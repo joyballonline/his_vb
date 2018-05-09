@@ -8,7 +8,7 @@
 	<TITLE>デフォルトウィンドルタイトル</TITLE>
 	<BUTTON_TYPE>OK</BUTTON_TYPE>
 	<ICONT_TYPE>None</ICONT_TYPE>
-	<DEFAULT_BUTTON>Button1</DEFAULT_BUTTON>
+	<DEFAULT_BUTTON>Button2</DEFAULT_BUTTON>
 </DEFAULT_MSG>
 
 ↓個別MSG定義 ※<ID>タグ以外は省略可能→省略時はデフォルトMSG定義が適用される
@@ -19,7 +19,7 @@
 		<MSG2>メッセージ２</MSG2>
 		<BUTTON_TYPE>AbortRetryIgnore</BUTTON_TYPE>
 		<ICONT_TYPE>Exclamation</ICONT_TYPE>
-		<DEFAULT_BUTTON>Button2</DEFAULT_BUTTON>
+		<DEFAULT_BUTTON>Button1</DEFAULT_BUTTON>
 			<CREATE_DATE>2006/04/10 20:00</CREATE_DATE>
 			<MEMO>サンプル</MEMO>
 </MSG_DATA>
@@ -70,11 +70,11 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
 
 <!--**********************デフォルトMSGの定義**********************-->
 <DEFAULT_MSG>
-	<TITLE>販売管理システム</TITLE>
+	<TITLE>在庫計画システム</TITLE>
 	<BUTTON_TYPE>OK</BUTTON_TYPE>
 	<ICONT_TYPE>None</ICONT_TYPE>
 	<DEFAULT_BUTTON>Button1</DEFAULT_BUTTON>
-	<CREATE_DATE>2018/02/26 19:07</CREATE_DATE>
+	<CREATE_DATE>2010/01/13 15:34</CREATE_DATE>
 	<MEMO>記述省略時のデフォルト</MEMO>
 </DEFAULT_MSG>
 
@@ -102,6 +102,7 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
 			<CREATE_DATE>2006/04/27 15:00</CREATE_DATE>
 			<MEMO></MEMO>
 </MSG_DATA>
+
 <MSG_DATA>
 	<ID>NonLogDirKey</ID>
 		<MSG1>Logファイル格納場所の取得に失敗しました。</MSG1>
@@ -119,37 +120,44 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
 			<MEMO>ログファイルの出力先パスが存在しない場合</MEMO>
 </MSG_DATA>
 <MSG_DATA>
-	<ID>NonPriDb</ID>
-		<MSG1>サーバに接続できません。</MSG1>
-		<MSG2>バックアップサーバに接続しますか？</MSG2>
-		<BUTTON_TYPE>YesNo</BUTTON_TYPE>
-		<ICONT_TYPE>Error</ICONT_TYPE>
-			<CREATE_DATE>2018/03/07 17:00</CREATE_DATE>
-			<MEMO>プライマリＤＢに接続できない場合</MEMO>
-</MSG_DATA>
-<MSG_DATA>
-	<ID>NonBackDb</ID>
-		<MSG1>バックアップサーバに接続できません。</MSG1>
-		<MSG2>システムを終了します。</MSG2>
-		<ICONT_TYPE>Error</ICONT_TYPE>
-			<CREATE_DATE>2018/03/07 17:00</CREATE_DATE>
-			<MEMO>バックアップＤＢに接続できない場合</MEMO>
-</MSG_DATA>
-<MSG_DATA>
-	<ID>NonDbIniKey</ID>
-		<MSG1>ＤＢ接続情報の取得に失敗しました。</MSG1>
+	<ID>NonPcNameKey</ID>
+		<MSG1>端末ＩＤの取得に失敗しました。</MSG1>
 		<MSG2>システムの起動を中止します。</MSG2>
 		<ICONT_TYPE>Error</ICONT_TYPE>
-			<CREATE_DATE>2018/02/08 13:30</CREATE_DATE>
-			<MEMO>ＤＢ接続情報が取得できない場合</MEMO>
+			<CREATE_DATE>2007/02/01 17:00</CREATE_DATE>
+			<MEMO>端末ＩＤが取得できない場合</MEMO>
 </MSG_DATA>
 <MSG_DATA>
-	<ID>NonProductInfoIniKey</ID>
-		<MSG1>システム規定情報の取得に失敗しました。</MSG1>
+	<ID>NonDbUdlKey</ID>
+		<MSG1>ＤＢ接続ファイルの格納場所の取得に失敗しました。</MSG1>
 		<MSG2>システムの起動を中止します。</MSG2>
 		<ICONT_TYPE>Error</ICONT_TYPE>
-			<CREATE_DATE>2018/02/08 13:30</CREATE_DATE>
-			<MEMO>システム規定情報が取得できない場合</MEMO>
+			<CREATE_DATE>2006/05/16 14:00</CREATE_DATE>
+			<MEMO>ＤＢ接続ファイルのパスが取得できない場合</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>NonDbUdlDir</ID>
+		<MSG1>ＤＢ接続ファイルの格納場所がありません。</MSG1>
+		<MSG2>システムの起動を中止します。</MSG2>
+		<ICONT_TYPE>Error</ICONT_TYPE>
+			<CREATE_DATE>2006/05/16 14:00</CREATE_DATE>
+			<MEMO>ＤＢ接続ファイルのパスが存在しない場合</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>NonKengenKey</ID>
+		<MSG1>利用権限の取得に失敗しました。</MSG1>
+		<MSG2>システムの起動を中止します。</MSG2>
+		<ICONT_TYPE>Error</ICONT_TYPE>
+			<CREATE_DATE>2007/02/01 17:00</CREATE_DATE>
+			<MEMO>利用権限が取得できない場合</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>NonShukkaDbKey</ID>
+		<MSG1>出荷報告データベース名の取得に失敗しました。</MSG1>
+		<MSG2>システムの起動を中止します。</MSG2>
+		<ICONT_TYPE>Error</ICONT_TYPE>
+			<CREATE_DATE>2006/12/06 11:30</CREATE_DATE>
+			<MEMO>出荷報告データベース名が取得できない場合</MEMO>
 </MSG_DATA>
 <MSG_DATA>
 	<ID>NonExcelDirKey</ID>
@@ -184,6 +192,22 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
 			<MEMO>作成帳票ファイル名が取得できない場合エラー</MEMO>
 </MSG_DATA>
 <MSG_DATA>
+	<ID>NonPcName</ID>
+		<MSG1>端末ＩＤが設定されていません。</MSG1>
+		<MSG2>システムの起動を中止します。</MSG2>
+		<ICONT_TYPE>Error</ICONT_TYPE>
+			<CREATE_DATE>2007/02/01 17:00</CREATE_DATE>
+			<MEMO>端末ＩＤが未設定の場合エラー</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>NonKengen</ID>
+		<MSG1>利用権限が設定されていません。</MSG1>
+		<MSG2>システムの起動を中止します。</MSG2>
+		<ICONT_TYPE>Error</ICONT_TYPE>
+			<CREATE_DATE>2007/02/01 17:00</CREATE_DATE>
+			<MEMO>利用権限が未設定の場合エラー</MEMO>
+</MSG_DATA>
+<MSG_DATA>
 	<ID>NonHinaFile</ID>
 		<MSG1>帳票雛形ファイルが存在しません。</MSG1>
 		<MSG2>システムの起動を中止します。</MSG2>
@@ -208,15 +232,8 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
 			<MEMO>ORACLEに接続できない場合エラー</MEMO>
 </MSG_DATA>
 <MSG_DATA>
-	<ID>requiredImput</ID>
-		<MSG1>必須入力項目です。</MSG1>
-		<ICONT_TYPE>Warning</ICONT_TYPE>
-			<CREATE_DATE>2006/04/27 15:00</CREATE_DATE>
-			<MEMO>該当項目が未入力の場合に表示</MEMO>
-</MSG_DATA>
-<MSG_DATA>
-	<ID>rejectPWEdit</ID>
-		<MSG1>パスワード変更を中断します。</MSG1>
+	<ID>confirmDgvEdit</ID>
+		<MSG1>編集中の内容が破棄されます。</MSG1>
 		<MSG2>よろしいですか？</MSG2>
 		<BUTTON_TYPE>YesNo</BUTTON_TYPE>
 		<ICONT_TYPE>Question</ICONT_TYPE>
@@ -225,69 +242,20 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
 			<MEMO></MEMO>
 </MSG_DATA>
 <MSG_DATA>
-	<ID>NonImputUserID</ID>
-		<MSG1>入力された「ユーザID」は存在しないか、無効になっています。</MSG1>
-		<ICONT_TYPE>Warning</ICONT_TYPE>
-			<CREATE_DATE>2018/02/17 13:27</CREATE_DATE>
-			<MEMO>入力されたユーザIDが存在しない場合に表示</MEMO>
-</MSG_DATA>
-<MSG_DATA>
-	<ID>NonImputNoDataUserID</ID>
-		<MSG1>入力された「ユーザID」のパスワード情報が存在しません。</MSG1>
-		<ICONT_TYPE>Warning</ICONT_TYPE>
-			<CREATE_DATE>2018/02/17 13:27</CREATE_DATE>
-			<MEMO>入力されたユーザIDのパスワード情報が存在しない場合に表示</MEMO>
-</MSG_DATA>
-<MSG_DATA>
-	<ID>NonImputPassword</ID>
-		<MSG1>パスワードが違います。</MSG1>
-		<ICONT_TYPE>Warning</ICONT_TYPE>
-			<CREATE_DATE>2018/02/17 13:27</CREATE_DATE>
-			<MEMO>パスワードが異なる場合に表示</MEMO>
-</MSG_DATA>
-<MSG_DATA>
-	<ID>requiredImputNewPassword</ID>
-		<MSG1>「新パスワード」を入力してください。</MSG1>
-		<ICONT_TYPE>Warning</ICONT_TYPE>
-			<CREATE_DATE>2018/02/12 18:00</CREATE_DATE>
-			<MEMO>新パスワードが未入力の場合に表示</MEMO>
-</MSG_DATA>
-<MSG_DATA>
-	<ID>requiredImputConfirmationPassword</ID>
-		<MSG1>「確認用パスワード」を入力してください。</MSG1>
-		<ICONT_TYPE>Warning</ICONT_TYPE>
-			<CREATE_DATE>2018/02/12 18:00</CREATE_DATE>
-			<MEMO>確認用パスワードが未入力の場合に表示</MEMO>
-</MSG_DATA>
-<MSG_DATA>
-	<ID>UnmatchPasswd</ID>
-		<MSG1>「新パスワード」と「確認用パスワード」が不一致です。</MSG1>
-		<ICONT_TYPE>Warning</ICONT_TYPE>
-			<CREATE_DATE>2018/02/12 18:00</CREATE_DATE>
-			<MEMO>新パスワードと確認用パスワードが不一致の場合に表示</MEMO>
-</MSG_DATA>
-<MSG_DATA>
-	<ID>ReusePasswd</ID>
-		<MSG1>以前に使用されたパスワードです。</MSG1>
-		<ICONT_TYPE>Warning</ICONT_TYPE>
-			<CREATE_DATE>2018/02/12 18:00</CREATE_DATE>
-			<MEMO>使用済みのパスワードの場合に表示</MEMO>
-</MSG_DATA>
-<MSG_DATA>
-	<ID>completePWChanged</ID>
-		<MSG1>パスワードを変更しました。</MSG1>
-		<ICONT_TYPE>Information</ICONT_TYPE>
-			<CREATE_DATE>2018/02/12 18:00</CREATE_DATE>
-			<MEMO>パスワード変更が成功した場合に表示</MEMO>
-</MSG_DATA>
-<MSG_DATA>
-	<ID>SystemExit</ID>
-		<MSG1>システムを終了します。</MSG1>
-		<MSG2>よろしいですか？</MSG2>
-		<BUTTON_TYPE>OKCancel</BUTTON_TYPE>
+	<ID>confirmSrcEdit</ID>
+		<MSG1>編集中の内容が破棄されます。</MSG1>
+		<MSG2>検索してよろしいですか？</MSG2>
+		<BUTTON_TYPE>YesNo</BUTTON_TYPE>
 		<ICONT_TYPE>Question</ICONT_TYPE>
 		<DEFAULT_BUTTON>Button2</DEFAULT_BUTTON>
-			<CREATE_DATE>2018/02/12 18:00</CREATE_DATE>
+			<CREATE_DATE>2006/05/19 11:00</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>requiredImput</ID>
+		<MSG1>必須入力項目です。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2006/04/27 15:00</CREATE_DATE>
 			<MEMO></MEMO>
 </MSG_DATA>
 <MSG_DATA>
@@ -305,78 +273,6 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
 		<ICONT_TYPE>Question</ICONT_TYPE>
 		<DEFAULT_BUTTON>Button2</DEFAULT_BUTTON>
 			<CREATE_DATE>2006/04/27 15:00</CREATE_DATE>
-			<MEMO></MEMO>
-</MSG_DATA>
-<MSG_DATA>
-	<ID>UpdateInfo</ID>
-		<MSG1>注文登録しました。</MSG1>
-		<BUTTON_TYPE>OK</BUTTON_TYPE>
-		<ICONT_TYPE>Information</ICONT_TYPE>
-			<CREATE_DATE>2018/03/05 18:00</CREATE_DATE>
-			<MEMO></MEMO>
-</MSG_DATA>
-<MSG_DATA>
-	<ID>UpdateItakuInfo</ID>
-		<MSG1>委託売上を登録しました。</MSG1>
-		<BUTTON_TYPE>OK</BUTTON_TYPE>
-		<ICONT_TYPE>Information</ICONT_TYPE>
-			<CREATE_DATE>2018/03/14 11:00</CREATE_DATE>
-			<MEMO></MEMO>
-</MSG_DATA>
-<MSG_DATA>
-	<ID>EditItakuInfo</ID>
-		<MSG1>委託売上を変更しました。</MSG1>
-		<BUTTON_TYPE>OK</BUTTON_TYPE>
-		<ICONT_TYPE>Information</ICONT_TYPE>
-			<CREATE_DATE>2018/03/14 11:00</CREATE_DATE>
-			<MEMO></MEMO>
-</MSG_DATA>
-<MSG_DATA>
-	<ID>CancelItakuInfo</ID>
-		<MSG1>委託売上を変更しました。</MSG1>
-		<BUTTON_TYPE>OK</BUTTON_TYPE>
-		<ICONT_TYPE>Information</ICONT_TYPE>
-			<CREATE_DATE>2018/03/14 11:00</CREATE_DATE>
-			<MEMO></MEMO>
-</MSG_DATA>
-<MSG_DATA>
-	<ID>UpdateNyukinInfo</ID>
-		<MSG1>入金登録しました。</MSG1>
-		<BUTTON_TYPE>OK</BUTTON_TYPE>
-		<ICONT_TYPE>Information</ICONT_TYPE>
-			<CREATE_DATE>2018/03/14 11:00</CREATE_DATE>
-			<MEMO></MEMO>
-</MSG_DATA>
-<MSG_DATA>
-	<ID>EditNyukinInfo</ID>
-		<MSG1>入金情報を変更しました。</MSG1>
-		<BUTTON_TYPE>OK</BUTTON_TYPE>
-		<ICONT_TYPE>Information</ICONT_TYPE>
-			<CREATE_DATE>2018/03/14 11:00</CREATE_DATE>
-			<MEMO></MEMO>
-</MSG_DATA>
-<MSG_DATA>
-	<ID>CancelNyukinInfo</ID>
-		<MSG1>入金情報を取消ました。</MSG1>
-		<BUTTON_TYPE>OK</BUTTON_TYPE>
-		<ICONT_TYPE>Information</ICONT_TYPE>
-			<CREATE_DATE>2018/03/14 11:00</CREATE_DATE>
-			<MEMO></MEMO>
-</MSG_DATA>
-<MSG_DATA>
-	<ID>InsertKeizoku</ID>
-		<MSG1>委託注文一覧画面に戻らずに、次の伝票番号を処理しますか？</MSG1>
-		<BUTTON_TYPE>YesNoCancel</BUTTON_TYPE>
-		<ICONT_TYPE>Question</ICONT_TYPE>
-			<CREATE_DATE>2018/03/05 18:00</CREATE_DATE>
-			<MEMO></MEMO>
-</MSG_DATA>
-<MSG_DATA>
-	<ID>UpdateShiireInfo</ID>
-		<MSG1>仕入登録しました。</MSG1>
-		<BUTTON_TYPE>OK</BUTTON_TYPE>
-		<ICONT_TYPE>Information</ICONT_TYPE>
-			<CREATE_DATE>2018/03/14 11:00</CREATE_DATE>
 			<MEMO></MEMO>
 </MSG_DATA>
 <MSG_DATA>
@@ -467,10 +363,87 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
 			<MEMO></MEMO>
 </MSG_DATA>
 <MSG_DATA>
+	<ID>selectNoData</ID>
+		<MSG1>対象データを選択してください。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2006/05/26 17:30</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>notAcceptZeroErr</ID>
+		<MSG1>ゼロを入力することはできません。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2006/06/06 15:55</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>onlyAcceptHankakuEisu</ID>
+		<MSG1>半角英数のみ入力可能です。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2006/06/13 13:35</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>onlyAcceptHankaku</ID>
+		<MSG1>半角文字のみ入力可能です。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2006/07/03 14:26</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>onlyAcceptNumeric</ID>
+		<MSG1>半角数字のみ入力可能です。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2006/07/03 14:26</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>ErrZenkaku</ID>
+		<MSG1>全角文字が入力されています。</MSG1>
+		<ICONT_TYPE>Exclamation</ICONT_TYPE>
+			<CREATE_DATE>2006/11/16 19:00</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>InfoTsoushin_U1Err</ID>
+		<MSG1>他端末で更新中のため処理を終了します。</MSG1>
+		<ICONT_TYPE>Error</ICONT_TYPE>
+			<CREATE_DATE>2006/11/24 12:17</CREATE_DATE>
+			<MEMO>T_送信管理ＤＢが更新中</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>ErrOutReport</ID>
+		<MSG1>帳票出力に失敗しました。</MSG1>
+		<ICONT_TYPE>Error</ICONT_TYPE>
+			<CREATE_DATE>2006/11/25 12:00</CREATE_DATE>
+			<MEMO>ＭＤＢ出力失敗</MEMO>
+</MSG_DATA>
+<MSG_DATA>
 	<ID>noTargetData</ID>
 		<MSG1>該当データがありません。</MSG1>
 		<ICONT_TYPE>Information</ICONT_TYPE>
 			<CREATE_DATE>2006/11/29 10:00</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>NonTextFileKey</ID>
+		<MSG1>テキストファイル名の取得に失敗しました。</MSG1>
+		<MSG2>システムの起動を中止します。</MSG2>
+		<ICONT_TYPE>Error</ICONT_TYPE>
+			<CREATE_DATE>2007/02/20 12:00</CREATE_DATE>
+			<MEMO>テキストファイル名が取得できない場合エラー</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>MaxErrBikouInput</ID>
+		<MSG1>入力文字列が長すぎます。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2006/04/11 18:30</CREATE_DATE>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>printOK</ID>
+		<MSG1>対象データの印刷が完了しました。</MSG1>
+		<ICONT_TYPE>Information</ICONT_TYPE>
+			<CREATE_DATE>2007/04/24 12:30</CREATE_DATE>
 			<MEMO></MEMO>
 </MSG_DATA>
 <MSG_DATA>
@@ -484,6 +457,289 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
 			<MEMO></MEMO>
 </MSG_DATA>
 <MSG_DATA>
+	<ID>NonShohinMst</ID>
+		<MSG1>品名コードが商品マスタに登録されていません。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2008/01/10 14:00</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>confirmRirekiDelete</ID>
+		<MSG1>履歴データ削除処理を実行します。</MSG1>
+		<MSG2>よろしいですか？</MSG2>
+		<BUTTON_TYPE>YesNo</BUTTON_TYPE>
+		<ICONT_TYPE>Question</ICONT_TYPE>
+		<DEFAULT_BUTTON>Button2</DEFAULT_BUTTON>
+			<CREATE_DATE>2008/01/22 17:45</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>alreadyHinmei</ID>
+		<MSG1>品名コードは既に登録されています。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2008/05/09 11:00</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>nonShohinMst</ID>
+		<MSG1>品名コードは商品マスタに登録されていません。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2008/05/09 13:00</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>nonHinmei</ID>
+		<MSG1>品名コードは登録されていません。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2008/05/09 11:00</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+
+<MSG_DATA>
+	<ID>dupHinmei</ID>
+		<MSG1>同じ品名コードは指定できません。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2008/05/12 11:00</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>MinoRirekiDelFolderErr</ID>
+		<MSG1>バックアップファイルを格納するフォルダがありません。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2008/07/04 17:00</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>RepeatKeyErr</ID>
+		<MSG1>入力されたコードは既に登録されています。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2008/07/06 14:10</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>nonNounyuTimeErr</ID>
+		<MSG1>納入特記が入力されています。</MSG1>
+		<MSG2>納入指定時刻を入力してください。</MSG2>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2009/07/21 12:23</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>nonNounyuErr</ID>
+		<MSG1>納入時刻が入力されています。</MSG1>
+		<MSG2>納入特記を入力してください。</MSG2>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2009/07/21 12:25</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>ErrBunruiChk</ID>
+		<MSG1>電線または付属品を選択してください。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+		<CREATE_DATE>2010/02/22 13:45</CREATE_DATE>
+		<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>ErrDataChk</ID>
+		<MSG1>テンプレートまたは受注データを選択してください。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+		<CREATE_DATE>2010/02/22 13:45</CREATE_DATE>
+		<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>ErrDelTmplt</ID>
+		<MSG1>テンプレートは削除できません。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+		<CREATE_DATE>2010/02/22 13:45</CREATE_DATE>
+		<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>ErrUpdTmplt</ID>
+		<MSG1>テンプレートは修正できません。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+		<CREATE_DATE>2010/02/22 13:45</CREATE_DATE>
+		<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>ErrKoushincyu</ID>
+		<MSG1>他端末で更新中です。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+		<CREATE_DATE>2010/02/22 13:45</CREATE_DATE>
+		<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>noBumonLength</ID>
+		<MSG1>部門コードは３桁で入力してください。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+		<CREATE_DATE>2010/02/23 14:00</CREATE_DATE>
+		<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>noSignLength</ID>
+		<MSG1>担当サインは３～４桁で入力してください。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+		<CREATE_DATE>2010/02/23 14:00</CREATE_DATE>
+		<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>RepeatKeyErr</ID>
+		<MSG1>入力した担当サインは既に登録済です。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+		<CREATE_DATE>2010/02/23 14:00</CREATE_DATE>
+		<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>SignTypeErr</ID>
+		<MSG1>１桁目が英字の場合、２～３桁目は数字を入力してください。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+		<CREATE_DATE>2010/02/23 14:00</CREATE_DATE>
+		<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>NoBumonCD</ID>
+		<MSG1>登録されていない部門です。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/02/23 14:45</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>NoTantoSign</ID>
+		<MSG1>部門コードと担当サインが一致しません。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/02/24 10:00</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>NonImgDir</ID>
+		<MSG1>画像ファイルの格納場所がありません。</MSG1>
+		<MSG2>システムの起動を中止します。</MSG2>
+		<ICONT_TYPE>Error</ICONT_TYPE>
+		<CREATE_DATE>2010/02/24 16:00</CREATE_DATE>
+		<MEMO>画像ファイルのパスが存在しないエラー</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>NonASCImgFile</ID>
+		<MSG1>ソートASC画像ファイルが存在しません。</MSG1>
+		<MSG2>システムの起動を中止します。</MSG2>
+		<ICONT_TYPE>Error</ICONT_TYPE>
+		<CREATE_DATE>2010/02/24 16:00</CREATE_DATE>
+		<MEMO>ソートASC画像ファイルが存在しないエラー</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>NonDESCImgFile</ID>
+		<MSG1>ソートDESC画像ファイルが存在しません。</MSG1>
+		<MSG2>システムの起動を中止します。</MSG2>
+		<ICONT_TYPE>Error</ICONT_TYPE>
+		<CREATE_DATE>2010/02/24 16:00</CREATE_DATE>
+		<MEMO>ソートDESC画像ファイルが存在しないエラー</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>NoTorihikiKubun</ID>
+		<MSG1>取引区分コードが正しくありません。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/02/25 17:20</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>NoTorihikiNm</ID>
+		<MSG1>該当する取引先名がありません。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/02/25 20:10</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>NoNoushoNm</ID>
+		<MSG1>該当する納入先がありません。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/02/26 11:10</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>NoHinmei</ID>
+		<MSG1>該当する品名がありません。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/02/26 14:45</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>confirmBack</ID>
+		<MSG1>戻ります。</MSG1>
+		<MSG2>よろしいですか？</MSG2>
+		<BUTTON_TYPE>YesNo</BUTTON_TYPE>
+		<ICONT_TYPE>Question</ICONT_TYPE>
+		<DEFAULT_BUTTON>Button2</DEFAULT_BUTTON>
+			<CREATE_DATE>2010/02/26 19:40</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>confirmSave</ID>
+		<MSG1>作成中へ保管します。</MSG1>
+		<MSG2>よろしいですか？</MSG2>
+		<BUTTON_TYPE>YesNo</BUTTON_TYPE>
+		<ICONT_TYPE>Question</ICONT_TYPE>
+		<DEFAULT_BUTTON>Button2</DEFAULT_BUTTON>
+			<CREATE_DATE>2010/02/26 19:55</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>OverKingaku</ID>
+		<MSG1>金額が大きすぎます。</MSG1>
+		<MSG2>９桁以内にしてください。</MSG2>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/03/04 11:25</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>PastDay</ID>
+		<MSG1>過去の日付は入力できません。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/03/04 16:20</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>FutureDay</ID>
+		<MSG1>将来の日付は入力できません。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/10/25 15:00</CREATE_DATE>
+			<MEMO>add takagi</MEMO>
+</MSG_DATA>
+<!--MSG_DATA>
+	<ID>FutureDay</ID>
+		<MSG1>１年以上先の日付は入力できません。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/03/04 16:28</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA-->
+<MSG_DATA>
+	<ID>TorihikisakiCDLength</ID>
+		<MSG1>取引先コードは８桁で入力してください。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+		<CREATE_DATE>2010/03/04 16:33</CREATE_DATE>
+		<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>NoushosakiCDLength</ID>
+		<MSG1>納入先コードは８桁で入力してください。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+		<CREATE_DATE>2010/03/04 16:38</CREATE_DATE>
+		<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>DateLength</ID>
+		<MSG1>日付は８桁で入力してください。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+		<CREATE_DATE>2010/03/04 16:50</CREATE_DATE>
+		<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>HinmeiLengthNG</ID>
+		<MSG1>品名コードの桁数が違います。</MSG1>
+		<MSG2>１３桁を入力してください。</MSG2>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/03/04 18:23</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
 	<ID>NoMastaData</ID>
 		<MSG1>該当するデータがマスタにありません。</MSG1>
 		<ICONT_TYPE>Warning</ICONT_TYPE>
@@ -491,25 +747,535 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
 			<MEMO></MEMO>
 </MSG_DATA>
 <MSG_DATA>
-	<ID>NoSaibanMst</ID>
-		<MSG1>採番マスタに該当データがありません。</MSG1>
+	<ID>NoPositiveNo</ID>
+		<MSG1>プラスの値を入力してください。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/03/04 18:58</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>NoNegativeNo</ID>
+		<MSG1>マイナスの値を入力してください。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/03/04 19:20</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>NoMeisai</ID>
+		<MSG1>明細を入力してください。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/03/04 20:25</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>BlankMeisai</ID>
+		<MSG1>明細の途中に空行があります。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/03/05 10:15</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>NoTeijyakuMasta</ID>
+		<MSG1>電線定尺マスタに登録されていない品名コードです。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/03/05 11:10</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>TeijyakuErr</ID>
+		<MSG1>定尺の値を入力してください。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/03/05 11:30</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>NoShiteiTime</ID>
+		<MSG1>納入指定時間を入力してください。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/03/05 13:50</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>byteShanaiMemo</ID>
+		<MSG1>社内備考は全角２３文字以内で入力して下さい。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/03/05 14:12</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>byteShagaiMemo</ID>
+		<MSG1>社外備考は全角２３文字以内で入力して下さい。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/03/05 14:12</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>NgStrErr</ID>
+		<MSG1>禁則文字は入力できません。</MSG1>
+		<MSG2>,(ｶﾝﾏ) '(ｼﾝｸﾞﾙｸｫｰﾃｰｼｮﾝ) "(ﾀﾞﾌﾞﾙｸｫｰﾃｰｼｮﾝ)</MSG2>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+		<CREATE_DATE>2010/03/05 14:00</CREATE_DATE>
+		<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>confirmSoushin</ID>
+		<MSG1>送信します。</MSG1>
+		<MSG2>よろしいですか？</MSG2>
+		<BUTTON_TYPE>YesNo</BUTTON_TYPE>
+		<ICONT_TYPE>Question</ICONT_TYPE>
+		<DEFAULT_BUTTON>Button2</DEFAULT_BUTTON>
+			<CREATE_DATE>2010/03/05 15:35</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>NoSaibanMasta</ID>
+		<MSG1>採番マスタにデータがありません。</MSG1>
 		<ICONT_TYPE>Warning</ICONT_TYPE>
 			<CREATE_DATE>2010/03/05 16:12</CREATE_DATE>
 			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>confirmTemplate</ID>
+		<MSG1>テンプレートとして保存します。</MSG1>
+		<MSG2>よろしいですか？</MSG2>
+		<BUTTON_TYPE>YesNo</BUTTON_TYPE>
+		<ICONT_TYPE>Question</ICONT_TYPE>
+		<DEFAULT_BUTTON>Button2</DEFAULT_BUTTON>
+			<CREATE_DATE>2010/03/05 20:02</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>ImputedInvalidDate</ID>
+		<MSG1>無効な日付が入力されています。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/03/09 15:42</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>ImputedInvalidTime</ID>
+		<MSG1>無効な時間が入力されています。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/03/09 18:10</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>PrinterErr</ID>
+		<MSG1>「受注（出荷）依頼書」のプリンタが登録されていません。　　</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+		<CREATE_DATE>2010/03/09 18:45</CREATE_DATE>
+		<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>DelYMDErr</ID>
+		<MSG1>削除基準日が算出できません。</MSG1>
+		<MSG2>履歴データ削除処理を中止します。</MSG2>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+		<CREATE_DATE>2010/03/10 16:30</CREATE_DATE>
+		<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>KeiyakutsukiLength</ID>
+		<MSG1>契約月は２桁で入力してください。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+		<CREATE_DATE>2010/03/10 18:25</CREATE_DATE>
+		<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>NoukiErr</ID>
+		<MSG1>納期は受注年月日以降の日付を入力してください。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/03/10 19:00</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>ErrSaveTmplt</ID>
+		<MSG1>テンプレートは保存登録の対象外です。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+		<CREATE_DATE>2010/03/12 11:40</CREATE_DATE>
+		<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>UpdUserErr</ID>
+		<MSG1>作成者以外のユーザはデータを修正できません。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+		<CREATE_DATE>2010/03/12 13:40</CREATE_DATE>
+		<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>DelUserErr</ID>
+		<MSG1>作成者以外のユーザはデータを削除できません。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+		<CREATE_DATE>2010/03/12 13:40</CREATE_DATE>
+		<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>ErrSoushinbi</ID>
+		<MSG1>送信日を入力してください。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+		<CREATE_DATE>2010/03/16 14:10</CREATE_DATE>
+		<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>ErrBumonCd</ID>
+		<MSG1>部門コードを入力してください。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+		<CREATE_DATE>2010/03/16 14:10</CREATE_DATE>
+		<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>confirmKakutei</ID>
+		<MSG1>確定します。</MSG1>
+		<MSG2>よろしいですか？</MSG2>
+		<BUTTON_TYPE>YesNo</BUTTON_TYPE>
+		<ICONT_TYPE>Question</ICONT_TYPE>
+		<DEFAULT_BUTTON>Button2</DEFAULT_BUTTON>
+			<CREATE_DATE>2010/03/17 15:45</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>confirmTantouSign</ID>
+		<MSG1>ＰＡが入力されていますが、運送会社連携対象外のため、担当サインに「＋」を付加します。</MSG1>
+		<MSG2>確定してよろしいですか？</MSG2>
+		<BUTTON_TYPE>YesNo</BUTTON_TYPE>
+		<ICONT_TYPE>Question</ICONT_TYPE>
+		<DEFAULT_BUTTON>Button2</DEFAULT_BUTTON>
+			<CREATE_DATE>2010/03/17 18:08</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>ErrHaniChk</ID>
+		<MSG1>範囲指定(FROM≦TO)の大小関係が正しくありません。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+		<CREATE_DATE>2010/03/18 15:15</CREATE_DATE>
+		<MEMO></MEMO>
 </MSG_DATA>
 <MSG_DATA>
 	<ID>ErrDaiSyoChk</ID>
 		<MSG1>大小関係が正しくありません。</MSG1>
 		<ICONT_TYPE>Warning</ICONT_TYPE>
 		<CREATE_DATE>2010/10/18 18:23</CREATE_DATE>
+		<MEMO>add by takagi</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>ErrHajyakuKosu</ID>
+		<MSG1>定端区分が端尺の場合は、個数に１を入力してください。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+		<CREATE_DATE>2010/03/19 19:50</CREATE_DATE>
 		<MEMO></MEMO>
 </MSG_DATA>
+<MSG_DATA>
+	<ID>UnneededHikiateNo</ID>
+		<MSG1>引当№は入力不要です。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+		<CREATE_DATE>2010/03/23 14:25</CREATE_DATE>
+		<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>NonPAmoji</ID>
+		<MSG1>ＰＡ付の場合は社外備考欄の先頭に"ＰＡ"を入力してください。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+		<CREATE_DATE>2010/03/29 17:10</CREATE_DATE>
+		<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>NoInputMinus</ID>
+		<MSG1>マイナスの値は入力できません。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/03/30 12:28</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>byteNoushoNm</ID>
+		<MSG1>納所名は全角２５文字以内で入力して下さい。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/03/30 14:05</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>byteAddress1</ID>
+		<MSG1>住所の上段は全角１０文字以内で入力して下さい。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/03/30 14:05</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>byteAddress2</ID>
+		<MSG1>住所の下段は全角２０文字以内で入力して下さい。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/03/30 14:05</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>NoInputZero</ID>
+		<MSG1>０以外の値を入力してください。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/03/30 16:47</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>confirmPASoushin</ID>
+		<MSG1>PA入力欄にデータがありませんが、送信してもよろしいですか？</MSG1>
+		<BUTTON_TYPE>YesNo</BUTTON_TYPE>
+		<ICONT_TYPE>Question</ICONT_TYPE>
+		<DEFAULT_BUTTON>Button2</DEFAULT_BUTTON>
+			<CREATE_DATE>2010/04/01 09:48</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>confirmPAKakutei</ID>
+		<MSG1>PA入力欄にデータがありませんが、確定してもよろしいですか？</MSG1>
+		<BUTTON_TYPE>YesNo</BUTTON_TYPE>
+		<ICONT_TYPE>Question</ICONT_TYPE>
+		<DEFAULT_BUTTON>Button2</DEFAULT_BUTTON>
+			<CREATE_DATE>2010/04/01 10:10</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>noKosuLength</ID>
+		<MSG1>個数は４桁以内で入力して下さい。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/04/22 18:45</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+
 <MSG_DATA>
 	<ID>noHanyouMst</ID>
 		<MSG1>汎用マスタの値の取得に失敗しました。</MSG1>
 		<ICONT_TYPE>Warning</ICONT_TYPE>
 			<CREATE_DATE>2010/07/20 10:00</CREATE_DATE>
-			<MEMO></MEMO>
+			<MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>failGetUserID</ID>
+		<MSG1>ユーザＩＤの取得に失敗しました。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/07/20 10:00</CREATE_DATE>
+			<MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>noSeisakuTantyou</ID>
+		<MSG1>製作単長が入力されていません。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/07/23 17:00</CREATE_DATE>
+			<MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>failLotOrTantyou</ID>
+		<MSG1>標準ロット長または製作単長が違います。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/07/23 17:00</CREATE_DATE>
+			<MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>noSekkeiFuka</ID>
+		<MSG1>設計付加コードが入力されていません。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/07/23 17:00</CREATE_DATE>
+			<MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>onlyAlphabet</ID>
+		<MSG1>英字以外は入力できません。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/07/23 17:00</CREATE_DATE>
+			<MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>noBubunTenkai</ID>
+		<MSG1>部分展開が入力されていません。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/07/23 17:00</CREATE_DATE>
+			<MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>errOutOfRange</ID>
+		<MSG1>範囲外の値が入力されました。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/07/23 17:00</CREATE_DATE>
+			<MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>notEqualNyuukoHonsuu</ID>
+		<MSG1>北日本本数と住電日立本数の合計が入庫本数（全体）と一致していません。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/07/23 17:00</CREATE_DATE>
+			<MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>noMakiwakuCD</ID>
+		<MSG1>巻枠コードが入力されていません。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/07/23 17:00</CREATE_DATE>
+			<MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>notMakiwaku6Keta</ID>
+		<MSG1>巻枠コードは６桁で入力して下さい。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/07/23 17:00</CREATE_DATE>
+			<MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>noHousouKbn</ID>
+		<MSG1>包装区分が入力されていません。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/07/23 17:00</CREATE_DATE>
+			<MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>noSiyousyoNo</ID>
+		<MSG1>仕様書番号が入力されていません。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/07/23 17:00</CREATE_DATE>
+			<MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>noKamokuCD</ID>
+		<MSG1>科目コードが入力されていません。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/07/23 17:00</CREATE_DATE>
+			<MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>notKamokuCDKeta</ID>
+		<MSG1>科目コードは５桁で入力して下さい。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2011/01/13 16:24</CREATE_DATE>
+			<MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>notExistCd</ID>
+		<MSG1>入力されたコードは登録されていません。</MSG1>
+		<MSG2>もう一度確認してください。</MSG2>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/07/23 17:00</CREATE_DATE>
+			<MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>failKeta</ID>
+		<MSG1>桁数が正しくありません。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/07/23 17:00</CREATE_DATE>
+			<MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>notExistZairyouhyou</ID>
+		<MSG1>材料票が登録されていません。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/07/23 17:00</CREATE_DATE>
+			<MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>failRegist</ID>
+		<MSG1>登録に失敗しました。アプリケーションを終了します。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/07/23 17:00</CREATE_DATE>
+			<MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>noData</ID>
+		<MSG1>登録されていません。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/07/26 14:00</CREATE_DATE>
+			<MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>overData</ID>
+		<MSG1>該当データが最大件数を超えています。</MSG1>
+		<MSG2>先頭200件のみ表示します。よろしいですか？</MSG2>
+		<BUTTON_TYPE>YesNo</BUTTON_TYPE>
+		<ICONT_TYPE>Question</ICONT_TYPE>
+		<DEFAULT_BUTTON>Button2</DEFAULT_BUTTON>
+			<CREATE_DATE>2010/07/26 15:</CREATE_DATE>
+			<MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>noHaitaFilePath</ID>
+		<MSG1>排他ファイルのパスが存在しません。</MSG1>
+		<MSG2>INIファイルをもう一度確認してください。</MSG2>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/07/27 16:00</CREATE_DATE>
+			<MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>noOCRTehaiFilePath</ID>
+		<MSG1>OCR手配用ファイルのパスが存在しません。</MSG1>
+		<MSG2>INIファイルをもう一度確認してください。</MSG2>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/07/27 16:00</CREATE_DATE>
+			<MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>noZaikoHojuFilePath</ID>
+		<MSG1>在庫補充データファイルのパスが存在しません。</MSG1>
+		<MSG2>INIファイルをもう一度確認してください。</MSG2>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/07/27 16:00</CREATE_DATE>
+			<MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>NonDbUdlKey</ID>
+		<MSG1>製作手配ユーザＩＤの取得に失敗しました。</MSG1>
+		<MSG2>システムの起動を中止します。</MSG2>
+		<ICONT_TYPE>Error</ICONT_TYPE>
+			<CREATE_DATE>2006/05/16 14:00</CREATE_DATE>
+			<MEMO>ＤＢ接続ファイルのパスが取得できない場合</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>ErrCodeChk</ID>
+		<MSG1>コードを選択してください。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+		<CREATE_DATE>2010/07/27 17:00</CREATE_DATE>
+		<MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>ErrZenkaku2</ID>
+		<MSG1>全角文字は入力できません。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/08/11 17:00</CREATE_DATE>
+			<MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>ErrLotOrSeisakuTantyou</ID>
+		<MSG1>標準ロット長または製作単長が違います。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/08/11 17:00</CREATE_DATE>
+			<MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>NoJuyousakiCD</ID>
+		<MSG1>登録されていない需要先コードです。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/09/22 16:00</CREATE_DATE>
+			<MEMO>add ojima</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>NotUniqueKahenKey</ID>
+    <MSG1>可変キーが重複しています。</MSG1>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+    <CREATE_DATE>2010/09/24 10:00</CREATE_DATE>
+    <MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>RepeatHinsyuCD</ID>
+		<MSG1>品種区分が重複してます。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/11/25 18:00</CREATE_DATE>
+			<MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>NonKoutei</ID>
+    <MSG1>登録されていない工程名コードです。</MSG1>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/09/30 15:00</CREATE_DATE>
+      <MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>NotUniqueKikaiRyaku</ID>
+    <MSG1>機械略記号が重複しています。</MSG1>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/09/30 18:00</CREATE_DATE>
+      <MEMO>add nakazawa</MEMO>
 </MSG_DATA>
 <MSG_DATA>
     <ID>NonXlsBaseDir</ID>
@@ -517,7 +1283,7 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <MSG2>システムの起動を中止します。</MSG2>
     <ICONT_TYPE>Warning</ICONT_TYPE>
       <CREATE_DATE>2010/10/01 16:00</CREATE_DATE>
-      <MEMO></MEMO>
+      <MEMO>add nakazawa</MEMO>
 </MSG_DATA>
 <MSG_DATA>
     <ID>NonXlsOutDir</ID>
@@ -525,15 +1291,240 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <MSG2>システムの起動を中止します。</MSG2>
     <ICONT_TYPE>Warning</ICONT_TYPE>
       <CREATE_DATE>2010/10/01 16:00</CREATE_DATE>
-      <MEMO></MEMO>
+      <MEMO>add nakazawa</MEMO>
 </MSG_DATA>
+<MSG_DATA>
+    <ID>noZM610R1_Base</ID>
+    <MSG1>生産能力マスタ雛形ファイル名が設定されていません。</MSG1>
+    <MSG2>INIファイルをもう一度確認してください。</MSG2>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/10/01 16:00</CREATE_DATE>
+      <MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>noZM610R1_Out</ID>
+    <MSG1>生産能力マスタ出力ファイル名が設定されていません。</MSG1>
+    <MSG2>INIファイルをもう一度確認してください。</MSG2>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/10/01 16:00</CREATE_DATE>
+      <MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>notExistZM610R1_Base</ID>
+    <MSG1>生産能力マスタ雛形ファイルが見つかりません。</MSG1>
+    <MSG2>雛形ファイルをもう一度確認してください。</MSG2>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/10/14 11:00</CREATE_DATE>
+      <MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>noZG310R1_Base</ID>
+    <MSG1>品種別販売計画雛形ファイル名が設定されていません。</MSG1>
+    <MSG2>INIファイルをもう一度確認してください。</MSG2>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/10/05 17:00</CREATE_DATE>
+      <MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>noZG310R1_Out</ID>
+    <MSG1>品種別販売計画出力ファイル名が設定されていません。</MSG1>
+    <MSG2>INIファイルをもう一度確認してください。</MSG2>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/10/05 17:00</CREATE_DATE>
+      <MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>notExistZG310R1_Base</ID>
+    <MSG1>品種別販売計画雛形ファイルが見つかりません。</MSG1>
+    <MSG2>雛形ファイルをもう一度確認してください。</MSG2>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/10/14 11:00</CREATE_DATE>
+      <MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>over4Keta</ID>
+    <MSG1>整数部は４桁以内で入力して下さい。</MSG1>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/10/08 15:00</CREATE_DATE>
+      <MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>noZG320R1_Base</ID>
+    <MSG1>品名別販売計画雛形ファイル名が設定されていません。</MSG1>
+    <MSG2>INIファイルをもう一度確認してください。</MSG2>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/10/07 17:00</CREATE_DATE>
+      <MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>noZG320R1_Out</ID>
+    <MSG1>品名別販売計画出力ファイル名が設定されていません。</MSG1>
+    <MSG2>INIファイルをもう一度確認してください。</MSG2>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/10/07 17:00</CREATE_DATE>
+      <MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+  　<ID>noMakiwakuName</ID>
+  　<MSG1>巻枠名がマスタに登録されていません。</MSG1>
+  　<ICONT_TYPE>Warning</ICONT_TYPE>
+  　　<CREATE_DATE>2010/10/25 17:00</CREATE_DATE>
+  　　<MEMO>add hashimoto</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>noHousouType</ID>
+    <MSG1>包装/表示種類がマスタに登録されていません。</MSG1>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+    　<CREATE_DATE>2010/10/25 17:00</CREATE_DATE>
+    　<MEMO>add hashimoto</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+　  <ID>JousuuOver</ID>
+    <MSG1>条数を超える値が入力されています。</MSG1>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+    　<CREATE_DATE>2010/10/25 17:00</CREATE_DATE>
+    　<MEMO>add hashimoto</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>notEqualKSSum</ID>
+    <MSG1>K本数とS本数の合計が、条数と一致していません。</MSG1>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+  　  <CREATE_DATE>2010/10/25 17:00</CREATE_DATE>
+  　  <MEMO>add hashimoto</MEMO>
+</MSG_DATA>
+  NoushosakiCDLength
+<MSG_DATA>　
+    <ID>MakiwakuCDLength</ID>
+　　<MSG1>巻枠コードは６桁で入力してください。</MSG1>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+  　  <CREATE_DATE>2010/10/25 17:00</CREATE_DATE>
+  　  <MEMO>add hashimoto</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>KamokuCDLength</ID>
+    <MSG1>科目コードは６桁で入力してください。</MSG1>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+    　  <CREATE_DATE>2010/10/25 17:00</CREATE_DATE>
+    　  <MEMO>add hashimoto</MEMO>
+</MSG_DATA>
+  
+<MSG_DATA>
+    <ID>notEqualTehaiSuuryou</ID>
+    <MSG1>手配数量が単長×条数と一致していません。</MSG1>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+    　  <CREATE_DATE>2010/10/25 17:00</CREATE_DATE>
+    　  <MEMO>add hashimoto</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>InputLenOver</ID>
+    <MSG1>単長×条数の値が７ケタを超えています。</MSG1>
+    <MSG2>単長または条数を修正してください。</MSG2>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+    　  <CREATE_DATE>2010/10/25 17:00</CREATE_DATE>
+    　  <MEMO>add hashimoto</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>nonGaicyuSelect</ID>
+    <MSG1>製作区分「外注」時は展開区分「部分展開」以外選択出来ません。</MSG1>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+    　  <CREATE_DATE>2010/10/25 17:00</CREATE_DATE>
+    　  <MEMO>add hashimoto</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>nonBubunOmit</ID>
+    <MSG1>展開区分「部分展開」時は部分展開指定工程は省略できません。</MSG1>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+    　  <CREATE_DATE>2010/10/25 17:00</CREATE_DATE>
+    　  <MEMO>add hashimoto</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>ErrStartKoutei</ID>
+    <MSG1>１または３から始まる工程を入力してください。</MSG1>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+    　  <CREATE_DATE>2010/10/25 17:00</CREATE_DATE>
+    　  <MEMO>add hashimoto</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>noZG640R1_Base</ID>
+    <MSG1>在庫補充品リスト雛形ファイルが存在しません。</MSG1>
+    <MSG2>INIファイルをもう一度確認してください。</MSG2>
+    <ICONT_TYPE>Error</ICONT_TYPE>
+    <CREATE_DATE>>2010/10/25 17:00</CREATE_DATE>
+    <MEMO>add hashimoto</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>noZG640R1_Out</ID>
+    <MSG1>在庫補充品リスト出力ファイル名が設定されていません。</MSG1>
+    <MSG2>INIファイルをもう一度確認してください。</MSG2>
+    <ICONT_TYPE>Error</ICONT_TYPE>
+    <CREATE_DATE>>2010/10/25 17:00</CREATE_DATE>
+    <MEMO>add hashimoto</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>ErrTukiFormat</ID>
+    <MSG1>年月はYYYY/MM形式で入力してください。</MSG1>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+    　  <CREATE_DATE>2010/10/27 13:00</CREATE_DATE>
+    　  <MEMO>add hashimoto</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>confirmNotTorikomi</ID>
+    <MSG1>取込済のデータが存在します。</MSG1>
+    <MSG2>取込済のデータは破棄して登録します。よろしいですか？</MSG2>
+    <BUTTON_TYPE>YesNo</BUTTON_TYPE>
+    <ICONT_TYPE>Question</ICONT_TYPE>
+    <DEFAULT_BUTTON>Button2</DEFAULT_BUTTON>
+    <CREATE_DATE>2010/10/27 13:00</CREATE_DATE>
+    <MEMO>add hashimoto</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>NonKeikakuhinMst</ID>
+    <MSG1>品名コードが計画対象品マスタに登録されていません。</MSG1>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+  　<CREATE_DATE>2010/10/27 13:00</CREATE_DATE>
+  　<MEMO>add hashimoto</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>DellDgvData</ID>
+    <MSG1>一覧の編集内容が破棄されます。</MSG1>
+  　<MSG2>よろしいですか？</MSG2>
+  　<BUTTON_TYPE>YesNo</BUTTON_TYPE>
+  　<ICONT_TYPE>Question</ICONT_TYPE>
+  　<DEFAULT_BUTTON>Button2</DEFAULT_BUTTON>
+  　<CREATE_DATE>2010/10/27 13:00</CREATE_DATE>
+  　<MEMO>add hashimoto</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>noZG220R1_Base</ID>
+    <MSG1>生産量データ一覧雛形ファイルが存在しません。</MSG1>
+    <MSG2>INIファイルをもう一度確認してください。</MSG2>
+    <ICONT_TYPE>Error</ICONT_TYPE>
+    <CREATE_DATE>>2010/10/25 17:00</CREATE_DATE>
+    <MEMO>add hashimoto</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>noZG220R1_Out</ID>
+    <MSG1>生産量データ一覧出力ファイル名が設定されていません。</MSG1>
+    <MSG2>INIファイルをもう一度確認してください。</MSG2>
+    <ICONT_TYPE>Error</ICONT_TYPE>
+    <CREATE_DATE>>2010/10/25 17:00</CREATE_DATE>
+    <MEMO>add hashimoto</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>notExistZG320R1_Base</ID>
+    <MSG1>品名別販売計画雛形ファイルが見つかりません。</MSG1>
+    <MSG2>雛形ファイルをもう一度確認してください。</MSG2>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/10/14 11:00</CREATE_DATE>
+      <MEMO>add nakazawa</MEMO>
+</MSG_DATA>  
 <MSG_DATA>
     <ID>noHinaDir</ID>
     <MSG1>雛形ファイル格納フォルダがありません。</MSG1>
     <MSG2>フォルダ構成をもう一度確認してください。</MSG2>
     <ICONT_TYPE>Warning</ICONT_TYPE>
       <CREATE_DATE>2010/10/14 11:00</CREATE_DATE>
-      <MEMO></MEMO>
+      <MEMO>add nakazawa</MEMO>
 </MSG_DATA>
 <MSG_DATA>
     <ID>noOutExcelDir</ID>
@@ -541,145 +1532,471 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <MSG2>フォルダ構成をもう一度確認してください。</MSG2>
     <ICONT_TYPE>Warning</ICONT_TYPE>
       <CREATE_DATE>2010/10/14 11:00</CREATE_DATE>
+      <MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>confirmDelHoseiti</ID>
+    <MSG1>一覧の補正値をクリアします。</MSG1>
+    <MSG2>よろしいですか？</MSG2>
+    <BUTTON_TYPE>YesNo</BUTTON_TYPE>
+    <ICONT_TYPE>Question</ICONT_TYPE>
+    <DEFAULT_BUTTON>Button2</DEFAULT_BUTTON>
+      <CREATE_DATE>2006/05/19 11:00</CREATE_DATE>
       <MEMO></MEMO>
 </MSG_DATA>
 <MSG_DATA>
-	<ID>NonSysDate</ID>
-		<MSG1>システム日付の取得に失敗しました。</MSG1>
-		<ICONT_TYPE>Error</ICONT_TYPE>
-			<CREATE_DATE>2018/02/22 18:00</CREATE_DATE>
-			<MEMO>システム日付の取得に失敗した場合エラー</MEMO>
+    <ID>NonSyukeiTenkaiDate</ID>
+    <MSG1>集計・展開実行日時データがありません。</MSG1>
+    <ICONT_TYPE>Information</ICONT_TYPE>
+      <CREATE_DATE>2010/10/15 19:00</CREATE_DATE>
+      <MEMO></MEMO>
 </MSG_DATA>
 <MSG_DATA>
-	<ID>nonDenNo</ID>
-		<MSG1>伝票番号が入力されていません。</MSG1>
-		<ICONT_TYPE>Warning</ICONT_TYPE>
-			<CREATE_DATE>2018/02/23 11:00</CREATE_DATE>
-			<MEMO>伝票番号が未入力の場合に表示</MEMO>
+    <ID>NonUniqueMPESEKKEI</ID>
+    <MSG1>材料票マスタ(MPESEKKEI1)に重複する品名コードが登録されています。</MSG1>
+    <MSG2>継続処理できないため、実行を中止します。</MSG2>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/10/21 11:00</CREATE_DATE>
+      <MEMO>add takagi</MEMO>
 </MSG_DATA>
 <MSG_DATA>
-	<ID>confirmCSVOutput</ID>
-		<MSG1>一覧のデータをCSVファイルへ出力します。</MSG1>
-		<MSG2>よろしいですか？</MSG2>
-		<BUTTON_TYPE>OKCancel</BUTTON_TYPE>
-		<ICONT_TYPE>Question</ICONT_TYPE>
-		<DEFAULT_BUTTON>Button2</DEFAULT_BUTTON>
-			<CREATE_DATE>2018/02/28 14:45</CREATE_DATE>
-			<MEMO></MEMO>
+    <ID>noZG530R1_Base</ID>
+    <MSG1>生産・販売・在庫計画雛形ファイル名が設定されていません。</MSG1>
+    <MSG2>INIファイルをもう一度確認してください。</MSG2>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/10/22 11:00</CREATE_DATE>
+      <MEMO>add nakazawa</MEMO>
 </MSG_DATA>
 <MSG_DATA>
-	<ID>ErrDbSelect</ID>
-		<MSG1>データベースからのデータ取得に失敗しました。</MSG1>
-		<MSG2>【詳細】</MSG2>
-		<BUTTON_TYPE>OK</BUTTON_TYPE>
-		<ICONT_TYPE>Error</ICONT_TYPE>
-			<CREATE_DATE>2018/02/28 14:45</CREATE_DATE>
-			<MEMO>DB共通で使用</MEMO>
+    <ID>noZG530R1_Out</ID>
+    <MSG1>生産・販売・在庫計画出力ファイル名が設定されていません。</MSG1>
+    <MSG2>INIファイルをもう一度確認してください。</MSG2>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/10/22 11:00</CREATE_DATE>
+      <MEMO>add nakazawa</MEMO>
 </MSG_DATA>
-  <MSG_DATA>
-    <ID>MaxDataCnt</ID>
-    <MSG1>抽出したデータが上限を超えています。</MSG1>
-    <MSG2>表示してよろしいですか？</MSG2>
-    <BUTTON_TYPE>OKCancel</BUTTON_TYPE>
+<MSG_DATA>
+    <ID>notExistZG530R1_Base</ID>
+    <MSG1>生産・販売・在庫計画雛形ファイルが見つかりません。</MSG1>
+    <MSG2>雛形ファイルをもう一度確認してください。</MSG2>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/10/22 11:00</CREATE_DATE>
+      <MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>noZG530R2_Base</ID>
+    <MSG1>品種別集計表雛形ファイル名が設定されていません。</MSG1>
+    <MSG2>INIファイルをもう一度確認してください。</MSG2>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/10/22 11:00</CREATE_DATE>
+      <MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>noZG530R2_Out</ID>
+    <MSG1>品種別集計表出力ファイル名が設定されていません。</MSG1>
+    <MSG2>INIファイルをもう一度確認してください。</MSG2>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/10/22 11:00</CREATE_DATE>
+      <MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>notExistZG530R2_Base</ID>
+    <MSG1>品種別集計表雛形ファイルが見つかりません。</MSG1>
+    <MSG2>雛形ファイルをもう一度確認してください。</MSG2>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/10/22 11:00</CREATE_DATE>
+      <MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>noExistOutExcelData</ID>
+    <MSG1>EXCEL出力用データがありません。</MSG1>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/10/22 11:00</CREATE_DATE>
+      <MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>failCopySheet</ID>
+    <MSG1>シートの複製に失敗しました。</MSG1>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/10/22 17:00</CREATE_DATE>
+      <MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>noExistHanyouMst</ID>
+    <MSG1>汎用マスタに登録されていない値です。</MSG1>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/10/27 19:30</CREATE_DATE>
+      <MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>noExistMakiwaku</ID>
+    <MSG1>巻枠名がマスタに登録されていません。</MSG1>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/10/27 20:30</CREATE_DATE>
+      <MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>noExistHousou</ID>
+    <MSG1>包装／表示種類がマスタに登録されていません。</MSG1>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/10/27 20:30</CREATE_DATE>
+      <MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>notExistZairyouMst</ID>
+    <MSG1>品名コードが材料票マスタに登録されていません。</MSG1>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/10/28 10:30</CREATE_DATE>
+      <MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>NonKTaisyohinMst</ID>
+    <MSG1>品名コードが計画対象品マスタに登録されていません。</MSG1>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/10/28 11:00</CREATE_DATE>
+      <MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>NonSHinmeiMst</ID>
+    <MSG1>品名コードが集約品名マスタに登録されていません。</MSG1>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/10/28 11:00</CREATE_DATE>
+      <MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>over7Keta</ID>
+    <MSG1>単長×条数の値が7桁を超えています。</MSG1>
+    <MSG2>単長または条数を修正してください。</MSG2>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/10/28 15:40</CREATE_DATE>
+      <MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>notBKouteiStart1Or3</ID>
+    <MSG1>1または3から始まる工程を入力してください。</MSG1>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/10/28 16:00</CREATE_DATE>
+      <MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>notJosuSumKndAndSumi</ID>
+    <MSG1>北日本分と住電日立分の合計が条数と一致していません。</MSG1>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/10/28 16:10</CREATE_DATE>
+      <MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>notExistSyukeiZairyouMst</ID>
+    <MSG1>集計対象品名コードが材料票マスタに登録されていません。</MSG1>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/10/28 17:50</CREATE_DATE>
+      <MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>confDeleteSTaisyohin</ID>
+    <MSG1>選択行を一覧から削除します。</MSG1>
+    <MSG2>よろしいですか？</MSG2>
+    <BUTTON_TYPE>YesNo</BUTTON_TYPE>
     <ICONT_TYPE>Question</ICONT_TYPE>
     <DEFAULT_BUTTON>Button2</DEFAULT_BUTTON>
-    <CREATE_DATE>2018/02/28 10:30</CREATE_DATE>
-  </MSG_DATA>
-<MSG_DATA>
-	<ID>printOK</ID>
-		<MSG1>印刷が完了しました。</MSG1>
-		<ICONT_TYPE>Information</ICONT_TYPE>
-			<CREATE_DATE>2018/02/28 15:00</CREATE_DATE>
-			<MEMO></MEMO>
+      <CREATE_DATE>2006/04/27 15:00</CREATE_DATE>
+      <MEMO></MEMO>
 </MSG_DATA>
 <MSG_DATA>
-	<ID>RegDupKeyData</ID>
-		<MSG1>重複データが存在します。</MSG1>
-		<BUTTON_TYPE>OK</BUTTON_TYPE>
-		<ICONT_TYPE>Warning</ICONT_TYPE>
-			<CREATE_DATE>2018/03/05 17:30</CREATE_DATE>
+    <ID>alreadyAddSyukeiItiran</ID>
+    <MSG1>すでに一覧に追加された集計対象品名コードです。</MSG1>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/10/28 20:50</CREATE_DATE>
+      <MEMO>add nakazawa</MEMO>
 </MSG_DATA>
 <MSG_DATA>
-	<ID>clearTaisho</ID>
-		<MSG1>選択された「出力対象」がクリアされますが、</MSG1>
-		<MSG2>よろしいですか？</MSG2>
-		<BUTTON_TYPE>YesNo</BUTTON_TYPE>
-		<ICONT_TYPE>Question</ICONT_TYPE>
-		<DEFAULT_BUTTON>Button2</DEFAULT_BUTTON>
-			<CREATE_DATE>2018/03/05 18:00</CREATE_DATE>
-			<MEMO></MEMO>
+    <ID>alreakyAddJituhinmeiCD</ID>
+    <MSG1>入力されたコードは以下のコードの実品名コードとして登録されています。</MSG1>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/11/01 19:40</CREATE_DATE>
+      <MEMO>add nakazawa</MEMO>
 </MSG_DATA>
 <MSG_DATA>
-	<ID>nonTaisho</ID>
-		<MSG1>出力対象を指定してください。</MSG1>
-		<ICONT_TYPE>Warning</ICONT_TYPE>
-			<CREATE_DATE>2018/03/06 11:00</CREATE_DATE>
-			<MEMO></MEMO>
+    <ID>equalsKHinmeiCD</ID>
+    <MSG1>入力されたコードは計画品名コードと同じです。</MSG1>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/11/04 15:40</CREATE_DATE>
+      <MEMO>add nakazawa</MEMO>
 </MSG_DATA>
 <MSG_DATA>
-	<ID>IsNotNumeric</ID>
-		<MSG1>数値以外が入力されています。</MSG1>
-		<BUTTON_TYPE>OK</BUTTON_TYPE>
-		<ICONT_TYPE>Warning</ICONT_TYPE>
-			<CREATE_DATE>2018/03/06 16:00</CREATE_DATE>
+    <ID>noHinsyuKbn</ID>
+    <MSG1>品種区分がマスタに登録されていません。</MSG1>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/11/05 12:30</CREATE_DATE>
+      <MEMO>add nakazawa</MEMO>
 </MSG_DATA>
 <MSG_DATA>
-	<ID>Exclusion</ID>
-		<MSG1>この伝票は更新されています。</MSG1>
-		<BUTTON_TYPE>OK</BUTTON_TYPE>
-		<ICONT_TYPE>Warning</ICONT_TYPE>
-			<CREATE_DATE>2018/03/08 12:00</CREATE_DATE>
+    <ID>noUpdDataGridView</ID>
+    <MSG1>一覧が更新されていません。</MSG1>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/11/08 18:00</CREATE_DATE>
+      <MEMO>add nakazawa</MEMO>
 </MSG_DATA>
 <MSG_DATA>
-	<ID>notUriageYm</ID>
-		<MSG1>売上入金年月と違います。</MSG1>
-		<BUTTON_TYPE>OK</BUTTON_TYPE>
-		<ICONT_TYPE>Warning</ICONT_TYPE>
-			<CREATE_DATE>2018/03/08 17:00</CREATE_DATE>
+    <ID>noZM120R1_Base</ID>
+    <MSG1>計画対象品マスタ一覧雛形ファイル名が設定されていません。</MSG1>
+    <MSG2>INIファイルをもう一度確認してください。</MSG2>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/11/09 19:30</CREATE_DATE>
+      <MEMO>add nakazawa</MEMO>
 </MSG_DATA>
 <MSG_DATA>
-	<ID>notSiireYm</ID>
-		<MSG1>仕入支払年月と違います。</MSG1>
-		<BUTTON_TYPE>OK</BUTTON_TYPE>
-		<ICONT_TYPE>Warning</ICONT_TYPE>
-			<CREATE_DATE>2018/03/16 17:00</CREATE_DATE>
+    <ID>noZM120R1_Out</ID>
+    <MSG1>計画対象品マスタ一覧出力ファイル名が設定されていません。</MSG1>
+    <MSG2>INIファイルをもう一度確認してください。</MSG2>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/11/09 19:30</CREATE_DATE>
+      <MEMO>add nakazawa</MEMO>
 </MSG_DATA>
 <MSG_DATA>
-	<ID>cannotSelectTorikeshiData</ID>
-		<MSG1>取消データは選択できません。</MSG1>
-		<ICONT_TYPE>Warning</ICONT_TYPE>
-			<CREATE_DATE>2018/03/09 15:00</CREATE_DATE>
-			<MEMO>データ選択時、変更/取消/参照モード、かつ、選択データが取消データの場合に表示</MEMO>
+    <ID>notExistZM120R1_Base</ID>
+    <MSG1>計画対象品マスタ一覧雛形ファイルが見つかりません。</MSG1>
+    <MSG2>雛形ファイルをもう一度確認してください。</MSG2>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/11/09 19:50</CREATE_DATE>
+      <MEMO>add nakazawa</MEMO>
 </MSG_DATA>
 <MSG_DATA>
-	<ID>confirmDeleteRow</ID>
-		<MSG1>選択行を削除します。</MSG1>
-		<MSG2>よろしいですか？</MSG2>
-		<BUTTON_TYPE>YesNo</BUTTON_TYPE>
-		<ICONT_TYPE>Question</ICONT_TYPE>
-		<DEFAULT_BUTTON>Button2</DEFAULT_BUTTON>
-			<CREATE_DATE>2018/03/22 14:00</CREATE_DATE>
-			<MEMO></MEMO>
+    <ID>noZM130R1_Base</ID>
+    <MSG1>計画対象品一覧雛形ファイル名が設定されていません。</MSG1>
+    <MSG2>INIファイルをもう一度確認してください。</MSG2>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/11/11 18:10</CREATE_DATE>
+      <MEMO>add nakazawa</MEMO>
 </MSG_DATA>
 <MSG_DATA>
-	<ID>existRegistData</ID>
-		<MSG1>登録済みのデータが存在します。</MSG1>
-		<BUTTON_TYPE>OK</BUTTON_TYPE>
-		<ICONT_TYPE>Warning</ICONT_TYPE>
-			<CREATE_DATE>2018/03/26 17:00</CREATE_DATE>
+    <ID>noZM130R1_Out</ID>
+    <MSG1>計画対象品一覧出力ファイル名が設定されていません。</MSG1>
+    <MSG2>INIファイルをもう一度確認してください。</MSG2>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/11/11 18:10</CREATE_DATE>
+      <MEMO>add nakazawa</MEMO>
 </MSG_DATA>
 <MSG_DATA>
-	<ID>paramTblError</ID>
-		<MSG1>出荷数一覧パラメタの対象条件に誤りがあります。</MSG1>
-		<BUTTON_TYPE>OK</BUTTON_TYPE>
-		<ICONT_TYPE>Error</ICONT_TYPE>
-			<CREATE_DATE>2018/03/29 17:00</CREATE_DATE>
+    <ID>notExistZM130R1_Base</ID>
+    <MSG1>計画対象品一覧雛形ファイルが見つかりません。</MSG1>
+    <MSG2>雛形ファイルをもう一度確認してください。</MSG2>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/11/11 18:10</CREATE_DATE>
+      <MEMO>add nakazawa</MEMO>
 </MSG_DATA>
 <MSG_DATA>
-	<ID>outFileOpen</ID>
-		<MSG1>出力先ファイルが開かれたままになっています。</MSG1>
-		<BUTTON_TYPE>OK</BUTTON_TYPE>
-		<ICONT_TYPE>Exclamation</ICONT_TYPE>
-			<CREATE_DATE>2018/03/29 17:00</CREATE_DATE>
+    <ID>selectedImportFile</ID>
+    <MSG1>取り込むファイルを選択してください。</MSG1>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+    <CREATE_DATE>2010/11/17 19:20</CREATE_DATE>
+    <MEMO>add suzuki</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>notExistsFilePath</ID>
+    <MSG1>ファイルのパスが存在しません。</MSG1>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+    <CREATE_DATE>2010/11/17 19:20</CREATE_DATE>
+    <MEMO>add suzuki</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>irregularFile</ID>
+    <MSG1>ファイルが正しくありません。</MSG1>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+    <CREATE_DATE>2010/11/17 19:20</CREATE_DATE>
+    <MEMO>add suzuki</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>noInsertData</ID>
+    <MSG1>登録するデータがありませんでした。</MSG1>
+    <ICONT_TYPE>Information</ICONT_TYPE>
+    <CREATE_DATE>2010/11/18 14:10</CREATE_DATE>
+    <MEMO>add suzuki</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>notEqualKouteiKikaiRyaku</ID>
+    <MSG1>工程名コードの1桁目と、機械略記号の1桁目が一致していません。</MSG1>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/11/22 15:20</CREATE_DATE>
+      <MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>noZG730R1_Base</ID>
+    <MSG1>機械別負荷山積集計表雛形ファイル名が設定されていません。</MSG1>
+    <MSG2>INIファイルをもう一度確認してください。</MSG2>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/11/22 17:00</CREATE_DATE>
+      <MEMO>add suzuki</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>noZG730R1_Out</ID>
+    <MSG1>機械別負荷山積集計表出力ファイル名が設定されていません。</MSG1>
+    <MSG2>INIファイルをもう一度確認してください。</MSG2>
+    <ICONT_TYPE>Error</ICONT_TYPE>
+      <CREATE_DATE>>2010/11/22 17:00</CREATE_DATE>
+      <MEMO>add suzuki</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>notExistZG730R1_Base</ID>
+    <MSG1>機械別負荷山積集計表雛形ファイルが見つかりません。</MSG1>
+    <MSG2>雛形ファイルをもう一度確認してください。</MSG2>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+    <CREATE_DATE>2010/11/22 17:00</CREATE_DATE>
+    <MEMO>add suzuki</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>confirmRegistReDisp</ID>
+    <MSG1>変更された内容で登録します。よろしいですか？</MSG1>
+    <MSG2>登録すると、負荷山積結果を再計算するため、一覧を再表示します。</MSG2>
+    <BUTTON_TYPE>YesNo</BUTTON_TYPE>
+    <ICONT_TYPE>Question</ICONT_TYPE>
+    <DEFAULT_BUTTON>Button2</DEFAULT_BUTTON>
+    <CREATE_DATE>2010/11/25 09:10</CREATE_DATE>
+    <MEMO>add suzuki</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>confirmRegist</ID>
+    <MSG1>変更された内容で登録します。よろしいですか？</MSG1>
+    <BUTTON_TYPE>YesNo</BUTTON_TYPE>
+    <ICONT_TYPE>Question</ICONT_TYPE>
+    <DEFAULT_BUTTON>Button2</DEFAULT_BUTTON>
+      <CREATE_DATE>2010/11/25 09:10</CREATE_DATE>
+      <MEMO>add suzuki</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>calculateMch</ID>
+    <MSG1>MCHを算出してください。</MSG1>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/11/25 09:10</CREATE_DATE>
+      <MEMO>add suzuki</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>inputOverZero</ID>
+    <MSG1>0以上の正の整数を入力してください。</MSG1>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/11/25 09:10</CREATE_DATE>
+      <MEMO>add suzuki</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>noZG731R1_Base</ID>
+    <MSG1>機械別品名別負荷山積集計表雛形ファイル名が設定されていません。</MSG1>
+    <MSG2>INIファイルをもう一度確認してください。</MSG2>
+    <ICONT_TYPE>Error</ICONT_TYPE>
+      <CREATE_DATE>2010/11/29 13:20</CREATE_DATE>
+      <MEMO>add suzuki</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>noZG731R1_Out</ID>
+    <MSG1>機械別品名別負荷山積集計表出力ファイル名が設定されていません。</MSG1>
+    <MSG2>INIファイルをもう一度確認してください。</MSG2>
+    <ICONT_TYPE>Error</ICONT_TYPE>
+      <CREATE_DATE>2010/11/29 13:20</CREATE_DATE>
+      <MEMO>add suzuki</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+  <ID>noZE110R1_Base</ID>
+  <MSG1>販売実績雛形ファイル名が設定されていません。</MSG1>
+  <MSG2>INIファイルをもう一度確認してください。</MSG2>
+  <ICONT_TYPE>Error</ICONT_TYPE>
+  <CREATE_DATE>2010/12/07 12:00</CREATE_DATE>
+  <MEMO>add takagi</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+  <ID>noZE110R1_Out</ID>
+  <MSG1>販売実績出力ファイル名が設定されていません。</MSG1>
+  <MSG2>INIファイルをもう一度確認してください。</MSG2>
+  <ICONT_TYPE>Error</ICONT_TYPE>
+  <CREATE_DATE>2010/12/07 12:00</CREATE_DATE>
+  <MEMO>add takagi</MEMO>
+</MSG_DATA>  
+<MSG_DATA>
+  <ID>noZE210R1_Base</ID>
+  <MSG1>在庫実績雛形ファイル名が設定されていません。</MSG1>
+  <MSG2>INIファイルをもう一度確認してください。</MSG2>
+  <ICONT_TYPE>Error</ICONT_TYPE>
+  <CREATE_DATE>2010/12/09 12:00</CREATE_DATE>
+  <MEMO>add takagi</MEMO>
+</MSG_DATA>
+  <MSG_DATA>
+    <ID>noTableOwner</ID>
+  <MSG1>テーブルを参照するためのテーブルオーナ名が設定されていません。</MSG1>
+  <MSG2>INIファイルをもう一度確認してください。</MSG2>
+  <ICONT_TYPE>Error</ICONT_TYPE>
+  <CREATE_DATE>2010/12/09 12:00</CREATE_DATE>
+  <MEMO>add takagi</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+  <ID>noLinkSvForHanbai</ID>
+  <MSG1>データベース 販売 を参照するためのリンクサーバー名が設定されていません。</MSG1>
+  <MSG2>INIファイルをもう一度確認してください。</MSG2>
+  <ICONT_TYPE>Error</ICONT_TYPE>
+  <CREATE_DATE>2010/12/09 12:00</CREATE_DATE>
+  <MEMO>add takagi</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+  <ID>noZE210R1_Out</ID>
+  <MSG1>在庫実績出力ファイル名が設定されていません。</MSG1>
+  <MSG2>INIファイルをもう一度確認してください。</MSG2>
+  <ICONT_TYPE>Error</ICONT_TYPE>
+  <CREATE_DATE>2010/12/09 12:00</CREATE_DATE>
+  <MEMO>add takagi</MEMO>
+</MSG_DATA>  
+<MSG_DATA>
+    <ID>notExistZG731R1_Base</ID>
+    <MSG1>機械別品名別負荷山積集計表雛形ファイルが見つかりません。</MSG1>
+    <MSG2>雛形ファイルをもう一度確認してください。</MSG2>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/11/29 13:20</CREATE_DATE>
+      <MEMO>add suzuki</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>emptyFile</ID>
+    <MSG1>ファイルの内容がありません。</MSG1>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/11/30 14:55</CREATE_DATE>
+      <MEMO>add suzuki</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>doSaikeisan</ID>
+    <MSG1>登録の前に再計算を行ってください。</MSG1>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/12/01 19:25</CREATE_DATE>
+      <MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>over4KetaJosu</ID>
+    <MSG1>条数の値が4桁を超えています。</MSG1>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/12/02 16:10</CREATE_DATE>
+      <MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>over20bite</ID>
+    <MSG1>20バイトまでで入力してください。</MSG1>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/12/02 16:20</CREATE_DATE>
+      <MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>over6biteBubunTenkai</ID>
+    <MSG1>部分展開工程は6バイトまでで入力してください。</MSG1>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/12/02 16:50</CREATE_DATE>
+      <MEMO>add nakazawa</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>over3Keta</ID>
+    <MSG1>整数部は３桁以内で入力して下さい。</MSG1>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/12/01 16:30</CREATE_DATE>
+      <MEMO>add suzuki</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>kobetsuMitouroku</ID>
+    <MSG1>個別計画入力が未登録のデータがあります。</MSG1>
+    <MSG2>個別計画入力画面に戻って販売計画を登録してください。</MSG2>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2011/01/26 17:00</CREATE_DATE>
+      <MEMO>add suzuki</MEMO>
 </MSG_DATA>
 </MSG_DEF>
