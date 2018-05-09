@@ -1,0 +1,685 @@
+<?xml version="1.0" encoding="shift_jis"?>
+<MSG_DEF>
+<!--
+以下定義サンプル
+
+↓デフォルトMSG定義 ※全タグ省略不可能
+<DEFAULT_MSG>
+	<TITLE>デフォルトウィンドルタイトル</TITLE>
+	<BUTTON_TYPE>OK</BUTTON_TYPE>
+	<ICONT_TYPE>None</ICONT_TYPE>
+	<DEFAULT_BUTTON>Button1</DEFAULT_BUTTON>
+</DEFAULT_MSG>
+
+↓個別MSG定義 ※<ID>タグ以外は省略可能→省略時はデフォルトMSG定義が適用される
+<MSG_DATA>
+	<ID>001</ID>
+		<TITLE>タイトル</TITLE>
+		<MSG1>メッセージ１</MSG1>
+		<MSG2>メッセージ２</MSG2>
+		<BUTTON_TYPE>AbortRetryIgnore</BUTTON_TYPE>
+		<ICONT_TYPE>Exclamation</ICONT_TYPE>
+		<DEFAULT_BUTTON>Button2</DEFAULT_BUTTON>
+			<CREATE_DATE>2006/04/10 20:00</CREATE_DATE>
+			<MEMO>サンプル</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>002</ID>
+	・
+	・
+	・
+	
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+BUTTON_TYPE定数		内容 
+───────────────────────────────────────────────
+AbortRetryIgnore	メッセージ ボックスに、[中止] ボタン、[再試行] ボタン、および [無視] ボタンを表示します。 
+OK					メッセージ ボックスに [OK] ボタンを表示します。 
+OKCancel			メッセージ ボックスに、[OK] ボタンと [キャンセル] ボタンを表示します。 
+RetryCancel			メッセージ ボックスに、[再試行] ボタンと [キャンセル] ボタンを表示します。 
+YesNo				メッセージ ボックスに、[はい] ボタンと [いいえ] ボタンを表示します。 
+YesNoCancel			メッセージ ボックスに、[はい] ボタン、[いいえ] ボタン、および [キャンセル] ボタンを表示します。 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ICONT_TYPE定数		内容 
+───────────────────────────────────────────────
+Asterisk			メッセージ ボックスに、円で囲まれた小文字の i から成る記号を表示します。 
+Error				メッセージ ボックスに、背景が赤の円で囲まれた白い X から成る記号を表示します。 
+Exclamation			メッセージ ボックスに、背景が黄色の三角形で囲まれた感嘆符から成る記号を表示します。 
+Hand				メッセージ ボックスに、背景が赤の円で囲まれた白い X から成る記号を表示します。 
+Information			メッセージ ボックスに、円で囲まれた小文字の i から成る記号を表示します。 
+None				メッセージ ボックスに記号を表示しません。 
+Question			メッセージ ボックスに、円で囲まれた疑問符から成る記号を表示します。 
+Stop				メッセージ ボックスに、背景が赤の円で囲まれた白い X から成る記号を表示します。 
+Warning				メッセージ ボックスに、背景が黄色の三角形で囲まれた感嘆符から成る記号を表示します。 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+DEFAULT_BUTTON定数	内容 
+───────────────────────────────────────────────
+Button1				メッセージ ボックスの 1 番目のボタンが既定のボタンです。 
+Button2				メッセージ ボックスの 2 番目のボタンが既定のボタンです。 
+Button3				メッセージ ボックスの 3 番目のボタンが既定のボタンです。 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+戻り値定数			値	説明 
+───────────────────────────────────────────────
+OK					1	ダイアログ ボックスの戻り値は OK です。		("OK")
+Cancel				2	ダイアログ ボックスの戻り値は Cancel です。	("キャンセル" )
+Abort				3	ダイアログ ボックスの戻り値は Abort です。	("中止")
+Retry				4	ダイアログ ボックスの戻り値は Retry です。	("再試行")
+Ignore				5	ダイアログ ボックスの戻り値は Ignore です。	("無視")
+Yes					6	ダイアログ ボックスの戻り値は Yes です。	("はい")
+No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
+-->
+
+<!--**********************デフォルトMSGの定義**********************-->
+<DEFAULT_MSG>
+	<TITLE>販売管理システム</TITLE>
+	<BUTTON_TYPE>OK</BUTTON_TYPE>
+	<ICONT_TYPE>None</ICONT_TYPE>
+	<DEFAULT_BUTTON>Button1</DEFAULT_BUTTON>
+	<CREATE_DATE>2018/02/26 19:07</CREATE_DATE>
+	<MEMO>記述省略時のデフォルト</MEMO>
+</DEFAULT_MSG>
+
+<!--****************************MSG定義*****************************-->
+<MSG_DATA>
+	<ID>SystemErr</ID>
+		<MSG1>システムエラーが発生しました。</MSG1>
+		<MSG2>システムを停止します。</MSG2>
+		<ICONT_TYPE>Error</ICONT_TYPE>
+			<CREATE_DATE>2006/04/27 15:00</CREATE_DATE>
+			<MEMO>システムエラー用</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>NonIniFile</ID>
+		<MSG1>INIファイルがありません。</MSG1>
+		<MSG2>システムの起動を中止します。</MSG2>
+		<ICONT_TYPE>Error</ICONT_TYPE>
+			<CREATE_DATE>2006/05/16 14:00</CREATE_DATE>
+			<MEMO>iniファイルが存在しない場合エラー</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>NonIniKey</ID>
+		<MSG1>設定ファイルの項目が存在しません。</MSG1>
+		<ICONT_TYPE>Error</ICONT_TYPE>
+			<CREATE_DATE>2006/04/27 15:00</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>NonLogDirKey</ID>
+		<MSG1>Logファイル格納場所の取得に失敗しました。</MSG1>
+		<MSG2>システムの起動を中止します。</MSG2>
+		<ICONT_TYPE>Error</ICONT_TYPE>
+			<CREATE_DATE>2006/05/16 14:00</CREATE_DATE>
+			<MEMO>ログファイルの出力先が取得できない場合エラー</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>NonLogDir</ID>
+		<MSG1>Logファイル格納場所がありません。</MSG1>
+		<MSG2>システムの起動を中止します。</MSG2>
+		<ICONT_TYPE>Error</ICONT_TYPE>
+			<CREATE_DATE>2006/05/16 14:00</CREATE_DATE>
+			<MEMO>ログファイルの出力先パスが存在しない場合</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>NonPriDb</ID>
+		<MSG1>サーバに接続できません。</MSG1>
+		<MSG2>バックアップサーバに接続しますか？</MSG2>
+		<BUTTON_TYPE>YesNo</BUTTON_TYPE>
+		<ICONT_TYPE>Error</ICONT_TYPE>
+			<CREATE_DATE>2018/03/07 17:00</CREATE_DATE>
+			<MEMO>プライマリＤＢに接続できない場合</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>NonBackDb</ID>
+		<MSG1>バックアップサーバに接続できません。</MSG1>
+		<MSG2>システムを終了します。</MSG2>
+		<ICONT_TYPE>Error</ICONT_TYPE>
+			<CREATE_DATE>2018/03/07 17:00</CREATE_DATE>
+			<MEMO>バックアップＤＢに接続できない場合</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>NonDbIniKey</ID>
+		<MSG1>ＤＢ接続情報の取得に失敗しました。</MSG1>
+		<MSG2>システムの起動を中止します。</MSG2>
+		<ICONT_TYPE>Error</ICONT_TYPE>
+			<CREATE_DATE>2018/02/08 13:30</CREATE_DATE>
+			<MEMO>ＤＢ接続情報が取得できない場合</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>NonProductInfoIniKey</ID>
+		<MSG1>システム規定情報の取得に失敗しました。</MSG1>
+		<MSG2>システムの起動を中止します。</MSG2>
+		<ICONT_TYPE>Error</ICONT_TYPE>
+			<CREATE_DATE>2018/02/08 13:30</CREATE_DATE>
+			<MEMO>システム規定情報が取得できない場合</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>NonExcelDirKey</ID>
+		<MSG1>雛型ファイル格納場所の取得に失敗しました。</MSG1>
+		<MSG2>システムの起動を中止します。</MSG2>
+		<ICONT_TYPE>Error</ICONT_TYPE>
+			<CREATE_DATE>2006/05/16 14:00</CREATE_DATE>
+			<MEMO>帳票雛形ファイル格納フォルダ名が取得できない場合エラー</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>NonTempDirKey</ID>
+		<MSG1>一時作成フォルダの取得に失敗しました。</MSG1>
+		<MSG2>システムの起動を中止します。</MSG2>
+		<ICONT_TYPE>Error</ICONT_TYPE>
+			<CREATE_DATE>2006/05/16 14:00</CREATE_DATE>
+			<MEMO>帳票一時作成フォルダ名が取得できない場合エラー</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>NonHinaFileKey</ID>
+		<MSG1>帳票雛型ファイル名の取得に失敗しました。</MSG1>
+		<MSG2>システムの起動を中止します。</MSG2>
+		<ICONT_TYPE>Error</ICONT_TYPE>
+			<CREATE_DATE>2006/05/16 14:00</CREATE_DATE>
+			<MEMO>帳票雛形ファイル名が取得できない場合エラー</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>NonChoFileKey</ID>
+		<MSG1>作成帳票ファイル名の取得に失敗しました。</MSG1>
+		<MSG2>システムの起動を中止します。</MSG2>
+		<ICONT_TYPE>Error</ICONT_TYPE>
+			<CREATE_DATE>2006/05/16 14:00</CREATE_DATE>
+			<MEMO>作成帳票ファイル名が取得できない場合エラー</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>NonHinaFile</ID>
+		<MSG1>帳票雛形ファイルが存在しません。</MSG1>
+		<MSG2>システムの起動を中止します。</MSG2>
+		<ICONT_TYPE>Error</ICONT_TYPE>
+			<CREATE_DATE>2006/05/16 14:00</CREATE_DATE>
+			<MEMO>帳票雛形ファイルが存在しない場合エラー</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>NonTempDir</ID>
+		<MSG1>一時作成フォルダが存在しません。</MSG1>
+		<MSG2>システムの起動を中止します。</MSG2>
+		<ICONT_TYPE>Error</ICONT_TYPE>
+			<CREATE_DATE>2006/05/16 14:00</CREATE_DATE>
+			<MEMO>帳票一時作成フォルダのパスが存在しない場合エラー</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>ErrDbCn</ID>
+		<MSG1>データベースの接続に失敗しました。</MSG1>
+		<MSG2>システムの起動を中止します。</MSG2>
+		<ICONT_TYPE>Error</ICONT_TYPE>
+			<CREATE_DATE>2006/05/16 14:00</CREATE_DATE>
+			<MEMO>ORACLEに接続できない場合エラー</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>requiredImput</ID>
+		<MSG1>必須入力項目です。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2006/04/27 15:00</CREATE_DATE>
+			<MEMO>該当項目が未入力の場合に表示</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>rejectPWEdit</ID>
+		<MSG1>パスワード変更を中断します。</MSG1>
+		<MSG2>よろしいですか？</MSG2>
+		<BUTTON_TYPE>YesNo</BUTTON_TYPE>
+		<ICONT_TYPE>Question</ICONT_TYPE>
+		<DEFAULT_BUTTON>Button2</DEFAULT_BUTTON>
+			<CREATE_DATE>2006/05/19 11:00</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>NonImputUserID</ID>
+		<MSG1>入力された「ユーザID」は存在しないか、無効になっています。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2018/02/17 13:27</CREATE_DATE>
+			<MEMO>入力されたユーザIDが存在しない場合に表示</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>NonImputNoDataUserID</ID>
+		<MSG1>入力された「ユーザID」のパスワード情報が存在しません。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2018/02/17 13:27</CREATE_DATE>
+			<MEMO>入力されたユーザIDのパスワード情報が存在しない場合に表示</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>NonImputPassword</ID>
+		<MSG1>パスワードが違います。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2018/02/17 13:27</CREATE_DATE>
+			<MEMO>パスワードが異なる場合に表示</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>requiredImputNewPassword</ID>
+		<MSG1>「新パスワード」を入力してください。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2018/02/12 18:00</CREATE_DATE>
+			<MEMO>新パスワードが未入力の場合に表示</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>requiredImputConfirmationPassword</ID>
+		<MSG1>「確認用パスワード」を入力してください。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2018/02/12 18:00</CREATE_DATE>
+			<MEMO>確認用パスワードが未入力の場合に表示</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>UnmatchPasswd</ID>
+		<MSG1>「新パスワード」と「確認用パスワード」が不一致です。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2018/02/12 18:00</CREATE_DATE>
+			<MEMO>新パスワードと確認用パスワードが不一致の場合に表示</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>ReusePasswd</ID>
+		<MSG1>以前に使用されたパスワードです。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2018/02/12 18:00</CREATE_DATE>
+			<MEMO>使用済みのパスワードの場合に表示</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>completePWChanged</ID>
+		<MSG1>パスワードを変更しました。</MSG1>
+		<ICONT_TYPE>Information</ICONT_TYPE>
+			<CREATE_DATE>2018/02/12 18:00</CREATE_DATE>
+			<MEMO>パスワード変更が成功した場合に表示</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>SystemExit</ID>
+		<MSG1>システムを終了します。</MSG1>
+		<MSG2>よろしいですか？</MSG2>
+		<BUTTON_TYPE>OKCancel</BUTTON_TYPE>
+		<ICONT_TYPE>Question</ICONT_TYPE>
+		<DEFAULT_BUTTON>Button2</DEFAULT_BUTTON>
+			<CREATE_DATE>2018/02/12 18:00</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>NonData</ID>
+		<MSG1>対象データがありません。</MSG1>
+		<ICONT_TYPE>Information</ICONT_TYPE>
+			<CREATE_DATE>2006/04/27 15:00</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>confirmInsert</ID>
+		<MSG1>登録します。</MSG1>
+		<MSG2>よろしいですか？</MSG2>
+		<BUTTON_TYPE>YesNo</BUTTON_TYPE>
+		<ICONT_TYPE>Question</ICONT_TYPE>
+		<DEFAULT_BUTTON>Button2</DEFAULT_BUTTON>
+			<CREATE_DATE>2006/04/27 15:00</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>UpdateInfo</ID>
+		<MSG1>注文登録しました。</MSG1>
+		<BUTTON_TYPE>OK</BUTTON_TYPE>
+		<ICONT_TYPE>Information</ICONT_TYPE>
+			<CREATE_DATE>2018/03/05 18:00</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>UpdateItakuInfo</ID>
+		<MSG1>委託売上を登録しました。</MSG1>
+		<BUTTON_TYPE>OK</BUTTON_TYPE>
+		<ICONT_TYPE>Information</ICONT_TYPE>
+			<CREATE_DATE>2018/03/14 11:00</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>EditItakuInfo</ID>
+		<MSG1>委託売上を変更しました。</MSG1>
+		<BUTTON_TYPE>OK</BUTTON_TYPE>
+		<ICONT_TYPE>Information</ICONT_TYPE>
+			<CREATE_DATE>2018/03/14 11:00</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>CancelItakuInfo</ID>
+		<MSG1>委託売上を変更しました。</MSG1>
+		<BUTTON_TYPE>OK</BUTTON_TYPE>
+		<ICONT_TYPE>Information</ICONT_TYPE>
+			<CREATE_DATE>2018/03/14 11:00</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>UpdateNyukinInfo</ID>
+		<MSG1>入金登録しました。</MSG1>
+		<BUTTON_TYPE>OK</BUTTON_TYPE>
+		<ICONT_TYPE>Information</ICONT_TYPE>
+			<CREATE_DATE>2018/03/14 11:00</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>EditNyukinInfo</ID>
+		<MSG1>入金情報を変更しました。</MSG1>
+		<BUTTON_TYPE>OK</BUTTON_TYPE>
+		<ICONT_TYPE>Information</ICONT_TYPE>
+			<CREATE_DATE>2018/03/14 11:00</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>CancelNyukinInfo</ID>
+		<MSG1>入金情報を取消ました。</MSG1>
+		<BUTTON_TYPE>OK</BUTTON_TYPE>
+		<ICONT_TYPE>Information</ICONT_TYPE>
+			<CREATE_DATE>2018/03/14 11:00</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>InsertKeizoku</ID>
+		<MSG1>委託注文一覧画面に戻らずに、次の伝票番号を処理しますか？</MSG1>
+		<BUTTON_TYPE>YesNoCancel</BUTTON_TYPE>
+		<ICONT_TYPE>Question</ICONT_TYPE>
+			<CREATE_DATE>2018/03/05 18:00</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>UpdateShiireInfo</ID>
+		<MSG1>仕入登録しました。</MSG1>
+		<BUTTON_TYPE>OK</BUTTON_TYPE>
+		<ICONT_TYPE>Information</ICONT_TYPE>
+			<CREATE_DATE>2018/03/14 11:00</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>confirmDelete</ID>
+		<MSG1>削除します。</MSG1>
+		<MSG2>よろしいですか？</MSG2>
+		<BUTTON_TYPE>YesNo</BUTTON_TYPE>
+		<ICONT_TYPE>Question</ICONT_TYPE>
+		<DEFAULT_BUTTON>Button2</DEFAULT_BUTTON>
+			<CREATE_DATE>2006/04/27 15:00</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>confirmUpdate</ID>
+		<MSG1>更新します。</MSG1>
+		<MSG2>よろしいですか？</MSG2>
+		<BUTTON_TYPE>YesNo</BUTTON_TYPE>
+		<ICONT_TYPE>Question</ICONT_TYPE>
+		<DEFAULT_BUTTON>Button2</DEFAULT_BUTTON>
+			<CREATE_DATE>2006/04/27 15:00</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>confirmRun</ID>
+		<MSG1>実行します。</MSG1>
+		<MSG2>よろしいですか？</MSG2>
+		<BUTTON_TYPE>YesNo</BUTTON_TYPE>
+		<ICONT_TYPE>Question</ICONT_TYPE>
+		<DEFAULT_BUTTON>Button2</DEFAULT_BUTTON>
+			<CREATE_DATE>2006/05/31 18:00</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>completeInsert</ID>
+		<MSG1>登録が完了しました。</MSG1>
+		<ICONT_TYPE>Information</ICONT_TYPE>
+			<CREATE_DATE>2006/04/27 15:00</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>completeDelete</ID>
+		<MSG1>削除が完了しました。</MSG1>
+		<ICONT_TYPE>Information</ICONT_TYPE>
+			<CREATE_DATE>2006/04/27 15:00</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>completeUpdate</ID>
+		<MSG1>更新が完了しました。</MSG1>
+		<ICONT_TYPE>Information</ICONT_TYPE>
+			<CREATE_DATE>2006/04/27 15:00</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>completeRun</ID>
+		<MSG1>処理が完了しました。</MSG1>
+		<ICONT_TYPE>Information</ICONT_TYPE>
+			<CREATE_DATE>2006/05/31 18:00</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>failInsert</ID>
+		<MSG1>登録に失敗しました。</MSG1>
+		<ICONT_TYPE>Error</ICONT_TYPE>
+			<CREATE_DATE>2006/04/27 15:00</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>failUpdate</ID>
+		<MSG1>更新に失敗しました。</MSG1>
+		<ICONT_TYPE>Error</ICONT_TYPE>
+			<CREATE_DATE>2006/04/27 15:00</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>failDelete</ID>
+		<MSG1>削除に失敗しました。</MSG1>
+		<ICONT_TYPE>Error</ICONT_TYPE>
+			<CREATE_DATE>2006/04/27 15:00</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>fileOpenErr</ID>
+		<MSG1>エクセルファイルが開かれています。</MSG1>
+		<MSG2>ファイルを閉じてから再実行してください。</MSG2>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2006/05/26 16:55</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>noTargetData</ID>
+		<MSG1>該当データがありません。</MSG1>
+		<ICONT_TYPE>Information</ICONT_TYPE>
+			<CREATE_DATE>2006/11/29 10:00</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>confirmPrint</ID>
+		<MSG1>印刷処理を実行します。</MSG1>
+		<MSG2>よろしいですか？</MSG2>
+		<BUTTON_TYPE>YesNo</BUTTON_TYPE>
+		<ICONT_TYPE>Question</ICONT_TYPE>
+		<DEFAULT_BUTTON>Button2</DEFAULT_BUTTON>
+			<CREATE_DATE>2007/05/17 10:10</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>NoMastaData</ID>
+		<MSG1>該当するデータがマスタにありません。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/03/04 18:52</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>NoSaibanMst</ID>
+		<MSG1>採番マスタに該当データがありません。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/03/05 16:12</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>ErrDaiSyoChk</ID>
+		<MSG1>大小関係が正しくありません。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+		<CREATE_DATE>2010/10/18 18:23</CREATE_DATE>
+		<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>noHanyouMst</ID>
+		<MSG1>汎用マスタの値の取得に失敗しました。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2010/07/20 10:00</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>NonXlsBaseDir</ID>
+    <MSG1>EXCEl雛形ファイルの格納場所の取得に失敗しました</MSG1>
+    <MSG2>システムの起動を中止します。</MSG2>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/10/01 16:00</CREATE_DATE>
+      <MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>NonXlsOutDir</ID>
+    <MSG1>EXCEl出力ファイルの格納場所の取得に失敗しました</MSG1>
+    <MSG2>システムの起動を中止します。</MSG2>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/10/01 16:00</CREATE_DATE>
+      <MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>noHinaDir</ID>
+    <MSG1>雛形ファイル格納フォルダがありません。</MSG1>
+    <MSG2>フォルダ構成をもう一度確認してください。</MSG2>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/10/14 11:00</CREATE_DATE>
+      <MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+    <ID>noOutExcelDir</ID>
+    <MSG1>EXCELファイル出力先フォルダがありません。</MSG1>
+    <MSG2>フォルダ構成をもう一度確認してください。</MSG2>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+      <CREATE_DATE>2010/10/14 11:00</CREATE_DATE>
+      <MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>NonSysDate</ID>
+		<MSG1>システム日付の取得に失敗しました。</MSG1>
+		<ICONT_TYPE>Error</ICONT_TYPE>
+			<CREATE_DATE>2018/02/22 18:00</CREATE_DATE>
+			<MEMO>システム日付の取得に失敗した場合エラー</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>nonDenNo</ID>
+		<MSG1>伝票番号が入力されていません。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2018/02/23 11:00</CREATE_DATE>
+			<MEMO>伝票番号が未入力の場合に表示</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>confirmCSVOutput</ID>
+		<MSG1>一覧のデータをCSVファイルへ出力します。</MSG1>
+		<MSG2>よろしいですか？</MSG2>
+		<BUTTON_TYPE>OKCancel</BUTTON_TYPE>
+		<ICONT_TYPE>Question</ICONT_TYPE>
+		<DEFAULT_BUTTON>Button2</DEFAULT_BUTTON>
+			<CREATE_DATE>2018/02/28 14:45</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>ErrDbSelect</ID>
+		<MSG1>データベースからのデータ取得に失敗しました。</MSG1>
+		<MSG2>【詳細】</MSG2>
+		<BUTTON_TYPE>OK</BUTTON_TYPE>
+		<ICONT_TYPE>Error</ICONT_TYPE>
+			<CREATE_DATE>2018/02/28 14:45</CREATE_DATE>
+			<MEMO>DB共通で使用</MEMO>
+</MSG_DATA>
+  <MSG_DATA>
+    <ID>MaxDataCnt</ID>
+    <MSG1>抽出したデータが上限を超えています。</MSG1>
+    <MSG2>表示してよろしいですか？</MSG2>
+    <BUTTON_TYPE>OKCancel</BUTTON_TYPE>
+    <ICONT_TYPE>Question</ICONT_TYPE>
+    <DEFAULT_BUTTON>Button2</DEFAULT_BUTTON>
+    <CREATE_DATE>2018/02/28 10:30</CREATE_DATE>
+  </MSG_DATA>
+<MSG_DATA>
+	<ID>printOK</ID>
+		<MSG1>印刷が完了しました。</MSG1>
+		<ICONT_TYPE>Information</ICONT_TYPE>
+			<CREATE_DATE>2018/02/28 15:00</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>RegDupKeyData</ID>
+		<MSG1>重複データが存在します。</MSG1>
+		<BUTTON_TYPE>OK</BUTTON_TYPE>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2018/03/05 17:30</CREATE_DATE>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>clearTaisho</ID>
+		<MSG1>選択された「出力対象」がクリアされますが、</MSG1>
+		<MSG2>よろしいですか？</MSG2>
+		<BUTTON_TYPE>YesNo</BUTTON_TYPE>
+		<ICONT_TYPE>Question</ICONT_TYPE>
+		<DEFAULT_BUTTON>Button2</DEFAULT_BUTTON>
+			<CREATE_DATE>2018/03/05 18:00</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>nonTaisho</ID>
+		<MSG1>出力対象を指定してください。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2018/03/06 11:00</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>IsNotNumeric</ID>
+		<MSG1>数値以外が入力されています。</MSG1>
+		<BUTTON_TYPE>OK</BUTTON_TYPE>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2018/03/06 16:00</CREATE_DATE>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>Exclusion</ID>
+		<MSG1>この伝票は更新されています。</MSG1>
+		<BUTTON_TYPE>OK</BUTTON_TYPE>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2018/03/08 12:00</CREATE_DATE>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>notUriageYm</ID>
+		<MSG1>売上入金年月と違います。</MSG1>
+		<BUTTON_TYPE>OK</BUTTON_TYPE>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2018/03/08 17:00</CREATE_DATE>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>notSiireYm</ID>
+		<MSG1>仕入支払年月と違います。</MSG1>
+		<BUTTON_TYPE>OK</BUTTON_TYPE>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2018/03/16 17:00</CREATE_DATE>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>cannotSelectTorikeshiData</ID>
+		<MSG1>取消データは選択できません。</MSG1>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2018/03/09 15:00</CREATE_DATE>
+			<MEMO>データ選択時、変更/取消/参照モード、かつ、選択データが取消データの場合に表示</MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>confirmDeleteRow</ID>
+		<MSG1>選択行を削除します。</MSG1>
+		<MSG2>よろしいですか？</MSG2>
+		<BUTTON_TYPE>YesNo</BUTTON_TYPE>
+		<ICONT_TYPE>Question</ICONT_TYPE>
+		<DEFAULT_BUTTON>Button2</DEFAULT_BUTTON>
+			<CREATE_DATE>2018/03/22 14:00</CREATE_DATE>
+			<MEMO></MEMO>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>existRegistData</ID>
+		<MSG1>登録済みのデータが存在します。</MSG1>
+		<BUTTON_TYPE>OK</BUTTON_TYPE>
+		<ICONT_TYPE>Warning</ICONT_TYPE>
+			<CREATE_DATE>2018/03/26 17:00</CREATE_DATE>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>paramTblError</ID>
+		<MSG1>出荷数一覧パラメタの対象条件に誤りがあります。</MSG1>
+		<BUTTON_TYPE>OK</BUTTON_TYPE>
+		<ICONT_TYPE>Error</ICONT_TYPE>
+			<CREATE_DATE>2018/03/29 17:00</CREATE_DATE>
+</MSG_DATA>
+<MSG_DATA>
+	<ID>outFileOpen</ID>
+		<MSG1>出力先ファイルが開かれたままになっています。</MSG1>
+		<BUTTON_TYPE>OK</BUTTON_TYPE>
+		<ICONT_TYPE>Exclamation</ICONT_TYPE>
+			<CREATE_DATE>2018/03/29 17:00</CREATE_DATE>
+</MSG_DATA>
+</MSG_DEF>
