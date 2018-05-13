@@ -1,0 +1,1068 @@
+2018/02/09 16:14:51   ERR***** データベース接続失敗
+データベースの接続に失敗しました。
+	　 そのようなホストは不明です。
+   場所 UtilMDL.DB.UtilPostgresHandler..ctor(String prmSvAdr, String prmDbNm, String prmUserId, String prmPswd, Int16 prmTimeout) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 75
+   場所 UtilMDL.DB.UtilPostgresDebugger..ctor(String prmSvAdr, String prmDbNm, String prmUserId, String prmPswd, String prmFileNm, Boolean prmDebugFlg, Boolean prmConsoleWrite, Int16 prmTimeout) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 90
+2018/02/09 16:16:49   ERR***** データベース接続失敗
+データベースの接続に失敗しました。
+	　 そのようなホストは不明です。
+   場所 UtilMDL.DB.UtilPostgresHandler..ctor(String prmSvAdr, String prmDbNm, String prmUserId, String prmPswd, Int16 prmTimeout) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 75
+   場所 UtilMDL.DB.UtilPostgresDebugger..ctor(String prmSvAdr, String prmDbNm, String prmUserId, String prmPswd, String prmFileNm, Boolean prmDebugFlg, Boolean prmConsoleWrite, Int16 prmTimeout) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 90
+2018/02/09 16:46:33   ERR***** データベース接続失敗
+データベースの接続に失敗しました。
+	　 そのようなホストは不明です。
+   場所 UtilMDL.DB.UtilPostgresHandler..ctor(String prmSvAdr, String prmDbNm, String prmUserId, String prmPswd, Int16 prmTimeout) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 75
+   場所 UtilMDL.DB.UtilPostgresDebugger..ctor(String prmSvAdr, String prmDbNm, String prmUserId, String prmPswd, String prmFileNm, Boolean prmDebugFlg, Boolean prmConsoleWrite, Int16 prmTimeout) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 90
+2018/02/09 16:50:53   ERR***** データベース接続失敗
+データベースの接続に失敗しました。
+	　 そのようなホストは不明です。
+   場所 UtilMDL.DB.UtilPostgresHandler..ctor(String prmSvAdr, String prmDbNm, String prmUserId, String prmPswd, Int16 prmTimeout) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 75
+   場所 UtilMDL.DB.UtilPostgresDebugger..ctor(String prmSvAdr, String prmDbNm, String prmUserId, String prmPswd, String prmFileNm, Boolean prmDebugFlg, Boolean prmConsoleWrite, Int16 prmTimeout) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 90
+2018/02/09 17:25:19   ERR***** データベース接続失敗
+データベースの接続に失敗しました。
+	　 そのようなホストは不明です。
+   場所 UtilMDL.DB.UtilPostgresHandler..ctor(String prmSvAdr, String prmDbNm, String prmUserId, String prmPswd, Int16 prmTimeout) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 75
+   場所 UtilMDL.DB.UtilPostgresDebugger..ctor(String prmSvAdr, String prmDbNm, String prmUserId, String prmPswd, String prmFileNm, Boolean prmDebugFlg, Boolean prmConsoleWrite, Int16 prmTimeout) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 90
+2018/02/14 12:32:29   ERR***** データ更新失敗：ERROR: 42P01: relation "m030_tanto_ctl" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 411
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 296
+
+UPDATE M030_TANTO_CTL SET 
+    CPASSWD = 'USER01@2'
+  , CMNUSER = 'USER01'
+  , DMNDATE = SYSDATE
+ WHERE 
+    CTANTO_CD = 'USER01'
+2018/02/14 13:27:35   ERR***** データ更新失敗：ERROR: 42601: syntax error at or near ","
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 411
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 296
+
+UPDATE m03_pswd SET 
+  , 適用終了日 = current_date -1 
+  , 更新者 = 'USER01'
+  , 更新日 = current_date 
+ WHERE 
+    会社コード = 'KANEKI'
+   and ユーザＩＤ = 'USER01'
+   and 適用開始日 <= current_date 
+   and 適用終了日 >= current_date 
+2018/02/14 13:29:58   ERR***** データ更新失敗：ERROR: 42601: syntax error at or near ","
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 411
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 296
+
+UPDATE m03_pswd SET 
+  , 適用終了日 = current_date -1 
+  , 更新者 = 'USER01'
+  , 更新日 = current_date 
+ WHERE 
+    会社コード = 'KANEKI'
+   and ユーザＩＤ = 'USER01'
+   and 適用開始日 <= current_date 
+   and 適用終了日 >= current_date 
+2018/02/14 13:30:46   ERR***** データ更新失敗：ERROR: 42601: syntax error at or near ","
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 411
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 296
+
+UPDATE m03_pswd SET 
+  , 適用終了日 = current_date -1 
+  , 更新者 = 'USER01'
+  , 更新日 = current_date 
+ WHERE 
+    会社コード = 'KANEKI'
+   and ユーザＩＤ = 'USER01'
+   and 適用開始日 <= current_date 
+   and 適用終了日 >= current_date 
+2018/02/17 18:14:04   ERR***** データ取得失敗：ERROR: 42601: syntax error at or near "m"
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 290
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 207
+SELECT     m.会社コード, m.処理ＩＤ, m.処理名, m.業務ＩＤ, m.業務名, m.表示順, m.削除フラグ, p.更新者, p.更新日  FROM m04_menu m  left join l10_proclog p on      m.会社コード = p.会社コード and m.処理ＩＤ = p.処理ＩＤ and m.業務ＩＤ = p.業務ＩＤ  Where m.会社コード = 'KANEKI' m.処理ＩＤ  like 'H05%'  and'  like 'H06%'  and'  like 'H07%'  and'  like 'G01%'  and'  like 'M01%'  order by m.表示順 
+2018/02/19 11:51:49   ERR***** データ取得失敗：ERROR: 42601: syntax error at or near "c"
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 290
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 207
+SELECT    c.会社コード, c.取引先コード, c.取引先名, c.出荷先分類, c.住所１, c.電話番号, c.メモ  FROM m10_customer c  Where c.会社コード = 'KANEKI'c.取引先名 like  '%%' c.住所１ like  '%%' c.電話番号 like  '%%' c.取引先コード like  '%'  order by c.会社コード, c.取引先コード 
+2018/02/19 11:54:23   ERR***** データ取得失敗：ERROR: 42601: syntax error at or near "c"
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 290
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 207
+SELECT    c.会社コード, c.取引先コード, c.取引先名, c.出荷先分類, c.住所１, c.電話番号, c.メモ  FROM m10_customer c  Where c.会社コード = 'KANEKI'c.取引先名 like  '%%' c.住所１ like  '%%' c.電話番号 like  '%%' c.取引先コード like  '%'  order by c.会社コード, c.取引先コード 
+2018/02/21 16:11:56   ERR***** データ取得失敗：ERROR: 42P01: missing FROM-clause entry for table "h"
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 290
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 207
+SELECT     c.配送日数,c.取引先名, c.郵便番号, c.住所１, c.住所２, c.住所３, c.担当者名, c.電話番号, c.ＦＡＸ番号, c.依頼主等, c.時間指定, c.運送便コード, h.文字１ as 運送便名, c.請求先コード, d.取引先名 as 請求先名, c.出荷先Ｇコード, e.取引先名 as 出荷先GRP, c.出荷先分類   FROM m10_customer c     left join m10_customer d on d.会社コード = c.会社コード and d.取引先コード = c.請求先コード     left join m10_customer e on e.会社コード = c.会社コード and e.取引先コード = c.出荷先Ｇコード  Where c.会社コード = 'KANEKI' and c.取引先コード = '050001'
+2018/02/23 20:48:22   ERR***** データ取得失敗：ERROR: 42601: syntax error at or near "FROM"
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 290
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 207
+SELECT DISTINCT     g.大分類 from m20_goods g group by g.大分類 order by g.大分類  FROM m20_goods g  GROUP BY g.大分類  WHERE h.会社コード = 'KANEKI'  order by g.大分類 
+2018/02/23 20:50:45   ERR***** データ取得失敗：ERROR: 42601: syntax error at or near "FROM"
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 290
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 207
+SELECT DISTINCT     g.大分類 from m20_goods g group by g.大分類 order by g.大分類  FROM m20_goods g  GROUP BY g.大分類  WHERE g.会社コード = 'KANEKI'  order by g.大分類 
+2018/02/24 16:29:54   ERR***** データ取得失敗：ERROR: 42P10: for SELECT DISTINCT, ORDER BY expressions must appear in select list
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 290
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 207
+SELECT DISTINCT     g.大分類 as 商品分類 ,h.文字１ as 商品分類名  FROM m20_goods g    inner join m90_hanyo h on h.会社コード= 'KANEKI' and h.固定キー ='1008大分類' and h.可変キー = g.大分類  WHERE g.会社コード = 'KANEKI'  order by h.表示順 
+2018/02/24 16:33:06   ERR***** データ取得失敗：ERROR: 42P10: for SELECT DISTINCT, ORDER BY expressions must appear in select list
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 290
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 207
+SELECT DISTINCT     g.大分類 as 商品分類 ,h.文字１ as 商品分類名  FROM m20_goods g    inner join m90_hanyo h on h.会社コード= 'KANEKI' and h.固定キー ='1008大分類' and h.可変キー = g.大分類  WHERE g.会社コード = 'KANEKI'  order by h.表示順 
+2018/02/24 16:36:44   ERR***** データ取得失敗：ERROR: 42601: syntax error at or near "h"
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 290
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 207
+SELECT DISTINCT     g.大分類 as 商品分類 ,h.文字１ as 商品分類名 h.表示順 FROM m20_goods g    inner join m90_hanyo h on h.会社コード= 'KANEKI' and h.固定キー ='1008大分類' and h.可変キー = g.大分類  order by h.表示順 
+2018/02/26 18:07:49   ERR***** データ取得失敗：ERROR: 42P01: missing FROM-clause entry for table "s"
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 290
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 207
+SELECT     s.会社コード, s.商品コード, s.商品名, s.冷凍区分, s.課税区分, s.入数, s.単位  FROM m20_goods c  Where s.会社コード = 'KANEKI' and s.商品コード = '10242'
+2018/03/03 17:51:55   ERR***** データ更新失敗：ERROR: 42701: column "税率" specified more than once
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 411
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 296
+
+INSERT INTO T10_CYMNHD ( 
+    会社コード 
+  , 注文伝番 
+  , 出荷先分類 
+  , 注文入力日 
+  , 出荷日 
+  , 着日 
+  , 売上区分 
+  , 出荷先コード 
+  , 出荷先名 
+  , 郵便番号 
+  , 住所１ 
+  , 住所２ 
+  , 住所３ 
+  , 電話番号 
+  , 電話番号検索用 
+  , ＦＡＸ番号 
+  , 担当者名 
+  , 依頼主等 
+  , 時間指定 
+  , 運送便コード 
+  , 社外備考 
+  , 社内備考 
+  , 請求先コード 
+  , 出荷先Ｇコード 
+  , 送り状印刷有無 
+  , 荷札印刷有無 
+  , 納品伝票印刷有無 
+  , 請求伝票印刷有無 
+  , レスプリ印刷有無 
+  , 総個数 
+  , 売上金額計 
+  , 税抜額計 
+  , 課税対象額計 
+  , 消費税計 
+  , 税込額計 
+  , 税率 
+  , 税率 
+  , 税計算区分 
+  , 更新者 
+  , 更新日 
+) VALUES ( 
+    'KANEKI' 
+  , 'U000047' 
+  , '2' 
+  , current_date 
+  , '2018/03/03' 
+  , '2018/03/13' 
+  , '売上' 
+  , '050001' 
+  , '横手水産' 
+  , '0130072' 
+  , '秋田県横手市' 
+  , '卸町７?７' 
+  , '住所３テキスト' 
+  , '0182-32-2852' 
+  , '0182322852' 
+  , '0182-32-2853' 
+  , '水産太郎' 
+  , '水産一子' 
+  , '午前中' 
+  , '10' 
+  , '' 
+  , '' 
+  , '050001' 
+  , '050001' 
+  , 0 
+  , 1 
+  , 1 
+  , 0 
+  , 1 
+  , 20
+  , 5,120
+  , 5,120
+  , 5,120
+  , 410
+  , 5,530
+  , 0.080
+  , '2' 
+  , '0' 
+  , 'USER01' 
+  , current_timestamp 
+) 
+2018/03/03 17:58:45   ERR***** データ更新失敗：ERROR: 42601: INSERT has more expressions than target columns
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 411
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 296
+
+INSERT INTO T10_CYMNHD ( 
+    会社コード 
+  , 注文伝番 
+  , 出荷先分類 
+  , 注文入力日 
+  , 出荷日 
+  , 着日 
+  , 売上区分 
+  , 出荷先コード 
+  , 出荷先名 
+  , 郵便番号 
+  , 住所１ 
+  , 住所２ 
+  , 住所３ 
+  , 電話番号 
+  , 電話番号検索用 
+  , ＦＡＸ番号 
+  , 担当者名 
+  , 依頼主等 
+  , 時間指定 
+  , 運送便コード 
+  , 社外備考 
+  , 社内備考 
+  , 請求先コード 
+  , 出荷先Ｇコード 
+  , 送り状印刷有無 
+  , 荷札印刷有無 
+  , 納品伝票印刷有無 
+  , 請求伝票印刷有無 
+  , レスプリ印刷有無 
+  , 総個数 
+  , 売上金額計 
+  , 税抜額計 
+  , 課税対象額計 
+  , 消費税計 
+  , 税込額計 
+  , 税率 
+  , 税計算区分 
+  , 更新者 
+  , 更新日 
+) VALUES ( 
+    'KANEKI' 
+  , 'U000049' 
+  , '2' 
+  , current_date 
+  , '2018/03/03' 
+  , '2018/03/13' 
+  , '売上' 
+  , '050001' 
+  , '横手水産' 
+  , '0130072' 
+  , '秋田県横手市' 
+  , '卸町７?７' 
+  , '住所３テキスト' 
+  , '0182-32-2852' 
+  , '0182322852' 
+  , '0182-32-2853' 
+  , '水産太郎' 
+  , '水産一子' 
+  , '午前中' 
+  , '10' 
+  , '' 
+  , '' 
+  , '050001' 
+  , '050001' 
+  , 0 
+  , 0 
+  , 0 
+  , 0 
+  , 0 
+  , 6
+  , 10320
+  , 10320
+  , 10320
+  , 826
+  , 11146
+  , 0.080
+  , '2' 
+  , '0' 
+  , 'USER01' 
+  , current_timestamp 
+) 
+2018/03/03 18:02:01   ERR***** データ更新失敗：ERROR: 42601: INSERT has more expressions than target columns
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 411
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 296
+
+INSERT INTO T10_CYMNHD ( 
+    会社コード 
+  , 注文伝番 
+  , 出荷先分類 
+  , 注文入力日 
+  , 出荷日 
+  , 着日 
+  , 売上区分 
+  , 出荷先コード 
+  , 出荷先名 
+  , 郵便番号 
+  , 住所１ 
+  , 住所２ 
+  , 住所３ 
+  , 電話番号 
+  , 電話番号検索用 
+  , ＦＡＸ番号 
+  , 担当者名 
+  , 依頼主等 
+  , 時間指定 
+  , 運送便コード 
+  , 社外備考 
+  , 社内備考 
+  , 請求先コード 
+  , 出荷先Ｇコード 
+  , 送り状印刷有無 
+  , 荷札印刷有無 
+  , 納品伝票印刷有無 
+  , 請求伝票印刷有無 
+  , レスプリ印刷有無 
+  , 総個数 
+  , 売上金額計 
+  , 税抜額計 
+  , 課税対象額計 
+  , 消費税計 
+  , 税込額計 
+  , 税率 
+  , 税計算区分 
+  , 更新者 
+  , 更新日 
+) VALUES ( 
+    'KANEKI' 
+  , 'U000050' 
+  , '2' 
+  , current_date 
+  , '2018/03/03' 
+  , '2018/03/13' 
+  , '売上' 
+  , '050001' 
+  , '横手水産' 
+  , '0130072' 
+  , '秋田県横手市' 
+  , '卸町７?７' 
+  , '住所３テキスト' 
+  , '0182-32-2852' 
+  , '0182322852' 
+  , '0182-32-2853' 
+  , '水産太郎' 
+  , '水産一子' 
+  , '午前中' 
+  , '10' 
+  , '' 
+  , '' 
+  , '050001' 
+  , '050001' 
+  , 0 
+  , 0 
+  , 0 
+  , 0 
+  , 0 
+  , 12
+  , 26880
+  , 26880
+  , 26880
+  , 2150
+  , 29030
+  , 0.080
+  , '2' 
+  , '0' 
+  , 'USER01' 
+  , current_timestamp 
+) 
+2018/03/03 18:36:52   ERR***** データ更新失敗：ERROR: 42703: column "行番" of relation "t10_cymnhd" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 411
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 296
+
+INSERT INTO T10_CYMNHD ( 
+    会社コード 
+  , 注文伝番 
+  , 行番 
+  , 商品コード 
+  , 商品名 
+  , 荷姿形状 
+  , 課税区分 
+  , 入数 
+  , 個数 
+  , 数量 
+  , 単位 
+  , 注文単価 
+  , 注文金額 
+  , 梱包区分 
+  , 冷凍区分 
+  , 明細備考 
+  , 税抜額 
+  , 課税対象額 
+  , 消費税 
+  , 税込額 
+  , 更新者 
+  , 更新日 
+) VALUES ( 
+    'KANEKI' 
+  , 'U000052' 
+  , '1' 
+  , '10264' 
+  , 'ｼｬｷｼｬｷめかぶ(宮城県産)' 
+  , '40gx3p 12x4' 
+  , '1' 
+  , 48
+  , 12
+  , 48
+  , '個' 
+  , 120
+  , 5760
+  , '1' 
+  , '2' 
+  , 'bikou' 
+  , 5760
+  , 5760
+  , 461
+  , 6221
+  , 'USER01' 
+  , current_timestamp 
+) 
+2018/03/04 12:53:56   ERR***** データ更新失敗：ERROR: 42703: column "注文伝番" of relation "t15_itakhd" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 411
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 296
+
+INSERT INTO T15_ITAKHD ( 
+    会社コード 
+  , 注文伝番 
+  , 出荷日 
+  , 着日 
+  , 出荷先コード 
+  , 請求先コード 
+  , 売上登録回数 
+  , 売上変更回数 
+  , 売上取消回数 
+  , 取消区分 
+  , 更新者 
+  , 更新日 
+) VALUES ( 
+    'KANEKI' 
+  , 'T000009' 
+  , '2018/03/04' 
+  , '2018/03/08' 
+  , '050201' 
+  , '050201' 
+  , 0 
+  , 0 
+  , 0 
+  , '0' 
+  , 'USER01' 
+  , current_timestamp 
+) 
+2018/03/04 12:55:03   ERR***** データ更新失敗：ERROR: 42703: column "注文金額" of relation "t16_itakdt" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 411
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 296
+
+INSERT INTO T16_ITAKDT ( 
+    会社コード 
+  , 委託伝番 
+  , 行番 
+  , 商品コード 
+  , 商品名 
+  , 荷姿形状 
+  , 課税区分 
+  , 入数 
+  , 個数 
+  , 委託数量 
+  , 単位 
+  , 仮単価 
+  , 売上数量計 
+  , 目切数量計 
+  , 委託残数 
+  , 注文金額 
+  , 更新者 
+  , 更新日 
+) VALUES ( 
+    'KANEKI' 
+  , 'T000010' 
+  , 1
+  , '10285' 
+  , '細切めかぶ(宮城県産)' 
+  , '40gx3p 60ｘ1' 
+  , '1' 
+  , 60
+  , 20
+  , 100
+  , '個' 
+  , 480
+  , 0 
+  , 0 
+  , 100
+  , 48000
+  , 'USER01' 
+  , current_timestamp 
+) 
+2018/03/04 13:27:37   ERR***** データ更新失敗：ERROR: 42703: column "行番" of relation "t20_urighd" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 411
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 296
+
+INSERT INTO T20_URIGHD ( 
+    会社コード 
+  , 売上伝番 
+  , 売上伝番枝番 
+  , 行番 
+  , 注文行番 
+  , 商品コード 
+  , 商品名 
+  , 荷姿形状 
+  , 課税区分 
+  , 入数 
+  , 個数 
+  , 数量 
+  , 単位 
+  , 売上数量 
+  , 目切数量 
+  , 売上単価 
+  , 売上金額 
+  , 売上明細備考 
+  , 税抜額 
+  , 課税対象額 
+  , 消費税 
+  , 税込額 
+  , 入金有無 
+  , 入金伝番 
+  , 更新者 
+  , 更新日 
+) VALUES ( 
+    'KANEKI' 
+  , 'U000059' 
+  , 1 
+  , 1
+  , 1
+  , '10300' 
+  , 'ぶっかけめかぶﾊﾞﾗ(宮城･岩手産)' 
+  , '1kgx10' 
+  , '1' 
+  , 10
+  , 20
+  , 120
+  , 'Kg' 
+  , 0 
+  , 0 
+  , 68
+  , 8160
+  , Null 
+  , '1' 
+  , '2' 
+  , '備考' 
+  , 8160
+  , 8160
+  , 653
+  , 8813
+  , '0' 
+  , Null 
+  , 'USER01' 
+  , current_timestamp 
+) 
+2018/03/05 8:24:29   ERR***** データ取得失敗：ERROR: 42601: syntax error at or near ","
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 290
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 207
+SELECT 
+   T11.会社コード,T11.注文伝番,T11.行番,T10.出荷日 
+ FROM T11_CYMNDT T11  	inner join T10_CYMNHD T10 on T10.会社コード = T11.会社コード and T10.注文伝番 = T11.注文伝番 
+ Where T11.会社コード = 'KANEKI'
+ order by ,T10.出荷日,T11.注文伝番,T11.行番 
+2018/03/05 12:01:26   ERR***** データ取得失敗：ERROR: 42601: syntax error at or near "inner"
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 290
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 207
+SELECT 
+   T1.会社コード,T1.注文伝番,T1.行番,T0.出荷日,T0.出荷先コード,T0.出荷先名 ,h2.文字１ as 運送便名  ,T0.電話番号 ,T1.商品名
+ ,COALESCE(T0.住所１,'') || COALESCE(T0.住所２,'') || COALESCE(T0.住所３,'') AS 住所 
+ FROM T11_CYMNDT T1 
+ 	inner join T10_CYMNHD T0 on T0.会社コード = T1.会社コード and T0.注文伝番 = T1.注文伝番 
+ 	inner join (SELECT DISTINCT 
+   T11.注文伝番 
+ 	inner join T10_CYMNHD T10 on T10.会社コード = T11.会社コード and T10.注文伝番 = T11.注文伝番 
+     left join M90_HANYO h on h.会社コード = T10.会社コード and h.固定キー = '1003運送便' and h.可変キー = T10.運送便コード 
+ Where T11.会社コード = 'KANEKI') M on M.会社コード = T1.会社コード and M.注文伝番 = T1.注文伝番 
+     left join M90_HANYO h2 on h2.会社コード = T0.会社コード and h2.固定キー = '1003運送便' and h2.可変キー = T0.運送便コード 
+ Where T1.会社コード = 'KANEKI'
+ order by T0.出荷日 desc,T1.注文伝番,T1.行番 
+2018/03/05 12:02:42   ERR***** データ取得失敗：ERROR: 42601: syntax error at or near "inner"
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 290
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 207
+SELECT 
+   T1.会社コード,T1.注文伝番,T1.行番,T0.出荷日,T0.出荷先コード,T0.出荷先名 ,h2.文字１ as 運送便名  ,T0.電話番号 ,T1.商品名
+ ,COALESCE(T0.住所１,'') || COALESCE(T0.住所２,'') || COALESCE(T0.住所３,'') AS 住所 
+ FROM T11_CYMNDT T1 
+ 	inner join T10_CYMNHD T0 on T0.会社コード = T1.会社コード and T0.注文伝番 = T1.注文伝番 
+ 	inner join (SELECT DISTINCT 
+   T11.注文伝番 
+ 	inner join T10_CYMNHD T10 on T10.会社コード = T11.会社コード and T10.注文伝番 = T11.注文伝番 
+     left join M90_HANYO h on h.会社コード = T10.会社コード and h.固定キー = '1003運送便' and h.可変キー = T10.運送便コード 
+ Where T11.会社コード = 'KANEKI') M on M.注文伝番 = T1.注文伝番 
+     left join M90_HANYO h2 on h2.会社コード = T0.会社コード and h2.固定キー = '1003運送便' and h2.可変キー = T0.運送便コード 
+ Where T1.会社コード = 'KANEKI'
+ order by T0.出荷日 desc,T1.注文伝番,T1.行番 
+2018/03/05 12:04:14   ERR***** データ取得失敗：ERROR: 42601: syntax error at or near "inner"
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 290
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 207
+SELECT 
+   T1.会社コード,T1.注文伝番,T1.行番,T0.出荷日,T0.出荷先コード,T0.出荷先名 ,h2.文字１ as 運送便名  ,T0.電話番号 ,T1.商品名
+ ,COALESCE(T0.住所１,'') || COALESCE(T0.住所２,'') || COALESCE(T0.住所３,'') AS 住所 
+ FROM T11_CYMNDT T1 
+ 	inner join T10_CYMNHD T0 on T0.会社コード = T1.会社コード and T0.注文伝番 = T1.注文伝番 
+     left join M90_HANYO h2 on h2.会社コード = T0.会社コード and h2.固定キー = '1003運送便' and h2.可変キー = T0.運送便コード 
+ Where T1.会社コード = 'KANEKI'
+ 	and T1.注文伝番 IN (SELECT DISTINCT 
+   T11.注文伝番 
+ 	inner join T10_CYMNHD T10 on T10.会社コード = T11.会社コード and T10.注文伝番 = T11.注文伝番 
+     left join M90_HANYO h on h.会社コード = T10.会社コード and h.固定キー = '1003運送便' and h.可変キー = T10.運送便コード 
+ Where T11.会社コード = 'KANEKI') 
+ order by T0.出荷日 desc,T1.注文伝番,T1.行番 
+2018/03/05 15:02:02   ERR***** データ取得失敗：ERROR: 42601: syntax error at or near "."
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 290
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 207
+SELECT      c.出荷日 ,a.配送日数 ,c.出荷先コード ,c.出荷先名 ,c.出荷先分類 c.郵便番号 ,c.住所１ ,c.住所２ ,c.住所３     c.担当者名 ,c.電話番号 ,c.ＦＡＸ番号 ,c.依頼主等 FROM T10_CYMNHD c     inner join m10_customer a on a.会社コード = c.会社コード and a.取引先コード = c.出荷先コード  Where c.会社コード = 'KANEKI' and c.注文伝番 = 'U000061'
+2018/03/05 15:02:45   ERR***** データ取得失敗：ERROR: 42601: syntax error at or near "."
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 290
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 207
+SELECT      c.出荷日 ,a.配送日数 ,c.出荷先コード ,c.出荷先名 ,c.出荷先分類 c.郵便番号 ,c.住所１ ,c.住所２ ,c.住所３     ,c.担当者名 ,c.電話番号 ,c.ＦＡＸ番号 ,c.依頼主等 FROM T10_CYMNHD c     inner join m10_customer a on a.会社コード = c.会社コード and a.取引先コード = c.出荷先コード  Where c.会社コード = 'KANEKI' and c.注文伝番 = 'T000010'
+2018/03/05 18:27:34   ERR***** データ更新失敗：ERROR: 42703: column "注文伝番" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 411
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 296
+
+Delete From T15_ITAKHD  
+  Where 会社コード =  'KANEKI' 
+   and 注文伝番 = 'U000053' 
+2018/03/05 18:40:44   ERR***** データ更新失敗：ERROR: 42601: syntax error at or near "From"
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 411
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 296
+
+UPDATE From T20_URIGHD  
+ SET 取消区分 = '1'  
+  , 更新者 = 'USER01' 
+  , 更新日 = current_timestamp 
+  Where 会社コード =  'KANEKI' 
+   and 売上伝番 = 'U000054' 
+2018/03/06 9:48:34   ERR***** データ取得失敗：ERROR: 22007: invalid input syntax for type date: ""
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 290
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 207
+SELECT    s.会社コード ,s.注文伝番, s.行番 , s.商品コード, s.商品名 ,s.荷姿形状 , s.冷凍区分 ,h.文字２ as 冷凍区分名 , s.課税区分,h2.文字２ as 課税区分名, s.入数 ,s.個数 ,s.数量, s.単位, s.注文単価, s.明細備考, t.消費税率 ,s.梱包区分 ,h3.文字２ as 梱包区分名  FROM T11_CYMNDT s    left join M90_HANYO h on h.会社コード = s.会社コード And h.固定キー = '1004冷凍区分' and h.可変キー = s.冷凍区分    left join M90_HANYO h2 on h2.会社コード = s.会社コード and h2.固定キー = '1005課税区分' and h2.可変キー = s.課税区分    left join M90_HANYO h3 on h3.会社コード = s.会社コード and h3.固定キー = '1007梱包区分' and h3.可変キー = s.梱包区分    left join m71_ctax t on t.会社コード = s.会社コード and t.適用開始日 <= ''  and t.適用終了日 >= ''  Where s.会社コード = 'KANEKI' and s.注文伝番 = 'U000082' order by s.行番 
+2018/03/06 9:49:06   ERR***** データ取得失敗：ERROR: 22007: invalid input syntax for type date: ""
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 290
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 207
+SELECT    s.会社コード ,s.注文伝番, s.行番 , s.商品コード, s.商品名 ,s.荷姿形状 , s.冷凍区分 ,h.文字２ as 冷凍区分名 , s.課税区分,h2.文字２ as 課税区分名, s.入数 ,s.個数 ,s.数量, s.単位, s.注文単価, s.明細備考, t.消費税率 ,s.梱包区分 ,h3.文字２ as 梱包区分名  FROM T11_CYMNDT s    left join M90_HANYO h on h.会社コード = s.会社コード And h.固定キー = '1004冷凍区分' and h.可変キー = s.冷凍区分    left join M90_HANYO h2 on h2.会社コード = s.会社コード and h2.固定キー = '1005課税区分' and h2.可変キー = s.課税区分    left join M90_HANYO h3 on h3.会社コード = s.会社コード and h3.固定キー = '1007梱包区分' and h3.可変キー = s.梱包区分    left join m71_ctax t on t.会社コード = s.会社コード and t.適用開始日 <= ''  and t.適用終了日 >= ''  Where s.会社コード = 'KANEKI' and s.注文伝番 = 'U000081' order by s.行番 
+2018/03/06 9:49:29   ERR***** データ取得失敗：ERROR: 22007: invalid input syntax for type date: ""
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 290
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 207
+SELECT    s.会社コード ,s.注文伝番, s.行番 , s.商品コード, s.商品名 ,s.荷姿形状 , s.冷凍区分 ,h.文字２ as 冷凍区分名 , s.課税区分,h2.文字２ as 課税区分名, s.入数 ,s.個数 ,s.数量, s.単位, s.注文単価, s.明細備考, t.消費税率 ,s.梱包区分 ,h3.文字２ as 梱包区分名  FROM T11_CYMNDT s    left join M90_HANYO h on h.会社コード = s.会社コード And h.固定キー = '1004冷凍区分' and h.可変キー = s.冷凍区分    left join M90_HANYO h2 on h2.会社コード = s.会社コード and h2.固定キー = '1005課税区分' and h2.可変キー = s.課税区分    left join M90_HANYO h3 on h3.会社コード = s.会社コード and h3.固定キー = '1007梱包区分' and h3.可変キー = s.梱包区分    left join m71_ctax t on t.会社コード = s.会社コード and t.適用開始日 <= ''  and t.適用終了日 >= ''  Where s.会社コード = 'KANEKI' and s.注文伝番 = 'T000009' order by s.行番 
+2018/03/06 9:54:15   ERR***** データ取得失敗：ERROR: 22007: invalid input syntax for type date: ""
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 290
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 207
+SELECT    s.会社コード ,s.注文伝番, s.行番 , s.商品コード, s.商品名 ,s.荷姿形状 , s.冷凍区分 ,h.文字２ as 冷凍区分名 , s.課税区分,h2.文字２ as 課税区分名, s.入数 ,s.個数 ,s.数量, s.単位, s.注文単価, s.明細備考, t.消費税率 ,s.梱包区分 ,h3.文字２ as 梱包区分名  FROM T11_CYMNDT s    left join M90_HANYO h on h.会社コード = s.会社コード And h.固定キー = '1004冷凍区分' and h.可変キー = s.冷凍区分    left join M90_HANYO h2 on h2.会社コード = s.会社コード and h2.固定キー = '1005課税区分' and h2.可変キー = s.課税区分    left join M90_HANYO h3 on h3.会社コード = s.会社コード and h3.固定キー = '1007梱包区分' and h3.可変キー = s.梱包区分    left join m71_ctax t on t.会社コード = s.会社コード and t.適用開始日 <= ''  and t.適用終了日 >= ''  Where s.会社コード = 'KANEKI' and s.注文伝番 = 'T000010' order by s.行番 
+2018/03/06 13:07:10   ERR***** データベース接続失敗
+データベースの接続に失敗しました。
+	　 Failed to establish a connection to '192.168.15.111'.
+   場所 UtilMDL.DB.UtilPostgresHandler..ctor(String prmSvAdr, String prmDbNm, String prmUserId, String prmPswd, Int16 prmTimeout) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 75
+   場所 UtilMDL.DB.UtilPostgresDebugger..ctor(String prmSvAdr, String prmDbNm, String prmUserId, String prmPswd, String prmFileNm, Boolean prmDebugFlg, Boolean prmConsoleWrite, Int16 prmTimeout) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 90
+2018/03/06 13:13:41   ERR***** データベース接続失敗
+データベースの接続に失敗しました。
+	　 Failed to establish a connection to '192.168.15.111'.
+   場所 UtilMDL.DB.UtilPostgresHandler..ctor(String prmSvAdr, String prmDbNm, String prmUserId, String prmPswd, Int16 prmTimeout) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 75
+   場所 UtilMDL.DB.UtilPostgresDebugger..ctor(String prmSvAdr, String prmDbNm, String prmUserId, String prmPswd, String prmFileNm, Boolean prmDebugFlg, Boolean prmConsoleWrite, Int16 prmTimeout) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 90
+2018/03/06 14:36:02   ERR***** データベース接続失敗
+データベースの接続に失敗しました。
+	　 Failed to establish a connection to '192.168.15.111'.
+   場所 UtilMDL.DB.UtilPostgresHandler..ctor(String prmSvAdr, String prmDbNm, String prmUserId, String prmPswd, Int16 prmTimeout) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 75
+   場所 UtilMDL.DB.UtilPostgresDebugger..ctor(String prmSvAdr, String prmDbNm, String prmUserId, String prmPswd, String prmFileNm, Boolean prmDebugFlg, Boolean prmConsoleWrite, Int16 prmTimeout) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 90
+2018/03/08 8:00:36   ERR***** データベース接続失敗
+データベースの接続に失敗しました。
+	　 Failed to establish a connection to '192.168.15.111'.
+   場所 UtilMDL.DB.UtilPostgresHandler..ctor(String prmSvAdr, String prmDbNm, String prmUserId, String prmPswd, Int16 prmTimeout) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 75
+   場所 UtilMDL.DB.UtilPostgresDebugger..ctor(String prmSvAdr, String prmDbNm, String prmUserId, String prmPswd, String prmFileNm, Boolean prmDebugFlg, Boolean prmConsoleWrite, Int16 prmTimeout) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 90
+2018/03/08 8:10:08   ERR***** データベース接続失敗
+データベースの接続に失敗しました。
+	　 Failed to establish a connection to '192.168.15.111'.
+   場所 UtilMDL.DB.UtilPostgresHandler..ctor(String prmSvAdr, String prmDbNm, String prmUserId, String prmPswd, Int16 prmTimeout) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 75
+   場所 UtilMDL.DB.UtilPostgresDebugger..ctor(String prmSvAdr, String prmDbNm, String prmUserId, String prmPswd, String prmFileNm, Boolean prmDebugFlg, Boolean prmConsoleWrite, Int16 prmTimeout) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 90
+2018/03/08 8:10:51   ERR***** データベース接続失敗
+データベースの接続に失敗しました。
+	　 Failed to establish a connection to '192.168.15.111'.
+   場所 UtilMDL.DB.UtilPostgresHandler..ctor(String prmSvAdr, String prmDbNm, String prmUserId, String prmPswd, Int16 prmTimeout) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 75
+   場所 UtilMDL.DB.UtilPostgresDebugger..ctor(String prmSvAdr, String prmDbNm, String prmUserId, String prmPswd, String prmFileNm, Boolean prmDebugFlg, Boolean prmConsoleWrite, Int16 prmTimeout) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 90
+2018/03/08 8:12:13   ERR***** データベース接続失敗
+データベースの接続に失敗しました。
+	　 Failed to establish a connection to '192.168.15.111'.
+   場所 UtilMDL.DB.UtilPostgresHandler..ctor(String prmSvAdr, String prmDbNm, String prmUserId, String prmPswd, Int16 prmTimeout) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 75
+   場所 UtilMDL.DB.UtilPostgresDebugger..ctor(String prmSvAdr, String prmDbNm, String prmUserId, String prmPswd, String prmFileNm, Boolean prmDebugFlg, Boolean prmConsoleWrite, Int16 prmTimeout) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 90
+2018/03/08 8:13:00   ERR***** データベース接続失敗
+データベースの接続に失敗しました。
+	　 Failed to establish a connection to '192.168.15.111'.
+   場所 UtilMDL.DB.UtilPostgresHandler..ctor(String prmSvAdr, String prmDbNm, String prmUserId, String prmPswd, Int16 prmTimeout) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 75
+   場所 UtilMDL.DB.UtilPostgresDebugger..ctor(String prmSvAdr, String prmDbNm, String prmUserId, String prmPswd, String prmFileNm, Boolean prmDebugFlg, Boolean prmConsoleWrite, Int16 prmTimeout) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 90
+2018/03/08 8:17:27   ERR***** データベース接続失敗
+データベースの接続に失敗しました。
+	　 Failed to establish a connection to '192.168.15.111'.
+   場所 UtilMDL.DB.UtilPostgresHandler..ctor(String prmSvAdr, String prmDbNm, String prmUserId, String prmPswd, Int16 prmTimeout) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 75
+   場所 UtilMDL.DB.UtilPostgresDebugger..ctor(String prmSvAdr, String prmDbNm, String prmUserId, String prmPswd, String prmFileNm, Boolean prmDebugFlg, Boolean prmConsoleWrite, Int16 prmTimeout) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 90
+2018/03/08 8:17:45   ERR***** データベース接続失敗
+データベースの接続に失敗しました。
+	　 Failed to establish a connection to '192.168.15.112'.
+   場所 UtilMDL.DB.UtilPostgresHandler..ctor(String prmSvAdr, String prmDbNm, String prmUserId, String prmPswd, Int16 prmTimeout) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 75
+   場所 UtilMDL.DB.UtilPostgresDebugger..ctor(String prmSvAdr, String prmDbNm, String prmUserId, String prmPswd, String prmFileNm, Boolean prmDebugFlg, Boolean prmConsoleWrite, Int16 prmTimeout) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 90
+2018/03/08 8:25:33   ERR***** データベース接続失敗
+データベースの接続に失敗しました。
+	　 Failed to establish a connection to '192.168.15.111'.
+   場所 UtilMDL.DB.UtilPostgresHandler..ctor(String prmSvAdr, String prmDbNm, String prmUserId, String prmPswd, Int16 prmTimeout) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 75
+   場所 UtilMDL.DB.UtilPostgresDebugger..ctor(String prmSvAdr, String prmDbNm, String prmUserId, String prmPswd, String prmFileNm, Boolean prmDebugFlg, Boolean prmConsoleWrite, Int16 prmTimeout) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 90
+2018/03/08 8:26:50   ERR***** データベース接続失敗
+データベースの接続に失敗しました。
+	　 Failed to establish a connection to '192.168.15.111'.
+   場所 UtilMDL.DB.UtilPostgresHandler..ctor(String prmSvAdr, String prmDbNm, String prmUserId, String prmPswd, Int16 prmTimeout) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 75
+   場所 UtilMDL.DB.UtilPostgresDebugger..ctor(String prmSvAdr, String prmDbNm, String prmUserId, String prmPswd, String prmFileNm, Boolean prmDebugFlg, Boolean prmConsoleWrite, Int16 prmTimeout) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 90
+2018/03/08 16:14:30   ERR***** データ取得失敗：ERROR: 42601: syntax error at or near "m"
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 290
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 207
+SELECT     m.会社コード, m.処理ＩＤ, m.処理名, m.業務ＩＤ, m.業務名, m.表示順, m.削除フラグ, p.更新者, p.更新日  FROM m04_menu m  left join l10_proclog p on      m.会社コード = p.会社コード and m.処理ＩＤ = p.処理ＩＤ and m.業務ＩＤ = p.業務ＩＤ  Where m.会社コード = 'KANEKI' and ( m.処理ＩＤ like 'H01%'  m.処理ＩＤ like 'H03%'  or  m.処理ＩＤ like 'H05%'  or  m.処理ＩＤ like 'H06%'  or  m.処理ＩＤ like 'H07%'  or  m.処理ＩＤ like 'G01%'  or  m.処理ＩＤ like 'H10%'  or  m.処理ＩＤ like 'M01%' ) order by m.表示順 
+2018/03/08 16:15:03   ERR***** データ取得失敗：ERROR: 42601: syntax error at or near "m"
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 290
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 207
+SELECT     m.会社コード, m.処理ＩＤ, m.処理名, m.業務ＩＤ, m.業務名, m.表示順, m.削除フラグ, p.更新者, p.更新日  FROM m04_menu m  left join l10_proclog p on      m.会社コード = p.会社コード and m.処理ＩＤ = p.処理ＩＤ and m.業務ＩＤ = p.業務ＩＤ  Where m.会社コード = 'KANEKI' and ( m.処理ＩＤ like 'H01%'  m.処理ＩＤ like 'H03%'  or  m.処理ＩＤ like 'H05%'  or  m.処理ＩＤ like 'H06%'  or  m.処理ＩＤ like 'H07%'  or  m.処理ＩＤ like 'G01%'  or  m.処理ＩＤ like 'H10%'  or  m.処理ＩＤ like 'M01%' ) order by m.表示順 
+2018/03/08 18:27:41   ERR***** データ取得失敗：ERROR: 42P01: missing FROM-clause entry for table "c"
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 290
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 207
+SELECT   t15.着日 ,t15.委託伝番 ,t16.行番,'出荷先' as 出荷先  ,t16.商品名,t16.委託数量,t16.売上数量計,t16.目切数量計,t16.委託残数   FROM t15_itakhd t15      inner join t16_itakdt t16 on t16.会社コード = t15.会社コード and t16.委託伝番 = t15.委託伝番  Where c.会社コード = 'KANEKI'  order by t15.着日 ,t15.委託伝番 ,t16.行番 
+2018/03/09 14:48:22   ERR***** データ取得失敗：ERROR: 42703: column t15.委託残数 does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 290
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 207
+SELECT   t15.着日 ,t15.委託伝番 ,t16.行番,'出荷先' as 出荷先  ,t16.商品名,t16.委託数量,t16.売上数量計,t16.目切数量計,t16.委託残数   FROM t15_itakhd t15      inner join t16_itakdt t16 on t16.会社コード = t15.会社コード and t16.委託伝番 = t15.委託伝番  Where t15.会社コード = 'KANEKI' 
+ and t15.出荷日 >= '2018/02/09' 
+ and t15.出荷日 <= '2018/03/09' 
+ and t15.着日 >= '2018/02/09' 
+ and t15.着日 <= '2018/03/09' 
+ and t15.委託残数 > 0  order by t15.着日 ,t15.委託伝番 ,t16.行番 
+2018/03/09 14:48:25   ERR***** データ取得失敗：ERROR: 42703: column t15.委託残数 does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 290
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 207
+SELECT   t15.着日 ,t15.委託伝番 ,t16.行番,'出荷先' as 出荷先  ,t16.商品名,t16.委託数量,t16.売上数量計,t16.目切数量計,t16.委託残数   FROM t15_itakhd t15      inner join t16_itakdt t16 on t16.会社コード = t15.会社コード and t16.委託伝番 = t15.委託伝番  Where t15.会社コード = 'KANEKI' 
+ and t15.出荷日 >= '2018/02/09' 
+ and t15.出荷日 <= '2018/03/09' 
+ and t15.着日 >= '2018/02/09' 
+ and t15.着日 <= '2018/03/09' 
+ and t15.委託残数 > 0  order by t15.着日 ,t15.委託伝番 ,t16.行番 
+2018/03/09 14:48:27   ERR***** データ取得失敗：ERROR: 42703: column t15.委託残数 does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 290
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 207
+SELECT   t15.着日 ,t15.委託伝番 ,t16.行番,'出荷先' as 出荷先  ,t16.商品名,t16.委託数量,t16.売上数量計,t16.目切数量計,t16.委託残数   FROM t15_itakhd t15      inner join t16_itakdt t16 on t16.会社コード = t15.会社コード and t16.委託伝番 = t15.委託伝番  Where t15.会社コード = 'KANEKI' 
+ and t15.出荷日 >= '2018/02/09' 
+ and t15.出荷日 <= '2018/03/09' 
+ and t15.着日 >= '2018/02/09' 
+ and t15.着日 <= '2018/03/09' 
+ and t15.委託残数 > 0  order by t15.着日 ,t15.委託伝番 ,t16.行番 
+2018/03/10 8:42:36   ERR***** データ取得失敗：ERROR: 42P01: missing FROM-clause entry for table "c"
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 290
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 207
+SELECT      t15.出荷日 ,t15.着日  FROM t15_itakhd t15  Where t15.会社コード = 'KANEKI' and c.委託伝番 = 'T000001'
+2018/03/10 15:24:15   ERR***** データ取得失敗：ERROR: 42601: syntax error at or near ","
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 290
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 207
+SELECT   t16.行番 ,t16.商品コード ,t16.商品名,t16.課税区分,t16.入数,t16.個数,t16.委託数量,t16.単位,,t16.委託残数    ,0.00 as 売上数量,0.00 as 目切数量,0.00 as 売上金額 ,t16.仮単価 as 売上単価  FROM T16_ITAKDT t16  Where t16.会社コード = 'KANEKI' and t16.委託伝番 = 'T000001' order by t16.行番 
+2018/03/10 15:31:30   ERR***** データ取得失敗：ERROR: 42601: syntax error at or near "left"
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 290
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 207
+SELECT   t16.行番 ,t16.商品コード ,t16.商品名 ,t16.課税区分 ,t16.入数,t16.個数 ,t16.委託数量 ,t16.単位 ,t16.委託残数 ,h2.文字２ as 課税区分名   ,0.00 as 売上数量 , 0.00 as 目切数量 ,0.00 as 売上金額 ,t16.仮単価 as 売上単価 ,'' as 売上明細備考  FROM T16_ITAKDT t16  Where t16.会社コード = 'KANEKI' and t16.委託伝番 = 'T000003'   left join M90_HANYO h2 on h2.会社コード = t16.会社コード and h2.固定キー = '1005課税区分' and h2.可変キー = t16.課税区分  order by t16.行番 
+2018/03/11 10:00:55   ERR***** データ取得失敗：ERROR: 42P01: missing FROM-clause entry for table "c"
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 290
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 207
+SELECT      t15.出荷日 ,t15.着日 ,t15.出荷先コード ,t15.出荷先名 ,t15.請求先コード ,t15.請求先名 , t.消費税率  ,a.税端数区分 ,c.更新日  FROM t15_itakhd t15    left join m71_ctax t on t.会社コード = t15.会社コード and t.適用開始日 <= t15.着日  and t.適用終了日 >= t15.着日     inner join m10_customer a on a.会社コード = t15.会社コード and a.取引先コード = t15.出荷先コード  Where t15.会社コード = 'KANEKI' and t15.委託伝番 = 'T000035'
+2018/03/15 9:47:45   ERR***** データ取得失敗：ERROR: 42P01: missing FROM-clause entry for table "t15"
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 290
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 207
+SELECT   t15.着日 ,t15.委託伝番 ,t16.行番,t15.出荷先名  ,t16.商品名,t16.委託数量,t16.売上数量計,t16.目切数量計,t16.委託残数   FROM t20_urighd t20      inner join T21_URIGDT t21 on t21.会社コード = t20.会社コード and t21.売上伝番 = t20.売上伝番 and t21.売上伝番枝番 = t20.売上伝番枝番  Where t20.会社コード = 'KANEKI' and  t20.取消区分 = 0 and t20.出荷先分類 ='1'  order by t20.着日, t20.売上伝番, t20.売上伝番枝番, t21.行番 
+2018/03/20 10:11:38   ERR***** データベース接続失敗
+データベースの接続に失敗しました。
+	　 Failed to establish a connection to '192.168.15.111'.
+   場所 UtilMDL.DB.UtilPostgresHandler..ctor(String prmSvAdr, String prmPortNo, String prmDbNm, String prmUserId, String prmPswd, Int16 prmTimeout) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 77
+   場所 UtilMDL.DB.UtilPostgresDebugger..ctor(String prmSvAdr, String prmPortNo, String prmDbNm, String prmUserId, String prmPswd, String prmFileNm, Boolean prmDebugFlg, Boolean prmConsoleWrite, Int16 prmTimeout) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 91
+2018/03/20 10:15:24   ERR***** データベース接続失敗
+データベースの接続に失敗しました。
+	　 Failed to establish a connection to '192.168.15.111'.
+   場所 UtilMDL.DB.UtilPostgresHandler..ctor(String prmSvAdr, String prmPortNo, String prmDbNm, String prmUserId, String prmPswd, Int16 prmTimeout) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 77
+   場所 UtilMDL.DB.UtilPostgresDebugger..ctor(String prmSvAdr, String prmPortNo, String prmDbNm, String prmUserId, String prmPswd, String prmFileNm, Boolean prmDebugFlg, Boolean prmConsoleWrite, Int16 prmTimeout) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 91
+2018/03/20 10:16:54   ERR***** データベース接続失敗
+データベースの接続に失敗しました。
+	　 Failed to establish a connection to '192.168.15.111'.
+   場所 UtilMDL.DB.UtilPostgresHandler..ctor(String prmSvAdr, String prmPortNo, String prmDbNm, String prmUserId, String prmPswd, Int16 prmTimeout) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 77
+   場所 UtilMDL.DB.UtilPostgresDebugger..ctor(String prmSvAdr, String prmPortNo, String prmDbNm, String prmUserId, String prmPswd, String prmFileNm, Boolean prmDebugFlg, Boolean prmConsoleWrite, Int16 prmTimeout) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 91
+2018/03/20 10:19:37   ERR***** データベース接続失敗
+データベースの接続に失敗しました。
+	　 Failed to establish a connection to '192.168.15.111'.
+   場所 UtilMDL.DB.UtilPostgresHandler..ctor(String prmSvAdr, String prmPortNo, String prmDbNm, String prmUserId, String prmPswd, Int16 prmTimeout) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 77
+   場所 UtilMDL.DB.UtilPostgresDebugger..ctor(String prmSvAdr, String prmPortNo, String prmDbNm, String prmUserId, String prmPswd, String prmFileNm, Boolean prmDebugFlg, Boolean prmConsoleWrite, Int16 prmTimeout) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 91
+2018/03/20 10:21:16   ERR***** データベース接続失敗
+データベースの接続に失敗しました。
+	　 Failed to establish a connection to '192.168.15.111'.
+   場所 UtilMDL.DB.UtilPostgresHandler..ctor(String prmSvAdr, String prmPortNo, String prmDbNm, String prmUserId, String prmPswd, Int16 prmTimeout) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 77
+   場所 UtilMDL.DB.UtilPostgresDebugger..ctor(String prmSvAdr, String prmPortNo, String prmDbNm, String prmUserId, String prmPswd, String prmFileNm, Boolean prmDebugFlg, Boolean prmConsoleWrite, Int16 prmTimeout) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 91
+2018/03/20 10:22:39   ERR***** データベース接続失敗
+データベースの接続に失敗しました。
+	　 Failed to establish a connection to '192.168.15.111'.
+   場所 UtilMDL.DB.UtilPostgresHandler..ctor(String prmSvAdr, String prmPortNo, String prmDbNm, String prmUserId, String prmPswd, Int16 prmTimeout) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 77
+   場所 UtilMDL.DB.UtilPostgresDebugger..ctor(String prmSvAdr, String prmPortNo, String prmDbNm, String prmUserId, String prmPswd, String prmFileNm, Boolean prmDebugFlg, Boolean prmConsoleWrite, Int16 prmTimeout) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 91
+2018/03/20 10:22:56   ERR***** データベース接続失敗
+データベースの接続に失敗しました。
+	　 Failed to establish a connection to '192.168.15.111'.
+   場所 UtilMDL.DB.UtilPostgresHandler..ctor(String prmSvAdr, String prmPortNo, String prmDbNm, String prmUserId, String prmPswd, Int16 prmTimeout) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 77
+   場所 UtilMDL.DB.UtilPostgresDebugger..ctor(String prmSvAdr, String prmPortNo, String prmDbNm, String prmUserId, String prmPswd, String prmFileNm, Boolean prmDebugFlg, Boolean prmConsoleWrite, Int16 prmTimeout) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 91
+2018/03/21 11:20:54   ERR***** データ取得失敗：ERROR: 42703: column t21.行番号 does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT   t20.売上日, t21.売上伝番, t21.売上伝番枝番, t21.行番号  FROM T20_URIGHD  t20     inner join T21_URIGDT t21 on t21.会社コード = t20.会社コード and t21.売上伝番 = t20.売上伝番  and t21.売上伝番枝番 = t20.売上伝番枝番  Where t20.会社コード = 'KANEKI' and t20.取消区分 =0  order by  t20.売上日 
+2018/03/21 11:20:56   ERR***** データ取得失敗：ERROR: 42703: column t21.行番号 does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT   t20.売上日, t21.売上伝番, t21.売上伝番枝番, t21.行番号  FROM T20_URIGHD  t20     inner join T21_URIGDT t21 on t21.会社コード = t20.会社コード and t21.売上伝番 = t20.売上伝番  and t21.売上伝番枝番 = t20.売上伝番枝番  Where t20.会社コード = 'KANEKI' and t20.取消区分 =0  order by  t20.売上日 
+2018/03/21 14:21:22   ERR***** データ取得失敗：ERROR: 42P01: missing FROM-clause entry for table "s"
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT   t20.売上日, t21.売上伝番, t21.売上伝番枝番, t21.行番, t21.商品名, t21.荷姿形状, t21.課税区分, h2.文字２ as 課税区分名   , t21.売上数量, t21.売上金額, t21.消費税  FROM T20_URIGHD  t20     inner join T21_URIGDT t21 on t21.会社コード = t20.会社コード and t21.売上伝番 = t20.売上伝番  and t21.売上伝番枝番 = t20.売上伝番枝番     left join M90_HANYO h2 on h2.会社コード = s.会社コード and h2.固定キー = '1005課税区分' and h2.可変キー = t21.課税区分  Where t20.会社コード = 'KANEKI' and t20.取消区分 =0  order by  t20.売上日, t21.売上伝番, t21.売上伝番枝番, t21.行番  
+2018/03/21 14:21:24   ERR***** データ取得失敗：ERROR: 42P01: missing FROM-clause entry for table "s"
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT   t20.売上日, t21.売上伝番, t21.売上伝番枝番, t21.行番, t21.商品名, t21.荷姿形状, t21.課税区分, h2.文字２ as 課税区分名   , t21.売上数量, t21.売上金額, t21.消費税  FROM T20_URIGHD  t20     inner join T21_URIGDT t21 on t21.会社コード = t20.会社コード and t21.売上伝番 = t20.売上伝番  and t21.売上伝番枝番 = t20.売上伝番枝番     left join M90_HANYO h2 on h2.会社コード = s.会社コード and h2.固定キー = '1005課税区分' and h2.可変キー = t21.課税区分  Where t20.会社コード = 'KANEKI' and t20.取消区分 =0  order by  t20.売上日, t21.売上伝番, t21.売上伝番枝番, t21.行番  
+2018/03/21 15:22:06   ERR***** データ取得失敗：ERROR: 42703: column t20.入金日 does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT   t20.売上日, t21.売上伝番, t21.売上伝番枝番, t21.行番, t20.出荷先名, t21.商品名, t21.荷姿形状, t21.課税区分, h2.文字２ as 課税区分名   , t21.売上数量, t21.単位, t21.売上単価, t21.売上金額, t21.消費税  FROM T20_URIGHD  t20     inner join T21_URIGDT t21 on t21.会社コード = t20.会社コード and t21.売上伝番 = t20.売上伝番  and t21.売上伝番枝番 = t20.売上伝番枝番     left join M90_HANYO h2 on h2.会社コード = t21.会社コード and h2.固定キー = '1005課税区分' and h2.可変キー = t21.課税区分  Where t20.会社コード = 'KANEKI' and t20.取消区分 =0 
+ and t20.入金日 >= '2018/02/21' 
+ and t20.入金日 <= '2018/03/21'  order by  t20.売上日, t21.売上伝番, t21.売上伝番枝番, t21.行番  
+2018/03/21 15:22:07   ERR***** データ取得失敗：ERROR: 42703: column t20.入金日 does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT   t20.売上日, t21.売上伝番, t21.売上伝番枝番, t21.行番, t20.出荷先名, t21.商品名, t21.荷姿形状, t21.課税区分, h2.文字２ as 課税区分名   , t21.売上数量, t21.単位, t21.売上単価, t21.売上金額, t21.消費税  FROM T20_URIGHD  t20     inner join T21_URIGDT t21 on t21.会社コード = t20.会社コード and t21.売上伝番 = t20.売上伝番  and t21.売上伝番枝番 = t20.売上伝番枝番     left join M90_HANYO h2 on h2.会社コード = t21.会社コード and h2.固定キー = '1005課税区分' and h2.可変キー = t21.課税区分  Where t20.会社コード = 'KANEKI' and t20.取消区分 =0 
+ and t20.入金日 >= '2018/02/21' 
+ and t20.入金日 <= '2018/03/21'  order by  t20.売上日, t21.売上伝番, t21.売上伝番枝番, t21.行番  
+2018/03/21 15:22:12   ERR***** データ取得失敗：ERROR: 42703: column t20.入金日 does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT   t20.売上日, t21.売上伝番, t21.売上伝番枝番, t21.行番, t20.出荷先名, t21.商品名, t21.荷姿形状, t21.課税区分, h2.文字２ as 課税区分名   , t21.売上数量, t21.単位, t21.売上単価, t21.売上金額, t21.消費税  FROM T20_URIGHD  t20     inner join T21_URIGDT t21 on t21.会社コード = t20.会社コード and t21.売上伝番 = t20.売上伝番  and t21.売上伝番枝番 = t20.売上伝番枝番     left join M90_HANYO h2 on h2.会社コード = t21.会社コード and h2.固定キー = '1005課税区分' and h2.可変キー = t21.課税区分  Where t20.会社コード = 'KANEKI' and t20.取消区分 =0 
+ and t20.入金日 >= '2018/02/01' 
+ and t20.入金日 <= '2018/03/21'  order by  t20.売上日, t21.売上伝番, t21.売上伝番枝番, t21.行番  
+2018/03/21 15:22:18   ERR***** データ取得失敗：ERROR: 42703: column t20.入金日 does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT   t20.売上日, t21.売上伝番, t21.売上伝番枝番, t21.行番, t20.出荷先名, t21.商品名, t21.荷姿形状, t21.課税区分, h2.文字２ as 課税区分名   , t21.売上数量, t21.単位, t21.売上単価, t21.売上金額, t21.消費税  FROM T20_URIGHD  t20     inner join T21_URIGDT t21 on t21.会社コード = t20.会社コード and t21.売上伝番 = t20.売上伝番  and t21.売上伝番枝番 = t20.売上伝番枝番     left join M90_HANYO h2 on h2.会社コード = t21.会社コード and h2.固定キー = '1005課税区分' and h2.可変キー = t21.課税区分  Where t20.会社コード = 'KANEKI' and t20.取消区分 =0 
+ and t20.入金日 >= '2018/02/01' 
+ and t20.入金日 <= '2018/04/30'  order by  t20.売上日, t21.売上伝番, t21.売上伝番枝番, t21.行番  
+2018/03/21 15:22:19   ERR***** データ取得失敗：ERROR: 42703: column t20.入金日 does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT   t20.売上日, t21.売上伝番, t21.売上伝番枝番, t21.行番, t20.出荷先名, t21.商品名, t21.荷姿形状, t21.課税区分, h2.文字２ as 課税区分名   , t21.売上数量, t21.単位, t21.売上単価, t21.売上金額, t21.消費税  FROM T20_URIGHD  t20     inner join T21_URIGDT t21 on t21.会社コード = t20.会社コード and t21.売上伝番 = t20.売上伝番  and t21.売上伝番枝番 = t20.売上伝番枝番     left join M90_HANYO h2 on h2.会社コード = t21.会社コード and h2.固定キー = '1005課税区分' and h2.可変キー = t21.課税区分  Where t20.会社コード = 'KANEKI' and t20.取消区分 =0 
+ and t20.入金日 >= '2018/02/01' 
+ and t20.入金日 <= '2018/04/30'  order by  t20.売上日, t21.売上伝番, t21.売上伝番枝番, t21.行番  
+2018/03/21 15:22:19   ERR***** データ取得失敗：ERROR: 42703: column t20.入金日 does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT   t20.売上日, t21.売上伝番, t21.売上伝番枝番, t21.行番, t20.出荷先名, t21.商品名, t21.荷姿形状, t21.課税区分, h2.文字２ as 課税区分名   , t21.売上数量, t21.単位, t21.売上単価, t21.売上金額, t21.消費税  FROM T20_URIGHD  t20     inner join T21_URIGDT t21 on t21.会社コード = t20.会社コード and t21.売上伝番 = t20.売上伝番  and t21.売上伝番枝番 = t20.売上伝番枝番     left join M90_HANYO h2 on h2.会社コード = t21.会社コード and h2.固定キー = '1005課税区分' and h2.可変キー = t21.課税区分  Where t20.会社コード = 'KANEKI' and t20.取消区分 =0 
+ and t20.入金日 >= '2018/02/01' 
+ and t20.入金日 <= '2018/04/30'  order by  t20.売上日, t21.売上伝番, t21.売上伝番枝番, t21.行番  
+2018/03/21 15:22:20   ERR***** データ取得失敗：ERROR: 42703: column t20.入金日 does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT   t20.売上日, t21.売上伝番, t21.売上伝番枝番, t21.行番, t20.出荷先名, t21.商品名, t21.荷姿形状, t21.課税区分, h2.文字２ as 課税区分名   , t21.売上数量, t21.単位, t21.売上単価, t21.売上金額, t21.消費税  FROM T20_URIGHD  t20     inner join T21_URIGDT t21 on t21.会社コード = t20.会社コード and t21.売上伝番 = t20.売上伝番  and t21.売上伝番枝番 = t20.売上伝番枝番     left join M90_HANYO h2 on h2.会社コード = t21.会社コード and h2.固定キー = '1005課税区分' and h2.可変キー = t21.課税区分  Where t20.会社コード = 'KANEKI' and t20.取消区分 =0 
+ and t20.入金日 >= '2018/02/01' 
+ and t20.入金日 <= '2018/04/30'  order by  t20.売上日, t21.売上伝番, t21.売上伝番枝番, t21.行番  
+2018/03/21 16:54:29   ERR***** データ取得失敗：ERROR: 42703: column t20.入金有無 does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT   t20.売上日, t21.売上伝番, t21.売上伝番枝番, t21.行番, t20.出荷先名, t21.商品名, t21.荷姿形状, t21.課税区分, h2.文字２ as 課税区分名   , t21.売上数量, t21.単位, t21.売上単価, t21.売上金額, t21.消費税  FROM T20_URIGHD  t20     inner join T21_URIGDT t21 on t21.会社コード = t20.会社コード and t21.売上伝番 = t20.売上伝番  and t21.売上伝番枝番 = t20.売上伝番枝番     left join M90_HANYO h2 on h2.会社コード = t21.会社コード and h2.固定キー = '1005課税区分' and h2.可変キー = t21.課税区分  Where t20.会社コード = 'KANEKI' and t20.取消区分 =0 and t20.入金有無 =0 
+ and t20.売上日 >= '2018/02/21' 
+ and t20.売上日 <= '2018/03/21'   and t20.電話番号検索用 like '%852%'  order by  t20.売上日, t21.売上伝番, t21.売上伝番枝番, t21.行番  
+2018/03/21 16:54:30   ERR***** データ取得失敗：ERROR: 42703: column t20.入金有無 does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT   t20.売上日, t21.売上伝番, t21.売上伝番枝番, t21.行番, t20.出荷先名, t21.商品名, t21.荷姿形状, t21.課税区分, h2.文字２ as 課税区分名   , t21.売上数量, t21.単位, t21.売上単価, t21.売上金額, t21.消費税  FROM T20_URIGHD  t20     inner join T21_URIGDT t21 on t21.会社コード = t20.会社コード and t21.売上伝番 = t20.売上伝番  and t21.売上伝番枝番 = t20.売上伝番枝番     left join M90_HANYO h2 on h2.会社コード = t21.会社コード and h2.固定キー = '1005課税区分' and h2.可変キー = t21.課税区分  Where t20.会社コード = 'KANEKI' and t20.取消区分 =0 and t20.入金有無 =0 
+ and t20.売上日 >= '2018/02/21' 
+ and t20.売上日 <= '2018/03/21'   and t20.電話番号検索用 like '%852%'  order by  t20.売上日, t21.売上伝番, t21.売上伝番枝番, t21.行番  
+2018/03/22 11:09:24   ERR***** データ取得失敗：ERROR: 42703: column t20.入金伝番 does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT   t20.売上日, t21.売上伝番, t21.売上伝番枝番, t21.行番, t20.出荷先名, t21.商品名, t21.荷姿形状, t21.課税区分, h2.文字２ as 課税区分名   , t21.売上数量, t21.単位, t21.売上単価, t21.売上金額, t21.消費税  FROM T20_URIGHD  t20     inner join T21_URIGDT t21 on t21.会社コード = t20.会社コード and t21.売上伝番 = t20.売上伝番  and t21.売上伝番枝番 = t20.売上伝番枝番     left join M90_HANYO h2 on h2.会社コード = t21.会社コード and h2.固定キー = '1005課税区分' and h2.可変キー = t21.課税区分  Where t20.会社コード = 'KANEKI' and t20.取消区分 =0 and t21.入金有無 =0 
+ and t20.売上日 >= '2018/02/22' 
+ and t20.売上日 <= '2018/03/22' 
+ and t20.入金伝番 >= 'U000081' 
+ and t20.入金伝番 <= 'U000081'  order by  t20.売上日, t21.売上伝番, t21.売上伝番枝番, t21.行番  
+2018/03/22 11:09:25   ERR***** データ取得失敗：ERROR: 42703: column t20.入金伝番 does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT   t20.売上日, t21.売上伝番, t21.売上伝番枝番, t21.行番, t20.出荷先名, t21.商品名, t21.荷姿形状, t21.課税区分, h2.文字２ as 課税区分名   , t21.売上数量, t21.単位, t21.売上単価, t21.売上金額, t21.消費税  FROM T20_URIGHD  t20     inner join T21_URIGDT t21 on t21.会社コード = t20.会社コード and t21.売上伝番 = t20.売上伝番  and t21.売上伝番枝番 = t20.売上伝番枝番     left join M90_HANYO h2 on h2.会社コード = t21.会社コード and h2.固定キー = '1005課税区分' and h2.可変キー = t21.課税区分  Where t20.会社コード = 'KANEKI' and t20.取消区分 =0 and t21.入金有無 =0 
+ and t20.売上日 >= '2018/02/22' 
+ and t20.売上日 <= '2018/03/22' 
+ and t20.入金伝番 >= 'U000081' 
+ and t20.入金伝番 <= 'U000081'  order by  t20.売上日, t21.売上伝番, t21.売上伝番枝番, t21.行番  
+2018/03/22 13:37:51   ERR***** データ取得失敗：ERROR: 42703: column t21.更新日付 does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT   t20.売上日, t21.売上伝番, t21.売上伝番枝番, t21.行番, t20.出荷先名, t21.商品名, t21.荷姿形状, t21.課税区分, h2.文字２ as 課税区分名   , t21.売上数量, t21.単位, t21.売上単価, t21.売上金額, t21.消費税, t21.更新日付  FROM T20_URIGHD  t20     inner join T21_URIGDT t21 on t21.会社コード = t20.会社コード and t21.売上伝番 = t20.売上伝番  and t21.売上伝番枝番 = t20.売上伝番枝番     left join M90_HANYO h2 on h2.会社コード = t21.会社コード and h2.固定キー = '1005課税区分' and h2.可変キー = t21.課税区分  Where t20.会社コード = 'KANEKI' and t20.取消区分 =0 and t21.入金有無 =0 
+ and t20.売上日 >= '2018/02/22' 
+ and t20.売上日 <= '2018/03/22'  order by  t20.売上日, t21.売上伝番, t21.売上伝番枝番, t21.行番  
+2018/03/22 13:37:53   ERR***** データ取得失敗：ERROR: 42703: column t21.更新日付 does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT   t20.売上日, t21.売上伝番, t21.売上伝番枝番, t21.行番, t20.出荷先名, t21.商品名, t21.荷姿形状, t21.課税区分, h2.文字２ as 課税区分名   , t21.売上数量, t21.単位, t21.売上単価, t21.売上金額, t21.消費税, t21.更新日付  FROM T20_URIGHD  t20     inner join T21_URIGDT t21 on t21.会社コード = t20.会社コード and t21.売上伝番 = t20.売上伝番  and t21.売上伝番枝番 = t20.売上伝番枝番     left join M90_HANYO h2 on h2.会社コード = t21.会社コード and h2.固定キー = '1005課税区分' and h2.可変キー = t21.課税区分  Where t20.会社コード = 'KANEKI' and t20.取消区分 =0 and t21.入金有無 =0 
+ and t20.売上日 >= '2018/02/22' 
+ and t20.売上日 <= '2018/03/22'  order by  t20.売上日, t21.売上伝番, t21.売上伝番枝番, t21.行番  
+2018/03/22 18:24:54   ERR***** データ更新失敗：ERROR: 42601: INSERT has more target columns than expressions
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+
+INSERT INTO T25_NKINHD ( 
+    会社コード 
+  , 入金伝番 
+  , 入金日 
+  , 請求先コード 
+  , 請求先名 
+  , 売上明細数 
+  , 売上金額計 
+  , 売上消費税計 
+  , 現金振込計 
+  , 手数料計 
+  , 入金額計 
+  , 備考１ 
+  , 備考２ 
+  , 取消区分 
+  , 更新者 
+  , 更新日 
+) VALUES ( 
+    'KANEKI' 
+  , 'N000068' 
+  , '2018/03/22' 
+  , '' 
+  , '' 
+  , 1
+  , 60000
+  , 0
+  , 0
+  , 64800
+  , '' 
+  , '' 
+  , '0' 
+  , 'USER01' 
+  , current_timestamp 
+) 
+2018/03/22 18:26:41   ERR***** データ更新失敗：ERROR: 42601: INSERT has more target columns than expressions
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+
+INSERT INTO T25_NKINHD ( 
+    会社コード 
+  , 入金伝番 
+  , 入金日 
+  , 請求先コード 
+  , 請求先名 
+  , 売上明細数 
+  , 売上金額計 
+  , 売上消費税計 
+  , 現金振込計 
+  , 手数料計 
+  , 入金額計 
+  , 備考１ 
+  , 備考２ 
+  , 取消区分 
+  , 更新者 
+  , 更新日 
+) VALUES ( 
+    'KANEKI' 
+  , 'N000069' 
+  , '2018/03/22' 
+  , '' 
+  , '' 
+  , 1
+  , 80000
+  , 0
+  , 0
+  , 86400
+  , '' 
+  , '' 
+  , '0' 
+  , 'USER01' 
+  , current_timestamp 
+) 
+2018/03/22 18:27:46   ERR***** データ更新失敗：ERROR: 42601: INSERT has more target columns than expressions
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+
+INSERT INTO T25_NKINHD ( 
+    会社コード 
+  , 入金伝番 
+  , 入金日 
+  , 請求先コード 
+  , 請求先名 
+  , 売上明細数 
+  , 売上金額計 
+  , 売上消費税計 
+  , 現金振込計 
+  , 手数料計 
+  , 入金額計 
+  , 備考１ 
+  , 備考２ 
+  , 取消区分 
+  , 更新者 
+  , 更新日 
+) VALUES ( 
+    'KANEKI' 
+  , 'N000070' 
+  , '2018/03/22' 
+  , '' 
+  , '' 
+  , 1
+  , 120
+  , 0
+  , 0
+  , 130
+  , '' 
+  , '' 
+  , '0' 
+  , 'USER01' 
+  , current_timestamp 
+) 
+2018/03/22 18:31:53   ERR***** データ更新失敗：ERROR: 42703: column "可変キー" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+
+INSERT INTO T26_NKINDT ( 
+    会社コード 
+  , 入金伝番 
+  , 行番 
+  , 入金種別 
+  , 入金種別名 
+  , 入金分類 
+  , 金額 
+  , 更新者 
+  , 更新日 
+) VALUES ( 
+    'KANEKI' 
+  , 'N000072' 
+  , 1
+  , 可変キー
+  , '文字１' 
+  , '1' 
+  , 108
+  , 'USER01' 
+  , current_timestamp 
+) 
+2018/03/23 17:40:56   ERR***** データ取得失敗：ERROR: 42703: column "入金種別" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT     会社コード, 入金伝番, 行番, 入金種別, 入金種別名, 入金分類, 金額  FROM T21_URIGDT  Where 会社コード = 'KANEKI' and 入金伝番 = 'N000074'
+2018/03/28 15:50:18   ERR***** データ取得失敗：ERROR: 42703: column t20.入金伝番 does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT   t20.売上日, t21.売上伝番, t21.売上伝番枝番, t21.行番, t20.出荷先名, t21.商品名, t21.荷姿形状, t21.課税区分, h2.文字２ as 課税区分名   , t21.売上数量, t21.単位, t21.売上単価, t21.売上金額, case t21.行番 when 1 then t20.消費税計 else 0 end 消費税, t21.更新日  FROM T20_URIGHD  t20     inner join T21_URIGDT t21 on t21.会社コード = t20.会社コード and t21.売上伝番 = t20.売上伝番  and t21.売上伝番枝番 = t20.売上伝番枝番     left join M90_HANYO h2 on h2.会社コード = t21.会社コード and h2.固定キー = '1005課税区分' and h2.可変キー = t21.課税区分  Where t20.会社コード = 'KANEKI' and t20.取消区分 =0  And t21.入金有無 =0 
+ and t20.売上日 >= '2018/03/27' 
+ and t20.売上日 <= '2018/03/27' 
+ and t20.入金伝番 >= 'U000001' 
+ and t20.入金伝番 <= 'U000002'   and t20.出荷先名 like '%２２%'   and t20.電話番号検索用 like '%22%'  order by  t20.売上日, t21.売上伝番, t21.売上伝番枝番, t21.行番  
+2018/03/28 15:50:19   ERR***** データ取得失敗：ERROR: 42703: column t20.入金伝番 does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\KYSCLDEV\Desktop\svn\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT   t20.売上日, t21.売上伝番, t21.売上伝番枝番, t21.行番, t20.出荷先名, t21.商品名, t21.荷姿形状, t21.課税区分, h2.文字２ as 課税区分名   , t21.売上数量, t21.単位, t21.売上単価, t21.売上金額, case t21.行番 when 1 then t20.消費税計 else 0 end 消費税, t21.更新日  FROM T20_URIGHD  t20     inner join T21_URIGDT t21 on t21.会社コード = t20.会社コード and t21.売上伝番 = t20.売上伝番  and t21.売上伝番枝番 = t20.売上伝番枝番     left join M90_HANYO h2 on h2.会社コード = t21.会社コード and h2.固定キー = '1005課税区分' and h2.可変キー = t21.課税区分  Where t20.会社コード = 'KANEKI' and t20.取消区分 =0  And t21.入金有無 =0 
+ and t20.売上日 >= '2018/03/27' 
+ and t20.売上日 <= '2018/03/27' 
+ and t20.入金伝番 >= 'U000001' 
+ and t20.入金伝番 <= 'U000002'   and t20.出荷先名 like '%２２%'   and t20.電話番号検索用 like '%22%'  order by  t20.売上日, t21.売上伝番, t21.売上伝番枝番, t21.行番  

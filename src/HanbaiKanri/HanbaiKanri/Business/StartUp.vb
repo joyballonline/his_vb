@@ -1,5 +1,5 @@
 '===================================================================================
-'　 （システム名）      株式会社 全備様向け　販売管理システム
+'　 （システム名）      カネキ吉田商店様向け　原価管理システム
 '
 '   （機能名）          スタートアップクラス（Sub Mainを含む）
 '   （クラス名）        StartUp
@@ -325,10 +325,10 @@ Public Class StartUp
                 Try
 
                     Try
-                    '汎用マスタ内容を構造体に格納
-                    'Call _instance.getHanyouMST()
+                        '汎用マスタ内容を構造体に格納
+                        'Call _instance.getHanyouMST()
 
-                Catch ex As UsrDefException             'ユーザー定義例外(だけキャッチする)。他の例外は親ブロックに任せる。
+                    Catch ex As UsrDefException             'ユーザー定義例外(だけキャッチする)。他の例外は親ブロックに任せる。
                         Call ex.dspMsg()                    'エラー出力
                         Exit Sub                            '読み込み/チェックエラー(ユーザー定義例外の場合、エラー処理済なので終了)
                     End Try

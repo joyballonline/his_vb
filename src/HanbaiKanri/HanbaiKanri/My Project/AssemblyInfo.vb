@@ -3,26 +3,22 @@ Imports System.Reflection
 Imports System.Runtime.InteropServices
 
 ' アセンブリに関する一般情報は以下の属性セットをとおして制御されます。 
-' アセンブリに関連付けられている情報を変更するには、
+' アセンブリに関連付けられている情報を変更するには、
+' これらの属性値を変更してください。
 
-' これらの属性値を変更してください。
-
-
-' アセンブリ属性の値を確認します。
-
+' アセンブリ属性の値を確認します。
 
 <Assembly: AssemblyTitle("販売管理システム")>
 <Assembly: AssemblyDescription("")>
-<Assembly: AssemblyCompany("株式会社 全備")>
+<Assembly: AssemblyCompany("株式会社カネキ吉田商店")>
 <Assembly: AssemblyProduct("HanbaiKanri")>
-<Assembly: AssemblyCopyright("Copyright Zenbi Co., Ltd. All Rights Reserved.")>
-<Assembly: AssemblyTrademark("")>
+<Assembly: AssemblyCopyright("Copyright kaneki-yoshida Co., Ltd. All Rights Reserved.")>
+<Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>
 
-'このプロジェクトが COM に公開される場合、次の GUID がタイプ ライブラリの ID になります。
-
-<Assembly: Guid("3BC72445-AFE5-4A45-8F85-E3D0086452A3")>
+'このプロジェクトが COM に公開される場合、次の GUID がタイプ ライブラリの ID になります。
+<Assembly: Guid("1e4d5894-e3f5-4dbd-9b36-e94309d4703f")>
 
 ' アセンブリのバージョン情報は、以下の 4 つの値で構成されています:
 '

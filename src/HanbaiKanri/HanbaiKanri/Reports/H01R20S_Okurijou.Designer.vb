@@ -1,14 +1,14 @@
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Public Class H01R20S_Okurijou
-    'Inherits GrapeCity.ActiveReports.SectionReport
+    Inherits GrapeCity.ActiveReports.SectionReport
 
     'フォームがコンポーネントの一覧をクリーンアップするために dispose をオーバーライドします。
-    'Protected Overloads Overrides Sub Dispose(ByVal disposing As Boolean)
-    '    If disposing Then
-    '    End If
-    '    'MyBase.Dispose(disposing)
-    'End Sub
-    'Private WithEvents Detail As GrapeCity.ActiveReports.SectionReportModel.Detail
+    Protected Overloads Overrides Sub Dispose(ByVal disposing As Boolean)
+        If disposing Then
+        End If
+        MyBase.Dispose(disposing)
+    End Sub
+    Private WithEvents Detail As GrapeCity.ActiveReports.SectionReportModel.Detail
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.Resources.ResourceManager = New System.Resources.ResourceManager(GetType(H01R20S_Okurijou))
@@ -197,13 +197,13 @@ Partial Public Class H01R20S_Okurijou
 
     End Sub
 
-    'Private WithEvents txtGoodsNm As GrapeCity.ActiveReports.SectionReportModel.TextBox
-    'Private WithEvents txtIrisu As GrapeCity.ActiveReports.SectionReportModel.TextBox
-    'Private WithEvents txtKosu As GrapeCity.ActiveReports.SectionReportModel.TextBox
-    'Private WithEvents txtBiko As GrapeCity.ActiveReports.SectionReportModel.TextBox
-    'Public WithEvents Parameter1 As GrapeCity.ActiveReports.SectionReportModel.Parameter
-    'Private WithEvents txtTani As GrapeCity.ActiveReports.SectionReportModel.TextBox
-    'Private WithEvents TextBox1 As GrapeCity.ActiveReports.SectionReportModel.TextBox
-    'Private WithEvents txtGoodsCd As GrapeCity.ActiveReports.SectionReportModel.Label
-    'Private WithEvents lblReitouKb As GrapeCity.ActiveReports.SectionReportModel.Label
+    Private WithEvents txtGoodsNm As GrapeCity.ActiveReports.SectionReportModel.TextBox
+    Private WithEvents txtIrisu As GrapeCity.ActiveReports.SectionReportModel.TextBox
+    Private WithEvents txtKosu As GrapeCity.ActiveReports.SectionReportModel.TextBox
+    Private WithEvents txtBiko As GrapeCity.ActiveReports.SectionReportModel.TextBox
+    Public WithEvents Parameter1 As GrapeCity.ActiveReports.SectionReportModel.Parameter
+    Private WithEvents txtTani As GrapeCity.ActiveReports.SectionReportModel.TextBox
+    Private WithEvents TextBox1 As GrapeCity.ActiveReports.SectionReportModel.TextBox
+    Private WithEvents txtGoodsCd As GrapeCity.ActiveReports.SectionReportModel.Label
+    Private WithEvents lblReitouKb As GrapeCity.ActiveReports.SectionReportModel.Label
 End Class
