@@ -85,7 +85,7 @@ Public Class ZM310E_HanyouMstMente
 
     Private _msgHd As UtilMsgHandler
     Private _db As UtilDBIf
-    Private _parentForm As ZC110M_Menu
+    'Private _parentForm As ZC110M_Menu
 
     Dim _dgv As UtilDataGridViewHandler         'グリッドハンドラー
 
@@ -139,17 +139,17 @@ Public Class ZM310E_HanyouMstMente
     '-------------------------------------------------------------------------------
     'コンストラクタ　frmMZ02_01Mから呼ばれる
     '-------------------------------------------------------------------------------
-    Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler, ByRef prmRefDbHd As UtilDBIf, ByVal prmForm As ZC110M_Menu, ByVal prmUpdFlg As Boolean)
-        Call Me.New()
+    'Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler, ByRef prmRefDbHd As UtilDBIf, ByVal prmForm As ZC110M_Menu, ByVal prmUpdFlg As Boolean)
+    '    Call Me.New()
 
-        '初期処理
-        _msgHd = prmRefMsgHd                                                'MSGハンドラの設定
-        _db = prmRefDbHd                                                    'DBハンドラの設定
-        _parentForm = prmForm                                               '親フォーム
-        StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
-        _updFlg = prmUpdFlg
+    '初期処理
+    '_msgHd = prmRefMsgHd                                                'MSGハンドラの設定
+    '_db = prmRefDbHd                                                    'DBハンドラの設定
+    '_parentForm = prmForm                                               '親フォーム
+    'StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
+    '_updFlg = prmUpdFlg
 
-    End Sub
+    'End Sub
 
 #End Region
 
@@ -168,8 +168,8 @@ Public Class ZM310E_HanyouMstMente
             Me.SetStyle(ControlStyles.UserPaint, True)              'コントロールは、オペレーティング システムによってではなく、独自に描画されるよう設定
             Me.SetStyle(ControlStyles.AllPaintingInWmPaint, True)   'コントロールはウィンドウ メッセージ WM_ERASEBKGND を無視するように設定
 
-            Dim optionStr As String = ComBiz.getFormTitleOption(_db, _msgHd)
-            If Not "".Equals(optionStr) Then Me.Text = Me.Text & " - " & optionStr 'タイトルオプション表示
+            'Dim optionStr As String = ComBiz.getFormTitleOption(_db, _msgHd)
+            'If Not "".Equals(optionStr) Then Me.Text = Me.Text & " - " & optionStr 'タイトルオプション表示
 
             _dispDgvUnderFirstFlg = True
             'コントロール設定
@@ -199,9 +199,9 @@ Public Class ZM310E_HanyouMstMente
             '現在カーソルがある行の可変キーを取得
             Dim kahenKey As String = gh.getCellData(COLDT_TOP_KAHENCD, rowcnt)
             '子画面表示
-            Dim openForm As ZM311S_HanyouMstHensyuu = New ZM311S_HanyouMstHensyuu(_msgHd, _db, Me, kahenKey)      'パラメタを遷移先画面へ渡す
-            openForm.ShowDialog(Me)                                                             '画面表示
-            openForm.Dispose()
+            'Dim openForm As ZM311S_HanyouMstHensyuu = New ZM311S_HanyouMstHensyuu(_msgHd, _db, Me, kahenKey)      'パラメタを遷移先画面へ渡す
+            'openForm.ShowDialog(Me)                                                             '画面表示
+            'openForm.Dispose()
 
             'マスタ登録項目一覧(上)の再表示
             Call dispDgvTop()
@@ -315,8 +315,8 @@ Public Class ZM310E_HanyouMstMente
         End If
 
         '自画面を終了し、メニュー画面に戻る。
-        _parentForm.Show()
-        _parentForm.Activate()
+        '_parentForm.Show()
+        '_parentForm.Activate()
 
         Me.Close()
 
@@ -801,7 +801,7 @@ Public Class ZM310E_HanyouMstMente
             _db.executeDB(sql, cnt)
 
             'T02処理制御テーブル更新
-            _parentForm.updateSeigyoTbl(PGID, True, updStartDate, updFinDate)
+            '_parentForm.updateSeigyoTbl(PGID, True, updStartDate, updFinDate)
 
             _db.commitTran()
 
@@ -960,6 +960,10 @@ Public Class ZM310E_HanyouMstMente
 #End Region
 
     Private Sub dgvJuyousaki_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvJuyousaki.CellContentClick
+
+    End Sub
+
+    Private Sub dgvHanyouMst_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvHanyouMst.CellContentClick
 
     End Sub
 End Class

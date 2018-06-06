@@ -341,12 +341,12 @@ Public Class StartUp
                     Dim openForm As Form = Nothing
                     openForm = New frmC01F10_Login(_msgHd, _db)
 
-                    'フォームオープン
-                    Application.Run(openForm)
-                    'ログイン画面オープン
-                    'openForm.ShowDialog()
+                'フォームオープン
+                Application.Run(openForm)
+                'ログイン画面オープン
+                'openForm.ShowDialog()
 
-                Finally                                                                         '必ず通過する部分で後処理を行う
+            Finally                                                                         '必ず通過する部分で後処理を行う
                     '_db.close()
                 End Try
 

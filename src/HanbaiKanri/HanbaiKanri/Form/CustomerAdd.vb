@@ -69,7 +69,7 @@ Public Class CustomerAdd
             Sql += "INSERT INTO "
             Sql += "Public."
             Sql += "m10_customer("
-            Sql += "会社コード, 得意先コード, 得意先名, 得意先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 既定支払条件, メモ, 更新者, 更新日)"
+            Sql += "会社コード, 得意先コード, 得意先名, 得意先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 担当者役職, 既定支払条件, メモ, 更新者, 更新日)"
             Sql += " VALUES('"
             Sql += CompanyCode.Text
             Sql += "', '"
@@ -94,6 +94,8 @@ Public Class CustomerAdd
             Sql += Fax.Text
             Sql += "', '"
             Sql += Person.Text
+            Sql += "', '"
+            Sql += Position.Text
             Sql += "', '"
             Sql += PaymentTerms.Text
             Sql += "', '"
@@ -127,6 +129,8 @@ Public Class CustomerAdd
             Sql += ", "
             Sql += "担当者名"
             Sql += ", "
+            Sql += "担当者役職"
+            Sql += ", "
             Sql += "既定支払条件"
             Sql += ", "
             Sql += "メモ"
@@ -149,5 +153,12 @@ Public Class CustomerAdd
             'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
             Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", UtilClass.getErrDetail(ex)))
         End Try
+    End Sub
+
+    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+        Dim MstCustomer As MstCustomer
+        MstCustomer = New MstCustomer(_msgHd, _db)
+        MstCustomer.Show()
+        Me.Close()
     End Sub
 End Class

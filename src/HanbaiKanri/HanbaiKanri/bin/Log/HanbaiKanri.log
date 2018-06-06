@@ -1066,3 +1066,401 @@ SELECT   t20.売上日, t21.売上伝番, t21.売上伝番枝番, t21.行番, t20.出荷先名, t21
  and t20.売上日 <= '2018/03/27' 
  and t20.入金伝番 >= 'U000001' 
  and t20.入金伝番 <= 'U000002'   and t20.出荷先名 like '%２２%'   and t20.電話番号検索用 like '%22%'  order by  t20.売上日, t21.売上伝番, t21.売上伝番枝番, t21.行番  
+2018/05/18 15:49:38   ERR***** データベース接続失敗
+ファイルまたはアセンブリ 'Npgsql, Version=2.0.12.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7'、またはその依存関係の 1 つが読み込めませんでした。見つかったアセンブリのマニフェスト定義はアセンブリ参照に一致しません。 (HRESULT からの例外:0x80131040)
+   場所 UtilMDL.DB.UtilPostgresHandler..ctor(String prmSvAdr, String prmPortNo, String prmDbNm, String prmUserId, String prmPswd, Int16 prmTimeout) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 77
+   場所 UtilMDL.DB.UtilPostgresDebugger..ctor(String prmSvAdr, String prmPortNo, String prmDbNm, String prmUserId, String prmPswd, String prmFileNm, Boolean prmDebugFlg, Boolean prmConsoleWrite, Int16 prmTimeout) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 91
+2018/05/18 15:49:44   ERR***** データベース接続失敗
+ファイルまたはアセンブリ 'Npgsql, Version=2.0.12.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7'、またはその依存関係の 1 つが読み込めませんでした。見つかったアセンブリのマニフェスト定義はアセンブリ参照に一致しません。 (HRESULT からの例外:0x80131040)
+   場所 UtilMDL.DB.UtilPostgresHandler..ctor(String prmSvAdr, String prmPortNo, String prmDbNm, String prmUserId, String prmPswd, Int16 prmTimeout) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 77
+   場所 UtilMDL.DB.UtilPostgresDebugger..ctor(String prmSvAdr, String prmPortNo, String prmDbNm, String prmUserId, String prmPswd, String prmFileNm, Boolean prmDebugFlg, Boolean prmConsoleWrite, Int16 prmTimeout) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 91
+2018/05/21 17:07:50   ERR***** データ更新失敗：ERROR: 42601: syntax error at or near ","
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+
+INSERT INTO m02_user ( 
+    会社コード 
+  , ユーザID 
+  , 氏名 
+  , 略名 
+  , 備考 
+  , 無効フラグ 
+  , 権限 
+  , 言語 
+) VALUES ( 
+  ,  ZENBI02
+  ,  zenbi02
+  ,  zenbi02
+  ,  zenbi02
+  ,  notes
+  ,  0
+  ,  0
+  ,  JPN
+) 
+2018/05/21 17:20:36   ERR***** データ更新失敗：ERROR: 42601: syntax error at or near ","
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+
+INSERT INTO m02_user ( 
+    会社コード 
+  , ユーザID 
+  , 氏名 
+  , 略名 
+  , 備考 
+  , 無効フラグ 
+  , 権限 
+  , 言語 
+) VALUES ( 
+  ,  test
+  ,  test
+  ,  test
+  ,  test
+  ,  test
+  ,  test
+  ,  test
+  ,  test
+) 
+2018/05/21 17:23:28   ERR***** データ更新失敗：ERROR: 42601: syntax error at or near ","
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+
+INSERT INTO m02_user ( 
+    会社コード 
+  , ユーザID 
+  , 氏名 
+  , 略名 
+  , 備考 
+  , 無効フラグ 
+  , 権限 
+  , 言語 
+) VALUES ( 
+  ,  test
+  ,  test
+  ,  test
+  ,  test
+  ,  test
+  ,  test
+  ,  test
+  ,  test
+) 
+2018/05/21 17:26:23   ERR***** データ更新失敗：ERROR: 42601: syntax error at or near ","
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO m02_user (     会社コード   , ユーザID   , 氏名   , 略名   , 備考   , 無効フラグ   , 権限   , 言語 ) VALUES (   ,  test  ,  test  ,  test  ,  test  ,  test  ,  test  ,  test  ,  test) 
+2018/05/21 17:30:13   ERR***** データ更新失敗：ERROR: 42601: syntax error at or near ","
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO m02_user (     会社コード   , ユーザID   , 氏名   , 略名   , 備考   , 無効フラグ   , 権限   , 言語   , 更新者   , 更新日 ) VALUES (   ,  test  ,  test  ,  test  ,  test  ,  test  ,  test  ,  test  ,  test  ,  tetsu   , current_timestamp ) 
+2018/05/21 17:35:47   ERR***** データ更新失敗：ERROR: 42601: syntax error at or near ","
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO m02_user (     会社コード   , ユーザID   , 氏名   , 略名   , 備考   , 無効フラグ   , 権限   , 言語   , 更新者   , 更新日 ) VALUES (   ,  test  ,  test  ,  test  ,  test  ,  test  ,  test  ,  test  ,  test  ,  tetsu   , current_timestamp ) 
+2018/05/21 17:38:17   ERR***** データ更新失敗：ERROR: 42703: column "ユーザid" of relation "m02_user" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO m02_user (     会社コード   , ユーザID   , 氏名   , 略名   , 備考   , 無効フラグ   , 権限   , 言語   , 更新者   , 更新日 ) VALUES ( test  ,  test  ,  test  ,  test  ,  test  ,  test  ,  test  ,  test  ,  tetsu   , current_timestamp ) 
+2018/05/21 17:39:23   ERR***** データ更新失敗：ERROR: 42703: column "test" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO m02_user (     会社コード   , ユーザＩＤ   , 氏名   , 略名   , 備考   , 無効フラグ   , 権限   , 言語   , 更新者   , 更新日 ) VALUES ( test  ,  test  ,  test  ,  test  ,  test  ,  test  ,  test  ,  test  ,  tetsu   , current_timestamp ) 
+2018/05/21 17:40:52   ERR***** データ更新失敗：ERROR: 42703: column "zenbi02" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO m02_user (     会社コード   , ユーザＩＤ   , 氏名   , 略名   , 備考   , 無効フラグ   , 権限   , 言語   , 更新者   , 更新日 ) VALUES ( ZENBI02  ,  zenbi02  ,  zenbi02  ,  zenbi02  ,  notes  ,  0  ,  0  ,  JPN  ,  tetsu   , current_timestamp ) 
+2018/05/21 18:23:56   ERR***** データ更新失敗：ERROR: 23502: null value in column "会社コード" violates not-null constraint
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO Public.m02_user(氏名, 略名, 備考, 無効フラグ, 権限, 言語, 更新者, 更新日)VALUES('zenbi02', 'zenbi02', 'notes', 0, 0, 'JPN', 'zenbi01', '2018-05-09 20:08:06.404282')RETURNING 会社コード, ユーザＩＤ, 氏名, 略名, 備考, 無効フラグ, 権限, 言語, 更新者, 更新日
+2018/05/21 18:25:52   ERR***** データ更新失敗：ERROR: 23502: null value in column "ユーザＩＤ" violates not-null constraint
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO Public.m02_user(会社コード, 氏名, 略名, 備考, 無効フラグ, 権限, 言語, 更新者, 更新日)VALUES('ZENBI', 'zenbi02', 'zenbi02', 'notes', 0, 0, 'JPN', 'zenbi01', '2018-05-09 20:08:06.404282')RETURNING 会社コード, ユーザＩＤ, 氏名, 略名, 備考, 無効フラグ, 権限, 言語, 更新者, 更新日
+2018/05/21 18:27:03   ERR***** データ更新失敗：ERROR: 23505: duplicate key value violates unique constraint "pk_m02_user"
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO Public.m02_user(会社コード, ユーザＩＤ, 氏名, 略名, 備考, 無効フラグ, 権限, 言語, 更新者, 更新日)VALUES('ZENBI', 'zenbi02', 'zenbi02', 'zenbi02', 'notes', 0, 0, 'JPN', 'zenbi01', '2018-05-09 20:08:06.404282')RETURNING 会社コード, ユーザＩＤ, 氏名, 略名, 備考, 無効フラグ, 権限, 言語, 更新者, 更新日
+2018/05/21 18:30:31   ERR***** データ更新失敗：ERROR: 42703: column "zenbi" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO Public.m02_user(    会社コード   , ユーザＩＤ   , 氏名   , 略名   , 備考   , 無効フラグ   , 権限   , 言語   , 更新者   , 更新日 ) VALUES ( ZENBI  ,  zenbi03  ,  zenbi03  ,  zenbi03  ,  notes  ,  0  ,  0  ,  JPN  ,  tetsu   , current_timestamp ) 
+2018/05/22 1:09:09   ERR***** データ更新失敗：ERROR: 42601: syntax error at or near "="
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+UPDATE Public.m02_userSET 会社コード='ZENBI', ユーザＩＤ='zenbi05', 氏名='zenbi05', 略名='zenbi05', 備考='notes', 無効フラグ='0', 権限='0', 言語='ENG', 更新者='Admin', 更新日='2018/05/22 1:09:09' WHERE会社コード='ZENBI'ANDユーザＩＤ='zenbi04'RETURNING 会社コード, ユーザＩＤ, 氏名, 略名, 備考, 無効フラグ, 権限, 言語, 更新者, 更新日
+2018/05/22 1:16:08   ERR***** データ更新失敗：ERROR: 42601: syntax error at or near "'会社コード'"
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+UPDATE Public.m02_userSET '会社コード'='ZENBI', 'ユーザＩＤ'='zenbi05', '氏名'='zenbi05', '略名'='zenbi05', '備考'='notes', '無効フラグ'='0', '権限'='0', '言語'='JPN', '更新者'='Admin', '更新日'='2018/05/22 1:14:28' WHERE '会社コード'='ZENBI'AND 'ユーザＩＤ'='zenbi04' RETURNING 会社コード, ユーザＩＤ, 氏名, 略名, 備考, 無効フラグ, 権限, 言語, 更新者, 更新日
+2018/05/22 1:17:36   ERR***** データ更新失敗：ERROR: 42601: syntax error at or near "'ユーザＩＤ'"
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+UPDATE Public.m02_userSET 'ユーザＩＤ'='zenbi04', '氏名'='zenbi05', '略名'='zenbi05', '備考'='notes', '無効フラグ'='0', '権限'='0', '言語'='JPN', '更新者'='Admin', '更新日'='2018/05/22 1:17:32' WHERE '会社コード'='ZENBI'AND 'ユーザＩＤ'='zenbi04' RETURNING 会社コード, ユーザＩＤ, 氏名, 略名, 備考, 無効フラグ, 権限, 言語, 更新者, 更新日
+2018/05/22 1:18:32   ERR***** データ更新失敗：ERROR: 42601: syntax error at or near "'氏名'"
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+UPDATE Public.m02_userSET '氏名'='zenbi05', '略名'='zenbi05', '備考'='notes', '無効フラグ'='0', '権限'='0', '言語'='JPN', '更新者'='Admin', '更新日'='2018/05/22 1:18:28' WHERE '会社コード'='ZENBI'AND 'ユーザＩＤ'='zenbi04' RETURNING 会社コード, ユーザＩＤ, 氏名, 略名, 備考, 無効フラグ, 権限, 言語, 更新者, 更新日
+2018/05/22 1:20:19   ERR***** データ更新失敗：ERROR: 42601: syntax error at or near "="
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+UPDATE Public.m02_userSET 氏名='zenbi05', 略名='zenbi05', 備考='notes', 無効フラグ='0', 権限='0', 言語='JPN', 更新者='Admin', 更新日='2018/05/22 1:20:18' WHERE 会社コード='ZENBI'AND ユーザＩＤ='zenbi04' RETURNING 会社コード, ユーザＩＤ, 氏名, 略名, 備考, 無効フラグ, 権限, 言語, 更新者, 更新日
+2018/05/22 1:31:17   ERR***** データ更新失敗：ERROR: 42601: syntax error at or near "'会社コード'"
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+UPDATE Public.m02_user SET '会社コード' = 'ZENBI', 'ユーザＩＤ' = 'zenbi05', 氏名 = 'zenbi05', 略名 = 'zenbi05', 備考 = 'notes', 無効フラグ = '0', 権限 = '0', 言語 = 'JPN', 更新者 = 'Admin', 更新日 = '2018/05/22 1:31:17' WHERE 会社コード='ZENBI' AND ユーザＩＤ='zenbi04' RETURNING 会社コード, ユーザＩＤ, 氏名, 略名, 備考, 無効フラグ, 権限, 言語, 更新者, 更新日
+2018/05/22 1:32:09   ERR***** データ更新失敗：ERROR: 42601: syntax error at or near "'会社コード'"
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+UPDATE Public.m02_user SET '会社コード' = 'ZENBI02', 'ユーザＩＤ' = 'zenbi05', 氏名 = 'zenbi05', 略名 = 'zenbi05', 備考 = 'notes', 無効フラグ = '0', 権限 = '0', 言語 = 'JPN', 更新者 = 'Admin', 更新日 = '2018/05/22 1:32:08' WHERE 会社コード='ZENBI' AND ユーザＩＤ='zenbi04' RETURNING 会社コード, ユーザＩＤ, 氏名, 略名, 備考, 無効フラグ, 権限, 言語, 更新者, 更新日
+2018/05/22 14:18:05   ERR***** データ取得失敗：ERROR: 42703: column m.更新者 does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT     m.会社コード   , m.言語コード   , m.言語名称   , m.言語略称   , m.備考   , m.無効フラグ   , m.更新者   , m.更新日  FROM m05_language m 
+2018/05/22 14:20:11   ERR***** データ取得失敗：ERROR: 42703: column m.更新日 does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT     m.会社コード   , m.言語コード   , m.言語名称   , m.言語略称   , m.備考   , m.無効フラグ   , m.更新日  FROM m05_language m 
+2018/05/22 14:24:26   ERR***** データ取得失敗：ERROR: 42703: column m.更新者 does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT     m.会社コード   , m.言語コード   , m.言語名称   , m.言語略称   , m.備考   , m.無効フラグ   , m.更新者   , m.更新日  FROM m05_language m 
+2018/05/22 15:03:32   ERR***** データ取得失敗：ERROR: 42703: column "更新者" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT 会社コード, 言語コード, 言語名称, 言語略称, 備考, 無効フラグ, 更新者, 更新日 FROM m05_language
+2018/05/22 15:12:00   ERR***** データ取得失敗：ERROR: 42601: syntax error at or near "SELECT会社コード"
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT会社コード, 言語コード, 言語名称, 言語略称, 備考, 無効フラグ, ?更新者, 更新日, FROM public.m05_language
+2018/05/22 15:13:01   ERR***** データ取得失敗：ERROR: 42601: syntax error at or near "FROM"
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT 会社コード, 言語コード, 言語名称, 言語略称, 備考, 無効フラグ, ?更新者, 更新日, FROM public.m05_language
+2018/05/22 15:53:11   ERR***** データ取得失敗：ERROR: 42703: column "銀行コード" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT 会社コード, 会社名, 会社略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, ＦＡＸ番号, 代表者役職, 代表者名, 表示順, 備考, 銀行コード, 支店コード, 預金種目, 口座番号, 口座名義, ?更新者, 更新日 FROM public.m01_company
+2018/05/22 15:58:46   ERR***** データ取得失敗：ERROR: 42703: column "?更新者" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT 会社コード, 会社名, 会社略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, ＦＡＸ番号, 代表者役職, 代表者名, 表示順, 備考, 銀行コード, 支店コード, 預金種目, 口座番号, 口座名義, ?更新者, 更新日 FROM public.m01_company
+2018/05/22 16:05:59   ERR***** データ取得失敗：ERROR: 42601: syntax error at or near "."
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT 会社コード, 会社名, 会社略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, ＦＡＸ番号, 代表者役職, 代表者名, 表示順, 備考, 銀行コード, 支店コード, 預金種目, 口座番号, 口座名義, 更新者, 更新日FROM public.m01_company
+2018/05/22 16:44:03   ERR***** データ取得失敗：ERROR: 42703: column "得意先名" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT 会社コード, 得意先コード, 得意先名, 得意先略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 既定支払条件, メモ, 更新者, 更新日 FROM public.m10_customer
+2018/05/22 16:45:15   ERR***** データ取得失敗：ERROR: 42703: column "得意先略称" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT 会社コード, 得意先コード, 得意先名, 得意先略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 既定支払条件, メモ, 更新者, 更新日 FROM public.m10_customer
+2018/05/22 16:46:02   ERR***** データ取得失敗：ERROR: 42703: column "既定支払条件" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT 会社コード, 得意先コード, 得意先名, 得意先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 既定支払条件, メモ, 更新者, 更新日 FROM public.m10_customer
+2018/05/22 16:46:48   ERR***** データ取得失敗：ERROR: 42703: column "更新者" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT 会社コード, 得意先コード, 得意先名, 得意先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 既定支払条件, メモ, 更新者, 更新日 FROM public.m10_customer
+2018/05/22 17:14:05   ERR***** データ取得失敗：ERROR: 42703: column "?更新者" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT 会社コード, ユーザＩＤ, 氏名, 略名, 備考, 無効フラグ, 権限, 言語, ?更新者, ?更新日 FROM public.m02_user
+2018/05/22 17:15:34   ERR***** データ取得失敗：ERROR: 42703: column "?更新日" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT 会社コード, ユーザＩＤ, 氏名, 略名, 備考, 無効フラグ, 権限, 言語, 更新者, ?更新日 FROM public.m02_user
+2018/05/22 18:09:59   ERR***** データ更新失敗：ERROR: 42703: column "更新者" of relation "m10_customer" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO Public.m10_customer(会社コード, 得意先コード, 得意先名, 得意先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 既定支払条件, メモ, 更新者, 更新日)VALUES('ZENBI01', 'ZENBI01', 'zenbi01', 'zenbi01', '郵便番号', '住所１', '住所２', '住所３', '電話番号', 'FAX番号', '担当者名', '既定支払条件', 'メモ', 'Admin', '2018/05/22 18:09:59 ')RETURNING 会社コード, 得意先コード, 得意先名, 得意先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 既定支払条件, メモ, 更新者, 更新日
+2018/05/22 18:12:29   ERR***** データ更新失敗：ERROR: 42703: column "更新者" of relation "m10_customer" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO Public.m10_customer(会社コード, 得意先コード, 得意先名, 得意先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 既定支払条件, メモ, 更新者, 更新日)VALUES('test', 'test', 'test', 'test', '郵便番号', '住所１', '住所２', '住所３', '電話番号', 'FAX番号', '担当者名', '既定支払条件', 'メモ', 'Admin', '2018/05/22 18:12:28 ')RETURNING 会社コード, 得意先コード, 得意先名, 得意先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 既定支払条件, メモ, 更新者, 更新日
+2018/05/22 18:17:55   ERR***** データ更新失敗：ERROR: 42601: INSERT has more target columns than expressions
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO Public.m10_customer(会社コード, 得意先コード, 得意先名, 得意先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 既定支払条件, メモ, ?更新者, ?更新日) VALUES('test', 'test', 'test', 'test', '郵便番号', '住所１', '住所２', '住所３', '電話番号', 'FAX番号', '担当者名', '既定支払条件', 'メモ', 'Admin', '2018/05/22 18:17:54 ')RETURNING 会社コード, 得意先コード, 得意先名, 得意先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 既定支払条件, メモ, 更新者, 更新日
+2018/05/22 18:19:59   ERR***** データ更新失敗：ERROR: 42601: INSERT has more target columns than expressions
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO Public.m10_customer(会社コード, 得意先コード, 得意先名, 得意先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 既定支払条件, メモ, ?更新者, ?更新日) VALUES('test', 'test', 'test', 'test', '郵便番号', '住所１', '住所２', '住所３', '電話番号', 'FAX番号', '担当者名', '既定支払条件', 'メモ', 'Admin', '2018/05/22 18:19:44 ')RETURNING 会社コード, 得意先コード, 得意先名, 得意先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 既定支払条件, メモ, 更新者, 更新日
+2018/05/22 18:22:38   ERR***** データ更新失敗：ERROR: 42703: column "更新者" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO Public.m10_customer(会社コード, 得意先コード, 得意先名, 得意先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 既定支払条件, メモ, ?更新者, ?更新日) VALUES('test', 'test', 'test', 'test', '郵便番号', '住所１', '住所２', '住所３', '電話番号', '電話番号検索用', 'FAX番号', '担当者名', '既定支払条件', 'メモ', 'Admin', '2018/05/22 18:22:33 ')RETURNING 会社コード, 得意先コード, 得意先名, 得意先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 既定支払条件, メモ, 更新者, 更新日
+2018/05/22 18:48:02   ERR***** データ更新失敗：ERROR: 42703: column "更新日" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO Public.m10_customer(会社コード, 得意先コード, 得意先名, 得意先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 既定支払条件, メモ, ?更新者, ?更新日) VALUES('test', 'test', 'test', 'test', '郵便番号', '住所１', '住所２', '住所３', '電話番号', '電話番号検索用', 'FAX番号', '担当者名', '既定支払条件', 'メモ', 'Admin', '2018/05/22 18:48:01 ')RETURNING 会社コード, 得意先コード, 得意先名, 得意先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 既定支払条件, メモ, ?更新者, 更新日
+2018/05/22 21:40:51   ERR***** データ更新失敗：ERROR: 42703: column "得意先コード" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+UPDATE Public.m02_user SET  会社コード = 'test', 得意先コード = 'test', 得意先名 = 'test', 得意先名略称 = 'test', 郵便番号 = '0000000', 住所１ = 'test', 住所２ = 'test', 住所３ = 'test', 電話番号 = '0000000000', 電話番号検索用 = '0000000000', ＦＡＸ番号 = '0000000000', 担当者 = 'Admin', 更新日 = '2018/05/22 21:40:50' WHERE 会社コード='test' AND 得意先コード='test' RETURNING 会社コード, 得意先コード, 得意先名, 得意先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 既定支払条件, メモ, 更新者, 更新日
+2018/05/22 21:44:14   ERR***** データ更新失敗：ERROR: 42703: column "更新者" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+UPDATE Public.m10_customer SET  会社コード = 'test', 得意先コード = 'test', 得意先名 = 'test', 得意先名略称 = 'test', 郵便番号 = '0000000', 住所１ = 'test', 住所２ = 'test', 住所３ = 'test', 電話番号 = '0000000000', 電話番号検索用 = '0000000000', ＦＡＸ番号 = '0000000000', 担当者 = 'Admin', 更新日 = '2018/05/22 21:44:13' WHERE 会社コード='test' AND 得意先コード='test' RETURNING 会社コード, 得意先コード, 得意先名, 得意先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 既定支払条件, メモ, 更新者, 更新日
+2018/05/22 21:48:42   ERR***** データ更新失敗：ERROR: 42703: column "担当者" of relation "m10_customer" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+UPDATE Public.m10_customer SET  会社コード = 'test', 得意先コード = 'test', 得意先名 = 'test', 得意先名略称 = 'test', 郵便番号 = '0000000', 住所１ = 'test', 住所２ = 'test', 住所３ = '住所３', 電話番号 = '0000000000', 電話番号検索用 = '0000000000', ＦＡＸ番号 = '0000000000', 担当者 = 'Admin', 更新日 = '2018/05/22 21:48:41' WHERE 会社コード='test' AND 得意先コード='test' RETURNING 会社コード, 得意先コード, 得意先名, 得意先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 既定支払条件, メモ, ?更新者, ?更新日
+2018/05/22 21:50:50   ERR***** データ更新失敗：ERROR: 42703: column "更新日" of relation "m10_customer" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+UPDATE Public.m10_customer SET  会社コード = 'test', 得意先コード = 'test', 得意先名 = 'test', 得意先名略称 = 'test', 郵便番号 = '0000000', 住所１ = 'test', 住所２ = 'test', 住所３ = 'test', 電話番号 = '0000000000', 電話番号検索用 = '0000000000', ＦＡＸ番号 = '0000000000', 担当者名 = 'Admin', 更新日 = '2018/05/22 21:50:49' WHERE 会社コード='test' AND 得意先コード='test' RETURNING 会社コード, 得意先コード, 得意先名, 得意先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 既定支払条件, メモ, ?更新者, ?更新日
+2018/05/22 21:53:55   ERR***** データ更新失敗：ERROR: 42601: syntax error at or near "', ?更新日 = '"
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+UPDATE Public.m10_customer SET  会社コード = 'test', 得意先コード = 'test', 得意先名 = 'test', 得意先名略称 = 'test', 郵便番号 = '0000000', 住所１ = '住所１', 住所２ = '住所２', 住所３ = '住所３', 電話番号 = '電話番号', 電話番号検索用 = '電話番号検索用', ＦＡＸ番号 = 'FAX番号', 担当者名 = '担当者名', ?更新者Admin', ?更新日 = '2018/05/22 21:53:54' WHERE 会社コード='test' AND 得意先コード='test' RETURNING 会社コード, 得意先コード, 得意先名, 得意先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 既定支払条件, メモ, ?更新者, ?更新日
+2018/05/22 23:20:56   ERR***** データ更新失敗：ERROR: 42703: column "仕入先コード" of relation "m10_customer" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO Public.m10_customer(会社コード, 仕入先コード, 仕入先名, 仕入先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 既定間接費率, メモ, 銀行コード, 支店コード, 預金種目, ?口座番号, ?口座名義, ?更新者, ?更新日) VALUES('zenbi', 'zenbi', 'zebni', 'zenbi', '0000000', 'test', 'test', 'test', '000-000-0000', '0000000000', '000-000-0000', 'supplier', '20%', 'notes', 'bank', 'branch', '1', '0000000', 'name', 'Admin', '2018/05/22 23:20:55 ')RETURNING 会社コード, 仕入先コード, 仕入先名, 仕入先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 既定間接費率, メモ, 銀行コード, 支店コード, 預金種目, 口座番号, 口座名義, ?更新者, ?更新日
+2018/05/22 23:24:07   ERR***** データ更新失敗：ERROR: 42703: column "?口座番号" of relation "m11_supplier" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO Public.m11_supplier(会社コード, 仕入先コード, 仕入先名, 仕入先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 既定間接費率, メモ, 銀行コード, 支店コード, 預金種目, ?口座番号, ?口座名義, ?更新者, ?更新日) VALUES('test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'testte', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'Admin', '2018/05/22 23:24:06 ')RETURNING 会社コード, 仕入先コード, 仕入先名, 仕入先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 既定間接費率, メモ, 銀行コード, 支店コード, 預金種目, 口座番号, 口座名義, ?更新者, ?更新日
+2018/05/22 23:26:15   ERR***** データ更新失敗：ERROR: 42703: column "?口座番号" of relation "m11_supplier" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO Public.m11_supplier(会社コード, 仕入先コード, 仕入先名, 仕入先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 既定間接費率, メモ, 銀行コード, 支店コード, 預金種目, ?口座番号, ?口座名義, ?更新者, ?更新日) VALUES('test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', '000-000-0000', '0000000000', '000-000-0000', 'test', '20%', 'notes', '00000', '000', '1', '00000', 'test', 'Admin', '2018/05/22 23:26:14 ')RETURNING 会社コード, 仕入先コード, 仕入先名, 仕入先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 既定間接費率, メモ, 銀行コード, 支店コード, 預金種目, 口座番号, 口座名義, ?更新者, ?更新日
+2018/05/22 23:29:38   ERR***** データ更新失敗：ERROR: 42703: column "?口座名義" of relation "m11_supplier" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO Public.m11_supplier(会社コード, 仕入先コード, 仕入先名, 仕入先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 既定間接費率, メモ, 銀行コード, 支店コード, 預金種目, 口座番号, ?口座名義, ?更新者, ?更新日) VALUES('test', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'Admin', '2018/05/22 23:29:37 ')RETURNING 会社コード, 仕入先コード, 仕入先名, 仕入先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 既定間接費率, メモ, 銀行コード, 支店コード, 預金種目, 口座番号, 口座名義, ?更新者, ?更新日
+2018/05/22 23:31:36   ERR***** データ更新失敗：ERROR: 42703: column "更新者" of relation "m11_supplier" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO Public.m11_supplier(会社コード, 仕入先コード, 仕入先名, 仕入先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 既定間接費率, メモ, 銀行コード, 支店コード, 預金種目, 口座番号, 口座名義, 更新者, 更新日) VALUES('test', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'Admin', '2018/05/22 23:31:35 ')RETURNING 会社コード, 仕入先コード, 仕入先名, 仕入先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 既定間接費率, メモ, 銀行コード, 支店コード, 預金種目, 口座番号, 口座名義, ?更新者, ?更新日
+2018/05/22 23:32:56   ERR***** データ更新失敗：ERROR: 42703: column "更新日" of relation "m11_supplier" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO Public.m11_supplier(会社コード, 仕入先コード, 仕入先名, 仕入先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 既定間接費率, メモ, 銀行コード, 支店コード, 預金種目, 口座番号, 口座名義,  ?更新者, 更新日) VALUES('test', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'Admin', '2018/05/22 23:32:55 ')RETURNING 会社コード, 仕入先コード, 仕入先名, 仕入先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 既定間接費率, メモ, 銀行コード, 支店コード, 預金種目, 口座番号, 口座名義, ?更新者, ?更新日
+2018/05/22 23:35:04   ERR***** データ取得失敗：ERROR: 42703: column "?更新者" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT 会社コード, 仕入先コード, 仕入先名, 仕入先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 既定間接費率, メモ, 銀行コード, 支店コード, 預金種目, 口座番号, 口座名義, ?更新者, ?更新日 FROM public.m11_supplier
+2018/05/22 23:36:28   ERR***** データ更新失敗：ERROR: 42703: column "?更新者" of relation "m11_supplier" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO Public.m11_supplier(会社コード, 仕入先コード, 仕入先名, 仕入先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 既定間接費率, メモ, 銀行コード, 支店コード, 預金種目, 口座番号, 口座名義,  ?更新者, 更新日) VALUES('test', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'Admin', '2018/05/22 23:36:27 ')RETURNING 会社コード, 仕入先コード, 仕入先名, 仕入先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 既定間接費率, メモ, 銀行コード, 支店コード, 預金種目, 口座番号, 口座名義, ?更新者, ?更新日
+2018/05/22 23:37:43   ERR***** データ更新失敗：ERROR: 22P02: invalid input syntax for type numeric: ""
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO Public.m11_supplier(会社コード, 仕入先コード, 仕入先名, 仕入先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 既定間接費率, メモ, 銀行コード, 支店コード, 預金種目, 口座番号, 口座名義,  更新者, 更新日) VALUES('test', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'Admin', '2018/05/22 23:37:43 ')RETURNING 会社コード, 仕入先コード, 仕入先名, 仕入先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 既定間接費率, メモ, 銀行コード, 支店コード, 預金種目, 口座番号, 口座名義, 更新者, 更新日
+2018/05/23 0:02:19   ERR***** データ更新失敗：ERROR: 42703: column "?更新者" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+UPDATE Public.m11_Supplier SET  会社コード = 'test', 仕入先コード = 'test', 仕入先名 = 'test', 仕入先名略称 = 'test', 郵便番号 = '000', 住所１ = 'tes', 住所２ = 'test', 住所３ = 'test', 電話番号 = '0000000000', 電話番号検索用 = '0000000000', ＦＡＸ番号 = '0000000000', 担当者名 = 'test', 既定間接費率 = '10', メモ = 'test', 銀行コード = '000 ', 支店コード = '000', 預金種目 = '1', 口座番号 = '00000  ', 口座名義 = 'test', ?更新者 = 'Admin', ?更新日 = '2018/05/23 0:02:18' WHERE 会社コード='test' AND 仕入先コード='test' RETURNING 会社コード, 仕入先コード, 仕入先名, 仕入先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 既定間接費率, メモ, 銀行コード, 支店コード, 預金種目, 口座番号, 口座名義, ?更新者, ?更新日
+2018/05/23 0:51:43   ERR***** データ更新失敗：ERROR: 42703: column "会社略名" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+UPDATE Public.m01_Company SET  会社コード = 'LAEVI', 会社名 = 'レビガータ株式会社', 会社略称 = 'レビガータ', 郵便番号 = '0200022', 住所１ = '岩手県盛岡市大通三丁目', 住所２ = '６番12号', 住所３ = '開運橋センタービル3階', 電話番号 = '000-000-0000', ＦＡＸ番号 = '000-000-0000', 代表者役職 = '代表取締役', 代表者名 = '久慈　昌和', 表示順 = '20', 備考 = '備考', 銀行コード = '1234', 支店コード = '123', 預金種目 = '0', 口座番号 = '1234567', 口座名義 = 'test', 更新者 = 'Admin', 更新日 = '2018/05/23 0:51:42' WHERE 会社コード='LAEVI' RETURNING 会社コード, 会社名, 会社略名, 郵便番号, 住所１, 住所２, 住所３, 電話番号, ＦＡＸ番号, 代表者役職, 代表者名, 表示順, 備考, 銀行コード, 支店コード, 預金種目, 口座番号, 口座名義, 更新者, 更新日
+2018/05/27 21:33:13   ERR***** データ更新失敗：ERROR: 22001: value too long for type character varying(8)
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+UPDATE Public.m10_customer SET  会社コード = 'LAEVI', 得意先コード = 'レビガータ株式会社', 得意先名 = 'レビガータ', 得意先名略称 = '0200022', 郵便番号 = '岩手県盛岡市大通三丁目', 住所１ = '６番12号', 住所２ = '開運橋センタービル3階', 住所３ = '000-000-0000', 電話番号 = '000-000-0000', 電話番号検索用 = '代表取締役', ＦＡＸ番号 = '久慈　昌和', 担当者名 = '20', 既定支払条件 = '備考', メモ = '5678', 更新者 = 'Admin', 更新日 = '2018/05/27 21:33:11' WHERE 会社コード='LAEVI' AND 得意先コード='レビガータ株式会社' RETURNING 会社コード, 得意先コード, 得意先名, 得意先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 既定支払条件, メモ, 更新者, 更新日
+2018/05/27 21:38:39   ERR***** データ更新失敗：ERROR: 42601: syntax error at or near "0200022"
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+UPDATE Public.m11_Supplier SET  会社コード = 'LAEVI', 会社名 = 'レビガータ株式会社', 会社略称 = 'レビガータ', 仕入先名略称 = '郵便番号 = '0200022', 住所１ = '岩手県盛岡市大通三丁目', 住所２ = '６番12号', 住所３ = '開運橋センタービル3階', 電話番号 = '000-000-0000', ＦＡＸ番号 = '000-000-0000', 代表者役職 = '代表取締役', 代表者名 = '久慈　昌和', 表示順 = '20', 備考 = '備考', 銀行コード = '5678', 支店コード = '123', 預金種目 = '0', 口座番号 = '1234567', 口座名義 = 'test', 更新者 = 'Admin', 更新日 = '2018/05/27 21:38:38' WHERE 会社コード='LAEVI'RETURNING 会社コード, 会社名, 会社略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, ＦＡＸ番号, 代表者役職, 代表者名, 表示順, 備考, 銀行コード, 支店コード, 預金種目, 口座番号, 口座名義, 更新者, 更新日
+2018/05/27 21:40:52   ERR***** データ更新失敗：ERROR: 42601: syntax error at or near "0200022"
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+UPDATE Public.m11_Supplier SET  会社コード = 'LAEVI', 会社名 = 'レビガータ株式会社', 会社略称 = 'レビガータ', 仕入先名略称 = '郵便番号 = '0200022', 住所１ = '岩手県盛岡市大通三丁目', 住所２ = '６番12号', 住所３ = '開運橋センタービル3階', 電話番号 = '000-000-0000', ＦＡＸ番号 = '000-000-0000', 代表者役職 = '代表取締役', 代表者名 = '久慈　昌和', 表示順 = '20', 備考 = '備考', 銀行コード = '1234', 支店コード = '123', 預金種目 = '0', 口座番号 = '1234567', 口座名義 = 'test', 更新者 = 'Admin', 更新日 = '2018/05/27 21:40:51' WHERE 会社コード='LAEVI'RETURNING 会社コード, 会社名, 会社略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, ＦＡＸ番号, 代表者役職, 代表者名, 表示順, 備考, 銀行コード, 支店コード, 預金種目, 口座番号, 口座名義, 更新者, 更新日
+2018/05/27 21:42:15   ERR***** データ更新失敗：ERROR: 42703: column "会社名" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+UPDATE Public.m11_Supplier SET  会社コード = 'LAEVI', 会社名 = 'レビガータ株式会社', 会社略称 = 'レビガータ', 郵便番号 = '0200022', 住所１ = '岩手県盛岡市大通三丁目', 住所２ = '６番12号', 住所３ = '開運橋センタービル3階', 電話番号 = '000-000-0000', ＦＡＸ番号 = '000-000-0000', 代表者役職 = '代表取締役', 代表者名 = '久慈　昌和', 表示順 = '20', 備考 = '備考', 銀行コード = '1234', 支店コード = '123', 預金種目 = '0', 口座番号 = '2345678', 口座名義 = 'test', 更新者 = 'Admin', 更新日 = '2018/05/27 21:42:14' WHERE 会社コード='LAEVI'RETURNING 会社コード, 会社名, 会社略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, ＦＡＸ番号, 代表者役職, 代表者名, 表示順, 備考, 銀行コード, 支店コード, 預金種目, 口座番号, 口座名義, 更新者, 更新日
+2018/05/27 21:45:26   ERR***** データ更新失敗：ERROR: 42703: column "会社名" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+UPDATE Public.m11_Supplier SET  会社コード = 'LAEVI', 会社名 = 'レビガータ株式会社', 会社略称 = 'レビガータ', 郵便番号 = '0200022', 住所１ = '岩手県盛岡市大通三丁目', 住所２ = '６番12号', 住所３ = '開運橋センタービル3階', 電話番号 = '000-000-0000', ＦＡＸ番号 = '000-000-0000', 代表者役職 = '代表取締役', 代表者名 = '久慈　昌和', 表示順 = '20', 備考 = '備考', 銀行コード = '1234', 支店コード = '123', 預金種目 = '0', 口座番号 = '1234567', 口座名義 = 'test', 更新者 = 'Admin', 更新日 = '2018/05/27 21:45:25' WHERE 会社コード='LAEVI'RETURNING 会社コード, 会社名, 会社略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, ＦＡＸ番号, 代表者役職, 代表者名, 表示順, 備考, 銀行コード, 支店コード, 預金種目, 口座番号, 口座名義, 更新者, 更新日
+2018/05/27 21:58:26   ERR***** データ取得失敗：ERROR: 42601: syntax error at or near "FROM"
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT 会社コード, 固定キー, 可変キー, 表示順, 文字１, 文字２, 文字３, 文字４, 文字５, 文字６, 数値１, 数値２, 数値３, 数値４, 数値５, 数値６, メモ, 更新者, 更新日, FROM public.m90_hanyo
+2018/05/27 22:00:21   ERR***** データ取得失敗：ERROR: 42601: syntax error at or near "FROM"
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT 会社コード, 固定キー, 可変キー, 表示順, 文字１, 文字２, 文字３, 文字４, 文字５, 文字６, 数値１, 数値２, 数値３, 数値４, 数値５, 数値６, メモ, 更新者, 更新日, FROM public.m90_hanyo
+2018/05/27 22:02:16   ERR***** データ取得失敗：ERROR: 42601: syntax error at or near "FROM"
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT 会社コード, 固定キー, 可変キー, 表示順, 文字１, 文字２, 文字３, 文字４, 文字５, 文字６, 数値１, 数値２, 数値３, 数値４, 数値５, 数値６, メモ, 更新者, 更新日, FROM public.m90_hanyo
+2018/05/27 23:14:58   ERR***** データ更新失敗：ERROR: 42P01: relation "public.m90_hanyou" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO Public.m90_hanyou(会社コード, 固定キー, 可変キー, 表示順, 文字１, 文字２, 文字３, 文字４, 文字５, 文字６, 数値１, 数値２, 数値３, 数値４, 数値５, 数値６, メモ, 更新者, 更新日) VALUES('1', '1', '1', 'text', 'text', 'text', 'text', 'text', 'text', '1', '2', '3', '4', '5', '6', 'notes', 'Admin', '2018/05/27 23:14:57 ')RETURNING 会社コード, 固定キー, 可変キー, 表示順, 文字１, 文字２, 文字３, 文字４, 文字５, 文字６, 数値１, 数値２, 数値３, 数値４, 数値５, 数値６, メモ, 更新者, 更新日
+2018/05/27 23:17:33   ERR***** データ更新失敗：ERROR: 42601: INSERT has more target columns than expressions
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO Public.m90_hanyo(会社コード, 固定キー, 可変キー, 表示順, 文字１, 文字２, 文字３, 文字４, 文字５, 文字６, 数値１, 数値２, 数値３, 数値４, 数値５, 数値６, メモ, 更新者, 更新日) VALUES('1', '1', '1', 'test', 'test', 'test', 'test', 'test', 'test', '1', '2', '3', '4', '5', '6', 'notes', 'Admin', '2018/05/27 23:17:32 ')RETURNING 会社コード, 固定キー, 可変キー, 表示順, 文字１, 文字２, 文字３, 文字４, 文字５, 文字６, 数値１, 数値２, 数値３, 数値４, 数値５, 数値６, メモ, 更新者, 更新日
+2018/05/28 0:01:22   ERR***** データ取得失敗：ERROR: 42703: column "zenbi" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT * FROM public.m01_company WHERE 会社コード LIKE ZENBI
+2018/05/28 0:13:16   ERR***** データ取得失敗：ERROR: 42601: syntax error at or near "%"
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT * FROM public.m01_company WHERE 会社コード LIKE %ZENBI%
+2018/05/29 13:33:52   ERR***** データ取得失敗：The Connection is broken.
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+
+SELECT 
+    略名 
+ FROM m02_user 
+ WHERE 
+    会社コード = 'ZENBI'
+    and ユーザＩＤ = 'zenbi01'
+    and 無効フラグ = 0 
+2018/06/05 14:03:49   ERR***** データベース接続失敗
+データベースの接続に失敗しました。
+	　 Failed to establish a connection to '13.230.190.253'.
+   場所 UtilMDL.DB.UtilPostgresHandler..ctor(String prmSvAdr, String prmPortNo, String prmDbNm, String prmUserId, String prmPswd, Int16 prmTimeout) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 77
+   場所 UtilMDL.DB.UtilPostgresDebugger..ctor(String prmSvAdr, String prmPortNo, String prmDbNm, String prmUserId, String prmPswd, String prmFileNm, Boolean prmDebugFlg, Boolean prmConsoleWrite, Int16 prmTimeout) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 91
+2018/06/05 14:11:47   ERR***** データ取得失敗：The Connection is broken.
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT 会社コード, 得意先コード, 得意先名, 得意先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 担当者役職, 既定支払条件, メモ, 更新者, 更新日 FROM public.m10_customer
+2018/06/05 14:12:24   ERR***** データベース接続失敗
+データベースの接続に失敗しました。
+	　 Failed to establish a connection to '13.230.190.253'.
+   場所 UtilMDL.DB.UtilPostgresHandler..ctor(String prmSvAdr, String prmPortNo, String prmDbNm, String prmUserId, String prmPswd, Int16 prmTimeout) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 77
+   場所 UtilMDL.DB.UtilPostgresDebugger..ctor(String prmSvAdr, String prmPortNo, String prmDbNm, String prmUserId, String prmPswd, String prmFileNm, Boolean prmDebugFlg, Boolean prmConsoleWrite, Int16 prmTimeout) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 91
+2018/06/06 2:13:34   ERR***** データ更新失敗：ERROR: 42P01: relation "public.t02_mithd" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO Public.t02_mithd(会社コード, 見積番号, 見積番号枝番, 得意先コード, 得意先名, 得意先担当者役職, 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額, 営業担当者, 入力担当者, 備考, 登録日) VALUES('ZENBI', '20180606', '1', 'zenbi1', 'zenbi1', 'zenbi1-user', '役職', '2018/06/06', '2018/06/13', 'payment terms', '72000', 'admin', '', 'remarks', '2018/06/06 ')RETURNING 会社コード, 見積番号, 見積番号枝番, 得意先コード, 得意先名, 得意先担当者役職, 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額, 営業担当者, 入力担当者, 備考, 登録日
+2018/06/06 3:02:05   ERR***** データ更新失敗：ERROR: 23505: duplicate key value violates unique constraint "pk_t01_mithd"
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO Public.t01_mithd(会社コード, 見積番号, 見積番号枝番, 得意先コード, 得意先名, 得意先担当者役職, 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額, 営業担当者, 入力担当者, 備考, 登録日) VALUES('ZENBI', '20180606', '1', 'zenbi1', 'zenbi1', 'zenbi1-user', '役職', '2018/06/06', '2018/06/13', 'payment terms', '12000', '', '', '', '2018/06/06 ')RETURNING 会社コード, 見積番号, 見積番号枝番, 得意先コード, 得意先名, 得意先担当者役職, 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額, 営業担当者, 入力担当者, 備考, 登録日
+2018/06/06 3:20:21   ERR***** データ更新失敗：ERROR: 42601: INSERT has more expressions than target columns
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO Public.t02_mitdt(会社コード, 見積番号, 見積番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 数量, 単位, 仕入先名称, 仕入単価, 間接費, 仕入金額, 売単価, 売上金額, 粗利額, 粗利率, リードタイム, 備考, 更新者, 登録日) VALUES('ZENBI', '20180606', '1', 'zenbi1', '1', '仕入', 'aaa', 'bbb', 'ccc', '100', 'unit', 'supplier01', '10', '1000', '11000', '120', '12000', '1000', '8.33333333333333', '2', 'notes', 'Admin', '2018/06/06 ')RETURNING 会社コード, 見積番号, 見積番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 数量, 単位, 仕入先名称, 仕入単価, 間接費, 仕入金額, 売単価, 売上金額, 粗利額, 粗利率, リードタイム, 備考, 更新者, 登録日
+2018/06/06 3:24:40   ERR***** データ更新失敗：ERROR: 22P02: invalid input syntax for type numeric: "zenbi1"
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO Public.t02_mitdt(会社コード, 見積番号, 見積番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 数量, 単位, 仕入先名称, 仕入単価, 間接費, 仕入金額, 売単価, 売上金額, 粗利額, 粗利率, リードタイム, 備考, 更新者, 登録日) VALUES('ZENBI', '20180606', '1', 'zenbi1', '1', '仕入', 'aaa', 'bbb', 'ccc', '100', 'unit', 'supplier01', '10', '1000', '11000', '120', '12000', '1000', '8.33333333333333', '2', 'Admin', '2018/06/06 ')RETURNING 会社コード, 見積番号, 見積番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 数量, 単位, 仕入先名称, 仕入単価, 間接費, 仕入金額, 売単価, 売上金額, 粗利額, 粗利率, リードタイム, 備考, 更新者, 登録日
+2018/06/06 3:31:45   ERR***** データ更新失敗：ERROR: 22003: numeric field overflow
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO Public.t02_mitdt(会社コード, 見積番号, 見積番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 数量, 単位, 仕入先名称, 仕入単価, 間接費, 仕入金額, 売単価, 売上金額, 粗利額, 粗利率, リードタイム, 備考, 更新者, 登録日) VALUES('ZENBI', '20180606', '1', '1', '仕入', 'aaa', 'bbb', 'ccc', '100', 'unit', 'supplier01', '10', '1000', '11000', '120', '12000', '1000', '8', '2', 'notes', 'Admin', '2018/06/06 ')RETURNING 会社コード, 見積番号, 見積番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 数量, 単位, 仕入先名称, 仕入単価, 間接費, 仕入金額, 売単価, 売上金額, 粗利額, 粗利率, リードタイム, 備考, 更新者, 登録日
+2018/06/06 3:39:55   ERR***** データ更新失敗：ERROR: 22003: numeric field overflow
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO Public.t02_mitdt(会社コード, 見積番号, 見積番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 数量, 単位, 仕入先名称, 仕入単価, 間接費, 仕入金額, 売単価, 売上金額, 粗利額, 粗利率, リードタイム, 備考, 更新者, 登録日) VALUES('ZENBI', '20180606', '1', '1', '仕入', 'aaa', 'bbb', 'ccc', '100', 'unit', 'supplier01', '10', '1000', '11000', '120', '12000', '1000', '8.333', '2', 'notes', 'Admin', '2018/06/06 ')RETURNING 会社コード, 見積番号, 見積番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 数量, 単位, 仕入先名称, 仕入単価, 間接費, 仕入金額, 売単価, 売上金額, 粗利額, 粗利率, リードタイム, 備考, 更新者, 登録日
+2018/06/06 3:45:31   ERR***** データ更新失敗：ERROR: 22003: numeric field overflow
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO Public.t02_mitdt(会社コード, 見積番号, 見積番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 数量, 単位, 仕入先名称, 仕入単価, 間接費, 仕入金額, 売単価, 売上金額, 粗利額, 粗利率, リードタイム, 備考, 更新者, 登録日) VALUES('ZENBI', '20180606', '1', '1', '仕入', 'aaa', 'bbb', 'ccc', '100', 'unit', 'supplier01', '100', '1000', '11000', '120', '12000', '1000', '8.333', '2', 'notes', 'Admin', '2018/06/06 ')RETURNING 会社コード, 見積番号, 見積番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 数量, 単位, 仕入先名称, 仕入単価, 間接費, 仕入金額, 売単価, 売上金額, 粗利額, 粗利率, リードタイム, 備考, 更新者, 登録日
+2018/06/06 3:53:27   ERR***** データ更新失敗：ERROR: 23505: duplicate key value violates unique constraint "pk_t01_mithd"
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\IEUser\Desktop\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO Public.t01_mithd(会社コード, 見積番号, 見積番号枝番, 得意先コード, 得意先名, 得意先担当者役職, 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額, 営業担当者, 入力担当者, 備考, 登録日) VALUES('ZENBI', '20180606', '1', 'zenbi1', 'zenbi1', 'zenbi1-user', '役職', '2018/06/06', '2018/06/13', 'payment terms', '72000', 'admin', '', 'notes', '2018/06/06 ')RETURNING 会社コード, 見積番号, 見積番号枝番, 得意先コード, 得意先名, 得意先担当者役職, 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額, 営業担当者, 入力担当者, 備考, 登録日

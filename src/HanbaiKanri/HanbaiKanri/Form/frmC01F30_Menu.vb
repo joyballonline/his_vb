@@ -71,21 +71,23 @@ Public Class frmC01F30_Menu
     End Sub
 
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle33 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle34 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle35 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle36 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle37 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle38 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle39 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle40 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.TableLayoutPanel30 = New System.Windows.Forms.TableLayoutPanel()
         Me.btnSelect = New System.Windows.Forms.Button()
         Me.btnUserMaintenance = New System.Windows.Forms.Button()
         Me.btnLanguageMaster = New System.Windows.Forms.Button()
-        Me.btnHanyouMaster = New System.Windows.Forms.Button()
         Me.btnSupplierMaster = New System.Windows.Forms.Button()
+        Me.btnCostmerMaster = New System.Windows.Forms.Button()
         Me.cmdExit = New System.Windows.Forms.Button()
+        Me.btnHanyouMaster = New System.Windows.Forms.Button()
+        Me.BtnCompanyMaster = New System.Windows.Forms.Button()
         Me.chkM01 = New System.Windows.Forms.CheckBox()
         Me.chkG01 = New System.Windows.Forms.CheckBox()
         Me.chkH07 = New System.Windows.Forms.CheckBox()
@@ -104,7 +106,7 @@ Public Class frmC01F30_Menu
         Me.My前回操作日時 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.操作者 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.前回操作日時 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.btnCostmerMaster = New System.Windows.Forms.Button()
+        Me.Button3 = New System.Windows.Forms.Button()
         Me.TableLayoutPanel30.SuspendLayout()
         Me.TableLayoutPanel28.SuspendLayout()
         Me.TableLayoutPanel23.SuspendLayout()
@@ -132,6 +134,8 @@ Public Class frmC01F30_Menu
         Me.TableLayoutPanel30.Controls.Add(Me.btnCostmerMaster, 3, 1)
         Me.TableLayoutPanel30.Controls.Add(Me.cmdExit, 8, 1)
         Me.TableLayoutPanel30.Controls.Add(Me.btnHanyouMaster, 1, 1)
+        Me.TableLayoutPanel30.Controls.Add(Me.BtnCompanyMaster, 6, 1)
+        Me.TableLayoutPanel30.Controls.Add(Me.Button3, 7, 1)
         Me.TableLayoutPanel30.Location = New System.Drawing.Point(3, 488)
         Me.TableLayoutPanel30.Name = "TableLayoutPanel30"
         Me.TableLayoutPanel30.RowCount = 2
@@ -170,15 +174,6 @@ Public Class frmC01F30_Menu
         Me.btnLanguageMaster.Text = "言語マスタ"
         Me.btnLanguageMaster.UseVisualStyleBackColor = True
         '
-        'btnHanyouMaster
-        '
-        Me.btnHanyouMaster.Location = New System.Drawing.Point(86, 9)
-        Me.btnHanyouMaster.Name = "btnHanyouMaster"
-        Me.btnHanyouMaster.Size = New System.Drawing.Size(82, 33)
-        Me.btnHanyouMaster.TabIndex = 8
-        Me.btnHanyouMaster.Text = "汎用マスタ"
-        Me.btnHanyouMaster.UseVisualStyleBackColor = True
-        '
         'btnSupplierMaster
         '
         Me.btnSupplierMaster.Location = New System.Drawing.Point(461, 9)
@@ -187,6 +182,15 @@ Public Class frmC01F30_Menu
         Me.btnSupplierMaster.TabIndex = 9
         Me.btnSupplierMaster.Text = "仕入先マスタ"
         Me.btnSupplierMaster.UseVisualStyleBackColor = True
+        '
+        'btnCostmerMaster
+        '
+        Me.btnCostmerMaster.Location = New System.Drawing.Point(362, 9)
+        Me.btnCostmerMaster.Name = "btnCostmerMaster"
+        Me.btnCostmerMaster.Size = New System.Drawing.Size(93, 33)
+        Me.btnCostmerMaster.TabIndex = 12
+        Me.btnCostmerMaster.Text = "得意先マスタ"
+        Me.btnCostmerMaster.UseVisualStyleBackColor = True
         '
         'cmdExit
         '
@@ -198,6 +202,24 @@ Public Class frmC01F30_Menu
         Me.cmdExit.TabIndex = 5
         Me.cmdExit.Text = "終了(&B)"
         Me.cmdExit.UseVisualStyleBackColor = True
+        '
+        'btnHanyouMaster
+        '
+        Me.btnHanyouMaster.Location = New System.Drawing.Point(86, 9)
+        Me.btnHanyouMaster.Name = "btnHanyouMaster"
+        Me.btnHanyouMaster.Size = New System.Drawing.Size(82, 33)
+        Me.btnHanyouMaster.TabIndex = 8
+        Me.btnHanyouMaster.Text = "汎用マスタ"
+        Me.btnHanyouMaster.UseVisualStyleBackColor = True
+        '
+        'BtnCompanyMaster
+        '
+        Me.BtnCompanyMaster.Location = New System.Drawing.Point(561, 9)
+        Me.BtnCompanyMaster.Name = "BtnCompanyMaster"
+        Me.BtnCompanyMaster.Size = New System.Drawing.Size(82, 33)
+        Me.BtnCompanyMaster.TabIndex = 13
+        Me.BtnCompanyMaster.Text = "会社マスタ"
+        Me.BtnCompanyMaster.UseVisualStyleBackColor = True
         '
         'chkM01
         '
@@ -355,14 +377,14 @@ Public Class frmC01F30_Menu
         '
         'dgvLIST
         '
-        DataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle33.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle33.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        DataGridViewCellStyle33.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle33.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle33.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle33.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvLIST.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle33
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvLIST.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.dgvLIST.ColumnHeadersHeight = 25
         Me.dgvLIST.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.処理ID, Me.業務, Me.処理名, Me.説明, Me.My前回操作日時, Me.操作者, Me.前回操作日時})
         Me.dgvLIST.Dock = System.Windows.Forms.DockStyle.Fill
@@ -378,8 +400,8 @@ Public Class frmC01F30_Menu
         '
         '処理ID
         '
-        DataGridViewCellStyle34.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.処理ID.DefaultCellStyle = DataGridViewCellStyle34
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.処理ID.DefaultCellStyle = DataGridViewCellStyle2
         Me.処理ID.HeaderText = "処理ID"
         Me.処理ID.Name = "処理ID"
         Me.処理ID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
@@ -388,16 +410,16 @@ Public Class frmC01F30_Menu
         '
         '業務
         '
-        DataGridViewCellStyle35.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
-        Me.業務.DefaultCellStyle = DataGridViewCellStyle35
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        Me.業務.DefaultCellStyle = DataGridViewCellStyle3
         Me.業務.HeaderText = "業務"
         Me.業務.Name = "業務"
         Me.業務.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
         '処理名
         '
-        DataGridViewCellStyle36.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
-        Me.処理名.DefaultCellStyle = DataGridViewCellStyle36
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        Me.処理名.DefaultCellStyle = DataGridViewCellStyle4
         Me.処理名.HeaderText = "処理名"
         Me.処理名.Name = "処理名"
         Me.処理名.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
@@ -405,8 +427,8 @@ Public Class frmC01F30_Menu
         '
         '説明
         '
-        DataGridViewCellStyle37.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
-        Me.説明.DefaultCellStyle = DataGridViewCellStyle37
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        Me.説明.DefaultCellStyle = DataGridViewCellStyle5
         Me.説明.HeaderText = "説明"
         Me.説明.Name = "説明"
         Me.説明.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
@@ -414,9 +436,9 @@ Public Class frmC01F30_Menu
         '
         'My前回操作日時
         '
-        DataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle38.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
-        Me.My前回操作日時.DefaultCellStyle = DataGridViewCellStyle38
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        Me.My前回操作日時.DefaultCellStyle = DataGridViewCellStyle6
         Me.My前回操作日時.HeaderText = " My前回操作日時"
         Me.My前回操作日時.Name = "My前回操作日時"
         Me.My前回操作日時.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
@@ -424,8 +446,8 @@ Public Class frmC01F30_Menu
         '
         '操作者
         '
-        DataGridViewCellStyle39.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
-        Me.操作者.DefaultCellStyle = DataGridViewCellStyle39
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        Me.操作者.DefaultCellStyle = DataGridViewCellStyle7
         Me.操作者.HeaderText = "　操作者"
         Me.操作者.Name = "操作者"
         Me.操作者.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
@@ -433,22 +455,22 @@ Public Class frmC01F30_Menu
         '
         '前回操作日時
         '
-        DataGridViewCellStyle40.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle40.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
-        Me.前回操作日時.DefaultCellStyle = DataGridViewCellStyle40
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle8.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        Me.前回操作日時.DefaultCellStyle = DataGridViewCellStyle8
         Me.前回操作日時.HeaderText = "前回操作日時"
         Me.前回操作日時.Name = "前回操作日時"
         Me.前回操作日時.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.前回操作日時.Width = 135
         '
-        'btnCostmerMaster
+        'Button3
         '
-        Me.btnCostmerMaster.Location = New System.Drawing.Point(362, 9)
-        Me.btnCostmerMaster.Name = "btnCostmerMaster"
-        Me.btnCostmerMaster.Size = New System.Drawing.Size(93, 33)
-        Me.btnCostmerMaster.TabIndex = 12
-        Me.btnCostmerMaster.Text = "得意先マスタ"
-        Me.btnCostmerMaster.UseVisualStyleBackColor = True
+        Me.Button3.Location = New System.Drawing.Point(659, 9)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(94, 33)
+        Me.Button3.TabIndex = 14
+        Me.Button3.Text = "見積"
+        Me.Button3.UseVisualStyleBackColor = True
         '
         'frmC01F30_Menu
         '
@@ -1175,6 +1197,20 @@ Public Class frmC01F30_Menu
     Private Sub btnSupplierMaster_Click(sender As Object, e As EventArgs) Handles btnSupplierMaster.Click
         Dim openForm As Form = Nothing
         openForm = New MstSupplier(_msgHd, _db)
+        openForm.Show()
+        Me.Hide()
+    End Sub
+
+    Private Sub BtnCompanyMaster_Click(sender As Object, e As EventArgs) Handles BtnCompanyMaster.Click
+        Dim openForm As Form = Nothing
+        openForm = New MstCompany(_msgHd, _db)
+        openForm.Show()
+        Me.Hide()
+    End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        Dim openForm As Form = Nothing
+        openForm = New QuoteRequest(_msgHd, _db)
         openForm.Show()
         Me.Hide()
     End Sub

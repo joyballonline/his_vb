@@ -19,7 +19,8 @@
     </SccAuxPath>
     <SccProvider>
     </SccProvider>
-    <ApplicationIcon>dotNetIco.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -79,6 +80,9 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.3.0\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -98,6 +102,24 @@
     <Compile Include="Business\CommonLogic.vb" />
     <Compile Include="Business\RepSectionIF.vb" />
     <Compile Include="Business\StartUp.vb" />
+    <Compile Include="Form\CompanyAdd.Designer.vb">
+      <DependentUpon>CompanyAdd.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\CompanyAdd.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\CompanyEdit.Designer.vb">
+      <DependentUpon>CompanyEdit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\CompanyEdit.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\CompanySearch.Designer.vb">
+      <DependentUpon>CompanySearch.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\CompanySearch.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\CustomerAdd.Designer.vb">
       <DependentUpon>CustomerAdd.vb</DependentUpon>
     </Compile>
@@ -108,6 +130,12 @@
       <DependentUpon>CustomerEdit.vb</DependentUpon>
     </Compile>
     <Compile Include="Form\CustomerEdit.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\CustomerSearch.Designer.vb">
+      <DependentUpon>CustomerSearch.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\CustomerSearch.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form\frmC10F30_Postal.Designer.vb">
@@ -140,6 +168,37 @@
     <Compile Include="Form\frmC10F90_Hanyo.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form\HanyoAdd.Designer.vb">
+      <DependentUpon>HanyoAdd.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\HanyoAdd.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\HanyoEdit.Designer.vb">
+      <DependentUpon>HanyoEdit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\HanyoEdit.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\ItemSearch.Designer.vb">
+      <DependentUpon>ItemSearch.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\ItemSearch.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\.Designer.vb">
+      <DependentUpon>MakerSearch.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\MakerSearch.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\MstCompany.Designer.vb">
+      <DependentUpon>MstCompany.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\MstCompany.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\MstCustomer.Designer.vb">
       <DependentUpon>MstCustomer.vb</DependentUpon>
     </Compile>
@@ -164,10 +223,10 @@
     <Compile Include="Form\MstSupplier.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form\MstUser.Designer.vb">
-      <DependentUpon>MstUser.vb</DependentUpon>
+    <Compile Include="Form\QuoteRequest.Designer.vb">
+      <DependentUpon>QuoteRequest.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form\MstUser.vb">
+    <Compile Include="Form\QuoteRequest.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form\SupplierAdd.Designer.vb">
@@ -182,6 +241,12 @@
     <Compile Include="Form\SupplierEdit.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form\SupplierSearch.Designer.vb">
+      <DependentUpon>SupplierSearch.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\SupplierSearch.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\UserAdd.Designer.vb">
       <DependentUpon>UserAdd.vb</DependentUpon>
     </Compile>
@@ -192,6 +257,18 @@
       <DependentUpon>UserEdit.vb</DependentUpon>
     </Compile>
     <Compile Include="Form\UserEdit.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\MstUser.Designer.vb">
+      <DependentUpon>MstUser.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\MstUser.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\ZM310E_HanyouMstMente.Designer.vb">
+      <DependentUpon>ZM310E_HanyouMstMente.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\ZM310E_HanyouMstMente.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -211,11 +288,23 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Form\CompanyAdd.resx">
+      <DependentUpon>CompanyAdd.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\CompanyEdit.resx">
+      <DependentUpon>CompanyEdit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\CompanySearch.resx">
+      <DependentUpon>CompanySearch.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\CustomerAdd.resx">
       <DependentUpon>CustomerAdd.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\CustomerEdit.resx">
       <DependentUpon>CustomerEdit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\CustomerSearch.resx">
+      <DependentUpon>CustomerSearch.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmC01F10_Login.resx">
       <DependentUpon>frmC01F10_Login.vb</DependentUpon>
@@ -232,6 +321,21 @@
     <EmbeddedResource Include="Form\frmC10F90_Hanyo.resx">
       <DependentUpon>frmC10F90_Hanyo.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form\HanyoAdd.resx">
+      <DependentUpon>HanyoAdd.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\HanyoEdit.resx">
+      <DependentUpon>HanyoEdit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\ItemSearch.resx">
+      <DependentUpon>ItemSearch.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\MakerSearch.resx">
+      <DependentUpon>MakerSearch.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\MstCompany.resx">
+      <DependentUpon>MstCompany.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\MstCustomer.resx">
       <DependentUpon>MstCustomer.vb</DependentUpon>
     </EmbeddedResource>
@@ -244,8 +348,8 @@
     <EmbeddedResource Include="Form\MstSupplier.resx">
       <DependentUpon>MstSupplier.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form\MstUser.resx">
-      <DependentUpon>MstUser.vb</DependentUpon>
+    <EmbeddedResource Include="Form\QuoteRequest.resx">
+      <DependentUpon>QuoteRequest.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\SupplierAdd.resx">
       <DependentUpon>SupplierAdd.vb</DependentUpon>
@@ -253,11 +357,20 @@
     <EmbeddedResource Include="Form\SupplierEdit.resx">
       <DependentUpon>SupplierEdit.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form\SupplierSearch.resx">
+      <DependentUpon>SupplierSearch.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\UserAdd.resx">
       <DependentUpon>UserAdd.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\UserEdit.resx">
       <DependentUpon>UserEdit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\MstUser.resx">
+      <DependentUpon>MstUser.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\ZM310E_HanyouMstMente.resx">
+      <DependentUpon>ZM310E_HanyouMstMente.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -271,7 +384,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="bin\Setting\HanbaiKanri.ini" />
-    <None Include="Form\frmC01F30_Menu.Designer.vb:Zone.Identifier:%24DATA" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -281,6 +393,7 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UtilMDL\UtilMDL.vbproj">

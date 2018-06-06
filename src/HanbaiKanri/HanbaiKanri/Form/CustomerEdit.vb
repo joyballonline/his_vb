@@ -82,8 +82,9 @@ Public Class CustomerEdit
         TelSearch.Text = srArr(9)
         Fax.Text = srArr(10)
         Person.Text = srArr(11)
-        PaymentTerms.Text = srArr(12)
-        Memo.Text = srArr(13)
+        Position.Text = srArr(12)
+        PaymentTerms.Text = srArr(13)
+        Memo.Text = srArr(14)
     End Sub
 
     Private Sub btnEditCustomer_Click(sender As Object, e As EventArgs) Handles btnEditCustomer.Click
@@ -144,6 +145,10 @@ Public Class CustomerEdit
             Sql += " = '"
             Sql += Person.Text
             Sql += "', "
+            Sql += "担当者役職"
+            Sql += " = '"
+            Sql += Position.Text
+            Sql += "', "
             Sql += "既定支払条件"
             Sql += " = '"
             Sql += PaymentTerms.Text
@@ -194,6 +199,8 @@ Public Class CustomerEdit
             Sql += ", "
             Sql += "担当者名"
             Sql += ", "
+            Sql += "担当者役職"
+            Sql += ", "
             Sql += "既定支払条件"
             Sql += ", "
             Sql += "メモ"
@@ -216,5 +223,12 @@ Public Class CustomerEdit
             'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
             Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", UtilClass.getErrDetail(ex)))
         End Try
+    End Sub
+
+    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+        Dim MstCustomer As MstCustomer
+        MstCustomer = New MstCustomer(_msgHd, _db)
+        MstCustomer.Show()
+        Me.Close()
     End Sub
 End Class

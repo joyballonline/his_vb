@@ -61,6 +61,7 @@ Partial Class SupplierEdit
         Me.SupplierName = New System.Windows.Forms.TextBox()
         Me.SupplierCode = New System.Windows.Forms.TextBox()
         Me.CompanyCode = New System.Windows.Forms.TextBox()
+        Me.BtnBack = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'Label19
@@ -82,7 +83,7 @@ Partial Class SupplierEdit
         'Label15
         '
         Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(383, 209)
+        Me.Label15.Location = New System.Drawing.Point(381, 209)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(53, 12)
         Me.Label15.TabIndex = 124
@@ -100,7 +101,7 @@ Partial Class SupplierEdit
         'Label17
         '
         Me.Label17.AutoSize = True
-        Me.Label17.Location = New System.Drawing.Point(383, 184)
+        Me.Label17.Location = New System.Drawing.Point(381, 184)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(56, 12)
         Me.Label17.TabIndex = 122
@@ -119,7 +120,7 @@ Partial Class SupplierEdit
         '
         Me.AccountNumber.Location = New System.Drawing.Point(472, 206)
         Me.AccountNumber.Name = "AccountNumber"
-        Me.AccountNumber.Size = New System.Drawing.Size(234, 19)
+        Me.AccountNumber.Size = New System.Drawing.Size(232, 19)
         Me.AccountNumber.TabIndex = 120
         '
         'DepositCategory
@@ -133,7 +134,7 @@ Partial Class SupplierEdit
         '
         Me.BranchOfficeCode.Location = New System.Drawing.Point(472, 181)
         Me.BranchOfficeCode.Name = "BranchOfficeCode"
-        Me.BranchOfficeCode.Size = New System.Drawing.Size(234, 19)
+        Me.BranchOfficeCode.Size = New System.Drawing.Size(232, 19)
         Me.BranchOfficeCode.TabIndex = 118
         '
         'BankCode
@@ -146,7 +147,7 @@ Partial Class SupplierEdit
         'Label14
         '
         Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(383, 159)
+        Me.Label14.Location = New System.Drawing.Point(381, 159)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(22, 12)
         Me.Label14.TabIndex = 116
@@ -164,7 +165,7 @@ Partial Class SupplierEdit
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(383, 134)
+        Me.Label12.Location = New System.Drawing.Point(381, 134)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(53, 12)
         Me.Label12.TabIndex = 114
@@ -182,7 +183,7 @@ Partial Class SupplierEdit
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(381, 109)
+        Me.Label10.Location = New System.Drawing.Point(379, 109)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(89, 12)
         Me.Label10.TabIndex = 112
@@ -201,7 +202,7 @@ Partial Class SupplierEdit
         '
         Me.Memo.Location = New System.Drawing.Point(472, 156)
         Me.Memo.Name = "Memo"
-        Me.Memo.Size = New System.Drawing.Size(234, 19)
+        Me.Memo.Size = New System.Drawing.Size(232, 19)
         Me.Memo.TabIndex = 110
         '
         'Costs
@@ -215,7 +216,7 @@ Partial Class SupplierEdit
         '
         Me.Person.Location = New System.Drawing.Point(472, 131)
         Me.Person.Name = "Person"
-        Me.Person.Size = New System.Drawing.Size(234, 19)
+        Me.Person.Size = New System.Drawing.Size(232, 19)
         Me.Person.TabIndex = 108
         '
         'Fax
@@ -229,7 +230,7 @@ Partial Class SupplierEdit
         '
         Me.TelSearch.Location = New System.Drawing.Point(472, 106)
         Me.TelSearch.Name = "TelSearch"
-        Me.TelSearch.Size = New System.Drawing.Size(234, 19)
+        Me.TelSearch.Size = New System.Drawing.Size(232, 19)
         Me.TelSearch.TabIndex = 106
         '
         'Tel
@@ -241,9 +242,9 @@ Partial Class SupplierEdit
         '
         'btnEditSupplier
         '
-        Me.btnEditSupplier.Location = New System.Drawing.Point(12, 275)
+        Me.btnEditSupplier.Location = New System.Drawing.Point(381, 274)
         Me.btnEditSupplier.Name = "btnEditSupplier"
-        Me.btnEditSupplier.Size = New System.Drawing.Size(692, 23)
+        Me.btnEditSupplier.Size = New System.Drawing.Size(323, 23)
         Me.btnEditSupplier.TabIndex = 104
         Me.btnEditSupplier.Text = "仕入先追加"
         Me.btnEditSupplier.UseVisualStyleBackColor = True
@@ -251,7 +252,7 @@ Partial Class SupplierEdit
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(383, 84)
+        Me.Label8.Location = New System.Drawing.Point(379, 84)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(37, 12)
         Me.Label8.TabIndex = 103
@@ -269,7 +270,7 @@ Partial Class SupplierEdit
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(383, 59)
+        Me.Label6.Location = New System.Drawing.Point(379, 59)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(37, 12)
         Me.Label6.TabIndex = 101
@@ -287,7 +288,7 @@ Partial Class SupplierEdit
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(381, 34)
+        Me.Label4.Location = New System.Drawing.Point(379, 34)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(77, 12)
         Me.Label4.TabIndex = 99
@@ -305,7 +306,7 @@ Partial Class SupplierEdit
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(381, 9)
+        Me.Label2.Location = New System.Drawing.Point(379, 9)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(68, 12)
         Me.Label2.TabIndex = 97
@@ -324,7 +325,7 @@ Partial Class SupplierEdit
         '
         Me.Address3.Location = New System.Drawing.Point(472, 81)
         Me.Address3.Name = "Address3"
-        Me.Address3.Size = New System.Drawing.Size(234, 19)
+        Me.Address3.Size = New System.Drawing.Size(232, 19)
         Me.Address3.TabIndex = 95
         '
         'Address2
@@ -338,7 +339,7 @@ Partial Class SupplierEdit
         '
         Me.Address1.Location = New System.Drawing.Point(472, 56)
         Me.Address1.Name = "Address1"
-        Me.Address1.Size = New System.Drawing.Size(234, 19)
+        Me.Address1.Size = New System.Drawing.Size(232, 19)
         Me.Address1.TabIndex = 93
         '
         'PostalCode
@@ -350,9 +351,9 @@ Partial Class SupplierEdit
         '
         'SupplierShortName
         '
-        Me.SupplierShortName.Location = New System.Drawing.Point(470, 31)
+        Me.SupplierShortName.Location = New System.Drawing.Point(472, 31)
         Me.SupplierShortName.Name = "SupplierShortName"
-        Me.SupplierShortName.Size = New System.Drawing.Size(234, 19)
+        Me.SupplierShortName.Size = New System.Drawing.Size(232, 19)
         Me.SupplierShortName.TabIndex = 91
         '
         'SupplierName
@@ -364,9 +365,9 @@ Partial Class SupplierEdit
         '
         'SupplierCode
         '
-        Me.SupplierCode.Location = New System.Drawing.Point(470, 6)
+        Me.SupplierCode.Location = New System.Drawing.Point(472, 6)
         Me.SupplierCode.Name = "SupplierCode"
-        Me.SupplierCode.Size = New System.Drawing.Size(234, 19)
+        Me.SupplierCode.Size = New System.Drawing.Size(232, 19)
         Me.SupplierCode.TabIndex = 89
         '
         'CompanyCode
@@ -376,11 +377,21 @@ Partial Class SupplierEdit
         Me.CompanyCode.Size = New System.Drawing.Size(234, 19)
         Me.CompanyCode.TabIndex = 88
         '
+        'BtnBack
+        '
+        Me.BtnBack.Location = New System.Drawing.Point(14, 274)
+        Me.BtnBack.Name = "BtnBack"
+        Me.BtnBack.Size = New System.Drawing.Size(321, 23)
+        Me.BtnBack.TabIndex = 127
+        Me.BtnBack.Text = "戻る"
+        Me.BtnBack.UseVisualStyleBackColor = True
+        '
         'SupplierEdit
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(721, 320)
+        Me.Controls.Add(Me.BtnBack)
         Me.Controls.Add(Me.Label19)
         Me.Controls.Add(Me.AccountName)
         Me.Controls.Add(Me.Label15)
@@ -466,4 +477,5 @@ Partial Class SupplierEdit
     Friend WithEvents SupplierName As TextBox
     Friend WithEvents SupplierCode As TextBox
     Friend WithEvents CompanyCode As TextBox
+    Friend WithEvents BtnBack As Button
 End Class

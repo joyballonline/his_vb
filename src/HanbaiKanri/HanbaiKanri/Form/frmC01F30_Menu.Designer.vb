@@ -42,6 +42,8 @@ Partial Class frmC01F30_Menu
     Friend WithEvents btnHanyouMaster As Button
     Friend WithEvents btnSupplierMaster As Button
     Friend WithEvents btnCostmerMaster As Button
+    Friend WithEvents BtnCompanyMaster As Button
+    Friend WithEvents Button3 As Button
 
     'メモ: 以下のプロシージャは Windows フォーム デザイナーで必要です。
     'Windows フォーム デザイナーを使用して変更できます。  

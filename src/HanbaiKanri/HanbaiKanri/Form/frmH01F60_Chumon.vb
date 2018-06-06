@@ -2010,29 +2010,29 @@ Public Class frmH01F60_Chumon
     Friend WithEvents cnTaxAmount As CustomTabStopDataGridView.TabStop.TabStopTextBoxColumn
 
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle47 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle69 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle48 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle49 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle50 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle51 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle52 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle53 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle54 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle55 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle56 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle57 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle58 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle59 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle60 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle61 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle62 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle63 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle64 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle65 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle66 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle67 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle68 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.lblShoriMode = New System.Windows.Forms.Label()
@@ -2348,11 +2348,11 @@ Public Class frmH01F60_Chumon
         Me.dtpShukkaDt.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.dtpShukkaDt.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
         Me.dtpShukkaDt.ImeMode = System.Windows.Forms.ImeMode.Disable
-        Me.dtpShukkaDt.Location = New System.Drawing.Point(100, 33)
+        Me.dtpShukkaDt.Location = New System.Drawing.Point(100, 27)
         Me.dtpShukkaDt.Margin = New System.Windows.Forms.Padding(0)
         Me.dtpShukkaDt.Name = "dtpShukkaDt"
-        Me.dtpShukkaDt.NullValue = String.Empty
-        Me.dtpShukkaDt.Size = New System.Drawing.Size(106, 22)
+        Me.dtpShukkaDt.NullValue = ""
+        Me.dtpShukkaDt.Size = New System.Drawing.Size(106, 37)
         Me.dtpShukkaDt.TabIndex = 3
         Me.dtpShukkaDt.Value = New Date(2018, 3, 19, 18, 4, 53, 839)
         '
@@ -2393,11 +2393,11 @@ Public Class frmH01F60_Chumon
         Me.dtpChakuDt.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.dtpChakuDt.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
         Me.dtpChakuDt.ImeMode = System.Windows.Forms.ImeMode.Disable
-        Me.dtpChakuDt.Location = New System.Drawing.Point(100, 33)
+        Me.dtpChakuDt.Location = New System.Drawing.Point(100, 27)
         Me.dtpChakuDt.Margin = New System.Windows.Forms.Padding(0)
         Me.dtpChakuDt.Name = "dtpChakuDt"
-        Me.dtpChakuDt.NullValue = String.Empty
-        Me.dtpChakuDt.Size = New System.Drawing.Size(106, 22)
+        Me.dtpChakuDt.NullValue = ""
+        Me.dtpChakuDt.Size = New System.Drawing.Size(106, 37)
         Me.dtpChakuDt.TabIndex = 4
         Me.dtpChakuDt.Value = New Date(2018, 3, 19, 18, 4, 43, 283)
         '
@@ -2500,7 +2500,7 @@ Public Class frmH01F60_Chumon
         Me.txtShagaiBikou.Margin = New System.Windows.Forms.Padding(0)
         Me.txtShagaiBikou.MaxLength = 100
         Me.txtShagaiBikou.Name = "txtShagaiBikou"
-        Me.txtShagaiBikou.Size = New System.Drawing.Size(537, 22)
+        Me.txtShagaiBikou.Size = New System.Drawing.Size(537, 37)
         Me.txtShagaiBikou.TabIndex = 1
         '
         'txtShanaiBikou
@@ -2511,7 +2511,7 @@ Public Class frmH01F60_Chumon
         Me.txtShanaiBikou.Margin = New System.Windows.Forms.Padding(0)
         Me.txtShanaiBikou.MaxLength = 100
         Me.txtShanaiBikou.Name = "txtShanaiBikou"
-        Me.txtShanaiBikou.Size = New System.Drawing.Size(537, 22)
+        Me.txtShanaiBikou.Size = New System.Drawing.Size(537, 37)
         Me.txtShanaiBikou.TabIndex = 3
         '
         'TableLayoutPanel15
@@ -2587,7 +2587,7 @@ Public Class frmH01F60_Chumon
         Me.txtAddress1.Margin = New System.Windows.Forms.Padding(0)
         Me.txtAddress1.MaxLength = 100
         Me.txtAddress1.Name = "txtAddress1"
-        Me.txtAddress1.Size = New System.Drawing.Size(453, 22)
+        Me.txtAddress1.Size = New System.Drawing.Size(453, 37)
         Me.txtAddress1.TabIndex = 0
         '
         'txtAddress2
@@ -2595,22 +2595,22 @@ Public Class frmH01F60_Chumon
         Me.txtAddress2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.txtAddress2.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.txtAddress2.ImeMode = System.Windows.Forms.ImeMode.Hiragana
-        Me.txtAddress2.Location = New System.Drawing.Point(0, 22)
+        Me.txtAddress2.Location = New System.Drawing.Point(0, 37)
         Me.txtAddress2.Margin = New System.Windows.Forms.Padding(0)
         Me.txtAddress2.MaxLength = 100
         Me.txtAddress2.Name = "txtAddress2"
-        Me.txtAddress2.Size = New System.Drawing.Size(453, 22)
+        Me.txtAddress2.Size = New System.Drawing.Size(453, 37)
         Me.txtAddress2.TabIndex = 1
         '
         'txtAddress3
         '
         Me.txtAddress3.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.txtAddress3.ImeMode = System.Windows.Forms.ImeMode.Hiragana
-        Me.txtAddress3.Location = New System.Drawing.Point(0, 44)
+        Me.txtAddress3.Location = New System.Drawing.Point(0, 74)
         Me.txtAddress3.Margin = New System.Windows.Forms.Padding(0)
         Me.txtAddress3.MaxLength = 100
         Me.txtAddress3.Name = "txtAddress3"
-        Me.txtAddress3.Size = New System.Drawing.Size(453, 22)
+        Me.txtAddress3.Size = New System.Drawing.Size(453, 37)
         Me.txtAddress3.TabIndex = 2
         '
         'TableLayoutPanel18
@@ -2639,7 +2639,7 @@ Public Class frmH01F60_Chumon
         Me.txtPostalCd2.Margin = New System.Windows.Forms.Padding(0)
         Me.txtPostalCd2.MaxLength = 4
         Me.txtPostalCd2.Name = "txtPostalCd2"
-        Me.txtPostalCd2.Size = New System.Drawing.Size(41, 22)
+        Me.txtPostalCd2.Size = New System.Drawing.Size(41, 37)
         Me.txtPostalCd2.TabIndex = 2
         '
         'TextBox11
@@ -2651,7 +2651,7 @@ Public Class frmH01F60_Chumon
         Me.TextBox11.MaxLength = 20
         Me.TextBox11.Name = "TextBox11"
         Me.TextBox11.ReadOnly = True
-        Me.TextBox11.Size = New System.Drawing.Size(13, 22)
+        Me.TextBox11.Size = New System.Drawing.Size(13, 37)
         Me.TextBox11.TabIndex = 1
         Me.TextBox11.TabStop = False
         Me.TextBox11.Text = "-"
@@ -2666,7 +2666,7 @@ Public Class frmH01F60_Chumon
         Me.txtPostalCd1.Margin = New System.Windows.Forms.Padding(0)
         Me.txtPostalCd1.MaxLength = 3
         Me.txtPostalCd1.Name = "txtPostalCd1"
-        Me.txtPostalCd1.Size = New System.Drawing.Size(30, 22)
+        Me.txtPostalCd1.Size = New System.Drawing.Size(30, 37)
         Me.txtPostalCd1.TabIndex = 0
         '
         'TableLayoutPanel20
@@ -2693,7 +2693,7 @@ Public Class frmH01F60_Chumon
         Me.lblShukkaCd.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.lblShukkaCd.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lblShukkaCd.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.lblShukkaCd.Location = New System.Drawing.Point(100, 0)
+        Me.lblShukkaCd.Location = New System.Drawing.Point(100, 15)
         Me.lblShukkaCd.Margin = New System.Windows.Forms.Padding(0)
         Me.lblShukkaCd.Name = "lblShukkaCd"
         Me.lblShukkaCd.Size = New System.Drawing.Size(84, 22)
@@ -2706,7 +2706,7 @@ Public Class frmH01F60_Chumon
         Me.Label21.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.Label21.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label21.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label21.Location = New System.Drawing.Point(0, 0)
+        Me.Label21.Location = New System.Drawing.Point(0, 15)
         Me.Label21.Margin = New System.Windows.Forms.Padding(0)
         Me.Label21.Name = "Label21"
         Me.Label21.Size = New System.Drawing.Size(100, 22)
@@ -2723,7 +2723,7 @@ Public Class frmH01F60_Chumon
         Me.txtShukkaNm.Margin = New System.Windows.Forms.Padding(0)
         Me.txtShukkaNm.MaxLength = 100
         Me.txtShukkaNm.Name = "txtShukkaNm"
-        Me.txtShukkaNm.Size = New System.Drawing.Size(453, 22)
+        Me.txtShukkaNm.Size = New System.Drawing.Size(453, 37)
         Me.txtShukkaNm.TabIndex = 2
         '
         'TableLayoutPanel9
@@ -2786,22 +2786,22 @@ Public Class frmH01F60_Chumon
         '
         Me.txtFaxNo.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.txtFaxNo.ImeMode = System.Windows.Forms.ImeMode.Off
-        Me.txtFaxNo.Location = New System.Drawing.Point(100, 44)
+        Me.txtFaxNo.Location = New System.Drawing.Point(100, 74)
         Me.txtFaxNo.Margin = New System.Windows.Forms.Padding(0)
         Me.txtFaxNo.MaxLength = 15
         Me.txtFaxNo.Name = "txtFaxNo"
-        Me.txtFaxNo.Size = New System.Drawing.Size(110, 22)
+        Me.txtFaxNo.Size = New System.Drawing.Size(110, 37)
         Me.txtFaxNo.TabIndex = 5
         '
         'txtTelNo
         '
         Me.txtTelNo.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.txtTelNo.ImeMode = System.Windows.Forms.ImeMode.Off
-        Me.txtTelNo.Location = New System.Drawing.Point(100, 22)
+        Me.txtTelNo.Location = New System.Drawing.Point(100, 37)
         Me.txtTelNo.Margin = New System.Windows.Forms.Padding(0)
         Me.txtTelNo.MaxLength = 15
         Me.txtTelNo.Name = "txtTelNo"
-        Me.txtTelNo.Size = New System.Drawing.Size(110, 22)
+        Me.txtTelNo.Size = New System.Drawing.Size(110, 37)
         Me.txtTelNo.TabIndex = 4
         '
         'Label7
@@ -2810,7 +2810,7 @@ Public Class frmH01F60_Chumon
         Me.Label7.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.Label7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label7.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label7.Location = New System.Drawing.Point(0, 44)
+        Me.Label7.Location = New System.Drawing.Point(0, 74)
         Me.Label7.Margin = New System.Windows.Forms.Padding(0)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(100, 22)
@@ -2824,7 +2824,7 @@ Public Class frmH01F60_Chumon
         Me.Label5.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.Label5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label5.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label5.Location = New System.Drawing.Point(0, 0)
+        Me.Label5.Location = New System.Drawing.Point(0, 15)
         Me.Label5.Margin = New System.Windows.Forms.Padding(0)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(100, 22)
@@ -2838,7 +2838,7 @@ Public Class frmH01F60_Chumon
         Me.Label6.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.Label6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label6.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label6.Location = New System.Drawing.Point(0, 22)
+        Me.Label6.Location = New System.Drawing.Point(0, 52)
         Me.Label6.Margin = New System.Windows.Forms.Padding(0)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(100, 22)
@@ -2854,7 +2854,7 @@ Public Class frmH01F60_Chumon
         Me.txtTantousha.Margin = New System.Windows.Forms.Padding(0)
         Me.txtTantousha.MaxLength = 30
         Me.txtTantousha.Name = "txtTantousha"
-        Me.txtTantousha.Size = New System.Drawing.Size(110, 22)
+        Me.txtTantousha.Size = New System.Drawing.Size(110, 37)
         Me.txtTantousha.TabIndex = 3
         '
         'TableLayoutPanel12
@@ -2886,7 +2886,7 @@ Public Class frmH01F60_Chumon
         Me.lblUnsoubin.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.lblUnsoubin.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lblUnsoubin.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.lblUnsoubin.Location = New System.Drawing.Point(100, 44)
+        Me.lblUnsoubin.Location = New System.Drawing.Point(100, 74)
         Me.lblUnsoubin.Margin = New System.Windows.Forms.Padding(0)
         Me.lblUnsoubin.Name = "lblUnsoubin"
         Me.lblUnsoubin.Size = New System.Drawing.Size(200, 22)
@@ -2899,11 +2899,11 @@ Public Class frmH01F60_Chumon
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtJikansitei.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.txtJikansitei.ImeMode = System.Windows.Forms.ImeMode.Hiragana
-        Me.txtJikansitei.Location = New System.Drawing.Point(100, 22)
+        Me.txtJikansitei.Location = New System.Drawing.Point(100, 37)
         Me.txtJikansitei.Margin = New System.Windows.Forms.Padding(0)
         Me.txtJikansitei.MaxLength = 30
         Me.txtJikansitei.Name = "txtJikansitei"
-        Me.txtJikansitei.Size = New System.Drawing.Size(200, 22)
+        Me.txtJikansitei.Size = New System.Drawing.Size(200, 37)
         Me.txtJikansitei.TabIndex = 4
         '
         'Label8
@@ -2912,7 +2912,7 @@ Public Class frmH01F60_Chumon
         Me.Label8.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.Label8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label8.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label8.Location = New System.Drawing.Point(0, 44)
+        Me.Label8.Location = New System.Drawing.Point(0, 74)
         Me.Label8.Margin = New System.Windows.Forms.Padding(0)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(100, 22)
@@ -2926,7 +2926,7 @@ Public Class frmH01F60_Chumon
         Me.Label9.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.Label9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label9.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label9.Location = New System.Drawing.Point(0, 0)
+        Me.Label9.Location = New System.Drawing.Point(0, 15)
         Me.Label9.Margin = New System.Windows.Forms.Padding(0)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(100, 22)
@@ -2940,7 +2940,7 @@ Public Class frmH01F60_Chumon
         Me.Label10.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.Label10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label10.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label10.Location = New System.Drawing.Point(0, 22)
+        Me.Label10.Location = New System.Drawing.Point(0, 52)
         Me.Label10.Margin = New System.Windows.Forms.Padding(0)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(100, 22)
@@ -2958,7 +2958,7 @@ Public Class frmH01F60_Chumon
         Me.txtIrainusi.Margin = New System.Windows.Forms.Padding(0)
         Me.txtIrainusi.MaxLength = 30
         Me.txtIrainusi.Name = "txtIrainusi"
-        Me.txtIrainusi.Size = New System.Drawing.Size(200, 22)
+        Me.txtIrainusi.Size = New System.Drawing.Size(200, 37)
         Me.txtIrainusi.TabIndex = 3
         '
         'TableLayoutPanel13
@@ -2992,7 +2992,7 @@ Public Class frmH01F60_Chumon
         Me.txtShukkaGrpNm.Margin = New System.Windows.Forms.Padding(0)
         Me.txtShukkaGrpNm.MaxLength = 100
         Me.txtShukkaGrpNm.Name = "txtShukkaGrpNm"
-        Me.txtShukkaGrpNm.Size = New System.Drawing.Size(306, 22)
+        Me.txtShukkaGrpNm.Size = New System.Drawing.Size(306, 37)
         Me.txtShukkaGrpNm.TabIndex = 5
         '
         'Label13
@@ -3058,7 +3058,7 @@ Public Class frmH01F60_Chumon
         Me.txtSeikyuNm.Margin = New System.Windows.Forms.Padding(0)
         Me.txtSeikyuNm.MaxLength = 100
         Me.txtSeikyuNm.Name = "txtSeikyuNm"
-        Me.txtSeikyuNm.Size = New System.Drawing.Size(306, 22)
+        Me.txtSeikyuNm.Size = New System.Drawing.Size(306, 37)
         Me.txtSeikyuNm.TabIndex = 2
         '
         'TableLayoutPanel25
@@ -3082,10 +3082,10 @@ Public Class frmH01F60_Chumon
         Me.Label46.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label46.AutoSize = True
         Me.Label46.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label46.Location = New System.Drawing.Point(97, 27)
+        Me.Label46.Location = New System.Drawing.Point(97, 12)
         Me.Label46.Margin = New System.Windows.Forms.Padding(3, 0, 3, 3)
         Me.Label46.Name = "Label46"
-        Me.Label46.Size = New System.Drawing.Size(15, 15)
+        Me.Label46.Size = New System.Drawing.Size(15, 30)
         Me.Label46.TabIndex = 4
         Me.Label46.Text = "件"
         '
@@ -3551,25 +3551,25 @@ Public Class frmH01F60_Chumon
         Me.dgvIchiran.AllowUserToAddRows = False
         Me.dgvIchiran.AllowUserToDeleteRows = False
         Me.dgvIchiran.AllowUserToResizeRows = False
-        DataGridViewCellStyle47.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle47.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle47.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        DataGridViewCellStyle47.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle47.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle47.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle47.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvIchiran.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle47
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvIchiran.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.dgvIchiran.ColumnHeadersHeight = 25
         Me.dgvIchiran.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.dgvIchiran.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.cnNo, Me.cnItemCd, Me.cnItemNm, Me.cnNisugata, Me.cnReiKbn, Me.cnZeiKbn, Me.cnIrisuu, Me.cnKosuu, Me.cnSuryou, Me.cnTanni, Me.cnUriTanka, Me.cnUriKingaku, Me.cnMeisaiBikou, Me.cnKonpou, Me.cnReiCD, Me.cnZeiKbnCD, Me.cnKonpouCD, Me.cnTaxRate, Me.cnTaxExclusion, Me.cnTaxAble, Me.cnTaxAmount})
-        DataGridViewCellStyle69.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle69.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle69.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
-        DataGridViewCellStyle69.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle69.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle69.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle69.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvIchiran.DefaultCellStyle = DataGridViewCellStyle69
+        DataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle23.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle23.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        DataGridViewCellStyle23.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle23.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle23.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvIchiran.DefaultCellStyle = DataGridViewCellStyle23
         Me.dgvIchiran.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgvIchiran.EnableHeadersVisualStyles = False
         Me.dgvIchiran.ImeMode = System.Windows.Forms.ImeMode.NoControl
@@ -3587,11 +3587,11 @@ Public Class frmH01F60_Chumon
         'cnNo
         '
         Me.cnNo.DataPropertyName = "dtNo"
-        DataGridViewCellStyle48.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle48.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle48.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
-        DataGridViewCellStyle48.ForeColor = System.Drawing.Color.Black
-        Me.cnNo.DefaultCellStyle = DataGridViewCellStyle48
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
+        Me.cnNo.DefaultCellStyle = DataGridViewCellStyle2
         Me.cnNo.HeaderText = "No."
         Me.cnNo.Name = "cnNo"
         Me.cnNo.ReadOnly = True
@@ -3603,13 +3603,13 @@ Public Class frmH01F60_Chumon
         'cnItemCd
         '
         Me.cnItemCd.DataPropertyName = "dtItemCd"
-        DataGridViewCellStyle49.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle49.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle49.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
-        DataGridViewCellStyle49.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle49.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle49.SelectionForeColor = System.Drawing.Color.Black
-        Me.cnItemCd.DefaultCellStyle = DataGridViewCellStyle49
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black
+        Me.cnItemCd.DefaultCellStyle = DataGridViewCellStyle3
         Me.cnItemCd.HeaderText = "商品CD"
         Me.cnItemCd.MaxInputLength = 5
         Me.cnItemCd.Name = "cnItemCd"
@@ -3622,8 +3622,8 @@ Public Class frmH01F60_Chumon
         'cnItemNm
         '
         Me.cnItemNm.DataPropertyName = "dtItemNm"
-        DataGridViewCellStyle50.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
-        Me.cnItemNm.DefaultCellStyle = DataGridViewCellStyle50
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        Me.cnItemNm.DefaultCellStyle = DataGridViewCellStyle4
         Me.cnItemNm.HeaderText = "商品名"
         Me.cnItemNm.Name = "cnItemNm"
         Me.cnItemNm.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
@@ -3634,8 +3634,8 @@ Public Class frmH01F60_Chumon
         'cnNisugata
         '
         Me.cnNisugata.DataPropertyName = "dtNisugata"
-        DataGridViewCellStyle51.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
-        Me.cnNisugata.DefaultCellStyle = DataGridViewCellStyle51
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        Me.cnNisugata.DefaultCellStyle = DataGridViewCellStyle5
         Me.cnNisugata.HeaderText = "荷姿・形状"
         Me.cnNisugata.MaxInputLength = 50
         Me.cnNisugata.Name = "cnNisugata"
@@ -3647,13 +3647,13 @@ Public Class frmH01F60_Chumon
         'cnReiKbn
         '
         Me.cnReiKbn.DataPropertyName = "dtReiKbn"
-        DataGridViewCellStyle52.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle52.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle52.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
-        DataGridViewCellStyle52.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle52.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle52.SelectionForeColor = System.Drawing.Color.Black
-        Me.cnReiKbn.DefaultCellStyle = DataGridViewCellStyle52
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black
+        Me.cnReiKbn.DefaultCellStyle = DataGridViewCellStyle6
         Me.cnReiKbn.HeaderText = "冷"
         Me.cnReiKbn.Name = "cnReiKbn"
         Me.cnReiKbn.ReadOnly = True
@@ -3663,13 +3663,13 @@ Public Class frmH01F60_Chumon
         'cnZeiKbn
         '
         Me.cnZeiKbn.DataPropertyName = "dtZeiKbn"
-        DataGridViewCellStyle53.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle53.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle53.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
-        DataGridViewCellStyle53.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle53.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle53.SelectionForeColor = System.Drawing.Color.Black
-        Me.cnZeiKbn.DefaultCellStyle = DataGridViewCellStyle53
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        DataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black
+        Me.cnZeiKbn.DefaultCellStyle = DataGridViewCellStyle7
         Me.cnZeiKbn.HeaderText = "税"
         Me.cnZeiKbn.Name = "cnZeiKbn"
         Me.cnZeiKbn.ReadOnly = True
@@ -3681,10 +3681,10 @@ Public Class frmH01F60_Chumon
         'cnIrisuu
         '
         Me.cnIrisuu.DataPropertyName = "dtIrisuu"
-        DataGridViewCellStyle54.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle54.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        DataGridViewCellStyle54.Format = "N2"
-        Me.cnIrisuu.DefaultCellStyle = DataGridViewCellStyle54
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle8.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle8.Format = "N2"
+        Me.cnIrisuu.DefaultCellStyle = DataGridViewCellStyle8
         Me.cnIrisuu.HeaderText = "入数"
         Me.cnIrisuu.MaxInputLength = 11
         Me.cnIrisuu.Name = "cnIrisuu"
@@ -3696,10 +3696,10 @@ Public Class frmH01F60_Chumon
         'cnKosuu
         '
         Me.cnKosuu.DataPropertyName = "dtKosuu"
-        DataGridViewCellStyle55.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle55.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        DataGridViewCellStyle55.Format = "N0"
-        Me.cnKosuu.DefaultCellStyle = DataGridViewCellStyle55
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle9.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle9.Format = "N0"
+        Me.cnKosuu.DefaultCellStyle = DataGridViewCellStyle9
         Me.cnKosuu.HeaderText = "個数"
         Me.cnKosuu.MaxInputLength = 6
         Me.cnKosuu.Name = "cnKosuu"
@@ -3711,10 +3711,10 @@ Public Class frmH01F60_Chumon
         'cnSuryou
         '
         Me.cnSuryou.DataPropertyName = "dtSuryou"
-        DataGridViewCellStyle56.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle56.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        DataGridViewCellStyle56.Format = "N2"
-        Me.cnSuryou.DefaultCellStyle = DataGridViewCellStyle56
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle10.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle10.Format = "N2"
+        Me.cnSuryou.DefaultCellStyle = DataGridViewCellStyle10
         Me.cnSuryou.HeaderText = "数量"
         Me.cnSuryou.MaxInputLength = 11
         Me.cnSuryou.Name = "cnSuryou"
@@ -3726,13 +3726,13 @@ Public Class frmH01F60_Chumon
         'cnTanni
         '
         Me.cnTanni.DataPropertyName = "dtTanni"
-        DataGridViewCellStyle57.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle57.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle57.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
-        DataGridViewCellStyle57.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle57.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle57.SelectionForeColor = System.Drawing.Color.Black
-        Me.cnTanni.DefaultCellStyle = DataGridViewCellStyle57
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle11.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        DataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.Black
+        Me.cnTanni.DefaultCellStyle = DataGridViewCellStyle11
         Me.cnTanni.HeaderText = "単位"
         Me.cnTanni.Name = "cnTanni"
         Me.cnTanni.ReadOnly = True
@@ -3744,10 +3744,10 @@ Public Class frmH01F60_Chumon
         'cnUriTanka
         '
         Me.cnUriTanka.DataPropertyName = "dtUriTanka"
-        DataGridViewCellStyle58.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle58.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        DataGridViewCellStyle58.Format = "N2"
-        Me.cnUriTanka.DefaultCellStyle = DataGridViewCellStyle58
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle12.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle12.Format = "N2"
+        Me.cnUriTanka.DefaultCellStyle = DataGridViewCellStyle12
         Me.cnUriTanka.HeaderText = "売上単価"
         Me.cnUriTanka.MaxInputLength = 15
         Me.cnUriTanka.Name = "cnUriTanka"
@@ -3758,10 +3758,10 @@ Public Class frmH01F60_Chumon
         'cnUriKingaku
         '
         Me.cnUriKingaku.DataPropertyName = "dtUriKingaku"
-        DataGridViewCellStyle59.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle59.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        DataGridViewCellStyle59.Format = "N0"
-        Me.cnUriKingaku.DefaultCellStyle = DataGridViewCellStyle59
+        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle13.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle13.Format = "N0"
+        Me.cnUriKingaku.DefaultCellStyle = DataGridViewCellStyle13
         Me.cnUriKingaku.HeaderText = "売上金額"
         Me.cnUriKingaku.MaxInputLength = 12
         Me.cnUriKingaku.Name = "cnUriKingaku"
@@ -3772,8 +3772,8 @@ Public Class frmH01F60_Chumon
         'cnMeisaiBikou
         '
         Me.cnMeisaiBikou.DataPropertyName = "dtMeisaiBikou"
-        DataGridViewCellStyle60.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
-        Me.cnMeisaiBikou.DefaultCellStyle = DataGridViewCellStyle60
+        DataGridViewCellStyle14.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        Me.cnMeisaiBikou.DefaultCellStyle = DataGridViewCellStyle14
         Me.cnMeisaiBikou.HeaderText = "明細備考"
         Me.cnMeisaiBikou.MaxInputLength = 100
         Me.cnMeisaiBikou.Name = "cnMeisaiBikou"
@@ -3785,13 +3785,13 @@ Public Class frmH01F60_Chumon
         'cnKonpou
         '
         Me.cnKonpou.DataPropertyName = "dtKonpou"
-        DataGridViewCellStyle61.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle61.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle61.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
-        DataGridViewCellStyle61.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle61.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle61.SelectionForeColor = System.Drawing.Color.Black
-        Me.cnKonpou.DefaultCellStyle = DataGridViewCellStyle61
+        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle15.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle15.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        DataGridViewCellStyle15.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.Black
+        Me.cnKonpou.DefaultCellStyle = DataGridViewCellStyle15
         Me.cnKonpou.HeaderText = "梱包"
         Me.cnKonpou.Name = "cnKonpou"
         Me.cnKonpou.ReadOnly = True
@@ -3803,8 +3803,8 @@ Public Class frmH01F60_Chumon
         'cnReiCD
         '
         Me.cnReiCD.DataPropertyName = "dtReiCD"
-        DataGridViewCellStyle62.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
-        Me.cnReiCD.DefaultCellStyle = DataGridViewCellStyle62
+        DataGridViewCellStyle16.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        Me.cnReiCD.DefaultCellStyle = DataGridViewCellStyle16
         Me.cnReiCD.HeaderText = "冷凍区分"
         Me.cnReiCD.Name = "cnReiCD"
         Me.cnReiCD.TabStop = True
@@ -3813,8 +3813,8 @@ Public Class frmH01F60_Chumon
         'cnZeiKbnCD
         '
         Me.cnZeiKbnCD.DataPropertyName = "dtZeiKbnCD"
-        DataGridViewCellStyle63.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
-        Me.cnZeiKbnCD.DefaultCellStyle = DataGridViewCellStyle63
+        DataGridViewCellStyle17.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        Me.cnZeiKbnCD.DefaultCellStyle = DataGridViewCellStyle17
         Me.cnZeiKbnCD.HeaderText = "課税区分"
         Me.cnZeiKbnCD.Name = "cnZeiKbnCD"
         Me.cnZeiKbnCD.TabStop = True
@@ -3823,8 +3823,8 @@ Public Class frmH01F60_Chumon
         'cnKonpouCD
         '
         Me.cnKonpouCD.DataPropertyName = "dtKonpouCD"
-        DataGridViewCellStyle64.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
-        Me.cnKonpouCD.DefaultCellStyle = DataGridViewCellStyle64
+        DataGridViewCellStyle18.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        Me.cnKonpouCD.DefaultCellStyle = DataGridViewCellStyle18
         Me.cnKonpouCD.HeaderText = "梱包区分"
         Me.cnKonpouCD.Name = "cnKonpouCD"
         Me.cnKonpouCD.TabStop = True
@@ -3833,8 +3833,8 @@ Public Class frmH01F60_Chumon
         'cnTaxRate
         '
         Me.cnTaxRate.DataPropertyName = "dtTaxRate"
-        DataGridViewCellStyle65.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
-        Me.cnTaxRate.DefaultCellStyle = DataGridViewCellStyle65
+        DataGridViewCellStyle19.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        Me.cnTaxRate.DefaultCellStyle = DataGridViewCellStyle19
         Me.cnTaxRate.HeaderText = "税率"
         Me.cnTaxRate.Name = "cnTaxRate"
         Me.cnTaxRate.TabStop = True
@@ -3843,8 +3843,8 @@ Public Class frmH01F60_Chumon
         'cnTaxExclusion
         '
         Me.cnTaxExclusion.DataPropertyName = "dtTaxExclusion"
-        DataGridViewCellStyle66.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.cnTaxExclusion.DefaultCellStyle = DataGridViewCellStyle66
+        DataGridViewCellStyle20.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.cnTaxExclusion.DefaultCellStyle = DataGridViewCellStyle20
         Me.cnTaxExclusion.HeaderText = "税抜額"
         Me.cnTaxExclusion.Name = "cnTaxExclusion"
         Me.cnTaxExclusion.TabStop = True
@@ -3853,8 +3853,8 @@ Public Class frmH01F60_Chumon
         'cnTaxAble
         '
         Me.cnTaxAble.DataPropertyName = "dtTaxAble"
-        DataGridViewCellStyle67.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.cnTaxAble.DefaultCellStyle = DataGridViewCellStyle67
+        DataGridViewCellStyle21.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.cnTaxAble.DefaultCellStyle = DataGridViewCellStyle21
         Me.cnTaxAble.HeaderText = "課税対象額"
         Me.cnTaxAble.Name = "cnTaxAble"
         Me.cnTaxAble.TabStop = True
@@ -3863,8 +3863,8 @@ Public Class frmH01F60_Chumon
         'cnTaxAmount
         '
         Me.cnTaxAmount.DataPropertyName = "dtTaxAmount"
-        DataGridViewCellStyle68.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.cnTaxAmount.DefaultCellStyle = DataGridViewCellStyle68
+        DataGridViewCellStyle22.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.cnTaxAmount.DefaultCellStyle = DataGridViewCellStyle22
         Me.cnTaxAmount.HeaderText = "消費税額"
         Me.cnTaxAmount.Name = "cnTaxAmount"
         Me.cnTaxAmount.TabStop = True

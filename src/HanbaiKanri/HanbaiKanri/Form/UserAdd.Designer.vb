@@ -39,62 +39,63 @@ Partial Class UserAdd
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.BtnBack = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'TextBox1
         '
         Me.TextBox1.Location = New System.Drawing.Point(101, 33)
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(234, 19)
+        Me.TextBox1.Size = New System.Drawing.Size(271, 19)
         Me.TextBox1.TabIndex = 0
         '
         'TextBox2
         '
         Me.TextBox2.Location = New System.Drawing.Point(101, 68)
         Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(234, 19)
+        Me.TextBox2.Size = New System.Drawing.Size(271, 19)
         Me.TextBox2.TabIndex = 1
         '
         'TextBox3
         '
         Me.TextBox3.Location = New System.Drawing.Point(101, 106)
         Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(234, 19)
+        Me.TextBox3.Size = New System.Drawing.Size(271, 19)
         Me.TextBox3.TabIndex = 2
         '
         'TextBox4
         '
         Me.TextBox4.Location = New System.Drawing.Point(101, 143)
         Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(234, 19)
+        Me.TextBox4.Size = New System.Drawing.Size(271, 19)
         Me.TextBox4.TabIndex = 3
         '
         'TextBox5
         '
         Me.TextBox5.Location = New System.Drawing.Point(101, 181)
         Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.Size = New System.Drawing.Size(234, 19)
+        Me.TextBox5.Size = New System.Drawing.Size(271, 19)
         Me.TextBox5.TabIndex = 4
         '
         'TextBox6
         '
         Me.TextBox6.Location = New System.Drawing.Point(101, 220)
         Me.TextBox6.Name = "TextBox6"
-        Me.TextBox6.Size = New System.Drawing.Size(234, 19)
+        Me.TextBox6.Size = New System.Drawing.Size(271, 19)
         Me.TextBox6.TabIndex = 5
         '
         'TextBox7
         '
         Me.TextBox7.Location = New System.Drawing.Point(101, 259)
         Me.TextBox7.Name = "TextBox7"
-        Me.TextBox7.Size = New System.Drawing.Size(234, 19)
+        Me.TextBox7.Size = New System.Drawing.Size(271, 19)
         Me.TextBox7.TabIndex = 6
         '
         'TextBox8
         '
         Me.TextBox8.Location = New System.Drawing.Point(101, 295)
         Me.TextBox8.Name = "TextBox8"
-        Me.TextBox8.Size = New System.Drawing.Size(234, 19)
+        Me.TextBox8.Size = New System.Drawing.Size(271, 19)
         Me.TextBox8.TabIndex = 7
         '
         'Label1
@@ -171,18 +172,28 @@ Partial Class UserAdd
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(12, 337)
+        Me.Button1.Location = New System.Drawing.Point(197, 337)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(321, 23)
+        Me.Button1.Size = New System.Drawing.Size(175, 23)
         Me.Button1.TabIndex = 17
         Me.Button1.Text = "ユーザ追加"
         Me.Button1.UseVisualStyleBackColor = True
+        '
+        'BtnBack
+        '
+        Me.BtnBack.Location = New System.Drawing.Point(12, 337)
+        Me.BtnBack.Name = "BtnBack"
+        Me.BtnBack.Size = New System.Drawing.Size(175, 23)
+        Me.BtnBack.TabIndex = 18
+        Me.BtnBack.Text = "戻る"
+        Me.BtnBack.UseVisualStyleBackColor = True
         '
         'UserAdd
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(351, 388)
+        Me.ClientSize = New System.Drawing.Size(384, 381)
+        Me.Controls.Add(Me.BtnBack)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.Label7)
@@ -224,4 +235,5 @@ Partial Class UserAdd
     Friend WithEvents Label7 As Label
     Friend WithEvents Label8 As Label
     Friend WithEvents Button1 As Button
+    Friend WithEvents BtnBack As Button
 End Class

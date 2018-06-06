@@ -39,6 +39,7 @@ Partial Class UserEdit
         Me.TextBox7 = New System.Windows.Forms.TextBox()
         Me.TextBox8 = New System.Windows.Forms.TextBox()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.BtnBack = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'Label1
@@ -115,74 +116,84 @@ Partial Class UserEdit
         '
         'btn_userEdit
         '
-        Me.btn_userEdit.Location = New System.Drawing.Point(14, 228)
+        Me.btn_userEdit.Location = New System.Drawing.Point(197, 226)
         Me.btn_userEdit.Name = "btn_userEdit"
-        Me.btn_userEdit.Size = New System.Drawing.Size(158, 23)
+        Me.btn_userEdit.Size = New System.Drawing.Size(175, 23)
         Me.btn_userEdit.TabIndex = 16
         Me.btn_userEdit.Text = "変更"
         Me.btn_userEdit.UseVisualStyleBackColor = True
         '
         'TextBox2
         '
-        Me.TextBox2.Location = New System.Drawing.Point(72, 42)
+        Me.TextBox2.Location = New System.Drawing.Point(101, 42)
         Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(100, 19)
+        Me.TextBox2.Size = New System.Drawing.Size(271, 19)
         Me.TextBox2.TabIndex = 9
         '
         'TextBox3
         '
-        Me.TextBox3.Location = New System.Drawing.Point(72, 67)
+        Me.TextBox3.Location = New System.Drawing.Point(101, 67)
         Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(100, 19)
+        Me.TextBox3.Size = New System.Drawing.Size(271, 19)
         Me.TextBox3.TabIndex = 10
         '
         'TextBox4
         '
-        Me.TextBox4.Location = New System.Drawing.Point(72, 92)
+        Me.TextBox4.Location = New System.Drawing.Point(101, 92)
         Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(100, 19)
+        Me.TextBox4.Size = New System.Drawing.Size(271, 19)
         Me.TextBox4.TabIndex = 11
         '
         'TextBox5
         '
-        Me.TextBox5.Location = New System.Drawing.Point(72, 117)
+        Me.TextBox5.Location = New System.Drawing.Point(101, 117)
         Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.Size = New System.Drawing.Size(100, 19)
+        Me.TextBox5.Size = New System.Drawing.Size(271, 19)
         Me.TextBox5.TabIndex = 12
         '
         'TextBox6
         '
-        Me.TextBox6.Location = New System.Drawing.Point(72, 142)
+        Me.TextBox6.Location = New System.Drawing.Point(101, 142)
         Me.TextBox6.Name = "TextBox6"
-        Me.TextBox6.Size = New System.Drawing.Size(100, 19)
+        Me.TextBox6.Size = New System.Drawing.Size(271, 19)
         Me.TextBox6.TabIndex = 13
         '
         'TextBox7
         '
-        Me.TextBox7.Location = New System.Drawing.Point(72, 167)
+        Me.TextBox7.Location = New System.Drawing.Point(101, 167)
         Me.TextBox7.Name = "TextBox7"
-        Me.TextBox7.Size = New System.Drawing.Size(100, 19)
+        Me.TextBox7.Size = New System.Drawing.Size(271, 19)
         Me.TextBox7.TabIndex = 14
         '
         'TextBox8
         '
-        Me.TextBox8.Location = New System.Drawing.Point(72, 192)
+        Me.TextBox8.Location = New System.Drawing.Point(101, 192)
         Me.TextBox8.Name = "TextBox8"
-        Me.TextBox8.Size = New System.Drawing.Size(100, 19)
+        Me.TextBox8.Size = New System.Drawing.Size(271, 19)
         Me.TextBox8.TabIndex = 15
         '
         'TextBox1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(72, 17)
+        Me.TextBox1.Location = New System.Drawing.Point(101, 17)
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(100, 19)
+        Me.TextBox1.Size = New System.Drawing.Size(271, 19)
         Me.TextBox1.TabIndex = 8
+        '
+        'BtnBack
+        '
+        Me.BtnBack.Location = New System.Drawing.Point(12, 226)
+        Me.BtnBack.Name = "BtnBack"
+        Me.BtnBack.Size = New System.Drawing.Size(175, 23)
+        Me.BtnBack.TabIndex = 17
+        Me.BtnBack.Text = "戻る"
+        Me.BtnBack.UseVisualStyleBackColor = True
         '
         'UserEdit
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(194, 263)
+        Me.ClientSize = New System.Drawing.Size(384, 261)
+        Me.Controls.Add(Me.BtnBack)
         Me.Controls.Add(Me.btn_userEdit)
         Me.Controls.Add(Me.TextBox8)
         Me.Controls.Add(Me.TextBox7)
@@ -224,4 +235,5 @@ Partial Class UserEdit
     Friend WithEvents TextBox7 As TextBox
     Friend WithEvents TextBox8 As TextBox
     Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents BtnBack As Button
 End Class

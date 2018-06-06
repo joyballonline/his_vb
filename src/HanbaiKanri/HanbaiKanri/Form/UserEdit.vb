@@ -176,4 +176,11 @@ Public Class UserEdit
             Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", UtilClass.getErrDetail(ex)))
         End Try
     End Sub
+
+    Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
+        Dim MstUser As MstUser
+        MstUser = New MstUser(_msgHd, _db)
+        MstUser.Show()
+        Me.Close()
+    End Sub
 End Class

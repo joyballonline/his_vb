@@ -170,4 +170,11 @@ Public Class SupplierAdd
             Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", UtilClass.getErrDetail(ex)))
         End Try
     End Sub
+
+    Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
+        Dim MstSupplier As MstSupplier
+        MstSupplier = New MstSupplier(_msgHd, _db)
+        MstSupplier.Show()
+        Me.Close()
+    End Sub
 End Class

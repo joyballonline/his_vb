@@ -51,12 +51,15 @@ Partial Class CustomerEdit
         Me.CustomerName = New System.Windows.Forms.TextBox()
         Me.CustomerCode = New System.Windows.Forms.TextBox()
         Me.CompanyCode = New System.Windows.Forms.TextBox()
+        Me.btnBack = New System.Windows.Forms.Button()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.Position = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
         'Label14
         '
         Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(383, 159)
+        Me.Label14.Location = New System.Drawing.Point(12, 187)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(22, 12)
         Me.Label14.TabIndex = 77
@@ -65,7 +68,7 @@ Partial Class CustomerEdit
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(12, 162)
+        Me.Label13.Location = New System.Drawing.Point(383, 159)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(77, 12)
         Me.Label13.TabIndex = 76
@@ -109,14 +112,14 @@ Partial Class CustomerEdit
         '
         'Memo
         '
-        Me.Memo.Location = New System.Drawing.Point(472, 156)
+        Me.Memo.Location = New System.Drawing.Point(101, 184)
         Me.Memo.Name = "Memo"
         Me.Memo.Size = New System.Drawing.Size(234, 19)
         Me.Memo.TabIndex = 71
         '
         'PaymentTerms
         '
-        Me.PaymentTerms.Location = New System.Drawing.Point(101, 159)
+        Me.PaymentTerms.Location = New System.Drawing.Point(472, 156)
         Me.PaymentTerms.Name = "PaymentTerms"
         Me.PaymentTerms.Size = New System.Drawing.Size(234, 19)
         Me.PaymentTerms.TabIndex = 70
@@ -151,9 +154,9 @@ Partial Class CustomerEdit
         '
         'btnEditCustomer
         '
-        Me.btnEditCustomer.Location = New System.Drawing.Point(12, 197)
+        Me.btnEditCustomer.Location = New System.Drawing.Point(383, 215)
         Me.btnEditCustomer.Name = "btnEditCustomer"
-        Me.btnEditCustomer.Size = New System.Drawing.Size(692, 23)
+        Me.btnEditCustomer.Size = New System.Drawing.Size(321, 23)
         Me.btnEditCustomer.TabIndex = 65
         Me.btnEditCustomer.Text = "得意先追加"
         Me.btnEditCustomer.UseVisualStyleBackColor = True
@@ -262,7 +265,7 @@ Partial Class CustomerEdit
         '
         Me.CustomerShortName.Location = New System.Drawing.Point(470, 31)
         Me.CustomerShortName.Name = "CustomerShortName"
-        Me.CustomerShortName.Size = New System.Drawing.Size(234, 19)
+        Me.CustomerShortName.Size = New System.Drawing.Size(236, 19)
         Me.CustomerShortName.TabIndex = 52
         '
         'CustomerName
@@ -276,7 +279,7 @@ Partial Class CustomerEdit
         '
         Me.CustomerCode.Location = New System.Drawing.Point(470, 6)
         Me.CustomerCode.Name = "CustomerCode"
-        Me.CustomerCode.Size = New System.Drawing.Size(234, 19)
+        Me.CustomerCode.Size = New System.Drawing.Size(236, 19)
         Me.CustomerCode.TabIndex = 50
         '
         'CompanyCode
@@ -286,11 +289,39 @@ Partial Class CustomerEdit
         Me.CompanyCode.Size = New System.Drawing.Size(234, 19)
         Me.CompanyCode.TabIndex = 49
         '
+        'btnBack
+        '
+        Me.btnBack.Location = New System.Drawing.Point(14, 215)
+        Me.btnBack.Name = "btnBack"
+        Me.btnBack.Size = New System.Drawing.Size(321, 23)
+        Me.btnBack.TabIndex = 78
+        Me.btnBack.Text = "戻る"
+        Me.btnBack.UseVisualStyleBackColor = True
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Location = New System.Drawing.Point(12, 162)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(65, 12)
+        Me.Label15.TabIndex = 80
+        Me.Label15.Text = "担当者役職"
+        '
+        'Position
+        '
+        Me.Position.Location = New System.Drawing.Point(101, 159)
+        Me.Position.Name = "Position"
+        Me.Position.Size = New System.Drawing.Size(234, 19)
+        Me.Position.TabIndex = 79
+        '
         'CustomerEdit
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(718, 240)
+        Me.Controls.Add(Me.Label15)
+        Me.Controls.Add(Me.Position)
+        Me.Controls.Add(Me.btnBack)
         Me.Controls.Add(Me.Label14)
         Me.Controls.Add(Me.Label13)
         Me.Controls.Add(Me.Label12)
@@ -356,4 +387,7 @@ Partial Class CustomerEdit
     Friend WithEvents CustomerName As TextBox
     Friend WithEvents CustomerCode As TextBox
     Friend WithEvents CompanyCode As TextBox
+    Friend WithEvents btnBack As Button
+    Friend WithEvents Label15 As Label
+    Friend WithEvents Position As TextBox
 End Class

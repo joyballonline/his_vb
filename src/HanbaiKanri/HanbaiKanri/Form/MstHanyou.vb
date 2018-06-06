@@ -65,75 +65,54 @@ Public Class MstHanyou
         Try
             Sql += "SELECT "
             Sql += "会社コード, "
-            Sql += "会社名, "
-            Sql += "会社略称, "
-            Sql += "郵便番号, "
-            Sql += "住所１, "
-            Sql += "住所２, "
-            Sql += "住所３, "
-            Sql += "電話番号, "
-            Sql += "ＦＡＸ番号, "
-            Sql += "代表者役職, "
-            Sql += "代表者名, "
+            Sql += "固定キー, "
+            Sql += "可変キー, "
             Sql += "表示順, "
-            Sql += "備考, "
-            Sql += "銀行コード, "
-            Sql += "支店コード, "
-            Sql += "預金種目, "
-            Sql += "口座番号, "
-            Sql += "口座名義, "
+            Sql += "文字１, "
+            Sql += "文字２, "
+            Sql += "文字３, "
+            Sql += "文字４, "
+            Sql += "文字５, "
+            Sql += "文字６, "
+            Sql += "数値１, "
+            Sql += "数値２, "
+            Sql += "数値３, "
+            Sql += "数値４, "
+            Sql += "数値５, "
+            Sql += "数値６, "
+            Sql += "メモ, "
             Sql += "更新者, "
             Sql += "更新日 "
             Sql += "FROM "
             Sql += "public"
             Sql += "."
-            Sql += "m01_company"
+            Sql += "m90_hanyo"
 
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
 
             For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-                Dgv_Company.Rows.Add()
-                Dgv_Company.Rows(index).Cells(0).Value = ds.Tables(RS).Rows(index)(0)        '会社コード
-                Dgv_Company.Rows(index).Cells(1).Value = ds.Tables(RS).Rows(index)(1)        '言語コード
-                Dgv_Company.Rows(index).Cells(2).Value = ds.Tables(RS).Rows(index)(2)        '氏名
-                Dgv_Company.Rows(index).Cells(3).Value = ds.Tables(RS).Rows(index)(3)      '略名
-                Dgv_Company.Rows(index).Cells(4).Value = ds.Tables(RS).Rows(index)(4)      '備考
-                Dgv_Company.Rows(index).Cells(5).Value = ds.Tables(RS).Rows(index)(5)      '無効フラグ
-                Dgv_Company.Rows(index).Cells(6).Value = ds.Tables(RS).Rows(index)(6)      '更新者
-                Dgv_Company.Rows(index).Cells(7).Value = ds.Tables(RS).Rows(index)(7)      '更新日
-                Dgv_Company.Rows(index).Cells(8).Value = ds.Tables(RS).Rows(index)(8)        '会社コード
-                Dgv_Company.Rows(index).Cells(9).Value = ds.Tables(RS).Rows(index)(9)        '言語コード
-                Dgv_Company.Rows(index).Cells(10).Value = ds.Tables(RS).Rows(index)(10)        '氏名
-                Dgv_Company.Rows(index).Cells(11).Value = ds.Tables(RS).Rows(index)(11)      '略名
-                Dgv_Company.Rows(index).Cells(12).Value = ds.Tables(RS).Rows(index)(12)      '備考
-                Dgv_Company.Rows(index).Cells(13).Value = ds.Tables(RS).Rows(index)(13)      '無効フラグ
-                Dgv_Company.Rows(index).Cells(14).Value = ds.Tables(RS).Rows(index)(14)      '更新者
-                Dgv_Company.Rows(index).Cells(15).Value = ds.Tables(RS).Rows(index)(15)      '更新日
-                Dgv_Company.Rows(index).Cells(16).Value = ds.Tables(RS).Rows(index)(16)      '備考
-                Dgv_Company.Rows(index).Cells(17).Value = ds.Tables(RS).Rows(index)(17)      '無効フラグ
-                Dgv_Company.Rows(index).Cells(18).Value = ds.Tables(RS).Rows(index)(18)      '更新者
-                Dgv_Company.Rows(index).Cells(19).Value = ds.Tables(RS).Rows(index)(19)      '更新日
+                Dgv_Hanyo.Rows.Add()
+                Dgv_Hanyo.Rows(index).Cells(0).Value = ds.Tables(RS).Rows(index)(0)        '会社コード
+                Dgv_Hanyo.Rows(index).Cells(1).Value = ds.Tables(RS).Rows(index)(1)        '言語コード
+                Dgv_Hanyo.Rows(index).Cells(2).Value = ds.Tables(RS).Rows(index)(2)        '氏名
+                Dgv_Hanyo.Rows(index).Cells(3).Value = ds.Tables(RS).Rows(index)(3)      '略名
+                Dgv_Hanyo.Rows(index).Cells(4).Value = ds.Tables(RS).Rows(index)(4)      '備考
+                Dgv_Hanyo.Rows(index).Cells(5).Value = ds.Tables(RS).Rows(index)(5)      '無効フラグ
+                Dgv_Hanyo.Rows(index).Cells(6).Value = ds.Tables(RS).Rows(index)(6)      '更新者
+                Dgv_Hanyo.Rows(index).Cells(7).Value = ds.Tables(RS).Rows(index)(7)      '更新日
+                Dgv_Hanyo.Rows(index).Cells(8).Value = ds.Tables(RS).Rows(index)(8)        '会社コード
+                Dgv_Hanyo.Rows(index).Cells(9).Value = ds.Tables(RS).Rows(index)(9)        '言語コード
+                Dgv_Hanyo.Rows(index).Cells(10).Value = ds.Tables(RS).Rows(index)(10)        '氏名
+                Dgv_Hanyo.Rows(index).Cells(11).Value = ds.Tables(RS).Rows(index)(11)      '略名
+                Dgv_Hanyo.Rows(index).Cells(12).Value = ds.Tables(RS).Rows(index)(12)      '備考
+                Dgv_Hanyo.Rows(index).Cells(13).Value = ds.Tables(RS).Rows(index)(13)      '無効フラグ
+                Dgv_Hanyo.Rows(index).Cells(14).Value = ds.Tables(RS).Rows(index)(14)      '更新者
+                Dgv_Hanyo.Rows(index).Cells(15).Value = ds.Tables(RS).Rows(index)(15)      '更新日
+                Dgv_Hanyo.Rows(index).Cells(16).Value = ds.Tables(RS).Rows(index)(16)      '備考
+                Dgv_Hanyo.Rows(index).Cells(17).Value = ds.Tables(RS).Rows(index)(17)      '無効フラグ
+                Dgv_Hanyo.Rows(index).Cells(18).Value = ds.Tables(RS).Rows(index)(18)      '更新者
             Next
-
-            CompanyCode.Text = Dgv_Company.Rows(0).Cells(0).Value
-            CompanyName.Text = Dgv_Company.Rows(0).Cells(1).Value
-            CompanyShortName.Text = Dgv_Company.Rows(0).Cells(2).Value
-            PostalCode.Text = Dgv_Company.Rows(0).Cells(3).Value
-            Address1.Text = Dgv_Company.Rows(0).Cells(4).Value
-            Address2.Text = Dgv_Company.Rows(0).Cells(5).Value
-            Address3.Text = Dgv_Company.Rows(0).Cells(6).Value
-            Tel.Text = Dgv_Company.Rows(0).Cells(7).Value
-            Fax.Text = Dgv_Company.Rows(0).Cells(8).Value
-            RepresentativePosition.Text = Dgv_Company.Rows(0).Cells(9).Value
-            RepresentativeName.Text = Dgv_Company.Rows(0).Cells(10).Value
-            DisplayOrder.Text = Dgv_Company.Rows(0).Cells(11).Value
-            Remarks.Text = Dgv_Company.Rows(0).Cells(12).Value
-            BankCode.Text = Dgv_Company.Rows(0).Cells(13).Value
-            BranchOfficeCode.Text = Dgv_Company.Rows(0).Cells(14).Value
-            DepositCategory.Text = Dgv_Company.Rows(0).Cells(15).Value
-            AccountNumber.Text = Dgv_Company.Rows(0).Cells(16).Value
-            AccountName.Text = Dgv_Company.Rows(0).Cells(17).Value
 
         Catch ue As UsrDefException
             ue.dspMsg()
@@ -144,147 +123,105 @@ Public Class MstHanyou
         End Try
     End Sub
 
-    Private Sub btnEditCompany_Click(sender As Object, e As EventArgs) Handles btnEditCompany.Click
-        Dim dtToday As DateTime = DateTime.Now
+    Private Sub BtnSelect_Click(sender As Object, e As EventArgs) Handles BtnSelect.Click
         Try
-            Dim Sql As String = ""
+            'メニュー選択処理
+            Dim idx As Integer
+            Dim sc(18) As String
 
-            Sql = ""
-            Sql += "UPDATE "
-            Sql += "Public."
-            Sql += "m01_Company "
-            Sql += "SET "
-            Sql += " 会社コード"
-            Sql += " = '"
-            Sql += CompanyCode.Text
-            Sql += "', "
-            Sql += "会社名"
-            Sql += " = '"
-            Sql += CompanyName.Text
-            Sql += "', "
-            Sql += "会社略称"
-            Sql += " = '"
-            Sql += CompanyShortName.Text
-            Sql += "', "
-            Sql += "郵便番号"
-            Sql += " = '"
-            Sql += PostalCode.Text
-            Sql += "', "
-            Sql += "住所１"
-            Sql += " = '"
-            Sql += Address1.Text
-            Sql += "', "
-            Sql += "住所２"
-            Sql += " = '"
-            Sql += Address2.Text
-            Sql += "', "
-            Sql += "住所３"
-            Sql += " = '"
-            Sql += Address3.Text
-            Sql += "', "
-            Sql += "電話番号"
-            Sql += " = '"
-            Sql += Tel.Text
-            Sql += "', "
-            Sql += "ＦＡＸ番号"
-            Sql += " = '"
-            Sql += Fax.Text
-            Sql += "', "
-            Sql += "代表者役職"
-            Sql += " = '"
-            Sql += RepresentativePosition.Text
-            Sql += "', "
-            Sql += "代表者名"
-            Sql += " = '"
-            Sql += RepresentativeName.Text
-            Sql += "', "
-            Sql += "表示順"
-            Sql += " = '"
-            Sql += DisplayOrder.Text
-            Sql += "', "
-            Sql += "備考"
-            Sql += " = '"
-            Sql += Remarks.Text
-            Sql += "', "
-            Sql += "銀行コード"
-            Sql += " = '"
-            Sql += BankCode.Text
-            Sql += "', "
-            Sql += "支店コード"
-            Sql += " = '"
-            Sql += BranchOfficeCode.Text
-            Sql += "', "
-            Sql += "預金種目"
-            Sql += " = '"
-            Sql += DepositCategory.Text
-            Sql += "', "
-            Sql += "口座番号"
-            Sql += " = '"
-            Sql += AccountNumber.Text
-            Sql += "', "
-            Sql += "口座名義"
-            Sql += " = '"
-            Sql += AccountName.Text
-            Sql += "', "
-            Sql += "更新者"
-            Sql += " = '"
-            Sql += "Admin"
-            Sql += "', "
-            Sql += "更新日"
-            Sql += " = '"
-            Sql += dtToday
-            Sql += "' "
-            Sql += "WHERE"
-            Sql += " 会社コード"
-            Sql += "='"
-            Sql += CompanyCode.Text
-            Sql += "' "
-            Sql += "RETURNING 会社コード"
-            Sql += ", "
-            Sql += "会社名"
-            Sql += ", "
-            Sql += "会社略称"
-            Sql += ", "
-            Sql += "郵便番号"
-            Sql += ", "
-            Sql += "住所１"
-            Sql += ", "
-            Sql += "住所２"
-            Sql += ", "
-            Sql += "住所３"
-            Sql += ", "
-            Sql += "電話番号"
-            Sql += ", "
-            Sql += "ＦＡＸ番号"
-            Sql += ", "
-            Sql += "代表者役職"
-            Sql += ", "
-            Sql += "代表者名"
-            Sql += ", "
-            Sql += "表示順"
-            Sql += ", "
-            Sql += "備考"
-            Sql += ", "
-            Sql += "銀行コード"
-            Sql += ", "
-            Sql += "支店コード"
-            Sql += ", "
-            Sql += "預金種目"
-            Sql += ", "
-            Sql += "口座番号"
-            Sql += ", "
-            Sql += "口座名義"
-            Sql += ", "
-            Sql += "更新者"
-            Sql += ", "
-            Sql += "更新日"
+            '一覧選択行インデックスの取得
+            For Each c As DataGridViewRow In Dgv_Hanyo.SelectedRows
+                idx = c.Index
+                Exit For
+            Next c
 
-            _db.executeDB(Sql)
+            sc(0) = Dgv_Hanyo.Rows(idx).Cells(0).Value
+            sc(1) = Dgv_Hanyo.Rows(idx).Cells(1).Value
+            sc(2) = Dgv_Hanyo.Rows(idx).Cells(2).Value
+            sc(3) = Dgv_Hanyo.Rows(idx).Cells(3).Value
+            sc(4) = Dgv_Hanyo.Rows(idx).Cells(4).Value
+            sc(5) = Dgv_Hanyo.Rows(idx).Cells(5).Value
+            sc(6) = Dgv_Hanyo.Rows(idx).Cells(6).Value
+            sc(7) = Dgv_Hanyo.Rows(idx).Cells(7).Value
+            sc(8) = Dgv_Hanyo.Rows(idx).Cells(8).Value
+            sc(9) = Dgv_Hanyo.Rows(idx).Cells(9).Value
+            sc(10) = Dgv_Hanyo.Rows(idx).Cells(10).Value
+            sc(11) = Dgv_Hanyo.Rows(idx).Cells(11).Value
+            sc(12) = Dgv_Hanyo.Rows(idx).Cells(12).Value
+            sc(13) = Dgv_Hanyo.Rows(idx).Cells(13).Value
+            sc(14) = Dgv_Hanyo.Rows(idx).Cells(14).Value
+            sc(15) = Dgv_Hanyo.Rows(idx).Cells(15).Value
+            sc(16) = Dgv_Hanyo.Rows(idx).Cells(16).Value
+            sc(17) = Dgv_Hanyo.Rows(idx).Cells(17).Value
+            sc(18) = Dgv_Hanyo.Rows(idx).Cells(18).Value
 
-            Dim frmUM As frmC01F30_Menu
-            frmUM = New frmC01F30_Menu(_msgHd, _db)
-            frmUM.Show()
-            Me.Close()
+            Dim openForm As Form = Nothing
+            openForm = New HanyoEdit(_msgHd, _db, sc, sc(0), sc(1), sc(2))   '処理選択
+            openForm.Show()
+            Me.Hide()   ' 自分は隠れる
+
+        Catch ue As UsrDefException
+            ue.dspMsg()
+        Catch ex As Exception
+            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
+            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", UtilClass.getErrDetail(ex)))
+        End Try
+    End Sub
+
+    Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
+        Dim frmC01F30_Menu As frmC01F30_Menu
+        frmC01F30_Menu = New frmC01F30_Menu(_msgHd, _db)
+        frmC01F30_Menu.Show()
+        Me.Close()
+    End Sub
+
+    Private Sub BtnAdd_Click(sender As Object, e As EventArgs) Handles BtnAdd.Click
+        Dim openForm As Form = Nothing
+        openForm = New HanyoAdd(_msgHd, _db)   '処理選択
+        openForm.Show()
+        Me.Hide()   ' 自分は隠れる
+    End Sub
+
+    Private Sub BtnSearch_Click(sender As Object, e As EventArgs) Handles BtnSearch.Click
+        Dgv_Hanyo.Rows.Clear()
+
+        Dim Sql As String = ""
+        Try
+            Sql += "SELECT "
+            Sql += "* "
+            Sql += "FROM "
+            Sql += "public"
+            Sql += "."
+            Sql += "m90_hanyo"
+            Sql += " WHERE "
+            Sql += "会社コード"
+            Sql += " ILIKE "
+            Sql += "'%"
+            Sql += Search.Text
+            Sql += "%'"
+
+            Dim reccnt As Integer = 0
+            Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+            For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+                Dgv_Hanyo.Rows.Add()
+                Dgv_Hanyo.Rows(index).Cells(0).Value = ds.Tables(RS).Rows(index)(0)        '会社コード
+                Dgv_Hanyo.Rows(index).Cells(1).Value = ds.Tables(RS).Rows(index)(1)        '言語コード
+                Dgv_Hanyo.Rows(index).Cells(2).Value = ds.Tables(RS).Rows(index)(2)        '氏名
+                Dgv_Hanyo.Rows(index).Cells(3).Value = ds.Tables(RS).Rows(index)(3)      '略名
+                Dgv_Hanyo.Rows(index).Cells(4).Value = ds.Tables(RS).Rows(index)(4)      '備考
+                Dgv_Hanyo.Rows(index).Cells(5).Value = ds.Tables(RS).Rows(index)(5)      '無効フラグ
+                Dgv_Hanyo.Rows(index).Cells(6).Value = ds.Tables(RS).Rows(index)(6)      '更新者
+                Dgv_Hanyo.Rows(index).Cells(7).Value = ds.Tables(RS).Rows(index)(7)      '更新日
+                Dgv_Hanyo.Rows(index).Cells(8).Value = ds.Tables(RS).Rows(index)(8)        '会社コード
+                Dgv_Hanyo.Rows(index).Cells(9).Value = ds.Tables(RS).Rows(index)(9)        '言語コード
+                Dgv_Hanyo.Rows(index).Cells(10).Value = ds.Tables(RS).Rows(index)(10)        '氏名
+                Dgv_Hanyo.Rows(index).Cells(11).Value = ds.Tables(RS).Rows(index)(11)      '略名
+                Dgv_Hanyo.Rows(index).Cells(12).Value = ds.Tables(RS).Rows(index)(12)      '備考
+                Dgv_Hanyo.Rows(index).Cells(13).Value = ds.Tables(RS).Rows(index)(13)      '無効フラグ
+                Dgv_Hanyo.Rows(index).Cells(14).Value = ds.Tables(RS).Rows(index)(14)      '更新者
+                Dgv_Hanyo.Rows(index).Cells(15).Value = ds.Tables(RS).Rows(index)(15)      '更新日
+            Next
 
         Catch ue As UsrDefException
             ue.dspMsg()

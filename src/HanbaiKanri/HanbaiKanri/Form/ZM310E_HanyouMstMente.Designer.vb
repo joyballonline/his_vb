@@ -19,55 +19,55 @@ Partial Class ZM310E_HanyouMstMente
     'コード エディタを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ZM310E_HanyouMstMente))
-        Me.lblSeisakuNm = New System.Windows.Forms.Label
-        Me.dgvJuyousaki = New CustomTabStopDataGridView.TabStop.UtilTabStopDataGridView
-        Me.cnCd = New CustomTabStopDataGridView.TabStop.TabStopTextBoxColumn
-        Me.cnKahenCD = New CustomTabStopDataGridView.TabStop.TabStopTextBoxColumn
-        Me.cnMeisyou = New CustomTabStopDataGridView.TabStop.TabStopTextBoxColumn
-        Me.cnBiko = New CustomTabStopDataGridView.TabStop.TabStopTextBoxColumn
-        Me.cnUpdDate = New CustomTabStopDataGridView.TabStop.TabStopTextBoxColumn
-        Me.lblKensuu = New System.Windows.Forms.Label
-        Me.btnHensyuu = New System.Windows.Forms.Button
-        Me.btnTouroku = New System.Windows.Forms.Button
-        Me.btnModoru = New System.Windows.Forms.Button
-        Me.btnTuika = New System.Windows.Forms.Button
-        Me.Label2 = New System.Windows.Forms.Label
-        Me.lblKousinDate = New System.Windows.Forms.Label
-        Me.Label4 = New System.Windows.Forms.Label
-        Me.lblKoumokuSetumei = New System.Windows.Forms.Label
-        Me.dgvHanyouMst = New CustomTabStopDataGridView.TabStop.UtilTabStopDataGridView
-        Me.cnCheck = New CustomTabStopDataGridView.TabStop.TabStopCheckBoxColumn
-        Me.cnKahenKey = New CustomTabStopDataGridView.TabStop.TabStopTextBoxColumn
-        Me.cnMeisyou1 = New CustomTabStopDataGridView.TabStop.TabStopTextBoxColumn
-        Me.cnMeisyou2 = New CustomTabStopDataGridView.TabStop.TabStopTextBoxColumn
-        Me.cnMeisyou3 = New CustomTabStopDataGridView.TabStop.TabStopTextBoxColumn
-        Me.cnMeisyou4 = New CustomTabStopDataGridView.TabStop.TabStopTextBoxColumn
-        Me.cnMeisyou5 = New CustomTabStopDataGridView.TabStop.TabStopTextBoxColumn
-        Me.cnSuuti1 = New CustomTabStopDataGridView.TabStop.TabStopTextBoxColumn
-        Me.cnSuuti2 = New CustomTabStopDataGridView.TabStop.TabStopTextBoxColumn
-        Me.cnSuuti3 = New CustomTabStopDataGridView.TabStop.TabStopTextBoxColumn
-        Me.cnSuuti4 = New CustomTabStopDataGridView.TabStop.TabStopTextBoxColumn
-        Me.cnSuuti5 = New CustomTabStopDataGridView.TabStop.TabStopTextBoxColumn
-        Me.cnHyoujijun = New CustomTabStopDataGridView.TabStop.TabStopTextBoxColumn
-        Me.cnKoteiKey = New CustomTabStopDataGridView.TabStop.TabStopTextBoxColumn
+        Me.lblSeisakuNm = New System.Windows.Forms.Label()
+        Me.dgvJuyousaki = New CustomTabStopDataGridView.TabStop.UtilTabStopDataGridView()
+        Me.cnCd = New CustomTabStopDataGridView.TabStop.TabStopTextBoxColumn()
+        Me.cnKahenCD = New CustomTabStopDataGridView.TabStop.TabStopTextBoxColumn()
+        Me.cnMeisyou = New CustomTabStopDataGridView.TabStop.TabStopTextBoxColumn()
+        Me.cnBiko = New CustomTabStopDataGridView.TabStop.TabStopTextBoxColumn()
+        Me.cnUpdDate = New CustomTabStopDataGridView.TabStop.TabStopTextBoxColumn()
+        Me.lblKensuu = New System.Windows.Forms.Label()
+        Me.btnHensyuu = New System.Windows.Forms.Button()
+        Me.btnTouroku = New System.Windows.Forms.Button()
+        Me.btnModoru = New System.Windows.Forms.Button()
+        Me.btnTuika = New System.Windows.Forms.Button()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.lblKousinDate = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.lblKoumokuSetumei = New System.Windows.Forms.Label()
+        Me.dgvHanyouMst = New CustomTabStopDataGridView.TabStop.UtilTabStopDataGridView()
+        Me.cnCheck = New CustomTabStopDataGridView.TabStop.TabStopCheckBoxColumn()
+        Me.cnKahenKey = New CustomTabStopDataGridView.TabStop.TabStopTextBoxColumn()
+        Me.cnMeisyou1 = New CustomTabStopDataGridView.TabStop.TabStopTextBoxColumn()
+        Me.cnMeisyou2 = New CustomTabStopDataGridView.TabStop.TabStopTextBoxColumn()
+        Me.cnMeisyou3 = New CustomTabStopDataGridView.TabStop.TabStopTextBoxColumn()
+        Me.cnMeisyou4 = New CustomTabStopDataGridView.TabStop.TabStopTextBoxColumn()
+        Me.cnMeisyou5 = New CustomTabStopDataGridView.TabStop.TabStopTextBoxColumn()
+        Me.cnSuuti1 = New CustomTabStopDataGridView.TabStop.TabStopTextBoxColumn()
+        Me.cnSuuti2 = New CustomTabStopDataGridView.TabStop.TabStopTextBoxColumn()
+        Me.cnSuuti3 = New CustomTabStopDataGridView.TabStop.TabStopTextBoxColumn()
+        Me.cnSuuti4 = New CustomTabStopDataGridView.TabStop.TabStopTextBoxColumn()
+        Me.cnSuuti5 = New CustomTabStopDataGridView.TabStop.TabStopTextBoxColumn()
+        Me.cnHyoujijun = New CustomTabStopDataGridView.TabStop.TabStopTextBoxColumn()
+        Me.cnKoteiKey = New CustomTabStopDataGridView.TabStop.TabStopTextBoxColumn()
         CType(Me.dgvJuyousaki, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgvHanyouMst, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -514,7 +514,7 @@ Partial Class ZM310E_HanyouMstMente
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1272, 956)
+        Me.ClientSize = New System.Drawing.Size(1272, 815)
         Me.Controls.Add(Me.lblKoumokuSetumei)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.lblKousinDate)

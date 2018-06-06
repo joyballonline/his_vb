@@ -61,6 +61,7 @@ Partial Class SupplierAdd
         Me.BankCode = New System.Windows.Forms.TextBox()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.AccountName = New System.Windows.Forms.TextBox()
+        Me.BtnBack = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'Label14
@@ -161,9 +162,9 @@ Partial Class SupplierAdd
         '
         'btnAddSupplier
         '
-        Me.btnAddSupplier.Location = New System.Drawing.Point(12, 275)
+        Me.btnAddSupplier.Location = New System.Drawing.Point(385, 275)
         Me.btnAddSupplier.Name = "btnAddSupplier"
-        Me.btnAddSupplier.Size = New System.Drawing.Size(692, 23)
+        Me.btnAddSupplier.Size = New System.Drawing.Size(321, 23)
         Me.btnAddSupplier.TabIndex = 65
         Me.btnAddSupplier.Text = "仕入先追加"
         Me.btnAddSupplier.UseVisualStyleBackColor = True
@@ -376,11 +377,21 @@ Partial Class SupplierAdd
         Me.AccountName.Size = New System.Drawing.Size(234, 19)
         Me.AccountName.TabIndex = 86
         '
+        'BtnBack
+        '
+        Me.BtnBack.Location = New System.Drawing.Point(14, 275)
+        Me.BtnBack.Name = "BtnBack"
+        Me.BtnBack.Size = New System.Drawing.Size(321, 23)
+        Me.BtnBack.TabIndex = 88
+        Me.BtnBack.Text = "戻る"
+        Me.BtnBack.UseVisualStyleBackColor = True
+        '
         'SupplierAdd
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(721, 323)
+        Me.Controls.Add(Me.BtnBack)
         Me.Controls.Add(Me.Label19)
         Me.Controls.Add(Me.AccountName)
         Me.Controls.Add(Me.Label15)
@@ -466,4 +477,5 @@ Partial Class SupplierAdd
     Friend WithEvents BankCode As TextBox
     Friend WithEvents Label19 As Label
     Friend WithEvents AccountName As TextBox
+    Friend WithEvents BtnBack As Button
 End Class
