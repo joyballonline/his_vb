@@ -1210,7 +1210,7 @@ Public Class frmC01F30_Menu
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         Dim openForm As Form = Nothing
-        openForm = New QuoteRequest(_msgHd, _db)
+        openForm = New QuoteList(_msgHd, _db)
         openForm.Show()
         Me.Hide()
     End Sub

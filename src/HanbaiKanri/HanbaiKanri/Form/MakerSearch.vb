@@ -244,7 +244,7 @@ Public Class MakerSearch
     End Sub
 
     Private Sub BtnSelectMaker_Click(sender As Object, e As EventArgs) Handles BtnSelect.Click
-        Dim frm As QuoteRequest = CType(Me.Owner, QuoteRequest)
+        Dim frm As Quote = CType(Me.Owner, Quote)
         If LbMaker.SelectedIndex > -1 Then
             frm.DgvItemList.Rows(RowIdx).Cells(2).Value = LbMaker.SelectedItem
             If LbItem.SelectedIndex > -1 Then

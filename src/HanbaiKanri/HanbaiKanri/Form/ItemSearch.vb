@@ -102,7 +102,7 @@ Public Class ItemSearch
     End Sub
 
     Private Sub BtnSelectItem_Click(sender As Object, e As EventArgs) Handles BtnSelectItem.Click
-        Dim frm As QuoteRequest = CType(Me.Owner, QuoteRequest)
+        Dim frm As Quote = CType(Me.Owner, Quote)
         Dim RowIdx As Integer = Dgv_Item.CurrentCell.RowIndex
         frm.DgvItemList.Rows(idx).Cells(3).Value = Dgv_Item.Rows(RowIdx).Cells(0).Value
         frm.DgvItemList.Rows(idx).Cells(4).Value = Dgv_Item.Rows(RowIdx).Cells(1).Value

@@ -123,7 +123,7 @@ Public Class CustomerSearch
         Try
             'メニュー選択処理
             Dim idx As Integer
-            Dim frm As QuoteRequest = CType(Me.Owner, QuoteRequest)
+            Dim frm As Quote = CType(Me.Owner, Quote)
 
             '一覧選択行インデックスの取得
             For Each c As DataGridViewRow In Dgv_Customer.SelectedRows

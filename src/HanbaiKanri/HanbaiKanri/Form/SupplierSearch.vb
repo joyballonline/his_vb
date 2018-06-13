@@ -134,7 +134,7 @@ Public Class SupplierSearch
     Private Sub btnSupplierSelect_Click(sender As Object, e As EventArgs) Handles btnSupplierSelect.Click
         Try
             'メニュー選択処理
-            Dim frm As QuoteRequest = CType(Me.Owner, QuoteRequest)
+            Dim frm As Quote = CType(Me.Owner, Quote)
             Dim idx As Integer
 
             '一覧選択行インデックスの取得

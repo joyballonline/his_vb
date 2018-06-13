@@ -180,8 +180,8 @@ Public Class CompanySearch
     End Sub
 
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
-        Dim QuoteRequest As QuoteRequest
-        QuoteRequest = New QuoteRequest(_msgHd, _db)
+        Dim QuoteRequest As Quote
+        QuoteRequest = New Quote(_msgHd, _db)
         QuoteRequest.ShowDialog()
         Me.Close()
     End Sub
@@ -191,7 +191,7 @@ Public Class CompanySearch
             'メニュー選択処理
             Dim idx As Integer
             Dim sc(17) As String
-            Dim frm As QuoteRequest = CType(Me.Owner, QuoteRequest)
+            Dim frm As Quote = CType(Me.Owner, Quote)
 
             '一覧選択行インデックスの取得
             For Each c As DataGridViewRow In Dgv_Company.SelectedRows

@@ -223,10 +223,16 @@
     <Compile Include="Form\MstSupplier.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form\QuoteRequest.Designer.vb">
-      <DependentUpon>QuoteRequest.vb</DependentUpon>
+    <Compile Include="Form\Quote.Designer.vb">
+      <DependentUpon>Quote.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form\QuoteRequest.vb">
+    <Compile Include="Form\Quote.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\QuoteList.Designer.vb">
+      <DependentUpon>QuoteList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\QuoteList.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form\SupplierAdd.Designer.vb">
@@ -348,8 +354,11 @@
     <EmbeddedResource Include="Form\MstSupplier.resx">
       <DependentUpon>MstSupplier.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form\QuoteRequest.resx">
-      <DependentUpon>QuoteRequest.vb</DependentUpon>
+    <EmbeddedResource Include="Form\Quote.resx">
+      <DependentUpon>Quote.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\QuoteList.resx">
+      <DependentUpon>QuoteList.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\SupplierAdd.resx">
       <DependentUpon>SupplierAdd.vb</DependentUpon>
