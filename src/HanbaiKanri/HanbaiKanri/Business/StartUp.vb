@@ -13,6 +13,7 @@
 '-----------------------------------------------------------------------------------
 Imports UtilMDL
 Imports UtilMDL.MSG
+Imports UtilMDL.LANG
 Imports UtilMDL.API
 Imports UtilMDL.DB
 
@@ -21,6 +22,8 @@ Imports UtilMDL.DB
 '===================================================================================
 Public Class StartUp
 
+    Public Lang As String = "en"
+
     '-------------------------------------------------------------------------------
     '構造体宣言
     '-------------------------------------------------------------------------------
@@ -28,6 +31,7 @@ Public Class StartUp
         Public LogType As String                'ログレベル
         Public LogFilePath As String            'ログファイルパス(ファイル名も含む)
         Public MsgFileName As String            'メッセージファイル名
+        Public LangFileName As String           '言語ファイル名
         Public SVAddr As String                 'サーバ名（メインサーバ）
         Public PortNo As String                 'ポート番号（メインサーバ）
         Public DBName As String                 'ＤＢ（メインサーバ）
@@ -75,6 +79,7 @@ Public Class StartUp
     'ＩＮＩファイルのセクション名称
     Private Const INIITEM1_LOGFILE As String = "Logging"                                'ログレベル/ログファイル情報
     Private Const INIITEM1_MSGFILE As String = "msg File"                               'メッセージファイル情報
+    Private Const INIITEM1_LANGFILE As String = "lang File"                             '言語ファイル情報
     Private Const INIITEM1_DB As String = "DB"                                          'メインサーバDB接続情報
     Private Const INIITEM1_DB_STBY As String = "DB_Standby"                             'バックアップサーバDB接続情報
     Private Const INIITEM1_PRODUCT_INFO As String = "Product Info"                      'システム規定情報
@@ -84,6 +89,7 @@ Public Class StartUp
     Private Const INIITEM2_LOGTYPE As String = "LogType"                                'ログレベル
     Private Const INIITEM2_LOGFILEPATH As String = "LogFilePath"                        'ログファイルパス(ファイル名も含む)
     Private Const INIITEM2_MSGFILENAME As String = "msgFileName"                        'メッセージファイル名
+    Private Const INIITEM2_LANGFILENAME As String = "LangFileName"                      '言語ファイル名
     Private Const INIITEM2_SVADDR As String = "SVAddr"                                  'サーバ名（メインサーバ）
     Private Const INIITEM2_PORTNO As String = "PortNo"                                  'ポート番号（メインサーバ）
     Private Const INIITEM2_DBNAME As String = "DBName"                                  'ＤＢ（メインサーバ）
@@ -138,6 +144,7 @@ Public Class StartUp
     '-------------------------------------------------------------------------------
     Private Shared _assembly As System.Reflection.Assembly          'アセンブリ(アプリケーション情報)
     Private Shared _msgHd As UtilMsgHandler                         'メッセージハンドラ
+    Private Shared _langHd As UtilLangHandler                       '言語ハンドラ
     Private Shared _db As UtilDBIf                                  '営業受注 DBハンドラ
     Private Shared _debugMode As Boolean                            'デバッグモード(ログレベルがDEBUGの場合にTrue)
 
@@ -279,6 +286,9 @@ Public Class StartUp
                 'メッセージ用Xmlファイルの存在チェック
                 Call _instance.checkMesXmlFile()
 
+                '言語用Xmlファイルの存在チェック
+                Call _instance.checkLangXmlFile()
+
                 '初期設定ファイル読込
                 Call _instance.setIniVal()
 
@@ -339,7 +349,7 @@ Public Class StartUp
 
                     'メニュー画面
                     Dim openForm As Form = Nothing
-                    openForm = New frmC01F10_Login(_msgHd, _db)
+                openForm = New frmC01F10_Login(_msgHd, _langHd, _db)
 
                 'フォームオープン
                 Application.Run(openForm)
@@ -391,16 +401,59 @@ Public Class StartUp
                 _msgHd = New UtilMsgHandler(msgFileName)                'これ以降_msgHdを使用して
             Else
                 '存在しないのでエラー
-                Throw New UsrDefException(fileWk & "が有りません。" & ControlChars.NewLine & _
-                                          "システムの起動を中止します。" & ControlChars.NewLine & _
+                Throw New UsrDefException(fileWk & "が有りません。" & ControlChars.NewLine &
+                                          "システムの起動を中止します。" & ControlChars.NewLine &
                                           "メッセージファイル取得　エラー")
             End If
         Catch ex As Exception
             'MSGが出力できない
-            Dim t As UsrDefException = New UsrDefException("システムエラーが発生しました。" & ControlChars.NewLine & _
-                                      "システムの起動を中止します。" & ControlChars.NewLine & ControlChars.NewLine & _
-                                      UtilClass.getErrDetail(ex) & _
-                                      ex.Message & ControlChars.NewLine & _
+            Dim t As UsrDefException = New UsrDefException("システムエラーが発生しました。" & ControlChars.NewLine &
+                                      "システムの起動を中止します。" & ControlChars.NewLine & ControlChars.NewLine &
+                                      UtilClass.getErrDetail(ex) &
+                                      ex.Message & ControlChars.NewLine &
+                                      ex.StackTrace)
+            t.dspMsg()
+            Throw t
+        End Try
+    End Sub
+
+    '-------------------------------------------------------------------------------
+    '   言語用Xmlファイルの存在チェック
+    '   （処理概要）ファイルが存在しない場合、アプリケーションを終了する
+    '   ●入力パラメタ   ：なし
+    '   ●メソッド戻り値 ：なし
+    '   ●発生例外       ：なし
+    '-------------------------------------------------------------------------------
+    Private Sub checkLangXmlFile()
+        Try
+
+            '言語用Xml存在チェック
+            Dim langFileName As String
+            langFileName = UtilClass.getAppPath(_assembly)               'アプリケーション実行パスを取得
+            If Not langFileName.EndsWith("\") Then                       '"\"で終わっていないなら
+                langFileName = langFileName & "\"
+            End If
+
+            '言語ファイル名を結合
+            Dim ini As String = UtilClass.getAppPath(_assembly) & "\..\Setting\" & INI_FILE
+            Dim fileWk As String = (New UtilIniFileHandler(ini)).getIni(INIITEM1_LANGFILE, INIITEM2_LANGFILENAME)
+            langFileName = langFileName & "..\Setting\" & fileWk
+
+            If UtilClass.isFileExists(langFileName) Then                 'ファイルが存在するなら
+                '言語ハンドラを生成
+                _langHd = New UtilLangHandler(langFileName)                'これ以降_msgHdを使用して
+            Else
+                '存在しないのでエラー
+                Throw New UsrDefException(fileWk & "が有りません。" & ControlChars.NewLine &
+                                          "システムの起動を中止します。" & ControlChars.NewLine &
+                                          "言語ファイル取得　エラー")
+            End If
+        Catch ex As Exception
+            '言語が出力できない
+            Dim t As UsrDefException = New UsrDefException("システムエラーが発生しました。" & ControlChars.NewLine &
+                                      "システムの起動を中止します。" & ControlChars.NewLine & ControlChars.NewLine &
+                                      UtilClass.getErrDetail(ex) &
+                                      ex.Message & ControlChars.NewLine &
                                       ex.StackTrace)
             t.dspMsg()
             Throw t
@@ -458,6 +511,9 @@ Public Class StartUp
 
                 'メッセージファイル名の読み込み
                 _iniVal.MsgFileName = ini.getIni(INIITEM1_MSGFILE, INIITEM2_MSGFILENAME)
+
+                '言語ファイル名の読み込み
+                _iniVal.LangFileName = ini.getIni(INIITEM1_LANGFILE, INIITEM2_LANGFILENAME)
 
                 'Logファイル
                 errXMLstrkey = "NonLogDirKey"               'Logファイル格納場所の取得に失敗しました。

@@ -402,6 +402,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\Setting\HanbaiKanri-Lang.xml" />
     <Content Include="bin\Setting\HanbaiKanri.xml" />
     <Content Include="dotNetIco.ico" />
   </ItemGroup>

@@ -15,6 +15,7 @@
 '-------------------------------------------------------------------------------
 Imports UtilMDL
 Imports UtilMDL.MSG
+Imports UtilMDL.LANG
 Imports UtilMDL.DB
 
 Imports System.Drawing.Printing
@@ -39,6 +40,7 @@ Public Class frmC01F10_Login
     '-------------------------------------------------------------------------------
     Private _parentForm As Form
     Private _msgHd As UtilMsgHandler
+    Private _langHd As UtilLangHandler
     Private _db As UtilDBIf
     Private _btnSybt As String
 
@@ -69,11 +71,12 @@ Public Class frmC01F10_Login
     '                      prmRefDbHd       DBハンドラ
     '   ●メソッド戻り値 ：インスタンス
     '-------------------------------------------------------------------------------
-    Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler, ByRef prmRefDbHd As UtilDBIf)
+    Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler, ByRef prmRefLangHd As UtilLangHandler, ByRef prmRefDbHd As UtilDBIf)
         Call Me.New()
 
         '初期処理
         _msgHd = prmRefMsgHd                                                    'MSGハンドラの設定
+        _langHd = prmRefLangHd                                                  'LANGハンドラの設定
         _db = prmRefDbHd                                                        'DBハンドラの設定
         StartPosition = FormStartPosition.CenterScreen                          '画面中央表示
         lblVer.Text = "Ver : " & UtilClass.getAppVersion(StartUp.assembly)      'ラベルへ、バージョン情報の表示
@@ -81,7 +84,7 @@ Public Class frmC01F10_Login
             'バックアップサーバ接続中
             lblBackup.Visible = True
         End If
-
+        Dim test As String = _langHd.getLANG("title", "en")
 
     End Sub
 
