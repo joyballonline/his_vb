@@ -17,7 +17,6 @@ Partial Class frmC01F30_Menu
     'Windows フォーム デザイナーで必要です。
     Private components As System.ComponentModel.IContainer
     Friend WithEvents TableLayoutPanel30 As TableLayoutPanel
-    Friend WithEvents cmdExit As Button
     Friend WithEvents chkM01 As CheckBox
     Friend WithEvents chkG01 As CheckBox
     Friend WithEvents chkH07 As CheckBox
@@ -44,6 +43,9 @@ Partial Class frmC01F30_Menu
     Friend WithEvents btnCostmerMaster As Button
     Friend WithEvents BtnCompanyMaster As Button
     Friend WithEvents Button3 As Button
+    Friend WithEvents BtnOrder As Button
+    Friend WithEvents cmdExit As Button
+    Friend WithEvents BtnPurchase As Button
 
     'メモ: 以下のプロシージャは Windows フォーム デザイナーで必要です。
     'Windows フォーム デザイナーを使用して変更できます。  

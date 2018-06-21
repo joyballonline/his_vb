@@ -138,6 +138,12 @@
     <Compile Include="Form\CustomerSearch.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form\cymn.Designer.vb">
+      <DependentUpon>cymn.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\cymn.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\frmC10F30_Postal.Designer.vb">
       <DependentUpon>frmC10F30_Postal.vb</DependentUpon>
     </Compile>
@@ -221,6 +227,30 @@
       <DependentUpon>MstSupplier.vb</DependentUpon>
     </Compile>
     <Compile Include="Form\MstSupplier.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Order.Designer.vb">
+      <DependentUpon>Order.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Order.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\OrderList.Designer.vb">
+      <DependentUpon>OrderList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\OrderList.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Purchase.Designer.vb">
+      <DependentUpon>Purchase.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Purchase.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\PurchaseList.Designer.vb">
+      <DependentUpon>PurchaseList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\PurchaseList.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form\Quote.Designer.vb">
@@ -312,6 +342,9 @@
     <EmbeddedResource Include="Form\CustomerSearch.resx">
       <DependentUpon>CustomerSearch.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form\cymn.resx">
+      <DependentUpon>cymn.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\frmC01F10_Login.resx">
       <DependentUpon>frmC01F10_Login.vb</DependentUpon>
     </EmbeddedResource>
@@ -353,6 +386,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\MstSupplier.resx">
       <DependentUpon>MstSupplier.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Order.resx">
+      <DependentUpon>Order.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\OrderList.resx">
+      <DependentUpon>OrderList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Purchase.resx">
+      <DependentUpon>Purchase.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\PurchaseList.resx">
+      <DependentUpon>PurchaseList.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Quote.resx">
       <DependentUpon>Quote.vb</DependentUpon>

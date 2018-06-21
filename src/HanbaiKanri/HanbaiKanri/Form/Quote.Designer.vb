@@ -92,7 +92,7 @@ Partial Class Quote
         Me.単位 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.仕入先 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.仕入単価 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.間接率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.間接費率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.間接費 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.仕入金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.売単価 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -135,6 +135,7 @@ Partial Class Quote
         '
         Me.TxtQuoteNo.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.TxtQuoteNo.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TxtQuoteNo.Enabled = False
         Me.TxtQuoteNo.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtQuoteNo.Location = New System.Drawing.Point(128, 15)
         Me.TxtQuoteNo.MaxLength = 8
@@ -174,7 +175,7 @@ Partial Class Quote
         Me.DgvItemList.AllowUserToAddRows = False
         Me.DgvItemList.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.DgvItemList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvItemList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.No, Me.メーカー, Me.品名, Me.型式, Me.数量, Me.単位, Me.仕入先, Me.仕入単価, Me.間接率, Me.間接費, Me.仕入金額, Me.売単価, Me.売上金額, Me.粗利額, Me.粗利率, Me.リードタイム, Me.備考, Me.ステータス})
+        Me.DgvItemList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.No, Me.メーカー, Me.品名, Me.型式, Me.数量, Me.単位, Me.仕入先, Me.仕入単価, Me.間接費率, Me.間接費, Me.仕入金額, Me.売単価, Me.売上金額, Me.粗利額, Me.粗利率, Me.リードタイム, Me.備考, Me.ステータス})
         Me.DgvItemList.Location = New System.Drawing.Point(12, 237)
         Me.DgvItemList.Name = "DgvItemList"
         Me.DgvItemList.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
@@ -372,6 +373,7 @@ Partial Class Quote
         '
         Me.TxtInput.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.TxtInput.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TxtInput.Enabled = False
         Me.TxtInput.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtInput.Location = New System.Drawing.Point(1128, 92)
         Me.TxtInput.MaxLength = 20
@@ -469,6 +471,7 @@ Partial Class Quote
         '
         Me.TxtSuffixNo.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.TxtSuffixNo.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TxtSuffixNo.Enabled = False
         Me.TxtSuffixNo.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtSuffixNo.Location = New System.Drawing.Point(239, 15)
         Me.TxtSuffixNo.MaxLength = 1
@@ -552,6 +555,7 @@ Partial Class Quote
         '
         Me.TxtTotal.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.TxtTotal.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TxtTotal.Enabled = False
         Me.TxtTotal.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtTotal.Location = New System.Drawing.Point(1110, 619)
         Me.TxtTotal.MaxLength = 10
@@ -587,6 +591,7 @@ Partial Class Quote
         '
         Me.DtpRegistration.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpRegistration.CustomFormat = "yyyy/MM/dd"
+        Me.DtpRegistration.Enabled = False
         Me.DtpRegistration.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpRegistration.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.DtpRegistration.Location = New System.Drawing.Point(390, 15)
@@ -630,6 +635,7 @@ Partial Class Quote
         '
         Me.TxtItemCount.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.TxtItemCount.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TxtItemCount.Enabled = False
         Me.TxtItemCount.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtItemCount.Location = New System.Drawing.Point(1275, 208)
         Me.TxtItemCount.MaxLength = 20
@@ -656,6 +662,7 @@ Partial Class Quote
         '
         Me.TxtGrossProfit.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.TxtGrossProfit.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TxtGrossProfit.Enabled = False
         Me.TxtGrossProfit.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtGrossProfit.Location = New System.Drawing.Point(1110, 648)
         Me.TxtGrossProfit.MaxLength = 10
@@ -682,6 +689,7 @@ Partial Class Quote
         '
         Me.TxtPurchaseTotal.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.TxtPurchaseTotal.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TxtPurchaseTotal.Enabled = False
         Me.TxtPurchaseTotal.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtPurchaseTotal.Location = New System.Drawing.Point(1110, 590)
         Me.TxtPurchaseTotal.MaxLength = 10
@@ -786,11 +794,11 @@ Partial Class Quote
         Me.仕入単価.Name = "仕入単価"
         Me.仕入単価.Width = 80
         '
-        '間接率
+        '間接費率
         '
-        Me.間接率.HeaderText = "間接率"
-        Me.間接率.Name = "間接率"
-        Me.間接率.Width = 85
+        Me.間接費率.HeaderText = "間接費率"
+        Me.間接費率.Name = "間接費率"
+        Me.間接費率.Width = 85
         '
         '間接費
         '
@@ -799,6 +807,7 @@ Partial Class Quote
         Me.間接費.HeaderText = "間接費"
         Me.間接費.Name = "間接費"
         Me.間接費.ReadOnly = True
+        Me.間接費.Visible = False
         '
         '仕入金額
         '
@@ -853,6 +862,7 @@ Partial Class Quote
         '
         Me.ステータス.HeaderText = "ステータス"
         Me.ステータス.Name = "ステータス"
+        Me.ステータス.Visible = False
         '
         'Quote
         '
@@ -980,7 +990,7 @@ Partial Class Quote
     Friend WithEvents 単位 As DataGridViewTextBoxColumn
     Friend WithEvents 仕入先 As DataGridViewTextBoxColumn
     Friend WithEvents 仕入単価 As DataGridViewTextBoxColumn
-    Friend WithEvents 間接率 As DataGridViewTextBoxColumn
+    Friend WithEvents 間接費率 As DataGridViewTextBoxColumn
     Friend WithEvents 間接費 As DataGridViewTextBoxColumn
     Friend WithEvents 仕入金額 As DataGridViewTextBoxColumn
     Friend WithEvents 売単価 As DataGridViewTextBoxColumn

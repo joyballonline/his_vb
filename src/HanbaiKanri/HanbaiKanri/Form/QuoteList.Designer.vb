@@ -28,23 +28,23 @@ Partial Class QuoteList
         Me.BtnQuoteClone = New System.Windows.Forms.Button()
         Me.BtnBack = New System.Windows.Forms.Button()
         Me.BtnQuoteSearch = New System.Windows.Forms.Button()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.TxtCustomerName = New System.Windows.Forms.TextBox()
         Me.LblConditions = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.TxtAddress = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.TxtTel = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
+        Me.TxtCustomerCode = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.TextBox6 = New System.Windows.Forms.TextBox()
+        Me.TxtSales = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.TextBox7 = New System.Windows.Forms.TextBox()
+        Me.TxtQuoteNo1 = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.TextBox8 = New System.Windows.Forms.TextBox()
-        Me.TextBox5 = New System.Windows.Forms.TextBox()
-        Me.TextBox9 = New System.Windows.Forms.TextBox()
+        Me.TxtQuoteDate1 = New System.Windows.Forms.TextBox()
+        Me.TxtQuoteDate2 = New System.Windows.Forms.TextBox()
+        Me.TxtQuoteNo2 = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
@@ -53,6 +53,7 @@ Partial Class QuoteList
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.BtnQuoteView = New System.Windows.Forms.Button()
         Me.BtnUnitPrice = New System.Windows.Forms.Button()
+        Me.BtnOrder = New System.Windows.Forms.Button()
         CType(Me.DgvMithd, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -61,12 +62,12 @@ Partial Class QuoteList
         '
         Me.DgvMithd.AllowUserToAddRows = False
         Me.DgvMithd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvMithd.Location = New System.Drawing.Point(12, 200)
+        Me.DgvMithd.Location = New System.Drawing.Point(12, 241)
         Me.DgvMithd.Name = "DgvMithd"
         Me.DgvMithd.ReadOnly = True
         Me.DgvMithd.RowTemplate.Height = 21
         Me.DgvMithd.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvMithd.Size = New System.Drawing.Size(1326, 471)
+        Me.DgvMithd.Size = New System.Drawing.Size(1326, 420)
         Me.DgvMithd.TabIndex = 0
         '
         'BtnQuoteAdd
@@ -108,30 +109,30 @@ Partial Class QuoteList
         'BtnQuoteSearch
         '
         Me.BtnQuoteSearch.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.BtnQuoteSearch.Location = New System.Drawing.Point(1101, 44)
+        Me.BtnQuoteSearch.Location = New System.Drawing.Point(1173, 46)
         Me.BtnQuoteSearch.Name = "BtnQuoteSearch"
-        Me.BtnQuoteSearch.Size = New System.Drawing.Size(75, 23)
+        Me.BtnQuoteSearch.Size = New System.Drawing.Size(165, 40)
         Me.BtnQuoteSearch.TabIndex = 5
         Me.BtnQuoteSearch.Text = "検索"
         Me.BtnQuoteSearch.UseVisualStyleBackColor = True
         '
-        'TextBox1
+        'TxtCustomerName
         '
-        Me.TextBox1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(189, 45)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(350, 22)
-        Me.TextBox1.TabIndex = 6
+        Me.TxtCustomerName.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtCustomerName.Location = New System.Drawing.Point(189, 45)
+        Me.TxtCustomerName.Name = "TxtCustomerName"
+        Me.TxtCustomerName.Size = New System.Drawing.Size(350, 22)
+        Me.TxtCustomerName.TabIndex = 6
         '
         'LblConditions
         '
         Me.LblConditions.AutoSize = True
         Me.LblConditions.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblConditions.Location = New System.Drawing.Point(26, 23)
+        Me.LblConditions.Location = New System.Drawing.Point(10, 18)
         Me.LblConditions.Name = "LblConditions"
-        Me.LblConditions.Size = New System.Drawing.Size(71, 15)
+        Me.LblConditions.Size = New System.Drawing.Size(87, 15)
         Me.LblConditions.TabIndex = 7
-        Me.LblConditions.Text = "抽出条件"
+        Me.LblConditions.Text = "■抽出条件"
         '
         'Label1
         '
@@ -157,13 +158,13 @@ Partial Class QuoteList
         Me.Label2.Text = "住所"
         Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'TextBox2
+        'TxtAddress
         '
-        Me.TextBox2.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TextBox2.Location = New System.Drawing.Point(189, 73)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(350, 22)
-        Me.TextBox2.TabIndex = 9
+        Me.TxtAddress.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtAddress.Location = New System.Drawing.Point(189, 73)
+        Me.TxtAddress.Name = "TxtAddress"
+        Me.TxtAddress.Size = New System.Drawing.Size(350, 22)
+        Me.TxtAddress.TabIndex = 9
         '
         'Label3
         '
@@ -177,13 +178,13 @@ Partial Class QuoteList
         Me.Label3.Text = "電話番号"
         Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'TextBox3
+        'TxtTel
         '
-        Me.TextBox3.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TextBox3.Location = New System.Drawing.Point(189, 101)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(350, 22)
-        Me.TextBox3.TabIndex = 11
+        Me.TxtTel.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtTel.Location = New System.Drawing.Point(189, 101)
+        Me.TxtTel.Name = "TxtTel"
+        Me.TxtTel.Size = New System.Drawing.Size(350, 22)
+        Me.TxtTel.TabIndex = 11
         '
         'Label4
         '
@@ -197,94 +198,94 @@ Partial Class QuoteList
         Me.Label4.Text = "得意先コード"
         Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'TextBox4
+        'TxtCustomerCode
         '
-        Me.TextBox4.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TextBox4.Location = New System.Drawing.Point(189, 129)
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(350, 22)
-        Me.TextBox4.TabIndex = 13
+        Me.TxtCustomerCode.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtCustomerCode.Location = New System.Drawing.Point(189, 129)
+        Me.TxtCustomerCode.Name = "TxtCustomerCode"
+        Me.TxtCustomerCode.Size = New System.Drawing.Size(350, 22)
+        Me.TxtCustomerCode.TabIndex = 13
         '
         'Label6
         '
         Me.Label6.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.Label6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label6.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label6.Location = New System.Drawing.Point(545, 101)
+        Me.Label6.Location = New System.Drawing.Point(583, 100)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(170, 22)
         Me.Label6.TabIndex = 20
         Me.Label6.Text = "営業担当者"
         Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'TextBox6
+        'TxtSales
         '
-        Me.TextBox6.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TextBox6.Location = New System.Drawing.Point(721, 101)
-        Me.TextBox6.Name = "TextBox6"
-        Me.TextBox6.Size = New System.Drawing.Size(170, 22)
-        Me.TextBox6.TabIndex = 19
+        Me.TxtSales.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtSales.Location = New System.Drawing.Point(759, 100)
+        Me.TxtSales.Name = "TxtSales"
+        Me.TxtSales.Size = New System.Drawing.Size(170, 22)
+        Me.TxtSales.TabIndex = 19
         '
         'Label7
         '
         Me.Label7.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.Label7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label7.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label7.Location = New System.Drawing.Point(545, 73)
+        Me.Label7.Location = New System.Drawing.Point(583, 72)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(170, 22)
         Me.Label7.TabIndex = 18
         Me.Label7.Text = "見積番号"
         Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'TextBox7
+        'TxtQuoteNo1
         '
-        Me.TextBox7.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TextBox7.Location = New System.Drawing.Point(721, 73)
-        Me.TextBox7.Name = "TextBox7"
-        Me.TextBox7.Size = New System.Drawing.Size(170, 22)
-        Me.TextBox7.TabIndex = 17
+        Me.TxtQuoteNo1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtQuoteNo1.Location = New System.Drawing.Point(759, 72)
+        Me.TxtQuoteNo1.Name = "TxtQuoteNo1"
+        Me.TxtQuoteNo1.Size = New System.Drawing.Size(170, 22)
+        Me.TxtQuoteNo1.TabIndex = 17
         '
         'Label8
         '
         Me.Label8.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.Label8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label8.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label8.Location = New System.Drawing.Point(545, 45)
+        Me.Label8.Location = New System.Drawing.Point(583, 44)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(170, 22)
         Me.Label8.TabIndex = 16
         Me.Label8.Text = "見積日"
         Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'TextBox8
+        'TxtQuoteDate1
         '
-        Me.TextBox8.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TextBox8.Location = New System.Drawing.Point(721, 46)
-        Me.TextBox8.Name = "TextBox8"
-        Me.TextBox8.Size = New System.Drawing.Size(170, 22)
-        Me.TextBox8.TabIndex = 15
+        Me.TxtQuoteDate1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtQuoteDate1.Location = New System.Drawing.Point(759, 45)
+        Me.TxtQuoteDate1.Name = "TxtQuoteDate1"
+        Me.TxtQuoteDate1.Size = New System.Drawing.Size(170, 22)
+        Me.TxtQuoteDate1.TabIndex = 15
         '
-        'TextBox5
+        'TxtQuoteDate2
         '
-        Me.TextBox5.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TextBox5.Location = New System.Drawing.Point(920, 45)
-        Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.Size = New System.Drawing.Size(170, 22)
-        Me.TextBox5.TabIndex = 21
+        Me.TxtQuoteDate2.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtQuoteDate2.Location = New System.Drawing.Point(958, 45)
+        Me.TxtQuoteDate2.Name = "TxtQuoteDate2"
+        Me.TxtQuoteDate2.Size = New System.Drawing.Size(170, 22)
+        Me.TxtQuoteDate2.TabIndex = 21
         '
-        'TextBox9
+        'TxtQuoteNo2
         '
-        Me.TextBox9.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TextBox9.Location = New System.Drawing.Point(920, 73)
-        Me.TextBox9.Name = "TextBox9"
-        Me.TextBox9.Size = New System.Drawing.Size(170, 22)
-        Me.TextBox9.TabIndex = 22
+        Me.TxtQuoteNo2.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtQuoteNo2.Location = New System.Drawing.Point(958, 73)
+        Me.TxtQuoteNo2.Name = "TxtQuoteNo2"
+        Me.TxtQuoteNo2.Size = New System.Drawing.Size(170, 22)
+        Me.TxtQuoteNo2.TabIndex = 22
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(897, 52)
+        Me.Label5.Location = New System.Drawing.Point(935, 51)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(17, 12)
         Me.Label5.TabIndex = 23
@@ -293,7 +294,7 @@ Partial Class QuoteList
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(897, 80)
+        Me.Label9.Location = New System.Drawing.Point(935, 79)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(17, 12)
         Me.Label9.TabIndex = 24
@@ -303,11 +304,11 @@ Partial Class QuoteList
         '
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label10.Location = New System.Drawing.Point(26, 170)
+        Me.Label10.Location = New System.Drawing.Point(12, 167)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(71, 15)
+        Me.Label10.Size = New System.Drawing.Size(87, 15)
         Me.Label10.TabIndex = 25
-        Me.Label10.Text = "表示形式"
+        Me.Label10.Text = "■表示形式"
         '
         'RbtnSlip
         '
@@ -338,7 +339,7 @@ Partial Class QuoteList
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel1.Controls.Add(Me.RbtnSlip)
         Me.Panel1.Controls.Add(Me.RbtnDetails)
-        Me.Panel1.Location = New System.Drawing.Point(103, 157)
+        Me.Panel1.Location = New System.Drawing.Point(15, 192)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(195, 37)
         Me.Panel1.TabIndex = 28
@@ -361,34 +362,44 @@ Partial Class QuoteList
         Me.BtnUnitPrice.Text = "単価入力"
         Me.BtnUnitPrice.UseVisualStyleBackColor = True
         '
+        'BtnOrder
+        '
+        Me.BtnOrder.Location = New System.Drawing.Point(137, 677)
+        Me.BtnOrder.Name = "BtnOrder"
+        Me.BtnOrder.Size = New System.Drawing.Size(165, 40)
+        Me.BtnOrder.TabIndex = 32
+        Me.BtnOrder.Text = "受発注登録"
+        Me.BtnOrder.UseVisualStyleBackColor = True
+        '
         'QuoteList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1350, 729)
+        Me.Controls.Add(Me.BtnOrder)
         Me.Controls.Add(Me.BtnUnitPrice)
         Me.Controls.Add(Me.BtnQuoteView)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.TextBox9)
-        Me.Controls.Add(Me.TextBox5)
+        Me.Controls.Add(Me.TxtQuoteNo2)
+        Me.Controls.Add(Me.TxtQuoteDate2)
         Me.Controls.Add(Me.Label6)
-        Me.Controls.Add(Me.TextBox6)
+        Me.Controls.Add(Me.TxtSales)
         Me.Controls.Add(Me.Label7)
-        Me.Controls.Add(Me.TextBox7)
+        Me.Controls.Add(Me.TxtQuoteNo1)
         Me.Controls.Add(Me.Label8)
-        Me.Controls.Add(Me.TextBox8)
+        Me.Controls.Add(Me.TxtQuoteDate1)
         Me.Controls.Add(Me.Label4)
-        Me.Controls.Add(Me.TextBox4)
+        Me.Controls.Add(Me.TxtCustomerCode)
         Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.TextBox3)
+        Me.Controls.Add(Me.TxtTel)
         Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.TextBox2)
+        Me.Controls.Add(Me.TxtAddress)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.LblConditions)
-        Me.Controls.Add(Me.TextBox1)
+        Me.Controls.Add(Me.TxtCustomerName)
         Me.Controls.Add(Me.BtnQuoteSearch)
         Me.Controls.Add(Me.BtnBack)
         Me.Controls.Add(Me.BtnQuoteClone)
@@ -411,23 +422,23 @@ Partial Class QuoteList
     Friend WithEvents BtnQuoteClone As Button
     Friend WithEvents BtnBack As Button
     Friend WithEvents BtnQuoteSearch As Button
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents TxtCustomerName As TextBox
     Friend WithEvents LblConditions As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label
-    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents TxtAddress As TextBox
     Friend WithEvents Label3 As Label
-    Friend WithEvents TextBox3 As TextBox
+    Friend WithEvents TxtTel As TextBox
     Friend WithEvents Label4 As Label
-    Friend WithEvents TextBox4 As TextBox
+    Friend WithEvents TxtCustomerCode As TextBox
     Friend WithEvents Label6 As Label
-    Friend WithEvents TextBox6 As TextBox
+    Friend WithEvents TxtSales As TextBox
     Friend WithEvents Label7 As Label
-    Friend WithEvents TextBox7 As TextBox
+    Friend WithEvents TxtQuoteNo1 As TextBox
     Friend WithEvents Label8 As Label
-    Friend WithEvents TextBox8 As TextBox
-    Friend WithEvents TextBox5 As TextBox
-    Friend WithEvents TextBox9 As TextBox
+    Friend WithEvents TxtQuoteDate1 As TextBox
+    Friend WithEvents TxtQuoteDate2 As TextBox
+    Friend WithEvents TxtQuoteNo2 As TextBox
     Friend WithEvents Label5 As Label
     Friend WithEvents Label9 As Label
     Friend WithEvents Label10 As Label
@@ -436,4 +447,5 @@ Partial Class QuoteList
     Friend WithEvents Panel1 As Panel
     Friend WithEvents BtnQuoteView As Button
     Friend WithEvents BtnUnitPrice As Button
+    Friend WithEvents BtnOrder As Button
 End Class
