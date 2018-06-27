@@ -84,7 +84,7 @@ Namespace LANG
                         Return textWk
                     End If
                 Next
-                Return "err"
+                Return prmLangText
             Catch ex As Exception
                 Debug.WriteLine(ex.Message)
                 Debug.WriteLine(ex.StackTrace)

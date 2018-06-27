@@ -253,6 +253,12 @@
     <Compile Include="Form\PurchaseList.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form\PurchasingManagement.Designer.vb">
+      <DependentUpon>PurchasingManagement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\PurchasingManagement.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\Quote.Designer.vb">
       <DependentUpon>Quote.vb</DependentUpon>
     </Compile>
@@ -405,6 +411,9 @@
     <EmbeddedResource Include="Form\PurchaseList.resx">
       <DependentUpon>PurchaseList.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form\PurchasingManagement.resx">
+      <DependentUpon>PurchasingManagement.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\Quote.resx">
       <DependentUpon>Quote.vb</DependentUpon>
     </EmbeddedResource>
@@ -465,7 +474,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\Setting\HanbaiKanri-Lang.xml" />
+    <Content Include="bin\Setting\HanbaiKanri-Lang.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="bin\Setting\HanbaiKanri.xml">
       <SubType>Designer</SubType>
     </Content>
