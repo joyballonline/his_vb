@@ -4,3 +4,6 @@
 slnx.sqlite
 VSWorkspaceState.json
 .dtbcache
+slnx.sqlite-journal
+src/HanbaiKanri/.vs/*
+.vs

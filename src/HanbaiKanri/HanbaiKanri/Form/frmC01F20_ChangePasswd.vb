@@ -14,6 +14,7 @@
 '-------------------------------------------------------------------------------
 Imports UtilMDL
 Imports UtilMDL.MSG
+Imports UtilMDL.LANG
 Imports UtilMDL.DB
 
 Imports System.Drawing.Printing
@@ -38,6 +39,7 @@ Public Class frmC01F20_ChangePasswd
     'メンバー変数宣言
     '-------------------------------------------------------------------------------
     Private _msgHd As UtilMsgHandler
+    Private _langHd As UtilLangHandler
     Private _db As UtilDBIf
     Private _parentForm As Form
 
@@ -280,7 +282,7 @@ Public Class frmC01F20_ChangePasswd
 
             ''「連携処理一覧」画面起動
             Dim openForm As Form = Nothing
-            openForm = New frmC01F30_Menu(_msgHd, _db)
+            openForm = New frmC01F30_Menu(_msgHd, _langHd, _db)
             openForm.Show()
             Me.Close()
             _parentForm.Hide()
