@@ -36,6 +36,7 @@ Public Class OrderList
     Private CompanyCode As String = ""
     Private OrderNo As String()
 
+
     '-------------------------------------------------------------------------------
     'デフォルトコンストラクタ（隠蔽）
     '-------------------------------------------------------------------------------
@@ -369,28 +370,6 @@ Public Class OrderList
         End If
     End Sub
 
-    'Private Sub BtnQuoteEdit_Click(sender As Object, e As EventArgs) Handles BtnQuoteEdit.Click
-    '    Dim RowIdx As Integer
-    '    RowIdx = Me.DgvCymnhd.CurrentCell.RowIndex
-    '    Dim No As String = DgvCymnhd.Rows(RowIdx).Cells(1).Value
-    '    Dim Suffix As String = DgvCymnhd.Rows(RowIdx).Cells(2).Value
-
-    '    Dim openForm As Form = Nothing
-    '    openForm = New Quote(_msgHd, _db, No, Suffix)   '処理選択
-    '    openForm.Show(Me)
-    'End Sub
-
-    'Private Sub BtnQuoteView_Click(sender As Object, e As EventArgs) Handles BtnQuoteView.Click
-    '    Dim RowIdx As Integer
-    '    RowIdx = Me.DgvCymnhd.CurrentCell.RowIndex
-    '    Dim No As String = DgvCymnhd.Rows(RowIdx).Cells(1).Value
-    '    Dim Suffix As String = DgvCymnhd.Rows(RowIdx).Cells(2).Value
-    '    Dim Status As String = "VIEW"
-    '    Dim openForm As Form = Nothing
-    '    openForm = New Quote(_msgHd, _db, No, Suffix, Status)   '処理選択
-    '    openForm.Show(Me)
-    'End Sub
-
     Private Sub BtnQuoteSearch_Click(sender As Object, e As EventArgs) Handles BtnOrderSearch.Click
         DgvCymnhd.Rows.Clear()
         DgvCymnhd.Columns.Clear()
@@ -711,6 +690,18 @@ Public Class OrderList
 
         Dim openForm As Form = Nothing
         openForm = New Order(_msgHd, _db, No, Suffix)   '処理選択
+        openForm.Show(Me)
+    End Sub
+
+    Private Sub BtnOrderView_Click(sender As Object, e As EventArgs) Handles BtnOrderView.Click
+        Dim RowIdx As Integer
+        RowIdx = Me.DgvCymnhd.CurrentCell.RowIndex
+        Dim No As String = DgvCymnhd.Rows(RowIdx).Cells(0).Value
+        Dim Suffix As String = DgvCymnhd.Rows(RowIdx).Cells(1).Value
+        Dim Status As String = "VIEW"
+
+        Dim openForm As Form = Nothing
+        openForm = New Order(_msgHd, _db, No, Suffix, Status)   '処理選択
         openForm.Show(Me)
     End Sub
 End Class

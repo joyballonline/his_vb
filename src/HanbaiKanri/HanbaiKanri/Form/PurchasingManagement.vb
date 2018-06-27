@@ -8,7 +8,7 @@ Imports UtilMDL.FileDirectory
 Imports UtilMDL.xls
 
 
-Public Class PurchaseList
+Public Class PurchasingManagement
     Inherits System.Windows.Forms.Form
 
     '------------------------------------------------------------------------------------------------------
@@ -135,183 +135,9 @@ Public Class PurchaseList
         Me.Close()
     End Sub
 
-    Private Sub RbtnDetails_CheckedChanged(sender As Object, e As EventArgs) Handles RbtnDetails.CheckedChanged
-        DgvHtyhd.Rows.Clear()
-        DgvHtyhd.Columns.Clear()
-
-        If RbtnSlip.Checked Then
-            Dim Sql As String = ""
-            Sql += "SELECT "
-            Sql += " * "
-            Sql += "FROM "
-            Sql += "public"
-            Sql += "."
-            Sql += "t20_hattyu"
-            If OrderNo IsNot Nothing Then
-                For i As Integer = 0 To OrderNo.Length - 1
-                    If i = 0 Then
-                        Sql += " WHERE "
-                        Sql += "発注番号"
-                        Sql += " ILIKE "
-                        Sql += "'%"
-                        Sql += OrderNo(i)
-                        Sql += "%'"
-                    Else
-                        Sql += " OR "
-                        Sql += "発注番号"
-                        Sql += " ILIKE "
-                        Sql += "'%"
-                        Sql += OrderNo(i)
-                        Sql += "%'"
-                    End If
-                Next
-            End If
 
 
-
-            Dim reccnt As Integer = 0
-            ds = _db.selectDB(Sql, RS, reccnt)
-
-            DgvHtyhd.Columns.Add("発注番号", "発注番号")
-            DgvHtyhd.Columns.Add("発注番号枝番", "発注番号枝番")
-            DgvHtyhd.Columns.Add("発注日", "発注日")
-            DgvHtyhd.Columns.Add("仕入先コード", "仕入先コード")
-            DgvHtyhd.Columns.Add("仕入先名", "仕入先名")
-            DgvHtyhd.Columns.Add("仕入先郵便番号", "仕入先郵便番号")
-            DgvHtyhd.Columns.Add("仕入先住所", "仕入先先住所")
-            DgvHtyhd.Columns.Add("仕入先電話番号", "仕入先電話番号")
-            DgvHtyhd.Columns.Add("仕入先ＦＡＸ", "仕入先ＦＡＸ")
-            DgvHtyhd.Columns.Add("仕入先担当者名", "仕入先担当者名")
-            DgvHtyhd.Columns.Add("仕入先担当者役職", "仕入先担当者役職")
-            DgvHtyhd.Columns.Add("仕入金額", "仕入金額")
-            DgvHtyhd.Columns.Add("支払条件", "支払条件")
-            DgvHtyhd.Columns.Add("営業担当者", "営業担当者")
-            DgvHtyhd.Columns.Add("入力担当者", "入力担当者")
-            DgvHtyhd.Columns.Add("備考", "備考")
-            DgvHtyhd.Columns.Add("登録日", "登録日")
-
-            DgvHtyhd.Columns(12).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvHtyhd.Columns(13).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvHtyhd.Columns(14).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvHtyhd.Columns(15).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-
-            For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-                DgvHtyhd.Rows.Add()
-                DgvHtyhd.Rows(index).Cells(0).Value = ds.Tables(RS).Rows(index)("発注番号")
-                DgvHtyhd.Rows(index).Cells(1).Value = ds.Tables(RS).Rows(index)("発注番号枝番")
-                DgvHtyhd.Rows(index).Cells(2).Value = ds.Tables(RS).Rows(index)("発注日")
-                DgvHtyhd.Rows(index).Cells(3).Value = ds.Tables(RS).Rows(index)("仕入先コード")
-                DgvHtyhd.Rows(index).Cells(4).Value = ds.Tables(RS).Rows(index)("仕入先名")
-                DgvHtyhd.Rows(index).Cells(5).Value = ds.Tables(RS).Rows(index)("仕入先郵便番号")
-                DgvHtyhd.Rows(index).Cells(6).Value = ds.Tables(RS).Rows(index)("仕入先住所")
-                DgvHtyhd.Rows(index).Cells(7).Value = ds.Tables(RS).Rows(index)("仕入先電話番号")
-                DgvHtyhd.Rows(index).Cells(8).Value = ds.Tables(RS).Rows(index)("仕入先ＦＡＸ")
-                DgvHtyhd.Rows(index).Cells(9).Value = ds.Tables(RS).Rows(index)("仕入先担当者名")
-                DgvHtyhd.Rows(index).Cells(10).Value = ds.Tables(RS).Rows(index)("仕入先担当者役職")
-                DgvHtyhd.Rows(index).Cells(11).Value = ds.Tables(RS).Rows(index)("仕入金額")
-                DgvHtyhd.Rows(index).Cells(12).Value = ds.Tables(RS).Rows(index)("支払条件")
-                DgvHtyhd.Rows(index).Cells(13).Value = ds.Tables(RS).Rows(index)("営業担当者")
-                DgvHtyhd.Rows(index).Cells(14).Value = ds.Tables(RS).Rows(index)("入力担当者")
-                DgvHtyhd.Rows(index).Cells(15).Value = ds.Tables(RS).Rows(index)("備考")
-                DgvHtyhd.Rows(index).Cells(16).Value = ds.Tables(RS).Rows(index)("登録日")
-            Next
-        Else
-            Dim Sql As String = ""
-
-            Sql += "SELECT "
-            Sql += " * "
-            Sql += "FROM "
-            Sql += "public"
-            Sql += "."
-            Sql += "t21_hattyu"
-
-            If OrderNo IsNot Nothing Then
-                For i As Integer = 0 To OrderNo.Length - 1
-                    If i = 0 Then
-                        Sql += " WHERE "
-                        Sql += "発注番号"
-                        Sql += " ILIKE "
-                        Sql += "'%"
-                        Sql += OrderNo(i)
-                        Sql += "%'"
-                    Else
-                        Sql += " OR "
-                        Sql += "発注番号"
-                        Sql += " ILIKE "
-                        Sql += "'%"
-                        Sql += OrderNo(i)
-                        Sql += "%'"
-                    End If
-                Next
-            End If
-
-            Dim reccnt As Integer = 0
-            ds = _db.selectDB(Sql, RS, reccnt)
-
-            DgvHtyhd.Columns.Add("発注番号", "発注番号")
-            DgvHtyhd.Columns.Add("発注番号枝番", "発注番号枝番")
-            DgvHtyhd.Columns.Add("行番号", "行番号")
-            DgvHtyhd.Columns.Add("仕入区分", "仕入区分")
-            DgvHtyhd.Columns.Add("メーカー", "メーカー")
-            DgvHtyhd.Columns.Add("品名", "品名")
-            DgvHtyhd.Columns.Add("型式", "型式")
-            DgvHtyhd.Columns.Add("仕入先名", "仕入先名")
-            DgvHtyhd.Columns.Add("仕入値", "仕入値")
-            DgvHtyhd.Columns.Add("発注数量", "発注数量")
-            DgvHtyhd.Columns.Add("仕入数量", "仕入数量")
-            DgvHtyhd.Columns.Add("発注残数", "発注残数")
-            DgvHtyhd.Columns.Add("単位", "単位")
-            DgvHtyhd.Columns.Add("間接費", "間接費")
-            DgvHtyhd.Columns.Add("仕入金額", "仕入金額")
-            DgvHtyhd.Columns.Add("リードタイム", "リードタイム")
-            DgvHtyhd.Columns.Add("入庫数", "入庫数")
-            DgvHtyhd.Columns.Add("未入庫数", "未入庫数")
-            DgvHtyhd.Columns.Add("備考", "備考")
-            DgvHtyhd.Columns.Add("更新者", "更新者")
-            DgvHtyhd.Columns.Add("登録日", "登録日")
-
-            DgvHtyhd.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvHtyhd.Columns(8).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvHtyhd.Columns(9).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvHtyhd.Columns(10).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvHtyhd.Columns(11).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvHtyhd.Columns(12).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvHtyhd.Columns(14).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvHtyhd.Columns(15).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvHtyhd.Columns(16).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvHtyhd.Columns(17).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvHtyhd.Columns(18).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvHtyhd.Columns(19).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvHtyhd.Columns(20).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-
-            For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-                DgvHtyhd.Rows.Add()
-                DgvHtyhd.Rows(index).Cells(0).Value = ds.Tables(RS).Rows(index)("発注番号")
-                DgvHtyhd.Rows(index).Cells(1).Value = ds.Tables(RS).Rows(index)("発注番号枝番")
-                DgvHtyhd.Rows(index).Cells(2).Value = ds.Tables(RS).Rows(index)("行番号")
-                DgvHtyhd.Rows(index).Cells(3).Value = ds.Tables(RS).Rows(index)("仕入区分")
-                DgvHtyhd.Rows(index).Cells(4).Value = ds.Tables(RS).Rows(index)("メーカー")
-                DgvHtyhd.Rows(index).Cells(5).Value = ds.Tables(RS).Rows(index)("品名")
-                DgvHtyhd.Rows(index).Cells(6).Value = ds.Tables(RS).Rows(index)("型式")
-                DgvHtyhd.Rows(index).Cells(7).Value = ds.Tables(RS).Rows(index)("仕入先名")
-                DgvHtyhd.Rows(index).Cells(8).Value = ds.Tables(RS).Rows(index)("仕入値")
-                DgvHtyhd.Rows(index).Cells(9).Value = ds.Tables(RS).Rows(index)("発注数量")
-                DgvHtyhd.Rows(index).Cells(10).Value = ds.Tables(RS).Rows(index)("仕入数量")
-                DgvHtyhd.Rows(index).Cells(11).Value = ds.Tables(RS).Rows(index)("発注残数")
-                DgvHtyhd.Rows(index).Cells(12).Value = ds.Tables(RS).Rows(index)("単位")
-                DgvHtyhd.Rows(index).Cells(13).Value = ds.Tables(RS).Rows(index)("間接費")
-                DgvHtyhd.Rows(index).Cells(14).Value = ds.Tables(RS).Rows(index)("仕入金額")
-                DgvHtyhd.Rows(index).Cells(15).Value = ds.Tables(RS).Rows(index)("リードタイム")
-                DgvHtyhd.Rows(index).Cells(16).Value = ds.Tables(RS).Rows(index)("入庫数")
-                DgvHtyhd.Rows(index).Cells(17).Value = ds.Tables(RS).Rows(index)("未入庫数")
-                DgvHtyhd.Rows(index).Cells(18).Value = ds.Tables(RS).Rows(index)("備考")
-                DgvHtyhd.Rows(index).Cells(19).Value = ds.Tables(RS).Rows(index)("更新者")
-                DgvHtyhd.Rows(index).Cells(20).Value = ds.Tables(RS).Rows(index)("登録日")
-            Next
-        End If
-    End Sub
-
-    Private Sub BtnPurchaseeEdit_Click(sender As Object, e As EventArgs) Handles BtnPurchaseEdit.Click
+    Private Sub BtnSelect_Click(sender As Object, e As EventArgs) Handles BtnSelect.Click
         Dim RowIdx As Integer
         RowIdx = Me.DgvHtyhd.CurrentCell.RowIndex
         Dim No As String = DgvHtyhd.Rows(RowIdx).Cells(0).Value
@@ -616,16 +442,4 @@ Public Class PurchaseList
             Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", UtilClass.getErrDetail(ex)))
         End Try
     End Sub
-
-    Private Sub BtnPurchaseView_Click(sender As Object, e As EventArgs) Handles BtnPurchaseView.Click
-        Dim RowIdx As Integer
-        RowIdx = Me.DgvHtyhd.CurrentCell.RowIndex
-        Dim No As String = DgvHtyhd.Rows(RowIdx).Cells(0).Value
-        Dim Suffix As String = DgvHtyhd.Rows(RowIdx).Cells(1).Value
-        Dim Status As String = "VIEW"
-        Dim openForm As Form = Nothing
-        openForm = New Purchase(_msgHd, _db, No, Suffix, Status)   '処理選択
-        openForm.Show(Me)
-    End Sub
-
 End Class

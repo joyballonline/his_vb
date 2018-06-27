@@ -233,3 +233,4 @@ C:\Users\IEUser\Desktop\HanbaiKanri\HanbaiKanri\obj\Debug\HanbaiKanri.SupplierSe
 \\VBOXSVR\his_vb\src\HanbaiKanri\HanbaiKanri\obj\Debug\HanbaiKanri.Order.resources
 \\VBOXSVR\his_vb\src\HanbaiKanri\HanbaiKanri\obj\Debug\HanbaiKanri.Purchase.resources
 \\VBOXSVR\his_vb\src\HanbaiKanri\HanbaiKanri\obj\Debug\HanbaiKanri.PurchaseList.resources
+\\VBOXSVR\his_vb\src\HanbaiKanri\HanbaiKanri\obj\Debug\HanbaiKanri.SalesSearch.resources

@@ -37,6 +37,24 @@ Partial Class Quote
         Me.LblPaymentTerms = New System.Windows.Forms.Label()
         Me.TxtPaymentTerms = New System.Windows.Forms.TextBox()
         Me.DgvItemList = New System.Windows.Forms.DataGridView()
+        Me.No = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.メーカー = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.品名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.型式 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.数量 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.単位 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入先 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入単価 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.間接費率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.間接費 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.売単価 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.売上金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.粗利額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.粗利率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.リードタイム = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.備考 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ステータス = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LblInput = New System.Windows.Forms.Label()
         Me.TxtCustomerName = New System.Windows.Forms.TextBox()
         Me.LblCustomerName = New System.Windows.Forms.Label()
@@ -84,24 +102,6 @@ Partial Class Quote
         Me.LblStockOrder = New System.Windows.Forms.Label()
         Me.DtpQuote = New System.Windows.Forms.DateTimePicker()
         Me.DtpExpiration = New System.Windows.Forms.DateTimePicker()
-        Me.No = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.メーカー = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.品名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.型式 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.数量 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.単位 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.仕入先 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.仕入単価 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.間接費率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.間接費 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.仕入金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.売単価 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.売上金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.粗利額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.粗利率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.リードタイム = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.備考 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ステータス = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DgvItemList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -183,6 +183,132 @@ Partial Class Quote
         Me.DgvItemList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
         Me.DgvItemList.Size = New System.Drawing.Size(1329, 337)
         Me.DgvItemList.TabIndex = 17
+        '
+        'No
+        '
+        Me.No.HeaderText = "No"
+        Me.No.Name = "No"
+        Me.No.Width = 43
+        '
+        'メーカー
+        '
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.メーカー.DefaultCellStyle = DataGridViewCellStyle1
+        Me.メーカー.HeaderText = "メーカー"
+        Me.メーカー.Name = "メーカー"
+        Me.メーカー.Width = 220
+        '
+        '品名
+        '
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.品名.DefaultCellStyle = DataGridViewCellStyle2
+        Me.品名.HeaderText = "品名"
+        Me.品名.Name = "品名"
+        Me.品名.Width = 220
+        '
+        '型式
+        '
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.型式.DefaultCellStyle = DataGridViewCellStyle3
+        Me.型式.HeaderText = "型式"
+        Me.型式.Name = "型式"
+        Me.型式.Width = 230
+        '
+        '数量
+        '
+        Me.数量.HeaderText = "数量"
+        Me.数量.Name = "数量"
+        Me.数量.Width = 80
+        '
+        '単位
+        '
+        Me.単位.HeaderText = "単位"
+        Me.単位.Name = "単位"
+        Me.単位.Width = 80
+        '
+        '仕入先
+        '
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.仕入先.DefaultCellStyle = DataGridViewCellStyle4
+        Me.仕入先.HeaderText = "仕入先"
+        Me.仕入先.Name = "仕入先"
+        Me.仕入先.Width = 85
+        '
+        '仕入単価
+        '
+        Me.仕入単価.HeaderText = "仕入単価"
+        Me.仕入単価.Name = "仕入単価"
+        Me.仕入単価.Width = 80
+        '
+        '間接費率
+        '
+        Me.間接費率.HeaderText = "間接費率"
+        Me.間接費率.Name = "間接費率"
+        Me.間接費率.Width = 85
+        '
+        '間接費
+        '
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.間接費.DefaultCellStyle = DataGridViewCellStyle5
+        Me.間接費.HeaderText = "間接費"
+        Me.間接費.Name = "間接費"
+        Me.間接費.ReadOnly = True
+        Me.間接費.Visible = False
+        '
+        '仕入金額
+        '
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.仕入金額.DefaultCellStyle = DataGridViewCellStyle6
+        Me.仕入金額.HeaderText = "仕入金額"
+        Me.仕入金額.Name = "仕入金額"
+        Me.仕入金額.ReadOnly = True
+        '
+        '売単価
+        '
+        Me.売単価.HeaderText = "売単価"
+        Me.売単価.Name = "売単価"
+        Me.売単価.Width = 80
+        '
+        '売上金額
+        '
+        DataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.売上金額.DefaultCellStyle = DataGridViewCellStyle7
+        Me.売上金額.HeaderText = "売上金額"
+        Me.売上金額.Name = "売上金額"
+        Me.売上金額.ReadOnly = True
+        '
+        '粗利額
+        '
+        DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.粗利額.DefaultCellStyle = DataGridViewCellStyle8
+        Me.粗利額.HeaderText = "粗利額"
+        Me.粗利額.Name = "粗利額"
+        Me.粗利額.ReadOnly = True
+        '
+        '粗利率
+        '
+        DataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.粗利率.DefaultCellStyle = DataGridViewCellStyle9
+        Me.粗利率.HeaderText = "粗利率"
+        Me.粗利率.Name = "粗利率"
+        Me.粗利率.ReadOnly = True
+        '
+        'リードタイム
+        '
+        Me.リードタイム.HeaderText = "リードタイム"
+        Me.リードタイム.Name = "リードタイム"
+        '
+        '備考
+        '
+        Me.備考.HeaderText = "備考"
+        Me.備考.Name = "備考"
+        Me.備考.Width = 80
+        '
+        'ステータス
+        '
+        Me.ステータス.HeaderText = "ステータス"
+        Me.ステータス.Name = "ステータス"
+        Me.ステータス.Visible = False
         '
         'LblInput
         '
@@ -737,132 +863,6 @@ Partial Class Quote
         Me.DtpExpiration.TabIndex = 45
         Me.DtpExpiration.TabStop = False
         Me.DtpExpiration.Value = New Date(2018, 6, 5, 23, 23, 58, 0)
-        '
-        'No
-        '
-        Me.No.HeaderText = "No"
-        Me.No.Name = "No"
-        Me.No.Width = 43
-        '
-        'メーカー
-        '
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.メーカー.DefaultCellStyle = DataGridViewCellStyle1
-        Me.メーカー.HeaderText = "メーカー"
-        Me.メーカー.Name = "メーカー"
-        Me.メーカー.Width = 220
-        '
-        '品名
-        '
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.品名.DefaultCellStyle = DataGridViewCellStyle2
-        Me.品名.HeaderText = "品名"
-        Me.品名.Name = "品名"
-        Me.品名.Width = 220
-        '
-        '型式
-        '
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.型式.DefaultCellStyle = DataGridViewCellStyle3
-        Me.型式.HeaderText = "型式"
-        Me.型式.Name = "型式"
-        Me.型式.Width = 230
-        '
-        '数量
-        '
-        Me.数量.HeaderText = "数量"
-        Me.数量.Name = "数量"
-        Me.数量.Width = 80
-        '
-        '単位
-        '
-        Me.単位.HeaderText = "単位"
-        Me.単位.Name = "単位"
-        Me.単位.Width = 80
-        '
-        '仕入先
-        '
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.仕入先.DefaultCellStyle = DataGridViewCellStyle4
-        Me.仕入先.HeaderText = "仕入先"
-        Me.仕入先.Name = "仕入先"
-        Me.仕入先.Width = 85
-        '
-        '仕入単価
-        '
-        Me.仕入単価.HeaderText = "仕入単価"
-        Me.仕入単価.Name = "仕入単価"
-        Me.仕入単価.Width = 80
-        '
-        '間接費率
-        '
-        Me.間接費率.HeaderText = "間接費率"
-        Me.間接費率.Name = "間接費率"
-        Me.間接費率.Width = 85
-        '
-        '間接費
-        '
-        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.間接費.DefaultCellStyle = DataGridViewCellStyle5
-        Me.間接費.HeaderText = "間接費"
-        Me.間接費.Name = "間接費"
-        Me.間接費.ReadOnly = True
-        Me.間接費.Visible = False
-        '
-        '仕入金額
-        '
-        DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.仕入金額.DefaultCellStyle = DataGridViewCellStyle6
-        Me.仕入金額.HeaderText = "仕入金額"
-        Me.仕入金額.Name = "仕入金額"
-        Me.仕入金額.ReadOnly = True
-        '
-        '売単価
-        '
-        Me.売単価.HeaderText = "売単価"
-        Me.売単価.Name = "売単価"
-        Me.売単価.Width = 80
-        '
-        '売上金額
-        '
-        DataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.売上金額.DefaultCellStyle = DataGridViewCellStyle7
-        Me.売上金額.HeaderText = "売上金額"
-        Me.売上金額.Name = "売上金額"
-        Me.売上金額.ReadOnly = True
-        '
-        '粗利額
-        '
-        DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.粗利額.DefaultCellStyle = DataGridViewCellStyle8
-        Me.粗利額.HeaderText = "粗利額"
-        Me.粗利額.Name = "粗利額"
-        Me.粗利額.ReadOnly = True
-        '
-        '粗利率
-        '
-        DataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.粗利率.DefaultCellStyle = DataGridViewCellStyle9
-        Me.粗利率.HeaderText = "粗利率"
-        Me.粗利率.Name = "粗利率"
-        Me.粗利率.ReadOnly = True
-        '
-        'リードタイム
-        '
-        Me.リードタイム.HeaderText = "リードタイム"
-        Me.リードタイム.Name = "リードタイム"
-        '
-        '備考
-        '
-        Me.備考.HeaderText = "備考"
-        Me.備考.Name = "備考"
-        Me.備考.Width = 80
-        '
-        'ステータス
-        '
-        Me.ステータス.HeaderText = "ステータス"
-        Me.ステータス.Name = "ステータス"
-        Me.ステータス.Visible = False
         '
         'Quote
         '

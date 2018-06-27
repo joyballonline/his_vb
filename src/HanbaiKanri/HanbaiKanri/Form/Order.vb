@@ -36,6 +36,7 @@ Public Class Order
     Private OrderNo As String = ""
     Private OrderSuffix As String = ""
     Private OrderCount As String = ""
+    Private OrderStatus As String = ""
 
     '-------------------------------------------------------------------------------
     'デフォルトコンストラクタ（隠蔽）
@@ -51,7 +52,8 @@ Public Class Order
     Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler,
                    ByRef prmRefDbHd As UtilDBIf,
                    Optional ByRef prmRefNo As String = Nothing,
-                   Optional ByRef prmRefSuffix As String = Nothing)
+                   Optional ByRef prmRefSuffix As String = Nothing,
+                   Optional ByRef prmRefStatus As String = Nothing)
         Call Me.New()
 
         _init = False
@@ -61,7 +63,7 @@ Public Class Order
         _db = prmRefDbHd                                                    'DBハンドラの設定
         OrderNo = prmRefNo
         OrderSuffix = prmRefSuffix
-
+        OrderStatus = prmRefStatus
         '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
         StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
         Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
@@ -295,6 +297,14 @@ Public Class Order
         Next c
         TxtItemCount.Text = DgvItemList.Rows.Count()
 
+        If OrderStatus = "VIEW" Then
+            DtpOrderDate.Enabled = False
+            TxtOrderRemark.Enabled = False
+            DtpQuoteDate.Enabled = False
+            DtpExpiration.Enabled = False
+            DgvItemList.ReadOnly = True
+            BtnRegistration.Visible = False
+        End If
 
     End Sub
 

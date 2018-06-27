@@ -41,6 +41,7 @@ Public Class Quote
     Private EditSuffix As String = ""
     Private LoadFlg As Boolean = False
     Private Status As String = ""
+    Private Input As String = ""
 
     '-------------------------------------------------------------------------------
     'デフォルトコンストラクタ（隠蔽）
@@ -68,6 +69,7 @@ Public Class Quote
         EditNo = prmRefNo
         EditSuffix = prmRefSuffix
         Status = prmRefStatus
+        Input = frmC01F10_Login.loginValue.TantoNM
         '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
         StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
         Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
@@ -115,6 +117,7 @@ Public Class Quote
         column.ValueMember = "Value"
         column.DisplayMember = "Display"
         column.HeaderText = "仕入区分"
+        column.Name = "仕入区分"
         'column.ValueMember = 1
         'DataGridView1に追加する
         DgvItemList.Columns.Insert(1, column)
@@ -386,6 +389,8 @@ Public Class Quote
             QuoteNoMin = ds.Tables(RS).Rows(0)(3)
             QuoteNoMax = ds.Tables(RS).Rows(0)(4)
             TxtQuoteNo.Text += QuoteNo.PadLeft(ds.Tables(RS).Rows(0)(6), "0")
+
+            TxtInput.Text = Input
         End If
 
         If Status Is "VIEW" Then
@@ -426,16 +431,6 @@ Public Class Quote
         LoadFlg = True
 
     End Sub
-
-    '行追加時にNoを自動採番
-    'Private Sub DgvItemList_RowsAdded(ByVal sender As Object,
-    '    ByVal e As DataGridViewRowsAddedEventArgs) _
-    '    Handles DgvItemList.RowsAdded
-    '    'セルの既定値を指定する
-    '    count += 1
-    '    Dim index As Integer = e.RowIndex
-    '    DgvItemList.Rows(index).Cells(0).Value = count
-    'End Sub
 
     '金額自動計算
     Private Sub CellValueChanged(ByVal sender As Object,
@@ -610,6 +605,13 @@ Public Class Quote
         'Me.Hide()   ' 自分は隠れる
     End Sub
 
+    Private Sub TxtSales_DoubleClick(sender As Object, e As EventArgs) Handles TxtSales.DoubleClick
+        Dim openForm As Form = Nothing
+        openForm = New SalesSearch(_msgHd, _db)   '処理選択
+        openForm.Show(Me)
+        'Me.Hide()   ' 自分は隠れる
+    End Sub
+
     'Dgv内での検索
     Private Sub DgvItemList_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) _
      Handles DgvItemList.CellDoubleClick
@@ -771,7 +773,7 @@ Public Class Quote
                 Sql1 += "', "
                 Sql1 += "更新者"
                 Sql1 += " = '"
-                Sql1 += "zenbi01"
+                Sql1 += Input
                 Sql1 += "' "
                 Sql1 += "WHERE"
                 Sql1 += " 会社コード"
@@ -843,25 +845,25 @@ Public Class Quote
 
                     Sql2 += "仕入区分"
                     Sql2 += " = '"
-                    Sql2 += DgvItemList.Rows(index).Cells(1).Value.ToString
+                    Sql2 += DgvItemList.Rows(index).Cells("仕入区分").Value.ToString
                     Sql2 += "', "
                     Sql2 += "メーカー"
                     Sql2 += " = '"
-                    Sql2 += DgvItemList.Rows(index).Cells(2).Value.ToString
+                    Sql2 += DgvItemList.Rows(index).Cells("メーカー").Value.ToString
                     Sql2 += "', "
                     Sql2 += "品名"
                     Sql2 += " = '"
-                    Sql2 += DgvItemList.Rows(index).Cells(3).Value.ToString
+                    Sql2 += DgvItemList.Rows(index).Cells("品名").Value.ToString
                     Sql2 += "', "
                     Sql2 += "型式"
                     Sql2 += " = '"
-                    Sql2 += DgvItemList.Rows(index).Cells(4).Value.ToString
+                    Sql2 += DgvItemList.Rows(index).Cells("型式").Value.ToString
                     Sql2 += "', "
 
                     If DgvItemList.Rows(index).Cells(5).Value IsNot Nothing Then
                         Sql2 += "数量"
                         Sql2 += " = '"
-                        Sql2 += DgvItemList.Rows(index).Cells(5).Value.ToString
+                        Sql2 += DgvItemList.Rows(index).Cells("数量").Value.ToString
                         Sql2 += "', "
                     Else
                         Sql2 += "数量"
@@ -871,16 +873,16 @@ Public Class Quote
                     End If
                     Sql2 += "単位"
                     Sql2 += " = '"
-                    Sql2 += DgvItemList.Rows(index).Cells(6).Value.ToString
+                    Sql2 += DgvItemList.Rows(index).Cells("単位").Value.ToString
                     Sql2 += "', "
                     Sql2 += "仕入先名称"
                     Sql2 += " = '"
-                    Sql2 += DgvItemList.Rows(index).Cells(7).Value.ToString
+                    Sql2 += DgvItemList.Rows(index).Cells("仕入先").Value.ToString
                     Sql2 += "', "
                     If DgvItemList.Rows(index).Cells(8).Value IsNot Nothing Then
                         Sql2 += "仕入単価"
                         Sql2 += " = '"
-                        Sql2 += DgvItemList.Rows(index).Cells(8).Value.ToString
+                        Sql2 += DgvItemList.Rows(index).Cells("仕入単価").Value.ToString
                         Sql2 += "', "
                     Else
                         Sql2 += "仕入単価"
@@ -891,7 +893,7 @@ Public Class Quote
                     If DgvItemList.Rows(index).Cells(9).Value IsNot Nothing Then
                         Sql2 += "間接費率"
                         Sql2 += " = '"
-                        Sql2 += DgvItemList.Rows(index).Cells(9).Value.ToString
+                        Sql2 += DgvItemList.Rows(index).Cells("間接費率").Value.ToString
                         Sql2 += "', "
                     Else
                         Sql2 += "間接費率"
@@ -902,7 +904,7 @@ Public Class Quote
                     If DgvItemList.Rows(index).Cells(10).Value IsNot Nothing Then
                         Sql2 += "間接費"
                         Sql2 += " = '"
-                        Sql2 += DgvItemList.Rows(index).Cells(10).Value.ToString
+                        Sql2 += DgvItemList.Rows(index).Cells("間接費").Value.ToString
                         Sql2 += "', "
                     Else
                         Sql2 += "間接費"
@@ -913,7 +915,7 @@ Public Class Quote
                     If DgvItemList.Rows(index).Cells(11).Value IsNot Nothing Then
                         Sql2 += "仕入金額"
                         Sql2 += " = '"
-                        Sql2 += DgvItemList.Rows(index).Cells(11).Value.ToString
+                        Sql2 += DgvItemList.Rows(index).Cells("仕入金額").Value.ToString
                         Sql2 += "', "
                     Else
                         Sql2 += "仕入金額"
@@ -924,7 +926,7 @@ Public Class Quote
                     If DgvItemList.Rows(index).Cells(12).Value IsNot Nothing Then
                         Sql2 += "売単価"
                         Sql2 += " = '"
-                        Sql2 += DgvItemList.Rows(index).Cells(12).Value.ToString
+                        Sql2 += DgvItemList.Rows(index).Cells("売単価").Value.ToString
                         Sql2 += "', "
                     Else
                         Sql2 += "売単価"
@@ -935,7 +937,7 @@ Public Class Quote
                     If DgvItemList.Rows(index).Cells(13).Value IsNot Nothing Then
                         Sql2 += "売上金額"
                         Sql2 += " = '"
-                        Sql2 += DgvItemList.Rows(index).Cells(13).Value.ToString
+                        Sql2 += DgvItemList.Rows(index).Cells("売上金額").Value.ToString
                         Sql2 += "', "
                     Else
                         Sql2 += "売上金額"
@@ -946,7 +948,7 @@ Public Class Quote
                     If DgvItemList.Rows(index).Cells(14).Value IsNot Nothing Then
                         Sql2 += "粗利額"
                         Sql2 += " = '"
-                        Sql2 += DgvItemList.Rows(index).Cells(14).Value.ToString
+                        Sql2 += DgvItemList.Rows(index).Cells("粗利額").Value.ToString
                         Sql2 += "', "
                     Else
                         Sql2 += "粗利額"
@@ -957,7 +959,7 @@ Public Class Quote
                     If DgvItemList.Rows(index).Cells(15).Value IsNot Nothing Then
                         Sql2 += "粗利率"
                         Sql2 += " = '"
-                        Sql2 += DgvItemList.Rows(index).Cells(15).Value.ToString
+                        Sql2 += DgvItemList.Rows(index).Cells("粗利率").Value.ToString
                         Sql2 += "', "
                     Else
                         Sql2 += "粗利率"
@@ -968,7 +970,7 @@ Public Class Quote
                     If DgvItemList.Rows(index).Cells(16).Value IsNot Nothing Then
                         Sql2 += "リードタイム"
                         Sql2 += " = '"
-                        Sql2 += DgvItemList.Rows(index).Cells(16).Value.ToString
+                        Sql2 += DgvItemList.Rows(index).Cells("リードタイム").Value.ToString
                         Sql2 += "', "
                     Else
                         Sql2 += "リードタイム"
@@ -979,11 +981,11 @@ Public Class Quote
 
                     Sql2 += "備考"
                     Sql2 += " = '"
-                    Sql2 += DgvItemList.Rows(index).Cells(17).Value.ToString
+                    Sql2 += DgvItemList.Rows(index).Cells("備考").Value.ToString
                     Sql2 += "', "
                     Sql2 += "更新者"
                     Sql2 += " = '"
-                    Sql2 += "Admin"
+                    Sql2 += Input
                     Sql2 += "', "
                     Sql2 += "登録日"
                     Sql2 += " = '"
@@ -1075,7 +1077,7 @@ Public Class Quote
                 Sql1 += "t01_mithd("
                 Sql1 += "会社コード, 見積番号, 見積番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額, 仕入金額, 営業担当者, 入力担当者, 備考, 登録日, 更新日, 更新者)"
                 Sql1 += " VALUES('"
-                Sql1 += "ZENBI"
+                Sql1 += CompanyCode
                 Sql1 += "', '"
                 Sql1 += TxtQuoteNo.Text
                 Sql1 += "', '"
@@ -1122,7 +1124,7 @@ Public Class Quote
                 Sql1 += "', '"
                 Sql1 += dtToday
                 Sql1 += "', '"
-                Sql1 += "zenbi01"
+                Sql1 += Input
                 Sql1 += " ')"
                 Sql1 += "RETURNING 会社コード"
                 Sql1 += ", "
@@ -1178,7 +1180,7 @@ Public Class Quote
                     Sql2 += "t02_mitdt("
                     Sql2 += "会社コード, 見積番号, 見積番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 数量, 単位, 仕入先名称, 仕入単価, 間接費率, 間接費, 仕入金額, 売単価, 売上金額, 粗利額, 粗利率, リードタイム, 備考, 更新者, 登録日)"
                     Sql2 += " VALUES('"
-                    Sql2 += "ZENBI"
+                    Sql2 += CompanyCode
                     Sql2 += "', '"
                     Sql2 += TxtQuoteNo.Text
                     Sql2 += "', '"
@@ -1187,7 +1189,7 @@ Public Class Quote
 
 
                     Dim ary As Integer() = New Integer() {0, 5, 8, 9, 10, 11, 12, 13, 14, 15, 16}
-                    For i As Integer = 0 To 16
+                    For i As Integer = 0 To 17
                         Dim res As Integer = Array.IndexOf(ary, i)
                         If DgvItemList.Rows(index).Cells(i).Value IsNot Nothing Then
                             Sql2 += DgvItemList.Rows(index).Cells(i).Value.ToString
@@ -1201,7 +1203,7 @@ Public Class Quote
                             End If
                         End If
                     Next
-                    Sql2 += "Admin"
+                    Sql2 += Input
                     Sql2 += "', '"
                     Sql2 += DtpRegistration.Text
                     Sql2 += " ')"
@@ -1272,7 +1274,7 @@ Public Class Quote
                     Sql3 += "', "
                     Sql3 += "更新者"
                     Sql3 += " = '"
-                    Sql3 += "Admin"
+                    Sql3 += Input
                     Sql3 += "', "
                     Sql3 += "更新日"
                     Sql3 += " = '"
@@ -1317,5 +1319,9 @@ Public Class Quote
             End Try
         End If
         Me.Close()
+    End Sub
+
+    Private Sub TxtSales_TextChanged(sender As Object, e As EventArgs) Handles TxtSales.TextChanged
+
     End Sub
 End Class

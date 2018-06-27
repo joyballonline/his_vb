@@ -265,6 +265,12 @@
     <Compile Include="Form\QuoteList.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form\SalesSearch.Designer.vb">
+      <DependentUpon>SalesSearch.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\SalesSearch.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\SupplierAdd.Designer.vb">
       <DependentUpon>SupplierAdd.vb</DependentUpon>
     </Compile>
@@ -404,6 +410,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\QuoteList.resx">
       <DependentUpon>QuoteList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\SalesSearch.resx">
+      <DependentUpon>SalesSearch.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\SupplierAdd.resx">
       <DependentUpon>SupplierAdd.vb</DependentUpon>

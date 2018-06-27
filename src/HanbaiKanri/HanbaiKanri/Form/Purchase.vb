@@ -35,6 +35,7 @@ Public Class Purchase
     Private CompanyCode As String = ""
     Private PurchaseNo As String = ""
     Private PurchaseSuffix As String = ""
+    Private PurchaseStatus As String = ""
     Private OrderCount As String = ""
 
     '-------------------------------------------------------------------------------
@@ -51,7 +52,8 @@ Public Class Purchase
     Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler,
                    ByRef prmRefDbHd As UtilDBIf,
                    Optional ByRef prmRefNo As String = Nothing,
-                   Optional ByRef prmRefSuffix As String = Nothing)
+                   Optional ByRef prmRefSuffix As String = Nothing,
+                   Optional ByRef prmRefStatus As String = Nothing)
         Call Me.New()
 
         _init = False
@@ -61,6 +63,7 @@ Public Class Purchase
         _db = prmRefDbHd                                                    'DBハンドラの設定
         PurchaseNo = prmRefNo
         PurchaseSuffix = prmRefSuffix
+        PurchaseStatus = prmRefStatus
 
         '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
         StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
@@ -257,6 +260,13 @@ Public Class Purchase
             No += 1
         Next c
         TxtItemCount.Text = DgvItemList.Rows.Count()
+
+        If PurchaseStatus = "VIEW" Then
+            DtpPurchaseDate.Enabled = False
+            TxtPurchaseRemark.Enabled = False
+            DgvItemList.ReadOnly = True
+            BtnRegistration.Visible = False
+        End If
 
     End Sub
 
