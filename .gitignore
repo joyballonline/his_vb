@@ -1,3 +1,6 @@
 .DS_Store
 *$DATA*
 .cache
+slnx.sqlite
+VSWorkspaceState.json
+.dtbcache
