@@ -36,23 +36,23 @@ Partial Class frmC01F10_Login
         'btnLogin
         '
         Me.btnLogin.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.btnLogin.Location = New System.Drawing.Point(472, 412)
+        Me.btnLogin.Location = New System.Drawing.Point(470, 394)
         Me.btnLogin.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.btnLogin.Name = "btnLogin"
         Me.btnLogin.Size = New System.Drawing.Size(271, 80)
         Me.btnLogin.TabIndex = 2
-        Me.btnLogin.Text = "ログイン(&G)"
+        Me.btnLogin.Text = "Login(&G)"
         Me.btnLogin.UseVisualStyleBackColor = True
         '
         'btnEnd
         '
         Me.btnEnd.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.btnEnd.Location = New System.Drawing.Point(765, 412)
+        Me.btnEnd.Location = New System.Drawing.Point(763, 394)
         Me.btnEnd.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.btnEnd.Name = "btnEnd"
         Me.btnEnd.Size = New System.Drawing.Size(271, 80)
         Me.btnEnd.TabIndex = 3
-        Me.btnEnd.Text = "終了(&B)"
+        Me.btnEnd.Text = "Exit(&B)"
         Me.btnEnd.UseVisualStyleBackColor = True
         '
         'Label1
@@ -62,9 +62,9 @@ Partial Class frmC01F10_Login
         Me.Label1.Location = New System.Drawing.Point(56, 242)
         Me.Label1.Margin = New System.Windows.Forms.Padding(7, 0, 7, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(189, 33)
+        Me.Label1.Size = New System.Drawing.Size(117, 33)
         Me.Label1.TabIndex = 2
-        Me.Label1.Text = "ユーザコード"
+        Me.Label1.Text = "User ID"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'Label2
@@ -74,9 +74,9 @@ Partial Class frmC01F10_Login
         Me.Label2.Location = New System.Drawing.Point(61, 328)
         Me.Label2.Margin = New System.Windows.Forms.Padding(7, 0, 7, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(160, 33)
+        Me.Label2.Size = New System.Drawing.Size(144, 33)
         Me.Label2.TabIndex = 3
-        Me.Label2.Text = "パスワード"
+        Me.Label2.Text = "Password"
         Me.Label2.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'txtTanto
@@ -96,21 +96,21 @@ Partial Class frmC01F10_Login
         Me.lblTitle.AutoSize = True
         Me.lblTitle.Font = New System.Drawing.Font("Verdana", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTitle.ForeColor = System.Drawing.Color.Navy
-        Me.lblTitle.Location = New System.Drawing.Point(54, 38)
+        Me.lblTitle.Location = New System.Drawing.Point(54, 31)
         Me.lblTitle.Margin = New System.Windows.Forms.Padding(7, 0, 7, 0)
         Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New System.Drawing.Size(399, 59)
+        Me.lblTitle.Size = New System.Drawing.Size(532, 59)
         Me.lblTitle.TabIndex = 6
-        Me.lblTitle.Text = "販売管理システム"
+        Me.lblTitle.Text = "Sales Management"
         '
         'lblVer
         '
-        Me.lblVer.Font = New System.Drawing.Font("HG創英角ﾎﾟｯﾌﾟ体", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.lblVer.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblVer.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.lblVer.Location = New System.Drawing.Point(667, 32)
+        Me.lblVer.Location = New System.Drawing.Point(667, 33)
         Me.lblVer.Margin = New System.Windows.Forms.Padding(7, 0, 7, 0)
         Me.lblVer.Name = "lblVer"
-        Me.lblVer.Size = New System.Drawing.Size(379, 68)
+        Me.lblVer.Size = New System.Drawing.Size(379, 54)
         Me.lblVer.TabIndex = 11
         Me.lblVer.Text = "Ver : @.@.@@"
         Me.lblVer.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -131,12 +131,12 @@ Partial Class frmC01F10_Login
         '
         Me.chkPasswd.AutoSize = True
         Me.chkPasswd.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.chkPasswd.Location = New System.Drawing.Point(63, 434)
+        Me.chkPasswd.Location = New System.Drawing.Point(61, 416)
         Me.chkPasswd.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.chkPasswd.Name = "chkPasswd"
-        Me.chkPasswd.Size = New System.Drawing.Size(288, 37)
+        Me.chkPasswd.Size = New System.Drawing.Size(285, 37)
         Me.chkPasswd.TabIndex = 13
-        Me.chkPasswd.Text = "パスワードの変更"
+        Me.chkPasswd.Text = "Change Password"
         Me.chkPasswd.UseVisualStyleBackColor = True
         '
         'Label5
@@ -146,9 +146,9 @@ Partial Class frmC01F10_Login
         Me.Label5.Location = New System.Drawing.Point(56, 158)
         Me.Label5.Margin = New System.Windows.Forms.Padding(7, 0, 7, 0)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(79, 33)
+        Me.Label5.Size = New System.Drawing.Size(138, 33)
         Me.Label5.TabIndex = 14
-        Me.Label5.Text = "会社"
+        Me.Label5.Text = "Company"
         Me.Label5.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'cmbCampany
@@ -168,12 +168,12 @@ Partial Class frmC01F10_Login
         Me.lblBackup.AutoSize = True
         Me.lblBackup.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.lblBackup.ForeColor = System.Drawing.Color.Red
-        Me.lblBackup.Location = New System.Drawing.Point(-9, 480)
+        Me.lblBackup.Location = New System.Drawing.Point(-2, 458)
         Me.lblBackup.Margin = New System.Windows.Forms.Padding(7, 0, 7, 0)
         Me.lblBackup.Name = "lblBackup"
-        Me.lblBackup.Size = New System.Drawing.Size(433, 33)
+        Me.lblBackup.Size = New System.Drawing.Size(466, 33)
         Me.lblBackup.TabIndex = 16
-        Me.lblBackup.Text = "★バックアップサーバ接続中★"
+        Me.lblBackup.Text = "★Connected to Backup Server★"
         Me.lblBackup.TextAlign = System.Drawing.ContentAlignment.TopRight
         Me.lblBackup.Visible = False
         '

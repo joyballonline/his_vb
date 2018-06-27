@@ -10,4 +10,59 @@
     <ENG>MENU（C01F30）</ENG>
     <JPN>処理メニュー（C01F30）</JPN>
   </LANG_DATA>
+  <LANG_DATA>
+    <ID>SelectG</ID>
+    <ENG>Select(G)</ENG>
+    <JPN>選択(G)</JPN>
+  </LANG_DATA>
+  <LANG_DATA>
+    <ID>UserMST</ID>
+    <ENG>User MST</ENG>
+    <JPN>ユーザマスタ</JPN>
+  </LANG_DATA>
+  <LANG_DATA>
+    <ID>LangMST</ID>
+    <ENG>Lang MST</ENG>
+    <JPN>言語マスタ</JPN>
+  </LANG_DATA>
+  <LANG_DATA>
+    <ID>SupplierMST</ID>
+    <ENG>Supplier MST</ENG>
+    <JPN>仕入先マスタ</JPN>
+  </LANG_DATA>
+  <LANG_DATA>
+    <ID>CustomerMST</ID>
+    <ENG>Customer MST</ENG>
+    <JPN>得意先マスタ</JPN>
+  </LANG_DATA>
+  <LANG_DATA>
+    <ID>CommonMST</ID>
+    <ENG>Common MST</ENG>
+    <JPN>汎用マスタ</JPN>
+  </LANG_DATA>
+  <LANG_DATA>
+    <ID>CompanyMST</ID>
+    <ENG>Company MST</ENG>
+    <JPN>会社マスタ</JPN>
+  </LANG_DATA>
+  <LANG_DATA>
+    <ID>Quotation</ID>
+    <ENG>Quotation</ENG>
+    <JPN>見積</JPN>
+  </LANG_DATA>
+  <LANG_DATA>
+    <ID>Order</ID>
+    <ENG>Order</ENG>
+    <JPN>受注</JPN>
+  </LANG_DATA>
+  <LANG_DATA>
+    <ID>Exit(B)</ID>
+    <ENG>Exit(B)</ENG>
+    <JPN>終了(B)</JPN>
+  </LANG_DATA>
+  <LANG_DATA>
+    <ID>Purchase</ID>
+    <ENG>Purchase</ENG>
+    <JPN>発注</JPN>
+  </LANG_DATA>
 </LANG_DEF>
