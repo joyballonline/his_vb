@@ -15,6 +15,7 @@
 '-------------------------------------------------------------------------------
 Imports UtilMDL
 Imports UtilMDL.MSG
+Imports UtilMDL.LANG
 Imports UtilMDL.DB
 
 Imports System.Drawing.Printing
@@ -39,6 +40,7 @@ Public Class frmC01F10_Login
     '-------------------------------------------------------------------------------
     Private _parentForm As Form
     Private _msgHd As UtilMsgHandler
+    Private _langHd As UtilLangHandler
     Private _db As UtilDBIf
     Private _btnSybt As String
 
@@ -69,11 +71,12 @@ Public Class frmC01F10_Login
     '                      prmRefDbHd       DBハンドラ
     '   ●メソッド戻り値 ：インスタンス
     '-------------------------------------------------------------------------------
-    Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler, ByRef prmRefDbHd As UtilDBIf)
+    Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler, ByRef prmRefLangHd As UtilLangHandler, ByRef prmRefDbHd As UtilDBIf)
         Call Me.New()
 
         '初期処理
         _msgHd = prmRefMsgHd                                                    'MSGハンドラの設定
+        _langHd = prmRefLangHd                                                  'LANGハンドラの設定
         _db = prmRefDbHd                                                        'DBハンドラの設定
         StartPosition = FormStartPosition.CenterScreen                          '画面中央表示
         lblVer.Text = "Ver : " & UtilClass.getAppVersion(StartUp.assembly)      'ラベルへ、バージョン情報の表示
@@ -81,8 +84,6 @@ Public Class frmC01F10_Login
             'バックアップサーバ接続中
             lblBackup.Visible = True
         End If
-
-
     End Sub
 
     '-------------------------------------------------------------------------------
@@ -166,6 +167,7 @@ Public Class frmC01F10_Login
             Try
                 sql = sql & N & "SELECT "
                 sql = sql & N & "    略名 "
+                sql = sql & N & "  , 言語 "
                 sql = sql & N & " FROM m02_user "
                 sql = sql & N & " WHERE "
                 sql = sql & N & "    会社コード = '" & _db.rmSQ(cmbCampany.SelectedValue) & "'"
@@ -234,6 +236,7 @@ Public Class frmC01F10_Login
                 _loginVal.TantoNM = _db.rmNullStr(ds.Tables(RS).Rows(0)("略名"))                '社員略名
                 _loginVal.Passwd = _db.rmNullStr(txtPasswd.Text)                'パスワード
                 _loginVal.Generation = _db.rmNullStr(ds2.Tables(RS).Rows(0)("世代番号"))                '世代番号
+                _loginVal.Language = _db.rmNullStr(ds.Tables(RS).Rows(0)("言語"))                '言語
                 '未実装　BKUPサーバ接続有無（バックアップサーバ接続時:"Y"、以外:"N"）
 
 
@@ -260,7 +263,7 @@ Public Class frmC01F10_Login
             Else
                 'パスワード変更チェックなし
                 Dim openForm As Form = Nothing
-                openForm = New frmC01F30_Menu(_msgHd, _db)
+                openForm = New frmC01F30_Menu(_msgHd, _langHd, _db)
                 openForm.Show()
                 Me.Hide()                                                           '自分は隠れる
 
@@ -331,6 +334,14 @@ Public Class frmC01F10_Login
 
         'システム名称表示
         lblTitle.Text = StartUp.iniValue.SystemCaption
+
+        Label1.Text = "User ID"
+        Label2.Text = "Password"
+        Label5.Text = "Company"
+        chkPasswd.Text = "Change Password"
+        lblBackup.Text = "Connected to Backup Server"
+        btnLogin.Text = "Login"
+        btnEnd.Text = "Exit"
 
         '担当者コード
         txtTanto.Text = ""

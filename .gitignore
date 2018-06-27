@@ -1,3 +1,14 @@
 .DS_Store
 *$DATA*
 .cache
+slnx.sqlite
+VSWorkspaceState.json
+.dtbcache
+slnx.sqlite-journal
+src/HanbaiKanri/.vs/*
+.vs
+*.cache
+src/HanbaiKanri/HanbaiKanri/bin/Debug/
+src/HanbaiKanri/HanbaiKanri/obj/Debug/
+src/HanbaiKanri/UtilMDL/bin/Debug/
+src/HanbaiKanri/UtilMDL/obj/Debug/

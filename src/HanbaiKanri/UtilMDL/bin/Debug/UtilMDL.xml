@@ -598,6 +598,21 @@ UtilMDL
  <returns></returns>
  <remarks></remarks>
 </member>
+<member name="M:UtilMDL.LANG.UtilLangHandler.#ctor(System.String)">
+ <summary>
+ コンストラクタ
+ </summary>
+ <param name="prmFileName">フルパスメッセージファイル名</param>
+ <remarks></remarks>
+</member>
+<member name="M:UtilMDL.LANG.UtilLangHandler.getLANG(System.String,System.String)">
+ <summary>
+ メッセージ取得 通知されたメッセージIDに対応するMSGを編集して返却する
+ </summary>
+ <param name="prmLangId">メッセージID</param>
+ <returns>検索されたメッセージビーン(ValueObject)</returns>
+ <remarks>発生例外       ：Exception,UsrDefException</remarks>
+</member>
 <member name="T:UtilMDL.API.UtilDirectorySelector">
  <summary>
  ユーティリティモジュール
