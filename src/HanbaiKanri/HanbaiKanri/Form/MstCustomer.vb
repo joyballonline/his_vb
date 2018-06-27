@@ -2,6 +2,7 @@
 
 Imports UtilMDL
 Imports UtilMDL.MSG
+Imports UtilMDL.LANG
 Imports UtilMDL.DB
 Imports UtilMDL.DataGridView
 Imports UtilMDL.FileDirectory
@@ -29,6 +30,7 @@ Public Class MstCustomer
     '   変数定義
     '-------------------------------------------------------------------------------
     Private _msgHd As UtilMsgHandler
+    Private _langHd As UtilLangHandler
     Private _db As UtilDBIf
     'Private _gh As UtilDataGridViewHandler
     Private _init As Boolean                             '初期処理済フラグ
@@ -171,7 +173,7 @@ Public Class MstCustomer
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
         Dim frmMenu As frmC01F30_Menu
-        frmMenu = New frmC01F30_Menu(_msgHd, _db)
+        frmMenu = New frmC01F30_Menu(_msgHd, _langHd, _db)
         frmMenu.Show()
         Me.Close()
     End Sub
