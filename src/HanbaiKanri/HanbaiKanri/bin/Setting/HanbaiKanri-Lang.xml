@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<LANG_DEF>
+  <LANG_DATA>
+    <ID>id</ID>
+    <ENG>title</ENG>
+    <JPN>タイトル</JPN>
+  </LANG_DATA>
+  <LANG_DATA>
+    <ID>MENU</ID>
+    <ENG>MENU（C01F30）</ENG>
+    <JPN>処理メニュー（C01F30）</JPN>
+  </LANG_DATA>
+</LANG_DEF>

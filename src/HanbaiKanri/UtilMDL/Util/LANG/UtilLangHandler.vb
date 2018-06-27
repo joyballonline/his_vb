@@ -75,7 +75,7 @@ Namespace LANG
                 Dim elemList As XmlNodeList = langDef.GetElementsByTagName("LANG_DATA")
                 Dim i As Integer
                 For i = 0 To elemList.Count - 1
-                    If elemList.ItemOf(i).Item("en").InnerText = prmLangText Then
+                    If elemList.ItemOf(i).Item("ID").InnerText = prmLangText Then
                         'メッセージIDが一致するなら
                         Dim textWk As String = "err"
                         textWk = elemList.ItemOf(i).Item(prmLangId).InnerText

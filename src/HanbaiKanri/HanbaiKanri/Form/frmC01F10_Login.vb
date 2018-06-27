@@ -84,8 +84,6 @@ Public Class frmC01F10_Login
             'バックアップサーバ接続中
             lblBackup.Visible = True
         End If
-        Dim test As String = _langHd.getLANG("title", "en")
-
     End Sub
 
     '-------------------------------------------------------------------------------
@@ -169,6 +167,7 @@ Public Class frmC01F10_Login
             Try
                 sql = sql & N & "SELECT "
                 sql = sql & N & "    略名 "
+                sql = sql & N & "  , 言語 "
                 sql = sql & N & " FROM m02_user "
                 sql = sql & N & " WHERE "
                 sql = sql & N & "    会社コード = '" & _db.rmSQ(cmbCampany.SelectedValue) & "'"
@@ -237,6 +236,7 @@ Public Class frmC01F10_Login
                 _loginVal.TantoNM = _db.rmNullStr(ds.Tables(RS).Rows(0)("略名"))                '社員略名
                 _loginVal.Passwd = _db.rmNullStr(txtPasswd.Text)                'パスワード
                 _loginVal.Generation = _db.rmNullStr(ds2.Tables(RS).Rows(0)("世代番号"))                '世代番号
+                _loginVal.Language = _db.rmNullStr(ds.Tables(RS).Rows(0)("言語"))                '言語
                 '未実装　BKUPサーバ接続有無（バックアップサーバ接続時:"Y"、以外:"N"）
 
 
@@ -263,7 +263,7 @@ Public Class frmC01F10_Login
             Else
                 'パスワード変更チェックなし
                 Dim openForm As Form = Nothing
-                openForm = New frmC01F30_Menu(_msgHd, _db)
+                openForm = New frmC01F30_Menu(_msgHd, _langHd, _db)
                 openForm.Show()
                 Me.Hide()                                                           '自分は隠れる
 
@@ -334,6 +334,14 @@ Public Class frmC01F10_Login
 
         'システム名称表示
         lblTitle.Text = StartUp.iniValue.SystemCaption
+
+        Label1.Text = "User ID"
+        Label2.Text = "Password"
+        Label5.Text = "Company"
+        chkPasswd.Text = "Change Password"
+        lblBackup.Text = "Connected to Backup Server"
+        btnLogin.Text = "Login"
+        btnEnd.Text = "Exit"
 
         '担当者コード
         txtTanto.Text = ""

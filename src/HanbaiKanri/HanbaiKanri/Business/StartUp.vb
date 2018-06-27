@@ -68,6 +68,7 @@ Public Class StartUp
         Public BumonNM As String            '‰ïĞ—ªÌ
         Public TantoSign As String          '’S“–ƒTƒCƒ“
         Public Generation As Integer        '¢‘ã”Ô†
+        Public Language As String           'Œ¾Œê
     End Structure
 
     '-------------------------------------------------------------------------------

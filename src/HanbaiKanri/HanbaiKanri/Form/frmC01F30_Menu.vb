@@ -13,8 +13,9 @@
 Option Explicit On
 
 Imports UtilMDL
-    Imports UtilMDL.MSG
-    Imports UtilMDL.DB
+Imports UtilMDL.MSG
+Imports UtilMDL.LANG
+Imports UtilMDL.DB
     Imports UtilMDL.DataGridView
     Imports UtilMDL.FileDirectory
     Imports UtilMDL.xls
@@ -39,6 +40,7 @@ Public Class frmC01F30_Menu
     '   変数定義
     '-------------------------------------------------------------------------------
     Private _msgHd As UtilMsgHandler
+    Private _langHd As UtilLangHandler
     Private _db As UtilDBIf
     Private _gh As UtilDataGridViewHandler
     Private _init As Boolean                             '初期処理済フラグ
@@ -54,17 +56,19 @@ Public Class frmC01F30_Menu
     '-------------------------------------------------------------------------------
     'コンストラクタ　メニューから呼ばれる
     '-------------------------------------------------------------------------------
-    Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler, ByRef prmRefDbHd As UtilDBIf)
+    Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler, ByRef prmRefLangHd As UtilLangHandler, ByRef prmRefDbHd As UtilDBIf)
         Call Me.New()
 
         _init = False
 
         '初期処理
         _msgHd = prmRefMsgHd                                                'MSGハンドラの設定
+        _langHd = prmRefLangHd
         _db = prmRefDbHd                                                    'DBハンドラの設定
         _gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
         StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
-        Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
+        Dim Title As String = _langHd.getLANG("MENU", frmC01F10_Login.loginValue.Language)
+        Me.Text = Title & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
 
         _init = True
 
