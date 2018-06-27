@@ -7,3 +7,4 @@ VSWorkspaceState.json
 slnx.sqlite-journal
 src/HanbaiKanri/.vs/*
 .vs
+*.cache
