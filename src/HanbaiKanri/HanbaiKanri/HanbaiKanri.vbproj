@@ -474,7 +474,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\Setting\HanbaiKanri-Lang.xml" />
+    <Content Include="bin\Setting\HanbaiKanri-Lang.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="bin\Setting\HanbaiKanri.xml">
       <SubType>Designer</SubType>
     </Content>
