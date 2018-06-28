@@ -49,7 +49,7 @@ Public Class QuoteList
     '-------------------------------------------------------------------------------
     'コンストラクタ　メニューから呼ばれる
     '-------------------------------------------------------------------------------
-    Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler, ByRef prmRefDbHd As UtilDBIf)
+    Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler, ByRef prmRefDbHd As UtilDBIf, ByRef prmRefLangHd As UtilLangHandler)
         Call Me.New()
 
         _init = False
@@ -57,6 +57,7 @@ Public Class QuoteList
         '初期処理
         _msgHd = prmRefMsgHd                                                'MSGハンドラの設定
         _db = prmRefDbHd                                                    'DBハンドラの設定
+        _langHd = prmRefLangHd
         '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
         StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
         Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
@@ -325,7 +326,7 @@ Public Class QuoteList
     Private Sub BtnQuoteAdd_Click(sender As Object, e As EventArgs) Handles BtnQuoteAdd.Click
         Dim Status As String = "ADD"
         Dim openForm As Form = Nothing
-        openForm = New Quote(_msgHd, _db, , Status)
+        openForm = New Quote(_msgHd, _db, _langHd, , Status)
         openForm.Show(Me)
     End Sub
 
@@ -336,7 +337,7 @@ Public Class QuoteList
         Dim Suffix As String = DgvMithd.Rows(RowIdx).Cells(1).Value
 
         Dim openForm As Form = Nothing
-        openForm = New Quote(_msgHd, _db, No, Suffix)   '処理選択
+        openForm = New Quote(_msgHd, _db, _langHd, No, Suffix)   '処理選択
         openForm.Show(Me)
     End Sub
 
@@ -347,7 +348,7 @@ Public Class QuoteList
         Dim Suffix As String = DgvMithd.Rows(RowIdx).Cells(1).Value
         Dim Status As String = "CLONE"
         Dim openForm As Form = Nothing
-        openForm = New Quote(_msgHd, _db, No, Suffix, Status)   '処理選択
+        openForm = New Quote(_msgHd, _db, _langHd, No, Suffix, Status)   '処理選択
         openForm.Show(Me)
     End Sub
 
@@ -358,7 +359,7 @@ Public Class QuoteList
         Dim Suffix As String = DgvMithd.Rows(RowIdx).Cells(1).Value
         Dim Status As String = "VIEW"
         Dim openForm As Form = Nothing
-        openForm = New Quote(_msgHd, _db, No, Suffix, Status)   '処理選択
+        openForm = New Quote(_msgHd, _db, _langHd, No, Suffix, Status)   '処理選択
         openForm.Show(Me)
     End Sub
 
@@ -369,7 +370,7 @@ Public Class QuoteList
         Dim Suffix As String = DgvMithd.Rows(RowIdx).Cells(1).Value
         Dim Status As String = "PRICE"
         Dim openForm As Form = Nothing
-        openForm = New Quote(_msgHd, _db, No, Suffix, Status)   '処理選択
+        openForm = New Quote(_msgHd, _db, _langHd, No, Suffix, Status)   '処理選択
         openForm.Show(Me)
     End Sub
 
@@ -682,7 +683,7 @@ Public Class QuoteList
         Dim Suffix As String = DgvMithd.Rows(RowIdx).Cells(1).Value
 
         Dim openForm As Form = Nothing
-        openForm = New Cymn(_msgHd, _db, No, Suffix)   '処理選択
+        openForm = New Cymn(_msgHd, _db, _langHd, No, Suffix)   '処理選択
         openForm.Show(Me)
     End Sub
 End Class

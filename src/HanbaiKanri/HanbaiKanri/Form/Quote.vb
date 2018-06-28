@@ -2,6 +2,7 @@
 
 Imports UtilMDL
 Imports UtilMDL.MSG
+Imports UtilMDL.LANG
 Imports UtilMDL.DB
 Imports UtilMDL.DataGridView
 Imports UtilMDL.FileDirectory
@@ -29,6 +30,7 @@ Public Class Quote
     '-------------------------------------------------------------------------------
     Private _msgHd As UtilMsgHandler
     Private _db As UtilDBIf
+    Private _langHd As UtilLangHandler
     Private _gh As UtilDataGridViewHandler
     Private _init As Boolean                             '初期処理済フラグ
     Private count As Integer = 0
@@ -56,6 +58,7 @@ Public Class Quote
     '-------------------------------------------------------------------------------
     Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler,
                    ByRef prmRefDbHd As UtilDBIf,
+                   ByRef prmRefLangHd As UtilLangHandler,
                    Optional ByRef prmRefNo As String = Nothing,
                    Optional ByRef prmRefSuffix As String = Nothing,
                    Optional ByRef prmRefStatus As String = Nothing)
@@ -66,6 +69,7 @@ Public Class Quote
         '初期処理
         _msgHd = prmRefMsgHd                                                'MSGハンドラの設定
         _db = prmRefDbHd                                                    'DBハンドラの設定
+        _langHd = prmRefLangHd
         EditNo = prmRefNo
         EditSuffix = prmRefSuffix
         Status = prmRefStatus
@@ -678,7 +682,7 @@ Public Class Quote
     '前の画面に戻る
     Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
         'Dim QuoteList As QuoteList
-        'QuoteList = New QuoteList(_msgHd, _db)
+        'QuoteList = New QuoteList(_msgHd, _db, _langHd)
         'QuoteList.Show()
         Me.Close()
     End Sub
@@ -1319,9 +1323,5 @@ Public Class Quote
             End Try
         End If
         Me.Close()
-    End Sub
-
-    Private Sub TxtSales_TextChanged(sender As Object, e As EventArgs) Handles TxtSales.TextChanged
-
     End Sub
 End Class

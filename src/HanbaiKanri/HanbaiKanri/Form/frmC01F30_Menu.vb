@@ -88,8 +88,6 @@ Public Class frmC01F30_Menu
     End Sub
 
     Private Sub InitializeComponent()
-        Dim langText As String
-
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -1285,22 +1283,26 @@ Public Class frmC01F30_Menu
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         Dim openForm As Form = Nothing
-        openForm = New QuoteList(_msgHd, _db)
+        openForm = New QuoteList(_msgHd, _db, _langHd)
         openForm.Show()
         Me.Hide()
     End Sub
 
     Private Sub BtnOrder_Click(sender As Object, e As EventArgs) Handles BtnOrder.Click
         Dim openForm As Form = Nothing
-        openForm = New OrderList(_msgHd, _db)
+        openForm = New OrderList(_msgHd, _db, _langHd)
         openForm.Show()
         Me.Hide()
     End Sub
 
     Private Sub BtnPurchase_Click(sender As Object, e As EventArgs) Handles BtnPurchase.Click
         Dim openForm As Form = Nothing
-        openForm = New PurchaseList(_msgHd, _db)
+        openForm = New PurchaseList(_msgHd, _db, _langHd)
         openForm.Show()
         Me.Hide()
+    End Sub
+
+    Private Sub dgvLIST_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvLIST.CellContentClick
+
     End Sub
 End Class

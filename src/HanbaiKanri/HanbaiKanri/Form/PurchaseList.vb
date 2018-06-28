@@ -49,7 +49,7 @@ Public Class PurchaseList
     '-------------------------------------------------------------------------------
     'コンストラクタ　メニューから呼ばれる
     '-------------------------------------------------------------------------------
-    Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler, ByRef prmRefDbHd As UtilDBIf)
+    Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler, ByRef prmRefDbHd As UtilDBIf, ByRef prmRefLang As UtilLangHandler)
         Call Me.New()
 
         _init = False
@@ -57,6 +57,7 @@ Public Class PurchaseList
         '初期処理
         _msgHd = prmRefMsgHd                                                'MSGハンドラの設定
         _db = prmRefDbHd                                                    'DBハンドラの設定
+        _langHd = prmRefLang
         '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
         StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
         Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
@@ -321,7 +322,7 @@ Public Class PurchaseList
         Dim status As String = "EDIT"
 
         Dim openForm As Form = Nothing
-        openForm = New Purchase(_msgHd, _db, No, Suffix)   '処理選択
+        openForm = New Purchase(_msgHd, _db, _langHd, No, Suffix)   '処理選択
         openForm.Show(Me)
     End Sub
 
@@ -626,8 +627,17 @@ Public Class PurchaseList
         Dim Suffix As String = DgvHtyhd.Rows(RowIdx).Cells(1).Value
         Dim Status As String = "VIEW"
         Dim openForm As Form = Nothing
-        openForm = New Purchase(_msgHd, _db, No, Suffix, Status)   '処理選択
+        openForm = New Purchase(_msgHd, _db, _langHd, No, Suffix, Status)   '処理選択
         openForm.Show(Me)
     End Sub
 
+    Private Sub BtnOrding_Click(sender As Object, e As EventArgs) Handles BtnOrding.Click
+        Dim RowIdx As Integer
+        RowIdx = Me.DgvHtyhd.CurrentCell.RowIndex
+        Dim No As String = DgvHtyhd.Rows(RowIdx).Cells(0).Value
+        Dim Suffix As String = DgvHtyhd.Rows(RowIdx).Cells(1).Value
+        Dim openForm As Form = Nothing
+        openForm = New PurchasingManagement(_msgHd, _db, _langHd, No)   '処理選択
+        openForm.Show(Me)
+    End Sub
 End Class

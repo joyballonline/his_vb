@@ -51,6 +51,7 @@ Public Class PurchasingManagement
     '-------------------------------------------------------------------------------
     Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler,
                    ByRef prmRefDbHd As UtilDBIf,
+                   ByRef prmRefLang As UtilLangHandler,
                    ByRef prmRefNo As String)
         Call Me.New()
 
@@ -59,6 +60,7 @@ Public Class PurchasingManagement
         '初期処理
         _msgHd = prmRefMsgHd                                                'MSGハンドラの設定
         _db = prmRefDbHd                                                    'DBハンドラの設定
+        _langHd = prmRefLang
         No = prmRefNo
         '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
         StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
@@ -71,6 +73,7 @@ Public Class PurchasingManagement
     Private Sub PurchaseManagement_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim Sql1 As String = ""
         Dim Sql2 As String = ""
+        Dim Sql3 As String = ""
         Try
             Sql1 += "SELECT "
             Sql1 += "* "
@@ -90,7 +93,7 @@ Public Class PurchasingManagement
             Sql2 += "FROM "
             Sql2 += "public"
             Sql2 += "."
-            Sql2 += "t21_hattyu"
+            Sql2 += "t41_siredt"
             Sql2 += " WHERE "
             Sql2 += "発注番号"
             Sql2 += " ILIKE "
@@ -98,9 +101,23 @@ Public Class PurchasingManagement
             Sql2 += No
             Sql2 += "'"
 
+            Sql3 += "SELECT "
+            Sql3 += "* "
+            Sql3 += "FROM "
+            Sql3 += "public"
+            Sql3 += "."
+            Sql3 += "t21_hattyu"
+            Sql3 += " WHERE "
+            Sql3 += "発注番号"
+            Sql3 += " ILIKE "
+            Sql3 += "'"
+            Sql3 += No
+            Sql3 += "'"
+
             Dim reccnt As Integer = 0
             Dim ds1 As DataSet = _db.selectDB(Sql1, RS, reccnt)
             Dim ds2 As DataSet = _db.selectDB(Sql2, RS, reccnt)
+            Dim ds3 As DataSet = _db.selectDB(Sql3, RS, reccnt)
 
             DgvPurchase.Columns.Add("明細", "明細")
             DgvPurchase.Columns.Add("メーカー", "メーカー")
@@ -119,18 +136,108 @@ Public Class PurchasingManagement
             DgvPurchase.Columns(8).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             DgvPurchase.Columns(9).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
-            For index As Integer = 0 To ds1.Tables(RS).Rows.Count - 1
+            For index As Integer = 0 To ds3.Tables(RS).Rows.Count - 1
                 DgvPurchase.Rows.Add()
-                DgvPurchase.Rows(index).Cells(1).Value = ds1.Tables(RS).Rows(index)("メーカー")
-                DgvPurchase.Rows(index).Cells(2).Value = ds1.Tables(RS).Rows(index)("品名")
-                DgvPurchase.Rows(index).Cells(3).Value = ds1.Tables(RS).Rows(index)("型式")
-                DgvPurchase.Rows(index).Cells(4).Value = ds1.Tables(RS).Rows(index)("発注数量")
-                DgvPurchase.Rows(index).Cells(5).Value = ds1.Tables(RS).Rows(index)("単位")
-                DgvPurchase.Rows(index).Cells(6).Value = ds1.Tables(RS).Rows(index)("仕入数量")
-                DgvPurchase.Rows(index).Cells(7).Value = ds1.Tables(RS).Rows(index)("仕入単価")
-                DgvPurchase.Rows(index).Cells(8).Value = ds1.Tables(RS).Rows(index)("仕入金額")
-                DgvPurchase.Rows(index).Cells(9).Value = ds1.Tables(RS).Rows(index)("発注残数")
+                DgvPurchase.Rows(index).Cells(1).Value = ds3.Tables(RS).Rows(index)("メーカー")
+                DgvPurchase.Rows(index).Cells(2).Value = ds3.Tables(RS).Rows(index)("品名")
+                DgvPurchase.Rows(index).Cells(3).Value = ds3.Tables(RS).Rows(index)("型式")
+                DgvPurchase.Rows(index).Cells(4).Value = ds3.Tables(RS).Rows(index)("発注数量")
+                DgvPurchase.Rows(index).Cells(5).Value = ds3.Tables(RS).Rows(index)("単位")
+                DgvPurchase.Rows(index).Cells(6).Value = ds3.Tables(RS).Rows(index)("仕入数量")
+                DgvPurchase.Rows(index).Cells(7).Value = ds3.Tables(RS).Rows(index)("仕入単価")
+                DgvPurchase.Rows(index).Cells(8).Value = ds3.Tables(RS).Rows(index)("仕入金額")
+                DgvPurchase.Rows(index).Cells(9).Value = ds3.Tables(RS).Rows(index)("発注残数")
             Next
+
+            DgvHistory.Columns.Add("No", "No")
+            DgvHistory.Columns.Add("仕入番号", "仕入番号")
+            DgvHistory.Columns.Add("行番号", "行番号")
+            DgvHistory.Columns.Add("仕入区分", "仕入区分")
+            DgvHistory.Columns.Add("メーカー", "メーカー")
+            DgvHistory.Columns.Add("品名", "品名")
+            DgvHistory.Columns.Add("型式", "型式")
+            DgvHistory.Columns.Add("単位", "単位")
+            DgvHistory.Columns.Add("仕入先", "仕入先")
+            DgvHistory.Columns.Add("仕入値", "仕入値")
+            DgvHistory.Columns.Add("仕入数量", "仕入数量")
+            DgvHistory.Columns.Add("備考", "備考")
+
+            DgvHistory.Columns(9).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            DgvHistory.Columns(10).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+            For index As Integer = 0 To ds2.Tables(RS).Rows.Count - 1
+                DgvHistory.Rows.Add()
+                DgvHistory.Rows(index).Cells(1).Value = ds2.Tables(RS).Rows(index)("仕入番号")
+                DgvHistory.Rows(index).Cells(1).Value = ds2.Tables(RS).Rows(index)("行番号")
+                DgvHistory.Rows(index).Cells(1).Value = ds2.Tables(RS).Rows(index)("仕入区分")
+                DgvHistory.Rows(index).Cells(1).Value = ds2.Tables(RS).Rows(index)("メーカー")
+                DgvHistory.Rows(index).Cells(2).Value = ds2.Tables(RS).Rows(index)("品名")
+                DgvHistory.Rows(index).Cells(3).Value = ds2.Tables(RS).Rows(index)("型式")
+                DgvHistory.Rows(index).Cells(5).Value = ds2.Tables(RS).Rows(index)("単位")
+                DgvHistory.Rows(index).Cells(6).Value = ds2.Tables(RS).Rows(index)("仕入先")
+                DgvHistory.Rows(index).Cells(7).Value = ds2.Tables(RS).Rows(index)("仕入値")
+                DgvHistory.Rows(index).Cells(8).Value = ds2.Tables(RS).Rows(index)("仕入数量")
+                DgvHistory.Rows(index).Cells(9).Value = ds2.Tables(RS).Rows(index)("備考")
+            Next
+
+            DgvAdd.Columns.Add("No", "No")
+            DgvAdd.Columns.Add("行番号", "行番号")
+            DgvAdd.Columns.Add("仕入区分", "仕入区分")
+            DgvAdd.Columns.Add("メーカー", "メーカー")
+            DgvAdd.Columns.Add("品名", "品名")
+            DgvAdd.Columns.Add("型式", "型式")
+            DgvAdd.Columns.Add("単位", "単位")
+            DgvAdd.Columns.Add("仕入先", "仕入先")
+            DgvAdd.Columns.Add("仕入値", "仕入値")
+            DgvAdd.Columns.Add("仕入数量", "仕入数量")
+            DgvAdd.Columns.Add("備考", "備考")
+
+            DgvAdd.Columns(8).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            DgvAdd.Columns(9).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+            For index As Integer = 0 To ds3.Tables(RS).Rows.Count - 1
+                DgvAdd.Rows.Add()
+                DgvAdd.Rows(index).Cells(1).Value = ds3.Tables(RS).Rows(index)("行番号")
+                DgvAdd.Rows(index).Cells(2).Value = ds3.Tables(RS).Rows(index)("仕入区分")
+                DgvAdd.Rows(index).Cells(3).Value = ds3.Tables(RS).Rows(index)("メーカー")
+                DgvAdd.Rows(index).Cells(4).Value = ds3.Tables(RS).Rows(index)("品名")
+                DgvAdd.Rows(index).Cells(5).Value = ds3.Tables(RS).Rows(index)("型式")
+                DgvAdd.Rows(index).Cells(6).Value = ds3.Tables(RS).Rows(index)("仕入先名")
+                DgvAdd.Rows(index).Cells(7).Value = ds3.Tables(RS).Rows(index)("単位")
+                DgvAdd.Rows(index).Cells(8).Value = ds3.Tables(RS).Rows(index)("仕入値")
+                DgvAdd.Rows(index).Cells(9).Value = ds3.Tables(RS).Rows(index)("仕入数量")
+                DgvAdd.Rows(index).Cells(10).Value = ds3.Tables(RS).Rows(index)("備考")
+            Next
+
+            '行番号の振り直し
+            Dim i1 As Integer = DgvPurchase.Rows.Count()
+            Dim No1 As Integer = 1
+            For c As Integer = 0 To i1 - 1
+                DgvPurchase.Rows(c).Cells(0).Value = No1
+                No1 += 1
+            Next c
+            TxtCount1.Text = DgvPurchase.Rows.Count()
+
+            Dim i2 As Integer = DgvHistory.Rows.Count()
+            Dim No2 As Integer = 1
+            For c As Integer = 0 To i2 - 1
+                DgvHistory.Rows(c).Cells(0).Value = No2
+                No2 += 1
+            Next c
+            TxtCount2.Text = DgvHistory.Rows.Count()
+
+            Dim i3 As Integer = DgvAdd.Rows.Count()
+            Dim No3 As Integer = 1
+            For c As Integer = 0 To i3 - 1
+                DgvAdd.Rows(c).Cells(0).Value = No3
+                No3 += 1
+            Next c
+            TxtCount3.Text = DgvAdd.Rows.Count()
+
+            TxtPurchaseNo.Text = ds1.Tables(RS).Rows(0)("発注番号")
+            TxtOrdingDate.Text = ds1.Tables(RS).Rows(0)("発注日")
+            TxtSupplierCode.Text = ds1.Tables(RS).Rows(0)("仕入先コード")
+            TxtSupplierName.Text = ds1.Tables(RS).Rows(0)("仕入先名")
 
         Catch ue As UsrDefException
             ue.dspMsg()
@@ -142,10 +249,13 @@ Public Class PurchasingManagement
     End Sub
 
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
-        Dim openForm As Form = Nothing
-        openForm = New frmC01F30_Menu(_msgHd, _langHd, _db)
-        openForm.Show()
+        'Dim openForm As Form = Nothing
+        'openForm = New frmC01F30_Menu(_msgHd, _langHd, _db)
+        'openForm.Show()
         Me.Close()
     End Sub
 
+    Private Sub BtnRegist_Click(sender As Object, e As EventArgs) Handles BtnRegist.Click
+
+    End Sub
 End Class

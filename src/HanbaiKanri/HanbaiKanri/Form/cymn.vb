@@ -2,6 +2,7 @@
 
 Imports UtilMDL
 Imports UtilMDL.MSG
+Imports UtilMDL.LANG
 Imports UtilMDL.DB
 Imports UtilMDL.DataGridView
 Imports UtilMDL.FileDirectory
@@ -29,6 +30,7 @@ Public Class Cymn
     '-------------------------------------------------------------------------------
     Private _msgHd As UtilMsgHandler
     Private _db As UtilDBIf
+    Private _langHd As UtilLangHandler
     Private _gh As UtilDataGridViewHandler
     Private _init As Boolean                             '初期処理済フラグ
 
@@ -50,6 +52,7 @@ Public Class Cymn
     '-------------------------------------------------------------------------------
     Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler,
                    ByRef prmRefDbHd As UtilDBIf,
+                   ByRef prmRefLang As UtilLangHandler,
                    Optional ByRef prmRefNo As String = Nothing,
                    Optional ByRef prmRefSuffix As String = Nothing)
         Call Me.New()
@@ -59,6 +62,7 @@ Public Class Cymn
         '初期処理
         _msgHd = prmRefMsgHd                                                'MSGハンドラの設定
         _db = prmRefDbHd                                                    'DBハンドラの設定
+        _langHd = prmRefLang
         QuoteNo = prmRefNo
         QuoteSuffix = prmRefSuffix
 

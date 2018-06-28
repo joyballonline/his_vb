@@ -148,9 +148,11 @@ Partial Class PurchasingManagement
         '
         'DgvPurchase
         '
+        Me.DgvPurchase.AllowUserToAddRows = False
         Me.DgvPurchase.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvPurchase.Location = New System.Drawing.Point(12, 105)
         Me.DgvPurchase.Name = "DgvPurchase"
+        Me.DgvPurchase.ReadOnly = True
         Me.DgvPurchase.RowTemplate.Height = 21
         Me.DgvPurchase.Size = New System.Drawing.Size(1326, 150)
         Me.DgvPurchase.TabIndex = 76
@@ -199,9 +201,11 @@ Partial Class PurchasingManagement
         '
         'DgvHistory
         '
+        Me.DgvHistory.AllowUserToAddRows = False
         Me.DgvHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvHistory.Location = New System.Drawing.Point(12, 286)
         Me.DgvHistory.Name = "DgvHistory"
+        Me.DgvHistory.ReadOnly = True
         Me.DgvHistory.RowTemplate.Height = 21
         Me.DgvHistory.Size = New System.Drawing.Size(1326, 150)
         Me.DgvHistory.TabIndex = 79
@@ -262,6 +266,7 @@ Partial Class PurchasingManagement
         '
         'DgvAdd
         '
+        Me.DgvAdd.AllowUserToAddRows = False
         Me.DgvAdd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvAdd.Location = New System.Drawing.Point(12, 467)
         Me.DgvAdd.Name = "DgvAdd"

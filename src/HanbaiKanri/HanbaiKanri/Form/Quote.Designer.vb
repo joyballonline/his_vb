@@ -923,7 +923,7 @@ Partial Class Quote
         Me.Controls.Add(Me.BtnRowsAdd)
         Me.Controls.Add(Me.DgvItemList)
         Me.Name = "Quote"
-        Me.Text = "QuoteRequest"
+        Me.Text = "Quote"
         CType(Me.DgvItemList, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()

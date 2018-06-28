@@ -50,6 +50,7 @@ Partial Class PurchaseList
         Me.BtnBack = New System.Windows.Forms.Button()
         Me.BtnPurchaseEdit = New System.Windows.Forms.Button()
         Me.DgvHtyhd = New System.Windows.Forms.DataGridView()
+        Me.BtnOrding = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         CType(Me.DgvHtyhd, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -331,11 +332,21 @@ Partial Class PurchaseList
         Me.DgvHtyhd.Size = New System.Drawing.Size(1326, 420)
         Me.DgvHtyhd.TabIndex = 61
         '
+        'BtnOrding
+        '
+        Me.BtnOrding.Location = New System.Drawing.Point(660, 675)
+        Me.BtnOrding.Name = "BtnOrding"
+        Me.BtnOrding.Size = New System.Drawing.Size(165, 40)
+        Me.BtnOrding.TabIndex = 87
+        Me.BtnOrding.Text = "仕入入力"
+        Me.BtnOrding.UseVisualStyleBackColor = True
+        '
         'PurchaseList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1350, 729)
+        Me.Controls.Add(Me.BtnOrding)
         Me.Controls.Add(Me.BtnPurchaseView)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Label10)
@@ -400,4 +411,5 @@ Partial Class PurchaseList
     Friend WithEvents BtnBack As Button
     Friend WithEvents BtnPurchaseEdit As Button
     Friend WithEvents DgvHtyhd As DataGridView
+    Friend WithEvents BtnOrding As Button
 End Class
