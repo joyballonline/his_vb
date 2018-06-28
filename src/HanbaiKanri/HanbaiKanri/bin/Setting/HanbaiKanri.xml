@@ -682,4 +682,11 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
 		<ICONT_TYPE>Exclamation</ICONT_TYPE>
 			<CREATE_DATE>2018/03/29 17:00</CREATE_DATE>
 </MSG_DATA>
+<MSG_DATA>
+	<ID>CreateExcel</ID>
+		<MSG1>エクセルファイルが作成されました。</MSG1>
+		<BUTTON_TYPE>OK</BUTTON_TYPE>
+		<ICONT_TYPE>Information</ICONT_TYPE>
+			<CREATE_DATE>2018/03/29 17:00</CREATE_DATE>
+</MSG_DATA>
 </MSG_DEF>

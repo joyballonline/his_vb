@@ -7,6 +7,8 @@ Imports UtilMDL.DB
 Imports UtilMDL.DataGridView
 Imports UtilMDL.FileDirectory
 Imports UtilMDL.xls
+Imports Microsoft.Office.Interop
+Imports System.Runtime.InteropServices
 
 
 Public Class Quote
@@ -422,6 +424,8 @@ Public Class Quote
             BtnDown.Visible = False
             BtnClone.Visible = False
             BtnInsert.Visible = False
+            BtnQuote.Visible = True
+            BtnQuote.Location = New Point(1004, 677)
         ElseIf Status Is "PRICE" Then
             BtnRowsAdd.Visible = False
             BtnRowsDel.Visible = False
@@ -429,6 +433,7 @@ Public Class Quote
             BtnDown.Visible = False
             BtnClone.Visible = False
             BtnInsert.Visible = False
+            BtnQuote.Visible = False
         End If
 
 
@@ -1323,5 +1328,275 @@ Public Class Quote
             End Try
         End If
         Me.Close()
+    End Sub
+
+    Private Sub BtnQuote_Click(sender As Object, e As EventArgs) Handles BtnQuote.Click
+
+        '見積基本情報
+        Dim Sql1 As String = ""
+        Sql1 += "SELECT "
+        Sql1 += "会社コード, "
+        Sql1 += "見積番号, "
+        Sql1 += "見積番号枝番, "
+        Sql1 += "見積日, "
+        Sql1 += "見積有効期限, "
+        Sql1 += "得意先コード, "
+        Sql1 += "得意先名, "
+        Sql1 += "得意先担当者名, "
+        Sql1 += "得意先担当者役職, "
+        Sql1 += "得意先郵便番号, "
+        Sql1 += "得意先住所, "
+        Sql1 += "得意先電話番号, "
+        Sql1 += "得意先ＦＡＸ, "
+        Sql1 += "営業担当者, "
+        Sql1 += "入力担当者, "
+        Sql1 += "支払条件, "
+        Sql1 += "備考, "
+        Sql1 += "登録日, "
+        Sql1 += "更新日, "
+        Sql1 += "更新者 "
+        Sql1 += "FROM "
+        Sql1 += "public"
+        Sql1 += "."
+        Sql1 += "t01_mithd"
+        Sql1 += " WHERE "
+        Sql1 += "見積番号"
+        Sql1 += " ILIKE "
+        Sql1 += "'%"
+        Sql1 += EditNo.ToString
+        Sql1 += "%'"
+        Sql1 += " AND "
+        Sql1 += "見積番号枝番"
+        Sql1 += " ILIKE "
+        Sql1 += "'%"
+        Sql1 += EditSuffix.ToString
+        Sql1 += "%'"
+        Dim reccnt As Integer = 0
+        Dim ds1 = _db.selectDB(Sql1, RS, reccnt)
+
+        Dim Sql2 As String = ""
+        Sql2 += "SELECT "
+        Sql2 += "見積番号枝番 "
+        Sql2 += "FROM "
+        Sql2 += "public"
+        Sql2 += "."
+        Sql2 += "t01_mithd"
+        Sql2 += " WHERE "
+        Sql2 += "見積番号"
+        Sql2 += " ILIKE "
+        Sql2 += "'%"
+        Sql2 += EditNo.ToString
+        Sql2 += "%'"
+
+        Dim ds2 = _db.selectDB(Sql2, RS, reccnt)
+        Dim SuffixMax As Integer = 0
+
+
+        CompanyCode = ds1.Tables(RS).Rows(0)(0)
+
+        Dim CmnData = ds1.Tables(RS).Rows(0)
+
+
+        '見積明細情報
+        Dim Sql3 As String = ""
+        Sql3 += "SELECT "
+        Sql3 += "仕入区分, "
+        Sql3 += "メーカー, "
+        Sql3 += "品名, "
+        Sql3 += "型式, "
+        Sql3 += "数量, "
+        Sql3 += "単位, "
+        Sql3 += "仕入先名称, "
+        Sql3 += "仕入単価, "
+        Sql3 += "間接費率, "
+        Sql3 += "間接費, "
+        Sql3 += "仕入金額, "
+        Sql3 += "売単価, "
+        Sql3 += "売上金額, "
+        Sql3 += "粗利額, "
+        Sql3 += "粗利率, "
+        Sql3 += "リードタイム, "
+        Sql3 += "備考, "
+        Sql3 += "登録日 "
+        Sql3 += "FROM "
+        Sql3 += "public"
+        Sql3 += "."
+        Sql3 += "t02_mitdt"
+        Sql3 += " WHERE "
+        Sql3 += "見積番号"
+        Sql3 += " ILIKE "
+        Sql3 += "'%"
+        Sql3 += EditNo.ToString
+        Sql3 += "%'"
+        Sql3 += " AND "
+        Sql3 += "見積番号枝番"
+        Sql3 += " ILIKE "
+        Sql3 += "'%"
+        Sql3 += EditSuffix.ToString
+        Sql3 += "%'"
+
+        Dim ds3 = _db.selectDB(Sql3, RS, reccnt)
+
+        Dim Sql4 As String = ""
+        Sql4 += "SELECT "
+        Sql4 += "会社コード, "
+        Sql4 += "会社名, "
+        Sql4 += "会社略称, "
+        Sql4 += "郵便番号, "
+        Sql4 += "住所１, "
+        Sql4 += "住所２, "
+        Sql4 += "住所３, "
+        Sql4 += "電話番号, "
+        Sql4 += "ＦＡＸ番号, "
+        Sql4 += "代表者役職, "
+        Sql4 += "代表者名, "
+        Sql4 += "表示順, "
+        Sql4 += "備考, "
+        Sql4 += "銀行コード, "
+        Sql4 += "支店コード, "
+        Sql4 += "預金種目, "
+        Sql4 += "口座番号, "
+        Sql4 += "口座名義, "
+        Sql4 += "更新者, "
+        Sql4 += "更新日 "
+        Sql4 += "FROM "
+        Sql4 += "public"
+        Sql4 += "."
+        Sql4 += "m01_company"
+
+        Dim ds4 = _db.selectDB(Sql4, RS, reccnt)
+
+
+        '定義
+        Dim app As Excel.Application = Nothing
+        Dim book As Excel.Workbook = Nothing
+        Dim sheet As Excel.Worksheet = Nothing
+
+
+
+        Try
+            '雛形パス
+            Dim sHinaPath As String = ""
+            sHinaPath = StartUp._iniVal.BaseXlsPath
+
+            '雛形ファイル名
+            Dim sHinaFile As String = ""
+            sHinaFile = sHinaPath & "\" & "Quotation.xlsx"
+
+            '出力先パス
+            Dim sOutPath As String = ""
+            sOutPath = StartUp._iniVal.OutXlsPath
+
+            '出力ファイル名
+            Dim sOutFile As String = ""
+            sOutFile = sOutPath & "\" & CmnData(1) & "-" & CmnData(2) & ".xlsx"
+
+
+
+            app = New Excel.Application()
+            book = app.Workbooks.Add(sHinaFile)  'テンプレート
+            sheet = CType(book.Worksheets(1), Excel.Worksheet)
+
+            sheet.Range("D1").Value = ds4.Tables(RS).Rows(0)(1)
+            sheet.Range("D2").Value = ds4.Tables(RS).Rows(0)(3) & " " & ds4.Tables(RS).Rows(0)(4)
+            sheet.Range("D3").Value = ds4.Tables(RS).Rows(0)(5) & " " & ds4.Tables(RS).Rows(0)(6)
+            sheet.Range("D4").Value = "telp. " & ds4.Tables(RS).Rows(0)(7) & " Fax." & ds4.Tables(RS).Rows(0)(8)
+
+            sheet.Range("E8").Value = CmnData(6)                       '得意先名
+            sheet.Range("E9").Value = CmnData(8) & " " & CmnData(7)    '得意先担当者
+            sheet.Range("E11").Value = CmnData(11)                       '得意先名
+            sheet.Range("E12").Value = CmnData(12)                       '得意先名
+
+            sheet.Range("S8").Value = CmnData(1) & "-" & CmnData(2)    '見積番号
+            sheet.Range("S9").Value = CmnData(3)                       '見積番号
+
+            sheet.Range("H27").Value = CmnData(15)                       '見積番号
+            sheet.Range("H28").Value = CmnData(10) & " " & CmnData(11)                        '見積番号
+            sheet.Range("H29").Value = CmnData(4)                       '見積番号
+            sheet.Range("H30").Value = CmnData(16)                       '見積番号
+
+            sheet.Range("D34").Value = CmnData(13)                       '見積番号
+            sheet.Range("D35").Value = CmnData(14)                       '見積番号
+
+            Dim rowCnt As Integer = 0
+            Dim lstRow As Integer = 22
+            Dim addRowCnt As Integer = 0
+            Dim currentCnt As Integer = 20
+            Dim num As Integer = 1
+
+            rowCnt = ds3.Tables(RS).Rows.Count - 1
+            'rowCnt = 10
+
+            Dim cellPos As String = lstRow & ":" & lstRow
+
+            If rowCnt > 1 Then
+                For addRow As Integer = 0 To rowCnt
+                    Dim R As Object
+                    cellPos = lstRow - 2 & ":" & lstRow - 2
+                    R = sheet.Range(cellPos)
+                    R.Copy()
+                    R.Insert()
+                    If Marshal.IsComObject(R) Then
+                        Marshal.ReleaseComObject(R)
+                    End If
+
+                    lstRow = lstRow + 1
+                Next
+            End If
+
+            Dim totalPrice As Integer = 0
+
+            For index As Integer = 0 To ds3.Tables(RS).Rows.Count - 1
+                Dim cell As String
+
+                cell = "A" & currentCnt
+                sheet.Range(cell).Value = num
+                cell = "C" & currentCnt
+                sheet.Range(cell).Value = ds3.Tables(RS).Rows(index)(1) & "/" & ds3.Tables(RS).Rows(index)(2) & "/" & ds3.Tables(RS).Rows(index)(3)
+                cell = "L" & currentCnt
+                sheet.Range(cell).Value = ds3.Tables(RS).Rows(index)(4)
+                cell = "O" & currentCnt
+                sheet.Range(cell).Value = ds3.Tables(RS).Rows(index)(5)
+                cell = "R" & currentCnt
+                sheet.Range(cell).Value = ds3.Tables(RS).Rows(index)(11)
+                cell = "V" & currentCnt
+                sheet.Range(cell).Value = ds3.Tables(RS).Rows(index)(12)
+
+                totalPrice = totalPrice + ds3.Tables(RS).Rows(index)(12)
+
+                cell = "Z" & currentCnt
+                sheet.Range(cell).Value = ds3.Tables(RS).Rows(index)(15)
+
+                sheet.Rows(currentCnt & ":" & currentCnt).AutoFit
+
+                currentCnt = currentCnt + 1
+                num = num + 1
+            Next
+
+
+            sheet.Range("V" & lstRow + 1).Value = totalPrice
+            sheet.Range("V" & lstRow + 2).Value = totalPrice * 10 * 0.01
+            sheet.Range("V" & lstRow + 3).Value = totalPrice * 10 * 0.01 + totalPrice
+
+            book.SaveAs(sOutFile)
+
+            _msgHd.dspMSG("CreateExcel")
+
+        Catch ex As Exception
+            Throw ex
+
+        Finally
+            app.Quit()
+            Marshal.ReleaseComObject(sheet)
+            Marshal.ReleaseComObject(book)
+            Marshal.ReleaseComObject(app)
+
+        End Try
+
+
+
+
+
+
     End Sub
 End Class

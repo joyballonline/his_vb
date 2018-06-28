@@ -90,6 +90,7 @@ Partial Class Quote
         Me.TxtTotal = New System.Windows.Forms.TextBox()
         Me.LblTotal = New System.Windows.Forms.Label()
         Me.BtnRegistration = New System.Windows.Forms.Button()
+        Me.BtnQuote = New System.Windows.Forms.Button()
         Me.DtpRegistration = New System.Windows.Forms.DateTimePicker()
         Me.BtnBack = New System.Windows.Forms.Button()
         Me.TxtCustomerCode = New System.Windows.Forms.TextBox()
@@ -713,6 +714,15 @@ Partial Class Quote
         Me.BtnRegistration.Text = "登録"
         Me.BtnRegistration.UseVisualStyleBackColor = True
         '
+        'BtnQuote
+        '
+        Me.BtnQuote.Location = New System.Drawing.Point(828, 677)
+        Me.BtnQuote.Name = "BtnQuote"
+        Me.BtnQuote.Size = New System.Drawing.Size(165, 40)
+        Me.BtnQuote.TabIndex = 18
+        Me.BtnQuote.Text = "見積書発行"
+        Me.BtnQuote.UseVisualStyleBackColor = True
+        '
         'DtpRegistration
         '
         Me.DtpRegistration.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
@@ -882,6 +892,7 @@ Partial Class Quote
         Me.Controls.Add(Me.BtnBack)
         Me.Controls.Add(Me.DtpRegistration)
         Me.Controls.Add(Me.BtnRegistration)
+        Me.Controls.Add(Me.BtnQuote)
         Me.Controls.Add(Me.TxtTotal)
         Me.Controls.Add(Me.LblTotal)
         Me.Controls.Add(Me.TxtAddress3)
@@ -970,6 +981,7 @@ Partial Class Quote
     Friend WithEvents TxtTotal As TextBox
     Friend WithEvents LblTotal As Label
     Friend WithEvents BtnRegistration As Button
+    Friend WithEvents BtnQuote As Button
     Friend WithEvents DtpRegistration As DateTimePicker
     Friend WithEvents BtnBack As Button
     Friend WithEvents TxtCustomerCode As TextBox
