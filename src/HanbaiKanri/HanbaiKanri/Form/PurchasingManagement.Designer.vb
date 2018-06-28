@@ -48,6 +48,7 @@ Partial Class PurchasingManagement
         Me.TxtRemarks = New System.Windows.Forms.TextBox()
         Me.DtpPurchaseDate = New System.Windows.Forms.DateTimePicker()
         Me.BtnRegist = New System.Windows.Forms.Button()
+        Me.TxtSuffixNo = New System.Windows.Forms.TextBox()
         CType(Me.DgvPurchase, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvHistory, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvAdd, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -129,7 +130,7 @@ Partial Class PurchasingManagement
         Me.LblPurchaseDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblPurchaseDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblPurchaseDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblPurchaseDate.Location = New System.Drawing.Point(351, 9)
+        Me.LblPurchaseDate.Location = New System.Drawing.Point(393, 9)
         Me.LblPurchaseDate.Name = "LblPurchaseDate"
         Me.LblPurchaseDate.Size = New System.Drawing.Size(170, 22)
         Me.LblPurchaseDate.TabIndex = 75
@@ -141,7 +142,7 @@ Partial Class PurchasingManagement
         Me.TxtOrdingDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.TxtOrdingDate.Enabled = False
         Me.TxtOrdingDate.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtOrdingDate.Location = New System.Drawing.Point(527, 9)
+        Me.TxtOrdingDate.Location = New System.Drawing.Point(569, 9)
         Me.TxtOrdingDate.Name = "TxtOrdingDate"
         Me.TxtOrdingDate.Size = New System.Drawing.Size(157, 22)
         Me.TxtOrdingDate.TabIndex = 74
@@ -328,11 +329,22 @@ Partial Class PurchasingManagement
         Me.BtnRegist.Text = "登録"
         Me.BtnRegist.UseVisualStyleBackColor = True
         '
+        'TxtSuffixNo
+        '
+        Me.TxtSuffixNo.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TxtSuffixNo.Enabled = False
+        Me.TxtSuffixNo.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtSuffixNo.Location = New System.Drawing.Point(351, 9)
+        Me.TxtSuffixNo.Name = "TxtSuffixNo"
+        Me.TxtSuffixNo.Size = New System.Drawing.Size(36, 22)
+        Me.TxtSuffixNo.TabIndex = 231
+        '
         'PurchasingManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1350, 729)
+        Me.Controls.Add(Me.TxtSuffixNo)
         Me.Controls.Add(Me.BtnRegist)
         Me.Controls.Add(Me.DtpPurchaseDate)
         Me.Controls.Add(Me.Label9)
@@ -395,4 +407,5 @@ Partial Class PurchasingManagement
     Friend WithEvents TxtRemarks As TextBox
     Friend WithEvents DtpPurchaseDate As DateTimePicker
     Friend WithEvents BtnRegist As Button
+    Friend WithEvents TxtSuffixNo As TextBox
 End Class

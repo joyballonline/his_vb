@@ -637,7 +637,7 @@ Public Class PurchaseList
         Dim No As String = DgvHtyhd.Rows(RowIdx).Cells(0).Value
         Dim Suffix As String = DgvHtyhd.Rows(RowIdx).Cells(1).Value
         Dim openForm As Form = Nothing
-        openForm = New PurchasingManagement(_msgHd, _db, _langHd, No)   '処理選択
+        openForm = New PurchasingManagement(_msgHd, _db, _langHd, No, Suffix)   '処理選択
         openForm.Show(Me)
     End Sub
 End Class
