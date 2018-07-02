@@ -63,7 +63,7 @@ Partial Class MstSupplier
         Me.Dgv_Supplier.ReadOnly = True
         Me.Dgv_Supplier.RowTemplate.Height = 21
         Me.Dgv_Supplier.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.Dgv_Supplier.Size = New System.Drawing.Size(960, 220)
+        Me.Dgv_Supplier.Size = New System.Drawing.Size(1326, 640)
         Me.Dgv_Supplier.TabIndex = 0
         '
         '会社コード
@@ -194,34 +194,34 @@ Partial Class MstSupplier
         '
         'btnSupplierEdit
         '
-        Me.btnSupplierEdit.Location = New System.Drawing.Point(12, 257)
+        Me.btnSupplierEdit.Location = New System.Drawing.Point(1002, 677)
         Me.btnSupplierEdit.Name = "btnSupplierEdit"
-        Me.btnSupplierEdit.Size = New System.Drawing.Size(75, 23)
+        Me.btnSupplierEdit.Size = New System.Drawing.Size(165, 40)
         Me.btnSupplierEdit.TabIndex = 1
         Me.btnSupplierEdit.Text = "選択"
         Me.btnSupplierEdit.UseVisualStyleBackColor = True
         '
         'btnSupplierAdd
         '
-        Me.btnSupplierAdd.Location = New System.Drawing.Point(93, 257)
+        Me.btnSupplierAdd.Location = New System.Drawing.Point(831, 677)
         Me.btnSupplierAdd.Name = "btnSupplierAdd"
-        Me.btnSupplierAdd.Size = New System.Drawing.Size(75, 23)
+        Me.btnSupplierAdd.Size = New System.Drawing.Size(165, 40)
         Me.btnSupplierAdd.TabIndex = 2
         Me.btnSupplierAdd.Text = "追加"
         Me.btnSupplierAdd.UseVisualStyleBackColor = True
         '
         'BtnBack
         '
-        Me.BtnBack.Location = New System.Drawing.Point(897, 257)
+        Me.BtnBack.Location = New System.Drawing.Point(1173, 677)
         Me.BtnBack.Name = "BtnBack"
-        Me.BtnBack.Size = New System.Drawing.Size(75, 23)
+        Me.BtnBack.Size = New System.Drawing.Size(165, 40)
         Me.BtnBack.TabIndex = 3
         Me.BtnBack.Text = "戻る"
         Me.BtnBack.UseVisualStyleBackColor = True
         '
         'BtnSearch
         '
-        Me.BtnSearch.Location = New System.Drawing.Point(180, 4)
+        Me.BtnSearch.Location = New System.Drawing.Point(192, 4)
         Me.BtnSearch.Name = "BtnSearch"
         Me.BtnSearch.Size = New System.Drawing.Size(75, 23)
         Me.BtnSearch.TabIndex = 18
@@ -233,13 +233,13 @@ Partial Class MstSupplier
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(12, 9)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(56, 12)
+        Me.Label1.Size = New System.Drawing.Size(68, 12)
         Me.Label1.TabIndex = 17
-        Me.Label1.Text = "会社コード"
+        Me.Label1.Text = "仕入先コード"
         '
         'Search
         '
-        Me.Search.Location = New System.Drawing.Point(74, 6)
+        Me.Search.Location = New System.Drawing.Point(86, 6)
         Me.Search.Name = "Search"
         Me.Search.Size = New System.Drawing.Size(100, 19)
         Me.Search.TabIndex = 16
@@ -248,7 +248,7 @@ Partial Class MstSupplier
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(984, 287)
+        Me.ClientSize = New System.Drawing.Size(1350, 729)
         Me.Controls.Add(Me.BtnSearch)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Search)

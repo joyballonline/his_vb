@@ -2,6 +2,7 @@
 
 Imports UtilMDL
 Imports UtilMDL.MSG
+Imports UtilMDL.LANG
 Imports UtilMDL.DB
 Imports UtilMDL.DataGridView
 Imports UtilMDL.FileDirectory
@@ -29,6 +30,7 @@ Public Class SupplierEdit
     '-------------------------------------------------------------------------------
     Private _msgHd As UtilMsgHandler
     Private _db As UtilDBIf
+    Private _langHd As UtilLangHandler
     'Private _gh As UtilDataGridViewHandler
     Private _init As Boolean                             '初期処理済フラグ
     Private srArr() As String
@@ -48,6 +50,7 @@ Public Class SupplierEdit
     '-------------------------------------------------------------------------------
     Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler,
                    ByRef prmRefDbHd As UtilDBIf,
+                   ByRef prmRefLang As UtilLangHandler,
                    ByRef prmRefsrArr() As String,
                    ByRef prmRefkey1 As String,
                    ByRef prmRefkey2 As String)
@@ -61,6 +64,7 @@ Public Class SupplierEdit
         key2 = prmRefkey2
         _msgHd = prmRefMsgHd                                                'MSGハンドラの設定
         _db = prmRefDbHd                                                    'DBハンドラの設定
+        _langHd = prmRefLang
         '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
         StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
         Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
@@ -240,7 +244,7 @@ Public Class SupplierEdit
             _db.executeDB(Sql)
 
             Dim frmUM As MstSupplier
-            frmUM = New MstSupplier(_msgHd, _db)
+            frmUM = New MstSupplier(_msgHd, _db, _langHd)
             frmUM.Show()
             Me.Close()
 
@@ -255,7 +259,7 @@ Public Class SupplierEdit
 
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
         Dim MstSupplier As MstSupplier
-        MstSupplier = New MstSupplier(_msgHd, _db)
+        MstSupplier = New MstSupplier(_msgHd, _db, _langHd)
         MstSupplier.Show()
         Me.Close()
     End Sub

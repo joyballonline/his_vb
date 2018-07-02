@@ -71,16 +71,16 @@ Public Class frmC01F30_Menu
         Me.Text = Title & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
 
         Me.btnSelect.Text = _langHd.getLANG("SelectG", frmC01F10_Login.loginValue.Language)
-        Me.btnUserMaintenance.Text = _langHd.getLANG("UserMST", frmC01F10_Login.loginValue.Language)
-        Me.btnLanguageMaster.Text = _langHd.getLANG("LangMST", frmC01F10_Login.loginValue.Language)
-        Me.btnSupplierMaster.Text = _langHd.getLANG("SupplierMST", frmC01F10_Login.loginValue.Language)
-        Me.btnCostmerMaster.Text = _langHd.getLANG("CustomerMST", frmC01F10_Login.loginValue.Language)
-        Me.btnHanyouMaster.Text = _langHd.getLANG("CommonMST", frmC01F10_Login.loginValue.Language)
-        Me.BtnCompanyMaster.Text = _langHd.getLANG("CompanyMST", frmC01F10_Login.loginValue.Language)
-        Me.Button3.Text = _langHd.getLANG("Quotation", frmC01F10_Login.loginValue.Language)
-        Me.BtnOrder.Text = _langHd.getLANG("Order", frmC01F10_Login.loginValue.Language)
-        Me.cmdExit.Text = _langHd.getLANG("Exit(B)", frmC01F10_Login.loginValue.Language)
-        Me.BtnPurchase.Text = _langHd.getLANG("Purchase", frmC01F10_Login.loginValue.Language)
+        'Me.btnUserMaintenance.Text = _langHd.getLANG("UserMST", frmC01F10_Login.loginValue.Language)
+        'Me.btnLanguageMaster.Text = _langHd.getLANG("LangMST", frmC01F10_Login.loginValue.Language)
+        'Me.btnSupplierMaster.Text = _langHd.getLANG("SupplierMST", frmC01F10_Login.loginValue.Language)
+        'Me.btnCostmerMaster.Text = _langHd.getLANG("CustomerMST", frmC01F10_Login.loginValue.Language)
+        'Me.btnHanyouMaster.Text = _langHd.getLANG("CommonMST", frmC01F10_Login.loginValue.Language)
+        'Me.BtnCompanyMaster.Text = _langHd.getLANG("CompanyMST", frmC01F10_Login.loginValue.Language)
+        'Me.Button3.Text = _langHd.getLANG("Quotation", frmC01F10_Login.loginValue.Language)
+        'Me.BtnOrder.Text = _langHd.getLANG("Order", frmC01F10_Login.loginValue.Language)
+        'Me.cmdExit.Text = _langHd.getLANG("Exit(B)", frmC01F10_Login.loginValue.Language)
+        'Me.BtnPurchase.Text = _langHd.getLANG("Purchase", frmC01F10_Login.loginValue.Language)
 
 
         _init = True
@@ -88,85 +88,90 @@ Public Class frmC01F30_Menu
     End Sub
 
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Me.TableLayoutPanel30 = New System.Windows.Forms.TableLayoutPanel()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Me.前回操作日時 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.My前回操作日時 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.説明 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.処理名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.業務 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.処理ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnSelect = New System.Windows.Forms.Button()
-        Me.btnUserMaintenance = New System.Windows.Forms.Button()
-        Me.btnLanguageMaster = New System.Windows.Forms.Button()
-        Me.btnSupplierMaster = New System.Windows.Forms.Button()
-        Me.btnCostmerMaster = New System.Windows.Forms.Button()
-        Me.btnHanyouMaster = New System.Windows.Forms.Button()
-        Me.BtnCompanyMaster = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.BtnOrder = New System.Windows.Forms.Button()
+        Me.操作者 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.cmdExit = New System.Windows.Forms.Button()
-        Me.BtnPurchase = New System.Windows.Forms.Button()
         Me.chkM01 = New System.Windows.Forms.CheckBox()
         Me.chkG01 = New System.Windows.Forms.CheckBox()
         Me.chkH07 = New System.Windows.Forms.CheckBox()
         Me.chkH06 = New System.Windows.Forms.CheckBox()
         Me.chkH05 = New System.Windows.Forms.CheckBox()
-        Me.chkH01 = New System.Windows.Forms.CheckBox()
-        Me.TableLayoutPanel28 = New System.Windows.Forms.TableLayoutPanel()
-        Me.TableLayoutPanel23 = New System.Windows.Forms.TableLayoutPanel()
         Me.chkH03 = New System.Windows.Forms.CheckBox()
-        Me.TableLayoutPanel27 = New System.Windows.Forms.TableLayoutPanel()
+        Me.chkH01 = New System.Windows.Forms.CheckBox()
         Me.dgvLIST = New System.Windows.Forms.DataGridView()
-        Me.処理ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.業務 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.処理名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.説明 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.My前回操作日時 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.操作者 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.前回操作日時 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TableLayoutPanel30.SuspendLayout()
-        Me.TableLayoutPanel28.SuspendLayout()
-        Me.TableLayoutPanel23.SuspendLayout()
-        Me.TableLayoutPanel27.SuspendLayout()
         CType(Me.dgvLIST, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'TableLayoutPanel30
+        '前回操作日時
         '
-        Me.TableLayoutPanel30.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TableLayoutPanel30.ColumnCount = 12
-        Me.TableLayoutPanel30.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100.0!))
-        Me.TableLayoutPanel30.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100.0!))
-        Me.TableLayoutPanel30.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100.0!))
-        Me.TableLayoutPanel30.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100.0!))
-        Me.TableLayoutPanel30.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100.0!))
-        Me.TableLayoutPanel30.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100.0!))
-        Me.TableLayoutPanel30.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100.0!))
-        Me.TableLayoutPanel30.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100.0!))
-        Me.TableLayoutPanel30.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100.0!))
-        Me.TableLayoutPanel30.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100.0!))
-        Me.TableLayoutPanel30.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100.0!))
-        Me.TableLayoutPanel30.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100.0!))
-        Me.TableLayoutPanel30.Controls.Add(Me.btnSelect, 0, 1)
-        Me.TableLayoutPanel30.Controls.Add(Me.btnUserMaintenance, 1, 1)
-        Me.TableLayoutPanel30.Controls.Add(Me.btnLanguageMaster, 2, 1)
-        Me.TableLayoutPanel30.Controls.Add(Me.btnSupplierMaster, 4, 1)
-        Me.TableLayoutPanel30.Controls.Add(Me.btnCostmerMaster, 3, 1)
-        Me.TableLayoutPanel30.Controls.Add(Me.btnHanyouMaster, 1, 1)
-        Me.TableLayoutPanel30.Controls.Add(Me.BtnCompanyMaster, 6, 1)
-        Me.TableLayoutPanel30.Controls.Add(Me.Button3, 7, 1)
-        Me.TableLayoutPanel30.Controls.Add(Me.BtnOrder, 8, 1)
-        Me.TableLayoutPanel30.Controls.Add(Me.cmdExit, 10, 1)
-        Me.TableLayoutPanel30.Controls.Add(Me.BtnPurchase, 9, 1)
-        Me.TableLayoutPanel30.Location = New System.Drawing.Point(178, 663)
-        Me.TableLayoutPanel30.Name = "TableLayoutPanel30"
-        Me.TableLayoutPanel30.RowCount = 2
-        Me.TableLayoutPanel30.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.25424!))
-        Me.TableLayoutPanel30.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 84.74576!))
-        Me.TableLayoutPanel30.Size = New System.Drawing.Size(1169, 63)
-        Me.TableLayoutPanel30.TabIndex = 1
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle9.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        Me.前回操作日時.DefaultCellStyle = DataGridViewCellStyle9
+        Me.前回操作日時.HeaderText = "前回操作日時"
+        Me.前回操作日時.Name = "前回操作日時"
+        Me.前回操作日時.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.前回操作日時.Width = 200
+        '
+        'My前回操作日時
+        '
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle10.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        Me.My前回操作日時.DefaultCellStyle = DataGridViewCellStyle10
+        Me.My前回操作日時.HeaderText = " My前回操作日時"
+        Me.My前回操作日時.Name = "My前回操作日時"
+        Me.My前回操作日時.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.My前回操作日時.Width = 200
+        '
+        '説明
+        '
+        DataGridViewCellStyle11.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        Me.説明.DefaultCellStyle = DataGridViewCellStyle11
+        Me.説明.HeaderText = "説明"
+        Me.説明.Name = "説明"
+        Me.説明.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.説明.Width = 320
+        '
+        '処理名
+        '
+        DataGridViewCellStyle12.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        Me.処理名.DefaultCellStyle = DataGridViewCellStyle12
+        Me.処理名.HeaderText = "処理名"
+        Me.処理名.Name = "処理名"
+        Me.処理名.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.処理名.Width = 200
+        '
+        '業務
+        '
+        DataGridViewCellStyle13.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        Me.業務.DefaultCellStyle = DataGridViewCellStyle13
+        Me.業務.HeaderText = "業務"
+        Me.業務.Name = "業務"
+        Me.業務.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.業務.Width = 200
+        '
+        '処理ID
+        '
+        DataGridViewCellStyle14.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.処理ID.DefaultCellStyle = DataGridViewCellStyle14
+        Me.処理ID.HeaderText = "処理ID"
+        Me.処理ID.Name = "処理ID"
+        Me.処理ID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.処理ID.Visible = False
+        Me.処理ID.Width = 130
         '
         'btnSelect
         '
@@ -175,108 +180,21 @@ Public Class frmC01F30_Menu
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnSelect.Enabled = False
         Me.btnSelect.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.btnSelect.Location = New System.Drawing.Point(3, 12)
+        Me.btnSelect.Location = New System.Drawing.Point(1144, 669)
         Me.btnSelect.Name = "btnSelect"
         Me.btnSelect.Size = New System.Drawing.Size(94, 48)
-        Me.btnSelect.TabIndex = 4
+        Me.btnSelect.TabIndex = 20
         Me.btnSelect.Text = "選択(&G)"
         Me.btnSelect.UseVisualStyleBackColor = True
         '
-        'btnUserMaintenance
+        '操作者
         '
-        Me.btnUserMaintenance.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnUserMaintenance.Location = New System.Drawing.Point(203, 12)
-        Me.btnUserMaintenance.Name = "btnUserMaintenance"
-        Me.btnUserMaintenance.Size = New System.Drawing.Size(94, 48)
-        Me.btnUserMaintenance.TabIndex = 6
-        Me.btnUserMaintenance.Text = "ユーザマスタ"
-        Me.btnUserMaintenance.UseVisualStyleBackColor = True
-        '
-        'btnLanguageMaster
-        '
-        Me.btnLanguageMaster.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnLanguageMaster.Location = New System.Drawing.Point(303, 12)
-        Me.btnLanguageMaster.Name = "btnLanguageMaster"
-        Me.btnLanguageMaster.Size = New System.Drawing.Size(94, 48)
-        Me.btnLanguageMaster.TabIndex = 7
-        Me.btnLanguageMaster.Text = "言語マスタ"
-        Me.btnLanguageMaster.UseVisualStyleBackColor = True
-        '
-        'btnSupplierMaster
-        '
-        Me.btnSupplierMaster.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnSupplierMaster.Location = New System.Drawing.Point(503, 12)
-        Me.btnSupplierMaster.Name = "btnSupplierMaster"
-        Me.btnSupplierMaster.Size = New System.Drawing.Size(94, 48)
-        Me.btnSupplierMaster.TabIndex = 9
-        Me.btnSupplierMaster.Text = "仕入先マスタ"
-        Me.btnSupplierMaster.UseVisualStyleBackColor = True
-        '
-        'btnCostmerMaster
-        '
-        Me.btnCostmerMaster.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnCostmerMaster.Location = New System.Drawing.Point(403, 12)
-        Me.btnCostmerMaster.Name = "btnCostmerMaster"
-        Me.btnCostmerMaster.Size = New System.Drawing.Size(94, 48)
-        Me.btnCostmerMaster.TabIndex = 12
-        Me.btnCostmerMaster.Text = "得意先マスタ"
-        Me.btnCostmerMaster.UseVisualStyleBackColor = True
-        '
-        'btnHanyouMaster
-        '
-        Me.btnHanyouMaster.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnHanyouMaster.Location = New System.Drawing.Point(103, 12)
-        Me.btnHanyouMaster.Name = "btnHanyouMaster"
-        Me.btnHanyouMaster.Size = New System.Drawing.Size(94, 48)
-        Me.btnHanyouMaster.TabIndex = 8
-        Me.btnHanyouMaster.Text = "汎用マスタ"
-        Me.btnHanyouMaster.UseVisualStyleBackColor = True
-        '
-        'BtnCompanyMaster
-        '
-        Me.BtnCompanyMaster.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnCompanyMaster.Location = New System.Drawing.Point(603, 12)
-        Me.BtnCompanyMaster.Name = "BtnCompanyMaster"
-        Me.BtnCompanyMaster.Size = New System.Drawing.Size(94, 48)
-        Me.BtnCompanyMaster.TabIndex = 13
-        Me.BtnCompanyMaster.Text = "会社マスタ"
-        Me.BtnCompanyMaster.UseVisualStyleBackColor = True
-        '
-        'Button3
-        '
-        Me.Button3.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button3.Location = New System.Drawing.Point(703, 12)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(94, 48)
-        Me.Button3.TabIndex = 14
-        Me.Button3.Text = "見積"
-        Me.Button3.UseVisualStyleBackColor = True
-        '
-        'BtnOrder
-        '
-        Me.BtnOrder.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnOrder.Location = New System.Drawing.Point(803, 12)
-        Me.BtnOrder.Name = "BtnOrder"
-        Me.BtnOrder.Size = New System.Drawing.Size(94, 48)
-        Me.BtnOrder.TabIndex = 15
-        Me.BtnOrder.Text = "受注"
-        Me.BtnOrder.UseVisualStyleBackColor = True
+        DataGridViewCellStyle15.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        Me.操作者.DefaultCellStyle = DataGridViewCellStyle15
+        Me.操作者.HeaderText = "　操作者"
+        Me.操作者.Name = "操作者"
+        Me.操作者.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.操作者.Width = 200
         '
         'cmdExit
         '
@@ -284,24 +202,12 @@ Public Class frmC01F30_Menu
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cmdExit.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.cmdExit.Location = New System.Drawing.Point(1003, 12)
+        Me.cmdExit.Location = New System.Drawing.Point(1244, 669)
         Me.cmdExit.Name = "cmdExit"
         Me.cmdExit.Size = New System.Drawing.Size(94, 48)
-        Me.cmdExit.TabIndex = 5
+        Me.cmdExit.TabIndex = 19
         Me.cmdExit.Text = "終了(&B)"
         Me.cmdExit.UseVisualStyleBackColor = True
-        '
-        'BtnPurchase
-        '
-        Me.BtnPurchase.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnPurchase.Location = New System.Drawing.Point(903, 12)
-        Me.BtnPurchase.Name = "BtnPurchase"
-        Me.BtnPurchase.Size = New System.Drawing.Size(94, 48)
-        Me.BtnPurchase.TabIndex = 16
-        Me.BtnPurchase.Text = "発注"
-        Me.BtnPurchase.UseVisualStyleBackColor = True
         '
         'chkM01
         '
@@ -310,10 +216,10 @@ Public Class frmC01F30_Menu
         Me.chkM01.Checked = True
         Me.chkM01.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkM01.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.chkM01.Location = New System.Drawing.Point(777, 4)
+        Me.chkM01.Location = New System.Drawing.Point(624, 12)
         Me.chkM01.Name = "chkM01"
         Me.chkM01.Size = New System.Drawing.Size(88, 19)
-        Me.chkM01.TabIndex = 6
+        Me.chkM01.TabIndex = 18
         Me.chkM01.Text = "マスタ保守"
         Me.chkM01.UseVisualStyleBackColor = True
         '
@@ -324,10 +230,10 @@ Public Class frmC01F30_Menu
         Me.chkG01.Checked = True
         Me.chkG01.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkG01.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.chkG01.Location = New System.Drawing.Point(635, 4)
+        Me.chkG01.Location = New System.Drawing.Point(502, 12)
         Me.chkG01.Name = "chkG01"
         Me.chkG01.Size = New System.Drawing.Size(116, 19)
-        Me.chkG01.TabIndex = 5
+        Me.chkG01.TabIndex = 17
         Me.chkG01.Text = "原価管理業務"
         Me.chkG01.UseVisualStyleBackColor = True
         '
@@ -338,10 +244,10 @@ Public Class frmC01F30_Menu
         Me.chkH07.Checked = True
         Me.chkH07.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkH07.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.chkH07.Location = New System.Drawing.Point(524, 4)
+        Me.chkH07.Location = New System.Drawing.Point(410, 12)
         Me.chkH07.Name = "chkH07"
         Me.chkH07.Size = New System.Drawing.Size(86, 19)
-        Me.chkH07.TabIndex = 4
+        Me.chkH07.TabIndex = 16
         Me.chkH07.Text = "支払業務"
         Me.chkH07.UseVisualStyleBackColor = True
         '
@@ -352,10 +258,10 @@ Public Class frmC01F30_Menu
         Me.chkH06.Checked = True
         Me.chkH06.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkH06.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.chkH06.Location = New System.Drawing.Point(398, 4)
+        Me.chkH06.Location = New System.Drawing.Point(318, 12)
         Me.chkH06.Name = "chkH06"
         Me.chkH06.Size = New System.Drawing.Size(86, 19)
-        Me.chkH06.TabIndex = 3
+        Me.chkH06.TabIndex = 15
         Me.chkH06.Text = "仕入業務"
         Me.chkH06.UseVisualStyleBackColor = True
         '
@@ -366,64 +272,12 @@ Public Class frmC01F30_Menu
         Me.chkH05.Checked = True
         Me.chkH05.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkH05.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.chkH05.Location = New System.Drawing.Point(272, 4)
+        Me.chkH05.Location = New System.Drawing.Point(226, 12)
         Me.chkH05.Name = "chkH05"
         Me.chkH05.Size = New System.Drawing.Size(86, 19)
-        Me.chkH05.TabIndex = 2
+        Me.chkH05.TabIndex = 14
         Me.chkH05.Text = "入金業務"
         Me.chkH05.UseVisualStyleBackColor = True
-        '
-        'chkH01
-        '
-        Me.chkH01.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.chkH01.AutoSize = True
-        Me.chkH01.Checked = True
-        Me.chkH01.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkH01.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.chkH01.Location = New System.Drawing.Point(20, 4)
-        Me.chkH01.Name = "chkH01"
-        Me.chkH01.Size = New System.Drawing.Size(86, 19)
-        Me.chkH01.TabIndex = 0
-        Me.chkH01.Text = "注文業務"
-        Me.chkH01.UseVisualStyleBackColor = True
-        '
-        'TableLayoutPanel28
-        '
-        Me.TableLayoutPanel28.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.TableLayoutPanel28.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.[Single]
-        Me.TableLayoutPanel28.ColumnCount = 1
-        Me.TableLayoutPanel28.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80.0!))
-        Me.TableLayoutPanel28.Controls.Add(Me.TableLayoutPanel23, 0, 0)
-        Me.TableLayoutPanel28.Location = New System.Drawing.Point(3, 18)
-        Me.TableLayoutPanel28.Name = "TableLayoutPanel28"
-        Me.TableLayoutPanel28.RowCount = 1
-        Me.TableLayoutPanel28.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel28.Size = New System.Drawing.Size(899, 36)
-        Me.TableLayoutPanel28.TabIndex = 2
-        '
-        'TableLayoutPanel23
-        '
-        Me.TableLayoutPanel23.ColumnCount = 7
-        Me.TableLayoutPanel23.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571!))
-        Me.TableLayoutPanel23.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571!))
-        Me.TableLayoutPanel23.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571!))
-        Me.TableLayoutPanel23.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571!))
-        Me.TableLayoutPanel23.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571!))
-        Me.TableLayoutPanel23.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571!))
-        Me.TableLayoutPanel23.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571!))
-        Me.TableLayoutPanel23.Controls.Add(Me.chkH03, 1, 0)
-        Me.TableLayoutPanel23.Controls.Add(Me.chkM01, 6, 0)
-        Me.TableLayoutPanel23.Controls.Add(Me.chkH01, 0, 0)
-        Me.TableLayoutPanel23.Controls.Add(Me.chkG01, 5, 0)
-        Me.TableLayoutPanel23.Controls.Add(Me.chkH05, 2, 0)
-        Me.TableLayoutPanel23.Controls.Add(Me.chkH07, 4, 0)
-        Me.TableLayoutPanel23.Controls.Add(Me.chkH06, 3, 0)
-        Me.TableLayoutPanel23.Location = New System.Drawing.Point(4, 4)
-        Me.TableLayoutPanel23.Name = "TableLayoutPanel23"
-        Me.TableLayoutPanel23.RowCount = 1
-        Me.TableLayoutPanel23.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel23.Size = New System.Drawing.Size(886, 28)
-        Me.TableLayoutPanel23.TabIndex = 0
         '
         'chkH03
         '
@@ -432,133 +286,68 @@ Public Class frmC01F30_Menu
         Me.chkH03.Checked = True
         Me.chkH03.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkH03.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.chkH03.Location = New System.Drawing.Point(131, 4)
+        Me.chkH03.Location = New System.Drawing.Point(104, 12)
         Me.chkH03.Name = "chkH03"
         Me.chkH03.Size = New System.Drawing.Size(116, 19)
-        Me.chkH03.TabIndex = 1
+        Me.chkH03.TabIndex = 13
         Me.chkH03.Text = "委託売上業務"
         Me.chkH03.UseVisualStyleBackColor = True
         '
-        'TableLayoutPanel27
+        'chkH01
         '
-        Me.TableLayoutPanel27.ColumnCount = 1
-        Me.TableLayoutPanel27.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel27.Controls.Add(Me.dgvLIST, 0, 1)
-        Me.TableLayoutPanel27.Controls.Add(Me.TableLayoutPanel28, 0, 0)
-        Me.TableLayoutPanel27.Controls.Add(Me.TableLayoutPanel30, 0, 2)
-        Me.TableLayoutPanel27.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel27.Location = New System.Drawing.Point(0, 0)
-        Me.TableLayoutPanel27.Name = "TableLayoutPanel27"
-        Me.TableLayoutPanel27.RowCount = 3
-        Me.TableLayoutPanel27.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.0!))
-        Me.TableLayoutPanel27.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80.78358!))
-        Me.TableLayoutPanel27.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.328359!))
-        Me.TableLayoutPanel27.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel27.Size = New System.Drawing.Size(1350, 729)
-        Me.TableLayoutPanel27.TabIndex = 1
+        Me.chkH01.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.chkH01.AutoSize = True
+        Me.chkH01.Checked = True
+        Me.chkH01.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkH01.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.chkH01.Location = New System.Drawing.Point(12, 12)
+        Me.chkH01.Name = "chkH01"
+        Me.chkH01.Size = New System.Drawing.Size(86, 19)
+        Me.chkH01.TabIndex = 12
+        Me.chkH01.Text = "注文業務"
+        Me.chkH01.UseVisualStyleBackColor = True
         '
         'dgvLIST
         '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvLIST.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle16.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle16.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvLIST.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle16
         Me.dgvLIST.ColumnHeadersHeight = 25
         Me.dgvLIST.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.処理ID, Me.業務, Me.処理名, Me.説明, Me.My前回操作日時, Me.操作者, Me.前回操作日時})
-        Me.dgvLIST.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgvLIST.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
-        Me.dgvLIST.Location = New System.Drawing.Point(3, 75)
+        Me.dgvLIST.Location = New System.Drawing.Point(12, 37)
         Me.dgvLIST.MultiSelect = False
         Me.dgvLIST.Name = "dgvLIST"
         Me.dgvLIST.RowHeadersVisible = False
         Me.dgvLIST.RowHeadersWidth = 25
         Me.dgvLIST.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvLIST.Size = New System.Drawing.Size(1344, 582)
-        Me.dgvLIST.TabIndex = 0
-        '
-        '処理ID
-        '
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.処理ID.DefaultCellStyle = DataGridViewCellStyle2
-        Me.処理ID.HeaderText = "処理ID"
-        Me.処理ID.Name = "処理ID"
-        Me.処理ID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.処理ID.Visible = False
-        Me.処理ID.Width = 130
-        '
-        '業務
-        '
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
-        Me.業務.DefaultCellStyle = DataGridViewCellStyle3
-        Me.業務.HeaderText = "業務"
-        Me.業務.Name = "業務"
-        Me.業務.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        '処理名
-        '
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
-        Me.処理名.DefaultCellStyle = DataGridViewCellStyle4
-        Me.処理名.HeaderText = "処理名"
-        Me.処理名.Name = "処理名"
-        Me.処理名.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.処理名.Width = 140
-        '
-        '説明
-        '
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
-        Me.説明.DefaultCellStyle = DataGridViewCellStyle5
-        Me.説明.HeaderText = "説明"
-        Me.説明.Name = "説明"
-        Me.説明.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.説明.Width = 355
-        '
-        'My前回操作日時
-        '
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
-        Me.My前回操作日時.DefaultCellStyle = DataGridViewCellStyle6
-        Me.My前回操作日時.HeaderText = " My前回操作日時"
-        Me.My前回操作日時.Name = "My前回操作日時"
-        Me.My前回操作日時.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.My前回操作日時.Width = 135
-        '
-        '操作者
-        '
-        DataGridViewCellStyle7.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
-        Me.操作者.DefaultCellStyle = DataGridViewCellStyle7
-        Me.操作者.HeaderText = "　操作者"
-        Me.操作者.Name = "操作者"
-        Me.操作者.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.操作者.Width = 90
-        '
-        '前回操作日時
-        '
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle8.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
-        Me.前回操作日時.DefaultCellStyle = DataGridViewCellStyle8
-        Me.前回操作日時.HeaderText = "前回操作日時"
-        Me.前回操作日時.Name = "前回操作日時"
-        Me.前回操作日時.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.前回操作日時.Width = 135
+        Me.dgvLIST.Size = New System.Drawing.Size(1326, 626)
+        Me.dgvLIST.TabIndex = 11
         '
         'frmC01F30_Menu
         '
         Me.ClientSize = New System.Drawing.Size(1350, 729)
         Me.ControlBox = False
-        Me.Controls.Add(Me.TableLayoutPanel27)
+        Me.Controls.Add(Me.btnSelect)
+        Me.Controls.Add(Me.cmdExit)
+        Me.Controls.Add(Me.chkM01)
+        Me.Controls.Add(Me.chkG01)
+        Me.Controls.Add(Me.chkH07)
+        Me.Controls.Add(Me.chkH06)
+        Me.Controls.Add(Me.chkH05)
+        Me.Controls.Add(Me.chkH03)
+        Me.Controls.Add(Me.chkH01)
+        Me.Controls.Add(Me.dgvLIST)
         Me.Name = "frmC01F30_Menu"
         Me.Text = "処理メニュー（C01F30）"
-        Me.TableLayoutPanel30.ResumeLayout(False)
-        Me.TableLayoutPanel28.ResumeLayout(False)
-        Me.TableLayoutPanel23.ResumeLayout(False)
-        Me.TableLayoutPanel23.PerformLayout()
-        Me.TableLayoutPanel27.ResumeLayout(False)
         CType(Me.dgvLIST, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -725,7 +514,7 @@ Public Class frmC01F30_Menu
 
     End Sub
 
-    Private Sub cmdExit_Click(sender As Object, e As EventArgs) Handles cmdExit.Click
+    Private Sub cmdExit_Click(sender As Object, e As EventArgs)
         Dim intRet As Integer
         intRet = _msgHd.dspMSG("SystemExit")
         If intRet = vbOK Then
@@ -796,7 +585,7 @@ Public Class frmC01F30_Menu
     End Sub
 
     Sub Check_Clicked(sender As Object, e As EventArgs) _
-        Handles chkH01.CheckedChanged, chkH03.CheckedChanged, chkH05.CheckedChanged, chkH06.CheckedChanged, chkH07.CheckedChanged, chkG01.CheckedChanged, chkM01.CheckedChanged
+
         'チェックされているメニューをもとに表示条件を作成
         getMenuList(strcheckMenu())
 
@@ -960,204 +749,209 @@ Public Class frmC01F30_Menu
 
         Dim selectID As String = dgvLIST.Rows(idx).Cells(0).Value   '選択処理ＩＤ
 
-        'Select Case selectID
-        '    '-----------------------------------注文業務（H01）
-        '    Case HAIFUN_ID               'ハイフン
-        '        Exit Sub
-        '    '-----------------------------------注文業務（H01）
-        '    Case CommonConst.MENU_H0110  '注文登録
-        '        Dim openForm As Form = Nothing
-        '        openForm = New frmH01F10_SyoriSentaku(_msgHd, _db, selectID, Me)   '処理選択
-        '        openForm.Show()
-        '    Case CommonConst.MENU_H0120  '注文変更
-        '        '注文変更フォームオープン
-        '        Dim openForm As New frmH01F50_SelectRireki(_msgHd, _db, selectID, Me, CommonConst.MODE_EditStatus)
-        '        openForm.Show()
-        '    Case CommonConst.MENU_H0130  '注文取消
-        '        '注文取消フォームオープン
-        '        Dim openForm As New frmH01F50_SelectRireki(_msgHd, _db, selectID, Me, CommonConst.MODE_CancelStatus)
-        '        openForm.Show()
-        '    Case CommonConst.MENU_H0140  '注文照会
-        '        '注文照会フォームオープン
-        '        Dim openForm As New frmH01F50_SelectRireki(_msgHd, _db, selectID, Me, CommonConst.MODE_InquiryStatus)
-        '        openForm.Show()
-        '    '-----------------------------------注文帳照会（H02）
-        '    Case CommonConst.MENU_H0210  '注文帳照会
-        '        '注文帳照会フォームオープン
-        '    '-----------------------------------委託売上業務（H03）
-        '    Case CommonConst.MENU_H0310  '委託売上登録
-        '        Dim openForm As Form = Nothing
-        '        openForm = New frmH03F10_SelectItakuList(_msgHd, _db, selectID, Me, CommonConst.MODE_ADDNEW)
-        '        openForm.Show()
-        '    Case CommonConst.MENU_H0320  '委託売上変更
-        '        Dim openForm As Form = Nothing
-        '        openForm = New frmH03F30_SelectItakuList(_msgHd, _db, selectID, Me, CommonConst.MODE_EditStatus)
-        '        openForm.Show()
-        '    Case CommonConst.MENU_H0330  '委託売上取消
-        '        Dim openForm As Form = Nothing
-        '        openForm = New frmH03F30_SelectItakuList(_msgHd, _db, selectID, Me, CommonConst.MODE_CancelStatus)
-        '        openForm.Show()
-        '    Case CommonConst.MENU_H0340  '委託売上照会
-        '        Dim openForm As Form = Nothing
-        '        openForm = New frmH03F30_SelectItakuList(_msgHd, _db, selectID, Me, CommonConst.MODE_InquiryStatus)
-        '        openForm.Show()
-        '    '-----------------------------------請求書発行業務（H04）
-        '    'Case CommonConst.MENU_H0410  '請求書発行
-        '    '    '請求書発行フォームオープン
-        '    ''-----------------------------------入金業務（H05）
-        '    Case CommonConst.MENU_H0510  '入金登録
-        '        '入金登録フォームオープン
-        '        Dim openForm As Form = Nothing
-        '        openForm = New frmH05F20_Nyukin(_msgHd, _db, selectID, Me, CommonConst.MODE_ADDNEW)
-        '        openForm.Show()
+        Select Case selectID
+            '-----------------------------------注文業務（H01）
+            Case HAIFUN_ID               'ハイフン
+                Exit Sub
+            '-----------------------------------注文業務（H01）
+            Case CommonConst.MENU_H0110  '注文登録
+                'Dim Status As String = "ADD"
+                'Dim openForm As Form = Nothing
+                'openForm = New Quote(_msgHd, _db, _langHd, , Status)
+                'openForm.Show(Me)
+                Dim openForm As Form = Nothing
+                openForm = New QuoteList(_msgHd, _db, _langHd)
+                openForm.Show()
+                Me.Hide()
+            Case CommonConst.MENU_H0120  '注文変更
+                Dim openForm As Form = Nothing
+                openForm = New QuoteList(_msgHd, _db, _langHd)
+                openForm.Show()
+                Me.Hide()
+            Case CommonConst.MENU_H0130  '注文取消
+                Dim openForm As Form = Nothing
+                openForm = New QuoteList(_msgHd, _db, _langHd)
+                openForm.Show()
+                Me.Hide()
+            Case CommonConst.MENU_H0140  '注文照会
+                Dim openForm As Form = Nothing
+                openForm = New QuoteList(_msgHd, _db, _langHd)
+                openForm.Show()
+                Me.Hide()
+            '-----------------------------------注文帳照会（H02）
+            Case CommonConst.MENU_H0210  '注文帳照会
+                Dim openForm As Form = Nothing
+                openForm = New QuoteList(_msgHd, _db, _langHd)
+                openForm.Show()
+                Me.Hide()
+            '-----------------------------------委託売上業務（H03）
+            Case CommonConst.MENU_H0310  '委託売上登録
+                Dim openForm As Form = Nothing
+                openForm = New OrderList(_msgHd, _db, _langHd)
+                openForm.Show()
+                Me.Hide()
+            Case CommonConst.MENU_H0320  '委託売上変更
+                Dim openForm As Form = Nothing
+                openForm = New OrderList(_msgHd, _db, _langHd)
+                openForm.Show()
+                Me.Hide()
+            Case CommonConst.MENU_H0330  '委託売上取消
+                Dim openForm As Form = Nothing
+                openForm = New OrderList(_msgHd, _db, _langHd)
+                openForm.Show()
+                Me.Hide()
+            Case CommonConst.MENU_H0340  '委託売上照会
+                Dim openForm As Form = Nothing
+                openForm = New OrderList(_msgHd, _db, _langHd)
+                openForm.Show()
+                Me.Hide()
+            '-----------------------------------請求書発行業務（H04）
+            'Case CommonConst.MENU_H0410  '請求書発行
+            '    '請求書発行フォームオープン
+            ''-----------------------------------入金業務（H05）
+            'Case CommonConst.MENU_H0510  '入金登録
+            '    '入金登録フォームオープン
+            '    Dim openForm As Form = Nothing
+            '    openForm = New frmH05F20_Nyukin(_msgHd, _db, selectID, Me, CommonConst.MODE_ADDNEW)
+            '    openForm.Show()
 
-        '    Case CommonConst.MENU_H0520  '入金変更
-        '        '入金変更フォームオープン
-        '        Dim openForm As Form = Nothing
-        '        openForm = New frmH05F10_NyukinList(_msgHd, _db, selectID, Me, CommonConst.MODE_EditStatus)
-        '        openForm.Show()
+            'Case CommonConst.MENU_H0520  '入金変更
+            '    '入金変更フォームオープン
+            '    Dim openForm As Form = Nothing
+            '    openForm = New frmH05F10_NyukinList(_msgHd, _db, selectID, Me, CommonConst.MODE_EditStatus)
+            '    openForm.Show()
 
-        '    Case CommonConst.MENU_H0530  '入金取消
-        '        '入金取消フォームオープン
-        '        Dim openForm As Form = Nothing
-        '        openForm = New frmH05F10_NyukinList(_msgHd, _db, selectID, Me, CommonConst.MODE_CancelStatus)
-        '        openForm.Show()
+            'Case CommonConst.MENU_H0530  '入金取消
+            '    '入金取消フォームオープン
+            '    Dim openForm As Form = Nothing
+            '    openForm = New frmH05F10_NyukinList(_msgHd, _db, selectID, Me, CommonConst.MODE_CancelStatus)
+            '    openForm.Show()
 
-        '    Case CommonConst.MENU_H0540  '入金照会
-        '        '入金照会フォームオープン
-        '        Dim openForm As Form = Nothing
-        '        openForm = New frmH05F10_NyukinList(_msgHd, _db, selectID, Me, CommonConst.MODE_InquiryStatus)
-        '        openForm.Show()
-        '    '-----------------------------------仕入業務（H06）
-        '    Case CommonConst.MENU_H0610  '仕入登録
-        '        '仕入登録フォームオープン
-        '        Dim openForm As Form = Nothing
-        '        openForm = New frmH06F20_Shiire(_msgHd, _db, selectID, CommonConst.STARTUPID_MENU, Me)
-        '        openForm.Show()
+            'Case CommonConst.MENU_H0540  '入金照会
+            '    '入金照会フォームオープン
+            '    Dim openForm As Form = Nothing
+            '    openForm = New frmH05F10_NyukinList(_msgHd, _db, selectID, Me, CommonConst.MODE_InquiryStatus)
+            '    openForm.Show()
+            '-----------------------------------仕入業務（H06）
+            Case CommonConst.MENU_H0610  '仕入登録
+                Dim openForm As Form = Nothing
+                openForm = New PurchaseList(_msgHd, _db, _langHd)
+                openForm.Show()
+                Me.Hide()
 
-        '    Case CommonConst.MENU_H0620  '仕入変更
-        '        '仕入一覧フォームオープン
-        '        Dim openForm As Form = Nothing
-        '        openForm = New frmH06F10_SelectShiire(_msgHd, _db, selectID, CommonConst.STARTUPID_MENU, Me)
-        '        openForm.Show()
+            Case CommonConst.MENU_H0620  '仕入変更
+                Dim openForm As Form = Nothing
+                openForm = New PurchaseList(_msgHd, _db, _langHd)
+                openForm.Show()
+                Me.Hide()
 
-        '    Case CommonConst.MENU_H0630  '仕入取消
-        '        '仕入一覧フォームオープン
-        '        Dim openForm As Form = Nothing
-        '        openForm = New frmH06F10_SelectShiire(_msgHd, _db, selectID, CommonConst.STARTUPID_MENU, Me)
-        '        openForm.Show()
+            Case CommonConst.MENU_H0630  '仕入取消
+                Dim openForm As Form = Nothing
+                openForm = New PurchaseList(_msgHd, _db, _langHd)
+                openForm.Show()
+                Me.Hide()
 
-        '    Case CommonConst.MENU_H0640  '仕入照会
-        '        '仕入一覧フォームオープン
-        '        Dim openForm As Form = Nothing
-        '        openForm = New frmH06F10_SelectShiire(_msgHd, _db, selectID, CommonConst.STARTUPID_MENU, Me)
-        '        openForm.Show()
+            Case CommonConst.MENU_H0640  '仕入照会
+                Dim openForm As Form = Nothing
+                openForm = New PurchaseList(_msgHd, _db, _langHd)
+                openForm.Show()
+                Me.Hide()
 
-        '    '-----------------------------------支払業務（H07）
-        '    'Case CommonConst.MENU_H0710  '支払登録
-        '    '    '支払登録フォームオープン
+            '-----------------------------------支払業務（H07）
+            'Case CommonConst.MENU_H0710  '支払登録
+            '    '支払登録フォームオープン
 
-        '    'Case CommonConst.MENU_H0720  '支払変更
-        '    '    '支払変更フォームオープン
+            'Case CommonConst.MENU_H0720  '支払変更
+            '    '支払変更フォームオープン
 
-        '    'Case CommonConst.MENU_H0730  '支払取消
-        '    '    '支払取消フォームオープン
+            'Case CommonConst.MENU_H0730  '支払取消
+            '    '支払取消フォームオープン
 
-        '    'Case CommonConst.MENU_H0740  '支払照会
-        '        '支払照会フォームオープン
+            'Case CommonConst.MENU_H0740  '支払照会
+                '支払照会フォームオープン
 
-        '    '-----------------------------------注文明細表（H10）
-        '    Case CommonConst.MENU_H1001  '注文明細表
-        '        Dim openForm As Form = Nothing
-        '        openForm = New frmH10F01_ChumonList(_msgHd, _db, selectID, CommonConst.STARTUPID_MENU, Me)   '処理選択
-        '        openForm.Show()
+            '-----------------------------------注文明細表（H10）
+            'Case CommonConst.MENU_H1001  '注文明細表
+            '    Dim openForm As Form = Nothing
+            '    openForm = New frmH10F01_ChumonList(_msgHd, _db, selectID, CommonConst.STARTUPID_MENU, Me)   '処理選択
+            '    openForm.Show()
 
-        '    Case CommonConst.MENU_H1002  '売上未計上一覧表
-        '        Dim openForm As Form = Nothing
-        '        openForm = New frmH10F02_MikeijyoList(_msgHd, _db, selectID, CommonConst.STARTUPID_MENU, Me)   '処理選択
-        '        openForm.Show()
+            'Case CommonConst.MENU_H1002  '売上未計上一覧表
+            '    Dim openForm As Form = Nothing
+            '    openForm = New frmH10F02_MikeijyoList(_msgHd, _db, selectID, CommonConst.STARTUPID_MENU, Me)   '処理選択
+            '    openForm.Show()
 
-        '    Case CommonConst.MENU_H1003  '売掛金一覧表
-        '        Dim openForm As Form = Nothing
-        '        openForm = New frmH10F03_UrikakeKinList(_msgHd, _db, selectID, CommonConst.STARTUPID_MENU, Me)   '処理選択
-        '        openForm.Show()
+            'Case CommonConst.MENU_H1003  '売掛金一覧表
+            '    Dim openForm As Form = Nothing
+            '    openForm = New frmH10F03_UrikakeKinList(_msgHd, _db, selectID, CommonConst.STARTUPID_MENU, Me)   '処理選択
+            '    openForm.Show()
 
-        '    Case CommonConst.MENU_H1004  '得意先元帳
-        '        Dim openForm As Form = Nothing
-        '        openForm = New frmH10F04_TokuisakiMotoList(_msgHd, _db, selectID, CommonConst.STARTUPID_MENU, Me)   '処理選択
-        '        openForm.Show()
+            'Case CommonConst.MENU_H1004  '得意先元帳
+            '    Dim openForm As Form = Nothing
+            '    openForm = New frmH10F04_TokuisakiMotoList(_msgHd, _db, selectID, CommonConst.STARTUPID_MENU, Me)   '処理選択
+            '    openForm.Show()
 
-        '    Case CommonConst.MENU_H1005  '出荷数一覧表
-        '        Dim openForm As Form = Nothing
-        '        openForm = New frmH10F05_ShukkaSuList(_msgHd, _db, selectID, CommonConst.STARTUPID_MENU, Me)   '処理選択
-        '        openForm.Show()
+            'Case CommonConst.MENU_H1005  '出荷数一覧表
+            '    Dim openForm As Form = Nothing
+            '    openForm = New frmH10F05_ShukkaSuList(_msgHd, _db, selectID, CommonConst.STARTUPID_MENU, Me)   '処理選択
+            '    openForm.Show()
 
-        '    '-----------------------------------仕入明細表（H11）
-        '    Case CommonConst.MENU_H1101  '注文明細表
-        '        Dim openForm As Form = Nothing
-        '        openForm = New frmH11F01_ShiireList(_msgHd, _db, selectID, CommonConst.STARTUPID_MENU, Me)   '処理選択
-        '        openForm.Show()
+            ''-----------------------------------仕入明細表（H11）
+            'Case CommonConst.MENU_H1101  '注文明細表
+            '    Dim openForm As Form = Nothing
+            '    openForm = New frmH11F01_ShiireList(_msgHd, _db, selectID, CommonConst.STARTUPID_MENU, Me)   '処理選択
+            '    openForm.Show()
 
-        '    Case CommonConst.MENU_H1102  '買掛金一覧表
-        '        Dim openForm As Form = Nothing
-        '        openForm = New frmH11F02_KaikakeList(_msgHd, _db, selectID, CommonConst.STARTUPID_MENU, Me)   '処理選択
-        '        openForm.Show()
+            'Case CommonConst.MENU_H1102  '買掛金一覧表
+            '    Dim openForm As Form = Nothing
+            '    openForm = New frmH11F02_KaikakeList(_msgHd, _db, selectID, CommonConst.STARTUPID_MENU, Me)   '処理選択
+            '    openForm.Show()
 
-        '    Case CommonConst.MENU_H1103  '仕入先元帳
-        '        Dim openForm As Form = Nothing
-        '        openForm = New frmH11F03_SiiresakiMotoList(_msgHd, _db, selectID, CommonConst.STARTUPID_MENU, Me)   '処理選択
-        '        openForm.Show()
+            'Case CommonConst.MENU_H1103  '仕入先元帳
+            '    Dim openForm As Form = Nothing
+            '    openForm = New frmH11F03_SiiresakiMotoList(_msgHd, _db, selectID, CommonConst.STARTUPID_MENU, Me)   '処理選択
+            '    openForm.Show()
 
-        '    Case CommonConst.MENU_H1121  '仕入総括表
-        '        Dim openForm As Form = Nothing
-        '        openForm = New frmH11F21_ShiireSokatuList(_msgHd, _db, selectID, CommonConst.STARTUPID_MENU, Me)   '処理選択
-        '        openForm.Show()
+            'Case CommonConst.MENU_H1121  '仕入総括表
+            '    Dim openForm As Form = Nothing
+            '    openForm = New frmH11F21_ShiireSokatuList(_msgHd, _db, selectID, CommonConst.STARTUPID_MENU, Me)   '処理選択
+            '    openForm.Show()
+                '-----------------------------------
+            Case CommonConst.MENU_M0110    '汎用マスタ一覧
+                Dim openForm As Form = Nothing
+                openForm = New MstHanyou(_msgHd, _db, _langHd)
+                openForm.Show()
+                Me.Hide()
 
-        '        '-----------------------------------
-        '    Case CommonConst.MENU_M0170    '汎用マスタ一覧
-        '        Dim openForm As Form = Nothing
-        '        openForm = New frmM70F10_HanyoList(_msgHd, _db, selectID, Me)   '処理選択
-        '        openForm.Show()
-
-        '    Case CommonConst.MENU_M0120    '取引先マスタ一覧
-        '        Dim openForm As Form = Nothing
-        '        openForm = New frmM20F10_TorihikisakiList(_msgHd, _db, selectID, Me)   '処理選択
-        '        openForm.Show()
-
-        '    Case CommonConst.MENU_M0130    '商品マスタ一覧
-        '        Dim openForm As Form = Nothing
-        '        openForm = New frmM30F10_ShohinList(_msgHd, _db, selectID, Me)   '処理選択
-        '        openForm.Show()
-
-        '    Case CommonConst.MENU_M0110    'ユーザーマスタ一覧
-        '        Dim openForm As Form = Nothing
-        '        openForm = New frmM10F10_UserList(_msgHd, _db, selectID, Me)   '処理選択
-        '        openForm.Show()
-
-        '    Case CommonConst.MENU_M0140    '販売単価マスタ一覧
-        '        Dim openForm As Form = Nothing
-        '        openForm = New frmM40F10_HanbaiTankaList(_msgHd, _db, selectID, Me)   '処理選択
-        '        openForm.Show()
-
-        '    Case CommonConst.MENU_M0150    '仕入単価マスタ一覧
-        '        Dim openForm As Form = Nothing
-        '        openForm = New frmM50F10_SiireTankaList(_msgHd, _db, selectID, Me)   '処理選択
-        '        openForm.Show()
-
-        '    Case CommonConst.MENU_M0180    '消費税マスタ一覧
-        '        Dim openForm As Form = Nothing
-        '        openForm = New frmM80F10_ShohizeiList(_msgHd, _db, selectID, Me)   '処理選択
-        '        openForm.Show()
-
-        '    Case "M0199"
-        '        Dim openForm As Form = Nothing
-        '        openForm = New ReportSample(_msgHd, _db)
-        '        openForm.Show()
-
-        '        '-----------------------------------
-        '    Case Else                      'マスタ設定されていない場合
-        '        Exit Sub
-        'End Select
+            Case CommonConst.MENU_M0120    '取引先マスタ一覧
+                Dim openForm As Form = Nothing
+                openForm = New MstCustomer(_msgHd, _db, _langHd)
+                openForm.Show()
+                Me.Hide()
+            Case CommonConst.MENU_M0130    '仕入先マスタ一覧
+                Dim openForm As Form = Nothing
+                openForm = New MstSupplier(_msgHd, _db, _langHd)
+                openForm.Show()
+                Me.Hide()
+            Case CommonConst.MENU_M0140    '会社マスタ一覧
+                Dim openForm As Form = Nothing
+                openForm = New MstCompany(_msgHd, _db, _langHd)
+                openForm.Show()
+                Me.Hide()
+            Case CommonConst.MENU_M0150    'ユーザマスタ一覧
+                Dim openForm As Form = Nothing
+                openForm = New MstUser(_msgHd, _db, _langHd)
+                openForm.Show()
+                Me.Hide()
+            Case CommonConst.MENU_M0160    '言語マスタ一覧
+                Dim openForm As Form = Nothing
+                openForm = New MstLanguage(_msgHd, _db, _langHd)
+                openForm.Show()
+                Me.Hide()
+                '-----------------------------------
+            Case Else                      'マスタ設定されていない場合
+                Exit Sub
+        End Select
 
         Me.Hide()   ' 自分は隠れる
 
@@ -1233,76 +1027,11 @@ Public Class frmC01F30_Menu
 
     End Function
 
-
-    'ユーザマスタ
-    Private Sub btnUserMaintenance_Click(sender As Object, e As EventArgs) Handles btnUserMaintenance.Click
-        Dim openForm As Form = Nothing
-        openForm = New MstUser(_msgHd, _db)
-        openForm.Show()
-        Me.Hide()
-    End Sub
-
-    '言語マスタ
-    Private Sub btnLanguageMaster_Click(sender As Object, e As EventArgs) Handles btnLanguageMaster.Click
-        Dim openForm As Form = Nothing
-        openForm = New MstLanguage(_msgHd, _db)
-        openForm.Show()
-        Me.Hide()
-    End Sub
-
-    '汎用マスタ
-    Private Sub btnHanyouMaster_Click(sender As Object, e As EventArgs) Handles btnHanyouMaster.Click
-        Dim openForm As Form = Nothing
-        openForm = New MstHanyou(_msgHd, _db)
-        openForm.Show()
-        Me.Hide()
-    End Sub
-
-    '得意先マスタ
-    Private Sub btnCostmerMaster_Click(sender As Object, e As EventArgs) Handles btnCostmerMaster.Click
-        Dim openForm As Form = Nothing
-        openForm = New MstCustomer(_msgHd, _db)
-        openForm.Show()
-        Me.Hide()
-    End Sub
-
-    '仕入先マスタ
-    Private Sub btnSupplierMaster_Click(sender As Object, e As EventArgs) Handles btnSupplierMaster.Click
-        Dim openForm As Form = Nothing
-        openForm = New MstSupplier(_msgHd, _db)
-        openForm.Show()
-        Me.Hide()
-    End Sub
-
-    Private Sub BtnCompanyMaster_Click(sender As Object, e As EventArgs) Handles BtnCompanyMaster.Click
-        Dim openForm As Form = Nothing
-        openForm = New MstCompany(_msgHd, _db)
-        openForm.Show()
-        Me.Hide()
-    End Sub
-
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        Dim openForm As Form = Nothing
-        openForm = New QuoteList(_msgHd, _db, _langHd)
-        openForm.Show()
-        Me.Hide()
-    End Sub
-
-    Private Sub BtnOrder_Click(sender As Object, e As EventArgs) Handles BtnOrder.Click
-        Dim openForm As Form = Nothing
-        openForm = New OrderList(_msgHd, _db, _langHd)
-        openForm.Show()
-        Me.Hide()
-    End Sub
-
-    Private Sub BtnPurchase_Click(sender As Object, e As EventArgs) Handles BtnPurchase.Click
-        Dim openForm As Form = Nothing
-        openForm = New PurchaseList(_msgHd, _db, _langHd)
-        openForm.Show()
-        Me.Hide()
-    End Sub
-
-    Private Sub dgvLIST_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvLIST.CellContentClick
-
+    Private Sub cmdExit_Click_1(sender As Object, e As EventArgs) Handles cmdExit.Click
+        Dim intRet As Integer
+        intRet = _msgHd.dspMSG("SystemExit")
+        If intRet = vbOK Then
+            Application.Exit()
+        End If
     End Sub
 End Class

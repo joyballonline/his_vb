@@ -180,6 +180,7 @@ Public Class CommonConst
     Public Const MENU_M5002 As String = "M5002"           '仕入単価マスタ保守
     Public Const MENU_M0180 As String = "M0180"           '消費税マスタ一覧
     Public Const MENU_M8002 As String = "M8002"           '消費税マスタ保守
+    Public Const MENU_M0160 As String = "M0160"           '言語マスタ
 
     '各フォームに引き渡す編集モードの値
     Public Const MODE_ADDNEW = 1                                 '登録

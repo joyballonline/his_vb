@@ -64,7 +64,7 @@ Partial Class MstHanyou
         Me.Dgv_Hanyo.ReadOnly = True
         Me.Dgv_Hanyo.RowTemplate.Height = 21
         Me.Dgv_Hanyo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.Dgv_Hanyo.Size = New System.Drawing.Size(960, 220)
+        Me.Dgv_Hanyo.Size = New System.Drawing.Size(1326, 640)
         Me.Dgv_Hanyo.TabIndex = 0
         '
         '会社コード
@@ -183,27 +183,27 @@ Partial Class MstHanyou
         '
         'BtnSelect
         '
-        Me.BtnSelect.Location = New System.Drawing.Point(12, 257)
+        Me.BtnSelect.Location = New System.Drawing.Point(1002, 677)
         Me.BtnSelect.Name = "BtnSelect"
-        Me.BtnSelect.Size = New System.Drawing.Size(75, 23)
+        Me.BtnSelect.Size = New System.Drawing.Size(165, 40)
         Me.BtnSelect.TabIndex = 1
         Me.BtnSelect.Text = "選択"
         Me.BtnSelect.UseVisualStyleBackColor = True
         '
         'BtnAdd
         '
-        Me.BtnAdd.Location = New System.Drawing.Point(93, 257)
+        Me.BtnAdd.Location = New System.Drawing.Point(831, 677)
         Me.BtnAdd.Name = "BtnAdd"
-        Me.BtnAdd.Size = New System.Drawing.Size(75, 23)
+        Me.BtnAdd.Size = New System.Drawing.Size(165, 40)
         Me.BtnAdd.TabIndex = 2
         Me.BtnAdd.Text = "追加"
         Me.BtnAdd.UseVisualStyleBackColor = True
         '
         'BtnBack
         '
-        Me.BtnBack.Location = New System.Drawing.Point(897, 257)
+        Me.BtnBack.Location = New System.Drawing.Point(1173, 677)
         Me.BtnBack.Name = "BtnBack"
-        Me.BtnBack.Size = New System.Drawing.Size(75, 23)
+        Me.BtnBack.Size = New System.Drawing.Size(165, 40)
         Me.BtnBack.TabIndex = 3
         Me.BtnBack.Text = "戻る"
         Me.BtnBack.UseVisualStyleBackColor = True
@@ -237,7 +237,7 @@ Partial Class MstHanyou
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(984, 287)
+        Me.ClientSize = New System.Drawing.Size(1350, 729)
         Me.Controls.Add(Me.BtnSearch)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Search)

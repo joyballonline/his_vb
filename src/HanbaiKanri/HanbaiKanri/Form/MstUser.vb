@@ -45,7 +45,7 @@ Public Class MstUser
     '-------------------------------------------------------------------------------
     'コンストラクタ　メニューから呼ばれる
     '-------------------------------------------------------------------------------
-    Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler, ByRef prmRefDbHd As UtilDBIf)
+    Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler, ByRef prmRefDbHd As UtilDBIf, ByRef prmRefLang As UtilLangHandler)
         Call Me.New()
 
         _init = False
@@ -53,6 +53,7 @@ Public Class MstUser
         '初期処理
         _msgHd = prmRefMsgHd                                                'MSGハンドラの設定
         _db = prmRefDbHd                                                    'DBハンドラの設定
+        _langHd = prmRefLang
         '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
         StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
         Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
@@ -110,7 +111,7 @@ Public Class MstUser
 
     Private Sub btn_userAdd_Click(sender As Object, e As EventArgs) Handles btn_userAdd.Click
         Dim openForm As Form = Nothing
-        openForm = New UserAdd(_msgHd, _db)   '処理選択
+        openForm = New UserAdd(_msgHd, _db, _langHd)   '処理選択
         openForm.Show()
         Me.Hide()   ' 自分は隠れる
     End Sub
@@ -137,7 +138,7 @@ Public Class MstUser
             sc(7) = Dgv_User.Rows(idx).Cells(7).Value
 
             Dim openForm As Form = Nothing
-            openForm = New UserEdit(_msgHd, _db, sc, sc(0), sc(1))   '処理選択
+            openForm = New UserEdit(_msgHd, _db, _langHd, sc, sc(0), sc(1))   '処理選択
             openForm.Show()
             Me.Hide()   ' 自分は隠れる
 
@@ -168,7 +169,7 @@ Public Class MstUser
             Sql += "."
             Sql += "m02_user"
             Sql += " WHERE "
-            Sql += "会社コード"
+            Sql += "ユーザＩＤ"
             Sql += " ILIKE "
             Sql += "'%"
             Sql += Search.Text

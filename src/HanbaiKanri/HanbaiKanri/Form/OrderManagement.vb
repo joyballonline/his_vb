@@ -9,7 +9,7 @@ Imports UtilMDL.FileDirectory
 Imports UtilMDL.xls
 
 
-Public Class PurchasingManagement
+Public Class OrderManagement
     Inherits System.Windows.Forms.Form
 
     '------------------------------------------------------------------------------------------------------
@@ -84,15 +84,15 @@ Public Class PurchasingManagement
             Sql1 += "FROM "
             Sql1 += "public"
             Sql1 += "."
-            Sql1 += "t20_hattyu"
+            Sql1 += "t10_cymnhd"
             Sql1 += " WHERE "
-            Sql1 += "発注番号"
+            Sql1 += "受注番号"
             Sql1 += " ILIKE "
             Sql1 += "'"
             Sql1 += No
             Sql1 += "'"
             Sql1 += " AND "
-            Sql1 += "発注番号枝番"
+            Sql1 += "受注番号枝番"
             Sql1 += " ILIKE "
             Sql1 += "'"
             Sql1 += Suffix

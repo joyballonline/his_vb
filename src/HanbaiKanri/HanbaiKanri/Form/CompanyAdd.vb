@@ -2,6 +2,7 @@
 
 Imports UtilMDL
 Imports UtilMDL.MSG
+Imports UtilMDL.LANG
 Imports UtilMDL.DB
 Imports UtilMDL.DataGridView
 Imports UtilMDL.FileDirectory
@@ -30,6 +31,7 @@ Public Class CompanyAdd
     '-------------------------------------------------------------------------------
     Private _msgHd As UtilMsgHandler
     Private _db As UtilDBIf
+    Private _langHd As UtilLangHandler
     'Private _gh As UtilDataGridViewHandler
     Private _init As Boolean                             '初期処理済フラグ
 
@@ -44,7 +46,7 @@ Public Class CompanyAdd
     '-------------------------------------------------------------------------------
     'コンストラクタ　メニューから呼ばれる
     '-------------------------------------------------------------------------------
-    Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler, ByRef prmRefDbHd As UtilDBIf)
+    Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler, ByRef prmRefDbHd As UtilDBIf, ByRef prmRefLang As UtilLangHandler)
         Call Me.New()
 
         _init = False
@@ -52,6 +54,7 @@ Public Class CompanyAdd
         '初期処理
         _msgHd = prmRefMsgHd                                                'MSGハンドラの設定
         _db = prmRefDbHd                                                    'DBハンドラの設定
+        _langHd = prmRefLang
         '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
         StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
         Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
@@ -62,7 +65,7 @@ Public Class CompanyAdd
 
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
         Dim MC As MstCustomer
-        MC = New MstCustomer(_msgHd, _db)
+        MC = New MstCustomer(_msgHd, _db, _langHd)
         MC.Show()
         Me.Close()
     End Sub
@@ -161,7 +164,7 @@ Public Class CompanyAdd
             _db.executeDB(Sql)
 
             Dim frmMC As MstCompany
-            frmMC = New MstCompany(_msgHd, _db)
+            frmMC = New MstCompany(_msgHd, _db, _langHd)
             frmMC.Show()
             Me.Close()
 

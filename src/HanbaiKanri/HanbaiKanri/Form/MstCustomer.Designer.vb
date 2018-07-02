@@ -23,12 +23,6 @@ Partial Class MstCustomer
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.Dgv_Customer = New System.Windows.Forms.DataGridView()
-        Me.btnSelectCustomer = New System.Windows.Forms.Button()
-        Me.btnCustomerAdd = New System.Windows.Forms.Button()
-        Me.btnBack = New System.Windows.Forms.Button()
-        Me.BtnSearch = New System.Windows.Forms.Button()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Search = New System.Windows.Forms.TextBox()
         Me.会社コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.得意先コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.得意先名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -46,6 +40,12 @@ Partial Class MstCustomer
         Me.メモ = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.更新者 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.更新日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnSelectCustomer = New System.Windows.Forms.Button()
+        Me.btnCustomerAdd = New System.Windows.Forms.Button()
+        Me.btnBack = New System.Windows.Forms.Button()
+        Me.BtnSearch = New System.Windows.Forms.Button()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Search = New System.Windows.Forms.TextBox()
         CType(Me.Dgv_Customer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -63,60 +63,8 @@ Partial Class MstCustomer
         Me.Dgv_Customer.ReadOnly = True
         Me.Dgv_Customer.RowTemplate.Height = 21
         Me.Dgv_Customer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.Dgv_Customer.Size = New System.Drawing.Size(960, 220)
+        Me.Dgv_Customer.Size = New System.Drawing.Size(1326, 638)
         Me.Dgv_Customer.TabIndex = 0
-        '
-        'btnSelectCustomer
-        '
-        Me.btnSelectCustomer.Location = New System.Drawing.Point(12, 259)
-        Me.btnSelectCustomer.Name = "btnSelectCustomer"
-        Me.btnSelectCustomer.Size = New System.Drawing.Size(75, 23)
-        Me.btnSelectCustomer.TabIndex = 1
-        Me.btnSelectCustomer.Text = "選択"
-        Me.btnSelectCustomer.UseVisualStyleBackColor = True
-        '
-        'btnCustomerAdd
-        '
-        Me.btnCustomerAdd.Location = New System.Drawing.Point(93, 259)
-        Me.btnCustomerAdd.Name = "btnCustomerAdd"
-        Me.btnCustomerAdd.Size = New System.Drawing.Size(75, 23)
-        Me.btnCustomerAdd.TabIndex = 2
-        Me.btnCustomerAdd.Text = "追加"
-        Me.btnCustomerAdd.UseVisualStyleBackColor = True
-        '
-        'btnBack
-        '
-        Me.btnBack.Location = New System.Drawing.Point(897, 259)
-        Me.btnBack.Name = "btnBack"
-        Me.btnBack.Size = New System.Drawing.Size(75, 23)
-        Me.btnBack.TabIndex = 3
-        Me.btnBack.Text = "戻る"
-        Me.btnBack.UseVisualStyleBackColor = True
-        '
-        'BtnSearch
-        '
-        Me.BtnSearch.Location = New System.Drawing.Point(180, 4)
-        Me.BtnSearch.Name = "BtnSearch"
-        Me.BtnSearch.Size = New System.Drawing.Size(75, 23)
-        Me.BtnSearch.TabIndex = 12
-        Me.BtnSearch.Text = "検索"
-        Me.BtnSearch.UseVisualStyleBackColor = True
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(12, 9)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(56, 12)
-        Me.Label1.TabIndex = 11
-        Me.Label1.Text = "会社コード"
-        '
-        'Search
-        '
-        Me.Search.Location = New System.Drawing.Point(74, 6)
-        Me.Search.Name = "Search"
-        Me.Search.Size = New System.Drawing.Size(100, 19)
-        Me.Search.TabIndex = 10
         '
         '会社コード
         '
@@ -220,11 +168,63 @@ Partial Class MstCustomer
         Me.更新日.Name = "更新日"
         Me.更新日.ReadOnly = True
         '
+        'btnSelectCustomer
+        '
+        Me.btnSelectCustomer.Location = New System.Drawing.Point(1002, 677)
+        Me.btnSelectCustomer.Name = "btnSelectCustomer"
+        Me.btnSelectCustomer.Size = New System.Drawing.Size(165, 40)
+        Me.btnSelectCustomer.TabIndex = 1
+        Me.btnSelectCustomer.Text = "選択"
+        Me.btnSelectCustomer.UseVisualStyleBackColor = True
+        '
+        'btnCustomerAdd
+        '
+        Me.btnCustomerAdd.Location = New System.Drawing.Point(831, 677)
+        Me.btnCustomerAdd.Name = "btnCustomerAdd"
+        Me.btnCustomerAdd.Size = New System.Drawing.Size(165, 40)
+        Me.btnCustomerAdd.TabIndex = 2
+        Me.btnCustomerAdd.Text = "追加"
+        Me.btnCustomerAdd.UseVisualStyleBackColor = True
+        '
+        'btnBack
+        '
+        Me.btnBack.Location = New System.Drawing.Point(1173, 677)
+        Me.btnBack.Name = "btnBack"
+        Me.btnBack.Size = New System.Drawing.Size(165, 40)
+        Me.btnBack.TabIndex = 3
+        Me.btnBack.Text = "戻る"
+        Me.btnBack.UseVisualStyleBackColor = True
+        '
+        'BtnSearch
+        '
+        Me.BtnSearch.Location = New System.Drawing.Point(180, 4)
+        Me.BtnSearch.Name = "BtnSearch"
+        Me.BtnSearch.Size = New System.Drawing.Size(75, 23)
+        Me.BtnSearch.TabIndex = 12
+        Me.BtnSearch.Text = "検索"
+        Me.BtnSearch.UseVisualStyleBackColor = True
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(12, 9)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(56, 12)
+        Me.Label1.TabIndex = 11
+        Me.Label1.Text = "会社コード"
+        '
+        'Search
+        '
+        Me.Search.Location = New System.Drawing.Point(74, 6)
+        Me.Search.Name = "Search"
+        Me.Search.Size = New System.Drawing.Size(100, 19)
+        Me.Search.TabIndex = 10
+        '
         'MstCustomer
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(984, 287)
+        Me.ClientSize = New System.Drawing.Size(1350, 729)
         Me.Controls.Add(Me.BtnSearch)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Search)

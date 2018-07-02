@@ -46,7 +46,7 @@ Public Class MstHanyou
     '-------------------------------------------------------------------------------
     'コンストラクタ　メニューから呼ばれる
     '-------------------------------------------------------------------------------
-    Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler, ByRef prmRefDbHd As UtilDBIf)
+    Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler, ByRef prmRefDbHd As UtilDBIf, ByRef prmRefLang As UtilLangHandler)
         Call Me.New()
 
         _init = False
@@ -54,6 +54,7 @@ Public Class MstHanyou
         '初期処理
         _msgHd = prmRefMsgHd                                                'MSGハンドラの設定
         _db = prmRefDbHd                                                    'DBハンドラの設定
+        _langHd = prmRefLang
         '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
         StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
         Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
@@ -158,7 +159,7 @@ Public Class MstHanyou
             sc(18) = Dgv_Hanyo.Rows(idx).Cells(18).Value
 
             Dim openForm As Form = Nothing
-            openForm = New HanyoEdit(_msgHd, _db, sc, sc(0), sc(1), sc(2))   '処理選択
+            openForm = New HanyoEdit(_msgHd, _db, _langHd, sc, sc(0), sc(1), sc(2))   '処理選択
             openForm.Show()
             Me.Hide()   ' 自分は隠れる
 
@@ -179,7 +180,7 @@ Public Class MstHanyou
 
     Private Sub BtnAdd_Click(sender As Object, e As EventArgs) Handles BtnAdd.Click
         Dim openForm As Form = Nothing
-        openForm = New HanyoAdd(_msgHd, _db)   '処理選択
+        openForm = New HanyoAdd(_msgHd, _db, _langHd)   '処理選択
         openForm.Show()
         Me.Hide()   ' 自分は隠れる
     End Sub

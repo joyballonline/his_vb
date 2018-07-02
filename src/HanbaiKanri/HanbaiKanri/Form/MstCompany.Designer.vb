@@ -62,7 +62,7 @@ Partial Class MstCompany
         Me.Dgv_Company.ReadOnly = True
         Me.Dgv_Company.RowTemplate.Height = 21
         Me.Dgv_Company.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.Dgv_Company.Size = New System.Drawing.Size(960, 220)
+        Me.Dgv_Company.Size = New System.Drawing.Size(1326, 638)
         Me.Dgv_Company.TabIndex = 0
         '
         '会社コード
@@ -187,27 +187,27 @@ Partial Class MstCompany
         '
         'BtnBack
         '
-        Me.BtnBack.Location = New System.Drawing.Point(902, 259)
+        Me.BtnBack.Location = New System.Drawing.Point(1173, 677)
         Me.BtnBack.Name = "BtnBack"
-        Me.BtnBack.Size = New System.Drawing.Size(75, 23)
+        Me.BtnBack.Size = New System.Drawing.Size(165, 40)
         Me.BtnBack.TabIndex = 6
         Me.BtnBack.Text = "戻る"
         Me.BtnBack.UseVisualStyleBackColor = True
         '
         'btnCompanyAdd
         '
-        Me.btnCompanyAdd.Location = New System.Drawing.Point(93, 259)
+        Me.btnCompanyAdd.Location = New System.Drawing.Point(831, 677)
         Me.btnCompanyAdd.Name = "btnCompanyAdd"
-        Me.btnCompanyAdd.Size = New System.Drawing.Size(75, 23)
+        Me.btnCompanyAdd.Size = New System.Drawing.Size(165, 40)
         Me.btnCompanyAdd.TabIndex = 5
         Me.btnCompanyAdd.Text = "追加"
         Me.btnCompanyAdd.UseVisualStyleBackColor = True
         '
         'btnSelectCompany
         '
-        Me.btnSelectCompany.Location = New System.Drawing.Point(12, 259)
+        Me.btnSelectCompany.Location = New System.Drawing.Point(1002, 677)
         Me.btnSelectCompany.Name = "btnSelectCompany"
-        Me.btnSelectCompany.Size = New System.Drawing.Size(75, 23)
+        Me.btnSelectCompany.Size = New System.Drawing.Size(165, 40)
         Me.btnSelectCompany.TabIndex = 4
         Me.btnSelectCompany.Text = "選択"
         Me.btnSelectCompany.UseVisualStyleBackColor = True
@@ -241,7 +241,7 @@ Partial Class MstCompany
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(984, 287)
+        Me.ClientSize = New System.Drawing.Size(1350, 729)
         Me.Controls.Add(Me.BtnSearch)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Search)
