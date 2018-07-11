@@ -50,6 +50,7 @@ Partial Class OrderList
         Me.BtnBack = New System.Windows.Forms.Button()
         Me.BtnOrderEdit = New System.Windows.Forms.Button()
         Me.DgvCymnhd = New System.Windows.Forms.DataGridView()
+        Me.BtnOrder = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         CType(Me.DgvCymnhd, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -331,11 +332,21 @@ Partial Class OrderList
         Me.DgvCymnhd.Size = New System.Drawing.Size(1326, 420)
         Me.DgvCymnhd.TabIndex = 33
         '
+        'BtnOrder
+        '
+        Me.BtnOrder.Location = New System.Drawing.Point(660, 677)
+        Me.BtnOrder.Name = "BtnOrder"
+        Me.BtnOrder.Size = New System.Drawing.Size(165, 40)
+        Me.BtnOrder.TabIndex = 61
+        Me.BtnOrder.Text = "売上入力"
+        Me.BtnOrder.UseVisualStyleBackColor = True
+        '
         'OrderList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1350, 729)
+        Me.Controls.Add(Me.BtnOrder)
         Me.Controls.Add(Me.BtnOrderView)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Label10)
@@ -400,4 +411,5 @@ Partial Class OrderList
     Friend WithEvents BtnBack As Button
     Friend WithEvents BtnOrderEdit As Button
     Friend WithEvents DgvCymnhd As DataGridView
+    Friend WithEvents BtnOrder As Button
 End Class

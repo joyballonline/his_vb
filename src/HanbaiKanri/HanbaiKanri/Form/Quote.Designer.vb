@@ -59,9 +59,7 @@ Partial Class Quote
         Me.TxtCustomerName = New System.Windows.Forms.TextBox()
         Me.LblCustomerName = New System.Windows.Forms.Label()
         Me.LblAddress = New System.Windows.Forms.Label()
-        Me.TxtPostalCode1 = New System.Windows.Forms.TextBox()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.TxtPostalCode2 = New System.Windows.Forms.TextBox()
+        Me.TxtPostalCode = New System.Windows.Forms.TextBox()
         Me.TxtAddress1 = New System.Windows.Forms.TextBox()
         Me.LblFax = New System.Windows.Forms.Label()
         Me.LblPerson = New System.Windows.Forms.Label()
@@ -103,6 +101,9 @@ Partial Class Quote
         Me.LblStockOrder = New System.Windows.Forms.Label()
         Me.DtpQuote = New System.Windows.Forms.DateTimePicker()
         Me.DtpExpiration = New System.Windows.Forms.DateTimePicker()
+        Me.TxtVat = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.LblMode = New System.Windows.Forms.Label()
         CType(Me.DgvItemList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -180,6 +181,7 @@ Partial Class Quote
         Me.DgvItemList.Location = New System.Drawing.Point(12, 237)
         Me.DgvItemList.Name = "DgvItemList"
         Me.DgvItemList.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
+        Me.DgvItemList.RowHeadersVisible = False
         Me.DgvItemList.RowTemplate.Height = 21
         Me.DgvItemList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
         Me.DgvItemList.Size = New System.Drawing.Size(1329, 337)
@@ -360,39 +362,17 @@ Partial Class Quote
         Me.LblAddress.Text = "住所"
         Me.LblAddress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'TxtPostalCode1
+        'TxtPostalCode
         '
-        Me.TxtPostalCode1.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.TxtPostalCode1.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.TxtPostalCode1.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtPostalCode1.Location = New System.Drawing.Point(128, 92)
-        Me.TxtPostalCode1.MaxLength = 3
-        Me.TxtPostalCode1.Name = "TxtPostalCode1"
-        Me.TxtPostalCode1.Size = New System.Drawing.Size(54, 23)
-        Me.TxtPostalCode1.TabIndex = 5
-        Me.TxtPostalCode1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'Label4
-        '
-        Me.Label4.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(188, 99)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(11, 12)
-        Me.Label4.TabIndex = 10
-        Me.Label4.Text = "-"
-        '
-        'TxtPostalCode2
-        '
-        Me.TxtPostalCode2.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.TxtPostalCode2.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.TxtPostalCode2.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtPostalCode2.Location = New System.Drawing.Point(205, 92)
-        Me.TxtPostalCode2.MaxLength = 4
-        Me.TxtPostalCode2.Name = "TxtPostalCode2"
-        Me.TxtPostalCode2.Size = New System.Drawing.Size(63, 23)
-        Me.TxtPostalCode2.TabIndex = 6
-        Me.TxtPostalCode2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.TxtPostalCode.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.TxtPostalCode.BackColor = System.Drawing.Color.White
+        Me.TxtPostalCode.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtPostalCode.Location = New System.Drawing.Point(128, 92)
+        Me.TxtPostalCode.MaxLength = 7
+        Me.TxtPostalCode.Name = "TxtPostalCode"
+        Me.TxtPostalCode.Size = New System.Drawing.Size(140, 23)
+        Me.TxtPostalCode.TabIndex = 5
+        Me.TxtPostalCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'TxtAddress1
         '
@@ -458,7 +438,7 @@ Partial Class Quote
         Me.TxtTel.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.TxtTel.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtTel.Location = New System.Drawing.Point(766, 63)
-        Me.TxtTel.MaxLength = 15
+        Me.TxtTel.MaxLength = 13
         Me.TxtTel.Name = "TxtTel"
         Me.TxtTel.Size = New System.Drawing.Size(200, 23)
         Me.TxtTel.TabIndex = 10
@@ -478,7 +458,7 @@ Partial Class Quote
         Me.TxtFax.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.TxtFax.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtFax.Location = New System.Drawing.Point(766, 92)
-        Me.TxtFax.MaxLength = 15
+        Me.TxtFax.MaxLength = 13
         Me.TxtFax.Name = "TxtFax"
         Me.TxtFax.Size = New System.Drawing.Size(200, 23)
         Me.TxtFax.TabIndex = 11
@@ -506,7 +486,7 @@ Partial Class Quote
         Me.TxtInput.MaxLength = 20
         Me.TxtInput.Name = "TxtInput"
         Me.TxtInput.ReadOnly = True
-        Me.TxtInput.Size = New System.Drawing.Size(200, 23)
+        Me.TxtInput.Size = New System.Drawing.Size(213, 23)
         Me.TxtInput.TabIndex = 6
         Me.TxtInput.TabStop = False
         '
@@ -616,7 +596,7 @@ Partial Class Quote
         Me.TxtSales.Location = New System.Drawing.Point(1128, 63)
         Me.TxtSales.MaxLength = 20
         Me.TxtSales.Name = "TxtSales"
-        Me.TxtSales.Size = New System.Drawing.Size(200, 23)
+        Me.TxtSales.Size = New System.Drawing.Size(213, 23)
         Me.TxtSales.TabIndex = 14
         '
         'LblSales
@@ -722,6 +702,7 @@ Partial Class Quote
         Me.BtnQuote.TabIndex = 18
         Me.BtnQuote.Text = "見積書発行"
         Me.BtnQuote.UseVisualStyleBackColor = True
+        Me.BtnQuote.Visible = False
         '
         'DtpRegistration
         '
@@ -874,11 +855,53 @@ Partial Class Quote
         Me.DtpExpiration.TabStop = False
         Me.DtpExpiration.Value = New Date(2018, 6, 5, 23, 23, 58, 0)
         '
+        'TxtVat
+        '
+        Me.TxtVat.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.TxtVat.BackColor = System.Drawing.Color.White
+        Me.TxtVat.Enabled = False
+        Me.TxtVat.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtVat.Location = New System.Drawing.Point(767, 590)
+        Me.TxtVat.MaxLength = 10
+        Me.TxtVat.Name = "TxtVat"
+        Me.TxtVat.Size = New System.Drawing.Size(231, 23)
+        Me.TxtVat.TabIndex = 46
+        Me.TxtVat.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label1
+        '
+        Me.Label1.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.Label1.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.Label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Label1.Location = New System.Drawing.Point(661, 590)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(100, 23)
+        Me.Label1.TabIndex = 47
+        Me.Label1.Text = "VAT"
+        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LblMode
+        '
+        Me.LblMode.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.LblMode.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblMode.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblMode.Location = New System.Drawing.Point(1128, 16)
+        Me.LblMode.Name = "LblMode"
+        Me.LblMode.Size = New System.Drawing.Size(213, 23)
+        Me.LblMode.TabIndex = 48
+        Me.LblMode.Text = "モード"
+        Me.LblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'Quote
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1350, 729)
+        Me.Controls.Add(Me.LblMode)
+        Me.Controls.Add(Me.TxtVat)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.DtpExpiration)
         Me.Controls.Add(Me.DtpQuote)
         Me.Controls.Add(Me.TxtPurchaseTotal)
@@ -907,16 +930,14 @@ Partial Class Quote
         Me.Controls.Add(Me.LblRemarks)
         Me.Controls.Add(Me.LblPaymentTerms)
         Me.Controls.Add(Me.TxtPosition)
-        Me.Controls.Add(Me.TxtPostalCode2)
         Me.Controls.Add(Me.LblPosition)
         Me.Controls.Add(Me.TxtTel)
         Me.Controls.Add(Me.LblPerson)
         Me.Controls.Add(Me.TxtAddress1)
         Me.Controls.Add(Me.TxtPerson)
-        Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.LblFax)
         Me.Controls.Add(Me.TxtFax)
-        Me.Controls.Add(Me.TxtPostalCode1)
+        Me.Controls.Add(Me.TxtPostalCode)
         Me.Controls.Add(Me.LblTel)
         Me.Controls.Add(Me.LblAddress)
         Me.Controls.Add(Me.TxtCustomerName)
@@ -953,9 +974,7 @@ Partial Class Quote
     Friend WithEvents LblFax As Label
     Friend WithEvents LblPerson As Label
     Friend WithEvents LblTel As Label
-    Friend WithEvents TxtPostalCode1 As TextBox
-    Friend WithEvents Label4 As Label
-    Friend WithEvents TxtPostalCode2 As TextBox
+    Friend WithEvents TxtPostalCode As TextBox
     Friend WithEvents TxtAddress1 As TextBox
     Friend WithEvents TxtPosition As TextBox
     Friend WithEvents TxtTel As TextBox
@@ -1012,4 +1031,7 @@ Partial Class Quote
     Friend WithEvents リードタイム As DataGridViewTextBoxColumn
     Friend WithEvents 備考 As DataGridViewTextBoxColumn
     Friend WithEvents ステータス As DataGridViewTextBoxColumn
+    Friend WithEvents TxtVat As TextBox
+    Friend WithEvents Label1 As Label
+    Friend WithEvents LblMode As Label
 End Class

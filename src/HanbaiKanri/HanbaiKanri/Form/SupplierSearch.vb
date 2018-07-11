@@ -30,6 +30,7 @@ Public Class SupplierSearch
     '-------------------------------------------------------------------------------
     Private _msgHd As UtilMsgHandler
     Private _db As UtilDBIf
+    Private _parentForm As Form
     'Private _gh As UtilDataGridViewHandler
     Private _init As Boolean                             '初期処理済フラグ
     Private RowIdx As Integer
@@ -47,7 +48,8 @@ Public Class SupplierSearch
     '-------------------------------------------------------------------------------
     Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler,
                    ByRef prmRefDbHd As UtilDBIf,
-                   ByRef prmRefRowIdx As Integer)
+                   ByRef prmRefRowIdx As Integer,
+                   ByRef prmRefForm As Form)
         Call Me.New()
 
         _init = False
@@ -56,6 +58,7 @@ Public Class SupplierSearch
         _msgHd = prmRefMsgHd                                                'MSGハンドラの設定
         _db = prmRefDbHd                                                    'DBハンドラの設定
         RowIdx = RowIdx
+        _parentForm = prmRefForm
         '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
         StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
         Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
@@ -146,7 +149,9 @@ Public Class SupplierSearch
             frm.DgvItemList.Rows(RowIdx).Cells(7).Value = Dgv_Supplier.Rows(idx).Cells(2).Value
             frm.DgvItemList.Rows(RowIdx).Cells(9).Value = Dgv_Supplier.Rows(idx).Cells(12).Value
 
-            Me.Close()
+            _parentForm.Enabled = True
+            _parentForm.Show()
+            Me.Dispose()
 
         Catch ue As UsrDefException
             ue.dspMsg()
@@ -157,7 +162,9 @@ Public Class SupplierSearch
     End Sub
 
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
-        Me.Close()
+        _parentForm.Enabled = True
+        _parentForm.Show()
+        Me.Dispose()
     End Sub
 
     Private Sub BtnSearch_Click(sender As Object, e As EventArgs) Handles BtnSearch.Click

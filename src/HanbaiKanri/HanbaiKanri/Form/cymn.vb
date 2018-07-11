@@ -33,7 +33,7 @@ Public Class Cymn
     Private _langHd As UtilLangHandler
     Private _gh As UtilDataGridViewHandler
     Private _init As Boolean                             '初期処理済フラグ
-
+    Private _parentForm As Form
     Private CompanyCode As String = ""
     Private QuoteNo As String = ""
     Private QuoteSuffix As String = ""
@@ -53,6 +53,7 @@ Public Class Cymn
     Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler,
                    ByRef prmRefDbHd As UtilDBIf,
                    ByRef prmRefLang As UtilLangHandler,
+                   ByRef prmRefForm As Form,
                    Optional ByRef prmRefNo As String = Nothing,
                    Optional ByRef prmRefSuffix As String = Nothing)
         Call Me.New()
@@ -63,6 +64,7 @@ Public Class Cymn
         _msgHd = prmRefMsgHd                                                'MSGハンドラの設定
         _db = prmRefDbHd                                                    'DBハンドラの設定
         _langHd = prmRefLang
+        _parentForm = prmRefForm
         QuoteNo = prmRefNo
         QuoteSuffix = prmRefSuffix
 
@@ -228,9 +230,7 @@ Public Class Cymn
             TxtPosition.Text = ds1.Tables(RS).Rows(0)("得意先担当者役職")
         End If
         If ds1.Tables(RS).Rows(0)("得意先郵便番号") IsNot DBNull.Value Then
-            Dim PostalCode As String = ds1.Tables(RS).Rows(0)("得意先郵便番号")
-            TxtPostalCode1.Text = PostalCode.Substring(0, 3)
-            TxtPostalCode2.Text = PostalCode.Substring(3, 4)
+            TxtPostalCode.Text = ds1.Tables(RS).Rows(0)("得意先郵便番号")
         End If
         If ds1.Tables(RS).Rows(0)("得意先住所") IsNot DBNull.Value Then
             Dim Address As String = ds1.Tables(RS).Rows(0)("得意先住所")
@@ -380,10 +380,9 @@ Public Class Cymn
 
     '前の画面に戻る
     Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
-        'Dim QuoteList As QuoteList
-        'QuoteList = New QuoteList(_msgHd, _db)
-        'QuoteList.Show()
-        Me.Close()
+        _parentForm.Enabled = True
+        _parentForm.Show()
+        Me.Dispose()
     End Sub
 
     Private Sub BtnRegistration_Click(sender As Object, e As EventArgs) Handles BtnRegistration.Click
@@ -413,8 +412,7 @@ Public Class Cymn
         Sql1 += "', '"
         Sql1 += TxtCustomerName.Text
         Sql1 += "', '"
-        Sql1 += TxtPostalCode1.Text
-        Sql1 += TxtPostalCode2.Text
+        Sql1 += TxtPostalCode.Text
         Sql1 += "', '"
         Sql1 += TxtAddress1.Text
         Sql1 += " "
@@ -710,8 +708,7 @@ Public Class Cymn
             Sql3 += "', '"
             Sql3 += TxtCustomerName.Text
             Sql3 += "', '"
-            Sql3 += TxtPostalCode1.Text
-            Sql3 += TxtPostalCode2.Text
+            Sql3 += TxtPostalCode.Text
             Sql3 += "', '"
             Sql3 += TxtAddress1.Text
             Sql3 += " "
@@ -1065,6 +1062,8 @@ Public Class Cymn
         Saiban4 += ", "
         Saiban4 += "更新日"
         _db.executeDB(Saiban4)
-        Me.Close()
+        _parentForm.Enabled = True
+        _parentForm.Show()
+        Me.Dispose()
     End Sub
 End Class

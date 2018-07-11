@@ -754,34 +754,40 @@ Public Class frmC01F30_Menu
             Case HAIFUN_ID               'ハイフン
                 Exit Sub
             '-----------------------------------注文業務（H01）
-            Case CommonConst.MENU_H0110  '注文登録
-                'Dim Status As String = "ADD"
-                'Dim openForm As Form = Nothing
-                'openForm = New Quote(_msgHd, _db, _langHd, , Status)
-                'openForm.Show(Me)
+            Case CommonConst.MENU_H0110  '見積登録
+                Dim Status As String = "ADD"
                 Dim openForm As Form = Nothing
-                openForm = New QuoteList(_msgHd, _db, _langHd)
+                openForm = New Quote(_msgHd, _db, _langHd, Me, , Status)
                 openForm.Show()
                 Me.Hide()
-            Case CommonConst.MENU_H0120  '注文変更
+            Case CommonConst.MENU_H0120  '仕入単価入力
+                Dim Status As String = "PRICE"
                 Dim openForm As Form = Nothing
-                openForm = New QuoteList(_msgHd, _db, _langHd)
+                openForm = New QuoteList(_msgHd, _db, _langHd, Me, Status)
                 openForm.Show()
                 Me.Hide()
-            Case CommonConst.MENU_H0130  '注文取消
+            Case CommonConst.MENU_H0130  '見積修正
+                Dim Status As String = "EDIT"
                 Dim openForm As Form = Nothing
-                openForm = New QuoteList(_msgHd, _db, _langHd)
+                openForm = New QuoteList(_msgHd, _db, _langHd, Me, Status)
                 openForm.Show()
                 Me.Hide()
-            Case CommonConst.MENU_H0140  '注文照会
+            Case CommonConst.MENU_H0140  '見積複写
+                Dim Status As String = "CLONE"
                 Dim openForm As Form = Nothing
-                openForm = New QuoteList(_msgHd, _db, _langHd)
+                openForm = New QuoteList(_msgHd, _db, _langHd, Me, Status)
                 openForm.Show()
                 Me.Hide()
-            '-----------------------------------注文帳照会（H02）
-            Case CommonConst.MENU_H0210  '注文帳照会
+            Case CommonConst.MENU_H0150  '見積参照
+                Dim Status As String = "VIEW"
                 Dim openForm As Form = Nothing
-                openForm = New QuoteList(_msgHd, _db, _langHd)
+                openForm = New QuoteList(_msgHd, _db, _langHd, Me, Status)
+                openForm.Show()
+                Me.Hide()
+            Case CommonConst.MENU_H0160  '見積取消
+                Dim Status As String = "CANCEL"
+                Dim openForm As Form = Nothing
+                openForm = New QuoteList(_msgHd, _db, _langHd, Me, Status)
                 openForm.Show()
                 Me.Hide()
             '-----------------------------------委託売上業務（H03）

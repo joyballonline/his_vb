@@ -32,8 +32,10 @@ Public Class CustomerSearch
     Private _msgHd As UtilMsgHandler
     Private _langHd As UtilLangHandler
     Private _db As UtilDBIf
+    Private _parentForm As Form
     'Private _gh As UtilDataGridViewHandler
     Private _init As Boolean                             '初期処理済フラグ
+    Private _companyCode As String = frmC01F10_Login.loginValue.BumonNM
 
     '-------------------------------------------------------------------------------
     'デフォルトコンストラクタ（隠蔽）
@@ -46,7 +48,7 @@ Public Class CustomerSearch
     '-------------------------------------------------------------------------------
     'コンストラクタ　メニューから呼ばれる
     '-------------------------------------------------------------------------------
-    Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler, ByRef prmRefDbHd As UtilDBIf)
+    Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler, ByRef prmRefDbHd As UtilDBIf, ByRef prmRefLang As UtilLangHandler, ByRef prmRefForm As Form)
         Call Me.New()
 
         _init = False
@@ -54,6 +56,8 @@ Public Class CustomerSearch
         '初期処理
         _msgHd = prmRefMsgHd                                                'MSGハンドラの設定
         _db = prmRefDbHd                                                    'DBハンドラの設定
+        _parentForm = prmRefForm
+        _langHd = prmRefLang
         '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
         StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
         Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
@@ -87,6 +91,12 @@ Public Class CustomerSearch
             Sql += "public"
             Sql += "."
             Sql += "m10_customer"
+            Sql += " WHERE "
+            Sql += "会社コード"
+            Sql += " ILIKE "
+            Sql += "'"
+            Sql += _companyCode
+            Sql += "'"
 
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
@@ -135,9 +145,7 @@ Public Class CustomerSearch
 
             frm.TxtCustomerCode.Text = Dgv_Customer.Rows(idx).Cells(1).Value
             frm.TxtCustomerName.Text = Dgv_Customer.Rows(idx).Cells(2).Value
-            Dim PostalCode As String = Dgv_Customer.Rows(idx).Cells(4).Value
-            frm.TxtPostalCode1.Text = PostalCode.Substring(0, 3)
-            frm.TxtPostalCode2.Text = PostalCode.Substring(3, 4)
+            frm.TxtPostalCode.Text = Dgv_Customer.Rows(idx).Cells(4).Value
             frm.TxtAddress1.Text = Dgv_Customer.Rows(idx).Cells(5).Value
             frm.TxtAddress2.Text = Dgv_Customer.Rows(idx).Cells(6).Value
             frm.TxtAddress3.Text = Dgv_Customer.Rows(idx).Cells(7).Value
@@ -147,7 +155,9 @@ Public Class CustomerSearch
             frm.TxtPosition.Text = Dgv_Customer.Rows(idx).Cells(12).Value
             frm.TxtPaymentTerms.Text = Dgv_Customer.Rows(idx).Cells(13).Value
 
-            Me.Close()   ' 自分は隠れる
+            _parentForm.Enabled = True
+            _parentForm.Show()
+            Me.Dispose()
 
         Catch ue As UsrDefException
             ue.dspMsg()
@@ -158,10 +168,9 @@ Public Class CustomerSearch
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        Dim frmMenu As frmC01F30_Menu
-        frmMenu = New frmC01F30_Menu(_msgHd, _langHd, _db)
-        frmMenu.Show()
-        Me.Close()
+        _parentForm.Enabled = True
+        _parentForm.Show()
+        Me.Dispose()
     End Sub
 
     Private Sub BtnSearch_Click(sender As Object, e As EventArgs) Handles BtnSearch.Click

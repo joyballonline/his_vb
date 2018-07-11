@@ -30,6 +30,7 @@ Public Class MakerSearch
     '-------------------------------------------------------------------------------
     Private _msgHd As UtilMsgHandler
     Private _db As UtilDBIf
+    Private _parentForm As Form
     'Private _gh As UtilDataGridViewHandler
     Private _init As Boolean                             '初期処理済フラグ
     Private RowIdx As Integer
@@ -50,6 +51,7 @@ Public Class MakerSearch
     '-------------------------------------------------------------------------------
     Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler,
                    ByRef prmRefDbHd As UtilDBIf,
+                   ByRef prmRefForm As Form,
                    ByRef prmRefRowIdx As Integer,
                    ByRef prmRefColIdx As Integer,
                    ByRef prmRefMaker As String,
@@ -63,6 +65,7 @@ Public Class MakerSearch
 
         _msgHd = prmRefMsgHd                                                'MSGハンドラの設定
         _db = prmRefDbHd                                                    'DBハンドラの設定
+        _parentForm = prmRefForm
         RowIdx = prmRefRowIdx
         ColIdx = prmRefColIdx
         Maker = prmRefMaker
@@ -254,6 +257,14 @@ Public Class MakerSearch
                 End If
             End If
         End If
-        Me.Close()
+        _parentForm.Enabled = True
+        _parentForm.Show()
+        Me.Dispose()
+    End Sub
+
+    Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
+        _parentForm.Enabled = True
+        _parentForm.Show()
+        Me.Dispose()
     End Sub
 End Class

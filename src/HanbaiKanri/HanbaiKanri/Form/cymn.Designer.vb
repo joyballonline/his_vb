@@ -76,16 +76,14 @@ Partial Class Cymn
         Me.LblRemarks = New System.Windows.Forms.Label()
         Me.LblPaymentTerms = New System.Windows.Forms.Label()
         Me.TxtPosition = New System.Windows.Forms.TextBox()
-        Me.TxtPostalCode2 = New System.Windows.Forms.TextBox()
         Me.LblPosition = New System.Windows.Forms.Label()
         Me.TxtTel = New System.Windows.Forms.TextBox()
         Me.LblPerson = New System.Windows.Forms.Label()
         Me.TxtAddress1 = New System.Windows.Forms.TextBox()
         Me.TxtPerson = New System.Windows.Forms.TextBox()
-        Me.Label4 = New System.Windows.Forms.Label()
         Me.LblFax = New System.Windows.Forms.Label()
         Me.TxtFax = New System.Windows.Forms.TextBox()
-        Me.TxtPostalCode1 = New System.Windows.Forms.TextBox()
+        Me.TxtPostalCode = New System.Windows.Forms.TextBox()
         Me.LblTel = New System.Windows.Forms.Label()
         Me.LblAddress = New System.Windows.Forms.Label()
         Me.TxtCustomerName = New System.Windows.Forms.TextBox()
@@ -98,7 +96,6 @@ Partial Class Cymn
         Me.DgvItemList = New System.Windows.Forms.DataGridView()
         Me.DtpExpiration = New System.Windows.Forms.DateTimePicker()
         Me.DtpQuoteDate = New System.Windows.Forms.DateTimePicker()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.DtpQuoteRegistration = New System.Windows.Forms.DateTimePicker()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -118,6 +115,7 @@ Partial Class Cymn
         Me.LblVAT = New System.Windows.Forms.Label()
         Me.TxtPph = New System.Windows.Forms.TextBox()
         Me.Label12 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
         CType(Me.DgvItemList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -588,19 +586,6 @@ Partial Class Cymn
         Me.TxtPosition.Size = New System.Drawing.Size(200, 23)
         Me.TxtPosition.TabIndex = 78
         '
-        'TxtPostalCode2
-        '
-        Me.TxtPostalCode2.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.TxtPostalCode2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.TxtPostalCode2.Enabled = False
-        Me.TxtPostalCode2.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtPostalCode2.Location = New System.Drawing.Point(204, 100)
-        Me.TxtPostalCode2.MaxLength = 4
-        Me.TxtPostalCode2.Name = "TxtPostalCode2"
-        Me.TxtPostalCode2.Size = New System.Drawing.Size(63, 23)
-        Me.TxtPostalCode2.TabIndex = 66
-        Me.TxtPostalCode2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'LblPosition
         '
         Me.LblPosition.Anchor = System.Windows.Forms.AnchorStyles.None
@@ -663,16 +648,6 @@ Partial Class Cymn
         Me.TxtPerson.Size = New System.Drawing.Size(200, 23)
         Me.TxtPerson.TabIndex = 77
         '
-        'Label4
-        '
-        Me.Label4.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(187, 107)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(11, 12)
-        Me.Label4.TabIndex = 74
-        Me.Label4.Text = "-"
-        '
         'LblFax
         '
         Me.LblFax.Anchor = System.Windows.Forms.AnchorStyles.None
@@ -698,18 +673,18 @@ Partial Class Cymn
         Me.TxtFax.Size = New System.Drawing.Size(200, 23)
         Me.TxtFax.TabIndex = 76
         '
-        'TxtPostalCode1
+        'TxtPostalCode
         '
-        Me.TxtPostalCode1.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.TxtPostalCode1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.TxtPostalCode1.Enabled = False
-        Me.TxtPostalCode1.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtPostalCode1.Location = New System.Drawing.Point(127, 100)
-        Me.TxtPostalCode1.MaxLength = 3
-        Me.TxtPostalCode1.Name = "TxtPostalCode1"
-        Me.TxtPostalCode1.Size = New System.Drawing.Size(54, 23)
-        Me.TxtPostalCode1.TabIndex = 64
-        Me.TxtPostalCode1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.TxtPostalCode.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.TxtPostalCode.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TxtPostalCode.Enabled = False
+        Me.TxtPostalCode.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtPostalCode.Location = New System.Drawing.Point(127, 100)
+        Me.TxtPostalCode.MaxLength = 7
+        Me.TxtPostalCode.Name = "TxtPostalCode"
+        Me.TxtPostalCode.Size = New System.Drawing.Size(140, 23)
+        Me.TxtPostalCode.TabIndex = 64
+        Me.TxtPostalCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'LblTel
         '
@@ -838,6 +813,7 @@ Partial Class Cymn
         Me.DgvItemList.Location = New System.Drawing.Point(11, 245)
         Me.DgvItemList.Name = "DgvItemList"
         Me.DgvItemList.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
+        Me.DgvItemList.RowHeadersVisible = False
         Me.DgvItemList.RowTemplate.Height = 21
         Me.DgvItemList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
         Me.DgvItemList.Size = New System.Drawing.Size(1329, 337)
@@ -868,16 +844,6 @@ Partial Class Cymn
         Me.DtpQuoteDate.TabIndex = 107
         Me.DtpQuoteDate.TabStop = False
         Me.DtpQuoteDate.Value = New Date(2018, 6, 5, 23, 23, 58, 0)
-        '
-        'Label1
-        '
-        Me.Label1.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(221, 49)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(11, 12)
-        Me.Label1.TabIndex = 106
-        Me.Label1.Text = "-"
         '
         'DtpQuoteRegistration
         '
@@ -1120,6 +1086,16 @@ Partial Class Cymn
         Me.Label12.Text = "PPH"
         Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'Label1
+        '
+        Me.Label1.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(221, 49)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(11, 12)
+        Me.Label1.TabIndex = 106
+        Me.Label1.Text = "-"
+        '
         'Cymn
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
@@ -1174,16 +1150,14 @@ Partial Class Cymn
         Me.Controls.Add(Me.LblRemarks)
         Me.Controls.Add(Me.LblPaymentTerms)
         Me.Controls.Add(Me.TxtPosition)
-        Me.Controls.Add(Me.TxtPostalCode2)
         Me.Controls.Add(Me.LblPosition)
         Me.Controls.Add(Me.TxtTel)
         Me.Controls.Add(Me.LblPerson)
         Me.Controls.Add(Me.TxtAddress1)
         Me.Controls.Add(Me.TxtPerson)
-        Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.LblFax)
         Me.Controls.Add(Me.TxtFax)
-        Me.Controls.Add(Me.TxtPostalCode1)
+        Me.Controls.Add(Me.TxtPostalCode)
         Me.Controls.Add(Me.LblTel)
         Me.Controls.Add(Me.LblAddress)
         Me.Controls.Add(Me.TxtCustomerName)
@@ -1247,16 +1221,14 @@ Partial Class Cymn
     Friend WithEvents LblRemarks As Label
     Friend WithEvents LblPaymentTerms As Label
     Friend WithEvents TxtPosition As TextBox
-    Friend WithEvents TxtPostalCode2 As TextBox
     Friend WithEvents LblPosition As Label
     Friend WithEvents TxtTel As TextBox
     Friend WithEvents LblPerson As Label
     Friend WithEvents TxtAddress1 As TextBox
     Friend WithEvents TxtPerson As TextBox
-    Friend WithEvents Label4 As Label
     Friend WithEvents LblFax As Label
     Friend WithEvents TxtFax As TextBox
-    Friend WithEvents TxtPostalCode1 As TextBox
+    Friend WithEvents TxtPostalCode As TextBox
     Friend WithEvents LblTel As Label
     Friend WithEvents LblAddress As Label
     Friend WithEvents TxtCustomerName As TextBox
@@ -1269,7 +1241,6 @@ Partial Class Cymn
     Friend WithEvents DgvItemList As DataGridView
     Friend WithEvents DtpExpiration As DateTimePicker
     Friend WithEvents DtpQuoteDate As DateTimePicker
-    Friend WithEvents Label1 As Label
     Friend WithEvents DtpQuoteRegistration As DateTimePicker
     Friend WithEvents Label3 As Label
     Friend WithEvents Label5 As Label
@@ -1289,4 +1260,5 @@ Partial Class Cymn
     Friend WithEvents LblVAT As Label
     Friend WithEvents TxtPph As TextBox
     Friend WithEvents Label12 As Label
+    Friend WithEvents Label1 As Label
 End Class

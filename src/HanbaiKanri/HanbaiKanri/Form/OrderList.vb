@@ -707,4 +707,14 @@ Public Class OrderList
         openForm = New Order(_msgHd, _db, _langHd, No, Suffix, Status)   '処理選択
         openForm.Show(Me)
     End Sub
+
+    Private Sub BtnOrder_Click(sender As Object, e As EventArgs) Handles BtnOrder.Click
+        Dim RowIdx As Integer
+        RowIdx = Me.DgvCymnhd.CurrentCell.RowIndex
+        Dim No As String = DgvCymnhd.Rows(RowIdx).Cells(0).Value
+        Dim Suffix As String = DgvCymnhd.Rows(RowIdx).Cells(1).Value
+        Dim openForm As Form = Nothing
+        openForm = New OrderManagement(_msgHd, _db, _langHd, No, Suffix)   '処理選択
+        openForm.Show(Me)
+    End Sub
 End Class

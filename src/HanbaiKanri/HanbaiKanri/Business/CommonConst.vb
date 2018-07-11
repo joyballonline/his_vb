@@ -135,10 +135,12 @@ Public Class CommonConst
     Public Const STARTUPID_MENU As String = "C0130"             'メニュー（C01F30）
 
     '処理ＩＤ
-    Public Const MENU_H0110 As String = "H0110"           '注文登録
-    Public Const MENU_H0120 As String = "H0120"           '注文変更
-    Public Const MENU_H0130 As String = "H0130"           '注文取消
-    Public Const MENU_H0140 As String = "H0140"           '注文照会
+    Public Const MENU_H0110 As String = "H0110"           '見積登録
+    Public Const MENU_H0120 As String = "H0120"           '仕入単価入力
+    Public Const MENU_H0130 As String = "H0130"           '見積修正
+    Public Const MENU_H0140 As String = "H0140"           '見積複写
+    Public Const MENU_H0150 As String = "H0150"           '見積参照
+    Public Const MENU_H0160 As String = "H0160"           '見積取消
     Public Const MENU_H0210 As String = "H0210"           '注文帳照会
     Public Const MENU_H0310 As String = "H0310"           '委託売上登録
     Public Const MENU_H0320 As String = "H0320"           '委託売上変更

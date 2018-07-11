@@ -103,15 +103,15 @@ Public Class OrderManagement
             Sql2 += "FROM "
             Sql2 += "public"
             Sql2 += "."
-            Sql2 += "t41_siredt"
+            Sql2 += "t45_shukodt"
             Sql2 += " WHERE "
-            Sql2 += "発注番号"
+            Sql2 += "受注番号"
             Sql2 += " ILIKE "
             Sql2 += "'"
             Sql2 += No
             Sql2 += "'"
             Sql2 += " AND "
-            Sql2 += "発注番号枝番"
+            Sql2 += "受注番号枝番"
             Sql2 += " ILIKE "
             Sql2 += "'"
             Sql2 += Suffix
@@ -122,15 +122,15 @@ Public Class OrderManagement
             Sql3 += "FROM "
             Sql3 += "public"
             Sql3 += "."
-            Sql3 += "t21_hattyu"
+            Sql3 += "t11_cymndt"
             Sql3 += " WHERE "
-            Sql3 += "発注番号"
+            Sql3 += "受注番号"
             Sql3 += " ILIKE "
             Sql3 += "'"
             Sql3 += No
             Sql3 += "'"
             Sql3 += " AND "
-            Sql3 += "発注番号枝番"
+            Sql3 += "受注番号枝番"
             Sql3 += " ILIKE "
             Sql3 += "'"
             Sql3 += Suffix
@@ -141,38 +141,38 @@ Public Class OrderManagement
             Dim ds2 As DataSet = _db.selectDB(Sql2, RS, reccnt)
             Dim ds3 As DataSet = _db.selectDB(Sql3, RS, reccnt)
 
-            DgvPurchase.Columns.Add("明細", "明細")
-            DgvPurchase.Columns.Add("メーカー", "メーカー")
-            DgvPurchase.Columns.Add("品名", "品名")
-            DgvPurchase.Columns.Add("型式", "型式")
-            DgvPurchase.Columns.Add("発注数量", "発注数量")
-            DgvPurchase.Columns.Add("単位", "単位")
-            DgvPurchase.Columns.Add("仕入数量", "仕入数量")
-            DgvPurchase.Columns.Add("仕入単価", "仕入単価")
-            DgvPurchase.Columns.Add("仕入金額", "仕入金額")
-            DgvPurchase.Columns.Add("発注残数", "発注残数")
+            DgvOrder.Columns.Add("明細", "明細")
+            DgvOrder.Columns.Add("メーカー", "メーカー")
+            DgvOrder.Columns.Add("品名", "品名")
+            DgvOrder.Columns.Add("型式", "型式")
+            DgvOrder.Columns.Add("受注数量", "受注数量")
+            DgvOrder.Columns.Add("単位", "単位")
+            DgvOrder.Columns.Add("売上数量", "売上数量")
+            DgvOrder.Columns.Add("売単価", "売単価")
+            DgvOrder.Columns.Add("売上金額", "売上金額")
+            DgvOrder.Columns.Add("受注残数", "受注残数")
 
-            DgvPurchase.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvPurchase.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvPurchase.Columns(7).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvPurchase.Columns(8).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvPurchase.Columns(9).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            DgvOrder.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            DgvOrder.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            DgvOrder.Columns(7).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            DgvOrder.Columns(8).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            DgvOrder.Columns(9).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
             For index As Integer = 0 To ds3.Tables(RS).Rows.Count - 1
-                DgvPurchase.Rows.Add()
-                DgvPurchase.Rows(index).Cells(1).Value = ds3.Tables(RS).Rows(index)("メーカー")
-                DgvPurchase.Rows(index).Cells(2).Value = ds3.Tables(RS).Rows(index)("品名")
-                DgvPurchase.Rows(index).Cells(3).Value = ds3.Tables(RS).Rows(index)("型式")
-                DgvPurchase.Rows(index).Cells(4).Value = ds3.Tables(RS).Rows(index)("発注数量")
-                DgvPurchase.Rows(index).Cells(5).Value = ds3.Tables(RS).Rows(index)("単位")
-                DgvPurchase.Rows(index).Cells(6).Value = ds3.Tables(RS).Rows(index)("仕入数量")
-                DgvPurchase.Rows(index).Cells(7).Value = ds3.Tables(RS).Rows(index)("仕入値")
-                DgvPurchase.Rows(index).Cells(8).Value = ds3.Tables(RS).Rows(index)("仕入金額")
-                DgvPurchase.Rows(index).Cells(9).Value = ds3.Tables(RS).Rows(index)("発注残数")
+                DgvOrder.Rows.Add()
+                DgvOrder.Rows(index).Cells(1).Value = ds3.Tables(RS).Rows(index)("メーカー")
+                DgvOrder.Rows(index).Cells(2).Value = ds3.Tables(RS).Rows(index)("品名")
+                DgvOrder.Rows(index).Cells(3).Value = ds3.Tables(RS).Rows(index)("型式")
+                DgvOrder.Rows(index).Cells(4).Value = ds3.Tables(RS).Rows(index)("受注数量")
+                DgvOrder.Rows(index).Cells(5).Value = ds3.Tables(RS).Rows(index)("単位")
+                DgvOrder.Rows(index).Cells(6).Value = ds3.Tables(RS).Rows(index)("売上数量")
+                DgvOrder.Rows(index).Cells(7).Value = ds3.Tables(RS).Rows(index)("売単価")
+                DgvOrder.Rows(index).Cells(8).Value = ds3.Tables(RS).Rows(index)("売上金額")
+                DgvOrder.Rows(index).Cells(9).Value = ds3.Tables(RS).Rows(index)("受注残数")
             Next
 
             DgvHistory.Columns.Add("No", "No")
-            DgvHistory.Columns.Add("仕入番号", "仕入番号")
+            DgvHistory.Columns.Add("出庫番号", "出庫番号")
             DgvHistory.Columns.Add("行番号", "行番号")
             DgvHistory.Columns.Add("仕入区分", "仕入区分")
             DgvHistory.Columns.Add("メーカー", "メーカー")
@@ -180,8 +180,8 @@ Public Class OrderManagement
             DgvHistory.Columns.Add("型式", "型式")
             DgvHistory.Columns.Add("単位", "単位")
             DgvHistory.Columns.Add("仕入先", "仕入先")
-            DgvHistory.Columns.Add("仕入値", "仕入値")
-            DgvHistory.Columns.Add("仕入数量", "仕入数量")
+            DgvHistory.Columns.Add("売単価", "売単価")
+            DgvHistory.Columns.Add("出庫数量", "出庫数量")
             DgvHistory.Columns.Add("備考", "備考")
 
             DgvHistory.Columns(9).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -189,7 +189,7 @@ Public Class OrderManagement
 
             For index As Integer = 0 To ds2.Tables(RS).Rows.Count - 1
                 DgvHistory.Rows.Add()
-                DgvHistory.Rows(index).Cells("仕入番号").Value = ds2.Tables(RS).Rows(index)("仕入番号")
+                DgvHistory.Rows(index).Cells("出庫番号").Value = ds2.Tables(RS).Rows(index)("出庫番号")
                 DgvHistory.Rows(index).Cells("行番号").Value = ds2.Tables(RS).Rows(index)("行番号")
                 DgvHistory.Rows(index).Cells("仕入区分").Value = ds2.Tables(RS).Rows(index)("仕入区分")
                 DgvHistory.Rows(index).Cells("メーカー").Value = ds2.Tables(RS).Rows(index)("メーカー")
@@ -197,8 +197,8 @@ Public Class OrderManagement
                 DgvHistory.Rows(index).Cells("型式").Value = ds2.Tables(RS).Rows(index)("型式")
                 DgvHistory.Rows(index).Cells("単位").Value = ds2.Tables(RS).Rows(index)("単位")
                 DgvHistory.Rows(index).Cells("仕入先").Value = ds2.Tables(RS).Rows(index)("仕入先名")
-                DgvHistory.Rows(index).Cells("仕入値").Value = ds2.Tables(RS).Rows(index)("仕入値")
-                DgvHistory.Rows(index).Cells("仕入数量").Value = ds2.Tables(RS).Rows(index)("仕入数量")
+                DgvHistory.Rows(index).Cells("売単価").Value = ds2.Tables(RS).Rows(index)("売単価")
+                DgvHistory.Rows(index).Cells("出庫数量").Value = ds2.Tables(RS).Rows(index)("出庫数量")
                 DgvHistory.Rows(index).Cells("備考").Value = ds2.Tables(RS).Rows(index)("備考")
             Next
 
@@ -210,12 +210,12 @@ Public Class OrderManagement
             DgvAdd.Columns.Add("型式", "型式")
             DgvAdd.Columns.Add("単位", "単位")
             DgvAdd.Columns.Add("仕入先", "仕入先")
-            DgvAdd.Columns.Add("仕入値", "仕入値")
-            DgvAdd.Columns.Add("仕入数量", "仕入数量")
+            DgvAdd.Columns.Add("売単価", "売単価")
+            DgvAdd.Columns.Add("売上数量", "売上数量")
             DgvAdd.Columns.Add("備考", "備考")
 
-            DgvAdd.Columns("仕入値").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvAdd.Columns("仕入数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            DgvAdd.Columns("売単価").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            DgvAdd.Columns("売上数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
             DgvAdd.Columns("No").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
             DgvAdd.Columns("No").ReadOnly = True
@@ -235,7 +235,7 @@ Public Class OrderManagement
             DgvAdd.Columns("仕入先").ReadOnly = True
 
             For index As Integer = 0 To ds3.Tables(RS).Rows.Count - 1
-                If ds3.Tables(RS).Rows(index)("発注残数") = 0 Then
+                If ds3.Tables(RS).Rows(index)("受注残数") = 0 Then
                 Else
                     DgvAdd.Rows.Add()
                     DgvAdd.Rows(index).Cells("行番号").Value = ds3.Tables(RS).Rows(index)("行番号")
@@ -245,20 +245,20 @@ Public Class OrderManagement
                     DgvAdd.Rows(index).Cells("型式").Value = ds3.Tables(RS).Rows(index)("型式")
                     DgvAdd.Rows(index).Cells("仕入先").Value = ds3.Tables(RS).Rows(index)("仕入先名")
                     DgvAdd.Rows(index).Cells("単位").Value = ds3.Tables(RS).Rows(index)("単位")
-                    DgvAdd.Rows(index).Cells("仕入値").Value = ds3.Tables(RS).Rows(index)("仕入値")
-                    DgvAdd.Rows(index).Cells("仕入数量").Value = 0
+                    DgvAdd.Rows(index).Cells("売単価").Value = ds3.Tables(RS).Rows(index)("売単価")
+                    DgvAdd.Rows(index).Cells("売上数量").Value = 0
                     DgvAdd.Rows(index).Cells("備考").Value = ds3.Tables(RS).Rows(index)("備考")
                 End If
             Next
 
             '行番号の振り直し
-            Dim i1 As Integer = DgvPurchase.Rows.Count()
+            Dim i1 As Integer = DgvOrder.Rows.Count()
             Dim No1 As Integer = 1
             For c As Integer = 0 To i1 - 1
-                DgvPurchase.Rows(c).Cells(0).Value = No1
+                DgvOrder.Rows(c).Cells(0).Value = No1
                 No1 += 1
             Next c
-            TxtCount1.Text = DgvPurchase.Rows.Count()
+            TxtCount1.Text = DgvOrder.Rows.Count()
 
             Dim i2 As Integer = DgvHistory.Rows.Count()
             Dim No2 As Integer = 1
@@ -276,10 +276,10 @@ Public Class OrderManagement
             Next c
             TxtCount3.Text = DgvAdd.Rows.Count()
 
-            TxtPurchaseNo.Text = ds1.Tables(RS).Rows(0)("発注番号")
-            TxtOrdingDate.Text = ds1.Tables(RS).Rows(0)("発注日")
-            TxtSupplierCode.Text = ds1.Tables(RS).Rows(0)("仕入先コード")
-            TxtSupplierName.Text = ds1.Tables(RS).Rows(0)("仕入先名")
+            TxtOrderNo.Text = ds1.Tables(RS).Rows(0)("受注番号")
+            TxtOrderDate.Text = ds1.Tables(RS).Rows(0)("受注日")
+            TxtCustomerCode.Text = ds1.Tables(RS).Rows(0)("得意先コード")
+            TxtCustomerName.Text = ds1.Tables(RS).Rows(0)("得意先名")
 
         Catch ue As UsrDefException
             ue.dspMsg()
@@ -318,15 +318,15 @@ Public Class OrderManagement
         Sql1 += "FROM "
         Sql1 += "public"
         Sql1 += "."
-        Sql1 += "t20_hattyu"
+        Sql1 += "t10_cymnhd"
         Sql1 += " WHERE "
-        Sql1 += "発注番号"
+        Sql1 += "受注番号"
         Sql1 += " ILIKE "
         Sql1 += "'"
         Sql1 += No
         Sql1 += "'"
         Sql1 += " AND "
-        Sql1 += "発注番号枝番"
+        Sql1 += "受注番号枝番"
         Sql1 += " ILIKE "
         Sql1 += "'"
         Sql1 += Suffix
@@ -340,15 +340,15 @@ Public Class OrderManagement
         Sql2 += "FROM "
         Sql2 += "public"
         Sql2 += "."
-        Sql2 += "t21_hattyu"
+        Sql2 += "t11_cymndt"
         Sql2 += " WHERE "
-        Sql2 += "発注番号"
+        Sql2 += "受注番号"
         Sql2 += " ILIKE "
         Sql2 += "'"
         Sql2 += No
         Sql2 += "'"
         Sql2 += " AND "
-        Sql2 += "発注番号枝番"
+        Sql2 += "受注番号枝番"
         Sql2 += " ILIKE "
         Sql2 += "'"
         Sql2 += Suffix
@@ -358,7 +358,7 @@ Public Class OrderManagement
 
 
         For i As Integer = 0 To DgvAdd.Rows.Count() - 1
-            If ds2.Tables(RS).Rows(i)("発注数量") < ds2.Tables(RS).Rows(i)("仕入数量") + DgvAdd.Rows(i).Cells("仕入数量").Value Then
+            If ds2.Tables(RS).Rows(i)("受注数量") < ds2.Tables(RS).Rows(i)("売上数量") + DgvAdd.Rows(i).Cells("売上数量").Value Then
                 MessageBox.Show("正しい値を入力してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 errFlg = False
             End If
@@ -376,7 +376,7 @@ Public Class OrderManagement
             Saiban1 += "採番キー"
             Saiban1 += " ILIKE "
             Saiban1 += "'"
-            Saiban1 += "50"
+            Saiban1 += "40"
             Saiban1 += "'"
 
             Saiban2 += "SELECT "
@@ -389,53 +389,65 @@ Public Class OrderManagement
             Saiban2 += "採番キー"
             Saiban2 += " ILIKE "
             Saiban2 += "'"
-            Saiban2 += "60"
+            Saiban2 += "70"
             Saiban2 += "'"
 
             Dim dsSaiban1 As DataSet = _db.selectDB(Saiban1, RS, reccnt)
             Dim dsSaiban2 As DataSet = _db.selectDB(Saiban2, RS, reccnt)
 
-            Dim PC As String = dsSaiban1.Tables(RS).Rows(0)("接頭文字")
-            PC += dtToday.ToString("MMdd")
-            PC += dsSaiban1.Tables(RS).Rows(0)("最新値").ToString.PadLeft(dsSaiban1.Tables(RS).Rows(0)("連番桁数"), "0")
+            Dim ER As String = dsSaiban1.Tables(RS).Rows(0)("接頭文字")
+            ER += dtToday.ToString("MMdd")
+            ER += dsSaiban1.Tables(RS).Rows(0)("最新値").ToString.PadLeft(dsSaiban1.Tables(RS).Rows(0)("連番桁数"), "0")
 
-            Dim WH As String = dsSaiban2.Tables(RS).Rows(0)("接頭文字")
-            WH += dtToday.ToString("MMdd")
-            WH += dsSaiban2.Tables(RS).Rows(0)("最新値").ToString.PadLeft(dsSaiban2.Tables(RS).Rows(0)("連番桁数"), "0")
+            Dim LS As String = dsSaiban2.Tables(RS).Rows(0)("接頭文字")
+            LS += dtToday.ToString("MMdd")
+            LS += dsSaiban2.Tables(RS).Rows(0)("最新値").ToString.PadLeft(dsSaiban2.Tables(RS).Rows(0)("連番桁数"), "0")
 
             Sql3 = ""
             Sql3 += "INSERT INTO "
             Sql3 += "Public."
-            Sql3 += "t40_sirehd("
-            Sql3 += "会社コード, 仕入番号, 発注番号, 発注番号枝番, 仕入先コード, 仕入先名, 仕入先郵便番号, 仕入先住所, 仕入先電話番号, 仕入先ＦＡＸ, 仕入先担当者役職, 仕入先担当者名, 支払条件, 仕入金額, 粗利額, 営業担当者, 入力担当者, 備考, 取消日, 取消区分, ＶＡＴ, ＰＰＨ, 仕入日, 登録日, 更新日, 更新者)"
+            Sql3 += "t30_urighd("
+            Sql3 += "会社コード, 売上番号, 売上番号枝番, 受注番号, 受注番号枝番, 見積番号, 見積番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額, 売上金額, 粗利額, 営業担当者, 入力担当者, 備考, 取消日, 取消区分, ＶＡＴ, ＰＰＨ, 受注日, 売上日, 入金予定日, 登録日, 更新日, 更新者)"
             Sql3 += " VALUES('"
             Sql3 += ds1.Tables(RS).Rows(0)("会社コード").ToString
             Sql3 += "', '"
-            Sql3 += PC
+            Sql3 += ER
             Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("発注番号").ToString
+            Sql3 += "1"
             Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("発注番号枝番").ToString
+            Sql3 += ds1.Tables(RS).Rows(0)("受注番号").ToString
             Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("仕入先コード").ToString
+            Sql3 += ds1.Tables(RS).Rows(0)("受注番号枝番").ToString
             Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("仕入先名").ToString
+            Sql3 += ds1.Tables(RS).Rows(0)("見積番号").ToString
             Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("仕入先郵便番号").ToString
+            Sql3 += ds1.Tables(RS).Rows(0)("見積番号枝番").ToString
             Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("仕入先住所").ToString
+            Sql3 += ds1.Tables(RS).Rows(0)("得意先コード").ToString
             Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("仕入先電話番号").ToString
+            Sql3 += ds1.Tables(RS).Rows(0)("得意先名").ToString
             Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("仕入先ＦＡＸ").ToString
+            Sql3 += ds1.Tables(RS).Rows(0)("得意先郵便番号").ToString
             Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("仕入先担当者役職").ToString
+            Sql3 += ds1.Tables(RS).Rows(0)("得意先住所").ToString
             Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("仕入先担当者名").ToString
+            Sql3 += ds1.Tables(RS).Rows(0)("得意先電話番号").ToString
+            Sql3 += "', '"
+            Sql3 += ds1.Tables(RS).Rows(0)("得意先ＦＡＸ").ToString
+            Sql3 += "', '"
+            Sql3 += ds1.Tables(RS).Rows(0)("得意先担当者役職").ToString
+            Sql3 += "', '"
+            Sql3 += ds1.Tables(RS).Rows(0)("得意先担当者名").ToString
+            Sql3 += "', '"
+            Sql3 += ds1.Tables(RS).Rows(0)("見積日").ToString
+            Sql3 += "', '"
+            Sql3 += ds1.Tables(RS).Rows(0)("見積有効期限").ToString
             Sql3 += "', '"
             Sql3 += ds1.Tables(RS).Rows(0)("支払条件").ToString
             Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("仕入金額").ToString
+            Sql3 += ds1.Tables(RS).Rows(0)("見積金額").ToString
+            Sql3 += "', '"
+            Sql3 += ds1.Tables(RS).Rows(0)("見積金額").ToString
             Sql3 += "', '"
             Sql3 += ds1.Tables(RS).Rows(0)("粗利額").ToString
             Sql3 += "', '"
@@ -459,35 +471,51 @@ Public Class OrderManagement
             Sql3 += "', '"
             Sql3 += dtToday
             Sql3 += "', '"
+            Sql3 += dtToday
+            Sql3 += "', '"
+            Sql3 += dtToday
+            Sql3 += "', '"
             Sql3 += Input
             Sql3 += " ')"
             Sql3 += "RETURNING 会社コード"
             Sql3 += ", "
-            Sql3 += "仕入番号"
+            Sql3 += "売上番号"
             Sql3 += ", "
-            Sql3 += "発注番号"
+            Sql3 += "売上番号枝番"
             Sql3 += ", "
-            Sql3 += "発注番号枝番"
+            Sql3 += "受注番号"
             Sql3 += ", "
-            Sql3 += "仕入先コード"
+            Sql3 += "受注番号枝番"
             Sql3 += ", "
-            Sql3 += "仕入先名"
+            Sql3 += "見積番号"
             Sql3 += ", "
-            Sql3 += "仕入先郵便番号"
+            Sql3 += "見積番号枝番"
             Sql3 += ", "
-            Sql3 += "仕入先住所"
+            Sql3 += "得意先コード"
             Sql3 += ", "
-            Sql3 += "仕入先電話番号"
+            Sql3 += "得意先名"
             Sql3 += ", "
-            Sql3 += "仕入先ＦＡＸ"
+            Sql3 += "得意先郵便番号"
             Sql3 += ", "
-            Sql3 += "仕入先担当者役職"
+            Sql3 += "得意先住所"
             Sql3 += ", "
-            Sql3 += "仕入先担当者名"
+            Sql3 += "得意先電話番号"
+            Sql3 += ", "
+            Sql3 += "得意先ＦＡＸ"
+            Sql3 += ", "
+            Sql3 += "得意先担当者役職"
+            Sql3 += ", "
+            Sql3 += "得意先担当者名"
+            Sql3 += ", "
+            Sql3 += "見積日"
+            Sql3 += ", "
+            Sql3 += "見積有効期限"
             Sql3 += ", "
             Sql3 += "支払条件"
             Sql3 += ", "
-            Sql3 += "仕入金額"
+            Sql3 += "見積金額"
+            Sql3 += ", "
+            Sql3 += "売上金額"
             Sql3 += ", "
             Sql3 += "粗利額"
             Sql3 += ", "
@@ -505,7 +533,11 @@ Public Class OrderManagement
             Sql3 += ", "
             Sql3 += "ＰＰＨ"
             Sql3 += ", "
-            Sql3 += "仕入日"
+            Sql3 += "受注日"
+            Sql3 += ", "
+            Sql3 += "売上日"
+            Sql3 += ", "
+            Sql3 += "入金予定日"
             Sql3 += ", "
             Sql3 += "登録日"
             Sql3 += ", "
@@ -519,18 +551,20 @@ Public Class OrderManagement
                 Sql4 = ""
                 Sql4 += "INSERT INTO "
                 Sql4 += "Public."
-                Sql4 += "t41_siredt("
-                Sql4 += "会社コード, 仕入番号, 発注番号, 発注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 仕入先名, 仕入値, 発注数量, 仕入数量, 発注残数, 単位, 間接費, 仕入単価, 仕入金額, リードタイム, 備考, 更新者, 更新日)"
+                Sql4 += "t31_urigdt("
+                Sql4 += "会社コード, 売上番号, 売上番号枝番, 受注番号, 受注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 仕入先名, 仕入値, 受注数量, 売上数量, 受注残数, 単位, 間接費, 売単価, 売上金額, 粗利額, 粗利率, リードタイム, 備考, 更新者, 更新日)"
                 Sql4 += " VALUES('"
-                Sql4 += ds1.Tables(RS).Rows(0)("会社コード").ToString
+                Sql4 += ds2.Tables(RS).Rows(index)("会社コード").ToString
                 Sql4 += "', '"
-                Sql4 += PC
+                Sql4 += ER
                 Sql4 += "', '"
-                Sql4 += ds1.Tables(RS).Rows(0)("発注番号").ToString
+                Sql4 += "1"
                 Sql4 += "', '"
-                Sql4 += ds1.Tables(RS).Rows(0)("発注番号枝番").ToString
+                Sql4 += ds2.Tables(RS).Rows(index)("受注番号").ToString
                 Sql4 += "', '"
-                Sql4 += DgvAdd.Rows(index).Cells("No").Value.ToString
+                Sql4 += ds2.Tables(RS).Rows(index)("受注番号枝番").ToString
+                Sql4 += "', '"
+                Sql4 += DgvAdd.Rows(index).Cells("行番号").Value.ToString
                 Sql4 += "', '"
                 Sql4 += DgvAdd.Rows(index).Cells("仕入区分").Value.ToString
                 Sql4 += "', '"
@@ -542,28 +576,32 @@ Public Class OrderManagement
                 Sql4 += "', '"
                 Sql4 += DgvAdd.Rows(index).Cells("仕入先").Value.ToString
                 Sql4 += "', '"
-                Sql4 += DgvAdd.Rows(index).Cells("仕入値").Value.ToString
+                Sql4 += ds2.Tables(RS).Rows(index)("仕入値").ToString
                 Sql4 += "', '"
-                Sql4 += ds2.Tables(RS).Rows(0)("発注数量").ToString
+                Sql4 += ds2.Tables(RS).Rows(index)("受注数量").ToString
                 Sql4 += "', '"
-                Sql4 += DgvAdd.Rows(index).Cells("仕入数量").Value.ToString
+                Sql4 += DgvAdd.Rows(index).Cells("売上数量").Value.ToString
                 Sql4 += "', '"
 
-                Dim OrderNo As Integer = ds2.Tables(RS).Rows(0)("発注数量")
-                Dim PurchaseNo As Integer = DgvAdd.Rows(index).Cells("仕入数量").Value
+                Dim OrderNo As Integer = ds2.Tables(RS).Rows(index)("受注数量")
+                Dim PurchaseNo As Integer = DgvAdd.Rows(index).Cells("売上数量").Value
                 Dim RemainingNo As Integer = OrderNo - PurchaseNo
 
                 Sql4 += RemainingNo.ToString
                 Sql4 += "', '"
                 Sql4 += DgvAdd.Rows(index).Cells("単位").Value.ToString
                 Sql4 += "', '"
-                Sql4 += ds2.Tables(RS).Rows(0)("間接費").ToString
+                Sql4 += ds2.Tables(RS).Rows(index)("間接費").ToString
                 Sql4 += "', '"
-                Sql4 += ds2.Tables(RS).Rows(0)("仕入単価").ToString
+                Sql4 += ds2.Tables(RS).Rows(index)("売単価").ToString
                 Sql4 += "', '"
-                Sql4 += ds2.Tables(RS).Rows(0)("仕入金額").ToString
+                Sql4 += ds2.Tables(RS).Rows(index)("売上金額").ToString
                 Sql4 += "', '"
-                Sql4 += ds2.Tables(RS).Rows(0)("リードタイム").ToString
+                Sql4 += ds2.Tables(RS).Rows(index)("粗利額").ToString
+                Sql4 += "', '"
+                Sql4 += ds2.Tables(RS).Rows(index)("粗利率").ToString
+                Sql4 += "', '"
+                Sql4 += ds2.Tables(RS).Rows(index)("リードタイム").ToString
                 Sql4 += "', '"
                 Sql4 += DgvAdd.Rows(index).Cells("備考").Value.ToString
                 Sql4 += "', '"
@@ -573,11 +611,13 @@ Public Class OrderManagement
                 Sql4 += " ')"
                 Sql4 += "RETURNING 会社コード"
                 Sql4 += ", "
-                Sql4 += "仕入番号"
+                Sql4 += "売上番号"
                 Sql4 += ", "
-                Sql4 += "発注番号"
+                Sql4 += "売上番号枝番"
                 Sql4 += ", "
-                Sql4 += "発注番号枝番"
+                Sql4 += "受注番号"
+                Sql4 += ", "
+                Sql4 += "受注番号枝番"
                 Sql4 += ", "
                 Sql4 += "行番号"
                 Sql4 += ", "
@@ -593,27 +633,27 @@ Public Class OrderManagement
                 Sql4 += ", "
                 Sql4 += "仕入値"
                 Sql4 += ", "
-                Sql4 += "発注数量"
+                Sql4 += "受注数量"
                 Sql4 += ", "
-                Sql4 += "仕入数量"
+                Sql4 += "売上数量"
                 Sql4 += ", "
-                Sql4 += "発注残数"
+                Sql4 += "受注残数"
                 Sql4 += ", "
                 Sql4 += "単位"
                 Sql4 += ", "
                 Sql4 += "間接費"
                 Sql4 += ", "
-                Sql4 += "仕入単価"
+                Sql4 += "売単価"
                 Sql4 += ", "
-                Sql4 += "仕入金額"
+                Sql4 += "売上金額"
                 Sql4 += ", "
                 Sql4 += "リードタイム"
                 Sql4 += ", "
-                Sql4 += "支払有無"
+                Sql4 += "入金有無"
                 Sql4 += ", "
-                Sql4 += "支払番号"
+                Sql4 += "入金番号"
                 Sql4 += ", "
-                Sql4 += "支払日"
+                Sql4 += "入金日"
                 Sql4 += ", "
                 Sql4 += "備考"
                 Sql4 += ", "
@@ -624,12 +664,12 @@ Public Class OrderManagement
                 _db.executeDB(Sql4)
             Next
 
-            Dim PCNo As Integer
+            Dim ERNo As Integer
 
             If dsSaiban1.Tables(RS).Rows(0)("最新値") = dsSaiban1.Tables(RS).Rows(0)("最大値") Then
-                PCNo = dsSaiban1.Tables(RS).Rows(0)("最小値")
+                ERNo = dsSaiban1.Tables(RS).Rows(0)("最小値")
             Else
-                PCNo = dsSaiban1.Tables(RS).Rows(0)("最新値") + 1
+                ERNo = dsSaiban1.Tables(RS).Rows(0)("最新値") + 1
             End If
 
             Sql5 = ""
@@ -639,7 +679,7 @@ Public Class OrderManagement
             Sql5 += "SET "
             Sql5 += " 最新値"
             Sql5 += " = '"
-            Sql5 += PCNo.ToString
+            Sql5 += ERNo.ToString
             Sql5 += "', "
             Sql5 += "更新者"
             Sql5 += " = '"
@@ -657,7 +697,7 @@ Public Class OrderManagement
             Sql5 += " AND"
             Sql5 += " 採番キー"
             Sql5 += "='"
-            Sql5 += "50"
+            Sql5 += "40"
             Sql5 += "' "
             Sql5 += "RETURNING 会社コード"
             Sql5 += ", "
@@ -685,16 +725,16 @@ Public Class OrderManagement
                 Sql6 = ""
                 Sql6 += "UPDATE "
                 Sql6 += "Public."
-                Sql6 += "t21_hattyu "
+                Sql6 += "t11_cymndt "
                 Sql6 += "SET "
-                Sql6 += "仕入数量"
+                Sql6 += "売上数量"
                 Sql6 += " = '"
-                PurchaseNum = ds2.Tables(RS).Rows(index)("仕入数量") + DgvAdd.Rows(index).Cells("仕入数量").Value
+                PurchaseNum = ds2.Tables(RS).Rows(index)("売上数量") + DgvAdd.Rows(index).Cells("売上数量").Value
                 Sql6 += PurchaseNum.ToString
                 Sql6 += "', "
-                Sql6 += " 発注残数"
+                Sql6 += " 受注残数"
                 Sql6 += " = '"
-                OrdingNum = ds2.Tables(RS).Rows(index)("発注残数") - DgvAdd.Rows(index).Cells("仕入数量").Value
+                OrdingNum = ds2.Tables(RS).Rows(index)("受注残数") - DgvAdd.Rows(index).Cells("売上数量").Value
                 Sql6 += OrdingNum.ToString
                 Sql6 += "', "
                 Sql6 += "更新者"
@@ -707,14 +747,14 @@ Public Class OrderManagement
                 Sql6 += ds1.Tables(RS).Rows(0)("会社コード").ToString
                 Sql6 += "'"
                 Sql6 += " AND"
-                Sql6 += " 発注番号"
+                Sql6 += " 受注番号"
                 Sql6 += "='"
-                Sql6 += ds2.Tables(RS).Rows(index)("発注番号").ToString
+                Sql6 += ds2.Tables(RS).Rows(index)("受注番号").ToString
                 Sql6 += "'"
                 Sql6 += " AND"
-                Sql6 += " 発注番号枝番"
+                Sql6 += " 受注番号枝番"
                 Sql6 += "='"
-                Sql6 += ds2.Tables(RS).Rows(index)("発注番号枝番").ToString
+                Sql6 += ds2.Tables(RS).Rows(index)("受注番号枝番").ToString
                 Sql6 += "'"
                 Sql6 += " AND"
                 Sql6 += " 行番号"
@@ -723,9 +763,9 @@ Public Class OrderManagement
                 Sql6 += "' "
                 Sql6 += "RETURNING 会社コード"
                 Sql6 += ", "
-                Sql6 += "発注番号"
+                Sql6 += "受注番号"
                 Sql6 += ", "
-                Sql6 += "発注番号枝番"
+                Sql6 += "受注番号枝番"
                 Sql6 += ", "
                 Sql6 += "行番号"
                 Sql6 += ", "
@@ -741,25 +781,25 @@ Public Class OrderManagement
                 Sql6 += ", "
                 Sql6 += "仕入値"
                 Sql6 += ", "
-                Sql6 += "発注数量"
+                Sql6 += "受注数量"
                 Sql6 += ", "
-                Sql6 += "仕入数量"
+                Sql6 += "売上数量"
                 Sql6 += ", "
-                Sql6 += "発注残数"
+                Sql6 += "受注残数"
                 Sql6 += ", "
                 Sql6 += "単位"
                 Sql6 += ", "
                 Sql6 += "間接費"
                 Sql6 += ", "
-                Sql6 += "仕入単価"
+                Sql6 += "売単価"
                 Sql6 += ", "
-                Sql6 += "仕入金額"
+                Sql6 += "売上金額"
                 Sql6 += ", "
                 Sql6 += "リードタイム"
                 Sql6 += ", "
-                Sql6 += "入庫数"
+                Sql6 += "出庫数"
                 Sql6 += ", "
-                Sql6 += "未入庫数"
+                Sql6 += "未出庫数"
                 Sql6 += ", "
                 Sql6 += "備考"
                 Sql6 += ", "
@@ -771,38 +811,36 @@ Public Class OrderManagement
             Sql7 = ""
             Sql7 += "INSERT INTO "
             Sql7 += "Public."
-            Sql7 += "t42_nyukohd("
-            Sql7 += "会社コード, 入庫番号, 発注番号, 発注番号枝番, 仕入先コード, 仕入先名, 仕入先郵便番号, 仕入先住所, 仕入先電話番号, 仕入先ＦＡＸ, 仕入先担当者役職, 仕入先担当者名, 支払条件, 仕入金額, 粗利額, 営業担当者, 入力担当者, 備考, 取消日, 取消区分, ＶＡＴ, ＰＰＨ, 入庫日, 登録日, 更新日, 更新者)"
+            Sql7 += "t44_shukohd("
+            Sql7 += "会社コード, 出庫番号, 見積番号, 見積番号枝番, 受注番号, 受注番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 営業担当者, 入力担当者, 備考, 取消日, 取消区分, 出庫日, 登録日, 更新日, 更新者)"
             Sql7 += " VALUES('"
             Sql7 += ds1.Tables(RS).Rows(0)("会社コード").ToString
             Sql7 += "', '"
-            Sql7 += WH
+            Sql7 += LS
             Sql7 += "', '"
-            Sql7 += ds1.Tables(RS).Rows(0)("発注番号").ToString
+            Sql7 += ds1.Tables(RS).Rows(0)("見積番号").ToString
             Sql7 += "', '"
-            Sql7 += ds1.Tables(RS).Rows(0)("発注番号枝番").ToString
+            Sql7 += ds1.Tables(RS).Rows(0)("見積番号枝番").ToString
             Sql7 += "', '"
-            Sql7 += ds1.Tables(RS).Rows(0)("仕入先コード").ToString
+            Sql7 += ds1.Tables(RS).Rows(0)("受注番号").ToString
             Sql7 += "', '"
-            Sql7 += ds1.Tables(RS).Rows(0)("仕入先名").ToString
+            Sql7 += ds1.Tables(RS).Rows(0)("受注番号枝番").ToString
             Sql7 += "', '"
-            Sql7 += ds1.Tables(RS).Rows(0)("仕入先郵便番号").ToString
+            Sql7 += ds1.Tables(RS).Rows(0)("得意先コード").ToString
             Sql7 += "', '"
-            Sql7 += ds1.Tables(RS).Rows(0)("仕入先住所").ToString
+            Sql7 += ds1.Tables(RS).Rows(0)("得意先名").ToString
             Sql7 += "', '"
-            Sql7 += ds1.Tables(RS).Rows(0)("仕入先電話番号").ToString
+            Sql7 += ds1.Tables(RS).Rows(0)("得意先郵便番号").ToString
             Sql7 += "', '"
-            Sql7 += ds1.Tables(RS).Rows(0)("仕入先ＦＡＸ").ToString
+            Sql7 += ds1.Tables(RS).Rows(0)("得意先住所").ToString
             Sql7 += "', '"
-            Sql7 += ds1.Tables(RS).Rows(0)("仕入先担当者役職").ToString
+            Sql7 += ds1.Tables(RS).Rows(0)("得意先電話番号").ToString
             Sql7 += "', '"
-            Sql7 += ds1.Tables(RS).Rows(0)("仕入先担当者名").ToString
+            Sql7 += ds1.Tables(RS).Rows(0)("得意先ＦＡＸ").ToString
             Sql7 += "', '"
-            Sql7 += ds1.Tables(RS).Rows(0)("支払条件").ToString
+            Sql7 += ds1.Tables(RS).Rows(0)("得意先担当者役職").ToString
             Sql7 += "', '"
-            Sql7 += ds1.Tables(RS).Rows(0)("仕入金額").ToString
-            Sql7 += "', '"
-            Sql7 += ds1.Tables(RS).Rows(0)("粗利額").ToString
+            Sql7 += ds1.Tables(RS).Rows(0)("得意先担当者名").ToString
             Sql7 += "', '"
             Sql7 += ds1.Tables(RS).Rows(0)("営業担当者").ToString
             Sql7 += "', '"
@@ -814,10 +852,6 @@ Public Class OrderManagement
             Sql7 += ", "
             Sql7 += "null"
             Sql7 += ", '"
-            Sql7 += ds1.Tables(RS).Rows(0)("ＶＡＴ").ToString
-            Sql7 += "', '"
-            Sql7 += ds1.Tables(RS).Rows(0)("ＰＰＨ").ToString
-            Sql7 += "', '"
             Sql7 += dtToday
             Sql7 += "', '"
             Sql7 += dtToday
@@ -828,33 +862,31 @@ Public Class OrderManagement
             Sql7 += " ')"
             Sql7 += "RETURNING 会社コード"
             Sql7 += ", "
-            Sql7 += "入庫番号"
+            Sql7 += "出庫番号"
             Sql7 += ", "
-            Sql7 += "発注番号"
+            Sql7 += "見積番号"
             Sql7 += ", "
-            Sql7 += "発注番号枝番"
+            Sql7 += "見積番号枝番"
             Sql7 += ", "
-            Sql7 += "仕入先コード"
+            Sql7 += "受注番号"
             Sql7 += ", "
-            Sql7 += "仕入先名"
+            Sql7 += "受注番号枝番"
             Sql7 += ", "
-            Sql7 += "仕入先郵便番号"
+            Sql7 += "得意先コード"
             Sql7 += ", "
-            Sql7 += "仕入先住所"
+            Sql7 += "得意先名"
             Sql7 += ", "
-            Sql7 += "仕入先電話番号"
+            Sql7 += "得意先郵便番号"
             Sql7 += ", "
-            Sql7 += "仕入先ＦＡＸ"
+            Sql7 += "得意先住所"
             Sql7 += ", "
-            Sql7 += "仕入先担当者役職"
+            Sql7 += "得意先電話番号"
             Sql7 += ", "
-            Sql7 += "仕入先担当者名"
+            Sql7 += "得意先ＦＡＸ"
             Sql7 += ", "
-            Sql7 += "支払条件"
+            Sql7 += "得意先担当者役職"
             Sql7 += ", "
-            Sql7 += "仕入金額"
-            Sql7 += ", "
-            Sql7 += "粗利額"
+            Sql7 += "得意先担当者名"
             Sql7 += ", "
             Sql7 += "営業担当者"
             Sql7 += ", "
@@ -866,11 +898,7 @@ Public Class OrderManagement
             Sql7 += ", "
             Sql7 += "取消区分"
             Sql7 += ", "
-            Sql7 += "ＶＡＴ"
-            Sql7 += ", "
-            Sql7 += "ＰＰＨ"
-            Sql7 += ", "
-            Sql7 += "入庫日"
+            Sql7 += "出庫日"
             Sql7 += ", "
             Sql7 += "登録日"
             Sql7 += ", "
@@ -884,16 +912,16 @@ Public Class OrderManagement
                 Sql8 = ""
                 Sql8 += "INSERT INTO "
                 Sql8 += "Public."
-                Sql8 += "t43_nyukodt("
-                Sql8 += "会社コード, 入庫番号, 発注番号, 発注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 仕入先名, 仕入値, 入庫数量, 単位, 備考, 更新者, 更新日)"
+                Sql8 += "t45_shukodt("
+                Sql8 += "会社コード, 出庫番号, 受注番号, 受注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 仕入先名, 売単価, 出庫数量, 単位, 備考, 更新者, 更新日)"
                 Sql8 += " VALUES('"
                 Sql8 += ds1.Tables(RS).Rows(0)("会社コード").ToString
                 Sql8 += "', '"
-                Sql8 += WH
+                Sql8 += LS
                 Sql8 += "', '"
-                Sql8 += ds1.Tables(RS).Rows(0)("発注番号").ToString
+                Sql8 += ds1.Tables(RS).Rows(0)("受注番号").ToString
                 Sql8 += "', '"
-                Sql8 += ds1.Tables(RS).Rows(0)("発注番号枝番").ToString
+                Sql8 += ds1.Tables(RS).Rows(0)("受注番号枝番").ToString
                 Sql8 += "', '"
                 Sql8 += DgvAdd.Rows(index).Cells("No").Value.ToString
                 Sql8 += "', '"
@@ -907,9 +935,9 @@ Public Class OrderManagement
                 Sql8 += "', '"
                 Sql8 += DgvAdd.Rows(index).Cells("仕入先").Value.ToString
                 Sql8 += "', '"
-                Sql8 += DgvAdd.Rows(index).Cells("仕入値").Value.ToString
+                Sql8 += DgvAdd.Rows(index).Cells("売単価").Value.ToString
                 Sql8 += "', '"
-                Sql8 += DgvAdd.Rows(index).Cells("仕入数量").Value.ToString
+                Sql8 += DgvAdd.Rows(index).Cells("売上数量").Value.ToString
                 Sql8 += "', '"
                 Sql8 += DgvAdd.Rows(index).Cells("単位").Value.ToString
                 Sql8 += "', '"
@@ -921,11 +949,11 @@ Public Class OrderManagement
                 Sql8 += " ')"
                 Sql8 += "RETURNING 会社コード"
                 Sql8 += ", "
-                Sql8 += "入庫番号"
+                Sql8 += "出庫番号"
                 Sql8 += ", "
-                Sql8 += "発注番号"
+                Sql8 += "受注番号"
                 Sql8 += ", "
-                Sql8 += "発注番号枝番"
+                Sql8 += "受注番号枝番"
                 Sql8 += ", "
                 Sql8 += "行番号"
                 Sql8 += ", "
@@ -939,9 +967,9 @@ Public Class OrderManagement
                 Sql8 += ", "
                 Sql8 += "仕入先名"
                 Sql8 += ", "
-                Sql8 += "仕入値"
+                Sql8 += "売単価"
                 Sql8 += ", "
-                Sql8 += "入庫数量"
+                Sql8 += "出庫数量"
                 Sql8 += ", "
                 Sql8 += "単位"
                 Sql8 += ", "
@@ -954,12 +982,12 @@ Public Class OrderManagement
                 _db.executeDB(Sql8)
             Next
 
-            Dim WHNo As Integer
+            Dim LSNo As Integer
 
             If dsSaiban2.Tables(RS).Rows(0)("最新値") = dsSaiban2.Tables(RS).Rows(0)("最大値") Then
-                WHNo = dsSaiban2.Tables(RS).Rows(0)("最小値")
+                LSNo = dsSaiban2.Tables(RS).Rows(0)("最小値")
             Else
-                WHNo = dsSaiban2.Tables(RS).Rows(0)("最新値") + 1
+                LSNo = dsSaiban2.Tables(RS).Rows(0)("最新値") + 1
             End If
 
             Sql9 = ""
@@ -969,7 +997,7 @@ Public Class OrderManagement
             Sql9 += "SET "
             Sql9 += " 最新値"
             Sql9 += " = '"
-            Sql9 += WHNo.ToString
+            Sql9 += LSNo.ToString
             Sql9 += "', "
             Sql9 += "更新者"
             Sql9 += " = '"
@@ -987,7 +1015,7 @@ Public Class OrderManagement
             Sql9 += " AND"
             Sql9 += " 採番キー"
             Sql9 += "='"
-            Sql9 += "60"
+            Sql9 += "70"
             Sql9 += "' "
             Sql9 += "RETURNING 会社コード"
             Sql9 += ", "

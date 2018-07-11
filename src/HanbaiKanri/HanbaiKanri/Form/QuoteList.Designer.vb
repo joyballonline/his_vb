@@ -54,6 +54,9 @@ Partial Class QuoteList
         Me.BtnQuoteView = New System.Windows.Forms.Button()
         Me.BtnUnitPrice = New System.Windows.Forms.Button()
         Me.BtnOrder = New System.Windows.Forms.Button()
+        Me.BtnCancel = New System.Windows.Forms.Button()
+        Me.LblMode = New System.Windows.Forms.Label()
+        Me.ChkExpired = New System.Windows.Forms.CheckBox()
         CType(Me.DgvMithd, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -78,6 +81,7 @@ Partial Class QuoteList
         Me.BtnQuoteAdd.TabIndex = 1
         Me.BtnQuoteAdd.Text = "新規登録"
         Me.BtnQuoteAdd.UseVisualStyleBackColor = True
+        Me.BtnQuoteAdd.Visible = False
         '
         'BtnQuoteEdit
         '
@@ -87,6 +91,7 @@ Partial Class QuoteList
         Me.BtnQuoteEdit.TabIndex = 2
         Me.BtnQuoteEdit.Text = "見積修正"
         Me.BtnQuoteEdit.UseVisualStyleBackColor = True
+        Me.BtnQuoteEdit.Visible = False
         '
         'BtnQuoteClone
         '
@@ -96,6 +101,7 @@ Partial Class QuoteList
         Me.BtnQuoteClone.TabIndex = 3
         Me.BtnQuoteClone.Text = "複製"
         Me.BtnQuoteClone.UseVisualStyleBackColor = True
+        Me.BtnQuoteClone.Visible = False
         '
         'BtnBack
         '
@@ -352,6 +358,7 @@ Partial Class QuoteList
         Me.BtnQuoteView.TabIndex = 30
         Me.BtnQuoteView.Text = "見積参照"
         Me.BtnQuoteView.UseVisualStyleBackColor = True
+        Me.BtnQuoteView.Visible = False
         '
         'BtnUnitPrice
         '
@@ -361,6 +368,7 @@ Partial Class QuoteList
         Me.BtnUnitPrice.TabIndex = 31
         Me.BtnUnitPrice.Text = "単価入力"
         Me.BtnUnitPrice.UseVisualStyleBackColor = True
+        Me.BtnUnitPrice.Visible = False
         '
         'BtnOrder
         '
@@ -370,12 +378,49 @@ Partial Class QuoteList
         Me.BtnOrder.TabIndex = 32
         Me.BtnOrder.Text = "受発注登録"
         Me.BtnOrder.UseVisualStyleBackColor = True
+        Me.BtnOrder.Visible = False
+        '
+        'BtnCancel
+        '
+        Me.BtnCancel.Location = New System.Drawing.Point(12, 677)
+        Me.BtnCancel.Name = "BtnCancel"
+        Me.BtnCancel.Size = New System.Drawing.Size(165, 40)
+        Me.BtnCancel.TabIndex = 33
+        Me.BtnCancel.Text = "見積取消"
+        Me.BtnCancel.UseVisualStyleBackColor = True
+        Me.BtnCancel.Visible = False
+        '
+        'LblMode
+        '
+        Me.LblMode.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblMode.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblMode.Location = New System.Drawing.Point(1173, 9)
+        Me.LblMode.Name = "LblMode"
+        Me.LblMode.Size = New System.Drawing.Size(165, 22)
+        Me.LblMode.TabIndex = 34
+        Me.LblMode.Text = "モード"
+        Me.LblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'ChkExpired
+        '
+        Me.ChkExpired.AutoSize = True
+        Me.ChkExpired.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.ChkExpired.Location = New System.Drawing.Point(288, 202)
+        Me.ChkExpired.Name = "ChkExpired"
+        Me.ChkExpired.Size = New System.Drawing.Size(221, 19)
+        Me.ChkExpired.TabIndex = 35
+        Me.ChkExpired.Text = "有効期限の切れたデータを含める"
+        Me.ChkExpired.UseVisualStyleBackColor = True
         '
         'QuoteList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1350, 729)
+        Me.Controls.Add(Me.ChkExpired)
+        Me.Controls.Add(Me.LblMode)
+        Me.Controls.Add(Me.BtnCancel)
         Me.Controls.Add(Me.BtnOrder)
         Me.Controls.Add(Me.BtnUnitPrice)
         Me.Controls.Add(Me.BtnQuoteView)
@@ -448,4 +493,7 @@ Partial Class QuoteList
     Friend WithEvents BtnQuoteView As Button
     Friend WithEvents BtnUnitPrice As Button
     Friend WithEvents BtnOrder As Button
+    Friend WithEvents BtnCancel As Button
+    Friend WithEvents LblMode As Label
+    Friend WithEvents ChkExpired As CheckBox
 End Class

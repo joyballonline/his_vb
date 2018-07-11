@@ -34,6 +34,7 @@ Public Class Quote
     Private _db As UtilDBIf
     Private _langHd As UtilLangHandler
     Private _gh As UtilDataGridViewHandler
+    Private _parentForm As Form
     Private _init As Boolean                             '初期処理済フラグ
     Private count As Integer = 0
     Private CompanyCode As String = ""
@@ -61,6 +62,7 @@ Public Class Quote
     Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler,
                    ByRef prmRefDbHd As UtilDBIf,
                    ByRef prmRefLangHd As UtilLangHandler,
+                   ByRef prmRefForm As Form,
                    Optional ByRef prmRefNo As String = Nothing,
                    Optional ByRef prmRefSuffix As String = Nothing,
                    Optional ByRef prmRefStatus As String = Nothing)
@@ -72,6 +74,7 @@ Public Class Quote
         _msgHd = prmRefMsgHd                                                'MSGハンドラの設定
         _db = prmRefDbHd                                                    'DBハンドラの設定
         _langHd = prmRefLangHd
+        _parentForm = prmRefForm
         EditNo = prmRefNo
         EditSuffix = prmRefSuffix
         Status = prmRefStatus
@@ -243,9 +246,7 @@ Public Class Quote
             TxtPerson.Text = ds1.Tables(RS).Rows(0)(7)
             TxtPosition.Text = ds1.Tables(RS).Rows(0)(8)
             If ds1.Tables(RS).Rows(0)(9) IsNot DBNull.Value Then
-                Dim PostalCode As String = ds1.Tables(RS).Rows(0)(9)
-                TxtPostalCode1.Text = PostalCode.Substring(0, 3)
-                TxtPostalCode2.Text = PostalCode.Substring(3, 4)
+                TxtPostalCode.Text = ds1.Tables(RS).Rows(0)(9)
             End If
             If ds1.Tables(RS).Rows(0)(10) IsNot DBNull.Value Then
                 Dim Address As String = ds1.Tables(RS).Rows(0)(10)
@@ -400,12 +401,12 @@ Public Class Quote
         End If
 
         If Status Is "VIEW" Then
+            LblMode.Text = "参照モード"
             DtpQuote.Enabled = False
             DtpExpiration.Enabled = False
             TxtCustomerCode.Enabled = False
             TxtCustomerName.Enabled = False
-            TxtPostalCode1.Enabled = False
-            TxtPostalCode2.Enabled = False
+            TxtPostalCode.Enabled = False
             TxtAddress1.Enabled = False
             TxtAddress2.Enabled = False
             TxtAddress3.Enabled = False
@@ -427,6 +428,7 @@ Public Class Quote
             BtnQuote.Visible = True
             BtnQuote.Location = New Point(1004, 677)
         ElseIf Status Is "PRICE" Then
+            LblMode.Text = "仕入単価入力モード"
             BtnRowsAdd.Visible = False
             BtnRowsDel.Visible = False
             BtnUp.Visible = False
@@ -434,6 +436,10 @@ Public Class Quote
             BtnClone.Visible = False
             BtnInsert.Visible = False
             BtnQuote.Visible = False
+        ElseIf Status Is "EDIT" Then
+            LblMode.Text = "編集モード"
+        ElseIf Status Is "ADD" Then
+            LblMode.Text = "新規登録モード"
         End If
 
 
@@ -495,6 +501,7 @@ Public Class Quote
                 DgvItemList.Rows(c).Cells(0).Value = No
                 No += 1
             Next c
+            TxtItemCount.Text = DgvItemList.Rows.Count()
         Else
             DgvItemList.Rows.Add()
             TxtItemCount.Text = DgvItemList.Rows.Count()
@@ -506,6 +513,7 @@ Public Class Quote
                 DgvItemList.Rows(c).Cells(0).Value = No
                 No += 1
             Next c
+            TxtItemCount.Text = DgvItemList.Rows.Count()
         End If
     End Sub
 
@@ -609,16 +617,16 @@ Public Class Quote
     '得意先コードをダブルクリック時得意先マスタから得意先を取得
     Private Sub TxtCustomerCode_DoubleClick(sender As Object, e As EventArgs) Handles TxtCustomerCode.DoubleClick
         Dim openForm As Form = Nothing
-        openForm = New CustomerSearch(_msgHd, _db)   '処理選択
+        openForm = New CustomerSearch(_msgHd, _db, _langHd, Me)   '処理選択
         openForm.Show(Me)
-        'Me.Hide()   ' 自分は隠れる
+        Me.Enabled = False
     End Sub
 
     Private Sub TxtSales_DoubleClick(sender As Object, e As EventArgs) Handles TxtSales.DoubleClick
         Dim openForm As Form = Nothing
-        openForm = New SalesSearch(_msgHd, _db)   '処理選択
+        openForm = New SalesSearch(_msgHd, _db, _langHd, Me)   '処理選択
         openForm.Show(Me)
-        'Me.Hide()   ' 自分は隠れる
+        Me.Enabled = False
     End Sub
 
     'Dgv内での検索
@@ -629,21 +637,24 @@ Public Class Quote
         ColIdx = Me.DgvItemList.CurrentCell.ColumnIndex
         Dim RowIdx As Integer
         RowIdx = Me.DgvItemList.CurrentCell.RowIndex
+
         Dim Maker As String = DgvItemList.Rows(RowIdx).Cells(2).Value
         Dim Item As String = DgvItemList.Rows(RowIdx).Cells(3).Value
         Dim Model As String = DgvItemList.Rows(RowIdx).Cells(4).Value
 
         If ColIdx = 2 Then                  'メーカー検索
             Dim openForm As Form = Nothing
-            openForm = New MakerSearch(_msgHd, _db, RowIdx, ColIdx, Maker, Item, Model)   '処理選択
+            openForm = New MakerSearch(_msgHd, _db, Me, RowIdx, ColIdx, Maker, Item, Model)   '処理選択
             openForm.Show(Me)
+            Me.Enabled = False
         End If
 
         If ColIdx = 3 Then              '品名検索
             If Maker IsNot Nothing Then
                 Dim openForm As Form = Nothing
-                openForm = New MakerSearch(_msgHd, _db, RowIdx, ColIdx, Maker, Item, Model)   '処理選択
+                openForm = New MakerSearch(_msgHd, _db, Me, RowIdx, ColIdx, Maker, Item, Model)   '処理選択
                 openForm.Show(Me)
+                Me.Enabled = False
             Else
                 MessageBox.Show("メーカーを入力してください。",
                 "エラー",
@@ -655,8 +666,9 @@ Public Class Quote
         If ColIdx = 4 Then
             If Maker IsNot Nothing And Item IsNot Nothing Then
                 Dim openForm As Form = Nothing
-                openForm = New MakerSearch(_msgHd, _db, RowIdx, ColIdx, Maker, Item, Model)   '処理選択
+                openForm = New MakerSearch(_msgHd, _db, Me, RowIdx, ColIdx, Maker, Item, Model)
                 openForm.Show(Me)
+                Me.Enabled = False
             Else
                 MessageBox.Show("メーカー、品名を入力してください。",
                 "エラー",
@@ -667,8 +679,9 @@ Public Class Quote
 
         If ColIdx = 7 Then
             Dim openForm As Form = Nothing
-            openForm = New SupplierSearch(_msgHd, _db, RowIdx)   '処理選択
+            openForm = New SupplierSearch(_msgHd, _db, RowIdx, Me)
             openForm.Show(Me)
+            Me.Enabled = False
         End If
     End Sub
 
@@ -686,10 +699,9 @@ Public Class Quote
 
     '前の画面に戻る
     Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
-        'Dim QuoteList As QuoteList
-        'QuoteList = New QuoteList(_msgHd, _db, _langHd)
-        'QuoteList.Show()
-        Me.Close()
+        _parentForm.Show()
+        _parentForm.Enabled = True
+        Me.Dispose()
     End Sub
 
     Private Sub BtnRegistration_Click(sender As Object, e As EventArgs) Handles BtnRegistration.Click
@@ -713,8 +725,7 @@ Public Class Quote
                 Sql1 += "', "
                 Sql1 += "得意先郵便番号"
                 Sql1 += " = '"
-                Sql1 += TxtPostalCode1.Text
-                Sql1 += TxtPostalCode2.Text
+                Sql1 += TxtPostalCode.Text
                 Sql1 += "', "
                 Sql1 += "得意先住所"
                 Sql1 += " = '"
@@ -1084,7 +1095,7 @@ Public Class Quote
                 Sql1 += "INSERT INTO "
                 Sql1 += "Public."
                 Sql1 += "t01_mithd("
-                Sql1 += "会社コード, 見積番号, 見積番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額, 仕入金額, 営業担当者, 入力担当者, 備考, 登録日, 更新日, 更新者)"
+                Sql1 += "会社コード, 見積番号, 見積番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額, 仕入金額, 営業担当者, 入力担当者, 備考, ＶＡＴ, 取消区分, 登録日, 更新日, 更新者)"
                 Sql1 += " VALUES('"
                 Sql1 += CompanyCode
                 Sql1 += "', '"
@@ -1096,8 +1107,7 @@ Public Class Quote
                 Sql1 += "', '"
                 Sql1 += TxtCustomerName.Text
                 Sql1 += "', '"
-                Sql1 += TxtPostalCode1.Text
-                Sql1 += TxtPostalCode2.Text
+                Sql1 += TxtPostalCode.Text
                 Sql1 += "', '"
                 Sql1 += TxtAddress1.Text
                 Sql1 += " "
@@ -1128,6 +1138,14 @@ Public Class Quote
                 Sql1 += TxtInput.Text
                 Sql1 += "', '"
                 Sql1 += TxtRemarks.Text
+                Sql1 += "', '"
+                If TxtVat.Text = Nothing Then
+                    Sql1 += "0"
+                Else
+                    Sql1 += TxtVat.Text
+                End If
+                Sql1 += "', '"
+                Sql1 += "0"
                 Sql1 += "', '"
                 Sql1 += DtpRegistration.Text
                 Sql1 += "', '"
@@ -1172,6 +1190,10 @@ Public Class Quote
                 Sql1 += "入力担当者"
                 Sql1 += ", "
                 Sql1 += "備考"
+                Sql1 += ", "
+                Sql1 += "ＶＡＴ"
+                Sql1 += ", "
+                Sql1 += "取消区分"
                 Sql1 += ", "
                 Sql1 += "登録日"
                 Sql1 += ", "
@@ -1327,7 +1349,10 @@ Public Class Quote
                 Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", UtilClass.getErrDetail(ex)))
             End Try
         End If
-        Me.Close()
+        _parentForm.Enabled = True
+        _parentForm.Show()
+        Me.Dispose()
+
     End Sub
 
     Private Sub BtnQuote_Click(sender As Object, e As EventArgs) Handles BtnQuote.Click
@@ -1592,11 +1617,5 @@ Public Class Quote
             Marshal.ReleaseComObject(app)
 
         End Try
-
-
-
-
-
-
     End Sub
 End Class

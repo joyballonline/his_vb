@@ -26,6 +26,7 @@ Partial Class MakerSearch
         Me.LbMaker = New System.Windows.Forms.ListBox()
         Me.LbItem = New System.Windows.Forms.ListBox()
         Me.LbModel = New System.Windows.Forms.ListBox()
+        Me.BtnBack = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'BtnSelect
@@ -64,11 +65,21 @@ Partial Class MakerSearch
         Me.LbModel.Size = New System.Drawing.Size(200, 400)
         Me.LbModel.TabIndex = 4
         '
+        'BtnBack
+        '
+        Me.BtnBack.Location = New System.Drawing.Point(468, 418)
+        Me.BtnBack.Name = "BtnBack"
+        Me.BtnBack.Size = New System.Drawing.Size(75, 23)
+        Me.BtnBack.TabIndex = 5
+        Me.BtnBack.Text = "戻る"
+        Me.BtnBack.UseVisualStyleBackColor = True
+        '
         'MakerSearch
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(636, 448)
+        Me.Controls.Add(Me.BtnBack)
         Me.Controls.Add(Me.LbModel)
         Me.Controls.Add(Me.LbItem)
         Me.Controls.Add(Me.LbMaker)
@@ -82,4 +93,5 @@ Partial Class MakerSearch
     Friend WithEvents LbMaker As ListBox
     Friend WithEvents LbItem As ListBox
     Friend WithEvents LbModel As ListBox
+    Friend WithEvents BtnBack As Button
 End Class

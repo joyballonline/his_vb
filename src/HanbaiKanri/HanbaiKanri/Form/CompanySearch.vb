@@ -184,7 +184,7 @@ Public Class CompanySearch
 
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
         Dim QuoteRequest As Quote
-        QuoteRequest = New Quote(_msgHd, _db, _langHd)
+        QuoteRequest = New Quote(_msgHd, _db, _langHd, Me)
         QuoteRequest.ShowDialog()
         Me.Close()
     End Sub
@@ -204,9 +204,7 @@ Public Class CompanySearch
 
             frm.TxtCustomerCode.Text = Dgv_Company.Rows(idx).Cells(0).Value
             frm.TxtCustomerName.Text = Dgv_Company.Rows(idx).Cells(1).Value
-            Dim PostalCode As String = Dgv_Company.Rows(idx).Cells(3).Value
-            frm.TxtPostalCode1.Text = PostalCode.Substring(0, 3)
-            frm.TxtPostalCode2.Text = PostalCode.Substring(3, 4)
+            frm.TxtPostalCode.Text = Dgv_Company.Rows(idx).Cells(3).Value
             frm.TxtAddress1.Text = Dgv_Company.Rows(idx).Cells(4).Value
             frm.TxtAddress2.Text = Dgv_Company.Rows(idx).Cells(5).Value
             frm.TxtAddress3.Text = Dgv_Company.Rows(idx).Cells(6).Value
