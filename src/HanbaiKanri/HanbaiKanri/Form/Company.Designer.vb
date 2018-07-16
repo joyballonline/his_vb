@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class CompanyAdd
+Partial Class Company
     Inherits System.Windows.Forms.Form
 
     'フォームがコンポーネントの一覧をクリーンアップするために dispose をオーバーライドします。
@@ -23,27 +23,27 @@ Partial Class CompanyAdd
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.RepresentativePosition = New System.Windows.Forms.TextBox()
+        Me.TxtRepresentativePosition = New System.Windows.Forms.TextBox()
         Me.Label19 = New System.Windows.Forms.Label()
-        Me.AccountName = New System.Windows.Forms.TextBox()
+        Me.TxtAccountName = New System.Windows.Forms.TextBox()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label18 = New System.Windows.Forms.Label()
-        Me.AccountNumber = New System.Windows.Forms.TextBox()
-        Me.DepositCategory = New System.Windows.Forms.TextBox()
-        Me.BranchOfficeCode = New System.Windows.Forms.TextBox()
-        Me.BankCode = New System.Windows.Forms.TextBox()
+        Me.TxtAccountNumber = New System.Windows.Forms.TextBox()
+        Me.TxtDepositCategory = New System.Windows.Forms.TextBox()
+        Me.TxtBranchOfficeCode = New System.Windows.Forms.TextBox()
+        Me.TxtBankCode = New System.Windows.Forms.TextBox()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.Remarks = New System.Windows.Forms.TextBox()
-        Me.DisplayOrder = New System.Windows.Forms.TextBox()
-        Me.RepresentativeName = New System.Windows.Forms.TextBox()
-        Me.Fax = New System.Windows.Forms.TextBox()
-        Me.Tel = New System.Windows.Forms.TextBox()
+        Me.TxtRemarks = New System.Windows.Forms.TextBox()
+        Me.TxtDisplayOrder = New System.Windows.Forms.TextBox()
+        Me.TxtRepresentativeName = New System.Windows.Forms.TextBox()
+        Me.TxtFax = New System.Windows.Forms.TextBox()
+        Me.TxtTel = New System.Windows.Forms.TextBox()
         Me.BtnBack = New System.Windows.Forms.Button()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
@@ -52,14 +52,14 @@ Partial Class CompanyAdd
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.Address3 = New System.Windows.Forms.TextBox()
-        Me.Address2 = New System.Windows.Forms.TextBox()
-        Me.Address1 = New System.Windows.Forms.TextBox()
-        Me.PostalCode = New System.Windows.Forms.TextBox()
-        Me.CompanyShortName = New System.Windows.Forms.TextBox()
-        Me.CompanyName = New System.Windows.Forms.TextBox()
-        Me.CompanyCode = New System.Windows.Forms.TextBox()
-        Me.BtnAddCompany = New System.Windows.Forms.Button()
+        Me.TxtAddress3 = New System.Windows.Forms.TextBox()
+        Me.TxtAddress2 = New System.Windows.Forms.TextBox()
+        Me.TxtAddress1 = New System.Windows.Forms.TextBox()
+        Me.TxtPostalCode = New System.Windows.Forms.TextBox()
+        Me.TxtCompanyShortName = New System.Windows.Forms.TextBox()
+        Me.TxtCompanyName = New System.Windows.Forms.TextBox()
+        Me.TxtCompanyCode = New System.Windows.Forms.TextBox()
+        Me.BtnRegistration = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'Label4
@@ -71,12 +71,13 @@ Partial Class CompanyAdd
         Me.Label4.TabIndex = 204
         Me.Label4.Text = "代表者役職"
         '
-        'RepresentativePosition
+        'TxtRepresentativePosition
         '
-        Me.RepresentativePosition.Location = New System.Drawing.Point(470, 106)
-        Me.RepresentativePosition.Name = "RepresentativePosition"
-        Me.RepresentativePosition.Size = New System.Drawing.Size(234, 19)
-        Me.RepresentativePosition.TabIndex = 203
+        Me.TxtRepresentativePosition.Location = New System.Drawing.Point(470, 106)
+        Me.TxtRepresentativePosition.MaxLength = 50
+        Me.TxtRepresentativePosition.Name = "TxtRepresentativePosition"
+        Me.TxtRepresentativePosition.Size = New System.Drawing.Size(234, 19)
+        Me.TxtRepresentativePosition.TabIndex = 203
         '
         'Label19
         '
@@ -87,12 +88,13 @@ Partial Class CompanyAdd
         Me.Label19.TabIndex = 202
         Me.Label19.Text = "口座名義"
         '
-        'AccountName
+        'TxtAccountName
         '
-        Me.AccountName.Location = New System.Drawing.Point(470, 206)
-        Me.AccountName.Name = "AccountName"
-        Me.AccountName.Size = New System.Drawing.Size(234, 19)
-        Me.AccountName.TabIndex = 201
+        Me.TxtAccountName.Location = New System.Drawing.Point(470, 206)
+        Me.TxtAccountName.MaxLength = 20
+        Me.TxtAccountName.Name = "TxtAccountName"
+        Me.TxtAccountName.Size = New System.Drawing.Size(234, 19)
+        Me.TxtAccountName.TabIndex = 201
         '
         'Label15
         '
@@ -130,33 +132,37 @@ Partial Class CompanyAdd
         Me.Label18.TabIndex = 197
         Me.Label18.Text = "銀行コード"
         '
-        'AccountNumber
+        'TxtAccountNumber
         '
-        Me.AccountNumber.Location = New System.Drawing.Point(101, 206)
-        Me.AccountNumber.Name = "AccountNumber"
-        Me.AccountNumber.Size = New System.Drawing.Size(234, 19)
-        Me.AccountNumber.TabIndex = 196
+        Me.TxtAccountNumber.Location = New System.Drawing.Point(101, 206)
+        Me.TxtAccountNumber.MaxLength = 7
+        Me.TxtAccountNumber.Name = "TxtAccountNumber"
+        Me.TxtAccountNumber.Size = New System.Drawing.Size(234, 19)
+        Me.TxtAccountNumber.TabIndex = 196
         '
-        'DepositCategory
+        'TxtDepositCategory
         '
-        Me.DepositCategory.Location = New System.Drawing.Point(470, 181)
-        Me.DepositCategory.Name = "DepositCategory"
-        Me.DepositCategory.Size = New System.Drawing.Size(234, 19)
-        Me.DepositCategory.TabIndex = 195
+        Me.TxtDepositCategory.Location = New System.Drawing.Point(470, 181)
+        Me.TxtDepositCategory.MaxLength = 1
+        Me.TxtDepositCategory.Name = "TxtDepositCategory"
+        Me.TxtDepositCategory.Size = New System.Drawing.Size(234, 19)
+        Me.TxtDepositCategory.TabIndex = 195
         '
-        'BranchOfficeCode
+        'TxtBranchOfficeCode
         '
-        Me.BranchOfficeCode.Location = New System.Drawing.Point(101, 181)
-        Me.BranchOfficeCode.Name = "BranchOfficeCode"
-        Me.BranchOfficeCode.Size = New System.Drawing.Size(234, 19)
-        Me.BranchOfficeCode.TabIndex = 194
+        Me.TxtBranchOfficeCode.Location = New System.Drawing.Point(101, 181)
+        Me.TxtBranchOfficeCode.MaxLength = 3
+        Me.TxtBranchOfficeCode.Name = "TxtBranchOfficeCode"
+        Me.TxtBranchOfficeCode.Size = New System.Drawing.Size(234, 19)
+        Me.TxtBranchOfficeCode.TabIndex = 194
         '
-        'BankCode
+        'TxtBankCode
         '
-        Me.BankCode.Location = New System.Drawing.Point(470, 156)
-        Me.BankCode.Name = "BankCode"
-        Me.BankCode.Size = New System.Drawing.Size(234, 19)
-        Me.BankCode.TabIndex = 193
+        Me.TxtBankCode.Location = New System.Drawing.Point(470, 156)
+        Me.TxtBankCode.MaxLength = 4
+        Me.TxtBankCode.Name = "TxtBankCode"
+        Me.TxtBankCode.Size = New System.Drawing.Size(234, 19)
+        Me.TxtBankCode.TabIndex = 193
         '
         'Label14
         '
@@ -203,44 +209,49 @@ Partial Class CompanyAdd
         Me.Label9.TabIndex = 188
         Me.Label9.Text = "電話番号"
         '
-        'Remarks
+        'TxtRemarks
         '
-        Me.Remarks.Location = New System.Drawing.Point(101, 156)
-        Me.Remarks.Name = "Remarks"
-        Me.Remarks.Size = New System.Drawing.Size(234, 19)
-        Me.Remarks.TabIndex = 187
+        Me.TxtRemarks.Location = New System.Drawing.Point(101, 156)
+        Me.TxtRemarks.MaxLength = 255
+        Me.TxtRemarks.Name = "TxtRemarks"
+        Me.TxtRemarks.Size = New System.Drawing.Size(234, 19)
+        Me.TxtRemarks.TabIndex = 187
         '
-        'DisplayOrder
+        'TxtDisplayOrder
         '
-        Me.DisplayOrder.Location = New System.Drawing.Point(470, 131)
-        Me.DisplayOrder.Name = "DisplayOrder"
-        Me.DisplayOrder.Size = New System.Drawing.Size(234, 19)
-        Me.DisplayOrder.TabIndex = 186
+        Me.TxtDisplayOrder.Location = New System.Drawing.Point(470, 131)
+        Me.TxtDisplayOrder.MaxLength = 3
+        Me.TxtDisplayOrder.Name = "TxtDisplayOrder"
+        Me.TxtDisplayOrder.Size = New System.Drawing.Size(234, 19)
+        Me.TxtDisplayOrder.TabIndex = 186
         '
-        'RepresentativeName
+        'TxtRepresentativeName
         '
-        Me.RepresentativeName.Location = New System.Drawing.Point(101, 131)
-        Me.RepresentativeName.Name = "RepresentativeName"
-        Me.RepresentativeName.Size = New System.Drawing.Size(234, 19)
-        Me.RepresentativeName.TabIndex = 185
+        Me.TxtRepresentativeName.Location = New System.Drawing.Point(101, 131)
+        Me.TxtRepresentativeName.MaxLength = 50
+        Me.TxtRepresentativeName.Name = "TxtRepresentativeName"
+        Me.TxtRepresentativeName.Size = New System.Drawing.Size(234, 19)
+        Me.TxtRepresentativeName.TabIndex = 185
         '
-        'Fax
+        'TxtFax
         '
-        Me.Fax.Location = New System.Drawing.Point(101, 106)
-        Me.Fax.Name = "Fax"
-        Me.Fax.Size = New System.Drawing.Size(234, 19)
-        Me.Fax.TabIndex = 184
+        Me.TxtFax.Location = New System.Drawing.Point(101, 106)
+        Me.TxtFax.MaxLength = 15
+        Me.TxtFax.Name = "TxtFax"
+        Me.TxtFax.Size = New System.Drawing.Size(234, 19)
+        Me.TxtFax.TabIndex = 184
         '
-        'Tel
+        'TxtTel
         '
-        Me.Tel.Location = New System.Drawing.Point(470, 81)
-        Me.Tel.Name = "Tel"
-        Me.Tel.Size = New System.Drawing.Size(234, 19)
-        Me.Tel.TabIndex = 183
+        Me.TxtTel.Location = New System.Drawing.Point(470, 81)
+        Me.TxtTel.MaxLength = 15
+        Me.TxtTel.Name = "TxtTel"
+        Me.TxtTel.Size = New System.Drawing.Size(234, 19)
+        Me.TxtTel.TabIndex = 183
         '
         'BtnBack
         '
-        Me.BtnBack.Location = New System.Drawing.Point(12, 245)
+        Me.BtnBack.Location = New System.Drawing.Point(383, 231)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(323, 23)
         Me.BtnBack.TabIndex = 182
@@ -310,92 +321,99 @@ Partial Class CompanyAdd
         Me.Label1.TabIndex = 175
         Me.Label1.Text = "会社コード"
         '
-        'Address3
+        'TxtAddress3
         '
-        Me.Address3.Location = New System.Drawing.Point(101, 81)
-        Me.Address3.Name = "Address3"
-        Me.Address3.Size = New System.Drawing.Size(234, 19)
-        Me.Address3.TabIndex = 174
+        Me.TxtAddress3.Location = New System.Drawing.Point(101, 81)
+        Me.TxtAddress3.MaxLength = 100
+        Me.TxtAddress3.Name = "TxtAddress3"
+        Me.TxtAddress3.Size = New System.Drawing.Size(234, 19)
+        Me.TxtAddress3.TabIndex = 174
         '
-        'Address2
+        'TxtAddress2
         '
-        Me.Address2.Location = New System.Drawing.Point(470, 56)
-        Me.Address2.Name = "Address2"
-        Me.Address2.Size = New System.Drawing.Size(234, 19)
-        Me.Address2.TabIndex = 173
+        Me.TxtAddress2.Location = New System.Drawing.Point(470, 56)
+        Me.TxtAddress2.MaxLength = 100
+        Me.TxtAddress2.Name = "TxtAddress2"
+        Me.TxtAddress2.Size = New System.Drawing.Size(234, 19)
+        Me.TxtAddress2.TabIndex = 173
         '
-        'Address1
+        'TxtAddress1
         '
-        Me.Address1.Location = New System.Drawing.Point(101, 56)
-        Me.Address1.Name = "Address1"
-        Me.Address1.Size = New System.Drawing.Size(234, 19)
-        Me.Address1.TabIndex = 172
+        Me.TxtAddress1.Location = New System.Drawing.Point(101, 56)
+        Me.TxtAddress1.MaxLength = 100
+        Me.TxtAddress1.Name = "TxtAddress1"
+        Me.TxtAddress1.Size = New System.Drawing.Size(234, 19)
+        Me.TxtAddress1.TabIndex = 172
         '
-        'PostalCode
+        'TxtPostalCode
         '
-        Me.PostalCode.Location = New System.Drawing.Point(470, 31)
-        Me.PostalCode.Name = "PostalCode"
-        Me.PostalCode.Size = New System.Drawing.Size(234, 19)
-        Me.PostalCode.TabIndex = 171
+        Me.TxtPostalCode.Location = New System.Drawing.Point(470, 31)
+        Me.TxtPostalCode.MaxLength = 7
+        Me.TxtPostalCode.Name = "TxtPostalCode"
+        Me.TxtPostalCode.Size = New System.Drawing.Size(234, 19)
+        Me.TxtPostalCode.TabIndex = 171
         '
-        'CompanyShortName
+        'TxtCompanyShortName
         '
-        Me.CompanyShortName.Location = New System.Drawing.Point(101, 31)
-        Me.CompanyShortName.Name = "CompanyShortName"
-        Me.CompanyShortName.Size = New System.Drawing.Size(234, 19)
-        Me.CompanyShortName.TabIndex = 170
+        Me.TxtCompanyShortName.Location = New System.Drawing.Point(101, 31)
+        Me.TxtCompanyShortName.MaxLength = 20
+        Me.TxtCompanyShortName.Name = "TxtCompanyShortName"
+        Me.TxtCompanyShortName.Size = New System.Drawing.Size(234, 19)
+        Me.TxtCompanyShortName.TabIndex = 170
         '
-        'CompanyName
+        'TxtCompanyName
         '
-        Me.CompanyName.Location = New System.Drawing.Point(470, 6)
-        Me.CompanyName.Name = "CompanyName"
-        Me.CompanyName.Size = New System.Drawing.Size(234, 19)
-        Me.CompanyName.TabIndex = 169
+        Me.TxtCompanyName.Location = New System.Drawing.Point(470, 6)
+        Me.TxtCompanyName.MaxLength = 50
+        Me.TxtCompanyName.Name = "TxtCompanyName"
+        Me.TxtCompanyName.Size = New System.Drawing.Size(234, 19)
+        Me.TxtCompanyName.TabIndex = 169
         '
-        'CompanyCode
+        'TxtCompanyCode
         '
-        Me.CompanyCode.Location = New System.Drawing.Point(101, 6)
-        Me.CompanyCode.Name = "CompanyCode"
-        Me.CompanyCode.Size = New System.Drawing.Size(234, 19)
-        Me.CompanyCode.TabIndex = 168
+        Me.TxtCompanyCode.Location = New System.Drawing.Point(101, 6)
+        Me.TxtCompanyCode.MaxLength = 8
+        Me.TxtCompanyCode.Name = "TxtCompanyCode"
+        Me.TxtCompanyCode.Size = New System.Drawing.Size(234, 19)
+        Me.TxtCompanyCode.TabIndex = 168
         '
-        'BtnAddCompany
+        'BtnRegistration
         '
-        Me.BtnAddCompany.Location = New System.Drawing.Point(383, 245)
-        Me.BtnAddCompany.Name = "BtnAddCompany"
-        Me.BtnAddCompany.Size = New System.Drawing.Size(321, 23)
-        Me.BtnAddCompany.TabIndex = 205
-        Me.BtnAddCompany.Text = "追加"
-        Me.BtnAddCompany.UseVisualStyleBackColor = True
+        Me.BtnRegistration.Location = New System.Drawing.Point(14, 231)
+        Me.BtnRegistration.Name = "BtnRegistration"
+        Me.BtnRegistration.Size = New System.Drawing.Size(321, 23)
+        Me.BtnRegistration.TabIndex = 205
+        Me.BtnRegistration.Text = "登録"
+        Me.BtnRegistration.UseVisualStyleBackColor = True
         '
-        'CompanyAdd
+        'Company
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(717, 286)
-        Me.Controls.Add(Me.BtnAddCompany)
+        Me.ClientSize = New System.Drawing.Size(717, 263)
+        Me.Controls.Add(Me.BtnRegistration)
         Me.Controls.Add(Me.Label4)
-        Me.Controls.Add(Me.RepresentativePosition)
+        Me.Controls.Add(Me.TxtRepresentativePosition)
         Me.Controls.Add(Me.Label19)
-        Me.Controls.Add(Me.AccountName)
+        Me.Controls.Add(Me.TxtAccountName)
         Me.Controls.Add(Me.Label15)
         Me.Controls.Add(Me.Label16)
         Me.Controls.Add(Me.Label17)
         Me.Controls.Add(Me.Label18)
-        Me.Controls.Add(Me.AccountNumber)
-        Me.Controls.Add(Me.DepositCategory)
-        Me.Controls.Add(Me.BranchOfficeCode)
-        Me.Controls.Add(Me.BankCode)
+        Me.Controls.Add(Me.TxtAccountNumber)
+        Me.Controls.Add(Me.TxtDepositCategory)
+        Me.Controls.Add(Me.TxtBranchOfficeCode)
+        Me.Controls.Add(Me.TxtBankCode)
         Me.Controls.Add(Me.Label14)
         Me.Controls.Add(Me.Label13)
         Me.Controls.Add(Me.Label12)
         Me.Controls.Add(Me.Label11)
         Me.Controls.Add(Me.Label9)
-        Me.Controls.Add(Me.Remarks)
-        Me.Controls.Add(Me.DisplayOrder)
-        Me.Controls.Add(Me.RepresentativeName)
-        Me.Controls.Add(Me.Fax)
-        Me.Controls.Add(Me.Tel)
+        Me.Controls.Add(Me.TxtRemarks)
+        Me.Controls.Add(Me.TxtDisplayOrder)
+        Me.Controls.Add(Me.TxtRepresentativeName)
+        Me.Controls.Add(Me.TxtFax)
+        Me.Controls.Add(Me.TxtTel)
         Me.Controls.Add(Me.BtnBack)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.Label7)
@@ -404,42 +422,42 @@ Partial Class CompanyAdd
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.Address3)
-        Me.Controls.Add(Me.Address2)
-        Me.Controls.Add(Me.Address1)
-        Me.Controls.Add(Me.PostalCode)
-        Me.Controls.Add(Me.CompanyShortName)
-        Me.Controls.Add(Me.CompanyName)
-        Me.Controls.Add(Me.CompanyCode)
-        Me.Name = "CompanyAdd"
-        Me.Text = "CompanyAdd"
+        Me.Controls.Add(Me.TxtAddress3)
+        Me.Controls.Add(Me.TxtAddress2)
+        Me.Controls.Add(Me.TxtAddress1)
+        Me.Controls.Add(Me.TxtPostalCode)
+        Me.Controls.Add(Me.TxtCompanyShortName)
+        Me.Controls.Add(Me.TxtCompanyName)
+        Me.Controls.Add(Me.TxtCompanyCode)
+        Me.Name = "Company"
+        Me.Text = "Company"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents Label4 As Label
-    Friend WithEvents RepresentativePosition As TextBox
+    Friend WithEvents TxtRepresentativePosition As TextBox
     Friend WithEvents Label19 As Label
-    Friend WithEvents AccountName As TextBox
+    Friend WithEvents TxtAccountName As TextBox
     Friend WithEvents Label15 As Label
     Friend WithEvents Label16 As Label
     Friend WithEvents Label17 As Label
     Friend WithEvents Label18 As Label
-    Friend WithEvents AccountNumber As TextBox
-    Friend WithEvents DepositCategory As TextBox
-    Friend WithEvents BranchOfficeCode As TextBox
-    Friend WithEvents BankCode As TextBox
+    Friend WithEvents TxtAccountNumber As TextBox
+    Friend WithEvents TxtDepositCategory As TextBox
+    Friend WithEvents TxtBranchOfficeCode As TextBox
+    Friend WithEvents TxtBankCode As TextBox
     Friend WithEvents Label14 As Label
     Friend WithEvents Label13 As Label
     Friend WithEvents Label12 As Label
     Friend WithEvents Label11 As Label
     Friend WithEvents Label9 As Label
-    Friend WithEvents Remarks As TextBox
-    Friend WithEvents DisplayOrder As TextBox
-    Friend WithEvents RepresentativeName As TextBox
-    Friend WithEvents Fax As TextBox
-    Friend WithEvents Tel As TextBox
+    Friend WithEvents TxtRemarks As TextBox
+    Friend WithEvents TxtDisplayOrder As TextBox
+    Friend WithEvents TxtRepresentativeName As TextBox
+    Friend WithEvents TxtFax As TextBox
+    Friend WithEvents TxtTel As TextBox
     Friend WithEvents BtnBack As Button
     Friend WithEvents Label8 As Label
     Friend WithEvents Label7 As Label
@@ -448,12 +466,12 @@ Partial Class CompanyAdd
     Friend WithEvents Label3 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
-    Friend WithEvents Address3 As TextBox
-    Friend WithEvents Address2 As TextBox
-    Friend WithEvents Address1 As TextBox
-    Friend WithEvents PostalCode As TextBox
-    Friend WithEvents CompanyShortName As TextBox
-    Friend WithEvents CompanyName As TextBox
-    Friend WithEvents CompanyCode As TextBox
-    Friend WithEvents BtnAddCompany As Button
+    Friend WithEvents TxtAddress3 As TextBox
+    Friend WithEvents TxtAddress2 As TextBox
+    Friend WithEvents TxtAddress1 As TextBox
+    Friend WithEvents TxtPostalCode As TextBox
+    Friend WithEvents TxtCompanyShortName As TextBox
+    Friend WithEvents TxtCompanyName As TextBox
+    Friend WithEvents TxtCompanyCode As TextBox
+    Friend WithEvents BtnRegistration As Button
 End Class

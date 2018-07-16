@@ -154,6 +154,7 @@ Partial Class PurchasingManagement
         Me.DgvPurchase.Location = New System.Drawing.Point(12, 105)
         Me.DgvPurchase.Name = "DgvPurchase"
         Me.DgvPurchase.ReadOnly = True
+        Me.DgvPurchase.RowHeadersVisible = False
         Me.DgvPurchase.RowTemplate.Height = 21
         Me.DgvPurchase.Size = New System.Drawing.Size(1326, 150)
         Me.DgvPurchase.TabIndex = 76
@@ -207,6 +208,7 @@ Partial Class PurchasingManagement
         Me.DgvHistory.Location = New System.Drawing.Point(12, 286)
         Me.DgvHistory.Name = "DgvHistory"
         Me.DgvHistory.ReadOnly = True
+        Me.DgvHistory.RowHeadersVisible = False
         Me.DgvHistory.RowTemplate.Height = 21
         Me.DgvHistory.Size = New System.Drawing.Size(1326, 150)
         Me.DgvHistory.TabIndex = 79
@@ -271,6 +273,7 @@ Partial Class PurchasingManagement
         Me.DgvAdd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvAdd.Location = New System.Drawing.Point(12, 467)
         Me.DgvAdd.Name = "DgvAdd"
+        Me.DgvAdd.RowHeadersVisible = False
         Me.DgvAdd.RowTemplate.Height = 21
         Me.DgvAdd.Size = New System.Drawing.Size(1326, 150)
         Me.DgvAdd.TabIndex = 88
@@ -318,7 +321,7 @@ Partial Class PurchasingManagement
         Me.DtpPurchaseDate.Size = New System.Drawing.Size(148, 22)
         Me.DtpPurchaseDate.TabIndex = 229
         Me.DtpPurchaseDate.TabStop = False
-        Me.DtpPurchaseDate.Value = New Date(2018, 6, 5, 23, 23, 58, 0)
+        Me.DtpPurchaseDate.Value = New Date(2018, 7, 16, 0, 0, 0, 0)
         '
         'BtnRegist
         '

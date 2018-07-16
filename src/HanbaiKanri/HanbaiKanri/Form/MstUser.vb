@@ -111,43 +111,20 @@ Public Class MstUser
 
     Private Sub btn_userAdd_Click(sender As Object, e As EventArgs) Handles btn_userAdd.Click
         Dim openForm As Form = Nothing
-        openForm = New UserAdd(_msgHd, _db, _langHd)   '処理選択
+        Dim Status As String = "ADD"
+        openForm = New User(_msgHd, _db, _langHd, Status)   '処理選択
         openForm.Show()
         Me.Hide()   ' 自分は隠れる
     End Sub
 
     Private Sub btn_selectedRow_Click(sender As Object, e As EventArgs) Handles btn_selectedRow.Click
-        Try
-            'メニュー選択処理
-            Dim idx As Integer
-            Dim sc(7) As String
-
-            '一覧選択行インデックスの取得
-            For Each c As DataGridViewRow In Dgv_User.SelectedRows
-                idx = c.Index
-                Exit For
-            Next c
-
-            sc(0) = Dgv_User.Rows(idx).Cells(0).Value
-            sc(1) = Dgv_User.Rows(idx).Cells(1).Value
-            sc(2) = Dgv_User.Rows(idx).Cells(2).Value
-            sc(3) = Dgv_User.Rows(idx).Cells(3).Value
-            sc(4) = Dgv_User.Rows(idx).Cells(4).Value
-            sc(5) = Dgv_User.Rows(idx).Cells(5).Value
-            sc(6) = Dgv_User.Rows(idx).Cells(6).Value
-            sc(7) = Dgv_User.Rows(idx).Cells(7).Value
-
-            Dim openForm As Form = Nothing
-            openForm = New UserEdit(_msgHd, _db, _langHd, sc, sc(0), sc(1))   '処理選択
-            openForm.Show()
-            Me.Hide()   ' 自分は隠れる
-
-        Catch ue As UsrDefException
-            ue.dspMsg()
-        Catch ex As Exception
-            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", UtilClass.getErrDetail(ex)))
-        End Try
+        Dim openForm As Form = Nothing
+        Dim Status As String = "EDIT"
+        Dim CompanyCode As String = Dgv_User.Rows(Dgv_User.CurrentCell.RowIndex).Cells("会社コード").Value
+        Dim UserId As String = Dgv_User.Rows(Dgv_User.CurrentCell.RowIndex).Cells("ユーザID").Value
+        openForm = New User(_msgHd, _db, _langHd, Status, UserId)   '処理選択
+        openForm.Show()
+        Me.Hide()   ' 自分は隠れる
     End Sub
 
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click

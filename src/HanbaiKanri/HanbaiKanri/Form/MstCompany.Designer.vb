@@ -60,6 +60,7 @@ Partial Class MstCompany
         Me.Dgv_Company.Location = New System.Drawing.Point(12, 33)
         Me.Dgv_Company.Name = "Dgv_Company"
         Me.Dgv_Company.ReadOnly = True
+        Me.Dgv_Company.RowHeadersVisible = False
         Me.Dgv_Company.RowTemplate.Height = 21
         Me.Dgv_Company.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.Dgv_Company.Size = New System.Drawing.Size(1326, 638)
@@ -200,7 +201,7 @@ Partial Class MstCompany
         Me.btnCompanyAdd.Name = "btnCompanyAdd"
         Me.btnCompanyAdd.Size = New System.Drawing.Size(165, 40)
         Me.btnCompanyAdd.TabIndex = 5
-        Me.btnCompanyAdd.Text = "追加"
+        Me.btnCompanyAdd.Text = "会社情報追加"
         Me.btnCompanyAdd.UseVisualStyleBackColor = True
         '
         'btnSelectCompany
@@ -209,7 +210,7 @@ Partial Class MstCompany
         Me.btnSelectCompany.Name = "btnSelectCompany"
         Me.btnSelectCompany.Size = New System.Drawing.Size(165, 40)
         Me.btnSelectCompany.TabIndex = 4
-        Me.btnSelectCompany.Text = "選択"
+        Me.btnSelectCompany.Text = "会社情報編集"
         Me.btnSelectCompany.UseVisualStyleBackColor = True
         '
         'Search

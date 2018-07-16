@@ -364,7 +364,21 @@ Public Class OrderManagement
             End If
         Next
 
+        If TxtOrderDate.Text >= DtpPurchaseDate.Value Then
+            MessageBox.Show("売上日の値が受注日以前になっています。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            errFlg = False
+        End If
 
+        Dim nullCount As Integer = 0
+        For i As Integer = 0 To DgvAdd.Rows.Count() - 1
+            If DgvAdd.Rows(i).Cells("売上数量").Value = 0 Then
+                nullCount += 1
+            End If
+        Next
+        If DgvAdd.Rows.Count() = nullCount Then
+            MessageBox.Show("売上数量がすべて0になっています。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            errFlg = False
+        End If
         If errFlg Then
             Saiban1 += "SELECT "
             Saiban1 += "* "
@@ -660,8 +674,9 @@ Public Class OrderManagement
                 Sql4 += "更新者"
                 Sql4 += ", "
                 Sql4 += "更新日"
-
-                _db.executeDB(Sql4)
+                If DgvAdd.Rows(index).Cells("売上数量").Value > 0 Then
+                    _db.executeDB(Sql4)
+                End If
             Next
 
             Dim ERNo As Integer
@@ -804,8 +819,9 @@ Public Class OrderManagement
                 Sql6 += "備考"
                 Sql6 += ", "
                 Sql6 += "更新者"
-
-                _db.executeDB(Sql6)
+                If DgvAdd.Rows(index).Cells("売上数量").Value > 0 Then
+                    _db.executeDB(Sql6)
+                End If
             Next
 
             Sql7 = ""
@@ -978,8 +994,9 @@ Public Class OrderManagement
                 Sql8 += "更新者"
                 Sql8 += ", "
                 Sql8 += "更新日"
-
-                _db.executeDB(Sql8)
+                If DgvAdd.Rows(index).Cells("売上数量").Value > 0 Then
+                    _db.executeDB(Sql8)
+                End If
             Next
 
             Dim LSNo As Integer

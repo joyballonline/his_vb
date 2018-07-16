@@ -73,7 +73,7 @@ Public Class MstLanguage
             Sql += "言語略称, "
             Sql += "備考, "
             Sql += "無効フラグ, "
-            Sql += "更新者, "
+            Sql += "更新者, "
             Sql += "更新日 "
             Sql += "FROM "
             Sql += "public"
@@ -109,5 +109,23 @@ Public Class MstLanguage
         frmMenu = New frmC01F30_Menu(_msgHd, _langHd, _db)
         frmMenu.Show()
         Me.Close()
+    End Sub
+
+    Private Sub BtnAdd_Click(sender As Object, e As EventArgs) Handles BtnAdd.Click
+        Dim openForm As Form = Nothing
+        Dim Status As String = "ADD"
+        openForm = New Language(_msgHd, _db, _langHd, Status)   '処理選択
+        openForm.Show()
+        Me.Hide()   ' 自分は隠れる
+    End Sub
+
+    Private Sub BtnEdit_Click(sender As Object, e As EventArgs) Handles BtnEdit.Click
+        Dim openForm As Form = Nothing
+        Dim Status As String = "EDIT"
+        Dim CompanyCode As String = Dgv_Language.Rows(Dgv_Language.CurrentCell.RowIndex).Cells("会社コード").Value
+        Dim LangCode As String = Dgv_Language.Rows(Dgv_Language.CurrentCell.RowIndex).Cells("言語コード").Value
+        openForm = New Language(_msgHd, _db, _langHd, Status, CompanyCode, LangCode)   '処理選択
+        openForm.Show()
+        Me.Hide()   ' 自分は隠れる
     End Sub
 End Class

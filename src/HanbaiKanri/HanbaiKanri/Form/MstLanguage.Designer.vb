@@ -32,6 +32,8 @@ Partial Class MstLanguage
         Me.更新者 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.更新日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.BtnBack = New System.Windows.Forms.Button()
+        Me.BtnAdd = New System.Windows.Forms.Button()
+        Me.BtnEdit = New System.Windows.Forms.Button()
         CType(Me.Dgv_Language, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -42,7 +44,9 @@ Partial Class MstLanguage
         Me.Dgv_Language.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.会社コード, Me.言語コード, Me.言語名称, Me.言語略称, Me.備考, Me.無効フラグ, Me.更新者, Me.更新日})
         Me.Dgv_Language.Location = New System.Drawing.Point(12, 12)
         Me.Dgv_Language.Name = "Dgv_Language"
+        Me.Dgv_Language.RowHeadersVisible = False
         Me.Dgv_Language.RowTemplate.Height = 21
+        Me.Dgv_Language.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.Dgv_Language.Size = New System.Drawing.Size(1326, 659)
         Me.Dgv_Language.TabIndex = 0
         '
@@ -95,11 +99,31 @@ Partial Class MstLanguage
         Me.BtnBack.Text = "戻る"
         Me.BtnBack.UseVisualStyleBackColor = True
         '
+        'BtnAdd
+        '
+        Me.BtnAdd.Location = New System.Drawing.Point(831, 677)
+        Me.BtnAdd.Name = "BtnAdd"
+        Me.BtnAdd.Size = New System.Drawing.Size(165, 40)
+        Me.BtnAdd.TabIndex = 5
+        Me.BtnAdd.Text = "言語追加"
+        Me.BtnAdd.UseVisualStyleBackColor = True
+        '
+        'BtnEdit
+        '
+        Me.BtnEdit.Location = New System.Drawing.Point(1002, 677)
+        Me.BtnEdit.Name = "BtnEdit"
+        Me.BtnEdit.Size = New System.Drawing.Size(165, 40)
+        Me.BtnEdit.TabIndex = 6
+        Me.BtnEdit.Text = "言語編集"
+        Me.BtnEdit.UseVisualStyleBackColor = True
+        '
         'MstLanguage
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1350, 729)
+        Me.Controls.Add(Me.BtnEdit)
+        Me.Controls.Add(Me.BtnAdd)
         Me.Controls.Add(Me.BtnBack)
         Me.Controls.Add(Me.Dgv_Language)
         Me.Name = "MstLanguage"
@@ -119,4 +143,6 @@ Partial Class MstLanguage
     Friend WithEvents 更新者 As DataGridViewTextBoxColumn
     Friend WithEvents 更新日 As DataGridViewTextBoxColumn
     Friend WithEvents BtnBack As Button
+    Friend WithEvents BtnAdd As Button
+    Friend WithEvents BtnEdit As Button
 End Class

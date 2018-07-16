@@ -182,6 +182,7 @@ Public Class PurchasingManagement
             DgvHistory.Columns.Add("仕入先", "仕入先")
             DgvHistory.Columns.Add("仕入値", "仕入値")
             DgvHistory.Columns.Add("仕入数量", "仕入数量")
+            DgvHistory.Columns.Add("仕入日", "仕入日")
             DgvHistory.Columns.Add("備考", "備考")
 
             DgvHistory.Columns(9).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -199,6 +200,7 @@ Public Class PurchasingManagement
                 DgvHistory.Rows(index).Cells("仕入先").Value = ds2.Tables(RS).Rows(index)("仕入先名")
                 DgvHistory.Rows(index).Cells("仕入値").Value = ds2.Tables(RS).Rows(index)("仕入値")
                 DgvHistory.Rows(index).Cells("仕入数量").Value = ds2.Tables(RS).Rows(index)("仕入数量")
+                DgvHistory.Rows(index).Cells("仕入日").Value = ds2.Tables(RS).Rows(index)("仕入日")
                 DgvHistory.Rows(index).Cells("備考").Value = ds2.Tables(RS).Rows(index)("備考")
             Next
 
@@ -359,11 +361,29 @@ Public Class PurchasingManagement
 
         For i As Integer = 0 To DgvAdd.Rows.Count() - 1
             If ds2.Tables(RS).Rows(i)("発注数量") < ds2.Tables(RS).Rows(i)("仕入数量") + DgvAdd.Rows(i).Cells("仕入数量").Value Then
-                MessageBox.Show("正しい値を入力してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                MessageBox.Show("発注数量が発注残数を超えています。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 errFlg = False
+            End If
+            If DgvAdd.Rows(i).Cells("仕入数量").Value = 0 Then
+
             End If
         Next
 
+        If TxtOrdingDate.Text >= DtpPurchaseDate.Value Then
+            MessageBox.Show("仕入日の値が発注日以前になっています。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            errFlg = False
+        End If
+
+        Dim nullCount As Integer = 0
+        For i As Integer = 0 To DgvAdd.Rows.Count() - 1
+            If DgvAdd.Rows(i).Cells("仕入数量").Value = 0 Then
+                nullCount += 1
+            End If
+        Next
+        If DgvAdd.Rows.Count() = nullCount Then
+            MessageBox.Show("仕入数量がすべて0になっています。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            errFlg = False
+        End If
 
         If errFlg Then
             Saiban1 += "SELECT "
@@ -520,7 +540,7 @@ Public Class PurchasingManagement
                 Sql4 += "INSERT INTO "
                 Sql4 += "Public."
                 Sql4 += "t41_siredt("
-                Sql4 += "会社コード, 仕入番号, 発注番号, 発注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 仕入先名, 仕入値, 発注数量, 仕入数量, 発注残数, 単位, 間接費, 仕入単価, 仕入金額, リードタイム, 備考, 更新者, 更新日)"
+                Sql4 += "会社コード, 仕入番号, 発注番号, 発注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 仕入先名, 仕入値, 発注数量, 仕入数量, 発注残数, 単位, 間接費, 仕入単価, 仕入金額, リードタイム, 備考, 仕入日, 更新者, 更新日)"
                 Sql4 += " VALUES('"
                 Sql4 += ds1.Tables(RS).Rows(0)("会社コード").ToString
                 Sql4 += "', '"
@@ -567,6 +587,8 @@ Public Class PurchasingManagement
                 Sql4 += "', '"
                 Sql4 += DgvAdd.Rows(index).Cells("備考").Value.ToString
                 Sql4 += "', '"
+                Sql4 += dtToday
+                Sql4 += "', '"
                 Sql4 += Input
                 Sql4 += "', '"
                 Sql4 += dtToday
@@ -577,6 +599,7 @@ Public Class PurchasingManagement
                 Sql4 += ", "
                 Sql4 += "発注番号"
                 Sql4 += ", "
+
                 Sql4 += "発注番号枝番"
                 Sql4 += ", "
                 Sql4 += "行番号"
@@ -617,11 +640,14 @@ Public Class PurchasingManagement
                 Sql4 += ", "
                 Sql4 += "備考"
                 Sql4 += ", "
+                Sql4 += "仕入日"
+                Sql4 += ", "
                 Sql4 += "更新者"
                 Sql4 += ", "
                 Sql4 += "更新日"
-
-                _db.executeDB(Sql4)
+                If DgvAdd.Rows(index).Cells("仕入数量").Value.ToString > 0 Then
+                    _db.executeDB(Sql4)
+                End If
             Next
 
             Dim PCNo As Integer
@@ -950,8 +976,10 @@ Public Class PurchasingManagement
                 Sql8 += "更新者"
                 Sql8 += ", "
                 Sql8 += "更新日"
+                If DgvAdd.Rows(index).Cells("仕入数量").Value.ToString > 0 Then
+                    _db.executeDB(Sql8)
+                End If
 
-                _db.executeDB(Sql8)
             Next
 
             Dim WHNo As Integer
@@ -1008,6 +1036,10 @@ Public Class PurchasingManagement
             Sql9 += "更新日"
 
             _db.executeDB(Sql9)
+            Dim openForm As Form = Nothing
+            openForm = New PurchaseList(_msgHd, _db, _langHd)
+            openForm.Show()
+            Me.Close()
         End If
 
     End Sub

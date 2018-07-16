@@ -61,6 +61,7 @@ Partial Class MstSupplier
         Me.Dgv_Supplier.Location = New System.Drawing.Point(12, 31)
         Me.Dgv_Supplier.Name = "Dgv_Supplier"
         Me.Dgv_Supplier.ReadOnly = True
+        Me.Dgv_Supplier.RowHeadersVisible = False
         Me.Dgv_Supplier.RowTemplate.Height = 21
         Me.Dgv_Supplier.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.Dgv_Supplier.Size = New System.Drawing.Size(1326, 640)
@@ -198,7 +199,7 @@ Partial Class MstSupplier
         Me.btnSupplierEdit.Name = "btnSupplierEdit"
         Me.btnSupplierEdit.Size = New System.Drawing.Size(165, 40)
         Me.btnSupplierEdit.TabIndex = 1
-        Me.btnSupplierEdit.Text = "選択"
+        Me.btnSupplierEdit.Text = "仕入先編集"
         Me.btnSupplierEdit.UseVisualStyleBackColor = True
         '
         'btnSupplierAdd
@@ -207,7 +208,7 @@ Partial Class MstSupplier
         Me.btnSupplierAdd.Name = "btnSupplierAdd"
         Me.btnSupplierAdd.Size = New System.Drawing.Size(165, 40)
         Me.btnSupplierAdd.TabIndex = 2
-        Me.btnSupplierAdd.Text = "追加"
+        Me.btnSupplierAdd.Text = "仕入先追加"
         Me.btnSupplierAdd.UseVisualStyleBackColor = True
         '
         'BtnBack

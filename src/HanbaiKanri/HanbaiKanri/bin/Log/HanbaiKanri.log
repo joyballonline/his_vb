@@ -1880,3 +1880,55 @@ INSERT INTO Public.t01_mithd(‰ïĞƒR[ƒh, Œ©Ï”Ô†, Œ©Ï”Ô†}”Ô, “¾ˆÓæƒR[ƒh, “
    êŠ UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) êŠ \\VBOXSVR\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:s 415
    êŠ UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) êŠ \\VBOXSVR\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:s 297
 INSERT INTO Public.t01_mithd(‰ïĞƒR[ƒh, Œ©Ï”Ô†, Œ©Ï”Ô†}”Ô, “¾ˆÓæƒR[ƒh, “¾ˆÓæ–¼, “¾ˆÓæ—X•Ö”Ô†, “¾ˆÓæZŠ, “¾ˆÓæ“d˜b”Ô†, “¾ˆÓæ‚e‚`‚w, “¾ˆÓæ’S“–Ò–ğE, “¾ˆÓæ’S“–Ò–¼, Œ©Ï“ú, Œ©Ï—LŒøŠúŒÀ, x•¥ğŒ, Œ©Ï‹àŠz, d“ü‹àŠz, ‰c‹Æ’S“–Ò, “ü—Í’S“–Ò, ”õl, ‚u‚`‚s, æÁ‹æ•ª, “o˜^“ú, XV“ú, XVÒ) VALUES('ZENBI', 'QT07100002', '1', 'test', 'test', '01234', 'ŠâèŒ§ ‚Ç‚±‚©s ‚Ç‚±’¬', '', '', '', '', '2018/07/10', '2018/07/17', '', '0', '0', 'zenbi0', 'zenbi01', '', '', '0', '2018/07/10', '2018/07/10 17:44:39', 'zenbi01 ')RETURNING ‰ïĞƒR[ƒh, Œ©Ï”Ô†, Œ©Ï”Ô†}”Ô, “¾ˆÓæƒR[ƒh, “¾ˆÓæ–¼, “¾ˆÓæ—X•Ö”Ô†, “¾ˆÓæZŠ, “¾ˆÓæ“d˜b”Ô†, “¾ˆÓæ‚e‚`‚w, “¾ˆÓæ’S“–Ò–ğE, “¾ˆÓæ’S“–Ò–¼, Œ©Ï“ú, Œ©Ï—LŒøŠúŒÀ, x•¥ğŒ, Œ©Ï‹àŠz, d“ü‹àŠz, ‰c‹Æ’S“–Ò, “ü—Í’S“–Ò, ”õl, ‚u‚`‚s, æÁ‹æ•ª, “o˜^“ú, XV“ú, XVÒ
+2018/07/12 19:05:53   ERR***** ƒf[ƒ^XV¸”sFERROR: 22P02: invalid input syntax for type numeric: ""
+   êŠ UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) êŠ \\VBOXSVR\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:s 415
+   êŠ UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) êŠ \\VBOXSVR\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:s 297
+INSERT INTO Public.m90_hanyo(‰ïĞƒR[ƒh, ŒÅ’èƒL[, ‰Â•ÏƒL[, •\¦‡, •¶š‚P, •¶š‚Q, •¶š‚R, •¶š‚S, •¶š‚T, •¶š‚U, ”’l‚P, ”’l‚Q, ”’l‚R, ”’l‚S, ”’l‚T, ”’l‚U, ƒƒ‚, XVÒ, XV“ú) VALUES('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'Admin', '2018/07/12 19:05:52 ')RETURNING ‰ïĞƒR[ƒh, ŒÅ’èƒL[, ‰Â•ÏƒL[, •\¦‡, •¶š‚P, •¶š‚Q, •¶š‚R, •¶š‚S, •¶š‚T, •¶š‚U, ”’l‚P, ”’l‚Q, ”’l‚R, ”’l‚S, ”’l‚T, ”’l‚U, ƒƒ‚, XVÒ, XV“ú
+2018/07/12 19:15:58   ERR***** ƒf[ƒ^XV¸”sFERROR: 22P02: invalid input syntax for type numeric: ""
+   êŠ UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) êŠ \\VBOXSVR\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:s 415
+   êŠ UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) êŠ \\VBOXSVR\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:s 297
+INSERT INTO Public.m90_hanyo(‰ïĞƒR[ƒh, ŒÅ’èƒL[, ‰Â•ÏƒL[, •\¦‡, •¶š‚P, •¶š‚Q, •¶š‚R, •¶š‚S, •¶š‚T, •¶š‚U, ”’l‚P, ”’l‚Q, ”’l‚R, ”’l‚S, ”’l‚T, ”’l‚U, ƒƒ‚, XVÒ, XV“ú) VALUES('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'Admin', '2018/07/12 19:15:58 ')RETURNING ‰ïĞƒR[ƒh, ŒÅ’èƒL[, ‰Â•ÏƒL[, •\¦‡, •¶š‚P, •¶š‚Q, •¶š‚R, •¶š‚S, •¶š‚T, •¶š‚U, ”’l‚P, ”’l‚Q, ”’l‚R, ”’l‚S, ”’l‚T, ”’l‚U, ƒƒ‚, XVÒ, XV“ú
+2018/07/12 19:31:42   ERR***** ƒf[ƒ^XV¸”sFERROR: 23505: duplicate key value violates unique constraint "pk_m90_hanyo"
+   êŠ UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) êŠ \\VBOXSVR\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:s 415
+   êŠ UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) êŠ \\VBOXSVR\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:s 297
+INSERT INTO Public.m90_hanyo(‰ïĞƒR[ƒh, ŒÅ’èƒL[, ‰Â•ÏƒL[, •\¦‡, •¶š‚P, •¶š‚Q, •¶š‚R, •¶š‚S, •¶š‚T, •¶š‚U, ”’l‚P, ”’l‚Q, ”’l‚R, ”’l‚S, ”’l‚T, ”’l‚U, ƒƒ‚, XVÒ, XV“ú) VALUES('ZENBI', '1', '1', '10', 'text', 'text', 'text', 'text', 'text', 'text', '1', '2', '3', '4', '5', '6', 'memo', 'zenbi01', '2018/07/12 19:31:41 ')RETURNING ‰ïĞƒR[ƒh, ŒÅ’èƒL[, ‰Â•ÏƒL[, •\¦‡, •¶š‚P, •¶š‚Q, •¶š‚R, •¶š‚S, •¶š‚T, •¶š‚U, ”’l‚P, ”’l‚Q, ”’l‚R, ”’l‚S, ”’l‚T, ”’l‚U, ƒƒ‚, XVÒ, XV“ú
+2018/07/12 20:34:18   ERR***** ƒf[ƒ^æ“¾¸”sFERROR: 42601: syntax error at or near "WHERE"
+   êŠ UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) êŠ \\VBOXSVR\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:s 294
+   êŠ UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) êŠ \\VBOXSVR\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:s 208
+SELECT ‰ïĞƒR[ƒh, ŒÅ’èƒL[, ‰Â•ÏƒL[, •\¦‡, •¶š‚P, •¶š‚Q, •¶š‚R, •¶š‚S, •¶š‚T, •¶š‚U, ”’l‚P, ”’l‚Q, ”’l‚R, ”’l‚S, ”’l‚T, ”’l‚U, ƒƒ‚, XVÒ, XV“ú FROM public.m90_hanyo WHERE ‰ïĞƒR[ƒh ILIKE 'ZENBI' WHERE ŒÅ’èƒL[ ILIKE '1' WHERE ‰Â•ÏƒL[ ILIKE '1'
+2018/07/13 13:38:13   ERR***** ƒf[ƒ^XV¸”sFERROR: 23505: duplicate key value violates unique constraint "pk_m10_customer"
+   êŠ UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) êŠ \\VBOXSVR\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:s 415
+   êŠ UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) êŠ \\VBOXSVR\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:s 297
+UPDATE Public.m10_customer SET  ‰ïĞƒR[ƒh = 'ZENBI', “¾ˆÓæƒR[ƒh = 'test', “¾ˆÓæ–¼ = 'test', “¾ˆÓæ–¼—ªÌ = 'test', —X•Ö”Ô† = 'test', ZŠ‚P = 'test', ZŠ‚Q = 'test', ZŠ‚R = 'test', “d˜b”Ô† = 'test', “d˜b”Ô†ŒŸõ—p = 'test', ‚e‚`‚w”Ô† = 'test', ’S“–Ò–¼ = 'test', ’S“–Ò–ğE = 'test', Šù’èx•¥ğŒ = 'test', ƒƒ‚ = 'test', XVÒ = 'Admin', XV“ú = '2018/07/13 13:38:12' WHERE ‰ïĞƒR[ƒh='ZENBI' AND “¾ˆÓæƒR[ƒh='' RETURNING ‰ïĞƒR[ƒh, “¾ˆÓæƒR[ƒh, “¾ˆÓæ–¼, “¾ˆÓæ–¼—ªÌ, —X•Ö”Ô†, ZŠ‚P, ZŠ‚Q, ZŠ‚R, “d˜b”Ô†, “d˜b”Ô†ŒŸõ—p, ‚e‚`‚w”Ô†, ’S“–Ò–¼, ’S“–Ò–ğE, Šù’èx•¥ğŒ, ƒƒ‚, XVÒ, XV“ú
+2018/07/13 16:52:52   ERR***** ƒf[ƒ^XV¸”sFERROR: 42601: INSERT has more target columns than expressions
+   êŠ UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) êŠ \\VBOXSVR\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:s 415
+   êŠ UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) êŠ \\VBOXSVR\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:s 297
+INSERT INTO Public.m11_supplier(‰ïĞƒR[ƒh, d“üæƒR[ƒh, d“üæ–¼, d“üæ–¼—ªÌ, —X•Ö”Ô†, ZŠ‚P, ZŠ‚Q, ZŠ‚R, “d˜b”Ô†, “d˜b”Ô†ŒŸõ—p, ‚e‚`‚w”Ô†, ’S“–Ò–¼, ’S“–Ò–ğE, Šù’èŠÔÚ”ï—¦, ƒƒ‚, ‹âsƒR[ƒh, x“XƒR[ƒh, —a‹àí–Ú, ŒûÀ”Ô†, ŒûÀ–¼‹`,  XVÒ, XV“ú) VALUES('ZENBI', '', '', '', '', '', '', '', '', '', '', '', '0', '', '', '', '', '', '', 'zenbi01', '2018/07/13 16:52:52 ')RETURNING ‰ïĞƒR[ƒh, d“üæƒR[ƒh, d“üæ–¼, d“üæ–¼—ªÌ, —X•Ö”Ô†, ZŠ‚P, ZŠ‚Q, ZŠ‚R, “d˜b”Ô†, “d˜b”Ô†ŒŸõ—p, ‚e‚`‚w”Ô†, ’S“–Ò–¼, ’S“–Ò–ğE, Šù’èŠÔÚ”ï—¦, ƒƒ‚, ‹âsƒR[ƒh, x“XƒR[ƒh, —a‹àí–Ú, ŒûÀ”Ô†, ŒûÀ–¼‹`, XVÒ, XV“ú
+2018/07/16 15:55:42   ERR***** ƒf[ƒ^XV¸”sFERROR: 42703: column "“d˜b”Ô†ŒŸõ—p" does not exist
+   êŠ UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) êŠ \\VBOXSVR\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:s 415
+   êŠ UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) êŠ \\VBOXSVR\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:s 297
+INSERT INTO Public.m01_company(‰ïĞƒR[ƒh, ‰ïĞ–¼, ‰ïĞ—ªÌ, —X•Ö”Ô†, ZŠ‚P, ZŠ‚Q, ZŠ‚R, “d˜b”Ô†, ‚e‚`‚w”Ô†, ‘ã•\Ò–ğE, ‘ã•\Ò–¼, •\¦‡, ”õl, ‹âsƒR[ƒh, x“XƒR[ƒh, —a‹àí–Ú, ŒûÀ”Ô†, ŒûÀ–¼‹`, XVÒ, XV“ú) VALUES('', '', '', '', '', '', '', '', '', '', '', '0', '', '', '', '', '', '', 'zenbi01', '2018/07/16 15:55:41 ')RETURNING ‰ïĞƒR[ƒh, ‰ïĞ–¼, ‰ïĞ—ªÌ, —X•Ö”Ô†, ZŠ‚P, ZŠ‚Q, ZŠ‚R, “d˜b”Ô†, “d˜b”Ô†ŒŸõ—p, ‘ã•\Ò–ğE, ‘ã•\Ò–¼, •\¦‡, ”õl, ‹âsƒR[ƒh, x“XƒR[ƒh, —a‹àí–Ú, ŒûÀ”Ô†, ŒûÀ–¼‹`, XVÒ, XV“ú
+2018/07/16 16:05:41   ERR***** ƒf[ƒ^XV¸”sFERROR: 22001: value too long for type character varying(8)
+   êŠ UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) êŠ \\VBOXSVR\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:s 415
+   êŠ UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) êŠ \\VBOXSVR\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:s 297
+UPDATE Public.m01_company SET  ‰ïĞƒR[ƒh = 'MONOGRAPH', ‰ïĞ–¼ = '', ‰ïĞ—ªÌ = '', —X•Ö”Ô† = '', ZŠ‚P = '', ZŠ‚Q = '', ZŠ‚R = '', “d˜b”Ô† = '', ‚e‚`‚w”Ô† = '', ‘ã•\Ò–ğE = '', ‘ã•\Ò–¼ = '', •\¦‡ = '0', ”õl = '', ‹âsƒR[ƒh = '    ', x“XƒR[ƒh = '   ', —a‹àí–Ú = ' ', ŒûÀ”Ô† = '       ', ŒûÀ–¼‹` = '', XVÒ = 'zenbi01', XV“ú = '2018/07/16 16:05:41' WHERE ‰ïĞƒR[ƒh='TEST'RETURNING ‰ïĞƒR[ƒh, ‰ïĞ–¼, ‰ïĞ—ªÌ, —X•Ö”Ô†, ZŠ‚P, ZŠ‚Q, ZŠ‚R, “d˜b”Ô†, ‚e‚`‚w”Ô†, ‘ã•\Ò–ğE, ‘ã•\Ò–¼, •\¦‡, ”õl, ‹âsƒR[ƒh, x“XƒR[ƒh, —a‹àí–Ú, ŒûÀ”Ô†, ŒûÀ–¼‹`, XVÒ, XV“ú
+2018/07/16 18:54:55   ERR***** ƒf[ƒ^XV¸”sFERROR: 42703: column "XVÒ" of relation "m05_language" does not exist
+   êŠ UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) êŠ \\VBOXSVR\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:s 415
+   êŠ UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) êŠ \\VBOXSVR\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:s 297
+INSERT INTO Public.m05_language(‰ïĞƒR[ƒh, Œ¾ŒêƒR[ƒh, Œ¾Œê–¼Ì, Œ¾Œê—ªÌ, ”õl, –³Œøƒtƒ‰ƒO, XVÒ, XV“ú)VALUES('ZENBI', 'TEST', 'test', 'test', 'teset', '1', 'zenbi01', '2018/07/16 18:54:54 ')RETURNING ‰ïĞƒR[ƒh, Œ¾ŒêƒR[ƒh, Œ¾Œê–¼Ì, Œ¾Œê—ªÌ, ”õl, –³Œøƒtƒ‰ƒO, XVÒ, XV“ú
+2018/07/16 19:22:57   ERR***** ƒf[ƒ^æ“¾¸”sFERROR: 42703: column "?XVÒ" does not exist
+   êŠ UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) êŠ \\VBOXSVR\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:s 294
+   êŠ UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) êŠ \\VBOXSVR\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:s 208
+SELECT ‰ïĞƒR[ƒh, Œ¾ŒêƒR[ƒh, Œ¾Œê–¼Ì, Œ¾Œê—ªÌ, ”õl, –³Œøƒtƒ‰ƒO, ?XVÒ, XV“ú FROM public.m05_language
+2018/07/16 19:24:35   ERR***** ƒf[ƒ^XV¸”sFERROR: 22P02: invalid input syntax for type numeric: "test"
+   êŠ UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) êŠ \\VBOXSVR\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:s 415
+   êŠ UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) êŠ \\VBOXSVR\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:s 297
+INSERT INTO Public.m05_language(‰ïĞƒR[ƒh, Œ¾ŒêƒR[ƒh, Œ¾Œê–¼Ì, Œ¾Œê—ªÌ, ”õl, –³Œøƒtƒ‰ƒO, XVÒ, XV“ú)VALUES('ZENBI', 'test', 'test', 'test', 'test', '0', 'zenbi01', '2018/07/16 19:24:34 ')RETURNING ‰ïĞƒR[ƒh, Œ¾ŒêƒR[ƒh, Œ¾Œê–¼Ì, Œ¾Œê—ªÌ, ”õl, –³Œøƒtƒ‰ƒO, XVÒ, XV“ú
+2018/07/16 19:26:23   ERR***** ƒf[ƒ^æ“¾¸”sFERROR: 42601: syntax error at or near "="
+   êŠ UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) êŠ \\VBOXSVR\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:s 294
+   êŠ UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) êŠ \\VBOXSVR\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:s 208
+SELECT ‰ïĞƒR[ƒh, Œ¾ŒêƒR[ƒh, Œ¾Œê–¼Ì, Œ¾Œê—ªÌ, ”õl, –³Œøƒtƒ‰ƒO, XVÒ, XV“ú FROM public.m05_languageWHERE ‰ïĞƒR[ƒh='ZENBI' AND Œ¾ŒêƒR[ƒh='2' 
+2018/07/16 19:30:45   ERR***** ƒf[ƒ^XV¸”sFERROR: 42703: column "ƒ†[ƒU‚h‚c" does not exist
+   êŠ UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) êŠ \\VBOXSVR\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:s 415
+   êŠ UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) êŠ \\VBOXSVR\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:s 297
+UPDATE Public.m05_language SET  ‰ïĞƒR[ƒh = 'ZENBI', Œ¾ŒêƒR[ƒh = '2', Œ¾Œê–¼Ì = 'ENGLISH', Œ¾Œê—ªÌ = 'ENG', ”õl = 'notes', –³Œøƒtƒ‰ƒO = '1', XVÒ = 'zenbi01', XV“ú = '2018/07/16 19:30:44' WHERE ‰ïĞƒR[ƒh='ZENBI' AND ƒ†[ƒU‚h‚c='2' RETURNING ‰ïĞƒR[ƒh, ƒ†[ƒU‚h‚c, –¼, —ª–¼, ”õl, –³Œøƒtƒ‰ƒO, XVÒ, XV“ú

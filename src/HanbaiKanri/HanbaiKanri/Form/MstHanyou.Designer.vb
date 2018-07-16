@@ -62,6 +62,7 @@ Partial Class MstHanyou
         Me.Dgv_Hanyo.Location = New System.Drawing.Point(12, 31)
         Me.Dgv_Hanyo.Name = "Dgv_Hanyo"
         Me.Dgv_Hanyo.ReadOnly = True
+        Me.Dgv_Hanyo.RowHeadersVisible = False
         Me.Dgv_Hanyo.RowTemplate.Height = 21
         Me.Dgv_Hanyo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.Dgv_Hanyo.Size = New System.Drawing.Size(1326, 640)
@@ -187,7 +188,7 @@ Partial Class MstHanyou
         Me.BtnSelect.Name = "BtnSelect"
         Me.BtnSelect.Size = New System.Drawing.Size(165, 40)
         Me.BtnSelect.TabIndex = 1
-        Me.BtnSelect.Text = "選択"
+        Me.BtnSelect.Text = "編集"
         Me.BtnSelect.UseVisualStyleBackColor = True
         '
         'BtnAdd

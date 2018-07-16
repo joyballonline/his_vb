@@ -124,52 +124,20 @@ Public Class MstCustomer
 
     Private Sub btnCustomerAdd_Click(sender As Object, e As EventArgs) Handles btnCustomerAdd.Click
         Dim openForm As Form = Nothing
-        openForm = New CustomerAdd(_msgHd, _db, _langHd)   '処理選択
+        Dim Status As String = "ADD"
+        openForm = New Customer(_msgHd, _db, _langHd, Status)   '処理選択
         openForm.Show()
         Me.Hide()   ' 自分は隠れる
     End Sub
 
     Private Sub btnSelectCustomer_Click(sender As Object, e As EventArgs) Handles btnSelectCustomer.Click
-        Try
-            'メニュー選択処理
-            Dim idx As Integer
-            Dim sc(16) As String
-
-            '一覧選択行インデックスの取得
-            For Each c As DataGridViewRow In Dgv_Customer.SelectedRows
-                idx = c.Index
-                Exit For
-            Next c
-
-            sc(0) = Dgv_Customer.Rows(idx).Cells(0).Value
-            sc(1) = Dgv_Customer.Rows(idx).Cells(1).Value
-            sc(2) = Dgv_Customer.Rows(idx).Cells(2).Value
-            sc(3) = Dgv_Customer.Rows(idx).Cells(3).Value
-            sc(4) = Dgv_Customer.Rows(idx).Cells(4).Value
-            sc(5) = Dgv_Customer.Rows(idx).Cells(5).Value
-            sc(6) = Dgv_Customer.Rows(idx).Cells(6).Value
-            sc(7) = Dgv_Customer.Rows(idx).Cells(7).Value
-            sc(8) = Dgv_Customer.Rows(idx).Cells(8).Value
-            sc(9) = Dgv_Customer.Rows(idx).Cells(9).Value
-            sc(10) = Dgv_Customer.Rows(idx).Cells(10).Value
-            sc(11) = Dgv_Customer.Rows(idx).Cells(11).Value
-            sc(12) = Dgv_Customer.Rows(idx).Cells(12).Value
-            sc(13) = Dgv_Customer.Rows(idx).Cells(13).Value
-            sc(14) = Dgv_Customer.Rows(idx).Cells(14).Value
-            sc(15) = Dgv_Customer.Rows(idx).Cells(15).Value
-            sc(16) = Dgv_Customer.Rows(idx).Cells(16).Value
-
-            Dim openForm As Form = Nothing
-            openForm = New CustomerEdit(_msgHd, _db, _langHd, sc, sc(0), sc(1))   '処理選択
-            openForm.Show()
-            Me.Hide()   ' 自分は隠れる
-
-        Catch ue As UsrDefException
-            ue.dspMsg()
-        Catch ex As Exception
-            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", UtilClass.getErrDetail(ex)))
-        End Try
+        Dim openForm As Form = Nothing
+        Dim Status As String = "EDIT"
+        Dim CompanyCode As String = Dgv_Customer.Rows(Dgv_Customer.CurrentCell.RowIndex).Cells("会社コード").Value
+        Dim CustomerCode As String = Dgv_Customer.Rows(Dgv_Customer.CurrentCell.RowIndex).Cells("得意先コード").Value
+        openForm = New Customer(_msgHd, _db, _langHd, Status, CompanyCode, CustomerCode)   '処理選択
+        openForm.Show()
+        Me.Hide()   ' 自分は隠れる
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click

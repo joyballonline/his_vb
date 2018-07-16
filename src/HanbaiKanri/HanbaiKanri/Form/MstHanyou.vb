@@ -127,48 +127,15 @@ Public Class MstHanyou
     End Sub
 
     Private Sub BtnSelect_Click(sender As Object, e As EventArgs) Handles BtnSelect.Click
-        Try
-            'メニュー選択処理
-            Dim idx As Integer
-            Dim sc(18) As String
+        Dim openForm As Form = Nothing
+        Dim Status As String = "EDIT"
+        Dim Code As String = Dgv_Hanyo.Rows(Dgv_Hanyo.CurrentCell.RowIndex).Cells("会社コード").Value
+        Dim Key1 As String = Dgv_Hanyo.Rows(Dgv_Hanyo.CurrentCell.RowIndex).Cells("固定キー").Value
+        Dim Key2 As String = Dgv_Hanyo.Rows(Dgv_Hanyo.CurrentCell.RowIndex).Cells("可変キー").Value
 
-            '一覧選択行インデックスの取得
-            For Each c As DataGridViewRow In Dgv_Hanyo.SelectedRows
-                idx = c.Index
-                Exit For
-            Next c
-
-            sc(0) = Dgv_Hanyo.Rows(idx).Cells(0).Value
-            sc(1) = Dgv_Hanyo.Rows(idx).Cells(1).Value
-            sc(2) = Dgv_Hanyo.Rows(idx).Cells(2).Value
-            sc(3) = Dgv_Hanyo.Rows(idx).Cells(3).Value
-            sc(4) = Dgv_Hanyo.Rows(idx).Cells(4).Value
-            sc(5) = Dgv_Hanyo.Rows(idx).Cells(5).Value
-            sc(6) = Dgv_Hanyo.Rows(idx).Cells(6).Value
-            sc(7) = Dgv_Hanyo.Rows(idx).Cells(7).Value
-            sc(8) = Dgv_Hanyo.Rows(idx).Cells(8).Value
-            sc(9) = Dgv_Hanyo.Rows(idx).Cells(9).Value
-            sc(10) = Dgv_Hanyo.Rows(idx).Cells(10).Value
-            sc(11) = Dgv_Hanyo.Rows(idx).Cells(11).Value
-            sc(12) = Dgv_Hanyo.Rows(idx).Cells(12).Value
-            sc(13) = Dgv_Hanyo.Rows(idx).Cells(13).Value
-            sc(14) = Dgv_Hanyo.Rows(idx).Cells(14).Value
-            sc(15) = Dgv_Hanyo.Rows(idx).Cells(15).Value
-            sc(16) = Dgv_Hanyo.Rows(idx).Cells(16).Value
-            sc(17) = Dgv_Hanyo.Rows(idx).Cells(17).Value
-            sc(18) = Dgv_Hanyo.Rows(idx).Cells(18).Value
-
-            Dim openForm As Form = Nothing
-            openForm = New HanyoEdit(_msgHd, _db, _langHd, sc, sc(0), sc(1), sc(2))   '処理選択
-            openForm.Show()
-            Me.Hide()   ' 自分は隠れる
-
-        Catch ue As UsrDefException
-            ue.dspMsg()
-        Catch ex As Exception
-            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", UtilClass.getErrDetail(ex)))
-        End Try
+        openForm = New Hanyo(_msgHd, _db, _langHd, Status, Code, Key1, Key2)   '処理選択
+        openForm.Show()
+        Me.Hide()   ' 自分は隠れる
     End Sub
 
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
@@ -180,7 +147,8 @@ Public Class MstHanyou
 
     Private Sub BtnAdd_Click(sender As Object, e As EventArgs) Handles BtnAdd.Click
         Dim openForm As Form = Nothing
-        openForm = New HanyoAdd(_msgHd, _db, _langHd)   '処理選択
+        Dim Status As String = "ADD"
+        openForm = New Hanyo(_msgHd, _db, _langHd, Status)   '処理選択
         openForm.Show()
         Me.Hide()   ' 自分は隠れる
     End Sub

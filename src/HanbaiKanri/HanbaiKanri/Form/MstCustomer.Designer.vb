@@ -61,6 +61,7 @@ Partial Class MstCustomer
         Me.Dgv_Customer.MultiSelect = False
         Me.Dgv_Customer.Name = "Dgv_Customer"
         Me.Dgv_Customer.ReadOnly = True
+        Me.Dgv_Customer.RowHeadersVisible = False
         Me.Dgv_Customer.RowTemplate.Height = 21
         Me.Dgv_Customer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.Dgv_Customer.Size = New System.Drawing.Size(1326, 638)
@@ -174,7 +175,7 @@ Partial Class MstCustomer
         Me.btnSelectCustomer.Name = "btnSelectCustomer"
         Me.btnSelectCustomer.Size = New System.Drawing.Size(165, 40)
         Me.btnSelectCustomer.TabIndex = 1
-        Me.btnSelectCustomer.Text = "選択"
+        Me.btnSelectCustomer.Text = "得意先編集"
         Me.btnSelectCustomer.UseVisualStyleBackColor = True
         '
         'btnCustomerAdd
@@ -183,7 +184,7 @@ Partial Class MstCustomer
         Me.btnCustomerAdd.Name = "btnCustomerAdd"
         Me.btnCustomerAdd.Size = New System.Drawing.Size(165, 40)
         Me.btnCustomerAdd.TabIndex = 2
-        Me.btnCustomerAdd.Text = "追加"
+        Me.btnCustomerAdd.Text = "得意先追加"
         Me.btnCustomerAdd.UseVisualStyleBackColor = True
         '
         'btnBack

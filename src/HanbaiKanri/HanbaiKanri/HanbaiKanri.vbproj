@@ -102,10 +102,10 @@
     <Compile Include="Business\CommonLogic.vb" />
     <Compile Include="Business\RepSectionIF.vb" />
     <Compile Include="Business\StartUp.vb" />
-    <Compile Include="Form\CompanyAdd.Designer.vb">
-      <DependentUpon>CompanyAdd.vb</DependentUpon>
+    <Compile Include="Form\Company.Designer.vb">
+      <DependentUpon>Company.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form\CompanyAdd.vb">
+    <Compile Include="Form\Company.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form\CompanyEdit.Designer.vb">
@@ -120,10 +120,10 @@
     <Compile Include="Form\CompanySearch.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form\CustomerAdd.Designer.vb">
-      <DependentUpon>CustomerAdd.vb</DependentUpon>
+    <Compile Include="Form\Customer.Designer.vb">
+      <DependentUpon>Customer.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form\CustomerAdd.vb">
+    <Compile Include="Form\Customer.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form\CustomerEdit.Designer.vb">
@@ -174,16 +174,10 @@
     <Compile Include="Form\frmC10F90_Hanyo.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form\HanyoAdd.Designer.vb">
-      <DependentUpon>HanyoAdd.vb</DependentUpon>
+    <Compile Include="Form\Hanyo.Designer.vb">
+      <DependentUpon>Hanyo.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form\HanyoAdd.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form\HanyoEdit.Designer.vb">
-      <DependentUpon>HanyoEdit.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Form\HanyoEdit.vb">
+    <Compile Include="Form\Hanyo.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form\ItemSearch.Designer.vb">
@@ -194,6 +188,12 @@
     </Compile>
     <Compile Include="Form\.Designer.vb">
       <DependentUpon>MakerSearch.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Language.Designer.vb">
+      <DependentUpon>Language.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Language.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form\MakerSearch.vb">
@@ -283,10 +283,10 @@
     <Compile Include="Form\SalesSearch.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form\SupplierAdd.Designer.vb">
-      <DependentUpon>SupplierAdd.vb</DependentUpon>
+    <Compile Include="Form\Supplier.Designer.vb">
+      <DependentUpon>Supplier.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form\SupplierAdd.vb">
+    <Compile Include="Form\Supplier.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form\SupplierEdit.Designer.vb">
@@ -301,16 +301,10 @@
     <Compile Include="Form\SupplierSearch.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form\UserAdd.Designer.vb">
-      <DependentUpon>UserAdd.vb</DependentUpon>
+    <Compile Include="Form\User.Designer.vb">
+      <DependentUpon>User.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form\UserAdd.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form\UserEdit.Designer.vb">
-      <DependentUpon>UserEdit.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Form\UserEdit.vb">
+    <Compile Include="Form\User.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form\MstUser.Designer.vb">
@@ -342,8 +336,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Form\CompanyAdd.resx">
-      <DependentUpon>CompanyAdd.vb</DependentUpon>
+    <EmbeddedResource Include="Form\Company.resx">
+      <DependentUpon>Company.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\CompanyEdit.resx">
       <DependentUpon>CompanyEdit.vb</DependentUpon>
@@ -351,8 +345,8 @@
     <EmbeddedResource Include="Form\CompanySearch.resx">
       <DependentUpon>CompanySearch.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form\CustomerAdd.resx">
-      <DependentUpon>CustomerAdd.vb</DependentUpon>
+    <EmbeddedResource Include="Form\Customer.resx">
+      <DependentUpon>Customer.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\CustomerEdit.resx">
       <DependentUpon>CustomerEdit.vb</DependentUpon>
@@ -378,14 +372,14 @@
     <EmbeddedResource Include="Form\frmC10F90_Hanyo.resx">
       <DependentUpon>frmC10F90_Hanyo.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form\HanyoAdd.resx">
-      <DependentUpon>HanyoAdd.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form\HanyoEdit.resx">
-      <DependentUpon>HanyoEdit.vb</DependentUpon>
+    <EmbeddedResource Include="Form\Hanyo.resx">
+      <DependentUpon>Hanyo.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\ItemSearch.resx">
       <DependentUpon>ItemSearch.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Language.resx">
+      <DependentUpon>Language.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\MakerSearch.resx">
       <DependentUpon>MakerSearch.vb</DependentUpon>
@@ -432,8 +426,8 @@
     <EmbeddedResource Include="Form\SalesSearch.resx">
       <DependentUpon>SalesSearch.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form\SupplierAdd.resx">
-      <DependentUpon>SupplierAdd.vb</DependentUpon>
+    <EmbeddedResource Include="Form\Supplier.resx">
+      <DependentUpon>Supplier.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\SupplierEdit.resx">
       <DependentUpon>SupplierEdit.vb</DependentUpon>
@@ -441,11 +435,8 @@
     <EmbeddedResource Include="Form\SupplierSearch.resx">
       <DependentUpon>SupplierSearch.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form\UserAdd.resx">
-      <DependentUpon>UserAdd.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form\UserEdit.resx">
-      <DependentUpon>UserEdit.vb</DependentUpon>
+    <EmbeddedResource Include="Form\User.resx">
+      <DependentUpon>User.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\MstUser.resx">
       <DependentUpon>MstUser.vb</DependentUpon>

@@ -53,6 +53,7 @@ Partial Class MstUser
         Me.Dgv_User.Location = New System.Drawing.Point(12, 33)
         Me.Dgv_User.Name = "Dgv_User"
         Me.Dgv_User.ReadOnly = True
+        Me.Dgv_User.RowHeadersVisible = False
         Me.Dgv_User.RowTemplate.Height = 21
         Me.Dgv_User.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.Dgv_User.Size = New System.Drawing.Size(1326, 638)
@@ -133,7 +134,7 @@ Partial Class MstUser
         Me.btn_selectedRow.Name = "btn_selectedRow"
         Me.btn_selectedRow.Size = New System.Drawing.Size(165, 40)
         Me.btn_selectedRow.TabIndex = 2
-        Me.btn_selectedRow.Text = "選択"
+        Me.btn_selectedRow.Text = "ユーザ編集"
         Me.btn_selectedRow.UseVisualStyleBackColor = True
         '
         'BtnBack

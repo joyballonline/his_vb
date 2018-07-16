@@ -84,7 +84,7 @@ Partial Class OrderManagement
         Me.DtpPurchaseDate.Size = New System.Drawing.Size(148, 22)
         Me.DtpPurchaseDate.TabIndex = 256
         Me.DtpPurchaseDate.TabStop = False
-        Me.DtpPurchaseDate.Value = New Date(2018, 6, 5, 23, 23, 58, 0)
+        Me.DtpPurchaseDate.Value = New Date(2018, 7, 16, 0, 0, 0, 0)
         '
         'Label9
         '
@@ -156,6 +156,7 @@ Partial Class OrderManagement
         Me.DgvAdd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvAdd.Location = New System.Drawing.Point(12, 468)
         Me.DgvAdd.Name = "DgvAdd"
+        Me.DgvAdd.RowHeadersVisible = False
         Me.DgvAdd.RowTemplate.Height = 21
         Me.DgvAdd.Size = New System.Drawing.Size(1326, 150)
         Me.DgvAdd.TabIndex = 249
@@ -210,6 +211,7 @@ Partial Class OrderManagement
         Me.DgvHistory.Location = New System.Drawing.Point(12, 287)
         Me.DgvHistory.Name = "DgvHistory"
         Me.DgvHistory.ReadOnly = True
+        Me.DgvHistory.RowHeadersVisible = False
         Me.DgvHistory.RowTemplate.Height = 21
         Me.DgvHistory.Size = New System.Drawing.Size(1326, 150)
         Me.DgvHistory.TabIndex = 244
@@ -242,6 +244,7 @@ Partial Class OrderManagement
         Me.DgvOrder.Location = New System.Drawing.Point(12, 106)
         Me.DgvOrder.Name = "DgvOrder"
         Me.DgvOrder.ReadOnly = True
+        Me.DgvOrder.RowHeadersVisible = False
         Me.DgvOrder.RowTemplate.Height = 21
         Me.DgvOrder.Size = New System.Drawing.Size(1326, 150)
         Me.DgvOrder.TabIndex = 241
@@ -339,7 +342,7 @@ Partial Class OrderManagement
         Me.Label1.Size = New System.Drawing.Size(0, 12)
         Me.Label1.TabIndex = 232
         '
-        'OrderManagemant
+        'OrderManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -371,7 +374,7 @@ Partial Class OrderManagement
         Me.Controls.Add(Me.LblPurchaseNo)
         Me.Controls.Add(Me.TxtOrderNo)
         Me.Controls.Add(Me.Label1)
-        Me.Name = "OrderManagemant"
+        Me.Name = "OrderManagement"
         Me.Text = "OrderManagemant"
         CType(Me.DgvAdd, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DgvHistory, System.ComponentModel.ISupportInitialize).EndInit()
