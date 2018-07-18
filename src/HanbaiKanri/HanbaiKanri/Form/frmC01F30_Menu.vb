@@ -919,13 +919,15 @@ Public Class frmC01F30_Menu
                 Me.Hide()
             '-----------------------------------仕入業務（H05）
             Case CommonConst.MENU_H0610  '仕入登録
+                Dim Status As String = "ORDING"
                 Dim openForm As Form = Nothing
-                openForm = New PurchaseList(_msgHd, _db, _langHd)
+                openForm = New PurchaseList(_msgHd, _db, _langHd, Status)
                 openForm.Show()
                 Me.Hide()
             Case CommonConst.MENU_H0620  '仕入編集
+                Dim Status As String = "ORDING"
                 Dim openForm As Form = Nothing
-                openForm = New PurchaseList(_msgHd, _db, _langHd)
+                openForm = New PurchaseList(_msgHd, _db, _langHd, Status)
                 openForm.Show()
                 Me.Hide()
             Case CommonConst.MENU_H0630  '仕入取消
@@ -940,8 +942,9 @@ Public Class frmC01F30_Menu
                 Me.Hide()
             '-----------------------------------入庫業務（H05）
             Case CommonConst.MENU_H0710  '入庫登録
+                Dim Status As String = "RECEIPT"
                 Dim openForm As Form = Nothing
-                openForm = New PurchaseList(_msgHd, _db, _langHd)
+                openForm = New PurchaseList(_msgHd, _db, _langHd, Status)
                 openForm.Show()
                 Me.Hide()
             Case CommonConst.MENU_H0720  '入庫編集
