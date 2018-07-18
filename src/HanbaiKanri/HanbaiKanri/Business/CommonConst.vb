@@ -141,47 +141,44 @@ Public Class CommonConst
     Public Const MENU_H0140 As String = "H0140"           '見積複写
     Public Const MENU_H0150 As String = "H0150"           '見積参照
     Public Const MENU_H0160 As String = "H0160"           '見積取消
-    Public Const MENU_H0210 As String = "H0210"           '注文帳照会
-    Public Const MENU_H0310 As String = "H0310"           '委託売上登録
-    Public Const MENU_H0320 As String = "H0320"           '委託売上変更
-    Public Const MENU_H0330 As String = "H0330"           '委託売上取消
-    Public Const MENU_H0340 As String = "H0340"           '委託売上照会
-    Public Const MENU_H0410 As String = "H0410"           '請求書発行
-    Public Const MENU_H0510 As String = "H0510"           '入金登録
-    Public Const MENU_H0520 As String = "H0520"           '入金変更
-    Public Const MENU_H0530 As String = "H0530"           '入金取消
-    Public Const MENU_H0540 As String = "H0540"           '入金照会
+
+    Public Const MENU_H0210 As String = "H0210"           '受注登録
+    Public Const MENU_H0220 As String = "H0220"           '受注編集
+    Public Const MENU_H0230 As String = "H0230"           '受注複写
+    Public Const MENU_H0240 As String = "H0240"           '受注取消
+    Public Const MENU_H0250 As String = "H0250"           '受注参照
+
+    Public Const MENU_H0310 As String = "H0310"           '売上登録
+    Public Const MENU_H0320 As String = "H0320"           '売上編集
+    Public Const MENU_H0330 As String = "H0330"           '売上取消
+    Public Const MENU_H0340 As String = "H0340"           '売上参照
+
+    Public Const MENU_H0410 As String = "H0410"           '出庫登録
+    Public Const MENU_H0420 As String = "H0420"           '出庫編集
+    Public Const MENU_H0430 As String = "H0430"           '出庫取消
+    Public Const MENU_H0440 As String = "H0440"           '出庫参照
+
+    Public Const MENU_H0510 As String = "H0510"           '発注登録
+    Public Const MENU_H0520 As String = "H0520"           '発注編集
+    Public Const MENU_H0530 As String = "H0530"           '発注複写
+    Public Const MENU_H0540 As String = "H0540"           '発注取消
+    Public Const MENU_H0550 As String = "H0550"           '発注参照
+
     Public Const MENU_H0610 As String = "H0610"           '仕入登録
-    Public Const MENU_H0620 As String = "H0620"           '仕入変更
-    Public Const MENU_H0630 As String = "H0630"           '仕入取消
-    Public Const MENU_H0640 As String = "H0640"           '仕入照会
-    Public Const MENU_H0710 As String = "H0710"           '支払登録
-    Public Const MENU_H0720 As String = "H0720"           '支払変更
-    Public Const MENU_H0730 As String = "H0730"           '支払取消
-    Public Const MENU_H0740 As String = "H0740"           '支払照会
-    Public Const MENU_H1001 As String = "H1001"           '注文明細表
-    Public Const MENU_H1002 As String = "H1002"           '売上未計上一覧表
-    Public Const MENU_H1003 As String = "H1003"           '売掛金一覧表
-    Public Const MENU_H1004 As String = "H1004"           '得意先元帳
-    Public Const MENU_H1005 As String = "H1005"           '出荷数一覧表
-    Public Const MENU_H1101 As String = "H1101"           '仕入明細表
-    Public Const MENU_H1102 As String = "H1102"           '買掛金一覧表
-    Public Const MENU_H1103 As String = "H1103"           '仕入先元帳
-    Public Const MENU_H1121 As String = "H1121"           '仕入総括表
-    Public Const MENU_M0170 As String = "M0170"           '汎用マスタ一覧
-    Public Const MENU_M7002 As String = "M7002"           '汎用マスタ保守
-    Public Const MENU_M0120 As String = "M0120"           '取引先マスタ一覧
-    Public Const MENU_M2002 As String = "M2002"           '取引先マスタ保守
-    Public Const MENU_M0130 As String = "M0130"           '商品マスタ一覧
-    Public Const MENU_M3002 As String = "M3002"           '商品マスタ保守
-    Public Const MENU_M0110 As String = "M0110"           'ユーザマスタ一覧
-    Public Const MENU_M1002 As String = "M1002"           'ユーザマスタ保守
-    Public Const MENU_M0140 As String = "M0140"           '販売単価マスタ一覧
-    Public Const MENU_M4002 As String = "M4002"           '販売単価マスタ保守
-    Public Const MENU_M0150 As String = "M0150"           '仕入単価マスタ一覧
-    Public Const MENU_M5002 As String = "M5002"           '仕入単価マスタ保守
-    Public Const MENU_M0180 As String = "M0180"           '消費税マスタ一覧
-    Public Const MENU_M8002 As String = "M8002"           '消費税マスタ保守
+    Public Const MENU_H0620 As String = "H0620"           '仕入編集
+    Public Const MENU_H0630 As String = "H0630"           '仕入複写
+    Public Const MENU_H0640 As String = "H0640"           '仕入取消
+
+    Public Const MENU_H0710 As String = "H0710"           '入庫登録
+    Public Const MENU_H0720 As String = "H0720"           '入庫編集
+    Public Const MENU_H0730 As String = "H0730"           '入庫複写
+    Public Const MENU_H0740 As String = "H0740"           '入庫取消
+
+    Public Const MENU_M0110 As String = "M0110"           '汎用マスタ
+    Public Const MENU_M0120 As String = "M0120"           '得意先マスタ
+    Public Const MENU_M0130 As String = "M0130"           '仕入先マスタ
+    Public Const MENU_M0140 As String = "M0140"           '会社マスタ
+    Public Const MENU_M0150 As String = "M0150"           'ユーザマスタ
     Public Const MENU_M0160 As String = "M0160"           '言語マスタ
 
     '各フォームに引き渡す編集モードの値

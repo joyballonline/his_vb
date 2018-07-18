@@ -26,13 +26,14 @@ Partial Class frmC01F30_Menu
     Friend WithEvents 操作者 As DataGridViewTextBoxColumn
     Friend WithEvents cmdExit As Button
     Friend WithEvents chkM01 As CheckBox
-    Friend WithEvents chkG01 As CheckBox
     Friend WithEvents chkH07 As CheckBox
-    Friend WithEvents chkH06 As CheckBox
     Friend WithEvents chkH05 As CheckBox
-    Friend WithEvents chkH03 As CheckBox
+    Friend WithEvents chkH04 As CheckBox
+    Friend WithEvents chkH02 As CheckBox
     Friend WithEvents chkH01 As CheckBox
     Friend WithEvents dgvLIST As DataGridView
+    Friend WithEvents chkH06 As CheckBox
+    Friend WithEvents chkH03 As CheckBox
 
     'メモ: 以下のプロシージャは Windows フォーム デザイナーで必要です。
     'Windows フォーム デザイナーを使用して変更できます。  

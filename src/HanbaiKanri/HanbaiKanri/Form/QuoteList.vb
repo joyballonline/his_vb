@@ -97,6 +97,14 @@ Public Class QuoteList
             LblMode.Text = "仕入単価入力モード"
             BtnUnitPrice.Visible = True
             BtnUnitPrice.Location = New Point(997, 677)
+        ElseIf _status = "ORDER_NEW" Then
+            LblMode.Text = "受注新規入力モード"
+            BtnOrder.Visible = True
+            BtnOrder.Location = New Point(997, 677)
+        ElseIf _status = "PURCHASE_NEW" Then
+            LblMode.Text = "仕入新規入力モード"
+            BtnPurchase.Visible = True
+            BtnPurchase.Location = New Point(997, 677)
         End If
 
         Dim Sql As String = ""
@@ -942,7 +950,7 @@ Public Class QuoteList
         End Try
     End Sub
 
-    Private Sub BtnOrder_Click(sender As Object, e As EventArgs) Handles BtnOrder.Click
+    Private Sub BtnOrder_Click(sender As Object, e As EventArgs) Handles BtnOrderAndPurchase.Click
         Dim RowIdx As Integer
         RowIdx = Me.DgvMithd.CurrentCell.RowIndex
         Dim No As String = DgvMithd.Rows(RowIdx).Cells(0).Value
@@ -1193,5 +1201,14 @@ Public Class QuoteList
 
     End Sub
 
-
+    Private Sub BtnOrder_Click_1(sender As Object, e As EventArgs) Handles BtnOrder.Click
+        Dim RowIdx As Integer
+        RowIdx = DgvMithd.CurrentCell.RowIndex
+        Dim No As String = DgvMithd.Rows(RowIdx).Cells(0).Value
+        Dim Suffix As String = DgvMithd.Rows(RowIdx).Cells(1).Value
+        Dim Status As String = "ADD"
+        Dim openForm As Form = Nothing
+        openForm = New Order(_msgHd, _db, _langHd, Me, No, Suffix, Status)   '処理選択
+        openForm.Show(Me)
+    End Sub
 End Class

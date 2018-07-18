@@ -166,6 +166,7 @@ Public Class Cymn
         SqlSaiban2 += "'%30%'"
 
         Dim Saiban2 As DataSet = _db.selectDB(SqlSaiban2, RS, reccnt)
+
         CompanyCode = Saiban1.Tables(RS).Rows(0)(0)
         Dim OrderNo As String = Saiban1.Tables(RS).Rows(0)(5)
         OrderNo += dtNow.ToString("MMdd")

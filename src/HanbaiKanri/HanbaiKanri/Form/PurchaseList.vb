@@ -37,6 +37,7 @@ Public Class PurchaseList
     Private _init As Boolean                             '初期処理済フラグ
     Private CompanyCode As String = ""
     Private OrderNo As String()
+    Private _status As String = ""
 
     '-------------------------------------------------------------------------------
     'デフォルトコンストラクタ（隠蔽）
@@ -49,7 +50,10 @@ Public Class PurchaseList
     '-------------------------------------------------------------------------------
     'コンストラクタ　メニューから呼ばれる
     '-------------------------------------------------------------------------------
-    Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler, ByRef prmRefDbHd As UtilDBIf, ByRef prmRefLang As UtilLangHandler)
+    Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler,
+                   ByRef prmRefDbHd As UtilDBIf,
+                   ByRef prmRefLang As UtilLangHandler,
+                   Optional ByRef prmRefStatus As String = "")
         Call Me.New()
 
         _init = False
@@ -58,6 +62,7 @@ Public Class PurchaseList
         _msgHd = prmRefMsgHd                                                'MSGハンドラの設定
         _db = prmRefDbHd                                                    'DBハンドラの設定
         _langHd = prmRefLang
+        _status = prmRefStatus
         '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
         StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
         Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
@@ -65,70 +70,164 @@ Public Class PurchaseList
         _init = True
 
     End Sub
+    Private Sub PurchaseListLoad(Optional ByRef Status As String = "")
+        If Status = "EXCLUSION" Then
+            Dim Sql As String = ""
+            Try
+                Sql += "SELECT "
+                Sql += "* "
+                Sql += "FROM "
+                Sql += "public"
+                Sql += "."
+                Sql += "t20_hattyu"
+                Sql += " WHERE "
+                Sql += "取消区分"
+                Sql += " = "
+                Sql += "'"
+                Sql += "0"
+                Sql += "'"
 
+                Dim reccnt As Integer = 0
+                ds = _db.selectDB(Sql, RS, reccnt)
+                DgvHtyhd.Columns.Add("発注番号", "発注番号")
+                DgvHtyhd.Columns.Add("発注番号枝番", "発注番号枝番")
+                DgvHtyhd.Columns.Add("発注日", "発注日")
+                DgvHtyhd.Columns.Add("仕入先コード", "仕入先コード")
+                DgvHtyhd.Columns.Add("仕入先名", "仕入先名")
+                DgvHtyhd.Columns.Add("仕入先郵便番号", "仕入先郵便番号")
+                DgvHtyhd.Columns.Add("仕入先住所", "仕入先住所")
+                DgvHtyhd.Columns.Add("仕入先電話番号", "仕入先電話番号")
+                DgvHtyhd.Columns.Add("仕入先ＦＡＸ", "仕入先ＦＡＸ")
+                DgvHtyhd.Columns.Add("仕入先担当者名", "仕入先担当者名")
+                DgvHtyhd.Columns.Add("仕入先担当者役職", "仕入先担当者役職")
+                DgvHtyhd.Columns.Add("仕入金額", "仕入金額")
+                DgvHtyhd.Columns.Add("支払条件", "支払条件")
+                DgvHtyhd.Columns.Add("営業担当者", "営業担当者")
+                DgvHtyhd.Columns.Add("入力担当者", "入力担当者")
+                DgvHtyhd.Columns.Add("備考", "備考")
+                DgvHtyhd.Columns.Add("登録日", "登録日")
+
+                DgvHtyhd.Columns(12).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                DgvHtyhd.Columns(13).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                DgvHtyhd.Columns(14).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                DgvHtyhd.Columns(15).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+                For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+                    DgvHtyhd.Rows.Add()
+                    DgvHtyhd.Rows(index).Cells(0).Value = ds.Tables(RS).Rows(index)("発注番号")
+                    DgvHtyhd.Rows(index).Cells(1).Value = ds.Tables(RS).Rows(index)("発注番号枝番")
+                    DgvHtyhd.Rows(index).Cells(2).Value = ds.Tables(RS).Rows(index)("発注日")
+                    DgvHtyhd.Rows(index).Cells(3).Value = ds.Tables(RS).Rows(index)("仕入先コード")
+                    DgvHtyhd.Rows(index).Cells(4).Value = ds.Tables(RS).Rows(index)("仕入先名")
+                    DgvHtyhd.Rows(index).Cells(5).Value = ds.Tables(RS).Rows(index)("仕入先郵便番号")
+                    DgvHtyhd.Rows(index).Cells(6).Value = ds.Tables(RS).Rows(index)("仕入先住所")
+                    DgvHtyhd.Rows(index).Cells(7).Value = ds.Tables(RS).Rows(index)("仕入先電話番号")
+                    DgvHtyhd.Rows(index).Cells(8).Value = ds.Tables(RS).Rows(index)("仕入先ＦＡＸ")
+                    DgvHtyhd.Rows(index).Cells(9).Value = ds.Tables(RS).Rows(index)("仕入先担当者名")
+                    DgvHtyhd.Rows(index).Cells(10).Value = ds.Tables(RS).Rows(index)("仕入先担当者役職")
+                    DgvHtyhd.Rows(index).Cells(11).Value = ds.Tables(RS).Rows(index)("仕入金額")
+                    DgvHtyhd.Rows(index).Cells(12).Value = ds.Tables(RS).Rows(index)("支払条件")
+                    DgvHtyhd.Rows(index).Cells(13).Value = ds.Tables(RS).Rows(index)("営業担当者")
+                    DgvHtyhd.Rows(index).Cells(14).Value = ds.Tables(RS).Rows(index)("入力担当者")
+                    DgvHtyhd.Rows(index).Cells(15).Value = ds.Tables(RS).Rows(index)("備考")
+                    DgvHtyhd.Rows(index).Cells(16).Value = ds.Tables(RS).Rows(index)("登録日")
+                Next
+
+            Catch ue As UsrDefException
+                ue.dspMsg()
+                Throw ue
+            Catch ex As Exception
+                'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
+                Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", UtilClass.getErrDetail(ex)))
+            End Try
+        Else
+            Dim Sql As String = ""
+            Try
+                Sql += "SELECT "
+                Sql += "* "
+                Sql += "FROM "
+                Sql += "public"
+                Sql += "."
+                Sql += "t20_hattyu"
+
+                Dim reccnt As Integer = 0
+                ds = _db.selectDB(Sql, RS, reccnt)
+                DgvHtyhd.Columns.Add("発注番号", "発注番号")
+                DgvHtyhd.Columns.Add("発注番号枝番", "発注番号枝番")
+                DgvHtyhd.Columns.Add("発注日", "発注日")
+                DgvHtyhd.Columns.Add("仕入先コード", "仕入先コード")
+                DgvHtyhd.Columns.Add("仕入先名", "仕入先名")
+                DgvHtyhd.Columns.Add("仕入先郵便番号", "仕入先郵便番号")
+                DgvHtyhd.Columns.Add("仕入先住所", "仕入先住所")
+                DgvHtyhd.Columns.Add("仕入先電話番号", "仕入先電話番号")
+                DgvHtyhd.Columns.Add("仕入先ＦＡＸ", "仕入先ＦＡＸ")
+                DgvHtyhd.Columns.Add("仕入先担当者名", "仕入先担当者名")
+                DgvHtyhd.Columns.Add("仕入先担当者役職", "仕入先担当者役職")
+                DgvHtyhd.Columns.Add("仕入金額", "仕入金額")
+                DgvHtyhd.Columns.Add("支払条件", "支払条件")
+                DgvHtyhd.Columns.Add("営業担当者", "営業担当者")
+                DgvHtyhd.Columns.Add("入力担当者", "入力担当者")
+                DgvHtyhd.Columns.Add("備考", "備考")
+                DgvHtyhd.Columns.Add("登録日", "登録日")
+
+                DgvHtyhd.Columns(12).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                DgvHtyhd.Columns(13).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                DgvHtyhd.Columns(14).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                DgvHtyhd.Columns(15).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+                For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+                    DgvHtyhd.Rows.Add()
+                    DgvHtyhd.Rows(index).Cells(0).Value = ds.Tables(RS).Rows(index)("発注番号")
+                    DgvHtyhd.Rows(index).Cells(1).Value = ds.Tables(RS).Rows(index)("発注番号枝番")
+                    DgvHtyhd.Rows(index).Cells(2).Value = ds.Tables(RS).Rows(index)("発注日")
+                    DgvHtyhd.Rows(index).Cells(3).Value = ds.Tables(RS).Rows(index)("仕入先コード")
+                    DgvHtyhd.Rows(index).Cells(4).Value = ds.Tables(RS).Rows(index)("仕入先名")
+                    DgvHtyhd.Rows(index).Cells(5).Value = ds.Tables(RS).Rows(index)("仕入先郵便番号")
+                    DgvHtyhd.Rows(index).Cells(6).Value = ds.Tables(RS).Rows(index)("仕入先住所")
+                    DgvHtyhd.Rows(index).Cells(7).Value = ds.Tables(RS).Rows(index)("仕入先電話番号")
+                    DgvHtyhd.Rows(index).Cells(8).Value = ds.Tables(RS).Rows(index)("仕入先ＦＡＸ")
+                    DgvHtyhd.Rows(index).Cells(9).Value = ds.Tables(RS).Rows(index)("仕入先担当者名")
+                    DgvHtyhd.Rows(index).Cells(10).Value = ds.Tables(RS).Rows(index)("仕入先担当者役職")
+                    DgvHtyhd.Rows(index).Cells(11).Value = ds.Tables(RS).Rows(index)("仕入金額")
+                    DgvHtyhd.Rows(index).Cells(12).Value = ds.Tables(RS).Rows(index)("支払条件")
+                    DgvHtyhd.Rows(index).Cells(13).Value = ds.Tables(RS).Rows(index)("営業担当者")
+                    DgvHtyhd.Rows(index).Cells(14).Value = ds.Tables(RS).Rows(index)("入力担当者")
+                    DgvHtyhd.Rows(index).Cells(15).Value = ds.Tables(RS).Rows(index)("備考")
+                    DgvHtyhd.Rows(index).Cells(16).Value = ds.Tables(RS).Rows(index)("登録日")
+                Next
+
+            Catch ue As UsrDefException
+                ue.dspMsg()
+                Throw ue
+            Catch ex As Exception
+                'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
+                Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", UtilClass.getErrDetail(ex)))
+            End Try
+        End If
+    End Sub
     Private Sub MstHanyoue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim Sql As String = ""
-        Try
-            Sql += "SELECT "
-            Sql += "* "
-            Sql += "FROM "
-            Sql += "public"
-            Sql += "."
-            Sql += "t20_hattyu"
+        If _status = "ORDING" Then
+            BtnOrding.Visible = True
+            BtnOrding.Location = New Point(997, 677)
+        ElseIf _status = "RECEIPT" Then
+            BtnReceipt.Visible = True
+            BtnReceipt.Location = New Point(997, 677)
+        ElseIf _status = "EDIT" Then
+            BtnPurchaseEdit.Visible = True
+            BtnPurchaseEdit.Location = New Point(997, 677)
+        ElseIf _status = "VIEW" Then
+            BtnPurchaseView.Visible = True
+            BtnPurchaseView.Location = New Point(997, 677)
+        ElseIf _status = "CANCEL" Then
+            BtnPurchaseCancel.Visible = True
+            BtnPurchaseCancel.Location = New Point(997, 677)
+        ElseIf _status = "CLONE" Then
+            BtnPurchaseClone.Visible = True
+            BtnPurchaseClone.Location = New Point(997, 677)
+        End If
 
-            Dim reccnt As Integer = 0
-            ds = _db.selectDB(Sql, RS, reccnt)
-            DgvHtyhd.Columns.Add("発注番号", "発注番号")
-            DgvHtyhd.Columns.Add("発注番号枝番", "発注番号枝番")
-            DgvHtyhd.Columns.Add("発注日", "発注日")
-            DgvHtyhd.Columns.Add("仕入先コード", "仕入先コード")
-            DgvHtyhd.Columns.Add("仕入先名", "仕入先名")
-            DgvHtyhd.Columns.Add("仕入先郵便番号", "仕入先郵便番号")
-            DgvHtyhd.Columns.Add("仕入先住所", "仕入先住所")
-            DgvHtyhd.Columns.Add("仕入先電話番号", "仕入先電話番号")
-            DgvHtyhd.Columns.Add("仕入先ＦＡＸ", "仕入先ＦＡＸ")
-            DgvHtyhd.Columns.Add("仕入先担当者名", "仕入先担当者名")
-            DgvHtyhd.Columns.Add("仕入先担当者役職", "仕入先担当者役職")
-            DgvHtyhd.Columns.Add("仕入金額", "仕入金額")
-            DgvHtyhd.Columns.Add("支払条件", "支払条件")
-            DgvHtyhd.Columns.Add("営業担当者", "営業担当者")
-            DgvHtyhd.Columns.Add("入力担当者", "入力担当者")
-            DgvHtyhd.Columns.Add("備考", "備考")
-            DgvHtyhd.Columns.Add("登録日", "登録日")
-
-            DgvHtyhd.Columns(12).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvHtyhd.Columns(13).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvHtyhd.Columns(14).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvHtyhd.Columns(15).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-
-            For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-                DgvHtyhd.Rows.Add()
-                DgvHtyhd.Rows(index).Cells(0).Value = ds.Tables(RS).Rows(index)("発注番号")
-                DgvHtyhd.Rows(index).Cells(1).Value = ds.Tables(RS).Rows(index)("発注番号枝番")
-                DgvHtyhd.Rows(index).Cells(2).Value = ds.Tables(RS).Rows(index)("発注日")
-                DgvHtyhd.Rows(index).Cells(3).Value = ds.Tables(RS).Rows(index)("仕入先コード")
-                DgvHtyhd.Rows(index).Cells(4).Value = ds.Tables(RS).Rows(index)("仕入先名")
-                DgvHtyhd.Rows(index).Cells(5).Value = ds.Tables(RS).Rows(index)("仕入先郵便番号")
-                DgvHtyhd.Rows(index).Cells(6).Value = ds.Tables(RS).Rows(index)("仕入先住所")
-                DgvHtyhd.Rows(index).Cells(7).Value = ds.Tables(RS).Rows(index)("仕入先電話番号")
-                DgvHtyhd.Rows(index).Cells(8).Value = ds.Tables(RS).Rows(index)("仕入先ＦＡＸ")
-                DgvHtyhd.Rows(index).Cells(9).Value = ds.Tables(RS).Rows(index)("仕入先担当者名")
-                DgvHtyhd.Rows(index).Cells(10).Value = ds.Tables(RS).Rows(index)("仕入先担当者役職")
-                DgvHtyhd.Rows(index).Cells(11).Value = ds.Tables(RS).Rows(index)("仕入金額")
-                DgvHtyhd.Rows(index).Cells(12).Value = ds.Tables(RS).Rows(index)("支払条件")
-                DgvHtyhd.Rows(index).Cells(13).Value = ds.Tables(RS).Rows(index)("営業担当者")
-                DgvHtyhd.Rows(index).Cells(14).Value = ds.Tables(RS).Rows(index)("入力担当者")
-                DgvHtyhd.Rows(index).Cells(15).Value = ds.Tables(RS).Rows(index)("備考")
-                DgvHtyhd.Rows(index).Cells(16).Value = ds.Tables(RS).Rows(index)("登録日")
-            Next
-
-        Catch ue As UsrDefException
-            ue.dspMsg()
-            Throw ue
-        Catch ex As Exception
-            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", UtilClass.getErrDetail(ex)))
-        End Try
+        Dim Status As String = "EXCLUSION"
+        PurchaseListLoad(Status)
     End Sub
 
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
@@ -639,5 +738,176 @@ Public Class PurchaseList
         Dim openForm As Form = Nothing
         openForm = New PurchasingManagement(_msgHd, _db, _langHd, No, Suffix)   '処理選択
         openForm.Show(Me)
+    End Sub
+
+    Private Sub BtnGoodsIssue_Click(sender As Object, e As EventArgs) Handles BtnReceipt.Click
+        Dim RowIdx As Integer
+        RowIdx = Me.DgvHtyhd.CurrentCell.RowIndex
+        Dim No As String = DgvHtyhd.Rows(RowIdx).Cells(0).Value
+        Dim Suffix As String = DgvHtyhd.Rows(RowIdx).Cells(1).Value
+        Dim openForm As Form = Nothing
+        openForm = New Receipt(_msgHd, _db, _langHd, No, Suffix)   '処理選択
+        openForm.Show(Me)
+    End Sub
+
+    Private Sub BtnPurchaseClone_Click(sender As Object, e As EventArgs) Handles BtnPurchaseClone.Click
+        Dim RowIdx As Integer
+        RowIdx = Me.DgvHtyhd.CurrentCell.RowIndex
+        Dim No As String = DgvHtyhd.Rows(RowIdx).Cells(0).Value
+        Dim Suffix As String = DgvHtyhd.Rows(RowIdx).Cells(1).Value
+        Dim Status As String = "CLONE"
+        Dim openForm As Form = Nothing
+        openForm = New Purchase(_msgHd, _db, _langHd, No, Suffix, Status)   '処理選択
+        openForm.ShowDialog(Me)
+        DgvHtyhd.Rows.Clear()
+        DgvHtyhd.Columns.Clear()
+        Dim ListStatus As String = "EXCLUSION"
+        PurchaseListLoad(ListStatus)
+    End Sub
+
+    Private Sub ChkCancelData_CheckedChanged(sender As Object, e As EventArgs) Handles ChkCancelData.CheckedChanged
+        DgvHtyhd.Rows.Clear()
+        DgvHtyhd.Columns.Clear()
+
+        If ChkCancelData.Checked = False Then
+            Dim Status As String = "EXCLUSION"
+            PurchaseListLoad(Status)
+        Else
+            PurchaseListLoad()
+        End If
+    End Sub
+
+    Private Sub BtnPurchaseCancel_Click(sender As Object, e As EventArgs) Handles BtnPurchaseCancel.Click
+        Dim dtNow As DateTime = DateTime.Now
+        Dim Sql1 As String = ""
+        Sql1 = ""
+        Sql1 += "UPDATE "
+        Sql1 += "Public."
+        Sql1 += "t20_hattyu "
+        Sql1 += "SET "
+
+        Sql1 += "取消区分"
+        Sql1 += " = '"
+        Sql1 += "1"
+        Sql1 += "', "
+        Sql1 += "取消日"
+        Sql1 += " = '"
+        Sql1 += dtNow
+        Sql1 += "', "
+        Sql1 += "更新日"
+        Sql1 += " = '"
+        Sql1 += dtNow
+        Sql1 += "', "
+        Sql1 += "更新者"
+        Sql1 += " = '"
+        Sql1 += frmC01F10_Login.loginValue.TantoNM
+        Sql1 += " ' "
+
+        Sql1 += "WHERE"
+        Sql1 += " 会社コード"
+        Sql1 += "='"
+        Sql1 += frmC01F10_Login.loginValue.BumonNM
+        Sql1 += "'"
+        Sql1 += " AND"
+        Sql1 += " 発注番号"
+        Sql1 += "='"
+        Sql1 += DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("発注番号").Value
+        Sql1 += "' "
+        Sql1 += " AND"
+        Sql1 += " 発注番号枝番"
+        Sql1 += "='"
+        Sql1 += DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("発注番号枝番").Value
+        Sql1 += "' "
+        Sql1 += "RETURNING 会社コード"
+        Sql1 += ", "
+        Sql1 += "発注番号"
+        Sql1 += ", "
+        Sql1 += "発注番号枝番"
+        Sql1 += ", "
+        Sql1 += "受注番号"
+        Sql1 += ", "
+        Sql1 += "受注番号枝番"
+        Sql1 += ", "
+        Sql1 += "見積番号"
+        Sql1 += ", "
+        Sql1 += "見積番号枝番"
+        Sql1 += ", "
+        Sql1 += "仕入先コード"
+        Sql1 += ", "
+        Sql1 += "仕入先名"
+        Sql1 += ", "
+        Sql1 += "仕入先郵便番号"
+        Sql1 += ", "
+        Sql1 += "仕入先住所"
+        Sql1 += ", "
+        Sql1 += "仕入先電話番号"
+        Sql1 += ", "
+        Sql1 += "仕入先ＦＡＸ"
+        Sql1 += ", "
+        Sql1 += "仕入先担当者役職"
+        Sql1 += ", "
+        Sql1 += "仕入先担当者名"
+        Sql1 += ", "
+        Sql1 += "見積日"
+        Sql1 += ", "
+        Sql1 += "見積有効期限"
+        Sql1 += ", "
+        Sql1 += "インボイス日"
+        Sql1 += ", "
+        Sql1 += "検品完了日"
+        Sql1 += ", "
+        Sql1 += "支払条件"
+        Sql1 += ", "
+        Sql1 += "見積金額"
+        Sql1 += ", "
+        Sql1 += "仕入金額"
+        Sql1 += ", "
+        Sql1 += "粗利額"
+        Sql1 += ", "
+        Sql1 += "営業担当者"
+        Sql1 += ", "
+        Sql1 += "入力担当者"
+        Sql1 += ", "
+        Sql1 += "備考"
+        Sql1 += ", "
+        Sql1 += "取消日"
+        Sql1 += ", "
+        Sql1 += "取消区分"
+        Sql1 += ", "
+        Sql1 += "ＶＡＴ"
+        Sql1 += ", "
+        Sql1 += "ＰＰＨ"
+        Sql1 += ", "
+        Sql1 += "受注日"
+        Sql1 += ", "
+        Sql1 += "発注日"
+        Sql1 += ", "
+        Sql1 += "登録日"
+        Sql1 += ", "
+        Sql1 += "更新日"
+        Sql1 += ", "
+        Sql1 += "更新者"
+        Sql1 += ", "
+        Sql1 += "得意先コード"
+        Sql1 += ", "
+        Sql1 += "得意先名"
+        Sql1 += ", "
+        Sql1 += "得意先郵便番号"
+        Sql1 += ", "
+        Sql1 += "得意先住所"
+        Sql1 += ", "
+        Sql1 += "得意先電話番号"
+        Sql1 += ", "
+        Sql1 += "得意先ＦＡＸ"
+        Sql1 += ", "
+        Sql1 += "得意先担当者役職"
+        Sql1 += ", "
+        Sql1 += "得意先担当者名"
+
+        _db.executeDB(Sql1)
+        DgvHtyhd.Rows.Clear()
+        DgvHtyhd.Columns.Clear()
+        Dim Status As String = "EXCLUSION"
+        PurchaseListLoad(Status)
     End Sub
 End Class

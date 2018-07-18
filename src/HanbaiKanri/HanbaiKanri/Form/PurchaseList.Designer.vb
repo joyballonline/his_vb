@@ -51,6 +51,10 @@ Partial Class PurchaseList
         Me.BtnPurchaseEdit = New System.Windows.Forms.Button()
         Me.DgvHtyhd = New System.Windows.Forms.DataGridView()
         Me.BtnOrding = New System.Windows.Forms.Button()
+        Me.BtnReceipt = New System.Windows.Forms.Button()
+        Me.BtnPurchaseClone = New System.Windows.Forms.Button()
+        Me.ChkCancelData = New System.Windows.Forms.CheckBox()
+        Me.BtnPurchaseCancel = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         CType(Me.DgvHtyhd, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -63,6 +67,7 @@ Partial Class PurchaseList
         Me.BtnPurchaseView.TabIndex = 86
         Me.BtnPurchaseView.Text = "発注参照"
         Me.BtnPurchaseView.UseVisualStyleBackColor = True
+        Me.BtnPurchaseView.Visible = False
         '
         'Panel1
         '
@@ -319,6 +324,7 @@ Partial Class PurchaseList
         Me.BtnPurchaseEdit.TabIndex = 62
         Me.BtnPurchaseEdit.Text = "発注修正"
         Me.BtnPurchaseEdit.UseVisualStyleBackColor = True
+        Me.BtnPurchaseEdit.Visible = False
         '
         'DgvHtyhd
         '
@@ -334,18 +340,64 @@ Partial Class PurchaseList
         '
         'BtnOrding
         '
-        Me.BtnOrding.Location = New System.Drawing.Point(660, 675)
+        Me.BtnOrding.Location = New System.Drawing.Point(489, 675)
         Me.BtnOrding.Name = "BtnOrding"
         Me.BtnOrding.Size = New System.Drawing.Size(165, 40)
         Me.BtnOrding.TabIndex = 87
         Me.BtnOrding.Text = "仕入入力"
         Me.BtnOrding.UseVisualStyleBackColor = True
+        Me.BtnOrding.Visible = False
+        '
+        'BtnReceipt
+        '
+        Me.BtnReceipt.Location = New System.Drawing.Point(660, 675)
+        Me.BtnReceipt.Name = "BtnReceipt"
+        Me.BtnReceipt.Size = New System.Drawing.Size(165, 40)
+        Me.BtnReceipt.TabIndex = 88
+        Me.BtnReceipt.Text = "入庫入力"
+        Me.BtnReceipt.UseVisualStyleBackColor = True
+        Me.BtnReceipt.Visible = False
+        '
+        'BtnPurchaseClone
+        '
+        Me.BtnPurchaseClone.Location = New System.Drawing.Point(318, 675)
+        Me.BtnPurchaseClone.Name = "BtnPurchaseClone"
+        Me.BtnPurchaseClone.Size = New System.Drawing.Size(165, 40)
+        Me.BtnPurchaseClone.TabIndex = 89
+        Me.BtnPurchaseClone.Text = "発注複製"
+        Me.BtnPurchaseClone.UseVisualStyleBackColor = True
+        Me.BtnPurchaseClone.Visible = False
+        '
+        'ChkCancelData
+        '
+        Me.ChkCancelData.AutoSize = True
+        Me.ChkCancelData.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.ChkCancelData.Location = New System.Drawing.Point(401, 196)
+        Me.ChkCancelData.Name = "ChkCancelData"
+        Me.ChkCancelData.Size = New System.Drawing.Size(139, 19)
+        Me.ChkCancelData.TabIndex = 90
+        Me.ChkCancelData.Text = "取消データを含める"
+        Me.ChkCancelData.UseVisualStyleBackColor = True
+        '
+        'BtnPurchaseCancel
+        '
+        Me.BtnPurchaseCancel.Location = New System.Drawing.Point(147, 675)
+        Me.BtnPurchaseCancel.Name = "BtnPurchaseCancel"
+        Me.BtnPurchaseCancel.Size = New System.Drawing.Size(165, 40)
+        Me.BtnPurchaseCancel.TabIndex = 91
+        Me.BtnPurchaseCancel.Text = "発注取消"
+        Me.BtnPurchaseCancel.UseVisualStyleBackColor = True
+        Me.BtnPurchaseCancel.Visible = False
         '
         'PurchaseList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1350, 729)
+        Me.Controls.Add(Me.BtnPurchaseCancel)
+        Me.Controls.Add(Me.ChkCancelData)
+        Me.Controls.Add(Me.BtnPurchaseClone)
+        Me.Controls.Add(Me.BtnReceipt)
         Me.Controls.Add(Me.BtnOrding)
         Me.Controls.Add(Me.BtnPurchaseView)
         Me.Controls.Add(Me.Panel1)
@@ -412,4 +464,8 @@ Partial Class PurchaseList
     Friend WithEvents BtnPurchaseEdit As Button
     Friend WithEvents DgvHtyhd As DataGridView
     Friend WithEvents BtnOrding As Button
+    Friend WithEvents BtnReceipt As Button
+    Friend WithEvents BtnPurchaseClone As Button
+    Friend WithEvents ChkCancelData As CheckBox
+    Friend WithEvents BtnPurchaseCancel As Button
 End Class

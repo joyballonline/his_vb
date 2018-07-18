@@ -37,6 +37,7 @@ Public Class OrderList
     Private _init As Boolean                             '初期処理済フラグ
     Private CompanyCode As String = ""
     Private OrderNo As String()
+    Private OrderStatus As String = ""
 
 
     '-------------------------------------------------------------------------------
@@ -50,7 +51,10 @@ Public Class OrderList
     '-------------------------------------------------------------------------------
     'コンストラクタ　メニューから呼ばれる
     '-------------------------------------------------------------------------------
-    Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler, ByRef prmRefDbHd As UtilDBIf, ByRef prmRefLang As UtilLangHandler)
+    Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler,
+                   ByRef prmRefDbHd As UtilDBIf,
+                   ByRef prmRefLang As UtilLangHandler,
+                   ByRef prmRefStatus As String)
         Call Me.New()
 
         _init = False
@@ -59,6 +63,7 @@ Public Class OrderList
         _msgHd = prmRefMsgHd                                                'MSGハンドラの設定
         _db = prmRefDbHd                                                    'DBハンドラの設定
         _langHd = prmRefLang
+        OrderStatus = prmRefStatus
         '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
         StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
         Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
@@ -66,108 +71,243 @@ Public Class OrderList
         _init = True
 
     End Sub
+    Private Sub OrderListLoad(Optional ByRef prmRefStatus As String = "")
+        Dim Status As String = prmRefStatus
+        Dim Sql As String = ""
+
+        If Status = "EXCLUSION" Then
+            Try
+                Sql += "SELECT "
+                Sql += "会社コード, "
+                Sql += "受注番号, "
+                Sql += "受注番号枝番, "
+                Sql += "受注日, "
+                Sql += "見積番号, "
+                Sql += "見積番号枝番, "
+                Sql += "見積日, "
+                Sql += "見積有効期限, "
+                Sql += "得意先コード, "
+                Sql += "得意先名, "
+                Sql += "得意先郵便番号, "
+                Sql += "得意先住所, "
+                Sql += "得意先電話番号, "
+                Sql += "得意先ＦＡＸ, "
+                Sql += "得意先担当者名, "
+                Sql += "得意先担当者役職, "
+                Sql += "支払条件, "
+                Sql += "ＶＡＴ, "
+                Sql += "見積金額, "
+                Sql += "仕入金額, "
+                Sql += "粗利額, "
+                Sql += "営業担当者, "
+                Sql += "入力担当者, "
+                Sql += "備考, "
+                Sql += "登録日 "
+                Sql += "FROM "
+                Sql += "public"
+                Sql += "."
+                Sql += "t10_cymnhd"
+                Sql += " WHERE "
+                Sql += "取消区分"
+                Sql += " = "
+                Sql += "'"
+                Sql += "0"
+                Sql += "'"
+
+                Dim reccnt As Integer = 0
+                ds = _db.selectDB(Sql, RS, reccnt)
+                DgvCymnhd.Columns.Add("受注番号", "受注番号")
+                DgvCymnhd.Columns.Add("受注番号枝番", "受注番号枝番")
+                DgvCymnhd.Columns.Add("受注日", "受注日")
+                DgvCymnhd.Columns.Add("見積番号", "見積番号")
+                DgvCymnhd.Columns.Add("見積番号枝番", "見積番号枝番")
+                DgvCymnhd.Columns.Add("見積日", "見積日")
+                DgvCymnhd.Columns.Add("見積有効期限", "見積有効期限")
+                DgvCymnhd.Columns.Add("得意先コード", "得意先コード")
+                DgvCymnhd.Columns.Add("得意先名", "得意先名")
+                DgvCymnhd.Columns.Add("得意先郵便番号", "得意先郵便番号")
+                DgvCymnhd.Columns.Add("得意先住所", "得意先住所")
+                DgvCymnhd.Columns.Add("得意先電話番号", "得意先電話番号")
+                DgvCymnhd.Columns.Add("得意先ＦＡＸ", "得意先ＦＡＸ")
+                DgvCymnhd.Columns.Add("得意先担当者名", "得意先担当者名")
+                DgvCymnhd.Columns.Add("得意先担当者役職", "得意先担当者役職")
+                DgvCymnhd.Columns.Add("ＶＡＴ", "ＶＡＴ")
+                DgvCymnhd.Columns.Add("受注金額", "受注金額")
+                DgvCymnhd.Columns.Add("仕入金額", "仕入金額")
+                DgvCymnhd.Columns.Add("粗利額", "粗利額")
+                DgvCymnhd.Columns.Add("支払条件", "支払条件")
+                DgvCymnhd.Columns.Add("営業担当者", "営業担当者")
+                DgvCymnhd.Columns.Add("入力担当者", "入力担当者")
+                DgvCymnhd.Columns.Add("備考", "備考")
+                DgvCymnhd.Columns.Add("登録日", "登録日")
+
+                DgvCymnhd.Columns(12).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                DgvCymnhd.Columns(13).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                DgvCymnhd.Columns(14).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                DgvCymnhd.Columns(15).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+                For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+                    DgvCymnhd.Rows.Add()
+                    DgvCymnhd.Rows(index).Cells(0).Value = ds.Tables(RS).Rows(index)("受注番号")
+                    DgvCymnhd.Rows(index).Cells(1).Value = ds.Tables(RS).Rows(index)("受注番号枝番")
+                    DgvCymnhd.Rows(index).Cells(2).Value = ds.Tables(RS).Rows(index)("受注日")
+                    DgvCymnhd.Rows(index).Cells(3).Value = ds.Tables(RS).Rows(index)("見積番号")
+                    DgvCymnhd.Rows(index).Cells(4).Value = ds.Tables(RS).Rows(index)("見積番号枝番")
+                    DgvCymnhd.Rows(index).Cells(5).Value = ds.Tables(RS).Rows(index)("見積日")
+                    DgvCymnhd.Rows(index).Cells(6).Value = ds.Tables(RS).Rows(index)("見積有効期限")
+                    DgvCymnhd.Rows(index).Cells(7).Value = ds.Tables(RS).Rows(index)("得意先コード")
+                    DgvCymnhd.Rows(index).Cells(8).Value = ds.Tables(RS).Rows(index)("得意先名")
+                    DgvCymnhd.Rows(index).Cells(9).Value = ds.Tables(RS).Rows(index)("得意先郵便番号")
+                    DgvCymnhd.Rows(index).Cells(10).Value = ds.Tables(RS).Rows(index)("得意先住所")
+                    DgvCymnhd.Rows(index).Cells(11).Value = ds.Tables(RS).Rows(index)("得意先電話番号")
+                    DgvCymnhd.Rows(index).Cells(12).Value = ds.Tables(RS).Rows(index)("得意先ＦＡＸ")
+                    DgvCymnhd.Rows(index).Cells(13).Value = ds.Tables(RS).Rows(index)("得意先担当者名")
+                    DgvCymnhd.Rows(index).Cells(14).Value = ds.Tables(RS).Rows(index)("得意先担当者役職")
+                    DgvCymnhd.Rows(index).Cells(15).Value = ds.Tables(RS).Rows(index)("ＶＡＴ")
+                    DgvCymnhd.Rows(index).Cells(16).Value = ds.Tables(RS).Rows(index)("見積金額")
+                    DgvCymnhd.Rows(index).Cells(17).Value = ds.Tables(RS).Rows(index)("仕入金額")
+                    DgvCymnhd.Rows(index).Cells(18).Value = ds.Tables(RS).Rows(index)("粗利額")
+                    DgvCymnhd.Rows(index).Cells(19).Value = ds.Tables(RS).Rows(index)("支払条件")
+                    DgvCymnhd.Rows(index).Cells(20).Value = ds.Tables(RS).Rows(index)("営業担当者")
+                    DgvCymnhd.Rows(index).Cells(21).Value = ds.Tables(RS).Rows(index)("入力担当者")
+                    DgvCymnhd.Rows(index).Cells(22).Value = ds.Tables(RS).Rows(index)("備考")
+                    DgvCymnhd.Rows(index).Cells(23).Value = ds.Tables(RS).Rows(index)("登録日")
+                Next
+
+            Catch ue As UsrDefException
+                ue.dspMsg()
+                Throw ue
+            Catch ex As Exception
+                'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
+                Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", UtilClass.getErrDetail(ex)))
+            End Try
+        Else
+            Try
+                Sql += "SELECT "
+                Sql += "会社コード, "
+                Sql += "受注番号, "
+                Sql += "受注番号枝番, "
+                Sql += "受注日, "
+                Sql += "見積番号, "
+                Sql += "見積番号枝番, "
+                Sql += "見積日, "
+                Sql += "見積有効期限, "
+                Sql += "得意先コード, "
+                Sql += "得意先名, "
+                Sql += "得意先郵便番号, "
+                Sql += "得意先住所, "
+                Sql += "得意先電話番号, "
+                Sql += "得意先ＦＡＸ, "
+                Sql += "得意先担当者名, "
+                Sql += "得意先担当者役職, "
+                Sql += "支払条件, "
+                Sql += "ＶＡＴ, "
+                Sql += "見積金額, "
+                Sql += "仕入金額, "
+                Sql += "粗利額, "
+                Sql += "営業担当者, "
+                Sql += "入力担当者, "
+                Sql += "備考, "
+                Sql += "登録日 "
+                Sql += "FROM "
+                Sql += "public"
+                Sql += "."
+                Sql += "t10_cymnhd"
+
+                Dim reccnt As Integer = 0
+                ds = _db.selectDB(Sql, RS, reccnt)
+                DgvCymnhd.Columns.Add("受注番号", "受注番号")
+                DgvCymnhd.Columns.Add("受注番号枝番", "受注番号枝番")
+                DgvCymnhd.Columns.Add("受注日", "受注日")
+                DgvCymnhd.Columns.Add("見積番号", "見積番号")
+                DgvCymnhd.Columns.Add("見積番号枝番", "見積番号枝番")
+                DgvCymnhd.Columns.Add("見積日", "見積日")
+                DgvCymnhd.Columns.Add("見積有効期限", "見積有効期限")
+                DgvCymnhd.Columns.Add("得意先コード", "得意先コード")
+                DgvCymnhd.Columns.Add("得意先名", "得意先名")
+                DgvCymnhd.Columns.Add("得意先郵便番号", "得意先郵便番号")
+                DgvCymnhd.Columns.Add("得意先住所", "得意先住所")
+                DgvCymnhd.Columns.Add("得意先電話番号", "得意先電話番号")
+                DgvCymnhd.Columns.Add("得意先ＦＡＸ", "得意先ＦＡＸ")
+                DgvCymnhd.Columns.Add("得意先担当者名", "得意先担当者名")
+                DgvCymnhd.Columns.Add("得意先担当者役職", "得意先担当者役職")
+                DgvCymnhd.Columns.Add("ＶＡＴ", "ＶＡＴ")
+                DgvCymnhd.Columns.Add("受注金額", "受注金額")
+                DgvCymnhd.Columns.Add("仕入金額", "仕入金額")
+                DgvCymnhd.Columns.Add("粗利額", "粗利額")
+                DgvCymnhd.Columns.Add("支払条件", "支払条件")
+                DgvCymnhd.Columns.Add("営業担当者", "営業担当者")
+                DgvCymnhd.Columns.Add("入力担当者", "入力担当者")
+                DgvCymnhd.Columns.Add("備考", "備考")
+                DgvCymnhd.Columns.Add("登録日", "登録日")
+
+                DgvCymnhd.Columns(12).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                DgvCymnhd.Columns(13).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                DgvCymnhd.Columns(14).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                DgvCymnhd.Columns(15).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+                For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+                    DgvCymnhd.Rows.Add()
+                    DgvCymnhd.Rows(index).Cells(0).Value = ds.Tables(RS).Rows(index)("受注番号")
+                    DgvCymnhd.Rows(index).Cells(1).Value = ds.Tables(RS).Rows(index)("受注番号枝番")
+                    DgvCymnhd.Rows(index).Cells(2).Value = ds.Tables(RS).Rows(index)("受注日")
+                    DgvCymnhd.Rows(index).Cells(3).Value = ds.Tables(RS).Rows(index)("見積番号")
+                    DgvCymnhd.Rows(index).Cells(4).Value = ds.Tables(RS).Rows(index)("見積番号枝番")
+                    DgvCymnhd.Rows(index).Cells(5).Value = ds.Tables(RS).Rows(index)("見積日")
+                    DgvCymnhd.Rows(index).Cells(6).Value = ds.Tables(RS).Rows(index)("見積有効期限")
+                    DgvCymnhd.Rows(index).Cells(7).Value = ds.Tables(RS).Rows(index)("得意先コード")
+                    DgvCymnhd.Rows(index).Cells(8).Value = ds.Tables(RS).Rows(index)("得意先名")
+                    DgvCymnhd.Rows(index).Cells(9).Value = ds.Tables(RS).Rows(index)("得意先郵便番号")
+                    DgvCymnhd.Rows(index).Cells(10).Value = ds.Tables(RS).Rows(index)("得意先住所")
+                    DgvCymnhd.Rows(index).Cells(11).Value = ds.Tables(RS).Rows(index)("得意先電話番号")
+                    DgvCymnhd.Rows(index).Cells(12).Value = ds.Tables(RS).Rows(index)("得意先ＦＡＸ")
+                    DgvCymnhd.Rows(index).Cells(13).Value = ds.Tables(RS).Rows(index)("得意先担当者名")
+                    DgvCymnhd.Rows(index).Cells(14).Value = ds.Tables(RS).Rows(index)("得意先担当者役職")
+                    DgvCymnhd.Rows(index).Cells(15).Value = ds.Tables(RS).Rows(index)("ＶＡＴ")
+                    DgvCymnhd.Rows(index).Cells(16).Value = ds.Tables(RS).Rows(index)("見積金額")
+                    DgvCymnhd.Rows(index).Cells(17).Value = ds.Tables(RS).Rows(index)("仕入金額")
+                    DgvCymnhd.Rows(index).Cells(18).Value = ds.Tables(RS).Rows(index)("粗利額")
+                    DgvCymnhd.Rows(index).Cells(19).Value = ds.Tables(RS).Rows(index)("支払条件")
+                    DgvCymnhd.Rows(index).Cells(20).Value = ds.Tables(RS).Rows(index)("営業担当者")
+                    DgvCymnhd.Rows(index).Cells(21).Value = ds.Tables(RS).Rows(index)("入力担当者")
+                    DgvCymnhd.Rows(index).Cells(22).Value = ds.Tables(RS).Rows(index)("備考")
+                    DgvCymnhd.Rows(index).Cells(23).Value = ds.Tables(RS).Rows(index)("登録日")
+                Next
+
+            Catch ue As UsrDefException
+                ue.dspMsg()
+                Throw ue
+            Catch ex As Exception
+                'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
+                Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", UtilClass.getErrDetail(ex)))
+            End Try
+        End If
+
+
+    End Sub
 
     Private Sub MstHanyoue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim Sql As String = ""
-        Try
-            Sql += "SELECT "
-            Sql += "会社コード, "
-            Sql += "受注番号, "
-            Sql += "受注番号枝番, "
-            Sql += "受注日, "
-            Sql += "見積番号, "
-            Sql += "見積番号枝番, "
-            Sql += "見積日, "
-            Sql += "見積有効期限, "
-            Sql += "得意先コード, "
-            Sql += "得意先名, "
-            Sql += "得意先郵便番号, "
-            Sql += "得意先住所, "
-            Sql += "得意先電話番号, "
-            Sql += "得意先ＦＡＸ, "
-            Sql += "得意先担当者名, "
-            Sql += "得意先担当者役職, "
-            Sql += "支払条件, "
-            Sql += "ＶＡＴ, "
-            Sql += "見積金額, "
-            Sql += "仕入金額, "
-            Sql += "粗利額, "
-            Sql += "営業担当者, "
-            Sql += "入力担当者, "
-            Sql += "備考, "
-            Sql += "登録日 "
-            Sql += "FROM "
-            Sql += "public"
-            Sql += "."
-            Sql += "t10_cymnhd"
-
-            Dim reccnt As Integer = 0
-            ds = _db.selectDB(Sql, RS, reccnt)
-            DgvCymnhd.Columns.Add("受注番号", "受注番号")
-            DgvCymnhd.Columns.Add("受注番号枝番", "受注番号枝番")
-            DgvCymnhd.Columns.Add("受注日", "受注日")
-            DgvCymnhd.Columns.Add("見積番号", "見積番号")
-            DgvCymnhd.Columns.Add("見積番号枝番", "見積番号枝番")
-            DgvCymnhd.Columns.Add("見積日", "見積日")
-            DgvCymnhd.Columns.Add("見積有効期限", "見積有効期限")
-            DgvCymnhd.Columns.Add("得意先コード", "得意先コード")
-            DgvCymnhd.Columns.Add("得意先名", "得意先名")
-            DgvCymnhd.Columns.Add("得意先郵便番号", "得意先郵便番号")
-            DgvCymnhd.Columns.Add("得意先住所", "得意先住所")
-            DgvCymnhd.Columns.Add("得意先電話番号", "得意先電話番号")
-            DgvCymnhd.Columns.Add("得意先ＦＡＸ", "得意先ＦＡＸ")
-            DgvCymnhd.Columns.Add("得意先担当者名", "得意先担当者名")
-            DgvCymnhd.Columns.Add("得意先担当者役職", "得意先担当者役職")
-            DgvCymnhd.Columns.Add("ＶＡＴ", "ＶＡＴ")
-            DgvCymnhd.Columns.Add("受注金額", "受注金額")
-            DgvCymnhd.Columns.Add("仕入金額", "仕入金額")
-            DgvCymnhd.Columns.Add("粗利額", "粗利額")
-            DgvCymnhd.Columns.Add("支払条件", "支払条件")
-            DgvCymnhd.Columns.Add("営業担当者", "営業担当者")
-            DgvCymnhd.Columns.Add("入力担当者", "入力担当者")
-            DgvCymnhd.Columns.Add("備考", "備考")
-            DgvCymnhd.Columns.Add("登録日", "登録日")
-
-            DgvCymnhd.Columns(12).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvCymnhd.Columns(13).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvCymnhd.Columns(14).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvCymnhd.Columns(15).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-
-            For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-                DgvCymnhd.Rows.Add()
-                DgvCymnhd.Rows(index).Cells(0).Value = ds.Tables(RS).Rows(index)("受注番号")
-                DgvCymnhd.Rows(index).Cells(1).Value = ds.Tables(RS).Rows(index)("受注番号枝番")
-                DgvCymnhd.Rows(index).Cells(2).Value = ds.Tables(RS).Rows(index)("受注日")
-                DgvCymnhd.Rows(index).Cells(3).Value = ds.Tables(RS).Rows(index)("見積番号")
-                DgvCymnhd.Rows(index).Cells(4).Value = ds.Tables(RS).Rows(index)("見積番号枝番")
-                DgvCymnhd.Rows(index).Cells(5).Value = ds.Tables(RS).Rows(index)("見積日")
-                DgvCymnhd.Rows(index).Cells(6).Value = ds.Tables(RS).Rows(index)("見積有効期限")
-                DgvCymnhd.Rows(index).Cells(7).Value = ds.Tables(RS).Rows(index)("得意先コード")
-                DgvCymnhd.Rows(index).Cells(8).Value = ds.Tables(RS).Rows(index)("得意先名")
-                DgvCymnhd.Rows(index).Cells(9).Value = ds.Tables(RS).Rows(index)("得意先郵便番号")
-                DgvCymnhd.Rows(index).Cells(10).Value = ds.Tables(RS).Rows(index)("得意先住所")
-                DgvCymnhd.Rows(index).Cells(11).Value = ds.Tables(RS).Rows(index)("得意先電話番号")
-                DgvCymnhd.Rows(index).Cells(12).Value = ds.Tables(RS).Rows(index)("得意先ＦＡＸ")
-                DgvCymnhd.Rows(index).Cells(13).Value = ds.Tables(RS).Rows(index)("得意先担当者名")
-                DgvCymnhd.Rows(index).Cells(14).Value = ds.Tables(RS).Rows(index)("得意先担当者役職")
-                DgvCymnhd.Rows(index).Cells(15).Value = ds.Tables(RS).Rows(index)("ＶＡＴ")
-                DgvCymnhd.Rows(index).Cells(16).Value = ds.Tables(RS).Rows(index)("見積金額")
-                DgvCymnhd.Rows(index).Cells(17).Value = ds.Tables(RS).Rows(index)("仕入金額")
-                DgvCymnhd.Rows(index).Cells(18).Value = ds.Tables(RS).Rows(index)("粗利額")
-                DgvCymnhd.Rows(index).Cells(19).Value = ds.Tables(RS).Rows(index)("支払条件")
-                DgvCymnhd.Rows(index).Cells(20).Value = ds.Tables(RS).Rows(index)("営業担当者")
-                DgvCymnhd.Rows(index).Cells(21).Value = ds.Tables(RS).Rows(index)("入力担当者")
-                DgvCymnhd.Rows(index).Cells(22).Value = ds.Tables(RS).Rows(index)("備考")
-                DgvCymnhd.Rows(index).Cells(23).Value = ds.Tables(RS).Rows(index)("登録日")
-            Next
-
-        Catch ue As UsrDefException
-            ue.dspMsg()
-            Throw ue
-        Catch ex As Exception
-            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", UtilClass.getErrDetail(ex)))
-        End Try
+        If OrderStatus = "SALES" Then
+            BtnSales.Visible = True
+            BtnSales.Location = New Point(997, 677)
+        ElseIf OrderStatus = "GOODS_ISSUE" Then
+            BtnReceipt.Visible = True
+            BtnReceipt.Location = New Point(997, 677)
+        ElseIf OrderStatus = "EDIT" Then
+            BtnOrderEdit.Visible = True
+            BtnOrderEdit.Location = New Point(997, 677)
+        ElseIf OrderStatus = "VIEW" Then
+            BtnOrderView.Visible = True
+            BtnOrderView.Location = New Point(997, 677)
+        ElseIf OrderStatus = "CANCEL" Then
+            BtnOrderCancel.Visible = True
+            BtnOrderCancel.Location = New Point(997, 677)
+        ElseIf OrderStatus = "CLONE" Then
+            BtnOrderClone.Visible = True
+            BtnOrderClone.Location = New Point(997, 677)
+        End If
+        Dim Status As String = "EXCLUSION"
+        OrderListLoad(Status)
     End Sub
 
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
@@ -690,9 +830,9 @@ Public Class OrderList
         RowIdx = Me.DgvCymnhd.CurrentCell.RowIndex
         Dim No As String = DgvCymnhd.Rows(RowIdx).Cells(0).Value
         Dim Suffix As String = DgvCymnhd.Rows(RowIdx).Cells(1).Value
-
+        Dim Status As String = "EDIT"
         Dim openForm As Form = Nothing
-        openForm = New Order(_msgHd, _db, _langHd, No, Suffix)   '処理選択
+        openForm = New Order(_msgHd, _db, _langHd, Me, No, Suffix, Status)   '処理選択
         openForm.Show(Me)
     End Sub
 
@@ -704,11 +844,11 @@ Public Class OrderList
         Dim Status As String = "VIEW"
 
         Dim openForm As Form = Nothing
-        openForm = New Order(_msgHd, _db, _langHd, No, Suffix, Status)   '処理選択
+        openForm = New Order(_msgHd, _db, _langHd, Me, No, Suffix, Status)   '処理選択
         openForm.Show(Me)
     End Sub
 
-    Private Sub BtnOrder_Click(sender As Object, e As EventArgs) Handles BtnOrder.Click
+    Private Sub BtnOrder_Click(sender As Object, e As EventArgs) Handles BtnSales.Click
         Dim RowIdx As Integer
         RowIdx = Me.DgvCymnhd.CurrentCell.RowIndex
         Dim No As String = DgvCymnhd.Rows(RowIdx).Cells(0).Value
@@ -716,5 +856,148 @@ Public Class OrderList
         Dim openForm As Form = Nothing
         openForm = New OrderManagement(_msgHd, _db, _langHd, No, Suffix)   '処理選択
         openForm.Show(Me)
+    End Sub
+
+    Private Sub BtnReceipt_Click(sender As Object, e As EventArgs) Handles BtnReceipt.Click
+        Dim RowIdx As Integer
+        RowIdx = Me.DgvCymnhd.CurrentCell.RowIndex
+        Dim No As String = DgvCymnhd.Rows(RowIdx).Cells(0).Value
+        Dim Suffix As String = DgvCymnhd.Rows(RowIdx).Cells(1).Value
+        Dim openForm As Form = Nothing
+        openForm = New GoodsIssue(_msgHd, _db, _langHd, No, Suffix)   '処理選択
+        openForm.Show(Me)
+    End Sub
+
+    Private Sub BtnOrderCancel_Click(sender As Object, e As EventArgs) Handles BtnOrderCancel.Click
+        Dim dtNow As DateTime = DateTime.Now
+        Dim Sql1 As String = ""
+        Sql1 = ""
+        Sql1 += "UPDATE "
+        Sql1 += "Public."
+        Sql1 += "t10_cymnhd "
+        Sql1 += "SET "
+
+        Sql1 += "取消区分"
+        Sql1 += " = '"
+        Sql1 += "1"
+        Sql1 += "', "
+        Sql1 += "取消日"
+        Sql1 += " = '"
+        Sql1 += dtNow
+        Sql1 += "', "
+        Sql1 += "更新日"
+        Sql1 += " = '"
+        Sql1 += dtNow
+        Sql1 += "', "
+        Sql1 += "更新者"
+        Sql1 += " = '"
+        Sql1 += frmC01F10_Login.loginValue.TantoNM
+        Sql1 += " ' "
+
+        Sql1 += "WHERE"
+        Sql1 += " 会社コード"
+        Sql1 += "='"
+        Sql1 += frmC01F10_Login.loginValue.BumonNM
+        Sql1 += "'"
+        Sql1 += " AND"
+        Sql1 += " 受注番号"
+        Sql1 += "='"
+        Sql1 += DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号").Value
+        Sql1 += "' "
+        Sql1 += " AND"
+        Sql1 += " 受注番号枝番"
+        Sql1 += "='"
+        Sql1 += DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号枝番").Value
+        Sql1 += "' "
+        Sql1 += "RETURNING 会社コード"
+        Sql1 += ", "
+        Sql1 += "受注番号"
+        Sql1 += ", "
+        Sql1 += "受注番号枝番"
+        Sql1 += ", "
+        Sql1 += "見積番号"
+        Sql1 += ", "
+        Sql1 += "見積番号枝番"
+        Sql1 += ", "
+        Sql1 += "得意先コード"
+        Sql1 += ", "
+        Sql1 += "得意先名"
+        Sql1 += ", "
+        Sql1 += "得意先郵便番号"
+        Sql1 += ", "
+        Sql1 += "得意先住所"
+        Sql1 += ", "
+        Sql1 += "得意先電話番号"
+        Sql1 += ", "
+        Sql1 += "得意先ＦＡＸ"
+        Sql1 += ", "
+        Sql1 += "得意先担当者役職"
+        Sql1 += ", "
+        Sql1 += "得意先担当者名"
+        Sql1 += ", "
+        Sql1 += "見積日"
+        Sql1 += ", "
+        Sql1 += "見積有効期限"
+        Sql1 += ", "
+        Sql1 += "支払条件"
+        Sql1 += ", "
+        Sql1 += "見積金額"
+        Sql1 += ", "
+        Sql1 += "仕入金額"
+        Sql1 += ", "
+        Sql1 += "粗利額"
+        Sql1 += ", "
+        Sql1 += "営業担当者"
+        Sql1 += ", "
+        Sql1 += "入力担当者"
+        Sql1 += ", "
+        Sql1 += "備考"
+        Sql1 += ", "
+        Sql1 += "ＶＡＴ"
+        Sql1 += ", "
+        Sql1 += "受注日"
+        Sql1 += ", "
+        Sql1 += "登録日"
+        Sql1 += ", "
+        Sql1 += "更新日"
+        Sql1 += ", "
+        Sql1 += "更新者"
+
+        _db.executeDB(Sql1)
+        DgvCymnhd.Rows.Clear()
+        DgvCymnhd.Columns.Clear()
+        Dim Status As String = "EXCLUSION"
+        OrderListLoad(Status)
+    End Sub
+
+    Private Sub ChkCancelData_CheckedChanged(sender As Object, e As EventArgs) Handles ChkCancelData.CheckedChanged
+        DgvCymnhd.Rows.Clear()
+        DgvCymnhd.Columns.Clear()
+
+        If ChkCancelData.Checked = False Then
+            Dim Status As String = "EXCLUSION"
+            OrderListLoad(Status)
+        Else
+            OrderListLoad()
+        End If
+    End Sub
+
+    Private Sub BtnOrderClone_Click(sender As Object, e As EventArgs) Handles BtnOrderClone.Click
+        Dim RowIdx As Integer
+        RowIdx = Me.DgvCymnhd.CurrentCell.RowIndex
+        Dim No As String = DgvCymnhd.Rows(RowIdx).Cells(0).Value
+        Dim Suffix As String = DgvCymnhd.Rows(RowIdx).Cells(1).Value
+        Dim Status As String = "CLONE"
+        Dim openForm As Form = Nothing
+        openForm = New Order(_msgHd, _db, _langHd, Me, No, Suffix, Status)   '処理選択
+        Me.Enabled = False
+        Me.Hide()
+        openForm.ShowDialog(Me)
+
+        DgvCymnhd.Rows.Clear()
+        DgvCymnhd.Columns.Clear()
+
+        Dim ListStatus As String = "EXCLUSION"
+        OrderListLoad(ListStatus)
     End Sub
 End Class
