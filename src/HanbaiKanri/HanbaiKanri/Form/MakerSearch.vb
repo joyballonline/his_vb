@@ -38,6 +38,7 @@ Public Class MakerSearch
     Private Maker As String
     Private Item As String
     Private Model As String
+    Private _status As String
     '-------------------------------------------------------------------------------
     'デフォルトコンストラクタ（隠蔽）
     '-------------------------------------------------------------------------------
@@ -56,7 +57,8 @@ Public Class MakerSearch
                    ByRef prmRefColIdx As Integer,
                    ByRef prmRefMaker As String,
                    ByRef prmRefItem As String,
-                   ByRef prmRefModel As String)
+                   ByRef prmRefModel As String,
+                   Optional ByRef prmRefStatus As String = "")
         Call Me.New()
 
         _init = False
@@ -71,6 +73,7 @@ Public Class MakerSearch
         Maker = prmRefMaker
         Item = prmRefItem
         Model = prmRefModel
+        _status = prmRefStatus
         '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
         StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
         Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
@@ -247,13 +250,26 @@ Public Class MakerSearch
     End Sub
 
     Private Sub BtnSelectMaker_Click(sender As Object, e As EventArgs) Handles BtnSelect.Click
-        Dim frm As Quote = CType(Me.Owner, Quote)
-        If LbMaker.SelectedIndex > -1 Then
-            frm.DgvItemList.Rows(RowIdx).Cells(2).Value = LbMaker.SelectedItem
-            If LbItem.SelectedIndex > -1 Then
-                frm.DgvItemList.Rows(RowIdx).Cells(3).Value = LbItem.SelectedItem
-                If LbModel.SelectedIndex > -1 Then
-                    frm.DgvItemList.Rows(RowIdx).Cells(4).Value = LbModel.SelectedItem
+        If _status = "ADD" Then
+            Dim frm As OrderingAdd = CType(Me.Owner, OrderingAdd)
+            If LbMaker.SelectedIndex > -1 Then
+                frm.DgvItemList.Rows(RowIdx).Cells(2).Value = LbMaker.SelectedItem
+                If LbItem.SelectedIndex > -1 Then
+                    frm.DgvItemList.Rows(RowIdx).Cells(3).Value = LbItem.SelectedItem
+                    If LbModel.SelectedIndex > -1 Then
+                        frm.DgvItemList.Rows(RowIdx).Cells(4).Value = LbModel.SelectedItem
+                    End If
+                End If
+            End If
+        Else
+            Dim frm As Quote = CType(Me.Owner, Quote)
+            If LbMaker.SelectedIndex > -1 Then
+                frm.DgvItemList.Rows(RowIdx).Cells(2).Value = LbMaker.SelectedItem
+                If LbItem.SelectedIndex > -1 Then
+                    frm.DgvItemList.Rows(RowIdx).Cells(3).Value = LbItem.SelectedItem
+                    If LbModel.SelectedIndex > -1 Then
+                        frm.DgvItemList.Rows(RowIdx).Cells(4).Value = LbModel.SelectedItem
+                    End If
                 End If
             End If
         End If

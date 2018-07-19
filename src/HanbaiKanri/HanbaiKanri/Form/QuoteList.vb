@@ -887,6 +887,12 @@ Public Class QuoteList
             Sql += "public"
             Sql += "."
             Sql += "t01_mithd"
+            Sql += " WHERE "
+            Sql += "取消区分"
+            Sql += " =  "
+            Sql += "'"
+            Sql += "0"
+            Sql += "'"
 
             Dim reccnt As Integer = 0
             ds = _db.selectDB(Sql, RS, reccnt)
@@ -959,6 +965,12 @@ Public Class QuoteList
             Sql += " >=  "
             Sql += "'"
             Sql += dtToday
+            Sql += "'"
+            Sql += " AND "
+            Sql += "取消区分"
+            Sql += " =  "
+            Sql += "'"
+            Sql += "0"
             Sql += "'"
 
             Dim reccnt As Integer = 0

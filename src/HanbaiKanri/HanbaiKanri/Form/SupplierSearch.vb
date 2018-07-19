@@ -2,6 +2,7 @@
 
 Imports UtilMDL
 Imports UtilMDL.MSG
+Imports UtilMDL.LANG
 Imports UtilMDL.DB
 Imports UtilMDL.DataGridView
 Imports UtilMDL.FileDirectory
@@ -31,9 +32,11 @@ Public Class SupplierSearch
     Private _msgHd As UtilMsgHandler
     Private _db As UtilDBIf
     Private _parentForm As Form
+    Private _langHd As UtilLangHandler
     'Private _gh As UtilDataGridViewHandler
     Private _init As Boolean                             '初期処理済フラグ
     Private RowIdx As Integer
+    Private _status As String
 
     '-------------------------------------------------------------------------------
     'デフォルトコンストラクタ（隠蔽）
@@ -48,8 +51,10 @@ Public Class SupplierSearch
     '-------------------------------------------------------------------------------
     Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler,
                    ByRef prmRefDbHd As UtilDBIf,
+                   ByRef prmRefDbLang As UtilLangHandler,
                    ByRef prmRefRowIdx As Integer,
-                   ByRef prmRefForm As Form)
+                   ByRef prmRefForm As Form,
+                   Optional ByRef prmRefStatus As String = "")
         Call Me.New()
 
         _init = False
@@ -57,8 +62,10 @@ Public Class SupplierSearch
         '初期処理
         _msgHd = prmRefMsgHd                                                'MSGハンドラの設定
         _db = prmRefDbHd                                                    'DBハンドラの設定
-        RowIdx = RowIdx
+        RowIdx = prmRefRowIdx
+        _status = prmRefStatus
         _parentForm = prmRefForm
+        _langHd = prmRefDbLang
         '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
         StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
         Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
@@ -91,7 +98,8 @@ Public Class SupplierSearch
             Sql += "口座番号, "
             Sql += "口座名義, "
             Sql += "更新者, "
-            Sql += "更新日 "
+            Sql += "更新日, "
+            Sql += "担当者役職 "
             Sql += "FROM "
             Sql += "public"
             Sql += "."
@@ -123,6 +131,7 @@ Public Class SupplierSearch
                 Dgv_Supplier.Rows(index).Cells(18).Value = ds.Tables(RS).Rows(index)(18)      '備考
                 Dgv_Supplier.Rows(index).Cells(19).Value = ds.Tables(RS).Rows(index)(19)      '無効フラグ
                 Dgv_Supplier.Rows(index).Cells(20).Value = ds.Tables(RS).Rows(index)(20)      '更新者
+                Dgv_Supplier.Rows(index).Cells(21).Value = ds.Tables(RS).Rows(index)(21)      '更新者
             Next
 
         Catch ue As UsrDefException
@@ -135,30 +144,32 @@ Public Class SupplierSearch
     End Sub
 
     Private Sub btnSupplierSelect_Click(sender As Object, e As EventArgs) Handles btnSupplierSelect.Click
-        Try
-            'メニュー選択処理
-            Dim frm As Quote = CType(Me.Owner, Quote)
-            Dim idx As Integer
 
-            '一覧選択行インデックスの取得
-            For Each c As DataGridViewRow In Dgv_Supplier.SelectedRows
-                idx = c.Index
-                Exit For
-            Next c
+        If _status = "ADD" Then
+            Dim frm As OrderingAdd = CType(Me.Owner, OrderingAdd)
+            Dim idx As Integer = Dgv_Supplier.CurrentCell.RowIndex
+
+            frm.TxtSupplierCode.Text = Dgv_Supplier.Rows(idx).Cells("仕入先コード").Value
+            frm.TxtSupplierName.Text = Dgv_Supplier.Rows(idx).Cells("仕入先名").Value
+            frm.TxtPostalCode.Text = Dgv_Supplier.Rows(idx).Cells("郵便番号").Value
+            frm.TxtAddress1.Text = Dgv_Supplier.Rows(idx).Cells("住所１").Value
+            frm.TxtAddress2.Text = Dgv_Supplier.Rows(idx).Cells("住所２").Value
+            frm.TxtAddress3.Text = Dgv_Supplier.Rows(idx).Cells("住所３").Value
+            frm.TxtTel.Text = Dgv_Supplier.Rows(idx).Cells("電話番号").Value
+            frm.TxtFax.Text = Dgv_Supplier.Rows(idx).Cells("FAX番号").Value
+            frm.TxtPerson.Text = Dgv_Supplier.Rows(idx).Cells("担当者名").Value
+            frm.TxtPosition.Text = Dgv_Supplier.Rows(idx).Cells("担当者役職").Value
+        Else
+            Dim frm As Quote = CType(Me.Owner, Quote)
+            Dim idx As Integer = Dgv_Supplier.CurrentCell.RowIndex
 
             frm.DgvItemList.Rows(RowIdx).Cells(7).Value = Dgv_Supplier.Rows(idx).Cells(2).Value
             frm.DgvItemList.Rows(RowIdx).Cells(9).Value = Dgv_Supplier.Rows(idx).Cells(12).Value
+        End If
 
-            _parentForm.Enabled = True
-            _parentForm.Show()
-            Me.Dispose()
-
-        Catch ue As UsrDefException
-            ue.dspMsg()
-        Catch ex As Exception
-            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", UtilClass.getErrDetail(ex)))
-        End Try
+        _parentForm.Enabled = True
+        _parentForm.Show()
+        Me.Dispose()
     End Sub
 
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
