@@ -7,6 +7,8 @@ Imports UtilMDL.DB
 Imports UtilMDL.DataGridView
 Imports UtilMDL.FileDirectory
 Imports UtilMDL.xls
+Imports Microsoft.Office.Interop
+Imports System.Runtime.InteropServices
 
 
 Public Class Ordering
@@ -808,5 +810,169 @@ Public Class Ordering
             _db.executeDB(Sql1)
         End If
         Me.Close()
+    End Sub
+
+    Private Sub BtnPurchase_Click(sender As Object, e As EventArgs) Handles BtnPurchase.Click
+        Dim reccnt As Integer = 0
+        Dim Sql1 As String = ""
+        Sql1 += "SELECT"
+        Sql1 += " * "
+        Sql1 += "FROM "
+        Sql1 += "public"
+        Sql1 += "."
+        Sql1 += "t20_hattyu"
+        Sql1 += " WHERE "
+        Sql1 += "発注番号"
+        Sql1 += " ILIKE "
+        Sql1 += "'"
+        Sql1 += PurchaseNo.ToString
+        Sql1 += "'"
+        Sql1 += " AND "
+        Sql1 += "発注番号枝番"
+        Sql1 += " ILIKE "
+        Sql1 += "'"
+        Sql1 += PurchaseSuffix.ToString
+        Sql1 += "'"
+        Dim ds1 = _db.selectDB(Sql1, RS, reccnt)
+
+        Dim Sql2 As String = ""
+        Sql2 += "SELECT"
+        Sql2 += " * "
+        Sql2 += "FROM "
+        Sql2 += "public"
+        Sql2 += "."
+        Sql2 += "t21_hattyu"
+        Sql2 += " WHERE "
+        Sql2 += "発注番号"
+        Sql2 += " ILIKE "
+        Sql2 += "'"
+        Sql2 += PurchaseNo.ToString
+        Sql2 += "'"
+        Sql2 += " AND "
+        Sql2 += "発注番号枝番"
+        Sql2 += " ILIKE "
+        Sql2 += "'"
+        Sql2 += PurchaseSuffix.ToString
+        Sql2 += "'"
+        Dim ds2 = _db.selectDB(Sql2, RS, reccnt)
+
+
+        '定義
+        Dim app As Excel.Application = Nothing
+        Dim book As Excel.Workbook = Nothing
+        Dim sheet As Excel.Worksheet = Nothing
+
+
+
+        Try
+            '雛形パス
+            Dim sHinaPath As String = ""
+            sHinaPath = StartUp._iniVal.BaseXlsPath
+
+            '雛形ファイル名
+            Dim sHinaFile As String = ""
+            sHinaFile = sHinaPath & "\" & "PurchaseOrder.xlsx"
+
+            '出力先パス
+            Dim sOutPath As String = ""
+            sOutPath = StartUp._iniVal.OutXlsPath
+
+            '出力ファイル名
+            Dim sOutFile As String = ""
+            sOutFile = sOutPath & "\" & ds1.Tables(RS).Rows(0)("発注番号") & "-" & ds1.Tables(RS).Rows(0)("発注番号枝番") & ".xlsx"
+
+
+
+            app = New Excel.Application()
+            book = app.Workbooks.Add(sHinaFile)  'テンプレート
+            sheet = CType(book.Worksheets(1), Excel.Worksheet)
+
+            sheet.Range("C8").Value = ds1.Tables(RS).Rows(0)("仕入先名") & vbLf & ds1.Tables(RS).Rows(0)("仕入先郵便番号") & vbLf & ds1.Tables(RS).Rows(0)("仕入先住所")
+            sheet.Range("C14").Value = ds1.Tables(RS).Rows(0)("仕入先担当者役職") & " " & ds1.Tables(RS).Rows(0)("仕入先担当者")
+            sheet.Range("A15").Value = "Telp." & ds1.Tables(RS).Rows(0)("仕入先電話番号") & "　Fax." & ds1.Tables(RS).Rows(0)("仕入先ＦＡＸ")
+            sheet.Range("T8").Value = ds1.Tables(RS).Rows(0)("発注番号") & "-" & ds1.Tables(RS).Rows(0)("発注番号枝番")
+            sheet.Range("T9").Value = ds1.Tables(RS).Rows(0)("発注日")
+            sheet.Range("T12").Value = ds1.Tables(RS).Rows(0)("得意先名")
+            sheet.Range("T13").Value = ds1.Tables(RS).Rows(0)("受注番号") & "-" & ds1.Tables(RS).Rows(0)("受注番号枝番")
+            sheet.Range("T14").Value = ds1.Tables(RS).Rows(0)("支払条件")
+
+            sheet.Range("H26").Value = ds1.Tables(RS).Rows(0)("仕入金額")
+            sheet.Range("H27").Value = ds1.Tables(RS).Rows(0)("備考")
+
+            sheet.Range("A34").Value = ds1.Tables(RS).Rows(0)("営業担当者")
+            sheet.Range("A35").Value = ds1.Tables(RS).Rows(0)("入力担当者")
+
+
+            Dim rowCnt As Integer = 0
+            Dim lstRow As Integer = 20
+            Dim addRowCnt As Integer = 0
+            Dim currentCnt As Integer = 19
+            Dim num As Integer = 1
+
+            rowCnt = ds2.Tables(RS).Rows.Count - 1
+            'rowCnt = 10
+
+            Dim cellPos As String = lstRow & ":" & lstRow
+
+            If rowCnt > 1 Then
+                For addRow As Integer = 0 To rowCnt
+                    Dim R As Object
+                    cellPos = lstRow - 2 & ":" & lstRow - 2
+                    R = sheet.Range(cellPos)
+                    R.Copy()
+                    R.Insert()
+                    If Marshal.IsComObject(R) Then
+                        Marshal.ReleaseComObject(R)
+                    End If
+
+                    lstRow = lstRow + 1
+                Next
+            End If
+
+            Dim totalPrice As Integer = 0
+
+            For index As Integer = 0 To ds2.Tables(RS).Rows.Count - 1
+                Dim cell As String
+
+                cell = "A" & currentCnt
+                sheet.Range(cell).Value = num
+                cell = "C" & currentCnt
+                sheet.Range(cell).Value = ds2.Tables(RS).Rows(index)("メーカー") & "/" & ds2.Tables(RS).Rows(index)("品名") & "/" & ds2.Tables(RS).Rows(index)("型式")
+                cell = "L" & currentCnt
+                sheet.Range(cell).Value = ds2.Tables(RS).Rows(index)("発注数量") & " " & ds2.Tables(RS).Rows(index)("単位")
+                cell = "O" & currentCnt
+                sheet.Range(cell).Value = ds2.Tables(RS).Rows(index)("備考")
+                cell = "R" & currentCnt
+                sheet.Range(cell).Value = ds2.Tables(RS).Rows(index)("仕入単価")
+                cell = "V" & currentCnt
+                sheet.Range(cell).Value = ds2.Tables(RS).Rows(index)("仕入金額")
+
+                totalPrice = totalPrice + ds2.Tables(RS).Rows(index)("仕入金額")
+
+                sheet.Rows(currentCnt & ":" & currentCnt).AutoFit
+
+                currentCnt = currentCnt + 1
+                num = num + 1
+            Next
+
+
+            sheet.Range("W" & lstRow + 2).Value = totalPrice
+            sheet.Range("W" & lstRow + 3).Value = totalPrice * 10 * 0.01
+            sheet.Range("W" & lstRow + 4).Value = totalPrice * 10 * 0.01 + totalPrice
+
+            book.SaveAs(sOutFile)
+
+            _msgHd.dspMSG("CreateExcel")
+
+        Catch ex As Exception
+            Throw ex
+
+        Finally
+            app.Quit()
+            Marshal.ReleaseComObject(sheet)
+            Marshal.ReleaseComObject(book)
+            Marshal.ReleaseComObject(app)
+
+        End Try
     End Sub
 End Class
