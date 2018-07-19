@@ -49,6 +49,7 @@ Partial Class GoodsIssue
         Me.LblPurchaseNo = New System.Windows.Forms.Label()
         Me.TxtOrderNo = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.BtnDeliveryNote = New System.Windows.Forms.Button()
         CType(Me.DgvAdd, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvHistory, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvOrder, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -342,11 +343,22 @@ Partial Class GoodsIssue
         Me.Label1.Size = New System.Drawing.Size(0, 12)
         Me.Label1.TabIndex = 259
         '
+        'BtnDeliveryNote
+        '
+        Me.BtnDeliveryNote.Location = New System.Drawing.Point(831, 678)
+        Me.BtnDeliveryNote.Name = "BtnDeliveryNote"
+        Me.BtnDeliveryNote.Size = New System.Drawing.Size(165, 40)
+        Me.BtnDeliveryNote.TabIndex = 286
+        Me.BtnDeliveryNote.Text = "納品書・受領書発行"
+        Me.BtnDeliveryNote.UseVisualStyleBackColor = True
+        Me.BtnDeliveryNote.Visible = False
+        '
         'GoodsIssue
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1350, 729)
+        Me.Controls.Add(Me.BtnDeliveryNote)
         Me.Controls.Add(Me.TxtSuffixNo)
         Me.Controls.Add(Me.BtnRegist)
         Me.Controls.Add(Me.DtpGoodsIssueDate)
@@ -411,4 +423,5 @@ Partial Class GoodsIssue
     Friend WithEvents LblPurchaseNo As Label
     Friend WithEvents TxtOrderNo As TextBox
     Friend WithEvents Label1 As Label
+    Friend WithEvents BtnDeliveryNote As Button
 End Class

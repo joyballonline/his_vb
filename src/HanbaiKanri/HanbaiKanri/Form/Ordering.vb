@@ -270,6 +270,8 @@ Public Class Ordering
             TxtPurchaseRemark.Enabled = False
             DgvItemList.ReadOnly = True
             BtnRegistration.Visible = False
+            BtnPurchase.Visible = True
+            BtnPurchase.Location = New Point(1004, 677)
         End If
 
     End Sub

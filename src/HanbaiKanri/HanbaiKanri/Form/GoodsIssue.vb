@@ -100,6 +100,8 @@ Public Class GoodsIssue
             DgvHistory.Size = New Point(1326, 566)
 
             BtnRegist.Visible = False
+            BtnDeliveryNote.Visible = True
+            BtnDeliveryNote.Location = New Point(1002, 678)
         End If
         Dim Sql1 As String = ""
         Dim Sql2 As String = ""

@@ -429,8 +429,21 @@ Public Class Quote
             BtnDown.Visible = False
             BtnClone.Visible = False
             BtnInsert.Visible = False
-            BtnQuote.Visible = True
-            BtnQuote.Location = New Point(1004, 677)
+            Dim RequestFlg As Boolean = True
+            For i As Integer = 0 To DgvItemList.Rows.Count() - 1
+                If DgvItemList.Rows(i).Cells("仕入単価").Value = 0 Then
+                Else
+                    RequestFlg = False
+                End If
+            Next
+            If RequestFlg Then
+                BtnQuoteRequest.Visible = True
+                BtnQuoteRequest.Location = New Point(1004, 677)
+            Else
+                BtnQuote.Visible = True
+                BtnQuote.Location = New Point(1004, 677)
+            End If
+
         ElseIf Status Is "PRICE" Then
             LblMode.Text = "仕入単価入力モード"
             BtnRowsAdd.Visible = False
