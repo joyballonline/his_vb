@@ -214,6 +214,7 @@ Partial Class GoodsIssue
         Me.DgvHistory.ReadOnly = True
         Me.DgvHistory.RowHeadersVisible = False
         Me.DgvHistory.RowTemplate.Height = 21
+        Me.DgvHistory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvHistory.Size = New System.Drawing.Size(1326, 150)
         Me.DgvHistory.TabIndex = 271
         '
