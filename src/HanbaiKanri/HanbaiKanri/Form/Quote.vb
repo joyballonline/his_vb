@@ -1635,4 +1635,239 @@ Public Class Quote
 
         End Try
     End Sub
+
+    Private Sub BtnQuoteRequest_Click(sender As Object, e As EventArgs) Handles BtnQuoteRequest.Click
+        Dim createFlg = False
+
+        '見積基本情報
+        Dim Sql1 As String = ""
+        Sql1 += "SELECT "
+        Sql1 += "会社コード, "
+        Sql1 += "見積番号, "
+        Sql1 += "見積番号枝番, "
+        Sql1 += "見積日, "
+        Sql1 += "見積有効期限, "
+        Sql1 += "得意先コード, "
+        Sql1 += "得意先名, "
+        Sql1 += "得意先担当者名, "
+        Sql1 += "得意先担当者役職, "
+        Sql1 += "得意先郵便番号, "
+        Sql1 += "得意先住所, "
+        Sql1 += "得意先電話番号, "
+        Sql1 += "得意先ＦＡＸ, "
+        Sql1 += "営業担当者, "
+        Sql1 += "入力担当者, "
+        Sql1 += "支払条件, "
+        Sql1 += "備考, "
+        Sql1 += "登録日, "
+        Sql1 += "更新日, "
+        Sql1 += "更新者 "
+        Sql1 += "FROM "
+        Sql1 += "public"
+        Sql1 += "."
+        Sql1 += "t01_mithd"
+        Sql1 += " WHERE "
+        Sql1 += "見積番号"
+        Sql1 += " ILIKE "
+        Sql1 += "'%"
+        Sql1 += EditNo.ToString
+        Sql1 += "%'"
+        Sql1 += " AND "
+        Sql1 += "見積番号枝番"
+        Sql1 += " ILIKE "
+        Sql1 += "'%"
+        Sql1 += EditSuffix.ToString
+        Sql1 += "%'"
+
+        Dim reccnt As Integer = 0
+        Dim ds1 = _db.selectDB(Sql1, RS, reccnt)
+
+        Dim Sql2 As String = ""
+        Sql2 += "SELECT "
+        Sql2 += "見積番号枝番 "
+        Sql2 += "FROM "
+        Sql2 += "public"
+        Sql2 += "."
+        Sql2 += "t01_mithd"
+        Sql2 += " WHERE "
+        Sql2 += "見積番号"
+        Sql2 += " ILIKE "
+        Sql2 += "'%"
+        Sql2 += EditNo.ToString
+        Sql2 += "%'"
+
+
+        Dim ds2 = _db.selectDB(Sql2, RS, reccnt)
+        Dim SuffixMax As Integer = 0
+
+
+        CompanyCode = ds1.Tables(RS).Rows(0)(0)
+
+        Dim CmnData = ds1.Tables(RS).Rows(0)
+
+
+        '見積明細情報
+        Dim Sql3 As String = ""
+        Sql3 += "SELECT "
+        Sql3 += "仕入区分, "
+        Sql3 += "メーカー, "
+        Sql3 += "品名, "
+        Sql3 += "型式, "
+        Sql3 += "数量, "
+        Sql3 += "単位, "
+        Sql3 += "仕入先名称, "
+        Sql3 += "仕入単価, "
+        Sql3 += "間接費率, "
+        Sql3 += "間接費, "
+        Sql3 += "仕入金額, "
+        Sql3 += "売単価, "
+        Sql3 += "売上金額, "
+        Sql3 += "粗利額, "
+        Sql3 += "粗利率, "
+        Sql3 += "リードタイム, "
+        Sql3 += "備考, "
+        Sql3 += "登録日 "
+        Sql3 += "FROM "
+        Sql3 += "public"
+        Sql3 += "."
+        Sql3 += "t02_mitdt"
+        Sql3 += " WHERE "
+        Sql3 += "見積番号"
+        Sql3 += " ILIKE "
+        Sql3 += "'%"
+        Sql3 += EditNo.ToString
+        Sql3 += "%'"
+        Sql3 += " AND "
+        Sql3 += "見積番号枝番"
+        Sql3 += " ILIKE "
+        Sql3 += "'%"
+        Sql3 += EditSuffix.ToString
+        Sql3 += "%'"
+
+        Dim ds3 = _db.selectDB(Sql3, RS, reccnt)
+
+
+        Dim supplierlist As New List(Of String)(New String() {})
+        Dim supplierChkList As New List(Of Boolean)
+        For i As Integer = 0 To ds3.tables(RS).rows.count - 1
+            If supplierlist.Contains(ds3.tables(RS).rows(i)("仕入先名称")) = False Then
+                supplierlist.Add(ds3.tables(RS).rows(i)("仕入先名称"))
+                supplierChkList.Add(False)
+            End If
+        Next
+
+        Dim supplier
+
+        For i As Integer = 0 To supplierlist.Count - 1
+            supplier = supplierlist(i)
+            For j As Integer = 0 To ds3.tables(RS).rows.count - 1
+                If supplier Is ds3.tables(RS).rows(j)("仕入先名称") And ds3.tables(RS).rows(j)("仕入単価") <= 0 Then
+                    supplierChkList(i) = True
+                End If
+            Next
+        Next
+
+        For i As Integer = 0 To supplierlist.Count - 1
+
+            If supplierChkList(i) = True Then
+
+                '定義
+                Dim app As Excel.Application = Nothing
+                Dim book As Excel.Workbook = Nothing
+                Dim sheet As Excel.Worksheet = Nothing
+
+
+
+                Try
+                    '雛形パス
+                    Dim sHinaPath As String = ""
+                    sHinaPath = StartUp._iniVal.BaseXlsPath
+
+                    '雛形ファイル名
+                    Dim sHinaFile As String = ""
+                    sHinaFile = sHinaPath & "\" & "QuotationRequest.xlsx"
+
+                    '出力先パス
+                    Dim sOutPath As String = ""
+                    sOutPath = StartUp._iniVal.OutXlsPath
+
+                    '出力ファイル名
+                    Dim sOutFile As String = ""
+                    sOutFile = sOutPath & "\" & CmnData("見積番号") & "-" & CmnData("見積番号枝番") & "_Request_" & supplierlist(i) & ".xlsx"
+
+
+
+                    app = New Excel.Application()
+                    book = app.Workbooks.Add(sHinaFile)  'テンプレート
+                    sheet = CType(book.Worksheets(1), Excel.Worksheet)
+
+                    sheet.Range("AA2").Value = CmnData("見積番号") & "-" & CmnData("見積番号枝番")
+                    sheet.Range("AA3").Value = System.DateTime.Today
+                    sheet.Range("A12").Value = supplierlist(i)
+                    sheet.Range("V19").Value = CmnData("営業担当者")
+                    sheet.Range("V20").Value = CmnData("入力担当者")
+
+
+                    Dim rowCnt As Integer = 0
+                    Dim lstRow As Integer = 23
+                    'Dim addRowCnt As Integer = 0
+                    'Dim currentCnt As Integer = 20
+                    'Dim num As Integer = 1
+
+
+                    For j As Integer = 0 To ds3.tables(RS).rows.count - 1
+                        If supplierlist(i) Is ds3.tables(RS).rows(j)("仕入先名称") And ds3.tables(RS).rows(j)("仕入単価") <= 0 Then
+                            If rowCnt = 0 Then
+                                sheet.Range("A23").Value = ds3.tables(RS).rows(j)("メーカー") & vbLf & ds3.tables(RS).rows(j)("品名") & vbLf & ds3.tables(RS).rows(j)("型式")
+                                sheet.Range("B23").Value = ds3.tables(RS).rows(j)("数量") & " " & ds3.tables(RS).rows(j)("単位")
+                                sheet.Rows(lstRow & ":" & lstRow).AutoFit
+                            Else
+                                Dim cellPos As String = lstRow & ":" & lstRow
+                                Dim R As Object
+                                cellPos = lstRow & ":" & lstRow
+                                R = sheet.Range(cellPos)
+                                R.Copy()
+                                R.Insert()
+                                If Marshal.IsComObject(R) Then
+                                    Marshal.ReleaseComObject(R)
+                                End If
+
+                                lstRow = lstRow + 1
+
+                                sheet.Range("A" & lstRow).Value = ds3.tables(RS).rows(j)("メーカー") & vbLf & ds3.tables(RS).rows(j)("品名") & vbLf & ds3.tables(RS).rows(j)("型式")
+                                sheet.Range("B" & lstRow).Value = ds3.tables(RS).rows(j)("数量") & " " & ds3.tables(RS).rows(j)("単位")
+                                sheet.Rows(lstRow & ":" & lstRow).AutoFit
+
+                            End If
+
+
+
+                        End If
+                    Next
+
+                    book.SaveAs(sOutFile)
+
+                    '_msgHd.dspMSG("CreateExcel")
+                    createFlg = True
+
+                Catch ex As Exception
+                    Throw ex
+
+                Finally
+                    app.Quit()
+                    Marshal.ReleaseComObject(sheet)
+                    Marshal.ReleaseComObject(book)
+                    Marshal.ReleaseComObject(app)
+
+                End Try
+            End If
+
+            If (createFlg = True) Then
+                _msgHd.dspMSG("CreateExcel")
+            End If
+
+        Next
+
+    End Sub
+
 End Class
