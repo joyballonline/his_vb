@@ -896,7 +896,7 @@ Public Class frmC01F30_Menu
             Case CommonConst.MENU_H0510  '発注登録
 
                 Dim openForm As Form = Nothing
-                openForm = New OrderingList(_msgHd, _db, _langHd)
+                openForm = New OrderingAdd(_msgHd, _db, _langHd, Me)
                 openForm.Show()
                 Me.Hide()
             Case CommonConst.MENU_H0520  '発注編集

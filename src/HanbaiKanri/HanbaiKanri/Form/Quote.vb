@@ -651,9 +651,9 @@ Public Class Quote
      Handles DgvItemList.CellDoubleClick
 
         Dim ColIdx As Integer
-        ColIdx = Me.DgvItemList.CurrentCell.ColumnIndex
+        ColIdx = DgvItemList.CurrentCell.ColumnIndex
         Dim RowIdx As Integer
-        RowIdx = Me.DgvItemList.CurrentCell.RowIndex
+        RowIdx = DgvItemList.CurrentCell.RowIndex
 
         Dim Maker As String = DgvItemList.Rows(RowIdx).Cells(2).Value
         Dim Item As String = DgvItemList.Rows(RowIdx).Cells(3).Value
@@ -696,7 +696,7 @@ Public Class Quote
 
         If ColIdx = 7 Then
             Dim openForm As Form = Nothing
-            openForm = New SupplierSearch(_msgHd, _db, RowIdx, Me)
+            openForm = New SupplierSearch(_msgHd, _db, _langHd, RowIdx, Me)
             openForm.Show(Me)
             Me.Enabled = False
         End If

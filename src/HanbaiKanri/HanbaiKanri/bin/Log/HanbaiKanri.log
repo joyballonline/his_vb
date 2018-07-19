@@ -2016,32 +2016,31 @@ INSERT INTO Public.t30_urighd(会社コード, 売上番号, 売上番号枝番, 受注番号, 受注
    場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 \\VBOXSVR\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
    場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 \\VBOXSVR\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
 SELECT 仕入区分, メーカー, 品名, 型式, 数量, 単位, 仕入先名称, 仕入単価, 間接費率, 間接費, 仕入金額, 売単価, 売上金額, 粗利額, 粗利率, リードタイム, 備考, 登録日 FROM public.t02_mitdt WHERE 見積番号 ILIKE '%QT07190001%' AND 見積番号枝番 ILIKE '%2%'
-2018/07/19 22:48:00   ERR***** データ取得失敗：入力文字列の形式が正しくありません。列 粗利率 に <NaN> を格納できませんでした。 必要な型は Decimal です。
-   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 Z:\local\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
-   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 Z:\local\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+2018/07/19 23:01:47   ERR***** データ取得失敗：入力文字列の形式が正しくありません。列 粗利率 に <NaN> を格納できませんでした。 必要な型は Decimal です。
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 \\VBOXSVR\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 \\VBOXSVR\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
 SELECT 仕入区分, メーカー, 品名, 型式, 数量, 単位, 仕入先名称, 仕入単価, 間接費率, 間接費, 仕入金額, 売単価, 売上金額, 粗利額, 粗利率, リードタイム, 備考, 登録日 FROM public.t02_mitdt WHERE 見積番号 ILIKE '%QT07190001%' AND 見積番号枝番 ILIKE '%2%'
-2018/07/19 22:49:03   ERR***** データ取得失敗：入力文字列の形式が正しくありません。列 粗利率 に <NaN> を格納できませんでした。 必要な型は Decimal です。
-   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 Z:\local\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
-   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 Z:\local\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
-SELECT 仕入区分, メーカー, 品名, 型式, 数量, 単位, 仕入先名称, 仕入単価, 間接費率, 間接費, 仕入金額, 売単価, 売上金額, 粗利額, 粗利率, リードタイム, 備考, 登録日 FROM public.t02_mitdt WHERE 見積番号 ILIKE '%QT07190001%' AND 見積番号枝番 ILIKE '%2%'
-2018/07/19 22:53:56   ERR***** データ取得失敗：入力文字列の形式が正しくありません。列 粗利率 に <NaN> を格納できませんでした。 必要な型は Decimal です。
-   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 Z:\local\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
-   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 Z:\local\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
-SELECT 仕入区分, メーカー, 品名, 型式, 数量, 単位, 仕入先名称, 仕入単価, 間接費率, 間接費, 仕入金額, 売単価, 売上金額, 粗利額, 粗利率, リードタイム, 備考, 登録日 FROM public.t02_mitdt WHERE 見積番号 ILIKE '%QT07190001%' AND 見積番号枝番 ILIKE '%2%'
-2018/07/19 22:55:42   ERR***** データ取得失敗：入力文字列の形式が正しくありません。列 粗利率 に <NaN> を格納できませんでした。 必要な型は Decimal です。
-   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 Z:\local\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
-   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 Z:\local\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
-SELECT 仕入区分, メーカー, 品名, 型式, 数量, 単位, 仕入先名称, 仕入単価, 間接費率, 間接費, 仕入金額, 売単価, 売上金額, 粗利額, 粗利率, リードタイム, 備考, 登録日 FROM public.t02_mitdt WHERE 見積番号 ILIKE '%QT07190001%' AND 見積番号枝番 ILIKE '%2%'
-2018/07/19 22:58:02   ERR***** データ取得失敗：入力文字列の形式が正しくありません。列 粗利率 に <NaN> を格納できませんでした。 必要な型は Decimal です。
-   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 Z:\local\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
-   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 Z:\local\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
-SELECT  * FROM public.t02_mitdt
-2018/07/19 23:08:31   ERR***** データ取得失敗：入力文字列の形式が正しくありません。列 粗利率 に <NaN> を格納できませんでした。 必要な型は Decimal です。
-   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 Z:\local\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
-   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 Z:\local\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
-SELECT 仕入区分, メーカー, 品名, 型式, 数量, 単位, 仕入先名称, 仕入単価, 間接費率, 間接費, 仕入金額, 売単価, 売上金額, 粗利額, 粗利率, リードタイム, 備考, 登録日 FROM public.t02_mitdt WHERE 見積番号 ILIKE '%QT07190001%' AND 見積番号枝番 ILIKE '%2%'
-2018/07/20 0:10:14   ERR***** データベース接続失敗
-データベースの接続に失敗しました。
-	　 Failed to establish a connection to '13.230.190.253'.
-   場所 UtilMDL.DB.UtilPostgresHandler..ctor(String prmSvAdr, String prmPortNo, String prmDbNm, String prmUserId, String prmPswd, Int16 prmTimeout) 場所 Z:\local\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 77
-   場所 UtilMDL.DB.UtilPostgresDebugger..ctor(String prmSvAdr, String prmPortNo, String prmDbNm, String prmUserId, String prmPswd, String prmFileNm, Boolean prmDebugFlg, Boolean prmConsoleWrite, Int16 prmTimeout) 場所 Z:\local\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 91
+2018/07/20 1:13:01   ERR***** データ取得失敗：ERROR: 42601: syntax error at or near "FROM"
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 \\VBOXSVR\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 \\VBOXSVR\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT 会社コード, 仕入先コード, 仕入先名, 仕入先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 既定間接費率, メモ, 銀行コード, 支店コード, 預金種目, 口座番号, 口座名義, 更新者, 更新日, 担当者役職, FROM public.m11_supplier
+2018/07/20 1:16:20   ERR***** データ更新失敗：ERROR: 42601: syntax error at or near "'test'"
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 \\VBOXSVR\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 \\VBOXSVR\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO Public.t20_hattyu(会社コード, 発注番号, 発注番号枝番, 仕入先コード, 仕入先名, 仕入先郵便番号, 仕入先住所, 仕入先電話番号, 仕入先ＦＡＸ, 仕入先担当者役職, 仕入先担当者名, 支払条件, 仕入金額, 営業担当者, 入力担当者, 備考, 発注日, 登録日, 更新日, 更新者, 取消区分) VALUES('ZENBI', 'PO07200007', '1', 'sup002', 'supplier02', '1234567', 'tes' 'test' 'test', '0000000000', '0000000000', '役職', 'test', 'testtest', '', '', '', 'testtest', '2018/07/20', '2018/07/20', '2018/07/20 1:16:19', 'zenbi01', '0 ')RETURNING 会社コード, 発注番号, 発注番号枝番, 仕入先コード, 仕入先名, 仕入先郵便番号, 仕入先住所, 仕入先電話番号, 仕入先ＦＡＸ, 仕入先担当者役職, 仕入先担当者名, 支払条件, 仕入金額, 営業担当者, 入力担当者, 備考, 発注日, 登録日, 更新日, 更新者, 取消区分
+2018/07/20 1:18:06   ERR***** データ更新失敗：ERROR: 22P02: invalid input syntax for type numeric: ""
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 \\VBOXSVR\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 \\VBOXSVR\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO Public.t20_hattyu(会社コード, 発注番号, 発注番号枝番, 仕入先コード, 仕入先名, 仕入先郵便番号, 仕入先住所, 仕入先電話番号, 仕入先ＦＡＸ, 仕入先担当者役職, 仕入先担当者名, 支払条件, 仕入金額, 営業担当者, 入力担当者, 備考, 発注日, 登録日, 更新日, 更新者, 取消区分) VALUES('ZENBI', 'PO07200007', '1', 'sup002', 'supplier02', '1234567', 'tes test test', '0000000000', '0000000000', '役職', 'test', '', '', '', '', '', '2018/07/20', '2018/07/20', '2018/07/20 1:18:05', 'zenbi01', '0 ')RETURNING 会社コード, 発注番号, 発注番号枝番, 仕入先コード, 仕入先名, 仕入先郵便番号, 仕入先住所, 仕入先電話番号, 仕入先ＦＡＸ, 仕入先担当者役職, 仕入先担当者名, 支払条件, 仕入金額, 営業担当者, 入力担当者, 備考, 発注日, 登録日, 更新日, 更新者, 取消区分
+2018/07/20 1:23:58   ERR***** データ更新失敗：ERROR: 23502: null value in column "受注番号" violates not-null constraint
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 \\VBOXSVR\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 \\VBOXSVR\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO Public.t20_hattyu(会社コード, 発注番号, 発注番号枝番, 仕入先コード, 仕入先名, 仕入先郵便番号, 仕入先住所, 仕入先電話番号, 仕入先ＦＡＸ, 仕入先担当者役職, 仕入先担当者名, 支払条件, 仕入金額, 営業担当者, 入力担当者, 備考, 発注日, 登録日, 更新日, 更新者, 取消区分) VALUES('ZENBI', 'PO07200007', '1', 'sup002', 'supplier02', '1234567', 'tes test test', '0000000000', '0000000000', '役職', 'test', '', '0', '', '', '', '2018/07/20', '2018/07/20', '2018/07/20 1:23:58', 'zenbi01', '0 ')RETURNING 会社コード, 発注番号, 発注番号枝番, 仕入先コード, 仕入先名, 仕入先郵便番号, 仕入先住所, 仕入先電話番号, 仕入先ＦＡＸ, 仕入先担当者役職, 仕入先担当者名, 支払条件, 仕入金額, 営業担当者, 入力担当者, 備考, 発注日, 登録日, 更新日, 更新者, 取消区分
+2018/07/20 1:49:23   ERR***** データ更新失敗：ERROR: 23505: duplicate key value violates unique constraint "pk_t20_hattyu"
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 \\VBOXSVR\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 \\VBOXSVR\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO Public.t20_hattyu(会社コード, 発注番号, 発注番号枝番, 仕入先コード, 仕入先名, 仕入先郵便番号, 仕入先住所, 仕入先電話番号, 仕入先ＦＡＸ, 仕入先担当者役職, 仕入先担当者名, 支払条件, 仕入金額, 営業担当者, 入力担当者, 備考, 発注日, 登録日, 更新日, 更新者, 取消区分) VALUES('ZENBI', 'PO07200007', '1', 'sup002', 'supplier02', '1234567', 'tes test test', '0000000000', '0000000000', '役職', 'test', '', '20000', '', '', '', '2018/07/20', '2018/07/20', '2018/07/20 1:49:23', 'zenbi01', '0 ')RETURNING 会社コード, 発注番号, 発注番号枝番, 仕入先コード, 仕入先名, 仕入先郵便番号, 仕入先住所, 仕入先電話番号, 仕入先ＦＡＸ, 仕入先担当者役職, 仕入先担当者名, 支払条件, 仕入金額, 営業担当者, 入力担当者, 備考, 発注日, 登録日, 更新日, 更新者, 取消区分
+2018/07/20 2:06:14   ERR***** データ更新失敗：ERROR: 23505: duplicate key value violates unique constraint "pk_t20_hattyu"
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 \\VBOXSVR\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 \\VBOXSVR\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO Public.t20_hattyu(会社コード, 発注番号, 発注番号枝番, 仕入先コード, 仕入先名, 仕入先郵便番号, 仕入先住所, 仕入先電話番号, 仕入先ＦＡＸ, 仕入先担当者役職, 仕入先担当者名, 支払条件, 仕入金額, 営業担当者, 入力担当者, 備考, 発注日, 登録日, 更新日, 更新者, 取消区分) VALUES('ZENBI', 'PO07200007', '1', 'sup002', 'supplier02', '1234567', 'tes test test', '0000000000', '0000000000', '役職', 'test', '', '10000', '', '', '', '2018/07/20', '2018/07/20', '2018/07/20 2:06:14', 'zenbi01', '0 ')RETURNING 会社コード, 発注番号, 発注番号枝番, 仕入先コード, 仕入先名, 仕入先郵便番号, 仕入先住所, 仕入先電話番号, 仕入先ＦＡＸ, 仕入先担当者役職, 仕入先担当者名, 支払条件, 仕入金額, 営業担当者, 入力担当者, 備考, 発注日, 登録日, 更新日, 更新者, 取消区分

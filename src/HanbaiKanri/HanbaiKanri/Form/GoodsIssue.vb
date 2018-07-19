@@ -305,6 +305,7 @@ Public Class GoodsIssue
             TxtCount3.Text = DgvAdd.Rows.Count()
 
             TxtOrderNo.Text = ds1.Tables(RS).Rows(0)("受注番号")
+            TxtSuffixNo.Text = ds1.Tables(RS).Rows(0)("受注番号枝番")
             TxtOrderDate.Text = ds1.Tables(RS).Rows(0)("受注日")
             TxtCustomerCode.Text = ds1.Tables(RS).Rows(0)("得意先コード")
             TxtCustomerName.Text = ds1.Tables(RS).Rows(0)("得意先名")
@@ -1083,5 +1084,28 @@ Public Class GoodsIssue
             _db.executeDB(Sql9)
         End If
 
+    End Sub
+
+    Private Sub BtnDeliveryNote_Click(sender As Object, e As EventArgs) Handles BtnDeliveryNote.Click
+        Dim SelectedRow As Integer = DgvHistory.CurrentCell.RowIndex
+
+        Dim Sql1 As String = ""
+        Sql1 += "SELECT "
+        Sql1 += "* "
+        Sql1 += "FROM "
+        Sql1 += "public"
+        Sql1 += "."
+        Sql1 += "t45_shukodt"
+        Sql1 += " WHERE "
+        Sql1 += "出庫番号"
+        Sql1 += " ILIKE "
+        Sql1 += "'"
+        Sql1 += DgvHistory.Rows(SelectedRow).Cells("出庫番号").Value
+        Sql1 += "'"
+
+        Dim reccnt As Integer = 0
+        Dim ds1 As DataSet = _db.selectDB(Sql1, RS, reccnt)
+
+        'Dim test As String = ds1.Tables(RS).Rows(0)("")
     End Sub
 End Class

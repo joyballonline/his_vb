@@ -247,6 +247,12 @@
     <Compile Include="Form\Order.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form\OrderingAdd.Designer.vb">
+      <DependentUpon>OrderingAdd.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\OrderingAdd.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\OrderList.Designer.vb">
       <DependentUpon>OrderList.vb</DependentUpon>
     </Compile>
@@ -443,6 +449,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Order.resx">
       <DependentUpon>Order.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\OrderingAdd.resx">
+      <DependentUpon>OrderingAdd.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\OrderList.resx">
       <DependentUpon>OrderList.vb</DependentUpon>
