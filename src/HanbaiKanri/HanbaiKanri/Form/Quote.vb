@@ -154,7 +154,8 @@ Public Class Quote
             Sql1 += "備考, "
             Sql1 += "登録日, "
             Sql1 += "更新日, "
-            Sql1 += "更新者 "
+            Sql1 += "更新者, "
+            Sql1 += "ＶＡＴ "
             Sql1 += "FROM "
             Sql1 += "public"
             Sql1 += "."
@@ -273,6 +274,9 @@ Public Class Quote
             End If
             If ds1.Tables(RS).Rows(0)(16) IsNot DBNull.Value Then
                 TxtRemarks.Text = ds1.Tables(RS).Rows(0)(16)
+            End If
+            If ds1.Tables(RS).Rows(0)("ＶＡＴ") IsNot DBNull.Value Then
+                TxtVat.Text = ds1.Tables(RS).Rows(0)("ＶＡＴ")
             End If
 
             '見積明細情報

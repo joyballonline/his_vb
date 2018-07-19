@@ -24,20 +24,20 @@ Partial Class Receipt
     Private Sub InitializeComponent()
         Me.TxtSuffixNo = New System.Windows.Forms.TextBox()
         Me.BtnRegist = New System.Windows.Forms.Button()
-        Me.DtpPurchaseDate = New System.Windows.Forms.DateTimePicker()
-        Me.Label9 = New System.Windows.Forms.Label()
+        Me.DtpReceiptDate = New System.Windows.Forms.DateTimePicker()
+        Me.LblRemarks = New System.Windows.Forms.Label()
         Me.TxtRemarks = New System.Windows.Forms.TextBox()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label7 = New System.Windows.Forms.Label()
+        Me.LblReceiptDate = New System.Windows.Forms.Label()
+        Me.LblAdd = New System.Windows.Forms.Label()
+        Me.LblCount3 = New System.Windows.Forms.Label()
         Me.TxtCount3 = New System.Windows.Forms.TextBox()
         Me.DgvAdd = New System.Windows.Forms.DataGridView()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
+        Me.LblHistory = New System.Windows.Forms.Label()
+        Me.LblPurchase = New System.Windows.Forms.Label()
+        Me.LblCount2 = New System.Windows.Forms.Label()
         Me.TxtCount2 = New System.Windows.Forms.TextBox()
         Me.DgvHistory = New System.Windows.Forms.DataGridView()
-        Me.Label2 = New System.Windows.Forms.Label()
+        Me.LblCount1 = New System.Windows.Forms.Label()
         Me.TxtCount1 = New System.Windows.Forms.TextBox()
         Me.DgvPurchase = New System.Windows.Forms.DataGridView()
         Me.LblPurchaseDate = New System.Windows.Forms.Label()
@@ -73,30 +73,30 @@ Partial Class Receipt
         Me.BtnRegist.Text = "登録"
         Me.BtnRegist.UseVisualStyleBackColor = True
         '
-        'DtpPurchaseDate
+        'DtpReceiptDate
         '
-        Me.DtpPurchaseDate.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.DtpPurchaseDate.CustomFormat = "yyyy/MM/dd"
-        Me.DtpPurchaseDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.DtpPurchaseDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DtpPurchaseDate.Location = New System.Drawing.Point(292, 443)
-        Me.DtpPurchaseDate.Name = "DtpPurchaseDate"
-        Me.DtpPurchaseDate.Size = New System.Drawing.Size(148, 22)
-        Me.DtpPurchaseDate.TabIndex = 256
-        Me.DtpPurchaseDate.TabStop = False
-        Me.DtpPurchaseDate.Value = New Date(2018, 7, 16, 0, 0, 0, 0)
+        Me.DtpReceiptDate.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.DtpReceiptDate.CustomFormat = "yyyy/MM/dd"
+        Me.DtpReceiptDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.DtpReceiptDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.DtpReceiptDate.Location = New System.Drawing.Point(292, 443)
+        Me.DtpReceiptDate.Name = "DtpReceiptDate"
+        Me.DtpReceiptDate.Size = New System.Drawing.Size(148, 22)
+        Me.DtpReceiptDate.TabIndex = 256
+        Me.DtpReceiptDate.TabStop = False
+        Me.DtpReceiptDate.Value = New Date(2018, 7, 16, 0, 0, 0, 0)
         '
-        'Label9
+        'LblRemarks
         '
-        Me.Label9.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.Label9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label9.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label9.Location = New System.Drawing.Point(446, 443)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(170, 22)
-        Me.Label9.TabIndex = 255
-        Me.Label9.Text = "備考"
-        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LblRemarks.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblRemarks.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblRemarks.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblRemarks.Location = New System.Drawing.Point(446, 443)
+        Me.LblRemarks.Name = "LblRemarks"
+        Me.LblRemarks.Size = New System.Drawing.Size(170, 22)
+        Me.LblRemarks.TabIndex = 255
+        Me.LblRemarks.Text = "備考"
+        Me.LblRemarks.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'TxtRemarks
         '
@@ -106,39 +106,39 @@ Partial Class Receipt
         Me.TxtRemarks.Size = New System.Drawing.Size(644, 22)
         Me.TxtRemarks.TabIndex = 254
         '
-        'Label8
+        'LblReceiptDate
         '
-        Me.Label8.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.Label8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label8.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label8.Location = New System.Drawing.Point(188, 443)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(98, 22)
-        Me.Label8.TabIndex = 253
-        Me.Label8.Text = "入庫日"
-        Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LblReceiptDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblReceiptDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblReceiptDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblReceiptDate.Location = New System.Drawing.Point(188, 443)
+        Me.LblReceiptDate.Name = "LblReceiptDate"
+        Me.LblReceiptDate.Size = New System.Drawing.Size(98, 22)
+        Me.LblReceiptDate.TabIndex = 253
+        Me.LblReceiptDate.Text = "入庫日"
+        Me.LblReceiptDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Label4
+        'LblAdd
         '
-        Me.Label4.BackColor = System.Drawing.Color.Transparent
-        Me.Label4.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label4.Location = New System.Drawing.Point(12, 443)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(89, 22)
-        Me.Label4.TabIndex = 252
-        Me.Label4.Text = "■今回仕入"
-        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.LblAdd.BackColor = System.Drawing.Color.Transparent
+        Me.LblAdd.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblAdd.Location = New System.Drawing.Point(12, 443)
+        Me.LblAdd.Name = "LblAdd"
+        Me.LblAdd.Size = New System.Drawing.Size(89, 22)
+        Me.LblAdd.TabIndex = 252
+        Me.LblAdd.Text = "■今回仕入"
+        Me.LblAdd.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'Label7
+        'LblCount3
         '
-        Me.Label7.BackColor = System.Drawing.Color.Transparent
-        Me.Label7.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label7.Location = New System.Drawing.Point(1316, 443)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(22, 22)
-        Me.Label7.TabIndex = 251
-        Me.Label7.Text = "件"
-        Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LblCount3.BackColor = System.Drawing.Color.Transparent
+        Me.LblCount3.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblCount3.Location = New System.Drawing.Point(1316, 443)
+        Me.LblCount3.Name = "LblCount3"
+        Me.LblCount3.Size = New System.Drawing.Size(22, 22)
+        Me.LblCount3.TabIndex = 251
+        Me.LblCount3.Text = "件"
+        Me.LblCount3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'TxtCount3
         '
@@ -161,38 +161,38 @@ Partial Class Receipt
         Me.DgvAdd.Size = New System.Drawing.Size(1326, 150)
         Me.DgvAdd.TabIndex = 249
         '
-        'Label6
+        'LblHistory
         '
-        Me.Label6.BackColor = System.Drawing.Color.Transparent
-        Me.Label6.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label6.Location = New System.Drawing.Point(12, 262)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(89, 22)
-        Me.Label6.TabIndex = 248
-        Me.Label6.Text = "■仕入済み"
-        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.LblHistory.BackColor = System.Drawing.Color.Transparent
+        Me.LblHistory.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblHistory.Location = New System.Drawing.Point(12, 262)
+        Me.LblHistory.Name = "LblHistory"
+        Me.LblHistory.Size = New System.Drawing.Size(89, 22)
+        Me.LblHistory.TabIndex = 248
+        Me.LblHistory.Text = "■仕入済み"
+        Me.LblHistory.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'Label5
+        'LblPurchase
         '
-        Me.Label5.BackColor = System.Drawing.Color.Transparent
-        Me.Label5.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label5.Location = New System.Drawing.Point(12, 82)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(57, 22)
-        Me.Label5.TabIndex = 247
-        Me.Label5.Text = "■発注"
-        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.LblPurchase.BackColor = System.Drawing.Color.Transparent
+        Me.LblPurchase.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblPurchase.Location = New System.Drawing.Point(12, 82)
+        Me.LblPurchase.Name = "LblPurchase"
+        Me.LblPurchase.Size = New System.Drawing.Size(57, 22)
+        Me.LblPurchase.TabIndex = 247
+        Me.LblPurchase.Text = "■発注"
+        Me.LblPurchase.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'Label3
+        'LblCount2
         '
-        Me.Label3.BackColor = System.Drawing.Color.Transparent
-        Me.Label3.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label3.Location = New System.Drawing.Point(1316, 262)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(22, 22)
-        Me.Label3.TabIndex = 246
-        Me.Label3.Text = "件"
-        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LblCount2.BackColor = System.Drawing.Color.Transparent
+        Me.LblCount2.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblCount2.Location = New System.Drawing.Point(1316, 262)
+        Me.LblCount2.Name = "LblCount2"
+        Me.LblCount2.Size = New System.Drawing.Size(22, 22)
+        Me.LblCount2.TabIndex = 246
+        Me.LblCount2.Text = "件"
+        Me.LblCount2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'TxtCount2
         '
@@ -216,16 +216,16 @@ Partial Class Receipt
         Me.DgvHistory.Size = New System.Drawing.Size(1326, 150)
         Me.DgvHistory.TabIndex = 244
         '
-        'Label2
+        'LblCount1
         '
-        Me.Label2.BackColor = System.Drawing.Color.Transparent
-        Me.Label2.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label2.Location = New System.Drawing.Point(1316, 82)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(22, 22)
-        Me.Label2.TabIndex = 243
-        Me.Label2.Text = "件"
-        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LblCount1.BackColor = System.Drawing.Color.Transparent
+        Me.LblCount1.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblCount1.Location = New System.Drawing.Point(1316, 82)
+        Me.LblCount1.Name = "LblCount1"
+        Me.LblCount1.Size = New System.Drawing.Size(22, 22)
+        Me.LblCount1.TabIndex = 243
+        Me.LblCount1.Text = "件"
+        Me.LblCount1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'TxtCount1
         '
@@ -349,20 +349,20 @@ Partial Class Receipt
         Me.ClientSize = New System.Drawing.Size(1350, 729)
         Me.Controls.Add(Me.TxtSuffixNo)
         Me.Controls.Add(Me.BtnRegist)
-        Me.Controls.Add(Me.DtpPurchaseDate)
-        Me.Controls.Add(Me.Label9)
+        Me.Controls.Add(Me.DtpReceiptDate)
+        Me.Controls.Add(Me.LblRemarks)
         Me.Controls.Add(Me.TxtRemarks)
-        Me.Controls.Add(Me.Label8)
-        Me.Controls.Add(Me.Label4)
-        Me.Controls.Add(Me.Label7)
+        Me.Controls.Add(Me.LblReceiptDate)
+        Me.Controls.Add(Me.LblAdd)
+        Me.Controls.Add(Me.LblCount3)
         Me.Controls.Add(Me.TxtCount3)
         Me.Controls.Add(Me.DgvAdd)
-        Me.Controls.Add(Me.Label6)
-        Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.LblHistory)
+        Me.Controls.Add(Me.LblPurchase)
+        Me.Controls.Add(Me.LblCount2)
         Me.Controls.Add(Me.TxtCount2)
         Me.Controls.Add(Me.DgvHistory)
-        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.LblCount1)
         Me.Controls.Add(Me.TxtCount1)
         Me.Controls.Add(Me.DgvPurchase)
         Me.Controls.Add(Me.LblPurchaseDate)
@@ -386,20 +386,20 @@ Partial Class Receipt
 
     Friend WithEvents TxtSuffixNo As TextBox
     Friend WithEvents BtnRegist As Button
-    Friend WithEvents DtpPurchaseDate As DateTimePicker
-    Friend WithEvents Label9 As Label
+    Friend WithEvents DtpReceiptDate As DateTimePicker
+    Friend WithEvents LblRemarks As Label
     Friend WithEvents TxtRemarks As TextBox
-    Friend WithEvents Label8 As Label
-    Friend WithEvents Label4 As Label
-    Friend WithEvents Label7 As Label
+    Friend WithEvents LblReceiptDate As Label
+    Friend WithEvents LblAdd As Label
+    Friend WithEvents LblCount3 As Label
     Friend WithEvents TxtCount3 As TextBox
     Friend WithEvents DgvAdd As DataGridView
-    Friend WithEvents Label6 As Label
-    Friend WithEvents Label5 As Label
-    Friend WithEvents Label3 As Label
+    Friend WithEvents LblHistory As Label
+    Friend WithEvents LblPurchase As Label
+    Friend WithEvents LblCount2 As Label
     Friend WithEvents TxtCount2 As TextBox
     Friend WithEvents DgvHistory As DataGridView
-    Friend WithEvents Label2 As Label
+    Friend WithEvents LblCount1 As Label
     Friend WithEvents TxtCount1 As TextBox
     Friend WithEvents DgvPurchase As DataGridView
     Friend WithEvents LblPurchaseDate As Label

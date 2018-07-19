@@ -354,7 +354,7 @@ Partial Class OrderList
         Me.BtnReceipt.Name = "BtnReceipt"
         Me.BtnReceipt.Size = New System.Drawing.Size(165, 40)
         Me.BtnReceipt.TabIndex = 62
-        Me.BtnReceipt.Text = "入庫入力"
+        Me.BtnReceipt.Text = "出庫入力"
         Me.BtnReceipt.UseVisualStyleBackColor = True
         Me.BtnReceipt.Visible = False
         '

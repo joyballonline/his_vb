@@ -54,7 +54,7 @@ Public Class OrderList
     Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler,
                    ByRef prmRefDbHd As UtilDBIf,
                    ByRef prmRefLang As UtilLangHandler,
-                   ByRef prmRefStatus As String)
+                   Optional ByRef prmRefStatus As String = "")
         Call Me.New()
 
         _init = False

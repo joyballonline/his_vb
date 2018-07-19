@@ -37,6 +37,7 @@ Public Class Receipt
     Private CompanyCode As String = ""
     Private No As String = ""
     Private Suffix As String = ""
+    Private _status As String = ""
     Private _langHd As UtilLangHandler
     Private Input As String = frmC01F10_Login.loginValue.TantoNM
 
@@ -55,7 +56,8 @@ Public Class Receipt
                    ByRef prmRefDbHd As UtilDBIf,
                    ByRef prmRefLang As UtilLangHandler,
                    ByRef prmRefNo As String,
-                   ByRef prmRefSuffix As String)
+                   ByRef prmRefSuffix As String,
+                   Optional ByRef prmRefStatus As String = "")
         Call Me.New()
 
         _init = False
@@ -66,6 +68,7 @@ Public Class Receipt
         _langHd = prmRefLang
         No = prmRefNo
         Suffix = prmRefSuffix
+        _status = prmRefStatus
         '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
         StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
         Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
@@ -75,6 +78,30 @@ Public Class Receipt
     End Sub
 
     Private Sub PurchaseManagement_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If _status = "VIEW" Then
+            LblCount1.Visible = False
+            LblCount2.Visible = False
+            LblCount3.Visible = False
+            LblPurchase.Visible = False
+            LblAdd.Visible = False
+            LblReceiptDate.Visible = False
+            LblRemarks.Visible = False
+            DtpReceiptDate.Visible = False
+            TxtCount1.Visible = False
+            TxtCount2.Visible = False
+            TxtCount3.Visible = False
+            TxtRemarks.Visible = False
+            DgvPurchase.Visible = False
+            DgvAdd.Visible = False
+            DgvHistory.ReadOnly = False
+
+            LblHistory.Location = New Point(12, 82)
+            DgvHistory.Location = New Point(12, 106)
+            DgvHistory.Size = New Point(1326, 566)
+
+            BtnRegist.Visible = False
+        End If
+
         Dim Sql1 As String = ""
         Dim Sql2 As String = ""
         Dim Sql3 As String = ""
@@ -366,7 +393,7 @@ Public Class Receipt
             End If
         Next
 
-        If TxtOrdingDate.Text >= DtpPurchaseDate.Value Then
+        If TxtOrdingDate.Text >= DtpReceiptDate.Value Then
             MessageBox.Show("入庫日の値が発注日以前になっています。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
             errFlg = False
         End If
@@ -1034,7 +1061,7 @@ Public Class Receipt
 
             _db.executeDB(Sql9)
             Dim openForm As Form = Nothing
-            openForm = New PurchaseList(_msgHd, _db, _langHd)
+            openForm = New OrderingList(_msgHd, _db, _langHd)
             openForm.Show()
             Me.Close()
         End If

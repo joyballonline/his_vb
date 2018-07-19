@@ -53,7 +53,7 @@ Partial Class QuoteList
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.BtnQuoteView = New System.Windows.Forms.Button()
         Me.BtnUnitPrice = New System.Windows.Forms.Button()
-        Me.BtnOrderAndPurchase = New System.Windows.Forms.Button()
+        Me.BtnOrderPurchase = New System.Windows.Forms.Button()
         Me.BtnCancel = New System.Windows.Forms.Button()
         Me.LblMode = New System.Windows.Forms.Label()
         Me.ChkExpired = New System.Windows.Forms.CheckBox()
@@ -372,15 +372,15 @@ Partial Class QuoteList
         Me.BtnUnitPrice.UseVisualStyleBackColor = True
         Me.BtnUnitPrice.Visible = False
         '
-        'BtnOrderAndPurchase
+        'BtnOrderPurchase
         '
-        Me.BtnOrderAndPurchase.Location = New System.Drawing.Point(137, 677)
-        Me.BtnOrderAndPurchase.Name = "BtnOrderAndPurchase"
-        Me.BtnOrderAndPurchase.Size = New System.Drawing.Size(165, 40)
-        Me.BtnOrderAndPurchase.TabIndex = 32
-        Me.BtnOrderAndPurchase.Text = "受発注登録"
-        Me.BtnOrderAndPurchase.UseVisualStyleBackColor = True
-        Me.BtnOrderAndPurchase.Visible = False
+        Me.BtnOrderPurchase.Location = New System.Drawing.Point(137, 677)
+        Me.BtnOrderPurchase.Name = "BtnOrderPurchase"
+        Me.BtnOrderPurchase.Size = New System.Drawing.Size(165, 40)
+        Me.BtnOrderPurchase.TabIndex = 32
+        Me.BtnOrderPurchase.Text = "受発注登録"
+        Me.BtnOrderPurchase.UseVisualStyleBackColor = True
+        Me.BtnOrderPurchase.Visible = False
         '
         'BtnCancel
         '
@@ -439,13 +439,13 @@ Partial Class QuoteList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1429, 729)
+        Me.ClientSize = New System.Drawing.Size(1440, 729)
         Me.Controls.Add(Me.BtnPurchase)
         Me.Controls.Add(Me.BtnOrder)
         Me.Controls.Add(Me.ChkExpired)
         Me.Controls.Add(Me.LblMode)
         Me.Controls.Add(Me.BtnCancel)
-        Me.Controls.Add(Me.BtnOrderAndPurchase)
+        Me.Controls.Add(Me.BtnOrderPurchase)
         Me.Controls.Add(Me.BtnUnitPrice)
         Me.Controls.Add(Me.BtnQuoteView)
         Me.Controls.Add(Me.Panel1)
@@ -516,7 +516,7 @@ Partial Class QuoteList
     Friend WithEvents Panel1 As Panel
     Friend WithEvents BtnQuoteView As Button
     Friend WithEvents BtnUnitPrice As Button
-    Friend WithEvents BtnOrderAndPurchase As Button
+    Friend WithEvents BtnOrderPurchase As Button
     Friend WithEvents BtnCancel As Button
     Friend WithEvents LblMode As Label
     Friend WithEvents ChkExpired As CheckBox

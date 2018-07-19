@@ -9,7 +9,7 @@ Imports UtilMDL.FileDirectory
 Imports UtilMDL.xls
 
 
-Public Class Purchase
+Public Class Ordering
     Inherits System.Windows.Forms.Form
 
     '------------------------------------------------------------------------------------------------------

@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class Purchase
+Partial Class Ordering
     Inherits System.Windows.Forms.Form
 
     'フォームがコンポーネントの一覧をクリーンアップするために dispose をオーバーライドします。
@@ -750,7 +750,7 @@ Partial Class Purchase
         Me.TxtPosition.Size = New System.Drawing.Size(200, 23)
         Me.TxtPosition.TabIndex = 212
         '
-        'Purchase
+        'Ordering
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -800,8 +800,8 @@ Partial Class Purchase
         Me.Controls.Add(Me.TxtPaymentTerms)
         Me.Controls.Add(Me.LblRemarks)
         Me.Controls.Add(Me.TxtPosition)
-        Me.Name = "Purchase"
-        Me.Text = "Purchase"
+        Me.Name = "Ordering"
+        Me.Text = "Ordering"
         CType(Me.DgvItemList, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()

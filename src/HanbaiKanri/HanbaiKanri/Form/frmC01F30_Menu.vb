@@ -772,7 +772,7 @@ Public Class frmC01F30_Menu
             Case CommonConst.MENU_H0110  '見積登録
                 Dim Status As String = "ADD"
                 Dim openForm As Form = Nothing
-                openForm = New Quote(_msgHd, _db, _langHd, Me, , Status)
+                openForm = New Quote(_msgHd, _db, _langHd, Me, , , Status)
                 openForm.Show()
                 Me.Hide()
             Case CommonConst.MENU_H0120  '仕入単価入力
@@ -801,6 +801,12 @@ Public Class frmC01F30_Menu
                 Me.Hide()
             Case CommonConst.MENU_H0160  '見積取消
                 Dim Status As String = "CANCEL"
+                Dim openForm As Form = Nothing
+                openForm = New QuoteList(_msgHd, _db, _langHd, Me, Status)
+                openForm.Show()
+                Me.Hide()
+            Case CommonConst.MENU_H0170  '見積取消
+                Dim Status As String = "ORDER_PURCHASE"
                 Dim openForm As Form = Nothing
                 openForm = New QuoteList(_msgHd, _db, _langHd, Me, Status)
                 openForm.Show()
@@ -890,76 +896,81 @@ Public Class frmC01F30_Menu
             Case CommonConst.MENU_H0510  '発注登録
 
                 Dim openForm As Form = Nothing
-                openForm = New PurchaseList(_msgHd, _db, _langHd)
+                openForm = New OrderingList(_msgHd, _db, _langHd)
                 openForm.Show()
                 Me.Hide()
             Case CommonConst.MENU_H0520  '発注編集
                 Dim Status As String = "EDIT"
                 Dim openForm As Form = Nothing
-                openForm = New PurchaseList(_msgHd, _db, _langHd, Status)
+                openForm = New OrderingList(_msgHd, _db, _langHd, Status)
                 openForm.Show()
                 Me.Hide()
             Case CommonConst.MENU_H0530  '発注複写
                 Dim Status As String = "CLONE"
                 Dim openForm As Form = Nothing
-                openForm = New PurchaseList(_msgHd, _db, _langHd, Status)
+                openForm = New OrderingList(_msgHd, _db, _langHd, Status)
                 openForm.Show()
                 Me.Hide()
             Case CommonConst.MENU_H0540  '発注取消
                 Dim Status As String = "CANCEL"
                 Dim openForm As Form = Nothing
-                openForm = New PurchaseList(_msgHd, _db, _langHd, Status)
+                openForm = New OrderingList(_msgHd, _db, _langHd, Status)
                 openForm.Show()
                 Me.Hide()
             Case CommonConst.MENU_H0550  '発注参照
                 Dim Status As String = "VIEW"
                 Dim openForm As Form = Nothing
-                openForm = New PurchaseList(_msgHd, _db, _langHd, Status)
+                openForm = New OrderingList(_msgHd, _db, _langHd, Status)
                 openForm.Show()
                 Me.Hide()
             '-----------------------------------仕入業務（H05）
             Case CommonConst.MENU_H0610  '仕入登録
                 Dim Status As String = "ORDING"
                 Dim openForm As Form = Nothing
-                openForm = New PurchaseList(_msgHd, _db, _langHd, Status)
+                openForm = New OrderingList(_msgHd, _db, _langHd, Status)
                 openForm.Show()
                 Me.Hide()
             Case CommonConst.MENU_H0620  '仕入編集
                 Dim Status As String = "ORDING"
                 Dim openForm As Form = Nothing
-                openForm = New PurchaseList(_msgHd, _db, _langHd, Status)
+                openForm = New OrderingList(_msgHd, _db, _langHd, Status)
                 openForm.Show()
                 Me.Hide()
             Case CommonConst.MENU_H0630  '仕入取消
+                Dim Status As String = "CANCEL"
                 Dim openForm As Form = Nothing
-                openForm = New PurchaseList(_msgHd, _db, _langHd)
+                openForm = New PurchaseList(_msgHd, _db, _langHd, Status)
                 openForm.Show()
                 Me.Hide()
             Case CommonConst.MENU_H0640  '仕入参照
+                Dim Status As String = "VIEW"
                 Dim openForm As Form = Nothing
-                openForm = New PurchaseList(_msgHd, _db, _langHd)
+                openForm = New PurchaseList(_msgHd, _db, _langHd, Status)
                 openForm.Show()
                 Me.Hide()
             '-----------------------------------入庫業務（H05）
             Case CommonConst.MENU_H0710  '入庫登録
                 Dim Status As String = "RECEIPT"
                 Dim openForm As Form = Nothing
-                openForm = New PurchaseList(_msgHd, _db, _langHd, Status)
+                openForm = New OrderingList(_msgHd, _db, _langHd, Status)
                 openForm.Show()
                 Me.Hide()
             Case CommonConst.MENU_H0720  '入庫編集
+                Dim Status As String = "RECEIPT"
                 Dim openForm As Form = Nothing
-                openForm = New PurchaseList(_msgHd, _db, _langHd)
+                openForm = New OrderingList(_msgHd, _db, _langHd, Status)
                 openForm.Show()
                 Me.Hide()
             Case CommonConst.MENU_H0730  '入庫取消
+                Dim Status As String = "CANCEL"
                 Dim openForm As Form = Nothing
-                openForm = New PurchaseList(_msgHd, _db, _langHd)
+                openForm = New ReceiptList(_msgHd, _db, _langHd, Status)
                 openForm.Show()
                 Me.Hide()
             Case CommonConst.MENU_H0740  '入庫参照
+                Dim Status As String = "VIEW"
                 Dim openForm As Form = Nothing
-                openForm = New PurchaseList(_msgHd, _db, _langHd)
+                openForm = New ReceiptList(_msgHd, _db, _langHd, Status)
                 openForm.Show()
                 Me.Hide()
             '-----------------------------------マスタ管理（M01）

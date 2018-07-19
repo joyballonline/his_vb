@@ -105,8 +105,17 @@ Public Class QuoteList
             LblMode.Text = "仕入新規入力モード"
             BtnPurchase.Visible = True
             BtnPurchase.Location = New Point(997, 677)
+        ElseIf _status = "ORDER_PURCHASE" Then
+            LblMode.Text = "受発注登録モード"
+            BtnOrderPurchase.Visible = True
+            BtnOrderPurchase.Location = New Point(997, 677)
         End If
 
+        QuoteListLoad()
+
+    End Sub
+
+    Private Sub QuoteListLoad()
         Dim Sql As String = ""
         Try
             Sql += "SELECT "
@@ -120,6 +129,12 @@ Public Class QuoteList
             Sql += " >=  "
             Sql += "'"
             Sql += dtToday
+            Sql += "'"
+            Sql += " AND "
+            Sql += "取消区分"
+            Sql += " =  "
+            Sql += "'"
+            Sql += "0"
             Sql += "'"
 
             Dim reccnt As Integer = 0
@@ -177,9 +192,6 @@ Public Class QuoteList
                 DgvMithd.Rows(index).Cells(19).Value = ds.Tables(RS).Rows(index)("更新者")
                 DgvMithd.Rows(index).Cells(20).Value = ds.Tables(RS).Rows(index)("更新日")
             Next
-
-
-
         Catch ue As UsrDefException
             ue.dspMsg()
             Throw ue
@@ -374,7 +386,13 @@ Public Class QuoteList
         Dim openForm As Form = Nothing
         openForm = New Quote(_msgHd, _db, _langHd, Me, , Status)
         Me.Hide()
-        openForm.Show(Me)
+        openForm.ShowDialog(Me)
+
+        DgvMithd.Rows.Clear()
+        DgvMithd.Columns.Clear()
+
+        QuoteListLoad()
+
     End Sub
 
     Private Sub BtnQuoteEdit_Click(sender As Object, e As EventArgs) Handles BtnQuoteEdit.Click
@@ -392,75 +410,7 @@ Public Class QuoteList
         DgvMithd.Rows.Clear()
         DgvMithd.Columns.Clear()
 
-        Dim Sql As String = ""
-
-        Sql += "SELECT "
-        Sql += " *  "
-        Sql += "FROM "
-        Sql += "public"
-        Sql += "."
-        Sql += "t01_mithd"
-        Sql += " WHERE "
-        Sql += "見積有効期限"
-        Sql += " >=  "
-        Sql += "'"
-        Sql += dtToday
-        Sql += "'"
-
-        Dim reccnt As Integer = 0
-        ds = _db.selectDB(Sql, RS, reccnt)
-
-        DgvMithd.Columns.Add("見積番号", "見積番号")
-        DgvMithd.Columns.Add("見積番号枝番", "見積番号枝番")
-        DgvMithd.Columns.Add("見積日", "見積日")
-        DgvMithd.Columns.Add("見積有効期限", "見積有効期限")
-        DgvMithd.Columns.Add("得意先コード", "得意先コード")
-        DgvMithd.Columns.Add("得意先名", "得意先名")
-        DgvMithd.Columns.Add("得意先郵便番号", "得意先郵便番号")
-        DgvMithd.Columns.Add("得意先住所", "得意先住所")
-        DgvMithd.Columns.Add("得意先電話番号", "得意先電話番号")
-        DgvMithd.Columns.Add("得意先ＦＡＸ", "得意先ＦＡＸ")
-        DgvMithd.Columns.Add("見積金額", "見積金額")
-        DgvMithd.Columns.Add("仕入金額", "仕入金額")
-        DgvMithd.Columns.Add("ＶＡＴ", "ＶＡＴ")
-        DgvMithd.Columns.Add("粗利額", "粗利額")
-        DgvMithd.Columns.Add("支払条件", "支払条件")
-        DgvMithd.Columns.Add("営業担当者", "営業担当者")
-        DgvMithd.Columns.Add("入力担当者", "入力担当者")
-        DgvMithd.Columns.Add("備考", "備考")
-        DgvMithd.Columns.Add("登録日", "登録日")
-        DgvMithd.Columns.Add("更新者", "更新者")
-        DgvMithd.Columns.Add("更新日", "更新日")
-
-        DgvMithd.Columns(10).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        DgvMithd.Columns(11).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        DgvMithd.Columns(12).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        DgvMithd.Columns(13).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-
-        For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-            DgvMithd.Rows.Add()
-            DgvMithd.Rows(index).Cells(0).Value = ds.Tables(RS).Rows(index)("見積番号")
-            DgvMithd.Rows(index).Cells(1).Value = ds.Tables(RS).Rows(index)("見積番号枝番")
-            DgvMithd.Rows(index).Cells(2).Value = ds.Tables(RS).Rows(index)("見積日")
-            DgvMithd.Rows(index).Cells(3).Value = ds.Tables(RS).Rows(index)("見積有効期限")
-            DgvMithd.Rows(index).Cells(4).Value = ds.Tables(RS).Rows(index)("得意先コード")
-            DgvMithd.Rows(index).Cells(5).Value = ds.Tables(RS).Rows(index)("得意先名")
-            DgvMithd.Rows(index).Cells(6).Value = ds.Tables(RS).Rows(index)("得意先郵便番号")
-            DgvMithd.Rows(index).Cells(7).Value = ds.Tables(RS).Rows(index)("得意先住所")
-            DgvMithd.Rows(index).Cells(8).Value = ds.Tables(RS).Rows(index)("得意先電話番号")
-            DgvMithd.Rows(index).Cells(9).Value = ds.Tables(RS).Rows(index)("得意先ＦＡＸ")
-            DgvMithd.Rows(index).Cells(10).Value = ds.Tables(RS).Rows(index)("見積金額")
-            DgvMithd.Rows(index).Cells(11).Value = ds.Tables(RS).Rows(index)("仕入金額")
-            DgvMithd.Rows(index).Cells(12).Value = ds.Tables(RS).Rows(index)("ＶＡＴ")
-            DgvMithd.Rows(index).Cells(13).Value = ds.Tables(RS).Rows(index)("粗利額")
-            DgvMithd.Rows(index).Cells(14).Value = ds.Tables(RS).Rows(index)("支払条件")
-            DgvMithd.Rows(index).Cells(15).Value = ds.Tables(RS).Rows(index)("営業担当者")
-            DgvMithd.Rows(index).Cells(16).Value = ds.Tables(RS).Rows(index)("入力担当者")
-            DgvMithd.Rows(index).Cells(17).Value = ds.Tables(RS).Rows(index)("備考")
-            DgvMithd.Rows(index).Cells(18).Value = ds.Tables(RS).Rows(index)("登録日")
-            DgvMithd.Rows(index).Cells(19).Value = ds.Tables(RS).Rows(index)("更新者")
-            DgvMithd.Rows(index).Cells(20).Value = ds.Tables(RS).Rows(index)("更新日")
-        Next
+        QuoteListLoad()
     End Sub
 
     Private Sub BtnQuoteClone_Click(sender As Object, e As EventArgs) Handles BtnQuoteClone.Click
@@ -478,75 +428,7 @@ Public Class QuoteList
         DgvMithd.Rows.Clear()
         DgvMithd.Columns.Clear()
 
-        Dim Sql As String = ""
-
-        Sql += "SELECT "
-        Sql += " *  "
-        Sql += "FROM "
-        Sql += "public"
-        Sql += "."
-        Sql += "t01_mithd"
-        Sql += " WHERE "
-        Sql += "見積有効期限"
-        Sql += " >=  "
-        Sql += "'"
-        Sql += dtToday
-        Sql += "'"
-
-        Dim reccnt As Integer = 0
-        ds = _db.selectDB(Sql, RS, reccnt)
-
-        DgvMithd.Columns.Add("見積番号", "見積番号")
-        DgvMithd.Columns.Add("見積番号枝番", "見積番号枝番")
-        DgvMithd.Columns.Add("見積日", "見積日")
-        DgvMithd.Columns.Add("見積有効期限", "見積有効期限")
-        DgvMithd.Columns.Add("得意先コード", "得意先コード")
-        DgvMithd.Columns.Add("得意先名", "得意先名")
-        DgvMithd.Columns.Add("得意先郵便番号", "得意先郵便番号")
-        DgvMithd.Columns.Add("得意先住所", "得意先住所")
-        DgvMithd.Columns.Add("得意先電話番号", "得意先電話番号")
-        DgvMithd.Columns.Add("得意先ＦＡＸ", "得意先ＦＡＸ")
-        DgvMithd.Columns.Add("見積金額", "見積金額")
-        DgvMithd.Columns.Add("仕入金額", "仕入金額")
-        DgvMithd.Columns.Add("ＶＡＴ", "ＶＡＴ")
-        DgvMithd.Columns.Add("粗利額", "粗利額")
-        DgvMithd.Columns.Add("支払条件", "支払条件")
-        DgvMithd.Columns.Add("営業担当者", "営業担当者")
-        DgvMithd.Columns.Add("入力担当者", "入力担当者")
-        DgvMithd.Columns.Add("備考", "備考")
-        DgvMithd.Columns.Add("登録日", "登録日")
-        DgvMithd.Columns.Add("更新者", "更新者")
-        DgvMithd.Columns.Add("更新日", "更新日")
-
-        DgvMithd.Columns(10).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        DgvMithd.Columns(11).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        DgvMithd.Columns(12).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        DgvMithd.Columns(13).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-
-        For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-            DgvMithd.Rows.Add()
-            DgvMithd.Rows(index).Cells(0).Value = ds.Tables(RS).Rows(index)("見積番号")
-            DgvMithd.Rows(index).Cells(1).Value = ds.Tables(RS).Rows(index)("見積番号枝番")
-            DgvMithd.Rows(index).Cells(2).Value = ds.Tables(RS).Rows(index)("見積日")
-            DgvMithd.Rows(index).Cells(3).Value = ds.Tables(RS).Rows(index)("見積有効期限")
-            DgvMithd.Rows(index).Cells(4).Value = ds.Tables(RS).Rows(index)("得意先コード")
-            DgvMithd.Rows(index).Cells(5).Value = ds.Tables(RS).Rows(index)("得意先名")
-            DgvMithd.Rows(index).Cells(6).Value = ds.Tables(RS).Rows(index)("得意先郵便番号")
-            DgvMithd.Rows(index).Cells(7).Value = ds.Tables(RS).Rows(index)("得意先住所")
-            DgvMithd.Rows(index).Cells(8).Value = ds.Tables(RS).Rows(index)("得意先電話番号")
-            DgvMithd.Rows(index).Cells(9).Value = ds.Tables(RS).Rows(index)("得意先ＦＡＸ")
-            DgvMithd.Rows(index).Cells(10).Value = ds.Tables(RS).Rows(index)("見積金額")
-            DgvMithd.Rows(index).Cells(11).Value = ds.Tables(RS).Rows(index)("仕入金額")
-            DgvMithd.Rows(index).Cells(12).Value = ds.Tables(RS).Rows(index)("ＶＡＴ")
-            DgvMithd.Rows(index).Cells(13).Value = ds.Tables(RS).Rows(index)("粗利額")
-            DgvMithd.Rows(index).Cells(14).Value = ds.Tables(RS).Rows(index)("支払条件")
-            DgvMithd.Rows(index).Cells(15).Value = ds.Tables(RS).Rows(index)("営業担当者")
-            DgvMithd.Rows(index).Cells(16).Value = ds.Tables(RS).Rows(index)("入力担当者")
-            DgvMithd.Rows(index).Cells(17).Value = ds.Tables(RS).Rows(index)("備考")
-            DgvMithd.Rows(index).Cells(18).Value = ds.Tables(RS).Rows(index)("登録日")
-            DgvMithd.Rows(index).Cells(19).Value = ds.Tables(RS).Rows(index)("更新者")
-            DgvMithd.Rows(index).Cells(20).Value = ds.Tables(RS).Rows(index)("更新日")
-        Next
+        QuoteListLoad()
     End Sub
 
     Private Sub BtnQuoteView_Click(sender As Object, e As EventArgs) Handles BtnQuoteView.Click
@@ -577,75 +459,7 @@ Public Class QuoteList
         DgvMithd.Rows.Clear()
         DgvMithd.Columns.Clear()
 
-        Dim Sql As String = ""
-
-        Sql += "SELECT "
-        Sql += " *  "
-        Sql += "FROM "
-        Sql += "public"
-        Sql += "."
-        Sql += "t01_mithd"
-        Sql += " WHERE "
-        Sql += "見積有効期限"
-        Sql += " >=  "
-        Sql += "'"
-        Sql += dtToday
-        Sql += "'"
-
-        Dim reccnt As Integer = 0
-        ds = _db.selectDB(Sql, RS, reccnt)
-
-        DgvMithd.Columns.Add("見積番号", "見積番号")
-        DgvMithd.Columns.Add("見積番号枝番", "見積番号枝番")
-        DgvMithd.Columns.Add("見積日", "見積日")
-        DgvMithd.Columns.Add("見積有効期限", "見積有効期限")
-        DgvMithd.Columns.Add("得意先コード", "得意先コード")
-        DgvMithd.Columns.Add("得意先名", "得意先名")
-        DgvMithd.Columns.Add("得意先郵便番号", "得意先郵便番号")
-        DgvMithd.Columns.Add("得意先住所", "得意先住所")
-        DgvMithd.Columns.Add("得意先電話番号", "得意先電話番号")
-        DgvMithd.Columns.Add("得意先ＦＡＸ", "得意先ＦＡＸ")
-        DgvMithd.Columns.Add("見積金額", "見積金額")
-        DgvMithd.Columns.Add("仕入金額", "仕入金額")
-        DgvMithd.Columns.Add("ＶＡＴ", "ＶＡＴ")
-        DgvMithd.Columns.Add("粗利額", "粗利額")
-        DgvMithd.Columns.Add("支払条件", "支払条件")
-        DgvMithd.Columns.Add("営業担当者", "営業担当者")
-        DgvMithd.Columns.Add("入力担当者", "入力担当者")
-        DgvMithd.Columns.Add("備考", "備考")
-        DgvMithd.Columns.Add("登録日", "登録日")
-        DgvMithd.Columns.Add("更新者", "更新者")
-        DgvMithd.Columns.Add("更新日", "更新日")
-
-        DgvMithd.Columns(10).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        DgvMithd.Columns(11).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        DgvMithd.Columns(12).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        DgvMithd.Columns(13).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-
-        For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-            DgvMithd.Rows.Add()
-            DgvMithd.Rows(index).Cells(0).Value = ds.Tables(RS).Rows(index)("見積番号")
-            DgvMithd.Rows(index).Cells(1).Value = ds.Tables(RS).Rows(index)("見積番号枝番")
-            DgvMithd.Rows(index).Cells(2).Value = ds.Tables(RS).Rows(index)("見積日")
-            DgvMithd.Rows(index).Cells(3).Value = ds.Tables(RS).Rows(index)("見積有効期限")
-            DgvMithd.Rows(index).Cells(4).Value = ds.Tables(RS).Rows(index)("得意先コード")
-            DgvMithd.Rows(index).Cells(5).Value = ds.Tables(RS).Rows(index)("得意先名")
-            DgvMithd.Rows(index).Cells(6).Value = ds.Tables(RS).Rows(index)("得意先郵便番号")
-            DgvMithd.Rows(index).Cells(7).Value = ds.Tables(RS).Rows(index)("得意先住所")
-            DgvMithd.Rows(index).Cells(8).Value = ds.Tables(RS).Rows(index)("得意先電話番号")
-            DgvMithd.Rows(index).Cells(9).Value = ds.Tables(RS).Rows(index)("得意先ＦＡＸ")
-            DgvMithd.Rows(index).Cells(10).Value = ds.Tables(RS).Rows(index)("見積金額")
-            DgvMithd.Rows(index).Cells(11).Value = ds.Tables(RS).Rows(index)("仕入金額")
-            DgvMithd.Rows(index).Cells(12).Value = ds.Tables(RS).Rows(index)("ＶＡＴ")
-            DgvMithd.Rows(index).Cells(13).Value = ds.Tables(RS).Rows(index)("粗利額")
-            DgvMithd.Rows(index).Cells(14).Value = ds.Tables(RS).Rows(index)("支払条件")
-            DgvMithd.Rows(index).Cells(15).Value = ds.Tables(RS).Rows(index)("営業担当者")
-            DgvMithd.Rows(index).Cells(16).Value = ds.Tables(RS).Rows(index)("入力担当者")
-            DgvMithd.Rows(index).Cells(17).Value = ds.Tables(RS).Rows(index)("備考")
-            DgvMithd.Rows(index).Cells(18).Value = ds.Tables(RS).Rows(index)("登録日")
-            DgvMithd.Rows(index).Cells(19).Value = ds.Tables(RS).Rows(index)("更新者")
-            DgvMithd.Rows(index).Cells(20).Value = ds.Tables(RS).Rows(index)("更新日")
-        Next
+        QuoteListLoad()
     End Sub
 
     Private Sub BtnQuoteSearch_Click(sender As Object, e As EventArgs) Handles BtnQuoteSearch.Click
@@ -950,7 +764,7 @@ Public Class QuoteList
         End Try
     End Sub
 
-    Private Sub BtnOrder_Click(sender As Object, e As EventArgs) Handles BtnOrderAndPurchase.Click
+    Private Sub BtnOrder_Click(sender As Object, e As EventArgs) Handles BtnOrderPurchase.Click
         Dim RowIdx As Integer
         RowIdx = Me.DgvMithd.CurrentCell.RowIndex
         Dim No As String = DgvMithd.Rows(RowIdx).Cells(0).Value
@@ -1054,6 +868,10 @@ Public Class QuoteList
         Sql1 += ", "
         Sql1 += "更新者"
         _db.executeDB(Sql1)
+
+        DgvMithd.Rows.Clear()
+        DgvMithd.Columns.Clear()
+        QuoteListLoad()
     End Sub
 
     Private Sub ChkExpired_CheckedChanged(sender As Object, e As EventArgs) Handles ChkExpired.CheckedChanged

@@ -141,6 +141,7 @@ Public Class CommonConst
     Public Const MENU_H0140 As String = "H0140"           '見積複写
     Public Const MENU_H0150 As String = "H0150"           '見積参照
     Public Const MENU_H0160 As String = "H0160"           '見積取消
+    Public Const MENU_H0170 As String = "H0170"           '受発注登録
 
     Public Const MENU_H0210 As String = "H0210"           '受注登録
     Public Const MENU_H0220 As String = "H0220"           '受注編集
