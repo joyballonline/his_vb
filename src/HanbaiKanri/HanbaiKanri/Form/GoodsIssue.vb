@@ -7,6 +7,8 @@ Imports UtilMDL.DB
 Imports UtilMDL.DataGridView
 Imports UtilMDL.FileDirectory
 Imports UtilMDL.xls
+Imports Microsoft.Office.Interop
+Imports System.Runtime.InteropServices
 
 
 Public Class GoodsIssue
@@ -1089,13 +1091,15 @@ Public Class GoodsIssue
     Private Sub BtnDeliveryNote_Click(sender As Object, e As EventArgs) Handles BtnDeliveryNote.Click
         Dim SelectedRow As Integer = DgvHistory.CurrentCell.RowIndex
 
+        Dim createFlg = False
+
         Dim Sql1 As String = ""
         Sql1 += "SELECT "
         Sql1 += "* "
         Sql1 += "FROM "
         Sql1 += "public"
         Sql1 += "."
-        Sql1 += "t45_shukodt"
+        Sql1 += "t44_shukohd"
         Sql1 += " WHERE "
         Sql1 += "出庫番号"
         Sql1 += " ILIKE "
@@ -1103,9 +1107,207 @@ Public Class GoodsIssue
         Sql1 += DgvHistory.Rows(SelectedRow).Cells("出庫番号").Value
         Sql1 += "'"
 
+
+        Dim Sql2 As String = ""
+        Sql2 += "SELECT "
+        Sql2 += "* "
+        Sql2 += "FROM "
+        Sql2 += "public"
+        Sql2 += "."
+        Sql2 += "t45_shukodt"
+        Sql2 += " WHERE "
+        Sql2 += "出庫番号"
+        Sql2 += " ILIKE "
+        Sql2 += "'"
+        Sql2 += DgvHistory.Rows(SelectedRow).Cells("出庫番号").Value
+        Sql2 += "'"
+
         Dim reccnt As Integer = 0
         Dim ds1 As DataSet = _db.selectDB(Sql1, RS, reccnt)
+        Dim ds2 As DataSet = _db.selectDB(Sql2, RS, reccnt)
 
+        '定義
+        Dim app As Excel.Application = Nothing
+        Dim book As Excel.Workbook = Nothing
+        Dim sheet As Excel.Worksheet = Nothing
+
+
+
+        Try
+            '雛形パス
+            Dim sHinaPath As String = ""
+            sHinaPath = StartUp._iniVal.BaseXlsPath
+
+            '雛形ファイル名
+            Dim sHinaFileDeliv As String = ""
+            sHinaFileDeliv = sHinaPath & "\" & "DeliveryNote.xlsx"
+
+            Dim sHinaFileReceipt As String = ""
+            sHinaFileReceipt = sHinaPath & "\" & "DeliveryNote.xlsx"
+
+            '出力先パス
+            Dim sOutPath As String = ""
+            sOutPath = StartUp._iniVal.OutXlsPath
+
+            '出力ファイル名
+            Dim sOutFile As String = ""
+            sOutFile = sOutPath & "\DeliveryNote_" & ds2.Tables(RS).Rows(0)("出庫番号") & ".xlsx"
+
+
+
+            app = New Excel.Application()
+            book = app.Workbooks.Add(sHinaFileDeliv)  'テンプレート
+            sheet = CType(book.Worksheets(1), Excel.Worksheet)
+
+            sheet.Range("E8").Value = ds1.Tables(RS).Rows(0)("得意先名")
+            sheet.Range("E9").Value = ds1.Tables(RS).Rows(0)("得意先郵便番号") & " " & ds1.Tables(RS).Rows(0)("得意先住所")
+            sheet.Range("E11").Value = ds1.Tables(RS).Rows(0)("得意先電話番号")
+
+            sheet.Range("U8").Value = ds1.Tables(RS).Rows(0)("出庫番号")
+            sheet.Range("U9").Value = ds1.Tables(RS).Rows(0)("出庫日")
+
+
+
+            Dim rowCnt As Integer = 0
+            Dim lstRow As Integer = 14
+            'Dim addRowCnt As Integer = 0
+            'Dim currentCnt As Integer = 20
+            Dim num As Integer = 1
+
+
+            For j As Integer = 0 To ds2.Tables(RS).Rows.Count - 1
+                If rowCnt = 0 Then
+                    sheet.Range("A14").Value = num
+                    sheet.Range("C14").Value = ds2.Tables(RS).Rows(j)("メーカー") & " / " & ds2.Tables(RS).Rows(j)("品名") & " / " & ds2.Tables(RS).Rows(j)("型式")
+                    sheet.Range("N14").Value = ds2.Tables(RS).Rows(j)("出庫数量")
+                    sheet.Range("Q14").Value = ds2.Tables(RS).Rows(j)("単位")
+                    sheet.Range("T14").Value = ds2.Tables(RS).Rows(j)("備考")
+                    sheet.Rows(lstRow & ":" & lstRow).AutoFit
+                Else
+                    Dim cellPos As String = lstRow & ":" & lstRow
+                    Dim R As Object
+                    cellPos = lstRow & ":" & lstRow
+                    R = sheet.Range(cellPos)
+                    R.Copy()
+                    R.Insert()
+                    If Marshal.IsComObject(R) Then
+                        Marshal.ReleaseComObject(R)
+                    End If
+
+                    lstRow = lstRow + 1
+
+                    sheet.Range("A" & lstRow).Value = num
+                    sheet.Range("C" & lstRow).Value = ds2.Tables(RS).Rows(j)("メーカー") & " / " & ds2.Tables(RS).Rows(j)("品名") & " / " & ds2.Tables(RS).Rows(j)("型式")
+                    sheet.Range("N" & lstRow).Value = ds2.Tables(RS).Rows(j)("出庫数量")
+                    sheet.Range("Q" & lstRow).Value = ds2.Tables(RS).Rows(j)("単位")
+                    sheet.Range("T" & lstRow).Value = ds2.Tables(RS).Rows(j)("備考")
+                    sheet.Rows(lstRow & ":" & lstRow).AutoFit
+
+                End If
+            Next
+
+            book.SaveAs(sOutFile)
+
+            '_msgHd.dspMSG("CreateExcel")
+            createFlg = True
+
+        Catch ex As Exception
+            Throw ex
+
+        Finally
+            app.Quit()
+            Marshal.ReleaseComObject(sheet)
+            Marshal.ReleaseComObject(book)
+            Marshal.ReleaseComObject(app)
+
+        End Try
+
+
+        Try
+            '雛形パス
+            Dim sHinaPath As String = ""
+            sHinaPath = StartUp._iniVal.BaseXlsPath
+
+            '雛形ファイル名
+            Dim sHinaFileReceipt As String = ""
+            sHinaFileReceipt = sHinaPath & "\" & "DeliveryNote.xlsx"
+
+            '出力先パス
+            Dim sOutPath As String = ""
+            sOutPath = StartUp._iniVal.OutXlsPath
+
+            '出力ファイル名
+            Dim sOutFile As String = ""
+            sOutFile = sOutPath & "\Receipt_" & ds2.Tables(RS).Rows(0)("出庫番号") & ".xlsx"
+
+
+
+            app = New Excel.Application()
+            book = app.Workbooks.Add(sHinaFileReceipt)  'テンプレート
+            sheet = CType(book.Worksheets(1), Excel.Worksheet)
+
+            sheet.Range("E8").Value = ds1.Tables(RS).Rows(0)("得意先名")
+            sheet.Range("E9").Value = ds1.Tables(RS).Rows(0)("得意先郵便番号") & " " & ds1.Tables(RS).Rows(0)("得意先住所")
+            sheet.Range("E11").Value = ds1.Tables(RS).Rows(0)("得意先電話番号")
+
+            sheet.Range("U8").Value = ds1.Tables(RS).Rows(0)("出庫番号")
+            sheet.Range("U9").Value = ds1.Tables(RS).Rows(0)("出庫日")
+
+
+
+            Dim rowCnt As Integer = 0
+            Dim lstRow As Integer = 14
+            'Dim addRowCnt As Integer = 0
+            'Dim currentCnt As Integer = 20
+            Dim num As Integer = 1
+
+
+            For j As Integer = 0 To ds2.Tables(RS).Rows.Count - 1
+                If rowCnt = 0 Then
+                    sheet.Range("A14").Value = num
+                    sheet.Range("C14").Value = ds2.Tables(RS).Rows(j)("メーカー") & " / " & ds2.Tables(RS).Rows(j)("品名") & " / " & ds2.Tables(RS).Rows(j)("型式")
+                    sheet.Range("N14").Value = ds2.Tables(RS).Rows(j)("出庫数量")
+                    sheet.Range("Q14").Value = ds2.Tables(RS).Rows(j)("単位")
+                    sheet.Range("T14").Value = ds2.Tables(RS).Rows(j)("備考")
+                    sheet.Rows(lstRow & ":" & lstRow).AutoFit
+                Else
+                    Dim cellPos As String = lstRow & ":" & lstRow
+                    Dim R As Object
+                    cellPos = lstRow & ":" & lstRow
+                    R = sheet.Range(cellPos)
+                    R.Copy()
+                    R.Insert()
+                    If Marshal.IsComObject(R) Then
+                        Marshal.ReleaseComObject(R)
+                    End If
+
+                    lstRow = lstRow + 1
+
+                    sheet.Range("A" & lstRow).Value = num
+                    sheet.Range("C" & lstRow).Value = ds2.Tables(RS).Rows(j)("メーカー") & " / " & ds2.Tables(RS).Rows(j)("品名") & " / " & ds2.Tables(RS).Rows(j)("型式")
+                    sheet.Range("N" & lstRow).Value = ds2.Tables(RS).Rows(j)("出庫数量")
+                    sheet.Range("Q" & lstRow).Value = ds2.Tables(RS).Rows(j)("単位")
+                    sheet.Range("T" & lstRow).Value = ds2.Tables(RS).Rows(j)("備考")
+                    sheet.Rows(lstRow & ":" & lstRow).AutoFit
+
+                End If
+            Next
+
+            book.SaveAs(sOutFile)
+
+            '_msgHd.dspMSG("CreateExcel")
+            createFlg = True
+
+        Catch ex As Exception
+            Throw ex
+
+        Finally
+            app.Quit()
+            Marshal.ReleaseComObject(sheet)
+            Marshal.ReleaseComObject(book)
+            Marshal.ReleaseComObject(app)
+
+        End Try
         'Dim test As String = ds1.Tables(RS).Rows(0)("")
     End Sub
 End Class
