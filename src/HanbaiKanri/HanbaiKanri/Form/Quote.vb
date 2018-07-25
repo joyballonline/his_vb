@@ -1832,7 +1832,7 @@ Public Class Quote
                         If supplierlist(i) Is ds3.tables(RS).rows(j)("仕入先名称") And ds3.tables(RS).rows(j)("仕入単価") <= 0 And ds3.tables(RS).rows(j)("仕入区分") = 1 Then
                             If rowCnt = 0 Then
                                 sheet.Range("A23").Value = ds3.tables(RS).rows(j)("メーカー") & vbLf & ds3.tables(RS).rows(j)("品名") & vbLf & ds3.tables(RS).rows(j)("型式")
-                                sheet.Range("B23").Value = ds3.tables(RS).rows(j)("数量") & " " & ds3.tables(RS).rows(j)("単位")
+                                sheet.Range("J23").Value = ds3.tables(RS).rows(j)("数量") & " " & ds3.tables(RS).rows(j)("単位")
                                 'sheet.Rows(lstRow & ":" & lstRow).AutoFit
                             Else
                                 Dim cellPos As String = lstRow & ":" & lstRow
