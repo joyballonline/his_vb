@@ -1848,7 +1848,7 @@ Public Class Quote
                                 lstRow = lstRow + 1
 
                                 sheet.Range("A" & lstRow).Value = ds3.tables(RS).rows(j)("メーカー") & vbLf & ds3.tables(RS).rows(j)("品名") & vbLf & ds3.tables(RS).rows(j)("型式")
-                                sheet.Range("B" & lstRow).Value = ds3.tables(RS).rows(j)("数量") & " " & ds3.tables(RS).rows(j)("単位")
+                                sheet.Range("J" & lstRow).Value = ds3.tables(RS).rows(j)("数量") & " " & ds3.tables(RS).rows(j)("単位")
                                 'sheet.Rows(lstRow & ":" & lstRow).AutoFit
 
                             End If
