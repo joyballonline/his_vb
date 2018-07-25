@@ -96,14 +96,7 @@ Public Class frmC01F30_Menu
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Me.前回操作日時 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.My前回操作日時 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.説明 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.処理名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.業務 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.処理ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnSelect = New System.Windows.Forms.Button()
-        Me.操作者 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.cmdExit = New System.Windows.Forms.Button()
         Me.chkM01 = New System.Windows.Forms.CheckBox()
         Me.chkH07 = New System.Windows.Forms.CheckBox()
@@ -114,65 +107,15 @@ Public Class frmC01F30_Menu
         Me.dgvLIST = New System.Windows.Forms.DataGridView()
         Me.chkH06 = New System.Windows.Forms.CheckBox()
         Me.chkH03 = New System.Windows.Forms.CheckBox()
+        Me.処理ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.業務 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.処理名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.説明 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.My前回操作日時 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.操作者 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.前回操作日時 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.dgvLIST, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        '前回操作日時
-        '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
-        Me.前回操作日時.DefaultCellStyle = DataGridViewCellStyle1
-        Me.前回操作日時.HeaderText = "前回操作日時"
-        Me.前回操作日時.Name = "前回操作日時"
-        Me.前回操作日時.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.前回操作日時.Width = 200
-        '
-        'My前回操作日時
-        '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
-        Me.My前回操作日時.DefaultCellStyle = DataGridViewCellStyle2
-        Me.My前回操作日時.HeaderText = " My前回操作日時"
-        Me.My前回操作日時.Name = "My前回操作日時"
-        Me.My前回操作日時.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.My前回操作日時.Width = 200
-        '
-        '説明
-        '
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
-        Me.説明.DefaultCellStyle = DataGridViewCellStyle3
-        Me.説明.HeaderText = "説明"
-        Me.説明.Name = "説明"
-        Me.説明.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.説明.Width = 320
-        '
-        '処理名
-        '
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
-        Me.処理名.DefaultCellStyle = DataGridViewCellStyle4
-        Me.処理名.HeaderText = "処理名"
-        Me.処理名.Name = "処理名"
-        Me.処理名.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.処理名.Width = 200
-        '
-        '業務
-        '
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
-        Me.業務.DefaultCellStyle = DataGridViewCellStyle5
-        Me.業務.HeaderText = "業務"
-        Me.業務.Name = "業務"
-        Me.業務.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.業務.Width = 200
-        '
-        '処理ID
-        '
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.処理ID.DefaultCellStyle = DataGridViewCellStyle6
-        Me.処理ID.HeaderText = "処理ID"
-        Me.処理ID.Name = "処理ID"
-        Me.処理ID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.処理ID.Visible = False
-        Me.処理ID.Width = 130
         '
         'btnSelect
         '
@@ -187,15 +130,6 @@ Public Class frmC01F30_Menu
         Me.btnSelect.TabIndex = 20
         Me.btnSelect.Text = "選択(&G)"
         Me.btnSelect.UseVisualStyleBackColor = True
-        '
-        '操作者
-        '
-        DataGridViewCellStyle7.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
-        Me.操作者.DefaultCellStyle = DataGridViewCellStyle7
-        Me.操作者.HeaderText = "　操作者"
-        Me.操作者.Name = "操作者"
-        Me.操作者.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.操作者.Width = 200
         '
         'cmdExit
         '
@@ -223,6 +157,7 @@ Public Class frmC01F30_Menu
         Me.chkM01.TabIndex = 18
         Me.chkM01.Text = "マスタ保守"
         Me.chkM01.UseVisualStyleBackColor = True
+        Me.chkM01.Visible = False
         '
         'chkH07
         '
@@ -237,6 +172,7 @@ Public Class frmC01F30_Menu
         Me.chkH07.TabIndex = 16
         Me.chkH07.Text = "入庫業務"
         Me.chkH07.UseVisualStyleBackColor = True
+        Me.chkH07.Visible = False
         '
         'chkH05
         '
@@ -251,6 +187,7 @@ Public Class frmC01F30_Menu
         Me.chkH05.TabIndex = 15
         Me.chkH05.Text = "発注業務"
         Me.chkH05.UseVisualStyleBackColor = True
+        Me.chkH05.Visible = False
         '
         'chkH04
         '
@@ -265,6 +202,7 @@ Public Class frmC01F30_Menu
         Me.chkH04.TabIndex = 14
         Me.chkH04.Text = "出庫業務"
         Me.chkH04.UseVisualStyleBackColor = True
+        Me.chkH04.Visible = False
         '
         'chkH02
         '
@@ -279,6 +217,7 @@ Public Class frmC01F30_Menu
         Me.chkH02.TabIndex = 13
         Me.chkH02.Text = "受注業務"
         Me.chkH02.UseVisualStyleBackColor = True
+        Me.chkH02.Visible = False
         '
         'chkH01
         '
@@ -293,17 +232,18 @@ Public Class frmC01F30_Menu
         Me.chkH01.TabIndex = 12
         Me.chkH01.Text = "注文業務"
         Me.chkH01.UseVisualStyleBackColor = True
+        Me.chkH01.Visible = False
         '
         'dgvLIST
         '
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle8.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvLIST.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvLIST.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.dgvLIST.ColumnHeadersHeight = 25
         Me.dgvLIST.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.処理ID, Me.業務, Me.処理名, Me.説明, Me.My前回操作日時, Me.操作者, Me.前回操作日時})
         Me.dgvLIST.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
@@ -329,6 +269,7 @@ Public Class frmC01F30_Menu
         Me.chkH06.TabIndex = 21
         Me.chkH06.Text = "仕入業務"
         Me.chkH06.UseVisualStyleBackColor = True
+        Me.chkH06.Visible = False
         '
         'chkH03
         '
@@ -343,6 +284,76 @@ Public Class frmC01F30_Menu
         Me.chkH03.TabIndex = 22
         Me.chkH03.Text = "売上業務"
         Me.chkH03.UseVisualStyleBackColor = True
+        Me.chkH03.Visible = False
+        '
+        '処理ID
+        '
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.処理ID.DefaultCellStyle = DataGridViewCellStyle2
+        Me.処理ID.HeaderText = "処理ID"
+        Me.処理ID.Name = "処理ID"
+        Me.処理ID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.処理ID.Visible = False
+        Me.処理ID.Width = 130
+        '
+        '業務
+        '
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        Me.業務.DefaultCellStyle = DataGridViewCellStyle3
+        Me.業務.HeaderText = "業務"
+        Me.業務.Name = "業務"
+        Me.業務.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.業務.Width = 200
+        '
+        '処理名
+        '
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        Me.処理名.DefaultCellStyle = DataGridViewCellStyle4
+        Me.処理名.HeaderText = "処理名"
+        Me.処理名.Name = "処理名"
+        Me.処理名.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.処理名.Width = 200
+        '
+        '説明
+        '
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        Me.説明.DefaultCellStyle = DataGridViewCellStyle5
+        Me.説明.HeaderText = "説明"
+        Me.説明.Name = "説明"
+        Me.説明.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.説明.Width = 320
+        '
+        'My前回操作日時
+        '
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        Me.My前回操作日時.DefaultCellStyle = DataGridViewCellStyle6
+        Me.My前回操作日時.HeaderText = " My前回操作日時"
+        Me.My前回操作日時.Name = "My前回操作日時"
+        Me.My前回操作日時.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.My前回操作日時.Visible = False
+        Me.My前回操作日時.Width = 200
+        '
+        '操作者
+        '
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        Me.操作者.DefaultCellStyle = DataGridViewCellStyle7
+        Me.操作者.HeaderText = "　操作者"
+        Me.操作者.Name = "操作者"
+        Me.操作者.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.操作者.Visible = False
+        Me.操作者.Width = 200
+        '
+        '前回操作日時
+        '
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle8.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        Me.前回操作日時.DefaultCellStyle = DataGridViewCellStyle8
+        Me.前回操作日時.HeaderText = "前回操作日時"
+        Me.前回操作日時.Name = "前回操作日時"
+        Me.前回操作日時.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.前回操作日時.Visible = False
+        Me.前回操作日時.Width = 200
         '
         'frmC01F30_Menu
         '

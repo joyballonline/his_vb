@@ -66,7 +66,7 @@ Public Class OrderingList
         '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
         StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
         Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
-
+        Me.ControlBox = Not Me.ControlBox
         _init = True
 
     End Sub
@@ -903,11 +903,23 @@ Public Class OrderingList
         Sql1 += "得意先担当者役職"
         Sql1 += ", "
         Sql1 += "得意先担当者名"
+        Dim result As DialogResult = MessageBox.Show("発注を取り消しますか？",
+                                             "質問",
+                                             MessageBoxButtons.YesNoCancel,
+                                             MessageBoxIcon.Exclamation,
+                                             MessageBoxDefaultButton.Button2)
 
-        _db.executeDB(Sql1)
-        DgvHtyhd.Rows.Clear()
-        DgvHtyhd.Columns.Clear()
-        Dim Status As String = "EXCLUSION"
-        PurchaseListLoad(Status)
+        If result = DialogResult.Yes Then
+            _db.executeDB(Sql1)
+            DgvHtyhd.Rows.Clear()
+            DgvHtyhd.Columns.Clear()
+            Dim Status As String = "EXCLUSION"
+            PurchaseListLoad(Status)
+        ElseIf result = DialogResult.No Then
+
+        ElseIf result = DialogResult.Cancel Then
+
+        End If
+
     End Sub
 End Class

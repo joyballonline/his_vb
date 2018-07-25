@@ -82,7 +82,7 @@ Public Class Quote
         '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
         StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
         Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
-
+        Me.ControlBox = Not Me.ControlBox
         _init = True
 
     End Sub
@@ -432,6 +432,10 @@ Public Class Quote
             Dim RequestFlg As Boolean = True
             For i As Integer = 0 To DgvItemList.Rows.Count() - 1
                 If DgvItemList.Rows(i).Cells("仕入単価").Value = 0 Then
+                Else
+                    RequestFlg = False
+                End If
+                If DgvItemList.Rows(i).Cells("仕入区分").Value = 1 Then
                 Else
                     RequestFlg = False
                 End If

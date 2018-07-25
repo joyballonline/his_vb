@@ -72,7 +72,8 @@ Public Class PurchasingManagement
         '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
         StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
         Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
-
+        Me.ControlBox = Not Me.ControlBox
+        DtpPurchaseDate.Value = Date.Now
         _init = True
 
     End Sub
@@ -267,16 +268,16 @@ Public Class PurchasingManagement
                 If ds3.Tables(RS).Rows(index)("発注残数") = 0 Then
                 Else
                     DgvAdd.Rows.Add()
-                    DgvAdd.Rows(index).Cells("行番号").Value = ds3.Tables(RS).Rows(index)("行番号")
-                    DgvAdd.Rows(index).Cells("仕入区分").Value = ds3.Tables(RS).Rows(index)("仕入区分")
-                    DgvAdd.Rows(index).Cells("メーカー").Value = ds3.Tables(RS).Rows(index)("メーカー")
-                    DgvAdd.Rows(index).Cells("品名").Value = ds3.Tables(RS).Rows(index)("品名")
-                    DgvAdd.Rows(index).Cells("型式").Value = ds3.Tables(RS).Rows(index)("型式")
-                    DgvAdd.Rows(index).Cells("仕入先").Value = ds3.Tables(RS).Rows(index)("仕入先名")
-                    DgvAdd.Rows(index).Cells("単位").Value = ds3.Tables(RS).Rows(index)("単位")
-                    DgvAdd.Rows(index).Cells("仕入値").Value = ds3.Tables(RS).Rows(index)("仕入値")
-                    DgvAdd.Rows(index).Cells("仕入数量").Value = 0
-                    DgvAdd.Rows(index).Cells("備考").Value = ds3.Tables(RS).Rows(index)("備考")
+                    DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("行番号").Value = ds3.Tables(RS).Rows(index)("行番号")
+                    DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("仕入区分").Value = ds3.Tables(RS).Rows(index)("仕入区分")
+                    DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("メーカー").Value = ds3.Tables(RS).Rows(index)("メーカー")
+                    DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("品名").Value = ds3.Tables(RS).Rows(index)("品名")
+                    DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("型式").Value = ds3.Tables(RS).Rows(index)("型式")
+                    DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("仕入先").Value = ds3.Tables(RS).Rows(index)("仕入先名")
+                    DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("単位").Value = ds3.Tables(RS).Rows(index)("単位")
+                    DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("仕入値").Value = ds3.Tables(RS).Rows(index)("仕入値")
+                    DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("仕入数量").Value = 0
+                    DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("備考").Value = ds3.Tables(RS).Rows(index)("備考")
                 End If
             Next
 
@@ -738,7 +739,7 @@ Public Class PurchasingManagement
 
             Dim PurchaseNum As Integer
             Dim OrdingNum As Integer
-            For index As Integer = 0 To ds2.Tables(RS).Rows.Count - 1
+            For index As Integer = 0 To DgvAdd.Rows.Count() - 1
                 Sql6 = ""
                 Sql6 += "UPDATE "
                 Sql6 += "Public."

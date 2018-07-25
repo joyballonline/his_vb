@@ -72,7 +72,8 @@ Public Class OrderManagement
         '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
         StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
         Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
-
+        Me.ControlBox = Not Me.ControlBox
+        DtpOrderDate.Value = Date.Now
         _init = True
 
     End Sub
@@ -86,7 +87,7 @@ Public Class OrderManagement
             LblAdd.Visible = False
             LblOrderDate.Visible = False
             LblRemarks.Visible = False
-            DtpPurchaseDate.Visible = False
+            DtpOrderDate.Visible = False
             TxtCount1.Visible = False
             TxtCount2.Visible = False
             TxtCount3.Visible = False
@@ -264,16 +265,16 @@ Public Class OrderManagement
                 If ds3.Tables(RS).Rows(index)("受注残数") = 0 Then
                 Else
                     DgvAdd.Rows.Add()
-                    DgvAdd.Rows(index).Cells("行番号").Value = ds3.Tables(RS).Rows(index)("行番号")
-                    DgvAdd.Rows(index).Cells("仕入区分").Value = ds3.Tables(RS).Rows(index)("仕入区分")
-                    DgvAdd.Rows(index).Cells("メーカー").Value = ds3.Tables(RS).Rows(index)("メーカー")
-                    DgvAdd.Rows(index).Cells("品名").Value = ds3.Tables(RS).Rows(index)("品名")
-                    DgvAdd.Rows(index).Cells("型式").Value = ds3.Tables(RS).Rows(index)("型式")
-                    DgvAdd.Rows(index).Cells("仕入先").Value = ds3.Tables(RS).Rows(index)("仕入先名")
-                    DgvAdd.Rows(index).Cells("単位").Value = ds3.Tables(RS).Rows(index)("単位")
-                    DgvAdd.Rows(index).Cells("売単価").Value = ds3.Tables(RS).Rows(index)("売単価")
-                    DgvAdd.Rows(index).Cells("売上数量").Value = 0
-                    DgvAdd.Rows(index).Cells("備考").Value = ds3.Tables(RS).Rows(index)("備考")
+                    DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("行番号").Value = ds3.Tables(RS).Rows(index)("行番号")
+                    DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("仕入区分").Value = ds3.Tables(RS).Rows(index)("仕入区分")
+                    DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("メーカー").Value = ds3.Tables(RS).Rows(index)("メーカー")
+                    DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("品名").Value = ds3.Tables(RS).Rows(index)("品名")
+                    DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("型式").Value = ds3.Tables(RS).Rows(index)("型式")
+                    DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("仕入先").Value = ds3.Tables(RS).Rows(index)("仕入先名")
+                    DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("単位").Value = ds3.Tables(RS).Rows(index)("単位")
+                    DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("売単価").Value = ds3.Tables(RS).Rows(index)("売単価")
+                    DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("売上数量").Value = 0
+                    DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("備考").Value = ds3.Tables(RS).Rows(index)("備考")
                 End If
             Next
 
@@ -390,7 +391,7 @@ Public Class OrderManagement
             End If
         Next
 
-        If TxtOrderDate.Text >= DtpPurchaseDate.Value Then
+        If TxtOrderDate.Text >= DtpOrderDate.Value Then
             MessageBox.Show("売上日の値が受注日以前になっています。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
             errFlg = False
         End If
@@ -768,7 +769,7 @@ Public Class OrderManagement
 
             Dim PurchaseNum As Integer
             Dim OrdingNum As Integer
-            For index As Integer = 0 To ds2.Tables(RS).Rows.Count - 1
+            For index As Integer = 0 To DgvAdd.Rows.Count() - 1
                 Sql6 = ""
                 Sql6 += "UPDATE "
                 Sql6 += "Public."
@@ -1085,11 +1086,11 @@ Public Class OrderManagement
             Sql9 += "更新日"
 
             _db.executeDB(Sql9)
+            Dim openForm As Form = Nothing
+            Dim Status As String = "SALES"
+            openForm = New OrderList(_msgHd, _db, _langHd, Status)
+            openForm.Show()
+            Me.Close()
         End If
-        Dim openForm As Form = Nothing
-        Dim Status As String = "EDIT"
-        openForm = New OrderList(_msgHd, _db, _langHd, Status)
-        openForm.Show()
-        Me.Close()
     End Sub
 End Class

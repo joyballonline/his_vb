@@ -103,6 +103,7 @@ Partial Class CustomerSearch
         Me.Dgv_Customer.MultiSelect = False
         Me.Dgv_Customer.Name = "Dgv_Customer"
         Me.Dgv_Customer.ReadOnly = True
+        Me.Dgv_Customer.RowHeadersVisible = False
         Me.Dgv_Customer.RowTemplate.Height = 21
         Me.Dgv_Customer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.Dgv_Customer.Size = New System.Drawing.Size(1326, 220)

@@ -24,7 +24,7 @@ Partial Class OrderManagement
     Private Sub InitializeComponent()
         Me.TxtSuffixNo = New System.Windows.Forms.TextBox()
         Me.BtnRegist = New System.Windows.Forms.Button()
-        Me.DtpPurchaseDate = New System.Windows.Forms.DateTimePicker()
+        Me.DtpOrderDate = New System.Windows.Forms.DateTimePicker()
         Me.LblRemarks = New System.Windows.Forms.Label()
         Me.TxtRemarks = New System.Windows.Forms.TextBox()
         Me.LblOrderDate = New System.Windows.Forms.Label()
@@ -73,18 +73,18 @@ Partial Class OrderManagement
         Me.BtnRegist.Text = "登録"
         Me.BtnRegist.UseVisualStyleBackColor = True
         '
-        'DtpPurchaseDate
+        'DtpOrderDate
         '
-        Me.DtpPurchaseDate.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.DtpPurchaseDate.CustomFormat = "yyyy/MM/dd"
-        Me.DtpPurchaseDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.DtpPurchaseDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DtpPurchaseDate.Location = New System.Drawing.Point(292, 443)
-        Me.DtpPurchaseDate.Name = "DtpPurchaseDate"
-        Me.DtpPurchaseDate.Size = New System.Drawing.Size(148, 22)
-        Me.DtpPurchaseDate.TabIndex = 256
-        Me.DtpPurchaseDate.TabStop = False
-        Me.DtpPurchaseDate.Value = New Date(2018, 7, 16, 0, 0, 0, 0)
+        Me.DtpOrderDate.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.DtpOrderDate.CustomFormat = "yyyy/MM/dd"
+        Me.DtpOrderDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.DtpOrderDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.DtpOrderDate.Location = New System.Drawing.Point(292, 443)
+        Me.DtpOrderDate.Name = "DtpOrderDate"
+        Me.DtpOrderDate.Size = New System.Drawing.Size(148, 22)
+        Me.DtpOrderDate.TabIndex = 256
+        Me.DtpOrderDate.TabStop = False
+        Me.DtpOrderDate.Value = New Date(2018, 7, 25, 13, 29, 25, 0)
         '
         'LblRemarks
         '
@@ -115,7 +115,7 @@ Partial Class OrderManagement
         Me.LblOrderDate.Name = "LblOrderDate"
         Me.LblOrderDate.Size = New System.Drawing.Size(98, 22)
         Me.LblOrderDate.TabIndex = 253
-        Me.LblOrderDate.Text = "受注日"
+        Me.LblOrderDate.Text = "売上日"
         Me.LblOrderDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'LblAdd
@@ -349,7 +349,7 @@ Partial Class OrderManagement
         Me.ClientSize = New System.Drawing.Size(1350, 729)
         Me.Controls.Add(Me.TxtSuffixNo)
         Me.Controls.Add(Me.BtnRegist)
-        Me.Controls.Add(Me.DtpPurchaseDate)
+        Me.Controls.Add(Me.DtpOrderDate)
         Me.Controls.Add(Me.LblRemarks)
         Me.Controls.Add(Me.TxtRemarks)
         Me.Controls.Add(Me.LblOrderDate)
@@ -386,7 +386,7 @@ Partial Class OrderManagement
 
     Friend WithEvents TxtSuffixNo As TextBox
     Friend WithEvents BtnRegist As Button
-    Friend WithEvents DtpPurchaseDate As DateTimePicker
+    Friend WithEvents DtpOrderDate As DateTimePicker
     Friend WithEvents LblRemarks As Label
     Friend WithEvents TxtRemarks As TextBox
     Friend WithEvents LblOrderDate As Label
