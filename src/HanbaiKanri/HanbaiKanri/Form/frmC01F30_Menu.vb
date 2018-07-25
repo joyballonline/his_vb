@@ -294,7 +294,7 @@ Public Class frmC01F30_Menu
         Me.処理ID.Name = "処理ID"
         Me.処理ID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.処理ID.Visible = False
-        Me.処理ID.Width = 130
+        Me.処理ID.Width = 300
         '
         '業務
         '
@@ -303,7 +303,7 @@ Public Class frmC01F30_Menu
         Me.業務.HeaderText = "業務"
         Me.業務.Name = "業務"
         Me.業務.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.業務.Width = 200
+        Me.業務.Width = 300
         '
         '処理名
         '
@@ -321,7 +321,7 @@ Public Class frmC01F30_Menu
         Me.説明.HeaderText = "説明"
         Me.説明.Name = "説明"
         Me.説明.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.説明.Width = 320
+        Me.説明.Width = 640
         '
         'My前回操作日時
         '
@@ -723,6 +723,9 @@ Public Class frmC01F30_Menu
         If chkH01.Checked Then
             checkMenu += " m.処理ＩＤ like 'H01%' "
         End If
+        checkMenu += " or "
+        checkMenu += " m.処理ＩＤ like 'H08%' "
+
         If chkH02.Checked Then
             If checkMenu IsNot "" Then checkMenu += " or "
             checkMenu += " m.処理ＩＤ like 'H02%' "
@@ -816,7 +819,7 @@ Public Class frmC01F30_Menu
                 openForm = New QuoteList(_msgHd, _db, _langHd, Me, Status)
                 openForm.Show()
                 Me.Hide()
-            Case CommonConst.MENU_H0170  '見積取消
+            Case CommonConst.MENU_H0810  '受発注登録
                 Dim Status As String = "ORDER_PURCHASE"
                 Dim openForm As Form = Nothing
                 openForm = New QuoteList(_msgHd, _db, _langHd, Me, Status)
