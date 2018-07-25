@@ -1216,7 +1216,7 @@ Public Class GoodsIssue
             Throw ex
 
         Finally
-            app.Quit()
+            'app.Quit()
             Marshal.ReleaseComObject(sheet)
             Marshal.ReleaseComObject(book)
             Marshal.ReleaseComObject(app)
@@ -1304,7 +1304,7 @@ Public Class GoodsIssue
             Throw ex
 
         Finally
-            app.Quit()
+            'app.Quit()
             Marshal.ReleaseComObject(sheet)
             Marshal.ReleaseComObject(book)
             Marshal.ReleaseComObject(app)

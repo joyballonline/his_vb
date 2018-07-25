@@ -1821,7 +1821,7 @@ Public Class Quote
 
 
                     For j As Integer = 0 To ds3.tables(RS).rows.count - 1
-                        If supplierlist(i) Is ds3.tables(RS).rows(j)("仕入先名称") And ds3.tables(RS).rows(j)("仕入単価") <= 0 Then
+                        If supplierlist(i) Is ds3.tables(RS).rows(j)("仕入先名称") And ds3.tables(RS).rows(j)("仕入単価") <= 0 And ds3.tables(RS).rows(j)("仕入区分") = 1 Then
                             If rowCnt = 0 Then
                                 sheet.Range("A23").Value = ds3.tables(RS).rows(j)("メーカー") & vbLf & ds3.tables(RS).rows(j)("品名") & vbLf & ds3.tables(RS).rows(j)("型式")
                                 sheet.Range("B23").Value = ds3.tables(RS).rows(j)("数量") & " " & ds3.tables(RS).rows(j)("単位")
@@ -1860,7 +1860,7 @@ Public Class Quote
                     Throw ex
 
                 Finally
-                    app.Quit()
+                    'app.Quit()
                     Marshal.ReleaseComObject(sheet)
                     Marshal.ReleaseComObject(book)
                     Marshal.ReleaseComObject(app)
@@ -1868,11 +1868,11 @@ Public Class Quote
                 End Try
             End If
 
-            If (createFlg = True) Then
-                _msgHd.dspMSG("CreateExcel")
-            End If
-
         Next
+
+        If (createFlg = True) Then
+            _msgHd.dspMSG("CreateExcel")
+        End If
 
     End Sub
 
