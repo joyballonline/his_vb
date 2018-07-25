@@ -429,17 +429,13 @@ Public Class Quote
             BtnDown.Visible = False
             BtnClone.Visible = False
             BtnInsert.Visible = False
-            Dim RequestFlg As Boolean = True
+            Dim RequestFlg As Boolean = False
             For i As Integer = 0 To DgvItemList.Rows.Count() - 1
-                If DgvItemList.Rows(i).Cells("仕入単価").Value = 0 Then
-                Else
-                    RequestFlg = False
-                End If
-                If DgvItemList.Rows(i).Cells("仕入区分").Value = 1 Then
-                Else
-                    RequestFlg = False
+                If DgvItemList.Rows(i).Cells("仕入区分").Value = 1 And DgvItemList.Rows(i).Cells("仕入単価").Value = 0 Then
+                    RequestFlg = True
                 End If
             Next
+
             If RequestFlg Then
                 BtnQuoteRequest.Visible = True
                 BtnQuoteRequest.Location = New Point(1004, 677)
@@ -554,6 +550,7 @@ Public Class Quote
 
     '選択行の削除（削除時に金額の再計算、Noの再採番）
     Private Sub BtnRowsDel_Click(sender As Object, e As EventArgs) Handles BtnRowsDel.Click
+        LoadFlg = False
 
         For Each r As DataGridViewCell In DgvItemList.SelectedCells
             DgvItemList.Rows.RemoveAt(r.RowIndex)
@@ -583,6 +580,7 @@ Public Class Quote
             No += 1
         Next c
         TxtItemCount.Text = DgvItemList.Rows.Count()
+        LoadFlg = True
     End Sub
 
     '行の複写（選択行の直下に複写）
@@ -1829,7 +1827,7 @@ Public Class Quote
 
 
                     For j As Integer = 0 To ds3.tables(RS).rows.count - 1
-                        If supplierlist(i) Is ds3.tables(RS).rows(j)("仕入先名称") And ds3.tables(RS).rows(j)("仕入単価") <= 0 And ds3.tables(RS).rows(j)("仕入区分") = 1 Then
+                        If supplierlist(i) Is ds3.tables(RS).rows(j)("仕入先名称") And ds3.tables(RS).rows(j)("仕入単価") <= 0 Then
                             If rowCnt = 0 Then
                                 sheet.Range("A23").Value = ds3.tables(RS).rows(j)("メーカー") & vbLf & ds3.tables(RS).rows(j)("品名") & vbLf & ds3.tables(RS).rows(j)("型式")
                                 sheet.Range("B23").Value = ds3.tables(RS).rows(j)("数量") & " " & ds3.tables(RS).rows(j)("単位")
@@ -1868,7 +1866,7 @@ Public Class Quote
                     Throw ex
 
                 Finally
-                    'app.Quit()
+                    app.Quit()
                     Marshal.ReleaseComObject(sheet)
                     Marshal.ReleaseComObject(book)
                     Marshal.ReleaseComObject(app)
@@ -1876,11 +1874,11 @@ Public Class Quote
                 End Try
             End If
 
-        Next
+            If (createFlg = True) Then
+                _msgHd.dspMSG("CreateExcel")
+            End If
 
-        If (createFlg = True) Then
-            _msgHd.dspMSG("CreateExcel")
-        End If
+        Next
 
     End Sub
 
