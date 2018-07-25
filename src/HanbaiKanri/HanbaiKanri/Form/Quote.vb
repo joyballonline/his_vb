@@ -1641,7 +1641,7 @@ Public Class Quote
             Throw ex
 
         Finally
-            app.Quit()
+            'app.Quit()
             'Marshal.ReleaseComObject(sheet)
             'Marshal.ReleaseComObject(book)
             'Marshal.ReleaseComObject(app)
