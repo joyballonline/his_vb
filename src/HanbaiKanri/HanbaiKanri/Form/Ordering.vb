@@ -249,7 +249,7 @@ Public Class Ordering
             DgvItemList.Rows(index).Cells(5).Value = ds3.Tables(RS).Rows(index)("発注数量")
             DgvItemList.Rows(index).Cells(6).Value = ds3.Tables(RS).Rows(index)("単位")
             DgvItemList.Rows(index).Cells(7).Value = ds3.Tables(RS).Rows(index)("仕入先名")
-            DgvItemList.Rows(index).Cells(8).Value = ds3.Tables(RS).Rows(index)("仕入単価")
+            DgvItemList.Rows(index).Cells(8).Value = ds3.Tables(RS).Rows(index)("仕入値")
             DgvItemList.Rows(index).Cells(9).Value = ds3.Tables(RS).Rows(index)("間接費")
             DgvItemList.Rows(index).Cells(10).Value = ds3.Tables(RS).Rows(index)("仕入金額")
             DgvItemList.Rows(index).Cells(11).Value = ds3.Tables(RS).Rows(index)("リードタイム")
