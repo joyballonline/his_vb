@@ -72,8 +72,8 @@ Public Class Company
     End Sub
 
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
-        Dim MC As MstCustomer
-        MC = New MstCustomer(_msgHd, _db, _langHd)
+        Dim MC As MstCompany
+        MC = New MstCompany(_msgHd, _db, _langHd)
         MC.Show()
         Me.Close()
     End Sub

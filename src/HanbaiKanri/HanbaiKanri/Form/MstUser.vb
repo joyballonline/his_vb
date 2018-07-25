@@ -122,7 +122,7 @@ Public Class MstUser
         Dim Status As String = "EDIT"
         Dim CompanyCode As String = Dgv_User.Rows(Dgv_User.CurrentCell.RowIndex).Cells("会社コード").Value
         Dim UserId As String = Dgv_User.Rows(Dgv_User.CurrentCell.RowIndex).Cells("ユーザID").Value
-        openForm = New User(_msgHd, _db, _langHd, Status, UserId)   '処理選択
+        openForm = New User(_msgHd, _db, _langHd, Status, CompanyCode, UserId)   '処理選択
         openForm.Show()
         Me.Hide()   ' 自分は隠れる
     End Sub

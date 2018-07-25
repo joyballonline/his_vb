@@ -255,7 +255,7 @@ Public Class User
             Sql += "FROM "
             Sql += "public"
             Sql += "."
-            Sql += "m02_user"
+            Sql += "m02_user "
             Sql += "WHERE"
             Sql += " 会社コード"
             Sql += "='"
@@ -270,14 +270,14 @@ Public Class User
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-            TxtCompanyCode.Text = ds.Tables(RS).Rows(0)("会社コード").Value
-            TxtUserId.Text = ds.Tables(RS).Rows(0)("ユーザＩＤ").Value
-            TxtName.Text = ds.Tables(RS).Rows(0)("氏名").Value
-            TxtShortName.Text = ds.Tables(RS).Rows(0)("略名").Value
-            TxtRemarks.Text = ds.Tables(RS).Rows(0)("備考").Value
-            TxtFlg.Text = ds.Tables(RS).Rows(0)("無効フラグ").Value
-            TxtAuthority.Text = ds.Tables(RS).Rows(0)("権限").Value
-            TxtLangage.Text = ds.Tables(RS).Rows(0)("言語").Value
+            TxtCompanyCode.Text = ds.Tables(RS).Rows(0)("会社コード")
+            TxtUserId.Text = ds.Tables(RS).Rows(0)("ユーザＩＤ")
+            TxtName.Text = ds.Tables(RS).Rows(0)("氏名")
+            TxtShortName.Text = ds.Tables(RS).Rows(0)("略名")
+            TxtRemarks.Text = ds.Tables(RS).Rows(0)("備考")
+            TxtFlg.Text = ds.Tables(RS).Rows(0)("無効フラグ")
+            TxtAuthority.Text = ds.Tables(RS).Rows(0)("権限")
+            TxtLangage.Text = ds.Tables(RS).Rows(0)("言語")
         End If
     End Sub
 End Class

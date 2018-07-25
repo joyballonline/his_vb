@@ -788,7 +788,7 @@ Public Class PurchaseList
         Sql1 += "更新日"
         Sql1 += ", "
         Sql1 += "更新者"
-        Dim result As DialogResult = MessageBox.Show("発注を取り消しますか？",
+        Dim result As DialogResult = MessageBox.Show("仕入を取り消しますか？",
                                              "質問",
                                              MessageBoxButtons.YesNoCancel,
                                              MessageBoxIcon.Exclamation,
