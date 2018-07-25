@@ -268,16 +268,16 @@ Public Class GoodsIssue
                 If ds3.Tables(RS).Rows(index)("受注残数") = 0 Then
                 Else
                     DgvAdd.Rows.Add()
-                    DgvAdd.Rows(index).Cells("行番号").Value = ds3.Tables(RS).Rows(index)("行番号")
-                    DgvAdd.Rows(index).Cells("仕入区分").Value = ds3.Tables(RS).Rows(index)("仕入区分")
-                    DgvAdd.Rows(index).Cells("メーカー").Value = ds3.Tables(RS).Rows(index)("メーカー")
-                    DgvAdd.Rows(index).Cells("品名").Value = ds3.Tables(RS).Rows(index)("品名")
-                    DgvAdd.Rows(index).Cells("型式").Value = ds3.Tables(RS).Rows(index)("型式")
-                    DgvAdd.Rows(index).Cells("仕入先").Value = ds3.Tables(RS).Rows(index)("仕入先名")
-                    DgvAdd.Rows(index).Cells("単位").Value = ds3.Tables(RS).Rows(index)("単位")
-                    DgvAdd.Rows(index).Cells("売単価").Value = ds3.Tables(RS).Rows(index)("売単価")
-                    DgvAdd.Rows(index).Cells("出庫数量").Value = 0
-                    DgvAdd.Rows(index).Cells("備考").Value = ds3.Tables(RS).Rows(index)("備考")
+                    DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("行番号").Value = ds3.Tables(RS).Rows(index)("行番号")
+                    DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("仕入区分").Value = ds3.Tables(RS).Rows(index)("仕入区分")
+                    DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("メーカー").Value = ds3.Tables(RS).Rows(index)("メーカー")
+                    DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("品名").Value = ds3.Tables(RS).Rows(index)("品名")
+                    DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("型式").Value = ds3.Tables(RS).Rows(index)("型式")
+                    DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("仕入先").Value = ds3.Tables(RS).Rows(index)("仕入先名")
+                    DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("単位").Value = ds3.Tables(RS).Rows(index)("単位")
+                    DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("売単価").Value = ds3.Tables(RS).Rows(index)("売単価")
+                    DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("出庫数量").Value = 0
+                    DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("備考").Value = ds3.Tables(RS).Rows(index)("備考")
                 End If
             Next
 

@@ -67,6 +67,7 @@ Public Class OrderingAdd
         StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
         Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
         Me.ControlBox = Not Me.ControlBox
+        TxtInput.Text = frmC01F10_Login.loginValue.TantoNM
         _init = True
 
     End Sub
@@ -646,5 +647,12 @@ Public Class OrderingAdd
         Me.Dispose()
     End Sub
 
+    Private Sub TxtSales_DoubleClick(sender As Object, e As EventArgs) Handles TxtSales.DoubleClick
+        Dim openForm As Form = Nothing
+        Dim Status As String = "PURCHASE"
+        openForm = New SalesSearch(_msgHd, _db, _langHd, Me, Status)   '処理選択
+        openForm.Show(Me)
+        Me.Enabled = False
+    End Sub
 
 End Class

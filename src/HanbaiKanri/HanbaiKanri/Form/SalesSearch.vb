@@ -32,6 +32,7 @@ Public Class SalesSearch
     Private _langHd As UtilLangHandler
     Private _db As UtilDBIf
     Private _parentForm As Form
+    Private _status As String
     Private _companyCode As String = frmC01F10_Login.loginValue.BumonNM
     Private _gh As UtilDataGridViewHandler
     Private _init As Boolean                             '初期処理済フラグ
@@ -47,7 +48,11 @@ Public Class SalesSearch
     '-------------------------------------------------------------------------------
     'コンストラクタ　メニューから呼ばれる
     '-------------------------------------------------------------------------------
-    Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler, ByRef prmRefDbHd As UtilDBIf, ByRef prmRefLang As UtilLangHandler, ByRef prmRefForm As Form)
+    Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler,
+                   ByRef prmRefDbHd As UtilDBIf,
+                   ByRef prmRefLang As UtilLangHandler,
+                   ByRef prmRefForm As Form,
+                   Optional ByRef prmRefStatus As String = "")
         Call Me.New()
 
         _init = False
@@ -57,6 +62,7 @@ Public Class SalesSearch
         _db = prmRefDbHd                                                    'DBハンドラの設定
         _langHd = prmRefLang
         _parentForm = prmRefForm
+        _status = prmRefStatus
         '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
         StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
         Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
@@ -119,22 +125,24 @@ Public Class SalesSearch
     End Sub
 
     Private Sub BtnSelect_Click(sender As Object, e As EventArgs) Handles BtnSelect.Click
-        Try
+        If _status = "PURCHASE" Then
+            Dim frm As OrderingAdd = CType(Me.Owner, OrderingAdd)
+            Dim RowIndex As Integer = DgvUser.CurrentCell.RowIndex
+
+            frm.TxtSales.Text = DgvUser.Rows(RowIndex).Cells("氏名").Value
+        Else
             Dim frm As Quote = CType(Me.Owner, Quote)
             Dim RowIndex As Integer = DgvUser.CurrentCell.RowIndex
 
             frm.TxtSales.Text = DgvUser.Rows(RowIndex).Cells("氏名").Value
+        End If
 
-            _parentForm.Enabled = True
-            _parentForm.Show()
-            Me.Dispose()
 
-        Catch ue As UsrDefException
-            ue.dspMsg()
-        Catch ex As Exception
-            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", UtilClass.getErrDetail(ex)))
-        End Try
+        _parentForm.Enabled = True
+        _parentForm.Show()
+        Me.Dispose()
+
+
     End Sub
 
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click

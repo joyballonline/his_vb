@@ -792,6 +792,10 @@ Public Class Quote
                 Sql1 += " = '"
                 Sql1 += TxtPurchaseTotal.Text
                 Sql1 += "', "
+                Sql1 += "粗利額"
+                Sql1 += " = '"
+                Sql1 += TxtGrossProfit.Text
+                Sql1 += "', "
                 Sql1 += "営業担当者"
                 Sql1 += " = '"
                 Sql1 += TxtSales.Text
@@ -1116,7 +1120,7 @@ Public Class Quote
                 Sql1 += "INSERT INTO "
                 Sql1 += "Public."
                 Sql1 += "t01_mithd("
-                Sql1 += "会社コード, 見積番号, 見積番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額, 仕入金額, 営業担当者, 入力担当者, 備考, ＶＡＴ, 取消区分, 登録日, 更新日, 更新者)"
+                Sql1 += "会社コード, 見積番号, 見積番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額, 仕入金額, 粗利額, 営業担当者, 入力担当者, 備考, ＶＡＴ, 取消区分, 登録日, 更新日, 更新者)"
                 Sql1 += " VALUES('"
                 Sql1 += CompanyCode
                 Sql1 += "', '"
@@ -1153,6 +1157,8 @@ Public Class Quote
                 Sql1 += TxtTotal.Text
                 Sql1 += "', '"
                 Sql1 += TxtPurchaseTotal.Text
+                Sql1 += "', '"
+                Sql1 += TxtGrossProfit.Text
                 Sql1 += "', '"
                 Sql1 += TxtSales.Text
                 Sql1 += "', '"
@@ -1205,6 +1211,8 @@ Public Class Quote
                 Sql1 += "見積金額"
                 Sql1 += ", "
                 Sql1 += "仕入金額"
+                Sql1 += ", "
+                Sql1 += "粗利額"
                 Sql1 += ", "
                 Sql1 += "営業担当者"
                 Sql1 += ", "

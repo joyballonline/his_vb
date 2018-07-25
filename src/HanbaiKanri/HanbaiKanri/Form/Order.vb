@@ -240,6 +240,15 @@ Public Class Order
             If ds1.Tables(RS).Rows(0)("備考") IsNot DBNull.Value Then
                 TxtQuoteRemarks.Text = ds1.Tables(RS).Rows(0)("備考")
             End If
+            If ds1.Tables(RS).Rows(0)("見積金額") IsNot DBNull.Value Then
+                TxtOrderAmount.Text = ds1.Tables(RS).Rows(0)("見積金額")
+            End If
+            If ds1.Tables(RS).Rows(0)("仕入金額") IsNot DBNull.Value Then
+                TxtPurchaseAmount.Text = ds1.Tables(RS).Rows(0)("仕入金額")
+            End If
+            If ds1.Tables(RS).Rows(0)("粗利額") IsNot DBNull.Value Then
+                TxtGrossProfit.Text = ds1.Tables(RS).Rows(0)("粗利額")
+            End If
             If ds1.Tables(RS).Rows(0)("ＶＡＴ") IsNot DBNull.Value Then
                 TxtVat.Text = ds1.Tables(RS).Rows(0)("ＶＡＴ")
             End If
@@ -270,38 +279,36 @@ Public Class Order
                 DgvItemList.Rows.Add()
                 Dim tmp As Integer = ds3.Tables(RS).Rows(index)("仕入区分")
                 DgvItemList(1, index).Value = tmp
-                DgvItemList.Rows(index).Cells(2).Value = ds3.Tables(RS).Rows(index)("メーカー")
-                DgvItemList.Rows(index).Cells(3).Value = ds3.Tables(RS).Rows(index)("品名")
-                DgvItemList.Rows(index).Cells(4).Value = ds3.Tables(RS).Rows(index)("型式")
-                DgvItemList.Rows(index).Cells(5).Value = ds3.Tables(RS).Rows(index)("数量")
-                DgvItemList.Rows(index).Cells(6).Value = ds3.Tables(RS).Rows(index)("単位")
-                DgvItemList.Rows(index).Cells(7).Value = ds3.Tables(RS).Rows(index)("仕入先名称")
-                DgvItemList.Rows(index).Cells(8).Value = ds3.Tables(RS).Rows(index)("仕入単価")
-                DgvItemList.Rows(index).Cells(9).Value = ds3.Tables(RS).Rows(index)("間接費率")
-                DgvItemList.Rows(index).Cells(10).Value = ds3.Tables(RS).Rows(index)("間接費")
-                DgvItemList.Rows(index).Cells(11).Value = ds3.Tables(RS).Rows(index)("仕入金額")
-                DgvItemList.Rows(index).Cells(12).Value = ds3.Tables(RS).Rows(index)("売単価")
-                DgvItemList.Rows(index).Cells(13).Value = ds3.Tables(RS).Rows(index)("売上金額")
-                DgvItemList.Rows(index).Cells(14).Value = ds3.Tables(RS).Rows(index)("粗利額")
-                DgvItemList.Rows(index).Cells(15).Value = ds3.Tables(RS).Rows(index)("粗利率")
-                DgvItemList.Rows(index).Cells(16).Value = ds3.Tables(RS).Rows(index)("リードタイム")
-                DgvItemList.Rows(index).Cells(17).Value = ds3.Tables(RS).Rows(index)("備考")
+                DgvItemList.Rows(index).Cells("メーカー").Value = ds3.Tables(RS).Rows(index)("メーカー")
+                DgvItemList.Rows(index).Cells("品名").Value = ds3.Tables(RS).Rows(index)("品名")
+                DgvItemList.Rows(index).Cells("型式").Value = ds3.Tables(RS).Rows(index)("型式")
+                DgvItemList.Rows(index).Cells("数量").Value = ds3.Tables(RS).Rows(index)("数量")
+                DgvItemList.Rows(index).Cells("単位").Value = ds3.Tables(RS).Rows(index)("単位")
+                DgvItemList.Rows(index).Cells("仕入先").Value = ds3.Tables(RS).Rows(index)("仕入先名称")
+                DgvItemList.Rows(index).Cells("仕入値").Value = ds3.Tables(RS).Rows(index)("仕入単価")
+                DgvItemList.Rows(index).Cells("間接費").Value = ds3.Tables(RS).Rows(index)("間接費")
+                DgvItemList.Rows(index).Cells("売単価").Value = ds3.Tables(RS).Rows(index)("売単価")
+                DgvItemList.Rows(index).Cells("売上金額").Value = ds3.Tables(RS).Rows(index)("売上金額")
+                DgvItemList.Rows(index).Cells("粗利額").Value = ds3.Tables(RS).Rows(index)("粗利額")
+                DgvItemList.Rows(index).Cells("粗利率").Value = ds3.Tables(RS).Rows(index)("粗利率")
+                DgvItemList.Rows(index).Cells("リードタイム").Value = ds3.Tables(RS).Rows(index)("リードタイム")
+                DgvItemList.Rows(index).Cells("備考").Value = ds3.Tables(RS).Rows(index)("備考")
 
             Next
 
             '金額計算
-            Dim Total As Integer = 0
-            Dim PurchaseTotal As Integer = 0
-            Dim GrossProfit As Decimal = 0
+            'Dim Total As Integer = 0
+            'Dim PurchaseTotal As Integer = 0
+            'Dim GrossProfit As Decimal = 0
 
-            For index As Integer = 0 To DgvItemList.Rows.Count - 1
-                PurchaseTotal += DgvItemList.Rows(index).Cells(11).Value
-                Total += DgvItemList.Rows(index).Cells(13).Value
-            Next
+            'For index As Integer = 0 To DgvItemList.Rows.Count - 1
+            '    PurchaseTotal += DgvItemList.Rows(index).Cells(11).Value
+            '    Total += DgvItemList.Rows(index).Cells(13).Value
+            'Next
 
-            TxtOrderAmount.Text = PurchaseTotal
-            TxtPurchaseAmount.Text = Total
-            TxtGrossProfit.Text = Total - PurchaseTotal
+            'TxtOrderAmount.Text = PurchaseTotal
+            'TxtPurchaseAmount.Text = Total
+            'TxtGrossProfit.Text = Total - PurchaseTotal
 
             '行番号の振り直し
             Dim i As Integer = DgvItemList.Rows.Count()

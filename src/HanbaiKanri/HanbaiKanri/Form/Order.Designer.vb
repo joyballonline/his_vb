@@ -85,6 +85,8 @@ Partial Class Order
         Me.LblOrderDate = New System.Windows.Forms.Label()
         Me.LblOrderNo = New System.Windows.Forms.Label()
         Me.DgvItemList = New System.Windows.Forms.DataGridView()
+        Me.TxtPurchaseAmount = New System.Windows.Forms.TextBox()
+        Me.LblPurchaseAmount = New System.Windows.Forms.Label()
         Me.No = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.メーカー = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.品名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -102,8 +104,6 @@ Partial Class Order
         Me.備考 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.出庫数 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.未出庫数 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TxtPurchaseAmount = New System.Windows.Forms.TextBox()
-        Me.LblPurchaseAmount = New System.Windows.Forms.Label()
         CType(Me.DgvItemList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -807,6 +807,33 @@ Partial Class Order
         Me.DgvItemList.Size = New System.Drawing.Size(1329, 337)
         Me.DgvItemList.TabIndex = 149
         '
+        'TxtPurchaseAmount
+        '
+        Me.TxtPurchaseAmount.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.TxtPurchaseAmount.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TxtPurchaseAmount.Enabled = False
+        Me.TxtPurchaseAmount.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtPurchaseAmount.Location = New System.Drawing.Point(1107, 588)
+        Me.TxtPurchaseAmount.MaxLength = 10
+        Me.TxtPurchaseAmount.Name = "TxtPurchaseAmount"
+        Me.TxtPurchaseAmount.ReadOnly = True
+        Me.TxtPurchaseAmount.Size = New System.Drawing.Size(231, 23)
+        Me.TxtPurchaseAmount.TabIndex = 186
+        Me.TxtPurchaseAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'LblPurchaseAmount
+        '
+        Me.LblPurchaseAmount.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.LblPurchaseAmount.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblPurchaseAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblPurchaseAmount.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblPurchaseAmount.Location = New System.Drawing.Point(1001, 588)
+        Me.LblPurchaseAmount.Name = "LblPurchaseAmount"
+        Me.LblPurchaseAmount.Size = New System.Drawing.Size(100, 23)
+        Me.LblPurchaseAmount.TabIndex = 187
+        Me.LblPurchaseAmount.Text = "発注金額"
+        Me.LblPurchaseAmount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'No
         '
         Me.No.HeaderText = "No"
@@ -917,38 +944,13 @@ Partial Class Order
         '
         Me.出庫数.HeaderText = "出庫数"
         Me.出庫数.Name = "出庫数"
+        Me.出庫数.Visible = False
         '
         '未出庫数
         '
         Me.未出庫数.HeaderText = "未出庫数"
         Me.未出庫数.Name = "未出庫数"
-        '
-        'TxtPurchaseAmount
-        '
-        Me.TxtPurchaseAmount.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.TxtPurchaseAmount.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.TxtPurchaseAmount.Enabled = False
-        Me.TxtPurchaseAmount.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtPurchaseAmount.Location = New System.Drawing.Point(1107, 588)
-        Me.TxtPurchaseAmount.MaxLength = 10
-        Me.TxtPurchaseAmount.Name = "TxtPurchaseAmount"
-        Me.TxtPurchaseAmount.ReadOnly = True
-        Me.TxtPurchaseAmount.Size = New System.Drawing.Size(231, 23)
-        Me.TxtPurchaseAmount.TabIndex = 186
-        Me.TxtPurchaseAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'LblPurchaseAmount
-        '
-        Me.LblPurchaseAmount.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.LblPurchaseAmount.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.LblPurchaseAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblPurchaseAmount.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblPurchaseAmount.Location = New System.Drawing.Point(1001, 588)
-        Me.LblPurchaseAmount.Name = "LblPurchaseAmount"
-        Me.LblPurchaseAmount.Size = New System.Drawing.Size(100, 23)
-        Me.LblPurchaseAmount.TabIndex = 187
-        Me.LblPurchaseAmount.Text = "発注金額"
-        Me.LblPurchaseAmount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.未出庫数.Visible = False
         '
         'Order
         '
@@ -1075,6 +1077,8 @@ Partial Class Order
     Friend WithEvents LblOrderDate As Label
     Friend WithEvents LblOrderNo As Label
     Friend WithEvents DgvItemList As DataGridView
+    Friend WithEvents TxtPurchaseAmount As TextBox
+    Friend WithEvents LblPurchaseAmount As Label
     Friend WithEvents No As DataGridViewTextBoxColumn
     Friend WithEvents メーカー As DataGridViewTextBoxColumn
     Friend WithEvents 品名 As DataGridViewTextBoxColumn
@@ -1092,6 +1096,4 @@ Partial Class Order
     Friend WithEvents 備考 As DataGridViewTextBoxColumn
     Friend WithEvents 出庫数 As DataGridViewTextBoxColumn
     Friend WithEvents 未出庫数 As DataGridViewTextBoxColumn
-    Friend WithEvents TxtPurchaseAmount As TextBox
-    Friend WithEvents LblPurchaseAmount As Label
 End Class

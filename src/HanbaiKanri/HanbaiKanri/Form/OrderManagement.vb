@@ -635,7 +635,7 @@ Public Class OrderManagement
 
                 Sql4 += RemainingNo.ToString
                 Sql4 += "', '"
-                Sql4 += DgvAdd.Rows(index).Cells("単位").Value.ToString
+                Sql4 += DgvAdd.Rows(index).Cells("単位").Value
                 Sql4 += "', '"
                 Sql4 += ds2.Tables(RS).Rows(index)("間接費").ToString
                 Sql4 += "', '"
@@ -649,7 +649,7 @@ Public Class OrderManagement
                 Sql4 += "', '"
                 Sql4 += ds2.Tables(RS).Rows(index)("リードタイム").ToString
                 Sql4 += "', '"
-                Sql4 += DgvAdd.Rows(index).Cells("備考").Value.ToString
+                Sql4 += DgvAdd.Rows(index).Cells("備考").Value
                 Sql4 += "', '"
                 Sql4 += Input
                 Sql4 += "', '"
@@ -852,7 +852,8 @@ Public Class OrderManagement
                 Sql6 += "備考"
                 Sql6 += ", "
                 Sql6 += "更新者"
-                If DgvAdd.Rows(index).Cells("売上数量").Value > 0 Then
+                If DgvAdd.Rows(index).Cells("売上数量").Value = 0 Then
+                Else
                     _db.executeDB(Sql6)
                 End If
             Next
@@ -1027,7 +1028,8 @@ Public Class OrderManagement
                 Sql8 += "更新者"
                 Sql8 += ", "
                 Sql8 += "更新日"
-                If DgvAdd.Rows(index).Cells("売上数量").Value > 0 Then
+                If DgvAdd.Rows(index).Cells("売上数量").Value = 0 Then
+                Else
                     _db.executeDB(Sql8)
                 End If
             Next

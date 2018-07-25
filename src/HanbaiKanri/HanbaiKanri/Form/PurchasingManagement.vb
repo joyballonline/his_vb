@@ -677,7 +677,8 @@ Public Class PurchasingManagement
                 Sql4 += "更新者"
                 Sql4 += ", "
                 Sql4 += "更新日"
-                If DgvAdd.Rows(index).Cells("仕入数量").Value.ToString > 0 Then
+                If DgvAdd.Rows(index).Cells("仕入数量").Value.ToString = 0 Then
+                Else
                     _db.executeDB(Sql4)
                 End If
             Next
@@ -1008,7 +1009,8 @@ Public Class PurchasingManagement
                 Sql8 += "更新者"
                 Sql8 += ", "
                 Sql8 += "更新日"
-                If DgvAdd.Rows(index).Cells("仕入数量").Value.ToString > 0 Then
+                If DgvAdd.Rows(index).Cells("仕入数量").Value.ToString = 0 Then
+                Else
                     _db.executeDB(Sql8)
                 End If
 
@@ -1067,9 +1069,9 @@ Public Class PurchasingManagement
             Sql9 += ", "
             Sql9 += "更新日"
 
-            '_db.executeDB(Sql9)
+            _db.executeDB(Sql9)
             Dim openForm As Form = Nothing
-            Dim Status As String = "EDIT"
+            Dim Status As String = "ORDING"
             openForm = New OrderingList(_msgHd, _db, _langHd, Status)
             openForm.Show()
             Me.Close()

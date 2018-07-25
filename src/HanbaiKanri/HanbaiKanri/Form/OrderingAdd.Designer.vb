@@ -136,13 +136,14 @@ Partial Class OrderingAdd
         Me.TxtGrossProfit.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.TxtGrossProfit.Enabled = False
         Me.TxtGrossProfit.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtGrossProfit.Location = New System.Drawing.Point(1109, 646)
+        Me.TxtGrossProfit.Location = New System.Drawing.Point(765, 692)
         Me.TxtGrossProfit.MaxLength = 10
         Me.TxtGrossProfit.Name = "TxtGrossProfit"
         Me.TxtGrossProfit.ReadOnly = True
         Me.TxtGrossProfit.Size = New System.Drawing.Size(231, 23)
         Me.TxtGrossProfit.TabIndex = 280
         Me.TxtGrossProfit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.TxtGrossProfit.Visible = False
         '
         'LblGrossProfit
         '
@@ -150,12 +151,13 @@ Partial Class OrderingAdd
         Me.LblGrossProfit.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblGrossProfit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblGrossProfit.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblGrossProfit.Location = New System.Drawing.Point(1003, 646)
+        Me.LblGrossProfit.Location = New System.Drawing.Point(659, 692)
         Me.LblGrossProfit.Name = "LblGrossProfit"
         Me.LblGrossProfit.Size = New System.Drawing.Size(100, 23)
         Me.LblGrossProfit.TabIndex = 281
         Me.LblGrossProfit.Text = "粗利額"
         Me.LblGrossProfit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LblGrossProfit.Visible = False
         '
         'TxtItemCount
         '
