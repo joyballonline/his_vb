@@ -1621,7 +1621,7 @@ Public Class Quote
                 cell = "Z" & currentCnt
                 sheet.Range(cell).Value = ds3.Tables(RS).Rows(index)(15)
 
-                'sheet.Rows(currentCnt & ":" & currentCnt).AutoFit
+                'sheet.Rows(currentCnt & ":" & currentCnt)
 
                 currentCnt = currentCnt + 1
                 num = num + 1
@@ -1642,9 +1642,9 @@ Public Class Quote
 
         Finally
             app.Quit()
-            Marshal.ReleaseComObject(sheet)
-            Marshal.ReleaseComObject(book)
-            Marshal.ReleaseComObject(app)
+            'Marshal.ReleaseComObject(sheet)
+            'Marshal.ReleaseComObject(book)
+            'Marshal.ReleaseComObject(app)
 
         End Try
     End Sub
@@ -1869,9 +1869,9 @@ Public Class Quote
 
                 Finally
                     'app.Quit()
-                    Marshal.ReleaseComObject(sheet)
-                    Marshal.ReleaseComObject(book)
-                    Marshal.ReleaseComObject(app)
+                    'Marshal.ReleaseComObject(sheet)
+                    'Marshal.ReleaseComObject(book)
+                    'Marshal.ReleaseComObject(app)
 
                 End Try
             End If

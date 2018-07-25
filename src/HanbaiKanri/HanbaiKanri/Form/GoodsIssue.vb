@@ -1217,9 +1217,9 @@ Public Class GoodsIssue
 
         Finally
             'app.Quit()
-            Marshal.ReleaseComObject(sheet)
-            Marshal.ReleaseComObject(book)
-            Marshal.ReleaseComObject(app)
+            'Marshal.ReleaseComObject(sheet)
+            'Marshal.ReleaseComObject(book)
+            'Marshal.ReleaseComObject(app)
 
         End Try
 
@@ -1305,9 +1305,9 @@ Public Class GoodsIssue
 
         Finally
             'app.Quit()
-            Marshal.ReleaseComObject(sheet)
-            Marshal.ReleaseComObject(book)
-            Marshal.ReleaseComObject(app)
+            'Marshal.ReleaseComObject(sheet)
+            'Marshal.ReleaseComObject(book)
+            'Marshal.ReleaseComObject(app)
 
         End Try
         'Dim test As String = ds1.Tables(RS).Rows(0)("")

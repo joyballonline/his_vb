@@ -1001,10 +1001,10 @@ Public Class Ordering
             Throw ex
 
         Finally
-            app.Quit()
-            Marshal.ReleaseComObject(sheet)
-            Marshal.ReleaseComObject(book)
-            Marshal.ReleaseComObject(app)
+            'app.Quit()
+            'Marshal.ReleaseComObject(sheet)
+            'Marshal.ReleaseComObject(book)
+            'Marshal.ReleaseComObject(app)
 
         End Try
     End Sub
