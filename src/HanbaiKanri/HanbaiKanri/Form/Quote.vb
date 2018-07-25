@@ -1621,6 +1621,7 @@ Public Class Quote
             sheet.Range("V" & lstRow + 3).Value = totalPrice * 10 * 0.01 + totalPrice
 
             book.SaveAs(sOutFile)
+            app.Visible = True
 
             _msgHd.dspMSG("CreateExcel")
 
@@ -1846,6 +1847,7 @@ Public Class Quote
                     Next
 
                     book.SaveAs(sOutFile)
+                    app.Visible = True
 
                     '_msgHd.dspMSG("CreateExcel")
                     createFlg = True

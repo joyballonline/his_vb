@@ -1207,6 +1207,7 @@ Public Class GoodsIssue
             Next
 
             book.SaveAs(sOutFile)
+            app.Visible = True
 
             '_msgHd.dspMSG("CreateExcel")
             createFlg = True
@@ -1230,7 +1231,7 @@ Public Class GoodsIssue
 
             '雛形ファイル名
             Dim sHinaFileReceipt As String = ""
-            sHinaFileReceipt = sHinaPath & "\" & "DeliveryNote.xlsx"
+            sHinaFileReceipt = sHinaPath & "\" & "Receipt.xlsx"
 
             '出力先パス
             Dim sOutPath As String = ""
@@ -1294,6 +1295,7 @@ Public Class GoodsIssue
             Next
 
             book.SaveAs(sOutFile)
+            app.Visible = True
 
             '_msgHd.dspMSG("CreateExcel")
             createFlg = True
@@ -1309,5 +1311,8 @@ Public Class GoodsIssue
 
         End Try
         'Dim test As String = ds1.Tables(RS).Rows(0)("")
+        If createFlg = True Then
+            _msgHd.dspMSG("CreateExcel")
+        End If
     End Sub
 End Class

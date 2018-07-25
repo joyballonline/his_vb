@@ -944,7 +944,7 @@ Public Class Ordering
                 sheet.Range(cell).Value = ds2.Tables(RS).Rows(index)("備考")
                 cell = "R" & currentCnt
                 sheet.Range(cell).Value = ds2.Tables(RS).Rows(index)("仕入単価")
-                cell = "V" & currentCnt
+                cell = "W" & currentCnt
                 sheet.Range(cell).Value = ds2.Tables(RS).Rows(index)("仕入金額")
 
                 totalPrice = totalPrice + ds2.Tables(RS).Rows(index)("仕入金額")
@@ -956,11 +956,12 @@ Public Class Ordering
             Next
 
 
-            sheet.Range("W" & lstRow + 2).Value = totalPrice
-            sheet.Range("W" & lstRow + 3).Value = totalPrice * 10 * 0.01
-            sheet.Range("W" & lstRow + 4).Value = totalPrice * 10 * 0.01 + totalPrice
+            sheet.Range("W" & lstRow + 3).Value = totalPrice
+            sheet.Range("W" & lstRow + 4).Value = totalPrice * 10 * 0.01
+            sheet.Range("W" & lstRow + 5).Value = totalPrice * 10 * 0.01 + totalPrice
 
             book.SaveAs(sOutFile)
+            app.Visible = True
 
             _msgHd.dspMSG("CreateExcel")
 
