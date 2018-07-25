@@ -904,7 +904,7 @@ Public Class Ordering
 
 
             Dim rowCnt As Integer = 0
-            Dim lstRow As Integer = 20
+            Dim lstRow As Integer = 21
             Dim addRowCnt As Integer = 0
             Dim currentCnt As Integer = 19
             Dim num As Integer = 1
@@ -956,9 +956,9 @@ Public Class Ordering
             Next
 
 
-            sheet.Range("W" & lstRow + 3).Value = totalPrice
-            sheet.Range("W" & lstRow + 4).Value = totalPrice * 10 * 0.01
-            sheet.Range("W" & lstRow + 5).Value = totalPrice * 10 * 0.01 + totalPrice
+            sheet.Range("W" & lstRow + 1).Value = totalPrice
+            sheet.Range("W" & lstRow + 2).Value = totalPrice * 10 * 0.01
+            sheet.Range("W" & lstRow + 3).Value = totalPrice * 10 * 0.01 + totalPrice
 
             book.SaveAs(sOutFile)
             app.Visible = True
