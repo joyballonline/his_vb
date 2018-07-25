@@ -1182,7 +1182,7 @@ Public Class GoodsIssue
                     sheet.Range("N14").Value = ds2.Tables(RS).Rows(j)("出庫数量")
                     sheet.Range("Q14").Value = ds2.Tables(RS).Rows(j)("単位")
                     sheet.Range("T14").Value = ds2.Tables(RS).Rows(j)("備考")
-                    sheet.Rows(lstRow & ":" & lstRow).AutoFit
+                    'sheet.Rows(lstRow & ":" & lstRow).AutoFit
                 Else
                     Dim cellPos As String = lstRow & ":" & lstRow
                     Dim R As Object
@@ -1201,7 +1201,7 @@ Public Class GoodsIssue
                     sheet.Range("N" & lstRow).Value = ds2.Tables(RS).Rows(j)("出庫数量")
                     sheet.Range("Q" & lstRow).Value = ds2.Tables(RS).Rows(j)("単位")
                     sheet.Range("T" & lstRow).Value = ds2.Tables(RS).Rows(j)("備考")
-                    sheet.Rows(lstRow & ":" & lstRow).AutoFit
+                    'sheet.Rows(lstRow & ":" & lstRow).AutoFit
 
                 End If
             Next
@@ -1270,7 +1270,7 @@ Public Class GoodsIssue
                     sheet.Range("N14").Value = ds2.Tables(RS).Rows(j)("出庫数量")
                     sheet.Range("Q14").Value = ds2.Tables(RS).Rows(j)("単位")
                     sheet.Range("T14").Value = ds2.Tables(RS).Rows(j)("備考")
-                    sheet.Rows(lstRow & ":" & lstRow).AutoFit
+                    'sheet.Rows(lstRow & ":" & lstRow).AutoFit
                 Else
                     Dim cellPos As String = lstRow & ":" & lstRow
                     Dim R As Object
@@ -1289,7 +1289,7 @@ Public Class GoodsIssue
                     sheet.Range("N" & lstRow).Value = ds2.Tables(RS).Rows(j)("出庫数量")
                     sheet.Range("Q" & lstRow).Value = ds2.Tables(RS).Rows(j)("単位")
                     sheet.Range("T" & lstRow).Value = ds2.Tables(RS).Rows(j)("備考")
-                    sheet.Rows(lstRow & ":" & lstRow).AutoFit
+                    'sheet.Rows(lstRow & ":" & lstRow).AutoFit
 
                 End If
             Next

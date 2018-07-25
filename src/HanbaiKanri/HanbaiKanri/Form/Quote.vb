@@ -1621,7 +1621,7 @@ Public Class Quote
                 cell = "Z" & currentCnt
                 sheet.Range(cell).Value = ds3.Tables(RS).Rows(index)(15)
 
-                sheet.Rows(currentCnt & ":" & currentCnt).AutoFit
+                'sheet.Rows(currentCnt & ":" & currentCnt).AutoFit
 
                 currentCnt = currentCnt + 1
                 num = num + 1
@@ -1833,7 +1833,7 @@ Public Class Quote
                             If rowCnt = 0 Then
                                 sheet.Range("A23").Value = ds3.tables(RS).rows(j)("メーカー") & vbLf & ds3.tables(RS).rows(j)("品名") & vbLf & ds3.tables(RS).rows(j)("型式")
                                 sheet.Range("B23").Value = ds3.tables(RS).rows(j)("数量") & " " & ds3.tables(RS).rows(j)("単位")
-                                sheet.Rows(lstRow & ":" & lstRow).AutoFit
+                                'sheet.Rows(lstRow & ":" & lstRow).AutoFit
                             Else
                                 Dim cellPos As String = lstRow & ":" & lstRow
                                 Dim R As Object
@@ -1849,7 +1849,7 @@ Public Class Quote
 
                                 sheet.Range("A" & lstRow).Value = ds3.tables(RS).rows(j)("メーカー") & vbLf & ds3.tables(RS).rows(j)("品名") & vbLf & ds3.tables(RS).rows(j)("型式")
                                 sheet.Range("B" & lstRow).Value = ds3.tables(RS).rows(j)("数量") & " " & ds3.tables(RS).rows(j)("単位")
-                                sheet.Rows(lstRow & ":" & lstRow).AutoFit
+                                'sheet.Rows(lstRow & ":" & lstRow).AutoFit
 
                             End If
 

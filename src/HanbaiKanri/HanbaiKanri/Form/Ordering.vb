@@ -981,7 +981,7 @@ Public Class Ordering
 
                 totalPrice = totalPrice + ds2.Tables(RS).Rows(index)("仕入金額")
 
-                sheet.Rows(currentCnt & ":" & currentCnt).AutoFit
+                'sheet.Rows(currentCnt & ":" & currentCnt).AutoFit
 
                 currentCnt = currentCnt + 1
                 num = num + 1
