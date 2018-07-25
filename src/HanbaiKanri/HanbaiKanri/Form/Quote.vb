@@ -17,7 +17,7 @@ Public Class Quote
     '------------------------------------------------------------------------------------------------------
     'メンバー定数宣言
     '------------------------------------------------------------------------------------------------------
-    'PG制御文字 
+    'PG制御文字
     Private Const RS As String = "RecSet"                               'レコードセットテーブル
     Private Const HAIFUN_ID As String = "H@@@@@"
     Private Const HAIFUN_GYOMU1 As String = "-----------"
@@ -1619,7 +1619,7 @@ Public Class Quote
                 cell = "Z" & currentCnt
                 sheet.Range(cell).Value = ds3.Tables(RS).Rows(index)(15)
 
-                sheet.Rows(currentCnt & ":" & currentCnt).AutoFit
+                'sheet.Rows(currentCnt & ":" & currentCnt)
 
                 currentCnt = currentCnt + 1
                 num = num + 1
@@ -1639,10 +1639,10 @@ Public Class Quote
             Throw ex
 
         Finally
-            app.Quit()
-            Marshal.ReleaseComObject(sheet)
-            Marshal.ReleaseComObject(book)
-            Marshal.ReleaseComObject(app)
+            'app.Quit()
+            'Marshal.ReleaseComObject(sheet)
+            'Marshal.ReleaseComObject(book)
+            'Marshal.ReleaseComObject(app)
 
         End Try
     End Sub
@@ -1830,8 +1830,8 @@ Public Class Quote
                         If supplierlist(i) Is ds3.tables(RS).rows(j)("仕入先名称") And ds3.tables(RS).rows(j)("仕入単価") <= 0 Then
                             If rowCnt = 0 Then
                                 sheet.Range("A23").Value = ds3.tables(RS).rows(j)("メーカー") & vbLf & ds3.tables(RS).rows(j)("品名") & vbLf & ds3.tables(RS).rows(j)("型式")
-                                sheet.Range("B23").Value = ds3.tables(RS).rows(j)("数量") & " " & ds3.tables(RS).rows(j)("単位")
-                                sheet.Rows(lstRow & ":" & lstRow).AutoFit
+                                sheet.Range("J23").Value = ds3.tables(RS).rows(j)("数量") & " " & ds3.tables(RS).rows(j)("単位")
+                                'sheet.Rows(lstRow & ":" & lstRow).AutoFit
                             Else
                                 Dim cellPos As String = lstRow & ":" & lstRow
                                 Dim R As Object
@@ -1846,8 +1846,8 @@ Public Class Quote
                                 lstRow = lstRow + 1
 
                                 sheet.Range("A" & lstRow).Value = ds3.tables(RS).rows(j)("メーカー") & vbLf & ds3.tables(RS).rows(j)("品名") & vbLf & ds3.tables(RS).rows(j)("型式")
-                                sheet.Range("B" & lstRow).Value = ds3.tables(RS).rows(j)("数量") & " " & ds3.tables(RS).rows(j)("単位")
-                                sheet.Rows(lstRow & ":" & lstRow).AutoFit
+                                sheet.Range("J" & lstRow).Value = ds3.tables(RS).rows(j)("数量") & " " & ds3.tables(RS).rows(j)("単位")
+                                'sheet.Rows(lstRow & ":" & lstRow).AutoFit
 
                             End If
 
@@ -1866,10 +1866,10 @@ Public Class Quote
                     Throw ex
 
                 Finally
-                    app.Quit()
-                    Marshal.ReleaseComObject(sheet)
-                    Marshal.ReleaseComObject(book)
-                    Marshal.ReleaseComObject(app)
+                    'app.Quit()
+                    'Marshal.ReleaseComObject(sheet)
+                    'Marshal.ReleaseComObject(book)
+                    'Marshal.ReleaseComObject(app)
 
                 End Try
             End If
@@ -1882,4 +1882,4 @@ Public Class Quote
 
     End Sub
 
-End Class
+End Class
