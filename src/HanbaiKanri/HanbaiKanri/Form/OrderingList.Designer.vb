@@ -333,6 +333,7 @@ Partial Class OrderingList
         Me.DgvHtyhd.Location = New System.Drawing.Point(13, 236)
         Me.DgvHtyhd.Name = "DgvHtyhd"
         Me.DgvHtyhd.ReadOnly = True
+        Me.DgvHtyhd.RowHeadersVisible = False
         Me.DgvHtyhd.RowTemplate.Height = 21
         Me.DgvHtyhd.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvHtyhd.Size = New System.Drawing.Size(1326, 420)

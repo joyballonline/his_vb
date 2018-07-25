@@ -164,7 +164,7 @@ Partial Class Quote
         'TxtPaymentTerms
         '
         Me.TxtPaymentTerms.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.TxtPaymentTerms.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.TxtPaymentTerms.BackColor = System.Drawing.Color.White
         Me.TxtPaymentTerms.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtPaymentTerms.Location = New System.Drawing.Point(128, 179)
         Me.TxtPaymentTerms.MaxLength = 50

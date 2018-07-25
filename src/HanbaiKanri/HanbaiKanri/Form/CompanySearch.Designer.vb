@@ -222,6 +222,7 @@ Partial Class CompanySearch
         Me.Dgv_Company.Location = New System.Drawing.Point(12, 33)
         Me.Dgv_Company.Name = "Dgv_Company"
         Me.Dgv_Company.ReadOnly = True
+        Me.Dgv_Company.RowHeadersVisible = False
         Me.Dgv_Company.RowTemplate.Height = 21
         Me.Dgv_Company.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.Dgv_Company.Size = New System.Drawing.Size(1326, 220)

@@ -59,6 +59,7 @@ Partial Class QuoteList
         Me.ChkExpired = New System.Windows.Forms.CheckBox()
         Me.BtnOrder = New System.Windows.Forms.Button()
         Me.BtnPurchase = New System.Windows.Forms.Button()
+        Me.ChkCancel = New System.Windows.Forms.CheckBox()
         CType(Me.DgvMithd, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -70,6 +71,7 @@ Partial Class QuoteList
         Me.DgvMithd.Location = New System.Drawing.Point(12, 241)
         Me.DgvMithd.Name = "DgvMithd"
         Me.DgvMithd.ReadOnly = True
+        Me.DgvMithd.RowHeadersVisible = False
         Me.DgvMithd.RowTemplate.Height = 21
         Me.DgvMithd.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvMithd.Size = New System.Drawing.Size(1326, 420)
@@ -435,11 +437,23 @@ Partial Class QuoteList
         Me.BtnPurchase.UseVisualStyleBackColor = True
         Me.BtnPurchase.Visible = False
         '
+        'ChkCancel
+        '
+        Me.ChkCancel.AutoSize = True
+        Me.ChkCancel.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.ChkCancel.Location = New System.Drawing.Point(515, 202)
+        Me.ChkCancel.Name = "ChkCancel"
+        Me.ChkCancel.Size = New System.Drawing.Size(139, 19)
+        Me.ChkCancel.TabIndex = 38
+        Me.ChkCancel.Text = "取消データを含める"
+        Me.ChkCancel.UseVisualStyleBackColor = True
+        '
         'QuoteList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1440, 729)
+        Me.ClientSize = New System.Drawing.Size(1350, 729)
+        Me.Controls.Add(Me.ChkCancel)
         Me.Controls.Add(Me.BtnPurchase)
         Me.Controls.Add(Me.BtnOrder)
         Me.Controls.Add(Me.ChkExpired)
@@ -522,4 +536,5 @@ Partial Class QuoteList
     Friend WithEvents ChkExpired As CheckBox
     Friend WithEvents BtnOrder As Button
     Friend WithEvents BtnPurchase As Button
+    Friend WithEvents ChkCancel As CheckBox
 End Class
