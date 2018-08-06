@@ -102,6 +102,18 @@
     <Compile Include="Business\CommonLogic.vb" />
     <Compile Include="Business\RepSectionIF.vb" />
     <Compile Include="Business\StartUp.vb" />
+    <Compile Include="Form\BillingList.Designer.vb">
+      <DependentUpon>BillingList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\BillingList.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\BillingManagement.Designer.vb">
+      <DependentUpon>BillingManagement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\BillingManagement.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\Company.Designer.vb">
       <DependentUpon>Company.vb</DependentUpon>
     </Compile>
@@ -118,6 +130,18 @@
       <DependentUpon>Customer.vb</DependentUpon>
     </Compile>
     <Compile Include="Form\Customer.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\CustomerList.Designer.vb">
+      <DependentUpon>CustomerList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\CustomerList.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\CustomerOrderList.Designer.vb">
+      <DependentUpon>CustomerOrderList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\CustomerOrderList.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form\CustomerSearch.Designer.vb">
@@ -336,6 +360,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Form\BillingList.resx">
+      <DependentUpon>BillingList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\BillingManagement.resx">
+      <DependentUpon>BillingManagement.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\Company.resx">
       <DependentUpon>Company.vb</DependentUpon>
     </EmbeddedResource>
@@ -344,6 +374,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Customer.resx">
       <DependentUpon>Customer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\CustomerList.resx">
+      <DependentUpon>CustomerList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\CustomerOrderList.resx">
+      <DependentUpon>CustomerOrderList.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\CustomerSearch.resx">
       <DependentUpon>CustomerSearch.vb</DependentUpon>
