@@ -55,6 +55,7 @@ Partial Class OrderList
         Me.BtnOrderCancel = New System.Windows.Forms.Button()
         Me.ChkCancelData = New System.Windows.Forms.CheckBox()
         Me.BtnOrderClone = New System.Windows.Forms.Button()
+        Me.BtnBill = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         CType(Me.DgvCymnhd, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -390,11 +391,22 @@ Partial Class OrderList
         Me.BtnOrderClone.UseVisualStyleBackColor = True
         Me.BtnOrderClone.Visible = False
         '
+        'BtnBill
+        '
+        Me.BtnBill.Location = New System.Drawing.Point(12, 677)
+        Me.BtnBill.Name = "BtnBill"
+        Me.BtnBill.Size = New System.Drawing.Size(165, 40)
+        Me.BtnBill.TabIndex = 66
+        Me.BtnBill.Text = "請求登録"
+        Me.BtnBill.UseVisualStyleBackColor = True
+        Me.BtnBill.Visible = False
+        '
         'OrderList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1350, 729)
+        Me.Controls.Add(Me.BtnBill)
         Me.Controls.Add(Me.BtnOrderClone)
         Me.Controls.Add(Me.ChkCancelData)
         Me.Controls.Add(Me.BtnOrderCancel)
@@ -469,4 +481,5 @@ Partial Class OrderList
     Friend WithEvents BtnOrderCancel As Button
     Friend WithEvents ChkCancelData As CheckBox
     Friend WithEvents BtnOrderClone As Button
+    Friend WithEvents BtnBill As Button
 End Class

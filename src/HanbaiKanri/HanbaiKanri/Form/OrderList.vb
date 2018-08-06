@@ -305,6 +305,9 @@ Public Class OrderList
         ElseIf OrderStatus = "CLONE" Then
             BtnOrderClone.Visible = True
             BtnOrderClone.Location = New Point(997, 677)
+        ElseIf OrderStatus = "BILL" Then
+            BtnBill.Visible = True
+            BtnBill.Location = New Point(997, 677)
         End If
         Dim Status As String = "EXCLUSION"
         OrderListLoad(Status)
@@ -1002,6 +1005,24 @@ Public Class OrderList
         Dim Status As String = "CLONE"
         Dim openForm As Form = Nothing
         openForm = New Order(_msgHd, _db, _langHd, Me, No, Suffix, Status)   '処理選択
+        Me.Enabled = False
+        Me.Hide()
+        openForm.ShowDialog(Me)
+
+        DgvCymnhd.Rows.Clear()
+        DgvCymnhd.Columns.Clear()
+
+        Dim ListStatus As String = "EXCLUSION"
+        OrderListLoad(ListStatus)
+    End Sub
+
+    Private Sub BtnBill_Click(sender As Object, e As EventArgs) Handles BtnBill.Click
+        Dim RowIdx As Integer
+        RowIdx = Me.DgvCymnhd.CurrentCell.RowIndex
+        Dim No As String = DgvCymnhd.Rows(RowIdx).Cells(0).Value
+        Dim Suffix As String = DgvCymnhd.Rows(RowIdx).Cells(1).Value
+        Dim openForm As Form = Nothing
+        openForm = New BillingManagement(_msgHd, _db, _langHd, Me, No, Suffix)   '処理選択
         Me.Enabled = False
         Me.Hide()
         openForm.ShowDialog(Me)

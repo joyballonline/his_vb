@@ -726,6 +726,9 @@ Public Class frmC01F30_Menu
         checkMenu += " or "
         checkMenu += " m.処理ＩＤ like 'H08%' "
 
+        checkMenu += " or "
+        checkMenu += " m.処理ＩＤ like 'H09%' "
+
         If chkH02.Checked Then
             If checkMenu IsNot "" Then checkMenu += " or "
             checkMenu += " m.処理ＩＤ like 'H02%' "
@@ -985,6 +988,37 @@ Public Class frmC01F30_Menu
                 Dim Status As String = "VIEW"
                 Dim openForm As Form = Nothing
                 openForm = New ReceiptList(_msgHd, _db, _langHd, Status)
+                openForm.Show()
+                Me.Hide()
+            '-----------------------------------請求業務（H05）
+            Case CommonConst.MENU_H0910  '請求登録
+                Dim Status As String = "BILL"
+                Dim openForm As Form = Nothing
+                openForm = New OrderList(_msgHd, _db, _langHd, Status)
+                openForm.Show()
+                Me.Hide()
+            Case CommonConst.MENU_H0920  '請求編集
+                Dim Status As String = "BILL"
+                Dim openForm As Form = Nothing
+                openForm = New OrderList(_msgHd, _db, _langHd, Status)
+                openForm.Show()
+                Me.Hide()
+            Case CommonConst.MENU_H0930  '請求取消
+                Dim Status As String = "CANCEL"
+                Dim openForm As Form = Nothing
+                openForm = New BillingList(_msgHd, _db, _langHd, Status)
+                openForm.Show()
+                Me.Hide()
+            Case CommonConst.MENU_H0940  '請求参照
+                Dim Status As String = "VIEW"
+                Dim openForm As Form = Nothing
+                openForm = New BillingList(_msgHd, _db, _langHd, Status)
+                openForm.Show()
+                Me.Hide()
+            Case CommonConst.MENU_H0950  '請求計算
+                Dim Status As String = ""
+                Dim openForm As Form = Nothing
+                openForm = New CustomerList(_msgHd, _db, _langHd)
                 openForm.Show()
                 Me.Hide()
             '-----------------------------------マスタ管理（M01）
