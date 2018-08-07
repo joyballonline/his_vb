@@ -280,28 +280,32 @@ Public Class CustomerOrderList
 
                 Dim ds2 As DataSet = _db.selectDB(Sql2, RS, reccnt) '受注明細（商品情報）
 
-                If currentNum > 2 Then
-                    Dim obj As Object
-                    Dim cellPos = lastRow & ":" & lastRow
-                    obj = sheet.Range(cellPos)
-                    obj.Copy()
-                    obj.Insert()
-                    If Marshal.IsComObject(obj) Then
-                        Marshal.ReleaseComObject(obj)
+
+
+                For index As Integer = 0 To ds2.Tables(RS).Rows.Count - 1
+                    If currentNum > 3 Then
+                        Dim obj As Object
+                        Dim cellPos = lastRow & ":" & lastRow
+                        obj = sheet.Range(cellPos)
+                        obj.Copy()
+                        obj.Insert()
+                        If Marshal.IsComObject(obj) Then
+                            Marshal.ReleaseComObject(obj)
+                        End If
+                        lastRow += 1
                     End If
-                    lastRow += 1
-                End If
+                    sheet.Range("A" & currentRow).Value = currentNum
+                    sheet.Range("B" & currentRow).Value = ds2.Tables(RS).Rows(index)("メーカー") & " / " & ds2.Tables(RS).Rows(index)("品名") & " / " & ds2.Tables(RS).Rows(index)("型式")
+                    sheet.Range("C" & currentRow).Value = ds2.Tables(RS).Rows(index)("受注数量")
+                    sheet.Range("D" & currentRow).Value = ds2.Tables(RS).Rows(index)("売単価")
+                    sheet.Range("E" & currentRow).Value = ds2.Tables(RS).Rows(index)("売上金額")
+                    currentNum += 1
+                    currentRow += 1
+                Next index
 
-                sheet.Range("A" & currentRow).Value = currentNum
-                sheet.Range("B" & currentRow).Value = ds2.Tables(RS).Rows(0)("メーカー") & " / " & ds2.Tables(RS).Rows(0)("品名") & " / " & ds2.Tables(RS).Rows(0)("型式")
-                sheet.Range("C" & currentRow).Value = ds2.Tables(RS).Rows(0)("売上数量")
-                sheet.Range("D" & currentRow).Value = ds2.Tables(RS).Rows(0)("売単価")
-                sheet.Range("E" & currentRow).Value = ds2.Tables(RS).Rows(0)("売上金額")
 
 
 
-                currentNum += 1
-                currentRow += 1
                 Sql1 = ""
                 Sql2 = ""
             Next r
@@ -309,6 +313,8 @@ Public Class CustomerOrderList
             sheet.Range("E" & lastRow + 1).Value = BillingSubTotal
             sheet.Range("E" & lastRow + 2).Value = BillingSubTotal * 0.1
             sheet.Range("E" & lastRow + 3).Value = BillingSubTotal * 1.1
+
+            sheet.Range("C" & lastRow + 5).Value = sheet.Range("E" & lastRow + 3).Value
 
             Sql3 += "SELECT "
             Sql3 += "* "

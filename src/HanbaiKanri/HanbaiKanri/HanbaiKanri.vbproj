@@ -165,7 +165,9 @@
     <Compile Include="Form\DepositManagement.Designer.vb">
       <DependentUpon>DepositManagement.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form\DepositManagement.vb" />
+    <Compile Include="Form\DepositManagement.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\frmC01F30_Menu.Designer.vb">
       <DependentUpon>frmC01F30_Menu.vb</DependentUpon>
     </Compile>
