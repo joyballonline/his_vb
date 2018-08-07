@@ -729,6 +729,9 @@ Public Class frmC01F30_Menu
         checkMenu += " or "
         checkMenu += " m.処理ＩＤ like 'H09%' "
 
+        checkMenu += " or "
+        checkMenu += " m.処理ＩＤ like 'H10%' "
+
         If chkH02.Checked Then
             If checkMenu IsNot "" Then checkMenu += " or "
             checkMenu += " m.処理ＩＤ like 'H02%' "
@@ -1019,6 +1022,12 @@ Public Class frmC01F30_Menu
                 Dim Status As String = ""
                 Dim openForm As Form = Nothing
                 openForm = New CustomerList(_msgHd, _db, _langHd)
+                openForm.Show()
+                Me.Hide()
+                '-----------------------------------入金業務（H05）
+            Case CommonConst.MENU_H1010  '入金登録
+                Dim openForm As Form = Nothing
+                openForm = New DepositList(_msgHd, _db, _langHd)
                 openForm.Show()
                 Me.Hide()
             '-----------------------------------マスタ管理（M01）
