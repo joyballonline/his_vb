@@ -1,525 +1,291 @@
-﻿'Option Explicit On
+﻿Option Explicit On
 
-'Imports UtilMDL
-'Imports UtilMDL.MSG
-'Imports UtilMDL.LANG
-'Imports UtilMDL.DB
-'Imports UtilMDL.DataGridView
-'Imports UtilMDL.FileDirectory
-'Imports UtilMDL.xls
-
-
-'Public Class DepositManagement
-'    Inherits System.Windows.Forms.Form
-
-'    '------------------------------------------------------------------------------------------------------
-'    'メンバー定数宣言
-'    '------------------------------------------------------------------------------------------------------
-'    'PG制御文字 
-'    Private Const RS As String = "RecSet"                               'レコードセットテーブル
-'    Private Const HAIFUN_ID As String = "H@@@@@"
-'    Private Const HAIFUN_GYOMU1 As String = "-----------"
-'    Private Const HAIFUN_SHORI As String = "----------------"
-'    Private Const HAIFUN_SETUMEI As String = "-------------------------------------------"
-'    Private Const HAIFUN_MYSOUSANICHIJI As String = "---------------"
-'    Private Const HAIFUN_SOUSA As String = "----------"
-'    Private Const HAIFUN_ZENKAI As String = "---------------"
-
-'    '-------------------------------------------------------------------------------
-'    '   変数定義
-'    '-------------------------------------------------------------------------------
-'    Private _msgHd As UtilMsgHandler
-'    Private _db As UtilDBIf
-'    Private _langHd As UtilLangHandler
-'    Private _gh As UtilDataGridViewHandler
-'    Private _init As Boolean                             '初期処理済フラグ
-
-'    Private CompanyCode As String = ""
-'    Private CustomerCode As String = ""
-'    Private Suffix As String = ""
-'    Private _parentForm As Form
-'    Private _status As String = ""
-
-'    '-------------------------------------------------------------------------------
-'    'デフォルトコンストラクタ（隠蔽）
-'    '-------------------------------------------------------------------------------
-'    Private Sub New()
-'        ' この呼び出しは、Windows フォーム デザイナで必要です。
-'        InitializeComponent()
-'    End Sub
-
-'    '-------------------------------------------------------------------------------
-'    'コンストラクタ　メニューから呼ばれる
-'    '-------------------------------------------------------------------------------
-'    Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler,
-'                   ByRef prmRefDbHd As UtilDBIf,
-'                   ByRef prmRefLang As UtilLangHandler,
-'                   ByRef prmRefForm As Form,
-'                   ByRef prmRefCompany As String,
-'                   ByRef prmRefCustomer As String,
-'                   Optional ByRef prmRefStatus As String = "")
-'        Call Me.New()
-
-'        _init = False
-
-'        '初期処理
-'        _msgHd = prmRefMsgHd                                                'MSGハンドラの設定
-'        _db = prmRefDbHd                                                    'DBハンドラの設定
-'        _langHd = prmRefLang
-'        _parentForm = prmRefForm
-'        CompanyCode = prmRefCompany
-'        CustomerCode = prmRefCustomer
-'        _status = prmRefStatus
-'        '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
-'        StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
-'        Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
-'        Me.ControlBox = Not Me.ControlBox
-'        DtpDepositDate.Value = Date.Now
-'        _init = True
-
-'    End Sub
-
-'    Private Sub Quote_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-'        'ComboBoxに表示する項目のリストを作成する
-'        Dim table As New DataTable("Table")
-'        table.Columns.Add("Display", GetType(String))
-'        table.Columns.Add("Value", GetType(Integer))
-'        table.Rows.Add("前受金請求", 1)
-'        table.Rows.Add("通常請求", 2)
-
-'        'DataGridViewComboBoxColumnを作成
-'        Dim column As New DataGridViewComboBoxColumn()
-'        'DataGridViewComboBoxColumnのDataSourceを設定
-'        column.DataSource = table
-'        '実際の値が"Value"列、表示するテキストが"Display"列とする
-'        column.ValueMember = "Value"
-'        column.DisplayMember = "Display"
-'        column.HeaderText = "請求区分"
-'        column.Name = "請求区分"
-'        'column.ValueMember = 1
-'        'DataGridView1に追加する
-'        DgvDeposit.Columns.Insert(0, column)
-
-'        BillLoad()
-
-'        'If _status = "VIEW" Then
-'        '    LblNo1.Visible = False
-'        '    LblNo2.Visible = False
-'        '    LblNo2.Visible = False
-'        '    LblCymndt.Visible = False
-'        '    LblAdd.Visible = False
-'        '    LblBillingDate.Visible = False
-'        '    DtpBillingDate.Visible = False
-'        '    TxtCount1.Visible = False
-'        '    TxtCount2.Visible = False
-'        '    TxtCount3.Visible = False
-'        '    DgvCymn.Visible = False
-'        '    DgvCymndt.Visible = False
-'        '    DgvAdd.Visible = False
-'        '    DgvHistory.ReadOnly = False
-
-'        '    LblHistory.Location = New Point(12, 82)
-'        '    DgvHistory.Location = New Point(12, 106)
-'        '    DgvHistory.Size = New Point(1326, 566)
-
-'        '    BtnRegist.Visible = False
-'        'End If
-
-'    End Sub
-
-'    Private Sub BillLoad()
-'        Dim Sql1 As String = ""
-'        Sql1 += "SELECT "
-'        Sql1 += "* "
-'        Sql1 += "FROM "
-'        Sql1 += "public"
-'        Sql1 += "."
-'        Sql1 += "t10_cymnhd"
-'        Sql1 += " WHERE "
-'        Sql1 += "会社コード"
-'        Sql1 += " = "
-'        Sql1 += "'"
-'        Sql1 += CompanyCode
-'        Sql1 += "'"
-'        Sql1 += " AND "
-'        Sql1 += "得意先コード"
-'        Sql1 += " ILIKE "
-'        Sql1 += "'"
-'        Sql1 += CustomerCode
-'        Sql1 += "'"
-
-'        Dim Sql2 As String = ""
-'        Sql2 += "SELECT "
-'        Sql2 += "* "
-'        Sql2 += "FROM "
-'        Sql2 += "public"
-'        Sql2 += "."
-'        Sql2 += "t25_nkinhd"
-'        Sql2 += " WHERE "
-'        Sql2 += "会社コード"
-'        Sql2 += " = "
-'        Sql2 += "'"
-'        Sql2 += CompanyCode
-'        Sql2 += "'"
-'        Sql2 += " AND "
-'        Sql2 += "請求先コード"
-'        Sql2 += " = "
-'        Sql2 += "'"
-'        Sql2 += CustomerCode
-'        Sql2 += "'"
-
-'        Dim Sql3 As String = ""
-'        Sql3 += "SELECT "
-'        Sql3 += "* "
-'        Sql3 += "FROM "
-'        Sql3 += "public"
-'        Sql3 += "."
-'        Sql3 += "t23_skyuhd"
-'        Sql3 += " WHERE "
-'        Sql3 += "会社コード"
-'        Sql3 += " = "
-'        Sql3 += "'"
-'        Sql3 += CompanyCode
-'        Sql3 += "'"
-'        Sql3 += " AND "
-'        Sql3 += "得意先コード"
-'        Sql3 += " = "
-'        Sql3 += "'"
-'        Sql3 += CustomerCode
-'        Sql3 += "'"
-
-'        Dim reccnt As Integer = 0
-'        Dim ds1 As DataSet = _db.selectDB(Sql1, RS, reccnt)
-'        Dim ds2 As DataSet = _db.selectDB(Sql2, RS, reccnt)
-'        Dim ds3 As DataSet = _db.selectDB(Sql3, RS, reccnt)
-'        Dim BillingAmoount As Integer = 0
-
-'        For index As Integer = 0 To ds3.Tables(RS).Rows.Count - 1
-'            BillingAmoount += ds3.Tables(RS).Rows(index)("請求金額計")
-'        Next
-
-'        DgvCustomer.Rows.Add()
-'        DgvCustomer.Rows(0).Cells("請求先").Value = ds1.Tables(RS).Rows(0)("得意先名")
-
-'        For index As Integer = 0 To ds2.Tables(RS).Rows.Count - 1
-'            DgvHistory.Rows.Add()
-'            DgvHistory.Rows(index).Cells("No").Value = index + 1
-'            DgvHistory.Rows(index).Cells("請求先").Value = ds2.Tables(RS).Rows(index)("請求先名")
-'            DgvHistory.Rows(index).Cells("入金番号").Value = ds2.Tables(RS).Rows(index)("入金番号")
-'            DgvHistory.Rows(index).Cells("型式").Value = ds2.Tables(RS).Rows(index)("型式")
-'            DgvHistory.Rows(index).Cells("受注個数").Value = ds2.Tables(RS).Rows(index)("受注数量")
-'            DgvHistory.Rows(index).Cells("単位").Value = ds2.Tables(RS).Rows(index)("単位")
-'            DgvHistory.Rows(index).Cells("売上数量").Value = ds2.Tables(RS).Rows(index)("売上数量")
-'            DgvHistory.Rows(index).Cells("売上単価").Value = ds2.Tables(RS).Rows(index)("売単価")
-'            DgvHistory.Rows(index).Cells("売上金額").Value = ds2.Tables(RS).Rows(index)("売上金額")
-'        Next
-
-'        TxtCount1.Text = ds2.Tables(RS).Rows.Count
-
-'        For index As Integer = 0 To ds3.Tables(RS).Rows.Count - 1
-'            DgvHistory.Rows.Add()
-'            DgvHistory.Rows(index).Cells("No").Value = index + 1
-'            DgvHistory.Rows(index).Cells("請求番号").Value = ds3.Tables(RS).Rows(index)("請求番号")
-'            DgvHistory.Rows(index).Cells("請求日").Value = ds3.Tables(RS).Rows(index)("請求日")
-'            DgvHistory.Rows(index).Cells("請求区分").Value = ds3.Tables(RS).Rows(index)("請求区分")
-'            DgvHistory.Rows(index).Cells("請求先").Value = ds3.Tables(RS).Rows(index)("得意先名")
-'            DgvHistory.Rows(index).Cells("請求金額").Value = ds3.Tables(RS).Rows(index)("請求金額計")
-'            DgvHistory.Rows(index).Cells("備考1").Value = ds3.Tables(RS).Rows(index)("備考1")
-'            DgvHistory.Rows(index).Cells("備考2").Value = ds3.Tables(RS).Rows(index)("備考2")
-'            DgvHistory.Rows(index).Cells("請求済み受注番号").Value = ds3.Tables(RS).Rows(index)("請求済み受注番号")
-'            DgvHistory.Rows(index).Cells("請求済み受注番号枝番").Value = ds3.Tables(RS).Rows(index)("請求済み受注番号枝番")
-'        Next
-
-'        TxtCount2.Text = ds3.Tables(RS).Rows.Count
-
-'        If DgvCymn.Rows(0).Cells("請求残高").Value = 0 Then
-'        Else
-'            DgvAdd.Rows.Add()
-'            DgvAdd.Rows(0).Cells("AddNo").Value = 1
-'            DgvAdd.Rows(0).Cells("今回請求先").Value = ds1.Tables(RS).Rows(0)("得意先名")
-'            DgvAdd.Rows(0).Cells("今回請求金額計").Value = 0
-
-'            TxtCount3.Text = 1
-'        End If
-'    End Sub
-
-'    '前の画面に戻る
-'    Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
-'        _parentForm.Enabled = True
-'        _parentForm.Show()
-'        Me.Dispose()
-'    End Sub
-
-'    Private Sub BtnClone_Click(sender As Object, e As EventArgs) Handles BtnClone.Click
-'        'メニュー選択処理
-'        Dim RowIdx As Integer
-'        Dim Item(5) As String
-
-'        '一覧選択行インデックスの取得
-
-'        RowIdx = DgvAdd.CurrentCell.RowIndex
+Imports UtilMDL
+Imports UtilMDL.MSG
+Imports UtilMDL.LANG
+Imports UtilMDL.DB
+Imports UtilMDL.DataGridView
+Imports UtilMDL.FileDirectory
+Imports UtilMDL.xls
 
 
-'        '選択行の値を格納
-'        For c As Integer = 0 To 5
-'            Item(c) = DgvAdd.Rows(RowIdx).Cells(c).Value
-'        Next c
+Public Class DepositManagement
+    Inherits System.Windows.Forms.Form
 
-'        '行を挿入
-'        DgvAdd.Rows.Insert(RowIdx + 1)
+    '------------------------------------------------------------------------------------------------------
+    'メンバー定数宣言
+    '------------------------------------------------------------------------------------------------------
+    'PG制御文字 
+    Private Const RS As String = "RecSet"                               'レコードセットテーブル
+    Private Const HAIFUN_ID As String = "H@@@@@"
+    Private Const HAIFUN_GYOMU1 As String = "-----------"
+    Private Const HAIFUN_SHORI As String = "----------------"
+    Private Const HAIFUN_SETUMEI As String = "-------------------------------------------"
+    Private Const HAIFUN_MYSOUSANICHIJI As String = "---------------"
+    Private Const HAIFUN_SOUSA As String = "----------"
+    Private Const HAIFUN_ZENKAI As String = "---------------"
 
-'        '追加した行に複製元の値を格納
-'        For c As Integer = 0 To 5
-'            If c = 1 Then
-'                If Item(c) IsNot Nothing Then
-'                    Dim tmp As Integer = Item(c)
-'                    DgvAdd(1, RowIdx + 1).Value = tmp
-'                End If
-'            Else
-'                DgvAdd.Rows(RowIdx + 1).Cells(c).Value = Item(c)
-'            End If
+    '-------------------------------------------------------------------------------
+    '   変数定義
+    '-------------------------------------------------------------------------------
+    Private _msgHd As UtilMsgHandler
+    Private _db As UtilDBIf
+    Private _langHd As UtilLangHandler
+    Private _gh As UtilDataGridViewHandler
+    Private _init As Boolean                             '初期処理済フラグ
 
-'        Next c
+    Private CompanyCode As String = ""
+    Private CustomerCode As String = ""
+    Private CustomerName As String = ""
+    Private Suffix As String = ""
+    Private _parentForm As Form
+    Private _status As String = ""
 
-'        '最終行のインデックスを取得
-'        Dim index As Integer = DgvAdd.Rows.Count()
-'        '行番号の振り直し
-'        Dim No As Integer = 1
-'        For c As Integer = 0 To index - 1
-'            DgvAdd.Rows(c).Cells(0).Value = No
-'            No += 1
-'        Next c
-'        TxtCount3.Text = DgvAdd.Rows.Count()
-'    End Sub
+    '-------------------------------------------------------------------------------
+    'デフォルトコンストラクタ（隠蔽）
+    '-------------------------------------------------------------------------------
+    Private Sub New()
+        ' この呼び出しは、Windows フォーム デザイナで必要です。
+        InitializeComponent()
+    End Sub
 
-'    Private Sub BtnDelete_Click(sender As Object, e As EventArgs) Handles BtnDelete.Click
-'        For Each r As DataGridViewCell In DgvAdd.SelectedCells
-'            DgvAdd.Rows.RemoveAt(r.RowIndex)
-'        Next r
+    '-------------------------------------------------------------------------------
+    'コンストラクタ　メニューから呼ばれる
+    '-------------------------------------------------------------------------------
+    Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler,
+                   ByRef prmRefDbHd As UtilDBIf,
+                   ByRef prmRefLang As UtilLangHandler,
+                   ByRef prmRefForm As Form,
+                   ByRef prmRefCompany As String,
+                   ByRef prmRefCustomer As String,
+                   ByRef prmRefName As String,
+                   Optional ByRef prmRefStatus As String = "")
+        Call Me.New()
 
-'        '行番号の振り直し
-'        Dim index As Integer = DgvAdd.Rows.Count()
-'        Dim No As Integer = 1
-'        For c As Integer = 0 To index - 1
-'            DgvAdd.Rows(c).Cells(0).Value = No
-'            No += 1
-'        Next c
-'        TxtCount3.Text = DgvAdd.Rows.Count()
-'    End Sub
+        _init = False
 
-'    Private Sub BtnRegist_Click(sender As Object, e As EventArgs) Handles BtnRegist.Click
-'        Dim errflg As Boolean = True
-'        Dim dtToday As DateTime = DateTime.Now
-'        Dim reccnt As Integer = 0
-'        Dim BillingAmount As Integer = 0
+        '初期処理
+        _msgHd = prmRefMsgHd                                                'MSGハンドラの設定
+        _db = prmRefDbHd                                                    'DBハンドラの設定
+        _langHd = prmRefLang
+        _parentForm = prmRefForm
+        CompanyCode = prmRefCompany
+        CustomerCode = prmRefCustomer
+        CustomerName = prmRefName
+        _status = prmRefStatus
+        '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
+        StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
+        Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
+        Me.ControlBox = Not Me.ControlBox
+        DtpDepositDate.Value = Date.Now
+        _init = True
 
-'        Dim Saiban1 As String = ""
-'        Dim Sql1 As String = ""
-'        Dim Sql2 As String = ""
-'        Dim Sql3 As String = ""
-'        Dim Sql4 As String = ""
+    End Sub
 
-'        Saiban1 += "SELECT "
-'        Saiban1 += "* "
-'        Saiban1 += "FROM "
-'        Saiban1 += "public"
-'        Saiban1 += "."
-'        Saiban1 += "m80_saiban"
-'        Saiban1 += " WHERE "
-'        Saiban1 += "採番キー"
-'        Saiban1 += " ILIKE "
-'        Saiban1 += "'"
-'        Saiban1 += "80"
-'        Saiban1 += "'"
+    Private Sub Quote_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-'        Dim dsSaiban1 As DataSet = _db.selectDB(Saiban1, RS, reccnt)
+        Dim table As New DataTable("Table")
+        table.Columns.Add("Display", GetType(String))
+        table.Columns.Add("Value", GetType(Integer))
+        table.Rows.Add("振込入金", 1)
+        table.Rows.Add("振込手数料", 2)
+        table.Rows.Add("現金入金", 3)
+        table.Rows.Add("手形受入", 4)
+        table.Rows.Add("電子債権", 5)
+        table.Rows.Add("売上割引", 6)
+        table.Rows.Add("売上値引", 7)
+        table.Rows.Add("リベート", 8)
+        table.Rows.Add("相殺", 9)
+        table.Rows.Add("諸口", 10)
 
-'        Dim DM As String = dsSaiban1.Tables(RS).Rows(0)("接頭文字")
-'        DM += dtToday.ToString("MMdd")
-'        DM += dsSaiban1.Tables(RS).Rows(0)("最新値").ToString.PadLeft(dsSaiban1.Tables(RS).Rows(0)("連番桁数"), "0")
+        Dim column As New DataGridViewComboBoxColumn()
+        column.DataSource = table
+        column.ValueMember = "Value"
+        column.DisplayMember = "Display"
+        column.HeaderText = "入金種目"
+        column.Name = "入金種目"
 
-'        Sql1 += "SELECT "
-'        Sql1 += "* "
-'        Sql1 += "FROM "
-'        Sql1 += "public"
-'        Sql1 += "."
-'        Sql1 += "t10_cymnhd"
-'        Sql1 += " WHERE "
-'        Sql1 += "受注番号"
-'        Sql1 += " ILIKE "
-'        Sql1 += "'"
-'        Sql1 += CymnNo
-'        Sql1 += "'"
-'        Sql1 += " AND "
-'        Sql1 += "受注番号枝番"
-'        Sql1 += " ILIKE "
-'        Sql1 += "'"
-'        Sql1 += Suffix
-'        Sql1 += "'"
+        DgvDeposit.Columns.Insert(1, column)
 
-'        Dim ds1 As DataSet = _db.selectDB(Sql1, RS, reccnt)
+        BillLoad()
+    End Sub
 
-'        Sql2 += "SELECT "
-'        Sql2 += "* "
-'        Sql2 += "FROM "
-'        Sql2 += "public"
-'        Sql2 += "."
-'        Sql2 += "t23_skyuhd"
-'        Sql2 += " WHERE "
-'        Sql2 += "受注番号"
-'        Sql2 += " ILIKE "
-'        Sql2 += "'"
-'        Sql2 += CymnNo
-'        Sql2 += "'"
-'        Sql2 += " AND "
-'        Sql2 += "受注番号枝番"
-'        Sql2 += "="
-'        Sql2 += Suffix
+    Private Sub BillLoad()
+        Dim Sql1 As String = ""
+        Sql1 += "SELECT "
+        Sql1 += "* "
+        Sql1 += "FROM "
+        Sql1 += "public"
+        Sql1 += "."
+        Sql1 += "t10_cymnhd"
+        Sql1 += " WHERE "
+        Sql1 += "会社コード"
+        Sql1 += " = "
+        Sql1 += "'"
+        Sql1 += CompanyCode
+        Sql1 += "'"
+        Sql1 += " AND "
+        Sql1 += "得意先コード"
+        Sql1 += " ILIKE "
+        Sql1 += "'"
+        Sql1 += CustomerCode
+        Sql1 += "'"
 
-'        Dim ds2 As DataSet = _db.selectDB(Sql2, RS, reccnt)
+        Dim Sql2 As String = ""
+        Sql2 += "SELECT "
+        Sql2 += "* "
+        Sql2 += "FROM "
+        Sql2 += "public"
+        Sql2 += "."
+        Sql2 += "t25_nkinhd"
+        Sql2 += " WHERE "
+        Sql2 += "会社コード"
+        Sql2 += " = "
+        Sql2 += "'"
+        Sql2 += CompanyCode
+        Sql2 += "'"
+        Sql2 += " AND "
+        Sql2 += "請求先コード"
+        Sql2 += " = "
+        Sql2 += "'"
+        Sql2 += CustomerCode
+        Sql2 += "'"
 
-'        For index As Integer = 0 To ds2.Tables(RS).Rows.Count - 1
-'            BillingAmount += ds2.Tables(RS).Rows(index)("請求金額計")
-'        Next
+        Dim Sql3 As String = ""
+        Sql3 += "SELECT "
+        Sql3 += "* "
+        Sql3 += "FROM "
+        Sql3 += "public"
+        Sql3 += "."
+        Sql3 += "t23_skyuhd"
+        Sql3 += " WHERE "
+        Sql3 += "会社コード"
+        Sql3 += " = "
+        Sql3 += "'"
+        Sql3 += CompanyCode
+        Sql3 += "'"
+        Sql3 += " AND "
+        Sql3 += "得意先コード"
+        Sql3 += " = "
+        Sql3 += "'"
+        Sql3 += CustomerCode
+        Sql3 += "'"
 
+        Dim reccnt As Integer = 0
+        Dim ds1 As DataSet = _db.selectDB(Sql1, RS, reccnt)
+        Dim ds2 As DataSet = _db.selectDB(Sql2, RS, reccnt)
+        Dim ds3 As DataSet = _db.selectDB(Sql3, RS, reccnt)
+        Dim OrderAmount As Integer = 0
+        Dim BillingAmount As Integer = 0
+        Dim Balance As Integer = 0
 
-'        Dim BillTotal As Integer = DgvAdd.Rows(0).Cells("今回請求金額計").Value + BillingAmount
-'        Dim Balance As Integer = ds1.Tables(RS).Rows(0)("見積金額") - BillTotal
+        For index1 As Integer = 0 To ds1.Tables(RS).Rows.Count - 1
+            OrderAmount += ds1.Tables(RS).Rows(index1)("見積金額")
+        Next
 
-'        If Balance < 0 Then
-'            MessageBox.Show("請求金額計が受注金額を超えています。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
-'            errflg = False
-'        End If
+        For index2 As Integer = 0 To ds3.Tables(RS).Rows.Count - 1
+            BillingAmount += ds3.Tables(RS).Rows(index2)("請求金額計")
+        Next
 
-'        If DgvAdd.Rows(0).Cells("今回請求金額計").Value = 0 Then
-'            MessageBox.Show("請求金額計が0になっています。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
-'            errflg = False
-'        End If
+        Balance = OrderAmount - BillingAmount
 
-'        If errflg Then
-'            Sql3 = ""
-'            Sql3 += "INSERT INTO "
-'            Sql3 += "Public."
-'            Sql3 += "t23_skyuhd("
-'            Sql3 += "会社コード, 請求番号, 請求区分, 請求日, 受注番号, 受注番号枝番, 得意先コード, 得意先名, 請求金額計, 売掛残高, 備考1, 備考2, 取消区分, 登録日, 更新者)"
-'            Sql3 += " VALUES('"
-'            Sql3 += ds1.Tables(RS).Rows(0)("会社コード").ToString
-'            Sql3 += "', '"
-'            Sql3 += DM
-'            Sql3 += "', '"
-'            Sql3 += DgvAdd.Rows(0).Cells("請求区分").Value.ToString
-'            Sql3 += "', '"
-'            Sql3 += DtpBillingDate.Value
-'            Sql3 += "', '"
-'            Sql3 += ds1.Tables(RS).Rows(0)("受注番号").ToString
-'            Sql3 += "', '"
-'            Sql3 += ds1.Tables(RS).Rows(0)("受注番号枝番").ToString
-'            Sql3 += "', '"
-'            Sql3 += ds1.Tables(RS).Rows(0)("得意先コード").ToString
-'            Sql3 += "', '"
-'            Sql3 += ds1.Tables(RS).Rows(0)("得意先名").ToString
-'            Sql3 += "', '"
-'            Sql3 += DgvAdd.Rows(0).Cells("今回請求金額計").Value
-'            Sql3 += "', '"
-'            Sql3 += DgvAdd.Rows(0).Cells("今回請求金額計").Value
-'            Sql3 += "', '"
-'            Sql3 += DgvAdd.Rows(0).Cells("今回備考1").Value
-'            Sql3 += "', '"
-'            Sql3 += DgvAdd.Rows(0).Cells("今回備考2").Value
-'            Sql3 += "', '"
-'            Sql3 += "0"
-'            Sql3 += "', '"
-'            Sql3 += dtToday
-'            Sql3 += "', '"
-'            Sql3 += frmC01F10_Login.loginValue.TantoNM
-'            Sql3 += " ')"
-'            Sql3 += "RETURNING 会社コード"
-'            Sql3 += ", "
-'            Sql3 += "請求番号"
-'            Sql3 += ", "
-'            Sql3 += "請求区分"
-'            Sql3 += ", "
-'            Sql3 += "請求日"
-'            Sql3 += ", "
-'            Sql3 += "受注番号"
-'            Sql3 += ", "
-'            Sql3 += "受注番号枝番"
-'            Sql3 += ", "
-'            Sql3 += "得意先コード"
-'            Sql3 += ", "
-'            Sql3 += "得意先名"
-'            Sql3 += ", "
-'            Sql3 += "請求金額計"
-'            Sql3 += ", "
-'            Sql3 += "売掛残高"
-'            Sql3 += ", "
-'            Sql3 += "備考1"
-'            Sql3 += ", "
-'            Sql3 += "備考2"
-'            Sql3 += ", "
-'            Sql3 += "取消区分"
-'            Sql3 += ", "
-'            Sql3 += "登録日"
-'            Sql3 += ", "
-'            Sql3 += "更新者"
+        DgvCustomer.Rows.Add()
+        DgvCustomer.Rows(0).Cells("請求先").Value = CustomerName
+        DgvCustomer.Rows(0).Cells("請求残高").Value = Balance
+        TxtCount1.Text = DgvDeposit.Rows.Count()
+        'For index As Integer = 0 To ds2.Tables(RS).Rows.Count - 1
+        '    DgvHistory.Rows.Add()
+        '    DgvHistory.Rows(index).Cells("No").Value = index + 1
+        '    DgvHistory.Rows(index).Cells("請求先").Value = ds2.Tables(RS).Rows(index)("請求先名")
+        '    DgvHistory.Rows(index).Cells("入金番号").Value = ds2.Tables(RS).Rows(index)("入金番号")
+        '    DgvHistory.Rows(index).Cells("型式").Value = ds2.Tables(RS).Rows(index)("型式")
+        '    DgvHistory.Rows(index).Cells("受注個数").Value = ds2.Tables(RS).Rows(index)("受注数量")
+        '    DgvHistory.Rows(index).Cells("単位").Value = ds2.Tables(RS).Rows(index)("単位")
+        '    DgvHistory.Rows(index).Cells("売上数量").Value = ds2.Tables(RS).Rows(index)("売上数量")
+        '    DgvHistory.Rows(index).Cells("売上単価").Value = ds2.Tables(RS).Rows(index)("売単価")
+        '    DgvHistory.Rows(index).Cells("売上金額").Value = ds2.Tables(RS).Rows(index)("売上金額")
+        'Next
 
-'            _db.executeDB(Sql3)
+        'TxtCount1.Text = ds2.Tables(RS).Rows.Count
+        TxtCount2.Text = DgvHistory.Rows.Count()
+        For index As Integer = 0 To ds3.Tables(RS).Rows.Count - 1
+            DgvBillingInfo.Rows.Add()
+            DgvBillingInfo.Rows(index).Cells("InfoNo").Value = index + 1
+            DgvBillingInfo.Rows(index).Cells("請求情報請求番号").Value = ds3.Tables(RS).Rows(index)("請求番号")
+            DgvBillingInfo.Rows(index).Cells("請求日").Value = ds3.Tables(RS).Rows(index)("請求日")
+            DgvBillingInfo.Rows(index).Cells("請求金額").Value = ds3.Tables(RS).Rows(index)("請求金額計")
+            If ds3.Tables(RS).Rows(index)("入金額計") Is DBNull.Value Then
+                DgvBillingInfo.Rows(index).Cells("請求情報入金額計").Value = 0
+            Else
+                DgvBillingInfo.Rows(index).Cells("請求情報入金額計").Value = ds3.Tables(RS).Rows(index)("入金額計")
+            End If
 
-'            Dim DMNo As Integer
+            If ds3.Tables(RS).Rows(index)("入金額計") Is DBNull.Value Then
+                DgvBillingInfo.Rows(index).Cells("請求情報請求残高").Value = ds3.Tables(RS).Rows(index)("請求金額計")
+            Else
+                DgvBillingInfo.Rows(index).Cells("請求情報請求残高").Value = ds3.Tables(RS).Rows(index)("請求金額計") - ds3.Tables(RS).Rows(index)("入金額計")
+            End If
+            DgvBillingInfo.Rows(index).Cells("入金額").Value = 0
+        Next
+        TxtCount3.Text = DgvBillingInfo.Rows.Count()
+    End Sub
 
-'            If dsSaiban1.Tables(RS).Rows(0)("最新値") = dsSaiban1.Tables(RS).Rows(0)("最大値") Then
-'                DMNo = dsSaiban1.Tables(RS).Rows(0)("最小値")
-'            Else
-'                DMNo = dsSaiban1.Tables(RS).Rows(0)("最新値") + 1
-'            End If
+    '前の画面に戻る
+    Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
+        _parentForm.Enabled = True
+        _parentForm.Show()
+        Me.Dispose()
+    End Sub
 
-'            Sql4 = ""
-'            Sql4 += "UPDATE "
-'            Sql4 += "Public."
-'            Sql4 += "m80_saiban "
-'            Sql4 += "SET "
-'            Sql4 += " 最新値"
-'            Sql4 += " = '"
-'            Sql4 += DMNo.ToString
-'            Sql4 += "', "
-'            Sql4 += "更新者"
-'            Sql4 += " = '"
-'            Sql4 += frmC01F10_Login.loginValue.TantoNM
-'            Sql4 += "', "
-'            Sql4 += "更新日"
-'            Sql4 += " = '"
-'            Sql4 += dtToday
-'            Sql4 += "' "
-'            Sql4 += "WHERE"
-'            Sql4 += " 会社コード"
-'            Sql4 += "='"
-'            Sql4 += ds1.Tables(RS).Rows(0)("会社コード").ToString
-'            Sql4 += "'"
-'            Sql4 += " AND"
-'            Sql4 += " 採番キー"
-'            Sql4 += "='"
-'            Sql4 += "80"
-'            Sql4 += "' "
-'            Sql4 += "RETURNING 会社コード"
-'            Sql4 += ", "
-'            Sql4 += "採番キー"
-'            Sql4 += ", "
-'            Sql4 += "最新値"
-'            Sql4 += ", "
-'            Sql4 += "最小値"
-'            Sql4 += ", "
-'            Sql4 += "最大値"
-'            Sql4 += ", "
-'            Sql4 += "接頭文字"
-'            Sql4 += ", "
-'            Sql4 += "連番桁数"
-'            Sql4 += ", "
-'            Sql4 += "更新者"
-'            Sql4 += ", "
-'            Sql4 += "更新日"
+    Private Sub BtnAdd_Click(sender As Object, e As EventArgs) Handles BtnAdd.Click
+        DgvDeposit.Rows.Add()
+        '最終行のインデックスを取得
+        Dim index As Integer = DgvDeposit.Rows.Count()
+        '行番号の振り直し
+        Dim No As Integer = 1
+        For c As Integer = 0 To index - 1
+            DgvDeposit.Rows(c).Cells(0).Value = No
+            No += 1
+        Next c
+        TxtCount2.Text = DgvDeposit.Rows.Count()
+    End Sub
 
-'            _db.executeDB(Sql4)
-'        End If
+    Private Sub BtnDelete_Click(sender As Object, e As EventArgs) Handles BtnDelete.Click
+        For Each r As DataGridViewCell In DgvDeposit.SelectedCells
+            DgvDeposit.Rows.RemoveAt(r.RowIndex)
+        Next r
 
-'    End Sub
-'End Class
+        '行番号の振り直し
+        Dim index As Integer = DgvDeposit.Rows.Count()
+        Dim No As Integer = 1
+        For c As Integer = 0 To index - 1
+            DgvDeposit.Rows(c).Cells(0).Value = No
+            No += 1
+        Next c
+        TxtCount3.Text = DgvDeposit.Rows.Count()
+    End Sub
+
+    Private Sub BtnCal_Click(sender As Object, e As EventArgs) Handles BtnCal.Click
+        Dim Total As Integer = 0
+        Dim count As Integer = 0
+
+        For index As Integer = 0 To DgvDeposit.Rows.Count - 1
+            Total += DgvDeposit.Rows(index).Cells("入力入金額").Value
+        Next
+
+        For index As Integer = 0 To DgvBillingInfo.Rows.Count - 1
+            If Total - DgvBillingInfo.Rows(index).Cells("請求金額").Value > 0 Then
+                DgvBillingInfo.Rows(index).Cells("入金額").Value = DgvBillingInfo.Rows(index).Cells("請求金額").Value
+                DgvBillingInfo.Rows(index).Cells("請求情報入金額計").Value = DgvBillingInfo.Rows(index).Cells("入金額").Value
+                DgvBillingInfo.Rows(index).Cells("請求情報請求残高").Value = 0
+                Total -= DgvBillingInfo.Rows(index).Cells("請求金額").Value
+            ElseIf Total > 0 Then
+                DgvBillingInfo.Rows(index).Cells("入金額").Value = Total
+                DgvBillingInfo.Rows(index).Cells("請求情報入金額計").Value = Total
+                DgvBillingInfo.Rows(index).Cells("請求情報請求残高").Value = DgvBillingInfo.Rows(index).Cells("請求金額").Value - Total
+                Total -= Total
+            End If
+        Next
+
+    End Sub
+End Class

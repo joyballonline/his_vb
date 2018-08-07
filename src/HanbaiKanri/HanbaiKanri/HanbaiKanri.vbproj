@@ -156,6 +156,12 @@
     <Compile Include="Form\cymn.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form\DepositList.Designer.vb">
+      <DependentUpon>DepositList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\DepositList.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\DepositManagement.Designer.vb">
       <DependentUpon>DepositManagement.vb</DependentUpon>
     </Compile>
@@ -390,6 +396,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\cymn.resx">
       <DependentUpon>cymn.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\DepositList.resx">
+      <DependentUpon>DepositList.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\DepositManagement.resx">
       <DependentUpon>DepositManagement.vb</DependentUpon>
