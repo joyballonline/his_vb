@@ -157,7 +157,8 @@ Public Class CustomerOrderList
 
     Private Sub BtnInvoice_Click(sender As Object, e As EventArgs) Handles BtnInvoice.Click '請求書発行
         Dim BillingNo As String = ""
-        Dim BillingSuffix As String = ""
+        Dim OrderNo As String = ""
+        Dim OrderSuffix As String = ""
         Dim BillingSubTotal As Integer = 0
         Dim Sql1 As String = ""
         Dim Sql2 As String = ""
@@ -165,8 +166,9 @@ Public Class CustomerOrderList
         Dim reccnt As Integer = 0
 
         For Each r As DataGridViewRow In DgvBilling.SelectedRows
-            BillingNo = DgvBilling.Rows(r.Index).Cells("受注番号").Value
-            BillingSuffix = DgvBilling.Rows(r.Index).Cells("受注番号枝番").Value
+            BillingNo = DgvBilling.Rows(r.Index).Cells("請求番号").Value
+            OrderNo = DgvBilling.Rows(r.Index).Cells("受注番号").Value
+            OrderSuffix = DgvBilling.Rows(r.Index).Cells("受注番号枝番").Value
             BillingSubTotal += DgvBilling.Rows(r.Index).Cells("請求金額計").Value
 
             Sql1 += "SELECT "
@@ -179,13 +181,13 @@ Public Class CustomerOrderList
             Sql1 += "受注番号"
             Sql1 += " = "
             Sql1 += "'"
-            Sql1 += BillingNo
+            Sql1 += OrderNo
             Sql1 += "'"
             Sql1 += " AND "
             Sql1 += "受注番号枝番"
             Sql1 += " = "
             Sql1 += "'"
-            Sql1 += BillingSuffix
+            Sql1 += OrderSuffix
             Sql1 += "'"
 
             Dim ds1 As DataSet = _db.selectDB(Sql1, RS, reccnt) '受注基本（請求債情報）
@@ -200,13 +202,13 @@ Public Class CustomerOrderList
             Sql2 += "受注番号"
             Sql2 += " = "
             Sql2 += "'"
-            Sql2 += BillingNo
+            Sql2 += OrderNo
             Sql2 += "'"
             Sql2 += " AND "
             Sql2 += "受注番号枝番"
             Sql2 += " = "
             Sql2 += "'"
-            Sql2 += BillingSuffix
+            Sql2 += OrderSuffix
             Sql2 += "'"
 
             Dim ds2 As DataSet = _db.selectDB(Sql2, RS, reccnt)　'受注明細（商品情報）
