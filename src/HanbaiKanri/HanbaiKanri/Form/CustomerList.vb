@@ -218,7 +218,10 @@ Public Class CustomerList
         Dim Company As String = DgvCustomer.Rows(RowIdx).Cells("会社コード").Value
         Dim Customer As String = DgvCustomer.Rows(RowIdx).Cells("得意先コード").Value
         Dim openForm As Form = Nothing
-        openForm = New CustomerOrderList(_msgHd, _db, _langHd, Company, Customer)   '処理選択
+        openForm = New CustomerOrderList(_msgHd, _db, _langHd, Me, Company, Customer)   '処理選択
+
+        Me.Enabled = False
+        Me.Hide()
         openForm.Show(Me)
     End Sub
 End Class

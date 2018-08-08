@@ -229,8 +229,8 @@ Public Class BillingManagement
             DgvHistory.Rows(index).Cells("請求金額").Value = ds3.Tables(RS).Rows(index)("請求金額計")
             DgvHistory.Rows(index).Cells("備考1").Value = ds3.Tables(RS).Rows(index)("備考1")
             DgvHistory.Rows(index).Cells("備考2").Value = ds3.Tables(RS).Rows(index)("備考2")
-            DgvHistory.Rows(index).Cells("請求済み受注番号").Value = ds3.Tables(RS).Rows(index)("請求済み受注番号")
-            DgvHistory.Rows(index).Cells("請求済み受注番号枝番").Value = ds3.Tables(RS).Rows(index)("請求済み受注番号枝番")
+            DgvHistory.Rows(index).Cells("請求済み受注番号").Value = ds3.Tables(RS).Rows(index)("受注番号")
+            DgvHistory.Rows(index).Cells("請求済み受注番号枝番").Value = ds3.Tables(RS).Rows(index)("受注番号枝番")
         Next
 
         TxtCount2.Text = ds3.Tables(RS).Rows.Count

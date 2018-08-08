@@ -40,6 +40,7 @@ Public Class CustomerOrderList
     Private CompanyCode As String = ""
     Private OrderingNo As String()
     Private CustomerCode As String = ""
+    Private _parentForm As Form
 
     '-------------------------------------------------------------------------------
     'デフォルトコンストラクタ（隠蔽）
@@ -55,6 +56,7 @@ Public Class CustomerOrderList
     Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler,
                    ByRef prmRefDbHd As UtilDBIf,
                    ByRef prmRefLang As UtilLangHandler,
+                   ByRef prmRefForm As Form,
                    ByRef prmRefCompany As String,
                    ByRef prmRefCustomer As String)
         Call Me.New()
@@ -67,6 +69,7 @@ Public Class CustomerOrderList
         _langHd = prmRefLang
         CompanyCode = prmRefCompany
         CustomerCode = prmRefCustomer
+        _parentForm = prmRefForm
         '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
         StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
         Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
@@ -91,16 +94,16 @@ Public Class CustomerOrderList
             Sql += "'"
             Sql += " AND "
             Sql += "会社コード"
-            Sql += " = "
-            Sql += "'"
+            Sql += " ILIKE "
+            Sql += "'%"
             Sql += CompanyCode
-            Sql += "'"
+            Sql += "%'"
             Sql += " AND "
             Sql += "得意先コード"
-            Sql += " = "
-            Sql += "'"
+            Sql += " ILIKE "
+            Sql += "'%"
             Sql += CustomerCode
-            Sql += "'"
+            Sql += "%'"
 
             Dim reccnt As Integer = 0
             ds = _db.selectDB(Sql, RS, reccnt)
@@ -151,10 +154,9 @@ Public Class CustomerOrderList
     End Sub
 
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
-        Dim openForm As Form = Nothing
-        openForm = New frmC01F30_Menu(_msgHd, _langHd, _db)
-        openForm.Show()
-        Me.Close()
+        _parentForm.Show()
+        _parentForm.Enabled = True
+        Me.Dispose()
     End Sub
 
     Private Sub BtnInvoice_Click(sender As Object, e As EventArgs) Handles BtnInvoice.Click '請求書発行
