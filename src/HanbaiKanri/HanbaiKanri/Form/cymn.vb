@@ -294,9 +294,16 @@ Public Class Cymn
         Sql3 += "'"
         Dim ds3 = _db.selectDB(Sql3, RS, reccnt)
 
+        Dim tmp As Integer
+        Dim tmp2 As Integer
+        Dim tmp3 As Integer
+        Dim tmp4 As Integer
+        Dim NoOverHead As Integer = 0
+        Dim Total As Integer = 0
+
         For index As Integer = 0 To ds3.Tables(RS).Rows.Count - 1
             DgvItemList.Rows.Add()
-            Dim tmp As Integer = ds3.Tables(RS).Rows(index)("仕入区分")
+            tmp = ds3.Tables(RS).Rows(index)("仕入区分")
             DgvItemList(1, index).Value = tmp
             DgvItemList.Rows(index).Cells(2).Value = ds3.Tables(RS).Rows(index)("メーカー")
             DgvItemList.Rows(index).Cells(3).Value = ds3.Tables(RS).Rows(index)("品名")
@@ -308,6 +315,7 @@ Public Class Cymn
             DgvItemList.Rows(index).Cells(9).Value = ds3.Tables(RS).Rows(index)("間接費率")
             DgvItemList.Rows(index).Cells(10).Value = ds3.Tables(RS).Rows(index)("間接費")
             DgvItemList.Rows(index).Cells(11).Value = ds3.Tables(RS).Rows(index)("仕入金額")
+            NoOverHead = ds3.Tables(RS).Rows(index)("間接費無仕入金額")
             DgvItemList.Rows(index).Cells(12).Value = ds3.Tables(RS).Rows(index)("売単価")
             DgvItemList.Rows(index).Cells(13).Value = ds3.Tables(RS).Rows(index)("売上金額")
             DgvItemList.Rows(index).Cells(14).Value = ds3.Tables(RS).Rows(index)("粗利額")
@@ -315,24 +323,12 @@ Public Class Cymn
             DgvItemList.Rows(index).Cells(16).Value = ds3.Tables(RS).Rows(index)("リードタイム")
             DgvItemList.Rows(index).Cells(17).Value = ds3.Tables(RS).Rows(index)("備考")
             DgvItemList.Rows(index).Cells(18).Value = ""
+            tmp3 = ds3.Tables(RS).Rows(index)("間接費率") / 100
+            tmp2 = ds3.Tables(RS).Rows(index)("仕入金額") * tmp3
+            Total += ds3.Tables(RS).Rows(index)("仕入金額") + tmp2
         Next
 
-        ''金額計算
-        'Dim Total As Integer = 0
-        'Dim PurchaseTotal As Integer = 0
-        'Dim GrossProfit As Decimal = 0
-
-        'For index As Integer = 0 To DgvItemList.Rows.Count - 1
-        '    PurchaseTotal += DgvItemList.Rows(index).Cells(11).Value
-        '    Total += DgvItemList.Rows(index).Cells(13).Value
-        'Next
-
-        'TxtOrderAmount.Text = PurchaseTotal
-        'TxtPurchaseAmount.Text = Total
-        'TxtGrossProfit.Text = Total - PurchaseTotal
-
-
-
+        TxtPph.Text = Total * 0.025
 
         '行番号の振り直し
         Dim i As Integer = DgvItemList.Rows.Count()
