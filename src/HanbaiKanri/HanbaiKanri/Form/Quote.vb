@@ -290,7 +290,7 @@ Public Class Quote
                 DgvItemList.Rows(index).Cells("品名").Value = ds3.Tables(RS).Rows(index)("品名")
                 DgvItemList.Rows(index).Cells("型式").Value = ds3.Tables(RS).Rows(index)("型式")
                 DgvItemList.Rows(index).Cells("数量").Value = ds3.Tables(RS).Rows(index)("数量")
-                DgvItemList.Rows(index).Cells("単価").Value = ds3.Tables(RS).Rows(index)("単価")
+                DgvItemList.Rows(index).Cells("単位").Value = ds3.Tables(RS).Rows(index)("単位")
                 DgvItemList.Rows(index).Cells("仕入先").Value = ds3.Tables(RS).Rows(index)("仕入先名称")
                 DgvItemList.Rows(index).Cells("仕入単価").Value = ds3.Tables(RS).Rows(index)("仕入単価")
                 DgvItemList.Rows(index).Cells("間接費").Value = ds3.Tables(RS).Rows(index)("間接費")
@@ -1912,25 +1912,113 @@ Public Class Quote
         Dim LeadTime(DgvItemList.Rows.Count - 1) As String
         Dim ItemRemarks(DgvItemList.Rows.Count - 1) As String
 
-        For index As Integer = 0 To DgvItemList.Rows.Count - 1
-            No(index) = DgvItemList.Rows(index).Cells("No").Value
-            PurchaseCategory(index) = DgvItemList(1, index).Value
-            Maker(index) = DgvItemList.Rows(index).Cells("メーカー").Value
-            ItemName(index) = DgvItemList.Rows(index).Cells("品名").Value
-            Model(index) = DgvItemList.Rows(index).Cells("型式").Value
-            Quantity(index) = DgvItemList.Rows(index).Cells("数量").Value
-            Unit(index) = DgvItemList.Rows(index).Cells("単位").Value
-            Supplier(index) = DgvItemList.Rows(index).Cells("仕入先").Value
-            PurchasePrice(index) = DgvItemList.Rows(index).Cells("仕入単価").Value
-            OverHead(index) = DgvItemList.Rows(index).Cells("間接費率").Value
-            PurchaseAmount1(index) = DgvItemList.Rows(index).Cells("仕入金額").Value
-            PurchaseAmount2(index) = DgvItemList.Rows(index).Cells("間接費無仕入金額").Value
-            SellingPrice(index) = DgvItemList.Rows(index).Cells("売単価").Value
-            SellingAmount(index) = DgvItemList.Rows(index).Cells("売上金額").Value
-            GrossProfit(index) = DgvItemList.Rows(index).Cells("粗利額").Value
-            GrossProfitRate(index) = DgvItemList.Rows(index).Cells("粗利率").Value
-            LeadTime(index) = DgvItemList.Rows(index).Cells("リードタイム").Value
-            ItemRemarks(index) = DgvItemList.Rows(index).Cells("備考").Value
-        Next
+        '定義
+        Dim app As Excel.Application = Nothing
+        Dim book As Excel.Workbook = Nothing
+        Dim sheet As Excel.Worksheet = Nothing
+
+
+
+        Try
+            '雛形パス
+            Dim sHinaPath As String = ""
+            sHinaPath = StartUp._iniVal.BaseXlsPath
+
+            '雛形ファイル名
+            Dim sHinaFile As String = ""
+            sHinaFile = sHinaPath & "\" & "Proof.xlsx"
+
+            '出力先パス
+            Dim sOutPath As String = ""
+            sOutPath = StartUp._iniVal.OutXlsPath
+
+            '出力ファイル名
+            Dim sOutFile As String = ""
+            sOutFile = sOutPath & "\Proof_" & QuoteNo & "-" & QuoteSuffix & ".xlsx"
+
+
+
+            app = New Excel.Application()
+            book = app.Workbooks.Add(sHinaFile)  'テンプレート
+            sheet = CType(book.Worksheets(1), Excel.Worksheet)
+
+            Dim rowCnt As Integer = 0
+            Dim currentRow As Integer = 10
+            Dim lastRow As Integer = 12
+
+            sheet.Range("B1").Value = QuoteNo & "-" & QuoteSuffix
+            sheet.Range("H1").Value = QuoteDate & "(" & RegistrationDate & ")"
+            sheet.Range("M1").Value = Expiration
+            sheet.Range("B2").Value = CustomerName
+            sheet.Range("B3").Value = PostalCode & " " & Address1
+            sheet.Range("B4").Value = Address2
+            sheet.Range("B5").Value = Address3
+            sheet.Range("H2").Value = Tel
+            sheet.Range("H3").Value = Fax
+            sheet.Range("H4").Value = Person
+            sheet.Range("H5").Value = Position
+            sheet.Range("M2").Value = Sales
+            sheet.Range("M3").Value = Input
+            sheet.Range("B6").Value = PaymentTerms
+            sheet.Range("B7").Value = QuoteRemarks
+            sheet.Range("L13").Value = PurchaseTotal
+            sheet.Range("N13").Value = QuoteAmount
+            sheet.Range("O13").Value = GrossProfitAmount
+
+
+
+            For index As Integer = 0 To DgvItemList.Rows.Count - 1
+                If rowCnt > 3 Then
+                    Dim R As Object
+                    R = sheet.Range(lastRow - 2 & ":" & lastRow - 2)
+                    R.Copy()
+                    R.Insert()
+                    If Marshal.IsComObject(R) Then
+                        Marshal.ReleaseComObject(R)
+                    End If
+                    lastRow += 1
+                End If
+
+                sheet.Range("A" & currentRow).Value = DgvItemList.Rows(index).Cells("No").Value
+                sheet.Range("B" & currentRow).Value = PurchaseCategory(index) = DgvItemList(1, index).Value
+                sheet.Range("C" & currentRow).Value = DgvItemList.Rows(index).Cells("メーカー").Value
+                sheet.Range("D" & currentRow).Value = DgvItemList.Rows(index).Cells("品名").Value
+                sheet.Range("E" & currentRow).Value = DgvItemList.Rows(index).Cells("型式").Value
+                sheet.Range("F" & currentRow).Value = DgvItemList.Rows(index).Cells("数量").Value
+                sheet.Range("G" & currentRow).Value = DgvItemList.Rows(index).Cells("単位").Value
+                sheet.Range("H" & currentRow).Value = DgvItemList.Rows(index).Cells("仕入先").Value
+                sheet.Range("I" & currentRow).Value = DgvItemList.Rows(index).Cells("仕入単価").Value
+                sheet.Range("J" & currentRow).Value = DgvItemList.Rows(index).Cells("間接費率").Value
+                sheet.Range("L" & currentRow).Value = DgvItemList.Rows(index).Cells("仕入金額").Value
+                sheet.Range("K" & currentRow).Value = DgvItemList.Rows(index).Cells("間接費無仕入金額").Value
+                sheet.Range("M" & currentRow).Value = DgvItemList.Rows(index).Cells("売単価").Value
+                sheet.Range("N" & currentRow).Value = DgvItemList.Rows(index).Cells("売上金額").Value
+                sheet.Range("O" & currentRow).Value = DgvItemList.Rows(index).Cells("粗利額").Value
+                sheet.Range("P" & currentRow).Value = DgvItemList.Rows(index).Cells("粗利率").Value
+                sheet.Range("Q" & currentRow).Value = DgvItemList.Rows(index).Cells("リードタイム").Value
+                sheet.Range("R" & currentRow).Value = DgvItemList.Rows(index).Cells("備考").Value
+
+
+                currentRow += 1
+                rowCnt += 1
+
+            Next
+
+            book.SaveAs(sOutFile)
+            app.Visible = True
+
+            _msgHd.dspMSG("CreateExcel")
+
+        Catch ex As Exception
+            Throw ex
+
+        Finally
+            'app.Quit()
+            'Marshal.ReleaseComObject(sheet)
+            'Marshal.ReleaseComObject(book)
+            'Marshal.ReleaseComObject(app)
+
+        End Try
+
     End Sub
 End Class
