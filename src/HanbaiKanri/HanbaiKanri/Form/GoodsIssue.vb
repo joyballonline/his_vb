@@ -1223,6 +1223,91 @@ Public Class GoodsIssue
 
         End Try
 
+        Try
+            '雛形パス
+            Dim sHinaPath As String = ""
+            sHinaPath = StartUp._iniVal.BaseXlsPath
+
+            '雛形ファイル名
+            Dim sHinaFile As String = ""
+            sHinaFile = sHinaPath & "\" & "PackingList.xlsx"
+
+
+
+            '出力先パス
+            Dim sOutPath As String = ""
+            sOutPath = StartUp._iniVal.OutXlsPath
+
+            '出力ファイル名
+            Dim sOutFile As String = ""
+            sOutFile = sOutPath & "\PackingList_" & ds2.Tables(RS).Rows(0)("出庫番号") & ".xlsx"
+
+
+
+            app = New Excel.Application()
+            book = app.Workbooks.Add(sHinaFile)  'テンプレート
+            sheet = CType(book.Worksheets(1), Excel.Worksheet)
+
+            sheet.Range("B2").Value = ds1.Tables(RS).Rows(0)("得意先名")
+            sheet.Range("B9").Value = ds1.Tables(RS).Rows(0)("得意先郵便番号")
+            sheet.Range("B10").Value = ds1.Tables(RS).Rows(0)("得意先住所")
+            sheet.Range("B11").Value = ds1.Tables(RS).Rows(0)("得意先電話番号")
+
+            sheet.Range("G8").Value = ds1.Tables(RS).Rows(0)("出庫番号")
+            sheet.Range("G9").Value = ds1.Tables(RS).Rows(0)("出庫日")
+
+
+
+            Dim rowCnt As Integer = 0
+            Dim lstRow As Integer = 14
+            'Dim addRowCnt As Integer = 0
+            'Dim currentCnt As Integer = 20
+            Dim num As Integer = 1
+
+
+            For j As Integer = 0 To ds2.Tables(RS).Rows.Count - 1
+                If rowCnt = 0 Then
+                    sheet.Range("A" & lstRow).Value = num
+                    sheet.Range("B" & lstRow).Value = ds2.Tables(RS).Rows(j)("メーカー") & " / " & ds2.Tables(RS).Rows(j)("品名") & " / " & ds2.Tables(RS).Rows(j)("型式")
+                    sheet.Range("F" & lstRow).Value = ds2.Tables(RS).Rows(j)("出庫数量") & " " & ds2.Tables(RS).Rows(j)("単位")
+                    'sheet.Rows(lstRow & ":" & lstRow).AutoFit
+                Else
+                    Dim cellPos As String = lstRow & ":" & lstRow
+                    Dim R As Object
+                    cellPos = lstRow & ":" & lstRow
+                    R = sheet.Range(cellPos)
+                    R.Copy()
+                    R.Insert()
+                    If Marshal.IsComObject(R) Then
+                        Marshal.ReleaseComObject(R)
+                    End If
+
+                    lstRow = lstRow + 1
+
+                    sheet.Range("A" & lstRow).Value = num
+                    sheet.Range("B" & lstRow).Value = ds2.Tables(RS).Rows(j)("メーカー") & " / " & ds2.Tables(RS).Rows(j)("品名") & " / " & ds2.Tables(RS).Rows(j)("型式")
+                    sheet.Range("F" & lstRow).Value = ds2.Tables(RS).Rows(j)("出庫数量") & " " & ds2.Tables(RS).Rows(j)("単位")
+                    'sheet.Rows(lstRow & ":" & lstRow).AutoFit
+
+                End If
+            Next
+
+            book.SaveAs(sOutFile)
+            app.Visible = True
+
+            '_msgHd.dspMSG("CreateExcel")
+            createFlg = True
+
+        Catch ex As Exception
+            Throw ex
+
+        Finally
+            'app.Quit()
+            'Marshal.ReleaseComObject(sheet)
+            'Marshal.ReleaseComObject(book)
+            'Marshal.ReleaseComObject(app)
+
+        End Try
 
         Try
             '雛形パス
