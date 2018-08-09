@@ -1088,11 +1088,219 @@ Public Class OrderManagement
             Sql9 += "更新日"
 
             _db.executeDB(Sql9)
+
+            Dim result As DialogResult = MessageBox.Show("請求データを作成しますか？",
+                                             "質問",
+                                             MessageBoxButtons.YesNo,
+                                             MessageBoxIcon.Exclamation,
+                                             MessageBoxDefaultButton.Button2)
+
+            If result = DialogResult.Yes Then
+                Biilng()
+            End If
+
             Dim openForm As Form = Nothing
             Dim Status As String = "SALES"
             openForm = New OrderList(_msgHd, _db, _langHd, Status)
             openForm.Show()
             Me.Close()
         End If
+    End Sub
+
+    Private Sub Biilng()
+        Dim dtToday As DateTime = DateTime.Now
+        Dim reccnt As Integer = 0
+        Dim BillingAmount As Integer = 0
+        For index As Integer = 0 To DgvAdd.Rows.Count - 1
+            BillingAmount += DgvAdd.Rows(index).Cells("売単価").Value * DgvAdd.Rows(index).Cells("売上数量").Value
+        Next
+
+        Dim Saiban1 As String = ""
+        Dim Sql1 As String = ""
+        Dim Sql2 As String = ""
+        Dim Sql3 As String = ""
+        Dim Sql4 As String = ""
+
+        Saiban1 += "SELECT "
+        Saiban1 += "* "
+        Saiban1 += "FROM "
+        Saiban1 += "public"
+        Saiban1 += "."
+        Saiban1 += "m80_saiban"
+        Saiban1 += " WHERE "
+        Saiban1 += "採番キー"
+        Saiban1 += " ILIKE "
+        Saiban1 += "'"
+        Saiban1 += "80"
+        Saiban1 += "'"
+
+        Dim dsSaiban1 As DataSet = _db.selectDB(Saiban1, RS, reccnt)
+
+        Dim DM As String = dsSaiban1.Tables(RS).Rows(0)("接頭文字")
+        DM += dtToday.ToString("MMdd")
+        DM += dsSaiban1.Tables(RS).Rows(0)("最新値").ToString.PadLeft(dsSaiban1.Tables(RS).Rows(0)("連番桁数"), "0")
+
+        Sql1 += "SELECT "
+        Sql1 += "* "
+        Sql1 += "FROM "
+        Sql1 += "public"
+        Sql1 += "."
+        Sql1 += "t10_cymnhd"
+        Sql1 += " WHERE "
+        Sql1 += "受注番号"
+        Sql1 += " ILIKE "
+        Sql1 += "'"
+        Sql1 += No
+        Sql1 += "'"
+        Sql1 += " AND "
+        Sql1 += "受注番号枝番"
+        Sql1 += " ILIKE "
+        Sql1 += "'"
+        Sql1 += Suffix
+        Sql1 += "'"
+
+        Dim ds1 As DataSet = _db.selectDB(Sql1, RS, reccnt)
+
+        Sql2 += "SELECT "
+        Sql2 += "* "
+        Sql2 += "FROM "
+        Sql2 += "public"
+        Sql2 += "."
+        Sql2 += "t23_skyuhd"
+        Sql2 += " WHERE "
+        Sql2 += "受注番号"
+        Sql2 += " ILIKE "
+        Sql2 += "'"
+        Sql2 += No
+        Sql2 += "'"
+        Sql2 += " AND "
+        Sql2 += "受注番号枝番"
+        Sql2 += "="
+        Sql2 += Suffix
+
+        Dim ds2 As DataSet = _db.selectDB(Sql2, RS, reccnt)
+
+        Sql3 = ""
+        Sql3 += "INSERT INTO "
+        Sql3 += "Public."
+        Sql3 += "t23_skyuhd("
+        Sql3 += "会社コード, 請求番号, 請求区分, 請求日, 受注番号, 受注番号枝番, 得意先コード, 得意先名, 請求金額計, 売掛残高, 備考1, 備考2, 取消区分, 登録日, 更新者)"
+        Sql3 += " VALUES('"
+        Sql3 += ds1.Tables(RS).Rows(0)("会社コード").ToString
+        Sql3 += "', '"
+        Sql3 += DM
+        Sql3 += "', '"
+        Sql3 += "1"
+        Sql3 += "', '"
+        Sql3 += DtpOrderDate.Value
+        Sql3 += "', '"
+        Sql3 += ds1.Tables(RS).Rows(0)("受注番号").ToString
+        Sql3 += "', '"
+        Sql3 += ds1.Tables(RS).Rows(0)("受注番号枝番").ToString
+        Sql3 += "', '"
+        Sql3 += ds1.Tables(RS).Rows(0)("得意先コード").ToString
+        Sql3 += "', '"
+        Sql3 += ds1.Tables(RS).Rows(0)("得意先名").ToString
+        Sql3 += "', '"
+        Sql3 += BillingAmount.ToString
+        Sql3 += "', '"
+        Sql3 += BillingAmount.ToString
+        Sql3 += "', '"
+        Sql3 += TxtRemarks.Text
+        Sql3 += "', '"
+        Sql3 += DgvAdd.Rows(0).Cells("備考").Value
+        Sql3 += "', '"
+        Sql3 += "0"
+        Sql3 += "', '"
+        Sql3 += dtToday
+        Sql3 += "', '"
+        Sql3 += frmC01F10_Login.loginValue.TantoNM
+        Sql3 += " ')"
+        Sql3 += "RETURNING 会社コード"
+        Sql3 += ", "
+        Sql3 += "請求番号"
+        Sql3 += ", "
+        Sql3 += "請求区分"
+        Sql3 += ", "
+        Sql3 += "請求日"
+        Sql3 += ", "
+        Sql3 += "受注番号"
+        Sql3 += ", "
+        Sql3 += "受注番号枝番"
+        Sql3 += ", "
+        Sql3 += "得意先コード"
+        Sql3 += ", "
+        Sql3 += "得意先名"
+        Sql3 += ", "
+        Sql3 += "請求金額計"
+        Sql3 += ", "
+        Sql3 += "売掛残高"
+        Sql3 += ", "
+        Sql3 += "備考1"
+        Sql3 += ", "
+        Sql3 += "備考2"
+        Sql3 += ", "
+        Sql3 += "取消区分"
+        Sql3 += ", "
+        Sql3 += "登録日"
+        Sql3 += ", "
+        Sql3 += "更新者"
+
+        _db.executeDB(Sql3)
+
+        Dim DMNo As Integer
+
+        If dsSaiban1.Tables(RS).Rows(0)("最新値") = dsSaiban1.Tables(RS).Rows(0)("最大値") Then
+            DMNo = dsSaiban1.Tables(RS).Rows(0)("最小値")
+        Else
+            DMNo = dsSaiban1.Tables(RS).Rows(0)("最新値") + 1
+        End If
+
+        Sql4 = ""
+        Sql4 += "UPDATE "
+        Sql4 += "Public."
+        Sql4 += "m80_saiban "
+        Sql4 += "SET "
+        Sql4 += " 最新値"
+        Sql4 += " = '"
+        Sql4 += DMNo.ToString
+        Sql4 += "', "
+        Sql4 += "更新者"
+        Sql4 += " = '"
+        Sql4 += frmC01F10_Login.loginValue.TantoNM
+        Sql4 += "', "
+        Sql4 += "更新日"
+        Sql4 += " = '"
+        Sql4 += dtToday
+        Sql4 += "' "
+        Sql4 += "WHERE"
+        Sql4 += " 会社コード"
+        Sql4 += "='"
+        Sql4 += ds1.Tables(RS).Rows(0)("会社コード").ToString
+        Sql4 += "'"
+        Sql4 += " AND"
+        Sql4 += " 採番キー"
+        Sql4 += "='"
+        Sql4 += "80"
+        Sql4 += "' "
+        Sql4 += "RETURNING 会社コード"
+        Sql4 += ", "
+        Sql4 += "採番キー"
+        Sql4 += ", "
+        Sql4 += "最新値"
+        Sql4 += ", "
+        Sql4 += "最小値"
+        Sql4 += ", "
+        Sql4 += "最大値"
+        Sql4 += ", "
+        Sql4 += "接頭文字"
+        Sql4 += ", "
+        Sql4 += "連番桁数"
+        Sql4 += ", "
+        Sql4 += "更新者"
+        Sql4 += ", "
+        Sql4 += "更新日"
+
+        _db.executeDB(Sql4)
     End Sub
 End Class

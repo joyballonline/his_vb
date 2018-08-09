@@ -262,6 +262,15 @@ Public Class Cymn
         If ds1.Tables(RS).Rows(0)("ＶＡＴ") IsNot DBNull.Value Then
             TxtVat.Text = ds1.Tables(RS).Rows(0)("ＶＡＴ")
         End If
+        If ds1.Tables(RS).Rows(0)("見積金額") IsNot DBNull.Value Then
+            TxtOrderAmount.Text = ds1.Tables(RS).Rows(0)("見積金額")
+        End If
+        If ds1.Tables(RS).Rows(0)("仕入金額") IsNot DBNull.Value Then
+            TxtPurchaseAmount.Text = ds1.Tables(RS).Rows(0)("仕入金額")
+        End If
+        If ds1.Tables(RS).Rows(0)("粗利額") IsNot DBNull.Value Then
+            TxtGrossProfit.Text = ds1.Tables(RS).Rows(0)("粗利額")
+        End If
 
         ''見積明細情報
         Dim Sql3 As String = ""
@@ -308,19 +317,19 @@ Public Class Cymn
             DgvItemList.Rows(index).Cells(18).Value = ""
         Next
 
-        '金額計算
-        Dim Total As Integer = 0
-        Dim PurchaseTotal As Integer = 0
-        Dim GrossProfit As Decimal = 0
+        ''金額計算
+        'Dim Total As Integer = 0
+        'Dim PurchaseTotal As Integer = 0
+        'Dim GrossProfit As Decimal = 0
 
-        For index As Integer = 0 To DgvItemList.Rows.Count - 1
-            PurchaseTotal += DgvItemList.Rows(index).Cells(11).Value
-            Total += DgvItemList.Rows(index).Cells(13).Value
-        Next
+        'For index As Integer = 0 To DgvItemList.Rows.Count - 1
+        '    PurchaseTotal += DgvItemList.Rows(index).Cells(11).Value
+        '    Total += DgvItemList.Rows(index).Cells(13).Value
+        'Next
 
-        TxtOrderAmount.Text = PurchaseTotal
-        TxtPurchaseAmount.Text = Total
-        TxtGrossProfit.Text = Total - PurchaseTotal
+        'TxtOrderAmount.Text = PurchaseTotal
+        'TxtPurchaseAmount.Text = Total
+        'TxtGrossProfit.Text = Total - PurchaseTotal
 
 
 
