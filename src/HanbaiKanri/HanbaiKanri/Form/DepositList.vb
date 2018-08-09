@@ -100,10 +100,10 @@ Public Class DepositList
             Sql2 += "'"
             Sql2 += " AND "
             Sql2 += "得意先コード"
-            Sql2 += " = "
-            Sql2 += "'"
+            Sql2 += " ILIKE "
+            Sql2 += "'%"
             Sql2 += ds1.Tables(RS).Rows(index1)("得意先コード")
-            Sql2 += "'"
+            Sql2 += "%'"
             Dim ds2 As DataSet = _db.selectDB(Sql2, RS, reccnt)
             CustomerBillingCount(index1) = ds2.Tables(RS).Rows.Count.ToString
 
@@ -121,10 +121,10 @@ Public Class DepositList
             Sql3 += "'"
             Sql3 += " AND "
             Sql3 += "得意先コード"
-            Sql3 += " = "
-            Sql3 += "'"
+            Sql3 += " ILIKE "
+            Sql3 += "'%"
             Sql3 += ds1.Tables(RS).Rows(index1)("得意先コード")
-            Sql3 += "'"
+            Sql3 += "%'"
             Dim ds3 As DataSet = _db.selectDB(Sql3, RS, reccnt)
 
             CustomerOrderCount(index1) = ds3.Tables(RS).Rows.Count.ToString

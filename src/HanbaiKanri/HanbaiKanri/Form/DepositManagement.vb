@@ -120,16 +120,16 @@ Public Class DepositManagement
         Sql1 += "t10_cymnhd"
         Sql1 += " WHERE "
         Sql1 += "会社コード"
-        Sql1 += " = "
+        Sql1 += " ILIKE "
         Sql1 += "'"
         Sql1 += CompanyCode
         Sql1 += "'"
         Sql1 += " AND "
         Sql1 += "得意先コード"
         Sql1 += " ILIKE "
-        Sql1 += "'"
+        Sql1 += "'%"
         Sql1 += CustomerCode
-        Sql1 += "'"
+        Sql1 += "%'"
 
         Dim Sql2 As String = ""
         Sql2 += "SELECT "
@@ -140,16 +140,16 @@ Public Class DepositManagement
         Sql2 += "t25_nkinhd"
         Sql2 += " WHERE "
         Sql2 += "会社コード"
-        Sql2 += " = "
+        Sql2 += " ILIKE "
         Sql2 += "'"
         Sql2 += CompanyCode
         Sql2 += "'"
         Sql2 += " AND "
         Sql2 += "請求先コード"
-        Sql2 += " = "
-        Sql2 += "'"
+        Sql2 += " ILIKE "
+        Sql2 += "'%"
         Sql2 += CustomerCode
-        Sql2 += "'"
+        Sql2 += "%'"
 
         Dim Sql3 As String = ""
         Sql3 += "SELECT "
@@ -160,16 +160,16 @@ Public Class DepositManagement
         Sql3 += "t23_skyuhd"
         Sql3 += " WHERE "
         Sql3 += "会社コード"
-        Sql3 += " = "
+        Sql3 += " ILIKE "
         Sql3 += "'"
         Sql3 += CompanyCode
         Sql3 += "'"
         Sql3 += " AND "
         Sql3 += "得意先コード"
-        Sql3 += " = "
-        Sql3 += "'"
+        Sql3 += " ILIKE "
+        Sql3 += "'%"
         Sql3 += CustomerCode
-        Sql3 += "'"
+        Sql3 += "%'"
 
         Dim reccnt As Integer = 0
         Dim ds1 As DataSet = _db.selectDB(Sql1, RS, reccnt)

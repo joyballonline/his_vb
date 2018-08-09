@@ -295,7 +295,7 @@ Public Class Quote
                 DgvItemList.Rows(index).Cells("仕入単価").Value = ds3.Tables(RS).Rows(index)("仕入単価")
                 DgvItemList.Rows(index).Cells("間接費").Value = ds3.Tables(RS).Rows(index)("間接費")
                 DgvItemList.Rows(index).Cells("間接費率").Value = ds3.Tables(RS).Rows(index)("間接費率")
-                DgvItemList.Rows(index).Cells("間接費無仕入金額").Value = ds3.Tables(RS).Rows(index)("仕入金額") '途中
+                DgvItemList.Rows(index).Cells("間接費無仕入金額").Value = ds3.Tables(RS).Rows(index)("間接費無仕入金額")
                 DgvItemList.Rows(index).Cells("仕入金額").Value = ds3.Tables(RS).Rows(index)("仕入金額")
                 DgvItemList.Rows(index).Cells("売単価").Value = ds3.Tables(RS).Rows(index)("売単価")
                 DgvItemList.Rows(index).Cells("売上金額").Value = ds3.Tables(RS).Rows(index)("売上金額")

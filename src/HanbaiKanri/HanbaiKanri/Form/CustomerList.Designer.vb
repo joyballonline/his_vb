@@ -80,9 +80,9 @@ Partial Class CustomerList
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(12, 13)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(56, 12)
+        Me.Label1.Size = New System.Drawing.Size(53, 12)
         Me.Label1.TabIndex = 18
-        Me.Label1.Text = "会社コード"
+        Me.Label1.Text = "得意先名"
         Me.Label1.Visible = False
         '
         'DgvCustomer
@@ -93,14 +93,14 @@ Partial Class CustomerList
         Me.DgvCustomer.AllowUserToResizeRows = False
         Me.DgvCustomer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvCustomer.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.得意先名, Me.得意先コード, Me.受注金額計, Me.請求金額計, Me.請求残高, Me.受注件数, Me.請求件数, Me.会社コード})
-        Me.DgvCustomer.Location = New System.Drawing.Point(12, 8)
+        Me.DgvCustomer.Location = New System.Drawing.Point(12, 37)
         Me.DgvCustomer.MultiSelect = False
         Me.DgvCustomer.Name = "DgvCustomer"
         Me.DgvCustomer.ReadOnly = True
         Me.DgvCustomer.RowHeadersVisible = False
         Me.DgvCustomer.RowTemplate.Height = 21
         Me.DgvCustomer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvCustomer.Size = New System.Drawing.Size(1326, 667)
+        Me.DgvCustomer.Size = New System.Drawing.Size(1326, 638)
         Me.DgvCustomer.TabIndex = 13
         '
         '得意先名
@@ -143,6 +143,7 @@ Partial Class CustomerList
         Me.受注件数.HeaderText = "受注件数"
         Me.受注件数.Name = "受注件数"
         Me.受注件数.ReadOnly = True
+        Me.受注件数.Visible = False
         Me.受注件数.Width = 200
         '
         '請求件数
@@ -150,6 +151,7 @@ Partial Class CustomerList
         Me.請求件数.HeaderText = "請求件数"
         Me.請求件数.Name = "請求件数"
         Me.請求件数.ReadOnly = True
+        Me.請求件数.Visible = False
         Me.請求件数.Width = 200
         '
         '会社コード
