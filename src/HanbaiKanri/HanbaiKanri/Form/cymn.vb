@@ -323,12 +323,13 @@ Public Class Cymn
             DgvItemList.Rows(index).Cells(16).Value = ds3.Tables(RS).Rows(index)("リードタイム")
             DgvItemList.Rows(index).Cells(17).Value = ds3.Tables(RS).Rows(index)("備考")
             DgvItemList.Rows(index).Cells(18).Value = ""
-            tmp3 = ds3.Tables(RS).Rows(index)("間接費率") / 100
-            tmp2 = ds3.Tables(RS).Rows(index)("仕入金額") * tmp3
-            Total += ds3.Tables(RS).Rows(index)("仕入金額") + tmp2
+            tmp2 = ds3.Tables(RS).Rows(index)("間接費率") / 100
+            tmp3 = ds3.Tables(RS).Rows(index)("仕入金額") * tmp2
+            tmp4 = ds3.Tables(RS).Rows(index)("仕入金額") + tmp3
+            Total += tmp4 * 0.025
         Next
 
-        TxtPph.Text = Total * 0.025
+        TxtPph.Text = Total
 
         '行番号の振り直し
         Dim i As Integer = DgvItemList.Rows.Count()
