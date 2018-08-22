@@ -239,6 +239,7 @@ Public Class BillingManagement
         Else
             DgvAdd.Rows.Add()
             DgvAdd.Rows(0).Cells("AddNo").Value = 1
+            DgvAdd(1, 0).Value = 2
             DgvAdd.Rows(0).Cells("今回請求先").Value = ds1.Tables(RS).Rows(0)("得意先名")
             DgvAdd.Rows(0).Cells("今回請求金額計").Value = 0
 
