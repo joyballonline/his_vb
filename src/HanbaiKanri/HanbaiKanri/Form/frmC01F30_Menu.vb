@@ -732,6 +732,12 @@ Public Class frmC01F30_Menu
         checkMenu += " or "
         checkMenu += " m.処理ＩＤ like 'H10%' "
 
+        checkMenu += " or "
+        checkMenu += " m.処理ＩＤ like 'H11%' "
+
+        checkMenu += " or "
+        checkMenu += " m.処理ＩＤ like 'H12%' "
+
         If chkH02.Checked Then
             If checkMenu IsNot "" Then checkMenu += " or "
             checkMenu += " m.処理ＩＤ like 'H02%' "
@@ -1028,6 +1034,37 @@ Public Class frmC01F30_Menu
             Case CommonConst.MENU_H1010  '入金登録
                 Dim openForm As Form = Nothing
                 openForm = New DepositList(_msgHd, _db, _langHd)
+                openForm.Show()
+                Me.Hide()
+            '-----------------------------------売掛業務（H05）
+            Case CommonConst.MENU_H1110  '売掛登録
+                Dim Status As String = "AP"
+                Dim openForm As Form = Nothing
+                openForm = New OrderingList(_msgHd, _db, _langHd, Status)
+                openForm.Show()
+                Me.Hide()
+            Case CommonConst.MENU_H1120  '売掛編集
+                Dim Status As String = "AP"
+                Dim openForm As Form = Nothing
+                openForm = New OrderingList(_msgHd, _db, _langHd, Status)
+                openForm.Show()
+                Me.Hide()
+            Case CommonConst.MENU_H1130  '売掛取消
+                Dim Status As String = "CANCEL"
+                Dim openForm As Form = Nothing
+                openForm = New AccountsPayableList(_msgHd, _db, _langHd, Status)
+                openForm.Show()
+                Me.Hide()
+            Case CommonConst.MENU_H1140  '売掛参照
+                Dim Status As String = "VIEW"
+                Dim openForm As Form = Nothing
+                openForm = New AccountsPayableList(_msgHd, _db, _langHd, Status)
+                openForm.Show()
+                Me.Hide()
+                '-----------------------------------入金業務（H05）
+            Case CommonConst.MENU_H1210  '支払登録
+                Dim openForm As Form = Nothing
+                openForm = New PaymentList(_msgHd, _db, _langHd)
                 openForm.Show()
                 Me.Hide()
             '-----------------------------------マスタ管理（M01）

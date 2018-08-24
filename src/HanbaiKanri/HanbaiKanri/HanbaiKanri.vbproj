@@ -102,6 +102,18 @@
     <Compile Include="Business\CommonLogic.vb" />
     <Compile Include="Business\RepSectionIF.vb" />
     <Compile Include="Business\StartUp.vb" />
+    <Compile Include="Form\AccountsPayable.Designer.vb">
+      <DependentUpon>AccountsPayable.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\AccountsPayable.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\AccountsPayableList.Designer.vb">
+      <DependentUpon>AccountsPayableList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\AccountsPayableList.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\BillingList.Designer.vb">
       <DependentUpon>BillingList.vb</DependentUpon>
     </Compile>
@@ -283,6 +295,18 @@
     <Compile Include="Form\OrderingList.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form\Payment.Designer.vb">
+      <DependentUpon>Payment.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Payment.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\PaymentList.Designer.vb">
+      <DependentUpon>PaymentList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\PaymentList.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\PurchaseList.Designer.vb">
       <DependentUpon>PurchaseList.vb</DependentUpon>
     </Compile>
@@ -372,6 +396,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Form\AccountsPayable.resx">
+      <DependentUpon>AccountsPayable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\AccountsPayableList.resx">
+      <DependentUpon>AccountsPayableList.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\BillingList.resx">
       <DependentUpon>BillingList.vb</DependentUpon>
     </EmbeddedResource>
@@ -461,6 +491,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\OrderingList.resx">
       <DependentUpon>OrderingList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Payment.resx">
+      <DependentUpon>Payment.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\PaymentList.resx">
+      <DependentUpon>PaymentList.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\PurchaseList.resx">
       <DependentUpon>PurchaseList.vb</DependentUpon>

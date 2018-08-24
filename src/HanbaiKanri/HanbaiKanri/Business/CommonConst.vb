@@ -185,6 +185,13 @@ Public Class CommonConst
 
     Public Const MENU_H1010 As String = "H1010"           '入金登録
 
+    Public Const MENU_H1110 As String = "H1110"           '売掛登録
+    Public Const MENU_H1120 As String = "H1120"           '売掛編集
+    Public Const MENU_H1130 As String = "H1130"           '売掛取消
+    Public Const MENU_H1140 As String = "H1140"           '売掛参照
+
+    Public Const MENU_H1210 As String = "H1210"           '支払登録
+
     Public Const MENU_M0110 As String = "M0110"           '汎用マスタ
     Public Const MENU_M0120 As String = "M0120"           '得意先マスタ
     Public Const MENU_M0130 As String = "M0130"           '仕入先マスタ

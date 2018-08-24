@@ -55,6 +55,7 @@ Partial Class OrderingList
         Me.BtnPurchaseClone = New System.Windows.Forms.Button()
         Me.ChkCancelData = New System.Windows.Forms.CheckBox()
         Me.BtnPurchaseCancel = New System.Windows.Forms.Button()
+        Me.BtnAP = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         CType(Me.DgvHtyhd, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -390,11 +391,22 @@ Partial Class OrderingList
         Me.BtnPurchaseCancel.UseVisualStyleBackColor = True
         Me.BtnPurchaseCancel.Visible = False
         '
+        'BtnAP
+        '
+        Me.BtnAP.Location = New System.Drawing.Point(12, 675)
+        Me.BtnAP.Name = "BtnAP"
+        Me.BtnAP.Size = New System.Drawing.Size(165, 40)
+        Me.BtnAP.TabIndex = 92
+        Me.BtnAP.Text = "買掛登録"
+        Me.BtnAP.UseVisualStyleBackColor = True
+        Me.BtnAP.Visible = False
+        '
         'OrderingList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1350, 729)
+        Me.Controls.Add(Me.BtnAP)
         Me.Controls.Add(Me.BtnPurchaseCancel)
         Me.Controls.Add(Me.ChkCancelData)
         Me.Controls.Add(Me.BtnPurchaseClone)
@@ -469,4 +481,5 @@ Partial Class OrderingList
     Friend WithEvents BtnPurchaseClone As Button
     Friend WithEvents ChkCancelData As CheckBox
     Friend WithEvents BtnPurchaseCancel As Button
+    Friend WithEvents BtnAP As Button
 End Class

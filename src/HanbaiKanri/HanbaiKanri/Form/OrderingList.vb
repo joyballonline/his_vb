@@ -224,6 +224,9 @@ Public Class OrderingList
         ElseIf _status = "CLONE" Then
             BtnPurchaseClone.Visible = True
             BtnPurchaseClone.Location = New Point(997, 677)
+        ElseIf _status = "AP" Then
+            BtnAP.Visible = True
+            BtnAP.Location = New Point(997, 677)
         End If
 
         Dim Status As String = "EXCLUSION"
@@ -921,5 +924,23 @@ Public Class OrderingList
 
         End If
 
+    End Sub
+
+    Private Sub BtnAP_Click(sender As Object, e As EventArgs) Handles BtnAP.Click
+        Dim RowIdx As Integer
+        RowIdx = Me.DgvHtyhd.CurrentCell.RowIndex
+        Dim No As String = DgvHtyhd.Rows(RowIdx).Cells(0).Value
+        Dim Suffix As String = DgvHtyhd.Rows(RowIdx).Cells(1).Value
+        Dim openForm As Form = Nothing
+        openForm = New AccountsPayable(_msgHd, _db, _langHd, Me, No, Suffix)   '処理選択
+        Me.Enabled = False
+        Me.Hide()
+        openForm.ShowDialog(Me)
+
+        DgvHtyhd.Rows.Clear()
+        DgvHtyhd.Columns.Clear()
+
+        Dim ListStatus As String = "EXCLUSION"
+        PurchaseListLoad(ListStatus)
     End Sub
 End Class
