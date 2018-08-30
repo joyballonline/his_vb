@@ -295,6 +295,12 @@
     <Compile Include="Form\OrderingList.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form\PaidList.Designer.vb">
+      <DependentUpon>PaidList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\PaidList.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\Payment.Designer.vb">
       <DependentUpon>Payment.vb</DependentUpon>
     </Compile>
@@ -305,6 +311,12 @@
       <DependentUpon>PaymentList.vb</DependentUpon>
     </Compile>
     <Compile Include="Form\PaymentList.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\PaymentReceivedList.Designer.vb">
+      <DependentUpon>PaymentReceivedList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\PaymentReceivedList.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form\PurchaseList.Designer.vb">
@@ -492,11 +504,17 @@
     <EmbeddedResource Include="Form\OrderingList.resx">
       <DependentUpon>OrderingList.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form\PaidList.resx">
+      <DependentUpon>PaidList.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\Payment.resx">
       <DependentUpon>Payment.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\PaymentList.resx">
       <DependentUpon>PaymentList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\PaymentReceivedList.resx">
+      <DependentUpon>PaymentReceivedList.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\PurchaseList.resx">
       <DependentUpon>PurchaseList.vb</DependentUpon>
