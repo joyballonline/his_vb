@@ -146,7 +146,7 @@ Public Class Order
             SqlSaiban += " WHERE "
             SqlSaiban += "採番キー"
             SqlSaiban += " ILIKE "
-            SqlSaiban += "'%20%'"
+            SqlSaiban += "'20'"
 
             Dim Saiban1 As DataSet = _db.selectDB(SqlSaiban, RS, reccnt)
 
@@ -177,6 +177,8 @@ Public Class Order
             OrderCount = Saiban1.Tables(RS).Rows(0)(2)
             Dim TmpOrderCount As String = Saiban1.Tables(RS).Rows(0)(2)
             NewOrderNo += TmpOrderCount.PadLeft(Saiban1.Tables(RS).Rows(0)(6), "0")
+
+            SaibanSave()
 
             CompanyCode = ds1.Tables(RS).Rows(0)("会社コード")
             TxtOrderNo.Text = NewOrderNo
@@ -296,20 +298,6 @@ Public Class Order
 
             Next
 
-            '金額計算
-            'Dim Total As Integer = 0
-            'Dim PurchaseTotal As Integer = 0
-            'Dim GrossProfit As Decimal = 0
-
-            'For index As Integer = 0 To DgvItemList.Rows.Count - 1
-            '    PurchaseTotal += DgvItemList.Rows(index).Cells(11).Value
-            '    Total += DgvItemList.Rows(index).Cells(13).Value
-            'Next
-
-            'TxtOrderAmount.Text = PurchaseTotal
-            'TxtPurchaseAmount.Text = Total
-            'TxtGrossProfit.Text = Total - PurchaseTotal
-
             '行番号の振り直し
             Dim i As Integer = DgvItemList.Rows.Count()
             Dim No As Integer = 1
@@ -361,7 +349,7 @@ Public Class Order
                 SqlSaiban += " WHERE "
                 SqlSaiban += "採番キー"
                 SqlSaiban += " ILIKE "
-                SqlSaiban += "'%20%'"
+                SqlSaiban += "'20'"
 
                 Dim Saiban1 As DataSet = _db.selectDB(SqlSaiban, RS, reccnt)
 
@@ -371,6 +359,8 @@ Public Class Order
                 OrderCount = Saiban1.Tables(RS).Rows(0)(2)
                 Dim TmpOrderCount As String = Saiban1.Tables(RS).Rows(0)(2)
                 NewOrderNo += TmpOrderCount.PadLeft(Saiban1.Tables(RS).Rows(0)(6), "0")
+
+                SaibanSave()
 
                 TxtOrderNo.Text = NewOrderNo
             Else
@@ -536,6 +526,57 @@ Public Class Order
                 BtnRegistration.Visible = False
             End If
         End If
+    End Sub
+
+    Private Sub SaibanSave()
+        Dim dtNow As DateTime = DateTime.Now
+        OrderCount += 1
+        Dim Saiban3 As String = ""
+        Saiban3 += "UPDATE "
+        Saiban3 += "Public."
+        Saiban3 += "m80_saiban "
+        Saiban3 += "SET "
+        Saiban3 += " 最新値"
+        Saiban3 += " = '"
+        Saiban3 += OrderCount.ToString
+        Saiban3 += "', "
+        Saiban3 += "更新者"
+        Saiban3 += " = '"
+        Saiban3 += "Admin"
+        Saiban3 += "', "
+        Saiban3 += "更新日"
+        Saiban3 += " = '"
+        Saiban3 += dtNow
+        Saiban3 += "' "
+        Saiban3 += "WHERE"
+        Saiban3 += " 会社コード"
+        Saiban3 += "='"
+        Saiban3 += CompanyCode.ToString
+        Saiban3 += "'"
+        Saiban3 += " AND"
+        Saiban3 += " 採番キー"
+        Saiban3 += "='"
+        Saiban3 += "20"
+        Saiban3 += "' "
+        Saiban3 += "RETURNING 会社コード"
+        Saiban3 += ", "
+        Saiban3 += "採番キー"
+        Saiban3 += ", "
+        Saiban3 += "最新値"
+        Saiban3 += ", "
+        Saiban3 += "最小値"
+        Saiban3 += ", "
+        Saiban3 += "最大値"
+        Saiban3 += ", "
+        Saiban3 += "接頭文字"
+        Saiban3 += ", "
+        Saiban3 += "連番桁数"
+        Saiban3 += ", "
+        Saiban3 += "更新者"
+        Saiban3 += ", "
+        Saiban3 += "更新日"
+
+        _db.executeDB(Saiban3)
     End Sub
 
     '前の画面に戻る
@@ -791,54 +832,6 @@ Public Class Order
 
                 Sql2 = ""
             Next
-
-            OrderCount += 1
-            Dim Saiban3 As String = ""
-            Saiban3 += "UPDATE "
-            Saiban3 += "Public."
-            Saiban3 += "m80_saiban "
-            Saiban3 += "SET "
-            Saiban3 += " 最新値"
-            Saiban3 += " = '"
-            Saiban3 += OrderCount.ToString
-            Saiban3 += "', "
-            Saiban3 += "更新者"
-            Saiban3 += " = '"
-            Saiban3 += "Admin"
-            Saiban3 += "', "
-            Saiban3 += "更新日"
-            Saiban3 += " = '"
-            Saiban3 += dtNow
-            Saiban3 += "' "
-            Saiban3 += "WHERE"
-            Saiban3 += " 会社コード"
-            Saiban3 += "='"
-            Saiban3 += CompanyCode.ToString
-            Saiban3 += "'"
-            Saiban3 += " AND"
-            Saiban3 += " 採番キー"
-            Saiban3 += "='"
-            Saiban3 += "20"
-            Saiban3 += "' "
-            Saiban3 += "RETURNING 会社コード"
-            Saiban3 += ", "
-            Saiban3 += "採番キー"
-            Saiban3 += ", "
-            Saiban3 += "最新値"
-            Saiban3 += ", "
-            Saiban3 += "最小値"
-            Saiban3 += ", "
-            Saiban3 += "最大値"
-            Saiban3 += ", "
-            Saiban3 += "接頭文字"
-            Saiban3 += ", "
-            Saiban3 += "連番桁数"
-            Saiban3 += ", "
-            Saiban3 += "更新者"
-            Saiban3 += ", "
-            Saiban3 += "更新日"
-
-            _db.executeDB(Saiban3)
         Else
             Dim Sql1 As String = ""
             Sql1 = ""

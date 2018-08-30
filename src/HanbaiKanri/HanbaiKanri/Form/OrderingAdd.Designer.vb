@@ -30,8 +30,6 @@ Partial Class OrderingAdd
         Me.DtpPurchaseDate = New System.Windows.Forms.DateTimePicker()
         Me.TxtOrderingAmount = New System.Windows.Forms.TextBox()
         Me.LblOrderAmount = New System.Windows.Forms.Label()
-        Me.TxtGrossProfit = New System.Windows.Forms.TextBox()
-        Me.LblGrossProfit = New System.Windows.Forms.Label()
         Me.TxtItemCount = New System.Windows.Forms.TextBox()
         Me.LblItemCount = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -129,35 +127,6 @@ Partial Class OrderingAdd
         Me.LblOrderAmount.TabIndex = 283
         Me.LblOrderAmount.Text = "発注金額"
         Me.LblOrderAmount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'TxtGrossProfit
-        '
-        Me.TxtGrossProfit.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.TxtGrossProfit.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.TxtGrossProfit.Enabled = False
-        Me.TxtGrossProfit.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtGrossProfit.Location = New System.Drawing.Point(765, 692)
-        Me.TxtGrossProfit.MaxLength = 10
-        Me.TxtGrossProfit.Name = "TxtGrossProfit"
-        Me.TxtGrossProfit.ReadOnly = True
-        Me.TxtGrossProfit.Size = New System.Drawing.Size(231, 23)
-        Me.TxtGrossProfit.TabIndex = 280
-        Me.TxtGrossProfit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.TxtGrossProfit.Visible = False
-        '
-        'LblGrossProfit
-        '
-        Me.LblGrossProfit.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.LblGrossProfit.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.LblGrossProfit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblGrossProfit.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblGrossProfit.Location = New System.Drawing.Point(659, 692)
-        Me.LblGrossProfit.Name = "LblGrossProfit"
-        Me.LblGrossProfit.Size = New System.Drawing.Size(100, 23)
-        Me.LblGrossProfit.TabIndex = 281
-        Me.LblGrossProfit.Text = "粗利額"
-        Me.LblGrossProfit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.LblGrossProfit.Visible = False
         '
         'TxtItemCount
         '
@@ -761,8 +730,6 @@ Partial Class OrderingAdd
         Me.Controls.Add(Me.DtpPurchaseDate)
         Me.Controls.Add(Me.TxtOrderingAmount)
         Me.Controls.Add(Me.LblOrderAmount)
-        Me.Controls.Add(Me.TxtGrossProfit)
-        Me.Controls.Add(Me.LblGrossProfit)
         Me.Controls.Add(Me.TxtItemCount)
         Me.Controls.Add(Me.LblItemCount)
         Me.Controls.Add(Me.Label2)
@@ -807,8 +774,6 @@ Partial Class OrderingAdd
     Friend WithEvents DtpPurchaseDate As DateTimePicker
     Friend WithEvents TxtOrderingAmount As TextBox
     Friend WithEvents LblOrderAmount As Label
-    Friend WithEvents TxtGrossProfit As TextBox
-    Friend WithEvents LblGrossProfit As Label
     Friend WithEvents TxtItemCount As TextBox
     Friend WithEvents LblItemCount As Label
     Friend WithEvents Label2 As Label

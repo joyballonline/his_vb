@@ -130,6 +130,11 @@ Public Class SalesSearch
             Dim RowIndex As Integer = DgvUser.CurrentCell.RowIndex
 
             frm.TxtSales.Text = DgvUser.Rows(RowIndex).Cells("氏名").Value
+        ElseIf _status = "CLONE" Then
+            Dim frm As Ordering = CType(Me.Owner, Ordering)
+            Dim RowIndex As Integer = DgvUser.CurrentCell.RowIndex
+
+            frm.TxtSales.Text = DgvUser.Rows(RowIndex).Cells("氏名").Value
         Else
             Dim frm As Quote = CType(Me.Owner, Quote)
             Dim RowIndex As Integer = DgvUser.CurrentCell.RowIndex

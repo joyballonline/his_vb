@@ -261,6 +261,17 @@ Public Class MakerSearch
                     End If
                 End If
             End If
+        ElseIf _status = "CLONE" Then
+            Dim frm As Ordering = CType(Me.Owner, Ordering)
+            If LbMaker.SelectedIndex > -1 Then
+                frm.DgvItemList.Rows(RowIdx).Cells(2).Value = LbMaker.SelectedItem
+                If LbItem.SelectedIndex > -1 Then
+                    frm.DgvItemList.Rows(RowIdx).Cells(3).Value = LbItem.SelectedItem
+                    If LbModel.SelectedIndex > -1 Then
+                        frm.DgvItemList.Rows(RowIdx).Cells(4).Value = LbModel.SelectedItem
+                    End If
+                End If
+            End If
         Else
             Dim frm As Quote = CType(Me.Owner, Quote)
             If LbMaker.SelectedIndex > -1 Then

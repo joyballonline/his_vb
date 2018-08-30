@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class DepositList
     Inherits System.Windows.Forms.Form
 
     'フォームがコンポーネントの一覧をクリーンアップするために dispose をオーバーライドします。
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,9 +20,18 @@ Partial Class DepositList
     'メモ: 以下のプロシージャは Windows フォーム デザイナーで必要です。
     'Windows フォーム デザイナーを使用して変更できます。  
     'コード エディターを使って変更しないでください。
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.DgvCustomer = New System.Windows.Forms.DataGridView()
+        Me.得意先名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.得意先コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.受注金額計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.請求金額計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.請求金額残 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.売掛残高 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.受注件数 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.請求件数 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.会社コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnBack = New System.Windows.Forms.Button()
         Me.BtnDeposit = New System.Windows.Forms.Button()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -35,15 +44,6 @@ Partial Class DepositList
         Me.LblConditions = New System.Windows.Forms.Label()
         Me.TxtCustomerName = New System.Windows.Forms.TextBox()
         Me.BtnSerach = New System.Windows.Forms.Button()
-        Me.得意先名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.得意先コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.受注金額計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.請求金額計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.請求金額残 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.売掛残高 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.受注件数 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.請求件数 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.会社コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DgvCustomer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -64,6 +64,73 @@ Partial Class DepositList
         Me.DgvCustomer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvCustomer.Size = New System.Drawing.Size(1326, 513)
         Me.DgvCustomer.TabIndex = 20
+        '
+        '得意先名
+        '
+        Me.得意先名.HeaderText = "得意先名"
+        Me.得意先名.Name = "得意先名"
+        Me.得意先名.ReadOnly = True
+        Me.得意先名.Width = 200
+        '
+        '得意先コード
+        '
+        Me.得意先コード.HeaderText = "得意先コード"
+        Me.得意先コード.Name = "得意先コード"
+        Me.得意先コード.ReadOnly = True
+        Me.得意先コード.Visible = False
+        '
+        '受注金額計
+        '
+        Me.受注金額計.HeaderText = "受注金額計"
+        Me.受注金額計.Name = "受注金額計"
+        Me.受注金額計.ReadOnly = True
+        Me.受注金額計.Visible = False
+        Me.受注金額計.Width = 200
+        '
+        '請求金額計
+        '
+        Me.請求金額計.HeaderText = "請求金額計"
+        Me.請求金額計.Name = "請求金額計"
+        Me.請求金額計.ReadOnly = True
+        Me.請求金額計.Visible = False
+        Me.請求金額計.Width = 200
+        '
+        '請求金額残
+        '
+        Me.請求金額残.HeaderText = "請求金額残"
+        Me.請求金額残.Name = "請求金額残"
+        Me.請求金額残.ReadOnly = True
+        Me.請求金額残.Width = 200
+        '
+        '売掛残高
+        '
+        Me.売掛残高.HeaderText = "売掛残高"
+        Me.売掛残高.Name = "売掛残高"
+        Me.売掛残高.ReadOnly = True
+        Me.売掛残高.Width = 200
+        '
+        '受注件数
+        '
+        Me.受注件数.HeaderText = "受注件数"
+        Me.受注件数.Name = "受注件数"
+        Me.受注件数.ReadOnly = True
+        Me.受注件数.Visible = False
+        Me.受注件数.Width = 200
+        '
+        '請求件数
+        '
+        Me.請求件数.HeaderText = "請求件数"
+        Me.請求件数.Name = "請求件数"
+        Me.請求件数.ReadOnly = True
+        Me.請求件数.Visible = False
+        Me.請求件数.Width = 200
+        '
+        '会社コード
+        '
+        Me.会社コード.HeaderText = "会社コード"
+        Me.会社コード.Name = "会社コード"
+        Me.会社コード.ReadOnly = True
+        Me.会社コード.Visible = False
         '
         'btnBack
         '
@@ -181,73 +248,6 @@ Partial Class DepositList
         Me.BtnSerach.TabIndex = 57
         Me.BtnSerach.Text = "検索"
         Me.BtnSerach.UseVisualStyleBackColor = True
-        '
-        '得意先名
-        '
-        Me.得意先名.HeaderText = "得意先名"
-        Me.得意先名.Name = "得意先名"
-        Me.得意先名.ReadOnly = True
-        Me.得意先名.Width = 200
-        '
-        '得意先コード
-        '
-        Me.得意先コード.HeaderText = "得意先コード"
-        Me.得意先コード.Name = "得意先コード"
-        Me.得意先コード.ReadOnly = True
-        Me.得意先コード.Visible = False
-        '
-        '受注金額計
-        '
-        Me.受注金額計.HeaderText = "受注金額計"
-        Me.受注金額計.Name = "受注金額計"
-        Me.受注金額計.ReadOnly = True
-        Me.受注金額計.Visible = False
-        Me.受注金額計.Width = 200
-        '
-        '請求金額計
-        '
-        Me.請求金額計.HeaderText = "請求金額計"
-        Me.請求金額計.Name = "請求金額計"
-        Me.請求金額計.ReadOnly = True
-        Me.請求金額計.Visible = False
-        Me.請求金額計.Width = 200
-        '
-        '請求金額残
-        '
-        Me.請求金額残.HeaderText = "請求金額残"
-        Me.請求金額残.Name = "請求金額残"
-        Me.請求金額残.ReadOnly = True
-        Me.請求金額残.Width = 200
-        '
-        '売掛残高
-        '
-        Me.売掛残高.HeaderText = "売掛残高"
-        Me.売掛残高.Name = "売掛残高"
-        Me.売掛残高.ReadOnly = True
-        Me.売掛残高.Width = 200
-        '
-        '受注件数
-        '
-        Me.受注件数.HeaderText = "受注件数"
-        Me.受注件数.Name = "受注件数"
-        Me.受注件数.ReadOnly = True
-        Me.受注件数.Visible = False
-        Me.受注件数.Width = 200
-        '
-        '請求件数
-        '
-        Me.請求件数.HeaderText = "請求件数"
-        Me.請求件数.Name = "請求件数"
-        Me.請求件数.ReadOnly = True
-        Me.請求件数.Visible = False
-        Me.請求件数.Width = 200
-        '
-        '会社コード
-        '
-        Me.会社コード.HeaderText = "会社コード"
-        Me.会社コード.Name = "会社コード"
-        Me.会社コード.ReadOnly = True
-        Me.会社コード.Visible = False
         '
         'DepositList
         '

@@ -101,6 +101,53 @@ Public Class OrderingAdd
         NewPurchaseNo += dtNow.ToString("MMdd")
         NewPurchaseNo += PurchaseCount.PadLeft(Saiban.Tables(RS).Rows(0)(6), "0")
 
+        PurchaseCount += 1
+        Dim Saiban4 As String = ""
+        Saiban4 += "UPDATE "
+        Saiban4 += "Public."
+        Saiban4 += "m80_saiban "
+        Saiban4 += "SET "
+        Saiban4 += " 最新値"
+        Saiban4 += " = '"
+        Saiban4 += PurchaseCount.ToString
+        Saiban4 += "', "
+        Saiban4 += "更新者"
+        Saiban4 += " = '"
+        Saiban4 += "Admin"
+        Saiban4 += "', "
+        Saiban4 += "更新日"
+        Saiban4 += " = '"
+        Saiban4 += dtNow
+        Saiban4 += "' "
+        Saiban4 += "WHERE"
+        Saiban4 += " 会社コード"
+        Saiban4 += "='"
+        Saiban4 += frmC01F10_Login.loginValue.BumonNM
+        Saiban4 += "'"
+        Saiban4 += " AND"
+        Saiban4 += " 採番キー"
+        Saiban4 += "='"
+        Saiban4 += "30"
+        Saiban4 += "' "
+        Saiban4 += "RETURNING 会社コード"
+        Saiban4 += ", "
+        Saiban4 += "採番キー"
+        Saiban4 += ", "
+        Saiban4 += "最新値"
+        Saiban4 += ", "
+        Saiban4 += "最小値"
+        Saiban4 += ", "
+        Saiban4 += "最大値"
+        Saiban4 += ", "
+        Saiban4 += "接頭文字"
+        Saiban4 += ", "
+        Saiban4 += "連番桁数"
+        Saiban4 += ", "
+        Saiban4 += "更新者"
+        Saiban4 += ", "
+        Saiban4 += "更新日"
+        _db.executeDB(Saiban4)
+
         TxtOrderingNo.Text = NewPurchaseNo
         TxtOrderingSuffix.Text = 1
 
@@ -595,53 +642,6 @@ Public Class OrderingAdd
 
             _db.executeDB(Sql4)
         Next
-
-        PurchaseCount += 1
-        Dim Saiban4 As String = ""
-        Saiban4 += "UPDATE "
-        Saiban4 += "Public."
-        Saiban4 += "m80_saiban "
-        Saiban4 += "SET "
-        Saiban4 += " 最新値"
-        Saiban4 += " = '"
-        Saiban4 += PurchaseCount.ToString
-        Saiban4 += "', "
-        Saiban4 += "更新者"
-        Saiban4 += " = '"
-        Saiban4 += "Admin"
-        Saiban4 += "', "
-        Saiban4 += "更新日"
-        Saiban4 += " = '"
-        Saiban4 += dtNow
-        Saiban4 += "' "
-        Saiban4 += "WHERE"
-        Saiban4 += " 会社コード"
-        Saiban4 += "='"
-        Saiban4 += frmC01F10_Login.loginValue.BumonNM
-        Saiban4 += "'"
-        Saiban4 += " AND"
-        Saiban4 += " 採番キー"
-        Saiban4 += "='"
-        Saiban4 += "30"
-        Saiban4 += "' "
-        Saiban4 += "RETURNING 会社コード"
-        Saiban4 += ", "
-        Saiban4 += "採番キー"
-        Saiban4 += ", "
-        Saiban4 += "最新値"
-        Saiban4 += ", "
-        Saiban4 += "最小値"
-        Saiban4 += ", "
-        Saiban4 += "最大値"
-        Saiban4 += ", "
-        Saiban4 += "接頭文字"
-        Saiban4 += ", "
-        Saiban4 += "連番桁数"
-        Saiban4 += ", "
-        Saiban4 += "更新者"
-        Saiban4 += ", "
-        Saiban4 += "更新日"
-        _db.executeDB(Saiban4)
         _parentForm.Enabled = True
         _parentForm.Show()
         Me.Dispose()

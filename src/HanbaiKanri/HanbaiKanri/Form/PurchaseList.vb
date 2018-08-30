@@ -703,91 +703,138 @@ Public Class PurchaseList
 
     Private Sub BtnPurchaseCancel_Click(sender As Object, e As EventArgs) Handles BtnPurchaseCancel.Click
         Dim dtNow As DateTime = DateTime.Now
+        Dim reccnt As Integer = 0
+
         Dim Sql1 As String = ""
-        Sql1 = ""
-        Sql1 += "UPDATE "
-        Sql1 += "Public."
-        Sql1 += "t40_sirehd "
-        Sql1 += "SET "
-
-        Sql1 += "取消区分"
-        Sql1 += " = '"
-        Sql1 += "1"
-        Sql1 += "', "
-        Sql1 += "取消日"
-        Sql1 += " = '"
-        Sql1 += dtNow
-        Sql1 += "', "
-        Sql1 += "更新日"
-        Sql1 += " = '"
-        Sql1 += dtNow
-        Sql1 += "', "
-        Sql1 += "更新者"
-        Sql1 += " = '"
-        Sql1 += frmC01F10_Login.loginValue.TantoNM
-        Sql1 += " ' "
-
+        Sql1 += "SELECT "
+        Sql1 += " * "
+        Sql1 += "FROM "
+        Sql1 += "public"
+        Sql1 += "."
+        Sql1 += "t21_hattyu "
         Sql1 += "WHERE"
         Sql1 += " 会社コード"
         Sql1 += "='"
         Sql1 += frmC01F10_Login.loginValue.BumonNM
         Sql1 += "'"
         Sql1 += " AND"
-        Sql1 += " 仕入番号"
+        Sql1 += " 発注番号"
         Sql1 += "='"
-        Sql1 += DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("仕入番号").Value
+        Sql1 += DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("発注番号").Value
         Sql1 += "' "
-        Sql1 += "RETURNING 会社コード"
-        Sql1 += ", "
-        Sql1 += "仕入番号"
-        Sql1 += ", "
-        Sql1 += "発注番号"
-        Sql1 += ", "
-        Sql1 += "発注番号枝番"
-        Sql1 += ", "
-        Sql1 += "仕入先コード"
-        Sql1 += ", "
-        Sql1 += "仕入先名"
-        Sql1 += ", "
-        Sql1 += "仕入先郵便番号"
-        Sql1 += ", "
-        Sql1 += "仕入先住所"
-        Sql1 += ", "
-        Sql1 += "仕入先電話番号"
-        Sql1 += ", "
-        Sql1 += "仕入先ＦＡＸ"
-        Sql1 += ", "
-        Sql1 += "仕入先担当者役職"
-        Sql1 += ", "
-        Sql1 += "仕入先担当者名"
-        Sql1 += ", "
-        Sql1 += "支払条件"
-        Sql1 += ", "
-        Sql1 += "仕入金額"
-        Sql1 += ", "
-        Sql1 += "粗利額"
-        Sql1 += ", "
-        Sql1 += "営業担当者"
-        Sql1 += ", "
-        Sql1 += "入力担当者"
-        Sql1 += ", "
-        Sql1 += "備考"
-        Sql1 += ", "
-        Sql1 += "取消日"
-        Sql1 += ", "
-        Sql1 += "取消区分"
-        Sql1 += ", "
-        Sql1 += "ＶＡＴ"
-        Sql1 += ", "
-        Sql1 += "ＰＰＨ"
-        Sql1 += ", "
-        Sql1 += "仕入日"
-        Sql1 += ", "
-        Sql1 += "登録日"
-        Sql1 += ", "
-        Sql1 += "更新日"
-        Sql1 += ", "
-        Sql1 += "更新者"
+        Sql1 += " AND"
+        Sql1 += " 発注番号枝番"
+        Sql1 += "='"
+        Sql1 += DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("発注番号枝番").Value
+        Sql1 += "' "
+
+        Dim ds1 As DataSet = _db.selectDB(Sql1, RS, reccnt)
+
+        Dim Sql2 As String = ""
+        Sql2 += "SELECT "
+        Sql2 += " * "
+        Sql2 += "FROM "
+        Sql2 += "public"
+        Sql2 += "."
+        Sql2 += "t41_siredt "
+        Sql2 += "WHERE"
+        Sql2 += " 会社コード"
+        Sql2 += "='"
+        Sql2 += frmC01F10_Login.loginValue.BumonNM
+        Sql2 += "'"
+        Sql2 += " AND"
+        Sql2 += " 仕入番号"
+        Sql2 += "='"
+        Sql2 += DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("仕入番号").Value
+        Sql2 += "' "
+
+        Dim ds2 As DataSet = _db.selectDB(Sql2, RS, reccnt)
+
+        Dim Sql3 As String = ""
+        Sql3 = ""
+        Sql3 += "UPDATE "
+        Sql3 += "Public."
+        Sql3 += "t40_sirehd "
+        Sql3 += "SET "
+
+        Sql3 += "取消区分"
+        Sql3 += " = '"
+        Sql3 += "1"
+        Sql3 += "', "
+        Sql3 += "取消日"
+        Sql3 += " = '"
+        Sql3 += dtNow
+        Sql3 += "', "
+        Sql3 += "更新日"
+        Sql3 += " = '"
+        Sql3 += dtNow
+        Sql3 += "', "
+        Sql3 += "更新者"
+        Sql3 += " = '"
+        Sql3 += frmC01F10_Login.loginValue.TantoNM
+        Sql3 += " ' "
+
+        Sql3 += "WHERE"
+        Sql3 += " 会社コード"
+        Sql3 += "='"
+        Sql3 += frmC01F10_Login.loginValue.BumonNM
+        Sql3 += "'"
+        Sql3 += " AND"
+        Sql3 += " 仕入番号"
+        Sql3 += "='"
+        Sql3 += DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("仕入番号").Value
+        Sql3 += "' "
+        Sql3 += "RETURNING 会社コード"
+        Sql3 += ", "
+        Sql3 += "仕入番号"
+        Sql3 += ", "
+        Sql3 += "発注番号"
+        Sql3 += ", "
+        Sql3 += "発注番号枝番"
+        Sql3 += ", "
+        Sql3 += "仕入先コード"
+        Sql3 += ", "
+        Sql3 += "仕入先名"
+        Sql3 += ", "
+        Sql3 += "仕入先郵便番号"
+        Sql3 += ", "
+        Sql3 += "仕入先住所"
+        Sql3 += ", "
+        Sql3 += "仕入先電話番号"
+        Sql3 += ", "
+        Sql3 += "仕入先ＦＡＸ"
+        Sql3 += ", "
+        Sql3 += "仕入先担当者役職"
+        Sql3 += ", "
+        Sql3 += "仕入先担当者名"
+        Sql3 += ", "
+        Sql3 += "支払条件"
+        Sql3 += ", "
+        Sql3 += "仕入金額"
+        Sql3 += ", "
+        Sql3 += "粗利額"
+        Sql3 += ", "
+        Sql3 += "営業担当者"
+        Sql3 += ", "
+        Sql3 += "入力担当者"
+        Sql3 += ", "
+        Sql3 += "備考"
+        Sql3 += ", "
+        Sql3 += "取消日"
+        Sql3 += ", "
+        Sql3 += "取消区分"
+        Sql3 += ", "
+        Sql3 += "ＶＡＴ"
+        Sql3 += ", "
+        Sql3 += "ＰＰＨ"
+        Sql3 += ", "
+        Sql3 += "仕入日"
+        Sql3 += ", "
+        Sql3 += "登録日"
+        Sql3 += ", "
+        Sql3 += "更新日"
+        Sql3 += ", "
+        Sql3 += "更新者"
         Dim result As DialogResult = MessageBox.Show("仕入を取り消しますか？",
                                              "質問",
                                              MessageBoxButtons.YesNoCancel,
@@ -795,15 +842,111 @@ Public Class PurchaseList
                                              MessageBoxDefaultButton.Button2)
 
         If result = DialogResult.Yes Then
-            _db.executeDB(Sql1)
+            _db.executeDB(Sql3)
+
+
+            Dim Sql4 As String = ""
+            Dim PurchaseNum As Integer = 0
+            Dim OrderingNum As Integer = 0
+
+            For index1 As Integer = 0 To ds1.Tables(RS).Rows.Count() - 1
+                For index2 As Integer = 0 To ds2.Tables(RS).Rows.Count() - 1
+                    If ds1.Tables(RS).Rows(index1)("行番号") = ds2.Tables(RS).Rows(index2)("行番号") Then
+                        Sql4 = ""
+                        Sql4 += "UPDATE "
+                        Sql4 += "Public."
+                        Sql4 += "t21_hattyu "
+                        Sql4 += "SET "
+                        Sql4 += "仕入数量"
+                        Sql4 += " = '"
+                        PurchaseNum = ds1.Tables(RS).Rows(index1)("仕入数量") - ds2.Tables(RS).Rows(index1)("仕入数量")
+                        Sql4 += PurchaseNum.ToString
+                        Sql4 += "', "
+                        Sql4 += " 発注残数"
+                        Sql4 += " = '"
+                        OrderingNum = ds1.Tables(RS).Rows(index1)("発注残数") + ds2.Tables(RS).Rows(index2)("仕入数量")
+                        Sql4 += OrderingNum.ToString
+                        Sql4 += "', "
+                        Sql4 += "更新者"
+                        Sql4 += " = '"
+                        Sql4 += frmC01F10_Login.loginValue.TantoNM
+                        Sql4 += "' "
+                        Sql4 += "WHERE"
+                        Sql4 += " 会社コード"
+                        Sql4 += "='"
+                        Sql4 += ds1.Tables(RS).Rows(index1)("会社コード")
+                        Sql4 += "'"
+                        Sql4 += " AND"
+                        Sql4 += " 発注番号"
+                        Sql4 += "='"
+                        Sql4 += ds1.Tables(RS).Rows(index1)("発注番号")
+                        Sql4 += "'"
+                        Sql4 += " AND"
+                        Sql4 += " 発注番号枝番"
+                        Sql4 += "='"
+                        Sql4 += ds1.Tables(RS).Rows(index1)("発注番号枝番")
+                        Sql4 += "'"
+                        Sql4 += " AND"
+                        Sql4 += " 行番号"
+                        Sql4 += "='"
+                        Sql4 += ds1.Tables(RS).Rows(index1)("行番号").ToString
+                        Sql4 += "' "
+                        Sql4 += "RETURNING 会社コード"
+                        Sql4 += ", "
+                        Sql4 += "発注番号"
+                        Sql4 += ", "
+                        Sql4 += "発注番号枝番"
+                        Sql4 += ", "
+                        Sql4 += "行番号"
+                        Sql4 += ", "
+                        Sql4 += "仕入区分"
+                        Sql4 += ", "
+                        Sql4 += "メーカー"
+                        Sql4 += ", "
+                        Sql4 += "品名"
+                        Sql4 += ", "
+                        Sql4 += "型式"
+                        Sql4 += ", "
+                        Sql4 += "仕入先名"
+                        Sql4 += ", "
+                        Sql4 += "仕入値"
+                        Sql4 += ", "
+                        Sql4 += "発注数量"
+                        Sql4 += ", "
+                        Sql4 += "仕入数量"
+                        Sql4 += ", "
+                        Sql4 += "発注残数"
+                        Sql4 += ", "
+                        Sql4 += "単位"
+                        Sql4 += ", "
+                        Sql4 += "間接費"
+                        Sql4 += ", "
+                        Sql4 += "仕入単価"
+                        Sql4 += ", "
+                        Sql4 += "仕入金額"
+                        Sql4 += ", "
+                        Sql4 += "リードタイム"
+                        Sql4 += ", "
+                        Sql4 += "入庫数"
+                        Sql4 += ", "
+                        Sql4 += "未入庫数"
+                        Sql4 += ", "
+                        Sql4 += "備考"
+                        Sql4 += ", "
+                        Sql4 += "更新者"
+
+                        _db.executeDB(Sql4)
+
+                        Sql4 = ""
+                        PurchaseNum = 0
+                        OrderingNum = 0
+                    End If
+                Next
+            Next
             DgvHtyhd.Rows.Clear()
             DgvHtyhd.Columns.Clear()
             Dim Status As String = "EXCLUSION"
             PurchaseListLoad(Status)
-        ElseIf result = DialogResult.No Then
-
-        ElseIf result = DialogResult.Cancel Then
-
         End If
     End Sub
 End Class

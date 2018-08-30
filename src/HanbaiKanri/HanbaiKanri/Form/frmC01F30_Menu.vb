@@ -1036,6 +1036,16 @@ Public Class frmC01F30_Menu
                 openForm = New DepositList(_msgHd, _db, _langHd)
                 openForm.Show()
                 Me.Hide()
+            Case CommonConst.MENU_H1020  '入金取消
+                Dim openForm As Form = Nothing
+                openForm = New DepositList(_msgHd, _db, _langHd)
+                openForm.Show()
+                Me.Hide()
+            Case CommonConst.MENU_H1030  '入金参照
+                Dim openForm As Form = Nothing
+                openForm = New DepositList(_msgHd, _db, _langHd)
+                openForm.Show()
+                Me.Hide()
             '-----------------------------------売掛業務（H05）
             Case CommonConst.MENU_H1110  '売掛登録
                 Dim Status As String = "AP"
@@ -1065,6 +1075,17 @@ Public Class frmC01F30_Menu
             Case CommonConst.MENU_H1210  '支払登録
                 Dim openForm As Form = Nothing
                 openForm = New PaymentList(_msgHd, _db, _langHd)
+                openForm.Show()
+                Me.Hide()
+            Case CommonConst.MENU_H1220  '支払取消
+                Dim openForm As Form = Nothing
+                Dim Status As String = "CANCEL"
+                openForm = New PaidList(_msgHd, _db, _langHd, Status)
+                openForm.Show()
+                Me.Hide()
+            Case CommonConst.MENU_H1230  '支払登録
+                Dim openForm As Form = Nothing
+                openForm = New PaidList(_msgHd, _db, _langHd)
                 openForm.Show()
                 Me.Hide()
             '-----------------------------------マスタ管理（M01）

@@ -965,6 +965,7 @@ Public Class OrderList
         Sql1 += "更新日"
         Sql1 += ", "
         Sql1 += "更新者"
+
         Dim result As DialogResult = MessageBox.Show("受注を取り消しますか？",
                                              "質問",
                                              MessageBoxButtons.YesNoCancel,

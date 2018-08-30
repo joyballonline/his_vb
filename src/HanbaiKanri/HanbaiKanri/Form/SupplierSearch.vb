@@ -159,6 +159,20 @@ Public Class SupplierSearch
             frm.TxtFax.Text = Dgv_Supplier.Rows(idx).Cells("FAX番号").Value
             frm.TxtPerson.Text = Dgv_Supplier.Rows(idx).Cells("担当者名").Value
             frm.TxtPosition.Text = Dgv_Supplier.Rows(idx).Cells("担当者役職").Value
+        ElseIf _status = "CLONE" Then
+            Dim frm As Ordering = CType(Me.Owner, Ordering)
+            Dim idx As Integer = Dgv_Supplier.CurrentCell.RowIndex
+
+            frm.TxtSupplierCode.Text = Dgv_Supplier.Rows(idx).Cells("仕入先コード").Value
+            frm.TxtSupplierName.Text = Dgv_Supplier.Rows(idx).Cells("仕入先名").Value
+            frm.TxtPostalCode.Text = Dgv_Supplier.Rows(idx).Cells("郵便番号").Value
+            frm.TxtAddress1.Text = Dgv_Supplier.Rows(idx).Cells("住所１").Value
+            frm.TxtAddress2.Text = Dgv_Supplier.Rows(idx).Cells("住所２").Value
+            frm.TxtAddress3.Text = Dgv_Supplier.Rows(idx).Cells("住所３").Value
+            frm.TxtTel.Text = Dgv_Supplier.Rows(idx).Cells("電話番号").Value
+            frm.TxtFax.Text = Dgv_Supplier.Rows(idx).Cells("FAX番号").Value
+            frm.TxtPerson.Text = Dgv_Supplier.Rows(idx).Cells("担当者名").Value
+            frm.TxtPosition.Text = Dgv_Supplier.Rows(idx).Cells("担当者役職").Value
         Else
             Dim frm As Quote = CType(Me.Owner, Quote)
             Dim idx As Integer = Dgv_Supplier.CurrentCell.RowIndex

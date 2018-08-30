@@ -141,11 +141,12 @@ Public Class Cymn
         SqlSaiban += " WHERE "
         SqlSaiban += "採番キー"
         SqlSaiban += " ILIKE "
-        SqlSaiban += "'%20%'"
+        SqlSaiban += "'20'"
 
         Dim dtNow As DateTime = DateTime.Now
-
         Dim Saiban1 As DataSet = _db.selectDB(SqlSaiban, RS, reccnt)
+
+
 
         Dim SqlSaiban2 As String = ""
         SqlSaiban2 += "SELECT "
@@ -163,7 +164,7 @@ Public Class Cymn
         SqlSaiban2 += " WHERE "
         SqlSaiban2 += "採番キー"
         SqlSaiban2 += " ILIKE "
-        SqlSaiban2 += "'%30%'"
+        SqlSaiban2 += "'30'"
 
         Dim Saiban2 As DataSet = _db.selectDB(SqlSaiban2, RS, reccnt)
 
@@ -172,6 +173,54 @@ Public Class Cymn
         OrderNo += dtNow.ToString("MMdd")
         OrderCount = Saiban1.Tables(RS).Rows(0)(2)
         OrderNo += OrderCount.PadLeft(Saiban1.Tables(RS).Rows(0)(6), "0")
+
+        OrderCount += 1
+        Dim Saiban3 As String = ""
+        Saiban3 += "UPDATE "
+        Saiban3 += "Public."
+        Saiban3 += "m80_saiban "
+        Saiban3 += "SET "
+        Saiban3 += " 最新値"
+        Saiban3 += " = '"
+        Saiban3 += OrderCount.ToString
+        Saiban3 += "', "
+        Saiban3 += "更新者"
+        Saiban3 += " = '"
+        Saiban3 += "Admin"
+        Saiban3 += "', "
+        Saiban3 += "更新日"
+        Saiban3 += " = '"
+        Saiban3 += dtNow
+        Saiban3 += "' "
+        Saiban3 += "WHERE"
+        Saiban3 += " 会社コード"
+        Saiban3 += "='"
+        Saiban3 += CompanyCode.ToString
+        Saiban3 += "'"
+        Saiban3 += " AND"
+        Saiban3 += " 採番キー"
+        Saiban3 += "='"
+        Saiban3 += "20"
+        Saiban3 += "' "
+        Saiban3 += "RETURNING 会社コード"
+        Saiban3 += ", "
+        Saiban3 += "採番キー"
+        Saiban3 += ", "
+        Saiban3 += "最新値"
+        Saiban3 += ", "
+        Saiban3 += "最小値"
+        Saiban3 += ", "
+        Saiban3 += "最大値"
+        Saiban3 += ", "
+        Saiban3 += "接頭文字"
+        Saiban3 += ", "
+        Saiban3 += "連番桁数"
+        Saiban3 += ", "
+        Saiban3 += "更新者"
+        Saiban3 += ", "
+        Saiban3 += "更新日"
+
+        _db.executeDB(Saiban3)
 
         '見積基本情報
 
@@ -295,11 +344,11 @@ Public Class Cymn
         Dim ds3 = _db.selectDB(Sql3, RS, reccnt)
 
         Dim tmp As Integer
-        Dim tmp2 As Integer
-        Dim tmp3 As Integer
-        Dim tmp4 As Integer
+        Dim tmp2 As Double
+        Dim tmp3 As Double
+        Dim tmp4 As Double
         Dim NoOverHead As Integer = 0
-        Dim Total As Integer = 0
+        Dim Total As Double = 0
 
         For index As Integer = 0 To ds3.Tables(RS).Rows.Count - 1
             DgvItemList.Rows.Add()
@@ -323,9 +372,13 @@ Public Class Cymn
             DgvItemList.Rows(index).Cells(16).Value = ds3.Tables(RS).Rows(index)("リードタイム")
             DgvItemList.Rows(index).Cells(17).Value = ds3.Tables(RS).Rows(index)("備考")
             DgvItemList.Rows(index).Cells(18).Value = ""
-            tmp2 = ds3.Tables(RS).Rows(index)("間接費率") / 100
-            tmp3 = ds3.Tables(RS).Rows(index)("仕入金額") * tmp2
-            tmp4 = ds3.Tables(RS).Rows(index)("仕入金額") + tmp3
+
+            tmp2 = ds3.Tables(RS).Rows(index)("間接費率")
+            tmp2 = tmp2 / 100
+            tmp3 = ds3.Tables(RS).Rows(index)("仕入金額")
+            tmp3 = tmp3 * tmp2
+            tmp4 = ds3.Tables(RS).Rows(index)("仕入金額")
+            tmp4 = tmp4 + tmp3
             Total += tmp4 * 0.025
         Next
 
@@ -343,49 +396,6 @@ Public Class Cymn
 
     End Sub
 
-
-
-    '金額自動計算
-    'Private Sub CellValueChanged(ByVal sender As Object,
-    'ByVal e As DataGridViewCellEventArgs) _
-    'Handles DgvItemList.CellValueChanged
-    '    If LoadFlg Then
-    '        TxtPurchaseTotal.Clear()
-    '        TxtTotal.Clear()
-    '        TxtGrossProfit.Clear()
-
-    '        Dim Total As Integer = 0
-    '        Dim PurchaseTotal As Integer = 0
-    '        Dim GrossProfit As Decimal = 0
-
-    '        If e.RowIndex > -1 Then
-    '            If DgvItemList.Rows(e.RowIndex).Cells(8).Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells(9).Value IsNot Nothing Then
-    '                DgvItemList.Rows(e.RowIndex).Cells(10).Value = DgvItemList.Rows(e.RowIndex).Cells(8).Value * DgvItemList.Rows(e.RowIndex).Cells(9).Value
-    '                If DgvItemList.Rows(e.RowIndex).Cells(5).Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells(8).Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells(10).Value IsNot Nothing Then
-    '                    DgvItemList.Rows(e.RowIndex).Cells(11).Value = DgvItemList.Rows(e.RowIndex).Cells(5).Value * DgvItemList.Rows(e.RowIndex).Cells(8).Value + DgvItemList.Rows(e.RowIndex).Cells(10).Value
-    '                End If
-    '            End If
-    '            If DgvItemList.Rows(e.RowIndex).Cells(5).Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells(12).Value IsNot Nothing Then
-    '                DgvItemList.Rows(e.RowIndex).Cells(13).Value = DgvItemList.Rows(e.RowIndex).Cells(5).Value * DgvItemList.Rows(e.RowIndex).Cells(12).Value
-    '                If DgvItemList.Rows(e.RowIndex).Cells(11).Value IsNot Nothing Then
-    '                    DgvItemList.Rows(e.RowIndex).Cells(14).Value = DgvItemList.Rows(e.RowIndex).Cells(13).Value - DgvItemList.Rows(e.RowIndex).Cells(11).Value
-    '                    DgvItemList.Rows(e.RowIndex).Cells(15).Value = Format(DgvItemList.Rows(e.RowIndex).Cells(14).Value / DgvItemList.Rows(e.RowIndex).Cells(13).Value * 100, "0.000")
-    '                End If
-    '            End If
-    '        End If
-
-    '        For index As Integer = 0 To DgvItemList.Rows.Count - 1
-    '            PurchaseTotal += DgvItemList.Rows(index).Cells(11).Value
-    '            Total += DgvItemList.Rows(index).Cells(13).Value
-    '        Next
-    '        TxtPurchaseTotal.Text = PurchaseTotal
-    '        TxtTotal.Text = Total
-    '        TxtGrossProfit.Text = Total - PurchaseTotal
-    '    End If
-    'End Sub
-
-
-    '前の画面に戻る
     Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
         _parentForm.Enabled = True
         _parentForm.Show()
@@ -665,7 +675,7 @@ Public Class Cymn
         SqlSaiban += " WHERE "
         SqlSaiban += "採番キー"
         SqlSaiban += " ILIKE "
-        SqlSaiban += "'%30%'"
+        SqlSaiban += "'30'"
 
         Dim Saiban As DataSet = _db.selectDB(SqlSaiban, RS, reccnt)
 
@@ -685,9 +695,9 @@ Public Class Cymn
             Sql += " WHERE "
             Sql += "仕入先名"
             Sql += " ILIKE "
-            Sql += "'%"
+            Sql += "'"
             Sql += supplier
-            Sql += "%'"
+            Sql += "'"
             Dim ds1 As DataSet = _db.selectDB(Sql, RS, reccnt)
 
             Dim PurchaseNo As String = Saiban.Tables(RS).Rows(0)(5)
@@ -982,54 +992,6 @@ Public Class Cymn
             Next
             PurchaseCount += 1
         Next
-
-        OrderCount += 1
-        Dim Saiban3 As String = ""
-        Saiban3 += "UPDATE "
-        Saiban3 += "Public."
-        Saiban3 += "m80_saiban "
-        Saiban3 += "SET "
-        Saiban3 += " 最新値"
-        Saiban3 += " = '"
-        Saiban3 += OrderCount.ToString
-        Saiban3 += "', "
-        Saiban3 += "更新者"
-        Saiban3 += " = '"
-        Saiban3 += "Admin"
-        Saiban3 += "', "
-        Saiban3 += "更新日"
-        Saiban3 += " = '"
-        Saiban3 += dtNow
-        Saiban3 += "' "
-        Saiban3 += "WHERE"
-        Saiban3 += " 会社コード"
-        Saiban3 += "='"
-        Saiban3 += CompanyCode.ToString
-        Saiban3 += "'"
-        Saiban3 += " AND"
-        Saiban3 += " 採番キー"
-        Saiban3 += "='"
-        Saiban3 += "20"
-        Saiban3 += "' "
-        Saiban3 += "RETURNING 会社コード"
-        Saiban3 += ", "
-        Saiban3 += "採番キー"
-        Saiban3 += ", "
-        Saiban3 += "最新値"
-        Saiban3 += ", "
-        Saiban3 += "最小値"
-        Saiban3 += ", "
-        Saiban3 += "最大値"
-        Saiban3 += ", "
-        Saiban3 += "接頭文字"
-        Saiban3 += ", "
-        Saiban3 += "連番桁数"
-        Saiban3 += ", "
-        Saiban3 += "更新者"
-        Saiban3 += ", "
-        Saiban3 += "更新日"
-
-        _db.executeDB(Saiban3)
 
         PurchaseCount += 1
         Dim Saiban4 As String = ""

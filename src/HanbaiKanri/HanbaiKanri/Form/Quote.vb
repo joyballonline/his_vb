@@ -188,7 +188,8 @@ Public Class Quote
                 Sql += " WHERE "
                 Sql += "採番キー"
                 Sql += " ILIKE "
-                Sql += "'%10%'"
+                Sql += "'10'"
+
 
                 Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
                 Dim dtNow As DateTime = DateTime.Now
@@ -203,6 +204,8 @@ Public Class Quote
                 QuoteNoMin = ds.Tables(RS).Rows(0)(3)
                 QuoteNoMax = ds.Tables(RS).Rows(0)(4)
                 TxtQuoteNo.Text += QuoteNo.PadLeft(ds.Tables(RS).Rows(0)(6), "0")
+
+                SaibanSave()
             Else
                 TxtQuoteNo.Text = ds1.Tables(RS).Rows(0)(1)
                 For index As Integer = 0 To ds2.Tables(RS).Rows.Count - 1
@@ -351,9 +354,9 @@ Public Class Quote
             Sql += " WHERE "
             Sql += "採番キー"
             Sql += " ILIKE "
-            Sql += "'%10%'"
+            Sql += "'10'"
 
-                Dim reccnt As Integer = 0
+            Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
 
             TxtQuoteNo.Text += ds.Tables(RS).Rows(0)(5)
@@ -366,6 +369,8 @@ Public Class Quote
             TxtQuoteNo.Text += QuoteNo.PadLeft(ds.Tables(RS).Rows(0)(6), "0")
 
             TxtInput.Text = Input
+
+            SaibanSave()
         End If
 
         If Status Is "VIEW" Then
@@ -431,6 +436,64 @@ Public Class Quote
 
     End Sub
 
+    Private Sub SaibanSave()
+        Dim dtToday As DateTime = DateTime.Now
+
+        If QuoteNo = QuoteNoMax Then
+            QuoteNo = QuoteNoMin
+        Else
+            QuoteNo = QuoteNo + 1
+        End If
+        Dim Sql As String = ""
+
+        Sql = ""
+        Sql += "UPDATE "
+        Sql += "Public."
+        Sql += "m80_saiban "
+        Sql += "SET "
+        Sql += " 最新値"
+        Sql += " = '"
+        Sql += QuoteNo.ToString
+        Sql += "', "
+        Sql += "更新者"
+        Sql += " = '"
+        Sql += Input
+        Sql += "', "
+        Sql += "更新日"
+        Sql += " = '"
+        Sql += dtToday
+        Sql += "' "
+        Sql += "WHERE"
+        Sql += " 会社コード"
+        Sql += "='"
+        Sql += CompanyCode.ToString
+        Sql += "'"
+        Sql += " AND"
+        Sql += " 採番キー"
+        Sql += "='"
+        Sql += KeyNo.ToString
+        Sql += "' "
+        Sql += "RETURNING 会社コード"
+        Sql += ", "
+        Sql += "採番キー"
+        Sql += ", "
+        Sql += "最新値"
+        Sql += ", "
+        Sql += "最小値"
+        Sql += ", "
+        Sql += "最大値"
+        Sql += ", "
+        Sql += "接頭文字"
+        Sql += ", "
+        Sql += "連番桁数"
+        Sql += ", "
+        Sql += "更新者"
+        Sql += ", "
+        Sql += "更新日"
+
+        _db.executeDB(Sql)
+    End Sub
+
     '金額自動計算
     Private Sub CellValueChanged(ByVal sender As Object,
     ByVal e As DataGridViewCellEventArgs) _
@@ -481,6 +544,7 @@ Public Class Quote
             Dim RowIdx As Integer = DgvItemList.CurrentCell.RowIndex
             '行を挿入
             DgvItemList.Rows.Insert(RowIdx + 1)
+            DgvItemList.Rows(RowIdx + 1).Cells("仕入区分").Value = 1
             DgvItemList.Rows(RowIdx + 1).Cells("ステータス").Value = "ADD"
             '最終行のインデックスを取得
             Dim index As Integer = DgvItemList.Rows.Count()
@@ -509,6 +573,7 @@ Public Class Quote
     '行追加（DGVの最終行に追加）
     Private Sub BtnRowsAdd_Click(sender As Object, e As EventArgs) Handles BtnRowsAdd.Click
         DgvItemList.Rows.Add()
+        DgvItemList.Rows(DgvItemList.Rows.Count() - 1).Cells("仕入区分").Value = 1
         DgvItemList.Rows(DgvItemList.Rows.Count() - 1).Cells("ステータス").Value = "ADD"
         '行番号の振り直し
         Dim index As Integer = DgvItemList.Rows.Count()
@@ -1298,61 +1363,6 @@ Public Class Quote
 
                     _db.executeDB(Sql2)
                 Next
-                If Status = "ADD" Or Status = "CLONE" Then
-                    If QuoteNo = QuoteNoMax Then
-                        QuoteNo = QuoteNoMin
-                    Else
-                        QuoteNo = QuoteNo + 1
-                    End If
-                    Dim Sql3 As String = ""
-
-                    Sql3 = ""
-                    Sql3 += "UPDATE "
-                    Sql3 += "Public."
-                    Sql3 += "m80_saiban "
-                    Sql3 += "SET "
-                    Sql3 += " 最新値"
-                    Sql3 += " = '"
-                    Sql3 += QuoteNo.ToString
-                    Sql3 += "', "
-                    Sql3 += "更新者"
-                    Sql3 += " = '"
-                    Sql3 += Input
-                    Sql3 += "', "
-                    Sql3 += "更新日"
-                    Sql3 += " = '"
-                    Sql3 += dtToday
-                    Sql3 += "' "
-                    Sql3 += "WHERE"
-                    Sql3 += " 会社コード"
-                    Sql3 += "='"
-                    Sql3 += CompanyCode.ToString
-                    Sql3 += "'"
-                    Sql3 += " AND"
-                    Sql3 += " 採番キー"
-                    Sql3 += "='"
-                    Sql3 += KeyNo.ToString
-                    Sql3 += "' "
-                    Sql3 += "RETURNING 会社コード"
-                    Sql3 += ", "
-                    Sql3 += "採番キー"
-                    Sql3 += ", "
-                    Sql3 += "最新値"
-                    Sql3 += ", "
-                    Sql3 += "最小値"
-                    Sql3 += ", "
-                    Sql3 += "最大値"
-                    Sql3 += ", "
-                    Sql3 += "接頭文字"
-                    Sql3 += ", "
-                    Sql3 += "連番桁数"
-                    Sql3 += ", "
-                    Sql3 += "更新者"
-                    Sql3 += ", "
-                    Sql3 += "更新日"
-
-                    _db.executeDB(Sql3)
-                End If
             Catch ue As UsrDefException
                 ue.dspMsg()
                 Throw ue

@@ -55,16 +55,6 @@ Partial Class AccountsPayable
         Me.今回備考1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.今回備考2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DgvHistory = New System.Windows.Forms.DataGridView()
-        Me.DgvCymndt = New System.Windows.Forms.DataGridView()
-        Me.明細 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.メーカー = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.品名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.型式 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.発注個数 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.単位 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.仕入数量 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.仕入単価 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.仕入金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.No = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.買掛番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.買掛日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -75,6 +65,16 @@ Partial Class AccountsPayable
         Me.備考2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.買掛済み発注番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.買掛済み発注番号枝番 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DgvCymndt = New System.Windows.Forms.DataGridView()
+        Me.明細 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.メーカー = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.品名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.型式 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.発注個数 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.単位 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入数量 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入単価 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DgvCymn, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvAdd, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvHistory, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -310,7 +310,7 @@ Partial Class AccountsPayable
         Me.LblAdd.Name = "LblAdd"
         Me.LblAdd.Size = New System.Drawing.Size(82, 15)
         Me.LblAdd.TabIndex = 279
-        Me.LblAdd.Text = "■今回売掛"
+        Me.LblAdd.Text = "■今回買掛"
         '
         'LblHistory
         '
@@ -320,7 +320,7 @@ Partial Class AccountsPayable
         Me.LblHistory.Name = "LblHistory"
         Me.LblHistory.Size = New System.Drawing.Size(80, 15)
         Me.LblHistory.TabIndex = 278
-        Me.LblHistory.Text = "■売掛済み"
+        Me.LblHistory.Text = "■買掛済み"
         '
         'LblCymndt
         '
@@ -387,6 +387,65 @@ Partial Class AccountsPayable
         Me.DgvHistory.Size = New System.Drawing.Size(1326, 120)
         Me.DgvHistory.TabIndex = 275
         '
+        'No
+        '
+        Me.No.HeaderText = "No"
+        Me.No.Name = "No"
+        Me.No.Width = 70
+        '
+        '買掛番号
+        '
+        Me.買掛番号.HeaderText = "買掛番号"
+        Me.買掛番号.Name = "買掛番号"
+        Me.買掛番号.Width = 150
+        '
+        '買掛日
+        '
+        Me.買掛日.HeaderText = "買掛日"
+        Me.買掛日.Name = "買掛日"
+        Me.買掛日.Width = 150
+        '
+        '買掛区分
+        '
+        Me.買掛区分.HeaderText = "買掛区分"
+        Me.買掛区分.Name = "買掛区分"
+        '
+        '支払先
+        '
+        Me.支払先.HeaderText = "支払先"
+        Me.支払先.Name = "支払先"
+        Me.支払先.Width = 200
+        '
+        '買掛金額
+        '
+        Me.買掛金額.HeaderText = "買掛金額計"
+        Me.買掛金額.Name = "買掛金額"
+        Me.買掛金額.Width = 150
+        '
+        '備考1
+        '
+        Me.備考1.HeaderText = "備考1"
+        Me.備考1.Name = "備考1"
+        Me.備考1.Width = 200
+        '
+        '備考2
+        '
+        Me.備考2.HeaderText = "備考2"
+        Me.備考2.Name = "備考2"
+        Me.備考2.Width = 200
+        '
+        '買掛済み発注番号
+        '
+        Me.買掛済み発注番号.HeaderText = "買掛済み発注番号"
+        Me.買掛済み発注番号.Name = "買掛済み発注番号"
+        Me.買掛済み発注番号.Visible = False
+        '
+        '買掛済み発注番号枝番
+        '
+        Me.買掛済み発注番号枝番.HeaderText = "請求済み発注番号枝番"
+        Me.買掛済み発注番号枝番.Name = "買掛済み発注番号枝番"
+        Me.買掛済み発注番号枝番.Visible = False
+        '
         'DgvCymndt
         '
         Me.DgvCymndt.AllowUserToAddRows = False
@@ -452,65 +511,6 @@ Partial Class AccountsPayable
         Me.仕入金額.HeaderText = "仕入金額"
         Me.仕入金額.Name = "仕入金額"
         Me.仕入金額.Width = 150
-        '
-        'No
-        '
-        Me.No.HeaderText = "No"
-        Me.No.Name = "No"
-        Me.No.Width = 70
-        '
-        '買掛番号
-        '
-        Me.買掛番号.HeaderText = "買掛番号"
-        Me.買掛番号.Name = "買掛番号"
-        Me.買掛番号.Width = 150
-        '
-        '買掛日
-        '
-        Me.買掛日.HeaderText = "買掛日"
-        Me.買掛日.Name = "買掛日"
-        Me.買掛日.Width = 150
-        '
-        '買掛区分
-        '
-        Me.買掛区分.HeaderText = "買掛区分"
-        Me.買掛区分.Name = "買掛区分"
-        '
-        '支払先
-        '
-        Me.支払先.HeaderText = "支払先"
-        Me.支払先.Name = "支払先"
-        Me.支払先.Width = 200
-        '
-        '買掛金額
-        '
-        Me.買掛金額.HeaderText = "買掛金額計"
-        Me.買掛金額.Name = "買掛金額"
-        Me.買掛金額.Width = 150
-        '
-        '備考1
-        '
-        Me.備考1.HeaderText = "備考1"
-        Me.備考1.Name = "備考1"
-        Me.備考1.Width = 200
-        '
-        '備考2
-        '
-        Me.備考2.HeaderText = "備考2"
-        Me.備考2.Name = "備考2"
-        Me.備考2.Width = 200
-        '
-        '買掛済み発注番号
-        '
-        Me.買掛済み発注番号.HeaderText = "買掛済み発注番号"
-        Me.買掛済み発注番号.Name = "買掛済み発注番号"
-        Me.買掛済み発注番号.Visible = False
-        '
-        '買掛済み発注番号枝番
-        '
-        Me.買掛済み発注番号枝番.HeaderText = "請求済み発注番号枝番"
-        Me.買掛済み発注番号枝番.Name = "買掛済み発注番号枝番"
-        Me.買掛済み発注番号枝番.Visible = False
         '
         'AccountsPayable
         '
