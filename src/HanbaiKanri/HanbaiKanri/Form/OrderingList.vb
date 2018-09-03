@@ -38,6 +38,7 @@ Public Class OrderingList
     Private CompanyCode As String = ""
     Private OrderNo As String()
     Private _status As String = ""
+    Private List As New List(Of String)(New String() {})
 
     '-------------------------------------------------------------------------------
     'デフォルトコンストラクタ（隠蔽）
@@ -70,8 +71,47 @@ Public Class OrderingList
         _init = True
 
     End Sub
+
+    'Private Sub SelectList()
+
+    '    Dim reccnt As Integer = 0
+
+    '    Dim Sql1 As String = ""
+    '    Sql1 += "SELECT "
+    '    Sql1 += "* "
+    '    Sql1 += "FROM "
+    '    Sql1 += "public"
+    '    Sql1 += "."
+    '    Sql1 += "t21_hattyu"
+    '    Sql1 += " WHERE "
+    '    Sql1 += "発注残数"
+    '    Sql1 += " > "
+    '    Sql1 += "'"
+    '    Sql1 += "0"
+    '    Sql1 += "'"
+    '    Dim ds1 As DataSet = _db.selectDB(Sql1, RS, reccnt)
+
+    '    Dim NoSuffix As String()
+    '    Dim Count As Integer = ds1.Tables(RS).Rows.Count - 1
+    '    ReDim NoSuffix(Count)
+
+    '    For i As Integer = 0 To ds1.Tables(RS).Rows.Count - 1
+    '        NoSuffix(i) += ds1.Tables(RS).Rows(i)("発注番号")
+    '        NoSuffix(i) += " "
+    '        NoSuffix(i) += ds1.Tables(RS).Rows(i)("発注番号枝番")
+    '    Next
+
+    '    For i As Integer = 0 To ds1.Tables(RS).Rows.Count - 1
+    '        If List.Contains(NoSuffix(i)) = False Then
+    '            List.Add(NoSuffix(i))
+    '        End If
+    '    Next
+    'End Sub
+
+
     Private Sub PurchaseListLoad(Optional ByRef Status As String = "")
         If Status = "EXCLUSION" Then
+
             Dim Sql As String = ""
             Try
                 Sql += "SELECT "
@@ -86,6 +126,28 @@ Public Class OrderingList
                 Sql += "'"
                 Sql += "0"
                 Sql += "'"
+                'Dim stData As String = ""
+                'Dim stArrayData() As String
+                'For i As Integer = 0 To List.Count - 1
+                '    stData = List(i)
+                '    stArrayData = Split(stData, " ")
+
+                '    Sql += " AND "
+                '    Sql += "発注番号"
+                '    Sql += " = "
+                '    Sql += "'"
+                '    Sql += stArrayData(0)
+                '    Sql += "'"
+                '    Sql += " AND "
+                '    Sql += "発注番号枝番"
+                '    Sql += " = "
+                '    Sql += "'"
+                '    Sql += stArrayData(1)
+                '    Sql += "'"
+
+                '    stData = ""
+                '    Erase stArrayData
+                'Next
 
                 Dim reccnt As Integer = 0
                 ds = _db.selectDB(Sql, RS, reccnt)

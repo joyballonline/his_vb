@@ -371,6 +371,8 @@ Public Class Order
 
             If OrderStatus = "CLONE" Then
                 TxtOrderSuffix.Text = 1
+            ElseIf OrderStatus = "EDIT" Then
+                TxtOrderSuffix.Text = ds1.Tables(RS).Rows(0)("受注番号枝番") + 1
             Else
                 If ds1.Tables(RS).Rows(0)("受注番号枝番") IsNot DBNull.Value Then
                     TxtOrderSuffix.Text = ds1.Tables(RS).Rows(0)("受注番号枝番")
@@ -590,7 +592,7 @@ Public Class Order
         Dim reccnt As Integer = 0
         Dim dtNow As DateTime = DateTime.Now
 
-        If OrderStatus = "ADD" Or OrderStatus = "CLONE" Then
+        If OrderStatus = "ADD" Or OrderStatus = "EDIT" Or OrderStatus = "CLONE" Then
             Dim Sql1 As String = ""
             Sql1 = ""
             Sql1 += "INSERT INTO "
