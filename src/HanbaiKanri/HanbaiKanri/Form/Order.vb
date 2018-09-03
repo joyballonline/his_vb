@@ -340,6 +340,28 @@ Public Class Order
 
             Dim ds1 = _db.selectDB(Sql1, RS, reccnt)
 
+            Dim Sql2 As String = ""
+            Sql2 += "SELECT"
+            Sql2 += " * "
+            Sql2 += "FROM "
+            Sql2 += "public"
+            Sql2 += "."
+            Sql2 += "t10_cymnhd"
+            Sql2 += " WHERE "
+            Sql2 += "受注番号"
+            Sql2 += " ILIKE "
+            Sql2 += "'"
+            Sql2 += ds1.Tables(RS).Rows(0)("受注番号")
+            Sql2 += "'"
+            Dim ds2 As DataSet = _db.selectDB(Sql2, RS, reccnt)
+
+            Dim MaxSuffix As Integer = 0
+            For index As Integer = 0 To ds2.Tables(RS).Rows.Count - 1
+                If MaxSuffix < ds2.Tables(RS).Rows(index)("受注番号枝番") Then
+                    MaxSuffix = ds2.Tables(RS).Rows(index)("受注番号枝番")
+                End If
+            Next
+
             CompanyCode = ds1.Tables(RS).Rows(0)("会社コード")
             If OrderStatus = "CLONE" Then
                 Dim SqlSaiban As String = ""
@@ -381,7 +403,7 @@ Public Class Order
             If OrderStatus = "CLONE" Then
                 TxtOrderSuffix.Text = 1
             ElseIf OrderStatus = "EDIT" Then
-                TxtOrderSuffix.Text = ds1.Tables(RS).Rows(0)("受注番号枝番") + 1
+                TxtOrderSuffix.Text = MaxSuffix + 1
             Else
                 If ds1.Tables(RS).Rows(0)("受注番号枝番") IsNot DBNull.Value Then
                     TxtOrderSuffix.Text = ds1.Tables(RS).Rows(0)("受注番号枝番")

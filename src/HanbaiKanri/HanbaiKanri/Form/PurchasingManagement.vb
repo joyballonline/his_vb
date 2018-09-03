@@ -310,6 +310,7 @@ Public Class PurchasingManagement
             TxtCount3.Text = DgvAdd.Rows.Count()
 
             TxtPurchaseNo.Text = ds1.Tables(RS).Rows(0)("発注番号")
+            TxtSuffixNo.Text = ds1.Tables(RS).Rows(0)("発注番号枝番")
             TxtOrdingDate.Text = ds1.Tables(RS).Rows(0)("発注日")
             TxtSupplierCode.Text = ds1.Tables(RS).Rows(0)("仕入先コード")
             TxtSupplierName.Text = ds1.Tables(RS).Rows(0)("仕入先名")
