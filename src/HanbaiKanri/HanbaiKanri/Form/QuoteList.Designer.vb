@@ -55,11 +55,11 @@ Partial Class QuoteList
         Me.BtnUnitPrice = New System.Windows.Forms.Button()
         Me.BtnOrderPurchase = New System.Windows.Forms.Button()
         Me.BtnCancel = New System.Windows.Forms.Button()
-        Me.LblMode = New System.Windows.Forms.Label()
         Me.ChkExpired = New System.Windows.Forms.CheckBox()
         Me.BtnOrder = New System.Windows.Forms.Button()
         Me.BtnPurchase = New System.Windows.Forms.Button()
         Me.ChkCancel = New System.Windows.Forms.CheckBox()
+        Me.LblMode = New System.Windows.Forms.Label()
         CType(Me.DgvMithd, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -394,18 +394,6 @@ Partial Class QuoteList
         Me.BtnCancel.UseVisualStyleBackColor = True
         Me.BtnCancel.Visible = False
         '
-        'LblMode
-        '
-        Me.LblMode.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.LblMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblMode.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblMode.Location = New System.Drawing.Point(1173, 9)
-        Me.LblMode.Name = "LblMode"
-        Me.LblMode.Size = New System.Drawing.Size(165, 22)
-        Me.LblMode.TabIndex = 34
-        Me.LblMode.Text = "モード"
-        Me.LblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
         'ChkExpired
         '
         Me.ChkExpired.AutoSize = True
@@ -447,6 +435,18 @@ Partial Class QuoteList
         Me.ChkCancel.TabIndex = 38
         Me.ChkCancel.Text = "取消データを含める"
         Me.ChkCancel.UseVisualStyleBackColor = True
+        '
+        'LblMode
+        '
+        Me.LblMode.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblMode.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblMode.Location = New System.Drawing.Point(1173, 9)
+        Me.LblMode.Name = "LblMode"
+        Me.LblMode.Size = New System.Drawing.Size(165, 22)
+        Me.LblMode.TabIndex = 34
+        Me.LblMode.Text = "モード"
+        Me.LblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'QuoteList
         '
@@ -532,9 +532,9 @@ Partial Class QuoteList
     Friend WithEvents BtnUnitPrice As Button
     Friend WithEvents BtnOrderPurchase As Button
     Friend WithEvents BtnCancel As Button
-    Friend WithEvents LblMode As Label
     Friend WithEvents ChkExpired As CheckBox
     Friend WithEvents BtnOrder As Button
     Friend WithEvents BtnPurchase As Button
     Friend WithEvents ChkCancel As CheckBox
+    Friend WithEvents LblMode As Label
 End Class

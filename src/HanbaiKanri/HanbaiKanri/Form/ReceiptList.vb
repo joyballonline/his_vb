@@ -208,9 +208,11 @@ Public Class ReceiptList
 
     Private Sub MstHanyoue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If ReceiptStatus = "CANCEL" Then
+            LblMode.Text = "取消モード"
             BtnReceiptCancel.Visible = True
             BtnReceiptCancel.Location = New Point(997, 677)
         ElseIf ReceiptStatus = "VIEW" Then
+            LblMode.Text = "参照モード"
             BtnReceiptView.Visible = True
             BtnReceiptView.Location = New Point(997, 677)
         End If

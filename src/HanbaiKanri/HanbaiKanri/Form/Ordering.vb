@@ -134,8 +134,29 @@ Public Class Ordering
         Sql1 += "'"
         Sql1 += PurchaseSuffix.ToString
         Sql1 += "'"
+        Dim ds1 As DataSet = _db.selectDB(Sql1, RS, reccnt)
 
-        Dim ds1 = _db.selectDB(Sql1, RS, reccnt)
+        Dim Sql2 As String = ""
+        Sql2 += "SELECT"
+        Sql2 += " * "
+        Sql2 += "FROM "
+        Sql2 += "public"
+        Sql2 += "."
+        Sql2 += "t20_hattyu"
+        Sql2 += " WHERE "
+        Sql2 += "発注番号"
+        Sql2 += " ILIKE "
+        Sql2 += "'"
+        Sql2 += ds1.Tables(RS).Rows(0)("発注番号")
+        Sql2 += "'"
+        Dim ds2 As DataSet = _db.selectDB(Sql2, RS, reccnt)
+
+        Dim MaxSuffix As Integer = 0
+        For index As Integer = 0 To ds2.Tables(RS).Rows.Count - 1
+            If MaxSuffix < ds2.Tables(RS).Rows(index)("発注番号枝番") Then
+                MaxSuffix = ds2.Tables(RS).Rows(index)("発注番号枝番")
+            End If
+        Next
 
         CompanyCode = ds1.Tables(RS).Rows(0)("会社コード")
 
@@ -249,6 +270,7 @@ Public Class Ordering
         TxtItemCount.Text = DgvItemList.Rows.Count()
 
         If PurchaseStatus = "VIEW" Then
+            LblMode.Text = "参照モード"
             DtpOrderingDate.Enabled = False
             TxtPurchaseRemark.Enabled = False
             DgvItemList.ReadOnly = True
@@ -256,6 +278,7 @@ Public Class Ordering
             BtnPurchase.Visible = True
             BtnPurchase.Location = New Point(1004, 677)
         ElseIf PurchaseStatus = "CLONE" Then
+            LblMode.Text = "新規複写モード"
             TxtSupplierCode.Enabled = True
             TxtSupplierName.Enabled = True
             TxtPostalCode.Enabled = True
@@ -270,6 +293,7 @@ Public Class Ordering
             TxtPaymentTerms.Enabled = True
             LblRemarks.Visible = False
             TxtQuoteRemarks.Visible = False
+            DtpOrderingRegistration.Enabled = True
 
             Dim SqlSaiban As String = ""
             SqlSaiban += "SELECT "
@@ -343,6 +367,9 @@ Public Class Ordering
             Saiban4 += ", "
             Saiban4 += "更新日"
             _db.executeDB(Saiban4)
+        ElseIf PurchaseStatus = "EDIT" Then
+            LblMode.Text = "編集モード"
+            TxtOrderingSuffix.Text = MaxSuffix + 1
         End If
 
     End Sub
@@ -577,7 +604,7 @@ Public Class Ordering
         Dim reccnt As Integer = 0
         Dim dtNow As DateTime = DateTime.Now
 
-        If PurchaseStatus = "CLONE" Then
+        If PurchaseStatus = "CLONE" Or PurchaseStatus = "EDIT" Then
             Dim Sql3 As String = ""
             Sql3 = ""
             Sql3 += "INSERT INTO "
@@ -589,7 +616,7 @@ Public Class Ordering
             Sql3 += "', '"
             Sql3 += TxtOrderingNo.Text
             Sql3 += "', '"
-            Sql3 += "1"
+            Sql3 += TxtOrderingSuffix.Text
             Sql3 += "', '"
             Sql3 += ""
             Sql3 += "', '"
@@ -766,7 +793,7 @@ Public Class Ordering
                 Sql4 += "', '"
                 Sql4 += TxtOrderingNo.Text
                 Sql4 += "', '"
-                Sql4 += "1"
+                Sql4 += TxtOrderingSuffix.Text
                 Sql4 += "', '"
                 Sql4 += DgvItemList.Rows(hattyuIdx).Cells("No").Value.ToString
                 Sql4 += "', '"

@@ -85,6 +85,7 @@ Partial Class OrderingAdd
         Me.BtnInsert = New System.Windows.Forms.Button()
         Me.BtnRowsDel = New System.Windows.Forms.Button()
         Me.BtnRowsAdd = New System.Windows.Forms.Button()
+        Me.LblMode = New System.Windows.Forms.Label()
         CType(Me.DgvItemList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -250,7 +251,7 @@ Partial Class OrderingAdd
         Me.TxtSales.Location = New System.Drawing.Point(1127, 42)
         Me.TxtSales.MaxLength = 20
         Me.TxtSales.Name = "TxtSales"
-        Me.TxtSales.Size = New System.Drawing.Size(200, 23)
+        Me.TxtSales.Size = New System.Drawing.Size(211, 23)
         Me.TxtSales.TabIndex = 269
         '
         'LblSales
@@ -447,7 +448,7 @@ Partial Class OrderingAdd
         Me.TxtInput.MaxLength = 20
         Me.TxtInput.Name = "TxtInput"
         Me.TxtInput.ReadOnly = True
-        Me.TxtInput.Size = New System.Drawing.Size(200, 23)
+        Me.TxtInput.Size = New System.Drawing.Size(211, 23)
         Me.TxtInput.TabIndex = 255
         Me.TxtInput.TabStop = False
         '
@@ -714,11 +715,24 @@ Partial Class OrderingAdd
         Me.BtnRowsAdd.Text = "行追加"
         Me.BtnRowsAdd.UseVisualStyleBackColor = True
         '
+        'LblMode
+        '
+        Me.LblMode.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblMode.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblMode.Location = New System.Drawing.Point(1127, 9)
+        Me.LblMode.Name = "LblMode"
+        Me.LblMode.Size = New System.Drawing.Size(211, 22)
+        Me.LblMode.TabIndex = 296
+        Me.LblMode.Text = "新規登録モード"
+        Me.LblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'OrderingAdd
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1350, 729)
+        Me.Controls.Add(Me.LblMode)
         Me.Controls.Add(Me.BtnClone)
         Me.Controls.Add(Me.BtnDown)
         Me.Controls.Add(Me.BtnUp)
@@ -829,4 +843,5 @@ Partial Class OrderingAdd
     Friend WithEvents 入庫数 As DataGridViewTextBoxColumn
     Friend WithEvents 未入庫数 As DataGridViewTextBoxColumn
     Friend WithEvents 備考 As DataGridViewTextBoxColumn
+    Friend WithEvents LblMode As Label
 End Class

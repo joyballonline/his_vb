@@ -234,9 +234,11 @@ Public Class SalesList
 
     Private Sub MstHanyoue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If SalesStatus = "CANCEL" Then
+            LblMode.Text = "取消モード"
             BtnSalesCancel.Visible = True
             BtnSalesCancel.Location = New Point(997, 677)
         ElseIf SalesStatus = "VIEW" Then
+            LblMode.Text = "参照モード"
             BtnSalesView.Visible = True
             BtnSalesView.Location = New Point(997, 677)
         End If

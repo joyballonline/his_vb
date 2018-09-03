@@ -103,6 +103,7 @@ Public Class BillingManagement
         BillLoad()
 
         If _status = "VIEW" Then
+            LblMode.Text = "参照モード"
             LblNo1.Visible = False
             LblNo2.Visible = False
             LblNo2.Visible = False
@@ -123,6 +124,8 @@ Public Class BillingManagement
             DgvHistory.Size = New Point(1326, 566)
 
             BtnRegist.Visible = False
+        Else
+            LblMode.Text = "請求登録モード"
         End If
 
     End Sub

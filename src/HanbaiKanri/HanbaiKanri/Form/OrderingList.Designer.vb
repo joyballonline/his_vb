@@ -56,6 +56,7 @@ Partial Class OrderingList
         Me.ChkCancelData = New System.Windows.Forms.CheckBox()
         Me.BtnPurchaseCancel = New System.Windows.Forms.Button()
         Me.BtnAP = New System.Windows.Forms.Button()
+        Me.LblMode = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         CType(Me.DgvHtyhd, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -301,9 +302,9 @@ Partial Class OrderingList
         'BtnPurchaseSearch
         '
         Me.BtnPurchaseSearch.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.BtnPurchaseSearch.Location = New System.Drawing.Point(1174, 41)
+        Me.BtnPurchaseSearch.Location = New System.Drawing.Point(1173, 41)
         Me.BtnPurchaseSearch.Name = "BtnPurchaseSearch"
-        Me.BtnPurchaseSearch.Size = New System.Drawing.Size(165, 40)
+        Me.BtnPurchaseSearch.Size = New System.Drawing.Size(166, 40)
         Me.BtnPurchaseSearch.TabIndex = 64
         Me.BtnPurchaseSearch.Text = "検索"
         Me.BtnPurchaseSearch.UseVisualStyleBackColor = True
@@ -401,11 +402,24 @@ Partial Class OrderingList
         Me.BtnAP.UseVisualStyleBackColor = True
         Me.BtnAP.Visible = False
         '
+        'LblMode
+        '
+        Me.LblMode.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblMode.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblMode.Location = New System.Drawing.Point(1173, 9)
+        Me.LblMode.Name = "LblMode"
+        Me.LblMode.Size = New System.Drawing.Size(165, 22)
+        Me.LblMode.TabIndex = 93
+        Me.LblMode.Text = "モード"
+        Me.LblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'OrderingList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1350, 729)
+        Me.Controls.Add(Me.LblMode)
         Me.Controls.Add(Me.BtnAP)
         Me.Controls.Add(Me.BtnPurchaseCancel)
         Me.Controls.Add(Me.ChkCancelData)
@@ -482,4 +496,5 @@ Partial Class OrderingList
     Friend WithEvents ChkCancelData As CheckBox
     Friend WithEvents BtnPurchaseCancel As Button
     Friend WithEvents BtnAP As Button
+    Friend WithEvents LblMode As Label
 End Class

@@ -44,6 +44,7 @@ Partial Class DepositList
         Me.LblConditions = New System.Windows.Forms.Label()
         Me.TxtCustomerName = New System.Windows.Forms.TextBox()
         Me.BtnSerach = New System.Windows.Forms.Button()
+        Me.LblMode = New System.Windows.Forms.Label()
         CType(Me.DgvCustomer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -242,18 +243,31 @@ Partial Class DepositList
         '
         'BtnSerach
         '
-        Me.BtnSerach.Location = New System.Drawing.Point(1173, 36)
+        Me.BtnSerach.Location = New System.Drawing.Point(1172, 36)
         Me.BtnSerach.Name = "BtnSerach"
-        Me.BtnSerach.Size = New System.Drawing.Size(165, 40)
+        Me.BtnSerach.Size = New System.Drawing.Size(166, 40)
         Me.BtnSerach.TabIndex = 57
         Me.BtnSerach.Text = "検索"
         Me.BtnSerach.UseVisualStyleBackColor = True
+        '
+        'LblMode
+        '
+        Me.LblMode.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblMode.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblMode.Location = New System.Drawing.Point(1172, 9)
+        Me.LblMode.Name = "LblMode"
+        Me.LblMode.Size = New System.Drawing.Size(166, 22)
+        Me.LblMode.TabIndex = 324
+        Me.LblMode.Text = "入金入力モード"
+        Me.LblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'DepositList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1350, 729)
+        Me.Controls.Add(Me.LblMode)
         Me.Controls.Add(Me.BtnSerach)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.TxtCustomerCode)
@@ -297,4 +311,5 @@ Partial Class DepositList
     Friend WithEvents 受注件数 As DataGridViewTextBoxColumn
     Friend WithEvents 請求件数 As DataGridViewTextBoxColumn
     Friend WithEvents 会社コード As DataGridViewTextBoxColumn
+    Friend WithEvents LblMode As Label
 End Class

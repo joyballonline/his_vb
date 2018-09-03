@@ -63,6 +63,7 @@ Partial Class DepositManagement
         Me.TxtCount3 = New System.Windows.Forms.TextBox()
         Me.BtnDelete = New System.Windows.Forms.Button()
         Me.BtnCal = New System.Windows.Forms.Button()
+        Me.LblMode = New System.Windows.Forms.Label()
         CType(Me.DgvCustomer, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvBillingInfo, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvHistory, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -418,11 +419,24 @@ Partial Class DepositManagement
         Me.BtnCal.Text = "自動振分"
         Me.BtnCal.UseVisualStyleBackColor = True
         '
+        'LblMode
+        '
+        Me.LblMode.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblMode.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblMode.Location = New System.Drawing.Point(1170, 9)
+        Me.LblMode.Name = "LblMode"
+        Me.LblMode.Size = New System.Drawing.Size(166, 22)
+        Me.LblMode.TabIndex = 324
+        Me.LblMode.Text = "モード"
+        Me.LblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'DepositManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1350, 729)
+        Me.Controls.Add(Me.LblMode)
         Me.Controls.Add(Me.BtnCal)
         Me.Controls.Add(Me.BtnDelete)
         Me.Controls.Add(Me.LblNo3)
@@ -496,4 +510,5 @@ Partial Class DepositManagement
     Friend WithEvents 請求情報請求残高 As DataGridViewTextBoxColumn
     Friend WithEvents 入金額 As DataGridViewTextBoxColumn
     Friend WithEvents BtnCal As Button
+    Friend WithEvents LblMode As Label
 End Class

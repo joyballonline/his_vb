@@ -187,9 +187,11 @@ Public Class AccountsPayableList
     End Sub
     Private Sub MstHanyoue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If _status = "VIEW" Then
+            LblMode.Text = "参照モード"
             'BtnBillingView.Visible = True
             'BtnBillingView.Location = New Point(997, 677)
         ElseIf _status = "CANCEL" Then
+            LblMode.Text = "取消モード"
             BtnAPCancel.Visible = True
             BtnAPCancel.Location = New Point(997, 677)
         End If

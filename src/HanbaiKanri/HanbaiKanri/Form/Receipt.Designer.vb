@@ -49,6 +49,7 @@ Partial Class Receipt
         Me.LblPurchaseNo = New System.Windows.Forms.Label()
         Me.TxtPurchaseNo = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.LblMode = New System.Windows.Forms.Label()
         CType(Me.DgvAdd, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvHistory, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvPurchase, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -342,11 +343,24 @@ Partial Class Receipt
         Me.Label1.Size = New System.Drawing.Size(0, 12)
         Me.Label1.TabIndex = 232
         '
+        'LblMode
+        '
+        Me.LblMode.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblMode.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblMode.Location = New System.Drawing.Point(1173, 9)
+        Me.LblMode.Name = "LblMode"
+        Me.LblMode.Size = New System.Drawing.Size(165, 22)
+        Me.LblMode.TabIndex = 305
+        Me.LblMode.Text = "モード"
+        Me.LblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'Receipt
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1350, 729)
+        Me.Controls.Add(Me.LblMode)
         Me.Controls.Add(Me.TxtSuffixNo)
         Me.Controls.Add(Me.BtnRegist)
         Me.Controls.Add(Me.DtpReceiptDate)
@@ -411,4 +425,5 @@ Partial Class Receipt
     Friend WithEvents LblPurchaseNo As Label
     Friend WithEvents TxtPurchaseNo As TextBox
     Friend WithEvents Label1 As Label
+    Friend WithEvents LblMode As Label
 End Class

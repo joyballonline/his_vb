@@ -24,6 +24,14 @@ Partial Class Payment
     Private Sub InitializeComponent()
         Me.BtnDelete = New System.Windows.Forms.Button()
         Me.DgvHistory = New System.Windows.Forms.DataGridView()
+        Me.No = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.売掛番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.支払済支払先 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.支払番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.支払日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.支払種目 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.支払済支払金額計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.備考 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DgvDeposit = New System.Windows.Forms.DataGridView()
         Me.行番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.入力支払金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -42,20 +50,11 @@ Partial Class Payment
         Me.LblNo2 = New System.Windows.Forms.Label()
         Me.TxtCount2 = New System.Windows.Forms.TextBox()
         Me.DgvCustomer = New System.Windows.Forms.DataGridView()
+        Me.支払先 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.買掛残高 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LblBillingInfo = New System.Windows.Forms.Label()
         Me.LblDeposit = New System.Windows.Forms.Label()
         Me.DgvBillingInfo = New System.Windows.Forms.DataGridView()
-        Me.LblHistory = New System.Windows.Forms.Label()
-        Me.No = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.売掛番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.支払済支払先 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.支払番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.支払日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.支払種目 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.支払済支払金額計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.備考 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.支払先 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.買掛残高 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.InfoNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.買掛情報買掛番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.買掛日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -63,6 +62,8 @@ Partial Class Payment
         Me.買掛情報支払金額計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.買掛情報買掛残高 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.支払金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.LblHistory = New System.Windows.Forms.Label()
+        Me.LblMode = New System.Windows.Forms.Label()
         CType(Me.DgvHistory, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvDeposit, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvCustomer, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -91,6 +92,55 @@ Partial Class Payment
         Me.DgvHistory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvHistory.Size = New System.Drawing.Size(1326, 160)
         Me.DgvHistory.TabIndex = 301
+        '
+        'No
+        '
+        Me.No.HeaderText = "No"
+        Me.No.Name = "No"
+        Me.No.Width = 70
+        '
+        '売掛番号
+        '
+        Me.売掛番号.HeaderText = "売掛番号"
+        Me.売掛番号.Name = "売掛番号"
+        Me.売掛番号.Visible = False
+        Me.売掛番号.Width = 150
+        '
+        '支払済支払先
+        '
+        Me.支払済支払先.HeaderText = "支払先"
+        Me.支払済支払先.Name = "支払済支払先"
+        Me.支払済支払先.Width = 200
+        '
+        '支払番号
+        '
+        Me.支払番号.HeaderText = "支払番号"
+        Me.支払番号.Name = "支払番号"
+        Me.支払番号.Width = 150
+        '
+        '支払日
+        '
+        Me.支払日.HeaderText = "支払日"
+        Me.支払日.Name = "支払日"
+        Me.支払日.Width = 150
+        '
+        '支払種目
+        '
+        Me.支払種目.HeaderText = "支払種目"
+        Me.支払種目.Name = "支払種目"
+        Me.支払種目.Width = 150
+        '
+        '支払済支払金額計
+        '
+        Me.支払済支払金額計.HeaderText = "支払金額計"
+        Me.支払済支払金額計.Name = "支払済支払金額計"
+        Me.支払済支払金額計.Width = 200
+        '
+        '備考
+        '
+        Me.備考.HeaderText = "備考"
+        Me.備考.Name = "備考"
+        Me.備考.Width = 200
         '
         'DgvDeposit
         '
@@ -273,6 +323,18 @@ Partial Class Payment
         Me.DgvCustomer.Size = New System.Drawing.Size(504, 40)
         Me.DgvCustomer.TabIndex = 299
         '
+        '支払先
+        '
+        Me.支払先.HeaderText = "支払先"
+        Me.支払先.Name = "支払先"
+        Me.支払先.Width = 300
+        '
+        '買掛残高
+        '
+        Me.買掛残高.HeaderText = "買掛残高"
+        Me.買掛残高.Name = "買掛残高"
+        Me.買掛残高.Width = 200
+        '
         'LblBillingInfo
         '
         Me.LblBillingInfo.AutoSize = True
@@ -304,77 +366,6 @@ Partial Class Payment
         Me.DgvBillingInfo.RowTemplate.Height = 21
         Me.DgvBillingInfo.Size = New System.Drawing.Size(1327, 160)
         Me.DgvBillingInfo.TabIndex = 302
-        '
-        'LblHistory
-        '
-        Me.LblHistory.AutoSize = True
-        Me.LblHistory.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblHistory.Location = New System.Drawing.Point(13, 68)
-        Me.LblHistory.Name = "LblHistory"
-        Me.LblHistory.Size = New System.Drawing.Size(80, 15)
-        Me.LblHistory.TabIndex = 304
-        Me.LblHistory.Text = "■支払済み"
-        '
-        'No
-        '
-        Me.No.HeaderText = "No"
-        Me.No.Name = "No"
-        Me.No.Width = 70
-        '
-        '売掛番号
-        '
-        Me.売掛番号.HeaderText = "売掛番号"
-        Me.売掛番号.Name = "売掛番号"
-        Me.売掛番号.Visible = False
-        Me.売掛番号.Width = 150
-        '
-        '支払済支払先
-        '
-        Me.支払済支払先.HeaderText = "支払先"
-        Me.支払済支払先.Name = "支払済支払先"
-        Me.支払済支払先.Width = 200
-        '
-        '支払番号
-        '
-        Me.支払番号.HeaderText = "支払番号"
-        Me.支払番号.Name = "支払番号"
-        Me.支払番号.Width = 150
-        '
-        '支払日
-        '
-        Me.支払日.HeaderText = "支払日"
-        Me.支払日.Name = "支払日"
-        Me.支払日.Width = 150
-        '
-        '支払種目
-        '
-        Me.支払種目.HeaderText = "支払種目"
-        Me.支払種目.Name = "支払種目"
-        Me.支払種目.Width = 150
-        '
-        '支払済支払金額計
-        '
-        Me.支払済支払金額計.HeaderText = "支払金額計"
-        Me.支払済支払金額計.Name = "支払済支払金額計"
-        Me.支払済支払金額計.Width = 200
-        '
-        '備考
-        '
-        Me.備考.HeaderText = "備考"
-        Me.備考.Name = "備考"
-        Me.備考.Width = 200
-        '
-        '支払先
-        '
-        Me.支払先.HeaderText = "支払先"
-        Me.支払先.Name = "支払先"
-        Me.支払先.Width = 300
-        '
-        '買掛残高
-        '
-        Me.買掛残高.HeaderText = "買掛残高"
-        Me.買掛残高.Name = "買掛残高"
-        Me.買掛残高.Width = 200
         '
         'InfoNo
         '
@@ -418,11 +409,34 @@ Partial Class Payment
         Me.支払金額.Name = "支払金額"
         Me.支払金額.Width = 150
         '
+        'LblHistory
+        '
+        Me.LblHistory.AutoSize = True
+        Me.LblHistory.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblHistory.Location = New System.Drawing.Point(13, 68)
+        Me.LblHistory.Name = "LblHistory"
+        Me.LblHistory.Size = New System.Drawing.Size(80, 15)
+        Me.LblHistory.TabIndex = 304
+        Me.LblHistory.Text = "■支払済み"
+        '
+        'LblMode
+        '
+        Me.LblMode.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblMode.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblMode.Location = New System.Drawing.Point(1172, 9)
+        Me.LblMode.Name = "LblMode"
+        Me.LblMode.Size = New System.Drawing.Size(165, 22)
+        Me.LblMode.TabIndex = 321
+        Me.LblMode.Text = "支払登録モード"
+        Me.LblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'Payment
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1350, 729)
+        Me.Controls.Add(Me.LblMode)
         Me.Controls.Add(Me.BtnDelete)
         Me.Controls.Add(Me.DgvHistory)
         Me.Controls.Add(Me.DgvDeposit)
@@ -497,4 +511,5 @@ Partial Class Payment
     Friend WithEvents 買掛情報支払金額計 As DataGridViewTextBoxColumn
     Friend WithEvents 買掛情報買掛残高 As DataGridViewTextBoxColumn
     Friend WithEvents 支払金額 As DataGridViewTextBoxColumn
+    Friend WithEvents LblMode As Label
 End Class

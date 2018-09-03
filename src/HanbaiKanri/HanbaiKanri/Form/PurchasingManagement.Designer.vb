@@ -49,6 +49,7 @@ Partial Class PurchasingManagement
         Me.DtpPurchaseDate = New System.Windows.Forms.DateTimePicker()
         Me.BtnRegist = New System.Windows.Forms.Button()
         Me.TxtSuffixNo = New System.Windows.Forms.TextBox()
+        Me.LblMode = New System.Windows.Forms.Label()
         CType(Me.DgvPurchase, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvHistory, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvAdd, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -342,11 +343,24 @@ Partial Class PurchasingManagement
         Me.TxtSuffixNo.Size = New System.Drawing.Size(36, 22)
         Me.TxtSuffixNo.TabIndex = 231
         '
+        'LblMode
+        '
+        Me.LblMode.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblMode.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblMode.Location = New System.Drawing.Point(1125, 9)
+        Me.LblMode.Name = "LblMode"
+        Me.LblMode.Size = New System.Drawing.Size(213, 22)
+        Me.LblMode.TabIndex = 303
+        Me.LblMode.Text = "モード"
+        Me.LblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'PurchasingManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1350, 729)
+        Me.Controls.Add(Me.LblMode)
         Me.Controls.Add(Me.TxtSuffixNo)
         Me.Controls.Add(Me.BtnRegist)
         Me.Controls.Add(Me.DtpPurchaseDate)
@@ -411,4 +425,5 @@ Partial Class PurchasingManagement
     Friend WithEvents DtpPurchaseDate As DateTimePicker
     Friend WithEvents BtnRegist As Button
     Friend WithEvents TxtSuffixNo As TextBox
+    Friend WithEvents LblMode As Label
 End Class

@@ -33,14 +33,15 @@ Partial Class PaymentList
         Me.LblConditions = New System.Windows.Forms.Label()
         Me.TxtCustomerName = New System.Windows.Forms.TextBox()
         Me.DgvSupplier = New System.Windows.Forms.DataGridView()
-        Me.BtnPayment = New System.Windows.Forms.Button()
-        Me.btnBack = New System.Windows.Forms.Button()
         Me.仕入先名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.仕入先コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.仕入金額計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.買掛金額計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.支払残高 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.会社コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.BtnPayment = New System.Windows.Forms.Button()
+        Me.btnBack = New System.Windows.Forms.Button()
+        Me.LblMode = New System.Windows.Forms.Label()
         CType(Me.DgvSupplier, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -161,24 +162,6 @@ Partial Class PaymentList
         Me.DgvSupplier.Size = New System.Drawing.Size(1326, 513)
         Me.DgvSupplier.TabIndex = 58
         '
-        'BtnPayment
-        '
-        Me.BtnPayment.Location = New System.Drawing.Point(1004, 680)
-        Me.BtnPayment.Name = "BtnPayment"
-        Me.BtnPayment.Size = New System.Drawing.Size(165, 40)
-        Me.BtnPayment.TabIndex = 59
-        Me.BtnPayment.Text = "支払入力"
-        Me.BtnPayment.UseVisualStyleBackColor = True
-        '
-        'btnBack
-        '
-        Me.btnBack.Location = New System.Drawing.Point(1175, 680)
-        Me.btnBack.Name = "btnBack"
-        Me.btnBack.Size = New System.Drawing.Size(165, 40)
-        Me.btnBack.TabIndex = 60
-        Me.btnBack.Text = "戻る"
-        Me.btnBack.UseVisualStyleBackColor = True
-        '
         '仕入先名
         '
         Me.仕入先名.HeaderText = "仕入先名"
@@ -222,11 +205,42 @@ Partial Class PaymentList
         Me.会社コード.ReadOnly = True
         Me.会社コード.Visible = False
         '
+        'BtnPayment
+        '
+        Me.BtnPayment.Location = New System.Drawing.Point(1004, 680)
+        Me.BtnPayment.Name = "BtnPayment"
+        Me.BtnPayment.Size = New System.Drawing.Size(165, 40)
+        Me.BtnPayment.TabIndex = 59
+        Me.BtnPayment.Text = "支払入力"
+        Me.BtnPayment.UseVisualStyleBackColor = True
+        '
+        'btnBack
+        '
+        Me.btnBack.Location = New System.Drawing.Point(1175, 680)
+        Me.btnBack.Name = "btnBack"
+        Me.btnBack.Size = New System.Drawing.Size(165, 40)
+        Me.btnBack.TabIndex = 60
+        Me.btnBack.Text = "戻る"
+        Me.btnBack.UseVisualStyleBackColor = True
+        '
+        'LblMode
+        '
+        Me.LblMode.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblMode.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblMode.Location = New System.Drawing.Point(1175, 9)
+        Me.LblMode.Name = "LblMode"
+        Me.LblMode.Size = New System.Drawing.Size(165, 22)
+        Me.LblMode.TabIndex = 306
+        Me.LblMode.Text = "支払登録モード"
+        Me.LblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'PaymentList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1350, 729)
+        Me.Controls.Add(Me.LblMode)
         Me.Controls.Add(Me.DgvSupplier)
         Me.Controls.Add(Me.BtnSerach)
         Me.Controls.Add(Me.Label4)
@@ -267,4 +281,5 @@ Partial Class PaymentList
     Friend WithEvents 買掛金額計 As DataGridViewTextBoxColumn
     Friend WithEvents 支払残高 As DataGridViewTextBoxColumn
     Friend WithEvents 会社コード As DataGridViewTextBoxColumn
+    Friend WithEvents LblMode As Label
 End Class

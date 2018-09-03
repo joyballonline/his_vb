@@ -205,9 +205,11 @@ Public Class PurchaseList
     End Sub
     Private Sub MstHanyoue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If _status = "VIEW" Then
+            LblMode.Text = "参照モード"
             BtnPurchaseView.Visible = True
             BtnPurchaseView.Location = New Point(997, 677)
         ElseIf _status = "CANCEL" Then
+            LblMode.Text = "取消モード"
             BtnPurchaseCancel.Visible = True
             BtnPurchaseCancel.Location = New Point(997, 677)
         End If

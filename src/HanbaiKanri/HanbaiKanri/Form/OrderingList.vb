@@ -269,24 +269,31 @@ Public Class OrderingList
     End Sub
     Private Sub MstHanyoue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If _status = "ORDING" Then
+            LblMode.Text = "仕入入力モード"
             BtnOrding.Visible = True
             BtnOrding.Location = New Point(997, 677)
         ElseIf _status = "RECEIPT" Then
+            LblMode.Text = "入庫入力モード"
             BtnReceipt.Visible = True
             BtnReceipt.Location = New Point(997, 677)
         ElseIf _status = "EDIT" Then
+            LblMode.Text = "編集モード"
             BtnPurchaseEdit.Visible = True
             BtnPurchaseEdit.Location = New Point(997, 677)
         ElseIf _status = "VIEW" Then
+            LblMode.Text = "参照モード"
             BtnPurchaseView.Visible = True
             BtnPurchaseView.Location = New Point(997, 677)
         ElseIf _status = "CANCEL" Then
+            LblMode.Text = "取消モード"
             BtnPurchaseCancel.Visible = True
             BtnPurchaseCancel.Location = New Point(997, 677)
         ElseIf _status = "CLONE" Then
+            LblMode.Text = "新規複写モード"
             BtnPurchaseClone.Visible = True
             BtnPurchaseClone.Location = New Point(997, 677)
         ElseIf _status = "AP" Then
+            LblMode.Text = "買掛入力モード"
             BtnAP.Visible = True
             BtnAP.Location = New Point(997, 677)
         End If
@@ -486,7 +493,7 @@ Public Class OrderingList
         Dim status As String = "EDIT"
 
         Dim openForm As Form = Nothing
-        openForm = New Ordering(_msgHd, _db, _langHd, No, Suffix)   '処理選択
+        openForm = New Ordering(_msgHd, _db, _langHd, No, Suffix, status)   '処理選択
         openForm.Show(Me)
     End Sub
 

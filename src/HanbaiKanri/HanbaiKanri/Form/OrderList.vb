@@ -288,24 +288,31 @@ Public Class OrderList
 
     Private Sub MstHanyoue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If OrderStatus = "SALES" Then
+            LblMode.Text = "売上入力モード"
             BtnSales.Visible = True
             BtnSales.Location = New Point(997, 677)
         ElseIf OrderStatus = "GOODS_ISSUE" Then
+            LblMode.Text = "出庫入力モード"
             BtnReceipt.Visible = True
             BtnReceipt.Location = New Point(997, 677)
         ElseIf OrderStatus = "EDIT" Then
+            LblMode.Text = "編集モード"
             BtnOrderEdit.Visible = True
             BtnOrderEdit.Location = New Point(997, 677)
         ElseIf OrderStatus = "VIEW" Then
+            LblMode.Text = "参照モード"
             BtnOrderView.Visible = True
             BtnOrderView.Location = New Point(997, 677)
         ElseIf OrderStatus = "CANCEL" Then
+            LblMode.Text = "取消モード"
             BtnOrderCancel.Visible = True
             BtnOrderCancel.Location = New Point(997, 677)
         ElseIf OrderStatus = "CLONE" Then
+            LblMode.Text = "新規複写モード"
             BtnOrderClone.Visible = True
             BtnOrderClone.Location = New Point(997, 677)
         ElseIf OrderStatus = "BILL" Then
+            LblMode.Text = "請求登録モード"
             BtnBill.Visible = True
             BtnBill.Location = New Point(997, 677)
         End If

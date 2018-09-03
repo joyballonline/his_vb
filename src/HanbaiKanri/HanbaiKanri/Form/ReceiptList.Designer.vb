@@ -51,6 +51,7 @@ Partial Class ReceiptList
         Me.BtnBack = New System.Windows.Forms.Button()
         Me.BtnReceiptCancel = New System.Windows.Forms.Button()
         Me.DgvCymnhd = New System.Windows.Forms.DataGridView()
+        Me.LblMode = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         CType(Me.DgvCymnhd, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -345,11 +346,24 @@ Partial Class ReceiptList
         Me.DgvCymnhd.Size = New System.Drawing.Size(1326, 420)
         Me.DgvCymnhd.TabIndex = 123
         '
+        'LblMode
+        '
+        Me.LblMode.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblMode.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblMode.Location = New System.Drawing.Point(1174, 9)
+        Me.LblMode.Name = "LblMode"
+        Me.LblMode.Size = New System.Drawing.Size(165, 22)
+        Me.LblMode.TabIndex = 305
+        Me.LblMode.Text = "モード"
+        Me.LblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'ReceiptList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1350, 729)
+        Me.Controls.Add(Me.LblMode)
         Me.Controls.Add(Me.ChkCancelData)
         Me.Controls.Add(Me.BtnReceiptView)
         Me.Controls.Add(Me.Panel1)
@@ -416,4 +430,5 @@ Partial Class ReceiptList
     Friend WithEvents BtnBack As Button
     Friend WithEvents BtnReceiptCancel As Button
     Friend WithEvents DgvCymnhd As DataGridView
+    Friend WithEvents LblMode As Label
 End Class

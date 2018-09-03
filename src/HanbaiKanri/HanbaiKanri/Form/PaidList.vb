@@ -171,7 +171,10 @@ Public Class PaidList
     End Sub
     Private Sub MstHanyoue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If _status = "CANCEL" Then
+            LblMode.Text = "取消モード"
             BtnCancel.Visible = True
+        Else
+            LblMode.Text = "参照モード"
         End If
 
         Dim Status As String = "EXCLUSION"

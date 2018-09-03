@@ -85,7 +85,6 @@ Public Class Payment
     End Sub
 
     Private Sub Quote_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
         Dim table As New DataTable("Table")
         table.Columns.Add("Display", GetType(String))
         table.Columns.Add("Value", GetType(Integer))

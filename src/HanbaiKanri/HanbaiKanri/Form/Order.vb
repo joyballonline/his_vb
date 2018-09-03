@@ -124,6 +124,15 @@ Public Class Order
         'DataGridView1に追加する
         DgvItemList.Columns.Insert(1, column)
 
+        If OrderStatus = "ADD" Then
+            LblMode.Text = "新規登録モード"
+        ElseIf OrderStatus = "EDIT" Then
+            LblMode.Text = "編集モード"
+        ElseIf OrderStatus = "CLONE" Then
+            LblMode.Text = "新規複写モード"
+        ElseIf OrderStatus = "VIEW" Then
+            LblMode.Text = "参照モード"
+        End If
 
         Dim reccnt As Integer = 0
         Dim dtNow As DateTime = DateTime.Now

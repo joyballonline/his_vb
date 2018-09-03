@@ -81,6 +81,7 @@ Public Class GoodsIssue
 
     Private Sub PurchaseManagement_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If _status = "VIEW" Then
+            LblMode.Text = "参照モード"
             LblCount1.Visible = False
             LblCount2.Visible = False
             LblCount3.Visible = False
@@ -104,6 +105,8 @@ Public Class GoodsIssue
             BtnRegist.Visible = False
             BtnDeliveryNote.Visible = True
             BtnDeliveryNote.Location = New Point(1002, 678)
+        Else
+            LblMode.Text = "出庫入力モード"
         End If
         Dim Sql1 As String = ""
         Dim Sql2 As String = ""

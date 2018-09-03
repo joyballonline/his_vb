@@ -75,6 +75,7 @@ Partial Class AccountsPayable
         Me.仕入数量 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.仕入単価 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.仕入金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.LblMode = New System.Windows.Forms.Label()
         CType(Me.DgvCymn, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvAdd, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvHistory, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -258,12 +259,12 @@ Partial Class AccountsPayable
         Me.DgvCymn.AllowUserToAddRows = False
         Me.DgvCymn.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvCymn.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.発注番号, Me.発注日, Me.仕入先, Me.発注金額, Me.買掛金額計, Me.買掛残高})
-        Me.DgvCymn.Location = New System.Drawing.Point(12, 19)
+        Me.DgvCymn.Location = New System.Drawing.Point(12, 9)
         Me.DgvCymn.Name = "DgvCymn"
         Me.DgvCymn.RowHeadersVisible = False
         Me.DgvCymn.RowTemplate.Height = 21
         Me.DgvCymn.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvCymn.Size = New System.Drawing.Size(1053, 120)
+        Me.DgvCymn.Size = New System.Drawing.Size(1053, 130)
         Me.DgvCymn.TabIndex = 273
         '
         '発注番号
@@ -512,11 +513,24 @@ Partial Class AccountsPayable
         Me.仕入金額.Name = "仕入金額"
         Me.仕入金額.Width = 150
         '
+        'LblMode
+        '
+        Me.LblMode.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblMode.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblMode.Location = New System.Drawing.Point(1175, 9)
+        Me.LblMode.Name = "LblMode"
+        Me.LblMode.Size = New System.Drawing.Size(164, 22)
+        Me.LblMode.TabIndex = 323
+        Me.LblMode.Text = "買掛入力モード"
+        Me.LblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'AccountsPayable
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1350, 729)
+        Me.Controls.Add(Me.LblMode)
         Me.Controls.Add(Me.BtnDelete)
         Me.Controls.Add(Me.BtnClone)
         Me.Controls.Add(Me.BtnRegist)
@@ -604,4 +618,5 @@ Partial Class AccountsPayable
     Friend WithEvents 備考2 As DataGridViewTextBoxColumn
     Friend WithEvents 買掛済み発注番号 As DataGridViewTextBoxColumn
     Friend WithEvents 買掛済み発注番号枝番 As DataGridViewTextBoxColumn
+    Friend WithEvents LblMode As Label
 End Class

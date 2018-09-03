@@ -80,6 +80,7 @@ Public Class PurchasingManagement
 
     Private Sub PurchaseManagement_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If Status = "VIEW" Then
+            LblMode.Text = "参照モード"
             LblNo1.Visible = False
             LblNo2.Visible = False
             LblNo3.Visible = False
@@ -101,6 +102,8 @@ Public Class PurchasingManagement
             DgvHistory.Size = New Point(1326, 566)
 
             BtnRegist.Visible = False
+        Else
+            LblMode.Text = "仕入入力モード"
         End If
 
         Dim Sql1 As String = ""

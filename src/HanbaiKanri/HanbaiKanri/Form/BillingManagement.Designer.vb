@@ -75,6 +75,7 @@ Partial Class BillingManagement
         Me.BtnBack = New System.Windows.Forms.Button()
         Me.BtnClone = New System.Windows.Forms.Button()
         Me.BtnDelete = New System.Windows.Forms.Button()
+        Me.LblMode = New System.Windows.Forms.Label()
         CType(Me.DgvAdd, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvHistory, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvCymndt, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -296,12 +297,12 @@ Partial Class BillingManagement
         Me.DgvCymn.AllowUserToAddRows = False
         Me.DgvCymn.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvCymn.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.受注番号, Me.受注日, Me.得意先, Me.受注金額, Me.請求金額計, Me.請求残高})
-        Me.DgvCymn.Location = New System.Drawing.Point(12, 27)
+        Me.DgvCymn.Location = New System.Drawing.Point(12, 9)
         Me.DgvCymn.Name = "DgvCymn"
         Me.DgvCymn.RowHeadersVisible = False
         Me.DgvCymn.RowTemplate.Height = 21
         Me.DgvCymn.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvCymn.Size = New System.Drawing.Size(1053, 120)
+        Me.DgvCymn.Size = New System.Drawing.Size(1053, 138)
         Me.DgvCymn.TabIndex = 8
         '
         '受注番号
@@ -512,11 +513,24 @@ Partial Class BillingManagement
         Me.BtnDelete.UseVisualStyleBackColor = True
         Me.BtnDelete.Visible = False
         '
+        'LblMode
+        '
+        Me.LblMode.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblMode.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblMode.Location = New System.Drawing.Point(1174, 9)
+        Me.LblMode.Name = "LblMode"
+        Me.LblMode.Size = New System.Drawing.Size(165, 22)
+        Me.LblMode.TabIndex = 306
+        Me.LblMode.Text = "モード"
+        Me.LblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'BillingManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1350, 729)
+        Me.Controls.Add(Me.LblMode)
         Me.Controls.Add(Me.BtnDelete)
         Me.Controls.Add(Me.BtnClone)
         Me.Controls.Add(Me.BtnRegist)
@@ -603,4 +617,5 @@ Partial Class BillingManagement
     Friend WithEvents 備考2 As DataGridViewTextBoxColumn
     Friend WithEvents 請求済み受注番号 As DataGridViewTextBoxColumn
     Friend WithEvents 請求済み受注番号枝番 As DataGridViewTextBoxColumn
+    Friend WithEvents LblMode As Label
 End Class
