@@ -1038,12 +1038,14 @@ Public Class frmC01F30_Menu
                 Me.Hide()
             Case CommonConst.MENU_H1020  '入金取消
                 Dim openForm As Form = Nothing
-                openForm = New DepositList(_msgHd, _db, _langHd)
+                Dim Status As String = "CANCEL"
+                openForm = New DepositDetailList(_msgHd, _db, _langHd, Status)
                 openForm.Show()
                 Me.Hide()
             Case CommonConst.MENU_H1030  '入金参照
                 Dim openForm As Form = Nothing
-                openForm = New DepositList(_msgHd, _db, _langHd)
+                Dim Status As String = "VIEW"
+                openForm = New DepositDetailList(_msgHd, _db, _langHd, Status)
                 openForm.Show()
                 Me.Hide()
             '-----------------------------------売掛業務（H05）

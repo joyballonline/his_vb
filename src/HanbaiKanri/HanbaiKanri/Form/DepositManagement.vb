@@ -85,7 +85,31 @@ Public Class DepositManagement
     End Sub
 
     Private Sub Quote_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'If _status = "VIEW" Then
+        '    DgvCustomer.Visible = False
+        '    DgvDeposit.Visible = False
+        '    DgvBillingInfo.Visible = False
+        '    LblDeposit.Visible = False
+        '    LblBillingInfo.Visible = False
+        '    LblNo1.Visible = False
+        '    LblNo2.Visible = False
+        '    LblNo3.Visible = False
+        '    LblDepositDate.Visible = False
+        '    LblRemarks.Visible = False
+        '    TxtCount1.Visible = False
+        '    TxtCount2.Visible = False
+        '    TxtCount3.Visible = False
+        '    TxtRemarks.Visible = False
+        '    DtpDepositDate.Visible = False
 
+        '    BtnAdd.Visible = False
+        '    BtnCal.Visible = False
+        '    BtnDelete.Visible = False
+        '    BtnRegist.Visible = False
+
+        '    DgvHistory.Location = New Point(10, 19)
+        '    DgvHistory.Location = New Size(1326, 625)
+        'End If
         Dim table As New DataTable("Table")
         table.Columns.Add("Display", GetType(String))
         table.Columns.Add("Value", GetType(Integer))
