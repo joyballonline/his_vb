@@ -526,7 +526,10 @@ Public Class BillingManagement
             Sql4 += "更新日"
 
             _db.executeDB(Sql4)
-        End If
 
+            _parentForm.Enabled = True
+            _parentForm.Show()
+            Me.Dispose()
+        End If
     End Sub
 End Class

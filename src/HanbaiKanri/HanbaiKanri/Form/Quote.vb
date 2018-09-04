@@ -1957,18 +1957,18 @@ Public Class Quote
             Dim lastRow As Integer = 12
 
             sheet.Range("B1").Value = QuoteNo & "-" & QuoteSuffix
-            sheet.Range("H1").Value = QuoteDate & "(" & RegistrationDate & ")"
-            sheet.Range("M1").Value = Expiration
+            sheet.Range("I1").Value = QuoteDate & "(" & RegistrationDate & ")"
+            sheet.Range("N1").Value = Expiration
             sheet.Range("B2").Value = CustomerName
             sheet.Range("B3").Value = PostalCode & " " & Address1
             sheet.Range("B4").Value = Address2
             sheet.Range("B5").Value = Address3
-            sheet.Range("H2").Value = Tel
-            sheet.Range("H3").Value = Fax
-            sheet.Range("H4").Value = Person
-            sheet.Range("H5").Value = Position
-            sheet.Range("M2").Value = Sales
-            sheet.Range("M3").Value = Input
+            sheet.Range("I2").Value = Tel
+            sheet.Range("I3").Value = Fax
+            sheet.Range("I4").Value = Person
+            sheet.Range("I5").Value = Position
+            sheet.Range("N2").Value = Sales
+            sheet.Range("N3").Value = Input
             sheet.Range("B6").Value = PaymentTerms
             sheet.Range("B7").Value = QuoteRemarks
             sheet.Range("L13").Value = PurchaseTotal
