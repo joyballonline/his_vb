@@ -91,7 +91,6 @@ Public Class DepositDetailList
                 ds = _db.selectDB(Sql, RS, reccnt)
                 DgvBilling.Columns.Add("入金番号", "入金番号")
                 DgvBilling.Columns.Add("入金日", "入金日")
-                DgvBilling.Columns.Add("請求先コード", "請求先名")
                 DgvBilling.Columns.Add("請求先名", "請求先名")
                 DgvBilling.Columns.Add("振込先", "振込先")
                 DgvBilling.Columns.Add("請求金額", "請求金額")
