@@ -293,6 +293,7 @@ Public Class DepositManagement
 
     Private Sub BtnAdd_Click(sender As Object, e As EventArgs) Handles BtnAdd.Click
         DgvDeposit.Rows.Add()
+        DgvDeposit.Rows(DgvDeposit.Rows.Count() - 1).Cells("入金種目").Value = 1
         '最終行のインデックスを取得
         Dim index As Integer = DgvDeposit.Rows.Count()
         '行番号の振り直し
@@ -336,7 +337,13 @@ Public Class DepositManagement
                     Total -= DgvBillingInfo.Rows(index).Cells("入金額").Value
                 ElseIf Total > 0 Then
                     DgvBillingInfo.Rows(index).Cells("入金額").Value = Total
-                    DgvBillingInfo.Rows(index).Cells("請求情報入金額計").Value = Total
+                    If DgvBillingInfo.Rows(index).Cells("請求情報請求残高").Value - Total > 0 Then
+                        DgvBillingInfo.Rows(index).Cells("請求情報入金額計").Value = DgvBillingInfo.Rows(index).Cells("請求情報入金額計").Value + DgvBillingInfo.Rows(index).Cells("入金額").Value
+                    ElseIf DgvBillingInfo.Rows(index).Cells("請求情報請求残高").Value - Total = 0 Then
+                        DgvBillingInfo.Rows(index).Cells("請求情報入金額計").Value = DgvBillingInfo.Rows(index).Cells("請求情報入金額計").Value + DgvBillingInfo.Rows(index).Cells("入金額").Value
+                    Else
+                        DgvBillingInfo.Rows(index).Cells("請求情報入金額計").Value = Total
+                    End If
                     DgvBillingInfo.Rows(index).Cells("請求情報請求残高").Value = DgvBillingInfo.Rows(index).Cells("請求情報請求残高").Value - Total
                     Total -= Total
                 End If
@@ -645,7 +652,12 @@ Public Class DepositManagement
                 Sql5 += "SET "
                 Sql5 += " 入金額計"
                 Sql5 += " = '"
-                DsDeposit = DgvBillingInfo.Rows(index).Cells("入金額").Value + ds.Tables(RS).Rows(index)("入金額計")
+                If ds.Tables(RS).Rows(index)("入金額計") Is DBNull.Value Then
+                    DsDeposit = DgvBillingInfo.Rows(index).Cells("入金額").Value
+                Else
+                    DsDeposit = DgvBillingInfo.Rows(index).Cells("入金額").Value + ds.Tables(RS).Rows(index)("入金額計")
+                End If
+
                 Sql5 += DsDeposit.ToString
                 Sql5 += "', "
                 Sql5 += "売掛残高"
@@ -777,6 +789,10 @@ Public Class DepositManagement
             Sql6 += "更新日"
 
             _db.executeDB(Sql6)
+
+            _parentForm.Enabled = True
+            _parentForm.Show()
+            Me.Dispose()
         End If
     End Sub
 End Class

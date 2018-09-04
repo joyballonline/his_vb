@@ -151,7 +151,7 @@ Partial Class Payment
         Me.DgvDeposit.Name = "DgvDeposit"
         Me.DgvDeposit.RowHeadersVisible = False
         Me.DgvDeposit.RowTemplate.Height = 21
-        Me.DgvDeposit.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.DgvDeposit.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
         Me.DgvDeposit.Size = New System.Drawing.Size(1326, 160)
         Me.DgvDeposit.TabIndex = 300
         '
