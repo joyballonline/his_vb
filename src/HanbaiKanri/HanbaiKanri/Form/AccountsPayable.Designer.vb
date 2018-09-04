@@ -230,7 +230,7 @@ Partial Class AccountsPayable
         Me.LblBillingDate.Name = "LblBillingDate"
         Me.LblBillingDate.Size = New System.Drawing.Size(98, 22)
         Me.LblBillingDate.TabIndex = 282
-        Me.LblBillingDate.Text = "売掛日"
+        Me.LblBillingDate.Text = "買掛日"
         Me.LblBillingDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'LblNo2
