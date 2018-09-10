@@ -388,8 +388,7 @@ Partial Class Company
         '
         'Company
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(717, 263)
         Me.Controls.Add(Me.BtnRegistration)
         Me.Controls.Add(Me.Label4)
@@ -429,6 +428,7 @@ Partial Class Company
         Me.Controls.Add(Me.TxtCompanyShortName)
         Me.Controls.Add(Me.TxtCompanyName)
         Me.Controls.Add(Me.TxtCompanyCode)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "Company"
         Me.Text = "Company"
         Me.ResumeLayout(False)

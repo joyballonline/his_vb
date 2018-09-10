@@ -22,12 +22,12 @@ Partial Class Ordering
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LblPaymentTerms = New System.Windows.Forms.Label()
         Me.LblPosition = New System.Windows.Forms.Label()
         Me.TxtTel = New System.Windows.Forms.TextBox()
@@ -319,7 +319,7 @@ Partial Class Ordering
         Me.DgvItemList.RowHeadersVisible = False
         Me.DgvItemList.RowTemplate.Height = 21
         Me.DgvItemList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
-        Me.DgvItemList.Size = New System.Drawing.Size(1329, 353)
+        Me.DgvItemList.Size = New System.Drawing.Size(1329, 213)
         Me.DgvItemList.TabIndex = 216
         '
         'No
@@ -330,24 +330,24 @@ Partial Class Ordering
         '
         'メーカー
         '
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.メーカー.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.メーカー.DefaultCellStyle = DataGridViewCellStyle7
         Me.メーカー.HeaderText = "メーカー"
         Me.メーカー.Name = "メーカー"
         Me.メーカー.Width = 220
         '
         '品名
         '
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.品名.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.品名.DefaultCellStyle = DataGridViewCellStyle8
         Me.品名.HeaderText = "品名"
         Me.品名.Name = "品名"
         Me.品名.Width = 220
         '
         '型式
         '
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.型式.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.型式.DefaultCellStyle = DataGridViewCellStyle9
         Me.型式.HeaderText = "型式"
         Me.型式.Name = "型式"
         Me.型式.Width = 230
@@ -366,8 +366,8 @@ Partial Class Ordering
         '
         '仕入先
         '
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.仕入先.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.仕入先.DefaultCellStyle = DataGridViewCellStyle10
         Me.仕入先.HeaderText = "仕入先"
         Me.仕入先.Name = "仕入先"
         Me.仕入先.Visible = False
@@ -381,8 +381,8 @@ Partial Class Ordering
         '
         '間接費
         '
-        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.間接費.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.間接費.DefaultCellStyle = DataGridViewCellStyle11
         Me.間接費.HeaderText = "間接費"
         Me.間接費.Name = "間接費"
         Me.間接費.ReadOnly = True
@@ -390,8 +390,8 @@ Partial Class Ordering
         '
         '仕入金額
         '
-        DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.仕入金額.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.仕入金額.DefaultCellStyle = DataGridViewCellStyle12
         Me.仕入金額.HeaderText = "仕入金額"
         Me.仕入金額.Name = "仕入金額"
         Me.仕入金額.ReadOnly = True
@@ -458,7 +458,7 @@ Partial Class Ordering
         Me.TxtOrderingAmount.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.TxtOrderingAmount.Enabled = False
         Me.TxtOrderingAmount.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtOrderingAmount.Location = New System.Drawing.Point(1109, 605)
+        Me.TxtOrderingAmount.Location = New System.Drawing.Point(1109, 465)
         Me.TxtOrderingAmount.MaxLength = 10
         Me.TxtOrderingAmount.Name = "TxtOrderingAmount"
         Me.TxtOrderingAmount.ReadOnly = True
@@ -471,7 +471,7 @@ Partial Class Ordering
         Me.LblOrderAmount.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblOrderAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblOrderAmount.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblOrderAmount.Location = New System.Drawing.Point(1003, 605)
+        Me.LblOrderAmount.Location = New System.Drawing.Point(1003, 465)
         Me.LblOrderAmount.Name = "LblOrderAmount"
         Me.LblOrderAmount.Size = New System.Drawing.Size(100, 23)
         Me.LblOrderAmount.TabIndex = 227
@@ -525,7 +525,7 @@ Partial Class Ordering
         '
         'BtnBack
         '
-        Me.BtnBack.Location = New System.Drawing.Point(1175, 649)
+        Me.BtnBack.Location = New System.Drawing.Point(1175, 509)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(165, 40)
         Me.BtnBack.TabIndex = 218
@@ -548,7 +548,7 @@ Partial Class Ordering
         '
         'BtnRegistration
         '
-        Me.BtnRegistration.Location = New System.Drawing.Point(1003, 649)
+        Me.BtnRegistration.Location = New System.Drawing.Point(1003, 509)
         Me.BtnRegistration.Name = "BtnRegistration"
         Me.BtnRegistration.Size = New System.Drawing.Size(165, 40)
         Me.BtnRegistration.TabIndex = 217
@@ -674,7 +674,7 @@ Partial Class Ordering
         '
         'BtnPurchase
         '
-        Me.BtnPurchase.Location = New System.Drawing.Point(832, 649)
+        Me.BtnPurchase.Location = New System.Drawing.Point(832, 509)
         Me.BtnPurchase.Name = "BtnPurchase"
         Me.BtnPurchase.Size = New System.Drawing.Size(165, 40)
         Me.BtnPurchase.TabIndex = 241
@@ -684,7 +684,7 @@ Partial Class Ordering
         '
         'BtnClone
         '
-        Me.BtnClone.Location = New System.Drawing.Point(263, 651)
+        Me.BtnClone.Location = New System.Drawing.Point(263, 511)
         Me.BtnClone.Name = "BtnClone"
         Me.BtnClone.Size = New System.Drawing.Size(120, 40)
         Me.BtnClone.TabIndex = 296
@@ -694,7 +694,7 @@ Partial Class Ordering
         '
         'BtnDown
         '
-        Me.BtnDown.Location = New System.Drawing.Point(263, 605)
+        Me.BtnDown.Location = New System.Drawing.Point(263, 465)
         Me.BtnDown.Name = "BtnDown"
         Me.BtnDown.Size = New System.Drawing.Size(120, 40)
         Me.BtnDown.TabIndex = 297
@@ -704,7 +704,7 @@ Partial Class Ordering
         '
         'BtnUp
         '
-        Me.BtnUp.Location = New System.Drawing.Point(137, 605)
+        Me.BtnUp.Location = New System.Drawing.Point(137, 465)
         Me.BtnUp.Name = "BtnUp"
         Me.BtnUp.Size = New System.Drawing.Size(120, 40)
         Me.BtnUp.TabIndex = 298
@@ -714,7 +714,7 @@ Partial Class Ordering
         '
         'BtnInsert
         '
-        Me.BtnInsert.Location = New System.Drawing.Point(11, 605)
+        Me.BtnInsert.Location = New System.Drawing.Point(11, 465)
         Me.BtnInsert.Name = "BtnInsert"
         Me.BtnInsert.Size = New System.Drawing.Size(120, 40)
         Me.BtnInsert.TabIndex = 299
@@ -724,7 +724,7 @@ Partial Class Ordering
         '
         'BtnRowsDel
         '
-        Me.BtnRowsDel.Location = New System.Drawing.Point(134, 651)
+        Me.BtnRowsDel.Location = New System.Drawing.Point(134, 511)
         Me.BtnRowsDel.Name = "BtnRowsDel"
         Me.BtnRowsDel.Size = New System.Drawing.Size(120, 40)
         Me.BtnRowsDel.TabIndex = 300
@@ -734,7 +734,7 @@ Partial Class Ordering
         '
         'BtnRowsAdd
         '
-        Me.BtnRowsAdd.Location = New System.Drawing.Point(11, 651)
+        Me.BtnRowsAdd.Location = New System.Drawing.Point(11, 511)
         Me.BtnRowsAdd.Name = "BtnRowsAdd"
         Me.BtnRowsAdd.Size = New System.Drawing.Size(120, 40)
         Me.BtnRowsAdd.TabIndex = 301
@@ -756,9 +756,8 @@ Partial Class Ordering
         '
         'Ordering
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1350, 701)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
+        Me.ClientSize = New System.Drawing.Size(1350, 561)
         Me.Controls.Add(Me.LblMode)
         Me.Controls.Add(Me.BtnClone)
         Me.Controls.Add(Me.BtnDown)
@@ -808,6 +807,7 @@ Partial Class Ordering
         Me.Controls.Add(Me.TxtPaymentTerms)
         Me.Controls.Add(Me.LblRemarks)
         Me.Controls.Add(Me.TxtPosition)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "Ordering"
         Me.Text = "Ordering"
         CType(Me.DgvItemList, System.ComponentModel.ISupportInitialize).EndInit()

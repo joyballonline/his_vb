@@ -142,10 +142,9 @@ Partial Class Language
         Me.TxtCompanyCode.Size = New System.Drawing.Size(28, 19)
         Me.TxtCompanyCode.TabIndex = 35
         '
-        'Langage
+        'Language
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(383, 163)
         Me.Controls.Add(Me.TxtCompanyCode)
         Me.Controls.Add(Me.BtnBack)
@@ -160,7 +159,8 @@ Partial Class Language
         Me.Controls.Add(Me.TxtShortName)
         Me.Controls.Add(Me.TxtName)
         Me.Controls.Add(Me.TxtLanguage)
-        Me.Name = "Langage"
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.Name = "Language"
         Me.Text = "Langage"
         Me.ResumeLayout(False)
         Me.PerformLayout()

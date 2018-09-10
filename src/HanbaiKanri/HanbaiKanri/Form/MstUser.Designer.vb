@@ -56,7 +56,7 @@ Partial Class MstUser
         Me.Dgv_User.RowHeadersVisible = False
         Me.Dgv_User.RowTemplate.Height = 21
         Me.Dgv_User.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.Dgv_User.Size = New System.Drawing.Size(1326, 610)
+        Me.Dgv_User.Size = New System.Drawing.Size(1326, 470)
         Me.Dgv_User.TabIndex = 0
         '
         '会社コード
@@ -121,7 +121,7 @@ Partial Class MstUser
         '
         'btn_userAdd
         '
-        Me.btn_userAdd.Location = New System.Drawing.Point(831, 649)
+        Me.btn_userAdd.Location = New System.Drawing.Point(831, 509)
         Me.btn_userAdd.Name = "btn_userAdd"
         Me.btn_userAdd.Size = New System.Drawing.Size(165, 40)
         Me.btn_userAdd.TabIndex = 1
@@ -130,7 +130,7 @@ Partial Class MstUser
         '
         'btn_selectedRow
         '
-        Me.btn_selectedRow.Location = New System.Drawing.Point(1002, 649)
+        Me.btn_selectedRow.Location = New System.Drawing.Point(1002, 509)
         Me.btn_selectedRow.Name = "btn_selectedRow"
         Me.btn_selectedRow.Size = New System.Drawing.Size(165, 40)
         Me.btn_selectedRow.TabIndex = 2
@@ -139,7 +139,7 @@ Partial Class MstUser
         '
         'BtnBack
         '
-        Me.BtnBack.Location = New System.Drawing.Point(1173, 649)
+        Me.BtnBack.Location = New System.Drawing.Point(1173, 509)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(165, 40)
         Me.BtnBack.TabIndex = 3
@@ -173,9 +173,8 @@ Partial Class MstUser
         '
         'MstUser
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1350, 701)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
+        Me.ClientSize = New System.Drawing.Size(1350, 561)
         Me.Controls.Add(Me.BtnSearch)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Search)
@@ -183,6 +182,7 @@ Partial Class MstUser
         Me.Controls.Add(Me.btn_selectedRow)
         Me.Controls.Add(Me.btn_userAdd)
         Me.Controls.Add(Me.Dgv_User)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "MstUser"
         Me.Text = "MstUser"
         CType(Me.Dgv_User, System.ComponentModel.ISupportInitialize).EndInit()

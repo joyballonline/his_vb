@@ -62,7 +62,7 @@ Partial Class PaidList
         '
         'BtnCancel
         '
-        Me.BtnCancel.Location = New System.Drawing.Point(1002, 649)
+        Me.BtnCancel.Location = New System.Drawing.Point(1002, 509)
         Me.BtnCancel.Name = "BtnCancel"
         Me.BtnCancel.Size = New System.Drawing.Size(165, 40)
         Me.BtnCancel.TabIndex = 118
@@ -250,7 +250,7 @@ Partial Class PaidList
         '
         'BtnBack
         '
-        Me.BtnBack.Location = New System.Drawing.Point(1173, 649)
+        Me.BtnBack.Location = New System.Drawing.Point(1173, 509)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(165, 40)
         Me.BtnBack.TabIndex = 95
@@ -267,7 +267,7 @@ Partial Class PaidList
         Me.DgvHtyhd.RowHeadersVisible = False
         Me.DgvHtyhd.RowTemplate.Height = 21
         Me.DgvHtyhd.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvHtyhd.Size = New System.Drawing.Size(1326, 407)
+        Me.DgvHtyhd.Size = New System.Drawing.Size(1326, 267)
         Me.DgvHtyhd.TabIndex = 93
         '
         'LblMode
@@ -284,9 +284,8 @@ Partial Class PaidList
         '
         'PaidList
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1350, 701)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
+        Me.ClientSize = New System.Drawing.Size(1350, 561)
         Me.Controls.Add(Me.LblMode)
         Me.Controls.Add(Me.ChkCancelData)
         Me.Controls.Add(Me.BtnCancel)
@@ -308,6 +307,7 @@ Partial Class PaidList
         Me.Controls.Add(Me.BtnPurchaseSearch)
         Me.Controls.Add(Me.BtnBack)
         Me.Controls.Add(Me.DgvHtyhd)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "PaidList"
         Me.Text = "PaidList"
         Me.Panel1.ResumeLayout(False)

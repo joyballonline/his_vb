@@ -63,7 +63,7 @@ Partial Class MstCompany
         Me.Dgv_Company.RowHeadersVisible = False
         Me.Dgv_Company.RowTemplate.Height = 21
         Me.Dgv_Company.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.Dgv_Company.Size = New System.Drawing.Size(1326, 610)
+        Me.Dgv_Company.Size = New System.Drawing.Size(1326, 470)
         Me.Dgv_Company.TabIndex = 0
         '
         '会社コード
@@ -188,7 +188,7 @@ Partial Class MstCompany
         '
         'BtnBack
         '
-        Me.BtnBack.Location = New System.Drawing.Point(1173, 649)
+        Me.BtnBack.Location = New System.Drawing.Point(1173, 509)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(165, 40)
         Me.BtnBack.TabIndex = 6
@@ -197,7 +197,7 @@ Partial Class MstCompany
         '
         'btnCompanyAdd
         '
-        Me.btnCompanyAdd.Location = New System.Drawing.Point(831, 649)
+        Me.btnCompanyAdd.Location = New System.Drawing.Point(831, 509)
         Me.btnCompanyAdd.Name = "btnCompanyAdd"
         Me.btnCompanyAdd.Size = New System.Drawing.Size(165, 40)
         Me.btnCompanyAdd.TabIndex = 5
@@ -206,7 +206,7 @@ Partial Class MstCompany
         '
         'btnSelectCompany
         '
-        Me.btnSelectCompany.Location = New System.Drawing.Point(1002, 649)
+        Me.btnSelectCompany.Location = New System.Drawing.Point(1002, 509)
         Me.btnSelectCompany.Name = "btnSelectCompany"
         Me.btnSelectCompany.Size = New System.Drawing.Size(165, 40)
         Me.btnSelectCompany.TabIndex = 4
@@ -240,9 +240,8 @@ Partial Class MstCompany
         '
         'MstCompany
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1350, 701)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
+        Me.ClientSize = New System.Drawing.Size(1350, 561)
         Me.Controls.Add(Me.BtnSearch)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Search)
@@ -250,6 +249,7 @@ Partial Class MstCompany
         Me.Controls.Add(Me.btnCompanyAdd)
         Me.Controls.Add(Me.btnSelectCompany)
         Me.Controls.Add(Me.Dgv_Company)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "MstCompany"
         Me.Text = "MstHanyou"
         CType(Me.Dgv_Company, System.ComponentModel.ISupportInitialize).EndInit()

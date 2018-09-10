@@ -69,7 +69,7 @@ Partial Class SalesList
         '
         'BtnSalesView
         '
-        Me.BtnSalesView.Location = New System.Drawing.Point(1003, 649)
+        Me.BtnSalesView.Location = New System.Drawing.Point(1003, 509)
         Me.BtnSalesView.Name = "BtnSalesView"
         Me.BtnSalesView.Size = New System.Drawing.Size(165, 40)
         Me.BtnSalesView.TabIndex = 91
@@ -317,7 +317,7 @@ Partial Class SalesList
         '
         'BtnBack
         '
-        Me.BtnBack.Location = New System.Drawing.Point(1174, 649)
+        Me.BtnBack.Location = New System.Drawing.Point(1174, 509)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(165, 40)
         Me.BtnBack.TabIndex = 68
@@ -333,12 +333,12 @@ Partial Class SalesList
         Me.DgvCymnhd.ReadOnly = True
         Me.DgvCymnhd.RowTemplate.Height = 21
         Me.DgvCymnhd.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvCymnhd.Size = New System.Drawing.Size(1326, 407)
+        Me.DgvCymnhd.Size = New System.Drawing.Size(1326, 267)
         Me.DgvCymnhd.TabIndex = 66
         '
         'BtnSalesCancel
         '
-        Me.BtnSalesCancel.Location = New System.Drawing.Point(832, 649)
+        Me.BtnSalesCancel.Location = New System.Drawing.Point(832, 509)
         Me.BtnSalesCancel.Name = "BtnSalesCancel"
         Me.BtnSalesCancel.Size = New System.Drawing.Size(165, 40)
         Me.BtnSalesCancel.TabIndex = 67
@@ -360,9 +360,8 @@ Partial Class SalesList
         '
         'SalesList
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1350, 701)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
+        Me.ClientSize = New System.Drawing.Size(1350, 561)
         Me.Controls.Add(Me.LblMode)
         Me.Controls.Add(Me.ChkCancelData)
         Me.Controls.Add(Me.BtnSalesView)
@@ -391,6 +390,7 @@ Partial Class SalesList
         Me.Controls.Add(Me.BtnBack)
         Me.Controls.Add(Me.BtnSalesCancel)
         Me.Controls.Add(Me.DgvCymnhd)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "SalesList"
         Me.Text = "SalesList"
         Me.Panel1.ResumeLayout(False)

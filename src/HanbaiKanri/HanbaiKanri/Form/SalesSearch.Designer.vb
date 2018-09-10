@@ -162,8 +162,7 @@ Partial Class SalesSearch
         '
         'SalesSearch
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 287)
         Me.Controls.Add(Me.BtnSearch)
         Me.Controls.Add(Me.Search)
@@ -171,6 +170,7 @@ Partial Class SalesSearch
         Me.Controls.Add(Me.BtnSelect)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.DgvUser)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "SalesSearch"
         Me.Text = "SalesSearch"
         CType(Me.DgvUser, System.ComponentModel.ISupportInitialize).EndInit()

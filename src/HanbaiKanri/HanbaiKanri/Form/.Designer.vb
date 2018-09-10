@@ -76,14 +76,14 @@ Partial Class MakerSearch
         '
         'MakerSearch
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(636, 448)
         Me.Controls.Add(Me.BtnBack)
         Me.Controls.Add(Me.LbModel)
         Me.Controls.Add(Me.LbItem)
         Me.Controls.Add(Me.LbMaker)
         Me.Controls.Add(Me.BtnSelect)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "MakerSearch"
         Me.Text = "MakerSearch"
         Me.ResumeLayout(False)

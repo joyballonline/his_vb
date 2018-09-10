@@ -398,8 +398,7 @@ Partial Class Supplier
         '
         'Supplier
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(714, 286)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.TxtPosition)
@@ -442,6 +441,7 @@ Partial Class Supplier
         Me.Controls.Add(Me.TxtSupplierName)
         Me.Controls.Add(Me.TxtSupplierCode)
         Me.Controls.Add(Me.TxtCompanyCode)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "Supplier"
         Me.Text = "SupplierAdd"
         Me.ResumeLayout(False)

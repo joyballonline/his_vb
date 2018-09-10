@@ -127,8 +127,7 @@ Partial Class frmC01F20_ChangePasswd
         '
         'frmC01F20_ChangePasswd
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(456, 276)
         Me.ControlBox = False
         Me.Controls.Add(Me.lblTanto)

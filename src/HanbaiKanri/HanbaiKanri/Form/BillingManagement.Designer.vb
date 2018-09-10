@@ -86,7 +86,7 @@ Partial Class BillingManagement
         '
         Me.LblAdd.AutoSize = True
         Me.LblAdd.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblAdd.Location = New System.Drawing.Point(13, 465)
+        Me.LblAdd.Location = New System.Drawing.Point(11, 387)
         Me.LblAdd.Name = "LblAdd"
         Me.LblAdd.Size = New System.Drawing.Size(82, 15)
         Me.LblAdd.TabIndex = 14
@@ -96,7 +96,7 @@ Partial Class BillingManagement
         '
         Me.LblHistory.AutoSize = True
         Me.LblHistory.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblHistory.Location = New System.Drawing.Point(14, 311)
+        Me.LblHistory.Location = New System.Drawing.Point(12, 253)
         Me.LblHistory.Name = "LblHistory"
         Me.LblHistory.Size = New System.Drawing.Size(80, 15)
         Me.LblHistory.TabIndex = 13
@@ -106,7 +106,7 @@ Partial Class BillingManagement
         '
         Me.LblCymndt.AutoSize = True
         Me.LblCymndt.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblCymndt.Location = New System.Drawing.Point(14, 156)
+        Me.LblCymndt.Location = New System.Drawing.Point(12, 118)
         Me.LblCymndt.Name = "LblCymndt"
         Me.LblCymndt.Size = New System.Drawing.Size(82, 15)
         Me.LblCymndt.TabIndex = 12
@@ -117,7 +117,7 @@ Partial Class BillingManagement
         Me.DgvAdd.AllowUserToAddRows = False
         Me.DgvAdd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvAdd.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.AddNo, Me.今回請求先, Me.今回請求金額計, Me.今回備考1, Me.今回備考2})
-        Me.DgvAdd.Location = New System.Drawing.Point(12, 489)
+        Me.DgvAdd.Location = New System.Drawing.Point(10, 411)
         Me.DgvAdd.Name = "DgvAdd"
         Me.DgvAdd.RowHeadersVisible = False
         Me.DgvAdd.RowTemplate.Height = 21
@@ -159,12 +159,12 @@ Partial Class BillingManagement
         Me.DgvHistory.AllowUserToAddRows = False
         Me.DgvHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvHistory.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.No, Me.請求番号, Me.請求日, Me.請求区分, Me.請求先, Me.請求金額, Me.備考1, Me.備考2, Me.請求済み受注番号, Me.請求済み受注番号枝番})
-        Me.DgvHistory.Location = New System.Drawing.Point(12, 335)
+        Me.DgvHistory.Location = New System.Drawing.Point(10, 277)
         Me.DgvHistory.Name = "DgvHistory"
         Me.DgvHistory.RowHeadersVisible = False
         Me.DgvHistory.RowTemplate.Height = 21
         Me.DgvHistory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvHistory.Size = New System.Drawing.Size(1326, 120)
+        Me.DgvHistory.Size = New System.Drawing.Size(1326, 100)
         Me.DgvHistory.TabIndex = 10
         '
         'No
@@ -231,12 +231,12 @@ Partial Class BillingManagement
         Me.DgvCymndt.AllowUserToAddRows = False
         Me.DgvCymndt.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvCymndt.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.明細, Me.メーカー, Me.品名, Me.型式, Me.受注個数, Me.単位, Me.売上数量, Me.売上単価, Me.売上金額})
-        Me.DgvCymndt.Location = New System.Drawing.Point(12, 181)
+        Me.DgvCymndt.Location = New System.Drawing.Point(10, 143)
         Me.DgvCymndt.Name = "DgvCymndt"
         Me.DgvCymndt.RowHeadersVisible = False
         Me.DgvCymndt.RowTemplate.Height = 21
         Me.DgvCymndt.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvCymndt.Size = New System.Drawing.Size(1326, 120)
+        Me.DgvCymndt.Size = New System.Drawing.Size(1326, 100)
         Me.DgvCymndt.TabIndex = 9
         '
         '明細
@@ -302,7 +302,7 @@ Partial Class BillingManagement
         Me.DgvCymn.RowHeadersVisible = False
         Me.DgvCymn.RowTemplate.Height = 21
         Me.DgvCymn.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvCymn.Size = New System.Drawing.Size(1053, 138)
+        Me.DgvCymn.Size = New System.Drawing.Size(1053, 100)
         Me.DgvCymn.TabIndex = 8
         '
         '受注番号
@@ -347,7 +347,7 @@ Partial Class BillingManagement
         Me.DtpBillingDate.CustomFormat = "yyyy/MM/dd"
         Me.DtpBillingDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpBillingDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DtpBillingDate.Location = New System.Drawing.Point(291, 461)
+        Me.DtpBillingDate.Location = New System.Drawing.Point(289, 383)
         Me.DtpBillingDate.Name = "DtpBillingDate"
         Me.DtpBillingDate.Size = New System.Drawing.Size(148, 22)
         Me.DtpBillingDate.TabIndex = 262
@@ -359,7 +359,7 @@ Partial Class BillingManagement
         Me.LblRemarks1.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblRemarks1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblRemarks1.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblRemarks1.Location = New System.Drawing.Point(518, 535)
+        Me.LblRemarks1.Location = New System.Drawing.Point(516, 457)
         Me.LblRemarks1.Name = "LblRemarks1"
         Me.LblRemarks1.Size = New System.Drawing.Size(170, 22)
         Me.LblRemarks1.TabIndex = 261
@@ -370,7 +370,7 @@ Partial Class BillingManagement
         'TxtRemarks1
         '
         Me.TxtRemarks1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtRemarks1.Location = New System.Drawing.Point(694, 535)
+        Me.TxtRemarks1.Location = New System.Drawing.Point(692, 457)
         Me.TxtRemarks1.Name = "TxtRemarks1"
         Me.TxtRemarks1.Size = New System.Drawing.Size(644, 22)
         Me.TxtRemarks1.TabIndex = 260
@@ -381,7 +381,7 @@ Partial Class BillingManagement
         Me.LblBillingDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblBillingDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblBillingDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblBillingDate.Location = New System.Drawing.Point(187, 461)
+        Me.LblBillingDate.Location = New System.Drawing.Point(185, 383)
         Me.LblBillingDate.Name = "LblBillingDate"
         Me.LblBillingDate.Size = New System.Drawing.Size(98, 22)
         Me.LblBillingDate.TabIndex = 259
@@ -392,7 +392,7 @@ Partial Class BillingManagement
         '
         Me.LblNo2.BackColor = System.Drawing.Color.Transparent
         Me.LblNo2.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblNo2.Location = New System.Drawing.Point(1316, 307)
+        Me.LblNo2.Location = New System.Drawing.Point(1314, 249)
         Me.LblNo2.Name = "LblNo2"
         Me.LblNo2.Size = New System.Drawing.Size(22, 22)
         Me.LblNo2.TabIndex = 258
@@ -404,7 +404,7 @@ Partial Class BillingManagement
         Me.TxtCount2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.TxtCount2.Enabled = False
         Me.TxtCount2.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtCount2.Location = New System.Drawing.Point(1272, 307)
+        Me.TxtCount2.Location = New System.Drawing.Point(1270, 249)
         Me.TxtCount2.Name = "TxtCount2"
         Me.TxtCount2.Size = New System.Drawing.Size(38, 22)
         Me.TxtCount2.TabIndex = 257
@@ -414,7 +414,7 @@ Partial Class BillingManagement
         Me.LblRemarks2.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblRemarks2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblRemarks2.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblRemarks2.Location = New System.Drawing.Point(518, 560)
+        Me.LblRemarks2.Location = New System.Drawing.Point(516, 482)
         Me.LblRemarks2.Name = "LblRemarks2"
         Me.LblRemarks2.Size = New System.Drawing.Size(170, 22)
         Me.LblRemarks2.TabIndex = 265
@@ -425,7 +425,7 @@ Partial Class BillingManagement
         'TxtRemarks2
         '
         Me.TxtRemarks2.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtRemarks2.Location = New System.Drawing.Point(694, 560)
+        Me.TxtRemarks2.Location = New System.Drawing.Point(692, 482)
         Me.TxtRemarks2.Name = "TxtRemarks2"
         Me.TxtRemarks2.Size = New System.Drawing.Size(644, 22)
         Me.TxtRemarks2.TabIndex = 264
@@ -436,7 +436,7 @@ Partial Class BillingManagement
         Me.TxtCount3.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.TxtCount3.Enabled = False
         Me.TxtCount3.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtCount3.Location = New System.Drawing.Point(1272, 461)
+        Me.TxtCount3.Location = New System.Drawing.Point(1270, 383)
         Me.TxtCount3.Name = "TxtCount3"
         Me.TxtCount3.Size = New System.Drawing.Size(38, 22)
         Me.TxtCount3.TabIndex = 263
@@ -446,7 +446,7 @@ Partial Class BillingManagement
         '
         Me.LblNo3.BackColor = System.Drawing.Color.Transparent
         Me.LblNo3.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblNo3.Location = New System.Drawing.Point(1316, 461)
+        Me.LblNo3.Location = New System.Drawing.Point(1314, 383)
         Me.LblNo3.Name = "LblNo3"
         Me.LblNo3.Size = New System.Drawing.Size(22, 22)
         Me.LblNo3.TabIndex = 266
@@ -458,7 +458,7 @@ Partial Class BillingManagement
         '
         Me.LblNo1.BackColor = System.Drawing.Color.Transparent
         Me.LblNo1.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblNo1.Location = New System.Drawing.Point(1316, 153)
+        Me.LblNo1.Location = New System.Drawing.Point(1314, 115)
         Me.LblNo1.Name = "LblNo1"
         Me.LblNo1.Size = New System.Drawing.Size(22, 22)
         Me.LblNo1.TabIndex = 268
@@ -470,14 +470,14 @@ Partial Class BillingManagement
         Me.TxtCount1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.TxtCount1.Enabled = False
         Me.TxtCount1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtCount1.Location = New System.Drawing.Point(1272, 153)
+        Me.TxtCount1.Location = New System.Drawing.Point(1270, 115)
         Me.TxtCount1.Name = "TxtCount1"
         Me.TxtCount1.Size = New System.Drawing.Size(38, 22)
         Me.TxtCount1.TabIndex = 267
         '
         'BtnRegist
         '
-        Me.BtnRegist.Location = New System.Drawing.Point(1003, 649)
+        Me.BtnRegist.Location = New System.Drawing.Point(1000, 509)
         Me.BtnRegist.Name = "BtnRegist"
         Me.BtnRegist.Size = New System.Drawing.Size(165, 40)
         Me.BtnRegist.TabIndex = 270
@@ -486,7 +486,7 @@ Partial Class BillingManagement
         '
         'BtnBack
         '
-        Me.BtnBack.Location = New System.Drawing.Point(1174, 649)
+        Me.BtnBack.Location = New System.Drawing.Point(1171, 509)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(165, 40)
         Me.BtnBack.TabIndex = 269
@@ -495,7 +495,7 @@ Partial Class BillingManagement
         '
         'BtnClone
         '
-        Me.BtnClone.Location = New System.Drawing.Point(12, 538)
+        Me.BtnClone.Location = New System.Drawing.Point(10, 460)
         Me.BtnClone.Name = "BtnClone"
         Me.BtnClone.Size = New System.Drawing.Size(94, 20)
         Me.BtnClone.TabIndex = 271
@@ -505,7 +505,7 @@ Partial Class BillingManagement
         '
         'BtnDelete
         '
-        Me.BtnDelete.Location = New System.Drawing.Point(112, 538)
+        Me.BtnDelete.Location = New System.Drawing.Point(110, 460)
         Me.BtnDelete.Name = "BtnDelete"
         Me.BtnDelete.Size = New System.Drawing.Size(94, 20)
         Me.BtnDelete.TabIndex = 272
@@ -527,9 +527,8 @@ Partial Class BillingManagement
         '
         'BillingManagement
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1350, 701)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
+        Me.ClientSize = New System.Drawing.Size(1350, 561)
         Me.Controls.Add(Me.LblMode)
         Me.Controls.Add(Me.BtnDelete)
         Me.Controls.Add(Me.BtnClone)
@@ -554,6 +553,7 @@ Partial Class BillingManagement
         Me.Controls.Add(Me.DgvHistory)
         Me.Controls.Add(Me.DgvCymndt)
         Me.Controls.Add(Me.DgvCymn)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "BillingManagement"
         Me.Text = "BillingManagement"
         CType(Me.DgvAdd, System.ComponentModel.ISupportInitialize).EndInit()

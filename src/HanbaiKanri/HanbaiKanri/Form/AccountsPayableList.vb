@@ -193,7 +193,7 @@ Public Class AccountsPayableList
         ElseIf _status = "CANCEL" Then
             LblMode.Text = "取消モード"
             BtnAPCancel.Visible = True
-            BtnAPCancel.Location = New Point(997, 649)
+            BtnAPCancel.Location = New Point(997, 509)
         End If
 
         Dim Status As String = "EXCLUSION"

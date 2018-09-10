@@ -167,8 +167,7 @@ Partial Class frmC01F10_Login
         '
         'frmC01F10_Login
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(490, 262)
         Me.ControlBox = False
         Me.Controls.Add(Me.lblBackup)

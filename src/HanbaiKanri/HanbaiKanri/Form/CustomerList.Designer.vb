@@ -59,7 +59,7 @@ Partial Class CustomerList
         '
         'btnBack
         '
-        Me.btnBack.Location = New System.Drawing.Point(1173, 649)
+        Me.btnBack.Location = New System.Drawing.Point(1173, 509)
         Me.btnBack.Name = "btnBack"
         Me.btnBack.Size = New System.Drawing.Size(165, 40)
         Me.btnBack.TabIndex = 16
@@ -68,7 +68,7 @@ Partial Class CustomerList
         '
         'BtnBillingCalculation
         '
-        Me.BtnBillingCalculation.Location = New System.Drawing.Point(1002, 649)
+        Me.BtnBillingCalculation.Location = New System.Drawing.Point(1002, 509)
         Me.BtnBillingCalculation.Name = "BtnBillingCalculation"
         Me.BtnBillingCalculation.Size = New System.Drawing.Size(165, 40)
         Me.BtnBillingCalculation.TabIndex = 14
@@ -100,7 +100,7 @@ Partial Class CustomerList
         Me.DgvCustomer.RowHeadersVisible = False
         Me.DgvCustomer.RowTemplate.Height = 21
         Me.DgvCustomer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvCustomer.Size = New System.Drawing.Size(1326, 606)
+        Me.DgvCustomer.Size = New System.Drawing.Size(1326, 466)
         Me.DgvCustomer.TabIndex = 13
         '
         '得意先名
@@ -163,15 +163,15 @@ Partial Class CustomerList
         '
         'CustomerList
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1350, 701)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
+        Me.ClientSize = New System.Drawing.Size(1350, 561)
         Me.Controls.Add(Me.DgvCustomer)
         Me.Controls.Add(Me.BtnSearch)
         Me.Controls.Add(Me.Search)
         Me.Controls.Add(Me.btnBack)
         Me.Controls.Add(Me.BtnBillingCalculation)
         Me.Controls.Add(Me.Label1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "CustomerList"
         Me.Text = "CustomerList"
         CType(Me.DgvCustomer, System.ComponentModel.ISupportInitialize).EndInit()

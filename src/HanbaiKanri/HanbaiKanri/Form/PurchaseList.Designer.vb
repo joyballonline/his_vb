@@ -58,7 +58,7 @@ Partial Class PurchaseList
         '
         'BtnPurchaseCancel
         '
-        Me.BtnPurchaseCancel.Location = New System.Drawing.Point(832, 649)
+        Me.BtnPurchaseCancel.Location = New System.Drawing.Point(832, 509)
         Me.BtnPurchaseCancel.Name = "BtnPurchaseCancel"
         Me.BtnPurchaseCancel.Size = New System.Drawing.Size(165, 40)
         Me.BtnPurchaseCancel.TabIndex = 122
@@ -79,7 +79,7 @@ Partial Class PurchaseList
         '
         'BtnPurchaseView
         '
-        Me.BtnPurchaseView.Location = New System.Drawing.Point(1003, 649)
+        Me.BtnPurchaseView.Location = New System.Drawing.Point(1003, 509)
         Me.BtnPurchaseView.Name = "BtnPurchaseView"
         Me.BtnPurchaseView.Size = New System.Drawing.Size(165, 40)
         Me.BtnPurchaseView.TabIndex = 117
@@ -327,7 +327,7 @@ Partial Class PurchaseList
         '
         'BtnBack
         '
-        Me.BtnBack.Location = New System.Drawing.Point(1174, 649)
+        Me.BtnBack.Location = New System.Drawing.Point(1174, 509)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(165, 40)
         Me.BtnBack.TabIndex = 94
@@ -344,7 +344,7 @@ Partial Class PurchaseList
         Me.DgvHtyhd.RowHeadersVisible = False
         Me.DgvHtyhd.RowTemplate.Height = 21
         Me.DgvHtyhd.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvHtyhd.Size = New System.Drawing.Size(1326, 407)
+        Me.DgvHtyhd.Size = New System.Drawing.Size(1326, 267)
         Me.DgvHtyhd.TabIndex = 92
         '
         'LblMode
@@ -361,9 +361,8 @@ Partial Class PurchaseList
         '
         'PurchaseList
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1350, 701)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
+        Me.ClientSize = New System.Drawing.Size(1350, 561)
         Me.Controls.Add(Me.LblMode)
         Me.Controls.Add(Me.BtnPurchaseCancel)
         Me.Controls.Add(Me.ChkCancelData)
@@ -392,6 +391,7 @@ Partial Class PurchaseList
         Me.Controls.Add(Me.BtnPurchaseSearch)
         Me.Controls.Add(Me.BtnBack)
         Me.Controls.Add(Me.DgvHtyhd)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "PurchaseList"
         Me.Text = "PurchaseList"
         Me.Panel1.ResumeLayout(False)

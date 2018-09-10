@@ -63,7 +63,7 @@ Partial Class OrderList
         '
         'BtnOrderView
         '
-        Me.BtnOrderView.Location = New System.Drawing.Point(1003, 649)
+        Me.BtnOrderView.Location = New System.Drawing.Point(1003, 509)
         Me.BtnOrderView.Name = "BtnOrderView"
         Me.BtnOrderView.Size = New System.Drawing.Size(165, 40)
         Me.BtnOrderView.TabIndex = 60
@@ -311,7 +311,7 @@ Partial Class OrderList
         '
         'BtnBack
         '
-        Me.BtnBack.Location = New System.Drawing.Point(1174, 649)
+        Me.BtnBack.Location = New System.Drawing.Point(1174, 509)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(165, 40)
         Me.BtnBack.TabIndex = 37
@@ -320,7 +320,7 @@ Partial Class OrderList
         '
         'BtnOrderEdit
         '
-        Me.BtnOrderEdit.Location = New System.Drawing.Point(832, 649)
+        Me.BtnOrderEdit.Location = New System.Drawing.Point(832, 509)
         Me.BtnOrderEdit.Name = "BtnOrderEdit"
         Me.BtnOrderEdit.Size = New System.Drawing.Size(165, 40)
         Me.BtnOrderEdit.TabIndex = 35
@@ -338,12 +338,12 @@ Partial Class OrderList
         Me.DgvCymnhd.RowHeadersVisible = False
         Me.DgvCymnhd.RowTemplate.Height = 21
         Me.DgvCymnhd.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvCymnhd.Size = New System.Drawing.Size(1326, 405)
+        Me.DgvCymnhd.Size = New System.Drawing.Size(1326, 265)
         Me.DgvCymnhd.TabIndex = 33
         '
         'BtnSales
         '
-        Me.BtnSales.Location = New System.Drawing.Point(490, 649)
+        Me.BtnSales.Location = New System.Drawing.Point(490, 509)
         Me.BtnSales.Name = "BtnSales"
         Me.BtnSales.Size = New System.Drawing.Size(165, 40)
         Me.BtnSales.TabIndex = 61
@@ -353,7 +353,7 @@ Partial Class OrderList
         '
         'BtnReceipt
         '
-        Me.BtnReceipt.Location = New System.Drawing.Point(661, 649)
+        Me.BtnReceipt.Location = New System.Drawing.Point(661, 509)
         Me.BtnReceipt.Name = "BtnReceipt"
         Me.BtnReceipt.Size = New System.Drawing.Size(165, 40)
         Me.BtnReceipt.TabIndex = 62
@@ -363,7 +363,7 @@ Partial Class OrderList
         '
         'BtnOrderCancel
         '
-        Me.BtnOrderCancel.Location = New System.Drawing.Point(319, 649)
+        Me.BtnOrderCancel.Location = New System.Drawing.Point(319, 509)
         Me.BtnOrderCancel.Name = "BtnOrderCancel"
         Me.BtnOrderCancel.Size = New System.Drawing.Size(165, 40)
         Me.BtnOrderCancel.TabIndex = 63
@@ -384,7 +384,7 @@ Partial Class OrderList
         '
         'BtnOrderClone
         '
-        Me.BtnOrderClone.Location = New System.Drawing.Point(148, 649)
+        Me.BtnOrderClone.Location = New System.Drawing.Point(148, 509)
         Me.BtnOrderClone.Name = "BtnOrderClone"
         Me.BtnOrderClone.Size = New System.Drawing.Size(165, 40)
         Me.BtnOrderClone.TabIndex = 65
@@ -394,7 +394,7 @@ Partial Class OrderList
         '
         'BtnBill
         '
-        Me.BtnBill.Location = New System.Drawing.Point(13, 649)
+        Me.BtnBill.Location = New System.Drawing.Point(13, 509)
         Me.BtnBill.Name = "BtnBill"
         Me.BtnBill.Size = New System.Drawing.Size(165, 40)
         Me.BtnBill.TabIndex = 66
@@ -416,9 +416,8 @@ Partial Class OrderList
         '
         'OrderList
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1350, 701)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
+        Me.ClientSize = New System.Drawing.Size(1350, 561)
         Me.Controls.Add(Me.LblMode)
         Me.Controls.Add(Me.BtnBill)
         Me.Controls.Add(Me.BtnOrderClone)
@@ -452,6 +451,7 @@ Partial Class OrderList
         Me.Controls.Add(Me.BtnBack)
         Me.Controls.Add(Me.BtnOrderEdit)
         Me.Controls.Add(Me.DgvCymnhd)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "OrderList"
         Me.Text = "OrderList"
         Me.Panel1.ResumeLayout(False)

@@ -308,8 +308,7 @@ Partial Class Customer
         '
         'Customer
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(729, 216)
         Me.Controls.Add(Me.TxtCompanyCode)
         Me.Controls.Add(Me.Label15)
@@ -342,6 +341,7 @@ Partial Class Customer
         Me.Controls.Add(Me.TxtCustomerShortName)
         Me.Controls.Add(Me.TxtCustomerName)
         Me.Controls.Add(Me.TxtCustomerCode)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "Customer"
         Me.Text = "CustomerAdd"
         Me.ResumeLayout(False)

@@ -243,8 +243,7 @@ Partial Class SupplierSearch
         '
         'SupplierSearch
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 287)
         Me.Controls.Add(Me.BtnSearch)
         Me.Controls.Add(Me.Search)
@@ -252,6 +251,7 @@ Partial Class SupplierSearch
         Me.Controls.Add(Me.btnSupplierSelect)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Dgv_Supplier)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "SupplierSearch"
         Me.Text = "SupplierSearch"
         CType(Me.Dgv_Supplier, System.ComponentModel.ISupportInitialize).EndInit()

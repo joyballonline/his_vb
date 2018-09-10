@@ -65,7 +65,7 @@ Partial Class MstHanyou
         Me.Dgv_Hanyo.RowHeadersVisible = False
         Me.Dgv_Hanyo.RowTemplate.Height = 21
         Me.Dgv_Hanyo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.Dgv_Hanyo.Size = New System.Drawing.Size(1326, 612)
+        Me.Dgv_Hanyo.Size = New System.Drawing.Size(1326, 472)
         Me.Dgv_Hanyo.TabIndex = 0
         '
         '会社コード
@@ -184,7 +184,7 @@ Partial Class MstHanyou
         '
         'BtnSelect
         '
-        Me.BtnSelect.Location = New System.Drawing.Point(1002, 649)
+        Me.BtnSelect.Location = New System.Drawing.Point(1002, 509)
         Me.BtnSelect.Name = "BtnSelect"
         Me.BtnSelect.Size = New System.Drawing.Size(165, 40)
         Me.BtnSelect.TabIndex = 1
@@ -193,7 +193,7 @@ Partial Class MstHanyou
         '
         'BtnAdd
         '
-        Me.BtnAdd.Location = New System.Drawing.Point(831, 649)
+        Me.BtnAdd.Location = New System.Drawing.Point(831, 509)
         Me.BtnAdd.Name = "BtnAdd"
         Me.BtnAdd.Size = New System.Drawing.Size(165, 40)
         Me.BtnAdd.TabIndex = 2
@@ -202,7 +202,7 @@ Partial Class MstHanyou
         '
         'BtnBack
         '
-        Me.BtnBack.Location = New System.Drawing.Point(1173, 649)
+        Me.BtnBack.Location = New System.Drawing.Point(1173, 509)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(165, 40)
         Me.BtnBack.TabIndex = 3
@@ -236,9 +236,8 @@ Partial Class MstHanyou
         '
         'MstHanyou
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1350, 701)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
+        Me.ClientSize = New System.Drawing.Size(1350, 561)
         Me.Controls.Add(Me.BtnSearch)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Search)
@@ -246,6 +245,7 @@ Partial Class MstHanyou
         Me.Controls.Add(Me.BtnAdd)
         Me.Controls.Add(Me.BtnSelect)
         Me.Controls.Add(Me.Dgv_Hanyo)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "MstHanyou"
         Me.Text = "MstHanyou"
         CType(Me.Dgv_Hanyo, System.ComponentModel.ISupportInitialize).EndInit()

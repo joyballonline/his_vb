@@ -80,35 +80,35 @@ Public Class QuoteList
         If _status = "EDIT" Then
             LblMode.Text = "編集モード"
             BtnQuoteEdit.Visible = True
-            BtnQuoteEdit.Location = New Point(997, 649)
+            BtnQuoteEdit.Location = New Point(997, 509)
         ElseIf _status = "CLONE" Then
             LblMode.Text = "複写モード"
             BtnQuoteClone.Visible = True
-            BtnQuoteClone.Location = New Point(997, 649)
+            BtnQuoteClone.Location = New Point(997, 509)
         ElseIf _status = "CANCEL" Then
             LblMode.Text = "取消モード"
             BtnCancel.Visible = True
-            BtnCancel.Location = New Point(997, 649)
+            BtnCancel.Location = New Point(997, 509)
         ElseIf _status = "VIEW" Then
             LblMode.Text = "参照モード"
             BtnQuoteView.Visible = True
-            BtnQuoteView.Location = New Point(997, 649)
+            BtnQuoteView.Location = New Point(997, 509)
         ElseIf _status = "PRICE" Then
             LblMode.Text = "仕入単価入力モード"
             BtnUnitPrice.Visible = True
-            BtnUnitPrice.Location = New Point(997, 649)
+            BtnUnitPrice.Location = New Point(997, 509)
         ElseIf _status = "ORDER_NEW" Then
             LblMode.Text = "受注新規入力モード"
             BtnOrder.Visible = True
-            BtnOrder.Location = New Point(997, 649)
+            BtnOrder.Location = New Point(997, 509)
         ElseIf _status = "PURCHASE_NEW" Then
             LblMode.Text = "仕入新規入力モード"
             BtnPurchase.Visible = True
-            BtnPurchase.Location = New Point(997, 649)
+            BtnPurchase.Location = New Point(997, 509)
         ElseIf _status = "ORDER_PURCHASE" Then
             LblMode.Text = "受発注登録モード"
             BtnOrderPurchase.Visible = True
-            BtnOrderPurchase.Location = New Point(997, 649)
+            BtnOrderPurchase.Location = New Point(997, 509)
         End If
 
         QuoteListLoad()

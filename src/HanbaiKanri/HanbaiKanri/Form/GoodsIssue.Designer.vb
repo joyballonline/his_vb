@@ -68,7 +68,7 @@ Partial Class GoodsIssue
         '
         'BtnRegist
         '
-        Me.BtnRegist.Location = New System.Drawing.Point(1002, 648)
+        Me.BtnRegist.Location = New System.Drawing.Point(1002, 508)
         Me.BtnRegist.Name = "BtnRegist"
         Me.BtnRegist.Size = New System.Drawing.Size(165, 40)
         Me.BtnRegist.TabIndex = 284
@@ -81,7 +81,7 @@ Partial Class GoodsIssue
         Me.DtpGoodsIssueDate.CustomFormat = "yyyy/MM/dd"
         Me.DtpGoodsIssueDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpGoodsIssueDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DtpGoodsIssueDate.Location = New System.Drawing.Point(292, 443)
+        Me.DtpGoodsIssueDate.Location = New System.Drawing.Point(292, 343)
         Me.DtpGoodsIssueDate.Name = "DtpGoodsIssueDate"
         Me.DtpGoodsIssueDate.Size = New System.Drawing.Size(148, 22)
         Me.DtpGoodsIssueDate.TabIndex = 283
@@ -93,7 +93,7 @@ Partial Class GoodsIssue
         Me.LblRemarks.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblRemarks.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblRemarks.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblRemarks.Location = New System.Drawing.Point(446, 443)
+        Me.LblRemarks.Location = New System.Drawing.Point(446, 343)
         Me.LblRemarks.Name = "LblRemarks"
         Me.LblRemarks.Size = New System.Drawing.Size(170, 22)
         Me.LblRemarks.TabIndex = 282
@@ -103,7 +103,7 @@ Partial Class GoodsIssue
         'TxtRemarks
         '
         Me.TxtRemarks.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtRemarks.Location = New System.Drawing.Point(622, 443)
+        Me.TxtRemarks.Location = New System.Drawing.Point(622, 343)
         Me.TxtRemarks.Name = "TxtRemarks"
         Me.TxtRemarks.Size = New System.Drawing.Size(644, 22)
         Me.TxtRemarks.TabIndex = 281
@@ -113,7 +113,7 @@ Partial Class GoodsIssue
         Me.LblGoodsIssueDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblGoodsIssueDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblGoodsIssueDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblGoodsIssueDate.Location = New System.Drawing.Point(188, 443)
+        Me.LblGoodsIssueDate.Location = New System.Drawing.Point(188, 343)
         Me.LblGoodsIssueDate.Name = "LblGoodsIssueDate"
         Me.LblGoodsIssueDate.Size = New System.Drawing.Size(98, 22)
         Me.LblGoodsIssueDate.TabIndex = 280
@@ -124,7 +124,7 @@ Partial Class GoodsIssue
         '
         Me.LblAdd.BackColor = System.Drawing.Color.Transparent
         Me.LblAdd.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblAdd.Location = New System.Drawing.Point(12, 443)
+        Me.LblAdd.Location = New System.Drawing.Point(12, 343)
         Me.LblAdd.Name = "LblAdd"
         Me.LblAdd.Size = New System.Drawing.Size(89, 22)
         Me.LblAdd.TabIndex = 279
@@ -135,7 +135,7 @@ Partial Class GoodsIssue
         '
         Me.LblCount3.BackColor = System.Drawing.Color.Transparent
         Me.LblCount3.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblCount3.Location = New System.Drawing.Point(1316, 443)
+        Me.LblCount3.Location = New System.Drawing.Point(1316, 343)
         Me.LblCount3.Name = "LblCount3"
         Me.LblCount3.Size = New System.Drawing.Size(22, 22)
         Me.LblCount3.TabIndex = 278
@@ -147,7 +147,7 @@ Partial Class GoodsIssue
         Me.TxtCount3.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.TxtCount3.Enabled = False
         Me.TxtCount3.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtCount3.Location = New System.Drawing.Point(1272, 443)
+        Me.TxtCount3.Location = New System.Drawing.Point(1272, 343)
         Me.TxtCount3.Name = "TxtCount3"
         Me.TxtCount3.Size = New System.Drawing.Size(38, 22)
         Me.TxtCount3.TabIndex = 277
@@ -156,18 +156,18 @@ Partial Class GoodsIssue
         '
         Me.DgvAdd.AllowUserToAddRows = False
         Me.DgvAdd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvAdd.Location = New System.Drawing.Point(12, 468)
+        Me.DgvAdd.Location = New System.Drawing.Point(12, 368)
         Me.DgvAdd.Name = "DgvAdd"
         Me.DgvAdd.RowHeadersVisible = False
         Me.DgvAdd.RowTemplate.Height = 21
-        Me.DgvAdd.Size = New System.Drawing.Size(1326, 150)
+        Me.DgvAdd.Size = New System.Drawing.Size(1326, 100)
         Me.DgvAdd.TabIndex = 276
         '
         'LblHistory
         '
         Me.LblHistory.BackColor = System.Drawing.Color.Transparent
         Me.LblHistory.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblHistory.Location = New System.Drawing.Point(12, 262)
+        Me.LblHistory.Location = New System.Drawing.Point(12, 212)
         Me.LblHistory.Name = "LblHistory"
         Me.LblHistory.Size = New System.Drawing.Size(89, 22)
         Me.LblHistory.TabIndex = 275
@@ -189,7 +189,7 @@ Partial Class GoodsIssue
         '
         Me.LblCount2.BackColor = System.Drawing.Color.Transparent
         Me.LblCount2.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblCount2.Location = New System.Drawing.Point(1316, 262)
+        Me.LblCount2.Location = New System.Drawing.Point(1316, 212)
         Me.LblCount2.Name = "LblCount2"
         Me.LblCount2.Size = New System.Drawing.Size(22, 22)
         Me.LblCount2.TabIndex = 273
@@ -201,7 +201,7 @@ Partial Class GoodsIssue
         Me.TxtCount2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.TxtCount2.Enabled = False
         Me.TxtCount2.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtCount2.Location = New System.Drawing.Point(1272, 262)
+        Me.TxtCount2.Location = New System.Drawing.Point(1272, 212)
         Me.TxtCount2.Name = "TxtCount2"
         Me.TxtCount2.Size = New System.Drawing.Size(38, 22)
         Me.TxtCount2.TabIndex = 272
@@ -210,13 +210,13 @@ Partial Class GoodsIssue
         '
         Me.DgvHistory.AllowUserToAddRows = False
         Me.DgvHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvHistory.Location = New System.Drawing.Point(12, 287)
+        Me.DgvHistory.Location = New System.Drawing.Point(12, 237)
         Me.DgvHistory.Name = "DgvHistory"
         Me.DgvHistory.ReadOnly = True
         Me.DgvHistory.RowHeadersVisible = False
         Me.DgvHistory.RowTemplate.Height = 21
         Me.DgvHistory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvHistory.Size = New System.Drawing.Size(1326, 150)
+        Me.DgvHistory.Size = New System.Drawing.Size(1326, 100)
         Me.DgvHistory.TabIndex = 271
         '
         'LblCount1
@@ -249,7 +249,7 @@ Partial Class GoodsIssue
         Me.DgvOrder.ReadOnly = True
         Me.DgvOrder.RowHeadersVisible = False
         Me.DgvOrder.RowTemplate.Height = 21
-        Me.DgvOrder.Size = New System.Drawing.Size(1326, 150)
+        Me.DgvOrder.Size = New System.Drawing.Size(1326, 100)
         Me.DgvOrder.TabIndex = 268
         '
         'LblPurchaseDate
@@ -308,7 +308,7 @@ Partial Class GoodsIssue
         '
         'BtnBack
         '
-        Me.BtnBack.Location = New System.Drawing.Point(1173, 649)
+        Me.BtnBack.Location = New System.Drawing.Point(1173, 509)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(165, 40)
         Me.BtnBack.TabIndex = 262
@@ -347,7 +347,7 @@ Partial Class GoodsIssue
         '
         'BtnDeliveryNote
         '
-        Me.BtnDeliveryNote.Location = New System.Drawing.Point(831, 648)
+        Me.BtnDeliveryNote.Location = New System.Drawing.Point(831, 508)
         Me.BtnDeliveryNote.Name = "BtnDeliveryNote"
         Me.BtnDeliveryNote.Size = New System.Drawing.Size(165, 40)
         Me.BtnDeliveryNote.TabIndex = 286
@@ -369,9 +369,8 @@ Partial Class GoodsIssue
         '
         'GoodsIssue
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1350, 701)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
+        Me.ClientSize = New System.Drawing.Size(1350, 561)
         Me.Controls.Add(Me.LblMode)
         Me.Controls.Add(Me.BtnDeliveryNote)
         Me.Controls.Add(Me.TxtSuffixNo)
@@ -401,6 +400,7 @@ Partial Class GoodsIssue
         Me.Controls.Add(Me.LblPurchaseNo)
         Me.Controls.Add(Me.TxtOrderNo)
         Me.Controls.Add(Me.Label1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "GoodsIssue"
         Me.Text = "GoodsIssue"
         CType(Me.DgvAdd, System.ComponentModel.ISupportInitialize).EndInit()

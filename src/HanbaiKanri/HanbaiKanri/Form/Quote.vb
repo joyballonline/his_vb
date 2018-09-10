@@ -399,7 +399,7 @@ Public Class Quote
             BtnClone.Visible = False
             BtnInsert.Visible = False
             BtnProof.Visible = True
-            BtnProof.Location = New Point(828, 649)
+            BtnProof.Location = New Point(828, 509)
 
             Dim RequestFlg As Boolean = False
             For i As Integer = 0 To DgvItemList.Rows.Count() - 1
@@ -410,10 +410,10 @@ Public Class Quote
 
             If RequestFlg Then
                 BtnQuoteRequest.Visible = True
-                BtnQuoteRequest.Location = New Point(1004, 649)
+                BtnQuoteRequest.Location = New Point(1004, 509)
             Else
                 BtnQuote.Visible = True
-                BtnQuote.Location = New Point(1004, 649)
+                BtnQuote.Location = New Point(1004, 509)
             End If
 
         ElseIf Status Is "PRICE" Then

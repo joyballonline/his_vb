@@ -44,7 +44,7 @@ Partial Class CustomerOrderList
         '
         'BtnInvoice
         '
-        Me.BtnInvoice.Location = New System.Drawing.Point(1002, 649)
+        Me.BtnInvoice.Location = New System.Drawing.Point(1002, 509)
         Me.BtnInvoice.Name = "BtnInvoice"
         Me.BtnInvoice.Size = New System.Drawing.Size(165, 40)
         Me.BtnInvoice.TabIndex = 152
@@ -64,7 +64,7 @@ Partial Class CustomerOrderList
         '
         'BtnBack
         '
-        Me.BtnBack.Location = New System.Drawing.Point(1173, 649)
+        Me.BtnBack.Location = New System.Drawing.Point(1173, 509)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(165, 40)
         Me.BtnBack.TabIndex = 150
@@ -81,19 +81,19 @@ Partial Class CustomerOrderList
         Me.DgvBilling.RowHeadersVisible = False
         Me.DgvBilling.RowTemplate.Height = 21
         Me.DgvBilling.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvBilling.Size = New System.Drawing.Size(1326, 634)
+        Me.DgvBilling.Size = New System.Drawing.Size(1326, 494)
         Me.DgvBilling.TabIndex = 149
         '
         'CustomerOrderList
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1350, 701)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
+        Me.ClientSize = New System.Drawing.Size(1350, 561)
         Me.Controls.Add(Me.DgvBilling)
         Me.Controls.Add(Me.ChkCancelData)
         Me.Controls.Add(Me.BtnInvoice)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.BtnBack)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "CustomerOrderList"
         Me.Text = "CustomerOrderList"
         CType(Me.DgvBilling, System.ComponentModel.ISupportInitialize).EndInit()

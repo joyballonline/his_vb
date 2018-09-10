@@ -230,8 +230,7 @@ Partial Class CompanySearch
         '
         'CompanySearch
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 287)
         Me.Controls.Add(Me.BtnSearch)
         Me.Controls.Add(Me.Search)
@@ -239,6 +238,7 @@ Partial Class CompanySearch
         Me.Controls.Add(Me.btnSelectCompany)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Dgv_Company)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "CompanySearch"
         Me.Text = "CompanySearch"
         CType(Me.Dgv_Company, System.ComponentModel.ISupportInitialize).EndInit()

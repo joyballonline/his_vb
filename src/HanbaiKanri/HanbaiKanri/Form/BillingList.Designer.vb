@@ -52,7 +52,7 @@ Partial Class BillingList
         '
         'BtnBillingCancel
         '
-        Me.BtnBillingCancel.Location = New System.Drawing.Point(832, 649)
+        Me.BtnBillingCancel.Location = New System.Drawing.Point(832, 509)
         Me.BtnBillingCancel.Name = "BtnBillingCancel"
         Me.BtnBillingCancel.Size = New System.Drawing.Size(165, 40)
         Me.BtnBillingCancel.TabIndex = 149
@@ -73,7 +73,7 @@ Partial Class BillingList
         '
         'BtnBillingView
         '
-        Me.BtnBillingView.Location = New System.Drawing.Point(1003, 649)
+        Me.BtnBillingView.Location = New System.Drawing.Point(1003, 509)
         Me.BtnBillingView.Name = "BtnBillingView"
         Me.BtnBillingView.Size = New System.Drawing.Size(165, 40)
         Me.BtnBillingView.TabIndex = 147
@@ -262,7 +262,7 @@ Partial Class BillingList
         '
         'BtnBack
         '
-        Me.BtnBack.Location = New System.Drawing.Point(1174, 649)
+        Me.BtnBack.Location = New System.Drawing.Point(1174, 509)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(165, 40)
         Me.BtnBack.TabIndex = 124
@@ -279,7 +279,7 @@ Partial Class BillingList
         Me.DgvBilling.RowHeadersVisible = False
         Me.DgvBilling.RowTemplate.Height = 21
         Me.DgvBilling.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvBilling.Size = New System.Drawing.Size(1326, 407)
+        Me.DgvBilling.Size = New System.Drawing.Size(1326, 267)
         Me.DgvBilling.TabIndex = 123
         '
         'LblMode
@@ -296,9 +296,8 @@ Partial Class BillingList
         '
         'BillingList
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1350, 701)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
+        Me.ClientSize = New System.Drawing.Size(1350, 561)
         Me.Controls.Add(Me.LblMode)
         Me.Controls.Add(Me.BtnBillingCancel)
         Me.Controls.Add(Me.ChkCancelData)
@@ -321,6 +320,7 @@ Partial Class BillingList
         Me.Controls.Add(Me.BtnPurchaseSearch)
         Me.Controls.Add(Me.BtnBack)
         Me.Controls.Add(Me.DgvBilling)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "BillingList"
         Me.Text = "BillingList"
         Me.Panel1.ResumeLayout(False)

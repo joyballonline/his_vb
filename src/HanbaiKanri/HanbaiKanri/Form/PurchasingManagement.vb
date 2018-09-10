@@ -99,7 +99,7 @@ Public Class PurchasingManagement
 
             LblHistory.Location = New Point(12, 82)
             DgvHistory.Location = New Point(12, 106)
-            DgvHistory.Size = New Point(1326, 500)
+            DgvHistory.Size = New Point(1326, 400)
 
             BtnRegist.Visible = False
         Else

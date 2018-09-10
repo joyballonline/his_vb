@@ -180,8 +180,7 @@ Partial Class User
         '
         'User
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(382, 212)
         Me.Controls.Add(Me.BtnBack)
         Me.Controls.Add(Me.BtnRegistration)
@@ -200,6 +199,7 @@ Partial Class User
         Me.Controls.Add(Me.TxtName)
         Me.Controls.Add(Me.TxtUserId)
         Me.Controls.Add(Me.TxtCompanyCode)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "User"
         Me.Text = "User"
         Me.ResumeLayout(False)
