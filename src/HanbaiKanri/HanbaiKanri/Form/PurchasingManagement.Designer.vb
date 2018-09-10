@@ -87,7 +87,7 @@ Partial Class PurchasingManagement
         '
         'BtnBack
         '
-        Me.BtnBack.Location = New System.Drawing.Point(1173, 677)
+        Me.BtnBack.Location = New System.Drawing.Point(1173, 649)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(165, 40)
         Me.BtnBack.TabIndex = 70
@@ -326,7 +326,7 @@ Partial Class PurchasingManagement
         '
         'BtnRegist
         '
-        Me.BtnRegist.Location = New System.Drawing.Point(1002, 677)
+        Me.BtnRegist.Location = New System.Drawing.Point(1002, 649)
         Me.BtnRegist.Name = "BtnRegist"
         Me.BtnRegist.Size = New System.Drawing.Size(165, 40)
         Me.BtnRegist.TabIndex = 230
@@ -359,7 +359,7 @@ Partial Class PurchasingManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1350, 729)
+        Me.ClientSize = New System.Drawing.Size(1350, 701)
         Me.Controls.Add(Me.LblMode)
         Me.Controls.Add(Me.TxtSuffixNo)
         Me.Controls.Add(Me.BtnRegist)

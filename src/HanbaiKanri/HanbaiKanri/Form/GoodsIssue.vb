@@ -100,11 +100,11 @@ Public Class GoodsIssue
 
             LblHistory.Location = New Point(12, 82)
             DgvHistory.Location = New Point(12, 106)
-            DgvHistory.Size = New Point(1326, 566)
+            DgvHistory.Size = New Point(1326, 500)
 
             BtnRegist.Visible = False
             BtnDeliveryNote.Visible = True
-            BtnDeliveryNote.Location = New Point(1002, 678)
+            BtnDeliveryNote.Location = New Point(1002, 649)
         Else
             LblMode.Text = "出庫入力モード"
         End If

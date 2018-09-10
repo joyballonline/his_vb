@@ -207,11 +207,11 @@ Public Class PurchaseList
         If _status = "VIEW" Then
             LblMode.Text = "参照モード"
             BtnPurchaseView.Visible = True
-            BtnPurchaseView.Location = New Point(997, 677)
+            BtnPurchaseView.Location = New Point(997, 649)
         ElseIf _status = "CANCEL" Then
             LblMode.Text = "取消モード"
             BtnPurchaseCancel.Visible = True
-            BtnPurchaseCancel.Location = New Point(997, 677)
+            BtnPurchaseCancel.Location = New Point(997, 649)
         End If
 
         Dim Status As String = "EXCLUSION"

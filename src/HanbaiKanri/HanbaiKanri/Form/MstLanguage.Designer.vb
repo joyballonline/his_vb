@@ -47,7 +47,7 @@ Partial Class MstLanguage
         Me.Dgv_Language.RowHeadersVisible = False
         Me.Dgv_Language.RowTemplate.Height = 21
         Me.Dgv_Language.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.Dgv_Language.Size = New System.Drawing.Size(1326, 659)
+        Me.Dgv_Language.Size = New System.Drawing.Size(1326, 631)
         Me.Dgv_Language.TabIndex = 0
         '
         '会社コード
@@ -92,7 +92,7 @@ Partial Class MstLanguage
         '
         'BtnBack
         '
-        Me.BtnBack.Location = New System.Drawing.Point(1173, 677)
+        Me.BtnBack.Location = New System.Drawing.Point(1173, 649)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(165, 40)
         Me.BtnBack.TabIndex = 4
@@ -101,7 +101,7 @@ Partial Class MstLanguage
         '
         'BtnAdd
         '
-        Me.BtnAdd.Location = New System.Drawing.Point(831, 677)
+        Me.BtnAdd.Location = New System.Drawing.Point(831, 649)
         Me.BtnAdd.Name = "BtnAdd"
         Me.BtnAdd.Size = New System.Drawing.Size(165, 40)
         Me.BtnAdd.TabIndex = 5
@@ -110,7 +110,7 @@ Partial Class MstLanguage
         '
         'BtnEdit
         '
-        Me.BtnEdit.Location = New System.Drawing.Point(1002, 677)
+        Me.BtnEdit.Location = New System.Drawing.Point(1002, 649)
         Me.BtnEdit.Name = "BtnEdit"
         Me.BtnEdit.Size = New System.Drawing.Size(165, 40)
         Me.BtnEdit.TabIndex = 6
@@ -121,7 +121,7 @@ Partial Class MstLanguage
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1350, 729)
+        Me.ClientSize = New System.Drawing.Size(1350, 701)
         Me.Controls.Add(Me.BtnEdit)
         Me.Controls.Add(Me.BtnAdd)
         Me.Controls.Add(Me.BtnBack)

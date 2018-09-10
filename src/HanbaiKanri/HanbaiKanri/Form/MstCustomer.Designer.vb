@@ -64,7 +64,7 @@ Partial Class MstCustomer
         Me.Dgv_Customer.RowHeadersVisible = False
         Me.Dgv_Customer.RowTemplate.Height = 21
         Me.Dgv_Customer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.Dgv_Customer.Size = New System.Drawing.Size(1326, 638)
+        Me.Dgv_Customer.Size = New System.Drawing.Size(1326, 610)
         Me.Dgv_Customer.TabIndex = 0
         '
         '会社コード
@@ -171,7 +171,7 @@ Partial Class MstCustomer
         '
         'btnSelectCustomer
         '
-        Me.btnSelectCustomer.Location = New System.Drawing.Point(1002, 677)
+        Me.btnSelectCustomer.Location = New System.Drawing.Point(1002, 649)
         Me.btnSelectCustomer.Name = "btnSelectCustomer"
         Me.btnSelectCustomer.Size = New System.Drawing.Size(165, 40)
         Me.btnSelectCustomer.TabIndex = 1
@@ -180,7 +180,7 @@ Partial Class MstCustomer
         '
         'btnCustomerAdd
         '
-        Me.btnCustomerAdd.Location = New System.Drawing.Point(831, 677)
+        Me.btnCustomerAdd.Location = New System.Drawing.Point(831, 649)
         Me.btnCustomerAdd.Name = "btnCustomerAdd"
         Me.btnCustomerAdd.Size = New System.Drawing.Size(165, 40)
         Me.btnCustomerAdd.TabIndex = 2
@@ -189,7 +189,7 @@ Partial Class MstCustomer
         '
         'btnBack
         '
-        Me.btnBack.Location = New System.Drawing.Point(1173, 677)
+        Me.btnBack.Location = New System.Drawing.Point(1173, 649)
         Me.btnBack.Name = "btnBack"
         Me.btnBack.Size = New System.Drawing.Size(165, 40)
         Me.btnBack.TabIndex = 3
@@ -225,7 +225,7 @@ Partial Class MstCustomer
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1350, 729)
+        Me.ClientSize = New System.Drawing.Size(1350, 701)
         Me.Controls.Add(Me.BtnSearch)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Search)

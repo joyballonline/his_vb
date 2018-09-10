@@ -276,7 +276,7 @@ Public Class Ordering
             DgvItemList.ReadOnly = True
             BtnRegistration.Visible = False
             BtnPurchase.Visible = True
-            BtnPurchase.Location = New Point(1004, 677)
+            BtnPurchase.Location = New Point(1004, 649)
         ElseIf PurchaseStatus = "CLONE" Then
             LblMode.Text = "新規複写モード"
             TxtSupplierCode.Enabled = True

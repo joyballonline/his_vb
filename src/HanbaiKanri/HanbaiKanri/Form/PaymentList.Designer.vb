@@ -159,7 +159,7 @@ Partial Class PaymentList
         Me.DgvSupplier.RowHeadersVisible = False
         Me.DgvSupplier.RowTemplate.Height = 21
         Me.DgvSupplier.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvSupplier.Size = New System.Drawing.Size(1326, 513)
+        Me.DgvSupplier.Size = New System.Drawing.Size(1326, 482)
         Me.DgvSupplier.TabIndex = 58
         '
         '仕入先名
@@ -207,7 +207,7 @@ Partial Class PaymentList
         '
         'BtnPayment
         '
-        Me.BtnPayment.Location = New System.Drawing.Point(1004, 680)
+        Me.BtnPayment.Location = New System.Drawing.Point(1004, 649)
         Me.BtnPayment.Name = "BtnPayment"
         Me.BtnPayment.Size = New System.Drawing.Size(165, 40)
         Me.BtnPayment.TabIndex = 59
@@ -216,7 +216,7 @@ Partial Class PaymentList
         '
         'btnBack
         '
-        Me.btnBack.Location = New System.Drawing.Point(1175, 680)
+        Me.btnBack.Location = New System.Drawing.Point(1175, 649)
         Me.btnBack.Name = "btnBack"
         Me.btnBack.Size = New System.Drawing.Size(165, 40)
         Me.btnBack.TabIndex = 60
@@ -239,7 +239,7 @@ Partial Class PaymentList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1350, 729)
+        Me.ClientSize = New System.Drawing.Size(1350, 701)
         Me.Controls.Add(Me.LblMode)
         Me.Controls.Add(Me.DgvSupplier)
         Me.Controls.Add(Me.BtnSerach)

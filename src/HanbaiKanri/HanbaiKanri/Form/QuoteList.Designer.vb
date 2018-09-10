@@ -74,12 +74,12 @@ Partial Class QuoteList
         Me.DgvMithd.RowHeadersVisible = False
         Me.DgvMithd.RowTemplate.Height = 21
         Me.DgvMithd.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvMithd.Size = New System.Drawing.Size(1326, 420)
+        Me.DgvMithd.Size = New System.Drawing.Size(1326, 402)
         Me.DgvMithd.TabIndex = 0
         '
         'BtnQuoteAdd
         '
-        Me.BtnQuoteAdd.Location = New System.Drawing.Point(308, 677)
+        Me.BtnQuoteAdd.Location = New System.Drawing.Point(308, 649)
         Me.BtnQuoteAdd.Name = "BtnQuoteAdd"
         Me.BtnQuoteAdd.Size = New System.Drawing.Size(165, 40)
         Me.BtnQuoteAdd.TabIndex = 1
@@ -89,7 +89,7 @@ Partial Class QuoteList
         '
         'BtnQuoteEdit
         '
-        Me.BtnQuoteEdit.Location = New System.Drawing.Point(650, 677)
+        Me.BtnQuoteEdit.Location = New System.Drawing.Point(650, 649)
         Me.BtnQuoteEdit.Name = "BtnQuoteEdit"
         Me.BtnQuoteEdit.Size = New System.Drawing.Size(165, 40)
         Me.BtnQuoteEdit.TabIndex = 2
@@ -99,7 +99,7 @@ Partial Class QuoteList
         '
         'BtnQuoteClone
         '
-        Me.BtnQuoteClone.Location = New System.Drawing.Point(821, 677)
+        Me.BtnQuoteClone.Location = New System.Drawing.Point(821, 649)
         Me.BtnQuoteClone.Name = "BtnQuoteClone"
         Me.BtnQuoteClone.Size = New System.Drawing.Size(165, 40)
         Me.BtnQuoteClone.TabIndex = 3
@@ -109,7 +109,7 @@ Partial Class QuoteList
         '
         'BtnBack
         '
-        Me.BtnBack.Location = New System.Drawing.Point(1173, 677)
+        Me.BtnBack.Location = New System.Drawing.Point(1173, 649)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(165, 40)
         Me.BtnBack.TabIndex = 4
@@ -356,7 +356,7 @@ Partial Class QuoteList
         '
         'BtnQuoteView
         '
-        Me.BtnQuoteView.Location = New System.Drawing.Point(997, 677)
+        Me.BtnQuoteView.Location = New System.Drawing.Point(997, 649)
         Me.BtnQuoteView.Name = "BtnQuoteView"
         Me.BtnQuoteView.Size = New System.Drawing.Size(165, 40)
         Me.BtnQuoteView.TabIndex = 30
@@ -366,7 +366,7 @@ Partial Class QuoteList
         '
         'BtnUnitPrice
         '
-        Me.BtnUnitPrice.Location = New System.Drawing.Point(479, 677)
+        Me.BtnUnitPrice.Location = New System.Drawing.Point(479, 649)
         Me.BtnUnitPrice.Name = "BtnUnitPrice"
         Me.BtnUnitPrice.Size = New System.Drawing.Size(165, 40)
         Me.BtnUnitPrice.TabIndex = 31
@@ -376,7 +376,7 @@ Partial Class QuoteList
         '
         'BtnOrderPurchase
         '
-        Me.BtnOrderPurchase.Location = New System.Drawing.Point(137, 677)
+        Me.BtnOrderPurchase.Location = New System.Drawing.Point(137, 649)
         Me.BtnOrderPurchase.Name = "BtnOrderPurchase"
         Me.BtnOrderPurchase.Size = New System.Drawing.Size(165, 40)
         Me.BtnOrderPurchase.TabIndex = 32
@@ -452,7 +452,7 @@ Partial Class QuoteList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1350, 729)
+        Me.ClientSize = New System.Drawing.Size(1350, 701)
         Me.Controls.Add(Me.ChkCancel)
         Me.Controls.Add(Me.BtnPurchase)
         Me.Controls.Add(Me.BtnOrder)

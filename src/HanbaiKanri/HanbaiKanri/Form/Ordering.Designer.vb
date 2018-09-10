@@ -96,7 +96,6 @@ Partial Class Ordering
         '
         'LblPaymentTerms
         '
-        Me.LblPaymentTerms.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.LblPaymentTerms.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblPaymentTerms.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblPaymentTerms.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
@@ -109,7 +108,6 @@ Partial Class Ordering
         '
         'LblPosition
         '
-        Me.LblPosition.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.LblPosition.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblPosition.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblPosition.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
@@ -122,7 +120,6 @@ Partial Class Ordering
         '
         'TxtTel
         '
-        Me.TxtTel.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.TxtTel.BackColor = System.Drawing.Color.White
         Me.TxtTel.Enabled = False
         Me.TxtTel.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
@@ -134,7 +131,6 @@ Partial Class Ordering
         '
         'LblPerson
         '
-        Me.LblPerson.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.LblPerson.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblPerson.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblPerson.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
@@ -147,7 +143,6 @@ Partial Class Ordering
         '
         'TxtAddress1
         '
-        Me.TxtAddress1.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.TxtAddress1.BackColor = System.Drawing.Color.White
         Me.TxtAddress1.Enabled = False
         Me.TxtAddress1.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
@@ -159,7 +154,6 @@ Partial Class Ordering
         '
         'TxtPerson
         '
-        Me.TxtPerson.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.TxtPerson.BackColor = System.Drawing.Color.White
         Me.TxtPerson.Enabled = False
         Me.TxtPerson.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
@@ -171,7 +165,6 @@ Partial Class Ordering
         '
         'LblFax
         '
-        Me.LblFax.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.LblFax.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblFax.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblFax.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
@@ -184,7 +177,6 @@ Partial Class Ordering
         '
         'TxtFax
         '
-        Me.TxtFax.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.TxtFax.BackColor = System.Drawing.Color.White
         Me.TxtFax.Enabled = False
         Me.TxtFax.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
@@ -196,7 +188,6 @@ Partial Class Ordering
         '
         'TxtPostalCode
         '
-        Me.TxtPostalCode.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.TxtPostalCode.BackColor = System.Drawing.Color.White
         Me.TxtPostalCode.Enabled = False
         Me.TxtPostalCode.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
@@ -209,7 +200,6 @@ Partial Class Ordering
         '
         'LblTel
         '
-        Me.LblTel.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.LblTel.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblTel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblTel.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
@@ -222,7 +212,6 @@ Partial Class Ordering
         '
         'LblAddress
         '
-        Me.LblAddress.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.LblAddress.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblAddress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblAddress.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
@@ -235,7 +224,6 @@ Partial Class Ordering
         '
         'TxtSupplierName
         '
-        Me.TxtSupplierName.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.TxtSupplierName.BackColor = System.Drawing.Color.White
         Me.TxtSupplierName.Enabled = False
         Me.TxtSupplierName.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
@@ -247,7 +235,6 @@ Partial Class Ordering
         '
         'TxtInput
         '
-        Me.TxtInput.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.TxtInput.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.TxtInput.Enabled = False
         Me.TxtInput.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
@@ -261,7 +248,6 @@ Partial Class Ordering
         '
         'LblCustomerName
         '
-        Me.LblCustomerName.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.LblCustomerName.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblCustomerName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblCustomerName.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
@@ -274,7 +260,6 @@ Partial Class Ordering
         '
         'TxtOrderingNo
         '
-        Me.TxtOrderingNo.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.TxtOrderingNo.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.TxtOrderingNo.Enabled = False
         Me.TxtOrderingNo.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
@@ -288,7 +273,6 @@ Partial Class Ordering
         '
         'LblInput
         '
-        Me.LblInput.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.LblInput.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblInput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblInput.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
@@ -301,7 +285,6 @@ Partial Class Ordering
         '
         'LblOrderDate
         '
-        Me.LblOrderDate.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.LblOrderDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblOrderDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblOrderDate.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
@@ -314,7 +297,6 @@ Partial Class Ordering
         '
         'LblOrderNo
         '
-        Me.LblOrderNo.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.LblOrderNo.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblOrderNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblOrderNo.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
@@ -337,7 +319,7 @@ Partial Class Ordering
         Me.DgvItemList.RowHeadersVisible = False
         Me.DgvItemList.RowTemplate.Height = 21
         Me.DgvItemList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
-        Me.DgvItemList.Size = New System.Drawing.Size(1329, 379)
+        Me.DgvItemList.Size = New System.Drawing.Size(1329, 353)
         Me.DgvItemList.TabIndex = 216
         '
         'No
@@ -439,7 +421,6 @@ Partial Class Ordering
         '
         'Label9
         '
-        Me.Label9.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Label9.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.Label9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label9.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
@@ -452,7 +433,6 @@ Partial Class Ordering
         '
         'TxtPurchaseRemark
         '
-        Me.TxtPurchaseRemark.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.TxtPurchaseRemark.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtPurchaseRemark.Location = New System.Drawing.Point(127, 187)
         Me.TxtPurchaseRemark.MaxLength = 50
@@ -475,11 +455,10 @@ Partial Class Ordering
         '
         'TxtOrderingAmount
         '
-        Me.TxtOrderingAmount.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.TxtOrderingAmount.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.TxtOrderingAmount.Enabled = False
         Me.TxtOrderingAmount.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtOrderingAmount.Location = New System.Drawing.Point(1109, 631)
+        Me.TxtOrderingAmount.Location = New System.Drawing.Point(1109, 605)
         Me.TxtOrderingAmount.MaxLength = 10
         Me.TxtOrderingAmount.Name = "TxtOrderingAmount"
         Me.TxtOrderingAmount.ReadOnly = True
@@ -489,11 +468,10 @@ Partial Class Ordering
         '
         'LblOrderAmount
         '
-        Me.LblOrderAmount.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.LblOrderAmount.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblOrderAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblOrderAmount.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblOrderAmount.Location = New System.Drawing.Point(1003, 631)
+        Me.LblOrderAmount.Location = New System.Drawing.Point(1003, 605)
         Me.LblOrderAmount.Name = "LblOrderAmount"
         Me.LblOrderAmount.Size = New System.Drawing.Size(100, 23)
         Me.LblOrderAmount.TabIndex = 227
@@ -502,7 +480,6 @@ Partial Class Ordering
         '
         'TxtItemCount
         '
-        Me.TxtItemCount.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.TxtItemCount.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.TxtItemCount.Enabled = False
         Me.TxtItemCount.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
@@ -516,7 +493,6 @@ Partial Class Ordering
         '
         'LblItemCount
         '
-        Me.LblItemCount.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.LblItemCount.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblItemCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblItemCount.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
@@ -529,7 +505,6 @@ Partial Class Ordering
         '
         'Label2
         '
-        Me.Label2.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Label2.AutoSize = True
         Me.Label2.Location = New System.Drawing.Point(221, 20)
         Me.Label2.Name = "Label2"
@@ -539,7 +514,6 @@ Partial Class Ordering
         '
         'TxtSupplierCode
         '
-        Me.TxtSupplierCode.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.TxtSupplierCode.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.TxtSupplierCode.Enabled = False
         Me.TxtSupplierCode.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
@@ -551,7 +525,7 @@ Partial Class Ordering
         '
         'BtnBack
         '
-        Me.BtnBack.Location = New System.Drawing.Point(1175, 675)
+        Me.BtnBack.Location = New System.Drawing.Point(1175, 649)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(165, 40)
         Me.BtnBack.TabIndex = 218
@@ -574,7 +548,7 @@ Partial Class Ordering
         '
         'BtnRegistration
         '
-        Me.BtnRegistration.Location = New System.Drawing.Point(1003, 675)
+        Me.BtnRegistration.Location = New System.Drawing.Point(1003, 649)
         Me.BtnRegistration.Name = "BtnRegistration"
         Me.BtnRegistration.Size = New System.Drawing.Size(165, 40)
         Me.BtnRegistration.TabIndex = 217
@@ -583,7 +557,6 @@ Partial Class Ordering
         '
         'TxtAddress3
         '
-        Me.TxtAddress3.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.TxtAddress3.BackColor = System.Drawing.Color.White
         Me.TxtAddress3.Enabled = False
         Me.TxtAddress3.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
@@ -595,7 +568,6 @@ Partial Class Ordering
         '
         'TxtAddress2
         '
-        Me.TxtAddress2.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.TxtAddress2.BackColor = System.Drawing.Color.White
         Me.TxtAddress2.Enabled = False
         Me.TxtAddress2.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
@@ -607,7 +579,6 @@ Partial Class Ordering
         '
         'LblRegistration
         '
-        Me.LblRegistration.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.LblRegistration.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblRegistration.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblRegistration.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
@@ -620,7 +591,6 @@ Partial Class Ordering
         '
         'TxtSales
         '
-        Me.TxtSales.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.TxtSales.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.TxtSales.Enabled = False
         Me.TxtSales.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
@@ -632,7 +602,6 @@ Partial Class Ordering
         '
         'LblSales
         '
-        Me.LblSales.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.LblSales.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblSales.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblSales.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
@@ -645,7 +614,6 @@ Partial Class Ordering
         '
         'TxtOrderingSuffix
         '
-        Me.TxtOrderingSuffix.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.TxtOrderingSuffix.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.TxtOrderingSuffix.Enabled = False
         Me.TxtOrderingSuffix.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
@@ -659,7 +627,6 @@ Partial Class Ordering
         '
         'TxtQuoteRemarks
         '
-        Me.TxtQuoteRemarks.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.TxtQuoteRemarks.BackColor = System.Drawing.Color.White
         Me.TxtQuoteRemarks.Enabled = False
         Me.TxtQuoteRemarks.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
@@ -672,7 +639,6 @@ Partial Class Ordering
         '
         'TxtPaymentTerms
         '
-        Me.TxtPaymentTerms.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.TxtPaymentTerms.BackColor = System.Drawing.Color.White
         Me.TxtPaymentTerms.Enabled = False
         Me.TxtPaymentTerms.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
@@ -685,7 +651,6 @@ Partial Class Ordering
         '
         'LblRemarks
         '
-        Me.LblRemarks.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.LblRemarks.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblRemarks.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblRemarks.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
@@ -698,7 +663,6 @@ Partial Class Ordering
         '
         'TxtPosition
         '
-        Me.TxtPosition.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.TxtPosition.BackColor = System.Drawing.Color.White
         Me.TxtPosition.Enabled = False
         Me.TxtPosition.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
@@ -710,7 +674,7 @@ Partial Class Ordering
         '
         'BtnPurchase
         '
-        Me.BtnPurchase.Location = New System.Drawing.Point(832, 675)
+        Me.BtnPurchase.Location = New System.Drawing.Point(832, 649)
         Me.BtnPurchase.Name = "BtnPurchase"
         Me.BtnPurchase.Size = New System.Drawing.Size(165, 40)
         Me.BtnPurchase.TabIndex = 241
@@ -720,7 +684,7 @@ Partial Class Ordering
         '
         'BtnClone
         '
-        Me.BtnClone.Location = New System.Drawing.Point(263, 677)
+        Me.BtnClone.Location = New System.Drawing.Point(263, 651)
         Me.BtnClone.Name = "BtnClone"
         Me.BtnClone.Size = New System.Drawing.Size(120, 40)
         Me.BtnClone.TabIndex = 296
@@ -730,7 +694,7 @@ Partial Class Ordering
         '
         'BtnDown
         '
-        Me.BtnDown.Location = New System.Drawing.Point(263, 631)
+        Me.BtnDown.Location = New System.Drawing.Point(263, 605)
         Me.BtnDown.Name = "BtnDown"
         Me.BtnDown.Size = New System.Drawing.Size(120, 40)
         Me.BtnDown.TabIndex = 297
@@ -740,7 +704,7 @@ Partial Class Ordering
         '
         'BtnUp
         '
-        Me.BtnUp.Location = New System.Drawing.Point(137, 631)
+        Me.BtnUp.Location = New System.Drawing.Point(137, 605)
         Me.BtnUp.Name = "BtnUp"
         Me.BtnUp.Size = New System.Drawing.Size(120, 40)
         Me.BtnUp.TabIndex = 298
@@ -750,7 +714,7 @@ Partial Class Ordering
         '
         'BtnInsert
         '
-        Me.BtnInsert.Location = New System.Drawing.Point(11, 631)
+        Me.BtnInsert.Location = New System.Drawing.Point(11, 605)
         Me.BtnInsert.Name = "BtnInsert"
         Me.BtnInsert.Size = New System.Drawing.Size(120, 40)
         Me.BtnInsert.TabIndex = 299
@@ -760,7 +724,7 @@ Partial Class Ordering
         '
         'BtnRowsDel
         '
-        Me.BtnRowsDel.Location = New System.Drawing.Point(134, 677)
+        Me.BtnRowsDel.Location = New System.Drawing.Point(134, 651)
         Me.BtnRowsDel.Name = "BtnRowsDel"
         Me.BtnRowsDel.Size = New System.Drawing.Size(120, 40)
         Me.BtnRowsDel.TabIndex = 300
@@ -770,7 +734,7 @@ Partial Class Ordering
         '
         'BtnRowsAdd
         '
-        Me.BtnRowsAdd.Location = New System.Drawing.Point(11, 677)
+        Me.BtnRowsAdd.Location = New System.Drawing.Point(11, 651)
         Me.BtnRowsAdd.Name = "BtnRowsAdd"
         Me.BtnRowsAdd.Size = New System.Drawing.Size(120, 40)
         Me.BtnRowsAdd.TabIndex = 301
@@ -794,7 +758,7 @@ Partial Class Ordering
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1350, 729)
+        Me.ClientSize = New System.Drawing.Size(1350, 701)
         Me.Controls.Add(Me.LblMode)
         Me.Controls.Add(Me.BtnClone)
         Me.Controls.Add(Me.BtnDown)

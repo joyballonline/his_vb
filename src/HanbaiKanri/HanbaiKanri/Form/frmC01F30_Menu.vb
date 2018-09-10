@@ -105,8 +105,6 @@ Public Class frmC01F30_Menu
         Me.chkH02 = New System.Windows.Forms.CheckBox()
         Me.chkH01 = New System.Windows.Forms.CheckBox()
         Me.dgvLIST = New System.Windows.Forms.DataGridView()
-        Me.chkH06 = New System.Windows.Forms.CheckBox()
-        Me.chkH03 = New System.Windows.Forms.CheckBox()
         Me.処理ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.業務 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.処理名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -114,17 +112,16 @@ Public Class frmC01F30_Menu
         Me.My前回操作日時 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.操作者 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.前回操作日時 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.chkH06 = New System.Windows.Forms.CheckBox()
+        Me.chkH03 = New System.Windows.Forms.CheckBox()
         CType(Me.dgvLIST, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnSelect
         '
-        Me.btnSelect.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnSelect.Enabled = False
         Me.btnSelect.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.btnSelect.Location = New System.Drawing.Point(1144, 669)
+        Me.btnSelect.Location = New System.Drawing.Point(1144, 641)
         Me.btnSelect.Name = "btnSelect"
         Me.btnSelect.Size = New System.Drawing.Size(94, 48)
         Me.btnSelect.TabIndex = 20
@@ -133,11 +130,8 @@ Public Class frmC01F30_Menu
         '
         'cmdExit
         '
-        Me.cmdExit.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cmdExit.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.cmdExit.Location = New System.Drawing.Point(1244, 669)
+        Me.cmdExit.Location = New System.Drawing.Point(1244, 641)
         Me.cmdExit.Name = "cmdExit"
         Me.cmdExit.Size = New System.Drawing.Size(94, 48)
         Me.cmdExit.TabIndex = 19
@@ -151,7 +145,7 @@ Public Class frmC01F30_Menu
         Me.chkM01.Checked = True
         Me.chkM01.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkM01.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.chkM01.Location = New System.Drawing.Point(660, 12)
+        Me.chkM01.Location = New System.Drawing.Point(660, -2)
         Me.chkM01.Name = "chkM01"
         Me.chkM01.Size = New System.Drawing.Size(88, 19)
         Me.chkM01.TabIndex = 18
@@ -166,7 +160,7 @@ Public Class frmC01F30_Menu
         Me.chkH07.Checked = True
         Me.chkH07.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkH07.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.chkH07.Location = New System.Drawing.Point(568, 12)
+        Me.chkH07.Location = New System.Drawing.Point(568, -2)
         Me.chkH07.Name = "chkH07"
         Me.chkH07.Size = New System.Drawing.Size(86, 19)
         Me.chkH07.TabIndex = 16
@@ -181,7 +175,7 @@ Public Class frmC01F30_Menu
         Me.chkH05.Checked = True
         Me.chkH05.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkH05.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.chkH05.Location = New System.Drawing.Point(382, 12)
+        Me.chkH05.Location = New System.Drawing.Point(382, -2)
         Me.chkH05.Name = "chkH05"
         Me.chkH05.Size = New System.Drawing.Size(86, 19)
         Me.chkH05.TabIndex = 15
@@ -196,7 +190,7 @@ Public Class frmC01F30_Menu
         Me.chkH04.Checked = True
         Me.chkH04.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkH04.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.chkH04.Location = New System.Drawing.Point(290, 12)
+        Me.chkH04.Location = New System.Drawing.Point(290, -2)
         Me.chkH04.Name = "chkH04"
         Me.chkH04.Size = New System.Drawing.Size(86, 19)
         Me.chkH04.TabIndex = 14
@@ -211,7 +205,7 @@ Public Class frmC01F30_Menu
         Me.chkH02.Checked = True
         Me.chkH02.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkH02.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.chkH02.Location = New System.Drawing.Point(104, 12)
+        Me.chkH02.Location = New System.Drawing.Point(104, -2)
         Me.chkH02.Name = "chkH02"
         Me.chkH02.Size = New System.Drawing.Size(86, 19)
         Me.chkH02.TabIndex = 13
@@ -226,7 +220,7 @@ Public Class frmC01F30_Menu
         Me.chkH01.Checked = True
         Me.chkH01.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkH01.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.chkH01.Location = New System.Drawing.Point(12, 12)
+        Me.chkH01.Location = New System.Drawing.Point(12, -2)
         Me.chkH01.Name = "chkH01"
         Me.chkH01.Size = New System.Drawing.Size(86, 19)
         Me.chkH01.TabIndex = 12
@@ -253,38 +247,8 @@ Public Class frmC01F30_Menu
         Me.dgvLIST.RowHeadersVisible = False
         Me.dgvLIST.RowHeadersWidth = 25
         Me.dgvLIST.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvLIST.Size = New System.Drawing.Size(1326, 626)
+        Me.dgvLIST.Size = New System.Drawing.Size(1326, 598)
         Me.dgvLIST.TabIndex = 11
-        '
-        'chkH06
-        '
-        Me.chkH06.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.chkH06.AutoSize = True
-        Me.chkH06.Checked = True
-        Me.chkH06.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkH06.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.chkH06.Location = New System.Drawing.Point(474, 12)
-        Me.chkH06.Name = "chkH06"
-        Me.chkH06.Size = New System.Drawing.Size(86, 19)
-        Me.chkH06.TabIndex = 21
-        Me.chkH06.Text = "仕入業務"
-        Me.chkH06.UseVisualStyleBackColor = True
-        Me.chkH06.Visible = False
-        '
-        'chkH03
-        '
-        Me.chkH03.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.chkH03.AutoSize = True
-        Me.chkH03.Checked = True
-        Me.chkH03.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkH03.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.chkH03.Location = New System.Drawing.Point(196, 12)
-        Me.chkH03.Name = "chkH03"
-        Me.chkH03.Size = New System.Drawing.Size(86, 19)
-        Me.chkH03.TabIndex = 22
-        Me.chkH03.Text = "売上業務"
-        Me.chkH03.UseVisualStyleBackColor = True
-        Me.chkH03.Visible = False
         '
         '処理ID
         '
@@ -355,9 +319,39 @@ Public Class frmC01F30_Menu
         Me.前回操作日時.Visible = False
         Me.前回操作日時.Width = 200
         '
+        'chkH06
+        '
+        Me.chkH06.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.chkH06.AutoSize = True
+        Me.chkH06.Checked = True
+        Me.chkH06.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkH06.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.chkH06.Location = New System.Drawing.Point(474, -2)
+        Me.chkH06.Name = "chkH06"
+        Me.chkH06.Size = New System.Drawing.Size(86, 19)
+        Me.chkH06.TabIndex = 21
+        Me.chkH06.Text = "仕入業務"
+        Me.chkH06.UseVisualStyleBackColor = True
+        Me.chkH06.Visible = False
+        '
+        'chkH03
+        '
+        Me.chkH03.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.chkH03.AutoSize = True
+        Me.chkH03.Checked = True
+        Me.chkH03.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkH03.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.chkH03.Location = New System.Drawing.Point(196, -2)
+        Me.chkH03.Name = "chkH03"
+        Me.chkH03.Size = New System.Drawing.Size(86, 19)
+        Me.chkH03.TabIndex = 22
+        Me.chkH03.Text = "売上業務"
+        Me.chkH03.UseVisualStyleBackColor = True
+        Me.chkH03.Visible = False
+        '
         'frmC01F30_Menu
         '
-        Me.ClientSize = New System.Drawing.Size(1350, 729)
+        Me.ClientSize = New System.Drawing.Size(1350, 701)
         Me.ControlBox = False
         Me.Controls.Add(Me.chkH03)
         Me.Controls.Add(Me.chkH06)

@@ -63,7 +63,7 @@ Partial Class DepositList
         Me.DgvCustomer.RowHeadersVisible = False
         Me.DgvCustomer.RowTemplate.Height = 21
         Me.DgvCustomer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvCustomer.Size = New System.Drawing.Size(1326, 513)
+        Me.DgvCustomer.Size = New System.Drawing.Size(1326, 481)
         Me.DgvCustomer.TabIndex = 20
         '
         '得意先名
@@ -135,7 +135,7 @@ Partial Class DepositList
         '
         'btnBack
         '
-        Me.btnBack.Location = New System.Drawing.Point(1173, 681)
+        Me.btnBack.Location = New System.Drawing.Point(1173, 649)
         Me.btnBack.Name = "btnBack"
         Me.btnBack.Size = New System.Drawing.Size(165, 40)
         Me.btnBack.TabIndex = 22
@@ -144,7 +144,7 @@ Partial Class DepositList
         '
         'BtnDeposit
         '
-        Me.BtnDeposit.Location = New System.Drawing.Point(1002, 681)
+        Me.BtnDeposit.Location = New System.Drawing.Point(1002, 649)
         Me.BtnDeposit.Name = "BtnDeposit"
         Me.BtnDeposit.Size = New System.Drawing.Size(165, 40)
         Me.BtnDeposit.TabIndex = 21
@@ -266,7 +266,7 @@ Partial Class DepositList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1350, 729)
+        Me.ClientSize = New System.Drawing.Size(1350, 701)
         Me.Controls.Add(Me.LblMode)
         Me.Controls.Add(Me.BtnSerach)
         Me.Controls.Add(Me.Label4)

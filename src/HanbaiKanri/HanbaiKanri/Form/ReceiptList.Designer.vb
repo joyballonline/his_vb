@@ -69,7 +69,7 @@ Partial Class ReceiptList
         '
         'BtnReceiptView
         '
-        Me.BtnReceiptView.Location = New System.Drawing.Point(1002, 675)
+        Me.BtnReceiptView.Location = New System.Drawing.Point(1003, 649)
         Me.BtnReceiptView.Name = "BtnReceiptView"
         Me.BtnReceiptView.Size = New System.Drawing.Size(165, 40)
         Me.BtnReceiptView.TabIndex = 148
@@ -317,7 +317,7 @@ Partial Class ReceiptList
         '
         'BtnBack
         '
-        Me.BtnBack.Location = New System.Drawing.Point(1173, 675)
+        Me.BtnBack.Location = New System.Drawing.Point(1174, 649)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(165, 40)
         Me.BtnBack.TabIndex = 125
@@ -326,7 +326,7 @@ Partial Class ReceiptList
         '
         'BtnReceiptCancel
         '
-        Me.BtnReceiptCancel.Location = New System.Drawing.Point(831, 675)
+        Me.BtnReceiptCancel.Location = New System.Drawing.Point(832, 649)
         Me.BtnReceiptCancel.Name = "BtnReceiptCancel"
         Me.BtnReceiptCancel.Size = New System.Drawing.Size(165, 40)
         Me.BtnReceiptCancel.TabIndex = 124
@@ -343,7 +343,7 @@ Partial Class ReceiptList
         Me.DgvCymnhd.ReadOnly = True
         Me.DgvCymnhd.RowTemplate.Height = 21
         Me.DgvCymnhd.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvCymnhd.Size = New System.Drawing.Size(1326, 420)
+        Me.DgvCymnhd.Size = New System.Drawing.Size(1326, 407)
         Me.DgvCymnhd.TabIndex = 123
         '
         'LblMode
@@ -362,7 +362,7 @@ Partial Class ReceiptList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1350, 729)
+        Me.ClientSize = New System.Drawing.Size(1350, 701)
         Me.Controls.Add(Me.LblMode)
         Me.Controls.Add(Me.ChkCancelData)
         Me.Controls.Add(Me.BtnReceiptView)

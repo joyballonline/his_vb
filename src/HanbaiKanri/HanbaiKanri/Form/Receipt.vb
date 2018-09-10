@@ -98,7 +98,7 @@ Public Class Receipt
 
             LblHistory.Location = New Point(12, 82)
             DgvHistory.Location = New Point(12, 106)
-            DgvHistory.Size = New Point(1326, 566)
+            DgvHistory.Size = New Point(1326, 500)
 
             BtnRegist.Visible = False
         Else

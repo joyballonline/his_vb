@@ -236,11 +236,11 @@ Public Class SalesList
         If SalesStatus = "CANCEL" Then
             LblMode.Text = "取消モード"
             BtnSalesCancel.Visible = True
-            BtnSalesCancel.Location = New Point(997, 677)
+            BtnSalesCancel.Location = New Point(997, 649)
         ElseIf SalesStatus = "VIEW" Then
             LblMode.Text = "参照モード"
             BtnSalesView.Visible = True
-            BtnSalesView.Location = New Point(997, 677)
+            BtnSalesView.Location = New Point(997, 649)
         End If
 
         Dim Status As String = "EXCLUSION"

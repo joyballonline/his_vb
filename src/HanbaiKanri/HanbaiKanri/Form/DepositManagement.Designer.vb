@@ -72,7 +72,7 @@ Partial Class DepositManagement
         '
         'BtnRegist
         '
-        Me.BtnRegist.Location = New System.Drawing.Point(1002, 669)
+        Me.BtnRegist.Location = New System.Drawing.Point(1003, 649)
         Me.BtnRegist.Name = "BtnRegist"
         Me.BtnRegist.Size = New System.Drawing.Size(165, 40)
         Me.BtnRegist.TabIndex = 293
@@ -81,7 +81,7 @@ Partial Class DepositManagement
         '
         'BtnBack
         '
-        Me.BtnBack.Location = New System.Drawing.Point(1173, 669)
+        Me.BtnBack.Location = New System.Drawing.Point(1174, 649)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(165, 40)
         Me.BtnBack.TabIndex = 292
@@ -115,7 +115,7 @@ Partial Class DepositManagement
         Me.DtpDepositDate.CustomFormat = "yyyy/MM/dd"
         Me.DtpDepositDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpDepositDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DtpDepositDate.Location = New System.Drawing.Point(291, 456)
+        Me.DtpDepositDate.Location = New System.Drawing.Point(291, 435)
         Me.DtpDepositDate.Name = "DtpDepositDate"
         Me.DtpDepositDate.Size = New System.Drawing.Size(148, 22)
         Me.DtpDepositDate.TabIndex = 285
@@ -127,7 +127,7 @@ Partial Class DepositManagement
         Me.LblRemarks.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblRemarks.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblRemarks.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblRemarks.Location = New System.Drawing.Point(445, 456)
+        Me.LblRemarks.Location = New System.Drawing.Point(445, 435)
         Me.LblRemarks.Name = "LblRemarks"
         Me.LblRemarks.Size = New System.Drawing.Size(170, 22)
         Me.LblRemarks.TabIndex = 284
@@ -137,7 +137,7 @@ Partial Class DepositManagement
         'TxtRemarks
         '
         Me.TxtRemarks.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtRemarks.Location = New System.Drawing.Point(621, 456)
+        Me.TxtRemarks.Location = New System.Drawing.Point(621, 435)
         Me.TxtRemarks.Name = "TxtRemarks"
         Me.TxtRemarks.Size = New System.Drawing.Size(644, 22)
         Me.TxtRemarks.TabIndex = 283
@@ -147,7 +147,7 @@ Partial Class DepositManagement
         Me.LblDepositDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblDepositDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblDepositDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblDepositDate.Location = New System.Drawing.Point(187, 456)
+        Me.LblDepositDate.Location = New System.Drawing.Point(187, 435)
         Me.LblDepositDate.Name = "LblDepositDate"
         Me.LblDepositDate.Size = New System.Drawing.Size(98, 22)
         Me.LblDepositDate.TabIndex = 282
@@ -158,7 +158,7 @@ Partial Class DepositManagement
         '
         Me.LblNo2.BackColor = System.Drawing.Color.Transparent
         Me.LblNo2.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblNo2.Location = New System.Drawing.Point(1316, 258)
+        Me.LblNo2.Location = New System.Drawing.Point(1316, 248)
         Me.LblNo2.Name = "LblNo2"
         Me.LblNo2.Size = New System.Drawing.Size(22, 22)
         Me.LblNo2.TabIndex = 281
@@ -170,7 +170,7 @@ Partial Class DepositManagement
         Me.TxtCount2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.TxtCount2.Enabled = False
         Me.TxtCount2.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtCount2.Location = New System.Drawing.Point(1272, 258)
+        Me.TxtCount2.Location = New System.Drawing.Point(1272, 248)
         Me.TxtCount2.Name = "TxtCount2"
         Me.TxtCount2.Size = New System.Drawing.Size(38, 22)
         Me.TxtCount2.TabIndex = 280
@@ -204,7 +204,7 @@ Partial Class DepositManagement
         '
         Me.LblBillingInfo.AutoSize = True
         Me.LblBillingInfo.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblBillingInfo.Location = New System.Drawing.Point(13, 460)
+        Me.LblBillingInfo.Location = New System.Drawing.Point(13, 439)
         Me.LblBillingInfo.Name = "LblBillingInfo"
         Me.LblBillingInfo.Size = New System.Drawing.Size(82, 15)
         Me.LblBillingInfo.TabIndex = 279
@@ -224,7 +224,7 @@ Partial Class DepositManagement
         '
         Me.LblDeposit.AutoSize = True
         Me.LblDeposit.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblDeposit.Location = New System.Drawing.Point(13, 263)
+        Me.LblDeposit.Location = New System.Drawing.Point(13, 253)
         Me.LblDeposit.Name = "LblDeposit"
         Me.LblDeposit.Size = New System.Drawing.Size(82, 15)
         Me.LblDeposit.TabIndex = 277
@@ -235,11 +235,11 @@ Partial Class DepositManagement
         Me.DgvBillingInfo.AllowUserToAddRows = False
         Me.DgvBillingInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvBillingInfo.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.InfoNo, Me.請求情報請求番号, Me.請求日, Me.請求金額, Me.請求情報入金額計, Me.請求情報請求残高, Me.入金額})
-        Me.DgvBillingInfo.Location = New System.Drawing.Point(12, 484)
+        Me.DgvBillingInfo.Location = New System.Drawing.Point(12, 463)
         Me.DgvBillingInfo.Name = "DgvBillingInfo"
         Me.DgvBillingInfo.RowHeadersVisible = False
         Me.DgvBillingInfo.RowTemplate.Height = 21
-        Me.DgvBillingInfo.Size = New System.Drawing.Size(1327, 160)
+        Me.DgvBillingInfo.Size = New System.Drawing.Size(1327, 150)
         Me.DgvBillingInfo.TabIndex = 276
         '
         'InfoNo
@@ -294,7 +294,7 @@ Partial Class DepositManagement
         Me.DgvHistory.RowHeadersVisible = False
         Me.DgvHistory.RowTemplate.Height = 21
         Me.DgvHistory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvHistory.Size = New System.Drawing.Size(1326, 160)
+        Me.DgvHistory.Size = New System.Drawing.Size(1327, 150)
         Me.DgvHistory.TabIndex = 275
         '
         'No
@@ -351,12 +351,12 @@ Partial Class DepositManagement
         Me.DgvDeposit.AllowUserToAddRows = False
         Me.DgvDeposit.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvDeposit.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.行番号, Me.入力入金額})
-        Me.DgvDeposit.Location = New System.Drawing.Point(11, 289)
+        Me.DgvDeposit.Location = New System.Drawing.Point(11, 279)
         Me.DgvDeposit.Name = "DgvDeposit"
         Me.DgvDeposit.RowHeadersVisible = False
         Me.DgvDeposit.RowTemplate.Height = 21
         Me.DgvDeposit.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
-        Me.DgvDeposit.Size = New System.Drawing.Size(1326, 160)
+        Me.DgvDeposit.Size = New System.Drawing.Size(1327, 150)
         Me.DgvDeposit.TabIndex = 274
         '
         '行番号
@@ -372,7 +372,7 @@ Partial Class DepositManagement
         '
         'BtnAdd
         '
-        Me.BtnAdd.Location = New System.Drawing.Point(101, 263)
+        Me.BtnAdd.Location = New System.Drawing.Point(101, 253)
         Me.BtnAdd.Name = "BtnAdd"
         Me.BtnAdd.Size = New System.Drawing.Size(94, 20)
         Me.BtnAdd.TabIndex = 294
@@ -383,7 +383,7 @@ Partial Class DepositManagement
         '
         Me.LblNo3.BackColor = System.Drawing.Color.Transparent
         Me.LblNo3.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblNo3.Location = New System.Drawing.Point(1316, 456)
+        Me.LblNo3.Location = New System.Drawing.Point(1316, 435)
         Me.LblNo3.Name = "LblNo3"
         Me.LblNo3.Size = New System.Drawing.Size(22, 22)
         Me.LblNo3.TabIndex = 296
@@ -395,14 +395,14 @@ Partial Class DepositManagement
         Me.TxtCount3.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.TxtCount3.Enabled = False
         Me.TxtCount3.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtCount3.Location = New System.Drawing.Point(1272, 456)
+        Me.TxtCount3.Location = New System.Drawing.Point(1272, 435)
         Me.TxtCount3.Name = "TxtCount3"
         Me.TxtCount3.Size = New System.Drawing.Size(38, 22)
         Me.TxtCount3.TabIndex = 295
         '
         'BtnDelete
         '
-        Me.BtnDelete.Location = New System.Drawing.Point(301, 263)
+        Me.BtnDelete.Location = New System.Drawing.Point(301, 253)
         Me.BtnDelete.Name = "BtnDelete"
         Me.BtnDelete.Size = New System.Drawing.Size(94, 20)
         Me.BtnDelete.TabIndex = 297
@@ -412,7 +412,7 @@ Partial Class DepositManagement
         '
         'BtnCal
         '
-        Me.BtnCal.Location = New System.Drawing.Point(201, 263)
+        Me.BtnCal.Location = New System.Drawing.Point(201, 253)
         Me.BtnCal.Name = "BtnCal"
         Me.BtnCal.Size = New System.Drawing.Size(94, 20)
         Me.BtnCal.TabIndex = 298
@@ -435,7 +435,7 @@ Partial Class DepositManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1350, 729)
+        Me.ClientSize = New System.Drawing.Size(1350, 701)
         Me.Controls.Add(Me.LblMode)
         Me.Controls.Add(Me.BtnCal)
         Me.Controls.Add(Me.BtnDelete)

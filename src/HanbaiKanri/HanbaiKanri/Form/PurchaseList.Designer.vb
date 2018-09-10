@@ -58,7 +58,7 @@ Partial Class PurchaseList
         '
         'BtnPurchaseCancel
         '
-        Me.BtnPurchaseCancel.Location = New System.Drawing.Point(831, 675)
+        Me.BtnPurchaseCancel.Location = New System.Drawing.Point(832, 649)
         Me.BtnPurchaseCancel.Name = "BtnPurchaseCancel"
         Me.BtnPurchaseCancel.Size = New System.Drawing.Size(165, 40)
         Me.BtnPurchaseCancel.TabIndex = 122
@@ -79,7 +79,7 @@ Partial Class PurchaseList
         '
         'BtnPurchaseView
         '
-        Me.BtnPurchaseView.Location = New System.Drawing.Point(1002, 675)
+        Me.BtnPurchaseView.Location = New System.Drawing.Point(1003, 649)
         Me.BtnPurchaseView.Name = "BtnPurchaseView"
         Me.BtnPurchaseView.Size = New System.Drawing.Size(165, 40)
         Me.BtnPurchaseView.TabIndex = 117
@@ -327,7 +327,7 @@ Partial Class PurchaseList
         '
         'BtnBack
         '
-        Me.BtnBack.Location = New System.Drawing.Point(1173, 675)
+        Me.BtnBack.Location = New System.Drawing.Point(1174, 649)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(165, 40)
         Me.BtnBack.TabIndex = 94
@@ -344,7 +344,7 @@ Partial Class PurchaseList
         Me.DgvHtyhd.RowHeadersVisible = False
         Me.DgvHtyhd.RowTemplate.Height = 21
         Me.DgvHtyhd.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvHtyhd.Size = New System.Drawing.Size(1326, 420)
+        Me.DgvHtyhd.Size = New System.Drawing.Size(1326, 407)
         Me.DgvHtyhd.TabIndex = 92
         '
         'LblMode
@@ -363,7 +363,7 @@ Partial Class PurchaseList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1350, 729)
+        Me.ClientSize = New System.Drawing.Size(1350, 701)
         Me.Controls.Add(Me.LblMode)
         Me.Controls.Add(Me.BtnPurchaseCancel)
         Me.Controls.Add(Me.ChkCancelData)

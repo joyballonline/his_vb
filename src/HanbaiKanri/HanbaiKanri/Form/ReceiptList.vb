@@ -210,11 +210,11 @@ Public Class ReceiptList
         If ReceiptStatus = "CANCEL" Then
             LblMode.Text = "取消モード"
             BtnReceiptCancel.Visible = True
-            BtnReceiptCancel.Location = New Point(997, 677)
+            BtnReceiptCancel.Location = New Point(997, 649)
         ElseIf ReceiptStatus = "VIEW" Then
             LblMode.Text = "参照モード"
             BtnReceiptView.Visible = True
-            BtnReceiptView.Location = New Point(997, 677)
+            BtnReceiptView.Location = New Point(997, 649)
         End If
 
         Dim Status As String = "EXCLUSION"

@@ -52,7 +52,7 @@ Partial Class AccountsPayableList
         '
         'BtnAPCancel
         '
-        Me.BtnAPCancel.Location = New System.Drawing.Point(831, 675)
+        Me.BtnAPCancel.Location = New System.Drawing.Point(831, 649)
         Me.BtnAPCancel.Name = "BtnAPCancel"
         Me.BtnAPCancel.Size = New System.Drawing.Size(165, 40)
         Me.BtnAPCancel.TabIndex = 170
@@ -73,7 +73,7 @@ Partial Class AccountsPayableList
         '
         'BtnAPView
         '
-        Me.BtnAPView.Location = New System.Drawing.Point(1002, 675)
+        Me.BtnAPView.Location = New System.Drawing.Point(1002, 649)
         Me.BtnAPView.Name = "BtnAPView"
         Me.BtnAPView.Size = New System.Drawing.Size(165, 40)
         Me.BtnAPView.TabIndex = 168
@@ -262,7 +262,7 @@ Partial Class AccountsPayableList
         '
         'BtnBack
         '
-        Me.BtnBack.Location = New System.Drawing.Point(1173, 675)
+        Me.BtnBack.Location = New System.Drawing.Point(1173, 649)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(165, 40)
         Me.BtnBack.TabIndex = 151
@@ -279,7 +279,7 @@ Partial Class AccountsPayableList
         Me.DgvBilling.RowHeadersVisible = False
         Me.DgvBilling.RowTemplate.Height = 21
         Me.DgvBilling.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvBilling.Size = New System.Drawing.Size(1326, 420)
+        Me.DgvBilling.Size = New System.Drawing.Size(1326, 407)
         Me.DgvBilling.TabIndex = 150
         '
         'LblMode
@@ -298,7 +298,7 @@ Partial Class AccountsPayableList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1350, 729)
+        Me.ClientSize = New System.Drawing.Size(1350, 701)
         Me.Controls.Add(Me.LblMode)
         Me.Controls.Add(Me.BtnAPCancel)
         Me.Controls.Add(Me.ChkCancelData)

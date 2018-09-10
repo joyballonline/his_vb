@@ -64,7 +64,7 @@ Partial Class MstSupplier
         Me.Dgv_Supplier.RowHeadersVisible = False
         Me.Dgv_Supplier.RowTemplate.Height = 21
         Me.Dgv_Supplier.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.Dgv_Supplier.Size = New System.Drawing.Size(1326, 640)
+        Me.Dgv_Supplier.Size = New System.Drawing.Size(1326, 612)
         Me.Dgv_Supplier.TabIndex = 0
         '
         '会社コード
@@ -195,7 +195,7 @@ Partial Class MstSupplier
         '
         'btnSupplierEdit
         '
-        Me.btnSupplierEdit.Location = New System.Drawing.Point(1002, 677)
+        Me.btnSupplierEdit.Location = New System.Drawing.Point(1002, 649)
         Me.btnSupplierEdit.Name = "btnSupplierEdit"
         Me.btnSupplierEdit.Size = New System.Drawing.Size(165, 40)
         Me.btnSupplierEdit.TabIndex = 1
@@ -204,7 +204,7 @@ Partial Class MstSupplier
         '
         'btnSupplierAdd
         '
-        Me.btnSupplierAdd.Location = New System.Drawing.Point(831, 677)
+        Me.btnSupplierAdd.Location = New System.Drawing.Point(831, 649)
         Me.btnSupplierAdd.Name = "btnSupplierAdd"
         Me.btnSupplierAdd.Size = New System.Drawing.Size(165, 40)
         Me.btnSupplierAdd.TabIndex = 2
@@ -213,7 +213,7 @@ Partial Class MstSupplier
         '
         'BtnBack
         '
-        Me.BtnBack.Location = New System.Drawing.Point(1173, 677)
+        Me.BtnBack.Location = New System.Drawing.Point(1173, 649)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(165, 40)
         Me.BtnBack.TabIndex = 3
@@ -249,7 +249,7 @@ Partial Class MstSupplier
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1350, 729)
+        Me.ClientSize = New System.Drawing.Size(1350, 701)
         Me.Controls.Add(Me.BtnSearch)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Search)

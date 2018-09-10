@@ -181,7 +181,7 @@ Public Class DepositDetailList
         ElseIf _status = "CANCEL" Then
             LblMode.Text = "取消モード"
             BtnBillingCancel.Visible = True
-            BtnBillingCancel.Location = New Point(997, 677)
+            BtnBillingCancel.Location = New Point(997, 649)
         End If
 
         Dim Status As String = "EXCLUSION"

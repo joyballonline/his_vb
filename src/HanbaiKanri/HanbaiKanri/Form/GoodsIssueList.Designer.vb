@@ -69,7 +69,7 @@ Partial Class GoodsIssueList
         '
         'BtnSalesView
         '
-        Me.BtnSalesView.Location = New System.Drawing.Point(1002, 675)
+        Me.BtnSalesView.Location = New System.Drawing.Point(1003, 649)
         Me.BtnSalesView.Name = "BtnSalesView"
         Me.BtnSalesView.Size = New System.Drawing.Size(165, 40)
         Me.BtnSalesView.TabIndex = 121
@@ -317,7 +317,7 @@ Partial Class GoodsIssueList
         '
         'BtnBack
         '
-        Me.BtnBack.Location = New System.Drawing.Point(1173, 675)
+        Me.BtnBack.Location = New System.Drawing.Point(1174, 649)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(165, 40)
         Me.BtnBack.TabIndex = 98
@@ -326,7 +326,7 @@ Partial Class GoodsIssueList
         '
         'BtnSalesCancel
         '
-        Me.BtnSalesCancel.Location = New System.Drawing.Point(831, 675)
+        Me.BtnSalesCancel.Location = New System.Drawing.Point(832, 649)
         Me.BtnSalesCancel.Name = "BtnSalesCancel"
         Me.BtnSalesCancel.Size = New System.Drawing.Size(165, 40)
         Me.BtnSalesCancel.TabIndex = 97
@@ -344,7 +344,7 @@ Partial Class GoodsIssueList
         Me.DgvCymnhd.RowHeadersVisible = False
         Me.DgvCymnhd.RowTemplate.Height = 21
         Me.DgvCymnhd.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvCymnhd.Size = New System.Drawing.Size(1326, 420)
+        Me.DgvCymnhd.Size = New System.Drawing.Size(1326, 407)
         Me.DgvCymnhd.TabIndex = 96
         '
         'LblMode
@@ -363,7 +363,7 @@ Partial Class GoodsIssueList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1350, 729)
+        Me.ClientSize = New System.Drawing.Size(1350, 701)
         Me.Controls.Add(Me.LblMode)
         Me.Controls.Add(Me.ChkCancelData)
         Me.Controls.Add(Me.BtnSalesView)
