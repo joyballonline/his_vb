@@ -110,19 +110,37 @@ Public Class DepositManagement
         '    DgvHistory.Location = New Point(10, 19)
         '    DgvHistory.Location = New Size(1326, 625)
         'End If
+        Dim Sql1 As String = ""
+
+        Sql1 += "SELECT "
+        Sql1 += "* "
+        Sql1 += "FROM "
+        Sql1 += "public"
+        Sql1 += "."
+        Sql1 += "m90_hanyo"
+        Sql1 += " WHERE "
+        Sql1 += "会社コード"
+        Sql1 += " ILIKE "
+        Sql1 += "'"
+        Sql1 += CompanyCode
+        Sql1 += "'"
+        Sql1 += " AND "
+        Sql1 += "固定キー"
+        Sql1 += " ILIKE "
+        Sql1 += "'"
+        Sql1 += "2"
+        Sql1 += "'"
+
+        Dim reccnt As Integer = 0
+        Dim ds1 As DataSet = _db.selectDB(Sql1, RS, reccnt)
+
         Dim table As New DataTable("Table")
         table.Columns.Add("Display", GetType(String))
         table.Columns.Add("Value", GetType(Integer))
-        table.Rows.Add("振込入金", 1)
-        table.Rows.Add("振込手数料", 2)
-        table.Rows.Add("現金入金", 3)
-        table.Rows.Add("手形受入", 4)
-        table.Rows.Add("電子債権", 5)
-        table.Rows.Add("売上割引", 6)
-        table.Rows.Add("売上値引", 7)
-        table.Rows.Add("リベート", 8)
-        table.Rows.Add("相殺", 9)
-        table.Rows.Add("諸口", 10)
+
+        For i As Integer = 0 To ds1.Tables(RS).Rows.Count - 1
+            table.Rows.Add(ds1.Tables(RS).Rows(i)("文字１"), ds1.Tables(RS).Rows(i)("可変キー"))
+        Next
 
         Dim column As New DataGridViewComboBoxColumn()
         column.DataSource = table
