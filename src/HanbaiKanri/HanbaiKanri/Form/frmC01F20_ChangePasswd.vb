@@ -281,11 +281,11 @@ Public Class frmC01F20_ChangePasswd
 
 
             ''「連携処理一覧」画面起動
-            Dim openForm As Form = Nothing
-            openForm = New frmC01F30_Menu(_msgHd, _langHd, _db)
-            openForm.Show()
+            'Dim openForm As Form = Nothing
+            'openForm = New frmC01F30_Menu(_msgHd, _langHd, _db)
+            'openForm.Show()
             Me.Close()
-            _parentForm.Hide()
+            _parentForm.Enabled = True
 
         Catch ue As UsrDefException
             ue.dspMsg()
