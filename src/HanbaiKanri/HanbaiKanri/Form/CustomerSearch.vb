@@ -146,15 +146,42 @@ Public Class CustomerSearch
 
             frm.TxtCustomerCode.Text = Dgv_Customer.Rows(idx).Cells(1).Value
             frm.TxtCustomerName.Text = Dgv_Customer.Rows(idx).Cells(2).Value
-            frm.TxtPostalCode.Text = Dgv_Customer.Rows(idx).Cells(4).Value
-            frm.TxtAddress1.Text = Dgv_Customer.Rows(idx).Cells(5).Value
-            frm.TxtAddress2.Text = Dgv_Customer.Rows(idx).Cells(6).Value
-            frm.TxtAddress3.Text = Dgv_Customer.Rows(idx).Cells(7).Value
-            frm.TxtTel.Text = Dgv_Customer.Rows(idx).Cells(8).Value
-            frm.TxtFax.Text = Dgv_Customer.Rows(idx).Cells(10).Value
-            frm.TxtPerson.Text = Dgv_Customer.Rows(idx).Cells(11).Value
-            frm.TxtPosition.Text = Dgv_Customer.Rows(idx).Cells(12).Value
-            frm.TxtPaymentTerms.Text = Dgv_Customer.Rows(idx).Cells(13).Value
+            If Dgv_Customer.Rows(idx).Cells(4).Value Is DBNull.Value Then
+            Else
+                frm.TxtPostalCode.Text = Dgv_Customer.Rows(idx).Cells(4).Value
+            End If
+            If Dgv_Customer.Rows(idx).Cells(5).Value Is DBNull.Value Then
+            Else
+                frm.TxtAddress1.Text = Dgv_Customer.Rows(idx).Cells(5).Value
+            End If
+            If Dgv_Customer.Rows(idx).Cells(6).Value Is DBNull.Value Then
+            Else
+                frm.TxtAddress2.Text = Dgv_Customer.Rows(idx).Cells(6).Value
+            End If
+            If Dgv_Customer.Rows(idx).Cells(7).Value Is DBNull.Value Then
+            Else
+                frm.TxtAddress3.Text = Dgv_Customer.Rows(idx).Cells(7).Value
+            End If
+            If Dgv_Customer.Rows(idx).Cells(8).Value Is DBNull.Value Then
+            Else
+                frm.TxtTel.Text = Dgv_Customer.Rows(idx).Cells(8).Value
+            End If
+            If Dgv_Customer.Rows(idx).Cells(10).Value Is DBNull.Value Then
+            Else
+                frm.TxtFax.Text = Dgv_Customer.Rows(idx).Cells(10).Value
+            End If
+            If Dgv_Customer.Rows(idx).Cells(11).Value Is DBNull.Value Then
+            Else
+                frm.TxtPerson.Text = Dgv_Customer.Rows(idx).Cells(11).Value
+            End If
+            If Dgv_Customer.Rows(idx).Cells(12).Value Is DBNull.Value Then
+            Else
+                frm.TxtPosition.Text = Dgv_Customer.Rows(idx).Cells(12).Value
+            End If
+            If Dgv_Customer.Rows(idx).Cells(13).Value Is DBNull.Value Then
+            Else
+                frm.TxtPaymentTerms.Text = Dgv_Customer.Rows(idx).Cells(13).Value
+            End If
 
             _parentForm.Enabled = True
             _parentForm.Show()

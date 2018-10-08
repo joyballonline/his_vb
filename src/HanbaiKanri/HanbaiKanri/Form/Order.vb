@@ -497,6 +497,9 @@ Public Class Order
             If ds1.Tables(RS).Rows(0)("見積備考") IsNot DBNull.Value Then
                 TxtQuoteRemarks.Text = ds1.Tables(RS).Rows(0)("見積備考")
             End If
+            If ds1.Tables(RS).Rows(0)("客先番号") IsNot DBNull.Value Then
+                TxtCustomerPO.Text = ds1.Tables(RS).Rows(0)("客先番号")
+            End If
 
             ''見積明細情報
             Dim Sql3 As String = ""
@@ -629,13 +632,15 @@ Public Class Order
             Sql1 += "INSERT INTO "
             Sql1 += "Public."
             Sql1 += "t10_cymnhd("
-            Sql1 += "会社コード, 受注番号, 受注番号枝番, 見積番号, 見積番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額,仕入金額, 粗利額, 営業担当者, 入力担当者, 備考, 見積備考, ＶＡＴ, 受注日, 登録日, 更新日, 更新者, 取消区分)"
+            Sql1 += "会社コード, 受注番号, 受注番号枝番, 客先番号, 見積番号, 見積番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額,仕入金額, 粗利額, 営業担当者, 入力担当者, 備考, 見積備考, ＶＡＴ, 受注日, 登録日, 更新日, 更新者, 取消区分)"
             Sql1 += " VALUES('"
             Sql1 += CompanyCode
             Sql1 += "', '"
             Sql1 += TxtOrderNo.Text
             Sql1 += "', '"
             Sql1 += TxtOrderSuffix.Text
+            Sql1 += "', '"
+            Sql1 += TxtCustomerPO.Text
             Sql1 += "', '"
             Sql1 += TxtQuoteNo.Text
             Sql1 += "', '"
@@ -698,6 +703,8 @@ Public Class Order
             Sql1 += "受注番号"
             Sql1 += ", "
             Sql1 += "受注番号枝番"
+            Sql1 += ", "
+            Sql1 += "客先番号"
             Sql1 += ", "
             Sql1 += "見積番号"
             Sql1 += ", "

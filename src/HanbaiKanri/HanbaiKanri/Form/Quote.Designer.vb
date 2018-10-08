@@ -22,41 +22,22 @@ Partial Class Quote
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LblQuoteNo = New System.Windows.Forms.Label()
         Me.LblQuote = New System.Windows.Forms.Label()
         Me.TxtQuoteNo = New System.Windows.Forms.TextBox()
         Me.LblPaymentTerms = New System.Windows.Forms.Label()
         Me.TxtPaymentTerms = New System.Windows.Forms.TextBox()
         Me.DgvItemList = New System.Windows.Forms.DataGridView()
-        Me.No = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.メーカー = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.品名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.型式 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.数量 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.単位 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.仕入先 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.仕入単価 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.間接費率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.間接費 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.間接費無仕入金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.仕入金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.売単価 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.売上金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.粗利額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.粗利率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.リードタイム = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.備考 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ステータス = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LblInput = New System.Windows.Forms.Label()
         Me.TxtCustomerName = New System.Windows.Forms.TextBox()
         Me.LblCustomerName = New System.Windows.Forms.Label()
@@ -108,7 +89,37 @@ Partial Class Quote
         Me.LblMode = New System.Windows.Forms.Label()
         Me.BtnQuoteRequest = New System.Windows.Forms.Button()
         Me.BtnProof = New System.Windows.Forms.Button()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.RbtnUP = New System.Windows.Forms.RadioButton()
+        Me.RbtnGP = New System.Windows.Forms.RadioButton()
+        Me.No = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.メーカー = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.品名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.型式 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.数量 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.単位 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入先 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入単価 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入原価 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.関税率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.関税額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.前払法人税率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.前払法人税額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.輸送費率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.輸送費額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.売単価 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.売上金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.粗利額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.粗利率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.リードタイム = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.備考 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ステータス = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.間接費無仕入金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.間接費率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.間接費 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DgvItemList, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'LblQuoteNo
@@ -176,7 +187,7 @@ Partial Class Quote
         Me.DgvItemList.AllowUserToAddRows = False
         Me.DgvItemList.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.DgvItemList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvItemList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.No, Me.メーカー, Me.品名, Me.型式, Me.数量, Me.単位, Me.仕入先, Me.仕入単価, Me.間接費率, Me.間接費, Me.間接費無仕入金額, Me.仕入金額, Me.売単価, Me.売上金額, Me.粗利額, Me.粗利率, Me.リードタイム, Me.備考, Me.ステータス})
+        Me.DgvItemList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.No, Me.メーカー, Me.品名, Me.型式, Me.数量, Me.単位, Me.仕入先, Me.仕入単価, Me.仕入原価, Me.関税率, Me.関税額, Me.前払法人税率, Me.前払法人税額, Me.輸送費率, Me.輸送費額, Me.仕入金額, Me.売単価, Me.売上金額, Me.粗利額, Me.粗利率, Me.リードタイム, Me.備考, Me.ステータス, Me.間接費無仕入金額, Me.間接費率, Me.間接費})
         Me.DgvItemList.Location = New System.Drawing.Point(12, 237)
         Me.DgvItemList.Name = "DgvItemList"
         Me.DgvItemList.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
@@ -185,141 +196,6 @@ Partial Class Quote
         Me.DgvItemList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
         Me.DgvItemList.Size = New System.Drawing.Size(1329, 179)
         Me.DgvItemList.TabIndex = 17
-        '
-        'No
-        '
-        Me.No.HeaderText = "No"
-        Me.No.Name = "No"
-        Me.No.Width = 43
-        '
-        'メーカー
-        '
-        DataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.メーカー.DefaultCellStyle = DataGridViewCellStyle11
-        Me.メーカー.HeaderText = "メーカー"
-        Me.メーカー.Name = "メーカー"
-        Me.メーカー.Width = 220
-        '
-        '品名
-        '
-        DataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.品名.DefaultCellStyle = DataGridViewCellStyle12
-        Me.品名.HeaderText = "品名"
-        Me.品名.Name = "品名"
-        Me.品名.Width = 220
-        '
-        '型式
-        '
-        DataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.型式.DefaultCellStyle = DataGridViewCellStyle13
-        Me.型式.HeaderText = "型式"
-        Me.型式.Name = "型式"
-        Me.型式.Width = 230
-        '
-        '数量
-        '
-        Me.数量.HeaderText = "数量"
-        Me.数量.Name = "数量"
-        Me.数量.Width = 80
-        '
-        '単位
-        '
-        Me.単位.HeaderText = "単位"
-        Me.単位.Name = "単位"
-        Me.単位.Width = 80
-        '
-        '仕入先
-        '
-        DataGridViewCellStyle14.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.仕入先.DefaultCellStyle = DataGridViewCellStyle14
-        Me.仕入先.HeaderText = "仕入先"
-        Me.仕入先.Name = "仕入先"
-        Me.仕入先.Width = 85
-        '
-        '仕入単価
-        '
-        Me.仕入単価.HeaderText = "仕入単価"
-        Me.仕入単価.Name = "仕入単価"
-        Me.仕入単価.Width = 80
-        '
-        '間接費率
-        '
-        Me.間接費率.HeaderText = "間接費率"
-        Me.間接費率.Name = "間接費率"
-        Me.間接費率.Width = 85
-        '
-        '間接費
-        '
-        DataGridViewCellStyle15.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.間接費.DefaultCellStyle = DataGridViewCellStyle15
-        Me.間接費.HeaderText = "間接費"
-        Me.間接費.Name = "間接費"
-        Me.間接費.ReadOnly = True
-        Me.間接費.Visible = False
-        '
-        '間接費無仕入金額
-        '
-        DataGridViewCellStyle16.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.間接費無仕入金額.DefaultCellStyle = DataGridViewCellStyle16
-        Me.間接費無仕入金額.HeaderText = "仕入金額(間接費無)"
-        Me.間接費無仕入金額.Name = "間接費無仕入金額"
-        Me.間接費無仕入金額.ReadOnly = True
-        Me.間接費無仕入金額.Width = 150
-        '
-        '仕入金額
-        '
-        DataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.仕入金額.DefaultCellStyle = DataGridViewCellStyle17
-        Me.仕入金額.HeaderText = "仕入金額"
-        Me.仕入金額.Name = "仕入金額"
-        Me.仕入金額.ReadOnly = True
-        '
-        '売単価
-        '
-        Me.売単価.HeaderText = "売単価"
-        Me.売単価.Name = "売単価"
-        Me.売単価.Width = 80
-        '
-        '売上金額
-        '
-        DataGridViewCellStyle18.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.売上金額.DefaultCellStyle = DataGridViewCellStyle18
-        Me.売上金額.HeaderText = "売上金額"
-        Me.売上金額.Name = "売上金額"
-        Me.売上金額.ReadOnly = True
-        '
-        '粗利額
-        '
-        DataGridViewCellStyle19.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.粗利額.DefaultCellStyle = DataGridViewCellStyle19
-        Me.粗利額.HeaderText = "粗利額"
-        Me.粗利額.Name = "粗利額"
-        Me.粗利額.ReadOnly = True
-        '
-        '粗利率
-        '
-        DataGridViewCellStyle20.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.粗利率.DefaultCellStyle = DataGridViewCellStyle20
-        Me.粗利率.HeaderText = "粗利率"
-        Me.粗利率.Name = "粗利率"
-        Me.粗利率.ReadOnly = True
-        '
-        'リードタイム
-        '
-        Me.リードタイム.HeaderText = "リードタイム"
-        Me.リードタイム.Name = "リードタイム"
-        '
-        '備考
-        '
-        Me.備考.HeaderText = "備考"
-        Me.備考.Name = "備考"
-        Me.備考.Width = 80
-        '
-        'ステータス
-        '
-        Me.ステータス.HeaderText = "ステータス"
-        Me.ステータス.Name = "ステータス"
-        Me.ステータス.Visible = False
         '
         'LblInput
         '
@@ -884,10 +760,219 @@ Partial Class Quote
         Me.BtnProof.UseVisualStyleBackColor = True
         Me.BtnProof.Visible = False
         '
+        'Panel1
+        '
+        Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel1.Controls.Add(Me.RbtnUP)
+        Me.Panel1.Controls.Add(Me.RbtnGP)
+        Me.Panel1.Location = New System.Drawing.Point(1074, 194)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(195, 37)
+        Me.Panel1.TabIndex = 86
+        '
+        'RbtnUP
+        '
+        Me.RbtnUP.AutoSize = True
+        Me.RbtnUP.Checked = True
+        Me.RbtnUP.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.RbtnUP.Location = New System.Drawing.Point(6, 8)
+        Me.RbtnUP.Name = "RbtnUP"
+        Me.RbtnUP.Size = New System.Drawing.Size(89, 19)
+        Me.RbtnUP.TabIndex = 26
+        Me.RbtnUP.TabStop = True
+        Me.RbtnUP.Text = "単価入力"
+        Me.RbtnUP.UseVisualStyleBackColor = True
+        '
+        'RbtnGP
+        '
+        Me.RbtnGP.AutoSize = True
+        Me.RbtnGP.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.RbtnGP.Location = New System.Drawing.Point(101, 8)
+        Me.RbtnGP.Name = "RbtnGP"
+        Me.RbtnGP.Size = New System.Drawing.Size(89, 19)
+        Me.RbtnGP.TabIndex = 27
+        Me.RbtnGP.Text = "粗利入力"
+        Me.RbtnGP.UseVisualStyleBackColor = True
+        '
+        'No
+        '
+        Me.No.HeaderText = "No"
+        Me.No.Name = "No"
+        Me.No.Width = 43
+        '
+        'メーカー
+        '
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.メーカー.DefaultCellStyle = DataGridViewCellStyle1
+        Me.メーカー.HeaderText = "メーカー"
+        Me.メーカー.Name = "メーカー"
+        Me.メーカー.Width = 220
+        '
+        '品名
+        '
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.品名.DefaultCellStyle = DataGridViewCellStyle2
+        Me.品名.HeaderText = "品名"
+        Me.品名.Name = "品名"
+        Me.品名.Width = 220
+        '
+        '型式
+        '
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.型式.DefaultCellStyle = DataGridViewCellStyle3
+        Me.型式.HeaderText = "型式"
+        Me.型式.Name = "型式"
+        Me.型式.Width = 230
+        '
+        '数量
+        '
+        Me.数量.HeaderText = "数量"
+        Me.数量.Name = "数量"
+        Me.数量.Width = 80
+        '
+        '単位
+        '
+        Me.単位.HeaderText = "単位"
+        Me.単位.Name = "単位"
+        Me.単位.Width = 80
+        '
+        '仕入先
+        '
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.仕入先.DefaultCellStyle = DataGridViewCellStyle4
+        Me.仕入先.HeaderText = "仕入先"
+        Me.仕入先.Name = "仕入先"
+        Me.仕入先.Width = 85
+        '
+        '仕入単価
+        '
+        Me.仕入単価.HeaderText = "仕入単価"
+        Me.仕入単価.Name = "仕入単価"
+        Me.仕入単価.Width = 80
+        '
+        '仕入原価
+        '
+        Me.仕入原価.HeaderText = "仕入原価"
+        Me.仕入原価.Name = "仕入原価"
+        '
+        '関税率
+        '
+        Me.関税率.HeaderText = "関税率"
+        Me.関税率.Name = "関税率"
+        '
+        '関税額
+        '
+        Me.関税額.HeaderText = "関税額"
+        Me.関税額.Name = "関税額"
+        '
+        '前払法人税率
+        '
+        Me.前払法人税率.HeaderText = "前払法人税率"
+        Me.前払法人税率.Name = "前払法人税率"
+        Me.前払法人税率.Width = 120
+        '
+        '前払法人税額
+        '
+        Me.前払法人税額.HeaderText = "前払法人税額"
+        Me.前払法人税額.Name = "前払法人税額"
+        Me.前払法人税額.Width = 120
+        '
+        '輸送費率
+        '
+        Me.輸送費率.HeaderText = "輸送費率"
+        Me.輸送費率.Name = "輸送費率"
+        '
+        '輸送費額
+        '
+        Me.輸送費額.HeaderText = "輸送費額"
+        Me.輸送費額.Name = "輸送費額"
+        '
+        '仕入金額
+        '
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.仕入金額.DefaultCellStyle = DataGridViewCellStyle5
+        Me.仕入金額.HeaderText = "仕入金額"
+        Me.仕入金額.Name = "仕入金額"
+        Me.仕入金額.ReadOnly = True
+        '
+        '売単価
+        '
+        Me.売単価.HeaderText = "売単価"
+        Me.売単価.Name = "売単価"
+        Me.売単価.Width = 80
+        '
+        '売上金額
+        '
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.売上金額.DefaultCellStyle = DataGridViewCellStyle6
+        Me.売上金額.HeaderText = "売上金額"
+        Me.売上金額.Name = "売上金額"
+        Me.売上金額.ReadOnly = True
+        '
+        '粗利額
+        '
+        DataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.粗利額.DefaultCellStyle = DataGridViewCellStyle7
+        Me.粗利額.HeaderText = "粗利額"
+        Me.粗利額.Name = "粗利額"
+        Me.粗利額.ReadOnly = True
+        '
+        '粗利率
+        '
+        DataGridViewCellStyle8.BackColor = System.Drawing.Color.Gray
+        Me.粗利率.DefaultCellStyle = DataGridViewCellStyle8
+        Me.粗利率.HeaderText = "粗利率"
+        Me.粗利率.Name = "粗利率"
+        Me.粗利率.ReadOnly = True
+        '
+        'リードタイム
+        '
+        Me.リードタイム.HeaderText = "リードタイム"
+        Me.リードタイム.Name = "リードタイム"
+        '
+        '備考
+        '
+        Me.備考.HeaderText = "備考"
+        Me.備考.Name = "備考"
+        Me.備考.Width = 80
+        '
+        'ステータス
+        '
+        Me.ステータス.HeaderText = "ステータス"
+        Me.ステータス.Name = "ステータス"
+        Me.ステータス.Visible = False
+        '
+        '間接費無仕入金額
+        '
+        DataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.間接費無仕入金額.DefaultCellStyle = DataGridViewCellStyle9
+        Me.間接費無仕入金額.HeaderText = "仕入原価"
+        Me.間接費無仕入金額.Name = "間接費無仕入金額"
+        Me.間接費無仕入金額.ReadOnly = True
+        Me.間接費無仕入金額.Visible = False
+        Me.間接費無仕入金額.Width = 150
+        '
+        '間接費率
+        '
+        Me.間接費率.HeaderText = "間接費率"
+        Me.間接費率.Name = "間接費率"
+        Me.間接費率.Visible = False
+        Me.間接費率.Width = 85
+        '
+        '間接費
+        '
+        DataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.間接費.DefaultCellStyle = DataGridViewCellStyle10
+        Me.間接費.HeaderText = "間接費"
+        Me.間接費.Name = "間接費"
+        Me.間接費.ReadOnly = True
+        Me.間接費.Visible = False
+        '
         'Quote
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.BtnProof)
         Me.Controls.Add(Me.BtnQuoteRequest)
         Me.Controls.Add(Me.LblMode)
@@ -949,6 +1034,8 @@ Partial Class Quote
         Me.Name = "Quote"
         Me.Text = "Quote"
         CType(Me.DgvItemList, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1010,6 +1097,9 @@ Partial Class Quote
     Friend WithEvents LblMode As Label
     Friend WithEvents BtnQuoteRequest As Button
     Friend WithEvents BtnProof As Button
+    Friend WithEvents Panel1 As Panel
+    Friend WithEvents RbtnUP As RadioButton
+    Friend WithEvents RbtnGP As RadioButton
     Friend WithEvents No As DataGridViewTextBoxColumn
     Friend WithEvents メーカー As DataGridViewTextBoxColumn
     Friend WithEvents 品名 As DataGridViewTextBoxColumn
@@ -1018,9 +1108,13 @@ Partial Class Quote
     Friend WithEvents 単位 As DataGridViewTextBoxColumn
     Friend WithEvents 仕入先 As DataGridViewTextBoxColumn
     Friend WithEvents 仕入単価 As DataGridViewTextBoxColumn
-    Friend WithEvents 間接費率 As DataGridViewTextBoxColumn
-    Friend WithEvents 間接費 As DataGridViewTextBoxColumn
-    Friend WithEvents 間接費無仕入金額 As DataGridViewTextBoxColumn
+    Friend WithEvents 仕入原価 As DataGridViewTextBoxColumn
+    Friend WithEvents 関税率 As DataGridViewTextBoxColumn
+    Friend WithEvents 関税額 As DataGridViewTextBoxColumn
+    Friend WithEvents 前払法人税率 As DataGridViewTextBoxColumn
+    Friend WithEvents 前払法人税額 As DataGridViewTextBoxColumn
+    Friend WithEvents 輸送費率 As DataGridViewTextBoxColumn
+    Friend WithEvents 輸送費額 As DataGridViewTextBoxColumn
     Friend WithEvents 仕入金額 As DataGridViewTextBoxColumn
     Friend WithEvents 売単価 As DataGridViewTextBoxColumn
     Friend WithEvents 売上金額 As DataGridViewTextBoxColumn
@@ -1029,4 +1123,7 @@ Partial Class Quote
     Friend WithEvents リードタイム As DataGridViewTextBoxColumn
     Friend WithEvents 備考 As DataGridViewTextBoxColumn
     Friend WithEvents ステータス As DataGridViewTextBoxColumn
+    Friend WithEvents 間接費無仕入金額 As DataGridViewTextBoxColumn
+    Friend WithEvents 間接費率 As DataGridViewTextBoxColumn
+    Friend WithEvents 間接費 As DataGridViewTextBoxColumn
 End Class

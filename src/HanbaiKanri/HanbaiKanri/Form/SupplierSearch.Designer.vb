@@ -29,6 +29,9 @@ Partial Class SupplierSearch
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Dgv_Supplier = New System.Windows.Forms.DataGridView()
         Me.会社コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.関税率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.前払法人税率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.輸送費率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.仕入先コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.仕入先名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.仕入先名略名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -100,7 +103,7 @@ Partial Class SupplierSearch
         '
         Me.Dgv_Supplier.AllowUserToAddRows = False
         Me.Dgv_Supplier.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.Dgv_Supplier.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.会社コード, Me.仕入先コード, Me.仕入先名, Me.仕入先名略名, Me.郵便番号, Me.住所１, Me.住所２, Me.住所３, Me.電話番号, Me.電話番号検索用, Me.FAX番号, Me.担当者名, Me.既定間接費率, Me.メモ, Me.銀行コード, Me.支店コード, Me.預金種目, Me.口座番号, Me.口座名義, Me.更新者, Me.更新日, Me.担当者役職})
+        Me.Dgv_Supplier.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.会社コード, Me.関税率, Me.前払法人税率, Me.輸送費率, Me.仕入先コード, Me.仕入先名, Me.仕入先名略名, Me.郵便番号, Me.住所１, Me.住所２, Me.住所３, Me.電話番号, Me.電話番号検索用, Me.FAX番号, Me.担当者名, Me.既定間接費率, Me.メモ, Me.銀行コード, Me.支店コード, Me.預金種目, Me.口座番号, Me.口座名義, Me.更新者, Me.更新日, Me.担当者役職})
         Me.Dgv_Supplier.Location = New System.Drawing.Point(12, 31)
         Me.Dgv_Supplier.Name = "Dgv_Supplier"
         Me.Dgv_Supplier.ReadOnly = True
@@ -114,6 +117,24 @@ Partial Class SupplierSearch
         Me.会社コード.HeaderText = "会社コード"
         Me.会社コード.Name = "会社コード"
         Me.会社コード.ReadOnly = True
+        '
+        '関税率
+        '
+        Me.関税率.HeaderText = "関税率"
+        Me.関税率.Name = "関税率"
+        Me.関税率.ReadOnly = True
+        '
+        '前払法人税率
+        '
+        Me.前払法人税率.HeaderText = "前払法人税率"
+        Me.前払法人税率.Name = "前払法人税率"
+        Me.前払法人税率.ReadOnly = True
+        '
+        '輸送費率
+        '
+        Me.輸送費率.HeaderText = "輸送費率"
+        Me.輸送費率.Name = "輸送費率"
+        Me.輸送費率.ReadOnly = True
         '
         '仕入先コード
         '
@@ -267,6 +288,9 @@ Partial Class SupplierSearch
     Friend WithEvents Label1 As Label
     Friend WithEvents Dgv_Supplier As DataGridView
     Friend WithEvents 会社コード As DataGridViewTextBoxColumn
+    Friend WithEvents 関税率 As DataGridViewTextBoxColumn
+    Friend WithEvents 前払法人税率 As DataGridViewTextBoxColumn
+    Friend WithEvents 輸送費率 As DataGridViewTextBoxColumn
     Friend WithEvents 仕入先コード As DataGridViewTextBoxColumn
     Friend WithEvents 仕入先名 As DataGridViewTextBoxColumn
     Friend WithEvents 仕入先名略名 As DataGridViewTextBoxColumn

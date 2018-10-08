@@ -305,6 +305,7 @@ Public Class OrderManagement
             TxtCount3.Text = DgvAdd.Rows.Count()
 
             TxtOrderNo.Text = ds1.Tables(RS).Rows(0)("受注番号")
+            TxtCustomerPO.Text = ds1.Tables(RS).Rows(0)("客先番号")
             TxtOrderDate.Text = ds1.Tables(RS).Rows(0)("受注日")
             TxtCustomerCode.Text = ds1.Tables(RS).Rows(0)("得意先コード")
             TxtCustomerName.Text = ds1.Tables(RS).Rows(0)("得意先名")
@@ -449,13 +450,15 @@ Public Class OrderManagement
             Sql3 += "INSERT INTO "
             Sql3 += "Public."
             Sql3 += "t30_urighd("
-            Sql3 += "会社コード, 売上番号, 売上番号枝番, 受注番号, 受注番号枝番, 見積番号, 見積番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額, 売上金額, 粗利額, 営業担当者, 入力担当者, 備考, 取消日, 取消区分, ＶＡＴ, ＰＰＨ, 受注日, 売上日, 入金予定日, 登録日, 更新日, 更新者)"
+            Sql3 += "会社コード, 売上番号, 売上番号枝番, 客先番号, 受注番号, 受注番号枝番, 見積番号, 見積番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額, 売上金額, 粗利額, 営業担当者, 入力担当者, 備考, 取消日, 取消区分, ＶＡＴ, ＰＰＨ, 受注日, 売上日, 入金予定日, 登録日, 更新日, 更新者)"
             Sql3 += " VALUES('"
             Sql3 += ds1.Tables(RS).Rows(0)("会社コード").ToString
             Sql3 += "', '"
             Sql3 += ER
             Sql3 += "', '"
             Sql3 += "1"
+            Sql3 += "', '"
+            Sql3 += ds1.Tables(RS).Rows(0)("客先番号").ToString
             Sql3 += "', '"
             Sql3 += ds1.Tables(RS).Rows(0)("受注番号").ToString
             Sql3 += "', '"
@@ -528,6 +531,8 @@ Public Class OrderManagement
             Sql3 += "売上番号"
             Sql3 += ", "
             Sql3 += "売上番号枝番"
+            Sql3 += ", "
+            Sql3 += "客先番号"
             Sql3 += ", "
             Sql3 += "受注番号"
             Sql3 += ", "
@@ -863,11 +868,13 @@ Public Class OrderManagement
             Sql7 += "INSERT INTO "
             Sql7 += "Public."
             Sql7 += "t44_shukohd("
-            Sql7 += "会社コード, 出庫番号, 見積番号, 見積番号枝番, 受注番号, 受注番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 営業担当者, 入力担当者, 備考, 取消日, 取消区分, 出庫日, 登録日, 更新日, 更新者)"
+            Sql7 += "会社コード, 出庫番号, 客先番号, 見積番号, 見積番号枝番, 受注番号, 受注番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 営業担当者, 入力担当者, 備考, 取消日, 取消区分, 出庫日, 登録日, 更新日, 更新者)"
             Sql7 += " VALUES('"
             Sql7 += ds1.Tables(RS).Rows(0)("会社コード").ToString
             Sql7 += "', '"
             Sql7 += LS
+            Sql7 += "', '"
+            Sql7 += ds1.Tables(RS).Rows(0)("客先番号").ToString
             Sql7 += "', '"
             Sql7 += ds1.Tables(RS).Rows(0)("見積番号").ToString
             Sql7 += "', '"
@@ -914,6 +921,8 @@ Public Class OrderManagement
             Sql7 += "RETURNING 会社コード"
             Sql7 += ", "
             Sql7 += "出庫番号"
+            Sql7 += ", "
+            Sql7 += "客先番号"
             Sql7 += ", "
             Sql7 += "見積番号"
             Sql7 += ", "
@@ -1185,11 +1194,13 @@ Public Class OrderManagement
         Sql3 += "INSERT INTO "
         Sql3 += "Public."
         Sql3 += "t23_skyuhd("
-        Sql3 += "会社コード, 請求番号, 請求区分, 請求日, 受注番号, 受注番号枝番, 得意先コード, 得意先名, 請求金額計, 売掛残高, 備考1, 備考2, 取消区分, 登録日, 更新者)"
+        Sql3 += "会社コード, 請求番号, 客先番号, 請求区分, 請求日, 受注番号, 受注番号枝番, 得意先コード, 得意先名, 請求金額計, 売掛残高, 備考1, 備考2, 取消区分, 登録日, 更新者)"
         Sql3 += " VALUES('"
         Sql3 += ds1.Tables(RS).Rows(0)("会社コード").ToString
         Sql3 += "', '"
         Sql3 += DM
+        Sql3 += "', '"
+        Sql3 += ds1.Tables(RS).Rows(0)("客先番号").ToString
         Sql3 += "', '"
         Sql3 += "1"
         Sql3 += "', '"
@@ -1220,6 +1231,8 @@ Public Class OrderManagement
         Sql3 += "RETURNING 会社コード"
         Sql3 += ", "
         Sql3 += "請求番号"
+        Sql3 += ", "
+        Sql3 += "客先番号"
         Sql3 += ", "
         Sql3 += "請求区分"
         Sql3 += ", "

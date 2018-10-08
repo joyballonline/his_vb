@@ -22,12 +22,12 @@ Partial Class Ordering
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LblPaymentTerms = New System.Windows.Forms.Label()
         Me.LblPosition = New System.Windows.Forms.Label()
         Me.TxtTel = New System.Windows.Forms.TextBox()
@@ -91,6 +91,8 @@ Partial Class Ordering
         Me.BtnRowsDel = New System.Windows.Forms.Button()
         Me.BtnRowsAdd = New System.Windows.Forms.Button()
         Me.LblMode = New System.Windows.Forms.Label()
+        Me.TxtCustomerPO = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
         CType(Me.DgvItemList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -288,7 +290,7 @@ Partial Class Ordering
         Me.LblOrderDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblOrderDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblOrderDate.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblOrderDate.Location = New System.Drawing.Point(273, 13)
+        Me.LblOrderDate.Location = New System.Drawing.Point(483, 13)
         Me.LblOrderDate.Name = "LblOrderDate"
         Me.LblOrderDate.Size = New System.Drawing.Size(112, 23)
         Me.LblOrderDate.TabIndex = 206
@@ -330,24 +332,24 @@ Partial Class Ordering
         '
         'メーカー
         '
-        DataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.メーカー.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.メーカー.DefaultCellStyle = DataGridViewCellStyle1
         Me.メーカー.HeaderText = "メーカー"
         Me.メーカー.Name = "メーカー"
         Me.メーカー.Width = 220
         '
         '品名
         '
-        DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.品名.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.品名.DefaultCellStyle = DataGridViewCellStyle2
         Me.品名.HeaderText = "品名"
         Me.品名.Name = "品名"
         Me.品名.Width = 220
         '
         '型式
         '
-        DataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.型式.DefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.型式.DefaultCellStyle = DataGridViewCellStyle3
         Me.型式.HeaderText = "型式"
         Me.型式.Name = "型式"
         Me.型式.Width = 230
@@ -366,8 +368,8 @@ Partial Class Ordering
         '
         '仕入先
         '
-        DataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.仕入先.DefaultCellStyle = DataGridViewCellStyle10
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.仕入先.DefaultCellStyle = DataGridViewCellStyle4
         Me.仕入先.HeaderText = "仕入先"
         Me.仕入先.Name = "仕入先"
         Me.仕入先.Visible = False
@@ -381,8 +383,8 @@ Partial Class Ordering
         '
         '間接費
         '
-        DataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.間接費.DefaultCellStyle = DataGridViewCellStyle11
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.間接費.DefaultCellStyle = DataGridViewCellStyle5
         Me.間接費.HeaderText = "間接費"
         Me.間接費.Name = "間接費"
         Me.間接費.ReadOnly = True
@@ -390,8 +392,8 @@ Partial Class Ordering
         '
         '仕入金額
         '
-        DataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.仕入金額.DefaultCellStyle = DataGridViewCellStyle12
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.仕入金額.DefaultCellStyle = DataGridViewCellStyle6
         Me.仕入金額.HeaderText = "仕入金額"
         Me.仕入金額.Name = "仕入金額"
         Me.仕入金額.ReadOnly = True
@@ -446,7 +448,7 @@ Partial Class Ordering
         Me.DtpOrderingDate.CustomFormat = "yyyy/MM/dd"
         Me.DtpOrderingDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpOrderingDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DtpOrderingDate.Location = New System.Drawing.Point(391, 14)
+        Me.DtpOrderingDate.Location = New System.Drawing.Point(601, 14)
         Me.DtpOrderingDate.Name = "DtpOrderingDate"
         Me.DtpOrderingDate.Size = New System.Drawing.Size(148, 22)
         Me.DtpOrderingDate.TabIndex = 228
@@ -539,7 +541,7 @@ Partial Class Ordering
         Me.DtpOrderingRegistration.Enabled = False
         Me.DtpOrderingRegistration.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpOrderingRegistration.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DtpOrderingRegistration.Location = New System.Drawing.Point(661, 13)
+        Me.DtpOrderingRegistration.Location = New System.Drawing.Point(871, 13)
         Me.DtpOrderingRegistration.Name = "DtpOrderingRegistration"
         Me.DtpOrderingRegistration.Size = New System.Drawing.Size(150, 22)
         Me.DtpOrderingRegistration.TabIndex = 186
@@ -582,7 +584,7 @@ Partial Class Ordering
         Me.LblRegistration.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblRegistration.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblRegistration.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblRegistration.Location = New System.Drawing.Point(545, 13)
+        Me.LblRegistration.Location = New System.Drawing.Point(755, 13)
         Me.LblRegistration.Name = "LblRegistration"
         Me.LblRegistration.Size = New System.Drawing.Size(110, 23)
         Me.LblRegistration.TabIndex = 220
@@ -747,17 +749,42 @@ Partial Class Ordering
         Me.LblMode.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblMode.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblMode.Location = New System.Drawing.Point(1127, 9)
+        Me.LblMode.Location = New System.Drawing.Point(1127, 14)
         Me.LblMode.Name = "LblMode"
         Me.LblMode.Size = New System.Drawing.Size(213, 22)
         Me.LblMode.TabIndex = 302
         Me.LblMode.Text = "モード"
         Me.LblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'TxtCustomerPO
+        '
+        Me.TxtCustomerPO.BackColor = System.Drawing.Color.White
+        Me.TxtCustomerPO.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtCustomerPO.Location = New System.Drawing.Point(389, 13)
+        Me.TxtCustomerPO.MaxLength = 8
+        Me.TxtCustomerPO.Name = "TxtCustomerPO"
+        Me.TxtCustomerPO.Size = New System.Drawing.Size(88, 23)
+        Me.TxtCustomerPO.TabIndex = 304
+        Me.TxtCustomerPO.TabStop = False
+        '
+        'Label1
+        '
+        Me.Label1.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.Label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Label1.Location = New System.Drawing.Point(273, 13)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(110, 23)
+        Me.Label1.TabIndex = 303
+        Me.Label1.Text = "客先PO"
+        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'Ordering
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.TxtCustomerPO)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.LblMode)
         Me.Controls.Add(Me.BtnClone)
         Me.Controls.Add(Me.BtnDown)
@@ -878,4 +905,6 @@ Partial Class Ordering
     Friend WithEvents BtnRowsDel As Button
     Friend WithEvents BtnRowsAdd As Button
     Friend WithEvents LblMode As Label
+    Friend WithEvents TxtCustomerPO As TextBox
+    Friend WithEvents Label1 As Label
 End Class
