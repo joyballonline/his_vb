@@ -513,6 +513,7 @@ Public Class Quote
             Dim tmpPurchase As Integer = 0
             Dim tmp As Decimal = 0
             Dim tmp2 As Decimal = 0
+            Dim tmp3 As Decimal = 0
 
             If e.RowIndex > -1 Then
                 If DgvItemList.Rows(e.RowIndex).Cells("数量").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("仕入単価").Value IsNot Nothing Then
@@ -542,10 +543,11 @@ Public Class Quote
                     End If
                 Else
                     If DgvItemList.Rows(e.RowIndex).Cells("数量").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("仕入単価").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("粗利率").Value IsNot Nothing Then
-                        tmp2 = 1 - DgvItemList.Rows(e.RowIndex).Cells("粗利率").Value
-                        DgvItemList.Rows(e.RowIndex).Cells("売単価").Value = DgvItemList.Rows(e.RowIndex).Cells("仕入単価").Value / tmp2
-                        DgvItemList.Rows(e.RowIndex).Cells("売上金額").Value = DgvItemList.Rows(e.RowIndex).Cells("売単価").Value * DgvItemList.Rows(e.RowIndex).Cells("数量").Value
+                        tmp2 = DgvItemList.Rows(e.RowIndex).Cells("粗利率").Value / 100
+                        tmp3 = DgvItemList.Rows(e.RowIndex).Cells("数量").Value - tmp2 * DgvItemList.Rows(e.RowIndex).Cells("数量").Value
                         If DgvItemList.Rows(e.RowIndex).Cells("仕入金額").Value IsNot Nothing Then
+                            DgvItemList.Rows(e.RowIndex).Cells("売単価").Value = DgvItemList.Rows(e.RowIndex).Cells("仕入金額").Value / tmp3
+                            DgvItemList.Rows(e.RowIndex).Cells("売上金額").Value = DgvItemList.Rows(e.RowIndex).Cells("売単価").Value * DgvItemList.Rows(e.RowIndex).Cells("数量").Value
                             DgvItemList.Rows(e.RowIndex).Cells("粗利額").Value = DgvItemList.Rows(e.RowIndex).Cells("売上金額").Value - DgvItemList.Rows(e.RowIndex).Cells("仕入金額").Value
                         End If
                     End If
@@ -1392,16 +1394,41 @@ Public Class Quote
                     Sql2 += "', '"
                     Sql2 += TxtSuffixNo.Text
                     Sql2 += "', '"
-                    Sql2 += DgvItemList.Rows(index).Cells("No").Value.ToString
-                    Sql2 += "', '"
-                    Sql2 += DgvItemList.Rows(index).Cells("仕入区分").Value.ToString
-                    Sql2 += "', '"
-                    Sql2 += DgvItemList.Rows(index).Cells("メーカー").Value.ToString
-                    Sql2 += "', '"
-                    Sql2 += DgvItemList.Rows(index).Cells("品名").Value.ToString
-                    Sql2 += "', '"
-                    Sql2 += DgvItemList.Rows(index).Cells("型式").Value.ToString
-                    Sql2 += "', '"
+                    If DgvItemList.Rows(index).Cells("No").Value IsNot Nothing Then
+                        Sql2 += DgvItemList.Rows(index).Cells("No").Value.ToString
+                        Sql2 += "', '"
+                    Else
+                        Sql2 += ""
+                        Sql2 += "', '"
+                    End If
+                    If DgvItemList.Rows(index).Cells("仕入区分").Value IsNot Nothing Then
+                        Sql2 += DgvItemList.Rows(index).Cells("仕入区分").Value.ToString
+                        Sql2 += "', '"
+                    Else
+                        Sql2 += ""
+                        Sql2 += "', '"
+                    End If
+                    If DgvItemList.Rows(index).Cells("メーカー").Value IsNot Nothing Then
+                        Sql2 += DgvItemList.Rows(index).Cells("メーカー").Value.ToString
+                        Sql2 += "', '"
+                    Else
+                        Sql2 += ""
+                        Sql2 += "', '"
+                    End If
+                    If DgvItemList.Rows(index).Cells("品名").Value IsNot Nothing Then
+                        Sql2 += DgvItemList.Rows(index).Cells("品名").Value.ToString
+                        Sql2 += "', '"
+                    Else
+                        Sql2 += ""
+                        Sql2 += "', '"
+                    End If
+                    If DgvItemList.Rows(index).Cells("型式").Value IsNot Nothing Then
+                        Sql2 += DgvItemList.Rows(index).Cells("型式").Value.ToString
+                        Sql2 += "', '"
+                    Else
+                        Sql2 += ""
+                        Sql2 += "', '"
+                    End If
 
                     If DgvItemList.Rows(index).Cells("数量").Value IsNot Nothing Then
                         Sql2 += DgvItemList.Rows(index).Cells("数量").Value.ToString
@@ -1410,12 +1437,20 @@ Public Class Quote
                         Sql2 += "0"
                         Sql2 += "', '"
                     End If
-
-                    Sql2 += DgvItemList.Rows(index).Cells("単位").Value.ToString
-                    Sql2 += "', '"
-                    Sql2 += DgvItemList.Rows(index).Cells("仕入先").Value.ToString
-                    Sql2 += "', '"
-
+                    If DgvItemList.Rows(index).Cells("単位").Value IsNot Nothing Then
+                        Sql2 += DgvItemList.Rows(index).Cells("単位").Value.ToString
+                        Sql2 += "', '"
+                    Else
+                        Sql2 += ""
+                        Sql2 += "', '"
+                    End If
+                    If DgvItemList.Rows(index).Cells("仕入先").Value IsNot Nothing Then
+                        Sql2 += DgvItemList.Rows(index).Cells("仕入先").Value.ToString
+                        Sql2 += "', '"
+                    Else
+                        Sql2 += ""
+                        Sql2 += "', '"
+                    End If
                     If DgvItemList.Rows(index).Cells("仕入単価").Value IsNot Nothing Then
                         Sql2 += DgvItemList.Rows(index).Cells("仕入単価").Value.ToString
                         Sql2 += "', '"
@@ -1511,12 +1546,17 @@ Public Class Quote
                         Sql2 += DgvItemList.Rows(index).Cells("リードタイム").Value.ToString
                         Sql2 += "', '"
                     Else
-                        Sql2 += "0"
+                        Sql2 += ""
+                        Sql2 += "', '"
+                    End If
+                    If DgvItemList.Rows(index).Cells("備考").Value IsNot Nothing Then
+                        Sql2 += DgvItemList.Rows(index).Cells("備考").Value.ToString
+                        Sql2 += "', '"
+                    Else
+                        Sql2 += ""
                         Sql2 += "', '"
                     End If
 
-                    Sql2 += DgvItemList.Rows(index).Cells("備考").Value.ToString
-                    Sql2 += "', '"
                     Sql2 += Input
                     Sql2 += "', '"
                     Sql2 += DtpRegistration.Text

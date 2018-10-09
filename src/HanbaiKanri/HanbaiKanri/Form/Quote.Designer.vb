@@ -921,7 +921,7 @@ Partial Class Quote
         '
         DataGridViewCellStyle8.BackColor = System.Drawing.Color.Gray
         Me.粗利率.DefaultCellStyle = DataGridViewCellStyle8
-        Me.粗利率.HeaderText = "粗利率"
+        Me.粗利率.HeaderText = "粗利率(%)"
         Me.粗利率.Name = "粗利率"
         Me.粗利率.ReadOnly = True
         '
