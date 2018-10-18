@@ -600,6 +600,7 @@ Public Class Quote
             TxtItemCount.Text = DgvItemList.Rows.Count()
         Else
             DgvItemList.Rows.Add()
+            DgvItemList.Rows(0).Cells("仕入区分").Value = 1
             TxtItemCount.Text = DgvItemList.Rows.Count()
             DgvItemList.Rows(DgvItemList.Rows.Count() - 1).Cells("ステータス").Value = "ADD"
             '行番号の振り直し
