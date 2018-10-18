@@ -411,7 +411,7 @@ Public Class Cymn
         Dim reccnt As Integer = 0
 
         Dim dtNow As DateTime = DateTime.Now
-        If TxtCustomerCode.Text = 99999 Then
+        If TxtCustomerCode.Text = "99999" Then
         Else
             Dim Sql1 As String = ""
             Sql1 = ""
@@ -552,7 +552,7 @@ Public Class Cymn
                 Sql2 += "INSERT INTO "
                 Sql2 += "Public."
                 Sql2 += "t11_cymndt("
-                Sql2 += "会社コード, 受注番号, 受注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 単位, 仕入先名, 仕入値, 受注数量, 売上数量, 受注残数, 売単価, 売上金額, 粗利額, 粗利率, リードタイム, 出庫数, 未出庫数, 備考, 更新者, 登録日)"
+                Sql2 += "会社コード, 受注番号, 受注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 単位, 仕入先名, 仕入値, 受注数量, 売上数量, 受注残数, 売単価, 売上金額, 粗利額, 粗利率, 間接費, リードタイム, 出庫数, 未出庫数, 備考, 更新者, 登録日)"
                 Sql2 += " VALUES('"
                 Sql2 += CompanyCode
                 Sql2 += "', '"
@@ -589,6 +589,10 @@ Public Class Cymn
                 Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("粗利額").Value.ToString
                 Sql2 += "', '"
                 Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("粗利率").Value.ToString
+                Sql2 += "', '"
+                Dim overhead As Double = 0
+                overhead = DgvItemList.Rows(cymnhdIdx).Cells("仕入金額").Value - DgvItemList.Rows(cymnhdIdx).Cells("仕入原価").Value
+                Sql2 += overhead.ToString
                 Sql2 += "', '"
                 Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("リードタイム").Value.ToString
                 Sql2 += "', '"
@@ -637,6 +641,8 @@ Public Class Cymn
                 Sql2 += "粗利額"
                 Sql2 += ", "
                 Sql2 += "粗利率"
+                Sql2 += ", "
+                Sql2 += "間接費"
                 Sql2 += ", "
                 Sql2 += "リードタイム"
                 Sql2 += ", "
@@ -903,7 +909,7 @@ Public Class Cymn
                     Sql4 += "INSERT INTO "
                     Sql4 += "Public."
                     Sql4 += "t21_hattyu("
-                    Sql4 += "会社コード, 発注番号, 発注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 単位, 仕入先名, 仕入値, 発注数量, 仕入数量, 発注残数, 仕入単価, 仕入金額, リードタイム, 入庫数, 未入庫数, 備考, 更新者, 登録日)"
+                    Sql4 += "会社コード, 発注番号, 発注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 単位, 仕入先名, 仕入値, 発注数量, 仕入数量, 発注残数, 仕入単価, 仕入金額, 間接費, リードタイム, 入庫数, 未入庫数, 備考, 更新者, 登録日)"
                     Sql4 += " VALUES('"
                     Sql4 += CompanyCode
                     Sql4 += "', '"
@@ -936,6 +942,10 @@ Public Class Cymn
                     Sql4 += DgvItemList.Rows(hattyuIdx).Cells("売単価").Value.ToString
                     Sql4 += "', '"
                     Sql4 += DgvItemList.Rows(hattyuIdx).Cells("仕入金額").Value.ToString
+                    Sql4 += "', '"
+                    Dim overhead As Double = 0
+                    overhead = DgvItemList.Rows(hattyuIdx).Cells("仕入金額").Value - DgvItemList.Rows(hattyuIdx).Cells("仕入原価").Value
+                    Sql4 += overhead.ToString
                     Sql4 += "', '"
                     Sql4 += DgvItemList.Rows(hattyuIdx).Cells("リードタイム").Value.ToString
                     Sql4 += "', '"

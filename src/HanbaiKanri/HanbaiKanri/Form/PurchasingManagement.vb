@@ -576,7 +576,7 @@ Public Class PurchasingManagement
                 Sql4 += "INSERT INTO "
                 Sql4 += "Public."
                 Sql4 += "t41_siredt("
-                Sql4 += "会社コード, 仕入番号, 発注番号, 発注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 仕入先名, 仕入値, 発注数量, 仕入数量, 発注残数, 単位, 間接費, 仕入単価, 仕入金額, リードタイム, 備考, 仕入日, 更新者, 更新日)"
+                Sql4 += "会社コード, 仕入番号, 発注番号, 発注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 仕入先名, 仕入値, 発注数量, 仕入数量, 発注残数, 単位, 仕入単価, 仕入金額, 間接費, リードタイム, 備考, 仕入日, 更新者, 更新日)"
                 Sql4 += " VALUES('"
                 Sql4 += ds1.Tables(RS).Rows(0)("会社コード").ToString
                 Sql4 += "', '"
@@ -600,12 +600,12 @@ Public Class PurchasingManagement
                 Sql4 += "', '"
                 Sql4 += DgvAdd.Rows(index).Cells("仕入値").Value.ToString
                 Sql4 += "', '"
-                Sql4 += ds2.Tables(RS).Rows(0)("発注数量").ToString
+                Sql4 += ds2.Tables(RS).Rows(index)("発注数量").ToString
                 Sql4 += "', '"
                 Sql4 += DgvAdd.Rows(index).Cells("仕入数量").Value.ToString
                 Sql4 += "', '"
 
-                Dim OrderNo As Integer = ds2.Tables(RS).Rows(0)("発注数量")
+                Dim OrderNo As Integer = ds2.Tables(RS).Rows(index)("発注数量")
                 Dim PurchaseNo As Integer = DgvAdd.Rows(index).Cells("仕入数量").Value
                 Dim RemainingNo As Integer = OrderNo - PurchaseNo
 
@@ -613,13 +613,13 @@ Public Class PurchasingManagement
                 Sql4 += "', '"
                 Sql4 += DgvAdd.Rows(index).Cells("単位").Value.ToString
                 Sql4 += "', '"
-                Sql4 += ds2.Tables(RS).Rows(0)("間接費").ToString
+                Sql4 += ds2.Tables(RS).Rows(index)("仕入値").ToString
                 Sql4 += "', '"
-                Sql4 += ds2.Tables(RS).Rows(0)("仕入単価").ToString
+                Sql4 += ds2.Tables(RS).Rows(index)("仕入金額").ToString
                 Sql4 += "', '"
-                Sql4 += ds2.Tables(RS).Rows(0)("仕入金額").ToString
+                Sql4 += ds2.Tables(RS).Rows(index)("間接費").ToString
                 Sql4 += "', '"
-                Sql4 += ds2.Tables(RS).Rows(0)("リードタイム").ToString
+                Sql4 += ds2.Tables(RS).Rows(index)("リードタイム").ToString
                 Sql4 += "', '"
                 Sql4 += DgvAdd.Rows(index).Cells("備考").Value.ToString
                 Sql4 += "', '"
@@ -635,7 +635,6 @@ Public Class PurchasingManagement
                 Sql4 += ", "
                 Sql4 += "発注番号"
                 Sql4 += ", "
-
                 Sql4 += "発注番号枝番"
                 Sql4 += ", "
                 Sql4 += "行番号"
@@ -660,11 +659,11 @@ Public Class PurchasingManagement
                 Sql4 += ", "
                 Sql4 += "単位"
                 Sql4 += ", "
-                Sql4 += "間接費"
-                Sql4 += ", "
                 Sql4 += "仕入単価"
                 Sql4 += ", "
                 Sql4 += "仕入金額"
+                Sql4 += ", "
+                Sql4 += "間接費"
                 Sql4 += ", "
                 Sql4 += "リードタイム"
                 Sql4 += ", "
@@ -811,8 +810,6 @@ Public Class PurchasingManagement
                 Sql6 += "発注残数"
                 Sql6 += ", "
                 Sql6 += "単位"
-                Sql6 += ", "
-                Sql6 += "間接費"
                 Sql6 += ", "
                 Sql6 += "仕入単価"
                 Sql6 += ", "

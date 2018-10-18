@@ -126,6 +126,12 @@
     <Compile Include="Form\BillingManagement.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form\ClosingLog.Designer.vb">
+      <DependentUpon>ClosingLog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\ClosingLog.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\Company.Designer.vb">
       <DependentUpon>Company.vb</DependentUpon>
     </Compile>
@@ -373,6 +379,12 @@
     <Compile Include="Form\SalesSearch.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form\StockList.Designer.vb">
+      <DependentUpon>StockList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\StockList.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\Supplier.Designer.vb">
       <DependentUpon>Supplier.vb</DependentUpon>
     </Compile>
@@ -425,6 +437,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\BillingManagement.resx">
       <DependentUpon>BillingManagement.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\ClosingLog.resx">
+      <DependentUpon>ClosingLog.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Company.resx">
       <DependentUpon>Company.vb</DependentUpon>
@@ -548,6 +563,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\SalesSearch.resx">
       <DependentUpon>SalesSearch.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\StockList.resx">
+      <DependentUpon>StockList.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Supplier.resx">
       <DependentUpon>Supplier.vb</DependentUpon>

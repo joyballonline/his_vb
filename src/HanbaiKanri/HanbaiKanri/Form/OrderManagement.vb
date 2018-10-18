@@ -305,7 +305,11 @@ Public Class OrderManagement
             TxtCount3.Text = DgvAdd.Rows.Count()
 
             TxtOrderNo.Text = ds1.Tables(RS).Rows(0)("受注番号")
-            TxtCustomerPO.Text = ds1.Tables(RS).Rows(0)("客先番号")
+            If ds1.Tables(RS).Rows(0)("客先番号") Is DBNull.Value Then
+            Else
+                TxtCustomerPO.Text = ds1.Tables(RS).Rows(0)("客先番号")
+            End If
+
             TxtOrderDate.Text = ds1.Tables(RS).Rows(0)("受注日")
             TxtCustomerCode.Text = ds1.Tables(RS).Rows(0)("得意先コード")
             TxtCustomerName.Text = ds1.Tables(RS).Rows(0)("得意先名")
@@ -604,7 +608,7 @@ Public Class OrderManagement
                 Sql4 += "INSERT INTO "
                 Sql4 += "Public."
                 Sql4 += "t31_urigdt("
-                Sql4 += "会社コード, 売上番号, 売上番号枝番, 受注番号, 受注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 仕入先名, 仕入値, 受注数量, 売上数量, 受注残数, 単位, 間接費, 売単価, 売上金額, 粗利額, 粗利率, リードタイム, 備考, 更新者, 更新日)"
+                Sql4 += "会社コード, 売上番号, 売上番号枝番, 受注番号, 受注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 仕入先名, 仕入値, 受注数量, 売上数量, 受注残数, 単位, 売単価, 売上金額, 粗利額, 粗利率, 間接費, リードタイム, 備考, 更新者, 更新日)"
                 Sql4 += " VALUES('"
                 Sql4 += ds2.Tables(RS).Rows(index)("会社コード").ToString
                 Sql4 += "', '"
@@ -643,8 +647,6 @@ Public Class OrderManagement
                 Sql4 += "', '"
                 Sql4 += DgvAdd.Rows(index).Cells("単位").Value
                 Sql4 += "', '"
-                Sql4 += ds2.Tables(RS).Rows(index)("間接費").ToString
-                Sql4 += "', '"
                 Sql4 += ds2.Tables(RS).Rows(index)("売単価").ToString
                 Sql4 += "', '"
                 Sql4 += ds2.Tables(RS).Rows(index)("売上金額").ToString
@@ -652,6 +654,8 @@ Public Class OrderManagement
                 Sql4 += ds2.Tables(RS).Rows(index)("粗利額").ToString
                 Sql4 += "', '"
                 Sql4 += ds2.Tables(RS).Rows(index)("粗利率").ToString
+                Sql4 += "', '"
+                Sql4 += ds2.Tables(RS).Rows(index)("間接費").ToString
                 Sql4 += "', '"
                 Sql4 += ds2.Tables(RS).Rows(index)("リードタイム").ToString
                 Sql4 += "', '"
@@ -693,11 +697,11 @@ Public Class OrderManagement
                 Sql4 += ", "
                 Sql4 += "単位"
                 Sql4 += ", "
-                Sql4 += "間接費"
-                Sql4 += ", "
                 Sql4 += "売単価"
                 Sql4 += ", "
                 Sql4 += "売上金額"
+                Sql4 += ", "
+                Sql4 += "間接費"
                 Sql4 += ", "
                 Sql4 += "リードタイム"
                 Sql4 += ", "
@@ -842,8 +846,6 @@ Public Class OrderManagement
                 Sql6 += "受注残数"
                 Sql6 += ", "
                 Sql6 += "単位"
-                Sql6 += ", "
-                Sql6 += "間接費"
                 Sql6 += ", "
                 Sql6 += "売単価"
                 Sql6 += ", "

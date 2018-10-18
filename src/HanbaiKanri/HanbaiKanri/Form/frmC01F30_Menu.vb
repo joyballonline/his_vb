@@ -732,6 +732,9 @@ Public Class frmC01F30_Menu
         checkMenu += " or "
         checkMenu += " m.処理ＩＤ like 'H12%' "
 
+        checkMenu += " or "
+        checkMenu += " m.処理ＩＤ like 'H13%' "
+
         If chkH02.Checked Then
             If checkMenu IsNot "" Then checkMenu += " or "
             checkMenu += " m.処理ＩＤ like 'H02%' "
@@ -1067,7 +1070,7 @@ Public Class frmC01F30_Menu
                 openForm = New AccountsPayableList(_msgHd, _db, _langHd, Status)
                 openForm.Show()
                 Me.Hide()
-                '-----------------------------------入金業務（H05）
+            '-----------------------------------入金業務（H05）
             Case CommonConst.MENU_H1210  '支払登録
                 Dim openForm As Form = Nothing
                 openForm = New PaymentList(_msgHd, _db, _langHd)
@@ -1082,6 +1085,12 @@ Public Class frmC01F30_Menu
             Case CommonConst.MENU_H1230  '支払登録
                 Dim openForm As Form = Nothing
                 openForm = New PaidList(_msgHd, _db, _langHd)
+                openForm.Show()
+                Me.Hide()
+            '-----------------------------------締処理業務（H05）
+            Case CommonConst.MENU_H1310  '締処理ログ参照
+                Dim openForm As Form = Nothing
+                openForm = New ClosingLog(_msgHd, _db, _langHd)
                 openForm.Show()
                 Me.Hide()
             '-----------------------------------マスタ管理（M01）

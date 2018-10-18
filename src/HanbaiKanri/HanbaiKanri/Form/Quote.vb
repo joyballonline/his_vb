@@ -536,8 +536,8 @@ Public Class Quote
                 If RbtnUP.Checked Then
                     If DgvItemList.Rows(e.RowIndex).Cells("数量").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("売単価").Value IsNot Nothing Then
                         DgvItemList.Rows(e.RowIndex).Cells("売上金額").Value = DgvItemList.Rows(e.RowIndex).Cells("数量").Value * DgvItemList.Rows(e.RowIndex).Cells("売単価").Value
-                        If DgvItemList.Rows(e.RowIndex).Cells("仕入金額").Value IsNot Nothing Then
-                            DgvItemList.Rows(e.RowIndex).Cells("粗利額").Value = DgvItemList.Rows(e.RowIndex).Cells("売上金額").Value - DgvItemList.Rows(e.RowIndex).Cells("仕入金額").Value
+                        If DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value IsNot Nothing Then
+                            DgvItemList.Rows(e.RowIndex).Cells("粗利額").Value = DgvItemList.Rows(e.RowIndex).Cells("売上金額").Value - DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value
                             DgvItemList.Rows(e.RowIndex).Cells("粗利率").Value = Format(DgvItemList.Rows(e.RowIndex).Cells("粗利額").Value / DgvItemList.Rows(e.RowIndex).Cells("売上金額").Value * 100, "0.000")
                         End If
                     End If
@@ -545,10 +545,10 @@ Public Class Quote
                     If DgvItemList.Rows(e.RowIndex).Cells("数量").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("仕入単価").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("粗利率").Value IsNot Nothing Then
                         tmp2 = DgvItemList.Rows(e.RowIndex).Cells("粗利率").Value / 100
                         tmp3 = DgvItemList.Rows(e.RowIndex).Cells("数量").Value - tmp2 * DgvItemList.Rows(e.RowIndex).Cells("数量").Value
-                        If DgvItemList.Rows(e.RowIndex).Cells("仕入金額").Value IsNot Nothing Then
-                            DgvItemList.Rows(e.RowIndex).Cells("売単価").Value = DgvItemList.Rows(e.RowIndex).Cells("仕入金額").Value / tmp3
+                        If DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value IsNot Nothing Then
+                            DgvItemList.Rows(e.RowIndex).Cells("売単価").Value = DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value / tmp3
                             DgvItemList.Rows(e.RowIndex).Cells("売上金額").Value = DgvItemList.Rows(e.RowIndex).Cells("売単価").Value * DgvItemList.Rows(e.RowIndex).Cells("数量").Value
-                            DgvItemList.Rows(e.RowIndex).Cells("粗利額").Value = DgvItemList.Rows(e.RowIndex).Cells("売上金額").Value - DgvItemList.Rows(e.RowIndex).Cells("仕入金額").Value
+                            DgvItemList.Rows(e.RowIndex).Cells("粗利額").Value = DgvItemList.Rows(e.RowIndex).Cells("売上金額").Value - DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value
                         End If
                     End If
                 End If
@@ -1856,20 +1856,22 @@ Public Class Quote
                 cell = "A" & currentCnt
                 sheet.Range(cell).Value = num
                 cell = "C" & currentCnt
-                sheet.Range(cell).Value = ds3.Tables(RS).Rows(index)(1) & "/" & ds3.Tables(RS).Rows(index)(2) & "/" & ds3.Tables(RS).Rows(index)(3)
+                sheet.Range(cell).Value = ds3.Tables(RS).Rows(index)("メーカー") & "/" & ds3.Tables(RS).Rows(index)("品名") & "/" & ds3.Tables(RS).Rows(index)("型式")
                 cell = "L" & currentCnt
-                sheet.Range(cell).Value = ds3.Tables(RS).Rows(index)(4)
-                cell = "O" & currentCnt
-                sheet.Range(cell).Value = ds3.Tables(RS).Rows(index)(5)
-                cell = "R" & currentCnt
-                sheet.Range(cell).Value = ds3.Tables(RS).Rows(index)(11)
+                sheet.Range(cell).Value = ds3.Tables(RS).Rows(index)("数量")
+                cell = "N" & currentCnt
+                sheet.Range(cell).Value = ds3.Tables(RS).Rows(index)("単位")
+                cell = "P" & currentCnt
+                sheet.Range(cell).Value = ds3.Tables(RS).Rows(index)("売単価")
+                cell = "S" & currentCnt
+                sheet.Range(cell).Value = ds3.Tables(RS).Rows(index)("売上金額")
                 cell = "V" & currentCnt
-                sheet.Range(cell).Value = ds3.Tables(RS).Rows(index)(12)
+                sheet.Range(cell).Value = ds3.Tables(RS).Rows(index)("備考")
 
-                totalPrice = totalPrice + ds3.Tables(RS).Rows(index)(12)
+                totalPrice = totalPrice + ds3.Tables(RS).Rows(index)("売上金額")
 
                 cell = "Z" & currentCnt
-                sheet.Range(cell).Value = ds3.Tables(RS).Rows(index)(15)
+                sheet.Range(cell).Value = ds3.Tables(RS).Rows(index)("リードタイム")
 
                 'sheet.Rows(currentCnt & ":" & currentCnt)
 
@@ -1878,9 +1880,9 @@ Public Class Quote
             Next
 
 
-            sheet.Range("V" & lstRow + 1).Value = totalPrice
-            sheet.Range("V" & lstRow + 2).Value = totalPrice * 10 * 0.01
-            sheet.Range("V" & lstRow + 3).Value = totalPrice * 10 * 0.01 + totalPrice
+            sheet.Range("S" & lstRow + 1).Value = totalPrice
+            sheet.Range("S" & lstRow + 2).Value = totalPrice * 10 * 0.01
+            sheet.Range("S" & lstRow + 3).Value = totalPrice * 10 * 0.01 + totalPrice
 
             book.SaveAs(sOutFile)
             app.Visible = True
