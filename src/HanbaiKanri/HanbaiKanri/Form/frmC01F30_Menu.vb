@@ -1125,6 +1125,11 @@ Public Class frmC01F30_Menu
                 openForm = New MstLanguage(_msgHd, _db, _langHd)
                 openForm.Show()
                 Me.Hide()
+            Case CommonConst.MENU_M0170    '在庫マスタ一覧
+                Dim openForm As Form = Nothing
+                openForm = New StockList(_msgHd, _db, _langHd)
+                openForm.Show()
+                Me.Hide()
                 '-----------------------------------
             Case Else                      'マスタ設定されていない場合
                 Exit Sub
