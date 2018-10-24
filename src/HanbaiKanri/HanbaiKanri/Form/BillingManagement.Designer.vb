@@ -53,12 +53,6 @@ Partial Class BillingManagement
         Me.売上単価 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.売上金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DgvCymn = New System.Windows.Forms.DataGridView()
-        Me.受注番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.受注日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.得意先 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.受注金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.請求金額計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.請求残高 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DtpBillingDate = New System.Windows.Forms.DateTimePicker()
         Me.LblRemarks1 = New System.Windows.Forms.Label()
         Me.TxtRemarks1 = New System.Windows.Forms.TextBox()
@@ -76,6 +70,13 @@ Partial Class BillingManagement
         Me.BtnClone = New System.Windows.Forms.Button()
         Me.BtnDelete = New System.Windows.Forms.Button()
         Me.LblMode = New System.Windows.Forms.Label()
+        Me.受注番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.受注日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.得意先 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.客先番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.受注金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.請求金額計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.請求残高 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DgvAdd, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvHistory, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvCymndt, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -296,7 +297,7 @@ Partial Class BillingManagement
         '
         Me.DgvCymn.AllowUserToAddRows = False
         Me.DgvCymn.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvCymn.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.受注番号, Me.受注日, Me.得意先, Me.受注金額, Me.請求金額計, Me.請求残高})
+        Me.DgvCymn.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.受注番号, Me.受注日, Me.得意先, Me.客先番号, Me.受注金額, Me.請求金額計, Me.請求残高})
         Me.DgvCymn.Location = New System.Drawing.Point(12, 9)
         Me.DgvCymn.Name = "DgvCymn"
         Me.DgvCymn.RowHeadersVisible = False
@@ -304,42 +305,6 @@ Partial Class BillingManagement
         Me.DgvCymn.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvCymn.Size = New System.Drawing.Size(1053, 100)
         Me.DgvCymn.TabIndex = 8
-        '
-        '受注番号
-        '
-        Me.受注番号.HeaderText = "受注番号"
-        Me.受注番号.Name = "受注番号"
-        Me.受注番号.Width = 150
-        '
-        '受注日
-        '
-        Me.受注日.HeaderText = "受注日"
-        Me.受注日.Name = "受注日"
-        Me.受注日.Width = 150
-        '
-        '得意先
-        '
-        Me.得意先.HeaderText = "得意先"
-        Me.得意先.Name = "得意先"
-        Me.得意先.Width = 300
-        '
-        '受注金額
-        '
-        Me.受注金額.HeaderText = "受注金額"
-        Me.受注金額.Name = "受注金額"
-        Me.受注金額.Width = 150
-        '
-        '請求金額計
-        '
-        Me.請求金額計.HeaderText = "請求金額計"
-        Me.請求金額計.Name = "請求金額計"
-        Me.請求金額計.Width = 150
-        '
-        '請求残高
-        '
-        Me.請求残高.HeaderText = "請求残高"
-        Me.請求残高.Name = "請求残高"
-        Me.請求残高.Width = 150
         '
         'DtpBillingDate
         '
@@ -525,6 +490,47 @@ Partial Class BillingManagement
         Me.LblMode.Text = "モード"
         Me.LblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        '受注番号
+        '
+        Me.受注番号.HeaderText = "受注番号"
+        Me.受注番号.Name = "受注番号"
+        Me.受注番号.Width = 150
+        '
+        '受注日
+        '
+        Me.受注日.HeaderText = "受注日"
+        Me.受注日.Name = "受注日"
+        Me.受注日.Width = 150
+        '
+        '得意先
+        '
+        Me.得意先.HeaderText = "得意先"
+        Me.得意先.Name = "得意先"
+        Me.得意先.Width = 200
+        '
+        '客先番号
+        '
+        Me.客先番号.HeaderText = "客先番号"
+        Me.客先番号.Name = "客先番号"
+        '
+        '受注金額
+        '
+        Me.受注金額.HeaderText = "受注金額"
+        Me.受注金額.Name = "受注金額"
+        Me.受注金額.Width = 150
+        '
+        '請求金額計
+        '
+        Me.請求金額計.HeaderText = "請求金額計"
+        Me.請求金額計.Name = "請求金額計"
+        Me.請求金額計.Width = 150
+        '
+        '請求残高
+        '
+        Me.請求残高.HeaderText = "請求残高"
+        Me.請求残高.Name = "請求残高"
+        Me.請求残高.Width = 150
+        '
         'BillingManagement
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
@@ -583,12 +589,6 @@ Partial Class BillingManagement
     Friend WithEvents LblNo3 As Label
     Friend WithEvents LblNo1 As Label
     Friend WithEvents TxtCount1 As TextBox
-    Friend WithEvents 受注番号 As DataGridViewTextBoxColumn
-    Friend WithEvents 受注日 As DataGridViewTextBoxColumn
-    Friend WithEvents 得意先 As DataGridViewTextBoxColumn
-    Friend WithEvents 受注金額 As DataGridViewTextBoxColumn
-    Friend WithEvents 請求金額計 As DataGridViewTextBoxColumn
-    Friend WithEvents 請求残高 As DataGridViewTextBoxColumn
     Friend WithEvents BtnRegist As Button
     Friend WithEvents BtnBack As Button
     Friend WithEvents 明細 As DataGridViewTextBoxColumn
@@ -618,4 +618,11 @@ Partial Class BillingManagement
     Friend WithEvents 請求済み受注番号 As DataGridViewTextBoxColumn
     Friend WithEvents 請求済み受注番号枝番 As DataGridViewTextBoxColumn
     Friend WithEvents LblMode As Label
+    Friend WithEvents 受注番号 As DataGridViewTextBoxColumn
+    Friend WithEvents 受注日 As DataGridViewTextBoxColumn
+    Friend WithEvents 得意先 As DataGridViewTextBoxColumn
+    Friend WithEvents 客先番号 As DataGridViewTextBoxColumn
+    Friend WithEvents 受注金額 As DataGridViewTextBoxColumn
+    Friend WithEvents 請求金額計 As DataGridViewTextBoxColumn
+    Friend WithEvents 請求残高 As DataGridViewTextBoxColumn
 End Class

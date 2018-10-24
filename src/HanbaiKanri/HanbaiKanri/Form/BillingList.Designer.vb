@@ -46,6 +46,8 @@ Partial Class BillingList
         Me.BtnBack = New System.Windows.Forms.Button()
         Me.DgvBilling = New System.Windows.Forms.DataGridView()
         Me.LblMode = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.TxtCustomerPO = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
         CType(Me.DgvBilling, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -294,10 +296,32 @@ Partial Class BillingList
         Me.LblMode.Text = "モード"
         Me.LblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'Label11
+        '
+        Me.Label11.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.Label11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label11.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Label11.Location = New System.Drawing.Point(584, 95)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(170, 22)
+        Me.Label11.TabIndex = 327
+        Me.Label11.Text = "客先番号"
+        Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'TxtCustomerPO
+        '
+        Me.TxtCustomerPO.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtCustomerPO.Location = New System.Drawing.Point(760, 95)
+        Me.TxtCustomerPO.Name = "TxtCustomerPO"
+        Me.TxtCustomerPO.Size = New System.Drawing.Size(170, 22)
+        Me.TxtCustomerPO.TabIndex = 326
+        '
         'BillingList
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.Label11)
+        Me.Controls.Add(Me.TxtCustomerPO)
         Me.Controls.Add(Me.LblMode)
         Me.Controls.Add(Me.BtnBillingCancel)
         Me.Controls.Add(Me.ChkCancelData)
@@ -355,4 +379,6 @@ Partial Class BillingList
     Friend WithEvents BtnBack As Button
     Friend WithEvents DgvBilling As DataGridView
     Friend WithEvents LblMode As Label
+    Friend WithEvents Label11 As Label
+    Friend WithEvents TxtCustomerPO As TextBox
 End Class

@@ -411,7 +411,7 @@ Public Class Cymn
         Dim reccnt As Integer = 0
 
         Dim dtNow As DateTime = DateTime.Now
-        If TxtCustomerCode.Text = "99999" Then
+        If TxtCustomerCode.Text = "stock" Then
         Else
             Dim Sql1 As String = ""
             Sql1 = ""

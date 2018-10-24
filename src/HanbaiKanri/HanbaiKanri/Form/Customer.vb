@@ -340,21 +340,80 @@ Public Class Customer
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-            TxtCompanyCode.Text = ds.Tables(RS).Rows(0)("会社コード")
-            TxtCustomerCode.Text = ds.Tables(RS).Rows(0)("得意先コード")
-            TxtCustomerName.Text = ds.Tables(RS).Rows(0)("得意先名")
-            TxtCustomerShortName.Text = ds.Tables(RS).Rows(0)("得意先名略称")
-            TxtPostalCode.Text = ds.Tables(RS).Rows(0)("郵便番号")
-            TxtAddress1.Text = ds.Tables(RS).Rows(0)("住所１")
-            TxtAddress2.Text = ds.Tables(RS).Rows(0)("住所２")
-            TxtAddress3.Text = ds.Tables(RS).Rows(0)("住所３")
-            TxtTel.Text = ds.Tables(RS).Rows(0)("電話番号")
-            TxtTelSearch.Text = ds.Tables(RS).Rows(0)("電話番号検索用")
-            TxtFax.Text = ds.Tables(RS).Rows(0)("ＦＡＸ番号")
-            TxtPerson.Text = ds.Tables(RS).Rows(0)("担当者名")
-            TxtPosition.Text = ds.Tables(RS).Rows(0)("担当者役職")
-            TxtPaymentTerms.Text = ds.Tables(RS).Rows(0)("既定支払条件")
-            TxtMemo.Text = ds.Tables(RS).Rows(0)("メモ")
+            If ds.Tables(RS).Rows(0)("会社コード") Is DBNull.Value Then
+            Else
+                TxtCompanyCode.Text = ds.Tables(RS).Rows(0)("会社コード")
+            End If
+
+            If ds.Tables(RS).Rows(0)("得意先コード") Is DBNull.Value Then
+            Else
+                TxtCustomerCode.Text = ds.Tables(RS).Rows(0)("得意先コード")
+            End If
+
+            If ds.Tables(RS).Rows(0)("得意先名") Is DBNull.Value Then
+            Else
+                TxtCustomerName.Text = ds.Tables(RS).Rows(0)("得意先名")
+            End If
+
+            If ds.Tables(RS).Rows(0)("得意先名略称") Is DBNull.Value Then
+            Else
+                TxtCustomerShortName.Text = ds.Tables(RS).Rows(0)("得意先名略称")
+            End If
+
+            If ds.Tables(RS).Rows(0)("郵便番号") Is DBNull.Value Then
+            Else
+                TxtPostalCode.Text = ds.Tables(RS).Rows(0)("郵便番号")
+            End If
+
+            If ds.Tables(RS).Rows(0)("住所１") Is DBNull.Value Then
+            Else
+                TxtAddress1.Text = ds.Tables(RS).Rows(0)("住所１")
+            End If
+
+            If ds.Tables(RS).Rows(0)("住所２") Is DBNull.Value Then
+            Else
+                TxtAddress2.Text = ds.Tables(RS).Rows(0)("住所２")
+            End If
+
+            If ds.Tables(RS).Rows(0)("住所３") Is DBNull.Value Then
+            Else
+                TxtAddress3.Text = ds.Tables(RS).Rows(0)("住所３")
+            End If
+
+            If ds.Tables(RS).Rows(0)("電話番号") Is DBNull.Value Then
+            Else
+                TxtTel.Text = ds.Tables(RS).Rows(0)("電話番号")
+            End If
+
+            If ds.Tables(RS).Rows(0)("電話番号検索用") Is DBNull.Value Then
+            Else
+                TxtTelSearch.Text = ds.Tables(RS).Rows(0)("電話番号検索用")
+            End If
+
+            If ds.Tables(RS).Rows(0)("ＦＡＸ番号") Is DBNull.Value Then
+            Else
+                TxtFax.Text = ds.Tables(RS).Rows(0)("ＦＡＸ番号")
+            End If
+
+            If ds.Tables(RS).Rows(0)("担当者名") Is DBNull.Value Then
+            Else
+                TxtPerson.Text = ds.Tables(RS).Rows(0)("担当者名")
+            End If
+
+            If ds.Tables(RS).Rows(0)("担当者役職") Is DBNull.Value Then
+            Else
+                TxtPosition.Text = ds.Tables(RS).Rows(0)("担当者役職")
+            End If
+
+            If ds.Tables(RS).Rows(0)("既定支払条件") Is DBNull.Value Then
+            Else
+                TxtPaymentTerms.Text = ds.Tables(RS).Rows(0)("既定支払条件")
+            End If
+
+            If ds.Tables(RS).Rows(0)("メモ") Is DBNull.Value Then
+            Else
+                TxtMemo.Text = ds.Tables(RS).Rows(0)("メモ")
+            End If
         End If
     End Sub
 End Class

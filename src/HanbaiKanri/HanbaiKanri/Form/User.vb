@@ -270,14 +270,47 @@ Public Class User
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-            TxtCompanyCode.Text = ds.Tables(RS).Rows(0)("会社コード")
-            TxtUserId.Text = ds.Tables(RS).Rows(0)("ユーザＩＤ")
-            TxtName.Text = ds.Tables(RS).Rows(0)("氏名")
-            TxtShortName.Text = ds.Tables(RS).Rows(0)("略名")
-            TxtRemarks.Text = ds.Tables(RS).Rows(0)("備考")
-            TxtFlg.Text = ds.Tables(RS).Rows(0)("無効フラグ")
-            TxtAuthority.Text = ds.Tables(RS).Rows(0)("権限")
-            TxtLangage.Text = ds.Tables(RS).Rows(0)("言語")
+            If ds.Tables(RS).Rows(0)("会社コード") Is DBNull.Value Then
+            Else
+                TxtCompanyCode.Text = ds.Tables(RS).Rows(0)("会社コード")
+            End If
+
+
+            If ds.Tables(RS).Rows(0)("ユーザＩＤ") Is DBNull.Value Then
+            Else
+                TxtUserId.Text = ds.Tables(RS).Rows(0)("ユーザＩＤ")
+            End If
+
+            If ds.Tables(RS).Rows(0)("氏名") Is DBNull.Value Then
+            Else
+                TxtName.Text = ds.Tables(RS).Rows(0)("氏名")
+            End If
+
+            If ds.Tables(RS).Rows(0)("略名") Is DBNull.Value Then
+            Else
+                TxtShortName.Text = ds.Tables(RS).Rows(0)("略名")
+            End If
+
+            If ds.Tables(RS).Rows(0)("備考") Is DBNull.Value Then
+            Else
+                TxtRemarks.Text = ds.Tables(RS).Rows(0)("備考")
+            End If
+
+            If ds.Tables(RS).Rows(0)("無効フラグ") Is DBNull.Value Then
+            Else
+                TxtFlg.Text = ds.Tables(RS).Rows(0)("無効フラグ")
+            End If
+
+            If ds.Tables(RS).Rows(0)("権限") Is DBNull.Value Then
+            Else
+                TxtAuthority.Text = ds.Tables(RS).Rows(0)("権限")
+            End If
+
+            If ds.Tables(RS).Rows(0)("言語") Is DBNull.Value Then
+            Else
+                TxtLangage.Text = ds.Tables(RS).Rows(0)("言語")
+            End If
+
         End If
     End Sub
 End Class

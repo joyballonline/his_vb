@@ -938,7 +938,7 @@ Partial Class Order
         Me.LblCustomerPO.Name = "LblCustomerPO"
         Me.LblCustomerPO.Size = New System.Drawing.Size(110, 23)
         Me.LblCustomerPO.TabIndex = 189
-        Me.LblCustomerPO.Text = "客先PO"
+        Me.LblCustomerPO.Text = "客先番号"
         Me.LblCustomerPO.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Order

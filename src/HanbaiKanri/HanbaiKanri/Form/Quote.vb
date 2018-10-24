@@ -2296,4 +2296,41 @@ Public Class Quote
         End Try
 
     End Sub
+
+    Private Sub BtnCodeSearch_Click(sender As Object, e As EventArgs) Handles BtnCodeSearch.Click
+        Dim SqlCode As String = ""
+        SqlCode += "SELECT "
+        SqlCode += "* "
+        SqlCode += "FROM "
+        SqlCode += "public"
+        SqlCode += "."
+        SqlCode += "m10_customer"
+        SqlCode += " WHERE "
+        SqlCode += "会社コード"
+        SqlCode += " ILIKE "
+        SqlCode += "'"
+        SqlCode += CompanyCode
+        SqlCode += "'"
+        SqlCode += " AND "
+        SqlCode += "得意先コード"
+        SqlCode += " ILIKE "
+        SqlCode += "'"
+        SqlCode += TxtCustomerCode.Text
+        SqlCode += "'"
+
+        Dim reccnt As Integer = 0
+        Dim dsCode = _db.selectDB(SqlCode, RS, reccnt)
+        If dsCode.Tables(RS).Rows.Count > 0 Then
+            TxtCustomerName.Text = dsCode.Tables(RS).Rows(0)("得意先名").ToString
+            TxtPostalCode.Text = dsCode.Tables(RS).Rows(0)("郵便番号").ToString
+            TxtAddress1.Text = dsCode.Tables(RS).Rows(0)("住所１").ToString
+            TxtAddress2.Text = dsCode.Tables(RS).Rows(0)("住所２").ToString
+            TxtAddress3.Text = dsCode.Tables(RS).Rows(0)("住所３").ToString
+            TxtTel.Text = dsCode.Tables(RS).Rows(0)("電話番号").ToString
+            TxtFax.Text = dsCode.Tables(RS).Rows(0)("ＦＡＸ番号").ToString
+            TxtPerson.Text = dsCode.Tables(RS).Rows(0)("担当者名").ToString
+            TxtPosition.Text = dsCode.Tables(RS).Rows(0)("担当者役職").ToString
+            TxtPaymentTerms.Text = dsCode.Tables(RS).Rows(0)("既定支払条件").ToString
+        End If
+    End Sub
 End Class

@@ -305,11 +305,8 @@ Public Class OrderManagement
             TxtCount3.Text = DgvAdd.Rows.Count()
 
             TxtOrderNo.Text = ds1.Tables(RS).Rows(0)("受注番号")
-            If ds1.Tables(RS).Rows(0)("客先番号") Is DBNull.Value Then
-            Else
-                TxtCustomerPO.Text = ds1.Tables(RS).Rows(0)("客先番号")
-            End If
-
+            TxtSuffixNo.Text = ds1.Tables(RS).Rows(0)("受注番号枝番")
+            TxtCustomerPO.Text = ds1.Tables(RS).Rows(0)("客先番号").ToString
             TxtOrderDate.Text = ds1.Tables(RS).Rows(0)("受注日")
             TxtCustomerCode.Text = ds1.Tables(RS).Rows(0)("得意先コード")
             TxtCustomerName.Text = ds1.Tables(RS).Rows(0)("得意先名")

@@ -78,31 +78,7 @@ Public Class OrderList
         If Status = "EXCLUSION" Then
             Try
                 Sql += "SELECT "
-                Sql += "会社コード, "
-                Sql += "受注番号, "
-                Sql += "受注番号枝番, "
-                Sql += "受注日, "
-                Sql += "見積番号, "
-                Sql += "見積番号枝番, "
-                Sql += "見積日, "
-                Sql += "見積有効期限, "
-                Sql += "得意先コード, "
-                Sql += "得意先名, "
-                Sql += "得意先郵便番号, "
-                Sql += "得意先住所, "
-                Sql += "得意先電話番号, "
-                Sql += "得意先ＦＡＸ, "
-                Sql += "得意先担当者名, "
-                Sql += "得意先担当者役職, "
-                Sql += "支払条件, "
-                Sql += "ＶＡＴ, "
-                Sql += "見積金額, "
-                Sql += "仕入金額, "
-                Sql += "粗利額, "
-                Sql += "営業担当者, "
-                Sql += "入力担当者, "
-                Sql += "備考, "
-                Sql += "登録日 "
+                Sql += "* "
                 Sql += "FROM "
                 Sql += "public"
                 Sql += "."
@@ -118,6 +94,7 @@ Public Class OrderList
                 ds = _db.selectDB(Sql, RS, reccnt)
                 DgvCymnhd.Columns.Add("受注番号", "受注番号")
                 DgvCymnhd.Columns.Add("受注番号枝番", "受注番号枝番")
+                DgvCymnhd.Columns.Add("客先番号", "客先番号")
                 DgvCymnhd.Columns.Add("受注日", "受注日")
                 DgvCymnhd.Columns.Add("見積番号", "見積番号")
                 DgvCymnhd.Columns.Add("見積番号枝番", "見積番号枝番")
@@ -150,28 +127,29 @@ Public Class OrderList
                     DgvCymnhd.Rows.Add()
                     DgvCymnhd.Rows(index).Cells(0).Value = ds.Tables(RS).Rows(index)("受注番号")
                     DgvCymnhd.Rows(index).Cells(1).Value = ds.Tables(RS).Rows(index)("受注番号枝番")
-                    DgvCymnhd.Rows(index).Cells(2).Value = ds.Tables(RS).Rows(index)("受注日")
-                    DgvCymnhd.Rows(index).Cells(3).Value = ds.Tables(RS).Rows(index)("見積番号")
-                    DgvCymnhd.Rows(index).Cells(4).Value = ds.Tables(RS).Rows(index)("見積番号枝番")
-                    DgvCymnhd.Rows(index).Cells(5).Value = ds.Tables(RS).Rows(index)("見積日")
-                    DgvCymnhd.Rows(index).Cells(6).Value = ds.Tables(RS).Rows(index)("見積有効期限")
-                    DgvCymnhd.Rows(index).Cells(7).Value = ds.Tables(RS).Rows(index)("得意先コード")
-                    DgvCymnhd.Rows(index).Cells(8).Value = ds.Tables(RS).Rows(index)("得意先名")
-                    DgvCymnhd.Rows(index).Cells(9).Value = ds.Tables(RS).Rows(index)("得意先郵便番号")
-                    DgvCymnhd.Rows(index).Cells(10).Value = ds.Tables(RS).Rows(index)("得意先住所")
-                    DgvCymnhd.Rows(index).Cells(11).Value = ds.Tables(RS).Rows(index)("得意先電話番号")
-                    DgvCymnhd.Rows(index).Cells(12).Value = ds.Tables(RS).Rows(index)("得意先ＦＡＸ")
-                    DgvCymnhd.Rows(index).Cells(13).Value = ds.Tables(RS).Rows(index)("得意先担当者名")
-                    DgvCymnhd.Rows(index).Cells(14).Value = ds.Tables(RS).Rows(index)("得意先担当者役職")
-                    DgvCymnhd.Rows(index).Cells(15).Value = ds.Tables(RS).Rows(index)("ＶＡＴ")
-                    DgvCymnhd.Rows(index).Cells(16).Value = ds.Tables(RS).Rows(index)("見積金額")
-                    DgvCymnhd.Rows(index).Cells(17).Value = ds.Tables(RS).Rows(index)("仕入金額")
-                    DgvCymnhd.Rows(index).Cells(18).Value = ds.Tables(RS).Rows(index)("粗利額")
-                    DgvCymnhd.Rows(index).Cells(19).Value = ds.Tables(RS).Rows(index)("支払条件")
-                    DgvCymnhd.Rows(index).Cells(20).Value = ds.Tables(RS).Rows(index)("営業担当者")
-                    DgvCymnhd.Rows(index).Cells(21).Value = ds.Tables(RS).Rows(index)("入力担当者")
-                    DgvCymnhd.Rows(index).Cells(22).Value = ds.Tables(RS).Rows(index)("備考")
-                    DgvCymnhd.Rows(index).Cells(23).Value = ds.Tables(RS).Rows(index)("登録日")
+                    DgvCymnhd.Rows(index).Cells(2).Value = ds.Tables(RS).Rows(index)("客先番号")
+                    DgvCymnhd.Rows(index).Cells(3).Value = ds.Tables(RS).Rows(index)("受注日")
+                    DgvCymnhd.Rows(index).Cells(4).Value = ds.Tables(RS).Rows(index)("見積番号")
+                    DgvCymnhd.Rows(index).Cells(5).Value = ds.Tables(RS).Rows(index)("見積番号枝番")
+                    DgvCymnhd.Rows(index).Cells(6).Value = ds.Tables(RS).Rows(index)("見積日")
+                    DgvCymnhd.Rows(index).Cells(7).Value = ds.Tables(RS).Rows(index)("見積有効期限")
+                    DgvCymnhd.Rows(index).Cells(8).Value = ds.Tables(RS).Rows(index)("得意先コード")
+                    DgvCymnhd.Rows(index).Cells(9).Value = ds.Tables(RS).Rows(index)("得意先名")
+                    DgvCymnhd.Rows(index).Cells(10).Value = ds.Tables(RS).Rows(index)("得意先郵便番号")
+                    DgvCymnhd.Rows(index).Cells(11).Value = ds.Tables(RS).Rows(index)("得意先住所")
+                    DgvCymnhd.Rows(index).Cells(12).Value = ds.Tables(RS).Rows(index)("得意先電話番号")
+                    DgvCymnhd.Rows(index).Cells(13).Value = ds.Tables(RS).Rows(index)("得意先ＦＡＸ")
+                    DgvCymnhd.Rows(index).Cells(14).Value = ds.Tables(RS).Rows(index)("得意先担当者名")
+                    DgvCymnhd.Rows(index).Cells(15).Value = ds.Tables(RS).Rows(index)("得意先担当者役職")
+                    DgvCymnhd.Rows(index).Cells(16).Value = ds.Tables(RS).Rows(index)("ＶＡＴ")
+                    DgvCymnhd.Rows(index).Cells(17).Value = ds.Tables(RS).Rows(index)("見積金額")
+                    DgvCymnhd.Rows(index).Cells(18).Value = ds.Tables(RS).Rows(index)("仕入金額")
+                    DgvCymnhd.Rows(index).Cells(19).Value = ds.Tables(RS).Rows(index)("粗利額")
+                    DgvCymnhd.Rows(index).Cells(20).Value = ds.Tables(RS).Rows(index)("支払条件")
+                    DgvCymnhd.Rows(index).Cells(21).Value = ds.Tables(RS).Rows(index)("営業担当者")
+                    DgvCymnhd.Rows(index).Cells(22).Value = ds.Tables(RS).Rows(index)("入力担当者")
+                    DgvCymnhd.Rows(index).Cells(23).Value = ds.Tables(RS).Rows(index)("備考")
+                    DgvCymnhd.Rows(index).Cells(24).Value = ds.Tables(RS).Rows(index)("登録日")
                 Next
 
             Catch ue As UsrDefException
@@ -184,31 +162,7 @@ Public Class OrderList
         Else
             Try
                 Sql += "SELECT "
-                Sql += "会社コード, "
-                Sql += "受注番号, "
-                Sql += "受注番号枝番, "
-                Sql += "受注日, "
-                Sql += "見積番号, "
-                Sql += "見積番号枝番, "
-                Sql += "見積日, "
-                Sql += "見積有効期限, "
-                Sql += "得意先コード, "
-                Sql += "得意先名, "
-                Sql += "得意先郵便番号, "
-                Sql += "得意先住所, "
-                Sql += "得意先電話番号, "
-                Sql += "得意先ＦＡＸ, "
-                Sql += "得意先担当者名, "
-                Sql += "得意先担当者役職, "
-                Sql += "支払条件, "
-                Sql += "ＶＡＴ, "
-                Sql += "見積金額, "
-                Sql += "仕入金額, "
-                Sql += "粗利額, "
-                Sql += "営業担当者, "
-                Sql += "入力担当者, "
-                Sql += "備考, "
-                Sql += "登録日 "
+                Sql += "*  "
                 Sql += "FROM "
                 Sql += "public"
                 Sql += "."
@@ -218,6 +172,7 @@ Public Class OrderList
                 ds = _db.selectDB(Sql, RS, reccnt)
                 DgvCymnhd.Columns.Add("受注番号", "受注番号")
                 DgvCymnhd.Columns.Add("受注番号枝番", "受注番号枝番")
+                DgvCymnhd.Columns.Add("客先番号", "客先番号")
                 DgvCymnhd.Columns.Add("受注日", "受注日")
                 DgvCymnhd.Columns.Add("見積番号", "見積番号")
                 DgvCymnhd.Columns.Add("見積番号枝番", "見積番号枝番")
@@ -250,28 +205,29 @@ Public Class OrderList
                     DgvCymnhd.Rows.Add()
                     DgvCymnhd.Rows(index).Cells(0).Value = ds.Tables(RS).Rows(index)("受注番号")
                     DgvCymnhd.Rows(index).Cells(1).Value = ds.Tables(RS).Rows(index)("受注番号枝番")
-                    DgvCymnhd.Rows(index).Cells(2).Value = ds.Tables(RS).Rows(index)("受注日")
-                    DgvCymnhd.Rows(index).Cells(3).Value = ds.Tables(RS).Rows(index)("見積番号")
-                    DgvCymnhd.Rows(index).Cells(4).Value = ds.Tables(RS).Rows(index)("見積番号枝番")
-                    DgvCymnhd.Rows(index).Cells(5).Value = ds.Tables(RS).Rows(index)("見積日")
-                    DgvCymnhd.Rows(index).Cells(6).Value = ds.Tables(RS).Rows(index)("見積有効期限")
-                    DgvCymnhd.Rows(index).Cells(7).Value = ds.Tables(RS).Rows(index)("得意先コード")
-                    DgvCymnhd.Rows(index).Cells(8).Value = ds.Tables(RS).Rows(index)("得意先名")
-                    DgvCymnhd.Rows(index).Cells(9).Value = ds.Tables(RS).Rows(index)("得意先郵便番号")
-                    DgvCymnhd.Rows(index).Cells(10).Value = ds.Tables(RS).Rows(index)("得意先住所")
-                    DgvCymnhd.Rows(index).Cells(11).Value = ds.Tables(RS).Rows(index)("得意先電話番号")
-                    DgvCymnhd.Rows(index).Cells(12).Value = ds.Tables(RS).Rows(index)("得意先ＦＡＸ")
-                    DgvCymnhd.Rows(index).Cells(13).Value = ds.Tables(RS).Rows(index)("得意先担当者名")
-                    DgvCymnhd.Rows(index).Cells(14).Value = ds.Tables(RS).Rows(index)("得意先担当者役職")
-                    DgvCymnhd.Rows(index).Cells(15).Value = ds.Tables(RS).Rows(index)("ＶＡＴ")
-                    DgvCymnhd.Rows(index).Cells(16).Value = ds.Tables(RS).Rows(index)("見積金額")
-                    DgvCymnhd.Rows(index).Cells(17).Value = ds.Tables(RS).Rows(index)("仕入金額")
-                    DgvCymnhd.Rows(index).Cells(18).Value = ds.Tables(RS).Rows(index)("粗利額")
-                    DgvCymnhd.Rows(index).Cells(19).Value = ds.Tables(RS).Rows(index)("支払条件")
-                    DgvCymnhd.Rows(index).Cells(20).Value = ds.Tables(RS).Rows(index)("営業担当者")
-                    DgvCymnhd.Rows(index).Cells(21).Value = ds.Tables(RS).Rows(index)("入力担当者")
-                    DgvCymnhd.Rows(index).Cells(22).Value = ds.Tables(RS).Rows(index)("備考")
-                    DgvCymnhd.Rows(index).Cells(23).Value = ds.Tables(RS).Rows(index)("登録日")
+                    DgvCymnhd.Rows(index).Cells(2).Value = ds.Tables(RS).Rows(index)("客先番号")
+                    DgvCymnhd.Rows(index).Cells(3).Value = ds.Tables(RS).Rows(index)("受注日")
+                    DgvCymnhd.Rows(index).Cells(4).Value = ds.Tables(RS).Rows(index)("見積番号")
+                    DgvCymnhd.Rows(index).Cells(5).Value = ds.Tables(RS).Rows(index)("見積番号枝番")
+                    DgvCymnhd.Rows(index).Cells(6).Value = ds.Tables(RS).Rows(index)("見積日")
+                    DgvCymnhd.Rows(index).Cells(7).Value = ds.Tables(RS).Rows(index)("見積有効期限")
+                    DgvCymnhd.Rows(index).Cells(8).Value = ds.Tables(RS).Rows(index)("得意先コード")
+                    DgvCymnhd.Rows(index).Cells(9).Value = ds.Tables(RS).Rows(index)("得意先名")
+                    DgvCymnhd.Rows(index).Cells(10).Value = ds.Tables(RS).Rows(index)("得意先郵便番号")
+                    DgvCymnhd.Rows(index).Cells(11).Value = ds.Tables(RS).Rows(index)("得意先住所")
+                    DgvCymnhd.Rows(index).Cells(12).Value = ds.Tables(RS).Rows(index)("得意先電話番号")
+                    DgvCymnhd.Rows(index).Cells(13).Value = ds.Tables(RS).Rows(index)("得意先ＦＡＸ")
+                    DgvCymnhd.Rows(index).Cells(14).Value = ds.Tables(RS).Rows(index)("得意先担当者名")
+                    DgvCymnhd.Rows(index).Cells(15).Value = ds.Tables(RS).Rows(index)("得意先担当者役職")
+                    DgvCymnhd.Rows(index).Cells(16).Value = ds.Tables(RS).Rows(index)("ＶＡＴ")
+                    DgvCymnhd.Rows(index).Cells(17).Value = ds.Tables(RS).Rows(index)("見積金額")
+                    DgvCymnhd.Rows(index).Cells(18).Value = ds.Tables(RS).Rows(index)("仕入金額")
+                    DgvCymnhd.Rows(index).Cells(19).Value = ds.Tables(RS).Rows(index)("粗利額")
+                    DgvCymnhd.Rows(index).Cells(20).Value = ds.Tables(RS).Rows(index)("支払条件")
+                    DgvCymnhd.Rows(index).Cells(21).Value = ds.Tables(RS).Rows(index)("営業担当者")
+                    DgvCymnhd.Rows(index).Cells(22).Value = ds.Tables(RS).Rows(index)("入力担当者")
+                    DgvCymnhd.Rows(index).Cells(23).Value = ds.Tables(RS).Rows(index)("備考")
+                    DgvCymnhd.Rows(index).Cells(24).Value = ds.Tables(RS).Rows(index)("登録日")
                 Next
 
             Catch ue As UsrDefException
@@ -366,6 +322,7 @@ Public Class OrderList
 
             DgvCymnhd.Columns.Add("受注番号", "受注番号")
             DgvCymnhd.Columns.Add("受注番号枝番", "受注番号枝番")
+            DgvCymnhd.Columns.Add("客先番号", "客先番号")
             DgvCymnhd.Columns.Add("受注日", "受注日")
             DgvCymnhd.Columns.Add("見積番号", "見積番号")
             DgvCymnhd.Columns.Add("見積番号枝番", "見積番号枝番")
@@ -398,28 +355,29 @@ Public Class OrderList
                 DgvCymnhd.Rows.Add()
                 DgvCymnhd.Rows(index).Cells(0).Value = ds.Tables(RS).Rows(index)("受注番号")
                 DgvCymnhd.Rows(index).Cells(1).Value = ds.Tables(RS).Rows(index)("受注番号枝番")
-                DgvCymnhd.Rows(index).Cells(2).Value = ds.Tables(RS).Rows(index)("受注日")
-                DgvCymnhd.Rows(index).Cells(3).Value = ds.Tables(RS).Rows(index)("見積番号")
-                DgvCymnhd.Rows(index).Cells(4).Value = ds.Tables(RS).Rows(index)("見積番号枝番")
-                DgvCymnhd.Rows(index).Cells(5).Value = ds.Tables(RS).Rows(index)("見積日")
-                DgvCymnhd.Rows(index).Cells(6).Value = ds.Tables(RS).Rows(index)("見積有効期限")
-                DgvCymnhd.Rows(index).Cells(7).Value = ds.Tables(RS).Rows(index)("得意先コード")
-                DgvCymnhd.Rows(index).Cells(8).Value = ds.Tables(RS).Rows(index)("得意先名")
-                DgvCymnhd.Rows(index).Cells(9).Value = ds.Tables(RS).Rows(index)("得意先郵便番号")
-                DgvCymnhd.Rows(index).Cells(10).Value = ds.Tables(RS).Rows(index)("得意先住所")
-                DgvCymnhd.Rows(index).Cells(11).Value = ds.Tables(RS).Rows(index)("得意先電話番号")
-                DgvCymnhd.Rows(index).Cells(12).Value = ds.Tables(RS).Rows(index)("得意先ＦＡＸ")
-                DgvCymnhd.Rows(index).Cells(13).Value = ds.Tables(RS).Rows(index)("得意先担当者名")
-                DgvCymnhd.Rows(index).Cells(14).Value = ds.Tables(RS).Rows(index)("得意先担当者役職")
-                DgvCymnhd.Rows(index).Cells(15).Value = ds.Tables(RS).Rows(index)("ＶＡＴ")
-                DgvCymnhd.Rows(index).Cells(16).Value = ds.Tables(RS).Rows(index)("見積金額")
-                DgvCymnhd.Rows(index).Cells(17).Value = ds.Tables(RS).Rows(index)("仕入金額")
-                DgvCymnhd.Rows(index).Cells(18).Value = ds.Tables(RS).Rows(index)("粗利額")
-                DgvCymnhd.Rows(index).Cells(19).Value = ds.Tables(RS).Rows(index)("支払条件")
-                DgvCymnhd.Rows(index).Cells(20).Value = ds.Tables(RS).Rows(index)("営業担当者")
-                DgvCymnhd.Rows(index).Cells(21).Value = ds.Tables(RS).Rows(index)("入力担当者")
-                DgvCymnhd.Rows(index).Cells(22).Value = ds.Tables(RS).Rows(index)("備考")
-                DgvCymnhd.Rows(index).Cells(23).Value = ds.Tables(RS).Rows(index)("登録日")
+                DgvCymnhd.Rows(index).Cells(2).Value = ds.Tables(RS).Rows(index)("客先番号")
+                DgvCymnhd.Rows(index).Cells(3).Value = ds.Tables(RS).Rows(index)("受注日")
+                DgvCymnhd.Rows(index).Cells(4).Value = ds.Tables(RS).Rows(index)("見積番号")
+                DgvCymnhd.Rows(index).Cells(5).Value = ds.Tables(RS).Rows(index)("見積番号枝番")
+                DgvCymnhd.Rows(index).Cells(6).Value = ds.Tables(RS).Rows(index)("見積日")
+                DgvCymnhd.Rows(index).Cells(7).Value = ds.Tables(RS).Rows(index)("見積有効期限")
+                DgvCymnhd.Rows(index).Cells(8).Value = ds.Tables(RS).Rows(index)("得意先コード")
+                DgvCymnhd.Rows(index).Cells(9).Value = ds.Tables(RS).Rows(index)("得意先名")
+                DgvCymnhd.Rows(index).Cells(10).Value = ds.Tables(RS).Rows(index)("得意先郵便番号")
+                DgvCymnhd.Rows(index).Cells(11).Value = ds.Tables(RS).Rows(index)("得意先住所")
+                DgvCymnhd.Rows(index).Cells(12).Value = ds.Tables(RS).Rows(index)("得意先電話番号")
+                DgvCymnhd.Rows(index).Cells(13).Value = ds.Tables(RS).Rows(index)("得意先ＦＡＸ")
+                DgvCymnhd.Rows(index).Cells(14).Value = ds.Tables(RS).Rows(index)("得意先担当者名")
+                DgvCymnhd.Rows(index).Cells(15).Value = ds.Tables(RS).Rows(index)("得意先担当者役職")
+                DgvCymnhd.Rows(index).Cells(16).Value = ds.Tables(RS).Rows(index)("ＶＡＴ")
+                DgvCymnhd.Rows(index).Cells(17).Value = ds.Tables(RS).Rows(index)("見積金額")
+                DgvCymnhd.Rows(index).Cells(18).Value = ds.Tables(RS).Rows(index)("仕入金額")
+                DgvCymnhd.Rows(index).Cells(19).Value = ds.Tables(RS).Rows(index)("粗利額")
+                DgvCymnhd.Rows(index).Cells(20).Value = ds.Tables(RS).Rows(index)("支払条件")
+                DgvCymnhd.Rows(index).Cells(21).Value = ds.Tables(RS).Rows(index)("営業担当者")
+                DgvCymnhd.Rows(index).Cells(22).Value = ds.Tables(RS).Rows(index)("入力担当者")
+                DgvCymnhd.Rows(index).Cells(23).Value = ds.Tables(RS).Rows(index)("備考")
+                DgvCymnhd.Rows(index).Cells(24).Value = ds.Tables(RS).Rows(index)("登録日")
             Next
         Else
             Dim Sql As String = ""
@@ -760,12 +718,32 @@ Public Class OrderList
                     count += 1
                 End If
             End If
+            If TxtCustomerPO.Text = "" Then
+            Else
+                If count > 0 Then
+                    Sql += " AND "
+                    Sql += "客先番号"
+                    Sql += " ILIKE "
+                    Sql += "'%"
+                    Sql += TxtCustomerPO.Text
+                    Sql += "%'"
+                Else
+                    Sql += " WHERE "
+                    Sql += "客先番号"
+                    Sql += " ILIKE "
+                    Sql += "'%"
+                    Sql += TxtCustomerPO.Text
+                    Sql += "%'"
+                    count += 1
+                End If
+            End If
 
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
 
             DgvCymnhd.Columns.Add("受注番号", "受注番号")
             DgvCymnhd.Columns.Add("受注番号枝番", "受注番号枝番")
+            DgvCymnhd.Columns.Add("客先番号", "客先番号")
             DgvCymnhd.Columns.Add("受注日", "受注日")
             DgvCymnhd.Columns.Add("見積番号", "見積番号")
             DgvCymnhd.Columns.Add("見積番号枝番", "見積番号枝番")
@@ -799,31 +777,32 @@ Public Class OrderList
 
             For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
                 DgvCymnhd.Rows.Add()
-                DgvCymnhd.Rows(index).Cells(0).Value = ds.Tables(RS).Rows(index)("受注番号")
                 OrderNo(index) = ds.Tables(RS).Rows(index)("受注番号")
+                DgvCymnhd.Rows(index).Cells(0).Value = ds.Tables(RS).Rows(index)("受注番号")
                 DgvCymnhd.Rows(index).Cells(1).Value = ds.Tables(RS).Rows(index)("受注番号枝番")
-                DgvCymnhd.Rows(index).Cells(2).Value = ds.Tables(RS).Rows(index)("受注日")
-                DgvCymnhd.Rows(index).Cells(3).Value = ds.Tables(RS).Rows(index)("見積番号")
-                DgvCymnhd.Rows(index).Cells(4).Value = ds.Tables(RS).Rows(index)("見積番号枝番")
-                DgvCymnhd.Rows(index).Cells(5).Value = ds.Tables(RS).Rows(index)("見積日")
-                DgvCymnhd.Rows(index).Cells(6).Value = ds.Tables(RS).Rows(index)("見積有効期限")
-                DgvCymnhd.Rows(index).Cells(7).Value = ds.Tables(RS).Rows(index)("得意先コード")
-                DgvCymnhd.Rows(index).Cells(8).Value = ds.Tables(RS).Rows(index)("得意先名")
-                DgvCymnhd.Rows(index).Cells(9).Value = ds.Tables(RS).Rows(index)("得意先郵便番号")
-                DgvCymnhd.Rows(index).Cells(10).Value = ds.Tables(RS).Rows(index)("得意先住所")
-                DgvCymnhd.Rows(index).Cells(11).Value = ds.Tables(RS).Rows(index)("得意先電話番号")
-                DgvCymnhd.Rows(index).Cells(12).Value = ds.Tables(RS).Rows(index)("得意先ＦＡＸ")
-                DgvCymnhd.Rows(index).Cells(13).Value = ds.Tables(RS).Rows(index)("得意先担当者名")
-                DgvCymnhd.Rows(index).Cells(14).Value = ds.Tables(RS).Rows(index)("得意先担当者役職")
-                DgvCymnhd.Rows(index).Cells(15).Value = ds.Tables(RS).Rows(index)("ＶＡＴ")
-                DgvCymnhd.Rows(index).Cells(16).Value = ds.Tables(RS).Rows(index)("見積金額")
-                DgvCymnhd.Rows(index).Cells(17).Value = ds.Tables(RS).Rows(index)("仕入金額")
-                DgvCymnhd.Rows(index).Cells(18).Value = ds.Tables(RS).Rows(index)("粗利額")
-                DgvCymnhd.Rows(index).Cells(19).Value = ds.Tables(RS).Rows(index)("支払条件")
-                DgvCymnhd.Rows(index).Cells(20).Value = ds.Tables(RS).Rows(index)("営業担当者")
-                DgvCymnhd.Rows(index).Cells(21).Value = ds.Tables(RS).Rows(index)("入力担当者")
-                DgvCymnhd.Rows(index).Cells(22).Value = ds.Tables(RS).Rows(index)("備考")
-                DgvCymnhd.Rows(index).Cells(23).Value = ds.Tables(RS).Rows(index)("登録日")
+                DgvCymnhd.Rows(index).Cells(2).Value = ds.Tables(RS).Rows(index)("客先番号")
+                DgvCymnhd.Rows(index).Cells(3).Value = ds.Tables(RS).Rows(index)("受注日")
+                DgvCymnhd.Rows(index).Cells(4).Value = ds.Tables(RS).Rows(index)("見積番号")
+                DgvCymnhd.Rows(index).Cells(5).Value = ds.Tables(RS).Rows(index)("見積番号枝番")
+                DgvCymnhd.Rows(index).Cells(6).Value = ds.Tables(RS).Rows(index)("見積日")
+                DgvCymnhd.Rows(index).Cells(7).Value = ds.Tables(RS).Rows(index)("見積有効期限")
+                DgvCymnhd.Rows(index).Cells(8).Value = ds.Tables(RS).Rows(index)("得意先コード")
+                DgvCymnhd.Rows(index).Cells(9).Value = ds.Tables(RS).Rows(index)("得意先名")
+                DgvCymnhd.Rows(index).Cells(10).Value = ds.Tables(RS).Rows(index)("得意先郵便番号")
+                DgvCymnhd.Rows(index).Cells(11).Value = ds.Tables(RS).Rows(index)("得意先住所")
+                DgvCymnhd.Rows(index).Cells(12).Value = ds.Tables(RS).Rows(index)("得意先電話番号")
+                DgvCymnhd.Rows(index).Cells(13).Value = ds.Tables(RS).Rows(index)("得意先ＦＡＸ")
+                DgvCymnhd.Rows(index).Cells(14).Value = ds.Tables(RS).Rows(index)("得意先担当者名")
+                DgvCymnhd.Rows(index).Cells(15).Value = ds.Tables(RS).Rows(index)("得意先担当者役職")
+                DgvCymnhd.Rows(index).Cells(16).Value = ds.Tables(RS).Rows(index)("ＶＡＴ")
+                DgvCymnhd.Rows(index).Cells(17).Value = ds.Tables(RS).Rows(index)("見積金額")
+                DgvCymnhd.Rows(index).Cells(18).Value = ds.Tables(RS).Rows(index)("仕入金額")
+                DgvCymnhd.Rows(index).Cells(19).Value = ds.Tables(RS).Rows(index)("粗利額")
+                DgvCymnhd.Rows(index).Cells(20).Value = ds.Tables(RS).Rows(index)("支払条件")
+                DgvCymnhd.Rows(index).Cells(21).Value = ds.Tables(RS).Rows(index)("営業担当者")
+                DgvCymnhd.Rows(index).Cells(22).Value = ds.Tables(RS).Rows(index)("入力担当者")
+                DgvCymnhd.Rows(index).Cells(23).Value = ds.Tables(RS).Rows(index)("備考")
+                DgvCymnhd.Rows(index).Cells(24).Value = ds.Tables(RS).Rows(index)("登録日")
             Next
 
         Catch ue As UsrDefException

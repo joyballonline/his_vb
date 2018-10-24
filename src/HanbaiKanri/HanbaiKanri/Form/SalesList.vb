@@ -94,6 +94,7 @@ Public Class SalesList
                 ds = _db.selectDB(Sql, RS, reccnt)
                 DgvCymnhd.Columns.Add("売上番号", "売上番号")
                 DgvCymnhd.Columns.Add("売上番号枝番", "売上番号枝番")
+                DgvCymnhd.Columns.Add("客先番号", "客先番号")
                 DgvCymnhd.Columns.Add("売上日", "売上日")
                 DgvCymnhd.Columns.Add("受注番号", "受注番号")
                 DgvCymnhd.Columns.Add("受注番号枝番", "受注番号枝番")
@@ -124,6 +125,7 @@ Public Class SalesList
                     DgvCymnhd.Rows.Add()
                     DgvCymnhd.Rows(index).Cells("売上番号").Value = ds.Tables(RS).Rows(index)("売上番号")
                     DgvCymnhd.Rows(index).Cells("売上番号枝番").Value = ds.Tables(RS).Rows(index)("売上番号枝番")
+                    DgvCymnhd.Rows(index).Cells("客先番号").Value = ds.Tables(RS).Rows(index)("客先番号")
                     DgvCymnhd.Rows(index).Cells("売上日").Value = ds.Tables(RS).Rows(index)("売上日")
                     DgvCymnhd.Rows(index).Cells("受注番号").Value = ds.Tables(RS).Rows(index)("受注番号")
                     DgvCymnhd.Rows(index).Cells("受注番号枝番").Value = ds.Tables(RS).Rows(index)("受注番号枝番")
@@ -166,6 +168,7 @@ Public Class SalesList
                 ds = _db.selectDB(Sql, RS, reccnt)
                 DgvCymnhd.Columns.Add("売上番号", "売上番号")
                 DgvCymnhd.Columns.Add("売上番号枝番", "売上番号枝番")
+                DgvCymnhd.Columns.Add("客先番号", "客先番号")
                 DgvCymnhd.Columns.Add("売上日", "売上日")
                 DgvCymnhd.Columns.Add("受注番号", "受注番号")
                 DgvCymnhd.Columns.Add("受注番号枝番", "受注番号枝番")
@@ -197,6 +200,7 @@ Public Class SalesList
                     DgvCymnhd.Rows.Add()
                     DgvCymnhd.Rows(index).Cells("売上番号").Value = ds.Tables(RS).Rows(index)("売上番号")
                     DgvCymnhd.Rows(index).Cells("売上番号枝番").Value = ds.Tables(RS).Rows(index)("売上番号枝番")
+                    DgvCymnhd.Rows(index).Cells("客先番号").Value = ds.Tables(RS).Rows(index)("客先番号")
                     DgvCymnhd.Rows(index).Cells("売上日").Value = ds.Tables(RS).Rows(index)("売上日")
                     DgvCymnhd.Rows(index).Cells("受注番号").Value = ds.Tables(RS).Rows(index)("受注番号")
                     DgvCymnhd.Rows(index).Cells("受注番号枝番").Value = ds.Tables(RS).Rows(index)("受注番号枝番")
@@ -292,6 +296,7 @@ Public Class SalesList
 
             DgvCymnhd.Columns.Add("売上番号", "売上番号")
             DgvCymnhd.Columns.Add("売上番号枝番", "売上番号枝番")
+            DgvCymnhd.Columns.Add("客先番号", "客先番号")
             DgvCymnhd.Columns.Add("売上日", "売上日")
             DgvCymnhd.Columns.Add("受注番号", "受注番号")
             DgvCymnhd.Columns.Add("受注番号枝番", "受注番号枝番")
@@ -322,6 +327,7 @@ Public Class SalesList
                 DgvCymnhd.Rows.Add()
                 DgvCymnhd.Rows(index).Cells("売上番号").Value = ds.Tables(RS).Rows(index)("売上番号")
                 DgvCymnhd.Rows(index).Cells("売上番号枝番").Value = ds.Tables(RS).Rows(index)("売上番号枝番")
+                DgvCymnhd.Rows(index).Cells("客先番号").Value = ds.Tables(RS).Rows(index)("客先番号")
                 DgvCymnhd.Rows(index).Cells("売上日").Value = ds.Tables(RS).Rows(index)("売上日")
                 DgvCymnhd.Rows(index).Cells("受注番号").Value = ds.Tables(RS).Rows(index)("受注番号")
                 DgvCymnhd.Rows(index).Cells("受注番号枝番").Value = ds.Tables(RS).Rows(index)("受注番号枝番")
@@ -683,12 +689,32 @@ Public Class SalesList
                     count += 1
                 End If
             End If
+            If TxtCustomerPO.Text = "" Then
+            Else
+                If count > 0 Then
+                    Sql += " AND "
+                    Sql += "客先番号"
+                    Sql += " ILIKE "
+                    Sql += "'%"
+                    Sql += TxtCustomerPO.Text
+                    Sql += "%'"
+                Else
+                    Sql += " WHERE "
+                    Sql += "客先番号"
+                    Sql += " ILIKE "
+                    Sql += "'%"
+                    Sql += TxtCustomerPO.Text
+                    Sql += "%'"
+                    count += 1
+                End If
+            End If
 
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
 
             DgvCymnhd.Columns.Add("売上番号", "売上番号")
             DgvCymnhd.Columns.Add("売上番号枝番", "売上番号枝番")
+            DgvCymnhd.Columns.Add("客先番号", "客先番号")
             DgvCymnhd.Columns.Add("売上日", "売上日")
             DgvCymnhd.Columns.Add("受注番号", "受注番号")
             DgvCymnhd.Columns.Add("受注番号枝番", "受注番号枝番")
@@ -723,6 +749,7 @@ Public Class SalesList
                 DgvCymnhd.Rows(index).Cells("売上番号").Value = ds.Tables(RS).Rows(index)("売上番号")
                 SalesNo(index) = ds.Tables(RS).Rows(index)("売上番号")
                 DgvCymnhd.Rows(index).Cells("売上番号枝番").Value = ds.Tables(RS).Rows(index)("売上番号枝番")
+                DgvCymnhd.Rows(index).Cells("客先番号").Value = ds.Tables(RS).Rows(index)("客先番号")
                 DgvCymnhd.Rows(index).Cells("売上日").Value = ds.Tables(RS).Rows(index)("売上日")
                 DgvCymnhd.Rows(index).Cells("受注番号").Value = ds.Tables(RS).Rows(index)("受注番号")
                 DgvCymnhd.Rows(index).Cells("受注番号枝番").Value = ds.Tables(RS).Rows(index)("受注番号枝番")

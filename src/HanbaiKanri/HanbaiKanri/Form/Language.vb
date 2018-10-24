@@ -244,12 +244,35 @@ Public Class Language
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-            TxtCompanyCode.Text = ds.Tables(RS).Rows(0)("会社コード")
-            TxtLanguage.Text = ds.Tables(RS).Rows(0)("言語コード")
-            TxtName.Text = ds.Tables(RS).Rows(0)("言語名称")
-            TxtShortName.Text = ds.Tables(RS).Rows(0)("言語略称")
-            TxtRemarks.Text = ds.Tables(RS).Rows(0)("備考")
-            TxtFlg.Text = ds.Tables(RS).Rows(0)("無効フラグ")
+            If ds.Tables(RS).Rows(0)("会社コード") Is DBNull.Value Then
+            Else
+                TxtCompanyCode.Text = ds.Tables(RS).Rows(0)("会社コード")
+            End If
+
+            If ds.Tables(RS).Rows(0)("言語コード") Is DBNull.Value Then
+            Else
+                TxtLanguage.Text = ds.Tables(RS).Rows(0)("言語コード")
+            End If
+
+            If ds.Tables(RS).Rows(0)("言語名称") Is DBNull.Value Then
+            Else
+                TxtName.Text = ds.Tables(RS).Rows(0)("言語名称")
+            End If
+
+            If ds.Tables(RS).Rows(0)("言語略称") Is DBNull.Value Then
+            Else
+                TxtShortName.Text = ds.Tables(RS).Rows(0)("言語略称")
+            End If
+
+            If ds.Tables(RS).Rows(0)("備考") Is DBNull.Value Then
+            Else
+                TxtRemarks.Text = ds.Tables(RS).Rows(0)("備考")
+            End If
+
+            If ds.Tables(RS).Rows(0)("無効フラグ") Is DBNull.Value Then
+            Else
+                TxtFlg.Text = ds.Tables(RS).Rows(0)("無効フラグ")
+            End If
         End If
     End Sub
 End Class

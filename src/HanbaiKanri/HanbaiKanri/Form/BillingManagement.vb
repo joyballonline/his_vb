@@ -203,6 +203,7 @@ Public Class BillingManagement
         DgvCymn.Rows(0).Cells("受注番号").Value = ds1.Tables(RS).Rows(0)("受注番号")
         DgvCymn.Rows(0).Cells("受注日").Value = ds1.Tables(RS).Rows(0)("受注日")
         DgvCymn.Rows(0).Cells("得意先").Value = ds1.Tables(RS).Rows(0)("得意先名")
+        DgvCymn.Rows(0).Cells("客先番号").Value = ds1.Tables(RS).Rows(0)("客先番号").ToString
         DgvCymn.Rows(0).Cells("受注金額").Value = ds1.Tables(RS).Rows(0)("見積金額")
         DgvCymn.Rows(0).Cells("請求金額計").Value = BillingAmoount
         DgvCymn.Rows(0).Cells("請求残高").Value = ds1.Tables(RS).Rows(0)("見積金額") - BillingAmoount
@@ -408,7 +409,7 @@ Public Class BillingManagement
             Sql3 += "INSERT INTO "
             Sql3 += "Public."
             Sql3 += "t23_skyuhd("
-            Sql3 += "会社コード, 請求番号, 請求区分, 請求日, 受注番号, 受注番号枝番, 得意先コード, 得意先名, 請求金額計, 売掛残高, 備考1, 備考2, 取消区分, 登録日, 更新者)"
+            Sql3 += "会社コード, 請求番号, 請求区分, 請求日, 受注番号, 受注番号枝番, 客先番号, 得意先コード, 得意先名, 請求金額計, 売掛残高, 備考1, 備考2, 取消区分, 登録日, 更新者)"
             Sql3 += " VALUES('"
             Sql3 += ds1.Tables(RS).Rows(0)("会社コード").ToString
             Sql3 += "', '"
@@ -421,6 +422,8 @@ Public Class BillingManagement
             Sql3 += ds1.Tables(RS).Rows(0)("受注番号").ToString
             Sql3 += "', '"
             Sql3 += ds1.Tables(RS).Rows(0)("受注番号枝番").ToString
+            Sql3 += "', '"
+            Sql3 += ds1.Tables(RS).Rows(0)("客先番号").ToString
             Sql3 += "', '"
             Sql3 += ds1.Tables(RS).Rows(0)("得意先コード").ToString
             Sql3 += "', '"
@@ -451,6 +454,8 @@ Public Class BillingManagement
             Sql3 += "受注番号"
             Sql3 += ", "
             Sql3 += "受注番号枝番"
+            Sql3 += ", "
+            Sql3 += "客先番号"
             Sql3 += ", "
             Sql3 += "得意先コード"
             Sql3 += ", "

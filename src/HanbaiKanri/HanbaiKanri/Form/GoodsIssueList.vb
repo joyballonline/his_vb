@@ -96,6 +96,7 @@ Public Class GoodsIssueList
                 DgvCymnhd.Columns.Add("出庫日", "出庫日")
                 DgvCymnhd.Columns.Add("受注番号", "受注番号")
                 DgvCymnhd.Columns.Add("受注番号枝番", "受注番号枝番")
+                DgvCymnhd.Columns.Add("客先番号", "客先番号")
                 DgvCymnhd.Columns.Add("得意先コード", "得意先コード")
                 DgvCymnhd.Columns.Add("得意先名", "得意先名")
                 DgvCymnhd.Columns.Add("得意先郵便番号", "得意先郵便番号")
@@ -120,6 +121,7 @@ Public Class GoodsIssueList
                     DgvCymnhd.Rows(index).Cells("出庫日").Value = ds.Tables(RS).Rows(index)("出庫日")
                     DgvCymnhd.Rows(index).Cells("受注番号").Value = ds.Tables(RS).Rows(index)("受注番号")
                     DgvCymnhd.Rows(index).Cells("受注番号枝番").Value = ds.Tables(RS).Rows(index)("受注番号枝番")
+                    DgvCymnhd.Rows(index).Cells("客先番号").Value = ds.Tables(RS).Rows(index)("客先番号")
                     DgvCymnhd.Rows(index).Cells("得意先コード").Value = ds.Tables(RS).Rows(index)("得意先コード")
                     DgvCymnhd.Rows(index).Cells("得意先名").Value = ds.Tables(RS).Rows(index)("得意先名")
                     DgvCymnhd.Rows(index).Cells("得意先郵便番号").Value = ds.Tables(RS).Rows(index)("得意先郵便番号")
@@ -156,6 +158,7 @@ Public Class GoodsIssueList
                 DgvCymnhd.Columns.Add("出庫日", "出庫日")
                 DgvCymnhd.Columns.Add("受注番号", "受注番号")
                 DgvCymnhd.Columns.Add("受注番号枝番", "受注番号枝番")
+                DgvCymnhd.Columns.Add("客先番号", "客先番号")
                 DgvCymnhd.Columns.Add("得意先コード", "得意先コード")
                 DgvCymnhd.Columns.Add("得意先名", "得意先名")
                 DgvCymnhd.Columns.Add("得意先郵便番号", "得意先郵便番号")
@@ -180,6 +183,7 @@ Public Class GoodsIssueList
                     DgvCymnhd.Rows(index).Cells("出庫日").Value = ds.Tables(RS).Rows(index)("出庫日")
                     DgvCymnhd.Rows(index).Cells("受注番号").Value = ds.Tables(RS).Rows(index)("受注番号")
                     DgvCymnhd.Rows(index).Cells("受注番号枝番").Value = ds.Tables(RS).Rows(index)("受注番号枝番")
+                    DgvCymnhd.Rows(index).Cells("客先番号").Value = ds.Tables(RS).Rows(index)("客先番号")
                     DgvCymnhd.Rows(index).Cells("得意先コード").Value = ds.Tables(RS).Rows(index)("得意先コード")
                     DgvCymnhd.Rows(index).Cells("得意先名").Value = ds.Tables(RS).Rows(index)("得意先名")
                     DgvCymnhd.Rows(index).Cells("得意先郵便番号").Value = ds.Tables(RS).Rows(index)("得意先郵便番号")
@@ -268,6 +272,7 @@ Public Class GoodsIssueList
             DgvCymnhd.Columns.Add("出庫日", "出庫日")
             DgvCymnhd.Columns.Add("受注番号", "受注番号")
             DgvCymnhd.Columns.Add("受注番号枝番", "受注番号枝番")
+            DgvCymnhd.Columns.Add("客先番号", "客先番号")
             DgvCymnhd.Columns.Add("得意先コード", "得意先コード")
             DgvCymnhd.Columns.Add("得意先名", "得意先名")
             DgvCymnhd.Columns.Add("得意先郵便番号", "得意先郵便番号")
@@ -292,6 +297,7 @@ Public Class GoodsIssueList
                 DgvCymnhd.Rows(index).Cells("出庫日").Value = ds.Tables(RS).Rows(index)("出庫日")
                 DgvCymnhd.Rows(index).Cells("受注番号").Value = ds.Tables(RS).Rows(index)("受注番号")
                 DgvCymnhd.Rows(index).Cells("受注番号枝番").Value = ds.Tables(RS).Rows(index)("受注番号枝番")
+                DgvCymnhd.Rows(index).Cells("客先番号").Value = ds.Tables(RS).Rows(index)("客先番号")
                 DgvCymnhd.Rows(index).Cells("得意先コード").Value = ds.Tables(RS).Rows(index)("得意先コード")
                 DgvCymnhd.Rows(index).Cells("得意先名").Value = ds.Tables(RS).Rows(index)("得意先名")
                 DgvCymnhd.Rows(index).Cells("得意先郵便番号").Value = ds.Tables(RS).Rows(index)("得意先郵便番号")
@@ -610,6 +616,25 @@ Public Class GoodsIssueList
                     count += 1
                 End If
             End If
+            If TxtCustomerPO.Text = "" Then
+            Else
+                If count > 0 Then
+                    Sql += " AND "
+                    Sql += "客先番号"
+                    Sql += " ILIKE "
+                    Sql += "'%"
+                    Sql += TxtCustomerPO.Text
+                    Sql += "%'"
+                Else
+                    Sql += " WHERE "
+                    Sql += "客先番号"
+                    Sql += " ILIKE "
+                    Sql += "'%"
+                    Sql += TxtCustomerPO.Text
+                    Sql += "%'"
+                    count += 1
+                End If
+            End If
 
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
@@ -618,6 +643,7 @@ Public Class GoodsIssueList
             DgvCymnhd.Columns.Add("出庫日", "出庫日")
             DgvCymnhd.Columns.Add("受注番号", "受注番号")
             DgvCymnhd.Columns.Add("受注番号枝番", "受注番号枝番")
+            DgvCymnhd.Columns.Add("客先番号", "客先番号")
             DgvCymnhd.Columns.Add("得意先コード", "得意先コード")
             DgvCymnhd.Columns.Add("得意先名", "得意先名")
             DgvCymnhd.Columns.Add("得意先郵便番号", "得意先郵便番号")
@@ -641,6 +667,7 @@ Public Class GoodsIssueList
                 DgvCymnhd.Rows(index).Cells("出庫日").Value = ds.Tables(RS).Rows(index)("出庫日")
                 DgvCymnhd.Rows(index).Cells("受注番号").Value = ds.Tables(RS).Rows(index)("受注番号")
                 DgvCymnhd.Rows(index).Cells("受注番号枝番").Value = ds.Tables(RS).Rows(index)("受注番号枝番")
+                DgvCymnhd.Rows(index).Cells("客先番号").Value = ds.Tables(RS).Rows(index)("客先番号")
                 DgvCymnhd.Rows(index).Cells("得意先コード").Value = ds.Tables(RS).Rows(index)("得意先コード")
                 DgvCymnhd.Rows(index).Cells("得意先名").Value = ds.Tables(RS).Rows(index)("得意先名")
                 DgvCymnhd.Rows(index).Cells("得意先郵便番号").Value = ds.Tables(RS).Rows(index)("得意先郵便番号")

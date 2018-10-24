@@ -23,6 +23,12 @@ Partial Class MstCompany
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.Dgv_Company = New System.Windows.Forms.DataGridView()
+        Me.BtnBack = New System.Windows.Forms.Button()
+        Me.btnCompanyAdd = New System.Windows.Forms.Button()
+        Me.btnSelectCompany = New System.Windows.Forms.Button()
+        Me.Search = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.BtnSearch = New System.Windows.Forms.Button()
         Me.会社コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.会社名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.会社略称 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -36,19 +42,20 @@ Partial Class MstCompany
         Me.代表者名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.表示順 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.備考 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.銀行名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.銀行コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.支店名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.支店コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.預金種目 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.口座番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.口座名義 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.前回締日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.今回締日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.次回締日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.在庫単価評価法 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.前払法人税率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.更新者 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.更新日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.BtnBack = New System.Windows.Forms.Button()
-        Me.btnCompanyAdd = New System.Windows.Forms.Button()
-        Me.btnSelectCompany = New System.Windows.Forms.Button()
-        Me.Search = New System.Windows.Forms.TextBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.BtnSearch = New System.Windows.Forms.Button()
         CType(Me.Dgv_Company, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -56,7 +63,7 @@ Partial Class MstCompany
         '
         Me.Dgv_Company.AllowUserToAddRows = False
         Me.Dgv_Company.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.Dgv_Company.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.会社コード, Me.会社名, Me.会社略称, Me.郵便番号, Me.住所１, Me.住所２, Me.住所３, Me.電話番号, Me.FAX番号, Me.代表者役職, Me.代表者名, Me.表示順, Me.備考, Me.銀行コード, Me.支店コード, Me.預金種目, Me.口座番号, Me.口座名義, Me.更新者, Me.更新日})
+        Me.Dgv_Company.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.会社コード, Me.会社名, Me.会社略称, Me.郵便番号, Me.住所１, Me.住所２, Me.住所３, Me.電話番号, Me.FAX番号, Me.代表者役職, Me.代表者名, Me.表示順, Me.備考, Me.銀行名, Me.銀行コード, Me.支店名, Me.支店コード, Me.預金種目, Me.口座番号, Me.口座名義, Me.前回締日, Me.今回締日, Me.次回締日, Me.在庫単価評価法, Me.前払法人税率, Me.更新者, Me.更新日})
         Me.Dgv_Company.Location = New System.Drawing.Point(12, 33)
         Me.Dgv_Company.Name = "Dgv_Company"
         Me.Dgv_Company.ReadOnly = True
@@ -65,6 +72,58 @@ Partial Class MstCompany
         Me.Dgv_Company.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.Dgv_Company.Size = New System.Drawing.Size(1326, 470)
         Me.Dgv_Company.TabIndex = 0
+        '
+        'BtnBack
+        '
+        Me.BtnBack.Location = New System.Drawing.Point(1173, 509)
+        Me.BtnBack.Name = "BtnBack"
+        Me.BtnBack.Size = New System.Drawing.Size(165, 40)
+        Me.BtnBack.TabIndex = 6
+        Me.BtnBack.Text = "戻る"
+        Me.BtnBack.UseVisualStyleBackColor = True
+        '
+        'btnCompanyAdd
+        '
+        Me.btnCompanyAdd.Location = New System.Drawing.Point(831, 509)
+        Me.btnCompanyAdd.Name = "btnCompanyAdd"
+        Me.btnCompanyAdd.Size = New System.Drawing.Size(165, 40)
+        Me.btnCompanyAdd.TabIndex = 5
+        Me.btnCompanyAdd.Text = "会社情報追加"
+        Me.btnCompanyAdd.UseVisualStyleBackColor = True
+        '
+        'btnSelectCompany
+        '
+        Me.btnSelectCompany.Location = New System.Drawing.Point(1002, 509)
+        Me.btnSelectCompany.Name = "btnSelectCompany"
+        Me.btnSelectCompany.Size = New System.Drawing.Size(165, 40)
+        Me.btnSelectCompany.TabIndex = 4
+        Me.btnSelectCompany.Text = "会社情報編集"
+        Me.btnSelectCompany.UseVisualStyleBackColor = True
+        '
+        'Search
+        '
+        Me.Search.Location = New System.Drawing.Point(74, 6)
+        Me.Search.Name = "Search"
+        Me.Search.Size = New System.Drawing.Size(100, 19)
+        Me.Search.TabIndex = 7
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(12, 9)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(56, 12)
+        Me.Label1.TabIndex = 8
+        Me.Label1.Text = "会社コード"
+        '
+        'BtnSearch
+        '
+        Me.BtnSearch.Location = New System.Drawing.Point(180, 4)
+        Me.BtnSearch.Name = "BtnSearch"
+        Me.BtnSearch.Size = New System.Drawing.Size(75, 23)
+        Me.BtnSearch.TabIndex = 9
+        Me.BtnSearch.Text = "検索"
+        Me.BtnSearch.UseVisualStyleBackColor = True
         '
         '会社コード
         '
@@ -144,11 +203,23 @@ Partial Class MstCompany
         Me.備考.Name = "備考"
         Me.備考.ReadOnly = True
         '
+        '銀行名
+        '
+        Me.銀行名.HeaderText = "銀行名"
+        Me.銀行名.Name = "銀行名"
+        Me.銀行名.ReadOnly = True
+        '
         '銀行コード
         '
         Me.銀行コード.HeaderText = "銀行コード"
         Me.銀行コード.Name = "銀行コード"
         Me.銀行コード.ReadOnly = True
+        '
+        '支店名
+        '
+        Me.支店名.HeaderText = "支店名"
+        Me.支店名.Name = "支店名"
+        Me.支店名.ReadOnly = True
         '
         '支店コード
         '
@@ -174,6 +245,36 @@ Partial Class MstCompany
         Me.口座名義.Name = "口座名義"
         Me.口座名義.ReadOnly = True
         '
+        '前回締日
+        '
+        Me.前回締日.HeaderText = "前回締日"
+        Me.前回締日.Name = "前回締日"
+        Me.前回締日.ReadOnly = True
+        '
+        '今回締日
+        '
+        Me.今回締日.HeaderText = "今回締日"
+        Me.今回締日.Name = "今回締日"
+        Me.今回締日.ReadOnly = True
+        '
+        '次回締日
+        '
+        Me.次回締日.HeaderText = "次回締日"
+        Me.次回締日.Name = "次回締日"
+        Me.次回締日.ReadOnly = True
+        '
+        '在庫単価評価法
+        '
+        Me.在庫単価評価法.HeaderText = "在庫単価評価法"
+        Me.在庫単価評価法.Name = "在庫単価評価法"
+        Me.在庫単価評価法.ReadOnly = True
+        '
+        '前払法人税率
+        '
+        Me.前払法人税率.HeaderText = "前払法人税率"
+        Me.前払法人税率.Name = "前払法人税率"
+        Me.前払法人税率.ReadOnly = True
+        '
         '更新者
         '
         Me.更新者.HeaderText = "更新者"
@@ -185,58 +286,6 @@ Partial Class MstCompany
         Me.更新日.HeaderText = "更新日"
         Me.更新日.Name = "更新日"
         Me.更新日.ReadOnly = True
-        '
-        'BtnBack
-        '
-        Me.BtnBack.Location = New System.Drawing.Point(1173, 509)
-        Me.BtnBack.Name = "BtnBack"
-        Me.BtnBack.Size = New System.Drawing.Size(165, 40)
-        Me.BtnBack.TabIndex = 6
-        Me.BtnBack.Text = "戻る"
-        Me.BtnBack.UseVisualStyleBackColor = True
-        '
-        'btnCompanyAdd
-        '
-        Me.btnCompanyAdd.Location = New System.Drawing.Point(831, 509)
-        Me.btnCompanyAdd.Name = "btnCompanyAdd"
-        Me.btnCompanyAdd.Size = New System.Drawing.Size(165, 40)
-        Me.btnCompanyAdd.TabIndex = 5
-        Me.btnCompanyAdd.Text = "会社情報追加"
-        Me.btnCompanyAdd.UseVisualStyleBackColor = True
-        '
-        'btnSelectCompany
-        '
-        Me.btnSelectCompany.Location = New System.Drawing.Point(1002, 509)
-        Me.btnSelectCompany.Name = "btnSelectCompany"
-        Me.btnSelectCompany.Size = New System.Drawing.Size(165, 40)
-        Me.btnSelectCompany.TabIndex = 4
-        Me.btnSelectCompany.Text = "会社情報編集"
-        Me.btnSelectCompany.UseVisualStyleBackColor = True
-        '
-        'Search
-        '
-        Me.Search.Location = New System.Drawing.Point(74, 6)
-        Me.Search.Name = "Search"
-        Me.Search.Size = New System.Drawing.Size(100, 19)
-        Me.Search.TabIndex = 7
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(12, 9)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(56, 12)
-        Me.Label1.TabIndex = 8
-        Me.Label1.Text = "会社コード"
-        '
-        'BtnSearch
-        '
-        Me.BtnSearch.Location = New System.Drawing.Point(180, 4)
-        Me.BtnSearch.Name = "BtnSearch"
-        Me.BtnSearch.Size = New System.Drawing.Size(75, 23)
-        Me.BtnSearch.TabIndex = 9
-        Me.BtnSearch.Text = "検索"
-        Me.BtnSearch.UseVisualStyleBackColor = True
         '
         'MstCompany
         '
@@ -259,6 +308,12 @@ Partial Class MstCompany
     End Sub
 
     Friend WithEvents Dgv_Company As DataGridView
+    Friend WithEvents BtnBack As Button
+    Friend WithEvents btnCompanyAdd As Button
+    Friend WithEvents btnSelectCompany As Button
+    Friend WithEvents Search As TextBox
+    Friend WithEvents Label1 As Label
+    Friend WithEvents BtnSearch As Button
     Friend WithEvents 会社コード As DataGridViewTextBoxColumn
     Friend WithEvents 会社名 As DataGridViewTextBoxColumn
     Friend WithEvents 会社略称 As DataGridViewTextBoxColumn
@@ -272,17 +327,18 @@ Partial Class MstCompany
     Friend WithEvents 代表者名 As DataGridViewTextBoxColumn
     Friend WithEvents 表示順 As DataGridViewTextBoxColumn
     Friend WithEvents 備考 As DataGridViewTextBoxColumn
+    Friend WithEvents 銀行名 As DataGridViewTextBoxColumn
     Friend WithEvents 銀行コード As DataGridViewTextBoxColumn
+    Friend WithEvents 支店名 As DataGridViewTextBoxColumn
     Friend WithEvents 支店コード As DataGridViewTextBoxColumn
     Friend WithEvents 預金種目 As DataGridViewTextBoxColumn
     Friend WithEvents 口座番号 As DataGridViewTextBoxColumn
     Friend WithEvents 口座名義 As DataGridViewTextBoxColumn
+    Friend WithEvents 前回締日 As DataGridViewTextBoxColumn
+    Friend WithEvents 今回締日 As DataGridViewTextBoxColumn
+    Friend WithEvents 次回締日 As DataGridViewTextBoxColumn
+    Friend WithEvents 在庫単価評価法 As DataGridViewTextBoxColumn
+    Friend WithEvents 前払法人税率 As DataGridViewTextBoxColumn
     Friend WithEvents 更新者 As DataGridViewTextBoxColumn
     Friend WithEvents 更新日 As DataGridViewTextBoxColumn
-    Friend WithEvents BtnBack As Button
-    Friend WithEvents btnCompanyAdd As Button
-    Friend WithEvents btnSelectCompany As Button
-    Friend WithEvents Search As TextBox
-    Friend WithEvents Label1 As Label
-    Friend WithEvents BtnSearch As Button
 End Class

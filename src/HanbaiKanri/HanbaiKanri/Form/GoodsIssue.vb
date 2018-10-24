@@ -311,9 +311,11 @@ Public Class GoodsIssue
 
             TxtOrderNo.Text = ds1.Tables(RS).Rows(0)("受注番号")
             TxtSuffixNo.Text = ds1.Tables(RS).Rows(0)("受注番号枝番")
+            TxtCustomerPO.Text = ds1.Tables(RS).Rows(0)("客先番号").ToString
             TxtOrderDate.Text = ds1.Tables(RS).Rows(0)("受注日")
             TxtCustomerCode.Text = ds1.Tables(RS).Rows(0)("得意先コード")
             TxtCustomerName.Text = ds1.Tables(RS).Rows(0)("得意先名")
+            DtpGoodsIssueDate.Value = Date.Now
 
         Catch ue As UsrDefException
             ue.dspMsg()
@@ -455,7 +457,7 @@ Public Class GoodsIssue
             'Sql3 += "INSERT INTO "
             'Sql3 += "Public."
             'Sql3 += "t30_urighd("
-            'Sql3 += "会社コード, 売上番号, 売上番号枝番, 受注番号, 受注番号枝番, 見積番号, 見積番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額, 売上金額, 粗利額, 営業担当者, 入力担当者, 備考, 取消日, 取消区分, ＶＡＴ, ＰＰＨ, 受注日, 売上日, 入金予定日, 登録日, 更新日, 更新者)"
+            'Sql3 += "会社コード, 売上番号, 売上番号枝番, 受注番号, 受注番号枝番, 客先番号, 見積番号, 見積番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額, 売上金額, 粗利額, 営業担当者, 入力担当者, 備考, 取消日, 取消区分, ＶＡＴ, ＰＰＨ, 受注日, 売上日, 入金予定日, 登録日, 更新日, 更新者)"
             'Sql3 += " VALUES('"
             'Sql3 += ds1.Tables(RS).Rows(0)("会社コード").ToString
             'Sql3 += "', '"
@@ -862,7 +864,7 @@ Public Class GoodsIssue
             Sql7 += "INSERT INTO "
             Sql7 += "Public."
             Sql7 += "t44_shukohd("
-            Sql7 += "会社コード, 出庫番号, 見積番号, 見積番号枝番, 受注番号, 受注番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 営業担当者, 入力担当者, 備考, 取消日, 取消区分, 出庫日, 登録日, 更新日, 更新者)"
+            Sql7 += "会社コード, 出庫番号, 見積番号, 見積番号枝番, 受注番号, 受注番号枝番, 客先番号, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 営業担当者, 入力担当者, 備考, 取消日, 取消区分, 出庫日, 登録日, 更新日, 更新者)"
             Sql7 += " VALUES('"
             Sql7 += ds1.Tables(RS).Rows(0)("会社コード").ToString
             Sql7 += "', '"
@@ -875,6 +877,8 @@ Public Class GoodsIssue
             Sql7 += ds1.Tables(RS).Rows(0)("受注番号").ToString
             Sql7 += "', '"
             Sql7 += ds1.Tables(RS).Rows(0)("受注番号枝番").ToString
+            Sql7 += "', '"
+            Sql7 += ds1.Tables(RS).Rows(0)("客先番号").ToString
             Sql7 += "', '"
             Sql7 += ds1.Tables(RS).Rows(0)("得意先コード").ToString
             Sql7 += "', '"
@@ -921,6 +925,8 @@ Public Class GoodsIssue
             Sql7 += "受注番号"
             Sql7 += ", "
             Sql7 += "受注番号枝番"
+            Sql7 += ", "
+            Sql7 += "客先番号"
             Sql7 += ", "
             Sql7 += "得意先コード"
             Sql7 += ", "

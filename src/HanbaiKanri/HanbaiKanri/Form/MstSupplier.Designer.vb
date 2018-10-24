@@ -23,10 +23,16 @@ Partial Class MstSupplier
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.Dgv_Supplier = New System.Windows.Forms.DataGridView()
+        Me.btnSupplierEdit = New System.Windows.Forms.Button()
+        Me.btnSupplierAdd = New System.Windows.Forms.Button()
+        Me.BtnBack = New System.Windows.Forms.Button()
+        Me.BtnSearch = New System.Windows.Forms.Button()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Search = New System.Windows.Forms.TextBox()
         Me.会社コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.仕入先コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.仕入先名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.仕入先名略名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入先名略称 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.郵便番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.住所１ = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.住所２ = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -35,21 +41,21 @@ Partial Class MstSupplier
         Me.電話番号検索用 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FAX番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.担当者名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.担当者役職 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.既定間接費率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.メモ = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.銀行名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.銀行コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.支店名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.支店コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.預金種目 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.口座番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.口座名義 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.関税率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.前払法人税率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.輸送費率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.更新者 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.更新日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.btnSupplierEdit = New System.Windows.Forms.Button()
-        Me.btnSupplierAdd = New System.Windows.Forms.Button()
-        Me.BtnBack = New System.Windows.Forms.Button()
-        Me.BtnSearch = New System.Windows.Forms.Button()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Search = New System.Windows.Forms.TextBox()
         CType(Me.Dgv_Supplier, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -57,7 +63,7 @@ Partial Class MstSupplier
         '
         Me.Dgv_Supplier.AllowUserToAddRows = False
         Me.Dgv_Supplier.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.Dgv_Supplier.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.会社コード, Me.仕入先コード, Me.仕入先名, Me.仕入先名略名, Me.郵便番号, Me.住所１, Me.住所２, Me.住所３, Me.電話番号, Me.電話番号検索用, Me.FAX番号, Me.担当者名, Me.既定間接費率, Me.メモ, Me.銀行コード, Me.支店コード, Me.預金種目, Me.口座番号, Me.口座名義, Me.更新者, Me.更新日})
+        Me.Dgv_Supplier.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.会社コード, Me.仕入先コード, Me.仕入先名, Me.仕入先名略称, Me.郵便番号, Me.住所１, Me.住所２, Me.住所３, Me.電話番号, Me.電話番号検索用, Me.FAX番号, Me.担当者名, Me.担当者役職, Me.既定間接費率, Me.メモ, Me.銀行名, Me.銀行コード, Me.支店名, Me.支店コード, Me.預金種目, Me.口座番号, Me.口座名義, Me.関税率, Me.前払法人税率, Me.輸送費率, Me.更新者, Me.更新日})
         Me.Dgv_Supplier.Location = New System.Drawing.Point(12, 31)
         Me.Dgv_Supplier.Name = "Dgv_Supplier"
         Me.Dgv_Supplier.ReadOnly = True
@@ -66,132 +72,6 @@ Partial Class MstSupplier
         Me.Dgv_Supplier.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.Dgv_Supplier.Size = New System.Drawing.Size(1326, 472)
         Me.Dgv_Supplier.TabIndex = 0
-        '
-        '会社コード
-        '
-        Me.会社コード.HeaderText = "会社コード"
-        Me.会社コード.Name = "会社コード"
-        Me.会社コード.ReadOnly = True
-        '
-        '仕入先コード
-        '
-        Me.仕入先コード.HeaderText = "仕入先コード"
-        Me.仕入先コード.Name = "仕入先コード"
-        Me.仕入先コード.ReadOnly = True
-        '
-        '仕入先名
-        '
-        Me.仕入先名.HeaderText = "仕入先名"
-        Me.仕入先名.Name = "仕入先名"
-        Me.仕入先名.ReadOnly = True
-        '
-        '仕入先名略名
-        '
-        Me.仕入先名略名.HeaderText = "仕入先名略名"
-        Me.仕入先名略名.Name = "仕入先名略名"
-        Me.仕入先名略名.ReadOnly = True
-        '
-        '郵便番号
-        '
-        Me.郵便番号.HeaderText = "郵便番号"
-        Me.郵便番号.Name = "郵便番号"
-        Me.郵便番号.ReadOnly = True
-        '
-        '住所１
-        '
-        Me.住所１.HeaderText = "住所１"
-        Me.住所１.Name = "住所１"
-        Me.住所１.ReadOnly = True
-        '
-        '住所２
-        '
-        Me.住所２.HeaderText = "住所２"
-        Me.住所２.Name = "住所２"
-        Me.住所２.ReadOnly = True
-        '
-        '住所３
-        '
-        Me.住所３.HeaderText = "住所３"
-        Me.住所３.Name = "住所３"
-        Me.住所３.ReadOnly = True
-        '
-        '電話番号
-        '
-        Me.電話番号.HeaderText = "電話番号"
-        Me.電話番号.Name = "電話番号"
-        Me.電話番号.ReadOnly = True
-        '
-        '電話番号検索用
-        '
-        Me.電話番号検索用.HeaderText = "電話番号検索用"
-        Me.電話番号検索用.Name = "電話番号検索用"
-        Me.電話番号検索用.ReadOnly = True
-        '
-        'FAX番号
-        '
-        Me.FAX番号.HeaderText = "FAX番号"
-        Me.FAX番号.Name = "FAX番号"
-        Me.FAX番号.ReadOnly = True
-        '
-        '担当者名
-        '
-        Me.担当者名.HeaderText = "担当者名"
-        Me.担当者名.Name = "担当者名"
-        Me.担当者名.ReadOnly = True
-        '
-        '既定間接費率
-        '
-        Me.既定間接費率.HeaderText = "既定間接費率"
-        Me.既定間接費率.Name = "既定間接費率"
-        Me.既定間接費率.ReadOnly = True
-        '
-        'メモ
-        '
-        Me.メモ.HeaderText = "メモ"
-        Me.メモ.Name = "メモ"
-        Me.メモ.ReadOnly = True
-        '
-        '銀行コード
-        '
-        Me.銀行コード.HeaderText = "銀行コード"
-        Me.銀行コード.Name = "銀行コード"
-        Me.銀行コード.ReadOnly = True
-        '
-        '支店コード
-        '
-        Me.支店コード.HeaderText = "支店コード"
-        Me.支店コード.Name = "支店コード"
-        Me.支店コード.ReadOnly = True
-        '
-        '預金種目
-        '
-        Me.預金種目.HeaderText = "預金種目"
-        Me.預金種目.Name = "預金種目"
-        Me.預金種目.ReadOnly = True
-        '
-        '口座番号
-        '
-        Me.口座番号.HeaderText = "口座番号"
-        Me.口座番号.Name = "口座番号"
-        Me.口座番号.ReadOnly = True
-        '
-        '口座名義
-        '
-        Me.口座名義.HeaderText = "口座名義"
-        Me.口座名義.Name = "口座名義"
-        Me.口座名義.ReadOnly = True
-        '
-        '更新者
-        '
-        Me.更新者.HeaderText = "更新者"
-        Me.更新者.Name = "更新者"
-        Me.更新者.ReadOnly = True
-        '
-        '更新日
-        '
-        Me.更新日.HeaderText = "更新日"
-        Me.更新日.Name = "更新日"
-        Me.更新日.ReadOnly = True
         '
         'btnSupplierEdit
         '
@@ -245,6 +125,169 @@ Partial Class MstSupplier
         Me.Search.Size = New System.Drawing.Size(100, 19)
         Me.Search.TabIndex = 16
         '
+        '会社コード
+        '
+        Me.会社コード.HeaderText = "会社コード"
+        Me.会社コード.Name = "会社コード"
+        Me.会社コード.ReadOnly = True
+        '
+        '仕入先コード
+        '
+        Me.仕入先コード.HeaderText = "仕入先コード"
+        Me.仕入先コード.Name = "仕入先コード"
+        Me.仕入先コード.ReadOnly = True
+        '
+        '仕入先名
+        '
+        Me.仕入先名.HeaderText = "仕入先名"
+        Me.仕入先名.Name = "仕入先名"
+        Me.仕入先名.ReadOnly = True
+        '
+        '仕入先名略称
+        '
+        Me.仕入先名略称.HeaderText = "仕入先名略称"
+        Me.仕入先名略称.Name = "仕入先名略称"
+        Me.仕入先名略称.ReadOnly = True
+        '
+        '郵便番号
+        '
+        Me.郵便番号.HeaderText = "郵便番号"
+        Me.郵便番号.Name = "郵便番号"
+        Me.郵便番号.ReadOnly = True
+        '
+        '住所１
+        '
+        Me.住所１.HeaderText = "住所１"
+        Me.住所１.Name = "住所１"
+        Me.住所１.ReadOnly = True
+        '
+        '住所２
+        '
+        Me.住所２.HeaderText = "住所２"
+        Me.住所２.Name = "住所２"
+        Me.住所２.ReadOnly = True
+        '
+        '住所３
+        '
+        Me.住所３.HeaderText = "住所３"
+        Me.住所３.Name = "住所３"
+        Me.住所３.ReadOnly = True
+        '
+        '電話番号
+        '
+        Me.電話番号.HeaderText = "電話番号"
+        Me.電話番号.Name = "電話番号"
+        Me.電話番号.ReadOnly = True
+        '
+        '電話番号検索用
+        '
+        Me.電話番号検索用.HeaderText = "電話番号検索用"
+        Me.電話番号検索用.Name = "電話番号検索用"
+        Me.電話番号検索用.ReadOnly = True
+        '
+        'FAX番号
+        '
+        Me.FAX番号.HeaderText = "FAX番号"
+        Me.FAX番号.Name = "FAX番号"
+        Me.FAX番号.ReadOnly = True
+        '
+        '担当者名
+        '
+        Me.担当者名.HeaderText = "担当者名"
+        Me.担当者名.Name = "担当者名"
+        Me.担当者名.ReadOnly = True
+        '
+        '担当者役職
+        '
+        Me.担当者役職.HeaderText = "担当者役職"
+        Me.担当者役職.Name = "担当者役職"
+        Me.担当者役職.ReadOnly = True
+        '
+        '既定間接費率
+        '
+        Me.既定間接費率.HeaderText = "既定間接費率"
+        Me.既定間接費率.Name = "既定間接費率"
+        Me.既定間接費率.ReadOnly = True
+        Me.既定間接費率.Visible = False
+        '
+        'メモ
+        '
+        Me.メモ.HeaderText = "メモ"
+        Me.メモ.Name = "メモ"
+        Me.メモ.ReadOnly = True
+        '
+        '銀行名
+        '
+        Me.銀行名.HeaderText = "銀行名"
+        Me.銀行名.Name = "銀行名"
+        Me.銀行名.ReadOnly = True
+        '
+        '銀行コード
+        '
+        Me.銀行コード.HeaderText = "銀行コード"
+        Me.銀行コード.Name = "銀行コード"
+        Me.銀行コード.ReadOnly = True
+        '
+        '支店名
+        '
+        Me.支店名.HeaderText = "支店名"
+        Me.支店名.Name = "支店名"
+        Me.支店名.ReadOnly = True
+        '
+        '支店コード
+        '
+        Me.支店コード.HeaderText = "支店コード"
+        Me.支店コード.Name = "支店コード"
+        Me.支店コード.ReadOnly = True
+        '
+        '預金種目
+        '
+        Me.預金種目.HeaderText = "預金種目"
+        Me.預金種目.Name = "預金種目"
+        Me.預金種目.ReadOnly = True
+        '
+        '口座番号
+        '
+        Me.口座番号.HeaderText = "口座番号"
+        Me.口座番号.Name = "口座番号"
+        Me.口座番号.ReadOnly = True
+        '
+        '口座名義
+        '
+        Me.口座名義.HeaderText = "口座名義"
+        Me.口座名義.Name = "口座名義"
+        Me.口座名義.ReadOnly = True
+        '
+        '関税率
+        '
+        Me.関税率.HeaderText = "関税率"
+        Me.関税率.Name = "関税率"
+        Me.関税率.ReadOnly = True
+        '
+        '前払法人税率
+        '
+        Me.前払法人税率.HeaderText = "前払法人税率"
+        Me.前払法人税率.Name = "前払法人税率"
+        Me.前払法人税率.ReadOnly = True
+        '
+        '輸送費率
+        '
+        Me.輸送費率.HeaderText = "輸送費率"
+        Me.輸送費率.Name = "輸送費率"
+        Me.輸送費率.ReadOnly = True
+        '
+        '更新者
+        '
+        Me.更新者.HeaderText = "更新者"
+        Me.更新者.Name = "更新者"
+        Me.更新者.ReadOnly = True
+        '
+        '更新日
+        '
+        Me.更新日.HeaderText = "更新日"
+        Me.更新日.Name = "更新日"
+        Me.更新日.ReadOnly = True
+        '
         'MstSupplier
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
@@ -266,10 +309,16 @@ Partial Class MstSupplier
     End Sub
 
     Friend WithEvents Dgv_Supplier As DataGridView
+    Friend WithEvents btnSupplierEdit As Button
+    Friend WithEvents btnSupplierAdd As Button
+    Friend WithEvents BtnBack As Button
+    Friend WithEvents BtnSearch As Button
+    Friend WithEvents Label1 As Label
+    Friend WithEvents Search As TextBox
     Friend WithEvents 会社コード As DataGridViewTextBoxColumn
     Friend WithEvents 仕入先コード As DataGridViewTextBoxColumn
     Friend WithEvents 仕入先名 As DataGridViewTextBoxColumn
-    Friend WithEvents 仕入先名略名 As DataGridViewTextBoxColumn
+    Friend WithEvents 仕入先名略称 As DataGridViewTextBoxColumn
     Friend WithEvents 郵便番号 As DataGridViewTextBoxColumn
     Friend WithEvents 住所１ As DataGridViewTextBoxColumn
     Friend WithEvents 住所２ As DataGridViewTextBoxColumn
@@ -278,19 +327,19 @@ Partial Class MstSupplier
     Friend WithEvents 電話番号検索用 As DataGridViewTextBoxColumn
     Friend WithEvents FAX番号 As DataGridViewTextBoxColumn
     Friend WithEvents 担当者名 As DataGridViewTextBoxColumn
+    Friend WithEvents 担当者役職 As DataGridViewTextBoxColumn
     Friend WithEvents 既定間接費率 As DataGridViewTextBoxColumn
     Friend WithEvents メモ As DataGridViewTextBoxColumn
+    Friend WithEvents 銀行名 As DataGridViewTextBoxColumn
     Friend WithEvents 銀行コード As DataGridViewTextBoxColumn
+    Friend WithEvents 支店名 As DataGridViewTextBoxColumn
     Friend WithEvents 支店コード As DataGridViewTextBoxColumn
     Friend WithEvents 預金種目 As DataGridViewTextBoxColumn
     Friend WithEvents 口座番号 As DataGridViewTextBoxColumn
     Friend WithEvents 口座名義 As DataGridViewTextBoxColumn
+    Friend WithEvents 関税率 As DataGridViewTextBoxColumn
+    Friend WithEvents 前払法人税率 As DataGridViewTextBoxColumn
+    Friend WithEvents 輸送費率 As DataGridViewTextBoxColumn
     Friend WithEvents 更新者 As DataGridViewTextBoxColumn
     Friend WithEvents 更新日 As DataGridViewTextBoxColumn
-    Friend WithEvents btnSupplierEdit As Button
-    Friend WithEvents btnSupplierAdd As Button
-    Friend WithEvents BtnBack As Button
-    Friend WithEvents BtnSearch As Button
-    Friend WithEvents Label1 As Label
-    Friend WithEvents Search As TextBox
 End Class

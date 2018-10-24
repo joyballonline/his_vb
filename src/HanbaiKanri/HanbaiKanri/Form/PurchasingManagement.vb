@@ -314,6 +314,7 @@ Public Class PurchasingManagement
             TxtOrdingDate.Text = ds1.Tables(RS).Rows(0)("発注日")
             TxtSupplierCode.Text = ds1.Tables(RS).Rows(0)("仕入先コード")
             TxtSupplierName.Text = ds1.Tables(RS).Rows(0)("仕入先名")
+            TxtCustomerPO.Text = ds1.Tables(RS).Rows(0)("客先番号").ToString
 
         Catch ue As UsrDefException
             ue.dspMsg()
@@ -459,7 +460,7 @@ Public Class PurchasingManagement
             Sql3 += "INSERT INTO "
             Sql3 += "Public."
             Sql3 += "t40_sirehd("
-            Sql3 += "会社コード, 仕入番号, 発注番号, 発注番号枝番, 仕入先コード, 仕入先名, 仕入先郵便番号, 仕入先住所, 仕入先電話番号, 仕入先ＦＡＸ, 仕入先担当者役職, 仕入先担当者名, 支払条件, 仕入金額, 粗利額, 営業担当者, 入力担当者, 備考, 取消日, 取消区分, ＶＡＴ, ＰＰＨ, 仕入日, 登録日, 更新日, 更新者)"
+            Sql3 += "会社コード, 仕入番号, 発注番号, 発注番号枝番, 客先番号, 仕入先コード, 仕入先名, 仕入先郵便番号, 仕入先住所, 仕入先電話番号, 仕入先ＦＡＸ, 仕入先担当者役職, 仕入先担当者名, 支払条件, 仕入金額, 粗利額, 営業担当者, 入力担当者, 備考, 取消日, 取消区分, ＶＡＴ, ＰＰＨ, 仕入日, 登録日, 更新日, 更新者)"
             Sql3 += " VALUES('"
             Sql3 += ds1.Tables(RS).Rows(0)("会社コード").ToString
             Sql3 += "', '"
@@ -468,6 +469,8 @@ Public Class PurchasingManagement
             Sql3 += ds1.Tables(RS).Rows(0)("発注番号").ToString
             Sql3 += "', '"
             Sql3 += ds1.Tables(RS).Rows(0)("発注番号枝番").ToString
+            Sql3 += "', '"
+            Sql3 += ds1.Tables(RS).Rows(0)("客先番号").ToString
             Sql3 += "', '"
             Sql3 += ds1.Tables(RS).Rows(0)("仕入先コード").ToString
             Sql3 += "', '"
@@ -524,6 +527,8 @@ Public Class PurchasingManagement
             Sql3 += "発注番号"
             Sql3 += ", "
             Sql3 += "発注番号枝番"
+            Sql3 += ", "
+            Sql3 += "客先番号"
             Sql3 += ", "
             Sql3 += "仕入先コード"
             Sql3 += ", "
@@ -832,7 +837,7 @@ Public Class PurchasingManagement
             Sql7 += "INSERT INTO "
             Sql7 += "Public."
             Sql7 += "t42_nyukohd("
-            Sql7 += "会社コード, 入庫番号, 発注番号, 発注番号枝番, 仕入先コード, 仕入先名, 仕入先郵便番号, 仕入先住所, 仕入先電話番号, 仕入先ＦＡＸ, 仕入先担当者役職, 仕入先担当者名, 支払条件, 仕入金額, 粗利額, 営業担当者, 入力担当者, 備考, 取消日, 取消区分, ＶＡＴ, ＰＰＨ, 入庫日, 登録日, 更新日, 更新者)"
+            Sql7 += "会社コード, 入庫番号, 発注番号, 発注番号枝番, 客先番号, 仕入先コード, 仕入先名, 仕入先郵便番号, 仕入先住所, 仕入先電話番号, 仕入先ＦＡＸ, 仕入先担当者役職, 仕入先担当者名, 支払条件, 仕入金額, 粗利額, 営業担当者, 入力担当者, 備考, 取消日, 取消区分, ＶＡＴ, ＰＰＨ, 入庫日, 登録日, 更新日, 更新者)"
             Sql7 += " VALUES('"
             Sql7 += ds1.Tables(RS).Rows(0)("会社コード").ToString
             Sql7 += "', '"
@@ -841,6 +846,8 @@ Public Class PurchasingManagement
             Sql7 += ds1.Tables(RS).Rows(0)("発注番号").ToString
             Sql7 += "', '"
             Sql7 += ds1.Tables(RS).Rows(0)("発注番号枝番").ToString
+            Sql7 += "', '"
+            Sql7 += ds1.Tables(RS).Rows(0)("客先番号").ToString
             Sql7 += "', '"
             Sql7 += ds1.Tables(RS).Rows(0)("仕入先コード").ToString
             Sql7 += "', '"
@@ -893,6 +900,8 @@ Public Class PurchasingManagement
             Sql7 += "発注番号"
             Sql7 += ", "
             Sql7 += "発注番号枝番"
+            Sql7 += ", "
+            Sql7 += "客先番号"
             Sql7 += ", "
             Sql7 += "仕入先コード"
             Sql7 += ", "

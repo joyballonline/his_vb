@@ -200,6 +200,7 @@ Public Class AccountsPayable
         DgvCymn.Rows(0).Cells("発注番号").Value = ds1.Tables(RS).Rows(0)("発注番号")
         DgvCymn.Rows(0).Cells("発注日").Value = ds1.Tables(RS).Rows(0)("発注日")
         DgvCymn.Rows(0).Cells("仕入先").Value = ds1.Tables(RS).Rows(0)("仕入先名")
+        DgvCymn.Rows(0).Cells("客先番号").Value = ds1.Tables(RS).Rows(0)("客先番号").ToString
         DgvCymn.Rows(0).Cells("発注金額").Value = ds1.Tables(RS).Rows(0)("仕入金額")
         DgvCymn.Rows(0).Cells("買掛金額計").Value = AccountsPayable
         DgvCymn.Rows(0).Cells("買掛残高").Value = ds1.Tables(RS).Rows(0)("仕入金額") - AccountsPayable
@@ -405,7 +406,7 @@ Public Class AccountsPayable
             Sql3 += "INSERT INTO "
             Sql3 += "Public."
             Sql3 += "t46_kikehd("
-            Sql3 += "会社コード, 買掛番号, 買掛区分, 買掛日, 発注番号, 発注番号枝番, 仕入先コード, 仕入先名, 買掛金額計, 買掛残高, 備考1, 備考2, 取消区分, 登録日, 更新者)"
+            Sql3 += "会社コード, 買掛番号, 買掛区分, 買掛日, 発注番号, 発注番号枝番, 客先番号, 仕入先コード, 仕入先名, 買掛金額計, 買掛残高, 備考1, 備考2, 取消区分, 登録日, 更新者)"
             Sql3 += " VALUES('"
             Sql3 += ds1.Tables(RS).Rows(0)("会社コード").ToString
             Sql3 += "', '"
@@ -418,6 +419,8 @@ Public Class AccountsPayable
             Sql3 += ds1.Tables(RS).Rows(0)("発注番号").ToString
             Sql3 += "', '"
             Sql3 += ds1.Tables(RS).Rows(0)("発注番号枝番").ToString
+            Sql3 += "', '"
+            Sql3 += ds1.Tables(RS).Rows(0)("客先番号").ToString
             Sql3 += "', '"
             Sql3 += ds1.Tables(RS).Rows(0)("仕入先コード").ToString
             Sql3 += "', '"
@@ -448,6 +451,8 @@ Public Class AccountsPayable
             Sql3 += "発注番号"
             Sql3 += ", "
             Sql3 += "発注番号枝番"
+            Sql3 += ", "
+            Sql3 += "客先番号"
             Sql3 += ", "
             Sql3 += "仕入先コード"
             Sql3 += ", "
@@ -523,6 +528,10 @@ Public Class AccountsPayable
             Sql4 += "更新日"
 
             _db.executeDB(Sql4)
+
+            _parentForm.Enabled = True
+            _parentForm.Show()
+            Me.Dispose()
         End If
 
     End Sub

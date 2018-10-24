@@ -67,26 +67,7 @@ Public Class MstCompany
         Dim Sql As String = ""
         Try
             Sql += "SELECT "
-            Sql += "会社コード, "
-            Sql += "会社名, "
-            Sql += "会社略称, "
-            Sql += "郵便番号, "
-            Sql += "住所１, "
-            Sql += "住所２, "
-            Sql += "住所３, "
-            Sql += "電話番号, "
-            Sql += "ＦＡＸ番号, "
-            Sql += "代表者役職, "
-            Sql += "代表者名, "
-            Sql += "表示順, "
-            Sql += "備考, "
-            Sql += "銀行コード, "
-            Sql += "支店コード, "
-            Sql += "預金種目, "
-            Sql += "口座番号, "
-            Sql += "口座名義, "
-            Sql += "更新者, "
-            Sql += "更新日 "
+            Sql += "* "
             Sql += "FROM "
             Sql += "public"
             Sql += "."
@@ -97,26 +78,34 @@ Public Class MstCompany
 
             For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
                 Dgv_Company.Rows.Add()
-                Dgv_Company.Rows(index).Cells(0).Value = ds.Tables(RS).Rows(index)(0)        '会社コード
-                Dgv_Company.Rows(index).Cells(1).Value = ds.Tables(RS).Rows(index)(1)        '言語コード
-                Dgv_Company.Rows(index).Cells(2).Value = ds.Tables(RS).Rows(index)(2)        '氏名
-                Dgv_Company.Rows(index).Cells(3).Value = ds.Tables(RS).Rows(index)(3)      '略名
-                Dgv_Company.Rows(index).Cells(4).Value = ds.Tables(RS).Rows(index)(4)      '備考
-                Dgv_Company.Rows(index).Cells(5).Value = ds.Tables(RS).Rows(index)(5)      '無効フラグ
-                Dgv_Company.Rows(index).Cells(6).Value = ds.Tables(RS).Rows(index)(6)      '更新者
-                Dgv_Company.Rows(index).Cells(7).Value = ds.Tables(RS).Rows(index)(7)      '更新日
-                Dgv_Company.Rows(index).Cells(8).Value = ds.Tables(RS).Rows(index)(8)        '会社コード
-                Dgv_Company.Rows(index).Cells(9).Value = ds.Tables(RS).Rows(index)(9)        '言語コード
-                Dgv_Company.Rows(index).Cells(10).Value = ds.Tables(RS).Rows(index)(10)        '氏名
-                Dgv_Company.Rows(index).Cells(11).Value = ds.Tables(RS).Rows(index)(11)      '略名
-                Dgv_Company.Rows(index).Cells(12).Value = ds.Tables(RS).Rows(index)(12)      '備考
-                Dgv_Company.Rows(index).Cells(13).Value = ds.Tables(RS).Rows(index)(13)      '無効フラグ
-                Dgv_Company.Rows(index).Cells(14).Value = ds.Tables(RS).Rows(index)(14)      '更新者
-                Dgv_Company.Rows(index).Cells(15).Value = ds.Tables(RS).Rows(index)(15)      '更新日
-                Dgv_Company.Rows(index).Cells(16).Value = ds.Tables(RS).Rows(index)(16)      '備考
-                Dgv_Company.Rows(index).Cells(17).Value = ds.Tables(RS).Rows(index)(17)      '無効フラグ
-                Dgv_Company.Rows(index).Cells(18).Value = ds.Tables(RS).Rows(index)(18)      '更新者
-                Dgv_Company.Rows(index).Cells(19).Value = ds.Tables(RS).Rows(index)(19)      '更新日
+                Dgv_Company.Rows(index).Cells("会社コード").Value = ds.Tables(RS).Rows(index)("会社コード")
+                Dgv_Company.Rows(index).Cells("会社名").Value = ds.Tables(RS).Rows(index)("会社名")
+                Dgv_Company.Rows(index).Cells("会社略称").Value = ds.Tables(RS).Rows(index)("会社略称")
+                Dgv_Company.Rows(index).Cells("郵便番号").Value = ds.Tables(RS).Rows(index)("郵便番号")
+                Dgv_Company.Rows(index).Cells("住所１").Value = ds.Tables(RS).Rows(index)("住所１")
+                Dgv_Company.Rows(index).Cells("住所２").Value = ds.Tables(RS).Rows(index)("住所２")
+                Dgv_Company.Rows(index).Cells("住所３").Value = ds.Tables(RS).Rows(index)("住所３")
+                Dgv_Company.Rows(index).Cells("電話番号").Value = ds.Tables(RS).Rows(index)("電話番号")
+                Dgv_Company.Rows(index).Cells("FAX番号").Value = ds.Tables(RS).Rows(index)("ＦＡＸ番号")
+                Dgv_Company.Rows(index).Cells("代表者役職").Value = ds.Tables(RS).Rows(index)("代表者役職")
+                Dgv_Company.Rows(index).Cells("代表者名").Value = ds.Tables(RS).Rows(index)("代表者名")
+                Dgv_Company.Rows(index).Cells("表示順").Value = ds.Tables(RS).Rows(index)("表示順")
+                Dgv_Company.Rows(index).Cells("備考").Value = ds.Tables(RS).Rows(index)("備考")
+                Dgv_Company.Rows(index).Cells("更新者").Value = ds.Tables(RS).Rows(index)("更新者")
+                Dgv_Company.Rows(index).Cells("更新日").Value = ds.Tables(RS).Rows(index)("更新日")
+                Dgv_Company.Rows(index).Cells("銀行コード").Value = ds.Tables(RS).Rows(index)("銀行コード")
+                Dgv_Company.Rows(index).Cells("支店コード").Value = ds.Tables(RS).Rows(index)("支店コード")
+                Dgv_Company.Rows(index).Cells("預金種目").Value = ds.Tables(RS).Rows(index)("預金種目")
+                Dgv_Company.Rows(index).Cells("口座番号").Value = ds.Tables(RS).Rows(index)("口座番号")
+                Dgv_Company.Rows(index).Cells("口座名義").Value = ds.Tables(RS).Rows(index)("口座名義")
+                Dgv_Company.Rows(index).Cells("銀行名").Value = ds.Tables(RS).Rows(index)("銀行名")
+                Dgv_Company.Rows(index).Cells("支店名").Value = ds.Tables(RS).Rows(index)("支店名")
+                Dgv_Company.Rows(index).Cells("前回締日").Value = ds.Tables(RS).Rows(index)("前回締日")
+                Dgv_Company.Rows(index).Cells("今回締日").Value = ds.Tables(RS).Rows(index)("今回締日")
+                Dgv_Company.Rows(index).Cells("次回締日").Value = ds.Tables(RS).Rows(index)("次回締日")
+                Dgv_Company.Rows(index).Cells("在庫単価評価法").Value = ds.Tables(RS).Rows(index)("在庫単価評価法")
+                Dgv_Company.Rows(index).Cells("前払法人税率").Value = ds.Tables(RS).Rows(index)("前払法人税率")
+
             Next
 
         Catch ue As UsrDefException
@@ -175,26 +164,33 @@ Public Class MstCompany
 
             For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
                 Dgv_Company.Rows.Add()
-                Dgv_Company.Rows(index).Cells(0).Value = ds.Tables(RS).Rows(index)(0)        '会社コード
-                Dgv_Company.Rows(index).Cells(1).Value = ds.Tables(RS).Rows(index)(1)        '言語コード
-                Dgv_Company.Rows(index).Cells(2).Value = ds.Tables(RS).Rows(index)(2)        '氏名
-                Dgv_Company.Rows(index).Cells(3).Value = ds.Tables(RS).Rows(index)(3)      '略名
-                Dgv_Company.Rows(index).Cells(4).Value = ds.Tables(RS).Rows(index)(4)      '備考
-                Dgv_Company.Rows(index).Cells(5).Value = ds.Tables(RS).Rows(index)(5)      '無効フラグ
-                Dgv_Company.Rows(index).Cells(6).Value = ds.Tables(RS).Rows(index)(6)      '更新者
-                Dgv_Company.Rows(index).Cells(7).Value = ds.Tables(RS).Rows(index)(7)      '更新日
-                Dgv_Company.Rows(index).Cells(8).Value = ds.Tables(RS).Rows(index)(8)        '会社コード
-                Dgv_Company.Rows(index).Cells(9).Value = ds.Tables(RS).Rows(index)(9)        '言語コード
-                Dgv_Company.Rows(index).Cells(10).Value = ds.Tables(RS).Rows(index)(10)        '氏名
-                Dgv_Company.Rows(index).Cells(11).Value = ds.Tables(RS).Rows(index)(11)      '略名
-                Dgv_Company.Rows(index).Cells(12).Value = ds.Tables(RS).Rows(index)(12)      '備考
-                Dgv_Company.Rows(index).Cells(13).Value = ds.Tables(RS).Rows(index)(13)      '無効フラグ
-                Dgv_Company.Rows(index).Cells(14).Value = ds.Tables(RS).Rows(index)(14)      '更新者
-                Dgv_Company.Rows(index).Cells(15).Value = ds.Tables(RS).Rows(index)(15)      '更新日
-                Dgv_Company.Rows(index).Cells(16).Value = ds.Tables(RS).Rows(index)(16)      '備考
-                Dgv_Company.Rows(index).Cells(17).Value = ds.Tables(RS).Rows(index)(17)      '無効フラグ
-                Dgv_Company.Rows(index).Cells(18).Value = ds.Tables(RS).Rows(index)(18)      '更新者
-                Dgv_Company.Rows(index).Cells(19).Value = ds.Tables(RS).Rows(index)(19)      '更新日
+                Dgv_Company.Rows(index).Cells("会社コード").Value = ds.Tables(RS).Rows(index)("会社コード")
+                Dgv_Company.Rows(index).Cells("会社名").Value = ds.Tables(RS).Rows(index)("会社名")
+                Dgv_Company.Rows(index).Cells("会社略称").Value = ds.Tables(RS).Rows(index)("会社略称")
+                Dgv_Company.Rows(index).Cells("郵便番号").Value = ds.Tables(RS).Rows(index)("郵便番号")
+                Dgv_Company.Rows(index).Cells("住所１").Value = ds.Tables(RS).Rows(index)("住所１")
+                Dgv_Company.Rows(index).Cells("住所２").Value = ds.Tables(RS).Rows(index)("住所２")
+                Dgv_Company.Rows(index).Cells("住所３").Value = ds.Tables(RS).Rows(index)("住所３")
+                Dgv_Company.Rows(index).Cells("電話番号").Value = ds.Tables(RS).Rows(index)("電話番号")
+                Dgv_Company.Rows(index).Cells("ＦＡＸ番号").Value = ds.Tables(RS).Rows(index)("ＦＡＸ番号")
+                Dgv_Company.Rows(index).Cells("代表者役職").Value = ds.Tables(RS).Rows(index)("代表者役職")
+                Dgv_Company.Rows(index).Cells("代表者名").Value = ds.Tables(RS).Rows(index)("代表者名")
+                Dgv_Company.Rows(index).Cells("表示順").Value = ds.Tables(RS).Rows(index)("表示順")
+                Dgv_Company.Rows(index).Cells("備考").Value = ds.Tables(RS).Rows(index)("備考")
+                Dgv_Company.Rows(index).Cells("更新者").Value = ds.Tables(RS).Rows(index)("更新者")
+                Dgv_Company.Rows(index).Cells("更新日").Value = ds.Tables(RS).Rows(index)("更新日")
+                Dgv_Company.Rows(index).Cells("銀行コード").Value = ds.Tables(RS).Rows(index)("銀行コード")
+                Dgv_Company.Rows(index).Cells("支店コード").Value = ds.Tables(RS).Rows(index)("支店コード")
+                Dgv_Company.Rows(index).Cells("預金種目").Value = ds.Tables(RS).Rows(index)("預金種目")
+                Dgv_Company.Rows(index).Cells("口座番号").Value = ds.Tables(RS).Rows(index)("口座番号")
+                Dgv_Company.Rows(index).Cells("口座名義").Value = ds.Tables(RS).Rows(index)("口座名義")
+                Dgv_Company.Rows(index).Cells("銀行名").Value = ds.Tables(RS).Rows(index)("銀行名")
+                Dgv_Company.Rows(index).Cells("支店名").Value = ds.Tables(RS).Rows(index)("支店名")
+                Dgv_Company.Rows(index).Cells("前回締日").Value = ds.Tables(RS).Rows(index)("前回締日")
+                Dgv_Company.Rows(index).Cells("今回締日").Value = ds.Tables(RS).Rows(index)("今回締日")
+                Dgv_Company.Rows(index).Cells("次回締日").Value = ds.Tables(RS).Rows(index)("次回締日")
+                Dgv_Company.Rows(index).Cells("在庫単価評価法").Value = ds.Tables(RS).Rows(index)("在庫単価評価法")
+                Dgv_Company.Rows(index).Cells("前払法人税率").Value = ds.Tables(RS).Rows(index)("前払法人税率")
             Next
 
         Catch ue As UsrDefException

@@ -92,6 +92,7 @@ Public Class BillingList
                 DgvBilling.Columns.Add("請求番号", "請求番号")
                 DgvBilling.Columns.Add("請求区分", "請求区分")
                 DgvBilling.Columns.Add("請求日", "請求日")
+                DgvBilling.Columns.Add("客先番号", "客先番号")
                 DgvBilling.Columns.Add("受注番号", "受注番号")
                 DgvBilling.Columns.Add("受注番号枝番", "受注番号枝番")
                 DgvBilling.Columns.Add("得意先コード", "得意先コード")
@@ -111,6 +112,7 @@ Public Class BillingList
                     DgvBilling.Rows(index).Cells("請求番号").Value = ds.Tables(RS).Rows(index)("請求番号")
                     DgvBilling.Rows(index).Cells("請求区分").Value = ds.Tables(RS).Rows(index)("請求区分")
                     DgvBilling.Rows(index).Cells("請求日").Value = ds.Tables(RS).Rows(index)("請求日")
+                    DgvBilling.Rows(index).Cells("客先番号").Value = ds.Tables(RS).Rows(index)("客先番号")
                     DgvBilling.Rows(index).Cells("受注番号").Value = ds.Tables(RS).Rows(index)("受注番号")
                     DgvBilling.Rows(index).Cells("受注番号枝番").Value = ds.Tables(RS).Rows(index)("受注番号枝番")
                     DgvBilling.Rows(index).Cells("得意先コード").Value = ds.Tables(RS).Rows(index)("得意先コード")
@@ -145,6 +147,7 @@ Public Class BillingList
                 DgvBilling.Columns.Add("請求番号", "請求番号")
                 DgvBilling.Columns.Add("請求区分", "請求区分")
                 DgvBilling.Columns.Add("請求日", "請求日")
+                DgvBilling.Columns.Add("客先番号", "客先番号")
                 DgvBilling.Columns.Add("受注番号", "受注番号")
                 DgvBilling.Columns.Add("受注番号枝番", "受注番号枝番")
                 DgvBilling.Columns.Add("得意先コード", "得意先コード")
@@ -164,6 +167,7 @@ Public Class BillingList
                     DgvBilling.Rows(index).Cells("請求番号").Value = ds.Tables(RS).Rows(index)("請求番号")
                     DgvBilling.Rows(index).Cells("請求区分").Value = ds.Tables(RS).Rows(index)("請求区分")
                     DgvBilling.Rows(index).Cells("請求日").Value = ds.Tables(RS).Rows(index)("請求日")
+                    DgvBilling.Rows(index).Cells("客先番号").Value = ds.Tables(RS).Rows(index)("客先番号")
                     DgvBilling.Rows(index).Cells("受注番号").Value = ds.Tables(RS).Rows(index)("受注番号")
                     DgvBilling.Rows(index).Cells("受注番号枝番").Value = ds.Tables(RS).Rows(index)("受注番号枝番")
                     DgvBilling.Rows(index).Cells("得意先コード").Value = ds.Tables(RS).Rows(index)("得意先コード")
@@ -207,168 +211,168 @@ Public Class BillingList
         Me.Close()
     End Sub
 
-    Private Sub RbtnDetails_CheckedChanged(sender As Object, e As EventArgs) Handles RbtnDetails.CheckedChanged
-        DgvBilling.Rows.Clear()
-        DgvBilling.Columns.Clear()
+    'Private Sub RbtnDetails_CheckedChanged(sender As Object, e As EventArgs) Handles RbtnDetails.CheckedChanged
+    '    DgvBilling.Rows.Clear()
+    '    DgvBilling.Columns.Clear()
 
-        If RbtnSlip.Checked Then
-            Dim Sql As String = ""
-            Sql += "SELECT "
-            Sql += " * "
-            Sql += "FROM "
-            Sql += "public"
-            Sql += "."
-            Sql += "t40_sirehd"
-            If OrderingNo IsNot Nothing Then
-                For i As Integer = 0 To OrderingNo.Length - 1
-                    If i = 0 Then
-                        Sql += " WHERE "
-                        Sql += "仕入番号"
-                        Sql += " ILIKE "
-                        Sql += "'%"
-                        Sql += OrderingNo(i)
-                        Sql += "%'"
-                    Else
-                        Sql += " OR "
-                        Sql += "仕入番号"
-                        Sql += " ILIKE "
-                        Sql += "'%"
-                        Sql += OrderingNo(i)
-                        Sql += "%'"
-                    End If
-                Next
-            End If
-
-
-
-            Dim reccnt As Integer = 0
-            ds = _db.selectDB(Sql, RS, reccnt)
-
-            DgvBilling.Columns.Add("仕入番号", "仕入番号")
-            DgvBilling.Columns.Add("仕入日", "仕入日")
-            DgvBilling.Columns.Add("発注番号", "発注番号")
-            DgvBilling.Columns.Add("発注番号枝番", "発注番号枝番")
-            DgvBilling.Columns.Add("仕入先コード", "仕入先コード")
-            DgvBilling.Columns.Add("仕入先名", "仕入先名")
-            DgvBilling.Columns.Add("仕入先郵便番号", "仕入先郵便番号")
-            DgvBilling.Columns.Add("仕入先住所", "仕入先住所")
-            DgvBilling.Columns.Add("仕入先電話番号", "仕入先電話番号")
-            DgvBilling.Columns.Add("仕入先ＦＡＸ", "仕入先ＦＡＸ")
-            DgvBilling.Columns.Add("仕入先担当者名", "仕入先担当者名")
-            DgvBilling.Columns.Add("仕入先担当者役職", "仕入先担当者役職")
-            DgvBilling.Columns.Add("仕入金額", "仕入金額")
-            DgvBilling.Columns.Add("支払条件", "支払条件")
-            DgvBilling.Columns.Add("営業担当者", "営業担当者")
-            DgvBilling.Columns.Add("入力担当者", "入力担当者")
-            DgvBilling.Columns.Add("備考", "備考")
-            DgvBilling.Columns.Add("登録日", "登録日")
-
-            DgvBilling.Columns("仕入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-
-            For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-                DgvBilling.Rows.Add()
-                DgvBilling.Rows(index).Cells("仕入番号").Value = ds.Tables(RS).Rows(index)("仕入番号")
-                DgvBilling.Rows(index).Cells("発注番号").Value = ds.Tables(RS).Rows(index)("発注番号")
-                DgvBilling.Rows(index).Cells("発注番号枝番").Value = ds.Tables(RS).Rows(index)("発注番号枝番")
-                DgvBilling.Rows(index).Cells("仕入日").Value = ds.Tables(RS).Rows(index)("仕入日")
-                DgvBilling.Rows(index).Cells("仕入先コード").Value = ds.Tables(RS).Rows(index)("仕入先コード")
-                DgvBilling.Rows(index).Cells("仕入先名").Value = ds.Tables(RS).Rows(index)("仕入先名")
-                DgvBilling.Rows(index).Cells("仕入先郵便番号").Value = ds.Tables(RS).Rows(index)("仕入先郵便番号")
-                DgvBilling.Rows(index).Cells("仕入先住所").Value = ds.Tables(RS).Rows(index)("仕入先住所")
-                DgvBilling.Rows(index).Cells("仕入先電話番号").Value = ds.Tables(RS).Rows(index)("仕入先電話番号")
-                DgvBilling.Rows(index).Cells("仕入先ＦＡＸ").Value = ds.Tables(RS).Rows(index)("仕入先ＦＡＸ")
-                DgvBilling.Rows(index).Cells("仕入先担当者名").Value = ds.Tables(RS).Rows(index)("仕入先担当者名")
-                DgvBilling.Rows(index).Cells("仕入先担当者役職").Value = ds.Tables(RS).Rows(index)("仕入先担当者役職")
-                DgvBilling.Rows(index).Cells("仕入金額").Value = ds.Tables(RS).Rows(index)("仕入金額")
-                DgvBilling.Rows(index).Cells("支払条件").Value = ds.Tables(RS).Rows(index)("支払条件")
-                DgvBilling.Rows(index).Cells("営業担当者").Value = ds.Tables(RS).Rows(index)("営業担当者")
-                DgvBilling.Rows(index).Cells("入力担当者").Value = ds.Tables(RS).Rows(index)("入力担当者")
-                DgvBilling.Rows(index).Cells("備考").Value = ds.Tables(RS).Rows(index)("備考")
-                DgvBilling.Rows(index).Cells("登録日").Value = ds.Tables(RS).Rows(index)("登録日")
-            Next
-        Else
-            Dim Sql As String = ""
-
-            Sql += "SELECT "
-            Sql += " * "
-            Sql += "FROM "
-            Sql += "public"
-            Sql += "."
-            Sql += "t41_siredt"
-
-            If OrderingNo IsNot Nothing Then
-                For i As Integer = 0 To OrderingNo.Length - 1
-                    If i = 0 Then
-                        Sql += " WHERE "
-                        Sql += "仕入番号"
-                        Sql += " ILIKE "
-                        Sql += "'%"
-                        Sql += OrderingNo(i)
-                        Sql += "%'"
-                    Else
-                        Sql += " OR "
-                        Sql += "仕入番号"
-                        Sql += " ILIKE "
-                        Sql += "'%"
-                        Sql += OrderingNo(i)
-                        Sql += "%'"
-                    End If
-                Next
-            End If
-
-            Dim reccnt As Integer = 0
-            ds = _db.selectDB(Sql, RS, reccnt)
-
-            DgvBilling.Columns.Add("仕入番号", "仕入番号")
-            DgvBilling.Columns.Add("行番号", "行番号")
-            DgvBilling.Columns.Add("仕入区分", "仕入区分")
-            DgvBilling.Columns.Add("メーカー", "メーカー")
-            DgvBilling.Columns.Add("品名", "品名")
-            DgvBilling.Columns.Add("型式", "型式")
-            DgvBilling.Columns.Add("仕入先名", "仕入先名")
-            DgvBilling.Columns.Add("仕入値", "仕入値")
-            DgvBilling.Columns.Add("発注数量", "発注数量")
-            DgvBilling.Columns.Add("仕入数量", "仕入数量")
-            DgvBilling.Columns.Add("発注残数", "発注残数")
-            DgvBilling.Columns.Add("単位", "単位")
-            DgvBilling.Columns.Add("間接費", "間接費")
-            DgvBilling.Columns.Add("仕入金額", "仕入金額")
-            DgvBilling.Columns.Add("リードタイム", "リードタイム")
-            DgvBilling.Columns.Add("備考", "備考")
-            DgvBilling.Columns.Add("更新者", "更新者")
+    '    If RbtnSlip.Checked Then
+    '        Dim Sql As String = ""
+    '        Sql += "SELECT "
+    '        Sql += " * "
+    '        Sql += "FROM "
+    '        Sql += "public"
+    '        Sql += "."
+    '        Sql += "t40_sirehd"
+    '        If OrderingNo IsNot Nothing Then
+    '            For i As Integer = 0 To OrderingNo.Length - 1
+    '                If i = 0 Then
+    '                    Sql += " WHERE "
+    '                    Sql += "仕入番号"
+    '                    Sql += " ILIKE "
+    '                    Sql += "'%"
+    '                    Sql += OrderingNo(i)
+    '                    Sql += "%'"
+    '                Else
+    '                    Sql += " OR "
+    '                    Sql += "仕入番号"
+    '                    Sql += " ILIKE "
+    '                    Sql += "'%"
+    '                    Sql += OrderingNo(i)
+    '                    Sql += "%'"
+    '                End If
+    '            Next
+    '        End If
 
 
 
-            DgvBilling.Columns("仕入値").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvBilling.Columns("発注数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvBilling.Columns("仕入数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvBilling.Columns("発注残数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvBilling.Columns("間接費").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvBilling.Columns("仕入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvBilling.Columns("リードタイム").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+    '        Dim reccnt As Integer = 0
+    '        ds = _db.selectDB(Sql, RS, reccnt)
 
-            For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-                DgvBilling.Rows.Add()
-                DgvBilling.Rows(index).Cells("仕入番号").Value = ds.Tables(RS).Rows(index)("仕入番号")
-                DgvBilling.Rows(index).Cells("行番号").Value = ds.Tables(RS).Rows(index)("行番号")
-                DgvBilling.Rows(index).Cells("仕入区分").Value = ds.Tables(RS).Rows(index)("仕入区分")
-                DgvBilling.Rows(index).Cells("メーカー").Value = ds.Tables(RS).Rows(index)("メーカー")
-                DgvBilling.Rows(index).Cells("品名").Value = ds.Tables(RS).Rows(index)("品名")
-                DgvBilling.Rows(index).Cells("型式").Value = ds.Tables(RS).Rows(index)("型式")
-                DgvBilling.Rows(index).Cells("仕入先名").Value = ds.Tables(RS).Rows(index)("仕入先名")
-                DgvBilling.Rows(index).Cells("仕入値").Value = ds.Tables(RS).Rows(index)("仕入値")
-                DgvBilling.Rows(index).Cells("発注数量").Value = ds.Tables(RS).Rows(index)("発注数量")
-                DgvBilling.Rows(index).Cells("仕入数量").Value = ds.Tables(RS).Rows(index)("仕入数量")
-                DgvBilling.Rows(index).Cells("発注残数").Value = ds.Tables(RS).Rows(index)("発注残数")
-                DgvBilling.Rows(index).Cells("単位").Value = ds.Tables(RS).Rows(index)("単位")
-                DgvBilling.Rows(index).Cells("間接費").Value = ds.Tables(RS).Rows(index)("間接費")
-                DgvBilling.Rows(index).Cells("仕入金額").Value = ds.Tables(RS).Rows(index)("仕入金額")
-                DgvBilling.Rows(index).Cells("リードタイム").Value = ds.Tables(RS).Rows(index)("リードタイム")
-                DgvBilling.Rows(index).Cells("備考").Value = ds.Tables(RS).Rows(index)("備考")
-                DgvBilling.Rows(index).Cells("更新者").Value = ds.Tables(RS).Rows(index)("更新者")
-            Next
-        End If
-    End Sub
+    '        DgvBilling.Columns.Add("仕入番号", "仕入番号")
+    '        DgvBilling.Columns.Add("仕入日", "仕入日")
+    '        DgvBilling.Columns.Add("発注番号", "発注番号")
+    '        DgvBilling.Columns.Add("発注番号枝番", "発注番号枝番")
+    '        DgvBilling.Columns.Add("仕入先コード", "仕入先コード")
+    '        DgvBilling.Columns.Add("仕入先名", "仕入先名")
+    '        DgvBilling.Columns.Add("仕入先郵便番号", "仕入先郵便番号")
+    '        DgvBilling.Columns.Add("仕入先住所", "仕入先住所")
+    '        DgvBilling.Columns.Add("仕入先電話番号", "仕入先電話番号")
+    '        DgvBilling.Columns.Add("仕入先ＦＡＸ", "仕入先ＦＡＸ")
+    '        DgvBilling.Columns.Add("仕入先担当者名", "仕入先担当者名")
+    '        DgvBilling.Columns.Add("仕入先担当者役職", "仕入先担当者役職")
+    '        DgvBilling.Columns.Add("仕入金額", "仕入金額")
+    '        DgvBilling.Columns.Add("支払条件", "支払条件")
+    '        DgvBilling.Columns.Add("営業担当者", "営業担当者")
+    '        DgvBilling.Columns.Add("入力担当者", "入力担当者")
+    '        DgvBilling.Columns.Add("備考", "備考")
+    '        DgvBilling.Columns.Add("登録日", "登録日")
+
+    '        DgvBilling.Columns("仕入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+    '        For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+    '            DgvBilling.Rows.Add()
+    '            DgvBilling.Rows(index).Cells("仕入番号").Value = ds.Tables(RS).Rows(index)("仕入番号")
+    '            DgvBilling.Rows(index).Cells("発注番号").Value = ds.Tables(RS).Rows(index)("発注番号")
+    '            DgvBilling.Rows(index).Cells("発注番号枝番").Value = ds.Tables(RS).Rows(index)("発注番号枝番")
+    '            DgvBilling.Rows(index).Cells("仕入日").Value = ds.Tables(RS).Rows(index)("仕入日")
+    '            DgvBilling.Rows(index).Cells("仕入先コード").Value = ds.Tables(RS).Rows(index)("仕入先コード")
+    '            DgvBilling.Rows(index).Cells("仕入先名").Value = ds.Tables(RS).Rows(index)("仕入先名")
+    '            DgvBilling.Rows(index).Cells("仕入先郵便番号").Value = ds.Tables(RS).Rows(index)("仕入先郵便番号")
+    '            DgvBilling.Rows(index).Cells("仕入先住所").Value = ds.Tables(RS).Rows(index)("仕入先住所")
+    '            DgvBilling.Rows(index).Cells("仕入先電話番号").Value = ds.Tables(RS).Rows(index)("仕入先電話番号")
+    '            DgvBilling.Rows(index).Cells("仕入先ＦＡＸ").Value = ds.Tables(RS).Rows(index)("仕入先ＦＡＸ")
+    '            DgvBilling.Rows(index).Cells("仕入先担当者名").Value = ds.Tables(RS).Rows(index)("仕入先担当者名")
+    '            DgvBilling.Rows(index).Cells("仕入先担当者役職").Value = ds.Tables(RS).Rows(index)("仕入先担当者役職")
+    '            DgvBilling.Rows(index).Cells("仕入金額").Value = ds.Tables(RS).Rows(index)("仕入金額")
+    '            DgvBilling.Rows(index).Cells("支払条件").Value = ds.Tables(RS).Rows(index)("支払条件")
+    '            DgvBilling.Rows(index).Cells("営業担当者").Value = ds.Tables(RS).Rows(index)("営業担当者")
+    '            DgvBilling.Rows(index).Cells("入力担当者").Value = ds.Tables(RS).Rows(index)("入力担当者")
+    '            DgvBilling.Rows(index).Cells("備考").Value = ds.Tables(RS).Rows(index)("備考")
+    '            DgvBilling.Rows(index).Cells("登録日").Value = ds.Tables(RS).Rows(index)("登録日")
+    '        Next
+    '    Else
+    '        Dim Sql As String = ""
+
+    '        Sql += "SELECT "
+    '        Sql += " * "
+    '        Sql += "FROM "
+    '        Sql += "public"
+    '        Sql += "."
+    '        Sql += "t41_siredt"
+
+    '        If OrderingNo IsNot Nothing Then
+    '            For i As Integer = 0 To OrderingNo.Length - 1
+    '                If i = 0 Then
+    '                    Sql += " WHERE "
+    '                    Sql += "仕入番号"
+    '                    Sql += " ILIKE "
+    '                    Sql += "'%"
+    '                    Sql += OrderingNo(i)
+    '                    Sql += "%'"
+    '                Else
+    '                    Sql += " OR "
+    '                    Sql += "仕入番号"
+    '                    Sql += " ILIKE "
+    '                    Sql += "'%"
+    '                    Sql += OrderingNo(i)
+    '                    Sql += "%'"
+    '                End If
+    '            Next
+    '        End If
+
+    '        Dim reccnt As Integer = 0
+    '        ds = _db.selectDB(Sql, RS, reccnt)
+
+    '        DgvBilling.Columns.Add("仕入番号", "仕入番号")
+    '        DgvBilling.Columns.Add("行番号", "行番号")
+    '        DgvBilling.Columns.Add("仕入区分", "仕入区分")
+    '        DgvBilling.Columns.Add("メーカー", "メーカー")
+    '        DgvBilling.Columns.Add("品名", "品名")
+    '        DgvBilling.Columns.Add("型式", "型式")
+    '        DgvBilling.Columns.Add("仕入先名", "仕入先名")
+    '        DgvBilling.Columns.Add("仕入値", "仕入値")
+    '        DgvBilling.Columns.Add("発注数量", "発注数量")
+    '        DgvBilling.Columns.Add("仕入数量", "仕入数量")
+    '        DgvBilling.Columns.Add("発注残数", "発注残数")
+    '        DgvBilling.Columns.Add("単位", "単位")
+    '        DgvBilling.Columns.Add("間接費", "間接費")
+    '        DgvBilling.Columns.Add("仕入金額", "仕入金額")
+    '        DgvBilling.Columns.Add("リードタイム", "リードタイム")
+    '        DgvBilling.Columns.Add("備考", "備考")
+    '        DgvBilling.Columns.Add("更新者", "更新者")
+
+
+
+    '        DgvBilling.Columns("仕入値").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+    '        DgvBilling.Columns("発注数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+    '        DgvBilling.Columns("仕入数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+    '        DgvBilling.Columns("発注残数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+    '        DgvBilling.Columns("間接費").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+    '        DgvBilling.Columns("仕入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+    '        DgvBilling.Columns("リードタイム").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+    '        For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+    '            DgvBilling.Rows.Add()
+    '            DgvBilling.Rows(index).Cells("仕入番号").Value = ds.Tables(RS).Rows(index)("仕入番号")
+    '            DgvBilling.Rows(index).Cells("行番号").Value = ds.Tables(RS).Rows(index)("行番号")
+    '            DgvBilling.Rows(index).Cells("仕入区分").Value = ds.Tables(RS).Rows(index)("仕入区分")
+    '            DgvBilling.Rows(index).Cells("メーカー").Value = ds.Tables(RS).Rows(index)("メーカー")
+    '            DgvBilling.Rows(index).Cells("品名").Value = ds.Tables(RS).Rows(index)("品名")
+    '            DgvBilling.Rows(index).Cells("型式").Value = ds.Tables(RS).Rows(index)("型式")
+    '            DgvBilling.Rows(index).Cells("仕入先名").Value = ds.Tables(RS).Rows(index)("仕入先名")
+    '            DgvBilling.Rows(index).Cells("仕入値").Value = ds.Tables(RS).Rows(index)("仕入値")
+    '            DgvBilling.Rows(index).Cells("発注数量").Value = ds.Tables(RS).Rows(index)("発注数量")
+    '            DgvBilling.Rows(index).Cells("仕入数量").Value = ds.Tables(RS).Rows(index)("仕入数量")
+    '            DgvBilling.Rows(index).Cells("発注残数").Value = ds.Tables(RS).Rows(index)("発注残数")
+    '            DgvBilling.Rows(index).Cells("単位").Value = ds.Tables(RS).Rows(index)("単位")
+    '            DgvBilling.Rows(index).Cells("間接費").Value = ds.Tables(RS).Rows(index)("間接費")
+    '            DgvBilling.Rows(index).Cells("仕入金額").Value = ds.Tables(RS).Rows(index)("仕入金額")
+    '            DgvBilling.Rows(index).Cells("リードタイム").Value = ds.Tables(RS).Rows(index)("リードタイム")
+    '            DgvBilling.Rows(index).Cells("備考").Value = ds.Tables(RS).Rows(index)("備考")
+    '            DgvBilling.Rows(index).Cells("更新者").Value = ds.Tables(RS).Rows(index)("更新者")
+    '        Next
+    '    End If
+    'End Sub
 
     Private Sub BtnPurchaseSearch_Click(sender As Object, e As EventArgs) Handles BtnPurchaseSearch.Click
         DgvBilling.Rows.Clear()
@@ -550,6 +554,25 @@ Public Class BillingList
                     End If
                 End If
             End If
+            If TxtCustomerPO.Text = "" Then
+            Else
+                If count > 0 Then
+                    Sql += " AND "
+                    Sql += "客先番号"
+                    Sql += " ILIKE "
+                    Sql += "'%"
+                    Sql += TxtCustomerPO.Text
+                    Sql += "%'"
+                Else
+                    Sql += " WHERE "
+                    Sql += "客先番号"
+                    Sql += " ILIKE "
+                    Sql += "'%"
+                    Sql += TxtCustomerPO.Text
+                    Sql += "%'"
+                    count += 1
+                End If
+            End If
 
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
@@ -557,6 +580,7 @@ Public Class BillingList
             DgvBilling.Columns.Add("請求番号", "請求番号")
             DgvBilling.Columns.Add("請求区分", "請求区分")
             DgvBilling.Columns.Add("請求日", "請求日")
+            DgvBilling.Columns.Add("客先番号", "客先番号")
             DgvBilling.Columns.Add("受注番号", "受注番号")
             DgvBilling.Columns.Add("受注番号枝番", "受注番号枝番")
             DgvBilling.Columns.Add("得意先コード", "得意先コード")
@@ -579,6 +603,7 @@ Public Class BillingList
                 DgvBilling.Rows(index).Cells("請求番号").Value = ds.Tables(RS).Rows(index)("請求番号")
                 DgvBilling.Rows(index).Cells("請求区分").Value = ds.Tables(RS).Rows(index)("請求区分")
                 DgvBilling.Rows(index).Cells("請求日").Value = ds.Tables(RS).Rows(index)("請求日")
+                DgvBilling.Rows(index).Cells("客先番号").Value = ds.Tables(RS).Rows(index)("客先番号")
                 DgvBilling.Rows(index).Cells("受注番号").Value = ds.Tables(RS).Rows(index)("受注番号")
                 DgvBilling.Rows(index).Cells("受注番号枝番").Value = ds.Tables(RS).Rows(index)("受注番号枝番")
                 DgvBilling.Rows(index).Cells("得意先コード").Value = ds.Tables(RS).Rows(index)("得意先コード")

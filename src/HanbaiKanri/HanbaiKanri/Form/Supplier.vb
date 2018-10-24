@@ -87,7 +87,7 @@ Public Class Supplier
                 Sql += "INSERT INTO "
                 Sql += "Public."
                 Sql += "m11_supplier("
-                Sql += "会社コード, 仕入先コード, 仕入先名, 仕入先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 担当者役職, 既定間接費率, メモ, 銀行コード, 支店コード, 預金種目, 口座番号, 口座名義,  更新者, 更新日)"
+                Sql += "会社コード, 仕入先コード, 仕入先名, 仕入先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 担当者役職, 関税率, 前払法人税率, 輸送費率, メモ, 銀行名, 銀行コード, 支店名, 支店コード, 預金種目, 口座番号, 口座名義,  更新者, 更新日)"
                 Sql += " VALUES('"
                 Sql += frmC01F10_Login.loginValue.BumonNM
                 Sql += "', '"
@@ -115,15 +115,31 @@ Public Class Supplier
                 Sql += "', '"
                 Sql += TxtPosition.Text
                 Sql += "', '"
-                If TxtCosts.Text = "" Then
+                If TxtTariffRate.Text = "" Then
                     Sql += "0"
                 Else
-                    Sql += TxtCosts.Text
+                    Sql += TxtTariffRate.Text
+                End If
+                Sql += "', '"
+                If TxtPph.Text = "" Then
+                    Sql += "0"
+                Else
+                    Sql += TxtPph.Text
+                End If
+                Sql += "', '"
+                If TxtTransportationCost.Text = "" Then
+                    Sql += "0"
+                Else
+                    Sql += TxtTransportationCost.Text
                 End If
                 Sql += "', '"
                 Sql += TxtMemo.Text
                 Sql += "', '"
+                Sql += TxtBankName.Text
+                Sql += "', '"
                 Sql += TxtBankCode.Text
+                Sql += "', '"
+                Sql += TxtBranchName.Text
                 Sql += "', '"
                 Sql += TxtBranchOfficeCode.Text
                 Sql += "', '"
@@ -163,11 +179,19 @@ Public Class Supplier
                 Sql += ", "
                 Sql += "担当者役職"
                 Sql += ", "
-                Sql += "既定間接費率"
+                Sql += "関税率"
+                Sql += ", "
+                Sql += "前払法人税率"
+                Sql += ", "
+                Sql += "輸送費率"
                 Sql += ", "
                 Sql += "メモ"
                 Sql += ", "
+                Sql += "銀行名"
+                Sql += ", "
                 Sql += "銀行コード"
+                Sql += ", "
+                Sql += "支店名"
                 Sql += ", "
                 Sql += "支店コード"
                 Sql += ", "
@@ -242,17 +266,33 @@ Public Class Supplier
                 Sql += " = '"
                 Sql += TxtPosition.Text
                 Sql += "', "
-                Sql += "既定間接費率"
+                Sql += "関税率"
                 Sql += " = '"
-                Sql += TxtCosts.Text
+                Sql += TxtTariffRate.Text
+                Sql += "', "
+                Sql += "前払法人税率"
+                Sql += " = '"
+                Sql += TxtPph.Text
+                Sql += "', "
+                Sql += "輸送費率"
+                Sql += " = '"
+                Sql += TxtTransportationCost.Text
                 Sql += "', "
                 Sql += "メモ"
                 Sql += " = '"
                 Sql += TxtMemo.Text
                 Sql += "', "
+                Sql += "銀行名"
+                Sql += " = '"
+                Sql += TxtBankName.Text
+                Sql += "', "
                 Sql += "銀行コード"
                 Sql += " = '"
                 Sql += TxtBankCode.Text
+                Sql += "', "
+                Sql += "支店名"
+                Sql += " = '"
+                Sql += TxtBranchName.Text
                 Sql += "', "
                 Sql += "支店コード"
                 Sql += " = '"
@@ -314,11 +354,19 @@ Public Class Supplier
                 Sql += ", "
                 Sql += "担当者役職"
                 Sql += ", "
-                Sql += "既定間接費率"
+                Sql += "関税率"
+                Sql += ", "
+                Sql += "前払法人税率"
+                Sql += ", "
+                Sql += "輸送費率"
                 Sql += ", "
                 Sql += "メモ"
                 Sql += ", "
+                Sql += "銀行名"
+                Sql += ", "
                 Sql += "銀行コード"
+                Sql += ", "
+                Sql += "支店名"
                 Sql += ", "
                 Sql += "支店コード"
                 Sql += ", "
@@ -361,28 +409,7 @@ Public Class Supplier
             Dim Sql As String = ""
 
             Sql += "SELECT "
-            Sql += "会社コード, "
-            Sql += "仕入先コード, "
-            Sql += "仕入先名, "
-            Sql += "仕入先名略称, "
-            Sql += "郵便番号, "
-            Sql += "住所１, "
-            Sql += "住所２, "
-            Sql += "住所３, "
-            Sql += "電話番号, "
-            Sql += "電話番号検索用, "
-            Sql += "ＦＡＸ番号, "
-            Sql += "担当者名, "
-            Sql += "担当者役職, "
-            Sql += "既定間接費率, "
-            Sql += "メモ, "
-            Sql += "銀行コード, "
-            Sql += "支店コード, "
-            Sql += "預金種目, "
-            Sql += "口座番号, "
-            Sql += "口座名義, "
-            Sql += "更新者, "
-            Sql += "更新日 "
+            Sql += "* "
             Sql += "FROM "
             Sql += "public"
             Sql += "."
@@ -403,26 +430,126 @@ Public Class Supplier
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-            TxtCompanyCode.Text = ds.Tables(RS).Rows(0)("会社コード")
-            TxtSupplierCode.Text = ds.Tables(RS).Rows(0)("仕入先コード")
-            TxtSupplierName.Text = ds.Tables(RS).Rows(0)("仕入先名")
-            TxtSupplierShortName.Text = ds.Tables(RS).Rows(0)("仕入先名略称")
-            TxtPostalCode.Text = ds.Tables(RS).Rows(0)("郵便番号")
-            TxtAddress1.Text = ds.Tables(RS).Rows(0)("住所１")
-            TxtAddress2.Text = ds.Tables(RS).Rows(0)("住所２")
-            TxtAddress3.Text = ds.Tables(RS).Rows(0)("住所３")
-            TxtTel.Text = ds.Tables(RS).Rows(0)("電話番号")
-            TxtTelSearch.Text = ds.Tables(RS).Rows(0)("電話番号検索用")
-            TxtFax.Text = ds.Tables(RS).Rows(0)("ＦＡＸ番号")
-            TxtPerson.Text = ds.Tables(RS).Rows(0)("担当者名")
-            TxtPosition.Text = ds.Tables(RS).Rows(0)("担当者役職")
-            TxtCosts.Text = ds.Tables(RS).Rows(0)("既定間接費率")
-            TxtMemo.Text = ds.Tables(RS).Rows(0)("メモ")
-            TxtBankCode.Text = ds.Tables(RS).Rows(0)("銀行コード")
-            TxtBranchOfficeCode.Text = ds.Tables(RS).Rows(0)("支店コード")
-            TxtDepositCategory.Text = ds.Tables(RS).Rows(0)("預金種目")
-            TxtAccountNumber.Text = ds.Tables(RS).Rows(0)("口座番号")
-            TxtAccountName.Text = ds.Tables(RS).Rows(0)("口座名義")
+            If ds.Tables(RS).Rows(0)("会社コード") Is DBNull.Value Then
+            Else
+                TxtCompanyCode.Text = ds.Tables(RS).Rows(0)("会社コード")
+            End If
+
+            If ds.Tables(RS).Rows(0)("仕入先コード") Is DBNull.Value Then
+            Else
+                TxtSupplierCode.Text = ds.Tables(RS).Rows(0)("仕入先コード")
+            End If
+
+            If ds.Tables(RS).Rows(0)("仕入先名") Is DBNull.Value Then
+            Else
+                TxtSupplierName.Text = ds.Tables(RS).Rows(0)("仕入先名")
+            End If
+
+            If ds.Tables(RS).Rows(0)("仕入先名略称") Is DBNull.Value Then
+            Else
+                TxtSupplierShortName.Text = ds.Tables(RS).Rows(0)("仕入先名略称")
+            End If
+
+            If ds.Tables(RS).Rows(0)("郵便番号") Is DBNull.Value Then
+            Else
+                TxtPostalCode.Text = ds.Tables(RS).Rows(0)("郵便番号")
+            End If
+
+            If ds.Tables(RS).Rows(0)("住所１") Is DBNull.Value Then
+            Else
+                TxtAddress1.Text = ds.Tables(RS).Rows(0)("住所１")
+            End If
+
+            If ds.Tables(RS).Rows(0)("住所２") Is DBNull.Value Then
+            Else
+                TxtAddress2.Text = ds.Tables(RS).Rows(0)("住所２")
+            End If
+
+            If ds.Tables(RS).Rows(0)("住所３") Is DBNull.Value Then
+            Else
+                TxtAddress3.Text = ds.Tables(RS).Rows(0)("住所３")
+            End If
+
+            If ds.Tables(RS).Rows(0)("電話番号") Is DBNull.Value Then
+            Else
+                TxtTel.Text = ds.Tables(RS).Rows(0)("電話番号")
+            End If
+
+            If ds.Tables(RS).Rows(0)("電話番号検索用") Is DBNull.Value Then
+            Else
+                TxtTelSearch.Text = ds.Tables(RS).Rows(0)("電話番号検索用")
+            End If
+
+            If ds.Tables(RS).Rows(0)("ＦＡＸ番号") Is DBNull.Value Then
+            Else
+                TxtFax.Text = ds.Tables(RS).Rows(0)("ＦＡＸ番号")
+            End If
+
+            If ds.Tables(RS).Rows(0)("担当者名") Is DBNull.Value Then
+            Else
+                TxtPerson.Text = ds.Tables(RS).Rows(0)("担当者名")
+            End If
+
+            If ds.Tables(RS).Rows(0)("担当者役職") Is DBNull.Value Then
+            Else
+                TxtPosition.Text = ds.Tables(RS).Rows(0)("担当者役職")
+            End If
+
+            If ds.Tables(RS).Rows(0)("関税率") Is DBNull.Value Then
+            Else
+                TxtTariffRate.Text = ds.Tables(RS).Rows(0)("関税率")
+            End If
+
+            If ds.Tables(RS).Rows(0)("前払法人税率") Is DBNull.Value Then
+            Else
+                TxtPph.Text = ds.Tables(RS).Rows(0)("前払法人税率")
+            End If
+
+            If ds.Tables(RS).Rows(0)("輸送費率") Is DBNull.Value Then
+            Else
+                TxtTransportationCost.Text = ds.Tables(RS).Rows(0)("輸送費率")
+            End If
+
+            If ds.Tables(RS).Rows(0)("メモ") Is DBNull.Value Then
+            Else
+                TxtMemo.Text = ds.Tables(RS).Rows(0)("メモ")
+            End If
+
+            If ds.Tables(RS).Rows(0)("銀行名") Is DBNull.Value Then
+            Else
+                TxtBankName.Text = ds.Tables(RS).Rows(0)("銀行名")
+            End If
+
+            If ds.Tables(RS).Rows(0)("銀行コード") Is DBNull.Value Then
+            Else
+                TxtBankCode.Text = ds.Tables(RS).Rows(0)("銀行コード")
+            End If
+
+            If ds.Tables(RS).Rows(0)("支店名") Is DBNull.Value Then
+            Else
+                TxtBranchName.Text = ds.Tables(RS).Rows(0)("支店名")
+            End If
+
+            If ds.Tables(RS).Rows(0)("支店コード") Is DBNull.Value Then
+            Else
+                TxtBranchOfficeCode.Text = ds.Tables(RS).Rows(0)("支店コード")
+            End If
+
+            If ds.Tables(RS).Rows(0)("預金種目") Is DBNull.Value Then
+            Else
+                TxtDepositCategory.Text = ds.Tables(RS).Rows(0)("預金種目")
+            End If
+
+            If ds.Tables(RS).Rows(0)("口座番号") Is DBNull.Value Then
+            Else
+                TxtAccountNumber.Text = ds.Tables(RS).Rows(0)("口座番号")
+            End If
+
+            If ds.Tables(RS).Rows(0)("口座名義") Is DBNull.Value Then
+            Else
+                TxtAccountName.Text = ds.Tables(RS).Rows(0)("口座名義")
+            End If
+
         End If
     End Sub
 End Class

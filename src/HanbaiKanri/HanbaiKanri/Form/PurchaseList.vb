@@ -90,7 +90,9 @@ Public Class PurchaseList
                 Dim reccnt As Integer = 0
                 ds = _db.selectDB(Sql, RS, reccnt)
                 DgvHtyhd.Columns.Add("仕入番号", "仕入番号")
+                DgvHtyhd.Columns.Add("客先番号", "客先番号")
                 DgvHtyhd.Columns.Add("仕入日", "仕入日")
+
                 DgvHtyhd.Columns.Add("発注番号", "発注番号")
                 DgvHtyhd.Columns.Add("発注番号枝番", "発注番号枝番")
                 DgvHtyhd.Columns.Add("仕入先コード", "仕入先コード")
@@ -113,6 +115,7 @@ Public Class PurchaseList
                 For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
                     DgvHtyhd.Rows.Add()
                     DgvHtyhd.Rows(index).Cells("仕入番号").Value = ds.Tables(RS).Rows(index)("仕入番号")
+                    DgvHtyhd.Rows(index).Cells("客先番号").Value = ds.Tables(RS).Rows(index)("客先番号")
                     DgvHtyhd.Rows(index).Cells("発注番号").Value = ds.Tables(RS).Rows(index)("発注番号")
                     DgvHtyhd.Rows(index).Cells("発注番号枝番").Value = ds.Tables(RS).Rows(index)("発注番号枝番")
                     DgvHtyhd.Rows(index).Cells("仕入日").Value = ds.Tables(RS).Rows(index)("仕入日")
@@ -152,6 +155,7 @@ Public Class PurchaseList
                 Dim reccnt As Integer = 0
                 ds = _db.selectDB(Sql, RS, reccnt)
                 DgvHtyhd.Columns.Add("仕入番号", "仕入番号")
+                DgvHtyhd.Columns.Add("客先番号", "客先番号")
                 DgvHtyhd.Columns.Add("仕入日", "仕入日")
                 DgvHtyhd.Columns.Add("発注番号", "発注番号")
                 DgvHtyhd.Columns.Add("発注番号枝番", "発注番号枝番")
@@ -175,6 +179,8 @@ Public Class PurchaseList
                 For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
                     DgvHtyhd.Rows.Add()
                     DgvHtyhd.Rows(index).Cells("仕入番号").Value = ds.Tables(RS).Rows(index)("仕入番号")
+                    DgvHtyhd.Rows(index).Cells("客先番号").Value = ds.Tables(RS).Rows(index)("客先番号")
+                    DgvHtyhd.Rows(index).Cells("仕入日").Value = ds.Tables(RS).Rows(index)("仕入日")
                     DgvHtyhd.Rows(index).Cells("発注番号").Value = ds.Tables(RS).Rows(index)("発注番号")
                     DgvHtyhd.Rows(index).Cells("発注番号枝番").Value = ds.Tables(RS).Rows(index)("発注番号枝番")
                     DgvHtyhd.Rows(index).Cells("仕入日").Value = ds.Tables(RS).Rows(index)("仕入日")
@@ -263,6 +269,7 @@ Public Class PurchaseList
             ds = _db.selectDB(Sql, RS, reccnt)
 
             DgvHtyhd.Columns.Add("仕入番号", "仕入番号")
+            DgvHtyhd.Columns.Add("客先番号", "客先番号")
             DgvHtyhd.Columns.Add("仕入日", "仕入日")
             DgvHtyhd.Columns.Add("発注番号", "発注番号")
             DgvHtyhd.Columns.Add("発注番号枝番", "発注番号枝番")
@@ -286,6 +293,8 @@ Public Class PurchaseList
             For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
                 DgvHtyhd.Rows.Add()
                 DgvHtyhd.Rows(index).Cells("仕入番号").Value = ds.Tables(RS).Rows(index)("仕入番号")
+                DgvHtyhd.Rows(index).Cells("客先番号").Value = ds.Tables(RS).Rows(index)("客先番号")
+                DgvHtyhd.Rows(index).Cells("仕入日").Value = ds.Tables(RS).Rows(index)("仕入日")
                 DgvHtyhd.Rows(index).Cells("発注番号").Value = ds.Tables(RS).Rows(index)("発注番号")
                 DgvHtyhd.Rows(index).Cells("発注番号枝番").Value = ds.Tables(RS).Rows(index)("発注番号枝番")
                 DgvHtyhd.Rows(index).Cells("仕入日").Value = ds.Tables(RS).Rows(index)("仕入日")
@@ -625,12 +634,34 @@ Public Class PurchaseList
                     count += 1
                 End If
             End If
+            If TxtCustomerPO.Text = "" Then
+            Else
+                If count > 0 Then
+                    Sql += " AND "
+                    Sql += "客先番号"
+                    Sql += " ILIKE "
+                    Sql += "'%"
+                    Sql += TxtCustomerPO.Text
+                    Sql += "%'"
+                Else
+                    Sql += " WHERE "
+                    Sql += "客先番号"
+                    Sql += " ILIKE "
+                    Sql += "'%"
+                    Sql += TxtCustomerPO.Text
+                    Sql += "%'"
+                    count += 1
+                End If
+            End If
 
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
 
             DgvHtyhd.Columns.Add("仕入番号", "仕入番号")
+            DgvHtyhd.Columns.Add("客先番号", "客先番号")
             DgvHtyhd.Columns.Add("仕入日", "仕入日")
+            DgvHtyhd.Columns.Add("発注番号", "発注番号")
+            DgvHtyhd.Columns.Add("発注番号枝番", "発注番号枝番")
             DgvHtyhd.Columns.Add("仕入先コード", "仕入先コード")
             DgvHtyhd.Columns.Add("仕入先名", "仕入先名")
             DgvHtyhd.Columns.Add("仕入先郵便番号", "仕入先郵便番号")
@@ -653,22 +684,26 @@ Public Class PurchaseList
 
             For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
                 DgvHtyhd.Rows.Add()
-                DgvHtyhd.Rows(index).Cells(0).Value = ds.Tables(RS).Rows(index)("仕入番号")
-                DgvHtyhd.Rows(index).Cells(2).Value = ds.Tables(RS).Rows(index)("仕入日")
-                DgvHtyhd.Rows(index).Cells(3).Value = ds.Tables(RS).Rows(index)("仕入先コード")
-                DgvHtyhd.Rows(index).Cells(4).Value = ds.Tables(RS).Rows(index)("仕入先名")
-                DgvHtyhd.Rows(index).Cells(5).Value = ds.Tables(RS).Rows(index)("仕入先郵便番号")
-                DgvHtyhd.Rows(index).Cells(6).Value = ds.Tables(RS).Rows(index)("仕入先住所")
-                DgvHtyhd.Rows(index).Cells(7).Value = ds.Tables(RS).Rows(index)("仕入先電話番号")
-                DgvHtyhd.Rows(index).Cells(8).Value = ds.Tables(RS).Rows(index)("仕入先ＦＡＸ")
-                DgvHtyhd.Rows(index).Cells(9).Value = ds.Tables(RS).Rows(index)("仕入先担当者名")
-                DgvHtyhd.Rows(index).Cells(10).Value = ds.Tables(RS).Rows(index)("仕入先担当者役職")
-                DgvHtyhd.Rows(index).Cells(11).Value = ds.Tables(RS).Rows(index)("仕入金額")
-                DgvHtyhd.Rows(index).Cells(12).Value = ds.Tables(RS).Rows(index)("支払条件")
-                DgvHtyhd.Rows(index).Cells(13).Value = ds.Tables(RS).Rows(index)("営業担当者")
-                DgvHtyhd.Rows(index).Cells(14).Value = ds.Tables(RS).Rows(index)("入力担当者")
-                DgvHtyhd.Rows(index).Cells(15).Value = ds.Tables(RS).Rows(index)("備考")
-                DgvHtyhd.Rows(index).Cells(16).Value = ds.Tables(RS).Rows(index)("登録日")
+                DgvHtyhd.Rows(index).Cells("仕入番号").Value = ds.Tables(RS).Rows(index)("仕入番号")
+                DgvHtyhd.Rows(index).Cells("客先番号").Value = ds.Tables(RS).Rows(index)("客先番号")
+                DgvHtyhd.Rows(index).Cells("仕入日").Value = ds.Tables(RS).Rows(index)("仕入日")
+                DgvHtyhd.Rows(index).Cells("発注番号").Value = ds.Tables(RS).Rows(index)("発注番号")
+                DgvHtyhd.Rows(index).Cells("発注番号枝番").Value = ds.Tables(RS).Rows(index)("発注番号枝番")
+                DgvHtyhd.Rows(index).Cells("仕入日").Value = ds.Tables(RS).Rows(index)("仕入日")
+                DgvHtyhd.Rows(index).Cells("仕入先コード").Value = ds.Tables(RS).Rows(index)("仕入先コード")
+                DgvHtyhd.Rows(index).Cells("仕入先名").Value = ds.Tables(RS).Rows(index)("仕入先名")
+                DgvHtyhd.Rows(index).Cells("仕入先郵便番号").Value = ds.Tables(RS).Rows(index)("仕入先郵便番号")
+                DgvHtyhd.Rows(index).Cells("仕入先住所").Value = ds.Tables(RS).Rows(index)("仕入先住所")
+                DgvHtyhd.Rows(index).Cells("仕入先電話番号").Value = ds.Tables(RS).Rows(index)("仕入先電話番号")
+                DgvHtyhd.Rows(index).Cells("仕入先ＦＡＸ").Value = ds.Tables(RS).Rows(index)("仕入先ＦＡＸ")
+                DgvHtyhd.Rows(index).Cells("仕入先担当者名").Value = ds.Tables(RS).Rows(index)("仕入先担当者名")
+                DgvHtyhd.Rows(index).Cells("仕入先担当者役職").Value = ds.Tables(RS).Rows(index)("仕入先担当者役職")
+                DgvHtyhd.Rows(index).Cells("仕入金額").Value = ds.Tables(RS).Rows(index)("仕入金額")
+                DgvHtyhd.Rows(index).Cells("支払条件").Value = ds.Tables(RS).Rows(index)("支払条件")
+                DgvHtyhd.Rows(index).Cells("営業担当者").Value = ds.Tables(RS).Rows(index)("営業担当者")
+                DgvHtyhd.Rows(index).Cells("入力担当者").Value = ds.Tables(RS).Rows(index)("入力担当者")
+                DgvHtyhd.Rows(index).Cells("備考").Value = ds.Tables(RS).Rows(index)("備考")
+                DgvHtyhd.Rows(index).Cells("登録日").Value = ds.Tables(RS).Rows(index)("登録日")
             Next
 
         Catch ue As UsrDefException

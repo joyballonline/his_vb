@@ -248,30 +248,61 @@ Public Class Hanyo
                 Sql += " = '"
                 Sql += TxtChar6.Text
                 Sql += "', "
+
                 Sql += "数値１"
                 Sql += " = '"
-                Sql += TxtNum1.Text
+                If TxtNum1.Text = "" Then
+                    Sql += "0"
+                Else
+                    Sql += TxtNum1.Text
+                End If
                 Sql += "', "
+
                 Sql += "数値２"
                 Sql += " = '"
-                Sql += TxtNum2.Text
+                If TxtNum2.Text = "" Then
+                    Sql += "0"
+                Else
+                    Sql += TxtNum2.Text
+                End If
                 Sql += "', "
+
                 Sql += "数値３"
                 Sql += " = '"
-                Sql += TxtNum3.Text
+                If TxtNum3.Text = "" Then
+                    Sql += "0"
+                Else
+                    Sql += TxtNum3.Text
+                End If
                 Sql += "', "
+
                 Sql += "数値４"
                 Sql += " = '"
-                Sql += TxtNum4.Text
+                If TxtNum4.Text = "" Then
+                    Sql += "0"
+                Else
+                    Sql += TxtNum4.Text
+                End If
                 Sql += "', "
+
                 Sql += "数値５"
                 Sql += " = '"
-                Sql += TxtNum5.Text
+                If TxtNum5.Text = "" Then
+                    Sql += "0"
+                Else
+                    Sql += TxtNum5.Text
+                End If
                 Sql += "', "
+
                 Sql += "数値６"
                 Sql += " = '"
-                Sql += TxtNum6.Text
+                If TxtNum6.Text = "" Then
+                    Sql += "0"
+                Else
+                    Sql += TxtNum6.Text
+                End If
                 Sql += "', "
+
                 Sql += "メモ"
                 Sql += " = '"
                 Sql += TxtMemo.Text
@@ -358,25 +389,7 @@ Public Class Hanyo
         If _status = "EDIT" Then
             Dim Sql As String = ""
             Sql += "SELECT "
-            Sql += "会社コード, "
-            Sql += "固定キー, "
-            Sql += "可変キー, "
-            Sql += "表示順, "
-            Sql += "文字１, "
-            Sql += "文字２, "
-            Sql += "文字３, "
-            Sql += "文字４, "
-            Sql += "文字５, "
-            Sql += "文字６, "
-            Sql += "数値１, "
-            Sql += "数値２, "
-            Sql += "数値３, "
-            Sql += "数値４, "
-            Sql += "数値５, "
-            Sql += "数値６, "
-            Sql += "メモ, "
-            Sql += "更新者, "
-            Sql += "更新日 "
+            Sql += "* "
             Sql += "FROM "
             Sql += "public"
             Sql += "."
@@ -403,23 +416,85 @@ Public Class Hanyo
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-            TxtFixedKey.Text = ds.Tables(RS).Rows(0)("固定キー")
-            TxtVariableKey.Text = ds.Tables(RS).Rows(0)("可変キー")
-            TxtDisplayOrder.Text = ds.Tables(RS).Rows(0)("表示順")
-            TxtChar1.Text = ds.Tables(RS).Rows(0)("文字１")
-            TxtChar2.Text = ds.Tables(RS).Rows(0)("文字２")
-            TxtChar3.Text = ds.Tables(RS).Rows(0)("文字３")
-            txtChar4.Text = ds.Tables(RS).Rows(0)("文字４")
-            TxtChar5.Text = ds.Tables(RS).Rows(0)("文字５")
-            TxtChar6.Text = ds.Tables(RS).Rows(0)("文字６")
-            TxtNum1.Text = ds.Tables(RS).Rows(0)("数値１")
-            TxtNum2.Text = ds.Tables(RS).Rows(0)("数値２")
-            TxtNum3.Text = ds.Tables(RS).Rows(0)("数値３")
-            TxtNum4.Text = ds.Tables(RS).Rows(0)("数値４")
-            TxtNum5.Text = ds.Tables(RS).Rows(0)("数値５")
-            TxtNum6.Text = ds.Tables(RS).Rows(0)("数値６")
-            TxtMemo.Text = ds.Tables(RS).Rows(0)("メモ")
+            If ds.Tables(RS).Rows(0)("固定キー") Is DBNull.Value Then
+            Else
+                TxtFixedKey.Text = ds.Tables(RS).Rows(0)("固定キー")
+            End If
 
+            If ds.Tables(RS).Rows(0)("可変キー") Is DBNull.Value Then
+            Else
+                TxtVariableKey.Text = ds.Tables(RS).Rows(0)("可変キー")
+            End If
+
+            If ds.Tables(RS).Rows(0)("表示順") Is DBNull.Value Then
+            Else
+                TxtDisplayOrder.Text = ds.Tables(RS).Rows(0)("表示順")
+            End If
+
+            If ds.Tables(RS).Rows(0)("文字１") Is DBNull.Value Then
+            Else
+                TxtChar1.Text = ds.Tables(RS).Rows(0)("文字１")
+            End If
+
+            If ds.Tables(RS).Rows(0)("文字２") Is DBNull.Value Then
+            Else
+                TxtChar2.Text = ds.Tables(RS).Rows(0)("文字２")
+            End If
+
+            If ds.Tables(RS).Rows(0)("文字３") Is DBNull.Value Then
+            Else
+                TxtChar3.Text = ds.Tables(RS).Rows(0)("文字３")
+            End If
+
+            If ds.Tables(RS).Rows(0)("文字４") Is DBNull.Value Then
+            Else
+                txtChar4.Text = ds.Tables(RS).Rows(0)("文字４")
+            End If
+
+            If ds.Tables(RS).Rows(0)("文字５") Is DBNull.Value Then
+            Else
+                TxtChar5.Text = ds.Tables(RS).Rows(0)("文字５")
+            End If
+
+            If ds.Tables(RS).Rows(0)("文字６") Is DBNull.Value Then
+            Else
+                TxtChar6.Text = ds.Tables(RS).Rows(0)("文字６")
+            End If
+
+            If ds.Tables(RS).Rows(0)("数値１") Is DBNull.Value Then
+            Else
+                TxtNum1.Text = ds.Tables(RS).Rows(0)("数値１")
+            End If
+
+            If ds.Tables(RS).Rows(0)("数値２") Is DBNull.Value Then
+            Else
+                TxtNum2.Text = ds.Tables(RS).Rows(0)("数値２")
+            End If
+
+            If ds.Tables(RS).Rows(0)("数値３") Is DBNull.Value Then
+            Else
+                TxtNum3.Text = ds.Tables(RS).Rows(0)("数値３")
+            End If
+
+            If ds.Tables(RS).Rows(0)("数値４") Is DBNull.Value Then
+            Else
+                TxtNum4.Text = ds.Tables(RS).Rows(0)("数値４")
+            End If
+
+            If ds.Tables(RS).Rows(0)("数値５") Is DBNull.Value Then
+            Else
+                TxtNum5.Text = ds.Tables(RS).Rows(0)("数値５")
+            End If
+
+            If ds.Tables(RS).Rows(0)("数値６") Is DBNull.Value Then
+            Else
+                TxtNum6.Text = ds.Tables(RS).Rows(0)("数値６")
+            End If
+
+            If ds.Tables(RS).Rows(0)("メモ") Is DBNull.Value Then
+            Else
+                TxtMemo.Text = ds.Tables(RS).Rows(0)("メモ")
+            End If
         End If
     End Sub
 End Class

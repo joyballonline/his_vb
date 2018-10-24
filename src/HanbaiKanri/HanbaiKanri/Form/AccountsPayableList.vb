@@ -92,6 +92,7 @@ Public Class AccountsPayableList
                 DgvBilling.Columns.Add("買掛番号", "買掛番号")
                 DgvBilling.Columns.Add("買掛区分", "買掛区分")
                 DgvBilling.Columns.Add("買掛日", "買掛日")
+                DgvBilling.Columns.Add("客先番号", "客先番号")
                 DgvBilling.Columns.Add("発注番号", "発注番号")
                 DgvBilling.Columns.Add("発注番号枝番", "発注番号枝番")
                 DgvBilling.Columns.Add("仕入先コード", "仕入先コード")
@@ -111,6 +112,7 @@ Public Class AccountsPayableList
                     DgvBilling.Rows(index).Cells("買掛番号").Value = ds.Tables(RS).Rows(index)("買掛番号")
                     DgvBilling.Rows(index).Cells("買掛区分").Value = ds.Tables(RS).Rows(index)("買掛区分")
                     DgvBilling.Rows(index).Cells("買掛日").Value = ds.Tables(RS).Rows(index)("買掛日")
+                    DgvBilling.Rows(index).Cells("客先番号").Value = ds.Tables(RS).Rows(index)("客先番号")
                     DgvBilling.Rows(index).Cells("発注番号").Value = ds.Tables(RS).Rows(index)("発注番号")
                     DgvBilling.Rows(index).Cells("発注番号枝番").Value = ds.Tables(RS).Rows(index)("発注番号枝番")
                     DgvBilling.Rows(index).Cells("仕入先コード").Value = ds.Tables(RS).Rows(index)("仕入先コード")
@@ -145,6 +147,7 @@ Public Class AccountsPayableList
                 DgvBilling.Columns.Add("買掛番号", "買掛番号")
                 DgvBilling.Columns.Add("買掛区分", "買掛区分")
                 DgvBilling.Columns.Add("買掛日", "買掛日")
+                DgvBilling.Columns.Add("客先番号", "客先番号")
                 DgvBilling.Columns.Add("発注番号", "発注番号")
                 DgvBilling.Columns.Add("発注番号枝番", "発注番号枝番")
                 DgvBilling.Columns.Add("仕入先コード", "仕入先コード")
@@ -164,6 +167,7 @@ Public Class AccountsPayableList
                     DgvBilling.Rows(index).Cells("買掛番号").Value = ds.Tables(RS).Rows(index)("買掛番号")
                     DgvBilling.Rows(index).Cells("買掛区分").Value = ds.Tables(RS).Rows(index)("買掛区分")
                     DgvBilling.Rows(index).Cells("買掛日").Value = ds.Tables(RS).Rows(index)("買掛日")
+                    DgvBilling.Rows(index).Cells("客先番号").Value = ds.Tables(RS).Rows(index)("客先番号")
                     DgvBilling.Rows(index).Cells("発注番号").Value = ds.Tables(RS).Rows(index)("発注番号")
                     DgvBilling.Rows(index).Cells("発注番号枝番").Value = ds.Tables(RS).Rows(index)("発注番号枝番")
                     DgvBilling.Rows(index).Cells("仕入先コード").Value = ds.Tables(RS).Rows(index)("仕入先コード")
@@ -550,6 +554,25 @@ Public Class AccountsPayableList
                     End If
                 End If
             End If
+            If TxtCustomerPO.Text = "" Then
+            Else
+                If count > 0 Then
+                    Sql += " AND "
+                    Sql += "客先番号"
+                    Sql += " ILIKE "
+                    Sql += "'%"
+                    Sql += TxtCustomerPO.Text
+                    Sql += "%'"
+                Else
+                    Sql += " WHERE "
+                    Sql += "客先番号"
+                    Sql += " ILIKE "
+                    Sql += "'%"
+                    Sql += TxtCustomerPO.Text
+                    Sql += "%'"
+                    count += 1
+                End If
+            End If
 
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
@@ -557,6 +580,7 @@ Public Class AccountsPayableList
             DgvBilling.Columns.Add("買掛番号", "買掛番号")
             DgvBilling.Columns.Add("買掛区分", "買掛区分")
             DgvBilling.Columns.Add("買掛日", "買掛日")
+            DgvBilling.Columns.Add("客先番号", "客先番号")
             DgvBilling.Columns.Add("発注番号", "発注番号")
             DgvBilling.Columns.Add("発注番号枝番", "発注番号枝番")
             DgvBilling.Columns.Add("仕入先コード", "仕入先コード")
@@ -579,6 +603,7 @@ Public Class AccountsPayableList
                 DgvBilling.Rows(index).Cells("買掛番号").Value = ds.Tables(RS).Rows(index)("買掛番号")
                 DgvBilling.Rows(index).Cells("買掛区分").Value = ds.Tables(RS).Rows(index)("買掛区分")
                 DgvBilling.Rows(index).Cells("買掛日").Value = ds.Tables(RS).Rows(index)("買掛日")
+                DgvBilling.Rows(index).Cells("客先番号").Value = ds.Tables(RS).Rows(index)("客先番号")
                 DgvBilling.Rows(index).Cells("発注番号").Value = ds.Tables(RS).Rows(index)("発注番号")
                 DgvBilling.Rows(index).Cells("発注番号枝番").Value = ds.Tables(RS).Rows(index)("発注番号枝番")
                 DgvBilling.Rows(index).Cells("仕入先コード").Value = ds.Tables(RS).Rows(index)("仕入先コード")

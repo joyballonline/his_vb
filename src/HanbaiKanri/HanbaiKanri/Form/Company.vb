@@ -71,6 +71,35 @@ Public Class Company
 
     End Sub
 
+    Public Class ComboBoxItem
+
+        Private m_id As String = ""
+        Private m_name As String = ""
+
+        '実際の値
+        '（ValueMemberに設定する文字列と同名にする）
+        Public Property ID() As String
+            Set(ByVal value As String)
+                m_id = value
+            End Set
+            Get
+                Return m_id
+            End Get
+        End Property
+
+        '表示名称
+        '（DisplayMemberに設定する文字列と同名にする）
+        Public Property NAME() As String
+            Set(ByVal value As String)
+                m_name = value
+            End Set
+            Get
+                Return m_name
+            End Get
+        End Property
+
+    End Class
+
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
         Dim MC As MstCompany
         MC = New MstCompany(_msgHd, _db, _langHd)
@@ -88,7 +117,7 @@ Public Class Company
                 Sql += "INSERT INTO "
                 Sql += "Public."
                 Sql += "m01_company("
-                Sql += "会社コード, 会社名, 会社略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, ＦＡＸ番号, 代表者役職, 代表者名, 表示順, 備考, 銀行コード, 支店コード, 預金種目, 口座番号, 口座名義, 更新者, 更新日)"
+                Sql += "会社コード, 会社名, 会社略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, ＦＡＸ番号, 代表者役職, 代表者名, 表示順, 備考, 銀行名, 銀行コード, 支店名, 支店コード, 預金種目, 口座番号, 口座名義, 在庫単価評価法, 前払法人税率, 更新者, 更新日)"
                 Sql += " VALUES('"
                 Sql += TxtCompanyCode.Text
                 Sql += "', '"
@@ -121,7 +150,11 @@ Public Class Company
                 Sql += "', '"
                 Sql += TxtRemarks.Text
                 Sql += "', '"
+                Sql += TxtBankName.Text
+                Sql += "', '"
                 Sql += TxtBankCode.Text
+                Sql += "', '"
+                Sql += TxtBranchName.Text
                 Sql += "', '"
                 Sql += TxtBranchOfficeCode.Text
                 Sql += "', '"
@@ -130,6 +163,10 @@ Public Class Company
                 Sql += TxtAccountNumber.Text
                 Sql += "', '"
                 Sql += TxtAccountName.Text
+                Sql += "', '"
+                Sql += CbEvaluation.SelectedValue.ToString
+                Sql += "', '"
+                Sql += TxtPph.Text
                 Sql += "', '"
                 Sql += frmC01F10_Login.loginValue.TantoNM
                 Sql += "', '"
@@ -159,7 +196,11 @@ Public Class Company
                 Sql += ", "
                 Sql += "備考"
                 Sql += ", "
+                Sql += "銀行名"
+                Sql += ", "
                 Sql += "銀行コード"
+                Sql += ", "
+                Sql += "支店名"
                 Sql += ", "
                 Sql += "支店コード"
                 Sql += ", "
@@ -168,6 +209,10 @@ Public Class Company
                 Sql += "口座番号"
                 Sql += ", "
                 Sql += "口座名義"
+                Sql += ", "
+                Sql += "在庫単価評価法"
+                Sql += ", "
+                Sql += "前払法人税率"
                 Sql += ", "
                 Sql += "更新者"
                 Sql += ", "
@@ -234,9 +279,17 @@ Public Class Company
                 Sql += " = '"
                 Sql += TxtRemarks.Text
                 Sql += "', "
+                Sql += "銀行名"
+                Sql += " = '"
+                Sql += TxtBankName.Text
+                Sql += "', "
                 Sql += "銀行コード"
                 Sql += " = '"
                 Sql += TxtBankCode.Text
+                Sql += "', "
+                Sql += "支店名"
+                Sql += " = '"
+                Sql += TxtBranchName.Text
                 Sql += "', "
                 Sql += "支店コード"
                 Sql += " = '"
@@ -253,6 +306,14 @@ Public Class Company
                 Sql += "口座名義"
                 Sql += " = '"
                 Sql += TxtAccountName.Text
+                Sql += "', "
+                Sql += "在庫単価評価法"
+                Sql += " = '"
+                Sql += CbEvaluation.SelectedValue.ToString
+                Sql += "', "
+                Sql += "前払法人税率"
+                Sql += " = '"
+                Sql += TxtPph.Text
                 Sql += "', "
                 Sql += "更新者"
                 Sql += " = '"
@@ -293,7 +354,11 @@ Public Class Company
                 Sql += ", "
                 Sql += "備考"
                 Sql += ", "
+                Sql += "銀行名"
+                Sql += ", "
                 Sql += "銀行コード"
+                Sql += ", "
+                Sql += "支店名"
                 Sql += ", "
                 Sql += "支店コード"
                 Sql += ", "
@@ -302,6 +367,10 @@ Public Class Company
                 Sql += "口座番号"
                 Sql += ", "
                 Sql += "口座名義"
+                Sql += ", "
+                Sql += "在庫単価評価法"
+                Sql += ", "
+                Sql += "前払法人税率"
                 Sql += ", "
                 Sql += "更新者"
                 Sql += ", "
@@ -325,30 +394,50 @@ Public Class Company
     End Sub
 
     Private Sub Company_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim Sql1 As String = ""
+
+        Sql1 += "SELECT "
+        Sql1 += "* "
+        Sql1 += "FROM "
+        Sql1 += "public"
+        Sql1 += "."
+        Sql1 += "m90_hanyo"
+        Sql1 += " WHERE "
+        Sql1 += "会社コード"
+        Sql1 += " ILIKE "
+        Sql1 += "'"
+        Sql1 += frmC01F10_Login.loginValue.BumonNM
+        Sql1 += "'"
+        Sql1 += " AND "
+        Sql1 += "固定キー"
+        Sql1 += " ILIKE "
+        Sql1 += "'"
+        Sql1 += "3"
+        Sql1 += "'"
+
+        Dim reccnt As Integer = 0
+        Dim ds1 As DataSet = _db.selectDB(Sql1, RS, reccnt)
+
+        Dim EvaluationCount As Integer = ds1.Tables(RS).Rows.Count - 1
+        Dim Evaluation(EvaluationCount) As ComboBoxItem
+
+        For i As Integer = 0 To ds1.Tables(RS).Rows.Count - 1
+            Evaluation(i) = New ComboBoxItem
+            Evaluation(i).ID = (ds1.Tables(RS).Rows(i)("可変キー"))
+            Evaluation(i).NAME = (ds1.Tables(RS).Rows(i)("文字１"))
+        Next
+
+        CbEvaluation.DisplayMember = "NAME"
+        CbEvaluation.ValueMember = "ID"
+
+        CbEvaluation.DataSource = Evaluation
+        CbEvaluation.SelectedIndex = 0
+
         If _status = "EDIT" Then
             Dim Sql As String = ""
 
             Sql += "SELECT "
-            Sql += "会社コード, "
-            Sql += "会社名, "
-            Sql += "会社略称, "
-            Sql += "郵便番号, "
-            Sql += "住所１, "
-            Sql += "住所２, "
-            Sql += "住所３, "
-            Sql += "電話番号, "
-            Sql += "ＦＡＸ番号, "
-            Sql += "代表者役職, "
-            Sql += "代表者名, "
-            Sql += "表示順, "
-            Sql += "備考, "
-            Sql += "銀行コード, "
-            Sql += "支店コード, "
-            Sql += "預金種目, "
-            Sql += "口座番号, "
-            Sql += "口座名義, "
-            Sql += "更新者, "
-            Sql += "更新日 "
+            Sql += "* "
             Sql += "FROM "
             Sql += "public"
             Sql += "."
@@ -360,28 +449,120 @@ Public Class Company
             Sql += _companyCode
             Sql += "'"
 
-            Dim reccnt As Integer = 0
-            Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-            TxtCompanyCode.Text = ds.Tables(RS).Rows(0)("会社コード")
-            TxtCompanyName.Text = ds.Tables(RS).Rows(0)("会社名")
-            TxtCompanyShortName.Text = ds.Tables(RS).Rows(0)("会社略称")
-            TxtPostalCode.Text = ds.Tables(RS).Rows(0)("郵便番号")
-            TxtAddress1.Text = ds.Tables(RS).Rows(0)("住所１")
-            TxtAddress2.Text = ds.Tables(RS).Rows(0)("住所２")
-            TxtAddress3.Text = ds.Tables(RS).Rows(0)("住所３")
-            TxtTel.Text = ds.Tables(RS).Rows(0)("電話番号")
-            TxtFax.Text = ds.Tables(RS).Rows(0)("ＦＡＸ番号")
-            TxtRepresentativePosition.Text = ds.Tables(RS).Rows(0)("代表者役職")
-            TxtRepresentativeName.Text = ds.Tables(RS).Rows(0)("代表者名")
-            TxtDisplayOrder.Text = ds.Tables(RS).Rows(0)("表示順")
-            TxtRemarks.Text = ds.Tables(RS).Rows(0)("備考")
-            TxtBankCode.Text = ds.Tables(RS).Rows(0)("銀行コード")
-            TxtBranchOfficeCode.Text = ds.Tables(RS).Rows(0)("支店コード")
-            TxtDepositCategory.Text = ds.Tables(RS).Rows(0)("預金種目")
-            TxtAccountNumber.Text = ds.Tables(RS).Rows(0)("口座番号")
-            TxtAccountName.Text = ds.Tables(RS).Rows(0)("口座名義")
+            Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
+            If ds.Tables(RS).Rows(0)("会社コード") Is DBNull.Value Then
+            Else
+                TxtCompanyCode.Text = ds.Tables(RS).Rows(0)("会社コード")
+            End If
+
+            If ds.Tables(RS).Rows(0)("会社名") Is DBNull.Value Then
+            Else
+                TxtCompanyName.Text = ds.Tables(RS).Rows(0)("会社名")
+            End If
+
+            If ds.Tables(RS).Rows(0)("会社略称") Is DBNull.Value Then
+            Else
+                TxtCompanyShortName.Text = ds.Tables(RS).Rows(0)("会社略称")
+            End If
+
+            If ds.Tables(RS).Rows(0)("郵便番号") Is DBNull.Value Then
+            Else
+                TxtPostalCode.Text = ds.Tables(RS).Rows(0)("郵便番号")
+            End If
+
+            If ds.Tables(RS).Rows(0)("住所１") Is DBNull.Value Then
+            Else
+                TxtAddress1.Text = ds.Tables(RS).Rows(0)("住所１")
+            End If
+
+            If ds.Tables(RS).Rows(0)("住所２") Is DBNull.Value Then
+            Else
+                TxtAddress2.Text = ds.Tables(RS).Rows(0)("住所２")
+            End If
+
+            If ds.Tables(RS).Rows(0)("住所３") Is DBNull.Value Then
+            Else
+                TxtAddress3.Text = ds.Tables(RS).Rows(0)("住所３")
+            End If
+
+            If ds.Tables(RS).Rows(0)("電話番号") Is DBNull.Value Then
+            Else
+                TxtTel.Text = ds.Tables(RS).Rows(0)("電話番号")
+            End If
+
+            If ds.Tables(RS).Rows(0)("ＦＡＸ番号") Is DBNull.Value Then
+            Else
+                TxtFax.Text = ds.Tables(RS).Rows(0)("ＦＡＸ番号")
+            End If
+
+            If ds.Tables(RS).Rows(0)("代表者役職") Is DBNull.Value Then
+            Else
+                TxtRepresentativePosition.Text = ds.Tables(RS).Rows(0)("代表者役職")
+            End If
+
+            If ds.Tables(RS).Rows(0)("代表者名") Is DBNull.Value Then
+            Else
+                TxtRepresentativeName.Text = ds.Tables(RS).Rows(0)("代表者名")
+            End If
+
+            If ds.Tables(RS).Rows(0)("表示順") Is DBNull.Value Then
+            Else
+                TxtDisplayOrder.Text = ds.Tables(RS).Rows(0)("表示順")
+            End If
+
+            If ds.Tables(RS).Rows(0)("備考") Is DBNull.Value Then
+            Else
+                TxtRemarks.Text = ds.Tables(RS).Rows(0)("備考")
+            End If
+
+            If ds.Tables(RS).Rows(0)("銀行名") Is DBNull.Value Then
+            Else
+                TxtBankName.Text = ds.Tables(RS).Rows(0)("銀行名")
+            End If
+
+            If ds.Tables(RS).Rows(0)("銀行コード") Is DBNull.Value Then
+            Else
+                TxtBankCode.Text = ds.Tables(RS).Rows(0)("銀行コード")
+            End If
+
+            If ds.Tables(RS).Rows(0)("支店名") Is DBNull.Value Then
+            Else
+                TxtBranchName.Text = ds.Tables(RS).Rows(0)("支店名")
+            End If
+
+            If ds.Tables(RS).Rows(0)("支店コード") Is DBNull.Value Then
+            Else
+                TxtBranchOfficeCode.Text = ds.Tables(RS).Rows(0)("支店コード")
+            End If
+
+            If ds.Tables(RS).Rows(0)("預金種目") Is DBNull.Value Then
+            Else
+                TxtDepositCategory.Text = ds.Tables(RS).Rows(0)("預金種目")
+            End If
+
+            If ds.Tables(RS).Rows(0)("口座番号") Is DBNull.Value Then
+            Else
+                TxtAccountNumber.Text = ds.Tables(RS).Rows(0)("口座番号")
+            End If
+
+            If ds.Tables(RS).Rows(0)("口座名義") Is DBNull.Value Then
+            Else
+                TxtAccountName.Text = ds.Tables(RS).Rows(0)("口座名義")
+            End If
+
+            If ds.Tables(RS).Rows(0)("前払法人税率") Is DBNull.Value Then
+            Else
+                TxtPph.Text = ds.Tables(RS).Rows(0)("前払法人税率")
+            End If
+
+            If ds.Tables(RS).Rows(0)("在庫単価評価法") Is DBNull.Value Then
+            Else
+                Dim tmp = ds.Tables(RS).Rows(0)("在庫単価評価法").ToString
+                CbEvaluation.SelectedValue = tmp
+            End If
+
+
         End If
     End Sub
-
 End Class

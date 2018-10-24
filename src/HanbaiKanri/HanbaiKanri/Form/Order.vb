@@ -796,7 +796,12 @@ Public Class Order
                 Sql2 += "', '"
                 Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("数量").Value.ToString
                 Sql2 += "', '"
-                Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("間接費").Value.ToString
+
+                If DgvItemList.Rows(cymnhdIdx).Cells("間接費").Value.ToString = "" Then
+                    Sql2 += "0"
+                Else
+                    Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("間接費").Value.ToString
+                End If
                 Sql2 += "', '"
                 Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("売単価").Value.ToString
                 Sql2 += "', '"
@@ -880,6 +885,10 @@ Public Class Order
             Sql1 += "t10_cymnhd "
             Sql1 += "SET "
 
+            Sql1 += "客先番号"
+            Sql1 += " = '"
+            Sql1 += TxtCustomerPO.Text
+            Sql1 += "', "
             Sql1 += "備考"
             Sql1 += " = '"
             Sql1 += TxtOrderRemark.Text
@@ -917,6 +926,8 @@ Public Class Order
             Sql1 += "受注番号"
             Sql1 += ", "
             Sql1 += "受注番号枝番"
+            Sql1 += ", "
+            Sql1 += "客先番号"
             Sql1 += ", "
             Sql1 += "見積番号"
             Sql1 += ", "

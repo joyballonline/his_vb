@@ -1054,7 +1054,7 @@ Partial Class Cymn
         Me.LblCustmerPO.Name = "LblCustmerPO"
         Me.LblCustmerPO.Size = New System.Drawing.Size(110, 23)
         Me.LblCustmerPO.TabIndex = 121
-        Me.LblCustmerPO.Text = "客先PO"
+        Me.LblCustmerPO.Text = "客先番号"
         Me.LblCustmerPO.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Cymn

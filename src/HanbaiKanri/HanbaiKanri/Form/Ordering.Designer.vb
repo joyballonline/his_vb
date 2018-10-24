@@ -776,7 +776,7 @@ Partial Class Ordering
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(110, 23)
         Me.Label1.TabIndex = 303
-        Me.Label1.Text = "客先PO"
+        Me.Label1.Text = "客先番号"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Ordering

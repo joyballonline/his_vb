@@ -39,12 +39,6 @@ Partial Class AccountsPayable
         Me.LblNo2 = New System.Windows.Forms.Label()
         Me.TxtCount2 = New System.Windows.Forms.TextBox()
         Me.DgvCymn = New System.Windows.Forms.DataGridView()
-        Me.発注番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.発注日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.仕入先 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.発注金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.買掛金額計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.買掛残高 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LblAdd = New System.Windows.Forms.Label()
         Me.LblHistory = New System.Windows.Forms.Label()
         Me.LblCymndt = New System.Windows.Forms.Label()
@@ -76,6 +70,13 @@ Partial Class AccountsPayable
         Me.仕入単価 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.仕入金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LblMode = New System.Windows.Forms.Label()
+        Me.発注番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.発注日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入先 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.客先番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.発注金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.買掛金額計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.買掛残高 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DgvCymn, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvAdd, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvHistory, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -258,7 +259,7 @@ Partial Class AccountsPayable
         '
         Me.DgvCymn.AllowUserToAddRows = False
         Me.DgvCymn.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvCymn.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.発注番号, Me.発注日, Me.仕入先, Me.発注金額, Me.買掛金額計, Me.買掛残高})
+        Me.DgvCymn.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.発注番号, Me.発注日, Me.仕入先, Me.客先番号, Me.発注金額, Me.買掛金額計, Me.買掛残高})
         Me.DgvCymn.Location = New System.Drawing.Point(12, 9)
         Me.DgvCymn.Name = "DgvCymn"
         Me.DgvCymn.RowHeadersVisible = False
@@ -266,42 +267,6 @@ Partial Class AccountsPayable
         Me.DgvCymn.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvCymn.Size = New System.Drawing.Size(1053, 100)
         Me.DgvCymn.TabIndex = 273
-        '
-        '発注番号
-        '
-        Me.発注番号.HeaderText = "発注番号"
-        Me.発注番号.Name = "発注番号"
-        Me.発注番号.Width = 150
-        '
-        '発注日
-        '
-        Me.発注日.HeaderText = "発注日"
-        Me.発注日.Name = "発注日"
-        Me.発注日.Width = 150
-        '
-        '仕入先
-        '
-        Me.仕入先.HeaderText = "仕入先"
-        Me.仕入先.Name = "仕入先"
-        Me.仕入先.Width = 300
-        '
-        '発注金額
-        '
-        Me.発注金額.HeaderText = "発注金額"
-        Me.発注金額.Name = "発注金額"
-        Me.発注金額.Width = 150
-        '
-        '買掛金額計
-        '
-        Me.買掛金額計.HeaderText = "買掛金額計"
-        Me.買掛金額計.Name = "買掛金額計"
-        Me.買掛金額計.Width = 150
-        '
-        '買掛残高
-        '
-        Me.買掛残高.HeaderText = "買掛残高"
-        Me.買掛残高.Name = "買掛残高"
-        Me.買掛残高.Width = 150
         '
         'LblAdd
         '
@@ -525,6 +490,47 @@ Partial Class AccountsPayable
         Me.LblMode.Text = "買掛入力モード"
         Me.LblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        '発注番号
+        '
+        Me.発注番号.HeaderText = "発注番号"
+        Me.発注番号.Name = "発注番号"
+        Me.発注番号.Width = 150
+        '
+        '発注日
+        '
+        Me.発注日.HeaderText = "発注日"
+        Me.発注日.Name = "発注日"
+        Me.発注日.Width = 150
+        '
+        '仕入先
+        '
+        Me.仕入先.HeaderText = "仕入先"
+        Me.仕入先.Name = "仕入先"
+        Me.仕入先.Width = 200
+        '
+        '客先番号
+        '
+        Me.客先番号.HeaderText = "客先番号"
+        Me.客先番号.Name = "客先番号"
+        '
+        '発注金額
+        '
+        Me.発注金額.HeaderText = "発注金額"
+        Me.発注金額.Name = "発注金額"
+        Me.発注金額.Width = 150
+        '
+        '買掛金額計
+        '
+        Me.買掛金額計.HeaderText = "買掛金額計"
+        Me.買掛金額計.Name = "買掛金額計"
+        Me.買掛金額計.Width = 150
+        '
+        '買掛残高
+        '
+        Me.買掛残高.HeaderText = "買掛残高"
+        Me.買掛残高.Name = "買掛残高"
+        Me.買掛残高.Width = 150
+        '
         'AccountsPayable
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
@@ -588,12 +594,6 @@ Partial Class AccountsPayable
     Friend WithEvents DgvAdd As DataGridView
     Friend WithEvents DgvHistory As DataGridView
     Friend WithEvents DgvCymndt As DataGridView
-    Friend WithEvents 発注番号 As DataGridViewTextBoxColumn
-    Friend WithEvents 発注日 As DataGridViewTextBoxColumn
-    Friend WithEvents 仕入先 As DataGridViewTextBoxColumn
-    Friend WithEvents 発注金額 As DataGridViewTextBoxColumn
-    Friend WithEvents 買掛金額計 As DataGridViewTextBoxColumn
-    Friend WithEvents 買掛残高 As DataGridViewTextBoxColumn
     Friend WithEvents AddNo As DataGridViewTextBoxColumn
     Friend WithEvents 今回支払先 As DataGridViewTextBoxColumn
     Friend WithEvents 今回買掛金額計 As DataGridViewTextBoxColumn
@@ -619,4 +619,11 @@ Partial Class AccountsPayable
     Friend WithEvents 買掛済み発注番号 As DataGridViewTextBoxColumn
     Friend WithEvents 買掛済み発注番号枝番 As DataGridViewTextBoxColumn
     Friend WithEvents LblMode As Label
+    Friend WithEvents 発注番号 As DataGridViewTextBoxColumn
+    Friend WithEvents 発注日 As DataGridViewTextBoxColumn
+    Friend WithEvents 仕入先 As DataGridViewTextBoxColumn
+    Friend WithEvents 客先番号 As DataGridViewTextBoxColumn
+    Friend WithEvents 発注金額 As DataGridViewTextBoxColumn
+    Friend WithEvents 買掛金額計 As DataGridViewTextBoxColumn
+    Friend WithEvents 買掛残高 As DataGridViewTextBoxColumn
 End Class

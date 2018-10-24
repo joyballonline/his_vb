@@ -50,6 +50,8 @@ Partial Class PurchasingManagement
         Me.BtnRegist = New System.Windows.Forms.Button()
         Me.TxtSuffixNo = New System.Windows.Forms.TextBox()
         Me.LblMode = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.TxtCustomerPO = New System.Windows.Forms.TextBox()
         CType(Me.DgvPurchase, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvHistory, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvAdd, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -131,7 +133,7 @@ Partial Class PurchasingManagement
         Me.LblOrderingDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblOrderingDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblOrderingDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblOrderingDate.Location = New System.Drawing.Point(393, 9)
+        Me.LblOrderingDate.Location = New System.Drawing.Point(732, 8)
         Me.LblOrderingDate.Name = "LblOrderingDate"
         Me.LblOrderingDate.Size = New System.Drawing.Size(170, 22)
         Me.LblOrderingDate.TabIndex = 75
@@ -143,7 +145,7 @@ Partial Class PurchasingManagement
         Me.TxtOrdingDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.TxtOrdingDate.Enabled = False
         Me.TxtOrdingDate.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtOrdingDate.Location = New System.Drawing.Point(569, 9)
+        Me.TxtOrdingDate.Location = New System.Drawing.Point(908, 9)
         Me.TxtOrdingDate.Name = "TxtOrdingDate"
         Me.TxtOrdingDate.Size = New System.Drawing.Size(157, 22)
         Me.TxtOrdingDate.TabIndex = 74
@@ -355,10 +357,34 @@ Partial Class PurchasingManagement
         Me.LblMode.Text = "モード"
         Me.LblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'Label2
+        '
+        Me.Label2.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.Label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label2.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Label2.Location = New System.Drawing.Point(393, 9)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(170, 22)
+        Me.Label2.TabIndex = 305
+        Me.Label2.Text = "客先番号"
+        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'TxtCustomerPO
+        '
+        Me.TxtCustomerPO.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TxtCustomerPO.Enabled = False
+        Me.TxtCustomerPO.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtCustomerPO.Location = New System.Drawing.Point(569, 9)
+        Me.TxtCustomerPO.Name = "TxtCustomerPO"
+        Me.TxtCustomerPO.Size = New System.Drawing.Size(157, 22)
+        Me.TxtCustomerPO.TabIndex = 304
+        '
         'PurchasingManagement
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.TxtCustomerPO)
         Me.Controls.Add(Me.LblMode)
         Me.Controls.Add(Me.TxtSuffixNo)
         Me.Controls.Add(Me.BtnRegist)
@@ -426,4 +452,6 @@ Partial Class PurchasingManagement
     Friend WithEvents BtnRegist As Button
     Friend WithEvents TxtSuffixNo As TextBox
     Friend WithEvents LblMode As Label
+    Friend WithEvents Label2 As Label
+    Friend WithEvents TxtCustomerPO As TextBox
 End Class

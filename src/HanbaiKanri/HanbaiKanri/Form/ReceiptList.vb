@@ -96,6 +96,7 @@ Public Class ReceiptList
                 DgvCymnhd.Columns.Add("入庫日", "入庫日")
                 DgvCymnhd.Columns.Add("発注番号", "発注番号")
                 DgvCymnhd.Columns.Add("発注番号枝番", "発注番号枝番")
+                DgvCymnhd.Columns.Add("客先番号", "客先番号")
                 DgvCymnhd.Columns.Add("仕入先コード", "仕入先コード")
                 DgvCymnhd.Columns.Add("仕入先名", "仕入先名")
                 DgvCymnhd.Columns.Add("仕入先郵便番号", "仕入先郵便番号")
@@ -120,6 +121,7 @@ Public Class ReceiptList
                     DgvCymnhd.Rows(index).Cells("入庫日").Value = ds.Tables(RS).Rows(index)("入庫日")
                     DgvCymnhd.Rows(index).Cells("発注番号").Value = ds.Tables(RS).Rows(index)("発注番号")
                     DgvCymnhd.Rows(index).Cells("発注番号枝番").Value = ds.Tables(RS).Rows(index)("発注番号枝番")
+                    DgvCymnhd.Rows(index).Cells("客先番号").Value = ds.Tables(RS).Rows(index)("客先番号")
                     DgvCymnhd.Rows(index).Cells("仕入先コード").Value = ds.Tables(RS).Rows(index)("仕入先コード")
                     DgvCymnhd.Rows(index).Cells("仕入先名").Value = ds.Tables(RS).Rows(index)("仕入先名")
                     DgvCymnhd.Rows(index).Cells("仕入先郵便番号").Value = ds.Tables(RS).Rows(index)("仕入先郵便番号")
@@ -156,6 +158,7 @@ Public Class ReceiptList
                 DgvCymnhd.Columns.Add("入庫日", "入庫日")
                 DgvCymnhd.Columns.Add("発注番号", "発注番号")
                 DgvCymnhd.Columns.Add("発注番号枝番", "発注番号枝番")
+                DgvCymnhd.Columns.Add("客先番号", "客先番号")
                 DgvCymnhd.Columns.Add("仕入先コード", "仕入先コード")
                 DgvCymnhd.Columns.Add("仕入先名", "仕入先名")
                 DgvCymnhd.Columns.Add("仕入先郵便番号", "仕入先郵便番号")
@@ -180,6 +183,7 @@ Public Class ReceiptList
                     DgvCymnhd.Rows(index).Cells("入庫日").Value = ds.Tables(RS).Rows(index)("入庫日")
                     DgvCymnhd.Rows(index).Cells("発注番号").Value = ds.Tables(RS).Rows(index)("発注番号")
                     DgvCymnhd.Rows(index).Cells("発注番号枝番").Value = ds.Tables(RS).Rows(index)("発注番号枝番")
+                    DgvCymnhd.Rows(index).Cells("客先番号").Value = ds.Tables(RS).Rows(index)("客先番号")
                     DgvCymnhd.Rows(index).Cells("仕入先コード").Value = ds.Tables(RS).Rows(index)("仕入先コード")
                     DgvCymnhd.Rows(index).Cells("仕入先名").Value = ds.Tables(RS).Rows(index)("仕入先名")
                     DgvCymnhd.Rows(index).Cells("仕入先郵便番号").Value = ds.Tables(RS).Rows(index)("仕入先郵便番号")
@@ -268,6 +272,7 @@ Public Class ReceiptList
             DgvCymnhd.Columns.Add("入庫日", "入庫日")
             DgvCymnhd.Columns.Add("発注番号", "発注番号")
             DgvCymnhd.Columns.Add("発注番号枝番", "発注番号枝番")
+            DgvCymnhd.Columns.Add("客先番号", "客先番号")
             DgvCymnhd.Columns.Add("仕入先コード", "仕入先コード")
             DgvCymnhd.Columns.Add("仕入先名", "仕入先名")
             DgvCymnhd.Columns.Add("仕入先郵便番号", "仕入先郵便番号")
@@ -292,6 +297,7 @@ Public Class ReceiptList
                 DgvCymnhd.Rows(index).Cells("入庫日").Value = ds.Tables(RS).Rows(index)("入庫日")
                 DgvCymnhd.Rows(index).Cells("発注番号").Value = ds.Tables(RS).Rows(index)("発注番号")
                 DgvCymnhd.Rows(index).Cells("発注番号枝番").Value = ds.Tables(RS).Rows(index)("発注番号枝番")
+                DgvCymnhd.Rows(index).Cells("客先番号").Value = ds.Tables(RS).Rows(index)("客先番号")
                 DgvCymnhd.Rows(index).Cells("仕入先コード").Value = ds.Tables(RS).Rows(index)("仕入先コード")
                 DgvCymnhd.Rows(index).Cells("仕入先名").Value = ds.Tables(RS).Rows(index)("仕入先名")
                 DgvCymnhd.Rows(index).Cells("仕入先郵便番号").Value = ds.Tables(RS).Rows(index)("仕入先郵便番号")
@@ -610,6 +616,25 @@ Public Class ReceiptList
                     count += 1
                 End If
             End If
+            If TxtCustomerPO.Text = "" Then
+            Else
+                If count > 0 Then
+                    Sql += " AND "
+                    Sql += "客先番号"
+                    Sql += " ILIKE "
+                    Sql += "'%"
+                    Sql += TxtCustomerPO.Text
+                    Sql += "%'"
+                Else
+                    Sql += " WHERE "
+                    Sql += "客先番号"
+                    Sql += " ILIKE "
+                    Sql += "'%"
+                    Sql += TxtCustomerPO.Text
+                    Sql += "%'"
+                    count += 1
+                End If
+            End If
 
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
@@ -618,6 +643,7 @@ Public Class ReceiptList
             DgvCymnhd.Columns.Add("入庫日", "入庫日")
             DgvCymnhd.Columns.Add("発注番号", "発注番号")
             DgvCymnhd.Columns.Add("発注番号枝番", "発注番号枝番")
+            DgvCymnhd.Columns.Add("客先番号", "客先番号")
             DgvCymnhd.Columns.Add("仕入先コード", "仕入先コード")
             DgvCymnhd.Columns.Add("仕入先名", "仕入先名")
             DgvCymnhd.Columns.Add("仕入先郵便番号", "仕入先郵便番号")
@@ -641,6 +667,7 @@ Public Class ReceiptList
                 DgvCymnhd.Rows(index).Cells("入庫日").Value = ds.Tables(RS).Rows(index)("入庫日")
                 DgvCymnhd.Rows(index).Cells("発注番号").Value = ds.Tables(RS).Rows(index)("発注番号")
                 DgvCymnhd.Rows(index).Cells("発注番号枝番").Value = ds.Tables(RS).Rows(index)("発注番号枝番")
+                DgvCymnhd.Rows(index).Cells("客先番号").Value = ds.Tables(RS).Rows(index)("客先番号")
                 DgvCymnhd.Rows(index).Cells("仕入先コード").Value = ds.Tables(RS).Rows(index)("仕入先コード")
                 DgvCymnhd.Rows(index).Cells("仕入先名").Value = ds.Tables(RS).Rows(index)("仕入先名")
                 DgvCymnhd.Rows(index).Cells("仕入先郵便番号").Value = ds.Tables(RS).Rows(index)("仕入先郵便番号")
