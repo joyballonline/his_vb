@@ -124,6 +124,46 @@ Public Class Cymn
         DgvItemList.Columns.Insert(1, column)
 
         Dim reccnt As Integer = 0
+        Dim Sql12 As String = ""
+
+        Sql12 += "SELECT "
+        Sql12 += "* "
+        Sql12 += "FROM "
+        Sql12 += "public"
+        Sql12 += "."
+        Sql12 += "m90_hanyo"
+        Sql12 += " WHERE "
+        Sql12 += "会社コード"
+        Sql12 += " ILIKE "
+        Sql12 += "'"
+        Sql12 += frmC01F10_Login.loginValue.BumonNM
+        Sql12 += "'"
+        Sql12 += " AND "
+        Sql12 += "固定キー"
+        Sql12 += " ILIKE "
+        Sql12 += "'"
+        Sql12 += "4"
+        Sql12 += "'"
+
+        Dim ds12 As DataSet = _db.selectDB(Sql12, RS, reccnt)
+
+        Dim table2 As New DataTable("Table")
+        table2.Columns.Add("Display", GetType(String))
+        table2.Columns.Add("Value", GetType(Integer))
+
+        For index As Integer = 0 To ds12.Tables(RS).Rows.Count - 1
+            table2.Rows.Add(ds12.Tables(RS).Rows(index)("文字１"), ds12.Tables(RS).Rows(index)("可変キー"))
+        Next
+
+        Dim column2 As New DataGridViewComboBoxColumn()
+        column2.DataSource = table2
+        column2.ValueMember = "Value"
+        column2.DisplayMember = "Display"
+        column2.HeaderText = "リードタイム単位"
+        column2.Name = "リードタイム単位"
+
+        DgvItemList.Columns.Insert(22, column2)
+
 
         Dim SqlSaiban As String = ""
         SqlSaiban += "SELECT "
@@ -349,7 +389,7 @@ Public Class Cymn
         Dim tmp4 As Double
         Dim NoOverHead As Integer = 0
         Dim Total As Double = 0
-
+        Dim tmp5 As Integer
         For index As Integer = 0 To ds3.Tables(RS).Rows.Count - 1
             DgvItemList.Rows.Add()
             tmp = ds3.Tables(RS).Rows(index)("仕入区分")
@@ -374,8 +414,10 @@ Public Class Cymn
             DgvItemList.Rows(index).Cells(19).Value = ds3.Tables(RS).Rows(index)("粗利額")
             DgvItemList.Rows(index).Cells(20).Value = ds3.Tables(RS).Rows(index)("粗利率")
             DgvItemList.Rows(index).Cells(21).Value = ds3.Tables(RS).Rows(index)("リードタイム")
-            DgvItemList.Rows(index).Cells(22).Value = ds3.Tables(RS).Rows(index)("備考")
-            DgvItemList.Rows(index).Cells(23).Value = ""
+            tmp5 = ds3.Tables(RS).Rows(index)("リードタイム単位")
+            DgvItemList.Rows(index).Cells(22).Value = tmp5
+            DgvItemList.Rows(index).Cells(23).Value = ds3.Tables(RS).Rows(index)("備考")
+            DgvItemList.Rows(index).Cells(24).Value = ""
 
             tmp2 = ds3.Tables(RS).Rows(index)("関税率")
             tmp2 = tmp2 / 100
@@ -595,6 +637,7 @@ Public Class Cymn
                 Sql2 += overhead.ToString
                 Sql2 += "', '"
                 Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("リードタイム").Value.ToString
+                Sql2 += DgvItemList.Item("リードタイム単位", cymnhdIdx).FormattedValue.ToString
                 Sql2 += "', '"
                 Sql2 += "0"
                 Sql2 += "', '"
@@ -948,6 +991,7 @@ Public Class Cymn
                     Sql4 += overhead.ToString
                     Sql4 += "', '"
                     Sql4 += DgvItemList.Rows(hattyuIdx).Cells("リードタイム").Value.ToString
+                    Sql4 += DgvItemList.Item("リードタイム単位", hattyuIdx).FormattedValue.ToString
                     Sql4 += "', '"
                     Sql4 += "0"
                     Sql4 += "', '"

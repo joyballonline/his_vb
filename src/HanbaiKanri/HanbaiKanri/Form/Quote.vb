@@ -109,6 +109,7 @@ Public Class Quote
         DgvItemList.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
         '"Column1"列のセルのテキストを折り返して表示する
         DgvItemList.Columns("型式").DefaultCellStyle.WrapMode = DataGridViewTriState.True
+        DgvItemList.Columns("備考").DefaultCellStyle.WrapMode = DataGridViewTriState.True
 
         'ComboBoxに表示する項目のリストを作成する
         Dim table As New DataTable("Table")
@@ -131,6 +132,48 @@ Public Class Quote
         'DataGridView1に追加する
         DgvItemList.Columns.Insert(1, column)
 
+        Dim reccnt As Integer = 0
+
+        Dim Sql12 As String = ""
+
+        Sql12 += "SELECT "
+        Sql12 += "* "
+        Sql12 += "FROM "
+        Sql12 += "public"
+        Sql12 += "."
+        Sql12 += "m90_hanyo"
+        Sql12 += " WHERE "
+        Sql12 += "会社コード"
+        Sql12 += " ILIKE "
+        Sql12 += "'"
+        Sql12 += frmC01F10_Login.loginValue.BumonNM
+        Sql12 += "'"
+        Sql12 += " AND "
+        Sql12 += "固定キー"
+        Sql12 += " ILIKE "
+        Sql12 += "'"
+        Sql12 += "4"
+        Sql12 += "'"
+
+        Dim ds12 As DataSet = _db.selectDB(Sql12, RS, reccnt)
+
+        Dim table2 As New DataTable("Table")
+        table2.Columns.Add("Display", GetType(String))
+        table2.Columns.Add("Value", GetType(Integer))
+
+        For i As Integer = 0 To ds12.Tables(RS).Rows.Count - 1
+            table2.Rows.Add(ds12.Tables(RS).Rows(i)("文字１"), ds12.Tables(RS).Rows(i)("可変キー"))
+        Next
+
+        Dim column2 As New DataGridViewComboBoxColumn()
+        column2.DataSource = table2
+        column2.ValueMember = "Value"
+        column2.DisplayMember = "Display"
+        column2.HeaderText = "リードタイム単位"
+        column2.Name = "リードタイム単位"
+
+        DgvItemList.Columns.Insert(22, column2)
+
         If EditNo IsNot Nothing Then    '見積編集時
             '見積基本情報
             Dim Sql1 As String = ""
@@ -152,7 +195,7 @@ Public Class Quote
             Sql1 += "'%"
             Sql1 += EditSuffix.ToString
             Sql1 += "%'"
-            Dim reccnt As Integer = 0
+
             Dim ds1 = _db.selectDB(Sql1, RS, reccnt)
 
             Dim Sql2 As String = ""
@@ -309,6 +352,8 @@ Public Class Quote
                 DgvItemList.Rows(index).Cells("粗利額").Value = ds3.Tables(RS).Rows(index)("粗利額")
                 DgvItemList.Rows(index).Cells("粗利率").Value = ds3.Tables(RS).Rows(index)("粗利率")
                 DgvItemList.Rows(index).Cells("リードタイム").Value = ds3.Tables(RS).Rows(index)("リードタイム")
+                Dim tmp2 As Integer = ds3.Tables(RS).Rows(index)("リードタイム単位")
+                DgvItemList("リードタイム単位", index).Value = tmp2
                 DgvItemList.Rows(index).Cells("備考").Value = ds3.Tables(RS).Rows(index)("備考")
                 DgvItemList.Rows(index).Cells("ステータス").Value = "EDIT"
             Next
@@ -360,7 +405,6 @@ Public Class Quote
             Sql += " ILIKE "
             Sql += "'10'"
 
-            Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
 
             TxtQuoteNo.Text += ds.Tables(RS).Rows(0)(5)
@@ -588,6 +632,7 @@ Public Class Quote
             '行を挿入
             DgvItemList.Rows.Insert(RowIdx + 1)
             DgvItemList.Rows(RowIdx + 1).Cells("仕入区分").Value = 1
+            DgvItemList.Rows(RowIdx + 1).Cells("リードタイム単位").Value = 1
             DgvItemList.Rows(RowIdx + 1).Cells("ステータス").Value = "ADD"
             '最終行のインデックスを取得
             Dim index As Integer = DgvItemList.Rows.Count()
@@ -601,6 +646,7 @@ Public Class Quote
         Else
             DgvItemList.Rows.Add()
             DgvItemList.Rows(0).Cells("仕入区分").Value = 1
+            DgvItemList.Rows(0).Cells("リードタイム単位").Value = 1
             TxtItemCount.Text = DgvItemList.Rows.Count()
             DgvItemList.Rows(DgvItemList.Rows.Count() - 1).Cells("ステータス").Value = "ADD"
             '行番号の振り直し
@@ -618,6 +664,7 @@ Public Class Quote
     Private Sub BtnRowsAdd_Click(sender As Object, e As EventArgs) Handles BtnRowsAdd.Click
         DgvItemList.Rows.Add()
         DgvItemList.Rows(DgvItemList.Rows.Count() - 1).Cells("仕入区分").Value = 1
+        DgvItemList.Rows(DgvItemList.Rows.Count() - 1).Cells("リードタイム単位").Value = 1
         DgvItemList.Rows(DgvItemList.Rows.Count() - 1).Cells("ステータス").Value = "ADD"
         '行番号の振り直し
         Dim index As Integer = DgvItemList.Rows.Count()
@@ -690,6 +737,11 @@ Public Class Quote
                     If Item(c) IsNot Nothing Then
                         Dim tmp As Integer = Item(c)
                         DgvItemList(1, RowIdx + 1).Value = tmp
+                    End If
+                ElseIf c = 22 Then
+                    If Item(c) IsNot Nothing Then
+                        Dim tmp As Integer = Item(c)
+                        DgvItemList(22, RowIdx + 1).Value = tmp
                     End If
                 Else
                     DgvItemList.Rows(RowIdx + 1).Cells(c).Value = Item(c)
@@ -780,6 +832,13 @@ Public Class Quote
         If ColIdx = 7 Then
             Dim openForm As Form = Nothing
             openForm = New SupplierSearch(_msgHd, _db, _langHd, RowIdx, Me)
+            openForm.Show(Me)
+            Me.Enabled = False
+        End If
+
+        If ColIdx = 23 Then
+            Dim openForm As Form = Nothing
+            openForm = New RemarksInput(_msgHd, _db, _langHd, RowIdx, Me)
             openForm.Show(Me)
             Me.Enabled = False
         End If
@@ -1165,6 +1224,10 @@ Public Class Quote
                         Sql2 += "', "
                     End If
 
+                    Sql2 += "リードタイム単位"
+                    Sql2 += " = '"
+                    Sql2 += DgvItemList.Rows(index).Cells("リードタイム単位").Value.ToString
+                    Sql2 += "', "
                     Sql2 += "備考"
                     Sql2 += " = '"
                     Sql2 += DgvItemList.Rows(index).Cells("備考").Value.ToString
@@ -1246,6 +1309,8 @@ Public Class Quote
                     Sql2 += "粗利率"
                     Sql2 += ", "
                     Sql2 += "リードタイム"
+                    Sql2 += ", "
+                    Sql2 += "リードタイム単位"
                     Sql2 += ", "
                     Sql2 += "備考"
                     Sql2 += ", "
@@ -1387,7 +1452,7 @@ Public Class Quote
                     Sql2 += "INSERT INTO "
                     Sql2 += "Public."
                     Sql2 += "t02_mitdt("
-                    Sql2 += "会社コード, 見積番号, 見積番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 数量, 単位, 仕入先名称, 仕入単価, 仕入原価, 関税率, 関税額, 前払法人税率, 前払法人税額, 輸送費率, 輸送費額, 仕入金額, 売単価, 売上金額, 粗利額, 粗利率, リードタイム, 備考, 更新者, 登録日)"
+                    Sql2 += "会社コード, 見積番号, 見積番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 数量, 単位, 仕入先名称, 仕入単価, 仕入原価, 関税率, 関税額, 前払法人税率, 前払法人税額, 輸送費率, 輸送費額, 仕入金額, 売単価, 売上金額, 粗利額, 粗利率, リードタイム, リードタイム単位, 備考, 更新者, 登録日)"
                     Sql2 += " VALUES('"
                     Sql2 += CompanyCode
                     Sql2 += "', '"
@@ -1550,6 +1615,8 @@ Public Class Quote
                         Sql2 += ""
                         Sql2 += "', '"
                     End If
+                    Sql2 += DgvItemList.Rows(index).Cells("リードタイム単位").Value.ToString
+                    Sql2 += "', '"
                     If DgvItemList.Rows(index).Cells("備考").Value IsNot Nothing Then
                         Sql2 += DgvItemList.Rows(index).Cells("備考").Value.ToString
                         Sql2 += "', '"
@@ -1612,6 +1679,8 @@ Public Class Quote
                     Sql2 += "粗利率"
                     Sql2 += ", "
                     Sql2 += "リードタイム"
+                    Sql2 += ", "
+                    Sql2 += "リードタイム単位"
                     Sql2 += ", "
                     Sql2 += "備考"
                     Sql2 += ", "
@@ -1721,6 +1790,7 @@ Public Class Quote
         Sql3 += "粗利額, "
         Sql3 += "粗利率, "
         Sql3 += "リードタイム, "
+        Sql3 += "リードタイム単位, "
         Sql3 += "備考, "
         Sql3 += "登録日 "
         Sql3 += "FROM "
@@ -1850,6 +1920,8 @@ Public Class Quote
             End If
 
             Dim totalPrice As Integer = 0
+            Dim Sql5 As String = ""
+            Dim tmp1 As String = ""
 
             For index As Integer = 0 To ds3.Tables(RS).Rows.Count - 1
                 Dim cell As String
@@ -1870,9 +1942,39 @@ Public Class Quote
                 sheet.Range(cell).Value = ds3.Tables(RS).Rows(index)("備考")
 
                 totalPrice = totalPrice + ds3.Tables(RS).Rows(index)("売上金額")
+                Sql5 = ""
+                Sql5 += "SELECT "
+                Sql5 += "* "
+                Sql5 += "FROM "
+                Sql5 += "public"
+                Sql5 += "."
+                Sql5 += "m90_hanyo"
+                Sql5 += " WHERE "
+                Sql5 += "会社コード"
+                Sql5 += " ILIKE "
+                Sql5 += "'"
+                Sql5 += frmC01F10_Login.loginValue.BumonNM
+                Sql5 += "'"
+                Sql5 += " AND "
+                Sql5 += "固定キー"
+                Sql5 += " ILIKE "
+                Sql5 += "'"
+                Sql5 += "4"
+                Sql5 += "'"
+                Sql5 += " AND "
+                Sql5 += "可変キー"
+                Sql5 += " ILIKE "
+                Sql5 += "'"
+                Sql5 += ds3.Tables(RS).Rows(index)("リードタイム単位").ToString
+                Sql5 += "'"
+                Dim ds5 = _db.selectDB(Sql5, RS, reccnt)
 
                 cell = "Z" & currentCnt
-                sheet.Range(cell).Value = ds3.Tables(RS).Rows(index)("リードタイム")
+                tmp1 = ""
+                tmp1 += ds3.Tables(RS).Rows(index)("リードタイム")
+                tmp1 += ds5.Tables(RS).Rows(0)("文字１")
+
+                sheet.Range(cell).Value = tmp1
 
                 'sheet.Rows(currentCnt & ":" & currentCnt)
 
@@ -1975,24 +2077,7 @@ Public Class Quote
         '見積明細情報
         Dim Sql3 As String = ""
         Sql3 += "SELECT "
-        Sql3 += "仕入区分, "
-        Sql3 += "メーカー, "
-        Sql3 += "品名, "
-        Sql3 += "型式, "
-        Sql3 += "数量, "
-        Sql3 += "単位, "
-        Sql3 += "仕入先名称, "
-        Sql3 += "仕入単価, "
-        Sql3 += "間接費率, "
-        Sql3 += "間接費, "
-        Sql3 += "仕入金額, "
-        Sql3 += "売単価, "
-        Sql3 += "売上金額, "
-        Sql3 += "粗利額, "
-        Sql3 += "粗利率, "
-        Sql3 += "リードタイム, "
-        Sql3 += "備考, "
-        Sql3 += "登録日 "
+        Sql3 += "* "
         Sql3 += "FROM "
         Sql3 += "public"
         Sql3 += "."
@@ -2181,6 +2266,7 @@ Public Class Quote
         Dim GrossProfitRate(DgvItemList.Rows.Count - 1) As String
         Dim LeadTime(DgvItemList.Rows.Count - 1) As String
         Dim ItemRemarks(DgvItemList.Rows.Count - 1) As String
+        Dim tmp As String = ""
 
         '定義
         Dim app As Excel.Application = Nothing
@@ -2270,7 +2356,10 @@ Public Class Quote
                 sheet.Range("S" & currentRow).Value = DgvItemList.Rows(index).Cells("売上金額").Value
                 sheet.Range("T" & currentRow).Value = DgvItemList.Rows(index).Cells("粗利額").Value
                 sheet.Range("U" & currentRow).Value = DgvItemList.Rows(index).Cells("粗利率").Value
-                sheet.Range("V" & currentRow).Value = DgvItemList.Rows(index).Cells("リードタイム").Value
+                tmp = ""
+                tmp += DgvItemList.Rows(index).Cells("リードタイム").Value
+                tmp += DgvItemList.Item("リードタイム単位", index).FormattedValue
+                sheet.Range("V" & currentRow).Value = tmp
                 sheet.Range("W" & currentRow).Value = DgvItemList.Rows(index).Cells("備考").Value
 
 

@@ -124,6 +124,47 @@ Public Class Order
         'DataGridView1に追加する
         DgvItemList.Columns.Insert(1, column)
 
+        Dim reccnt As Integer = 0
+        Dim Sql12 As String = ""
+
+        Sql12 += "SELECT "
+        Sql12 += "* "
+        Sql12 += "FROM "
+        Sql12 += "public"
+        Sql12 += "."
+        Sql12 += "m90_hanyo"
+        Sql12 += " WHERE "
+        Sql12 += "会社コード"
+        Sql12 += " ILIKE "
+        Sql12 += "'"
+        Sql12 += frmC01F10_Login.loginValue.BumonNM
+        Sql12 += "'"
+        Sql12 += " AND "
+        Sql12 += "固定キー"
+        Sql12 += " ILIKE "
+        Sql12 += "'"
+        Sql12 += "4"
+        Sql12 += "'"
+
+        Dim ds12 As DataSet = _db.selectDB(Sql12, RS, reccnt)
+
+        Dim table2 As New DataTable("Table")
+        table2.Columns.Add("Display", GetType(String))
+        table2.Columns.Add("Value", GetType(Integer))
+
+        For index As Integer = 0 To ds12.Tables(RS).Rows.Count - 1
+            table2.Rows.Add(ds12.Tables(RS).Rows(index)("文字１"), ds12.Tables(RS).Rows(index)("可変キー"))
+        Next
+
+        Dim column2 As New DataGridViewComboBoxColumn()
+        column2.DataSource = table2
+        column2.ValueMember = "Value"
+        column2.DisplayMember = "Display"
+        column2.HeaderText = "リードタイム単位"
+        column2.Name = "リードタイム単位"
+
+        DgvItemList.Columns.Insert(15, column2)
+
         If OrderStatus = "ADD" Then
             LblMode.Text = "新規登録モード"
         ElseIf OrderStatus = "EDIT" Then
@@ -134,7 +175,7 @@ Public Class Order
             LblMode.Text = "参照モード"
         End If
 
-        Dim reccnt As Integer = 0
+
         Dim dtNow As DateTime = DateTime.Now
 
         If OrderStatus = "ADD" Then
@@ -285,7 +326,7 @@ Public Class Order
             Sql3 += OrderSuffix.ToString
             Sql3 += "'"
             Dim ds3 = _db.selectDB(Sql3, RS, reccnt)
-
+            Dim tmp1 As Integer
             For index As Integer = 0 To ds3.Tables(RS).Rows.Count - 1
                 DgvItemList.Rows.Add()
                 Dim tmp As Integer = ds3.Tables(RS).Rows(index)("仕入区分")
@@ -303,6 +344,8 @@ Public Class Order
                 DgvItemList.Rows(index).Cells("粗利額").Value = ds3.Tables(RS).Rows(index)("粗利額")
                 DgvItemList.Rows(index).Cells("粗利率").Value = ds3.Tables(RS).Rows(index)("粗利率")
                 DgvItemList.Rows(index).Cells("リードタイム").Value = ds3.Tables(RS).Rows(index)("リードタイム")
+                tmp1 = ds3.Tables(RS).Rows(index)("リードタイム単位")
+                DgvItemList.Rows(index).Cells("リードタイム単位").Value = tmp1
                 DgvItemList.Rows(index).Cells("備考").Value = ds3.Tables(RS).Rows(index)("備考")
 
             Next
@@ -522,27 +565,46 @@ Public Class Order
             Sql3 += OrderSuffix.ToString
             Sql3 += "'"
             Dim ds3 = _db.selectDB(Sql3, RS, reccnt)
-
+            Dim tmp1 As Integer
             For index As Integer = 0 To ds3.Tables(RS).Rows.Count - 1
+                'DgvItemList.Rows.Add()
+                'Dim tmp As Integer = ds3.Tables(RS).Rows(index)("仕入区分")
+                'DgvItemList(1, index).Value = tmp
+                'DgvItemList.Rows(index).Cells(2).Value = ds3.Tables(RS).Rows(index)("メーカー")
+                'DgvItemList.Rows(index).Cells(3).Value = ds3.Tables(RS).Rows(index)("品名")
+                'DgvItemList.Rows(index).Cells(4).Value = ds3.Tables(RS).Rows(index)("型式")
+                'DgvItemList.Rows(index).Cells(5).Value = ds3.Tables(RS).Rows(index)("受注数量")
+                'DgvItemList.Rows(index).Cells(6).Value = ds3.Tables(RS).Rows(index)("単位")
+                'DgvItemList.Rows(index).Cells(7).Value = ds3.Tables(RS).Rows(index)("仕入先名")
+                'DgvItemList.Rows(index).Cells(8).Value = ds3.Tables(RS).Rows(index)("仕入値")
+                'DgvItemList.Rows(index).Cells(9).Value = ds3.Tables(RS).Rows(index)("間接費")
+                'DgvItemList.Rows(index).Cells(10).Value = ds3.Tables(RS).Rows(index)("売単価")
+                'DgvItemList.Rows(index).Cells(11).Value = ds3.Tables(RS).Rows(index)("売上金額")
+                'DgvItemList.Rows(index).Cells(12).Value = ds3.Tables(RS).Rows(index)("粗利額")
+                'DgvItemList.Rows(index).Cells(13).Value = ds3.Tables(RS).Rows(index)("粗利率")
+                'DgvItemList.Rows(index).Cells(14).Value = ds3.Tables(RS).Rows(index)("リードタイム")
+                'DgvItemList.Rows(index).Cells(15).Value = ds3.Tables(RS).Rows(index)("備考")
+                'DgvItemList.Rows(index).Cells(16).Value = ds3.Tables(RS).Rows(index)("出庫数")
+                'DgvItemList.Rows(index).Cells(17).Value = ds3.Tables(RS).Rows(index)("未出庫数")
                 DgvItemList.Rows.Add()
                 Dim tmp As Integer = ds3.Tables(RS).Rows(index)("仕入区分")
                 DgvItemList(1, index).Value = tmp
-                DgvItemList.Rows(index).Cells(2).Value = ds3.Tables(RS).Rows(index)("メーカー")
-                DgvItemList.Rows(index).Cells(3).Value = ds3.Tables(RS).Rows(index)("品名")
-                DgvItemList.Rows(index).Cells(4).Value = ds3.Tables(RS).Rows(index)("型式")
-                DgvItemList.Rows(index).Cells(5).Value = ds3.Tables(RS).Rows(index)("受注数量")
-                DgvItemList.Rows(index).Cells(6).Value = ds3.Tables(RS).Rows(index)("単位")
-                DgvItemList.Rows(index).Cells(7).Value = ds3.Tables(RS).Rows(index)("仕入先名")
-                DgvItemList.Rows(index).Cells(8).Value = ds3.Tables(RS).Rows(index)("仕入値")
-                DgvItemList.Rows(index).Cells(9).Value = ds3.Tables(RS).Rows(index)("間接費")
-                DgvItemList.Rows(index).Cells(10).Value = ds3.Tables(RS).Rows(index)("売単価")
-                DgvItemList.Rows(index).Cells(11).Value = ds3.Tables(RS).Rows(index)("売上金額")
-                DgvItemList.Rows(index).Cells(12).Value = ds3.Tables(RS).Rows(index)("粗利額")
-                DgvItemList.Rows(index).Cells(13).Value = ds3.Tables(RS).Rows(index)("粗利率")
-                DgvItemList.Rows(index).Cells(14).Value = ds3.Tables(RS).Rows(index)("リードタイム")
-                DgvItemList.Rows(index).Cells(15).Value = ds3.Tables(RS).Rows(index)("備考")
-                DgvItemList.Rows(index).Cells(16).Value = ds3.Tables(RS).Rows(index)("出庫数")
-                DgvItemList.Rows(index).Cells(17).Value = ds3.Tables(RS).Rows(index)("未出庫数")
+                DgvItemList.Rows(index).Cells("メーカー").Value = ds3.Tables(RS).Rows(index)("メーカー")
+                DgvItemList.Rows(index).Cells("品名").Value = ds3.Tables(RS).Rows(index)("品名")
+                DgvItemList.Rows(index).Cells("型式").Value = ds3.Tables(RS).Rows(index)("型式")
+                DgvItemList.Rows(index).Cells("数量").Value = ds3.Tables(RS).Rows(index)("数量")
+                DgvItemList.Rows(index).Cells("単位").Value = ds3.Tables(RS).Rows(index)("単位")
+                DgvItemList.Rows(index).Cells("仕入先").Value = ds3.Tables(RS).Rows(index)("仕入先名称")
+                DgvItemList.Rows(index).Cells("仕入値").Value = ds3.Tables(RS).Rows(index)("仕入単価")
+                DgvItemList.Rows(index).Cells("間接費").Value = ds3.Tables(RS).Rows(index)("間接費")
+                DgvItemList.Rows(index).Cells("売単価").Value = ds3.Tables(RS).Rows(index)("売単価")
+                DgvItemList.Rows(index).Cells("売上金額").Value = ds3.Tables(RS).Rows(index)("売上金額")
+                DgvItemList.Rows(index).Cells("粗利額").Value = ds3.Tables(RS).Rows(index)("粗利額")
+                DgvItemList.Rows(index).Cells("粗利率").Value = ds3.Tables(RS).Rows(index)("粗利率")
+                DgvItemList.Rows(index).Cells("リードタイム").Value = ds3.Tables(RS).Rows(index)("リードタイム")
+                tmp1 = ds3.Tables(RS).Rows(index)("リードタイム単位")
+                DgvItemList.Rows(index).Cells("リードタイム単位").Value = tmp1
+                DgvItemList.Rows(index).Cells("備考").Value = ds3.Tables(RS).Rows(index)("備考")
             Next
 
             '行番号の振り直し
@@ -812,6 +874,7 @@ Public Class Order
                 Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("粗利率").Value.ToString
                 Sql2 += "', '"
                 Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("リードタイム").Value.ToString
+                Sql2 += DgvItemList.Item("リードタイム単位", cymnhdIdx).FormattedValue.ToString
                 Sql2 += "', '"
                 Sql2 += "0"
                 Sql2 += "', '"

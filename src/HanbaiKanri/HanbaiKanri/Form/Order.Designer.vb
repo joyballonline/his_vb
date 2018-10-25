@@ -778,6 +778,7 @@ Partial Class Order
         Me.DgvItemList.Location = New System.Drawing.Point(11, 245)
         Me.DgvItemList.Name = "DgvItemList"
         Me.DgvItemList.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
+        Me.DgvItemList.RowHeadersVisible = False
         Me.DgvItemList.RowTemplate.Height = 21
         Me.DgvItemList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
         Me.DgvItemList.Size = New System.Drawing.Size(1329, 171)
