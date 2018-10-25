@@ -158,7 +158,7 @@ Public Class MstSupplier
             Sql += "."
             Sql += "m11_supplier"
             Sql += " WHERE "
-            Sql += "会社コード"
+            Sql += "仕入先名"
             Sql += " ILIKE "
             Sql += "'%"
             Sql += Search.Text

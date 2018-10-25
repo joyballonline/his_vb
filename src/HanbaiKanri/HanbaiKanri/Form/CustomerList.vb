@@ -224,4 +224,8 @@ Public Class CustomerList
         Me.Hide()
         openForm.Show(Me)
     End Sub
+
+    Private Sub BtnSearch_Click(sender As Object, e As EventArgs) Handles BtnSearch.Click
+
+    End Sub
 End Class

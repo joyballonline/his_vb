@@ -86,13 +86,15 @@ Partial Class PurchasingManagement
         Me.TxtPurchaseNo.Name = "TxtPurchaseNo"
         Me.TxtPurchaseNo.Size = New System.Drawing.Size(157, 22)
         Me.TxtPurchaseNo.TabIndex = 68
+        Me.TxtPurchaseNo.TabStop = False
         '
         'BtnBack
         '
+        Me.BtnBack.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnBack.Location = New System.Drawing.Point(1173, 509)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(165, 40)
-        Me.BtnBack.TabIndex = 70
+        Me.BtnBack.TabIndex = 7
         Me.BtnBack.Text = "戻る"
         Me.BtnBack.UseVisualStyleBackColor = True
         '
@@ -117,6 +119,7 @@ Partial Class PurchasingManagement
         Me.TxtSupplierCode.Name = "TxtSupplierCode"
         Me.TxtSupplierCode.Size = New System.Drawing.Size(157, 22)
         Me.TxtSupplierCode.TabIndex = 71
+        Me.TxtSupplierCode.TabStop = False
         '
         'TxtSupplierName
         '
@@ -127,6 +130,7 @@ Partial Class PurchasingManagement
         Me.TxtSupplierName.Name = "TxtSupplierName"
         Me.TxtSupplierName.Size = New System.Drawing.Size(333, 22)
         Me.TxtSupplierName.TabIndex = 73
+        Me.TxtSupplierName.TabStop = False
         '
         'LblOrderingDate
         '
@@ -149,6 +153,7 @@ Partial Class PurchasingManagement
         Me.TxtOrdingDate.Name = "TxtOrdingDate"
         Me.TxtOrdingDate.Size = New System.Drawing.Size(157, 22)
         Me.TxtOrdingDate.TabIndex = 74
+        Me.TxtOrdingDate.TabStop = False
         '
         'DgvPurchase
         '
@@ -160,7 +165,7 @@ Partial Class PurchasingManagement
         Me.DgvPurchase.RowHeadersVisible = False
         Me.DgvPurchase.RowTemplate.Height = 21
         Me.DgvPurchase.Size = New System.Drawing.Size(1326, 100)
-        Me.DgvPurchase.TabIndex = 76
+        Me.DgvPurchase.TabIndex = 1
         '
         'LblNo1
         '
@@ -182,6 +187,7 @@ Partial Class PurchasingManagement
         Me.TxtCount1.Name = "TxtCount1"
         Me.TxtCount1.Size = New System.Drawing.Size(38, 22)
         Me.TxtCount1.TabIndex = 77
+        Me.TxtCount1.TabStop = False
         '
         'LblNo2
         '
@@ -203,6 +209,7 @@ Partial Class PurchasingManagement
         Me.TxtCount2.Name = "TxtCount2"
         Me.TxtCount2.Size = New System.Drawing.Size(38, 22)
         Me.TxtCount2.TabIndex = 80
+        Me.TxtCount2.TabStop = False
         '
         'DgvHistory
         '
@@ -214,7 +221,7 @@ Partial Class PurchasingManagement
         Me.DgvHistory.RowHeadersVisible = False
         Me.DgvHistory.RowTemplate.Height = 21
         Me.DgvHistory.Size = New System.Drawing.Size(1326, 100)
-        Me.DgvHistory.TabIndex = 79
+        Me.DgvHistory.TabIndex = 2
         '
         'LblPurchase
         '
@@ -269,6 +276,7 @@ Partial Class PurchasingManagement
         Me.TxtCount3.Name = "TxtCount3"
         Me.TxtCount3.Size = New System.Drawing.Size(38, 22)
         Me.TxtCount3.TabIndex = 89
+        Me.TxtCount3.TabStop = False
         '
         'DgvAdd
         '
@@ -279,7 +287,7 @@ Partial Class PurchasingManagement
         Me.DgvAdd.RowHeadersVisible = False
         Me.DgvAdd.RowTemplate.Height = 21
         Me.DgvAdd.Size = New System.Drawing.Size(1326, 100)
-        Me.DgvAdd.TabIndex = 88
+        Me.DgvAdd.TabIndex = 5
         '
         'LblPurchaseDate
         '
@@ -311,7 +319,7 @@ Partial Class PurchasingManagement
         Me.TxtRemarks.Location = New System.Drawing.Point(622, 342)
         Me.TxtRemarks.Name = "TxtRemarks"
         Me.TxtRemarks.Size = New System.Drawing.Size(644, 22)
-        Me.TxtRemarks.TabIndex = 94
+        Me.TxtRemarks.TabIndex = 4
         '
         'DtpPurchaseDate
         '
@@ -322,16 +330,17 @@ Partial Class PurchasingManagement
         Me.DtpPurchaseDate.Location = New System.Drawing.Point(292, 342)
         Me.DtpPurchaseDate.Name = "DtpPurchaseDate"
         Me.DtpPurchaseDate.Size = New System.Drawing.Size(148, 22)
-        Me.DtpPurchaseDate.TabIndex = 229
+        Me.DtpPurchaseDate.TabIndex = 3
         Me.DtpPurchaseDate.TabStop = False
         Me.DtpPurchaseDate.Value = New Date(2018, 7, 16, 0, 0, 0, 0)
         '
         'BtnRegist
         '
+        Me.BtnRegist.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnRegist.Location = New System.Drawing.Point(1002, 509)
         Me.BtnRegist.Name = "BtnRegist"
         Me.BtnRegist.Size = New System.Drawing.Size(165, 40)
-        Me.BtnRegist.TabIndex = 230
+        Me.BtnRegist.TabIndex = 6
         Me.BtnRegist.Text = "登録"
         Me.BtnRegist.UseVisualStyleBackColor = True
         '
@@ -344,6 +353,7 @@ Partial Class PurchasingManagement
         Me.TxtSuffixNo.Name = "TxtSuffixNo"
         Me.TxtSuffixNo.Size = New System.Drawing.Size(36, 22)
         Me.TxtSuffixNo.TabIndex = 231
+        Me.TxtSuffixNo.TabStop = False
         '
         'LblMode
         '
@@ -378,6 +388,7 @@ Partial Class PurchasingManagement
         Me.TxtCustomerPO.Name = "TxtCustomerPO"
         Me.TxtCustomerPO.Size = New System.Drawing.Size(157, 22)
         Me.TxtCustomerPO.TabIndex = 304
+        Me.TxtCustomerPO.TabStop = False
         '
         'PurchasingManagement
         '

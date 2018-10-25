@@ -65,16 +65,17 @@ Partial Class ReceiptList
         Me.ChkCancelData.Location = New System.Drawing.Point(319, 197)
         Me.ChkCancelData.Name = "ChkCancelData"
         Me.ChkCancelData.Size = New System.Drawing.Size(139, 19)
-        Me.ChkCancelData.TabIndex = 149
+        Me.ChkCancelData.TabIndex = 14
         Me.ChkCancelData.Text = "取消データを含める"
         Me.ChkCancelData.UseVisualStyleBackColor = True
         '
         'BtnReceiptView
         '
+        Me.BtnReceiptView.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnReceiptView.Location = New System.Drawing.Point(1003, 509)
         Me.BtnReceiptView.Name = "BtnReceiptView"
         Me.BtnReceiptView.Size = New System.Drawing.Size(165, 40)
-        Me.BtnReceiptView.TabIndex = 148
+        Me.BtnReceiptView.TabIndex = 17
         Me.BtnReceiptView.Text = "入庫参照"
         Me.BtnReceiptView.UseVisualStyleBackColor = True
         Me.BtnReceiptView.Visible = False
@@ -97,7 +98,7 @@ Partial Class ReceiptList
         Me.RbtnSlip.Location = New System.Drawing.Point(6, 8)
         Me.RbtnSlip.Name = "RbtnSlip"
         Me.RbtnSlip.Size = New System.Drawing.Size(89, 19)
-        Me.RbtnSlip.TabIndex = 26
+        Me.RbtnSlip.TabIndex = 12
         Me.RbtnSlip.TabStop = True
         Me.RbtnSlip.Text = "伝票単位"
         Me.RbtnSlip.UseVisualStyleBackColor = True
@@ -109,7 +110,7 @@ Partial Class ReceiptList
         Me.RbtnDetails.Location = New System.Drawing.Point(101, 8)
         Me.RbtnDetails.Name = "RbtnDetails"
         Me.RbtnDetails.Size = New System.Drawing.Size(89, 19)
-        Me.RbtnDetails.TabIndex = 27
+        Me.RbtnDetails.TabIndex = 13
         Me.RbtnDetails.Text = "明細単位"
         Me.RbtnDetails.UseVisualStyleBackColor = True
         '
@@ -138,7 +139,7 @@ Partial Class ReceiptList
         Me.TxtReceiptNo2.Location = New System.Drawing.Point(959, 68)
         Me.TxtReceiptNo2.Name = "TxtReceiptNo2"
         Me.TxtReceiptNo2.Size = New System.Drawing.Size(170, 22)
-        Me.TxtReceiptNo2.TabIndex = 143
+        Me.TxtReceiptNo2.TabIndex = 8
         '
         'TxtReceiptDate2
         '
@@ -146,7 +147,7 @@ Partial Class ReceiptList
         Me.TxtReceiptDate2.Location = New System.Drawing.Point(959, 40)
         Me.TxtReceiptDate2.Name = "TxtReceiptDate2"
         Me.TxtReceiptDate2.Size = New System.Drawing.Size(170, 22)
-        Me.TxtReceiptDate2.TabIndex = 142
+        Me.TxtReceiptDate2.TabIndex = 6
         '
         'Label6
         '
@@ -166,7 +167,7 @@ Partial Class ReceiptList
         Me.TxtSales.Location = New System.Drawing.Point(760, 95)
         Me.TxtSales.Name = "TxtSales"
         Me.TxtSales.Size = New System.Drawing.Size(170, 22)
-        Me.TxtSales.TabIndex = 140
+        Me.TxtSales.TabIndex = 9
         '
         'Label7
         '
@@ -186,7 +187,7 @@ Partial Class ReceiptList
         Me.TxtReceiptNo1.Location = New System.Drawing.Point(760, 67)
         Me.TxtReceiptNo1.Name = "TxtReceiptNo1"
         Me.TxtReceiptNo1.Size = New System.Drawing.Size(170, 22)
-        Me.TxtReceiptNo1.TabIndex = 138
+        Me.TxtReceiptNo1.TabIndex = 7
         '
         'Label8
         '
@@ -206,7 +207,7 @@ Partial Class ReceiptList
         Me.TxtReceiptDate1.Location = New System.Drawing.Point(760, 40)
         Me.TxtReceiptDate1.Name = "TxtReceiptDate1"
         Me.TxtReceiptDate1.Size = New System.Drawing.Size(170, 22)
-        Me.TxtReceiptDate1.TabIndex = 136
+        Me.TxtReceiptDate1.TabIndex = 5
         '
         'Label4
         '
@@ -235,7 +236,7 @@ Partial Class ReceiptList
         Me.TxtSupplierCode.Location = New System.Drawing.Point(190, 124)
         Me.TxtSupplierCode.Name = "TxtSupplierCode"
         Me.TxtSupplierCode.Size = New System.Drawing.Size(350, 22)
-        Me.TxtSupplierCode.TabIndex = 134
+        Me.TxtSupplierCode.TabIndex = 4
         '
         'Label3
         '
@@ -255,7 +256,7 @@ Partial Class ReceiptList
         Me.TxtTel.Location = New System.Drawing.Point(190, 96)
         Me.TxtTel.Name = "TxtTel"
         Me.TxtTel.Size = New System.Drawing.Size(350, 22)
-        Me.TxtTel.TabIndex = 132
+        Me.TxtTel.TabIndex = 3
         '
         'Label2
         '
@@ -275,7 +276,7 @@ Partial Class ReceiptList
         Me.TxtAddress.Location = New System.Drawing.Point(190, 68)
         Me.TxtAddress.Name = "TxtAddress"
         Me.TxtAddress.Size = New System.Drawing.Size(350, 22)
-        Me.TxtAddress.TabIndex = 130
+        Me.TxtAddress.TabIndex = 2
         '
         'Label1
         '
@@ -305,7 +306,7 @@ Partial Class ReceiptList
         Me.TxtSupplierName.Location = New System.Drawing.Point(190, 40)
         Me.TxtSupplierName.Name = "TxtSupplierName"
         Me.TxtSupplierName.Size = New System.Drawing.Size(350, 22)
-        Me.TxtSupplierName.TabIndex = 127
+        Me.TxtSupplierName.TabIndex = 1
         '
         'BtnOrderSearch
         '
@@ -313,25 +314,27 @@ Partial Class ReceiptList
         Me.BtnOrderSearch.Location = New System.Drawing.Point(1174, 41)
         Me.BtnOrderSearch.Name = "BtnOrderSearch"
         Me.BtnOrderSearch.Size = New System.Drawing.Size(165, 40)
-        Me.BtnOrderSearch.TabIndex = 126
+        Me.BtnOrderSearch.TabIndex = 11
         Me.BtnOrderSearch.Text = "検索"
         Me.BtnOrderSearch.UseVisualStyleBackColor = True
         '
         'BtnBack
         '
+        Me.BtnBack.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnBack.Location = New System.Drawing.Point(1174, 509)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(165, 40)
-        Me.BtnBack.TabIndex = 125
+        Me.BtnBack.TabIndex = 18
         Me.BtnBack.Text = "戻る"
         Me.BtnBack.UseVisualStyleBackColor = True
         '
         'BtnReceiptCancel
         '
+        Me.BtnReceiptCancel.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnReceiptCancel.Location = New System.Drawing.Point(832, 509)
         Me.BtnReceiptCancel.Name = "BtnReceiptCancel"
         Me.BtnReceiptCancel.Size = New System.Drawing.Size(165, 40)
-        Me.BtnReceiptCancel.TabIndex = 124
+        Me.BtnReceiptCancel.TabIndex = 16
         Me.BtnReceiptCancel.Text = "入庫取消"
         Me.BtnReceiptCancel.UseVisualStyleBackColor = True
         Me.BtnReceiptCancel.Visible = False
@@ -346,7 +349,7 @@ Partial Class ReceiptList
         Me.DgvCymnhd.RowTemplate.Height = 21
         Me.DgvCymnhd.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvCymnhd.Size = New System.Drawing.Size(1326, 267)
-        Me.DgvCymnhd.TabIndex = 123
+        Me.DgvCymnhd.TabIndex = 15
         '
         'LblMode
         '
@@ -378,7 +381,7 @@ Partial Class ReceiptList
         Me.TxtCustomerPO.Location = New System.Drawing.Point(760, 124)
         Me.TxtCustomerPO.Name = "TxtCustomerPO"
         Me.TxtCustomerPO.Size = New System.Drawing.Size(170, 22)
-        Me.TxtCustomerPO.TabIndex = 306
+        Me.TxtCustomerPO.TabIndex = 10
         '
         'ReceiptList
         '

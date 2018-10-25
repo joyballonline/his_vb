@@ -23,12 +23,6 @@ Partial Class MstSupplier
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.Dgv_Supplier = New System.Windows.Forms.DataGridView()
-        Me.btnSupplierEdit = New System.Windows.Forms.Button()
-        Me.btnSupplierAdd = New System.Windows.Forms.Button()
-        Me.BtnBack = New System.Windows.Forms.Button()
-        Me.BtnSearch = New System.Windows.Forms.Button()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Search = New System.Windows.Forms.TextBox()
         Me.会社コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.仕入先コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.仕入先名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -56,6 +50,12 @@ Partial Class MstSupplier
         Me.輸送費率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.更新者 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.更新日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnSupplierEdit = New System.Windows.Forms.Button()
+        Me.btnSupplierAdd = New System.Windows.Forms.Button()
+        Me.BtnBack = New System.Windows.Forms.Button()
+        Me.BtnSearch = New System.Windows.Forms.Button()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Search = New System.Windows.Forms.TextBox()
         CType(Me.Dgv_Supplier, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -64,66 +64,14 @@ Partial Class MstSupplier
         Me.Dgv_Supplier.AllowUserToAddRows = False
         Me.Dgv_Supplier.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.Dgv_Supplier.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.会社コード, Me.仕入先コード, Me.仕入先名, Me.仕入先名略称, Me.郵便番号, Me.住所１, Me.住所２, Me.住所３, Me.電話番号, Me.電話番号検索用, Me.FAX番号, Me.担当者名, Me.担当者役職, Me.既定間接費率, Me.メモ, Me.銀行名, Me.銀行コード, Me.支店名, Me.支店コード, Me.預金種目, Me.口座番号, Me.口座名義, Me.関税率, Me.前払法人税率, Me.輸送費率, Me.更新者, Me.更新日})
-        Me.Dgv_Supplier.Location = New System.Drawing.Point(12, 31)
+        Me.Dgv_Supplier.Location = New System.Drawing.Point(12, 34)
         Me.Dgv_Supplier.Name = "Dgv_Supplier"
         Me.Dgv_Supplier.ReadOnly = True
         Me.Dgv_Supplier.RowHeadersVisible = False
         Me.Dgv_Supplier.RowTemplate.Height = 21
         Me.Dgv_Supplier.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.Dgv_Supplier.Size = New System.Drawing.Size(1326, 472)
-        Me.Dgv_Supplier.TabIndex = 0
-        '
-        'btnSupplierEdit
-        '
-        Me.btnSupplierEdit.Location = New System.Drawing.Point(1002, 509)
-        Me.btnSupplierEdit.Name = "btnSupplierEdit"
-        Me.btnSupplierEdit.Size = New System.Drawing.Size(165, 40)
-        Me.btnSupplierEdit.TabIndex = 1
-        Me.btnSupplierEdit.Text = "仕入先編集"
-        Me.btnSupplierEdit.UseVisualStyleBackColor = True
-        '
-        'btnSupplierAdd
-        '
-        Me.btnSupplierAdd.Location = New System.Drawing.Point(831, 509)
-        Me.btnSupplierAdd.Name = "btnSupplierAdd"
-        Me.btnSupplierAdd.Size = New System.Drawing.Size(165, 40)
-        Me.btnSupplierAdd.TabIndex = 2
-        Me.btnSupplierAdd.Text = "仕入先追加"
-        Me.btnSupplierAdd.UseVisualStyleBackColor = True
-        '
-        'BtnBack
-        '
-        Me.BtnBack.Location = New System.Drawing.Point(1173, 509)
-        Me.BtnBack.Name = "BtnBack"
-        Me.BtnBack.Size = New System.Drawing.Size(165, 40)
-        Me.BtnBack.TabIndex = 3
-        Me.BtnBack.Text = "戻る"
-        Me.BtnBack.UseVisualStyleBackColor = True
-        '
-        'BtnSearch
-        '
-        Me.BtnSearch.Location = New System.Drawing.Point(192, 4)
-        Me.BtnSearch.Name = "BtnSearch"
-        Me.BtnSearch.Size = New System.Drawing.Size(75, 23)
-        Me.BtnSearch.TabIndex = 18
-        Me.BtnSearch.Text = "検索"
-        Me.BtnSearch.UseVisualStyleBackColor = True
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(12, 9)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(68, 12)
-        Me.Label1.TabIndex = 17
-        Me.Label1.Text = "仕入先コード"
-        '
-        'Search
-        '
-        Me.Search.Location = New System.Drawing.Point(86, 6)
-        Me.Search.Name = "Search"
-        Me.Search.Size = New System.Drawing.Size(100, 19)
-        Me.Search.TabIndex = 16
+        Me.Dgv_Supplier.Size = New System.Drawing.Size(1326, 469)
+        Me.Dgv_Supplier.TabIndex = 3
         '
         '会社コード
         '
@@ -287,6 +235,64 @@ Partial Class MstSupplier
         Me.更新日.HeaderText = "更新日"
         Me.更新日.Name = "更新日"
         Me.更新日.ReadOnly = True
+        '
+        'btnSupplierEdit
+        '
+        Me.btnSupplierEdit.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.btnSupplierEdit.Location = New System.Drawing.Point(1002, 509)
+        Me.btnSupplierEdit.Name = "btnSupplierEdit"
+        Me.btnSupplierEdit.Size = New System.Drawing.Size(165, 40)
+        Me.btnSupplierEdit.TabIndex = 5
+        Me.btnSupplierEdit.Text = "仕入先編集"
+        Me.btnSupplierEdit.UseVisualStyleBackColor = True
+        '
+        'btnSupplierAdd
+        '
+        Me.btnSupplierAdd.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.btnSupplierAdd.Location = New System.Drawing.Point(831, 509)
+        Me.btnSupplierAdd.Name = "btnSupplierAdd"
+        Me.btnSupplierAdd.Size = New System.Drawing.Size(165, 40)
+        Me.btnSupplierAdd.TabIndex = 4
+        Me.btnSupplierAdd.Text = "仕入先追加"
+        Me.btnSupplierAdd.UseVisualStyleBackColor = True
+        '
+        'BtnBack
+        '
+        Me.BtnBack.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.BtnBack.Location = New System.Drawing.Point(1173, 509)
+        Me.BtnBack.Name = "BtnBack"
+        Me.BtnBack.Size = New System.Drawing.Size(165, 40)
+        Me.BtnBack.TabIndex = 6
+        Me.BtnBack.Text = "戻る"
+        Me.BtnBack.UseVisualStyleBackColor = True
+        '
+        'BtnSearch
+        '
+        Me.BtnSearch.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.BtnSearch.Location = New System.Drawing.Point(191, 5)
+        Me.BtnSearch.Name = "BtnSearch"
+        Me.BtnSearch.Size = New System.Drawing.Size(75, 23)
+        Me.BtnSearch.TabIndex = 2
+        Me.BtnSearch.Text = "検索"
+        Me.BtnSearch.UseVisualStyleBackColor = True
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Label1.Location = New System.Drawing.Point(12, 9)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(67, 15)
+        Me.Label1.TabIndex = 17
+        Me.Label1.Text = "仕入先名"
+        '
+        'Search
+        '
+        Me.Search.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Search.Location = New System.Drawing.Point(85, 6)
+        Me.Search.Name = "Search"
+        Me.Search.Size = New System.Drawing.Size(100, 22)
+        Me.Search.TabIndex = 1
         '
         'MstSupplier
         '

@@ -159,7 +159,7 @@ Public Class MstCustomer
             Sql += "."
             Sql += "m10_customer"
             Sql += " WHERE "
-            Sql += "会社コード"
+            Sql += "得意先名"
             Sql += " ILIKE "
             Sql += "'%"
             Sql += Search.Text

@@ -58,7 +58,7 @@ Partial Class DepositDetailList
         Me.RbtnSlip.Location = New System.Drawing.Point(6, 8)
         Me.RbtnSlip.Name = "RbtnSlip"
         Me.RbtnSlip.Size = New System.Drawing.Size(89, 19)
-        Me.RbtnSlip.TabIndex = 26
+        Me.RbtnSlip.TabIndex = 9
         Me.RbtnSlip.TabStop = True
         Me.RbtnSlip.Text = "伝票単位"
         Me.RbtnSlip.UseVisualStyleBackColor = True
@@ -70,7 +70,7 @@ Partial Class DepositDetailList
         Me.RbtnDetails.Location = New System.Drawing.Point(101, 8)
         Me.RbtnDetails.Name = "RbtnDetails"
         Me.RbtnDetails.Size = New System.Drawing.Size(89, 19)
-        Me.RbtnDetails.TabIndex = 27
+        Me.RbtnDetails.TabIndex = 10
         Me.RbtnDetails.Text = "明細単位"
         Me.RbtnDetails.UseVisualStyleBackColor = True
         '
@@ -88,10 +88,11 @@ Partial Class DepositDetailList
         '
         'BtnBillingCancel
         '
+        Me.BtnBillingCancel.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnBillingCancel.Location = New System.Drawing.Point(832, 509)
         Me.BtnBillingCancel.Name = "BtnBillingCancel"
         Me.BtnBillingCancel.Size = New System.Drawing.Size(165, 40)
-        Me.BtnBillingCancel.TabIndex = 327
+        Me.BtnBillingCancel.TabIndex = 12
         Me.BtnBillingCancel.Text = "入金取消"
         Me.BtnBillingCancel.UseVisualStyleBackColor = True
         Me.BtnBillingCancel.Visible = False
@@ -103,16 +104,17 @@ Partial Class DepositDetailList
         Me.ChkCancelData.Location = New System.Drawing.Point(16, 204)
         Me.ChkCancelData.Name = "ChkCancelData"
         Me.ChkCancelData.Size = New System.Drawing.Size(139, 19)
-        Me.ChkCancelData.TabIndex = 326
+        Me.ChkCancelData.TabIndex = 8
         Me.ChkCancelData.Text = "取消データを含める"
         Me.ChkCancelData.UseVisualStyleBackColor = True
         '
         'BtnBillingView
         '
+        Me.BtnBillingView.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnBillingView.Location = New System.Drawing.Point(1003, 509)
         Me.BtnBillingView.Name = "BtnBillingView"
         Me.BtnBillingView.Size = New System.Drawing.Size(165, 40)
-        Me.BtnBillingView.TabIndex = 325
+        Me.BtnBillingView.TabIndex = 13
         Me.BtnBillingView.Text = "入金参照"
         Me.BtnBillingView.UseVisualStyleBackColor = True
         Me.BtnBillingView.Visible = False
@@ -153,7 +155,7 @@ Partial Class DepositDetailList
         Me.TxtBillingNo2.Location = New System.Drawing.Point(959, 70)
         Me.TxtBillingNo2.Name = "TxtBillingNo2"
         Me.TxtBillingNo2.Size = New System.Drawing.Size(170, 22)
-        Me.TxtBillingNo2.TabIndex = 320
+        Me.TxtBillingNo2.TabIndex = 6
         '
         'TxtBillingDate2
         '
@@ -161,7 +163,7 @@ Partial Class DepositDetailList
         Me.TxtBillingDate2.Location = New System.Drawing.Point(959, 42)
         Me.TxtBillingDate2.Name = "TxtBillingDate2"
         Me.TxtBillingDate2.Size = New System.Drawing.Size(170, 22)
-        Me.TxtBillingDate2.TabIndex = 319
+        Me.TxtBillingDate2.TabIndex = 4
         '
         'Label7
         '
@@ -181,7 +183,7 @@ Partial Class DepositDetailList
         Me.TxtBillingNo1.Location = New System.Drawing.Point(760, 69)
         Me.TxtBillingNo1.Name = "TxtBillingNo1"
         Me.TxtBillingNo1.Size = New System.Drawing.Size(170, 22)
-        Me.TxtBillingNo1.TabIndex = 317
+        Me.TxtBillingNo1.TabIndex = 5
         '
         'Label8
         '
@@ -201,7 +203,7 @@ Partial Class DepositDetailList
         Me.TxtBillingDate1.Location = New System.Drawing.Point(760, 42)
         Me.TxtBillingDate1.Name = "TxtBillingDate1"
         Me.TxtBillingDate1.Size = New System.Drawing.Size(170, 22)
-        Me.TxtBillingDate1.TabIndex = 315
+        Me.TxtBillingDate1.TabIndex = 3
         '
         'Label4
         '
@@ -230,7 +232,7 @@ Partial Class DepositDetailList
         Me.TxtCustomerCode.Location = New System.Drawing.Point(190, 70)
         Me.TxtCustomerCode.Name = "TxtCustomerCode"
         Me.TxtCustomerCode.Size = New System.Drawing.Size(350, 22)
-        Me.TxtCustomerCode.TabIndex = 313
+        Me.TxtCustomerCode.TabIndex = 2
         '
         'Label1
         '
@@ -260,7 +262,7 @@ Partial Class DepositDetailList
         Me.TxtCustomerName.Location = New System.Drawing.Point(190, 42)
         Me.TxtCustomerName.Name = "TxtCustomerName"
         Me.TxtCustomerName.Size = New System.Drawing.Size(350, 22)
-        Me.TxtCustomerName.TabIndex = 310
+        Me.TxtCustomerName.TabIndex = 1
         '
         'BtnPurchaseSearch
         '
@@ -268,16 +270,17 @@ Partial Class DepositDetailList
         Me.BtnPurchaseSearch.Location = New System.Drawing.Point(1174, 43)
         Me.BtnPurchaseSearch.Name = "BtnPurchaseSearch"
         Me.BtnPurchaseSearch.Size = New System.Drawing.Size(165, 40)
-        Me.BtnPurchaseSearch.TabIndex = 309
+        Me.BtnPurchaseSearch.TabIndex = 7
         Me.BtnPurchaseSearch.Text = "検索"
         Me.BtnPurchaseSearch.UseVisualStyleBackColor = True
         '
         'BtnBack
         '
+        Me.BtnBack.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnBack.Location = New System.Drawing.Point(1174, 509)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(165, 40)
-        Me.BtnBack.TabIndex = 308
+        Me.BtnBack.TabIndex = 14
         Me.BtnBack.Text = "戻る"
         Me.BtnBack.UseVisualStyleBackColor = True
         '
@@ -292,7 +295,7 @@ Partial Class DepositDetailList
         Me.DgvBilling.RowTemplate.Height = 21
         Me.DgvBilling.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvBilling.Size = New System.Drawing.Size(1326, 265)
-        Me.DgvBilling.TabIndex = 307
+        Me.DgvBilling.TabIndex = 11
         '
         'DepositDetailList
         '

@@ -34,6 +34,9 @@ Partial Class MstLanguage
         Me.BtnBack = New System.Windows.Forms.Button()
         Me.BtnAdd = New System.Windows.Forms.Button()
         Me.BtnEdit = New System.Windows.Forms.Button()
+        Me.BtnSearch = New System.Windows.Forms.Button()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Search = New System.Windows.Forms.TextBox()
         CType(Me.Dgv_Language, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -42,13 +45,13 @@ Partial Class MstLanguage
         Me.Dgv_Language.AllowUserToAddRows = False
         Me.Dgv_Language.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.Dgv_Language.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.会社コード, Me.言語コード, Me.言語名称, Me.言語略称, Me.備考, Me.無効フラグ, Me.更新者, Me.更新日})
-        Me.Dgv_Language.Location = New System.Drawing.Point(12, 12)
+        Me.Dgv_Language.Location = New System.Drawing.Point(12, 34)
         Me.Dgv_Language.Name = "Dgv_Language"
         Me.Dgv_Language.RowHeadersVisible = False
         Me.Dgv_Language.RowTemplate.Height = 21
         Me.Dgv_Language.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.Dgv_Language.Size = New System.Drawing.Size(1326, 491)
-        Me.Dgv_Language.TabIndex = 0
+        Me.Dgv_Language.Size = New System.Drawing.Size(1326, 469)
+        Me.Dgv_Language.TabIndex = 3
         '
         '会社コード
         '
@@ -95,7 +98,7 @@ Partial Class MstLanguage
         Me.BtnBack.Location = New System.Drawing.Point(1173, 509)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(165, 40)
-        Me.BtnBack.TabIndex = 4
+        Me.BtnBack.TabIndex = 6
         Me.BtnBack.Text = "戻る"
         Me.BtnBack.UseVisualStyleBackColor = True
         '
@@ -104,7 +107,7 @@ Partial Class MstLanguage
         Me.BtnAdd.Location = New System.Drawing.Point(831, 509)
         Me.BtnAdd.Name = "BtnAdd"
         Me.BtnAdd.Size = New System.Drawing.Size(165, 40)
-        Me.BtnAdd.TabIndex = 5
+        Me.BtnAdd.TabIndex = 4
         Me.BtnAdd.Text = "言語追加"
         Me.BtnAdd.UseVisualStyleBackColor = True
         '
@@ -113,14 +116,45 @@ Partial Class MstLanguage
         Me.BtnEdit.Location = New System.Drawing.Point(1002, 509)
         Me.BtnEdit.Name = "BtnEdit"
         Me.BtnEdit.Size = New System.Drawing.Size(165, 40)
-        Me.BtnEdit.TabIndex = 6
+        Me.BtnEdit.TabIndex = 5
         Me.BtnEdit.Text = "言語編集"
         Me.BtnEdit.UseVisualStyleBackColor = True
+        '
+        'BtnSearch
+        '
+        Me.BtnSearch.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.BtnSearch.Location = New System.Drawing.Point(185, 5)
+        Me.BtnSearch.Name = "BtnSearch"
+        Me.BtnSearch.Size = New System.Drawing.Size(75, 23)
+        Me.BtnSearch.TabIndex = 2
+        Me.BtnSearch.Text = "検索"
+        Me.BtnSearch.UseVisualStyleBackColor = True
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Label1.Location = New System.Drawing.Point(12, 9)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(67, 15)
+        Me.Label1.TabIndex = 17
+        Me.Label1.Text = "言語名称"
+        '
+        'Search
+        '
+        Me.Search.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Search.Location = New System.Drawing.Point(79, 6)
+        Me.Search.Name = "Search"
+        Me.Search.Size = New System.Drawing.Size(100, 22)
+        Me.Search.TabIndex = 1
         '
         'MstLanguage
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.BtnSearch)
+        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.Search)
         Me.Controls.Add(Me.BtnEdit)
         Me.Controls.Add(Me.BtnAdd)
         Me.Controls.Add(Me.BtnBack)
@@ -130,6 +164,7 @@ Partial Class MstLanguage
         Me.Text = "MstLanguage"
         CType(Me.Dgv_Language, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -145,4 +180,7 @@ Partial Class MstLanguage
     Friend WithEvents BtnBack As Button
     Friend WithEvents BtnAdd As Button
     Friend WithEvents BtnEdit As Button
+    Friend WithEvents BtnSearch As Button
+    Friend WithEvents Label1 As Label
+    Friend WithEvents Search As TextBox
 End Class

@@ -75,44 +75,48 @@ Partial Class QuoteList
         Me.DgvMithd.RowTemplate.Height = 21
         Me.DgvMithd.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvMithd.Size = New System.Drawing.Size(1326, 262)
-        Me.DgvMithd.TabIndex = 0
+        Me.DgvMithd.TabIndex = 15
         '
         'BtnQuoteAdd
         '
+        Me.BtnQuoteAdd.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnQuoteAdd.Location = New System.Drawing.Point(308, 509)
         Me.BtnQuoteAdd.Name = "BtnQuoteAdd"
         Me.BtnQuoteAdd.Size = New System.Drawing.Size(165, 40)
-        Me.BtnQuoteAdd.TabIndex = 1
+        Me.BtnQuoteAdd.TabIndex = 17
         Me.BtnQuoteAdd.Text = "新規登録"
         Me.BtnQuoteAdd.UseVisualStyleBackColor = True
         Me.BtnQuoteAdd.Visible = False
         '
         'BtnQuoteEdit
         '
+        Me.BtnQuoteEdit.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnQuoteEdit.Location = New System.Drawing.Point(650, 509)
         Me.BtnQuoteEdit.Name = "BtnQuoteEdit"
         Me.BtnQuoteEdit.Size = New System.Drawing.Size(165, 40)
-        Me.BtnQuoteEdit.TabIndex = 2
+        Me.BtnQuoteEdit.TabIndex = 19
         Me.BtnQuoteEdit.Text = "見積修正"
         Me.BtnQuoteEdit.UseVisualStyleBackColor = True
         Me.BtnQuoteEdit.Visible = False
         '
         'BtnQuoteClone
         '
+        Me.BtnQuoteClone.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnQuoteClone.Location = New System.Drawing.Point(821, 509)
         Me.BtnQuoteClone.Name = "BtnQuoteClone"
         Me.BtnQuoteClone.Size = New System.Drawing.Size(165, 40)
-        Me.BtnQuoteClone.TabIndex = 3
+        Me.BtnQuoteClone.TabIndex = 20
         Me.BtnQuoteClone.Text = "複製"
         Me.BtnQuoteClone.UseVisualStyleBackColor = True
         Me.BtnQuoteClone.Visible = False
         '
         'BtnBack
         '
+        Me.BtnBack.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnBack.Location = New System.Drawing.Point(1173, 509)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(165, 40)
-        Me.BtnBack.TabIndex = 4
+        Me.BtnBack.TabIndex = 22
         Me.BtnBack.Text = "戻る"
         Me.BtnBack.UseVisualStyleBackColor = True
         '
@@ -122,7 +126,7 @@ Partial Class QuoteList
         Me.BtnQuoteSearch.Location = New System.Drawing.Point(1173, 46)
         Me.BtnQuoteSearch.Name = "BtnQuoteSearch"
         Me.BtnQuoteSearch.Size = New System.Drawing.Size(165, 40)
-        Me.BtnQuoteSearch.TabIndex = 5
+        Me.BtnQuoteSearch.TabIndex = 10
         Me.BtnQuoteSearch.Text = "検索"
         Me.BtnQuoteSearch.UseVisualStyleBackColor = True
         '
@@ -132,7 +136,7 @@ Partial Class QuoteList
         Me.TxtCustomerName.Location = New System.Drawing.Point(189, 45)
         Me.TxtCustomerName.Name = "TxtCustomerName"
         Me.TxtCustomerName.Size = New System.Drawing.Size(350, 22)
-        Me.TxtCustomerName.TabIndex = 6
+        Me.TxtCustomerName.TabIndex = 1
         '
         'LblConditions
         '
@@ -174,7 +178,7 @@ Partial Class QuoteList
         Me.TxtAddress.Location = New System.Drawing.Point(189, 73)
         Me.TxtAddress.Name = "TxtAddress"
         Me.TxtAddress.Size = New System.Drawing.Size(350, 22)
-        Me.TxtAddress.TabIndex = 9
+        Me.TxtAddress.TabIndex = 12
         '
         'Label3
         '
@@ -194,7 +198,7 @@ Partial Class QuoteList
         Me.TxtTel.Location = New System.Drawing.Point(189, 101)
         Me.TxtTel.Name = "TxtTel"
         Me.TxtTel.Size = New System.Drawing.Size(350, 22)
-        Me.TxtTel.TabIndex = 11
+        Me.TxtTel.TabIndex = 3
         '
         'Label4
         '
@@ -214,7 +218,7 @@ Partial Class QuoteList
         Me.TxtCustomerCode.Location = New System.Drawing.Point(189, 129)
         Me.TxtCustomerCode.Name = "TxtCustomerCode"
         Me.TxtCustomerCode.Size = New System.Drawing.Size(350, 22)
-        Me.TxtCustomerCode.TabIndex = 13
+        Me.TxtCustomerCode.TabIndex = 4
         '
         'Label6
         '
@@ -234,7 +238,7 @@ Partial Class QuoteList
         Me.TxtSales.Location = New System.Drawing.Point(759, 100)
         Me.TxtSales.Name = "TxtSales"
         Me.TxtSales.Size = New System.Drawing.Size(170, 22)
-        Me.TxtSales.TabIndex = 19
+        Me.TxtSales.TabIndex = 9
         '
         'Label7
         '
@@ -254,7 +258,7 @@ Partial Class QuoteList
         Me.TxtQuoteNo1.Location = New System.Drawing.Point(759, 72)
         Me.TxtQuoteNo1.Name = "TxtQuoteNo1"
         Me.TxtQuoteNo1.Size = New System.Drawing.Size(170, 22)
-        Me.TxtQuoteNo1.TabIndex = 17
+        Me.TxtQuoteNo1.TabIndex = 7
         '
         'Label8
         '
@@ -274,7 +278,7 @@ Partial Class QuoteList
         Me.TxtQuoteDate1.Location = New System.Drawing.Point(759, 45)
         Me.TxtQuoteDate1.Name = "TxtQuoteDate1"
         Me.TxtQuoteDate1.Size = New System.Drawing.Size(170, 22)
-        Me.TxtQuoteDate1.TabIndex = 15
+        Me.TxtQuoteDate1.TabIndex = 5
         '
         'TxtQuoteDate2
         '
@@ -282,7 +286,7 @@ Partial Class QuoteList
         Me.TxtQuoteDate2.Location = New System.Drawing.Point(958, 45)
         Me.TxtQuoteDate2.Name = "TxtQuoteDate2"
         Me.TxtQuoteDate2.Size = New System.Drawing.Size(170, 22)
-        Me.TxtQuoteDate2.TabIndex = 21
+        Me.TxtQuoteDate2.TabIndex = 6
         '
         'TxtQuoteNo2
         '
@@ -290,7 +294,7 @@ Partial Class QuoteList
         Me.TxtQuoteNo2.Location = New System.Drawing.Point(958, 73)
         Me.TxtQuoteNo2.Name = "TxtQuoteNo2"
         Me.TxtQuoteNo2.Size = New System.Drawing.Size(170, 22)
-        Me.TxtQuoteNo2.TabIndex = 22
+        Me.TxtQuoteNo2.TabIndex = 8
         '
         'Label5
         '
@@ -328,7 +332,7 @@ Partial Class QuoteList
         Me.RbtnSlip.Location = New System.Drawing.Point(6, 8)
         Me.RbtnSlip.Name = "RbtnSlip"
         Me.RbtnSlip.Size = New System.Drawing.Size(89, 19)
-        Me.RbtnSlip.TabIndex = 26
+        Me.RbtnSlip.TabIndex = 11
         Me.RbtnSlip.TabStop = True
         Me.RbtnSlip.Text = "伝票単位"
         Me.RbtnSlip.UseVisualStyleBackColor = True
@@ -340,7 +344,7 @@ Partial Class QuoteList
         Me.RbtnDetails.Location = New System.Drawing.Point(101, 8)
         Me.RbtnDetails.Name = "RbtnDetails"
         Me.RbtnDetails.Size = New System.Drawing.Size(89, 19)
-        Me.RbtnDetails.TabIndex = 27
+        Me.RbtnDetails.TabIndex = 12
         Me.RbtnDetails.Text = "明細単位"
         Me.RbtnDetails.UseVisualStyleBackColor = True
         '
@@ -356,30 +360,33 @@ Partial Class QuoteList
         '
         'BtnQuoteView
         '
+        Me.BtnQuoteView.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnQuoteView.Location = New System.Drawing.Point(997, 509)
         Me.BtnQuoteView.Name = "BtnQuoteView"
         Me.BtnQuoteView.Size = New System.Drawing.Size(165, 40)
-        Me.BtnQuoteView.TabIndex = 30
+        Me.BtnQuoteView.TabIndex = 21
         Me.BtnQuoteView.Text = "見積参照"
         Me.BtnQuoteView.UseVisualStyleBackColor = True
         Me.BtnQuoteView.Visible = False
         '
         'BtnUnitPrice
         '
+        Me.BtnUnitPrice.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnUnitPrice.Location = New System.Drawing.Point(479, 509)
         Me.BtnUnitPrice.Name = "BtnUnitPrice"
         Me.BtnUnitPrice.Size = New System.Drawing.Size(165, 40)
-        Me.BtnUnitPrice.TabIndex = 31
+        Me.BtnUnitPrice.TabIndex = 18
         Me.BtnUnitPrice.Text = "単価入力"
         Me.BtnUnitPrice.UseVisualStyleBackColor = True
         Me.BtnUnitPrice.Visible = False
         '
         'BtnOrderPurchase
         '
+        Me.BtnOrderPurchase.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnOrderPurchase.Location = New System.Drawing.Point(137, 509)
         Me.BtnOrderPurchase.Name = "BtnOrderPurchase"
         Me.BtnOrderPurchase.Size = New System.Drawing.Size(165, 40)
-        Me.BtnOrderPurchase.TabIndex = 32
+        Me.BtnOrderPurchase.TabIndex = 16
         Me.BtnOrderPurchase.Text = "受発注登録"
         Me.BtnOrderPurchase.UseVisualStyleBackColor = True
         Me.BtnOrderPurchase.Visible = False
@@ -401,7 +408,7 @@ Partial Class QuoteList
         Me.ChkExpired.Location = New System.Drawing.Point(288, 202)
         Me.ChkExpired.Name = "ChkExpired"
         Me.ChkExpired.Size = New System.Drawing.Size(221, 19)
-        Me.ChkExpired.TabIndex = 35
+        Me.ChkExpired.TabIndex = 13
         Me.ChkExpired.Text = "有効期限の切れたデータを含める"
         Me.ChkExpired.UseVisualStyleBackColor = True
         '
@@ -432,7 +439,7 @@ Partial Class QuoteList
         Me.ChkCancel.Location = New System.Drawing.Point(515, 202)
         Me.ChkCancel.Name = "ChkCancel"
         Me.ChkCancel.Size = New System.Drawing.Size(139, 19)
-        Me.ChkCancel.TabIndex = 38
+        Me.ChkCancel.TabIndex = 14
         Me.ChkCancel.Text = "取消データを含める"
         Me.ChkCancel.UseVisualStyleBackColor = True
         '

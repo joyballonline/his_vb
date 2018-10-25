@@ -168,7 +168,7 @@ Public Class SalesSearch
             Sql += "."
             Sql += "m02_user"
             Sql += " WHERE "
-            Sql += "会社コード"
+            Sql += "ユーザＩＤ"
             Sql += " ILIKE "
             Sql += "'%"
             Sql += Search.Text

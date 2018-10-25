@@ -29,12 +29,12 @@ Partial Class SupplierSearch
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Dgv_Supplier = New System.Windows.Forms.DataGridView()
         Me.会社コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.関税率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.前払法人税率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.輸送費率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.仕入先コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.仕入先名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.仕入先名略名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.関税率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.前払法人税率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.輸送費率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.郵便番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.住所１ = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.住所２ = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -58,83 +58,71 @@ Partial Class SupplierSearch
         '
         'BtnSearch
         '
-        Me.BtnSearch.Location = New System.Drawing.Point(180, 4)
+        Me.BtnSearch.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.BtnSearch.Location = New System.Drawing.Point(209, 5)
         Me.BtnSearch.Name = "BtnSearch"
         Me.BtnSearch.Size = New System.Drawing.Size(75, 23)
-        Me.BtnSearch.TabIndex = 25
+        Me.BtnSearch.TabIndex = 2
         Me.BtnSearch.Text = "検索"
         Me.BtnSearch.UseVisualStyleBackColor = True
         '
         'Search
         '
-        Me.Search.Location = New System.Drawing.Point(74, 6)
+        Me.Search.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Search.Location = New System.Drawing.Point(103, 6)
         Me.Search.Name = "Search"
-        Me.Search.Size = New System.Drawing.Size(100, 19)
-        Me.Search.TabIndex = 23
+        Me.Search.Size = New System.Drawing.Size(100, 22)
+        Me.Search.TabIndex = 1
         '
         'BtnBack
         '
-        Me.BtnBack.Location = New System.Drawing.Point(1263, 257)
+        Me.BtnBack.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.BtnBack.Location = New System.Drawing.Point(1173, 235)
         Me.BtnBack.Name = "BtnBack"
-        Me.BtnBack.Size = New System.Drawing.Size(75, 23)
-        Me.BtnBack.TabIndex = 22
+        Me.BtnBack.Size = New System.Drawing.Size(165, 40)
+        Me.BtnBack.TabIndex = 5
         Me.BtnBack.Text = "戻る"
         Me.BtnBack.UseVisualStyleBackColor = True
         '
         'btnSupplierSelect
         '
-        Me.btnSupplierSelect.Location = New System.Drawing.Point(1182, 257)
+        Me.btnSupplierSelect.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.btnSupplierSelect.Location = New System.Drawing.Point(1002, 235)
         Me.btnSupplierSelect.Name = "btnSupplierSelect"
-        Me.btnSupplierSelect.Size = New System.Drawing.Size(75, 23)
-        Me.btnSupplierSelect.TabIndex = 20
+        Me.btnSupplierSelect.Size = New System.Drawing.Size(165, 40)
+        Me.btnSupplierSelect.TabIndex = 4
         Me.btnSupplierSelect.Text = "選択"
         Me.btnSupplierSelect.UseVisualStyleBackColor = True
         '
         'Label1
         '
         Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.Label1.Location = New System.Drawing.Point(12, 9)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(56, 12)
+        Me.Label1.Size = New System.Drawing.Size(85, 15)
         Me.Label1.TabIndex = 24
-        Me.Label1.Text = "会社コード"
+        Me.Label1.Text = "仕入先コード"
         '
         'Dgv_Supplier
         '
         Me.Dgv_Supplier.AllowUserToAddRows = False
         Me.Dgv_Supplier.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.Dgv_Supplier.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.会社コード, Me.関税率, Me.前払法人税率, Me.輸送費率, Me.仕入先コード, Me.仕入先名, Me.仕入先名略名, Me.郵便番号, Me.住所１, Me.住所２, Me.住所３, Me.電話番号, Me.電話番号検索用, Me.FAX番号, Me.担当者名, Me.既定間接費率, Me.メモ, Me.銀行コード, Me.支店コード, Me.預金種目, Me.口座番号, Me.口座名義, Me.更新者, Me.更新日, Me.担当者役職})
-        Me.Dgv_Supplier.Location = New System.Drawing.Point(12, 31)
+        Me.Dgv_Supplier.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.会社コード, Me.仕入先コード, Me.仕入先名, Me.仕入先名略名, Me.関税率, Me.前払法人税率, Me.輸送費率, Me.郵便番号, Me.住所１, Me.住所２, Me.住所３, Me.電話番号, Me.電話番号検索用, Me.FAX番号, Me.担当者名, Me.既定間接費率, Me.メモ, Me.銀行コード, Me.支店コード, Me.預金種目, Me.口座番号, Me.口座名義, Me.更新者, Me.更新日, Me.担当者役職})
+        Me.Dgv_Supplier.Location = New System.Drawing.Point(12, 34)
         Me.Dgv_Supplier.Name = "Dgv_Supplier"
         Me.Dgv_Supplier.ReadOnly = True
+        Me.Dgv_Supplier.RowHeadersVisible = False
         Me.Dgv_Supplier.RowTemplate.Height = 21
         Me.Dgv_Supplier.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.Dgv_Supplier.Size = New System.Drawing.Size(1326, 220)
-        Me.Dgv_Supplier.TabIndex = 19
+        Me.Dgv_Supplier.Size = New System.Drawing.Size(1326, 195)
+        Me.Dgv_Supplier.TabIndex = 3
         '
         '会社コード
         '
         Me.会社コード.HeaderText = "会社コード"
         Me.会社コード.Name = "会社コード"
         Me.会社コード.ReadOnly = True
-        '
-        '関税率
-        '
-        Me.関税率.HeaderText = "関税率"
-        Me.関税率.Name = "関税率"
-        Me.関税率.ReadOnly = True
-        '
-        '前払法人税率
-        '
-        Me.前払法人税率.HeaderText = "前払法人税率"
-        Me.前払法人税率.Name = "前払法人税率"
-        Me.前払法人税率.ReadOnly = True
-        '
-        '輸送費率
-        '
-        Me.輸送費率.HeaderText = "輸送費率"
-        Me.輸送費率.Name = "輸送費率"
-        Me.輸送費率.ReadOnly = True
         '
         '仕入先コード
         '
@@ -153,6 +141,24 @@ Partial Class SupplierSearch
         Me.仕入先名略名.HeaderText = "仕入先名略名"
         Me.仕入先名略名.Name = "仕入先名略名"
         Me.仕入先名略名.ReadOnly = True
+        '
+        '関税率
+        '
+        Me.関税率.HeaderText = "関税率"
+        Me.関税率.Name = "関税率"
+        Me.関税率.ReadOnly = True
+        '
+        '前払法人税率
+        '
+        Me.前払法人税率.HeaderText = "前払法人税率"
+        Me.前払法人税率.Name = "前払法人税率"
+        Me.前払法人税率.ReadOnly = True
+        '
+        '輸送費率
+        '
+        Me.輸送費率.HeaderText = "輸送費率"
+        Me.輸送費率.Name = "輸送費率"
+        Me.輸送費率.ReadOnly = True
         '
         '郵便番号
         '
@@ -288,12 +294,12 @@ Partial Class SupplierSearch
     Friend WithEvents Label1 As Label
     Friend WithEvents Dgv_Supplier As DataGridView
     Friend WithEvents 会社コード As DataGridViewTextBoxColumn
-    Friend WithEvents 関税率 As DataGridViewTextBoxColumn
-    Friend WithEvents 前払法人税率 As DataGridViewTextBoxColumn
-    Friend WithEvents 輸送費率 As DataGridViewTextBoxColumn
     Friend WithEvents 仕入先コード As DataGridViewTextBoxColumn
     Friend WithEvents 仕入先名 As DataGridViewTextBoxColumn
     Friend WithEvents 仕入先名略名 As DataGridViewTextBoxColumn
+    Friend WithEvents 関税率 As DataGridViewTextBoxColumn
+    Friend WithEvents 前払法人税率 As DataGridViewTextBoxColumn
+    Friend WithEvents 輸送費率 As DataGridViewTextBoxColumn
     Friend WithEvents 郵便番号 As DataGridViewTextBoxColumn
     Friend WithEvents 住所１ As DataGridViewTextBoxColumn
     Friend WithEvents 住所２ As DataGridViewTextBoxColumn

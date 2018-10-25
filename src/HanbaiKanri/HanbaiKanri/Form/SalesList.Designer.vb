@@ -65,16 +65,17 @@ Partial Class SalesList
         Me.ChkCancelData.Location = New System.Drawing.Point(319, 197)
         Me.ChkCancelData.Name = "ChkCancelData"
         Me.ChkCancelData.Size = New System.Drawing.Size(139, 19)
-        Me.ChkCancelData.TabIndex = 95
+        Me.ChkCancelData.TabIndex = 13
         Me.ChkCancelData.Text = "取消データを含める"
         Me.ChkCancelData.UseVisualStyleBackColor = True
         '
         'BtnSalesView
         '
+        Me.BtnSalesView.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnSalesView.Location = New System.Drawing.Point(1003, 509)
         Me.BtnSalesView.Name = "BtnSalesView"
         Me.BtnSalesView.Size = New System.Drawing.Size(165, 40)
-        Me.BtnSalesView.TabIndex = 91
+        Me.BtnSalesView.TabIndex = 16
         Me.BtnSalesView.Text = "売上参照"
         Me.BtnSalesView.UseVisualStyleBackColor = True
         Me.BtnSalesView.Visible = False
@@ -97,7 +98,7 @@ Partial Class SalesList
         Me.RbtnSlip.Location = New System.Drawing.Point(6, 8)
         Me.RbtnSlip.Name = "RbtnSlip"
         Me.RbtnSlip.Size = New System.Drawing.Size(89, 19)
-        Me.RbtnSlip.TabIndex = 26
+        Me.RbtnSlip.TabIndex = 11
         Me.RbtnSlip.TabStop = True
         Me.RbtnSlip.Text = "伝票単位"
         Me.RbtnSlip.UseVisualStyleBackColor = True
@@ -109,7 +110,7 @@ Partial Class SalesList
         Me.RbtnDetails.Location = New System.Drawing.Point(101, 8)
         Me.RbtnDetails.Name = "RbtnDetails"
         Me.RbtnDetails.Size = New System.Drawing.Size(89, 19)
-        Me.RbtnDetails.TabIndex = 27
+        Me.RbtnDetails.TabIndex = 12
         Me.RbtnDetails.Text = "明細単位"
         Me.RbtnDetails.UseVisualStyleBackColor = True
         '
@@ -138,7 +139,7 @@ Partial Class SalesList
         Me.TxtSalesNo2.Location = New System.Drawing.Point(959, 68)
         Me.TxtSalesNo2.Name = "TxtSalesNo2"
         Me.TxtSalesNo2.Size = New System.Drawing.Size(170, 22)
-        Me.TxtSalesNo2.TabIndex = 86
+        Me.TxtSalesNo2.TabIndex = 8
         '
         'TxtSalesDate2
         '
@@ -146,7 +147,7 @@ Partial Class SalesList
         Me.TxtSalesDate2.Location = New System.Drawing.Point(959, 40)
         Me.TxtSalesDate2.Name = "TxtSalesDate2"
         Me.TxtSalesDate2.Size = New System.Drawing.Size(170, 22)
-        Me.TxtSalesDate2.TabIndex = 85
+        Me.TxtSalesDate2.TabIndex = 6
         '
         'Label6
         '
@@ -166,7 +167,7 @@ Partial Class SalesList
         Me.TxtSales.Location = New System.Drawing.Point(760, 95)
         Me.TxtSales.Name = "TxtSales"
         Me.TxtSales.Size = New System.Drawing.Size(170, 22)
-        Me.TxtSales.TabIndex = 83
+        Me.TxtSales.TabIndex = 9
         '
         'Label7
         '
@@ -186,7 +187,7 @@ Partial Class SalesList
         Me.TxtSalesNo1.Location = New System.Drawing.Point(760, 67)
         Me.TxtSalesNo1.Name = "TxtSalesNo1"
         Me.TxtSalesNo1.Size = New System.Drawing.Size(170, 22)
-        Me.TxtSalesNo1.TabIndex = 81
+        Me.TxtSalesNo1.TabIndex = 7
         '
         'Label8
         '
@@ -206,7 +207,7 @@ Partial Class SalesList
         Me.TxtSalesDate1.Location = New System.Drawing.Point(760, 40)
         Me.TxtSalesDate1.Name = "TxtSalesDate1"
         Me.TxtSalesDate1.Size = New System.Drawing.Size(170, 22)
-        Me.TxtSalesDate1.TabIndex = 79
+        Me.TxtSalesDate1.TabIndex = 5
         '
         'Label4
         '
@@ -235,7 +236,7 @@ Partial Class SalesList
         Me.TxtCustomerCode.Location = New System.Drawing.Point(190, 124)
         Me.TxtCustomerCode.Name = "TxtCustomerCode"
         Me.TxtCustomerCode.Size = New System.Drawing.Size(350, 22)
-        Me.TxtCustomerCode.TabIndex = 77
+        Me.TxtCustomerCode.TabIndex = 4
         '
         'Label3
         '
@@ -255,7 +256,7 @@ Partial Class SalesList
         Me.TxtTel.Location = New System.Drawing.Point(190, 96)
         Me.TxtTel.Name = "TxtTel"
         Me.TxtTel.Size = New System.Drawing.Size(350, 22)
-        Me.TxtTel.TabIndex = 75
+        Me.TxtTel.TabIndex = 3
         '
         'Label2
         '
@@ -275,7 +276,7 @@ Partial Class SalesList
         Me.TxtAddress.Location = New System.Drawing.Point(190, 68)
         Me.TxtAddress.Name = "TxtAddress"
         Me.TxtAddress.Size = New System.Drawing.Size(350, 22)
-        Me.TxtAddress.TabIndex = 73
+        Me.TxtAddress.TabIndex = 2
         '
         'Label1
         '
@@ -305,7 +306,7 @@ Partial Class SalesList
         Me.TxtCustomerName.Location = New System.Drawing.Point(190, 40)
         Me.TxtCustomerName.Name = "TxtCustomerName"
         Me.TxtCustomerName.Size = New System.Drawing.Size(350, 22)
-        Me.TxtCustomerName.TabIndex = 70
+        Me.TxtCustomerName.TabIndex = 1
         '
         'BtnOrderSearch
         '
@@ -319,10 +320,11 @@ Partial Class SalesList
         '
         'BtnBack
         '
+        Me.BtnBack.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnBack.Location = New System.Drawing.Point(1174, 509)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(165, 40)
-        Me.BtnBack.TabIndex = 68
+        Me.BtnBack.TabIndex = 17
         Me.BtnBack.Text = "戻る"
         Me.BtnBack.UseVisualStyleBackColor = True
         '
@@ -336,14 +338,15 @@ Partial Class SalesList
         Me.DgvCymnhd.RowTemplate.Height = 21
         Me.DgvCymnhd.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvCymnhd.Size = New System.Drawing.Size(1326, 267)
-        Me.DgvCymnhd.TabIndex = 66
+        Me.DgvCymnhd.TabIndex = 14
         '
         'BtnSalesCancel
         '
+        Me.BtnSalesCancel.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnSalesCancel.Location = New System.Drawing.Point(832, 509)
         Me.BtnSalesCancel.Name = "BtnSalesCancel"
         Me.BtnSalesCancel.Size = New System.Drawing.Size(165, 40)
-        Me.BtnSalesCancel.TabIndex = 67
+        Me.BtnSalesCancel.TabIndex = 15
         Me.BtnSalesCancel.Text = "売上取消"
         Me.BtnSalesCancel.UseVisualStyleBackColor = True
         Me.BtnSalesCancel.Visible = False
@@ -378,7 +381,7 @@ Partial Class SalesList
         Me.TxtCustomerPO.Location = New System.Drawing.Point(760, 124)
         Me.TxtCustomerPO.Name = "TxtCustomerPO"
         Me.TxtCustomerPO.Size = New System.Drawing.Size(170, 22)
-        Me.TxtCustomerPO.TabIndex = 308
+        Me.TxtCustomerPO.TabIndex = 10
         '
         'SalesList
         '

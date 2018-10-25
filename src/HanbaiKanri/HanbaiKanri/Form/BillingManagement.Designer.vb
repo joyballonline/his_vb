@@ -53,6 +53,13 @@ Partial Class BillingManagement
         Me.売上単価 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.売上金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DgvCymn = New System.Windows.Forms.DataGridView()
+        Me.受注番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.受注日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.得意先 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.客先番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.受注金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.請求金額計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.請求残高 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DtpBillingDate = New System.Windows.Forms.DateTimePicker()
         Me.LblRemarks1 = New System.Windows.Forms.Label()
         Me.TxtRemarks1 = New System.Windows.Forms.TextBox()
@@ -70,13 +77,6 @@ Partial Class BillingManagement
         Me.BtnClone = New System.Windows.Forms.Button()
         Me.BtnDelete = New System.Windows.Forms.Button()
         Me.LblMode = New System.Windows.Forms.Label()
-        Me.受注番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.受注日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.得意先 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.客先番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.受注金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.請求金額計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.請求残高 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DgvAdd, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvHistory, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvCymndt, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -123,7 +123,7 @@ Partial Class BillingManagement
         Me.DgvAdd.RowHeadersVisible = False
         Me.DgvAdd.RowTemplate.Height = 21
         Me.DgvAdd.Size = New System.Drawing.Size(1327, 40)
-        Me.DgvAdd.TabIndex = 11
+        Me.DgvAdd.TabIndex = 5
         '
         'AddNo
         '
@@ -166,7 +166,7 @@ Partial Class BillingManagement
         Me.DgvHistory.RowTemplate.Height = 21
         Me.DgvHistory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvHistory.Size = New System.Drawing.Size(1326, 100)
-        Me.DgvHistory.TabIndex = 10
+        Me.DgvHistory.TabIndex = 3
         '
         'No
         '
@@ -238,7 +238,7 @@ Partial Class BillingManagement
         Me.DgvCymndt.RowTemplate.Height = 21
         Me.DgvCymndt.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvCymndt.Size = New System.Drawing.Size(1326, 100)
-        Me.DgvCymndt.TabIndex = 9
+        Me.DgvCymndt.TabIndex = 2
         '
         '明細
         '
@@ -304,7 +304,48 @@ Partial Class BillingManagement
         Me.DgvCymn.RowTemplate.Height = 21
         Me.DgvCymn.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvCymn.Size = New System.Drawing.Size(1053, 100)
-        Me.DgvCymn.TabIndex = 8
+        Me.DgvCymn.TabIndex = 1
+        '
+        '受注番号
+        '
+        Me.受注番号.HeaderText = "受注番号"
+        Me.受注番号.Name = "受注番号"
+        Me.受注番号.Width = 150
+        '
+        '受注日
+        '
+        Me.受注日.HeaderText = "受注日"
+        Me.受注日.Name = "受注日"
+        Me.受注日.Width = 150
+        '
+        '得意先
+        '
+        Me.得意先.HeaderText = "得意先"
+        Me.得意先.Name = "得意先"
+        Me.得意先.Width = 200
+        '
+        '客先番号
+        '
+        Me.客先番号.HeaderText = "客先番号"
+        Me.客先番号.Name = "客先番号"
+        '
+        '受注金額
+        '
+        Me.受注金額.HeaderText = "受注金額"
+        Me.受注金額.Name = "受注金額"
+        Me.受注金額.Width = 150
+        '
+        '請求金額計
+        '
+        Me.請求金額計.HeaderText = "請求金額計"
+        Me.請求金額計.Name = "請求金額計"
+        Me.請求金額計.Width = 150
+        '
+        '請求残高
+        '
+        Me.請求残高.HeaderText = "請求残高"
+        Me.請求残高.Name = "請求残高"
+        Me.請求残高.Width = 150
         '
         'DtpBillingDate
         '
@@ -315,7 +356,7 @@ Partial Class BillingManagement
         Me.DtpBillingDate.Location = New System.Drawing.Point(289, 383)
         Me.DtpBillingDate.Name = "DtpBillingDate"
         Me.DtpBillingDate.Size = New System.Drawing.Size(148, 22)
-        Me.DtpBillingDate.TabIndex = 262
+        Me.DtpBillingDate.TabIndex = 4
         Me.DtpBillingDate.TabStop = False
         Me.DtpBillingDate.Value = New Date(2018, 7, 25, 13, 29, 25, 0)
         '
@@ -373,6 +414,7 @@ Partial Class BillingManagement
         Me.TxtCount2.Name = "TxtCount2"
         Me.TxtCount2.Size = New System.Drawing.Size(38, 22)
         Me.TxtCount2.TabIndex = 257
+        Me.TxtCount2.TabStop = False
         '
         'LblRemarks2
         '
@@ -405,6 +447,7 @@ Partial Class BillingManagement
         Me.TxtCount3.Name = "TxtCount3"
         Me.TxtCount3.Size = New System.Drawing.Size(38, 22)
         Me.TxtCount3.TabIndex = 263
+        Me.TxtCount3.TabStop = False
         Me.TxtCount3.Visible = False
         '
         'LblNo3
@@ -439,22 +482,25 @@ Partial Class BillingManagement
         Me.TxtCount1.Name = "TxtCount1"
         Me.TxtCount1.Size = New System.Drawing.Size(38, 22)
         Me.TxtCount1.TabIndex = 267
+        Me.TxtCount1.TabStop = False
         '
         'BtnRegist
         '
+        Me.BtnRegist.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnRegist.Location = New System.Drawing.Point(1000, 509)
         Me.BtnRegist.Name = "BtnRegist"
         Me.BtnRegist.Size = New System.Drawing.Size(165, 40)
-        Me.BtnRegist.TabIndex = 270
+        Me.BtnRegist.TabIndex = 6
         Me.BtnRegist.Text = "登録"
         Me.BtnRegist.UseVisualStyleBackColor = True
         '
         'BtnBack
         '
+        Me.BtnBack.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnBack.Location = New System.Drawing.Point(1171, 509)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(165, 40)
-        Me.BtnBack.TabIndex = 269
+        Me.BtnBack.TabIndex = 7
         Me.BtnBack.Text = "戻る"
         Me.BtnBack.UseVisualStyleBackColor = True
         '
@@ -489,47 +535,6 @@ Partial Class BillingManagement
         Me.LblMode.TabIndex = 306
         Me.LblMode.Text = "モード"
         Me.LblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        '受注番号
-        '
-        Me.受注番号.HeaderText = "受注番号"
-        Me.受注番号.Name = "受注番号"
-        Me.受注番号.Width = 150
-        '
-        '受注日
-        '
-        Me.受注日.HeaderText = "受注日"
-        Me.受注日.Name = "受注日"
-        Me.受注日.Width = 150
-        '
-        '得意先
-        '
-        Me.得意先.HeaderText = "得意先"
-        Me.得意先.Name = "得意先"
-        Me.得意先.Width = 200
-        '
-        '客先番号
-        '
-        Me.客先番号.HeaderText = "客先番号"
-        Me.客先番号.Name = "客先番号"
-        '
-        '受注金額
-        '
-        Me.受注金額.HeaderText = "受注金額"
-        Me.受注金額.Name = "受注金額"
-        Me.受注金額.Width = 150
-        '
-        '請求金額計
-        '
-        Me.請求金額計.HeaderText = "請求金額計"
-        Me.請求金額計.Name = "請求金額計"
-        Me.請求金額計.Width = 150
-        '
-        '請求残高
-        '
-        Me.請求残高.HeaderText = "請求残高"
-        Me.請求残高.Name = "請求残高"
-        Me.請求残高.Width = 150
         '
         'BillingManagement
         '

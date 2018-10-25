@@ -66,7 +66,7 @@ Partial Class MstHanyou
         Me.Dgv_Hanyo.RowTemplate.Height = 21
         Me.Dgv_Hanyo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.Dgv_Hanyo.Size = New System.Drawing.Size(1326, 472)
-        Me.Dgv_Hanyo.TabIndex = 0
+        Me.Dgv_Hanyo.TabIndex = 3
         '
         '会社コード
         '
@@ -184,55 +184,61 @@ Partial Class MstHanyou
         '
         'BtnSelect
         '
+        Me.BtnSelect.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnSelect.Location = New System.Drawing.Point(1002, 509)
         Me.BtnSelect.Name = "BtnSelect"
         Me.BtnSelect.Size = New System.Drawing.Size(165, 40)
-        Me.BtnSelect.TabIndex = 1
+        Me.BtnSelect.TabIndex = 5
         Me.BtnSelect.Text = "編集"
         Me.BtnSelect.UseVisualStyleBackColor = True
         '
         'BtnAdd
         '
+        Me.BtnAdd.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnAdd.Location = New System.Drawing.Point(831, 509)
         Me.BtnAdd.Name = "BtnAdd"
         Me.BtnAdd.Size = New System.Drawing.Size(165, 40)
-        Me.BtnAdd.TabIndex = 2
+        Me.BtnAdd.TabIndex = 4
         Me.BtnAdd.Text = "追加"
         Me.BtnAdd.UseVisualStyleBackColor = True
         '
         'BtnBack
         '
+        Me.BtnBack.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnBack.Location = New System.Drawing.Point(1173, 509)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(165, 40)
-        Me.BtnBack.TabIndex = 3
+        Me.BtnBack.TabIndex = 6
         Me.BtnBack.Text = "戻る"
         Me.BtnBack.UseVisualStyleBackColor = True
         '
         'BtnSearch
         '
-        Me.BtnSearch.Location = New System.Drawing.Point(180, 4)
+        Me.BtnSearch.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.BtnSearch.Location = New System.Drawing.Point(185, 5)
         Me.BtnSearch.Name = "BtnSearch"
         Me.BtnSearch.Size = New System.Drawing.Size(75, 23)
-        Me.BtnSearch.TabIndex = 15
+        Me.BtnSearch.TabIndex = 2
         Me.BtnSearch.Text = "検索"
         Me.BtnSearch.UseVisualStyleBackColor = True
         '
         'Label1
         '
         Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.Label1.Location = New System.Drawing.Point(12, 9)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(56, 12)
+        Me.Label1.Size = New System.Drawing.Size(61, 15)
         Me.Label1.TabIndex = 14
-        Me.Label1.Text = "会社コード"
+        Me.Label1.Text = "固定キー"
         '
         'Search
         '
-        Me.Search.Location = New System.Drawing.Point(74, 6)
+        Me.Search.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Search.Location = New System.Drawing.Point(79, 6)
         Me.Search.Name = "Search"
-        Me.Search.Size = New System.Drawing.Size(100, 19)
-        Me.Search.TabIndex = 13
+        Me.Search.Size = New System.Drawing.Size(100, 22)
+        Me.Search.TabIndex = 1
         '
         'MstHanyou
         '

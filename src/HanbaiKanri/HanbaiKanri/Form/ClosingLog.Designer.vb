@@ -70,7 +70,7 @@ Partial Class ClosingLog
         Me.TxtPerson.Location = New System.Drawing.Point(191, 64)
         Me.TxtPerson.Name = "TxtPerson"
         Me.TxtPerson.Size = New System.Drawing.Size(200, 22)
-        Me.TxtPerson.TabIndex = 313
+        Me.TxtPerson.TabIndex = 2
         '
         'Label1
         '
@@ -100,7 +100,7 @@ Partial Class ClosingLog
         Me.TxtClosingDate.Location = New System.Drawing.Point(191, 36)
         Me.TxtClosingDate.Name = "TxtClosingDate"
         Me.TxtClosingDate.Size = New System.Drawing.Size(200, 22)
-        Me.TxtClosingDate.TabIndex = 308
+        Me.TxtClosingDate.TabIndex = 1
         '
         'BtnSearch
         '
@@ -108,7 +108,7 @@ Partial Class ClosingLog
         Me.BtnSearch.Location = New System.Drawing.Point(1175, 35)
         Me.BtnSearch.Name = "BtnSearch"
         Me.BtnSearch.Size = New System.Drawing.Size(165, 40)
-        Me.BtnSearch.TabIndex = 307
+        Me.BtnSearch.TabIndex = 3
         Me.BtnSearch.Text = "検索"
         Me.BtnSearch.UseVisualStyleBackColor = True
         '
@@ -123,7 +123,7 @@ Partial Class ClosingLog
         Me.DgvClosingLog.RowTemplate.Height = 21
         Me.DgvClosingLog.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvClosingLog.Size = New System.Drawing.Size(1325, 334)
-        Me.DgvClosingLog.TabIndex = 322
+        Me.DgvClosingLog.TabIndex = 4
         '
         '締処理日時
         '
@@ -152,19 +152,21 @@ Partial Class ClosingLog
         '
         'BtnClosing
         '
+        Me.BtnClosing.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnClosing.Location = New System.Drawing.Point(1004, 509)
         Me.BtnClosing.Name = "BtnClosing"
         Me.BtnClosing.Size = New System.Drawing.Size(165, 40)
-        Me.BtnClosing.TabIndex = 323
+        Me.BtnClosing.TabIndex = 5
         Me.BtnClosing.Text = "締処理実行"
         Me.BtnClosing.UseVisualStyleBackColor = True
         '
         'BtnBack
         '
+        Me.BtnBack.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnBack.Location = New System.Drawing.Point(1175, 509)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(165, 40)
-        Me.BtnBack.TabIndex = 324
+        Me.BtnBack.TabIndex = 6
         Me.BtnBack.Text = "戻る"
         Me.BtnBack.UseVisualStyleBackColor = True
         '

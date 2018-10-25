@@ -39,6 +39,13 @@ Partial Class AccountsPayable
         Me.LblNo2 = New System.Windows.Forms.Label()
         Me.TxtCount2 = New System.Windows.Forms.TextBox()
         Me.DgvCymn = New System.Windows.Forms.DataGridView()
+        Me.発注番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.発注日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入先 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.客先番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.発注金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.買掛金額計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.買掛残高 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LblAdd = New System.Windows.Forms.Label()
         Me.LblHistory = New System.Windows.Forms.Label()
         Me.LblCymndt = New System.Windows.Forms.Label()
@@ -70,13 +77,6 @@ Partial Class AccountsPayable
         Me.仕入単価 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.仕入金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LblMode = New System.Windows.Forms.Label()
-        Me.発注番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.発注日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.仕入先 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.客先番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.発注金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.買掛金額計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.買掛残高 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DgvCymn, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvAdd, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvHistory, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -105,19 +105,21 @@ Partial Class AccountsPayable
         '
         'BtnRegist
         '
+        Me.BtnRegist.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnRegist.Location = New System.Drawing.Point(1004, 509)
         Me.BtnRegist.Name = "BtnRegist"
         Me.BtnRegist.Size = New System.Drawing.Size(165, 40)
-        Me.BtnRegist.TabIndex = 293
+        Me.BtnRegist.TabIndex = 8
         Me.BtnRegist.Text = "登録"
         Me.BtnRegist.UseVisualStyleBackColor = True
         '
         'BtnBack
         '
+        Me.BtnBack.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnBack.Location = New System.Drawing.Point(1175, 509)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(165, 40)
-        Me.BtnBack.TabIndex = 292
+        Me.BtnBack.TabIndex = 9
         Me.BtnBack.Text = "戻る"
         Me.BtnBack.UseVisualStyleBackColor = True
         '
@@ -141,6 +143,7 @@ Partial Class AccountsPayable
         Me.TxtCount1.Name = "TxtCount1"
         Me.TxtCount1.Size = New System.Drawing.Size(38, 22)
         Me.TxtCount1.TabIndex = 290
+        Me.TxtCount1.TabStop = False
         '
         'LblNo3
         '
@@ -173,7 +176,7 @@ Partial Class AccountsPayable
         Me.TxtRemarks2.Location = New System.Drawing.Point(694, 481)
         Me.TxtRemarks2.Name = "TxtRemarks2"
         Me.TxtRemarks2.Size = New System.Drawing.Size(644, 22)
-        Me.TxtRemarks2.TabIndex = 287
+        Me.TxtRemarks2.TabIndex = 7
         Me.TxtRemarks2.Visible = False
         '
         'TxtCount3
@@ -185,6 +188,7 @@ Partial Class AccountsPayable
         Me.TxtCount3.Name = "TxtCount3"
         Me.TxtCount3.Size = New System.Drawing.Size(38, 22)
         Me.TxtCount3.TabIndex = 286
+        Me.TxtCount3.TabStop = False
         Me.TxtCount3.Visible = False
         '
         'DtpAPDate
@@ -196,7 +200,7 @@ Partial Class AccountsPayable
         Me.DtpAPDate.Location = New System.Drawing.Point(291, 379)
         Me.DtpAPDate.Name = "DtpAPDate"
         Me.DtpAPDate.Size = New System.Drawing.Size(148, 22)
-        Me.DtpAPDate.TabIndex = 285
+        Me.DtpAPDate.TabIndex = 4
         Me.DtpAPDate.TabStop = False
         Me.DtpAPDate.Value = New Date(2018, 7, 25, 13, 29, 25, 0)
         '
@@ -219,7 +223,7 @@ Partial Class AccountsPayable
         Me.TxtRemarks1.Location = New System.Drawing.Point(694, 453)
         Me.TxtRemarks1.Name = "TxtRemarks1"
         Me.TxtRemarks1.Size = New System.Drawing.Size(644, 22)
-        Me.TxtRemarks1.TabIndex = 283
+        Me.TxtRemarks1.TabIndex = 6
         Me.TxtRemarks1.Visible = False
         '
         'LblBillingDate
@@ -254,6 +258,7 @@ Partial Class AccountsPayable
         Me.TxtCount2.Name = "TxtCount2"
         Me.TxtCount2.Size = New System.Drawing.Size(38, 22)
         Me.TxtCount2.TabIndex = 280
+        Me.TxtCount2.TabStop = False
         '
         'DgvCymn
         '
@@ -266,7 +271,48 @@ Partial Class AccountsPayable
         Me.DgvCymn.RowTemplate.Height = 21
         Me.DgvCymn.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvCymn.Size = New System.Drawing.Size(1053, 100)
-        Me.DgvCymn.TabIndex = 273
+        Me.DgvCymn.TabIndex = 1
+        '
+        '発注番号
+        '
+        Me.発注番号.HeaderText = "発注番号"
+        Me.発注番号.Name = "発注番号"
+        Me.発注番号.Width = 150
+        '
+        '発注日
+        '
+        Me.発注日.HeaderText = "発注日"
+        Me.発注日.Name = "発注日"
+        Me.発注日.Width = 150
+        '
+        '仕入先
+        '
+        Me.仕入先.HeaderText = "仕入先"
+        Me.仕入先.Name = "仕入先"
+        Me.仕入先.Width = 200
+        '
+        '客先番号
+        '
+        Me.客先番号.HeaderText = "客先番号"
+        Me.客先番号.Name = "客先番号"
+        '
+        '発注金額
+        '
+        Me.発注金額.HeaderText = "発注金額"
+        Me.発注金額.Name = "発注金額"
+        Me.発注金額.Width = 150
+        '
+        '買掛金額計
+        '
+        Me.買掛金額計.HeaderText = "買掛金額計"
+        Me.買掛金額計.Name = "買掛金額計"
+        Me.買掛金額計.Width = 150
+        '
+        '買掛残高
+        '
+        Me.買掛残高.HeaderText = "買掛残高"
+        Me.買掛残高.Name = "買掛残高"
+        Me.買掛残高.Width = 150
         '
         'LblAdd
         '
@@ -308,7 +354,7 @@ Partial Class AccountsPayable
         Me.DgvAdd.RowHeadersVisible = False
         Me.DgvAdd.RowTemplate.Height = 21
         Me.DgvAdd.Size = New System.Drawing.Size(1327, 40)
-        Me.DgvAdd.TabIndex = 276
+        Me.DgvAdd.TabIndex = 5
         '
         'AddNo
         '
@@ -351,7 +397,7 @@ Partial Class AccountsPayable
         Me.DgvHistory.RowTemplate.Height = 21
         Me.DgvHistory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvHistory.Size = New System.Drawing.Size(1326, 100)
-        Me.DgvHistory.TabIndex = 275
+        Me.DgvHistory.TabIndex = 3
         '
         'No
         '
@@ -423,7 +469,7 @@ Partial Class AccountsPayable
         Me.DgvCymndt.RowTemplate.Height = 21
         Me.DgvCymndt.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvCymndt.Size = New System.Drawing.Size(1326, 100)
-        Me.DgvCymndt.TabIndex = 274
+        Me.DgvCymndt.TabIndex = 2
         '
         '明細
         '
@@ -490,47 +536,6 @@ Partial Class AccountsPayable
         Me.LblMode.Text = "買掛入力モード"
         Me.LblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        '発注番号
-        '
-        Me.発注番号.HeaderText = "発注番号"
-        Me.発注番号.Name = "発注番号"
-        Me.発注番号.Width = 150
-        '
-        '発注日
-        '
-        Me.発注日.HeaderText = "発注日"
-        Me.発注日.Name = "発注日"
-        Me.発注日.Width = 150
-        '
-        '仕入先
-        '
-        Me.仕入先.HeaderText = "仕入先"
-        Me.仕入先.Name = "仕入先"
-        Me.仕入先.Width = 200
-        '
-        '客先番号
-        '
-        Me.客先番号.HeaderText = "客先番号"
-        Me.客先番号.Name = "客先番号"
-        '
-        '発注金額
-        '
-        Me.発注金額.HeaderText = "発注金額"
-        Me.発注金額.Name = "発注金額"
-        Me.発注金額.Width = 150
-        '
-        '買掛金額計
-        '
-        Me.買掛金額計.HeaderText = "買掛金額計"
-        Me.買掛金額計.Name = "買掛金額計"
-        Me.買掛金額計.Width = 150
-        '
-        '買掛残高
-        '
-        Me.買掛残高.HeaderText = "買掛残高"
-        Me.買掛残高.Name = "買掛残高"
-        Me.買掛残高.Width = 150
-        '
         'AccountsPayable
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
@@ -559,6 +564,7 @@ Partial Class AccountsPayable
         Me.Controls.Add(Me.DgvAdd)
         Me.Controls.Add(Me.DgvHistory)
         Me.Controls.Add(Me.DgvCymndt)
+        Me.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "AccountsPayable"
         Me.Text = "AccountsPayable"

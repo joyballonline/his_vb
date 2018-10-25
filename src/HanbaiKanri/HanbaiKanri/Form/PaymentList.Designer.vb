@@ -50,7 +50,7 @@ Partial Class PaymentList
         Me.BtnSerach.Location = New System.Drawing.Point(1175, 35)
         Me.BtnSerach.Name = "BtnSerach"
         Me.BtnSerach.Size = New System.Drawing.Size(165, 40)
-        Me.BtnSerach.TabIndex = 70
+        Me.BtnSerach.TabIndex = 5
         Me.BtnSerach.Text = "検索"
         Me.BtnSerach.UseVisualStyleBackColor = True
         '
@@ -72,7 +72,7 @@ Partial Class PaymentList
         Me.TxtCustomerCode.Location = New System.Drawing.Point(190, 119)
         Me.TxtCustomerCode.Name = "TxtCustomerCode"
         Me.TxtCustomerCode.Size = New System.Drawing.Size(350, 22)
-        Me.TxtCustomerCode.TabIndex = 68
+        Me.TxtCustomerCode.TabIndex = 4
         '
         'Label3
         '
@@ -92,7 +92,7 @@ Partial Class PaymentList
         Me.TxtTel.Location = New System.Drawing.Point(190, 91)
         Me.TxtTel.Name = "TxtTel"
         Me.TxtTel.Size = New System.Drawing.Size(350, 22)
-        Me.TxtTel.TabIndex = 66
+        Me.TxtTel.TabIndex = 3
         '
         'Label2
         '
@@ -112,7 +112,7 @@ Partial Class PaymentList
         Me.TxtAddress.Location = New System.Drawing.Point(190, 63)
         Me.TxtAddress.Name = "TxtAddress"
         Me.TxtAddress.Size = New System.Drawing.Size(350, 22)
-        Me.TxtAddress.TabIndex = 64
+        Me.TxtAddress.TabIndex = 2
         '
         'Label1
         '
@@ -142,7 +142,7 @@ Partial Class PaymentList
         Me.TxtCustomerName.Location = New System.Drawing.Point(190, 35)
         Me.TxtCustomerName.Name = "TxtCustomerName"
         Me.TxtCustomerName.Size = New System.Drawing.Size(350, 22)
-        Me.TxtCustomerName.TabIndex = 61
+        Me.TxtCustomerName.TabIndex = 1
         '
         'DgvSupplier
         '
@@ -160,7 +160,7 @@ Partial Class PaymentList
         Me.DgvSupplier.RowTemplate.Height = 21
         Me.DgvSupplier.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvSupplier.Size = New System.Drawing.Size(1326, 342)
-        Me.DgvSupplier.TabIndex = 58
+        Me.DgvSupplier.TabIndex = 6
         '
         '仕入先名
         '
@@ -207,19 +207,21 @@ Partial Class PaymentList
         '
         'BtnPayment
         '
+        Me.BtnPayment.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnPayment.Location = New System.Drawing.Point(1004, 509)
         Me.BtnPayment.Name = "BtnPayment"
         Me.BtnPayment.Size = New System.Drawing.Size(165, 40)
-        Me.BtnPayment.TabIndex = 59
+        Me.BtnPayment.TabIndex = 7
         Me.BtnPayment.Text = "支払入力"
         Me.BtnPayment.UseVisualStyleBackColor = True
         '
         'btnBack
         '
+        Me.btnBack.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.btnBack.Location = New System.Drawing.Point(1175, 509)
         Me.btnBack.Name = "btnBack"
         Me.btnBack.Size = New System.Drawing.Size(165, 40)
-        Me.btnBack.TabIndex = 60
+        Me.btnBack.TabIndex = 8
         Me.btnBack.Text = "戻る"
         Me.btnBack.UseVisualStyleBackColor = True
         '

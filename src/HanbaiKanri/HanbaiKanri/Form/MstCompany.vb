@@ -153,7 +153,7 @@ Public Class MstCompany
             Sql += "."
             Sql += "m01_company"
             Sql += " WHERE "
-            Sql += "会社コード"
+            Sql += "会社名"
             Sql += " ILIKE "
             Sql += "'%"
             Sql += Search.Text

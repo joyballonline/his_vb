@@ -129,7 +129,7 @@ Partial Class Ordering
         Me.TxtTel.MaxLength = 15
         Me.TxtTel.Name = "TxtTel"
         Me.TxtTel.Size = New System.Drawing.Size(200, 23)
-        Me.TxtTel.TabIndex = 209
+        Me.TxtTel.TabIndex = 13
         '
         'LblPerson
         '
@@ -152,7 +152,7 @@ Partial Class Ordering
         Me.TxtAddress1.MaxLength = 100
         Me.TxtAddress1.Name = "TxtAddress1"
         Me.TxtAddress1.Size = New System.Drawing.Size(330, 23)
-        Me.TxtAddress1.TabIndex = 202
+        Me.TxtAddress1.TabIndex = 7
         '
         'TxtPerson
         '
@@ -163,7 +163,7 @@ Partial Class Ordering
         Me.TxtPerson.MaxLength = 50
         Me.TxtPerson.Name = "TxtPerson"
         Me.TxtPerson.Size = New System.Drawing.Size(200, 23)
-        Me.TxtPerson.TabIndex = 211
+        Me.TxtPerson.TabIndex = 15
         '
         'LblFax
         '
@@ -186,7 +186,7 @@ Partial Class Ordering
         Me.TxtFax.MaxLength = 15
         Me.TxtFax.Name = "TxtFax"
         Me.TxtFax.Size = New System.Drawing.Size(200, 23)
-        Me.TxtFax.TabIndex = 210
+        Me.TxtFax.TabIndex = 14
         '
         'TxtPostalCode
         '
@@ -197,7 +197,7 @@ Partial Class Ordering
         Me.TxtPostalCode.MaxLength = 3
         Me.TxtPostalCode.Name = "TxtPostalCode"
         Me.TxtPostalCode.Size = New System.Drawing.Size(140, 23)
-        Me.TxtPostalCode.TabIndex = 198
+        Me.TxtPostalCode.TabIndex = 6
         Me.TxtPostalCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'LblTel
@@ -233,7 +233,7 @@ Partial Class Ordering
         Me.TxtSupplierName.MaxLength = 50
         Me.TxtSupplierName.Name = "TxtSupplierName"
         Me.TxtSupplierName.Size = New System.Drawing.Size(330, 23)
-        Me.TxtSupplierName.TabIndex = 195
+        Me.TxtSupplierName.TabIndex = 5
         '
         'TxtInput
         '
@@ -322,7 +322,7 @@ Partial Class Ordering
         Me.DgvItemList.RowTemplate.Height = 21
         Me.DgvItemList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
         Me.DgvItemList.Size = New System.Drawing.Size(1329, 213)
-        Me.DgvItemList.TabIndex = 216
+        Me.DgvItemList.TabIndex = 18
         '
         'No
         '
@@ -440,7 +440,7 @@ Partial Class Ordering
         Me.TxtPurchaseRemark.MaxLength = 50
         Me.TxtPurchaseRemark.Name = "TxtPurchaseRemark"
         Me.TxtPurchaseRemark.Size = New System.Drawing.Size(476, 23)
-        Me.TxtPurchaseRemark.TabIndex = 240
+        Me.TxtPurchaseRemark.TabIndex = 11
         '
         'DtpOrderingDate
         '
@@ -451,8 +451,7 @@ Partial Class Ordering
         Me.DtpOrderingDate.Location = New System.Drawing.Point(601, 14)
         Me.DtpOrderingDate.Name = "DtpOrderingDate"
         Me.DtpOrderingDate.Size = New System.Drawing.Size(148, 22)
-        Me.DtpOrderingDate.TabIndex = 228
-        Me.DtpOrderingDate.TabStop = False
+        Me.DtpOrderingDate.TabIndex = 2
         Me.DtpOrderingDate.Value = New Date(2018, 6, 5, 23, 23, 58, 0)
         '
         'TxtOrderingAmount
@@ -466,6 +465,7 @@ Partial Class Ordering
         Me.TxtOrderingAmount.ReadOnly = True
         Me.TxtOrderingAmount.Size = New System.Drawing.Size(231, 23)
         Me.TxtOrderingAmount.TabIndex = 226
+        Me.TxtOrderingAmount.TabStop = False
         Me.TxtOrderingAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'LblOrderAmount
@@ -491,6 +491,7 @@ Partial Class Ordering
         Me.TxtItemCount.ReadOnly = True
         Me.TxtItemCount.Size = New System.Drawing.Size(66, 23)
         Me.TxtItemCount.TabIndex = 222
+        Me.TxtItemCount.TabStop = False
         Me.TxtItemCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'LblItemCount
@@ -523,14 +524,14 @@ Partial Class Ordering
         Me.TxtSupplierCode.MaxLength = 50
         Me.TxtSupplierCode.Name = "TxtSupplierCode"
         Me.TxtSupplierCode.Size = New System.Drawing.Size(140, 23)
-        Me.TxtSupplierCode.TabIndex = 193
+        Me.TxtSupplierCode.TabIndex = 3
         '
         'BtnBack
         '
         Me.BtnBack.Location = New System.Drawing.Point(1175, 509)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(165, 40)
-        Me.BtnBack.TabIndex = 218
+        Me.BtnBack.TabIndex = 21
         Me.BtnBack.Text = "戻る"
         Me.BtnBack.UseVisualStyleBackColor = True
         '
@@ -553,7 +554,7 @@ Partial Class Ordering
         Me.BtnRegistration.Location = New System.Drawing.Point(1003, 509)
         Me.BtnRegistration.Name = "BtnRegistration"
         Me.BtnRegistration.Size = New System.Drawing.Size(165, 40)
-        Me.BtnRegistration.TabIndex = 217
+        Me.BtnRegistration.TabIndex = 20
         Me.BtnRegistration.Text = "登録"
         Me.BtnRegistration.UseVisualStyleBackColor = True
         '
@@ -566,7 +567,7 @@ Partial Class Ordering
         Me.TxtAddress3.MaxLength = 100
         Me.TxtAddress3.Name = "TxtAddress3"
         Me.TxtAddress3.Size = New System.Drawing.Size(330, 23)
-        Me.TxtAddress3.TabIndex = 205
+        Me.TxtAddress3.TabIndex = 9
         '
         'TxtAddress2
         '
@@ -577,7 +578,7 @@ Partial Class Ordering
         Me.TxtAddress2.MaxLength = 100
         Me.TxtAddress2.Name = "TxtAddress2"
         Me.TxtAddress2.Size = New System.Drawing.Size(330, 23)
-        Me.TxtAddress2.TabIndex = 204
+        Me.TxtAddress2.TabIndex = 8
         '
         'LblRegistration
         '
@@ -600,7 +601,7 @@ Partial Class Ordering
         Me.TxtSales.MaxLength = 20
         Me.TxtSales.Name = "TxtSales"
         Me.TxtSales.Size = New System.Drawing.Size(213, 23)
-        Me.TxtSales.TabIndex = 213
+        Me.TxtSales.TabIndex = 17
         '
         'LblSales
         '
@@ -637,7 +638,7 @@ Partial Class Ordering
         Me.TxtQuoteRemarks.Multiline = True
         Me.TxtQuoteRemarks.Name = "TxtQuoteRemarks"
         Me.TxtQuoteRemarks.Size = New System.Drawing.Size(476, 23)
-        Me.TxtQuoteRemarks.TabIndex = 215
+        Me.TxtQuoteRemarks.TabIndex = 12
         '
         'TxtPaymentTerms
         '
@@ -649,7 +650,7 @@ Partial Class Ordering
         Me.TxtPaymentTerms.Multiline = True
         Me.TxtPaymentTerms.Name = "TxtPaymentTerms"
         Me.TxtPaymentTerms.Size = New System.Drawing.Size(476, 23)
-        Me.TxtPaymentTerms.TabIndex = 214
+        Me.TxtPaymentTerms.TabIndex = 10
         '
         'LblRemarks
         '
@@ -672,14 +673,14 @@ Partial Class Ordering
         Me.TxtPosition.MaxLength = 50
         Me.TxtPosition.Name = "TxtPosition"
         Me.TxtPosition.Size = New System.Drawing.Size(200, 23)
-        Me.TxtPosition.TabIndex = 212
+        Me.TxtPosition.TabIndex = 16
         '
         'BtnPurchase
         '
         Me.BtnPurchase.Location = New System.Drawing.Point(832, 509)
         Me.BtnPurchase.Name = "BtnPurchase"
         Me.BtnPurchase.Size = New System.Drawing.Size(165, 40)
-        Me.BtnPurchase.TabIndex = 241
+        Me.BtnPurchase.TabIndex = 19
         Me.BtnPurchase.Text = "発注書発行"
         Me.BtnPurchase.UseVisualStyleBackColor = True
         Me.BtnPurchase.Visible = False
@@ -764,8 +765,7 @@ Partial Class Ordering
         Me.TxtCustomerPO.MaxLength = 8
         Me.TxtCustomerPO.Name = "TxtCustomerPO"
         Me.TxtCustomerPO.Size = New System.Drawing.Size(88, 23)
-        Me.TxtCustomerPO.TabIndex = 304
-        Me.TxtCustomerPO.TabStop = False
+        Me.TxtCustomerPO.TabIndex = 1
         '
         'Label1
         '

@@ -56,16 +56,17 @@ Partial Class PaidList
         Me.ChkCancelData.Location = New System.Drawing.Point(401, 196)
         Me.ChkCancelData.Name = "ChkCancelData"
         Me.ChkCancelData.Size = New System.Drawing.Size(139, 19)
-        Me.ChkCancelData.TabIndex = 122
+        Me.ChkCancelData.TabIndex = 10
         Me.ChkCancelData.Text = "取消データを含める"
         Me.ChkCancelData.UseVisualStyleBackColor = True
         '
         'BtnCancel
         '
+        Me.BtnCancel.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnCancel.Location = New System.Drawing.Point(1002, 509)
         Me.BtnCancel.Name = "BtnCancel"
         Me.BtnCancel.Size = New System.Drawing.Size(165, 40)
-        Me.BtnCancel.TabIndex = 118
+        Me.BtnCancel.TabIndex = 12
         Me.BtnCancel.Text = "支払取消"
         Me.BtnCancel.UseVisualStyleBackColor = True
         Me.BtnCancel.Visible = False
@@ -88,7 +89,7 @@ Partial Class PaidList
         Me.RbtnSlip.Location = New System.Drawing.Point(6, 8)
         Me.RbtnSlip.Name = "RbtnSlip"
         Me.RbtnSlip.Size = New System.Drawing.Size(89, 19)
-        Me.RbtnSlip.TabIndex = 26
+        Me.RbtnSlip.TabIndex = 8
         Me.RbtnSlip.TabStop = True
         Me.RbtnSlip.Text = "伝票単位"
         Me.RbtnSlip.UseVisualStyleBackColor = True
@@ -100,7 +101,7 @@ Partial Class PaidList
         Me.RbtnDetails.Location = New System.Drawing.Point(101, 8)
         Me.RbtnDetails.Name = "RbtnDetails"
         Me.RbtnDetails.Size = New System.Drawing.Size(89, 19)
-        Me.RbtnDetails.TabIndex = 27
+        Me.RbtnDetails.TabIndex = 9
         Me.RbtnDetails.Text = "明細単位"
         Me.RbtnDetails.UseVisualStyleBackColor = True
         '
@@ -119,7 +120,7 @@ Partial Class PaidList
         Me.TxtPaidNo2.Location = New System.Drawing.Point(959, 68)
         Me.TxtPaidNo2.Name = "TxtPaidNo2"
         Me.TxtPaidNo2.Size = New System.Drawing.Size(170, 22)
-        Me.TxtPaidNo2.TabIndex = 113
+        Me.TxtPaidNo2.TabIndex = 6
         '
         'TxtPaidDate2
         '
@@ -127,7 +128,7 @@ Partial Class PaidList
         Me.TxtPaidDate2.Location = New System.Drawing.Point(959, 40)
         Me.TxtPaidDate2.Name = "TxtPaidDate2"
         Me.TxtPaidDate2.Size = New System.Drawing.Size(170, 22)
-        Me.TxtPaidDate2.TabIndex = 112
+        Me.TxtPaidDate2.TabIndex = 4
         '
         'Label7
         '
@@ -147,7 +148,7 @@ Partial Class PaidList
         Me.TxtPaidNo1.Location = New System.Drawing.Point(760, 67)
         Me.TxtPaidNo1.Name = "TxtPaidNo1"
         Me.TxtPaidNo1.Size = New System.Drawing.Size(170, 22)
-        Me.TxtPaidNo1.TabIndex = 108
+        Me.TxtPaidNo1.TabIndex = 5
         '
         'Label8
         '
@@ -167,7 +168,7 @@ Partial Class PaidList
         Me.TxtPaidDate1.Location = New System.Drawing.Point(760, 40)
         Me.TxtPaidDate1.Name = "TxtPaidDate1"
         Me.TxtPaidDate1.Size = New System.Drawing.Size(170, 22)
-        Me.TxtPaidDate1.TabIndex = 106
+        Me.TxtPaidDate1.TabIndex = 3
         '
         'Label4
         '
@@ -206,7 +207,7 @@ Partial Class PaidList
         Me.TxtSupplierCode.Location = New System.Drawing.Point(190, 68)
         Me.TxtSupplierCode.Name = "TxtSupplierCode"
         Me.TxtSupplierCode.Size = New System.Drawing.Size(350, 22)
-        Me.TxtSupplierCode.TabIndex = 104
+        Me.TxtSupplierCode.TabIndex = 2
         '
         'Label1
         '
@@ -236,7 +237,7 @@ Partial Class PaidList
         Me.TxtSupplierName.Location = New System.Drawing.Point(190, 40)
         Me.TxtSupplierName.Name = "TxtSupplierName"
         Me.TxtSupplierName.Size = New System.Drawing.Size(350, 22)
-        Me.TxtSupplierName.TabIndex = 97
+        Me.TxtSupplierName.TabIndex = 1
         '
         'BtnPurchaseSearch
         '
@@ -244,16 +245,17 @@ Partial Class PaidList
         Me.BtnPurchaseSearch.Location = New System.Drawing.Point(1174, 41)
         Me.BtnPurchaseSearch.Name = "BtnPurchaseSearch"
         Me.BtnPurchaseSearch.Size = New System.Drawing.Size(165, 40)
-        Me.BtnPurchaseSearch.TabIndex = 96
+        Me.BtnPurchaseSearch.TabIndex = 7
         Me.BtnPurchaseSearch.Text = "検索"
         Me.BtnPurchaseSearch.UseVisualStyleBackColor = True
         '
         'BtnBack
         '
+        Me.BtnBack.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnBack.Location = New System.Drawing.Point(1173, 509)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(165, 40)
-        Me.BtnBack.TabIndex = 95
+        Me.BtnBack.TabIndex = 13
         Me.BtnBack.Text = "戻る"
         Me.BtnBack.UseVisualStyleBackColor = True
         '
@@ -268,7 +270,7 @@ Partial Class PaidList
         Me.DgvHtyhd.RowTemplate.Height = 21
         Me.DgvHtyhd.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvHtyhd.Size = New System.Drawing.Size(1326, 267)
-        Me.DgvHtyhd.TabIndex = 93
+        Me.DgvHtyhd.TabIndex = 11
         '
         'LblMode
         '

@@ -43,35 +43,39 @@ Partial Class SalesSearch
         '
         'BtnSearch
         '
-        Me.BtnSearch.Location = New System.Drawing.Point(180, 4)
+        Me.BtnSearch.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.BtnSearch.Location = New System.Drawing.Point(181, 5)
         Me.BtnSearch.Name = "BtnSearch"
         Me.BtnSearch.Size = New System.Drawing.Size(75, 23)
-        Me.BtnSearch.TabIndex = 28
+        Me.BtnSearch.TabIndex = 2
         Me.BtnSearch.Text = "検索"
         Me.BtnSearch.UseVisualStyleBackColor = True
         '
         'Search
         '
-        Me.Search.Location = New System.Drawing.Point(74, 6)
+        Me.Search.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Search.Location = New System.Drawing.Point(75, 6)
         Me.Search.Name = "Search"
-        Me.Search.Size = New System.Drawing.Size(100, 19)
-        Me.Search.TabIndex = 26
+        Me.Search.Size = New System.Drawing.Size(100, 22)
+        Me.Search.TabIndex = 1
         '
         'BtnBack
         '
-        Me.BtnBack.Location = New System.Drawing.Point(1263, 259)
+        Me.BtnBack.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.BtnBack.Location = New System.Drawing.Point(1173, 235)
         Me.BtnBack.Name = "BtnBack"
-        Me.BtnBack.Size = New System.Drawing.Size(75, 23)
-        Me.BtnBack.TabIndex = 25
+        Me.BtnBack.Size = New System.Drawing.Size(165, 40)
+        Me.BtnBack.TabIndex = 5
         Me.BtnBack.Text = "戻る"
         Me.BtnBack.UseVisualStyleBackColor = True
         '
         'BtnSelect
         '
-        Me.BtnSelect.Location = New System.Drawing.Point(1182, 259)
+        Me.BtnSelect.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.BtnSelect.Location = New System.Drawing.Point(1002, 235)
         Me.BtnSelect.Name = "BtnSelect"
-        Me.BtnSelect.Size = New System.Drawing.Size(75, 23)
-        Me.BtnSelect.TabIndex = 24
+        Me.BtnSelect.Size = New System.Drawing.Size(165, 40)
+        Me.BtnSelect.TabIndex = 4
         Me.BtnSelect.Text = "選択"
         Me.BtnSelect.UseVisualStyleBackColor = True
         '
@@ -90,11 +94,12 @@ Partial Class SalesSearch
         'Label1
         '
         Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.Label1.Location = New System.Drawing.Point(12, 9)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(56, 12)
+        Me.Label1.Size = New System.Drawing.Size(57, 15)
         Me.Label1.TabIndex = 27
-        Me.Label1.Text = "会社コード"
+        Me.Label1.Text = "ユーザID"
         '
         '言語
         '
@@ -152,13 +157,14 @@ Partial Class SalesSearch
         Me.DgvUser.AllowUserToResizeRows = False
         Me.DgvUser.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvUser.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.会社コード, Me.ユーザID, Me.氏名, Me.略名, Me.備考, Me.無効フラグ, Me.権限, Me.言語, Me.更新者, Me.更新日})
-        Me.DgvUser.Location = New System.Drawing.Point(12, 33)
+        Me.DgvUser.Location = New System.Drawing.Point(12, 34)
         Me.DgvUser.Name = "DgvUser"
         Me.DgvUser.ReadOnly = True
+        Me.DgvUser.RowHeadersVisible = False
         Me.DgvUser.RowTemplate.Height = 21
         Me.DgvUser.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvUser.Size = New System.Drawing.Size(1326, 220)
-        Me.DgvUser.TabIndex = 22
+        Me.DgvUser.Size = New System.Drawing.Size(1326, 195)
+        Me.DgvUser.TabIndex = 3
         '
         'SalesSearch
         '

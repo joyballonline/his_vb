@@ -41,46 +41,51 @@ Partial Class CustomerList
         '
         'BtnSearch
         '
-        Me.BtnSearch.Location = New System.Drawing.Point(180, 8)
+        Me.BtnSearch.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.BtnSearch.Location = New System.Drawing.Point(191, 9)
         Me.BtnSearch.Name = "BtnSearch"
         Me.BtnSearch.Size = New System.Drawing.Size(75, 23)
-        Me.BtnSearch.TabIndex = 19
+        Me.BtnSearch.TabIndex = 2
         Me.BtnSearch.Text = "検索"
         Me.BtnSearch.UseVisualStyleBackColor = True
         Me.BtnSearch.Visible = False
         '
         'Search
         '
-        Me.Search.Location = New System.Drawing.Point(74, 10)
+        Me.Search.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Search.Location = New System.Drawing.Point(85, 10)
         Me.Search.Name = "Search"
-        Me.Search.Size = New System.Drawing.Size(100, 19)
-        Me.Search.TabIndex = 17
+        Me.Search.Size = New System.Drawing.Size(100, 22)
+        Me.Search.TabIndex = 1
         Me.Search.Visible = False
         '
         'btnBack
         '
-        Me.btnBack.Location = New System.Drawing.Point(1173, 509)
+        Me.btnBack.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.btnBack.Location = New System.Drawing.Point(1173, 235)
         Me.btnBack.Name = "btnBack"
         Me.btnBack.Size = New System.Drawing.Size(165, 40)
-        Me.btnBack.TabIndex = 16
+        Me.btnBack.TabIndex = 5
         Me.btnBack.Text = "戻る"
         Me.btnBack.UseVisualStyleBackColor = True
         '
         'BtnBillingCalculation
         '
-        Me.BtnBillingCalculation.Location = New System.Drawing.Point(1002, 509)
+        Me.BtnBillingCalculation.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.BtnBillingCalculation.Location = New System.Drawing.Point(1002, 235)
         Me.BtnBillingCalculation.Name = "BtnBillingCalculation"
         Me.BtnBillingCalculation.Size = New System.Drawing.Size(165, 40)
-        Me.BtnBillingCalculation.TabIndex = 14
+        Me.BtnBillingCalculation.TabIndex = 4
         Me.BtnBillingCalculation.Text = "請求計算"
         Me.BtnBillingCalculation.UseVisualStyleBackColor = True
         '
         'Label1
         '
         Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.Label1.Location = New System.Drawing.Point(12, 13)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(53, 12)
+        Me.Label1.Size = New System.Drawing.Size(67, 15)
         Me.Label1.TabIndex = 18
         Me.Label1.Text = "得意先名"
         Me.Label1.Visible = False
@@ -93,15 +98,15 @@ Partial Class CustomerList
         Me.DgvCustomer.AllowUserToResizeRows = False
         Me.DgvCustomer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvCustomer.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.得意先名, Me.得意先コード, Me.受注金額計, Me.請求金額計, Me.請求残高, Me.受注件数, Me.請求件数, Me.会社コード})
-        Me.DgvCustomer.Location = New System.Drawing.Point(12, 37)
+        Me.DgvCustomer.Location = New System.Drawing.Point(12, 38)
         Me.DgvCustomer.MultiSelect = False
         Me.DgvCustomer.Name = "DgvCustomer"
         Me.DgvCustomer.ReadOnly = True
         Me.DgvCustomer.RowHeadersVisible = False
         Me.DgvCustomer.RowTemplate.Height = 21
         Me.DgvCustomer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvCustomer.Size = New System.Drawing.Size(1326, 466)
-        Me.DgvCustomer.TabIndex = 13
+        Me.DgvCustomer.Size = New System.Drawing.Size(1326, 191)
+        Me.DgvCustomer.TabIndex = 3
         '
         '得意先名
         '
@@ -164,7 +169,7 @@ Partial Class CustomerList
         'CustomerList
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
-        Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.ClientSize = New System.Drawing.Size(1350, 287)
         Me.Controls.Add(Me.DgvCustomer)
         Me.Controls.Add(Me.BtnSearch)
         Me.Controls.Add(Me.Search)

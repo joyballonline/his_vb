@@ -65,10 +65,11 @@ Partial Class OrderingList
         '
         'BtnPurchaseView
         '
+        Me.BtnPurchaseView.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnPurchaseView.Location = New System.Drawing.Point(1003, 509)
         Me.BtnPurchaseView.Name = "BtnPurchaseView"
         Me.BtnPurchaseView.Size = New System.Drawing.Size(165, 40)
-        Me.BtnPurchaseView.TabIndex = 86
+        Me.BtnPurchaseView.TabIndex = 22
         Me.BtnPurchaseView.Text = "発注参照"
         Me.BtnPurchaseView.UseVisualStyleBackColor = True
         Me.BtnPurchaseView.Visible = False
@@ -91,7 +92,7 @@ Partial Class OrderingList
         Me.RbtnSlip.Location = New System.Drawing.Point(6, 8)
         Me.RbtnSlip.Name = "RbtnSlip"
         Me.RbtnSlip.Size = New System.Drawing.Size(89, 19)
-        Me.RbtnSlip.TabIndex = 26
+        Me.RbtnSlip.TabIndex = 12
         Me.RbtnSlip.TabStop = True
         Me.RbtnSlip.Text = "伝票単位"
         Me.RbtnSlip.UseVisualStyleBackColor = True
@@ -103,7 +104,7 @@ Partial Class OrderingList
         Me.RbtnDetails.Location = New System.Drawing.Point(101, 8)
         Me.RbtnDetails.Name = "RbtnDetails"
         Me.RbtnDetails.Size = New System.Drawing.Size(89, 19)
-        Me.RbtnDetails.TabIndex = 27
+        Me.RbtnDetails.TabIndex = 13
         Me.RbtnDetails.Text = "明細単位"
         Me.RbtnDetails.UseVisualStyleBackColor = True
         '
@@ -141,7 +142,7 @@ Partial Class OrderingList
         Me.TxtPurchaseNo2.Location = New System.Drawing.Point(959, 68)
         Me.TxtPurchaseNo2.Name = "TxtPurchaseNo2"
         Me.TxtPurchaseNo2.Size = New System.Drawing.Size(170, 22)
-        Me.TxtPurchaseNo2.TabIndex = 81
+        Me.TxtPurchaseNo2.TabIndex = 8
         '
         'TxtPurchaseDate2
         '
@@ -149,7 +150,7 @@ Partial Class OrderingList
         Me.TxtPurchaseDate2.Location = New System.Drawing.Point(959, 40)
         Me.TxtPurchaseDate2.Name = "TxtPurchaseDate2"
         Me.TxtPurchaseDate2.Size = New System.Drawing.Size(170, 22)
-        Me.TxtPurchaseDate2.TabIndex = 80
+        Me.TxtPurchaseDate2.TabIndex = 6
         '
         'Label6
         '
@@ -169,7 +170,7 @@ Partial Class OrderingList
         Me.TxtSales.Location = New System.Drawing.Point(760, 95)
         Me.TxtSales.Name = "TxtSales"
         Me.TxtSales.Size = New System.Drawing.Size(170, 22)
-        Me.TxtSales.TabIndex = 78
+        Me.TxtSales.TabIndex = 9
         '
         'Label7
         '
@@ -189,7 +190,7 @@ Partial Class OrderingList
         Me.TxtPurchaseNo1.Location = New System.Drawing.Point(760, 67)
         Me.TxtPurchaseNo1.Name = "TxtPurchaseNo1"
         Me.TxtPurchaseNo1.Size = New System.Drawing.Size(170, 22)
-        Me.TxtPurchaseNo1.TabIndex = 76
+        Me.TxtPurchaseNo1.TabIndex = 7
         '
         'Label8
         '
@@ -209,7 +210,7 @@ Partial Class OrderingList
         Me.TxtPurchaseDate1.Location = New System.Drawing.Point(760, 40)
         Me.TxtPurchaseDate1.Name = "TxtPurchaseDate1"
         Me.TxtPurchaseDate1.Size = New System.Drawing.Size(170, 22)
-        Me.TxtPurchaseDate1.TabIndex = 74
+        Me.TxtPurchaseDate1.TabIndex = 5
         '
         'Label4
         '
@@ -229,7 +230,7 @@ Partial Class OrderingList
         Me.TxtSupplierCode.Location = New System.Drawing.Point(190, 124)
         Me.TxtSupplierCode.Name = "TxtSupplierCode"
         Me.TxtSupplierCode.Size = New System.Drawing.Size(350, 22)
-        Me.TxtSupplierCode.TabIndex = 72
+        Me.TxtSupplierCode.TabIndex = 4
         '
         'Label3
         '
@@ -249,7 +250,7 @@ Partial Class OrderingList
         Me.TxtTel.Location = New System.Drawing.Point(190, 96)
         Me.TxtTel.Name = "TxtTel"
         Me.TxtTel.Size = New System.Drawing.Size(350, 22)
-        Me.TxtTel.TabIndex = 70
+        Me.TxtTel.TabIndex = 3
         '
         'Label2
         '
@@ -269,7 +270,7 @@ Partial Class OrderingList
         Me.TxtAddress.Location = New System.Drawing.Point(190, 68)
         Me.TxtAddress.Name = "TxtAddress"
         Me.TxtAddress.Size = New System.Drawing.Size(350, 22)
-        Me.TxtAddress.TabIndex = 68
+        Me.TxtAddress.TabIndex = 2
         '
         'Label1
         '
@@ -299,7 +300,7 @@ Partial Class OrderingList
         Me.TxtSupplierName.Location = New System.Drawing.Point(190, 40)
         Me.TxtSupplierName.Name = "TxtSupplierName"
         Me.TxtSupplierName.Size = New System.Drawing.Size(350, 22)
-        Me.TxtSupplierName.TabIndex = 65
+        Me.TxtSupplierName.TabIndex = 1
         '
         'BtnPurchaseSearch
         '
@@ -307,25 +308,27 @@ Partial Class OrderingList
         Me.BtnPurchaseSearch.Location = New System.Drawing.Point(1173, 41)
         Me.BtnPurchaseSearch.Name = "BtnPurchaseSearch"
         Me.BtnPurchaseSearch.Size = New System.Drawing.Size(166, 40)
-        Me.BtnPurchaseSearch.TabIndex = 64
+        Me.BtnPurchaseSearch.TabIndex = 11
         Me.BtnPurchaseSearch.Text = "検索"
         Me.BtnPurchaseSearch.UseVisualStyleBackColor = True
         '
         'BtnBack
         '
+        Me.BtnBack.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnBack.Location = New System.Drawing.Point(1174, 509)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(165, 40)
-        Me.BtnBack.TabIndex = 63
+        Me.BtnBack.TabIndex = 23
         Me.BtnBack.Text = "戻る"
         Me.BtnBack.UseVisualStyleBackColor = True
         '
         'BtnPurchaseEdit
         '
+        Me.BtnPurchaseEdit.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnPurchaseEdit.Location = New System.Drawing.Point(832, 509)
         Me.BtnPurchaseEdit.Name = "BtnPurchaseEdit"
         Me.BtnPurchaseEdit.Size = New System.Drawing.Size(165, 40)
-        Me.BtnPurchaseEdit.TabIndex = 62
+        Me.BtnPurchaseEdit.TabIndex = 21
         Me.BtnPurchaseEdit.Text = "発注修正"
         Me.BtnPurchaseEdit.UseVisualStyleBackColor = True
         Me.BtnPurchaseEdit.Visible = False
@@ -341,34 +344,37 @@ Partial Class OrderingList
         Me.DgvHtyhd.RowTemplate.Height = 21
         Me.DgvHtyhd.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvHtyhd.Size = New System.Drawing.Size(1326, 267)
-        Me.DgvHtyhd.TabIndex = 61
+        Me.DgvHtyhd.TabIndex = 15
         '
         'BtnOrding
         '
+        Me.BtnOrding.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnOrding.Location = New System.Drawing.Point(490, 509)
         Me.BtnOrding.Name = "BtnOrding"
         Me.BtnOrding.Size = New System.Drawing.Size(165, 40)
-        Me.BtnOrding.TabIndex = 87
+        Me.BtnOrding.TabIndex = 19
         Me.BtnOrding.Text = "仕入入力"
         Me.BtnOrding.UseVisualStyleBackColor = True
         Me.BtnOrding.Visible = False
         '
         'BtnReceipt
         '
+        Me.BtnReceipt.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnReceipt.Location = New System.Drawing.Point(661, 509)
         Me.BtnReceipt.Name = "BtnReceipt"
         Me.BtnReceipt.Size = New System.Drawing.Size(165, 40)
-        Me.BtnReceipt.TabIndex = 88
+        Me.BtnReceipt.TabIndex = 20
         Me.BtnReceipt.Text = "入庫入力"
         Me.BtnReceipt.UseVisualStyleBackColor = True
         Me.BtnReceipt.Visible = False
         '
         'BtnPurchaseClone
         '
+        Me.BtnPurchaseClone.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnPurchaseClone.Location = New System.Drawing.Point(319, 509)
         Me.BtnPurchaseClone.Name = "BtnPurchaseClone"
         Me.BtnPurchaseClone.Size = New System.Drawing.Size(165, 40)
-        Me.BtnPurchaseClone.TabIndex = 89
+        Me.BtnPurchaseClone.TabIndex = 18
         Me.BtnPurchaseClone.Text = "発注複製"
         Me.BtnPurchaseClone.UseVisualStyleBackColor = True
         Me.BtnPurchaseClone.Visible = False
@@ -380,26 +386,28 @@ Partial Class OrderingList
         Me.ChkCancelData.Location = New System.Drawing.Point(401, 196)
         Me.ChkCancelData.Name = "ChkCancelData"
         Me.ChkCancelData.Size = New System.Drawing.Size(139, 19)
-        Me.ChkCancelData.TabIndex = 90
+        Me.ChkCancelData.TabIndex = 14
         Me.ChkCancelData.Text = "取消データを含める"
         Me.ChkCancelData.UseVisualStyleBackColor = True
         '
         'BtnPurchaseCancel
         '
+        Me.BtnPurchaseCancel.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnPurchaseCancel.Location = New System.Drawing.Point(148, 509)
         Me.BtnPurchaseCancel.Name = "BtnPurchaseCancel"
         Me.BtnPurchaseCancel.Size = New System.Drawing.Size(165, 40)
-        Me.BtnPurchaseCancel.TabIndex = 91
+        Me.BtnPurchaseCancel.TabIndex = 17
         Me.BtnPurchaseCancel.Text = "発注取消"
         Me.BtnPurchaseCancel.UseVisualStyleBackColor = True
         Me.BtnPurchaseCancel.Visible = False
         '
         'BtnAP
         '
+        Me.BtnAP.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnAP.Location = New System.Drawing.Point(13, 509)
         Me.BtnAP.Name = "BtnAP"
         Me.BtnAP.Size = New System.Drawing.Size(165, 40)
-        Me.BtnAP.TabIndex = 92
+        Me.BtnAP.TabIndex = 16
         Me.BtnAP.Text = "買掛登録"
         Me.BtnAP.UseVisualStyleBackColor = True
         Me.BtnAP.Visible = False
@@ -434,7 +442,7 @@ Partial Class OrderingList
         Me.TxtCustomerPO.Location = New System.Drawing.Point(760, 123)
         Me.TxtCustomerPO.Name = "TxtCustomerPO"
         Me.TxtCustomerPO.Size = New System.Drawing.Size(170, 22)
-        Me.TxtCustomerPO.TabIndex = 94
+        Me.TxtCustomerPO.TabIndex = 10
         '
         'OrderingList
         '

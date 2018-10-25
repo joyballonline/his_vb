@@ -128,4 +128,48 @@ Public Class MstLanguage
         openForm.Show()
         Me.Hide()   ' 自分は隠れる
     End Sub
+
+    Private Sub BtnSearch_Click(sender As Object, e As EventArgs) Handles BtnSearch.Click
+        Dgv_Language.Rows.Clear()
+
+        Dim Sql As String = ""
+        Try
+            Sql += "SELECT "
+            Sql += "* "
+            Sql += "FROM "
+            Sql += "public"
+            Sql += "."
+            Sql += "m05_language"
+            Sql += " WHERE "
+            Sql += "言語名称"
+            Sql += " ILIKE "
+            Sql += "'%"
+            Sql += Search.Text
+            Sql += "%'"
+
+            Dim reccnt As Integer = 0
+            Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+            For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+                Dgv_Language.Rows.Add()
+                Dgv_Language.Rows(index).Cells(0).Value = ds.Tables(RS).Rows(index)(0)
+                Dgv_Language.Rows(index).Cells(1).Value = ds.Tables(RS).Rows(index)(1)
+                Dgv_Language.Rows(index).Cells(2).Value = ds.Tables(RS).Rows(index)(2)
+                Dgv_Language.Rows(index).Cells(3).Value = ds.Tables(RS).Rows(index)(3)
+                Dgv_Language.Rows(index).Cells(4).Value = ds.Tables(RS).Rows(index)(4)
+                Dgv_Language.Rows(index).Cells(5).Value = ds.Tables(RS).Rows(index)(5)
+                Dgv_Language.Rows(index).Cells(6).Value = ds.Tables(RS).Rows(index)(6)
+                Dgv_Language.Rows(index).Cells(7).Value = ds.Tables(RS).Rows(index)(7)
+                Dgv_Language.Rows(index).Cells(8).Value = ds.Tables(RS).Rows(index)(8)
+
+            Next
+
+        Catch ue As UsrDefException
+            ue.dspMsg()
+            Throw ue
+        Catch ex As Exception
+            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
+            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", UtilClass.getErrDetail(ex)))
+        End Try
+    End Sub
 End Class

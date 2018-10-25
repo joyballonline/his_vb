@@ -54,10 +54,11 @@ Partial Class AccountsPayableList
         '
         'BtnAPCancel
         '
+        Me.BtnAPCancel.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnAPCancel.Location = New System.Drawing.Point(832, 509)
         Me.BtnAPCancel.Name = "BtnAPCancel"
         Me.BtnAPCancel.Size = New System.Drawing.Size(165, 40)
-        Me.BtnAPCancel.TabIndex = 170
+        Me.BtnAPCancel.TabIndex = 13
         Me.BtnAPCancel.Text = "買掛取消"
         Me.BtnAPCancel.UseVisualStyleBackColor = True
         Me.BtnAPCancel.Visible = False
@@ -69,16 +70,17 @@ Partial Class AccountsPayableList
         Me.ChkCancelData.Location = New System.Drawing.Point(16, 202)
         Me.ChkCancelData.Name = "ChkCancelData"
         Me.ChkCancelData.Size = New System.Drawing.Size(139, 19)
-        Me.ChkCancelData.TabIndex = 169
+        Me.ChkCancelData.TabIndex = 9
         Me.ChkCancelData.Text = "取消データを含める"
         Me.ChkCancelData.UseVisualStyleBackColor = True
         '
         'BtnAPView
         '
+        Me.BtnAPView.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnAPView.Location = New System.Drawing.Point(1003, 509)
         Me.BtnAPView.Name = "BtnAPView"
         Me.BtnAPView.Size = New System.Drawing.Size(165, 40)
-        Me.BtnAPView.TabIndex = 168
+        Me.BtnAPView.TabIndex = 14
         Me.BtnAPView.Text = "買掛参照"
         Me.BtnAPView.UseVisualStyleBackColor = True
         Me.BtnAPView.Visible = False
@@ -102,7 +104,7 @@ Partial Class AccountsPayableList
         Me.RbtnSlip.Location = New System.Drawing.Point(6, 8)
         Me.RbtnSlip.Name = "RbtnSlip"
         Me.RbtnSlip.Size = New System.Drawing.Size(89, 19)
-        Me.RbtnSlip.TabIndex = 26
+        Me.RbtnSlip.TabIndex = 10
         Me.RbtnSlip.TabStop = True
         Me.RbtnSlip.Text = "伝票単位"
         Me.RbtnSlip.UseVisualStyleBackColor = True
@@ -114,7 +116,7 @@ Partial Class AccountsPayableList
         Me.RbtnDetails.Location = New System.Drawing.Point(101, 8)
         Me.RbtnDetails.Name = "RbtnDetails"
         Me.RbtnDetails.Size = New System.Drawing.Size(89, 19)
-        Me.RbtnDetails.TabIndex = 27
+        Me.RbtnDetails.TabIndex = 11
         Me.RbtnDetails.Text = "明細単位"
         Me.RbtnDetails.UseVisualStyleBackColor = True
         '
@@ -133,7 +135,7 @@ Partial Class AccountsPayableList
         Me.Label5.AutoSize = True
         Me.Label5.Location = New System.Drawing.Point(936, 46)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(17, 12)
+        Me.Label5.Size = New System.Drawing.Size(22, 15)
         Me.Label5.TabIndex = 164
         Me.Label5.Text = "～"
         '
@@ -143,7 +145,7 @@ Partial Class AccountsPayableList
         Me.TxtAPNo2.Location = New System.Drawing.Point(959, 68)
         Me.TxtAPNo2.Name = "TxtAPNo2"
         Me.TxtAPNo2.Size = New System.Drawing.Size(170, 22)
-        Me.TxtAPNo2.TabIndex = 163
+        Me.TxtAPNo2.TabIndex = 6
         '
         'TxtAPDate2
         '
@@ -151,7 +153,7 @@ Partial Class AccountsPayableList
         Me.TxtAPDate2.Location = New System.Drawing.Point(959, 40)
         Me.TxtAPDate2.Name = "TxtAPDate2"
         Me.TxtAPDate2.Size = New System.Drawing.Size(170, 22)
-        Me.TxtAPDate2.TabIndex = 162
+        Me.TxtAPDate2.TabIndex = 4
         '
         'Label7
         '
@@ -171,7 +173,7 @@ Partial Class AccountsPayableList
         Me.TxtAPNo1.Location = New System.Drawing.Point(760, 67)
         Me.TxtAPNo1.Name = "TxtAPNo1"
         Me.TxtAPNo1.Size = New System.Drawing.Size(170, 22)
-        Me.TxtAPNo1.TabIndex = 160
+        Me.TxtAPNo1.TabIndex = 5
         '
         'Label8
         '
@@ -191,7 +193,7 @@ Partial Class AccountsPayableList
         Me.TxtAPDate1.Location = New System.Drawing.Point(760, 40)
         Me.TxtAPDate1.Name = "TxtAPDate1"
         Me.TxtAPDate1.Size = New System.Drawing.Size(170, 22)
-        Me.TxtAPDate1.TabIndex = 158
+        Me.TxtAPDate1.TabIndex = 3
         '
         'Label4
         '
@@ -210,7 +212,7 @@ Partial Class AccountsPayableList
         Me.Label9.AutoSize = True
         Me.Label9.Location = New System.Drawing.Point(936, 74)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(17, 12)
+        Me.Label9.Size = New System.Drawing.Size(22, 15)
         Me.Label9.TabIndex = 165
         Me.Label9.Text = "～"
         '
@@ -220,7 +222,7 @@ Partial Class AccountsPayableList
         Me.TxtSupplierCode.Location = New System.Drawing.Point(190, 68)
         Me.TxtSupplierCode.Name = "TxtSupplierCode"
         Me.TxtSupplierCode.Size = New System.Drawing.Size(350, 22)
-        Me.TxtSupplierCode.TabIndex = 156
+        Me.TxtSupplierCode.TabIndex = 2
         '
         'Label1
         '
@@ -250,7 +252,7 @@ Partial Class AccountsPayableList
         Me.TxtSupplierName.Location = New System.Drawing.Point(190, 40)
         Me.TxtSupplierName.Name = "TxtSupplierName"
         Me.TxtSupplierName.Size = New System.Drawing.Size(350, 22)
-        Me.TxtSupplierName.TabIndex = 153
+        Me.TxtSupplierName.TabIndex = 1
         '
         'BtnPurchaseSearch
         '
@@ -258,16 +260,17 @@ Partial Class AccountsPayableList
         Me.BtnPurchaseSearch.Location = New System.Drawing.Point(1173, 41)
         Me.BtnPurchaseSearch.Name = "BtnPurchaseSearch"
         Me.BtnPurchaseSearch.Size = New System.Drawing.Size(166, 40)
-        Me.BtnPurchaseSearch.TabIndex = 152
+        Me.BtnPurchaseSearch.TabIndex = 8
         Me.BtnPurchaseSearch.Text = "検索"
         Me.BtnPurchaseSearch.UseVisualStyleBackColor = True
         '
         'BtnBack
         '
+        Me.BtnBack.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnBack.Location = New System.Drawing.Point(1174, 509)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(165, 40)
-        Me.BtnBack.TabIndex = 151
+        Me.BtnBack.TabIndex = 15
         Me.BtnBack.Text = "戻る"
         Me.BtnBack.UseVisualStyleBackColor = True
         '
@@ -282,7 +285,7 @@ Partial Class AccountsPayableList
         Me.DgvBilling.RowTemplate.Height = 21
         Me.DgvBilling.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvBilling.Size = New System.Drawing.Size(1326, 267)
-        Me.DgvBilling.TabIndex = 150
+        Me.DgvBilling.TabIndex = 12
         '
         'LblMode
         '
@@ -314,7 +317,7 @@ Partial Class AccountsPayableList
         Me.TxtCustomerPO.Location = New System.Drawing.Point(760, 95)
         Me.TxtCustomerPO.Name = "TxtCustomerPO"
         Me.TxtCustomerPO.Size = New System.Drawing.Size(170, 22)
-        Me.TxtCustomerPO.TabIndex = 324
+        Me.TxtCustomerPO.TabIndex = 7
         '
         'AccountsPayableList
         '
@@ -344,6 +347,7 @@ Partial Class AccountsPayableList
         Me.Controls.Add(Me.BtnPurchaseSearch)
         Me.Controls.Add(Me.BtnBack)
         Me.Controls.Add(Me.DgvBilling)
+        Me.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "AccountsPayableList"
         Me.Text = "AccountsPayableList"

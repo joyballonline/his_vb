@@ -64,7 +64,7 @@ Partial Class DepositList
         Me.DgvCustomer.RowTemplate.Height = 21
         Me.DgvCustomer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvCustomer.Size = New System.Drawing.Size(1326, 341)
-        Me.DgvCustomer.TabIndex = 20
+        Me.DgvCustomer.TabIndex = 6
         '
         '得意先名
         '
@@ -135,19 +135,21 @@ Partial Class DepositList
         '
         'btnBack
         '
+        Me.btnBack.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.btnBack.Location = New System.Drawing.Point(1173, 509)
         Me.btnBack.Name = "btnBack"
         Me.btnBack.Size = New System.Drawing.Size(165, 40)
-        Me.btnBack.TabIndex = 22
+        Me.btnBack.TabIndex = 8
         Me.btnBack.Text = "戻る"
         Me.btnBack.UseVisualStyleBackColor = True
         '
         'BtnDeposit
         '
+        Me.BtnDeposit.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnDeposit.Location = New System.Drawing.Point(1002, 509)
         Me.BtnDeposit.Name = "BtnDeposit"
         Me.BtnDeposit.Size = New System.Drawing.Size(165, 40)
-        Me.BtnDeposit.TabIndex = 21
+        Me.BtnDeposit.TabIndex = 7
         Me.BtnDeposit.Text = "入金入力"
         Me.BtnDeposit.UseVisualStyleBackColor = True
         '
@@ -169,7 +171,7 @@ Partial Class DepositList
         Me.TxtCustomerCode.Location = New System.Drawing.Point(188, 120)
         Me.TxtCustomerCode.Name = "TxtCustomerCode"
         Me.TxtCustomerCode.Size = New System.Drawing.Size(350, 22)
-        Me.TxtCustomerCode.TabIndex = 55
+        Me.TxtCustomerCode.TabIndex = 4
         '
         'Label3
         '
@@ -189,7 +191,7 @@ Partial Class DepositList
         Me.TxtTel.Location = New System.Drawing.Point(188, 92)
         Me.TxtTel.Name = "TxtTel"
         Me.TxtTel.Size = New System.Drawing.Size(350, 22)
-        Me.TxtTel.TabIndex = 53
+        Me.TxtTel.TabIndex = 3
         '
         'Label2
         '
@@ -209,7 +211,7 @@ Partial Class DepositList
         Me.TxtAddress.Location = New System.Drawing.Point(188, 64)
         Me.TxtAddress.Name = "TxtAddress"
         Me.TxtAddress.Size = New System.Drawing.Size(350, 22)
-        Me.TxtAddress.TabIndex = 51
+        Me.TxtAddress.TabIndex = 2
         '
         'Label1
         '
@@ -239,14 +241,15 @@ Partial Class DepositList
         Me.TxtCustomerName.Location = New System.Drawing.Point(188, 36)
         Me.TxtCustomerName.Name = "TxtCustomerName"
         Me.TxtCustomerName.Size = New System.Drawing.Size(350, 22)
-        Me.TxtCustomerName.TabIndex = 48
+        Me.TxtCustomerName.TabIndex = 1
         '
         'BtnSerach
         '
+        Me.BtnSerach.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnSerach.Location = New System.Drawing.Point(1172, 36)
         Me.BtnSerach.Name = "BtnSerach"
         Me.BtnSerach.Size = New System.Drawing.Size(166, 40)
-        Me.BtnSerach.TabIndex = 57
+        Me.BtnSerach.TabIndex = 5
         Me.BtnSerach.Text = "検索"
         Me.BtnSerach.UseVisualStyleBackColor = True
         '

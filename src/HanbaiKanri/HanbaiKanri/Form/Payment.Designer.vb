@@ -76,6 +76,7 @@ Partial Class Payment
         Me.BtnDelete.Name = "BtnDelete"
         Me.BtnDelete.Size = New System.Drawing.Size(94, 20)
         Me.BtnDelete.TabIndex = 319
+        Me.BtnDelete.TabStop = False
         Me.BtnDelete.Text = "行削除"
         Me.BtnDelete.UseVisualStyleBackColor = True
         Me.BtnDelete.Visible = False
@@ -91,7 +92,7 @@ Partial Class Payment
         Me.DgvHistory.RowTemplate.Height = 21
         Me.DgvHistory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvHistory.Size = New System.Drawing.Size(1327, 100)
-        Me.DgvHistory.TabIndex = 301
+        Me.DgvHistory.TabIndex = 2
         '
         'No
         '
@@ -153,7 +154,7 @@ Partial Class Payment
         Me.DgvDeposit.RowTemplate.Height = 21
         Me.DgvDeposit.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
         Me.DgvDeposit.Size = New System.Drawing.Size(1327, 100)
-        Me.DgvDeposit.TabIndex = 300
+        Me.DgvDeposit.TabIndex = 5
         '
         '行番号
         '
@@ -186,13 +187,14 @@ Partial Class Payment
         Me.TxtCount3.Name = "TxtCount3"
         Me.TxtCount3.Size = New System.Drawing.Size(38, 22)
         Me.TxtCount3.TabIndex = 317
+        Me.TxtCount3.TabStop = False
         '
         'BtnAdd
         '
         Me.BtnAdd.Location = New System.Drawing.Point(102, 203)
         Me.BtnAdd.Name = "BtnAdd"
         Me.BtnAdd.Size = New System.Drawing.Size(94, 20)
-        Me.BtnAdd.TabIndex = 316
+        Me.BtnAdd.TabIndex = 3
         Me.BtnAdd.Text = "行追加"
         Me.BtnAdd.UseVisualStyleBackColor = True
         '
@@ -201,25 +203,27 @@ Partial Class Payment
         Me.BtnCal.Location = New System.Drawing.Point(202, 203)
         Me.BtnCal.Name = "BtnCal"
         Me.BtnCal.Size = New System.Drawing.Size(94, 20)
-        Me.BtnCal.TabIndex = 320
+        Me.BtnCal.TabIndex = 4
         Me.BtnCal.Text = "自動振分"
         Me.BtnCal.UseVisualStyleBackColor = True
         '
         'BtnRegist
         '
+        Me.BtnRegist.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnRegist.Location = New System.Drawing.Point(1004, 509)
         Me.BtnRegist.Name = "BtnRegist"
         Me.BtnRegist.Size = New System.Drawing.Size(165, 40)
-        Me.BtnRegist.TabIndex = 315
+        Me.BtnRegist.TabIndex = 9
         Me.BtnRegist.Text = "登録"
         Me.BtnRegist.UseVisualStyleBackColor = True
         '
         'BtnBack
         '
+        Me.BtnBack.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnBack.Location = New System.Drawing.Point(1175, 509)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(165, 40)
-        Me.BtnBack.TabIndex = 314
+        Me.BtnBack.TabIndex = 10
         Me.BtnBack.Text = "戻る"
         Me.BtnBack.UseVisualStyleBackColor = True
         '
@@ -243,6 +247,7 @@ Partial Class Payment
         Me.TxtCount1.Name = "TxtCount1"
         Me.TxtCount1.Size = New System.Drawing.Size(38, 22)
         Me.TxtCount1.TabIndex = 312
+        Me.TxtCount1.TabStop = False
         '
         'DtpDepositDate
         '
@@ -253,7 +258,7 @@ Partial Class Payment
         Me.DtpDepositDate.Location = New System.Drawing.Point(292, 335)
         Me.DtpDepositDate.Name = "DtpDepositDate"
         Me.DtpDepositDate.Size = New System.Drawing.Size(148, 22)
-        Me.DtpDepositDate.TabIndex = 311
+        Me.DtpDepositDate.TabIndex = 6
         Me.DtpDepositDate.TabStop = False
         Me.DtpDepositDate.Value = New Date(2018, 7, 25, 13, 29, 25, 0)
         '
@@ -275,7 +280,7 @@ Partial Class Payment
         Me.TxtRemarks.Location = New System.Drawing.Point(622, 335)
         Me.TxtRemarks.Name = "TxtRemarks"
         Me.TxtRemarks.Size = New System.Drawing.Size(644, 22)
-        Me.TxtRemarks.TabIndex = 309
+        Me.TxtRemarks.TabIndex = 7
         '
         'LblDepositDate
         '
@@ -309,6 +314,7 @@ Partial Class Payment
         Me.TxtCount2.Name = "TxtCount2"
         Me.TxtCount2.Size = New System.Drawing.Size(38, 22)
         Me.TxtCount2.TabIndex = 306
+        Me.TxtCount2.TabStop = False
         '
         'DgvCustomer
         '
@@ -321,7 +327,7 @@ Partial Class Payment
         Me.DgvCustomer.RowTemplate.Height = 21
         Me.DgvCustomer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvCustomer.Size = New System.Drawing.Size(504, 40)
-        Me.DgvCustomer.TabIndex = 299
+        Me.DgvCustomer.TabIndex = 1
         '
         '支払先
         '
@@ -365,7 +371,7 @@ Partial Class Payment
         Me.DgvBillingInfo.RowHeadersVisible = False
         Me.DgvBillingInfo.RowTemplate.Height = 21
         Me.DgvBillingInfo.Size = New System.Drawing.Size(1327, 100)
-        Me.DgvBillingInfo.TabIndex = 302
+        Me.DgvBillingInfo.TabIndex = 8
         '
         'InfoNo
         '

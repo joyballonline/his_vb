@@ -50,14 +50,14 @@ Partial Class MstUser
         Me.Dgv_User.AllowUserToResizeRows = False
         Me.Dgv_User.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.Dgv_User.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.会社コード, Me.ユーザID, Me.氏名, Me.略名, Me.備考, Me.無効フラグ, Me.権限, Me.言語, Me.更新者, Me.更新日})
-        Me.Dgv_User.Location = New System.Drawing.Point(12, 33)
+        Me.Dgv_User.Location = New System.Drawing.Point(12, 34)
         Me.Dgv_User.Name = "Dgv_User"
         Me.Dgv_User.ReadOnly = True
         Me.Dgv_User.RowHeadersVisible = False
         Me.Dgv_User.RowTemplate.Height = 21
         Me.Dgv_User.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.Dgv_User.Size = New System.Drawing.Size(1326, 470)
-        Me.Dgv_User.TabIndex = 0
+        Me.Dgv_User.Size = New System.Drawing.Size(1326, 469)
+        Me.Dgv_User.TabIndex = 3
         '
         '会社コード
         '
@@ -121,55 +121,61 @@ Partial Class MstUser
         '
         'btn_userAdd
         '
+        Me.btn_userAdd.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.btn_userAdd.Location = New System.Drawing.Point(831, 509)
         Me.btn_userAdd.Name = "btn_userAdd"
         Me.btn_userAdd.Size = New System.Drawing.Size(165, 40)
-        Me.btn_userAdd.TabIndex = 1
+        Me.btn_userAdd.TabIndex = 4
         Me.btn_userAdd.Text = "ユーザ追加"
         Me.btn_userAdd.UseVisualStyleBackColor = True
         '
         'btn_selectedRow
         '
+        Me.btn_selectedRow.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.btn_selectedRow.Location = New System.Drawing.Point(1002, 509)
         Me.btn_selectedRow.Name = "btn_selectedRow"
         Me.btn_selectedRow.Size = New System.Drawing.Size(165, 40)
-        Me.btn_selectedRow.TabIndex = 2
+        Me.btn_selectedRow.TabIndex = 5
         Me.btn_selectedRow.Text = "ユーザ編集"
         Me.btn_selectedRow.UseVisualStyleBackColor = True
         '
         'BtnBack
         '
+        Me.BtnBack.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnBack.Location = New System.Drawing.Point(1173, 509)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(165, 40)
-        Me.BtnBack.TabIndex = 3
+        Me.BtnBack.TabIndex = 6
         Me.BtnBack.Text = "戻る"
         Me.BtnBack.UseVisualStyleBackColor = True
         '
         'BtnSearch
         '
-        Me.BtnSearch.Location = New System.Drawing.Point(180, 4)
+        Me.BtnSearch.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.BtnSearch.Location = New System.Drawing.Point(181, 5)
         Me.BtnSearch.Name = "BtnSearch"
         Me.BtnSearch.Size = New System.Drawing.Size(75, 23)
-        Me.BtnSearch.TabIndex = 21
+        Me.BtnSearch.TabIndex = 2
         Me.BtnSearch.Text = "検索"
         Me.BtnSearch.UseVisualStyleBackColor = True
         '
         'Label1
         '
         Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.Label1.Location = New System.Drawing.Point(12, 9)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(46, 12)
+        Me.Label1.Size = New System.Drawing.Size(57, 15)
         Me.Label1.TabIndex = 20
         Me.Label1.Text = "ユーザID"
         '
         'Search
         '
-        Me.Search.Location = New System.Drawing.Point(74, 6)
+        Me.Search.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Search.Location = New System.Drawing.Point(75, 6)
         Me.Search.Name = "Search"
-        Me.Search.Size = New System.Drawing.Size(100, 19)
-        Me.Search.TabIndex = 19
+        Me.Search.Size = New System.Drawing.Size(100, 22)
+        Me.Search.TabIndex = 1
         '
         'MstUser
         '

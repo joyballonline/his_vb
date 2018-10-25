@@ -53,35 +53,39 @@ Partial Class CompanySearch
         '
         'BtnSearch
         '
-        Me.BtnSearch.Location = New System.Drawing.Point(180, 4)
+        Me.BtnSearch.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.BtnSearch.Location = New System.Drawing.Point(176, 5)
         Me.BtnSearch.Name = "BtnSearch"
         Me.BtnSearch.Size = New System.Drawing.Size(75, 23)
-        Me.BtnSearch.TabIndex = 16
+        Me.BtnSearch.TabIndex = 2
         Me.BtnSearch.Text = "検索"
         Me.BtnSearch.UseVisualStyleBackColor = True
         '
         'Search
         '
-        Me.Search.Location = New System.Drawing.Point(74, 6)
+        Me.Search.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Search.Location = New System.Drawing.Point(70, 6)
         Me.Search.Name = "Search"
-        Me.Search.Size = New System.Drawing.Size(100, 19)
-        Me.Search.TabIndex = 14
+        Me.Search.Size = New System.Drawing.Size(100, 22)
+        Me.Search.TabIndex = 1
         '
         'BtnBack
         '
-        Me.BtnBack.Location = New System.Drawing.Point(1263, 259)
+        Me.BtnBack.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.BtnBack.Location = New System.Drawing.Point(1173, 235)
         Me.BtnBack.Name = "BtnBack"
-        Me.BtnBack.Size = New System.Drawing.Size(75, 23)
-        Me.BtnBack.TabIndex = 13
+        Me.BtnBack.Size = New System.Drawing.Size(165, 40)
+        Me.BtnBack.TabIndex = 5
         Me.BtnBack.Text = "戻る"
         Me.BtnBack.UseVisualStyleBackColor = True
         '
         'btnSelectCompany
         '
-        Me.btnSelectCompany.Location = New System.Drawing.Point(1182, 259)
+        Me.btnSelectCompany.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.btnSelectCompany.Location = New System.Drawing.Point(1002, 235)
         Me.btnSelectCompany.Name = "btnSelectCompany"
-        Me.btnSelectCompany.Size = New System.Drawing.Size(75, 23)
-        Me.btnSelectCompany.TabIndex = 11
+        Me.btnSelectCompany.Size = New System.Drawing.Size(165, 40)
+        Me.btnSelectCompany.TabIndex = 4
         Me.btnSelectCompany.Text = "選択"
         Me.btnSelectCompany.UseVisualStyleBackColor = True
         '
@@ -130,11 +134,12 @@ Partial Class CompanySearch
         'Label1
         '
         Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.Label1.Location = New System.Drawing.Point(12, 9)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(56, 12)
+        Me.Label1.Size = New System.Drawing.Size(52, 15)
         Me.Label1.TabIndex = 15
-        Me.Label1.Text = "会社コード"
+        Me.Label1.Text = "会社名"
         '
         '備考
         '
@@ -219,14 +224,14 @@ Partial Class CompanySearch
         Me.Dgv_Company.AllowUserToAddRows = False
         Me.Dgv_Company.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.Dgv_Company.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.会社コード, Me.会社名, Me.会社略称, Me.郵便番号, Me.住所１, Me.住所２, Me.住所３, Me.電話番号, Me.FAX番号, Me.代表者役職, Me.代表者名, Me.表示順, Me.備考, Me.銀行コード, Me.支店コード, Me.預金種目, Me.口座番号, Me.口座名義, Me.更新者, Me.更新日})
-        Me.Dgv_Company.Location = New System.Drawing.Point(12, 33)
+        Me.Dgv_Company.Location = New System.Drawing.Point(12, 34)
         Me.Dgv_Company.Name = "Dgv_Company"
         Me.Dgv_Company.ReadOnly = True
         Me.Dgv_Company.RowHeadersVisible = False
         Me.Dgv_Company.RowTemplate.Height = 21
         Me.Dgv_Company.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.Dgv_Company.Size = New System.Drawing.Size(1326, 220)
-        Me.Dgv_Company.TabIndex = 10
+        Me.Dgv_Company.Size = New System.Drawing.Size(1326, 195)
+        Me.Dgv_Company.TabIndex = 3
         '
         'CompanySearch
         '

@@ -165,7 +165,7 @@ Public Class MstHanyou
             Sql += "."
             Sql += "m90_hanyo"
             Sql += " WHERE "
-            Sql += "会社コード"
+            Sql += "固定キー"
             Sql += " ILIKE "
             Sql += "'%"
             Sql += Search.Text

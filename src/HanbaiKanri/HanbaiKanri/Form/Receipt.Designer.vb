@@ -66,13 +66,15 @@ Partial Class Receipt
         Me.TxtSuffixNo.Name = "TxtSuffixNo"
         Me.TxtSuffixNo.Size = New System.Drawing.Size(36, 22)
         Me.TxtSuffixNo.TabIndex = 258
+        Me.TxtSuffixNo.TabStop = False
         '
         'BtnRegist
         '
+        Me.BtnRegist.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnRegist.Location = New System.Drawing.Point(1002, 509)
         Me.BtnRegist.Name = "BtnRegist"
         Me.BtnRegist.Size = New System.Drawing.Size(165, 40)
-        Me.BtnRegist.TabIndex = 257
+        Me.BtnRegist.TabIndex = 6
         Me.BtnRegist.Text = "登録"
         Me.BtnRegist.UseVisualStyleBackColor = True
         '
@@ -85,7 +87,7 @@ Partial Class Receipt
         Me.DtpReceiptDate.Location = New System.Drawing.Point(292, 343)
         Me.DtpReceiptDate.Name = "DtpReceiptDate"
         Me.DtpReceiptDate.Size = New System.Drawing.Size(148, 22)
-        Me.DtpReceiptDate.TabIndex = 256
+        Me.DtpReceiptDate.TabIndex = 3
         Me.DtpReceiptDate.TabStop = False
         Me.DtpReceiptDate.Value = New Date(2018, 7, 16, 0, 0, 0, 0)
         '
@@ -107,7 +109,7 @@ Partial Class Receipt
         Me.TxtRemarks.Location = New System.Drawing.Point(622, 343)
         Me.TxtRemarks.Name = "TxtRemarks"
         Me.TxtRemarks.Size = New System.Drawing.Size(644, 22)
-        Me.TxtRemarks.TabIndex = 254
+        Me.TxtRemarks.TabIndex = 4
         '
         'LblReceiptDate
         '
@@ -152,6 +154,7 @@ Partial Class Receipt
         Me.TxtCount3.Name = "TxtCount3"
         Me.TxtCount3.Size = New System.Drawing.Size(38, 22)
         Me.TxtCount3.TabIndex = 250
+        Me.TxtCount3.TabStop = False
         '
         'DgvAdd
         '
@@ -162,7 +165,7 @@ Partial Class Receipt
         Me.DgvAdd.RowHeadersVisible = False
         Me.DgvAdd.RowTemplate.Height = 21
         Me.DgvAdd.Size = New System.Drawing.Size(1326, 100)
-        Me.DgvAdd.TabIndex = 249
+        Me.DgvAdd.TabIndex = 5
         '
         'LblHistory
         '
@@ -206,6 +209,7 @@ Partial Class Receipt
         Me.TxtCount2.Name = "TxtCount2"
         Me.TxtCount2.Size = New System.Drawing.Size(38, 22)
         Me.TxtCount2.TabIndex = 245
+        Me.TxtCount2.TabStop = False
         '
         'DgvHistory
         '
@@ -217,7 +221,7 @@ Partial Class Receipt
         Me.DgvHistory.RowHeadersVisible = False
         Me.DgvHistory.RowTemplate.Height = 21
         Me.DgvHistory.Size = New System.Drawing.Size(1326, 100)
-        Me.DgvHistory.TabIndex = 244
+        Me.DgvHistory.TabIndex = 2
         '
         'LblCount1
         '
@@ -239,6 +243,7 @@ Partial Class Receipt
         Me.TxtCount1.Name = "TxtCount1"
         Me.TxtCount1.Size = New System.Drawing.Size(38, 22)
         Me.TxtCount1.TabIndex = 242
+        Me.TxtCount1.TabStop = False
         '
         'DgvPurchase
         '
@@ -250,7 +255,7 @@ Partial Class Receipt
         Me.DgvPurchase.RowHeadersVisible = False
         Me.DgvPurchase.RowTemplate.Height = 21
         Me.DgvPurchase.Size = New System.Drawing.Size(1326, 100)
-        Me.DgvPurchase.TabIndex = 241
+        Me.DgvPurchase.TabIndex = 1
         '
         'LblPurchaseDate
         '
@@ -273,6 +278,7 @@ Partial Class Receipt
         Me.TxtOrdingDate.Name = "TxtOrdingDate"
         Me.TxtOrdingDate.Size = New System.Drawing.Size(157, 22)
         Me.TxtOrdingDate.TabIndex = 239
+        Me.TxtOrdingDate.TabStop = False
         '
         'TxtSupplierName
         '
@@ -283,6 +289,7 @@ Partial Class Receipt
         Me.TxtSupplierName.Name = "TxtSupplierName"
         Me.TxtSupplierName.Size = New System.Drawing.Size(333, 22)
         Me.TxtSupplierName.TabIndex = 238
+        Me.TxtSupplierName.TabStop = False
         '
         'LblSupplier
         '
@@ -305,13 +312,15 @@ Partial Class Receipt
         Me.TxtSupplierCode.Name = "TxtSupplierCode"
         Me.TxtSupplierCode.Size = New System.Drawing.Size(157, 22)
         Me.TxtSupplierCode.TabIndex = 236
+        Me.TxtSupplierCode.TabStop = False
         '
         'BtnBack
         '
+        Me.BtnBack.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnBack.Location = New System.Drawing.Point(1173, 509)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(165, 40)
-        Me.BtnBack.TabIndex = 235
+        Me.BtnBack.TabIndex = 7
         Me.BtnBack.Text = "戻る"
         Me.BtnBack.UseVisualStyleBackColor = True
         '
@@ -336,6 +345,7 @@ Partial Class Receipt
         Me.TxtPurchaseNo.Name = "TxtPurchaseNo"
         Me.TxtPurchaseNo.Size = New System.Drawing.Size(157, 22)
         Me.TxtPurchaseNo.TabIndex = 233
+        Me.TxtPurchaseNo.TabStop = False
         '
         'Label1
         '
@@ -378,6 +388,7 @@ Partial Class Receipt
         Me.TxtCustomerPO.Name = "TxtCustomerPO"
         Me.TxtCustomerPO.Size = New System.Drawing.Size(157, 22)
         Me.TxtCustomerPO.TabIndex = 306
+        Me.TxtCustomerPO.TabStop = False
         '
         'Receipt
         '

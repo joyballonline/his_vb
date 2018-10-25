@@ -50,10 +50,11 @@ Partial Class StockList
         '
         'BtnBack
         '
+        Me.BtnBack.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnBack.Location = New System.Drawing.Point(1174, 512)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(165, 40)
-        Me.BtnBack.TabIndex = 334
+        Me.BtnBack.TabIndex = 6
         Me.BtnBack.Text = "戻る"
         Me.BtnBack.UseVisualStyleBackColor = True
         '
@@ -68,7 +69,7 @@ Partial Class StockList
         Me.DgvStocklist.RowTemplate.Height = 21
         Me.DgvStocklist.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvStocklist.Size = New System.Drawing.Size(1325, 334)
-        Me.DgvStocklist.TabIndex = 332
+        Me.DgvStocklist.TabIndex = 5
         '
         '年月
         '
@@ -160,7 +161,7 @@ Partial Class StockList
         Me.TxtName.Location = New System.Drawing.Point(190, 67)
         Me.TxtName.Name = "TxtName"
         Me.TxtName.Size = New System.Drawing.Size(200, 22)
-        Me.TxtName.TabIndex = 329
+        Me.TxtName.TabIndex = 2
         '
         'Label1
         '
@@ -190,7 +191,7 @@ Partial Class StockList
         Me.TxtMaker.Location = New System.Drawing.Point(190, 39)
         Me.TxtMaker.Name = "TxtMaker"
         Me.TxtMaker.Size = New System.Drawing.Size(200, 22)
-        Me.TxtMaker.TabIndex = 326
+        Me.TxtMaker.TabIndex = 1
         '
         'BtnSearch
         '
@@ -198,7 +199,7 @@ Partial Class StockList
         Me.BtnSearch.Location = New System.Drawing.Point(1174, 38)
         Me.BtnSearch.Name = "BtnSearch"
         Me.BtnSearch.Size = New System.Drawing.Size(165, 40)
-        Me.BtnSearch.TabIndex = 325
+        Me.BtnSearch.TabIndex = 4
         Me.BtnSearch.Text = "検索"
         Me.BtnSearch.UseVisualStyleBackColor = True
         '
@@ -220,7 +221,7 @@ Partial Class StockList
         Me.TxtModel.Location = New System.Drawing.Point(190, 95)
         Me.TxtModel.Name = "TxtModel"
         Me.TxtModel.Size = New System.Drawing.Size(200, 22)
-        Me.TxtModel.TabIndex = 335
+        Me.TxtModel.TabIndex = 3
         '
         'StockList
         '

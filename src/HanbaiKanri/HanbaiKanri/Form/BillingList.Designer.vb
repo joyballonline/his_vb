@@ -54,10 +54,11 @@ Partial Class BillingList
         '
         'BtnBillingCancel
         '
+        Me.BtnBillingCancel.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnBillingCancel.Location = New System.Drawing.Point(832, 509)
         Me.BtnBillingCancel.Name = "BtnBillingCancel"
         Me.BtnBillingCancel.Size = New System.Drawing.Size(165, 40)
-        Me.BtnBillingCancel.TabIndex = 149
+        Me.BtnBillingCancel.TabIndex = 13
         Me.BtnBillingCancel.Text = "請求取消"
         Me.BtnBillingCancel.UseVisualStyleBackColor = True
         Me.BtnBillingCancel.Visible = False
@@ -69,16 +70,17 @@ Partial Class BillingList
         Me.ChkCancelData.Location = New System.Drawing.Point(16, 202)
         Me.ChkCancelData.Name = "ChkCancelData"
         Me.ChkCancelData.Size = New System.Drawing.Size(139, 19)
-        Me.ChkCancelData.TabIndex = 148
+        Me.ChkCancelData.TabIndex = 9
         Me.ChkCancelData.Text = "取消データを含める"
         Me.ChkCancelData.UseVisualStyleBackColor = True
         '
         'BtnBillingView
         '
+        Me.BtnBillingView.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnBillingView.Location = New System.Drawing.Point(1003, 509)
         Me.BtnBillingView.Name = "BtnBillingView"
         Me.BtnBillingView.Size = New System.Drawing.Size(165, 40)
-        Me.BtnBillingView.TabIndex = 147
+        Me.BtnBillingView.TabIndex = 14
         Me.BtnBillingView.Text = "請求参照"
         Me.BtnBillingView.UseVisualStyleBackColor = True
         Me.BtnBillingView.Visible = False
@@ -102,7 +104,7 @@ Partial Class BillingList
         Me.RbtnSlip.Location = New System.Drawing.Point(6, 8)
         Me.RbtnSlip.Name = "RbtnSlip"
         Me.RbtnSlip.Size = New System.Drawing.Size(89, 19)
-        Me.RbtnSlip.TabIndex = 26
+        Me.RbtnSlip.TabIndex = 10
         Me.RbtnSlip.TabStop = True
         Me.RbtnSlip.Text = "伝票単位"
         Me.RbtnSlip.UseVisualStyleBackColor = True
@@ -114,7 +116,7 @@ Partial Class BillingList
         Me.RbtnDetails.Location = New System.Drawing.Point(101, 8)
         Me.RbtnDetails.Name = "RbtnDetails"
         Me.RbtnDetails.Size = New System.Drawing.Size(89, 19)
-        Me.RbtnDetails.TabIndex = 27
+        Me.RbtnDetails.TabIndex = 11
         Me.RbtnDetails.Text = "明細単位"
         Me.RbtnDetails.UseVisualStyleBackColor = True
         '
@@ -133,7 +135,7 @@ Partial Class BillingList
         Me.Label5.AutoSize = True
         Me.Label5.Location = New System.Drawing.Point(936, 46)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(17, 12)
+        Me.Label5.Size = New System.Drawing.Size(22, 15)
         Me.Label5.TabIndex = 143
         Me.Label5.Text = "～"
         '
@@ -143,7 +145,7 @@ Partial Class BillingList
         Me.TxtBillingNo2.Location = New System.Drawing.Point(959, 68)
         Me.TxtBillingNo2.Name = "TxtBillingNo2"
         Me.TxtBillingNo2.Size = New System.Drawing.Size(170, 22)
-        Me.TxtBillingNo2.TabIndex = 142
+        Me.TxtBillingNo2.TabIndex = 6
         '
         'TxtBillingDate2
         '
@@ -151,7 +153,7 @@ Partial Class BillingList
         Me.TxtBillingDate2.Location = New System.Drawing.Point(959, 40)
         Me.TxtBillingDate2.Name = "TxtBillingDate2"
         Me.TxtBillingDate2.Size = New System.Drawing.Size(170, 22)
-        Me.TxtBillingDate2.TabIndex = 141
+        Me.TxtBillingDate2.TabIndex = 4
         '
         'Label7
         '
@@ -171,7 +173,7 @@ Partial Class BillingList
         Me.TxtBillingNo1.Location = New System.Drawing.Point(760, 67)
         Me.TxtBillingNo1.Name = "TxtBillingNo1"
         Me.TxtBillingNo1.Size = New System.Drawing.Size(170, 22)
-        Me.TxtBillingNo1.TabIndex = 137
+        Me.TxtBillingNo1.TabIndex = 5
         '
         'Label8
         '
@@ -191,7 +193,7 @@ Partial Class BillingList
         Me.TxtBillingDate1.Location = New System.Drawing.Point(760, 40)
         Me.TxtBillingDate1.Name = "TxtBillingDate1"
         Me.TxtBillingDate1.Size = New System.Drawing.Size(170, 22)
-        Me.TxtBillingDate1.TabIndex = 135
+        Me.TxtBillingDate1.TabIndex = 3
         '
         'Label4
         '
@@ -210,7 +212,7 @@ Partial Class BillingList
         Me.Label9.AutoSize = True
         Me.Label9.Location = New System.Drawing.Point(936, 74)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(17, 12)
+        Me.Label9.Size = New System.Drawing.Size(22, 15)
         Me.Label9.TabIndex = 144
         Me.Label9.Text = "～"
         '
@@ -220,7 +222,7 @@ Partial Class BillingList
         Me.TxtCustomerCode.Location = New System.Drawing.Point(190, 68)
         Me.TxtCustomerCode.Name = "TxtCustomerCode"
         Me.TxtCustomerCode.Size = New System.Drawing.Size(350, 22)
-        Me.TxtCustomerCode.TabIndex = 133
+        Me.TxtCustomerCode.TabIndex = 2
         '
         'Label1
         '
@@ -250,7 +252,7 @@ Partial Class BillingList
         Me.TxtCustomerName.Location = New System.Drawing.Point(190, 40)
         Me.TxtCustomerName.Name = "TxtCustomerName"
         Me.TxtCustomerName.Size = New System.Drawing.Size(350, 22)
-        Me.TxtCustomerName.TabIndex = 126
+        Me.TxtCustomerName.TabIndex = 1
         '
         'BtnPurchaseSearch
         '
@@ -258,16 +260,17 @@ Partial Class BillingList
         Me.BtnPurchaseSearch.Location = New System.Drawing.Point(1174, 41)
         Me.BtnPurchaseSearch.Name = "BtnPurchaseSearch"
         Me.BtnPurchaseSearch.Size = New System.Drawing.Size(165, 40)
-        Me.BtnPurchaseSearch.TabIndex = 125
+        Me.BtnPurchaseSearch.TabIndex = 8
         Me.BtnPurchaseSearch.Text = "検索"
         Me.BtnPurchaseSearch.UseVisualStyleBackColor = True
         '
         'BtnBack
         '
+        Me.BtnBack.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnBack.Location = New System.Drawing.Point(1174, 509)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(165, 40)
-        Me.BtnBack.TabIndex = 124
+        Me.BtnBack.TabIndex = 15
         Me.BtnBack.Text = "戻る"
         Me.BtnBack.UseVisualStyleBackColor = True
         '
@@ -282,7 +285,7 @@ Partial Class BillingList
         Me.DgvBilling.RowTemplate.Height = 21
         Me.DgvBilling.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvBilling.Size = New System.Drawing.Size(1326, 267)
-        Me.DgvBilling.TabIndex = 123
+        Me.DgvBilling.TabIndex = 12
         '
         'LblMode
         '
@@ -314,7 +317,7 @@ Partial Class BillingList
         Me.TxtCustomerPO.Location = New System.Drawing.Point(760, 95)
         Me.TxtCustomerPO.Name = "TxtCustomerPO"
         Me.TxtCustomerPO.Size = New System.Drawing.Size(170, 22)
-        Me.TxtCustomerPO.TabIndex = 326
+        Me.TxtCustomerPO.TabIndex = 7
         '
         'BillingList
         '
@@ -344,6 +347,7 @@ Partial Class BillingList
         Me.Controls.Add(Me.BtnPurchaseSearch)
         Me.Controls.Add(Me.BtnBack)
         Me.Controls.Add(Me.DgvBilling)
+        Me.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "BillingList"
         Me.Text = "BillingList"
