@@ -383,12 +383,30 @@ Public Class Cymn
         Sql3 += "'"
         Dim ds3 = _db.selectDB(Sql3, RS, reccnt)
 
+        Dim Sql4 As String = ""
+        Sql4 += "SELECT"
+        Sql4 += " * "
+        Sql4 += "FROM "
+        Sql4 += "public"
+        Sql4 += "."
+        Sql4 += "m01_company"
+        Sql4 += " WHERE "
+        Sql4 += "会社コード"
+        Sql4 += " ILIKE "
+        Sql4 += "'"
+        Sql4 += frmC01F10_Login.loginValue.BumonNM
+        Sql4 += "'"
+
+        Dim ds4 As DataSet = _db.selectDB(Sql4, RS, reccnt)
+
         Dim tmp As Integer
         Dim tmp2 As Double
         Dim tmp3 As Double
         Dim tmp4 As Double
         Dim NoOverHead As Integer = 0
         Dim Total As Double = 0
+        Dim PPH As Double = ds4.Tables(RS).Rows(0)("前払法人税率")
+
         Dim tmp5 As Integer
         For index As Integer = 0 To ds3.Tables(RS).Rows.Count - 1
             DgvItemList.Rows.Add()
@@ -425,7 +443,7 @@ Public Class Cymn
             tmp3 = tmp3 * tmp2
             tmp4 = ds3.Tables(RS).Rows(index)("仕入原価")
             tmp4 = tmp4 + tmp3
-            Total += tmp4 * 0.025
+            Total += tmp4 * PPH
         Next
 
         TxtPph.Text = Total

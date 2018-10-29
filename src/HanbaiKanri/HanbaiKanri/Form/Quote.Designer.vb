@@ -40,6 +40,8 @@ Partial Class Quote
         Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LblQuoteNo = New System.Windows.Forms.Label()
         Me.LblQuote = New System.Windows.Forms.Label()
         Me.TxtQuoteNo = New System.Windows.Forms.TextBox()
@@ -101,6 +103,7 @@ Partial Class Quote
         Me.RbtnUP = New System.Windows.Forms.RadioButton()
         Me.RbtnGP = New System.Windows.Forms.RadioButton()
         Me.BtnCodeSearch = New System.Windows.Forms.Button()
+        Me.RbtnQuote = New System.Windows.Forms.RadioButton()
         Me.No = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.メーカー = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.品名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -130,6 +133,8 @@ Partial Class Quote
         Me.間接費無仕入金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.間接費率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.間接費 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TxtQuoteTotal = New System.Windows.Forms.TextBox()
+        Me.Label3 = New System.Windows.Forms.Label()
         CType(Me.DgvItemList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -207,7 +212,7 @@ Partial Class Quote
         Me.DgvItemList.RowTemplate.Height = 21
         Me.DgvItemList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
         Me.DgvItemList.Size = New System.Drawing.Size(1329, 179)
-        Me.DgvItemList.TabIndex = 19
+        Me.DgvItemList.TabIndex = 20
         '
         'LblInput
         '
@@ -553,7 +558,7 @@ Partial Class Quote
         Me.LblTotal.Name = "LblTotal"
         Me.LblTotal.Size = New System.Drawing.Size(100, 23)
         Me.LblTotal.TabIndex = 33
-        Me.LblTotal.Text = "見積金額"
+        Me.LblTotal.Text = "売上金額"
         Me.LblTotal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'BtnRegistration
@@ -562,7 +567,7 @@ Partial Class Quote
         Me.BtnRegistration.Location = New System.Drawing.Point(1004, 509)
         Me.BtnRegistration.Name = "BtnRegistration"
         Me.BtnRegistration.Size = New System.Drawing.Size(165, 40)
-        Me.BtnRegistration.TabIndex = 100
+        Me.BtnRegistration.TabIndex = 25
         Me.BtnRegistration.Text = "登録"
         Me.BtnRegistration.UseVisualStyleBackColor = True
         '
@@ -572,7 +577,7 @@ Partial Class Quote
         Me.BtnQuote.Location = New System.Drawing.Point(828, 509)
         Me.BtnQuote.Name = "BtnQuote"
         Me.BtnQuote.Size = New System.Drawing.Size(165, 40)
-        Me.BtnQuote.TabIndex = 23
+        Me.BtnQuote.TabIndex = 24
         Me.BtnQuote.Text = "見積書発行"
         Me.BtnQuote.UseVisualStyleBackColor = True
         Me.BtnQuote.Visible = False
@@ -597,7 +602,7 @@ Partial Class Quote
         Me.BtnBack.Location = New System.Drawing.Point(1176, 509)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(165, 40)
-        Me.BtnBack.TabIndex = 200
+        Me.BtnBack.TabIndex = 26
         Me.BtnBack.Text = "戻る"
         Me.BtnBack.UseVisualStyleBackColor = True
         '
@@ -651,7 +656,7 @@ Partial Class Quote
         Me.TxtGrossProfit.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.TxtGrossProfit.Enabled = False
         Me.TxtGrossProfit.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtGrossProfit.Location = New System.Drawing.Point(1110, 480)
+        Me.TxtGrossProfit.Location = New System.Drawing.Point(766, 451)
         Me.TxtGrossProfit.MaxLength = 10
         Me.TxtGrossProfit.Name = "TxtGrossProfit"
         Me.TxtGrossProfit.ReadOnly = True
@@ -665,7 +670,7 @@ Partial Class Quote
         Me.LblGrossProfit.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblGrossProfit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblGrossProfit.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblGrossProfit.Location = New System.Drawing.Point(1004, 480)
+        Me.LblGrossProfit.Location = New System.Drawing.Point(660, 451)
         Me.LblGrossProfit.Name = "LblGrossProfit"
         Me.LblGrossProfit.Size = New System.Drawing.Size(100, 23)
         Me.LblGrossProfit.TabIndex = 41
@@ -730,7 +735,7 @@ Partial Class Quote
         Me.TxtVat.MaxLength = 10
         Me.TxtVat.Name = "TxtVat"
         Me.TxtVat.Size = New System.Drawing.Size(231, 23)
-        Me.TxtVat.TabIndex = 20
+        Me.TxtVat.TabIndex = 21
         Me.TxtVat.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label1
@@ -763,7 +768,7 @@ Partial Class Quote
         Me.BtnQuoteRequest.Location = New System.Drawing.Point(657, 509)
         Me.BtnQuoteRequest.Name = "BtnQuoteRequest"
         Me.BtnQuoteRequest.Size = New System.Drawing.Size(165, 40)
-        Me.BtnQuoteRequest.TabIndex = 22
+        Me.BtnQuoteRequest.TabIndex = 23
         Me.BtnQuoteRequest.Text = "見積書依頼発行"
         Me.BtnQuoteRequest.UseVisualStyleBackColor = True
         Me.BtnQuoteRequest.Visible = False
@@ -774,7 +779,7 @@ Partial Class Quote
         Me.BtnProof.Location = New System.Drawing.Point(486, 509)
         Me.BtnProof.Name = "BtnProof"
         Me.BtnProof.Size = New System.Drawing.Size(165, 40)
-        Me.BtnProof.TabIndex = 21
+        Me.BtnProof.TabIndex = 22
         Me.BtnProof.Text = "プルーフ発行"
         Me.BtnProof.UseVisualStyleBackColor = True
         Me.BtnProof.Visible = False
@@ -782,11 +787,12 @@ Partial Class Quote
         'Panel1
         '
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel1.Controls.Add(Me.RbtnQuote)
         Me.Panel1.Controls.Add(Me.RbtnUP)
         Me.Panel1.Controls.Add(Me.RbtnGP)
-        Me.Panel1.Location = New System.Drawing.Point(1074, 194)
+        Me.Panel1.Location = New System.Drawing.Point(950, 194)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(195, 37)
+        Me.Panel1.Size = New System.Drawing.Size(319, 37)
         Me.Panel1.TabIndex = 86
         '
         'RbtnUP
@@ -798,7 +804,6 @@ Partial Class Quote
         Me.RbtnUP.Name = "RbtnUP"
         Me.RbtnUP.Size = New System.Drawing.Size(89, 19)
         Me.RbtnUP.TabIndex = 17
-        Me.RbtnUP.TabStop = True
         Me.RbtnUP.Text = "単価入力"
         Me.RbtnUP.UseVisualStyleBackColor = True
         '
@@ -810,7 +815,6 @@ Partial Class Quote
         Me.RbtnGP.Name = "RbtnGP"
         Me.RbtnGP.Size = New System.Drawing.Size(89, 19)
         Me.RbtnGP.TabIndex = 18
-        Me.RbtnGP.TabStop = True
         Me.RbtnGP.Text = "粗利入力"
         Me.RbtnGP.UseVisualStyleBackColor = True
         '
@@ -823,6 +827,17 @@ Partial Class Quote
         Me.BtnCodeSearch.TabIndex = 4
         Me.BtnCodeSearch.Text = "検索"
         Me.BtnCodeSearch.UseVisualStyleBackColor = True
+        '
+        'RbtnQuote
+        '
+        Me.RbtnQuote.AutoSize = True
+        Me.RbtnQuote.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.RbtnQuote.Location = New System.Drawing.Point(196, 8)
+        Me.RbtnQuote.Name = "RbtnQuote"
+        Me.RbtnQuote.Size = New System.Drawing.Size(121, 19)
+        Me.RbtnQuote.TabIndex = 19
+        Me.RbtnQuote.Text = "見積単価入力"
+        Me.RbtnQuote.UseVisualStyleBackColor = True
         '
         'No
         '
@@ -973,30 +988,36 @@ Partial Class Quote
         '
         '見積単価
         '
+        DataGridViewCellStyle15.BackColor = System.Drawing.Color.Gray
+        Me.見積単価.DefaultCellStyle = DataGridViewCellStyle15
         Me.見積単価.HeaderText = "見積単価"
         Me.見積単価.Name = "見積単価"
+        Me.見積単価.ReadOnly = True
         '
         '見積金額
         '
+        DataGridViewCellStyle16.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.見積金額.DefaultCellStyle = DataGridViewCellStyle16
         Me.見積金額.HeaderText = "見積金額"
         Me.見積金額.Name = "見積金額"
+        Me.見積金額.ReadOnly = True
         '
         '粗利額
         '
-        DataGridViewCellStyle15.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle15.Format = "N0"
-        DataGridViewCellStyle15.NullValue = Nothing
-        Me.粗利額.DefaultCellStyle = DataGridViewCellStyle15
+        DataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle17.Format = "N0"
+        DataGridViewCellStyle17.NullValue = Nothing
+        Me.粗利額.DefaultCellStyle = DataGridViewCellStyle17
         Me.粗利額.HeaderText = "粗利額"
         Me.粗利額.Name = "粗利額"
         Me.粗利額.ReadOnly = True
         '
         '粗利率
         '
-        DataGridViewCellStyle16.BackColor = System.Drawing.Color.Gray
-        DataGridViewCellStyle16.Format = "N1"
-        DataGridViewCellStyle16.NullValue = Nothing
-        Me.粗利率.DefaultCellStyle = DataGridViewCellStyle16
+        DataGridViewCellStyle18.BackColor = System.Drawing.Color.Gray
+        DataGridViewCellStyle18.Format = "N1"
+        DataGridViewCellStyle18.NullValue = Nothing
+        Me.粗利率.DefaultCellStyle = DataGridViewCellStyle18
         Me.粗利率.HeaderText = "粗利率(%)"
         Me.粗利率.Name = "粗利率"
         Me.粗利率.ReadOnly = True
@@ -1020,8 +1041,8 @@ Partial Class Quote
         '
         '間接費無仕入金額
         '
-        DataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.間接費無仕入金額.DefaultCellStyle = DataGridViewCellStyle17
+        DataGridViewCellStyle19.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.間接費無仕入金額.DefaultCellStyle = DataGridViewCellStyle19
         Me.間接費無仕入金額.HeaderText = "仕入原価"
         Me.間接費無仕入金額.Name = "間接費無仕入金額"
         Me.間接費無仕入金額.ReadOnly = True
@@ -1037,17 +1058,45 @@ Partial Class Quote
         '
         '間接費
         '
-        DataGridViewCellStyle18.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.間接費.DefaultCellStyle = DataGridViewCellStyle18
+        DataGridViewCellStyle20.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.間接費.DefaultCellStyle = DataGridViewCellStyle20
         Me.間接費.HeaderText = "間接費"
         Me.間接費.Name = "間接費"
         Me.間接費.ReadOnly = True
         Me.間接費.Visible = False
         '
+        'TxtQuoteTotal
+        '
+        Me.TxtQuoteTotal.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TxtQuoteTotal.Enabled = False
+        Me.TxtQuoteTotal.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtQuoteTotal.Location = New System.Drawing.Point(1110, 480)
+        Me.TxtQuoteTotal.MaxLength = 10
+        Me.TxtQuoteTotal.Name = "TxtQuoteTotal"
+        Me.TxtQuoteTotal.ReadOnly = True
+        Me.TxtQuoteTotal.Size = New System.Drawing.Size(231, 23)
+        Me.TxtQuoteTotal.TabIndex = 201
+        Me.TxtQuoteTotal.TabStop = False
+        Me.TxtQuoteTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label3
+        '
+        Me.Label3.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.Label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label3.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Label3.Location = New System.Drawing.Point(1004, 480)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(100, 23)
+        Me.Label3.TabIndex = 202
+        Me.Label3.Text = "見積金額"
+        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'Quote
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.TxtQuoteTotal)
+        Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.BtnCodeSearch)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.BtnProof)
@@ -1178,6 +1227,7 @@ Partial Class Quote
     Friend WithEvents RbtnUP As RadioButton
     Friend WithEvents RbtnGP As RadioButton
     Friend WithEvents BtnCodeSearch As Button
+    Friend WithEvents RbtnQuote As RadioButton
     Friend WithEvents No As DataGridViewTextBoxColumn
     Friend WithEvents メーカー As DataGridViewTextBoxColumn
     Friend WithEvents 品名 As DataGridViewTextBoxColumn
@@ -1207,4 +1257,6 @@ Partial Class Quote
     Friend WithEvents 間接費無仕入金額 As DataGridViewTextBoxColumn
     Friend WithEvents 間接費率 As DataGridViewTextBoxColumn
     Friend WithEvents 間接費 As DataGridViewTextBoxColumn
+    Friend WithEvents TxtQuoteTotal As TextBox
+    Friend WithEvents Label3 As Label
 End Class
