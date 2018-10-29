@@ -306,7 +306,7 @@ Partial Class MstCompany
         Me.Controls.Add(Me.Dgv_Company)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "MstCompany"
-        Me.Text = "MstHanyou"
+        Me.Text = "MstCompany"
         CType(Me.Dgv_Company, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()

@@ -172,7 +172,7 @@ Public Class Quote
         column2.HeaderText = "リードタイム単位"
         column2.Name = "リードタイム単位"
 
-        DgvItemList.Columns.Insert(22, column2)
+        DgvItemList.Columns.Insert(23, column2)
 
         If EditNo IsNot Nothing Then    '見積編集時
             '見積基本情報
@@ -352,8 +352,12 @@ Public Class Quote
                 DgvItemList.Rows(index).Cells("粗利額").Value = ds3.Tables(RS).Rows(index)("粗利額")
                 DgvItemList.Rows(index).Cells("粗利率").Value = ds3.Tables(RS).Rows(index)("粗利率")
                 DgvItemList.Rows(index).Cells("リードタイム").Value = ds3.Tables(RS).Rows(index)("リードタイム")
-                Dim tmp2 As Integer = ds3.Tables(RS).Rows(index)("リードタイム単位")
-                DgvItemList("リードタイム単位", index).Value = tmp2
+                If ds3.Tables(RS).Rows(index)("リードタイム単位") Is DBNull.Value Then
+                Else
+                    Dim tmp2 As Integer = ds3.Tables(RS).Rows(index)("リードタイム単位")
+                    DgvItemList("リードタイム単位", index).Value = tmp2
+                End If
+
                 DgvItemList.Rows(index).Cells("備考").Value = ds3.Tables(RS).Rows(index)("備考")
                 DgvItemList.Rows(index).Cells("ステータス").Value = "EDIT"
             Next
@@ -556,26 +560,44 @@ Public Class Quote
             Dim GrossProfit As Decimal = 0
             Dim tmpPurchase As Integer = 0
             Dim tmp As Decimal = 0
+            Dim tmp1 As Decimal = 0
             Dim tmp2 As Decimal = 0
             Dim tmp3 As Decimal = 0
+            Dim tmp4 As Decimal = 0
+            Dim Sql As String = ""
 
             If e.RowIndex > -1 Then
                 If DgvItemList.Rows(e.RowIndex).Cells("数量").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("仕入単価").Value IsNot Nothing Then
                     DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value = DgvItemList.Rows(e.RowIndex).Cells("仕入単価").Value * DgvItemList.Rows(e.RowIndex).Cells("数量").Value
                 End If
-                If DgvItemList.Rows(e.RowIndex).Cells("関税率").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value IsNot Nothing Then
-                    DgvItemList.Rows(e.RowIndex).Cells("関税額").Value = DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value * DgvItemList.Rows(e.RowIndex).Cells("関税率").Value
+                If DgvItemList.Rows(e.RowIndex).Cells("関税率").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("仕入単価").Value IsNot Nothing Then
+                    DgvItemList.Rows(e.RowIndex).Cells("関税額").Value = DgvItemList.Rows(e.RowIndex).Cells("仕入単価").Value * DgvItemList.Rows(e.RowIndex).Cells("関税率").Value
                 End If
-                If DgvItemList.Rows(e.RowIndex).Cells("前払法人税率").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("関税額").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value IsNot Nothing Then
-                    tmp = DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value + DgvItemList.Rows(e.RowIndex).Cells("関税額").Value
-                    DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value = tmp * DgvItemList.Rows(e.RowIndex).Cells("前払法人税率").Value
+                If DgvItemList.Rows(e.RowIndex).Cells("前払法人税率").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("関税額").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("仕入単価").Value IsNot Nothing Then
+                    tmp = DgvItemList.Rows(e.RowIndex).Cells("仕入単価").Value + DgvItemList.Rows(e.RowIndex).Cells("関税額").Value
+                    tmp1 = tmp * DgvItemList.Rows(e.RowIndex).Cells("前払法人税率").Value
+                    tmp1 = Math.Ceiling(tmp1)
+                    DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value = tmp1
                 End If
-                If DgvItemList.Rows(e.RowIndex).Cells("輸送費率").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value IsNot Nothing Then
-                    DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value = DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value * DgvItemList.Rows(e.RowIndex).Cells("輸送費率").Value
+                If DgvItemList.Rows(e.RowIndex).Cells("輸送費率").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("仕入単価").Value IsNot Nothing Then
+                    DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value = DgvItemList.Rows(e.RowIndex).Cells("仕入単価").Value * DgvItemList.Rows(e.RowIndex).Cells("輸送費率").Value
                 End If
                 If DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("関税額").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value IsNot Nothing Then
                     DgvItemList.Rows(e.RowIndex).Cells("仕入金額").Value = DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value + DgvItemList.Rows(e.RowIndex).Cells("関税額").Value + DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value + DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value
                 End If
+
+                If DgvItemList.Rows(e.RowIndex).Cells("売単価").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("関税額").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value IsNot Nothing Then
+                    DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value = DgvItemList.Rows(e.RowIndex).Cells("売単価").Value + DgvItemList.Rows(e.RowIndex).Cells("関税額").Value + DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value + DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value
+                End If
+
+                If DgvItemList.Rows(e.RowIndex).Cells("数量").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value IsNot Nothing Then
+                    DgvItemList.Rows(e.RowIndex).Cells("見積金額").Value = DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value * DgvItemList.Rows(e.RowIndex).Cells("数量").Value
+                End If
+
+                'If DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value IsNot Nothing Then
+                '    tmp4 = DgvItemList.Rows(e.RowIndex).Cells("関税額").Value + DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value + DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value
+                '    DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value = DgvItemList.Rows(e.RowIndex).Cells("売単価").Value - tmp4
+                'End If
 
                 If RbtnUP.Checked Then
                     If DgvItemList.Rows(e.RowIndex).Cells("数量").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("売単価").Value IsNot Nothing Then
@@ -597,9 +619,34 @@ Public Class Quote
                     End If
                 End If
 
+                If DgvItemList.Rows(e.RowIndex).Cells("仕入先コード").Value IsNot Nothing Then
+                    Sql = ""
+                    Sql += "SELECT "
+                    Sql += "* "
+                    Sql += "FROM "
+                    Sql += "public"
+                    Sql += "."
+                    Sql += "m11_supplier"
+                    Sql += " WHERE "
+                    Sql += "仕入先コード"
+                    Sql += " ILIKE "
+                    Sql += "'"
+                    Sql += DgvItemList.Rows(e.RowIndex).Cells("仕入先コード").Value.ToString
+                    Sql += "'"
+
+                    Dim reccnt As Integer = 0
+                    Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+                    DgvItemList.Rows(e.RowIndex).Cells("仕入先").Value = ds.Tables(RS).Rows(0)("仕入先名").ToString
+                    DgvItemList.Rows(e.RowIndex).Cells("間接費率").Value = ds.Tables(RS).Rows(0)("既定間接費率").ToString
+                    DgvItemList.Rows(e.RowIndex).Cells("関税率").Value = ds.Tables(RS).Rows(0)("関税率").ToString
+                    DgvItemList.Rows(e.RowIndex).Cells("前払法人税率").Value = ds.Tables(RS).Rows(0)("前払法人税率").ToString
+                    DgvItemList.Rows(e.RowIndex).Cells("輸送費率").Value = ds.Tables(RS).Rows(0)("輸送費率").ToString
+                End If
+
             End If
 
-            For index As Integer = 0 To DgvItemList.Rows.Count - 1
+                For index As Integer = 0 To DgvItemList.Rows.Count - 1
                 PurchaseTotal += DgvItemList.Rows(index).Cells("仕入金額").Value
                 Total += DgvItemList.Rows(index).Cells("売上金額").Value
             Next
@@ -738,10 +785,10 @@ Public Class Quote
                         Dim tmp As Integer = Item(c)
                         DgvItemList(1, RowIdx + 1).Value = tmp
                     End If
-                ElseIf c = 22 Then
+                ElseIf c = 23 Then
                     If Item(c) IsNot Nothing Then
                         Dim tmp As Integer = Item(c)
-                        DgvItemList(22, RowIdx + 1).Value = tmp
+                        DgvItemList(23, RowIdx + 1).Value = tmp
                     End If
                 Else
                     DgvItemList.Rows(RowIdx + 1).Cells(c).Value = Item(c)
@@ -829,14 +876,14 @@ Public Class Quote
             End If
         End If
 
-        If ColIdx = 7 Then
+        If ColIdx = 8 Then
             Dim openForm As Form = Nothing
             openForm = New SupplierSearch(_msgHd, _db, _langHd, RowIdx, Me)
             openForm.Show(Me)
             Me.Enabled = False
         End If
 
-        If ColIdx = 23 Then
+        If ColIdx = 24 Then
             Dim openForm As Form = Nothing
             openForm = New RemarksInput(_msgHd, _db, _langHd, RowIdx, Me)
             openForm.Show(Me)

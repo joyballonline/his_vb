@@ -344,8 +344,11 @@ Public Class Order
                 DgvItemList.Rows(index).Cells("粗利額").Value = ds3.Tables(RS).Rows(index)("粗利額")
                 DgvItemList.Rows(index).Cells("粗利率").Value = ds3.Tables(RS).Rows(index)("粗利率")
                 DgvItemList.Rows(index).Cells("リードタイム").Value = ds3.Tables(RS).Rows(index)("リードタイム")
-                tmp1 = ds3.Tables(RS).Rows(index)("リードタイム単位")
-                DgvItemList.Rows(index).Cells("リードタイム単位").Value = tmp1
+                If ds3.Tables(RS).Rows(index)("リードタイム単位") Is DBNull.Value Then
+                Else
+                    Dim tmp2 As Integer = ds3.Tables(RS).Rows(index)("リードタイム単位")
+                    DgvItemList("リードタイム単位", index).Value = tmp2
+                End If
                 DgvItemList.Rows(index).Cells("備考").Value = ds3.Tables(RS).Rows(index)("備考")
 
             Next
@@ -592,18 +595,21 @@ Public Class Order
                 DgvItemList.Rows(index).Cells("メーカー").Value = ds3.Tables(RS).Rows(index)("メーカー")
                 DgvItemList.Rows(index).Cells("品名").Value = ds3.Tables(RS).Rows(index)("品名")
                 DgvItemList.Rows(index).Cells("型式").Value = ds3.Tables(RS).Rows(index)("型式")
-                DgvItemList.Rows(index).Cells("数量").Value = ds3.Tables(RS).Rows(index)("数量")
+                DgvItemList.Rows(index).Cells("数量").Value = ds3.Tables(RS).Rows(index)("受注数量")
                 DgvItemList.Rows(index).Cells("単位").Value = ds3.Tables(RS).Rows(index)("単位")
-                DgvItemList.Rows(index).Cells("仕入先").Value = ds3.Tables(RS).Rows(index)("仕入先名称")
-                DgvItemList.Rows(index).Cells("仕入値").Value = ds3.Tables(RS).Rows(index)("仕入単価")
+                DgvItemList.Rows(index).Cells("仕入先").Value = ds3.Tables(RS).Rows(index)("仕入先名")
+                DgvItemList.Rows(index).Cells("仕入値").Value = ds3.Tables(RS).Rows(index)("仕入値")
                 DgvItemList.Rows(index).Cells("間接費").Value = ds3.Tables(RS).Rows(index)("間接費")
                 DgvItemList.Rows(index).Cells("売単価").Value = ds3.Tables(RS).Rows(index)("売単価")
                 DgvItemList.Rows(index).Cells("売上金額").Value = ds3.Tables(RS).Rows(index)("売上金額")
                 DgvItemList.Rows(index).Cells("粗利額").Value = ds3.Tables(RS).Rows(index)("粗利額")
                 DgvItemList.Rows(index).Cells("粗利率").Value = ds3.Tables(RS).Rows(index)("粗利率")
                 DgvItemList.Rows(index).Cells("リードタイム").Value = ds3.Tables(RS).Rows(index)("リードタイム")
-                tmp1 = ds3.Tables(RS).Rows(index)("リードタイム単位")
-                DgvItemList.Rows(index).Cells("リードタイム単位").Value = tmp1
+                If ds3.Tables(RS).Rows(index)("リードタイム単位") Is DBNull.Value Then
+                Else
+                    Dim tmp2 As Integer = ds3.Tables(RS).Rows(index)("リードタイム単位")
+                    DgvItemList("リードタイム単位", index).Value = tmp2
+                End If
                 DgvItemList.Rows(index).Cells("備考").Value = ds3.Tables(RS).Rows(index)("備考")
             Next
 
@@ -828,7 +834,7 @@ Public Class Order
                 Sql2 += "INSERT INTO "
                 Sql2 += "Public."
                 Sql2 += "t11_cymndt("
-                Sql2 += "会社コード, 受注番号, 受注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 単位, 仕入先名, 仕入値, 受注数量, 売上数量, 受注残数, 間接費, 売単価, 売上金額, 粗利額, 粗利率, リードタイム, 出庫数, 未出庫数, 備考, 更新者, 登録日)"
+                Sql2 += "会社コード, 受注番号, 受注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 単位, 仕入先名, 仕入値, 受注数量, 売上数量, 受注残数, 間接費, 売単価, 売上金額, 粗利額, 粗利率, リードタイム, リードタイム単位, 出庫数, 未出庫数, 備考, 更新者, 登録日)"
                 Sql2 += " VALUES('"
                 Sql2 += CompanyCode
                 Sql2 += "', '"
@@ -874,7 +880,8 @@ Public Class Order
                 Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("粗利率").Value.ToString
                 Sql2 += "', '"
                 Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("リードタイム").Value.ToString
-                Sql2 += DgvItemList.Item("リードタイム単位", cymnhdIdx).FormattedValue.ToString
+                Sql2 += "', '"
+                Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("リードタイム単位").Value.ToString
                 Sql2 += "', '"
                 Sql2 += "0"
                 Sql2 += "', '"

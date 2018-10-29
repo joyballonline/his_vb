@@ -22,6 +22,8 @@ Partial Class DepositList
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.DgvCustomer = New System.Windows.Forms.DataGridView()
         Me.得意先名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.得意先コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -54,6 +56,7 @@ Partial Class DepositList
         Me.DgvCustomer.AllowUserToDeleteRows = False
         Me.DgvCustomer.AllowUserToResizeColumns = False
         Me.DgvCustomer.AllowUserToResizeRows = False
+        Me.DgvCustomer.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader
         Me.DgvCustomer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvCustomer.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.得意先名, Me.得意先コード, Me.受注金額計, Me.請求金額計, Me.請求金額残, Me.売掛残高, Me.受注件数, Me.請求件数, Me.会社コード})
         Me.DgvCustomer.Location = New System.Drawing.Point(12, 162)
@@ -71,7 +74,7 @@ Partial Class DepositList
         Me.得意先名.HeaderText = "得意先名"
         Me.得意先名.Name = "得意先名"
         Me.得意先名.ReadOnly = True
-        Me.得意先名.Width = 200
+        Me.得意先名.Width = 78
         '
         '得意先コード
         '
@@ -98,17 +101,21 @@ Partial Class DepositList
         '
         '請求金額残
         '
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.請求金額残.DefaultCellStyle = DataGridViewCellStyle1
         Me.請求金額残.HeaderText = "請求金額残"
         Me.請求金額残.Name = "請求金額残"
         Me.請求金額残.ReadOnly = True
-        Me.請求金額残.Width = 200
+        Me.請求金額残.Width = 90
         '
         '売掛残高
         '
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.売掛残高.DefaultCellStyle = DataGridViewCellStyle2
         Me.売掛残高.HeaderText = "売掛残高"
         Me.売掛残高.Name = "売掛残高"
         Me.売掛残高.ReadOnly = True
-        Me.売掛残高.Width = 200
+        Me.売掛残高.Width = 78
         '
         '受注件数
         '
@@ -283,6 +290,7 @@ Partial Class DepositList
         Me.Controls.Add(Me.DgvCustomer)
         Me.Controls.Add(Me.btnBack)
         Me.Controls.Add(Me.BtnDeposit)
+        Me.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "DepositList"
         Me.Text = "DepositList"
@@ -305,6 +313,7 @@ Partial Class DepositList
     Friend WithEvents LblConditions As Label
     Friend WithEvents TxtCustomerName As TextBox
     Friend WithEvents BtnSerach As Button
+    Friend WithEvents LblMode As Label
     Friend WithEvents 得意先名 As DataGridViewTextBoxColumn
     Friend WithEvents 得意先コード As DataGridViewTextBoxColumn
     Friend WithEvents 受注金額計 As DataGridViewTextBoxColumn
@@ -314,5 +323,4 @@ Partial Class DepositList
     Friend WithEvents 受注件数 As DataGridViewTextBoxColumn
     Friend WithEvents 請求件数 As DataGridViewTextBoxColumn
     Friend WithEvents 会社コード As DataGridViewTextBoxColumn
-    Friend WithEvents LblMode As Label
 End Class

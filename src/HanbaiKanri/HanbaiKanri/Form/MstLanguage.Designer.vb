@@ -110,6 +110,7 @@ Partial Class MstLanguage
         Me.BtnAdd.TabIndex = 4
         Me.BtnAdd.Text = "言語追加"
         Me.BtnAdd.UseVisualStyleBackColor = True
+        Me.BtnAdd.Visible = False
         '
         'BtnEdit
         '
@@ -119,6 +120,7 @@ Partial Class MstLanguage
         Me.BtnEdit.TabIndex = 5
         Me.BtnEdit.Text = "言語編集"
         Me.BtnEdit.UseVisualStyleBackColor = True
+        Me.BtnEdit.Visible = False
         '
         'BtnSearch
         '

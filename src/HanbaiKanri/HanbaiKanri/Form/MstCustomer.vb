@@ -88,6 +88,12 @@ Public Class MstCustomer
             Sql += "public"
             Sql += "."
             Sql += "m10_customer"
+            Sql += " WHERE "
+            Sql += "会社コード"
+            Sql += " ILIKE "
+            Sql += "'"
+            Sql += frmC01F10_Login.loginValue.BumonNM
+            Sql += "'"
 
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
@@ -159,6 +165,12 @@ Public Class MstCustomer
             Sql += "."
             Sql += "m10_customer"
             Sql += " WHERE "
+            Sql += "会社コード"
+            Sql += " ILIKE "
+            Sql += "'"
+            Sql += frmC01F10_Login.loginValue.BumonNM
+            Sql += "'"
+            Sql += " AND "
             Sql += "得意先名"
             Sql += " ILIKE "
             Sql += "'%"

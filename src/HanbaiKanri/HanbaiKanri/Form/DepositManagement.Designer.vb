@@ -22,6 +22,13 @@ Partial Class DepositManagement
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.BtnRegist = New System.Windows.Forms.Button()
         Me.BtnBack = New System.Windows.Forms.Button()
         Me.LblNo1 = New System.Windows.Forms.Label()
@@ -76,7 +83,7 @@ Partial Class DepositManagement
         Me.BtnRegist.Location = New System.Drawing.Point(1003, 509)
         Me.BtnRegist.Name = "BtnRegist"
         Me.BtnRegist.Size = New System.Drawing.Size(165, 40)
-        Me.BtnRegist.TabIndex = 9
+        Me.BtnRegist.TabIndex = 10
         Me.BtnRegist.Text = "登録"
         Me.BtnRegist.UseVisualStyleBackColor = True
         '
@@ -86,7 +93,7 @@ Partial Class DepositManagement
         Me.BtnBack.Location = New System.Drawing.Point(1174, 509)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(165, 40)
-        Me.BtnBack.TabIndex = 10
+        Me.BtnBack.TabIndex = 11
         Me.BtnBack.Text = "戻る"
         Me.BtnBack.UseVisualStyleBackColor = True
         '
@@ -121,7 +128,7 @@ Partial Class DepositManagement
         Me.DtpDepositDate.Location = New System.Drawing.Point(291, 335)
         Me.DtpDepositDate.Name = "DtpDepositDate"
         Me.DtpDepositDate.Size = New System.Drawing.Size(148, 22)
-        Me.DtpDepositDate.TabIndex = 6
+        Me.DtpDepositDate.TabIndex = 7
         Me.DtpDepositDate.TabStop = False
         Me.DtpDepositDate.Value = New Date(2018, 7, 25, 13, 29, 25, 0)
         '
@@ -143,7 +150,7 @@ Partial Class DepositManagement
         Me.TxtRemarks.Location = New System.Drawing.Point(621, 335)
         Me.TxtRemarks.Name = "TxtRemarks"
         Me.TxtRemarks.Size = New System.Drawing.Size(644, 22)
-        Me.TxtRemarks.TabIndex = 7
+        Me.TxtRemarks.TabIndex = 8
         '
         'LblDepositDate
         '
@@ -200,6 +207,8 @@ Partial Class DepositManagement
         '
         '請求残高
         '
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.請求残高.DefaultCellStyle = DataGridViewCellStyle1
         Me.請求残高.HeaderText = "請求残高"
         Me.請求残高.Name = "請求残高"
         Me.請求残高.Width = 200
@@ -244,7 +253,7 @@ Partial Class DepositManagement
         Me.DgvBillingInfo.RowHeadersVisible = False
         Me.DgvBillingInfo.RowTemplate.Height = 21
         Me.DgvBillingInfo.Size = New System.Drawing.Size(1327, 100)
-        Me.DgvBillingInfo.TabIndex = 8
+        Me.DgvBillingInfo.TabIndex = 9
         '
         'InfoNo
         '
@@ -266,24 +275,32 @@ Partial Class DepositManagement
         '
         '請求金額
         '
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.請求金額.DefaultCellStyle = DataGridViewCellStyle2
         Me.請求金額.HeaderText = "請求金額"
         Me.請求金額.Name = "請求金額"
         Me.請求金額.Width = 150
         '
         '請求情報入金額計
         '
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.請求情報入金額計.DefaultCellStyle = DataGridViewCellStyle3
         Me.請求情報入金額計.HeaderText = "入金額計"
         Me.請求情報入金額計.Name = "請求情報入金額計"
         Me.請求情報入金額計.Width = 150
         '
         '請求情報請求残高
         '
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.請求情報請求残高.DefaultCellStyle = DataGridViewCellStyle4
         Me.請求情報請求残高.HeaderText = "請求残高"
         Me.請求情報請求残高.Name = "請求情報請求残高"
         Me.請求情報請求残高.Width = 150
         '
         '入金額
         '
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.入金額.DefaultCellStyle = DataGridViewCellStyle5
         Me.入金額.HeaderText = "入金額"
         Me.入金額.Name = "入金額"
         Me.入金額.Width = 150
@@ -340,6 +357,8 @@ Partial Class DepositManagement
         '
         '入金済入金額計
         '
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.入金済入金額計.DefaultCellStyle = DataGridViewCellStyle6
         Me.入金済入金額計.HeaderText = "入金額計"
         Me.入金済入金額計.Name = "入金済入金額計"
         Me.入金済入金額計.Width = 200
@@ -361,7 +380,7 @@ Partial Class DepositManagement
         Me.DgvDeposit.RowTemplate.Height = 21
         Me.DgvDeposit.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
         Me.DgvDeposit.Size = New System.Drawing.Size(1327, 100)
-        Me.DgvDeposit.TabIndex = 5
+        Me.DgvDeposit.TabIndex = 6
         '
         '行番号
         '
@@ -371,6 +390,8 @@ Partial Class DepositManagement
         '
         '入力入金額
         '
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.入力入金額.DefaultCellStyle = DataGridViewCellStyle7
         Me.入力入金額.HeaderText = "入金額"
         Me.入力入金額.Name = "入力入金額"
         '
@@ -407,20 +428,19 @@ Partial Class DepositManagement
         '
         'BtnDelete
         '
-        Me.BtnDelete.Location = New System.Drawing.Point(301, 203)
+        Me.BtnDelete.Location = New System.Drawing.Point(201, 203)
         Me.BtnDelete.Name = "BtnDelete"
         Me.BtnDelete.Size = New System.Drawing.Size(94, 20)
-        Me.BtnDelete.TabIndex = 297
+        Me.BtnDelete.TabIndex = 4
         Me.BtnDelete.Text = "行削除"
         Me.BtnDelete.UseVisualStyleBackColor = True
-        Me.BtnDelete.Visible = False
         '
         'BtnCal
         '
-        Me.BtnCal.Location = New System.Drawing.Point(201, 203)
+        Me.BtnCal.Location = New System.Drawing.Point(301, 203)
         Me.BtnCal.Name = "BtnCal"
         Me.BtnCal.Size = New System.Drawing.Size(94, 20)
-        Me.BtnCal.TabIndex = 4
+        Me.BtnCal.TabIndex = 5
         Me.BtnCal.Text = "自動振分"
         Me.BtnCal.UseVisualStyleBackColor = True
         '
@@ -492,8 +512,21 @@ Partial Class DepositManagement
     Friend WithEvents DgvBillingInfo As DataGridView
     Friend WithEvents DgvHistory As DataGridView
     Friend WithEvents DgvDeposit As DataGridView
+    Friend WithEvents BtnAdd As Button
+    Friend WithEvents LblNo3 As Label
+    Friend WithEvents TxtCount3 As TextBox
+    Friend WithEvents BtnDelete As Button
+    Friend WithEvents BtnCal As Button
+    Friend WithEvents LblMode As Label
     Friend WithEvents 請求先 As DataGridViewTextBoxColumn
     Friend WithEvents 請求残高 As DataGridViewTextBoxColumn
+    Friend WithEvents InfoNo As DataGridViewTextBoxColumn
+    Friend WithEvents 請求情報請求番号 As DataGridViewTextBoxColumn
+    Friend WithEvents 請求日 As DataGridViewTextBoxColumn
+    Friend WithEvents 請求金額 As DataGridViewTextBoxColumn
+    Friend WithEvents 請求情報入金額計 As DataGridViewTextBoxColumn
+    Friend WithEvents 請求情報請求残高 As DataGridViewTextBoxColumn
+    Friend WithEvents 入金額 As DataGridViewTextBoxColumn
     Friend WithEvents No As DataGridViewTextBoxColumn
     Friend WithEvents 請求番号 As DataGridViewTextBoxColumn
     Friend WithEvents 入金済請求先 As DataGridViewTextBoxColumn
@@ -504,17 +537,4 @@ Partial Class DepositManagement
     Friend WithEvents 備考 As DataGridViewTextBoxColumn
     Friend WithEvents 行番号 As DataGridViewTextBoxColumn
     Friend WithEvents 入力入金額 As DataGridViewTextBoxColumn
-    Friend WithEvents BtnAdd As Button
-    Friend WithEvents LblNo3 As Label
-    Friend WithEvents TxtCount3 As TextBox
-    Friend WithEvents BtnDelete As Button
-    Friend WithEvents InfoNo As DataGridViewTextBoxColumn
-    Friend WithEvents 請求情報請求番号 As DataGridViewTextBoxColumn
-    Friend WithEvents 請求日 As DataGridViewTextBoxColumn
-    Friend WithEvents 請求金額 As DataGridViewTextBoxColumn
-    Friend WithEvents 請求情報入金額計 As DataGridViewTextBoxColumn
-    Friend WithEvents 請求情報請求残高 As DataGridViewTextBoxColumn
-    Friend WithEvents 入金額 As DataGridViewTextBoxColumn
-    Friend WithEvents BtnCal As Button
-    Friend WithEvents LblMode As Label
 End Class

@@ -287,6 +287,7 @@ Partial Class DepositDetailList
         'DgvBilling
         '
         Me.DgvBilling.AllowUserToAddRows = False
+        Me.DgvBilling.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader
         Me.DgvBilling.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvBilling.Location = New System.Drawing.Point(13, 238)
         Me.DgvBilling.Name = "DgvBilling"
@@ -323,6 +324,7 @@ Partial Class DepositDetailList
         Me.Controls.Add(Me.BtnPurchaseSearch)
         Me.Controls.Add(Me.BtnBack)
         Me.Controls.Add(Me.DgvBilling)
+        Me.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "DepositDetailList"
         Me.Text = "DepositDetailList"

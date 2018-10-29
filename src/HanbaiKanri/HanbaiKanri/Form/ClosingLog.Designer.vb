@@ -22,6 +22,7 @@ Partial Class ClosingLog
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LblMode = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.TxtPerson = New System.Windows.Forms.TextBox()
@@ -115,6 +116,9 @@ Partial Class ClosingLog
         'DgvClosingLog
         '
         Me.DgvClosingLog.AllowUserToAddRows = False
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.DgvClosingLog.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        Me.DgvClosingLog.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader
         Me.DgvClosingLog.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvClosingLog.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.締処理日時, Me.前回締日, Me.今回締日, Me.次回締日, Me.担当者})
         Me.DgvClosingLog.Location = New System.Drawing.Point(15, 169)
@@ -129,26 +133,31 @@ Partial Class ClosingLog
         '
         Me.締処理日時.HeaderText = "締処理日時"
         Me.締処理日時.Name = "締処理日時"
+        Me.締処理日時.Width = 90
         '
         '前回締日
         '
         Me.前回締日.HeaderText = "前回締日"
         Me.前回締日.Name = "前回締日"
+        Me.前回締日.Width = 78
         '
         '今回締日
         '
         Me.今回締日.HeaderText = "今回締日"
         Me.今回締日.Name = "今回締日"
+        Me.今回締日.Width = 78
         '
         '次回締日
         '
         Me.次回締日.HeaderText = "次回締日"
         Me.次回締日.Name = "次回締日"
+        Me.次回締日.Width = 78
         '
         '担当者
         '
         Me.担当者.HeaderText = "担当者"
         Me.担当者.Name = "担当者"
+        Me.担当者.Width = 66
         '
         'BtnClosing
         '

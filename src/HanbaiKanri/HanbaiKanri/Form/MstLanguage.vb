@@ -79,6 +79,12 @@ Public Class MstLanguage
             Sql += "public"
             Sql += "."
             Sql += "m05_language"
+            Sql += " WHERE "
+            Sql += "会社コード"
+            Sql += " ILIKE "
+            Sql += "'"
+            Sql += frmC01F10_Login.loginValue.BumonNM
+            Sql += "'"
 
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
@@ -141,6 +147,12 @@ Public Class MstLanguage
             Sql += "."
             Sql += "m05_language"
             Sql += " WHERE "
+            Sql += "会社コード"
+            Sql += " ILIKE "
+            Sql += "'"
+            Sql += frmC01F10_Login.loginValue.BumonNM
+            Sql += "'"
+            Sql += " AND "
             Sql += "言語名称"
             Sql += " ILIKE "
             Sql += "'%"

@@ -111,7 +111,6 @@ Public Class OrderingList
 
     Private Sub PurchaseListLoad(Optional ByRef Status As String = "")
         If Status = "EXCLUSION" Then
-
             Dim Sql As String = ""
             Try
                 Sql += "SELECT "
@@ -170,10 +169,7 @@ Public Class OrderingList
                 DgvHtyhd.Columns.Add("備考", "備考")
                 DgvHtyhd.Columns.Add("登録日", "登録日")
 
-                DgvHtyhd.Columns(12).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                DgvHtyhd.Columns(13).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                DgvHtyhd.Columns(14).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                DgvHtyhd.Columns(15).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                DgvHtyhd.Columns("仕入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
                 For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
                     DgvHtyhd.Rows.Add()
@@ -235,10 +231,7 @@ Public Class OrderingList
                 DgvHtyhd.Columns.Add("備考", "備考")
                 DgvHtyhd.Columns.Add("登録日", "登録日")
 
-                DgvHtyhd.Columns(12).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                DgvHtyhd.Columns(13).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                DgvHtyhd.Columns(14).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                DgvHtyhd.Columns(15).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                DgvHtyhd.Columns("仕入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
                 For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
                     DgvHtyhd.Rows.Add()
@@ -369,10 +362,7 @@ Public Class OrderingList
             DgvHtyhd.Columns.Add("備考", "備考")
             DgvHtyhd.Columns.Add("登録日", "登録日")
 
-            DgvHtyhd.Columns(12).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvHtyhd.Columns(13).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvHtyhd.Columns(14).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvHtyhd.Columns(15).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            DgvHtyhd.Columns("仕入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
             For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
                 DgvHtyhd.Rows.Add()
@@ -444,32 +434,39 @@ Public Class OrderingList
             DgvHtyhd.Columns.Add("間接費", "間接費")
             DgvHtyhd.Columns.Add("仕入金額", "仕入金額")
             DgvHtyhd.Columns.Add("リードタイム", "リードタイム")
+            DgvHtyhd.Columns.Add("貿易条件", "貿易条件")
             DgvHtyhd.Columns.Add("入庫数", "入庫数")
             DgvHtyhd.Columns.Add("未入庫数", "未入庫数")
             DgvHtyhd.Columns.Add("備考", "備考")
             DgvHtyhd.Columns.Add("更新者", "更新者")
             DgvHtyhd.Columns.Add("登録日", "登録日")
 
-            DgvHtyhd.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvHtyhd.Columns(8).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvHtyhd.Columns(9).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvHtyhd.Columns(10).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvHtyhd.Columns(11).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvHtyhd.Columns(12).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvHtyhd.Columns(14).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvHtyhd.Columns(15).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvHtyhd.Columns(16).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvHtyhd.Columns(17).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvHtyhd.Columns(18).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvHtyhd.Columns(19).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvHtyhd.Columns(20).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            DgvHtyhd.Columns("仕入値").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            DgvHtyhd.Columns("発注数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            DgvHtyhd.Columns("仕入数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            DgvHtyhd.Columns("発注残数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            DgvHtyhd.Columns("間接費").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            DgvHtyhd.Columns("仕入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            DgvHtyhd.Columns("入庫数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            DgvHtyhd.Columns("未入庫数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
+            Dim Sql2 As String = ""
+            Dim tmp1 As String = ""
+
+            Dim Sql3 As String = ""
+            Dim tmp2 As String = ""
             For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
                 DgvHtyhd.Rows.Add()
                 DgvHtyhd.Rows(index).Cells(0).Value = ds.Tables(RS).Rows(index)("発注番号")
                 DgvHtyhd.Rows(index).Cells(1).Value = ds.Tables(RS).Rows(index)("発注番号枝番")
                 DgvHtyhd.Rows(index).Cells(2).Value = ds.Tables(RS).Rows(index)("行番号")
-                DgvHtyhd.Rows(index).Cells(3).Value = ds.Tables(RS).Rows(index)("仕入区分")
+                If ds.Tables(RS).Rows(index)("仕入区分") = 1 Then
+                    DgvHtyhd.Rows(index).Cells(3).Value = "仕入"
+                ElseIf ds.Tables(RS).Rows(index)("仕入区分") = 2 Then
+                    DgvHtyhd.Rows(index).Cells(3).Value = "在庫"
+                Else
+                    DgvHtyhd.Rows(index).Cells(3).Value = "サービス"
+                End If
                 DgvHtyhd.Rows(index).Cells(4).Value = ds.Tables(RS).Rows(index)("メーカー")
                 DgvHtyhd.Rows(index).Cells(5).Value = ds.Tables(RS).Rows(index)("品名")
                 DgvHtyhd.Rows(index).Cells(6).Value = ds.Tables(RS).Rows(index)("型式")
@@ -481,12 +478,80 @@ Public Class OrderingList
                 DgvHtyhd.Rows(index).Cells(12).Value = ds.Tables(RS).Rows(index)("単位")
                 DgvHtyhd.Rows(index).Cells(13).Value = ds.Tables(RS).Rows(index)("間接費")
                 DgvHtyhd.Rows(index).Cells(14).Value = ds.Tables(RS).Rows(index)("仕入金額")
-                DgvHtyhd.Rows(index).Cells(15).Value = ds.Tables(RS).Rows(index)("リードタイム")
-                DgvHtyhd.Rows(index).Cells(16).Value = ds.Tables(RS).Rows(index)("入庫数")
-                DgvHtyhd.Rows(index).Cells(17).Value = ds.Tables(RS).Rows(index)("未入庫数")
-                DgvHtyhd.Rows(index).Cells(18).Value = ds.Tables(RS).Rows(index)("備考")
-                DgvHtyhd.Rows(index).Cells(19).Value = ds.Tables(RS).Rows(index)("更新者")
-                DgvHtyhd.Rows(index).Cells(20).Value = ds.Tables(RS).Rows(index)("登録日")
+                If ds.Tables(RS).Rows(index)("リードタイム単位") Is DBNull.Value Then
+                    DgvHtyhd.Rows(index).Cells(15).Value = ds.Tables(RS).Rows(index)("リードタイム")
+                Else
+                    tmp1 = ""
+                    Sql2 = ""
+                    Sql2 += "SELECT "
+                    Sql2 += "* "
+                    Sql2 += "FROM "
+                    Sql2 += "public"
+                    Sql2 += "."
+                    Sql2 += "m90_hanyo"
+                    Sql2 += " WHERE "
+                    Sql2 += "会社コード"
+                    Sql2 += " ILIKE "
+                    Sql2 += "'"
+                    Sql2 += frmC01F10_Login.loginValue.BumonNM
+                    Sql2 += "'"
+                    Sql2 += " AND "
+                    Sql2 += "固定キー"
+                    Sql2 += " ILIKE "
+                    Sql2 += "'"
+                    Sql2 += "4"
+                    Sql2 += "'"
+                    Sql2 += " AND "
+                    Sql2 += "可変キー"
+                    Sql2 += " ILIKE "
+                    Sql2 += "'"
+                    Sql2 += ds.Tables(RS).Rows(index)("リードタイム単位").ToString
+                    Sql2 += "'"
+
+                    Dim ds2 As DataSet = _db.selectDB(Sql2, RS, reccnt)
+                    tmp1 += ds.Tables(RS).Rows(index)("リードタイム")
+                    tmp1 += ds2.Tables(RS).Rows(0)("文字１")
+                    DgvHtyhd.Rows(index).Cells(15).Value = tmp1
+                End If
+
+                If ds.Tables(RS).Rows(index)("貿易条件") Is DBNull.Value Then
+
+                Else
+                    tmp2 = ""
+                    Sql3 = ""
+                    Sql3 += "SELECT "
+                    Sql3 += "* "
+                    Sql3 += "FROM "
+                    Sql3 += "public"
+                    Sql3 += "."
+                    Sql3 += "m90_hanyo"
+                    Sql3 += " WHERE "
+                    Sql3 += "会社コード"
+                    Sql3 += " ILIKE "
+                    Sql3 += "'"
+                    Sql3 += frmC01F10_Login.loginValue.BumonNM
+                    Sql3 += "'"
+                    Sql3 += " AND "
+                    Sql3 += "固定キー"
+                    Sql3 += " ILIKE "
+                    Sql3 += "'"
+                    Sql3 += "5"
+                    Sql3 += "'"
+                    Sql3 += " AND "
+                    Sql3 += "可変キー"
+                    Sql3 += " ILIKE "
+                    Sql3 += "'"
+                    Sql3 += ds.Tables(RS).Rows(index)("貿易条件").ToString
+                    Sql3 += "'"
+
+                    Dim ds3 As DataSet = _db.selectDB(Sql3, RS, reccnt)
+                    DgvHtyhd.Rows(index).Cells(16).Value = ds3.Tables(RS).Rows(0)("文字１").ToString
+                End If
+                DgvHtyhd.Rows(index).Cells(17).Value = ds.Tables(RS).Rows(index)("入庫数")
+                DgvHtyhd.Rows(index).Cells(18).Value = ds.Tables(RS).Rows(index)("未入庫数")
+                DgvHtyhd.Rows(index).Cells(19).Value = ds.Tables(RS).Rows(index)("備考")
+                DgvHtyhd.Rows(index).Cells(20).Value = ds.Tables(RS).Rows(index)("更新者")
+                DgvHtyhd.Rows(index).Cells(21).Value = ds.Tables(RS).Rows(index)("登録日")
             Next
         End If
     End Sub
@@ -500,7 +565,11 @@ Public Class OrderingList
 
         Dim openForm As Form = Nothing
         openForm = New Ordering(_msgHd, _db, _langHd, No, Suffix, status)   '処理選択
-        openForm.Show(Me)
+        openForm.ShowDialog(Me)
+        DgvHtyhd.Rows.Clear()
+        DgvHtyhd.Columns.Clear()
+        Dim ListStatus As String = "EXCLUSION"
+        PurchaseListLoad(ListStatus)
     End Sub
 
     Private Sub BtnPurchaseSearch_Click(sender As Object, e As EventArgs) Handles BtnPurchaseSearch.Click
@@ -837,6 +906,7 @@ Public Class OrderingList
         Dim openForm As Form = Nothing
         openForm = New PurchasingManagement(_msgHd, _db, _langHd, No, Suffix)   '処理選択
         openForm.Show(Me)
+
     End Sub
 
     Private Sub BtnGoodsIssue_Click(sender As Object, e As EventArgs) Handles BtnReceipt.Click
@@ -847,6 +917,7 @@ Public Class OrderingList
         Dim openForm As Form = Nothing
         openForm = New Receipt(_msgHd, _db, _langHd, No, Suffix)   '処理選択
         openForm.Show(Me)
+
     End Sub
 
     Private Sub BtnPurchaseClone_Click(sender As Object, e As EventArgs) Handles BtnPurchaseClone.Click

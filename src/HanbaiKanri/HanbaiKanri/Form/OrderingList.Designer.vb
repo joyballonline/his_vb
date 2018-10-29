@@ -483,6 +483,7 @@ Partial Class OrderingList
         Me.Controls.Add(Me.BtnBack)
         Me.Controls.Add(Me.BtnPurchaseEdit)
         Me.Controls.Add(Me.DgvHtyhd)
+        Me.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "OrderingList"
         Me.Text = "OrderingList"

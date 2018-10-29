@@ -64,6 +64,11 @@ Public Class CustomerList
     End Sub
 
     Private Sub MstCustomere_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim Status As String = "LOAD"
+        CustomerListLoad(Status)
+    End Sub
+
+    Private Sub CustomerListLoad(Status)
         Dim Sql1 As String = ""
         Dim Sql2 As String = ""
         Dim Sql3 As String = ""
@@ -75,6 +80,21 @@ Public Class CustomerList
         Sql1 += "public"
         Sql1 += "."
         Sql1 += "m10_customer"
+
+        If Status = "SEARCH" Then
+            Sql1 += " WHERE "
+            Sql1 += "会社コード"
+            Sql1 += " = "
+            Sql1 += "'"
+            Sql1 += frmC01F10_Login.loginValue.BumonNM
+            Sql1 += "'"
+            Sql1 += " AND "
+            Sql1 += "得意先名"
+            Sql1 += " = "
+            Sql1 += "'"
+            Sql1 += TxtSearch.Text
+            Sql1 += "'"
+        End If
 
         Dim ds1 As DataSet = _db.selectDB(Sql1, RS, reccnt)
         Dim Count As Integer = 0
@@ -226,6 +246,8 @@ Public Class CustomerList
     End Sub
 
     Private Sub BtnSearch_Click(sender As Object, e As EventArgs) Handles BtnSearch.Click
-
+        DgvCustomer.Rows.Clear()
+        Dim Status As String = "SEARCH"
+        CustomerListLoad(Status)
     End Sub
 End Class

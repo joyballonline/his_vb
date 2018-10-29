@@ -72,6 +72,12 @@ Public Class MstCompany
             Sql += "public"
             Sql += "."
             Sql += "m01_company"
+            Sql += " WHERE "
+            Sql += "会社コード"
+            Sql += " ILIKE "
+            Sql += "'"
+            Sql += frmC01F10_Login.loginValue.BumonNM
+            Sql += "'"
 
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
@@ -153,6 +159,12 @@ Public Class MstCompany
             Sql += "."
             Sql += "m01_company"
             Sql += " WHERE "
+            Sql += "会社コード"
+            Sql += " ILIKE "
+            Sql += "'"
+            Sql += frmC01F10_Login.loginValue.BumonNM
+            Sql += "'"
+            Sql += " AND "
             Sql += "会社名"
             Sql += " ILIKE "
             Sql += "'%"
@@ -172,7 +184,7 @@ Public Class MstCompany
                 Dgv_Company.Rows(index).Cells("住所２").Value = ds.Tables(RS).Rows(index)("住所２")
                 Dgv_Company.Rows(index).Cells("住所３").Value = ds.Tables(RS).Rows(index)("住所３")
                 Dgv_Company.Rows(index).Cells("電話番号").Value = ds.Tables(RS).Rows(index)("電話番号")
-                Dgv_Company.Rows(index).Cells("ＦＡＸ番号").Value = ds.Tables(RS).Rows(index)("ＦＡＸ番号")
+                Dgv_Company.Rows(index).Cells("FAX番号").Value = ds.Tables(RS).Rows(index)("ＦＡＸ番号")
                 Dgv_Company.Rows(index).Cells("代表者役職").Value = ds.Tables(RS).Rows(index)("代表者役職")
                 Dgv_Company.Rows(index).Cells("代表者名").Value = ds.Tables(RS).Rows(index)("代表者名")
                 Dgv_Company.Rows(index).Cells("表示順").Value = ds.Tables(RS).Rows(index)("表示順")

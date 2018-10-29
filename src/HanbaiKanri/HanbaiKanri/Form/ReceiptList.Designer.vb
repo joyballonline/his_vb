@@ -346,6 +346,7 @@ Partial Class ReceiptList
         Me.DgvCymnhd.Location = New System.Drawing.Point(13, 236)
         Me.DgvCymnhd.Name = "DgvCymnhd"
         Me.DgvCymnhd.ReadOnly = True
+        Me.DgvCymnhd.RowHeadersVisible = False
         Me.DgvCymnhd.RowTemplate.Height = 21
         Me.DgvCymnhd.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvCymnhd.Size = New System.Drawing.Size(1326, 267)

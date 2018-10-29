@@ -135,7 +135,7 @@ Partial Class AccountsPayableList
         Me.Label5.AutoSize = True
         Me.Label5.Location = New System.Drawing.Point(936, 46)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(22, 15)
+        Me.Label5.Size = New System.Drawing.Size(17, 12)
         Me.Label5.TabIndex = 164
         Me.Label5.Text = "～"
         '
@@ -212,7 +212,7 @@ Partial Class AccountsPayableList
         Me.Label9.AutoSize = True
         Me.Label9.Location = New System.Drawing.Point(936, 74)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(22, 15)
+        Me.Label9.Size = New System.Drawing.Size(17, 12)
         Me.Label9.TabIndex = 165
         Me.Label9.Text = "～"
         '
@@ -277,6 +277,7 @@ Partial Class AccountsPayableList
         'DgvBilling
         '
         Me.DgvBilling.AllowUserToAddRows = False
+        Me.DgvBilling.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader
         Me.DgvBilling.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvBilling.Location = New System.Drawing.Point(13, 236)
         Me.DgvBilling.Name = "DgvBilling"
@@ -347,7 +348,7 @@ Partial Class AccountsPayableList
         Me.Controls.Add(Me.BtnPurchaseSearch)
         Me.Controls.Add(Me.BtnBack)
         Me.Controls.Add(Me.DgvBilling)
-        Me.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "AccountsPayableList"
         Me.Text = "AccountsPayableList"

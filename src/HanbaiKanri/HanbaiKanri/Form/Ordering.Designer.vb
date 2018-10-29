@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Ordering
     Inherits System.Windows.Forms.Form
 
     'フォームがコンポーネントの一覧をクリーンアップするために dispose をオーバーライドします。
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,14 +20,14 @@ Partial Class Ordering
     'メモ: 以下のプロシージャは Windows フォーム デザイナーで必要です。
     'Windows フォーム デザイナーを使用して変更できます。  
     'コード エディターを使って変更しないでください。
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LblPaymentTerms = New System.Windows.Forms.Label()
         Me.LblPosition = New System.Windows.Forms.Label()
         Me.TxtTel = New System.Windows.Forms.TextBox()
@@ -93,6 +93,11 @@ Partial Class Ordering
         Me.LblMode = New System.Windows.Forms.Label()
         Me.TxtCustomerPO = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.BtnCodeSearch = New System.Windows.Forms.Button()
+        Me.CbShippedBy = New System.Windows.Forms.ComboBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.DtpShippedDate = New System.Windows.Forms.DateTimePicker()
+        Me.Label4 = New System.Windows.Forms.Label()
         CType(Me.DgvItemList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -315,13 +320,13 @@ Partial Class Ordering
         Me.DgvItemList.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.DgvItemList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvItemList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.No, Me.メーカー, Me.品名, Me.型式, Me.数量, Me.単位, Me.仕入先, Me.仕入単価, Me.間接費, Me.仕入金額, Me.リードタイム, Me.入庫数, Me.未入庫数, Me.備考})
-        Me.DgvItemList.Location = New System.Drawing.Point(11, 246)
+        Me.DgvItemList.Location = New System.Drawing.Point(11, 274)
         Me.DgvItemList.Name = "DgvItemList"
         Me.DgvItemList.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
         Me.DgvItemList.RowHeadersVisible = False
         Me.DgvItemList.RowTemplate.Height = 21
         Me.DgvItemList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
-        Me.DgvItemList.Size = New System.Drawing.Size(1329, 213)
+        Me.DgvItemList.Size = New System.Drawing.Size(1329, 185)
         Me.DgvItemList.TabIndex = 18
         '
         'No
@@ -332,24 +337,24 @@ Partial Class Ordering
         '
         'メーカー
         '
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.メーカー.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle19.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.メーカー.DefaultCellStyle = DataGridViewCellStyle19
         Me.メーカー.HeaderText = "メーカー"
         Me.メーカー.Name = "メーカー"
         Me.メーカー.Width = 220
         '
         '品名
         '
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.品名.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle20.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.品名.DefaultCellStyle = DataGridViewCellStyle20
         Me.品名.HeaderText = "品名"
         Me.品名.Name = "品名"
         Me.品名.Width = 220
         '
         '型式
         '
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.型式.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle21.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.型式.DefaultCellStyle = DataGridViewCellStyle21
         Me.型式.HeaderText = "型式"
         Me.型式.Name = "型式"
         Me.型式.Width = 230
@@ -368,8 +373,8 @@ Partial Class Ordering
         '
         '仕入先
         '
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.仕入先.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle22.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.仕入先.DefaultCellStyle = DataGridViewCellStyle22
         Me.仕入先.HeaderText = "仕入先"
         Me.仕入先.Name = "仕入先"
         Me.仕入先.Visible = False
@@ -383,8 +388,8 @@ Partial Class Ordering
         '
         '間接費
         '
-        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.間接費.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle23.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.間接費.DefaultCellStyle = DataGridViewCellStyle23
         Me.間接費.HeaderText = "間接費"
         Me.間接費.Name = "間接費"
         Me.間接費.ReadOnly = True
@@ -392,8 +397,8 @@ Partial Class Ordering
         '
         '仕入金額
         '
-        DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.仕入金額.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle24.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.仕入金額.DefaultCellStyle = DataGridViewCellStyle24
         Me.仕入金額.HeaderText = "仕入金額"
         Me.仕入金額.Name = "仕入金額"
         Me.仕入金額.ReadOnly = True
@@ -523,7 +528,7 @@ Partial Class Ordering
         Me.TxtSupplierCode.Location = New System.Drawing.Point(127, 42)
         Me.TxtSupplierCode.MaxLength = 50
         Me.TxtSupplierCode.Name = "TxtSupplierCode"
-        Me.TxtSupplierCode.Size = New System.Drawing.Size(140, 23)
+        Me.TxtSupplierCode.Size = New System.Drawing.Size(78, 23)
         Me.TxtSupplierCode.TabIndex = 3
         '
         'BtnBack
@@ -779,10 +784,71 @@ Partial Class Ordering
         Me.Label1.Text = "客先番号"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'BtnCodeSearch
+        '
+        Me.BtnCodeSearch.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.BtnCodeSearch.Location = New System.Drawing.Point(211, 42)
+        Me.BtnCodeSearch.Name = "BtnCodeSearch"
+        Me.BtnCodeSearch.Size = New System.Drawing.Size(56, 23)
+        Me.BtnCodeSearch.TabIndex = 304
+        Me.BtnCodeSearch.Text = "検索"
+        Me.BtnCodeSearch.UseVisualStyleBackColor = True
+        '
+        'CbShippedBy
+        '
+        Me.CbShippedBy.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.CbShippedBy.FormattingEnabled = True
+        Me.CbShippedBy.Items.AddRange(New Object() {"RegularShip", "DHL", "Air", "Ship"})
+        Me.CbShippedBy.Location = New System.Drawing.Point(127, 245)
+        Me.CbShippedBy.Name = "CbShippedBy"
+        Me.CbShippedBy.Size = New System.Drawing.Size(140, 23)
+        Me.CbShippedBy.TabIndex = 305
+        '
+        'Label3
+        '
+        Me.Label3.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.Label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label3.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Label3.Location = New System.Drawing.Point(11, 245)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(110, 23)
+        Me.Label3.TabIndex = 306
+        Me.Label3.Text = "出荷方法"
+        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'DtpShippedDate
+        '
+        Me.DtpShippedDate.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.DtpShippedDate.CustomFormat = "yyyy/MM/dd"
+        Me.DtpShippedDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.DtpShippedDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.DtpShippedDate.Location = New System.Drawing.Point(389, 245)
+        Me.DtpShippedDate.Name = "DtpShippedDate"
+        Me.DtpShippedDate.Size = New System.Drawing.Size(150, 22)
+        Me.DtpShippedDate.TabIndex = 307
+        Me.DtpShippedDate.Value = New Date(2018, 6, 5, 23, 23, 58, 0)
+        '
+        'Label4
+        '
+        Me.Label4.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.Label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label4.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Label4.Location = New System.Drawing.Point(273, 245)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(110, 23)
+        Me.Label4.TabIndex = 308
+        Me.Label4.Text = "出荷日"
+        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'Ordering
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.DtpShippedDate)
+        Me.Controls.Add(Me.Label4)
+        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.CbShippedBy)
+        Me.Controls.Add(Me.BtnCodeSearch)
         Me.Controls.Add(Me.TxtCustomerPO)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.LblMode)
@@ -907,4 +973,9 @@ Partial Class Ordering
     Friend WithEvents LblMode As Label
     Friend WithEvents TxtCustomerPO As TextBox
     Friend WithEvents Label1 As Label
+    Friend WithEvents BtnCodeSearch As Button
+    Friend WithEvents CbShippedBy As ComboBox
+    Friend WithEvents Label3 As Label
+    Friend WithEvents DtpShippedDate As DateTimePicker
+    Friend WithEvents Label4 As Label
 End Class

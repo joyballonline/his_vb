@@ -83,7 +83,7 @@ Partial Class Company
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label4.Location = New System.Drawing.Point(395, 199)
+        Me.Label4.Location = New System.Drawing.Point(395, 198)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(82, 15)
         Me.Label4.TabIndex = 204
@@ -91,7 +91,7 @@ Partial Class Company
         '
         'TxtRepresentativePosition
         '
-        Me.TxtRepresentativePosition.Location = New System.Drawing.Point(483, 196)
+        Me.TxtRepresentativePosition.Location = New System.Drawing.Point(483, 195)
         Me.TxtRepresentativePosition.MaxLength = 50
         Me.TxtRepresentativePosition.Name = "TxtRepresentativePosition"
         Me.TxtRepresentativePosition.Size = New System.Drawing.Size(234, 22)
@@ -101,7 +101,7 @@ Partial Class Company
         '
         Me.Label19.AutoSize = True
         Me.Label19.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label19.Location = New System.Drawing.Point(410, 425)
+        Me.Label19.Location = New System.Drawing.Point(410, 426)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(67, 15)
         Me.Label19.TabIndex = 202
@@ -111,7 +111,7 @@ Partial Class Company
         '
         Me.Label15.AutoSize = True
         Me.Label15.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label15.Location = New System.Drawing.Point(57, 425)
+        Me.Label15.Location = New System.Drawing.Point(57, 426)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(67, 15)
         Me.Label15.TabIndex = 200
@@ -121,7 +121,7 @@ Partial Class Company
         '
         Me.Label16.AutoSize = True
         Me.Label16.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label16.Location = New System.Drawing.Point(410, 379)
+        Me.Label16.Location = New System.Drawing.Point(410, 380)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(67, 15)
         Me.Label16.TabIndex = 199
@@ -131,7 +131,7 @@ Partial Class Company
         '
         Me.Label17.AutoSize = True
         Me.Label17.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label17.Location = New System.Drawing.Point(54, 379)
+        Me.Label17.Location = New System.Drawing.Point(54, 380)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(70, 15)
         Me.Label17.TabIndex = 198
@@ -141,7 +141,7 @@ Partial Class Company
         '
         Me.Label18.AutoSize = True
         Me.Label18.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label18.Location = New System.Drawing.Point(425, 336)
+        Me.Label18.Location = New System.Drawing.Point(425, 335)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(52, 15)
         Me.Label18.TabIndex = 197
@@ -149,7 +149,7 @@ Partial Class Company
         '
         'TxtAccountNumber
         '
-        Me.TxtAccountNumber.Location = New System.Drawing.Point(130, 422)
+        Me.TxtAccountNumber.Location = New System.Drawing.Point(130, 423)
         Me.TxtAccountNumber.MaxLength = 7
         Me.TxtAccountNumber.Name = "TxtAccountNumber"
         Me.TxtAccountNumber.Size = New System.Drawing.Size(234, 22)
@@ -157,7 +157,7 @@ Partial Class Company
         '
         'TxtDepositCategory
         '
-        Me.TxtDepositCategory.Location = New System.Drawing.Point(483, 376)
+        Me.TxtDepositCategory.Location = New System.Drawing.Point(483, 377)
         Me.TxtDepositCategory.MaxLength = 1
         Me.TxtDepositCategory.Name = "TxtDepositCategory"
         Me.TxtDepositCategory.Size = New System.Drawing.Size(234, 22)
@@ -165,7 +165,7 @@ Partial Class Company
         '
         'TxtBranchOfficeCode
         '
-        Me.TxtBranchOfficeCode.Location = New System.Drawing.Point(130, 376)
+        Me.TxtBranchOfficeCode.Location = New System.Drawing.Point(130, 377)
         Me.TxtBranchOfficeCode.MaxLength = 3
         Me.TxtBranchOfficeCode.Name = "TxtBranchOfficeCode"
         Me.TxtBranchOfficeCode.Size = New System.Drawing.Size(234, 22)
@@ -173,7 +173,7 @@ Partial Class Company
         '
         'TxtBranchName
         '
-        Me.TxtBranchName.Location = New System.Drawing.Point(483, 333)
+        Me.TxtBranchName.Location = New System.Drawing.Point(483, 332)
         Me.TxtBranchName.MaxLength = 4
         Me.TxtBranchName.Name = "TxtBranchName"
         Me.TxtBranchName.Size = New System.Drawing.Size(234, 22)
@@ -183,7 +183,7 @@ Partial Class Company
         '
         Me.Label14.AutoSize = True
         Me.Label14.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label14.Location = New System.Drawing.Point(87, 290)
+        Me.Label14.Location = New System.Drawing.Point(87, 289)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(37, 15)
         Me.Label14.TabIndex = 192
@@ -193,7 +193,7 @@ Partial Class Company
         '
         Me.Label13.AutoSize = True
         Me.Label13.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label13.Location = New System.Drawing.Point(425, 245)
+        Me.Label13.Location = New System.Drawing.Point(425, 244)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(52, 15)
         Me.Label13.TabIndex = 191
@@ -203,7 +203,7 @@ Partial Class Company
         '
         Me.Label12.AutoSize = True
         Me.Label12.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label12.Location = New System.Drawing.Point(57, 245)
+        Me.Label12.Location = New System.Drawing.Point(57, 244)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(67, 15)
         Me.Label12.TabIndex = 190
@@ -213,7 +213,7 @@ Partial Class Company
         '
         Me.Label11.AutoSize = True
         Me.Label11.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label11.Location = New System.Drawing.Point(61, 199)
+        Me.Label11.Location = New System.Drawing.Point(61, 198)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(63, 15)
         Me.Label11.TabIndex = 189
@@ -223,7 +223,7 @@ Partial Class Company
         '
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label9.Location = New System.Drawing.Point(410, 153)
+        Me.Label9.Location = New System.Drawing.Point(410, 152)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(67, 15)
         Me.Label9.TabIndex = 188
@@ -231,7 +231,7 @@ Partial Class Company
         '
         'TxtRemarks
         '
-        Me.TxtRemarks.Location = New System.Drawing.Point(130, 287)
+        Me.TxtRemarks.Location = New System.Drawing.Point(130, 286)
         Me.TxtRemarks.MaxLength = 255
         Me.TxtRemarks.Name = "TxtRemarks"
         Me.TxtRemarks.Size = New System.Drawing.Size(234, 22)
@@ -239,7 +239,7 @@ Partial Class Company
         '
         'TxtDisplayOrder
         '
-        Me.TxtDisplayOrder.Location = New System.Drawing.Point(483, 242)
+        Me.TxtDisplayOrder.Location = New System.Drawing.Point(483, 241)
         Me.TxtDisplayOrder.MaxLength = 3
         Me.TxtDisplayOrder.Name = "TxtDisplayOrder"
         Me.TxtDisplayOrder.Size = New System.Drawing.Size(234, 22)
@@ -247,7 +247,7 @@ Partial Class Company
         '
         'TxtRepresentativeName
         '
-        Me.TxtRepresentativeName.Location = New System.Drawing.Point(130, 242)
+        Me.TxtRepresentativeName.Location = New System.Drawing.Point(130, 241)
         Me.TxtRepresentativeName.MaxLength = 50
         Me.TxtRepresentativeName.Name = "TxtRepresentativeName"
         Me.TxtRepresentativeName.Size = New System.Drawing.Size(234, 22)
@@ -255,7 +255,7 @@ Partial Class Company
         '
         'TxtFax
         '
-        Me.TxtFax.Location = New System.Drawing.Point(130, 196)
+        Me.TxtFax.Location = New System.Drawing.Point(130, 195)
         Me.TxtFax.MaxLength = 15
         Me.TxtFax.Name = "TxtFax"
         Me.TxtFax.Size = New System.Drawing.Size(234, 22)
@@ -263,7 +263,7 @@ Partial Class Company
         '
         'TxtTel
         '
-        Me.TxtTel.Location = New System.Drawing.Point(483, 150)
+        Me.TxtTel.Location = New System.Drawing.Point(483, 149)
         Me.TxtTel.MaxLength = 15
         Me.TxtTel.Name = "TxtTel"
         Me.TxtTel.Size = New System.Drawing.Size(234, 22)
@@ -271,7 +271,7 @@ Partial Class Company
         '
         'BtnBack
         '
-        Me.BtnBack.Location = New System.Drawing.Point(552, 512)
+        Me.BtnBack.Location = New System.Drawing.Point(552, 514)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(165, 40)
         Me.BtnBack.TabIndex = 24
@@ -282,7 +282,7 @@ Partial Class Company
         '
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label8.Location = New System.Drawing.Point(77, 153)
+        Me.Label8.Location = New System.Drawing.Point(77, 152)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(47, 15)
         Me.Label8.TabIndex = 181
@@ -292,7 +292,7 @@ Partial Class Company
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label7.Location = New System.Drawing.Point(430, 108)
+        Me.Label7.Location = New System.Drawing.Point(430, 107)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(47, 15)
         Me.Label7.TabIndex = 180
@@ -302,7 +302,7 @@ Partial Class Company
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label6.Location = New System.Drawing.Point(77, 108)
+        Me.Label6.Location = New System.Drawing.Point(77, 107)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(47, 15)
         Me.Label6.TabIndex = 179
@@ -312,7 +312,7 @@ Partial Class Company
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label5.Location = New System.Drawing.Point(410, 60)
+        Me.Label5.Location = New System.Drawing.Point(410, 59)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(67, 15)
         Me.Label5.TabIndex = 178
@@ -322,7 +322,7 @@ Partial Class Company
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label3.Location = New System.Drawing.Point(57, 60)
+        Me.Label3.Location = New System.Drawing.Point(57, 59)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(67, 15)
         Me.Label3.TabIndex = 177
@@ -332,7 +332,7 @@ Partial Class Company
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label2.Location = New System.Drawing.Point(425, 15)
+        Me.Label2.Location = New System.Drawing.Point(425, 14)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(52, 15)
         Me.Label2.TabIndex = 176
@@ -342,7 +342,7 @@ Partial Class Company
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label1.Location = New System.Drawing.Point(54, 15)
+        Me.Label1.Location = New System.Drawing.Point(54, 14)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(70, 15)
         Me.Label1.TabIndex = 175
@@ -350,7 +350,7 @@ Partial Class Company
         '
         'TxtAddress3
         '
-        Me.TxtAddress3.Location = New System.Drawing.Point(130, 150)
+        Me.TxtAddress3.Location = New System.Drawing.Point(130, 149)
         Me.TxtAddress3.MaxLength = 100
         Me.TxtAddress3.Name = "TxtAddress3"
         Me.TxtAddress3.Size = New System.Drawing.Size(234, 22)
@@ -358,7 +358,7 @@ Partial Class Company
         '
         'TxtAddress2
         '
-        Me.TxtAddress2.Location = New System.Drawing.Point(483, 105)
+        Me.TxtAddress2.Location = New System.Drawing.Point(483, 104)
         Me.TxtAddress2.MaxLength = 100
         Me.TxtAddress2.Name = "TxtAddress2"
         Me.TxtAddress2.Size = New System.Drawing.Size(234, 22)
@@ -366,7 +366,7 @@ Partial Class Company
         '
         'TxtAddress1
         '
-        Me.TxtAddress1.Location = New System.Drawing.Point(130, 105)
+        Me.TxtAddress1.Location = New System.Drawing.Point(130, 104)
         Me.TxtAddress1.MaxLength = 100
         Me.TxtAddress1.Name = "TxtAddress1"
         Me.TxtAddress1.Size = New System.Drawing.Size(234, 22)
@@ -374,7 +374,7 @@ Partial Class Company
         '
         'TxtPostalCode
         '
-        Me.TxtPostalCode.Location = New System.Drawing.Point(483, 57)
+        Me.TxtPostalCode.Location = New System.Drawing.Point(483, 56)
         Me.TxtPostalCode.MaxLength = 7
         Me.TxtPostalCode.Name = "TxtPostalCode"
         Me.TxtPostalCode.Size = New System.Drawing.Size(234, 22)
@@ -382,7 +382,7 @@ Partial Class Company
         '
         'TxtCompanyShortName
         '
-        Me.TxtCompanyShortName.Location = New System.Drawing.Point(130, 57)
+        Me.TxtCompanyShortName.Location = New System.Drawing.Point(130, 56)
         Me.TxtCompanyShortName.MaxLength = 20
         Me.TxtCompanyShortName.Name = "TxtCompanyShortName"
         Me.TxtCompanyShortName.Size = New System.Drawing.Size(234, 22)
@@ -390,7 +390,7 @@ Partial Class Company
         '
         'TxtCompanyName
         '
-        Me.TxtCompanyName.Location = New System.Drawing.Point(483, 12)
+        Me.TxtCompanyName.Location = New System.Drawing.Point(483, 11)
         Me.TxtCompanyName.MaxLength = 50
         Me.TxtCompanyName.Name = "TxtCompanyName"
         Me.TxtCompanyName.Size = New System.Drawing.Size(234, 22)
@@ -398,7 +398,7 @@ Partial Class Company
         '
         'TxtCompanyCode
         '
-        Me.TxtCompanyCode.Location = New System.Drawing.Point(130, 12)
+        Me.TxtCompanyCode.Location = New System.Drawing.Point(130, 11)
         Me.TxtCompanyCode.MaxLength = 8
         Me.TxtCompanyCode.Name = "TxtCompanyCode"
         Me.TxtCompanyCode.Size = New System.Drawing.Size(234, 22)
@@ -406,7 +406,7 @@ Partial Class Company
         '
         'BtnRegistration
         '
-        Me.BtnRegistration.Location = New System.Drawing.Point(381, 512)
+        Me.BtnRegistration.Location = New System.Drawing.Point(381, 514)
         Me.BtnRegistration.Name = "BtnRegistration"
         Me.BtnRegistration.Size = New System.Drawing.Size(165, 40)
         Me.BtnRegistration.TabIndex = 23
@@ -415,7 +415,7 @@ Partial Class Company
         '
         'TxtAccountName
         '
-        Me.TxtAccountName.Location = New System.Drawing.Point(483, 422)
+        Me.TxtAccountName.Location = New System.Drawing.Point(483, 423)
         Me.TxtAccountName.MaxLength = 20
         Me.TxtAccountName.Name = "TxtAccountName"
         Me.TxtAccountName.Size = New System.Drawing.Size(234, 22)
@@ -425,7 +425,7 @@ Partial Class Company
         '
         Me.Label21.AutoSize = True
         Me.Label21.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label21.Location = New System.Drawing.Point(483, 83)
+        Me.Label21.Location = New System.Drawing.Point(483, 82)
         Me.Label21.Name = "Label21"
         Me.Label21.Size = New System.Drawing.Size(96, 15)
         Me.Label21.TabIndex = 208
@@ -435,7 +435,7 @@ Partial Class Company
         '
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label10.Location = New System.Drawing.Point(483, 176)
+        Me.Label10.Location = New System.Drawing.Point(483, 175)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(120, 15)
         Me.Label10.TabIndex = 210
@@ -445,7 +445,7 @@ Partial Class Company
         '
         Me.Label20.AutoSize = True
         Me.Label20.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label20.Location = New System.Drawing.Point(133, 222)
+        Me.Label20.Location = New System.Drawing.Point(133, 221)
         Me.Label20.Name = "Label20"
         Me.Label20.Size = New System.Drawing.Size(120, 15)
         Me.Label20.TabIndex = 211
@@ -455,7 +455,7 @@ Partial Class Company
         '
         Me.Label27.AutoSize = True
         Me.Label27.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label27.Location = New System.Drawing.Point(483, 402)
+        Me.Label27.Location = New System.Drawing.Point(483, 403)
         Me.Label27.Name = "Label27"
         Me.Label27.Size = New System.Drawing.Size(104, 15)
         Me.Label27.TabIndex = 216
@@ -465,7 +465,7 @@ Partial Class Company
         '
         Me.Label30.AutoSize = True
         Me.Label30.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label30.Location = New System.Drawing.Point(12, 471)
+        Me.Label30.Location = New System.Drawing.Point(12, 472)
         Me.Label30.Name = "Label30"
         Me.Label30.Size = New System.Drawing.Size(112, 15)
         Me.Label30.TabIndex = 220
@@ -474,7 +474,7 @@ Partial Class Company
         'CbEvaluation
         '
         Me.CbEvaluation.FormattingEnabled = True
-        Me.CbEvaluation.Location = New System.Drawing.Point(130, 468)
+        Me.CbEvaluation.Location = New System.Drawing.Point(130, 469)
         Me.CbEvaluation.Name = "CbEvaluation"
         Me.CbEvaluation.Size = New System.Drawing.Size(234, 23)
         Me.CbEvaluation.TabIndex = 21
@@ -483,7 +483,7 @@ Partial Class Company
         '
         Me.Label24.AutoSize = True
         Me.Label24.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label24.Location = New System.Drawing.Point(484, 493)
+        Me.Label24.Location = New System.Drawing.Point(484, 494)
         Me.Label24.Name = "Label24"
         Me.Label24.Size = New System.Drawing.Size(75, 15)
         Me.Label24.TabIndex = 226
@@ -493,7 +493,7 @@ Partial Class Company
         '
         Me.Label29.AutoSize = True
         Me.Label29.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label29.Location = New System.Drawing.Point(380, 471)
+        Me.Label29.Location = New System.Drawing.Point(380, 472)
         Me.Label29.Name = "Label29"
         Me.Label29.Size = New System.Drawing.Size(97, 15)
         Me.Label29.TabIndex = 225
@@ -501,7 +501,7 @@ Partial Class Company
         '
         'TxtPph
         '
-        Me.TxtPph.Location = New System.Drawing.Point(483, 468)
+        Me.TxtPph.Location = New System.Drawing.Point(483, 469)
         Me.TxtPph.MaxLength = 20
         Me.TxtPph.Name = "TxtPph"
         Me.TxtPph.Size = New System.Drawing.Size(234, 22)
@@ -511,7 +511,7 @@ Partial Class Company
         '
         Me.Label32.AutoSize = True
         Me.Label32.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label32.Location = New System.Drawing.Point(425, 290)
+        Me.Label32.Location = New System.Drawing.Point(425, 289)
         Me.Label32.Name = "Label32"
         Me.Label32.Size = New System.Drawing.Size(52, 15)
         Me.Label32.TabIndex = 228
@@ -519,7 +519,7 @@ Partial Class Company
         '
         'TxtBankName
         '
-        Me.TxtBankName.Location = New System.Drawing.Point(483, 287)
+        Me.TxtBankName.Location = New System.Drawing.Point(483, 286)
         Me.TxtBankName.MaxLength = 4
         Me.TxtBankName.Name = "TxtBankName"
         Me.TxtBankName.Size = New System.Drawing.Size(234, 22)
@@ -529,7 +529,7 @@ Partial Class Company
         '
         Me.Label34.AutoSize = True
         Me.Label34.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label34.Location = New System.Drawing.Point(54, 336)
+        Me.Label34.Location = New System.Drawing.Point(54, 335)
         Me.Label34.Name = "Label34"
         Me.Label34.Size = New System.Drawing.Size(70, 15)
         Me.Label34.TabIndex = 231
@@ -537,7 +537,7 @@ Partial Class Company
         '
         'TxtBankCode
         '
-        Me.TxtBankCode.Location = New System.Drawing.Point(130, 333)
+        Me.TxtBankCode.Location = New System.Drawing.Point(130, 332)
         Me.TxtBankCode.MaxLength = 4
         Me.TxtBankCode.Name = "TxtBankCode"
         Me.TxtBankCode.Size = New System.Drawing.Size(234, 22)
@@ -547,7 +547,7 @@ Partial Class Company
         '
         Me.Label22.AutoSize = True
         Me.Label22.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label22.Location = New System.Drawing.Point(133, 358)
+        Me.Label22.Location = New System.Drawing.Point(133, 357)
         Me.Label22.Name = "Label22"
         Me.Label22.Size = New System.Drawing.Size(72, 15)
         Me.Label22.TabIndex = 232
@@ -557,7 +557,7 @@ Partial Class Company
         '
         Me.Label23.AutoSize = True
         Me.Label23.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label23.Location = New System.Drawing.Point(133, 401)
+        Me.Label23.Location = New System.Drawing.Point(133, 402)
         Me.Label23.Name = "Label23"
         Me.Label23.Size = New System.Drawing.Size(64, 15)
         Me.Label23.TabIndex = 233
@@ -567,7 +567,7 @@ Partial Class Company
         '
         Me.Label25.AutoSize = True
         Me.Label25.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label25.Location = New System.Drawing.Point(133, 447)
+        Me.Label25.Location = New System.Drawing.Point(133, 448)
         Me.Label25.Name = "Label25"
         Me.Label25.Size = New System.Drawing.Size(96, 15)
         Me.Label25.TabIndex = 234
@@ -577,7 +577,7 @@ Partial Class Company
         '
         Me.Label26.AutoSize = True
         Me.Label26.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label26.Location = New System.Drawing.Point(133, 37)
+        Me.Label26.Location = New System.Drawing.Point(133, 36)
         Me.Label26.Name = "Label26"
         Me.Label26.Size = New System.Drawing.Size(215, 15)
         Me.Label26.TabIndex = 235

@@ -286,10 +286,7 @@ Public Class GoodsIssueList
             DgvCymnhd.Columns.Add("備考", "備考")
             DgvCymnhd.Columns.Add("登録日", "登録日")
 
-            DgvCymnhd.Columns(12).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvCymnhd.Columns(13).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvCymnhd.Columns(14).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvCymnhd.Columns(15).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            
 
             For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
                 DgvCymnhd.Rows.Add()
@@ -365,7 +362,13 @@ Public Class GoodsIssueList
                 DgvCymnhd.Rows.Add()
                 DgvCymnhd.Rows(index).Cells("出庫番号").Value = ds.Tables(RS).Rows(index)("出庫番号")
                 DgvCymnhd.Rows(index).Cells("行番号").Value = ds.Tables(RS).Rows(index)("行番号")
-                DgvCymnhd.Rows(index).Cells("仕入区分").Value = ds.Tables(RS).Rows(index)("仕入区分")
+                If ds.Tables(RS).Rows(index)("仕入区分") = 1 Then
+                    DgvCymnhd.Rows(index).Cells("仕入区分").Value = "仕入"
+                ElseIf ds.Tables(RS).Rows(index)("仕入区分") = 2 Then
+                    DgvCymnhd.Rows(index).Cells("仕入区分").Value = "在庫"
+                Else
+                    DgvCymnhd.Rows(index).Cells("仕入区分").Value = "サービス"
+                End If
                 DgvCymnhd.Rows(index).Cells("メーカー").Value = ds.Tables(RS).Rows(index)("メーカー")
                 DgvCymnhd.Rows(index).Cells("品名").Value = ds.Tables(RS).Rows(index)("品名")
                 DgvCymnhd.Rows(index).Cells("型式").Value = ds.Tables(RS).Rows(index)("型式")

@@ -151,7 +151,7 @@ Partial Class Supplier
         Me.TxtMemo.Location = New System.Drawing.Point(128, 328)
         Me.TxtMemo.Name = "TxtMemo"
         Me.TxtMemo.Size = New System.Drawing.Size(234, 22)
-        Me.TxtMemo.TabIndex = 14
+        Me.TxtMemo.TabIndex = 15
         '
         'TxtTariffRate
         '
@@ -159,7 +159,7 @@ Partial Class Supplier
         Me.TxtTariffRate.Location = New System.Drawing.Point(483, 238)
         Me.TxtTariffRate.Name = "TxtTariffRate"
         Me.TxtTariffRate.Size = New System.Drawing.Size(234, 22)
-        Me.TxtTariffRate.TabIndex = 13
+        Me.TxtTariffRate.TabIndex = 12
         '
         'TxtPerson
         '
@@ -167,7 +167,7 @@ Partial Class Supplier
         Me.TxtPerson.Location = New System.Drawing.Point(483, 193)
         Me.TxtPerson.Name = "TxtPerson"
         Me.TxtPerson.Size = New System.Drawing.Size(234, 22)
-        Me.TxtPerson.TabIndex = 11
+        Me.TxtPerson.TabIndex = 10
         '
         'TxtFax
         '
@@ -175,7 +175,7 @@ Partial Class Supplier
         Me.TxtFax.Location = New System.Drawing.Point(128, 193)
         Me.TxtFax.Name = "TxtFax"
         Me.TxtFax.Size = New System.Drawing.Size(234, 22)
-        Me.TxtFax.TabIndex = 10
+        Me.TxtFax.TabIndex = 9
         '
         'TxtTelSearch
         '
@@ -199,7 +199,7 @@ Partial Class Supplier
         Me.BtnRegistration.Location = New System.Drawing.Point(381, 509)
         Me.BtnRegistration.Name = "BtnRegistration"
         Me.BtnRegistration.Size = New System.Drawing.Size(165, 40)
-        Me.BtnRegistration.TabIndex = 20
+        Me.BtnRegistration.TabIndex = 23
         Me.BtnRegistration.Text = "登録"
         Me.BtnRegistration.UseVisualStyleBackColor = True
         '
@@ -384,7 +384,7 @@ Partial Class Supplier
         Me.TxtAccountNumber.Location = New System.Drawing.Point(128, 463)
         Me.TxtAccountNumber.Name = "TxtAccountNumber"
         Me.TxtAccountNumber.Size = New System.Drawing.Size(234, 22)
-        Me.TxtAccountNumber.TabIndex = 18
+        Me.TxtAccountNumber.TabIndex = 21
         '
         'TxtDepositCategory
         '
@@ -392,7 +392,7 @@ Partial Class Supplier
         Me.TxtDepositCategory.Location = New System.Drawing.Point(483, 418)
         Me.TxtDepositCategory.Name = "TxtDepositCategory"
         Me.TxtDepositCategory.Size = New System.Drawing.Size(234, 22)
-        Me.TxtDepositCategory.TabIndex = 17
+        Me.TxtDepositCategory.TabIndex = 20
         '
         'TxtBranchOfficeCode
         '
@@ -400,7 +400,7 @@ Partial Class Supplier
         Me.TxtBranchOfficeCode.Location = New System.Drawing.Point(128, 418)
         Me.TxtBranchOfficeCode.Name = "TxtBranchOfficeCode"
         Me.TxtBranchOfficeCode.Size = New System.Drawing.Size(234, 22)
-        Me.TxtBranchOfficeCode.TabIndex = 16
+        Me.TxtBranchOfficeCode.TabIndex = 19
         '
         'TxtBankCode
         '
@@ -408,7 +408,7 @@ Partial Class Supplier
         Me.TxtBankCode.Location = New System.Drawing.Point(128, 373)
         Me.TxtBankCode.Name = "TxtBankCode"
         Me.TxtBankCode.Size = New System.Drawing.Size(234, 22)
-        Me.TxtBankCode.TabIndex = 15
+        Me.TxtBankCode.TabIndex = 17
         '
         'Label19
         '
@@ -426,7 +426,7 @@ Partial Class Supplier
         Me.TxtAccountName.Location = New System.Drawing.Point(483, 463)
         Me.TxtAccountName.Name = "TxtAccountName"
         Me.TxtAccountName.Size = New System.Drawing.Size(234, 22)
-        Me.TxtAccountName.TabIndex = 19
+        Me.TxtAccountName.TabIndex = 22
         '
         'BtnBack
         '
@@ -434,7 +434,7 @@ Partial Class Supplier
         Me.BtnBack.Location = New System.Drawing.Point(552, 509)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(165, 40)
-        Me.BtnBack.TabIndex = 21
+        Me.BtnBack.TabIndex = 24
         Me.BtnBack.Text = "戻る"
         Me.BtnBack.UseVisualStyleBackColor = True
         '
@@ -454,7 +454,7 @@ Partial Class Supplier
         Me.TxtPosition.Location = New System.Drawing.Point(128, 238)
         Me.TxtPosition.Name = "TxtPosition"
         Me.TxtPosition.Size = New System.Drawing.Size(234, 22)
-        Me.TxtPosition.TabIndex = 12
+        Me.TxtPosition.TabIndex = 11
         '
         'Label20
         '
@@ -532,7 +532,7 @@ Partial Class Supplier
         Me.TxtPph.Location = New System.Drawing.Point(128, 283)
         Me.TxtPph.Name = "TxtPph"
         Me.TxtPph.Size = New System.Drawing.Size(234, 22)
-        Me.TxtPph.TabIndex = 231
+        Me.TxtPph.TabIndex = 13
         '
         'Label35
         '
@@ -560,7 +560,7 @@ Partial Class Supplier
         Me.TxtTransportationCost.Location = New System.Drawing.Point(483, 283)
         Me.TxtTransportationCost.Name = "TxtTransportationCost"
         Me.TxtTransportationCost.Size = New System.Drawing.Size(234, 22)
-        Me.TxtTransportationCost.TabIndex = 234
+        Me.TxtTransportationCost.TabIndex = 14
         '
         'Label39
         '
@@ -578,7 +578,7 @@ Partial Class Supplier
         Me.TxtBankName.Location = New System.Drawing.Point(483, 328)
         Me.TxtBankName.Name = "TxtBankName"
         Me.TxtBankName.Size = New System.Drawing.Size(234, 22)
-        Me.TxtBankName.TabIndex = 238
+        Me.TxtBankName.TabIndex = 16
         '
         'Label41
         '
@@ -596,7 +596,7 @@ Partial Class Supplier
         Me.TxtBranchName.Location = New System.Drawing.Point(483, 373)
         Me.TxtBranchName.Name = "TxtBranchName"
         Me.TxtBranchName.Size = New System.Drawing.Size(234, 22)
-        Me.TxtBranchName.TabIndex = 241
+        Me.TxtBranchName.TabIndex = 18
         '
         'Label21
         '

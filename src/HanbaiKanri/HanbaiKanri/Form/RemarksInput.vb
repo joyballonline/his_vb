@@ -80,9 +80,14 @@ Public Class RemarksInput
 
     Private Sub btnRemarksInput_Click(sender As Object, e As EventArgs) Handles BtnRemarksInput.Click
 
-        Dim frm As Quote = CType(Me.Owner, Quote)
+        If _status = "Ordering" Then
+            Dim frm As Ordering = CType(Me.Owner, Ordering)
+            frm.DgvItemList.Rows(RowIdx).Cells("備考").Value = TxtRemarks.Text
+        Else
+            Dim frm As Quote = CType(Me.Owner, Quote)
+            frm.DgvItemList.Rows(RowIdx).Cells("備考").Value = TxtRemarks.Text
+        End If
 
-        frm.DgvItemList.Rows(RowIdx).Cells("備考").Value = TxtRemarks.text
 
         _parentForm.Enabled = True
         _parentForm.Show()

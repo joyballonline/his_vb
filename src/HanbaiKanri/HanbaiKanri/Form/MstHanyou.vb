@@ -90,6 +90,12 @@ Public Class MstHanyou
             Sql += "public"
             Sql += "."
             Sql += "m90_hanyo"
+            Sql += " WHERE "
+            Sql += "会社コード"
+            Sql += " ILIKE "
+            Sql += "'"
+            Sql += frmC01F10_Login.loginValue.BumonNM
+            Sql += "'"
 
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
@@ -165,11 +171,130 @@ Public Class MstHanyou
             Sql += "."
             Sql += "m90_hanyo"
             Sql += " WHERE "
-            Sql += "固定キー"
+            Sql += "会社コード"
             Sql += " ILIKE "
-            Sql += "'%"
-            Sql += Search.Text
-            Sql += "%'"
+            Sql += "'"
+            Sql += frmC01F10_Login.loginValue.BumonNM
+            Sql += "'"
+
+            If TxtFixedkey.Text = "" Then
+            Else
+                Sql += " AND "
+                Sql += "固定キー"
+                Sql += " ILIKE "
+                Sql += "'"
+                Sql += TxtFixedkey.Text
+                Sql += "'"
+            End If
+
+            If TxtText1.Text = "" Then
+            Else
+
+                Sql += " AND "
+                Sql += "文字１"
+                Sql += " ILIKE "
+                Sql += "'%"
+                Sql += TxtText1.Text
+                Sql += "%'"
+            End If
+
+            If TxtText2.Text = "" Then
+            Else
+                Sql += " AND "
+                Sql += "文字２"
+                Sql += " ILIKE "
+                Sql += "'%"
+                Sql += TxtText2.Text
+                Sql += "%'"
+            End If
+
+            If TxtText3.Text = "" Then
+            Else
+                Sql += " AND "
+                Sql += "文字３"
+                Sql += " ILIKE "
+                Sql += "'%"
+                Sql += TxtText3.Text
+                Sql += "%'"
+            End If
+
+            If TxtText4.Text = "" Then
+            Else
+                Sql += " AND "
+                Sql += "文字４"
+                Sql += " ILIKE "
+                Sql += "'%"
+                Sql += TxtText4.Text
+                Sql += "%'"
+            End If
+
+            If TxtText5.Text = "" Then
+            Else
+                Sql += " AND "
+                Sql += "文字５"
+                Sql += " ILIKE "
+                Sql += "'%"
+                Sql += TxtText5.Text
+                Sql += "%'"
+            End If
+
+            If TxtText6.Text = "" Then
+            Else
+                Sql += " AND "
+                Sql += "文字６"
+                Sql += " ILIKE "
+                Sql += "'%"
+                Sql += TxtText6.Text
+                Sql += "%'"
+            End If
+
+            If TxtNumber1.Text = "" Then
+            Else
+                Sql += " AND "
+                Sql += "数値１"
+                Sql += " = "
+                Sql += TxtNumber1.Text
+            End If
+
+            If TxtNumber2.Text = "" Then
+            Else
+                Sql += " AND "
+                Sql += "数値２"
+                Sql += " = "
+                Sql += TxtNumber2.Text
+            End If
+
+            If TxtNumber3.Text = "" Then
+            Else
+                Sql += " AND "
+                Sql += "数値３"
+                Sql += " = "
+                Sql += TxtNumber3.Text
+            End If
+
+            If TxtNumber4.Text = "" Then
+            Else
+                Sql += " AND "
+                Sql += "数値４"
+                Sql += " = "
+                Sql += TxtNumber4.Text
+            End If
+
+            If TxtNumber5.Text = "" Then
+            Else
+                Sql += " AND "
+                Sql += "数値５"
+                Sql += " = "
+                Sql += TxtNumber5.Text
+            End If
+
+            If TxtNumber6.Text = "" Then
+            Else
+                Sql += " AND "
+                Sql += "数値６"
+                Sql += " = "
+                Sql += TxtNumber6.Text
+            End If
 
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
