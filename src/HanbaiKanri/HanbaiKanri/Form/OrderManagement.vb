@@ -451,7 +451,7 @@ Public Class OrderManagement
             Sql3 += "INSERT INTO "
             Sql3 += "Public."
             Sql3 += "t30_urighd("
-            Sql3 += "会社コード, 売上番号, 売上番号枝番, 客先番号, 受注番号, 受注番号枝番, 見積番号, 見積番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額, 売上金額, 粗利額, 営業担当者, 入力担当者, 備考, 取消日, 取消区分, ＶＡＴ, ＰＰＨ, 受注日, 売上日, 入金予定日, 登録日, 更新日, 更新者)"
+            Sql3 += "会社コード, 売上番号, 売上番号枝番, 客先番号, 受注番号, 受注番号枝番, 見積番号, 見積番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額, 売上金額, 粗利額, 営業担当者, 入力担当者, 備考, 取消日, 取消区分, ＶＡＴ, ＰＰＨ, 受注日, 売上日, 入金予定日, 登録日, 更新日, 更新者, 仕入金額)"
             Sql3 += " VALUES('"
             Sql3 += ds1.Tables(RS).Rows(0)("会社コード").ToString
             Sql3 += "', '"
@@ -526,6 +526,8 @@ Public Class OrderManagement
             Sql3 += dtToday
             Sql3 += "', '"
             Sql3 += Input
+            Sql3 += "', '"
+            Sql3 += ds1.Tables(RS).Rows(0)("仕入金額").ToString
             Sql3 += " ')"
             Sql3 += "RETURNING 会社コード"
             Sql3 += ", "
@@ -596,6 +598,8 @@ Public Class OrderManagement
             Sql3 += "更新日"
             Sql3 += ", "
             Sql3 += "更新者"
+            Sql3 += ", "
+            Sql3 += "仕入金額"
 
 
             _db.executeDB(Sql3)
@@ -605,7 +609,7 @@ Public Class OrderManagement
                 Sql4 += "INSERT INTO "
                 Sql4 += "Public."
                 Sql4 += "t31_urigdt("
-                Sql4 += "会社コード, 売上番号, 売上番号枝番, 受注番号, 受注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 仕入先名, 仕入値, 受注数量, 売上数量, 受注残数, 単位, 売単価, 売上金額, 粗利額, 粗利率, 間接費, リードタイム, 備考, 更新者, 更新日)"
+                Sql4 += "会社コード, 売上番号, 売上番号枝番, 受注番号, 受注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 仕入先名, 仕入値, 受注数量, 売上数量, 受注残数, 単位, 売単価, 売上金額, 粗利額, 粗利率, 間接費, リードタイム, 備考, 更新者, 更新日, 仕入原価, 関税率, 関税額, 前払法人税率, 前払法人税額, 輸送費率, 輸送費額, 仕入金額, 見積単価, 見積金額)"
                 Sql4 += " VALUES('"
                 Sql4 += ds2.Tables(RS).Rows(index)("会社コード").ToString
                 Sql4 += "', '"
@@ -661,6 +665,26 @@ Public Class OrderManagement
                 Sql4 += Input
                 Sql4 += "', '"
                 Sql4 += dtToday
+                Sql4 += "', '"
+                Sql4 += ds2.Tables(RS).Rows(index)("仕入原価").ToString
+                Sql4 += "', '"
+                Sql4 += ds2.Tables(RS).Rows(index)("関税率").ToString
+                Sql4 += "', '"
+                Sql4 += ds2.Tables(RS).Rows(index)("関税額").ToString
+                Sql4 += "', '"
+                Sql4 += ds2.Tables(RS).Rows(index)("前払法人税率").ToString
+                Sql4 += "', '"
+                Sql4 += ds2.Tables(RS).Rows(index)("前払法人税額").ToString
+                Sql4 += "', '"
+                Sql4 += ds2.Tables(RS).Rows(index)("輸送費率").ToString
+                Sql4 += "', '"
+                Sql4 += ds2.Tables(RS).Rows(index)("輸送費額").ToString
+                Sql4 += "', '"
+                Sql4 += ds2.Tables(RS).Rows(index)("仕入金額").ToString
+                Sql4 += "', '"
+                Sql4 += ds2.Tables(RS).Rows(index)("見積単価").ToString
+                Sql4 += "', '"
+                Sql4 += ds2.Tables(RS).Rows(index)("見積金額").ToString
                 Sql4 += " ')"
                 Sql4 += "RETURNING 会社コード"
                 Sql4 += ", "
@@ -713,6 +737,26 @@ Public Class OrderManagement
                 Sql4 += "更新者"
                 Sql4 += ", "
                 Sql4 += "更新日"
+                Sql4 += ", "
+                Sql4 += "仕入原価"
+                Sql4 += ", "
+                Sql4 += "関税率"
+                Sql4 += ", "
+                Sql4 += "関税額"
+                Sql4 += ", "
+                Sql4 += "前払法人税率"
+                Sql4 += ", "
+                Sql4 += "前払法人税額"
+                Sql4 += ", "
+                Sql4 += "輸送費率"
+                Sql4 += ", "
+                Sql4 += "輸送費額"
+                Sql4 += ", "
+                Sql4 += "仕入金額"
+                Sql4 += ", "
+                Sql4 += "見積単価"
+                Sql4 += ", "
+                Sql4 += "見積金額"
                 If DgvAdd.Rows(index).Cells("売上数量").Value = 0 Then
                 Else
                     _db.executeDB(Sql4)

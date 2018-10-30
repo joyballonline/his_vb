@@ -351,6 +351,8 @@ Public Class Quote
                 DgvItemList.Rows(index).Cells("売上金額").Value = ds3.Tables(RS).Rows(index)("売上金額")
                 DgvItemList.Rows(index).Cells("粗利額").Value = ds3.Tables(RS).Rows(index)("粗利額")
                 DgvItemList.Rows(index).Cells("粗利率").Value = ds3.Tables(RS).Rows(index)("粗利率")
+                DgvItemList.Rows(index).Cells("見積単価").Value = ds3.Tables(RS).Rows(index)("見積単価")
+                DgvItemList.Rows(index).Cells("見積金額").Value = ds3.Tables(RS).Rows(index)("見積金額")
                 DgvItemList.Rows(index).Cells("リードタイム").Value = ds3.Tables(RS).Rows(index)("リードタイム")
                 If ds3.Tables(RS).Rows(index)("リードタイム単位") Is DBNull.Value Then
                 Else
@@ -1260,6 +1262,31 @@ Public Class Quote
                         Sql2 += "0"
                         Sql2 += "', "
                     End If
+
+                    If DgvItemList.Rows(index).Cells("見積単価").Value IsNot Nothing Then
+                        Sql2 += "見積単価"
+                        Sql2 += " = '"
+                        Sql2 += DgvItemList.Rows(index).Cells("見積単価").Value.ToString
+                        Sql2 += "', "
+                    Else
+                        Sql2 += "見積単価"
+                        Sql2 += " = '"
+                        Sql2 += "0"
+                        Sql2 += "', "
+                    End If
+
+                    If DgvItemList.Rows(index).Cells("見積金額").Value IsNot Nothing Then
+                        Sql2 += "見積金額"
+                        Sql2 += " = '"
+                        Sql2 += DgvItemList.Rows(index).Cells("見積金額").Value.ToString
+                        Sql2 += "', "
+                    Else
+                        Sql2 += "見積金額"
+                        Sql2 += " = '"
+                        Sql2 += "0"
+                        Sql2 += "', "
+                    End If
+
                     If DgvItemList.Rows(index).Cells("粗利額").Value IsNot Nothing Then
                         Sql2 += "粗利額"
                         Sql2 += " = '"
@@ -1373,6 +1400,10 @@ Public Class Quote
                     Sql2 += "売単価"
                     Sql2 += ", "
                     Sql2 += "売上金額"
+                    Sql2 += ", "
+                    Sql2 += "見積単価"
+                    Sql2 += ", "
+                    Sql2 += "見積金額"
                     Sql2 += ", "
                     Sql2 += "粗利額"
                     Sql2 += ", "
@@ -1522,7 +1553,7 @@ Public Class Quote
                     Sql2 += "INSERT INTO "
                     Sql2 += "Public."
                     Sql2 += "t02_mitdt("
-                    Sql2 += "会社コード, 見積番号, 見積番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 数量, 単位, 仕入先名称, 仕入単価, 仕入原価, 関税率, 関税額, 前払法人税率, 前払法人税額, 輸送費率, 輸送費額, 仕入金額, 売単価, 売上金額, 粗利額, 粗利率, リードタイム, リードタイム単位, 備考, 更新者, 登録日)"
+                    Sql2 += "会社コード, 見積番号, 見積番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 数量, 単位, 仕入先名称, 仕入単価, 仕入原価, 関税率, 関税額, 前払法人税率, 前払法人税額, 輸送費率, 輸送費額, 仕入金額, 売単価, 売上金額, 見積単価, 見積金額, 粗利額, 粗利率, リードタイム, リードタイム単位, 備考, 更新者, 登録日)"
                     Sql2 += " VALUES('"
                     Sql2 += CompanyCode
                     Sql2 += "', '"
@@ -1664,6 +1695,22 @@ Public Class Quote
                         Sql2 += "0"
                         Sql2 += "', '"
                     End If
+
+                    If DgvItemList.Rows(index).Cells("見積単価").Value IsNot Nothing Then
+                        Sql2 += DgvItemList.Rows(index).Cells("見積単価").Value.ToString
+                        Sql2 += "', '"
+                    Else
+                        Sql2 += "0"
+                        Sql2 += "', '"
+                    End If
+                    If DgvItemList.Rows(index).Cells("見積金額").Value IsNot Nothing Then
+                        Sql2 += DgvItemList.Rows(index).Cells("見積金額").Value.ToString
+                        Sql2 += "', '"
+                    Else
+                        Sql2 += "0"
+                        Sql2 += "', '"
+                    End If
+
                     If DgvItemList.Rows(index).Cells("粗利額").Value IsNot Nothing Then
                         Sql2 += DgvItemList.Rows(index).Cells("粗利額").Value.ToString
                         Sql2 += "', '"
@@ -1743,6 +1790,10 @@ Public Class Quote
                     Sql2 += "売単価"
                     Sql2 += ", "
                     Sql2 += "売上金額"
+                    Sql2 += ", "
+                    Sql2 += "見積単価"
+                    Sql2 += ", "
+                    Sql2 += "見積金額"
                     Sql2 += ", "
                     Sql2 += "粗利額"
                     Sql2 += ", "

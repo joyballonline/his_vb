@@ -163,7 +163,7 @@ Public Class Order
         column2.HeaderText = "リードタイム単位"
         column2.Name = "リードタイム単位"
 
-        DgvItemList.Columns.Insert(15, column2)
+        DgvItemList.Columns.Insert(25, column2)
 
         If OrderStatus = "ADD" Then
             LblMode.Text = "新規登録モード"
@@ -326,7 +326,6 @@ Public Class Order
             Sql3 += OrderSuffix.ToString
             Sql3 += "'"
             Dim ds3 = _db.selectDB(Sql3, RS, reccnt)
-            Dim tmp1 As Integer
             For index As Integer = 0 To ds3.Tables(RS).Rows.Count - 1
                 DgvItemList.Rows.Add()
                 Dim tmp As Integer = ds3.Tables(RS).Rows(index)("仕入区分")
@@ -350,6 +349,16 @@ Public Class Order
                     DgvItemList("リードタイム単位", index).Value = tmp2
                 End If
                 DgvItemList.Rows(index).Cells("備考").Value = ds3.Tables(RS).Rows(index)("備考")
+                DgvItemList.Rows(index).Cells("見積単価").Value = ds3.Tables(RS).Rows(index)("見積単価")
+                DgvItemList.Rows(index).Cells("見積金額").Value = ds3.Tables(RS).Rows(index)("見積金額")
+                DgvItemList.Rows(index).Cells("関税率").Value = ds3.Tables(RS).Rows(index)("関税率")
+                DgvItemList.Rows(index).Cells("関税額").Value = ds3.Tables(RS).Rows(index)("関税額")
+                DgvItemList.Rows(index).Cells("前払法人税率").Value = ds3.Tables(RS).Rows(index)("前払法人税率")
+                DgvItemList.Rows(index).Cells("前払法人税額").Value = ds3.Tables(RS).Rows(index)("前払法人税額")
+                DgvItemList.Rows(index).Cells("輸送費率").Value = ds3.Tables(RS).Rows(index)("輸送費率")
+                DgvItemList.Rows(index).Cells("輸送費額").Value = ds3.Tables(RS).Rows(index)("輸送費額")
+                DgvItemList.Rows(index).Cells("仕入原価").Value = ds3.Tables(RS).Rows(index)("仕入原価")
+                DgvItemList.Rows(index).Cells("仕入金額").Value = ds3.Tables(RS).Rows(index)("仕入金額")
 
             Next
 
@@ -568,27 +577,7 @@ Public Class Order
             Sql3 += OrderSuffix.ToString
             Sql3 += "'"
             Dim ds3 = _db.selectDB(Sql3, RS, reccnt)
-            Dim tmp1 As Integer
             For index As Integer = 0 To ds3.Tables(RS).Rows.Count - 1
-                'DgvItemList.Rows.Add()
-                'Dim tmp As Integer = ds3.Tables(RS).Rows(index)("仕入区分")
-                'DgvItemList(1, index).Value = tmp
-                'DgvItemList.Rows(index).Cells(2).Value = ds3.Tables(RS).Rows(index)("メーカー")
-                'DgvItemList.Rows(index).Cells(3).Value = ds3.Tables(RS).Rows(index)("品名")
-                'DgvItemList.Rows(index).Cells(4).Value = ds3.Tables(RS).Rows(index)("型式")
-                'DgvItemList.Rows(index).Cells(5).Value = ds3.Tables(RS).Rows(index)("受注数量")
-                'DgvItemList.Rows(index).Cells(6).Value = ds3.Tables(RS).Rows(index)("単位")
-                'DgvItemList.Rows(index).Cells(7).Value = ds3.Tables(RS).Rows(index)("仕入先名")
-                'DgvItemList.Rows(index).Cells(8).Value = ds3.Tables(RS).Rows(index)("仕入値")
-                'DgvItemList.Rows(index).Cells(9).Value = ds3.Tables(RS).Rows(index)("間接費")
-                'DgvItemList.Rows(index).Cells(10).Value = ds3.Tables(RS).Rows(index)("売単価")
-                'DgvItemList.Rows(index).Cells(11).Value = ds3.Tables(RS).Rows(index)("売上金額")
-                'DgvItemList.Rows(index).Cells(12).Value = ds3.Tables(RS).Rows(index)("粗利額")
-                'DgvItemList.Rows(index).Cells(13).Value = ds3.Tables(RS).Rows(index)("粗利率")
-                'DgvItemList.Rows(index).Cells(14).Value = ds3.Tables(RS).Rows(index)("リードタイム")
-                'DgvItemList.Rows(index).Cells(15).Value = ds3.Tables(RS).Rows(index)("備考")
-                'DgvItemList.Rows(index).Cells(16).Value = ds3.Tables(RS).Rows(index)("出庫数")
-                'DgvItemList.Rows(index).Cells(17).Value = ds3.Tables(RS).Rows(index)("未出庫数")
                 DgvItemList.Rows.Add()
                 Dim tmp As Integer = ds3.Tables(RS).Rows(index)("仕入区分")
                 DgvItemList(1, index).Value = tmp
@@ -611,6 +600,16 @@ Public Class Order
                     DgvItemList("リードタイム単位", index).Value = tmp2
                 End If
                 DgvItemList.Rows(index).Cells("備考").Value = ds3.Tables(RS).Rows(index)("備考")
+                DgvItemList.Rows(index).Cells("見積単価").Value = ds3.Tables(RS).Rows(index)("見積単価")
+                DgvItemList.Rows(index).Cells("見積金額").Value = ds3.Tables(RS).Rows(index)("見積金額")
+                DgvItemList.Rows(index).Cells("関税率").Value = ds3.Tables(RS).Rows(index)("関税率")
+                DgvItemList.Rows(index).Cells("関税額").Value = ds3.Tables(RS).Rows(index)("関税額")
+                DgvItemList.Rows(index).Cells("前払法人税率").Value = ds3.Tables(RS).Rows(index)("前払法人税率")
+                DgvItemList.Rows(index).Cells("前払法人税額").Value = ds3.Tables(RS).Rows(index)("前払法人税額")
+                DgvItemList.Rows(index).Cells("輸送費率").Value = ds3.Tables(RS).Rows(index)("輸送費率")
+                DgvItemList.Rows(index).Cells("輸送費額").Value = ds3.Tables(RS).Rows(index)("輸送費額")
+                DgvItemList.Rows(index).Cells("仕入原価").Value = ds3.Tables(RS).Rows(index)("仕入原価")
+                DgvItemList.Rows(index).Cells("仕入金額").Value = ds3.Tables(RS).Rows(index)("仕入金額")
             Next
 
             '行番号の振り直し
@@ -834,7 +833,7 @@ Public Class Order
                 Sql2 += "INSERT INTO "
                 Sql2 += "Public."
                 Sql2 += "t11_cymndt("
-                Sql2 += "会社コード, 受注番号, 受注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 単位, 仕入先名, 仕入値, 受注数量, 売上数量, 受注残数, 間接費, 売単価, 売上金額, 粗利額, 粗利率, リードタイム, リードタイム単位, 出庫数, 未出庫数, 備考, 更新者, 登録日)"
+                Sql2 += "会社コード, 受注番号, 受注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 単位, 仕入先名, 仕入値, 受注数量, 売上数量, 受注残数, 間接費, 売単価, 売上金額, 粗利額, 粗利率, リードタイム, リードタイム単位, 出庫数, 未出庫数, 備考, 更新者, 登録日, 見積単価, 見積金額, 関税率, 関税額, 前払法人税率, 前払法人税額, 輸送費率, 輸送費額, 仕入原価, 仕入金額)"
                 Sql2 += " VALUES('"
                 Sql2 += CompanyCode
                 Sql2 += "', '"
@@ -892,6 +891,27 @@ Public Class Order
                 Sql2 += "zenbi01"
                 Sql2 += "', '"
                 Sql2 += dtNow
+
+                Sql2 += "', '"
+                Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("見積単価").Value.ToString
+                Sql2 += "', '"
+                Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("見積金額").Value.ToString
+                Sql2 += "', '"
+                Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("関税率").Value.ToString
+                Sql2 += "', '"
+                Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("関税額").Value.ToString
+                Sql2 += "', '"
+                Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("前払法人税率").Value.ToString
+                Sql2 += "', '"
+                Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("前払法人税額").Value.ToString
+                Sql2 += "', '"
+                Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("輸送費率").Value.ToString
+                Sql2 += "', '"
+                Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("輸送費額").Value.ToString
+                Sql2 += "', '"
+                Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("仕入原価").Value.ToString
+                Sql2 += "', '"
+                Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("仕入金額").Value.ToString
                 Sql2 += " ')"
                 Sql2 += "RETURNING 会社コード"
                 Sql2 += ", "
@@ -942,6 +962,26 @@ Public Class Order
                 Sql2 += "更新者"
                 Sql2 += ", "
                 Sql2 += "登録日"
+                Sql2 += ", "
+                Sql2 += "見積単価"
+                Sql2 += ", "
+                Sql2 += "見積金額"
+                Sql2 += ", "
+                Sql2 += "関税率"
+                Sql2 += ", "
+                Sql2 += "関税額"
+                Sql2 += ", "
+                Sql2 += "前払法人税率"
+                Sql2 += ", "
+                Sql2 += "前払法人税額"
+                Sql2 += ", "
+                Sql2 += "輸送費率"
+                Sql2 += ", "
+                Sql2 += "輸送費額"
+                Sql2 += ", "
+                Sql2 += "仕入原価"
+                Sql2 += ", "
+                Sql2 += "仕入金額"
 
                 _db.executeDB(Sql2)
 
