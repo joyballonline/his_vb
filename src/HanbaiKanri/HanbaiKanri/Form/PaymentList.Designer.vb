@@ -22,6 +22,8 @@ Partial Class PaymentList
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.BtnSerach = New System.Windows.Forms.Button()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.TxtCustomerCode = New System.Windows.Forms.TextBox()
@@ -33,15 +35,15 @@ Partial Class PaymentList
         Me.LblConditions = New System.Windows.Forms.Label()
         Me.TxtCustomerName = New System.Windows.Forms.TextBox()
         Me.DgvSupplier = New System.Windows.Forms.DataGridView()
+        Me.BtnPayment = New System.Windows.Forms.Button()
+        Me.btnBack = New System.Windows.Forms.Button()
+        Me.LblMode = New System.Windows.Forms.Label()
         Me.仕入先名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.仕入先コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.仕入金額計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.買掛金額計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.支払残高 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.会社コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.BtnPayment = New System.Windows.Forms.Button()
-        Me.btnBack = New System.Windows.Forms.Button()
-        Me.LblMode = New System.Windows.Forms.Label()
         CType(Me.DgvSupplier, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -162,49 +164,6 @@ Partial Class PaymentList
         Me.DgvSupplier.Size = New System.Drawing.Size(1326, 342)
         Me.DgvSupplier.TabIndex = 6
         '
-        '仕入先名
-        '
-        Me.仕入先名.HeaderText = "仕入先名"
-        Me.仕入先名.Name = "仕入先名"
-        Me.仕入先名.ReadOnly = True
-        Me.仕入先名.Width = 200
-        '
-        '仕入先コード
-        '
-        Me.仕入先コード.HeaderText = "仕入先コード"
-        Me.仕入先コード.Name = "仕入先コード"
-        Me.仕入先コード.ReadOnly = True
-        Me.仕入先コード.Visible = False
-        '
-        '仕入金額計
-        '
-        Me.仕入金額計.HeaderText = "仕入金額計"
-        Me.仕入金額計.Name = "仕入金額計"
-        Me.仕入金額計.ReadOnly = True
-        Me.仕入金額計.Width = 200
-        '
-        '買掛金額計
-        '
-        Me.買掛金額計.HeaderText = "買掛金額計"
-        Me.買掛金額計.Name = "買掛金額計"
-        Me.買掛金額計.ReadOnly = True
-        Me.買掛金額計.Visible = False
-        Me.買掛金額計.Width = 200
-        '
-        '支払残高
-        '
-        Me.支払残高.HeaderText = "支払残高"
-        Me.支払残高.Name = "支払残高"
-        Me.支払残高.ReadOnly = True
-        Me.支払残高.Width = 200
-        '
-        '会社コード
-        '
-        Me.会社コード.HeaderText = "会社コード"
-        Me.会社コード.Name = "会社コード"
-        Me.会社コード.ReadOnly = True
-        Me.会社コード.Visible = False
-        '
         'BtnPayment
         '
         Me.BtnPayment.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
@@ -236,6 +195,53 @@ Partial Class PaymentList
         Me.LblMode.TabIndex = 306
         Me.LblMode.Text = "支払登録モード"
         Me.LblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        '仕入先名
+        '
+        Me.仕入先名.HeaderText = "仕入先名"
+        Me.仕入先名.Name = "仕入先名"
+        Me.仕入先名.ReadOnly = True
+        Me.仕入先名.Width = 200
+        '
+        '仕入先コード
+        '
+        Me.仕入先コード.HeaderText = "仕入先コード"
+        Me.仕入先コード.Name = "仕入先コード"
+        Me.仕入先コード.ReadOnly = True
+        Me.仕入先コード.Visible = False
+        '
+        '仕入金額計
+        '
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.仕入金額計.DefaultCellStyle = DataGridViewCellStyle1
+        Me.仕入金額計.HeaderText = "仕入金額計"
+        Me.仕入金額計.Name = "仕入金額計"
+        Me.仕入金額計.ReadOnly = True
+        Me.仕入金額計.Width = 200
+        '
+        '買掛金額計
+        '
+        Me.買掛金額計.HeaderText = "買掛金額計"
+        Me.買掛金額計.Name = "買掛金額計"
+        Me.買掛金額計.ReadOnly = True
+        Me.買掛金額計.Visible = False
+        Me.買掛金額計.Width = 200
+        '
+        '支払残高
+        '
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.支払残高.DefaultCellStyle = DataGridViewCellStyle2
+        Me.支払残高.HeaderText = "支払残高"
+        Me.支払残高.Name = "支払残高"
+        Me.支払残高.ReadOnly = True
+        Me.支払残高.Width = 200
+        '
+        '会社コード
+        '
+        Me.会社コード.HeaderText = "会社コード"
+        Me.会社コード.Name = "会社コード"
+        Me.会社コード.ReadOnly = True
+        Me.会社コード.Visible = False
         '
         'PaymentList
         '
@@ -277,11 +283,11 @@ Partial Class PaymentList
     Friend WithEvents DgvSupplier As DataGridView
     Friend WithEvents BtnPayment As Button
     Friend WithEvents btnBack As Button
+    Friend WithEvents LblMode As Label
     Friend WithEvents 仕入先名 As DataGridViewTextBoxColumn
     Friend WithEvents 仕入先コード As DataGridViewTextBoxColumn
     Friend WithEvents 仕入金額計 As DataGridViewTextBoxColumn
     Friend WithEvents 買掛金額計 As DataGridViewTextBoxColumn
     Friend WithEvents 支払残高 As DataGridViewTextBoxColumn
     Friend WithEvents 会社コード As DataGridViewTextBoxColumn
-    Friend WithEvents LblMode As Label
 End Class

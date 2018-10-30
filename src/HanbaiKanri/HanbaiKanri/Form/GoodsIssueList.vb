@@ -110,10 +110,6 @@ Public Class GoodsIssueList
                 DgvCymnhd.Columns.Add("備考", "備考")
                 DgvCymnhd.Columns.Add("登録日", "登録日")
 
-                DgvCymnhd.Columns(12).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                DgvCymnhd.Columns(13).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                DgvCymnhd.Columns(14).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                DgvCymnhd.Columns(15).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
                 For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
                     DgvCymnhd.Rows.Add()

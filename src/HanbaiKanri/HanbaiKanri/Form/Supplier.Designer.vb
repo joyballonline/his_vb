@@ -184,6 +184,7 @@ Partial Class Supplier
         Me.TxtTelSearch.Name = "TxtTelSearch"
         Me.TxtTelSearch.Size = New System.Drawing.Size(234, 22)
         Me.TxtTelSearch.TabIndex = 9
+        Me.TxtTelSearch.TabStop = False
         '
         'TxtTel
         '
