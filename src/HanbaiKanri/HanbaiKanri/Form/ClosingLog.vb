@@ -199,6 +199,7 @@ Public Class ClosingLog
         If dtToday > ds1.Tables(RS).Rows(0)("今回締日") Then
             Accounting()
 
+
             Dim Sql2 As String = ""
             Sql2 += "SELECT "
             Sql2 += "* "
@@ -269,9 +270,33 @@ Public Class ClosingLog
             Sql4 += "締処理日"
             Sql4 += " IS NULL "
 
+            Sql4 = ""
+            Sql4 += "SELECT "
+            Sql4 += "* "
+            Sql4 += "FROM "
+            Sql4 += "public"
+            Sql4 += "."
+            Sql4 += "t46_kikehd"
+            Sql4 += " WHERE "
+            Sql4 += "買掛日"
+            Sql4 += " >  "
+            Sql4 += "'"
+            Sql4 += ds1.Tables(RS).Rows(0)("前回締日")
+            Sql4 += "'"
+            Sql4 += " AND "
+            Sql4 += "買掛日"
+            Sql4 += " <=  "
+            Sql4 += "'"
+            Sql4 += ds1.Tables(RS).Rows(0)("今回締日")
+            Sql4 += "'"
+            Sql4 += " AND "
+            Sql4 += "締処理日"
+            Sql4 += " IS NULL "
+
             Dim dsUrigdt As DataSet = _db.selectDB(Sql2, RS, reccnt)
             Dim ds3 As DataSet = _db.selectDB(Sql3, RS, reccnt)
             Dim ds4 As DataSet = _db.selectDB(Sql4, RS, reccnt)
+            Dim dsKike As DataSet = _db.selectDB(Sql4, RS, reccnt)
 
             Dim Sql5 As String = ""
             Sql5 += "SELECT "
@@ -325,8 +350,6 @@ Public Class ClosingLog
 
             Dim ds5 As DataSet = _db.selectDB(Sql5, RS, reccnt)
             Dim ds6 As DataSet = _db.selectDB(Sql6, RS, reccnt)
-
-
 
             Dim zaiko As String = ""
             zaiko += "SELECT "
@@ -1442,7 +1465,95 @@ Public Class ClosingLog
             Sql15 += "在庫単価評価法"
 
             _db.executeDB(Sql15)
+
+            '請求締処理日更新
+            Dim Sql16 As String = ""
+            For i As Integer = 0 To ds4.Tables(RS).Rows.Count - 1
+                Sql16 = ""
+                Sql16 += "UPDATE "
+                Sql16 += "Public."
+                Sql16 += "t23_skyuhd "
+                Sql16 += "SET "
+                Sql16 += "締処理日 "
+                Sql16 += " = '"
+                Sql16 += dtToday
+                Sql16 += "', "
+                Sql16 += "更新者"
+                Sql16 += " = '"
+                Sql16 += frmC01F10_Login.loginValue.TantoNM
+                Sql16 += "', "
+                Sql16 += "更新日"
+                Sql16 += " = '"
+                Sql16 += dtToday
+                Sql16 += "' "
+
+                Sql16 += " WHERE "
+                Sql16 += "会社コード"
+                Sql16 += " ILIKE  "
+                Sql16 += "'"
+                Sql16 += frmC01F10_Login.loginValue.BumonNM
+                Sql16 += "'"
+                Sql16 += " AND "
+                Sql16 += "請求番号"
+                Sql16 += " ILIKE  "
+                Sql16 += "'"
+                Sql16 += ds5.Tables(RS).Rows(i)("請求番号")
+                Sql16 += "'"
+
+                Sql16 += "RETURNING 締処理日"
+                Sql16 += ", "
+                Sql16 += "更新者"
+                Sql16 += ", "
+                Sql16 += "更新日"
+                _db.executeDB(Sql16)
+            Next
+
+
+            '買掛締処理日更新
+            Dim Sql17 As String = ""
+            For i As Integer = 0 To ds4.Tables(RS).Rows.Count - 1
+                Sql17 = ""
+                Sql17 += "UPDATE "
+                Sql17 += "Public."
+                Sql17 += "t46_kikehd "
+                Sql17 += "SET "
+                Sql17 += "締処理日 "
+                Sql17 += " = '"
+                Sql17 += dtToday
+                Sql17 += "', "
+                Sql17 += "更新者"
+                Sql17 += " = '"
+                Sql17 += frmC01F10_Login.loginValue.TantoNM
+                Sql17 += "', "
+                Sql17 += "更新日"
+                Sql17 += " = '"
+                Sql17 += dtToday
+                Sql17 += "' "
+
+                Sql17 += " WHERE "
+                Sql17 += "会社コード"
+                Sql17 += " ILIKE  "
+                Sql17 += "'"
+                Sql17 += frmC01F10_Login.loginValue.BumonNM
+                Sql17 += "'"
+                Sql17 += " AND "
+                Sql17 += "買掛番号"
+                Sql17 += " ILIKE  "
+                Sql17 += "'"
+                Sql17 += ds5.Tables(RS).Rows(i)("買掛番号")
+                Sql17 += "'"
+
+                Sql17 += "RETURNING 締処理日"
+                Sql17 += ", "
+                Sql17 += "更新者"
+                Sql17 += ", "
+                Sql17 += "更新日"
+                _db.executeDB(Sql17)
+            Next
+
         End If
+
+
         DgvClosingLog.Rows.Clear()
         ClosingLogLoad()
     End Sub
@@ -2548,9 +2659,17 @@ Public Class ClosingLog
             Sql += dsSkyuhd.Tables(RS).Rows(i)("得意先名").ToString
             Sql += "', '"
             Sql += dsSkyuhd.Tables(RS).Rows(i)("請求金額計").ToString
-            Sql += "', '"
-            Sql += dsSkyuhd.Tables(RS).Rows(i)("入金額計").ToString
-            Sql += "', '"
+
+            If dsSkyuhd.Tables(RS).Rows(i)("入金額計") IsNot DBNull.Value Then
+                Sql += "', '"
+                Sql += dsSkyuhd.Tables(RS).Rows(i)("入金額計").ToString
+                Sql += "', '"
+            Else
+                Sql += "', "
+                Sql += "0"
+                Sql += ", '"
+            End If
+
             Sql += dsSkyuhd.Tables(RS).Rows(i)("売掛残高").ToString
             Sql += "', '"
             Sql += dsSkyuhd.Tables(RS).Rows(i)("備考1").ToString
@@ -2678,7 +2797,7 @@ Public Class ClosingLog
             Sql += "INSERT INTO "
             Sql += "Public."
             Sql += "t57_krkikehd("
-            Sql += "会社コード, 買掛番号, 買掛区分, 買掛日, 発注番号, 発注番号枝番, 客先番号, 仕入先コード, 仕入先名, 買掛金額計, 支払金額計, 買掛残高, 備考１, 備考２, 支払完了日, 取消日, 取消区分, 登録日, 更新者)"
+            Sql += "会社コード, 買掛番号, 買掛区分, 買掛日, 発注番号, 発注番号枝番, 客先番号, 仕入先コード, 仕入先名, 買掛金額計, 支払金額計, 買掛残高, 備考１, 備考２, 支払完了日, 取消日, 取消区分, 登録日, 更新者, 締処理日)"
             Sql += " VALUES('"
             Sql += frmC01F10_Login.loginValue.BumonNM
             Sql += "', '"
@@ -2699,9 +2818,17 @@ Public Class ClosingLog
             Sql += dsKikehd.Tables(RS).Rows(i)("仕入先名").ToString
             Sql += "', '"
             Sql += dsKikehd.Tables(RS).Rows(i)("買掛金額計").ToString
-            Sql += "', '"
-            Sql += dsKikehd.Tables(RS).Rows(i)("支払金額計").ToString
-            Sql += "', '"
+
+            If dsKikehd.Tables(RS).Rows(i)("支払金額計") IsNot DBNull.Value Then
+                Sql += "', '"
+                Sql += dsKikehd.Tables(RS).Rows(i)("支払金額計").ToString
+                Sql += "', '"
+            Else
+                Sql += "', '"
+                Sql += "0"
+                Sql += "', '"
+            End If
+
             Sql += dsKikehd.Tables(RS).Rows(i)("買掛残高").ToString
             Sql += "', '"
             Sql += dsKikehd.Tables(RS).Rows(i)("備考1").ToString
@@ -2740,6 +2867,8 @@ Public Class ClosingLog
             Sql += dsKikehd.Tables(RS).Rows(i)("登録日").ToString
             Sql += "', '"
             Sql += frmC01F10_Login.loginValue.TantoNM
+            Sql += "', '"
+            Sql += dtToday
             Sql += " ')"
             Sql += "RETURNING 会社コード"
             Sql += ", "
@@ -2778,9 +2907,266 @@ Public Class ClosingLog
             Sql += "登録日"
             Sql += ", "
             Sql += "更新者"
+            Sql += ", "
+            Sql += "締処理日"
 
             _db.executeDB(Sql)
         Next
 #End Region
+
+#Region "CSV"
+        Sql = ""
+        Sql += "SELECT "
+        Sql += "* "
+        Sql += "FROM "
+        Sql += "public"
+        Sql += "."
+        Sql += "t52_krurighd"
+        Sql += " WHERE "
+        Sql += "会社コード"
+        Sql += " ILIKE  "
+        Sql += "'"
+        Sql += frmC01F10_Login.loginValue.BumonNM
+        Sql += "'"
+        Sql += " AND "
+        Sql += "締処理日"
+        Sql += " = "
+        Sql += "'"
+        Sql += dtToday
+        Sql += "'"
+        Dim csvUrighd As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+        ConvertDataTableToCsv(csvUrighd, "t53_krurigdt", "売上番号", "Urig")
+
+        Sql = ""
+        Sql += "SELECT "
+        Sql += "* "
+        Sql += "FROM "
+        Sql += "public"
+        Sql += "."
+        Sql += "t54_krsirehd"
+        Sql += " WHERE "
+        Sql += "会社コード"
+        Sql += " ILIKE  "
+        Sql += "'"
+        Sql += frmC01F10_Login.loginValue.BumonNM
+        Sql += "'"
+        Sql += " AND "
+        Sql += "締処理日"
+        Sql += " = "
+        Sql += "'"
+        Sql += dtToday
+        Sql += "'"
+        Dim csvSirehd As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+        ConvertDataTableToCsv(csvSirehd, "t55_krsiredt", "仕入番号", "Sire")
+
+        Sql = ""
+        Sql += "SELECT "
+        Sql += "* "
+        Sql += "FROM "
+        Sql += "public"
+        Sql += "."
+        Sql += "t56_krskyuhd"
+        Sql += " WHERE "
+        Sql += "会社コード"
+        Sql += " ILIKE  "
+        Sql += "'"
+        Sql += frmC01F10_Login.loginValue.BumonNM
+        Sql += "'"
+        Sql += " AND "
+        Sql += "締処理日"
+        Sql += " = "
+        Sql += "'"
+        Sql += dtToday
+        Sql += "'"
+        Dim csvSkyuhd As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+        ConvertDataTableToCsvSingle(csvSkyuhd, "Skyu")
+
+        Sql = ""
+        Sql += "SELECT "
+        Sql += "* "
+        Sql += "FROM "
+        Sql += "public"
+        Sql += "."
+        Sql += "t57_krkikehd"
+        Sql += " WHERE "
+        Sql += "会社コード"
+        Sql += " ILIKE  "
+        Sql += "'"
+        Sql += frmC01F10_Login.loginValue.BumonNM
+        Sql += "'"
+        Sql += " AND "
+        Sql += "締処理日"
+        Sql += " = "
+        Sql += "'"
+        Sql += dtToday
+        Sql += "'"
+        Dim csvKikehd As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+        ConvertDataTableToCsvSingle(csvKikehd, "Kike")
+#End Region
+        _msgHd.dspMSG("CreateExcel")
     End Sub
+
+    Public Sub ConvertDataTableToCsv(ds1 As DataSet, tableName As String, ColName As String, Name As String)
+
+        Dim enc As System.Text.Encoding = System.Text.Encoding.GetEncoding("Shift_JIS")
+        '出力先パス
+        Dim sOutPath As String = ""
+        sOutPath = StartUp._iniVal.OutXlsPath
+
+        '出力ファイル名
+        Dim sOutFile As String = ""
+        sOutFile = sOutPath & "\" & Name & ".csv"
+
+        '書き込むファイルを開く
+        Dim sr As New System.IO.StreamWriter(sOutFile, False, enc)
+        Dim Sql As String = ""
+        Dim reccnt As Integer = 0
+
+        For i As Integer = 0 To ds1.Tables(RS).Rows.Count - 1
+            Sql += "SELECT "
+            Sql += "* "
+            Sql += "FROM "
+            Sql += "public"
+            Sql += "."
+            Sql += tableName
+            Sql += " WHERE "
+            Sql += "会社コード"
+            Sql += " ILIKE  "
+            Sql += "'"
+            Sql += frmC01F10_Login.loginValue.BumonNM
+            Sql += "'"
+            Sql += " AND "
+            Sql += ColName
+            Sql += " = "
+            Sql += "'"
+            Sql += ds1.Tables(RS).Rows(i)(ColName)
+            Sql += "'"
+
+            Dim ds3 As DataSet = _db.selectDB(Sql, RS, reccnt)
+            If i = 0 Then
+                '基本列名
+                For y As Integer = 0 To ds1.Tables(RS).Columns.Count - 1
+                    Dim field As String = ds1.Tables(RS).Columns(y).ColumnName
+                    field = EncloseDoubleQuotesIfNeed(field)
+                    sr.Write(field)
+                    If y < ds1.Tables(RS).Columns.Count - 1 Then
+                        sr.Write(","c)
+                    End If
+                Next
+
+                '明細列名
+                For z As Integer = 0 To ds3.Tables(RS).Columns.Count - 1
+                    Dim field As String = ds3.Tables(RS).Columns(z).ColumnName
+                    field = EncloseDoubleQuotesIfNeed(field)
+                    sr.Write(field)
+                    sr.Write(","c)
+                    If z < ds3.Tables(RS).Columns.Count - 1 Then
+                        sr.Write(","c)
+                    End If
+                Next
+                sr.Write(vbCrLf)
+            End If
+
+            For x As Integer = 0 To ds3.Tables(RS).Rows.Count - 1
+
+                '基本
+                For y As Integer = 0 To ds1.Tables(RS).Columns.Count - 1
+                    Dim field As String = ds1.Tables(RS).Rows(i)(y).ToString()
+                    field = EncloseDoubleQuotesIfNeed(field)
+                    sr.Write(field)
+                    If y < ds1.Tables(RS).Columns.Count - 1 Then
+                        sr.Write(","c)
+                    End If
+                Next
+
+                '明細
+                For z As Integer = 0 To ds3.Tables(RS).Columns.Count - 1
+                    Dim field As String = ds3.Tables(RS).Rows(x)(z).ToString()
+                    field = EncloseDoubleQuotesIfNeed(field)
+                    sr.Write(field)
+                    sr.Write(","c)
+                    If z < ds3.Tables(RS).Columns.Count - 1 Then
+                        sr.Write(","c)
+                    End If
+                Next
+                sr.Write(vbCrLf)
+            Next
+        Next
+        sr.Close()
+    End Sub
+
+
+    Public Sub ConvertDataTableToCsvSingle(ds1 As DataSet, Name As String)
+
+        Dim enc As System.Text.Encoding = System.Text.Encoding.GetEncoding("Shift_JIS")
+        '出力先パス
+        Dim sOutPath As String = ""
+        sOutPath = StartUp._iniVal.OutXlsPath
+
+        '出力ファイル名
+        Dim sOutFile As String = ""
+        sOutFile = sOutPath & "\" & Name & ".csv"
+
+        '書き込むファイルを開く
+        Dim sr As New System.IO.StreamWriter(sOutFile, False, enc)
+        Dim Sql As String = ""
+        Dim reccnt As Integer = 0
+
+        For i As Integer = 0 To ds1.Tables(RS).Rows.Count - 1
+            If i = 0 Then
+                '基本列名
+                For y As Integer = 0 To ds1.Tables(RS).Columns.Count - 1
+                    Dim field As String = ds1.Tables(RS).Columns(y).ColumnName
+                    field = EncloseDoubleQuotesIfNeed(field)
+                    sr.Write(field)
+                    If y < ds1.Tables(RS).Columns.Count - 1 Then
+                        sr.Write(","c)
+                    End If
+                Next
+                sr.Write(vbCrLf)
+            End If
+
+            '基本
+            For y As Integer = 0 To ds1.Tables(RS).Columns.Count - 1
+                Dim field As String = ds1.Tables(RS).Rows(i)(y).ToString()
+                field = EncloseDoubleQuotesIfNeed(field)
+                sr.Write(field)
+                If y < ds1.Tables(RS).Columns.Count - 1 Then
+                    sr.Write(","c)
+                End If
+            Next
+            sr.Write(vbCrLf)
+        Next
+        sr.Close()
+    End Sub
+
+    Private Function EncloseDoubleQuotesIfNeed(field As String) As String
+        If NeedEncloseDoubleQuotes(field) Then
+            Return EncloseDoubleQuotes(field)
+        End If
+        Return field
+    End Function
+
+    Private Function EncloseDoubleQuotes(field As String) As String
+        If field.IndexOf(""""c) > -1 Then
+            '"を""とする
+            field = field.Replace("""", """""")
+        End If
+        Return """" & field & """"
+    End Function
+
+    Private Function NeedEncloseDoubleQuotes(field As String) As Boolean
+        Return field.IndexOf(""""c) > -1 OrElse
+        field.IndexOf(","c) > -1 OrElse
+        field.IndexOf(ControlChars.Cr) > -1 OrElse
+        field.IndexOf(ControlChars.Lf) > -1 OrElse
+        field.StartsWith(" ") OrElse
+        field.StartsWith(vbTab) OrElse
+        field.EndsWith(" ") OrElse
+        field.EndsWith(vbTab)
+    End Function
 End Class
