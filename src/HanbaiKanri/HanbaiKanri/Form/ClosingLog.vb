@@ -197,7 +197,7 @@ Public Class ClosingLog
         Dim ds1 As DataSet = _db.selectDB(Sql1, RS, reccnt)
 
         If dtToday > ds1.Tables(RS).Rows(0)("今回締日") Then
-            Accounting()
+            'Accounting()
 
 
             Dim Sql2 As String = ""
@@ -222,6 +222,8 @@ Public Class ClosingLog
             Sql2 += " AND "
             Sql2 += "締処理日"
             Sql2 += " IS NULL "
+            Dim dsUrigdt As DataSet = _db.selectDB(Sql2, RS, reccnt)
+
 
             Dim Sql3 As String = ""
             Sql3 += "SELECT "
@@ -245,6 +247,7 @@ Public Class ClosingLog
             Sql3 += " AND "
             Sql3 += "締処理日"
             Sql3 += " IS NULL "
+            Dim ds3 As DataSet = _db.selectDB(Sql3, RS, reccnt)
 
 
             Dim Sql4 As String = ""
@@ -269,6 +272,8 @@ Public Class ClosingLog
             Sql4 += " AND "
             Sql4 += "締処理日"
             Sql4 += " IS NULL "
+            Dim ds4 As DataSet = _db.selectDB(Sql4, RS, reccnt)
+
 
             Sql4 = ""
             Sql4 += "SELECT "
@@ -292,11 +297,10 @@ Public Class ClosingLog
             Sql4 += " AND "
             Sql4 += "締処理日"
             Sql4 += " IS NULL "
-
-            Dim dsUrigdt As DataSet = _db.selectDB(Sql2, RS, reccnt)
-            Dim ds3 As DataSet = _db.selectDB(Sql3, RS, reccnt)
-            Dim ds4 As DataSet = _db.selectDB(Sql4, RS, reccnt)
             Dim dsKike As DataSet = _db.selectDB(Sql4, RS, reccnt)
+
+
+
 
             Dim Sql5 As String = ""
             Sql5 += "SELECT "
@@ -1481,11 +1485,8 @@ Public Class ClosingLog
                 Sql16 += "更新者"
                 Sql16 += " = '"
                 Sql16 += frmC01F10_Login.loginValue.TantoNM
-                Sql16 += "', "
-                Sql16 += "更新日"
-                Sql16 += " = '"
-                Sql16 += dtToday
                 Sql16 += "' "
+
 
                 Sql16 += " WHERE "
                 Sql16 += "会社コード"
@@ -1497,21 +1498,20 @@ Public Class ClosingLog
                 Sql16 += "請求番号"
                 Sql16 += " ILIKE  "
                 Sql16 += "'"
-                Sql16 += ds5.Tables(RS).Rows(i)("請求番号")
+                Sql16 += ds4.Tables(RS).Rows(i)("請求番号")
                 Sql16 += "'"
 
                 Sql16 += "RETURNING 締処理日"
                 Sql16 += ", "
                 Sql16 += "更新者"
-                Sql16 += ", "
-                Sql16 += "更新日"
+
                 _db.executeDB(Sql16)
             Next
 
 
             '買掛締処理日更新
             Dim Sql17 As String = ""
-            For i As Integer = 0 To ds4.Tables(RS).Rows.Count - 1
+            For i As Integer = 0 To dsKike.Tables(RS).Rows.Count - 1
                 Sql17 = ""
                 Sql17 += "UPDATE "
                 Sql17 += "Public."
@@ -1524,10 +1524,6 @@ Public Class ClosingLog
                 Sql17 += "更新者"
                 Sql17 += " = '"
                 Sql17 += frmC01F10_Login.loginValue.TantoNM
-                Sql17 += "', "
-                Sql17 += "更新日"
-                Sql17 += " = '"
-                Sql17 += dtToday
                 Sql17 += "' "
 
                 Sql17 += " WHERE "
@@ -1540,14 +1536,13 @@ Public Class ClosingLog
                 Sql17 += "買掛番号"
                 Sql17 += " ILIKE  "
                 Sql17 += "'"
-                Sql17 += ds5.Tables(RS).Rows(i)("買掛番号")
+                Sql17 += dsKike.Tables(RS).Rows(i)("買掛番号")
                 Sql17 += "'"
 
                 Sql17 += "RETURNING 締処理日"
                 Sql17 += ", "
                 Sql17 += "更新者"
-                Sql17 += ", "
-                Sql17 += "更新日"
+
                 _db.executeDB(Sql17)
             Next
 
