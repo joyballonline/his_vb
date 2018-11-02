@@ -196,8 +196,8 @@ Public Class ClosingLog
 
         Dim ds1 As DataSet = _db.selectDB(Sql1, RS, reccnt)
 
-        If dtToday > ds1.Tables(RS).Rows(0)("今回締日") Then
-            'Accounting()
+
+        Accounting()
 
 
             Dim Sql2 As String = ""
@@ -298,9 +298,6 @@ Public Class ClosingLog
             Sql4 += "締処理日"
             Sql4 += " IS NULL "
             Dim dsKike As DataSet = _db.selectDB(Sql4, RS, reccnt)
-
-
-
 
             Dim Sql5 As String = ""
             Sql5 += "SELECT "
@@ -1546,7 +1543,7 @@ Public Class ClosingLog
                 _db.executeDB(Sql17)
             Next
 
-        End If
+
 
 
         DgvClosingLog.Rows.Clear()
@@ -1801,17 +1798,12 @@ Public Class ClosingLog
             Sql += "."
             Sql += "t31_urigdt"
             Sql += " WHERE "
-            Sql += "受注番号"
+            Sql += "売上番号"
             Sql += " ILIKE "
             Sql += "'"
-            Sql += dsUrighd.Tables(RS).Rows(i)("受注番号")
+            Sql += dsUrighd.Tables(RS).Rows(i)("売上番号")
             Sql += "'"
-            Sql += " AND "
-            Sql += "受注番号枝番"
-            Sql += " ILIKE "
-            Sql += "'"
-            Sql += dsUrighd.Tables(RS).Rows(i)("受注番号枝番")
-            Sql += "'"
+
             Dim dsUrigdt As DataSet = _db.selectDB(Sql, RS, reccnt)
 
             If dsCompany.Tables(RS).Rows(0)("在庫単価評価法") = 1 Then
@@ -2456,17 +2448,12 @@ Public Class ClosingLog
             Sql += "."
             Sql += "t41_siredt"
             Sql += " WHERE "
-            Sql += "発注番号"
+            Sql += "仕入番号"
             Sql += " ILIKE "
             Sql += "'"
-            Sql += dsSirehd.Tables(RS).Rows(i)("発注番号")
+            Sql += dsSirehd.Tables(RS).Rows(i)("仕入番号")
             Sql += "'"
-            Sql += " AND "
-            Sql += "発注番号枝番"
-            Sql += " ILIKE "
-            Sql += "'"
-            Sql += dsSirehd.Tables(RS).Rows(i)("発注番号枝番")
-            Sql += "'"
+
             Dim dssiredt As DataSet = _db.selectDB(Sql, RS, reccnt)
             For x As Integer = 0 To dssiredt.Tables(RS).Rows.Count - 1
                 Sql = ""
@@ -3022,6 +3009,7 @@ Public Class ClosingLog
         Dim reccnt As Integer = 0
 
         For i As Integer = 0 To ds1.Tables(RS).Rows.Count - 1
+            Sql = ""
             Sql += "SELECT "
             Sql += "* "
             Sql += "FROM "
