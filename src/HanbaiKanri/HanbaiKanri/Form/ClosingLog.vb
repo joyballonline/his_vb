@@ -70,6 +70,7 @@ Public Class ClosingLog
         _init = True
 
     End Sub
+
     Private Sub ClosingLogLoad()
         Dim Sql As String = ""
         Try
@@ -100,6 +101,7 @@ Public Class ClosingLog
             Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", UtilClass.getErrDetail(ex)))
         End Try
     End Sub
+
     Private Sub ClosingLog_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ClosingLogLoad()
     End Sub
@@ -200,177 +202,225 @@ Public Class ClosingLog
         Accounting()
 
 
-            Dim Sql2 As String = ""
-            Sql2 += "SELECT "
-            Sql2 += "* "
-            Sql2 += "FROM "
-            Sql2 += "public"
-            Sql2 += "."
-            Sql2 += "t30_urighd"
-            Sql2 += " WHERE "
-            Sql2 += "売上日"
-            Sql2 += " >  "
-            Sql2 += "'"
-            Sql2 += ds1.Tables(RS).Rows(0)("前回締日")
-            Sql2 += "'"
-            Sql2 += " AND "
-            Sql2 += "売上日"
-            Sql2 += " <=  "
-            Sql2 += "'"
-            Sql2 += ds1.Tables(RS).Rows(0)("今回締日")
-            Sql2 += "'"
-            Sql2 += " AND "
-            Sql2 += "締処理日"
-            Sql2 += " IS NULL "
-            Dim dsUrigdt As DataSet = _db.selectDB(Sql2, RS, reccnt)
+        Dim Sql2 As String = ""
+        Sql2 += "SELECT "
+        Sql2 += "* "
+        Sql2 += "FROM "
+        Sql2 += "public"
+        Sql2 += "."
+        Sql2 += "t30_urighd"
+        Sql2 += " WHERE "
+        Sql2 += "売上日"
+        Sql2 += " >  "
+        Sql2 += "'"
+        Sql2 += ds1.Tables(RS).Rows(0)("前回締日")
+        Sql2 += "'"
+        Sql2 += " AND "
+        Sql2 += "売上日"
+        Sql2 += " <=  "
+        Sql2 += "'"
+        Sql2 += ds1.Tables(RS).Rows(0)("今回締日")
+        Sql2 += "'"
+        Sql2 += " AND "
+        Sql2 += "締処理日"
+        Sql2 += " IS NULL "
+        Dim dsUrigdt As DataSet = _db.selectDB(Sql2, RS, reccnt)
 
 
-            Dim Sql3 As String = ""
-            Sql3 += "SELECT "
-            Sql3 += "* "
-            Sql3 += "FROM "
-            Sql3 += "public"
-            Sql3 += "."
-            Sql3 += "t40_sirehd"
-            Sql3 += " WHERE "
-            Sql3 += "仕入日"
-            Sql3 += " >  "
-            Sql3 += "'"
-            Sql3 += ds1.Tables(RS).Rows(0)("前回締日")
-            Sql3 += "'"
-            Sql3 += " AND "
-            Sql3 += "仕入日"
-            Sql3 += " <=  "
-            Sql3 += "'"
-            Sql3 += ds1.Tables(RS).Rows(0)("今回締日")
-            Sql3 += "'"
-            Sql3 += " AND "
-            Sql3 += "締処理日"
-            Sql3 += " IS NULL "
-            Dim ds3 As DataSet = _db.selectDB(Sql3, RS, reccnt)
+        Dim Sql3 As String = ""
+        Sql3 += "SELECT "
+        Sql3 += "* "
+        Sql3 += "FROM "
+        Sql3 += "public"
+        Sql3 += "."
+        Sql3 += "t40_sirehd"
+        Sql3 += " WHERE "
+        Sql3 += "仕入日"
+        Sql3 += " >  "
+        Sql3 += "'"
+        Sql3 += ds1.Tables(RS).Rows(0)("前回締日")
+        Sql3 += "'"
+        Sql3 += " AND "
+        Sql3 += "仕入日"
+        Sql3 += " <=  "
+        Sql3 += "'"
+        Sql3 += ds1.Tables(RS).Rows(0)("今回締日")
+        Sql3 += "'"
+        Sql3 += " AND "
+        Sql3 += "締処理日"
+        Sql3 += " IS NULL "
+        Dim ds3 As DataSet = _db.selectDB(Sql3, RS, reccnt)
 
 
-            Dim Sql4 As String = ""
-            Sql4 += "SELECT "
-            Sql4 += "* "
-            Sql4 += "FROM "
-            Sql4 += "public"
-            Sql4 += "."
-            Sql4 += "t23_skyuhd"
-            Sql4 += " WHERE "
-            Sql4 += "請求日"
-            Sql4 += " >  "
-            Sql4 += "'"
-            Sql4 += ds1.Tables(RS).Rows(0)("前回締日")
-            Sql4 += "'"
-            Sql4 += " AND "
-            Sql4 += "請求日"
-            Sql4 += " <=  "
-            Sql4 += "'"
-            Sql4 += ds1.Tables(RS).Rows(0)("今回締日")
-            Sql4 += "'"
-            Sql4 += " AND "
-            Sql4 += "締処理日"
-            Sql4 += " IS NULL "
-            Dim ds4 As DataSet = _db.selectDB(Sql4, RS, reccnt)
+        Dim Sql4 As String = ""
+        Sql4 += "SELECT "
+        Sql4 += "* "
+        Sql4 += "FROM "
+        Sql4 += "public"
+        Sql4 += "."
+        Sql4 += "t23_skyuhd"
+        Sql4 += " WHERE "
+        Sql4 += "請求日"
+        Sql4 += " >  "
+        Sql4 += "'"
+        Sql4 += ds1.Tables(RS).Rows(0)("前回締日")
+        Sql4 += "'"
+        Sql4 += " AND "
+        Sql4 += "請求日"
+        Sql4 += " <=  "
+        Sql4 += "'"
+        Sql4 += ds1.Tables(RS).Rows(0)("今回締日")
+        Sql4 += "'"
+        Sql4 += " AND "
+        Sql4 += "締処理日"
+        Sql4 += " IS NULL "
+        Dim ds4 As DataSet = _db.selectDB(Sql4, RS, reccnt)
 
 
-            Sql4 = ""
-            Sql4 += "SELECT "
-            Sql4 += "* "
-            Sql4 += "FROM "
-            Sql4 += "public"
-            Sql4 += "."
-            Sql4 += "t46_kikehd"
-            Sql4 += " WHERE "
-            Sql4 += "買掛日"
-            Sql4 += " >  "
-            Sql4 += "'"
-            Sql4 += ds1.Tables(RS).Rows(0)("前回締日")
-            Sql4 += "'"
-            Sql4 += " AND "
-            Sql4 += "買掛日"
-            Sql4 += " <=  "
-            Sql4 += "'"
-            Sql4 += ds1.Tables(RS).Rows(0)("今回締日")
-            Sql4 += "'"
-            Sql4 += " AND "
-            Sql4 += "締処理日"
-            Sql4 += " IS NULL "
-            Dim dsKike As DataSet = _db.selectDB(Sql4, RS, reccnt)
+        Sql4 = ""
+        Sql4 += "SELECT "
+        Sql4 += "* "
+        Sql4 += "FROM "
+        Sql4 += "public"
+        Sql4 += "."
+        Sql4 += "t46_kikehd"
+        Sql4 += " WHERE "
+        Sql4 += "買掛日"
+        Sql4 += " >  "
+        Sql4 += "'"
+        Sql4 += ds1.Tables(RS).Rows(0)("前回締日")
+        Sql4 += "'"
+        Sql4 += " AND "
+        Sql4 += "買掛日"
+        Sql4 += " <=  "
+        Sql4 += "'"
+        Sql4 += ds1.Tables(RS).Rows(0)("今回締日")
+        Sql4 += "'"
+        Sql4 += " AND "
+        Sql4 += "締処理日"
+        Sql4 += " IS NULL "
+        Dim dsKike As DataSet = _db.selectDB(Sql4, RS, reccnt)
 
-            Dim Sql5 As String = ""
-            Sql5 += "SELECT "
-            Sql5 += "* "
-            Sql5 += "FROM "
-            Sql5 += "public"
-            Sql5 += "."
-            Sql5 += "t31_urigdt"
-            For i As Integer = 0 To dsUrigdt.Tables(RS).Rows.Count - 1
-                If i = 0 Then
-                    Sql5 += " WHERE "
-                    Sql5 += "売上番号"
-                    Sql5 += " ILIKE  "
-                    Sql5 += "'"
-                    Sql5 += dsUrigdt.Tables(RS).Rows(i)("売上番号")
-                    Sql5 += "'"
-                Else
-                    Sql5 += " OR "
-                    Sql5 += "売上番号"
-                    Sql5 += " ILIKE  "
-                    Sql5 += "'"
-                    Sql5 += dsUrigdt.Tables(RS).Rows(i)("売上番号")
-                    Sql5 += "'"
-                End If
-            Next
+        Dim Sql5 As String = ""
+        Sql5 += "SELECT "
+        Sql5 += "* "
+        Sql5 += "FROM "
+        Sql5 += "public"
+        Sql5 += "."
+        Sql5 += "t31_urigdt"
+        For i As Integer = 0 To dsUrigdt.Tables(RS).Rows.Count - 1
+            If i = 0 Then
+                Sql5 += " WHERE "
+                Sql5 += "売上番号"
+                Sql5 += " ILIKE  "
+                Sql5 += "'"
+                Sql5 += dsUrigdt.Tables(RS).Rows(i)("売上番号")
+                Sql5 += "'"
+            Else
+                Sql5 += " OR "
+                Sql5 += "売上番号"
+                Sql5 += " ILIKE  "
+                Sql5 += "'"
+                Sql5 += dsUrigdt.Tables(RS).Rows(i)("売上番号")
+                Sql5 += "'"
+            End If
+        Next
 
-            Dim Sql6 As String = ""
-            Sql6 += "SELECT "
-            Sql6 += "* "
-            Sql6 += "FROM "
-            Sql6 += "public"
-            Sql6 += "."
-            Sql6 += "t41_siredt"
-            For i As Integer = 0 To ds3.Tables(RS).Rows.Count - 1
-                If i = 0 Then
-                    Sql6 += " WHERE "
-                    Sql6 += "仕入番号"
-                    Sql6 += " ILIKE  "
-                    Sql6 += "'"
-                    Sql6 += ds3.Tables(RS).Rows(i)("仕入番号")
-                    Sql6 += "'"
-                Else
-                    Sql6 += " OR "
-                    Sql6 += "仕入番号"
-                    Sql6 += " ILIKE  "
-                    Sql6 += "'"
-                    Sql6 += ds3.Tables(RS).Rows(i)("仕入番号")
-                    Sql6 += "'"
-                End If
-            Next
+        Dim Sql6 As String = ""
+        Sql6 += "SELECT "
+        Sql6 += "* "
+        Sql6 += "FROM "
+        Sql6 += "public"
+        Sql6 += "."
+        Sql6 += "t41_siredt"
+        For i As Integer = 0 To ds3.Tables(RS).Rows.Count - 1
+            If i = 0 Then
+                Sql6 += " WHERE "
+                Sql6 += "仕入番号"
+                Sql6 += " ILIKE  "
+                Sql6 += "'"
+                Sql6 += ds3.Tables(RS).Rows(i)("仕入番号")
+                Sql6 += "'"
+            Else
+                Sql6 += " OR "
+                Sql6 += "仕入番号"
+                Sql6 += " ILIKE  "
+                Sql6 += "'"
+                Sql6 += ds3.Tables(RS).Rows(i)("仕入番号")
+                Sql6 += "'"
+            End If
+        Next
 
-            Dim ds5 As DataSet = _db.selectDB(Sql5, RS, reccnt)
-            Dim ds6 As DataSet = _db.selectDB(Sql6, RS, reccnt)
+        Dim ds5 As DataSet = _db.selectDB(Sql5, RS, reccnt)
+        Dim ds6 As DataSet = _db.selectDB(Sql6, RS, reccnt)
 
-            Dim zaiko As String = ""
-            zaiko += "SELECT "
-            zaiko += "* "
-            zaiko += "FROM "
-            zaiko += "public"
-            zaiko += "."
-            zaiko += "t50_zikhd"
+        Dim zaiko As String = ""
+        zaiko += "SELECT "
+        zaiko += "* "
+        zaiko += "FROM "
+        zaiko += "public"
+        zaiko += "."
+        zaiko += "t50_zikhd"
 
-            Dim dszaiko As DataSet = _db.selectDB(zaiko, RS, reccnt)
-            Dim SqlZaiko As String = ""
+        Dim dszaiko As DataSet = _db.selectDB(zaiko, RS, reccnt)
+        Dim SqlZaiko As String = ""
 
-            For i As Integer = 0 To dszaiko.Tables(RS).Rows.Count - 1
-                Dim purchase As String = ""
-                purchase += "SELECT "
-                purchase += "* "
-                purchase += "FROM "
-                purchase += "public"
-                purchase += "."
-                purchase += "t41_siredt"
+        For i As Integer = 0 To dszaiko.Tables(RS).Rows.Count - 1
+            Dim purchase As String = ""
+            purchase += "SELECT "
+            purchase += "* "
+            purchase += "FROM "
+            purchase += "public"
+            purchase += "."
+            purchase += "t41_siredt"
+            purchase += " WHERE "
+            purchase += "会社コード"
+            purchase += " ILIKE  "
+            purchase += "'"
+            purchase += frmC01F10_Login.loginValue.BumonNM
+            purchase += "'"
+            purchase += " AND "
+            purchase += "メーカー"
+            purchase += " ILIKE  "
+            purchase += "'"
+            purchase += dszaiko.Tables(RS).Rows(i)("メーカー")
+            purchase += "'"
+            purchase += " AND "
+            purchase += "品名"
+            purchase += " ILIKE  "
+            purchase += "'"
+            purchase += dszaiko.Tables(RS).Rows(i)("品名")
+            purchase += "'"
+            purchase += " AND "
+            purchase += "型式"
+            purchase += " ILIKE  "
+            purchase += "'"
+            purchase += dszaiko.Tables(RS).Rows(i)("型式")
+            purchase += "'"
+            purchase += " AND "
+            purchase += "締処理日"
+            purchase += " IS NULL "
+
+            Dim dsPurchase As DataSet = _db.selectDB(purchase, RS, reccnt)
+            Dim PurchaseSum As Double = 0
+            Dim OverheadSum As Double = 0
+            Dim PurchaseQuantity As Double = 0
+
+            For x As Integer = 0 To dsPurchase.Tables(RS).Rows.Count - 1
+                PurchaseSum += dsPurchase.Tables(RS).Rows(x)("仕入金額")
+                OverheadSum += dsPurchase.Tables(RS).Rows(x)("間接費")
+                PurchaseQuantity += dsPurchase.Tables(RS).Rows(x)("仕入数量")
+
+                purchase = ""
+                purchase += "UPDATE "
+                purchase += "Public."
+                purchase += "t41_siredt "
+                purchase += "SET "
+                purchase += " 締処理日"
+                purchase += " = '"
+                purchase += dtToday
+                purchase += "' "
+
                 purchase += " WHERE "
                 purchase += "会社コード"
                 purchase += " ILIKE  "
@@ -378,1172 +428,1129 @@ Public Class ClosingLog
                 purchase += frmC01F10_Login.loginValue.BumonNM
                 purchase += "'"
                 purchase += " AND "
+                purchase += "仕入番号"
+                purchase += " ILIKE  "
+                purchase += "'"
+                purchase += dsPurchase.Tables(RS).Rows(x)("仕入番号")
+                purchase += "'"
+                purchase += " AND "
+                purchase += "行番号"
+                purchase += " =  "
+                purchase += "'"
+                purchase += dsPurchase.Tables(RS).Rows(x)("行番号").ToString
+                purchase += "'"
+
+                purchase += "RETURNING 会社コード"
+                purchase += ", "
+                purchase += "仕入番号"
+                purchase += ", "
+                purchase += "発注番号"
+                purchase += ", "
+                purchase += "発注番号枝番"
+                purchase += ", "
+                purchase += "行番号"
+                purchase += ", "
+                purchase += "仕入区分"
+                purchase += ", "
                 purchase += "メーカー"
-                purchase += " ILIKE  "
-                purchase += "'"
-                purchase += dszaiko.Tables(RS).Rows(i)("メーカー")
-                purchase += "'"
-                purchase += " AND "
+                purchase += ", "
                 purchase += "品名"
-                purchase += " ILIKE  "
-                purchase += "'"
-                purchase += dszaiko.Tables(RS).Rows(i)("品名")
-                purchase += "'"
-                purchase += " AND "
+                purchase += ", "
                 purchase += "型式"
-                purchase += " ILIKE  "
-                purchase += "'"
-                purchase += dszaiko.Tables(RS).Rows(i)("型式")
-                purchase += "'"
-                purchase += " AND "
-                purchase += "締処理日"
-                purchase += " IS NULL "
+                purchase += ", "
+                purchase += "仕入先名"
+                purchase += ", "
+                purchase += "仕入値"
+                purchase += ", "
+                purchase += "発注数量"
+                purchase += ", "
+                purchase += "仕入数量"
+                purchase += ", "
+                purchase += "発注残数"
+                purchase += ", "
+                purchase += "単位"
+                purchase += ", "
+                purchase += "仕入単価"
+                purchase += ", "
+                purchase += "仕入金額"
+                purchase += ", "
+                purchase += "間接費"
+                purchase += ", "
+                purchase += "リードタイム"
+                purchase += ", "
+                purchase += "支払有無"
+                purchase += ", "
+                purchase += "支払番号"
+                purchase += ", "
+                purchase += "支払日"
+                purchase += ", "
+                purchase += "備考"
+                purchase += ", "
+                purchase += "仕入日"
+                purchase += ", "
+                purchase += "更新者"
+                purchase += ", "
+                purchase += "更新日"
 
-                Dim dsPurchase As DataSet = _db.selectDB(purchase, RS, reccnt)
-                Dim PurchaseSum As Double = 0
-                Dim OverheadSum As Double = 0
-                Dim PurchaseQuantity As Double = 0
+                _db.executeDB(purchase)
 
-                For x As Integer = 0 To dsPurchase.Tables(RS).Rows.Count - 1
-                    PurchaseSum += dsPurchase.Tables(RS).Rows(x)("仕入金額")
-                    OverheadSum += dsPurchase.Tables(RS).Rows(x)("間接費")
-                    PurchaseQuantity += dsPurchase.Tables(RS).Rows(x)("仕入数量")
-
-                    purchase = ""
-                    purchase += "UPDATE "
-                    purchase += "Public."
-                    purchase += "t41_siredt "
-                    purchase += "SET "
-                    purchase += " 締処理日"
-                    purchase += " = '"
-                    purchase += dtToday
-                    purchase += "' "
-
-                    purchase += " WHERE "
-                    purchase += "会社コード"
-                    purchase += " ILIKE  "
-                    purchase += "'"
-                    purchase += frmC01F10_Login.loginValue.BumonNM
-                    purchase += "'"
-                    purchase += " AND "
-                    purchase += "仕入番号"
-                    purchase += " ILIKE  "
-                    purchase += "'"
-                    purchase += dsPurchase.Tables(RS).Rows(x)("仕入番号")
-                    purchase += "'"
-                    purchase += " AND "
-                    purchase += "行番号"
-                    purchase += " =  "
-                    purchase += "'"
-                    purchase += dsPurchase.Tables(RS).Rows(x)("行番号").ToString
-                    purchase += "'"
-
-                    purchase += "RETURNING 会社コード"
-                    purchase += ", "
-                    purchase += "仕入番号"
-                    purchase += ", "
-                    purchase += "発注番号"
-                    purchase += ", "
-                    purchase += "発注番号枝番"
-                    purchase += ", "
-                    purchase += "行番号"
-                    purchase += ", "
-                    purchase += "仕入区分"
-                    purchase += ", "
-                    purchase += "メーカー"
-                    purchase += ", "
-                    purchase += "品名"
-                    purchase += ", "
-                    purchase += "型式"
-                    purchase += ", "
-                    purchase += "仕入先名"
-                    purchase += ", "
-                    purchase += "仕入値"
-                    purchase += ", "
-                    purchase += "発注数量"
-                    purchase += ", "
-                    purchase += "仕入数量"
-                    purchase += ", "
-                    purchase += "発注残数"
-                    purchase += ", "
-                    purchase += "単位"
-                    purchase += ", "
-                    purchase += "仕入単価"
-                    purchase += ", "
-                    purchase += "仕入金額"
-                    purchase += ", "
-                    purchase += "間接費"
-                    purchase += ", "
-                    purchase += "リードタイム"
-                    purchase += ", "
-                    purchase += "支払有無"
-                    purchase += ", "
-                    purchase += "支払番号"
-                    purchase += ", "
-                    purchase += "支払日"
-                    purchase += ", "
-                    purchase += "備考"
-                    purchase += ", "
-                    purchase += "仕入日"
-                    purchase += ", "
-                    purchase += "更新者"
-                    purchase += ", "
-                    purchase += "更新日"
-
-                    _db.executeDB(purchase)
-
-                Next
-                Dim sum1 As Double = 0
-                Dim sum2 As Double = 0
-                Dim unitPrice As Double = 0
-                Dim sum3 As Double = 0
-                Dim sum4 As Double = 0
-                Dim OverHead As Double = 0
-                If ds1.Tables(RS).Rows(0)("在庫単価評価法") = 1 Then
-                    unitPrice = dsPurchase.Tables(RS).Rows(dsPurchase.Tables(RS).Rows.Count - 1)("仕入値")
-                    OverHead = dsPurchase.Tables(RS).Rows(dsPurchase.Tables(RS).Rows.Count - 1)("間接費")
-                Else
-                    sum1 = dszaiko.Tables(RS).Rows(i)("今月単価") * dszaiko.Tables(RS).Rows(i)("今月末数量")
-                    sum1 += PurchaseSum
-                    sum2 = dszaiko.Tables(RS).Rows(i)("今月末数量") + PurchaseQuantity
-                    unitPrice = sum1 / sum2
-                    sum3 = dszaiko.Tables(RS).Rows(i)("今月間接費") * dszaiko.Tables(RS).Rows(i)("今月末数量")
-                    sum3 += OverheadSum
-                    sum4 = dszaiko.Tables(RS).Rows(i)("今月末数量") + PurchaseQuantity
-                    OverHead = sum3 / sum4
-                End If
-
-
-
-                SqlZaiko = ""
-                SqlZaiko += "UPDATE "
-                SqlZaiko += "Public."
-                SqlZaiko += "t50_zikhd "
-                SqlZaiko += "SET "
-                SqlZaiko += " 前月末数量"
-                SqlZaiko += " = '"
-                SqlZaiko += dszaiko.Tables(RS).Rows(i)("今月末数量").ToString
-                SqlZaiko += "', "
-                SqlZaiko += " 前月末単価"
-                SqlZaiko += " = '"
-                SqlZaiko += dszaiko.Tables(RS).Rows(i)("今月単価").ToString
-                SqlZaiko += "', "
-                SqlZaiko += " 前月末間接費"
-                SqlZaiko += " = '"
-                SqlZaiko += dszaiko.Tables(RS).Rows(i)("今月間接費").ToString
-                SqlZaiko += "', "
-                SqlZaiko += "今月末数量"
-                SqlZaiko += " = '"
-                SqlZaiko += "0"
-                SqlZaiko += "', "
-                SqlZaiko += "今月単価"
-                SqlZaiko += " = '"
-                SqlZaiko += unitPrice.ToString
-                SqlZaiko += "', "
-                SqlZaiko += "今月入庫数"
-                SqlZaiko += " = '"
-                SqlZaiko += "0"
-                SqlZaiko += "', "
-                SqlZaiko += "今月出庫数"
-                SqlZaiko += " = '"
-                SqlZaiko += "0"
-                SqlZaiko += "', "
-                SqlZaiko += "今月間接費"
-                SqlZaiko += " = '"
-                SqlZaiko += OverHead.ToString
-                SqlZaiko += "', "
-                SqlZaiko += "更新者"
-                SqlZaiko += " = '"
-                SqlZaiko += frmC01F10_Login.loginValue.TantoNM
-                SqlZaiko += "', "
-                SqlZaiko += "更新日"
-                SqlZaiko += " = '"
-                SqlZaiko += dtToday
-                SqlZaiko += "' "
-
-                SqlZaiko += " WHERE "
-                SqlZaiko += "会社コード"
-                SqlZaiko += " ILIKE  "
-                SqlZaiko += "'"
-                SqlZaiko += frmC01F10_Login.loginValue.BumonNM
-                SqlZaiko += "'"
-                SqlZaiko += " AND "
-                SqlZaiko += "メーカー"
-                SqlZaiko += " ILIKE  "
-                SqlZaiko += "'"
-                SqlZaiko += dszaiko.Tables(RS).Rows(i)("メーカー")
-                SqlZaiko += "'"
-                SqlZaiko += " AND "
-                SqlZaiko += "品名"
-                SqlZaiko += " ILIKE  "
-                SqlZaiko += "'"
-                SqlZaiko += dszaiko.Tables(RS).Rows(i)("品名")
-                SqlZaiko += "'"
-                SqlZaiko += " AND "
-                SqlZaiko += "型式"
-                SqlZaiko += " ILIKE  "
-                SqlZaiko += "'"
-                SqlZaiko += dszaiko.Tables(RS).Rows(i)("型式")
-                SqlZaiko += "'"
-
-                SqlZaiko += "RETURNING 会社コード"
-                SqlZaiko += ", "
-                SqlZaiko += "年月"
-                SqlZaiko += ", "
-                SqlZaiko += "メーカー"
-                SqlZaiko += ", "
-                SqlZaiko += "品名"
-                SqlZaiko += ", "
-                SqlZaiko += "型式"
-                SqlZaiko += ", "
-                SqlZaiko += "前月末数量"
-                SqlZaiko += ", "
-                SqlZaiko += "前月末間接費"
-                SqlZaiko += ", "
-                SqlZaiko += "今月末数量"
-                SqlZaiko += ", "
-                SqlZaiko += "今月入庫数"
-                SqlZaiko += ", "
-                SqlZaiko += "今月出庫数"
-                SqlZaiko += ", "
-                SqlZaiko += "今月間接費"
-                SqlZaiko += ", "
-                SqlZaiko += "前月末単価"
-                SqlZaiko += ", "
-                SqlZaiko += "今月単価"
-                SqlZaiko += ", "
-                SqlZaiko += "更新者"
-                SqlZaiko += ", "
-                SqlZaiko += "更新日"
-
-                _db.executeDB(SqlZaiko)
             Next
-
-
-            For i As Integer = 0 To dszaiko.Tables(RS).Rows.Count - 1
-                SqlZaiko = ""
-                SqlZaiko += "UPDATE "
-                SqlZaiko += "Public."
-                SqlZaiko += "t50_zikhd "
-                SqlZaiko += "SET "
-                SqlZaiko += " 前月末数量"
-                SqlZaiko += " = '"
-                SqlZaiko += dszaiko.Tables(RS).Rows(i)("今月末数量").ToString
-                SqlZaiko += "', "
-                SqlZaiko += "今月末数量"
-                SqlZaiko += " = '"
-                SqlZaiko += "0"
-                SqlZaiko += "', "
-                SqlZaiko += "今月入庫数"
-                SqlZaiko += " = '"
-                SqlZaiko += "0"
-                SqlZaiko += "', "
-                SqlZaiko += "今月出庫数"
-                SqlZaiko += " = '"
-                SqlZaiko += "0"
-                SqlZaiko += "', "
-                SqlZaiko += "更新者"
-                SqlZaiko += " = '"
-                SqlZaiko += frmC01F10_Login.loginValue.TantoNM
-                SqlZaiko += "', "
-                SqlZaiko += "更新日"
-                SqlZaiko += " = '"
-                SqlZaiko += dtToday
-                SqlZaiko += "' "
-
-                SqlZaiko += " WHERE "
-                SqlZaiko += "会社コード"
-                SqlZaiko += " ILIKE  "
-                SqlZaiko += "'"
-                SqlZaiko += frmC01F10_Login.loginValue.BumonNM
-                SqlZaiko += "'"
-                SqlZaiko += " AND "
-                SqlZaiko += "メーカー"
-                SqlZaiko += " ILIKE  "
-                SqlZaiko += "'"
-                SqlZaiko += dszaiko.Tables(RS).Rows(i)("メーカー")
-                SqlZaiko += "'"
-                SqlZaiko += " AND "
-                SqlZaiko += "品名"
-                SqlZaiko += " ILIKE  "
-                SqlZaiko += "'"
-                SqlZaiko += dszaiko.Tables(RS).Rows(i)("品名")
-                SqlZaiko += "'"
-                SqlZaiko += " AND "
-                SqlZaiko += "型式"
-                SqlZaiko += " ILIKE  "
-                SqlZaiko += "'"
-                SqlZaiko += dszaiko.Tables(RS).Rows(i)("型式")
-                SqlZaiko += "'"
-
-                SqlZaiko += "RETURNING 会社コード"
-                SqlZaiko += ", "
-                SqlZaiko += "年月"
-                SqlZaiko += ", "
-                SqlZaiko += "メーカー"
-                SqlZaiko += ", "
-                SqlZaiko += "品名"
-                SqlZaiko += ", "
-                SqlZaiko += "型式"
-                SqlZaiko += ", "
-                SqlZaiko += "前月末数量"
-                SqlZaiko += ", "
-                SqlZaiko += "前月末間接費"
-                SqlZaiko += ", "
-                SqlZaiko += "今月末数量"
-                SqlZaiko += ", "
-                SqlZaiko += "今月入庫数"
-                SqlZaiko += ", "
-                SqlZaiko += "今月出庫数"
-                SqlZaiko += ", "
-                SqlZaiko += "今月間接費"
-                SqlZaiko += ", "
-                SqlZaiko += "更新者"
-                SqlZaiko += ", "
-                SqlZaiko += "更新日"
-
-                _db.executeDB(SqlZaiko)
-            Next
-
-            Dim Sql7 As String = ""
-            For i As Integer = 0 To ds6.Tables(RS).Rows.Count - 1
-                Sql7 += "SELECT "
-                Sql7 += "* "
-                Sql7 += "FROM "
-                Sql7 += "public"
-                Sql7 += "."
-                Sql7 += "t50_zikhd"
-                Sql7 += " WHERE "
-                Sql7 += "会社コード"
-                Sql7 += " ILIKE  "
-                Sql7 += "'"
-                Sql7 += frmC01F10_Login.loginValue.BumonNM
-                Sql7 += "'"
-                Sql7 += " AND "
-                Sql7 += "メーカー"
-                Sql7 += " ILIKE  "
-                Sql7 += "'"
-                Sql7 += ds6.Tables(RS).Rows(i)("メーカー")
-                Sql7 += "'"
-                Sql7 += " AND "
-                Sql7 += "品名"
-                Sql7 += " ILIKE  "
-                Sql7 += "'"
-                Sql7 += ds6.Tables(RS).Rows(i)("品名")
-                Sql7 += "'"
-                Sql7 += " AND "
-                Sql7 += "型式"
-                Sql7 += " ILIKE  "
-                Sql7 += "'"
-                Sql7 += ds6.Tables(RS).Rows(i)("型式")
-                Sql7 += "'"
-
-                Dim ds7 As DataSet = _db.selectDB(Sql7, RS, reccnt)
-                Sql7 = ""
-
-                Dim Sql8 As String = ""
-
-                If ds7.Tables(RS).Rows.Count = 0 Then
-                    Sql8 = ""
-                    Sql8 += "INSERT INTO "
-                    Sql8 += "Public."
-                    Sql8 += "t50_zikhd("
-                    Sql8 += "会社コード, 年月, メーカー, 品名, 型式, 前月末数量, 前月末間接費, 今月末数量, 今月入庫数, 今月出庫数, 今月間接費, 更新者, 更新日)"
-                    Sql8 += " VALUES('"
-                    Sql8 += frmC01F10_Login.loginValue.BumonNM
-                    Sql8 += "', '"
-                    Sql8 += dtToday
-                    Sql8 += "', '"
-                    Sql8 += ds6.Tables(RS).Rows(i)("メーカー")
-                    Sql8 += "', '"
-                    Sql8 += ds6.Tables(RS).Rows(i)("品名")
-                    Sql8 += "', '"
-                    Sql8 += ds6.Tables(RS).Rows(i)("型式")
-                    Sql8 += "', '"
-                    Sql8 += "0"
-                    Sql8 += "', '"
-                    Sql8 += "0"
-                    Sql8 += "', '"
-                    Sql8 += ds6.Tables(RS).Rows(i)("仕入数量").ToString
-                    Sql8 += "', '"
-                    Sql8 += ds6.Tables(RS).Rows(i)("仕入数量").ToString
-                    Sql8 += "', '"
-                    Sql8 += "0"
-                    Sql8 += "', '"
-                    Sql8 += "0"
-                    Sql8 += "', '"
-                    Sql8 += frmC01F10_Login.loginValue.TantoNM
-                    Sql8 += "', '"
-                    Sql8 += dtToday
-                    Sql8 += " ')"
-                    Sql8 += "RETURNING 会社コード"
-                    Sql8 += ", "
-                    Sql8 += "年月"
-                    Sql8 += ", "
-                    Sql8 += "メーカー"
-                    Sql8 += ", "
-                    Sql8 += "品名"
-                    Sql8 += ", "
-                    Sql8 += "型式"
-                    Sql8 += ", "
-                    Sql8 += "前月末数量"
-                    Sql8 += ", "
-                    Sql8 += "前月末間接費"
-                    Sql8 += ", "
-                    Sql8 += "今月末数量"
-                    Sql8 += ", "
-                    Sql8 += "今月入庫数"
-                    Sql8 += ", "
-                    Sql8 += "今月出庫数"
-                    Sql8 += ", "
-                    Sql8 += "今月間接費"
-                    Sql8 += ", "
-                    Sql8 += "更新者"
-                    Sql8 += ", "
-                    Sql8 += "更新日"
-                    _db.executeDB(Sql8)
-                Else
-                    Dim tmp1 As Double = 0
-                    Dim tmp2 As Double = 0
-                    Sql8 = ""
-                    Sql8 += "UPDATE "
-                    Sql8 += "Public."
-                    Sql8 += "t50_zikhd "
-                    Sql8 += "SET "
-                    Sql8 += " 今月末数量"
-                    Sql8 += " = '"
-                    tmp1 = ds7.Tables(RS).Rows(0)("今月末数量") + ds6.Tables(RS).Rows(i)("仕入数量")
-                    Sql8 += tmp1.ToString
-                    Sql8 += "', "
-                    Sql8 += "今月入庫数"
-                    Sql8 += " = '"
-                    tmp2 = ds7.Tables(RS).Rows(0)("今月入庫数") + ds6.Tables(RS).Rows(i)("仕入数量")
-                    Sql8 += tmp2.ToString
-                    Sql8 += "', "
-                    Sql8 += "更新者"
-                    Sql8 += " = '"
-                    Sql8 += frmC01F10_Login.loginValue.TantoNM
-                    Sql8 += "', "
-                    Sql8 += "更新日"
-                    Sql8 += " = '"
-                    Sql8 += dtToday
-                    Sql8 += "' "
-
-                    Sql8 += " WHERE "
-                    Sql8 += "会社コード"
-                    Sql8 += " ILIKE  "
-                    Sql8 += "'"
-                    Sql8 += frmC01F10_Login.loginValue.BumonNM
-                    Sql8 += "'"
-                    Sql8 += " AND "
-                    Sql8 += "メーカー"
-                    Sql8 += " ILIKE  "
-                    Sql8 += "'"
-                    Sql8 += ds6.Tables(RS).Rows(i)("メーカー")
-                    Sql8 += "'"
-                    Sql8 += " AND "
-                    Sql8 += "品名"
-                    Sql8 += " ILIKE  "
-                    Sql8 += "'"
-                    Sql8 += ds6.Tables(RS).Rows(i)("品名")
-                    Sql8 += "'"
-                    Sql8 += " AND "
-                    Sql8 += "型式"
-                    Sql8 += " ILIKE  "
-                    Sql8 += "'"
-                    Sql8 += ds6.Tables(RS).Rows(i)("型式")
-                    Sql8 += "'"
-
-                    Sql8 += "RETURNING 会社コード"
-                    Sql8 += ", "
-                    Sql8 += "年月"
-                    Sql8 += ", "
-                    Sql8 += "メーカー"
-                    Sql8 += ", "
-                    Sql8 += "品名"
-                    Sql8 += ", "
-                    Sql8 += "型式"
-                    Sql8 += ", "
-                    Sql8 += "前月末数量"
-                    Sql8 += ", "
-                    Sql8 += "前月末間接費"
-                    Sql8 += ", "
-                    Sql8 += "今月末数量"
-                    Sql8 += ", "
-                    Sql8 += "今月入庫数"
-                    Sql8 += ", "
-                    Sql8 += "今月出庫数"
-                    Sql8 += ", "
-                    Sql8 += "今月間接費"
-                    Sql8 += ", "
-                    Sql8 += "更新者"
-                    Sql8 += ", "
-                    Sql8 += "更新日"
-
-                    _db.executeDB(Sql8)
-                End If
-            Next
-
-            Sql7 = ""
-            For i As Integer = 0 To ds5.Tables(RS).Rows.Count - 1
-                Sql7 += "SELECT "
-                Sql7 += "* "
-                Sql7 += "FROM "
-                Sql7 += "public"
-                Sql7 += "."
-                Sql7 += "t50_zikhd"
-                Sql7 += " WHERE "
-                Sql7 += "会社コード"
-                Sql7 += " ILIKE  "
-                Sql7 += "'"
-                Sql7 += frmC01F10_Login.loginValue.BumonNM
-                Sql7 += "'"
-                Sql7 += " AND "
-                Sql7 += "メーカー"
-                Sql7 += " ILIKE  "
-                Sql7 += "'"
-                Sql7 += ds5.Tables(RS).Rows(i)("メーカー")
-                Sql7 += "'"
-                Sql7 += " AND "
-                Sql7 += "品名"
-                Sql7 += " ILIKE  "
-                Sql7 += "'"
-                Sql7 += ds5.Tables(RS).Rows(i)("品名")
-                Sql7 += "'"
-                Sql7 += " AND "
-                Sql7 += "型式"
-                Sql7 += " ILIKE  "
-                Sql7 += "'"
-                Sql7 += ds5.Tables(RS).Rows(i)("型式")
-                Sql7 += "'"
-
-                Dim ds7 As DataSet = _db.selectDB(Sql7, RS, reccnt)
-                Sql7 = ""
-
-                Dim Sql9 As String = ""
-
-                If ds7.Tables(RS).Rows.Count = 0 Then
-                    Sql9 = ""
-                    Sql9 += "INSERT INTO "
-                    Sql9 += "Public."
-                    Sql9 += "t50_zikhd("
-                    Sql9 += "会社コード, 年月, メーカー, 品名, 型式, 前月末数量, 前月末間接費, 今月末数量, 今月入庫数, 今月出庫数, 今月間接費, 更新者, 更新日)"
-                    Sql9 += " VALUES('"
-                    Sql9 += frmC01F10_Login.loginValue.BumonNM
-                    Sql9 += "', '"
-                    Sql9 += dtToday
-                    Sql9 += "', '"
-                    Sql9 += ds5.Tables(RS).Rows(i)("メーカー")
-                    Sql9 += "', '"
-                    Sql9 += ds5.Tables(RS).Rows(i)("品名")
-                    Sql9 += "', '"
-                    Sql9 += ds5.Tables(RS).Rows(i)("型式")
-                    Sql9 += "', '"
-                    Sql9 += "0"
-                    Sql9 += "', '"
-                    Sql9 += "0"
-                    Sql9 += "', '"
-                    Sql9 += ds5.Tables(RS).Rows(i)("売上数量").ToString
-                    Sql9 += "', '"
-                    Sql9 += "0"
-                    Sql9 += "', '"
-                    Sql9 += ds5.Tables(RS).Rows(i)("売上数量").ToString
-                    Sql9 += "', '"
-                    Sql9 += "0"
-                    Sql9 += "', '"
-                    Sql9 += frmC01F10_Login.loginValue.TantoNM
-                    Sql9 += "', '"
-                    Sql9 += dtToday
-                    Sql9 += " ')"
-                    Sql9 += "RETURNING 会社コード"
-                    Sql9 += ", "
-                    Sql9 += "年月"
-                    Sql9 += ", "
-                    Sql9 += "メーカー"
-                    Sql9 += ", "
-                    Sql9 += "品名"
-                    Sql9 += ", "
-                    Sql9 += "型式"
-                    Sql9 += ", "
-                    Sql9 += "前月末数量"
-                    Sql9 += ", "
-                    Sql9 += "前月末間接費"
-                    Sql9 += ", "
-                    Sql9 += "今月末数量"
-                    Sql9 += ", "
-                    Sql9 += "今月入庫数"
-                    Sql9 += ", "
-                    Sql9 += "今月出庫数"
-                    Sql9 += ", "
-                    Sql9 += "今月間接費"
-                    Sql9 += ", "
-                    Sql9 += "更新者"
-                    Sql9 += ", "
-                    Sql9 += "更新日"
-
-                    _db.executeDB(Sql9)
-
-                Else
-                    Dim tmp3 As Double = 0
-                    Dim tmp4 As Double = 0
-                    Sql9 = ""
-                    Sql9 += "UPDATE "
-                    Sql9 += "Public."
-                    Sql9 += "t50_zikhd "
-                    Sql9 += "SET "
-                    Sql9 += " 今月末数量"
-                    Sql9 += " = '"
-                    tmp3 = ds7.Tables(RS).Rows(0)("今月末数量") - ds5.Tables(RS).Rows(i)("売上数量")
-                    Sql9 += tmp3.ToString
-                    Sql9 += "', "
-                    Sql9 += "今月出庫数"
-                    Sql9 += " = '"
-                    tmp4 = ds7.Tables(RS).Rows(0)("今月出庫数") + ds5.Tables(RS).Rows(i)("売上数量")
-                    Sql9 += tmp4.ToString
-                    Sql9 += "', "
-                    Sql9 += "更新者"
-                    Sql9 += " = '"
-                    Sql9 += frmC01F10_Login.loginValue.TantoNM
-                    Sql9 += "', "
-                    Sql9 += "更新日"
-                    Sql9 += " = '"
-                    Sql9 += dtToday
-                    Sql9 += "' "
-
-                    Sql9 += " WHERE "
-                    Sql9 += "会社コード"
-                    Sql9 += " ILIKE  "
-                    Sql9 += "'"
-                    Sql9 += frmC01F10_Login.loginValue.BumonNM
-                    Sql9 += "'"
-                    Sql9 += " AND "
-                    Sql9 += "メーカー"
-                    Sql9 += " ILIKE  "
-                    Sql9 += "'"
-                    Sql9 += ds5.Tables(RS).Rows(i)("メーカー")
-                    Sql9 += "'"
-                    Sql9 += " AND "
-                    Sql9 += "品名"
-                    Sql9 += " ILIKE  "
-                    Sql9 += "'"
-                    Sql9 += ds5.Tables(RS).Rows(i)("品名")
-                    Sql9 += "'"
-                    Sql9 += " AND "
-                    Sql9 += "型式"
-                    Sql9 += " ILIKE  "
-                    Sql9 += "'"
-                    Sql9 += ds5.Tables(RS).Rows(i)("型式")
-                    Sql9 += "'"
-
-                    Sql9 += "RETURNING 会社コード"
-                    Sql9 += ", "
-                    Sql9 += "年月"
-                    Sql9 += ", "
-                    Sql9 += "メーカー"
-                    Sql9 += ", "
-                    Sql9 += "品名"
-                    Sql9 += ", "
-                    Sql9 += "型式"
-                    Sql9 += ", "
-                    Sql9 += "前月末数量"
-                    Sql9 += ", "
-                    Sql9 += "前月末間接費"
-                    Sql9 += ", "
-                    Sql9 += "今月末数量"
-                    Sql9 += ", "
-                    Sql9 += "今月入庫数"
-                    Sql9 += ", "
-                    Sql9 += "今月出庫数"
-                    Sql9 += ", "
-                    Sql9 += "今月間接費"
-                    Sql9 += ", "
-                    Sql9 += "更新者"
-                    Sql9 += ", "
-                    Sql9 += "更新日"
-
-                    _db.executeDB(Sql9)
-                End If
-            Next
-
-            Dim Sql10 As String = ""
-            Sql10 += "SELECT "
-            Sql10 += "* "
-            Sql10 += "FROM "
-            Sql10 += "public"
-            Sql10 += "."
-            Sql10 += "t50_zikhd"
-
-            Dim ds10 As DataSet = _db.selectDB(Sql10, RS, reccnt)
-
-            'Dim Sql11 As String = ""
-            'For i As Integer = 0 To ds10.Tables(RS).Rows.Count - 1
-            '    Dim tmp5 As Double = 0
-            '    Sql11 = ""
-            '    Sql11 += "UPDATE "
-            '    Sql11 += "Public."
-            '    Sql11 += "t50_zikhd "
-            '    Sql11 += "SET "
-            '    Sql11 += " 今月末数量"
-            '    Sql11 += " = '"
-            '    tmp5 = ds10.Tables(RS).Rows(i)("今月末数量") + ds10.Tables(RS).Rows(i)("前月末数量")
-            '    Sql11 += tmp5.ToString
-            '    Sql11 += "', "
-            '    Sql11 += "更新者"
-            '    Sql11 += " = '"
-            '    Sql11 += frmC01F10_Login.loginValue.TantoNM
-            '    Sql11 += "', "
-            '    Sql11 += "更新日"
-            '    Sql11 += " = '"
-            '    Sql11 += dtToday
-            '    Sql11 += "' "
-
-            '    Sql11 += " WHERE "
-            '    Sql11 += "会社コード"
-            '    Sql11 += " ILIKE  "
-            '    Sql11 += "'"
-            '    Sql11 += frmC01F10_Login.loginValue.BumonNM
-            '    Sql11 += "'"
-            '    Sql11 += " AND "
-            '    Sql11 += "メーカー"
-            '    Sql11 += " ILIKE  "
-            '    Sql11 += "'"
-            '    Sql11 += ds10.Tables(RS).Rows(i)("メーカー")
-            '    Sql11 += "'"
-            '    Sql11 += " AND "
-            '    Sql11 += "品名"
-            '    Sql11 += " ILIKE  "
-            '    Sql11 += "'"
-            '    Sql11 += ds10.Tables(RS).Rows(i)("品名")
-            '    Sql11 += "'"
-            '    Sql11 += " AND "
-            '    Sql11 += "型式"
-            '    Sql11 += " ILIKE  "
-            '    Sql11 += "'"
-            '    Sql11 += ds10.Tables(RS).Rows(i)("型式")
-            '    Sql11 += "'"
-
-            '    Sql11 += "RETURNING 会社コード"
-            '    Sql11 += ", "
-            '    Sql11 += "年月"
-            '    Sql11 += ", "
-            '    Sql11 += "メーカー"
-            '    Sql11 += ", "
-            '    Sql11 += "品名"
-            '    Sql11 += ", "
-            '    Sql11 += "型式"
-            '    Sql11 += ", "
-            '    Sql11 += "前月末数量"
-            '    Sql11 += ", "
-            '    Sql11 += "前月末間接費"
-            '    Sql11 += ", "
-            '    Sql11 += "今月末数量"
-            '    Sql11 += ", "
-            '    Sql11 += "今月入庫数"
-            '    Sql11 += ", "
-            '    Sql11 += "今月出庫数"
-            '    Sql11 += ", "
-            '    Sql11 += "今月間接費"
-            '    Sql11 += ", "
-            '    Sql11 += "更新者"
-            '    Sql11 += ", "
-            '    Sql11 += "更新日"
-
-            '    _db.executeDB(Sql11)
-            'Next
-            Dim Sql12 As String = ""
-            For i As Integer = 0 To ds5.Tables(RS).Rows.Count - 1
-                Sql12 = ""
-                Sql12 += "UPDATE "
-                Sql12 += "Public."
-                Sql12 += "t30_urighd "
-                Sql12 += "SET "
-                Sql12 += "締処理日 "
-                Sql12 += " = '"
-                Sql12 += dtToday
-                Sql12 += "', "
-                Sql12 += "更新者"
-                Sql12 += " = '"
-                Sql12 += frmC01F10_Login.loginValue.TantoNM
-                Sql12 += "', "
-                Sql12 += "更新日"
-                Sql12 += " = '"
-                Sql12 += dtToday
-                Sql12 += "' "
-
-                Sql12 += " WHERE "
-                Sql12 += "会社コード"
-                Sql12 += " ILIKE  "
-                Sql12 += "'"
-                Sql12 += frmC01F10_Login.loginValue.BumonNM
-                Sql12 += "'"
-                Sql12 += " AND "
-                Sql12 += "売上番号"
-                Sql12 += " ILIKE  "
-                Sql12 += "'"
-                Sql12 += ds5.Tables(RS).Rows(i)("売上番号")
-                Sql12 += "'"
-
-                Sql12 += "RETURNING 会社コード"
-                Sql12 += ", "
-                Sql12 += "売上番号"
-                Sql12 += ", "
-                Sql12 += "売上番号枝番"
-                Sql12 += ", "
-                Sql12 += "客先番号"
-                Sql12 += ", "
-                Sql12 += "受注番号"
-                Sql12 += ", "
-                Sql12 += "受注番号枝番"
-                Sql12 += ", "
-                Sql12 += "見積番号"
-                Sql12 += ", "
-                Sql12 += "見積番号枝番"
-                Sql12 += ", "
-                Sql12 += "得意先コード"
-                Sql12 += ", "
-                Sql12 += "得意先名"
-                Sql12 += ", "
-                Sql12 += "得意先郵便番号"
-                Sql12 += ", "
-                Sql12 += "得意先住所"
-                Sql12 += ", "
-                Sql12 += "得意先電話番号"
-                Sql12 += ", "
-                Sql12 += "得意先ＦＡＸ"
-                Sql12 += ", "
-                Sql12 += "得意先担当者役職"
-                Sql12 += ", "
-                Sql12 += "得意先担当者名"
-                Sql12 += ", "
-                Sql12 += "見積日"
-                Sql12 += ", "
-                Sql12 += "見積有効期限"
-                Sql12 += ", "
-                Sql12 += "支払条件"
-                Sql12 += ", "
-                Sql12 += "見積金額"
-                Sql12 += ", "
-                Sql12 += "売上金額"
-                Sql12 += ", "
-                Sql12 += "粗利額"
-                Sql12 += ", "
-                Sql12 += "営業担当者"
-                Sql12 += ", "
-                Sql12 += "入力担当者"
-                Sql12 += ", "
-                Sql12 += "備考"
-                Sql12 += ", "
-                Sql12 += "取消日"
-                Sql12 += ", "
-                Sql12 += "取消区分"
-                Sql12 += ", "
-                Sql12 += "ＶＡＴ"
-                Sql12 += ", "
-                Sql12 += "ＰＰＨ"
-                Sql12 += ", "
-                Sql12 += "受注日"
-                Sql12 += ", "
-                Sql12 += "売上日"
-                Sql12 += ", "
-                Sql12 += "入金予定日"
-                Sql12 += ", "
-                Sql12 += "登録日"
-                Sql12 += ", "
-                Sql12 += "更新日"
-                Sql12 += ", "
-                Sql12 += "更新者"
-
-                _db.executeDB(Sql12)
-            Next
-
-            Dim Sql13 As String = ""
-            For i As Integer = 0 To ds6.Tables(RS).Rows.Count - 1
-                Sql13 = ""
-                Sql13 += "UPDATE "
-                Sql13 += "Public."
-                Sql13 += "t40_sirehd "
-                Sql13 += "SET "
-                Sql13 += "締処理日 "
-                Sql13 += " = '"
-                Sql13 += dtToday
-                Sql13 += "', "
-                Sql13 += "更新者"
-                Sql13 += " = '"
-                Sql13 += frmC01F10_Login.loginValue.TantoNM
-                Sql13 += "', "
-                Sql13 += "更新日"
-                Sql13 += " = '"
-                Sql13 += dtToday
-                Sql13 += "' "
-
-                Sql13 += " WHERE "
-                Sql13 += "会社コード"
-                Sql13 += " ILIKE  "
-                Sql13 += "'"
-                Sql13 += frmC01F10_Login.loginValue.BumonNM
-                Sql13 += "'"
-                Sql13 += " AND "
-                Sql13 += "仕入番号"
-                Sql13 += " ILIKE  "
-                Sql13 += "'"
-                Sql13 += ds6.Tables(RS).Rows(i)("仕入番号")
-                Sql13 += "'"
-
-                Sql13 += "RETURNING 会社コード"
-                Sql13 += ", "
-                Sql13 += "仕入番号"
-                Sql13 += ", "
-                Sql13 += "発注番号"
-                Sql13 += ", "
-                Sql13 += "発注番号枝番"
-                Sql13 += ", "
-                Sql13 += "仕入先コード"
-                Sql13 += ", "
-                Sql13 += "仕入先名"
-                Sql13 += ", "
-                Sql13 += "仕入先郵便番号"
-                Sql13 += ", "
-                Sql13 += "仕入先住所"
-                Sql13 += ", "
-                Sql13 += "仕入先電話番号"
-                Sql13 += ", "
-                Sql13 += "仕入先ＦＡＸ"
-                Sql13 += ", "
-                Sql13 += "仕入先担当者役職"
-                Sql13 += ", "
-                Sql13 += "仕入先担当者名"
-                Sql13 += ", "
-                Sql13 += "支払条件"
-                Sql13 += ", "
-                Sql13 += "仕入金額"
-                Sql13 += ", "
-                Sql13 += "粗利額"
-                Sql13 += ", "
-                Sql13 += "営業担当者"
-                Sql13 += ", "
-                Sql13 += "入力担当者"
-                Sql13 += ", "
-                Sql13 += "備考"
-                Sql13 += ", "
-                Sql13 += "取消日"
-                Sql13 += ", "
-                Sql13 += "取消区分"
-                Sql13 += ", "
-                Sql13 += "ＶＡＴ"
-                Sql13 += ", "
-                Sql13 += "ＰＰＨ"
-                Sql13 += ", "
-                Sql13 += "仕入日"
-                Sql13 += ", "
-                Sql13 += "登録日"
-                Sql13 += ", "
-                Sql13 += "更新日"
-                Sql13 += ", "
-                Sql13 += "更新者"
-
-                _db.executeDB(Sql13)
-            Next
-
-            Dim Sql14 As String = ""
-
-            Sql14 = ""
-            Sql14 += "INSERT INTO "
-            Sql14 += "Public."
-            Sql14 += "t51_smlog("
-            Sql14 += "会社コード, 処理日時, 前回締日, 今回締日, 次回締日, 担当者)"
-            Sql14 += " VALUES('"
-            Sql14 += frmC01F10_Login.loginValue.BumonNM
-            Sql14 += "', '"
-            Sql14 += dtToday
-            Sql14 += "', '"
-            Sql14 += ds1.Tables(RS).Rows(0)("前回締日")
-            Sql14 += "', '"
-            Sql14 += ds1.Tables(RS).Rows(0)("今回締日")
-            Sql14 += "', '"
-            Sql14 += ds1.Tables(RS).Rows(0)("次回締日")
-            Sql14 += "', '"
-            Sql14 += frmC01F10_Login.loginValue.TantoNM
-            Sql14 += " ')"
-            Sql14 += "RETURNING "
-            Sql14 += "会社コード"
-            Sql14 += ", "
-            Sql14 += "処理日時"
-            Sql14 += ", "
-            Sql14 += "前回締日"
-            Sql14 += ", "
-            Sql14 += "今回締日"
-            Sql14 += ", "
-            Sql14 += "次回締日"
-            Sql14 += ", "
-            Sql14 += "担当者"
-
-            _db.executeDB(Sql14)
-
-            Dim thisClosingDate As DateTime = DateTime.Parse(ds1.Tables(RS).Rows(0)("次回締日"))
-            Dim dtYear As Integer = thisClosingDate.Year
-            Dim dtMonth As Integer = thisClosingDate.Month
-            If dtMonth < 12 Then
-                dtMonth += 1
+            Dim sum1 As Double = 0
+            Dim sum2 As Double = 0
+            Dim unitPrice As Double = 0
+            Dim sum3 As Double = 0
+            Dim sum4 As Double = 0
+            Dim OverHead As Double = 0
+            If ds1.Tables(RS).Rows(0)("在庫単価評価法") = 1 Then
+                unitPrice = dsPurchase.Tables(RS).Rows(dsPurchase.Tables(RS).Rows.Count)("仕入値")
+                OverHead = dsPurchase.Tables(RS).Rows(dsPurchase.Tables(RS).Rows.Count)("間接費")
             Else
-                dtYear += 1
-                dtMonth = 1
+                sum1 = dszaiko.Tables(RS).Rows(i)("今月単価") * dszaiko.Tables(RS).Rows(i)("今月末数量")
+                sum1 += PurchaseSum
+                sum2 = dszaiko.Tables(RS).Rows(i)("今月末数量") + PurchaseQuantity
+                unitPrice = sum1 / sum2
+                sum3 = dszaiko.Tables(RS).Rows(i)("今月間接費") * dszaiko.Tables(RS).Rows(i)("今月末数量")
+                sum3 += OverheadSum
+                sum4 = dszaiko.Tables(RS).Rows(i)("今月末数量") + PurchaseQuantity
+                OverHead = sum3 / sum4
             End If
 
-            Dim dtdays As Integer = DateTime.DaysInMonth(dtYear, dtMonth)
-            Dim nextClosingDate = New DateTime(dtYear, dtMonth, dtdays)
-            Dim Sql15 As String = ""
-            Sql15 = ""
-            Sql15 += "UPDATE "
-            Sql15 += "Public."
-            Sql15 += "m01_company "
-            Sql15 += "SET "
-            Sql15 += "前回締日 "
-            Sql15 += " = '"
-            Sql15 += ds1.Tables(RS).Rows(0)("今回締日")
-            Sql15 += "', "
-            Sql15 += "今回締日"
-            Sql15 += " = '"
-            Sql15 += ds1.Tables(RS).Rows(0)("次回締日")
-            Sql15 += "', "
-            Sql15 += "次回締日"
-            Sql15 += " = '"
-            Sql15 += nextClosingDate
-            Sql15 += "' "
-
-            Sql15 += " WHERE "
-            Sql15 += "会社コード"
-            Sql15 += " ILIKE  "
-            Sql15 += "'"
-            Sql15 += frmC01F10_Login.loginValue.BumonNM
-            Sql15 += "'"
-
-            Sql15 += "RETURNING 会社コード"
-            Sql15 += ", "
-            Sql15 += "会社名"
-            Sql15 += ", "
-            Sql15 += "会社略称"
-            Sql15 += ", "
-            Sql15 += "郵便番号"
-            Sql15 += ", "
-            Sql15 += "住所１"
-            Sql15 += ", "
-            Sql15 += "住所２"
-            Sql15 += ", "
-            Sql15 += "住所３"
-            Sql15 += ", "
-            Sql15 += "電話番号"
-            Sql15 += ", "
-            Sql15 += "ＦＡＸ番号"
-            Sql15 += ", "
-            Sql15 += "代表者役職"
-            Sql15 += ", "
-            Sql15 += "代表者名"
-            Sql15 += ", "
-            Sql15 += "表示順"
-            Sql15 += ", "
-            Sql15 += "備考"
-            Sql15 += ", "
-            Sql15 += "銀行コード"
-            Sql15 += ", "
-            Sql15 += "支店コード"
-            Sql15 += ", "
-            Sql15 += "預金種目"
-            Sql15 += ", "
-            Sql15 += "口座番号"
-            Sql15 += ", "
-            Sql15 += "口座名義"
-            Sql15 += ", "
-            Sql15 += "更新者"
-            Sql15 += ", "
-            Sql15 += "更新日"
-            Sql15 += ", "
-            Sql15 += "前回締日"
-            Sql15 += ", "
-            Sql15 += "今回締日"
-            Sql15 += ", "
-            Sql15 += "次回締日"
-            Sql15 += ", "
-            Sql15 += "在庫単価評価法"
-
-            _db.executeDB(Sql15)
-
-            '請求締処理日更新
-            Dim Sql16 As String = ""
-            For i As Integer = 0 To ds4.Tables(RS).Rows.Count - 1
-                Sql16 = ""
-                Sql16 += "UPDATE "
-                Sql16 += "Public."
-                Sql16 += "t23_skyuhd "
-                Sql16 += "SET "
-                Sql16 += "締処理日 "
-                Sql16 += " = '"
-                Sql16 += dtToday
-                Sql16 += "', "
-                Sql16 += "更新者"
-                Sql16 += " = '"
-                Sql16 += frmC01F10_Login.loginValue.TantoNM
-                Sql16 += "' "
 
 
-                Sql16 += " WHERE "
-                Sql16 += "会社コード"
-                Sql16 += " ILIKE  "
-                Sql16 += "'"
-                Sql16 += frmC01F10_Login.loginValue.BumonNM
-                Sql16 += "'"
-                Sql16 += " AND "
-                Sql16 += "請求番号"
-                Sql16 += " ILIKE  "
-                Sql16 += "'"
-                Sql16 += ds4.Tables(RS).Rows(i)("請求番号")
-                Sql16 += "'"
+            SqlZaiko = ""
+            SqlZaiko += "UPDATE "
+            SqlZaiko += "Public."
+            SqlZaiko += "t50_zikhd "
+            SqlZaiko += "SET "
+            SqlZaiko += " 前月末数量"
+            SqlZaiko += " = '"
+            SqlZaiko += dszaiko.Tables(RS).Rows(i)("今月末数量").ToString
+            SqlZaiko += "', "
+            SqlZaiko += " 前月末単価"
+            SqlZaiko += " = '"
+            SqlZaiko += dszaiko.Tables(RS).Rows(i)("今月単価").ToString
+            SqlZaiko += "', "
+            SqlZaiko += " 前月末間接費"
+            SqlZaiko += " = '"
+            SqlZaiko += dszaiko.Tables(RS).Rows(i)("今月間接費").ToString
+            SqlZaiko += "', "
+            SqlZaiko += "今月末数量"
+            SqlZaiko += " = '"
+            SqlZaiko += "0"
+            SqlZaiko += "', "
+            SqlZaiko += "今月単価"
+            SqlZaiko += " = '"
+            SqlZaiko += unitPrice.ToString
+            SqlZaiko += "', "
+            SqlZaiko += "今月入庫数"
+            SqlZaiko += " = '"
+            SqlZaiko += "0"
+            SqlZaiko += "', "
+            SqlZaiko += "今月出庫数"
+            SqlZaiko += " = '"
+            SqlZaiko += "0"
+            SqlZaiko += "', "
+            SqlZaiko += "今月間接費"
+            SqlZaiko += " = '"
+            SqlZaiko += OverHead.ToString
+            SqlZaiko += "', "
+            SqlZaiko += "更新者"
+            SqlZaiko += " = '"
+            SqlZaiko += frmC01F10_Login.loginValue.TantoNM
+            SqlZaiko += "', "
+            SqlZaiko += "更新日"
+            SqlZaiko += " = '"
+            SqlZaiko += dtToday
+            SqlZaiko += "' "
 
-                Sql16 += "RETURNING 締処理日"
-                Sql16 += ", "
-                Sql16 += "更新者"
+            SqlZaiko += " WHERE "
+            SqlZaiko += "会社コード"
+            SqlZaiko += " ILIKE  "
+            SqlZaiko += "'"
+            SqlZaiko += frmC01F10_Login.loginValue.BumonNM
+            SqlZaiko += "'"
+            SqlZaiko += " AND "
+            SqlZaiko += "メーカー"
+            SqlZaiko += " ILIKE  "
+            SqlZaiko += "'"
+            SqlZaiko += dszaiko.Tables(RS).Rows(i)("メーカー")
+            SqlZaiko += "'"
+            SqlZaiko += " AND "
+            SqlZaiko += "品名"
+            SqlZaiko += " ILIKE  "
+            SqlZaiko += "'"
+            SqlZaiko += dszaiko.Tables(RS).Rows(i)("品名")
+            SqlZaiko += "'"
+            SqlZaiko += " AND "
+            SqlZaiko += "型式"
+            SqlZaiko += " ILIKE  "
+            SqlZaiko += "'"
+            SqlZaiko += dszaiko.Tables(RS).Rows(i)("型式")
+            SqlZaiko += "'"
 
-                _db.executeDB(Sql16)
-            Next
+            SqlZaiko += "RETURNING 会社コード"
+            SqlZaiko += ", "
+            SqlZaiko += "年月"
+            SqlZaiko += ", "
+            SqlZaiko += "メーカー"
+            SqlZaiko += ", "
+            SqlZaiko += "品名"
+            SqlZaiko += ", "
+            SqlZaiko += "型式"
+            SqlZaiko += ", "
+            SqlZaiko += "前月末数量"
+            SqlZaiko += ", "
+            SqlZaiko += "前月末間接費"
+            SqlZaiko += ", "
+            SqlZaiko += "今月末数量"
+            SqlZaiko += ", "
+            SqlZaiko += "今月入庫数"
+            SqlZaiko += ", "
+            SqlZaiko += "今月出庫数"
+            SqlZaiko += ", "
+            SqlZaiko += "今月間接費"
+            SqlZaiko += ", "
+            SqlZaiko += "前月末単価"
+            SqlZaiko += ", "
+            SqlZaiko += "今月単価"
+            SqlZaiko += ", "
+            SqlZaiko += "更新者"
+            SqlZaiko += ", "
+            SqlZaiko += "更新日"
+
+            _db.executeDB(SqlZaiko)
+        Next
 
 
-            '買掛締処理日更新
-            Dim Sql17 As String = ""
-            For i As Integer = 0 To dsKike.Tables(RS).Rows.Count - 1
-                Sql17 = ""
-                Sql17 += "UPDATE "
-                Sql17 += "Public."
-                Sql17 += "t46_kikehd "
-                Sql17 += "SET "
-                Sql17 += "締処理日 "
-                Sql17 += " = '"
-                Sql17 += dtToday
-                Sql17 += "', "
-                Sql17 += "更新者"
-                Sql17 += " = '"
-                Sql17 += frmC01F10_Login.loginValue.TantoNM
-                Sql17 += "' "
+        For i As Integer = 0 To dszaiko.Tables(RS).Rows.Count - 1
+            SqlZaiko = ""
+            SqlZaiko += "UPDATE "
+            SqlZaiko += "Public."
+            SqlZaiko += "t50_zikhd "
+            SqlZaiko += "SET "
+            SqlZaiko += " 前月末数量"
+            SqlZaiko += " = '"
+            SqlZaiko += dszaiko.Tables(RS).Rows(i)("今月末数量").ToString
+            SqlZaiko += "', "
+            SqlZaiko += "今月末数量"
+            SqlZaiko += " = '"
+            SqlZaiko += "0"
+            SqlZaiko += "', "
+            SqlZaiko += "今月入庫数"
+            SqlZaiko += " = '"
+            SqlZaiko += "0"
+            SqlZaiko += "', "
+            SqlZaiko += "今月出庫数"
+            SqlZaiko += " = '"
+            SqlZaiko += "0"
+            SqlZaiko += "', "
+            SqlZaiko += "更新者"
+            SqlZaiko += " = '"
+            SqlZaiko += frmC01F10_Login.loginValue.TantoNM
+            SqlZaiko += "', "
+            SqlZaiko += "更新日"
+            SqlZaiko += " = '"
+            SqlZaiko += dtToday
+            SqlZaiko += "' "
 
-                Sql17 += " WHERE "
-                Sql17 += "会社コード"
-                Sql17 += " ILIKE  "
-                Sql17 += "'"
-                Sql17 += frmC01F10_Login.loginValue.BumonNM
-                Sql17 += "'"
-                Sql17 += " AND "
-                Sql17 += "買掛番号"
-                Sql17 += " ILIKE  "
-                Sql17 += "'"
-                Sql17 += dsKike.Tables(RS).Rows(i)("買掛番号")
-                Sql17 += "'"
+            SqlZaiko += " WHERE "
+            SqlZaiko += "会社コード"
+            SqlZaiko += " ILIKE  "
+            SqlZaiko += "'"
+            SqlZaiko += frmC01F10_Login.loginValue.BumonNM
+            SqlZaiko += "'"
+            SqlZaiko += " AND "
+            SqlZaiko += "メーカー"
+            SqlZaiko += " ILIKE  "
+            SqlZaiko += "'"
+            SqlZaiko += dszaiko.Tables(RS).Rows(i)("メーカー")
+            SqlZaiko += "'"
+            SqlZaiko += " AND "
+            SqlZaiko += "品名"
+            SqlZaiko += " ILIKE  "
+            SqlZaiko += "'"
+            SqlZaiko += dszaiko.Tables(RS).Rows(i)("品名")
+            SqlZaiko += "'"
+            SqlZaiko += " AND "
+            SqlZaiko += "型式"
+            SqlZaiko += " ILIKE  "
+            SqlZaiko += "'"
+            SqlZaiko += dszaiko.Tables(RS).Rows(i)("型式")
+            SqlZaiko += "'"
 
-                Sql17 += "RETURNING 締処理日"
-                Sql17 += ", "
-                Sql17 += "更新者"
+            SqlZaiko += "RETURNING 会社コード"
+            SqlZaiko += ", "
+            SqlZaiko += "年月"
+            SqlZaiko += ", "
+            SqlZaiko += "メーカー"
+            SqlZaiko += ", "
+            SqlZaiko += "品名"
+            SqlZaiko += ", "
+            SqlZaiko += "型式"
+            SqlZaiko += ", "
+            SqlZaiko += "前月末数量"
+            SqlZaiko += ", "
+            SqlZaiko += "前月末間接費"
+            SqlZaiko += ", "
+            SqlZaiko += "今月末数量"
+            SqlZaiko += ", "
+            SqlZaiko += "今月入庫数"
+            SqlZaiko += ", "
+            SqlZaiko += "今月出庫数"
+            SqlZaiko += ", "
+            SqlZaiko += "今月間接費"
+            SqlZaiko += ", "
+            SqlZaiko += "更新者"
+            SqlZaiko += ", "
+            SqlZaiko += "更新日"
 
-                _db.executeDB(Sql17)
-            Next
+            _db.executeDB(SqlZaiko)
+        Next
+
+        Dim Sql7 As String = ""
+        For i As Integer = 0 To ds6.Tables(RS).Rows.Count - 1
+            Sql7 += "SELECT "
+            Sql7 += "* "
+            Sql7 += "FROM "
+            Sql7 += "public"
+            Sql7 += "."
+            Sql7 += "t50_zikhd"
+            Sql7 += " WHERE "
+            Sql7 += "会社コード"
+            Sql7 += " ILIKE  "
+            Sql7 += "'"
+            Sql7 += frmC01F10_Login.loginValue.BumonNM
+            Sql7 += "'"
+            Sql7 += " AND "
+            Sql7 += "メーカー"
+            Sql7 += " ILIKE  "
+            Sql7 += "'"
+            Sql7 += ds6.Tables(RS).Rows(i)("メーカー")
+            Sql7 += "'"
+            Sql7 += " AND "
+            Sql7 += "品名"
+            Sql7 += " ILIKE  "
+            Sql7 += "'"
+            Sql7 += ds6.Tables(RS).Rows(i)("品名")
+            Sql7 += "'"
+            Sql7 += " AND "
+            Sql7 += "型式"
+            Sql7 += " ILIKE  "
+            Sql7 += "'"
+            Sql7 += ds6.Tables(RS).Rows(i)("型式")
+            Sql7 += "'"
+
+            Dim ds7 As DataSet = _db.selectDB(Sql7, RS, reccnt)
+            Sql7 = ""
+
+            Dim Sql8 As String = ""
+
+            If ds7.Tables(RS).Rows.Count = 0 Then
+                Sql8 = ""
+                Sql8 += "INSERT INTO "
+                Sql8 += "Public."
+                Sql8 += "t50_zikhd("
+                Sql8 += "会社コード, 年月, メーカー, 品名, 型式, 前月末数量, 前月末間接費, 今月末数量, 今月入庫数, 今月出庫数, 今月間接費, 更新者, 更新日,前月末単価, 今月単価)"
+                Sql8 += " VALUES('"
+                Sql8 += frmC01F10_Login.loginValue.BumonNM
+                Sql8 += "', '"
+                Sql8 += dtToday
+                Sql8 += "', '"
+                Sql8 += ds6.Tables(RS).Rows(i)("メーカー")
+                Sql8 += "', '"
+                Sql8 += ds6.Tables(RS).Rows(i)("品名")
+                Sql8 += "', '"
+                Sql8 += ds6.Tables(RS).Rows(i)("型式")
+                Sql8 += "', '"
+                Sql8 += "0"
+                Sql8 += "', '"
+                Sql8 += "0"
+                Sql8 += "', '"
+                Sql8 += ds6.Tables(RS).Rows(i)("仕入数量").ToString
+                Sql8 += "', '"
+                Sql8 += ds6.Tables(RS).Rows(i)("仕入数量").ToString
+                Sql8 += "', '"
+                Sql8 += "0"
+                Sql8 += "', '"
+                Sql8 += ds6.Tables(RS).Rows(i)("間接費").ToString
+                Sql8 += "', '"
+                Sql8 += frmC01F10_Login.loginValue.TantoNM
+                Sql8 += "', '"
+                Sql8 += dtToday
+                Sql8 += "', '"
+                Sql8 += "0"
+                Sql8 += "', '"
+                Sql8 += ds6.Tables(RS).Rows(i)("仕入単価").ToString
+                Sql8 += " ')"
+                Sql8 += "RETURNING 会社コード"
+                Sql8 += ", "
+                Sql8 += "年月"
+                Sql8 += ", "
+                Sql8 += "メーカー"
+                Sql8 += ", "
+                Sql8 += "品名"
+                Sql8 += ", "
+                Sql8 += "型式"
+                Sql8 += ", "
+                Sql8 += "前月末数量"
+                Sql8 += ", "
+                Sql8 += "前月末間接費"
+                Sql8 += ", "
+                Sql8 += "今月末数量"
+                Sql8 += ", "
+                Sql8 += "今月入庫数"
+                Sql8 += ", "
+                Sql8 += "今月出庫数"
+                Sql8 += ", "
+                Sql8 += "今月間接費"
+                Sql8 += ", "
+                Sql8 += "更新者"
+                Sql8 += ", "
+                Sql8 += "更新日"
+                Sql8 += ", "
+                Sql8 += "前月末単価"
+                Sql8 += ", "
+                Sql8 += "今月単価"
+                _db.executeDB(Sql8)
+            Else
+                Dim tmp1 As Double = 0
+                Dim tmp2 As Double = 0
+                Sql8 = ""
+                Sql8 += "UPDATE "
+                Sql8 += "Public."
+                Sql8 += "t50_zikhd "
+                Sql8 += "SET "
+                Sql8 += " 今月末数量"
+                Sql8 += " = '"
+                tmp1 = ds7.Tables(RS).Rows(0)("今月末数量") + ds6.Tables(RS).Rows(i)("仕入数量")
+                Sql8 += tmp1.ToString
+                Sql8 += "', "
+                Sql8 += "今月入庫数"
+                Sql8 += " = '"
+                tmp2 = ds7.Tables(RS).Rows(0)("今月入庫数") + ds6.Tables(RS).Rows(i)("仕入数量")
+                Sql8 += tmp2.ToString
+                Sql8 += "', "
+                Sql8 += "更新者"
+                Sql8 += " = '"
+                Sql8 += frmC01F10_Login.loginValue.TantoNM
+                Sql8 += "', "
+                Sql8 += "更新日"
+                Sql8 += " = '"
+                Sql8 += dtToday
+                Sql8 += "' "
+
+                Sql8 += " WHERE "
+                Sql8 += "会社コード"
+                Sql8 += " ILIKE  "
+                Sql8 += "'"
+                Sql8 += frmC01F10_Login.loginValue.BumonNM
+                Sql8 += "'"
+                Sql8 += " AND "
+                Sql8 += "メーカー"
+                Sql8 += " ILIKE  "
+                Sql8 += "'"
+                Sql8 += ds6.Tables(RS).Rows(i)("メーカー")
+                Sql8 += "'"
+                Sql8 += " AND "
+                Sql8 += "品名"
+                Sql8 += " ILIKE  "
+                Sql8 += "'"
+                Sql8 += ds6.Tables(RS).Rows(i)("品名")
+                Sql8 += "'"
+                Sql8 += " AND "
+                Sql8 += "型式"
+                Sql8 += " ILIKE  "
+                Sql8 += "'"
+                Sql8 += ds6.Tables(RS).Rows(i)("型式")
+                Sql8 += "'"
+
+                Sql8 += "RETURNING 会社コード"
+                Sql8 += ", "
+                Sql8 += "年月"
+                Sql8 += ", "
+                Sql8 += "メーカー"
+                Sql8 += ", "
+                Sql8 += "品名"
+                Sql8 += ", "
+                Sql8 += "型式"
+                Sql8 += ", "
+                Sql8 += "前月末数量"
+                Sql8 += ", "
+                Sql8 += "前月末間接費"
+                Sql8 += ", "
+                Sql8 += "今月末数量"
+                Sql8 += ", "
+                Sql8 += "今月入庫数"
+                Sql8 += ", "
+                Sql8 += "今月出庫数"
+                Sql8 += ", "
+                Sql8 += "今月間接費"
+                Sql8 += ", "
+                Sql8 += "更新者"
+                Sql8 += ", "
+                Sql8 += "更新日"
+
+                _db.executeDB(Sql8)
+            End If
+        Next
+
+        Sql7 = ""
+        For i As Integer = 0 To ds5.Tables(RS).Rows.Count - 1
+            Sql7 += "SELECT "
+            Sql7 += "* "
+            Sql7 += "FROM "
+            Sql7 += "public"
+            Sql7 += "."
+            Sql7 += "t50_zikhd"
+            Sql7 += " WHERE "
+            Sql7 += "会社コード"
+            Sql7 += " ILIKE  "
+            Sql7 += "'"
+            Sql7 += frmC01F10_Login.loginValue.BumonNM
+            Sql7 += "'"
+            Sql7 += " AND "
+            Sql7 += "メーカー"
+            Sql7 += " ILIKE  "
+            Sql7 += "'"
+            Sql7 += ds5.Tables(RS).Rows(i)("メーカー")
+            Sql7 += "'"
+            Sql7 += " AND "
+            Sql7 += "品名"
+            Sql7 += " ILIKE  "
+            Sql7 += "'"
+            Sql7 += ds5.Tables(RS).Rows(i)("品名")
+            Sql7 += "'"
+            Sql7 += " AND "
+            Sql7 += "型式"
+            Sql7 += " ILIKE  "
+            Sql7 += "'"
+            Sql7 += ds5.Tables(RS).Rows(i)("型式")
+            Sql7 += "'"
+
+            Dim ds7 As DataSet = _db.selectDB(Sql7, RS, reccnt)
+            Sql7 = ""
+
+            Dim Sql9 As String = ""
+
+            If ds7.Tables(RS).Rows.Count = 0 Then
+                Sql9 = ""
+                Sql9 += "INSERT INTO "
+                Sql9 += "Public."
+                Sql9 += "t50_zikhd("
+                Sql9 += "会社コード, 年月, メーカー, 品名, 型式, 前月末数量, 前月末間接費, 今月末数量, 今月入庫数, 今月出庫数, 今月間接費, 更新者, 更新日, 前月末単価, 今月単価)"
+                Sql9 += " VALUES('"
+                Sql9 += frmC01F10_Login.loginValue.BumonNM
+                Sql9 += "', '"
+                Sql9 += dtToday
+                Sql9 += "', '"
+                Sql9 += ds5.Tables(RS).Rows(i)("メーカー")
+                Sql9 += "', '"
+                Sql9 += ds5.Tables(RS).Rows(i)("品名")
+                Sql9 += "', '"
+                Sql9 += ds5.Tables(RS).Rows(i)("型式")
+                Sql9 += "', '"
+                Sql9 += "0"
+                Sql9 += "', '"
+                Sql9 += "0"
+                Sql9 += "', '"
+                Sql9 += ds5.Tables(RS).Rows(i)("売上数量").ToString
+                Sql9 += "', '"
+                Sql9 += "0"
+                Sql9 += "', '"
+                Sql9 += ds5.Tables(RS).Rows(i)("売上数量").ToString
+                Sql9 += "', '"
+                Sql9 += "0"
+                Sql9 += "', '"
+                Sql9 += frmC01F10_Login.loginValue.TantoNM
+                Sql9 += "', '"
+                Sql9 += dtToday
+                Sql9 += "', '"
+                Sql9 += "0"
+                Sql9 += "', '"
+                Sql9 += "0"
+                Sql9 += " ')"
+                Sql9 += "RETURNING 会社コード"
+                Sql9 += ", "
+                Sql9 += "年月"
+                Sql9 += ", "
+                Sql9 += "メーカー"
+                Sql9 += ", "
+                Sql9 += "品名"
+                Sql9 += ", "
+                Sql9 += "型式"
+                Sql9 += ", "
+                Sql9 += "前月末数量"
+                Sql9 += ", "
+                Sql9 += "前月末間接費"
+                Sql9 += ", "
+                Sql9 += "今月末数量"
+                Sql9 += ", "
+                Sql9 += "今月入庫数"
+                Sql9 += ", "
+                Sql9 += "今月出庫数"
+                Sql9 += ", "
+                Sql9 += "今月間接費"
+                Sql9 += ", "
+                Sql9 += "更新者"
+                Sql9 += ", "
+                Sql9 += "更新日"
+                Sql9 += ", "
+                Sql9 += "前月末単価"
+                Sql9 += ", "
+                Sql9 += "今月単価"
+
+                _db.executeDB(Sql9)
+
+            Else
+                Dim tmp3 As Double = 0
+                Dim tmp4 As Double = 0
+                Sql9 = ""
+                Sql9 += "UPDATE "
+                Sql9 += "Public."
+                Sql9 += "t50_zikhd "
+                Sql9 += "SET "
+                Sql9 += " 今月末数量"
+                Sql9 += " = '"
+                tmp3 = ds7.Tables(RS).Rows(0)("今月末数量") - ds5.Tables(RS).Rows(i)("売上数量")
+                Sql9 += tmp3.ToString
+                Sql9 += "', "
+                Sql9 += "今月出庫数"
+                Sql9 += " = '"
+                tmp4 = ds7.Tables(RS).Rows(0)("今月出庫数") + ds5.Tables(RS).Rows(i)("売上数量")
+                Sql9 += tmp4.ToString
+                Sql9 += "', "
+                Sql9 += "更新者"
+                Sql9 += " = '"
+                Sql9 += frmC01F10_Login.loginValue.TantoNM
+                Sql9 += "', "
+                Sql9 += "更新日"
+                Sql9 += " = '"
+                Sql9 += dtToday
+                Sql9 += "' "
+
+                Sql9 += " WHERE "
+                Sql9 += "会社コード"
+                Sql9 += " ILIKE  "
+                Sql9 += "'"
+                Sql9 += frmC01F10_Login.loginValue.BumonNM
+                Sql9 += "'"
+                Sql9 += " AND "
+                Sql9 += "メーカー"
+                Sql9 += " ILIKE  "
+                Sql9 += "'"
+                Sql9 += ds5.Tables(RS).Rows(i)("メーカー")
+                Sql9 += "'"
+                Sql9 += " AND "
+                Sql9 += "品名"
+                Sql9 += " ILIKE  "
+                Sql9 += "'"
+                Sql9 += ds5.Tables(RS).Rows(i)("品名")
+                Sql9 += "'"
+                Sql9 += " AND "
+                Sql9 += "型式"
+                Sql9 += " ILIKE  "
+                Sql9 += "'"
+                Sql9 += ds5.Tables(RS).Rows(i)("型式")
+                Sql9 += "'"
+
+                Sql9 += "RETURNING 会社コード"
+                Sql9 += ", "
+                Sql9 += "年月"
+                Sql9 += ", "
+                Sql9 += "メーカー"
+                Sql9 += ", "
+                Sql9 += "品名"
+                Sql9 += ", "
+                Sql9 += "型式"
+                Sql9 += ", "
+                Sql9 += "前月末数量"
+                Sql9 += ", "
+                Sql9 += "前月末間接費"
+                Sql9 += ", "
+                Sql9 += "今月末数量"
+                Sql9 += ", "
+                Sql9 += "今月入庫数"
+                Sql9 += ", "
+                Sql9 += "今月出庫数"
+                Sql9 += ", "
+                Sql9 += "今月間接費"
+                Sql9 += ", "
+                Sql9 += "更新者"
+                Sql9 += ", "
+                Sql9 += "更新日"
+
+                _db.executeDB(Sql9)
+            End If
+        Next
+
+        Dim Sql10 As String = ""
+        Sql10 += "SELECT "
+        Sql10 += "* "
+        Sql10 += "FROM "
+        Sql10 += "public"
+        Sql10 += "."
+        Sql10 += "t50_zikhd"
+
+        Dim ds10 As DataSet = _db.selectDB(Sql10, RS, reccnt)
+
+        Dim Sql11 As String = ""
+        For i As Integer = 0 To ds10.Tables(RS).Rows.Count - 1
+            Dim tmp5 As Double = 0
+            Sql11 = ""
+            Sql11 += "UPDATE "
+            Sql11 += "Public."
+            Sql11 += "t50_zikhd "
+            Sql11 += "SET "
+            Sql11 += " 今月末数量"
+            Sql11 += " = '"
+            tmp5 = ds10.Tables(RS).Rows(i)("今月末数量") + ds10.Tables(RS).Rows(i)("前月末数量")
+            Sql11 += tmp5.ToString
+            Sql11 += "', "
+            Sql11 += "更新者"
+            Sql11 += " = '"
+            Sql11 += frmC01F10_Login.loginValue.TantoNM
+            Sql11 += "', "
+            Sql11 += "更新日"
+            Sql11 += " = '"
+            Sql11 += dtToday
+            Sql11 += "' "
+
+            Sql11 += " WHERE "
+            Sql11 += "会社コード"
+            Sql11 += " ILIKE  "
+            Sql11 += "'"
+            Sql11 += frmC01F10_Login.loginValue.BumonNM
+            Sql11 += "'"
+            Sql11 += " AND "
+            Sql11 += "メーカー"
+            Sql11 += " ILIKE  "
+            Sql11 += "'"
+            Sql11 += ds10.Tables(RS).Rows(i)("メーカー")
+            Sql11 += "'"
+            Sql11 += " AND "
+            Sql11 += "品名"
+            Sql11 += " ILIKE  "
+            Sql11 += "'"
+            Sql11 += ds10.Tables(RS).Rows(i)("品名")
+            Sql11 += "'"
+            Sql11 += " AND "
+            Sql11 += "型式"
+            Sql11 += " ILIKE  "
+            Sql11 += "'"
+            Sql11 += ds10.Tables(RS).Rows(i)("型式")
+            Sql11 += "'"
+
+            Sql11 += "RETURNING 会社コード"
+            Sql11 += ", "
+            Sql11 += "年月"
+            Sql11 += ", "
+            Sql11 += "メーカー"
+            Sql11 += ", "
+            Sql11 += "品名"
+            Sql11 += ", "
+            Sql11 += "型式"
+            Sql11 += ", "
+            Sql11 += "前月末数量"
+            Sql11 += ", "
+            Sql11 += "前月末間接費"
+            Sql11 += ", "
+            Sql11 += "今月末数量"
+            Sql11 += ", "
+            Sql11 += "今月入庫数"
+            Sql11 += ", "
+            Sql11 += "今月出庫数"
+            Sql11 += ", "
+            Sql11 += "今月間接費"
+            Sql11 += ", "
+            Sql11 += "更新者"
+            Sql11 += ", "
+            Sql11 += "更新日"
+
+            _db.executeDB(Sql11)
+        Next
+        Dim Sql12 As String = ""
+        For i As Integer = 0 To ds5.Tables(RS).Rows.Count - 1
+            Sql12 = ""
+            Sql12 += "UPDATE "
+            Sql12 += "Public."
+            Sql12 += "t30_urighd "
+            Sql12 += "SET "
+            Sql12 += "締処理日 "
+            Sql12 += " = '"
+            Sql12 += dtToday
+            Sql12 += "', "
+            Sql12 += "更新者"
+            Sql12 += " = '"
+            Sql12 += frmC01F10_Login.loginValue.TantoNM
+            Sql12 += "', "
+            Sql12 += "更新日"
+            Sql12 += " = '"
+            Sql12 += dtToday
+            Sql12 += "' "
+
+            Sql12 += " WHERE "
+            Sql12 += "会社コード"
+            Sql12 += " ILIKE  "
+            Sql12 += "'"
+            Sql12 += frmC01F10_Login.loginValue.BumonNM
+            Sql12 += "'"
+            Sql12 += " AND "
+            Sql12 += "売上番号"
+            Sql12 += " ILIKE  "
+            Sql12 += "'"
+            Sql12 += ds5.Tables(RS).Rows(i)("売上番号")
+            Sql12 += "'"
+
+            Sql12 += "RETURNING 会社コード"
+            Sql12 += ", "
+            Sql12 += "売上番号"
+            Sql12 += ", "
+            Sql12 += "売上番号枝番"
+            Sql12 += ", "
+            Sql12 += "客先番号"
+            Sql12 += ", "
+            Sql12 += "受注番号"
+            Sql12 += ", "
+            Sql12 += "受注番号枝番"
+            Sql12 += ", "
+            Sql12 += "見積番号"
+            Sql12 += ", "
+            Sql12 += "見積番号枝番"
+            Sql12 += ", "
+            Sql12 += "得意先コード"
+            Sql12 += ", "
+            Sql12 += "得意先名"
+            Sql12 += ", "
+            Sql12 += "得意先郵便番号"
+            Sql12 += ", "
+            Sql12 += "得意先住所"
+            Sql12 += ", "
+            Sql12 += "得意先電話番号"
+            Sql12 += ", "
+            Sql12 += "得意先ＦＡＸ"
+            Sql12 += ", "
+            Sql12 += "得意先担当者役職"
+            Sql12 += ", "
+            Sql12 += "得意先担当者名"
+            Sql12 += ", "
+            Sql12 += "見積日"
+            Sql12 += ", "
+            Sql12 += "見積有効期限"
+            Sql12 += ", "
+            Sql12 += "支払条件"
+            Sql12 += ", "
+            Sql12 += "見積金額"
+            Sql12 += ", "
+            Sql12 += "売上金額"
+            Sql12 += ", "
+            Sql12 += "粗利額"
+            Sql12 += ", "
+            Sql12 += "営業担当者"
+            Sql12 += ", "
+            Sql12 += "入力担当者"
+            Sql12 += ", "
+            Sql12 += "備考"
+            Sql12 += ", "
+            Sql12 += "取消日"
+            Sql12 += ", "
+            Sql12 += "取消区分"
+            Sql12 += ", "
+            Sql12 += "ＶＡＴ"
+            Sql12 += ", "
+            Sql12 += "ＰＰＨ"
+            Sql12 += ", "
+            Sql12 += "受注日"
+            Sql12 += ", "
+            Sql12 += "売上日"
+            Sql12 += ", "
+            Sql12 += "入金予定日"
+            Sql12 += ", "
+            Sql12 += "登録日"
+            Sql12 += ", "
+            Sql12 += "更新日"
+            Sql12 += ", "
+            Sql12 += "更新者"
+
+            _db.executeDB(Sql12)
+        Next
+
+        Dim Sql13 As String = ""
+        For i As Integer = 0 To ds6.Tables(RS).Rows.Count - 1
+            Sql13 = ""
+            Sql13 += "UPDATE "
+            Sql13 += "Public."
+            Sql13 += "t40_sirehd "
+            Sql13 += "SET "
+            Sql13 += "締処理日 "
+            Sql13 += " = '"
+            Sql13 += dtToday
+            Sql13 += "', "
+            Sql13 += "更新者"
+            Sql13 += " = '"
+            Sql13 += frmC01F10_Login.loginValue.TantoNM
+            Sql13 += "', "
+            Sql13 += "更新日"
+            Sql13 += " = '"
+            Sql13 += dtToday
+            Sql13 += "' "
+
+            Sql13 += " WHERE "
+            Sql13 += "会社コード"
+            Sql13 += " ILIKE  "
+            Sql13 += "'"
+            Sql13 += frmC01F10_Login.loginValue.BumonNM
+            Sql13 += "'"
+            Sql13 += " AND "
+            Sql13 += "仕入番号"
+            Sql13 += " ILIKE  "
+            Sql13 += "'"
+            Sql13 += ds6.Tables(RS).Rows(i)("仕入番号")
+            Sql13 += "'"
+
+            Sql13 += "RETURNING 締処理日"
+            Sql13 += ", "
+            Sql13 += "更新日"
+            Sql13 += ", "
+            Sql13 += "更新者"
+
+            _db.executeDB(Sql13)
+        Next
+
+        Dim Sql14 As String = ""
+
+        Sql14 = ""
+        Sql14 += "INSERT INTO "
+        Sql14 += "Public."
+        Sql14 += "t51_smlog("
+        Sql14 += "会社コード, 処理日時, 前回締日, 今回締日, 次回締日, 担当者)"
+        Sql14 += " VALUES('"
+        Sql14 += frmC01F10_Login.loginValue.BumonNM
+        Sql14 += "', '"
+        Sql14 += dtToday
+        Sql14 += "', '"
+        Sql14 += ds1.Tables(RS).Rows(0)("前回締日")
+        Sql14 += "', '"
+        Sql14 += ds1.Tables(RS).Rows(0)("今回締日")
+        Sql14 += "', '"
+        Sql14 += ds1.Tables(RS).Rows(0)("次回締日")
+        Sql14 += "', '"
+        Sql14 += frmC01F10_Login.loginValue.TantoNM
+        Sql14 += " ')"
+        Sql14 += "RETURNING "
+        Sql14 += "会社コード"
+        Sql14 += ", "
+        Sql14 += "処理日時"
+        Sql14 += ", "
+        Sql14 += "前回締日"
+        Sql14 += ", "
+        Sql14 += "今回締日"
+        Sql14 += ", "
+        Sql14 += "次回締日"
+        Sql14 += ", "
+        Sql14 += "担当者"
+
+        _db.executeDB(Sql14)
+
+        Dim thisClosingDate As DateTime = DateTime.Parse(ds1.Tables(RS).Rows(0)("次回締日"))
+        Dim dtYear As Integer = thisClosingDate.Year
+        Dim dtMonth As Integer = thisClosingDate.Month
+        If dtMonth < 12 Then
+            dtMonth += 1
+        Else
+            dtYear += 1
+            dtMonth = 1
+        End If
+
+        Dim dtdays As Integer = DateTime.DaysInMonth(dtYear, dtMonth)
+        Dim nextClosingDate = New DateTime(dtYear, dtMonth, dtdays)
+        Dim Sql15 As String = ""
+        Sql15 = ""
+        Sql15 += "UPDATE "
+        Sql15 += "Public."
+        Sql15 += "m01_company "
+        Sql15 += "SET "
+        Sql15 += "前回締日 "
+        Sql15 += " = '"
+        Sql15 += ds1.Tables(RS).Rows(0)("今回締日")
+        Sql15 += "', "
+        Sql15 += "今回締日"
+        Sql15 += " = '"
+        Sql15 += ds1.Tables(RS).Rows(0)("次回締日")
+        Sql15 += "', "
+        Sql15 += "次回締日"
+        Sql15 += " = '"
+        Sql15 += nextClosingDate
+        Sql15 += "' "
+
+        Sql15 += " WHERE "
+        Sql15 += "会社コード"
+        Sql15 += " ILIKE  "
+        Sql15 += "'"
+        Sql15 += frmC01F10_Login.loginValue.BumonNM
+        Sql15 += "'"
+
+        Sql15 += "RETURNING 会社コード"
+        Sql15 += ", "
+        Sql15 += "会社名"
+        Sql15 += ", "
+        Sql15 += "会社略称"
+        Sql15 += ", "
+        Sql15 += "郵便番号"
+        Sql15 += ", "
+        Sql15 += "住所１"
+        Sql15 += ", "
+        Sql15 += "住所２"
+        Sql15 += ", "
+        Sql15 += "住所３"
+        Sql15 += ", "
+        Sql15 += "電話番号"
+        Sql15 += ", "
+        Sql15 += "ＦＡＸ番号"
+        Sql15 += ", "
+        Sql15 += "代表者役職"
+        Sql15 += ", "
+        Sql15 += "代表者名"
+        Sql15 += ", "
+        Sql15 += "表示順"
+        Sql15 += ", "
+        Sql15 += "備考"
+        Sql15 += ", "
+        Sql15 += "銀行コード"
+        Sql15 += ", "
+        Sql15 += "支店コード"
+        Sql15 += ", "
+        Sql15 += "預金種目"
+        Sql15 += ", "
+        Sql15 += "口座番号"
+        Sql15 += ", "
+        Sql15 += "口座名義"
+        Sql15 += ", "
+        Sql15 += "更新者"
+        Sql15 += ", "
+        Sql15 += "更新日"
+        Sql15 += ", "
+        Sql15 += "前回締日"
+        Sql15 += ", "
+        Sql15 += "今回締日"
+        Sql15 += ", "
+        Sql15 += "次回締日"
+        Sql15 += ", "
+        Sql15 += "在庫単価評価法"
+
+        _db.executeDB(Sql15)
+
+        '請求締処理日更新
+        Dim Sql16 As String = ""
+        For i As Integer = 0 To ds4.Tables(RS).Rows.Count - 1
+            Sql16 = ""
+            Sql16 += "UPDATE "
+            Sql16 += "Public."
+            Sql16 += "t23_skyuhd "
+            Sql16 += "SET "
+            Sql16 += "締処理日 "
+            Sql16 += " = '"
+            Sql16 += dtToday
+            Sql16 += "', "
+            Sql16 += "更新者"
+            Sql16 += " = '"
+            Sql16 += frmC01F10_Login.loginValue.TantoNM
+            Sql16 += "' "
 
 
+            Sql16 += " WHERE "
+            Sql16 += "会社コード"
+            Sql16 += " ILIKE  "
+            Sql16 += "'"
+            Sql16 += frmC01F10_Login.loginValue.BumonNM
+            Sql16 += "'"
+            Sql16 += " AND "
+            Sql16 += "請求番号"
+            Sql16 += " ILIKE  "
+            Sql16 += "'"
+            Sql16 += ds4.Tables(RS).Rows(i)("請求番号")
+            Sql16 += "'"
+
+            Sql16 += "RETURNING 締処理日"
+            Sql16 += ", "
+            Sql16 += "更新者"
+
+            _db.executeDB(Sql16)
+        Next
+
+
+        '買掛締処理日更新
+        Dim Sql17 As String = ""
+        For i As Integer = 0 To dsKike.Tables(RS).Rows.Count - 1
+            Sql17 = ""
+            Sql17 += "UPDATE "
+            Sql17 += "Public."
+            Sql17 += "t46_kikehd "
+            Sql17 += "SET "
+            Sql17 += "締処理日 "
+            Sql17 += " = '"
+            Sql17 += dtToday
+            Sql17 += "', "
+            Sql17 += "更新者"
+            Sql17 += " = '"
+            Sql17 += frmC01F10_Login.loginValue.TantoNM
+            Sql17 += "' "
+
+            Sql17 += " WHERE "
+            Sql17 += "会社コード"
+            Sql17 += " ILIKE  "
+            Sql17 += "'"
+            Sql17 += frmC01F10_Login.loginValue.BumonNM
+            Sql17 += "'"
+            Sql17 += " AND "
+            Sql17 += "買掛番号"
+            Sql17 += " ILIKE  "
+            Sql17 += "'"
+            Sql17 += dsKike.Tables(RS).Rows(i)("買掛番号")
+            Sql17 += "'"
+
+            Sql17 += "RETURNING 締処理日"
+            Sql17 += ", "
+            Sql17 += "更新者"
+
+            _db.executeDB(Sql17)
+        Next
+
+        '仕入明細締処理日更新
+        Dim Sql18 As String = ""
+        For i As Integer = 0 To ds6.Tables(RS).Rows.Count - 1
+            Sql18 = ""
+            Sql18 += "UPDATE "
+            Sql18 += "Public."
+            Sql18 += "t41_siredt "
+            Sql18 += "SET "
+            Sql18 += "締処理日 "
+            Sql18 += " = '"
+            Sql18 += dtToday
+            Sql18 += "', "
+            Sql18 += "更新者"
+            Sql18 += " = '"
+            Sql18 += frmC01F10_Login.loginValue.TantoNM
+            Sql18 += "' "
+
+            Sql18 += " WHERE "
+            Sql18 += "会社コード"
+            Sql18 += " ILIKE  "
+            Sql18 += "'"
+            Sql18 += frmC01F10_Login.loginValue.BumonNM
+            Sql18 += "'"
+            Sql18 += " AND "
+            Sql18 += "仕入番号"
+            Sql18 += " ILIKE  "
+            Sql18 += "'"
+            Sql18 += ds6.Tables(RS).Rows(i)("仕入番号")
+            Sql18 += "'"
+
+            Sql18 += "RETURNING 締処理日"
+            Sql18 += ", "
+            Sql18 += "更新者"
+
+            _db.executeDB(Sql18)
+        Next
 
 
         DgvClosingLog.Rows.Clear()
@@ -2918,7 +2925,7 @@ Public Class ClosingLog
         Sql += "'"
         Dim csvUrighd As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-        ConvertDataTableToCsv(csvUrighd, "t53_krurigdt", "売上番号", "Urig")
+        ConvertDataTableToCsv(csvUrighd, "t53_krurigdt", "売上番号", "Uriage")
 
         Sql = ""
         Sql += "SELECT "
@@ -2941,7 +2948,7 @@ Public Class ClosingLog
         Sql += "'"
         Dim csvSirehd As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-        ConvertDataTableToCsv(csvSirehd, "t55_krsiredt", "仕入番号", "Sire")
+        ConvertDataTableToCsv(csvSirehd, "t55_krsiredt", "仕入番号", "Siire")
 
         Sql = ""
         Sql += "SELECT "
@@ -2964,7 +2971,7 @@ Public Class ClosingLog
         Sql += "'"
         Dim csvSkyuhd As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-        ConvertDataTableToCsvSingle(csvSkyuhd, "Skyu")
+        ConvertDataTableToCsvSingle(csvSkyuhd, "Maeuke")
 
         Sql = ""
         Sql += "SELECT "
@@ -2987,7 +2994,7 @@ Public Class ClosingLog
         Sql += "'"
         Dim csvKikehd As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-        ConvertDataTableToCsvSingle(csvKikehd, "Kike")
+        ConvertDataTableToCsvSingle(csvKikehd, "Maebarai")
 #End Region
         _msgHd.dspMSG("CreateExcel")
     End Sub
