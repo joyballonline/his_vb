@@ -1232,7 +1232,14 @@ Public Class OrderManagement
         Sql2 += Suffix
 
         Dim ds2 As DataSet = _db.selectDB(Sql2, RS, reccnt)
+        Dim skyuPrice As Integer = 0
+        If ds2.Tables(RS).Rows.Count > 0 Then
+            For i As Integer = 0 To ds2.Tables(RS).Rows.Count - 1
+                skyuPrice += ds2.Tables(RS).Rows(i)("請求金額計")
+            Next
+        End If
 
+        Dim tmp As Integer = 0
         Sql3 = ""
         Sql3 += "INSERT INTO "
         Sql3 += "Public."
@@ -1257,9 +1264,10 @@ Public Class OrderManagement
         Sql3 += "', '"
         Sql3 += ds1.Tables(RS).Rows(0)("得意先名").ToString
         Sql3 += "', '"
-        Sql3 += BillingAmount.ToString
+        tmp = BillingAmount.ToString - skyuPrice
+        Sql3 += tmp.ToString
         Sql3 += "', '"
-        Sql3 += BillingAmount.ToString
+        Sql3 += tmp.ToString
         Sql3 += "', '"
         Sql3 += TxtRemarks.Text
         Sql3 += "', '"

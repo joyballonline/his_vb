@@ -820,6 +820,13 @@ Public Class Cymn
             Sql += "'"
             Dim ds1 As DataSet = _db.selectDB(Sql, RS, reccnt)
 
+            Dim cost As Integer = 0
+            For i As Integer = 0 To DgvItemList.Rows.Count - 1
+                If DgvItemList.Rows(i).Cells("仕入先").Value = supplier Then
+                    cost += DgvItemList.Rows(i).Cells("仕入原価").Value
+                End If
+            Next
+
             Dim PurchaseNo As String = Saiban.Tables(RS).Rows(0)(5)
             PurchaseNo += dtNow.ToString("MMdd")
             PurchaseNo += PurchaseCount.PadLeft(Saiban.Tables(RS).Rows(0)(6), "0")
@@ -895,7 +902,7 @@ Public Class Cymn
             Sql3 += "', '"
             Sql3 += TxtOrderAmount.Text
             Sql3 += "', '"
-            Sql3 += TxtPurchaseAmount.Text
+            Sql3 += cost.ToString
             Sql3 += "', '"
             Sql3 += TxtGrossProfit.Text
             Sql3 += "', '"
