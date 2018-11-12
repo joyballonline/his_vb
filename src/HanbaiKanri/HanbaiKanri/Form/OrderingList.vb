@@ -69,7 +69,7 @@ Public Class OrderingList
         Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
         Me.ControlBox = Not Me.ControlBox
         _init = True
-
+        DgvHtyhd.AutoSizeColumnsMode = DataGridViewAutoSizeColumnMode.DisplayedCells
     End Sub
 
     'Private Sub SelectList()
@@ -125,6 +125,8 @@ Public Class OrderingList
                 Sql += "'"
                 Sql += "0"
                 Sql += "'"
+                Sql += " ORDER BY "
+                Sql += "発注日 DESC"
                 'Dim stData As String = ""
                 'Dim stArrayData() As String
                 'For i As Integer = 0 To List.Count - 1
@@ -209,6 +211,8 @@ Public Class OrderingList
                 Sql += "public"
                 Sql += "."
                 Sql += "t20_hattyu"
+                Sql += " ORDER BY "
+                Sql += "発注日 DESC"
 
                 Dim reccnt As Integer = 0
                 ds = _db.selectDB(Sql, RS, reccnt)
@@ -263,6 +267,7 @@ Public Class OrderingList
                 Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", UtilClass.getErrDetail(ex)))
             End Try
         End If
+
     End Sub
     Private Sub MstHanyoue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If _status = "ORDING" Then
@@ -337,6 +342,8 @@ Public Class OrderingList
                     End If
                 Next
             End If
+            Sql += " ORDER BY "
+            Sql += "登録日 DESC"
 
 
 
@@ -414,6 +421,8 @@ Public Class OrderingList
                     End If
                 Next
             End If
+            Sql += " ORDER BY "
+            Sql += "登録日 DESC"
 
             Dim reccnt As Integer = 0
             ds = _db.selectDB(Sql, RS, reccnt)
@@ -828,6 +837,8 @@ Public Class OrderingList
                     count += 1
                 End If
             End If
+            Sql += " ORDER BY "
+            Sql += "登録日 DESC"
 
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)

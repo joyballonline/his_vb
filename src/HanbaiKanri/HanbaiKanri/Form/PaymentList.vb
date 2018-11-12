@@ -62,7 +62,7 @@ Public Class PaymentList
         Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
         Me.ControlBox = Not Me.ControlBox
         _init = True
-
+        DgvSupplier.AutoSizeColumnsMode = DataGridViewAutoSizeColumnMode.DisplayedCells
     End Sub
 
     Private Sub MstSuppliere_Load(sender As Object, e As EventArgs) Handles MyBase.Load

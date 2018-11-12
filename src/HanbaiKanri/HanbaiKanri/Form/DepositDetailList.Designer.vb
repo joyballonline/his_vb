@@ -128,7 +128,6 @@ Partial Class DepositDetailList
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(195, 37)
         Me.Panel1.TabIndex = 324
-        Me.Panel1.Visible = False
         '
         'Label10
         '

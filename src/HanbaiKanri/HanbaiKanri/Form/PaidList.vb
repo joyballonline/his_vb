@@ -68,7 +68,7 @@ Public Class PaidList
         Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
         Me.ControlBox = Not Me.ControlBox
         _init = True
-
+        DgvHtyhd.AutoSizeColumnsMode = DataGridViewAutoSizeColumnMode.DisplayedCells
     End Sub
     Private Sub PurchaseListLoad(Optional ByRef Status As String = "")
         If Status = "EXCLUSION" Then
@@ -86,6 +86,8 @@ Public Class PaidList
                 Sql += "'"
                 Sql += "0"
                 Sql += "'"
+                Sql += " ORDER BY "
+                Sql += "登録日 DESC"
 
                 Dim reccnt As Integer = 0
                 ds = _db.selectDB(Sql, RS, reccnt)
@@ -131,6 +133,8 @@ Public Class PaidList
                 Sql += "public"
                 Sql += "."
                 Sql += "t47_shrihd"
+                Sql += " ORDER BY "
+                Sql += "登録日 DESC"
 
                 Dim reccnt As Integer = 0
                 ds = _db.selectDB(Sql, RS, reccnt)
@@ -226,7 +230,8 @@ Public Class PaidList
                     End If
                 Next
             End If
-
+            Sql += " ORDER BY "
+            Sql += "登録日 DESC"
 
 
             Dim reccnt As Integer = 0
@@ -285,6 +290,8 @@ Public Class PaidList
                     End If
                 Next
             End If
+            Sql += " ORDER BY "
+            Sql += "更新日 DESC"
 
             Dim reccnt As Integer = 0
             ds = _db.selectDB(Sql, RS, reccnt)
@@ -506,6 +513,8 @@ Public Class PaidList
                     End If
                 End If
             End If
+            Sql += " ORDER BY "
+            Sql += "登録日 DESC"
 
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)

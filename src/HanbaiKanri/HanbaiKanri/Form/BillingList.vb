@@ -68,7 +68,7 @@ Public Class BillingList
         Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
         Me.ControlBox = Not Me.ControlBox
         _init = True
-
+        DgvBilling.AutoSizeColumnsMode = DataGridViewAutoSizeColumnMode.DisplayedCells
     End Sub
     Private Sub PurchaseListLoad(Optional ByRef Status As String = "")
         If Status = "EXCLUSION" Then
@@ -86,6 +86,8 @@ Public Class BillingList
                 Sql += "'"
                 Sql += "0"
                 Sql += "'"
+                Sql += " ORDER BY "
+                Sql += "登録日 DESC"
 
                 Dim reccnt As Integer = 0
                 ds = _db.selectDB(Sql, RS, reccnt)
@@ -141,6 +143,8 @@ Public Class BillingList
                 Sql += "public"
                 Sql += "."
                 Sql += "t23_skyuhd"
+                Sql += " ORDER BY "
+                Sql += "登録日 DESC"
 
                 Dim reccnt As Integer = 0
                 ds = _db.selectDB(Sql, RS, reccnt)
@@ -188,6 +192,7 @@ Public Class BillingList
                 Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", UtilClass.getErrDetail(ex)))
             End Try
         End If
+
     End Sub
     Private Sub MstHanyoue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If _status = "VIEW" Then
@@ -573,6 +578,8 @@ Public Class BillingList
                     count += 1
                 End If
             End If
+            Sql += " ORDER BY "
+            Sql += "登録日 DESC"
 
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
