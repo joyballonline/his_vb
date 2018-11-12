@@ -3053,7 +3053,6 @@ Public Class ClosingLog
                     Dim field As String = ds3.Tables(RS).Columns(z).ColumnName
                     field = EncloseDoubleQuotesIfNeed(field)
                     sr.Write(field)
-                    sr.Write(","c)
                     If z < ds3.Tables(RS).Columns.Count - 1 Then
                         sr.Write(","c)
                     End If
@@ -3078,7 +3077,6 @@ Public Class ClosingLog
                     Dim field As String = ds3.Tables(RS).Rows(x)(z).ToString()
                     field = EncloseDoubleQuotesIfNeed(field)
                     sr.Write(field)
-                    sr.Write(","c)
                     If z < ds3.Tables(RS).Columns.Count - 1 Then
                         sr.Write(","c)
                     End If
