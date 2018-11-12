@@ -1949,9 +1949,9 @@ Public Class ClosingLog
                             Sql += "', '"
                             Sql += dsUrigdt.Tables(RS).Rows(x)("見積金額").ToString
                             Sql += "', '"
-                            Sql += dsUrigdt.Tables(RS).Rows(x)("粗利率").ToString
-                            Sql += "', '"
                             Sql += dsUrigdt.Tables(RS).Rows(x)("粗利額").ToString
+                            Sql += "', '"
+                            Sql += dsUrigdt.Tables(RS).Rows(x)("粗利率").ToString
                             Sql += "', '"
                             Sql += dsUrigdt.Tables(RS).Rows(x)("リードタイム").ToString
                             Sql += "', '"
@@ -2167,9 +2167,9 @@ Public Class ClosingLog
                     Sql += "', '"
                     Sql += dsUrigdt.Tables(RS).Rows(x)("見積金額").ToString
                     Sql += "', '"
-                    Sql += dsUrigdt.Tables(RS).Rows(x)("粗利率").ToString
-                    Sql += "', '"
                     Sql += dsUrigdt.Tables(RS).Rows(x)("粗利額").ToString
+                    Sql += "', '"
+                    Sql += dsUrigdt.Tables(RS).Rows(x)("粗利率").ToString
                     Sql += "', '"
                     Sql += dsUrigdt.Tables(RS).Rows(x)("リードタイム").ToString
                     Sql += "', '"
