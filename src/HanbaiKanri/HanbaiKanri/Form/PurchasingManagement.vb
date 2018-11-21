@@ -456,6 +456,11 @@ Public Class PurchasingManagement
             WH += dtToday.ToString("MMdd")
             WH += dsSaiban2.Tables(RS).Rows(0)("最新値").ToString.PadLeft(dsSaiban2.Tables(RS).Rows(0)("連番桁数"), "0")
 
+            Dim PurchaseAmount As Double = 0
+            For i As Integer = 0 To ds2.Tables(RS).Rows.Count - 1
+                PurchaseAmount += ds2.Tables(RS).Rows(i)("仕入金額")
+            Next
+
             Sql3 = ""
             Sql3 += "INSERT INTO "
             Sql3 += "Public."
@@ -490,7 +495,7 @@ Public Class PurchasingManagement
             Sql3 += "', '"
             Sql3 += ds1.Tables(RS).Rows(0)("支払条件").ToString
             Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("仕入金額").ToString
+            Sql3 += PurchaseAmount.ToString
             Sql3 += "', '"
             Sql3 += ds1.Tables(RS).Rows(0)("粗利額").ToString
             Sql3 += "', '"
