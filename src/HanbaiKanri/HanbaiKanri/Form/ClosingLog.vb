@@ -4830,6 +4830,29 @@ Public Class ClosingLog
         Dim csvShrihd As DataSet = _db.selectDB(Sql, RS, reccnt)
 
         ConvertDataTableToCsv(csvShrihd, "t65_krshridt", "支払番号", "Siharai")
+
+        Sql = ""
+        Sql += "SELECT "
+        Sql += "* "
+        Sql += "FROM "
+        Sql += "public"
+        Sql += "."
+        Sql += "t66_swkhd"
+        Sql += " WHERE "
+        Sql += "会社コード"
+        Sql += " ILIKE  "
+        Sql += "'"
+        Sql += frmC01F10_Login.loginValue.BumonNM
+        Sql += "'"
+        Sql += " AND "
+        Sql += "仕分日"
+        Sql += " = "
+        Sql += "'"
+        Sql += dtToday
+        Sql += "'"
+        Dim csvSwkhd As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+        ConvertDataTableToCsvSingle(csvSwkhd, "Shiwake")
 #End Region
         _msgHd.dspMSG("CreateExcel")
 
