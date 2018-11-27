@@ -538,9 +538,15 @@ Public Class ClosingLog
             SqlZaiko += " = '"
             SqlZaiko += "0"
             SqlZaiko += "', "
-            SqlZaiko += "今月単価"
-            SqlZaiko += " = '"
-            SqlZaiko += unitPrice.ToString
+            If unitPrice.ToString = "∞" Or "-∞" Then
+                SqlZaiko += "今月単価"
+                SqlZaiko += " = '"
+                SqlZaiko += "0"
+            Else
+                SqlZaiko += "今月単価"
+                SqlZaiko += " = '"
+                SqlZaiko += unitPrice.ToString
+            End If
             SqlZaiko += "', "
             SqlZaiko += "今月入庫数"
             SqlZaiko += " = '"
@@ -550,9 +556,16 @@ Public Class ClosingLog
             SqlZaiko += " = '"
             SqlZaiko += "0"
             SqlZaiko += "', "
-            SqlZaiko += "今月間接費"
-            SqlZaiko += " = '"
-            SqlZaiko += OverHead.ToString
+            If OverHead.ToString = "∞" Or "-∞" Then
+                SqlZaiko += "今月間接費"
+                SqlZaiko += " = '"
+                SqlZaiko += "0"
+            Else
+                SqlZaiko += "今月間接費"
+                SqlZaiko += " = '"
+                SqlZaiko += OverHead.ToString
+            End If
+
             SqlZaiko += "', "
             SqlZaiko += "更新者"
             SqlZaiko += " = '"
