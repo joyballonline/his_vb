@@ -5029,7 +5029,7 @@ Public Class ClosingLog
         field.EndsWith(vbTab)
     End Function
 
-    Private Sub Swk()
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Dim dtToday As DateTime = DateTime.Now
         Dim reccnt As Integer = 0
         Dim Sql As String = ""
@@ -5102,7 +5102,7 @@ Public Class ClosingLog
             Sql += dsNkinkshihd.Tables(RS).Rows(i)("請求番号")
             Sql += "'"
             Dim dsNkinSkyu As DataSet = _db.selectDB(Sql, RS, reccnt)
-            If dsNkinSkyu.Tables(RS).Rows(0)("請求区分") = "2" Then
+            If dsNkinSkyu.Tables(RS).Rows(0)("請求区分") = "1" Then
                 Sql = ""
                 Sql += "SELECT "
                 Sql += "* "
@@ -5478,7 +5478,7 @@ Public Class ClosingLog
             Sql += "'"
             Dim dsShriKike As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-            If dsShriKike.Tables(RS).Rows(0)("買掛区分") = "2" Then
+            If dsShriKike.Tables(RS).Rows(0)("買掛区分") = "1" Then
                 Sql = ""
                 Sql += "SELECT "
                 Sql += "* "
@@ -5870,6 +5870,27 @@ Public Class ClosingLog
             _db.executeDB(Sql)
         Next
 #End Region
+        Sql = ""
+        Sql += "SELECT "
+        Sql += "* "
+        Sql += "FROM "
+        Sql += "public"
+        Sql += "."
+        Sql += "t66_swkhd"
+        Sql += " WHERE "
+        Sql += "会社コード"
+        Sql += " ILIKE  "
+        Sql += "'"
+        Sql += frmC01F10_Login.loginValue.BumonNM
+        Sql += "'"
+        Sql += " AND "
+        Sql += "仕分日"
+        Sql += " = "
+        Sql += "'"
+        Sql += dtToday
+        Sql += "'"
+        Dim csvSwkhd As DataSet = _db.selectDB(Sql, RS, reccnt)
 
+        ConvertDataTableToCsvSingle(csvSwkhd, "Shiwake")
     End Sub
 End Class

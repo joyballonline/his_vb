@@ -1056,7 +1056,7 @@ Public Class Cymn
                     Sql4 += "', '"
                     Sql4 += DgvItemList.Rows(hattyuIdx).Cells("売単価").Value.ToString
                     Sql4 += "', '"
-                    Sql4 += DgvItemList.Rows(hattyuIdx).Cells("仕入金額").Value.ToString
+                    Sql4 += DgvItemList.Rows(hattyuIdx).Cells("仕入原価").Value.ToString
                     Sql4 += "', '"
                     Dim overhead As Double = 0
                     overhead = DgvItemList.Rows(hattyuIdx).Cells("仕入金額").Value - DgvItemList.Rows(hattyuIdx).Cells("仕入原価").Value
