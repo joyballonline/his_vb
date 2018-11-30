@@ -269,7 +269,7 @@ Public Class PaidList
             Sql += "FROM "
             Sql += "public"
             Sql += "."
-            Sql += "t48_shridt"
+            Sql += "t49_shrikshihd"
 
             If OrderNo IsNot Nothing Then
                 For i As Integer = 0 To OrderNo.Length - 1
@@ -297,10 +297,8 @@ Public Class PaidList
             ds = _db.selectDB(Sql, RS, reccnt)
 
             DgvHtyhd.Columns.Add("支払番号", "支払番号")
-            DgvHtyhd.Columns.Add("行番号", "行番号")
-            DgvHtyhd.Columns.Add("支払種別名", "支払種別名")
+            DgvHtyhd.Columns.Add("買掛番号", "買掛番号")
             DgvHtyhd.Columns.Add("支払先名", "支払先名")
-            DgvHtyhd.Columns.Add("支払先", "支払先")
             DgvHtyhd.Columns.Add("支払金額", "支払金額")
             DgvHtyhd.Columns.Add("支払日", "支払日")
             DgvHtyhd.Columns.Add("備考", "備考")
@@ -310,11 +308,9 @@ Public Class PaidList
             For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
                 DgvHtyhd.Rows.Add()
                 DgvHtyhd.Rows(index).Cells("支払番号").Value = ds.Tables(RS).Rows(index)("支払番号")
-                DgvHtyhd.Rows(index).Cells("行番号").Value = ds.Tables(RS).Rows(index)("行番号")
-                DgvHtyhd.Rows(index).Cells("支払種別名").Value = ds.Tables(RS).Rows(index)("支払種別名")
+                DgvHtyhd.Rows(index).Cells("買掛番号").Value = ds.Tables(RS).Rows(index)("買掛番号")
                 DgvHtyhd.Rows(index).Cells("支払先名").Value = ds.Tables(RS).Rows(index)("支払先名")
-                DgvHtyhd.Rows(index).Cells("支払先").Value = ds.Tables(RS).Rows(index)("支払先")
-                DgvHtyhd.Rows(index).Cells("支払金額").Value = ds.Tables(RS).Rows(index)("支払金額")
+                DgvHtyhd.Rows(index).Cells("支払金額").Value = ds.Tables(RS).Rows(index)("支払消込額計")
                 DgvHtyhd.Rows(index).Cells("支払日").Value = ds.Tables(RS).Rows(index)("支払日")
                 DgvHtyhd.Rows(index).Cells("備考").Value = ds.Tables(RS).Rows(index)("備考")
             Next

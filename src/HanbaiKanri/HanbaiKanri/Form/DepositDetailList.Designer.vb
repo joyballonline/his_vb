@@ -101,7 +101,7 @@ Partial Class DepositDetailList
         '
         Me.ChkCancelData.AutoSize = True
         Me.ChkCancelData.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.ChkCancelData.Location = New System.Drawing.Point(16, 204)
+        Me.ChkCancelData.Location = New System.Drawing.Point(401, 196)
         Me.ChkCancelData.Name = "ChkCancelData"
         Me.ChkCancelData.Size = New System.Drawing.Size(139, 19)
         Me.ChkCancelData.TabIndex = 8
@@ -124,7 +124,7 @@ Partial Class DepositDetailList
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel1.Controls.Add(Me.RbtnSlip)
         Me.Panel1.Controls.Add(Me.RbtnDetails)
-        Me.Panel1.Location = New System.Drawing.Point(1144, 195)
+        Me.Panel1.Location = New System.Drawing.Point(16, 187)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(195, 37)
         Me.Panel1.TabIndex = 324

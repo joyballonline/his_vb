@@ -272,7 +272,7 @@ Public Class DepositDetailList
             Sql += "FROM "
             Sql += "public"
             Sql += "."
-            Sql += "t26_nkindt"
+            Sql += "t27_nkinkshihd"
 
             If OrderingNo IsNot Nothing Then
                 For i As Integer = 0 To OrderingNo.Length - 1
@@ -294,16 +294,14 @@ Public Class DepositDetailList
                 Next
             End If
             Sql += " ORDER BY "
-            Sql += "登録日 DESC"
+            Sql += "更新日 DESC"
 
             Dim reccnt As Integer = 0
             ds = _db.selectDB(Sql, RS, reccnt)
 
             DgvBilling.Columns.Add("入金番号", "入金番号")
-            DgvBilling.Columns.Add("行番号", "行番号")
-            DgvBilling.Columns.Add("入金種別", "入金種別")
+            DgvBilling.Columns.Add("請求番号", "請求番号")
             DgvBilling.Columns.Add("請求先名", "請求先名")
-            DgvBilling.Columns.Add("振込先", "振込先")
             DgvBilling.Columns.Add("入金額", "入金額")
             DgvBilling.Columns.Add("入金日", "入金日")
             DgvBilling.Columns.Add("備考", "備考")
@@ -311,11 +309,9 @@ Public Class DepositDetailList
             For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
                 DgvBilling.Rows.Add()
                 DgvBilling.Rows(index).Cells("入金番号").Value = ds.Tables(RS).Rows(index)("入金番号")
-                DgvBilling.Rows(index).Cells("行番号").Value = ds.Tables(RS).Rows(index)("行番号")
-                DgvBilling.Rows(index).Cells("入金種別").Value = ds.Tables(RS).Rows(index)("入金種別")
+                DgvBilling.Rows(index).Cells("請求番号").Value = ds.Tables(RS).Rows(index)("請求番号")
                 DgvBilling.Rows(index).Cells("請求先名").Value = ds.Tables(RS).Rows(index)("請求先名")
-                DgvBilling.Rows(index).Cells("振込先").Value = ds.Tables(RS).Rows(index)("振込先")
-                DgvBilling.Rows(index).Cells("入金額").Value = ds.Tables(RS).Rows(index)("入金額")
+                DgvBilling.Rows(index).Cells("入金額").Value = ds.Tables(RS).Rows(index)("入金消込額計")
                 DgvBilling.Rows(index).Cells("入金日").Value = ds.Tables(RS).Rows(index)("入金日")
                 DgvBilling.Rows(index).Cells("備考").Value = ds.Tables(RS).Rows(index)("備考")
             Next
