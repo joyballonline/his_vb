@@ -2287,9 +2287,9 @@ Public Class ClosingLog
             Sql += dsSwkSirehd.Tables(RS).Rows(i)("発注番号")
             Sql += "'"
 
-            Dim dsNyukohd As DataSet = _db.selectDB(Sql, RS, reccnt)
+            Dim dsSWKNyukohd As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-            For x As Integer = 0 To dsNyukohd.Tables(RS).Rows.Count - 1
+            For x As Integer = 0 To dsSWKNyukohd.Tables(RS).Rows.Count - 1
                 Sql = ""
                 Sql += "INSERT INTO "
                 Sql += "Public."
@@ -2310,11 +2310,11 @@ Public Class ClosingLog
                 Sql += "', '"
                 Sql += "棚卸資産"
                 Sql += "', '"
-                Sql += dsNyukohd.Tables(RS).Rows(x)("仕入金額").ToString
+                Sql += dsSWKNyukohd.Tables(RS).Rows(x)("仕入金額").ToString
                 Sql += "', '"
                 Sql += "買掛金"
                 Sql += "', '"
-                Sql += dsNyukohd.Tables(RS).Rows(x)("仕入金額").ToString
+                Sql += dsSWKNyukohd.Tables(RS).Rows(x)("仕入金額").ToString
                 Sql += " ')"
                 Sql += "RETURNING 会社コード"
                 Sql += ", "
@@ -2358,11 +2358,11 @@ Public Class ClosingLog
                 Sql += "', '"
                 Sql += "仕入"
                 Sql += "', '"
-                Sql += dsNyukohd.Tables(RS).Rows(x)("仕入金額").ToString
+                Sql += dsSWKNyukohd.Tables(RS).Rows(x)("仕入金額").ToString
                 Sql += "', '"
                 Sql += "棚卸資産"
                 Sql += "', '"
-                Sql += dsNyukohd.Tables(RS).Rows(x)("仕入金額").ToString
+                Sql += dsSWKNyukohd.Tables(RS).Rows(x)("仕入金額").ToString
                 Sql += " ')"
                 Sql += "RETURNING 会社コード"
                 Sql += ", "
