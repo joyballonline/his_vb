@@ -110,7 +110,11 @@ Public Class AccountsPayableList
                 For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
                     DgvBilling.Rows.Add()
                     DgvBilling.Rows(index).Cells("買掛番号").Value = ds.Tables(RS).Rows(index)("買掛番号")
-                    DgvBilling.Rows(index).Cells("買掛区分").Value = ds.Tables(RS).Rows(index)("買掛区分")
+                    If ds.Tables(RS).Rows(index)("買掛区分") = "1" Then
+                        DgvBilling.Rows(index).Cells("買掛区分").Value = "前払金買掛"
+                    Else
+                        DgvBilling.Rows(index).Cells("買掛区分").Value = "通常買掛"
+                    End If
                     DgvBilling.Rows(index).Cells("買掛日").Value = ds.Tables(RS).Rows(index)("買掛日")
                     DgvBilling.Rows(index).Cells("客先番号").Value = ds.Tables(RS).Rows(index)("客先番号")
                     DgvBilling.Rows(index).Cells("発注番号").Value = ds.Tables(RS).Rows(index)("発注番号")
@@ -165,7 +169,11 @@ Public Class AccountsPayableList
                 For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
                     DgvBilling.Rows.Add()
                     DgvBilling.Rows(index).Cells("買掛番号").Value = ds.Tables(RS).Rows(index)("買掛番号")
-                    DgvBilling.Rows(index).Cells("買掛区分").Value = ds.Tables(RS).Rows(index)("買掛区分")
+                    If ds.Tables(RS).Rows(index)("買掛区分") = "1" Then
+                        DgvBilling.Rows(index).Cells("買掛区分").Value = "前払金買掛"
+                    Else
+                        DgvBilling.Rows(index).Cells("買掛区分").Value = "通常買掛"
+                    End If
                     DgvBilling.Rows(index).Cells("買掛日").Value = ds.Tables(RS).Rows(index)("買掛日")
                     DgvBilling.Rows(index).Cells("客先番号").Value = ds.Tables(RS).Rows(index)("客先番号")
                     DgvBilling.Rows(index).Cells("発注番号").Value = ds.Tables(RS).Rows(index)("発注番号")

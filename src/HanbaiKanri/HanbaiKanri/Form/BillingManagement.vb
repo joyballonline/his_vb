@@ -228,7 +228,11 @@ Public Class BillingManagement
             DgvHistory.Rows(index).Cells("No").Value = index + 1
             DgvHistory.Rows(index).Cells("請求番号").Value = ds3.Tables(RS).Rows(index)("請求番号")
             DgvHistory.Rows(index).Cells("請求日").Value = ds3.Tables(RS).Rows(index)("請求日")
-            DgvHistory.Rows(index).Cells("請求区分").Value = ds3.Tables(RS).Rows(index)("請求区分")
+            If ds3.Tables(RS).Rows(index)("請求区分") = 1 Then
+                DgvHistory.Rows(index).Cells("請求区分").Value = "前受金請求"
+            Else
+                DgvHistory.Rows(index).Cells("請求区分").Value = "通常請求"
+            End If
             DgvHistory.Rows(index).Cells("請求先").Value = ds3.Tables(RS).Rows(index)("得意先名")
             DgvHistory.Rows(index).Cells("請求金額").Value = ds3.Tables(RS).Rows(index)("請求金額計")
             DgvHistory.Rows(index).Cells("備考1").Value = ds3.Tables(RS).Rows(index)("備考1")

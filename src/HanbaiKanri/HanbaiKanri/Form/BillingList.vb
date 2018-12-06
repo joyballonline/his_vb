@@ -112,7 +112,11 @@ Public Class BillingList
                 For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
                     DgvBilling.Rows.Add()
                     DgvBilling.Rows(index).Cells("請求番号").Value = ds.Tables(RS).Rows(index)("請求番号")
-                    DgvBilling.Rows(index).Cells("請求区分").Value = ds.Tables(RS).Rows(index)("請求区分")
+                    If ds.Tables(RS).Rows(index)("請求区分") = "1" Then
+                        DgvBilling.Rows(index).Cells("請求区分").Value = "前受金請求"
+                    Else
+                        DgvBilling.Rows(index).Cells("請求区分").Value = "通常請求"
+                    End If
                     DgvBilling.Rows(index).Cells("請求日").Value = ds.Tables(RS).Rows(index)("請求日")
                     DgvBilling.Rows(index).Cells("客先番号").Value = ds.Tables(RS).Rows(index)("客先番号")
                     DgvBilling.Rows(index).Cells("受注番号").Value = ds.Tables(RS).Rows(index)("受注番号")
@@ -169,9 +173,13 @@ Public Class BillingList
                 For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
                     DgvBilling.Rows.Add()
                     DgvBilling.Rows(index).Cells("請求番号").Value = ds.Tables(RS).Rows(index)("請求番号")
-                    DgvBilling.Rows(index).Cells("請求区分").Value = ds.Tables(RS).Rows(index)("請求区分")
+                    If ds.Tables(RS).Rows(index)("請求区分") = "1" Then
+                        DgvBilling.Rows(index).Cells("請求区分").Value = "前受金請求"
+                    Else
+                        DgvBilling.Rows(index).Cells("請求区分").Value = "通常請求"
+                    End If
                     DgvBilling.Rows(index).Cells("請求日").Value = ds.Tables(RS).Rows(index)("請求日")
-                    DgvBilling.Rows(index).Cells("客先番号").Value = ds.Tables(RS).Rows(index)("客先番号")
+                        DgvBilling.Rows(index).Cells("客先番号").Value = ds.Tables(RS).Rows(index)("客先番号")
                     DgvBilling.Rows(index).Cells("受注番号").Value = ds.Tables(RS).Rows(index)("受注番号")
                     DgvBilling.Rows(index).Cells("受注番号枝番").Value = ds.Tables(RS).Rows(index)("受注番号枝番")
                     DgvBilling.Rows(index).Cells("得意先コード").Value = ds.Tables(RS).Rows(index)("得意先コード")

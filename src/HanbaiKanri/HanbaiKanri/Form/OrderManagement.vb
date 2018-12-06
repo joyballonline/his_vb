@@ -86,18 +86,25 @@ Public Class OrderManagement
             LblNo3.Visible = False
             LblOrder.Visible = False
             LblAdd.Visible = False
-            LblOrderDate.Visible = False
-            LblRemarks.Visible = False
-            DtpOrderDate.Visible = False
+            'LblOrderDate.Visible = False
+            'LblRemarks.Visible = False
+            'DtpOrderDate.Visible = False
             TxtCount1.Visible = False
             TxtCount2.Visible = False
             TxtCount3.Visible = False
-            TxtRemarks.Visible = False
+            'TxtRemarks.Visible = False
             DgvOrder.Visible = False
             DgvAdd.Visible = False
             DgvHistory.ReadOnly = False
             LblHistory.Location = New Point(12, 82)
             DgvHistory.Location = New Point(12, 106)
+            LblOrderDate.Location = New Point(188, 82)
+            DtpOrderDate.Location = New Point(292, 82)
+            LblRemarks.Location = New Point(446, 82)
+            TxtRemarks.Location = New Point(622, 82)
+            DtpOrderDate.Enabled = False
+            TxtRemarks.Enabled = False
+            TxtRemarks.BackColor = Color.FromArgb(255, 255, 192)
             DgvHistory.Size = New Point(1326, 400)
             BtnRegist.Visible = False
         Else
@@ -106,6 +113,7 @@ Public Class OrderManagement
         Dim Sql1 As String = ""
         Dim Sql2 As String = ""
         Dim Sql3 As String = ""
+        Dim Sql4 As String = ""
         Try
             Sql1 += "SELECT "
             Sql1 += "* "
@@ -164,10 +172,30 @@ Public Class OrderManagement
             Sql3 += Suffix
             Sql3 += "'"
 
+            Sql4 += "SELECT "
+            Sql4 += "* "
+            Sql4 += "FROM "
+            Sql4 += "public"
+            Sql4 += "."
+            Sql4 += "t30_urighd"
+            Sql4 += " WHERE "
+            Sql4 += "受注番号"
+            Sql4 += " ILIKE "
+            Sql4 += "'"
+            Sql4 += No
+            Sql4 += "'"
+            Sql4 += " AND "
+            Sql4 += "受注番号枝番"
+            Sql4 += " ILIKE "
+            Sql4 += "'"
+            Sql4 += Suffix
+            Sql4 += "'"
+
             Dim reccnt As Integer = 0
             Dim ds1 As DataSet = _db.selectDB(Sql1, RS, reccnt)
             Dim ds2 As DataSet = _db.selectDB(Sql2, RS, reccnt)
             Dim ds3 As DataSet = _db.selectDB(Sql3, RS, reccnt)
+            Dim ds4 As DataSet = _db.selectDB(Sql4, RS, reccnt)
 
             DgvOrder.Columns.Add("明細", "明細")
             DgvOrder.Columns.Add("メーカー", "メーカー")
@@ -310,6 +338,11 @@ Public Class OrderManagement
             TxtOrderDate.Text = ds1.Tables(RS).Rows(0)("受注日")
             TxtCustomerCode.Text = ds1.Tables(RS).Rows(0)("得意先コード")
             TxtCustomerName.Text = ds1.Tables(RS).Rows(0)("得意先名")
+
+            If _status = "VIEW" Then
+                DtpOrderDate.Value = ds4.Tables(RS).Rows(0)("売上日")
+                TxtRemarks.Text = ds4.Tables(RS).Rows(0)("備考")
+            End If
 
         Catch ue As UsrDefException
             ue.dspMsg()

@@ -225,9 +225,13 @@ Public Class AccountsPayable
             DgvHistory.Rows(index).Cells("No").Value = index + 1
             DgvHistory.Rows(index).Cells("買掛番号").Value = ds3.Tables(RS).Rows(index)("買掛番号")
             DgvHistory.Rows(index).Cells("買掛日").Value = ds3.Tables(RS).Rows(index)("買掛日")
-            DgvHistory.Rows(index).Cells("買掛区分").Value = ds3.Tables(RS).Rows(index)("買掛区分")
+            If ds3.Tables(RS).Rows(index)("買掛区分") = 1 Then
+                DgvHistory.Rows(index).Cells("買掛区分").Value = "前払金買掛"
+            Else
+                DgvHistory.Rows(index).Cells("買掛区分").Value = "通常買掛"
+            End If
             DgvHistory.Rows(index).Cells("支払先").Value = ds3.Tables(RS).Rows(index)("仕入先名")
-            DgvHistory.Rows(index).Cells("買掛金額").Value = ds3.Tables(RS).Rows(index)("買掛金額計")
+                DgvHistory.Rows(index).Cells("買掛金額").Value = ds3.Tables(RS).Rows(index)("買掛金額計")
             DgvHistory.Rows(index).Cells("備考1").Value = ds3.Tables(RS).Rows(index)("備考1")
             DgvHistory.Rows(index).Cells("備考2").Value = ds3.Tables(RS).Rows(index)("備考2")
             DgvHistory.Rows(index).Cells("買掛済み発注番号").Value = ds3.Tables(RS).Rows(index)("発注番号")
