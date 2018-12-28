@@ -43,6 +43,8 @@ Partial Class User
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label26 = New System.Windows.Forms.Label()
+        Me.LblPassword = New System.Windows.Forms.Label()
+        Me.TxtPassword = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
         'TxtCompanyCode
@@ -184,7 +186,7 @@ Partial Class User
         Me.BtnRegistration.Location = New System.Drawing.Point(367, 509)
         Me.BtnRegistration.Name = "BtnRegistration"
         Me.BtnRegistration.Size = New System.Drawing.Size(165, 40)
-        Me.BtnRegistration.TabIndex = 8
+        Me.BtnRegistration.TabIndex = 9
         Me.BtnRegistration.Text = "登録"
         Me.BtnRegistration.UseVisualStyleBackColor = True
         '
@@ -238,10 +240,30 @@ Partial Class User
         Me.Label26.TabIndex = 237
         Me.Label26.Text = "(他ユーザと重複しない文字列)"
         '
+        'LblPassword
+        '
+        Me.LblPassword.AutoSize = True
+        Me.LblPassword.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblPassword.Location = New System.Drawing.Point(413, 149)
+        Me.LblPassword.Name = "LblPassword"
+        Me.LblPassword.Size = New System.Drawing.Size(64, 15)
+        Me.LblPassword.TabIndex = 239
+        Me.LblPassword.Text = "パスワード"
+        '
+        'TxtPassword
+        '
+        Me.TxtPassword.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtPassword.Location = New System.Drawing.Point(483, 146)
+        Me.TxtPassword.Name = "TxtPassword"
+        Me.TxtPassword.Size = New System.Drawing.Size(234, 22)
+        Me.TxtPassword.TabIndex = 8
+        '
         'User
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(729, 561)
+        Me.Controls.Add(Me.LblPassword)
+        Me.Controls.Add(Me.TxtPassword)
         Me.Controls.Add(Me.Label26)
         Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.Label1)
@@ -292,4 +314,6 @@ Partial Class User
     Friend WithEvents Label1 As Label
     Friend WithEvents Label9 As Label
     Friend WithEvents Label26 As Label
+    Friend WithEvents LblPassword As Label
+    Friend WithEvents TxtPassword As TextBox
 End Class

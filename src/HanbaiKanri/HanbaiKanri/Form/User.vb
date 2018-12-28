@@ -134,6 +134,55 @@ Public Class User
                 Sql += "更新日"
 
                 _db.executeDB(Sql)
+
+                Sql = ""
+                Sql += "INSERT INTO "
+                Sql += "Public."
+                Sql += "m03_pswd("
+                Sql += "会社コード, ユーザＩＤ, 世代番号, 適用開始日, 適用終了日, パスワード, パスワード変更方法, 有効期限, 更新者, 更新日)"
+                Sql += "VALUES('"
+                Sql += frmC01F10_Login.loginValue.BumonNM
+                Sql += "', '"
+                Sql += TxtUserId.Text
+                Sql += "', '"
+                Sql += "1"
+                Sql += "', '"
+                Sql += dtToday
+                Sql += "', '"
+                Sql += "2099-12-31"
+                Sql += "', '"
+                Sql += TxtPassword.Text
+                Sql += "', '"
+                Sql += "1"
+                Sql += "', '"
+                Sql += "2099-12-31"
+                Sql += "', '"
+                Sql += frmC01F10_Login.loginValue.TantoNM
+                Sql += "', '"
+                Sql += dtToday
+                Sql += " ')"
+                Sql += "RETURNING 会社コード"
+                Sql += ", "
+                Sql += "ユーザＩＤ"
+                Sql += ", "
+                Sql += "世代番号"
+                Sql += ", "
+                Sql += "適用開始日"
+                Sql += ", "
+                Sql += "適用終了日"
+                Sql += ", "
+                Sql += "パスワード"
+                Sql += ", "
+                Sql += "パスワード変更方法"
+                Sql += ", "
+                Sql += "有効期限"
+                Sql += ", "
+                Sql += "更新者"
+                Sql += ", "
+                Sql += "更新日"
+
+                _db.executeDB(Sql)
+
             Else
                 Dim Sql As String = ""
 
@@ -239,6 +288,9 @@ Public Class User
 
     Private Sub User_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If _status = "EDIT" Then
+            LblPassword.Visible = False
+            TxtPassword.Visible = False
+
             Dim Sql As String = ""
 
             Sql += "SELECT "
