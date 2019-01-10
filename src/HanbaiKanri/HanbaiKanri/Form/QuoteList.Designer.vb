@@ -48,9 +48,6 @@ Partial Class QuoteList
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
-        Me.RbtnSlip = New System.Windows.Forms.RadioButton()
-        Me.RbtnDetails = New System.Windows.Forms.RadioButton()
-        Me.Panel1 = New System.Windows.Forms.Panel()
         Me.BtnQuoteView = New System.Windows.Forms.Button()
         Me.BtnUnitPrice = New System.Windows.Forms.Button()
         Me.BtnOrderPurchase = New System.Windows.Forms.Button()
@@ -60,8 +57,9 @@ Partial Class QuoteList
         Me.BtnPurchase = New System.Windows.Forms.Button()
         Me.ChkCancel = New System.Windows.Forms.CheckBox()
         Me.LblMode = New System.Windows.Forms.Label()
+        Me.RbtnDetails = New System.Windows.Forms.RadioButton()
+        Me.RbtnSlip = New System.Windows.Forms.RadioButton()
         CType(Me.DgvMithd, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'DgvMithd
@@ -324,40 +322,6 @@ Partial Class QuoteList
         Me.Label10.TabIndex = 25
         Me.Label10.Text = "■表示形式"
         '
-        'RbtnSlip
-        '
-        Me.RbtnSlip.AutoSize = True
-        Me.RbtnSlip.Checked = True
-        Me.RbtnSlip.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.RbtnSlip.Location = New System.Drawing.Point(6, 8)
-        Me.RbtnSlip.Name = "RbtnSlip"
-        Me.RbtnSlip.Size = New System.Drawing.Size(89, 19)
-        Me.RbtnSlip.TabIndex = 11
-        Me.RbtnSlip.TabStop = True
-        Me.RbtnSlip.Text = "伝票単位"
-        Me.RbtnSlip.UseVisualStyleBackColor = True
-        '
-        'RbtnDetails
-        '
-        Me.RbtnDetails.AutoSize = True
-        Me.RbtnDetails.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.RbtnDetails.Location = New System.Drawing.Point(101, 8)
-        Me.RbtnDetails.Name = "RbtnDetails"
-        Me.RbtnDetails.Size = New System.Drawing.Size(89, 19)
-        Me.RbtnDetails.TabIndex = 12
-        Me.RbtnDetails.Text = "明細単位"
-        Me.RbtnDetails.UseVisualStyleBackColor = True
-        '
-        'Panel1
-        '
-        Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel1.Controls.Add(Me.RbtnSlip)
-        Me.Panel1.Controls.Add(Me.RbtnDetails)
-        Me.Panel1.Location = New System.Drawing.Point(15, 192)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(195, 37)
-        Me.Panel1.TabIndex = 28
-        '
         'BtnQuoteView
         '
         Me.BtnQuoteView.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
@@ -405,7 +369,7 @@ Partial Class QuoteList
         '
         Me.ChkExpired.AutoSize = True
         Me.ChkExpired.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.ChkExpired.Location = New System.Drawing.Point(288, 202)
+        Me.ChkExpired.Location = New System.Drawing.Point(252, 204)
         Me.ChkExpired.Name = "ChkExpired"
         Me.ChkExpired.Size = New System.Drawing.Size(221, 19)
         Me.ChkExpired.TabIndex = 13
@@ -436,7 +400,7 @@ Partial Class QuoteList
         '
         Me.ChkCancel.AutoSize = True
         Me.ChkCancel.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.ChkCancel.Location = New System.Drawing.Point(515, 202)
+        Me.ChkCancel.Location = New System.Drawing.Point(479, 204)
         Me.ChkCancel.Name = "ChkCancel"
         Me.ChkCancel.Size = New System.Drawing.Size(139, 19)
         Me.ChkCancel.TabIndex = 14
@@ -455,10 +419,36 @@ Partial Class QuoteList
         Me.LblMode.Text = "モード"
         Me.LblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'RbtnDetails
+        '
+        Me.RbtnDetails.AutoSize = True
+        Me.RbtnDetails.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.RbtnDetails.Location = New System.Drawing.Point(110, 203)
+        Me.RbtnDetails.Name = "RbtnDetails"
+        Me.RbtnDetails.Size = New System.Drawing.Size(89, 19)
+        Me.RbtnDetails.TabIndex = 12
+        Me.RbtnDetails.Text = "明細単位"
+        Me.RbtnDetails.UseVisualStyleBackColor = True
+        '
+        'RbtnSlip
+        '
+        Me.RbtnSlip.AutoSize = True
+        Me.RbtnSlip.Checked = True
+        Me.RbtnSlip.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.RbtnSlip.Location = New System.Drawing.Point(15, 202)
+        Me.RbtnSlip.Name = "RbtnSlip"
+        Me.RbtnSlip.Size = New System.Drawing.Size(89, 19)
+        Me.RbtnSlip.TabIndex = 11
+        Me.RbtnSlip.TabStop = True
+        Me.RbtnSlip.Text = "伝票単位"
+        Me.RbtnSlip.UseVisualStyleBackColor = True
+        '
         'QuoteList
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.RbtnDetails)
+        Me.Controls.Add(Me.RbtnSlip)
         Me.Controls.Add(Me.ChkCancel)
         Me.Controls.Add(Me.BtnPurchase)
         Me.Controls.Add(Me.BtnOrder)
@@ -468,7 +458,6 @@ Partial Class QuoteList
         Me.Controls.Add(Me.BtnOrderPurchase)
         Me.Controls.Add(Me.BtnUnitPrice)
         Me.Controls.Add(Me.BtnQuoteView)
-        Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.Label5)
@@ -499,8 +488,6 @@ Partial Class QuoteList
         Me.Name = "QuoteList"
         Me.Text = "QuoteList"
         CType(Me.DgvMithd, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.Panel1.ResumeLayout(False)
-        Me.Panel1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -532,9 +519,6 @@ Partial Class QuoteList
     Friend WithEvents Label5 As Label
     Friend WithEvents Label9 As Label
     Friend WithEvents Label10 As Label
-    Friend WithEvents RbtnSlip As RadioButton
-    Friend WithEvents RbtnDetails As RadioButton
-    Friend WithEvents Panel1 As Panel
     Friend WithEvents BtnQuoteView As Button
     Friend WithEvents BtnUnitPrice As Button
     Friend WithEvents BtnOrderPurchase As Button
@@ -544,4 +528,6 @@ Partial Class QuoteList
     Friend WithEvents BtnPurchase As Button
     Friend WithEvents ChkCancel As CheckBox
     Friend WithEvents LblMode As Label
+    Friend WithEvents RbtnDetails As RadioButton
+    Friend WithEvents RbtnSlip As RadioButton
 End Class

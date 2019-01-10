@@ -78,41 +78,110 @@ Public Class QuoteList
     Private Sub MstHanyoue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         If _status = "EDIT" Then
-            LblMode.Text = "編集モード"
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                LblMode.Text = "EditMode"
+            Else
+                LblMode.Text = "編集モード"
+            End If
+
             BtnQuoteEdit.Visible = True
             BtnQuoteEdit.Location = New Point(997, 509)
         ElseIf _status = "CLONE" Then
-            LblMode.Text = "複写モード"
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                LblMode.Text = "CopyMode"
+            Else
+                LblMode.Text = "複写モード"
+            End If
+
             BtnQuoteClone.Visible = True
             BtnQuoteClone.Location = New Point(997, 509)
         ElseIf _status = "CANCEL" Then
-            LblMode.Text = "取消モード"
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                LblMode.Text = "CancelMode"
+            Else
+                LblMode.Text = "取消モード"
+            End If
+
             BtnCancel.Visible = True
             BtnCancel.Location = New Point(997, 509)
         ElseIf _status = "VIEW" Then
-            LblMode.Text = "参照モード"
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                LblMode.Text = "ViewMode"
+            Else
+                LblMode.Text = "参照モード"
+            End If
+
             BtnQuoteView.Visible = True
             BtnQuoteView.Location = New Point(997, 509)
         ElseIf _status = "PRICE" Then
-            LblMode.Text = "仕入単価入力モード"
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                LblMode.Text = "PurchasePriceInputMode"
+            Else
+                LblMode.Text = "仕入単価入力モード"
+            End If
+
             BtnUnitPrice.Visible = True
             BtnUnitPrice.Location = New Point(997, 509)
         ElseIf _status = "ORDER_NEW" Then
-            LblMode.Text = "受注新規入力モード"
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                LblMode.Text = "NewOrderRegistrationMode"
+            Else
+                LblMode.Text = "受注新規入力モード"
+            End If
+
             BtnOrder.Visible = True
             BtnOrder.Location = New Point(997, 509)
         ElseIf _status = "PURCHASE_NEW" Then
-            LblMode.Text = "仕入新規入力モード"
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                LblMode.Text = "NewPurchaseRegistrationMode"
+            Else
+                LblMode.Text = "仕入新規入力モード"
+            End If
+
             BtnPurchase.Visible = True
             BtnPurchase.Location = New Point(997, 509)
         ElseIf _status = "ORDER_PURCHASE" Then
-            LblMode.Text = "受発注登録モード"
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                LblMode.Text = "NewOrderingRegistrationMode"
+            Else
+                LblMode.Text = "受発注登録モード"
+            End If
+
             BtnOrderPurchase.Visible = True
             BtnOrderPurchase.Location = New Point(997, 509)
         End If
 
         QuoteListLoad()
 
+        If frmC01F10_Login.loginValue.Language = "ENG" Then
+            LblConditions.Text = "ExtractionCondition"
+            Label1.Text = "CustomerName"
+            Label2.Text = "Address"
+            Label3.Text = "TEL"
+            Label4.Text = "CustomerCode"
+            Label8.Text = "QuotationDate"
+            Label7.Text = "QuotationNumber"
+            Label6.Text = "SalesPerson"
+            Label10.Text = "DisplayFormat"
+            RbtnSlip.Text = "UnitOfSlip"
+
+            RbtnDetails.Text = "LineItemUnit"
+            RbtnDetails.Location = New Point(166, 202)
+            ChkExpired.Text = "IncludeExpriedData"
+            ChkExpired.Location = New Point(329, 203)
+            ChkCancel.Text = "IncludeCancelData"
+            ChkCancel.Location = New Point(556, 203)
+
+            BtnQuoteSearch.Text = "Search"
+            BtnOrderPurchase.Text = "Ordering"
+            BtnQuoteAdd.Text = "QuotationRegistration"
+            BtnUnitPrice.Text = "PurchasePriceInput"
+            BtnQuoteEdit.Text = "QuotationEdit"
+            BtnQuoteClone.Text = "QuotationCopy"
+            BtnQuoteView.Text = "QuotationView"
+            BtnCancel.Text = "QuotationCancel"
+            BtnBack.Text = "Back"
+        End If
     End Sub
 
     Private Sub QuoteListLoad()
@@ -142,28 +211,52 @@ Public Class QuoteList
             Dim reccnt As Integer = 0
             ds = _db.selectDB(Sql, RS, reccnt)
 
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                DgvMithd.Columns.Add("見積番号", "QuotationNumber")
+                DgvMithd.Columns.Add("見積番号枝番", "BranchNumber")
+                DgvMithd.Columns.Add("見積日", "QuotationDate")
+                DgvMithd.Columns.Add("見積有効期限", "QuotationExpriedDate")
+                DgvMithd.Columns.Add("得意先コード", "CustomerCode")
+                DgvMithd.Columns.Add("得意先名", "CustomerName")
+                DgvMithd.Columns.Add("得意先郵便番号", "PostalCode")
+                DgvMithd.Columns.Add("得意先住所", "Address")
+                DgvMithd.Columns.Add("得意先電話番号", "TEL")
+                DgvMithd.Columns.Add("得意先ＦＡＸ", "FAX")
+                DgvMithd.Columns.Add("見積金額", "QuotationAmount")
+                DgvMithd.Columns.Add("仕入金額", "PurchaseAmount")
+                DgvMithd.Columns.Add("ＶＡＴ", "VAT")
+                DgvMithd.Columns.Add("粗利額", "GrossProfit")
+                DgvMithd.Columns.Add("支払条件", "PeymentTerms")
+                DgvMithd.Columns.Add("営業担当者", "SalesPerson")
+                DgvMithd.Columns.Add("入力担当者", "InputPerson")
+                DgvMithd.Columns.Add("備考", "Remarks")
+                DgvMithd.Columns.Add("登録日", "RegistrationDate")
+                DgvMithd.Columns.Add("更新者", "Changer")
+                DgvMithd.Columns.Add("更新日", "UpdateDate")
+            Else
+                DgvMithd.Columns.Add("見積番号", "見積番号")
+                DgvMithd.Columns.Add("見積番号枝番", "見積番号枝番")
+                DgvMithd.Columns.Add("見積日", "見積日")
+                DgvMithd.Columns.Add("見積有効期限", "見積有効期限")
+                DgvMithd.Columns.Add("得意先コード", "得意先コード")
+                DgvMithd.Columns.Add("得意先名", "得意先名")
+                DgvMithd.Columns.Add("得意先郵便番号", "得意先郵便番号")
+                DgvMithd.Columns.Add("得意先住所", "得意先住所")
+                DgvMithd.Columns.Add("得意先電話番号", "得意先電話番号")
+                DgvMithd.Columns.Add("得意先ＦＡＸ", "得意先ＦＡＸ")
+                DgvMithd.Columns.Add("見積金額", "見積金額")
+                DgvMithd.Columns.Add("仕入金額", "仕入金額")
+                DgvMithd.Columns.Add("ＶＡＴ", "ＶＡＴ")
+                DgvMithd.Columns.Add("粗利額", "粗利額")
+                DgvMithd.Columns.Add("支払条件", "支払条件")
+                DgvMithd.Columns.Add("営業担当者", "営業担当者")
+                DgvMithd.Columns.Add("入力担当者", "入力担当者")
+                DgvMithd.Columns.Add("備考", "備考")
+                DgvMithd.Columns.Add("登録日", "登録日")
+                DgvMithd.Columns.Add("更新者", "更新者")
+                DgvMithd.Columns.Add("更新日", "更新日")
+            End If
 
-            DgvMithd.Columns.Add("見積番号", "見積番号")
-            DgvMithd.Columns.Add("見積番号枝番", "見積番号枝番")
-            DgvMithd.Columns.Add("見積日", "見積日")
-            DgvMithd.Columns.Add("見積有効期限", "見積有効期限")
-            DgvMithd.Columns.Add("得意先コード", "得意先コード")
-            DgvMithd.Columns.Add("得意先名", "得意先名")
-            DgvMithd.Columns.Add("得意先郵便番号", "得意先郵便番号")
-            DgvMithd.Columns.Add("得意先住所", "得意先住所")
-            DgvMithd.Columns.Add("得意先電話番号", "得意先電話番号")
-            DgvMithd.Columns.Add("得意先ＦＡＸ", "得意先ＦＡＸ")
-            DgvMithd.Columns.Add("見積金額", "見積金額")
-            DgvMithd.Columns.Add("仕入金額", "仕入金額")
-            DgvMithd.Columns.Add("ＶＡＴ", "ＶＡＴ")
-            DgvMithd.Columns.Add("粗利額", "粗利額")
-            DgvMithd.Columns.Add("支払条件", "支払条件")
-            DgvMithd.Columns.Add("営業担当者", "営業担当者")
-            DgvMithd.Columns.Add("入力担当者", "入力担当者")
-            DgvMithd.Columns.Add("備考", "備考")
-            DgvMithd.Columns.Add("登録日", "登録日")
-            DgvMithd.Columns.Add("更新者", "更新者")
-            DgvMithd.Columns.Add("更新日", "更新日")
 
             DgvMithd.Columns(10).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             DgvMithd.Columns(11).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -247,27 +340,51 @@ Public Class QuoteList
             Dim reccnt As Integer = 0
             ds = _db.selectDB(Sql, RS, reccnt)
 
-            DgvMithd.Columns.Add("見積番号", "見積番号")
-            DgvMithd.Columns.Add("見積番号枝番", "見積番号枝番")
-            DgvMithd.Columns.Add("見積日", "見積日")
-            DgvMithd.Columns.Add("見積有効期限", "見積有効期限")
-            DgvMithd.Columns.Add("得意先コード", "得意先コード")
-            DgvMithd.Columns.Add("得意先名", "得意先名")
-            DgvMithd.Columns.Add("得意先郵便番号", "得意先郵便番号")
-            DgvMithd.Columns.Add("得意先住所", "得意先住所")
-            DgvMithd.Columns.Add("得意先電話番号", "得意先電話番号")
-            DgvMithd.Columns.Add("得意先ＦＡＸ", "得意先ＦＡＸ")
-            DgvMithd.Columns.Add("見積金額", "見積金額")
-            DgvMithd.Columns.Add("仕入金額", "仕入金額")
-            DgvMithd.Columns.Add("ＶＡＴ", "ＶＡＴ")
-            DgvMithd.Columns.Add("粗利額", "粗利額")
-            DgvMithd.Columns.Add("支払条件", "支払条件")
-            DgvMithd.Columns.Add("営業担当者", "営業担当者")
-            DgvMithd.Columns.Add("入力担当者", "入力担当者")
-            DgvMithd.Columns.Add("備考", "備考")
-            DgvMithd.Columns.Add("登録日", "登録日")
-            DgvMithd.Columns.Add("更新者", "更新者")
-            DgvMithd.Columns.Add("更新日", "更新日")
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                DgvMithd.Columns.Add("見積番号", "QuotationNumber")
+                DgvMithd.Columns.Add("見積番号枝番", "BranchNumber")
+                DgvMithd.Columns.Add("見積日", "QuotationDate")
+                DgvMithd.Columns.Add("見積有効期限", "QuotationExpriedDate")
+                DgvMithd.Columns.Add("得意先コード", "CustomerCode")
+                DgvMithd.Columns.Add("得意先名", "CustomerName")
+                DgvMithd.Columns.Add("得意先郵便番号", "PostalCode")
+                DgvMithd.Columns.Add("得意先住所", "Address")
+                DgvMithd.Columns.Add("得意先電話番号", "TEL")
+                DgvMithd.Columns.Add("得意先ＦＡＸ", "FAX")
+                DgvMithd.Columns.Add("見積金額", "QuotationAmount")
+                DgvMithd.Columns.Add("仕入金額", "PurchaseAmount")
+                DgvMithd.Columns.Add("ＶＡＴ", "VAT")
+                DgvMithd.Columns.Add("粗利額", "GrossProfit")
+                DgvMithd.Columns.Add("支払条件", "PeymentTerms")
+                DgvMithd.Columns.Add("営業担当者", "SalesPerson")
+                DgvMithd.Columns.Add("入力担当者", "InputPerson")
+                DgvMithd.Columns.Add("備考", "Remarks")
+                DgvMithd.Columns.Add("登録日", "RegistrationDate")
+                DgvMithd.Columns.Add("更新者", "Changer")
+                DgvMithd.Columns.Add("更新日", "UpdateDate")
+            Else
+                DgvMithd.Columns.Add("見積番号", "見積番号")
+                DgvMithd.Columns.Add("見積番号枝番", "見積番号枝番")
+                DgvMithd.Columns.Add("見積日", "見積日")
+                DgvMithd.Columns.Add("見積有効期限", "見積有効期限")
+                DgvMithd.Columns.Add("得意先コード", "得意先コード")
+                DgvMithd.Columns.Add("得意先名", "得意先名")
+                DgvMithd.Columns.Add("得意先郵便番号", "得意先郵便番号")
+                DgvMithd.Columns.Add("得意先住所", "得意先住所")
+                DgvMithd.Columns.Add("得意先電話番号", "得意先電話番号")
+                DgvMithd.Columns.Add("得意先ＦＡＸ", "得意先ＦＡＸ")
+                DgvMithd.Columns.Add("見積金額", "見積金額")
+                DgvMithd.Columns.Add("仕入金額", "仕入金額")
+                DgvMithd.Columns.Add("ＶＡＴ", "ＶＡＴ")
+                DgvMithd.Columns.Add("粗利額", "粗利額")
+                DgvMithd.Columns.Add("支払条件", "支払条件")
+                DgvMithd.Columns.Add("営業担当者", "営業担当者")
+                DgvMithd.Columns.Add("入力担当者", "入力担当者")
+                DgvMithd.Columns.Add("備考", "備考")
+                DgvMithd.Columns.Add("登録日", "登録日")
+                DgvMithd.Columns.Add("更新者", "更新者")
+                DgvMithd.Columns.Add("更新日", "更新日")
+            End If
 
             DgvMithd.Columns(10).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             DgvMithd.Columns(11).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -332,25 +449,48 @@ Public Class QuoteList
             Dim reccnt As Integer = 0
             ds = _db.selectDB(Sql, RS, reccnt)
 
-            DgvMithd.Columns.Add("見積番号", "見積番号")
-            DgvMithd.Columns.Add("見積番号枝番", "見積番号枝番")
-            DgvMithd.Columns.Add("仕入区分", "仕入区分")
-            DgvMithd.Columns.Add("メーカー", "メーカー")
-            DgvMithd.Columns.Add("品名", "品名")
-            DgvMithd.Columns.Add("型式", "型式")
-            DgvMithd.Columns.Add("数量", "数量")
-            DgvMithd.Columns.Add("単位", "単位")
-            DgvMithd.Columns.Add("仕入先名称", "仕入先名称")
-            DgvMithd.Columns.Add("仕入単価", "仕入単価")
-            DgvMithd.Columns.Add("間接費", "間接費")
-            DgvMithd.Columns.Add("仕入金額", "仕入金額")
-            DgvMithd.Columns.Add("売単価", "売単価")
-            DgvMithd.Columns.Add("売上金額", "売上金額")
-            DgvMithd.Columns.Add("粗利額", "粗利額")
-            DgvMithd.Columns.Add("粗利率", "粗利率")
-            DgvMithd.Columns.Add("リードタイム", "リードタイム")
-            DgvMithd.Columns.Add("備考", "備考")
-            DgvMithd.Columns.Add("登録日", "登録日")
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                DgvMithd.Columns.Add("見積番号", "QuotationNumber")
+                DgvMithd.Columns.Add("見積番号枝番", "BranchNumber")
+                DgvMithd.Columns.Add("仕入区分", "PurchasingClassification")
+                DgvMithd.Columns.Add("メーカー", "Maker")
+                DgvMithd.Columns.Add("品名", "Item")
+                DgvMithd.Columns.Add("型式", "Model")
+                DgvMithd.Columns.Add("数量", "Quantity")
+                DgvMithd.Columns.Add("単位", "Unit")
+                DgvMithd.Columns.Add("仕入先名称", "SupllierName")
+                DgvMithd.Columns.Add("仕入単価", "PurchasePrice")
+                DgvMithd.Columns.Add("間接費", "Overhead")
+                DgvMithd.Columns.Add("仕入金額", "PurchaseAmount")
+                DgvMithd.Columns.Add("売単価", "SellingPrice")
+                DgvMithd.Columns.Add("売上金額", "SalesAmount")
+                DgvMithd.Columns.Add("粗利額", "GrossProfit")
+                DgvMithd.Columns.Add("粗利率", "GrossMarginRate")
+                DgvMithd.Columns.Add("リードタイム", "LeadTime")
+                DgvMithd.Columns.Add("備考", "Remarks")
+                DgvMithd.Columns.Add("登録日", "RegistrationDate")
+            Else
+                DgvMithd.Columns.Add("見積番号", "見積番号")
+                DgvMithd.Columns.Add("見積番号枝番", "見積番号枝番")
+                DgvMithd.Columns.Add("仕入区分", "仕入区分")
+                DgvMithd.Columns.Add("メーカー", "メーカー")
+                DgvMithd.Columns.Add("品名", "品名")
+                DgvMithd.Columns.Add("型式", "型式")
+                DgvMithd.Columns.Add("数量", "数量")
+                DgvMithd.Columns.Add("単位", "単位")
+                DgvMithd.Columns.Add("仕入先名称", "仕入先名称")
+                DgvMithd.Columns.Add("仕入単価", "仕入単価")
+                DgvMithd.Columns.Add("間接費", "間接費")
+                DgvMithd.Columns.Add("仕入金額", "仕入金額")
+                DgvMithd.Columns.Add("売単価", "売単価")
+                DgvMithd.Columns.Add("売上金額", "売上金額")
+                DgvMithd.Columns.Add("粗利額", "粗利額")
+                DgvMithd.Columns.Add("粗利率", "粗利率")
+                DgvMithd.Columns.Add("リードタイム", "リードタイム")
+                DgvMithd.Columns.Add("備考", "備考")
+                DgvMithd.Columns.Add("登録日", "登録日")
+            End If
+
 
             DgvMithd.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             DgvMithd.Columns(9).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -711,27 +851,51 @@ Public Class QuoteList
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-            DgvMithd.Columns.Add("見積番号", "見積番号")
-            DgvMithd.Columns.Add("見積番号枝番", "見積番号枝番")
-            DgvMithd.Columns.Add("見積日", "見積日")
-            DgvMithd.Columns.Add("見積有効期限", "見積有効期限")
-            DgvMithd.Columns.Add("得意先コード", "得意先コード")
-            DgvMithd.Columns.Add("得意先名", "得意先名")
-            DgvMithd.Columns.Add("得意先郵便番号", "得意先郵便番号")
-            DgvMithd.Columns.Add("得意先住所", "得意先住所")
-            DgvMithd.Columns.Add("得意先電話番号", "得意先電話番号")
-            DgvMithd.Columns.Add("得意先ＦＡＸ", "得意先ＦＡＸ")
-            DgvMithd.Columns.Add("見積金額", "見積金額")
-            DgvMithd.Columns.Add("仕入金額", "仕入金額")
-            DgvMithd.Columns.Add("ＶＡＴ", "ＶＡＴ")
-            DgvMithd.Columns.Add("粗利額", "粗利額")
-            DgvMithd.Columns.Add("支払条件", "支払条件")
-            DgvMithd.Columns.Add("営業担当者", "営業担当者")
-            DgvMithd.Columns.Add("入力担当者", "入力担当者")
-            DgvMithd.Columns.Add("備考", "備考")
-            DgvMithd.Columns.Add("登録日", "登録日")
-            DgvMithd.Columns.Add("更新者", "更新者")
-            DgvMithd.Columns.Add("更新日", "更新日")
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                DgvMithd.Columns.Add("見積番号", "QuotationNumber")
+                DgvMithd.Columns.Add("見積番号枝番", "BranchNumber")
+                DgvMithd.Columns.Add("見積日", "QuotationDate")
+                DgvMithd.Columns.Add("見積有効期限", "QuotationExpriedDate")
+                DgvMithd.Columns.Add("得意先コード", "CustomerCode")
+                DgvMithd.Columns.Add("得意先名", "CustomerName")
+                DgvMithd.Columns.Add("得意先郵便番号", "PostalCode")
+                DgvMithd.Columns.Add("得意先住所", "Address")
+                DgvMithd.Columns.Add("得意先電話番号", "TEL")
+                DgvMithd.Columns.Add("得意先ＦＡＸ", "FAX")
+                DgvMithd.Columns.Add("見積金額", "QuotationAmount")
+                DgvMithd.Columns.Add("仕入金額", "PurchaseAmount")
+                DgvMithd.Columns.Add("ＶＡＴ", "VAT")
+                DgvMithd.Columns.Add("粗利額", "GrossProfit")
+                DgvMithd.Columns.Add("支払条件", "PeymentTerms")
+                DgvMithd.Columns.Add("営業担当者", "SalesPerson")
+                DgvMithd.Columns.Add("入力担当者", "InputPerson")
+                DgvMithd.Columns.Add("備考", "Remarks")
+                DgvMithd.Columns.Add("登録日", "RegistrationDate")
+                DgvMithd.Columns.Add("更新者", "Changer")
+                DgvMithd.Columns.Add("更新日", "UpdateDate")
+            Else
+                DgvMithd.Columns.Add("見積番号", "見積番号")
+                DgvMithd.Columns.Add("見積番号枝番", "見積番号枝番")
+                DgvMithd.Columns.Add("見積日", "見積日")
+                DgvMithd.Columns.Add("見積有効期限", "見積有効期限")
+                DgvMithd.Columns.Add("得意先コード", "得意先コード")
+                DgvMithd.Columns.Add("得意先名", "得意先名")
+                DgvMithd.Columns.Add("得意先郵便番号", "得意先郵便番号")
+                DgvMithd.Columns.Add("得意先住所", "得意先住所")
+                DgvMithd.Columns.Add("得意先電話番号", "得意先電話番号")
+                DgvMithd.Columns.Add("得意先ＦＡＸ", "得意先ＦＡＸ")
+                DgvMithd.Columns.Add("見積金額", "見積金額")
+                DgvMithd.Columns.Add("仕入金額", "仕入金額")
+                DgvMithd.Columns.Add("ＶＡＴ", "ＶＡＴ")
+                DgvMithd.Columns.Add("粗利額", "粗利額")
+                DgvMithd.Columns.Add("支払条件", "支払条件")
+                DgvMithd.Columns.Add("営業担当者", "営業担当者")
+                DgvMithd.Columns.Add("入力担当者", "入力担当者")
+                DgvMithd.Columns.Add("備考", "備考")
+                DgvMithd.Columns.Add("登録日", "登録日")
+                DgvMithd.Columns.Add("更新者", "更新者")
+                DgvMithd.Columns.Add("更新日", "更新日")
+            End If
 
             DgvMithd.Columns(10).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             DgvMithd.Columns(11).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -921,27 +1085,51 @@ Public Class QuoteList
             Dim reccnt As Integer = 0
             ds = _db.selectDB(Sql, RS, reccnt)
 
-            DgvMithd.Columns.Add("見積番号", "見積番号")
-            DgvMithd.Columns.Add("見積番号枝番", "見積番号枝番")
-            DgvMithd.Columns.Add("見積日", "見積日")
-            DgvMithd.Columns.Add("見積有効期限", "見積有効期限")
-            DgvMithd.Columns.Add("得意先コード", "得意先コード")
-            DgvMithd.Columns.Add("得意先名", "得意先名")
-            DgvMithd.Columns.Add("得意先郵便番号", "得意先郵便番号")
-            DgvMithd.Columns.Add("得意先住所", "得意先住所")
-            DgvMithd.Columns.Add("得意先電話番号", "得意先電話番号")
-            DgvMithd.Columns.Add("得意先ＦＡＸ", "得意先ＦＡＸ")
-            DgvMithd.Columns.Add("見積金額", "見積金額")
-            DgvMithd.Columns.Add("仕入金額", "仕入金額")
-            DgvMithd.Columns.Add("ＶＡＴ", "ＶＡＴ")
-            DgvMithd.Columns.Add("粗利額", "粗利額")
-            DgvMithd.Columns.Add("支払条件", "支払条件")
-            DgvMithd.Columns.Add("営業担当者", "営業担当者")
-            DgvMithd.Columns.Add("入力担当者", "入力担当者")
-            DgvMithd.Columns.Add("備考", "備考")
-            DgvMithd.Columns.Add("登録日", "登録日")
-            DgvMithd.Columns.Add("更新者", "更新者")
-            DgvMithd.Columns.Add("更新日", "更新日")
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                DgvMithd.Columns.Add("見積番号", "QuotationNumber")
+                DgvMithd.Columns.Add("見積番号枝番", "BranchNumber")
+                DgvMithd.Columns.Add("見積日", "QuotationDate")
+                DgvMithd.Columns.Add("見積有効期限", "QuotationExpriedDate")
+                DgvMithd.Columns.Add("得意先コード", "CustomerCode")
+                DgvMithd.Columns.Add("得意先名", "CustomerName")
+                DgvMithd.Columns.Add("得意先郵便番号", "PostalCode")
+                DgvMithd.Columns.Add("得意先住所", "Address")
+                DgvMithd.Columns.Add("得意先電話番号", "TEL")
+                DgvMithd.Columns.Add("得意先ＦＡＸ", "FAX")
+                DgvMithd.Columns.Add("見積金額", "QuotationAmount")
+                DgvMithd.Columns.Add("仕入金額", "PurchaseAmount")
+                DgvMithd.Columns.Add("ＶＡＴ", "VAT")
+                DgvMithd.Columns.Add("粗利額", "GrossProfit")
+                DgvMithd.Columns.Add("支払条件", "PeymentTerms")
+                DgvMithd.Columns.Add("営業担当者", "SalesPerson")
+                DgvMithd.Columns.Add("入力担当者", "InputPerson")
+                DgvMithd.Columns.Add("備考", "Remarks")
+                DgvMithd.Columns.Add("登録日", "RegistrationDate")
+                DgvMithd.Columns.Add("更新者", "Changer")
+                DgvMithd.Columns.Add("更新日", "UpdateDate")
+            Else
+                DgvMithd.Columns.Add("見積番号", "見積番号")
+                DgvMithd.Columns.Add("見積番号枝番", "見積番号枝番")
+                DgvMithd.Columns.Add("見積日", "見積日")
+                DgvMithd.Columns.Add("見積有効期限", "見積有効期限")
+                DgvMithd.Columns.Add("得意先コード", "得意先コード")
+                DgvMithd.Columns.Add("得意先名", "得意先名")
+                DgvMithd.Columns.Add("得意先郵便番号", "得意先郵便番号")
+                DgvMithd.Columns.Add("得意先住所", "得意先住所")
+                DgvMithd.Columns.Add("得意先電話番号", "得意先電話番号")
+                DgvMithd.Columns.Add("得意先ＦＡＸ", "得意先ＦＡＸ")
+                DgvMithd.Columns.Add("見積金額", "見積金額")
+                DgvMithd.Columns.Add("仕入金額", "仕入金額")
+                DgvMithd.Columns.Add("ＶＡＴ", "ＶＡＴ")
+                DgvMithd.Columns.Add("粗利額", "粗利額")
+                DgvMithd.Columns.Add("支払条件", "支払条件")
+                DgvMithd.Columns.Add("営業担当者", "営業担当者")
+                DgvMithd.Columns.Add("入力担当者", "入力担当者")
+                DgvMithd.Columns.Add("備考", "備考")
+                DgvMithd.Columns.Add("登録日", "登録日")
+                DgvMithd.Columns.Add("更新者", "更新者")
+                DgvMithd.Columns.Add("更新日", "更新日")
+            End If
 
             DgvMithd.Columns(10).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             DgvMithd.Columns(11).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -1004,27 +1192,51 @@ Public Class QuoteList
             Dim reccnt As Integer = 0
             ds = _db.selectDB(Sql, RS, reccnt)
 
-            DgvMithd.Columns.Add("見積番号", "見積番号")
-            DgvMithd.Columns.Add("見積番号枝番", "見積番号枝番")
-            DgvMithd.Columns.Add("見積日", "見積日")
-            DgvMithd.Columns.Add("見積有効期限", "見積有効期限")
-            DgvMithd.Columns.Add("得意先コード", "得意先コード")
-            DgvMithd.Columns.Add("得意先名", "得意先名")
-            DgvMithd.Columns.Add("得意先郵便番号", "得意先郵便番号")
-            DgvMithd.Columns.Add("得意先住所", "得意先住所")
-            DgvMithd.Columns.Add("得意先電話番号", "得意先電話番号")
-            DgvMithd.Columns.Add("得意先ＦＡＸ", "得意先ＦＡＸ")
-            DgvMithd.Columns.Add("見積金額", "見積金額")
-            DgvMithd.Columns.Add("仕入金額", "仕入金額")
-            DgvMithd.Columns.Add("ＶＡＴ", "ＶＡＴ")
-            DgvMithd.Columns.Add("粗利額", "粗利額")
-            DgvMithd.Columns.Add("支払条件", "支払条件")
-            DgvMithd.Columns.Add("営業担当者", "営業担当者")
-            DgvMithd.Columns.Add("入力担当者", "入力担当者")
-            DgvMithd.Columns.Add("備考", "備考")
-            DgvMithd.Columns.Add("登録日", "登録日")
-            DgvMithd.Columns.Add("更新者", "更新者")
-            DgvMithd.Columns.Add("更新日", "更新日")
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                DgvMithd.Columns.Add("見積番号", "QuotationNumber")
+                DgvMithd.Columns.Add("見積番号枝番", "BranchNumber")
+                DgvMithd.Columns.Add("見積日", "QuotationDate")
+                DgvMithd.Columns.Add("見積有効期限", "QuotationExpriedDate")
+                DgvMithd.Columns.Add("得意先コード", "CustomerCode")
+                DgvMithd.Columns.Add("得意先名", "CustomerName")
+                DgvMithd.Columns.Add("得意先郵便番号", "PostalCode")
+                DgvMithd.Columns.Add("得意先住所", "Address")
+                DgvMithd.Columns.Add("得意先電話番号", "TEL")
+                DgvMithd.Columns.Add("得意先ＦＡＸ", "FAX")
+                DgvMithd.Columns.Add("見積金額", "QuotationAmount")
+                DgvMithd.Columns.Add("仕入金額", "PurchaseAmount")
+                DgvMithd.Columns.Add("ＶＡＴ", "VAT")
+                DgvMithd.Columns.Add("粗利額", "GrossProfit")
+                DgvMithd.Columns.Add("支払条件", "PeymentTerms")
+                DgvMithd.Columns.Add("営業担当者", "SalesPerson")
+                DgvMithd.Columns.Add("入力担当者", "InputPerson")
+                DgvMithd.Columns.Add("備考", "Remarks")
+                DgvMithd.Columns.Add("登録日", "RegistrationDate")
+                DgvMithd.Columns.Add("更新者", "Changer")
+                DgvMithd.Columns.Add("更新日", "UpdateDate")
+            Else
+                DgvMithd.Columns.Add("見積番号", "見積番号")
+                DgvMithd.Columns.Add("見積番号枝番", "見積番号枝番")
+                DgvMithd.Columns.Add("見積日", "見積日")
+                DgvMithd.Columns.Add("見積有効期限", "見積有効期限")
+                DgvMithd.Columns.Add("得意先コード", "得意先コード")
+                DgvMithd.Columns.Add("得意先名", "得意先名")
+                DgvMithd.Columns.Add("得意先郵便番号", "得意先郵便番号")
+                DgvMithd.Columns.Add("得意先住所", "得意先住所")
+                DgvMithd.Columns.Add("得意先電話番号", "得意先電話番号")
+                DgvMithd.Columns.Add("得意先ＦＡＸ", "得意先ＦＡＸ")
+                DgvMithd.Columns.Add("見積金額", "見積金額")
+                DgvMithd.Columns.Add("仕入金額", "仕入金額")
+                DgvMithd.Columns.Add("ＶＡＴ", "ＶＡＴ")
+                DgvMithd.Columns.Add("粗利額", "粗利額")
+                DgvMithd.Columns.Add("支払条件", "支払条件")
+                DgvMithd.Columns.Add("営業担当者", "営業担当者")
+                DgvMithd.Columns.Add("入力担当者", "入力担当者")
+                DgvMithd.Columns.Add("備考", "備考")
+                DgvMithd.Columns.Add("登録日", "登録日")
+                DgvMithd.Columns.Add("更新者", "更新者")
+                DgvMithd.Columns.Add("更新日", "更新日")
+            End If
 
             DgvMithd.Columns(10).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             DgvMithd.Columns(11).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -1097,27 +1309,51 @@ Public Class QuoteList
             Dim reccnt As Integer = 0
             ds = _db.selectDB(Sql, RS, reccnt)
 
-            DgvMithd.Columns.Add("見積番号", "見積番号")
-            DgvMithd.Columns.Add("見積番号枝番", "見積番号枝番")
-            DgvMithd.Columns.Add("見積日", "見積日")
-            DgvMithd.Columns.Add("見積有効期限", "見積有効期限")
-            DgvMithd.Columns.Add("得意先コード", "得意先コード")
-            DgvMithd.Columns.Add("得意先名", "得意先名")
-            DgvMithd.Columns.Add("得意先郵便番号", "得意先郵便番号")
-            DgvMithd.Columns.Add("得意先住所", "得意先住所")
-            DgvMithd.Columns.Add("得意先電話番号", "得意先電話番号")
-            DgvMithd.Columns.Add("得意先ＦＡＸ", "得意先ＦＡＸ")
-            DgvMithd.Columns.Add("見積金額", "見積金額")
-            DgvMithd.Columns.Add("仕入金額", "仕入金額")
-            DgvMithd.Columns.Add("ＶＡＴ", "ＶＡＴ")
-            DgvMithd.Columns.Add("粗利額", "粗利額")
-            DgvMithd.Columns.Add("支払条件", "支払条件")
-            DgvMithd.Columns.Add("営業担当者", "営業担当者")
-            DgvMithd.Columns.Add("入力担当者", "入力担当者")
-            DgvMithd.Columns.Add("備考", "備考")
-            DgvMithd.Columns.Add("登録日", "登録日")
-            DgvMithd.Columns.Add("更新者", "更新者")
-            DgvMithd.Columns.Add("更新日", "更新日")
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                DgvMithd.Columns.Add("見積番号", "QuotationNumber")
+                DgvMithd.Columns.Add("見積番号枝番", "BranchNumber")
+                DgvMithd.Columns.Add("見積日", "QuotationDate")
+                DgvMithd.Columns.Add("見積有効期限", "QuotationExpriedDate")
+                DgvMithd.Columns.Add("得意先コード", "CustomerCode")
+                DgvMithd.Columns.Add("得意先名", "CustomerName")
+                DgvMithd.Columns.Add("得意先郵便番号", "PostalCode")
+                DgvMithd.Columns.Add("得意先住所", "Address")
+                DgvMithd.Columns.Add("得意先電話番号", "TEL")
+                DgvMithd.Columns.Add("得意先ＦＡＸ", "FAX")
+                DgvMithd.Columns.Add("見積金額", "QuotationAmount")
+                DgvMithd.Columns.Add("仕入金額", "PurchaseAmount")
+                DgvMithd.Columns.Add("ＶＡＴ", "VAT")
+                DgvMithd.Columns.Add("粗利額", "GrossProfit")
+                DgvMithd.Columns.Add("支払条件", "PeymentTerms")
+                DgvMithd.Columns.Add("営業担当者", "SalesPerson")
+                DgvMithd.Columns.Add("入力担当者", "InputPerson")
+                DgvMithd.Columns.Add("備考", "Remarks")
+                DgvMithd.Columns.Add("登録日", "RegistrationDate")
+                DgvMithd.Columns.Add("更新者", "Changer")
+                DgvMithd.Columns.Add("更新日", "UpdateDate")
+            Else
+                DgvMithd.Columns.Add("見積番号", "見積番号")
+                DgvMithd.Columns.Add("見積番号枝番", "見積番号枝番")
+                DgvMithd.Columns.Add("見積日", "見積日")
+                DgvMithd.Columns.Add("見積有効期限", "見積有効期限")
+                DgvMithd.Columns.Add("得意先コード", "得意先コード")
+                DgvMithd.Columns.Add("得意先名", "得意先名")
+                DgvMithd.Columns.Add("得意先郵便番号", "得意先郵便番号")
+                DgvMithd.Columns.Add("得意先住所", "得意先住所")
+                DgvMithd.Columns.Add("得意先電話番号", "得意先電話番号")
+                DgvMithd.Columns.Add("得意先ＦＡＸ", "得意先ＦＡＸ")
+                DgvMithd.Columns.Add("見積金額", "見積金額")
+                DgvMithd.Columns.Add("仕入金額", "仕入金額")
+                DgvMithd.Columns.Add("ＶＡＴ", "ＶＡＴ")
+                DgvMithd.Columns.Add("粗利額", "粗利額")
+                DgvMithd.Columns.Add("支払条件", "支払条件")
+                DgvMithd.Columns.Add("営業担当者", "営業担当者")
+                DgvMithd.Columns.Add("入力担当者", "入力担当者")
+                DgvMithd.Columns.Add("備考", "備考")
+                DgvMithd.Columns.Add("登録日", "登録日")
+                DgvMithd.Columns.Add("更新者", "更新者")
+                DgvMithd.Columns.Add("更新日", "更新日")
+            End If
 
             DgvMithd.Columns(10).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             DgvMithd.Columns(11).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -1180,27 +1416,51 @@ Public Class QuoteList
             Dim reccnt As Integer = 0
             ds = _db.selectDB(Sql, RS, reccnt)
 
-            DgvMithd.Columns.Add("見積番号", "見積番号")
-            DgvMithd.Columns.Add("見積番号枝番", "見積番号枝番")
-            DgvMithd.Columns.Add("見積日", "見積日")
-            DgvMithd.Columns.Add("見積有効期限", "見積有効期限")
-            DgvMithd.Columns.Add("得意先コード", "得意先コード")
-            DgvMithd.Columns.Add("得意先名", "得意先名")
-            DgvMithd.Columns.Add("得意先郵便番号", "得意先郵便番号")
-            DgvMithd.Columns.Add("得意先住所", "得意先住所")
-            DgvMithd.Columns.Add("得意先電話番号", "得意先電話番号")
-            DgvMithd.Columns.Add("得意先ＦＡＸ", "得意先ＦＡＸ")
-            DgvMithd.Columns.Add("見積金額", "見積金額")
-            DgvMithd.Columns.Add("仕入金額", "仕入金額")
-            DgvMithd.Columns.Add("ＶＡＴ", "ＶＡＴ")
-            DgvMithd.Columns.Add("粗利額", "粗利額")
-            DgvMithd.Columns.Add("支払条件", "支払条件")
-            DgvMithd.Columns.Add("営業担当者", "営業担当者")
-            DgvMithd.Columns.Add("入力担当者", "入力担当者")
-            DgvMithd.Columns.Add("備考", "備考")
-            DgvMithd.Columns.Add("登録日", "登録日")
-            DgvMithd.Columns.Add("更新者", "更新者")
-            DgvMithd.Columns.Add("更新日", "更新日")
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                DgvMithd.Columns.Add("見積番号", "QuotationNumber")
+                DgvMithd.Columns.Add("見積番号枝番", "BranchNumber")
+                DgvMithd.Columns.Add("見積日", "QuotationDate")
+                DgvMithd.Columns.Add("見積有効期限", "QuotationExpriedDate")
+                DgvMithd.Columns.Add("得意先コード", "CustomerCode")
+                DgvMithd.Columns.Add("得意先名", "CustomerName")
+                DgvMithd.Columns.Add("得意先郵便番号", "PostalCode")
+                DgvMithd.Columns.Add("得意先住所", "Address")
+                DgvMithd.Columns.Add("得意先電話番号", "TEL")
+                DgvMithd.Columns.Add("得意先ＦＡＸ", "FAX")
+                DgvMithd.Columns.Add("見積金額", "QuotationAmount")
+                DgvMithd.Columns.Add("仕入金額", "PurchaseAmount")
+                DgvMithd.Columns.Add("ＶＡＴ", "VAT")
+                DgvMithd.Columns.Add("粗利額", "GrossProfit")
+                DgvMithd.Columns.Add("支払条件", "PeymentTerms")
+                DgvMithd.Columns.Add("営業担当者", "SalesPerson")
+                DgvMithd.Columns.Add("入力担当者", "InputPerson")
+                DgvMithd.Columns.Add("備考", "Remarks")
+                DgvMithd.Columns.Add("登録日", "RegistrationDate")
+                DgvMithd.Columns.Add("更新者", "Changer")
+                DgvMithd.Columns.Add("更新日", "UpdateDate")
+            Else
+                DgvMithd.Columns.Add("見積番号", "見積番号")
+                DgvMithd.Columns.Add("見積番号枝番", "見積番号枝番")
+                DgvMithd.Columns.Add("見積日", "見積日")
+                DgvMithd.Columns.Add("見積有効期限", "見積有効期限")
+                DgvMithd.Columns.Add("得意先コード", "得意先コード")
+                DgvMithd.Columns.Add("得意先名", "得意先名")
+                DgvMithd.Columns.Add("得意先郵便番号", "得意先郵便番号")
+                DgvMithd.Columns.Add("得意先住所", "得意先住所")
+                DgvMithd.Columns.Add("得意先電話番号", "得意先電話番号")
+                DgvMithd.Columns.Add("得意先ＦＡＸ", "得意先ＦＡＸ")
+                DgvMithd.Columns.Add("見積金額", "見積金額")
+                DgvMithd.Columns.Add("仕入金額", "仕入金額")
+                DgvMithd.Columns.Add("ＶＡＴ", "ＶＡＴ")
+                DgvMithd.Columns.Add("粗利額", "粗利額")
+                DgvMithd.Columns.Add("支払条件", "支払条件")
+                DgvMithd.Columns.Add("営業担当者", "営業担当者")
+                DgvMithd.Columns.Add("入力担当者", "入力担当者")
+                DgvMithd.Columns.Add("備考", "備考")
+                DgvMithd.Columns.Add("登録日", "登録日")
+                DgvMithd.Columns.Add("更新者", "更新者")
+                DgvMithd.Columns.Add("更新日", "更新日")
+            End If
 
             DgvMithd.Columns(10).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             DgvMithd.Columns(11).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
