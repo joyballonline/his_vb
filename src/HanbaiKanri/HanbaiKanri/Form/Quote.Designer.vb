@@ -79,7 +79,7 @@ Partial Class Quote
         Me.TxtAddress2 = New System.Windows.Forms.TextBox()
         Me.TxtAddress3 = New System.Windows.Forms.TextBox()
         Me.TxtTotal = New System.Windows.Forms.TextBox()
-        Me.LblTotal = New System.Windows.Forms.Label()
+        Me.LblOrderAmount = New System.Windows.Forms.Label()
         Me.BtnRegistration = New System.Windows.Forms.Button()
         Me.BtnQuote = New System.Windows.Forms.Button()
         Me.DtpRegistration = New System.Windows.Forms.DateTimePicker()
@@ -91,19 +91,20 @@ Partial Class Quote
         Me.TxtGrossProfit = New System.Windows.Forms.TextBox()
         Me.LblGrossProfit = New System.Windows.Forms.Label()
         Me.TxtPurchaseTotal = New System.Windows.Forms.TextBox()
-        Me.LblStockOrder = New System.Windows.Forms.Label()
+        Me.LblPurchaseAmount = New System.Windows.Forms.Label()
         Me.DtpQuote = New System.Windows.Forms.DateTimePicker()
         Me.DtpExpiration = New System.Windows.Forms.DateTimePicker()
         Me.TxtVat = New System.Windows.Forms.TextBox()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.LblVat = New System.Windows.Forms.Label()
         Me.LblMode = New System.Windows.Forms.Label()
         Me.BtnQuoteRequest = New System.Windows.Forms.Button()
         Me.BtnProof = New System.Windows.Forms.Button()
-        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.RbtnQuote = New System.Windows.Forms.RadioButton()
         Me.RbtnUP = New System.Windows.Forms.RadioButton()
         Me.RbtnGP = New System.Windows.Forms.RadioButton()
         Me.BtnCodeSearch = New System.Windows.Forms.Button()
-        Me.RbtnQuote = New System.Windows.Forms.RadioButton()
+        Me.TxtQuoteTotal = New System.Windows.Forms.TextBox()
+        Me.LblQuoteAmount = New System.Windows.Forms.Label()
         Me.No = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.メーカー = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.品名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -133,10 +134,7 @@ Partial Class Quote
         Me.間接費無仕入金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.間接費率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.間接費 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TxtQuoteTotal = New System.Windows.Forms.TextBox()
-        Me.Label3 = New System.Windows.Forms.Label()
         CType(Me.DgvItemList, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'LblQuoteNo
@@ -549,17 +547,17 @@ Partial Class Quote
         Me.TxtTotal.TabStop = False
         Me.TxtTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'LblTotal
+        'LblOrderAmount
         '
-        Me.LblTotal.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.LblTotal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblTotal.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblTotal.Location = New System.Drawing.Point(1004, 451)
-        Me.LblTotal.Name = "LblTotal"
-        Me.LblTotal.Size = New System.Drawing.Size(100, 23)
-        Me.LblTotal.TabIndex = 33
-        Me.LblTotal.Text = "売上金額"
-        Me.LblTotal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LblOrderAmount.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblOrderAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblOrderAmount.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblOrderAmount.Location = New System.Drawing.Point(1004, 451)
+        Me.LblOrderAmount.Name = "LblOrderAmount"
+        Me.LblOrderAmount.Size = New System.Drawing.Size(100, 23)
+        Me.LblOrderAmount.TabIndex = 33
+        Me.LblOrderAmount.Text = "売上金額"
+        Me.LblOrderAmount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'BtnRegistration
         '
@@ -630,11 +628,11 @@ Partial Class Quote
         Me.TxtItemCount.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.TxtItemCount.Enabled = False
         Me.TxtItemCount.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtItemCount.Location = New System.Drawing.Point(1275, 208)
+        Me.TxtItemCount.Location = New System.Drawing.Point(1271, 208)
         Me.TxtItemCount.MaxLength = 20
         Me.TxtItemCount.Name = "TxtItemCount"
         Me.TxtItemCount.ReadOnly = True
-        Me.TxtItemCount.Size = New System.Drawing.Size(66, 23)
+        Me.TxtItemCount.Size = New System.Drawing.Size(70, 23)
         Me.TxtItemCount.TabIndex = 38
         Me.TxtItemCount.TabStop = False
         Me.TxtItemCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -644,9 +642,9 @@ Partial Class Quote
         Me.LblItemCount.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblItemCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblItemCount.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblItemCount.Location = New System.Drawing.Point(1275, 179)
+        Me.LblItemCount.Location = New System.Drawing.Point(1271, 179)
         Me.LblItemCount.Name = "LblItemCount"
-        Me.LblItemCount.Size = New System.Drawing.Size(66, 23)
+        Me.LblItemCount.Size = New System.Drawing.Size(70, 23)
         Me.LblItemCount.TabIndex = 39
         Me.LblItemCount.Text = "明細数"
         Me.LblItemCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -691,17 +689,17 @@ Partial Class Quote
         Me.TxtPurchaseTotal.TabStop = False
         Me.TxtPurchaseTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'LblStockOrder
+        'LblPurchaseAmount
         '
-        Me.LblStockOrder.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.LblStockOrder.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblStockOrder.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblStockOrder.Location = New System.Drawing.Point(1004, 422)
-        Me.LblStockOrder.Name = "LblStockOrder"
-        Me.LblStockOrder.Size = New System.Drawing.Size(100, 23)
-        Me.LblStockOrder.TabIndex = 43
-        Me.LblStockOrder.Text = "仕入金額"
-        Me.LblStockOrder.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LblPurchaseAmount.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblPurchaseAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblPurchaseAmount.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblPurchaseAmount.Location = New System.Drawing.Point(1004, 422)
+        Me.LblPurchaseAmount.Name = "LblPurchaseAmount"
+        Me.LblPurchaseAmount.Size = New System.Drawing.Size(100, 23)
+        Me.LblPurchaseAmount.TabIndex = 43
+        Me.LblPurchaseAmount.Text = "仕入金額"
+        Me.LblPurchaseAmount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'DtpQuote
         '
@@ -738,17 +736,17 @@ Partial Class Quote
         Me.TxtVat.TabIndex = 21
         Me.TxtVat.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'Label1
+        'LblVat
         '
-        Me.Label1.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.Label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label1.Location = New System.Drawing.Point(661, 422)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(100, 23)
-        Me.Label1.TabIndex = 47
-        Me.Label1.Text = "VAT"
-        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LblVat.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblVat.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblVat.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblVat.Location = New System.Drawing.Point(661, 422)
+        Me.LblVat.Name = "LblVat"
+        Me.LblVat.Size = New System.Drawing.Size(100, 23)
+        Me.LblVat.TabIndex = 47
+        Me.LblVat.Text = "VAT"
+        Me.LblVat.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'LblMode
         '
@@ -784,26 +782,27 @@ Partial Class Quote
         Me.BtnProof.UseVisualStyleBackColor = True
         Me.BtnProof.Visible = False
         '
-        'Panel1
+        'RbtnQuote
         '
-        Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel1.Controls.Add(Me.RbtnQuote)
-        Me.Panel1.Controls.Add(Me.RbtnUP)
-        Me.Panel1.Controls.Add(Me.RbtnGP)
-        Me.Panel1.Location = New System.Drawing.Point(950, 194)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(319, 37)
-        Me.Panel1.TabIndex = 86
+        Me.RbtnQuote.AutoSize = True
+        Me.RbtnQuote.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.RbtnQuote.Location = New System.Drawing.Point(1144, 210)
+        Me.RbtnQuote.Name = "RbtnQuote"
+        Me.RbtnQuote.Size = New System.Drawing.Size(121, 19)
+        Me.RbtnQuote.TabIndex = 19
+        Me.RbtnQuote.Text = "見積単価入力"
+        Me.RbtnQuote.UseVisualStyleBackColor = True
         '
         'RbtnUP
         '
         Me.RbtnUP.AutoSize = True
         Me.RbtnUP.Checked = True
         Me.RbtnUP.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.RbtnUP.Location = New System.Drawing.Point(6, 8)
+        Me.RbtnUP.Location = New System.Drawing.Point(954, 210)
         Me.RbtnUP.Name = "RbtnUP"
         Me.RbtnUP.Size = New System.Drawing.Size(89, 19)
         Me.RbtnUP.TabIndex = 17
+        Me.RbtnUP.TabStop = True
         Me.RbtnUP.Text = "単価入力"
         Me.RbtnUP.UseVisualStyleBackColor = True
         '
@@ -811,7 +810,7 @@ Partial Class Quote
         '
         Me.RbtnGP.AutoSize = True
         Me.RbtnGP.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.RbtnGP.Location = New System.Drawing.Point(101, 8)
+        Me.RbtnGP.Location = New System.Drawing.Point(1049, 210)
         Me.RbtnGP.Name = "RbtnGP"
         Me.RbtnGP.Size = New System.Drawing.Size(89, 19)
         Me.RbtnGP.TabIndex = 18
@@ -828,16 +827,31 @@ Partial Class Quote
         Me.BtnCodeSearch.Text = "検索"
         Me.BtnCodeSearch.UseVisualStyleBackColor = True
         '
-        'RbtnQuote
+        'TxtQuoteTotal
         '
-        Me.RbtnQuote.AutoSize = True
-        Me.RbtnQuote.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.RbtnQuote.Location = New System.Drawing.Point(196, 8)
-        Me.RbtnQuote.Name = "RbtnQuote"
-        Me.RbtnQuote.Size = New System.Drawing.Size(121, 19)
-        Me.RbtnQuote.TabIndex = 19
-        Me.RbtnQuote.Text = "見積単価入力"
-        Me.RbtnQuote.UseVisualStyleBackColor = True
+        Me.TxtQuoteTotal.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TxtQuoteTotal.Enabled = False
+        Me.TxtQuoteTotal.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtQuoteTotal.Location = New System.Drawing.Point(1110, 480)
+        Me.TxtQuoteTotal.MaxLength = 10
+        Me.TxtQuoteTotal.Name = "TxtQuoteTotal"
+        Me.TxtQuoteTotal.ReadOnly = True
+        Me.TxtQuoteTotal.Size = New System.Drawing.Size(231, 23)
+        Me.TxtQuoteTotal.TabIndex = 201
+        Me.TxtQuoteTotal.TabStop = False
+        Me.TxtQuoteTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'LblQuoteAmount
+        '
+        Me.LblQuoteAmount.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblQuoteAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblQuoteAmount.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblQuoteAmount.Location = New System.Drawing.Point(1004, 480)
+        Me.LblQuoteAmount.Name = "LblQuoteAmount"
+        Me.LblQuoteAmount.Size = New System.Drawing.Size(100, 23)
+        Me.LblQuoteAmount.TabIndex = 202
+        Me.LblQuoteAmount.Text = "見積金額"
+        Me.LblQuoteAmount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'No
         '
@@ -851,7 +865,7 @@ Partial Class Quote
         Me.メーカー.DefaultCellStyle = DataGridViewCellStyle1
         Me.メーカー.HeaderText = "メーカー"
         Me.メーカー.Name = "メーカー"
-        Me.メーカー.Width = 220
+        Me.メーカー.Width = 250
         '
         '品名
         '
@@ -859,7 +873,7 @@ Partial Class Quote
         Me.品名.DefaultCellStyle = DataGridViewCellStyle2
         Me.品名.HeaderText = "品名"
         Me.品名.Name = "品名"
-        Me.品名.Width = 220
+        Me.品名.Width = 250
         '
         '型式
         '
@@ -867,7 +881,7 @@ Partial Class Quote
         Me.型式.DefaultCellStyle = DataGridViewCellStyle3
         Me.型式.HeaderText = "型式"
         Me.型式.Name = "型式"
-        Me.型式.Width = 230
+        Me.型式.Width = 250
         '
         '数量
         '
@@ -876,18 +890,19 @@ Partial Class Quote
         Me.数量.DefaultCellStyle = DataGridViewCellStyle4
         Me.数量.HeaderText = "数量"
         Me.数量.Name = "数量"
-        Me.数量.Width = 80
+        Me.数量.Width = 150
         '
         '単位
         '
         Me.単位.HeaderText = "単位"
         Me.単位.Name = "単位"
-        Me.単位.Width = 80
+        Me.単位.Width = 150
         '
         '仕入先コード
         '
         Me.仕入先コード.HeaderText = "仕入先コード"
         Me.仕入先コード.Name = "仕入先コード"
+        Me.仕入先コード.Width = 150
         '
         '仕入先
         '
@@ -895,7 +910,7 @@ Partial Class Quote
         Me.仕入先.DefaultCellStyle = DataGridViewCellStyle5
         Me.仕入先.HeaderText = "仕入先名"
         Me.仕入先.Name = "仕入先"
-        Me.仕入先.Width = 85
+        Me.仕入先.Width = 150
         '
         '仕入単価
         '
@@ -904,7 +919,7 @@ Partial Class Quote
         Me.仕入単価.DefaultCellStyle = DataGridViewCellStyle6
         Me.仕入単価.HeaderText = "仕入単価"
         Me.仕入単価.Name = "仕入単価"
-        Me.仕入単価.Width = 80
+        Me.仕入単価.Width = 150
         '
         '仕入原価
         '
@@ -913,11 +928,13 @@ Partial Class Quote
         Me.仕入原価.DefaultCellStyle = DataGridViewCellStyle7
         Me.仕入原価.HeaderText = "仕入原価"
         Me.仕入原価.Name = "仕入原価"
+        Me.仕入原価.Width = 150
         '
         '関税率
         '
         Me.関税率.HeaderText = "関税率"
         Me.関税率.Name = "関税率"
+        Me.関税率.Width = 150
         '
         '関税額
         '
@@ -926,6 +943,7 @@ Partial Class Quote
         Me.関税額.DefaultCellStyle = DataGridViewCellStyle8
         Me.関税額.HeaderText = "関税額"
         Me.関税額.Name = "関税額"
+        Me.関税額.Width = 150
         '
         '前払法人税率
         '
@@ -933,7 +951,7 @@ Partial Class Quote
         Me.前払法人税率.DefaultCellStyle = DataGridViewCellStyle9
         Me.前払法人税率.HeaderText = "前払法人税率"
         Me.前払法人税率.Name = "前払法人税率"
-        Me.前払法人税率.Width = 120
+        Me.前払法人税率.Width = 150
         '
         '前払法人税額
         '
@@ -942,12 +960,13 @@ Partial Class Quote
         Me.前払法人税額.DefaultCellStyle = DataGridViewCellStyle10
         Me.前払法人税額.HeaderText = "前払法人税額"
         Me.前払法人税額.Name = "前払法人税額"
-        Me.前払法人税額.Width = 120
+        Me.前払法人税額.Width = 150
         '
         '輸送費率
         '
         Me.輸送費率.HeaderText = "輸送費率"
         Me.輸送費率.Name = "輸送費率"
+        Me.輸送費率.Width = 150
         '
         '輸送費額
         '
@@ -956,6 +975,7 @@ Partial Class Quote
         Me.輸送費額.DefaultCellStyle = DataGridViewCellStyle11
         Me.輸送費額.HeaderText = "輸送費額"
         Me.輸送費額.Name = "輸送費額"
+        Me.輸送費額.Width = 150
         '
         '仕入金額
         '
@@ -966,6 +986,7 @@ Partial Class Quote
         Me.仕入金額.HeaderText = "仕入金額"
         Me.仕入金額.Name = "仕入金額"
         Me.仕入金額.ReadOnly = True
+        Me.仕入金額.Width = 150
         '
         '売単価
         '
@@ -974,7 +995,7 @@ Partial Class Quote
         Me.売単価.DefaultCellStyle = DataGridViewCellStyle13
         Me.売単価.HeaderText = "売単価"
         Me.売単価.Name = "売単価"
-        Me.売単価.Width = 80
+        Me.売単価.Width = 150
         '
         '売上金額
         '
@@ -985,6 +1006,7 @@ Partial Class Quote
         Me.売上金額.HeaderText = "売上金額"
         Me.売上金額.Name = "売上金額"
         Me.売上金額.ReadOnly = True
+        Me.売上金額.Width = 150
         '
         '見積単価
         '
@@ -993,6 +1015,7 @@ Partial Class Quote
         Me.見積単価.HeaderText = "見積単価"
         Me.見積単価.Name = "見積単価"
         Me.見積単価.ReadOnly = True
+        Me.見積単価.Width = 150
         '
         '見積金額
         '
@@ -1001,6 +1024,7 @@ Partial Class Quote
         Me.見積金額.HeaderText = "見積金額"
         Me.見積金額.Name = "見積金額"
         Me.見積金額.ReadOnly = True
+        Me.見積金額.Width = 150
         '
         '粗利額
         '
@@ -1011,6 +1035,7 @@ Partial Class Quote
         Me.粗利額.HeaderText = "粗利額"
         Me.粗利額.Name = "粗利額"
         Me.粗利額.ReadOnly = True
+        Me.粗利額.Width = 150
         '
         '粗利率
         '
@@ -1021,17 +1046,19 @@ Partial Class Quote
         Me.粗利率.HeaderText = "粗利率(%)"
         Me.粗利率.Name = "粗利率"
         Me.粗利率.ReadOnly = True
+        Me.粗利率.Width = 150
         '
         'リードタイム
         '
         Me.リードタイム.HeaderText = "リードタイム"
         Me.リードタイム.Name = "リードタイム"
+        Me.リードタイム.Width = 150
         '
         '備考
         '
         Me.備考.HeaderText = "備考"
         Me.備考.Name = "備考"
-        Me.備考.Width = 80
+        Me.備考.Width = 150
         '
         'ステータス
         '
@@ -1065,49 +1092,25 @@ Partial Class Quote
         Me.間接費.ReadOnly = True
         Me.間接費.Visible = False
         '
-        'TxtQuoteTotal
-        '
-        Me.TxtQuoteTotal.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.TxtQuoteTotal.Enabled = False
-        Me.TxtQuoteTotal.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtQuoteTotal.Location = New System.Drawing.Point(1110, 480)
-        Me.TxtQuoteTotal.MaxLength = 10
-        Me.TxtQuoteTotal.Name = "TxtQuoteTotal"
-        Me.TxtQuoteTotal.ReadOnly = True
-        Me.TxtQuoteTotal.Size = New System.Drawing.Size(231, 23)
-        Me.TxtQuoteTotal.TabIndex = 201
-        Me.TxtQuoteTotal.TabStop = False
-        Me.TxtQuoteTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'Label3
-        '
-        Me.Label3.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.Label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label3.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label3.Location = New System.Drawing.Point(1004, 480)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(100, 23)
-        Me.Label3.TabIndex = 202
-        Me.Label3.Text = "見積金額"
-        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
         'Quote
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.RbtnQuote)
+        Me.Controls.Add(Me.RbtnUP)
+        Me.Controls.Add(Me.RbtnGP)
         Me.Controls.Add(Me.TxtQuoteTotal)
-        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.LblQuoteAmount)
         Me.Controls.Add(Me.BtnCodeSearch)
-        Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.BtnProof)
         Me.Controls.Add(Me.BtnQuoteRequest)
         Me.Controls.Add(Me.LblMode)
         Me.Controls.Add(Me.TxtVat)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.LblVat)
         Me.Controls.Add(Me.DtpExpiration)
         Me.Controls.Add(Me.DtpQuote)
         Me.Controls.Add(Me.TxtPurchaseTotal)
-        Me.Controls.Add(Me.LblStockOrder)
+        Me.Controls.Add(Me.LblPurchaseAmount)
         Me.Controls.Add(Me.TxtGrossProfit)
         Me.Controls.Add(Me.LblGrossProfit)
         Me.Controls.Add(Me.TxtItemCount)
@@ -1119,7 +1122,7 @@ Partial Class Quote
         Me.Controls.Add(Me.BtnRegistration)
         Me.Controls.Add(Me.BtnQuote)
         Me.Controls.Add(Me.TxtTotal)
-        Me.Controls.Add(Me.LblTotal)
+        Me.Controls.Add(Me.LblOrderAmount)
         Me.Controls.Add(Me.TxtAddress3)
         Me.Controls.Add(Me.TxtAddress2)
         Me.Controls.Add(Me.LblExpiration)
@@ -1160,8 +1163,6 @@ Partial Class Quote
         Me.Name = "Quote"
         Me.Text = "Quote"
         CType(Me.DgvItemList, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.Panel1.ResumeLayout(False)
-        Me.Panel1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1203,7 +1204,7 @@ Partial Class Quote
     Friend WithEvents TxtAddress2 As TextBox
     Friend WithEvents TxtAddress3 As TextBox
     Friend WithEvents TxtTotal As TextBox
-    Friend WithEvents LblTotal As Label
+    Friend WithEvents LblOrderAmount As Label
     Friend WithEvents BtnRegistration As Button
     Friend WithEvents BtnQuote As Button
     Friend WithEvents DtpRegistration As DateTimePicker
@@ -1215,19 +1216,20 @@ Partial Class Quote
     Friend WithEvents TxtGrossProfit As TextBox
     Friend WithEvents LblGrossProfit As Label
     Friend WithEvents TxtPurchaseTotal As TextBox
-    Friend WithEvents LblStockOrder As Label
+    Friend WithEvents LblPurchaseAmount As Label
     Friend WithEvents DtpQuote As DateTimePicker
     Friend WithEvents DtpExpiration As DateTimePicker
     Friend WithEvents TxtVat As TextBox
-    Friend WithEvents Label1 As Label
+    Friend WithEvents LblVat As Label
     Friend WithEvents LblMode As Label
     Friend WithEvents BtnQuoteRequest As Button
     Friend WithEvents BtnProof As Button
-    Friend WithEvents Panel1 As Panel
     Friend WithEvents RbtnUP As RadioButton
     Friend WithEvents RbtnGP As RadioButton
     Friend WithEvents BtnCodeSearch As Button
     Friend WithEvents RbtnQuote As RadioButton
+    Friend WithEvents TxtQuoteTotal As TextBox
+    Friend WithEvents LblQuoteAmount As Label
     Friend WithEvents No As DataGridViewTextBoxColumn
     Friend WithEvents メーカー As DataGridViewTextBoxColumn
     Friend WithEvents 品名 As DataGridViewTextBoxColumn
@@ -1257,6 +1259,4 @@ Partial Class Quote
     Friend WithEvents 間接費無仕入金額 As DataGridViewTextBoxColumn
     Friend WithEvents 間接費率 As DataGridViewTextBoxColumn
     Friend WithEvents 間接費 As DataGridViewTextBoxColumn
-    Friend WithEvents TxtQuoteTotal As TextBox
-    Friend WithEvents Label3 As Label
 End Class

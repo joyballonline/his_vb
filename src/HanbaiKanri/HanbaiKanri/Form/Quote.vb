@@ -85,9 +85,12 @@ Public Class Quote
         Me.ControlBox = Not Me.ControlBox
         _init = True
 
+
+
     End Sub
 
     Private Sub Quote_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         'DateTimePickerのフォーマットを指定
         DtpRegistration.Text = DateAdd("m", 0, Now).ToString("yyyy/MM/dd")
         DtpQuote.Text = DateAdd("m", 0, Now).ToString("yyyy/MM/dd")
@@ -173,6 +176,107 @@ Public Class Quote
         column2.Name = "リードタイム単位"
 
         DgvItemList.Columns.Insert(25, column2)
+
+        If frmC01F10_Login.loginValue.Language = "ENG" Then
+            LblMode.Text = "Mode"
+            LblQuoteNo.Text = "QuoteNo"
+            LblRegistration.Text = "RegistrationDate"
+            LblQuote.Text = "QuoteDate"
+            LblExpiration.Text = "Expiration"
+            LblCustomerName.Text = "CustomerName"
+            LblAddress.Text = "Address"
+            LblTel.Text = "Tel"
+            LblFax.Text = "Fax"
+            LblPerson.Text = "Person"
+            LblPosition.Text = "Position"
+            LblSales.Text = "Sales"
+            LblInput.Text = "Input"
+            LblPaymentTerms.Text = "PaymentTerms"
+            LblRemarks.Text = "Remarks"
+            LblItemCount.Text = "ItemCount"
+            LblPurchaseAmount.Text = "PurchaseAmount"
+            LblOrderAmount.Text = "OrderAmount"
+            LblQuoteAmount.Text = "QuoteAmount"
+            LblGrossProfit.Text = "GrossProfit"
+            LblVat.Text = "Vat"
+
+            RbtnGP.Text = "GrossProfitInput"
+            RbtnUP.Text = "SellingPriceInput"
+            RbtnQuote.Text = "QuotationPriceInput"
+
+            BtnCodeSearch.Text = "Search"
+            BtnInsert.Text = "Insert"
+            BtnUp.Text = "Up"
+            BtnDown.Text = "Down"
+            BtnRowsAdd.Text = "Add"
+            BtnRowsDel.Text = "Delete"
+            BtnClone.Text = "Clone"
+            BtnProof.Text = "Proof"
+            BtnQuoteRequest.Text = "QuoteRequest"
+            BtnQuote.Text = "Quote"
+            BtnRegistration.Text = "Registration"
+            BtnBack.Text = "Back"
+
+            LblRegistration.Size = New Size(156, 23)
+            LblRegistration.Location = New Point(274, 15)
+            DtpRegistration.Location = New Point(436, 16)
+            LblQuote.Location = New Point(592, 14)
+            DtpQuote.Location = New Point(710, 16)
+            LblExpiration.Location = New Point(866, 15)
+            DtpExpiration.Location = New Point(982, 16)
+
+            BtnCodeSearch.Size = New Size(108, 23)
+            BtnCodeSearch.Location = New Point(212, 63)
+            TxtCustomerName.Size = New Size(278, 23)
+            TxtCustomerName.Location = New Point(326, 63)
+
+            LblItemCount.Size = New Size(125, 23)
+            LblItemCount.Location = New Point(1216, 179)
+            TxtItemCount.Size = New Size(125, 23)
+            TxtItemCount.Location = New Point(1216, 208)
+            RbtnUP.Location = New Point(712, 210)
+            RbtnGP.Location = New Point(879, 210)
+            RbtnQuote.Location = New Point(1038, 210)
+
+            LblVat.Location = New Point(629, 422)
+            TxtVat.Location = New Point(735, 422)
+            LblGrossProfit.Location = New Point(628, 451)
+            TxtGrossProfit.Location = New Point(734, 451)
+            LblPurchaseAmount.Location = New Point(972, 422)
+            LblPurchaseAmount.Size = New Size(132, 23)
+            LblOrderAmount.Location = New Point(972, 451)
+            LblOrderAmount.Size = New Size(132, 23)
+            LblQuoteAmount.Location = New Point(972, 480)
+            LblQuoteAmount.Size = New Size(132, 23)
+
+            DgvItemList.Columns("仕入区分").HeaderText = "PurchaseSection"
+            DgvItemList.Columns("メーカー").HeaderText = "Maker"
+            DgvItemList.Columns("品名").HeaderText = "Item"
+            DgvItemList.Columns("型式").HeaderText = "Model"
+            DgvItemList.Columns("数量").HeaderText = "Quantity"
+            DgvItemList.Columns("単位").HeaderText = "Unit"
+            DgvItemList.Columns("仕入先コード").HeaderText = "SupplierCode"
+            DgvItemList.Columns("仕入先").HeaderText = "SupplierName"
+            DgvItemList.Columns("仕入単価").HeaderText = "PurchasePrice"
+            DgvItemList.Columns("仕入原価").HeaderText = "PurchsingCost"
+            DgvItemList.Columns("関税率").HeaderText = "TariffRate"
+            DgvItemList.Columns("関税額").HeaderText = "CustomsDuty"
+            DgvItemList.Columns("前払法人税率").HeaderText = "PrepaidCorporateTaxRate"
+            DgvItemList.Columns("前払法人税額").HeaderText = "PrepaidCorporateTaxAmount"
+            DgvItemList.Columns("輸送費率").HeaderText = "TransportationCostRate"
+            DgvItemList.Columns("輸送費額").HeaderText = "TransportationCost"
+            DgvItemList.Columns("仕入金額").HeaderText = "PurchaseAmount"
+            DgvItemList.Columns("売単価").HeaderText = "SellingPrice"
+            DgvItemList.Columns("売上金額").HeaderText = "SalesAmount"
+            DgvItemList.Columns("見積単価").HeaderText = "QuotetionPrice"
+            DgvItemList.Columns("見積金額").HeaderText = "QuotetionAmount"
+            DgvItemList.Columns("粗利額").HeaderText = "GrossProfit"
+            DgvItemList.Columns("粗利率").HeaderText = "GrossMarginRate(%)"
+            DgvItemList.Columns("リードタイム").HeaderText = "LeadTime"
+            DgvItemList.Columns("リードタイム単位").HeaderText = "LeadTimeUnit"
+            DgvItemList.Columns("備考").HeaderText = "Remarks"
+
+        End If
 
         If EditNo IsNot Nothing Then    '見積編集時
             '見積基本情報
@@ -431,7 +535,12 @@ Public Class Quote
         End If
 
         If Status Is "VIEW" Then
-            LblMode.Text = "参照モード"
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                LblMode.Text = "ViewMode"
+            Else
+                LblMode.Text = "参照モード"
+            End If
+
             DtpQuote.Enabled = False
             DtpExpiration.Enabled = False
             TxtCustomerCode.Enabled = False
@@ -475,7 +584,12 @@ Public Class Quote
             End If
 
         ElseIf Status Is "PRICE" Then
-            LblMode.Text = "仕入単価入力モード"
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                LblMode.Text = "PurchasePriceInputMode"
+            Else
+                LblMode.Text = "仕入単価入力モード"
+            End If
+
             BtnRowsAdd.Visible = False
             BtnRowsDel.Visible = False
             BtnUp.Visible = False
@@ -484,9 +598,18 @@ Public Class Quote
             BtnInsert.Visible = False
             BtnQuote.Visible = False
         ElseIf Status Is "EDIT" Then
-            LblMode.Text = "編集モード"
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                LblMode.Text = "EditMode"
+            Else
+                LblMode.Text = "編集モード"
+            End If
+
         ElseIf Status Is "ADD" Then
-            LblMode.Text = "新規登録モード"
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                LblMode.Text = "NewRegistrationMode"
+            Else
+                LblMode.Text = "新規登録モード"
+            End If
         End If
 
 
