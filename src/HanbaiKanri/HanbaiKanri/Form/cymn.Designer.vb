@@ -78,26 +78,6 @@ Partial Class Cymn
         Me.LblOrderDate = New System.Windows.Forms.Label()
         Me.LblOrderNo = New System.Windows.Forms.Label()
         Me.DgvItemList = New System.Windows.Forms.DataGridView()
-        Me.DtpExpiration = New System.Windows.Forms.DateTimePicker()
-        Me.DtpQuoteDate = New System.Windows.Forms.DateTimePicker()
-        Me.DtpQuoteRegistration = New System.Windows.Forms.DateTimePicker()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.TxtQuoteSuffix = New System.Windows.Forms.TextBox()
-        Me.TxtQuoteNo = New System.Windows.Forms.TextBox()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.TxtPurchaseRemark = New System.Windows.Forms.TextBox()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.TxtOrderRemark = New System.Windows.Forms.TextBox()
-        Me.TxtVat = New System.Windows.Forms.TextBox()
-        Me.LblVAT = New System.Windows.Forms.Label()
-        Me.TxtPph = New System.Windows.Forms.TextBox()
-        Me.Label12 = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.TxtCustomerPO = New System.Windows.Forms.TextBox()
-        Me.LblCustmerPO = New System.Windows.Forms.Label()
         Me.No = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.メーカー = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.品名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -125,6 +105,26 @@ Partial Class Cymn
         Me.ステータス = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.間接費率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.間接費 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DtpExpiration = New System.Windows.Forms.DateTimePicker()
+        Me.DtpQuoteDate = New System.Windows.Forms.DateTimePicker()
+        Me.DtpQuoteRegistration = New System.Windows.Forms.DateTimePicker()
+        Me.LblExpiration = New System.Windows.Forms.Label()
+        Me.LblQuoteRegistration = New System.Windows.Forms.Label()
+        Me.TxtQuoteSuffix = New System.Windows.Forms.TextBox()
+        Me.TxtQuoteNo = New System.Windows.Forms.TextBox()
+        Me.LblQuoteDate = New System.Windows.Forms.Label()
+        Me.LblQuoteNo = New System.Windows.Forms.Label()
+        Me.TxtPurchaseRemark = New System.Windows.Forms.TextBox()
+        Me.LblPurchaseRemarks = New System.Windows.Forms.Label()
+        Me.LblOrderRemarks = New System.Windows.Forms.Label()
+        Me.TxtOrderRemark = New System.Windows.Forms.TextBox()
+        Me.TxtVat = New System.Windows.Forms.TextBox()
+        Me.LblVAT = New System.Windows.Forms.Label()
+        Me.TxtPph = New System.Windows.Forms.TextBox()
+        Me.LblPph = New System.Windows.Forms.Label()
+        Me.LblHyphen = New System.Windows.Forms.Label()
+        Me.TxtCustomerPO = New System.Windows.Forms.TextBox()
+        Me.LblCustmerPO = New System.Windows.Forms.Label()
         CType(Me.DgvItemList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -134,7 +134,7 @@ Partial Class Cymn
         Me.DtpPurchaseDate.CustomFormat = "yyyy/MM/dd"
         Me.DtpPurchaseDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpPurchaseDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DtpPurchaseDate.Location = New System.Drawing.Point(871, 13)
+        Me.DtpPurchaseDate.Location = New System.Drawing.Point(863, 12)
         Me.DtpPurchaseDate.Name = "DtpPurchaseDate"
         Me.DtpPurchaseDate.Size = New System.Drawing.Size(140, 22)
         Me.DtpPurchaseDate.TabIndex = 3
@@ -146,9 +146,9 @@ Partial Class Cymn
         Me.DtpOrderDate.CustomFormat = "yyyy/MM/dd"
         Me.DtpOrderDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpOrderDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DtpOrderDate.Location = New System.Drawing.Point(601, 13)
+        Me.DtpOrderDate.Location = New System.Drawing.Point(601, 12)
         Me.DtpOrderDate.Name = "DtpOrderDate"
-        Me.DtpOrderDate.Size = New System.Drawing.Size(148, 22)
+        Me.DtpOrderDate.Size = New System.Drawing.Size(140, 22)
         Me.DtpOrderDate.TabIndex = 2
         Me.DtpOrderDate.Value = New Date(2018, 7, 19, 0, 0, 0, 0)
         '
@@ -209,11 +209,11 @@ Partial Class Cymn
         Me.TxtItemCount.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.TxtItemCount.Enabled = False
         Me.TxtItemCount.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtItemCount.Location = New System.Drawing.Point(1274, 216)
+        Me.TxtItemCount.Location = New System.Drawing.Point(1255, 216)
         Me.TxtItemCount.MaxLength = 20
         Me.TxtItemCount.Name = "TxtItemCount"
         Me.TxtItemCount.ReadOnly = True
-        Me.TxtItemCount.Size = New System.Drawing.Size(66, 23)
+        Me.TxtItemCount.Size = New System.Drawing.Size(85, 23)
         Me.TxtItemCount.TabIndex = 91
         Me.TxtItemCount.TabStop = False
         Me.TxtItemCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -223,9 +223,9 @@ Partial Class Cymn
         Me.LblItemCount.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblItemCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblItemCount.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblItemCount.Location = New System.Drawing.Point(1274, 187)
+        Me.LblItemCount.Location = New System.Drawing.Point(1255, 187)
         Me.LblItemCount.Name = "LblItemCount"
-        Me.LblItemCount.Size = New System.Drawing.Size(66, 23)
+        Me.LblItemCount.Size = New System.Drawing.Size(85, 23)
         Me.LblItemCount.TabIndex = 92
         Me.LblItemCount.Text = "明細数"
         Me.LblItemCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -268,7 +268,7 @@ Partial Class Cymn
         Me.DtpOrderRegistration.Enabled = False
         Me.DtpOrderRegistration.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpOrderRegistration.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DtpOrderRegistration.Location = New System.Drawing.Point(1133, 13)
+        Me.DtpOrderRegistration.Location = New System.Drawing.Point(1127, 11)
         Me.DtpOrderRegistration.Name = "DtpOrderRegistration"
         Me.DtpOrderRegistration.Size = New System.Drawing.Size(152, 22)
         Me.DtpOrderRegistration.TabIndex = 4
@@ -340,7 +340,7 @@ Partial Class Cymn
         Me.LblPurchaseDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblPurchaseDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblPurchaseDate.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblPurchaseDate.Location = New System.Drawing.Point(755, 12)
+        Me.LblPurchaseDate.Location = New System.Drawing.Point(747, 11)
         Me.LblPurchaseDate.Name = "LblPurchaseDate"
         Me.LblPurchaseDate.Size = New System.Drawing.Size(110, 23)
         Me.LblPurchaseDate.TabIndex = 88
@@ -352,7 +352,7 @@ Partial Class Cymn
         Me.LblRegistration.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblRegistration.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblRegistration.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblRegistration.Location = New System.Drawing.Point(1017, 12)
+        Me.LblRegistration.Location = New System.Drawing.Point(1009, 11)
         Me.LblRegistration.Name = "LblRegistration"
         Me.LblRegistration.Size = New System.Drawing.Size(110, 23)
         Me.LblRegistration.TabIndex = 87
@@ -680,241 +680,6 @@ Partial Class Cymn
         Me.DgvItemList.Size = New System.Drawing.Size(1329, 171)
         Me.DgvItemList.TabIndex = 4
         '
-        'DtpExpiration
-        '
-        Me.DtpExpiration.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.DtpExpiration.CustomFormat = "yyyy/MM/dd"
-        Me.DtpExpiration.Enabled = False
-        Me.DtpExpiration.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.DtpExpiration.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DtpExpiration.Location = New System.Drawing.Point(935, 43)
-        Me.DtpExpiration.Name = "DtpExpiration"
-        Me.DtpExpiration.Size = New System.Drawing.Size(140, 22)
-        Me.DtpExpiration.TabIndex = 108
-        Me.DtpExpiration.TabStop = False
-        Me.DtpExpiration.Value = New Date(2018, 6, 5, 23, 23, 58, 0)
-        '
-        'DtpQuoteDate
-        '
-        Me.DtpQuoteDate.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.DtpQuoteDate.CustomFormat = "yyyy/MM/dd"
-        Me.DtpQuoteDate.Enabled = False
-        Me.DtpQuoteDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.DtpQuoteDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DtpQuoteDate.Location = New System.Drawing.Point(663, 43)
-        Me.DtpQuoteDate.Name = "DtpQuoteDate"
-        Me.DtpQuoteDate.Size = New System.Drawing.Size(150, 22)
-        Me.DtpQuoteDate.TabIndex = 107
-        Me.DtpQuoteDate.TabStop = False
-        Me.DtpQuoteDate.Value = New Date(2018, 6, 5, 23, 23, 58, 0)
-        '
-        'DtpQuoteRegistration
-        '
-        Me.DtpQuoteRegistration.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.DtpQuoteRegistration.CustomFormat = "yyyy/MM/dd"
-        Me.DtpQuoteRegistration.Enabled = False
-        Me.DtpQuoteRegistration.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.DtpQuoteRegistration.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DtpQuoteRegistration.Location = New System.Drawing.Point(389, 42)
-        Me.DtpQuoteRegistration.Name = "DtpQuoteRegistration"
-        Me.DtpQuoteRegistration.Size = New System.Drawing.Size(150, 22)
-        Me.DtpQuoteRegistration.TabIndex = 99
-        Me.DtpQuoteRegistration.TabStop = False
-        Me.DtpQuoteRegistration.Value = New Date(2018, 6, 5, 23, 23, 58, 0)
-        '
-        'Label3
-        '
-        Me.Label3.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.Label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label3.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label3.Location = New System.Drawing.Point(819, 42)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(110, 23)
-        Me.Label3.TabIndex = 105
-        Me.Label3.Text = "見積有効期限"
-        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label5
-        '
-        Me.Label5.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.Label5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label5.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label5.Location = New System.Drawing.Point(273, 42)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(110, 23)
-        Me.Label5.TabIndex = 104
-        Me.Label5.Text = "見積登録日"
-        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'TxtQuoteSuffix
-        '
-        Me.TxtQuoteSuffix.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.TxtQuoteSuffix.Enabled = False
-        Me.TxtQuoteSuffix.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtQuoteSuffix.Location = New System.Drawing.Point(238, 42)
-        Me.TxtQuoteSuffix.MaxLength = 1
-        Me.TxtQuoteSuffix.Name = "TxtQuoteSuffix"
-        Me.TxtQuoteSuffix.ReadOnly = True
-        Me.TxtQuoteSuffix.Size = New System.Drawing.Size(29, 23)
-        Me.TxtQuoteSuffix.TabIndex = 102
-        Me.TxtQuoteSuffix.TabStop = False
-        '
-        'TxtQuoteNo
-        '
-        Me.TxtQuoteNo.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.TxtQuoteNo.Enabled = False
-        Me.TxtQuoteNo.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtQuoteNo.Location = New System.Drawing.Point(127, 42)
-        Me.TxtQuoteNo.MaxLength = 8
-        Me.TxtQuoteNo.Name = "TxtQuoteNo"
-        Me.TxtQuoteNo.ReadOnly = True
-        Me.TxtQuoteNo.Size = New System.Drawing.Size(88, 23)
-        Me.TxtQuoteNo.TabIndex = 101
-        Me.TxtQuoteNo.TabStop = False
-        '
-        'Label6
-        '
-        Me.Label6.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.Label6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label6.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label6.Location = New System.Drawing.Point(545, 42)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(112, 23)
-        Me.Label6.TabIndex = 103
-        Me.Label6.Text = "見積日"
-        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label7
-        '
-        Me.Label7.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.Label7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label7.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label7.Location = New System.Drawing.Point(11, 42)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(110, 23)
-        Me.Label7.TabIndex = 100
-        Me.Label7.Text = "見積番号"
-        Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'TxtPurchaseRemark
-        '
-        Me.TxtPurchaseRemark.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtPurchaseRemark.Location = New System.Drawing.Point(127, 451)
-        Me.TxtPurchaseRemark.MaxLength = 50
-        Me.TxtPurchaseRemark.Name = "TxtPurchaseRemark"
-        Me.TxtPurchaseRemark.Size = New System.Drawing.Size(476, 23)
-        Me.TxtPurchaseRemark.TabIndex = 6
-        '
-        'Label8
-        '
-        Me.Label8.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.Label8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label8.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label8.Location = New System.Drawing.Point(11, 451)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(110, 23)
-        Me.Label8.TabIndex = 110
-        Me.Label8.Text = "発注備考"
-        Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label9
-        '
-        Me.Label9.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.Label9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label9.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label9.Location = New System.Drawing.Point(11, 422)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(110, 23)
-        Me.Label9.TabIndex = 109
-        Me.Label9.Text = "受注備考"
-        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'TxtOrderRemark
-        '
-        Me.TxtOrderRemark.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtOrderRemark.Location = New System.Drawing.Point(127, 422)
-        Me.TxtOrderRemark.MaxLength = 50
-        Me.TxtOrderRemark.Name = "TxtOrderRemark"
-        Me.TxtOrderRemark.Size = New System.Drawing.Size(476, 23)
-        Me.TxtOrderRemark.TabIndex = 5
-        '
-        'TxtVat
-        '
-        Me.TxtVat.BackColor = System.Drawing.Color.White
-        Me.TxtVat.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtVat.Location = New System.Drawing.Point(766, 451)
-        Me.TxtVat.MaxLength = 10
-        Me.TxtVat.Name = "TxtVat"
-        Me.TxtVat.Size = New System.Drawing.Size(231, 23)
-        Me.TxtVat.TabIndex = 8
-        Me.TxtVat.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'LblVAT
-        '
-        Me.LblVAT.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.LblVAT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblVAT.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblVAT.Location = New System.Drawing.Point(660, 451)
-        Me.LblVAT.Name = "LblVAT"
-        Me.LblVAT.Size = New System.Drawing.Size(100, 23)
-        Me.LblVAT.TabIndex = 118
-        Me.LblVAT.Text = "VAT"
-        Me.LblVAT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'TxtPph
-        '
-        Me.TxtPph.BackColor = System.Drawing.Color.White
-        Me.TxtPph.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtPph.Location = New System.Drawing.Point(766, 422)
-        Me.TxtPph.MaxLength = 10
-        Me.TxtPph.Name = "TxtPph"
-        Me.TxtPph.Size = New System.Drawing.Size(231, 23)
-        Me.TxtPph.TabIndex = 7
-        Me.TxtPph.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'Label12
-        '
-        Me.Label12.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.Label12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label12.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label12.Location = New System.Drawing.Point(660, 422)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(100, 23)
-        Me.Label12.TabIndex = 120
-        Me.Label12.Text = "PPH"
-        Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(221, 49)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(11, 12)
-        Me.Label1.TabIndex = 106
-        Me.Label1.Text = "-"
-        '
-        'TxtCustomerPO
-        '
-        Me.TxtCustomerPO.BackColor = System.Drawing.Color.White
-        Me.TxtCustomerPO.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtCustomerPO.Location = New System.Drawing.Point(389, 12)
-        Me.TxtCustomerPO.MaxLength = 8
-        Me.TxtCustomerPO.Name = "TxtCustomerPO"
-        Me.TxtCustomerPO.Size = New System.Drawing.Size(88, 23)
-        Me.TxtCustomerPO.TabIndex = 1
-        '
-        'LblCustmerPO
-        '
-        Me.LblCustmerPO.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.LblCustmerPO.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblCustmerPO.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblCustmerPO.Location = New System.Drawing.Point(273, 12)
-        Me.LblCustmerPO.Name = "LblCustmerPO"
-        Me.LblCustmerPO.Size = New System.Drawing.Size(110, 23)
-        Me.LblCustmerPO.TabIndex = 121
-        Me.LblCustmerPO.Text = "客先番号"
-        Me.LblCustmerPO.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
         'No
         '
         Me.No.HeaderText = "No"
@@ -1091,6 +856,241 @@ Partial Class Cymn
         Me.間接費.ReadOnly = True
         Me.間接費.Visible = False
         '
+        'DtpExpiration
+        '
+        Me.DtpExpiration.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.DtpExpiration.CustomFormat = "yyyy/MM/dd"
+        Me.DtpExpiration.Enabled = False
+        Me.DtpExpiration.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.DtpExpiration.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.DtpExpiration.Location = New System.Drawing.Point(935, 43)
+        Me.DtpExpiration.Name = "DtpExpiration"
+        Me.DtpExpiration.Size = New System.Drawing.Size(140, 22)
+        Me.DtpExpiration.TabIndex = 108
+        Me.DtpExpiration.TabStop = False
+        Me.DtpExpiration.Value = New Date(2018, 6, 5, 23, 23, 58, 0)
+        '
+        'DtpQuoteDate
+        '
+        Me.DtpQuoteDate.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.DtpQuoteDate.CustomFormat = "yyyy/MM/dd"
+        Me.DtpQuoteDate.Enabled = False
+        Me.DtpQuoteDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.DtpQuoteDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.DtpQuoteDate.Location = New System.Drawing.Point(663, 43)
+        Me.DtpQuoteDate.Name = "DtpQuoteDate"
+        Me.DtpQuoteDate.Size = New System.Drawing.Size(150, 22)
+        Me.DtpQuoteDate.TabIndex = 107
+        Me.DtpQuoteDate.TabStop = False
+        Me.DtpQuoteDate.Value = New Date(2018, 6, 5, 23, 23, 58, 0)
+        '
+        'DtpQuoteRegistration
+        '
+        Me.DtpQuoteRegistration.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.DtpQuoteRegistration.CustomFormat = "yyyy/MM/dd"
+        Me.DtpQuoteRegistration.Enabled = False
+        Me.DtpQuoteRegistration.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.DtpQuoteRegistration.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.DtpQuoteRegistration.Location = New System.Drawing.Point(389, 42)
+        Me.DtpQuoteRegistration.Name = "DtpQuoteRegistration"
+        Me.DtpQuoteRegistration.Size = New System.Drawing.Size(150, 22)
+        Me.DtpQuoteRegistration.TabIndex = 99
+        Me.DtpQuoteRegistration.TabStop = False
+        Me.DtpQuoteRegistration.Value = New Date(2018, 6, 5, 23, 23, 58, 0)
+        '
+        'LblExpiration
+        '
+        Me.LblExpiration.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblExpiration.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblExpiration.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblExpiration.Location = New System.Drawing.Point(819, 42)
+        Me.LblExpiration.Name = "LblExpiration"
+        Me.LblExpiration.Size = New System.Drawing.Size(110, 23)
+        Me.LblExpiration.TabIndex = 105
+        Me.LblExpiration.Text = "見積有効期限"
+        Me.LblExpiration.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LblQuoteRegistration
+        '
+        Me.LblQuoteRegistration.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblQuoteRegistration.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblQuoteRegistration.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblQuoteRegistration.Location = New System.Drawing.Point(273, 42)
+        Me.LblQuoteRegistration.Name = "LblQuoteRegistration"
+        Me.LblQuoteRegistration.Size = New System.Drawing.Size(110, 23)
+        Me.LblQuoteRegistration.TabIndex = 104
+        Me.LblQuoteRegistration.Text = "見積登録日"
+        Me.LblQuoteRegistration.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'TxtQuoteSuffix
+        '
+        Me.TxtQuoteSuffix.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TxtQuoteSuffix.Enabled = False
+        Me.TxtQuoteSuffix.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtQuoteSuffix.Location = New System.Drawing.Point(238, 42)
+        Me.TxtQuoteSuffix.MaxLength = 1
+        Me.TxtQuoteSuffix.Name = "TxtQuoteSuffix"
+        Me.TxtQuoteSuffix.ReadOnly = True
+        Me.TxtQuoteSuffix.Size = New System.Drawing.Size(29, 23)
+        Me.TxtQuoteSuffix.TabIndex = 102
+        Me.TxtQuoteSuffix.TabStop = False
+        '
+        'TxtQuoteNo
+        '
+        Me.TxtQuoteNo.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TxtQuoteNo.Enabled = False
+        Me.TxtQuoteNo.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtQuoteNo.Location = New System.Drawing.Point(127, 42)
+        Me.TxtQuoteNo.MaxLength = 8
+        Me.TxtQuoteNo.Name = "TxtQuoteNo"
+        Me.TxtQuoteNo.ReadOnly = True
+        Me.TxtQuoteNo.Size = New System.Drawing.Size(88, 23)
+        Me.TxtQuoteNo.TabIndex = 101
+        Me.TxtQuoteNo.TabStop = False
+        '
+        'LblQuoteDate
+        '
+        Me.LblQuoteDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblQuoteDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblQuoteDate.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblQuoteDate.Location = New System.Drawing.Point(545, 42)
+        Me.LblQuoteDate.Name = "LblQuoteDate"
+        Me.LblQuoteDate.Size = New System.Drawing.Size(112, 23)
+        Me.LblQuoteDate.TabIndex = 103
+        Me.LblQuoteDate.Text = "見積日"
+        Me.LblQuoteDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LblQuoteNo
+        '
+        Me.LblQuoteNo.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblQuoteNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblQuoteNo.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblQuoteNo.Location = New System.Drawing.Point(11, 42)
+        Me.LblQuoteNo.Name = "LblQuoteNo"
+        Me.LblQuoteNo.Size = New System.Drawing.Size(110, 23)
+        Me.LblQuoteNo.TabIndex = 100
+        Me.LblQuoteNo.Text = "見積番号"
+        Me.LblQuoteNo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'TxtPurchaseRemark
+        '
+        Me.TxtPurchaseRemark.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtPurchaseRemark.Location = New System.Drawing.Point(127, 451)
+        Me.TxtPurchaseRemark.MaxLength = 50
+        Me.TxtPurchaseRemark.Name = "TxtPurchaseRemark"
+        Me.TxtPurchaseRemark.Size = New System.Drawing.Size(476, 23)
+        Me.TxtPurchaseRemark.TabIndex = 6
+        '
+        'LblPurchaseRemarks
+        '
+        Me.LblPurchaseRemarks.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblPurchaseRemarks.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblPurchaseRemarks.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblPurchaseRemarks.Location = New System.Drawing.Point(11, 451)
+        Me.LblPurchaseRemarks.Name = "LblPurchaseRemarks"
+        Me.LblPurchaseRemarks.Size = New System.Drawing.Size(110, 23)
+        Me.LblPurchaseRemarks.TabIndex = 110
+        Me.LblPurchaseRemarks.Text = "発注備考"
+        Me.LblPurchaseRemarks.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LblOrderRemarks
+        '
+        Me.LblOrderRemarks.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblOrderRemarks.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblOrderRemarks.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblOrderRemarks.Location = New System.Drawing.Point(11, 422)
+        Me.LblOrderRemarks.Name = "LblOrderRemarks"
+        Me.LblOrderRemarks.Size = New System.Drawing.Size(110, 23)
+        Me.LblOrderRemarks.TabIndex = 109
+        Me.LblOrderRemarks.Text = "受注備考"
+        Me.LblOrderRemarks.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'TxtOrderRemark
+        '
+        Me.TxtOrderRemark.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtOrderRemark.Location = New System.Drawing.Point(127, 422)
+        Me.TxtOrderRemark.MaxLength = 50
+        Me.TxtOrderRemark.Name = "TxtOrderRemark"
+        Me.TxtOrderRemark.Size = New System.Drawing.Size(476, 23)
+        Me.TxtOrderRemark.TabIndex = 5
+        '
+        'TxtVat
+        '
+        Me.TxtVat.BackColor = System.Drawing.Color.White
+        Me.TxtVat.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtVat.Location = New System.Drawing.Point(766, 451)
+        Me.TxtVat.MaxLength = 10
+        Me.TxtVat.Name = "TxtVat"
+        Me.TxtVat.Size = New System.Drawing.Size(231, 23)
+        Me.TxtVat.TabIndex = 8
+        Me.TxtVat.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'LblVAT
+        '
+        Me.LblVAT.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblVAT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblVAT.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblVAT.Location = New System.Drawing.Point(660, 451)
+        Me.LblVAT.Name = "LblVAT"
+        Me.LblVAT.Size = New System.Drawing.Size(100, 23)
+        Me.LblVAT.TabIndex = 118
+        Me.LblVAT.Text = "VAT"
+        Me.LblVAT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'TxtPph
+        '
+        Me.TxtPph.BackColor = System.Drawing.Color.White
+        Me.TxtPph.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtPph.Location = New System.Drawing.Point(766, 422)
+        Me.TxtPph.MaxLength = 10
+        Me.TxtPph.Name = "TxtPph"
+        Me.TxtPph.Size = New System.Drawing.Size(231, 23)
+        Me.TxtPph.TabIndex = 7
+        Me.TxtPph.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'LblPph
+        '
+        Me.LblPph.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblPph.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblPph.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblPph.Location = New System.Drawing.Point(660, 422)
+        Me.LblPph.Name = "LblPph"
+        Me.LblPph.Size = New System.Drawing.Size(100, 23)
+        Me.LblPph.TabIndex = 120
+        Me.LblPph.Text = "PPH"
+        Me.LblPph.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LblHyphen
+        '
+        Me.LblHyphen.AutoSize = True
+        Me.LblHyphen.Location = New System.Drawing.Point(221, 49)
+        Me.LblHyphen.Name = "LblHyphen"
+        Me.LblHyphen.Size = New System.Drawing.Size(11, 12)
+        Me.LblHyphen.TabIndex = 106
+        Me.LblHyphen.Text = "-"
+        '
+        'TxtCustomerPO
+        '
+        Me.TxtCustomerPO.BackColor = System.Drawing.Color.White
+        Me.TxtCustomerPO.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtCustomerPO.Location = New System.Drawing.Point(389, 12)
+        Me.TxtCustomerPO.MaxLength = 8
+        Me.TxtCustomerPO.Name = "TxtCustomerPO"
+        Me.TxtCustomerPO.Size = New System.Drawing.Size(88, 23)
+        Me.TxtCustomerPO.TabIndex = 1
+        '
+        'LblCustmerPO
+        '
+        Me.LblCustmerPO.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblCustmerPO.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblCustmerPO.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblCustmerPO.Location = New System.Drawing.Point(273, 12)
+        Me.LblCustmerPO.Name = "LblCustmerPO"
+        Me.LblCustmerPO.Size = New System.Drawing.Size(110, 23)
+        Me.LblCustmerPO.TabIndex = 121
+        Me.LblCustmerPO.Text = "客先番号"
+        Me.LblCustmerPO.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'Cymn
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
@@ -1098,23 +1098,23 @@ Partial Class Cymn
         Me.Controls.Add(Me.TxtCustomerPO)
         Me.Controls.Add(Me.LblCustmerPO)
         Me.Controls.Add(Me.TxtPph)
-        Me.Controls.Add(Me.Label12)
+        Me.Controls.Add(Me.LblPph)
         Me.Controls.Add(Me.TxtVat)
         Me.Controls.Add(Me.LblVAT)
         Me.Controls.Add(Me.TxtPurchaseRemark)
-        Me.Controls.Add(Me.Label8)
-        Me.Controls.Add(Me.Label9)
+        Me.Controls.Add(Me.LblPurchaseRemarks)
+        Me.Controls.Add(Me.LblOrderRemarks)
         Me.Controls.Add(Me.TxtOrderRemark)
         Me.Controls.Add(Me.DtpExpiration)
         Me.Controls.Add(Me.DtpQuoteDate)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.LblHyphen)
         Me.Controls.Add(Me.DtpQuoteRegistration)
-        Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.Label5)
+        Me.Controls.Add(Me.LblExpiration)
+        Me.Controls.Add(Me.LblQuoteRegistration)
         Me.Controls.Add(Me.TxtQuoteSuffix)
         Me.Controls.Add(Me.TxtQuoteNo)
-        Me.Controls.Add(Me.Label6)
-        Me.Controls.Add(Me.Label7)
+        Me.Controls.Add(Me.LblQuoteDate)
+        Me.Controls.Add(Me.LblQuoteNo)
         Me.Controls.Add(Me.DtpPurchaseDate)
         Me.Controls.Add(Me.DtpOrderDate)
         Me.Controls.Add(Me.TxtOrderAmount)
@@ -1216,21 +1216,21 @@ Partial Class Cymn
     Friend WithEvents DtpExpiration As DateTimePicker
     Friend WithEvents DtpQuoteDate As DateTimePicker
     Friend WithEvents DtpQuoteRegistration As DateTimePicker
-    Friend WithEvents Label3 As Label
-    Friend WithEvents Label5 As Label
+    Friend WithEvents LblExpiration As Label
+    Friend WithEvents LblQuoteRegistration As Label
     Friend WithEvents TxtQuoteSuffix As TextBox
     Friend WithEvents TxtQuoteNo As TextBox
-    Friend WithEvents Label6 As Label
-    Friend WithEvents Label7 As Label
+    Friend WithEvents LblQuoteDate As Label
+    Friend WithEvents LblQuoteNo As Label
     Friend WithEvents TxtPurchaseRemark As TextBox
-    Friend WithEvents Label8 As Label
-    Friend WithEvents Label9 As Label
+    Friend WithEvents LblPurchaseRemarks As Label
+    Friend WithEvents LblOrderRemarks As Label
     Friend WithEvents TxtOrderRemark As TextBox
     Friend WithEvents TxtVat As TextBox
     Friend WithEvents LblVAT As Label
     Friend WithEvents TxtPph As TextBox
-    Friend WithEvents Label12 As Label
-    Friend WithEvents Label1 As Label
+    Friend WithEvents LblPph As Label
+    Friend WithEvents LblHyphen As Label
     Friend WithEvents TxtCustomerPO As TextBox
     Friend WithEvents LblCustmerPO As Label
     Friend WithEvents No As DataGridViewTextBoxColumn

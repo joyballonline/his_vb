@@ -361,9 +361,6 @@ Public Class Cymn
             TxtGrossProfit.Text = ds1.Tables(RS).Rows(0)("粗利額")
         End If
 
-
-
-
         ''見積明細情報
         Dim Sql3 As String = ""
         Sql3 += "SELECT"
@@ -462,6 +459,110 @@ Public Class Cymn
         Next c
         TxtItemCount.Text = DgvItemList.Rows.Count()
 
+        '翻訳
+        If frmC01F10_Login.loginValue.Language = "ENG" Then
+            LblOrderNo.Text = "OrderNumber"
+            LblCustmerPO.Text = "CustomerNumber"
+            LblCustmerPO.Location = New Point(273, 12)
+            LblCustmerPO.Size = New Size(152, 23)
+            TxtCustomerPO.Location = New Point(431, 12)
+            LblOrderDate.Text = "OrderDate"
+            LblOrderDate.Location = New Point(525, 12)
+            DtpOrderDate.Location = New Point(643, 12)
+            DtpOrderDate.Size = New Size(130, 22)
+            LblPurchaseDate.Text = "PurchaseOrderDate"
+            LblPurchaseDate.Size = New Size(138, 23)
+            LblPurchaseDate.Location = New Point(779, 12)
+            DtpPurchaseDate.Location = New Point(923, 12)
+            DtpPurchaseDate.Size = New Size(130, 22)
+            LblRegistration.Text = "OrderingDate"
+            LblRegistration.Location = New Point(1059, 12)
+            DtpOrderRegistration.Location = New Point(1175, 12)
+            DtpOrderRegistration.Size = New Size(130, 22)
+            LblQuoteNo.Text = "QuotationNumber"
+            LblQuoteNo.Location = New Point(11, 42)
+            LblQuoteNo.Size = New Size(162, 23)
+            TxtQuoteNo.Location = New Point(179, 42)
+            LblHyphen.Location = New Point(273, 49)
+            TxtQuoteSuffix.Location = New Point(290, 42)
+            LblQuoteRegistration.Text = "QuotationRegistrationDate"
+            LblQuoteRegistration.Location = New Point(325, 42)
+            LblQuoteRegistration.Size = New Size(215, 23)
+            DtpQuoteRegistration.Location = New Point(546, 42)
+            LblQuoteDate.Text = "QuotationDate"
+            LblQuoteDate.Location = New Point(702, 42)
+            DtpQuoteDate.Location = New Point(820, 42)
+            LblExpiration.Text = "QuotationExpirationDate"
+            LblExpiration.Size = New Size(205, 23)
+            LblExpiration.Location = New Point(976, 42)
+            DtpExpiration.Location = New Point(1187, 42)
+            LblCustomerName.Text = "CustomerName"
+            LblAddress.Text = "Address"
+            LblTel.Text = "TEL"
+            LblFax.Text = "FAX"
+            LblPerson.Text = "ContactPersonName"
+            LblPosition.Text = "Position"
+            LblSales.Text = "SalesPerson"
+            LblInput.Text = "InputPerson"
+            LblPaymentTerms.Text = "PaymentTerms"
+            TxtPaymentTerms.Location = New Point(181, 187)
+            LblPaymentTerms.Size = New Size(162, 23)
+            LblRemarks.Text = "QuotationRemarks"
+            TxtQuoteRemarks.Location = New Point(181, 216)
+            LblRemarks.Size = New Size(162, 23)
+            LblItemCount.Text = "ItemCount"
+            LblOrderRemarks.Text = "OrderRemarks"
+            LblOrderRemarks.Size = New Size(161, 23)
+            LblOrderRemarks.Location = New Point(11, 422)
+            TxtOrderRemark.Location = New Point(178, 422)
+            LblPurchaseRemarks.Text = "PurchaseOrderRemarks"
+            LblPurchaseRemarks.Size = New Size(161, 23)
+            LblPurchaseRemarks.Location = New Point(11, 451)
+            TxtPurchaseRemark.Location = New Point(178, 451)
+            LblPph.Text = "PPH"
+            TxtPph.Size = New Size(151, 23)
+            LblVAT.Text = "VAT"
+            TxtVat.Size = New Size(151, 23)
+            LblOrderAmount.Text = "OrderAmount"
+            LblOrderAmount.Size = New Size(180, 23)
+            LblOrderAmount.Location = New Point(923, 422)
+            LblPurchaseAmount.Text = "PurchaseOrderAmount"
+            LblPurchaseAmount.Size = New Size(180, 23)
+            LblPurchaseAmount.Location = New Point(923, 451)
+            LblGrossProfit.Text = "GrossProfit"
+            LblGrossProfit.Size = New Size(180, 23)
+            LblGrossProfit.Location = New Point(923, 480)
+
+            BtnRegistration.Text = "Registrartion"
+            BtnBack.Text = "Back"
+
+            DgvItemList.Columns("仕入区分").HeaderText = "PurchaseSection"
+            DgvItemList.Columns("メーカー").HeaderText = "Maker"
+            DgvItemList.Columns("品名").HeaderText = "Item"
+            DgvItemList.Columns("型式").HeaderText = "Model"
+            DgvItemList.Columns("数量").HeaderText = "Quantity"
+            DgvItemList.Columns("単位").HeaderText = "Unit"
+            DgvItemList.Columns("仕入先").HeaderText = "SupplierName"
+            DgvItemList.Columns("仕入単価").HeaderText = "PurchasePrice"
+            DgvItemList.Columns("仕入原価").HeaderText = "PurchsingCost"
+            DgvItemList.Columns("関税率").HeaderText = "TariffRate"
+            DgvItemList.Columns("関税額").HeaderText = "CustomsDuty"
+            DgvItemList.Columns("前払法人税率").HeaderText = "PrepaidCorporateTaxRate"
+            DgvItemList.Columns("前払法人税額").HeaderText = "PrepaidCorporateTaxAmount"
+            DgvItemList.Columns("輸送費率").HeaderText = "TransportationCostRate"
+            DgvItemList.Columns("輸送費額").HeaderText = "TransportationCost"
+            DgvItemList.Columns("仕入金額").HeaderText = "PurchaseAmount"
+            DgvItemList.Columns("売単価").HeaderText = "SellingPrice"
+            DgvItemList.Columns("売上金額").HeaderText = "SalesAmount"
+            DgvItemList.Columns("見積単価").HeaderText = "QuotetionPrice"
+            DgvItemList.Columns("見積金額").HeaderText = "QuotetionAmount"
+            DgvItemList.Columns("粗利額").HeaderText = "GrossProfit"
+            DgvItemList.Columns("粗利率").HeaderText = "GrossMarginRate(%)"
+            DgvItemList.Columns("リードタイム").HeaderText = "LeadTime"
+            DgvItemList.Columns("リードタイム単位").HeaderText = "LeadTimeUnit"
+            DgvItemList.Columns("備考").HeaderText = "Remarks"
+        End If
+
 
     End Sub
 
@@ -485,10 +586,10 @@ Public Class Cymn
                 If DgvItemList.Rows(i).Cells("仕入区分").Value = 2 Then
                     itemCount = 0
                     Sql = ""
-                    Sql += "SELECT"
+                    Sql += "Select"
                     Sql += " * "
                     Sql += "FROM "
-                    Sql += "public"
+                    Sql += "Public"
                     Sql += "."
                     Sql += "t43_nyukodt"
                     Sql += " WHERE "
