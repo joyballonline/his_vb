@@ -22,29 +22,29 @@ Partial Class Order
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle28 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle29 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle30 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle31 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle32 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle33 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle34 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle35 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle36 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.TxtVat = New System.Windows.Forms.TextBox()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.Label9 = New System.Windows.Forms.Label()
+        Me.LblVat = New System.Windows.Forms.Label()
+        Me.LblOrderRemarks = New System.Windows.Forms.Label()
         Me.TxtOrderRemark = New System.Windows.Forms.TextBox()
         Me.DtpExpiration = New System.Windows.Forms.DateTimePicker()
         Me.DtpQuoteDate = New System.Windows.Forms.DateTimePicker()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.LblHyphen = New System.Windows.Forms.Label()
         Me.DtpQuoteRegistration = New System.Windows.Forms.DateTimePicker()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
+        Me.LblExpiration = New System.Windows.Forms.Label()
+        Me.LblQuoteRegistration = New System.Windows.Forms.Label()
         Me.TxtQuoteSuffix = New System.Windows.Forms.TextBox()
         Me.TxtQuoteNo = New System.Windows.Forms.TextBox()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.Label7 = New System.Windows.Forms.Label()
+        Me.LblQuoteDate = New System.Windows.Forms.Label()
+        Me.LblQuoteNo = New System.Windows.Forms.Label()
         Me.DtpOrderDate = New System.Windows.Forms.DateTimePicker()
         Me.TxtOrderAmount = New System.Windows.Forms.TextBox()
         Me.LblOrderAmount = New System.Windows.Forms.Label()
@@ -86,11 +86,6 @@ Partial Class Order
         Me.LblOrderDate = New System.Windows.Forms.Label()
         Me.LblOrderNo = New System.Windows.Forms.Label()
         Me.DgvItemList = New System.Windows.Forms.DataGridView()
-        Me.TxtPurchaseAmount = New System.Windows.Forms.TextBox()
-        Me.LblPurchaseAmount = New System.Windows.Forms.Label()
-        Me.LblMode = New System.Windows.Forms.Label()
-        Me.TxtCustomerPO = New System.Windows.Forms.TextBox()
-        Me.LblCustomerPO = New System.Windows.Forms.Label()
         Me.No = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.メーカー = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.品名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -118,6 +113,11 @@ Partial Class Order
         Me.備考 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.出庫数 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.未出庫数 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TxtPurchaseAmount = New System.Windows.Forms.TextBox()
+        Me.LblPurchaseAmount = New System.Windows.Forms.Label()
+        Me.LblMode = New System.Windows.Forms.Label()
+        Me.TxtCustomerPO = New System.Windows.Forms.TextBox()
+        Me.LblCustomerPO = New System.Windows.Forms.Label()
         CType(Me.DgvItemList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -135,29 +135,29 @@ Partial Class Order
         Me.TxtVat.TabStop = False
         Me.TxtVat.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'Label11
+        'LblVat
         '
-        Me.Label11.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.Label11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label11.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label11.Location = New System.Drawing.Point(659, 422)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(100, 23)
-        Me.Label11.TabIndex = 185
-        Me.Label11.Text = "VAT"
-        Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LblVat.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblVat.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblVat.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblVat.Location = New System.Drawing.Point(659, 422)
+        Me.LblVat.Name = "LblVat"
+        Me.LblVat.Size = New System.Drawing.Size(100, 23)
+        Me.LblVat.TabIndex = 185
+        Me.LblVat.Text = "VAT"
+        Me.LblVat.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Label9
+        'LblOrderRemarks
         '
-        Me.Label9.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.Label9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label9.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label9.Location = New System.Drawing.Point(11, 422)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(110, 23)
-        Me.Label9.TabIndex = 176
-        Me.Label9.Text = "受注備考"
-        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LblOrderRemarks.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblOrderRemarks.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblOrderRemarks.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblOrderRemarks.Location = New System.Drawing.Point(11, 422)
+        Me.LblOrderRemarks.Name = "LblOrderRemarks"
+        Me.LblOrderRemarks.Size = New System.Drawing.Size(110, 23)
+        Me.LblOrderRemarks.TabIndex = 176
+        Me.LblOrderRemarks.Text = "受注備考"
+        Me.LblOrderRemarks.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'TxtOrderRemark
         '
@@ -196,14 +196,14 @@ Partial Class Order
         Me.DtpQuoteDate.TabStop = False
         Me.DtpQuoteDate.Value = New Date(2018, 6, 5, 23, 23, 58, 0)
         '
-        'Label1
+        'LblHyphen
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(221, 49)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(11, 12)
-        Me.Label1.TabIndex = 173
-        Me.Label1.Text = "-"
+        Me.LblHyphen.AutoSize = True
+        Me.LblHyphen.Location = New System.Drawing.Point(221, 49)
+        Me.LblHyphen.Name = "LblHyphen"
+        Me.LblHyphen.Size = New System.Drawing.Size(11, 12)
+        Me.LblHyphen.TabIndex = 173
+        Me.LblHyphen.Text = "-"
         '
         'DtpQuoteRegistration
         '
@@ -219,29 +219,29 @@ Partial Class Order
         Me.DtpQuoteRegistration.TabStop = False
         Me.DtpQuoteRegistration.Value = New Date(2018, 6, 5, 23, 23, 58, 0)
         '
-        'Label3
+        'LblExpiration
         '
-        Me.Label3.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.Label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label3.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label3.Location = New System.Drawing.Point(817, 42)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(110, 23)
-        Me.Label3.TabIndex = 172
-        Me.Label3.Text = "見積有効期限"
-        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LblExpiration.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblExpiration.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblExpiration.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblExpiration.Location = New System.Drawing.Point(817, 42)
+        Me.LblExpiration.Name = "LblExpiration"
+        Me.LblExpiration.Size = New System.Drawing.Size(110, 23)
+        Me.LblExpiration.TabIndex = 172
+        Me.LblExpiration.Text = "見積有効期限"
+        Me.LblExpiration.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Label5
+        'LblQuoteRegistration
         '
-        Me.Label5.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.Label5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label5.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label5.Location = New System.Drawing.Point(273, 42)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(112, 23)
-        Me.Label5.TabIndex = 171
-        Me.Label5.Text = "見積登録日"
-        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LblQuoteRegistration.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblQuoteRegistration.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblQuoteRegistration.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblQuoteRegistration.Location = New System.Drawing.Point(273, 42)
+        Me.LblQuoteRegistration.Name = "LblQuoteRegistration"
+        Me.LblQuoteRegistration.Size = New System.Drawing.Size(112, 23)
+        Me.LblQuoteRegistration.TabIndex = 171
+        Me.LblQuoteRegistration.Text = "見積登録日"
+        Me.LblQuoteRegistration.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'TxtQuoteSuffix
         '
@@ -269,29 +269,29 @@ Partial Class Order
         Me.TxtQuoteNo.TabIndex = 168
         Me.TxtQuoteNo.TabStop = False
         '
-        'Label6
+        'LblQuoteDate
         '
-        Me.Label6.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.Label6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label6.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label6.Location = New System.Drawing.Point(545, 42)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(110, 23)
-        Me.Label6.TabIndex = 170
-        Me.Label6.Text = "見積日"
-        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LblQuoteDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblQuoteDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblQuoteDate.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblQuoteDate.Location = New System.Drawing.Point(545, 42)
+        Me.LblQuoteDate.Name = "LblQuoteDate"
+        Me.LblQuoteDate.Size = New System.Drawing.Size(110, 23)
+        Me.LblQuoteDate.TabIndex = 170
+        Me.LblQuoteDate.Text = "見積日"
+        Me.LblQuoteDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Label7
+        'LblQuoteNo
         '
-        Me.Label7.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.Label7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label7.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label7.Location = New System.Drawing.Point(11, 42)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(110, 23)
-        Me.Label7.TabIndex = 167
-        Me.Label7.Text = "見積番号"
-        Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LblQuoteNo.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblQuoteNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblQuoteNo.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblQuoteNo.Location = New System.Drawing.Point(11, 42)
+        Me.LblQuoteNo.Name = "LblQuoteNo"
+        Me.LblQuoteNo.Size = New System.Drawing.Size(110, 23)
+        Me.LblQuoteNo.TabIndex = 167
+        Me.LblQuoteNo.Text = "見積番号"
+        Me.LblQuoteNo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'DtpOrderDate
         '
@@ -299,9 +299,9 @@ Partial Class Order
         Me.DtpOrderDate.CustomFormat = "yyyy/MM/dd"
         Me.DtpOrderDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpOrderDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DtpOrderDate.Location = New System.Drawing.Point(601, 14)
+        Me.DtpOrderDate.Location = New System.Drawing.Point(643, 14)
         Me.DtpOrderDate.Name = "DtpOrderDate"
-        Me.DtpOrderDate.Size = New System.Drawing.Size(148, 22)
+        Me.DtpOrderDate.Size = New System.Drawing.Size(130, 22)
         Me.DtpOrderDate.TabIndex = 2
         Me.DtpOrderDate.Value = New Date(2018, 6, 5, 23, 23, 58, 0)
         '
@@ -362,11 +362,11 @@ Partial Class Order
         Me.TxtItemCount.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.TxtItemCount.Enabled = False
         Me.TxtItemCount.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtItemCount.Location = New System.Drawing.Point(1274, 216)
+        Me.TxtItemCount.Location = New System.Drawing.Point(1255, 216)
         Me.TxtItemCount.MaxLength = 20
         Me.TxtItemCount.Name = "TxtItemCount"
         Me.TxtItemCount.ReadOnly = True
-        Me.TxtItemCount.Size = New System.Drawing.Size(66, 23)
+        Me.TxtItemCount.Size = New System.Drawing.Size(85, 23)
         Me.TxtItemCount.TabIndex = 158
         Me.TxtItemCount.TabStop = False
         Me.TxtItemCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -376,9 +376,9 @@ Partial Class Order
         Me.LblItemCount.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblItemCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblItemCount.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblItemCount.Location = New System.Drawing.Point(1274, 187)
+        Me.LblItemCount.Location = New System.Drawing.Point(1255, 187)
         Me.LblItemCount.Name = "LblItemCount"
-        Me.LblItemCount.Size = New System.Drawing.Size(66, 23)
+        Me.LblItemCount.Size = New System.Drawing.Size(85, 23)
         Me.LblItemCount.TabIndex = 159
         Me.LblItemCount.Text = "明細数"
         Me.LblItemCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -421,9 +421,9 @@ Partial Class Order
         Me.DtpOrderRegistration.Enabled = False
         Me.DtpOrderRegistration.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpOrderRegistration.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DtpOrderRegistration.Location = New System.Drawing.Point(871, 13)
+        Me.DtpOrderRegistration.Location = New System.Drawing.Point(895, 13)
         Me.DtpOrderRegistration.Name = "DtpOrderRegistration"
-        Me.DtpOrderRegistration.Size = New System.Drawing.Size(150, 22)
+        Me.DtpOrderRegistration.Size = New System.Drawing.Size(130, 22)
         Me.DtpOrderRegistration.TabIndex = 119
         Me.DtpOrderRegistration.TabStop = False
         Me.DtpOrderRegistration.Value = New Date(2018, 6, 5, 23, 23, 58, 0)
@@ -467,7 +467,7 @@ Partial Class Order
         Me.LblRegistration.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblRegistration.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblRegistration.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblRegistration.Location = New System.Drawing.Point(755, 13)
+        Me.LblRegistration.Location = New System.Drawing.Point(779, 13)
         Me.LblRegistration.Name = "LblRegistration"
         Me.LblRegistration.Size = New System.Drawing.Size(110, 23)
         Me.LblRegistration.TabIndex = 154
@@ -795,6 +795,176 @@ Partial Class Order
         Me.DgvItemList.Size = New System.Drawing.Size(1329, 171)
         Me.DgvItemList.TabIndex = 3
         '
+        'No
+        '
+        Me.No.HeaderText = "No"
+        Me.No.Name = "No"
+        Me.No.Width = 43
+        '
+        'メーカー
+        '
+        DataGridViewCellStyle28.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.メーカー.DefaultCellStyle = DataGridViewCellStyle28
+        Me.メーカー.HeaderText = "メーカー"
+        Me.メーカー.Name = "メーカー"
+        Me.メーカー.Width = 220
+        '
+        '品名
+        '
+        DataGridViewCellStyle29.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.品名.DefaultCellStyle = DataGridViewCellStyle29
+        Me.品名.HeaderText = "品名"
+        Me.品名.Name = "品名"
+        Me.品名.Width = 220
+        '
+        '型式
+        '
+        DataGridViewCellStyle30.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.型式.DefaultCellStyle = DataGridViewCellStyle30
+        Me.型式.HeaderText = "型式"
+        Me.型式.Name = "型式"
+        Me.型式.Width = 230
+        '
+        '数量
+        '
+        Me.数量.HeaderText = "数量"
+        Me.数量.Name = "数量"
+        Me.数量.Width = 80
+        '
+        '単位
+        '
+        Me.単位.HeaderText = "単位"
+        Me.単位.Name = "単位"
+        Me.単位.Width = 80
+        '
+        '仕入先
+        '
+        DataGridViewCellStyle31.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.仕入先.DefaultCellStyle = DataGridViewCellStyle31
+        Me.仕入先.HeaderText = "仕入先"
+        Me.仕入先.Name = "仕入先"
+        Me.仕入先.Width = 85
+        '
+        '仕入値
+        '
+        Me.仕入値.HeaderText = "仕入値"
+        Me.仕入値.Name = "仕入値"
+        Me.仕入値.Width = 80
+        '
+        '仕入原価
+        '
+        DataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.仕入原価.DefaultCellStyle = DataGridViewCellStyle32
+        Me.仕入原価.HeaderText = "仕入原価"
+        Me.仕入原価.Name = "仕入原価"
+        '
+        '関税率
+        '
+        Me.関税率.HeaderText = "関税率"
+        Me.関税率.Name = "関税率"
+        '
+        '関税額
+        '
+        Me.関税額.HeaderText = "関税額"
+        Me.関税額.Name = "関税額"
+        '
+        '前払法人税率
+        '
+        Me.前払法人税率.HeaderText = "前払法人税率"
+        Me.前払法人税率.Name = "前払法人税率"
+        '
+        '前払法人税額
+        '
+        Me.前払法人税額.HeaderText = "前払法人税額"
+        Me.前払法人税額.Name = "前払法人税額"
+        '
+        '輸送費率
+        '
+        Me.輸送費率.HeaderText = "輸送費率"
+        Me.輸送費率.Name = "輸送費率"
+        '
+        '輸送費額
+        '
+        Me.輸送費額.HeaderText = "輸送費額"
+        Me.輸送費額.Name = "輸送費額"
+        '
+        '間接費
+        '
+        DataGridViewCellStyle33.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.間接費.DefaultCellStyle = DataGridViewCellStyle33
+        Me.間接費.HeaderText = "間接費"
+        Me.間接費.Name = "間接費"
+        Me.間接費.ReadOnly = True
+        Me.間接費.Visible = False
+        '
+        '仕入金額
+        '
+        Me.仕入金額.HeaderText = "仕入金額"
+        Me.仕入金額.Name = "仕入金額"
+        '
+        '売単価
+        '
+        Me.売単価.HeaderText = "売単価"
+        Me.売単価.Name = "売単価"
+        Me.売単価.Width = 80
+        '
+        '売上金額
+        '
+        DataGridViewCellStyle34.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.売上金額.DefaultCellStyle = DataGridViewCellStyle34
+        Me.売上金額.HeaderText = "売上金額"
+        Me.売上金額.Name = "売上金額"
+        Me.売上金額.ReadOnly = True
+        '
+        '見積単価
+        '
+        Me.見積単価.HeaderText = "見積単価"
+        Me.見積単価.Name = "見積単価"
+        '
+        '見積金額
+        '
+        Me.見積金額.HeaderText = "見積金額"
+        Me.見積金額.Name = "見積金額"
+        '
+        '粗利額
+        '
+        DataGridViewCellStyle35.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.粗利額.DefaultCellStyle = DataGridViewCellStyle35
+        Me.粗利額.HeaderText = "粗利額"
+        Me.粗利額.Name = "粗利額"
+        Me.粗利額.ReadOnly = True
+        '
+        '粗利率
+        '
+        DataGridViewCellStyle36.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.粗利率.DefaultCellStyle = DataGridViewCellStyle36
+        Me.粗利率.HeaderText = "粗利率"
+        Me.粗利率.Name = "粗利率"
+        Me.粗利率.ReadOnly = True
+        '
+        'リードタイム
+        '
+        Me.リードタイム.HeaderText = "リードタイム"
+        Me.リードタイム.Name = "リードタイム"
+        '
+        '備考
+        '
+        Me.備考.HeaderText = "備考"
+        Me.備考.Name = "備考"
+        Me.備考.Width = 80
+        '
+        '出庫数
+        '
+        Me.出庫数.HeaderText = "出庫数"
+        Me.出庫数.Name = "出庫数"
+        Me.出庫数.Visible = False
+        '
+        '未出庫数
+        '
+        Me.未出庫数.HeaderText = "未出庫数"
+        Me.未出庫数.Name = "未出庫数"
+        Me.未出庫数.Visible = False
+        '
         'TxtPurchaseAmount
         '
         Me.TxtPurchaseAmount.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
@@ -855,176 +1025,6 @@ Partial Class Order
         Me.LblCustomerPO.Text = "客先番号"
         Me.LblCustomerPO.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'No
-        '
-        Me.No.HeaderText = "No"
-        Me.No.Name = "No"
-        Me.No.Width = 43
-        '
-        'メーカー
-        '
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.メーカー.DefaultCellStyle = DataGridViewCellStyle1
-        Me.メーカー.HeaderText = "メーカー"
-        Me.メーカー.Name = "メーカー"
-        Me.メーカー.Width = 220
-        '
-        '品名
-        '
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.品名.DefaultCellStyle = DataGridViewCellStyle2
-        Me.品名.HeaderText = "品名"
-        Me.品名.Name = "品名"
-        Me.品名.Width = 220
-        '
-        '型式
-        '
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.型式.DefaultCellStyle = DataGridViewCellStyle3
-        Me.型式.HeaderText = "型式"
-        Me.型式.Name = "型式"
-        Me.型式.Width = 230
-        '
-        '数量
-        '
-        Me.数量.HeaderText = "数量"
-        Me.数量.Name = "数量"
-        Me.数量.Width = 80
-        '
-        '単位
-        '
-        Me.単位.HeaderText = "単位"
-        Me.単位.Name = "単位"
-        Me.単位.Width = 80
-        '
-        '仕入先
-        '
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.仕入先.DefaultCellStyle = DataGridViewCellStyle4
-        Me.仕入先.HeaderText = "仕入先"
-        Me.仕入先.Name = "仕入先"
-        Me.仕入先.Width = 85
-        '
-        '仕入値
-        '
-        Me.仕入値.HeaderText = "仕入値"
-        Me.仕入値.Name = "仕入値"
-        Me.仕入値.Width = 80
-        '
-        '仕入原価
-        '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.仕入原価.DefaultCellStyle = DataGridViewCellStyle5
-        Me.仕入原価.HeaderText = "仕入原価"
-        Me.仕入原価.Name = "仕入原価"
-        '
-        '関税率
-        '
-        Me.関税率.HeaderText = "関税率"
-        Me.関税率.Name = "関税率"
-        '
-        '関税額
-        '
-        Me.関税額.HeaderText = "関税額"
-        Me.関税額.Name = "関税額"
-        '
-        '前払法人税率
-        '
-        Me.前払法人税率.HeaderText = "前払法人税率"
-        Me.前払法人税率.Name = "前払法人税率"
-        '
-        '前払法人税額
-        '
-        Me.前払法人税額.HeaderText = "前払法人税額"
-        Me.前払法人税額.Name = "前払法人税額"
-        '
-        '輸送費率
-        '
-        Me.輸送費率.HeaderText = "輸送費率"
-        Me.輸送費率.Name = "輸送費率"
-        '
-        '輸送費額
-        '
-        Me.輸送費額.HeaderText = "輸送費額"
-        Me.輸送費額.Name = "輸送費額"
-        '
-        '間接費
-        '
-        DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.間接費.DefaultCellStyle = DataGridViewCellStyle6
-        Me.間接費.HeaderText = "間接費"
-        Me.間接費.Name = "間接費"
-        Me.間接費.ReadOnly = True
-        Me.間接費.Visible = False
-        '
-        '仕入金額
-        '
-        Me.仕入金額.HeaderText = "仕入金額"
-        Me.仕入金額.Name = "仕入金額"
-        '
-        '売単価
-        '
-        Me.売単価.HeaderText = "売単価"
-        Me.売単価.Name = "売単価"
-        Me.売単価.Width = 80
-        '
-        '売上金額
-        '
-        DataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.売上金額.DefaultCellStyle = DataGridViewCellStyle7
-        Me.売上金額.HeaderText = "売上金額"
-        Me.売上金額.Name = "売上金額"
-        Me.売上金額.ReadOnly = True
-        '
-        '見積単価
-        '
-        Me.見積単価.HeaderText = "見積単価"
-        Me.見積単価.Name = "見積単価"
-        '
-        '見積金額
-        '
-        Me.見積金額.HeaderText = "見積金額"
-        Me.見積金額.Name = "見積金額"
-        '
-        '粗利額
-        '
-        DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.粗利額.DefaultCellStyle = DataGridViewCellStyle8
-        Me.粗利額.HeaderText = "粗利額"
-        Me.粗利額.Name = "粗利額"
-        Me.粗利額.ReadOnly = True
-        '
-        '粗利率
-        '
-        DataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.粗利率.DefaultCellStyle = DataGridViewCellStyle9
-        Me.粗利率.HeaderText = "粗利率"
-        Me.粗利率.Name = "粗利率"
-        Me.粗利率.ReadOnly = True
-        '
-        'リードタイム
-        '
-        Me.リードタイム.HeaderText = "リードタイム"
-        Me.リードタイム.Name = "リードタイム"
-        '
-        '備考
-        '
-        Me.備考.HeaderText = "備考"
-        Me.備考.Name = "備考"
-        Me.備考.Width = 80
-        '
-        '出庫数
-        '
-        Me.出庫数.HeaderText = "出庫数"
-        Me.出庫数.Name = "出庫数"
-        Me.出庫数.Visible = False
-        '
-        '未出庫数
-        '
-        Me.未出庫数.HeaderText = "未出庫数"
-        Me.未出庫数.Name = "未出庫数"
-        Me.未出庫数.Visible = False
-        '
         'Order
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
@@ -1035,19 +1035,19 @@ Partial Class Order
         Me.Controls.Add(Me.TxtPurchaseAmount)
         Me.Controls.Add(Me.LblPurchaseAmount)
         Me.Controls.Add(Me.TxtVat)
-        Me.Controls.Add(Me.Label11)
-        Me.Controls.Add(Me.Label9)
+        Me.Controls.Add(Me.LblVat)
+        Me.Controls.Add(Me.LblOrderRemarks)
         Me.Controls.Add(Me.TxtOrderRemark)
         Me.Controls.Add(Me.DtpExpiration)
         Me.Controls.Add(Me.DtpQuoteDate)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.LblHyphen)
         Me.Controls.Add(Me.DtpQuoteRegistration)
-        Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.Label5)
+        Me.Controls.Add(Me.LblExpiration)
+        Me.Controls.Add(Me.LblQuoteRegistration)
         Me.Controls.Add(Me.TxtQuoteSuffix)
         Me.Controls.Add(Me.TxtQuoteNo)
-        Me.Controls.Add(Me.Label6)
-        Me.Controls.Add(Me.Label7)
+        Me.Controls.Add(Me.LblQuoteDate)
+        Me.Controls.Add(Me.LblQuoteNo)
         Me.Controls.Add(Me.DtpOrderDate)
         Me.Controls.Add(Me.TxtOrderAmount)
         Me.Controls.Add(Me.LblOrderAmount)
@@ -1099,19 +1099,19 @@ Partial Class Order
     End Sub
 
     Friend WithEvents TxtVat As TextBox
-    Friend WithEvents Label11 As Label
-    Friend WithEvents Label9 As Label
+    Friend WithEvents LblVat As Label
+    Friend WithEvents LblOrderRemarks As Label
     Friend WithEvents TxtOrderRemark As TextBox
     Friend WithEvents DtpExpiration As DateTimePicker
     Friend WithEvents DtpQuoteDate As DateTimePicker
-    Friend WithEvents Label1 As Label
+    Friend WithEvents LblHyphen As Label
     Friend WithEvents DtpQuoteRegistration As DateTimePicker
-    Friend WithEvents Label3 As Label
-    Friend WithEvents Label5 As Label
+    Friend WithEvents LblExpiration As Label
+    Friend WithEvents LblQuoteRegistration As Label
     Friend WithEvents TxtQuoteSuffix As TextBox
     Friend WithEvents TxtQuoteNo As TextBox
-    Friend WithEvents Label6 As Label
-    Friend WithEvents Label7 As Label
+    Friend WithEvents LblQuoteDate As Label
+    Friend WithEvents LblQuoteNo As Label
     Friend WithEvents DtpOrderDate As DateTimePicker
     Friend WithEvents TxtOrderAmount As TextBox
     Friend WithEvents LblOrderAmount As Label
