@@ -23,8 +23,7 @@ Partial Class GoodsIssueList
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.ChkCancelData = New System.Windows.Forms.CheckBox()
-        Me.BtnSalesView = New System.Windows.Forms.Button()
-        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.BtnGoodsIssueView = New System.Windows.Forms.Button()
         Me.RbtnSlip = New System.Windows.Forms.RadioButton()
         Me.RbtnDetails = New System.Windows.Forms.RadioButton()
         Me.Label10 = New System.Windows.Forms.Label()
@@ -49,12 +48,11 @@ Partial Class GoodsIssueList
         Me.TxtCustomerName = New System.Windows.Forms.TextBox()
         Me.BtnOrderSearch = New System.Windows.Forms.Button()
         Me.BtnBack = New System.Windows.Forms.Button()
-        Me.BtnSalesCancel = New System.Windows.Forms.Button()
+        Me.BtnGoodsIssueCancel = New System.Windows.Forms.Button()
         Me.DgvCymnhd = New System.Windows.Forms.DataGridView()
         Me.LblMode = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.TxtCustomerPO = New System.Windows.Forms.TextBox()
-        Me.Panel1.SuspendLayout()
         CType(Me.DgvCymnhd, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -69,33 +67,23 @@ Partial Class GoodsIssueList
         Me.ChkCancelData.Text = "取消データを含める"
         Me.ChkCancelData.UseVisualStyleBackColor = True
         '
-        'BtnSalesView
+        'BtnGoodsIssueView
         '
-        Me.BtnSalesView.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.BtnSalesView.Location = New System.Drawing.Point(1002, 509)
-        Me.BtnSalesView.Name = "BtnSalesView"
-        Me.BtnSalesView.Size = New System.Drawing.Size(165, 40)
-        Me.BtnSalesView.TabIndex = 17
-        Me.BtnSalesView.Text = "出庫参照"
-        Me.BtnSalesView.UseVisualStyleBackColor = True
-        Me.BtnSalesView.Visible = False
-        '
-        'Panel1
-        '
-        Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel1.Controls.Add(Me.RbtnSlip)
-        Me.Panel1.Controls.Add(Me.RbtnDetails)
-        Me.Panel1.Location = New System.Drawing.Point(16, 187)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(195, 37)
-        Me.Panel1.TabIndex = 120
+        Me.BtnGoodsIssueView.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.BtnGoodsIssueView.Location = New System.Drawing.Point(1002, 509)
+        Me.BtnGoodsIssueView.Name = "BtnGoodsIssueView"
+        Me.BtnGoodsIssueView.Size = New System.Drawing.Size(165, 40)
+        Me.BtnGoodsIssueView.TabIndex = 17
+        Me.BtnGoodsIssueView.Text = "出庫参照"
+        Me.BtnGoodsIssueView.UseVisualStyleBackColor = True
+        Me.BtnGoodsIssueView.Visible = False
         '
         'RbtnSlip
         '
         Me.RbtnSlip.AutoSize = True
         Me.RbtnSlip.Checked = True
         Me.RbtnSlip.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.RbtnSlip.Location = New System.Drawing.Point(6, 8)
+        Me.RbtnSlip.Location = New System.Drawing.Point(16, 196)
         Me.RbtnSlip.Name = "RbtnSlip"
         Me.RbtnSlip.Size = New System.Drawing.Size(89, 19)
         Me.RbtnSlip.TabIndex = 12
@@ -107,7 +95,7 @@ Partial Class GoodsIssueList
         '
         Me.RbtnDetails.AutoSize = True
         Me.RbtnDetails.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.RbtnDetails.Location = New System.Drawing.Point(101, 8)
+        Me.RbtnDetails.Location = New System.Drawing.Point(111, 196)
         Me.RbtnDetails.Name = "RbtnDetails"
         Me.RbtnDetails.Size = New System.Drawing.Size(89, 19)
         Me.RbtnDetails.TabIndex = 13
@@ -129,7 +117,7 @@ Partial Class GoodsIssueList
         Me.Label5.AutoSize = True
         Me.Label5.Location = New System.Drawing.Point(936, 46)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(17, 12)
+        Me.Label5.Size = New System.Drawing.Size(19, 13)
         Me.Label5.TabIndex = 117
         Me.Label5.Text = "～"
         '
@@ -226,7 +214,7 @@ Partial Class GoodsIssueList
         Me.Label9.AutoSize = True
         Me.Label9.Location = New System.Drawing.Point(936, 74)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(17, 12)
+        Me.Label9.Size = New System.Drawing.Size(19, 13)
         Me.Label9.TabIndex = 118
         Me.Label9.Text = "～"
         '
@@ -328,16 +316,16 @@ Partial Class GoodsIssueList
         Me.BtnBack.Text = "戻る"
         Me.BtnBack.UseVisualStyleBackColor = True
         '
-        'BtnSalesCancel
+        'BtnGoodsIssueCancel
         '
-        Me.BtnSalesCancel.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.BtnSalesCancel.Location = New System.Drawing.Point(831, 509)
-        Me.BtnSalesCancel.Name = "BtnSalesCancel"
-        Me.BtnSalesCancel.Size = New System.Drawing.Size(165, 40)
-        Me.BtnSalesCancel.TabIndex = 16
-        Me.BtnSalesCancel.Text = "出庫取消"
-        Me.BtnSalesCancel.UseVisualStyleBackColor = True
-        Me.BtnSalesCancel.Visible = False
+        Me.BtnGoodsIssueCancel.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.BtnGoodsIssueCancel.Location = New System.Drawing.Point(831, 509)
+        Me.BtnGoodsIssueCancel.Name = "BtnGoodsIssueCancel"
+        Me.BtnGoodsIssueCancel.Size = New System.Drawing.Size(165, 40)
+        Me.BtnGoodsIssueCancel.TabIndex = 16
+        Me.BtnGoodsIssueCancel.Text = "出庫取消"
+        Me.BtnGoodsIssueCancel.UseVisualStyleBackColor = True
+        Me.BtnGoodsIssueCancel.Visible = False
         '
         'DgvCymnhd
         '
@@ -388,12 +376,13 @@ Partial Class GoodsIssueList
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.RbtnDetails)
+        Me.Controls.Add(Me.RbtnSlip)
         Me.Controls.Add(Me.Label11)
         Me.Controls.Add(Me.TxtCustomerPO)
         Me.Controls.Add(Me.LblMode)
         Me.Controls.Add(Me.ChkCancelData)
-        Me.Controls.Add(Me.BtnSalesView)
-        Me.Controls.Add(Me.Panel1)
+        Me.Controls.Add(Me.BtnGoodsIssueView)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.TxtGoodsNo2)
@@ -416,13 +405,11 @@ Partial Class GoodsIssueList
         Me.Controls.Add(Me.TxtCustomerName)
         Me.Controls.Add(Me.BtnOrderSearch)
         Me.Controls.Add(Me.BtnBack)
-        Me.Controls.Add(Me.BtnSalesCancel)
+        Me.Controls.Add(Me.BtnGoodsIssueCancel)
         Me.Controls.Add(Me.DgvCymnhd)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "GoodsIssueList"
         Me.Text = "GoodsIssueList"
-        Me.Panel1.ResumeLayout(False)
-        Me.Panel1.PerformLayout()
         CType(Me.DgvCymnhd, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -430,8 +417,7 @@ Partial Class GoodsIssueList
     End Sub
 
     Friend WithEvents ChkCancelData As CheckBox
-    Friend WithEvents BtnSalesView As Button
-    Friend WithEvents Panel1 As Panel
+    Friend WithEvents BtnGoodsIssueView As Button
     Friend WithEvents RbtnSlip As RadioButton
     Friend WithEvents RbtnDetails As RadioButton
     Friend WithEvents Label10 As Label
@@ -456,7 +442,7 @@ Partial Class GoodsIssueList
     Friend WithEvents TxtCustomerName As TextBox
     Friend WithEvents BtnOrderSearch As Button
     Friend WithEvents BtnBack As Button
-    Friend WithEvents BtnSalesCancel As Button
+    Friend WithEvents BtnGoodsIssueCancel As Button
     Friend WithEvents DgvCymnhd As DataGridView
     Friend WithEvents LblMode As Label
     Friend WithEvents Label11 As Label

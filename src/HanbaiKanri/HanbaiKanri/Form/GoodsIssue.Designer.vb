@@ -40,18 +40,18 @@ Partial Class GoodsIssue
         Me.LblCount1 = New System.Windows.Forms.Label()
         Me.TxtCount1 = New System.Windows.Forms.TextBox()
         Me.DgvOrder = New System.Windows.Forms.DataGridView()
-        Me.LblPurchaseDate = New System.Windows.Forms.Label()
+        Me.LblOrderDate = New System.Windows.Forms.Label()
         Me.TxtOrderDate = New System.Windows.Forms.TextBox()
         Me.TxtCustomerName = New System.Windows.Forms.TextBox()
-        Me.LblSupplier = New System.Windows.Forms.Label()
+        Me.LblCustomer = New System.Windows.Forms.Label()
         Me.TxtCustomerCode = New System.Windows.Forms.TextBox()
         Me.BtnBack = New System.Windows.Forms.Button()
-        Me.LblPurchaseNo = New System.Windows.Forms.Label()
+        Me.LblOrderNo = New System.Windows.Forms.Label()
         Me.TxtOrderNo = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.BtnDeliveryNote = New System.Windows.Forms.Button()
         Me.LblMode = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
+        Me.LblCustomerNo = New System.Windows.Forms.Label()
         Me.TxtCustomerPO = New System.Windows.Forms.TextBox()
         CType(Me.DgvAdd, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvHistory, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -130,7 +130,7 @@ Partial Class GoodsIssue
         Me.LblAdd.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblAdd.Location = New System.Drawing.Point(12, 343)
         Me.LblAdd.Name = "LblAdd"
-        Me.LblAdd.Size = New System.Drawing.Size(89, 22)
+        Me.LblAdd.Size = New System.Drawing.Size(170, 22)
         Me.LblAdd.TabIndex = 279
         Me.LblAdd.Text = "■今回出庫"
         Me.LblAdd.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -174,7 +174,7 @@ Partial Class GoodsIssue
         Me.LblHistory.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblHistory.Location = New System.Drawing.Point(12, 212)
         Me.LblHistory.Name = "LblHistory"
-        Me.LblHistory.Size = New System.Drawing.Size(89, 22)
+        Me.LblHistory.Size = New System.Drawing.Size(170, 22)
         Me.LblHistory.TabIndex = 275
         Me.LblHistory.Text = "■出庫済み"
         Me.LblHistory.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -185,7 +185,7 @@ Partial Class GoodsIssue
         Me.LblOrder.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblOrder.Location = New System.Drawing.Point(12, 82)
         Me.LblOrder.Name = "LblOrder"
-        Me.LblOrder.Size = New System.Drawing.Size(57, 22)
+        Me.LblOrder.Size = New System.Drawing.Size(170, 22)
         Me.LblOrder.TabIndex = 274
         Me.LblOrder.Text = "■受注"
         Me.LblOrder.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -259,17 +259,17 @@ Partial Class GoodsIssue
         Me.DgvOrder.Size = New System.Drawing.Size(1326, 100)
         Me.DgvOrder.TabIndex = 1
         '
-        'LblPurchaseDate
+        'LblOrderDate
         '
-        Me.LblPurchaseDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.LblPurchaseDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblPurchaseDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblPurchaseDate.Location = New System.Drawing.Point(732, 10)
-        Me.LblPurchaseDate.Name = "LblPurchaseDate"
-        Me.LblPurchaseDate.Size = New System.Drawing.Size(170, 22)
-        Me.LblPurchaseDate.TabIndex = 267
-        Me.LblPurchaseDate.Text = "受注日"
-        Me.LblPurchaseDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LblOrderDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblOrderDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblOrderDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblOrderDate.Location = New System.Drawing.Point(732, 10)
+        Me.LblOrderDate.Name = "LblOrderDate"
+        Me.LblOrderDate.Size = New System.Drawing.Size(170, 22)
+        Me.LblOrderDate.TabIndex = 267
+        Me.LblOrderDate.Text = "受注日"
+        Me.LblOrderDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'TxtOrderDate
         '
@@ -293,17 +293,17 @@ Partial Class GoodsIssue
         Me.TxtCustomerName.TabIndex = 265
         Me.TxtCustomerName.TabStop = False
         '
-        'LblSupplier
+        'LblCustomer
         '
-        Me.LblSupplier.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.LblSupplier.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblSupplier.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblSupplier.Location = New System.Drawing.Point(12, 38)
-        Me.LblSupplier.Name = "LblSupplier"
-        Me.LblSupplier.Size = New System.Drawing.Size(170, 22)
-        Me.LblSupplier.TabIndex = 264
-        Me.LblSupplier.Text = "得意先"
-        Me.LblSupplier.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LblCustomer.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblCustomer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblCustomer.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblCustomer.Location = New System.Drawing.Point(12, 38)
+        Me.LblCustomer.Name = "LblCustomer"
+        Me.LblCustomer.Size = New System.Drawing.Size(170, 22)
+        Me.LblCustomer.TabIndex = 264
+        Me.LblCustomer.Text = "得意先"
+        Me.LblCustomer.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'TxtCustomerCode
         '
@@ -326,17 +326,17 @@ Partial Class GoodsIssue
         Me.BtnBack.Text = "戻る"
         Me.BtnBack.UseVisualStyleBackColor = True
         '
-        'LblPurchaseNo
+        'LblOrderNo
         '
-        Me.LblPurchaseNo.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.LblPurchaseNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblPurchaseNo.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblPurchaseNo.Location = New System.Drawing.Point(12, 10)
-        Me.LblPurchaseNo.Name = "LblPurchaseNo"
-        Me.LblPurchaseNo.Size = New System.Drawing.Size(170, 22)
-        Me.LblPurchaseNo.TabIndex = 261
-        Me.LblPurchaseNo.Text = "受注番号"
-        Me.LblPurchaseNo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LblOrderNo.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblOrderNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblOrderNo.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblOrderNo.Location = New System.Drawing.Point(12, 10)
+        Me.LblOrderNo.Name = "LblOrderNo"
+        Me.LblOrderNo.Size = New System.Drawing.Size(170, 22)
+        Me.LblOrderNo.TabIndex = 261
+        Me.LblOrderNo.Text = "受注番号"
+        Me.LblOrderNo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'TxtOrderNo
         '
@@ -354,7 +354,7 @@ Partial Class GoodsIssue
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(12, 10)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(0, 12)
+        Me.Label1.Size = New System.Drawing.Size(0, 13)
         Me.Label1.TabIndex = 259
         '
         'BtnDeliveryNote
@@ -380,17 +380,17 @@ Partial Class GoodsIssue
         Me.LblMode.Text = "モード"
         Me.LblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Label2
+        'LblCustomerNo
         '
-        Me.Label2.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.Label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label2.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label2.Location = New System.Drawing.Point(393, 10)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(170, 22)
-        Me.Label2.TabIndex = 289
-        Me.Label2.Text = "客先番号"
-        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LblCustomerNo.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblCustomerNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblCustomerNo.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblCustomerNo.Location = New System.Drawing.Point(393, 10)
+        Me.LblCustomerNo.Name = "LblCustomerNo"
+        Me.LblCustomerNo.Size = New System.Drawing.Size(170, 22)
+        Me.LblCustomerNo.TabIndex = 289
+        Me.LblCustomerNo.Text = "客先番号"
+        Me.LblCustomerNo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'TxtCustomerPO
         '
@@ -407,7 +407,7 @@ Partial Class GoodsIssue
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
-        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.LblCustomerNo)
         Me.Controls.Add(Me.TxtCustomerPO)
         Me.Controls.Add(Me.LblMode)
         Me.Controls.Add(Me.BtnDeliveryNote)
@@ -429,13 +429,13 @@ Partial Class GoodsIssue
         Me.Controls.Add(Me.LblCount1)
         Me.Controls.Add(Me.TxtCount1)
         Me.Controls.Add(Me.DgvOrder)
-        Me.Controls.Add(Me.LblPurchaseDate)
+        Me.Controls.Add(Me.LblOrderDate)
         Me.Controls.Add(Me.TxtOrderDate)
         Me.Controls.Add(Me.TxtCustomerName)
-        Me.Controls.Add(Me.LblSupplier)
+        Me.Controls.Add(Me.LblCustomer)
         Me.Controls.Add(Me.TxtCustomerCode)
         Me.Controls.Add(Me.BtnBack)
-        Me.Controls.Add(Me.LblPurchaseNo)
+        Me.Controls.Add(Me.LblOrderNo)
         Me.Controls.Add(Me.TxtOrderNo)
         Me.Controls.Add(Me.Label1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
@@ -467,17 +467,17 @@ Partial Class GoodsIssue
     Friend WithEvents LblCount1 As Label
     Friend WithEvents TxtCount1 As TextBox
     Friend WithEvents DgvOrder As DataGridView
-    Friend WithEvents LblPurchaseDate As Label
+    Friend WithEvents LblOrderDate As Label
     Friend WithEvents TxtOrderDate As TextBox
     Friend WithEvents TxtCustomerName As TextBox
-    Friend WithEvents LblSupplier As Label
+    Friend WithEvents LblCustomer As Label
     Friend WithEvents TxtCustomerCode As TextBox
     Friend WithEvents BtnBack As Button
-    Friend WithEvents LblPurchaseNo As Label
+    Friend WithEvents LblOrderNo As Label
     Friend WithEvents TxtOrderNo As TextBox
     Friend WithEvents Label1 As Label
     Friend WithEvents BtnDeliveryNote As Button
     Friend WithEvents LblMode As Label
-    Friend WithEvents Label2 As Label
+    Friend WithEvents LblCustomerNo As Label
     Friend WithEvents TxtCustomerPO As TextBox
 End Class
