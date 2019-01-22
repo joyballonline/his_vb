@@ -29,7 +29,7 @@ Partial Class PurchasingManagement
         Me.LblSupplier = New System.Windows.Forms.Label()
         Me.TxtSupplierCode = New System.Windows.Forms.TextBox()
         Me.TxtSupplierName = New System.Windows.Forms.TextBox()
-        Me.LblOrderingDate = New System.Windows.Forms.Label()
+        Me.LblPurchaseDate = New System.Windows.Forms.Label()
         Me.TxtOrdingDate = New System.Windows.Forms.TextBox()
         Me.DgvPurchase = New System.Windows.Forms.DataGridView()
         Me.LblNo1 = New System.Windows.Forms.Label()
@@ -43,14 +43,14 @@ Partial Class PurchasingManagement
         Me.LblNo3 = New System.Windows.Forms.Label()
         Me.TxtCount3 = New System.Windows.Forms.TextBox()
         Me.DgvAdd = New System.Windows.Forms.DataGridView()
-        Me.LblPurchaseDate = New System.Windows.Forms.Label()
+        Me.LblPurchasedDate = New System.Windows.Forms.Label()
         Me.LblRemarks = New System.Windows.Forms.Label()
         Me.TxtRemarks = New System.Windows.Forms.TextBox()
         Me.DtpPurchaseDate = New System.Windows.Forms.DateTimePicker()
         Me.BtnRegist = New System.Windows.Forms.Button()
         Me.TxtSuffixNo = New System.Windows.Forms.TextBox()
         Me.LblMode = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
+        Me.LblCustomerNo = New System.Windows.Forms.Label()
         Me.TxtCustomerPO = New System.Windows.Forms.TextBox()
         CType(Me.DgvPurchase, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvHistory, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -62,7 +62,7 @@ Partial Class PurchasingManagement
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(12, 9)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(0, 12)
+        Me.Label1.Size = New System.Drawing.Size(0, 13)
         Me.Label1.TabIndex = 0
         '
         'LblPurchaseNo
@@ -132,17 +132,17 @@ Partial Class PurchasingManagement
         Me.TxtSupplierName.TabIndex = 73
         Me.TxtSupplierName.TabStop = False
         '
-        'LblOrderingDate
+        'LblPurchaseDate
         '
-        Me.LblOrderingDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.LblOrderingDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblOrderingDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblOrderingDate.Location = New System.Drawing.Point(732, 8)
-        Me.LblOrderingDate.Name = "LblOrderingDate"
-        Me.LblOrderingDate.Size = New System.Drawing.Size(170, 22)
-        Me.LblOrderingDate.TabIndex = 75
-        Me.LblOrderingDate.Text = "発注日"
-        Me.LblOrderingDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LblPurchaseDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblPurchaseDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblPurchaseDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblPurchaseDate.Location = New System.Drawing.Point(732, 8)
+        Me.LblPurchaseDate.Name = "LblPurchaseDate"
+        Me.LblPurchaseDate.Size = New System.Drawing.Size(170, 22)
+        Me.LblPurchaseDate.TabIndex = 75
+        Me.LblPurchaseDate.Text = "発注日"
+        Me.LblPurchaseDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'TxtOrdingDate
         '
@@ -229,7 +229,7 @@ Partial Class PurchasingManagement
         Me.LblPurchase.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblPurchase.Location = New System.Drawing.Point(12, 81)
         Me.LblPurchase.Name = "LblPurchase"
-        Me.LblPurchase.Size = New System.Drawing.Size(57, 22)
+        Me.LblPurchase.Size = New System.Drawing.Size(170, 22)
         Me.LblPurchase.TabIndex = 86
         Me.LblPurchase.Text = "■発注"
         Me.LblPurchase.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -240,7 +240,7 @@ Partial Class PurchasingManagement
         Me.LblHistory.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblHistory.Location = New System.Drawing.Point(12, 211)
         Me.LblHistory.Name = "LblHistory"
-        Me.LblHistory.Size = New System.Drawing.Size(89, 22)
+        Me.LblHistory.Size = New System.Drawing.Size(170, 22)
         Me.LblHistory.TabIndex = 87
         Me.LblHistory.Text = "■仕入済み"
         Me.LblHistory.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -251,7 +251,7 @@ Partial Class PurchasingManagement
         Me.LblAdd.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblAdd.Location = New System.Drawing.Point(12, 342)
         Me.LblAdd.Name = "LblAdd"
-        Me.LblAdd.Size = New System.Drawing.Size(89, 22)
+        Me.LblAdd.Size = New System.Drawing.Size(170, 22)
         Me.LblAdd.TabIndex = 91
         Me.LblAdd.Text = "■今回仕入"
         Me.LblAdd.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -289,17 +289,17 @@ Partial Class PurchasingManagement
         Me.DgvAdd.Size = New System.Drawing.Size(1326, 100)
         Me.DgvAdd.TabIndex = 5
         '
-        'LblPurchaseDate
+        'LblPurchasedDate
         '
-        Me.LblPurchaseDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.LblPurchaseDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblPurchaseDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblPurchaseDate.Location = New System.Drawing.Point(188, 342)
-        Me.LblPurchaseDate.Name = "LblPurchaseDate"
-        Me.LblPurchaseDate.Size = New System.Drawing.Size(98, 22)
-        Me.LblPurchaseDate.TabIndex = 93
-        Me.LblPurchaseDate.Text = "仕入日"
-        Me.LblPurchaseDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LblPurchasedDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblPurchasedDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblPurchasedDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblPurchasedDate.Location = New System.Drawing.Point(188, 342)
+        Me.LblPurchasedDate.Name = "LblPurchasedDate"
+        Me.LblPurchasedDate.Size = New System.Drawing.Size(129, 22)
+        Me.LblPurchasedDate.TabIndex = 93
+        Me.LblPurchasedDate.Text = "仕入日"
+        Me.LblPurchasedDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'LblRemarks
         '
@@ -327,9 +327,9 @@ Partial Class PurchasingManagement
         Me.DtpPurchaseDate.CustomFormat = "yyyy/MM/dd"
         Me.DtpPurchaseDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpPurchaseDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DtpPurchaseDate.Location = New System.Drawing.Point(292, 342)
+        Me.DtpPurchaseDate.Location = New System.Drawing.Point(323, 342)
         Me.DtpPurchaseDate.Name = "DtpPurchaseDate"
-        Me.DtpPurchaseDate.Size = New System.Drawing.Size(148, 22)
+        Me.DtpPurchaseDate.Size = New System.Drawing.Size(117, 22)
         Me.DtpPurchaseDate.TabIndex = 3
         Me.DtpPurchaseDate.TabStop = False
         Me.DtpPurchaseDate.Value = New Date(2018, 7, 16, 0, 0, 0, 0)
@@ -367,17 +367,17 @@ Partial Class PurchasingManagement
         Me.LblMode.Text = "モード"
         Me.LblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Label2
+        'LblCustomerNo
         '
-        Me.Label2.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.Label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label2.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label2.Location = New System.Drawing.Point(393, 9)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(170, 22)
-        Me.Label2.TabIndex = 305
-        Me.Label2.Text = "客先番号"
-        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LblCustomerNo.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblCustomerNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblCustomerNo.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblCustomerNo.Location = New System.Drawing.Point(393, 9)
+        Me.LblCustomerNo.Name = "LblCustomerNo"
+        Me.LblCustomerNo.Size = New System.Drawing.Size(170, 22)
+        Me.LblCustomerNo.TabIndex = 305
+        Me.LblCustomerNo.Text = "客先番号"
+        Me.LblCustomerNo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'TxtCustomerPO
         '
@@ -394,7 +394,7 @@ Partial Class PurchasingManagement
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
-        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.LblCustomerNo)
         Me.Controls.Add(Me.TxtCustomerPO)
         Me.Controls.Add(Me.LblMode)
         Me.Controls.Add(Me.TxtSuffixNo)
@@ -402,7 +402,7 @@ Partial Class PurchasingManagement
         Me.Controls.Add(Me.DtpPurchaseDate)
         Me.Controls.Add(Me.LblRemarks)
         Me.Controls.Add(Me.TxtRemarks)
-        Me.Controls.Add(Me.LblPurchaseDate)
+        Me.Controls.Add(Me.LblPurchasedDate)
         Me.Controls.Add(Me.LblAdd)
         Me.Controls.Add(Me.LblNo3)
         Me.Controls.Add(Me.TxtCount3)
@@ -415,7 +415,7 @@ Partial Class PurchasingManagement
         Me.Controls.Add(Me.LblNo1)
         Me.Controls.Add(Me.TxtCount1)
         Me.Controls.Add(Me.DgvPurchase)
-        Me.Controls.Add(Me.LblOrderingDate)
+        Me.Controls.Add(Me.LblPurchaseDate)
         Me.Controls.Add(Me.TxtOrdingDate)
         Me.Controls.Add(Me.TxtSupplierName)
         Me.Controls.Add(Me.LblSupplier)
@@ -442,7 +442,7 @@ Partial Class PurchasingManagement
     Friend WithEvents LblSupplier As Label
     Friend WithEvents TxtSupplierCode As TextBox
     Friend WithEvents TxtSupplierName As TextBox
-    Friend WithEvents LblOrderingDate As Label
+    Friend WithEvents LblPurchaseDate As Label
     Friend WithEvents TxtOrdingDate As TextBox
     Friend WithEvents DgvPurchase As DataGridView
     Friend WithEvents LblNo1 As Label
@@ -456,13 +456,13 @@ Partial Class PurchasingManagement
     Friend WithEvents LblNo3 As Label
     Friend WithEvents TxtCount3 As TextBox
     Friend WithEvents DgvAdd As DataGridView
-    Friend WithEvents LblPurchaseDate As Label
+    Friend WithEvents LblPurchasedDate As Label
     Friend WithEvents LblRemarks As Label
     Friend WithEvents TxtRemarks As TextBox
     Friend WithEvents DtpPurchaseDate As DateTimePicker
     Friend WithEvents BtnRegist As Button
     Friend WithEvents TxtSuffixNo As TextBox
     Friend WithEvents LblMode As Label
-    Friend WithEvents Label2 As Label
+    Friend WithEvents LblCustomerNo As Label
     Friend WithEvents TxtCustomerPO As TextBox
 End Class
