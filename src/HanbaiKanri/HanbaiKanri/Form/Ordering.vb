@@ -110,8 +110,8 @@ Public Class Ordering
 
     Private Sub Quote_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'DateTimePickerのフォーマットを指定
-        DtpOrderingRegistration.Text = DateAdd("m", 0, Now).ToString("yyyy/MM/dd")
-        DtpOrderingDate.Text = DateAdd("m", 0, Now).ToString("yyyy/MM/dd")
+        DtpRegistrationDate.Text = DateAdd("m", 0, Now).ToString("yyyy/MM/dd")
+        DtpPurchaseDate.Text = DateAdd("m", 0, Now).ToString("yyyy/MM/dd")
 
         'セルの内容に合わせて、行の高さが自動的に調節されるようにする
         DgvItemList.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
@@ -282,10 +282,10 @@ Public Class Ordering
             TxtOrderingSuffix.Text = ds1.Tables(RS).Rows(0)("発注番号枝番")
         End If
         If ds1.Tables(RS).Rows(0)("発注日") IsNot DBNull.Value Then
-            DtpOrderingDate.Value = ds1.Tables(RS).Rows(0)("発注日")
+            DtpPurchaseDate.Value = ds1.Tables(RS).Rows(0)("発注日")
         End If
         If ds1.Tables(RS).Rows(0)("登録日") IsNot DBNull.Value Then
-            DtpOrderingRegistration.Value = ds1.Tables(RS).Rows(0)("登録日")
+            DtpRegistrationDate.Value = ds1.Tables(RS).Rows(0)("登録日")
         End If
         If ds1.Tables(RS).Rows(0)("仕入先コード") IsNot DBNull.Value Then
             TxtSupplierCode.Text = ds1.Tables(RS).Rows(0)("仕入先コード")
@@ -329,7 +329,7 @@ Public Class Ordering
             TxtPurchaseRemark.Text = ds1.Tables(RS).Rows(0)("備考")
         End If
         If ds1.Tables(RS).Rows(0)("仕入金額") IsNot DBNull.Value Then
-            TxtOrderingAmount.Text = ds1.Tables(RS).Rows(0)("仕入金額")
+            TxtPurchaseAmount.Text = ds1.Tables(RS).Rows(0)("仕入金額")
         End If
         If ds1.Tables(RS).Rows(0)("見積備考") IsNot DBNull.Value Then
             TxtQuoteRemarks.Text = ds1.Tables(RS).Rows(0)("見積備考")
@@ -407,7 +407,7 @@ Public Class Ordering
 
         If PurchaseStatus = "VIEW" Then
             LblMode.Text = "参照モード"
-            DtpOrderingDate.Enabled = False
+            DtpPurchaseDate.Enabled = False
             TxtPurchaseRemark.Enabled = False
             TxtCustomerPO.Enabled = False
             DgvItemList.ReadOnly = True
@@ -428,9 +428,9 @@ Public Class Ordering
             TxtPerson.Enabled = True
             TxtSales.Enabled = True
             TxtPaymentTerms.Enabled = True
-            LblRemarks.Visible = False
-            TxtQuoteRemarks.Visible = False
-            DtpOrderingRegistration.Enabled = True
+            'LblRemarks.Visible = False
+            'TxtQuoteRemarks.Visible = False
+            DtpRegistrationDate.Enabled = True
 
             Dim SqlSaiban As String = ""
             SqlSaiban += "SELECT "
@@ -510,6 +510,81 @@ Public Class Ordering
             TxtOrderingSuffix.Text = MaxSuffix + 1
         End If
 
+        '翻訳
+        If frmC01F10_Login.loginValue.Language = "ENG" Then
+            LblPurchaseNo.Text = "PurchaseNumber"
+            LblPurchaseNo.Size = New Size(145, 23)
+            TxtOrderingNo.Location = New Point(162, 12)
+            Label2.Location = New Point(256, 13)
+            TxtOrderingSuffix.Location = New Point(273, 13)
+            LblCustomerPO.Text = "CustomerNumber"
+            LblCustomerPO.Location = New Point(308, 13)
+            LblCustomerPO.Size = New Size(152, 23)
+            TxtCustomerPO.Location = New Point(466, 13)
+            LblPurchaseDate.Text = "PurchaseDate"
+            LblPurchaseDate.Location = New Point(560, 13)
+            DtpPurchaseDate.Location = New Point(678, 13)
+            DtpPurchaseDate.Size = New Size(130, 22)
+            LblRegistrationDate.Text = "RegistrationDate"
+            LblRegistrationDate.Size = New Size(138, 23)
+            LblRegistrationDate.Location = New Point(812, 13)
+            DtpRegistrationDate.Location = New Point(958, 13)
+            DtpRegistrationDate.Size = New Size(130, 22)
+
+            LblSupplierName.Text = "SupplierName"
+            LblAddress.Text = "Address"
+            LblTel.Text = "TEL"
+            LblFax.Text = "FAX"
+            LblPerson.Text = "ContactPersonName"
+            LblPosition.Text = "Position"
+            LblSales.Text = "SalesPerson"
+            LblInput.Text = "InputPerson"
+            LblPaymentTerms.Text = "PaymentTerms"
+            TxtPaymentTerms.Location = New Point(181, 158)
+            LblPaymentTerms.Size = New Size(162, 23)
+            LblPurchaseRemarks.Text = "PurchaseRemarks"
+            LblPurchaseRemarks.Size = New Size(162, 23)
+            TxtPurchaseRemark.Location = New Point(181, 187)
+            LblRemarks.Text = "QuotationRemarks"
+            LblRemarks.Size = New Size(162, 23)
+            TxtQuoteRemarks.Location = New Point(181, 216)
+            LblItemCount.Text = "ItemCount"
+            LblMethod.Text = "ShippingMethod"
+            LblShipDate.Text = "ShipDate"
+
+            LblPurchaseAmount.Text = "PurchaseAmount"
+            LblPurchaseAmount.Size = New Size(180, 23)
+            LblPurchaseAmount.Location = New Point(923, 465)
+
+            TxtSupplierCode.Size = New Point(62, 23)
+            BtnCodeSearch.Text = "Search"
+            BtnCodeSearch.Location = New Point(195, 42)
+            BtnCodeSearch.Size = New Size(72, 23)
+            BtnInsert.Text = "Insert"
+            BtnUp.Text = "Up"
+            BtnDown.Text = "Down"
+            BtnRowsAdd.Text = "Add"
+            BtnRowsDel.Text = "Delete"
+            BtnClone.Text = "Clone"
+
+            BtnPurchase.Text = "IssuePurchaseOrder"
+            BtnRegistration.Text = "Registrartion"
+            BtnBack.Text = "Back"
+
+            DgvItemList.Columns("仕入区分").HeaderText = "PurchaseSection"
+            DgvItemList.Columns("メーカー").HeaderText = "Maker"
+            DgvItemList.Columns("品名").HeaderText = "Item"
+            DgvItemList.Columns("型式").HeaderText = "Model"
+            DgvItemList.Columns("数量").HeaderText = "Quantity"
+            DgvItemList.Columns("単位").HeaderText = "Unit"
+            DgvItemList.Columns("仕入単価").HeaderText = "PurchasePrice"
+            DgvItemList.Columns("仕入金額").HeaderText = "PurchaseAmount"
+            DgvItemList.Columns("リードタイム").HeaderText = "LeadTime"
+            DgvItemList.Columns("リードタイム単位").HeaderText = "LeadTimeUnit"
+            DgvItemList.Columns("貿易条件").HeaderText = "TradeTerms"
+            DgvItemList.Columns("備考").HeaderText = "Remarks"
+        End If
+
     End Sub
 
     '前の画面に戻る
@@ -524,7 +599,7 @@ Public Class Ordering
     ByVal e As DataGridViewCellEventArgs) _
     Handles DgvItemList.CellValueChanged
 
-        TxtOrderingAmount.Clear()
+        TxtPurchaseAmount.Clear()
 
         Dim PurchaseTotal As Integer = 0
 
@@ -537,7 +612,7 @@ Public Class Ordering
         For index As Integer = 0 To DgvItemList.Rows.Count - 1
             PurchaseTotal += DgvItemList.Rows(index).Cells("仕入金額").Value
         Next
-        TxtOrderingAmount.Text = PurchaseTotal
+        TxtPurchaseAmount.Text = PurchaseTotal
 
     End Sub
     Private Sub BtnUp_Click(sender As Object, e As EventArgs) Handles BtnUp.Click
@@ -609,7 +684,7 @@ Public Class Ordering
             DgvItemList.Rows.RemoveAt(r.RowIndex)
         Next r
 
-        TxtOrderingAmount.Clear()
+        TxtPurchaseAmount.Clear()
 
         Dim Total As Integer = 0
         Dim PurchaseTotal As Integer = 0
@@ -618,7 +693,7 @@ Public Class Ordering
         For c As Integer = 0 To DgvItemList.Rows.Count - 1
             PurchaseTotal += DgvItemList.Rows(c).Cells("仕入金額").Value
         Next
-        TxtOrderingAmount.Text = PurchaseTotal
+        TxtPurchaseAmount.Text = PurchaseTotal
 
         '行番号の振り直し
         Dim index As Integer = DgvItemList.Rows.Count()
@@ -836,7 +911,7 @@ Public Class Ordering
             Sql3 += "', '"
             Sql3 += "0"
             Sql3 += "', '"
-            Sql3 += TxtOrderingAmount.Text
+            Sql3 += TxtPurchaseAmount.Text
             Sql3 += "', '"
             Sql3 += "0"
             Sql3 += "', '"
@@ -854,9 +929,9 @@ Public Class Ordering
             Sql3 += "', "
             Sql3 += "null"
             Sql3 += ", '"
-            Sql3 += DtpOrderingDate.Value
+            Sql3 += DtpPurchaseDate.Value
             Sql3 += "', '"
-            Sql3 += DtpOrderingRegistration.Value
+            Sql3 += DtpRegistrationDate.Value
             Sql3 += "', '"
             Sql3 += dtNow
             Sql3 += "', '"
@@ -1081,7 +1156,7 @@ Public Class Ordering
             Sql1 += "', "
             Sql1 += "受注日"
             Sql1 += " = '"
-            Sql1 += DtpOrderingDate.Value
+            Sql1 += DtpPurchaseDate.Value
             Sql1 += "', "
             Sql1 += "更新日"
             Sql1 += " = '"

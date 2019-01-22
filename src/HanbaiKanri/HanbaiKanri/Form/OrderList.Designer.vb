@@ -23,7 +23,6 @@ Partial Class OrderList
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.BtnOrderView = New System.Windows.Forms.Button()
-        Me.Panel1 = New System.Windows.Forms.Panel()
         Me.RbtnSlip = New System.Windows.Forms.RadioButton()
         Me.RbtnDetails = New System.Windows.Forms.RadioButton()
         Me.Label10 = New System.Windows.Forms.Label()
@@ -51,7 +50,7 @@ Partial Class OrderList
         Me.BtnOrderEdit = New System.Windows.Forms.Button()
         Me.DgvCymnhd = New System.Windows.Forms.DataGridView()
         Me.BtnSales = New System.Windows.Forms.Button()
-        Me.BtnReceipt = New System.Windows.Forms.Button()
+        Me.BtnGoodsIssue = New System.Windows.Forms.Button()
         Me.BtnOrderCancel = New System.Windows.Forms.Button()
         Me.ChkCancelData = New System.Windows.Forms.CheckBox()
         Me.BtnOrderClone = New System.Windows.Forms.Button()
@@ -59,7 +58,6 @@ Partial Class OrderList
         Me.LblMode = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.TxtCustomerPO = New System.Windows.Forms.TextBox()
-        Me.Panel1.SuspendLayout()
         CType(Me.DgvCymnhd, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -74,22 +72,12 @@ Partial Class OrderList
         Me.BtnOrderView.UseVisualStyleBackColor = True
         Me.BtnOrderView.Visible = False
         '
-        'Panel1
-        '
-        Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel1.Controls.Add(Me.RbtnSlip)
-        Me.Panel1.Controls.Add(Me.RbtnDetails)
-        Me.Panel1.Location = New System.Drawing.Point(16, 189)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(195, 37)
-        Me.Panel1.TabIndex = 59
-        '
         'RbtnSlip
         '
         Me.RbtnSlip.AutoSize = True
         Me.RbtnSlip.Checked = True
         Me.RbtnSlip.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.RbtnSlip.Location = New System.Drawing.Point(6, 8)
+        Me.RbtnSlip.Location = New System.Drawing.Point(16, 199)
         Me.RbtnSlip.Name = "RbtnSlip"
         Me.RbtnSlip.Size = New System.Drawing.Size(89, 19)
         Me.RbtnSlip.TabIndex = 12
@@ -101,7 +89,7 @@ Partial Class OrderList
         '
         Me.RbtnDetails.AutoSize = True
         Me.RbtnDetails.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.RbtnDetails.Location = New System.Drawing.Point(101, 8)
+        Me.RbtnDetails.Location = New System.Drawing.Point(111, 199)
         Me.RbtnDetails.Name = "RbtnDetails"
         Me.RbtnDetails.Size = New System.Drawing.Size(89, 19)
         Me.RbtnDetails.TabIndex = 13
@@ -357,16 +345,16 @@ Partial Class OrderList
         Me.BtnSales.UseVisualStyleBackColor = True
         Me.BtnSales.Visible = False
         '
-        'BtnReceipt
+        'BtnGoodsIssue
         '
-        Me.BtnReceipt.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.BtnReceipt.Location = New System.Drawing.Point(661, 509)
-        Me.BtnReceipt.Name = "BtnReceipt"
-        Me.BtnReceipt.Size = New System.Drawing.Size(165, 40)
-        Me.BtnReceipt.TabIndex = 20
-        Me.BtnReceipt.Text = "出庫入力"
-        Me.BtnReceipt.UseVisualStyleBackColor = True
-        Me.BtnReceipt.Visible = False
+        Me.BtnGoodsIssue.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.BtnGoodsIssue.Location = New System.Drawing.Point(661, 509)
+        Me.BtnGoodsIssue.Name = "BtnGoodsIssue"
+        Me.BtnGoodsIssue.Size = New System.Drawing.Size(165, 40)
+        Me.BtnGoodsIssue.TabIndex = 20
+        Me.BtnGoodsIssue.Text = "出庫入力"
+        Me.BtnGoodsIssue.UseVisualStyleBackColor = True
+        Me.BtnGoodsIssue.Visible = False
         '
         'BtnOrderCancel
         '
@@ -448,6 +436,8 @@ Partial Class OrderList
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.RbtnDetails)
+        Me.Controls.Add(Me.RbtnSlip)
         Me.Controls.Add(Me.Label11)
         Me.Controls.Add(Me.TxtCustomerPO)
         Me.Controls.Add(Me.LblMode)
@@ -455,10 +445,9 @@ Partial Class OrderList
         Me.Controls.Add(Me.BtnOrderClone)
         Me.Controls.Add(Me.ChkCancelData)
         Me.Controls.Add(Me.BtnOrderCancel)
-        Me.Controls.Add(Me.BtnReceipt)
+        Me.Controls.Add(Me.BtnGoodsIssue)
         Me.Controls.Add(Me.BtnSales)
         Me.Controls.Add(Me.BtnOrderView)
-        Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.Label5)
@@ -486,8 +475,6 @@ Partial Class OrderList
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "OrderList"
         Me.Text = "OrderList"
-        Me.Panel1.ResumeLayout(False)
-        Me.Panel1.PerformLayout()
         CType(Me.DgvCymnhd, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -495,7 +482,6 @@ Partial Class OrderList
     End Sub
 
     Friend WithEvents BtnOrderView As Button
-    Friend WithEvents Panel1 As Panel
     Friend WithEvents RbtnSlip As RadioButton
     Friend WithEvents RbtnDetails As RadioButton
     Friend WithEvents Label10 As Label
@@ -523,7 +509,7 @@ Partial Class OrderList
     Friend WithEvents BtnOrderEdit As Button
     Friend WithEvents DgvCymnhd As DataGridView
     Friend WithEvents BtnSales As Button
-    Friend WithEvents BtnReceipt As Button
+    Friend WithEvents BtnGoodsIssue As Button
     Friend WithEvents BtnOrderCancel As Button
     Friend WithEvents ChkCancelData As CheckBox
     Friend WithEvents BtnOrderClone As Button
