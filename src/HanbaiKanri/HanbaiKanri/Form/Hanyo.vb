@@ -386,6 +386,31 @@ Public Class Hanyo
     End Sub
 
     Private Sub Hanyo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If frmC01F10_Login.loginValue.Language = "ENG" Then
+            Label2.Text = "FixedKey"
+            Label3.Text = "VariableKey"
+            Label5.Text = "DisplayOrder"
+            Label6.Text = "Charcter1"
+            Label7.Text = "Charcter2"
+            Label8.Text = "Charcter3"
+            Label9.Text = "Charcter4"
+            Label11.Text = "Charcter5"
+            Label4.Text = "Charcter6"
+            Label12.Text = "Number1"
+            Label13.Text = "Number2"
+            Label14.Text = "Number3"
+            Label18.Text = "Number4"
+            Label17.Text = "Number5"
+            Label16.Text = "Number6"
+            Label15.Text = "Memo"
+
+            Label1.Text = "(Non-Overlapping string)"
+            Label20.Text = "(Non-Overlapping string)"
+
+
+            BtnRegistration.Text = "Registration"
+            BtnBack.Text = "Back"
+        End If
         If _status = "EDIT" Then
             Dim Sql As String = ""
             Sql += "SELECT "

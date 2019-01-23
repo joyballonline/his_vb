@@ -75,7 +75,7 @@ Partial Class Hanyo
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label4.Location = New System.Drawing.Point(48, 195)
+        Me.Label4.Location = New System.Drawing.Point(12, 195)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(47, 15)
         Me.Label4.TabIndex = 350
@@ -93,7 +93,7 @@ Partial Class Hanyo
         '
         Me.Label15.AutoSize = True
         Me.Label15.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label15.Location = New System.Drawing.Point(449, 333)
+        Me.Label15.Location = New System.Drawing.Point(378, 333)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(28, 15)
         Me.Label15.TabIndex = 348
@@ -103,7 +103,7 @@ Partial Class Hanyo
         '
         Me.Label16.AutoSize = True
         Me.Label16.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label16.Location = New System.Drawing.Point(48, 330)
+        Me.Label16.Location = New System.Drawing.Point(12, 330)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(47, 15)
         Me.Label16.TabIndex = 347
@@ -113,7 +113,7 @@ Partial Class Hanyo
         '
         Me.Label17.AutoSize = True
         Me.Label17.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label17.Location = New System.Drawing.Point(430, 285)
+        Me.Label17.Location = New System.Drawing.Point(378, 285)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(47, 15)
         Me.Label17.TabIndex = 346
@@ -123,7 +123,7 @@ Partial Class Hanyo
         '
         Me.Label18.AutoSize = True
         Me.Label18.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label18.Location = New System.Drawing.Point(48, 285)
+        Me.Label18.Location = New System.Drawing.Point(12, 285)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(47, 15)
         Me.Label18.TabIndex = 345
@@ -165,7 +165,7 @@ Partial Class Hanyo
         '
         Me.Label14.AutoSize = True
         Me.Label14.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label14.Location = New System.Drawing.Point(430, 240)
+        Me.Label14.Location = New System.Drawing.Point(378, 240)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(47, 15)
         Me.Label14.TabIndex = 340
@@ -175,7 +175,7 @@ Partial Class Hanyo
         '
         Me.Label13.AutoSize = True
         Me.Label13.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label13.Location = New System.Drawing.Point(48, 240)
+        Me.Label13.Location = New System.Drawing.Point(12, 240)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(47, 15)
         Me.Label13.TabIndex = 339
@@ -185,7 +185,7 @@ Partial Class Hanyo
         '
         Me.Label12.AutoSize = True
         Me.Label12.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label12.Location = New System.Drawing.Point(430, 195)
+        Me.Label12.Location = New System.Drawing.Point(378, 195)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(47, 15)
         Me.Label12.TabIndex = 338
@@ -195,7 +195,7 @@ Partial Class Hanyo
         '
         Me.Label11.AutoSize = True
         Me.Label11.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label11.Location = New System.Drawing.Point(430, 150)
+        Me.Label11.Location = New System.Drawing.Point(378, 150)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(47, 15)
         Me.Label11.TabIndex = 337
@@ -205,7 +205,7 @@ Partial Class Hanyo
         '
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label9.Location = New System.Drawing.Point(48, 150)
+        Me.Label9.Location = New System.Drawing.Point(12, 150)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(47, 15)
         Me.Label9.TabIndex = 336
@@ -265,7 +265,7 @@ Partial Class Hanyo
         '
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label8.Location = New System.Drawing.Point(430, 105)
+        Me.Label8.Location = New System.Drawing.Point(378, 105)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(47, 15)
         Me.Label8.TabIndex = 329
@@ -275,7 +275,7 @@ Partial Class Hanyo
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label7.Location = New System.Drawing.Point(48, 105)
+        Me.Label7.Location = New System.Drawing.Point(12, 105)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(47, 15)
         Me.Label7.TabIndex = 328
@@ -285,7 +285,7 @@ Partial Class Hanyo
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label6.Location = New System.Drawing.Point(430, 60)
+        Me.Label6.Location = New System.Drawing.Point(378, 60)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(47, 15)
         Me.Label6.TabIndex = 327
@@ -295,7 +295,7 @@ Partial Class Hanyo
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label5.Location = New System.Drawing.Point(43, 60)
+        Me.Label5.Location = New System.Drawing.Point(12, 60)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(52, 15)
         Me.Label5.TabIndex = 326
@@ -305,7 +305,7 @@ Partial Class Hanyo
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label3.Location = New System.Drawing.Point(416, 15)
+        Me.Label3.Location = New System.Drawing.Point(378, 15)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(61, 15)
         Me.Label3.TabIndex = 325
@@ -315,7 +315,7 @@ Partial Class Hanyo
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label2.Location = New System.Drawing.Point(34, 15)
+        Me.Label2.Location = New System.Drawing.Point(12, 15)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(61, 15)
         Me.Label2.TabIndex = 324
@@ -373,7 +373,7 @@ Partial Class Hanyo
         '
         Me.TxtCompanyCode.Location = New System.Drawing.Point(851, 6)
         Me.TxtCompanyCode.Name = "TxtCompanyCode"
-        Me.TxtCompanyCode.Size = New System.Drawing.Size(24, 19)
+        Me.TxtCompanyCode.Size = New System.Drawing.Size(24, 20)
         Me.TxtCompanyCode.TabIndex = 352
         '
         'Label20

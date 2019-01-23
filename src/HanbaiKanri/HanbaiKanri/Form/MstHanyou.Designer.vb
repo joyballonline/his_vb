@@ -42,7 +42,7 @@ Partial Class MstHanyou
         Me.メモ = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.更新者 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.更新日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.BtnSelect = New System.Windows.Forms.Button()
+        Me.BtnEdit = New System.Windows.Forms.Button()
         Me.BtnAdd = New System.Windows.Forms.Button()
         Me.BtnBack = New System.Windows.Forms.Button()
         Me.BtnSearch = New System.Windows.Forms.Button()
@@ -206,15 +206,15 @@ Partial Class MstHanyou
         Me.更新日.Name = "更新日"
         Me.更新日.ReadOnly = True
         '
-        'BtnSelect
+        'BtnEdit
         '
-        Me.BtnSelect.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.BtnSelect.Location = New System.Drawing.Point(1002, 509)
-        Me.BtnSelect.Name = "BtnSelect"
-        Me.BtnSelect.Size = New System.Drawing.Size(165, 40)
-        Me.BtnSelect.TabIndex = 5
-        Me.BtnSelect.Text = "編集"
-        Me.BtnSelect.UseVisualStyleBackColor = True
+        Me.BtnEdit.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.BtnEdit.Location = New System.Drawing.Point(1002, 509)
+        Me.BtnEdit.Name = "BtnEdit"
+        Me.BtnEdit.Size = New System.Drawing.Size(165, 40)
+        Me.BtnEdit.TabIndex = 5
+        Me.BtnEdit.Text = "編集"
+        Me.BtnEdit.UseVisualStyleBackColor = True
         '
         'BtnAdd
         '
@@ -513,7 +513,7 @@ Partial Class MstHanyou
         Me.Controls.Add(Me.TxtFixedkey)
         Me.Controls.Add(Me.BtnBack)
         Me.Controls.Add(Me.BtnAdd)
-        Me.Controls.Add(Me.BtnSelect)
+        Me.Controls.Add(Me.BtnEdit)
         Me.Controls.Add(Me.Dgv_Hanyo)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "MstHanyou"
@@ -544,7 +544,7 @@ Partial Class MstHanyou
     Friend WithEvents メモ As DataGridViewTextBoxColumn
     Friend WithEvents 更新者 As DataGridViewTextBoxColumn
     Friend WithEvents 更新日 As DataGridViewTextBoxColumn
-    Friend WithEvents BtnSelect As Button
+    Friend WithEvents BtnEdit As Button
     Friend WithEvents BtnAdd As Button
     Friend WithEvents BtnBack As Button
     Friend WithEvents BtnSearch As Button

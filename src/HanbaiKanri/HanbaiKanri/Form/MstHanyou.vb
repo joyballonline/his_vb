@@ -64,6 +64,47 @@ Public Class MstHanyou
     End Sub
 
     Private Sub MstHanyoue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If frmC01F10_Login.loginValue.Language = "ENG" Then
+            Label1.Text = "FixedKey"
+            Label2.Text = "Char1"
+            Label5.Text = "Char2"
+            Label7.Text = "Char3"
+            Label9.Text = "Char4"
+            Label11.Text = "Char5"
+            Label13.Text = "Char6"
+            Label3.Text = "Num1"
+            Label4.Text = "Num2"
+            Label6.Text = "Num3"
+            Label8.Text = "Num4"
+            Label10.Text = "Num5"
+            Label12.Text = "Num6"
+
+            BtnSearch.Text = "Search"
+            BtnAdd.Text = "Add"
+            BtnEdit.Text = "Edit"
+            BtnBack.Text = "Back"
+
+            Dgv_Hanyo.Columns("会社コード").HeaderText = "CompanyCode"
+            Dgv_Hanyo.Columns("固定キー").HeaderText = "FixedKey"
+            Dgv_Hanyo.Columns("可変キー").HeaderText = "VariableKey"
+            Dgv_Hanyo.Columns("表示順").HeaderText = "DisplayOrder"
+            Dgv_Hanyo.Columns("文字１").HeaderText = "Charcter1"
+            Dgv_Hanyo.Columns("文字２").HeaderText = "Charcter2"
+            Dgv_Hanyo.Columns("文字３").HeaderText = "Charcter3"
+            Dgv_Hanyo.Columns("文字４").HeaderText = "Charcter4"
+            Dgv_Hanyo.Columns("文字５").HeaderText = "Charcter5"
+            Dgv_Hanyo.Columns("文字６").HeaderText = "Charcter6"
+            Dgv_Hanyo.Columns("数値１").HeaderText = "Number1"
+            Dgv_Hanyo.Columns("数値２").HeaderText = "Number2"
+            Dgv_Hanyo.Columns("数値３").HeaderText = "Number3"
+            Dgv_Hanyo.Columns("数値４").HeaderText = "Number4"
+            Dgv_Hanyo.Columns("数値５").HeaderText = "Number5"
+            Dgv_Hanyo.Columns("数値６").HeaderText = "Number6"
+            Dgv_Hanyo.Columns("メモ").HeaderText = "Memo"
+            Dgv_Hanyo.Columns("更新者").HeaderText = "Changer"
+            Dgv_Hanyo.Columns("更新日").HeaderText = "UpDateDate"
+
+        End If
         Dim Sql As String = ""
         Try
             Sql += "SELECT "
@@ -132,7 +173,7 @@ Public Class MstHanyou
         End Try
     End Sub
 
-    Private Sub BtnSelect_Click(sender As Object, e As EventArgs) Handles BtnSelect.Click
+    Private Sub BtnSelect_Click(sender As Object, e As EventArgs) Handles BtnEdit.Click
         Dim openForm As Form = Nothing
         Dim Status As String = "EDIT"
         Dim Code As String = Dgv_Hanyo.Rows(Dgv_Hanyo.CurrentCell.RowIndex).Cells("会社コード").Value
