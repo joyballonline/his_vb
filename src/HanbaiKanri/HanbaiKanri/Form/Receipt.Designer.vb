@@ -50,7 +50,7 @@ Partial Class Receipt
         Me.TxtPurchaseNo = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.LblMode = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
+        Me.LblCustomerNo = New System.Windows.Forms.Label()
         Me.TxtCustomerPO = New System.Windows.Forms.TextBox()
         CType(Me.DgvAdd, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvHistory, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -129,7 +129,7 @@ Partial Class Receipt
         Me.LblAdd.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblAdd.Location = New System.Drawing.Point(12, 343)
         Me.LblAdd.Name = "LblAdd"
-        Me.LblAdd.Size = New System.Drawing.Size(89, 22)
+        Me.LblAdd.Size = New System.Drawing.Size(170, 22)
         Me.LblAdd.TabIndex = 252
         Me.LblAdd.Text = "■今回入庫"
         Me.LblAdd.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -173,7 +173,7 @@ Partial Class Receipt
         Me.LblHistory.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblHistory.Location = New System.Drawing.Point(12, 212)
         Me.LblHistory.Name = "LblHistory"
-        Me.LblHistory.Size = New System.Drawing.Size(89, 22)
+        Me.LblHistory.Size = New System.Drawing.Size(170, 22)
         Me.LblHistory.TabIndex = 248
         Me.LblHistory.Text = "■入庫済み"
         Me.LblHistory.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -184,7 +184,7 @@ Partial Class Receipt
         Me.LblPurchase.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblPurchase.Location = New System.Drawing.Point(12, 82)
         Me.LblPurchase.Name = "LblPurchase"
-        Me.LblPurchase.Size = New System.Drawing.Size(57, 22)
+        Me.LblPurchase.Size = New System.Drawing.Size(170, 22)
         Me.LblPurchase.TabIndex = 247
         Me.LblPurchase.Text = "■発注"
         Me.LblPurchase.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -352,7 +352,7 @@ Partial Class Receipt
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(12, 10)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(0, 12)
+        Me.Label1.Size = New System.Drawing.Size(0, 13)
         Me.Label1.TabIndex = 232
         '
         'LblMode
@@ -367,17 +367,17 @@ Partial Class Receipt
         Me.LblMode.Text = "モード"
         Me.LblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Label2
+        'LblCustomerNo
         '
-        Me.Label2.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.Label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label2.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label2.Location = New System.Drawing.Point(393, 10)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(170, 22)
-        Me.Label2.TabIndex = 307
-        Me.Label2.Text = "客先番号"
-        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LblCustomerNo.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblCustomerNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblCustomerNo.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblCustomerNo.Location = New System.Drawing.Point(393, 10)
+        Me.LblCustomerNo.Name = "LblCustomerNo"
+        Me.LblCustomerNo.Size = New System.Drawing.Size(170, 22)
+        Me.LblCustomerNo.TabIndex = 307
+        Me.LblCustomerNo.Text = "客先番号"
+        Me.LblCustomerNo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'TxtCustomerPO
         '
@@ -394,7 +394,7 @@ Partial Class Receipt
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
-        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.LblCustomerNo)
         Me.Controls.Add(Me.TxtCustomerPO)
         Me.Controls.Add(Me.LblMode)
         Me.Controls.Add(Me.TxtSuffixNo)
@@ -463,6 +463,6 @@ Partial Class Receipt
     Friend WithEvents TxtPurchaseNo As TextBox
     Friend WithEvents Label1 As Label
     Friend WithEvents LblMode As Label
-    Friend WithEvents Label2 As Label
+    Friend WithEvents LblCustomerNo As Label
     Friend WithEvents TxtCustomerPO As TextBox
 End Class

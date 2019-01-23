@@ -78,8 +78,41 @@ Public Class Receipt
     End Sub
 
     Private Sub PurchaseManagement_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If frmC01F10_Login.loginValue.Language = "ENG" Then
+            LblPurchaseNo.Text = "PurchaseOrderNumber"
+            LblCustomerNo.Text = "CustomerNumber"
+            LblPurchaseDate.Text = "PurchaseOrderDate"
+            LblSupplier.Text = "CustomerName"
+            LblPurchase.Text = "PurchaseOrder"
+            LblHistory.Text = "ReceiptHistory"
+            LblAdd.Text = "ThisTimeReceipt"
+            LblReceiptDate.Text = "ReceiptDate"
+            LblRemarks.Text = "Remarks"
+            LblCount1.Text = "Record"
+            LblCount1.Location = New Point(1272, 82)
+            LblCount1.Size = New Size(66, 22)
+            LblCount2.Text = "Record"
+            LblCount2.Location = New Point(1272, 212)
+            LblCount2.Size = New Size(66, 22)
+            LblCount3.Text = "Record"
+            LblCount3.Location = New Point(1272, 343)
+            LblCount3.Size = New Size(66, 22)
+
+            TxtCount1.Location = New Point(1228, 82)
+            TxtCount2.Location = New Point(1228, 212)
+            TxtCount3.Location = New Point(1228, 343)
+            TxtRemarks.Size = New Size(600, 22)
+
+            BtnRegist.Text = "Registration"
+            BtnBack.Text = "Back"
+        End If
         If _status = "VIEW" Then
-            LblMode.Text = "参照モード"
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                LblMode.Text = "ViewMode"
+            Else
+                LblMode.Text = "参照モード"
+            End If
+
             LblCount1.Visible = False
             LblCount2.Visible = False
             LblCount3.Visible = False
@@ -102,7 +135,11 @@ Public Class Receipt
 
             BtnRegist.Visible = False
         Else
-            LblMode.Text = "入庫入力モード"
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                LblMode.Text = "ReceiptInputMode"
+            Else
+                LblMode.Text = "入庫入力モード"
+            End If
         End If
 
         Dim Sql1 As String = ""
@@ -171,16 +208,30 @@ Public Class Receipt
             Dim ds2 As DataSet = _db.selectDB(Sql2, RS, reccnt)
             Dim ds3 As DataSet = _db.selectDB(Sql3, RS, reccnt)
 
-            DgvPurchase.Columns.Add("明細", "明細")
-            DgvPurchase.Columns.Add("メーカー", "メーカー")
-            DgvPurchase.Columns.Add("品名", "品名")
-            DgvPurchase.Columns.Add("型式", "型式")
-            DgvPurchase.Columns.Add("発注数量", "発注数量")
-            DgvPurchase.Columns.Add("単位", "単位")
-            DgvPurchase.Columns.Add("仕入数量", "仕入数量")
-            DgvPurchase.Columns.Add("仕入単価", "仕入単価")
-            DgvPurchase.Columns.Add("仕入金額", "仕入金額")
-            DgvPurchase.Columns.Add("発注残数", "発注残数")
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                DgvPurchase.Columns.Add("明細", "LineItem")
+                DgvPurchase.Columns.Add("メーカー", "Maker")
+                DgvPurchase.Columns.Add("品名", "Item")
+                DgvPurchase.Columns.Add("型式", "Model")
+                DgvPurchase.Columns.Add("発注数量", "PurchaseOrderQuantity")
+                DgvPurchase.Columns.Add("単位", "Unit")
+                DgvPurchase.Columns.Add("仕入数量", "PurchaseQuantity")
+                DgvPurchase.Columns.Add("仕入単価", "PurchasePrice")
+                DgvPurchase.Columns.Add("仕入金額", "PurchaseAmount")
+                DgvPurchase.Columns.Add("発注残数", "PurchaseOrderRemaining")
+            Else
+                DgvPurchase.Columns.Add("明細", "明細")
+                DgvPurchase.Columns.Add("メーカー", "メーカー")
+                DgvPurchase.Columns.Add("品名", "品名")
+                DgvPurchase.Columns.Add("型式", "型式")
+                DgvPurchase.Columns.Add("発注数量", "発注数量")
+                DgvPurchase.Columns.Add("単位", "単位")
+                DgvPurchase.Columns.Add("仕入数量", "仕入数量")
+                DgvPurchase.Columns.Add("仕入単価", "仕入単価")
+                DgvPurchase.Columns.Add("仕入金額", "仕入金額")
+                DgvPurchase.Columns.Add("発注残数", "発注残数")
+            End If
+
 
             DgvPurchase.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             DgvPurchase.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -201,19 +252,34 @@ Public Class Receipt
                 DgvPurchase.Rows(index).Cells(9).Value = ds3.Tables(RS).Rows(index)("発注残数")
             Next
 
-            DgvHistory.Columns.Add("No", "No")
-            DgvHistory.Columns.Add("入庫番号", "入庫番号")
-            DgvHistory.Columns.Add("行番号", "行番号")
-            DgvHistory.Columns.Add("仕入区分", "仕入区分")
-            DgvHistory.Columns.Add("メーカー", "メーカー")
-            DgvHistory.Columns.Add("品名", "品名")
-            DgvHistory.Columns.Add("型式", "型式")
-            DgvHistory.Columns.Add("単位", "単位")
-            DgvHistory.Columns.Add("仕入先", "仕入先")
-            DgvHistory.Columns.Add("仕入値", "仕入値")
-            DgvHistory.Columns.Add("入庫数量", "入庫数量")
-            'DgvHistory.Columns.Add("仕入日", "仕入日")
-            DgvHistory.Columns.Add("備考", "備考")
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                DgvHistory.Columns.Add("No", "No")
+                DgvHistory.Columns.Add("入庫番号", "ReceiptNumber")
+                DgvHistory.Columns.Add("行番号", "LineNumber")
+                DgvHistory.Columns.Add("仕入区分", "PurchaseClassification")
+                DgvHistory.Columns.Add("メーカー", "Maker")
+                DgvHistory.Columns.Add("品名", "Item")
+                DgvHistory.Columns.Add("型式", "Model")
+                DgvHistory.Columns.Add("単位", "Unit")
+                DgvHistory.Columns.Add("仕入先", "SupplierName")
+                DgvHistory.Columns.Add("仕入値", "PurchasePrice")
+                DgvHistory.Columns.Add("入庫数量", "ReceiptQuantity")
+                DgvHistory.Columns.Add("備考", "Remarks")
+            Else
+                DgvHistory.Columns.Add("No", "No")
+                DgvHistory.Columns.Add("入庫番号", "入庫番号")
+                DgvHistory.Columns.Add("行番号", "行番号")
+                DgvHistory.Columns.Add("仕入区分", "仕入区分")
+                DgvHistory.Columns.Add("メーカー", "メーカー")
+                DgvHistory.Columns.Add("品名", "品名")
+                DgvHistory.Columns.Add("型式", "型式")
+                DgvHistory.Columns.Add("単位", "単位")
+                DgvHistory.Columns.Add("仕入先", "仕入先")
+                DgvHistory.Columns.Add("仕入値", "仕入値")
+                DgvHistory.Columns.Add("入庫数量", "入庫数量")
+                DgvHistory.Columns.Add("備考", "備考")
+            End If
+
 
             DgvHistory.Columns(9).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             DgvHistory.Columns(10).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -234,17 +300,32 @@ Public Class Receipt
                 DgvHistory.Rows(index).Cells("備考").Value = ds2.Tables(RS).Rows(index)("備考")
             Next
 
-            DgvAdd.Columns.Add("No", "No")
-            DgvAdd.Columns.Add("行番号", "行番号")
-            DgvAdd.Columns.Add("仕入区分", "仕入区分")
-            DgvAdd.Columns.Add("メーカー", "メーカー")
-            DgvAdd.Columns.Add("品名", "品名")
-            DgvAdd.Columns.Add("型式", "型式")
-            DgvAdd.Columns.Add("単位", "単位")
-            DgvAdd.Columns.Add("仕入先", "仕入先")
-            DgvAdd.Columns.Add("仕入値", "仕入値")
-            DgvAdd.Columns.Add("入庫数量", "入庫数量")
-            DgvAdd.Columns.Add("備考", "備考")
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                DgvAdd.Columns.Add("No", "No")
+                DgvAdd.Columns.Add("行番号", "LineNumber")
+                DgvAdd.Columns.Add("仕入区分", "PurchaseClassification")
+                DgvAdd.Columns.Add("メーカー", "Maker")
+                DgvAdd.Columns.Add("品名", "Item")
+                DgvAdd.Columns.Add("型式", "Model")
+                DgvAdd.Columns.Add("単位", "Unit")
+                DgvAdd.Columns.Add("仕入先", "SupplierName")
+                DgvAdd.Columns.Add("仕入値", "PurchasePrice")
+                DgvAdd.Columns.Add("入庫数量", "ReceiptQuantity")
+                DgvAdd.Columns.Add("備考", "Remarks")
+            Else
+                DgvAdd.Columns.Add("No", "No")
+                DgvAdd.Columns.Add("行番号", "行番号")
+                DgvAdd.Columns.Add("仕入区分", "仕入区分")
+                DgvAdd.Columns.Add("メーカー", "メーカー")
+                DgvAdd.Columns.Add("品名", "品名")
+                DgvAdd.Columns.Add("型式", "型式")
+                DgvAdd.Columns.Add("単位", "単位")
+                DgvAdd.Columns.Add("仕入先", "仕入先")
+                DgvAdd.Columns.Add("仕入値", "仕入値")
+                DgvAdd.Columns.Add("入庫数量", "入庫数量")
+                DgvAdd.Columns.Add("備考", "備考")
+            End If
+
 
             DgvAdd.Columns("仕入値").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             DgvAdd.Columns("入庫数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
