@@ -109,6 +109,28 @@ Public Class StockList
     End Sub
     Private Sub ClosingLog_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         StockListLoad()
+        If frmC01F10_Login.loginValue.Language = "ENG" Then
+            LblConditions.Text = "ExtractionCondition"
+            Label1.Text = "Maker"
+            Label8.Text = "Item"
+            Label2.Text = "Model"
+
+            BtnSearch.Text = "Search"
+            BtnBack.Text = "Back"
+
+            DgvStocklist.Columns("年月").HeaderText = "Date"
+            DgvStocklist.Columns("メーカー").HeaderText = "Maker"
+            DgvStocklist.Columns("品名").HeaderText = "Item"
+            DgvStocklist.Columns("型式").HeaderText = "Model"
+            DgvStocklist.Columns("前月末数量").HeaderText = "Quantity(LastMonthEnd)"
+            DgvStocklist.Columns("前月末単価").HeaderText = "Price(LastMonthEnd)"
+            DgvStocklist.Columns("前月末間接費").HeaderText = "OverHead(LastMonthEnd)"
+            DgvStocklist.Columns("今月末数量").HeaderText = "Quantity(ThisMonth)"
+            DgvStocklist.Columns("今月入庫数").HeaderText = "ReceiptQuantity(ThisMonth)"
+            DgvStocklist.Columns("今月出庫数").HeaderText = "GoodsIssueQuantity(ThisMonth)"
+            DgvStocklist.Columns("今月単価").HeaderText = "Price(ThisMonth)"
+            DgvStocklist.Columns("今月間接費").HeaderText = "Overhead(ThisMonth)"
+        End If
     End Sub
 
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click

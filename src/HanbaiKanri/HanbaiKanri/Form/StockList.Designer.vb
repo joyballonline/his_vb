@@ -51,9 +51,9 @@ Partial Class StockList
         'BtnBack
         '
         Me.BtnBack.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.BtnBack.Location = New System.Drawing.Point(1174, 512)
+        Me.BtnBack.Location = New System.Drawing.Point(1174, 555)
         Me.BtnBack.Name = "BtnBack"
-        Me.BtnBack.Size = New System.Drawing.Size(165, 40)
+        Me.BtnBack.Size = New System.Drawing.Size(165, 43)
         Me.BtnBack.TabIndex = 6
         Me.BtnBack.Text = "戻る"
         Me.BtnBack.UseVisualStyleBackColor = True
@@ -63,12 +63,12 @@ Partial Class StockList
         Me.DgvStocklist.AllowUserToAddRows = False
         Me.DgvStocklist.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvStocklist.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.年月, Me.メーカー, Me.品名, Me.型式, Me.前月末数量, Me.前月末単価, Me.前月末間接費, Me.今月末数量, Me.今月入庫数, Me.今月出庫数, Me.今月単価, Me.今月間接費})
-        Me.DgvStocklist.Location = New System.Drawing.Point(12, 172)
+        Me.DgvStocklist.Location = New System.Drawing.Point(12, 186)
         Me.DgvStocklist.Name = "DgvStocklist"
         Me.DgvStocklist.RowHeadersVisible = False
         Me.DgvStocklist.RowTemplate.Height = 21
         Me.DgvStocklist.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvStocklist.Size = New System.Drawing.Size(1325, 334)
+        Me.DgvStocklist.Size = New System.Drawing.Size(1325, 362)
         Me.DgvStocklist.TabIndex = 5
         '
         '年月
@@ -136,21 +136,22 @@ Partial Class StockList
         Me.LblMode.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblMode.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblMode.Location = New System.Drawing.Point(1174, 8)
+        Me.LblMode.Location = New System.Drawing.Point(1174, 9)
         Me.LblMode.Name = "LblMode"
-        Me.LblMode.Size = New System.Drawing.Size(165, 22)
+        Me.LblMode.Size = New System.Drawing.Size(165, 24)
         Me.LblMode.TabIndex = 331
         Me.LblMode.Text = "モード"
         Me.LblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LblMode.Visible = False
         '
         'Label8
         '
         Me.Label8.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.Label8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label8.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label8.Location = New System.Drawing.Point(14, 66)
+        Me.Label8.Location = New System.Drawing.Point(14, 72)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(170, 22)
+        Me.Label8.Size = New System.Drawing.Size(170, 24)
         Me.Label8.TabIndex = 330
         Me.Label8.Text = "品名"
         Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -158,7 +159,7 @@ Partial Class StockList
         'TxtName
         '
         Me.TxtName.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtName.Location = New System.Drawing.Point(190, 67)
+        Me.TxtName.Location = New System.Drawing.Point(190, 73)
         Me.TxtName.Name = "TxtName"
         Me.TxtName.Size = New System.Drawing.Size(200, 22)
         Me.TxtName.TabIndex = 2
@@ -168,9 +169,9 @@ Partial Class StockList
         Me.Label1.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.Label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label1.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label1.Location = New System.Drawing.Point(14, 39)
+        Me.Label1.Location = New System.Drawing.Point(14, 42)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(170, 22)
+        Me.Label1.Size = New System.Drawing.Size(170, 24)
         Me.Label1.TabIndex = 328
         Me.Label1.Text = "メーカー"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -179,7 +180,7 @@ Partial Class StockList
         '
         Me.LblConditions.AutoSize = True
         Me.LblConditions.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblConditions.Location = New System.Drawing.Point(11, 12)
+        Me.LblConditions.Location = New System.Drawing.Point(11, 13)
         Me.LblConditions.Name = "LblConditions"
         Me.LblConditions.Size = New System.Drawing.Size(87, 15)
         Me.LblConditions.TabIndex = 327
@@ -188,7 +189,7 @@ Partial Class StockList
         'TxtMaker
         '
         Me.TxtMaker.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtMaker.Location = New System.Drawing.Point(190, 39)
+        Me.TxtMaker.Location = New System.Drawing.Point(190, 42)
         Me.TxtMaker.Name = "TxtMaker"
         Me.TxtMaker.Size = New System.Drawing.Size(200, 22)
         Me.TxtMaker.TabIndex = 1
@@ -196,9 +197,9 @@ Partial Class StockList
         'BtnSearch
         '
         Me.BtnSearch.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.BtnSearch.Location = New System.Drawing.Point(1174, 38)
+        Me.BtnSearch.Location = New System.Drawing.Point(1174, 41)
         Me.BtnSearch.Name = "BtnSearch"
-        Me.BtnSearch.Size = New System.Drawing.Size(165, 40)
+        Me.BtnSearch.Size = New System.Drawing.Size(165, 43)
         Me.BtnSearch.TabIndex = 4
         Me.BtnSearch.Text = "検索"
         Me.BtnSearch.UseVisualStyleBackColor = True
@@ -208,9 +209,9 @@ Partial Class StockList
         Me.Label2.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.Label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label2.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label2.Location = New System.Drawing.Point(14, 94)
+        Me.Label2.Location = New System.Drawing.Point(14, 102)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(170, 22)
+        Me.Label2.Size = New System.Drawing.Size(170, 24)
         Me.Label2.TabIndex = 336
         Me.Label2.Text = "型式"
         Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -218,16 +219,16 @@ Partial Class StockList
         'TxtModel
         '
         Me.TxtModel.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtModel.Location = New System.Drawing.Point(190, 95)
+        Me.TxtModel.Location = New System.Drawing.Point(190, 103)
         Me.TxtModel.Name = "TxtModel"
         Me.TxtModel.Size = New System.Drawing.Size(200, 22)
         Me.TxtModel.TabIndex = 3
         '
         'StockList
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.ClientSize = New System.Drawing.Size(1350, 608)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.TxtModel)
         Me.Controls.Add(Me.BtnBack)
