@@ -909,24 +909,43 @@ Public Class GoodsIssueList
         Sql += "更新日"
         Sql += ", "
         Sql += "更新者"
-        Dim result As DialogResult = MessageBox.Show("出庫を取り消しますか？",
+        If frmC01F10_Login.loginValue.Language = "ENG" Then
+            Dim result As DialogResult = MessageBox.Show("Would you like to cancel the goods issue？",
+                                             "Question",
+                                             MessageBoxButtons.YesNoCancel,
+                                             MessageBoxIcon.Exclamation,
+                                             MessageBoxDefaultButton.Button2)
+
+            If result = DialogResult.Yes Then
+                _db.executeDB(Sql)
+                DgvCymnhd.Rows.Clear()
+                DgvCymnhd.Columns.Clear()
+                Dim Status As String = "EXCLUSION"
+                OrderListLoad(Status)
+            ElseIf result = DialogResult.No Then
+
+            ElseIf result = DialogResult.Cancel Then
+
+            End If
+        Else
+            Dim result As DialogResult = MessageBox.Show("出庫を取り消しますか？",
                                              "質問",
                                              MessageBoxButtons.YesNoCancel,
                                              MessageBoxIcon.Exclamation,
                                              MessageBoxDefaultButton.Button2)
 
-        If result = DialogResult.Yes Then
-            _db.executeDB(Sql)
-            DgvCymnhd.Rows.Clear()
-            DgvCymnhd.Columns.Clear()
-            Dim Status As String = "EXCLUSION"
-            OrderListLoad(Status)
-        ElseIf result = DialogResult.No Then
+            If result = DialogResult.Yes Then
+                _db.executeDB(Sql)
+                DgvCymnhd.Rows.Clear()
+                DgvCymnhd.Columns.Clear()
+                Dim Status As String = "EXCLUSION"
+                OrderListLoad(Status)
+            ElseIf result = DialogResult.No Then
 
-        ElseIf result = DialogResult.Cancel Then
+            ElseIf result = DialogResult.Cancel Then
 
+            End If
         End If
-
     End Sub
 
     Private Sub ChkCancelData_CheckedChanged(sender As Object, e As EventArgs) Handles ChkCancelData.CheckedChanged

@@ -104,6 +104,19 @@ Public Class ClosingLog
 
     Private Sub ClosingLog_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ClosingLogLoad()
+        If frmC01F10_Login.loginValue.Language = "ENG" Then
+            LblClosingDate.Text = "ClosingDate"
+            LblPerson.Text = "Changer"
+            BtnClosing.Text = "Closing"
+            BtnBack.Text = "Back"
+            BtnSearch.Text = "Search"
+
+            DgvClosingLog.Columns("締処理日時").HeaderText = "ClosingDate"
+            DgvClosingLog.Columns("前回締日").HeaderText = "LastClosingDate"
+            DgvClosingLog.Columns("今回締日").HeaderText = "ThisClosingDate"
+            DgvClosingLog.Columns("次回締日").HeaderText = "NextClosingDate"
+            DgvClosingLog.Columns("担当者").HeaderText = "Person"
+        End If
     End Sub
 
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
