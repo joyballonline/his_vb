@@ -89,20 +89,37 @@ Public Class AccountsPayableList
 
                 Dim reccnt As Integer = 0
                 ds = _db.selectDB(Sql, RS, reccnt)
-                DgvBilling.Columns.Add("買掛番号", "買掛番号")
-                DgvBilling.Columns.Add("買掛区分", "買掛区分")
-                DgvBilling.Columns.Add("買掛日", "買掛日")
-                DgvBilling.Columns.Add("客先番号", "客先番号")
-                DgvBilling.Columns.Add("発注番号", "発注番号")
-                DgvBilling.Columns.Add("発注番号枝番", "発注番号枝番")
-                DgvBilling.Columns.Add("仕入先コード", "仕入先コード")
-                DgvBilling.Columns.Add("仕入先名", "仕入先名")
-                DgvBilling.Columns.Add("買掛金額計", "買掛金額計")
-                DgvBilling.Columns.Add("買掛残高", "買掛残高")
-                DgvBilling.Columns.Add("備考1", "備考1")
-                DgvBilling.Columns.Add("備考2", "備考2")
-                DgvBilling.Columns.Add("登録日", "登録日")
-                DgvBilling.Columns.Add("更新者", "更新者")
+                If frmC01F10_Login.loginValue.Language = "ENG" Then
+                    DgvBilling.Columns.Add("買掛番号", "AccountsPayableNumber")
+                    DgvBilling.Columns.Add("買掛区分", "AccountsPayableClassification")
+                    DgvBilling.Columns.Add("買掛日", "AccountsPayableDate")
+                    DgvBilling.Columns.Add("客先番号", "CustomerNumber")
+                    DgvBilling.Columns.Add("発注番号", "PurchaseOrderNumber")
+                    DgvBilling.Columns.Add("発注番号枝番", "BranchNumber")
+                    DgvBilling.Columns.Add("仕入先コード", "SupplierCode")
+                    DgvBilling.Columns.Add("仕入先名", "SupplierName")
+                    DgvBilling.Columns.Add("買掛金額計", "TotalAccountsPayableAmount")
+                    DgvBilling.Columns.Add("買掛残高", "AccountsPayableBalance")
+                    DgvBilling.Columns.Add("備考1", "Remarks1")
+                    DgvBilling.Columns.Add("備考2", "Remarks2")
+                    DgvBilling.Columns.Add("登録日", "Registration")
+                    DgvBilling.Columns.Add("更新者", "changer")
+                Else
+                    DgvBilling.Columns.Add("買掛番号", "買掛番号")
+                    DgvBilling.Columns.Add("買掛区分", "買掛区分")
+                    DgvBilling.Columns.Add("買掛日", "買掛日")
+                    DgvBilling.Columns.Add("客先番号", "客先番号")
+                    DgvBilling.Columns.Add("発注番号", "発注番号")
+                    DgvBilling.Columns.Add("発注番号枝番", "発注番号枝番")
+                    DgvBilling.Columns.Add("仕入先コード", "仕入先コード")
+                    DgvBilling.Columns.Add("仕入先名", "仕入先名")
+                    DgvBilling.Columns.Add("買掛金額計", "買掛金額計")
+                    DgvBilling.Columns.Add("買掛残高", "買掛残高")
+                    DgvBilling.Columns.Add("備考1", "備考1")
+                    DgvBilling.Columns.Add("備考2", "備考2")
+                    DgvBilling.Columns.Add("登録日", "登録日")
+                    DgvBilling.Columns.Add("更新者", "更新者")
+                End If
 
                 DgvBilling.Columns("買掛金額計").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 DgvBilling.Columns("買掛残高").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -148,20 +165,37 @@ Public Class AccountsPayableList
 
                 Dim reccnt As Integer = 0
                 ds = _db.selectDB(Sql, RS, reccnt)
-                DgvBilling.Columns.Add("買掛番号", "買掛番号")
-                DgvBilling.Columns.Add("買掛区分", "買掛区分")
-                DgvBilling.Columns.Add("買掛日", "買掛日")
-                DgvBilling.Columns.Add("客先番号", "客先番号")
-                DgvBilling.Columns.Add("発注番号", "発注番号")
-                DgvBilling.Columns.Add("発注番号枝番", "発注番号枝番")
-                DgvBilling.Columns.Add("仕入先コード", "仕入先コード")
-                DgvBilling.Columns.Add("仕入先名", "仕入先名")
-                DgvBilling.Columns.Add("買掛金額計", "買掛金額計")
-                DgvBilling.Columns.Add("買掛残高", "買掛残高")
-                DgvBilling.Columns.Add("備考1", "備考1")
-                DgvBilling.Columns.Add("備考2", "備考2")
-                DgvBilling.Columns.Add("登録日", "登録日")
-                DgvBilling.Columns.Add("更新者", "更新者")
+                If frmC01F10_Login.loginValue.Language = "ENG" Then
+                    DgvBilling.Columns.Add("買掛番号", "AccountsPayableNumber")
+                    DgvBilling.Columns.Add("買掛区分", "AccountsPayableClassification")
+                    DgvBilling.Columns.Add("買掛日", "AccountsPayableDate")
+                    DgvBilling.Columns.Add("客先番号", "CustomerNumber")
+                    DgvBilling.Columns.Add("発注番号", "PurchaseOrderNumber")
+                    DgvBilling.Columns.Add("発注番号枝番", "BranchNumber")
+                    DgvBilling.Columns.Add("仕入先コード", "SupplierCode")
+                    DgvBilling.Columns.Add("仕入先名", "SupplierName")
+                    DgvBilling.Columns.Add("買掛金額計", "TotalAccountsPayableAmount")
+                    DgvBilling.Columns.Add("買掛残高", "AccountsPayableBalance")
+                    DgvBilling.Columns.Add("備考1", "Remarks1")
+                    DgvBilling.Columns.Add("備考2", "Remarks2")
+                    DgvBilling.Columns.Add("登録日", "Registration")
+                    DgvBilling.Columns.Add("更新者", "changer")
+                Else
+                    DgvBilling.Columns.Add("買掛番号", "買掛番号")
+                    DgvBilling.Columns.Add("買掛区分", "買掛区分")
+                    DgvBilling.Columns.Add("買掛日", "買掛日")
+                    DgvBilling.Columns.Add("客先番号", "客先番号")
+                    DgvBilling.Columns.Add("発注番号", "発注番号")
+                    DgvBilling.Columns.Add("発注番号枝番", "発注番号枝番")
+                    DgvBilling.Columns.Add("仕入先コード", "仕入先コード")
+                    DgvBilling.Columns.Add("仕入先名", "仕入先名")
+                    DgvBilling.Columns.Add("買掛金額計", "買掛金額計")
+                    DgvBilling.Columns.Add("買掛残高", "買掛残高")
+                    DgvBilling.Columns.Add("備考1", "備考1")
+                    DgvBilling.Columns.Add("備考2", "備考2")
+                    DgvBilling.Columns.Add("登録日", "登録日")
+                    DgvBilling.Columns.Add("更新者", "更新者")
+                End If
 
                 DgvBilling.Columns("買掛金額計").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 DgvBilling.Columns("買掛残高").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -200,17 +234,42 @@ Public Class AccountsPayableList
     End Sub
     Private Sub MstHanyoue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If _status = "VIEW" Then
-            LblMode.Text = "参照モード"
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                LblMode.Text = "ViewMode"
+            Else
+                LblMode.Text = "参照モード"
+            End If
             'BtnBillingView.Visible = True
             'BtnBillingView.Location = New Point(997, 677)
         ElseIf _status = "CANCEL" Then
-            LblMode.Text = "取消モード"
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                LblMode.Text = "CancelMode"
+            Else
+                LblMode.Text = "取消モード"
+            End If
+
             BtnAPCancel.Visible = True
             BtnAPCancel.Location = New Point(997, 509)
         End If
 
         Dim Status As String = "EXCLUSION"
         PurchaseListLoad(Status)
+        If frmC01F10_Login.loginValue.Language = "ENG" Then
+            LblConditions.Text = "ExtractionCondition"
+            Label1.Text = "SupplierName"
+            Label4.Text = "SupplierCode"
+            Label8.Text = "AccountsPayableDate"
+            Label7.Text = "AccountsPayableNumber"
+            Label11.Text = "CustomerNumber"
+            Label10.Text = "DisplayFormat"
+
+            ChkCancelData.Text = "IncludeCancelData"
+
+            BtnAPSearch.Text = "Search"
+            BtnAPCancel.Text = "CancelOfBilling"
+            BtnAPView.Text = "BillingView"
+            BtnBack.Text = "Back"
+        End If
     End Sub
 
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
@@ -383,7 +442,7 @@ Public Class AccountsPayableList
     '    End If
     'End Sub
 
-    Private Sub BtnPurchaseSearch_Click(sender As Object, e As EventArgs) Handles BtnPurchaseSearch.Click
+    Private Sub BtnPurchaseSearch_Click(sender As Object, e As EventArgs) Handles BtnAPSearch.Click
         DgvBilling.Rows.Clear()
         DgvBilling.Columns.Clear()
 
@@ -586,20 +645,38 @@ Public Class AccountsPayableList
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-            DgvBilling.Columns.Add("買掛番号", "買掛番号")
-            DgvBilling.Columns.Add("買掛区分", "買掛区分")
-            DgvBilling.Columns.Add("買掛日", "買掛日")
-            DgvBilling.Columns.Add("客先番号", "客先番号")
-            DgvBilling.Columns.Add("発注番号", "発注番号")
-            DgvBilling.Columns.Add("発注番号枝番", "発注番号枝番")
-            DgvBilling.Columns.Add("仕入先コード", "仕入先コード")
-            DgvBilling.Columns.Add("仕入先名", "仕入先名")
-            DgvBilling.Columns.Add("買掛金額計", "買掛金額計")
-            DgvBilling.Columns.Add("買掛残高", "買掛残高")
-            DgvBilling.Columns.Add("備考1", "備考1")
-            DgvBilling.Columns.Add("備考2", "備考2")
-            DgvBilling.Columns.Add("登録日", "登録日")
-            DgvBilling.Columns.Add("更新者", "更新者")
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                DgvBilling.Columns.Add("買掛番号", "AccountsPayableNumber")
+                DgvBilling.Columns.Add("買掛区分", "AccountsPayableClassification")
+                DgvBilling.Columns.Add("買掛日", "AccountsPayableDate")
+                DgvBilling.Columns.Add("客先番号", "CustomerNumber")
+                DgvBilling.Columns.Add("発注番号", "PurchaseOrderNumber")
+                DgvBilling.Columns.Add("発注番号枝番", "BranchNumber")
+                DgvBilling.Columns.Add("仕入先コード", "SupplierCode")
+                DgvBilling.Columns.Add("仕入先名", "SupplierName")
+                DgvBilling.Columns.Add("買掛金額計", "TotalAccountsPayableAmount")
+                DgvBilling.Columns.Add("買掛残高", "AccountsPayableBalance")
+                DgvBilling.Columns.Add("備考1", "Remarks1")
+                DgvBilling.Columns.Add("備考2", "Remarks2")
+                DgvBilling.Columns.Add("登録日", "Registration")
+                DgvBilling.Columns.Add("更新者", "changer")
+            Else
+                DgvBilling.Columns.Add("買掛番号", "買掛番号")
+                DgvBilling.Columns.Add("買掛区分", "買掛区分")
+                DgvBilling.Columns.Add("買掛日", "買掛日")
+                DgvBilling.Columns.Add("客先番号", "客先番号")
+                DgvBilling.Columns.Add("発注番号", "発注番号")
+                DgvBilling.Columns.Add("発注番号枝番", "発注番号枝番")
+                DgvBilling.Columns.Add("仕入先コード", "仕入先コード")
+                DgvBilling.Columns.Add("仕入先名", "仕入先名")
+                DgvBilling.Columns.Add("買掛金額計", "買掛金額計")
+                DgvBilling.Columns.Add("買掛残高", "買掛残高")
+                DgvBilling.Columns.Add("備考1", "備考1")
+                DgvBilling.Columns.Add("備考2", "備考2")
+                DgvBilling.Columns.Add("登録日", "登録日")
+                DgvBilling.Columns.Add("更新者", "更新者")
+            End If
+
 
             DgvBilling.Columns("買掛金額計").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             DgvBilling.Columns("買掛残高").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -720,22 +797,44 @@ Public Class AccountsPayableList
         Sql1 += "登録日"
         Sql1 += ", "
         Sql1 += "更新者"
-        Dim result As DialogResult = MessageBox.Show("買掛を取り消しますか？",
+
+        If frmC01F10_Login.loginValue.Language = "ENG" Then
+            Dim result As DialogResult = MessageBox.Show("Would you like to cancel the accounts payable?",
+                                             "Question",
+                                             MessageBoxButtons.YesNoCancel,
+                                             MessageBoxIcon.Exclamation,
+                                             MessageBoxDefaultButton.Button2)
+
+            If result = DialogResult.Yes Then
+                _db.executeDB(Sql1)
+                DgvBilling.Rows.Clear()
+                DgvBilling.Columns.Clear()
+                Dim Status As String = "EXCLUSION"
+                PurchaseListLoad(Status)
+            ElseIf result = DialogResult.No Then
+
+            ElseIf result = DialogResult.Cancel Then
+
+            End If
+        Else
+            Dim result As DialogResult = MessageBox.Show("買掛を取り消しますか？",
                                              "質問",
                                              MessageBoxButtons.YesNoCancel,
                                              MessageBoxIcon.Exclamation,
                                              MessageBoxDefaultButton.Button2)
 
-        If result = DialogResult.Yes Then
-            _db.executeDB(Sql1)
-            DgvBilling.Rows.Clear()
-            DgvBilling.Columns.Clear()
-            Dim Status As String = "EXCLUSION"
-            PurchaseListLoad(Status)
-        ElseIf result = DialogResult.No Then
+            If result = DialogResult.Yes Then
+                _db.executeDB(Sql1)
+                DgvBilling.Rows.Clear()
+                DgvBilling.Columns.Clear()
+                Dim Status As String = "EXCLUSION"
+                PurchaseListLoad(Status)
+            ElseIf result = DialogResult.No Then
 
-        ElseIf result = DialogResult.Cancel Then
+            ElseIf result = DialogResult.Cancel Then
 
+            End If
         End If
+
     End Sub
 End Class

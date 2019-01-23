@@ -42,7 +42,7 @@ Partial Class AccountsPayableList
         Me.Label1 = New System.Windows.Forms.Label()
         Me.LblConditions = New System.Windows.Forms.Label()
         Me.TxtSupplierName = New System.Windows.Forms.TextBox()
-        Me.BtnPurchaseSearch = New System.Windows.Forms.Button()
+        Me.BtnAPSearch = New System.Windows.Forms.Button()
         Me.BtnBack = New System.Windows.Forms.Button()
         Me.DgvBilling = New System.Windows.Forms.DataGridView()
         Me.LblMode = New System.Windows.Forms.Label()
@@ -254,15 +254,15 @@ Partial Class AccountsPayableList
         Me.TxtSupplierName.Size = New System.Drawing.Size(350, 22)
         Me.TxtSupplierName.TabIndex = 1
         '
-        'BtnPurchaseSearch
+        'BtnAPSearch
         '
-        Me.BtnPurchaseSearch.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.BtnPurchaseSearch.Location = New System.Drawing.Point(1173, 41)
-        Me.BtnPurchaseSearch.Name = "BtnPurchaseSearch"
-        Me.BtnPurchaseSearch.Size = New System.Drawing.Size(166, 40)
-        Me.BtnPurchaseSearch.TabIndex = 8
-        Me.BtnPurchaseSearch.Text = "検索"
-        Me.BtnPurchaseSearch.UseVisualStyleBackColor = True
+        Me.BtnAPSearch.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.BtnAPSearch.Location = New System.Drawing.Point(1173, 41)
+        Me.BtnAPSearch.Name = "BtnAPSearch"
+        Me.BtnAPSearch.Size = New System.Drawing.Size(166, 40)
+        Me.BtnAPSearch.TabIndex = 8
+        Me.BtnAPSearch.Text = "検索"
+        Me.BtnAPSearch.UseVisualStyleBackColor = True
         '
         'BtnBack
         '
@@ -345,7 +345,7 @@ Partial Class AccountsPayableList
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.LblConditions)
         Me.Controls.Add(Me.TxtSupplierName)
-        Me.Controls.Add(Me.BtnPurchaseSearch)
+        Me.Controls.Add(Me.BtnAPSearch)
         Me.Controls.Add(Me.BtnBack)
         Me.Controls.Add(Me.DgvBilling)
         Me.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
@@ -380,7 +380,7 @@ Partial Class AccountsPayableList
     Friend WithEvents Label1 As Label
     Friend WithEvents LblConditions As Label
     Friend WithEvents TxtSupplierName As TextBox
-    Friend WithEvents BtnPurchaseSearch As Button
+    Friend WithEvents BtnAPSearch As Button
     Friend WithEvents BtnBack As Button
     Friend WithEvents DgvBilling As DataGridView
     Friend WithEvents LblMode As Label

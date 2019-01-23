@@ -27,9 +27,9 @@ Partial Class MakerSearch
         Me.LbItem = New System.Windows.Forms.ListBox()
         Me.LbModel = New System.Windows.Forms.ListBox()
         Me.BtnBack = New System.Windows.Forms.Button()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
+        Me.LblMaker = New System.Windows.Forms.Label()
+        Me.LblItem = New System.Windows.Forms.Label()
+        Me.LblModel = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'BtnSelect
@@ -45,28 +45,25 @@ Partial Class MakerSearch
         'LbMaker
         '
         Me.LbMaker.FormattingEnabled = True
-        Me.LbMaker.ItemHeight = 12
         Me.LbMaker.Location = New System.Drawing.Point(12, 27)
         Me.LbMaker.Name = "LbMaker"
-        Me.LbMaker.Size = New System.Drawing.Size(200, 364)
+        Me.LbMaker.Size = New System.Drawing.Size(200, 355)
         Me.LbMaker.TabIndex = 1
         '
         'LbItem
         '
         Me.LbItem.FormattingEnabled = True
-        Me.LbItem.ItemHeight = 12
         Me.LbItem.Location = New System.Drawing.Point(218, 27)
         Me.LbItem.Name = "LbItem"
-        Me.LbItem.Size = New System.Drawing.Size(200, 364)
+        Me.LbItem.Size = New System.Drawing.Size(200, 355)
         Me.LbItem.TabIndex = 2
         '
         'LbModel
         '
         Me.LbModel.FormattingEnabled = True
-        Me.LbModel.ItemHeight = 12
         Me.LbModel.Location = New System.Drawing.Point(424, 27)
         Me.LbModel.Name = "LbModel"
-        Me.LbModel.Size = New System.Drawing.Size(200, 364)
+        Me.LbModel.Size = New System.Drawing.Size(200, 355)
         Me.LbModel.TabIndex = 3
         '
         'BtnBack
@@ -79,44 +76,44 @@ Partial Class MakerSearch
         Me.BtnBack.Text = "戻る"
         Me.BtnBack.UseVisualStyleBackColor = True
         '
-        'Label2
+        'LblMaker
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label2.Location = New System.Drawing.Point(9, 9)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(52, 15)
-        Me.Label2.TabIndex = 27
-        Me.Label2.Text = "メーカー"
-        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LblMaker.AutoSize = True
+        Me.LblMaker.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblMaker.Location = New System.Drawing.Point(9, 7)
+        Me.LblMaker.Name = "LblMaker"
+        Me.LblMaker.Size = New System.Drawing.Size(52, 15)
+        Me.LblMaker.TabIndex = 27
+        Me.LblMaker.Text = "メーカー"
+        Me.LblMaker.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Label1
+        'LblItem
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label1.Location = New System.Drawing.Point(215, 9)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(37, 15)
-        Me.Label1.TabIndex = 28
-        Me.Label1.Text = "品名"
+        Me.LblItem.AutoSize = True
+        Me.LblItem.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblItem.Location = New System.Drawing.Point(215, 7)
+        Me.LblItem.Name = "LblItem"
+        Me.LblItem.Size = New System.Drawing.Size(37, 15)
+        Me.LblItem.TabIndex = 28
+        Me.LblItem.Text = "品名"
         '
-        'Label3
+        'LblModel
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label3.Location = New System.Drawing.Point(421, 9)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(37, 15)
-        Me.Label3.TabIndex = 29
-        Me.Label3.Text = "型式"
+        Me.LblModel.AutoSize = True
+        Me.LblModel.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblModel.Location = New System.Drawing.Point(421, 7)
+        Me.LblModel.Name = "LblModel"
+        Me.LblModel.Size = New System.Drawing.Size(37, 15)
+        Me.LblModel.TabIndex = 29
+        Me.LblModel.Text = "型式"
         '
         'MakerSearch
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(636, 448)
-        Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.LblModel)
+        Me.Controls.Add(Me.LblItem)
+        Me.Controls.Add(Me.LblMaker)
         Me.Controls.Add(Me.BtnBack)
         Me.Controls.Add(Me.LbModel)
         Me.Controls.Add(Me.LbItem)
@@ -134,7 +131,7 @@ Partial Class MakerSearch
     Friend WithEvents LbItem As ListBox
     Friend WithEvents LbModel As ListBox
     Friend WithEvents BtnBack As Button
-    Friend WithEvents Label2 As Label
-    Friend WithEvents Label1 As Label
-    Friend WithEvents Label3 As Label
+    Friend WithEvents LblMaker As Label
+    Friend WithEvents LblItem As Label
+    Friend WithEvents LblModel As Label
 End Class

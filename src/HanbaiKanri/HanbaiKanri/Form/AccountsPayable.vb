@@ -102,14 +102,79 @@ Public Class AccountsPayable
         DgvAdd.Columns.Insert(1, column)
 
         BillLoad()
+        If frmC01F10_Login.loginValue.Language = "ENG" Then
+            LblAccountsPayableDate.Text = "AccountsPayableDate"
+            LblAccountsPayableDate.Location = New Point(187, 379)
+            LblAccountsPayableDate.Size = New Size(205, 22)
+            DtpAPDate.Location = New Point(398, 379)
+            LblNo1.Text = "Record"
+            LblNo1.Location = New Point(1272, 111)
+            LblNo1.Size = New Size(66, 22)
+            LblNo2.Text = "Record"
+            LblNo2.Location = New Point(1272, 245)
+            LblNo2.Size = New Size(66, 22)
+            LblNo3.Text = "Record"
+            LblNo3.Location = New Point(1272, 387)
+            LblNo3.Size = New Size(66, 22)
+            LblRemarks1.Text = "Remarks1"
+            LblRemarks2.Text = "Remarks2"
+            LblPurchaseOrder.Text = "PurchaseOrderDetails"
+            LblHistory.Text = "AccountPayableHistory"
+            LblAdd.Text = "ThisTimeAccountPayable"
+
+            TxtCount1.Location = New Point(1228, 111)
+            TxtCount2.Location = New Point(1228, 245)
+            TxtCount3.Location = New Point(1228, 387)
+
+            BtnRegist.Text = "Registration"
+            BtnBack.Text = "Back"
+
+            DgvCymn.Columns("発注番号").HeaderText = "PurchaseOrderNumber"
+            DgvCymn.Columns("発注日").HeaderText = "PurchaseOrderDate"
+            DgvCymn.Columns("仕入先").HeaderText = "SupplierName"
+            DgvCymn.Columns("客先番号").HeaderText = "CustomerNumber"
+            DgvCymn.Columns("発注金額").HeaderText = "PurchaseOrderAmount"
+            DgvCymn.Columns("買掛金額計").HeaderText = "TotalAccountsPayableAmount"
+            DgvCymn.Columns("買掛残高").HeaderText = "AccountsPayableBalance"
+
+            DgvCymndt.Columns("明細").HeaderText = "LineItem"
+            DgvCymndt.Columns("メーカー").HeaderText = "Maker"
+            DgvCymndt.Columns("品名").HeaderText = "Item"
+            DgvCymndt.Columns("型式").HeaderText = "Model"
+            DgvCymndt.Columns("発注個数").HeaderText = "PurchaseOrderQuantity"
+            DgvCymndt.Columns("単位").HeaderText = "Unit"
+            DgvCymndt.Columns("仕入数量").HeaderText = "PurchaseQuantity"
+            DgvCymndt.Columns("仕入単価").HeaderText = "PurchasePrice"
+            DgvCymndt.Columns("仕入金額").HeaderText = "PurchaseAmount"
+
+            DgvHistory.Columns("買掛番号").HeaderText = "AccountsPayableNumber"
+            DgvHistory.Columns("買掛日").HeaderText = "AccountsPayableDate"
+            DgvHistory.Columns("買掛区分").HeaderText = "AccountsPayableClassification"
+            DgvHistory.Columns("支払先").HeaderText = "PaymentDestination"
+            DgvHistory.Columns("買掛金額").HeaderText = "TotalAccountsPayableAmount"
+            DgvHistory.Columns("備考1").HeaderText = "Remarks1"
+            DgvHistory.Columns("備考2").HeaderText = "Remarks2"
+
+            DgvAdd.Columns("買掛区分").HeaderText = "AccountsPayableClassification"
+            DgvAdd.Columns("今回支払先").HeaderText = "PaymentDestination"
+            DgvAdd.Columns("今回買掛金額計").HeaderText = "TotalAccountsPayableAmount"
+            DgvAdd.Columns("今回備考1").HeaderText = "Remarks1"
+            DgvAdd.Columns("今回備考2").HeaderText = "Remarks2"
+
+        End If
 
         If _status = "VIEW" Then
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                LblMode.Text = "ViewMode"
+            Else
+                LblMode.Text = "参照モード"
+            End If
             LblNo1.Visible = False
             LblNo2.Visible = False
             LblNo2.Visible = False
-            LblCymndt.Visible = False
+            LblPurchaseOrder.Visible = False
             LblAdd.Visible = False
-            LblBillingDate.Visible = False
+            LblAccountsPayableDate.Visible = False
             DtpAPDate.Visible = False
             TxtCount1.Visible = False
             TxtCount2.Visible = False
@@ -124,6 +189,12 @@ Public Class AccountsPayable
             DgvHistory.Size = New Point(1326, 566)
 
             BtnRegist.Visible = False
+        Else
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                LblMode.Text = "AccountsPayableInputMode"
+            Else
+                LblMode.Text = "買掛入力モード"
+            End If
         End If
 
     End Sub
