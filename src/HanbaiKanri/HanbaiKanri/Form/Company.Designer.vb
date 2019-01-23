@@ -77,6 +77,9 @@ Partial Class Company
         Me.Label23 = New System.Windows.Forms.Label()
         Me.Label25 = New System.Windows.Forms.Label()
         Me.Label26 = New System.Windows.Forms.Label()
+        Me.Label28 = New System.Windows.Forms.Label()
+        Me.TxtBranchCode = New System.Windows.Forms.TextBox()
+        Me.Label31 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'Label4
@@ -583,10 +586,40 @@ Partial Class Company
         Me.Label26.TabIndex = 235
         Me.Label26.Text = "(他会社コードと重複しない文字列)"
         '
+        'Label28
+        '
+        Me.Label28.AutoSize = True
+        Me.Label28.Location = New System.Drawing.Point(39, 514)
+        Me.Label28.Name = "Label28"
+        Me.Label28.Size = New System.Drawing.Size(85, 15)
+        Me.Label28.TabIndex = 236
+        Me.Label28.Text = "会計用コード"
+        '
+        'TxtBranchCode
+        '
+        Me.TxtBranchCode.Location = New System.Drawing.Point(130, 511)
+        Me.TxtBranchCode.MaxLength = 10
+        Me.TxtBranchCode.Name = "TxtBranchCode"
+        Me.TxtBranchCode.Size = New System.Drawing.Size(234, 22)
+        Me.TxtBranchCode.TabIndex = 237
+        '
+        'Label31
+        '
+        Me.Label31.AutoSize = True
+        Me.Label31.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Label31.Location = New System.Drawing.Point(133, 536)
+        Me.Label31.Name = "Label31"
+        Me.Label31.Size = New System.Drawing.Size(159, 15)
+        Me.Label31.TabIndex = 238
+        Me.Label31.Text = "(アキュレートの会社コード)"
+        '
         'Company
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(729, 561)
+        Me.Controls.Add(Me.Label31)
+        Me.Controls.Add(Me.TxtBranchCode)
+        Me.Controls.Add(Me.Label28)
         Me.Controls.Add(Me.Label26)
         Me.Controls.Add(Me.Label25)
         Me.Controls.Add(Me.Label23)
@@ -706,4 +739,7 @@ Partial Class Company
     Friend WithEvents Label23 As Label
     Friend WithEvents Label25 As Label
     Friend WithEvents Label26 As Label
+    Friend WithEvents Label28 As Label
+    Friend WithEvents TxtBranchCode As TextBox
+    Friend WithEvents Label31 As Label
 End Class

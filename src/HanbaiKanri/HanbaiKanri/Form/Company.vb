@@ -117,7 +117,7 @@ Public Class Company
                 Sql += "INSERT INTO "
                 Sql += "Public."
                 Sql += "m01_company("
-                Sql += "会社コード, 会社名, 会社略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, ＦＡＸ番号, 代表者役職, 代表者名, 表示順, 備考, 銀行名, 銀行コード, 支店名, 支店コード, 預金種目, 口座番号, 口座名義, 在庫単価評価法, 前払法人税率, 更新者, 更新日)"
+                Sql += "会社コード, 会社名, 会社略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, ＦＡＸ番号, 代表者役職, 代表者名, 表示順, 備考, 銀行名, 銀行コード, 支店名, 支店コード, 預金種目, 口座番号, 口座名義, 在庫単価評価法, 前払法人税率, 会計用コード, 更新者, 更新日)"
                 Sql += " VALUES('"
                 Sql += TxtCompanyCode.Text
                 Sql += "', '"
@@ -168,6 +168,8 @@ Public Class Company
                 Sql += "', '"
                 Sql += TxtPph.Text
                 Sql += "', '"
+                Sql += TxtBranchCode.Text
+                Sql += "', '"
                 Sql += frmC01F10_Login.loginValue.TantoNM
                 Sql += "', '"
                 Sql += dtToday
@@ -213,6 +215,8 @@ Public Class Company
                 Sql += "在庫単価評価法"
                 Sql += ", "
                 Sql += "前払法人税率"
+                Sql += ", "
+                Sql += "会計用コード"
                 Sql += ", "
                 Sql += "更新者"
                 Sql += ", "
@@ -315,6 +319,10 @@ Public Class Company
                 Sql += " = '"
                 Sql += TxtPph.Text
                 Sql += "', "
+                Sql += "会計用コード"
+                Sql += " = '"
+                Sql += TxtBranchCode.Text
+                Sql += "', "
                 Sql += "更新者"
                 Sql += " = '"
                 Sql += frmC01F10_Login.loginValue.TantoNM
@@ -371,6 +379,8 @@ Public Class Company
                 Sql += "在庫単価評価法"
                 Sql += ", "
                 Sql += "前払法人税率"
+                Sql += ", "
+                Sql += "会計用コード"
                 Sql += ", "
                 Sql += "更新者"
                 Sql += ", "

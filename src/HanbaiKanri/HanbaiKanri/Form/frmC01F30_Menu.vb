@@ -1093,6 +1093,11 @@ Public Class frmC01F30_Menu
                 openForm = New ClosingLog(_msgHd, _db, _langHd)
                 openForm.Show()
                 Me.Hide()
+            Case CommonConst.MENU_H1320  '仕訳処理
+                Dim openForm As Form = Nothing
+                openForm = New Shiwake(_msgHd, _db, _langHd)
+                openForm.Show()
+                Me.Hide()
             '-----------------------------------マスタ管理（M01）
             Case CommonConst.MENU_M0110    '汎用マスタ一覧
                 Dim openForm As Form = Nothing

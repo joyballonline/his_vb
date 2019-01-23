@@ -111,6 +111,7 @@ Public Class MstCompany
                 Dgv_Company.Rows(index).Cells("次回締日").Value = ds.Tables(RS).Rows(index)("次回締日")
                 Dgv_Company.Rows(index).Cells("在庫単価評価法").Value = ds.Tables(RS).Rows(index)("在庫単価評価法")
                 Dgv_Company.Rows(index).Cells("前払法人税率").Value = ds.Tables(RS).Rows(index)("前払法人税率")
+                Dgv_Company.Rows(index).Cells("会計用コード").Value = ds.Tables(RS).Rows(index)("会計用コード")
 
             Next
 
@@ -203,6 +204,7 @@ Public Class MstCompany
                 Dgv_Company.Rows(index).Cells("次回締日").Value = ds.Tables(RS).Rows(index)("次回締日")
                 Dgv_Company.Rows(index).Cells("在庫単価評価法").Value = ds.Tables(RS).Rows(index)("在庫単価評価法")
                 Dgv_Company.Rows(index).Cells("前払法人税率").Value = ds.Tables(RS).Rows(index)("前払法人税率")
+                Dgv_Company.Rows(index).Cells("会計用コード").Value = ds.Tables(RS).Rows(index)("会計用コード")
             Next
 
         Catch ue As UsrDefException

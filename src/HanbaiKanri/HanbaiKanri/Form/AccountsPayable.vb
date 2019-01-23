@@ -39,6 +39,7 @@ Public Class AccountsPayable
     Private Suffix As String = ""
     Private _parentForm As Form
     Private _status As String = ""
+    Private checkAdd As Integer
 
     '-------------------------------------------------------------------------------
     'デフォルトコンストラクタ（隠蔽）
@@ -205,6 +206,12 @@ Public Class AccountsPayable
         DgvCymn.Rows(0).Cells("買掛金額計").Value = AccountsPayable
         DgvCymn.Rows(0).Cells("買掛残高").Value = ds1.Tables(RS).Rows(0)("仕入金額") - AccountsPayable
 
+        checkAdd = DgvCymn.Rows(0).Cells("買掛残高").Value
+
+        If checkAdd = 0 Then
+            BtnRegist.Enabled = False
+        End If
+
         For index As Integer = 0 To ds2.Tables(RS).Rows.Count - 1
             DgvCymndt.Rows.Add()
             DgvCymndt.Rows(index).Cells("明細").Value = ds2.Tables(RS).Rows(index)("行番号")
@@ -322,221 +329,232 @@ Public Class AccountsPayable
         Dim reccnt As Integer = 0
         Dim AccountsPayable As Integer = 0
 
-        Dim Saiban1 As String = ""
-        Dim Sql1 As String = ""
-        Dim Sql2 As String = ""
-        Dim Sql3 As String = ""
-        Dim Sql4 As String = ""
-
-        Saiban1 += "SELECT "
-        Saiban1 += "* "
-        Saiban1 += "FROM "
-        Saiban1 += "public"
-        Saiban1 += "."
-        Saiban1 += "m80_saiban"
-        Saiban1 += " WHERE "
-        Saiban1 += "採番キー"
-        Saiban1 += " ILIKE "
-        Saiban1 += "'"
-        Saiban1 += "100"
-        Saiban1 += "'"
-
-        Dim dsSaiban1 As DataSet = _db.selectDB(Saiban1, RS, reccnt)
-
-        Dim AP As String = dsSaiban1.Tables(RS).Rows(0)("接頭文字")
-        AP += dtToday.ToString("MMdd")
-        AP += dsSaiban1.Tables(RS).Rows(0)("最新値").ToString.PadLeft(dsSaiban1.Tables(RS).Rows(0)("連番桁数"), "0")
-
-        Sql1 += "SELECT "
-        Sql1 += "* "
-        Sql1 += "FROM "
-        Sql1 += "public"
-        Sql1 += "."
-        Sql1 += "t20_hattyu"
-        Sql1 += " WHERE "
-        Sql1 += "発注番号"
-        Sql1 += " ILIKE "
-        Sql1 += "'"
-        Sql1 += HattyuNo
-        Sql1 += "'"
-        Sql1 += " AND "
-        Sql1 += "発注番号枝番"
-        Sql1 += " ILIKE "
-        Sql1 += "'"
-        Sql1 += Suffix
-        Sql1 += "'"
-
-        Dim ds1 As DataSet = _db.selectDB(Sql1, RS, reccnt)
-
-        Sql2 += "SELECT "
-        Sql2 += "* "
-        Sql2 += "FROM "
-        Sql2 += "public"
-        Sql2 += "."
-        Sql2 += "t46_kikehd"
-        Sql2 += " WHERE "
-        Sql2 += "発注番号"
-        Sql2 += " ILIKE "
-        Sql2 += "'"
-        Sql2 += HattyuNo
-        Sql2 += "'"
-        Sql2 += " AND "
-        Sql2 += "発注番号枝番"
-        Sql2 += "="
-        Sql2 += Suffix
-
-        Dim ds2 As DataSet = _db.selectDB(Sql2, RS, reccnt)
-
-        For index As Integer = 0 To ds2.Tables(RS).Rows.Count - 1
-            AccountsPayable += ds2.Tables(RS).Rows(index)("買掛金額計")
-        Next
 
 
-        Dim APTotal As Integer = DgvAdd.Rows(0).Cells("今回買掛金額計").Value + AccountsPayable
-        Dim Balance As Integer = ds1.Tables(RS).Rows(0)("仕入金額") - APTotal
+        If DgvAdd.Rows.Count() > 0 Then
 
-        If Balance < 0 Then
-            MessageBox.Show("買掛金額計が発注金額を超えています。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            errflg = False
-        End If
+            Dim Saiban1 As String = ""
+            Dim Sql1 As String = ""
+            Dim Sql2 As String = ""
+            Dim Sql3 As String = ""
+            Dim Sql4 As String = ""
 
-        If DgvAdd.Rows(0).Cells("今回買掛金額計").Value = 0 Then
-            MessageBox.Show("買掛金額計が0になっています。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            errflg = False
-        End If
+            Saiban1 += "SELECT "
+            Saiban1 += "* "
+            Saiban1 += "FROM "
+            Saiban1 += "public"
+            Saiban1 += "."
+            Saiban1 += "m80_saiban"
+            Saiban1 += " WHERE "
+            Saiban1 += "採番キー"
+            Saiban1 += " ILIKE "
+            Saiban1 += "'"
+            Saiban1 += "100"
+            Saiban1 += "'"
 
-        If errflg Then
-            Sql3 = ""
-            Sql3 += "INSERT INTO "
-            Sql3 += "Public."
-            Sql3 += "t46_kikehd("
-            Sql3 += "会社コード, 買掛番号, 買掛区分, 買掛日, 発注番号, 発注番号枝番, 客先番号, 仕入先コード, 仕入先名, 買掛金額計, 買掛残高, 備考1, 備考2, 取消区分, 登録日, 更新者)"
-            Sql3 += " VALUES('"
-            Sql3 += ds1.Tables(RS).Rows(0)("会社コード").ToString
-            Sql3 += "', '"
-            Sql3 += AP
-            Sql3 += "', '"
-            Sql3 += DgvAdd.Rows(0).Cells("買掛区分").Value.ToString
-            Sql3 += "', '"
-            Sql3 += DtpAPDate.Value
-            Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("発注番号").ToString
-            Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("発注番号枝番").ToString
-            Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("客先番号").ToString
-            Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("仕入先コード").ToString
-            Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("仕入先名").ToString
-            Sql3 += "', '"
-            Sql3 += DgvAdd.Rows(0).Cells("今回買掛金額計").Value
-            Sql3 += "', '"
-            Sql3 += DgvAdd.Rows(0).Cells("今回買掛金額計").Value
-            Sql3 += "', '"
-            Sql3 += DgvAdd.Rows(0).Cells("今回備考1").Value
-            Sql3 += "', '"
-            Sql3 += DgvAdd.Rows(0).Cells("今回備考2").Value
-            Sql3 += "', '"
-            Sql3 += "0"
-            Sql3 += "', '"
-            Sql3 += dtToday
-            Sql3 += "', '"
-            Sql3 += frmC01F10_Login.loginValue.TantoNM
-            Sql3 += " ')"
-            Sql3 += "RETURNING 会社コード"
-            Sql3 += ", "
-            Sql3 += "買掛番号"
-            Sql3 += ", "
-            Sql3 += "買掛区分"
-            Sql3 += ", "
-            Sql3 += "買掛日"
-            Sql3 += ", "
-            Sql3 += "発注番号"
-            Sql3 += ", "
-            Sql3 += "発注番号枝番"
-            Sql3 += ", "
-            Sql3 += "客先番号"
-            Sql3 += ", "
-            Sql3 += "仕入先コード"
-            Sql3 += ", "
-            Sql3 += "仕入先名"
-            Sql3 += ", "
-            Sql3 += "買掛金額計"
-            Sql3 += ", "
-            Sql3 += "買掛残高"
-            Sql3 += ", "
-            Sql3 += "備考1"
-            Sql3 += ", "
-            Sql3 += "備考2"
-            Sql3 += ", "
-            Sql3 += "取消区分"
-            Sql3 += ", "
-            Sql3 += "登録日"
-            Sql3 += ", "
-            Sql3 += "更新者"
+            Dim dsSaiban1 As DataSet = _db.selectDB(Saiban1, RS, reccnt)
 
-            _db.executeDB(Sql3)
+            Dim AP As String = dsSaiban1.Tables(RS).Rows(0)("接頭文字")
+            AP += dtToday.ToString("MMdd")
+            AP += dsSaiban1.Tables(RS).Rows(0)("最新値").ToString.PadLeft(dsSaiban1.Tables(RS).Rows(0)("連番桁数"), "0")
 
-            Dim APNo As Integer
+            Sql1 += "SELECT "
+            Sql1 += "* "
+            Sql1 += "FROM "
+            Sql1 += "public"
+            Sql1 += "."
+            Sql1 += "t20_hattyu"
+            Sql1 += " WHERE "
+            Sql1 += "発注番号"
+            Sql1 += " ILIKE "
+            Sql1 += "'"
+            Sql1 += HattyuNo
+            Sql1 += "'"
+            Sql1 += " AND "
+            Sql1 += "発注番号枝番"
+            Sql1 += " ILIKE "
+            Sql1 += "'"
+            Sql1 += Suffix
+            Sql1 += "'"
 
-            If dsSaiban1.Tables(RS).Rows(0)("最新値") = dsSaiban1.Tables(RS).Rows(0)("最大値") Then
-                APNo = dsSaiban1.Tables(RS).Rows(0)("最小値")
-            Else
-                APNo = dsSaiban1.Tables(RS).Rows(0)("最新値") + 1
+            Dim ds1 As DataSet = _db.selectDB(Sql1, RS, reccnt)
+
+            Sql2 += "SELECT "
+            Sql2 += "* "
+            Sql2 += "FROM "
+            Sql2 += "public"
+            Sql2 += "."
+            Sql2 += "t46_kikehd"
+            Sql2 += " WHERE "
+            Sql2 += "発注番号"
+            Sql2 += " ILIKE "
+            Sql2 += "'"
+            Sql2 += HattyuNo
+            Sql2 += "'"
+            Sql2 += " AND "
+            Sql2 += "発注番号枝番"
+            Sql2 += "="
+            Sql2 += Suffix
+
+            Dim ds2 As DataSet = _db.selectDB(Sql2, RS, reccnt)
+
+            For index As Integer = 0 To ds2.Tables(RS).Rows.Count - 1
+                AccountsPayable += ds2.Tables(RS).Rows(index)("買掛金額計")
+            Next
+
+
+            Dim APTotal As Integer = DgvAdd.Rows(0).Cells("今回買掛金額計").Value + AccountsPayable
+            Dim Balance As Integer = ds1.Tables(RS).Rows(0)("仕入金額") - APTotal
+
+            If Balance < 0 Then
+                MessageBox.Show("買掛金額計が発注金額を超えています。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                errflg = False
             End If
 
-            Sql4 = ""
-            Sql4 += "UPDATE "
-            Sql4 += "Public."
-            Sql4 += "m80_saiban "
-            Sql4 += "SET "
-            Sql4 += " 最新値"
-            Sql4 += " = '"
-            Sql4 += APNo.ToString
-            Sql4 += "', "
-            Sql4 += "更新者"
-            Sql4 += " = '"
-            Sql4 += frmC01F10_Login.loginValue.TantoNM
-            Sql4 += "', "
-            Sql4 += "更新日"
-            Sql4 += " = '"
-            Sql4 += dtToday
-            Sql4 += "' "
-            Sql4 += "WHERE"
-            Sql4 += " 会社コード"
-            Sql4 += "='"
-            Sql4 += ds1.Tables(RS).Rows(0)("会社コード").ToString
-            Sql4 += "'"
-            Sql4 += " AND"
-            Sql4 += " 採番キー"
-            Sql4 += "='"
-            Sql4 += "100"
-            Sql4 += "' "
-            Sql4 += "RETURNING 会社コード"
-            Sql4 += ", "
-            Sql4 += "採番キー"
-            Sql4 += ", "
-            Sql4 += "最新値"
-            Sql4 += ", "
-            Sql4 += "最小値"
-            Sql4 += ", "
-            Sql4 += "最大値"
-            Sql4 += ", "
-            Sql4 += "接頭文字"
-            Sql4 += ", "
-            Sql4 += "連番桁数"
-            Sql4 += ", "
-            Sql4 += "更新者"
-            Sql4 += ", "
-            Sql4 += "更新日"
+            If DgvAdd.Rows(0).Cells("今回買掛金額計").Value = 0 Then
+                MessageBox.Show("買掛金額計が0になっています。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                errflg = False
+            End If
 
-            _db.executeDB(Sql4)
+            If errflg Then
+                Sql3 = ""
+                Sql3 += "INSERT INTO "
+                Sql3 += "Public."
+                Sql3 += "t46_kikehd("
+                Sql3 += "会社コード, 買掛番号, 買掛区分, 買掛日, 発注番号, 発注番号枝番, 客先番号, 仕入先コード, 仕入先名, 買掛金額計, 買掛残高, 備考1, 備考2, 取消区分, 登録日, 更新者)"
+                Sql3 += " VALUES('"
+                Sql3 += ds1.Tables(RS).Rows(0)("会社コード").ToString
+                Sql3 += "', '"
+                Sql3 += AP
+                Sql3 += "', '"
+                Sql3 += DgvAdd.Rows(0).Cells("買掛区分").Value.ToString
+                Sql3 += "', '"
+                Sql3 += DtpAPDate.Value
+                Sql3 += "', '"
+                Sql3 += ds1.Tables(RS).Rows(0)("発注番号").ToString
+                Sql3 += "', '"
+                Sql3 += ds1.Tables(RS).Rows(0)("発注番号枝番").ToString
+                Sql3 += "', '"
+                Sql3 += ds1.Tables(RS).Rows(0)("客先番号").ToString
+                Sql3 += "', '"
+                Sql3 += ds1.Tables(RS).Rows(0)("仕入先コード").ToString
+                Sql3 += "', '"
+                Sql3 += ds1.Tables(RS).Rows(0)("仕入先名").ToString
+                Sql3 += "', '"
+                Sql3 += DgvAdd.Rows(0).Cells("今回買掛金額計").Value
+                Sql3 += "', '"
+                Sql3 += DgvAdd.Rows(0).Cells("今回買掛金額計").Value
+                Sql3 += "', '"
+                Sql3 += DgvAdd.Rows(0).Cells("今回備考1").Value
+                Sql3 += "', '"
+                Sql3 += DgvAdd.Rows(0).Cells("今回備考2").Value
+                Sql3 += "', '"
+                Sql3 += "0"
+                Sql3 += "', '"
+                Sql3 += dtToday
+                Sql3 += "', '"
+                Sql3 += frmC01F10_Login.loginValue.TantoNM
+                Sql3 += " ')"
+                Sql3 += "RETURNING 会社コード"
+                Sql3 += ", "
+                Sql3 += "買掛番号"
+                Sql3 += ", "
+                Sql3 += "買掛区分"
+                Sql3 += ", "
+                Sql3 += "買掛日"
+                Sql3 += ", "
+                Sql3 += "発注番号"
+                Sql3 += ", "
+                Sql3 += "発注番号枝番"
+                Sql3 += ", "
+                Sql3 += "客先番号"
+                Sql3 += ", "
+                Sql3 += "仕入先コード"
+                Sql3 += ", "
+                Sql3 += "仕入先名"
+                Sql3 += ", "
+                Sql3 += "買掛金額計"
+                Sql3 += ", "
+                Sql3 += "買掛残高"
+                Sql3 += ", "
+                Sql3 += "備考1"
+                Sql3 += ", "
+                Sql3 += "備考2"
+                Sql3 += ", "
+                Sql3 += "取消区分"
+                Sql3 += ", "
+                Sql3 += "登録日"
+                Sql3 += ", "
+                Sql3 += "更新者"
 
-            _parentForm.Enabled = True
-            _parentForm.Show()
-            Me.Dispose()
+                _db.executeDB(Sql3)
+
+                Dim APNo As Integer
+
+                If dsSaiban1.Tables(RS).Rows(0)("最新値") = dsSaiban1.Tables(RS).Rows(0)("最大値") Then
+                    APNo = dsSaiban1.Tables(RS).Rows(0)("最小値")
+                Else
+                    APNo = dsSaiban1.Tables(RS).Rows(0)("最新値") + 1
+                End If
+
+                Sql4 = ""
+                Sql4 += "UPDATE "
+                Sql4 += "Public."
+                Sql4 += "m80_saiban "
+                Sql4 += "SET "
+                Sql4 += " 最新値"
+                Sql4 += " = '"
+                Sql4 += APNo.ToString
+                Sql4 += "', "
+                Sql4 += "更新者"
+                Sql4 += " = '"
+                Sql4 += frmC01F10_Login.loginValue.TantoNM
+                Sql4 += "', "
+                Sql4 += "更新日"
+                Sql4 += " = '"
+                Sql4 += dtToday
+                Sql4 += "' "
+                Sql4 += "WHERE"
+                Sql4 += " 会社コード"
+                Sql4 += "='"
+                Sql4 += ds1.Tables(RS).Rows(0)("会社コード").ToString
+                Sql4 += "'"
+                Sql4 += " AND"
+                Sql4 += " 採番キー"
+                Sql4 += "='"
+                Sql4 += "100"
+                Sql4 += "' "
+                Sql4 += "RETURNING 会社コード"
+                Sql4 += ", "
+                Sql4 += "採番キー"
+                Sql4 += ", "
+                Sql4 += "最新値"
+                Sql4 += ", "
+                Sql4 += "最小値"
+                Sql4 += ", "
+                Sql4 += "最大値"
+                Sql4 += ", "
+                Sql4 += "接頭文字"
+                Sql4 += ", "
+                Sql4 += "連番桁数"
+                Sql4 += ", "
+                Sql4 += "更新者"
+                Sql4 += ", "
+                Sql4 += "更新日"
+
+                _db.executeDB(Sql4)
+
+                _parentForm.Enabled = True
+                _parentForm.Show()
+                Me.Dispose()
+            End If
+
+        Else
+            '登録するデータがなかったら
+            _msgHd.dspMSG("NonAddData")
+
         End If
+
 
     End Sub
 End Class

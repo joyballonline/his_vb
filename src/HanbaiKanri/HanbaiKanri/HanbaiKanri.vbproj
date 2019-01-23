@@ -385,6 +385,12 @@
     <Compile Include="Form\SalesSearch.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form\Shiwake.Designer.vb">
+      <DependentUpon>Shiwake.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Shiwake.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\StockList.Designer.vb">
       <DependentUpon>StockList.vb</DependentUpon>
     </Compile>
@@ -572,6 +578,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\SalesSearch.resx">
       <DependentUpon>SalesSearch.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Shiwake.resx">
+      <DependentUpon>Shiwake.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\StockList.resx">
       <DependentUpon>StockList.vb</DependentUpon>
