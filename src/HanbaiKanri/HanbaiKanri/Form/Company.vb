@@ -404,6 +404,45 @@ Public Class Company
     End Sub
 
     Private Sub Company_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If frmC01F10_Login.loginValue.Language = "ENG" Then
+            Label1.Text = "CompanyCode"
+            Label2.Text = "CompanyName"
+            Label3.Text = "ShortName"
+            Label5.Text = "PostalCode"
+            Label6.Text = "Address1"
+            Label7.Text = "Address2"
+            Label8.Text = "Address3"
+            Label9.Text = "TEL"
+            Label11.Text = "FAX"
+            Label4.Text = "Position"
+            Label12.Text = "Name"
+            Label13.Text = "DisplayOrder"
+            Label14.Text = "Remarks"
+            Label32.Text = "BankName"
+            Label34.Text = "BankCode"
+            Label18.Text = "BranchName"
+            Label17.Text = "BranchCode"
+            Label16.Text = "Category"
+            Label15.Text = "AccountNumber"
+            Label19.Text = "AccountHolder"
+            Label30.Text = "EvaluationMethod"
+            Label29.Text = "PPH"
+            Label28.Text = "AccountingCode"
+
+            Label26.Text = "(Non-Overlapping string)"
+            Label21.Text = "(Example:123456)"
+            Label10.Text = "(Example:123456789)"
+            Label20.Text = "(Example:123456789)"
+            Label22.Text = "(Example:0123)"
+            Label27.Text = "(1:Nomal 2:Deposit)"
+            Label23.Text = "(Example:012)"
+            Label25.Text = "(Example:123456)"
+            Label24.Text = "(Example:0.025)"
+            Label31.Text = "(Company code in accurate)"
+
+            BtnRegistration.Text = "Registration"
+            BtnBack.Text = "Back"
+        End If
         Dim Sql1 As String = ""
 
         Sql1 += "SELECT "
