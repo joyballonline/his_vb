@@ -287,6 +287,24 @@ Public Class User
     End Sub
 
     Private Sub User_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If frmC01F10_Login.loginValue.Language = "ENG" Then
+            Label2.Text = "UserID"
+            Label3.Text = "Name"
+            Label4.Text = "ShortName"
+            Label5.Text = "Remarks"
+            Label6.Text = "Disable"
+            Label7.Text = "Authority"
+            Label8.Text = "Language"
+            LblPassword.Text = "Password"
+            Label26.Text = "(Non-Overlapping string)"
+            Label27.Text = "(0:Valid 1:Disable)"
+            Label9.Text = "(0:Common 1:Management)"
+            Label1.Text = "(JPN:Japanese ENG:English)"
+
+
+            BtnRegistration.Text = "Registration"
+            BtnBack.Text = "Back"
+        End If
         If _status = "EDIT" Then
             LblPassword.Visible = False
             TxtPassword.Visible = False

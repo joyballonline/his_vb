@@ -33,8 +33,8 @@ Partial Class MstUser
         Me.言語 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.更新者 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.更新日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.btn_userAdd = New System.Windows.Forms.Button()
-        Me.btn_selectedRow = New System.Windows.Forms.Button()
+        Me.BtnAdd = New System.Windows.Forms.Button()
+        Me.BtnEdit = New System.Windows.Forms.Button()
         Me.BtnBack = New System.Windows.Forms.Button()
         Me.BtnSearch = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -119,25 +119,25 @@ Partial Class MstUser
         Me.更新日.Name = "更新日"
         Me.更新日.ReadOnly = True
         '
-        'btn_userAdd
+        'BtnAdd
         '
-        Me.btn_userAdd.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.btn_userAdd.Location = New System.Drawing.Point(831, 509)
-        Me.btn_userAdd.Name = "btn_userAdd"
-        Me.btn_userAdd.Size = New System.Drawing.Size(165, 40)
-        Me.btn_userAdd.TabIndex = 4
-        Me.btn_userAdd.Text = "ユーザ追加"
-        Me.btn_userAdd.UseVisualStyleBackColor = True
+        Me.BtnAdd.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.BtnAdd.Location = New System.Drawing.Point(831, 509)
+        Me.BtnAdd.Name = "BtnAdd"
+        Me.BtnAdd.Size = New System.Drawing.Size(165, 40)
+        Me.BtnAdd.TabIndex = 4
+        Me.BtnAdd.Text = "ユーザ追加"
+        Me.BtnAdd.UseVisualStyleBackColor = True
         '
-        'btn_selectedRow
+        'BtnEdit
         '
-        Me.btn_selectedRow.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.btn_selectedRow.Location = New System.Drawing.Point(1002, 509)
-        Me.btn_selectedRow.Name = "btn_selectedRow"
-        Me.btn_selectedRow.Size = New System.Drawing.Size(165, 40)
-        Me.btn_selectedRow.TabIndex = 5
-        Me.btn_selectedRow.Text = "ユーザ編集"
-        Me.btn_selectedRow.UseVisualStyleBackColor = True
+        Me.BtnEdit.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.BtnEdit.Location = New System.Drawing.Point(1002, 509)
+        Me.BtnEdit.Name = "BtnEdit"
+        Me.BtnEdit.Size = New System.Drawing.Size(165, 40)
+        Me.BtnEdit.TabIndex = 5
+        Me.BtnEdit.Text = "ユーザ編集"
+        Me.BtnEdit.UseVisualStyleBackColor = True
         '
         'BtnBack
         '
@@ -185,8 +185,8 @@ Partial Class MstUser
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Search)
         Me.Controls.Add(Me.BtnBack)
-        Me.Controls.Add(Me.btn_selectedRow)
-        Me.Controls.Add(Me.btn_userAdd)
+        Me.Controls.Add(Me.BtnEdit)
+        Me.Controls.Add(Me.BtnAdd)
         Me.Controls.Add(Me.Dgv_User)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "MstUser"
@@ -198,8 +198,8 @@ Partial Class MstUser
     End Sub
 
     Friend WithEvents Dgv_User As DataGridView
-    Friend WithEvents btn_userAdd As Button
-    Friend WithEvents btn_selectedRow As Button
+    Friend WithEvents BtnAdd As Button
+    Friend WithEvents BtnEdit As Button
     Friend WithEvents 会社コード As DataGridViewTextBoxColumn
     Friend WithEvents ユーザID As DataGridViewTextBoxColumn
     Friend WithEvents 氏名 As DataGridViewTextBoxColumn

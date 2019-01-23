@@ -63,6 +63,24 @@ Public Class MstUser
     End Sub
 
     Private Sub UserMaintenance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If frmC01F10_Login.loginValue.Language = "ENG" Then
+            Label1.Text = "UserID"
+            BtnBack.Text = "Back"
+            BtnSearch.Text = "Search"
+            BtnAdd.Text = "Add"
+            BtnEdit.Text = "Edit"
+
+            Dgv_User.Columns("会社コード").HeaderText = "CompanyCode"
+            Dgv_User.Columns("ユーザID").HeaderText = "UserID"
+            Dgv_User.Columns("氏名").HeaderText = "Name"
+            Dgv_User.Columns("略名").HeaderText = "ShortName"
+            Dgv_User.Columns("備考").HeaderText = "Remarks"
+            Dgv_User.Columns("無効フラグ").HeaderText = "Disabled"
+            Dgv_User.Columns("権限").HeaderText = "Authority"
+            Dgv_User.Columns("言語").HeaderText = "Language"
+            Dgv_User.Columns("更新者").HeaderText = "Changer"
+            Dgv_User.Columns("更新日").HeaderText = "UpdateDate"
+        End If
         Dim Sql As String = ""
         Try
             Sql += "SELECT "
@@ -115,7 +133,7 @@ Public Class MstUser
         End Try
     End Sub
 
-    Private Sub btn_userAdd_Click(sender As Object, e As EventArgs) Handles btn_userAdd.Click
+    Private Sub btn_userAdd_Click(sender As Object, e As EventArgs) Handles BtnAdd.Click
         Dim openForm As Form = Nothing
         Dim Status As String = "ADD"
         openForm = New User(_msgHd, _db, _langHd, Status)   '処理選択
@@ -123,7 +141,7 @@ Public Class MstUser
         Me.Hide()   ' 自分は隠れる
     End Sub
 
-    Private Sub btn_selectedRow_Click(sender As Object, e As EventArgs) Handles btn_selectedRow.Click
+    Private Sub btn_selectedRow_Click(sender As Object, e As EventArgs) Handles BtnEdit.Click
         Dim openForm As Form = Nothing
         Dim Status As String = "EDIT"
         Dim CompanyCode As String = Dgv_User.Rows(Dgv_User.CurrentCell.RowIndex).Cells("会社コード").Value
