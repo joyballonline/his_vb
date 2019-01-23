@@ -214,6 +214,20 @@ Public Class Language
     End Sub
 
     Private Sub User_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If frmC01F10_Login.loginValue.Language = "ENG" Then
+            Label2.Text = "LanguageCode"
+            Label3.Text = "LanguageName"
+            Label4.Text = "ShortName"
+            Label5.Text = "Remarks"
+            Label6.Text = "Disabled"
+            Label20.Text = "(Non-Overlapping string)"
+            Label8.Text = "(Example:JAPANESE)"
+            Label1.Text = "(Example:JPN)"
+            Label27.Text = "(0:Valid 1:Disabled)"
+
+            BtnRegistration.Text = "Registration"
+            BtnBack.Text = "Back"
+        End If
         If _status = "EDIT" Then
             Dim Sql As String = ""
 

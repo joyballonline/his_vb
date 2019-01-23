@@ -64,6 +64,22 @@ Public Class MstLanguage
     End Sub
 
     Private Sub MstLanguage_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If frmC01F10_Login.loginValue.Language = "ENG" Then
+            Label1.Text = "Language"
+            BtnBack.Text = "Back"
+            BtnSearch.Text = "Search"
+            BtnAdd.Text = "Add"
+            BtnEdit.Text = "Edit"
+
+            Dgv_Language.Columns("会社コード").HeaderText = "CompanyCode"
+            Dgv_Language.Columns("言語コード").HeaderText = "LanguageCode"
+            Dgv_Language.Columns("言語名称").HeaderText = "LanguageName"
+            Dgv_Language.Columns("言語略称").HeaderText = "ShortName"
+            Dgv_Language.Columns("備考").HeaderText = "Remarks"
+            Dgv_Language.Columns("無効フラグ").HeaderText = "Disabled"
+            Dgv_Language.Columns("更新者").HeaderText = "Changer"
+            Dgv_Language.Columns("更新日").HeaderText = "UpdateDate"
+        End If
         Dim Sql As String = ""
         Try
             Sql += "SELECT "
