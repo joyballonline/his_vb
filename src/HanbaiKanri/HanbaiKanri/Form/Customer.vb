@@ -300,6 +300,32 @@ Public Class Customer
     End Sub
 
     Private Sub Customer_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If frmC01F10_Login.loginValue.Language = "ENG" Then
+            Label2.Text = "CustomerCode"
+            Label3.Text = "CustomerName"
+            Label4.Text = "ShortName"
+            Label5.Text = "PostalCode"
+            Label6.Text = "Address1"
+            Label7.Text = "Address2"
+            Label8.Text = "Address3"
+            Label9.Text = "TEL"
+            Label10.Text = "TEL(Search)"
+            Label11.Text = "FAX"
+            Label12.Text = "Person"
+            Label15.Text = "Position"
+            Label13.Text = "PaymentTerms"
+            Label14.Text = "Memo"
+
+            Label26.Text = "(Non-Overlapping string)"
+            Label1.Text = "(Example:0123456)"
+            Label17.Text = "(Example:0123456789)"
+            Label16.Text = "(Example:0123456789)"
+            Label18.Text = "(Example:0123456789)"
+
+
+            btnRegistrarion.Text = "Registration"
+            btnBack.Text = "Back"
+        End If
         If _status = "EDIT" Then
             Dim Sql As String = ""
             Sql += "SELECT "
