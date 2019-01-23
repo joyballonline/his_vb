@@ -158,6 +158,20 @@ Public Class DepositList
             Sql2 = ""
             Sql3 = ""
         Next
+        If frmC01F10_Login.loginValue.Language = "ENG" Then
+            Label1.Text = "CustomerName"
+            Label2.Text = "Address"
+            Label3.Text = "TEL"
+            Label4.Text = "CustomerCode"
+            LblMode.Text = "DepositInputMode"
+            BtnSerach.Text = "Search"
+            BtnDeposit.Text = "DepositRegistration"
+            btnBack.Text = "Back"
+            DgvCustomer.Columns("得意先名").HeaderText = "CustomerName"
+            DgvCustomer.Columns("請求金額残").HeaderText = "BillingBalance"
+            DgvCustomer.Columns("売掛残高").HeaderText = "AccountsReceivableBalance"
+
+        End If
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click

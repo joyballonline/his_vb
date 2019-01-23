@@ -66,6 +66,17 @@ Public Class CustomerList
     Private Sub MstCustomere_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim Status As String = "LOAD"
         CustomerListLoad(Status)
+        If frmC01F10_Login.loginValue.Language = "ENG" Then
+            LblCustomerName.Text = "CustomerName"
+            BtnSearch.Text = "Search"
+            BtnBillingCalculation.Text = "SelectInvoice"
+            btnBack.Text = "Back"
+
+            DgvCustomer.Columns("得意先名").HeaderText = "CustomerName"
+            DgvCustomer.Columns("受注金額計").HeaderText = "TotalOrderAmount"
+            DgvCustomer.Columns("請求金額計").HeaderText = "TotalBillingAmount"
+            DgvCustomer.Columns("請求残高").HeaderText = "BillingBalance"
+        End If
     End Sub
 
     Private Sub CustomerListLoad(Status)

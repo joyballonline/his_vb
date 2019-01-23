@@ -91,15 +91,27 @@ Public Class DepositDetailList
 
                 Dim reccnt As Integer = 0
                 ds = _db.selectDB(Sql, RS, reccnt)
-                DgvBilling.Columns.Add("入金番号", "入金番号")
-                DgvBilling.Columns.Add("入金日", "入金日")
-                DgvBilling.Columns.Add("請求先名", "請求先名")
-                DgvBilling.Columns.Add("振込先", "振込先")
-                DgvBilling.Columns.Add("請求金額", "請求金額")
-                DgvBilling.Columns.Add("入金額", "入金額")
-                DgvBilling.Columns.Add("入金額計", "入金額計")
-                DgvBilling.Columns.Add("請求残高", "請求残高")
-                DgvBilling.Columns.Add("備考", "備考")
+                If frmC01F10_Login.loginValue.Language = "ENG" Then
+                    DgvBilling.Columns.Add("入金番号", "DepositNumber")
+                    DgvBilling.Columns.Add("入金日", "DepositDate")
+                    DgvBilling.Columns.Add("請求先名", "BillingAddress")
+                    DgvBilling.Columns.Add("振込先", "PaymentDestination")
+                    DgvBilling.Columns.Add("請求金額", "BillingAmount")
+                    DgvBilling.Columns.Add("入金額", "DepositAmount")
+                    DgvBilling.Columns.Add("入金額計", "TotalDepositAmount")
+                    DgvBilling.Columns.Add("請求残高", "BillingBalance")
+                    DgvBilling.Columns.Add("備考", "Remarks")
+                Else
+                    DgvBilling.Columns.Add("入金番号", "入金番号")
+                    DgvBilling.Columns.Add("入金日", "入金日")
+                    DgvBilling.Columns.Add("請求先名", "請求先名")
+                    DgvBilling.Columns.Add("振込先", "振込先")
+                    DgvBilling.Columns.Add("請求金額", "請求金額")
+                    DgvBilling.Columns.Add("入金額", "入金額")
+                    DgvBilling.Columns.Add("入金額計", "入金額計")
+                    DgvBilling.Columns.Add("請求残高", "請求残高")
+                    DgvBilling.Columns.Add("備考", "備考")
+                End If
 
 
                 DgvBilling.Columns("請求金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -142,15 +154,27 @@ Public Class DepositDetailList
                 Dim reccnt As Integer = 0
                 ds = _db.selectDB(Sql, RS, reccnt)
 
-                DgvBilling.Columns.Add("入金番号", "入金番号")
-                DgvBilling.Columns.Add("入金日", "入金日")
-                DgvBilling.Columns.Add("請求先名", "請求先名")
-                DgvBilling.Columns.Add("振込先", "振込先")
-                DgvBilling.Columns.Add("請求金額", "請求金額")
-                DgvBilling.Columns.Add("入金額", "入金額")
-                DgvBilling.Columns.Add("入金額計", "入金額計")
-                DgvBilling.Columns.Add("請求残高", "請求残高")
-                DgvBilling.Columns.Add("備考", "備考")
+                If frmC01F10_Login.loginValue.Language = "ENG" Then
+                    DgvBilling.Columns.Add("入金番号", "DepositNumber")
+                    DgvBilling.Columns.Add("入金日", "DepositDate")
+                    DgvBilling.Columns.Add("請求先名", "BillingAddress")
+                    DgvBilling.Columns.Add("振込先", "PaymentDestination")
+                    DgvBilling.Columns.Add("請求金額", "BillingAmount")
+                    DgvBilling.Columns.Add("入金額", "DepositAmount")
+                    DgvBilling.Columns.Add("入金額計", "TotalDepositAmount")
+                    DgvBilling.Columns.Add("請求残高", "BillingBalance")
+                    DgvBilling.Columns.Add("備考", "Remarks")
+                Else
+                    DgvBilling.Columns.Add("入金番号", "入金番号")
+                    DgvBilling.Columns.Add("入金日", "入金日")
+                    DgvBilling.Columns.Add("請求先名", "請求先名")
+                    DgvBilling.Columns.Add("振込先", "振込先")
+                    DgvBilling.Columns.Add("請求金額", "請求金額")
+                    DgvBilling.Columns.Add("入金額", "入金額")
+                    DgvBilling.Columns.Add("入金額計", "入金額計")
+                    DgvBilling.Columns.Add("請求残高", "請求残高")
+                    DgvBilling.Columns.Add("備考", "備考")
+                End If
 
                 DgvBilling.Columns("請求金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 DgvBilling.Columns("請求残高").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -182,15 +206,44 @@ Public Class DepositDetailList
     End Sub
     Private Sub MstHanyoue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If _status = "VIEW" Then
-            LblMode.Text = "参照モード"
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                LblMode.Text = "ViewMode"
+            Else
+                LblMode.Text = "参照モード"
+            End If
+
         ElseIf _status = "CANCEL" Then
-            LblMode.Text = "取消モード"
-            BtnBillingCancel.Visible = True
-            BtnBillingCancel.Location = New Point(997, 509)
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                LblMode.Text = "CancelMode"
+            Else
+                LblMode.Text = "取消モード"
+            End If
+
+            BtnDepositCancel.Visible = True
+            BtnDepositCancel.Location = New Point(997, 509)
         End If
 
         Dim Status As String = "EXCLUSION"
         PurchaseListLoad(Status)
+
+        If frmC01F10_Login.loginValue.Language = "ENG" Then
+            LblConditions.Text = "ExtractionCondition"
+            Label1.Text = "CustomerName"
+            Label4.Text = "CustomerCode"
+            Label8.Text = "DepositDate"
+            Label7.Text = "DepositNumber"
+            Label10.Text = "DisplayFormat"
+            RbtnSlip.Text = "UnitOfSlip"
+
+            RbtnDetails.Text = "LineItemUnit"
+            RbtnDetails.Location = New Point(166, 196)
+            ChkCancelData.Text = "IncludeCancelData"
+
+            BtnDepositSearch.Text = "Search"
+            BtnDepositCancel.Text = "CancelOfDeposit"
+            BtnDepositView.Text = "DepositView"
+            BtnBack.Text = "Back"
+        End If
     End Sub
 
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
@@ -237,15 +290,28 @@ Public Class DepositDetailList
             Dim reccnt As Integer = 0
             ds = _db.selectDB(Sql, RS, reccnt)
 
-            DgvBilling.Columns.Add("入金番号", "入金番号")
-            DgvBilling.Columns.Add("入金日", "入金日")
-            DgvBilling.Columns.Add("請求先名", "請求先名")
-            DgvBilling.Columns.Add("振込先", "振込先")
-            DgvBilling.Columns.Add("請求金額", "請求金額")
-            DgvBilling.Columns.Add("入金額", "入金額")
-            DgvBilling.Columns.Add("入金額計", "入金額計")
-            DgvBilling.Columns.Add("請求残高", "請求残高")
-            DgvBilling.Columns.Add("備考", "備考")
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                DgvBilling.Columns.Add("入金番号", "DepositNumber")
+                DgvBilling.Columns.Add("入金日", "DepositDate")
+                DgvBilling.Columns.Add("請求先名", "BillingAddress")
+                DgvBilling.Columns.Add("振込先", "PaymentDestination")
+                DgvBilling.Columns.Add("請求金額", "BillingAmount")
+                DgvBilling.Columns.Add("入金額", "DepositAmount")
+                DgvBilling.Columns.Add("入金額計", "TotalDepositAmount")
+                DgvBilling.Columns.Add("請求残高", "BillingBalance")
+                DgvBilling.Columns.Add("備考", "Remarks")
+            Else
+                DgvBilling.Columns.Add("入金番号", "入金番号")
+                DgvBilling.Columns.Add("入金日", "入金日")
+                DgvBilling.Columns.Add("請求先名", "請求先名")
+                DgvBilling.Columns.Add("振込先", "振込先")
+                DgvBilling.Columns.Add("請求金額", "請求金額")
+                DgvBilling.Columns.Add("入金額", "入金額")
+                DgvBilling.Columns.Add("入金額計", "入金額計")
+                DgvBilling.Columns.Add("請求残高", "請求残高")
+                DgvBilling.Columns.Add("備考", "備考")
+            End If
+
 
             DgvBilling.Columns("請求金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             DgvBilling.Columns("請求残高").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -299,12 +365,22 @@ Public Class DepositDetailList
             Dim reccnt As Integer = 0
             ds = _db.selectDB(Sql, RS, reccnt)
 
-            DgvBilling.Columns.Add("入金番号", "入金番号")
-            DgvBilling.Columns.Add("請求番号", "請求番号")
-            DgvBilling.Columns.Add("請求先名", "請求先名")
-            DgvBilling.Columns.Add("入金額", "入金額")
-            DgvBilling.Columns.Add("入金日", "入金日")
-            DgvBilling.Columns.Add("備考", "備考")
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                DgvBilling.Columns.Add("入金番号", "DepositNumber")
+                DgvBilling.Columns.Add("請求番号", "BillingNumber")
+                DgvBilling.Columns.Add("請求先名", "CustomerName")
+                DgvBilling.Columns.Add("入金額", "DepositAmount")
+                DgvBilling.Columns.Add("入金日", "DepositDate")
+                DgvBilling.Columns.Add("備考", "Remarks")
+            Else
+                DgvBilling.Columns.Add("入金番号", "入金番号")
+                DgvBilling.Columns.Add("請求番号", "請求番号")
+                DgvBilling.Columns.Add("請求先名", "請求先名")
+                DgvBilling.Columns.Add("入金額", "入金額")
+                DgvBilling.Columns.Add("入金日", "入金日")
+                DgvBilling.Columns.Add("備考", "備考")
+            End If
+
 
             For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
                 DgvBilling.Rows.Add()
@@ -318,7 +394,7 @@ Public Class DepositDetailList
         End If
     End Sub
 
-    Private Sub BtnPurchaseSearch_Click(sender As Object, e As EventArgs) Handles BtnPurchaseSearch.Click
+    Private Sub BtnPurchaseSearch_Click(sender As Object, e As EventArgs) Handles BtnDepositSearch.Click
         DgvBilling.Rows.Clear()
         DgvBilling.Columns.Clear()
 
@@ -507,15 +583,27 @@ Public Class DepositDetailList
             'Dim tmp As Integer = ds.Tables(RS).Rows.Count - 1
             'ReDim OrderingNo(tmp)
 
-            DgvBilling.Columns.Add("入金番号", "入金番号")
-            DgvBilling.Columns.Add("入金日", "入金日")
-            DgvBilling.Columns.Add("請求先名", "請求先名")
-            DgvBilling.Columns.Add("振込先", "振込先")
-            DgvBilling.Columns.Add("請求金額", "請求金額")
-            DgvBilling.Columns.Add("入金額", "入金額")
-            DgvBilling.Columns.Add("入金額計", "入金額計")
-            DgvBilling.Columns.Add("請求残高", "請求残高")
-            DgvBilling.Columns.Add("備考", "備考")
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                DgvBilling.Columns.Add("入金番号", "DepositNumber")
+                DgvBilling.Columns.Add("入金日", "DepositDate")
+                DgvBilling.Columns.Add("請求先名", "BillingAddress")
+                DgvBilling.Columns.Add("振込先", "PaymentDestination")
+                DgvBilling.Columns.Add("請求金額", "BillingAmount")
+                DgvBilling.Columns.Add("入金額", "DepositAmount")
+                DgvBilling.Columns.Add("入金額計", "TotalDepositAmount")
+                DgvBilling.Columns.Add("請求残高", "BillingBalance")
+                DgvBilling.Columns.Add("備考", "Remarks")
+            Else
+                DgvBilling.Columns.Add("入金番号", "入金番号")
+                DgvBilling.Columns.Add("入金日", "入金日")
+                DgvBilling.Columns.Add("請求先名", "請求先名")
+                DgvBilling.Columns.Add("振込先", "振込先")
+                DgvBilling.Columns.Add("請求金額", "請求金額")
+                DgvBilling.Columns.Add("入金額", "入金額")
+                DgvBilling.Columns.Add("入金額計", "入金額計")
+                DgvBilling.Columns.Add("請求残高", "請求残高")
+                DgvBilling.Columns.Add("備考", "備考")
+            End If
 
             DgvBilling.Columns("請求金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             DgvBilling.Columns("請求残高").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -567,7 +655,7 @@ Public Class DepositDetailList
         End If
     End Sub
 
-    Private Sub BtnBillingCancel_Click(sender As Object, e As EventArgs) Handles BtnBillingCancel.Click
+    Private Sub BtnBillingCancel_Click(sender As Object, e As EventArgs) Handles BtnDepositCancel.Click
         Dim dtNow As DateTime = DateTime.Now
         Dim Sql1 As String = ""
         Sql1 = ""
@@ -634,22 +722,44 @@ Public Class DepositDetailList
         Sql1 += "更新者"
         Sql1 += ", "
         Sql1 += "更新日"
-        Dim result As DialogResult = MessageBox.Show("入金を取り消しますか？",
+
+        If frmC01F10_Login.loginValue.Language = "ENG" Then
+            Dim result As DialogResult = MessageBox.Show("Would you like to cancel the Deposit?",
+                                             "Question",
+                                             MessageBoxButtons.YesNoCancel,
+                                             MessageBoxIcon.Exclamation,
+                                             MessageBoxDefaultButton.Button2)
+
+            If result = DialogResult.Yes Then
+                _db.executeDB(Sql1)
+                DgvBilling.Rows.Clear()
+                DgvBilling.Columns.Clear()
+                Dim Status As String = "EXCLUSION"
+                PurchaseListLoad(Status)
+            ElseIf result = DialogResult.No Then
+
+            ElseIf result = DialogResult.Cancel Then
+
+            End If
+        Else
+            Dim result As DialogResult = MessageBox.Show("入金を取り消しますか？",
                                              "質問",
                                              MessageBoxButtons.YesNoCancel,
                                              MessageBoxIcon.Exclamation,
                                              MessageBoxDefaultButton.Button2)
 
-        If result = DialogResult.Yes Then
-            _db.executeDB(Sql1)
-            DgvBilling.Rows.Clear()
-            DgvBilling.Columns.Clear()
-            Dim Status As String = "EXCLUSION"
-            PurchaseListLoad(Status)
-        ElseIf result = DialogResult.No Then
+            If result = DialogResult.Yes Then
+                _db.executeDB(Sql1)
+                DgvBilling.Rows.Clear()
+                DgvBilling.Columns.Clear()
+                Dim Status As String = "EXCLUSION"
+                PurchaseListLoad(Status)
+            ElseIf result = DialogResult.No Then
 
-        ElseIf result = DialogResult.Cancel Then
+            ElseIf result = DialogResult.Cancel Then
 
+            End If
         End If
+
     End Sub
 End Class

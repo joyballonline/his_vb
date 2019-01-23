@@ -22,14 +22,14 @@ Partial Class CustomerList
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.BtnSearch = New System.Windows.Forms.Button()
         Me.TxtSearch = New System.Windows.Forms.TextBox()
         Me.btnBack = New System.Windows.Forms.Button()
         Me.BtnBillingCalculation = New System.Windows.Forms.Button()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.LblCustomerName = New System.Windows.Forms.Label()
         Me.DgvCustomer = New System.Windows.Forms.DataGridView()
         Me.得意先名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.得意先コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -45,7 +45,7 @@ Partial Class CustomerList
         'BtnSearch
         '
         Me.BtnSearch.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.BtnSearch.Location = New System.Drawing.Point(191, 9)
+        Me.BtnSearch.Location = New System.Drawing.Point(239, 9)
         Me.BtnSearch.Name = "BtnSearch"
         Me.BtnSearch.Size = New System.Drawing.Size(75, 23)
         Me.BtnSearch.TabIndex = 2
@@ -55,7 +55,7 @@ Partial Class CustomerList
         'TxtSearch
         '
         Me.TxtSearch.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtSearch.Location = New System.Drawing.Point(85, 10)
+        Me.TxtSearch.Location = New System.Drawing.Point(133, 10)
         Me.TxtSearch.Name = "TxtSearch"
         Me.TxtSearch.Size = New System.Drawing.Size(100, 22)
         Me.TxtSearch.TabIndex = 1
@@ -80,15 +80,15 @@ Partial Class CustomerList
         Me.BtnBillingCalculation.Text = "請求計算"
         Me.BtnBillingCalculation.UseVisualStyleBackColor = True
         '
-        'Label1
+        'LblCustomerName
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label1.Location = New System.Drawing.Point(12, 13)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(67, 15)
-        Me.Label1.TabIndex = 18
-        Me.Label1.Text = "得意先名"
+        Me.LblCustomerName.AutoSize = True
+        Me.LblCustomerName.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblCustomerName.Location = New System.Drawing.Point(12, 13)
+        Me.LblCustomerName.Name = "LblCustomerName"
+        Me.LblCustomerName.Size = New System.Drawing.Size(67, 15)
+        Me.LblCustomerName.TabIndex = 18
+        Me.LblCustomerName.Text = "得意先名"
         '
         'DgvCustomer
         '
@@ -124,8 +124,8 @@ Partial Class CustomerList
         '
         '受注金額計
         '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.受注金額計.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.受注金額計.DefaultCellStyle = DataGridViewCellStyle4
         Me.受注金額計.HeaderText = "受注金額計"
         Me.受注金額計.Name = "受注金額計"
         Me.受注金額計.ReadOnly = True
@@ -133,8 +133,8 @@ Partial Class CustomerList
         '
         '請求金額計
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.請求金額計.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.請求金額計.DefaultCellStyle = DataGridViewCellStyle5
         Me.請求金額計.HeaderText = "請求金額計"
         Me.請求金額計.Name = "請求金額計"
         Me.請求金額計.ReadOnly = True
@@ -142,8 +142,8 @@ Partial Class CustomerList
         '
         '請求残高
         '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.請求残高.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.請求残高.DefaultCellStyle = DataGridViewCellStyle6
         Me.請求残高.HeaderText = "請求残高"
         Me.請求残高.Name = "請求残高"
         Me.請求残高.ReadOnly = True
@@ -181,7 +181,7 @@ Partial Class CustomerList
         Me.Controls.Add(Me.TxtSearch)
         Me.Controls.Add(Me.btnBack)
         Me.Controls.Add(Me.BtnBillingCalculation)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.LblCustomerName)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "CustomerList"
         Me.Text = "CustomerList"
@@ -195,7 +195,7 @@ Partial Class CustomerList
     Friend WithEvents TxtSearch As TextBox
     Friend WithEvents btnBack As Button
     Friend WithEvents BtnBillingCalculation As Button
-    Friend WithEvents Label1 As Label
+    Friend WithEvents LblCustomerName As Label
     Friend WithEvents DgvCustomer As DataGridView
     Friend WithEvents 得意先名 As DataGridViewTextBoxColumn
     Friend WithEvents 得意先コード As DataGridViewTextBoxColumn

@@ -107,19 +107,36 @@ Public Class CustomerOrderList
 
             Dim reccnt As Integer = 0
             ds = _db.selectDB(Sql, RS, reccnt)
-            DgvBilling.Columns.Add("請求番号", "請求番号")
-            DgvBilling.Columns.Add("請求区分", "請求区分")
-            DgvBilling.Columns.Add("請求日", "請求日")
-            DgvBilling.Columns.Add("受注番号", "受注番号")
-            DgvBilling.Columns.Add("受注番号枝番", "受注番号枝番")
-            DgvBilling.Columns.Add("得意先コード", "得意先コード")
-            DgvBilling.Columns.Add("得意先名", "得意先名")
-            DgvBilling.Columns.Add("請求金額計", "請求金額計")
-            DgvBilling.Columns.Add("売掛残高", "売掛残高")
-            DgvBilling.Columns.Add("備考1", "備考1")
-            DgvBilling.Columns.Add("備考2", "備考2")
-            DgvBilling.Columns.Add("登録日", "登録日")
-            DgvBilling.Columns.Add("更新者", "更新者")
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                DgvBilling.Columns.Add("請求番号", "BillingNumber")
+                DgvBilling.Columns.Add("請求区分", "BillingClassification")
+                DgvBilling.Columns.Add("請求日", "BillingDate")
+                DgvBilling.Columns.Add("受注番号", "OrderNumber")
+                DgvBilling.Columns.Add("受注番号枝番", "BranchNumber")
+                DgvBilling.Columns.Add("得意先コード", "CustomerCode")
+                DgvBilling.Columns.Add("得意先名", "CustomerName")
+                DgvBilling.Columns.Add("請求金額計", "TotalBillingAmount")
+                DgvBilling.Columns.Add("売掛残高", "AccountsReceivableBalance")
+                DgvBilling.Columns.Add("備考1", "Remarks1")
+                DgvBilling.Columns.Add("備考2", "Remarks2")
+                DgvBilling.Columns.Add("登録日", "RegistrationDate")
+                DgvBilling.Columns.Add("更新者", "Changer")
+            Else
+                DgvBilling.Columns.Add("請求番号", "請求番号")
+                DgvBilling.Columns.Add("請求区分", "請求区分")
+                DgvBilling.Columns.Add("請求日", "請求日")
+                DgvBilling.Columns.Add("受注番号", "受注番号")
+                DgvBilling.Columns.Add("受注番号枝番", "受注番号枝番")
+                DgvBilling.Columns.Add("得意先コード", "得意先コード")
+                DgvBilling.Columns.Add("得意先名", "得意先名")
+                DgvBilling.Columns.Add("請求金額計", "請求金額計")
+                DgvBilling.Columns.Add("売掛残高", "売掛残高")
+                DgvBilling.Columns.Add("備考1", "備考1")
+                DgvBilling.Columns.Add("備考2", "備考2")
+                DgvBilling.Columns.Add("登録日", "登録日")
+                DgvBilling.Columns.Add("更新者", "更新者")
+            End If
+
 
             DgvBilling.Columns("請求金額計").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             DgvBilling.Columns("売掛残高").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -151,6 +168,12 @@ Public Class CustomerOrderList
     End Sub
     Private Sub MstHanyoue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         PurchaseListLoad()
+        If frmC01F10_Login.loginValue.Language = "ENG" Then
+            LblCustomerName.Text = "CustomerName"
+            BtnSearch.Text = "Search"
+            BtnInvoice.Text = "Invoicing"
+            BtnBack.Text = "Back"
+        End If
     End Sub
 
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
@@ -350,5 +373,9 @@ Public Class CustomerOrderList
             'Marshal.ReleaseComObject(app)
 
         End Try
+    End Sub
+
+    Private Sub BtnSearch_Click(sender As Object, e As EventArgs) Handles BtnSearch.Click
+
     End Sub
 End Class

@@ -28,7 +28,7 @@ Partial Class CustomerOrderList
         Me.DgvBilling = New System.Windows.Forms.DataGridView()
         Me.BtnSearch = New System.Windows.Forms.Button()
         Me.Search = New System.Windows.Forms.TextBox()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.LblCustomerName = New System.Windows.Forms.Label()
         CType(Me.DgvBilling, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -80,7 +80,7 @@ Partial Class CustomerOrderList
         'BtnSearch
         '
         Me.BtnSearch.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.BtnSearch.Location = New System.Drawing.Point(191, 5)
+        Me.BtnSearch.Location = New System.Drawing.Point(239, 5)
         Me.BtnSearch.Name = "BtnSearch"
         Me.BtnSearch.Size = New System.Drawing.Size(75, 23)
         Me.BtnSearch.TabIndex = 2
@@ -90,20 +90,20 @@ Partial Class CustomerOrderList
         'Search
         '
         Me.Search.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Search.Location = New System.Drawing.Point(85, 6)
+        Me.Search.Location = New System.Drawing.Point(133, 6)
         Me.Search.Name = "Search"
         Me.Search.Size = New System.Drawing.Size(100, 22)
         Me.Search.TabIndex = 1
         '
-        'Label1
+        'LblCustomerName
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label1.Location = New System.Drawing.Point(12, 9)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(67, 15)
-        Me.Label1.TabIndex = 156
-        Me.Label1.Text = "得意先名"
+        Me.LblCustomerName.AutoSize = True
+        Me.LblCustomerName.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblCustomerName.Location = New System.Drawing.Point(12, 9)
+        Me.LblCustomerName.Name = "LblCustomerName"
+        Me.LblCustomerName.Size = New System.Drawing.Size(67, 15)
+        Me.LblCustomerName.TabIndex = 156
+        Me.LblCustomerName.Text = "得意先名"
         '
         'CustomerOrderList
         '
@@ -111,7 +111,7 @@ Partial Class CustomerOrderList
         Me.ClientSize = New System.Drawing.Size(1350, 287)
         Me.Controls.Add(Me.BtnSearch)
         Me.Controls.Add(Me.Search)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.LblCustomerName)
         Me.Controls.Add(Me.DgvBilling)
         Me.Controls.Add(Me.ChkCancelData)
         Me.Controls.Add(Me.BtnInvoice)
@@ -131,5 +131,5 @@ Partial Class CustomerOrderList
     Friend WithEvents DgvBilling As DataGridView
     Friend WithEvents BtnSearch As Button
     Friend WithEvents Search As TextBox
-    Friend WithEvents Label1 As Label
+    Friend WithEvents LblCustomerName As Label
 End Class

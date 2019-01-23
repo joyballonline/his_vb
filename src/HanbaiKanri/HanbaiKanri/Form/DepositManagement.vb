@@ -152,6 +152,56 @@ Public Class DepositManagement
         DgvDeposit.Columns.Insert(1, column)
 
         BillLoad()
+
+        If frmC01F10_Login.loginValue.Language = "ENG" Then
+            LblHistory.Text = "DepositHistory"
+            LblDeposit.Text = "DepositInput"
+            LblBillingInfo.Text = "BillingInfomation"
+            LblDepositDate.Text = "DepositDate"
+            LblRemarks.Text = "Remarks"
+            LblNo1.Text = "Record"
+            LblNo1.Location = New Point(1272, 65)
+            LblNo1.Size = New Size(66, 22)
+            LblNo2.Text = "Record"
+            LblNo2.Location = New Point(1272, 198)
+            LblNo2.Size = New Size(66, 22)
+            LblNo3.Text = "Record"
+            LblNo3.Location = New Point(1272, 335)
+            LblNo3.Size = New Size(66, 22)
+
+            TxtCount1.Location = New Point(1228, 65)
+            TxtCount2.Location = New Point(1228, 198)
+            TxtCount3.Location = New Point(1228, 335)
+
+            BtnAdd.Text = "Add"
+            BtnDelete.Text = "Delete"
+            BtnCal.Text = "Distribute"
+            BtnRegist.Text = "Registration"
+            BtnBack.Text = "Back"
+
+            DgvCustomer.Columns("請求先").HeaderText = "CustomerName"
+            DgvCustomer.Columns("請求残高").HeaderText = "BillingBalance"
+
+            DgvHistory.Columns("請求番号").HeaderText = "BillingNumber"
+            DgvHistory.Columns("入金済請求先").HeaderText = "CustomerName"
+            DgvHistory.Columns("入金番号").HeaderText = "DepositNumber"
+            DgvHistory.Columns("入金日").HeaderText = "DepositDate"
+            DgvHistory.Columns("入金種目").HeaderText = "DepositType"
+            DgvHistory.Columns("入金済入金額計").HeaderText = "TotalDepositAmount"
+            DgvHistory.Columns("備考").HeaderText = "Remarks"
+
+            DgvDeposit.Columns("行番号").HeaderText = "LineNumber"
+            DgvDeposit.Columns("入金種目").HeaderText = "DepositType"
+            DgvDeposit.Columns("入力入金額").HeaderText = "DepositAmount"
+
+            DgvBillingInfo.Columns("請求情報請求番号").HeaderText = "BillingNumber"
+            DgvBillingInfo.Columns("請求日").HeaderText = "BillingDate"
+            DgvBillingInfo.Columns("請求金額").HeaderText = "BillingAmount"
+            DgvBillingInfo.Columns("請求情報入金額計").HeaderText = "TotalDepositAmount"
+            DgvBillingInfo.Columns("請求情報請求残高").HeaderText = "BillingBalance"
+            DgvBillingInfo.Columns("入金額").HeaderText = "DepositAmount"
+
+        End If
     End Sub
 
     Private Sub BillLoad()

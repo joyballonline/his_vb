@@ -25,10 +25,9 @@ Partial Class DepositDetailList
         Me.RbtnSlip = New System.Windows.Forms.RadioButton()
         Me.RbtnDetails = New System.Windows.Forms.RadioButton()
         Me.LblMode = New System.Windows.Forms.Label()
-        Me.BtnBillingCancel = New System.Windows.Forms.Button()
+        Me.BtnDepositCancel = New System.Windows.Forms.Button()
         Me.ChkCancelData = New System.Windows.Forms.CheckBox()
-        Me.BtnBillingView = New System.Windows.Forms.Button()
-        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.BtnDepositView = New System.Windows.Forms.Button()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.TxtBillingNo2 = New System.Windows.Forms.TextBox()
@@ -43,10 +42,9 @@ Partial Class DepositDetailList
         Me.Label1 = New System.Windows.Forms.Label()
         Me.LblConditions = New System.Windows.Forms.Label()
         Me.TxtCustomerName = New System.Windows.Forms.TextBox()
-        Me.BtnPurchaseSearch = New System.Windows.Forms.Button()
+        Me.BtnDepositSearch = New System.Windows.Forms.Button()
         Me.BtnBack = New System.Windows.Forms.Button()
         Me.DgvBilling = New System.Windows.Forms.DataGridView()
-        Me.Panel1.SuspendLayout()
         CType(Me.DgvBilling, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -55,7 +53,7 @@ Partial Class DepositDetailList
         Me.RbtnSlip.AutoSize = True
         Me.RbtnSlip.Checked = True
         Me.RbtnSlip.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.RbtnSlip.Location = New System.Drawing.Point(6, 8)
+        Me.RbtnSlip.Location = New System.Drawing.Point(16, 196)
         Me.RbtnSlip.Name = "RbtnSlip"
         Me.RbtnSlip.Size = New System.Drawing.Size(89, 19)
         Me.RbtnSlip.TabIndex = 9
@@ -67,7 +65,7 @@ Partial Class DepositDetailList
         '
         Me.RbtnDetails.AutoSize = True
         Me.RbtnDetails.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.RbtnDetails.Location = New System.Drawing.Point(101, 8)
+        Me.RbtnDetails.Location = New System.Drawing.Point(111, 195)
         Me.RbtnDetails.Name = "RbtnDetails"
         Me.RbtnDetails.Size = New System.Drawing.Size(89, 19)
         Me.RbtnDetails.TabIndex = 10
@@ -86,16 +84,16 @@ Partial Class DepositDetailList
         Me.LblMode.Text = "モード"
         Me.LblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'BtnBillingCancel
+        'BtnDepositCancel
         '
-        Me.BtnBillingCancel.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.BtnBillingCancel.Location = New System.Drawing.Point(832, 509)
-        Me.BtnBillingCancel.Name = "BtnBillingCancel"
-        Me.BtnBillingCancel.Size = New System.Drawing.Size(165, 40)
-        Me.BtnBillingCancel.TabIndex = 12
-        Me.BtnBillingCancel.Text = "入金取消"
-        Me.BtnBillingCancel.UseVisualStyleBackColor = True
-        Me.BtnBillingCancel.Visible = False
+        Me.BtnDepositCancel.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.BtnDepositCancel.Location = New System.Drawing.Point(832, 509)
+        Me.BtnDepositCancel.Name = "BtnDepositCancel"
+        Me.BtnDepositCancel.Size = New System.Drawing.Size(165, 40)
+        Me.BtnDepositCancel.TabIndex = 12
+        Me.BtnDepositCancel.Text = "入金取消"
+        Me.BtnDepositCancel.UseVisualStyleBackColor = True
+        Me.BtnDepositCancel.Visible = False
         '
         'ChkCancelData
         '
@@ -108,26 +106,16 @@ Partial Class DepositDetailList
         Me.ChkCancelData.Text = "取消データを含める"
         Me.ChkCancelData.UseVisualStyleBackColor = True
         '
-        'BtnBillingView
+        'BtnDepositView
         '
-        Me.BtnBillingView.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.BtnBillingView.Location = New System.Drawing.Point(1003, 509)
-        Me.BtnBillingView.Name = "BtnBillingView"
-        Me.BtnBillingView.Size = New System.Drawing.Size(165, 40)
-        Me.BtnBillingView.TabIndex = 13
-        Me.BtnBillingView.Text = "入金参照"
-        Me.BtnBillingView.UseVisualStyleBackColor = True
-        Me.BtnBillingView.Visible = False
-        '
-        'Panel1
-        '
-        Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel1.Controls.Add(Me.RbtnSlip)
-        Me.Panel1.Controls.Add(Me.RbtnDetails)
-        Me.Panel1.Location = New System.Drawing.Point(16, 187)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(195, 37)
-        Me.Panel1.TabIndex = 324
+        Me.BtnDepositView.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.BtnDepositView.Location = New System.Drawing.Point(1003, 509)
+        Me.BtnDepositView.Name = "BtnDepositView"
+        Me.BtnDepositView.Size = New System.Drawing.Size(165, 40)
+        Me.BtnDepositView.TabIndex = 13
+        Me.BtnDepositView.Text = "入金参照"
+        Me.BtnDepositView.UseVisualStyleBackColor = True
+        Me.BtnDepositView.Visible = False
         '
         'Label10
         '
@@ -263,15 +251,15 @@ Partial Class DepositDetailList
         Me.TxtCustomerName.Size = New System.Drawing.Size(350, 22)
         Me.TxtCustomerName.TabIndex = 1
         '
-        'BtnPurchaseSearch
+        'BtnDepositSearch
         '
-        Me.BtnPurchaseSearch.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.BtnPurchaseSearch.Location = New System.Drawing.Point(1174, 43)
-        Me.BtnPurchaseSearch.Name = "BtnPurchaseSearch"
-        Me.BtnPurchaseSearch.Size = New System.Drawing.Size(165, 40)
-        Me.BtnPurchaseSearch.TabIndex = 7
-        Me.BtnPurchaseSearch.Text = "検索"
-        Me.BtnPurchaseSearch.UseVisualStyleBackColor = True
+        Me.BtnDepositSearch.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.BtnDepositSearch.Location = New System.Drawing.Point(1174, 43)
+        Me.BtnDepositSearch.Name = "BtnDepositSearch"
+        Me.BtnDepositSearch.Size = New System.Drawing.Size(165, 40)
+        Me.BtnDepositSearch.TabIndex = 7
+        Me.BtnDepositSearch.Text = "検索"
+        Me.BtnDepositSearch.UseVisualStyleBackColor = True
         '
         'BtnBack
         '
@@ -301,11 +289,12 @@ Partial Class DepositDetailList
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.RbtnDetails)
+        Me.Controls.Add(Me.RbtnSlip)
         Me.Controls.Add(Me.LblMode)
-        Me.Controls.Add(Me.BtnBillingCancel)
+        Me.Controls.Add(Me.BtnDepositCancel)
         Me.Controls.Add(Me.ChkCancelData)
-        Me.Controls.Add(Me.BtnBillingView)
-        Me.Controls.Add(Me.Panel1)
+        Me.Controls.Add(Me.BtnDepositView)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.TxtBillingNo2)
@@ -320,15 +309,13 @@ Partial Class DepositDetailList
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.LblConditions)
         Me.Controls.Add(Me.TxtCustomerName)
-        Me.Controls.Add(Me.BtnPurchaseSearch)
+        Me.Controls.Add(Me.BtnDepositSearch)
         Me.Controls.Add(Me.BtnBack)
         Me.Controls.Add(Me.DgvBilling)
         Me.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "DepositDetailList"
         Me.Text = "DepositDetailList"
-        Me.Panel1.ResumeLayout(False)
-        Me.Panel1.PerformLayout()
         CType(Me.DgvBilling, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -338,10 +325,9 @@ Partial Class DepositDetailList
     Friend WithEvents RbtnSlip As RadioButton
     Friend WithEvents RbtnDetails As RadioButton
     Friend WithEvents LblMode As Label
-    Friend WithEvents BtnBillingCancel As Button
+    Friend WithEvents BtnDepositCancel As Button
     Friend WithEvents ChkCancelData As CheckBox
-    Friend WithEvents BtnBillingView As Button
-    Friend WithEvents Panel1 As Panel
+    Friend WithEvents BtnDepositView As Button
     Friend WithEvents Label10 As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents TxtBillingNo2 As TextBox
@@ -356,7 +342,7 @@ Partial Class DepositDetailList
     Friend WithEvents Label1 As Label
     Friend WithEvents LblConditions As Label
     Friend WithEvents TxtCustomerName As TextBox
-    Friend WithEvents BtnPurchaseSearch As Button
+    Friend WithEvents BtnDepositSearch As Button
     Friend WithEvents BtnBack As Button
     Friend WithEvents DgvBilling As DataGridView
 End Class
