@@ -22,12 +22,12 @@ Partial Class Supplier
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.Label14 = New System.Windows.Forms.Label()
-        Me.Label13 = New System.Windows.Forms.Label()
-        Me.Label12 = New System.Windows.Forms.Label()
-        Me.Label11 = New System.Windows.Forms.Label()
+        Me.LblMemo = New System.Windows.Forms.Label()
+        Me.LblTariffRate = New System.Windows.Forms.Label()
+        Me.LblPerson = New System.Windows.Forms.Label()
+        Me.LblFax = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
-        Me.Label9 = New System.Windows.Forms.Label()
+        Me.LblTel = New System.Windows.Forms.Label()
         Me.TxtMemo = New System.Windows.Forms.TextBox()
         Me.TxtTariffRate = New System.Windows.Forms.TextBox()
         Me.TxtPerson = New System.Windows.Forms.TextBox()
@@ -35,13 +35,13 @@ Partial Class Supplier
         Me.TxtTelSearch = New System.Windows.Forms.TextBox()
         Me.TxtTel = New System.Windows.Forms.TextBox()
         Me.BtnRegistration = New System.Windows.Forms.Button()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Lbladdress3 = New System.Windows.Forms.Label()
+        Me.LblAddress2 = New System.Windows.Forms.Label()
+        Me.LblAddress1 = New System.Windows.Forms.Label()
+        Me.LblPostalCode = New System.Windows.Forms.Label()
+        Me.LblShortName = New System.Windows.Forms.Label()
+        Me.LblSupplierName = New System.Windows.Forms.Label()
+        Me.LblSupplierCode = New System.Windows.Forms.Label()
         Me.TxtAddress3 = New System.Windows.Forms.TextBox()
         Me.TxtAddress2 = New System.Windows.Forms.TextBox()
         Me.TxtAddress1 = New System.Windows.Forms.TextBox()
@@ -50,80 +50,80 @@ Partial Class Supplier
         Me.TxtSupplierName = New System.Windows.Forms.TextBox()
         Me.TxtSupplierCode = New System.Windows.Forms.TextBox()
         Me.TxtCompanyCode = New System.Windows.Forms.TextBox()
-        Me.Label15 = New System.Windows.Forms.Label()
-        Me.Label16 = New System.Windows.Forms.Label()
-        Me.Label17 = New System.Windows.Forms.Label()
-        Me.Label18 = New System.Windows.Forms.Label()
+        Me.LblAccountNumber = New System.Windows.Forms.Label()
+        Me.LblDepositCategory = New System.Windows.Forms.Label()
+        Me.LblBranchCode = New System.Windows.Forms.Label()
+        Me.LblBankCode = New System.Windows.Forms.Label()
         Me.TxtAccountNumber = New System.Windows.Forms.TextBox()
         Me.TxtDepositCategory = New System.Windows.Forms.TextBox()
         Me.TxtBranchOfficeCode = New System.Windows.Forms.TextBox()
         Me.TxtBankCode = New System.Windows.Forms.TextBox()
-        Me.Label19 = New System.Windows.Forms.Label()
+        Me.LblAccountHolder = New System.Windows.Forms.Label()
         Me.TxtAccountName = New System.Windows.Forms.TextBox()
         Me.BtnBack = New System.Windows.Forms.Button()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.LblPosition = New System.Windows.Forms.Label()
         Me.TxtPosition = New System.Windows.Forms.TextBox()
-        Me.Label20 = New System.Windows.Forms.Label()
-        Me.Label22 = New System.Windows.Forms.Label()
-        Me.Label23 = New System.Windows.Forms.Label()
+        Me.LblPostalCodeText = New System.Windows.Forms.Label()
+        Me.LblTelText = New System.Windows.Forms.Label()
+        Me.LblFaxText = New System.Windows.Forms.Label()
         Me.Label24 = New System.Windows.Forms.Label()
-        Me.Label26 = New System.Windows.Forms.Label()
-        Me.Label33 = New System.Windows.Forms.Label()
-        Me.Label34 = New System.Windows.Forms.Label()
+        Me.LblTariffRateText = New System.Windows.Forms.Label()
+        Me.LblPphText = New System.Windows.Forms.Label()
+        Me.LblPph = New System.Windows.Forms.Label()
         Me.TxtPph = New System.Windows.Forms.TextBox()
-        Me.Label35 = New System.Windows.Forms.Label()
-        Me.Label36 = New System.Windows.Forms.Label()
+        Me.LblTransportationCostText = New System.Windows.Forms.Label()
+        Me.LblTransportationCost = New System.Windows.Forms.Label()
         Me.TxtTransportationCost = New System.Windows.Forms.TextBox()
-        Me.Label39 = New System.Windows.Forms.Label()
+        Me.LblBankName = New System.Windows.Forms.Label()
         Me.TxtBankName = New System.Windows.Forms.TextBox()
-        Me.Label41 = New System.Windows.Forms.Label()
+        Me.LblBranchName = New System.Windows.Forms.Label()
         Me.TxtBranchName = New System.Windows.Forms.TextBox()
-        Me.Label21 = New System.Windows.Forms.Label()
-        Me.Label25 = New System.Windows.Forms.Label()
-        Me.Label27 = New System.Windows.Forms.Label()
-        Me.Label28 = New System.Windows.Forms.Label()
-        Me.Label29 = New System.Windows.Forms.Label()
+        Me.LblBankCodeText = New System.Windows.Forms.Label()
+        Me.LblBranchCodeText = New System.Windows.Forms.Label()
+        Me.LblDepositCategoryText = New System.Windows.Forms.Label()
+        Me.LblAccountNumberText = New System.Windows.Forms.Label()
+        Me.LblSupplierCodeText = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
-        'Label14
+        'LblMemo
         '
-        Me.Label14.AutoSize = True
-        Me.Label14.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label14.Location = New System.Drawing.Point(94, 331)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(28, 15)
-        Me.Label14.TabIndex = 77
-        Me.Label14.Text = "メモ"
+        Me.LblMemo.AutoSize = True
+        Me.LblMemo.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblMemo.Location = New System.Drawing.Point(12, 331)
+        Me.LblMemo.Name = "LblMemo"
+        Me.LblMemo.Size = New System.Drawing.Size(28, 15)
+        Me.LblMemo.TabIndex = 77
+        Me.LblMemo.Text = "メモ"
         '
-        'Label13
+        'LblTariffRate
         '
-        Me.Label13.AutoSize = True
-        Me.Label13.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label13.Location = New System.Drawing.Point(425, 241)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(52, 15)
-        Me.Label13.TabIndex = 76
-        Me.Label13.Text = "関税率"
+        Me.LblTariffRate.AutoSize = True
+        Me.LblTariffRate.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblTariffRate.Location = New System.Drawing.Point(368, 241)
+        Me.LblTariffRate.Name = "LblTariffRate"
+        Me.LblTariffRate.Size = New System.Drawing.Size(52, 15)
+        Me.LblTariffRate.TabIndex = 76
+        Me.LblTariffRate.Text = "関税率"
         '
-        'Label12
+        'LblPerson
         '
-        Me.Label12.AutoSize = True
-        Me.Label12.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label12.Location = New System.Drawing.Point(410, 196)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(67, 15)
-        Me.Label12.TabIndex = 75
-        Me.Label12.Text = "担当者名"
+        Me.LblPerson.AutoSize = True
+        Me.LblPerson.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblPerson.Location = New System.Drawing.Point(368, 196)
+        Me.LblPerson.Name = "LblPerson"
+        Me.LblPerson.Size = New System.Drawing.Size(67, 15)
+        Me.LblPerson.TabIndex = 75
+        Me.LblPerson.Text = "担当者名"
         '
-        'Label11
+        'LblFax
         '
-        Me.Label11.AutoSize = True
-        Me.Label11.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label11.Location = New System.Drawing.Point(59, 196)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(63, 15)
-        Me.Label11.TabIndex = 74
-        Me.Label11.Text = "FAX番号"
+        Me.LblFax.AutoSize = True
+        Me.LblFax.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblFax.Location = New System.Drawing.Point(12, 196)
+        Me.LblFax.Name = "LblFax"
+        Me.LblFax.Size = New System.Drawing.Size(63, 15)
+        Me.LblFax.TabIndex = 74
+        Me.LblFax.Text = "FAX番号"
         '
         'Label10
         '
@@ -135,15 +135,15 @@ Partial Class Supplier
         Me.Label10.TabIndex = 73
         Me.Label10.Text = "電話番号検索用"
         '
-        'Label9
+        'LblTel
         '
-        Me.Label9.AutoSize = True
-        Me.Label9.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label9.Location = New System.Drawing.Point(410, 151)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(67, 15)
-        Me.Label9.TabIndex = 72
-        Me.Label9.Text = "電話番号"
+        Me.LblTel.AutoSize = True
+        Me.LblTel.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblTel.Location = New System.Drawing.Point(368, 151)
+        Me.LblTel.Name = "LblTel"
+        Me.LblTel.Size = New System.Drawing.Size(67, 15)
+        Me.LblTel.TabIndex = 72
+        Me.LblTel.Text = "電話番号"
         '
         'TxtMemo
         '
@@ -204,75 +204,75 @@ Partial Class Supplier
         Me.BtnRegistration.Text = "登録"
         Me.BtnRegistration.UseVisualStyleBackColor = True
         '
-        'Label8
+        'Lbladdress3
         '
-        Me.Label8.AutoSize = True
-        Me.Label8.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label8.Location = New System.Drawing.Point(75, 155)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(47, 15)
-        Me.Label8.TabIndex = 64
-        Me.Label8.Text = "住所３"
+        Me.Lbladdress3.AutoSize = True
+        Me.Lbladdress3.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Lbladdress3.Location = New System.Drawing.Point(12, 155)
+        Me.Lbladdress3.Name = "Lbladdress3"
+        Me.Lbladdress3.Size = New System.Drawing.Size(47, 15)
+        Me.Lbladdress3.TabIndex = 64
+        Me.Lbladdress3.Text = "住所３"
         '
-        'Label7
+        'LblAddress2
         '
-        Me.Label7.AutoSize = True
-        Me.Label7.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label7.Location = New System.Drawing.Point(430, 106)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(47, 15)
-        Me.Label7.TabIndex = 63
-        Me.Label7.Text = "住所２"
+        Me.LblAddress2.AutoSize = True
+        Me.LblAddress2.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblAddress2.Location = New System.Drawing.Point(368, 106)
+        Me.LblAddress2.Name = "LblAddress2"
+        Me.LblAddress2.Size = New System.Drawing.Size(47, 15)
+        Me.LblAddress2.TabIndex = 63
+        Me.LblAddress2.Text = "住所２"
         '
-        'Label6
+        'LblAddress1
         '
-        Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label6.Location = New System.Drawing.Point(75, 106)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(47, 15)
-        Me.Label6.TabIndex = 62
-        Me.Label6.Text = "住所１"
+        Me.LblAddress1.AutoSize = True
+        Me.LblAddress1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblAddress1.Location = New System.Drawing.Point(12, 106)
+        Me.LblAddress1.Name = "LblAddress1"
+        Me.LblAddress1.Size = New System.Drawing.Size(47, 15)
+        Me.LblAddress1.TabIndex = 62
+        Me.LblAddress1.Text = "住所１"
         '
-        'Label5
+        'LblPostalCode
         '
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label5.Location = New System.Drawing.Point(410, 60)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(67, 15)
-        Me.Label5.TabIndex = 61
-        Me.Label5.Text = "郵便番号"
+        Me.LblPostalCode.AutoSize = True
+        Me.LblPostalCode.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblPostalCode.Location = New System.Drawing.Point(368, 60)
+        Me.LblPostalCode.Name = "LblPostalCode"
+        Me.LblPostalCode.Size = New System.Drawing.Size(67, 15)
+        Me.LblPostalCode.TabIndex = 61
+        Me.LblPostalCode.Text = "郵便番号"
         '
-        'Label4
+        'LblShortName
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label4.Location = New System.Drawing.Point(25, 60)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(97, 15)
-        Me.Label4.TabIndex = 60
-        Me.Label4.Text = "仕入先名略称"
+        Me.LblShortName.AutoSize = True
+        Me.LblShortName.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblShortName.Location = New System.Drawing.Point(12, 60)
+        Me.LblShortName.Name = "LblShortName"
+        Me.LblShortName.Size = New System.Drawing.Size(97, 15)
+        Me.LblShortName.TabIndex = 60
+        Me.LblShortName.Text = "仕入先名略称"
         '
-        'Label3
+        'LblSupplierName
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label3.Location = New System.Drawing.Point(410, 15)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(67, 15)
-        Me.Label3.TabIndex = 59
-        Me.Label3.Text = "仕入先名"
+        Me.LblSupplierName.AutoSize = True
+        Me.LblSupplierName.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblSupplierName.Location = New System.Drawing.Point(368, 15)
+        Me.LblSupplierName.Name = "LblSupplierName"
+        Me.LblSupplierName.Size = New System.Drawing.Size(67, 15)
+        Me.LblSupplierName.TabIndex = 59
+        Me.LblSupplierName.Text = "仕入先名"
         '
-        'Label2
+        'LblSupplierCode
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label2.Location = New System.Drawing.Point(37, 15)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(85, 15)
-        Me.Label2.TabIndex = 58
-        Me.Label2.Text = "仕入先コード"
+        Me.LblSupplierCode.AutoSize = True
+        Me.LblSupplierCode.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblSupplierCode.Location = New System.Drawing.Point(12, 15)
+        Me.LblSupplierCode.Name = "LblSupplierCode"
+        Me.LblSupplierCode.Size = New System.Drawing.Size(85, 15)
+        Me.LblSupplierCode.TabIndex = 58
+        Me.LblSupplierCode.Text = "仕入先コード"
         '
         'TxtAddress3
         '
@@ -334,50 +334,50 @@ Partial Class Supplier
         '
         Me.TxtCompanyCode.Location = New System.Drawing.Point(758, 6)
         Me.TxtCompanyCode.Name = "TxtCompanyCode"
-        Me.TxtCompanyCode.Size = New System.Drawing.Size(26, 19)
+        Me.TxtCompanyCode.Size = New System.Drawing.Size(26, 20)
         Me.TxtCompanyCode.TabIndex = 49
         Me.TxtCompanyCode.TabStop = False
         Me.TxtCompanyCode.Visible = False
         '
-        'Label15
+        'LblAccountNumber
         '
-        Me.Label15.AutoSize = True
-        Me.Label15.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label15.Location = New System.Drawing.Point(55, 466)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(67, 15)
-        Me.Label15.TabIndex = 85
-        Me.Label15.Text = "口座番号"
+        Me.LblAccountNumber.AutoSize = True
+        Me.LblAccountNumber.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblAccountNumber.Location = New System.Drawing.Point(15, 466)
+        Me.LblAccountNumber.Name = "LblAccountNumber"
+        Me.LblAccountNumber.Size = New System.Drawing.Size(67, 15)
+        Me.LblAccountNumber.TabIndex = 85
+        Me.LblAccountNumber.Text = "口座番号"
         '
-        'Label16
+        'LblDepositCategory
         '
-        Me.Label16.AutoSize = True
-        Me.Label16.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label16.Location = New System.Drawing.Point(410, 421)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(67, 15)
-        Me.Label16.TabIndex = 84
-        Me.Label16.Text = "預金種目"
+        Me.LblDepositCategory.AutoSize = True
+        Me.LblDepositCategory.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblDepositCategory.Location = New System.Drawing.Point(368, 421)
+        Me.LblDepositCategory.Name = "LblDepositCategory"
+        Me.LblDepositCategory.Size = New System.Drawing.Size(67, 15)
+        Me.LblDepositCategory.TabIndex = 84
+        Me.LblDepositCategory.Text = "預金種目"
         '
-        'Label17
+        'LblBranchCode
         '
-        Me.Label17.AutoSize = True
-        Me.Label17.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label17.Location = New System.Drawing.Point(52, 421)
-        Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(70, 15)
-        Me.Label17.TabIndex = 83
-        Me.Label17.Text = "支店コード"
+        Me.LblBranchCode.AutoSize = True
+        Me.LblBranchCode.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblBranchCode.Location = New System.Drawing.Point(12, 421)
+        Me.LblBranchCode.Name = "LblBranchCode"
+        Me.LblBranchCode.Size = New System.Drawing.Size(70, 15)
+        Me.LblBranchCode.TabIndex = 83
+        Me.LblBranchCode.Text = "支店コード"
         '
-        'Label18
+        'LblBankCode
         '
-        Me.Label18.AutoSize = True
-        Me.Label18.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label18.Location = New System.Drawing.Point(52, 376)
-        Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(70, 15)
-        Me.Label18.TabIndex = 82
-        Me.Label18.Text = "銀行コード"
+        Me.LblBankCode.AutoSize = True
+        Me.LblBankCode.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblBankCode.Location = New System.Drawing.Point(12, 376)
+        Me.LblBankCode.Name = "LblBankCode"
+        Me.LblBankCode.Size = New System.Drawing.Size(70, 15)
+        Me.LblBankCode.TabIndex = 82
+        Me.LblBankCode.Text = "銀行コード"
         '
         'TxtAccountNumber
         '
@@ -411,15 +411,15 @@ Partial Class Supplier
         Me.TxtBankCode.Size = New System.Drawing.Size(234, 22)
         Me.TxtBankCode.TabIndex = 17
         '
-        'Label19
+        'LblAccountHolder
         '
-        Me.Label19.AutoSize = True
-        Me.Label19.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label19.Location = New System.Drawing.Point(410, 466)
-        Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(67, 15)
-        Me.Label19.TabIndex = 87
-        Me.Label19.Text = "口座名義"
+        Me.LblAccountHolder.AutoSize = True
+        Me.LblAccountHolder.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblAccountHolder.Location = New System.Drawing.Point(368, 466)
+        Me.LblAccountHolder.Name = "LblAccountHolder"
+        Me.LblAccountHolder.Size = New System.Drawing.Size(67, 15)
+        Me.LblAccountHolder.TabIndex = 87
+        Me.LblAccountHolder.Text = "口座名義"
         '
         'TxtAccountName
         '
@@ -439,15 +439,15 @@ Partial Class Supplier
         Me.BtnBack.Text = "戻る"
         Me.BtnBack.UseVisualStyleBackColor = True
         '
-        'Label1
+        'LblPosition
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label1.Location = New System.Drawing.Point(40, 241)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(82, 15)
-        Me.Label1.TabIndex = 90
-        Me.Label1.Text = "担当者役職"
+        Me.LblPosition.AutoSize = True
+        Me.LblPosition.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblPosition.Location = New System.Drawing.Point(12, 241)
+        Me.LblPosition.Name = "LblPosition"
+        Me.LblPosition.Size = New System.Drawing.Size(82, 15)
+        Me.LblPosition.TabIndex = 90
+        Me.LblPosition.Text = "担当者役職"
         '
         'TxtPosition
         '
@@ -457,35 +457,35 @@ Partial Class Supplier
         Me.TxtPosition.Size = New System.Drawing.Size(234, 22)
         Me.TxtPosition.TabIndex = 11
         '
-        'Label20
+        'LblPostalCodeText
         '
-        Me.Label20.AutoSize = True
-        Me.Label20.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label20.Location = New System.Drawing.Point(486, 82)
-        Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(96, 15)
-        Me.Label20.TabIndex = 217
-        Me.Label20.Text = "(例：0123456)"
+        Me.LblPostalCodeText.AutoSize = True
+        Me.LblPostalCodeText.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblPostalCodeText.Location = New System.Drawing.Point(486, 82)
+        Me.LblPostalCodeText.Name = "LblPostalCodeText"
+        Me.LblPostalCodeText.Size = New System.Drawing.Size(96, 15)
+        Me.LblPostalCodeText.TabIndex = 217
+        Me.LblPostalCodeText.Text = "(例：0123456)"
         '
-        'Label22
+        'LblTelText
         '
-        Me.Label22.AutoSize = True
-        Me.Label22.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label22.Location = New System.Drawing.Point(486, 173)
-        Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(120, 15)
-        Me.Label22.TabIndex = 219
-        Me.Label22.Text = "(例：0123456789)"
+        Me.LblTelText.AutoSize = True
+        Me.LblTelText.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblTelText.Location = New System.Drawing.Point(486, 173)
+        Me.LblTelText.Name = "LblTelText"
+        Me.LblTelText.Size = New System.Drawing.Size(120, 15)
+        Me.LblTelText.TabIndex = 219
+        Me.LblTelText.Text = "(例：0123456789)"
         '
-        'Label23
+        'LblFaxText
         '
-        Me.Label23.AutoSize = True
-        Me.Label23.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label23.Location = New System.Drawing.Point(131, 218)
-        Me.Label23.Name = "Label23"
-        Me.Label23.Size = New System.Drawing.Size(120, 15)
-        Me.Label23.TabIndex = 220
-        Me.Label23.Text = "(例：0123456789)"
+        Me.LblFaxText.AutoSize = True
+        Me.LblFaxText.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblFaxText.Location = New System.Drawing.Point(131, 218)
+        Me.LblFaxText.Name = "LblFaxText"
+        Me.LblFaxText.Size = New System.Drawing.Size(120, 15)
+        Me.LblFaxText.TabIndex = 220
+        Me.LblFaxText.Text = "(例：0123456789)"
         '
         'Label24
         '
@@ -497,35 +497,35 @@ Partial Class Supplier
         Me.Label24.TabIndex = 221
         Me.Label24.Text = "(例：)"
         '
-        'Label26
+        'LblTariffRateText
         '
-        Me.Label26.AutoSize = True
-        Me.Label26.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label26.Location = New System.Drawing.Point(486, 263)
-        Me.Label26.Name = "Label26"
-        Me.Label26.Size = New System.Drawing.Size(67, 15)
-        Me.Label26.TabIndex = 222
-        Me.Label26.Text = "(例：0.01)"
+        Me.LblTariffRateText.AutoSize = True
+        Me.LblTariffRateText.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblTariffRateText.Location = New System.Drawing.Point(486, 263)
+        Me.LblTariffRateText.Name = "LblTariffRateText"
+        Me.LblTariffRateText.Size = New System.Drawing.Size(67, 15)
+        Me.LblTariffRateText.TabIndex = 222
+        Me.LblTariffRateText.Text = "(例：0.01)"
         '
-        'Label33
+        'LblPphText
         '
-        Me.Label33.AutoSize = True
-        Me.Label33.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label33.Location = New System.Drawing.Point(131, 308)
-        Me.Label33.Name = "Label33"
-        Me.Label33.Size = New System.Drawing.Size(75, 15)
-        Me.Label33.TabIndex = 233
-        Me.Label33.Text = "(例：0.025)"
+        Me.LblPphText.AutoSize = True
+        Me.LblPphText.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblPphText.Location = New System.Drawing.Point(131, 308)
+        Me.LblPphText.Name = "LblPphText"
+        Me.LblPphText.Size = New System.Drawing.Size(75, 15)
+        Me.LblPphText.TabIndex = 233
+        Me.LblPphText.Text = "(例：0.025)"
         '
-        'Label34
+        'LblPph
         '
-        Me.Label34.AutoSize = True
-        Me.Label34.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label34.Location = New System.Drawing.Point(25, 286)
-        Me.Label34.Name = "Label34"
-        Me.Label34.Size = New System.Drawing.Size(97, 15)
-        Me.Label34.TabIndex = 232
-        Me.Label34.Text = "前払法人税率"
+        Me.LblPph.AutoSize = True
+        Me.LblPph.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblPph.Location = New System.Drawing.Point(12, 286)
+        Me.LblPph.Name = "LblPph"
+        Me.LblPph.Size = New System.Drawing.Size(97, 15)
+        Me.LblPph.TabIndex = 232
+        Me.LblPph.Text = "前払法人税率"
         '
         'TxtPph
         '
@@ -535,25 +535,25 @@ Partial Class Supplier
         Me.TxtPph.Size = New System.Drawing.Size(234, 22)
         Me.TxtPph.TabIndex = 13
         '
-        'Label35
+        'LblTransportationCostText
         '
-        Me.Label35.AutoSize = True
-        Me.Label35.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label35.Location = New System.Drawing.Point(486, 308)
-        Me.Label35.Name = "Label35"
-        Me.Label35.Size = New System.Drawing.Size(59, 15)
-        Me.Label35.TabIndex = 236
-        Me.Label35.Text = "(例：0.1)"
+        Me.LblTransportationCostText.AutoSize = True
+        Me.LblTransportationCostText.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblTransportationCostText.Location = New System.Drawing.Point(486, 308)
+        Me.LblTransportationCostText.Name = "LblTransportationCostText"
+        Me.LblTransportationCostText.Size = New System.Drawing.Size(59, 15)
+        Me.LblTransportationCostText.TabIndex = 236
+        Me.LblTransportationCostText.Text = "(例：0.1)"
         '
-        'Label36
+        'LblTransportationCost
         '
-        Me.Label36.AutoSize = True
-        Me.Label36.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label36.Location = New System.Drawing.Point(410, 286)
-        Me.Label36.Name = "Label36"
-        Me.Label36.Size = New System.Drawing.Size(67, 15)
-        Me.Label36.TabIndex = 235
-        Me.Label36.Text = "輸送費率"
+        Me.LblTransportationCost.AutoSize = True
+        Me.LblTransportationCost.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblTransportationCost.Location = New System.Drawing.Point(368, 286)
+        Me.LblTransportationCost.Name = "LblTransportationCost"
+        Me.LblTransportationCost.Size = New System.Drawing.Size(67, 15)
+        Me.LblTransportationCost.TabIndex = 235
+        Me.LblTransportationCost.Text = "輸送費率"
         '
         'TxtTransportationCost
         '
@@ -563,15 +563,15 @@ Partial Class Supplier
         Me.TxtTransportationCost.Size = New System.Drawing.Size(234, 22)
         Me.TxtTransportationCost.TabIndex = 14
         '
-        'Label39
+        'LblBankName
         '
-        Me.Label39.AutoSize = True
-        Me.Label39.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label39.Location = New System.Drawing.Point(425, 331)
-        Me.Label39.Name = "Label39"
-        Me.Label39.Size = New System.Drawing.Size(52, 15)
-        Me.Label39.TabIndex = 239
-        Me.Label39.Text = "銀行名"
+        Me.LblBankName.AutoSize = True
+        Me.LblBankName.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblBankName.Location = New System.Drawing.Point(368, 331)
+        Me.LblBankName.Name = "LblBankName"
+        Me.LblBankName.Size = New System.Drawing.Size(52, 15)
+        Me.LblBankName.TabIndex = 239
+        Me.LblBankName.Text = "銀行名"
         '
         'TxtBankName
         '
@@ -581,15 +581,15 @@ Partial Class Supplier
         Me.TxtBankName.Size = New System.Drawing.Size(234, 22)
         Me.TxtBankName.TabIndex = 16
         '
-        'Label41
+        'LblBranchName
         '
-        Me.Label41.AutoSize = True
-        Me.Label41.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label41.Location = New System.Drawing.Point(425, 376)
-        Me.Label41.Name = "Label41"
-        Me.Label41.Size = New System.Drawing.Size(52, 15)
-        Me.Label41.TabIndex = 242
-        Me.Label41.Text = "支店名"
+        Me.LblBranchName.AutoSize = True
+        Me.LblBranchName.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblBranchName.Location = New System.Drawing.Point(368, 376)
+        Me.LblBranchName.Name = "LblBranchName"
+        Me.LblBranchName.Size = New System.Drawing.Size(52, 15)
+        Me.LblBranchName.TabIndex = 242
+        Me.LblBranchName.Text = "支店名"
         '
         'TxtBranchName
         '
@@ -599,99 +599,99 @@ Partial Class Supplier
         Me.TxtBranchName.Size = New System.Drawing.Size(234, 22)
         Me.TxtBranchName.TabIndex = 18
         '
-        'Label21
+        'LblBankCodeText
         '
-        Me.Label21.AutoSize = True
-        Me.Label21.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label21.Location = New System.Drawing.Point(131, 398)
-        Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(72, 15)
-        Me.Label21.TabIndex = 243
-        Me.Label21.Text = "(例：0123)"
+        Me.LblBankCodeText.AutoSize = True
+        Me.LblBankCodeText.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblBankCodeText.Location = New System.Drawing.Point(131, 398)
+        Me.LblBankCodeText.Name = "LblBankCodeText"
+        Me.LblBankCodeText.Size = New System.Drawing.Size(72, 15)
+        Me.LblBankCodeText.TabIndex = 243
+        Me.LblBankCodeText.Text = "(例：0123)"
         '
-        'Label25
+        'LblBranchCodeText
         '
-        Me.Label25.AutoSize = True
-        Me.Label25.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label25.Location = New System.Drawing.Point(131, 443)
-        Me.Label25.Name = "Label25"
-        Me.Label25.Size = New System.Drawing.Size(64, 15)
-        Me.Label25.TabIndex = 244
-        Me.Label25.Text = "(例：012)"
+        Me.LblBranchCodeText.AutoSize = True
+        Me.LblBranchCodeText.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblBranchCodeText.Location = New System.Drawing.Point(131, 443)
+        Me.LblBranchCodeText.Name = "LblBranchCodeText"
+        Me.LblBranchCodeText.Size = New System.Drawing.Size(64, 15)
+        Me.LblBranchCodeText.TabIndex = 244
+        Me.LblBranchCodeText.Text = "(例：012)"
         '
-        'Label27
+        'LblDepositCategoryText
         '
-        Me.Label27.AutoSize = True
-        Me.Label27.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label27.Location = New System.Drawing.Point(486, 443)
-        Me.Label27.Name = "Label27"
-        Me.Label27.Size = New System.Drawing.Size(127, 15)
-        Me.Label27.TabIndex = 245
-        Me.Label27.Text = "(例：1:普通 2:預金)"
+        Me.LblDepositCategoryText.AutoSize = True
+        Me.LblDepositCategoryText.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblDepositCategoryText.Location = New System.Drawing.Point(486, 443)
+        Me.LblDepositCategoryText.Name = "LblDepositCategoryText"
+        Me.LblDepositCategoryText.Size = New System.Drawing.Size(127, 15)
+        Me.LblDepositCategoryText.TabIndex = 245
+        Me.LblDepositCategoryText.Text = "(例：1:普通 2:預金)"
         '
-        'Label28
+        'LblAccountNumberText
         '
-        Me.Label28.AutoSize = True
-        Me.Label28.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label28.Location = New System.Drawing.Point(131, 488)
-        Me.Label28.Name = "Label28"
-        Me.Label28.Size = New System.Drawing.Size(96, 15)
-        Me.Label28.TabIndex = 246
-        Me.Label28.Text = "(例：0123456)"
+        Me.LblAccountNumberText.AutoSize = True
+        Me.LblAccountNumberText.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblAccountNumberText.Location = New System.Drawing.Point(131, 488)
+        Me.LblAccountNumberText.Name = "LblAccountNumberText"
+        Me.LblAccountNumberText.Size = New System.Drawing.Size(96, 15)
+        Me.LblAccountNumberText.TabIndex = 246
+        Me.LblAccountNumberText.Text = "(例：0123456)"
         '
-        'Label29
+        'LblSupplierCodeText
         '
-        Me.Label29.AutoSize = True
-        Me.Label29.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label29.Location = New System.Drawing.Point(131, 37)
-        Me.Label29.Name = "Label29"
-        Me.Label29.Size = New System.Drawing.Size(230, 15)
-        Me.Label29.TabIndex = 247
-        Me.Label29.Text = "(他仕入先コードと重複しない文字列)"
+        Me.LblSupplierCodeText.AutoSize = True
+        Me.LblSupplierCodeText.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblSupplierCodeText.Location = New System.Drawing.Point(131, 37)
+        Me.LblSupplierCodeText.Name = "LblSupplierCodeText"
+        Me.LblSupplierCodeText.Size = New System.Drawing.Size(230, 15)
+        Me.LblSupplierCodeText.TabIndex = 247
+        Me.LblSupplierCodeText.Text = "(他仕入先コードと重複しない文字列)"
         '
         'Supplier
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(729, 561)
-        Me.Controls.Add(Me.Label29)
-        Me.Controls.Add(Me.Label28)
-        Me.Controls.Add(Me.Label27)
-        Me.Controls.Add(Me.Label25)
-        Me.Controls.Add(Me.Label21)
-        Me.Controls.Add(Me.Label41)
+        Me.Controls.Add(Me.LblSupplierCodeText)
+        Me.Controls.Add(Me.LblAccountNumberText)
+        Me.Controls.Add(Me.LblDepositCategoryText)
+        Me.Controls.Add(Me.LblBranchCodeText)
+        Me.Controls.Add(Me.LblBankCodeText)
+        Me.Controls.Add(Me.LblBranchName)
         Me.Controls.Add(Me.TxtBranchName)
-        Me.Controls.Add(Me.Label39)
+        Me.Controls.Add(Me.LblBankName)
         Me.Controls.Add(Me.TxtBankName)
-        Me.Controls.Add(Me.Label35)
-        Me.Controls.Add(Me.Label36)
+        Me.Controls.Add(Me.LblTransportationCostText)
+        Me.Controls.Add(Me.LblTransportationCost)
         Me.Controls.Add(Me.TxtTransportationCost)
-        Me.Controls.Add(Me.Label33)
-        Me.Controls.Add(Me.Label34)
+        Me.Controls.Add(Me.LblPphText)
+        Me.Controls.Add(Me.LblPph)
         Me.Controls.Add(Me.TxtPph)
-        Me.Controls.Add(Me.Label26)
+        Me.Controls.Add(Me.LblTariffRateText)
         Me.Controls.Add(Me.Label24)
-        Me.Controls.Add(Me.Label23)
-        Me.Controls.Add(Me.Label22)
-        Me.Controls.Add(Me.Label20)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.LblFaxText)
+        Me.Controls.Add(Me.LblTelText)
+        Me.Controls.Add(Me.LblPostalCodeText)
+        Me.Controls.Add(Me.LblPosition)
         Me.Controls.Add(Me.TxtPosition)
         Me.Controls.Add(Me.BtnBack)
-        Me.Controls.Add(Me.Label19)
+        Me.Controls.Add(Me.LblAccountHolder)
         Me.Controls.Add(Me.TxtAccountName)
-        Me.Controls.Add(Me.Label15)
-        Me.Controls.Add(Me.Label16)
-        Me.Controls.Add(Me.Label17)
-        Me.Controls.Add(Me.Label18)
+        Me.Controls.Add(Me.LblAccountNumber)
+        Me.Controls.Add(Me.LblDepositCategory)
+        Me.Controls.Add(Me.LblBranchCode)
+        Me.Controls.Add(Me.LblBankCode)
         Me.Controls.Add(Me.TxtAccountNumber)
         Me.Controls.Add(Me.TxtDepositCategory)
         Me.Controls.Add(Me.TxtBranchOfficeCode)
         Me.Controls.Add(Me.TxtBankCode)
-        Me.Controls.Add(Me.Label14)
-        Me.Controls.Add(Me.Label13)
-        Me.Controls.Add(Me.Label12)
-        Me.Controls.Add(Me.Label11)
+        Me.Controls.Add(Me.LblMemo)
+        Me.Controls.Add(Me.LblTariffRate)
+        Me.Controls.Add(Me.LblPerson)
+        Me.Controls.Add(Me.LblFax)
         Me.Controls.Add(Me.Label10)
-        Me.Controls.Add(Me.Label9)
+        Me.Controls.Add(Me.LblTel)
         Me.Controls.Add(Me.TxtMemo)
         Me.Controls.Add(Me.TxtTariffRate)
         Me.Controls.Add(Me.TxtPerson)
@@ -699,13 +699,13 @@ Partial Class Supplier
         Me.Controls.Add(Me.TxtTelSearch)
         Me.Controls.Add(Me.TxtTel)
         Me.Controls.Add(Me.BtnRegistration)
-        Me.Controls.Add(Me.Label8)
-        Me.Controls.Add(Me.Label7)
-        Me.Controls.Add(Me.Label6)
-        Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.Label4)
-        Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.Lbladdress3)
+        Me.Controls.Add(Me.LblAddress2)
+        Me.Controls.Add(Me.LblAddress1)
+        Me.Controls.Add(Me.LblPostalCode)
+        Me.Controls.Add(Me.LblShortName)
+        Me.Controls.Add(Me.LblSupplierName)
+        Me.Controls.Add(Me.LblSupplierCode)
         Me.Controls.Add(Me.TxtAddress3)
         Me.Controls.Add(Me.TxtAddress2)
         Me.Controls.Add(Me.TxtAddress1)
@@ -722,12 +722,12 @@ Partial Class Supplier
 
     End Sub
 
-    Friend WithEvents Label14 As Label
-    Friend WithEvents Label13 As Label
-    Friend WithEvents Label12 As Label
-    Friend WithEvents Label11 As Label
+    Friend WithEvents LblMemo As Label
+    Friend WithEvents LblTariffRate As Label
+    Friend WithEvents LblPerson As Label
+    Friend WithEvents LblFax As Label
     Friend WithEvents Label10 As Label
-    Friend WithEvents Label9 As Label
+    Friend WithEvents LblTel As Label
     Friend WithEvents TxtMemo As TextBox
     Friend WithEvents TxtTariffRate As TextBox
     Friend WithEvents TxtPerson As TextBox
@@ -735,13 +735,13 @@ Partial Class Supplier
     Friend WithEvents TxtTelSearch As TextBox
     Friend WithEvents TxtTel As TextBox
     Friend WithEvents BtnRegistration As Button
-    Friend WithEvents Label8 As Label
-    Friend WithEvents Label7 As Label
-    Friend WithEvents Label6 As Label
-    Friend WithEvents Label5 As Label
-    Friend WithEvents Label4 As Label
-    Friend WithEvents Label3 As Label
-    Friend WithEvents Label2 As Label
+    Friend WithEvents Lbladdress3 As Label
+    Friend WithEvents LblAddress2 As Label
+    Friend WithEvents LblAddress1 As Label
+    Friend WithEvents LblPostalCode As Label
+    Friend WithEvents LblShortName As Label
+    Friend WithEvents LblSupplierName As Label
+    Friend WithEvents LblSupplierCode As Label
     Friend WithEvents TxtAddress3 As TextBox
     Friend WithEvents TxtAddress2 As TextBox
     Friend WithEvents TxtAddress1 As TextBox
@@ -750,37 +750,37 @@ Partial Class Supplier
     Friend WithEvents TxtSupplierName As TextBox
     Friend WithEvents TxtSupplierCode As TextBox
     Friend WithEvents TxtCompanyCode As TextBox
-    Friend WithEvents Label15 As Label
-    Friend WithEvents Label16 As Label
-    Friend WithEvents Label17 As Label
-    Friend WithEvents Label18 As Label
+    Friend WithEvents LblAccountNumber As Label
+    Friend WithEvents LblDepositCategory As Label
+    Friend WithEvents LblBranchCode As Label
+    Friend WithEvents LblBankCode As Label
     Friend WithEvents TxtAccountNumber As TextBox
     Friend WithEvents TxtDepositCategory As TextBox
     Friend WithEvents TxtBranchOfficeCode As TextBox
     Friend WithEvents TxtBankCode As TextBox
-    Friend WithEvents Label19 As Label
+    Friend WithEvents LblAccountHolder As Label
     Friend WithEvents TxtAccountName As TextBox
     Friend WithEvents BtnBack As Button
-    Friend WithEvents Label1 As Label
+    Friend WithEvents LblPosition As Label
     Friend WithEvents TxtPosition As TextBox
-    Friend WithEvents Label20 As Label
-    Friend WithEvents Label22 As Label
-    Friend WithEvents Label23 As Label
+    Friend WithEvents LblPostalCodeText As Label
+    Friend WithEvents LblTelText As Label
+    Friend WithEvents LblFaxText As Label
     Friend WithEvents Label24 As Label
-    Friend WithEvents Label26 As Label
-    Friend WithEvents Label33 As Label
-    Friend WithEvents Label34 As Label
+    Friend WithEvents LblTariffRateText As Label
+    Friend WithEvents LblPphText As Label
+    Friend WithEvents LblPph As Label
     Friend WithEvents TxtPph As TextBox
-    Friend WithEvents Label35 As Label
-    Friend WithEvents Label36 As Label
+    Friend WithEvents LblTransportationCostText As Label
+    Friend WithEvents LblTransportationCost As Label
     Friend WithEvents TxtTransportationCost As TextBox
-    Friend WithEvents Label39 As Label
+    Friend WithEvents LblBankName As Label
     Friend WithEvents TxtBankName As TextBox
-    Friend WithEvents Label41 As Label
+    Friend WithEvents LblBranchName As Label
     Friend WithEvents TxtBranchName As TextBox
-    Friend WithEvents Label21 As Label
-    Friend WithEvents Label25 As Label
-    Friend WithEvents Label27 As Label
-    Friend WithEvents Label28 As Label
-    Friend WithEvents Label29 As Label
+    Friend WithEvents LblBankCodeText As Label
+    Friend WithEvents LblBranchCodeText As Label
+    Friend WithEvents LblDepositCategoryText As Label
+    Friend WithEvents LblAccountNumberText As Label
+    Friend WithEvents LblSupplierCodeText As Label
 End Class

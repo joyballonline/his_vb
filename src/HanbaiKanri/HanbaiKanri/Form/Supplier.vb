@@ -405,6 +405,45 @@ Public Class Supplier
     End Sub
 
     Private Sub Supplier_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If frmC01F10_Login.loginValue.Language = "ENG" Then
+            LblSupplierCode.Text = "SupplierCode"
+            LblSupplierName.Text = "SupplierName"
+            LblShortName.Text = "ShortName"
+            LblPostalCode.Text = "PostalCode"
+            LblAddress1.Text = "Address1"
+            LblAddress2.Text = "Address2"
+            Lbladdress3.Text = "Address3"
+            LblTel.Text = "TEL"
+            LblFax.Text = "FAX"
+            LblPerson.Text = "Person"
+            LblPosition.Text = "Position"
+            LblTariffRate.Text = "TariffRate"
+            LblPph.Text = "PPH"
+            LblTransportationCost.Text = "ShippingCost"
+            LblMemo.Text = "Memo"
+            LblBankName.Text = "BankName"
+            LblBankCode.Text = "BankCode"
+            LblBranchCode.Text = "BranchCode"
+            LblBranchName.Text = "BranchName"
+            LblDepositCategory.Text = "DepositCategory"
+            LblAccountNumber.Text = "AccountNumber"
+            LblAccountHolder.Text = "AccountHolder"
+
+            LblSupplierCodeText.Text = "(Non-Overlapping string)"
+            LblPostalCodeText.Text = "(Example:0123456)"
+            LblTelText.Text = "(Example:0123456789)"
+            LblFaxText.Text = "(Example:0123456789)"
+            LblTariffRateText.Text = "(Example:0.01)"
+            LblTransportationCostText.Text = "(Example:0.1)"
+            LblPphText.Text = "(Example:0.025)"
+            LblBankCodeText.Text = "(Example:012)"
+            LblBranchCodeText.Text = "(Example:012)"
+            LblDepositCategoryText.Text = "(1:Normal 2:Deposit)"
+            LblAccountNumberText.Text = "(Example:0123456)"
+
+            BtnRegistration.Text = "Registration"
+            BtnBack.Text = "Back"
+        End If
         If _status = "EDIT" Then
             Dim Sql As String = ""
 
