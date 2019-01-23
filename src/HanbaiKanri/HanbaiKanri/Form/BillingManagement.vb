@@ -101,9 +101,70 @@ Public Class BillingManagement
         DgvAdd.Columns.Insert(1, column)
 
         BillLoad()
+        If frmC01F10_Login.loginValue.Language = "ENG" Then
+            LblBillingDate.Text = "BillingDate"
+            LblNo1.Text = "Record"
+            LblNo1.Location = New Point(1272, 118)
+            LblNo1.Size = New Size(66, 22)
+            LblNo2.Text = "Record"
+            LblNo2.Location = New Point(1272, 253)
+            LblNo2.Size = New Size(66, 22)
+            LblNo3.Text = "Record"
+            LblNo3.Location = New Point(1272, 387)
+            LblNo3.Size = New Size(66, 22)
+            LblRemarks1.Text = "Remarks1"
+            LblRemarks2.Text = "Remarks2"
+            LblCymndt.Text = "OrderDetails"
+            LblHistory.Text = "BillingHistory"
+            LblAdd.Text = "ThisTimeBilling"
 
+            TxtCount1.Location = New Point(1228, 118)
+            TxtCount2.Location = New Point(1228, 253)
+            TxtCount3.Location = New Point(1228, 387)
+
+            BtnRegist.Text = "Registration"
+            BtnBack.Text = "Back"
+
+            DgvCymn.Columns("受注番号").HeaderText = "OrderNumber"
+            DgvCymn.Columns("受注日").HeaderText = "OrderDate"
+            DgvCymn.Columns("得意先").HeaderText = "CustomerName"
+            DgvCymn.Columns("客先番号").HeaderText = "CustomerNumber"
+            DgvCymn.Columns("受注金額").HeaderText = "OrderAmount"
+            DgvCymn.Columns("請求金額計").HeaderText = "TotalBillingAmount"
+            DgvCymn.Columns("請求残高").HeaderText = "BillingRemaining"
+
+            DgvCymndt.Columns("明細").HeaderText = "LineItem"
+            DgvCymndt.Columns("メーカー").HeaderText = "Maker"
+            DgvCymndt.Columns("品名").HeaderText = "Item"
+            DgvCymndt.Columns("型式").HeaderText = "Model"
+            DgvCymndt.Columns("受注個数").HeaderText = "OrderQuantity"
+            DgvCymndt.Columns("単位").HeaderText = "Unit"
+            DgvCymndt.Columns("売上数量").HeaderText = "SalesQuantity"
+            DgvCymndt.Columns("売上単価").HeaderText = "SellingPrice"
+            DgvCymndt.Columns("売上金額").HeaderText = "SalesAmount"
+
+            DgvHistory.Columns("請求番号").HeaderText = "BillingNumber"
+            DgvHistory.Columns("請求日").HeaderText = "BillingDate"
+            DgvHistory.Columns("請求区分").HeaderText = "BillingClassification"
+            DgvHistory.Columns("請求先").HeaderText = "BillingAddress"
+            DgvHistory.Columns("請求金額").HeaderText = "TotalBillingAmount"
+            DgvHistory.Columns("備考1").HeaderText = "Remarks1"
+            DgvHistory.Columns("備考2").HeaderText = "Remarks2"
+
+            DgvAdd.Columns("請求区分").HeaderText = "BillingClassification"
+            DgvAdd.Columns("今回請求先").HeaderText = "BillingAddress"
+            DgvAdd.Columns("今回請求金額計").HeaderText = "TotalBillingAmount"
+            DgvAdd.Columns("今回備考1").HeaderText = "Remarks1"
+            DgvAdd.Columns("今回備考2").HeaderText = "Remarks2"
+
+        End If
         If _status = "VIEW" Then
-            LblMode.Text = "参照モード"
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                LblMode.Text = "ViewMode"
+            Else
+                LblMode.Text = "参照モード"
+            End If
+
             LblNo1.Visible = False
             LblNo2.Visible = False
             LblNo2.Visible = False
@@ -125,7 +186,12 @@ Public Class BillingManagement
 
             BtnRegist.Visible = False
         Else
-            LblMode.Text = "請求登録モード"
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                LblMode.Text = "BillingRegistrationMode"
+            Else
+                LblMode.Text = "請求登録モード"
+            End If
+
         End If
 
     End Sub

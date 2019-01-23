@@ -25,7 +25,6 @@ Partial Class BillingList
         Me.BtnBillingCancel = New System.Windows.Forms.Button()
         Me.ChkCancelData = New System.Windows.Forms.CheckBox()
         Me.BtnBillingView = New System.Windows.Forms.Button()
-        Me.Panel1 = New System.Windows.Forms.Panel()
         Me.RbtnSlip = New System.Windows.Forms.RadioButton()
         Me.RbtnDetails = New System.Windows.Forms.RadioButton()
         Me.Label10 = New System.Windows.Forms.Label()
@@ -42,13 +41,12 @@ Partial Class BillingList
         Me.Label1 = New System.Windows.Forms.Label()
         Me.LblConditions = New System.Windows.Forms.Label()
         Me.TxtCustomerName = New System.Windows.Forms.TextBox()
-        Me.BtnPurchaseSearch = New System.Windows.Forms.Button()
+        Me.BtnBillingSearch = New System.Windows.Forms.Button()
         Me.BtnBack = New System.Windows.Forms.Button()
         Me.DgvBilling = New System.Windows.Forms.DataGridView()
         Me.LblMode = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.TxtCustomerPO = New System.Windows.Forms.TextBox()
-        Me.Panel1.SuspendLayout()
         CType(Me.DgvBilling, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -67,7 +65,7 @@ Partial Class BillingList
         '
         Me.ChkCancelData.AutoSize = True
         Me.ChkCancelData.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.ChkCancelData.Location = New System.Drawing.Point(16, 202)
+        Me.ChkCancelData.Location = New System.Drawing.Point(16, 196)
         Me.ChkCancelData.Name = "ChkCancelData"
         Me.ChkCancelData.Size = New System.Drawing.Size(139, 19)
         Me.ChkCancelData.TabIndex = 9
@@ -85,40 +83,31 @@ Partial Class BillingList
         Me.BtnBillingView.UseVisualStyleBackColor = True
         Me.BtnBillingView.Visible = False
         '
-        'Panel1
-        '
-        Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel1.Controls.Add(Me.RbtnSlip)
-        Me.Panel1.Controls.Add(Me.RbtnDetails)
-        Me.Panel1.Location = New System.Drawing.Point(1144, 193)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(195, 37)
-        Me.Panel1.TabIndex = 146
-        Me.Panel1.Visible = False
-        '
         'RbtnSlip
         '
         Me.RbtnSlip.AutoSize = True
         Me.RbtnSlip.Checked = True
         Me.RbtnSlip.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.RbtnSlip.Location = New System.Drawing.Point(6, 8)
+        Me.RbtnSlip.Location = New System.Drawing.Point(1146, 196)
         Me.RbtnSlip.Name = "RbtnSlip"
         Me.RbtnSlip.Size = New System.Drawing.Size(89, 19)
         Me.RbtnSlip.TabIndex = 10
         Me.RbtnSlip.TabStop = True
         Me.RbtnSlip.Text = "伝票単位"
         Me.RbtnSlip.UseVisualStyleBackColor = True
+        Me.RbtnSlip.Visible = False
         '
         'RbtnDetails
         '
         Me.RbtnDetails.AutoSize = True
         Me.RbtnDetails.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.RbtnDetails.Location = New System.Drawing.Point(101, 8)
+        Me.RbtnDetails.Location = New System.Drawing.Point(1241, 196)
         Me.RbtnDetails.Name = "RbtnDetails"
         Me.RbtnDetails.Size = New System.Drawing.Size(89, 19)
         Me.RbtnDetails.TabIndex = 11
         Me.RbtnDetails.Text = "明細単位"
         Me.RbtnDetails.UseVisualStyleBackColor = True
+        Me.RbtnDetails.Visible = False
         '
         'Label10
         '
@@ -254,15 +243,15 @@ Partial Class BillingList
         Me.TxtCustomerName.Size = New System.Drawing.Size(350, 22)
         Me.TxtCustomerName.TabIndex = 1
         '
-        'BtnPurchaseSearch
+        'BtnBillingSearch
         '
-        Me.BtnPurchaseSearch.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.BtnPurchaseSearch.Location = New System.Drawing.Point(1174, 41)
-        Me.BtnPurchaseSearch.Name = "BtnPurchaseSearch"
-        Me.BtnPurchaseSearch.Size = New System.Drawing.Size(165, 40)
-        Me.BtnPurchaseSearch.TabIndex = 8
-        Me.BtnPurchaseSearch.Text = "検索"
-        Me.BtnPurchaseSearch.UseVisualStyleBackColor = True
+        Me.BtnBillingSearch.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.BtnBillingSearch.Location = New System.Drawing.Point(1174, 41)
+        Me.BtnBillingSearch.Name = "BtnBillingSearch"
+        Me.BtnBillingSearch.Size = New System.Drawing.Size(165, 40)
+        Me.BtnBillingSearch.TabIndex = 8
+        Me.BtnBillingSearch.Text = "検索"
+        Me.BtnBillingSearch.UseVisualStyleBackColor = True
         '
         'BtnBack
         '
@@ -324,13 +313,14 @@ Partial Class BillingList
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.RbtnDetails)
+        Me.Controls.Add(Me.RbtnSlip)
         Me.Controls.Add(Me.Label11)
         Me.Controls.Add(Me.TxtCustomerPO)
         Me.Controls.Add(Me.LblMode)
         Me.Controls.Add(Me.BtnBillingCancel)
         Me.Controls.Add(Me.ChkCancelData)
         Me.Controls.Add(Me.BtnBillingView)
-        Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.TxtBillingNo2)
@@ -345,15 +335,13 @@ Partial Class BillingList
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.LblConditions)
         Me.Controls.Add(Me.TxtCustomerName)
-        Me.Controls.Add(Me.BtnPurchaseSearch)
+        Me.Controls.Add(Me.BtnBillingSearch)
         Me.Controls.Add(Me.BtnBack)
         Me.Controls.Add(Me.DgvBilling)
         Me.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "BillingList"
         Me.Text = "BillingList"
-        Me.Panel1.ResumeLayout(False)
-        Me.Panel1.PerformLayout()
         CType(Me.DgvBilling, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -363,7 +351,6 @@ Partial Class BillingList
     Friend WithEvents BtnBillingCancel As Button
     Friend WithEvents ChkCancelData As CheckBox
     Friend WithEvents BtnBillingView As Button
-    Friend WithEvents Panel1 As Panel
     Friend WithEvents RbtnSlip As RadioButton
     Friend WithEvents RbtnDetails As RadioButton
     Friend WithEvents Label10 As Label
@@ -380,7 +367,7 @@ Partial Class BillingList
     Friend WithEvents Label1 As Label
     Friend WithEvents LblConditions As Label
     Friend WithEvents TxtCustomerName As TextBox
-    Friend WithEvents BtnPurchaseSearch As Button
+    Friend WithEvents BtnBillingSearch As Button
     Friend WithEvents BtnBack As Button
     Friend WithEvents DgvBilling As DataGridView
     Friend WithEvents LblMode As Label
