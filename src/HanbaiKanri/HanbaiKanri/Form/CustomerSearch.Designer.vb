@@ -26,7 +26,7 @@ Partial Class CustomerSearch
         Me.Search = New System.Windows.Forms.TextBox()
         Me.btnBack = New System.Windows.Forms.Button()
         Me.btnSelectCustomer = New System.Windows.Forms.Button()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.LblCustomerName = New System.Windows.Forms.Label()
         Me.Dgv_Customer = New System.Windows.Forms.DataGridView()
         Me.会社コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.得意先コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -51,7 +51,7 @@ Partial Class CustomerSearch
         'BtnSearch
         '
         Me.BtnSearch.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.BtnSearch.Location = New System.Drawing.Point(191, 5)
+        Me.BtnSearch.Location = New System.Drawing.Point(239, 5)
         Me.BtnSearch.Name = "BtnSearch"
         Me.BtnSearch.Size = New System.Drawing.Size(75, 23)
         Me.BtnSearch.TabIndex = 2
@@ -61,7 +61,7 @@ Partial Class CustomerSearch
         'Search
         '
         Me.Search.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Search.Location = New System.Drawing.Point(85, 6)
+        Me.Search.Location = New System.Drawing.Point(133, 6)
         Me.Search.Name = "Search"
         Me.Search.Size = New System.Drawing.Size(100, 22)
         Me.Search.TabIndex = 1
@@ -86,15 +86,15 @@ Partial Class CustomerSearch
         Me.btnSelectCustomer.Text = "選択"
         Me.btnSelectCustomer.UseVisualStyleBackColor = True
         '
-        'Label1
+        'LblCustomerName
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label1.Location = New System.Drawing.Point(12, 9)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(67, 15)
-        Me.Label1.TabIndex = 18
-        Me.Label1.Text = "得意先名"
+        Me.LblCustomerName.AutoSize = True
+        Me.LblCustomerName.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblCustomerName.Location = New System.Drawing.Point(12, 9)
+        Me.LblCustomerName.Name = "LblCustomerName"
+        Me.LblCustomerName.Size = New System.Drawing.Size(67, 15)
+        Me.LblCustomerName.TabIndex = 18
+        Me.LblCustomerName.Text = "得意先名"
         '
         'Dgv_Customer
         '
@@ -224,7 +224,7 @@ Partial Class CustomerSearch
         Me.Controls.Add(Me.Search)
         Me.Controls.Add(Me.btnBack)
         Me.Controls.Add(Me.btnSelectCustomer)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.LblCustomerName)
         Me.Controls.Add(Me.Dgv_Customer)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "CustomerSearch"
@@ -239,7 +239,7 @@ Partial Class CustomerSearch
     Friend WithEvents Search As TextBox
     Friend WithEvents btnBack As Button
     Friend WithEvents btnSelectCustomer As Button
-    Friend WithEvents Label1 As Label
+    Friend WithEvents LblCustomerName As Label
     Friend WithEvents Dgv_Customer As DataGridView
     Friend WithEvents 会社コード As DataGridViewTextBoxColumn
     Friend WithEvents 得意先コード As DataGridViewTextBoxColumn

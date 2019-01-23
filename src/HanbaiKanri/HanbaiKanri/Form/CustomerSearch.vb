@@ -130,6 +130,31 @@ Public Class CustomerSearch
             'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
             Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", UtilClass.getErrDetail(ex)))
         End Try
+        If frmC01F10_Login.loginValue.Language = "ENG" Then
+            LblCustomerName.Text = "CustomerName"
+            BtnSearch.Text = "Search"
+            btnSelectCustomer.Text = "Select"
+            btnBack.Text = "Back"
+
+            Dgv_Customer.Columns("会社コード").HeaderText = "CompanyCode"
+            Dgv_Customer.Columns("得意先コード").HeaderText = "CustomerCode"
+            Dgv_Customer.Columns("得意先名").HeaderText = "CustomerName"
+            Dgv_Customer.Columns("得意先名略称").HeaderText = "CustoemrShortName"
+            Dgv_Customer.Columns("郵便番号").HeaderText = "PostalCode"
+            Dgv_Customer.Columns("住所１").HeaderText = "Address1"
+            Dgv_Customer.Columns("住所２").HeaderText = "Address2"
+            Dgv_Customer.Columns("住所３").HeaderText = "Address3"
+            Dgv_Customer.Columns("電話番号").HeaderText = "TEL"
+            Dgv_Customer.Columns("電話番号検索用").HeaderText = "TEL(ForTheSearch)"
+            Dgv_Customer.Columns("FAX番号").HeaderText = "FAX"
+            Dgv_Customer.Columns("担当者名").HeaderText = "ContactPersonName"
+            Dgv_Customer.Columns("担当者役職").HeaderText = "ContactPersonPosition"
+            Dgv_Customer.Columns("既定支払条件").HeaderText = "PaymentTerms"
+            Dgv_Customer.Columns("メモ").HeaderText = "Memo"
+            Dgv_Customer.Columns("更新者").HeaderText = "Changer"
+            Dgv_Customer.Columns("更新日").HeaderText = "UpdateDate"
+
+        End If
     End Sub
 
     Private Sub btnSelectCustomer_Click(sender As Object, e As EventArgs) Handles btnSelectCustomer.Click

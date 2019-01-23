@@ -83,6 +83,14 @@ Public Class MakerSearch
     End Sub
 
     Private Sub MstHanyoue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If frmC01F10_Login.loginValue.Language = "ENG" Then
+            LblMaker.Text = "Maker"
+            LblItem.Text = "Item"
+            LblModel.Text = "Model"
+            BtnSelect.Text = "Select"
+            BtnBack.Text = "Back"
+
+        End If
         Dim Sql As String = ""
         Try
             If ColIdx = 2 Then
