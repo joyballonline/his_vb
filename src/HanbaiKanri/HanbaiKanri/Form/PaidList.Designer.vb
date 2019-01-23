@@ -24,7 +24,6 @@ Partial Class PaidList
     Private Sub InitializeComponent()
         Me.ChkCancelData = New System.Windows.Forms.CheckBox()
         Me.BtnCancel = New System.Windows.Forms.Button()
-        Me.Panel1 = New System.Windows.Forms.Panel()
         Me.RbtnSlip = New System.Windows.Forms.RadioButton()
         Me.RbtnDetails = New System.Windows.Forms.RadioButton()
         Me.Label9 = New System.Windows.Forms.Label()
@@ -41,11 +40,10 @@ Partial Class PaidList
         Me.Label1 = New System.Windows.Forms.Label()
         Me.LblConditions = New System.Windows.Forms.Label()
         Me.TxtSupplierName = New System.Windows.Forms.TextBox()
-        Me.BtnPurchaseSearch = New System.Windows.Forms.Button()
+        Me.BtnPaymentSearch = New System.Windows.Forms.Button()
         Me.BtnBack = New System.Windows.Forms.Button()
         Me.DgvHtyhd = New System.Windows.Forms.DataGridView()
         Me.LblMode = New System.Windows.Forms.Label()
-        Me.Panel1.SuspendLayout()
         CType(Me.DgvHtyhd, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -71,22 +69,12 @@ Partial Class PaidList
         Me.BtnCancel.UseVisualStyleBackColor = True
         Me.BtnCancel.Visible = False
         '
-        'Panel1
-        '
-        Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel1.Controls.Add(Me.RbtnSlip)
-        Me.Panel1.Controls.Add(Me.RbtnDetails)
-        Me.Panel1.Location = New System.Drawing.Point(16, 187)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(195, 37)
-        Me.Panel1.TabIndex = 117
-        '
         'RbtnSlip
         '
         Me.RbtnSlip.AutoSize = True
         Me.RbtnSlip.Checked = True
         Me.RbtnSlip.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.RbtnSlip.Location = New System.Drawing.Point(6, 8)
+        Me.RbtnSlip.Location = New System.Drawing.Point(16, 196)
         Me.RbtnSlip.Name = "RbtnSlip"
         Me.RbtnSlip.Size = New System.Drawing.Size(89, 19)
         Me.RbtnSlip.TabIndex = 8
@@ -98,7 +86,7 @@ Partial Class PaidList
         '
         Me.RbtnDetails.AutoSize = True
         Me.RbtnDetails.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.RbtnDetails.Location = New System.Drawing.Point(101, 8)
+        Me.RbtnDetails.Location = New System.Drawing.Point(111, 196)
         Me.RbtnDetails.Name = "RbtnDetails"
         Me.RbtnDetails.Size = New System.Drawing.Size(89, 19)
         Me.RbtnDetails.TabIndex = 9
@@ -110,7 +98,7 @@ Partial Class PaidList
         Me.Label9.AutoSize = True
         Me.Label9.Location = New System.Drawing.Point(936, 74)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(17, 12)
+        Me.Label9.Size = New System.Drawing.Size(19, 13)
         Me.Label9.TabIndex = 115
         Me.Label9.Text = "～"
         '
@@ -197,7 +185,7 @@ Partial Class PaidList
         Me.Label5.AutoSize = True
         Me.Label5.Location = New System.Drawing.Point(936, 46)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(17, 12)
+        Me.Label5.Size = New System.Drawing.Size(19, 13)
         Me.Label5.TabIndex = 114
         Me.Label5.Text = "～"
         '
@@ -239,15 +227,15 @@ Partial Class PaidList
         Me.TxtSupplierName.Size = New System.Drawing.Size(350, 22)
         Me.TxtSupplierName.TabIndex = 1
         '
-        'BtnPurchaseSearch
+        'BtnPaymentSearch
         '
-        Me.BtnPurchaseSearch.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.BtnPurchaseSearch.Location = New System.Drawing.Point(1174, 41)
-        Me.BtnPurchaseSearch.Name = "BtnPurchaseSearch"
-        Me.BtnPurchaseSearch.Size = New System.Drawing.Size(165, 40)
-        Me.BtnPurchaseSearch.TabIndex = 7
-        Me.BtnPurchaseSearch.Text = "検索"
-        Me.BtnPurchaseSearch.UseVisualStyleBackColor = True
+        Me.BtnPaymentSearch.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.BtnPaymentSearch.Location = New System.Drawing.Point(1174, 41)
+        Me.BtnPaymentSearch.Name = "BtnPaymentSearch"
+        Me.BtnPaymentSearch.Size = New System.Drawing.Size(165, 40)
+        Me.BtnPaymentSearch.TabIndex = 7
+        Me.BtnPaymentSearch.Text = "検索"
+        Me.BtnPaymentSearch.UseVisualStyleBackColor = True
         '
         'BtnBack
         '
@@ -288,10 +276,11 @@ Partial Class PaidList
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.RbtnDetails)
+        Me.Controls.Add(Me.RbtnSlip)
         Me.Controls.Add(Me.LblMode)
         Me.Controls.Add(Me.ChkCancelData)
         Me.Controls.Add(Me.BtnCancel)
-        Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.TxtPaidNo2)
         Me.Controls.Add(Me.TxtPaidDate2)
@@ -306,14 +295,12 @@ Partial Class PaidList
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.LblConditions)
         Me.Controls.Add(Me.TxtSupplierName)
-        Me.Controls.Add(Me.BtnPurchaseSearch)
+        Me.Controls.Add(Me.BtnPaymentSearch)
         Me.Controls.Add(Me.BtnBack)
         Me.Controls.Add(Me.DgvHtyhd)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "PaidList"
         Me.Text = "PaidList"
-        Me.Panel1.ResumeLayout(False)
-        Me.Panel1.PerformLayout()
         CType(Me.DgvHtyhd, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -321,7 +308,6 @@ Partial Class PaidList
     End Sub
     Friend WithEvents ChkCancelData As CheckBox
     Friend WithEvents BtnCancel As Button
-    Friend WithEvents Panel1 As Panel
     Friend WithEvents RbtnSlip As RadioButton
     Friend WithEvents RbtnDetails As RadioButton
     Friend WithEvents Label9 As Label
@@ -338,7 +324,7 @@ Partial Class PaidList
     Friend WithEvents Label1 As Label
     Friend WithEvents LblConditions As Label
     Friend WithEvents TxtSupplierName As TextBox
-    Friend WithEvents BtnPurchaseSearch As Button
+    Friend WithEvents BtnPaymentSearch As Button
     Friend WithEvents BtnBack As Button
     Friend WithEvents DgvHtyhd As DataGridView
     Friend WithEvents LblMode As Label

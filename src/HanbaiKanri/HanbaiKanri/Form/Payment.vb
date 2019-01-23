@@ -127,6 +127,61 @@ Public Class Payment
         DgvDeposit.Columns.Insert(1, column)
 
         BillLoad()
+
+        If frmC01F10_Login.loginValue.Language = "ENG" Then
+            LblHistory.Text = "PaymentHistory"
+            LblPayment.Text = "PaymentInput"
+            LblAPInfo.Text = "AccountsPayableInfo"
+            LblDepositDate.Text = "AccountsPayableDate"
+            LblDepositDate.Size = New Size(157, 22)
+            DtpDepositDate.Location = New Point(351, 335)
+            LblRemarks.Text = "Remarks"
+            LblRemarks.Location = New Point(505, 335)
+            LblRemarks.Size = New Size(111, 22)
+            TxtRemarks.Location = New Point(622, 335)
+            LblNo1.Text = "Record"
+            LblNo1.Location = New Point(1272, 65)
+            LblNo1.Size = New Size(66, 22)
+            LblNo2.Text = "Record"
+            LblNo2.Location = New Point(1272, 198)
+            LblNo2.Size = New Size(66, 22)
+            LblNo3.Text = "Record"
+            LblNo3.Location = New Point(1272, 335)
+            LblNo3.Size = New Size(66, 22)
+            LblMode.Text = "PaymentInputMode"
+            TxtCount1.Location = New Point(1240, 65)
+            TxtCount2.Location = New Point(1240, 198)
+            TxtCount3.Location = New Point(1240, 335)
+            TxtRemarks.Size = New Size(520, 22)
+            BtnAdd.Text = "Add"
+            BtnDelete.Text = "Delete"
+            BtnCal.Text = "Distribute"
+            BtnRegist.Text = "Registration"
+            BtnBack.Text = "Back"
+
+            DgvCustomer.Columns("支払先").HeaderText = "SupplierName"
+            DgvCustomer.Columns("買掛残高").HeaderText = "AccountsPayableBalance"
+
+
+            DgvHistory.Columns("支払済支払先").HeaderText = "SupplierName"
+            DgvHistory.Columns("支払番号").HeaderText = "PaymentNumber"
+            DgvHistory.Columns("支払日").HeaderText = "PaymentDate"
+            DgvHistory.Columns("支払種目").HeaderText = "PaymentType"
+            DgvHistory.Columns("支払済支払金額計").HeaderText = "TotalPaymentAmount"
+            DgvHistory.Columns("備考").HeaderText = "Remarks"
+
+            DgvDeposit.Columns("行番号").HeaderText = "LineNumber"
+            DgvDeposit.Columns("支払種目").HeaderText = "PaymentType"
+            DgvDeposit.Columns("入力支払金額").HeaderText = "PaymentAmount"
+
+            DgvBillingInfo.Columns("買掛情報買掛番号").HeaderText = "AccountsPayableNumber"
+            DgvBillingInfo.Columns("買掛日").HeaderText = "AccountsPayableDate"
+            DgvBillingInfo.Columns("買掛金額").HeaderText = "AccountsPayableAmount"
+            DgvBillingInfo.Columns("買掛情報支払金額計").HeaderText = "TotalPaymentAmount"
+            DgvBillingInfo.Columns("買掛情報買掛残高").HeaderText = "AccountsPayableBalance"
+            DgvBillingInfo.Columns("支払金額").HeaderText = "PaymentAmount"
+
+        End If
     End Sub
 
     Private Sub BillLoad()

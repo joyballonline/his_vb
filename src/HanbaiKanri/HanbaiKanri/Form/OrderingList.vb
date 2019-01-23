@@ -1262,24 +1262,44 @@ Public Class OrderingList
         Sql1 += "得意先担当者役職"
         Sql1 += ", "
         Sql1 += "得意先担当者名"
-        Dim result As DialogResult = MessageBox.Show("発注を取り消しますか？",
+
+        If frmC01F10_Login.loginValue.Language = "ENG" Then
+            Dim result As DialogResult = MessageBox.Show("Would you like to cancel the purchase order？",
+                                             "Question",
+                                             MessageBoxButtons.YesNoCancel,
+                                             MessageBoxIcon.Exclamation,
+                                             MessageBoxDefaultButton.Button2)
+
+            If result = DialogResult.Yes Then
+                _db.executeDB(Sql1)
+                DgvHtyhd.Rows.Clear()
+                DgvHtyhd.Columns.Clear()
+                Dim Status As String = "EXCLUSION"
+                PurchaseListLoad(Status)
+            ElseIf result = DialogResult.No Then
+
+            ElseIf result = DialogResult.Cancel Then
+
+            End If
+        Else
+            Dim result As DialogResult = MessageBox.Show("発注を取り消しますか？",
                                              "質問",
                                              MessageBoxButtons.YesNoCancel,
                                              MessageBoxIcon.Exclamation,
                                              MessageBoxDefaultButton.Button2)
 
-        If result = DialogResult.Yes Then
-            _db.executeDB(Sql1)
-            DgvHtyhd.Rows.Clear()
-            DgvHtyhd.Columns.Clear()
-            Dim Status As String = "EXCLUSION"
-            PurchaseListLoad(Status)
-        ElseIf result = DialogResult.No Then
+            If result = DialogResult.Yes Then
+                _db.executeDB(Sql1)
+                DgvHtyhd.Rows.Clear()
+                DgvHtyhd.Columns.Clear()
+                Dim Status As String = "EXCLUSION"
+                PurchaseListLoad(Status)
+            ElseIf result = DialogResult.No Then
 
-        ElseIf result = DialogResult.Cancel Then
+            ElseIf result = DialogResult.Cancel Then
 
+            End If
         End If
-
     End Sub
 
     Private Sub BtnAP_Click(sender As Object, e As EventArgs) Handles BtnAP.Click

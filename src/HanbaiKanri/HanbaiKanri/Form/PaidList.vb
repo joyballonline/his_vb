@@ -92,14 +92,25 @@ Public Class PaidList
                 Dim reccnt As Integer = 0
                 ds = _db.selectDB(Sql, RS, reccnt)
 
-                DgvHtyhd.Columns.Add("支払番号", "支払番号")
-                DgvHtyhd.Columns.Add("支払日", "支払日")
-                DgvHtyhd.Columns.Add("支払先名", "支払先名")
-                DgvHtyhd.Columns.Add("支払先", "支払先")
-                DgvHtyhd.Columns.Add("買掛金額", "買掛金額")
-                DgvHtyhd.Columns.Add("支払金額計", "支払金額計")
-                DgvHtyhd.Columns.Add("買掛残高", "買掛残高")
-                DgvHtyhd.Columns.Add("備考", "備考")
+                If frmC01F10_Login.loginValue.Language = "ENG" Then
+                    DgvHtyhd.Columns.Add("支払番号", "PaymentNumber")
+                    DgvHtyhd.Columns.Add("支払日", "PaymentDate")
+                    DgvHtyhd.Columns.Add("支払先名", "SupplierName")
+                    DgvHtyhd.Columns.Add("支払先", "PaymentDestination")
+                    DgvHtyhd.Columns.Add("買掛金額", "AccountsPayableAmount")
+                    DgvHtyhd.Columns.Add("支払金額計", "TotalPaymentAmount")
+                    DgvHtyhd.Columns.Add("買掛残高", "AccountsPayableBalance")
+                    DgvHtyhd.Columns.Add("備考", "Remarks")
+                Else
+                    DgvHtyhd.Columns.Add("支払番号", "支払番号")
+                    DgvHtyhd.Columns.Add("支払日", "支払日")
+                    DgvHtyhd.Columns.Add("支払先名", "支払先名")
+                    DgvHtyhd.Columns.Add("支払先", "支払先")
+                    DgvHtyhd.Columns.Add("買掛金額", "買掛金額")
+                    DgvHtyhd.Columns.Add("支払金額計", "支払金額計")
+                    DgvHtyhd.Columns.Add("買掛残高", "買掛残高")
+                    DgvHtyhd.Columns.Add("備考", "備考")
+                End If
 
                 DgvHtyhd.Columns("買掛金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 DgvHtyhd.Columns("支払金額計").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -139,14 +150,25 @@ Public Class PaidList
                 Dim reccnt As Integer = 0
                 ds = _db.selectDB(Sql, RS, reccnt)
 
-                DgvHtyhd.Columns.Add("支払番号", "支払番号")
-                DgvHtyhd.Columns.Add("支払日", "支払日")
-                DgvHtyhd.Columns.Add("支払先名", "支払先名")
-                DgvHtyhd.Columns.Add("支払先", "支払先")
-                DgvHtyhd.Columns.Add("買掛金額", "買掛金額")
-                DgvHtyhd.Columns.Add("支払金額計", "支払金額計")
-                DgvHtyhd.Columns.Add("買掛残高", "買掛残高")
-                DgvHtyhd.Columns.Add("備考", "備考")
+                If frmC01F10_Login.loginValue.Language = "ENG" Then
+                    DgvHtyhd.Columns.Add("支払番号", "PaymentNumber")
+                    DgvHtyhd.Columns.Add("支払日", "PaymentDate")
+                    DgvHtyhd.Columns.Add("支払先名", "SupplierName")
+                    DgvHtyhd.Columns.Add("支払先", "PaymentDestination")
+                    DgvHtyhd.Columns.Add("買掛金額", "AccountsPayableAmount")
+                    DgvHtyhd.Columns.Add("支払金額計", "TotalPaymentAmount")
+                    DgvHtyhd.Columns.Add("買掛残高", "AccountsPayableBalance")
+                    DgvHtyhd.Columns.Add("備考", "Remarks")
+                Else
+                    DgvHtyhd.Columns.Add("支払番号", "支払番号")
+                    DgvHtyhd.Columns.Add("支払日", "支払日")
+                    DgvHtyhd.Columns.Add("支払先名", "支払先名")
+                    DgvHtyhd.Columns.Add("支払先", "支払先")
+                    DgvHtyhd.Columns.Add("買掛金額", "買掛金額")
+                    DgvHtyhd.Columns.Add("支払金額計", "支払金額計")
+                    DgvHtyhd.Columns.Add("買掛残高", "買掛残高")
+                    DgvHtyhd.Columns.Add("備考", "備考")
+                End If
 
                 DgvHtyhd.Columns("買掛金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 DgvHtyhd.Columns("支払金額計").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -175,14 +197,41 @@ Public Class PaidList
     End Sub
     Private Sub MstHanyoue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If _status = "CANCEL" Then
-            LblMode.Text = "取消モード"
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                LblMode.Text = "CancelMode"
+            Else
+                LblMode.Text = "取消モード"
+            End If
+
             BtnCancel.Visible = True
         Else
-            LblMode.Text = "参照モード"
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                LblMode.Text = "ViewMode"
+            Else
+                LblMode.Text = "参照モード"
+            End If
         End If
 
         Dim Status As String = "EXCLUSION"
         PurchaseListLoad(Status)
+
+        If frmC01F10_Login.loginValue.Language = "ENG" Then
+            LblConditions.Text = "ExtractionCondition"
+            Label1.Text = "SupplierName"
+            Label4.Text = "SupplierCode"
+            Label8.Text = "PaymentDate"
+            Label7.Text = "PaymentNumber"
+            Label10.Text = "DisplayFormat"
+            RbtnSlip.Text = "UnitOfSlip"
+
+            RbtnDetails.Text = "LineItemUnit"
+            RbtnDetails.Location = New Point(166, 196)
+            ChkCancelData.Text = "IncludeCancelData"
+
+            BtnPaymentSearch.Text = "Search"
+            BtnCancel.Text = "CancelOfPayment"
+            BtnBack.Text = "Back"
+        End If
     End Sub
 
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
@@ -237,14 +286,25 @@ Public Class PaidList
             Dim reccnt As Integer = 0
             ds = _db.selectDB(Sql, RS, reccnt)
 
-            DgvHtyhd.Columns.Add("支払番号", "支払番号")
-            DgvHtyhd.Columns.Add("支払日", "支払日")
-            DgvHtyhd.Columns.Add("支払先名", "支払先名")
-            DgvHtyhd.Columns.Add("支払先", "支払先")
-            DgvHtyhd.Columns.Add("買掛金額", "買掛金額")
-            DgvHtyhd.Columns.Add("支払金額計", "支払金額計")
-            DgvHtyhd.Columns.Add("買掛残高", "買掛残高")
-            DgvHtyhd.Columns.Add("備考", "備考")
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                DgvHtyhd.Columns.Add("支払番号", "PaymentNumber")
+                DgvHtyhd.Columns.Add("支払日", "PaymentDate")
+                DgvHtyhd.Columns.Add("支払先名", "SupplierName")
+                DgvHtyhd.Columns.Add("支払先", "PaymentDestination")
+                DgvHtyhd.Columns.Add("買掛金額", "AccountsPayableAmount")
+                DgvHtyhd.Columns.Add("支払金額計", "TotalPaymentAmount")
+                DgvHtyhd.Columns.Add("買掛残高", "AccountsPayableBalance")
+                DgvHtyhd.Columns.Add("備考", "Remarks")
+            Else
+                DgvHtyhd.Columns.Add("支払番号", "支払番号")
+                DgvHtyhd.Columns.Add("支払日", "支払日")
+                DgvHtyhd.Columns.Add("支払先名", "支払先名")
+                DgvHtyhd.Columns.Add("支払先", "支払先")
+                DgvHtyhd.Columns.Add("買掛金額", "買掛金額")
+                DgvHtyhd.Columns.Add("支払金額計", "支払金額計")
+                DgvHtyhd.Columns.Add("買掛残高", "買掛残高")
+                DgvHtyhd.Columns.Add("備考", "備考")
+            End If
 
             DgvHtyhd.Columns("買掛金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             DgvHtyhd.Columns("支払金額計").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -296,12 +356,23 @@ Public Class PaidList
             Dim reccnt As Integer = 0
             ds = _db.selectDB(Sql, RS, reccnt)
 
-            DgvHtyhd.Columns.Add("支払番号", "支払番号")
-            DgvHtyhd.Columns.Add("買掛番号", "買掛番号")
-            DgvHtyhd.Columns.Add("支払先名", "支払先名")
-            DgvHtyhd.Columns.Add("支払金額", "支払金額")
-            DgvHtyhd.Columns.Add("支払日", "支払日")
-            DgvHtyhd.Columns.Add("備考", "備考")
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                DgvHtyhd.Columns.Add("支払番号", "PaymentNumber")
+                DgvHtyhd.Columns.Add("買掛番号", "AccountsPayableNumber")
+                DgvHtyhd.Columns.Add("支払先名", "SupplierName")
+                DgvHtyhd.Columns.Add("支払金額", "PaymentAmount")
+                DgvHtyhd.Columns.Add("支払日", "PaymentDate")
+                DgvHtyhd.Columns.Add("備考", "Remarks")
+            Else
+                DgvHtyhd.Columns.Add("支払番号", "支払番号")
+                DgvHtyhd.Columns.Add("買掛番号", "買掛番号")
+                DgvHtyhd.Columns.Add("支払先名", "支払先名")
+                DgvHtyhd.Columns.Add("支払金額", "支払金額")
+                DgvHtyhd.Columns.Add("支払日", "支払日")
+                DgvHtyhd.Columns.Add("備考", "備考")
+            End If
+
+
 
             DgvHtyhd.Columns("支払金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
@@ -329,7 +400,7 @@ Public Class PaidList
         End If
     End Sub
 
-    Private Sub BtnPurchaseSearch_Click(sender As Object, e As EventArgs) Handles BtnPurchaseSearch.Click
+    Private Sub BtnPurchaseSearch_Click(sender As Object, e As EventArgs) Handles BtnPaymentSearch.Click
         DgvHtyhd.Rows.Clear()
         DgvHtyhd.Columns.Clear()
 
@@ -515,14 +586,25 @@ Public Class PaidList
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-            DgvHtyhd.Columns.Add("支払番号", "支払番号")
-            DgvHtyhd.Columns.Add("支払日", "支払日")
-            DgvHtyhd.Columns.Add("支払先名", "支払先名")
-            DgvHtyhd.Columns.Add("支払先", "支払先")
-            DgvHtyhd.Columns.Add("買掛金額", "買掛金額")
-            DgvHtyhd.Columns.Add("支払金額計", "支払金額計")
-            DgvHtyhd.Columns.Add("買掛残高", "買掛残高")
-            DgvHtyhd.Columns.Add("備考", "備考")
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                DgvHtyhd.Columns.Add("支払番号", "PaymentNumber")
+                DgvHtyhd.Columns.Add("支払日", "PaymentDate")
+                DgvHtyhd.Columns.Add("支払先名", "SupplierName")
+                DgvHtyhd.Columns.Add("支払先", "PaymentDestination")
+                DgvHtyhd.Columns.Add("買掛金額", "AccountsPayableAmount")
+                DgvHtyhd.Columns.Add("支払金額計", "TotalPaymentAmount")
+                DgvHtyhd.Columns.Add("買掛残高", "AccountsPayableBalance")
+                DgvHtyhd.Columns.Add("備考", "Remarks")
+            Else
+                DgvHtyhd.Columns.Add("支払番号", "支払番号")
+                DgvHtyhd.Columns.Add("支払日", "支払日")
+                DgvHtyhd.Columns.Add("支払先名", "支払先名")
+                DgvHtyhd.Columns.Add("支払先", "支払先")
+                DgvHtyhd.Columns.Add("買掛金額", "買掛金額")
+                DgvHtyhd.Columns.Add("支払金額計", "支払金額計")
+                DgvHtyhd.Columns.Add("買掛残高", "買掛残高")
+                DgvHtyhd.Columns.Add("備考", "備考")
+            End If
 
             DgvHtyhd.Columns("買掛金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             DgvHtyhd.Columns("支払金額計").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -617,23 +699,44 @@ Public Class PaidList
         Sql1 += ", "
         Sql1 += "支払先"
 
-        Dim result As DialogResult = MessageBox.Show("支払情報を取り消しますか？",
+        If frmC01F10_Login.loginValue.Language = "ENG" Then
+            Dim result As DialogResult = MessageBox.Show("Would you like to cancel the Paymnt?",
+                                             "Question",
+                                             MessageBoxButtons.YesNoCancel,
+                                             MessageBoxIcon.Exclamation,
+                                             MessageBoxDefaultButton.Button2)
+
+            If result = DialogResult.Yes Then
+                _db.executeDB(Sql1)
+                DgvHtyhd.Rows.Clear()
+                DgvHtyhd.Columns.Clear()
+                Dim Status As String = "EXCLUSION"
+                PurchaseListLoad(Status)
+            ElseIf result = DialogResult.No Then
+
+            ElseIf result = DialogResult.Cancel Then
+
+            End If
+        Else
+            Dim result As DialogResult = MessageBox.Show("支払情報を取り消しますか？",
                                              "質問",
                                              MessageBoxButtons.YesNoCancel,
                                              MessageBoxIcon.Exclamation,
                                              MessageBoxDefaultButton.Button2)
 
-        If result = DialogResult.Yes Then
-            _db.executeDB(Sql1)
-            DgvHtyhd.Rows.Clear()
-            DgvHtyhd.Columns.Clear()
-            Dim Status As String = "EXCLUSION"
-            PurchaseListLoad(Status)
-        ElseIf result = DialogResult.No Then
+            If result = DialogResult.Yes Then
+                _db.executeDB(Sql1)
+                DgvHtyhd.Rows.Clear()
+                DgvHtyhd.Columns.Clear()
+                Dim Status As String = "EXCLUSION"
+                PurchaseListLoad(Status)
+            ElseIf result = DialogResult.No Then
 
-        ElseIf result = DialogResult.Cancel Then
+            ElseIf result = DialogResult.Cancel Then
 
+            End If
         End If
+
 
     End Sub
 End Class

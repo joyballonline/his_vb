@@ -156,6 +156,23 @@ Public Class PaymentList
             Sql2 = ""
             Sql3 = ""
         Next
+        If frmC01F10_Login.loginValue.Language = "ENG" Then
+            LblConditions.Text = "ExtractionCondition"
+            Label1.Text = "SupplierName"
+            Label2.Text = "Address"
+            Label3.Text = "TEL"
+            Label4.Text = "SupplierCode"
+            LblMode.Text = "PaymentInputmode"
+
+            BtnPayment.Text = "PaymentInput"
+            BtnSerach.Text = "Search"
+            btnBack.Text = "Back"
+
+            DgvSupplier.Columns("仕入先名").HeaderText = "SupplierName"
+            DgvSupplier.Columns("仕入金額計").HeaderText = "TotalPurchaseAmount"
+            DgvSupplier.Columns("支払残高").HeaderText = "PaymentBalance"
+
+        End If
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
