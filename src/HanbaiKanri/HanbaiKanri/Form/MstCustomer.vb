@@ -64,6 +64,34 @@ Public Class MstCustomer
     End Sub
 
     Private Sub MstCustomere_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If frmC01F10_Login.loginValue.Language = "ENG" Then
+            Label1.Text = "CustomerName"
+            TxtSearch.Location = New Point(120, 6)
+            BtnSearch.Text = "Search"
+            BtnSearch.Location = New Point(226, 6)
+            btnCustomerAdd.Text = "Add"
+            btnCustomerEdit.Text = "Edit"
+            btnBack.Text = "Back"
+
+            Dgv_Customer.Columns("会社コード").HeaderText = "CompanyCode"
+            Dgv_Customer.Columns("得意先コード").HeaderText = "CustomerCode"
+            Dgv_Customer.Columns("得意先名").HeaderText = "CustomerName"
+            Dgv_Customer.Columns("得意先名略称").HeaderText = "CustomerShortName"
+            Dgv_Customer.Columns("郵便番号").HeaderText = "PostalCode"
+            Dgv_Customer.Columns("住所１").HeaderText = "Address1"
+            Dgv_Customer.Columns("住所２").HeaderText = "Address2"
+            Dgv_Customer.Columns("住所３").HeaderText = "Address3"
+            Dgv_Customer.Columns("電話番号").HeaderText = "TEL"
+            Dgv_Customer.Columns("電話番号検索用").HeaderText = "TEL(ForSearch)"
+            Dgv_Customer.Columns("FAX番号").HeaderText = "FAX"
+            Dgv_Customer.Columns("担当者名").HeaderText = "ContactPersonName"
+            Dgv_Customer.Columns("担当者役職").HeaderText = "ContactPersonPosition"
+            Dgv_Customer.Columns("既定支払条件").HeaderText = "PaymentTerms"
+            Dgv_Customer.Columns("メモ").HeaderText = "Memo"
+            Dgv_Customer.Columns("更新者").HeaderText = "Changer"
+            Dgv_Customer.Columns("更新日").HeaderText = "UpdateDate"
+
+        End If
         Dim Sql As String = ""
         Try
             Sql += "SELECT "
@@ -136,7 +164,7 @@ Public Class MstCustomer
         Me.Hide()   ' 自分は隠れる
     End Sub
 
-    Private Sub btnSelectCustomer_Click(sender As Object, e As EventArgs) Handles btnSelectCustomer.Click
+    Private Sub btnSelectCustomer_Click(sender As Object, e As EventArgs) Handles btnCustomerEdit.Click
         Dim openForm As Form = Nothing
         Dim Status As String = "EDIT"
         Dim CompanyCode As String = Dgv_Customer.Rows(Dgv_Customer.CurrentCell.RowIndex).Cells("会社コード").Value
@@ -174,7 +202,7 @@ Public Class MstCustomer
             Sql += "得意先名"
             Sql += " ILIKE "
             Sql += "'%"
-            Sql += Search.Text
+            Sql += TxtSearch.Text
             Sql += "%'"
 
             Dim reccnt As Integer = 0

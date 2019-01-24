@@ -64,6 +64,45 @@ Public Class MstCompany
     End Sub
 
     Private Sub MstHanyoue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If frmC01F10_Login.loginValue.Language = "ENG" Then
+            Label1.Text = "CompanyName"
+            TxtSearch.Location = New Point(120, 6)
+            BtnSearch.Text = "Search"
+            BtnSearch.Location = New Point(226, 6)
+            btnCompanyAdd.Text = "Add"
+            btnCompanyEdit.Text = "Edit"
+            BtnBack.Text = "Back"
+
+            Dgv_Company.Columns("会社コード").HeaderText = "CompanyCode"
+            Dgv_Company.Columns("会社名").HeaderText = "CompanyName"
+            Dgv_Company.Columns("会社略称").HeaderText = "CompanyShortName"
+            Dgv_Company.Columns("郵便番号").HeaderText = "PostalCode"
+            Dgv_Company.Columns("住所１").HeaderText = "Address1"
+            Dgv_Company.Columns("住所２").HeaderText = "Address2"
+            Dgv_Company.Columns("住所３").HeaderText = "Address3"
+            Dgv_Company.Columns("電話番号").HeaderText = "TEL"
+            Dgv_Company.Columns("FAX番号").HeaderText = "FAX"
+            Dgv_Company.Columns("代表者役職").HeaderText = "RepresentativePosition"
+            Dgv_Company.Columns("代表者名").HeaderText = "RepresentativeName"
+            Dgv_Company.Columns("表示順").HeaderText = "DisplayOrder"
+            Dgv_Company.Columns("備考").HeaderText = "Remarks"
+            Dgv_Company.Columns("銀行名").HeaderText = "BankName"
+            Dgv_Company.Columns("銀行コード").HeaderText = "BankCode"
+            Dgv_Company.Columns("支店名").HeaderText = "BranchName"
+            Dgv_Company.Columns("支店コード").HeaderText = "BranchCode"
+            Dgv_Company.Columns("預金種目").HeaderText = "DepositCategory"
+            Dgv_Company.Columns("口座番号").HeaderText = "AccountNumber"
+            Dgv_Company.Columns("口座名義").HeaderText = "AccountHolder"
+            Dgv_Company.Columns("前回締日").HeaderText = "LastClosingDate"
+            Dgv_Company.Columns("今回締日").HeaderText = "ThisClosingDate"
+            Dgv_Company.Columns("次回締日").HeaderText = "NextClosingDate"
+            Dgv_Company.Columns("在庫単価評価法").HeaderText = "EvaluationMethod"
+            Dgv_Company.Columns("前払法人税率").HeaderText = "PPH"
+            Dgv_Company.Columns("会計用コード").HeaderText = "AccountingCode"
+            Dgv_Company.Columns("更新者").HeaderText = "Changer"
+            Dgv_Company.Columns("更新日").HeaderText = "UpdateDate"
+
+        End If
         Dim Sql As String = ""
         Try
             Sql += "SELECT "
@@ -132,7 +171,7 @@ Public Class MstCompany
         Me.Hide()   ' 自分は隠れる
     End Sub
 
-    Private Sub btnSelectCompany_Click(sender As Object, e As EventArgs) Handles btnSelectCompany.Click
+    Private Sub btnSelectCompany_Click(sender As Object, e As EventArgs) Handles btnCompanyEdit.Click
         Dim openForm As Form = Nothing
         Dim Status As String = "EDIT"
         Dim CompanyCode As String = Dgv_Company.Rows(Dgv_Company.CurrentCell.RowIndex).Cells("会社コード").Value
@@ -169,7 +208,7 @@ Public Class MstCompany
             Sql += "会社名"
             Sql += " ILIKE "
             Sql += "'%"
-            Sql += Search.Text
+            Sql += TxtSearch.Text
             Sql += "%'"
 
             Dim reccnt As Integer = 0

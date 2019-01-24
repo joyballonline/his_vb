@@ -40,12 +40,12 @@ Partial Class MstCustomer
         Me.メモ = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.更新者 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.更新日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.btnSelectCustomer = New System.Windows.Forms.Button()
+        Me.btnCustomerEdit = New System.Windows.Forms.Button()
         Me.btnCustomerAdd = New System.Windows.Forms.Button()
         Me.btnBack = New System.Windows.Forms.Button()
         Me.BtnSearch = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.Search = New System.Windows.Forms.TextBox()
+        Me.TxtSearch = New System.Windows.Forms.TextBox()
         CType(Me.Dgv_Customer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -169,15 +169,15 @@ Partial Class MstCustomer
         Me.更新日.Name = "更新日"
         Me.更新日.ReadOnly = True
         '
-        'btnSelectCustomer
+        'btnCustomerEdit
         '
-        Me.btnSelectCustomer.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.btnSelectCustomer.Location = New System.Drawing.Point(1002, 509)
-        Me.btnSelectCustomer.Name = "btnSelectCustomer"
-        Me.btnSelectCustomer.Size = New System.Drawing.Size(165, 40)
-        Me.btnSelectCustomer.TabIndex = 5
-        Me.btnSelectCustomer.Text = "得意先編集"
-        Me.btnSelectCustomer.UseVisualStyleBackColor = True
+        Me.btnCustomerEdit.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.btnCustomerEdit.Location = New System.Drawing.Point(1002, 509)
+        Me.btnCustomerEdit.Name = "btnCustomerEdit"
+        Me.btnCustomerEdit.Size = New System.Drawing.Size(165, 40)
+        Me.btnCustomerEdit.TabIndex = 5
+        Me.btnCustomerEdit.Text = "得意先編集"
+        Me.btnCustomerEdit.UseVisualStyleBackColor = True
         '
         'btnCustomerAdd
         '
@@ -219,13 +219,13 @@ Partial Class MstCustomer
         Me.Label1.TabIndex = 11
         Me.Label1.Text = "得意先名"
         '
-        'Search
+        'TxtSearch
         '
-        Me.Search.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Search.Location = New System.Drawing.Point(85, 6)
-        Me.Search.Name = "Search"
-        Me.Search.Size = New System.Drawing.Size(100, 22)
-        Me.Search.TabIndex = 1
+        Me.TxtSearch.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtSearch.Location = New System.Drawing.Point(85, 6)
+        Me.TxtSearch.Name = "TxtSearch"
+        Me.TxtSearch.Size = New System.Drawing.Size(100, 22)
+        Me.TxtSearch.TabIndex = 1
         '
         'MstCustomer
         '
@@ -233,10 +233,10 @@ Partial Class MstCustomer
         Me.ClientSize = New System.Drawing.Size(1350, 561)
         Me.Controls.Add(Me.BtnSearch)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.Search)
+        Me.Controls.Add(Me.TxtSearch)
         Me.Controls.Add(Me.btnBack)
         Me.Controls.Add(Me.btnCustomerAdd)
-        Me.Controls.Add(Me.btnSelectCustomer)
+        Me.Controls.Add(Me.btnCustomerEdit)
         Me.Controls.Add(Me.Dgv_Customer)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "MstCustomer"
@@ -248,12 +248,12 @@ Partial Class MstCustomer
     End Sub
 
     Friend WithEvents Dgv_Customer As DataGridView
-    Friend WithEvents btnSelectCustomer As Button
+    Friend WithEvents btnCustomerEdit As Button
     Friend WithEvents btnCustomerAdd As Button
     Friend WithEvents btnBack As Button
     Friend WithEvents BtnSearch As Button
     Friend WithEvents Label1 As Label
-    Friend WithEvents Search As TextBox
+    Friend WithEvents TxtSearch As TextBox
     Friend WithEvents 会社コード As DataGridViewTextBoxColumn
     Friend WithEvents 得意先コード As DataGridViewTextBoxColumn
     Friend WithEvents 得意先名 As DataGridViewTextBoxColumn
