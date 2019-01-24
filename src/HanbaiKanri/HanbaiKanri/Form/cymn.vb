@@ -1212,7 +1212,12 @@ Public Class Cymn
                     If errList(i) = Nothing Then
                     Else
                         itemNum = i + 1
-                        MessageBox.Show(itemNum.ToString + "行目の商品在庫数量が" + errList(i).ToString + "不足しています。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        If frmC01F10_Login.loginValue.Language = "ENG" Then
+                            MessageBox.Show("Item is missing" + errList(i).ToString + "at line " + itemNum.ToString + ".", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        Else
+                            MessageBox.Show(itemNum.ToString + "行目の商品在庫数量が" + errList(i).ToString + "不足しています。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        End If
+
                     End If
 
                 Next

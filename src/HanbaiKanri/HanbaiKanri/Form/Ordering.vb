@@ -808,10 +808,12 @@ Public Class Ordering
                 openForm.Show(Me)
                 Me.Enabled = False
             Else
-                MessageBox.Show("メーカーを入力してください。",
-                "エラー",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Error)
+                If frmC01F10_Login.loginValue.Language = "ENG" Then
+                    MessageBox.Show("Please enter the maker.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Else
+                    MessageBox.Show("メーカーを入力してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+
             End If
         End If
 
@@ -822,10 +824,12 @@ Public Class Ordering
                 openForm.Show(Me)
                 Me.Enabled = False
             Else
-                MessageBox.Show("メーカー、品名を入力してください。",
-                "エラー",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Error)
+                If frmC01F10_Login.loginValue.Language = "ENG" Then
+                    MessageBox.Show("Please enter the maker and item.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Else
+                    MessageBox.Show("メーカー、品名を入力してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+
             End If
         End If
 

@@ -475,13 +475,23 @@ Public Class GoodsIssue
 
         For i As Integer = 0 To DgvAdd.Rows.Count() - 1
             If ds2.Tables(RS).Rows(i)("受注数量") < ds2.Tables(RS).Rows(i)("売上数量") + DgvAdd.Rows(i).Cells("出庫数量").Value Then
-                MessageBox.Show("正しい値を入力してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                If frmC01F10_Login.loginValue.Language = "ENG" Then
+                    MessageBox.Show("Please enter the correct value.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Else
+                    MessageBox.Show("正しい値を入力してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+
                 errFlg = False
             End If
         Next
 
         If TxtOrderDate.Text >= DtpGoodsIssueDate.Value Then
-            MessageBox.Show("売上日の値が受注日以前になっています。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                MessageBox.Show("The sales date is before the order date.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Else
+                MessageBox.Show("売上日の値が受注日以前になっています。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+
             errFlg = False
         End If
 
@@ -492,7 +502,12 @@ Public Class GoodsIssue
             End If
         Next
         If DgvAdd.Rows.Count() = nullCount Then
-            MessageBox.Show("出庫数量がすべて0になっています。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                MessageBox.Show("Goods issue quantity is all 0.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Else
+                MessageBox.Show("出庫数量がすべて0になっています。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+
             errFlg = False
         End If
         If errFlg Then

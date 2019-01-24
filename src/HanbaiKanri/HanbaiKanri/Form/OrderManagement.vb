@@ -503,13 +503,23 @@ Public Class OrderManagement
 
         For i As Integer = 0 To DgvAdd.Rows.Count() - 1
             If ds2.Tables(RS).Rows(i)("受注数量") < ds2.Tables(RS).Rows(i)("売上数量") + DgvAdd.Rows(i).Cells("売上数量").Value Then
-                MessageBox.Show("正しい値を入力してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                If frmC01F10_Login.loginValue.Language = "ENG" Then
+                    MessageBox.Show("Please enter the correct value.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Else
+                    MessageBox.Show("正しい値を入力してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+
                 errFlg = False
             End If
         Next
 
         If TxtOrderDate.Text >= DtpOrderDate.Value Then
-            MessageBox.Show("売上日の値が受注日以前になっています。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                MessageBox.Show("The sales date is before the order date.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Else
+                MessageBox.Show("売上日の値が受注日以前になっています。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+
             errFlg = False
         End If
 
@@ -520,7 +530,12 @@ Public Class OrderManagement
             End If
         Next
         If DgvAdd.Rows.Count() = nullCount Then
-            MessageBox.Show("売上数量がすべて0になっています。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                MessageBox.Show("Sales Quantity is all 0.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Else
+                MessageBox.Show("売上数量がすべて0になっています。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+
             errFlg = False
         End If
         If errFlg Then
@@ -1349,14 +1364,16 @@ Public Class OrderManagement
 
             '_db.executeDB(Sql9)
 
-            Dim result As DialogResult = MessageBox.Show("請求データを作成しますか？",
-                                             "質問",
-                                             MessageBoxButtons.YesNo,
-                                             MessageBoxIcon.Exclamation,
-                                             MessageBoxDefaultButton.Button2)
-
-            If result = DialogResult.Yes Then
-                Biilng()
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                Dim result As DialogResult = MessageBox.Show("Create billing data?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2)
+                If result = DialogResult.Yes Then
+                    Biilng()
+                End If
+            Else
+                Dim result As DialogResult = MessageBox.Show("請求データを作成しますか？", "質問", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2)
+                If result = DialogResult.Yes Then
+                    Biilng()
+                End If
             End If
 
             Dim openForm As Form = Nothing

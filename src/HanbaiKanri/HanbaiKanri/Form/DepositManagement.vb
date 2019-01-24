@@ -499,12 +499,22 @@ Public Class DepositManagement
         Dim ds1 As DataSet = _db.selectDB(Sql1, RS, reccnt)
 
         If DgvDeposit.Rows.Count = -1 Then
-            MessageBox.Show("入金情報が入力されていません。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                MessageBox.Show("Deposit information has not been entered.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Else
+                MessageBox.Show("入金情報が入力されていません。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+
             errflg = False
         End If
 
         For index As Integer = 0 To DgvDeposit.Rows.Count - 1
             If DgvDeposit.Rows(index).Cells("入力入金額").Value <= 0 Then
+                If frmC01F10_Login.loginValue.Language = "ENG" Then
+                    MessageBox.Show("Deposit amount is 0.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Else
+                    MessageBox.Show("入金額が0です。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
                 errflg = False
             End If
         Next

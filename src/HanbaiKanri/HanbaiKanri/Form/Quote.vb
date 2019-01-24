@@ -1003,10 +1003,18 @@ Public Class Quote
                 openForm.Show(Me)
                 Me.Enabled = False
             Else
-                MessageBox.Show("メーカーを入力してください。",
+                If frmC01F10_Login.loginValue.Language = "ENG" Then
+                    MessageBox.Show("Please enter the maker.",
                 "エラー",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Error)
+                Else
+                    MessageBox.Show("メーカーを入力してください。",
+                "エラー",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error)
+                End If
+
             End If
         End If
 
@@ -1017,10 +1025,17 @@ Public Class Quote
                 openForm.Show(Me)
                 Me.Enabled = False
             Else
-                MessageBox.Show("メーカー、品名を入力してください。",
+                If frmC01F10_Login.loginValue.Language = "ENG" Then
+                    MessageBox.Show("Please enter the maker and item.",
                 "エラー",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Error)
+                Else
+                    MessageBox.Show("メーカー、品名を入力してください。",
+                "エラー",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error)
+                End If
             End If
         End If
 

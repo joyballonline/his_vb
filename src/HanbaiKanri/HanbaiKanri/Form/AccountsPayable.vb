@@ -478,12 +478,22 @@ Public Class AccountsPayable
             Dim Balance As Integer = ds1.Tables(RS).Rows(0)("仕入金額") - APTotal
 
             If Balance < 0 Then
-                MessageBox.Show("買掛金額計が発注金額を超えています。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                If frmC01F10_Login.loginValue.Language = "ENG" Then
+                    MessageBox.Show("Total accounts payable amount exceeds purchase order amount.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Else
+                    MessageBox.Show("買掛金額計が発注金額を超えています。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+
                 errflg = False
             End If
 
             If DgvAdd.Rows(0).Cells("今回買掛金額計").Value = 0 Then
-                MessageBox.Show("買掛金額計が0になっています。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                If frmC01F10_Login.loginValue.Language = "ENG" Then
+                    MessageBox.Show("Total accounts payable amount is 0.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Else
+                    MessageBox.Show("買掛金額計が0になっています。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+
                 errflg = False
             End If
 

@@ -480,11 +480,16 @@ Public Class Payment
         Dim ds1 As DataSet = _db.selectDB(Sql1, RS, reccnt)
 
         If DgvDeposit.Rows.Count = -1 Then
-            MessageBox.Show("支払情報が入力されていません。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            errflg = False
-        End If
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                MessageBox.Show("Payment information is not entered.", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Else
+                MessageBox.Show("支払情報が入力されていません。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
 
-        For index As Integer = 0 To DgvDeposit.Rows.Count - 1
+            errflg = False
+            End If
+
+            For index As Integer = 0 To DgvDeposit.Rows.Count - 1
             If DgvDeposit.Rows(index).Cells("入力支払金額").Value <= 0 Then
                 errflg = False
             End If

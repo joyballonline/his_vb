@@ -465,12 +465,22 @@ Public Class BillingManagement
         Dim Balance As Integer = ds1.Tables(RS).Rows(0)("見積金額") - BillTotal
 
         If Balance < 0 Then
-            MessageBox.Show("請求金額計が受注金額を超えています。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                MessageBox.Show("Total billing amount exceeds order amount.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Else
+                MessageBox.Show("請求金額計が受注金額を超えています。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+
             errflg = False
         End If
 
         If DgvAdd.Rows(0).Cells("今回請求金額計").Value = 0 Then
-            MessageBox.Show("請求金額計が0になっています。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                MessageBox.Show("Total billing amount is 0.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Else
+                MessageBox.Show("請求金額計が0になっています。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+
             errflg = False
         End If
 

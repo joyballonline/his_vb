@@ -475,13 +475,23 @@ Public Class Receipt
 
         For i As Integer = 0 To DgvAdd.Rows.Count() - 1
             If ds2.Tables(RS).Rows(i)("発注数量") < ds2.Tables(RS).Rows(i)("仕入数量") + DgvAdd.Rows(i).Cells("入庫数量").Value Then
-                MessageBox.Show("発注数量が発注残数を超えています。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                If frmC01F10_Login.loginValue.Language = "ENG" Then
+                    MessageBox.Show("Purchase order quantity exceeds purchase order remaining.", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Else
+                    MessageBox.Show("発注数量が発注残数を超えています。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+
                 errFlg = False
             End If
         Next
 
         If TxtOrdingDate.Text >= DtpReceiptDate.Value Then
-            MessageBox.Show("入庫日の値が発注日以前になっています。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                MessageBox.Show("Receipt date is before the purchase order date.", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Else
+                MessageBox.Show("入庫日の値が発注日以前になっています。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+
             errFlg = False
         End If
 
@@ -492,7 +502,12 @@ Public Class Receipt
             End If
         Next
         If DgvAdd.Rows.Count() = nullCount Then
-            MessageBox.Show("仕入数量がすべて0になっています。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                MessageBox.Show("Purchase quantity is all 0.", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Else
+                MessageBox.Show("仕入数量がすべて0になっています。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+
             errFlg = False
         End If
 

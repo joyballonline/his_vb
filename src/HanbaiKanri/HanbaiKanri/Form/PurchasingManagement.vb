@@ -479,16 +479,31 @@ Public Class PurchasingManagement
 
         For i As Integer = 0 To DgvAdd.Rows.Count() - 1
             If ds2.Tables(RS).Rows(i)("発注数量") < ds2.Tables(RS).Rows(i)("仕入数量") + DgvAdd.Rows(i).Cells("仕入数量").Value Then
-                MessageBox.Show("発注数量が発注残数を超えています。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                If frmC01F10_Login.loginValue.Language = "ENG" Then
+                    MessageBox.Show("Purchase order quantity exceeds purchase order remaining.", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Else
+                    MessageBox.Show("発注数量が発注残数を超えています。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+
                 errFlg = False
             End If
             If DgvAdd.Rows(i).Cells("仕入数量").Value = 0 Then
-
+                'If frmC01F10_Login.loginValue.Language = "ENG" Then
+                '    MessageBox.Show("Purchase quantity is 0.", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                'Else
+                '    MessageBox.Show("仕入数量が0です。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                'End If
+                'errFlg = False
             End If
         Next
 
         If TxtOrdingDate.Text >= DtpPurchaseDate.Value Then
-            MessageBox.Show("仕入日の値が発注日以前になっています。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                MessageBox.Show("Purchase date is before the purchase order date.", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Else
+                MessageBox.Show("仕入日の値が発注日以前になっています。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+
             errFlg = False
         End If
 
@@ -499,7 +514,12 @@ Public Class PurchasingManagement
             End If
         Next
         If DgvAdd.Rows.Count() = nullCount Then
-            MessageBox.Show("仕入数量がすべて0になっています。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                MessageBox.Show("Purchase quantity is all 0.", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Else
+                MessageBox.Show("仕入数量がすべて0になっています。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+
             errFlg = False
         End If
 
@@ -1171,15 +1191,28 @@ Public Class PurchasingManagement
 
             _db.executeDB(Sql9)
 
-            Dim result As DialogResult = MessageBox.Show("買掛データを作成しますか？",
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                Dim result As DialogResult = MessageBox.Show("Create accounts payable data?",
+                                             "Question",
+                                             MessageBoxButtons.YesNo,
+                                             MessageBoxIcon.Exclamation,
+                                             MessageBoxDefaultButton.Button2)
+
+                If result = DialogResult.Yes Then
+                    Accounts()
+                End If
+            Else
+                Dim result As DialogResult = MessageBox.Show("買掛データを作成しますか？",
                                              "質問",
                                              MessageBoxButtons.YesNo,
                                              MessageBoxIcon.Exclamation,
                                              MessageBoxDefaultButton.Button2)
 
-            If result = DialogResult.Yes Then
-                Accounts()
+                If result = DialogResult.Yes Then
+                    Accounts()
+                End If
             End If
+
 
             Dim openForm As Form = Nothing
             Dim Status As String = "ORDING"
