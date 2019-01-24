@@ -398,6 +398,13 @@ Public Class frmC01F30_Menu
 
         'メニュー表示
         getMenuList(strcheckMenu())
+        If frmC01F10_Login.loginValue.Language = "ENG" Then
+            dgvLIST.Columns("業務").HeaderText = "Business"
+            dgvLIST.Columns("処理名").HeaderText = "ProcessingName"
+            dgvLIST.Columns("説明").HeaderText = "Description"
+            btnSelect.Text = "Select(&G)"
+            cmdExit.Text = "Exit(&B)"
+        End If
 
     End Sub
 
@@ -640,39 +647,76 @@ Public Class frmC01F30_Menu
 
         'メニューを読み込み
         Try
-            strSql = "SELECT "
-            strSql = strSql & "    m.会社コード "
-            strSql = strSql & "  , m.処理ＩＤ "
-            strSql = strSql & "  , m.処理名 "
-            strSql = strSql & "  , m.業務ＩＤ "
-            strSql = strSql & "  , m.業務名"
-            strSql = strSql & "  , m.表示順 "
-            strSql = strSql & "  , m.説明 "
-            strSql = strSql & "  , m.削除フラグ "
-            strSql = strSql & "  , to_char(p.更新日, 'yyyy/mm/dd hh24:mi') My前回操作日時 "
-            strSql = strSql & "  , p2.更新者 "
-            strSql = strSql & "  , to_char(p2.更新日, 'yyyy/mm/dd hh24:mi') 前回操作日時"
-            strSql = strSql & " FROM m04_menu m "
-            strSql = strSql & " left join l10_proclog p on "
-            strSql = strSql & "           p.会社コード = m.会社コード "
-            strSql = strSql & "      and  p.処理ＩＤ   = m.処理ＩＤ "
-            strSql = strSql & "      and  p.更新日     = (SELECT MAX(更新日) "
-            strSql = strSql & "                           FROM l10_proclog "
-            strSql = strSql & "                           WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-            strSql = strSql & "                             and 処理ＩＤ   = m.処理ＩＤ "
-            strSql = strSql & "                             and 更新者     = '" & frmC01F10_Login.loginValue.TantoCD & "'"
-            strSql = strSql & "                          ) "
-            strSql = strSql & " left join l10_proclog p2 on "
-            strSql = strSql & "           p2.会社コード = m.会社コード "
-            strSql = strSql & "      and  p2.処理ＩＤ   = m.処理ＩＤ "
-            strSql = strSql & "      and  p2.更新日     = (SELECT MAX(更新日) "
-            strSql = strSql & "                            FROM l10_proclog "
-            strSql = strSql & "                            WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-            strSql = strSql & "                              and 処理ＩＤ   = m.処理ＩＤ "
-            strSql = strSql & "                           ) "
-            strSql = strSql & " Where m.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-            strSql = strSql & likeSql
-            strSql = strSql & " order by m.表示順 "
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                strSql = "SELECT "
+                strSql = strSql & "    m.会社コード "
+                strSql = strSql & "  , m.処理ＩＤ "
+                strSql = strSql & "  , m.英語用処理名 "
+                strSql = strSql & "  , m.業務ＩＤ "
+                strSql = strSql & "  , m.英語用業務名"
+                strSql = strSql & "  , m.表示順 "
+                strSql = strSql & "  , m.英語用説明 "
+                strSql = strSql & "  , m.削除フラグ "
+                strSql = strSql & "  , to_char(p.更新日, 'yyyy/mm/dd hh24:mi') My前回操作日時 "
+                strSql = strSql & "  , p2.更新者 "
+                strSql = strSql & "  , to_char(p2.更新日, 'yyyy/mm/dd hh24:mi') 前回操作日時"
+                strSql = strSql & " FROM m04_menu m "
+                strSql = strSql & " left join l10_proclog p on "
+                strSql = strSql & "           p.会社コード = m.会社コード "
+                strSql = strSql & "      and  p.処理ＩＤ   = m.処理ＩＤ "
+                strSql = strSql & "      and  p.更新日     = (SELECT MAX(更新日) "
+                strSql = strSql & "                           FROM l10_proclog "
+                strSql = strSql & "                           WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                strSql = strSql & "                             and 処理ＩＤ   = m.処理ＩＤ "
+                strSql = strSql & "                             and 更新者     = '" & frmC01F10_Login.loginValue.TantoCD & "'"
+                strSql = strSql & "                          ) "
+                strSql = strSql & " left join l10_proclog p2 on "
+                strSql = strSql & "           p2.会社コード = m.会社コード "
+                strSql = strSql & "      and  p2.処理ＩＤ   = m.処理ＩＤ "
+                strSql = strSql & "      and  p2.更新日     = (SELECT MAX(更新日) "
+                strSql = strSql & "                            FROM l10_proclog "
+                strSql = strSql & "                            WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                strSql = strSql & "                              and 処理ＩＤ   = m.処理ＩＤ "
+                strSql = strSql & "                           ) "
+                strSql = strSql & " Where m.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                strSql = strSql & likeSql
+                strSql = strSql & " order by m.表示順 "
+            Else
+                strSql = "SELECT "
+                strSql = strSql & "    m.会社コード "
+                strSql = strSql & "  , m.処理ＩＤ "
+                strSql = strSql & "  , m.処理名 "
+                strSql = strSql & "  , m.業務ＩＤ "
+                strSql = strSql & "  , m.業務名"
+                strSql = strSql & "  , m.表示順 "
+                strSql = strSql & "  , m.説明 "
+                strSql = strSql & "  , m.削除フラグ "
+                strSql = strSql & "  , to_char(p.更新日, 'yyyy/mm/dd hh24:mi') My前回操作日時 "
+                strSql = strSql & "  , p2.更新者 "
+                strSql = strSql & "  , to_char(p2.更新日, 'yyyy/mm/dd hh24:mi') 前回操作日時"
+                strSql = strSql & " FROM m04_menu m "
+                strSql = strSql & " left join l10_proclog p on "
+                strSql = strSql & "           p.会社コード = m.会社コード "
+                strSql = strSql & "      and  p.処理ＩＤ   = m.処理ＩＤ "
+                strSql = strSql & "      and  p.更新日     = (SELECT MAX(更新日) "
+                strSql = strSql & "                           FROM l10_proclog "
+                strSql = strSql & "                           WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                strSql = strSql & "                             and 処理ＩＤ   = m.処理ＩＤ "
+                strSql = strSql & "                             and 更新者     = '" & frmC01F10_Login.loginValue.TantoCD & "'"
+                strSql = strSql & "                          ) "
+                strSql = strSql & " left join l10_proclog p2 on "
+                strSql = strSql & "           p2.会社コード = m.会社コード "
+                strSql = strSql & "      and  p2.処理ＩＤ   = m.処理ＩＤ "
+                strSql = strSql & "      and  p2.更新日     = (SELECT MAX(更新日) "
+                strSql = strSql & "                            FROM l10_proclog "
+                strSql = strSql & "                            WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                strSql = strSql & "                              and 処理ＩＤ   = m.処理ＩＤ "
+                strSql = strSql & "                           ) "
+                strSql = strSql & " Where m.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                strSql = strSql & likeSql
+                strSql = strSql & " order by m.表示順 "
+            End If
+
 
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(strSql, RS, reccnt)
@@ -1192,17 +1236,32 @@ Public Class frmC01F30_Menu
             'keyブレイク用
             sGyomuId = _db.rmNullStr(paraDs.Tables(RS).Rows(index)("業務ＩＤ"))
 
-            newRow("会社コード") = _db.rmNullStr(paraDs.Tables(RS).Rows(index)("会社コード"))
-            newRow("処理ＩＤ") = _db.rmNullStr(paraDs.Tables(RS).Rows(index)("処理ＩＤ"))
-            newRow("処理名") = _db.rmNullStr(paraDs.Tables(RS).Rows(index)("処理名"))
-            newRow("業務ＩＤ") = _db.rmNullStr(paraDs.Tables(RS).Rows(index)("業務ＩＤ"))
-            newRow("業務名") = _db.rmNullStr(paraDs.Tables(RS).Rows(index)("業務名"))
-            newRow("表示順") = _db.rmNullStr(paraDs.Tables(RS).Rows(index)("表示順"))
-            newRow("説明") = _db.rmNullStr(paraDs.Tables(RS).Rows(index)("説明"))
-            newRow("削除フラグ") = _db.rmNullStr(paraDs.Tables(RS).Rows(index)("削除フラグ"))
-            newRow("My前回操作日時") = _db.rmNullStr(paraDs.Tables(RS).Rows(index)("My前回操作日時"))
-            newRow("更新者") = _db.rmNullStr(paraDs.Tables(RS).Rows(index)("更新者"))
-            newRow("前回操作日時") = _db.rmNullStr(paraDs.Tables(RS).Rows(index)("前回操作日時"))
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                newRow("会社コード") = _db.rmNullStr(paraDs.Tables(RS).Rows(index)("会社コード"))
+                newRow("処理ＩＤ") = _db.rmNullStr(paraDs.Tables(RS).Rows(index)("処理ＩＤ"))
+                newRow("処理名") = _db.rmNullStr(paraDs.Tables(RS).Rows(index)("英語用処理名"))
+                newRow("業務ＩＤ") = _db.rmNullStr(paraDs.Tables(RS).Rows(index)("業務ＩＤ"))
+                newRow("業務名") = _db.rmNullStr(paraDs.Tables(RS).Rows(index)("英語用業務名"))
+                newRow("表示順") = _db.rmNullStr(paraDs.Tables(RS).Rows(index)("表示順"))
+                newRow("説明") = _db.rmNullStr(paraDs.Tables(RS).Rows(index)("英語用説明"))
+                newRow("削除フラグ") = _db.rmNullStr(paraDs.Tables(RS).Rows(index)("削除フラグ"))
+                newRow("My前回操作日時") = _db.rmNullStr(paraDs.Tables(RS).Rows(index)("My前回操作日時"))
+                newRow("更新者") = _db.rmNullStr(paraDs.Tables(RS).Rows(index)("更新者"))
+                newRow("前回操作日時") = _db.rmNullStr(paraDs.Tables(RS).Rows(index)("前回操作日時"))
+            Else
+                newRow("会社コード") = _db.rmNullStr(paraDs.Tables(RS).Rows(index)("会社コード"))
+                newRow("処理ＩＤ") = _db.rmNullStr(paraDs.Tables(RS).Rows(index)("処理ＩＤ"))
+                newRow("処理名") = _db.rmNullStr(paraDs.Tables(RS).Rows(index)("処理名"))
+                newRow("業務ＩＤ") = _db.rmNullStr(paraDs.Tables(RS).Rows(index)("業務ＩＤ"))
+                newRow("業務名") = _db.rmNullStr(paraDs.Tables(RS).Rows(index)("業務名"))
+                newRow("表示順") = _db.rmNullStr(paraDs.Tables(RS).Rows(index)("表示順"))
+                newRow("説明") = _db.rmNullStr(paraDs.Tables(RS).Rows(index)("説明"))
+                newRow("削除フラグ") = _db.rmNullStr(paraDs.Tables(RS).Rows(index)("削除フラグ"))
+                newRow("My前回操作日時") = _db.rmNullStr(paraDs.Tables(RS).Rows(index)("My前回操作日時"))
+                newRow("更新者") = _db.rmNullStr(paraDs.Tables(RS).Rows(index)("更新者"))
+                newRow("前回操作日時") = _db.rmNullStr(paraDs.Tables(RS).Rows(index)("前回操作日時"))
+            End If
+
 
             dt.Rows.Add(newRow)
         Next
