@@ -55,7 +55,7 @@ Partial Class MstSupplier
         Me.BtnBack = New System.Windows.Forms.Button()
         Me.BtnSearch = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.Search = New System.Windows.Forms.TextBox()
+        Me.TxtSearch = New System.Windows.Forms.TextBox()
         CType(Me.Dgv_Supplier, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -269,7 +269,7 @@ Partial Class MstSupplier
         'BtnSearch
         '
         Me.BtnSearch.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.BtnSearch.Location = New System.Drawing.Point(191, 5)
+        Me.BtnSearch.Location = New System.Drawing.Point(188, 5)
         Me.BtnSearch.Name = "BtnSearch"
         Me.BtnSearch.Size = New System.Drawing.Size(75, 23)
         Me.BtnSearch.TabIndex = 2
@@ -286,13 +286,13 @@ Partial Class MstSupplier
         Me.Label1.TabIndex = 17
         Me.Label1.Text = "仕入先名"
         '
-        'Search
+        'TxtSearch
         '
-        Me.Search.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Search.Location = New System.Drawing.Point(85, 6)
-        Me.Search.Name = "Search"
-        Me.Search.Size = New System.Drawing.Size(100, 22)
-        Me.Search.TabIndex = 1
+        Me.TxtSearch.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtSearch.Location = New System.Drawing.Point(82, 6)
+        Me.TxtSearch.Name = "TxtSearch"
+        Me.TxtSearch.Size = New System.Drawing.Size(100, 22)
+        Me.TxtSearch.TabIndex = 1
         '
         'MstSupplier
         '
@@ -300,7 +300,7 @@ Partial Class MstSupplier
         Me.ClientSize = New System.Drawing.Size(1350, 561)
         Me.Controls.Add(Me.BtnSearch)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.Search)
+        Me.Controls.Add(Me.TxtSearch)
         Me.Controls.Add(Me.BtnBack)
         Me.Controls.Add(Me.btnSupplierAdd)
         Me.Controls.Add(Me.btnSupplierEdit)
@@ -320,7 +320,7 @@ Partial Class MstSupplier
     Friend WithEvents BtnBack As Button
     Friend WithEvents BtnSearch As Button
     Friend WithEvents Label1 As Label
-    Friend WithEvents Search As TextBox
+    Friend WithEvents TxtSearch As TextBox
     Friend WithEvents 会社コード As DataGridViewTextBoxColumn
     Friend WithEvents 仕入先コード As DataGridViewTextBoxColumn
     Friend WithEvents 仕入先名 As DataGridViewTextBoxColumn

@@ -68,6 +68,43 @@ Public Class MstSupplier
     End Sub
 
     Private Sub MstSupplier_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If frmC01F10_Login.loginValue.Language = "ENG" Then
+            Label1.Text = "SupplierName"
+            TxtSearch.Location = New Point(110, 6)
+            BtnSearch.Text = "Search"
+            BtnSearch.Location = New Point(216, 5)
+            btnSupplierAdd.Text = "Add"
+            btnSupplierEdit.Text = "Edit"
+            BtnBack.Text = "Back"
+
+            Dgv_Supplier.Columns("会社コード").HeaderText = "CompanyCode"
+            Dgv_Supplier.Columns("仕入先コード").HeaderText = "SupplierCode"
+            Dgv_Supplier.Columns("仕入先名").HeaderText = "SupplierName"
+            Dgv_Supplier.Columns("仕入先名略称").HeaderText = "SupplierShortName"
+            Dgv_Supplier.Columns("郵便番号").HeaderText = "PostalCode"
+            Dgv_Supplier.Columns("住所１").HeaderText = "Address1"
+            Dgv_Supplier.Columns("住所２").HeaderText = "Address2"
+            Dgv_Supplier.Columns("住所３").HeaderText = "Address3"
+            Dgv_Supplier.Columns("電話番号").HeaderText = "TEL"
+            Dgv_Supplier.Columns("電話番号検索用").HeaderText = "TEL(ForSearch)"
+            Dgv_Supplier.Columns("FAX番号").HeaderText = "FAX"
+            Dgv_Supplier.Columns("担当者名").HeaderText = "ContactPersonName"
+            Dgv_Supplier.Columns("担当者役職").HeaderText = "ContactPersonPosition"
+            Dgv_Supplier.Columns("メモ").HeaderText = "Memo"
+            Dgv_Supplier.Columns("銀行名").HeaderText = "BankName"
+            Dgv_Supplier.Columns("銀行コード").HeaderText = "BankCode"
+            Dgv_Supplier.Columns("支店名").HeaderText = "BranchName"
+            Dgv_Supplier.Columns("支店コード").HeaderText = "BranchCode"
+            Dgv_Supplier.Columns("預金種目").HeaderText = "DepositCategory"
+            Dgv_Supplier.Columns("口座番号").HeaderText = "AccountNumber"
+            Dgv_Supplier.Columns("口座名義").HeaderText = "AccountHolder"
+            Dgv_Supplier.Columns("関税率").HeaderText = "TariffRate"
+            Dgv_Supplier.Columns("前払法人税率").HeaderText = "PPH"
+            Dgv_Supplier.Columns("輸送費率").HeaderText = "TransportationCostRate"
+            Dgv_Supplier.Columns("更新者").HeaderText = "Changer"
+            Dgv_Supplier.Columns("更新日").HeaderText = "UpdateDate"
+
+        End If
         Dim Sql As String = ""
         Try
             Sql += "SELECT "
@@ -173,7 +210,7 @@ Public Class MstSupplier
             Sql += "仕入先名"
             Sql += " ILIKE "
             Sql += "'%"
-            Sql += Search.Text
+            Sql += TxtSearch.Text
             Sql += "%'"
 
             Dim reccnt As Integer = 0
