@@ -1180,6 +1180,12 @@ Public Class frmC01F30_Menu
                 openForm.Show()
                 Me.Hide()
                 '-----------------------------------
+            Case CommonConst.MENU_M0180    '勘定科目マスタ一覧
+                Dim openForm As Form = Nothing
+                openForm = New MstAccount(_msgHd, _db, _langHd)
+                openForm.Show()
+                Me.Hide()
+                '-----------------------------------
             Case Else                      'マスタ設定されていない場合
                 Exit Sub
         End Select

@@ -88,7 +88,7 @@ Public Class MstCustomer
             Dgv_Customer.Columns("担当者役職").HeaderText = "ContactPersonPosition"
             Dgv_Customer.Columns("既定支払条件").HeaderText = "PaymentTerms"
             Dgv_Customer.Columns("メモ").HeaderText = "Memo"
-            Dgv_Customer.Columns("会計用得意先コード").HeaderText = "AccountingCustomerNumber"
+            Dgv_Customer.Columns("会計用得意先コード").HeaderText = "AccountingCustomerCode"
             Dgv_Customer.Columns("更新者").HeaderText = "Changer"
             Dgv_Customer.Columns("更新日").HeaderText = "UpdateDate"
 
@@ -163,7 +163,7 @@ Public Class MstCustomer
     Private Sub btnCustomerAdd_Click(sender As Object, e As EventArgs) Handles btnCustomerAdd.Click
         Dim openForm As Form = Nothing
         Dim Status As String = "ADD"
-        openForm = New Customer(_msgHd, _db, _langHd, Status)   '処理選択
+        openForm = New Account(_msgHd, _db, _langHd, Status)   '処理選択
         openForm.Show()
         Me.Hide()   ' 自分は隠れる
     End Sub
@@ -173,7 +173,7 @@ Public Class MstCustomer
         Dim Status As String = "EDIT"
         Dim CompanyCode As String = Dgv_Customer.Rows(Dgv_Customer.CurrentCell.RowIndex).Cells("会社コード").Value
         Dim CustomerCode As String = Dgv_Customer.Rows(Dgv_Customer.CurrentCell.RowIndex).Cells("得意先コード").Value
-        openForm = New Customer(_msgHd, _db, _langHd, Status, CompanyCode, CustomerCode)   '処理選択
+        openForm = New Account(_msgHd, _db, _langHd, Status, CompanyCode, CustomerCode)   '処理選択
         openForm.Show()
         Me.Hide()   ' 自分は隠れる
     End Sub
