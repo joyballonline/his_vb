@@ -83,6 +83,8 @@ Partial Class Supplier
         Me.LblDepositCategoryText = New System.Windows.Forms.Label()
         Me.LblAccountNumberText = New System.Windows.Forms.Label()
         Me.LblSupplierCodeText = New System.Windows.Forms.Label()
+        Me.TxtAccountingVendorCode = New System.Windows.Forms.TextBox()
+        Me.LblAccountingVendorCode = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'LblMemo
@@ -200,7 +202,7 @@ Partial Class Supplier
         Me.BtnRegistration.Location = New System.Drawing.Point(381, 509)
         Me.BtnRegistration.Name = "BtnRegistration"
         Me.BtnRegistration.Size = New System.Drawing.Size(165, 40)
-        Me.BtnRegistration.TabIndex = 23
+        Me.BtnRegistration.TabIndex = 24
         Me.BtnRegistration.Text = "登録"
         Me.BtnRegistration.UseVisualStyleBackColor = True
         '
@@ -334,7 +336,7 @@ Partial Class Supplier
         '
         Me.TxtCompanyCode.Location = New System.Drawing.Point(758, 6)
         Me.TxtCompanyCode.Name = "TxtCompanyCode"
-        Me.TxtCompanyCode.Size = New System.Drawing.Size(26, 20)
+        Me.TxtCompanyCode.Size = New System.Drawing.Size(26, 19)
         Me.TxtCompanyCode.TabIndex = 49
         Me.TxtCompanyCode.TabStop = False
         Me.TxtCompanyCode.Visible = False
@@ -343,7 +345,7 @@ Partial Class Supplier
         '
         Me.LblAccountNumber.AutoSize = True
         Me.LblAccountNumber.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblAccountNumber.Location = New System.Drawing.Point(15, 466)
+        Me.LblAccountNumber.Location = New System.Drawing.Point(12, 463)
         Me.LblAccountNumber.Name = "LblAccountNumber"
         Me.LblAccountNumber.Size = New System.Drawing.Size(67, 15)
         Me.LblAccountNumber.TabIndex = 85
@@ -435,7 +437,7 @@ Partial Class Supplier
         Me.BtnBack.Location = New System.Drawing.Point(552, 509)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(165, 40)
-        Me.BtnBack.TabIndex = 24
+        Me.BtnBack.TabIndex = 25
         Me.BtnBack.Text = "戻る"
         Me.BtnBack.UseVisualStyleBackColor = True
         '
@@ -649,10 +651,31 @@ Partial Class Supplier
         Me.LblSupplierCodeText.TabIndex = 247
         Me.LblSupplierCodeText.Text = "(他仕入先コードと重複しない文字列)"
         '
+        'TxtAccountingVendorCode
+        '
+        Me.TxtAccountingVendorCode.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtAccountingVendorCode.Location = New System.Drawing.Point(127, 509)
+        Me.TxtAccountingVendorCode.MaxLength = 20
+        Me.TxtAccountingVendorCode.Name = "TxtAccountingVendorCode"
+        Me.TxtAccountingVendorCode.Size = New System.Drawing.Size(234, 22)
+        Me.TxtAccountingVendorCode.TabIndex = 23
+        '
+        'LblAccountingVendorCode
+        '
+        Me.LblAccountingVendorCode.AutoSize = True
+        Me.LblAccountingVendorCode.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblAccountingVendorCode.Location = New System.Drawing.Point(12, 509)
+        Me.LblAccountingVendorCode.Name = "LblAccountingVendorCode"
+        Me.LblAccountingVendorCode.Size = New System.Drawing.Size(104, 12)
+        Me.LblAccountingVendorCode.TabIndex = 248
+        Me.LblAccountingVendorCode.Text = "会計用仕入先コード"
+        '
         'Supplier
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(729, 561)
+        Me.Controls.Add(Me.LblAccountingVendorCode)
+        Me.Controls.Add(Me.TxtAccountingVendorCode)
         Me.Controls.Add(Me.LblSupplierCodeText)
         Me.Controls.Add(Me.LblAccountNumberText)
         Me.Controls.Add(Me.LblDepositCategoryText)
@@ -783,4 +806,6 @@ Partial Class Supplier
     Friend WithEvents LblDepositCategoryText As Label
     Friend WithEvents LblAccountNumberText As Label
     Friend WithEvents LblSupplierCodeText As Label
+    Friend WithEvents TxtAccountingVendorCode As TextBox
+    Friend WithEvents LblAccountingVendorCode As Label
 End Class

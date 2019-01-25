@@ -84,7 +84,7 @@ Public Class Customer
                 Sql += "INSERT INTO "
                 Sql += "Public."
                 Sql += "m10_customer("
-                Sql += "会社コード, 得意先コード, 得意先名, 得意先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 担当者役職, 既定支払条件, メモ, 更新者, 更新日)"
+                Sql += "会社コード, 得意先コード, 得意先名, 得意先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 担当者役職, 既定支払条件, メモ, 会計用得意先コード, 更新者, 更新日)"
                 Sql += " VALUES('"
                 Sql += frmC01F10_Login.loginValue.BumonNM
                 Sql += "', '"
@@ -115,6 +115,8 @@ Public Class Customer
                 Sql += TxtPaymentTerms.Text
                 Sql += "', '"
                 Sql += TxtMemo.Text
+                Sql += "', '"
+                Sql += TxtAccountingVendorCode.Text
                 Sql += "', '"
                 Sql += frmC01F10_Login.loginValue.TantoNM
                 Sql += "', '"
@@ -149,6 +151,8 @@ Public Class Customer
                 Sql += "既定支払条件"
                 Sql += ", "
                 Sql += "メモ"
+                Sql += ", "
+                Sql += "会計用得意先コード"
                 Sql += ", "
                 Sql += "更新者"
                 Sql += ", "
@@ -223,6 +227,10 @@ Public Class Customer
                 Sql += " = '"
                 Sql += TxtMemo.Text
                 Sql += "', "
+                Sql += "会計用得意先コード"
+                Sql += " = '"
+                Sql += TxtAccountingVendorCode.Text
+                Sql += "', "
                 Sql += "更新者"
                 Sql += " = '"
                 Sql += "Admin"
@@ -271,6 +279,8 @@ Public Class Customer
                 Sql += ", "
                 Sql += "メモ"
                 Sql += ", "
+                Sql += "会計用得意先コード"
+                Sql += ", "
                 Sql += "更新者"
                 Sql += ", "
                 Sql += "更新日"
@@ -315,6 +325,7 @@ Public Class Customer
             Label15.Text = "Position"
             Label13.Text = "PaymentTerms"
             Label14.Text = "Memo"
+            LblAccountingVendorCode.Text = "AccountingVendorCode"
 
             Label26.Text = "(Non-Overlapping string)"
             Label1.Text = "(Example:0123456)"
@@ -344,6 +355,7 @@ Public Class Customer
             Sql += "担当者役職, "
             Sql += "既定支払条件, "
             Sql += "メモ, "
+            Sql += "会計用得意先コード, "
             Sql += "更新者, "
             Sql += "更新日 "
             Sql += "FROM "
@@ -440,6 +452,13 @@ Public Class Customer
             Else
                 TxtMemo.Text = ds.Tables(RS).Rows(0)("メモ")
             End If
+
+            If ds.Tables(RS).Rows(0)("会計用得意先コード") Is DBNull.Value Then
+            Else
+                TxtAccountingVendorCode.Text = ds.Tables(RS).Rows(0)("会計用得意先コード")
+            End If
+
+
         End If
     End Sub
 End Class

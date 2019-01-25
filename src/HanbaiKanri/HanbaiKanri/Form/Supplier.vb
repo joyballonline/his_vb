@@ -87,7 +87,7 @@ Public Class Supplier
                 Sql += "INSERT INTO "
                 Sql += "Public."
                 Sql += "m11_supplier("
-                Sql += "会社コード, 仕入先コード, 仕入先名, 仕入先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 担当者役職, 関税率, 前払法人税率, 輸送費率, メモ, 銀行名, 銀行コード, 支店名, 支店コード, 預金種目, 口座番号, 口座名義,  更新者, 更新日)"
+                Sql += "会社コード, 仕入先コード, 仕入先名, 仕入先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 担当者役職, 関税率, 前払法人税率, 輸送費率, メモ, 銀行名, 銀行コード, 支店名, 支店コード, 預金種目, 口座番号, 口座名義, 会計用仕入先コード, 更新者, 更新日)"
                 Sql += " VALUES('"
                 Sql += frmC01F10_Login.loginValue.BumonNM
                 Sql += "', '"
@@ -149,6 +149,8 @@ Public Class Supplier
                 Sql += "', '"
                 Sql += TxtAccountName.Text
                 Sql += "', '"
+                Sql += TxtAccountingVendorCode.Text
+                Sql += "', '"
                 Sql += frmC01F10_Login.loginValue.TantoNM
                 Sql += "', '"
                 Sql += dtToday
@@ -200,6 +202,8 @@ Public Class Supplier
                 Sql += "口座番号"
                 Sql += ", "
                 Sql += "口座名義"
+                Sql += ", "
+                Sql += "会計用仕入先コード"
                 Sql += ", "
                 Sql += "更新者"
                 Sql += ", "
@@ -310,6 +314,10 @@ Public Class Supplier
                 Sql += " = '"
                 Sql += TxtAccountName.Text
                 Sql += "', "
+                Sql += "会計用仕入先コード"
+                Sql += " = '"
+                Sql += TxtAccountingVendorCode.Text
+                Sql += "', "
                 Sql += "更新者"
                 Sql += " = '"
                 Sql += frmC01F10_Login.loginValue.TantoNM
@@ -376,6 +384,8 @@ Public Class Supplier
                 Sql += ", "
                 Sql += "口座名義"
                 Sql += ", "
+                Sql += "会計用仕入先コード"
+                Sql += ", "
                 Sql += "更新者"
                 Sql += ", "
                 Sql += "更新日"
@@ -428,6 +438,7 @@ Public Class Supplier
             LblDepositCategory.Text = "DepositCategory"
             LblAccountNumber.Text = "AccountNumber"
             LblAccountHolder.Text = "AccountHolder"
+            LblAccountingVendorCode.Text = "AccountingVendorCode"
 
             LblSupplierCodeText.Text = "(Non-Overlapping string)"
             LblPostalCodeText.Text = "(Example:0123456)"
@@ -587,6 +598,11 @@ Public Class Supplier
             If ds.Tables(RS).Rows(0)("口座名義") Is DBNull.Value Then
             Else
                 TxtAccountName.Text = ds.Tables(RS).Rows(0)("口座名義")
+            End If
+
+            If ds.Tables(RS).Rows(0)("会計用仕入先コード") Is DBNull.Value Then
+            Else
+                TxtAccountName.Text = ds.Tables(RS).Rows(0)("会計用仕入先コード")
             End If
 
         End If

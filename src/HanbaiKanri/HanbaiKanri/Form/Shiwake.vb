@@ -82,7 +82,297 @@ Public Class Shiwake
         ShiwakeLoad()
     End Sub
 
+#Region "XML出力用"
+    Public Sub ConvertDataTableToCsvSingle(ds1 As DataSet, Name As String)
+
+        Dim enc As System.Text.Encoding = System.Text.Encoding.GetEncoding("Shift_JIS")
+        '出力先パス
+        Dim sOutPath As String = ""
+        sOutPath = StartUp._iniVal.OutXlsPath
+
+        '出力ファイル名
+        Dim sOutFile As String = ""
+        sOutFile = sOutPath & "\" & Name & ".csv"
+
+        '書き込むファイルを開く
+        Dim sr As New System.IO.StreamWriter(sOutFile, False, enc)
+        Dim Sql As String = ""
+        Dim reccnt As Integer = 0
+
+        For i As Integer = 0 To ds1.Tables(RS).Rows.Count - 1
+            If i = 0 Then
+                '基本列名
+                For y As Integer = 0 To ds1.Tables(RS).Columns.Count - 1
+                    Dim field As String = ds1.Tables(RS).Columns(y).ColumnName
+                    field = EncloseDoubleQuotesIfNeed(field)
+                    sr.Write(field)
+                    If y < ds1.Tables(RS).Columns.Count - 1 Then
+                        sr.Write(","c)
+                    End If
+                Next
+                sr.Write(vbCrLf)
+            End If
+
+            '基本
+            For y As Integer = 0 To ds1.Tables(RS).Columns.Count - 1
+                Dim field As String = ds1.Tables(RS).Rows(i)(y).ToString()
+                field = EncloseDoubleQuotesIfNeed(field)
+                sr.Write(field)
+                If y < ds1.Tables(RS).Columns.Count - 1 Then
+                    sr.Write(","c)
+                End If
+            Next
+            sr.Write(vbCrLf)
+        Next
+        sr.Close()
+    End Sub
+#End Region
+
+
+    '仕訳データのXML出力
+    Private Sub getShiwakeData()
+        Dim dtToday As DateTime = DateTime.Now '年月の設定
+        Dim reccnt As Integer = 0 'DB用（デフォルト）
+        Dim Sql As String = "" 'SQL文用
+
+        Dim dsCompany As DataSet = getDsData("m01_company") 'ログイン情報から会社データの取得
+
+
+#Region "仕分買掛金"
+
+        '条件オプション
+        'Sql = ""
+        Sql = " ORDER BY "
+        Sql += " 仕入日 "
+
+
+        Dim dsSwkSirehd As DataSet = getDsData("t40_sirehd", Sql) '仕入データの取得
+
+        For i As Integer = 0 To dsSwkSirehd.Tables(RS).Rows.Count - 1
+
+            '条件オプション
+            'Sql = ""
+            Sql = " AND "
+            Sql += "発注番号"
+            Sql += " ILIKE "
+            Sql += "'"
+            Sql += dsSwkSirehd.Tables(RS).Rows(i)("発注番号")
+            Sql += "'"
+
+            't20 発注基本
+            Dim dsSwkHattyu As DataSet = getDsData("t20_hattyu", Sql) '発注基本データの取得
+
+            't42 入庫基本
+            Dim dsSWKNyukohd As DataSet = getDsData("t42_nyukohd", Sql) '入庫基本データの取得
+
+            Dim VATIN As Double = 0
+            VATIN = dsSwkSirehd.Tables(RS).Rows(i)("仕入金額") * dsSwkSirehd.Tables(RS).Rows(i)("ＶＡＴ") / 100
+
+            '入庫データ回しながら以下データ作成
+            '借方：棚卸資産
+            '貸方：買掛金
+
+            Dim transactionid As String = DateTime.Now.ToString("MMddHHmmss" & i) 'TRANSACTIONID
+            Dim countKeyID As Integer = 0
+
+            For x As Integer = 0 To dsSWKNyukohd.Tables(RS).Rows.Count - 1
+                'Dim test As String = dsSWKNyukohd.Tables(RS).Rows(x)("入庫日").ToString()
+
+
+
+                'Sql = ""
+                Sql = ",'" & Format(dsSWKNyukohd.Tables(RS).Rows(x)("入庫日"), "yyyyMM") & "'" '入庫日
+                Sql += "," & transactionid 'プライマリ
+                Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
+                Sql += ",100000000000" '棚卸資産
+                Sql += "," & formatDouble(dsSWKNyukohd.Tables(RS).Rows(x)("仕入金額") * dsSWKNyukohd.Tables(RS).Rows(x)("VAT")) '仕入金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
+                Sql += ",1" '固定
+                Sql += ",'" & dsSwkHattyu.Tables(RS).Rows(0)("仕入先名").ToString & "'" '仕入先コード
+                Sql += ",'" & dsSwkHattyu.Tables(RS).Rows(0)("客先番号").ToString & "'" 'PO
+                'Sql += ",'" & dsSwkSirehd.Tables(RS).Rows(i)("仕入日") & "'" '仕入日
+                Sql += ",'" & Format(dsSwkSirehd.Tables(RS).Rows(i)("仕入日"), "yyyy-MM-dd") & "'" '仕入日
+                Sql += ",''" '空でよし
+                'Sql += "," & formatDouble(VATIN) '仕入金額 + VAT IN
+                Sql += "," & formatDouble(dsSWKNyukohd.Tables(RS).Rows(x)("仕入金額") + dsSWKNyukohd.Tables(RS).Rows(x)("VAT")) '仕入金額 + VAT IN
+                Sql += ",''" '空でよし
+                Sql += ",''" '空でよし
+
+                countKeyID = getCount(countKeyID)
+
+                't67_swkhd データ登録
+                updateT67Swkhd(Sql)
+
+                'Sql = ""
+                Sql = ",'" & Format(dsSWKNyukohd.Tables(RS).Rows(x)("入庫日"), "yyyyMM") & "'" '入庫日
+                Sql += "," & transactionid 'プライマリ
+                Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
+                Sql += ",100000000001" '買掛金
+                'Sql += "," & formatDouble(-dsSWKNyukohd.Tables(RS).Rows(x)("仕入金額")) '仕入金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
+                Sql += "," & formatDouble(dsSWKNyukohd.Tables(RS).Rows(x)("仕入金額") * dsSWKNyukohd.Tables(RS).Rows(x)("VAT")) '仕入金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
+                Sql += ",1" '固定
+                Sql += ",'" & dsSwkHattyu.Tables(RS).Rows(0)("仕入先名").ToString & "'" '仕入先コード
+                Sql += ",'" & dsSwkHattyu.Tables(RS).Rows(0)("客先番号").ToString & "'" 'PO
+                Sql += ",'" & Format(dsSwkSirehd.Tables(RS).Rows(i)("仕入日"), "yyyy-MM-dd") & "'" '仕入日
+                Sql += ",''" '空でよし
+                'Sql += "," & formatDouble(VATIN) '仕入金額 + VAT IN
+                Sql += "," & formatDouble(dsSWKNyukohd.Tables(RS).Rows(x)("仕入金額") + dsSWKNyukohd.Tables(RS).Rows(x)("VAT")) '仕入金額 + VAT IN
+                Sql += ",''" '空でよし
+                Sql += ",''" '空でよし
+
+                't67_swkhd データ登録
+                updateT67Swkhd(Sql)
+
+                countKeyID = getCount(countKeyID)
+
+                'Sql = ""
+                Sql = ",'" & Format(dsSWKNyukohd.Tables(RS).Rows(x)("入庫日"), "yyyyMM") & "'" '入庫日
+                Sql += "," & transactionid 'プライマリ
+                Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
+                Sql += ",100000000002" 'VAT-IN
+                'Sql += "," & formatDouble(dsSWKNyukohd.Tables(RS).Rows(x)("仕入金額")) '仕入金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
+                Sql += "," & formatDouble(dsSWKNyukohd.Tables(RS).Rows(x)("仕入金額") * dsSWKNyukohd.Tables(RS).Rows(x)("VAT")) '仕入金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
+                Sql += ",1" '固定
+                Sql += ",'" & dsSwkHattyu.Tables(RS).Rows(0)("仕入先名").ToString & "'" '仕入先コード
+                Sql += ",'" & dsSwkHattyu.Tables(RS).Rows(0)("客先番号").ToString & "'" 'PO
+                Sql += ",'" & Format(dsSwkSirehd.Tables(RS).Rows(i)("仕入日"), "yyyy-MM-dd") & "'" '仕入日
+                Sql += ",''" '空でよし
+                'Sql += "," & formatDouble(VATIN) '仕入金額 + VAT IN
+                Sql += "," & formatDouble(dsSWKNyukohd.Tables(RS).Rows(x)("仕入金額") + dsSWKNyukohd.Tables(RS).Rows(x)("VAT")) '仕入金額 + VAT IN
+                Sql += ",''" '空でよし
+                Sql += ",''" '空でよし
+
+                't67_swkhd データ登録
+                updateT67Swkhd(Sql)
+
+                countKeyID = getCount(countKeyID)
+
+
+                'Sql = ""
+                Sql = ",'" & Format(dsSWKNyukohd.Tables(RS).Rows(x)("入庫日"), "yyyyMM") & "'" '入庫日
+                Sql += "," & transactionid 'プライマリ
+                Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
+                Sql += ",100000000001" '買掛金
+                'Sql += "," & formatDouble(-dsSWKNyukohd.Tables(RS).Rows(x)("仕入金額")) '仕入金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
+                Sql += "," & formatDouble(-dsSWKNyukohd.Tables(RS).Rows(x)("仕入金額")) '仕入金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
+                Sql += ",1" '固定
+                Sql += ",'" & dsSwkHattyu.Tables(RS).Rows(0)("仕入先名").ToString & "'" '仕入先コード
+                Sql += ",'" & dsSwkHattyu.Tables(RS).Rows(0)("客先番号").ToString & "'" 'PO
+                Sql += ",'" & Format(dsSwkSirehd.Tables(RS).Rows(i)("仕入日"), "yyyy-MM-dd") & "'" '仕入日
+                Sql += ",''" '空でよし
+                'Sql += "," & formatDouble(VATIN) '仕入金額 + VAT IN
+                Sql += "," & formatDouble(dsSWKNyukohd.Tables(RS).Rows(x)("仕入金額") + dsSWKNyukohd.Tables(RS).Rows(x)("VAT")) '仕入金額 + VAT IN
+                Sql += ",''" '空でよし
+                Sql += ",''" '空でよし
+
+                't67_swkhd データ登録
+                updateT67Swkhd(Sql)
+
+                countKeyID = getCount(countKeyID)
+
+            Next
+
+
+
+        Next
+#End Region
+
+
+    End Sub
+
+
+
+    'Public Sub ConvertDataTableToCsv(ds1 As DataSet, tableName As String, ColName As String, Name As String)
+
+    '    Dim enc As System.Text.Encoding = System.Text.Encoding.GetEncoding("Shift_JIS")
+    '    '出力先パス
+    '    Dim sOutPath As String = ""
+    '    sOutPath = StartUp._iniVal.OutXlsPath
+
+    '    '出力ファイル名
+    '    Dim sOutFile As String = ""
+    '    sOutFile = sOutPath & "\" & Name & ".csv"
+
+    '    '書き込むファイルを開く
+    '    Dim sr As New System.IO.StreamWriter(sOutFile, False, enc)
+    '    Dim Sql As String = ""
+    '    Dim reccnt As Integer = 0
+
+    '    For i As Integer = 0 To ds1.Tables(RS).Rows.Count - 1
+    '        Sql = ""
+    '        Sql += "SELECT "
+    '        Sql += "* "
+    '        Sql += "FROM "
+    '        Sql += "public"
+    '        Sql += "."
+    '        Sql += tableName
+    '        Sql += " WHERE "
+    '        Sql += "会社コード"
+    '        Sql += " ILIKE  "
+    '        Sql += "'"
+    '        Sql += frmC01F10_Login.loginValue.BumonNM
+    '        Sql += "'"
+    '        Sql += " AND "
+    '        Sql += ColName
+    '        Sql += " = "
+    '        Sql += "'"
+    '        Sql += ds1.Tables(RS).Rows(i)(ColName)
+    '        Sql += "'"
+
+    '        Dim ds3 As DataSet = _db.selectDB(Sql, RS, reccnt)
+    '        If i = 0 Then
+    '            '基本列名
+    '            For y As Integer = 0 To ds1.Tables(RS).Columns.Count - 1
+    '                Dim field As String = ds1.Tables(RS).Columns(y).ColumnName
+    '                field = EncloseDoubleQuotesIfNeed(field)
+    '                sr.Write(field)
+    '                If y < ds1.Tables(RS).Columns.Count - 1 Then
+    '                    sr.Write(","c)
+    '                End If
+    '            Next
+
+    '            '明細列名
+    '            For z As Integer = 0 To ds3.Tables(RS).Columns.Count - 1
+    '                Dim field As String = ds3.Tables(RS).Columns(z).ColumnName
+    '                field = EncloseDoubleQuotesIfNeed(field)
+    '                sr.Write(field)
+    '                If z < ds3.Tables(RS).Columns.Count - 1 Then
+    '                    sr.Write(","c)
+    '                End If
+    '            Next
+    '            sr.Write(vbCrLf)
+    '        End If
+
+    '        For x As Integer = 0 To ds3.Tables(RS).Rows.Count - 1
+
+    '            '基本
+    '            For y As Integer = 0 To ds1.Tables(RS).Columns.Count - 1
+    '                Dim field As String = ds1.Tables(RS).Rows(i)(y).ToString()
+    '                field = EncloseDoubleQuotesIfNeed(field)
+    '                sr.Write(field)
+    '                If y < ds1.Tables(RS).Columns.Count - 1 Then
+    '                    sr.Write(","c)
+    '                End If
+    '            Next
+
+    '            '明細
+    '            For z As Integer = 0 To ds3.Tables(RS).Columns.Count - 1
+    '                Dim field As String = ds3.Tables(RS).Rows(x)(z).ToString()
+    '                field = EncloseDoubleQuotesIfNeed(field)
+    '                sr.Write(field)
+    '                If z < ds3.Tables(RS).Columns.Count - 1 Then
+    '                    sr.Write(","c)
+    '                End If
+    '            Next
+    '            sr.Write(vbCrLf)
+    '        Next
+    '    Next
+    '    sr.Close()
+    'End Sub
+
+
     Private Sub BtnOutput_Click(sender As Object, e As EventArgs) Handles BtnOutput.Click
+        '仕訳データを作成する
+        getShiwakeData()
 
         '現在日時を取得
         Dim nowDatetime As String = DateTime.Now.ToString("yyyyMMddHHmmss")
@@ -291,4 +581,85 @@ Public Class Shiwake
         Return txtSql
     End Function
 
+    'テーブル名
+    'オプションがあれば（条件）第二引数
+    Private Function getDsData(ByVal tableName As String, Optional ByRef txtParam As String = "") As DataSet
+        Dim reccnt As Integer = 0 'DB用（デフォルト）
+        Dim Sql As String = ""
+
+        Sql += "SELECT"
+        Sql += " *"
+        Sql += " FROM "
+
+        Sql += "public." & tableName
+        Sql += " WHERE "
+        Sql += "会社コード"
+        Sql += " ILIKE  "
+        Sql += "'" & frmC01F10_Login.loginValue.BumonNM & "'"
+        Sql += txtParam
+
+        Return _db.selectDB(Sql, RS, reccnt)
+    End Function
+
+
+    '登録する科目名
+    'オプションがあれば（条件）第二引数
+    Private Sub updateT67Swkhd(ByVal param As String)
+        Dim reccnt As Integer = 0 'DB用（デフォルト）
+        Dim Sql As String = ""
+
+        Sql += "INSERT INTO "
+        Sql += "Public.t67_swkhd"
+        Sql += "("
+        Sql += """会社コード"""
+        Sql += ",""処理年月"""
+        Sql += ",""TRANSACTIONID"""
+        Sql += ",""KeyID"""
+        Sql += ",""GLACCOUNT"""
+        Sql += ",""GLAMOUNT"""
+        Sql += ",""RATE"""
+        Sql += ",""VENDORNO"""
+        Sql += ",""JVNUMBER"""
+        Sql += ",""TRANSDATE"""
+        Sql += ",""TRANSDESCRIPTION"""
+        Sql += ",""JVAMOUNT"""
+        Sql += ",""CUSTOMERNO"""
+        Sql += ",""DESCRIPTION"""
+        Sql += ") "
+        Sql += " VALUES("
+        Sql += "'" & frmC01F10_Login.loginValue.BumonNM & "'"
+        Sql += param
+        Sql += ") "
+        'Console.WriteLine(Sql)
+        _db.executeDB(Sql)
+    End Sub
+
+    'カウントアップ
+    Private Function getCount(ByVal nowCount As Integer) As Integer
+        Dim count As Integer
+        count = nowCount + 1
+
+        Return count
+    End Function
+
+    'カウントアップ
+    Private Function formatDouble(ByVal val As Decimal) As Decimal
+        Dim result As Decimal
+
+        ' 小数点第三位で四捨五入し、小数点第二位まで出力
+        result = Math.Round(val, 2, MidpointRounding.AwayFromZero)
+
+        Return result
+    End Function
+
+
+    '最終的には削除する
+    '会社コード=ZENBIを一括削除
+    Private Sub BtnShiwakeClear_Click(sender As Object, e As EventArgs) Handles BtnShiwakeClear.Click
+        Dim reccnt As Integer = 0 'DB用（デフォルト）
+        Dim Sql As String = "DELETE FROM t67_swkhd WHERE ""会社コード"" = 'ZENBI';"
+
+        _db.executeDB(Sql)
+
+    End Sub
 End Class

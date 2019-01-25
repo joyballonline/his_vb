@@ -58,6 +58,8 @@ Partial Class Customer
         Me.Label18 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.Label26 = New System.Windows.Forms.Label()
+        Me.LblAccountingVendorCode = New System.Windows.Forms.Label()
+        Me.TxtAccountingVendorCode = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
         'btnRegistrarion
@@ -65,7 +67,7 @@ Partial Class Customer
         Me.btnRegistrarion.Location = New System.Drawing.Point(381, 509)
         Me.btnRegistrarion.Name = "btnRegistrarion"
         Me.btnRegistrarion.Size = New System.Drawing.Size(165, 40)
-        Me.btnRegistrarion.TabIndex = 15
+        Me.btnRegistrarion.TabIndex = 16
         Me.btnRegistrarion.Text = "登録"
         Me.btnRegistrarion.UseVisualStyleBackColor = True
         '
@@ -309,7 +311,7 @@ Partial Class Customer
         Me.btnBack.Location = New System.Drawing.Point(552, 509)
         Me.btnBack.Name = "btnBack"
         Me.btnBack.Size = New System.Drawing.Size(165, 40)
-        Me.btnBack.TabIndex = 16
+        Me.btnBack.TabIndex = 17
         Me.btnBack.Text = "戻る"
         Me.btnBack.UseVisualStyleBackColor = True
         '
@@ -335,7 +337,7 @@ Partial Class Customer
         '
         Me.TxtCompanyCode.Location = New System.Drawing.Point(754, 12)
         Me.TxtCompanyCode.Name = "TxtCompanyCode"
-        Me.TxtCompanyCode.Size = New System.Drawing.Size(23, 20)
+        Me.TxtCompanyCode.Size = New System.Drawing.Size(23, 19)
         Me.TxtCompanyCode.TabIndex = 52
         Me.TxtCompanyCode.TabStop = False
         Me.TxtCompanyCode.Visible = False
@@ -390,10 +392,31 @@ Partial Class Customer
         Me.Label26.TabIndex = 236
         Me.Label26.Text = "(他得意先コードと重複しない文字列)"
         '
+        'LblAccountingVendorCode
+        '
+        Me.LblAccountingVendorCode.AutoSize = True
+        Me.LblAccountingVendorCode.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblAccountingVendorCode.Location = New System.Drawing.Point(12, 332)
+        Me.LblAccountingVendorCode.Name = "LblAccountingVendorCode"
+        Me.LblAccountingVendorCode.Size = New System.Drawing.Size(104, 12)
+        Me.LblAccountingVendorCode.TabIndex = 237
+        Me.LblAccountingVendorCode.Text = "会計用得意先コード"
+        '
+        'TxtAccountingVendorCode
+        '
+        Me.TxtAccountingVendorCode.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtAccountingVendorCode.Location = New System.Drawing.Point(130, 329)
+        Me.TxtAccountingVendorCode.MaxLength = 20
+        Me.TxtAccountingVendorCode.Name = "TxtAccountingVendorCode"
+        Me.TxtAccountingVendorCode.Size = New System.Drawing.Size(234, 22)
+        Me.TxtAccountingVendorCode.TabIndex = 15
+        '
         'Customer
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(729, 561)
+        Me.Controls.Add(Me.TxtAccountingVendorCode)
+        Me.Controls.Add(Me.LblAccountingVendorCode)
         Me.Controls.Add(Me.Label26)
         Me.Controls.Add(Me.Label16)
         Me.Controls.Add(Me.Label18)
@@ -474,4 +497,6 @@ Partial Class Customer
     Friend WithEvents Label18 As Label
     Friend WithEvents Label16 As Label
     Friend WithEvents Label26 As Label
+    Friend WithEvents LblAccountingVendorCode As Label
+    Friend WithEvents TxtAccountingVendorCode As TextBox
 End Class

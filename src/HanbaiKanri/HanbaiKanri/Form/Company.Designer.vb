@@ -277,7 +277,7 @@ Partial Class Company
         Me.BtnBack.Location = New System.Drawing.Point(552, 514)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(165, 40)
-        Me.BtnBack.TabIndex = 24
+        Me.BtnBack.TabIndex = 25
         Me.BtnBack.Text = "戻る"
         Me.BtnBack.UseVisualStyleBackColor = True
         '
@@ -412,7 +412,7 @@ Partial Class Company
         Me.BtnRegistration.Location = New System.Drawing.Point(381, 514)
         Me.BtnRegistration.Name = "BtnRegistration"
         Me.BtnRegistration.Size = New System.Drawing.Size(165, 40)
-        Me.BtnRegistration.TabIndex = 23
+        Me.BtnRegistration.TabIndex = 24
         Me.BtnRegistration.Text = "登録"
         Me.BtnRegistration.UseVisualStyleBackColor = True
         '
@@ -601,7 +601,7 @@ Partial Class Company
         Me.TxtBranchCode.MaxLength = 10
         Me.TxtBranchCode.Name = "TxtBranchCode"
         Me.TxtBranchCode.Size = New System.Drawing.Size(234, 22)
-        Me.TxtBranchCode.TabIndex = 237
+        Me.TxtBranchCode.TabIndex = 23
         '
         'Label31
         '

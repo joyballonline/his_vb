@@ -101,6 +101,7 @@ Public Class MstSupplier
             Dgv_Supplier.Columns("関税率").HeaderText = "TariffRate"
             Dgv_Supplier.Columns("前払法人税率").HeaderText = "PPH"
             Dgv_Supplier.Columns("輸送費率").HeaderText = "TransportationCostRate"
+            Dgv_Supplier.Columns("会計用仕入先コード").HeaderText = "AccountingVendorCode"
             Dgv_Supplier.Columns("更新者").HeaderText = "Changer"
             Dgv_Supplier.Columns("更新日").HeaderText = "UpdateDate"
 
@@ -151,6 +152,7 @@ Public Class MstSupplier
                 Dgv_Supplier.Rows(index).Cells("関税率").Value = ds.Tables(RS).Rows(index)("関税率")
                 Dgv_Supplier.Rows(index).Cells("前払法人税率").Value = ds.Tables(RS).Rows(index)("前払法人税率")
                 Dgv_Supplier.Rows(index).Cells("輸送費率").Value = ds.Tables(RS).Rows(index)("輸送費率")
+                Dgv_Supplier.Rows(index).Cells("会計用仕入先コード").Value = ds.Tables(RS).Rows(index)("会計用仕入先コード")
 
             Next
 
@@ -244,6 +246,7 @@ Public Class MstSupplier
                 Dgv_Supplier.Rows(index).Cells("関税率").Value = ds.Tables(RS).Rows(index)("関税率")
                 Dgv_Supplier.Rows(index).Cells("前払法人税率").Value = ds.Tables(RS).Rows(index)("前払法人税率")
                 Dgv_Supplier.Rows(index).Cells("輸送費率").Value = ds.Tables(RS).Rows(index)("輸送費率")
+                Dgv_Supplier.Rows(index).Cells("会計用仕入先コード").Value = ds.Tables(RS).Rows(index)("会計用仕入先コード")
             Next
 
         Catch ue As UsrDefException

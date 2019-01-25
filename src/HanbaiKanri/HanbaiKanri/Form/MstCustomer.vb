@@ -88,6 +88,7 @@ Public Class MstCustomer
             Dgv_Customer.Columns("担当者役職").HeaderText = "ContactPersonPosition"
             Dgv_Customer.Columns("既定支払条件").HeaderText = "PaymentTerms"
             Dgv_Customer.Columns("メモ").HeaderText = "Memo"
+            Dgv_Customer.Columns("会計用得意先コード").HeaderText = "AccountingCustomerNumber"
             Dgv_Customer.Columns("更新者").HeaderText = "Changer"
             Dgv_Customer.Columns("更新日").HeaderText = "UpdateDate"
 
@@ -110,6 +111,7 @@ Public Class MstCustomer
             Sql += "担当者役職, "
             Sql += "既定支払条件, "
             Sql += "メモ, "
+            Sql += "会計用得意先コード, "
             Sql += "更新者, "
             Sql += "更新日 "
             Sql += "FROM "
@@ -128,23 +130,25 @@ Public Class MstCustomer
 
             For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
                 Dgv_Customer.Rows.Add()
-                Dgv_Customer.Rows(index).Cells(0).Value = ds.Tables(RS).Rows(index)(0)        '会社コード
-                Dgv_Customer.Rows(index).Cells(1).Value = ds.Tables(RS).Rows(index)(1)        '言語コード
-                Dgv_Customer.Rows(index).Cells(2).Value = ds.Tables(RS).Rows(index)(2)        '氏名
-                Dgv_Customer.Rows(index).Cells(3).Value = ds.Tables(RS).Rows(index)(3)      '略名
-                Dgv_Customer.Rows(index).Cells(4).Value = ds.Tables(RS).Rows(index)(4)      '備考
-                Dgv_Customer.Rows(index).Cells(5).Value = ds.Tables(RS).Rows(index)(5)      '無効フラグ
-                Dgv_Customer.Rows(index).Cells(6).Value = ds.Tables(RS).Rows(index)(6)      '更新者
-                Dgv_Customer.Rows(index).Cells(7).Value = ds.Tables(RS).Rows(index)(7)      '更新日
-                Dgv_Customer.Rows(index).Cells(8).Value = ds.Tables(RS).Rows(index)(8)        '会社コード
-                Dgv_Customer.Rows(index).Cells(9).Value = ds.Tables(RS).Rows(index)(9)        '言語コード
-                Dgv_Customer.Rows(index).Cells(10).Value = ds.Tables(RS).Rows(index)(10)        '氏名
-                Dgv_Customer.Rows(index).Cells(11).Value = ds.Tables(RS).Rows(index)(11)      '略名
-                Dgv_Customer.Rows(index).Cells(12).Value = ds.Tables(RS).Rows(index)(12)      '備考
-                Dgv_Customer.Rows(index).Cells(13).Value = ds.Tables(RS).Rows(index)(13)      '無効フラグ
-                Dgv_Customer.Rows(index).Cells(14).Value = ds.Tables(RS).Rows(index)(14)      '更新者
-                Dgv_Customer.Rows(index).Cells(15).Value = ds.Tables(RS).Rows(index)(15)      '更新日
-                Dgv_Customer.Rows(index).Cells(16).Value = ds.Tables(RS).Rows(index)(16)      '更新日
+                Dgv_Customer.Rows(index).Cells(0).Value = ds.Tables(RS).Rows(index)("会社コード")
+                Dgv_Customer.Rows(index).Cells(1).Value = ds.Tables(RS).Rows(index)("得意先コード")
+                Dgv_Customer.Rows(index).Cells(2).Value = ds.Tables(RS).Rows(index)("得意先名")
+                Dgv_Customer.Rows(index).Cells(3).Value = ds.Tables(RS).Rows(index)("得意先名略称")
+                Dgv_Customer.Rows(index).Cells(4).Value = ds.Tables(RS).Rows(index)("郵便番号")
+                Dgv_Customer.Rows(index).Cells(5).Value = ds.Tables(RS).Rows(index)("住所１")
+                Dgv_Customer.Rows(index).Cells(6).Value = ds.Tables(RS).Rows(index)("住所２")
+                Dgv_Customer.Rows(index).Cells(7).Value = ds.Tables(RS).Rows(index)("住所３")
+                Dgv_Customer.Rows(index).Cells(8).Value = ds.Tables(RS).Rows(index)("電話番号")
+                Dgv_Customer.Rows(index).Cells(9).Value = ds.Tables(RS).Rows(index)("電話番号検索用")
+                Dgv_Customer.Rows(index).Cells(10).Value = ds.Tables(RS).Rows(index)("ＦＡＸ番号")
+                Dgv_Customer.Rows(index).Cells(11).Value = ds.Tables(RS).Rows(index)("担当者名")
+                Dgv_Customer.Rows(index).Cells(12).Value = ds.Tables(RS).Rows(index)("担当者役職")
+                Dgv_Customer.Rows(index).Cells(13).Value = ds.Tables(RS).Rows(index)("既定支払条件")
+                Dgv_Customer.Rows(index).Cells(14).Value = ds.Tables(RS).Rows(index)("メモ")
+                Dgv_Customer.Rows(index).Cells(15).Value = ds.Tables(RS).Rows(index)("会計用得意先コード")
+                Dgv_Customer.Rows(index).Cells(16).Value = ds.Tables(RS).Rows(index)("更新者")
+                Dgv_Customer.Rows(index).Cells(17).Value = ds.Tables(RS).Rows(index)("更新日")
+
             Next
 
         Catch ue As UsrDefException
@@ -209,24 +213,28 @@ Public Class MstCustomer
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
 
             For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+
                 Dgv_Customer.Rows.Add()
-                Dgv_Customer.Rows(index).Cells(0).Value = ds.Tables(RS).Rows(index)(0)        '会社コード
-                Dgv_Customer.Rows(index).Cells(1).Value = ds.Tables(RS).Rows(index)(1)        '言語コード
-                Dgv_Customer.Rows(index).Cells(2).Value = ds.Tables(RS).Rows(index)(2)        '氏名
-                Dgv_Customer.Rows(index).Cells(3).Value = ds.Tables(RS).Rows(index)(3)      '略名
-                Dgv_Customer.Rows(index).Cells(4).Value = ds.Tables(RS).Rows(index)(4)      '備考
-                Dgv_Customer.Rows(index).Cells(5).Value = ds.Tables(RS).Rows(index)(5)      '無効フラグ
-                Dgv_Customer.Rows(index).Cells(6).Value = ds.Tables(RS).Rows(index)(6)      '更新者
-                Dgv_Customer.Rows(index).Cells(7).Value = ds.Tables(RS).Rows(index)(7)      '更新日
-                Dgv_Customer.Rows(index).Cells(8).Value = ds.Tables(RS).Rows(index)(8)        '会社コード
-                Dgv_Customer.Rows(index).Cells(9).Value = ds.Tables(RS).Rows(index)(9)        '言語コード
-                Dgv_Customer.Rows(index).Cells(10).Value = ds.Tables(RS).Rows(index)(10)        '氏名
-                Dgv_Customer.Rows(index).Cells(11).Value = ds.Tables(RS).Rows(index)(11)      '略名
-                Dgv_Customer.Rows(index).Cells(12).Value = ds.Tables(RS).Rows(index)(12)      '備考
-                Dgv_Customer.Rows(index).Cells(13).Value = ds.Tables(RS).Rows(index)(13)      '無効フラグ
-                Dgv_Customer.Rows(index).Cells(14).Value = ds.Tables(RS).Rows(index)(14)      '更新者
-                Dgv_Customer.Rows(index).Cells(15).Value = ds.Tables(RS).Rows(index)(15)      '更新日
-                Dgv_Customer.Rows(index).Cells(16).Value = ds.Tables(RS).Rows(index)(16)      '更新日
+
+                Dgv_Customer.Rows(index).Cells(0).Value = ds.Tables(RS).Rows(index)("会社コード")
+                Dgv_Customer.Rows(index).Cells(1).Value = ds.Tables(RS).Rows(index)("得意先コード")
+                Dgv_Customer.Rows(index).Cells(2).Value = ds.Tables(RS).Rows(index)("得意先名")
+                Dgv_Customer.Rows(index).Cells(3).Value = ds.Tables(RS).Rows(index)("得意先名略称")
+                Dgv_Customer.Rows(index).Cells(4).Value = ds.Tables(RS).Rows(index)("郵便番号")
+                Dgv_Customer.Rows(index).Cells(5).Value = ds.Tables(RS).Rows(index)("住所１")
+                Dgv_Customer.Rows(index).Cells(6).Value = ds.Tables(RS).Rows(index)("住所２")
+                Dgv_Customer.Rows(index).Cells(7).Value = ds.Tables(RS).Rows(index)("住所３")
+                Dgv_Customer.Rows(index).Cells(8).Value = ds.Tables(RS).Rows(index)("電話番号")
+                Dgv_Customer.Rows(index).Cells(9).Value = ds.Tables(RS).Rows(index)("電話番号検索用")
+                Dgv_Customer.Rows(index).Cells(10).Value = ds.Tables(RS).Rows(index)("ＦＡＸ番号")
+                Dgv_Customer.Rows(index).Cells(11).Value = ds.Tables(RS).Rows(index)("担当者名")
+                Dgv_Customer.Rows(index).Cells(12).Value = ds.Tables(RS).Rows(index)("担当者役職")
+                Dgv_Customer.Rows(index).Cells(13).Value = ds.Tables(RS).Rows(index)("既定支払条件")
+                Dgv_Customer.Rows(index).Cells(14).Value = ds.Tables(RS).Rows(index)("メモ")
+                Dgv_Customer.Rows(index).Cells(15).Value = ds.Tables(RS).Rows(index)("会計用得意先コード")
+                Dgv_Customer.Rows(index).Cells(16).Value = ds.Tables(RS).Rows(index)("更新者")
+                Dgv_Customer.Rows(index).Cells(17).Value = ds.Tables(RS).Rows(index)("更新日")
+
             Next
 
         Catch ue As UsrDefException

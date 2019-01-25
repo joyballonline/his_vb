@@ -25,6 +25,7 @@ Partial Class Shiwake
         Me.LblMode = New System.Windows.Forms.Label()
         Me.BtnBack = New System.Windows.Forms.Button()
         Me.BtnOutput = New System.Windows.Forms.Button()
+        Me.BtnShiwakeClear = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'LblMode
@@ -59,11 +60,21 @@ Partial Class Shiwake
         Me.BtnOutput.Text = "出力"
         Me.BtnOutput.UseVisualStyleBackColor = True
         '
+        'BtnShiwakeClear
+        '
+        Me.BtnShiwakeClear.Location = New System.Drawing.Point(768, 520)
+        Me.BtnShiwakeClear.Name = "BtnShiwakeClear"
+        Me.BtnShiwakeClear.Size = New System.Drawing.Size(126, 23)
+        Me.BtnShiwakeClear.TabIndex = 325
+        Me.BtnShiwakeClear.Text = "仕訳（67tableクリア）"
+        Me.BtnShiwakeClear.UseVisualStyleBackColor = True
+        '
         'Shiwake
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.BtnShiwakeClear)
         Me.Controls.Add(Me.BtnOutput)
         Me.Controls.Add(Me.BtnBack)
         Me.Controls.Add(Me.LblMode)
@@ -76,4 +87,5 @@ Partial Class Shiwake
     Friend WithEvents LblMode As Label
     Friend WithEvents BtnBack As Button
     Friend WithEvents BtnOutput As Button
+    Friend WithEvents BtnShiwakeClear As Button
 End Class

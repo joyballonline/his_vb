@@ -2132,3 +2132,83 @@ INSERT INTO Public.t62_krnkinhd(会社コード, 入金番号, 客先番号, 請求先コード, 請
    場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 \\VBOXSVR\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
    場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 \\VBOXSVR\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
 SELECT * FROM public.t50_zikhd WHERE 会社コード ILIKE  'ZENBI' AND メーカー ILIKE  'メーカーB' AND 品名 ILIKE  '品名B' AND 型式 ILIKE  '型式B'
+2019/01/23 10:59:19   ERR***** データ更新失敗：ERROR: 22001: value too long for type character varying(50)
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\kasah\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\kasah\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO Public.t01_mithd(会社コード, 見積番号, 見積番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額, 仕入金額, 粗利額, 営業担当者, 入力担当者, 備考, ＶＡＴ, 取消区分, 登録日, 更新日, 更新者) VALUES('DEMO', 'QT01230042', '1', 'cus04', 'PT DEF Nusantara', '12210', 'Jl Jenderal Sudirman Kav10 Jakarta Selatan, DKI Jakarta ', '08112345678', '', 'Manager', 'Siti', '2019/01/23', '2019/01/30', '60 Days', '1000000', '800500', '199500', 'demo01', 'demo01', '', '10', '0', '2019/01/23', '2019/01/23 10:59:19', 'demo01 ')RETURNING 会社コード, 見積番号, 見積番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額, 仕入金額, 粗利額, 営業担当者, 入力担当者, 備考, ＶＡＴ, 取消区分, 登録日, 更新日, 更新者
+2019/01/23 20:31:41   ERR***** データ更新失敗：ERROR: 42703: column "ID"会社コード" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\kasah\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\kasah\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO Public.t67_swkhd("会社コード","処理年月","TRANSACTIONID","KeyID","GLACCOUNT","GLAMOUNT","RATE","VENDORNO","JVNUMBER","TRANSDATE","TRANSDESCRIPTION","JVAMOUNT","CUSTOMERNO","DESCRIPTION")  VALUES('ZENBI','201812',190123203136,0,100000000000,24000.000,1,'supplier01','PO812031','2018/12/03','',2400,'','') RETURNING "ID""会社コード","処理年月","TRANSACTIONID","KeyID","GLACCOUNT","GLAMOUNT","RATE","VENDORNO","JVNUMBER","TRANSDATE","TRANSDESCRIPTION","JVAMOUNT","CUSTOMERNO","DESCRIPTION"
+2019/01/23 20:35:35   ERR***** データ更新失敗：ERROR: 42703: column "transactionid" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\kasah\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\kasah\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO Public.t67_swkhd("会社コード","処理年月","TRANSACTIONID","KeyID","GLACCOUNT","GLAMOUNT","RATE","VENDORNO","JVNUMBER","TRANSDATE","TRANSDESCRIPTION","JVAMOUNT","CUSTOMERNO","DESCRIPTION")  VALUES('ZENBI','201812',TRANSACTIONID,0,100000000001,-24000.000,1,'supplier01','PO812031','2018/12/03','',2400,'','') 
+2019/01/23 20:37:38   ERR***** データ更新失敗：ERROR: 22003: numeric field overflow
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\kasah\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\kasah\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO Public.t67_swkhd("会社コード","処理年月","TRANSACTIONID","KeyID","GLACCOUNT","GLAMOUNT","RATE","VENDORNO","JVNUMBER","TRANSDATE","TRANSDESCRIPTION","JVAMOUNT","CUSTOMERNO","DESCRIPTION")  VALUES('ZENBI','201901',190123203738,0,100000000000,100000000.000,1,'supplier01','PO000040','2019/01/23','',10000000000000,'','') 
+2019/01/23 20:41:36   ERR***** データ更新失敗：ERROR: 22003: numeric field overflow
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\kasah\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\kasah\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO Public.t67_swkhd("会社コード","処理年月","TRANSACTIONID","KeyID","GLACCOUNT","GLAMOUNT","RATE","VENDORNO","JVNUMBER","TRANSDATE","TRANSDESCRIPTION","JVAMOUNT","CUSTOMERNO","DESCRIPTION")  VALUES('ZENBI','201901',190123204136,0,100000000000,100000000.000,1,'supplier01','PO000040','2019/01/23','',10000000000000,'','') 
+2019/01/23 20:43:28   ERR***** データ更新失敗：ERROR: 22003: numeric field overflow
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\kasah\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\kasah\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO Public.t67_swkhd("会社コード","処理年月","TRANSACTIONID","KeyID","GLACCOUNT","GLAMOUNT","RATE","VENDORNO","JVNUMBER","TRANSDATE","TRANSDESCRIPTION","JVAMOUNT","CUSTOMERNO","DESCRIPTION")  VALUES('ZENBI','201901',190123204328,0,100000000000,100000000.000,1,'supplier01','PO000040','2019/01/23','',10000000000000,'','') 
+2019/01/23 21:35:45   ERR***** データ更新失敗：ERROR: 22003: numeric field overflow
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\kasah\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\kasah\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO Public.t67_swkhd("会社コード","処理年月","TRANSACTIONID","KeyID","GLACCOUNT","GLAMOUNT","RATE","VENDORNO","JVNUMBER","TRANSDATE","TRANSDESCRIPTION","JVAMOUNT","CUSTOMERNO","DESCRIPTION")  VALUES('ZENBI','201901',190123213545,0,100000000000,100000000.000,1,'supplier01','PO000040','2019/01/23','',10000000000000,'','') 
+2019/01/23 21:37:13   ERR***** データ更新失敗：ERROR: 22003: numeric field overflow
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\kasah\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\kasah\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO Public.t67_swkhd("会社コード","処理年月","TRANSACTIONID","KeyID","GLACCOUNT","GLAMOUNT","RATE","VENDORNO","JVNUMBER","TRANSDATE","TRANSDESCRIPTION","JVAMOUNT","CUSTOMERNO","DESCRIPTION")  VALUES('ZENBI','201901',190123213713,0,100000000000,100000000.000,1,'supplier01','PO000040','2019/01/23','',10000000000000,'','') 
+2019/01/23 21:51:22   ERR***** データ更新失敗：ERROR: 22003: numeric field overflow
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\kasah\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\kasah\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO Public.t67_swkhd("会社コード","処理年月","TRANSACTIONID","KeyID","GLACCOUNT","GLAMOUNT","RATE","VENDORNO","JVNUMBER","TRANSDATE","TRANSDESCRIPTION","JVAMOUNT","CUSTOMERNO","DESCRIPTION")  VALUES('ZENBI','201901',190123215121,0,100000000000,100000000.00,1,'supplier01','PO000040','2019/01/23','',10000000000000,'','') 
+2019/01/23 21:55:23   ERR***** データ更新失敗：ERROR: 22003: numeric field overflow
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\kasah\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\kasah\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO Public.t67_swkhd("会社コード","処理年月","TRANSACTIONID","KeyID","GLACCOUNT","GLAMOUNT","RATE","VENDORNO","JVNUMBER","TRANSDATE","TRANSDESCRIPTION","JVAMOUNT","CUSTOMERNO","DESCRIPTION")  VALUES('ZENBI','201901',190123215523,0,100000000000,100000000.00,1,'supplier01','PO000040','2019/01/23','',10000000000000,'','') 
+2019/01/23 21:56:29   ERR***** データ更新失敗：ERROR: 22003: numeric field overflow
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\kasah\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\kasah\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO Public.t67_swkhd("会社コード","処理年月","TRANSACTIONID","KeyID","GLACCOUNT","GLAMOUNT","RATE","VENDORNO","JVNUMBER","TRANSDATE","TRANSDESCRIPTION","JVAMOUNT","CUSTOMERNO","DESCRIPTION")  VALUES('ZENBI','201901',190123215629,0,100000000000,100000000.00,1,'supplier01','PO000040','2019/01/23','',10000000000000,'','') 
+2019/01/23 22:02:30   ERR***** データ更新失敗：ERROR: 22003: numeric field overflow
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\kasah\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\kasah\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO Public.t67_swkhd("会社コード","処理年月","TRANSACTIONID","KeyID","GLACCOUNT","GLAMOUNT","RATE","VENDORNO","JVNUMBER","TRANSDATE","TRANSDESCRIPTION","JVAMOUNT","CUSTOMERNO","DESCRIPTION")  VALUES('ZENBI','201901',190123220229,0,100000000000,100000000.00,1,'supplier01','PO000040','2019/01/23','',10000000000000,'','') 
+2019/01/23 22:20:43   ERR***** データ更新失敗：ERROR: 22003: numeric field overflow
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\kasah\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\kasah\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO Public.t67_swkhd("会社コード","処理年月","TRANSACTIONID","KeyID","GLACCOUNT","GLAMOUNT","RATE","VENDORNO","JVNUMBER","TRANSDATE","TRANSDESCRIPTION","JVAMOUNT","CUSTOMERNO","DESCRIPTION")  VALUES('ZENBI','201812',1901232220430,0,100000000000,24000.00,1,'supplier01','PO812031','2018/12/03','',2400,'','') 
+2019/01/24 10:37:05   ERR***** データ更新失敗：ERROR: 22003: numeric field overflow
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\kasah\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\kasah\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO Public.t67_swkhd("会社コード","処理年月","TRANSACTIONID","KeyID","GLACCOUNT","GLAMOUNT","RATE","VENDORNO","JVNUMBER","TRANSDATE","TRANSDESCRIPTION","JVAMOUNT","CUSTOMERNO","DESCRIPTION")  VALUES('ZENBI','201901',01241037056,0,100000000000,1000000000000000.00,1,'supplier01','PO000040','2019/01/23','',110000000.00,'','') 
+2019/01/24 10:38:03   ERR***** データ更新失敗：ERROR: 22003: numeric field overflow
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\kasah\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\kasah\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO Public.t67_swkhd("会社コード","処理年月","TRANSACTIONID","KeyID","GLACCOUNT","GLAMOUNT","RATE","VENDORNO","JVNUMBER","TRANSDATE","TRANSDESCRIPTION","JVAMOUNT","CUSTOMERNO","DESCRIPTION")  VALUES('ZENBI','201901',01241038026,0,100000000000,1000000000000000.00,1,'supplier01','PO000040','2019/01/23','',110000000.00,'','') 
+2019/01/24 10:39:07   ERR***** データ更新失敗：ERROR: 22003: numeric field overflow
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\kasah\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\kasah\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO Public.t67_swkhd("会社コード","処理年月","TRANSACTIONID","KeyID","GLACCOUNT","GLAMOUNT","RATE","VENDORNO","JVNUMBER","TRANSDATE","TRANSDESCRIPTION","JVAMOUNT","CUSTOMERNO","DESCRIPTION")  VALUES('ZENBI','201901',01241039076,0,100000000000,1000000000000000.00,1,'supplier01','PO000040','2019/01/23','',110000000.00,'','') 
+2019/01/24 10:45:01   ERR***** データ更新失敗：ERROR: 42601: unterminated quoted string at or near "'2018-12-DD,'',24010.00,'','')"
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\kasah\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\kasah\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO Public.t67_swkhd("会社コード","処理年月","TRANSACTIONID","KeyID","GLACCOUNT","GLAMOUNT","RATE","VENDORNO","JVNUMBER","TRANSDATE","TRANSDESCRIPTION","JVAMOUNT","CUSTOMERNO","DESCRIPTION")  VALUES('ZENBI','201812',01241045010,0,100000000000,240000.00,1,'supplier01','PO812031','2018-12-DD,'',24010.00,'','') 
+2019/01/24 10:46:16   ERR***** データ更新失敗：ERROR: 42601: unterminated quoted string at or near "'2018-12-03,'',24010.00,'','')"
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\kasah\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\kasah\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+INSERT INTO Public.t67_swkhd("会社コード","処理年月","TRANSACTIONID","KeyID","GLACCOUNT","GLAMOUNT","RATE","VENDORNO","JVNUMBER","TRANSDATE","TRANSDESCRIPTION","JVAMOUNT","CUSTOMERNO","DESCRIPTION")  VALUES('ZENBI','201812',01241046160,0,100000000000,240000.00,1,'supplier01','PO812031','2018-12-03,'',24010.00,'','') 
+2019/01/25 10:07:57   ERR***** データ更新失敗：ERROR: 42601: unterminated quoted string at or near "', 会計用仕入先コード, 更新者, 更新日"
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\kasah\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\kasah\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+UPDATE Public.m11_Supplier SET  会社コード = 'ZENBI', 仕入先コード = 'sup001', 仕入先名 = 'supplier01', 仕入先名略称 = 'supplier1', 郵便番号 = '1234567', 住所１ = 'tes', 住所２ = 'test', 住所３ = 'test', 電話番号 = '0000000000', 電話番号検索用 = '0000000000', ＦＡＸ番号 = '0000000000', 担当者名 = 'test', 担当者役職 = '役職', 関税率 = '0.010', 前払法人税率 = '0.025', 輸送費率 = '0.100', メモ = 'test', 銀行名 = 'テスト銀行', 銀行コード = '000 ', 支店名 = 'テスト支店', 支店コード = '000', 預金種目 = '1', 口座番号 = '00000', 口座名義 = 'test', 会計用仕入先コード = 'avc-sup001', 更新者 = 'zenbi01', 更新日 = '2019/01/25 10:07:56' WHERE 会社コード='ZENBI' AND 仕入先コード='sup001' RETURNING 会社コード, 仕入先コード, 仕入先名, 仕入先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 担当者役職, 関税率, 前払法人税率, 輸送費率, メモ, 銀行名, 銀行コード, 支店名, 支店コード, 預金種目, 口座番号, 口座名義', 会計用仕入先コード, 更新者, 更新日
+2019/01/25 10:09:35   ERR***** データ更新失敗：ERROR: 42704: type "口座名義" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\kasah\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\kasah\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+UPDATE Public.m11_Supplier SET  会社コード = 'ZENBI', 仕入先コード = 'sup001', 仕入先名 = 'supplier01', 仕入先名略称 = 'supplier1', 郵便番号 = '1234567', 住所１ = 'tes', 住所２ = 'test', 住所３ = 'test', 電話番号 = '0000000000', 電話番号検索用 = '0000000000', ＦＡＸ番号 = '0000000000', 担当者名 = 'test', 担当者役職 = '役職', 関税率 = '0.010', 前払法人税率 = '0.025', 輸送費率 = '0.100', メモ = 'test', 銀行名 = 'テスト銀行', 銀行コード = '000 ', 支店名 = 'テスト支店', 支店コード = '000', 預金種目 = '1', 口座番号 = '00000', 口座名義 = 'test', 会計用仕入先コード = 'avc-sup001', 更新者 = 'zenbi01', 更新日 = '2019/01/25 10:09:35' WHERE 会社コード='ZENBI' AND 仕入先コード='sup001' RETURNING 会社コード, 仕入先コード, 仕入先名, 仕入先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 担当者役職, 関税率, 前払法人税率, 輸送費率, メモ, 銀行名, 銀行コード, 支店名, 支店コード, 預金種目, 口座番号, 口座名義', 会計用仕入先コード', 更新者, 更新日
