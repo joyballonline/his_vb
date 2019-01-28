@@ -679,6 +679,8 @@ Public Class frmC01F30_Menu
                 strSql = strSql & "                              and 処理ＩＤ   = m.処理ＩＤ "
                 strSql = strSql & "                           ) "
                 strSql = strSql & " Where m.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                strSql = strSql & " and "
+                strSql = strSql & " m.削除フラグ = 0 "
                 strSql = strSql & likeSql
                 strSql = strSql & " order by m.表示順 "
             Else
@@ -713,6 +715,8 @@ Public Class frmC01F30_Menu
                 strSql = strSql & "                              and 処理ＩＤ   = m.処理ＩＤ "
                 strSql = strSql & "                           ) "
                 strSql = strSql & " Where m.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                strSql = strSql & " and "
+                strSql = strSql & " m.削除フラグ = 0 "
                 strSql = strSql & likeSql
                 strSql = strSql & " order by m.表示順 "
             End If

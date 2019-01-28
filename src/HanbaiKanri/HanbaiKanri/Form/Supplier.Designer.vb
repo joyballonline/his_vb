@@ -663,10 +663,10 @@ Partial Class Supplier
         'LblAccountingVendorCode
         '
         Me.LblAccountingVendorCode.AutoSize = True
-        Me.LblAccountingVendorCode.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblAccountingVendorCode.Font = New System.Drawing.Font("MS UI Gothic", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblAccountingVendorCode.Location = New System.Drawing.Point(12, 509)
         Me.LblAccountingVendorCode.Name = "LblAccountingVendorCode"
-        Me.LblAccountingVendorCode.Size = New System.Drawing.Size(104, 12)
+        Me.LblAccountingVendorCode.Size = New System.Drawing.Size(96, 11)
         Me.LblAccountingVendorCode.TabIndex = 248
         Me.LblAccountingVendorCode.Text = "会計用仕入先コード"
         '

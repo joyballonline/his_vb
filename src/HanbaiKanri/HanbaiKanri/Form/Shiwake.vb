@@ -165,6 +165,18 @@ Public Class Shiwake
             't42 入庫基本
             Dim dsSWKNyukohd As DataSet = getDsData("t42_nyukohd", Sql) '入庫基本データの取得
 
+            Sql = " AND "
+            Sql += "得意先コード"
+            Sql += " ILIKE "
+            Sql += "'"
+            Sql += dsSwkHattyu.Tables(0).Rows(0)("得意先コード")
+            Sql += "'"
+
+            'm10 得意先マスタ
+            Dim dsCustomer As DataSet = getDsData("m10_customer", Sql) '入庫基本データの取得
+
+            Dim codeAAC As String = dsCustomer.Tables(RS).Rows(0)("会計用得意先コード")
+
             Dim VATIN As Double = 0
             VATIN = dsSwkSirehd.Tables(RS).Rows(i)("仕入金額") * dsSwkSirehd.Tables(RS).Rows(i)("ＶＡＴ") / 100
 
@@ -194,7 +206,7 @@ Public Class Shiwake
                 Sql += ",''" '空でよし
                 'Sql += "," & formatDouble(VATIN) '仕入金額 + VAT IN
                 Sql += "," & formatDouble(dsSWKNyukohd.Tables(RS).Rows(x)("仕入金額") + dsSWKNyukohd.Tables(RS).Rows(x)("VAT")) '仕入金額 + VAT IN
-                Sql += ",''" '空でよし
+                Sql += ",'" & codeAAC & "'" '空でよし
                 Sql += ",''" '空でよし
 
                 countKeyID = getCount(countKeyID)
@@ -597,7 +609,7 @@ Public Class Shiwake
         Sql += " ILIKE  "
         Sql += "'" & frmC01F10_Login.loginValue.BumonNM & "'"
         Sql += txtParam
-
+        Console.WriteLine(Sql)
         Return _db.selectDB(Sql, RS, reccnt)
     End Function
 

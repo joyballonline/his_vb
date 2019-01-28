@@ -395,10 +395,10 @@ Partial Class Customer
         'LblAccountingVendorCode
         '
         Me.LblAccountingVendorCode.AutoSize = True
-        Me.LblAccountingVendorCode.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblAccountingVendorCode.Font = New System.Drawing.Font("MS UI Gothic", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblAccountingVendorCode.Location = New System.Drawing.Point(12, 332)
         Me.LblAccountingVendorCode.Name = "LblAccountingVendorCode"
-        Me.LblAccountingVendorCode.Size = New System.Drawing.Size(104, 12)
+        Me.LblAccountingVendorCode.Size = New System.Drawing.Size(96, 11)
         Me.LblAccountingVendorCode.TabIndex = 237
         Me.LblAccountingVendorCode.Text = "会計用得意先コード"
         '
