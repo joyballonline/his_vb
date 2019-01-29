@@ -94,30 +94,55 @@ Public Class SalesList
 
                 Dim reccnt As Integer = 0
                 ds = _db.selectDB(Sql, RS, reccnt)
-                DgvCymnhd.Columns.Add("売上番号", "売上番号")
-                DgvCymnhd.Columns.Add("売上番号枝番", "売上番号枝番")
-                DgvCymnhd.Columns.Add("客先番号", "客先番号")
-                DgvCymnhd.Columns.Add("売上日", "売上日")
-                DgvCymnhd.Columns.Add("受注番号", "受注番号")
-                DgvCymnhd.Columns.Add("受注番号枝番", "受注番号枝番")
-                DgvCymnhd.Columns.Add("受注日", "受注日")
-                DgvCymnhd.Columns.Add("得意先コード", "得意先コード")
-                DgvCymnhd.Columns.Add("得意先名", "得意先名")
-                DgvCymnhd.Columns.Add("得意先郵便番号", "得意先郵便番号")
-                DgvCymnhd.Columns.Add("得意先住所", "得意先住所")
-                DgvCymnhd.Columns.Add("得意先電話番号", "得意先電話番号")
-                DgvCymnhd.Columns.Add("得意先ＦＡＸ", "得意先ＦＡＸ")
-                DgvCymnhd.Columns.Add("得意先担当者名", "得意先担当者名")
-                DgvCymnhd.Columns.Add("得意先担当者役職", "得意先担当者役職")
-                DgvCymnhd.Columns.Add("ＶＡＴ", "ＶＡＴ")
-                DgvCymnhd.Columns.Add("売上金額", "売上金額")
-                DgvCymnhd.Columns.Add("粗利額", "粗利額")
-                DgvCymnhd.Columns.Add("支払条件", "支払条件")
-                DgvCymnhd.Columns.Add("営業担当者", "営業担当者")
-                DgvCymnhd.Columns.Add("入力担当者", "入力担当者")
-                DgvCymnhd.Columns.Add("備考", "備考")
-                DgvCymnhd.Columns.Add("登録日", "登録日")
-
+                If frmC01F10_Login.loginValue.Language = "ENG" Then
+                    DgvCymnhd.Columns.Add("売上番号", "SalesNumber")
+                    DgvCymnhd.Columns.Add("売上番号枝番", "SalesSubNumber")
+                    DgvCymnhd.Columns.Add("客先番号", "CustomerNumber")
+                    DgvCymnhd.Columns.Add("売上日", "SalesDate")
+                    DgvCymnhd.Columns.Add("受注番号", "OrderNumber")
+                    DgvCymnhd.Columns.Add("受注番号枝番", "JobOrderSubNumber")
+                    DgvCymnhd.Columns.Add("受注日", "JobOrderDate")
+                    DgvCymnhd.Columns.Add("得意先コード", "CustomerCode")
+                    DgvCymnhd.Columns.Add("得意先名", "CustomerName")
+                    DgvCymnhd.Columns.Add("得意先郵便番号", "PostalCode")
+                    DgvCymnhd.Columns.Add("得意先住所", "Address")
+                    DgvCymnhd.Columns.Add("得意先電話番号", "PhoneNumber")
+                    DgvCymnhd.Columns.Add("得意先ＦＡＸ", "FAX")
+                    DgvCymnhd.Columns.Add("得意先担当者名", "NameOfPIC")
+                    DgvCymnhd.Columns.Add("得意先担当者役職", "PositionPICCustomer")
+                    DgvCymnhd.Columns.Add("ＶＡＴ", "ＶＡＴ")
+                    DgvCymnhd.Columns.Add("売上金額", "SalesAmount")
+                    DgvCymnhd.Columns.Add("粗利額", "GrossMargin")
+                    DgvCymnhd.Columns.Add("支払条件", "PeymentTerms")
+                    DgvCymnhd.Columns.Add("営業担当者", "SalesPersonInCharge")
+                    DgvCymnhd.Columns.Add("入力担当者", "PICForInputting")
+                    DgvCymnhd.Columns.Add("備考", "Remarks")
+                    DgvCymnhd.Columns.Add("登録日", "RegistrationDate")
+                Else
+                    DgvCymnhd.Columns.Add("売上番号", "売上番号")
+                    DgvCymnhd.Columns.Add("売上番号枝番", "売上番号枝番")
+                    DgvCymnhd.Columns.Add("客先番号", "客先番号")
+                    DgvCymnhd.Columns.Add("売上日", "売上日")
+                    DgvCymnhd.Columns.Add("受注番号", "受注番号")
+                    DgvCymnhd.Columns.Add("受注番号枝番", "受注番号枝番")
+                    DgvCymnhd.Columns.Add("受注日", "受注日")
+                    DgvCymnhd.Columns.Add("得意先コード", "得意先コード")
+                    DgvCymnhd.Columns.Add("得意先名", "得意先名")
+                    DgvCymnhd.Columns.Add("得意先郵便番号", "得意先郵便番号")
+                    DgvCymnhd.Columns.Add("得意先住所", "得意先住所")
+                    DgvCymnhd.Columns.Add("得意先電話番号", "得意先電話番号")
+                    DgvCymnhd.Columns.Add("得意先ＦＡＸ", "得意先ＦＡＸ")
+                    DgvCymnhd.Columns.Add("得意先担当者名", "得意先担当者名")
+                    DgvCymnhd.Columns.Add("得意先担当者役職", "得意先担当者役職")
+                    DgvCymnhd.Columns.Add("ＶＡＴ", "ＶＡＴ")
+                    DgvCymnhd.Columns.Add("売上金額", "売上金額")
+                    DgvCymnhd.Columns.Add("粗利額", "粗利額")
+                    DgvCymnhd.Columns.Add("支払条件", "支払条件")
+                    DgvCymnhd.Columns.Add("営業担当者", "営業担当者")
+                    DgvCymnhd.Columns.Add("入力担当者", "入力担当者")
+                    DgvCymnhd.Columns.Add("備考", "備考")
+                    DgvCymnhd.Columns.Add("登録日", "登録日")
+                End If
                 DgvCymnhd.Columns("ＶＡＴ").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 DgvCymnhd.Columns("売上金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 DgvCymnhd.Columns("粗利額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -169,30 +194,59 @@ Public Class SalesList
 
                 Dim reccnt As Integer = 0
                 ds = _db.selectDB(Sql, RS, reccnt)
-                DgvCymnhd.Columns.Add("売上番号", "売上番号")
-                DgvCymnhd.Columns.Add("売上番号枝番", "売上番号枝番")
-                DgvCymnhd.Columns.Add("客先番号", "客先番号")
-                DgvCymnhd.Columns.Add("売上日", "売上日")
-                DgvCymnhd.Columns.Add("受注番号", "受注番号")
-                DgvCymnhd.Columns.Add("受注番号枝番", "受注番号枝番")
-                DgvCymnhd.Columns.Add("受注日", "受注日")
-                DgvCymnhd.Columns.Add("得意先コード", "得意先コード")
-                DgvCymnhd.Columns.Add("得意先名", "得意先名")
-                DgvCymnhd.Columns.Add("得意先郵便番号", "得意先郵便番号")
-                DgvCymnhd.Columns.Add("得意先住所", "得意先住所")
-                DgvCymnhd.Columns.Add("得意先電話番号", "得意先電話番号")
-                DgvCymnhd.Columns.Add("得意先ＦＡＸ", "得意先ＦＡＸ")
-                DgvCymnhd.Columns.Add("得意先担当者名", "得意先担当者名")
-                DgvCymnhd.Columns.Add("得意先担当者役職", "得意先担当者役職")
-                DgvCymnhd.Columns.Add("ＶＡＴ", "ＶＡＴ")
-                DgvCymnhd.Columns.Add("受注金額", "受注金額")
-                DgvCymnhd.Columns.Add("売上金額", "売上金額")
-                DgvCymnhd.Columns.Add("粗利額", "粗利額")
-                DgvCymnhd.Columns.Add("支払条件", "支払条件")
-                DgvCymnhd.Columns.Add("営業担当者", "営業担当者")
-                DgvCymnhd.Columns.Add("入力担当者", "入力担当者")
-                DgvCymnhd.Columns.Add("備考", "備考")
-                DgvCymnhd.Columns.Add("登録日", "登録日")
+                If frmC01F10_Login.loginValue.Language = "ENG" Then
+                    DgvCymnhd.Columns.Add("売上番号", "SalesNumber")
+                    DgvCymnhd.Columns.Add("売上番号枝番", "SalesSubNumber")
+                    DgvCymnhd.Columns.Add("客先番号", "CustomerNumber")
+                    DgvCymnhd.Columns.Add("売上日", "SalesDate")
+                    DgvCymnhd.Columns.Add("受注番号", "OrderNumber")
+                    DgvCymnhd.Columns.Add("受注番号枝番", "JobOrderSubNumber")
+                    DgvCymnhd.Columns.Add("受注日", "JobOrderDate")
+                    DgvCymnhd.Columns.Add("得意先コード", "CustomerCode")
+                    DgvCymnhd.Columns.Add("得意先名", "CustomerName")
+                    DgvCymnhd.Columns.Add("得意先郵便番号", "PostalCode")
+                    DgvCymnhd.Columns.Add("得意先住所", "Address")
+                    DgvCymnhd.Columns.Add("得意先電話番号", "PhoneNumber")
+                    DgvCymnhd.Columns.Add("得意先ＦＡＸ", "FAX")
+                    DgvCymnhd.Columns.Add("得意先担当者名", "NameOfPIC")
+                    DgvCymnhd.Columns.Add("得意先担当者役職", "PositionPICCustomer")
+                    DgvCymnhd.Columns.Add("ＶＡＴ", "ＶＡＴ")
+                    DgvCymnhd.Columns.Add("受注金額", "OrderAmount")
+                    DgvCymnhd.Columns.Add("売上金額", "SalesAmount")
+                    DgvCymnhd.Columns.Add("粗利額", "GrossMargin")
+                    DgvCymnhd.Columns.Add("支払条件", "PeymentTerms")
+                    DgvCymnhd.Columns.Add("営業担当者", "SalesPersonInCharge")
+                    DgvCymnhd.Columns.Add("入力担当者", "PICForInputting")
+                    DgvCymnhd.Columns.Add("備考", "Remarks")
+                    DgvCymnhd.Columns.Add("登録日", "RegistrationDate")
+
+                Else
+                    DgvCymnhd.Columns.Add("売上番号", "売上番号")
+                    DgvCymnhd.Columns.Add("売上番号枝番", "売上番号枝番")
+                    DgvCymnhd.Columns.Add("客先番号", "客先番号")
+                    DgvCymnhd.Columns.Add("売上日", "売上日")
+                    DgvCymnhd.Columns.Add("受注番号", "受注番号")
+                    DgvCymnhd.Columns.Add("受注番号枝番", "受注番号枝番")
+                    DgvCymnhd.Columns.Add("受注日", "受注日")
+                    DgvCymnhd.Columns.Add("得意先コード", "得意先コード")
+                    DgvCymnhd.Columns.Add("得意先名", "得意先名")
+                    DgvCymnhd.Columns.Add("得意先郵便番号", "得意先郵便番号")
+                    DgvCymnhd.Columns.Add("得意先住所", "得意先住所")
+                    DgvCymnhd.Columns.Add("得意先電話番号", "得意先電話番号")
+                    DgvCymnhd.Columns.Add("得意先ＦＡＸ", "得意先ＦＡＸ")
+                    DgvCymnhd.Columns.Add("得意先担当者名", "得意先担当者名")
+                    DgvCymnhd.Columns.Add("得意先担当者役職", "得意先担当者役職")
+                    DgvCymnhd.Columns.Add("ＶＡＴ", "ＶＡＴ")
+                    DgvCymnhd.Columns.Add("受注金額", "受注金額")
+                    DgvCymnhd.Columns.Add("売上金額", "売上金額")
+                    DgvCymnhd.Columns.Add("粗利額", "粗利額")
+                    DgvCymnhd.Columns.Add("支払条件", "支払条件")
+                    DgvCymnhd.Columns.Add("営業担当者", "営業担当者")
+                    DgvCymnhd.Columns.Add("入力担当者", "入力担当者")
+                    DgvCymnhd.Columns.Add("備考", "備考")
+                    DgvCymnhd.Columns.Add("登録日", "登録日")
+
+                End If
 
                 DgvCymnhd.Columns("ＶＡＴ").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 DgvCymnhd.Columns("売上金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -240,17 +294,55 @@ Public Class SalesList
 
     Private Sub MstHanyoue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If SalesStatus = "CANCEL" Then
-            LblMode.Text = "取消モード"
+
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                LblMode.Text = "CancelMode"
+            Else
+                LblMode.Text = "取消モード"
+            End If
+
             BtnSalesCancel.Visible = True
             BtnSalesCancel.Location = New Point(997, 509)
         ElseIf SalesStatus = "VIEW" Then
-            LblMode.Text = "参照モード"
+
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                LblMode.Text = "ViewMode"
+            Else
+                LblMode.Text = "参照モード"
+            End If
+
             BtnSalesView.Visible = True
             BtnSalesView.Location = New Point(997, 509)
         End If
 
         Dim Status As String = "EXCLUSION"
         OrderListLoad(Status)
+
+        If frmC01F10_Login.loginValue.Language = "ENG" Then
+            LblConditions.Text = "TermsOfSelection"
+            Label1.Text = "CustomerName"
+            Label2.Text = "Address"
+            Label3.Text = "PhoneNumber"
+            Label4.Text = "CustomerCode"
+            Label8.Text = "SalesDate"
+            Label7.Text = "SalesNumber"
+            Label6.Text = "SalesPersonInCharge"
+            Label11.Text = "CustomerNumber"
+            Label10.Text = "DisplayFormat"
+            RbtnSlip.Text = "UnitOfSlip"
+            LblConditions.Text = "TermsOfSelection"
+            RbtnDetails.Text = "UnitOfDetailData"
+            RbtnDetails.Location = New Point(166, 202)
+
+            ChkCancelData.Text = "IncludeCancelData"
+            ChkCancelData.Location = New Point(556, 203)
+
+            BtnOrderSearch.Text = "Search"
+            BtnSalesCancel.Text = "CancelOfSales"
+            BtnSalesView.Text = "SalesDataView"
+            BtnBack.Text = "Back"
+        End If
+
     End Sub
 
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
@@ -298,63 +390,91 @@ Public Class SalesList
             Dim reccnt As Integer = 0
             ds = _db.selectDB(Sql, RS, reccnt)
 
-            DgvCymnhd.Columns.Add("売上番号", "売上番号")
-            DgvCymnhd.Columns.Add("売上番号枝番", "売上番号枝番")
-            DgvCymnhd.Columns.Add("客先番号", "客先番号")
-            DgvCymnhd.Columns.Add("売上日", "売上日")
-            DgvCymnhd.Columns.Add("受注番号", "受注番号")
-            DgvCymnhd.Columns.Add("受注番号枝番", "受注番号枝番")
-            DgvCymnhd.Columns.Add("受注日", "受注日")
-            DgvCymnhd.Columns.Add("得意先コード", "得意先コード")
-            DgvCymnhd.Columns.Add("得意先名", "得意先名")
-            DgvCymnhd.Columns.Add("得意先郵便番号", "得意先郵便番号")
-            DgvCymnhd.Columns.Add("得意先住所", "得意先住所")
-            DgvCymnhd.Columns.Add("得意先電話番号", "得意先電話番号")
-            DgvCymnhd.Columns.Add("得意先ＦＡＸ", "得意先ＦＡＸ")
-            DgvCymnhd.Columns.Add("得意先担当者名", "得意先担当者名")
-            DgvCymnhd.Columns.Add("得意先担当者役職", "得意先担当者役職")
-            DgvCymnhd.Columns.Add("ＶＡＴ", "ＶＡＴ")
-            DgvCymnhd.Columns.Add("売上金額", "売上金額")
-            DgvCymnhd.Columns.Add("粗利額", "粗利額")
-            DgvCymnhd.Columns.Add("支払条件", "支払条件")
-            DgvCymnhd.Columns.Add("営業担当者", "営業担当者")
-            DgvCymnhd.Columns.Add("入力担当者", "入力担当者")
-            DgvCymnhd.Columns.Add("備考", "備考")
-            DgvCymnhd.Columns.Add("登録日", "登録日")
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                DgvCymnhd.Columns.Add("売上番号", "SalesNumber")
+                DgvCymnhd.Columns.Add("売上番号枝番", "SalesSubNumber")
+                DgvCymnhd.Columns.Add("客先番号", "CustomerNumber")
+                DgvCymnhd.Columns.Add("売上日", "SalesDate")
+                DgvCymnhd.Columns.Add("受注番号", "OrderNumber")
+                DgvCymnhd.Columns.Add("受注番号枝番", "JobOrderSubNumber")
+                DgvCymnhd.Columns.Add("受注日", "JobOrderDate")
+                DgvCymnhd.Columns.Add("得意先コード", "CustomerCode")
+                DgvCymnhd.Columns.Add("得意先名", "CustomerName")
+                DgvCymnhd.Columns.Add("得意先郵便番号", "PostalCode")
+                DgvCymnhd.Columns.Add("得意先住所", "Address")
+                DgvCymnhd.Columns.Add("得意先電話番号", "PhoneNumber")
+                DgvCymnhd.Columns.Add("得意先ＦＡＸ", "FAX")
+                DgvCymnhd.Columns.Add("得意先担当者名", "NameOfPIC")
+                DgvCymnhd.Columns.Add("得意先担当者役職", "PositionPICCustomer")
+                DgvCymnhd.Columns.Add("ＶＡＴ", "ＶＡＴ")
+                DgvCymnhd.Columns.Add("売上金額", "SalesAmount")
+                DgvCymnhd.Columns.Add("粗利額", "GrossMargin")
+                DgvCymnhd.Columns.Add("支払条件", "PeymentTerms")
+                DgvCymnhd.Columns.Add("営業担当者", "SalesPersonInCharge")
+                DgvCymnhd.Columns.Add("入力担当者", "PICForInputting")
+                DgvCymnhd.Columns.Add("備考", "Remarks")
+                DgvCymnhd.Columns.Add("登録日", "RegistrationDate")
+
+            Else
+                DgvCymnhd.Columns.Add("売上番号", "売上番号")
+                DgvCymnhd.Columns.Add("売上番号枝番", "売上番号枝番")
+                DgvCymnhd.Columns.Add("客先番号", "客先番号")
+                DgvCymnhd.Columns.Add("売上日", "売上日")
+                DgvCymnhd.Columns.Add("受注番号", "受注番号")
+                DgvCymnhd.Columns.Add("受注番号枝番", "受注番号枝番")
+                DgvCymnhd.Columns.Add("受注日", "受注日")
+                DgvCymnhd.Columns.Add("得意先コード", "得意先コード")
+                DgvCymnhd.Columns.Add("得意先名", "得意先名")
+                DgvCymnhd.Columns.Add("得意先郵便番号", "得意先郵便番号")
+                DgvCymnhd.Columns.Add("得意先住所", "得意先住所")
+                DgvCymnhd.Columns.Add("得意先電話番号", "得意先電話番号")
+                DgvCymnhd.Columns.Add("得意先ＦＡＸ", "得意先ＦＡＸ")
+                DgvCymnhd.Columns.Add("得意先担当者名", "得意先担当者名")
+                DgvCymnhd.Columns.Add("得意先担当者役職", "得意先担当者役職")
+                DgvCymnhd.Columns.Add("ＶＡＴ", "ＶＡＴ")
+                DgvCymnhd.Columns.Add("売上金額", "売上金額")
+                DgvCymnhd.Columns.Add("粗利額", "粗利額")
+                DgvCymnhd.Columns.Add("支払条件", "支払条件")
+                DgvCymnhd.Columns.Add("営業担当者", "営業担当者")
+                DgvCymnhd.Columns.Add("入力担当者", "入力担当者")
+                DgvCymnhd.Columns.Add("備考", "備考")
+                DgvCymnhd.Columns.Add("登録日", "登録日")
+            End If
+
 
             DgvCymnhd.Columns("ＶＡＴ").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvCymnhd.Columns("売上金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvCymnhd.Columns("粗利額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                DgvCymnhd.Columns("売上金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                DgvCymnhd.Columns("粗利額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
-            For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-                DgvCymnhd.Rows.Add()
-                DgvCymnhd.Rows(index).Cells("売上番号").Value = ds.Tables(RS).Rows(index)("売上番号")
-                DgvCymnhd.Rows(index).Cells("売上番号枝番").Value = ds.Tables(RS).Rows(index)("売上番号枝番")
-                DgvCymnhd.Rows(index).Cells("客先番号").Value = ds.Tables(RS).Rows(index)("客先番号")
-                DgvCymnhd.Rows(index).Cells("売上日").Value = ds.Tables(RS).Rows(index)("売上日")
-                DgvCymnhd.Rows(index).Cells("受注番号").Value = ds.Tables(RS).Rows(index)("受注番号")
-                DgvCymnhd.Rows(index).Cells("受注番号枝番").Value = ds.Tables(RS).Rows(index)("受注番号枝番")
-                DgvCymnhd.Rows(index).Cells("受注日").Value = ds.Tables(RS).Rows(index)("受注日")
-                DgvCymnhd.Rows(index).Cells("得意先コード").Value = ds.Tables(RS).Rows(index)("得意先コード")
-                DgvCymnhd.Rows(index).Cells("得意先名").Value = ds.Tables(RS).Rows(index)("得意先名")
-                DgvCymnhd.Rows(index).Cells("得意先郵便番号").Value = ds.Tables(RS).Rows(index)("得意先郵便番号")
-                DgvCymnhd.Rows(index).Cells("得意先住所").Value = ds.Tables(RS).Rows(index)("得意先住所")
-                DgvCymnhd.Rows(index).Cells("得意先電話番号").Value = ds.Tables(RS).Rows(index)("得意先電話番号")
-                DgvCymnhd.Rows(index).Cells("得意先ＦＡＸ").Value = ds.Tables(RS).Rows(index)("得意先ＦＡＸ")
-                DgvCymnhd.Rows(index).Cells("得意先担当者名").Value = ds.Tables(RS).Rows(index)("得意先担当者名")
-                DgvCymnhd.Rows(index).Cells("得意先担当者役職").Value = ds.Tables(RS).Rows(index)("得意先担当者役職")
-                DgvCymnhd.Rows(index).Cells("ＶＡＴ").Value = ds.Tables(RS).Rows(index)("ＶＡＴ")
-                DgvCymnhd.Rows(index).Cells("売上金額").Value = ds.Tables(RS).Rows(index)("売上金額")
-                DgvCymnhd.Rows(index).Cells("粗利額").Value = ds.Tables(RS).Rows(index)("粗利額")
-                DgvCymnhd.Rows(index).Cells("支払条件").Value = ds.Tables(RS).Rows(index)("支払条件")
-                DgvCymnhd.Rows(index).Cells("営業担当者").Value = ds.Tables(RS).Rows(index)("営業担当者")
-                DgvCymnhd.Rows(index).Cells("入力担当者").Value = ds.Tables(RS).Rows(index)("入力担当者")
-                DgvCymnhd.Rows(index).Cells("備考").Value = ds.Tables(RS).Rows(index)("備考")
-                DgvCymnhd.Rows(index).Cells("登録日").Value = ds.Tables(RS).Rows(index)("登録日")
-            Next
+                For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+                    DgvCymnhd.Rows.Add()
+                    DgvCymnhd.Rows(index).Cells("売上番号").Value = ds.Tables(RS).Rows(index)("売上番号")
+                    DgvCymnhd.Rows(index).Cells("売上番号枝番").Value = ds.Tables(RS).Rows(index)("売上番号枝番")
+                    DgvCymnhd.Rows(index).Cells("客先番号").Value = ds.Tables(RS).Rows(index)("客先番号")
+                    DgvCymnhd.Rows(index).Cells("売上日").Value = ds.Tables(RS).Rows(index)("売上日")
+                    DgvCymnhd.Rows(index).Cells("受注番号").Value = ds.Tables(RS).Rows(index)("受注番号")
+                    DgvCymnhd.Rows(index).Cells("受注番号枝番").Value = ds.Tables(RS).Rows(index)("受注番号枝番")
+                    DgvCymnhd.Rows(index).Cells("受注日").Value = ds.Tables(RS).Rows(index)("受注日")
+                    DgvCymnhd.Rows(index).Cells("得意先コード").Value = ds.Tables(RS).Rows(index)("得意先コード")
+                    DgvCymnhd.Rows(index).Cells("得意先名").Value = ds.Tables(RS).Rows(index)("得意先名")
+                    DgvCymnhd.Rows(index).Cells("得意先郵便番号").Value = ds.Tables(RS).Rows(index)("得意先郵便番号")
+                    DgvCymnhd.Rows(index).Cells("得意先住所").Value = ds.Tables(RS).Rows(index)("得意先住所")
+                    DgvCymnhd.Rows(index).Cells("得意先電話番号").Value = ds.Tables(RS).Rows(index)("得意先電話番号")
+                    DgvCymnhd.Rows(index).Cells("得意先ＦＡＸ").Value = ds.Tables(RS).Rows(index)("得意先ＦＡＸ")
+                    DgvCymnhd.Rows(index).Cells("得意先担当者名").Value = ds.Tables(RS).Rows(index)("得意先担当者名")
+                    DgvCymnhd.Rows(index).Cells("得意先担当者役職").Value = ds.Tables(RS).Rows(index)("得意先担当者役職")
+                    DgvCymnhd.Rows(index).Cells("ＶＡＴ").Value = ds.Tables(RS).Rows(index)("ＶＡＴ")
+                    DgvCymnhd.Rows(index).Cells("売上金額").Value = ds.Tables(RS).Rows(index)("売上金額")
+                    DgvCymnhd.Rows(index).Cells("粗利額").Value = ds.Tables(RS).Rows(index)("粗利額")
+                    DgvCymnhd.Rows(index).Cells("支払条件").Value = ds.Tables(RS).Rows(index)("支払条件")
+                    DgvCymnhd.Rows(index).Cells("営業担当者").Value = ds.Tables(RS).Rows(index)("営業担当者")
+                    DgvCymnhd.Rows(index).Cells("入力担当者").Value = ds.Tables(RS).Rows(index)("入力担当者")
+                    DgvCymnhd.Rows(index).Cells("備考").Value = ds.Tables(RS).Rows(index)("備考")
+                    DgvCymnhd.Rows(index).Cells("登録日").Value = ds.Tables(RS).Rows(index)("登録日")
+                Next
 
-        Else
-            Dim Sql As String = ""
+            Else
+                Dim Sql As String = ""
 
             Sql += "SELECT "
             Sql += " * "
@@ -760,29 +880,55 @@ Public Class SalesList
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-            DgvCymnhd.Columns.Add("売上番号", "売上番号")
-            DgvCymnhd.Columns.Add("売上番号枝番", "売上番号枝番")
-            DgvCymnhd.Columns.Add("客先番号", "客先番号")
-            DgvCymnhd.Columns.Add("売上日", "売上日")
-            DgvCymnhd.Columns.Add("受注番号", "受注番号")
-            DgvCymnhd.Columns.Add("受注番号枝番", "受注番号枝番")
-            DgvCymnhd.Columns.Add("受注日", "受注日")
-            DgvCymnhd.Columns.Add("得意先コード", "得意先コード")
-            DgvCymnhd.Columns.Add("得意先名", "得意先名")
-            DgvCymnhd.Columns.Add("得意先郵便番号", "得意先郵便番号")
-            DgvCymnhd.Columns.Add("得意先住所", "得意先住所")
-            DgvCymnhd.Columns.Add("得意先電話番号", "得意先電話番号")
-            DgvCymnhd.Columns.Add("得意先ＦＡＸ", "得意先ＦＡＸ")
-            DgvCymnhd.Columns.Add("得意先担当者名", "得意先担当者名")
-            DgvCymnhd.Columns.Add("得意先担当者役職", "得意先担当者役職")
-            DgvCymnhd.Columns.Add("ＶＡＴ", "ＶＡＴ")
-            DgvCymnhd.Columns.Add("売上金額", "売上金額")
-            DgvCymnhd.Columns.Add("粗利額", "粗利額")
-            DgvCymnhd.Columns.Add("支払条件", "支払条件")
-            DgvCymnhd.Columns.Add("営業担当者", "営業担当者")
-            DgvCymnhd.Columns.Add("入力担当者", "入力担当者")
-            DgvCymnhd.Columns.Add("備考", "備考")
-            DgvCymnhd.Columns.Add("登録日", "登録日")
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                DgvCymnhd.Columns.Add("売上番号", "SalesNumber")
+                DgvCymnhd.Columns.Add("売上番号枝番", "SalesSubNumber")
+                DgvCymnhd.Columns.Add("客先番号", "CustomerNumber")
+                DgvCymnhd.Columns.Add("売上日", "SalesDate")
+                DgvCymnhd.Columns.Add("受注番号", "OrderNumber")
+                DgvCymnhd.Columns.Add("受注番号枝番", "JobOrderSubNumber")
+                DgvCymnhd.Columns.Add("受注日", "JobOrderDate")
+                DgvCymnhd.Columns.Add("得意先コード", "CustomerCode")
+                DgvCymnhd.Columns.Add("得意先名", "CustomerName")
+                DgvCymnhd.Columns.Add("得意先郵便番号", "PostalCode")
+                DgvCymnhd.Columns.Add("得意先住所", "Address")
+                DgvCymnhd.Columns.Add("得意先電話番号", "PhoneNumber")
+                DgvCymnhd.Columns.Add("得意先ＦＡＸ", "FAX")
+                DgvCymnhd.Columns.Add("得意先担当者名", "NameOfPIC")
+                DgvCymnhd.Columns.Add("得意先担当者役職", "PositionPICCustomer")
+                DgvCymnhd.Columns.Add("ＶＡＴ", "ＶＡＴ")
+                DgvCymnhd.Columns.Add("売上金額", "SalesAmount")
+                DgvCymnhd.Columns.Add("粗利額", "GrossMargin")
+                DgvCymnhd.Columns.Add("支払条件", "PeymentTerms")
+                DgvCymnhd.Columns.Add("営業担当者", "SalesPersonInCharge")
+                DgvCymnhd.Columns.Add("入力担当者", "PICForInputting")
+                DgvCymnhd.Columns.Add("備考", "Remarks")
+                DgvCymnhd.Columns.Add("登録日", "RegistrationDate")
+            Else
+                DgvCymnhd.Columns.Add("売上番号", "売上番号")
+                DgvCymnhd.Columns.Add("売上番号枝番", "売上番号枝番")
+                DgvCymnhd.Columns.Add("客先番号", "客先番号")
+                DgvCymnhd.Columns.Add("売上日", "売上日")
+                DgvCymnhd.Columns.Add("受注番号", "受注番号")
+                DgvCymnhd.Columns.Add("受注番号枝番", "受注番号枝番")
+                DgvCymnhd.Columns.Add("受注日", "受注日")
+                DgvCymnhd.Columns.Add("得意先コード", "得意先コード")
+                DgvCymnhd.Columns.Add("得意先名", "得意先名")
+                DgvCymnhd.Columns.Add("得意先郵便番号", "得意先郵便番号")
+                DgvCymnhd.Columns.Add("得意先住所", "得意先住所")
+                DgvCymnhd.Columns.Add("得意先電話番号", "得意先電話番号")
+                DgvCymnhd.Columns.Add("得意先ＦＡＸ", "得意先ＦＡＸ")
+                DgvCymnhd.Columns.Add("得意先担当者名", "得意先担当者名")
+                DgvCymnhd.Columns.Add("得意先担当者役職", "得意先担当者役職")
+                DgvCymnhd.Columns.Add("ＶＡＴ", "ＶＡＴ")
+                DgvCymnhd.Columns.Add("売上金額", "売上金額")
+                DgvCymnhd.Columns.Add("粗利額", "粗利額")
+                DgvCymnhd.Columns.Add("支払条件", "支払条件")
+                DgvCymnhd.Columns.Add("営業担当者", "営業担当者")
+                DgvCymnhd.Columns.Add("入力担当者", "入力担当者")
+                DgvCymnhd.Columns.Add("備考", "備考")
+                DgvCymnhd.Columns.Add("登録日", "登録日")
+            End If
 
             DgvCymnhd.Columns("ＶＡＴ").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             DgvCymnhd.Columns("売上金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight

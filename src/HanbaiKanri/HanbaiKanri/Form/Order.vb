@@ -165,16 +165,29 @@ Public Class Order
 
         DgvItemList.Columns.Insert(25, column2)
 
-        If OrderStatus = "ADD" Then
-            LblMode.Text = "新規登録モード"
-        ElseIf OrderStatus = "EDIT" Then
-            LblMode.Text = "編集モード"
-        ElseIf OrderStatus = "CLONE" Then
-            LblMode.Text = "新規複写モード"
-        ElseIf OrderStatus = "VIEW" Then
-            LblMode.Text = "参照モード"
-        End If
 
+
+        If frmC01F10_Login.loginValue.Language = "ENG" Then
+            If OrderStatus = "ADD" Then
+                LblMode.Text = "NewRegistrationMode"
+            ElseIf OrderStatus = "EDIT" Then
+                LblMode.Text = "EditMode"
+            ElseIf OrderStatus = "CLONE" Then
+                LblMode.Text = "NewCopyMode"
+            ElseIf OrderStatus = "VIEW" Then
+                LblMode.Text = "ViewMode"
+            End If
+        Else
+            If OrderStatus = "ADD" Then
+                LblMode.Text = "新規登録モード"
+            ElseIf OrderStatus = "EDIT" Then
+                LblMode.Text = "編集モード"
+            ElseIf OrderStatus = "CLONE" Then
+                LblMode.Text = "新規複写モード"
+            ElseIf OrderStatus = "VIEW" Then
+                LblMode.Text = "参照モード"
+            End If
+        End If
 
         Dim dtNow As DateTime = DateTime.Now
 
@@ -664,12 +677,12 @@ Public Class Order
             DtpExpiration.Location = New Point(1187, 42)
             LblCustomerName.Text = "CustomerName"
             LblAddress.Text = "Address"
-            LblTel.Text = "TEL"
+            LblTel.Text = "PhoneNumber"
             LblFax.Text = "FAX"
-            LblPerson.Text = "ContactPersonName"
-            LblPosition.Text = "Position"
-            LblSales.Text = "SalesPerson"
-            LblInput.Text = "InputPerson"
+            LblPerson.Text = "NameOfPIC"
+            LblPosition.Text = "PositionPICCustomer"
+            LblSales.Text = "SalesPersonInCharge"
+            LblInput.Text = "PICForInputting"
             LblPaymentTerms.Text = "PaymentTerms"
             TxtPaymentTerms.Location = New Point(181, 187)
             LblPaymentTerms.Size = New Size(162, 23)
@@ -683,29 +696,29 @@ Public Class Order
             TxtOrderRemark.Location = New Point(178, 422)
             LblVat.Text = "VAT"
             TxtVat.Size = New Size(151, 23)
-            LblOrderAmount.Text = "OrderAmount"
+            LblOrderAmount.Text = "JobOrderAmount"
             LblOrderAmount.Size = New Size(180, 23)
             LblOrderAmount.Location = New Point(923, 422)
             LblPurchaseAmount.Text = "PurchaseOrderAmount"
             LblPurchaseAmount.Size = New Size(180, 23)
             LblPurchaseAmount.Location = New Point(923, 451)
-            LblGrossProfit.Text = "GrossProfit"
+            LblGrossProfit.Text = "GrossMargin"
             LblGrossProfit.Size = New Size(180, 23)
             LblGrossProfit.Location = New Point(923, 480)
 
             BtnRegistration.Text = "Registrartion"
             BtnBack.Text = "Back"
 
-            DgvItemList.Columns("仕入区分").HeaderText = "PurchaseSection"
-            DgvItemList.Columns("メーカー").HeaderText = "Maker"
-            DgvItemList.Columns("品名").HeaderText = "Item"
-            DgvItemList.Columns("型式").HeaderText = "Model"
+            DgvItemList.Columns("仕入区分").HeaderText = "PurchasingClassification"
+            DgvItemList.Columns("メーカー").HeaderText = "Manufacturer"
+            DgvItemList.Columns("品名").HeaderText = "ItemName"
+            DgvItemList.Columns("型式").HeaderText = "Spec"
             DgvItemList.Columns("数量").HeaderText = "Quantity"
             DgvItemList.Columns("単位").HeaderText = "Unit"
             DgvItemList.Columns("仕入先").HeaderText = "SupplierName"
-            DgvItemList.Columns("仕入値").HeaderText = "PurchasePrice"
+            DgvItemList.Columns("仕入値").HeaderText = "PurchaseAmount"
             DgvItemList.Columns("仕入原価").HeaderText = "PurchsingCost"
-            DgvItemList.Columns("関税率").HeaderText = "TariffRate"
+            DgvItemList.Columns("関税率").HeaderText = "CustomsDutyRate"
             DgvItemList.Columns("関税額").HeaderText = "CustomsDuty"
             DgvItemList.Columns("前払法人税率").HeaderText = "PrepaidCorporateTaxRate"
             DgvItemList.Columns("前払法人税額").HeaderText = "PrepaidCorporateTaxAmount"
@@ -716,7 +729,7 @@ Public Class Order
             DgvItemList.Columns("売上金額").HeaderText = "SalesAmount"
             DgvItemList.Columns("見積単価").HeaderText = "QuotetionPrice"
             DgvItemList.Columns("見積金額").HeaderText = "QuotetionAmount"
-            DgvItemList.Columns("粗利額").HeaderText = "GrossProfit"
+            DgvItemList.Columns("粗利額").HeaderText = "GrossMargin"
             DgvItemList.Columns("粗利率").HeaderText = "GrossMarginRate(%)"
             DgvItemList.Columns("リードタイム").HeaderText = "LeadTime"
             DgvItemList.Columns("リードタイム単位").HeaderText = "LeadTimeUnit"

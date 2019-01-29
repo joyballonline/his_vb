@@ -95,15 +95,15 @@ Public Class AccountsPayableList
                     DgvBilling.Columns.Add("買掛日", "AccountsPayableDate")
                     DgvBilling.Columns.Add("客先番号", "CustomerNumber")
                     DgvBilling.Columns.Add("発注番号", "PurchaseOrderNumber")
-                    DgvBilling.Columns.Add("発注番号枝番", "BranchNumber")
+                    DgvBilling.Columns.Add("発注番号枝番", "PurchaseOrderSubNumber")
                     DgvBilling.Columns.Add("仕入先コード", "SupplierCode")
                     DgvBilling.Columns.Add("仕入先名", "SupplierName")
-                    DgvBilling.Columns.Add("買掛金額計", "TotalAccountsPayableAmount")
+                    DgvBilling.Columns.Add("買掛金額計", "TotalAccountsPayable")
                     DgvBilling.Columns.Add("買掛残高", "AccountsPayableBalance")
                     DgvBilling.Columns.Add("備考1", "Remarks1")
                     DgvBilling.Columns.Add("備考2", "Remarks2")
                     DgvBilling.Columns.Add("登録日", "Registration")
-                    DgvBilling.Columns.Add("更新者", "changer")
+                    DgvBilling.Columns.Add("更新者", "ModifiedBy")
                 Else
                     DgvBilling.Columns.Add("買掛番号", "買掛番号")
                     DgvBilling.Columns.Add("買掛区分", "買掛区分")
@@ -171,15 +171,15 @@ Public Class AccountsPayableList
                     DgvBilling.Columns.Add("買掛日", "AccountsPayableDate")
                     DgvBilling.Columns.Add("客先番号", "CustomerNumber")
                     DgvBilling.Columns.Add("発注番号", "PurchaseOrderNumber")
-                    DgvBilling.Columns.Add("発注番号枝番", "BranchNumber")
+                    DgvBilling.Columns.Add("発注番号枝番", "PurchaseOrderSubNumber")
                     DgvBilling.Columns.Add("仕入先コード", "SupplierCode")
                     DgvBilling.Columns.Add("仕入先名", "SupplierName")
-                    DgvBilling.Columns.Add("買掛金額計", "TotalAccountsPayableAmount")
+                    DgvBilling.Columns.Add("買掛金額計", "TotalAccountsPayable")
                     DgvBilling.Columns.Add("買掛残高", "AccountsPayableBalance")
                     DgvBilling.Columns.Add("備考1", "Remarks1")
                     DgvBilling.Columns.Add("備考2", "Remarks2")
                     DgvBilling.Columns.Add("登録日", "Registration")
-                    DgvBilling.Columns.Add("更新者", "changer")
+                    DgvBilling.Columns.Add("更新者", "ModifiedBy")
                 Else
                     DgvBilling.Columns.Add("買掛番号", "買掛番号")
                     DgvBilling.Columns.Add("買掛区分", "買掛区分")
@@ -262,12 +262,14 @@ Public Class AccountsPayableList
             Label7.Text = "AccountsPayableNumber"
             Label11.Text = "CustomerNumber"
             Label10.Text = "DisplayFormat"
+            RbtnSlip.Text = "UnitOfVoucher"
+            RbtnDetails.Text = "UnitOfDetailData"
 
             ChkCancelData.Text = "IncludeCancelData"
 
             BtnAPSearch.Text = "Search"
-            BtnAPCancel.Text = "CancelOfBilling"
-            BtnAPView.Text = "BillingView"
+            BtnAPCancel.Text = "CancelOfAccountsPayable"
+            BtnAPView.Text = "AccountsPayableView"
             BtnBack.Text = "Back"
         End If
     End Sub
@@ -651,15 +653,15 @@ Public Class AccountsPayableList
                 DgvBilling.Columns.Add("買掛日", "AccountsPayableDate")
                 DgvBilling.Columns.Add("客先番号", "CustomerNumber")
                 DgvBilling.Columns.Add("発注番号", "PurchaseOrderNumber")
-                DgvBilling.Columns.Add("発注番号枝番", "BranchNumber")
+                DgvBilling.Columns.Add("発注番号枝番", "PurchaseOrderSubNumber")
                 DgvBilling.Columns.Add("仕入先コード", "SupplierCode")
                 DgvBilling.Columns.Add("仕入先名", "SupplierName")
-                DgvBilling.Columns.Add("買掛金額計", "TotalAccountsPayableAmount")
+                DgvBilling.Columns.Add("買掛金額計", "TotalAccountsPayable")
                 DgvBilling.Columns.Add("買掛残高", "AccountsPayableBalance")
                 DgvBilling.Columns.Add("備考1", "Remarks1")
                 DgvBilling.Columns.Add("備考2", "Remarks2")
                 DgvBilling.Columns.Add("登録日", "Registration")
-                DgvBilling.Columns.Add("更新者", "changer")
+                DgvBilling.Columns.Add("更新者", "ModifiedBy")
             Else
                 DgvBilling.Columns.Add("買掛番号", "買掛番号")
                 DgvBilling.Columns.Add("買掛区分", "買掛区分")

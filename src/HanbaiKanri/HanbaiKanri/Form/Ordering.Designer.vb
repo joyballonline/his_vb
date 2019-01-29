@@ -270,7 +270,7 @@ Partial Class Ordering
         Me.TxtOrderingNo.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.TxtOrderingNo.Enabled = False
         Me.TxtOrderingNo.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtOrderingNo.Location = New System.Drawing.Point(162, 13)
+        Me.TxtOrderingNo.Location = New System.Drawing.Point(186, 13)
         Me.TxtOrderingNo.MaxLength = 8
         Me.TxtOrderingNo.Name = "TxtOrderingNo"
         Me.TxtOrderingNo.ReadOnly = True
@@ -295,7 +295,7 @@ Partial Class Ordering
         Me.LblPurchaseDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblPurchaseDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblPurchaseDate.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblPurchaseDate.Location = New System.Drawing.Point(518, 13)
+        Me.LblPurchaseDate.Location = New System.Drawing.Point(542, 13)
         Me.LblPurchaseDate.Name = "LblPurchaseDate"
         Me.LblPurchaseDate.Size = New System.Drawing.Size(112, 23)
         Me.LblPurchaseDate.TabIndex = 206
@@ -309,7 +309,7 @@ Partial Class Ordering
         Me.LblPurchaseNo.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblPurchaseNo.Location = New System.Drawing.Point(11, 13)
         Me.LblPurchaseNo.Name = "LblPurchaseNo"
-        Me.LblPurchaseNo.Size = New System.Drawing.Size(145, 23)
+        Me.LblPurchaseNo.Size = New System.Drawing.Size(169, 23)
         Me.LblPurchaseNo.TabIndex = 191
         Me.LblPurchaseNo.Text = "発注番号"
         Me.LblPurchaseNo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -453,7 +453,7 @@ Partial Class Ordering
         Me.DtpPurchaseDate.CustomFormat = "yyyy/MM/dd"
         Me.DtpPurchaseDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpPurchaseDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DtpPurchaseDate.Location = New System.Drawing.Point(636, 14)
+        Me.DtpPurchaseDate.Location = New System.Drawing.Point(660, 14)
         Me.DtpPurchaseDate.Name = "DtpPurchaseDate"
         Me.DtpPurchaseDate.Size = New System.Drawing.Size(148, 22)
         Me.DtpPurchaseDate.TabIndex = 2
@@ -514,9 +514,9 @@ Partial Class Ordering
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(256, 20)
+        Me.Label2.Location = New System.Drawing.Point(280, 20)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(10, 13)
+        Me.Label2.Size = New System.Drawing.Size(11, 12)
         Me.Label2.TabIndex = 221
         Me.Label2.Text = "-"
         '
@@ -547,7 +547,7 @@ Partial Class Ordering
         Me.DtpRegistrationDate.Enabled = False
         Me.DtpRegistrationDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpRegistrationDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DtpRegistrationDate.Location = New System.Drawing.Point(906, 13)
+        Me.DtpRegistrationDate.Location = New System.Drawing.Point(958, 13)
         Me.DtpRegistrationDate.Name = "DtpRegistrationDate"
         Me.DtpRegistrationDate.Size = New System.Drawing.Size(150, 22)
         Me.DtpRegistrationDate.TabIndex = 186
@@ -590,9 +590,9 @@ Partial Class Ordering
         Me.LblRegistrationDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblRegistrationDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblRegistrationDate.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblRegistrationDate.Location = New System.Drawing.Point(790, 13)
+        Me.LblRegistrationDate.Location = New System.Drawing.Point(814, 13)
         Me.LblRegistrationDate.Name = "LblRegistrationDate"
-        Me.LblRegistrationDate.Size = New System.Drawing.Size(110, 23)
+        Me.LblRegistrationDate.Size = New System.Drawing.Size(138, 23)
         Me.LblRegistrationDate.TabIndex = 220
         Me.LblRegistrationDate.Text = "発注登録日"
         Me.LblRegistrationDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -625,7 +625,7 @@ Partial Class Ordering
         Me.TxtOrderingSuffix.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.TxtOrderingSuffix.Enabled = False
         Me.TxtOrderingSuffix.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtOrderingSuffix.Location = New System.Drawing.Point(273, 13)
+        Me.TxtOrderingSuffix.Location = New System.Drawing.Point(297, 13)
         Me.TxtOrderingSuffix.MaxLength = 1
         Me.TxtOrderingSuffix.Name = "TxtOrderingSuffix"
         Me.TxtOrderingSuffix.ReadOnly = True
@@ -766,7 +766,7 @@ Partial Class Ordering
         '
         Me.TxtCustomerPO.BackColor = System.Drawing.Color.White
         Me.TxtCustomerPO.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtCustomerPO.Location = New System.Drawing.Point(424, 13)
+        Me.TxtCustomerPO.Location = New System.Drawing.Point(448, 13)
         Me.TxtCustomerPO.MaxLength = 8
         Me.TxtCustomerPO.Name = "TxtCustomerPO"
         Me.TxtCustomerPO.Size = New System.Drawing.Size(88, 23)
@@ -777,7 +777,7 @@ Partial Class Ordering
         Me.LblCustomerPO.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblCustomerPO.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblCustomerPO.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblCustomerPO.Location = New System.Drawing.Point(308, 13)
+        Me.LblCustomerPO.Location = New System.Drawing.Point(332, 13)
         Me.LblCustomerPO.Name = "LblCustomerPO"
         Me.LblCustomerPO.Size = New System.Drawing.Size(110, 23)
         Me.LblCustomerPO.TabIndex = 303

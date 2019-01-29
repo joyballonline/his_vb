@@ -96,19 +96,19 @@ Public Class PurchaseList
                     DgvHtyhd.Columns.Add("客先番号", "CustomerNumber")
                     DgvHtyhd.Columns.Add("仕入日", "PurchaseDate")
                     DgvHtyhd.Columns.Add("発注番号", "PurchaseOrderNumber")
-                    DgvHtyhd.Columns.Add("発注番号枝番", "PurchaseOrderSuffixNumber")
+                    DgvHtyhd.Columns.Add("発注番号枝番", "PurchaseOrderSubNumber")
                     DgvHtyhd.Columns.Add("仕入先コード", "SupplierCode")
                     DgvHtyhd.Columns.Add("仕入先名", "SupplierName")
                     DgvHtyhd.Columns.Add("仕入先郵便番号", "PostalCode")
                     DgvHtyhd.Columns.Add("仕入先住所", "Address")
-                    DgvHtyhd.Columns.Add("仕入先電話番号", "TEL")
+                    DgvHtyhd.Columns.Add("仕入先電話番号", "PhoneNumber")
                     DgvHtyhd.Columns.Add("仕入先ＦＡＸ", "FAX")
-                    DgvHtyhd.Columns.Add("仕入先担当者名", "ContactPersonName")
-                    DgvHtyhd.Columns.Add("仕入先担当者役職", "ContactPersonPosition")
+                    DgvHtyhd.Columns.Add("仕入先担当者名", "NameOfPIC")
+                    DgvHtyhd.Columns.Add("仕入先担当者役職", "PositionPICSupplier")
                     DgvHtyhd.Columns.Add("仕入金額", "PurchaseAmount")
                     DgvHtyhd.Columns.Add("支払条件", "PaymentTerms")
-                    DgvHtyhd.Columns.Add("営業担当者", "SalesPerson")
-                    DgvHtyhd.Columns.Add("入力担当者", "InputPerson")
+                    DgvHtyhd.Columns.Add("営業担当者", "SalesPersonInCharge")
+                    DgvHtyhd.Columns.Add("入力担当者", "PICForInputting")
                     DgvHtyhd.Columns.Add("備考", "Remarks")
                     DgvHtyhd.Columns.Add("登録日", "RegistrationDate")
                 Else
@@ -184,21 +184,22 @@ Public Class PurchaseList
                     DgvHtyhd.Columns.Add("客先番号", "CustomerNumber")
                     DgvHtyhd.Columns.Add("仕入日", "PurchaseDate")
                     DgvHtyhd.Columns.Add("発注番号", "PurchaseOrderNumber")
-                    DgvHtyhd.Columns.Add("発注番号枝番", "PurchaseOrderSuffixNumber")
+                    DgvHtyhd.Columns.Add("発注番号枝番", "PurchaseOrderSubNumber")
                     DgvHtyhd.Columns.Add("仕入先コード", "SupplierCode")
                     DgvHtyhd.Columns.Add("仕入先名", "SupplierName")
                     DgvHtyhd.Columns.Add("仕入先郵便番号", "PostalCode")
                     DgvHtyhd.Columns.Add("仕入先住所", "Address")
-                    DgvHtyhd.Columns.Add("仕入先電話番号", "TEL")
+                    DgvHtyhd.Columns.Add("仕入先電話番号", "PhoneNumber")
                     DgvHtyhd.Columns.Add("仕入先ＦＡＸ", "FAX")
-                    DgvHtyhd.Columns.Add("仕入先担当者名", "ContactPersonName")
-                    DgvHtyhd.Columns.Add("仕入先担当者役職", "ContactPersonPosition")
+                    DgvHtyhd.Columns.Add("仕入先担当者名", "NameOfPIC")
+                    DgvHtyhd.Columns.Add("仕入先担当者役職", "PositionPICSupplier")
                     DgvHtyhd.Columns.Add("仕入金額", "PurchaseAmount")
                     DgvHtyhd.Columns.Add("支払条件", "PaymentTerms")
-                    DgvHtyhd.Columns.Add("営業担当者", "SalesPerson")
-                    DgvHtyhd.Columns.Add("入力担当者", "InputPerson")
+                    DgvHtyhd.Columns.Add("営業担当者", "SalesPersonInCharge")
+                    DgvHtyhd.Columns.Add("入力担当者", "PICForInputting")
                     DgvHtyhd.Columns.Add("備考", "Remarks")
                     DgvHtyhd.Columns.Add("登録日", "RegistrationDate")
+
                 Else
                     DgvHtyhd.Columns.Add("仕入番号", "仕入番号")
                     DgvHtyhd.Columns.Add("客先番号", "客先番号")
@@ -283,16 +284,16 @@ Public Class PurchaseList
             LblConditions.Text = "ExtractionCondition"
             Label1.Text = "SupplierName"
             Label2.Text = "Address"
-            Label3.Text = "TEL"
+            Label3.Text = "PhoneNumber"
             Label4.Text = "SupplierCode"
             Label8.Text = "PurchaseDate"
             Label7.Text = "PurchaseNumber"
-            Label6.Text = "SalesPerson"
+            Label6.Text = "SalesPersonInCharge"
             Label11.Text = "CustomerNumber"
             Label10.Text = "DisplayFormat"
-            RbtnSlip.Text = "UnitOfSlip"
+            RbtnSlip.Text = "UnitOfVoucher"
 
-            RbtnDetails.Text = "LineItemUnit"
+            RbtnDetails.Text = "UnitOfDetailData"
             RbtnDetails.Location = New Point(166, 196)
 
             ChkCancelData.Text = "IncludeCancelData"
@@ -300,7 +301,7 @@ Public Class PurchaseList
 
             BtnPurchaseSearch.Text = "Search"
             BtnPurchaseCancel.Text = "CancelOfPurchase"
-            BtnPurchaseView.Text = "PurchaseView"
+            BtnPurchaseView.Text = "PurchaseDataView"
             BtnBack.Text = "Back"
         End If
     End Sub
@@ -356,19 +357,19 @@ Public Class PurchaseList
                 DgvHtyhd.Columns.Add("客先番号", "CustomerNumber")
                 DgvHtyhd.Columns.Add("仕入日", "PurchaseDate")
                 DgvHtyhd.Columns.Add("発注番号", "PurchaseOrderNumber")
-                DgvHtyhd.Columns.Add("発注番号枝番", "PurchaseOrderSuffixNumber")
+                DgvHtyhd.Columns.Add("発注番号枝番", "PurchaseOrderSubNumber")
                 DgvHtyhd.Columns.Add("仕入先コード", "SupplierCode")
                 DgvHtyhd.Columns.Add("仕入先名", "SupplierName")
                 DgvHtyhd.Columns.Add("仕入先郵便番号", "PostalCode")
                 DgvHtyhd.Columns.Add("仕入先住所", "Address")
-                DgvHtyhd.Columns.Add("仕入先電話番号", "TEL")
+                DgvHtyhd.Columns.Add("仕入先電話番号", "PhoneNumber")
                 DgvHtyhd.Columns.Add("仕入先ＦＡＸ", "FAX")
-                DgvHtyhd.Columns.Add("仕入先担当者名", "ContactPersonName")
-                DgvHtyhd.Columns.Add("仕入先担当者役職", "ContactPersonPosition")
+                DgvHtyhd.Columns.Add("仕入先担当者名", "NameOfPIC")
+                DgvHtyhd.Columns.Add("仕入先担当者役職", "PositionPICSupplier")
                 DgvHtyhd.Columns.Add("仕入金額", "PurchaseAmount")
                 DgvHtyhd.Columns.Add("支払条件", "PaymentTerms")
-                DgvHtyhd.Columns.Add("営業担当者", "SalesPerson")
-                DgvHtyhd.Columns.Add("入力担当者", "InputPerson")
+                DgvHtyhd.Columns.Add("営業担当者", "SalesPersonInCharge")
+                DgvHtyhd.Columns.Add("入力担当者", "PICForInputting")
                 DgvHtyhd.Columns.Add("備考", "Remarks")
                 DgvHtyhd.Columns.Add("登録日", "RegistrationDate")
             Else
@@ -455,21 +456,22 @@ Public Class PurchaseList
             If frmC01F10_Login.loginValue.Language = "ENG" Then
                 DgvHtyhd.Columns.Add("仕入番号", "PurchaseNumber")
                 DgvHtyhd.Columns.Add("行番号", "LineNumber")
-                DgvHtyhd.Columns.Add("仕入区分", "PurchaseClassification")
-                DgvHtyhd.Columns.Add("メーカー", "Maker")
-                DgvHtyhd.Columns.Add("品名", "Item")
-                DgvHtyhd.Columns.Add("型式", "Model")
+                DgvHtyhd.Columns.Add("仕入区分", "PurchasingClassification")
+                DgvHtyhd.Columns.Add("メーカー", "Manufacturer")
+                DgvHtyhd.Columns.Add("品名", "ItemName")
+                DgvHtyhd.Columns.Add("型式", "Spec")
                 DgvHtyhd.Columns.Add("仕入先名", "SupplierName")
-                DgvHtyhd.Columns.Add("仕入値", "PurchasePrice")
-                DgvHtyhd.Columns.Add("発注数量", "PurchaseOrderQuantity")
+                DgvHtyhd.Columns.Add("仕入値", "PurchaseAmount")
+                DgvHtyhd.Columns.Add("発注数量", "OrderQuantity")
                 DgvHtyhd.Columns.Add("仕入数量", "PurchaseQuantity")
-                DgvHtyhd.Columns.Add("発注残数", "PurchaseOrderRemaining")
+                DgvHtyhd.Columns.Add("発注残数", "PurchasedQuantity")
                 DgvHtyhd.Columns.Add("単位", "Unit")
                 DgvHtyhd.Columns.Add("間接費", "OverHead")
                 DgvHtyhd.Columns.Add("仕入金額", "PurchaseAmount")
                 DgvHtyhd.Columns.Add("リードタイム", "LeadTime")
                 DgvHtyhd.Columns.Add("備考", "Remarks")
-                DgvHtyhd.Columns.Add("更新者", "Changer")
+                DgvHtyhd.Columns.Add("更新者", "ModifiedBy")
+
             Else
                 DgvHtyhd.Columns.Add("仕入番号", "仕入番号")
                 DgvHtyhd.Columns.Add("行番号", "行番号")
@@ -791,21 +793,22 @@ Public Class PurchaseList
                 DgvHtyhd.Columns.Add("客先番号", "CustomerNumber")
                 DgvHtyhd.Columns.Add("仕入日", "PurchaseDate")
                 DgvHtyhd.Columns.Add("発注番号", "PurchaseOrderNumber")
-                DgvHtyhd.Columns.Add("発注番号枝番", "PurchaseOrderSuffixNumber")
+                DgvHtyhd.Columns.Add("発注番号枝番", "PurchaseOrderSubNumber")
                 DgvHtyhd.Columns.Add("仕入先コード", "SupplierCode")
                 DgvHtyhd.Columns.Add("仕入先名", "SupplierName")
                 DgvHtyhd.Columns.Add("仕入先郵便番号", "PostalCode")
                 DgvHtyhd.Columns.Add("仕入先住所", "Address")
-                DgvHtyhd.Columns.Add("仕入先電話番号", "TEL")
+                DgvHtyhd.Columns.Add("仕入先電話番号", "PhoneNumber")
                 DgvHtyhd.Columns.Add("仕入先ＦＡＸ", "FAX")
-                DgvHtyhd.Columns.Add("仕入先担当者名", "ContactPersonName")
-                DgvHtyhd.Columns.Add("仕入先担当者役職", "ContactPersonPosition")
+                DgvHtyhd.Columns.Add("仕入先担当者名", "NameOfPIC")
+                DgvHtyhd.Columns.Add("仕入先担当者役職", "PositionPICSupplier")
                 DgvHtyhd.Columns.Add("仕入金額", "PurchaseAmount")
                 DgvHtyhd.Columns.Add("支払条件", "PaymentTerms")
-                DgvHtyhd.Columns.Add("営業担当者", "SalesPerson")
-                DgvHtyhd.Columns.Add("入力担当者", "InputPerson")
+                DgvHtyhd.Columns.Add("営業担当者", "SalesPersonInCharge")
+                DgvHtyhd.Columns.Add("入力担当者", "PICForInputting")
                 DgvHtyhd.Columns.Add("備考", "Remarks")
                 DgvHtyhd.Columns.Add("登録日", "RegistrationDate")
+
             Else
                 DgvHtyhd.Columns.Add("仕入番号", "仕入番号")
                 DgvHtyhd.Columns.Add("客先番号", "客先番号")

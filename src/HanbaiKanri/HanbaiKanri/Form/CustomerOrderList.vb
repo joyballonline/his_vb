@@ -108,11 +108,11 @@ Public Class CustomerOrderList
             Dim reccnt As Integer = 0
             ds = _db.selectDB(Sql, RS, reccnt)
             If frmC01F10_Login.loginValue.Language = "ENG" Then
-                DgvBilling.Columns.Add("請求番号", "BillingNumber")
+                DgvBilling.Columns.Add("請求番号", "InvoiceNumber")
                 DgvBilling.Columns.Add("請求区分", "BillingClassification")
                 DgvBilling.Columns.Add("請求日", "BillingDate")
-                DgvBilling.Columns.Add("受注番号", "OrderNumber")
-                DgvBilling.Columns.Add("受注番号枝番", "BranchNumber")
+                DgvBilling.Columns.Add("受注番号", "JobOrderNumber")
+                DgvBilling.Columns.Add("受注番号枝番", "JobOrderSubNumber")
                 DgvBilling.Columns.Add("得意先コード", "CustomerCode")
                 DgvBilling.Columns.Add("得意先名", "CustomerName")
                 DgvBilling.Columns.Add("請求金額計", "TotalBillingAmount")
@@ -120,7 +120,7 @@ Public Class CustomerOrderList
                 DgvBilling.Columns.Add("備考1", "Remarks1")
                 DgvBilling.Columns.Add("備考2", "Remarks2")
                 DgvBilling.Columns.Add("登録日", "RegistrationDate")
-                DgvBilling.Columns.Add("更新者", "Changer")
+                DgvBilling.Columns.Add("更新者", "ModifiedBy")
             Else
                 DgvBilling.Columns.Add("請求番号", "請求番号")
                 DgvBilling.Columns.Add("請求区分", "請求区分")

@@ -154,10 +154,14 @@ Public Class DepositManagement
         BillLoad()
 
         If frmC01F10_Login.loginValue.Language = "ENG" Then
-            LblHistory.Text = "DepositHistory"
-            LblDeposit.Text = "DepositInput"
+            LblHistory.Text = "MoneyReceiptDataHistory"
+            LblDeposit.Text = "MoneyReceiptInput"
+            LblDeposit.Location = New Point(13, 203)
+            LblDeposit.Size = New Size(142, 15)
             LblBillingInfo.Text = "BillingInfomation"
-            LblDepositDate.Text = "DepositDate"
+            LblDepositDate.Text = "MoneyReceiptDate"
+            LblDepositDate.Location = New Point(137, 335)
+            LblDepositDate.Size = New Size(140, 22)
             LblRemarks.Text = "Remarks"
             LblNo1.Text = "Record"
             LblNo1.Location = New Point(1272, 65)
@@ -174,32 +178,36 @@ Public Class DepositManagement
             TxtCount3.Location = New Point(1228, 335)
 
             BtnAdd.Text = "Add"
+            BtnAdd.Location = New Point(151, 203)
             BtnDelete.Text = "Delete"
-            BtnCal.Text = "Distribute"
+            BtnDelete.Location = New Point(251, 203)
+            BtnCal.Text = "AutomaticAllocation"
+            BtnCal.Location = New Point(351, 203)
+            BtnCal.Size = New Size(120, 20)
             BtnRegist.Text = "Registration"
             BtnBack.Text = "Back"
 
-            DgvCustomer.Columns("請求先").HeaderText = "CustomerName"
+            DgvCustomer.Columns("請求先").HeaderText = "BillingAddress"
             DgvCustomer.Columns("請求残高").HeaderText = "BillingBalance"
 
-            DgvHistory.Columns("請求番号").HeaderText = "BillingNumber"
+            DgvHistory.Columns("請求番号").HeaderText = "InvoiceNumber"
             DgvHistory.Columns("入金済請求先").HeaderText = "CustomerName"
             DgvHistory.Columns("入金番号").HeaderText = "DepositNumber"
             DgvHistory.Columns("入金日").HeaderText = "DepositDate"
             DgvHistory.Columns("入金種目").HeaderText = "DepositType"
-            DgvHistory.Columns("入金済入金額計").HeaderText = "TotalDepositAmount"
+            DgvHistory.Columns("入金済入金額計").HeaderText = "TotalMoneyReceiptAmount"
             DgvHistory.Columns("備考").HeaderText = "Remarks"
 
             DgvDeposit.Columns("行番号").HeaderText = "LineNumber"
-            DgvDeposit.Columns("入金種目").HeaderText = "DepositType"
-            DgvDeposit.Columns("入力入金額").HeaderText = "DepositAmount"
+            DgvDeposit.Columns("入金種目").HeaderText = "MoneyReceiptType"
+            DgvDeposit.Columns("入力入金額").HeaderText = "TotalMoneyReceiptAmount"
 
-            DgvBillingInfo.Columns("請求情報請求番号").HeaderText = "BillingNumber"
+            DgvBillingInfo.Columns("請求情報請求番号").HeaderText = "InvoiceNumber"
             DgvBillingInfo.Columns("請求日").HeaderText = "BillingDate"
             DgvBillingInfo.Columns("請求金額").HeaderText = "BillingAmount"
-            DgvBillingInfo.Columns("請求情報入金額計").HeaderText = "TotalDepositAmount"
+            DgvBillingInfo.Columns("請求情報入金額計").HeaderText = "TotalMoneyReceiptAmount"
             DgvBillingInfo.Columns("請求情報請求残高").HeaderText = "BillingBalance"
-            DgvBillingInfo.Columns("入金額").HeaderText = "DepositAmount"
+            DgvBillingInfo.Columns("入金額").HeaderText = "MoneyReceiptAmount"
 
         End If
     End Sub

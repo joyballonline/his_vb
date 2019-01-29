@@ -406,7 +406,13 @@ Public Class Ordering
         TxtItemCount.Text = DgvItemList.Rows.Count()
 
         If PurchaseStatus = "VIEW" Then
-            LblMode.Text = "参照モード"
+
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                LblMode.Text = "ViewMode"
+            Else
+                LblMode.Text = "参照モード"
+            End If
+
             DtpPurchaseDate.Enabled = False
             TxtPurchaseRemark.Enabled = False
             TxtCustomerPO.Enabled = False
@@ -415,6 +421,12 @@ Public Class Ordering
             BtnPurchase.Visible = True
             BtnPurchase.Location = New Point(1004, 509)
         ElseIf PurchaseStatus = "CLONE" Then
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                LblMode.Text = "NewCopyMode"
+            Else
+                LblMode.Text = "新規複写モード"
+            End If
+
             LblMode.Text = "新規複写モード"
             TxtSupplierCode.Enabled = True
             TxtSupplierName.Enabled = True
@@ -512,33 +524,33 @@ Public Class Ordering
 
         '翻訳
         If frmC01F10_Login.loginValue.Language = "ENG" Then
-            LblPurchaseNo.Text = "PurchaseNumber"
+            LblPurchaseNo.Text = "PurchaseOrderNo"
             LblPurchaseNo.Size = New Size(145, 23)
             TxtOrderingNo.Location = New Point(162, 12)
             Label2.Location = New Point(256, 13)
             TxtOrderingSuffix.Location = New Point(273, 13)
-            LblCustomerPO.Text = "CustomerNumber"
+            LblCustomerPO.Text = "CustomerNo"
             LblCustomerPO.Location = New Point(308, 13)
-            LblCustomerPO.Size = New Size(152, 23)
-            TxtCustomerPO.Location = New Point(466, 13)
-            LblPurchaseDate.Text = "PurchaseDate"
-            LblPurchaseDate.Location = New Point(560, 13)
-            DtpPurchaseDate.Location = New Point(678, 13)
+            LblCustomerPO.Size = New Size(142, 23)
+            TxtCustomerPO.Location = New Point(456, 13)
+            LblPurchaseDate.Text = "OrderDate"
+            LblPurchaseDate.Location = New Point(550, 13)
+            DtpPurchaseDate.Location = New Point(668, 13)
             DtpPurchaseDate.Size = New Size(130, 22)
-            LblRegistrationDate.Text = "RegistrationDate"
-            LblRegistrationDate.Size = New Size(138, 23)
-            LblRegistrationDate.Location = New Point(812, 13)
-            DtpRegistrationDate.Location = New Point(958, 13)
+            LblRegistrationDate.Text = "OrderRegistrationDate"
+            LblRegistrationDate.Size = New Size(158, 23)
+            LblRegistrationDate.Location = New Point(802, 13)
+            DtpRegistrationDate.Location = New Point(968, 13)
             DtpRegistrationDate.Size = New Size(130, 22)
 
             LblSupplierName.Text = "SupplierName"
             LblAddress.Text = "Address"
-            LblTel.Text = "TEL"
+            LblTel.Text = "PhoneNumber"
             LblFax.Text = "FAX"
-            LblPerson.Text = "ContactPersonName"
-            LblPosition.Text = "Position"
-            LblSales.Text = "SalesPerson"
-            LblInput.Text = "InputPerson"
+            LblPerson.Text = "NameOfPIC"
+            LblPosition.Text = "PositionPICSupplier"
+            LblSales.Text = "SalesPersonInCharge"
+            LblInput.Text = "PICForInputting"
             LblPaymentTerms.Text = "PaymentTerms"
             TxtPaymentTerms.Location = New Point(181, 158)
             LblPaymentTerms.Size = New Size(162, 23)
@@ -552,7 +564,7 @@ Public Class Ordering
             LblMethod.Text = "ShippingMethod"
             LblShipDate.Text = "ShipDate"
 
-            LblPurchaseAmount.Text = "PurchaseAmount"
+            LblPurchaseAmount.Text = "PurchaseOrderAmount"
             LblPurchaseAmount.Size = New Size(180, 23)
             LblPurchaseAmount.Location = New Point(923, 465)
 
@@ -560,24 +572,24 @@ Public Class Ordering
             BtnCodeSearch.Text = "Search"
             BtnCodeSearch.Location = New Point(195, 42)
             BtnCodeSearch.Size = New Size(72, 23)
-            BtnInsert.Text = "Insert"
-            BtnUp.Text = "Up"
-            BtnDown.Text = "Down"
-            BtnRowsAdd.Text = "Add"
-            BtnRowsDel.Text = "Delete"
-            BtnClone.Text = "Clone"
+            BtnInsert.Text = "InsertLine"
+            BtnUp.Text = "ShiftLineUp"
+            BtnDown.Text = "ShiftLineDown"
+            BtnRowsAdd.Text = "AddLine"
+            BtnRowsDel.Text = "DeleteLine"
+            BtnClone.Text = "LineDuplication"
 
             BtnPurchase.Text = "IssuePurchaseOrder"
             BtnRegistration.Text = "Registrartion"
             BtnBack.Text = "Back"
 
-            DgvItemList.Columns("仕入区分").HeaderText = "PurchaseSection"
-            DgvItemList.Columns("メーカー").HeaderText = "Maker"
-            DgvItemList.Columns("品名").HeaderText = "Item"
-            DgvItemList.Columns("型式").HeaderText = "Model"
+            DgvItemList.Columns("仕入区分").HeaderText = "PurchasingClassification"
+            DgvItemList.Columns("メーカー").HeaderText = "Manufacturer"
+            DgvItemList.Columns("品名").HeaderText = "ItemName"
+            DgvItemList.Columns("型式").HeaderText = "Spec"
             DgvItemList.Columns("数量").HeaderText = "Quantity"
             DgvItemList.Columns("単位").HeaderText = "Unit"
-            DgvItemList.Columns("仕入単価").HeaderText = "PurchasePrice"
+            DgvItemList.Columns("仕入単価").HeaderText = "PurchaseUnitPrice"
             DgvItemList.Columns("仕入金額").HeaderText = "PurchaseAmount"
             DgvItemList.Columns("リードタイム").HeaderText = "LeadTime"
             DgvItemList.Columns("リードタイム単位").HeaderText = "LeadTimeUnit"

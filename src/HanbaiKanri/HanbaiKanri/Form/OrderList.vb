@@ -96,9 +96,9 @@ Public Class OrderList
                 ds = _db.selectDB(Sql, RS, reccnt)
                 If frmC01F10_Login.loginValue.Language = "ENG" Then
                     DgvCymnhd.Columns.Add("受注番号", "OrderNumber")
-                    DgvCymnhd.Columns.Add("受注番号枝番", "OrderSuffixNumber")
+                    DgvCymnhd.Columns.Add("受注番号枝番", "JobOrderSubNumber")
                     DgvCymnhd.Columns.Add("客先番号", "CustomerNumber")
-                    DgvCymnhd.Columns.Add("受注日", "OrderNumber")
+                    DgvCymnhd.Columns.Add("受注日", "JobOrderDate")
                     DgvCymnhd.Columns.Add("見積番号", "QuotationNumber")
                     DgvCymnhd.Columns.Add("見積番号枝番", "BranchNumber")
                     DgvCymnhd.Columns.Add("見積日", "QuotationDate")
@@ -107,17 +107,17 @@ Public Class OrderList
                     DgvCymnhd.Columns.Add("得意先名", "CustomerName")
                     DgvCymnhd.Columns.Add("得意先郵便番号", "PostalCode")
                     DgvCymnhd.Columns.Add("得意先住所", "Address")
-                    DgvCymnhd.Columns.Add("得意先電話番号", "TEL")
+                    DgvCymnhd.Columns.Add("得意先電話番号", "PhoneNumber")
                     DgvCymnhd.Columns.Add("得意先ＦＡＸ", "FAX")
-                    DgvCymnhd.Columns.Add("得意先担当者名", "ContactPersonName")
-                    DgvCymnhd.Columns.Add("得意先担当者役職", "ContactPersonPosition")
+                    DgvCymnhd.Columns.Add("得意先担当者名", "NameOfPIC")
+                    DgvCymnhd.Columns.Add("得意先担当者役職", "PositionPICCustomer")
                     DgvCymnhd.Columns.Add("ＶＡＴ", "VAT")
                     DgvCymnhd.Columns.Add("受注金額", "OrderAmount")
                     DgvCymnhd.Columns.Add("仕入金額", "PurchaseAmount")
-                    DgvCymnhd.Columns.Add("粗利額", "GrossProfit")
+                    DgvCymnhd.Columns.Add("粗利額", "GrossMargin")
                     DgvCymnhd.Columns.Add("支払条件", "PeymentTerms")
-                    DgvCymnhd.Columns.Add("営業担当者", "SalesPerson")
-                    DgvCymnhd.Columns.Add("入力担当者", "InputPerson")
+                    DgvCymnhd.Columns.Add("営業担当者", "SalesPersonInCharge")
+                    DgvCymnhd.Columns.Add("入力担当者", "PICForInputting")
                     DgvCymnhd.Columns.Add("備考", "Remarks")
                     DgvCymnhd.Columns.Add("登録日", "RegistrationDate")
                 Else
@@ -204,9 +204,9 @@ Public Class OrderList
                 ds = _db.selectDB(Sql, RS, reccnt)
                 If frmC01F10_Login.loginValue.Language = "ENG" Then
                     DgvCymnhd.Columns.Add("受注番号", "OrderNumber")
-                    DgvCymnhd.Columns.Add("受注番号枝番", "OrderSuffixNumber")
+                    DgvCymnhd.Columns.Add("受注番号枝番", "JobOrderSubNumber")
                     DgvCymnhd.Columns.Add("客先番号", "CustomerNumber")
-                    DgvCymnhd.Columns.Add("受注日", "OrderNumber")
+                    DgvCymnhd.Columns.Add("受注日", "JobOrderDate")
                     DgvCymnhd.Columns.Add("見積番号", "QuotationNumber")
                     DgvCymnhd.Columns.Add("見積番号枝番", "BranchNumber")
                     DgvCymnhd.Columns.Add("見積日", "QuotationDate")
@@ -215,17 +215,17 @@ Public Class OrderList
                     DgvCymnhd.Columns.Add("得意先名", "CustomerName")
                     DgvCymnhd.Columns.Add("得意先郵便番号", "PostalCode")
                     DgvCymnhd.Columns.Add("得意先住所", "Address")
-                    DgvCymnhd.Columns.Add("得意先電話番号", "TEL")
+                    DgvCymnhd.Columns.Add("得意先電話番号", "PhoneNumber")
                     DgvCymnhd.Columns.Add("得意先ＦＡＸ", "FAX")
-                    DgvCymnhd.Columns.Add("得意先担当者名", "ContactPersonName")
-                    DgvCymnhd.Columns.Add("得意先担当者役職", "ContactPersonPosition")
+                    DgvCymnhd.Columns.Add("得意先担当者名", "NameOfPIC")
+                    DgvCymnhd.Columns.Add("得意先担当者役職", "PositionPICCustomer")
                     DgvCymnhd.Columns.Add("ＶＡＴ", "VAT")
                     DgvCymnhd.Columns.Add("受注金額", "OrderAmount")
                     DgvCymnhd.Columns.Add("仕入金額", "PurchaseAmount")
-                    DgvCymnhd.Columns.Add("粗利額", "GrossProfit")
+                    DgvCymnhd.Columns.Add("粗利額", "GrossMargin")
                     DgvCymnhd.Columns.Add("支払条件", "PeymentTerms")
-                    DgvCymnhd.Columns.Add("営業担当者", "SalesPerson")
-                    DgvCymnhd.Columns.Add("入力担当者", "InputPerson")
+                    DgvCymnhd.Columns.Add("営業担当者", "SalesPersonInCharge")
+                    DgvCymnhd.Columns.Add("入力担当者", "PICForInputting")
                     DgvCymnhd.Columns.Add("備考", "Remarks")
                     DgvCymnhd.Columns.Add("登録日", "RegistrationDate")
                 Else
@@ -314,7 +314,7 @@ Public Class OrderList
             BtnSales.Location = New Point(997, 509)
         ElseIf OrderStatus = "GOODS_ISSUE" Then
             If frmC01F10_Login.loginValue.Language = "ENG" Then
-                LblMode.Text = "GoodsIssueInputMode"
+                LblMode.Text = "GoodsDeliveryInputMode"
             Else
                 LblMode.Text = "出庫入力モード"
             End If
@@ -350,7 +350,7 @@ Public Class OrderList
             BtnOrderCancel.Location = New Point(997, 509)
         ElseIf OrderStatus = "CLONE" Then
             If frmC01F10_Login.loginValue.Language = "ENG" Then
-                LblMode.Text = "CopyMode"
+                LblMode.Text = "NewCopyMode"
             Else
                 LblMode.Text = "新規複写モード"
             End If
@@ -359,7 +359,7 @@ Public Class OrderList
             BtnOrderClone.Location = New Point(997, 509)
         ElseIf OrderStatus = "BILL" Then
             If frmC01F10_Login.loginValue.Language = "ENG" Then
-                LblMode.Text = "BillRegistrationMode"
+                LblMode.Text = "BillingRegistrationMode"
             Else
                 LblMode.Text = "請求登録モード"
             End If
@@ -370,14 +370,14 @@ Public Class OrderList
         Dim Status As String = "EXCLUSION"
         OrderListLoad(Status)
         If frmC01F10_Login.loginValue.Language = "ENG" Then
-            LblConditions.Text = "ExtractionCondition"
+            LblConditions.Text = "TermsOfSelection"
             Label1.Text = "CustomerName"
             Label2.Text = "Address"
-            Label3.Text = "TEL"
+            Label3.Text = "PhoneNumber"
             Label4.Text = "CustomerCode"
             Label8.Text = "OrderDate"
             Label7.Text = "OrdernNumber"
-            Label6.Text = "SalesPerson"
+            Label6.Text = "SalesPersonInCharge"
             Label11.Text = "CustomerNumber"
             Label10.Text = "DisplayFormat"
             RbtnSlip.Text = "UnitOfSlip"
@@ -448,7 +448,7 @@ Public Class OrderList
 
             If frmC01F10_Login.loginValue.Language = "ENG" Then
                 DgvCymnhd.Columns.Add("受注番号", "OrderNumber")
-                DgvCymnhd.Columns.Add("受注番号枝番", "OrderSuffixNumber")
+                DgvCymnhd.Columns.Add("受注番号枝番", "JobOrderSubNumber")
                 DgvCymnhd.Columns.Add("客先番号", "CustomerNumber")
                 DgvCymnhd.Columns.Add("受注日", "OrderNumber")
                 DgvCymnhd.Columns.Add("見積番号", "QuotationNumber")
@@ -459,17 +459,17 @@ Public Class OrderList
                 DgvCymnhd.Columns.Add("得意先名", "CustomerName")
                 DgvCymnhd.Columns.Add("得意先郵便番号", "PostalCode")
                 DgvCymnhd.Columns.Add("得意先住所", "Address")
-                DgvCymnhd.Columns.Add("得意先電話番号", "TEL")
+                DgvCymnhd.Columns.Add("得意先電話番号", "PhoneNumber")
                 DgvCymnhd.Columns.Add("得意先ＦＡＸ", "FAX")
-                DgvCymnhd.Columns.Add("得意先担当者名", "ContactPersonName")
-                DgvCymnhd.Columns.Add("得意先担当者役職", "ContactPersonPosition")
+                DgvCymnhd.Columns.Add("得意先担当者名", "NameOfPIC")
+                DgvCymnhd.Columns.Add("得意先担当者役職", "PositionPICCustomer")
                 DgvCymnhd.Columns.Add("ＶＡＴ", "VAT")
                 DgvCymnhd.Columns.Add("受注金額", "OrderAmount")
                 DgvCymnhd.Columns.Add("仕入金額", "PurchaseAmount")
-                DgvCymnhd.Columns.Add("粗利額", "GrossProfit")
+                DgvCymnhd.Columns.Add("粗利額", "GrossMargin")
                 DgvCymnhd.Columns.Add("支払条件", "PeymentTerms")
-                DgvCymnhd.Columns.Add("営業担当者", "SalesPerson")
-                DgvCymnhd.Columns.Add("入力担当者", "InputPerson")
+                DgvCymnhd.Columns.Add("営業担当者", "SalesPersonInCharge")
+                DgvCymnhd.Columns.Add("入力担当者", "PICForInputting")
                 DgvCymnhd.Columns.Add("備考", "Remarks")
                 DgvCymnhd.Columns.Add("登録日", "RegistrationDate")
             Else
@@ -572,11 +572,11 @@ Public Class OrderList
                 DgvCymnhd.Columns.Add("受注番号枝番", "OrderSuffixNumber")
                 DgvCymnhd.Columns.Add("行番号", "LineNumber")
                 DgvCymnhd.Columns.Add("仕入区分", "PurchasingClassification")
-                DgvCymnhd.Columns.Add("メーカー", "Maker")
-                DgvCymnhd.Columns.Add("品名", "Item")
-                DgvCymnhd.Columns.Add("型式", "Model")
+                DgvCymnhd.Columns.Add("メーカー", "Manufacturer")
+                DgvCymnhd.Columns.Add("品名", "ItemName")
+                DgvCymnhd.Columns.Add("型式", "Spec")
                 DgvCymnhd.Columns.Add("仕入先名", "SupplierName")
-                DgvCymnhd.Columns.Add("仕入値", "PurchasePrice")
+                DgvCymnhd.Columns.Add("仕入値", "PurchaseAmount")
                 DgvCymnhd.Columns.Add("受注数量", "OrderQuantity")
                 DgvCymnhd.Columns.Add("売上数量", "SalesQuantity")
                 DgvCymnhd.Columns.Add("受注残数", "OrderRemaining")
@@ -587,10 +587,10 @@ Public Class OrderList
                 DgvCymnhd.Columns.Add("粗利額", "GrossProfit")
                 DgvCymnhd.Columns.Add("粗利率", "GrossMarginRate")
                 DgvCymnhd.Columns.Add("リードタイム", "LeadTime")
-                DgvCymnhd.Columns.Add("出庫数", "GoodsIssueQuantity")
-                DgvCymnhd.Columns.Add("未出庫数", "GoodsIssueRemaining")
+                DgvCymnhd.Columns.Add("出庫数", "GoodsDeliveryQuantity")
+                DgvCymnhd.Columns.Add("未出庫数", "NoGoodsDeliveryQuantity")
                 DgvCymnhd.Columns.Add("備考", "Remarks")
-                DgvCymnhd.Columns.Add("更新者", "Changer")
+                DgvCymnhd.Columns.Add("更新者", "ModifiedBy")
                 DgvCymnhd.Columns.Add("登録日", "Registration")
             Else
                 DgvCymnhd.Columns.Add("受注番号", "受注番号")
@@ -973,9 +973,9 @@ Public Class OrderList
 
             If frmC01F10_Login.loginValue.Language = "ENG" Then
                 DgvCymnhd.Columns.Add("受注番号", "OrderNumber")
-                DgvCymnhd.Columns.Add("受注番号枝番", "OrderSuffixNumber")
+                DgvCymnhd.Columns.Add("受注番号枝番", "JobOrderSubNumber")
                 DgvCymnhd.Columns.Add("客先番号", "CustomerNumber")
-                DgvCymnhd.Columns.Add("受注日", "OrderNumber")
+                DgvCymnhd.Columns.Add("受注日", "JobOrderDate")
                 DgvCymnhd.Columns.Add("見積番号", "QuotationNumber")
                 DgvCymnhd.Columns.Add("見積番号枝番", "BranchNumber")
                 DgvCymnhd.Columns.Add("見積日", "QuotationDate")
@@ -984,17 +984,17 @@ Public Class OrderList
                 DgvCymnhd.Columns.Add("得意先名", "CustomerName")
                 DgvCymnhd.Columns.Add("得意先郵便番号", "PostalCode")
                 DgvCymnhd.Columns.Add("得意先住所", "Address")
-                DgvCymnhd.Columns.Add("得意先電話番号", "TEL")
+                DgvCymnhd.Columns.Add("得意先電話番号", "PhoneNumber")
                 DgvCymnhd.Columns.Add("得意先ＦＡＸ", "FAX")
-                DgvCymnhd.Columns.Add("得意先担当者名", "ContactPersonName")
-                DgvCymnhd.Columns.Add("得意先担当者役職", "ContactPersonPosition")
+                DgvCymnhd.Columns.Add("得意先担当者名", "NameOfPIC")
+                DgvCymnhd.Columns.Add("得意先担当者役職", "PositionPICCustomer")
                 DgvCymnhd.Columns.Add("ＶＡＴ", "VAT")
                 DgvCymnhd.Columns.Add("受注金額", "OrderAmount")
                 DgvCymnhd.Columns.Add("仕入金額", "PurchaseAmount")
-                DgvCymnhd.Columns.Add("粗利額", "GrossProfit")
+                DgvCymnhd.Columns.Add("粗利額", "GrossMargin")
                 DgvCymnhd.Columns.Add("支払条件", "PeymentTerms")
-                DgvCymnhd.Columns.Add("営業担当者", "SalesPerson")
-                DgvCymnhd.Columns.Add("入力担当者", "InputPerson")
+                DgvCymnhd.Columns.Add("営業担当者", "SalesPersonInCharge")
+                DgvCymnhd.Columns.Add("入力担当者", "PICForInputting")
                 DgvCymnhd.Columns.Add("備考", "Remarks")
                 DgvCymnhd.Columns.Add("登録日", "RegistrationDate")
             Else

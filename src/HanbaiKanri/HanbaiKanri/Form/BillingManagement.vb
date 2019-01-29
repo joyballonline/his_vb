@@ -114,9 +114,9 @@ Public Class BillingManagement
             LblNo3.Size = New Size(66, 22)
             LblRemarks1.Text = "Remarks1"
             LblRemarks2.Text = "Remarks2"
-            LblCymndt.Text = "OrderDetails"
-            LblHistory.Text = "BillingHistory"
-            LblAdd.Text = "ThisTimeBilling"
+            LblCymndt.Text = "JobOrderDetails"
+            LblHistory.Text = "BillingHistoryData"
+            LblAdd.Text = "InvoicingThisTime"
 
             TxtCount1.Location = New Point(1228, 118)
             TxtCount2.Location = New Point(1228, 253)
@@ -125,29 +125,29 @@ Public Class BillingManagement
             BtnRegist.Text = "Registration"
             BtnBack.Text = "Back"
 
-            DgvCymn.Columns("受注番号").HeaderText = "OrderNumber"
+            DgvCymn.Columns("受注番号").HeaderText = "JobOrderNumber"
             DgvCymn.Columns("受注日").HeaderText = "OrderDate"
             DgvCymn.Columns("得意先").HeaderText = "CustomerName"
             DgvCymn.Columns("客先番号").HeaderText = "CustomerNumber"
-            DgvCymn.Columns("受注金額").HeaderText = "OrderAmount"
+            DgvCymn.Columns("受注金額").HeaderText = "JobOrderAmount"
             DgvCymn.Columns("請求金額計").HeaderText = "TotalBillingAmount"
-            DgvCymn.Columns("請求残高").HeaderText = "BillingRemaining"
+            DgvCymn.Columns("請求残高").HeaderText = "BillingBalance"
 
-            DgvCymndt.Columns("明細").HeaderText = "LineItem"
-            DgvCymndt.Columns("メーカー").HeaderText = "Maker"
-            DgvCymndt.Columns("品名").HeaderText = "Item"
-            DgvCymndt.Columns("型式").HeaderText = "Model"
-            DgvCymndt.Columns("受注個数").HeaderText = "OrderQuantity"
+            DgvCymndt.Columns("明細").HeaderText = "DetailData"
+            DgvCymndt.Columns("メーカー").HeaderText = "Manufacturer"
+            DgvCymndt.Columns("品名").HeaderText = "ItemName"
+            DgvCymndt.Columns("型式").HeaderText = "Spec"
+            DgvCymndt.Columns("受注個数").HeaderText = "JobOrderQuantity"
             DgvCymndt.Columns("単位").HeaderText = "Unit"
             DgvCymndt.Columns("売上数量").HeaderText = "SalesQuantity"
             DgvCymndt.Columns("売上単価").HeaderText = "SellingPrice"
             DgvCymndt.Columns("売上金額").HeaderText = "SalesAmount"
 
-            DgvHistory.Columns("請求番号").HeaderText = "BillingNumber"
+            DgvHistory.Columns("請求番号").HeaderText = "InvoiceNumber"
             DgvHistory.Columns("請求日").HeaderText = "BillingDate"
             DgvHistory.Columns("請求区分").HeaderText = "BillingClassification"
             DgvHistory.Columns("請求先").HeaderText = "BillingAddress"
-            DgvHistory.Columns("請求金額").HeaderText = "TotalBillingAmount"
+            DgvHistory.Columns("請求金額").HeaderText = "BillingAmount"
             DgvHistory.Columns("備考1").HeaderText = "Remarks1"
             DgvHistory.Columns("備考2").HeaderText = "Remarks2"
 

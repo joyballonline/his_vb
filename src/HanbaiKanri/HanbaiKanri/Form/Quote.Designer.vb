@@ -48,6 +48,35 @@ Partial Class Quote
         Me.LblPaymentTerms = New System.Windows.Forms.Label()
         Me.TxtPaymentTerms = New System.Windows.Forms.TextBox()
         Me.DgvItemList = New System.Windows.Forms.DataGridView()
+        Me.No = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.メーカー = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.品名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.型式 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.数量 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.単位 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入先コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入先 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入単価 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入原価 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.関税率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.関税額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.前払法人税率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.前払法人税額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.輸送費率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.輸送費額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.売単価 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.売上金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.見積単価 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.見積金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.粗利額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.粗利率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.リードタイム = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.備考 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ステータス = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.間接費無仕入金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.間接費率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.間接費 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LblInput = New System.Windows.Forms.Label()
         Me.TxtCustomerName = New System.Windows.Forms.TextBox()
         Me.LblCustomerName = New System.Windows.Forms.Label()
@@ -105,35 +134,6 @@ Partial Class Quote
         Me.BtnCodeSearch = New System.Windows.Forms.Button()
         Me.TxtQuoteTotal = New System.Windows.Forms.TextBox()
         Me.LblQuoteAmount = New System.Windows.Forms.Label()
-        Me.No = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.メーカー = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.品名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.型式 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.数量 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.単位 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.仕入先コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.仕入先 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.仕入単価 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.仕入原価 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.関税率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.関税額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.前払法人税率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.前払法人税額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.輸送費率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.輸送費額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.仕入金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.売単価 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.売上金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.見積単価 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.見積金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.粗利額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.粗利率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.リードタイム = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.備考 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ステータス = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.間接費無仕入金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.間接費率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.間接費 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DgvItemList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -211,6 +211,247 @@ Partial Class Quote
         Me.DgvItemList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
         Me.DgvItemList.Size = New System.Drawing.Size(1329, 179)
         Me.DgvItemList.TabIndex = 20
+        '
+        'No
+        '
+        Me.No.HeaderText = "No"
+        Me.No.Name = "No"
+        Me.No.Width = 43
+        '
+        'メーカー
+        '
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.メーカー.DefaultCellStyle = DataGridViewCellStyle1
+        Me.メーカー.HeaderText = "メーカー"
+        Me.メーカー.Name = "メーカー"
+        Me.メーカー.Width = 250
+        '
+        '品名
+        '
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.品名.DefaultCellStyle = DataGridViewCellStyle2
+        Me.品名.HeaderText = "品名"
+        Me.品名.Name = "品名"
+        Me.品名.Width = 250
+        '
+        '型式
+        '
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.型式.DefaultCellStyle = DataGridViewCellStyle3
+        Me.型式.HeaderText = "型式"
+        Me.型式.Name = "型式"
+        Me.型式.Width = 250
+        '
+        '数量
+        '
+        DataGridViewCellStyle4.Format = "N0"
+        DataGridViewCellStyle4.NullValue = Nothing
+        Me.数量.DefaultCellStyle = DataGridViewCellStyle4
+        Me.数量.HeaderText = "数量"
+        Me.数量.Name = "数量"
+        Me.数量.Width = 150
+        '
+        '単位
+        '
+        Me.単位.HeaderText = "単位"
+        Me.単位.Name = "単位"
+        Me.単位.Width = 150
+        '
+        '仕入先コード
+        '
+        Me.仕入先コード.HeaderText = "仕入先コード"
+        Me.仕入先コード.Name = "仕入先コード"
+        Me.仕入先コード.Width = 150
+        '
+        '仕入先
+        '
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.仕入先.DefaultCellStyle = DataGridViewCellStyle5
+        Me.仕入先.HeaderText = "仕入先名"
+        Me.仕入先.Name = "仕入先"
+        Me.仕入先.Width = 150
+        '
+        '仕入単価
+        '
+        DataGridViewCellStyle6.Format = "N0"
+        DataGridViewCellStyle6.NullValue = Nothing
+        Me.仕入単価.DefaultCellStyle = DataGridViewCellStyle6
+        Me.仕入単価.HeaderText = "仕入単価"
+        Me.仕入単価.Name = "仕入単価"
+        Me.仕入単価.Width = 150
+        '
+        '仕入原価
+        '
+        DataGridViewCellStyle7.Format = "N0"
+        DataGridViewCellStyle7.NullValue = Nothing
+        Me.仕入原価.DefaultCellStyle = DataGridViewCellStyle7
+        Me.仕入原価.HeaderText = "仕入原価"
+        Me.仕入原価.Name = "仕入原価"
+        Me.仕入原価.Width = 150
+        '
+        '関税率
+        '
+        Me.関税率.HeaderText = "関税率"
+        Me.関税率.Name = "関税率"
+        Me.関税率.Width = 150
+        '
+        '関税額
+        '
+        DataGridViewCellStyle8.Format = "N0"
+        DataGridViewCellStyle8.NullValue = Nothing
+        Me.関税額.DefaultCellStyle = DataGridViewCellStyle8
+        Me.関税額.HeaderText = "関税額"
+        Me.関税額.Name = "関税額"
+        Me.関税額.Width = 150
+        '
+        '前払法人税率
+        '
+        DataGridViewCellStyle9.NullValue = Nothing
+        Me.前払法人税率.DefaultCellStyle = DataGridViewCellStyle9
+        Me.前払法人税率.HeaderText = "前払法人税率"
+        Me.前払法人税率.Name = "前払法人税率"
+        Me.前払法人税率.Width = 150
+        '
+        '前払法人税額
+        '
+        DataGridViewCellStyle10.Format = "N0"
+        DataGridViewCellStyle10.NullValue = Nothing
+        Me.前払法人税額.DefaultCellStyle = DataGridViewCellStyle10
+        Me.前払法人税額.HeaderText = "前払法人税額"
+        Me.前払法人税額.Name = "前払法人税額"
+        Me.前払法人税額.Width = 150
+        '
+        '輸送費率
+        '
+        Me.輸送費率.HeaderText = "輸送費率"
+        Me.輸送費率.Name = "輸送費率"
+        Me.輸送費率.Width = 150
+        '
+        '輸送費額
+        '
+        DataGridViewCellStyle11.Format = "N0"
+        DataGridViewCellStyle11.NullValue = Nothing
+        Me.輸送費額.DefaultCellStyle = DataGridViewCellStyle11
+        Me.輸送費額.HeaderText = "輸送費額"
+        Me.輸送費額.Name = "輸送費額"
+        Me.輸送費額.Width = 150
+        '
+        '仕入金額
+        '
+        DataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle12.Format = "N0"
+        DataGridViewCellStyle12.NullValue = Nothing
+        Me.仕入金額.DefaultCellStyle = DataGridViewCellStyle12
+        Me.仕入金額.HeaderText = "仕入金額"
+        Me.仕入金額.Name = "仕入金額"
+        Me.仕入金額.ReadOnly = True
+        Me.仕入金額.Width = 150
+        '
+        '売単価
+        '
+        DataGridViewCellStyle13.Format = "N0"
+        DataGridViewCellStyle13.NullValue = Nothing
+        Me.売単価.DefaultCellStyle = DataGridViewCellStyle13
+        Me.売単価.HeaderText = "売単価"
+        Me.売単価.Name = "売単価"
+        Me.売単価.Width = 150
+        '
+        '売上金額
+        '
+        DataGridViewCellStyle14.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle14.Format = "N0"
+        DataGridViewCellStyle14.NullValue = Nothing
+        Me.売上金額.DefaultCellStyle = DataGridViewCellStyle14
+        Me.売上金額.HeaderText = "売上金額"
+        Me.売上金額.Name = "売上金額"
+        Me.売上金額.ReadOnly = True
+        Me.売上金額.Width = 150
+        '
+        '見積単価
+        '
+        DataGridViewCellStyle15.BackColor = System.Drawing.Color.Gray
+        Me.見積単価.DefaultCellStyle = DataGridViewCellStyle15
+        Me.見積単価.HeaderText = "見積単価"
+        Me.見積単価.Name = "見積単価"
+        Me.見積単価.ReadOnly = True
+        Me.見積単価.Width = 150
+        '
+        '見積金額
+        '
+        DataGridViewCellStyle16.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.見積金額.DefaultCellStyle = DataGridViewCellStyle16
+        Me.見積金額.HeaderText = "見積金額"
+        Me.見積金額.Name = "見積金額"
+        Me.見積金額.ReadOnly = True
+        Me.見積金額.Width = 150
+        '
+        '粗利額
+        '
+        DataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle17.Format = "N0"
+        DataGridViewCellStyle17.NullValue = Nothing
+        Me.粗利額.DefaultCellStyle = DataGridViewCellStyle17
+        Me.粗利額.HeaderText = "粗利額"
+        Me.粗利額.Name = "粗利額"
+        Me.粗利額.ReadOnly = True
+        Me.粗利額.Width = 150
+        '
+        '粗利率
+        '
+        DataGridViewCellStyle18.BackColor = System.Drawing.Color.Gray
+        DataGridViewCellStyle18.Format = "N1"
+        DataGridViewCellStyle18.NullValue = Nothing
+        Me.粗利率.DefaultCellStyle = DataGridViewCellStyle18
+        Me.粗利率.HeaderText = "粗利率(%)"
+        Me.粗利率.Name = "粗利率"
+        Me.粗利率.ReadOnly = True
+        Me.粗利率.Width = 150
+        '
+        'リードタイム
+        '
+        Me.リードタイム.HeaderText = "リードタイム"
+        Me.リードタイム.Name = "リードタイム"
+        Me.リードタイム.Width = 150
+        '
+        '備考
+        '
+        Me.備考.HeaderText = "備考"
+        Me.備考.Name = "備考"
+        Me.備考.Width = 150
+        '
+        'ステータス
+        '
+        Me.ステータス.HeaderText = "ステータス"
+        Me.ステータス.Name = "ステータス"
+        Me.ステータス.Visible = False
+        Me.ステータス.Width = 61
+        '
+        '間接費無仕入金額
+        '
+        DataGridViewCellStyle19.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.間接費無仕入金額.DefaultCellStyle = DataGridViewCellStyle19
+        Me.間接費無仕入金額.HeaderText = "仕入原価"
+        Me.間接費無仕入金額.Name = "間接費無仕入金額"
+        Me.間接費無仕入金額.ReadOnly = True
+        Me.間接費無仕入金額.Visible = False
+        Me.間接費無仕入金額.Width = 61
+        '
+        '間接費率
+        '
+        Me.間接費率.HeaderText = "間接費率"
+        Me.間接費率.Name = "間接費率"
+        Me.間接費率.Visible = False
+        Me.間接費率.Width = 61
+        '
+        '間接費
+        '
+        DataGridViewCellStyle20.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.間接費.DefaultCellStyle = DataGridViewCellStyle20
+        Me.間接費.HeaderText = "間接費"
+        Me.間接費.Name = "間接費"
+        Me.間接費.ReadOnly = True
+        Me.間接費.Visible = False
+        Me.間接費.Width = 61
         '
         'LblInput
         '
@@ -852,245 +1093,6 @@ Partial Class Quote
         Me.LblQuoteAmount.TabIndex = 202
         Me.LblQuoteAmount.Text = "見積金額"
         Me.LblQuoteAmount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'No
-        '
-        Me.No.HeaderText = "No"
-        Me.No.Name = "No"
-        Me.No.Width = 43
-        '
-        'メーカー
-        '
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.メーカー.DefaultCellStyle = DataGridViewCellStyle1
-        Me.メーカー.HeaderText = "メーカー"
-        Me.メーカー.Name = "メーカー"
-        Me.メーカー.Width = 250
-        '
-        '品名
-        '
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.品名.DefaultCellStyle = DataGridViewCellStyle2
-        Me.品名.HeaderText = "品名"
-        Me.品名.Name = "品名"
-        Me.品名.Width = 250
-        '
-        '型式
-        '
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.型式.DefaultCellStyle = DataGridViewCellStyle3
-        Me.型式.HeaderText = "型式"
-        Me.型式.Name = "型式"
-        Me.型式.Width = 250
-        '
-        '数量
-        '
-        DataGridViewCellStyle4.Format = "N0"
-        DataGridViewCellStyle4.NullValue = Nothing
-        Me.数量.DefaultCellStyle = DataGridViewCellStyle4
-        Me.数量.HeaderText = "数量"
-        Me.数量.Name = "数量"
-        Me.数量.Width = 150
-        '
-        '単位
-        '
-        Me.単位.HeaderText = "単位"
-        Me.単位.Name = "単位"
-        Me.単位.Width = 150
-        '
-        '仕入先コード
-        '
-        Me.仕入先コード.HeaderText = "仕入先コード"
-        Me.仕入先コード.Name = "仕入先コード"
-        Me.仕入先コード.Width = 150
-        '
-        '仕入先
-        '
-        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.仕入先.DefaultCellStyle = DataGridViewCellStyle5
-        Me.仕入先.HeaderText = "仕入先名"
-        Me.仕入先.Name = "仕入先"
-        Me.仕入先.Width = 150
-        '
-        '仕入単価
-        '
-        DataGridViewCellStyle6.Format = "N0"
-        DataGridViewCellStyle6.NullValue = Nothing
-        Me.仕入単価.DefaultCellStyle = DataGridViewCellStyle6
-        Me.仕入単価.HeaderText = "仕入単価"
-        Me.仕入単価.Name = "仕入単価"
-        Me.仕入単価.Width = 150
-        '
-        '仕入原価
-        '
-        DataGridViewCellStyle7.Format = "N0"
-        DataGridViewCellStyle7.NullValue = Nothing
-        Me.仕入原価.DefaultCellStyle = DataGridViewCellStyle7
-        Me.仕入原価.HeaderText = "仕入原価"
-        Me.仕入原価.Name = "仕入原価"
-        Me.仕入原価.Width = 150
-        '
-        '関税率
-        '
-        Me.関税率.HeaderText = "関税率"
-        Me.関税率.Name = "関税率"
-        Me.関税率.Width = 150
-        '
-        '関税額
-        '
-        DataGridViewCellStyle8.Format = "N0"
-        DataGridViewCellStyle8.NullValue = Nothing
-        Me.関税額.DefaultCellStyle = DataGridViewCellStyle8
-        Me.関税額.HeaderText = "関税額"
-        Me.関税額.Name = "関税額"
-        Me.関税額.Width = 150
-        '
-        '前払法人税率
-        '
-        DataGridViewCellStyle9.NullValue = Nothing
-        Me.前払法人税率.DefaultCellStyle = DataGridViewCellStyle9
-        Me.前払法人税率.HeaderText = "前払法人税率"
-        Me.前払法人税率.Name = "前払法人税率"
-        Me.前払法人税率.Width = 150
-        '
-        '前払法人税額
-        '
-        DataGridViewCellStyle10.Format = "N0"
-        DataGridViewCellStyle10.NullValue = Nothing
-        Me.前払法人税額.DefaultCellStyle = DataGridViewCellStyle10
-        Me.前払法人税額.HeaderText = "前払法人税額"
-        Me.前払法人税額.Name = "前払法人税額"
-        Me.前払法人税額.Width = 150
-        '
-        '輸送費率
-        '
-        Me.輸送費率.HeaderText = "輸送費率"
-        Me.輸送費率.Name = "輸送費率"
-        Me.輸送費率.Width = 150
-        '
-        '輸送費額
-        '
-        DataGridViewCellStyle11.Format = "N0"
-        DataGridViewCellStyle11.NullValue = Nothing
-        Me.輸送費額.DefaultCellStyle = DataGridViewCellStyle11
-        Me.輸送費額.HeaderText = "輸送費額"
-        Me.輸送費額.Name = "輸送費額"
-        Me.輸送費額.Width = 150
-        '
-        '仕入金額
-        '
-        DataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle12.Format = "N0"
-        DataGridViewCellStyle12.NullValue = Nothing
-        Me.仕入金額.DefaultCellStyle = DataGridViewCellStyle12
-        Me.仕入金額.HeaderText = "仕入金額"
-        Me.仕入金額.Name = "仕入金額"
-        Me.仕入金額.ReadOnly = True
-        Me.仕入金額.Width = 150
-        '
-        '売単価
-        '
-        DataGridViewCellStyle13.Format = "N0"
-        DataGridViewCellStyle13.NullValue = Nothing
-        Me.売単価.DefaultCellStyle = DataGridViewCellStyle13
-        Me.売単価.HeaderText = "売単価"
-        Me.売単価.Name = "売単価"
-        Me.売単価.Width = 150
-        '
-        '売上金額
-        '
-        DataGridViewCellStyle14.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle14.Format = "N0"
-        DataGridViewCellStyle14.NullValue = Nothing
-        Me.売上金額.DefaultCellStyle = DataGridViewCellStyle14
-        Me.売上金額.HeaderText = "売上金額"
-        Me.売上金額.Name = "売上金額"
-        Me.売上金額.ReadOnly = True
-        Me.売上金額.Width = 150
-        '
-        '見積単価
-        '
-        DataGridViewCellStyle15.BackColor = System.Drawing.Color.Gray
-        Me.見積単価.DefaultCellStyle = DataGridViewCellStyle15
-        Me.見積単価.HeaderText = "見積単価"
-        Me.見積単価.Name = "見積単価"
-        Me.見積単価.ReadOnly = True
-        Me.見積単価.Width = 150
-        '
-        '見積金額
-        '
-        DataGridViewCellStyle16.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.見積金額.DefaultCellStyle = DataGridViewCellStyle16
-        Me.見積金額.HeaderText = "見積金額"
-        Me.見積金額.Name = "見積金額"
-        Me.見積金額.ReadOnly = True
-        Me.見積金額.Width = 150
-        '
-        '粗利額
-        '
-        DataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle17.Format = "N0"
-        DataGridViewCellStyle17.NullValue = Nothing
-        Me.粗利額.DefaultCellStyle = DataGridViewCellStyle17
-        Me.粗利額.HeaderText = "粗利額"
-        Me.粗利額.Name = "粗利額"
-        Me.粗利額.ReadOnly = True
-        Me.粗利額.Width = 150
-        '
-        '粗利率
-        '
-        DataGridViewCellStyle18.BackColor = System.Drawing.Color.Gray
-        DataGridViewCellStyle18.Format = "N1"
-        DataGridViewCellStyle18.NullValue = Nothing
-        Me.粗利率.DefaultCellStyle = DataGridViewCellStyle18
-        Me.粗利率.HeaderText = "粗利率(%)"
-        Me.粗利率.Name = "粗利率"
-        Me.粗利率.ReadOnly = True
-        Me.粗利率.Width = 150
-        '
-        'リードタイム
-        '
-        Me.リードタイム.HeaderText = "リードタイム"
-        Me.リードタイム.Name = "リードタイム"
-        Me.リードタイム.Width = 150
-        '
-        '備考
-        '
-        Me.備考.HeaderText = "備考"
-        Me.備考.Name = "備考"
-        Me.備考.Width = 150
-        '
-        'ステータス
-        '
-        Me.ステータス.HeaderText = "ステータス"
-        Me.ステータス.Name = "ステータス"
-        Me.ステータス.Visible = False
-        '
-        '間接費無仕入金額
-        '
-        DataGridViewCellStyle19.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.間接費無仕入金額.DefaultCellStyle = DataGridViewCellStyle19
-        Me.間接費無仕入金額.HeaderText = "仕入原価"
-        Me.間接費無仕入金額.Name = "間接費無仕入金額"
-        Me.間接費無仕入金額.ReadOnly = True
-        Me.間接費無仕入金額.Visible = False
-        Me.間接費無仕入金額.Width = 150
-        '
-        '間接費率
-        '
-        Me.間接費率.HeaderText = "間接費率"
-        Me.間接費率.Name = "間接費率"
-        Me.間接費率.Visible = False
-        Me.間接費率.Width = 85
-        '
-        '間接費
-        '
-        DataGridViewCellStyle20.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.間接費.DefaultCellStyle = DataGridViewCellStyle20
-        Me.間接費.HeaderText = "間接費"
-        Me.間接費.Name = "間接費"
-        Me.間接費.ReadOnly = True
-        Me.間接費.Visible = False
         '
         'Quote
         '

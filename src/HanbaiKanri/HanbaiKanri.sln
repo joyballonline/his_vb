@@ -7,6 +7,8 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "UtilMDL", "UtilMDL\UtilMDL.
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "HanbaiKanri", "HanbaiKanri\HanbaiKanri.vbproj", "{6850D325-F7D9-4072-BE5F-C4A5290D3970}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "HanbaiKanri_1.3.7", "HanbaiKanri_1.3.7\HanbaiKanri_1.3.7.vdproj", "{584DF5AF-8AAD-42AC-A13B-7EA617778938}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,8 @@ Global
 		{6850D325-F7D9-4072-BE5F-C4A5290D3970}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6850D325-F7D9-4072-BE5F-C4A5290D3970}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6850D325-F7D9-4072-BE5F-C4A5290D3970}.Release|Any CPU.Build.0 = Release|Any CPU
+		{584DF5AF-8AAD-42AC-A13B-7EA617778938}.Debug|Any CPU.ActiveCfg = Debug
+		{584DF5AF-8AAD-42AC-A13B-7EA617778938}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

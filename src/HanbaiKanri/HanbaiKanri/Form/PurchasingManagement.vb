@@ -182,16 +182,16 @@ Public Class PurchasingManagement
             Dim ds3 As DataSet = _db.selectDB(Sql3, RS, reccnt)
 
             If frmC01F10_Login.loginValue.Language = "ENG" Then
-                DgvPurchase.Columns.Add("明細", "LineItem")
-                DgvPurchase.Columns.Add("メーカー", "Maker")
-                DgvPurchase.Columns.Add("品名", "Item")
-                DgvPurchase.Columns.Add("型式", "Model")
-                DgvPurchase.Columns.Add("発注数量", "PurchseQuantity")
+                DgvPurchase.Columns.Add("明細", "DetailData")
+                DgvPurchase.Columns.Add("メーカー", "Manufacturer")
+                DgvPurchase.Columns.Add("品名", "ItemName")
+                DgvPurchase.Columns.Add("型式", "Spec")
+                DgvPurchase.Columns.Add("発注数量", "OrderQuantity")
                 DgvPurchase.Columns.Add("単位", "Unit")
                 DgvPurchase.Columns.Add("仕入数量", "PurchasedQuantity")
-                DgvPurchase.Columns.Add("仕入単価", "PurchasePrice")
+                DgvPurchase.Columns.Add("仕入単価", "PurchaseUnitPrice")
                 DgvPurchase.Columns.Add("仕入金額", "PurchaseAmount")
-                DgvPurchase.Columns.Add("発注残数", "PurchaseRemaining")
+                DgvPurchase.Columns.Add("発注残数", "NumberOfOrderRemaining")
             Else
                 DgvPurchase.Columns.Add("明細", "明細")
                 DgvPurchase.Columns.Add("メーカー", "メーカー")
@@ -229,16 +229,17 @@ Public Class PurchasingManagement
                 DgvHistory.Columns.Add("No", "No")
                 DgvHistory.Columns.Add("仕入番号", "PurchaseNumber")
                 DgvHistory.Columns.Add("行番号", "LineNumber")
-                DgvHistory.Columns.Add("仕入区分", "PurchaseClassification")
-                DgvHistory.Columns.Add("メーカー", "Maker")
-                DgvHistory.Columns.Add("品名", "Item")
-                DgvHistory.Columns.Add("型式", "Model")
+                DgvHistory.Columns.Add("仕入区分", "PurchasingClassification")
+                DgvHistory.Columns.Add("メーカー", "Manufacturer")
+                DgvHistory.Columns.Add("品名", "ItemName")
+                DgvHistory.Columns.Add("型式", "Spec")
                 DgvHistory.Columns.Add("単位", "Unit")
                 DgvHistory.Columns.Add("仕入先", "SupplierName")
-                DgvHistory.Columns.Add("仕入値", "PurchasePrice")
+                DgvHistory.Columns.Add("仕入値", "PurchaseAmount")
                 DgvHistory.Columns.Add("仕入数量", "PurchasedQuantity")
-                DgvHistory.Columns.Add("仕入日", "PurchasedDate")
+                DgvHistory.Columns.Add("仕入日", "PurchaseDate")
                 DgvHistory.Columns.Add("備考", "Remarks")
+
             Else
                 DgvHistory.Columns.Add("No", "No")
                 DgvHistory.Columns.Add("仕入番号", "仕入番号")
@@ -278,15 +279,16 @@ Public Class PurchasingManagement
             If frmC01F10_Login.loginValue.Language = "ENG" Then
                 DgvAdd.Columns.Add("No", "No")
                 DgvAdd.Columns.Add("行番号", "LineNumber")
-                DgvAdd.Columns.Add("仕入区分", "PurchaseClassification")
-                DgvAdd.Columns.Add("メーカー", "Maker")
-                DgvAdd.Columns.Add("品名", "Item")
-                DgvAdd.Columns.Add("型式", "Model")
+                DgvAdd.Columns.Add("仕入区分", "PurchasingClassification")
+                DgvAdd.Columns.Add("メーカー", "Manufacturer")
+                DgvAdd.Columns.Add("品名", "ItemName")
+                DgvAdd.Columns.Add("型式", "Spec")
                 DgvAdd.Columns.Add("単位", "Unit")
                 DgvAdd.Columns.Add("仕入先", "SupplierName")
-                DgvAdd.Columns.Add("仕入値", "PurchasePrice")
+                DgvAdd.Columns.Add("仕入値", "PurchaseAmount")
                 DgvAdd.Columns.Add("仕入数量", "PurchasedQuantity")
                 DgvAdd.Columns.Add("備考", "Remarks")
+
             Else
                 DgvAdd.Columns.Add("No", "No")
                 DgvAdd.Columns.Add("行番号", "行番号")
@@ -386,9 +388,9 @@ Public Class PurchasingManagement
             LblPurchaseDate.Text = "PurchaseDate"
             LblSupplier.Text = "SupplierName"
             LblPurchase.Text = "Purchase"
-            LblHistory.Text = "SalesHistory"
-            LblAdd.Text = "ThisTimePurchase"
-            LblPurchasedDate.Text = "PurchasedDate"
+            LblHistory.Text = "PurchaseHistory"
+            LblAdd.Text = "PurchaseThisTime"
+            LblPurchasedDate.Text = "PurchaseDate"
             LblRemarks.Text = "Remarks"
             LblNo1.Text = "Record"
             LblNo1.Location = New Point(1272, 82)

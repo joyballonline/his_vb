@@ -92,15 +92,16 @@ Public Class DepositDetailList
                 Dim reccnt As Integer = 0
                 ds = _db.selectDB(Sql, RS, reccnt)
                 If frmC01F10_Login.loginValue.Language = "ENG" Then
-                    DgvBilling.Columns.Add("入金番号", "DepositNumber")
-                    DgvBilling.Columns.Add("入金日", "DepositDate")
+                    DgvBilling.Columns.Add("入金番号", "MoneyReceiptNumber")
+                    DgvBilling.Columns.Add("入金日", "MoneyReceiptDate")
                     DgvBilling.Columns.Add("請求先名", "BillingAddress")
                     DgvBilling.Columns.Add("振込先", "PaymentDestination")
                     DgvBilling.Columns.Add("請求金額", "BillingAmount")
-                    DgvBilling.Columns.Add("入金額", "DepositAmount")
-                    DgvBilling.Columns.Add("入金額計", "TotalDepositAmount")
+                    DgvBilling.Columns.Add("入金額", "MoneyReceiptAmount")
+                    DgvBilling.Columns.Add("入金額計", "TotalMoneyReceiptAmount")
                     DgvBilling.Columns.Add("請求残高", "BillingBalance")
                     DgvBilling.Columns.Add("備考", "Remarks")
+
                 Else
                     DgvBilling.Columns.Add("入金番号", "入金番号")
                     DgvBilling.Columns.Add("入金日", "入金日")
@@ -155,13 +156,13 @@ Public Class DepositDetailList
                 ds = _db.selectDB(Sql, RS, reccnt)
 
                 If frmC01F10_Login.loginValue.Language = "ENG" Then
-                    DgvBilling.Columns.Add("入金番号", "DepositNumber")
-                    DgvBilling.Columns.Add("入金日", "DepositDate")
+                    DgvBilling.Columns.Add("入金番号", "MoneyReceiptNumber")
+                    DgvBilling.Columns.Add("入金日", "MoneyReceiptDate")
                     DgvBilling.Columns.Add("請求先名", "BillingAddress")
                     DgvBilling.Columns.Add("振込先", "PaymentDestination")
                     DgvBilling.Columns.Add("請求金額", "BillingAmount")
-                    DgvBilling.Columns.Add("入金額", "DepositAmount")
-                    DgvBilling.Columns.Add("入金額計", "TotalDepositAmount")
+                    DgvBilling.Columns.Add("入金額", "MoneyReceiptAmount")
+                    DgvBilling.Columns.Add("入金額計", "TotalMoneyReceiptAmount")
                     DgvBilling.Columns.Add("請求残高", "BillingBalance")
                     DgvBilling.Columns.Add("備考", "Remarks")
                 Else
@@ -230,18 +231,18 @@ Public Class DepositDetailList
             LblConditions.Text = "ExtractionCondition"
             Label1.Text = "CustomerName"
             Label4.Text = "CustomerCode"
-            Label8.Text = "DepositDate"
-            Label7.Text = "DepositNumber"
+            Label8.Text = "MoneyReceiptDate"
+            Label7.Text = "MoneyReceiptNumber"
             Label10.Text = "DisplayFormat"
-            RbtnSlip.Text = "UnitOfSlip"
+            RbtnSlip.Text = "UnitOfVoucher"
 
-            RbtnDetails.Text = "LineItemUnit"
+            RbtnDetails.Text = "UnitOfDetailData"
             RbtnDetails.Location = New Point(166, 196)
             ChkCancelData.Text = "IncludeCancelData"
 
             BtnDepositSearch.Text = "Search"
-            BtnDepositCancel.Text = "CancelOfDeposit"
-            BtnDepositView.Text = "DepositView"
+            BtnDepositCancel.Text = "CancelMfMoneyReceipt"
+            BtnDepositView.Text = "MoneyReceiptView"
             BtnBack.Text = "Back"
         End If
     End Sub
@@ -291,15 +292,16 @@ Public Class DepositDetailList
             ds = _db.selectDB(Sql, RS, reccnt)
 
             If frmC01F10_Login.loginValue.Language = "ENG" Then
-                DgvBilling.Columns.Add("入金番号", "DepositNumber")
-                DgvBilling.Columns.Add("入金日", "DepositDate")
+                DgvBilling.Columns.Add("入金番号", "MoneyReceiptNumber")
+                DgvBilling.Columns.Add("入金日", "MoneyReceiptDate")
                 DgvBilling.Columns.Add("請求先名", "BillingAddress")
                 DgvBilling.Columns.Add("振込先", "PaymentDestination")
                 DgvBilling.Columns.Add("請求金額", "BillingAmount")
-                DgvBilling.Columns.Add("入金額", "DepositAmount")
-                DgvBilling.Columns.Add("入金額計", "TotalDepositAmount")
+                DgvBilling.Columns.Add("入金額", "MoneyReceiptAmount")
+                DgvBilling.Columns.Add("入金額計", "TotalMoneyReceiptAmount")
                 DgvBilling.Columns.Add("請求残高", "BillingBalance")
                 DgvBilling.Columns.Add("備考", "Remarks")
+
             Else
                 DgvBilling.Columns.Add("入金番号", "入金番号")
                 DgvBilling.Columns.Add("入金日", "入金日")
@@ -366,11 +368,11 @@ Public Class DepositDetailList
             ds = _db.selectDB(Sql, RS, reccnt)
 
             If frmC01F10_Login.loginValue.Language = "ENG" Then
-                DgvBilling.Columns.Add("入金番号", "DepositNumber")
+                DgvBilling.Columns.Add("入金番号", "MoneyReceiptNumber")
                 DgvBilling.Columns.Add("請求番号", "BillingNumber")
-                DgvBilling.Columns.Add("請求先名", "CustomerName")
-                DgvBilling.Columns.Add("入金額", "DepositAmount")
-                DgvBilling.Columns.Add("入金日", "DepositDate")
+                DgvBilling.Columns.Add("請求先名", "BillingAddress")
+                DgvBilling.Columns.Add("入金額", "MoneyReceiptAmount")
+                DgvBilling.Columns.Add("入金日", "MoneyReceiptDate")
                 DgvBilling.Columns.Add("備考", "Remarks")
             Else
                 DgvBilling.Columns.Add("入金番号", "入金番号")
@@ -584,13 +586,13 @@ Public Class DepositDetailList
             'ReDim OrderingNo(tmp)
 
             If frmC01F10_Login.loginValue.Language = "ENG" Then
-                DgvBilling.Columns.Add("入金番号", "DepositNumber")
-                DgvBilling.Columns.Add("入金日", "DepositDate")
+                DgvBilling.Columns.Add("入金番号", "MoneyReceiptNumber")
+                DgvBilling.Columns.Add("入金日", "MoneyReceiptDate")
                 DgvBilling.Columns.Add("請求先名", "BillingAddress")
                 DgvBilling.Columns.Add("振込先", "PaymentDestination")
                 DgvBilling.Columns.Add("請求金額", "BillingAmount")
-                DgvBilling.Columns.Add("入金額", "DepositAmount")
-                DgvBilling.Columns.Add("入金額計", "TotalDepositAmount")
+                DgvBilling.Columns.Add("入金額", "MoneyReceiptAmount")
+                DgvBilling.Columns.Add("入金額計", "TotalMoneyReceiptAmount")
                 DgvBilling.Columns.Add("請求残高", "BillingBalance")
                 DgvBilling.Columns.Add("備考", "Remarks")
             Else

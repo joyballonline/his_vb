@@ -81,12 +81,20 @@ Public Class Receipt
         If frmC01F10_Login.loginValue.Language = "ENG" Then
             LblPurchaseNo.Text = "PurchaseOrderNumber"
             LblCustomerNo.Text = "CustomerNumber"
-            LblPurchaseDate.Text = "PurchaseOrderDate"
-            LblSupplier.Text = "CustomerName"
+            LblPurchaseDate.Text = "OrderDate"
+            LblSupplier.Text = "SupplierName"
             LblPurchase.Text = "PurchaseOrder"
             LblHistory.Text = "ReceiptHistory"
-            LblAdd.Text = "ThisTimeReceipt"
-            LblReceiptDate.Text = "ReceiptDate"
+            LblAdd.Text = "GoodsReceiptThisTime"
+            LblReceiptDate.Text = "GoodsReceiptDate"
+            LblReceiptDate.Size = New Size(148, 22)
+            DtpReceiptDate.Location = New Point(342, 343)
+
+            LblRemarks.Location = New Point(496, 343)
+            LblRemarks.Size = New Size(150, 22)
+            TxtRemarks.Location = New Point(652, 343)
+            TxtRemarks.Size = New Size(560, 22)
+
             LblRemarks.Text = "Remarks"
             LblCount1.Text = "Record"
             LblCount1.Location = New Point(1272, 82)
@@ -101,7 +109,6 @@ Public Class Receipt
             TxtCount1.Location = New Point(1228, 82)
             TxtCount2.Location = New Point(1228, 212)
             TxtCount3.Location = New Point(1228, 343)
-            TxtRemarks.Size = New Size(600, 22)
 
             BtnRegist.Text = "Registration"
             BtnBack.Text = "Back"
@@ -209,16 +216,16 @@ Public Class Receipt
             Dim ds3 As DataSet = _db.selectDB(Sql3, RS, reccnt)
 
             If frmC01F10_Login.loginValue.Language = "ENG" Then
-                DgvPurchase.Columns.Add("明細", "LineItem")
-                DgvPurchase.Columns.Add("メーカー", "Maker")
-                DgvPurchase.Columns.Add("品名", "Item")
-                DgvPurchase.Columns.Add("型式", "Model")
-                DgvPurchase.Columns.Add("発注数量", "PurchaseOrderQuantity")
+                DgvPurchase.Columns.Add("明細", "DetailData")
+                DgvPurchase.Columns.Add("メーカー", "Manufacturer")
+                DgvPurchase.Columns.Add("品名", "ItemName")
+                DgvPurchase.Columns.Add("型式", "Spec")
+                DgvPurchase.Columns.Add("発注数量", "OrderQuantity")
                 DgvPurchase.Columns.Add("単位", "Unit")
-                DgvPurchase.Columns.Add("仕入数量", "PurchaseQuantity")
-                DgvPurchase.Columns.Add("仕入単価", "PurchasePrice")
+                DgvPurchase.Columns.Add("仕入数量", "PurchasedQuantity")
+                DgvPurchase.Columns.Add("仕入単価", "PurchaseUnitPrice")
                 DgvPurchase.Columns.Add("仕入金額", "PurchaseAmount")
-                DgvPurchase.Columns.Add("発注残数", "PurchaseOrderRemaining")
+                DgvPurchase.Columns.Add("発注残数", "NumberOfOrderRemaining")
             Else
                 DgvPurchase.Columns.Add("明細", "明細")
                 DgvPurchase.Columns.Add("メーカー", "メーカー")
@@ -254,17 +261,18 @@ Public Class Receipt
 
             If frmC01F10_Login.loginValue.Language = "ENG" Then
                 DgvHistory.Columns.Add("No", "No")
-                DgvHistory.Columns.Add("入庫番号", "ReceiptNumber")
+                DgvHistory.Columns.Add("入庫番号", "GoodsReceiptNumber")
                 DgvHistory.Columns.Add("行番号", "LineNumber")
-                DgvHistory.Columns.Add("仕入区分", "PurchaseClassification")
-                DgvHistory.Columns.Add("メーカー", "Maker")
-                DgvHistory.Columns.Add("品名", "Item")
-                DgvHistory.Columns.Add("型式", "Model")
+                DgvHistory.Columns.Add("仕入区分", "PurchasingClassification")
+                DgvHistory.Columns.Add("メーカー", "Manufacturer")
+                DgvHistory.Columns.Add("品名", "ItemName")
+                DgvHistory.Columns.Add("型式", "Spec")
                 DgvHistory.Columns.Add("単位", "Unit")
                 DgvHistory.Columns.Add("仕入先", "SupplierName")
-                DgvHistory.Columns.Add("仕入値", "PurchasePrice")
-                DgvHistory.Columns.Add("入庫数量", "ReceiptQuantity")
+                DgvHistory.Columns.Add("仕入値", "PurchaseAmount")
+                DgvHistory.Columns.Add("入庫数量", "GoodsReceiptQuantity")
                 DgvHistory.Columns.Add("備考", "Remarks")
+
             Else
                 DgvHistory.Columns.Add("No", "No")
                 DgvHistory.Columns.Add("入庫番号", "入庫番号")
@@ -303,15 +311,16 @@ Public Class Receipt
             If frmC01F10_Login.loginValue.Language = "ENG" Then
                 DgvAdd.Columns.Add("No", "No")
                 DgvAdd.Columns.Add("行番号", "LineNumber")
-                DgvAdd.Columns.Add("仕入区分", "PurchaseClassification")
-                DgvAdd.Columns.Add("メーカー", "Maker")
-                DgvAdd.Columns.Add("品名", "Item")
-                DgvAdd.Columns.Add("型式", "Model")
+                DgvAdd.Columns.Add("仕入区分", "PurchasingClassification")
+                DgvAdd.Columns.Add("メーカー", "Manufacturer")
+                DgvAdd.Columns.Add("品名", "ItemName")
+                DgvAdd.Columns.Add("型式", "Spec")
                 DgvAdd.Columns.Add("単位", "Unit")
                 DgvAdd.Columns.Add("仕入先", "SupplierName")
-                DgvAdd.Columns.Add("仕入値", "PurchasePrice")
-                DgvAdd.Columns.Add("入庫数量", "ReceiptQuantity")
+                DgvAdd.Columns.Add("仕入値", "PurchaseAmount")
+                DgvAdd.Columns.Add("入庫数量", "GoodsReceiptQuantity")
                 DgvAdd.Columns.Add("備考", "Remarks")
+
             Else
                 DgvAdd.Columns.Add("No", "No")
                 DgvAdd.Columns.Add("行番号", "行番号")

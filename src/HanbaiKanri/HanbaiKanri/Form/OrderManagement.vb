@@ -84,9 +84,9 @@ Public Class OrderManagement
             LblCutomerNo.Text = "CustomerNumber"
             LblOrderDate.Text = "OrderDate"
             LblCustomer.Text = "CustomerName"
-            LblOrder.Text = "Order"
-            LblHistory.Text = "SalesHistory"
-            LblAdd.Text = "ThisTimeSales"
+            LblOrder.Text = "JobOrder"
+            LblHistory.Text = "SalesHistoryData"
+            LblAdd.Text = "SalesThisTime"
             LblSalesDate.Text = "SalesDate"
             LblRemarks.Text = "Remarks"
             LblNo1.Text = "Record"
@@ -234,16 +234,16 @@ Public Class OrderManagement
             Dim ds3 As DataSet = _db.selectDB(Sql3, RS, reccnt)
             Dim ds4 As DataSet = _db.selectDB(Sql4, RS, reccnt)
             If frmC01F10_Login.loginValue.Language = "ENG" Then
-                DgvOrder.Columns.Add("明細", "LineItem")
-                DgvOrder.Columns.Add("メーカー", "Maker")
-                DgvOrder.Columns.Add("品名", "Item")
-                DgvOrder.Columns.Add("型式", "Model")
-                DgvOrder.Columns.Add("受注数量", "OrderQuantity")
+                DgvOrder.Columns.Add("明細", "DetailData")
+                DgvOrder.Columns.Add("メーカー", "Manufacturer")
+                DgvOrder.Columns.Add("品名", "ItemName")
+                DgvOrder.Columns.Add("型式", "Spec")
+                DgvOrder.Columns.Add("受注数量", "JobOrderQuantity")
                 DgvOrder.Columns.Add("単位", "Unit")
                 DgvOrder.Columns.Add("売上数量", "SalesQUantity")
                 DgvOrder.Columns.Add("売単価", "SellingPrice")
                 DgvOrder.Columns.Add("売上金額", "SalesAmount")
-                DgvOrder.Columns.Add("受注残数", "OrderRemaining")
+                DgvOrder.Columns.Add("受注残数", "OrderRemainingAmount")
             Else
                 DgvOrder.Columns.Add("明細", "明細")
                 DgvOrder.Columns.Add("メーカー", "メーカー")
@@ -281,10 +281,10 @@ Public Class OrderManagement
                 DgvHistory.Columns.Add("No", "No")
                 DgvHistory.Columns.Add("売上番号", "SalesNumber")
                 DgvHistory.Columns.Add("行番号", "LineNumber")
-                DgvHistory.Columns.Add("仕入区分", "PurchaseClassification")
-                DgvHistory.Columns.Add("メーカー", "Maker")
-                DgvHistory.Columns.Add("品名", "Item")
-                DgvHistory.Columns.Add("型式", "Model")
+                DgvHistory.Columns.Add("仕入区分", "PurchasingClassification")
+                DgvHistory.Columns.Add("メーカー", "Manufacturer")
+                DgvHistory.Columns.Add("品名", "ItemName")
+                DgvHistory.Columns.Add("型式", "Spec")
                 DgvHistory.Columns.Add("単位", "Unit")
                 DgvHistory.Columns.Add("仕入先", "SupplierName")
                 DgvHistory.Columns.Add("売単価", "SellingPrice")
@@ -327,10 +327,10 @@ Public Class OrderManagement
             If frmC01F10_Login.loginValue.Language = "ENG" Then
                 DgvAdd.Columns.Add("No", "No")
                 DgvAdd.Columns.Add("行番号", "LineNumber")
-                DgvAdd.Columns.Add("仕入区分", "PurchaseClassification")
-                DgvAdd.Columns.Add("メーカー", "Maker")
-                DgvAdd.Columns.Add("品名", "Item")
-                DgvAdd.Columns.Add("型式", "Model")
+                DgvAdd.Columns.Add("仕入区分", "PurchasingClassification")
+                DgvAdd.Columns.Add("メーカー", "Manufacturer")
+                DgvAdd.Columns.Add("品名", "ItemName")
+                DgvAdd.Columns.Add("型式", "Spec")
                 DgvAdd.Columns.Add("単位", "Unit")
                 DgvAdd.Columns.Add("仕入先", "SupplierName")
                 DgvAdd.Columns.Add("売単価", "Sellingprice")

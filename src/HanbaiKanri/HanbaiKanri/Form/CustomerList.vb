@@ -73,7 +73,7 @@ Public Class CustomerList
             btnBack.Text = "Back"
 
             DgvCustomer.Columns("得意先名").HeaderText = "CustomerName"
-            DgvCustomer.Columns("受注金額計").HeaderText = "TotalOrderAmount"
+            DgvCustomer.Columns("受注金額計").HeaderText = "TotalJobOrderAmount"
             DgvCustomer.Columns("請求金額計").HeaderText = "TotalBillingAmount"
             DgvCustomer.Columns("請求残高").HeaderText = "BillingBalance"
         End If

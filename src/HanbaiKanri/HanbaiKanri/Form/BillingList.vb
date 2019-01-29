@@ -92,20 +92,20 @@ Public Class BillingList
                 Dim reccnt As Integer = 0
                 ds = _db.selectDB(Sql, RS, reccnt)
                 If frmC01F10_Login.loginValue.Language = "ENG" Then
-                    DgvBilling.Columns.Add("請求番号", "BillingNumber")
+                    DgvBilling.Columns.Add("請求番号", "InvoiceNumber")
                     DgvBilling.Columns.Add("請求区分", "BillingClassification")
                     DgvBilling.Columns.Add("請求日", "BillingDate")
                     DgvBilling.Columns.Add("客先番号", "CustomerNumber")
-                    DgvBilling.Columns.Add("受注番号", "OrderNumber")
-                    DgvBilling.Columns.Add("受注番号枝番", "BranchNumber")
+                    DgvBilling.Columns.Add("受注番号", "JobOrderNumber")
+                    DgvBilling.Columns.Add("受注番号枝番", "JobOrderSubNumber")
                     DgvBilling.Columns.Add("得意先コード", "CustomerCode")
                     DgvBilling.Columns.Add("得意先名", "CustomerName")
                     DgvBilling.Columns.Add("請求金額計", "TotalBillingAmount")
                     DgvBilling.Columns.Add("売掛残高", "AccountsReceivableBalance")
                     DgvBilling.Columns.Add("備考1", "Remarks1")
-                    DgvBilling.Columns.Add("備考2", "remarks2")
+                    DgvBilling.Columns.Add("備考2", "Remarks2")
                     DgvBilling.Columns.Add("登録日", "RegistrationDate")
-                    DgvBilling.Columns.Add("更新者", "Changer")
+                    DgvBilling.Columns.Add("更新者", "ModifiedBy")
                 Else
                     DgvBilling.Columns.Add("請求番号", "請求番号")
                     DgvBilling.Columns.Add("請求区分", "請求区分")
@@ -171,20 +171,21 @@ Public Class BillingList
                 Dim reccnt As Integer = 0
                 ds = _db.selectDB(Sql, RS, reccnt)
                 If frmC01F10_Login.loginValue.Language = "ENG" Then
-                    DgvBilling.Columns.Add("請求番号", "BillingNumber")
+                    DgvBilling.Columns.Add("請求番号", "InvoiceNumber")
                     DgvBilling.Columns.Add("請求区分", "BillingClassification")
                     DgvBilling.Columns.Add("請求日", "BillingDate")
                     DgvBilling.Columns.Add("客先番号", "CustomerNumber")
-                    DgvBilling.Columns.Add("受注番号", "OrderNumber")
-                    DgvBilling.Columns.Add("受注番号枝番", "BranchNumber")
+                    DgvBilling.Columns.Add("受注番号", "JobOrderNumber")
+                    DgvBilling.Columns.Add("受注番号枝番", "JobOrderSubNumber")
                     DgvBilling.Columns.Add("得意先コード", "CustomerCode")
                     DgvBilling.Columns.Add("得意先名", "CustomerName")
                     DgvBilling.Columns.Add("請求金額計", "TotalBillingAmount")
                     DgvBilling.Columns.Add("売掛残高", "AccountsReceivableBalance")
                     DgvBilling.Columns.Add("備考1", "Remarks1")
-                    DgvBilling.Columns.Add("備考2", "remarks2")
+                    DgvBilling.Columns.Add("備考2", "Remarks2")
                     DgvBilling.Columns.Add("登録日", "RegistrationDate")
-                    DgvBilling.Columns.Add("更新者", "Changer")
+                    DgvBilling.Columns.Add("更新者", "ModifiedBy")
+
                 Else
                     DgvBilling.Columns.Add("請求番号", "請求番号")
                     DgvBilling.Columns.Add("請求区分", "請求区分")
@@ -265,15 +266,15 @@ Public Class BillingList
             Label1.Text = "CustomerName"
             Label4.Text = "CustomerCode"
             Label8.Text = "BillingDate"
-            Label7.Text = "BillingNumber"
+            Label7.Text = "InvoiceNumber"
             Label11.Text = "CustomerNumber"
             Label10.Text = "DisplayFormat"
 
             ChkCancelData.Text = "IncludeCancelData"
 
             BtnBillingSearch.Text = "Search"
-            BtnBillingCancel.Text = "CancelOfBilling"
-            BtnBillingView.Text = "BillingView"
+            BtnBillingCancel.Text = "CancelOfInvoice"
+            BtnBillingView.Text = "BillingDataView"
             BtnBack.Text = "Back"
         End If
     End Sub
@@ -654,20 +655,20 @@ Public Class BillingList
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
 
             If frmC01F10_Login.loginValue.Language = "ENG" Then
-                DgvBilling.Columns.Add("請求番号", "BillingNumber")
+                DgvBilling.Columns.Add("請求番号", "InvoiceNumber")
                 DgvBilling.Columns.Add("請求区分", "BillingClassification")
                 DgvBilling.Columns.Add("請求日", "BillingDate")
                 DgvBilling.Columns.Add("客先番号", "CustomerNumber")
-                DgvBilling.Columns.Add("受注番号", "OrderNumber")
-                DgvBilling.Columns.Add("受注番号枝番", "BranchNumber")
+                DgvBilling.Columns.Add("受注番号", "JobOrderNumber")
+                DgvBilling.Columns.Add("受注番号枝番", "JobOrderSubNumber")
                 DgvBilling.Columns.Add("得意先コード", "CustomerCode")
                 DgvBilling.Columns.Add("得意先名", "CustomerName")
                 DgvBilling.Columns.Add("請求金額計", "TotalBillingAmount")
                 DgvBilling.Columns.Add("売掛残高", "AccountsReceivableBalance")
                 DgvBilling.Columns.Add("備考1", "Remarks1")
-                DgvBilling.Columns.Add("備考2", "remarks2")
+                DgvBilling.Columns.Add("備考2", "Remarks2")
                 DgvBilling.Columns.Add("登録日", "RegistrationDate")
-                DgvBilling.Columns.Add("更新者", "Changer")
+                DgvBilling.Columns.Add("更新者", "ModifiedBy")
             Else
                 DgvBilling.Columns.Add("請求番号", "請求番号")
                 DgvBilling.Columns.Add("請求区分", "請求区分")

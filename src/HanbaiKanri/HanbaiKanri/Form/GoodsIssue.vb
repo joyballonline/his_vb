@@ -81,14 +81,14 @@ Public Class GoodsIssue
 
     Private Sub PurchaseManagement_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If frmC01F10_Login.loginValue.Language = "ENG" Then
-            LblOrderNo.Text = "OrderNumber"
+            LblOrderNo.Text = "JobOrderNumber"
             LblCustomerNo.Text = "CustomerNumber"
-            LblOrderDate.Text = "OrderDate"
+            LblOrderDate.Text = "JobOrderDate"
             LblCustomer.Text = "CustomerName"
-            LblOrder.Text = "Order"
-            LblHistory.Text = "SalesHistory"
-            LblAdd.Text = "ThisTimeSales"
-            LblGoodsIssueDate.Text = "SalesDate"
+            LblOrder.Text = "JobOrder"
+            LblHistory.Text = "GoodsDeliveryHistory"
+            LblAdd.Text = "ShipmentThisTime"
+            LblGoodsIssueDate.Text = "GoodsDeliveryDate"
             LblRemarks.Text = "Remarks"
             LblCount1.Text = "Record"
             LblCount1.Location = New Point(1272, 82)
@@ -105,6 +105,7 @@ Public Class GoodsIssue
             TxtCount3.Location = New Point(1228, 343)
             TxtRemarks.Size = New Size(600, 22)
 
+            BtnDeliveryNote.Text = "Invoice/Receipt Issue"
             BtnRegist.Text = "Registration"
             BtnBack.Text = "Back"
         End If
@@ -139,7 +140,7 @@ Public Class GoodsIssue
             BtnDeliveryNote.Location = New Point(1002, 509)
         Else
             If frmC01F10_Login.loginValue.Language = "ENG" Then
-                LblMode.Text = "GoodsIssueInputMode"
+                LblMode.Text = "GoodsDelivelyInputMode"
             Else
                 LblMode.Text = "出庫入力モード"
             End If
@@ -211,16 +212,16 @@ Public Class GoodsIssue
             Dim ds2 As DataSet = _db.selectDB(Sql2, RS, reccnt)
             Dim ds3 As DataSet = _db.selectDB(Sql3, RS, reccnt)
             If frmC01F10_Login.loginValue.Language = "ENG" Then
-                DgvOrder.Columns.Add("明細", "LineItem")
-                DgvOrder.Columns.Add("メーカー", "Maker")
-                DgvOrder.Columns.Add("品名", "Item")
-                DgvOrder.Columns.Add("型式", "Model")
-                DgvOrder.Columns.Add("受注数量", "OrderQuantity")
+                DgvOrder.Columns.Add("明細", "DetailData")
+                DgvOrder.Columns.Add("メーカー", "Manufacturer")
+                DgvOrder.Columns.Add("品名", "ItemName")
+                DgvOrder.Columns.Add("型式", "Spec")
+                DgvOrder.Columns.Add("受注数量", "JobOrderQuantity")
                 DgvOrder.Columns.Add("単位", "Unit")
-                DgvOrder.Columns.Add("売上数量", "SalesQUantity")
+                DgvOrder.Columns.Add("売上数量", "SalesQuantity")
                 DgvOrder.Columns.Add("売単価", "SellingPrice")
                 DgvOrder.Columns.Add("売上金額", "SalesAmount")
-                DgvOrder.Columns.Add("受注残数", "OrderRemaining")
+                DgvOrder.Columns.Add("受注残数", "OrderRemainingAmount")
             Else
                 DgvOrder.Columns.Add("明細", "明細")
                 DgvOrder.Columns.Add("メーカー", "メーカー")
@@ -255,16 +256,16 @@ Public Class GoodsIssue
 
             If frmC01F10_Login.loginValue.Language = "ENG" Then
                 DgvHistory.Columns.Add("No", "No")
-                DgvHistory.Columns.Add("出庫番号", "GoodsIssueNumber")
+                DgvHistory.Columns.Add("出庫番号", "GoodsDeliveryNumber")
                 DgvHistory.Columns.Add("行番号", "LineNumber")
-                DgvHistory.Columns.Add("仕入区分", "PurchaseClassification")
-                DgvHistory.Columns.Add("メーカー", "Maker")
-                DgvHistory.Columns.Add("品名", "Item")
-                DgvHistory.Columns.Add("型式", "Model")
+                DgvHistory.Columns.Add("仕入区分", "PurchasingClassification")
+                DgvHistory.Columns.Add("メーカー", "Manufacturer")
+                DgvHistory.Columns.Add("品名", "ItemName")
+                DgvHistory.Columns.Add("型式", "Spec")
                 DgvHistory.Columns.Add("単位", "Unit")
                 DgvHistory.Columns.Add("仕入先", "SupplierName")
                 DgvHistory.Columns.Add("売単価", "SellingPrice")
-                DgvHistory.Columns.Add("出庫数量", "GoodsIssueQuantity")
+                DgvHistory.Columns.Add("出庫数量", "GoodsDeliveryQuantity")
                 DgvHistory.Columns.Add("備考", "Remarks")
             Else
                 DgvHistory.Columns.Add("No", "No")
@@ -302,14 +303,14 @@ Public Class GoodsIssue
             If frmC01F10_Login.loginValue.Language = "ENG" Then
                 DgvAdd.Columns.Add("No", "No")
                 DgvAdd.Columns.Add("行番号", "LineNumber")
-                DgvAdd.Columns.Add("仕入区分", "PurchaseClassification")
-                DgvAdd.Columns.Add("メーカー", "Maker")
-                DgvAdd.Columns.Add("品名", "Item")
-                DgvAdd.Columns.Add("型式", "Model")
+                DgvAdd.Columns.Add("仕入区分", "PurchasingClassification")
+                DgvAdd.Columns.Add("メーカー", "Manufacturer")
+                DgvAdd.Columns.Add("品名", "ItemName")
+                DgvAdd.Columns.Add("型式", "Spec")
                 DgvAdd.Columns.Add("単位", "Unit")
                 DgvAdd.Columns.Add("仕入先", "SupplierName")
-                DgvAdd.Columns.Add("売単価", "Sellingprice")
-                DgvAdd.Columns.Add("出庫数量", "GoodsIssueQuantity")
+                DgvAdd.Columns.Add("売単価", "SellingPrice")
+                DgvAdd.Columns.Add("出庫数量", "GoodsDeliveryQuantity")
                 DgvAdd.Columns.Add("備考", "Remarks")
             Else
                 DgvAdd.Columns.Add("No", "No")

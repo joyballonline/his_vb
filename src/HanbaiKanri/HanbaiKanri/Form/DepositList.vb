@@ -159,13 +159,14 @@ Public Class DepositList
             Sql3 = ""
         Next
         If frmC01F10_Login.loginValue.Language = "ENG" Then
+            LblConditions.Text = "TermsOfSelection"
             Label1.Text = "CustomerName"
             Label2.Text = "Address"
-            Label3.Text = "TEL"
+            Label3.Text = "PhoneNumber"
             Label4.Text = "CustomerCode"
-            LblMode.Text = "DepositInputMode"
+            LblMode.Text = "MoneyReceiptInputMode"
             BtnSerach.Text = "Search"
-            BtnDeposit.Text = "DepositRegistration"
+            BtnDeposit.Text = "MoneyReceiptInput"
             btnBack.Text = "Back"
             DgvCustomer.Columns("得意先名").HeaderText = "CustomerName"
             DgvCustomer.Columns("請求金額残").HeaderText = "BillingBalance"
