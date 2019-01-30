@@ -18,14 +18,14 @@ Namespace xls
     '===============================================================================
     '  履歴  名前          日  付      マーク      内容
     '-------------------------------------------------------------------------------
-    '  (1)   Jun.Takagi    2006/05/17              新規
-    '  (2)   Jun.Takagi    2006/07/03              改ページメソッドを追加
-    '  (3)   Jun.Takagi    2007/08/10              未実装だった以下メソッドを追加
+    '  (1)   Laevigata, Inc.    2006/05/17              新規
+    '  (2)   Laevigata, Inc.    2006/07/03              改ページメソッドを追加
+    '  (3)   Laevigata, Inc.    2007/08/10              未実装だった以下メソッドを追加
     '                                                   setColor
     '                                                   setFont
     '                                                   setNumberFormat
     '                                                   setUpPageDefine
-    '  (4)   Jun.Takagi    2010/03/05              endUseを呼び出してもプロセスが残る場合がある不具合を修正
+    '  (4)   Laevigata, Inc.    2010/03/05              endUseを呼び出してもプロセスが残る場合がある不具合を修正
     '  (5)   Karino        2010/03/08              setShapeTextBox,paintShape,printOutを追加
     '  (6)   Sugano        2010/03/16              printPreviewを追加
     '-------------------------------------------------------------------------------
@@ -232,7 +232,7 @@ Namespace xls
                 Me.releaseCom(_sheet)
                 Me.releaseCom(_sheets)
                 Me.releaseCom(_book)
-                Me.releaseCom(_books) '2010.03.04 add by takagi
+                Me.releaseCom(_books) '2010.03.04 add by Laevigata, Inc.
                 Me.releaseCom(_app)
 
                 'ガーベジコレクト強制実行
@@ -245,7 +245,7 @@ Namespace xls
         '内部メソッド：COMObjectの開放
         Private Sub releaseCom(ByRef prmCom As Object)
             Try
-                If Not prmCom Is Nothing AndAlso System.Runtime.InteropServices. _
+                If Not prmCom Is Nothing AndAlso System.Runtime.InteropServices.
                                                           Marshal.IsComObject(prmCom) Then
                     Dim i As Integer = 1
                     Do While i > 0
@@ -440,7 +440,7 @@ Namespace xls
         ''' <param name="prmRow2">終了行</param>
         ''' <param name="prmCol2">終了列</param>
         ''' <remarks></remarks>
-        Public Sub selectRange(ByVal prmRow As Short, ByVal prmCol As Short, _
+        Public Sub selectRange(ByVal prmRow As Short, ByVal prmCol As Short,
                                        Optional ByVal prmRow2 As Short = -9, Optional ByVal prmCol2 As Short = -9)
             Dim wkRow2 As Short = prmRow2
             Dim wkCol2 As Short = prmCol2
@@ -529,7 +529,7 @@ Namespace xls
         ''' <param name="prmRow2">終了行</param>
         ''' <param name="prmCol2">終了列</param>
         ''' <remarks></remarks>
-        Public Sub copyRange(ByVal prmRow As Short, ByVal prmCol As Short, _
+        Public Sub copyRange(ByVal prmRow As Short, ByVal prmCol As Short,
                                        Optional ByVal prmRow2 As Short = -9, Optional ByVal prmCol2 As Short = -9)
             Dim wkRow2 As Short = prmRow2
             Dim wkCol2 As Short = prmCol2
@@ -585,9 +585,9 @@ Namespace xls
         Public Sub pasteFormat(ByVal prmRow As Short, ByVal prmCol As Short)
             Dim cell1 As String = convFromR1C1(prmRow, prmCol)
 
-            _app.Range(cell1).PasteSpecial(Paste:=xlPasteFormats, _
-                                       Operation:=xlNone, _
-                                       SkipBlanks:=False, _
+            _app.Range(cell1).PasteSpecial(Paste:=xlPasteFormats,
+                                       Operation:=xlNone,
+                                       SkipBlanks:=False,
                                        Transpose:=False)
 
         End Sub
@@ -604,9 +604,9 @@ Namespace xls
         Public Sub pasteValue(ByVal prmRow As Short, ByVal prmCol As Short)
             Dim cell1 As String = convFromR1C1(prmRow, prmCol)
 
-            _app.Range(cell1).PasteSpecial(Paste:=xlPasteValues, _
-                                       Operation:=xlNone, _
-                                       SkipBlanks:=False, _
+            _app.Range(cell1).PasteSpecial(Paste:=xlPasteValues,
+                                       Operation:=xlNone,
+                                       SkipBlanks:=False,
                                        Transpose:=False)
 
         End Sub
@@ -642,7 +642,7 @@ Namespace xls
             Dim wkCol2 As Short = prmCol2
             If wkCol2 = -9 Then wkCol2 = prmCol
 
-            _sheet.Columns(cbnCellStr(convColFromR1C1(prmCol), _
+            _sheet.Columns(cbnCellStr(convColFromR1C1(prmCol),
                                       convColFromR1C1(wkCol2))).Insert(Shift:=xlToRight)
 
         End Sub
@@ -697,7 +697,7 @@ Namespace xls
             Dim wkCol2 As Short = prmCol2
             If wkCol2 = -9 Then wkCol2 = prmCol
 
-            _sheet.Columns(cbnCellStr(convColFromR1C1(prmCol), _
+            _sheet.Columns(cbnCellStr(convColFromR1C1(prmCol),
                                       convColFromR1C1(wkCol2))).Delete(Shift:=xlToLeft)
 
         End Sub
@@ -716,7 +716,7 @@ Namespace xls
             Dim wkCol2 As Short = prmCol2
             If wkCol2 = -9 Then wkCol2 = prmCol
 
-            _sheet.Columns(cbnCellStr(convColFromR1C1(prmCol), _
+            _sheet.Columns(cbnCellStr(convColFromR1C1(prmCol),
                                       convColFromR1C1(wkCol2))).Insert(Shift:=xlToRight)
 
         End Sub
@@ -817,7 +817,7 @@ Namespace xls
         ''' <param name="prmRow2">終了行</param>
         ''' <param name="prmCol2">終了列</param>
         ''' <remarks></remarks>
-        Public Sub drawRuledLine(ByVal prmLineVO As LineVO, ByVal prmRow As Short, ByVal prmCol As Short, _
+        Public Sub drawRuledLine(ByVal prmLineVO As LineVO, ByVal prmRow As Short, ByVal prmCol As Short,
                                        Optional ByVal prmRow2 As Short = -9, Optional ByVal prmCol2 As Short = -9)
             Try
 
@@ -869,7 +869,7 @@ Namespace xls
         '===============================================================================
         '背景色設定
         'prmRow2/prmCol2を省略した場合は、それぞれprmRow/prmColと同値を採用する
-        '                                                     2007.08.10 add by J.Takagi
+        '                                                     2007.08.10 add by Laevigata, Inc.
         '===============================================================================
         ''' <summary>
         ''' 背景色設定　prmRow2/prmCol2を省略した場合は、それぞれprmRow/prmColと同値を採用する
@@ -879,8 +879,8 @@ Namespace xls
         ''' <param name="prmCol">開始列</param>
         ''' <param name="prmRow2">終了行</param>
         ''' <param name="prmCol2">終了列</param>
-        ''' <remarks>2007.08.10 add by J.Takagi</remarks>
-        Public Sub setColor(ByVal prmColor As System.Drawing.Color, ByVal prmRow As Short, ByVal prmCol As Short, _
+        ''' <remarks>2007.08.10 add by Laevigata, Inc.</remarks>
+        Public Sub setColor(ByVal prmColor As System.Drawing.Color, ByVal prmRow As Short, ByVal prmCol As Short,
                                        Optional ByVal prmRow2 As Short = -9, Optional ByVal prmCol2 As Short = -9)
             Dim wkRow2 As Short = prmRow2
             Dim wkCol2 As Short = prmCol2
@@ -896,7 +896,7 @@ Namespace xls
         '===============================================================================
         'フォント設定
         'prmRow2/prmCol2を省略した場合は、それぞれprmRow/prmColと同値を採用する
-        '                                                     2007.08.10 add by J.Takagi
+        '                                                     2007.08.10 add by Laevigata, Inc.
         '===============================================================================
         ''' <summary>
         ''' フォント設定　prmRow2/prmCol2を省略した場合は、それぞれprmRow/prmColと同値を採用する
@@ -907,9 +907,9 @@ Namespace xls
         ''' <param name="prmCol">開始列</param>
         ''' <param name="prmRow2">終了行</param>
         ''' <param name="prmCol2">終了列</param>
-        ''' <remarks>2007.08.10 add by J.Takagi</remarks>
-        Public Sub setFont(ByVal prmFont As System.Drawing.Font, ByVal prmColor As System.Drawing.Color, _
-                           ByVal prmRow As Short, ByVal prmCol As Short, _
+        ''' <remarks>2007.08.10 add by Laevigata, Inc.</remarks>
+        Public Sub setFont(ByVal prmFont As System.Drawing.Font, ByVal prmColor As System.Drawing.Color,
+                           ByVal prmRow As Short, ByVal prmCol As Short,
                            Optional ByVal prmRow2 As Short = -9, Optional ByVal prmCol2 As Short = -9)
             Dim wkRow2 As Short = prmRow2
             Dim wkCol2 As Short = prmCol2
@@ -948,7 +948,7 @@ Namespace xls
         'パーセンテージ          "0%"                                              
         'パーセンテージ(少数2桁) "0.00%"                                           
         '文字列                  "@"                                               
-        '                                                     2007.08.10 add by J.Takagi
+        '                                                     2007.08.10 add by Laevigata, Inc.
         '===============================================================================
         ''' <summary>
         ''' 表示形式設定　prmRow2/prmCol2を省略した場合は、それぞれprmRow/prmColと同値を採用する
@@ -958,8 +958,8 @@ Namespace xls
         ''' <param name="prmCol">開始列</param>
         ''' <param name="prmRow2">終了行</param>
         ''' <param name="prmCol2">終了列</param>
-        ''' <remarks>2007.08.10 add by J.Takagi</remarks>
-        Public Sub setNumberFormat(ByVal prmNumberFormatLocal As String, ByVal prmRow As Short, ByVal prmCol As Short, _
+        ''' <remarks>2007.08.10 add by Laevigata, Inc.</remarks>
+        Public Sub setNumberFormat(ByVal prmNumberFormatLocal As String, ByVal prmRow As Short, ByVal prmCol As Short,
                                        Optional ByVal prmRow2 As Short = -9, Optional ByVal prmCol2 As Short = -9)
             Dim wkRow2 As Short = prmRow2
             Dim wkCol2 As Short = prmCol2
@@ -985,7 +985,7 @@ Namespace xls
         ''' <param name="prmRow2">終了行</param>
         ''' <param name="prmCol2">終了列</param>
         ''' <remarks></remarks>
-        Public Sub setHorizontalPos(ByVal prmPos As UtilExcelHandler.HorizontalAlignment, ByVal prmRow As Short, ByVal prmCol As Short, _
+        Public Sub setHorizontalPos(ByVal prmPos As UtilExcelHandler.HorizontalAlignment, ByVal prmRow As Short, ByVal prmCol As Short,
                           Optional ByVal prmRow2 As Short = -9, Optional ByVal prmCol2 As Short = -9)
             Dim wkRow2 As Short = prmRow2
             Dim wkCol2 As Short = prmCol2
@@ -1023,7 +1023,7 @@ Namespace xls
         ''' <param name="prmRow2">終了行</param>
         ''' <param name="prmCol2">終了列</param>
         ''' <remarks></remarks>
-        Public Sub setVerticalPos(ByVal prmPos As UtilExcelHandler.VerticalAlignment, ByVal prmRow As Short, ByVal prmCol As Short, _
+        Public Sub setVerticalPos(ByVal prmPos As UtilExcelHandler.VerticalAlignment, ByVal prmRow As Short, ByVal prmCol As Short,
                                   Optional ByVal prmRow2 As Short = -9, Optional ByVal prmCol2 As Short = -9)
             Dim wkRow2 As Short = prmRow2
             Dim wkCol2 As Short = prmCol2
@@ -1059,7 +1059,7 @@ Namespace xls
         ''' <param name="prmRow2">終了行</param>
         ''' <param name="prmCol2">終了列</param>
         ''' <remarks></remarks>
-        Public Sub combineCell(ByVal prmRow As Short, ByVal prmCol As Short, _
+        Public Sub combineCell(ByVal prmRow As Short, ByVal prmCol As Short,
                                        Optional ByVal prmRow2 As Short = -9, Optional ByVal prmCol2 As Short = -9)
             Dim wkRow2 As Short = prmRow2
             Dim wkCol2 As Short = prmCol2
@@ -1134,13 +1134,13 @@ Namespace xls
         '===============================================================================
         'ページ設定
         ' prmPageVO ページセットアップVO
-        '                                                     2007.08.10 add by J.Takagi
+        '                                                     2007.08.10 add by Laevigata, Inc.
         '===============================================================================
         ''' <summary>
         ''' ページ設定
         ''' </summary>
         ''' <param name="prmPageVO">ページセットアップVO</param>
-        ''' <remarks>2007.08.10 add by J.Takagi</remarks>
+        ''' <remarks>2007.08.10 add by Laevigata, Inc.</remarks>
         Public Sub setUpPageDefine(ByVal prmPageVO As PageSetUpVO)
             With _sheet.PageSetup
                 .PrintTitleRows = prmPageVO.PrintTitleRows                          '印刷行タイトル
@@ -1203,7 +1203,7 @@ Namespace xls
         ''' シートコピー(末尾へ)
         ''' </summary>
         ''' <param name="prmNewSheetName">新しいシート名</param>
-        ''' <remarks>2010.02.17 Created by Takagi</remarks>
+        ''' <remarks>2010.02.17 Created by Laevigata, Inc.</remarks>
         Public Sub copySheetOnLast(Optional ByVal prmNewSheetName As String = "newName")
             _sheet.Copy(After:=_sheets(_sheets.Count))
             _sheets(_sheets.Count).Name = prmNewSheetName
@@ -1220,7 +1220,7 @@ Namespace xls
         Public Sub deleteSheet(ByVal prmSheetName As String)
             Dim curSht As String = _sheet.Name
             _sheets(prmSheetName).Select()
-            '-->2010.03.04 upd by takagi
+            '-->2010.03.04 upd by Laevigata, Inc.
             '_app.Windows(1).SelectedSheets.Delete()
             Dim ew As Object = _app.Windows(1)
             Try
@@ -1260,29 +1260,29 @@ Namespace xls
         ''' <param name="prmTextVal">出力文字列</param>
         ''' <remarks></remarks>
         Public Sub setShapeTextBox(ByVal prmShapeTextBoxNm As String, ByVal prmTextVal As String)
-			Dim shps As Excel.Shapes = _sheet.Shapes
-			Try
-				Dim shpItem As Object = shps.Item(prmShapeTextBoxNm)
-				Try
-					Dim textFrm As Object = shpItem.TextFrame
-					Try
-						Dim xlsChars As Object = textFrm.Characters
-						Try
-							xlsChars.Text = prmTextVal
-						Finally
-							Me.releaseCom(xlsChars)
-						End Try
-					Finally
-						Me.releaseCom(textFrm)
-					End Try
-				Finally
-					Me.releaseCom(shpItem)
-				End Try
-			Finally
-				Me.releaseCom(shps)
-			End Try
+            Dim shps As Excel.Shapes = _sheet.Shapes
+            Try
+                Dim shpItem As Object = shps.Item(prmShapeTextBoxNm)
+                Try
+                    Dim textFrm As Object = shpItem.TextFrame
+                    Try
+                        Dim xlsChars As Object = textFrm.Characters
+                        Try
+                            xlsChars.Text = prmTextVal
+                        Finally
+                            Me.releaseCom(xlsChars)
+                        End Try
+                    Finally
+                        Me.releaseCom(textFrm)
+                    End Try
+                Finally
+                    Me.releaseCom(shpItem)
+                End Try
+            Finally
+                Me.releaseCom(shps)
+            End Try
 
-		End Sub
+        End Sub
 
         '===============================================================================
         'ボックス背景色の塗りつぶし
@@ -1295,35 +1295,35 @@ Namespace xls
         ''' <param name="prmColorGreen">RGBの緑</param>
         ''' <param name="prmColorBlue">RGBの青</param>
         ''' <remarks></remarks>
-        Public Sub paintShape(ByVal prmShapeTextBoxNm As String, _
-                                    Optional ByVal prmColorRed As Short = 0, _
-                                    Optional ByVal prmColorGreen As Short = 0, _
+        Public Sub paintShape(ByVal prmShapeTextBoxNm As String,
+                                    Optional ByVal prmColorRed As Short = 0,
+                                    Optional ByVal prmColorGreen As Short = 0,
                                     Optional ByVal prmColorBlue As Short = 0)
-			Dim shps As Excel.Shapes = _sheet.Shapes
-			Try
-				Dim shpsItem As Object = shps.Item(prmShapeTextBoxNm)
-				Try
-					Dim shpsFill As Object = shpsItem.Fill
-					Try
-						Dim frColor As Object = shpsFill.ForeColor
-						Try
-							frColor.RGB = RGB(prmColorRed, prmColorGreen, prmColorBlue)
-							shpsFill.Visible = -1 'msoTrue
-							shpsFill.Solid()
-						Finally
-							Me.releaseCom(frColor)
-						End Try
-					Finally
-						Me.releaseCom(shpsFill)
-					End Try
-				Finally
-					Me.releaseCom(shpsItem)
-				End Try
-			Finally
-				Me.releaseCom(shps)
-			End Try
+            Dim shps As Excel.Shapes = _sheet.Shapes
+            Try
+                Dim shpsItem As Object = shps.Item(prmShapeTextBoxNm)
+                Try
+                    Dim shpsFill As Object = shpsItem.Fill
+                    Try
+                        Dim frColor As Object = shpsFill.ForeColor
+                        Try
+                            frColor.RGB = RGB(prmColorRed, prmColorGreen, prmColorBlue)
+                            shpsFill.Visible = -1 'msoTrue
+                            shpsFill.Solid()
+                        Finally
+                            Me.releaseCom(frColor)
+                        End Try
+                    Finally
+                        Me.releaseCom(shpsFill)
+                    End Try
+                Finally
+                    Me.releaseCom(shpsItem)
+                End Try
+            Finally
+                Me.releaseCom(shps)
+            End Try
 
-		End Sub
+        End Sub
 
     End Class
 
@@ -1340,7 +1340,7 @@ Namespace xls
     '===============================================================================
     '  履歴  名前          日  付      マーク      内容
     '-------------------------------------------------------------------------------
-    '  (1)   Jun.Takagi    2007/08/10              新規
+    '  (1)   Laevigata, Inc.    2007/08/10              新規
     '-------------------------------------------------------------------------------
     Public MustInherit Class ExcelFunc
 
@@ -1943,7 +1943,7 @@ Namespace xls
     '===============================================================================
     '  履歴  名前          日  付      マーク      内容
     '-------------------------------------------------------------------------------
-    '  (1)   Jun.Takagi    2006/05/17              新規
+    '  (1)   Laevigata, Inc.    2006/05/17              新規
     '-------------------------------------------------------------------------------
     Public Class LineVO
 
@@ -2104,7 +2104,7 @@ Namespace xls
     '===============================================================================
     '  履歴  名前          日  付      マーク      内容
     '-------------------------------------------------------------------------------
-    '  (1)   Jun.Takagi    2007/08/10              新規
+    '  (1)   Laevigata, Inc.    2007/08/10              新規
     '-------------------------------------------------------------------------------
     Public Class PageSetUpVO
         Inherits ExcelFunc

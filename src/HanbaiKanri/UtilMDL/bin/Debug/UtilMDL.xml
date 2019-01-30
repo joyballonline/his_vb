@@ -1461,7 +1461,7 @@ Dim RtnDir As String = UtilDirectorySelector.choiceFolder("C:\WINDOWS", "○○�
  <param name="prmExceptionMsg">Exceptionに格納するエラーメッセージ</param>
  <param name="prmDspMessageVO">ユーザー通知用メッセージのMsgVO</param>
  <param name="prmErrCtl">フォーカスを設定するコントロール</param>
- <remarks>2006.11.06 Updated By Jun.Takagi</remarks>
+ <remarks>2006.11.06 Updated By Laevigata, Inc.</remarks>
 </member>
 <member name="M:UtilMDL.UsrDefException.#ctor(System.String,UtilMDL.MSG.UtilMsgVO,System.Windows.Forms.DataGridView,System.String,System.Int32)">
  <summary>
@@ -1472,7 +1472,7 @@ Dim RtnDir As String = UtilDirectorySelector.choiceFolder("C:\WINDOWS", "○○�
  <param name="prmErrDgv">フォーカスを設定するDataGridView</param>
  <param name="prmColName">選択させたいセルのグリッド上の列名</param>
  <param name="prmRow">選択させたいセルの行番号</param>
- <remarks>2006.11.06 Created By Jun.Takagi</remarks>
+ <remarks>2006.11.06 Created By Laevigata, Inc.</remarks>
 </member>
 <member name="M:UtilMDL.UsrDefException.dspMsg(System.Boolean,System.String)">
  <summary>
@@ -2090,7 +2090,7 @@ Dim RtnDir As String = UtilDirectorySelector.choiceFolder("C:\WINDOWS", "○○�
  <param name="prmCol">開始列</param>
  <param name="prmRow2">終了行</param>
  <param name="prmCol2">終了列</param>
- <remarks>2007.08.10 add by J.Takagi</remarks>
+ <remarks>2007.08.10 add by Laevigata, Inc.</remarks>
 </member>
 <member name="M:UtilMDL.xls.UtilExcelHandler.setFont(System.Drawing.Font,System.Drawing.Color,System.Int16,System.Int16,System.Int16,System.Int16)">
  <summary>
@@ -2102,7 +2102,7 @@ Dim RtnDir As String = UtilDirectorySelector.choiceFolder("C:\WINDOWS", "○○�
  <param name="prmCol">開始列</param>
  <param name="prmRow2">終了行</param>
  <param name="prmCol2">終了列</param>
- <remarks>2007.08.10 add by J.Takagi</remarks>
+ <remarks>2007.08.10 add by Laevigata, Inc.</remarks>
 </member>
 <member name="M:UtilMDL.xls.UtilExcelHandler.setNumberFormat(System.String,System.Int16,System.Int16,System.Int16,System.Int16)">
  <summary>
@@ -2113,7 +2113,7 @@ Dim RtnDir As String = UtilDirectorySelector.choiceFolder("C:\WINDOWS", "○○�
  <param name="prmCol">開始列</param>
  <param name="prmRow2">終了行</param>
  <param name="prmCol2">終了列</param>
- <remarks>2007.08.10 add by J.Takagi</remarks>
+ <remarks>2007.08.10 add by Laevigata, Inc.</remarks>
 </member>
 <member name="M:UtilMDL.xls.UtilExcelHandler.setHorizontalPos(UtilMDL.xls.UtilExcelHandler.HorizontalAlignment,System.Int16,System.Int16,System.Int16,System.Int16)">
  <summary>
@@ -2178,7 +2178,7 @@ Dim RtnDir As String = UtilDirectorySelector.choiceFolder("C:\WINDOWS", "○○�
  ページ設定
  </summary>
  <param name="prmPageVO">ページセットアップVO</param>
- <remarks>2007.08.10 add by J.Takagi</remarks>
+ <remarks>2007.08.10 add by Laevigata, Inc.</remarks>
 </member>
 <member name="M:UtilMDL.xls.UtilExcelHandler.AutoFilter">
  <summary>
@@ -2205,7 +2205,7 @@ Dim RtnDir As String = UtilDirectorySelector.choiceFolder("C:\WINDOWS", "○○�
  シートコピー(末尾へ)
  </summary>
  <param name="prmNewSheetName">新しいシート名</param>
- <remarks>2010.02.17 Created by Takagi</remarks>
+ <remarks>2010.02.17 Created by Laevigata, Inc.</remarks>
 </member>
 <member name="M:UtilMDL.xls.UtilExcelHandler.deleteSheet(System.String)">
  <summary>

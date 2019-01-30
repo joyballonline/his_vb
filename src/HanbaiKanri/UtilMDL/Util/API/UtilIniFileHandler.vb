@@ -16,18 +16,18 @@ Namespace API
     '===============================================================================
     '  履歴  名前          日  付      マーク      内容
     '-------------------------------------------------------------------------------
-    '  (1)   Jun.Takagi    2006/04/09             新規
+    '  (1)   Laevigata, Inc.    2006/04/09             新規
     '-------------------------------------------------------------------------------
     Public Class UtilIniFileHandler
 
         '===============================================================================
         'API定義
         '===============================================================================
-        <System.Security.SuppressUnmanagedCodeSecurity()> _
-        Private Declare Function GetPrivateProfileString Lib "KERNEL32.DLL" Alias "GetPrivateProfileStringA" ( _
-            ByVal lpAppName As String, _
-            ByVal lpKeyName As String, ByVal lpDefault As String, _
-            ByVal lpReturnedString As StringBuilder, ByVal nSize As Integer, _
+        <System.Security.SuppressUnmanagedCodeSecurity()>
+        Private Declare Function GetPrivateProfileString Lib "KERNEL32.DLL" Alias "GetPrivateProfileStringA" (
+            ByVal lpAppName As String,
+            ByVal lpKeyName As String, ByVal lpDefault As String,
+            ByVal lpReturnedString As StringBuilder, ByVal nSize As Integer,
             ByVal lpFileName As String) As Integer
 
         '===============================================================================
@@ -75,7 +75,7 @@ Namespace API
         '                   ：sKeyName    項目名
         '   ●メソッド戻り値 ：取得値
         '   ●発生例外       ：Exception,UsrDefException
-        '                                               2006.04.09 Created By Jun.Takagi
+        '                                               2006.04.09 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
         ''' 項目取得

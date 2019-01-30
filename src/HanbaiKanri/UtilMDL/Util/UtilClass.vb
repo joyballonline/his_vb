@@ -11,8 +11,8 @@ Imports System.Windows.Forms
 '===============================================================================
 '  履歴  名前          日  付      マーク      内容
 '-------------------------------------------------------------------------------
-'  (1)   Jun.Takagi    2006/05/01              新規
-'  (2)   Jun.Takagi    2010/08/26              エラーメッセージ取得(getErrDetail)に発生時刻追加
+'  (1)   Laevigata, Inc.    2006/05/01              新規
+'  (2)   Laevigata, Inc.    2010/08/26              エラーメッセージ取得(getErrDetail)に発生時刻追加
 '-------------------------------------------------------------------------------
 Public Class UtilClass
     Public Shared Sub main()
@@ -34,7 +34,7 @@ Public Class UtilClass
     '   （処理概要）アプリケーション実行パスを返却する
     '   ●入力パラメタ：prmAssembly  アセンブリ
     '   ●メソッド戻り値　：取得アプリケーション実行パス
-    '                                               2006.05.01 Created By Jun.Takagi
+    '                                               2006.05.01 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
     ''' アプリケーション実行パスを取得
@@ -51,7 +51,7 @@ Public Class UtilClass
     '   （処理概要）アプリケーション名称を返却する
     '   ●入力パラメタ：prmAssembly  アセンブリ
     '   ●メソッド戻り値　：取得アプリケーション名称
-    '                                               2006.05.01 Created By Jun.Takagi
+    '                                               2006.05.01 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
     ''' アプリケーション名称を取得
@@ -69,7 +69,7 @@ Public Class UtilClass
     '   　　　　　　起動されるアセンブリのファイルバージョンを返却する
     '   ●入力パラメタ：prmAssembly  アセンブリ
     '   ●メソッド戻り値　：取得Version
-    '                                               2006.05.22 Updated By Jun.Takagi
+    '                                               2006.05.22 Updated By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
     ''' アプリケーションのVersionを取得
@@ -82,10 +82,10 @@ Public Class UtilClass
         'アセンブリのバージョン情報を取得する
         Dim v As System.Diagnostics.FileVersionInfo
         v = (System.Diagnostics.FileVersionInfo.GetVersionInfo(prmAssembly.Location))
-        '-->2006.05.22 chg start by takagi
+        '-->2006.05.22 chg start by Laevigata, Inc.
         'Return v.ProductMajorPart & "." & v.ProductMinorPart & "." & v.ProductBuildPart & "." & v.ProductPrivatePart
         Return v.ProductMajorPart & "." & v.ProductMinorPart & "." & String.Format("{0:00}", v.ProductPrivatePart)
-        '<--2006.05.22 chg end by takagi
+        '<--2006.05.22 chg end by Laevigata, Inc.
 
     End Function
 
@@ -94,7 +94,7 @@ Public Class UtilClass
     '   （処理概要）引数のファイルが存在するかどうかを判定
     '   ●入力パラメタ：prmDir  判定ファイルフルパス文字列
     '   ●メソッド戻り値　：True/False
-    '                                               2006.05.01 Created By Jun.Takagi
+    '                                               2006.05.01 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
     ''' ファイル存在チェック 引数のファイルが存在するかどうかを判定
@@ -111,7 +111,7 @@ Public Class UtilClass
     '   （処理概要）引数のディレクトリが存在するかどうかを判定
     '   ●入力パラメタ：prmDir  判定ディレクトリ文字列
     '   ●メソッド戻り値　：True/False
-    '                                               2006.05.01 Created By Jun.Takagi
+    '                                               2006.05.01 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
     ''' フォルダ存在チェック 引数のディレクトリが存在するかどうかを判定
@@ -128,7 +128,7 @@ Public Class UtilClass
     '   （処理概要）Exceptionの詳細メッセージを取得する
     '   ●入力パラメタ：prmException  メッセージを取得する例外
     '   ●メソッド戻り値　：編集済みエラーメッセージ
-    '                                               20010.08.26 Created By Jun.Takagi
+    '                                               20010.08.26 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
     ''' エラーメッセージ取得 Exceptionの詳細メッセージを取得する
@@ -139,15 +139,15 @@ Public Class UtilClass
     Public Shared Function getErrDetail(ByVal prmException As Exception) As String
         Dim wkSorce As String = prmException.TargetSite.DeclaringType.FullName
         wkSorce = wkSorce.Replace(prmException.Source & ".", "")
-        '-->2010.08.26 upd by takagi #発生時刻追加
+        '-->2010.08.26 upd by Laevigata, Inc. #発生時刻追加
         'Return "メッセージ" & ControlChars.Tab & "： " & prmException.Message & ControlChars.NewLine & _
         '       "発生元" & ControlChars.Tab & "： " & prmException.Source & ControlChars.NewLine & _
         '       "発生箇所" & ControlChars.Tab & "： " & wkSorce & " [ " & prmException.TargetSite.ToString & " ]"
-        Return "メッセージ" & ControlChars.Tab & "： " & prmException.Message & ControlChars.NewLine & _
-               "発生元" & ControlChars.Tab & "： " & prmException.Source & ControlChars.NewLine & _
-               "発生箇所" & ControlChars.Tab & "： " & wkSorce & " [ " & prmException.TargetSite.ToString & " ]" & ControlChars.NewLine & _
+        Return "メッセージ" & ControlChars.Tab & "： " & prmException.Message & ControlChars.NewLine &
+               "発生元" & ControlChars.Tab & "： " & prmException.Source & ControlChars.NewLine &
+               "発生箇所" & ControlChars.Tab & "： " & wkSorce & " [ " & prmException.TargetSite.ToString & " ]" & ControlChars.NewLine &
                "発生時刻" & ControlChars.Tab & "： " & Now.ToString("G")
-        '<--2010.08.26 upd by takagi #発生時刻追加
+        '<--2010.08.26 upd by Laevigata, Inc. #発生時刻追加
     End Function
 
     '-------------------------------------------------------------------------------
@@ -156,7 +156,7 @@ Public Class UtilClass
     '   ●入力パラメタ：prmForm    フォーカス制御を行うフォーム
     '                   prmEvent   KeyPressイベント
     '   ●メソッド戻り値　：なし
-    '                                               2006.05.10 Created By Jun.Takagi
+    '                                               2006.05.10 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
     ''' フォーカス遷移 次のコントロールへフォーカス移動を行う
@@ -183,7 +183,7 @@ Public Class UtilClass
     '   （処理概要）渡された文字列の長さを求める(全角1文字=2，半角1文字=1で計算)
     '   ●入力パラメタ：sPrmStr 対象文字列
     '   ●メソッド戻り値　：文字列データ長(バイト単位)
-    '                                               2006.05.10 Created By Jun.Takagi
+    '                                               2006.05.10 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
     ''' 文字列データ長取得(全角・半角対応) 渡された文字列の長さを求める(全角1文字=2，半角1文字=1で計算)
@@ -206,7 +206,7 @@ Public Class UtilClass
     '   ●入力パラメタ：prmStr(対象文字列)
     '                 ：prmLen(指定データ長 … バイト単位)
     '   ●メソッド戻り値　：編集文字列
-    '                                               2006.05.10 Created By Jun.Takagi
+    '                                               2006.05.10 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
     ''' データ長取得(全角・半角対応) 文字列を指定された長さに編集する. 文字列＞データ長 ： 超過分切り捨て.  文字列＜データ長 ： 不足分スペース詰め.
@@ -238,7 +238,7 @@ Public Class UtilClass
     '   （処理概要）文字列中に半角・全角が混在しているかどうかを判定
     '   ●入力パラメタ：prmStr(対象文字列）
     '   ●メソッド戻り値　：TRUE(全角半角混在あり）／FALSE(半角全角混在なし)
-    '                                               2006.05.10 Created By Jun.Takagi
+    '                                               2006.05.10 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
     ''' 全角・半角混在チェック 文字列中に半角・全角が混在しているかどうかを判定
@@ -270,7 +270,7 @@ Public Class UtilClass
     '   （処理概要）文字列中に全角が混在しているかどうかを判定
     '   ●入力パラメタ：prmStr(対象文字列）
     '   ●メソッド戻り値　：TRUE(半角のみ）／FALSE(全角あり)
-    '                                               2006.05.10 Created By Jun.Takagi
+    '                                               2006.05.10 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
     ''' 半角のみチェック 文字列中に全角が混在しているかどうかを判定
@@ -303,7 +303,7 @@ Public Class UtilClass
     '   ●入力パラメタ：i prmFullPath フルパス
     '                 ：o prmPath     ディレクトリ
     '                 ：o prmFile     ファイル名
-    '                                               2006.05.10 Created By Jun.Takagi
+    '                                               2006.05.10 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
     ''' ディレクトリ・ファイル名分割 フルパスのファイル名をディレクトリ・ファイル名に分割する
@@ -329,7 +329,7 @@ Public Class UtilClass
     '   （処理概要）入力パラメタの数値を切り捨てして返却
     '   ●入力パラメタ：i num パラメタ
     '   ●メソッド戻り値　：処理値
-    '                                               2006.05.10 Created By Jun.Takagi
+    '                                               2006.05.10 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
     ''' 切捨て　入力パラメタの数値を切り捨てして返却
@@ -349,7 +349,7 @@ Public Class UtilClass
     '   ●メソッド戻り値　：処理値
     '   ●備考      　：0.15を少数第２位で切捨ての場合、prmDigitは 2 で実行
     '  　　　       　：1520を百の位で切捨ての場合、prmDigitは -3 で実行
-    '                                               2006.07.10 Created By Jun.Takagi
+    '                                               2006.07.10 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
     ''' 切捨て　入力パラメタの数値を切捨てして返却
@@ -395,7 +395,7 @@ Public Class UtilClass
     '   （処理概要）入力パラメタの数値を切り上げして返却
     '   ●入力パラメタ：i prmNum パラメタ
     '   ●メソッド戻り値　：処理値
-    '                                               2006.05.10 Created By Jun.Takagi
+    '                                               2006.05.10 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
     ''' 切り上げ　入力パラメタの数値を切り上げして返却
@@ -415,7 +415,7 @@ Public Class UtilClass
     '   ●メソッド戻り値　：処理値
     '   ●備考      　：0.15を少数第２位で切り上げの場合、prmDigitは 2 で実行
     '  　　　       　：1520を百の位で切り上げの場合、prmDigitは -3 で実行
-    '                                               2006.07.10 Created By Jun.Takagi
+    '                                               2006.07.10 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
     ''' 切り上げ　入力パラメタの数値を切り上げして返却
@@ -461,7 +461,7 @@ Public Class UtilClass
     '   （処理概要）入力パラメタの数値を四捨五入して返却
     '   ●入力パラメタ：i num パラメタ
     '   ●メソッド戻り値　：処理値
-    '                                               2006.05.10 Created By Jun.Takagi
+    '                                               2006.05.10 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
     ''' 四捨五入　入力パラメタの数値を四捨五入して返却
@@ -481,7 +481,7 @@ Public Class UtilClass
     '   ●メソッド戻り値　：処理値
     '   ●備考      　：0.15を少数第２位で四捨五入の場合、prmDigitは 2 で実行
     '  　　　       　：1520を百の位で四捨五入の場合、prmDigitは -3 で実行
-    '                                               2006.07.10 Created By Jun.Takagi
+    '                                               2006.07.10 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
     ''' 四捨五入　入力パラメタの数値を四捨五入して返却
@@ -530,7 +530,7 @@ Public Class UtilClass
     '   ●使用例　　　：     Private Sub Text1_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles Text1.GotFocus
     '                            Call UtilClass.selAll(Text1)
     '                        End Sub
-    '                                               2006.06.09 Updated By Jun.Takagi
+    '                                               2006.06.09 Updated By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
     ''' コントロール全選択状態生成　入力パラメタのコントロールを全選択状態とする
@@ -563,7 +563,7 @@ Public Class UtilClass
     '   （処理概要）実行端末のコンピュータ名を取得する
     '   ●入力パラメタ：なし
     '   ●メソッド戻り値　：端末名
-    '                                               2006.05.19 Created By Jun.Takagi
+    '                                               2006.05.19 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
     ''' 実行端末のコンピュータ名を取得する
@@ -579,7 +579,7 @@ Public Class UtilClass
     '   （処理概要）実行端末のIPを取得する
     '   ●入力パラメタ：なし
     '   ●メソッド戻り値　：IP
-    '                                               2006.05.19 Created By Jun.Takagi
+    '                                               2006.05.19 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
     ''' 実行端末のIPを取得する
@@ -599,7 +599,7 @@ Public Class UtilClass
     '   ●入力パラメタ：prmIP   IP
     '   ●メソッド戻り値　：端末名
     '   ●備考　　　　：DNSが逆引きをサポートしていること。 ※NSL-LANはサポート外
-    '                                               2006.05.19 Created By Jun.Takagi
+    '                                               2006.05.19 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
     ''' IPから端末名を取得する
@@ -617,7 +617,7 @@ Public Class UtilClass
     '   （処理概要）端末名からIPを取得する
     '   ●入力パラメタ：prmComputerName   端末名
     '   ●メソッド戻り値　：IP
-    '                                               2006.05.19 Created By Jun.Takagi
+    '                                               2006.05.19 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
     ''' 端末名からIPを取得する
@@ -636,7 +636,7 @@ Public Class UtilClass
     '   （処理概要）BooleanのTypeを返却する
     '   ●入力パラメタ　　：なし
     '   ●メソッド戻り値　：取得Type
-    '                                               2006.05.30 Created By Jun.Takagi
+    '                                               2006.05.30 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
     ''' BooleanのTypeを返却する
@@ -652,7 +652,7 @@ Public Class UtilClass
     '   （処理概要）StringのTypeを返却する
     '   ●入力パラメタ　　：なし
     '   ●メソッド戻り値　：取得Type
-    '                                               2006.05.30 Created By Jun.Takagi
+    '                                               2006.05.30 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
     ''' StringのTypeを返却する
@@ -668,7 +668,7 @@ Public Class UtilClass
     '   （処理概要）ShortのTypeを返却する
     '   ●入力パラメタ　　：なし
     '   ●メソッド戻り値　：取得Type
-    '                                               2006.05.30 Created By Jun.Takagi
+    '                                               2006.05.30 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
     ''' ShortのTypeを返却する
@@ -684,7 +684,7 @@ Public Class UtilClass
     '   （処理概要）IntegerのTypeを返却する
     '   ●入力パラメタ　　：なし
     '   ●メソッド戻り値　：取得Type
-    '                                               2006.05.30 Created By Jun.Takagi
+    '                                               2006.05.30 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
     ''' IntegerのTypeを返却する
@@ -700,7 +700,7 @@ Public Class UtilClass
     '   （処理概要）LongのTypeを返却する
     '   ●入力パラメタ　　：なし
     '   ●メソッド戻り値　：取得Type
-    '                                               2006.05.30 Created By Jun.Takagi
+    '                                               2006.05.30 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
     ''' LongのTypeを返却する
@@ -716,7 +716,7 @@ Public Class UtilClass
     '   （処理概要）SingleのTypeを返却する
     '   ●入力パラメタ　　：なし
     '   ●メソッド戻り値　：取得Type
-    '                                               2006.05.30 Created By Jun.Takagi
+    '                                               2006.05.30 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
     ''' SingleのTypeを返却する
@@ -732,7 +732,7 @@ Public Class UtilClass
     '   （処理概要）DoubleのTypeを返却する
     '   ●入力パラメタ　　：なし
     '   ●メソッド戻り値　：取得Type
-    '                                               2006.05.30 Created By Jun.Takagi
+    '                                               2006.05.30 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
     ''' DoubleのTypeを返却する
@@ -748,7 +748,7 @@ Public Class UtilClass
     '   （処理概要）DateTimeのTypeを返却する
     '   ●入力パラメタ　　：なし
     '   ●メソッド戻り値　：取得Type
-    '                                               2006.05.30 Created By Jun.Takagi
+    '                                               2006.05.30 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
     ''' DateTimeのTypeを返却する
@@ -764,7 +764,7 @@ Public Class UtilClass
     '   （処理概要）ObjectのTypeを返却する
     '   ●入力パラメタ　　：なし
     '   ●メソッド戻り値　：取得Type
-    '                                               2006.05.30 Created By Jun.Takagi
+    '                                               2006.05.30 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
     ''' ObjectのTypeを返却する
@@ -780,7 +780,7 @@ Public Class UtilClass
     '   （処理概要）ByteのTypeを返却する
     '   ●入力パラメタ　　：なし
     '   ●メソッド戻り値　：取得Type
-    '                                               2006.05.30 Created By Jun.Takagi
+    '                                               2006.05.30 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
     ''' ByteのTypeを返却する

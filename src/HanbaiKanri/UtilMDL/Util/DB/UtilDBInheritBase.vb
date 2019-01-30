@@ -14,8 +14,8 @@ Namespace DB
     '===============================================================================
     '  履歴  名前          日  付      マーク      内容
     '-------------------------------------------------------------------------------
-    '  (1)   Jun.Takagi    2006/05/23              新規
-    '  (2)   Jun.Takagi    2010/08/26              SystemInfoテーブルからの取得に対応
+    '  (1)   Laevigata, Inc.    2006/05/23              新規
+    '  (2)   Laevigata, Inc.    2010/08/26              SystemInfoテーブルからの取得に対応
     '-------------------------------------------------------------------------------
     Public MustInherit Class UtilDBInheritBase
         Implements UtilDBIf
@@ -48,7 +48,7 @@ Namespace DB
         '   （処理概要）DB接続をクローズする
         '   ●入力パラメタ  ：なし
         '   ●メソッド戻り値：なし
-        '                                               2006.05.23 Created By Jun.Takagi
+        '                                               2006.05.23 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
         ''' DB接続をクローズする
@@ -61,7 +61,7 @@ Namespace DB
         '   （処理概要)　トランザクションを開始する
         '   ●入力パラメタ  ：なし
         '   ●メソッド戻り値：なし
-        '                                               2006.05.23 Created By Jun.Takagi
+        '                                               2006.05.23 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
         ''' トランザクションを開始する
@@ -74,7 +74,7 @@ Namespace DB
         '   （処理概要)　トランザクションをCommitする
         '   ●入力パラメタ  ：なし
         '   ●メソッド戻り値：なし
-        '                                               2006.05.23 Created By Jun.Takagi
+        '                                               2006.05.23 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
         ''' トランザクションをCommitする
@@ -87,7 +87,7 @@ Namespace DB
         '   （処理概要)　トランザクションをRollbackする
         '   ●入力パラメタ  ：なし
         '   ●メソッド戻り値：なし
-        '                                               2006.05.23 Created By Jun.Takagi
+        '                                               2006.05.23 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
         ''' トランザクションをRollbackする
@@ -103,7 +103,7 @@ Namespace DB
         '                  ：<prmRefRecCnt> 取得件数
         '   ●メソッド戻り値：DataSet
         '   ●備考          ：返却するDataSetはprmTblNameのTBL名称で格納
-        '                                               2006.05.23 Created By Jun.Takagi
+        '                                               2006.05.23 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
         ''' Select文を発行し、DataSetを返却する
@@ -113,8 +113,8 @@ Namespace DB
         ''' <param name="prmRefRecCnt">取得件数</param>
         ''' <returns>DataSet</returns>
         ''' <remarks></remarks>
-        Public MustOverride Function selectDB(ByVal prmSQL As String, _
-                                              ByVal prmTblName As String, _
+        Public MustOverride Function selectDB(ByVal prmSQL As String,
+                                              ByVal prmTblName As String,
                                               Optional ByRef prmRefRecCnt As Integer = 0) _
                                                                            As System.Data.DataSet _
                                                                            Implements UtilDBIf.selectDB
@@ -141,7 +141,7 @@ Namespace DB
         '                                 Next
         '                             End With
         '                         End If
-        '                                               2006.06.16 Created By Jun.Takagi
+        '                                               2006.06.16 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
         ''' 置換パラメータ付きSELECT文を発行する (詳細は使用例参照)
@@ -152,9 +152,9 @@ Namespace DB
         ''' <param name="prmRefRecCnt">省略可能：SELECT文の取得レコード件数</param>
         ''' <returns>取得したレコードセットをDataSetオブジェクトとして返却</returns>
         ''' <remarks>SELECT文を発行し、レコードセットを取得する。取得したレコードセットはDataSetオブジェクトとして返却する。</remarks>
-        Public MustOverride Function selectDB(ByVal prmSQL As String, _
-                                              ByVal prmParameters As List(Of UtilDBPrm), _
-                                              ByVal prmTblName As String, _
+        Public MustOverride Function selectDB(ByVal prmSQL As String,
+                                              ByVal prmParameters As List(Of UtilDBPrm),
+                                              ByVal prmTblName As String,
                                               Optional ByRef prmRefRecCnt As Integer = 0) _
                                                                              As System.Data.DataSet _
                                                                              Implements UtilDBIf.selectDB
@@ -164,7 +164,7 @@ Namespace DB
         '   （処理概要）Insert/Update/Delete文を発行する
         '   ●入力パラメタ  ：prmSQL        SQL文
         '   ●メソッド戻り値：なし
-        '                                               2006.05.23 Created By Jun.Takagi
+        '                                               2006.05.23 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
         ''' Insert/Update/Delete文を発行する
@@ -179,7 +179,7 @@ Namespace DB
         '   ●入力パラメタ  ：prmSQL                SQL文
         '                   ：prmRefAffectedRows    影響を受けた行数
         '   ●メソッド戻り値：なし
-        '                                               2006.06.23 Created By Jun.Takagi
+        '                                               2006.06.23 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
         ''' 実行系SQLを発行する（影響件数引数付き）
@@ -237,7 +237,7 @@ Namespace DB
         '                     END;
         '                     /
         '                     =========================================
-        '                                               2006.06.16 Created By Jun.Takagi
+        '                                               2006.06.16 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
         ''' 置換パラメータ付き実行系SQLを発行する (詳細は使用例参照)
@@ -245,7 +245,7 @@ Namespace DB
         ''' <param name="prmSQL">パラメータ付きSQL文</param>
         ''' <param name="prmRefParameters">置換パラメータリスト</param>
         ''' <remarks>ストアド実行などを想定(それ以外も実行可能)</remarks>
-        Public MustOverride Sub executeDB(ByVal prmSQL As String, _
+        Public MustOverride Sub executeDB(ByVal prmSQL As String,
                                           ByRef prmRefParameters As List(Of UtilDBPrm)) _
                                                                    Implements UtilDBIf.executeDB
 
@@ -254,7 +254,7 @@ Namespace DB
         '   （処理概要）シングルクォートを「''」に置換して返却
         '   ●入力パラメタ  ：prmSQL     Select文
         '   ●メソッド戻り値：置換後SQL文字列
-        '                                               2006.05.23 Created By Jun.Takagi
+        '                                               2006.05.23 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
         ''' シングルクォート文字列化 シングルクォートを「''」に置換して返却
@@ -268,7 +268,7 @@ Namespace DB
 
         '-------------------------------------------------------------------------------
         '   Null⇒文字列
-        '                                               2006.05.23 Created By Jun.Takagi
+        '                                               2006.05.23 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
         ''' Null⇒文字列
@@ -291,7 +291,7 @@ Namespace DB
 
         '-------------------------------------------------------------------------------
         '   Null⇒Short
-        '                                               2006.05.23 Created By Jun.Takagi
+        '                                               2006.05.23 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
         ''' Null⇒Short
@@ -315,7 +315,7 @@ Namespace DB
 
         '-------------------------------------------------------------------------------
         '   Null⇒Integer
-        '                                               2006.05.23 Created By Jun.Takagi
+        '                                               2006.05.23 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
         ''' Null⇒Integer
@@ -339,7 +339,7 @@ Namespace DB
 
         '-------------------------------------------------------------------------------
         '   Null⇒Long
-        '                                               2006.05.23 Created By Jun.Takagi
+        '                                               2006.05.23 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
         ''' Null⇒Long
@@ -363,7 +363,7 @@ Namespace DB
 
         '-------------------------------------------------------------------------------
         '   Null⇒Double
-        '                                               2006.05.23 Created By Jun.Takagi
+        '                                               2006.05.23 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
         ''' Null⇒Double
@@ -387,7 +387,7 @@ Namespace DB
 
         '-------------------------------------------------------------------------------
         '   Null⇒日付文字列値
-        '                                               2006.05.23 Created By Jun.Takagi
+        '                                               2006.05.23 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
         ''' Null⇒日付文字列値

@@ -14,7 +14,7 @@ Namespace MSG
     '===============================================================================
     '  履歴  名前          日  付      マーク      内容
     '-------------------------------------------------------------------------------
-    '  (1)   Jun.Takagi    2006/04/17             新規
+    '  (1)   Laevigata, Inc.    2006/04/17             新規
     '-------------------------------------------------------------------------------
     Public Class UtilMsgHandler
 
@@ -85,7 +85,7 @@ Namespace MSG
                 _xmlDoc = New XmlDocument()  '_xmlDocumentオブジェクトを作成    
                 _xmlDoc.Load(prmFileName)
             Catch ex As XmlException
-                Dim lex As UsrDefException = New UsrDefException("メッセージ定義ファイル読込エラー" & ControlChars.NewLine & _
+                Dim lex As UsrDefException = New UsrDefException("メッセージ定義ファイル読込エラー" & ControlChars.NewLine &
                                                      "メッセージ定義ファイルの存在・パスを確認してください。")
                 Debug.WriteLine(lex.Message)
                 Throw lex
@@ -203,7 +203,7 @@ Namespace MSG
         '                   ：prmOptionalMsg   追加メッセージ
         '   ●メソッド戻り値 ：押下ボタン(DialogResult)
         '   ●発生例外       ：Exception,UsrDefException
-        '                                               2006.05.07 Updated By Jun.Takagi
+        '                                               2006.05.07 Updated By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
         ''' メッセージ表示 通知されたメッセージIDに対応するMSGを編集して表示する
@@ -226,7 +226,7 @@ Namespace MSG
         '                   ：prmOptionalMsg   追加メッセージ
         '   ●メソッド戻り値 ：検索されたメッセージビーン(ValueObject)
         '   ●発生例外       ：Exception,UsrDefException
-        '                                               2006.05.07 Created By Jun.Takagi
+        '                                               2006.05.07 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
         ''' メッセージ取得 通知されたメッセージIDに対応するMSGを編集して返却する
@@ -368,7 +368,7 @@ Namespace MSG
     '===============================================================================
     '  履歴  名前          日  付      マーク      内容
     '-------------------------------------------------------------------------------
-    '  (1)   Jun.Takagi    2006/05/07              新規
+    '  (1)   Laevigata, Inc.    2006/05/07              新規
     '-------------------------------------------------------------------------------
     Public Class UtilMsgVO
 

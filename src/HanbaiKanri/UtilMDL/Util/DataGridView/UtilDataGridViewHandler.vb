@@ -13,7 +13,7 @@ Namespace DataGridView
     '===============================================================================
     '  履歴  名前          日  付      マーク      内容
     '-------------------------------------------------------------------------------
-    '  (1)   Jun.Takagi    2006/05/01              新規
+    '  (1)   Laevigata, Inc.    2006/05/01              新規
     '-------------------------------------------------------------------------------
     Public Class UtilDataGridViewHandler
 
@@ -64,8 +64,8 @@ Namespace DataGridView
         '===============================================================================
         Private Shared NUM_CHARS As Char() = New Char(10) {"0"c, "1"c, "2"c, "3"c, "4"c, "5"c, "6"c, "7"c, "8"c, "9"c, "."c}
         Private Shared NUM_MINS_CHARS As Char() = New Char(11) {"0"c, "1"c, "2"c, "3"c, "4"c, "5"c, "6"c, "7"c, "8"c, "9"c, "-"c, "."c}
-        Private Shared HANKAKU_CHARS As Char() = New Char(61) {"0"c, "1"c, "2"c, "3"c, "4"c, "5"c, "6"c, "7"c, "8"c, "9"c, _
-                                                      "a"c, "b"c, "c"c, "d"c, "e"c, "f"c, "g"c, "h"c, "i"c, "j"c, "k"c, "l"c, "m"c, "n"c, "o"c, "p"c, "q"c, "r"c, "s"c, "t"c, "u"c, "v"c, "w"c, "x"c, "y"c, "z"c, _
+        Private Shared HANKAKU_CHARS As Char() = New Char(61) {"0"c, "1"c, "2"c, "3"c, "4"c, "5"c, "6"c, "7"c, "8"c, "9"c,
+                                                      "a"c, "b"c, "c"c, "d"c, "e"c, "f"c, "g"c, "h"c, "i"c, "j"c, "k"c, "l"c, "m"c, "n"c, "o"c, "p"c, "q"c, "r"c, "s"c, "t"c, "u"c, "v"c, "w"c, "x"c, "y"c, "z"c,
                                                       "A"c, "B"c, "C"c, "D"c, "E"c, "F"c, "G"c, "H"c, "I"c, "J"c, "K"c, "L"c, "M"c, "N"c, "O"c, "P"c, "Q"c, "R"c, "S"c, "T"c, "U"c, "V"c, "W"c, "X"c, "Y"c, "Z"c}
         '<--2006/11/10 ADD -END- A.Yamazaki
         '===============================================================================
@@ -94,7 +94,7 @@ Namespace DataGridView
         '   　　　　　　　　 ：prmRow           対象行のインデックス(0～)
         '   ●メソッド戻り値 ：なし
         '   ●備考　　       ：DataGridViewとバインドされている、DataSet上のデータにONを設定する
-        '                                               2006.05.01 Created By Jun.Takagi
+        '                                               2006.05.01 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
         ''' データ行を初期化する(一覧を0行とする)
@@ -115,7 +115,7 @@ Namespace DataGridView
         '   　　　　　　　　 ：prmRow           対象行のインデックス(0～)
         '   ●メソッド戻り値 ：なし
         '   ●備考　　       ：DataGridViewとバインドされている、DataSet上のデータにONを設定する
-        '                                               2006.05.01 Created By Jun.Takagi
+        '                                               2006.05.01 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
         ''' チェックボックス型の列データをチェックボックスONとする
@@ -125,8 +125,8 @@ Namespace DataGridView
         ''' <remarks></remarks>
         Public Sub checkBoxOn(ByVal prmDataColName As String, ByVal prmRow As Integer)
             Dim cell As Object = CType(_grid.DataSource, System.Data.DataSet).Tables(0).Rows(prmRow)(prmDataColName)
-            If cell.GetType().ToString.Equals("System.Int16") Or _
-               cell.GetType().ToString.Equals("System.Int32") Or _
+            If cell.GetType().ToString.Equals("System.Int16") Or
+               cell.GetType().ToString.Equals("System.Int32") Or
                cell.GetType().ToString.Equals("System.Int64") Then
                 CType(_grid.DataSource, System.Data.DataSet).Tables(0).Rows(prmRow)(prmDataColName) = 1
             ElseIf cell.GetType().ToString.Equals("System.String") Then
@@ -143,7 +143,7 @@ Namespace DataGridView
         '   　　　　　　　　 ：prmRow           対象行のインデックス(0～)
         '   ●メソッド戻り値 ：なし
         '   ●備考　　       ：DataGridViewとバインドされている、DataSet上のデータにONを設定する
-        '                                               2006.05.01 Created By Jun.Takagi
+        '                                               2006.05.01 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
         ''' チェックボックス型の列データをチェックボックスOFFとする
@@ -153,8 +153,8 @@ Namespace DataGridView
         ''' <remarks></remarks>
         Public Sub checkBoxOff(ByVal prmDataColName As String, ByVal prmRow As Integer)
             Dim cell As Object = CType(_grid.DataSource, System.Data.DataSet).Tables(0).Rows(prmRow)(prmDataColName)
-            If cell.GetType().ToString.Equals("System.Int16") Or _
-               cell.GetType().ToString.Equals("System.Int32") Or _
+            If cell.GetType().ToString.Equals("System.Int16") Or
+               cell.GetType().ToString.Equals("System.Int32") Or
                cell.GetType().ToString.Equals("System.Int64") Then
                 CType(_grid.DataSource, System.Data.DataSet).Tables(0).Rows(prmRow)(prmDataColName) = 0
             ElseIf cell.GetType().ToString.Equals("System.String") Then
@@ -171,7 +171,7 @@ Namespace DataGridView
         '   　　　　　　　　 ：prmRow       対象行のインデックス(0～)
         '   ●メソッド戻り値 ：なし
         '   ●備考　　       ：DataGridView上のCellそのものを取得
-        '                                               2006.05.01 Created By Jun.Takagi
+        '                                               2006.05.01 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
         ''' セルオブジェクトを取得する(DataGridView上のCellそのものを取得)
@@ -191,7 +191,7 @@ Namespace DataGridView
         '   　　　　　　　　 ：prmRow           対象行のインデックス(0～)
         '   ●メソッド戻り値 ：格納データ(String型で返却)
         '   ●備考　　       ：DataGridViewとバインドされている、DataSet上のデータから取得する
-        '                                               2006.06.05 Updated By Jun.Takagi
+        '                                               2006.06.05 Updated By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
         ''' セルに格納されているデータを取得する
@@ -216,7 +216,7 @@ Namespace DataGridView
         '   　　　　　　　　 ：prmRow           対象行のインデックス(0～)
         '   ●メソッド戻り値 ：格納データ(String型で返却)
         '   ●備考　　       ：DataGridViewとバインドされている、DataSet上のデータから取得する
-        '                                               2006.06.08 Created By Jun.Takagi
+        '                                               2006.06.08 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
         ''' セルに格納されているデータを取得する
@@ -242,7 +242,7 @@ Namespace DataGridView
         '   　　　　　　　　 ：prmVal           格納するデータ
         '   ●メソッド戻り値 ：なし
         '   ●備考　　       ：DataGridViewとバインドされている、DataSet上のデータへ設定する
-        '                                               2006.05.01 Created By Jun.Takagi
+        '                                               2006.05.01 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
         ''' セルに格納されているデータを設定する
@@ -261,7 +261,7 @@ Namespace DataGridView
         '   ●入力パラメタ   ：prmColName       グリッド上の列名
         '   　　　　　　　　 ：prmRow           対象行のインデックス(0～)
         '   ●メソッド戻り値 ：なし
-        '                                               2006.05.11 Created By Jun.Takagi
+        '                                               2006.05.11 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
         ''' カレントセルを設定する
@@ -272,7 +272,7 @@ Namespace DataGridView
         Public Sub setCurrentCell(ByVal prmColName As String, ByVal prmRow As Integer)
             _grid.CurrentCell = Me.getCell(prmColName, prmRow)
         End Sub
-        '2010.08.18 add by takagi
+        '2010.08.18 add by Laevigata, Inc.
         Public Structure dgvErrSet
             Public onErr As Boolean
             Public row As Integer
@@ -291,14 +291,14 @@ Namespace DataGridView
                 prmRefCell.onErr = False
             End If
         End Sub
-        '2010.08.18 add by takagi
+        '2010.08.18 add by Laevigata, Inc.
 
         '-------------------------------------------------------------------------------
         '   最大行数取得
         '   （処理概要）グリッドに表示されているデータの最大行数取得
         '   ●入力パラメタ   ：なし
         '   ●メソッド戻り値 ：行数
-        '                                               2006.05.29 Created By Jun.Takagi
+        '                                               2006.05.29 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
         ''' グリッドに表示されているデータの最大行数取得
@@ -306,11 +306,11 @@ Namespace DataGridView
         ''' <returns>最大行</returns>
         ''' <remarks></remarks>
         Public Function getMaxRow() As Integer
-            '-->2010.11.15 chg by takagi
+            '-->2010.11.15 chg by Laevigata, Inc.
             'Return CType(_grid.DataSource, DataSet).Tables(0).Rows.Count
             If _grid.DataSource Is Nothing Then Return 0
             Return CType(_grid.DataSource, DataSet).Tables(0).Rows.Count
-            '<--2010.11.15 chg by takagi
+            '<--2010.11.15 chg by Laevigata, Inc.
         End Function
 
         '-------------------------------------------------------------------------------
@@ -318,7 +318,7 @@ Namespace DataGridView
         '   （処理概要）列を読み取り専用にする
         '   ●入力パラメタ   ：prmColName       グリッド上の列名
         '   ●メソッド戻り値 ：なし
-        '                                               2006.05.01 Created By Jun.Takagi
+        '                                               2006.05.01 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
         ''' 列をロックする(読取専用)
@@ -334,7 +334,7 @@ Namespace DataGridView
         '   （処理概要）列の読み取り専用を解除し、編集可能にする
         '   ●入力パラメタ   ：prmColName       グリッド上の列名
         '   ●メソッド戻り値 ：なし
-        '                                               2006.05.01 Created By Jun.Takagi
+        '                                               2006.05.01 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
         ''' 列のロックを解除する(編集可能)
@@ -354,7 +354,7 @@ Namespace DataGridView
         '                    ：prmSelBackColor  選択時の背景色
         '                    ：prmSelForeColor  選択時の前景色
         '   ●メソッド戻り値 ：なし
-        '                                               2006.05.01 Created By Jun.Takagi
+        '                                               2006.05.01 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
         ''' 列の背景色を変更する
@@ -362,7 +362,7 @@ Namespace DataGridView
         ''' <param name="prmColName">グリッド上の列名</param>
         ''' <param name="prmBackColor">背景色</param>
         ''' <remarks></remarks>
-        Public Sub colChengeColor(ByVal prmColName As String, _
+        Public Sub colChengeColor(ByVal prmColName As String,
                                   ByVal prmBackColor As Drawing.Color)
             Try
                 _grid.Columns(prmColName).DefaultCellStyle.BackColor = prmBackColor
@@ -376,8 +376,8 @@ Namespace DataGridView
         ''' <param name="prmBackColor">背景色</param>
         ''' <param name="prmForeColor">前景色</param>
         ''' <remarks></remarks>
-        Public Sub colChengeColor(ByVal prmColName As String, _
-                                  ByVal prmBackColor As Drawing.Color, _
+        Public Sub colChengeColor(ByVal prmColName As String,
+                                  ByVal prmBackColor As Drawing.Color,
                                   ByVal prmForeColor As Drawing.Color)
             Try
                 _grid.Columns(prmColName).DefaultCellStyle.BackColor = prmBackColor
@@ -394,10 +394,10 @@ Namespace DataGridView
         ''' <param name="prmSelBackColor">選択時の背景色</param>
         ''' <param name="prmSelForeColor">選択時の前景色</param>
         ''' <remarks></remarks>
-        Public Sub colChengeColor(ByVal prmColName As String, _
-                                  ByVal prmBackColor As Drawing.Color, _
-                                  ByVal prmForeColor As Drawing.Color, _
-                                  ByVal prmSelBackColor As Drawing.Color, _
+        Public Sub colChengeColor(ByVal prmColName As String,
+                                  ByVal prmBackColor As Drawing.Color,
+                                  ByVal prmForeColor As Drawing.Color,
+                                  ByVal prmSelBackColor As Drawing.Color,
                                   ByVal prmSelForeColor As Drawing.Color)
             Try
                 _grid.Columns(prmColName).DefaultCellStyle.BackColor = prmBackColor
@@ -417,7 +417,7 @@ Namespace DataGridView
         '                    ：prmRefSelBackColor  選択時の背景色
         '                    ：prmRefSelForeColor  選択時の前景色
         '   ●メソッド戻り値 ：なし
-        '                                               2006.05.19 Created By Jun.Takagi
+        '                                               2006.05.19 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
         ''' 列の背景色を取得する
@@ -428,10 +428,10 @@ Namespace DataGridView
         ''' <param name="prmRefSelBackColor">選択時の背景色</param>
         ''' <param name="prmRefSelForeColor">選択時の前景色</param>
         ''' <remarks></remarks>
-        Public Sub colGetColor(ByVal prmColName As String, _
-                               ByRef prmRefBackColor As Drawing.Color, _
-                               ByRef prmRefForeColor As Drawing.Color, _
-                               ByRef prmRefSelBackColor As Drawing.Color, _
+        Public Sub colGetColor(ByVal prmColName As String,
+                               ByRef prmRefBackColor As Drawing.Color,
+                               ByRef prmRefForeColor As Drawing.Color,
+                               ByRef prmRefSelBackColor As Drawing.Color,
                                ByRef prmRefSelForeColor As Drawing.Color)
             Try
                 prmRefBackColor = _grid.Columns(prmColName).DefaultCellStyle.BackColor
@@ -451,7 +451,7 @@ Namespace DataGridView
         '                    ：prmSelBackColor  選択時の背景色
         '                    ：prmSelForeColor  選択時の前景色
         '   ●メソッド戻り値 ：なし
-        '                                               2006.05.11 Created By Jun.Takagi
+        '                                               2006.05.11 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
         ''' 行の背景色を変更する
@@ -459,7 +459,7 @@ Namespace DataGridView
         ''' <param name="prmRowIdx">対象行のインデックス</param>
         ''' <param name="prmBackColor">背景色</param>
         ''' <remarks></remarks>
-        Public Sub rowChengeColor(ByVal prmRowIdx As Integer, _
+        Public Sub rowChengeColor(ByVal prmRowIdx As Integer,
                                   ByVal prmBackColor As Drawing.Color)
             Try
                 _grid.Rows(prmRowIdx).DefaultCellStyle.BackColor = prmBackColor
@@ -473,8 +473,8 @@ Namespace DataGridView
         ''' <param name="prmBackColor">背景色</param>
         ''' <param name="prmForeColor">前景色</param>
         ''' <remarks></remarks>
-        Public Sub rowChengeColor(ByVal prmRowIdx As Integer, _
-                                  ByVal prmBackColor As Drawing.Color, _
+        Public Sub rowChengeColor(ByVal prmRowIdx As Integer,
+                                  ByVal prmBackColor As Drawing.Color,
                                   ByVal prmForeColor As Drawing.Color)
             Try
                 _grid.Rows(prmRowIdx).DefaultCellStyle.BackColor = prmBackColor
@@ -491,10 +491,10 @@ Namespace DataGridView
         ''' <param name="prmSelBackColor">選択時の背景色</param>
         ''' <param name="prmSelForeColor">選択時の前景色</param>
         ''' <remarks></remarks>
-        Public Sub rowChengeColor(ByVal prmRowIdx As Integer, _
-                                  ByVal prmBackColor As Drawing.Color, _
-                                  ByVal prmForeColor As Drawing.Color, _
-                                  ByVal prmSelBackColor As Drawing.Color, _
+        Public Sub rowChengeColor(ByVal prmRowIdx As Integer,
+                                  ByVal prmBackColor As Drawing.Color,
+                                  ByVal prmForeColor As Drawing.Color,
+                                  ByVal prmSelBackColor As Drawing.Color,
                                   ByVal prmSelForeColor As Drawing.Color)
             Try
                 _grid.Rows(prmRowIdx).DefaultCellStyle.BackColor = prmBackColor
@@ -514,7 +514,7 @@ Namespace DataGridView
         '                    ：prmRefSelBackColor  選択時の背景色
         '                    ：prmRefSelForeColor  選択時の前景色
         '   ●メソッド戻り値 ：なし
-        '                                               2006.05.19 Created By Jun.Takagi
+        '                                               2006.05.19 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
         ''' 行の背景色を取得する
@@ -525,10 +525,10 @@ Namespace DataGridView
         ''' <param name="prmRefSelBackColor">選択時の背景色</param>
         ''' <param name="prmRefSelForeColor">選択時の前景色</param>
         ''' <remarks></remarks>
-        Public Sub rowGetColor(ByVal prmRowIdx As Integer, _
-                                  ByRef prmRefBackColor As Drawing.Color, _
-                                  ByRef prmRefForeColor As Drawing.Color, _
-                                  ByRef prmRefSelBackColor As Drawing.Color, _
+        Public Sub rowGetColor(ByVal prmRowIdx As Integer,
+                                  ByRef prmRefBackColor As Drawing.Color,
+                                  ByRef prmRefForeColor As Drawing.Color,
+                                  ByRef prmRefSelBackColor As Drawing.Color,
                                   ByRef prmRefSelForeColor As Drawing.Color)
             Try
                 prmRefBackColor = _grid.Rows(prmRowIdx).DefaultCellStyle.BackColor
@@ -549,10 +549,10 @@ Namespace DataGridView
         '                    ：prmRefSelBackColor  選択時の背景色
         '                    ：prmRefSelForeColor  選択時の前景色
         '   ●メソッド戻り値 ：なし
-        '                                               2006.05.24 Created By Jun.Takagi
+        '                                               2006.05.24 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
-        Public Sub setSelectionRowColor(ByVal prmNewRowIdx As Integer, _
-                                        ByVal prmOldRowIdx As Integer, _
+        Public Sub setSelectionRowColor(ByVal prmNewRowIdx As Integer,
+                                        ByVal prmOldRowIdx As Integer,
                                         ByVal prmBackColor As Drawing.Color)
             Try
                 Me.setDefaultCellColor(DEFCLR_B, prmNewRowIdx, prmOldRowIdx)
@@ -561,9 +561,9 @@ Namespace DataGridView
             End Try
 
         End Sub
-        Public Sub setSelectionRowColor(ByVal prmNewRowIdx As Integer, _
-                                        ByVal prmOldRowIdx As Integer, _
-                                        ByVal prmBackColor As Drawing.Color, _
+        Public Sub setSelectionRowColor(ByVal prmNewRowIdx As Integer,
+                                        ByVal prmOldRowIdx As Integer,
+                                        ByVal prmBackColor As Drawing.Color,
                                         ByVal prmForeColor As Drawing.Color)
             Try
                 Me.setDefaultCellColor(DEFCLR_BF, prmNewRowIdx, prmOldRowIdx)
@@ -572,11 +572,11 @@ Namespace DataGridView
             Catch ex As ArgumentOutOfRangeException
             End Try
         End Sub
-        Public Sub setSelectionRowColor(ByVal prmNewRowIdx As Integer, _
-                                        ByVal prmOldRowIdx As Integer, _
-                                        ByVal prmBackColor As Drawing.Color, _
-                                        ByVal prmForeColor As Drawing.Color, _
-                                        ByVal prmSelBackColor As Drawing.Color, _
+        Public Sub setSelectionRowColor(ByVal prmNewRowIdx As Integer,
+                                        ByVal prmOldRowIdx As Integer,
+                                        ByVal prmBackColor As Drawing.Color,
+                                        ByVal prmForeColor As Drawing.Color,
+                                        ByVal prmSelBackColor As Drawing.Color,
                                         ByVal prmSelForeColor As Drawing.Color)
             Try
                 Me.setDefaultCellColor(DEFCLR_BFS, prmNewRowIdx, prmOldRowIdx)
@@ -591,8 +591,8 @@ Namespace DataGridView
         Private Const DEFCLR_B As Short = 0     '背景色のみ
         Private Const DEFCLR_BF As Short = 1    '背景色＆前景色のみ
         Private Const DEFCLR_BFS As Short = 2   '背景色と前景色と選択時背景色と選択時前景色
-        Private Sub setDefaultCellColor(ByVal prmKbn As Short, _
-                                        ByVal prmNewRowIdx As Integer, _
+        Private Sub setDefaultCellColor(ByVal prmKbn As Short,
+                                        ByVal prmNewRowIdx As Integer,
                                         ByVal prmOldRowIdx As Integer)
             If prmKbn = DEFCLR_B Or prmKbn = DEFCLR_BF Or prmKbn = DEFCLR_BFS Then
                 _grid.Rows(prmOldRowIdx).DefaultCellStyle.BackColor = _grid.Rows(prmNewRowIdx).DefaultCellStyle.BackColor
@@ -615,7 +615,7 @@ Namespace DataGridView
         '   ●備考　　       ：CellContentClickイベントで呼び出すこと。
         '                    ：ボタンクリックで無い場合も実行される為、
         '                    ：ボタンクリックの場合のみメソッド戻り値にTrueを返却する。
-        '                                               2006.05.11 Created By Jun.Takagi
+        '                                               2006.05.11 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
         ''' ボタン型の列において、クリックされた行のインデックスを取得
@@ -624,7 +624,7 @@ Namespace DataGridView
         ''' <param name="prmRefRowIdx">押下ボタン行Idx(0～)</param>
         ''' <returns>True/False：ボタンクリックされているか否か</returns>
         ''' <remarks></remarks>
-        Public Function getClickBtn(ByVal e As System.Windows.Forms.DataGridViewCellEventArgs, _
+        Public Function getClickBtn(ByVal e As System.Windows.Forms.DataGridViewCellEventArgs,
                                ByRef prmRefRowIdx As Integer) As Boolean
             If Not (TypeOf _grid.Columns(e.ColumnIndex) Is Windows.Forms.DataGridViewButtonColumn _
                AndAlso e.RowIndex <> -1) Then
@@ -643,7 +643,7 @@ Namespace DataGridView
         '   ●入力パラメタ   ：prmColName   グリッド上の列名
         '   　　　　　　　　 ：prmData      コンボボックスデータのVO(UtilDgvCboVO)
         '   ●メソッド戻り値 ：なし
-        '                                               2006.05.12 Created By Jun.Takagi
+        '                                               2006.05.12 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
         ''' コンボボックス列へデータを1件追加する
@@ -681,8 +681,8 @@ Namespace DataGridView
             End Try
         End Sub
         '内部メソッド：DataTableの最終行にVOの行を挿入する
-        Private Sub addRow(ByRef dt As DataTable, _
-                                       ByVal DisplayMember As String, _
+        Private Sub addRow(ByRef dt As DataTable,
+                                       ByVal DisplayMember As String,
                                        ByVal ValueMember As String _
                                        , ByVal prmData As UtilDgvCboVO)
             Try
@@ -709,7 +709,7 @@ Namespace DataGridView
         '   　　　　　　　　 ：prmTblName       DataSet上の使用するTBL名を指定
         '   ●メソッド戻り値 ：なし
         '   ●備考　　       ：Form_Loadイベントなどコンボ設定時に呼び出すこと。
-        '                                               2006.05.12 Created By Jun.Takagi
+        '                                               2006.05.12 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
         ''' コンボボックス型の列へデータを複数件追加する
@@ -721,10 +721,10 @@ Namespace DataGridView
         ''' <param name="prmValueMember">DataSet上のコードを格納している列の列名称</param>
         ''' <param name="prmTblName">DataSet上の使用するTBL名を指定</param>
         ''' <remarks></remarks>
-        Public Sub setCboData(ByVal prmColName As String, ByVal prmDataSet As DataSet, _
-                              Optional ByVal prmNonSelRowFlg As Boolean = False, _
-                              Optional ByVal prmDisplayMember As String = "名称", _
-                              Optional ByVal prmValueMember As String = "コード", _
+        Public Sub setCboData(ByVal prmColName As String, ByVal prmDataSet As DataSet,
+                              Optional ByVal prmNonSelRowFlg As Boolean = False,
+                              Optional ByVal prmDisplayMember As String = "名称",
+                              Optional ByVal prmValueMember As String = "コード",
                               Optional ByVal prmTblName As String = "")
             Try
 
@@ -753,8 +753,8 @@ Namespace DataGridView
             End Try
         End Sub
         '内部メソッド：DataTableの先頭行に空行を設ける
-        Private Sub addNonSelectRow(ByRef dt As DataTable, _
-                                       ByVal DisplayMember As String, _
+        Private Sub addNonSelectRow(ByRef dt As DataTable,
+                                       ByVal DisplayMember As String,
                                        ByVal ValueMember As String)
             Try
                 Dim newRow As DataRow = dt.NewRow
@@ -777,7 +777,7 @@ Namespace DataGridView
         '   　　　　　　　　 ：prmCode          コード
         '   ●メソッド戻り値 ：なし
         '   ●備考　　       ：コードが見つからない場合は未選択とする。
-        '                                               2006.05.12 Created By Jun.Takagi
+        '                                               2006.05.12 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
         ''' コンボボックス型の列上のコンボを選択させる　コードが見つからない場合は未選択とする
@@ -826,7 +826,7 @@ Namespace DataGridView
         '                    ：prmColName   列名
         '   ●メソッド戻り値 ：選択値(コード)
         '   ●備考           ：未選択のばあい、""を返却
-        '                                               2006.05.12 Created By Jun.Takagi
+        '                                               2006.05.12 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
         ''' コンボボックス列の選択値コード取得
@@ -852,7 +852,7 @@ Namespace DataGridView
         '   ●メソッド戻り値 ：選択値(表示名称)
         '   ●発生例外       ：なし
         '   ●備考           ：未選択のばあい、""を返却
-        '                                               2006.05.12 Created By Jun.Takagi
+        '                                               2006.05.12 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
         ''' 表示名取得　現在選択されている項目の表示名称を取得する　未選択のばあい、""を返却
@@ -1117,7 +1117,7 @@ Namespace DataGridView
         ''' 日付型の入力チェック
         ''' </summary>
         ''' <remarks></remarks>
-        Public Shared Sub ChkDgv_Date_KeyPress(ByVal sender As Object, _
+        Public Shared Sub ChkDgv_Date_KeyPress(ByVal sender As Object,
                                                        ByVal e As System.Windows.Forms.KeyPressEventArgs)
 
             Const MaxLen As Short = 6   '入力可能文字数
@@ -1166,8 +1166,8 @@ Namespace DataGridView
 
                     '前の文字が０なら、１～９のみ許可
                     If myBox.Text.ToString.Substring(2, 1).Equals("0") Then
-                        If KeyAscii <> Asc("1") And KeyAscii <> Asc("2") And KeyAscii <> Asc("3") And _
-                           KeyAscii <> Asc("4") And KeyAscii <> Asc("5") And KeyAscii <> Asc("6") And _
+                        If KeyAscii <> Asc("1") And KeyAscii <> Asc("2") And KeyAscii <> Asc("3") And
+                           KeyAscii <> Asc("4") And KeyAscii <> Asc("5") And KeyAscii <> Asc("6") And
                            KeyAscii <> Asc("7") And KeyAscii <> Asc("8") And KeyAscii <> Asc("9") Then
                             KeyAscii = 0
                         End If
@@ -1192,8 +1192,8 @@ Namespace DataGridView
 
                     '前の文字が０なら、１～９と０のみ許可
                     If myBox.Text.ToString.Substring(4, 1).Equals("0") Then
-                        If KeyAscii <> Asc("1") And KeyAscii <> Asc("2") And KeyAscii <> Asc("3") And _
-                           KeyAscii <> Asc("4") And KeyAscii <> Asc("5") And KeyAscii <> Asc("6") And _
+                        If KeyAscii <> Asc("1") And KeyAscii <> Asc("2") And KeyAscii <> Asc("3") And
+                           KeyAscii <> Asc("4") And KeyAscii <> Asc("5") And KeyAscii <> Asc("6") And
                            KeyAscii <> Asc("7") And KeyAscii <> Asc("8") And KeyAscii <> Asc("9") Then
                             KeyAscii = 0
                         End If
@@ -1219,7 +1219,7 @@ Namespace DataGridView
         ''' 日付型の入力チェック
         ''' </summary>
         ''' <remarks></remarks>
-        Public Shared Sub ChkDgv_Date2_KeyPress(ByVal sender As Object, _
+        Public Shared Sub ChkDgv_Date2_KeyPress(ByVal sender As Object,
                                                        ByVal e As System.Windows.Forms.KeyPressEventArgs)
 
             Const MaxLen As Short = 8   '入力可能文字数
@@ -1276,8 +1276,8 @@ Namespace DataGridView
 
                     '前の文字が０なら、１～９のみ許可
                     If myBox.Text.ToString.Substring(4, 1).Equals("0") Then
-                        If KeyAscii <> Asc("1") And KeyAscii <> Asc("2") And KeyAscii <> Asc("3") And _
-                           KeyAscii <> Asc("4") And KeyAscii <> Asc("5") And KeyAscii <> Asc("6") And _
+                        If KeyAscii <> Asc("1") And KeyAscii <> Asc("2") And KeyAscii <> Asc("3") And
+                           KeyAscii <> Asc("4") And KeyAscii <> Asc("5") And KeyAscii <> Asc("6") And
                            KeyAscii <> Asc("7") And KeyAscii <> Asc("8") And KeyAscii <> Asc("9") Then
                             KeyAscii = 0
                         End If
@@ -1302,8 +1302,8 @@ Namespace DataGridView
 
                     '前の文字が０なら、１～９と０のみ許可
                     If myBox.Text.ToString.Substring(6, 1).Equals("0") Then
-                        If KeyAscii <> Asc("1") And KeyAscii <> Asc("2") And KeyAscii <> Asc("3") And _
-                           KeyAscii <> Asc("4") And KeyAscii <> Asc("5") And KeyAscii <> Asc("6") And _
+                        If KeyAscii <> Asc("1") And KeyAscii <> Asc("2") And KeyAscii <> Asc("3") And
+                           KeyAscii <> Asc("4") And KeyAscii <> Asc("5") And KeyAscii <> Asc("6") And
                            KeyAscii <> Asc("7") And KeyAscii <> Asc("8") And KeyAscii <> Asc("9") Then
                             KeyAscii = 0
                         End If
@@ -1574,7 +1574,7 @@ Namespace DataGridView
     '===============================================================================
     '  履歴  名前          日  付      マーク      内容
     '-------------------------------------------------------------------------------
-    '  (1)   Jun.Takagi    2006/05/12              新規
+    '  (1)   Laevigata, Inc.    2006/05/12              新規
     '-------------------------------------------------------------------------------
     Public Class UtilDgvCboVO
         '===============================================================================

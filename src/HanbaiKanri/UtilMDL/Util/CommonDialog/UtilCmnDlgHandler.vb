@@ -43,7 +43,7 @@ Namespace CommonDialog
         '  ●その他：呼出例 Call UtilCmnDlgHandler.openFileDialog("d:\work", "tmp.txt", UtilCmnDlgHandler.TXT & "|" & UtilCmnDlgHandler.ALL)
         '            prmDir優先度
         '                      prmDir > カレントDir > "C:\"
-        '                                              2006.05.11 Createed By Jun.Takagi
+        '                                              2006.05.11 Createed By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
         ''' 「ファイルを選択」コモンダイアログ表示
@@ -55,10 +55,10 @@ Namespace CommonDialog
         ''' <param name="prmMultiSel">複数選択可否</param>
         ''' <returns>選択されたファイルのフルパス(複数選択ありの場合は「,」で連結して返却/キャンセル時は""を返却)</returns>
         ''' <remarks></remarks>
-        Public Shared Function openFileDialog(Optional ByVal prmDir As String = "", _
-                                          Optional ByVal prmFileNm As String = "", _
-                                          Optional ByVal prmFillter As String = ALL, _
-                                          Optional ByVal prmTitle As String = "ファイルを選択", _
+        Public Shared Function openFileDialog(Optional ByVal prmDir As String = "",
+                                          Optional ByVal prmFileNm As String = "",
+                                          Optional ByVal prmFillter As String = ALL,
+                                          Optional ByVal prmTitle As String = "ファイルを選択",
                                           Optional ByVal prmMultiSel As Boolean = False) As String
 
             Try
@@ -122,7 +122,7 @@ Namespace CommonDialog
         '  ●その他：呼出例 Call UtilCmnDlgHandler.saveFileDialog("d:\work", "tmp.txt", UtilCmnDlgHandler.TXT & "|" & UtilCmnDlgHandler.ALL)
         '            prmDir優先度
         '                      prmDir > カレントDir > "C:\"
-        '                                              2006.05.11 Createed By Jun.Takagi
+        '                                              2006.05.11 Createed By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
         ''' 「名前をつけて保存」コモンダイアログ表示

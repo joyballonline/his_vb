@@ -10,7 +10,7 @@ Imports System.Windows.Forms
 '===============================================================================
 '  履歴  名前          日  付      マーク      内容
 '-------------------------------------------------------------------------------
-'  (1)   Jun.Takagi    2006/04/18             新規
+'  (1)   Laevigata, Inc.    2006/04/18             新規
 '-------------------------------------------------------------------------------
 Public Class UsrDefException
     Inherits Exception
@@ -79,9 +79,9 @@ Public Class UsrDefException
     ''' <param name="prmSilentMode">メッセージを出すか出さないかを指定</param>
     ''' <param name="prmOutLogFile">MSGを出さない場合に代わりに出力されるログファイル名を指定</param>
     ''' <remarks>システム例外がCathされることを想定している為、インスタンス化した時点でエラーMsgを出力する</remarks>
-    Public Sub New(ByVal prmException As Exception, _
-                   ByVal prmDspMessageVO As UtilMDL.MSG.UtilMsgVO, _
-                   Optional ByVal prmSilentMode As Boolean = False, _
+    Public Sub New(ByVal prmException As Exception,
+                   ByVal prmDspMessageVO As UtilMDL.MSG.UtilMsgVO,
+                   Optional ByVal prmSilentMode As Boolean = False,
                    Optional ByVal prmOutLogFile As String = "")
         Call Me.New(prmException.Message, prmDspMessageVO)  '②に処理委託
         Debug.WriteLine(prmException.StackTrace)
@@ -95,7 +95,7 @@ Public Class UsrDefException
     ''' <param name="prmExceptionMsg">Exceptionに格納するエラーメッセージ</param>
     ''' <param name="prmDspMessageVO">ユーザー通知用メッセージのMsgVO</param>
     ''' <param name="prmErrCtl">フォーカスを設定するコントロール</param>
-    ''' <remarks>2006.11.06 Updated By Jun.Takagi</remarks>
+    ''' <remarks>2006.11.06 Updated By Laevigata, Inc.</remarks>
     Public Sub New(ByVal prmExceptionMsg As String, ByVal prmDspMessageVO As UtilMDL.MSG.UtilMsgVO, ByVal prmErrCtl As Control)
         Call Me.New(prmExceptionMsg, prmDspMessageVO)       '②に処理委託
         _targetCtl = prmErrCtl
@@ -111,11 +111,11 @@ Public Class UsrDefException
     ''' <param name="prmErrDgv">フォーカスを設定するDataGridView</param>
     ''' <param name="prmColName">選択させたいセルのグリッド上の列名</param>
     ''' <param name="prmRow">選択させたいセルの行番号</param>
-    ''' <remarks>2006.11.06 Created By Jun.Takagi</remarks>
-    Public Sub New(ByVal prmExceptionMsg As String, _
-                       ByVal prmDspMessageVO As UtilMDL.MSG.UtilMsgVO, _
-                       ByVal prmErrDgv As Windows.Forms.DataGridView, _
-                       ByVal prmColName As String, _
+    ''' <remarks>2006.11.06 Created By Laevigata, Inc.</remarks>
+    Public Sub New(ByVal prmExceptionMsg As String,
+                       ByVal prmDspMessageVO As UtilMDL.MSG.UtilMsgVO,
+                       ByVal prmErrDgv As Windows.Forms.DataGridView,
+                       ByVal prmColName As String,
                        ByVal prmRow As Integer)
         Call Me.New(prmExceptionMsg, prmDspMessageVO)       '②に処理委託
         _targetCtl = CType(prmErrDgv, Control)
@@ -130,7 +130,7 @@ Public Class UsrDefException
     '                    ：prmOutLogFile    MSGを出さない場合に代わりに出力されるログファイル名を指定
     '   ●メソッド戻り値 ：押下ボタン(DialogResult)
     '   ●発生例外       ：なし
-    '                                               2006.11.06 Updated By Jun.Takagi
+    '                                               2006.11.06 Updated By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
     ''' メッセージ表示 格納済みのMSGを表示(同一のExceptionに対しては一度しかMSGを表示しない)し、エラー対象コントロールが存在した場合はフォーカスの位置づけも行う

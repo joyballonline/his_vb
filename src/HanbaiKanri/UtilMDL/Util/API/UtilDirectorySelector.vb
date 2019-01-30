@@ -22,7 +22,7 @@ Namespace API
         '===============================================================================
         '  履歴  名前          日  付      マーク      内容
         '-------------------------------------------------------------------------------
-        '  (1)   Jun.Takagi    2006/05/11              新規
+        '  (1)   Laevigata, Inc.    2006/05/11              新規
         '-------------------------------------------------------------------------------
 
         '===============================================================================
@@ -32,12 +32,12 @@ Namespace API
         Private Declare Function SHGetPathFromIDList Lib "shell32" _
                 (ByVal pidl As Integer, ByVal pszPath As String) As Integer
         Private Declare Function SendMessageStr Lib "user32" Alias "SendMessageA" _
-                (ByVal hWnd As Integer, ByVal wMsg As Integer, _
+                (ByVal hWnd As Integer, ByVal wMsg As Integer,
                  ByVal wParam As Integer, ByVal lParam As String) As Integer
         Private Declare Function SHFree Lib "shell32" Alias "#195" (ByVal pidl As Integer) As Integer
         Private Declare Function GetDesktopWindow Lib "user32" () As Integer
         'SHBrowseForFolder API のコールバック関数用のDelegate
-        Private Delegate Function CallbackDelegate(ByVal lngHWnd As Integer, ByVal lngUMsg As Integer, _
+        Private Delegate Function CallbackDelegate(ByVal lngHWnd As Integer, ByVal lngUMsg As Integer,
                                     ByVal lngLParam As Integer, ByVal lngLpData As String) As Integer
 
         '===============================================================================
@@ -127,7 +127,7 @@ Namespace API
         '   ●その他　　　：以下、Formにおける使用例
         '                        Dim RtnDir As String = UtilDirectorySelector.choiceFolder("C:\WINDOWS", "○○のフォルダを選択してください。")
         '                        MsgBox RtnDir
-        '                                               2006.05.11 Created By Jun.Takagi
+        '                                               2006.05.11 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------'
         ''' <summary>
         ''' フォルダ選択ダイアログ表示

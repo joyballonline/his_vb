@@ -9,10 +9,10 @@ Imports System.Runtime.InteropServices
 ' アセンブリ属性の値を確認します。
 
 <Assembly: AssemblyTitle("WindowsApplication1")> 
-<Assembly: AssemblyDescription("")> 
-<Assembly: AssemblyCompany("NEWSol")> 
-<Assembly: AssemblyProduct("WindowsApplication1")> 
-<Assembly: AssemblyCopyright("Copyright (C) NEWSol 2006")> 
+<Assembly: AssemblyDescription("")>
+<Assembly: AssemblyCompany("Phoenix International Systems")>
+<Assembly: AssemblyProduct("WindowsApplication1")>
+<Assembly: AssemblyCopyright("Copyright (C) Phoenix International Systems 2019")>
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>
