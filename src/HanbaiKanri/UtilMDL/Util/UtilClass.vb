@@ -84,7 +84,8 @@ Public Class UtilClass
         v = (System.Diagnostics.FileVersionInfo.GetVersionInfo(prmAssembly.Location))
         '-->2006.05.22 chg start by Laevigata, Inc.
         'Return v.ProductMajorPart & "." & v.ProductMinorPart & "." & v.ProductBuildPart & "." & v.ProductPrivatePart
-        Return v.ProductMajorPart & "." & v.ProductMinorPart & "." & String.Format("{0:00}", v.ProductPrivatePart)
+        'Return v.ProductMajorPart & "." & v.ProductMinorPart & "." & String.Format("{0:00}", v.ProductPrivatePart)
+        Return v.ProductMajorPart & "." & v.ProductMinorPart & "." & v.ProductBuildPart & "." & v.ProductPrivatePart
         '<--2006.05.22 chg end by Laevigata, Inc.
 
     End Function
