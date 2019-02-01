@@ -233,7 +233,7 @@ Public Class Account
             LblAccountName3.Text = "CustomerName"
             LblAccountingAccountCode.Text = "ShortName"
             LblRemarks.Text = "PostalCode"
-            LblEffectiveClassification.Text = "Address1"
+            LblEffectiveClassification.Text = "EffectiveClassification"
             ExEffectiveClassification.Text = "(0:True 1:False)"
             btnAddAccount.Text = "Registration"
             btnBack.Text = "Back"
