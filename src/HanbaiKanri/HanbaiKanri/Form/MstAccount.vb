@@ -81,7 +81,7 @@ Public Class MstAccount
             Dgv_Account.Columns("会計用勘定科目コード").HeaderText = "AccountingAccountCode"
             Dgv_Account.Columns("備考").HeaderText = "Remarks"
             Dgv_Account.Columns("有効区分").HeaderText = "EffectiveClassification"
-            Dgv_Account.Columns("更新者").HeaderText = "Changer"
+            Dgv_Account.Columns("更新者").HeaderText = "ModifiedBy"
             Dgv_Account.Columns("更新日").HeaderText = "UpdateDate"
 
         End If

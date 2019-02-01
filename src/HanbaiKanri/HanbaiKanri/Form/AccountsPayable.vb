@@ -104,9 +104,9 @@ Public Class AccountsPayable
         BillLoad()
         If frmC01F10_Login.loginValue.Language = "ENG" Then
             LblAccountsPayableDate.Text = "AccountsPayableDate"
-            LblAccountsPayableDate.Location = New Point(187, 379)
+            LblAccountsPayableDate.Location = New Point(237, 379)
             LblAccountsPayableDate.Size = New Size(205, 22)
-            DtpAPDate.Location = New Point(398, 379)
+            DtpAPDate.Location = New Point(458, 379)
             LblNo1.Text = "Record"
             LblNo1.Location = New Point(1272, 111)
             LblNo1.Size = New Size(66, 22)

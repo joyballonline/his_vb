@@ -76,8 +76,8 @@ Public Class MstLanguage
             Dgv_Language.Columns("言語名称").HeaderText = "LanguageName"
             Dgv_Language.Columns("言語略称").HeaderText = "ShortName"
             Dgv_Language.Columns("備考").HeaderText = "Remarks"
-            Dgv_Language.Columns("無効フラグ").HeaderText = "Disabled"
-            Dgv_Language.Columns("更新者").HeaderText = "Changer"
+            Dgv_Language.Columns("無効フラグ").HeaderText = "InvalidFlag"
+            Dgv_Language.Columns("更新者").HeaderText = "ModifiedBy"
             Dgv_Language.Columns("更新日").HeaderText = "UpdateDate"
         End If
         Dim Sql As String = ""

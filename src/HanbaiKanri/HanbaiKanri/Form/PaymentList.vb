@@ -160,9 +160,9 @@ Public Class PaymentList
             LblConditions.Text = "ExtractionCondition"
             Label1.Text = "SupplierName"
             Label2.Text = "Address"
-            Label3.Text = "TEL"
+            Label3.Text = "PhoneNumber"
             Label4.Text = "SupplierCode"
-            LblMode.Text = "PaymentInputmode"
+            LblMode.Text = "PaymentRegistrationMode"
 
             BtnPayment.Text = "PaymentInput"
             BtnSerach.Text = "Search"
@@ -170,7 +170,7 @@ Public Class PaymentList
 
             DgvSupplier.Columns("仕入先名").HeaderText = "SupplierName"
             DgvSupplier.Columns("仕入金額計").HeaderText = "TotalPurchaseAmount"
-            DgvSupplier.Columns("支払残高").HeaderText = "PaymentBalance"
+            DgvSupplier.Columns("支払残高").HeaderText = "PaymentAmount"
 
         End If
     End Sub

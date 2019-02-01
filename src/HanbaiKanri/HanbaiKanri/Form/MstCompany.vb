@@ -75,12 +75,12 @@ Public Class MstCompany
 
             Dgv_Company.Columns("会社コード").HeaderText = "CompanyCode"
             Dgv_Company.Columns("会社名").HeaderText = "CompanyName"
-            Dgv_Company.Columns("会社略称").HeaderText = "CompanyShortName"
+            Dgv_Company.Columns("会社略称").HeaderText = "CompanyAbbreviationName"
             Dgv_Company.Columns("郵便番号").HeaderText = "PostalCode"
             Dgv_Company.Columns("住所１").HeaderText = "Address1"
             Dgv_Company.Columns("住所２").HeaderText = "Address2"
             Dgv_Company.Columns("住所３").HeaderText = "Address3"
-            Dgv_Company.Columns("電話番号").HeaderText = "TEL"
+            Dgv_Company.Columns("電話番号").HeaderText = "PhoneNumber"
             Dgv_Company.Columns("FAX番号").HeaderText = "FAX"
             Dgv_Company.Columns("代表者役職").HeaderText = "RepresentativePosition"
             Dgv_Company.Columns("代表者名").HeaderText = "RepresentativeName"
@@ -99,7 +99,7 @@ Public Class MstCompany
             Dgv_Company.Columns("在庫単価評価法").HeaderText = "EvaluationMethod"
             Dgv_Company.Columns("前払法人税率").HeaderText = "PPH"
             Dgv_Company.Columns("会計用コード").HeaderText = "AccountingCode"
-            Dgv_Company.Columns("更新者").HeaderText = "Changer"
+            Dgv_Company.Columns("更新者").HeaderText = "ModifiedBy"
             Dgv_Company.Columns("更新日").HeaderText = "UpdateDate"
 
         End If

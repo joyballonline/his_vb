@@ -380,7 +380,7 @@ Public Class OrderList
             Label6.Text = "SalesPersonInCharge"
             Label11.Text = "CustomerNumber"
             Label10.Text = "DisplayFormat"
-            RbtnSlip.Text = "UnitOfSlip"
+            RbtnSlip.Text = "UnitOfVoucher"
 
             RbtnDetails.Text = "LineItemUnit"
             RbtnDetails.Location = New Point(166, 202)

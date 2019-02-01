@@ -412,7 +412,7 @@ Public Class Company
             Label6.Text = "Address1"
             Label7.Text = "Address2"
             Label8.Text = "Address3"
-            Label9.Text = "TEL"
+            Label9.Text = "PhoneNumber"
             Label11.Text = "FAX"
             Label4.Text = "Position"
             Label12.Text = "Name"

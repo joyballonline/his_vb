@@ -106,7 +106,7 @@ Public Class ClosingLog
         ClosingLogLoad()
         If frmC01F10_Login.loginValue.Language = "ENG" Then
             LblClosingDate.Text = "ClosingDate"
-            LblPerson.Text = "Changer"
+            LblPerson.Text = "Name of PIC"
             BtnClosing.Text = "Closing"
             BtnBack.Text = "Back"
             BtnSearch.Text = "Search"
@@ -115,7 +115,7 @@ Public Class ClosingLog
             DgvClosingLog.Columns("前回締日").HeaderText = "LastClosingDate"
             DgvClosingLog.Columns("今回締日").HeaderText = "ThisClosingDate"
             DgvClosingLog.Columns("次回締日").HeaderText = "NextClosingDate"
-            DgvClosingLog.Columns("担当者").HeaderText = "Person"
+            DgvClosingLog.Columns("担当者").HeaderText = "Name of PIC"
         End If
     End Sub
 
@@ -1637,6 +1637,7 @@ Public Class ClosingLog
 
         Dim dsNkinkshihd As DataSet = _db.selectDB(Sql, RS, reccnt)
 
+        '入金消込データぶん回して
         For i As Integer = 0 To dsNkinkshihd.Tables(RS).Rows.Count - 1
             Sql = ""
             Sql += "SELECT "
@@ -1658,6 +1659,10 @@ Public Class ClosingLog
             Sql += dsNkinkshihd.Tables(RS).Rows(i)("請求番号")
             Sql += "'"
             Dim dsNkinSkyu As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+
+            '請求データから同じ請求番号のものを探す（1個しかない）
+
             If dsNkinSkyu.Tables(RS).Rows(0)("請求区分") = "2" Then
                 Sql = ""
                 Sql += "SELECT "
@@ -5937,8 +5942,8 @@ Public Class ClosingLog
 
         Next
 
-
 #End Region
+
         Sql = ""
         Sql += "SELECT "
         Sql += "* "

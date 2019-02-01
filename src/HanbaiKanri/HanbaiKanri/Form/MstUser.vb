@@ -75,10 +75,10 @@ Public Class MstUser
             Dgv_User.Columns("氏名").HeaderText = "Name"
             Dgv_User.Columns("略名").HeaderText = "ShortName"
             Dgv_User.Columns("備考").HeaderText = "Remarks"
-            Dgv_User.Columns("無効フラグ").HeaderText = "Disabled"
+            Dgv_User.Columns("無効フラグ").HeaderText = "InvalidFlag"
             Dgv_User.Columns("権限").HeaderText = "Authority"
             Dgv_User.Columns("言語").HeaderText = "Language"
-            Dgv_User.Columns("更新者").HeaderText = "Changer"
+            Dgv_User.Columns("更新者").HeaderText = "ModifiedBy"
             Dgv_User.Columns("更新日").HeaderText = "UpdateDate"
         End If
         Dim Sql As String = ""

@@ -222,7 +222,7 @@ Public Class PaidList
             Label8.Text = "PaymentDate"
             Label7.Text = "PaymentNumber"
             Label10.Text = "DisplayFormat"
-            RbtnSlip.Text = "UnitOfSlip"
+            RbtnSlip.Text = "UnitOfVoucher"
 
             RbtnDetails.Text = "LineItemUnit"
             RbtnDetails.Location = New Point(166, 196)

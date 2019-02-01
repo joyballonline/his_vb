@@ -329,7 +329,7 @@ Public Class SalesList
             Label6.Text = "SalesPersonInCharge"
             Label11.Text = "CustomerNumber"
             Label10.Text = "DisplayFormat"
-            RbtnSlip.Text = "UnitOfSlip"
+            RbtnSlip.Text = "UnitOfVoucher"
             LblConditions.Text = "TermsOfSelection"
             RbtnDetails.Text = "UnitOfDetailData"
             RbtnDetails.Location = New Point(166, 202)

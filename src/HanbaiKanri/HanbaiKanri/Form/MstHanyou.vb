@@ -101,7 +101,7 @@ Public Class MstHanyou
             Dgv_Hanyo.Columns("数値５").HeaderText = "Number5"
             Dgv_Hanyo.Columns("数値６").HeaderText = "Number6"
             Dgv_Hanyo.Columns("メモ").HeaderText = "Memo"
-            Dgv_Hanyo.Columns("更新者").HeaderText = "Changer"
+            Dgv_Hanyo.Columns("更新者").HeaderText = "ModifiedBy"
             Dgv_Hanyo.Columns("更新日").HeaderText = "UpDateDate"
 
         End If

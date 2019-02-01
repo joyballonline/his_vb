@@ -427,7 +427,7 @@ Public Class Supplier
             LblFax.Text = "FAX"
             LblPerson.Text = "Person"
             LblPosition.Text = "Position"
-            LblTariffRate.Text = "TariffRate"
+            LblTariffRate.Text = "CustomsDutyRate"
             LblPph.Text = "PPH"
             LblTransportationCost.Text = "ShippingCost"
             LblMemo.Text = "Memo"

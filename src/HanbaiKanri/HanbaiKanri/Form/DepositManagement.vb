@@ -163,6 +163,7 @@ Public Class DepositManagement
             LblDepositDate.Location = New Point(137, 335)
             LblDepositDate.Size = New Size(140, 22)
             LblRemarks.Text = "Remarks"
+            TxtRemarks.Size = New Size(600, 22)
             LblNo1.Text = "Record"
             LblNo1.Location = New Point(1272, 65)
             LblNo1.Size = New Size(66, 22)

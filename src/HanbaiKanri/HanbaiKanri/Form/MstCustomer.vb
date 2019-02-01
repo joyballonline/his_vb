@@ -89,7 +89,7 @@ Public Class MstCustomer
             Dgv_Customer.Columns("既定支払条件").HeaderText = "PaymentTerms"
             Dgv_Customer.Columns("メモ").HeaderText = "Memo"
             Dgv_Customer.Columns("会計用得意先コード").HeaderText = "AccountingCustomerCode"
-            Dgv_Customer.Columns("更新者").HeaderText = "Changer"
+            Dgv_Customer.Columns("更新者").HeaderText = "ModifiedBy"
             Dgv_Customer.Columns("更新日").HeaderText = "UpdateDate"
 
         End If
