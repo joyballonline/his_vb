@@ -7,9 +7,9 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{6850D325-F7D9-4072-BE5F-C4A5290D3970}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>HanbaiKanri.StartUp</StartupObject>
-    <RootNamespace>HanbaiKanri</RootNamespace>
-    <AssemblyName>HanbaiKanri</AssemblyName>
+    <StartupObject>SPIN.StartUp</StartupObject>
+    <RootNamespace>SPIN</RootNamespace>
+    <AssemblyName>SPIN</AssemblyName>
     <MyType>WindowsFormsWithCustomSubMain</MyType>
     <SccProjectName>
     </SccProjectName>
@@ -50,7 +50,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>HanbaiKanri.xml</DocumentationFile>
+    <DocumentationFile>SPIN.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
@@ -60,9 +60,12 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>HanbaiKanri.xml</DocumentationFile>
+    <DocumentationFile>SPIN.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
     <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Accessibility" />
@@ -98,10 +101,10 @@
     <Import Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Account.Designer.vb">
+    <Compile Include="Form\Account.Designer.vb">
       <DependentUpon>Account.vb</DependentUpon>
     </Compile>
-    <Compile Include="Account.vb">
+    <Compile Include="Form\Account.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Business\CommonConst.vb" />
@@ -450,7 +453,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Account.resx">
+    <EmbeddedResource Include="Form\Account.resx">
       <DependentUpon>Account.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\AccountsPayable.resx">
@@ -628,6 +631,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="bin\Setting\HanbaiKanri.ini" />
+    <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>

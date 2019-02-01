@@ -8,11 +8,11 @@ Imports System.Runtime.InteropServices
 
 ' アセンブリ属性の値を確認します。
 
-<Assembly: AssemblyTitle("販売管理システム")>
+<Assembly: AssemblyTitle("SPIN")>
 <Assembly: AssemblyDescription("")>
-<Assembly: AssemblyCompany("株式会社カネキ吉田商店")>
-<Assembly: AssemblyProduct("HanbaiKanri")>
-<Assembly: AssemblyCopyright("Copyright kaneki-yoshida Co., Ltd. All Rights Reserved.")>
+<Assembly: AssemblyCompany("Phoenix International Systems")>
+<Assembly: AssemblyProduct("SPIN")>
+<Assembly: AssemblyCopyright("Copyright Phoenix International Systems., Ltd. All Rights Reserved.")>
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' 既定値にすることができます:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.0.0.0")>
-<Assembly: AssemblyFileVersion("1.0.0.0")>
+<Assembly: AssemblyVersion("1.3.8.0")>
+<Assembly: AssemblyFileVersion("1.3.8.0")>
