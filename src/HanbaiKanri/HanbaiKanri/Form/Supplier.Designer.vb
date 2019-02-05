@@ -151,6 +151,7 @@ Partial Class Supplier
         '
         Me.TxtMemo.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtMemo.Location = New System.Drawing.Point(128, 328)
+        Me.TxtMemo.MaxLength = 255
         Me.TxtMemo.Name = "TxtMemo"
         Me.TxtMemo.Size = New System.Drawing.Size(234, 22)
         Me.TxtMemo.TabIndex = 15
@@ -159,6 +160,7 @@ Partial Class Supplier
         '
         Me.TxtTariffRate.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtTariffRate.Location = New System.Drawing.Point(483, 238)
+        Me.TxtTariffRate.MaxLength = 6
         Me.TxtTariffRate.Name = "TxtTariffRate"
         Me.TxtTariffRate.Size = New System.Drawing.Size(234, 22)
         Me.TxtTariffRate.TabIndex = 12
@@ -167,6 +169,7 @@ Partial Class Supplier
         '
         Me.TxtPerson.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtPerson.Location = New System.Drawing.Point(483, 193)
+        Me.TxtPerson.MaxLength = 30
         Me.TxtPerson.Name = "TxtPerson"
         Me.TxtPerson.Size = New System.Drawing.Size(234, 22)
         Me.TxtPerson.TabIndex = 10
@@ -175,6 +178,7 @@ Partial Class Supplier
         '
         Me.TxtFax.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtFax.Location = New System.Drawing.Point(128, 193)
+        Me.TxtFax.MaxLength = 20
         Me.TxtFax.Name = "TxtFax"
         Me.TxtFax.Size = New System.Drawing.Size(234, 22)
         Me.TxtFax.TabIndex = 9
@@ -192,6 +196,7 @@ Partial Class Supplier
         '
         Me.TxtTel.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtTel.Location = New System.Drawing.Point(483, 148)
+        Me.TxtTel.MaxLength = 20
         Me.TxtTel.Name = "TxtTel"
         Me.TxtTel.Size = New System.Drawing.Size(234, 22)
         Me.TxtTel.TabIndex = 8
@@ -280,6 +285,7 @@ Partial Class Supplier
         '
         Me.TxtAddress3.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtAddress3.Location = New System.Drawing.Point(128, 148)
+        Me.TxtAddress3.MaxLength = 100
         Me.TxtAddress3.Name = "TxtAddress3"
         Me.TxtAddress3.Size = New System.Drawing.Size(234, 22)
         Me.TxtAddress3.TabIndex = 7
@@ -288,6 +294,7 @@ Partial Class Supplier
         '
         Me.TxtAddress2.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtAddress2.Location = New System.Drawing.Point(483, 103)
+        Me.TxtAddress2.MaxLength = 100
         Me.TxtAddress2.Name = "TxtAddress2"
         Me.TxtAddress2.Size = New System.Drawing.Size(234, 22)
         Me.TxtAddress2.TabIndex = 6
@@ -296,6 +303,7 @@ Partial Class Supplier
         '
         Me.TxtAddress1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtAddress1.Location = New System.Drawing.Point(128, 103)
+        Me.TxtAddress1.MaxLength = 100
         Me.TxtAddress1.Name = "TxtAddress1"
         Me.TxtAddress1.Size = New System.Drawing.Size(234, 22)
         Me.TxtAddress1.TabIndex = 5
@@ -304,6 +312,7 @@ Partial Class Supplier
         '
         Me.TxtPostalCode.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtPostalCode.Location = New System.Drawing.Point(483, 57)
+        Me.TxtPostalCode.MaxLength = 7
         Me.TxtPostalCode.Name = "TxtPostalCode"
         Me.TxtPostalCode.Size = New System.Drawing.Size(234, 22)
         Me.TxtPostalCode.TabIndex = 4
@@ -312,6 +321,7 @@ Partial Class Supplier
         '
         Me.TxtSupplierShortName.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtSupplierShortName.Location = New System.Drawing.Point(128, 57)
+        Me.TxtSupplierShortName.MaxLength = 30
         Me.TxtSupplierShortName.Name = "TxtSupplierShortName"
         Me.TxtSupplierShortName.Size = New System.Drawing.Size(234, 22)
         Me.TxtSupplierShortName.TabIndex = 3
@@ -320,6 +330,7 @@ Partial Class Supplier
         '
         Me.TxtSupplierName.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtSupplierName.Location = New System.Drawing.Point(483, 12)
+        Me.TxtSupplierName.MaxLength = 100
         Me.TxtSupplierName.Name = "TxtSupplierName"
         Me.TxtSupplierName.Size = New System.Drawing.Size(234, 22)
         Me.TxtSupplierName.TabIndex = 2
@@ -328,6 +339,7 @@ Partial Class Supplier
         '
         Me.TxtSupplierCode.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtSupplierCode.Location = New System.Drawing.Point(128, 12)
+        Me.TxtSupplierCode.MaxLength = 8
         Me.TxtSupplierCode.Name = "TxtSupplierCode"
         Me.TxtSupplierCode.Size = New System.Drawing.Size(234, 22)
         Me.TxtSupplierCode.TabIndex = 1
@@ -385,6 +397,7 @@ Partial Class Supplier
         '
         Me.TxtAccountNumber.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtAccountNumber.Location = New System.Drawing.Point(128, 463)
+        Me.TxtAccountNumber.MaxLength = 20
         Me.TxtAccountNumber.Name = "TxtAccountNumber"
         Me.TxtAccountNumber.Size = New System.Drawing.Size(234, 22)
         Me.TxtAccountNumber.TabIndex = 21
@@ -393,6 +406,7 @@ Partial Class Supplier
         '
         Me.TxtDepositCategory.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtDepositCategory.Location = New System.Drawing.Point(483, 418)
+        Me.TxtDepositCategory.MaxLength = 1
         Me.TxtDepositCategory.Name = "TxtDepositCategory"
         Me.TxtDepositCategory.Size = New System.Drawing.Size(234, 22)
         Me.TxtDepositCategory.TabIndex = 20
@@ -401,6 +415,7 @@ Partial Class Supplier
         '
         Me.TxtBranchOfficeCode.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtBranchOfficeCode.Location = New System.Drawing.Point(128, 418)
+        Me.TxtBranchOfficeCode.MaxLength = 3
         Me.TxtBranchOfficeCode.Name = "TxtBranchOfficeCode"
         Me.TxtBranchOfficeCode.Size = New System.Drawing.Size(234, 22)
         Me.TxtBranchOfficeCode.TabIndex = 19
@@ -409,6 +424,7 @@ Partial Class Supplier
         '
         Me.TxtBankCode.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtBankCode.Location = New System.Drawing.Point(128, 373)
+        Me.TxtBankCode.MaxLength = 4
         Me.TxtBankCode.Name = "TxtBankCode"
         Me.TxtBankCode.Size = New System.Drawing.Size(234, 22)
         Me.TxtBankCode.TabIndex = 17
@@ -427,6 +443,7 @@ Partial Class Supplier
         '
         Me.TxtAccountName.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtAccountName.Location = New System.Drawing.Point(483, 463)
+        Me.TxtAccountName.MaxLength = 60
         Me.TxtAccountName.Name = "TxtAccountName"
         Me.TxtAccountName.Size = New System.Drawing.Size(234, 22)
         Me.TxtAccountName.TabIndex = 22
@@ -455,6 +472,7 @@ Partial Class Supplier
         '
         Me.TxtPosition.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtPosition.Location = New System.Drawing.Point(128, 238)
+        Me.TxtPosition.MaxLength = 20
         Me.TxtPosition.Name = "TxtPosition"
         Me.TxtPosition.Size = New System.Drawing.Size(234, 22)
         Me.TxtPosition.TabIndex = 11
@@ -533,6 +551,7 @@ Partial Class Supplier
         '
         Me.TxtPph.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtPph.Location = New System.Drawing.Point(128, 283)
+        Me.TxtPph.MaxLength = 6
         Me.TxtPph.Name = "TxtPph"
         Me.TxtPph.Size = New System.Drawing.Size(234, 22)
         Me.TxtPph.TabIndex = 13
@@ -561,6 +580,7 @@ Partial Class Supplier
         '
         Me.TxtTransportationCost.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtTransportationCost.Location = New System.Drawing.Point(483, 283)
+        Me.TxtTransportationCost.MaxLength = 6
         Me.TxtTransportationCost.Name = "TxtTransportationCost"
         Me.TxtTransportationCost.Size = New System.Drawing.Size(234, 22)
         Me.TxtTransportationCost.TabIndex = 14
@@ -579,6 +599,7 @@ Partial Class Supplier
         '
         Me.TxtBankName.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtBankName.Location = New System.Drawing.Point(483, 328)
+        Me.TxtBankName.MaxLength = 50
         Me.TxtBankName.Name = "TxtBankName"
         Me.TxtBankName.Size = New System.Drawing.Size(234, 22)
         Me.TxtBankName.TabIndex = 16
@@ -597,6 +618,7 @@ Partial Class Supplier
         '
         Me.TxtBranchName.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtBranchName.Location = New System.Drawing.Point(483, 373)
+        Me.TxtBranchName.MaxLength = 50
         Me.TxtBranchName.Name = "TxtBranchName"
         Me.TxtBranchName.Size = New System.Drawing.Size(234, 22)
         Me.TxtBranchName.TabIndex = 18
