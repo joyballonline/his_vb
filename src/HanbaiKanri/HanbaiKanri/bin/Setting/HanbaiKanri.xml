@@ -70,7 +70,7 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
 
 <!--**********************デフォルトMSGの定義**********************-->
 <DEFAULT_MSG>
-	<TITLE>原価管理システム</TITLE>
+	<TITLE>SPIN</TITLE>
 	<BUTTON_TYPE>OK</BUTTON_TYPE>
 	<ICONT_TYPE>None</ICONT_TYPE>
 	<DEFAULT_BUTTON>Button1</DEFAULT_BUTTON>
