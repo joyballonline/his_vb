@@ -85,63 +85,33 @@ Public Class DepositManagement
     End Sub
 
     Private Sub Quote_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'If _status = "VIEW" Then
-        '    DgvCustomer.Visible = False
-        '    DgvDeposit.Visible = False
-        '    DgvBillingInfo.Visible = False
-        '    LblDeposit.Visible = False
-        '    LblBillingInfo.Visible = False
-        '    LblNo1.Visible = False
-        '    LblNo2.Visible = False
-        '    LblNo3.Visible = False
-        '    LblDepositDate.Visible = False
-        '    LblRemarks.Visible = False
-        '    TxtCount1.Visible = False
-        '    TxtCount2.Visible = False
-        '    TxtCount3.Visible = False
-        '    TxtRemarks.Visible = False
-        '    DtpDepositDate.Visible = False
+        Dim Sql As String = ""
 
-        '    BtnAdd.Visible = False
-        '    BtnCal.Visible = False
-        '    BtnDelete.Visible = False
-        '    BtnRegist.Visible = False
-
-        '    DgvHistory.Location = New Point(10, 19)
-        '    DgvHistory.Location = New Size(1326, 625)
-        'End If
-        Dim Sql1 As String = ""
-
-        Sql1 += "SELECT "
-        Sql1 += "* "
-        Sql1 += "FROM "
-        Sql1 += "public"
-        Sql1 += "."
-        Sql1 += "m90_hanyo"
-        Sql1 += " WHERE "
-        Sql1 += "会社コード"
-        Sql1 += " ILIKE "
-        Sql1 += "'"
-        Sql1 += CompanyCode
-        Sql1 += "'"
-        Sql1 += " AND "
-        Sql1 += "固定キー"
-        Sql1 += " ILIKE "
-        Sql1 += "'"
-        Sql1 += "2"
-        Sql1 += "'"
+        Sql = " AND "
+        Sql += "固定キー"
+        Sql += " ILIKE "
+        Sql += "'"
+        Sql += "2"
+        Sql += "'"
 
         Dim reccnt As Integer = 0
-        Dim ds1 As DataSet = _db.selectDB(Sql1, RS, reccnt)
+
+        '汎用マスタから入金種目一覧を取得、プルダウンを作成
+        Dim dsHanyo As DataSet = getDsData("m90_hanyo", Sql)
 
         Dim table As New DataTable("Table")
         table.Columns.Add("Display", GetType(String))
         table.Columns.Add("Value", GetType(Integer))
 
-        For i As Integer = 0 To ds1.Tables(RS).Rows.Count - 1
-            table.Rows.Add(ds1.Tables(RS).Rows(i)("文字１"), ds1.Tables(RS).Rows(i)("可変キー"))
+        For i As Integer = 0 To dsHanyo.Tables(RS).Rows.Count - 1
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                table.Rows.Add(dsHanyo.Tables(RS).Rows(i)("文字２"), dsHanyo.Tables(RS).Rows(i)("可変キー"))
+            Else
+                table.Rows.Add(dsHanyo.Tables(RS).Rows(i)("文字１"), dsHanyo.Tables(RS).Rows(i)("可変キー"))
+            End If
         Next
 
+        '入金登録エリアに反映
         Dim column As New DataGridViewComboBoxColumn()
         column.DataSource = table
         column.ValueMember = "Value"
@@ -151,8 +121,10 @@ Public Class DepositManagement
 
         DgvDeposit.Columns.Insert(1, column)
 
+        '明細を描画
         BillLoad()
 
+        '翻訳
         If frmC01F10_Login.loginValue.Language = "ENG" Then
             LblHistory.Text = "MoneyReceiptDataHistory"
             LblDeposit.Text = "MoneyReceiptInput"
@@ -174,9 +146,9 @@ Public Class DepositManagement
             LblNo3.Location = New Point(1272, 335)
             LblNo3.Size = New Size(66, 22)
 
-            TxtCount1.Location = New Point(1228, 65)
-            TxtCount2.Location = New Point(1228, 198)
-            TxtCount3.Location = New Point(1228, 335)
+            TxtHistoryCount.Location = New Point(1228, 65)
+            TxtDepositCount.Location = New Point(1228, 198)
+            TxtBillingCount.Location = New Point(1228, 335)
 
             BtnAdd.Text = "Add"
             BtnAdd.Location = New Point(151, 203)
@@ -213,152 +185,137 @@ Public Class DepositManagement
         End If
     End Sub
 
+    '各Table内の作成
     Private Sub BillLoad()
-        Dim Sql1 As String = ""
-        Sql1 += "SELECT "
-        Sql1 += "* "
-        Sql1 += "FROM "
-        Sql1 += "public"
-        Sql1 += "."
-        Sql1 += "t10_cymnhd"
-        Sql1 += " WHERE "
-        Sql1 += "会社コード"
-        Sql1 += " ILIKE "
-        Sql1 += "'"
-        Sql1 += CompanyCode
-        Sql1 += "'"
-        Sql1 += " AND "
-        Sql1 += "得意先コード"
-        Sql1 += " ILIKE "
-        Sql1 += "'%"
-        Sql1 += CustomerCode
-        Sql1 += "%'"
 
-        Dim Sql2 As String = ""
-        Sql2 += "SELECT "
-        Sql2 += "* "
-        Sql2 += "FROM "
-        Sql2 += "public"
-        Sql2 += "."
-        Sql2 += "t25_nkinhd"
-        Sql2 += " WHERE "
-        Sql2 += "会社コード"
-        Sql2 += " ILIKE "
-        Sql2 += "'"
-        Sql2 += CompanyCode
-        Sql2 += "'"
-        Sql2 += " AND "
-        Sql2 += "請求先コード"
-        Sql2 += " ILIKE "
-        Sql2 += "'%"
-        Sql2 += CustomerCode
-        Sql2 += "%'"
+        setDgvCustomer() '請求先情報の出力
 
-        Dim Sql4 As String = ""
-        Sql4 += "SELECT "
-        Sql4 += "* "
-        Sql4 += "FROM "
-        Sql4 += "public"
-        Sql4 += "."
-        Sql4 += "t26_nkindt"
-        Sql4 += " WHERE "
-        Sql4 += "会社コード"
-        Sql4 += " ILIKE "
-        Sql4 += "'"
-        Sql4 += CompanyCode
-        Sql4 += "'"
-        Sql4 += " AND "
-        Sql4 += "請求先コード"
-        Sql4 += " ILIKE "
-        Sql4 += "'%"
-        Sql4 += CustomerCode
-        Sql4 += "%'"
+        setDgvHistory() '入金済みデータの出力
 
-        Dim Sql3 As String = ""
-        Sql3 += "SELECT "
-        Sql3 += "* "
-        Sql3 += "FROM "
-        Sql3 += "public"
-        Sql3 += "."
-        Sql3 += "t23_skyuhd"
-        Sql3 += " WHERE "
-        Sql3 += "会社コード"
-        Sql3 += " ILIKE "
-        Sql3 += "'"
-        Sql3 += CompanyCode
-        Sql3 += "'"
-        Sql3 += " AND "
-        Sql3 += "得意先コード"
-        Sql3 += " ILIKE "
-        Sql3 += "'%"
-        Sql3 += CustomerCode
-        Sql3 += "%'"
-        Sql3 += " AND "
-        Sql3 += "取消区分"
-        Sql3 += " = "
-        Sql3 += "0"
+        setDgvDeposit() '入金入力エリアの作成
 
-        Dim reccnt As Integer = 0
-        Dim ds1 As DataSet = _db.selectDB(Sql1, RS, reccnt)
-        Dim ds2 As DataSet = _db.selectDB(Sql2, RS, reccnt)
-        Dim ds3 As DataSet = _db.selectDB(Sql3, RS, reccnt)
-        Dim ds4 As DataSet = _db.selectDB(Sql4, RS, reccnt)
-        Dim OrderAmount As Integer = 0
-        Dim BillingAmount As Integer = 0
-        Dim Balance As Integer = 0
-        Dim SellingBalance As Integer = 0
+        setDgvBillingInfo() '請求情報の出力
 
-        For index1 As Integer = 0 To ds1.Tables(RS).Rows.Count - 1
-            OrderAmount += ds1.Tables(RS).Rows(index1)("見積金額")
-        Next
+    End Sub
 
-        For index2 As Integer = 0 To ds3.Tables(RS).Rows.Count - 1
-            BillingAmount += ds3.Tables(RS).Rows(index2)("請求金額計")
-        Next
+    '請求先情報
+    Private Sub setDgvCustomer()
+        Dim Sql As String = ""
+        Dim AccountsReceivable As Integer
 
-        For index2 As Integer = 0 To ds3.Tables(RS).Rows.Count - 1
-            SellingBalance += ds3.Tables(RS).Rows(index2)("売掛残高")
-        Next
+        Sql = " AND "
+        Sql += "得意先コード"
+        Sql += " ILIKE "
+        Sql += "'%"
+        Sql += CustomerCode
+        Sql += "%'"
 
-        Balance = OrderAmount - BillingAmount
+        '得意先と一致する請求基本を取得
+        Dim dsSkyuhd As DataSet = getDsData("t23_skyuhd", Sql)
 
+        '売掛残高を集計
+        AccountsReceivable = IIf(
+            dsSkyuhd.Tables(RS).Compute("SUM(売掛残高)", Nothing) IsNot DBNull.Value,
+            dsSkyuhd.Tables(RS).Compute("SUM(売掛残高)", Nothing),
+            0
+        )
+
+        '請求先情報の出力
         DgvCustomer.Rows.Add()
         DgvCustomer.Rows(0).Cells("請求先").Value = CustomerName
-        DgvCustomer.Rows(0).Cells("請求残高").Value = SellingBalance
-        TxtCount1.Text = DgvDeposit.Rows.Count()
-        For index As Integer = 0 To ds4.Tables(RS).Rows.Count - 1
+        DgvCustomer.Rows(0).Cells("請求残高").Value = AccountsReceivable
+    End Sub
+
+    '入金済みデータ
+    Private Sub setDgvHistory()
+        Dim Sql As String = ""
+
+        Sql = " AND "
+        Sql += "請求先コード"
+        Sql += " ILIKE "
+        Sql += "'%"
+        Sql += CustomerCode
+        Sql += "%'"
+
+        '得意先と一致する入金明細を取得
+        Dim dsNkindt As DataSet = getDsData("t26_nkindt", Sql)
+
+        '明細行の件数をセット
+        TxtHistoryCount.Text = dsNkindt.Tables(RS).Rows.Count()
+
+
+        '入金済みデータの出力
+        For index As Integer = 0 To dsNkindt.Tables(RS).Rows.Count - 1
             DgvHistory.Rows.Add()
             DgvHistory.Rows(index).Cells("No").Value = index + 1
-            DgvHistory.Rows(index).Cells("入金済請求先").Value = ds4.Tables(RS).Rows(index)("請求先名")
-            DgvHistory.Rows(index).Cells("入金番号").Value = ds4.Tables(RS).Rows(index)("入金番号")
-            DgvHistory.Rows(index).Cells("入金日").Value = ds4.Tables(RS).Rows(index)("入金日")
-            DgvHistory.Rows(index).Cells("入金種目").Value = ds4.Tables(RS).Rows(index)("入金種別名")
-            DgvHistory.Rows(index).Cells("入金済入金額計").Value = ds4.Tables(RS).Rows(index)("入金額")
-            DgvHistory.Rows(index).Cells("備考").Value = ds4.Tables(RS).Rows(index)("備考")
+            DgvHistory.Rows(index).Cells("入金済請求先").Value = dsNkindt.Tables(RS).Rows(index)("請求先名")
+            DgvHistory.Rows(index).Cells("入金番号").Value = dsNkindt.Tables(RS).Rows(index)("入金番号")
+            DgvHistory.Rows(index).Cells("入金日").Value = dsNkindt.Tables(RS).Rows(index)("入金日")
+            DgvHistory.Rows(index).Cells("入金種目").Value = dsNkindt.Tables(RS).Rows(index)("入金種別名")
+            DgvHistory.Rows(index).Cells("入金済入金額計").Value = dsNkindt.Tables(RS).Rows(index)("入金額")
+            DgvHistory.Rows(index).Cells("備考").Value = dsNkindt.Tables(RS).Rows(index)("備考")
         Next
 
-        TxtCount1.Text = ds2.Tables(RS).Rows.Count
-        TxtCount2.Text = DgvHistory.Rows.Count()
-        For index As Integer = 0 To ds3.Tables(RS).Rows.Count - 1
+    End Sub
+
+    '入金入力
+    Private Sub setDgvDeposit()
+        '明細行の件数をセット
+        TxtDepositCount.Text = DgvDeposit.Rows.Count()
+    End Sub
+
+
+    '請求情報の出力
+    Private Sub setDgvBillingInfo()
+        Dim Sql As String = ""
+
+        Sql = " AND "
+        Sql += "得意先コード"
+        Sql += " ILIKE "
+        Sql += "'%"
+        Sql += CustomerCode
+        Sql += "%'"
+        Sql += " AND "
+        Sql += "取消区分"
+        Sql += " = "
+        Sql += "0"
+
+        '得意先と一致する請求基本を取得
+        Dim dsSkyuhd As DataSet = getDsData("t23_skyuhd", Sql)
+
+
+        '明細行の件数をセット
+        TxtBillingCount.Text = dsSkyuhd.Tables(RS).Rows.Count()
+
+        't25_nkinhd 請求金額に登録する
+        BillingAmount = IIf(
+            dsSkyuhd.Tables(RS).Compute("SUM(請求金額計)", Nothing) IsNot DBNull.Value,
+            dsSkyuhd.Tables(RS).Compute("SUM(請求金額計)", Nothing),
+            0
+        )
+
+        '請求情報の出力
+        For i As Integer = 0 To dsSkyuhd.Tables(RS).Rows.Count - 1
             DgvBillingInfo.Rows.Add()
-            DgvBillingInfo.Rows(index).Cells("InfoNo").Value = index + 1
-            DgvBillingInfo.Rows(index).Cells("請求情報請求番号").Value = ds3.Tables(RS).Rows(index)("請求番号")
-            DgvBillingInfo.Rows(index).Cells("請求日").Value = ds3.Tables(RS).Rows(index)("請求日")
-            DgvBillingInfo.Rows(index).Cells("請求金額").Value = ds3.Tables(RS).Rows(index)("請求金額計")
-            If ds3.Tables(RS).Rows(index)("入金額計") Is DBNull.Value Then
-                DgvBillingInfo.Rows(index).Cells("請求情報入金額計").Value = 0
+            DgvBillingInfo.Rows(i).Cells("InfoNo").Value = i + 1
+            DgvBillingInfo.Rows(i).Cells("請求情報請求番号").Value = dsSkyuhd.Tables(RS).Rows(i)("請求番号")
+            DgvBillingInfo.Rows(i).Cells("請求日").Value = dsSkyuhd.Tables(RS).Rows(i)("請求日")
+            DgvBillingInfo.Rows(i).Cells("請求金額").Value = dsSkyuhd.Tables(RS).Rows(i)("請求金額計")
+            If dsSkyuhd.Tables(RS).Rows(i)("入金額計") Is DBNull.Value Then
+                DgvBillingInfo.Rows(i).Cells("請求情報入金額計").Value = 0
             Else
-                DgvBillingInfo.Rows(index).Cells("請求情報入金額計").Value = ds3.Tables(RS).Rows(index)("入金額計")
+                DgvBillingInfo.Rows(i).Cells("請求情報入金額計").Value = dsSkyuhd.Tables(RS).Rows(i)("入金額計")
             End If
 
-            If ds3.Tables(RS).Rows(index)("入金額計") Is DBNull.Value Then
-                DgvBillingInfo.Rows(index).Cells("請求情報請求残高").Value = ds3.Tables(RS).Rows(index)("請求金額計")
+            If dsSkyuhd.Tables(RS).Rows(i)("入金額計") Is DBNull.Value Then
+                DgvBillingInfo.Rows(i).Cells("請求情報請求残高").Value = dsSkyuhd.Tables(RS).Rows(i)("請求金額計")
             Else
-                DgvBillingInfo.Rows(index).Cells("請求情報請求残高").Value = ds3.Tables(RS).Rows(index)("請求金額計") - ds3.Tables(RS).Rows(index)("入金額計")
+                DgvBillingInfo.Rows(i).Cells("請求情報請求残高").Value = dsSkyuhd.Tables(RS).Rows(i)("請求金額計") - dsSkyuhd.Tables(RS).Rows(i)("入金額計")
             End If
-            DgvBillingInfo.Rows(index).Cells("入金額").Value = 0
+            DgvBillingInfo.Rows(i).Cells("入金額").Value = 0
         Next
-        TxtCount3.Text = DgvBillingInfo.Rows.Count()
+
+
     End Sub
 
     '前の画面に戻る
@@ -366,22 +323,27 @@ Public Class DepositManagement
         _parentForm.Enabled = True
         _parentForm.Show()
         Me.Dispose()
+        Me.Dispose()
     End Sub
 
+    '入金入力行の追加
     Private Sub BtnAdd_Click(sender As Object, e As EventArgs) Handles BtnAdd.Click
         DgvDeposit.Rows.Add()
         DgvDeposit.Rows(DgvDeposit.Rows.Count() - 1).Cells("入金種目").Value = 1
+
         '最終行のインデックスを取得
         Dim index As Integer = DgvDeposit.Rows.Count()
+
         '行番号の振り直し
         Dim No As Integer = 1
         For c As Integer = 0 To index - 1
             DgvDeposit.Rows(c).Cells(0).Value = No
             No += 1
         Next c
-        TxtCount2.Text = DgvDeposit.Rows.Count()
+        TxtDepositCount.Text = DgvDeposit.Rows.Count()
     End Sub
 
+    '入金入力行の削除
     Private Sub BtnDelete_Click(sender As Object, e As EventArgs) Handles BtnDelete.Click
         For Each r As DataGridViewCell In DgvDeposit.SelectedCells
             DgvDeposit.Rows.RemoveAt(r.RowIndex)
@@ -394,9 +356,10 @@ Public Class DepositManagement
             DgvDeposit.Rows(c).Cells(0).Value = No
             No += 1
         Next c
-        TxtCount3.Text = DgvDeposit.Rows.Count()
+        TxtDepositCount.Text = DgvDeposit.Rows.Count()
     End Sub
 
+    '自動振分の実行
     Private Sub BtnCal_Click(sender As Object, e As EventArgs) Handles BtnCal.Click
         Dim Total As Integer = 0
         Dim count As Integer = 0
@@ -429,84 +392,107 @@ Public Class DepositManagement
 
     End Sub
 
+    'param1：String 採番キー
+    'param2：DateTime 登録日
+    'Return: String 伝票番号
+    '伝票番号を取得
+    Private Function getSaiban(ByVal key As String, ByVal today As DateTime) As String
+        Dim Sql As String = ""
+        Dim saibanID As String = ""
+        Dim reccnt As Integer = 0 'DB用（デフォルト）
+
+        Try
+            Sql = "SELECT "
+            Sql += "* "
+            Sql += "FROM "
+            Sql += "public.m80_saiban"
+            Sql += " WHERE "
+            Sql += "会社コード = '" & frmC01F10_Login.loginValue.BumonNM & "'"
+            Sql += " AND "
+            Sql += "採番キー = '" & key & "'"
+
+            Dim dsSaiban As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+            saibanID = dsSaiban.Tables(RS).Rows(0)("接頭文字")
+            saibanID += today.ToString("MMdd")
+            saibanID += dsSaiban.Tables(RS).Rows(0)("最新値").ToString.PadLeft(dsSaiban.Tables(RS).Rows(0)("連番桁数"), "0")
+
+            Dim keyNo As Integer
+
+            If dsSaiban.Tables(RS).Rows(0)("最新値") = dsSaiban.Tables(RS).Rows(0)("最大値") Then
+                '最新値が最大と同じ場合、最小値にリセット
+                keyNo = dsSaiban.Tables(RS).Rows(0)("最小値")
+            Else
+                '最新値+1
+                keyNo = dsSaiban.Tables(RS).Rows(0)("最新値") + 1
+            End If
+
+            Sql = "UPDATE "
+            Sql += "Public.m80_saiban "
+            Sql += "SET "
+            Sql += " 最新値 "
+            Sql += " = '"
+            Sql += keyNo.ToString
+            Sql += "', "
+            Sql += "更新者"
+            Sql += " = '"
+            Sql += frmC01F10_Login.loginValue.TantoNM
+            Sql += "', "
+            Sql += "更新日"
+            Sql += " = '"
+            Sql += today
+            Sql += "' "
+            Sql += "WHERE"
+            Sql += " 会社コード"
+            Sql += "='"
+            Sql += frmC01F10_Login.loginValue.BumonNM
+            Sql += "'"
+            Sql += " AND"
+            Sql += " 採番キー = '" & key & "'"
+            Console.WriteLine(Sql)
+            _db.executeDB(Sql)
+
+            Return saibanID
+        Catch ex As Exception
+            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
+            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", UtilClass.getErrDetail(ex)))
+        End Try
+
+    End Function
+
+    '登録処理
     Private Sub BtnRegist_Click(sender As Object, e As EventArgs) Handles BtnRegist.Click
         Dim errflg As Boolean = True
         Dim dtToday As DateTime = DateTime.Now
         Dim reccnt As Integer = 0
         Dim DepositAmount As Integer = 0
 
-        Dim Saiban1 As String = ""
         Dim Sql As String = ""
-        Dim Sql1 As String = ""
-        Dim Sql2 As String = ""
-        Dim Sql3 As String = ""
-        Dim Sql4 As String = ""
-        Dim Sql5 As String = ""
-        Dim Sql6 As String = ""
 
-        Saiban1 += "SELECT "
-        Saiban1 += "* "
-        Saiban1 += "FROM "
-        Saiban1 += "public"
-        Saiban1 += "."
-        Saiban1 += "m80_saiban"
-        Saiban1 += " WHERE "
-        Saiban1 += "採番キー"
-        Saiban1 += " ILIKE "
-        Saiban1 += "'"
-        Saiban1 += "90"
-        Saiban1 += "'"
+        Dim PMSaiban As String = getSaiban("90", dtToday)
 
-        Dim dsSaiban1 As DataSet = _db.selectDB(Saiban1, RS, reccnt)
-
-        Dim PM As String = dsSaiban1.Tables(RS).Rows(0)("接頭文字")
-        PM += dtToday.ToString("MMdd")
-        PM += dsSaiban1.Tables(RS).Rows(0)("最新値").ToString.PadLeft(dsSaiban1.Tables(RS).Rows(0)("連番桁数"), "0")
-
+        '入力した入金額を合算
         For i As Integer = 0 To DgvDeposit.Rows.Count - 1
             DepositAmount += DgvDeposit.Rows(i).Cells("入力入金額").Value
         Next
 
-        Sql += "SELECT "
-        Sql += "* "
-        Sql += "FROM "
-        Sql += "public"
-        Sql += "."
-        Sql += "t23_skyuhd"
-        Sql += " WHERE "
-        Sql += "会社コード"
-        Sql += " ILIKE "
-        Sql += "'"
-        Sql += CompanyCode
-        Sql += "'"
-        Sql += " AND "
+        Sql = " AND "
         Sql += "得意先コード"
         Sql += " ILIKE "
         Sql += "'%"
         Sql += CustomerCode
         Sql += "%'"
         Sql += " AND "
-        Sql += "取消区分"
-        Sql += " = "
-        Sql += "0"
+        Sql += "取消区分 = 0"
 
-        Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
+        '請求基本データ取得
+        Dim dsSkyuhd As DataSet = getDsData("t23_skyuhd", Sql)
 
-        Sql1 += "SELECT "
-        Sql1 += "* "
-        Sql1 += "FROM "
-        Sql1 += "public"
-        Sql1 += "."
-        Sql1 += "m01_company"
-        Sql1 += " WHERE "
-        Sql1 += "会社コード"
-        Sql1 += " ILIKE "
-        Sql1 += "'"
-        Sql1 += CompanyCode
-        Sql1 += "'"
+        '会社情報の取得
+        Dim dsCompany As DataSet = getDsData("m01_company")
 
-        Dim ds1 As DataSet = _db.selectDB(Sql1, RS, reccnt)
-
+        '入力内容チェック
+        '入金入力がなかったら
         If DgvDeposit.Rows.Count = -1 Then
             If frmC01F10_Login.loginValue.Language = "ENG" Then
                 MessageBox.Show("Deposit information has not been entered.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -517,6 +503,7 @@ Public Class DepositManagement
             errflg = False
         End If
 
+        '入金入力があっても入金額が0だったら
         For index As Integer = 0 To DgvDeposit.Rows.Count - 1
             If DgvDeposit.Rows(index).Cells("入力入金額").Value <= 0 Then
                 If frmC01F10_Login.loginValue.Language = "ENG" Then
@@ -528,358 +515,213 @@ Public Class DepositManagement
             End If
         Next
 
+        'エラーがなかったら
         If errflg Then
-            Sql2 = ""
-            Sql2 += "INSERT INTO "
-            Sql2 += "Public."
-            Sql2 += "t25_nkinhd("
-            Sql2 += "会社コード, 入金番号, 入金日, 請求先コード, 請求先名, 振込先, 請求金額, 入金額, 請求残高, 備考, 取消区分, 登録日, 更新者, 更新日)"
-            Sql2 += " VALUES('"
-            Sql2 += CompanyCode
-            Sql2 += "', '"
-            Sql2 += PM
-            Sql2 += "', '"
-            Sql2 += dtToday
-            Sql2 += "', '"
-            Sql2 += CustomerCode
-            Sql2 += "', '"
-            Sql2 += CustomerName
-            Sql2 += "', '"
-            Sql2 += ds1.Tables(RS).Rows(0)("銀行名")
-            Sql2 += " "
-            Sql2 += ds1.Tables(RS).Rows(0)("支店名")
-            Sql2 += " "
-            Sql2 += ds1.Tables(RS).Rows(0)("預金種目")
-            Sql2 += " "
-            Sql2 += ds1.Tables(RS).Rows(0)("口座番号")
-            Sql2 += " "
-            Sql2 += ds1.Tables(RS).Rows(0)("口座名義")
-            Sql2 += "', '"
-            Sql2 += BillingAmount.ToString
-            Sql2 += "', '"
-            Sql2 += DepositAmount.ToString
-            Sql2 += "', '"
-            Sql2 += Balance.ToString
-            Sql2 += "', '"
-            Sql2 += TxtRemarks.Text
-            Sql2 += "', '"
-            Sql2 += "0"
-            Sql2 += "', '"
-            Sql2 += dtToday
-            Sql2 += "', '"
-            Sql2 += frmC01F10_Login.loginValue.TantoNM
-            Sql2 += "', '"
-            Sql2 += dtToday
-            Sql2 += " ')"
-            Sql2 += "RETURNING 会社コード"
-            Sql2 += ", "
-            Sql2 += "入金番号"
-            Sql2 += ", "
-            Sql2 += "入金日"
-            Sql2 += ", "
-            Sql2 += "請求先コード"
-            Sql2 += ", "
-            Sql2 += "請求先名"
-            Sql2 += ", "
-            Sql2 += "振込先"
-            Sql2 += ", "
-            Sql2 += "請求金額"
-            Sql2 += ", "
-            Sql2 += "入金額"
-            Sql2 += ", "
-            Sql2 += "請求残高"
-            Sql2 += ", "
-            Sql2 += "備考"
-            Sql2 += ", "
-            Sql2 += "取消区分"
-            Sql2 += ", "
-            Sql2 += "登録日"
-            Sql2 += ", "
-            Sql2 += "更新者"
-            Sql2 += ", "
-            Sql2 += "更新日"
 
-            _db.executeDB(Sql2)
+            't25_nkinhd 入金基本テーブルに新規追加
+            Sql = "INSERT INTO "
+            Sql += "Public."
+            Sql += "t25_nkinhd("
+            Sql += "会社コード, 入金番号, 入金日, 請求先コード, 請求先名, 振込先, 入金額,  備考, 取消区分, 登録日, 更新者, 更新日"
+            Sql += ") VALUES ('"
+            Sql += CompanyCode
+            Sql += "', '"
+            Sql += PMSaiban
+            Sql += "', '"
+            Sql += dtToday
+            Sql += "', '"
+            Sql += CustomerCode
+            Sql += "', '"
+            Sql += CustomerName
+            Sql += "', '"
+            Sql += dsCompany.Tables(RS).Rows(0)("銀行名")
+            Sql += " "
+            Sql += dsCompany.Tables(RS).Rows(0)("支店名")
+            Sql += " "
+            Sql += dsCompany.Tables(RS).Rows(0)("預金種目")
+            Sql += " "
+            Sql += dsCompany.Tables(RS).Rows(0)("口座番号")
+            Sql += " "
+            Sql += dsCompany.Tables(RS).Rows(0)("口座名義")
+            Sql += "', '"
+            Sql += DepositAmount.ToString
+            Sql += "', '"
+            Sql += TxtRemarks.Text
+            Sql += "', '"
+            Sql += "0"
+            Sql += "', '"
+            Sql += dtToday
+            Sql += "', '"
+            Sql += frmC01F10_Login.loginValue.TantoNM
+            Sql += "', '"
+            Sql += dtToday
+            Sql += " ')"
 
-            For index As Integer = 0 To DgvDeposit.Rows.Count - 1
-                Sql3 = ""
-                Sql3 += "INSERT INTO "
-                Sql3 += "Public."
-                Sql3 += "t26_nkindt("
-                Sql3 += "会社コード, 入金番号, 行番号, 入金種別, 入金種別名, 振込先, 入金額, 更新者, 更新日, 請求先コード, 請求先名, 入金日, 備考)"
-                Sql3 += " VALUES('"
-                Sql3 += CompanyCode
-                Sql3 += "', '"
-                Sql3 += PM
-                Sql3 += "', '"
-                Sql3 += DgvDeposit.Rows(index).Cells("行番号").Value.ToString
-                Sql3 += "', '"
-                Sql3 += DgvDeposit.Rows(index).Cells("入金種目").Value.ToString
-                Sql3 += "', '"
-                Sql3 += DgvDeposit.Rows(index).Cells("入金種目").Value.ToString
-                Sql3 += "', '"
-                Sql3 += ds1.Tables(RS).Rows(0)("銀行名").ToString
-                Sql3 += " "
-                Sql3 += ds1.Tables(RS).Rows(0)("支店名").ToString
-                Sql3 += " "
-                Sql3 += ds1.Tables(RS).Rows(0)("預金種目").ToString
-                Sql3 += " "
-                Sql3 += ds1.Tables(RS).Rows(0)("口座番号").ToString
-                Sql3 += " "
-                Sql3 += ds1.Tables(RS).Rows(0)("口座名義").ToString
-                Sql3 += "', '"
-                Sql3 += DgvDeposit.Rows(index).Cells("入力入金額").Value.ToString
-                Sql3 += "', '"
-                Sql3 += frmC01F10_Login.loginValue.TantoNM
-                Sql3 += "', '"
-                Sql3 += dtToday
-                Sql3 += "', '"
-                Sql3 += CustomerCode
-                Sql3 += "', '"
-                Sql3 += CustomerName
-                Sql3 += "', '"
-                Sql3 += dtToday
-                Sql3 += "', '"
-                Sql3 += TxtRemarks.Text
-                Sql3 += " ')"
-                Sql3 += "RETURNING 会社コード"
-                Sql3 += ", "
-                Sql3 += "入金番号"
-                Sql3 += ", "
-                Sql3 += "行番号"
-                Sql3 += ", "
-                Sql3 += "入金種別"
-                Sql3 += ", "
-                Sql3 += "入金種別名"
-                Sql3 += ", "
-                Sql3 += "振込先"
-                Sql3 += ", "
-                Sql3 += "入金額"
-                Sql3 += ", "
-                Sql3 += "更新者"
-                Sql3 += ", "
-                Sql3 += "更新日"
-                Sql3 += ", "
-                Sql3 += "請求先コード"
-                Sql3 += ", "
-                Sql3 += "請求先名"
-                Sql3 += ", "
-                Sql3 += "入金日"
-                Sql3 += ", "
-                Sql3 += "備考"
+            _db.executeDB(Sql)
 
-                _db.executeDB(Sql3)
+            't26_nkindt 入金明細テーブルに入金入力テーブルの明細を追加
+            For i As Integer = 0 To DgvDeposit.Rows.Count - 1
+                Sql = "INSERT INTO "
+                Sql += "Public."
+                Sql += "t26_nkindt("
+                Sql += "会社コード, 入金番号, 行番号, 入金種別, 入金種別名, 振込先, 入金額, 更新者, 更新日, 請求先コード, 請求先名, 入金日, 備考)"
+                Sql += " VALUES('"
+                Sql += CompanyCode
+                Sql += "', '"
+                Sql += PMSaiban
+                Sql += "', '"
+                Sql += DgvDeposit.Rows(i).Cells("行番号").Value.ToString
+                Sql += "', '"
+                Sql += DgvDeposit.Rows(i).Cells("入金種目").Value.ToString
+                Sql += "', '"
+                Sql += DgvDeposit.Rows(i).Cells("入金種目").Value.ToString
+                Sql += "', '"
+                Sql += dsCompany.Tables(RS).Rows(0)("銀行名").ToString
+                Sql += " "
+                Sql += dsCompany.Tables(RS).Rows(0)("支店名").ToString
+                Sql += " "
+                Sql += dsCompany.Tables(RS).Rows(0)("預金種目").ToString
+                Sql += " "
+                Sql += dsCompany.Tables(RS).Rows(0)("口座番号").ToString
+                Sql += " "
+                Sql += dsCompany.Tables(RS).Rows(0)("口座名義").ToString
+                Sql += "', '"
+                Sql += DgvDeposit.Rows(i).Cells("入力入金額").Value.ToString
+                Sql += "', '"
+                Sql += frmC01F10_Login.loginValue.TantoNM
+                Sql += "', '"
+                Sql += dtToday
+                Sql += "', '"
+                Sql += CustomerCode
+                Sql += "', '"
+                Sql += CustomerName
+                Sql += "', '"
+                Sql += dtToday
+                Sql += "', '"
+                Sql += TxtRemarks.Text
+                Sql += " ')"
 
-                Sql3 = ""
+                _db.executeDB(Sql)
+
             Next
 
+            't27_nkinkshihd 入金消込テーブルに新規追加
             For index As Integer = 0 To DgvBillingInfo.Rows.Count - 1
-                Sql4 = ""
-                Sql4 += "INSERT INTO "
-                Sql4 += "Public."
-                Sql4 += "t27_nkinkshihd("
-                Sql4 += "会社コード, 入金番号, 入金日, 請求番号, 請求先コード, 請求先名, 入金消込額計, 備考, 取消区分, 更新者, 更新日)"
-                Sql4 += " VALUES('"
-                Sql4 += CompanyCode
-                Sql4 += "', '"
-                Sql4 += PM
-                Sql4 += "', '"
-                Sql4 += dtToday
-                Sql4 += "', '"
-                Sql4 += DgvBillingInfo.Rows(index).Cells("請求情報請求番号").Value.ToString
-                Sql4 += "', '"
-                Sql4 += CustomerCode
-                Sql4 += "', '"
-                Sql4 += CustomerName
-                Sql4 += "', '"
-                Sql4 += DgvBillingInfo.Rows(index).Cells("入金額").Value.ToString
-                Sql4 += "', '"
-                Sql4 += TxtRemarks.Text
-                Sql4 += "', '"
-                Sql4 += "0"
-                Sql4 += "', '"
-                Sql4 += frmC01F10_Login.loginValue.TantoNM
-                Sql4 += "', '"
-                Sql4 += dtToday
-                Sql4 += " ')"
-                Sql4 += "RETURNING 会社コード"
-                Sql4 += ", "
-                Sql4 += "入金番号"
-                Sql4 += ", "
-                Sql4 += "入金日"
-                Sql4 += ", "
-                Sql4 += "請求番号"
-                Sql4 += ", "
-                Sql4 += "請求先コード"
-                Sql4 += ", "
-                Sql4 += "請求先名"
-                Sql4 += ", "
-                Sql4 += "入金消込額計"
-                Sql4 += ", "
-                Sql4 += "備考"
-                Sql4 += ", "
-                Sql4 += "取消区分"
-                Sql4 += ", "
-                Sql4 += "更新者"
-                Sql4 += ", "
-                Sql4 += "更新日"
+                Sql = "INSERT INTO "
+                Sql += "Public."
+                Sql += "t27_nkinkshihd("
+                Sql += "会社コード, 入金番号, 入金日, 請求番号, 請求先コード, 請求先名, 入金消込額計, 備考, 取消区分, 更新者, 更新日)"
+                Sql += " VALUES('"
+                Sql += CompanyCode
+                Sql += "', '"
+                Sql += PMSaiban
+                Sql += "', '"
+                Sql += dtToday
+                Sql += "', '"
+                Sql += DgvBillingInfo.Rows(index).Cells("請求情報請求番号").Value.ToString
+                Sql += "', '"
+                Sql += CustomerCode
+                Sql += "', '"
+                Sql += CustomerName
+                Sql += "', '"
+                Sql += DgvBillingInfo.Rows(index).Cells("入金額").Value.ToString
+                Sql += "', '"
+                Sql += TxtRemarks.Text
+                Sql += "', '"
+                Sql += "0"
+                Sql += "', '"
+                Sql += frmC01F10_Login.loginValue.TantoNM
+                Sql += "', '"
+                Sql += dtToday
+                Sql += " ')"
 
-                _db.executeDB(Sql4)
+                _db.executeDB(Sql)
             Next
 
             Dim DsSelling As Integer = 0
             Dim DgDeposit As Integer = 0
             Dim DsDeposit As Integer = 0
             Dim SellingBalance As Integer = 0
-            For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-                Sql5 = ""
-                Sql5 += "UPDATE "
-                Sql5 += "Public."
-                Sql5 += "t23_skyuhd "
-                Sql5 += "SET "
-                Sql5 += " 入金額計"
-                Sql5 += " = '"
-                If ds.Tables(RS).Rows(index)("入金額計") Is DBNull.Value Then
+
+            't23_skyuhd 請求基本テーブルを更新
+            For index As Integer = 0 To dsSkyuhd.Tables(RS).Rows.Count - 1
+
+                If dsSkyuhd.Tables(RS).Rows(index)("入金額計") Is DBNull.Value Then
+                    '請求基本の入金額計がなかったら入金額をそのまま登録
                     DsDeposit = DgvBillingInfo.Rows(index).Cells("入金額").Value
                 Else
-                    DsDeposit = DgvBillingInfo.Rows(index).Cells("入金額").Value + ds.Tables(RS).Rows(index)("入金額計")
+                    '入金額計があったら入金額を加算する
+                    DsDeposit = DgvBillingInfo.Rows(index).Cells("入金額").Value + dsSkyuhd.Tables(RS).Rows(index)("入金額計")
                 End If
 
-                Sql5 += DsDeposit.ToString
-                Sql5 += "', "
-                Sql5 += "売掛残高"
-                Sql5 += " = '"
-                DsSelling = ds.Tables(RS).Rows(index)("売掛残高")
-                DgDeposit = DgvBillingInfo.Rows(index).Cells("入金額").Value
-                SellingBalance = DsSelling - DgDeposit
-                Sql5 += SellingBalance.ToString
-                Sql5 += "', "
-                Sql5 += "入金完了日"
-                Sql5 += " = '"
-                Sql5 += dtToday
-                Sql5 += "' "
-                Sql5 += "WHERE"
-                Sql5 += " 会社コード"
-                Sql5 += "='"
-                Sql5 += CompanyCode
-                Sql5 += "'"
-                Sql5 += " AND"
-                Sql5 += " 請求番号"
-                Sql5 += "='"
-                Sql5 += ds.Tables(RS).Rows(index)("請求番号")
-                Sql5 += "' "
-                Sql5 += "RETURNING 会社コード"
-                Sql5 += ", "
-                Sql5 += "請求番号"
-                Sql5 += ", "
-                Sql5 += "請求区分"
-                Sql5 += ", "
-                Sql5 += "請求日"
-                Sql5 += ", "
-                Sql5 += "受注番号"
-                Sql5 += ", "
-                Sql5 += "受注番号枝番"
-                Sql5 += ", "
-                Sql5 += "得意先コード"
-                Sql5 += ", "
-                Sql5 += "得意先名"
-                Sql5 += ", "
-                Sql5 += "請求明細数"
-                Sql5 += ", "
-                Sql5 += "請求金額計"
-                Sql5 += ", "
-                Sql5 += "請求消費税計"
-                Sql5 += ", "
-                Sql5 += "現金振込計"
-                Sql5 += ", "
-                Sql5 += "手数料計"
-                Sql5 += ", "
-                Sql5 += "入金額計"
-                Sql5 += ", "
-                Sql5 += "売掛残高"
-                Sql5 += ", "
-                Sql5 += "備考1"
-                Sql5 += ", "
-                Sql5 += "備考2"
-                Sql5 += ", "
-                Sql5 += "入金完了日"
-                Sql5 += ", "
-                Sql5 += "登録日"
-                Sql5 += ", "
-                Sql5 += "更新者"
-                Sql5 += ", "
-                Sql5 += "取消日"
-                Sql5 += ", "
-                Sql5 += "取消区分"
-                Sql5 += ", "
-                Sql5 += "入金番号"
+                '残高を更新
+                SellingBalance = dsSkyuhd.Tables(RS).Rows(index)("売掛残高") - DgvBillingInfo.Rows(index).Cells("入金額").Value
 
-                _db.executeDB(Sql5)
-                Sql5 = ""
+                Sql = "UPDATE "
+                Sql += "Public."
+                Sql += "t23_skyuhd "
+                Sql += "SET "
+                Sql += " 入金額計"
+                Sql += " = '"
+                Sql += DsDeposit.ToString
+                Sql += "', "
+                Sql += "売掛残高"
+                Sql += " = '"
+                Sql += SellingBalance.ToString
+                Sql += "', "
+                Sql += "入金完了日"
+                Sql += " = '"
+                Sql += dtToday
+                Sql += "' "
+                Sql += "WHERE"
+                Sql += " 会社コード"
+                Sql += "='"
+                Sql += CompanyCode
+                Sql += "'"
+                Sql += " AND"
+                Sql += " 請求番号"
+                Sql += "='"
+                Sql += dsSkyuhd.Tables(RS).Rows(index)("請求番号")
+                Sql += "' "
+
+                _db.executeDB(Sql)
                 DsSelling = 0
                 DgDeposit = 0
                 DsDeposit = 0
                 SellingBalance = 0
             Next
 
-            Dim PMNo As Integer
+            '_parentForm.Enabled = True
+            '_parentForm.Show()
 
-            If dsSaiban1.Tables(RS).Rows(0)("最新値") = dsSaiban1.Tables(RS).Rows(0)("最大値") Then
-                PMNo = dsSaiban1.Tables(RS).Rows(0)("最小値")
-            Else
-                PMNo = dsSaiban1.Tables(RS).Rows(0)("最新値") + 1
-            End If
+            Dim openForm As Form = Nothing
+            openForm = New DepositList(_msgHd, _db, _langHd)
+            openForm.Show()
 
-            Sql6 = ""
-            Sql6 += "UPDATE "
-            Sql6 += "Public."
-            Sql6 += "m80_saiban "
-            Sql6 += "SET "
-            Sql6 += " 最新値"
-            Sql6 += " = '"
-            Sql6 += PMNo.ToString
-            Sql6 += "', "
-            Sql6 += "更新者"
-            Sql6 += " = '"
-            Sql6 += frmC01F10_Login.loginValue.TantoNM
-            Sql6 += "', "
-            Sql6 += "更新日"
-            Sql6 += " = '"
-            Sql6 += dtToday
-            Sql6 += "' "
-            Sql6 += "WHERE"
-            Sql6 += " 会社コード"
-            Sql6 += "='"
-            Sql6 += ds1.Tables(RS).Rows(0)("会社コード").ToString
-            Sql6 += "'"
-            Sql6 += " AND"
-            Sql6 += " 採番キー"
-            Sql6 += "='"
-            Sql6 += "90"
-            Sql6 += "' "
-            Sql6 += "RETURNING 会社コード"
-            Sql6 += ", "
-            Sql6 += "採番キー"
-            Sql6 += ", "
-            Sql6 += "最新値"
-            Sql6 += ", "
-            Sql6 += "最小値"
-            Sql6 += ", "
-            Sql6 += "最大値"
-            Sql6 += ", "
-            Sql6 += "接頭文字"
-            Sql6 += ", "
-            Sql6 += "連番桁数"
-            Sql6 += ", "
-            Sql6 += "更新者"
-            Sql6 += ", "
-            Sql6 += "更新日"
-
-            _db.executeDB(Sql6)
-
-            _parentForm.Enabled = True
-            _parentForm.Show()
             Me.Dispose()
         End If
     End Sub
+
+    'param1：String テーブル名
+    'param2：String 詳細条件
+    'Return: DataSet
+    Private Function getDsData(ByVal tableName As String, Optional ByRef txtParam As String = "") As DataSet
+        Dim reccnt As Integer = 0 'DB用（デフォルト）
+        Dim Sql As String = ""
+
+        Sql += "SELECT"
+        Sql += " *"
+        Sql += " FROM "
+
+        Sql += "public." & tableName
+        Sql += " WHERE "
+        Sql += "会社コード"
+        Sql += " ILIKE  "
+        Sql += "'" & frmC01F10_Login.loginValue.BumonNM & "'"
+        Sql += txtParam
+
+        Console.WriteLine(Sql)
+        Return _db.selectDB(Sql, RS, reccnt)
+    End Function
+
 End Class

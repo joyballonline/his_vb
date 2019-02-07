@@ -63,101 +63,88 @@ Public Class DepositList
 
     End Sub
 
-    Private Sub MstCustomere_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim Sql1 As String = ""
-        Dim Sql2 As String = ""
-        Dim Sql3 As String = ""
+
+    Private Sub DepositList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim Sql As String = ""
         Dim reccnt As Integer = 0
 
-        Sql1 += "SELECT "
-        Sql1 += "* "
-        Sql1 += "FROM "
-        Sql1 += "public"
-        Sql1 += "."
-        Sql1 += "m10_customer"
+        Dim dsCustomer As DataSet = getDsData("m10_customer")
 
-        Dim ds1 As DataSet = _db.selectDB(Sql1, RS, reccnt)
         Dim Count As Integer = 0
-        Dim CustomerCount As Integer = ds1.Tables(RS).Rows.Count
-        Dim CustomerOrderCount(CustomerCount) As Integer
-        Dim CustomerBillingCount(CustomerCount) As Integer
-        Dim CustomerBillingAmount(CustomerCount) As Integer
-        Dim CustomerOrderAmount(CustomerCount) As Integer
-        Dim AccountsReceivable(CustomerCount) As Integer
+        Dim CustomerCount As Integer = dsCustomer.Tables(RS).Rows.Count
 
-        For index1 As Integer = 0 To ds1.Tables(RS).Rows.Count - 1
-            Sql2 += "SELECT "
-            Sql2 += "* "
-            Sql2 += "FROM "
-            Sql2 += "public"
-            Sql2 += "."
-            Sql2 += "t23_skyuhd"
-            Sql2 += " WHERE "
-            Sql2 += "会社コード"
-            Sql2 += " = "
-            Sql2 += "'"
-            Sql2 += ds1.Tables(RS).Rows(index1)("会社コード")
-            Sql2 += "'"
-            Sql2 += " AND "
-            Sql2 += "得意先コード"
-            Sql2 += " ILIKE "
-            Sql2 += "'%"
-            Sql2 += ds1.Tables(RS).Rows(index1)("得意先コード")
-            Sql2 += "%'"
-            Dim ds2 As DataSet = _db.selectDB(Sql2, RS, reccnt)
-            CustomerBillingCount(index1) = ds2.Tables(RS).Rows.Count.ToString
+        Dim CustomerOrderCount As Integer
+        Dim CustomerBillingCount As Integer
+        Dim CustomerBillingAmount As Integer
+        Dim CustomerOrderAmount As Integer
+        Dim AccountsReceivable As Integer
 
-            Sql3 += "SELECT "
-            Sql3 += "* "
-            Sql3 += "FROM "
-            Sql3 += "public"
-            Sql3 += "."
-            Sql3 += "t10_cymnhd"
-            Sql3 += " WHERE "
-            Sql3 += "会社コード"
-            Sql3 += " = "
-            Sql3 += "'"
-            Sql3 += ds1.Tables(RS).Rows(index1)("会社コード")
-            Sql3 += "'"
-            Sql3 += " AND "
-            Sql3 += "得意先コード"
-            Sql3 += " ILIKE "
-            Sql3 += "'%"
-            Sql3 += ds1.Tables(RS).Rows(index1)("得意先コード")
-            Sql3 += "%'"
-            Dim ds3 As DataSet = _db.selectDB(Sql3, RS, reccnt)
 
-            CustomerOrderCount(index1) = ds3.Tables(RS).Rows.Count.ToString
+        '得意先の一覧を取得
+        For i As Integer = 0 To dsCustomer.Tables(RS).Rows.Count - 1
 
-            For index2 As Integer = 0 To ds2.Tables(RS).Rows.Count - 1
-                CustomerBillingAmount(index1) += ds2.Tables(RS).Rows(index2)("請求金額計")
-            Next
+            Sql = " AND "
+            Sql += "得意先コード"
+            Sql += " ILIKE "
+            Sql += "'%"
+            Sql += dsCustomer.Tables(RS).Rows(i)("得意先コード")
+            Sql += "%'"
 
-            For index3 As Integer = 0 To ds3.Tables(RS).Rows.Count - 1
-                CustomerOrderAmount(index1) += ds3.Tables(RS).Rows(index3)("見積金額")
-            Next
+            '得意先と一致する請求基本を取得
+            Dim dsSkyuhd As DataSet = getDsData("t23_skyuhd", Sql)
 
-            For index4 As Integer = 0 To ds2.Tables(RS).Rows.Count - 1
-                AccountsReceivable(index1) += ds2.Tables(RS).Rows(index4)("売掛残高")
-            Next
+            '得意先の請求データ数を取得
+            CustomerBillingCount = dsSkyuhd.Tables(RS).Rows.Count.ToString
 
-            If CustomerOrderCount(index1) > 0 Then
+            Sql = " AND "
+            Sql += "得意先コード"
+            Sql += " ILIKE "
+            Sql += "'%"
+            Sql += dsCustomer.Tables(RS).Rows(i)("得意先コード")
+            Sql += "%'"
+
+            '得意先と一致する受注基本を取得
+            Dim dsCymnhd As DataSet = getDsData("t10_cymnhd", Sql)
+
+            '受注データ数
+            CustomerOrderCount = dsCymnhd.Tables(RS).Rows.Count.ToString
+
+            '請求金額を集計
+            'CustomerBillingAmount = dsSkyuhd.Tables(RS).Compute("SUM(請求金額計)", Nothing)
+            CustomerBillingAmount = IIf(
+                dsSkyuhd.Tables(RS).Compute("SUM(請求金額計)", Nothing) IsNot DBNull.Value,
+                dsSkyuhd.Tables(RS).Compute("SUM(請求金額計)", Nothing),
+                0
+            )
+
+            '見積金額を集計
+            'CustomerOrderAmount = dsCymnhd.Tables(RS).Compute("SUM(見積金額)", Nothing)
+            CustomerOrderAmount = IIf(
+                dsCymnhd.Tables(RS).Compute("SUM(見積金額)", Nothing) IsNot DBNull.Value,
+                dsCymnhd.Tables(RS).Compute("SUM(見積金額)", Nothing),
+                0
+            )
+            '売掛残高を集計
+            'AccountsReceivable = dsSkyuhd.Tables(RS).Compute("SUM(売掛残高)", Nothing)
+            AccountsReceivable = IIf(
+                dsSkyuhd.Tables(RS).Compute("SUM(売掛残高)", Nothing) IsNot DBNull.Value,
+                dsSkyuhd.Tables(RS).Compute("SUM(売掛残高)", Nothing),
+                0
+            )
+            '表示エリアにデータを追加
+            If CustomerOrderCount > 0 Then
                 DgvCustomer.Rows.Add()
-                DgvCustomer.Rows(Count).Cells("得意先名").Value = ds1.Tables(RS).Rows(index1)("得意先名")
-                'DgvCustomer.Rows(Count).Cells("受注金額計").Value = CustomerOrderAmount(index1)
-                'DgvCustomer.Rows(Count).Cells("請求金額計").Value = CustomerBillingAmount(index1)
-                DgvCustomer.Rows(Count).Cells("請求金額残").Value = CustomerOrderAmount(index1) - CustomerBillingAmount(index1)
-                DgvCustomer.Rows(Count).Cells("売掛残高").Value = AccountsReceivable(index1)
-                'DgvCustomer.Rows(Count).Cells("受注件数").Value = CustomerOrderCount(index1)
-                'DgvCustomer.Rows(Count).Cells("請求件数").Value = CustomerBillingCount(index1)
-                DgvCustomer.Rows(Count).Cells("得意先コード").Value = ds1.Tables(RS).Rows(index1)("得意先コード")
-                DgvCustomer.Rows(Count).Cells("会社コード").Value = ds1.Tables(RS).Rows(index1)("会社コード")
+                DgvCustomer.Rows(Count).Cells("得意先名").Value = dsCustomer.Tables(RS).Rows(i)("得意先名")
+                DgvCustomer.Rows(Count).Cells("請求金額残").Value = CustomerOrderAmount - CustomerBillingAmount
+                DgvCustomer.Rows(Count).Cells("売掛残高").Value = AccountsReceivable
+                DgvCustomer.Rows(Count).Cells("得意先コード").Value = dsCustomer.Tables(RS).Rows(i)("得意先コード")
+                DgvCustomer.Rows(Count).Cells("会社コード").Value = dsCustomer.Tables(RS).Rows(i)("会社コード")
 
-                Count += 1
+                Count += 1 'カウントアップ
             End If
-            Sql2 = ""
-            Sql3 = ""
         Next
+
+        'Language=ENGの時
         If frmC01F10_Login.loginValue.Language = "ENG" Then
             LblConditions.Text = "TermsOfSelection"
             Label1.Text = "CustomerName"
@@ -190,6 +177,28 @@ Public Class DepositList
         Dim Name As String = DgvCustomer.Rows(RowIdx).Cells("得意先名").Value
         Dim openForm As Form = Nothing
         openForm = New DepositManagement(_msgHd, _db, _langHd, Me, Company, Customer, Name)   '処理選択
-        openForm.Show(Me)
+        openForm.ShowDialog(Me)
+        Me.Close()
     End Sub
+
+    'param1：String テーブル名
+    'param2：String 詳細条件
+    'Return: DataSet
+    Private Function getDsData(ByVal tableName As String, Optional ByRef txtParam As String = "") As DataSet
+        Dim reccnt As Integer = 0 'DB用（デフォルト）
+        Dim Sql As String = ""
+
+        Sql += "SELECT"
+        Sql += " *"
+        Sql += " FROM "
+
+        Sql += "public." & tableName
+        Sql += " WHERE "
+        Sql += "会社コード"
+        Sql += " ILIKE  "
+        Sql += "'" & frmC01F10_Login.loginValue.BumonNM & "'"
+        Sql += txtParam
+        Return _db.selectDB(Sql, RS, reccnt)
+    End Function
+
 End Class

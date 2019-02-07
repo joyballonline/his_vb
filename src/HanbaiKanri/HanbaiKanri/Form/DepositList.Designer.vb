@@ -23,7 +23,9 @@ Partial Class DepositList
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.DgvCustomer = New System.Windows.Forms.DataGridView()
         Me.得意先名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.得意先コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -57,8 +59,24 @@ Partial Class DepositList
         Me.DgvCustomer.AllowUserToResizeColumns = False
         Me.DgvCustomer.AllowUserToResizeRows = False
         Me.DgvCustomer.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DgvCustomer.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DgvCustomer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvCustomer.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.得意先名, Me.得意先コード, Me.受注金額計, Me.請求金額計, Me.請求金額残, Me.売掛残高, Me.受注件数, Me.請求件数, Me.会社コード})
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DgvCustomer.DefaultCellStyle = DataGridViewCellStyle4
         Me.DgvCustomer.Location = New System.Drawing.Point(12, 162)
         Me.DgvCustomer.MultiSelect = False
         Me.DgvCustomer.Name = "DgvCustomer"
@@ -101,8 +119,8 @@ Partial Class DepositList
         '
         '請求金額残
         '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.請求金額残.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.請求金額残.DefaultCellStyle = DataGridViewCellStyle2
         Me.請求金額残.HeaderText = "請求金額残"
         Me.請求金額残.Name = "請求金額残"
         Me.請求金額残.ReadOnly = True
@@ -110,8 +128,8 @@ Partial Class DepositList
         '
         '売掛残高
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.売掛残高.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.売掛残高.DefaultCellStyle = DataGridViewCellStyle3
         Me.売掛残高.HeaderText = "売掛残高"
         Me.売掛残高.Name = "売掛残高"
         Me.売掛残高.ReadOnly = True
@@ -265,9 +283,9 @@ Partial Class DepositList
         Me.LblMode.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblMode.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblMode.Location = New System.Drawing.Point(1172, 9)
+        Me.LblMode.Location = New System.Drawing.Point(1105, 9)
         Me.LblMode.Name = "LblMode"
-        Me.LblMode.Size = New System.Drawing.Size(166, 22)
+        Me.LblMode.Size = New System.Drawing.Size(233, 22)
         Me.LblMode.TabIndex = 324
         Me.LblMode.Text = "入金入力モード"
         Me.LblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter

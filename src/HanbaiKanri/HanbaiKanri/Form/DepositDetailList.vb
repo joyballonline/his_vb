@@ -70,142 +70,8 @@ Public Class DepositDetailList
         _init = True
         DgvBilling.AutoSizeColumnsMode = DataGridViewAutoSizeColumnMode.DisplayedCells
     End Sub
-    Private Sub PurchaseListLoad(Optional ByRef Status As String = "")
-        If Status = "EXCLUSION" Then
-            Dim Sql As String = ""
-            Try
-                Sql += "SELECT "
-                Sql += "* "
-                Sql += "FROM "
-                Sql += "public"
-                Sql += "."
-                Sql += "t25_nkinhd"
-                Sql += " WHERE "
-                Sql += "取消区分"
-                Sql += " = "
-                Sql += "'"
-                Sql += "0"
-                Sql += "'"
-                Sql += " ORDER BY "
-                Sql += "登録日 DESC"
 
-                Dim reccnt As Integer = 0
-                ds = _db.selectDB(Sql, RS, reccnt)
-                If frmC01F10_Login.loginValue.Language = "ENG" Then
-                    DgvBilling.Columns.Add("入金番号", "MoneyReceiptNumber")
-                    DgvBilling.Columns.Add("入金日", "MoneyReceiptDate")
-                    DgvBilling.Columns.Add("請求先名", "BillingAddress")
-                    DgvBilling.Columns.Add("振込先", "PaymentDestination")
-                    DgvBilling.Columns.Add("請求金額", "BillingAmount")
-                    DgvBilling.Columns.Add("入金額", "MoneyReceiptAmount")
-                    DgvBilling.Columns.Add("入金額計", "TotalMoneyReceiptAmount")
-                    DgvBilling.Columns.Add("請求残高", "BillingBalance")
-                    DgvBilling.Columns.Add("備考", "Remarks")
-
-                Else
-                    DgvBilling.Columns.Add("入金番号", "入金番号")
-                    DgvBilling.Columns.Add("入金日", "入金日")
-                    DgvBilling.Columns.Add("請求先名", "請求先名")
-                    DgvBilling.Columns.Add("振込先", "振込先")
-                    DgvBilling.Columns.Add("請求金額", "請求金額")
-                    DgvBilling.Columns.Add("入金額", "入金額")
-                    DgvBilling.Columns.Add("入金額計", "入金額計")
-                    DgvBilling.Columns.Add("請求残高", "請求残高")
-                    DgvBilling.Columns.Add("備考", "備考")
-                End If
-
-
-                DgvBilling.Columns("請求金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                DgvBilling.Columns("請求残高").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                DgvBilling.Columns("入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                DgvBilling.Columns("入金額計").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-
-                For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-                    DgvBilling.Rows.Add()
-                    DgvBilling.Rows(index).Cells("入金番号").Value = ds.Tables(RS).Rows(index)("入金番号")
-                    DgvBilling.Rows(index).Cells("入金日").Value = ds.Tables(RS).Rows(index)("入金日")
-                    DgvBilling.Rows(index).Cells("請求先名").Value = ds.Tables(RS).Rows(index)("請求先名")
-                    DgvBilling.Rows(index).Cells("振込先").Value = ds.Tables(RS).Rows(index)("振込先")
-                    DgvBilling.Rows(index).Cells("請求金額").Value = ds.Tables(RS).Rows(index)("請求金額")
-                    DgvBilling.Rows(index).Cells("入金額").Value = ds.Tables(RS).Rows(index)("入金額")
-                    DgvBilling.Rows(index).Cells("入金額計").Value = ds.Tables(RS).Rows(index)("入金額計")
-                    DgvBilling.Rows(index).Cells("請求残高").Value = ds.Tables(RS).Rows(index)("請求残高")
-                    DgvBilling.Rows(index).Cells("備考").Value = ds.Tables(RS).Rows(index)("備考")
-                Next
-
-            Catch ue As UsrDefException
-                ue.dspMsg()
-                Throw ue
-            Catch ex As Exception
-                'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-                Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", UtilClass.getErrDetail(ex)))
-            End Try
-        Else
-            Dim Sql As String = ""
-            Try
-                Sql += "SELECT "
-                Sql += "* "
-                Sql += "FROM "
-                Sql += "public"
-                Sql += "."
-                Sql += "t25_nkinhd"
-                Sql += " ORDER BY "
-                Sql += "登録日 DESC"
-
-                Dim reccnt As Integer = 0
-                ds = _db.selectDB(Sql, RS, reccnt)
-
-                If frmC01F10_Login.loginValue.Language = "ENG" Then
-                    DgvBilling.Columns.Add("入金番号", "MoneyReceiptNumber")
-                    DgvBilling.Columns.Add("入金日", "MoneyReceiptDate")
-                    DgvBilling.Columns.Add("請求先名", "BillingAddress")
-                    DgvBilling.Columns.Add("振込先", "PaymentDestination")
-                    DgvBilling.Columns.Add("請求金額", "BillingAmount")
-                    DgvBilling.Columns.Add("入金額", "MoneyReceiptAmount")
-                    DgvBilling.Columns.Add("入金額計", "TotalMoneyReceiptAmount")
-                    DgvBilling.Columns.Add("請求残高", "BillingBalance")
-                    DgvBilling.Columns.Add("備考", "Remarks")
-                Else
-                    DgvBilling.Columns.Add("入金番号", "入金番号")
-                    DgvBilling.Columns.Add("入金日", "入金日")
-                    DgvBilling.Columns.Add("請求先名", "請求先名")
-                    DgvBilling.Columns.Add("振込先", "振込先")
-                    DgvBilling.Columns.Add("請求金額", "請求金額")
-                    DgvBilling.Columns.Add("入金額", "入金額")
-                    DgvBilling.Columns.Add("入金額計", "入金額計")
-                    DgvBilling.Columns.Add("請求残高", "請求残高")
-                    DgvBilling.Columns.Add("備考", "備考")
-                End If
-
-                DgvBilling.Columns("請求金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                DgvBilling.Columns("請求残高").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                DgvBilling.Columns("入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                DgvBilling.Columns("入金額計").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-
-                For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-                    DgvBilling.Rows.Add()
-                    DgvBilling.Rows(index).Cells("入金番号").Value = ds.Tables(RS).Rows(index)("入金番号")
-                    DgvBilling.Rows(index).Cells("入金日").Value = ds.Tables(RS).Rows(index)("入金日")
-                    DgvBilling.Rows(index).Cells("請求先名").Value = ds.Tables(RS).Rows(index)("請求先名")
-                    DgvBilling.Rows(index).Cells("振込先").Value = ds.Tables(RS).Rows(index)("振込先")
-                    DgvBilling.Rows(index).Cells("請求金額").Value = ds.Tables(RS).Rows(index)("請求金額")
-                    DgvBilling.Rows(index).Cells("入金額").Value = ds.Tables(RS).Rows(index)("入金額")
-                    DgvBilling.Rows(index).Cells("入金額計").Value = ds.Tables(RS).Rows(index)("入金額計")
-                    DgvBilling.Rows(index).Cells("請求残高").Value = ds.Tables(RS).Rows(index)("請求残高")
-                    DgvBilling.Rows(index).Cells("備考").Value = ds.Tables(RS).Rows(index)("備考")
-                Next
-
-            Catch ue As UsrDefException
-                ue.dspMsg()
-                Throw ue
-            Catch ex As Exception
-                'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-                Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", UtilClass.getErrDetail(ex)))
-            End Try
-        End If
-
-    End Sub
-    Private Sub MstHanyoue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub DepositDetailList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If _status = "VIEW" Then
             If frmC01F10_Login.loginValue.Language = "ENG" Then
                 LblMode.Text = "ViewMode"
@@ -224,9 +90,10 @@ Public Class DepositDetailList
             BtnDepositCancel.Location = New Point(997, 509)
         End If
 
-        Dim Status As String = "EXCLUSION"
-        PurchaseListLoad(Status)
+        'データ描画
+        createDgvBilling()
 
+        '翻訳
         If frmC01F10_Login.loginValue.Language = "ENG" Then
             LblConditions.Text = "ExtractionCondition"
             Label1.Text = "CustomerName"
@@ -254,376 +121,87 @@ Public Class DepositDetailList
         Me.Close()
     End Sub
 
-    Private Sub RbtnDetails_CheckedChanged(sender As Object, e As EventArgs) Handles RbtnDetails.CheckedChanged
-        DgvBilling.Rows.Clear()
-        DgvBilling.Columns.Clear()
-
-        If RbtnSlip.Checked Then
-            Dim Sql As String = ""
-            Sql += "SELECT "
-            Sql += " * "
-            Sql += "FROM "
-            Sql += "public"
-            Sql += "."
-            Sql += "t25_nkinhd"
-            If OrderingNo IsNot Nothing Then
-                For i As Integer = 0 To OrderingNo.Length - 1
-                    If i = 0 Then
-                        Sql += " WHERE "
-                        Sql += "入金番号"
-                        Sql += " ILIKE "
-                        Sql += "'"
-                        Sql += OrderingNo(i)
-                        Sql += "'"
-                    Else
-                        Sql += " OR "
-                        Sql += "入金番号"
-                        Sql += " ILIKE "
-                        Sql += "'"
-                        Sql += OrderingNo(i)
-                        Sql += "'"
-                    End If
-                Next
-            End If
-            Sql += " ORDER BY "
-            Sql += "登録日 DESC"
-
-            Dim reccnt As Integer = 0
-            ds = _db.selectDB(Sql, RS, reccnt)
-
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
-                DgvBilling.Columns.Add("入金番号", "MoneyReceiptNumber")
-                DgvBilling.Columns.Add("入金日", "MoneyReceiptDate")
-                DgvBilling.Columns.Add("請求先名", "BillingAddress")
-                DgvBilling.Columns.Add("振込先", "PaymentDestination")
-                DgvBilling.Columns.Add("請求金額", "BillingAmount")
-                DgvBilling.Columns.Add("入金額", "MoneyReceiptAmount")
-                DgvBilling.Columns.Add("入金額計", "TotalMoneyReceiptAmount")
-                DgvBilling.Columns.Add("請求残高", "BillingBalance")
-                DgvBilling.Columns.Add("備考", "Remarks")
-
-            Else
-                DgvBilling.Columns.Add("入金番号", "入金番号")
-                DgvBilling.Columns.Add("入金日", "入金日")
-                DgvBilling.Columns.Add("請求先名", "請求先名")
-                DgvBilling.Columns.Add("振込先", "振込先")
-                DgvBilling.Columns.Add("請求金額", "請求金額")
-                DgvBilling.Columns.Add("入金額", "入金額")
-                DgvBilling.Columns.Add("入金額計", "入金額計")
-                DgvBilling.Columns.Add("請求残高", "請求残高")
-                DgvBilling.Columns.Add("備考", "備考")
-            End If
-
-
-            DgvBilling.Columns("請求金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvBilling.Columns("請求残高").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvBilling.Columns("入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvBilling.Columns("入金額計").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-
-            For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-                DgvBilling.Rows.Add()
-                DgvBilling.Rows(index).Cells("入金番号").Value = ds.Tables(RS).Rows(index)("入金番号")
-                DgvBilling.Rows(index).Cells("入金日").Value = ds.Tables(RS).Rows(index)("入金日")
-                DgvBilling.Rows(index).Cells("請求先名").Value = ds.Tables(RS).Rows(index)("請求先名")
-                DgvBilling.Rows(index).Cells("振込先").Value = ds.Tables(RS).Rows(index)("振込先")
-                DgvBilling.Rows(index).Cells("請求金額").Value = ds.Tables(RS).Rows(index)("請求金額")
-                DgvBilling.Rows(index).Cells("入金額").Value = ds.Tables(RS).Rows(index)("入金額")
-                DgvBilling.Rows(index).Cells("入金額計").Value = ds.Tables(RS).Rows(index)("入金額計")
-                DgvBilling.Rows(index).Cells("請求残高").Value = ds.Tables(RS).Rows(index)("請求残高")
-                DgvBilling.Rows(index).Cells("備考").Value = ds.Tables(RS).Rows(index)("備考")
-            Next
-        Else
-            Dim Sql As String = ""
-
-            Sql += "SELECT "
-            Sql += " * "
-            Sql += "FROM "
-            Sql += "public"
-            Sql += "."
-            Sql += "t27_nkinkshihd"
-
-            If OrderingNo IsNot Nothing Then
-                For i As Integer = 0 To OrderingNo.Length - 1
-                    If i = 0 Then
-                        Sql += " WHERE "
-                        Sql += "入金番号"
-                        Sql += " ILIKE "
-                        Sql += "'%"
-                        Sql += OrderingNo(i)
-                        Sql += "%'"
-                    Else
-                        Sql += " OR "
-                        Sql += "入金番号"
-                        Sql += " ILIKE "
-                        Sql += "'%"
-                        Sql += OrderingNo(i)
-                        Sql += "%'"
-                    End If
-                Next
-            End If
-            Sql += " ORDER BY "
-            Sql += "更新日 DESC"
-
-            Dim reccnt As Integer = 0
-            ds = _db.selectDB(Sql, RS, reccnt)
-
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
-                DgvBilling.Columns.Add("入金番号", "MoneyReceiptNumber")
-                DgvBilling.Columns.Add("請求番号", "BillingNumber")
-                DgvBilling.Columns.Add("請求先名", "BillingAddress")
-                DgvBilling.Columns.Add("入金額", "MoneyReceiptAmount")
-                DgvBilling.Columns.Add("入金日", "MoneyReceiptDate")
-                DgvBilling.Columns.Add("備考", "Remarks")
-            Else
-                DgvBilling.Columns.Add("入金番号", "入金番号")
-                DgvBilling.Columns.Add("請求番号", "請求番号")
-                DgvBilling.Columns.Add("請求先名", "請求先名")
-                DgvBilling.Columns.Add("入金額", "入金額")
-                DgvBilling.Columns.Add("入金日", "入金日")
-                DgvBilling.Columns.Add("備考", "備考")
-            End If
-
-
-            For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-                DgvBilling.Rows.Add()
-                DgvBilling.Rows(index).Cells("入金番号").Value = ds.Tables(RS).Rows(index)("入金番号")
-                DgvBilling.Rows(index).Cells("請求番号").Value = ds.Tables(RS).Rows(index)("請求番号")
-                DgvBilling.Rows(index).Cells("請求先名").Value = ds.Tables(RS).Rows(index)("請求先名")
-                DgvBilling.Rows(index).Cells("入金額").Value = ds.Tables(RS).Rows(index)("入金消込額計")
-                DgvBilling.Rows(index).Cells("入金日").Value = ds.Tables(RS).Rows(index)("入金日")
-                DgvBilling.Rows(index).Cells("備考").Value = ds.Tables(RS).Rows(index)("備考")
-            Next
-        End If
-    End Sub
-
-    Private Sub BtnPurchaseSearch_Click(sender As Object, e As EventArgs) Handles BtnDepositSearch.Click
-        DgvBilling.Rows.Clear()
-        DgvBilling.Columns.Clear()
-
-        Dim count As Integer = 0
+    'DgvBilling内を再描画
+    Private Sub createDgvBilling()
+        clearDGV() 'テーブルクリア
         Dim Sql As String = ""
+
+        Sql += searchConditions() '抽出条件取得
+        Sql += viewFormat() '表示形式条件
+
+        Sql += " ORDER BY "
+        Sql += "更新日 DESC"
+
         Try
-            Sql += "SELECT "
-            Sql += "* "
-            Sql += "FROM "
-            Sql += "public"
-            Sql += "."
-            Sql += "t25_nkinhd"
-            If TxtCustomerName.Text = "" Then
-            Else
-                Sql += " WHERE "
-                Sql += "得意先名"
-                Sql += " ILIKE "
-                Sql += "'%"
-                Sql += TxtCustomerName.Text
-                Sql += "%'"
-                count += 1
-            End If
-            If TxtCustomerCode.Text = "" Then
-            Else
-                If count > 0 Then
-                    Sql += " AND "
-                    Sql += "得意先コード"
-                    Sql += " ILIKE "
-                    Sql += "'%"
-                    Sql += TxtCustomerCode.Text
-                    Sql += "%'"
-                Else
-                    Sql += " WHERE "
-                    Sql += "得意先コード"
-                    Sql += " ILIKE "
-                    Sql += "'%"
-                    Sql += TxtCustomerCode.Text
-                    Sql += "%'"
-                    count += 1
-                End If
-            End If
-            If TxtBillingDate1.Text = "" Then
-                If TxtBillingDate2.Text = "" Then
-                Else
-                    If count > 0 Then
-                        Sql += " AND "
-                        Sql += "入金日"
-                        Sql += " <=  "
-                        Sql += "'"
-                        Sql += TxtBillingDate2.Text
-                        Sql += "'"
-                    Else
-                        Sql += " WHERE "
-                        Sql += "入金日"
-                        Sql += " <=  "
-                        Sql += "'"
-                        Sql += TxtBillingDate2.Text
-                        Sql += "'"
-                        count += 1
-                    End If
-                End If
-            Else
-                If TxtBillingDate2.Text = "" Then
-                    If count > 0 Then
-                        Sql += " AND "
-                        Sql += "入金日"
-                        Sql += " >=  "
-                        Sql += "'"
-                        Sql += TxtBillingDate1.Text
-                        Sql += "'"
-                    Else
-                        Sql += " WHERE "
-                        Sql += "入金日"
-                        Sql += " >=  "
-                        Sql += "'"
-                        Sql += TxtBillingDate1.Text
-                        Sql += "'"
-                        count += 1
-                    End If
-                Else
-                    If count > 0 Then
-                        Sql += " AND "
-                        Sql += "入金日"
-                        Sql += " >=  "
-                        Sql += "'"
-                        Sql += TxtBillingDate1.Text
-                        Sql += "' "
-                        Sql += "AND  "
-                        Sql += "入金日"
-                        Sql += " <=  "
-                        Sql += "'"
-                        Sql += TxtBillingDate2.Text
-                        Sql += "'"
-                    Else
-                        Sql += " WHERE "
-                        Sql += "入金日"
-                        Sql += " >=  "
-                        Sql += "'"
-                        Sql += TxtBillingDate1.Text
-                        Sql += "' "
-                        Sql += "AND  "
-                        Sql += "入金日"
-                        Sql += " <=  "
-                        Sql += "'"
-                        Sql += TxtBillingDate2.Text
-                        Sql += "'"
-                        count += 1
-                    End If
-                End If
-            End If
-            If TxtBillingNo1.Text = "" Then
-                If TxtBillingNo2.Text = "" Then
-                Else
-                    If count > 0 Then
-                        Sql += " AND "
-                        Sql += "入金番号"
-                        Sql += " <=  "
-                        Sql += "'"
-                        Sql += TxtBillingNo2.Text
-                        Sql += "'"
-                    Else
-                        Sql += " WHERE "
-                        Sql += "入金番号"
-                        Sql += " <=  "
-                        Sql += "'"
-                        Sql += TxtBillingNo2.Text
-                        Sql += "'"
-                        count += 1
-                    End If
-                End If
-            Else
-                If TxtBillingNo2.Text = "" Then
-                    If count > 0 Then
-                        Sql += " AND "
-                        Sql += "入金番号"
-                        Sql += " >=  "
-                        Sql += "'"
-                        Sql += TxtBillingNo1.Text
-                        Sql += "'"
-                    Else
-                        Sql += " WHERE "
-                        Sql += "入金番号"
-                        Sql += " >=  "
-                        Sql += "'"
-                        Sql += TxtBillingNo1.Text
-                        Sql += "'"
-                        count += 1
-                    End If
-                Else
-                    If count > 0 Then
-                        Sql += " AND "
-                        Sql += "入金番号"
-                        Sql += " >= "
-                        Sql += "'"
-                        Sql += TxtBillingNo1.Text
-                        Sql += "' "
-                        Sql += "AND "
-                        Sql += "入金番号"
-                        Sql += " <=  "
-                        Sql += "'"
-                        Sql += TxtBillingNo2.Text
-                        Sql += "'"
-                    Else
-                        Sql += " WHERE "
-                        Sql += "入金番号"
-                        Sql += " >= "
-                        Sql += "'"
-                        Sql += TxtBillingNo1.Text
-                        Sql += "' "
-                        Sql += "AND  "
-                        Sql += "入金番号"
-                        Sql += " <= "
-                        Sql += "'"
-                        Sql += TxtBillingNo2.Text
-                        Sql += "'"
-                        count += 1
-                    End If
-                End If
-            End If
-            Sql += " ORDER BY "
-            Sql += "登録日 DESC"
 
-            Dim reccnt As Integer = 0
-            Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
+            '伝票単位
+            If RbtnSlip.Checked Then
 
-            'Dim tmp As Integer = ds.Tables(RS).Rows.Count - 1
-            'ReDim OrderingNo(tmp)
+                ds = getDsData("t25_nkinhd", Sql)
 
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
-                DgvBilling.Columns.Add("入金番号", "MoneyReceiptNumber")
-                DgvBilling.Columns.Add("入金日", "MoneyReceiptDate")
-                DgvBilling.Columns.Add("請求先名", "BillingAddress")
-                DgvBilling.Columns.Add("振込先", "PaymentDestination")
-                DgvBilling.Columns.Add("請求金額", "BillingAmount")
-                DgvBilling.Columns.Add("入金額", "MoneyReceiptAmount")
-                DgvBilling.Columns.Add("入金額計", "TotalMoneyReceiptAmount")
-                DgvBilling.Columns.Add("請求残高", "BillingBalance")
-                DgvBilling.Columns.Add("備考", "Remarks")
-            Else
-                DgvBilling.Columns.Add("入金番号", "入金番号")
-                DgvBilling.Columns.Add("入金日", "入金日")
-                DgvBilling.Columns.Add("請求先名", "請求先名")
-                DgvBilling.Columns.Add("振込先", "振込先")
-                DgvBilling.Columns.Add("請求金額", "請求金額")
-                DgvBilling.Columns.Add("入金額", "入金額")
-                DgvBilling.Columns.Add("入金額計", "入金額計")
-                DgvBilling.Columns.Add("請求残高", "請求残高")
-                DgvBilling.Columns.Add("備考", "備考")
+                '英語の表記
+                If frmC01F10_Login.loginValue.Language = "ENG" Then
+                    DgvBilling.Columns.Add("入金番号", "MoneyReceiptNumber")
+                    DgvBilling.Columns.Add("入金日", "MoneyReceiptDate")
+                    DgvBilling.Columns.Add("請求先名", "BillingAddress")
+                    DgvBilling.Columns.Add("振込先", "PaymentDestination")
+                    DgvBilling.Columns.Add("入金額", "MoneyReceiptAmount")
+                    DgvBilling.Columns.Add("備考", "Remarks")
+                Else
+                    DgvBilling.Columns.Add("入金番号", "入金番号")
+                    DgvBilling.Columns.Add("入金日", "入金日")
+                    DgvBilling.Columns.Add("請求先名", "請求先名")
+                    DgvBilling.Columns.Add("振込先", "振込先")
+                    DgvBilling.Columns.Add("入金額", "入金額")
+                    DgvBilling.Columns.Add("備考", "備考")
+                End If
+
+                '伝票単位時のセル書式
+                DgvBilling.Columns("入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+                For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+                    DgvBilling.Rows.Add()
+                    DgvBilling.Rows(index).Cells("入金番号").Value = ds.Tables(RS).Rows(index)("入金番号")
+                    DgvBilling.Rows(index).Cells("入金日").Value = ds.Tables(RS).Rows(index)("入金日")
+                    DgvBilling.Rows(index).Cells("請求先名").Value = ds.Tables(RS).Rows(index)("請求先名")
+                    DgvBilling.Rows(index).Cells("振込先").Value = ds.Tables(RS).Rows(index)("振込先")
+                    DgvBilling.Rows(index).Cells("入金額").Value = ds.Tables(RS).Rows(index)("入金額")
+                    DgvBilling.Rows(index).Cells("備考").Value = ds.Tables(RS).Rows(index)("備考")
+                Next
+
+            Else '明細単位
+
+                ds = getDsData("t27_nkinkshihd", Sql)
+
+                If frmC01F10_Login.loginValue.Language = "ENG" Then
+                    DgvBilling.Columns.Add("入金番号", "MoneyReceiptNumber")
+                    DgvBilling.Columns.Add("請求番号", "BillingNumber")
+                    DgvBilling.Columns.Add("入金日", "MoneyReceiptDate")
+                    DgvBilling.Columns.Add("請求先名", "BillingAddress")
+                    DgvBilling.Columns.Add("入金額", "MoneyReceiptAmount")
+                    DgvBilling.Columns.Add("備考", "Remarks")
+                Else
+                    DgvBilling.Columns.Add("入金番号", "入金番号")
+                    DgvBilling.Columns.Add("請求番号", "請求番号")
+                    DgvBilling.Columns.Add("入金日", "入金日")
+                    DgvBilling.Columns.Add("請求先名", "請求先名")
+                    DgvBilling.Columns.Add("入金額", "入金額")
+                    DgvBilling.Columns.Add("備考", "備考")
+                End If
+
+                '伝票単位時のセル書式
+                DgvBilling.Columns("入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+                For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+                    DgvBilling.Rows.Add()
+                    DgvBilling.Rows(index).Cells("入金番号").Value = ds.Tables(RS).Rows(index)("入金番号")
+                    DgvBilling.Rows(index).Cells("請求番号").Value = ds.Tables(RS).Rows(index)("請求番号")
+                    DgvBilling.Rows(index).Cells("入金日").Value = ds.Tables(RS).Rows(index)("入金日")
+                    DgvBilling.Rows(index).Cells("請求先名").Value = ds.Tables(RS).Rows(index)("請求先名")
+                    DgvBilling.Rows(index).Cells("入金額").Value = ds.Tables(RS).Rows(index)("入金消込額計")
+                    DgvBilling.Rows(index).Cells("備考").Value = ds.Tables(RS).Rows(index)("備考")
+                Next
             End If
-
-            DgvBilling.Columns("請求金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvBilling.Columns("請求残高").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvBilling.Columns("入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvBilling.Columns("入金額計").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-
-            For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-                DgvBilling.Rows.Add()
-                DgvBilling.Rows(index).Cells("入金番号").Value = ds.Tables(RS).Rows(index)("入金番号")
-                DgvBilling.Rows(index).Cells("入金日").Value = ds.Tables(RS).Rows(index)("入金日")
-                DgvBilling.Rows(index).Cells("請求先名").Value = ds.Tables(RS).Rows(index)("請求先名")
-                DgvBilling.Rows(index).Cells("振込先").Value = ds.Tables(RS).Rows(index)("振込先")
-                DgvBilling.Rows(index).Cells("請求金額").Value = ds.Tables(RS).Rows(index)("請求金額")
-                DgvBilling.Rows(index).Cells("入金額").Value = ds.Tables(RS).Rows(index)("入金額")
-                DgvBilling.Rows(index).Cells("入金額計").Value = ds.Tables(RS).Rows(index)("入金額計")
-                DgvBilling.Rows(index).Cells("請求残高").Value = ds.Tables(RS).Rows(index)("請求残高")
-                DgvBilling.Rows(index).Cells("備考").Value = ds.Tables(RS).Rows(index)("備考")
-            Next
 
         Catch ue As UsrDefException
             ue.dspMsg()
@@ -632,6 +210,17 @@ Public Class DepositDetailList
             'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
             Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", UtilClass.getErrDetail(ex)))
         End Try
+
+    End Sub
+
+    '表示形式を切り替えたら
+    Private Sub RbtnDetails_CheckedChanged(sender As Object, e As EventArgs) Handles RbtnDetails.CheckedChanged
+        createDgvBilling()
+    End Sub
+
+    '検索ボタンをクリックしたら
+    Private Sub BtnPurchaseSearch_Click(sender As Object, e As EventArgs) Handles BtnDepositSearch.Click
+        createDgvBilling()
     End Sub
 
     'Private Sub BtnBillingView_Click(sender As Object, e As EventArgs) Handles BtnBillingView.Click
@@ -645,18 +234,12 @@ Public Class DepositDetailList
     '    openForm.Show(Me)
     'End Sub
 
+    '「取消データを含める」変更イベント取得時
     Private Sub ChkCancelData_CheckedChanged(sender As Object, e As EventArgs) Handles ChkCancelData.CheckedChanged
-        DgvBilling.Rows.Clear()
-        DgvBilling.Columns.Clear()
-
-        If ChkCancelData.Checked = False Then
-            Dim Status As String = "EXCLUSION"
-            PurchaseListLoad(Status)
-        Else
-            PurchaseListLoad()
-        End If
+        createDgvBilling()
     End Sub
 
+    '入金取消処理
     Private Sub BtnBillingCancel_Click(sender As Object, e As EventArgs) Handles BtnDepositCancel.Click
         Dim dtNow As DateTime = DateTime.Now
         Dim Sql1 As String = ""
@@ -734,10 +317,7 @@ Public Class DepositDetailList
 
             If result = DialogResult.Yes Then
                 _db.executeDB(Sql1)
-                DgvBilling.Rows.Clear()
-                DgvBilling.Columns.Clear()
-                Dim Status As String = "EXCLUSION"
-                PurchaseListLoad(Status)
+                createDgvBilling()
             ElseIf result = DialogResult.No Then
 
             ElseIf result = DialogResult.Cancel Then
@@ -752,10 +332,7 @@ Public Class DepositDetailList
 
             If result = DialogResult.Yes Then
                 _db.executeDB(Sql1)
-                DgvBilling.Rows.Clear()
-                DgvBilling.Columns.Clear()
-                Dim Status As String = "EXCLUSION"
-                PurchaseListLoad(Status)
+                createDgvBilling()
             ElseIf result = DialogResult.No Then
 
             ElseIf result = DialogResult.Cancel Then
@@ -764,4 +341,90 @@ Public Class DepositDetailList
         End If
 
     End Sub
+
+    'テーブルをクリア
+    Private Sub clearDGV()
+        DgvBilling.Rows.Clear()
+        DgvBilling.Columns.Clear()
+    End Sub
+
+    '抽出条件取得
+    Private Function searchConditions() As String
+        Dim Sql As String = ""
+
+        '抽出条件
+        Dim customerName As String = TxtCustomerName.Text
+        Dim customerCode As String = TxtCustomerCode.Text
+        Dim sinceDate As String = TxtBillingDate1.Text
+        Dim untilDate As String = TxtBillingDate2.Text
+        Dim sinceNum As String = TxtBillingNo1.Text
+        Dim untilNum As String = TxtBillingNo2.Text
+
+        If customerName <> Nothing Then
+            Sql += " AND "
+            Sql += " 請求先名 ILIKE '%" & customerName & "%' "
+        End If
+
+        If customerCode <> Nothing Then
+            Sql += " AND "
+            Sql += " 請求先コード ILIKE '%" & customerCode & "%' "
+        End If
+
+        If sinceDate <> Nothing Then
+            Sql += " AND "
+            Sql += " 入金日 >= '" & sinceDate & "'"
+        End If
+        If untilDate <> Nothing Then
+            Sql += " AND "
+            Sql += " 入金日 <= '" & untilDate & "'"
+        End If
+
+        If sinceNum <> Nothing Then
+            Sql += " AND "
+            Sql += " 入金番号 >= '" & sinceNum & "' "
+        End If
+        If untilNum <> Nothing Then
+            Sql += " AND "
+            Sql += " 入金番号 <= '" & untilNum & "' "
+        End If
+
+        Return Sql
+
+    End Function
+
+    '表示形式条件
+    Private Function viewFormat() As String
+        Dim Sql As String = ""
+
+        '取消データを含めない場合
+        If ChkCancelData.Checked = False Then
+            Sql += " AND "
+            Sql += " 取消区分 = 0 "
+        End If
+
+        Return Sql
+
+    End Function
+
+    'param1：String テーブル名
+    'param2：String 詳細条件
+    'Return: DataSet
+    Private Function getDsData(ByVal tableName As String, Optional ByRef txtParam As String = "") As DataSet
+        Dim reccnt As Integer = 0 'DB用（デフォルト）
+        Dim Sql As String = ""
+
+        Sql += "SELECT"
+        Sql += " *"
+        Sql += " FROM "
+
+        Sql += "public." & tableName
+        Sql += " WHERE "
+        Sql += "会社コード"
+        Sql += " ILIKE  "
+        Sql += "'" & frmC01F10_Login.loginValue.BumonNM & "'"
+        Sql += txtParam
+
+        Return _db.selectDB(Sql, RS, reccnt)
+    End Function
+
 End Class
