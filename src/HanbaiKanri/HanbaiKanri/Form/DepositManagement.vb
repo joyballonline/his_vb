@@ -79,6 +79,7 @@ Public Class DepositManagement
         StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
         Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
         Me.ControlBox = Not Me.ControlBox
+
         DtpDepositDate.Value = Date.Now
         _init = True
 
@@ -250,7 +251,7 @@ Public Class DepositManagement
             DgvHistory.Rows(index).Cells("No").Value = index + 1
             DgvHistory.Rows(index).Cells("入金済請求先").Value = dsNkindt.Tables(RS).Rows(index)("請求先名")
             DgvHistory.Rows(index).Cells("入金番号").Value = dsNkindt.Tables(RS).Rows(index)("入金番号")
-            DgvHistory.Rows(index).Cells("入金日").Value = dsNkindt.Tables(RS).Rows(index)("入金日")
+            DgvHistory.Rows(index).Cells("入金日").Value = dsNkindt.Tables(RS).Rows(index)("更新日")
             DgvHistory.Rows(index).Cells("入金種目").Value = dsNkindt.Tables(RS).Rows(index)("入金種別名")
             DgvHistory.Rows(index).Cells("入金済入金額計").Value = dsNkindt.Tables(RS).Rows(index)("入金額")
             DgvHistory.Rows(index).Cells("備考").Value = dsNkindt.Tables(RS).Rows(index)("備考")
@@ -320,10 +321,15 @@ Public Class DepositManagement
 
     '前の画面に戻る
     Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
-        _parentForm.Enabled = True
-        _parentForm.Show()
+        '_parentForm.Enabled = True
+        '_parentForm.Show()
+
+        Dim openForm As Form = Nothing
+        openForm = New DepositList(_msgHd, _db, _langHd)
+        openForm.Show()
+
         Me.Dispose()
-        Me.Dispose()
+
     End Sub
 
     '入金入力行の追加

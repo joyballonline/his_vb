@@ -162,7 +162,7 @@ Public Class DepositDetailList
                 For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
                     DgvBilling.Rows.Add()
                     DgvBilling.Rows(index).Cells("入金番号").Value = ds.Tables(RS).Rows(index)("入金番号")
-                    DgvBilling.Rows(index).Cells("入金日").Value = ds.Tables(RS).Rows(index)("入金日")
+                    DgvBilling.Rows(index).Cells("入金日").Value = ds.Tables(RS).Rows(index)("登録日")
                     DgvBilling.Rows(index).Cells("請求先名").Value = ds.Tables(RS).Rows(index)("請求先名")
                     DgvBilling.Rows(index).Cells("振込先").Value = ds.Tables(RS).Rows(index)("振込先")
                     DgvBilling.Rows(index).Cells("入金額").Value = ds.Tables(RS).Rows(index)("入金額")
