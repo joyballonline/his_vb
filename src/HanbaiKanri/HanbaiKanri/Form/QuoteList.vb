@@ -185,6 +185,7 @@ Public Class QuoteList
     Private Sub QuoteListLoad()
         Try
             'グリッド初期化
+            RbtnSlip.Checked = True
             DgvMithd.Rows.Clear()
             DgvMithd.Columns.Clear()
             Dim Sql As String = ""
@@ -192,10 +193,14 @@ Public Class QuoteList
 
             'データロード
             Sql += "SELECT * FROM public.t01_mithd "
+            strWhere += "WHERE"
+            strWhere += " 会社コード"
+            strWhere += "='"
+            strWhere += frmC01F10_Login.loginValue.BumonNM
+            strWhere += "' "
+
             If TxtCustomerName.Text <> "" Then
-                If strWhere = "" Then
-                    strWhere += " WHERE "
-                End If
+                strWhere += " and "
                 strWhere += "得意先名"
                 strWhere += " ILIKE "
                 strWhere += "'%"
@@ -203,11 +208,7 @@ Public Class QuoteList
                 strWhere += "%'"
             End If
             If TxtAddress.Text <> "" Then
-                If strWhere = "" Then
-                    strWhere += " WHERE "
-                Else
-                    strWhere += " and "
-                End If
+                strWhere += " and "
                 strWhere += "得意先住所"
                 strWhere += " ILIKE "
                 strWhere += "'%"
@@ -215,11 +216,7 @@ Public Class QuoteList
                 strWhere += "%'"
             End If
             If TxtTel.Text <> "" Then
-                If strWhere = "" Then
-                    strWhere += " WHERE "
-                Else
-                    strWhere += " and "
-                End If
+                strWhere += " and "
                 strWhere += "得意先電話番号"
                 strWhere += " ILIKE "
                 strWhere += "'%"
@@ -227,11 +224,7 @@ Public Class QuoteList
                 strWhere += "%'"
             End If
             If TxtCustomerCode.Text <> "" Then
-                If strWhere = "" Then
-                    strWhere += " WHERE "
-                Else
-                    strWhere += " and "
-                End If
+                strWhere += " and "
                 strWhere += "得意先コード"
                 strWhere += " ILIKE "
                 strWhere += "'%"
@@ -239,23 +232,15 @@ Public Class QuoteList
                 strWhere += "%'"
             End If
             If TxtQuoteDate1.Text <> "" Then
-                If strWhere = "" Then
-                    strWhere += " WHERE "
-                Else
-                    strWhere += " and "
-                End If
-                Sql += "見積日"
-                Sql += " >=  "
-                Sql += "'"
-                Sql += TxtQuoteDate1.Text
-                Sql += "'"
+                strWhere += " and "
+                strWhere += "見積日"
+                strWhere += " >=  "
+                strWhere += "'"
+                strWhere += TxtQuoteDate1.Text
+                strWhere += "'"
             End If
             If TxtQuoteDate2.Text <> "" Then
-                If strWhere = "" Then
-                    strWhere += " WHERE "
-                Else
-                    strWhere += " and "
-                End If
+                strWhere += " and "
                 strWhere += "見積日"
                 strWhere += " <=  "
                 strWhere += "'"
@@ -263,11 +248,7 @@ Public Class QuoteList
                 strWhere += "'"
             End If
             If TxtQuoteNo1.Text <> "" Then
-                If strWhere = "" Then
-                    strWhere += " WHERE "
-                Else
-                    strWhere += " and "
-                End If
+                strWhere += " and "
                 strWhere += "見積番号"
                 strWhere += " >=  "
                 strWhere += "'"
@@ -275,11 +256,7 @@ Public Class QuoteList
                 strWhere += "'"
             End If
             If TxtQuoteNo2.Text <> "" Then
-                If strWhere = "" Then
-                    strWhere += " WHERE "
-                Else
-                    strWhere += " and "
-                End If
+                strWhere += " and "
                 strWhere += "見積番号"
                 strWhere += " <=  "
                 strWhere += "'"
@@ -287,11 +264,7 @@ Public Class QuoteList
                 strWhere += "'"
             End If
             If TxtSales.Text <> "" Then
-                If strWhere = "" Then
-                    strWhere += " WHERE "
-                Else
-                    strWhere += " and "
-                End If
+                strWhere += " and "
                 strWhere += "営業担当者"
                 strWhere += " ILIKE "
                 strWhere += "'%"
@@ -299,21 +272,13 @@ Public Class QuoteList
                 strWhere += "%'"
             End If
             If Not ChkExpired.Checked Then
-                If strWhere = "" Then
-                    strWhere += " WHERE "
-                Else
-                    strWhere += " and "
-                End If
+                strWhere += " and "
                 strWhere += "見積有効期限 >= '"
                 strWhere += dtToday
                 strWhere += "'"
             End If
             If Not ChkCancel.Checked Then
-                If strWhere = "" Then
-                    strWhere += " WHERE "
-                Else
-                    strWhere += " and "
-                End If
+                strWhere += " and "
                 strWhere += " 取消区分 = '0'"
             End If
 
@@ -423,9 +388,10 @@ Public Class QuoteList
             QuoteListLoad()
         Else
             Dim Sql As String = ""
+            Dim strWhere As String = ""     'Where句
 
             Sql += "SELECT t02.* ,m901.文字１ as 仕入区分名 ,m902.文字１ as リードタイム単位名 "
-            Sql += "FROM public.t02_mitdt  t02 "
+            Sql += "FROM public.t01_mithd t01 ,public.t02_mitdt  t02  "
             Sql += "INNER JOIN public.m90_hanyo m901 "
             Sql += " ON m901.会社コード = t02.会社コード "
             Sql += "   and m901.固定キー = '1002' "
@@ -434,26 +400,98 @@ Public Class QuoteList
             Sql += " ON m902.会社コード = t02.会社コード "
             Sql += "   and m902.固定キー = '4' "
             Sql += "   and m902.可変キー = to_char(t02.リードタイム単位,'FM9') "
-            If QuoteNo IsNot Nothing Then
-                For i As Integer = 0 To QuoteNo.Length - 1
-                    If i = 0 Then
-                        Sql += " WHERE "
-                        Sql += "見積番号"
-                        Sql += " ILIKE "
-                        Sql += "'%"
-                        Sql += QuoteNo(i)
-                        Sql += "%'"
-                    Else
-                        Sql += " OR "
-                        Sql += "見積番号"
-                        Sql += " ILIKE "
-                        Sql += "'%"
-                        Sql += QuoteNo(i)
-                        Sql += "%'"
-                    End If
-                Next
+            strWhere += "WHERE"
+            strWhere += " t01.会社コード"
+            strWhere += "='"
+            strWhere += frmC01F10_Login.loginValue.BumonNM
+            strWhere += "' "
+            strWhere += " and t01.見積番号 = t02.見積番号 and t01.見積番号枝番 = t02.見積番号枝番"
+
+            If TxtCustomerName.Text <> "" Then
+                strWhere += " and "
+                strWhere += "t01.得意先名"
+                strWhere += " ILIKE "
+                strWhere += "'%"
+                strWhere += TxtCustomerName.Text
+                strWhere += "%'"
             End If
-            Sql += " ORDER BY 見積番号 DESC,見積番号枝番 DESC ,行番号"
+            If TxtAddress.Text <> "" Then
+                strWhere += " and "
+                strWhere += "t01.得意先住所"
+                strWhere += " ILIKE "
+                strWhere += "'%"
+                strWhere += TxtAddress.Text
+                strWhere += "%'"
+            End If
+            If TxtTel.Text <> "" Then
+                strWhere += " and "
+                strWhere += "t01.得意先電話番号"
+                strWhere += " ILIKE "
+                strWhere += "'%"
+                strWhere += TxtTel.Text
+                strWhere += "%'"
+            End If
+            If TxtCustomerCode.Text <> "" Then
+                strWhere += " and "
+                strWhere += "t01.得意先コード"
+                strWhere += " ILIKE "
+                strWhere += "'%"
+                strWhere += TxtCustomerCode.Text
+                strWhere += "%'"
+            End If
+            If TxtQuoteDate1.Text <> "" Then
+                strWhere += " and "
+                strWhere += "t01.見積日"
+                strWhere += " >=  "
+                strWhere += "'"
+                strWhere += TxtQuoteDate1.Text
+                strWhere += "'"
+            End If
+            If TxtQuoteDate2.Text <> "" Then
+                strWhere += " and "
+                strWhere += "t01.見積日"
+                strWhere += " <=  "
+                strWhere += "'"
+                strWhere += TxtQuoteDate2.Text
+                strWhere += "'"
+            End If
+            If TxtQuoteNo1.Text <> "" Then
+                strWhere += " and "
+                strWhere += "t01.見積番号"
+                strWhere += " >=  "
+                strWhere += "'"
+                strWhere += TxtQuoteNo1.Text
+                strWhere += "'"
+            End If
+            If TxtQuoteNo2.Text <> "" Then
+                strWhere += " and "
+                strWhere += "t01.見積番号"
+                strWhere += " <=  "
+                strWhere += "'"
+                strWhere += TxtQuoteNo2.Text
+                strWhere += "'"
+            End If
+            If TxtSales.Text <> "" Then
+                strWhere += " and "
+                strWhere += "t01.営業担当者"
+                strWhere += " ILIKE "
+                strWhere += "'%"
+                strWhere += TxtSales.Text
+                strWhere += "%'"
+            End If
+            If Not ChkExpired.Checked Then
+                strWhere += " and "
+                strWhere += "t01.見積有効期限 >= '"
+                strWhere += dtToday
+                strWhere += "'"
+            End If
+            If Not ChkCancel.Checked Then
+                strWhere += " and "
+                strWhere += " t01.取消区分 = '0'"
+            End If
+
+            Sql += strWhere
+            Sql += " ORDER BY t02.見積番号 DESC,t02.見積番号枝番 DESC ,t02.行番号"
 
             Dim reccnt As Integer = 0
             ds = _db.selectDB(Sql, RS, reccnt)
@@ -543,9 +581,6 @@ Public Class QuoteList
         Me.Hide()
         openForm.ShowDialog(Me)
 
-        DgvMithd.Rows.Clear()
-        DgvMithd.Columns.Clear()
-
         QuoteListLoad()
 
     End Sub
@@ -562,9 +597,6 @@ Public Class QuoteList
         Me.Hide()
         openForm.ShowDialog()
 
-        DgvMithd.Rows.Clear()
-        DgvMithd.Columns.Clear()
-
         QuoteListLoad()
     End Sub
 
@@ -579,9 +611,6 @@ Public Class QuoteList
         Me.Enabled = False
         Me.Hide()
         openForm.ShowDialog()
-
-        DgvMithd.Rows.Clear()
-        DgvMithd.Columns.Clear()
 
         QuoteListLoad()
     End Sub
@@ -611,15 +640,10 @@ Public Class QuoteList
         Me.Hide()
         openForm.ShowDialog()
 
-        DgvMithd.Rows.Clear()
-        DgvMithd.Columns.Clear()
-
         QuoteListLoad()
     End Sub
 
     Private Sub BtnQuoteSearch_Click(sender As Object, e As EventArgs) Handles BtnQuoteSearch.Click
-        DgvMithd.Rows.Clear()
-        DgvMithd.Columns.Clear()
         QuoteListLoad()
     End Sub
 
@@ -640,104 +664,50 @@ Public Class QuoteList
 
         Dim Sql1 As String = ""
         Sql1 = ""
-        Sql1 += "UPDATE "
-        Sql1 += "Public."
-        Sql1 += "t01_mithd "
-        Sql1 += "SET "
-        Sql1 += "取消区分"
-        Sql1 += " = '"
-        Sql1 += "1"
-        Sql1 += "', "
-        Sql1 += "取消日"
-        Sql1 += " = '"
-        Sql1 += dtToday
-        Sql1 += "', "
-        Sql1 += "更新日"
-        Sql1 += " = '"
-        Sql1 += dtToday
-        Sql1 += "', "
-        Sql1 += "更新者"
-        Sql1 += " = '"
-        Sql1 += frmC01F10_Login.loginValue.TantoNM
-        Sql1 += "' "
-        Sql1 += "WHERE"
-        Sql1 += " 会社コード"
-        Sql1 += "='"
-        Sql1 += frmC01F10_Login.loginValue.BumonNM
-        Sql1 += "'"
-        Sql1 += " AND"
-        Sql1 += " 見積番号"
-        Sql1 += "='"
-        Sql1 += DgvMithd.Rows(DgvMithd.CurrentCell.RowIndex).Cells("見積番号").Value
-        Sql1 += "' "
-        Sql1 += " AND"
-        Sql1 += " 見積番号枝番"
-        Sql1 += "='"
-        Sql1 += DgvMithd.Rows(DgvMithd.CurrentCell.RowIndex).Cells("見積番号枝番").Value
-        Sql1 += "' "
+        Sql1 += "UPDATE Public.t01_mithd "
+        Sql1 += "SET 取消区分 = '1' "
+        Sql1 += ",取消日 = '" & dtToday & "' "
+        Sql1 += ",更新日 = '" & dtToday & "' "
+        Sql1 += ",更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "' "
+        Sql1 += "WHERE 会社コード ='" & frmC01F10_Login.loginValue.BumonNM & "'"
+        Sql1 += " AND 見積番号 ='" & DgvMithd.Rows(DgvMithd.CurrentCell.RowIndex).Cells("見積番号").Value & "' "
+        Sql1 += " AND 見積番号枝番 ='" & DgvMithd.Rows(DgvMithd.CurrentCell.RowIndex).Cells("見積番号枝番").Value & "' "
         Sql1 += "RETURNING 会社コード"
-        Sql1 += ", "
-        Sql1 += "見積番号"
-        Sql1 += ", "
-        Sql1 += "見積番号枝番"
-        Sql1 += ", "
-        Sql1 += "得意先コード"
-        Sql1 += ", "
-        Sql1 += "得意先名"
-        Sql1 += ", "
-        Sql1 += "得意先郵便番号"
-        Sql1 += ", "
-        Sql1 += "得意先住所"
-        Sql1 += ", "
-        Sql1 += "得意先電話番号"
-        Sql1 += ", "
-        Sql1 += "得意先ＦＡＸ"
-        Sql1 += ", "
-        Sql1 += "得意先担当者役職"
-        Sql1 += ", "
-        Sql1 += "得意先担当者名"
-        Sql1 += ", "
-        Sql1 += "見積日"
-        Sql1 += ", "
-        Sql1 += "見積有効期限"
-        Sql1 += ", "
-        Sql1 += "支払条件"
-        Sql1 += ", "
-        Sql1 += "見積金額"
-        Sql1 += ", "
-        Sql1 += "仕入金額"
-        Sql1 += ", "
-        Sql1 += "営業担当者"
-        Sql1 += ", "
-        Sql1 += "入力担当者"
-        Sql1 += ", "
-        Sql1 += "備考"
-        Sql1 += ", "
-        Sql1 += "ＶＡＴ"
-        Sql1 += ", "
-        Sql1 += "取消日"
-        Sql1 += ", "
-        Sql1 += "取消区分"
-        Sql1 += ", "
-        Sql1 += "登録日"
-        Sql1 += ", "
-        Sql1 += "受注日"
-        Sql1 += ", "
-        Sql1 += "更新日"
-        Sql1 += ", "
-        Sql1 += "更新者"
+        Sql1 += ",見積番号 "
+        Sql1 += ",見積番号枝番 "
+        Sql1 += ",得意先コード "
+        Sql1 += ",得意先名 "
+        Sql1 += ",得意先郵便番号 "
+        Sql1 += ",得意先住所 "
+        Sql1 += ",得意先電話番号 "
+        Sql1 += ",得意先ＦＡＸ "
+        Sql1 += ",得意先担当者役職 "
+        Sql1 += ",得意先担当者名 "
+        Sql1 += ",見積日 "
+        Sql1 += ",見積有効期限 "
+        Sql1 += ",支払条件 "
+        Sql1 += ",見積金額 "
+        Sql1 += ",仕入金額 "
+        Sql1 += ",営業担当者 "
+        Sql1 += ",入力担当者 "
+        Sql1 += ",備考 "
+        Sql1 += ",ＶＡＴ "
+        Sql1 += ",取消日 "
+        Sql1 += ",取消区分 "
+        Sql1 += ",登録日 "
+        Sql1 += ",受注日 "
+        Sql1 += ",更新日 "
+        Sql1 += ",更新者"
 
         If frmC01F10_Login.loginValue.Language = "ENG" Then
             Dim result As DialogResult = MessageBox.Show("Would you like to cancel the Quotation？",
-                                            "質問",
+                                            "Question",
                                             MessageBoxButtons.YesNoCancel,
-                                            MessageBoxIcon.Exclamation,
+                                            MessageBoxIcon.Question,
                                             MessageBoxDefaultButton.Button2)
 
             If result = DialogResult.Yes Then
                 _db.executeDB(Sql1)
-                DgvMithd.Rows.Clear()
-                DgvMithd.Columns.Clear()
                 QuoteListLoad()
             ElseIf result = DialogResult.No Then
 
@@ -748,13 +718,11 @@ Public Class QuoteList
             Dim result As DialogResult = MessageBox.Show("見積を取り消しますか？",
                                             "質問",
                                             MessageBoxButtons.YesNoCancel,
-                                            MessageBoxIcon.Exclamation,
+                                            MessageBoxIcon.Question,
                                             MessageBoxDefaultButton.Button2)
 
             If result = DialogResult.Yes Then
                 _db.executeDB(Sql1)
-                DgvMithd.Rows.Clear()
-                DgvMithd.Columns.Clear()
                 QuoteListLoad()
             ElseIf result = DialogResult.No Then
 
