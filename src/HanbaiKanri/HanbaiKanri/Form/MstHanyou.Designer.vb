@@ -225,6 +225,7 @@ Partial Class MstHanyou
         Me.BtnAdd.TabIndex = 4
         Me.BtnAdd.Text = "追加"
         Me.BtnAdd.UseVisualStyleBackColor = True
+        Me.BtnAdd.Visible = False
         '
         'BtnBack
         '

@@ -184,6 +184,8 @@ Public Class QuoteList
         '見積日の範囲指定を初期設定
         TxtQuoteDate1.Value = DateAdd("d", -14, Now())
         TxtQuoteDate2.Value = Now()
+        'グリッドの初期表示
+        QuoteListLoad()
 
     End Sub
 

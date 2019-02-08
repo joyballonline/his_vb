@@ -355,6 +355,7 @@ Partial Class Hanyo
         '
         'TxtVariableKey
         '
+        Me.TxtVariableKey.Enabled = False
         Me.TxtVariableKey.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtVariableKey.Location = New System.Drawing.Point(483, 12)
         Me.TxtVariableKey.Name = "TxtVariableKey"
@@ -363,6 +364,7 @@ Partial Class Hanyo
         '
         'TxtFixedKey
         '
+        Me.TxtFixedKey.Enabled = False
         Me.TxtFixedKey.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtFixedKey.Location = New System.Drawing.Point(101, 12)
         Me.TxtFixedKey.Name = "TxtFixedKey"
@@ -373,7 +375,7 @@ Partial Class Hanyo
         '
         Me.TxtCompanyCode.Location = New System.Drawing.Point(851, 6)
         Me.TxtCompanyCode.Name = "TxtCompanyCode"
-        Me.TxtCompanyCode.Size = New System.Drawing.Size(24, 20)
+        Me.TxtCompanyCode.Size = New System.Drawing.Size(24, 19)
         Me.TxtCompanyCode.TabIndex = 352
         '
         'Label20
