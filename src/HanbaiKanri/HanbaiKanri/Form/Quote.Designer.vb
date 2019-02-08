@@ -467,6 +467,9 @@ Partial Class Quote
         '
         'TxtCustomerName
         '
+        Me.TxtCustomerName.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TxtCustomerName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TxtCustomerName.Enabled = False
         Me.TxtCustomerName.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtCustomerName.Location = New System.Drawing.Point(274, 63)
         Me.TxtCustomerName.MaxLength = 50
@@ -500,7 +503,9 @@ Partial Class Quote
         '
         'TxtPostalCode
         '
-        Me.TxtPostalCode.BackColor = System.Drawing.Color.White
+        Me.TxtPostalCode.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TxtPostalCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TxtPostalCode.Enabled = False
         Me.TxtPostalCode.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtPostalCode.Location = New System.Drawing.Point(128, 92)
         Me.TxtPostalCode.MaxLength = 7
@@ -511,6 +516,9 @@ Partial Class Quote
         '
         'TxtAddress1
         '
+        Me.TxtAddress1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TxtAddress1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TxtAddress1.Enabled = False
         Me.TxtAddress1.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtAddress1.Location = New System.Drawing.Point(274, 92)
         Me.TxtAddress1.MaxLength = 100
@@ -565,6 +573,8 @@ Partial Class Quote
         '
         'TxtTel
         '
+        Me.TxtTel.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TxtTel.Enabled = False
         Me.TxtTel.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtTel.Location = New System.Drawing.Point(766, 63)
         Me.TxtTel.MaxLength = 13
@@ -583,6 +593,8 @@ Partial Class Quote
         '
         'TxtFax
         '
+        Me.TxtFax.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TxtFax.Enabled = False
         Me.TxtFax.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtFax.Location = New System.Drawing.Point(766, 92)
         Me.TxtFax.MaxLength = 13
@@ -758,6 +770,9 @@ Partial Class Quote
         '
         'TxtAddress2
         '
+        Me.TxtAddress2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TxtAddress2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TxtAddress2.Enabled = False
         Me.TxtAddress2.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtAddress2.Location = New System.Drawing.Point(274, 121)
         Me.TxtAddress2.MaxLength = 100
@@ -767,6 +782,9 @@ Partial Class Quote
         '
         'TxtAddress3
         '
+        Me.TxtAddress3.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TxtAddress3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TxtAddress3.Enabled = False
         Me.TxtAddress3.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtAddress3.Location = New System.Drawing.Point(274, 150)
         Me.TxtAddress3.MaxLength = 100
