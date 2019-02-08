@@ -593,19 +593,28 @@ Public Class QuoteList
     End Sub
 
     Private Sub BtnQuoteEdit_Click(sender As Object, e As EventArgs) Handles BtnQuoteEdit.Click
-        Dim RowIdx As Integer
-        RowIdx = Me.DgvMithd.CurrentCell.RowIndex
-        Dim No As String = DgvMithd.Rows(RowIdx).Cells(0).Value
-        Dim Suffix As String = DgvMithd.Rows(RowIdx).Cells(1).Value
 
-        Dim openForm As Form = Nothing
-        openForm = New Quote(_msgHd, _db, _langHd, Me, No, Suffix)   '処理選択
-        Me.Enabled = False
-        Me.Hide()
-        openForm.ShowDialog()
+        'グリッドにリストが存在しない場合は処理しない
+        Try
 
-        QuoteListLoad()
+
+            Dim RowIdx As Integer
+            RowIdx = Me.DgvMithd.CurrentCell.RowIndex
+            Dim No As String = DgvMithd.Rows(RowIdx).Cells(0).Value
+            Dim Suffix As String = DgvMithd.Rows(RowIdx).Cells(1).Value
+
+            Dim openForm As Form = Nothing
+            openForm = New Quote(_msgHd, _db, _langHd, Me, No, Suffix)   '処理選択
+            Me.Enabled = False
+            Me.Hide()
+            openForm.ShowDialog()
+
+            QuoteListLoad()
+        Catch
+        End Try
+
     End Sub
+
 
     Private Sub BtnQuoteClone_Click(sender As Object, e As EventArgs) Handles BtnQuoteClone.Click
         Dim RowIdx As Integer
@@ -623,31 +632,45 @@ Public Class QuoteList
     End Sub
 
     Private Sub BtnQuoteView_Click(sender As Object, e As EventArgs) Handles BtnQuoteView.Click
-        Dim RowIdx As Integer
-        RowIdx = Me.DgvMithd.CurrentCell.RowIndex
-        Dim No As String = DgvMithd.Rows(RowIdx).Cells(0).Value
-        Dim Suffix As String = DgvMithd.Rows(RowIdx).Cells(1).Value
-        Dim Status As String = "VIEW"
-        Dim openForm As Form = Nothing
-        openForm = New Quote(_msgHd, _db, _langHd, Me, No, Suffix, Status)   '処理選択
-        Me.Enabled = False
-        Me.Hide()
-        openForm.Show(Me)
+
+        'グリッドに何もないときは次画面へ移動しない
+        Try
+            Dim RowIdx As Integer
+            RowIdx = Me.DgvMithd.CurrentCell.RowIndex
+            Dim No As String = DgvMithd.Rows(RowIdx).Cells(0).Value
+            Dim Suffix As String = DgvMithd.Rows(RowIdx).Cells(1).Value
+            Dim Status As String = "VIEW"
+            Dim openForm As Form = Nothing
+            openForm = New Quote(_msgHd, _db, _langHd, Me, No, Suffix, Status)   '処理選択
+            Me.Enabled = False
+            Me.Hide()
+            openForm.Show(Me)
+        Catch
+
+        End Try
+
     End Sub
 
     Private Sub BtnUnitPrice_Click(sender As Object, e As EventArgs) Handles BtnUnitPrice.Click
-        Dim RowIdx As Integer
-        RowIdx = Me.DgvMithd.CurrentCell.RowIndex
-        Dim No As String = DgvMithd.Rows(RowIdx).Cells(0).Value
-        Dim Suffix As String = DgvMithd.Rows(RowIdx).Cells(1).Value
-        Dim Status As String = "PRICE"
-        Dim openForm As Form = Nothing
-        openForm = New Quote(_msgHd, _db, _langHd, Me, No, Suffix, Status)   '処理選択
-        Me.Enabled = False
-        Me.Hide()
-        openForm.ShowDialog()
 
-        QuoteListLoad()
+        'グリッドに何もないときは次画面へ移動しない
+        Try
+            Dim RowIdx As Integer
+            RowIdx = Me.DgvMithd.CurrentCell.RowIndex
+            Dim No As String = DgvMithd.Rows(RowIdx).Cells(0).Value
+            Dim Suffix As String = DgvMithd.Rows(RowIdx).Cells(1).Value
+            Dim Status As String = "PRICE"
+            Dim openForm As Form = Nothing
+            openForm = New Quote(_msgHd, _db, _langHd, Me, No, Suffix, Status)   '処理選択
+            Me.Enabled = False
+            Me.Hide()
+            openForm.ShowDialog()
+
+            QuoteListLoad()
+
+        Catch
+
+        End Try
     End Sub
 
     Private Sub BtnQuoteSearch_Click(sender As Object, e As EventArgs) Handles BtnQuoteSearch.Click
