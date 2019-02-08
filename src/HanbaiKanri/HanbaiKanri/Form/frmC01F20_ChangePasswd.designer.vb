@@ -43,21 +43,21 @@ Partial Class frmC01F20_ChangePasswd
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("HG創英角ﾎﾟｯﾌﾟ体", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label3.ForeColor = System.Drawing.Color.Navy
-        Me.Label3.Location = New System.Drawing.Point(56, 30)
+        Me.Label3.Font = New System.Drawing.Font("游ゴシック Medium", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Label3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.Label3.Location = New System.Drawing.Point(138, 22)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(178, 24)
+        Me.Label3.Size = New System.Drawing.Size(189, 31)
         Me.Label3.TabIndex = 13
         Me.Label3.Text = "パスワード変更"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Label2.Font = New System.Drawing.Font("游ゴシック Medium", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.Label2.Location = New System.Drawing.Point(96, 169)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(64, 16)
+        Me.Label2.Size = New System.Drawing.Size(64, 17)
         Me.Label2.TabIndex = 11
         Me.Label2.Text = "確認用："
         Me.Label2.TextAlign = System.Drawing.ContentAlignment.TopRight
@@ -65,17 +65,17 @@ Partial Class frmC01F20_ChangePasswd
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Label1.Font = New System.Drawing.Font("游ゴシック Medium", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.Label1.Location = New System.Drawing.Point(57, 126)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(103, 16)
+        Me.Label1.Size = New System.Drawing.Size(106, 17)
         Me.Label1.TabIndex = 9
         Me.Label1.Text = "新パスワード："
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'btnback
         '
-        Me.btnback.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.btnback.Font = New System.Drawing.Font("游ゴシック", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.btnback.Location = New System.Drawing.Point(245, 206)
         Me.btnback.Name = "btnback"
         Me.btnback.Size = New System.Drawing.Size(125, 40)
@@ -85,7 +85,7 @@ Partial Class frmC01F20_ChangePasswd
         '
         'btnOK
         '
-        Me.btnOK.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.btnOK.Font = New System.Drawing.Font("游ゴシック", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.btnOK.Location = New System.Drawing.Point(99, 206)
         Me.btnOK.Name = "btnOK"
         Me.btnOK.Size = New System.Drawing.Size(125, 40)
@@ -96,10 +96,10 @@ Partial Class frmC01F20_ChangePasswd
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Label4.Font = New System.Drawing.Font("游ゴシック Medium", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.Label4.Location = New System.Drawing.Point(57, 82)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(101, 16)
+        Me.Label4.Size = New System.Drawing.Size(106, 17)
         Me.Label4.TabIndex = 15
         Me.Label4.Text = "ユーザコード："
         Me.Label4.TextAlign = System.Drawing.ContentAlignment.TopRight
@@ -128,6 +128,7 @@ Partial Class frmC01F20_ChangePasswd
         'frmC01F20_ChangePasswd
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
+        Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(456, 276)
         Me.ControlBox = False
         Me.Controls.Add(Me.lblTanto)
@@ -141,6 +142,7 @@ Partial Class frmC01F20_ChangePasswd
         Me.Controls.Add(Me.btnOK)
         Me.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Name = "frmC01F20_ChangePasswd"
+        Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
         Me.Text = "パスワード変更(C01F20)"
         Me.ResumeLayout(False)
         Me.PerformLayout()
