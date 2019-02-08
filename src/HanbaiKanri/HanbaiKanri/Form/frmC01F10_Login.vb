@@ -123,9 +123,9 @@ Public Class frmC01F10_Login
 
         'Dim test As DateTime = Format(Now, "Short Date")
 
-        'Console.WriteLine(Format(Now, "Short Date"))
-        Console.WriteLine("変数でformatしてる：" & UtilClass.jaDatetimeFormat(DateTime.Now))
-        Console.WriteLine("直接formatしてる：" & Format(DateTime.Now, "yyyy/MM/dd HH:mm:ss"))
+        ''Console.WriteLine(Format(Now, "Short Date"))
+        'Console.WriteLine("変数でformatしてる：" & UtilClass.jaDatetimeFormat(DateTime.Now))
+        'Console.WriteLine("直接formatしてる：" & Format(DateTime.Now, "yyyy/MM/dd HH:mm:ss"))
 
         Try
 

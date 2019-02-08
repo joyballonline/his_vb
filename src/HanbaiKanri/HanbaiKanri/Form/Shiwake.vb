@@ -189,26 +189,24 @@ Public Class Shiwake
 
             For x As Integer = 0 To dsSWKNyukohd.Tables(RS).Rows.Count - 1
 
-                'Console.WriteLine(dsSWKNyukohd.Tables(RS).Rows(x)("入庫番号"))
-                'Console.WriteLine("'WH-" & dsSWKNyukohd.Tables(RS).Rows(x)("客先番号").ToString & "-" & i & "'")
+                '棚卸資産, 買掛金 = 仕入金額 * (VAT / 100)
+                Dim calGlamount As Decimal = dsSWKNyukohd.Tables(RS).Rows(x)("仕入金額") * (dsSWKNyukohd.Tables(RS).Rows(x)("VAT") / 100)
+                'VAT-IN, 買掛金 = calGLAMOUNT * (VAT / 100)
+                Dim calGlamountVat As Decimal = calGlamount * (dsSWKNyukohd.Tables(RS).Rows(x)("VAT") / 100)
+
 
 
                 Sql = ",'" & Format(dsSWKNyukohd.Tables(RS).Rows(x)("入庫日"), "yyyyMM") & "'" '入庫日
                 Sql += "," & seqID 'プライマリ
                 Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
-                'Sql += ",100000000000" '棚卸資産
                 Sql += ",'" & getAccountName("inventory") & "'" '棚卸資産
-                'Sql += ",'" & getAccountName("inventory") & "：棚卸資産'" '棚卸資産
-                Sql += "," & formatDouble(dsSWKNyukohd.Tables(RS).Rows(x)("仕入金額") * dsSWKNyukohd.Tables(RS).Rows(x)("VAT")) '仕入金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
+                Sql += "," & formatDouble(calGlamount) '仕入金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
                 Sql += ",1" '固定
                 Sql += ",'" & dsSwkHattyu.Tables(RS).Rows(0)("仕入先名").ToString & "'" '仕入先コード
-                'Sql += ",'" & dsSwkHattyu.Tables(RS).Rows(0)("客先番号").ToString & "'" 'PO
                 Sql += ",'WH-" & dsSwkSirehd.Tables(RS).Rows(x)("客先番号").ToString & "-" & i & "'" 'PO
-                'Sql += ",'" & dsSwkSirehd.Tables(RS).Rows(i)("仕入日") & "'" '仕入日
                 Sql += ",'" & Format(dsSwkSirehd.Tables(RS).Rows(i)("仕入日"), "yyyy-MM-dd") & "'" '仕入日
                 Sql += ",''" '空でよし
-                'Sql += "," & formatDouble(VATIN) '仕入金額 + VAT IN
-                Sql += "," & formatDouble(dsSWKNyukohd.Tables(RS).Rows(x)("仕入金額") + dsSWKNyukohd.Tables(RS).Rows(x)("VAT")) '仕入金額 + VAT IN
+                Sql += ",'" & formatDouble(calGlamount + calGlamountVat) & "'" '仕入金額 + VAT IN
                 Sql += ",''" '空でよし
                 Sql += ",''" '空でよし
 
@@ -220,19 +218,14 @@ Public Class Shiwake
                 Sql = ",'" & Format(dsSWKNyukohd.Tables(RS).Rows(x)("入庫日"), "yyyyMM") & "'" '入庫日
                 Sql += "," & seqID 'プライマリ
                 Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
-                'Sql += ",100000000001" '買掛金
                 Sql += ",'" & getAccountName("accounts-payable") & "'" '買掛金
-                'Sql += ",'" & getAccountName("accounts-payable") & "：買掛金'" '買掛金
-                'Sql += "," & formatDouble(-dsSWKNyukohd.Tables(RS).Rows(x)("仕入金額")) '仕入金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
-                Sql += "," & formatDouble(-dsSWKNyukohd.Tables(RS).Rows(x)("仕入金額") * dsSWKNyukohd.Tables(RS).Rows(x)("VAT")) '仕入金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
+                Sql += "," & formatDouble(-calGlamount) '仕入金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
                 Sql += ",1" '固定
                 Sql += ",'" & dsSwkHattyu.Tables(RS).Rows(0)("仕入先名").ToString & "'" '仕入先コード
-                'Sql += ",'" & dsSwkHattyu.Tables(RS).Rows(0)("客先番号").ToString & "'" 'PO
                 Sql += ",'WH-" & dsSwkSirehd.Tables(RS).Rows(x)("客先番号").ToString & "-" & i & "'" 'PO
                 Sql += ",'" & Format(dsSwkSirehd.Tables(RS).Rows(i)("仕入日"), "yyyy-MM-dd") & "'" '仕入日
                 Sql += ",''" '空でよし
-                'Sql += "," & formatDouble(VATIN) '仕入金額 + VAT IN
-                Sql += "," & formatDouble(dsSWKNyukohd.Tables(RS).Rows(x)("仕入金額") + dsSWKNyukohd.Tables(RS).Rows(x)("VAT")) '仕入金額 + VAT IN
+                Sql += ",'" & formatDouble(calGlamount + calGlamountVat) & "'" '仕入金額 + VAT IN
                 Sql += ",''" '空でよし
                 Sql += ",''" '空でよし
 
@@ -241,23 +234,17 @@ Public Class Shiwake
 
                 countKeyID = getCount(countKeyID)
 
-                'Sql = ""
                 Sql = ",'" & Format(dsSWKNyukohd.Tables(RS).Rows(x)("入庫日"), "yyyyMM") & "'" '入庫日
                 Sql += "," & seqID 'プライマリ
                 Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
-                'Sql += ",100000000002" 'VAT-IN
                 Sql += ",'" & getAccountName("vat-in") & "'" 'VAT-IN 
-                'Sql += ",'" & getAccountName("vat-in") & "：VAT-IN'" 'VAT-IN
-                'Sql += "," & formatDouble(dsSWKNyukohd.Tables(RS).Rows(x)("仕入金額")) '仕入金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
-                Sql += "," & formatDouble((dsSWKNyukohd.Tables(RS).Rows(x)("仕入金額") * dsSWKNyukohd.Tables(RS).Rows(x)("VAT")) / 100) '仕入金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
+                Sql += "," & formatDouble(calGlamountVat) '仕入金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
                 Sql += ",1" '固定
                 Sql += ",'" & dsSwkHattyu.Tables(RS).Rows(0)("仕入先名").ToString & "'" '仕入先コード
-                'Sql += ",'" & dsSwkHattyu.Tables(RS).Rows(0)("客先番号").ToString & "'" 'PO
                 Sql += ",'WH-" & dsSwkSirehd.Tables(RS).Rows(x)("客先番号").ToString & "-" & i & "'" 'PO
                 Sql += ",'" & Format(dsSwkSirehd.Tables(RS).Rows(i)("仕入日"), "yyyy-MM-dd") & "'" '仕入日
                 Sql += ",''" '空でよし
-                'Sql += "," & formatDouble(VATIN) '仕入金額 + VAT IN
-                Sql += "," & formatDouble(dsSWKNyukohd.Tables(RS).Rows(x)("仕入金額") + dsSWKNyukohd.Tables(RS).Rows(x)("VAT")) '仕入金額 + VAT IN
+                Sql += ",'" & formatDouble(calGlamount + calGlamountVat) & "'" '仕入金額 + VAT IN
                 Sql += ",''" '空でよし
                 Sql += ",''" '空でよし
 
@@ -267,23 +254,17 @@ Public Class Shiwake
                 countKeyID = getCount(countKeyID)
 
 
-                'Sql = ""
                 Sql = ",'" & Format(dsSWKNyukohd.Tables(RS).Rows(x)("入庫日"), "yyyyMM") & "'" '入庫日
                 Sql += "," & seqID 'プライマリ
                 Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
-                'Sql += ",100000000001" '買掛金
                 Sql += ",'" & getAccountName("accounts-payable") & "'" '買掛金
-                'Sql += ",'" & getAccountName("accounts-payable") & "：買掛金'" '買掛金
-                'Sql += "," & formatDouble(-dsSWKNyukohd.Tables(RS).Rows(x)("仕入金額")) '仕入金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
-                Sql += "," & formatDouble(-((dsSWKNyukohd.Tables(RS).Rows(x)("仕入金額") * dsSWKNyukohd.Tables(RS).Rows(x)("VAT")) / 100)) '仕入金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
+                Sql += "," & formatDouble(-calGlamountVat) '仕入金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
                 Sql += ",1" '固定
                 Sql += ",'" & dsSwkHattyu.Tables(RS).Rows(0)("仕入先名").ToString & "'" '仕入先コード
-                'Sql += ",'" & dsSwkHattyu.Tables(RS).Rows(0)("客先番号").ToString & "'" 'PO
                 Sql += ",'WH-" & dsSwkSirehd.Tables(RS).Rows(x)("客先番号").ToString & "-" & i & "'" 'PO
                 Sql += ",'" & Format(dsSwkSirehd.Tables(RS).Rows(i)("仕入日"), "yyyy-MM-dd") & "'" '仕入日
                 Sql += ",''" '空でよし
-                'Sql += "," & formatDouble(VATIN) '仕入金額 + VAT IN
-                Sql += "," & formatDouble(dsSWKNyukohd.Tables(RS).Rows(x)("仕入金額") + dsSWKNyukohd.Tables(RS).Rows(x)("VAT")) '仕入金額 + VAT IN
+                Sql += ",'" & formatDouble(calGlamount + calGlamountVat) & "'" '仕入金額 + VAT IN
                 Sql += ",''" '空でよし
                 Sql += ",''" '空でよし
 
@@ -299,7 +280,7 @@ Public Class Shiwake
 
 #Region "仕訳売掛金"
 
-            Sql = " ORDER BY "
+        Sql = " ORDER BY "
         Sql += " 売上日 "
 
         Dim dsSwkUrighd As DataSet = getDsData("t30_urighd", Sql) '売上データの取得
@@ -308,26 +289,23 @@ Public Class Shiwake
 
             Dim countKeyID As Integer = 0
 
-            Console.WriteLine(dsSwkUrighd.Tables(RS).Rows(i)("売上番号"))
-            Console.WriteLine("'ER-" & dsSwkUrighd.Tables(RS).Rows(i)("客先番号").ToString & "-" & i & "'")
+            '売掛金, 売上 = 仕入金額 * (VAT / 100)
+            Dim calGlamount As Decimal = dsSwkUrighd.Tables(RS).Rows(i)("売上金額") * (dsSwkUrighd.Tables(RS).Rows(i)("VAT") / 100)
+            '売掛金, VAT-OUT = calGLAMOUNT * (VAT / 100)
+            Dim calGlamountVat As Decimal = calGlamount * (dsSwkUrighd.Tables(RS).Rows(i)("VAT") / 100)
 
 
             Sql = ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("売上日"), "yyyyMM") & "'" '売上日
             Sql += "," & "nextval('transactionid_seq')" 'プライマリ
             Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
-            'Sql += ",200000000003" '売掛金
             Sql += ",'" & getAccountName("accounts-receivable") & "'" '売掛金
-            'Sql += ",'" & getAccountName("accounts-receivable") & "：売掛金'" '売掛金
-            Sql += "," & formatDouble(dsSwkUrighd.Tables(RS).Rows(i)("売上金額") * dsSwkUrighd.Tables(RS).Rows(i)("VAT")) '売上金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
+            Sql += "," & formatDouble(calGlamount) '売上金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
             Sql += ",1" '固定
             Sql += ",'" & dsSwkUrighd.Tables(RS).Rows(i)("得意先コード").ToString & "'" '得意先コード
-            'Sql += ",'" & dsSwkUrighd.Tables(RS).Rows(0)("客先番号").ToString & "'" 'PO
             Sql += ",'ER-" & dsSwkUrighd.Tables(RS).Rows(i)("客先番号").ToString & "-" & i & "'" 'PO
-            'Sql += ",'" & dsSwkSirehd.Tables(RS).Rows(i)("仕入日") & "'" '仕入日
             Sql += ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("売上日"), "yyyy-MM-dd") & "'" '売上日
             Sql += ",''" '空でよし
-            'Sql += "," & formatDouble(VATIN) '仕入金額 + VAT IN
-            Sql += "," & formatDouble(dsSwkUrighd.Tables(RS).Rows(i)("売上金額") + dsSwkUrighd.Tables(RS).Rows(i)("VAT")) '売上金額 + VAT IN
+            Sql += "," & formatDouble(calGlamount + calGlamountVat) '売上金額 + VAT IN
             Sql += ",''" '空でよし
             Sql += ",''" '空でよし
 
@@ -341,19 +319,14 @@ Public Class Shiwake
             Sql = ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("売上日"), "yyyyMM") & "'" '売上日
             Sql += "," & seqID 'プライマリ
             Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
-            'Sql += ",200000000005" '売上
             Sql += ",'" & getAccountName("sales") & "'" '売上
-            'Sql += ",'" & getAccountName("sales") & "：売上'" '売上
-            Sql += "," & formatDouble(-dsSwkUrighd.Tables(RS).Rows(i)("売上金額") * dsSwkUrighd.Tables(RS).Rows(i)("VAT")) '売上金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
+            Sql += "," & formatDouble(-(calGlamount)) '売上金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
             Sql += ",1" '固定
             Sql += ",'" & dsSwkUrighd.Tables(RS).Rows(0)("得意先コード").ToString & "'" '得意先コード
-            'Sql += ",'" & dsSwkUrighd.Tables(RS).Rows(0)("客先番号").ToString & "'" 'PO
             Sql += ",'ER-" & dsSwkUrighd.Tables(RS).Rows(i)("客先番号").ToString & "-" & i & "'" 'PO
-            'Sql += ",'" & dsSwkSirehd.Tables(RS).Rows(i)("仕入日") & "'" '仕入日
             Sql += ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("売上日"), "yyyy-MM-dd") & "'" '売上日
             Sql += ",''" '空でよし
-            'Sql += "," & formatDouble(VATIN) '仕入金額 + VAT IN
-            Sql += "," & formatDouble(-dsSwkUrighd.Tables(RS).Rows(i)("売上金額") + dsSwkUrighd.Tables(RS).Rows(i)("VAT")) '売上金額 + VAT IN
+            Sql += "," & formatDouble(calGlamount + calGlamountVat) '売上金額 + VAT IN
             Sql += ",''" '空でよし
             Sql += ",''" '空でよし
 
@@ -365,19 +338,14 @@ Public Class Shiwake
             Sql = ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("売上日"), "yyyyMM") & "'" '売上日
             Sql += "," & seqID 'プライマリ
             Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
-            'Sql += ",200000000005" '売掛金
             Sql += ",'" & getAccountName("accounts-receivable") & "'" '売掛金
-            'Sql += ",'" & getAccountName("accounts-receivable") & "：売掛金'" '売掛金
-            Sql += "," & formatDouble((dsSwkUrighd.Tables(RS).Rows(i)("売上金額") * dsSwkUrighd.Tables(RS).Rows(i)("VAT")) / 100) '売上金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
+            Sql += "," & formatDouble(calGlamountVat) '売上金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
             Sql += ",1" '固定
             Sql += ",'" & dsSwkUrighd.Tables(RS).Rows(0)("得意先コード").ToString & "'" '得意先コード
-            'Sql += ",'" & dsSwkUrighd.Tables(RS).Rows(0)("客先番号").ToString & "'" 'PO
             Sql += ",'ER-" & dsSwkUrighd.Tables(RS).Rows(i)("客先番号").ToString & "-" & i & "'" 'PO
-            'Sql += ",'" & dsSwkSirehd.Tables(RS).Rows(i)("仕入日") & "'" '仕入日
             Sql += ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("売上日"), "yyyy-MM-dd") & "'" '売上日
             Sql += ",''" '空でよし
-            'Sql += "," & formatDouble(VATIN) '仕入金額 + VAT IN
-            Sql += "," & formatDouble(dsSwkUrighd.Tables(RS).Rows(i)("売上金額") + dsSwkUrighd.Tables(RS).Rows(i)("VAT")) '売上金額 + VAT IN
+            Sql += "," & formatDouble(calGlamount + calGlamountVat) '売上金額 + VAT IN
             Sql += ",''" '空でよし
             Sql += ",''" '空でよし
 
@@ -389,19 +357,14 @@ Public Class Shiwake
             Sql = ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("売上日"), "yyyyMM") & "'" '売上日
             Sql += "," & seqID 'プライマリ
             Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
-            'Sql += ",200000000006" 'VAT-OUT
             Sql += ",'" & getAccountName("vat-out") & "'" 'VAT-OUT
-            'Sql += ",'" & getAccountName("vat-out") & "：VAT-OUT'" 'VAT-OUT
-            Sql += "," & formatDouble(-((dsSwkUrighd.Tables(RS).Rows(i)("売上金額") * dsSwkUrighd.Tables(RS).Rows(i)("VAT")) / 100)) '売上金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
+            Sql += "," & formatDouble(-(calGlamountVat)) '売上金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
             Sql += ",1" '固定
             Sql += ",'" & dsSwkUrighd.Tables(RS).Rows(0)("得意先コード").ToString & "'" '得意先コード
-            'Sql += ",'" & dsSwkUrighd.Tables(RS).Rows(0)("客先番号").ToString & "'" 'PO
             Sql += ",'ER-" & dsSwkUrighd.Tables(RS).Rows(i)("客先番号").ToString & "-" & i & "'" 'PO
-            'Sql += ",'" & dsSwkSirehd.Tables(RS).Rows(i)("仕入日") & "'" '仕入日
             Sql += ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("売上日"), "yyyy-MM-dd") & "'" '売上日
             Sql += ",''" '空でよし
-            'Sql += "," & formatDouble(VATIN) '仕入金額 + VAT IN
-            Sql += "," & formatDouble(-dsSwkUrighd.Tables(RS).Rows(i)("売上金額") + dsSwkUrighd.Tables(RS).Rows(i)("VAT")) '売上金額 + VAT IN
+            Sql += "," & formatDouble(calGlamount + calGlamountVat) '売上金額 + VAT IN
             Sql += ",''" '空でよし
             Sql += ",''" '空でよし
 
@@ -418,9 +381,6 @@ Public Class Shiwake
         Sql += " 入金日 "
 
         Dim dsNkinkshihd As DataSet = getDsData("t27_nkinkshihd", Sql) '入金消込データの取得
-
-        'Dim transactionid As String = DateTime.Now.ToString("MMddHHmmss" & i) 'TRANSACTIONID
-        'Dim countKeyID As Integer = 0
 
         For i As Integer = 0 To dsNkinkshihd.Tables(RS).Rows.Count - 1
 
@@ -443,7 +403,7 @@ Public Class Shiwake
 
             'm10 得意先マスタ
             Dim dsCustomer As DataSet = getDsData("m10_customer", Sql) '得意先マスタデータの取得
-
+            Console.WriteLine(dsCustomer.Tables(RS).Rows(0)("会計用得意先コード"))
             Dim codeAAC As String = dsCustomer.Tables(RS).Rows(0)("会計用得意先コード")
             '<<------------------------------- 共通化したい
 
@@ -470,13 +430,10 @@ Public Class Shiwake
                 Sql = ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyyMM") & "'" '入金日
                 Sql += "," & seqID 'プライマリ
                 Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
-                'Sql += ",200000000000" '現金預金
                 Sql += ",'" & getAccountName("cash-deposit") & "'" '現金預金
-                'Sql += ",'" & getAccountName("cash-deposit") & "：現金預金'" '現金預金
                 Sql += "," & formatDouble(dsNkinkshihd.Tables(RS).Rows(i)("入金消込額計")) '入金金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
                 Sql += ",1" '固定
                 Sql += ",'" & dsNkinSkyu.Tables(RS).Rows(0)("得意先コード").ToString & "'" '得意先コード
-                'Sql += ",'" & dsNkinSkyu.Tables(RS).Rows(0)("客先番号").ToString & "'" 'PO
                 Sql += ",'PM-" & dsNkinSkyu.Tables(RS).Rows(0)("客先番号").ToString & "-" & i & "'" 'PO
                 Sql += ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyy-MM-dd") & "'" '入金日
                 Sql += ",''" '空でよし
@@ -492,13 +449,10 @@ Public Class Shiwake
                 Sql = ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyyMM") & "'" '入金日
                 Sql += "," & seqID 'プライマリ
                 Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
-                'Sql += ",200000000001" '前受金
                 Sql += ",'" & getAccountName("advance") & "'" '前受金
-                'Sql += ",'" & getAccountName("advance") & "：前受金'" '前受金
                 Sql += "," & formatDouble(-dsNkinkshihd.Tables(RS).Rows(i)("入金消込額計")) '入金金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
                 Sql += ",1" '固定
                 Sql += ",'" & dsNkinSkyu.Tables(RS).Rows(0)("得意先コード").ToString & "'" '得意先コード
-                'Sql += ",'" & dsNkinSkyu.Tables(RS).Rows(0)("客先番号").ToString & "'" 'PO
                 Sql += ",'PM-" & dsNkinSkyu.Tables(RS).Rows(0)("客先番号").ToString & "-" & i & "'" 'PO
                 Sql += ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyy-MM-dd") & "'" '入金日
                 Sql += ",''" '空でよし
@@ -514,13 +468,10 @@ Public Class Shiwake
                 Sql = ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyyMM") & "'" '入金日
                 Sql += "," & seqID 'プライマリ
                 Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
-                'Sql += ",200000000001" '前受金
                 Sql += ",'" & getAccountName("advance") & "'" '前受金
-                'Sql += ",'" & getAccountName("advance") & "：前受金'" '前受金
                 Sql += "," & formatDouble(dsNkinkshihd.Tables(RS).Rows(i)("入金消込額計")) '入金金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
                 Sql += ",1" '固定
                 Sql += ",'" & dsNkinSkyu.Tables(RS).Rows(0)("得意先コード").ToString & "'" '得意先コード
-                'Sql += ",'" & dsNkinSkyu.Tables(RS).Rows(0)("客先番号").ToString & "'" 'PO
                 Sql += ",'PM-" & dsNkinSkyu.Tables(RS).Rows(0)("客先番号").ToString & "-" & i & "'" 'PO
                 Sql += ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyy-MM-dd") & "'" '入金日
                 Sql += ",''" '空でよし
@@ -537,13 +488,10 @@ Public Class Shiwake
                 Sql = ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyyMM") & "'" '入金日
                 Sql += "," & seqID 'プライマリ
                 Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
-                'Sql += ",200000000003" '売掛金
                 Sql += ",'" & getAccountName("accounts-receivable") & "'" '売掛金
-                'Sql += ",'" & getAccountName("accounts-receivable") & "：売掛金'" '売掛金
                 Sql += "," & formatDouble(-dsNkinkshihd.Tables(RS).Rows(i)("入金消込額計")) '入金金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
                 Sql += ",1" '固定
                 Sql += ",'" & dsNkinSkyu.Tables(RS).Rows(0)("得意先コード").ToString & "'" '得意先コード
-                'Sql += ",'" & dsNkinSkyu.Tables(RS).Rows(0)("客先番号").ToString & "'" 'PO
                 Sql += ",'PM-" & dsNkinSkyu.Tables(RS).Rows(0)("客先番号").ToString & "-" & i & "'" 'PO
                 Sql += ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyy-MM-dd") & "'" '入金日
                 Sql += ",''" '空でよし
@@ -570,13 +518,10 @@ Public Class Shiwake
                 Sql = ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyyMM") & "'" '入金日
                 Sql += "," & seqID 'プライマリ
                 Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
-                'Sql += ",200000000000" '現金預金
                 Sql += ",'" & getAccountName("cash-deposit") & "'" '現金預金
-                'Sql += ",'" & getAccountName("cash-deposit") & "：現金預金'" '現金預金
                 Sql += "," & formatDouble(dsNkinkshihd.Tables(RS).Rows(i)("入金消込額計")) '入金金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
                 Sql += ",1" '固定
                 Sql += ",'" & dsNkinSkyu.Tables(RS).Rows(0)("得意先コード").ToString & "'" '得意先コード
-                'Sql += ",'" & dsNkinSkyu.Tables(RS).Rows(0)("客先番号").ToString & "'" 'PO
                 Sql += ",'PM-" & dsNkinSkyu.Tables(RS).Rows(0)("客先番号").ToString & "-" & i & "'" 'PO
                 Sql += ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyy-MM-dd") & "'" '入金日
                 Sql += ",''" '空でよし
@@ -592,13 +537,10 @@ Public Class Shiwake
                 Sql = ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyyMM") & "'" '入金日
                 Sql += "," & seqID 'プライマリ
                 Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
-                'Sql += ",200000000003" '売掛金
                 Sql += ",'" & getAccountName("accounts-receivable") & "'" '売掛金
-                'Sql += ",'" & getAccountName("accounts-receivable") & "：売掛金'" '売掛金
                 Sql += "," & formatDouble(-dsNkinkshihd.Tables(RS).Rows(i)("入金消込額計")) '入金金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
                 Sql += ",1" '固定
                 Sql += ",'" & dsNkinSkyu.Tables(RS).Rows(0)("得意先コード").ToString & "'" '得意先コード
-                'Sql += ",'" & dsNkinSkyu.Tables(RS).Rows(0)("客先番号").ToString & "'" 'PO
                 Sql += ",'PM-" & dsNkinSkyu.Tables(RS).Rows(0)("客先番号").ToString & "-" & i & "'" 'PO
                 Sql += ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyy-MM-dd") & "'" '入金日
                 Sql += ",''" '空でよし
@@ -666,13 +608,10 @@ Public Class Shiwake
                 Sql = ",'" & Format(dsShrikshihd.Tables(RS).Rows(i)("支払日"), "yyyyMM") & "'" '入金日
                 Sql += "," & "nextval('transactionid_seq')" 'プライマリ
                 Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
-                'Sql += ",200000000004" '前払金
                 Sql += ",'" & getAccountName("prepaid") & "'" '前払金
-                'Sql += ",'" & getAccountName("prepaid") & "：前払金'" '前払金
                 Sql += "," & formatDouble(dsShrikshihd.Tables(RS).Rows(i)("支払消込額計")) '支払金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
                 Sql += ",1" '固定
                 Sql += ",'" & dsShriKike.Tables(RS).Rows(0)("仕入先コード").ToString & "'" '仕入先コード
-                'Sql += ",'" & dsShriKike.Tables(RS).Rows(0)("客先番号").ToString & "'" 'PO
                 Sql += ",'PO-" & dsShriKike.Tables(RS).Rows(0)("客先番号").ToString & "-" & i & "'" 'PO
                 Sql += ",'" & Format(dsShrikshihd.Tables(RS).Rows(i)("支払日"), "yyyy-MM-dd") & "'" '入金日
                 Sql += ",''" '空でよし
@@ -687,33 +626,10 @@ Public Class Shiwake
                 Sql = ",'" & Format(dsShrikshihd.Tables(RS).Rows(i)("支払日"), "yyyyMM") & "'" '入金日
                 Sql += "," & seqID 'プライマリ
                 Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
-                'Sql += ",200000000000" '現金預金
                 Sql += ",'" & getAccountName("cash-deposit") & "'" '現金預金
-                'Sql += ",'" & getAccountName("cash-deposit") & "：現金預金'" '現金預金
                 Sql += "," & formatDouble(-dsShrikshihd.Tables(RS).Rows(i)("支払消込額計")) '支払金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
                 Sql += ",1" '固定
                 Sql += ",'" & dsShriKike.Tables(RS).Rows(0)("仕入先コード").ToString & "'" '仕入先コード
-                'Sql += ",'" & dsShriKike.Tables(RS).Rows(0)("客先番号").ToString & "'" 'PO
-                Sql += ",'PO-" & dsShriKike.Tables(RS).Rows(0)("客先番号").ToString & "-" & i & "'" 'PO
-                Sql += ",'" & Format(dsShrikshihd.Tables(RS).Rows(i)("支払日"), "yyyy-MM-dd") & "'" '入金日
-                Sql += ",''" '空でよし
-                Sql += "," & formatDouble(-dsShrikshihd.Tables(RS).Rows(i)("支払消込額計")) '支払金額
-                Sql += ",'" & codeAAC & "'" '会計用支払先コード
-                Sql += ",''" '空でよし
-
-                updateT67Swkhd(Sql) 'update実行
-                countKeyID = getCount(countKeyID) '0～カウントアップ
-
-                Sql = ",'" & Format(dsShrikshihd.Tables(RS).Rows(i)("支払日"), "yyyyMM") & "'" '入金日
-                Sql += "," & seqID 'プライマリ
-                Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
-                'Sql += ",200000000000" '買掛金
-                Sql += ",'" & getAccountName("accounts-payable") & "'" '買掛金
-                'Sql += ",'" & getAccountName("accounts-payable") & "：買掛金'" '買掛金
-                Sql += "," & formatDouble(dsShrikshihd.Tables(RS).Rows(i)("支払消込額計")) '支払金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
-                Sql += ",1" '固定
-                Sql += ",'" & dsShriKike.Tables(RS).Rows(0)("仕入先コード").ToString & "'" '仕入先コード
-                'Sql += ",'" & dsShriKike.Tables(RS).Rows(0)("客先番号").ToString & "'" 'PO
                 Sql += ",'PO-" & dsShriKike.Tables(RS).Rows(0)("客先番号").ToString & "-" & i & "'" 'PO
                 Sql += ",'" & Format(dsShrikshihd.Tables(RS).Rows(i)("支払日"), "yyyy-MM-dd") & "'" '入金日
                 Sql += ",''" '空でよし
@@ -727,17 +643,31 @@ Public Class Shiwake
                 Sql = ",'" & Format(dsShrikshihd.Tables(RS).Rows(i)("支払日"), "yyyyMM") & "'" '入金日
                 Sql += "," & seqID 'プライマリ
                 Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
-                'Sql += ",200000000000" '前払金
-                Sql += ",'" & getAccountName("prepaid") & "'" '前払金
-                'Sql += ",'" & getAccountName("prepaid") & "：前払金'" '前払金
-                Sql += "," & formatDouble(-dsShrikshihd.Tables(RS).Rows(i)("支払消込額計")) '支払金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
+                Sql += ",'" & getAccountName("accounts-payable") & "'" '買掛金
+                Sql += "," & formatDouble(dsShrikshihd.Tables(RS).Rows(i)("支払消込額計")) '支払金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
                 Sql += ",1" '固定
                 Sql += ",'" & dsShriKike.Tables(RS).Rows(0)("仕入先コード").ToString & "'" '仕入先コード
-                'Sql += ",'" & dsShriKike.Tables(RS).Rows(0)("客先番号").ToString & "'" 'PO
                 Sql += ",'PO-" & dsShriKike.Tables(RS).Rows(0)("客先番号").ToString & "-" & i & "'" 'PO
                 Sql += ",'" & Format(dsShrikshihd.Tables(RS).Rows(i)("支払日"), "yyyy-MM-dd") & "'" '入金日
                 Sql += ",''" '空でよし
-                Sql += "," & formatDouble(-dsShrikshihd.Tables(RS).Rows(i)("支払消込額計")) '支払金額
+                Sql += "," & formatDouble(dsShrikshihd.Tables(RS).Rows(i)("支払消込額計")) '支払金額
+                Sql += ",'" & codeAAC & "'" '会計用支払先コード
+                Sql += ",''" '空でよし
+
+                updateT67Swkhd(Sql) 'update実行
+                countKeyID = getCount(countKeyID) '0～カウントアップ
+
+                Sql = ",'" & Format(dsShrikshihd.Tables(RS).Rows(i)("支払日"), "yyyyMM") & "'" '入金日
+                Sql += "," & seqID 'プライマリ
+                Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
+                Sql += ",'" & getAccountName("prepaid") & "'" '前払金
+                Sql += "," & formatDouble(-dsShrikshihd.Tables(RS).Rows(i)("支払消込額計")) '支払金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
+                Sql += ",1" '固定
+                Sql += ",'" & dsShriKike.Tables(RS).Rows(0)("仕入先コード").ToString & "'" '仕入先コード
+                Sql += ",'PO-" & dsShriKike.Tables(RS).Rows(0)("客先番号").ToString & "-" & i & "'" 'PO
+                Sql += ",'" & Format(dsShrikshihd.Tables(RS).Rows(i)("支払日"), "yyyy-MM-dd") & "'" '入金日
+                Sql += ",''" '空でよし
+                Sql += "," & formatDouble(dsShrikshihd.Tables(RS).Rows(i)("支払消込額計")) '支払金額
                 Sql += ",'" & codeAAC & "'" '会計用支払先コード
                 Sql += ",''" '空でよし
 
@@ -760,13 +690,10 @@ Public Class Shiwake
                 Sql = ",'" & Format(dsShrikshihd.Tables(RS).Rows(i)("支払日"), "yyyyMM") & "'" '入金日
                 Sql += "," & "nextval('transactionid_seq')" 'プライマリ
                 Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
-                'Sql += ",200000000004" '買掛金
                 Sql += ",'" & getAccountName("accounts-payable") & "'" '買掛金
-                'Sql += ",'" & getAccountName("accounts-payable") & "：買掛金'" '買掛金
                 Sql += "," & formatDouble(dsShrikshihd.Tables(RS).Rows(i)("支払消込額計")) '支払金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
                 Sql += ",1" '固定
                 Sql += ",'" & dsShriKike.Tables(RS).Rows(0)("仕入先コード").ToString & "'" '仕入先コード
-                'Sql += ",'" & dsShriKike.Tables(RS).Rows(0)("客先番号").ToString & "'" 'PO
                 Sql += ",'PO-" & dsShriKike.Tables(RS).Rows(0)("客先番号").ToString & "-" & i & "'" 'PO
                 Sql += ",'" & Format(dsShrikshihd.Tables(RS).Rows(i)("支払日"), "yyyy-MM-dd") & "'" '入金日
                 Sql += ",''" '空でよし
@@ -781,17 +708,14 @@ Public Class Shiwake
                 Sql = ",'" & Format(dsShrikshihd.Tables(RS).Rows(i)("支払日"), "yyyyMM") & "'" '入金日
                 Sql += "," & seqID 'プライマリ
                 Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
-                'Sql += ",200000000000" '現金預金
                 Sql += ",'" & getAccountName("cash-deposit") & "'" '現金預金
-                'Sql += ",'" & getAccountName("cash-deposit") & "：現金預金'" '現金預金
                 Sql += "," & formatDouble(-dsShrikshihd.Tables(RS).Rows(i)("支払消込額計")) '支払金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
                 Sql += ",1" '固定
                 Sql += ",'" & dsShriKike.Tables(RS).Rows(0)("仕入先コード").ToString & "'" '仕入先コード
-                'Sql += ",'" & dsShriKike.Tables(RS).Rows(0)("客先番号").ToString & "'" 'PO
                 Sql += ",'PO-" & dsShriKike.Tables(RS).Rows(0)("客先番号").ToString & "-" & i & "'" 'PO
                 Sql += ",'" & Format(dsShrikshihd.Tables(RS).Rows(i)("支払日"), "yyyy-MM-dd") & "'" '入金日
                 Sql += ",''" '空でよし
-                Sql += "," & formatDouble(-dsShrikshihd.Tables(RS).Rows(i)("支払消込額計")) '支払金額
+                Sql += "," & formatDouble(dsShrikshihd.Tables(RS).Rows(i)("支払消込額計")) '支払金額
                 Sql += ",'" & codeAAC & "'" '会計用支払先コード
                 Sql += ",''" '空でよし
 
@@ -885,13 +809,6 @@ Public Class Shiwake
 
                 Dim totalJvamount As Integer = 0
 
-                '整数だったら加算していく
-                If valJvamount > 0 Then
-                    totalJvamount += valJvamount
-                End If
-
-
-
                 'TRANSACTIONID が同じ場合のみ
                 If valTransactionid = checkTransactionid Then
 
@@ -912,12 +829,11 @@ Public Class Shiwake
                         strXml += "<CUSTOMERNO>" & valCustomerno & "</CUSTOMERNO>"
                     ElseIf valGlaccount = cdAP Then
                         strXml += "<VENDORNO>" & valVendorno & "</VENDORNO>"
-                    Else
-                        strXml += "<VENDORNO>" & valVendorno & "</VENDORNO>"
-                        strXml += "<CUSTOMERNO>" & valCustomerno & "</CUSTOMERNO>"
                     End If
 
                     strXml += "</ACCOUNTLINE>"
+
+                    totalJvamount = 0 'リセット
 
                     'TRANSACTIONID が異なっていたら（初回含む）
                 Else
@@ -934,16 +850,13 @@ Public Class Shiwake
                     strXml += "<PRIMEAMOUNT></PRIMEAMOUNT>"
                     strXml += "<TXDATE/>"
                     strXml += "<POSTED/>"
-                    strXml += "<CURRENCYNAME>" & valVendorno & "</CURRENCYNAME>"
+                    strXml += "<CURRENCYNAME></CURRENCYNAME>"
 
                     '売掛金だったら
                     If valGlaccount = cdAR Then
                         strXml += "<CUSTOMERNO>" & valCustomerno & "</CUSTOMERNO>"
                     ElseIf valGlaccount = cdAP Then
                         strXml += "<VENDORNO>" & valVendorno & "</VENDORNO>"
-                    Else
-                        strXml += "<VENDORNO>" & valVendorno & "</VENDORNO>"
-                        strXml += "<CUSTOMERNO>" & valCustomerno & "</CUSTOMERNO>"
                     End If
 
 
@@ -954,13 +867,19 @@ Public Class Shiwake
                     strXml += "</ACCOUNTLINE>"
                 End If
 
+                '整数だったら加算していく
+                If valJvamount > 0 Then
+                    totalJvamount += valJvamount
+                End If
+
+
                 If nextTransactionid <> checkTransactionid Then
                     strXml += "<JVNUMBER>" & valJvnumber & "</JVNUMBER>"
                     strXml += "<TRANSDATE>" & valTransdate & "</TRANSDATE>"
                     strXml += "<SOURCE>GL</SOURCE>"
                     strXml += "<TRANSTYPE>journal voucher</TRANSTYPE>"
                     strXml += "<TRANSDESCRIPTION>" & valTransdescription & "</TRANSDESCRIPTION>"
-                    strXml += "<JVAMOUNT>" & totalJvamount & "</JVAMOUNT>"
+                    strXml += "<JVAMOUNT>" & valJvamount & "</JVAMOUNT>"
                     strXml += "</JV>"
                 End If
 
@@ -987,7 +906,7 @@ Public Class Shiwake
 
                 xmlDoc.Save(sOutPath & "\" & nowDatetime & ".xml")
 
-                _msgHd.dspMSG("CreateXML")
+                _msgHd.dspMSG("CreateXML", frmC01F10_Login.loginValue.Language)
             Catch ex As System.Xml.XmlException
                 'XMLによる例外をキャッチ
                 Console.WriteLine(ex.Message)
@@ -1071,7 +990,7 @@ Public Class Shiwake
         Sql += " ILIKE  "
         Sql += "'" & frmC01F10_Login.loginValue.BumonNM & "'"
         Sql += txtParam
-        'Console.WriteLine(Sql)
+        Console.WriteLine(Sql)
         Return _db.selectDB(Sql, RS, reccnt)
     End Function
 
@@ -1189,12 +1108,159 @@ Public Class Shiwake
 
     End Sub
 
+    '最終的には削除する
+    '会社コード=ZENBIを一括削除
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Dim reccnt As Integer = 0 'DB用（デフォルト）
+        Dim Sql As String
 
-        Dim Sql As String = "DELETE FROM t67_swkhd WHERE ""会社コード"" = 'ZENBI';"
+        't01_mithd
+        Sql = "DELETE FROM t01_mithd WHERE ""会社コード"" = 'ZENBI';"
         _db.executeDB(Sql)
 
+        't02_mitdt
+        Sql = "DELETE FROM t02_mitdt WHERE ""会社コード"" = 'ZENBI';"
+        _db.executeDB(Sql)
+
+        't10_cymnhd
+        Sql = "DELETE FROM t10_cymnhd WHERE ""会社コード"" = 'ZENBI';"
+        _db.executeDB(Sql)
+
+        't11_cymndt
+        Sql = "DELETE FROM t11_cymndt WHERE ""会社コード"" = 'ZENBI';"
+        _db.executeDB(Sql)
+
+        't20_hattyu
+        Sql = "DELETE FROM t20_hattyu WHERE ""会社コード"" = 'ZENBI';"
+        _db.executeDB(Sql)
+
+        't21_hattyu
+        Sql = "DELETE FROM t21_hattyu WHERE ""会社コード"" = 'ZENBI';"
+        _db.executeDB(Sql)
+
+        't23_skyuhd
+        Sql = "DELETE FROM t23_skyuhd WHERE ""会社コード"" = 'ZENBI';"
+        _db.executeDB(Sql)
+
+        't25_nkinhd
+        Sql = "DELETE FROM t25_nkinhd WHERE ""会社コード"" = 'ZENBI';"
+        _db.executeDB(Sql)
+
+        't26_nkindt
+        Sql = "DELETE FROM t26_nkindt WHERE ""会社コード"" = 'ZENBI';"
+        _db.executeDB(Sql)
+
+        't27_nkinkshihd
+        Sql = "DELETE FROM t27_nkinkshihd WHERE ""会社コード"" = 'ZENBI';"
+        _db.executeDB(Sql)
+
+        't30_urighd
+        Sql = "DELETE FROM t30_urighd WHERE ""会社コード"" = 'ZENBI';"
+        _db.executeDB(Sql)
+
+        't31_urigdt
+        Sql = "DELETE FROM t31_urigdt WHERE ""会社コード"" = 'ZENBI';"
+        _db.executeDB(Sql)
+
+        't40_sirehd
+        Sql = "DELETE FROM t40_sirehd WHERE ""会社コード"" = 'ZENBI';"
+        _db.executeDB(Sql)
+
+        't41_siredt
+        Sql = "DELETE FROM t41_siredt WHERE ""会社コード"" = 'ZENBI';"
+        _db.executeDB(Sql)
+
+        't42_nyukohd
+        Sql = "DELETE FROM t42_nyukohd WHERE ""会社コード"" = 'ZENBI';"
+        _db.executeDB(Sql)
+
+        't43_nyukodt
+        Sql = "DELETE FROM t43_nyukodt WHERE ""会社コード"" = 'ZENBI';"
+        _db.executeDB(Sql)
+
+        't44_shukohd
+        Sql = "DELETE FROM t44_shukohd WHERE ""会社コード"" = 'ZENBI';"
+        _db.executeDB(Sql)
+
+        't45_shukodt
+        Sql = "DELETE FROM t45_shukodt WHERE ""会社コード"" = 'ZENBI';"
+        _db.executeDB(Sql)
+
+        't46_kikehd
+        Sql = "DELETE FROM t46_kikehd WHERE ""会社コード"" = 'ZENBI';"
+        _db.executeDB(Sql)
+
+        't47_shrihd
+        Sql = "DELETE FROM t47_shrihd WHERE ""会社コード"" = 'ZENBI';"
+        _db.executeDB(Sql)
+
+        't48_shridt
+        Sql = "DELETE FROM t48_shridt WHERE ""会社コード"" = 'ZENBI';"
+        _db.executeDB(Sql)
+
+        't49_shrikshihd
+        Sql = "DELETE FROM t49_shrikshihd WHERE ""会社コード"" = 'ZENBI';"
+        _db.executeDB(Sql)
+
+        't50_zikhd
+        Sql = "DELETE FROM t50_zikhd WHERE ""会社コード"" = 'ZENBI';"
+        _db.executeDB(Sql)
+
+        ''t52_krurighd
+        'Sql = "DELETE FROM t52_krurighd WHERE ""会社コード"" = 'ZENBI';"
+        '_db.executeDB(Sql)
+
+        ''t53_krurigdt
+        'Sql = "DELETE FROM t53_krurigdt WHERE ""会社コード"" = 'ZENBI';"
+        '_db.executeDB(Sql)
+
+        ''t54_krsirehd
+        'Sql = "DELETE FROM t54_krsirehd WHERE ""会社コード"" = 'ZENBI';"
+        '_db.executeDB(Sql)
+
+        ''t55_krsiredt
+        'Sql = "DELETE FROM t55_krsiredt WHERE ""会社コード"" = 'ZENBI';"
+        '_db.executeDB(Sql)
+
+        ''t56_krskyuhd
+        'Sql = "DELETE FROM t56_krskyuhd WHERE ""会社コード"" = 'ZENBI';"
+        '_db.executeDB(Sql)
+
+        ''t57_krkikehd
+        'Sql = "DELETE FROM t57_krkikehd WHERE ""会社コード"" = 'ZENBI';"
+        '_db.executeDB(Sql)
+
+        ''t58_krnyukohd
+        'Sql = "DELETE FROM t58_krnyukohd WHERE ""会社コード"" = 'ZENBI';"
+        '_db.executeDB(Sql)
+
+        ''t59_krnyukodt
+        'Sql = "DELETE FROM t59_krnyukodt WHERE ""会社コード"" = 'ZENBI';"
+        '_db.executeDB(Sql)
+
+        ''t60_krshukohd
+        'Sql = "DELETE FROM t60_krshukohd WHERE ""会社コード"" = 'ZENBI';"
+        '_db.executeDB(Sql)
+
+        ''t61_krshukodt
+        'Sql = "DELETE FROM t61_krshukodt WHERE ""会社コード"" = 'ZENBI';"
+        '_db.executeDB(Sql)
+
+        ''t62_krnkinhd
+        'Sql = "DELETE FROM t62_krnkinhd WHERE ""会社コード"" = 'ZENBI';"
+        '_db.executeDB(Sql)
+
+        ''t63_krnkindt
+        'Sql = "DELETE FROM t63_krnkindt WHERE ""会社コード"" = 'ZENBI';"
+        '_db.executeDB(Sql)
+
+        ''t64_krshrihd
+        'Sql = "DELETE FROM t64_krshrihd WHERE ""会社コード"" = 'ZENBI';"
+        '_db.executeDB(Sql)
+
+        ''t65_krshridt
+        'Sql = "DELETE FROM t65_krshridt WHERE ""会社コード"" = 'ZENBI';"
+        '_db.executeDB(Sql)
 
     End Sub
 End Class
