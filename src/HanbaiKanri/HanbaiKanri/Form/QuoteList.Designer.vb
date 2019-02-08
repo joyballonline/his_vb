@@ -42,8 +42,6 @@ Partial Class QuoteList
         Me.Label7 = New System.Windows.Forms.Label()
         Me.TxtQuoteNo1 = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.TxtQuoteDate1 = New System.Windows.Forms.TextBox()
-        Me.TxtQuoteDate2 = New System.Windows.Forms.TextBox()
         Me.TxtQuoteNo2 = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
@@ -59,6 +57,8 @@ Partial Class QuoteList
         Me.LblMode = New System.Windows.Forms.Label()
         Me.RbtnDetails = New System.Windows.Forms.RadioButton()
         Me.RbtnSlip = New System.Windows.Forms.RadioButton()
+        Me.TxtQuoteDate1 = New System.Windows.Forms.DateTimePicker()
+        Me.TxtQuoteDate2 = New System.Windows.Forms.DateTimePicker()
         CType(Me.DgvMithd, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -270,22 +270,6 @@ Partial Class QuoteList
         Me.Label8.Text = "見積日"
         Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'TxtQuoteDate1
-        '
-        Me.TxtQuoteDate1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtQuoteDate1.Location = New System.Drawing.Point(759, 45)
-        Me.TxtQuoteDate1.Name = "TxtQuoteDate1"
-        Me.TxtQuoteDate1.Size = New System.Drawing.Size(170, 22)
-        Me.TxtQuoteDate1.TabIndex = 5
-        '
-        'TxtQuoteDate2
-        '
-        Me.TxtQuoteDate2.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtQuoteDate2.Location = New System.Drawing.Point(958, 45)
-        Me.TxtQuoteDate2.Name = "TxtQuoteDate2"
-        Me.TxtQuoteDate2.Size = New System.Drawing.Size(170, 22)
-        Me.TxtQuoteDate2.TabIndex = 6
-        '
         'TxtQuoteNo2
         '
         Me.TxtQuoteNo2.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
@@ -443,10 +427,36 @@ Partial Class QuoteList
         Me.RbtnSlip.Text = "伝票単位"
         Me.RbtnSlip.UseVisualStyleBackColor = True
         '
+        'TxtQuoteDate1
+        '
+        Me.TxtQuoteDate1.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtQuoteDate1.CustomFormat = "yyyy/MM/dd"
+        Me.TxtQuoteDate1.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtQuoteDate1.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.TxtQuoteDate1.Location = New System.Drawing.Point(759, 46)
+        Me.TxtQuoteDate1.Name = "TxtQuoteDate1"
+        Me.TxtQuoteDate1.Size = New System.Drawing.Size(170, 22)
+        Me.TxtQuoteDate1.TabIndex = 5
+        Me.TxtQuoteDate1.Value = New Date(2018, 6, 5, 23, 23, 58, 0)
+        '
+        'TxtQuoteDate2
+        '
+        Me.TxtQuoteDate2.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtQuoteDate2.CustomFormat = "yyyy/MM/dd"
+        Me.TxtQuoteDate2.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtQuoteDate2.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.TxtQuoteDate2.Location = New System.Drawing.Point(958, 46)
+        Me.TxtQuoteDate2.Name = "TxtQuoteDate2"
+        Me.TxtQuoteDate2.Size = New System.Drawing.Size(170, 22)
+        Me.TxtQuoteDate2.TabIndex = 6
+        Me.TxtQuoteDate2.Value = New Date(2018, 6, 5, 23, 23, 58, 0)
+        '
         'QuoteList
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.TxtQuoteDate2)
+        Me.Controls.Add(Me.TxtQuoteDate1)
         Me.Controls.Add(Me.RbtnDetails)
         Me.Controls.Add(Me.RbtnSlip)
         Me.Controls.Add(Me.ChkCancel)
@@ -462,13 +472,11 @@ Partial Class QuoteList
         Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.TxtQuoteNo2)
-        Me.Controls.Add(Me.TxtQuoteDate2)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.TxtSales)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.TxtQuoteNo1)
         Me.Controls.Add(Me.Label8)
-        Me.Controls.Add(Me.TxtQuoteDate1)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.TxtCustomerCode)
         Me.Controls.Add(Me.Label3)
@@ -513,8 +521,6 @@ Partial Class QuoteList
     Friend WithEvents Label7 As Label
     Friend WithEvents TxtQuoteNo1 As TextBox
     Friend WithEvents Label8 As Label
-    Friend WithEvents TxtQuoteDate1 As TextBox
-    Friend WithEvents TxtQuoteDate2 As TextBox
     Friend WithEvents TxtQuoteNo2 As TextBox
     Friend WithEvents Label5 As Label
     Friend WithEvents Label9 As Label
@@ -530,4 +536,6 @@ Partial Class QuoteList
     Friend WithEvents LblMode As Label
     Friend WithEvents RbtnDetails As RadioButton
     Friend WithEvents RbtnSlip As RadioButton
+    Friend WithEvents TxtQuoteDate1 As DateTimePicker
+    Friend WithEvents TxtQuoteDate2 As DateTimePicker
 End Class
