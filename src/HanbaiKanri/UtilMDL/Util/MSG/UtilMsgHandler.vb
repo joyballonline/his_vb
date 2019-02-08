@@ -212,9 +212,9 @@ Namespace MSG
         ''' <param name="prmOptionalMsg">追加メッセージ</param>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public Function dspMSG(ByVal prmMsgId As String, Optional ByVal prmOptionalMsg As String = "") As DialogResult
+        Public Function dspMSG(ByVal prmMsgId As String, ByVal prmLang As String, Optional ByVal prmOptionalMsg As String = "") As DialogResult
 
-            Dim mv As UtilMsgVO = Me.getMSG(prmMsgId, prmOptionalMsg)
+            Dim mv As UtilMsgVO = Me.getMSG(prmMsgId, prmLang, prmOptionalMsg)
             Return MessageBox.Show(mv.dspStr, mv.title, mv.button, mv.icon, mv.defaultButton)
 
         End Function
@@ -235,7 +235,7 @@ Namespace MSG
         ''' <param name="prmOptionalMsg">追加メッセージ</param>
         ''' <returns>検索されたメッセージビーン(ValueObject)</returns>
         ''' <remarks>発生例外       ：Exception,UsrDefException</remarks>
-        Public Function getMSG(ByVal prmMsgId As String, Optional ByVal prmOptionalMsg As String = "") As UtilMsgVO
+        Public Function getMSG(ByVal prmMsgId As String, ByVal prmLang As String, Optional ByVal prmOptionalMsg As String = "") As UtilMsgVO
             Try
                 Dim msgDef As XmlElement = _xmlDoc.DocumentElement
                 Dim elemList As XmlNodeList = msgDef.GetElementsByTagName("MSG_DATA")
@@ -256,8 +256,19 @@ Namespace MSG
                         'メッセージ編集
                         Dim msg1 As String = ""
                         Dim msg2 As String = ""
-                        Try : msg1 = elemList.ItemOf(i).Item("MSG1").InnerText : Catch ex As Exception : End Try
-                        Try : msg2 = elemList.ItemOf(i).Item("MSG2").InnerText : Catch ex As Exception : End Try
+
+                        If prmLang = "JPN" AndAlso elemList.ItemOf(i).Item("MSG1_EN") IsNot Nothing Then
+                            Try : msg1 = elemList.ItemOf(i).Item("MSG1").InnerText : Catch ex As Exception : End Try
+                        Else
+                            Try : msg1 = elemList.ItemOf(i).Item("MSG1_EN").InnerText : Catch ex As Exception : End Try
+                        End If
+
+                        If prmLang = "JPN" AndAlso elemList.ItemOf(i).Item("MSG2_EN") IsNot Nothing Then
+                            Try : msg2 = elemList.ItemOf(i).Item("MSG2").InnerText : Catch ex As Exception : End Try
+                        Else
+                            Try : msg2 = elemList.ItemOf(i).Item("MSG2_EN").InnerText : Catch ex As Exception : End Try
+                        End If
+
                         Dim dspStrWk As String
                         If msg2 <> "" Then
                             dspStrWk = msg1 & ControlChars.NewLine & msg2
