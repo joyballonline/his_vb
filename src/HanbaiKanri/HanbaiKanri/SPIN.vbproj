@@ -1,0 +1,706 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="14.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6850D325-F7D9-4072-BE5F-C4A5290D3970}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>SPIN.StartUp</StartupObject>
+    <RootNamespace>SPIN</RootNamespace>
+    <AssemblyName>SPIN</AssemblyName>
+    <MyType>WindowsFormsWithCustomSubMain</MyType>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <ApplicationIcon>
+    </ApplicationIcon>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>SPIN.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>SPIN.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Accessibility" />
+    <Reference Include="CustomControl, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\CustomControl.dll</HintPath>
+    </Reference>
+    <Reference Include="CustomTabStopDataGridView">
+      <HintPath>.\CustomTabStopDataGridView.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.3.0\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Form\Account.Designer.vb">
+      <DependentUpon>Account.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Account.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\CommonConst.vb" />
+    <Compile Include="Business\CommonLogic.vb" />
+    <Compile Include="Business\RepSectionIF.vb" />
+    <Compile Include="Business\StartUp.vb" />
+    <Compile Include="Form\MstAccount.Designer.vb">
+      <DependentUpon>MstAccount.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\MstAccount.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\AccountsPayable.Designer.vb">
+      <DependentUpon>AccountsPayable.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\AccountsPayable.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\AccountsPayableList.Designer.vb">
+      <DependentUpon>AccountsPayableList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\AccountsPayableList.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\BillingList.Designer.vb">
+      <DependentUpon>BillingList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\BillingList.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\BillingManagement.Designer.vb">
+      <DependentUpon>BillingManagement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\BillingManagement.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\ClosingLog.Designer.vb">
+      <DependentUpon>ClosingLog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\ClosingLog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Company.Designer.vb">
+      <DependentUpon>Company.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Company.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\CompanySearch.Designer.vb">
+      <DependentUpon>CompanySearch.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\CompanySearch.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Customer.Designer.vb">
+      <DependentUpon>Customer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Customer.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\CustomerList.Designer.vb">
+      <DependentUpon>CustomerList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\CustomerList.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\CustomerOrderList.Designer.vb">
+      <DependentUpon>CustomerOrderList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\CustomerOrderList.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\CustomerSearch.Designer.vb">
+      <DependentUpon>CustomerSearch.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\CustomerSearch.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\cymn.Designer.vb">
+      <DependentUpon>cymn.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\cymn.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\DepositDetailList.Designer.vb">
+      <DependentUpon>DepositDetailList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\DepositDetailList.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\DepositList.Designer.vb">
+      <DependentUpon>DepositList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\DepositList.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\DepositManagement.Designer.vb">
+      <DependentUpon>DepositManagement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\DepositManagement.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmC01F30_Menu.Designer.vb">
+      <DependentUpon>frmC01F30_Menu.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmC01F30_Menu.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmC01F10_Login.designer.vb">
+      <DependentUpon>frmC01F10_Login.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmC01F10_Login.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmC01F20_ChangePasswd.designer.vb">
+      <DependentUpon>frmC01F20_ChangePasswd.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmC01F20_ChangePasswd.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\GoodsIssue.Designer.vb">
+      <DependentUpon>GoodsIssue.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\GoodsIssue.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\GoodsIssueList.Designer.vb">
+      <DependentUpon>GoodsIssueList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\GoodsIssueList.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Hanyo.Designer.vb">
+      <DependentUpon>Hanyo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Hanyo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\.Designer.vb">
+      <DependentUpon>MakerSearch.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Language.Designer.vb">
+      <DependentUpon>Language.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Language.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\MakerSearch.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\MstCompany.Designer.vb">
+      <DependentUpon>MstCompany.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\MstCompany.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\MstCustomer.Designer.vb">
+      <DependentUpon>MstCustomer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\MstCustomer.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\MstHanyou.Designer.vb">
+      <DependentUpon>MstHanyou.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\MstHanyou.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\MstLanguage.Designer.vb">
+      <DependentUpon>MstLanguage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\MstLanguage.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\MstSupplier.Designer.vb">
+      <DependentUpon>MstSupplier.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\MstSupplier.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Order.Designer.vb">
+      <DependentUpon>Order.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Order.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\OrderingAdd.Designer.vb">
+      <DependentUpon>OrderingAdd.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\OrderingAdd.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\OrderList.Designer.vb">
+      <DependentUpon>OrderList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\OrderList.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\OrderManagement.Designer.vb">
+      <DependentUpon>OrderManagement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\OrderManagement.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Ordering.Designer.vb">
+      <DependentUpon>Ordering.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Ordering.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\OrderingList.Designer.vb">
+      <DependentUpon>OrderingList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\OrderingList.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\PaidList.Designer.vb">
+      <DependentUpon>PaidList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\PaidList.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Payment.Designer.vb">
+      <DependentUpon>Payment.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Payment.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\PaymentList.Designer.vb">
+      <DependentUpon>PaymentList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\PaymentList.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\PaymentReceivedList.Designer.vb">
+      <DependentUpon>PaymentReceivedList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\PaymentReceivedList.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\PurchaseList.Designer.vb">
+      <DependentUpon>PurchaseList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\PurchaseList.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\PurchasingManagement.Designer.vb">
+      <DependentUpon>PurchasingManagement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\PurchasingManagement.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Quote.Designer.vb">
+      <DependentUpon>Quote.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Quote.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\QuoteList.Designer.vb">
+      <DependentUpon>QuoteList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\QuoteList.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Receipt.Designer.vb">
+      <DependentUpon>Receipt.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Receipt.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\ReceiptList.Designer.vb">
+      <DependentUpon>ReceiptList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\ReceiptList.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\RemarksInput.Designer.vb">
+      <DependentUpon>RemarksInput.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\RemarksInput.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\SalesList.Designer.vb">
+      <DependentUpon>SalesList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\SalesList.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\SalesSearch.Designer.vb">
+      <DependentUpon>SalesSearch.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\SalesSearch.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Shiwake.Designer.vb">
+      <DependentUpon>Shiwake.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Shiwake.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\StockList.Designer.vb">
+      <DependentUpon>StockList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\StockList.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Supplier.Designer.vb">
+      <DependentUpon>Supplier.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Supplier.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\SupplierSearch.Designer.vb">
+      <DependentUpon>SupplierSearch.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\SupplierSearch.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\User.Designer.vb">
+      <DependentUpon>User.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\User.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\MstUser.Designer.vb">
+      <DependentUpon>MstUser.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\MstUser.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Form\Account.resx">
+      <DependentUpon>Account.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\AccountsPayable.resx">
+      <DependentUpon>AccountsPayable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\AccountsPayableList.resx">
+      <DependentUpon>AccountsPayableList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\BillingList.resx">
+      <DependentUpon>BillingList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\BillingManagement.resx">
+      <DependentUpon>BillingManagement.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\ClosingLog.resx">
+      <DependentUpon>ClosingLog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Company.resx">
+      <DependentUpon>Company.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\CompanySearch.resx">
+      <DependentUpon>CompanySearch.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Customer.resx">
+      <DependentUpon>Customer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\CustomerList.resx">
+      <DependentUpon>CustomerList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\CustomerOrderList.resx">
+      <DependentUpon>CustomerOrderList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\CustomerSearch.resx">
+      <DependentUpon>CustomerSearch.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\cymn.resx">
+      <DependentUpon>cymn.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\DepositDetailList.resx">
+      <DependentUpon>DepositDetailList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\DepositList.resx">
+      <DependentUpon>DepositList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\DepositManagement.resx">
+      <DependentUpon>DepositManagement.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmC01F10_Login.resx">
+      <DependentUpon>frmC01F10_Login.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmC01F20_ChangePasswd.resx">
+      <DependentUpon>frmC01F20_ChangePasswd.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmC01F30_Menu.resx">
+      <DependentUpon>frmC01F30_Menu.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\GoodsIssue.resx">
+      <DependentUpon>GoodsIssue.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\GoodsIssueList.resx">
+      <DependentUpon>GoodsIssueList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Hanyo.resx">
+      <DependentUpon>Hanyo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Language.resx">
+      <DependentUpon>Language.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\MakerSearch.resx">
+      <DependentUpon>MakerSearch.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\MstAccount.resx">
+      <DependentUpon>MstAccount.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\MstCompany.resx">
+      <DependentUpon>MstCompany.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\MstCustomer.resx">
+      <DependentUpon>MstCustomer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\MstHanyou.resx">
+      <DependentUpon>MstHanyou.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\MstLanguage.resx">
+      <DependentUpon>MstLanguage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\MstSupplier.resx">
+      <DependentUpon>MstSupplier.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Order.resx">
+      <DependentUpon>Order.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\OrderingAdd.resx">
+      <DependentUpon>OrderingAdd.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\OrderList.resx">
+      <DependentUpon>OrderList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\OrderManagement.resx">
+      <DependentUpon>OrderManagement.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Ordering.resx">
+      <DependentUpon>Ordering.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\OrderingList.resx">
+      <DependentUpon>OrderingList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\PaidList.resx">
+      <DependentUpon>PaidList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Payment.resx">
+      <DependentUpon>Payment.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\PaymentList.resx">
+      <DependentUpon>PaymentList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\PaymentReceivedList.resx">
+      <DependentUpon>PaymentReceivedList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\PurchaseList.resx">
+      <DependentUpon>PurchaseList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\PurchasingManagement.resx">
+      <DependentUpon>PurchasingManagement.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Quote.resx">
+      <DependentUpon>Quote.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\QuoteList.resx">
+      <DependentUpon>QuoteList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Receipt.resx">
+      <DependentUpon>Receipt.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\ReceiptList.resx">
+      <DependentUpon>ReceiptList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\RemarksInput.resx">
+      <DependentUpon>RemarksInput.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\SalesList.resx">
+      <DependentUpon>SalesList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\SalesSearch.resx">
+      <DependentUpon>SalesSearch.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Shiwake.resx">
+      <DependentUpon>Shiwake.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\StockList.resx">
+      <DependentUpon>StockList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Supplier.resx">
+      <DependentUpon>Supplier.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\SupplierSearch.resx">
+      <DependentUpon>SupplierSearch.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\User.resx">
+      <DependentUpon>User.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\MstUser.resx">
+      <DependentUpon>MstUser.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="bin\Setting\HanbaiKanri.ini" />
+    <None Include="My Project\app.manifest" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UtilMDL\UtilMDL.vbproj">
+      <Project>{498E51DD-919B-4AFF-B79F-D84FD09FF2BA}</Project>
+      <Name>UtilMDL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Setting\HanbaiKanri-Lang.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="bin\Setting\HanbaiKanri.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="dotNetIco.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\BaseXls\" />
+    <Folder Include="bin\Log\" />
+    <Folder Include="bin\OutXls\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 および x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>9</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
