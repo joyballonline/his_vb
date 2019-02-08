@@ -279,9 +279,9 @@ Public Class AccountsPayable
 
         checkAdd = DgvCymn.Rows(0).Cells("買掛残高").Value
 
-        If checkAdd = 0 Then
-            BtnRegist.Enabled = False
-        End If
+        'If checkAdd = 0 Then
+        '    BtnRegist.Enabled = False
+        'End If
 
         For index As Integer = 0 To ds2.Tables(RS).Rows.Count - 1
             DgvCymndt.Rows.Add()
@@ -632,8 +632,7 @@ Public Class AccountsPayable
 
         Else
             '登録するデータがなかったら
-            _msgHd.dspMSG("NonAddData")
-
+            _msgHd.dspMSG("NonAddData", frmC01F10_Login.loginValue.Language)
         End If
 
 

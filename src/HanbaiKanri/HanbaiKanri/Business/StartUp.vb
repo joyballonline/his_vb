@@ -1,5 +1,5 @@
 '===================================================================================
-'　 （システム名）      カネキ吉田商店様向け　原価管理システム
+'　 （システム名）      SPIN向け　原価管理システム
 '
 '   （機能名）          スタートアップクラス（Sub Mainを含む）
 '   （クラス名）        StartUp
@@ -312,7 +312,7 @@ Public Class StartUp
             Catch ex As Exception
                 '確認メッセージを表示する
                 Dim piRtn As Integer
-                piRtn = _msgHd.dspMSG("NonPriDb")  'サーバに接続できません。バックアップサーバに接続しますか？
+                piRtn = _msgHd.dspMSG("NonPriDb", CommonConst.LANG_KBN_JPN)  'サーバに接続できません。バックアップサーバに接続しますか？
                 If piRtn = vbNo Then
                     '・[いいえ]選択の場合	
                     '	システムを終了します。
@@ -325,7 +325,7 @@ Public Class StartUp
                     _db = New UtilPostgresDebugger(_iniVal.SVAddr_stby, _iniVal.PortNo_stby, _iniVal.DBName_stby, _iniVal.UserId_stby, _iniVal.Password_stby, _iniVal.LogFilePath, _debugMode)
                     _BackUpServer = True
                 Catch eex As Exception
-                    piRtn = _msgHd.dspMSG("NonBackDb")  'サーバに接続できません。
+                    piRtn = _msgHd.dspMSG("NonBackDb", CommonConst.LANG_KBN_JPN)  'サーバに接続できません。
                     GC.KeepAlive(m)
                     Exit Sub
                 End Try
@@ -333,23 +333,23 @@ Public Class StartUp
             End Try
 
 
+            Try
+
                 Try
+                    '汎用マスタ内容を構造体に格納
+                    'Call _instance.getHanyouMST()
 
-                    Try
-                        '汎用マスタ内容を構造体に格納
-                        'Call _instance.getHanyouMST()
+                Catch ex As UsrDefException             'ユーザー定義例外(だけキャッチする)。他の例外は親ブロックに任せる。
+                    Call ex.dspMsg()                    'エラー出力
+                    Exit Sub                            '読み込み/チェックエラー(ユーザー定義例外の場合、エラー処理済なので終了)
+                End Try
 
-                    Catch ex As UsrDefException             'ユーザー定義例外(だけキャッチする)。他の例外は親ブロックに任せる。
-                        Call ex.dspMsg()                    'エラー出力
-                        Exit Sub                            '読み込み/チェックエラー(ユーザー定義例外の場合、エラー処理済なので終了)
-                    End Try
+                '-----------------------------------------------------------------------
+                '　画面起動
+                '-----------------------------------------------------------------------
 
-                    '-----------------------------------------------------------------------
-                    '　画面起動
-                    '-----------------------------------------------------------------------
-
-                    'メニュー画面
-                    Dim openForm As Form = Nothing
+                'メニュー画面
+                Dim openForm As Form = Nothing
                 openForm = New frmC01F10_Login(_msgHd, _langHd, _db)
 
                 'フォームオープン
@@ -358,13 +358,13 @@ Public Class StartUp
                 'openForm.ShowDialog()
 
             Finally                                                                         '必ず通過する部分で後処理を行う
-                    '_db.close()
-                End Try
+                '_db.close()
+            End Try
 
-            Catch ex As Exception                       'システム例外
-                'システムエラーMSG出力
-                Dim tmp As UsrDefException = New UsrDefException(ex, _msgHd.getMSG("SystemErr", UtilClass.getErrDetail(ex)))
-            Finally
+        Catch ex As Exception                       'システム例外
+            'システムエラーMSG出力
+            Dim tmp As UsrDefException = New UsrDefException(ex, _msgHd.getMSG("SystemErr", CommonConst.LANG_KBN_JPN, UtilClass.getErrDetail(ex)))
+        Finally
             Try
                 '二重起動チェック用のインスタンス開放を許可する
                 GC.KeepAlive(m)
@@ -486,7 +486,7 @@ Public Class StartUp
             'INIファイル存在チェック
             '-----------------------------------------------------------------------
             If Not UtilClass.isFileExists(iniFileName) Then
-                Throw New UsrDefException("INIファイル存在チェックエラー", _msgHd.getMSG("nonIniFile"))
+                Throw New UsrDefException("INIファイル存在チェックエラー", _msgHd.getMSG("nonIniFile", CommonConst.LANG_KBN_JPN))
             End If
 
             '-----------------------------------------------------------------------
@@ -584,13 +584,13 @@ Public Class StartUp
 
             Catch ex As Exception
                 '変数（errXMLstrkey）をメッセージＩＤとして、エラーを出力します。
-                Throw New UsrDefException("項目未設定エラー", _msgHd.getMSG(errXMLstrkey))
+                Throw New UsrDefException("項目未設定エラー", _msgHd.getMSG(errXMLstrkey, CommonConst.LANG_KBN_JPN))
             End Try
         Catch ue As UsrDefException 'ユーザー定義例外(記述しない場合、Exceptionでキャッチされるため)
             Call ue.dspMsg()
             Throw ue                'キャッチした例外をそのままスロー(呼び出し元でエラー処理)
         Catch ex As Exception       'システム例外
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", UtilClass.getErrDetail(ex))) 'キャッチした例外をユーザー定義例外に移し変えスロー
+            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", CommonConst.LANG_KBN_JPN, UtilClass.getErrDetail(ex))) 'キャッチした例外をユーザー定義例外に移し変えスロー
         End Try
     End Sub
     '-------------------------------------------------------------------------------
@@ -610,24 +610,24 @@ Public Class StartUp
             UtilClass.dividePathAndFile(fullPath, pathName, fileName)
             If Not UtilClass.isDirExists(pathName) Then
                 _iniVal.LogFilePath = "" 'ログファイルが間違っている場合にログ出力すると実行エラーが出る為、初期化しておく
-                Throw New UsrDefException("ログファイルの出力先が存在しないエラー", _msgHd.getMSG("NonLogDir"))
+                Throw New UsrDefException("ログファイルの出力先が存在しないエラー", _msgHd.getMSG("NonLogDir", CommonConst.LANG_KBN_JPN))
             End If
 
             '雛形フォルダ存在チェック
             If Not UtilClass.isDirExists(_iniVal.BaseXlsPath) Then
-                Throw New UsrDefException("雛形ファイル格納フォルダがありません。", _msgHd.getMSG("noHinaDir"))
+                Throw New UsrDefException("雛形ファイル格納フォルダがありません。", _msgHd.getMSG("noHinaDir", CommonConst.LANG_KBN_JPN))
             End If
 
             'EXCEL出力先フォルダ存在チェック
             If Not UtilClass.isDirExists(_iniVal.OutXlsPath) Then
-                Throw New UsrDefException("EXCELファイル出力先フォルダがありません。", _msgHd.getMSG("noOutExcelDir"))
+                Throw New UsrDefException("EXCELファイル出力先フォルダがありません。", _msgHd.getMSG("noOutExcelDir", CommonConst.LANG_KBN_JPN))
             End If
 
         Catch ue As UsrDefException 'ユーザー定義例外
             Call ue.dspMsg()
             Throw ue                'キャッチした例外をそのままスロー
         Catch ex As Exception       'システム例外
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", UtilClass.getErrDetail(ex))) 'キャッチした例外をユーザー定義例外に移し変えスロー
+            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", CommonConst.LANG_KBN_JPN, UtilClass.getErrDetail(ex))) 'キャッチした例外をユーザー定義例外に移し変えスロー
         End Try
     End Sub
 
@@ -651,7 +651,7 @@ Public Class StartUp
             Dim ds As DataSet = _db.selectDB(SQL, RS, iRecCnt)
 
             If iRecCnt <= 0 Then             '抽出レコードが１件もない場合
-                Throw New UsrDefException("汎用マスタの値の取得に失敗しました。", _msgHd.getMSG("noHanyouMst"))
+                Throw New UsrDefException("汎用マスタの値の取得に失敗しました。", _msgHd.getMSG("noHanyouMst", CommonConst.LANG_KBN_JPN))
             End If
 
             '検索結果を構造体に格納
@@ -676,7 +676,7 @@ Public Class StartUp
             Call ue.dspMsg()
             Throw ue                        'キャッチした例外をそのままスロー
         Catch ex As Exception               'システム例外
-            Throw New UsrDefException(ex, _msgHd.getMSG(SYSERR, UtilClass.getErrDetail(ex)))   'キャッチした例外をユーザー定義例外に移し変えスロー
+            Throw New UsrDefException(ex, _msgHd.getMSG(SYSERR, CommonConst.LANG_KBN_JPN, UtilClass.getErrDetail(ex)))   'キャッチした例外をユーザー定義例外に移し変えスロー
         End Try
 
     End Sub
@@ -685,7 +685,7 @@ Public Class StartUp
     '　汎用マスタ名称返却
     '   （処理概要）渡された固定･可変キーを元に、汎用マスタの名称１・２を返却する
     '-------------------------------------------------------------------------------
-    Public Shared Function cnvKeyToName(ByVal sPrmKoteiKey As String, ByVal sPrmKahenKey As String, _
+    Public Shared Function cnvKeyToName(ByVal sPrmKoteiKey As String, ByVal sPrmKahenKey As String,
                                         Optional ByVal sPrmName2 As String = "") As String
         Try
 
@@ -697,7 +697,7 @@ Public Class StartUp
             Call ue.dspMsg()
             Throw ue                        'キャッチした例外をそのままスロー
         Catch ex As Exception               'システム例外
-            Throw New UsrDefException(ex, _msgHd.getMSG(SYSERR, UtilClass.getErrDetail(ex)))   'キャッチした例外をユーザー定義例外に移し変えスロー
+            Throw New UsrDefException(ex, _msgHd.getMSG(SYSERR, CommonConst.LANG_KBN_JPN, UtilClass.getErrDetail(ex)))   'キャッチした例外をユーザー定義例外に移し変えスロー
         End Try
 
     End Function

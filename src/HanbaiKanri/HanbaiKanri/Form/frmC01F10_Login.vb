@@ -20,6 +20,8 @@ Imports UtilMDL.DB
 
 Imports System.Drawing.Printing
 Imports System.Runtime.InteropServices
+Imports System.Threading
+Imports System.Globalization
 
 '===================================================================================
 'フォーム
@@ -93,7 +95,7 @@ Public Class frmC01F10_Login
     Private Sub btnEnd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEnd.Click
 
         Dim intRet As Integer
-        intRet = _msgHd.dspMSG("SystemExit")
+        intRet = _msgHd.dspMSG("SystemExit", CommonConst.LANG_KBN_JPN)
         If intRet = vbOK Then
             Application.Exit()
         End If
@@ -104,10 +106,27 @@ Public Class frmC01F10_Login
 
     End Sub
 
+
+
     '------------------------------------------------------------------------------------------------------
     'フォームロードイベント
     '------------------------------------------------------------------------------------------------------
     Private Sub frm_E11_Login_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
+        ''Console.WriteLine(CultureInfo.CurrentCulture.Name.ToString) '現在のカルチャーの取得
+        'Thread.CurrentThread.CurrentCulture = New CultureInfo("en-ID") 'カルチャーの変更
+        ''Console.WriteLine(CultureInfo.CurrentCulture.Name.ToString)
+        ''Console.WriteLine(Now.ToString("F", New CultureInfo("ja-JP")))
+        ''Console.WriteLine(Now.ToString("F", New CultureInfo("en-ID")))
+        'Console.WriteLine()
+        'Console.WriteLine(DateTime.Now.ToString("F", CultureInfo.InvariantCulture))
+
+        'Dim test As DateTime = Format(Now, "Short Date")
+
+        'Console.WriteLine(Format(Now, "Short Date"))
+        Console.WriteLine("変数でformatしてる：" & UtilClass.jaDatetimeFormat(DateTime.Now))
+        Console.WriteLine("直接formatしてる：" & Format(DateTime.Now, "yyyy/MM/dd HH:mm:ss"))
+
         Try
 
             '描画関係の設定
@@ -124,7 +143,7 @@ Public Class frmC01F10_Login
             ue.dspMsg()                                                                                                     '握りつぶす
         Catch ex As Exception
             'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力
-            Dim te As UsrDefException = New UsrDefException(ex, _msgHd.getMSG("SystemErr", UtilClass.getErrDetail(ex)))     '握りつぶす
+            Dim te As UsrDefException = New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))     '握りつぶす
         End Try
 
     End Sub
@@ -177,7 +196,7 @@ Public Class frmC01F10_Login
                 Dim ds As DataSet = _db.selectDB(sql, RS, reccnt)
 
                 If reccnt <= 0 Then
-                    _msgHd.dspMSG("NonImputUserID")
+                    _msgHd.dspMSG("NonImputUserID", CommonConst.LANG_KBN_JPN)
                     'MsgBox("入力された「ユーザID」は存在しないか、無効になっています。", vbOK)
                     'Throw New UsrDefException("入力された「ユーザID」は存在しないか、無効になっています。", _msgHd.getMSG("NoTantoCD", ""), txtTanto)
                     Exit Sub
@@ -205,7 +224,7 @@ Public Class frmC01F10_Login
                 '入力された「ユーザID」のパスワード情報が存在しません。
                 '→　入力状態に戻す（通常はありえない）
                 If reccnt2 <= 0 Then
-                    _msgHd.dspMSG("NonImputNoDataUserID")
+                    _msgHd.dspMSG("NonImputNoDataUserID", CommonConst.LANG_KBN_JPN)
                     'MsgBox("入力された「ユーザID」のパスワード情報が存在しません。", vbOK)
                     'Throw New UsrDefException("入力された「ユーザID」は存在しないか、無効になっています。", _msgHd.getMSG("NoTantoCD", ""), txtTanto)
                     Exit Sub
@@ -219,7 +238,7 @@ Public Class frmC01F10_Login
                 '画面)パスワードとDB)パスワードを比較
                 If Not _db.rmNullStr(ds2.Tables(RS).Rows(0)("パスワード")).Equals(txtPasswd.Text) Then
                     'Throw New UsrDefException("パスワードが違います。", _msgHd.getMSG("Unmatch", ""), txtPasswd)
-                    _msgHd.dspMSG("NonImputPassword")
+                    _msgHd.dspMSG("NonImputPassword", CommonConst.LANG_KBN_JPN)
                     'MsgBox("パスワードが違います。", vbOK)
                     Exit Sub
                 End If
@@ -280,7 +299,7 @@ Public Class frmC01F10_Login
             Throw ue
         Catch ex As Exception
             'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", UtilClass.getErrDetail(ex)))
+            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
         End Try
 
     End Sub
@@ -321,7 +340,7 @@ Public Class frmC01F10_Login
             Throw ue
         Catch ex As Exception
             'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", UtilClass.getErrDetail(ex)))
+            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
         End Try
 
     End Sub
@@ -379,7 +398,7 @@ Public Class frmC01F10_Login
             Throw ue
         Catch ex As Exception
             'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", UtilClass.getErrDetail(ex)))
+            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
         End Try
 
     End Sub
@@ -391,12 +410,12 @@ Public Class frmC01F10_Login
 
         '担当者コード
         If "".Equals(txtTanto.Text) Then
-            Throw New UsrDefException("必須入力項目です。", _msgHd.getMSG("requiredImput", ""), txtTanto)
+            Throw New UsrDefException("必須入力項目です。", _msgHd.getMSG("requiredImput", frmC01F10_Login.loginValue.Language), txtTanto)
         End If
 
         'パスワード
         If "".Equals(txtPasswd.Text) Then
-            Throw New UsrDefException("必須入力項目です。", _msgHd.getMSG("requiredImput", ""), txtPasswd)
+            Throw New UsrDefException("必須入力項目です。", _msgHd.getMSG("requiredImput", frmC01F10_Login.loginValue.Language), txtPasswd)
         End If
 
     End Sub

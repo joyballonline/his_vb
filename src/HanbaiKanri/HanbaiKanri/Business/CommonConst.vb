@@ -1,6 +1,6 @@
 ﻿'===============================================================================
 '
-'　カネキ吉田商店様
+'　SPIN
 '　　（システム名）販売管理
 '　　（処理機能名）共通定数
 '    （機能ID）    CommonConst
@@ -231,5 +231,24 @@ Public Class CommonConst
 
     'データ選択
     Public Const SELECT_DATA_NOT_SHITEI = "（指定なし）"                   '指定なし
+
+    'フラグ等
+
+    '請求区分
+    Public Const BILLING_KBN_DEPOSIT As Integer = 1                         '前受請求
+    Public Const BILLING_KBN_NORMAL As Integer = 2                          '通常請求
+
+    '買掛区分
+    Public Const APC_KBN_DEPOSIT As Integer = 1                         '前払買掛
+    Public Const APC_KBN_NORMAL As Integer = 2                          '通常買掛
+
+    '取消区分
+    Public Const CANCEL_KBN_ENABLED As Integer = 1                      '未取消
+    Public Const CANCEL_KBN_DISABLED As Integer = 2                     '取消済
+
+    '言語
+    Public Const LANG_KBN_JPN As String = "JPN"                         '日本語
+    Public Const LANG_KBN_ENG As String = "ENG"                         '英語
+
 
 End Class

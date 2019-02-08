@@ -96,7 +96,7 @@ Public Class frmC01F20_ChangePasswd
     Private Sub btnBack_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnback.Click
 
         Dim intRet As Integer
-        intRet = _msgHd.dspMSG("rejectPWEdit")
+        intRet = _msgHd.dspMSG("rejectPWEdit", CommonConst.LANG_KBN_JPN)
         If intRet = vbNo Then
             Exit Sub
         End If
@@ -125,7 +125,7 @@ Public Class frmC01F20_ChangePasswd
             ue.dspMsg()                                                                                                     '握りつぶす
         Catch ex As Exception
             'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力
-            Dim te As UsrDefException = New UsrDefException(ex, _msgHd.getMSG("SystemErr", UtilClass.getErrDetail(ex)))     '握りつぶす
+            Dim te As UsrDefException = New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))     '握りつぶす
         End Try
 
     End Sub
@@ -166,7 +166,7 @@ Public Class frmC01F20_ChangePasswd
             '以前に使用されたパスワードです。
             '→　入力状態に戻る
             If _db.rmNullInt(ds.Tables(RS).Rows(0)("件数")) > 0 Then
-                _msgHd.dspMSG("ReusePasswd")
+                _msgHd.dspMSG("ReusePasswd", CommonConst.LANG_KBN_JPN)
                 txtPasswd.Focus()
                 Exit Sub
             End If
@@ -277,7 +277,7 @@ Public Class frmC01F20_ChangePasswd
             _db.executeDB(sql)
 
             '更新完了メッセージ
-            _msgHd.dspMSG("completePWChanged")
+            _msgHd.dspMSG("completePWChanged", CommonConst.LANG_KBN_JPN)
 
 
             ''「連携処理一覧」画面起動
@@ -292,7 +292,7 @@ Public Class frmC01F20_ChangePasswd
             Throw ue
         Catch ex As Exception
             'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", UtilClass.getErrDetail(ex)))
+            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
         End Try
 
     End Sub
@@ -326,17 +326,17 @@ Public Class frmC01F20_ChangePasswd
 
         '新パスワード
         If "".Equals(txtPasswd.Text) Then
-            Throw New UsrDefException("「新パスワード」を入力してください。", _msgHd.getMSG("requiredImputNewPassword", ""), txtPasswd)
+            Throw New UsrDefException("「新パスワード」を入力してください。", _msgHd.getMSG("requiredImputNewPassword", frmC01F10_Login.loginValue.Language), txtPasswd)
         End If
 
         '確認用
         If "".Equals(txtKakunin.Text) Then
-            Throw New UsrDefException("「確認用パスワード」を入力してください。", _msgHd.getMSG("requiredImputConfirmationPassword", ""), txtKakunin)
+            Throw New UsrDefException("「確認用パスワード」を入力してください。", _msgHd.getMSG("requiredImputConfirmationPassword", frmC01F10_Login.loginValue.Language), txtKakunin)
         End If
 
         '新パスワードと確認用パスワードの一致確認
         If Not txtPasswd.Text.Equals(txtKakunin.Text) Then
-            Throw New UsrDefException("「新パスワード」と「確認用パスワード」が不一致です。", _msgHd.getMSG("UnmatchPasswd", ""), txtKakunin)
+            Throw New UsrDefException("「新パスワード」と「確認用パスワード」が不一致です。", _msgHd.getMSG("UnmatchPasswd", frmC01F10_Login.loginValue.Language), txtKakunin)
         End If
 
     End Sub

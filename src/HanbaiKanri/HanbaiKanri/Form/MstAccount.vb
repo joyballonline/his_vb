@@ -124,7 +124,7 @@ Public Class MstAccount
             Throw ue
         Catch ex As Exception
             'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", UtilClass.getErrDetail(ex)))
+            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
         End Try
     End Sub
 
@@ -147,7 +147,7 @@ Public Class MstAccount
             Me.Hide()   ' 自分は隠れる
         Else
             '該当データがなかったら
-            _msgHd.dspMSG("NonData")
+            _msgHd.dspMSG("NonData", frmC01F10_Login.loginValue.Language)
         End If
 
     End Sub
@@ -219,7 +219,7 @@ Public Class MstAccount
             Throw ue
         Catch ex As Exception
             'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", UtilClass.getErrDetail(ex)))
+            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
         End Try
 
     End Sub

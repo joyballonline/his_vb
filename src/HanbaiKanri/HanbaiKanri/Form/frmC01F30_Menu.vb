@@ -1,6 +1,6 @@
 ﻿'===============================================================================
 '
-'　カネキ吉田商店様
+'　SPIN
 '　　（システム名）販売管理
 '　　（処理機能名）メニュー画面
 '    （フォームID）C01F30
@@ -544,7 +544,7 @@ Public Class frmC01F30_Menu
 
     Private Sub cmdExit_Click(sender As Object, e As EventArgs)
         Dim intRet As Integer
-        intRet = _msgHd.dspMSG("SystemExit")
+        intRet = _msgHd.dspMSG("SystemExit", frmC01F10_Login.loginValue.Language)
         If intRet = vbOK Then
             Application.Exit()
         End If
@@ -561,7 +561,7 @@ Public Class frmC01F30_Menu
             ue.dspMsg()
         Catch ex As Exception
             'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", UtilClass.getErrDetail(ex)))
+            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
         End Try
     End Sub
 
@@ -581,7 +581,7 @@ Public Class frmC01F30_Menu
             ue.dspMsg()
         Catch ex As Exception
             'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", UtilClass.getErrDetail(ex)))
+            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
         End Try
     End Sub
 
@@ -608,7 +608,7 @@ Public Class frmC01F30_Menu
             ue.dspMsg()
         Catch ex As Exception
             'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", UtilClass.getErrDetail(ex)))
+            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
         End Try
     End Sub
 
@@ -755,7 +755,7 @@ Public Class frmC01F30_Menu
             Throw ue
         Catch ex As Exception
             'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", UtilClass.getErrDetail(ex)))
+            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
         End Try
     End Sub
 
@@ -1285,7 +1285,7 @@ Public Class frmC01F30_Menu
 
     Private Sub cmdExit_Click_1(sender As Object, e As EventArgs) Handles cmdExit.Click
         Dim intRet As Integer
-        intRet = _msgHd.dspMSG("SystemExit")
+        intRet = _msgHd.dspMSG("SystemExit", frmC01F10_Login.loginValue.Language)
         If intRet = vbOK Then
             Application.Exit()
         End If

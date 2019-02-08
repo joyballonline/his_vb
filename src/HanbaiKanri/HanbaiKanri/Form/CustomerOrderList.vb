@@ -163,7 +163,7 @@ Public Class CustomerOrderList
             Throw ue
         Catch ex As Exception
             'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", UtilClass.getErrDetail(ex)))
+            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
         End Try
     End Sub
     Private Sub MstHanyoue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -361,7 +361,7 @@ Public Class CustomerOrderList
             book.SaveAs(sOutFile)
             app.Visible = True
 
-            _msgHd.dspMSG("CreateExcel")
+            _msgHd.dspMSG("CreateExcel", frmC01F10_Login.loginValue.Language)
 
         Catch ex As Exception
             Throw ex

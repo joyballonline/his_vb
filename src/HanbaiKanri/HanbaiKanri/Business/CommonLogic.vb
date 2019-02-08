@@ -1,6 +1,6 @@
 ﻿'===============================================================================
 '
-'　カネキ吉田商店様
+'　SPIN
 '　　（システム名）販売管理
 '　　（処理機能名）共通定数
 '    （機能ID）    CommonConst
@@ -138,7 +138,7 @@ Public Class CommonLogic
         Dim ds As DataSet = _db.selectDB(sql, RS, reccnt)
 
         If reccnt <= 0 Then
-            Throw New UsrDefException("", _msgHd.getMSG("NonSysDate"))
+            Throw New UsrDefException("", _msgHd.getMSG("NonSysDate", frmC01F10_Login.loginValue.Language))
         End If
 
         Return _db.rmNullStr(ds.Tables(RS).Rows(0)("SYSDATE"))
@@ -157,7 +157,7 @@ Public Class CommonLogic
         Dim ds As DataSet = _db.selectDB(sql, RS, reccnt)
 
         If reccnt <= 0 Then
-            Throw New UsrDefException("曜日", _msgHd.getMSG("NonSysDate"))
+            Throw New UsrDefException("曜日", _msgHd.getMSG("NonSysDate", frmC01F10_Login.loginValue.Language))
         End If
 
         Return _db.rmNullStr(ds.Tables(RS).Rows(0)("SYSWEEK"))
@@ -210,7 +210,7 @@ Public Class CommonLogic
         Dim ds As DataSet = _db.selectDB(sql, RS, reccnt)
 
         If reccnt <= 0 Then
-            _msgHd.dspMSG("NoSaibanMst")
+            _msgHd.dspMSG("NoSaibanMst", frmC01F10_Login.loginValue.Language)
             Return ""
         End If
 
@@ -446,7 +446,7 @@ Public Class CommonLogic
             ue.dspMsg()
             Throw ue
         Catch ex As Exception
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", UtilClass.getErrDetail(ex)))
+            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
         End Try
     End Sub
 
