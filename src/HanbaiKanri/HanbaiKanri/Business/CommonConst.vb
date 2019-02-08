@@ -243,12 +243,15 @@ Public Class CommonConst
     Public Const APC_KBN_NORMAL As Integer = 2                          '通常買掛
 
     '取消区分
-    Public Const CANCEL_KBN_ENABLED As Integer = 1                      '未取消
-    Public Const CANCEL_KBN_DISABLED As Integer = 2                     '取消済
+    Public Const CANCEL_KBN_ENABLED As Integer = 0                      '未取消
+    Public Const CANCEL_KBN_DISABLED As Integer = 1                     '取消済
 
     '言語
     Public Const LANG_KBN_JPN As String = "JPN"                         '日本語
     Public Const LANG_KBN_ENG As String = "ENG"                         '英語
+
+    Public Const CANCEL_KBN_JPN_TXT As String = "済"                         '済
+    Public Const CANCEL_KBN_ENG_TXT As String = "Del"                         'Del
 
 
 End Class

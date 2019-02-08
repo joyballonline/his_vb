@@ -38,6 +38,7 @@ Public Class DepositDetailList
     Private CompanyCode As String = ""
     Private OrderingNo As String()
     Private _status As String = ""
+    Private openDatetime As DateTime
 
     '-------------------------------------------------------------------------------
     'デフォルトコンストラクタ（隠蔽）
@@ -64,6 +65,7 @@ Public Class DepositDetailList
         _langHd = prmRefLang
         _status = prmRefStatus
         '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
+        openDatetime = DateTime.Now
         StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
         Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
         Me.ControlBox = Not Me.ControlBox
@@ -141,6 +143,7 @@ Public Class DepositDetailList
 
                 '英語の表記
                 If frmC01F10_Login.loginValue.Language = "ENG" Then
+                    DgvBilling.Columns.Add("取消", "Cancel")
                     DgvBilling.Columns.Add("入金番号", "MoneyReceiptNumber")
                     DgvBilling.Columns.Add("入金日", "MoneyReceiptDate")
                     DgvBilling.Columns.Add("請求先名", "BillingAddress")
@@ -148,6 +151,7 @@ Public Class DepositDetailList
                     DgvBilling.Columns.Add("入金額", "MoneyReceiptAmount")
                     DgvBilling.Columns.Add("備考", "Remarks")
                 Else
+                    DgvBilling.Columns.Add("取消", "取消")
                     DgvBilling.Columns.Add("入金番号", "入金番号")
                     DgvBilling.Columns.Add("入金日", "入金日")
                     DgvBilling.Columns.Add("請求先名", "請求先名")
@@ -160,7 +164,9 @@ Public Class DepositDetailList
                 DgvBilling.Columns("入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
                 For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+
                     DgvBilling.Rows.Add()
+                    DgvBilling.Rows(index).Cells("取消").Value = getDelKbnTxt(ds.Tables(RS).Rows(index)("取消区分"))
                     DgvBilling.Rows(index).Cells("入金番号").Value = ds.Tables(RS).Rows(index)("入金番号")
                     DgvBilling.Rows(index).Cells("入金日").Value = ds.Tables(RS).Rows(index)("登録日")
                     DgvBilling.Rows(index).Cells("請求先名").Value = ds.Tables(RS).Rows(index)("請求先名")
@@ -174,6 +180,7 @@ Public Class DepositDetailList
                 ds = getDsData("t27_nkinkshihd", Sql)
 
                 If frmC01F10_Login.loginValue.Language = "ENG" Then
+                    DgvBilling.Columns.Add("取消", "Cancel")
                     DgvBilling.Columns.Add("入金番号", "MoneyReceiptNumber")
                     DgvBilling.Columns.Add("請求番号", "BillingNumber")
                     DgvBilling.Columns.Add("入金日", "MoneyReceiptDate")
@@ -181,6 +188,7 @@ Public Class DepositDetailList
                     DgvBilling.Columns.Add("入金額", "MoneyReceiptAmount")
                     DgvBilling.Columns.Add("備考", "Remarks")
                 Else
+                    DgvBilling.Columns.Add("取消", "取消")
                     DgvBilling.Columns.Add("入金番号", "入金番号")
                     DgvBilling.Columns.Add("請求番号", "請求番号")
                     DgvBilling.Columns.Add("入金日", "入金日")
@@ -194,6 +202,7 @@ Public Class DepositDetailList
 
                 For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
                     DgvBilling.Rows.Add()
+                    DgvBilling.Rows(index).Cells("取消").Value = getDelKbnTxt(ds.Tables(RS).Rows(index)("取消区分"))
                     DgvBilling.Rows(index).Cells("入金番号").Value = ds.Tables(RS).Rows(index)("入金番号")
                     DgvBilling.Rows(index).Cells("請求番号").Value = ds.Tables(RS).Rows(index)("請求番号")
                     DgvBilling.Rows(index).Cells("入金日").Value = ds.Tables(RS).Rows(index)("入金日")
@@ -208,7 +217,7 @@ Public Class DepositDetailList
             Throw ue
         Catch ex As Exception
             'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", UtilClass.getErrDetail(ex)))
+            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
         End Try
 
     End Sub
@@ -241,104 +250,206 @@ Public Class DepositDetailList
 
     '入金取消処理
     Private Sub BtnBillingCancel_Click(sender As Object, e As EventArgs) Handles BtnDepositCancel.Click
-        Dim dtNow As DateTime = DateTime.Now
-        Dim Sql1 As String = ""
-        Sql1 = ""
-        Sql1 += "UPDATE "
-        Sql1 += "Public."
-        Sql1 += "t25_nkinhd "
-        Sql1 += "SET "
 
-        Sql1 += "取消区分"
-        Sql1 += " = '"
-        Sql1 += "1"
-        Sql1 += "', "
-        Sql1 += "取消日"
-        Sql1 += " = '"
-        Sql1 += dtNow
-        Sql1 += "', "
-        Sql1 += "更新者"
-        Sql1 += " = '"
-        Sql1 += frmC01F10_Login.loginValue.TantoNM
-        Sql1 += "', "
-        Sql1 += "更新日"
-        Sql1 += " = '"
-        Sql1 += dtNow
-        Sql1 += "' "
+        '明細表示時は取消操作不可能
+        If RbtnDetails.Checked Then
 
-        Sql1 += "WHERE"
-        Sql1 += " 会社コード"
-        Sql1 += "='"
-        Sql1 += frmC01F10_Login.loginValue.BumonNM
-        Sql1 += "'"
-        Sql1 += " AND"
-        Sql1 += " 入金番号"
-        Sql1 += "='"
-        Sql1 += DgvBilling.Rows(DgvBilling.CurrentCell.RowIndex).Cells("入金番号").Value
-        Sql1 += "' "
-        Sql1 += "RETURNING 会社コード"
-        Sql1 += ", "
-        Sql1 += "入金番号"
-        Sql1 += ", "
-        Sql1 += "入金日"
-        Sql1 += ", "
-        Sql1 += "請求先コード"
-        Sql1 += ", "
-        Sql1 += "請求先名"
-        Sql1 += ", "
-        Sql1 += "請求金額"
-        Sql1 += ", "
-        Sql1 += "入金額計"
-        Sql1 += ", "
-        Sql1 += "請求残高"
-        Sql1 += ", "
-        Sql1 += "備考"
-        Sql1 += ", "
-        Sql1 += "振込先"
-        Sql1 += ", "
-        Sql1 += "入金額"
-        Sql1 += ", "
-        Sql1 += "取消日"
-        Sql1 += ", "
-        Sql1 += "取消区分"
-        Sql1 += ", "
-        Sql1 += "登録日"
-        Sql1 += ", "
-        Sql1 += "更新者"
-        Sql1 += ", "
-        Sql1 += "更新日"
+            '操作できないアラートを出す
+            _msgHd.dspMSG("NonAction", frmC01F10_Login.loginValue.Language)
+            Return
 
-        If frmC01F10_Login.loginValue.Language = "ENG" Then
-            Dim result As DialogResult = MessageBox.Show("Would you like to cancel the Deposit?",
+        End If
+
+        Try
+
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+
+                Dim result As DialogResult = MessageBox.Show("Would you like to cancel the Deposit?",
                                              "Question",
                                              MessageBoxButtons.YesNoCancel,
                                              MessageBoxIcon.Exclamation,
                                              MessageBoxDefaultButton.Button2)
 
-            If result = DialogResult.Yes Then
-                _db.executeDB(Sql1)
-                createDgvBilling()
-            ElseIf result = DialogResult.No Then
+                '登録がOKだったら
+                If result = DialogResult.Yes Then
 
-            ElseIf result = DialogResult.Cancel Then
+                    updateData() 'データ更新
 
-            End If
-        Else
-            Dim result As DialogResult = MessageBox.Show("入金を取り消しますか？",
+                ElseIf result = DialogResult.No Then
+
+                ElseIf result = DialogResult.Cancel Then
+
+                End If
+
+            Else
+
+                Dim result As DialogResult = MessageBox.Show("入金を取り消しますか？",
                                              "質問",
                                              MessageBoxButtons.YesNoCancel,
                                              MessageBoxIcon.Exclamation,
                                              MessageBoxDefaultButton.Button2)
 
-            If result = DialogResult.Yes Then
-                _db.executeDB(Sql1)
-                createDgvBilling()
-            ElseIf result = DialogResult.No Then
+                If result = DialogResult.Yes Then
 
-            ElseIf result = DialogResult.Cancel Then
+                    updateData() 'データ更新
+
+                ElseIf result = DialogResult.No Then
+
+                ElseIf result = DialogResult.Cancel Then
+
+                End If
 
             End If
-        End If
+
+        Catch ex As Exception
+
+            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
+            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
+
+        End Try
+
+    End Sub
+
+    '選択データをもとに以下テーブル更新
+    't25_nkinhd, t27_nkinkshihd, t23_skyuhd
+    Private Sub updateData()
+        Dim dtNow As DateTime = DateTime.Now
+        Dim Sql As String = ""
+
+        Sql = "UPDATE "
+        Sql += "Public."
+        Sql += "t25_nkinhd "
+        Sql += "SET "
+
+        Sql += "取消区分 = '" & CommonConst.CANCEL_KBN_DISABLED & "'"
+        Sql += ", "
+        Sql += "取消日"
+        Sql += " = '"
+        Sql += dtNow
+        Sql += "', "
+        Sql += "更新者"
+        Sql += " = '"
+        Sql += frmC01F10_Login.loginValue.TantoNM
+        Sql += "', "
+        Sql += "更新日"
+        Sql += " = '"
+        Sql += dtNow
+        Sql += "' "
+
+        Sql += "WHERE"
+        Sql += " 会社コード"
+        Sql += "='"
+        Sql += frmC01F10_Login.loginValue.BumonNM
+        Sql += "'"
+        Sql += " AND"
+        Sql += " 入金番号"
+        Sql += "='"
+        Sql += DgvBilling.Rows(DgvBilling.CurrentCell.RowIndex).Cells("入金番号").Value
+        Sql += "' "
+
+        '入金基本を更新
+        _db.executeDB(Sql)
+
+
+        Sql = " AND"
+        Sql += " 入金番号"
+        Sql += "='"
+        Sql += DgvBilling.Rows(DgvBilling.CurrentCell.RowIndex).Cells("入金番号").Value
+        Sql += "' "
+
+        '入金基本から入金額を取得
+        Dim dsNkinhd As DataSet = getDsData("t25_nkinhd", Sql)
+        Dim strNyukinGaku As Decimal = dsNkinhd.Tables(RS).Rows(0)("入金額")
+
+
+        Sql = " AND"
+        Sql += " 入金番号"
+        Sql += "='"
+        Sql += DgvBilling.Rows(DgvBilling.CurrentCell.RowIndex).Cells("入金番号").Value
+        Sql += "' "
+
+        '入金消込から請求番号を取得
+        Dim dsNkinkshihd As DataSet = getDsData("t27_nkinkshihd", Sql)
+
+
+        Sql = " AND"
+        Sql += " 請求番号"
+        Sql += "='"
+        Sql += dsNkinkshihd.Tables(RS).Rows(0)("請求番号")
+        Sql += "' "
+
+        '請求基本から受注番号を取得
+        Dim dsSkyuhd As DataSet = getDsData("t23_skyuhd", Sql)
+
+        Dim decUrikakeZan As Decimal = dsSkyuhd.Tables(RS).Rows(0)("売掛残高") + strNyukinGaku
+        Dim decNyukinKei As Decimal = dsSkyuhd.Tables(RS).Rows(0)("入金額計") - strNyukinGaku
+
+
+        Sql = "UPDATE "
+        Sql += "Public.t27_nkinkshihd "
+        Sql += "SET "
+
+        Sql += "取消区分 = '" & CommonConst.CANCEL_KBN_DISABLED & "'"
+        Sql += ", "
+        Sql += "取消日"
+        Sql += " = '"
+        Sql += dtNow
+        Sql += "', "
+        Sql += "更新者"
+        Sql += " = '"
+        Sql += frmC01F10_Login.loginValue.TantoNM
+        Sql += "', "
+        Sql += "更新日"
+        Sql += " = '"
+        Sql += dtNow
+        Sql += "' "
+
+        Sql += "WHERE"
+        Sql += " 会社コード"
+        Sql += "='"
+        Sql += frmC01F10_Login.loginValue.BumonNM
+        Sql += "'"
+        Sql += " AND"
+        Sql += " 入金番号"
+        Sql += "='"
+        Sql += DgvBilling.Rows(DgvBilling.CurrentCell.RowIndex).Cells("入金番号").Value
+        Sql += "' "
+
+        '請求基本を更新
+        _db.executeDB(Sql)
+
+        Sql = "UPDATE "
+        Sql += "Public.t23_skyuhd "
+        Sql += "SET "
+
+        Sql += "売掛残高"
+        Sql += " = '"
+        Sql += decUrikakeZan.ToString '売掛残高を増やす
+        Sql += "', "
+        Sql += "入金額計"
+        Sql += " = '"
+        Sql += decNyukinKei.ToString '入金額計を減らす
+        Sql += "', "
+        Sql += "更新者"
+        Sql += " = '"
+        Sql += frmC01F10_Login.loginValue.TantoNM
+        Sql += "' "
+
+        Sql += "WHERE"
+        Sql += " 会社コード"
+        Sql += "='"
+        Sql += frmC01F10_Login.loginValue.BumonNM
+        Sql += "'"
+        Sql += " AND"
+        Sql += " 請求番号"
+        Sql += "='"
+        Sql += dsNkinkshihd.Tables(RS).Rows(0)("請求番号")
+        Sql += "' "
+
+        '請求基本を更新
+        _db.executeDB(Sql)
+
+        createDgvBilling()
 
     End Sub
 
@@ -425,6 +536,19 @@ Public Class DepositDetailList
         Sql += txtParam
 
         Return _db.selectDB(Sql, RS, reccnt)
+    End Function
+
+    '取消区分の表示テキストを返す
+    'param1：String テーブル名
+    'param2：String 詳細条件
+    'Return: DataSet
+    Public Function getDelKbnTxt(ByVal delKbn As String) As String
+        '区分の値を取得し、使用言語に応じて値を返却
+
+        Dim reDelKbn As String = IIf(delKbn = CommonConst.CANCEL_KBN_DISABLED,
+                                    IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_JPN, CommonConst.CANCEL_KBN_JPN_TXT, CommonConst.CANCEL_KBN_ENG_TXT),
+                                    "")
+        Return reDelKbn
     End Function
 
 End Class

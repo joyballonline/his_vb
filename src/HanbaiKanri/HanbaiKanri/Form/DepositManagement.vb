@@ -210,6 +210,8 @@ Public Class DepositManagement
         Sql += "'%"
         Sql += CustomerCode
         Sql += "%'"
+        Sql += " AND "
+        Sql += "取消区分 = 0"
 
         '得意先と一致する請求基本を取得
         Dim dsSkyuhd As DataSet = getDsData("t23_skyuhd", Sql)
@@ -229,21 +231,39 @@ Public Class DepositManagement
 
     '入金済みデータ
     Private Sub setDgvHistory()
+        Dim reccnt As Integer = 0 'DB用（デフォルト）
         Dim Sql As String = ""
 
-        Sql = " AND "
-        Sql += "請求先コード"
+        'joinするのでとりあえず直書き
+        Sql = "SELECT"
+        Sql += " t26.請求先名, t26.入金番号, t26.更新日, t26.入金種別名, t26.入金額, t26.備考"
+        Sql += " FROM "
+        Sql += " public.t26_nkindt t26 "
+
+        Sql += " INNER JOIN "
+        Sql += " t25_nkinhd t25"
+        Sql += " ON "
+
+        Sql += " t26.会社コード = t25.会社コード"
+        Sql += " AND "
+        Sql += " t26.入金番号 = t25.入金番号"
+
+        Sql += " WHERE "
+        Sql += " t26.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonNM & "'"
+        Sql += " AND "
+        Sql += "t26.請求先コード"
         Sql += " ILIKE "
         Sql += "'%"
         Sql += CustomerCode
         Sql += "%'"
+        Sql += " AND "
+        Sql += "t25.取消区分 = 0"
 
         '得意先と一致する入金明細を取得
-        Dim dsNkindt As DataSet = getDsData("t26_nkindt", Sql)
+        Dim dsNkindt As DataSet = _db.selectDB(Sql, RS, reccnt)
 
         '明細行の件数をセット
         TxtHistoryCount.Text = dsNkindt.Tables(RS).Rows.Count()
-
 
         '入金済みデータの出力
         For index As Integer = 0 To dsNkindt.Tables(RS).Rows.Count - 1
@@ -730,4 +750,29 @@ Public Class DepositManagement
         Return _db.selectDB(Sql, RS, reccnt)
     End Function
 
+    ''param1：String テーブル名
+    ''param2：String 詳細条件
+    ''Return: DataSet
+    'Private Function getJoinDsData(ByVal tableName As String, ByVal joinTableName As String, Optional ByRef txtParam As String = "") As DataSet
+    '    Dim reccnt As Integer = 0 'DB用（デフォルト）
+    '    Dim Sql As String = ""
+
+    '    Sql += "SELECT"
+    '    Sql += " *"
+    '    Sql += " FROM "
+    '    Sql += "public." & tableName
+
+    '    Sql += " INNER JOIN "
+    '    Sql += joinTableName
+    '    Sql += " ON "
+
+
+    '    Sql += " WHERE "
+    '    Sql += "会社コード ILIKE "
+    '    Sql += "'" & frmC01F10_Login.loginValue.BumonNM & "'"
+    '    Sql += txtParam
+
+    '    Console.WriteLine(Sql)
+    '    Return _db.selectDB(Sql, RS, reccnt)
+    'End Function
 End Class
