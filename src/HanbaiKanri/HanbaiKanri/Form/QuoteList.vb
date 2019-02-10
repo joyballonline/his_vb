@@ -211,7 +211,7 @@ Public Class QuoteList
                 strWhere += "得意先名"
                 strWhere += " ILIKE "
                 strWhere += "'%"
-                strWhere += TxtCustomerName.Text
+                strWhere += RevoveChars(TxtCustomerName.Text)
                 strWhere += "%'"
             End If
             If TxtAddress.Text <> "" Then
@@ -219,7 +219,7 @@ Public Class QuoteList
                 strWhere += "得意先住所"
                 strWhere += " ILIKE "
                 strWhere += "'%"
-                strWhere += TxtAddress.Text
+                strWhere += RevoveChars(TxtAddress.Text)
                 strWhere += "%'"
             End If
             If TxtTel.Text <> "" Then
@@ -227,7 +227,7 @@ Public Class QuoteList
                 strWhere += "得意先電話番号"
                 strWhere += " ILIKE "
                 strWhere += "'%"
-                strWhere += TxtTel.Text
+                strWhere += RevoveChars(TxtTel.Text)
                 strWhere += "%'"
             End If
             If TxtCustomerCode.Text <> "" Then
@@ -235,7 +235,7 @@ Public Class QuoteList
                 strWhere += "得意先コード"
                 strWhere += " ILIKE "
                 strWhere += "'%"
-                strWhere += TxtCustomerCode.Text
+                strWhere += RevoveChars(TxtCustomerCode.Text)
                 strWhere += "%'"
             End If
             If TxtQuoteDate1.Text <> "" Then
@@ -243,7 +243,7 @@ Public Class QuoteList
                 strWhere += "見積日"
                 strWhere += " >=  "
                 strWhere += "'"
-                strWhere += TxtQuoteDate1.Text
+                strWhere += RevoveChars(TxtQuoteDate1.Text)
                 strWhere += "'"
             End If
             If TxtQuoteDate2.Text <> "" Then
@@ -251,7 +251,7 @@ Public Class QuoteList
                 strWhere += "見積日"
                 strWhere += " <=  "
                 strWhere += "'"
-                strWhere += TxtQuoteDate2.Text
+                strWhere += RevoveChars(TxtQuoteDate2.Text)
                 strWhere += "'"
             End If
             If TxtQuoteNo1.Text <> "" Then
@@ -259,7 +259,7 @@ Public Class QuoteList
                 strWhere += "見積番号"
                 strWhere += " >=  "
                 strWhere += "'"
-                strWhere += TxtQuoteNo1.Text
+                strWhere += RevoveChars(TxtQuoteNo1.Text)
                 strWhere += "'"
             End If
             If TxtQuoteNo2.Text <> "" Then
@@ -267,7 +267,7 @@ Public Class QuoteList
                 strWhere += "見積番号"
                 strWhere += " <=  "
                 strWhere += "'"
-                strWhere += TxtQuoteNo2.Text
+                strWhere += RevoveChars(TxtQuoteNo2.Text)
                 strWhere += "'"
             End If
             If TxtSales.Text <> "" Then
@@ -275,7 +275,7 @@ Public Class QuoteList
                 strWhere += "営業担当者"
                 strWhere += " ILIKE "
                 strWhere += "'%"
-                strWhere += TxtSales.Text
+                strWhere += RevoveChars(TxtSales.Text)
                 strWhere += "%'"
             End If
             If Not ChkExpired.Checked Then
@@ -419,7 +419,7 @@ Public Class QuoteList
                 strWhere += "t01.得意先名"
                 strWhere += " ILIKE "
                 strWhere += "'%"
-                strWhere += TxtCustomerName.Text
+                strWhere += RevoveChars(TxtCustomerName.Text)
                 strWhere += "%'"
             End If
             If TxtAddress.Text <> "" Then
@@ -427,7 +427,7 @@ Public Class QuoteList
                 strWhere += "t01.得意先住所"
                 strWhere += " ILIKE "
                 strWhere += "'%"
-                strWhere += TxtAddress.Text
+                strWhere += RevoveChars(TxtAddress.Text)
                 strWhere += "%'"
             End If
             If TxtTel.Text <> "" Then
@@ -435,7 +435,7 @@ Public Class QuoteList
                 strWhere += "t01.得意先電話番号"
                 strWhere += " ILIKE "
                 strWhere += "'%"
-                strWhere += TxtTel.Text
+                strWhere += RevoveChars(TxtTel.Text)
                 strWhere += "%'"
             End If
             If TxtCustomerCode.Text <> "" Then
@@ -443,7 +443,7 @@ Public Class QuoteList
                 strWhere += "t01.得意先コード"
                 strWhere += " ILIKE "
                 strWhere += "'%"
-                strWhere += TxtCustomerCode.Text
+                strWhere += RevoveChars(TxtCustomerCode.Text)
                 strWhere += "%'"
             End If
             If TxtQuoteDate1.Text <> "" Then
@@ -467,7 +467,7 @@ Public Class QuoteList
                 strWhere += "t01.見積番号"
                 strWhere += " >=  "
                 strWhere += "'"
-                strWhere += TxtQuoteNo1.Text
+                strWhere += RevoveChars(TxtQuoteNo1.Text)
                 strWhere += "'"
             End If
             If TxtQuoteNo2.Text <> "" Then
@@ -475,7 +475,7 @@ Public Class QuoteList
                 strWhere += "t01.見積番号"
                 strWhere += " <=  "
                 strWhere += "'"
-                strWhere += TxtQuoteNo2.Text
+                strWhere += RevoveChars(TxtQuoteNo2.Text)
                 strWhere += "'"
             End If
             If TxtSales.Text <> "" Then
@@ -483,7 +483,7 @@ Public Class QuoteList
                 strWhere += "t01.営業担当者"
                 strWhere += " ILIKE "
                 strWhere += "'%"
-                strWhere += TxtSales.Text
+                strWhere += RevoveChars(TxtSales.Text)
                 strWhere += "%'"
             End If
             If Not ChkExpired.Checked Then
@@ -784,5 +784,21 @@ Public Class QuoteList
         QuoteListLoad()
 
     End Sub
+
+    ''' <summary>
+    ''' 指定した文字列から指定した文字を全て削除する
+    ''' </summary>
+    ''' <param name="s">対象となる文字列。</param>
+    ''' <returns>sに含まれている全てのcharacters文字が削除された文字列。</returns>
+    Public Shared Function RevoveChars(s As String) As String
+        Dim buf As New System.Text.StringBuilder(s)
+        '削除する文字の配列
+        Dim removeChars As Char() = New Char() {vbCr, vbLf, Chr(39)}
+
+        For Each c As Char In removeChars
+            buf.Replace(c.ToString(), "")
+        Next
+        Return buf.ToString()
+    End Function
 
 End Class
