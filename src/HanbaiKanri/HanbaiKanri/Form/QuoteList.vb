@@ -203,7 +203,7 @@ Public Class QuoteList
             strWhere += "WHERE"
             strWhere += " 会社コード"
             strWhere += "='"
-            strWhere += frmC01F10_Login.loginValue.BumonNM
+            strWhere += frmC01F10_Login.loginValue.BumonCD
             strWhere += "' "
 
             If TxtCustomerName.Text <> "" Then
@@ -410,7 +410,7 @@ Public Class QuoteList
             strWhere += "WHERE"
             strWhere += " t01.会社コード"
             strWhere += "='"
-            strWhere += frmC01F10_Login.loginValue.BumonNM
+            strWhere += frmC01F10_Login.loginValue.BumonCD
             strWhere += "' "
             strWhere += " and t01.見積番号 = t02.見積番号 and t01.見積番号枝番 = t02.見積番号枝番"
 
@@ -699,7 +699,7 @@ Public Class QuoteList
         Sql1 += ",取消日 = '" & dtToday & "' "
         Sql1 += ",更新日 = '" & dtToday & "' "
         Sql1 += ",更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "' "
-        Sql1 += "WHERE 会社コード ='" & frmC01F10_Login.loginValue.BumonNM & "'"
+        Sql1 += "WHERE 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql1 += " AND 見積番号 ='" & DgvMithd.Rows(DgvMithd.CurrentCell.RowIndex).Cells("見積番号").Value & "' "
         Sql1 += " AND 見積番号枝番 ='" & DgvMithd.Rows(DgvMithd.CurrentCell.RowIndex).Cells("見積番号枝番").Value & "' "
         Sql1 += "RETURNING 会社コード"
