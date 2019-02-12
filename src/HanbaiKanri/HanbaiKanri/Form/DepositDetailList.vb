@@ -75,14 +75,14 @@ Public Class DepositDetailList
 
     Private Sub DepositDetailList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If _status = "VIEW" Then
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "ViewMode"
             Else
                 LblMode.Text = "参照モード"
             End If
 
         ElseIf _status = "CANCEL" Then
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "CancelMode"
             Else
                 LblMode.Text = "取消モード"
@@ -96,7 +96,7 @@ Public Class DepositDetailList
         createDgvBilling()
 
         '翻訳
-        If frmC01F10_Login.loginValue.Language = "ENG" Then
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
             LblConditions.Text = "ExtractionCondition"
             Label1.Text = "CustomerName"
             Label4.Text = "CustomerCode"
@@ -142,7 +142,7 @@ Public Class DepositDetailList
                 ds = getDsData("t25_nkinhd", Sql)
 
                 '英語の表記
-                If frmC01F10_Login.loginValue.Language = "ENG" Then
+                If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                     DgvBilling.Columns.Add("取消", "Cancel")
                     DgvBilling.Columns.Add("入金番号", "MoneyReceiptNumber")
                     DgvBilling.Columns.Add("入金日", "MoneyReceiptDate")
@@ -182,7 +182,7 @@ Public Class DepositDetailList
 
                 ds = getDsData("t27_nkinkshihd", Sql)
 
-                If frmC01F10_Login.loginValue.Language = "ENG" Then
+                If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                     DgvBilling.Columns.Add("取消", "Cancel")
                     DgvBilling.Columns.Add("入金番号", "MoneyReceiptNumber")
                     DgvBilling.Columns.Add("請求番号", "BillingNumber")

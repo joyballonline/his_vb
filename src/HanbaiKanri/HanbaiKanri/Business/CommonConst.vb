@@ -242,9 +242,20 @@ Public Class CommonConst
     Public Const APC_KBN_DEPOSIT As Integer = 1                         '前払買掛
     Public Const APC_KBN_NORMAL As Integer = 2                          '通常買掛
 
+    '仕入区分
+    Public Const Sire_KBN_Sire As Integer = 1                           '仕入
+    Public Const Sire_KBN_Zaiko As Integer = 2                          '在庫
+    Public Const Sire_KBN_SERVICE As Integer = 3                          'サービス
+
+    '仕入区分 テキスト
+    Public Const Sire_KBN_Sire_TXT As String = "仕入"                           '仕入
+    Public Const Sire_KBN_Zaiko_TXT As String = "在庫"                          '在庫
+    Public Const Sire_KBN_SERVICE_TXT As String = "サービス"                    'サービス
+
+
     '取消区分
     Public Const CANCEL_KBN_ENABLED As Integer = 0                      '未取消
-    Public Const CANCEL_KBN_DISABLED As Integer = 1                     '取消済
+    Public Const CANCEL_KBN_DISABLED As Integer = 1                 '取消済
 
     '言語
     Public Const LANG_KBN_JPN As String = "JPN"                         '日本語

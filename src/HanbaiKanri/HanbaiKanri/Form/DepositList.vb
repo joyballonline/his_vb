@@ -110,7 +110,6 @@ Public Class DepositList
             CustomerOrderCount = dsCymnhd.Tables(RS).Rows.Count.ToString
 
             '請求金額を集計
-            'CustomerBillingAmount = dsSkyuhd.Tables(RS).Compute("SUM(請求金額計)", Nothing)
             CustomerBillingAmount = IIf(
                 dsSkyuhd.Tables(RS).Compute("SUM(請求金額計)", Nothing) IsNot DBNull.Value,
                 dsSkyuhd.Tables(RS).Compute("SUM(請求金額計)", Nothing),
@@ -118,14 +117,12 @@ Public Class DepositList
             )
 
             '見積金額を集計
-            'CustomerOrderAmount = dsCymnhd.Tables(RS).Compute("SUM(見積金額)", Nothing)
             CustomerOrderAmount = IIf(
                 dsCymnhd.Tables(RS).Compute("SUM(見積金額)", Nothing) IsNot DBNull.Value,
                 dsCymnhd.Tables(RS).Compute("SUM(見積金額)", Nothing),
                 0
             )
             '売掛残高を集計
-            'AccountsReceivable = dsSkyuhd.Tables(RS).Compute("SUM(売掛残高)", Nothing)
             AccountsReceivable = IIf(
                 dsSkyuhd.Tables(RS).Compute("SUM(売掛残高)", Nothing) IsNot DBNull.Value,
                 dsSkyuhd.Tables(RS).Compute("SUM(売掛残高)", Nothing),
@@ -145,7 +142,7 @@ Public Class DepositList
         Next
 
         'Language=ENGの時
-        If frmC01F10_Login.loginValue.Language = "ENG" Then
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
             LblConditions.Text = "TermsOfSelection"
             Label1.Text = "CustomerName"
             Label2.Text = "Address"

@@ -28,14 +28,14 @@ Partial Class OrderList
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.TxtOrderNo2 = New System.Windows.Forms.TextBox()
-        Me.TxtOrderDate2 = New System.Windows.Forms.TextBox()
+        Me.TxtOrderUntil = New System.Windows.Forms.TextBox()
+        Me.TxtOrderDateUntil = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.TxtSales = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.TxtOrderNo1 = New System.Windows.Forms.TextBox()
+        Me.TxtOrderSince = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.TxtOrderDate1 = New System.Windows.Forms.TextBox()
+        Me.TxtOrderDateSince = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.TxtCustomerCode = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -124,21 +124,21 @@ Partial Class OrderList
         Me.Label5.TabIndex = 56
         Me.Label5.Text = "～"
         '
-        'TxtOrderNo2
+        'TxtOrderUntil
         '
-        Me.TxtOrderNo2.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtOrderNo2.Location = New System.Drawing.Point(959, 70)
-        Me.TxtOrderNo2.Name = "TxtOrderNo2"
-        Me.TxtOrderNo2.Size = New System.Drawing.Size(170, 22)
-        Me.TxtOrderNo2.TabIndex = 8
+        Me.TxtOrderUntil.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtOrderUntil.Location = New System.Drawing.Point(959, 70)
+        Me.TxtOrderUntil.Name = "TxtOrderUntil"
+        Me.TxtOrderUntil.Size = New System.Drawing.Size(170, 22)
+        Me.TxtOrderUntil.TabIndex = 8
         '
-        'TxtOrderDate2
+        'TxtOrderDateUntil
         '
-        Me.TxtOrderDate2.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtOrderDate2.Location = New System.Drawing.Point(959, 42)
-        Me.TxtOrderDate2.Name = "TxtOrderDate2"
-        Me.TxtOrderDate2.Size = New System.Drawing.Size(170, 22)
-        Me.TxtOrderDate2.TabIndex = 6
+        Me.TxtOrderDateUntil.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtOrderDateUntil.Location = New System.Drawing.Point(959, 42)
+        Me.TxtOrderDateUntil.Name = "TxtOrderDateUntil"
+        Me.TxtOrderDateUntil.Size = New System.Drawing.Size(170, 22)
+        Me.TxtOrderDateUntil.TabIndex = 6
         '
         'Label6
         '
@@ -172,13 +172,13 @@ Partial Class OrderList
         Me.Label7.Text = "受注番号"
         Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'TxtOrderNo1
+        'TxtOrderSince
         '
-        Me.TxtOrderNo1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtOrderNo1.Location = New System.Drawing.Point(760, 69)
-        Me.TxtOrderNo1.Name = "TxtOrderNo1"
-        Me.TxtOrderNo1.Size = New System.Drawing.Size(170, 22)
-        Me.TxtOrderNo1.TabIndex = 7
+        Me.TxtOrderSince.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtOrderSince.Location = New System.Drawing.Point(760, 69)
+        Me.TxtOrderSince.Name = "TxtOrderSince"
+        Me.TxtOrderSince.Size = New System.Drawing.Size(170, 22)
+        Me.TxtOrderSince.TabIndex = 7
         '
         'Label8
         '
@@ -192,13 +192,13 @@ Partial Class OrderList
         Me.Label8.Text = "受注日"
         Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'TxtOrderDate1
+        'TxtOrderDateSince
         '
-        Me.TxtOrderDate1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtOrderDate1.Location = New System.Drawing.Point(760, 42)
-        Me.TxtOrderDate1.Name = "TxtOrderDate1"
-        Me.TxtOrderDate1.Size = New System.Drawing.Size(170, 22)
-        Me.TxtOrderDate1.TabIndex = 5
+        Me.TxtOrderDateSince.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtOrderDateSince.Location = New System.Drawing.Point(760, 42)
+        Me.TxtOrderDateSince.Name = "TxtOrderDateSince"
+        Me.TxtOrderDateSince.Size = New System.Drawing.Size(170, 22)
+        Me.TxtOrderDateSince.TabIndex = 5
         '
         'Label4
         '
@@ -451,14 +451,14 @@ Partial Class OrderList
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.TxtOrderNo2)
-        Me.Controls.Add(Me.TxtOrderDate2)
+        Me.Controls.Add(Me.TxtOrderUntil)
+        Me.Controls.Add(Me.TxtOrderDateUntil)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.TxtSales)
         Me.Controls.Add(Me.Label7)
-        Me.Controls.Add(Me.TxtOrderNo1)
+        Me.Controls.Add(Me.TxtOrderSince)
         Me.Controls.Add(Me.Label8)
-        Me.Controls.Add(Me.TxtOrderDate1)
+        Me.Controls.Add(Me.TxtOrderDateSince)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.TxtCustomerCode)
         Me.Controls.Add(Me.Label3)
@@ -487,14 +487,14 @@ Partial Class OrderList
     Friend WithEvents Label10 As Label
     Friend WithEvents Label9 As Label
     Friend WithEvents Label5 As Label
-    Friend WithEvents TxtOrderNo2 As TextBox
-    Friend WithEvents TxtOrderDate2 As TextBox
+    Friend WithEvents TxtOrderUntil As TextBox
+    Friend WithEvents TxtOrderDateUntil As TextBox
     Friend WithEvents Label6 As Label
     Friend WithEvents TxtSales As TextBox
     Friend WithEvents Label7 As Label
-    Friend WithEvents TxtOrderNo1 As TextBox
+    Friend WithEvents TxtOrderSince As TextBox
     Friend WithEvents Label8 As Label
-    Friend WithEvents TxtOrderDate1 As TextBox
+    Friend WithEvents TxtOrderDateSince As TextBox
     Friend WithEvents Label4 As Label
     Friend WithEvents TxtCustomerCode As TextBox
     Friend WithEvents Label3 As Label
