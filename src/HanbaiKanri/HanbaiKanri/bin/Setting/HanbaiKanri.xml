@@ -447,6 +447,18 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <MEMO></MEMO>
   </MSG_DATA>
   <MSG_DATA>
+    <ID>confirmCancel</ID>
+    <MSG1>取り消します。</MSG1>
+    <MSG1_EN>Cancel it.</MSG1_EN>
+    <MSG2>よろしいですか？</MSG2>
+    <MSG2_EN>Is it OK?</MSG2_EN>
+    <BUTTON_TYPE>YesNo</BUTTON_TYPE>
+    <ICONT_TYPE>Question</ICONT_TYPE>
+    <DEFAULT_BUTTON>Button2</DEFAULT_BUTTON>
+    <CREATE_DATE>2006/04/27 15:00</CREATE_DATE>
+    <MEMO></MEMO>
+  </MSG_DATA>
+  <MSG_DATA>
     <ID>confirmUpdate</ID>
     <MSG1>更新します。</MSG1>
     <MSG1_EN>Update it.</MSG1_EN>
@@ -819,6 +831,17 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <ID>NonAction</ID>
     <MSG1>この操作は行えません。</MSG1>
     <MSG1_EN>This operation can not be performed.</MSG1_EN>
+    <BUTTON_TYPE>OK</BUTTON_TYPE>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+    <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
+    <MEMO></MEMO>
+  </MSG_DATA>
+  <MSG_DATA>
+    <ID>chkData</ID>
+    <MSG1>データが更新されています。</MSG1>
+    <MSG1_EN>Data is being updated.</MSG1_EN>
+    <MSG2>再度確認してから更新してください。</MSG2>
+    <MSG2_EN>Please check again and update.</MSG2_EN>
     <BUTTON_TYPE>OK</BUTTON_TYPE>
     <ICONT_TYPE>Warning</ICONT_TYPE>
     <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
