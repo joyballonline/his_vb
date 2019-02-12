@@ -1115,7 +1115,7 @@ Public Class Quote
                 Sql1 += ", '" & TxtCustomerCode.Text & "'"                      '得意先コード
                 Sql1 += ", '" & TxtCustomerName.Text & "'"                      '得意先名
                 Sql1 += ", '" & TxtPostalCode.Text & "'"                        '得意先郵便番号
-                Sql1 += ", '" & TxtAddress1.Text & "'"                          '得意先住所
+                Sql1 += ", '" & TxtAddress1.Text                                '得意先住所
                 Sql1 += " " & TxtAddress2.Text
                 Sql1 += " " & TxtAddress3.Text & "'"
                 Sql1 += ", '" & TxtTel.Text & "'"                               '得意先電話番号
