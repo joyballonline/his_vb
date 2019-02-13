@@ -27,12 +27,10 @@ Partial Class PaidList
         Me.RbtnSlip = New System.Windows.Forms.RadioButton()
         Me.RbtnDetails = New System.Windows.Forms.RadioButton()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.TxtPaidNo2 = New System.Windows.Forms.TextBox()
-        Me.TxtPaidDate2 = New System.Windows.Forms.TextBox()
+        Me.TxtPaidNoUntil = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.TxtPaidNo1 = New System.Windows.Forms.TextBox()
+        Me.TxtPaidNoSince = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.TxtPaidDate1 = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -44,6 +42,8 @@ Partial Class PaidList
         Me.BtnBack = New System.Windows.Forms.Button()
         Me.DgvHtyhd = New System.Windows.Forms.DataGridView()
         Me.LblMode = New System.Windows.Forms.Label()
+        Me.dtPaidDateSince = New System.Windows.Forms.DateTimePicker()
+        Me.dtPaidDateUntil = New System.Windows.Forms.DateTimePicker()
         CType(Me.DgvHtyhd, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -96,27 +96,19 @@ Partial Class PaidList
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(936, 74)
+        Me.Label9.Location = New System.Drawing.Point(936, 72)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(19, 13)
+        Me.Label9.Size = New System.Drawing.Size(17, 12)
         Me.Label9.TabIndex = 115
         Me.Label9.Text = "～"
         '
-        'TxtPaidNo2
+        'TxtPaidNoUntil
         '
-        Me.TxtPaidNo2.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtPaidNo2.Location = New System.Drawing.Point(959, 68)
-        Me.TxtPaidNo2.Name = "TxtPaidNo2"
-        Me.TxtPaidNo2.Size = New System.Drawing.Size(170, 22)
-        Me.TxtPaidNo2.TabIndex = 6
-        '
-        'TxtPaidDate2
-        '
-        Me.TxtPaidDate2.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtPaidDate2.Location = New System.Drawing.Point(959, 40)
-        Me.TxtPaidDate2.Name = "TxtPaidDate2"
-        Me.TxtPaidDate2.Size = New System.Drawing.Size(170, 22)
-        Me.TxtPaidDate2.TabIndex = 4
+        Me.TxtPaidNoUntil.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtPaidNoUntil.Location = New System.Drawing.Point(959, 67)
+        Me.TxtPaidNoUntil.Name = "TxtPaidNoUntil"
+        Me.TxtPaidNoUntil.Size = New System.Drawing.Size(170, 22)
+        Me.TxtPaidNoUntil.TabIndex = 6
         '
         'Label7
         '
@@ -130,13 +122,13 @@ Partial Class PaidList
         Me.Label7.Text = "支払番号"
         Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'TxtPaidNo1
+        'TxtPaidNoSince
         '
-        Me.TxtPaidNo1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtPaidNo1.Location = New System.Drawing.Point(760, 67)
-        Me.TxtPaidNo1.Name = "TxtPaidNo1"
-        Me.TxtPaidNo1.Size = New System.Drawing.Size(170, 22)
-        Me.TxtPaidNo1.TabIndex = 5
+        Me.TxtPaidNoSince.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtPaidNoSince.Location = New System.Drawing.Point(760, 67)
+        Me.TxtPaidNoSince.Name = "TxtPaidNoSince"
+        Me.TxtPaidNoSince.Size = New System.Drawing.Size(170, 22)
+        Me.TxtPaidNoSince.TabIndex = 5
         '
         'Label8
         '
@@ -149,14 +141,6 @@ Partial Class PaidList
         Me.Label8.TabIndex = 107
         Me.Label8.Text = "支払日"
         Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'TxtPaidDate1
-        '
-        Me.TxtPaidDate1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtPaidDate1.Location = New System.Drawing.Point(760, 40)
-        Me.TxtPaidDate1.Name = "TxtPaidDate1"
-        Me.TxtPaidDate1.Size = New System.Drawing.Size(170, 22)
-        Me.TxtPaidDate1.TabIndex = 3
         '
         'Label4
         '
@@ -183,9 +167,9 @@ Partial Class PaidList
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(936, 46)
+        Me.Label5.Location = New System.Drawing.Point(936, 44)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(19, 13)
+        Me.Label5.Size = New System.Drawing.Size(17, 12)
         Me.Label5.TabIndex = 114
         Me.Label5.Text = "～"
         '
@@ -272,22 +256,48 @@ Partial Class PaidList
         Me.LblMode.Text = "モード"
         Me.LblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'dtPaidDateSince
+        '
+        Me.dtPaidDateSince.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.dtPaidDateSince.CustomFormat = "yyyy/MM/dd"
+        Me.dtPaidDateSince.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.dtPaidDateSince.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtPaidDateSince.Location = New System.Drawing.Point(760, 39)
+        Me.dtPaidDateSince.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
+        Me.dtPaidDateSince.Name = "dtPaidDateSince"
+        Me.dtPaidDateSince.Size = New System.Drawing.Size(170, 22)
+        Me.dtPaidDateSince.TabIndex = 331
+        Me.dtPaidDateSince.Value = New Date(2019, 1, 1, 0, 0, 0, 0)
+        '
+        'dtPaidDateUntil
+        '
+        Me.dtPaidDateUntil.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.dtPaidDateUntil.CustomFormat = "yyyy/MM/dd"
+        Me.dtPaidDateUntil.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.dtPaidDateUntil.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtPaidDateUntil.Location = New System.Drawing.Point(959, 39)
+        Me.dtPaidDateUntil.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
+        Me.dtPaidDateUntil.Name = "dtPaidDateUntil"
+        Me.dtPaidDateUntil.Size = New System.Drawing.Size(170, 22)
+        Me.dtPaidDateUntil.TabIndex = 332
+        Me.dtPaidDateUntil.Value = New Date(2019, 1, 1, 0, 0, 0, 0)
+        '
         'PaidList
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.dtPaidDateUntil)
+        Me.Controls.Add(Me.dtPaidDateSince)
         Me.Controls.Add(Me.RbtnDetails)
         Me.Controls.Add(Me.RbtnSlip)
         Me.Controls.Add(Me.LblMode)
         Me.Controls.Add(Me.ChkCancelData)
         Me.Controls.Add(Me.BtnCancel)
         Me.Controls.Add(Me.Label9)
-        Me.Controls.Add(Me.TxtPaidNo2)
-        Me.Controls.Add(Me.TxtPaidDate2)
+        Me.Controls.Add(Me.TxtPaidNoUntil)
         Me.Controls.Add(Me.Label7)
-        Me.Controls.Add(Me.TxtPaidNo1)
+        Me.Controls.Add(Me.TxtPaidNoSince)
         Me.Controls.Add(Me.Label8)
-        Me.Controls.Add(Me.TxtPaidDate1)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.Label5)
@@ -311,12 +321,10 @@ Partial Class PaidList
     Friend WithEvents RbtnSlip As RadioButton
     Friend WithEvents RbtnDetails As RadioButton
     Friend WithEvents Label9 As Label
-    Friend WithEvents TxtPaidNo2 As TextBox
-    Friend WithEvents TxtPaidDate2 As TextBox
+    Friend WithEvents TxtPaidNoUntil As TextBox
     Friend WithEvents Label7 As Label
-    Friend WithEvents TxtPaidNo1 As TextBox
+    Friend WithEvents TxtPaidNoSince As TextBox
     Friend WithEvents Label8 As Label
-    Friend WithEvents TxtPaidDate1 As TextBox
     Friend WithEvents Label4 As Label
     Friend WithEvents Label10 As Label
     Friend WithEvents Label5 As Label
@@ -328,4 +336,6 @@ Partial Class PaidList
     Friend WithEvents BtnBack As Button
     Friend WithEvents DgvHtyhd As DataGridView
     Friend WithEvents LblMode As Label
+    Friend WithEvents dtPaidDateSince As DateTimePicker
+    Friend WithEvents dtPaidDateUntil As DateTimePicker
 End Class

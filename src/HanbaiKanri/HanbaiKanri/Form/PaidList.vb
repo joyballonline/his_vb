@@ -38,6 +38,7 @@ Public Class PaidList
     Private CompanyCode As String = ""
     Private OrderNo As String()
     Private _status As String = ""
+    Private openDatetime As DateTime
 
     '-------------------------------------------------------------------------------
     'デフォルトコンストラクタ（隠蔽）
@@ -70,134 +71,12 @@ Public Class PaidList
         _init = True
         DgvHtyhd.AutoSizeColumnsMode = DataGridViewAutoSizeColumnMode.DisplayedCells
     End Sub
-    Private Sub PurchaseListLoad(Optional ByRef Status As String = "")
-        If Status = "EXCLUSION" Then
-            Dim Sql As String = ""
-            Try
-                Sql += "SELECT "
-                Sql += "* "
-                Sql += "FROM "
-                Sql += "public"
-                Sql += "."
-                Sql += "t47_shrihd"
-                Sql += " WHERE "
-                Sql += "取消区分"
-                Sql += " = "
-                Sql += "'"
-                Sql += "0"
-                Sql += "'"
-                Sql += " ORDER BY "
-                Sql += "登録日 DESC"
 
-                Dim reccnt As Integer = 0
-                ds = _db.selectDB(Sql, RS, reccnt)
 
-                If frmC01F10_Login.loginValue.Language = "ENG" Then
-                    DgvHtyhd.Columns.Add("支払番号", "PaymentNumber")
-                    DgvHtyhd.Columns.Add("支払日", "PaymentDate")
-                    DgvHtyhd.Columns.Add("支払先名", "SupplierName")
-                    DgvHtyhd.Columns.Add("支払先", "PaymentDestination")
-                    DgvHtyhd.Columns.Add("買掛金額", "AccountsPayableAmount")
-                    DgvHtyhd.Columns.Add("支払金額計", "TotalPaymentAmount")
-                    DgvHtyhd.Columns.Add("買掛残高", "AccountsPayableBalance")
-                    DgvHtyhd.Columns.Add("備考", "Remarks")
-                Else
-                    DgvHtyhd.Columns.Add("支払番号", "支払番号")
-                    DgvHtyhd.Columns.Add("支払日", "支払日")
-                    DgvHtyhd.Columns.Add("支払先名", "支払先名")
-                    DgvHtyhd.Columns.Add("支払先", "支払先")
-                    DgvHtyhd.Columns.Add("買掛金額", "買掛金額")
-                    DgvHtyhd.Columns.Add("支払金額計", "支払金額計")
-                    DgvHtyhd.Columns.Add("買掛残高", "買掛残高")
-                    DgvHtyhd.Columns.Add("備考", "備考")
-                End If
-
-                DgvHtyhd.Columns("買掛金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                DgvHtyhd.Columns("支払金額計").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                DgvHtyhd.Columns("買掛残高").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-
-                For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-                    DgvHtyhd.Rows.Add()
-                    DgvHtyhd.Rows(index).Cells("支払番号").Value = ds.Tables(RS).Rows(index)("支払番号")
-                    DgvHtyhd.Rows(index).Cells("支払日").Value = ds.Tables(RS).Rows(index)("支払日")
-                    DgvHtyhd.Rows(index).Cells("支払先名").Value = ds.Tables(RS).Rows(index)("支払先名")
-                    DgvHtyhd.Rows(index).Cells("支払先").Value = ds.Tables(RS).Rows(index)("支払先")
-                    DgvHtyhd.Rows(index).Cells("買掛金額").Value = ds.Tables(RS).Rows(index)("買掛金額")
-                    DgvHtyhd.Rows(index).Cells("支払金額計").Value = ds.Tables(RS).Rows(index)("支払金額計")
-                    DgvHtyhd.Rows(index).Cells("買掛残高").Value = ds.Tables(RS).Rows(index)("買掛残高")
-                    DgvHtyhd.Rows(index).Cells("備考").Value = ds.Tables(RS).Rows(index)("備考")
-                Next
-
-            Catch ue As UsrDefException
-                ue.dspMsg()
-                Throw ue
-            Catch ex As Exception
-                'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-                Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
-            End Try
-        Else
-            Dim Sql As String = ""
-            Try
-                Sql += "SELECT "
-                Sql += "* "
-                Sql += "FROM "
-                Sql += "public"
-                Sql += "."
-                Sql += "t47_shrihd"
-                Sql += " ORDER BY "
-                Sql += "登録日 DESC"
-
-                Dim reccnt As Integer = 0
-                ds = _db.selectDB(Sql, RS, reccnt)
-
-                If frmC01F10_Login.loginValue.Language = "ENG" Then
-                    DgvHtyhd.Columns.Add("支払番号", "PaymentNumber")
-                    DgvHtyhd.Columns.Add("支払日", "PaymentDate")
-                    DgvHtyhd.Columns.Add("支払先名", "SupplierName")
-                    DgvHtyhd.Columns.Add("支払先", "PaymentDestination")
-                    DgvHtyhd.Columns.Add("買掛金額", "AccountsPayableAmount")
-                    DgvHtyhd.Columns.Add("支払金額計", "TotalPaymentAmount")
-                    DgvHtyhd.Columns.Add("買掛残高", "AccountsPayableBalance")
-                    DgvHtyhd.Columns.Add("備考", "Remarks")
-                Else
-                    DgvHtyhd.Columns.Add("支払番号", "支払番号")
-                    DgvHtyhd.Columns.Add("支払日", "支払日")
-                    DgvHtyhd.Columns.Add("支払先名", "支払先名")
-                    DgvHtyhd.Columns.Add("支払先", "支払先")
-                    DgvHtyhd.Columns.Add("買掛金額", "買掛金額")
-                    DgvHtyhd.Columns.Add("支払金額計", "支払金額計")
-                    DgvHtyhd.Columns.Add("買掛残高", "買掛残高")
-                    DgvHtyhd.Columns.Add("備考", "備考")
-                End If
-
-                DgvHtyhd.Columns("買掛金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                DgvHtyhd.Columns("支払金額計").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                DgvHtyhd.Columns("買掛残高").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-
-                For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-                    DgvHtyhd.Rows.Add()
-                    DgvHtyhd.Rows(index).Cells("支払番号").Value = ds.Tables(RS).Rows(index)("支払番号")
-                    DgvHtyhd.Rows(index).Cells("支払日").Value = ds.Tables(RS).Rows(index)("支払日")
-                    DgvHtyhd.Rows(index).Cells("支払先名").Value = ds.Tables(RS).Rows(index)("支払先名")
-                    DgvHtyhd.Rows(index).Cells("支払先").Value = ds.Tables(RS).Rows(index)("支払先")
-                    DgvHtyhd.Rows(index).Cells("買掛金額").Value = ds.Tables(RS).Rows(index)("買掛金額")
-                    DgvHtyhd.Rows(index).Cells("支払金額計").Value = ds.Tables(RS).Rows(index)("支払金額計")
-                    DgvHtyhd.Rows(index).Cells("買掛残高").Value = ds.Tables(RS).Rows(index)("買掛残高")
-                    DgvHtyhd.Rows(index).Cells("備考").Value = ds.Tables(RS).Rows(index)("備考")
-                Next
-
-            Catch ue As UsrDefException
-                ue.dspMsg()
-                Throw ue
-            Catch ex As Exception
-                'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-                Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
-            End Try
-        End If
-    End Sub
-    Private Sub MstHanyoue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    '画面表示時
+    Private Sub PaidList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If _status = "CANCEL" Then
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "CancelMode"
             Else
                 LblMode.Text = "取消モード"
@@ -205,17 +84,22 @@ Public Class PaidList
 
             BtnCancel.Visible = True
         Else
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "ViewMode"
             Else
                 LblMode.Text = "参照モード"
             End If
         End If
 
-        Dim Status As String = "EXCLUSION"
-        PurchaseListLoad(Status)
+        '検索（Date）の初期値
+        dtPaidDateSince.Value = DateAdd("d", CommonConst.SINCE_DEFAULT_DAY, DateTime.Today)
+        dtPaidDateUntil.Value = DateTime.Today
 
-        If frmC01F10_Login.loginValue.Language = "ENG" Then
+        'データ描画
+        setDgvHtyhd()
+
+        '翻訳
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
             LblConditions.Text = "ExtractionCondition"
             Label1.Text = "SupplierName"
             Label4.Text = "SupplierCode"
@@ -234,6 +118,7 @@ Public Class PaidList
         End If
     End Sub
 
+    '戻るボタン押下時
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
         Dim openForm As Form = Nothing
         openForm = New frmC01F30_Menu(_msgHd, _langHd, _db)
@@ -241,386 +126,97 @@ Public Class PaidList
         Me.Close()
     End Sub
 
-    Private Sub RbtnDetails_CheckedChanged(sender As Object, e As EventArgs) Handles RbtnDetails.CheckedChanged
-        DgvHtyhd.Rows.Clear()
-        DgvHtyhd.Columns.Clear()
 
-        If RbtnSlip.Checked Then
-            Dim Sql As String = ""
-            Sql += "SELECT "
-            Sql += " * "
-            Sql += "FROM "
-            Sql += "public"
-            Sql += "."
-            Sql += "t47_shrihd"
-            Sql += " WHERE "
-            Sql += "取消区分"
-            Sql += " = "
-            Sql += "'"
-            Sql += "0"
-            Sql += "'"
-
-            If OrderNo IsNot Nothing Then
-                For i As Integer = 0 To OrderNo.Length - 1
-                    If i = 0 Then
-                        Sql += " WHERE "
-                        Sql += "支払番号"
-                        Sql += " ILIKE "
-                        Sql += "'%"
-                        Sql += OrderNo(i)
-                        Sql += "%'"
-                    Else
-                        Sql += " OR "
-                        Sql += "支払番号"
-                        Sql += " ILIKE "
-                        Sql += "'%"
-                        Sql += OrderNo(i)
-                        Sql += "%'"
-                    End If
-                Next
-            End If
-            Sql += " ORDER BY "
-            Sql += "登録日 DESC"
-
-
-            Dim reccnt As Integer = 0
-            ds = _db.selectDB(Sql, RS, reccnt)
-
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
-                DgvHtyhd.Columns.Add("支払番号", "PaymentNumber")
-                DgvHtyhd.Columns.Add("支払日", "PaymentDate")
-                DgvHtyhd.Columns.Add("支払先名", "SupplierName")
-                DgvHtyhd.Columns.Add("支払先", "PaymentDestination")
-                DgvHtyhd.Columns.Add("買掛金額", "AccountsPayableAmount")
-                DgvHtyhd.Columns.Add("支払金額計", "TotalPaymentAmount")
-                DgvHtyhd.Columns.Add("買掛残高", "AccountsPayableBalance")
-                DgvHtyhd.Columns.Add("備考", "Remarks")
-            Else
-                DgvHtyhd.Columns.Add("支払番号", "支払番号")
-                DgvHtyhd.Columns.Add("支払日", "支払日")
-                DgvHtyhd.Columns.Add("支払先名", "支払先名")
-                DgvHtyhd.Columns.Add("支払先", "支払先")
-                DgvHtyhd.Columns.Add("買掛金額", "買掛金額")
-                DgvHtyhd.Columns.Add("支払金額計", "支払金額計")
-                DgvHtyhd.Columns.Add("買掛残高", "買掛残高")
-                DgvHtyhd.Columns.Add("備考", "備考")
-            End If
-
-            DgvHtyhd.Columns("買掛金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvHtyhd.Columns("支払金額計").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvHtyhd.Columns("買掛残高").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-
-            For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-                DgvHtyhd.Rows.Add()
-                DgvHtyhd.Rows(index).Cells("支払番号").Value = ds.Tables(RS).Rows(index)("支払番号")
-                DgvHtyhd.Rows(index).Cells("支払日").Value = ds.Tables(RS).Rows(index)("支払日")
-                DgvHtyhd.Rows(index).Cells("支払先名").Value = ds.Tables(RS).Rows(index)("支払先名")
-                DgvHtyhd.Rows(index).Cells("支払先").Value = ds.Tables(RS).Rows(index)("支払先")
-                DgvHtyhd.Rows(index).Cells("買掛金額").Value = ds.Tables(RS).Rows(index)("買掛金額")
-                DgvHtyhd.Rows(index).Cells("支払金額計").Value = ds.Tables(RS).Rows(index)("支払金額計")
-                DgvHtyhd.Rows(index).Cells("買掛残高").Value = ds.Tables(RS).Rows(index)("買掛残高")
-                DgvHtyhd.Rows(index).Cells("備考").Value = ds.Tables(RS).Rows(index)("備考")
-            Next
-        Else
-            Dim Sql As String = ""
-
-            Sql += "SELECT "
-            Sql += " * "
-            Sql += "FROM "
-            Sql += "public"
-            Sql += "."
-            Sql += "t49_shrikshihd"
-
-            If OrderNo IsNot Nothing Then
-                For i As Integer = 0 To OrderNo.Length - 1
-                    If i = 0 Then
-                        Sql += " WHERE "
-                        Sql += "支払番号"
-                        Sql += " ILIKE "
-                        Sql += "'%"
-                        Sql += OrderNo(i)
-                        Sql += "%'"
-                    Else
-                        Sql += " OR "
-                        Sql += "支払番号"
-                        Sql += " ILIKE "
-                        Sql += "'%"
-                        Sql += OrderNo(i)
-                        Sql += "%'"
-                    End If
-                Next
-            End If
-            Sql += " ORDER BY "
-            Sql += "更新日 DESC"
-
-            Dim reccnt As Integer = 0
-            ds = _db.selectDB(Sql, RS, reccnt)
-
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
-                DgvHtyhd.Columns.Add("支払番号", "PaymentNumber")
-                DgvHtyhd.Columns.Add("買掛番号", "AccountsPayableNumber")
-                DgvHtyhd.Columns.Add("支払先名", "SupplierName")
-                DgvHtyhd.Columns.Add("支払金額", "PaymentAmount")
-                DgvHtyhd.Columns.Add("支払日", "PaymentDate")
-                DgvHtyhd.Columns.Add("備考", "Remarks")
-            Else
-                DgvHtyhd.Columns.Add("支払番号", "支払番号")
-                DgvHtyhd.Columns.Add("買掛番号", "買掛番号")
-                DgvHtyhd.Columns.Add("支払先名", "支払先名")
-                DgvHtyhd.Columns.Add("支払金額", "支払金額")
-                DgvHtyhd.Columns.Add("支払日", "支払日")
-                DgvHtyhd.Columns.Add("備考", "備考")
-            End If
-
-
-
-            DgvHtyhd.Columns("支払金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-
-            For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-                DgvHtyhd.Rows.Add()
-                DgvHtyhd.Rows(index).Cells("支払番号").Value = ds.Tables(RS).Rows(index)("支払番号")
-                DgvHtyhd.Rows(index).Cells("買掛番号").Value = ds.Tables(RS).Rows(index)("買掛番号")
-                DgvHtyhd.Rows(index).Cells("支払先名").Value = ds.Tables(RS).Rows(index)("支払先名")
-                DgvHtyhd.Rows(index).Cells("支払金額").Value = ds.Tables(RS).Rows(index)("支払消込額計")
-                DgvHtyhd.Rows(index).Cells("支払日").Value = ds.Tables(RS).Rows(index)("支払日")
-                DgvHtyhd.Rows(index).Cells("備考").Value = ds.Tables(RS).Rows(index)("備考")
-            Next
-        End If
-    End Sub
-
-    Private Sub ChkCancelData_CheckedChanged(sender As Object, e As EventArgs) Handles ChkCancelData.CheckedChanged
-        DgvHtyhd.Rows.Clear()
-        DgvHtyhd.Columns.Clear()
-
-        If ChkCancelData.Checked = False Then
-            Dim Status As String = "EXCLUSION"
-            PurchaseListLoad(Status)
-        Else
-            PurchaseListLoad()
-        End If
-    End Sub
-
-    Private Sub BtnPurchaseSearch_Click(sender As Object, e As EventArgs) Handles BtnPaymentSearch.Click
-        DgvHtyhd.Rows.Clear()
-        DgvHtyhd.Columns.Clear()
-
-        Dim count As Integer = 0
+    'DgvHtyhd内を再描画
+    Private Sub setDgvHtyhd()
+        clearDGV() 'テーブルクリア
         Dim Sql As String = ""
+
+        Sql += searchConditions() '抽出条件取得
+        Sql += viewFormat() '表示形式条件
+
+        Sql += " ORDER BY "
+        Sql += "更新日 DESC"
+
         Try
-            Sql += "SELECT "
-            Sql += "* "
-            Sql += "FROM "
-            Sql += "public"
-            Sql += "."
-            Sql += "t47_shrihd"
-            If TxtSupplierName.Text = "" Then
-            Else
-                Sql += " WHERE "
-                Sql += "支払先名"
-                Sql += " ILIKE "
-                Sql += "'%"
-                Sql += TxtSupplierName.Text
-                Sql += "%'"
-                count += 1
-            End If
-            If TxtSupplierCode.Text = "" Then
-            Else
-                If count > 0 Then
-                    Sql += " AND "
-                    Sql += "支払先コード"
-                    Sql += " ILIKE "
-                    Sql += "'%"
-                    Sql += TxtSupplierCode.Text
-                    Sql += "%'"
-                Else
-                    Sql += " WHERE "
-                    Sql += "支払先コード"
-                    Sql += " ILIKE "
-                    Sql += "'%"
-                    Sql += TxtSupplierCode.Text
-                    Sql += "%'"
-                    count += 1
-                End If
-            End If
-            If TxtPaidDate1.Text = "" Then
-                If TxtPaidDate2.Text = "" Then
-                Else
-                    If count > 0 Then
-                        Sql += " AND "
-                        Sql += "支払日"
-                        Sql += " <=  "
-                        Sql += "'"
-                        Sql += TxtPaidDate2.Text
-                        Sql += "'"
-                    Else
-                        Sql += " WHERE "
-                        Sql += "支払日"
-                        Sql += " <=  "
-                        Sql += "'"
-                        Sql += TxtPaidDate2.Text
-                        Sql += "'"
-                        count += 1
-                    End If
-                End If
-            Else
-                If TxtPaidDate2.Text = "" Then
-                    If count > 0 Then
-                        Sql += " AND "
-                        Sql += "支払日"
-                        Sql += " >=  "
-                        Sql += "'"
-                        Sql += TxtPaidDate1.Text
-                        Sql += "'"
-                    Else
-                        Sql += " WHERE "
-                        Sql += "支払日"
-                        Sql += " >=  "
-                        Sql += "'"
-                        Sql += TxtPaidDate1.Text
-                        Sql += "'"
-                        count += 1
-                    End If
-                Else
-                    If count > 0 Then
-                        Sql += " AND "
-                        Sql += "支払日"
-                        Sql += " >=  "
-                        Sql += "'"
-                        Sql += TxtPaidDate1.Text
-                        Sql += "' "
-                        Sql += "AND  "
-                        Sql += "支払日"
-                        Sql += " <=  "
-                        Sql += "'"
-                        Sql += TxtPaidDate2.Text
-                        Sql += "'"
-                    Else
-                        Sql += " WHERE "
-                        Sql += "支払日"
-                        Sql += " >=  "
-                        Sql += "'"
-                        Sql += TxtPaidDate1.Text
-                        Sql += "' "
-                        Sql += "AND  "
-                        Sql += "支払日"
-                        Sql += " <=  "
-                        Sql += "'"
-                        Sql += TxtPaidDate2.Text
-                        Sql += "'"
-                        count += 1
-                    End If
-                End If
-            End If
-            If TxtPaidNo1.Text = "" Then
-                If TxtPaidNo2.Text = "" Then
-                Else
-                    If count > 0 Then
-                        Sql += " AND "
-                        Sql += "支払番号"
-                        Sql += " <=  "
-                        Sql += "'"
-                        Sql += TxtPaidNo2.Text
-                        Sql += "'"
-                    Else
-                        Sql += " WHERE "
-                        Sql += "支払番号"
-                        Sql += " <=  "
-                        Sql += "'"
-                        Sql += TxtPaidNo2.Text
-                        Sql += "'"
-                        count += 1
-                    End If
-                End If
-            Else
-                If TxtPaidNo2.Text = "" Then
-                    If count > 0 Then
-                        Sql += " AND "
-                        Sql += "支払番号"
-                        Sql += " >=  "
-                        Sql += "'"
-                        Sql += TxtPaidNo1.Text
-                        Sql += "'"
-                    Else
-                        Sql += " WHERE "
-                        Sql += "支払番号"
-                        Sql += " >=  "
-                        Sql += "'"
-                        Sql += TxtPaidNo1.Text
-                        Sql += "'"
-                        count += 1
-                    End If
-                Else
-                    If count > 0 Then
-                        Sql += " AND "
-                        Sql += "支払番号"
-                        Sql += " >= "
-                        Sql += "'"
-                        Sql += TxtPaidNo1.Text
-                        Sql += "' "
-                        Sql += "AND "
-                        Sql += "支払番号"
-                        Sql += " <=  "
-                        Sql += "'"
-                        Sql += TxtPaidNo2.Text
-                        Sql += "'"
-                    Else
-                        Sql += " WHERE "
-                        Sql += "支払番号"
-                        Sql += " >= "
-                        Sql += "'"
-                        Sql += TxtPaidNo1.Text
-                        Sql += "' "
-                        Sql += "AND  "
-                        Sql += "支払番号"
-                        Sql += " <= "
-                        Sql += "'"
-                        Sql += TxtPaidNo2.Text
-                        Sql += "'"
-                        count += 1
-                    End If
-                End If
-            End If
-            Sql += " ORDER BY "
-            Sql += "登録日 DESC"
+            '伝票単位
+            If RbtnSlip.Checked Then
 
-            Dim reccnt As Integer = 0
-            Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
+                ds = getDsData("t47_shrihd", Sql)
 
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
-                DgvHtyhd.Columns.Add("支払番号", "PaymentNumber")
-                DgvHtyhd.Columns.Add("支払日", "PaymentDate")
-                DgvHtyhd.Columns.Add("支払先名", "SupplierName")
-                DgvHtyhd.Columns.Add("支払先", "PaymentDestination")
-                DgvHtyhd.Columns.Add("買掛金額", "AccountsPayableAmount")
-                DgvHtyhd.Columns.Add("支払金額計", "TotalPaymentAmount")
-                DgvHtyhd.Columns.Add("買掛残高", "AccountsPayableBalance")
-                DgvHtyhd.Columns.Add("備考", "Remarks")
-            Else
-                DgvHtyhd.Columns.Add("支払番号", "支払番号")
-                DgvHtyhd.Columns.Add("支払日", "支払日")
-                DgvHtyhd.Columns.Add("支払先名", "支払先名")
-                DgvHtyhd.Columns.Add("支払先", "支払先")
-                DgvHtyhd.Columns.Add("買掛金額", "買掛金額")
-                DgvHtyhd.Columns.Add("支払金額計", "支払金額計")
-                DgvHtyhd.Columns.Add("買掛残高", "買掛残高")
-                DgvHtyhd.Columns.Add("備考", "備考")
+                '英語の表記
+                If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+                    DgvHtyhd.Columns.Add("取消", "Cancel")
+                    DgvHtyhd.Columns.Add("支払番号", "PaymentNumber")
+                    DgvHtyhd.Columns.Add("支払日", "PaymentDate")
+                    DgvHtyhd.Columns.Add("支払先名", "SupplierName")
+                    DgvHtyhd.Columns.Add("支払先", "PaymentDestination")
+                    DgvHtyhd.Columns.Add("支払金額計", "TotalPaymentAmount")
+                    DgvHtyhd.Columns.Add("更新日", "UpdateDate")
+                    DgvHtyhd.Columns.Add("備考", "Remarks")
+                Else
+                    DgvHtyhd.Columns.Add("取消", "取消")
+                    DgvHtyhd.Columns.Add("支払番号", "支払番号")
+                    DgvHtyhd.Columns.Add("支払日", "支払日")
+                    DgvHtyhd.Columns.Add("支払先名", "支払先名")
+                    DgvHtyhd.Columns.Add("支払先", "支払先")
+                    DgvHtyhd.Columns.Add("支払金額計", "支払金額計")
+                    DgvHtyhd.Columns.Add("更新日", "更新日")
+                    DgvHtyhd.Columns.Add("備考", "備考")
+                End If
+
+                '伝票単位時のセル書式
+                DgvHtyhd.Columns("支払金額計").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+                For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+                    DgvHtyhd.Rows.Add()
+                    DgvHtyhd.Rows(index).Cells("取消").Value = getDelKbnTxt(ds.Tables(RS).Rows(index)("取消区分"))
+                    DgvHtyhd.Rows(index).Cells("支払番号").Value = ds.Tables(RS).Rows(index)("支払番号")
+                    DgvHtyhd.Rows(index).Cells("支払日").Value = ds.Tables(RS).Rows(index)("支払日")
+                    DgvHtyhd.Rows(index).Cells("支払先名").Value = ds.Tables(RS).Rows(index)("支払先名")
+                    DgvHtyhd.Rows(index).Cells("支払先").Value = ds.Tables(RS).Rows(index)("支払先")
+                    DgvHtyhd.Rows(index).Cells("支払金額計").Value = ds.Tables(RS).Rows(index)("支払金額計")
+                    DgvHtyhd.Rows(index).Cells("更新日").Value = ds.Tables(RS).Rows(index)("更新日")
+                    DgvHtyhd.Rows(index).Cells("備考").Value = ds.Tables(RS).Rows(index)("備考")
+                Next
+
+            Else '明細単位
+
+                ds = getDsData("t49_shrikshihd", Sql)
+
+
+                '英語の表記
+                If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+                    DgvHtyhd.Columns.Add("取消", "Cancel")
+                    DgvHtyhd.Columns.Add("支払番号", "PaymentNumber")
+                    DgvHtyhd.Columns.Add("買掛番号", "AccountsPayableNumber")
+                    DgvHtyhd.Columns.Add("支払日", "PaymentDate")
+                    DgvHtyhd.Columns.Add("支払先名", "SupplierName")
+                    DgvHtyhd.Columns.Add("支払金額計", "TotalPaymentAmount")
+                    DgvHtyhd.Columns.Add("備考", "Remarks")
+                Else
+                    DgvHtyhd.Columns.Add("取消", "取消")
+                    DgvHtyhd.Columns.Add("支払番号", "支払番号")
+                    DgvHtyhd.Columns.Add("支払日", "支払日")
+                    DgvHtyhd.Columns.Add("支払先名", "支払先名")
+                    DgvHtyhd.Columns.Add("支払金額計", "支払金額計")
+                    DgvHtyhd.Columns.Add("備考", "備考")
+                End If
+
+                '伝票単位時のセル書式
+                DgvHtyhd.Columns("支払金額計").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+                For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+                    DgvHtyhd.Rows.Add()
+                    DgvHtyhd.Rows(index).Cells("取消").Value = getDelKbnTxt(ds.Tables(RS).Rows(index)("取消区分"))
+                    DgvHtyhd.Rows(index).Cells("支払番号").Value = ds.Tables(RS).Rows(index)("支払番号")
+                    DgvHtyhd.Rows(index).Cells("支払日").Value = ds.Tables(RS).Rows(index)("支払日")
+                    DgvHtyhd.Rows(index).Cells("支払先名").Value = ds.Tables(RS).Rows(index)("支払先名")
+                    DgvHtyhd.Rows(index).Cells("支払金額計").Value = ds.Tables(RS).Rows(index)("支払消込額計")
+                    DgvHtyhd.Rows(index).Cells("備考").Value = ds.Tables(RS).Rows(index)("備考")
+                Next
+
             End If
-
-            DgvHtyhd.Columns("買掛金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvHtyhd.Columns("支払金額計").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvHtyhd.Columns("買掛残高").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-
-            For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-                DgvHtyhd.Rows.Add()
-                DgvHtyhd.Rows(index).Cells("支払番号").Value = ds.Tables(RS).Rows(index)("支払番号")
-                DgvHtyhd.Rows(index).Cells("支払日").Value = ds.Tables(RS).Rows(index)("支払日")
-                DgvHtyhd.Rows(index).Cells("支払先名").Value = ds.Tables(RS).Rows(index)("支払先名")
-                DgvHtyhd.Rows(index).Cells("支払先").Value = ds.Tables(RS).Rows(index)("支払先")
-                DgvHtyhd.Rows(index).Cells("買掛金額").Value = ds.Tables(RS).Rows(index)("買掛金額")
-                DgvHtyhd.Rows(index).Cells("支払金額計").Value = ds.Tables(RS).Rows(index)("支払金額計")
-                DgvHtyhd.Rows(index).Cells("買掛残高").Value = ds.Tables(RS).Rows(index)("買掛残高")
-                DgvHtyhd.Rows(index).Cells("備考").Value = ds.Tables(RS).Rows(index)("備考")
-            Next
 
         Catch ue As UsrDefException
             ue.dspMsg()
@@ -629,114 +225,319 @@ Public Class PaidList
             'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
             Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
         End Try
+
+    End Sub
+
+    '表示形式を切り替えたら
+    Private Sub RbtnDetails_CheckedChanged(sender As Object, e As EventArgs) Handles RbtnDetails.CheckedChanged
+        setDgvHtyhd() '一覧再取得
+    End Sub
+
+    '検索ボタンをクリックしたら
+    Private Sub ChkCancelData_CheckedChanged(sender As Object, e As EventArgs) Handles ChkCancelData.CheckedChanged
+        setDgvHtyhd() '一覧再取得
+    End Sub
+
+    '「取消データを含める」変更イベント取得時
+    Private Sub BtnPurchaseSearch_Click(sender As Object, e As EventArgs) Handles BtnPaymentSearch.Click
+        setDgvHtyhd() '一覧再取得
     End Sub
 
 
+    '支払取消処理
     Private Sub BtnPurchaseCancel_Click(sender As Object, e As EventArgs) Handles BtnCancel.Click
-        Dim dtNow As DateTime = DateTime.Now
-        Dim Sql1 As String = ""
-        Sql1 = ""
-        Sql1 += "UPDATE "
-        Sql1 += "Public."
-        Sql1 += "t47_shrihd "
-        Sql1 += "SET "
 
-        Sql1 += "取消区分"
-        Sql1 += " = '"
-        Sql1 += "1"
-        Sql1 += "', "
-        Sql1 += "取消日"
-        Sql1 += " = '"
-        Sql1 += dtNow
-        Sql1 += "', "
-        Sql1 += "更新日"
-        Sql1 += " = '"
-        Sql1 += dtNow
-        Sql1 += "', "
-        Sql1 += "更新者"
-        Sql1 += " = '"
-        Sql1 += frmC01F10_Login.loginValue.TantoNM
-        Sql1 += " ' "
+        '明細表示時は取消操作不可能
+        If RbtnDetails.Checked Then
 
-        Sql1 += "WHERE"
-        Sql1 += " 会社コード"
-        Sql1 += "='"
-        Sql1 += frmC01F10_Login.loginValue.BumonNM
-        Sql1 += "'"
-        Sql1 += " AND"
-        Sql1 += " 支払番号"
-        Sql1 += "='"
-        Sql1 += DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("支払番号").Value
-        Sql1 += "' "
+            '操作できないアラートを出す
+            _msgHd.dspMSG("NonAction", frmC01F10_Login.loginValue.Language)
+            Return
 
-        Sql1 += "RETURNING 会社コード"
-        Sql1 += ", "
-        Sql1 += "支払番号"
-        Sql1 += ", "
-        Sql1 += "支払日"
-        Sql1 += ", "
-        Sql1 += "支払先コード"
-        Sql1 += ", "
-        Sql1 += "支払先名"
-        Sql1 += ", "
-        Sql1 += "買掛金額"
-        Sql1 += ", "
-        Sql1 += "支払金額計"
-        Sql1 += ", "
-        Sql1 += "買掛残高"
-        Sql1 += ", "
-        Sql1 += "備考"
-        Sql1 += ", "
-        Sql1 += "取消日"
-        Sql1 += ", "
-        Sql1 += "取消区分"
-        Sql1 += ", "
-        Sql1 += "登録日"
-        Sql1 += ", "
-        Sql1 += "更新者"
-        Sql1 += ", "
-        Sql1 += "更新日"
-        Sql1 += ", "
-        Sql1 += "支払先"
-
-        If frmC01F10_Login.loginValue.Language = "ENG" Then
-            Dim result As DialogResult = MessageBox.Show("Would you like to cancel the Paymnt?",
-                                             "Question",
-                                             MessageBoxButtons.YesNoCancel,
-                                             MessageBoxIcon.Exclamation,
-                                             MessageBoxDefaultButton.Button2)
-
-            If result = DialogResult.Yes Then
-                _db.executeDB(Sql1)
-                DgvHtyhd.Rows.Clear()
-                DgvHtyhd.Columns.Clear()
-                Dim Status As String = "EXCLUSION"
-                PurchaseListLoad(Status)
-            ElseIf result = DialogResult.No Then
-
-            ElseIf result = DialogResult.Cancel Then
-
-            End If
-        Else
-            Dim result As DialogResult = MessageBox.Show("支払情報を取り消しますか？",
-                                             "質問",
-                                             MessageBoxButtons.YesNoCancel,
-                                             MessageBoxIcon.Exclamation,
-                                             MessageBoxDefaultButton.Button2)
-
-            If result = DialogResult.Yes Then
-                _db.executeDB(Sql1)
-                DgvHtyhd.Rows.Clear()
-                DgvHtyhd.Columns.Clear()
-                Dim Status As String = "EXCLUSION"
-                PurchaseListLoad(Status)
-            ElseIf result = DialogResult.No Then
-
-            ElseIf result = DialogResult.Cancel Then
-
-            End If
         End If
 
+        Try
+
+            '取消確認のアラート
+            Dim result As DialogResult = _msgHd.dspMSG("confirmCancel", frmC01F10_Login.loginValue.Language)
+
+            If result = DialogResult.Yes Then
+                updateData() 'データ更新
+            End If
+
+        Catch ex As Exception
+
+            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
+            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
+
+        End Try
+
 
     End Sub
+
+    '選択データをもとに以下テーブル更新
+    't47_shrihd, t49_shrikshihd, t46_kikehd
+    Private Sub updateData()
+        Dim dtNow As DateTime = DateTime.Now
+        Dim Sql As String = ""
+        Dim ds As DataSet
+
+        Sql = " AND"
+        Sql += " 支払番号"
+        Sql += "='"
+        Sql += DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("支払番号").Value
+        Sql += "' "
+
+        '画面を開いた時から対象データに対して更新がされていないかどうか確認
+        ds = getDsData("t47_shrihd", Sql)
+
+        If ds.Tables(RS).Rows(0)("更新日") = DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("更新日").Value Then
+
+            Sql = "UPDATE "
+            Sql += "Public."
+            Sql += "t47_shrihd "
+            Sql += "SET "
+
+            Sql += "取消区分 = '" & CommonConst.CANCEL_KBN_DISABLED & "'"
+            Sql += ", "
+            Sql += "取消日"
+            Sql += " = '"
+            Sql += dtNow
+            Sql += "', "
+            Sql += "更新者"
+            Sql += " = '"
+            Sql += frmC01F10_Login.loginValue.TantoNM
+            Sql += "', "
+            Sql += "更新日"
+            Sql += " = '"
+            Sql += dtNow
+            Sql += "' "
+
+            Sql += "WHERE"
+            Sql += " 会社コード"
+            Sql += "='"
+            Sql += frmC01F10_Login.loginValue.BumonNM
+            Sql += "'"
+            Sql += " AND"
+            Sql += " 支払番号"
+            Sql += "='"
+            Sql += DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("支払番号").Value
+            Sql += "' "
+
+            '支払基本を更新
+            _db.executeDB(Sql)
+
+
+            Sql = " AND"
+            Sql += " 支払番号"
+            Sql += "='"
+            Sql += DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("支払番号").Value
+            Sql += "' "
+
+            '支払基本から支払金額計を取得
+            Dim dstShrihd As DataSet = getDsData("t47_shrihd", Sql)
+            Dim strSiharaiGaku As Decimal = dstShrihd.Tables(RS).Rows(0)("支払金額計")
+
+
+            Sql = " AND"
+            Sql += " 支払番号"
+            Sql += "='"
+            Sql += DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("支払番号").Value
+            Sql += "' "
+
+            '支払消込から買掛番号を取得
+            Dim dsShrikshihd As DataSet = getDsData("t49_shrikshihd", Sql)
+
+
+            Sql = " AND"
+            Sql += " 買掛番号"
+            Sql += "='"
+            Sql += dsShrikshihd.Tables(RS).Rows(0)("買掛番号")
+            Sql += "' "
+
+            '買掛基本から発注番号を取得
+            Dim dsKikehd As DataSet = getDsData("t46_kikehd", Sql)
+
+            Dim decKaikakeZan As Decimal = dsKikehd.Tables(RS).Rows(0)("買掛残高") + strSiharaiGaku
+            Dim decSiharaiKei As Decimal = dsKikehd.Tables(RS).Rows(0)("支払金額計") - strSiharaiGaku
+
+
+            Sql = "UPDATE "
+            Sql += "Public.t49_shrikshihd "
+            Sql += "SET "
+
+            Sql += "取消区分 = '" & CommonConst.CANCEL_KBN_DISABLED & "'"
+            Sql += ", "
+            Sql += "取消日"
+            Sql += " = '"
+            Sql += dtNow
+            Sql += "', "
+            Sql += "更新者"
+            Sql += " = '"
+            Sql += frmC01F10_Login.loginValue.TantoNM
+            Sql += "', "
+            Sql += "更新日"
+            Sql += " = '"
+            Sql += dtNow
+            Sql += "' "
+
+            Sql += "WHERE"
+            Sql += " 会社コード"
+            Sql += "='"
+            Sql += frmC01F10_Login.loginValue.BumonNM
+            Sql += "'"
+            Sql += " AND"
+            Sql += " 支払番号"
+            Sql += "='"
+            Sql += DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("支払番号").Value
+            Sql += "' "
+
+            '支払消込基本を更新
+            _db.executeDB(Sql)
+
+            Sql = "UPDATE "
+            Sql += "Public.t46_kikehd "
+            Sql += "SET "
+
+            Sql += "買掛残高"
+            Sql += " = '"
+            Sql += decKaikakeZan.ToString '買掛残高を増やす
+            Sql += "', "
+            Sql += "支払金額計"
+            Sql += " = '"
+            Sql += decSiharaiKei.ToString '支払金額計を減らす
+            Sql += "', "
+            Sql += "更新者"
+            Sql += " = '"
+            Sql += frmC01F10_Login.loginValue.TantoNM
+            Sql += "' "
+
+            Sql += "WHERE"
+            Sql += " 会社コード"
+            Sql += "='"
+            Sql += frmC01F10_Login.loginValue.BumonNM
+            Sql += "'"
+            Sql += " AND"
+            Sql += " 買掛番号"
+            Sql += "='"
+            Sql += dsShrikshihd.Tables(RS).Rows(0)("買掛番号")
+            Sql += "' "
+
+            '買掛基本を更新
+            _db.executeDB(Sql)
+
+            setDgvHtyhd()
+
+        Else
+
+            '画面を開いたときの日時とデータの日時が異なっていた場合
+            'データが誰かに変更された旨を伝える
+            _msgHd.dspMSG("chkData", frmC01F10_Login.loginValue.Language)
+
+            '表示データを更新
+            setDgvHtyhd()
+
+        End If
+
+    End Sub
+
+
+    'テーブルをクリア
+    Private Sub clearDGV()
+        DgvHtyhd.Rows.Clear()
+        DgvHtyhd.Columns.Clear()
+    End Sub
+
+    '抽出条件取得
+    Private Function searchConditions() As String
+        Dim Sql As String = ""
+
+        '抽出条件
+        Dim customerName As String = TxtSupplierName.Text
+        Dim customerCode As String = TxtSupplierCode.Text
+        Dim sinceDate As String = dtPaidDateSince.Text
+        Dim untilDate As String = dtPaidDateUntil.Text
+        Dim sinceNum As String = TxtPaidNoSince.Text
+        Dim untilNum As String = TxtPaidNoUntil.Text
+
+        If customerName <> Nothing Then
+            Sql += " AND "
+            Sql += " 支払先名 ILIKE '%" & customerName & "%' "
+        End If
+
+        If customerCode <> Nothing Then
+            Sql += " AND "
+            Sql += " 支払先コード ILIKE '%" & customerCode & "%' "
+        End If
+
+        If sinceDate <> Nothing Then
+            Sql += " AND "
+            Sql += " 支払日 >= '" & sinceDate & "'"
+        End If
+        If untilDate <> Nothing Then
+            Sql += " AND "
+            Sql += " 支払日 <= '" & untilDate & "'"
+        End If
+
+        If sinceNum <> Nothing Then
+            Sql += " AND "
+            Sql += " 支払番号 >= '" & sinceNum & "' "
+        End If
+        If untilNum <> Nothing Then
+            Sql += " AND "
+            Sql += " 支払番号 <= '" & untilNum & "' "
+        End If
+
+        Return Sql
+
+    End Function
+
+    '表示形式条件
+    Private Function viewFormat() As String
+        Dim Sql As String = ""
+
+        '取消データを含めない場合
+        If ChkCancelData.Checked = False Then
+            Sql += " AND "
+            Sql += " 取消区分 = 0 "
+        End If
+
+        Return Sql
+
+    End Function
+
+    'param1：String テーブル名
+    'param2：String 詳細条件
+    'Return: DataSet
+    Private Function getDsData(ByVal tableName As String, Optional ByRef txtParam As String = "") As DataSet
+        Dim reccnt As Integer = 0 'DB用（デフォルト）
+        Dim Sql As String = ""
+
+        Sql += "SELECT"
+        Sql += " *"
+        Sql += " FROM "
+
+        Sql += "public." & tableName
+        Sql += " WHERE "
+        Sql += "会社コード"
+        Sql += " ILIKE  "
+        Sql += "'" & frmC01F10_Login.loginValue.BumonNM & "'"
+        Sql += txtParam
+
+        Return _db.selectDB(Sql, RS, reccnt)
+    End Function
+
+    '取消区分の表示テキストを返す
+    'param1：String テーブル名
+    'param2：String 詳細条件
+    'Return: DataSet
+    Public Function getDelKbnTxt(ByVal delKbn As String) As String
+        '区分の値を取得し、使用言語に応じて値を返却
+
+        Dim reDelKbn As String = IIf(delKbn = CommonConst.CANCEL_KBN_DISABLED,
+                                    IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_JPN, CommonConst.CANCEL_KBN_JPN_TXT, CommonConst.CANCEL_KBN_ENG_TXT),
+                                    "")
+        Return reDelKbn
+    End Function
+
 End Class

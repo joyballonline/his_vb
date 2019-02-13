@@ -22,13 +22,13 @@ Partial Class Payment
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle36 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle37 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle38 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle39 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle40 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle41 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle42 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.BtnDelete = New System.Windows.Forms.Button()
         Me.DgvHistory = New System.Windows.Forms.DataGridView()
         Me.No = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -39,29 +39,29 @@ Partial Class Payment
         Me.支払種目 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.支払済支払金額計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.備考 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DgvDeposit = New System.Windows.Forms.DataGridView()
+        Me.DgvPayment = New System.Windows.Forms.DataGridView()
         Me.行番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.入力支払金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LblNo3 = New System.Windows.Forms.Label()
-        Me.TxtCount3 = New System.Windows.Forms.TextBox()
+        Me.TxtKikeCount = New System.Windows.Forms.TextBox()
         Me.BtnAdd = New System.Windows.Forms.Button()
         Me.BtnCal = New System.Windows.Forms.Button()
         Me.BtnRegist = New System.Windows.Forms.Button()
         Me.BtnBack = New System.Windows.Forms.Button()
         Me.LblNo1 = New System.Windows.Forms.Label()
-        Me.TxtCount1 = New System.Windows.Forms.TextBox()
+        Me.TxtHistoryCount = New System.Windows.Forms.TextBox()
         Me.DtpDepositDate = New System.Windows.Forms.DateTimePicker()
         Me.LblRemarks = New System.Windows.Forms.Label()
         Me.TxtRemarks = New System.Windows.Forms.TextBox()
         Me.LblDepositDate = New System.Windows.Forms.Label()
         Me.LblNo2 = New System.Windows.Forms.Label()
-        Me.TxtCount2 = New System.Windows.Forms.TextBox()
-        Me.DgvCustomer = New System.Windows.Forms.DataGridView()
+        Me.TxtPaymentCount = New System.Windows.Forms.TextBox()
+        Me.DgvSupplier = New System.Windows.Forms.DataGridView()
         Me.支払先 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.買掛残高 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LblAPInfo = New System.Windows.Forms.Label()
         Me.LblPayment = New System.Windows.Forms.Label()
-        Me.DgvBillingInfo = New System.Windows.Forms.DataGridView()
+        Me.DgvKikeInfo = New System.Windows.Forms.DataGridView()
         Me.InfoNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.買掛情報買掛番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.買掛日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -72,9 +72,9 @@ Partial Class Payment
         Me.LblHistory = New System.Windows.Forms.Label()
         Me.LblMode = New System.Windows.Forms.Label()
         CType(Me.DgvHistory, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DgvDeposit, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DgvCustomer, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DgvBillingInfo, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DgvPayment, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DgvSupplier, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DgvKikeInfo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'BtnDelete
@@ -139,8 +139,8 @@ Partial Class Payment
         '
         '支払済支払金額計
         '
-        DataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.支払済支払金額計.DefaultCellStyle = DataGridViewCellStyle36
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.支払済支払金額計.DefaultCellStyle = DataGridViewCellStyle1
         Me.支払済支払金額計.HeaderText = "支払金額計"
         Me.支払済支払金額計.Name = "支払済支払金額計"
         Me.支払済支払金額計.Width = 200
@@ -151,18 +151,18 @@ Partial Class Payment
         Me.備考.Name = "備考"
         Me.備考.Width = 200
         '
-        'DgvDeposit
+        'DgvPayment
         '
-        Me.DgvDeposit.AllowUserToAddRows = False
-        Me.DgvDeposit.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvDeposit.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.行番号, Me.入力支払金額})
-        Me.DgvDeposit.Location = New System.Drawing.Point(12, 229)
-        Me.DgvDeposit.Name = "DgvDeposit"
-        Me.DgvDeposit.RowHeadersVisible = False
-        Me.DgvDeposit.RowTemplate.Height = 21
-        Me.DgvDeposit.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
-        Me.DgvDeposit.Size = New System.Drawing.Size(1327, 100)
-        Me.DgvDeposit.TabIndex = 5
+        Me.DgvPayment.AllowUserToAddRows = False
+        Me.DgvPayment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DgvPayment.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.行番号, Me.入力支払金額})
+        Me.DgvPayment.Location = New System.Drawing.Point(12, 229)
+        Me.DgvPayment.Name = "DgvPayment"
+        Me.DgvPayment.RowHeadersVisible = False
+        Me.DgvPayment.RowTemplate.Height = 21
+        Me.DgvPayment.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
+        Me.DgvPayment.Size = New System.Drawing.Size(1327, 100)
+        Me.DgvPayment.TabIndex = 5
         '
         '行番号
         '
@@ -172,8 +172,8 @@ Partial Class Payment
         '
         '入力支払金額
         '
-        DataGridViewCellStyle37.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.入力支払金額.DefaultCellStyle = DataGridViewCellStyle37
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.入力支払金額.DefaultCellStyle = DataGridViewCellStyle2
         Me.入力支払金額.HeaderText = "支払金額"
         Me.入力支払金額.Name = "入力支払金額"
         '
@@ -188,16 +188,16 @@ Partial Class Payment
         Me.LblNo3.Text = "件"
         Me.LblNo3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'TxtCount3
+        'TxtKikeCount
         '
-        Me.TxtCount3.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.TxtCount3.Enabled = False
-        Me.TxtCount3.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtCount3.Location = New System.Drawing.Point(1273, 335)
-        Me.TxtCount3.Name = "TxtCount3"
-        Me.TxtCount3.Size = New System.Drawing.Size(38, 22)
-        Me.TxtCount3.TabIndex = 317
-        Me.TxtCount3.TabStop = False
+        Me.TxtKikeCount.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TxtKikeCount.Enabled = False
+        Me.TxtKikeCount.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtKikeCount.Location = New System.Drawing.Point(1273, 335)
+        Me.TxtKikeCount.Name = "TxtKikeCount"
+        Me.TxtKikeCount.Size = New System.Drawing.Size(38, 22)
+        Me.TxtKikeCount.TabIndex = 317
+        Me.TxtKikeCount.TabStop = False
         '
         'BtnAdd
         '
@@ -250,16 +250,16 @@ Partial Class Payment
         Me.LblNo1.Text = "件"
         Me.LblNo1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'TxtCount1
+        'TxtHistoryCount
         '
-        Me.TxtCount1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.TxtCount1.Enabled = False
-        Me.TxtCount1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtCount1.Location = New System.Drawing.Point(1273, 65)
-        Me.TxtCount1.Name = "TxtCount1"
-        Me.TxtCount1.Size = New System.Drawing.Size(38, 22)
-        Me.TxtCount1.TabIndex = 312
-        Me.TxtCount1.TabStop = False
+        Me.TxtHistoryCount.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TxtHistoryCount.Enabled = False
+        Me.TxtHistoryCount.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtHistoryCount.Location = New System.Drawing.Point(1273, 65)
+        Me.TxtHistoryCount.Name = "TxtHistoryCount"
+        Me.TxtHistoryCount.Size = New System.Drawing.Size(38, 22)
+        Me.TxtHistoryCount.TabIndex = 312
+        Me.TxtHistoryCount.TabStop = False
         '
         'DtpDepositDate
         '
@@ -317,29 +317,29 @@ Partial Class Payment
         Me.LblNo2.Text = "件"
         Me.LblNo2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'TxtCount2
+        'TxtPaymentCount
         '
-        Me.TxtCount2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.TxtCount2.Enabled = False
-        Me.TxtCount2.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtCount2.Location = New System.Drawing.Point(1273, 198)
-        Me.TxtCount2.Name = "TxtCount2"
-        Me.TxtCount2.Size = New System.Drawing.Size(38, 22)
-        Me.TxtCount2.TabIndex = 306
-        Me.TxtCount2.TabStop = False
+        Me.TxtPaymentCount.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TxtPaymentCount.Enabled = False
+        Me.TxtPaymentCount.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtPaymentCount.Location = New System.Drawing.Point(1273, 198)
+        Me.TxtPaymentCount.Name = "TxtPaymentCount"
+        Me.TxtPaymentCount.Size = New System.Drawing.Size(38, 22)
+        Me.TxtPaymentCount.TabIndex = 306
+        Me.TxtPaymentCount.TabStop = False
         '
-        'DgvCustomer
+        'DgvSupplier
         '
-        Me.DgvCustomer.AllowUserToAddRows = False
-        Me.DgvCustomer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvCustomer.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.支払先, Me.買掛残高})
-        Me.DgvCustomer.Location = New System.Drawing.Point(13, 19)
-        Me.DgvCustomer.Name = "DgvCustomer"
-        Me.DgvCustomer.RowHeadersVisible = False
-        Me.DgvCustomer.RowTemplate.Height = 21
-        Me.DgvCustomer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvCustomer.Size = New System.Drawing.Size(504, 40)
-        Me.DgvCustomer.TabIndex = 1
+        Me.DgvSupplier.AllowUserToAddRows = False
+        Me.DgvSupplier.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DgvSupplier.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.支払先, Me.買掛残高})
+        Me.DgvSupplier.Location = New System.Drawing.Point(13, 19)
+        Me.DgvSupplier.Name = "DgvSupplier"
+        Me.DgvSupplier.RowHeadersVisible = False
+        Me.DgvSupplier.RowTemplate.Height = 21
+        Me.DgvSupplier.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.DgvSupplier.Size = New System.Drawing.Size(504, 40)
+        Me.DgvSupplier.TabIndex = 1
         '
         '支払先
         '
@@ -349,8 +349,8 @@ Partial Class Payment
         '
         '買掛残高
         '
-        DataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.買掛残高.DefaultCellStyle = DataGridViewCellStyle38
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.買掛残高.DefaultCellStyle = DataGridViewCellStyle3
         Me.買掛残高.HeaderText = "買掛残高"
         Me.買掛残高.Name = "買掛残高"
         Me.買掛残高.Width = 200
@@ -375,17 +375,17 @@ Partial Class Payment
         Me.LblPayment.TabIndex = 303
         Me.LblPayment.Text = "■支払入力"
         '
-        'DgvBillingInfo
+        'DgvKikeInfo
         '
-        Me.DgvBillingInfo.AllowUserToAddRows = False
-        Me.DgvBillingInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvBillingInfo.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.InfoNo, Me.買掛情報買掛番号, Me.買掛日, Me.買掛金額, Me.買掛情報支払金額計, Me.買掛情報買掛残高, Me.支払金額})
-        Me.DgvBillingInfo.Location = New System.Drawing.Point(13, 363)
-        Me.DgvBillingInfo.Name = "DgvBillingInfo"
-        Me.DgvBillingInfo.RowHeadersVisible = False
-        Me.DgvBillingInfo.RowTemplate.Height = 21
-        Me.DgvBillingInfo.Size = New System.Drawing.Size(1327, 100)
-        Me.DgvBillingInfo.TabIndex = 8
+        Me.DgvKikeInfo.AllowUserToAddRows = False
+        Me.DgvKikeInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DgvKikeInfo.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.InfoNo, Me.買掛情報買掛番号, Me.買掛日, Me.買掛金額, Me.買掛情報支払金額計, Me.買掛情報買掛残高, Me.支払金額})
+        Me.DgvKikeInfo.Location = New System.Drawing.Point(13, 363)
+        Me.DgvKikeInfo.Name = "DgvKikeInfo"
+        Me.DgvKikeInfo.RowHeadersVisible = False
+        Me.DgvKikeInfo.RowTemplate.Height = 21
+        Me.DgvKikeInfo.Size = New System.Drawing.Size(1327, 100)
+        Me.DgvKikeInfo.TabIndex = 8
         '
         'InfoNo
         '
@@ -407,32 +407,32 @@ Partial Class Payment
         '
         '買掛金額
         '
-        DataGridViewCellStyle39.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.買掛金額.DefaultCellStyle = DataGridViewCellStyle39
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.買掛金額.DefaultCellStyle = DataGridViewCellStyle4
         Me.買掛金額.HeaderText = "買掛金額"
         Me.買掛金額.Name = "買掛金額"
         Me.買掛金額.Width = 150
         '
         '買掛情報支払金額計
         '
-        DataGridViewCellStyle40.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.買掛情報支払金額計.DefaultCellStyle = DataGridViewCellStyle40
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.買掛情報支払金額計.DefaultCellStyle = DataGridViewCellStyle5
         Me.買掛情報支払金額計.HeaderText = "支払金額計"
         Me.買掛情報支払金額計.Name = "買掛情報支払金額計"
         Me.買掛情報支払金額計.Width = 150
         '
         '買掛情報買掛残高
         '
-        DataGridViewCellStyle41.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.買掛情報買掛残高.DefaultCellStyle = DataGridViewCellStyle41
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.買掛情報買掛残高.DefaultCellStyle = DataGridViewCellStyle6
         Me.買掛情報買掛残高.HeaderText = "買掛残高"
         Me.買掛情報買掛残高.Name = "買掛情報買掛残高"
         Me.買掛情報買掛残高.Width = 150
         '
         '支払金額
         '
-        DataGridViewCellStyle42.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.支払金額.DefaultCellStyle = DataGridViewCellStyle42
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.支払金額.DefaultCellStyle = DataGridViewCellStyle7
         Me.支払金額.HeaderText = "支払金額"
         Me.支払金額.Name = "支払金額"
         Me.支払金額.Width = 150
@@ -466,33 +466,33 @@ Partial Class Payment
         Me.Controls.Add(Me.LblMode)
         Me.Controls.Add(Me.BtnDelete)
         Me.Controls.Add(Me.DgvHistory)
-        Me.Controls.Add(Me.DgvDeposit)
+        Me.Controls.Add(Me.DgvPayment)
         Me.Controls.Add(Me.LblNo3)
-        Me.Controls.Add(Me.TxtCount3)
+        Me.Controls.Add(Me.TxtKikeCount)
         Me.Controls.Add(Me.BtnAdd)
         Me.Controls.Add(Me.BtnCal)
         Me.Controls.Add(Me.BtnRegist)
         Me.Controls.Add(Me.BtnBack)
         Me.Controls.Add(Me.LblNo1)
-        Me.Controls.Add(Me.TxtCount1)
+        Me.Controls.Add(Me.TxtHistoryCount)
         Me.Controls.Add(Me.DtpDepositDate)
         Me.Controls.Add(Me.LblRemarks)
         Me.Controls.Add(Me.TxtRemarks)
         Me.Controls.Add(Me.LblDepositDate)
         Me.Controls.Add(Me.LblNo2)
-        Me.Controls.Add(Me.TxtCount2)
-        Me.Controls.Add(Me.DgvCustomer)
+        Me.Controls.Add(Me.TxtPaymentCount)
+        Me.Controls.Add(Me.DgvSupplier)
         Me.Controls.Add(Me.LblAPInfo)
         Me.Controls.Add(Me.LblPayment)
-        Me.Controls.Add(Me.DgvBillingInfo)
+        Me.Controls.Add(Me.DgvKikeInfo)
         Me.Controls.Add(Me.LblHistory)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "Payment"
         Me.Text = "Payment"
         CType(Me.DgvHistory, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DgvDeposit, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DgvCustomer, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DgvBillingInfo, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DgvPayment, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DgvSupplier, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DgvKikeInfo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -500,25 +500,25 @@ Partial Class Payment
 
     Friend WithEvents BtnDelete As Button
     Friend WithEvents DgvHistory As DataGridView
-    Friend WithEvents DgvDeposit As DataGridView
+    Friend WithEvents DgvPayment As DataGridView
     Friend WithEvents LblNo3 As Label
-    Friend WithEvents TxtCount3 As TextBox
+    Friend WithEvents TxtKikeCount As TextBox
     Friend WithEvents BtnAdd As Button
     Friend WithEvents BtnCal As Button
     Friend WithEvents BtnRegist As Button
     Friend WithEvents BtnBack As Button
     Friend WithEvents LblNo1 As Label
-    Friend WithEvents TxtCount1 As TextBox
+    Friend WithEvents TxtHistoryCount As TextBox
     Friend WithEvents DtpDepositDate As DateTimePicker
     Friend WithEvents LblRemarks As Label
     Friend WithEvents TxtRemarks As TextBox
     Friend WithEvents LblDepositDate As Label
     Friend WithEvents LblNo2 As Label
-    Friend WithEvents TxtCount2 As TextBox
-    Friend WithEvents DgvCustomer As DataGridView
+    Friend WithEvents TxtPaymentCount As TextBox
+    Friend WithEvents DgvSupplier As DataGridView
     Friend WithEvents LblAPInfo As Label
     Friend WithEvents LblPayment As Label
-    Friend WithEvents DgvBillingInfo As DataGridView
+    Friend WithEvents DgvKikeInfo As DataGridView
     Friend WithEvents LblHistory As Label
     Friend WithEvents LblMode As Label
     Friend WithEvents No As DataGridViewTextBoxColumn
