@@ -169,7 +169,7 @@ Partial Class Supplier
         '
         Me.TxtPerson.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtPerson.Location = New System.Drawing.Point(483, 193)
-        Me.TxtPerson.MaxLength = 30
+        Me.TxtPerson.MaxLength = 50
         Me.TxtPerson.Name = "TxtPerson"
         Me.TxtPerson.Size = New System.Drawing.Size(234, 22)
         Me.TxtPerson.TabIndex = 10
@@ -443,7 +443,7 @@ Partial Class Supplier
         '
         Me.TxtAccountName.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtAccountName.Location = New System.Drawing.Point(483, 463)
-        Me.TxtAccountName.MaxLength = 60
+        Me.TxtAccountName.MaxLength = 50
         Me.TxtAccountName.Name = "TxtAccountName"
         Me.TxtAccountName.Size = New System.Drawing.Size(234, 22)
         Me.TxtAccountName.TabIndex = 22

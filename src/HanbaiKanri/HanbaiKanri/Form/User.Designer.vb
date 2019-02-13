@@ -51,13 +51,14 @@ Partial Class User
         '
         Me.TxtCompanyCode.Location = New System.Drawing.Point(877, 6)
         Me.TxtCompanyCode.Name = "TxtCompanyCode"
-        Me.TxtCompanyCode.Size = New System.Drawing.Size(28, 20)
+        Me.TxtCompanyCode.Size = New System.Drawing.Size(28, 19)
         Me.TxtCompanyCode.TabIndex = 0
         '
         'TxtUserId
         '
         Me.TxtUserId.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtUserId.Location = New System.Drawing.Point(99, 12)
+        Me.TxtUserId.MaxLength = 20
         Me.TxtUserId.Name = "TxtUserId"
         Me.TxtUserId.Size = New System.Drawing.Size(234, 22)
         Me.TxtUserId.TabIndex = 1
@@ -66,6 +67,7 @@ Partial Class User
         '
         Me.TxtName.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtName.Location = New System.Drawing.Point(483, 12)
+        Me.TxtName.MaxLength = 50
         Me.TxtName.Name = "TxtName"
         Me.TxtName.Size = New System.Drawing.Size(234, 22)
         Me.TxtName.TabIndex = 2
@@ -74,6 +76,7 @@ Partial Class User
         '
         Me.TxtShortName.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtShortName.Location = New System.Drawing.Point(99, 57)
+        Me.TxtShortName.MaxLength = 20
         Me.TxtShortName.Name = "TxtShortName"
         Me.TxtShortName.Size = New System.Drawing.Size(234, 22)
         Me.TxtShortName.TabIndex = 3
@@ -82,6 +85,7 @@ Partial Class User
         '
         Me.TxtRemarks.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtRemarks.Location = New System.Drawing.Point(483, 57)
+        Me.TxtRemarks.MaxLength = 255
         Me.TxtRemarks.Name = "TxtRemarks"
         Me.TxtRemarks.Size = New System.Drawing.Size(234, 22)
         Me.TxtRemarks.TabIndex = 4
@@ -90,6 +94,7 @@ Partial Class User
         '
         Me.TxtFlg.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtFlg.Location = New System.Drawing.Point(99, 102)
+        Me.TxtFlg.MaxLength = 1
         Me.TxtFlg.Name = "TxtFlg"
         Me.TxtFlg.Size = New System.Drawing.Size(234, 22)
         Me.TxtFlg.TabIndex = 5
@@ -98,6 +103,7 @@ Partial Class User
         '
         Me.TxtAuthority.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtAuthority.Location = New System.Drawing.Point(483, 102)
+        Me.TxtAuthority.MaxLength = 1
         Me.TxtAuthority.Name = "TxtAuthority"
         Me.TxtAuthority.Size = New System.Drawing.Size(234, 22)
         Me.TxtAuthority.TabIndex = 6
@@ -106,6 +112,7 @@ Partial Class User
         '
         Me.TxtLangage.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtLangage.Location = New System.Drawing.Point(99, 147)
+        Me.TxtLangage.MaxLength = 10
         Me.TxtLangage.Name = "TxtLangage"
         Me.TxtLangage.Size = New System.Drawing.Size(234, 22)
         Me.TxtLangage.TabIndex = 7
@@ -254,6 +261,7 @@ Partial Class User
         '
         Me.TxtPassword.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtPassword.Location = New System.Drawing.Point(483, 147)
+        Me.TxtPassword.MaxLength = 255
         Me.TxtPassword.Name = "TxtPassword"
         Me.TxtPassword.Size = New System.Drawing.Size(234, 22)
         Me.TxtPassword.TabIndex = 8
