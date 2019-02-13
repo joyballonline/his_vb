@@ -286,7 +286,7 @@ Partial Class Customer
         '
         Me.TxtPerson.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtPerson.Location = New System.Drawing.Point(130, 238)
-        Me.TxtPerson.MaxLength = 30
+        Me.TxtPerson.MaxLength = 50
         Me.TxtPerson.Name = "TxtPerson"
         Me.TxtPerson.Size = New System.Drawing.Size(234, 22)
         Me.TxtPerson.TabIndex = 11

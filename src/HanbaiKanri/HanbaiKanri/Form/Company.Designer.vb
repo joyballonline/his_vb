@@ -153,7 +153,7 @@ Partial Class Company
         'TxtAccountNumber
         '
         Me.TxtAccountNumber.Location = New System.Drawing.Point(130, 423)
-        Me.TxtAccountNumber.MaxLength = 7
+        Me.TxtAccountNumber.MaxLength = 20
         Me.TxtAccountNumber.Name = "TxtAccountNumber"
         Me.TxtAccountNumber.Size = New System.Drawing.Size(234, 22)
         Me.TxtAccountNumber.TabIndex = 19
@@ -177,7 +177,7 @@ Partial Class Company
         'TxtBranchName
         '
         Me.TxtBranchName.Location = New System.Drawing.Point(483, 332)
-        Me.TxtBranchName.MaxLength = 4
+        Me.TxtBranchName.MaxLength = 50
         Me.TxtBranchName.Name = "TxtBranchName"
         Me.TxtBranchName.Size = New System.Drawing.Size(234, 22)
         Me.TxtBranchName.TabIndex = 16
@@ -259,7 +259,7 @@ Partial Class Company
         'TxtFax
         '
         Me.TxtFax.Location = New System.Drawing.Point(130, 195)
-        Me.TxtFax.MaxLength = 15
+        Me.TxtFax.MaxLength = 20
         Me.TxtFax.Name = "TxtFax"
         Me.TxtFax.Size = New System.Drawing.Size(234, 22)
         Me.TxtFax.TabIndex = 9
@@ -267,7 +267,7 @@ Partial Class Company
         'TxtTel
         '
         Me.TxtTel.Location = New System.Drawing.Point(483, 149)
-        Me.TxtTel.MaxLength = 15
+        Me.TxtTel.MaxLength = 20
         Me.TxtTel.Name = "TxtTel"
         Me.TxtTel.Size = New System.Drawing.Size(234, 22)
         Me.TxtTel.TabIndex = 8
@@ -419,7 +419,7 @@ Partial Class Company
         'TxtAccountName
         '
         Me.TxtAccountName.Location = New System.Drawing.Point(483, 423)
-        Me.TxtAccountName.MaxLength = 20
+        Me.TxtAccountName.MaxLength = 50
         Me.TxtAccountName.Name = "TxtAccountName"
         Me.TxtAccountName.Size = New System.Drawing.Size(234, 22)
         Me.TxtAccountName.TabIndex = 20
@@ -505,7 +505,7 @@ Partial Class Company
         'TxtPph
         '
         Me.TxtPph.Location = New System.Drawing.Point(483, 469)
-        Me.TxtPph.MaxLength = 20
+        Me.TxtPph.MaxLength = 5
         Me.TxtPph.Name = "TxtPph"
         Me.TxtPph.Size = New System.Drawing.Size(234, 22)
         Me.TxtPph.TabIndex = 22
@@ -523,7 +523,7 @@ Partial Class Company
         'TxtBankName
         '
         Me.TxtBankName.Location = New System.Drawing.Point(483, 286)
-        Me.TxtBankName.MaxLength = 4
+        Me.TxtBankName.MaxLength = 50
         Me.TxtBankName.Name = "TxtBankName"
         Me.TxtBankName.Size = New System.Drawing.Size(234, 22)
         Me.TxtBankName.TabIndex = 14
@@ -598,7 +598,7 @@ Partial Class Company
         'TxtBranchCode
         '
         Me.TxtBranchCode.Location = New System.Drawing.Point(130, 511)
-        Me.TxtBranchCode.MaxLength = 10
+        Me.TxtBranchCode.MaxLength = 20
         Me.TxtBranchCode.Name = "TxtBranchCode"
         Me.TxtBranchCode.Size = New System.Drawing.Size(234, 22)
         Me.TxtBranchCode.TabIndex = 23
