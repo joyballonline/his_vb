@@ -63,12 +63,17 @@ Public Class DepositList
 
     End Sub
 
+    Private Sub getNukinList()
 
-    Private Sub DepositList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim Sql As String = ""
-        Dim reccnt As Integer = 0
 
-        Dim dsCustomer As DataSet = getDsData("m10_customer")
+        '一覧をクリア
+        DgvCustomer.Rows.Clear()
+
+        '検索条件を取得
+        Sql = searchConditions()
+
+        Dim dsCustomer As DataSet = getDsData("m10_customer", Sql)
 
         Dim Count As Integer = 0
         Dim CustomerCount As Integer = dsCustomer.Tables(RS).Rows.Count
@@ -79,6 +84,23 @@ Public Class DepositList
         Dim CustomerOrderAmount As Integer
         Dim AccountsReceivable As Integer
 
+        'Language=ENGの時
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+
+            LblConditions.Text = "TermsOfSelection"
+            Label1.Text = "CustomerName"
+            Label2.Text = "Address"
+            Label3.Text = "PhoneNumber"
+            Label4.Text = "CustomerCode"
+            LblMode.Text = "MoneyReceiptInputMode"
+            BtnSerach.Text = "Search"
+            BtnDeposit.Text = "MoneyReceiptInput"
+            btnBack.Text = "Back"
+            DgvCustomer.Columns("得意先名").HeaderText = "CustomerName"
+            DgvCustomer.Columns("請求金額残").HeaderText = "BillingBalance"
+            DgvCustomer.Columns("売掛残高").HeaderText = "AccountsReceivableBalance"
+
+        End If
 
         '得意先の一覧を取得
         For i As Integer = 0 To dsCustomer.Tables(RS).Rows.Count - 1
@@ -141,22 +163,12 @@ Public Class DepositList
             End If
         Next
 
-        'Language=ENGの時
-        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-            LblConditions.Text = "TermsOfSelection"
-            Label1.Text = "CustomerName"
-            Label2.Text = "Address"
-            Label3.Text = "PhoneNumber"
-            Label4.Text = "CustomerCode"
-            LblMode.Text = "MoneyReceiptInputMode"
-            BtnSerach.Text = "Search"
-            BtnDeposit.Text = "MoneyReceiptInput"
-            btnBack.Text = "Back"
-            DgvCustomer.Columns("得意先名").HeaderText = "CustomerName"
-            DgvCustomer.Columns("請求金額残").HeaderText = "BillingBalance"
-            DgvCustomer.Columns("売掛残高").HeaderText = "AccountsReceivableBalance"
+    End Sub
 
-        End If
+    '画面表示時
+    Private Sub DepositList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        '一覧取得
+        getNukinList()
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
@@ -166,6 +178,7 @@ Public Class DepositList
         Me.Close()
     End Sub
 
+    '入金入力ボタン押下時
     Private Sub BtnDeposit_Click(sender As Object, e As EventArgs) Handles BtnDeposit.Click
         Dim RowIdx As Integer
         RowIdx = Me.DgvCustomer.CurrentCell.RowIndex
@@ -177,6 +190,44 @@ Public Class DepositList
         openForm.ShowDialog(Me)
         Me.Close()
     End Sub
+
+    '抽出条件取得
+    Private Function searchConditions() As String
+        Dim Sql As String = ""
+
+        '抽出条件
+        Dim customerName As String = TxtCustomerName.Text
+        Dim customerAddress As String = TxtAddress.Text
+        Dim customerTel As String = TxtTel.Text
+        Dim customerCode As String = TxtCustomerCode.Text
+
+        If customerName <> Nothing Then
+            Sql += " AND "
+            Sql += " 得意先名 ILIKE '%" & customerName & "%' "
+        End If
+
+        If customerAddress <> Nothing Then
+            Sql += " AND "
+            Sql += " (住所１ ILIKE '%" & customerAddress & "%' "
+            Sql += " OR "
+            Sql += " 住所２ ILIKE '%" & customerAddress & "%' "
+            Sql += " OR "
+            Sql += " 住所３ ILIKE '%" & customerAddress & "%' )"
+        End If
+
+        If customerTel <> Nothing Then
+            Sql += " AND "
+            Sql += " 電話番号検索用 ILIKE '%" & customerTel & "%' "
+        End If
+
+        If customerCode <> Nothing Then
+            Sql += " AND "
+            Sql += " 得意先コード ILIKE '%" & customerCode & "%' "
+        End If
+
+        Return Sql
+
+    End Function
 
     'param1：String テーブル名
     'param2：String 詳細条件
@@ -198,4 +249,8 @@ Public Class DepositList
         Return _db.selectDB(Sql, RS, reccnt)
     End Function
 
+    Private Sub BtnSerach_Click(sender As Object, e As EventArgs) Handles BtnSerach.Click
+        '一覧取得
+        getNukinList()
+    End Sub
 End Class
