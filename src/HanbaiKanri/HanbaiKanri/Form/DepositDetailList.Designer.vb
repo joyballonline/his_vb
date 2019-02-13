@@ -31,11 +31,9 @@ Partial Class DepositDetailList
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.TxtBillingNo2 = New System.Windows.Forms.TextBox()
-        Me.TxtBillingDate2 = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.TxtBillingNo1 = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.TxtBillingDate1 = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.TxtCustomerCode = New System.Windows.Forms.TextBox()
@@ -45,6 +43,8 @@ Partial Class DepositDetailList
         Me.BtnDepositSearch = New System.Windows.Forms.Button()
         Me.BtnBack = New System.Windows.Forms.Button()
         Me.DgvBilling = New System.Windows.Forms.DataGridView()
+        Me.dtBillingDateSince = New System.Windows.Forms.DateTimePicker()
+        Me.dtBillingDateUntil = New System.Windows.Forms.DateTimePicker()
         CType(Me.DgvBilling, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -144,14 +144,6 @@ Partial Class DepositDetailList
         Me.TxtBillingNo2.Size = New System.Drawing.Size(170, 22)
         Me.TxtBillingNo2.TabIndex = 6
         '
-        'TxtBillingDate2
-        '
-        Me.TxtBillingDate2.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtBillingDate2.Location = New System.Drawing.Point(959, 42)
-        Me.TxtBillingDate2.Name = "TxtBillingDate2"
-        Me.TxtBillingDate2.Size = New System.Drawing.Size(170, 22)
-        Me.TxtBillingDate2.TabIndex = 4
-        '
         'Label7
         '
         Me.Label7.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
@@ -167,7 +159,7 @@ Partial Class DepositDetailList
         'TxtBillingNo1
         '
         Me.TxtBillingNo1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtBillingNo1.Location = New System.Drawing.Point(760, 69)
+        Me.TxtBillingNo1.Location = New System.Drawing.Point(760, 71)
         Me.TxtBillingNo1.Name = "TxtBillingNo1"
         Me.TxtBillingNo1.Size = New System.Drawing.Size(170, 22)
         Me.TxtBillingNo1.TabIndex = 5
@@ -183,14 +175,6 @@ Partial Class DepositDetailList
         Me.Label8.TabIndex = 316
         Me.Label8.Text = "入金日"
         Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'TxtBillingDate1
-        '
-        Me.TxtBillingDate1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtBillingDate1.Location = New System.Drawing.Point(760, 42)
-        Me.TxtBillingDate1.Name = "TxtBillingDate1"
-        Me.TxtBillingDate1.Size = New System.Drawing.Size(170, 22)
-        Me.TxtBillingDate1.TabIndex = 3
         '
         'Label4
         '
@@ -285,10 +269,38 @@ Partial Class DepositDetailList
         Me.DgvBilling.Size = New System.Drawing.Size(1326, 265)
         Me.DgvBilling.TabIndex = 11
         '
+        'dtBillingDateSince
+        '
+        Me.dtBillingDateSince.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.dtBillingDateSince.CustomFormat = "yyyy/MM/dd"
+        Me.dtBillingDateSince.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.dtBillingDateSince.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtBillingDateSince.Location = New System.Drawing.Point(760, 42)
+        Me.dtBillingDateSince.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
+        Me.dtBillingDateSince.Name = "dtBillingDateSince"
+        Me.dtBillingDateSince.Size = New System.Drawing.Size(170, 22)
+        Me.dtBillingDateSince.TabIndex = 330
+        Me.dtBillingDateSince.Value = New Date(2019, 1, 1, 0, 0, 0, 0)
+        '
+        'dtBillingDateUntil
+        '
+        Me.dtBillingDateUntil.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.dtBillingDateUntil.CustomFormat = "yyyy/MM/dd"
+        Me.dtBillingDateUntil.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.dtBillingDateUntil.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtBillingDateUntil.Location = New System.Drawing.Point(959, 41)
+        Me.dtBillingDateUntil.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
+        Me.dtBillingDateUntil.Name = "dtBillingDateUntil"
+        Me.dtBillingDateUntil.Size = New System.Drawing.Size(170, 22)
+        Me.dtBillingDateUntil.TabIndex = 331
+        Me.dtBillingDateUntil.Value = New Date(2019, 1, 1, 0, 0, 0, 0)
+        '
         'DepositDetailList
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.dtBillingDateUntil)
+        Me.Controls.Add(Me.dtBillingDateSince)
         Me.Controls.Add(Me.RbtnDetails)
         Me.Controls.Add(Me.RbtnSlip)
         Me.Controls.Add(Me.LblMode)
@@ -298,11 +310,9 @@ Partial Class DepositDetailList
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.TxtBillingNo2)
-        Me.Controls.Add(Me.TxtBillingDate2)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.TxtBillingNo1)
         Me.Controls.Add(Me.Label8)
-        Me.Controls.Add(Me.TxtBillingDate1)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.TxtCustomerCode)
@@ -331,11 +341,9 @@ Partial Class DepositDetailList
     Friend WithEvents Label10 As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents TxtBillingNo2 As TextBox
-    Friend WithEvents TxtBillingDate2 As TextBox
     Friend WithEvents Label7 As Label
     Friend WithEvents TxtBillingNo1 As TextBox
     Friend WithEvents Label8 As Label
-    Friend WithEvents TxtBillingDate1 As TextBox
     Friend WithEvents Label4 As Label
     Friend WithEvents Label9 As Label
     Friend WithEvents TxtCustomerCode As TextBox
@@ -345,4 +353,6 @@ Partial Class DepositDetailList
     Friend WithEvents BtnDepositSearch As Button
     Friend WithEvents BtnBack As Button
     Friend WithEvents DgvBilling As DataGridView
+    Friend WithEvents dtBillingDateSince As DateTimePicker
+    Friend WithEvents dtBillingDateUntil As DateTimePicker
 End Class

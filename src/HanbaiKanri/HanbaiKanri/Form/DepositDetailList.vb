@@ -7,7 +7,7 @@ Imports UtilMDL.DB
 Imports UtilMDL.DataGridView
 Imports UtilMDL.FileDirectory
 Imports UtilMDL.xls
-
+Imports System.Text.RegularExpressions
 
 Public Class DepositDetailList
     Inherits System.Windows.Forms.Form
@@ -73,6 +73,7 @@ Public Class DepositDetailList
         DgvBilling.AutoSizeColumnsMode = DataGridViewAutoSizeColumnMode.DisplayedCells
     End Sub
 
+    '画面表示時
     Private Sub DepositDetailList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If _status = "VIEW" Then
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
@@ -92,8 +93,12 @@ Public Class DepositDetailList
             BtnDepositCancel.Location = New Point(997, 509)
         End If
 
+        '検索（Date）の初期値
+        dtBillingDateSince.Value = DateAdd("d", CommonConst.SINCE_DEFAULT_DAY, DateTime.Today)
+        dtBillingDateUntil.Value = DateTime.Today
+
         'データ描画
-        createDgvBilling()
+        setDgvBilling()
 
         '翻訳
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
@@ -116,6 +121,7 @@ Public Class DepositDetailList
         End If
     End Sub
 
+    '戻るボタン押下時
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
         Dim openForm As Form = Nothing
         openForm = New frmC01F30_Menu(_msgHd, _langHd, _db)
@@ -124,7 +130,7 @@ Public Class DepositDetailList
     End Sub
 
     'DgvBilling内を再描画
-    Private Sub createDgvBilling()
+    Private Sub setDgvBilling()
         clearDGV() 'テーブルクリア
         Dim Sql As String = ""
 
@@ -227,12 +233,17 @@ Public Class DepositDetailList
 
     '表示形式を切り替えたら
     Private Sub RbtnDetails_CheckedChanged(sender As Object, e As EventArgs) Handles RbtnDetails.CheckedChanged
-        createDgvBilling()
+        setDgvBilling()
     End Sub
 
     '検索ボタンをクリックしたら
     Private Sub BtnPurchaseSearch_Click(sender As Object, e As EventArgs) Handles BtnDepositSearch.Click
-        createDgvBilling()
+        setDgvBilling()
+    End Sub
+
+    '「取消データを含める」変更イベント取得時
+    Private Sub ChkCancelData_CheckedChanged(sender As Object, e As EventArgs) Handles ChkCancelData.CheckedChanged
+        setDgvBilling()
     End Sub
 
     'Private Sub BtnBillingView_Click(sender As Object, e As EventArgs) Handles BtnBillingView.Click
@@ -245,11 +256,6 @@ Public Class DepositDetailList
     '    openForm = New DepositManagement(_msgHd, _db, _langHd, Me, No, Suffix, Status)   '処理選択
     '    openForm.Show(Me)
     'End Sub
-
-    '「取消データを含める」変更イベント取得時
-    Private Sub ChkCancelData_CheckedChanged(sender As Object, e As EventArgs) Handles ChkCancelData.CheckedChanged
-        createDgvBilling()
-    End Sub
 
     '入金取消処理
     Private Sub BtnBillingCancel_Click(sender As Object, e As EventArgs) Handles BtnDepositCancel.Click
@@ -398,7 +404,7 @@ Public Class DepositDetailList
             Sql += DgvBilling.Rows(DgvBilling.CurrentCell.RowIndex).Cells("入金番号").Value
             Sql += "' "
 
-            '請求基本を更新
+            '入金消込基本を更新
             _db.executeDB(Sql)
 
             Sql = "UPDATE "
@@ -432,7 +438,7 @@ Public Class DepositDetailList
             '請求基本を更新
             _db.executeDB(Sql)
 
-            createDgvBilling()
+            setDgvBilling()
 
         Else
 
@@ -441,7 +447,7 @@ Public Class DepositDetailList
             _msgHd.dspMSG("chkData", frmC01F10_Login.loginValue.Language)
 
             '表示データを更新
-            createDgvBilling()
+            setDgvBilling()
 
 
         End If
@@ -454,17 +460,27 @@ Public Class DepositDetailList
         DgvBilling.Columns.Clear()
     End Sub
 
+    'sqlで実行する文字列からシングルクォーテーションを文字コードにする
+    Private Function escapeSql(ByVal prmSql As String) As String
+        Dim sql As String = prmSql
+
+        sql = sql.Replace("'"c, "''") 'シングルクォーテーションを置換
+
+        Return Regex.Escape(sql)
+        Return sql
+    End Function
+
     '抽出条件取得
     Private Function searchConditions() As String
         Dim Sql As String = ""
 
         '抽出条件
-        Dim customerName As String = TxtCustomerName.Text
-        Dim customerCode As String = TxtCustomerCode.Text
-        Dim sinceDate As String = TxtBillingDate1.Text
-        Dim untilDate As String = TxtBillingDate2.Text
-        Dim sinceNum As String = TxtBillingNo1.Text
-        Dim untilNum As String = TxtBillingNo2.Text
+        Dim customerName As String = escapeSql(TxtCustomerName.Text)
+        Dim customerCode As String = escapeSql(TxtCustomerCode.Text)
+        Dim sinceDate As String = escapeSql(dtBillingDateSince.Text)
+        Dim untilDate As String = escapeSql(dtBillingDateUntil.Text)
+        Dim sinceNum As String = escapeSql(TxtBillingNo1.Text)
+        Dim untilNum As String = escapeSql(TxtBillingNo2.Text)
 
         If customerName <> Nothing Then
             Sql += " AND "

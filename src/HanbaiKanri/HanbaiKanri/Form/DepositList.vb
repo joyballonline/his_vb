@@ -249,6 +249,7 @@ Public Class DepositList
         Return _db.selectDB(Sql, RS, reccnt)
     End Function
 
+    '検索ボタン押下時
     Private Sub BtnSerach_Click(sender As Object, e As EventArgs) Handles BtnSerach.Click
         '一覧取得
         getNukinList()

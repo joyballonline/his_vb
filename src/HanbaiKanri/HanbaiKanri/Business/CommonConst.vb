@@ -264,5 +264,7 @@ Public Class CommonConst
     Public Const CANCEL_KBN_JPN_TXT As String = "済"                         '済
     Public Const CANCEL_KBN_ENG_TXT As String = "Del"                         'Del
 
+    '検索系 開始日のデフォルト値
+    Public Const SINCE_DEFAULT_DAY As Integer = -14                          '二週間
 
 End Class

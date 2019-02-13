@@ -89,11 +89,7 @@ Public Class DepositManagement
         Dim Sql As String = ""
 
         Sql = " AND "
-        Sql += "固定キー"
-        Sql += " ILIKE "
-        Sql += "'"
-        Sql += "2"
-        Sql += "'"
+        Sql += "固定キー ILIKE '2'"
 
         Dim reccnt As Integer = 0
 
@@ -105,7 +101,7 @@ Public Class DepositManagement
         table.Columns.Add("Value", GetType(Integer))
 
         For i As Integer = 0 To dsHanyo.Tables(RS).Rows.Count - 1
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 table.Rows.Add(dsHanyo.Tables(RS).Rows(i)("文字２"), dsHanyo.Tables(RS).Rows(i)("可変キー"))
             Else
                 table.Rows.Add(dsHanyo.Tables(RS).Rows(i)("文字１"), dsHanyo.Tables(RS).Rows(i)("可変キー"))
@@ -123,10 +119,10 @@ Public Class DepositManagement
         DgvDeposit.Columns.Insert(1, column)
 
         '明細を描画
-        BillLoad()
+        setData()
 
         '翻訳
-        If frmC01F10_Login.loginValue.Language = "ENG" Then
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
             LblHistory.Text = "MoneyReceiptDataHistory"
             LblDeposit.Text = "MoneyReceiptInput"
             LblDeposit.Location = New Point(13, 203)
@@ -187,7 +183,7 @@ Public Class DepositManagement
     End Sub
 
     '各Table内の作成
-    Private Sub BillLoad()
+    Private Sub setData()
 
         setDgvCustomer() '請求先情報の出力
 
@@ -520,24 +516,19 @@ Public Class DepositManagement
         '入力内容チェック
         '入金入力がなかったら
         If DgvDeposit.Rows.Count = -1 Then
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
-                MessageBox.Show("Deposit information has not been entered.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Else
-                MessageBox.Show("入金情報が入力されていません。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            End If
+            '対象データがないメッセージを表示
+            _msgHd.dspMSG("NonData", frmC01F10_Login.loginValue.Language)
 
-            errflg = False
+            Return
         End If
 
         '入金入力があっても入金額が0だったら
         For index As Integer = 0 To DgvDeposit.Rows.Count - 1
             If DgvDeposit.Rows(index).Cells("入力入金額").Value <= 0 Then
-                If frmC01F10_Login.loginValue.Language = "ENG" Then
-                    MessageBox.Show("Deposit amount is 0.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                Else
-                    MessageBox.Show("入金額が0です。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                End If
-                errflg = False
+                '対象データがないメッセージを表示
+                _msgHd.dspMSG("NonData", frmC01F10_Login.loginValue.Language)
+
+                Return
             End If
         Next
 
@@ -632,40 +623,44 @@ Public Class DepositManagement
             Next
 
             't27_nkinkshihd 入金消込テーブルに新規追加
-            For index As Integer = 0 To DgvBillingInfo.Rows.Count - 1
-                Sql = "INSERT INTO "
-                Sql += "Public."
-                Sql += "t27_nkinkshihd("
-                Sql += "会社コード, 入金番号, 入金日, 請求番号, 請求先コード, 請求先名, 入金消込額計, 備考, 取消区分, 更新者, 更新日)"
-                Sql += " VALUES('"
-                Sql += CompanyCode
-                Sql += "', '"
-                Sql += PMSaiban
-                Sql += "', '"
-                Sql += dtToday
-                Sql += "', '"
-                Sql += DgvBillingInfo.Rows(index).Cells("請求情報請求番号").Value.ToString
-                Sql += "', '"
-                Sql += CustomerCode
-                Sql += "', '"
-                Sql += CustomerName
-                Sql += "', '"
-                Sql += DgvBillingInfo.Rows(index).Cells("入金額").Value.ToString
-                Sql += "', '"
-                Sql += TxtRemarks.Text
-                Sql += "', '"
-                Sql += "0"
-                Sql += "', '"
-                Sql += frmC01F10_Login.loginValue.TantoNM
-                Sql += "', '"
-                Sql += dtToday
-                Sql += " ')"
+            For i As Integer = 0 To DgvBillingInfo.Rows.Count - 1
 
-                _db.executeDB(Sql)
+                '複数の買掛情報がある場合、支払金額が0のものは登録しない
+                If DgvBillingInfo.Rows(i).Cells("入金額").Value <> 0 Then
+
+                    Sql = "INSERT INTO "
+                    Sql += "Public."
+                    Sql += "t27_nkinkshihd("
+                    Sql += "会社コード, 入金番号, 入金日, 請求番号, 請求先コード, 請求先名, 入金消込額計, 備考, 取消区分, 更新者, 更新日)"
+                    Sql += " VALUES('"
+                    Sql += CompanyCode
+                    Sql += "', '"
+                    Sql += PMSaiban
+                    Sql += "', '"
+                    Sql += dtToday
+                    Sql += "', '"
+                    Sql += DgvBillingInfo.Rows(i).Cells("請求情報請求番号").Value.ToString
+                    Sql += "', '"
+                    Sql += CustomerCode
+                    Sql += "', '"
+                    Sql += CustomerName
+                    Sql += "', '"
+                    Sql += DgvBillingInfo.Rows(i).Cells("入金額").Value.ToString
+                    Sql += "', '"
+                    Sql += TxtRemarks.Text
+                    Sql += "', '"
+                    Sql += "0"
+                    Sql += "', '"
+                    Sql += frmC01F10_Login.loginValue.TantoNM
+                    Sql += "', '"
+                    Sql += dtToday
+                    Sql += " ')"
+
+                    _db.executeDB(Sql)
+
+                End If
             Next
 
-            Dim DsSelling As Integer = 0
-            Dim DgDeposit As Integer = 0
             Dim DsDeposit As Integer = 0
             Dim SellingBalance As Integer = 0
 
@@ -711,8 +706,7 @@ Public Class DepositManagement
                 Sql += "' "
 
                 _db.executeDB(Sql)
-                DsSelling = 0
-                DgDeposit = 0
+
                 DsDeposit = 0
                 SellingBalance = 0
             Next
