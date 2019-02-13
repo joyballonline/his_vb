@@ -22,8 +22,8 @@ Partial Class PaymentList
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.BtnSerach = New System.Windows.Forms.Button()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.TxtCustomerCode = New System.Windows.Forms.TextBox()
@@ -72,6 +72,7 @@ Partial Class PaymentList
         '
         Me.TxtCustomerCode.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtCustomerCode.Location = New System.Drawing.Point(190, 119)
+        Me.TxtCustomerCode.MaxLength = 8
         Me.TxtCustomerCode.Name = "TxtCustomerCode"
         Me.TxtCustomerCode.Size = New System.Drawing.Size(350, 22)
         Me.TxtCustomerCode.TabIndex = 4
@@ -92,6 +93,7 @@ Partial Class PaymentList
         '
         Me.TxtTel.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtTel.Location = New System.Drawing.Point(190, 91)
+        Me.TxtTel.MaxLength = 20
         Me.TxtTel.Name = "TxtTel"
         Me.TxtTel.Size = New System.Drawing.Size(350, 22)
         Me.TxtTel.TabIndex = 3
@@ -112,6 +114,7 @@ Partial Class PaymentList
         '
         Me.TxtAddress.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtAddress.Location = New System.Drawing.Point(190, 63)
+        Me.TxtAddress.MaxLength = 100
         Me.TxtAddress.Name = "TxtAddress"
         Me.TxtAddress.Size = New System.Drawing.Size(350, 22)
         Me.TxtAddress.TabIndex = 2
@@ -142,6 +145,7 @@ Partial Class PaymentList
         '
         Me.TxtCustomerName.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtCustomerName.Location = New System.Drawing.Point(190, 35)
+        Me.TxtCustomerName.MaxLength = 100
         Me.TxtCustomerName.Name = "TxtCustomerName"
         Me.TxtCustomerName.Size = New System.Drawing.Size(350, 22)
         Me.TxtCustomerName.TabIndex = 1
@@ -180,8 +184,8 @@ Partial Class PaymentList
         '
         '仕入金額計
         '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.仕入金額計.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.仕入金額計.DefaultCellStyle = DataGridViewCellStyle3
         Me.仕入金額計.HeaderText = "仕入金額計"
         Me.仕入金額計.Name = "仕入金額計"
         Me.仕入金額計.ReadOnly = True
@@ -197,8 +201,8 @@ Partial Class PaymentList
         '
         '支払残高
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.支払残高.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.支払残高.DefaultCellStyle = DataGridViewCellStyle4
         Me.支払残高.HeaderText = "支払残高"
         Me.支払残高.Name = "支払残高"
         Me.支払残高.ReadOnly = True

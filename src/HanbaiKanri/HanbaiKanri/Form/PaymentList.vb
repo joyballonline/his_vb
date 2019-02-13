@@ -65,98 +65,40 @@ Public Class PaymentList
         DgvSupplier.AutoSizeColumnsMode = DataGridViewAutoSizeColumnMode.DisplayedCells
     End Sub
 
+    '画面表示時
     Private Sub MstSuppliere_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim Sql1 As String = ""
-        Dim Sql2 As String = ""
-        Dim Sql3 As String = ""
-        Dim reccnt As Integer = 0
 
-        Sql1 += "SELECT "
-        Sql1 += "* "
-        Sql1 += "FROM "
-        Sql1 += "public"
-        Sql1 += "."
-        Sql1 += "m11_supplier"
+        '一覧取得
+        getSiharaiList()
 
-        Dim ds1 As DataSet = _db.selectDB(Sql1, RS, reccnt)
+    End Sub
+
+    '抽出条件を含め、一覧取得
+    Private Sub getSiharaiList()
+
+        Dim Sql As String = ""
+
+        '一覧をクリア
+        DgvSupplier.Rows.Clear()
+
+        '検索条件を取得
+        Sql = searchConditions()
+
+        '仕入先リストの取得
+        Dim dsSupplier As DataSet = getDsData("m11_supplier", Sql)
+
         Dim Count As Integer = 0
-        Dim SupplierCount As Integer = ds1.Tables(RS).Rows.Count
-        Dim SupplierOrderCount(SupplierCount) As Integer
-        Dim SupplierBillingCount(SupplierCount) As Integer
-        Dim SupplierBillingAmount(SupplierCount) As Integer
-        Dim SupplierOrderAmount(SupplierCount) As Integer
-        Dim AccountsReceivable(SupplierCount) As Integer
+        Dim SupplierCount As Integer = dsSupplier.Tables(RS).Rows.Count
 
-        For index1 As Integer = 0 To ds1.Tables(RS).Rows.Count - 1
-            Sql2 += "SELECT "
-            Sql2 += "* "
-            Sql2 += "FROM "
-            Sql2 += "public"
-            Sql2 += "."
-            Sql2 += "t46_kikehd"
-            Sql2 += " WHERE "
-            Sql2 += "会社コード"
-            Sql2 += " = "
-            Sql2 += "'"
-            Sql2 += ds1.Tables(RS).Rows(index1)("会社コード")
-            Sql2 += "'"
-            Sql2 += " AND "
-            Sql2 += "仕入先コード"
-            Sql2 += " ILIKE "
-            Sql2 += "'%"
-            Sql2 += ds1.Tables(RS).Rows(index1)("仕入先コード")
-            Sql2 += "%'"
-            Dim ds2 As DataSet = _db.selectDB(Sql2, RS, reccnt)
-            SupplierBillingCount(index1) = ds2.Tables(RS).Rows.Count.ToString
+        Dim SupplierOrderCount As Integer
+        Dim SupplierBillingCount As Integer
+        Dim SupplierBillingAmount As Integer
+        Dim SupplierOrderAmount As Integer
+        Dim AccountsReceivable As Integer
 
-            Sql3 += "SELECT "
-            Sql3 += "* "
-            Sql3 += "FROM "
-            Sql3 += "public"
-            Sql3 += "."
-            Sql3 += "t20_hattyu"
-            Sql3 += " WHERE "
-            Sql3 += "会社コード"
-            Sql3 += " = "
-            Sql3 += "'"
-            Sql3 += ds1.Tables(RS).Rows(index1)("会社コード")
-            Sql3 += "'"
-            Sql3 += " AND "
-            Sql3 += "仕入先コード"
-            Sql3 += " ILIKE "
-            Sql3 += "'%"
-            Sql3 += ds1.Tables(RS).Rows(index1)("仕入先コード")
-            Sql3 += "%'"
-            Dim ds3 As DataSet = _db.selectDB(Sql3, RS, reccnt)
+        'Language=ENGの時
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
 
-            SupplierOrderCount(index1) = ds3.Tables(RS).Rows.Count.ToString
-
-            For index2 As Integer = 0 To ds2.Tables(RS).Rows.Count - 1
-                SupplierBillingAmount(index1) += ds2.Tables(RS).Rows(index2)("買掛金額計")
-            Next
-
-            For index3 As Integer = 0 To ds3.Tables(RS).Rows.Count - 1
-                SupplierOrderAmount(index1) += ds3.Tables(RS).Rows(index3)("仕入金額")
-            Next
-
-            For index4 As Integer = 0 To ds2.Tables(RS).Rows.Count - 1
-                AccountsReceivable(index1) += ds2.Tables(RS).Rows(index4)("買掛残高")
-            Next
-
-            If SupplierOrderCount(index1) > 0 Then
-                DgvSupplier.Rows.Add()
-                DgvSupplier.Rows(Count).Cells("仕入先名").Value = ds1.Tables(RS).Rows(index1)("仕入先名")
-                DgvSupplier.Rows(Count).Cells("仕入金額計").Value = SupplierOrderAmount(index1)
-                DgvSupplier.Rows(Count).Cells("支払残高").Value = SupplierOrderAmount(index1) - SupplierBillingAmount(index1)
-                DgvSupplier.Rows(Count).Cells("仕入先コード").Value = ds1.Tables(RS).Rows(index1)("仕入先コード")
-                DgvSupplier.Rows(Count).Cells("会社コード").Value = ds1.Tables(RS).Rows(index1)("会社コード")
-
-                Count += 1
-            End If
-            Sql2 = ""
-            Sql3 = ""
-        Next
-        If frmC01F10_Login.loginValue.Language = "ENG" Then
             LblConditions.Text = "ExtractionCondition"
             Label1.Text = "SupplierName"
             Label2.Text = "Address"
@@ -173,6 +115,70 @@ Public Class PaymentList
             DgvSupplier.Columns("支払残高").HeaderText = "PaymentAmount"
 
         End If
+
+        '仕入先の一覧から、支払一覧を作成
+        For i As Integer = 0 To dsSupplier.Tables(RS).Rows.Count - 1
+
+            Sql = " AND "
+            Sql += "仕入先コード"
+            Sql += " ILIKE "
+            Sql += "'%"
+            Sql += dsSupplier.Tables(RS).Rows(i)("仕入先コード")
+            Sql += "%'"
+
+            '仕入先と一致する買掛基本を取得
+            Dim dsKikehd As DataSet = getDsData("t46_kikehd", Sql)
+
+            '仕入先の買掛データ数を取得
+            SupplierBillingCount = dsKikehd.Tables(RS).Rows.Count.ToString
+
+            Sql = " AND "
+            Sql += "仕入先コード"
+            Sql += " ILIKE "
+            Sql += "'%"
+            Sql += dsSupplier.Tables(RS).Rows(i)("仕入先コード")
+            Sql += "%'"
+
+            '仕入先と一致する発注基本を取得
+            Dim dsHattyu As DataSet = getDsData("t20_hattyu", Sql)
+
+            '発注データ数
+            SupplierOrderCount = dsHattyu.Tables(RS).Rows.Count.ToString
+
+            '買掛金額を集計
+            SupplierBillingAmount = IIf(
+                dsKikehd.Tables(RS).Compute("SUM(買掛金額計)", Nothing) IsNot DBNull.Value,
+                dsKikehd.Tables(RS).Compute("SUM(買掛金額計)", Nothing),
+                0
+            )
+
+            '仕入金額を集計
+            SupplierOrderAmount = IIf(
+                dsHattyu.Tables(RS).Compute("SUM(仕入金額)", Nothing) IsNot DBNull.Value,
+                dsHattyu.Tables(RS).Compute("SUM(仕入金額)", Nothing),
+                0
+            )
+
+            '買掛残高を集計
+            AccountsReceivable = IIf(
+                dsKikehd.Tables(RS).Compute("SUM(買掛残高)", Nothing) IsNot DBNull.Value,
+                dsKikehd.Tables(RS).Compute("SUM(買掛残高)", Nothing),
+                0
+            )
+
+
+            '表示エリアにデータを追加
+            If SupplierOrderCount > 0 Then
+                DgvSupplier.Rows.Add()
+                DgvSupplier.Rows(Count).Cells("仕入先名").Value = dsSupplier.Tables(RS).Rows(i)("仕入先名")
+                DgvSupplier.Rows(Count).Cells("仕入金額計").Value = SupplierOrderAmount
+                DgvSupplier.Rows(Count).Cells("支払残高").Value = AccountsReceivable
+                DgvSupplier.Rows(Count).Cells("仕入先コード").Value = dsSupplier.Tables(RS).Rows(i)("仕入先コード")
+                DgvSupplier.Rows(Count).Cells("会社コード").Value = dsSupplier.Tables(RS).Rows(i)("会社コード")
+
+                Count += 1 'カウントアップ
+            End If
+        Next
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
@@ -191,5 +197,70 @@ Public Class PaymentList
         Dim openForm As Form = Nothing
         openForm = New Payment(_msgHd, _db, _langHd, Me, Company, Supplier, Name)   '処理選択
         openForm.Show(Me)
+    End Sub
+
+    '抽出条件取得
+    Private Function searchConditions() As String
+        Dim Sql As String = ""
+
+        '抽出条件
+        Dim customerName As String = TxtCustomerName.Text
+        Dim customerAddress As String = TxtAddress.Text
+        Dim customerTel As String = TxtTel.Text
+        Dim customerCode As String = TxtCustomerCode.Text
+
+        If customerName <> Nothing Then
+            Sql += " AND "
+            Sql += " 仕入先名 ILIKE '%" & customerName & "%' "
+        End If
+
+        If customerAddress <> Nothing Then
+            Sql += " AND "
+            Sql += " (住所１ ILIKE '%" & customerAddress & "%' "
+            Sql += " OR "
+            Sql += " 住所２ ILIKE '%" & customerAddress & "%' "
+            Sql += " OR "
+            Sql += " 住所３ ILIKE '%" & customerAddress & "%' )"
+        End If
+
+        If customerTel <> Nothing Then
+            Sql += " AND "
+            Sql += " 電話番号検索用 ILIKE '%" & customerTel & "%' "
+        End If
+
+        If customerCode <> Nothing Then
+            Sql += " AND "
+            Sql += " 仕入先コード ILIKE '%" & customerCode & "%' "
+        End If
+
+        Return Sql
+
+    End Function
+
+
+    'param1：String テーブル名
+    'param2：String 詳細条件
+    'Return: DataSet
+    Private Function getDsData(ByVal tableName As String, Optional ByRef txtParam As String = "") As DataSet
+        Dim reccnt As Integer = 0 'DB用（デフォルト）
+        Dim Sql As String = ""
+
+        Sql += "SELECT"
+        Sql += " *"
+        Sql += " FROM "
+
+        Sql += "public." & tableName
+        Sql += " WHERE "
+        Sql += "会社コード"
+        Sql += " ILIKE  "
+        Sql += "'" & frmC01F10_Login.loginValue.BumonNM & "'"
+        Sql += txtParam
+        Return _db.selectDB(Sql, RS, reccnt)
+    End Function
+
+    '検索ボタン押下時
+    Private Sub BtnSerach_Click(sender As Object, e As EventArgs) Handles BtnSerach.Click
+        '一覧取得
+        getSiharaiList()
     End Sub
 End Class
