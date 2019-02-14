@@ -77,12 +77,9 @@ Public Class SupplierSearch
     Private Sub MstSupplier_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim Sql As String = ""
         Try
-            Sql += "SELECT "
-            Sql += "* "
-            Sql += "FROM "
-            Sql += "public"
-            Sql += "."
-            Sql += "m11_supplier"
+            Sql += "SELECT * FROM public.m11_supplier"
+            Sql += " WHERE "
+            Sql += "会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
 
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
@@ -126,7 +123,9 @@ Public Class SupplierSearch
         End Try
     End Sub
 
-    Private Sub btnSupplierSelect_Click(sender As Object, e As EventArgs) Handles btnSupplierSelect.Click
+    '選択ボタンクリック時　＆　グリッド内ダブルクリック時
+    '
+    Private Sub btnSupplierSelect_Click(sender As Object, e As EventArgs) Handles btnSupplierSelect.Click, Dgv_Supplier.DoubleClick
 
         If _status = "ADD" Then
             Dim frm As OrderingAdd = CType(Me.Owner, OrderingAdd)
@@ -160,6 +159,7 @@ Public Class SupplierSearch
             Dim frm As Quote = CType(Me.Owner, Quote)
             Dim idx As Integer = Dgv_Supplier.CurrentCell.RowIndex
 
+            frm.DgvItemList.Rows(RowIdx).Cells("仕入先コード").Value = Dgv_Supplier.Rows(idx).Cells("仕入先コード").Value
             frm.DgvItemList.Rows(RowIdx).Cells("仕入先").Value = Dgv_Supplier.Rows(idx).Cells("仕入先名").Value
             frm.DgvItemList.Rows(RowIdx).Cells("間接費率").Value = Dgv_Supplier.Rows(idx).Cells("既定間接費率").Value
             frm.DgvItemList.Rows(RowIdx).Cells("関税率").Value = Dgv_Supplier.Rows(idx).Cells("関税率").Value
@@ -183,18 +183,10 @@ Public Class SupplierSearch
 
         Dim Sql As String = ""
         Try
-            Sql += "SELECT "
-            Sql += "* "
-            Sql += "FROM "
-            Sql += "public"
-            Sql += "."
-            Sql += "m11_supplier"
+            Sql += "SELECT * FROM public.m11_supplier"
             Sql += " WHERE "
-            Sql += "仕入先コード"
-            Sql += " ILIKE "
-            Sql += "'%"
-            Sql += Search.Text
-            Sql += "%'"
+            Sql += "会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += " and 仕入先コード  ILIKE '%" & Search.Text & "%'"
 
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
@@ -236,4 +228,5 @@ Public Class SupplierSearch
             Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
         End Try
     End Sub
+
 End Class

@@ -372,6 +372,7 @@ Public Class Quote
                 DgvItemList.Rows(index).Cells("型式").Value = ds3.Tables(RS).Rows(index)("型式")
                 DgvItemList.Rows(index).Cells("数量").Value = ds3.Tables(RS).Rows(index)("数量")
                 DgvItemList.Rows(index).Cells("単位").Value = ds3.Tables(RS).Rows(index)("単位")
+                DgvItemList.Rows(index).Cells("仕入先コード").Value = ds3.Tables(RS).Rows(index)("仕入先コード")
                 DgvItemList.Rows(index).Cells("仕入先").Value = ds3.Tables(RS).Rows(index)("仕入先名称")
                 DgvItemList.Rows(index).Cells("仕入単価").Value = ds3.Tables(RS).Rows(index)("仕入単価")
                 DgvItemList.Rows(index).Cells("仕入原価").Value = ds3.Tables(RS).Rows(index)("仕入原価")
@@ -1002,7 +1003,7 @@ Public Class Quote
             End If
         End If
 
-        If ColIdx = 8 Then
+        If ColIdx = 8 Then '仕入先検索
             Dim openForm As Form = Nothing
             openForm = New SupplierSearch(_msgHd, _db, _langHd, RowIdx, Me)
             openForm.Show(Me)
@@ -1075,7 +1076,6 @@ Public Class Quote
                 Sql1 += ",登録日 = '" & DtpRegistration.Text & "' "
                 Sql1 += ",更新日 = '" & dtToday & "' "
                 Sql1 += ",更新者 = '" & Input & "' "
-                Sql1 += "WHERE"
                 Sql1 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
                 Sql1 += " AND 見積番号 = '" & TxtQuoteNo.Text & "' "
                 Sql1 += " AND 見積番号枝番 = '" & TxtSuffixNo.Text & "' "
@@ -1096,6 +1096,7 @@ Public Class Quote
                         Sql2 += ",数量 = 0 "
                     End If
                     Sql2 += ",単位 = '" & DgvItemList.Rows(index).Cells("単位").Value.ToString & "' "
+                    Sql2 += ",仕入先コード = '" & DgvItemList.Rows(index).Cells("仕入先コード").Value.ToString & "' "
                     Sql2 += ",仕入先名称 = '" & DgvItemList.Rows(index).Cells("仕入先").Value.ToString & "' "
                     If DgvItemList.Rows(index).Cells("仕入単価").Value IsNot Nothing Then
                         Sql2 += ",仕入単価 = " & DgvItemList.Rows(index).Cells("仕入単価").Value.ToString
@@ -1176,7 +1177,7 @@ Public Class Quote
                     Else
                         Sql2 += ",粗利率 = 0"
                     End If
-                    If DgvItemList.Rows(index).Cells("リードタイム").Value IsNot Nothing Then
+                    If DgvItemList.Rows(index).Cells("リードタイム").Value IsNot Nothing And DgvItemList.Rows(index).Cells("リードタイム").Value <> "" Then
                         Sql2 += ",リードタイム = " & DgvItemList.Rows(index).Cells("リードタイム").Value.ToString
                     Else
                         Sql2 += ",リードタイム = 0"
@@ -1186,7 +1187,7 @@ Public Class Quote
                     Sql2 += ",備考 = '" & DgvItemList.Rows(index).Cells("備考").Value.ToString & "' "
                     Sql2 += ",更新者 = '" & Input & "' "
                     Sql2 += ",登録日 = '" & DtpRegistration.Text & "' "
-                    Sql1 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                    Sql2 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
                     Sql2 += " AND 見積番号 = '" & TxtQuoteNo.Text & "' "
                     Sql2 += " AND 見積番号枝番 = '" & TxtSuffixNo.Text & "' "
                     Sql2 += " AND 行番号 =" & DgvItemList.Rows(index).Cells("No").Value.ToString
@@ -1248,7 +1249,7 @@ Public Class Quote
                 For index As Integer = 0 To DgvItemList.Rows.Count - 1
                     Sql2 = ""
                     Sql2 += "INSERT INTO Public.t02_mitdt("
-                    Sql2 += "会社コード, 見積番号, 見積番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 数量, 単位, 仕入先名称, 仕入単価, 仕入原価, 関税率, 関税額, 前払法人税率, 前払法人税額, 輸送費率, 輸送費額, 仕入金額, 売単価, 売上金額, 見積単価, 見積金額, 粗利額, 粗利率, リードタイム, リードタイム単位, 備考, 更新者, 登録日)"
+                    Sql2 += "会社コード, 見積番号, 見積番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 数量, 単位, 仕入先コード, 仕入先名称, 仕入単価, 仕入原価, 関税率, 関税額, 前払法人税率, 前払法人税額, 輸送費率, 輸送費額, 仕入金額, 売単価, 売上金額, 見積単価, 見積金額, 粗利額, 粗利率, リードタイム, リードタイム単位, 備考, 更新者, 登録日)"
                     Sql2 += " VALUES("
                     Sql2 += " '" & frmC01F10_Login.loginValue.BumonCD & "'"     '会社コード
                     Sql2 += " , '" & TxtQuoteNo.Text & "'"                      '見積番号
@@ -1285,6 +1286,11 @@ Public Class Quote
                     End If
                     If DgvItemList.Rows(index).Cells("単位").Value IsNot Nothing Then     '単位
                         Sql2 += " ,'" & DgvItemList.Rows(index).Cells("単位").Value.ToString & "'"
+                    Else
+                        Sql2 += " ,''"
+                    End If
+                    If DgvItemList.Rows(index).Cells("仕入先コード").Value IsNot Nothing Then    '仕入先コード
+                        Sql2 += " ,'" & DgvItemList.Rows(index).Cells("仕入先コード").Value.ToString & "'"
                     Else
                         Sql2 += " ,''"
                     End If
@@ -1449,6 +1455,7 @@ Public Class Quote
         Sql3 += ", 型式 "
         Sql3 += ", 数量 "
         Sql3 += ", 単位 "
+        Sql3 += ", 仕入先コード "
         Sql3 += ", 仕入先名称 "
         Sql3 += ", 仕入単価 "
         Sql3 += ", 間接費率 "
