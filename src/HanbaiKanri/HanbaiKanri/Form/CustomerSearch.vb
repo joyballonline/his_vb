@@ -71,33 +71,29 @@ Public Class CustomerSearch
         Dim Sql As String = ""
         Try
             Sql += "SELECT "
-            Sql += "会社コード, "
-            Sql += "得意先コード, "
-            Sql += "得意先名, "
-            Sql += "得意先名略称, "
-            Sql += "郵便番号, "
-            Sql += "住所１, "
-            Sql += "住所２, "
-            Sql += "住所３, "
-            Sql += "電話番号, "
-            Sql += "電話番号検索用, "
-            Sql += "ＦＡＸ番号, "
-            Sql += "担当者名, "
-            Sql += "担当者役職, "
-            Sql += "既定支払条件, "
-            Sql += "メモ, "
-            Sql += "更新者, "
-            Sql += "更新日 "
+            Sql += "会社コード "
+            Sql += " ,得意先コード "
+            Sql += " ,得意先名 "
+            Sql += " ,得意先名略称 "
+            Sql += " ,郵便番号 "
+            Sql += " ,住所１ "
+            Sql += " ,住所２ "
+            Sql += " ,住所３ "
+            Sql += " ,電話番号 "
+            Sql += " ,電話番号検索用 "
+            Sql += " ,ＦＡＸ番号 "
+            Sql += " ,担当者名 "
+            Sql += " ,担当者役職 "
+            Sql += " ,既定支払条件 "
+            Sql += " ,メモ "
+            Sql += " ,更新者 "
+            Sql += " ,更新日 "
             Sql += "FROM "
             Sql += "public"
             Sql += "."
             Sql += "m10_customer"
             Sql += " WHERE "
-            Sql += "会社コード"
-            Sql += " ILIKE "
-            Sql += "'"
-            Sql += _companyCode
-            Sql += "'"
+            Sql += "会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
 
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
@@ -157,7 +153,7 @@ Public Class CustomerSearch
         End If
     End Sub
 
-    Private Sub btnSelectCustomer_Click(sender As Object, e As EventArgs) Handles btnSelectCustomer.Click
+    Private Sub btnSelectCustomer_Click(sender As Object, e As EventArgs) Handles btnSelectCustomer.Click, Dgv_Customer.DoubleClick
         Try
             'メニュー選択処理
             Dim idx As Integer
@@ -231,18 +227,9 @@ Public Class CustomerSearch
 
         Dim Sql As String = ""
         Try
-            Sql += "SELECT "
-            Sql += "* "
-            Sql += "FROM "
-            Sql += "public"
-            Sql += "."
-            Sql += "m10_customer"
-            Sql += " WHERE "
-            Sql += "会社コード"
-            Sql += " ILIKE "
-            Sql += "'%"
-            Sql += Search.Text
-            Sql += "%'"
+            Sql += "SELECT * FROM public.m10_customer"
+            Sql += " WHERE 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += " and 得意先名 ILIKE '%" & Search.Text & "%'"
 
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
@@ -275,4 +262,5 @@ Public Class CustomerSearch
             Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
         End Try
     End Sub
+
 End Class

@@ -1985,4 +1985,5 @@ Public Class Quote
             TxtPaymentTerms.Text = dsCode.Tables(RS).Rows(0)("既定支払条件").ToString
         End If
     End Sub
+
 End Class
