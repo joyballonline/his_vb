@@ -873,6 +873,10 @@ Public Class Quote
             Dim Item(27) As String
 
             '一覧選択行インデックスの取得
+            'グリッドに何もないときは処理しない
+            If DgvItemList.CurrentCell Is Nothing Then
+                Exit Sub
+            End If
 
             RowIdx = DgvItemList.CurrentCell.RowIndex
 
