@@ -233,7 +233,7 @@ Partial Class Cymn
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(221, 20)
+        Me.Label2.Location = New System.Drawing.Point(221, 19)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(11, 12)
         Me.Label2.TabIndex = 90
