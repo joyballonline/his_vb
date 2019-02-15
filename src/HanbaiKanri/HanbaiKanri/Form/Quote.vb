@@ -1385,7 +1385,7 @@ Public Class Quote
                     End If
                     Sql2 += " ," & RevoveChars(DgvItemList.Rows(index).Cells("リードタイム単位").Value.ToString)    'リードタイム単位
                     If DgvItemList.Rows(index).Cells("備考").Value IsNot Nothing Then         '備考
-                        Sql2 += " ," & RevoveChars(DgvItemList.Rows(index).Cells("備考").Value.ToString)
+                        Sql2 += " ,'" & RevoveChars(DgvItemList.Rows(index).Cells("備考").Value.ToString) & "'"
                     Else
                         Sql2 += " ,''"
                     End If
