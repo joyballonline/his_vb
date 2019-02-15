@@ -515,7 +515,7 @@ Public Class DepositManagement
 
         '入力内容チェック
         '入金入力がなかったら
-        If DgvDeposit.Rows.Count = -1 Then
+        If DgvDeposit.Rows.Count = 0 Then
             '対象データがないメッセージを表示
             _msgHd.dspMSG("NonData", frmC01F10_Login.loginValue.Language)
 
@@ -662,50 +662,59 @@ Public Class DepositManagement
         Dim SellingBalance As Integer = 0
 
         't23_skyuhd 請求基本テーブルを更新
-        For index As Integer = 0 To dsSkyuhd.Tables(RS).Rows.Count - 1
+        For i As Integer = 0 To dsSkyuhd.Tables(RS).Rows.Count - 1
 
-            If dsSkyuhd.Tables(RS).Rows(index)("入金額計") Is DBNull.Value Then
-                '請求基本の入金額計がなかったら入金額をそのまま登録
-                DsDeposit = DgvBillingInfo.Rows(index).Cells("入金額").Value
-            Else
-                '入金額計があったら入金額を加算する
-                DsDeposit = DgvBillingInfo.Rows(index).Cells("入金額").Value + dsSkyuhd.Tables(RS).Rows(index)("入金額計")
+            If DgvBillingInfo.Rows(i).Cells("入金額").Value <> 0 Then
+
+                If dsSkyuhd.Tables(RS).Rows(i)("入金額計") Is DBNull.Value Then
+                    '請求基本の入金額計がなかったら入金額をそのまま登録
+                    DsDeposit = DgvBillingInfo.Rows(i).Cells("入金額").Value
+                Else
+                    '入金額計があったら入金額を加算する
+                    DsDeposit = DgvBillingInfo.Rows(i).Cells("入金額").Value + dsSkyuhd.Tables(RS).Rows(i)("入金額計")
+                End If
+
+                '残高を更新
+                SellingBalance = dsSkyuhd.Tables(RS).Rows(i)("売掛残高") - DgvBillingInfo.Rows(i).Cells("入金額").Value
+
+                Sql = "UPDATE "
+                Sql += "Public."
+                Sql += "t23_skyuhd "
+                Sql += "SET "
+                Sql += " 入金額計"
+                Sql += " = '"
+                Sql += DsDeposit.ToString
+                Sql += "', "
+                Sql += "売掛残高"
+                Sql += " = '"
+                Sql += SellingBalance.ToString
+                Sql += "', "
+                Sql += "入金完了日"
+                Sql += " = '"
+                Sql += dtToday
+                Sql += "', "
+                Sql += "更新日"
+                Sql += " = '"
+                Sql += dtToday
+                Sql += "' "
+                Sql += "WHERE"
+                Sql += " 会社コード"
+                Sql += "='"
+                Sql += CompanyCode
+                Sql += "'"
+                Sql += " AND"
+                Sql += " 請求番号"
+                Sql += "='"
+                Sql += dsSkyuhd.Tables(RS).Rows(i)("請求番号")
+                Sql += "' "
+
+                _db.executeDB(Sql)
+
+                DsDeposit = 0
+                SellingBalance = 0
+
             End If
 
-            '残高を更新
-            SellingBalance = dsSkyuhd.Tables(RS).Rows(index)("売掛残高") - DgvBillingInfo.Rows(index).Cells("入金額").Value
-
-            Sql = "UPDATE "
-            Sql += "Public."
-            Sql += "t23_skyuhd "
-            Sql += "SET "
-            Sql += " 入金額計"
-            Sql += " = '"
-            Sql += DsDeposit.ToString
-            Sql += "', "
-            Sql += "売掛残高"
-            Sql += " = '"
-            Sql += SellingBalance.ToString
-            Sql += "', "
-            Sql += "入金完了日"
-            Sql += " = '"
-            Sql += dtToday
-            Sql += "' "
-            Sql += "WHERE"
-            Sql += " 会社コード"
-            Sql += "='"
-            Sql += CompanyCode
-            Sql += "'"
-            Sql += " AND"
-            Sql += " 請求番号"
-            Sql += "='"
-            Sql += dsSkyuhd.Tables(RS).Rows(index)("請求番号")
-            Sql += "' "
-
-            _db.executeDB(Sql)
-
-            DsDeposit = 0
-            SellingBalance = 0
         Next
 
         '_parentForm.Enabled = True
@@ -740,29 +749,4 @@ Public Class DepositManagement
         Return _db.selectDB(Sql, RS, reccnt)
     End Function
 
-    ''param1：String テーブル名
-    ''param2：String 詳細条件
-    ''Return: DataSet
-    'Private Function getJoinDsData(ByVal tableName As String, ByVal joinTableName As String, Optional ByRef txtParam As String = "") As DataSet
-    '    Dim reccnt As Integer = 0 'DB用（デフォルト）
-    '    Dim Sql As String = ""
-
-    '    Sql += "SELECT"
-    '    Sql += " *"
-    '    Sql += " FROM "
-    '    Sql += "public." & tableName
-
-    '    Sql += " INNER JOIN "
-    '    Sql += joinTableName
-    '    Sql += " ON "
-
-
-    '    Sql += " WHERE "
-    '    Sql += "会社コード ILIKE "
-    '    Sql += "'" & frmC01F10_Login.loginValue.BumonNM & "'"
-    '    Sql += txtParam
-
-    '    Console.WriteLine(Sql)
-    '    Return _db.selectDB(Sql, RS, reccnt)
-    'End Function
 End Class

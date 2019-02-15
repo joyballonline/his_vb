@@ -171,17 +171,17 @@ Public Class DepositDetailList
                 '伝票単位時のセル書式
                 DgvBilling.Columns("入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
-                For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+                For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
 
                     DgvBilling.Rows.Add()
-                    DgvBilling.Rows(index).Cells("取消").Value = getDelKbnTxt(ds.Tables(RS).Rows(index)("取消区分"))
-                    DgvBilling.Rows(index).Cells("入金番号").Value = ds.Tables(RS).Rows(index)("入金番号")
-                    DgvBilling.Rows(index).Cells("入金日").Value = ds.Tables(RS).Rows(index)("入金日")
-                    DgvBilling.Rows(index).Cells("請求先名").Value = ds.Tables(RS).Rows(index)("請求先名")
-                    DgvBilling.Rows(index).Cells("振込先").Value = ds.Tables(RS).Rows(index)("振込先")
-                    DgvBilling.Rows(index).Cells("入金額").Value = ds.Tables(RS).Rows(index)("入金額")
-                    DgvBilling.Rows(index).Cells("更新日").Value = ds.Tables(RS).Rows(index)("更新日")
-                    DgvBilling.Rows(index).Cells("備考").Value = ds.Tables(RS).Rows(index)("備考")
+                    DgvBilling.Rows(i).Cells("取消").Value = getDelKbnTxt(ds.Tables(RS).Rows(i)("取消区分"))
+                    DgvBilling.Rows(i).Cells("入金番号").Value = ds.Tables(RS).Rows(i)("入金番号")
+                    DgvBilling.Rows(i).Cells("入金日").Value = ds.Tables(RS).Rows(i)("入金日")
+                    DgvBilling.Rows(i).Cells("請求先名").Value = ds.Tables(RS).Rows(i)("請求先名")
+                    DgvBilling.Rows(i).Cells("振込先").Value = ds.Tables(RS).Rows(i)("振込先")
+                    DgvBilling.Rows(i).Cells("入金額").Value = ds.Tables(RS).Rows(i)("入金額")
+                    DgvBilling.Rows(i).Cells("更新日").Value = ds.Tables(RS).Rows(i)("更新日")
+                    DgvBilling.Rows(i).Cells("備考").Value = ds.Tables(RS).Rows(i)("備考")
                 Next
 
             Else '明細単位
@@ -209,15 +209,15 @@ Public Class DepositDetailList
                 '伝票単位時のセル書式
                 DgvBilling.Columns("入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
-                For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+                For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
                     DgvBilling.Rows.Add()
-                    DgvBilling.Rows(index).Cells("取消").Value = getDelKbnTxt(ds.Tables(RS).Rows(index)("取消区分"))
-                    DgvBilling.Rows(index).Cells("入金番号").Value = ds.Tables(RS).Rows(index)("入金番号")
-                    DgvBilling.Rows(index).Cells("請求番号").Value = ds.Tables(RS).Rows(index)("請求番号")
-                    DgvBilling.Rows(index).Cells("入金日").Value = ds.Tables(RS).Rows(index)("入金日")
-                    DgvBilling.Rows(index).Cells("請求先名").Value = ds.Tables(RS).Rows(index)("請求先名")
-                    DgvBilling.Rows(index).Cells("入金額").Value = ds.Tables(RS).Rows(index)("入金消込額計")
-                    DgvBilling.Rows(index).Cells("備考").Value = ds.Tables(RS).Rows(index)("備考")
+                    DgvBilling.Rows(i).Cells("取消").Value = getDelKbnTxt(ds.Tables(RS).Rows(i)("取消区分"))
+                    DgvBilling.Rows(i).Cells("入金番号").Value = ds.Tables(RS).Rows(i)("入金番号")
+                    DgvBilling.Rows(i).Cells("請求番号").Value = ds.Tables(RS).Rows(i)("請求番号")
+                    DgvBilling.Rows(i).Cells("入金日").Value = ds.Tables(RS).Rows(i)("入金日")
+                    DgvBilling.Rows(i).Cells("請求先名").Value = ds.Tables(RS).Rows(i)("請求先名")
+                    DgvBilling.Rows(i).Cells("入金額").Value = ds.Tables(RS).Rows(i)("入金消込額計")
+                    DgvBilling.Rows(i).Cells("備考").Value = ds.Tables(RS).Rows(i)("備考")
                 Next
             End If
 
@@ -245,17 +245,6 @@ Public Class DepositDetailList
     Private Sub ChkCancelData_CheckedChanged(sender As Object, e As EventArgs) Handles ChkCancelData.CheckedChanged
         setDgvBilling()
     End Sub
-
-    'Private Sub BtnBillingView_Click(sender As Object, e As EventArgs) Handles BtnBillingView.Click
-    '    Dim RowIdx As Integer
-    '    RowIdx = Me.DgvBilling.CurrentCell.RowIndex
-    '    Dim No As String = DgvBilling.Rows(RowIdx).Cells("受注番号").Value
-    '    Dim Suffix As String = DgvBilling.Rows(RowIdx).Cells("受注番号枝番").Value
-    '    Dim Status As String = "VIEW"
-    '    Dim openForm As Form = Nothing
-    '    openForm = New DepositManagement(_msgHd, _db, _langHd, Me, No, Suffix, Status)   '処理選択
-    '    openForm.Show(Me)
-    'End Sub
 
     '入金取消処理
     Private Sub BtnBillingCancel_Click(sender As Object, e As EventArgs) Handles BtnDepositCancel.Click
@@ -430,7 +419,12 @@ Public Class DepositDetailList
             Sql += "更新者"
             Sql += " = '"
             Sql += frmC01F10_Login.loginValue.TantoNM
+            Sql += "', "
+            Sql += "更新日"
+            Sql += " = '"
+            Sql += dtNow
             Sql += "' "
+
 
             Sql += "WHERE"
             Sql += " 会社コード"

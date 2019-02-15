@@ -1468,7 +1468,7 @@ Public Class OrderManagement
         Sql3 += "INSERT INTO "
         Sql3 += "Public."
         Sql3 += "t23_skyuhd("
-        Sql3 += "会社コード, 請求番号, 客先番号, 請求区分, 請求日, 受注番号, 受注番号枝番, 得意先コード, 得意先名, 請求金額計, 売掛残高, 備考1, 備考2, 取消区分, 登録日, 更新者)"
+        Sql3 += "会社コード, 請求番号, 客先番号, 請求区分, 請求日, 受注番号, 受注番号枝番, 得意先コード, 得意先名, 請求金額計, 売掛残高, 備考1, 備考2, 取消区分, 登録日, 更新者, 更新日)"
         Sql3 += " VALUES('"
         Sql3 += ds1.Tables(RS).Rows(0)("会社コード").ToString
         Sql3 += "', '"
@@ -1502,6 +1502,8 @@ Public Class OrderManagement
         Sql3 += dtToday
         Sql3 += "', '"
         Sql3 += frmC01F10_Login.loginValue.TantoNM
+        Sql3 += "', '"
+        Sql3 += dtToday
         Sql3 += " ')"
         Sql3 += "RETURNING 会社コード"
         Sql3 += ", "

@@ -272,7 +272,7 @@ Partial Class DepositDetailList
         'dtBillingDateSince
         '
         Me.dtBillingDateSince.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.dtBillingDateSince.CustomFormat = "yyyy/MM/dd"
+        Me.dtBillingDateSince.CustomFormat = ""
         Me.dtBillingDateSince.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.dtBillingDateSince.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtBillingDateSince.Location = New System.Drawing.Point(760, 42)
@@ -285,7 +285,7 @@ Partial Class DepositDetailList
         'dtBillingDateUntil
         '
         Me.dtBillingDateUntil.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.dtBillingDateUntil.CustomFormat = "yyyy/MM/dd"
+        Me.dtBillingDateUntil.CustomFormat = ""
         Me.dtBillingDateUntil.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.dtBillingDateUntil.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtBillingDateUntil.Location = New System.Drawing.Point(959, 41)
