@@ -1073,7 +1073,7 @@ Public Class Quote
                 Sql1 += ",営業担当者 = '" & TxtSales.Text & "' "
                 Sql1 += ",入力担当者コード = '" & frmC01F10_Login.loginValue.TantoCD & "' "
                 Sql1 += ",入力担当者 = '" & TxtInput.Text & "' "
-                Sql1 += ",備考 = '" & TxtRemarks.Text & "' "
+                Sql1 += ",備考 = '" & RevoveChars(TxtRemarks.Text) & "' "
                 Sql1 += ",ＶＡＴ = " & TxtVat.Text
                 Sql1 += ",登録日 = '" & DtpRegistration.Text & "' "
                 Sql1 += ",更新日 = '" & dtToday & "' "
@@ -1186,7 +1186,7 @@ Public Class Quote
                         Sql2 += ",リードタイム単位 = 0"
                     End If
 
-                    Sql2 += ",備考 = '" & DgvItemList.Rows(index).Cells("備考").Value.ToString & "' "
+                    Sql2 += ",備考 = '" & RevoveChars(DgvItemList.Rows(index).Cells("備考").Value.ToString) & "' "
                     Sql2 += ",更新者 = '" & Input & "' "
                     Sql2 += ",登録日 = '" & DtpRegistration.Text & "' "
                     Sql2 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
@@ -1234,7 +1234,7 @@ Public Class Quote
                 Sql1 += ", '" & TxtSales.Text & "'"                             '営業担当者
                 Sql1 += ", '" & frmC01F10_Login.loginValue.TantoCD & "' "       '入力担当者コード
                 Sql1 += ", '" & TxtInput.Text & "'"                             '入力担当者
-                Sql1 += ", '" & TxtRemarks.Text & "'"                           '備考
+                Sql1 += ", '" & RevoveChars(TxtRemarks.Text) & "'"              '備考
                 Sql1 += ","                                                     'ＶＡＴ
                 If TxtVat.Text = Nothing Then
                     Sql1 += "0"
