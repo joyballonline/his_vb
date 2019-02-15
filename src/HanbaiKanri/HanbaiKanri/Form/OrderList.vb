@@ -127,8 +127,8 @@ Public Class OrderList
                 Next
 
             Else
-                '明細単位の場合
 
+                '明細単位の場合
                 'joinするのでとりあえず直書き
                 Sql = "SELECT"
                 Sql += " *"
@@ -151,8 +151,8 @@ Public Class OrderList
                 Dim customerAddress As String = TxtAddress.Text
                 Dim customerTel As String = TxtTel.Text
                 Dim customerCode As String = TxtCustomerCode.Text
-                Dim sinceDate As String = TxtOrderDateSince.Text
-                Dim untilDate As String = TxtOrderDateUntil.Text
+                Dim sinceDate As String = dtOrderDateSince.Text
+                Dim untilDate As String = dtOrderDateUntil.Text
                 Dim sinceNum As String = TxtOrderSince.Text
                 Dim untilNum As String = TxtOrderUntil.Text
                 Dim salesName As String = TxtSales.Text
@@ -367,7 +367,9 @@ Public Class OrderList
             BtnBill.Location = New Point(997, 509)
         End If
 
-        Dim Status As String = "EXCLUSION"
+        '検索（Date）の初期値
+        dtOrderDateSince.Value = DateAdd("d", CommonConst.SINCE_DEFAULT_DAY, DateTime.Today)
+        dtOrderDateUntil.Value = DateTime.Today
 
         OrderListLoad() '一覧表示
 
@@ -428,8 +430,8 @@ Public Class OrderList
     Private Sub BtnOrderEdit_Click(sender As Object, e As EventArgs) Handles BtnOrderEdit.Click
         Dim RowIdx As Integer
         RowIdx = Me.DgvCymnhd.CurrentCell.RowIndex
-        Dim No As String = DgvCymnhd.Rows(RowIdx).Cells(0).Value
-        Dim Suffix As String = DgvCymnhd.Rows(RowIdx).Cells(1).Value
+        Dim No As String = DgvCymnhd.Rows(RowIdx).Cells("受注番号").Value
+        Dim Suffix As String = DgvCymnhd.Rows(RowIdx).Cells("受注番号枝番").Value
         Dim Status As String = "EDIT"
         Dim openForm As Form = Nothing
         openForm = New Order(_msgHd, _db, _langHd, Me, No, Suffix, Status)   '処理選択
@@ -442,8 +444,8 @@ Public Class OrderList
     Private Sub BtnOrderView_Click(sender As Object, e As EventArgs) Handles BtnOrderView.Click
         Dim RowIdx As Integer
         RowIdx = Me.DgvCymnhd.CurrentCell.RowIndex
-        Dim No As String = DgvCymnhd.Rows(RowIdx).Cells(0).Value
-        Dim Suffix As String = DgvCymnhd.Rows(RowIdx).Cells(1).Value
+        Dim No As String = DgvCymnhd.Rows(RowIdx).Cells("受注番号").Value
+        Dim Suffix As String = DgvCymnhd.Rows(RowIdx).Cells("受注番号枝番").Value
         Dim Status As String = "VIEW"
 
         Dim openForm As Form = Nothing
@@ -455,8 +457,8 @@ Public Class OrderList
     Private Sub BtnOrder_Click(sender As Object, e As EventArgs) Handles BtnSales.Click
         Dim RowIdx As Integer
         RowIdx = Me.DgvCymnhd.CurrentCell.RowIndex
-        Dim No As String = DgvCymnhd.Rows(RowIdx).Cells(0).Value
-        Dim Suffix As String = DgvCymnhd.Rows(RowIdx).Cells(1).Value
+        Dim No As String = DgvCymnhd.Rows(RowIdx).Cells("受注番号").Value
+        Dim Suffix As String = DgvCymnhd.Rows(RowIdx).Cells("受注番号枝番").Value
         Dim openForm As Form = Nothing
         openForm = New OrderManagement(_msgHd, _db, _langHd, No, Suffix)   '処理選択
         openForm.Show(Me)
@@ -466,8 +468,8 @@ Public Class OrderList
     Private Sub BtnReceipt_Click(sender As Object, e As EventArgs) Handles BtnGoodsIssue.Click
         Dim RowIdx As Integer
         RowIdx = Me.DgvCymnhd.CurrentCell.RowIndex
-        Dim No As String = DgvCymnhd.Rows(RowIdx).Cells(0).Value
-        Dim Suffix As String = DgvCymnhd.Rows(RowIdx).Cells(1).Value
+        Dim No As String = DgvCymnhd.Rows(RowIdx).Cells("受注番号").Value
+        Dim Suffix As String = DgvCymnhd.Rows(RowIdx).Cells("受注番号枝番").Value
         Dim openForm As Form = Nothing
         openForm = New GoodsIssue(_msgHd, _db, _langHd, No, Suffix)   '処理選択
         openForm.Show(Me)
@@ -530,8 +532,8 @@ Public Class OrderList
     Private Sub BtnOrderClone_Click(sender As Object, e As EventArgs) Handles BtnOrderClone.Click
         Dim RowIdx As Integer
         RowIdx = Me.DgvCymnhd.CurrentCell.RowIndex
-        Dim No As String = DgvCymnhd.Rows(RowIdx).Cells(0).Value
-        Dim Suffix As String = DgvCymnhd.Rows(RowIdx).Cells(1).Value
+        Dim No As String = DgvCymnhd.Rows(RowIdx).Cells("受注番号").Value
+        Dim Suffix As String = DgvCymnhd.Rows(RowIdx).Cells("受注番号枝番").Value
         Dim Status As String = "CLONE"
         Dim openForm As Form = Nothing
         openForm = New Order(_msgHd, _db, _langHd, Me, No, Suffix, Status)   '処理選択
@@ -546,8 +548,8 @@ Public Class OrderList
     Private Sub BtnBill_Click(sender As Object, e As EventArgs) Handles BtnBill.Click
         Dim RowIdx As Integer
         RowIdx = Me.DgvCymnhd.CurrentCell.RowIndex
-        Dim No As String = DgvCymnhd.Rows(RowIdx).Cells(0).Value
-        Dim Suffix As String = DgvCymnhd.Rows(RowIdx).Cells(1).Value
+        Dim No As String = DgvCymnhd.Rows(RowIdx).Cells("受注番号").Value
+        Dim Suffix As String = DgvCymnhd.Rows(RowIdx).Cells("受注番号枝番").Value
         Dim openForm As Form = Nothing
         openForm = New BillingManagement(_msgHd, _db, _langHd, Me, No, Suffix)   '処理選択
         Me.Enabled = False
@@ -679,19 +681,19 @@ Public Class OrderList
         End If
 
 
-        DgvCymnhd.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        DgvCymnhd.Columns(8).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        DgvCymnhd.Columns(9).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        DgvCymnhd.Columns(10).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        DgvCymnhd.Columns(11).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        DgvCymnhd.Columns(13).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        DgvCymnhd.Columns(14).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        DgvCymnhd.Columns(15).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        DgvCymnhd.Columns(16).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        DgvCymnhd.Columns(17).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvCymnhd.Columns("行番号").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvCymnhd.Columns("仕入値").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvCymnhd.Columns("受注数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvCymnhd.Columns("売上数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvCymnhd.Columns("受注残数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvCymnhd.Columns("間接費").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvCymnhd.Columns("売単価").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvCymnhd.Columns("売上金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvCymnhd.Columns("粗利額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvCymnhd.Columns("粗利率").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
-        DgvCymnhd.Columns(19).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        DgvCymnhd.Columns(20).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvCymnhd.Columns("出庫数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvCymnhd.Columns("未出庫数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
     End Sub
 
@@ -704,8 +706,8 @@ Public Class OrderList
         Dim customerAddress As String = TxtAddress.Text
         Dim customerTel As String = TxtTel.Text
         Dim customerCode As String = TxtCustomerCode.Text
-        Dim sinceDate As String = TxtOrderDateSince.Text
-        Dim untilDate As String = TxtOrderDateUntil.Text
+        Dim sinceDate As String = dtOrderDateSince.Text
+        Dim untilDate As String = dtOrderDateUntil.Text
         Dim sinceNum As String = TxtOrderSince.Text
         Dim untilNum As String = TxtOrderUntil.Text
         Dim salesName As String = TxtSales.Text
