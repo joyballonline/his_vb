@@ -40,7 +40,7 @@ Public Class DepositManagement
     Private Suffix As String = ""
     Private _parentForm As Form
     Private _status As String = ""
-    Private BillingAmount As Integer = 0
+    Private BillingAmount As Long = 0
     Private Balance As Integer = 0
 
     '-------------------------------------------------------------------------------
@@ -198,7 +198,7 @@ Public Class DepositManagement
     '請求先情報
     Private Sub setDgvCustomer()
         Dim Sql As String = ""
-        Dim AccountsReceivable As Integer
+        Dim AccountsReceivable As Long
 
         Sql = " AND "
         Sql += "得意先コード"
@@ -383,7 +383,7 @@ Public Class DepositManagement
 
     '自動振分の実行
     Private Sub BtnCal_Click(sender As Object, e As EventArgs) Handles BtnCal.Click
-        Dim Total As Integer = 0
+        Dim Total As Long = 0
         Dim count As Integer = 0
 
         For index As Integer = 0 To DgvDeposit.Rows.Count - 1
@@ -484,10 +484,10 @@ Public Class DepositManagement
 
     '登録処理
     Private Sub BtnRegist_Click(sender As Object, e As EventArgs) Handles BtnRegist.Click
-        Dim errflg As Boolean = True
+
         Dim dtToday As DateTime = DateTime.Now
         Dim reccnt As Integer = 0
-        Dim DepositAmount As Integer = 0
+        Dim DepositAmount As Long = 0
 
         Dim Sql As String = ""
 
@@ -532,18 +532,77 @@ Public Class DepositManagement
             End If
         Next
 
-        'エラーがなかったら
-        If errflg Then
+        't25_nkinhd 入金基本テーブルに新規追加
+        Sql = "INSERT INTO "
+        Sql += "Public."
+        Sql += "t25_nkinhd("
+        Sql += "会社コード, 入金番号, 入金日, 請求先コード, 請求先名, 振込先, 入金額,  備考, 取消区分, 登録日, 更新者, 更新日"
+        Sql += ") VALUES ('"
+        Sql += CompanyCode
+        Sql += "', '"
+        Sql += PMSaiban
+        Sql += "', '"
+        Sql += dtToday
+        Sql += "', '"
+        Sql += CustomerCode
+        Sql += "', '"
+        Sql += CustomerName
+        Sql += "', '"
+        Sql += dsCompany.Tables(RS).Rows(0)("銀行名")
+        Sql += " "
+        Sql += dsCompany.Tables(RS).Rows(0)("支店名")
+        Sql += " "
+        Sql += dsCompany.Tables(RS).Rows(0)("預金種目")
+        Sql += " "
+        Sql += dsCompany.Tables(RS).Rows(0)("口座番号")
+        Sql += " "
+        Sql += dsCompany.Tables(RS).Rows(0)("口座名義")
+        Sql += "', '"
+        Sql += DepositAmount.ToString
+        Sql += "', '"
+        Sql += TxtRemarks.Text
+        Sql += "', '"
+        Sql += "0"
+        Sql += "', '"
+        Sql += dtToday
+        Sql += "', '"
+        Sql += frmC01F10_Login.loginValue.TantoNM
+        Sql += "', '"
+        Sql += dtToday
+        Sql += " ')"
 
-            't25_nkinhd 入金基本テーブルに新規追加
+        _db.executeDB(Sql)
+
+        't26_nkindt 入金明細テーブルに入金入力テーブルの明細を追加
+        For i As Integer = 0 To DgvDeposit.Rows.Count - 1
             Sql = "INSERT INTO "
             Sql += "Public."
-            Sql += "t25_nkinhd("
-            Sql += "会社コード, 入金番号, 入金日, 請求先コード, 請求先名, 振込先, 入金額,  備考, 取消区分, 登録日, 更新者, 更新日"
-            Sql += ") VALUES ('"
+            Sql += "t26_nkindt("
+            Sql += "会社コード, 入金番号, 行番号, 入金種別, 入金種別名, 振込先, 入金額, 更新者, 更新日, 請求先コード, 請求先名, 入金日, 備考)"
+            Sql += " VALUES('"
             Sql += CompanyCode
             Sql += "', '"
             Sql += PMSaiban
+            Sql += "', '"
+            Sql += DgvDeposit.Rows(i).Cells("行番号").Value.ToString
+            Sql += "', '"
+            Sql += DgvDeposit.Rows(i).Cells("入金種目").Value.ToString
+            Sql += "', '"
+            Sql += DgvDeposit.Rows(i).Cells("入金種目").Value.ToString
+            Sql += "', '"
+            Sql += dsCompany.Tables(RS).Rows(0)("銀行名").ToString
+            Sql += " "
+            Sql += dsCompany.Tables(RS).Rows(0)("支店名").ToString
+            Sql += " "
+            Sql += dsCompany.Tables(RS).Rows(0)("預金種目").ToString
+            Sql += " "
+            Sql += dsCompany.Tables(RS).Rows(0)("口座番号").ToString
+            Sql += " "
+            Sql += dsCompany.Tables(RS).Rows(0)("口座名義").ToString
+            Sql += "', '"
+            Sql += DgvDeposit.Rows(i).Cells("入力入金額").Value.ToString
+            Sql += "', '"
+            Sql += frmC01F10_Login.loginValue.TantoNM
             Sql += "', '"
             Sql += dtToday
             Sql += "', '"
@@ -551,175 +610,112 @@ Public Class DepositManagement
             Sql += "', '"
             Sql += CustomerName
             Sql += "', '"
-            Sql += dsCompany.Tables(RS).Rows(0)("銀行名")
-            Sql += " "
-            Sql += dsCompany.Tables(RS).Rows(0)("支店名")
-            Sql += " "
-            Sql += dsCompany.Tables(RS).Rows(0)("預金種目")
-            Sql += " "
-            Sql += dsCompany.Tables(RS).Rows(0)("口座番号")
-            Sql += " "
-            Sql += dsCompany.Tables(RS).Rows(0)("口座名義")
-            Sql += "', '"
-            Sql += DepositAmount.ToString
+            Sql += dtToday
             Sql += "', '"
             Sql += TxtRemarks.Text
-            Sql += "', '"
-            Sql += "0"
-            Sql += "', '"
-            Sql += dtToday
-            Sql += "', '"
-            Sql += frmC01F10_Login.loginValue.TantoNM
-            Sql += "', '"
-            Sql += dtToday
             Sql += " ')"
 
             _db.executeDB(Sql)
 
-            't26_nkindt 入金明細テーブルに入金入力テーブルの明細を追加
-            For i As Integer = 0 To DgvDeposit.Rows.Count - 1
+        Next
+
+        't27_nkinkshihd 入金消込テーブルに新規追加
+        For i As Integer = 0 To DgvBillingInfo.Rows.Count - 1
+
+            '複数の買掛情報がある場合、支払金額が0のものは登録しない
+            If DgvBillingInfo.Rows(i).Cells("入金額").Value <> 0 Then
+
                 Sql = "INSERT INTO "
                 Sql += "Public."
-                Sql += "t26_nkindt("
-                Sql += "会社コード, 入金番号, 行番号, 入金種別, 入金種別名, 振込先, 入金額, 更新者, 更新日, 請求先コード, 請求先名, 入金日, 備考)"
+                Sql += "t27_nkinkshihd("
+                Sql += "会社コード, 入金番号, 入金日, 請求番号, 請求先コード, 請求先名, 入金消込額計, 備考, 取消区分, 更新者, 更新日)"
                 Sql += " VALUES('"
                 Sql += CompanyCode
                 Sql += "', '"
                 Sql += PMSaiban
                 Sql += "', '"
-                Sql += DgvDeposit.Rows(i).Cells("行番号").Value.ToString
-                Sql += "', '"
-                Sql += DgvDeposit.Rows(i).Cells("入金種目").Value.ToString
-                Sql += "', '"
-                Sql += DgvDeposit.Rows(i).Cells("入金種目").Value.ToString
-                Sql += "', '"
-                Sql += dsCompany.Tables(RS).Rows(0)("銀行名").ToString
-                Sql += " "
-                Sql += dsCompany.Tables(RS).Rows(0)("支店名").ToString
-                Sql += " "
-                Sql += dsCompany.Tables(RS).Rows(0)("預金種目").ToString
-                Sql += " "
-                Sql += dsCompany.Tables(RS).Rows(0)("口座番号").ToString
-                Sql += " "
-                Sql += dsCompany.Tables(RS).Rows(0)("口座名義").ToString
-                Sql += "', '"
-                Sql += DgvDeposit.Rows(i).Cells("入力入金額").Value.ToString
-                Sql += "', '"
-                Sql += frmC01F10_Login.loginValue.TantoNM
-                Sql += "', '"
                 Sql += dtToday
+                Sql += "', '"
+                Sql += DgvBillingInfo.Rows(i).Cells("請求情報請求番号").Value.ToString
                 Sql += "', '"
                 Sql += CustomerCode
                 Sql += "', '"
                 Sql += CustomerName
                 Sql += "', '"
-                Sql += dtToday
+                Sql += DgvBillingInfo.Rows(i).Cells("入金額").Value.ToString
                 Sql += "', '"
                 Sql += TxtRemarks.Text
+                Sql += "', '"
+                Sql += "0"
+                Sql += "', '"
+                Sql += frmC01F10_Login.loginValue.TantoNM
+                Sql += "', '"
+                Sql += dtToday
                 Sql += " ')"
 
                 _db.executeDB(Sql)
 
-            Next
+            End If
+        Next
 
-            't27_nkinkshihd 入金消込テーブルに新規追加
-            For i As Integer = 0 To DgvBillingInfo.Rows.Count - 1
+        Dim DsDeposit As Integer = 0
+        Dim SellingBalance As Integer = 0
 
-                '複数の買掛情報がある場合、支払金額が0のものは登録しない
-                If DgvBillingInfo.Rows(i).Cells("入金額").Value <> 0 Then
+        't23_skyuhd 請求基本テーブルを更新
+        For index As Integer = 0 To dsSkyuhd.Tables(RS).Rows.Count - 1
 
-                    Sql = "INSERT INTO "
-                    Sql += "Public."
-                    Sql += "t27_nkinkshihd("
-                    Sql += "会社コード, 入金番号, 入金日, 請求番号, 請求先コード, 請求先名, 入金消込額計, 備考, 取消区分, 更新者, 更新日)"
-                    Sql += " VALUES('"
-                    Sql += CompanyCode
-                    Sql += "', '"
-                    Sql += PMSaiban
-                    Sql += "', '"
-                    Sql += dtToday
-                    Sql += "', '"
-                    Sql += DgvBillingInfo.Rows(i).Cells("請求情報請求番号").Value.ToString
-                    Sql += "', '"
-                    Sql += CustomerCode
-                    Sql += "', '"
-                    Sql += CustomerName
-                    Sql += "', '"
-                    Sql += DgvBillingInfo.Rows(i).Cells("入金額").Value.ToString
-                    Sql += "', '"
-                    Sql += TxtRemarks.Text
-                    Sql += "', '"
-                    Sql += "0"
-                    Sql += "', '"
-                    Sql += frmC01F10_Login.loginValue.TantoNM
-                    Sql += "', '"
-                    Sql += dtToday
-                    Sql += " ')"
+            If dsSkyuhd.Tables(RS).Rows(index)("入金額計") Is DBNull.Value Then
+                '請求基本の入金額計がなかったら入金額をそのまま登録
+                DsDeposit = DgvBillingInfo.Rows(index).Cells("入金額").Value
+            Else
+                '入金額計があったら入金額を加算する
+                DsDeposit = DgvBillingInfo.Rows(index).Cells("入金額").Value + dsSkyuhd.Tables(RS).Rows(index)("入金額計")
+            End If
 
-                    _db.executeDB(Sql)
+            '残高を更新
+            SellingBalance = dsSkyuhd.Tables(RS).Rows(index)("売掛残高") - DgvBillingInfo.Rows(index).Cells("入金額").Value
 
-                End If
-            Next
+            Sql = "UPDATE "
+            Sql += "Public."
+            Sql += "t23_skyuhd "
+            Sql += "SET "
+            Sql += " 入金額計"
+            Sql += " = '"
+            Sql += DsDeposit.ToString
+            Sql += "', "
+            Sql += "売掛残高"
+            Sql += " = '"
+            Sql += SellingBalance.ToString
+            Sql += "', "
+            Sql += "入金完了日"
+            Sql += " = '"
+            Sql += dtToday
+            Sql += "' "
+            Sql += "WHERE"
+            Sql += " 会社コード"
+            Sql += "='"
+            Sql += CompanyCode
+            Sql += "'"
+            Sql += " AND"
+            Sql += " 請求番号"
+            Sql += "='"
+            Sql += dsSkyuhd.Tables(RS).Rows(index)("請求番号")
+            Sql += "' "
 
-            Dim DsDeposit As Integer = 0
-            Dim SellingBalance As Integer = 0
+            _db.executeDB(Sql)
 
-            't23_skyuhd 請求基本テーブルを更新
-            For index As Integer = 0 To dsSkyuhd.Tables(RS).Rows.Count - 1
+            DsDeposit = 0
+            SellingBalance = 0
+        Next
 
-                If dsSkyuhd.Tables(RS).Rows(index)("入金額計") Is DBNull.Value Then
-                    '請求基本の入金額計がなかったら入金額をそのまま登録
-                    DsDeposit = DgvBillingInfo.Rows(index).Cells("入金額").Value
-                Else
-                    '入金額計があったら入金額を加算する
-                    DsDeposit = DgvBillingInfo.Rows(index).Cells("入金額").Value + dsSkyuhd.Tables(RS).Rows(index)("入金額計")
-                End If
+        '_parentForm.Enabled = True
+        '_parentForm.Show()
 
-                '残高を更新
-                SellingBalance = dsSkyuhd.Tables(RS).Rows(index)("売掛残高") - DgvBillingInfo.Rows(index).Cells("入金額").Value
+        Dim openForm As Form = Nothing
+        openForm = New DepositList(_msgHd, _db, _langHd)
+        openForm.Show()
 
-                Sql = "UPDATE "
-                Sql += "Public."
-                Sql += "t23_skyuhd "
-                Sql += "SET "
-                Sql += " 入金額計"
-                Sql += " = '"
-                Sql += DsDeposit.ToString
-                Sql += "', "
-                Sql += "売掛残高"
-                Sql += " = '"
-                Sql += SellingBalance.ToString
-                Sql += "', "
-                Sql += "入金完了日"
-                Sql += " = '"
-                Sql += dtToday
-                Sql += "' "
-                Sql += "WHERE"
-                Sql += " 会社コード"
-                Sql += "='"
-                Sql += CompanyCode
-                Sql += "'"
-                Sql += " AND"
-                Sql += " 請求番号"
-                Sql += "='"
-                Sql += dsSkyuhd.Tables(RS).Rows(index)("請求番号")
-                Sql += "' "
-
-                _db.executeDB(Sql)
-
-                DsDeposit = 0
-                SellingBalance = 0
-            Next
-
-            '_parentForm.Enabled = True
-            '_parentForm.Show()
-
-            Dim openForm As Form = Nothing
-            openForm = New DepositList(_msgHd, _db, _langHd)
-            openForm.Show()
-
-            Me.Dispose()
-        End If
+        Me.Dispose()
     End Sub
 
     'param1：String テーブル名

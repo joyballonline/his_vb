@@ -238,6 +238,10 @@ Public Class CommonConst
     Public Const BILLING_KBN_DEPOSIT As Integer = 1                         '前受請求
     Public Const BILLING_KBN_NORMAL As Integer = 2                          '通常請求
 
+    '請求区分テキスト
+    Public Const BILLING_KBN_DEPOSIT_TXT As String = "前受金請求"                         '前受請求
+    Public Const BILLING_KBN_NORMAL_TXT As String = "通常請求"                          '通常請求
+
     '買掛区分
     Public Const APC_KBN_DEPOSIT As Integer = 1                         '前払買掛
     Public Const APC_KBN_NORMAL As Integer = 2                          '通常買掛
@@ -256,6 +260,9 @@ Public Class CommonConst
     '取消区分
     Public Const CANCEL_KBN_ENABLED As Integer = 0                      '未取消
     Public Const CANCEL_KBN_DISABLED As Integer = 1                 '取消済
+
+    '取消 テキスト
+    Public Const CANCEL_KBN_DISABLED_TXT As String = "済"                '取消
 
     '言語
     Public Const LANG_KBN_JPN As String = "JPN"                         '日本語
