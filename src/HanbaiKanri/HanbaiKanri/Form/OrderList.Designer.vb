@@ -29,13 +29,11 @@ Partial Class OrderList
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.TxtOrderUntil = New System.Windows.Forms.TextBox()
-        Me.TxtOrderDateUntil = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.TxtSales = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.TxtOrderSince = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.TxtOrderDateSince = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.TxtCustomerCode = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -58,6 +56,8 @@ Partial Class OrderList
         Me.LblMode = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.TxtCustomerPO = New System.Windows.Forms.TextBox()
+        Me.dtOrderDateSince = New System.Windows.Forms.DateTimePicker()
+        Me.dtOrderDateUntil = New System.Windows.Forms.DateTimePicker()
         CType(Me.DgvCymnhd, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -132,14 +132,6 @@ Partial Class OrderList
         Me.TxtOrderUntil.Size = New System.Drawing.Size(170, 22)
         Me.TxtOrderUntil.TabIndex = 8
         '
-        'TxtOrderDateUntil
-        '
-        Me.TxtOrderDateUntil.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtOrderDateUntil.Location = New System.Drawing.Point(959, 42)
-        Me.TxtOrderDateUntil.Name = "TxtOrderDateUntil"
-        Me.TxtOrderDateUntil.Size = New System.Drawing.Size(170, 22)
-        Me.TxtOrderDateUntil.TabIndex = 6
-        '
         'Label6
         '
         Me.Label6.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
@@ -191,14 +183,6 @@ Partial Class OrderList
         Me.Label8.TabIndex = 49
         Me.Label8.Text = "受注日"
         Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'TxtOrderDateSince
-        '
-        Me.TxtOrderDateSince.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtOrderDateSince.Location = New System.Drawing.Point(760, 42)
-        Me.TxtOrderDateSince.Name = "TxtOrderDateSince"
-        Me.TxtOrderDateSince.Size = New System.Drawing.Size(170, 22)
-        Me.TxtOrderDateSince.TabIndex = 5
         '
         'Label4
         '
@@ -432,10 +416,38 @@ Partial Class OrderList
         Me.TxtCustomerPO.Size = New System.Drawing.Size(170, 22)
         Me.TxtCustomerPO.TabIndex = 10
         '
+        'dtOrderDateSince
+        '
+        Me.dtOrderDateSince.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.dtOrderDateSince.CustomFormat = ""
+        Me.dtOrderDateSince.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.dtOrderDateSince.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtOrderDateSince.Location = New System.Drawing.Point(760, 41)
+        Me.dtOrderDateSince.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
+        Me.dtOrderDateSince.Name = "dtOrderDateSince"
+        Me.dtOrderDateSince.Size = New System.Drawing.Size(170, 22)
+        Me.dtOrderDateSince.TabIndex = 331
+        Me.dtOrderDateSince.Value = New Date(2019, 1, 1, 0, 0, 0, 0)
+        '
+        'dtOrderDateUntil
+        '
+        Me.dtOrderDateUntil.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.dtOrderDateUntil.CustomFormat = ""
+        Me.dtOrderDateUntil.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.dtOrderDateUntil.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtOrderDateUntil.Location = New System.Drawing.Point(959, 42)
+        Me.dtOrderDateUntil.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
+        Me.dtOrderDateUntil.Name = "dtOrderDateUntil"
+        Me.dtOrderDateUntil.Size = New System.Drawing.Size(170, 22)
+        Me.dtOrderDateUntil.TabIndex = 332
+        Me.dtOrderDateUntil.Value = New Date(2019, 1, 1, 0, 0, 0, 0)
+        '
         'OrderList
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.dtOrderDateUntil)
+        Me.Controls.Add(Me.dtOrderDateSince)
         Me.Controls.Add(Me.RbtnDetails)
         Me.Controls.Add(Me.RbtnSlip)
         Me.Controls.Add(Me.Label11)
@@ -452,13 +464,11 @@ Partial Class OrderList
         Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.TxtOrderUntil)
-        Me.Controls.Add(Me.TxtOrderDateUntil)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.TxtSales)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.TxtOrderSince)
         Me.Controls.Add(Me.Label8)
-        Me.Controls.Add(Me.TxtOrderDateSince)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.TxtCustomerCode)
         Me.Controls.Add(Me.Label3)
@@ -488,13 +498,11 @@ Partial Class OrderList
     Friend WithEvents Label9 As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents TxtOrderUntil As TextBox
-    Friend WithEvents TxtOrderDateUntil As TextBox
     Friend WithEvents Label6 As Label
     Friend WithEvents TxtSales As TextBox
     Friend WithEvents Label7 As Label
     Friend WithEvents TxtOrderSince As TextBox
     Friend WithEvents Label8 As Label
-    Friend WithEvents TxtOrderDateSince As TextBox
     Friend WithEvents Label4 As Label
     Friend WithEvents TxtCustomerCode As TextBox
     Friend WithEvents Label3 As Label
@@ -517,4 +525,6 @@ Partial Class OrderList
     Friend WithEvents LblMode As Label
     Friend WithEvents Label11 As Label
     Friend WithEvents TxtCustomerPO As TextBox
+    Friend WithEvents dtOrderDateSince As DateTimePicker
+    Friend WithEvents dtOrderDateUntil As DateTimePicker
 End Class
