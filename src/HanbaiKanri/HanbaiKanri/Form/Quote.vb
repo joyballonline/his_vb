@@ -1816,6 +1816,8 @@ Public Class Quote
 
     End Sub
 
+    'プルーフ発行処理
+    '
     Private Sub BtnProof_Click(sender As Object, e As EventArgs) Handles BtnProof.Click
         Dim QuoteNo As String = TxtQuoteNo.Text
         Dim QuoteSuffix As String = TxtSuffixNo.Text
@@ -1930,7 +1932,22 @@ Public Class Quote
                 End If
 
                 sheet.Range("A" & currentRow).Value = DgvItemList.Rows(index).Cells("No").Value
-                sheet.Range("B" & currentRow).Value = PurchaseCategory(index) = DgvItemList(1, index).Value
+                'sheet.Range("B" & currentRow).Value = PurchaseCategory(index) = DgvItemList(1, index).Value
+                'sheet.Range("B" & currentRow).Value = DgvItemList.Rows(index).Cells("仕入区分").Value
+                'DGVのコンボボックスから値を取る方法が良くわからなかったのでＤＢを読みに行くように変更
+                Dim reccnt As Integer = 0
+                Dim Sql As String = ""
+                Sql += "SELECT * FROM public.m90_hanyo"
+                Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                Sql += " AND 固定キー = '1002'"
+                Sql += " AND 可変キー = '" & DgvItemList.Rows(index).Cells("仕入区分").Value & "'"
+                Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
+                If reccnt = 0 Then
+                    sheet.Range("B" & currentRow).Value = ""
+                Else
+                    sheet.Range("B" & currentRow).Value = ds.Tables(RS).Rows(0)("文字１").ToString
+                End If
+
                 sheet.Range("C" & currentRow).Value = DgvItemList.Rows(index).Cells("メーカー").Value
                 sheet.Range("D" & currentRow).Value = DgvItemList.Rows(index).Cells("品名").Value
                 sheet.Range("E" & currentRow).Value = DgvItemList.Rows(index).Cells("型式").Value
