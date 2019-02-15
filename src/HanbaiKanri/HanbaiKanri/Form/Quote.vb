@@ -1183,7 +1183,7 @@ Public Class Quote
                     If DgvItemList.Rows(index).Cells("リードタイム単位").Value IsNot Nothing And Not IsNumeric(DgvItemList.Rows(index).Cells("リードタイム単位").Value) Then
                         Sql2 += ",リードタイム単位 = " & DgvItemList.Rows(index).Cells("リードタイム単位").Value.ToString
                     Else
-                        Sql2 += ",リードタイム単位 = 0"
+                        Sql2 += ",リードタイム単位 = 1"
                     End If
 
                     Sql2 += ",備考 = '" & RevoveChars(DgvItemList.Rows(index).Cells("備考").Value.ToString) & "' "
@@ -1387,7 +1387,7 @@ Public Class Quote
                     If DgvItemList.Rows(index).Cells("備考").Value IsNot Nothing Then         '備考
                         Sql2 += " ," & RevoveChars(DgvItemList.Rows(index).Cells("備考").Value.ToString)
                     Else
-                        Sql2 += " ,0"
+                        Sql2 += " ,''"
                     End If
 
                     Sql2 += " ,'" & Input & "'"                   '更新者
