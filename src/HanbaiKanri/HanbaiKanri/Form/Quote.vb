@@ -393,7 +393,7 @@ Public Class Quote
                 If ds3.Tables(RS).Rows(index)("リードタイム単位") Is DBNull.Value Then
                 Else
                     Dim tmp2 As Integer = ds3.Tables(RS).Rows(index)("リードタイム単位")
-                    DgvItemList("リードタイム単位", index).Value = tmp2
+                    DgvItemList.Rows(index).Cells("リードタイム単位").Value = tmp2
                 End If
 
                 DgvItemList.Rows(index).Cells("備考").Value = ds3.Tables(RS).Rows(index)("備考")
@@ -749,7 +749,7 @@ Public Class Quote
         End If
     End Sub
 
-    Private Sub RbtnGP_CheckedChanged(sender As Object, e As EventArgs) Handles RbtnGP.CheckedChanged
+    Private Sub RbtnGP_CheckedChanged(sender As Object, e As EventArgs) Handles RbtnGP.CheckedChanged, RbtnUP.CheckedChanged, RbtnQuote.CheckedChanged
         If RbtnUP.Checked Then
             DgvItemList.Columns("粗利率").ReadOnly = True
             DgvItemList.Columns("売単価").ReadOnly = False
@@ -1244,7 +1244,7 @@ Public Class Quote
                 Sql1 += ",0"                                                    '取消区分
                 Sql1 += ", '" & DtpRegistration.Text & "'"                      '登録日
                 Sql1 += ", '" & dtToday & "'"                                   '更新日
-                Sql1 += ", '" & Input & " '"                                    '更新者
+                Sql1 += ", '" & Input & "'"                                    '更新者
                 Sql1 += ")"
 
                 _db.executeDB(Sql1)
@@ -1556,10 +1556,10 @@ Public Class Quote
             sheet.Range("H27").Value = CmnData(15)                       '見積番号
             sheet.Range("H28").Value = CmnData(10) & " " & CmnData(11)                        '見積番号
             sheet.Range("H29").Value = CmnData(4)                       '見積番号
-            sheet.Range("H30").Value = CmnData(16)                       '見積番号
+            sheet.Range("H30").Value = CmnData(16)                       '備考
 
-            sheet.Range("D34").Value = CmnData(13)                       '見積番号
-            sheet.Range("D35").Value = CmnData(14)                       '見積番号
+            sheet.Range("E34").Value = CmnData(13)                       '営業担当者
+            sheet.Range("E35").Value = CmnData(14)                       '入力担当者
 
             Dim rowCnt As Integer = 0
             Dim lstRow As Integer = 22
@@ -2039,4 +2039,5 @@ Public Class Quote
         Next
         Return buf.ToString()
     End Function
+
 End Class
