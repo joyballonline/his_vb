@@ -1177,13 +1177,13 @@ Public Class Quote
                     Else
                         Sql2 += ",粗利率 = 0"
                     End If
-                    If DgvItemList.Rows(index).Cells("リードタイム").Value IsNot Nothing And DgvItemList.Rows(index).Cells("リードタイム").Value <> "" Then
-                        Sql2 += ",リードタイム = " & DgvItemList.Rows(index).Cells("リードタイム").Value.ToString
+                    Sql2 += ",リードタイム = '" & RevoveChars(DgvItemList.Rows(index).Cells("リードタイム").Value.ToString) & "' "
+                    If DgvItemList.Rows(index).Cells("リードタイム単位").Value IsNot Nothing And DgvItemList.Rows(index).Cells("リードタイム単位").Value <> "" Then
+                        Sql2 += ",リードタイム単位 = " & DgvItemList.Rows(index).Cells("リードタイム単位").Value.ToString
                     Else
-                        Sql2 += ",リードタイム = 0"
+                        Sql2 += ",リードタイム単位 = 0"
                     End If
 
-                    Sql2 += ",リードタイム単位 = " & DgvItemList.Rows(index).Cells("リードタイム単位").Value.ToString
                     Sql2 += ",備考 = '" & DgvItemList.Rows(index).Cells("備考").Value.ToString & "' "
                     Sql2 += ",更新者 = '" & Input & "' "
                     Sql2 += ",登録日 = '" & DtpRegistration.Text & "' "
@@ -1375,15 +1375,15 @@ Public Class Quote
                         Sql2 += " ,0"
                     End If
                     If DgvItemList.Rows(index).Cells("リードタイム").Value IsNot Nothing Then 'リードタイム
-                        Sql2 += " ,'" & DgvItemList.Rows(index).Cells("リードタイム").Value.ToString & "'"
+                        Sql2 += " ,'" & RevoveChars(DgvItemList.Rows(index).Cells("リードタイム").Value.ToString) & "'"
                     Else
                         Sql2 += " ,''"
                     End If
-                    Sql2 += " ," & DgvItemList.Rows(index).Cells("リードタイム単位").Value.ToString    'リードタイム単位
+                    Sql2 += " ,'" & RevoveChars(DgvItemList.Rows(index).Cells("リードタイム単位").Value.ToString) & "'"    'リードタイム単位
                     If DgvItemList.Rows(index).Cells("備考").Value IsNot Nothing Then         '備考
-                        Sql2 += " ,'" & DgvItemList.Rows(index).Cells("備考").Value.ToString & "'"
+                        Sql2 += " ," & RevoveChars(DgvItemList.Rows(index).Cells("備考").Value.ToString)
                     Else
-                        Sql2 += " ,''"
+                        Sql2 += " ,0"
                     End If
 
                     Sql2 += " ,'" & Input & "'"                   '更新者
@@ -2020,4 +2020,19 @@ Public Class Quote
         End If
     End Sub
 
+    ''' <summary>
+    ''' 指定した文字列から指定した文字を全て削除する
+    ''' </summary>
+    ''' <param name="s">対象となる文字列。</param>
+    ''' <returns>sに含まれている全てのcharacters文字が削除された文字列。</returns>
+    Public Shared Function RevoveChars(s As String) As String
+        Dim buf As New System.Text.StringBuilder(s)
+        '削除する文字の配列
+        Dim removeChars As Char() = New Char() {vbCr, vbLf, Chr(39)}
+
+        For Each c As Char In removeChars
+            buf.Replace(c.ToString(), "")
+        Next
+        Return buf.ToString()
+    End Function
 End Class
