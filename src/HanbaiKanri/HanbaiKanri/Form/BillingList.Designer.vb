@@ -29,12 +29,10 @@ Partial Class BillingList
         Me.RbtnDetails = New System.Windows.Forms.RadioButton()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.TxtBillingNo2 = New System.Windows.Forms.TextBox()
-        Me.TxtBillingDate2 = New System.Windows.Forms.TextBox()
+        Me.TxtBillingNoUntil = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.TxtBillingNo1 = New System.Windows.Forms.TextBox()
+        Me.TxtBillingNoSince = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.TxtBillingDate1 = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.TxtCustomerCode = New System.Windows.Forms.TextBox()
@@ -47,6 +45,8 @@ Partial Class BillingList
         Me.LblMode = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.TxtCustomerPO = New System.Windows.Forms.TextBox()
+        Me.dtBillingDateSince = New System.Windows.Forms.DateTimePicker()
+        Me.dtBillingDateUntil = New System.Windows.Forms.DateTimePicker()
         CType(Me.DgvBilling, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -128,21 +128,13 @@ Partial Class BillingList
         Me.Label5.TabIndex = 143
         Me.Label5.Text = "～"
         '
-        'TxtBillingNo2
+        'TxtBillingNoUntil
         '
-        Me.TxtBillingNo2.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtBillingNo2.Location = New System.Drawing.Point(959, 68)
-        Me.TxtBillingNo2.Name = "TxtBillingNo2"
-        Me.TxtBillingNo2.Size = New System.Drawing.Size(170, 22)
-        Me.TxtBillingNo2.TabIndex = 6
-        '
-        'TxtBillingDate2
-        '
-        Me.TxtBillingDate2.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtBillingDate2.Location = New System.Drawing.Point(959, 40)
-        Me.TxtBillingDate2.Name = "TxtBillingDate2"
-        Me.TxtBillingDate2.Size = New System.Drawing.Size(170, 22)
-        Me.TxtBillingDate2.TabIndex = 4
+        Me.TxtBillingNoUntil.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtBillingNoUntil.Location = New System.Drawing.Point(959, 68)
+        Me.TxtBillingNoUntil.Name = "TxtBillingNoUntil"
+        Me.TxtBillingNoUntil.Size = New System.Drawing.Size(170, 22)
+        Me.TxtBillingNoUntil.TabIndex = 6
         '
         'Label7
         '
@@ -156,13 +148,13 @@ Partial Class BillingList
         Me.Label7.Text = "請求番号"
         Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'TxtBillingNo1
+        'TxtBillingNoSince
         '
-        Me.TxtBillingNo1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtBillingNo1.Location = New System.Drawing.Point(760, 67)
-        Me.TxtBillingNo1.Name = "TxtBillingNo1"
-        Me.TxtBillingNo1.Size = New System.Drawing.Size(170, 22)
-        Me.TxtBillingNo1.TabIndex = 5
+        Me.TxtBillingNoSince.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtBillingNoSince.Location = New System.Drawing.Point(760, 67)
+        Me.TxtBillingNoSince.Name = "TxtBillingNoSince"
+        Me.TxtBillingNoSince.Size = New System.Drawing.Size(170, 22)
+        Me.TxtBillingNoSince.TabIndex = 5
         '
         'Label8
         '
@@ -175,14 +167,6 @@ Partial Class BillingList
         Me.Label8.TabIndex = 136
         Me.Label8.Text = "請求日"
         Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'TxtBillingDate1
-        '
-        Me.TxtBillingDate1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtBillingDate1.Location = New System.Drawing.Point(760, 40)
-        Me.TxtBillingDate1.Name = "TxtBillingDate1"
-        Me.TxtBillingDate1.Size = New System.Drawing.Size(170, 22)
-        Me.TxtBillingDate1.TabIndex = 3
         '
         'Label4
         '
@@ -309,10 +293,38 @@ Partial Class BillingList
         Me.TxtCustomerPO.Size = New System.Drawing.Size(170, 22)
         Me.TxtCustomerPO.TabIndex = 7
         '
+        'dtBillingDateSince
+        '
+        Me.dtBillingDateSince.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.dtBillingDateSince.CustomFormat = ""
+        Me.dtBillingDateSince.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.dtBillingDateSince.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtBillingDateSince.Location = New System.Drawing.Point(760, 39)
+        Me.dtBillingDateSince.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
+        Me.dtBillingDateSince.Name = "dtBillingDateSince"
+        Me.dtBillingDateSince.Size = New System.Drawing.Size(170, 22)
+        Me.dtBillingDateSince.TabIndex = 331
+        Me.dtBillingDateSince.Value = New Date(2019, 1, 1, 0, 0, 0, 0)
+        '
+        'dtBillingDateUntil
+        '
+        Me.dtBillingDateUntil.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.dtBillingDateUntil.CustomFormat = ""
+        Me.dtBillingDateUntil.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.dtBillingDateUntil.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtBillingDateUntil.Location = New System.Drawing.Point(959, 40)
+        Me.dtBillingDateUntil.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
+        Me.dtBillingDateUntil.Name = "dtBillingDateUntil"
+        Me.dtBillingDateUntil.Size = New System.Drawing.Size(170, 22)
+        Me.dtBillingDateUntil.TabIndex = 332
+        Me.dtBillingDateUntil.Value = New Date(2019, 1, 1, 0, 0, 0, 0)
+        '
         'BillingList
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.dtBillingDateUntil)
+        Me.Controls.Add(Me.dtBillingDateSince)
         Me.Controls.Add(Me.RbtnDetails)
         Me.Controls.Add(Me.RbtnSlip)
         Me.Controls.Add(Me.Label11)
@@ -323,12 +335,10 @@ Partial Class BillingList
         Me.Controls.Add(Me.BtnBillingView)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.TxtBillingNo2)
-        Me.Controls.Add(Me.TxtBillingDate2)
+        Me.Controls.Add(Me.TxtBillingNoUntil)
         Me.Controls.Add(Me.Label7)
-        Me.Controls.Add(Me.TxtBillingNo1)
+        Me.Controls.Add(Me.TxtBillingNoSince)
         Me.Controls.Add(Me.Label8)
-        Me.Controls.Add(Me.TxtBillingDate1)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.TxtCustomerCode)
@@ -355,12 +365,10 @@ Partial Class BillingList
     Friend WithEvents RbtnDetails As RadioButton
     Friend WithEvents Label10 As Label
     Friend WithEvents Label5 As Label
-    Friend WithEvents TxtBillingNo2 As TextBox
-    Friend WithEvents TxtBillingDate2 As TextBox
+    Friend WithEvents TxtBillingNoUntil As TextBox
     Friend WithEvents Label7 As Label
-    Friend WithEvents TxtBillingNo1 As TextBox
+    Friend WithEvents TxtBillingNoSince As TextBox
     Friend WithEvents Label8 As Label
-    Friend WithEvents TxtBillingDate1 As TextBox
     Friend WithEvents Label4 As Label
     Friend WithEvents Label9 As Label
     Friend WithEvents TxtCustomerCode As TextBox
@@ -373,4 +381,6 @@ Partial Class BillingList
     Friend WithEvents LblMode As Label
     Friend WithEvents Label11 As Label
     Friend WithEvents TxtCustomerPO As TextBox
+    Friend WithEvents dtBillingDateSince As DateTimePicker
+    Friend WithEvents dtBillingDateUntil As DateTimePicker
 End Class

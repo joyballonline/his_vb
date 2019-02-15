@@ -416,7 +416,7 @@ Public Class BillingManagement
         Sql = "INSERT INTO "
         Sql += "Public."
         Sql += "t23_skyuhd("
-        Sql += "会社コード, 請求番号, 請求区分, 請求日, 受注番号, 受注番号枝番, 客先番号, 得意先コード, 得意先名, 請求金額計, 売掛残高, 備考1, 備考2, 取消区分, 登録日, 更新者)"
+        Sql += "会社コード, 請求番号, 請求区分, 請求日, 受注番号, 受注番号枝番, 客先番号, 得意先コード, 得意先名, 請求金額計, 売掛残高, 備考1, 備考2, 取消区分, 登録日, 更新者, 更新日)"
         Sql += " VALUES('"
         Sql += dsCymnhd.Tables(RS).Rows(0)("会社コード").ToString
         Sql += "', '"
@@ -449,6 +449,8 @@ Public Class BillingManagement
         Sql += dtToday
         Sql += "', '"
         Sql += frmC01F10_Login.loginValue.TantoNM
+        Sql += "', '"
+        Sql += dtToday
         Sql += " ')"
 
         _db.executeDB(Sql)
