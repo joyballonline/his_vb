@@ -75,26 +75,19 @@ Public Class SalesSearch
         Dim Sql As String = ""
         Try
             Sql += "SELECT "
-            Sql += "会社コード, "
-            Sql += "ユーザＩＤ, "
-            Sql += "氏名, "
-            Sql += "略名, "
-            Sql += "備考, "
-            Sql += "無効フラグ, "
-            Sql += "権限, "
-            Sql += "言語, "
-            Sql += "更新者, "
-            Sql += "更新日 "
-            Sql += "FROM "
-            Sql += "public"
-            Sql += "."
-            Sql += "m02_user"
+            Sql += " 会社コード "
+            Sql += ", ユーザＩＤ "
+            Sql += ", 氏名 "
+            Sql += ", 略名 "
+            Sql += ", 備考 "
+            Sql += ", 無効フラグ "
+            Sql += ", 権限 "
+            Sql += ", 言語 "
+            Sql += ", 更新者 "
+            Sql += ", 更新日 "
+            Sql += "FROM public.m02_user"
             Sql += " WHERE "
-            Sql += "会社コード"
-            Sql += " ILIKE "
-            Sql += "'"
-            Sql += _companyCode
-            Sql += "'"
+            Sql += "会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
 
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
@@ -124,22 +117,26 @@ Public Class SalesSearch
         End Try
     End Sub
 
-    Private Sub BtnSelect_Click(sender As Object, e As EventArgs) Handles BtnSelect.Click
+    Private Sub BtnSelect_Click(sender As Object, e As EventArgs) Handles BtnSelect.Click, DgvUser.DoubleClick
         If _status = "PURCHASE" Then
             Dim frm As OrderingAdd = CType(Me.Owner, OrderingAdd)
             Dim RowIndex As Integer = DgvUser.CurrentCell.RowIndex
 
             frm.TxtSales.Text = DgvUser.Rows(RowIndex).Cells("氏名").Value
+            frm.TxtSales.Tag = DgvUser.Rows(RowIndex).Cells(1).Value
+
         ElseIf _status = "CLONE" Then
             Dim frm As Ordering = CType(Me.Owner, Ordering)
             Dim RowIndex As Integer = DgvUser.CurrentCell.RowIndex
 
             frm.TxtSales.Text = DgvUser.Rows(RowIndex).Cells("氏名").Value
+            frm.TxtSales.Tag = DgvUser.Rows(RowIndex).Cells(1).Value
         Else
             Dim frm As Quote = CType(Me.Owner, Quote)
             Dim RowIndex As Integer = DgvUser.CurrentCell.RowIndex
 
             frm.TxtSales.Text = DgvUser.Rows(RowIndex).Cells("氏名").Value
+            frm.TxtSales.Tag = DgvUser.Rows(RowIndex).Cells(1).Value
         End If
 
 
@@ -162,17 +159,20 @@ Public Class SalesSearch
         Dim Sql As String = ""
         Try
             Sql += "SELECT "
-            Sql += "* "
-            Sql += "FROM "
-            Sql += "public"
-            Sql += "."
-            Sql += "m02_user"
+            Sql += " 会社コード, "
+            Sql += ", ユーザＩＤ "
+            Sql += ", 氏名 "
+            Sql += ", 略名 "
+            Sql += ", 備考 "
+            Sql += ", 無効フラグ "
+            Sql += ", 権限 "
+            Sql += ", 言語 "
+            Sql += ", 更新者 "
+            Sql += ", 更新日 "
+            Sql += "FROM public.m02_user"
             Sql += " WHERE "
-            Sql += "ユーザＩＤ"
-            Sql += " ILIKE "
-            Sql += "'%"
-            Sql += Search.Text
-            Sql += "%'"
+            Sql += "会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += " WHERE 氏名 ILIKE '%" & Search.Text & "%'"
 
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
@@ -180,7 +180,7 @@ Public Class SalesSearch
             For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
                 DgvUser.Rows.Add()
                 DgvUser.Rows(index).Cells(0).Value = ds.Tables(RS).Rows(index)(0)        '会社コード
-                DgvUser.Rows(index).Cells(1).Value = ds.Tables(RS).Rows(index)(1)        '言語コード
+                DgvUser.Rows(index).Cells(1).Value = ds.Tables(RS).Rows(index)(1)        'ユーザＩＤ
                 DgvUser.Rows(index).Cells(2).Value = ds.Tables(RS).Rows(index)(2)        '氏名
                 DgvUser.Rows(index).Cells(3).Value = ds.Tables(RS).Rows(index)(3)      '略名
                 DgvUser.Rows(index).Cells(4).Value = ds.Tables(RS).Rows(index)(4)      '備考
@@ -197,4 +197,5 @@ Public Class SalesSearch
             Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
         End Try
     End Sub
+
 End Class

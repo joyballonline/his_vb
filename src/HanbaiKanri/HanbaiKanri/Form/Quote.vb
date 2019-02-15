@@ -1069,7 +1069,9 @@ Public Class Quote
                 Sql1 += ",見積金額 = " & TxtTotal.Text
                 Sql1 += ",仕入金額 = " & TxtPurchaseTotal.Text
                 Sql1 += ",粗利額 = " & TxtGrossProfit.Text
+                Sql1 += ",営業担当者コード = '" & TxtSales.Tag & "' "
                 Sql1 += ",営業担当者 = '" & TxtSales.Text & "' "
+                Sql1 += ",入力担当者コード = '" & frmC01F10_Login.loginValue.TantoCD & "' "
                 Sql1 += ",入力担当者 = '" & TxtInput.Text & "' "
                 Sql1 += ",備考 = '" & TxtRemarks.Text & "' "
                 Sql1 += ",ＶＡＴ = " & TxtVat.Text
@@ -1178,7 +1180,7 @@ Public Class Quote
                         Sql2 += ",粗利率 = 0"
                     End If
                     Sql2 += ",リードタイム = '" & RevoveChars(DgvItemList.Rows(index).Cells("リードタイム").Value.ToString) & "' "
-                    If DgvItemList.Rows(index).Cells("リードタイム単位").Value IsNot Nothing And DgvItemList.Rows(index).Cells("リードタイム単位").Value <> "" Then
+                    If DgvItemList.Rows(index).Cells("リードタイム単位").Value IsNot Nothing And Not IsNumeric(DgvItemList.Rows(index).Cells("リードタイム単位").Value) Then
                         Sql2 += ",リードタイム単位 = " & DgvItemList.Rows(index).Cells("リードタイム単位").Value.ToString
                     Else
                         Sql2 += ",リードタイム単位 = 0"
@@ -1208,7 +1210,7 @@ Public Class Quote
                 Sql1 += "INSERT INTO "
                 Sql1 += "Public."
                 Sql1 += "t01_mithd("
-                Sql1 += "会社コード, 見積番号, 見積番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額, 仕入金額, 粗利額, 営業担当者, 入力担当者, 備考, ＶＡＴ, 取消区分, 登録日, 更新日, 更新者)"
+                Sql1 += "会社コード, 見積番号, 見積番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額, 仕入金額, 粗利額, 営業担当者コード, 営業担当者, 入力担当者コード, 入力担当者, 備考, ＶＡＴ, 取消区分, 登録日, 更新日, 更新者)"
                 Sql1 += " VALUES('" & frmC01F10_Login.loginValue.BumonCD & "'"  '会社コード
                 Sql1 += ",'" & TxtQuoteNo.Text & "'"                            '見積番号
                 Sql1 += ", '" & TxtSuffixNo.Text & "'"                          '見積番号枝番
@@ -1228,7 +1230,9 @@ Public Class Quote
                 Sql1 += ", " & TxtTotal.Text                                    '見積金額
                 Sql1 += ", " & TxtPurchaseTotal.Text                            '仕入金額
                 Sql1 += ", " & TxtGrossProfit.Text                              '粗利額
+                Sql1 += ", '" & TxtSales.Tag & "'"                              '営業担当者コード
                 Sql1 += ", '" & TxtSales.Text & "'"                             '営業担当者
+                Sql1 += ", '" & frmC01F10_Login.loginValue.TantoCD & "' "       '入力担当者コード
                 Sql1 += ", '" & TxtInput.Text & "'"                             '入力担当者
                 Sql1 += ", '" & TxtRemarks.Text & "'"                           '備考
                 Sql1 += ","                                                     'ＶＡＴ
@@ -1379,7 +1383,7 @@ Public Class Quote
                     Else
                         Sql2 += " ,''"
                     End If
-                    Sql2 += " ,'" & RevoveChars(DgvItemList.Rows(index).Cells("リードタイム単位").Value.ToString) & "'"    'リードタイム単位
+                    Sql2 += " ," & RevoveChars(DgvItemList.Rows(index).Cells("リードタイム単位").Value.ToString)    'リードタイム単位
                     If DgvItemList.Rows(index).Cells("備考").Value IsNot Nothing Then         '備考
                         Sql2 += " ," & RevoveChars(DgvItemList.Rows(index).Cells("備考").Value.ToString)
                     Else
