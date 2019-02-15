@@ -1753,6 +1753,7 @@ Public Class Quote
                     sheet.Range("AA2").Value = CmnData("見積番号") & "-" & CmnData("見積番号枝番")
                     sheet.Range("AA3").Value = System.DateTime.Today
                     sheet.Range("A12").Value = supplierlist(i)
+                    sheet.Range("A14").Value = sheet.Range("A14").Value & DateAdd("d", 5, System.DateTime.Today).ToString("d/M/yyyy") & "."
                     sheet.Range("V19").Value = CmnData("営業担当者")
                     sheet.Range("V20").Value = CmnData("入力担当者")
 
