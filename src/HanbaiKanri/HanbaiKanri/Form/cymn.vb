@@ -558,13 +558,13 @@ Public Class Cymn
                     Sql2 += ", " & DgvItemList.Rows(cymnhdIdx).Cells("見積金額").Value.ToString     '見積金額
                     Sql2 += ", " & DgvItemList.Rows(cymnhdIdx).Cells("粗利額").Value.ToString      '粗利額
                     Sql2 += ", " & DgvItemList.Rows(cymnhdIdx).Cells("粗利率").Value.ToString      '粗利率
-                    Sql2 += ", " & DgvItemList.Rows(cymnhdIdx).Cells("間接費").Value.ToString      '間接費
+                    Sql2 += ", " & DgvItemList.Rows(cymnhdIdx).Cells("仕入金額").Value.ToString - DgvItemList.Rows(cymnhdIdx).Cells("仕入原価").Value.ToString     '間接費
                     Sql2 += ", '" & DgvItemList.Rows(cymnhdIdx).Cells("リードタイム").Value.ToString & "'"    'リードタイム
                     Sql2 += ", " & DgvItemList.Rows(cymnhdIdx).Cells("リードタイム単位").Value.ToString     'リードタイム単位
                     Sql2 += ", 0"       '出庫数
                     Sql2 += ", " & DgvItemList.Rows(cymnhdIdx).Cells("数量").Value.ToString       '未出庫数
                     Sql2 += ", '" & RevoveChars(DgvItemList.Rows(cymnhdIdx).Cells("備考").Value.ToString) & "'"   '備考
-                    Sql2 += "', '" & frmC01F10_Login.loginValue.TantoNM & "'"       '更新者
+                    Sql2 += ", '" & frmC01F10_Login.loginValue.TantoNM & "'"       '更新者
                     Sql2 += ", '" & dtNow & "'"      '登録日
                     Sql2 += ", " & DgvItemList.Rows(cymnhdIdx).Cells("関税率").Value.ToString      '関税率
                     Sql2 += ", " & DgvItemList.Rows(cymnhdIdx).Cells("関税額").Value.ToString      '関税額
@@ -574,6 +574,7 @@ Public Class Cymn
                     Sql2 += ", " & DgvItemList.Rows(cymnhdIdx).Cells("輸送費額").Value.ToString         '輸送費額
                     Sql2 += ", " & DgvItemList.Rows(cymnhdIdx).Cells("仕入原価").Value.ToString         '仕入原価
                     Sql2 += ", " & DgvItemList.Rows(cymnhdIdx).Cells("仕入金額").Value.ToString         '仕入金額
+                    Sql2 += ")"
                     _db.executeDB(Sql2)
 
                     Sql2 = ""

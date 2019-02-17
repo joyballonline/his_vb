@@ -113,19 +113,6 @@ Public Class frmC01F10_Login
     '------------------------------------------------------------------------------------------------------
     Private Sub frm_E11_Login_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        ''Console.WriteLine(CultureInfo.CurrentCulture.Name.ToString) '現在のカルチャーの取得
-        'Thread.CurrentThread.CurrentCulture = New CultureInfo("en-ID") 'カルチャーの変更
-        ''Console.WriteLine(CultureInfo.CurrentCulture.Name.ToString)
-        ''Console.WriteLine(Now.ToString("F", New CultureInfo("ja-JP")))
-        ''Console.WriteLine(Now.ToString("F", New CultureInfo("en-ID")))
-        'Console.WriteLine()
-        'Console.WriteLine(DateTime.Now.ToString("F", CultureInfo.InvariantCulture))
-
-        'Dim test As DateTime = Format(Now, "Short Date")
-
-        ''Console.WriteLine(Format(Now, "Short Date"))
-        'Console.WriteLine("変数でformatしてる：" & UtilClass.jaDatetimeFormat(DateTime.Now))
-        'Console.WriteLine("直接formatしてる：" & Format(DateTime.Now, "yyyy/MM/dd HH:mm:ss"))
 
         Try
 
@@ -153,20 +140,6 @@ Public Class frmC01F10_Login
     '-------------------------------------------------------------------------------
     Private Sub btnLogin_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLogin.Click
 
-        '_loginVal.BumonNM = cmbCampany.Text
-        'If chkPasswd.Checked Then
-        '    'パスワード変更チェックあり
-        '    Dim openForm As Form = Nothing
-        '    Dim strTitle As String = "[" & cmbCampany.Text & "][鴫原　牧人]"
-        '    openForm = New frmC01F20_ChangePasswd(_msgHd, _db, Me, txtTanto.Text, strTitle)
-        '    openForm.Show()
-
-        'Else
-        '    'パスワード変更チェックなし
-        '    Dim openForm As Form = Nothing
-        '    openForm = New frmC01F30_Menu(_msgHd, _db)
-        '    openForm.Show()
-        'End If
 
         Try
 
