@@ -105,8 +105,6 @@ Partial Class Quote
         Me.LblSales = New System.Windows.Forms.Label()
         Me.LblRegistration = New System.Windows.Forms.Label()
         Me.LblExpiration = New System.Windows.Forms.Label()
-        Me.TxtAddress2 = New System.Windows.Forms.TextBox()
-        Me.TxtAddress3 = New System.Windows.Forms.TextBox()
         Me.TxtTotal = New System.Windows.Forms.TextBox()
         Me.LblOrderAmount = New System.Windows.Forms.Label()
         Me.BtnRegistration = New System.Windows.Forms.Button()
@@ -522,8 +520,9 @@ Partial Class Quote
         Me.TxtAddress1.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtAddress1.Location = New System.Drawing.Point(274, 92)
         Me.TxtAddress1.MaxLength = 100
+        Me.TxtAddress1.Multiline = True
         Me.TxtAddress1.Name = "TxtAddress1"
-        Me.TxtAddress1.Size = New System.Drawing.Size(330, 23)
+        Me.TxtAddress1.Size = New System.Drawing.Size(330, 81)
         Me.TxtAddress1.TabIndex = 7
         '
         'LblFax
@@ -767,30 +766,6 @@ Partial Class Quote
         Me.LblExpiration.TabIndex = 30
         Me.LblExpiration.Text = "見積有効期限"
         Me.LblExpiration.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'TxtAddress2
-        '
-        Me.TxtAddress2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.TxtAddress2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TxtAddress2.Enabled = False
-        Me.TxtAddress2.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtAddress2.Location = New System.Drawing.Point(274, 121)
-        Me.TxtAddress2.MaxLength = 100
-        Me.TxtAddress2.Name = "TxtAddress2"
-        Me.TxtAddress2.Size = New System.Drawing.Size(330, 23)
-        Me.TxtAddress2.TabIndex = 8
-        '
-        'TxtAddress3
-        '
-        Me.TxtAddress3.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.TxtAddress3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TxtAddress3.Enabled = False
-        Me.TxtAddress3.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtAddress3.Location = New System.Drawing.Point(274, 150)
-        Me.TxtAddress3.MaxLength = 100
-        Me.TxtAddress3.Name = "TxtAddress3"
-        Me.TxtAddress3.Size = New System.Drawing.Size(330, 23)
-        Me.TxtAddress3.TabIndex = 9
         '
         'TxtTotal
         '
@@ -1143,8 +1118,6 @@ Partial Class Quote
         Me.Controls.Add(Me.BtnQuote)
         Me.Controls.Add(Me.TxtTotal)
         Me.Controls.Add(Me.LblOrderAmount)
-        Me.Controls.Add(Me.TxtAddress3)
-        Me.Controls.Add(Me.TxtAddress2)
         Me.Controls.Add(Me.LblExpiration)
         Me.Controls.Add(Me.LblRegistration)
         Me.Controls.Add(Me.TxtSales)
@@ -1221,8 +1194,6 @@ Partial Class Quote
     Friend WithEvents LblSales As Label
     Friend WithEvents LblRegistration As Label
     Friend WithEvents LblExpiration As Label
-    Friend WithEvents TxtAddress2 As TextBox
-    Friend WithEvents TxtAddress3 As TextBox
     Friend WithEvents TxtTotal As TextBox
     Friend WithEvents LblOrderAmount As Label
     Friend WithEvents BtnRegistration As Button

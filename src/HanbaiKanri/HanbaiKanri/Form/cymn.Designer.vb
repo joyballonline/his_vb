@@ -22,17 +22,17 @@ Partial Class Cymn
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.DtpPurchaseDate = New System.Windows.Forms.DateTimePicker()
         Me.DtpOrderDate = New System.Windows.Forms.DateTimePicker()
         Me.TxtOrderAmount = New System.Windows.Forms.TextBox()
@@ -48,8 +48,6 @@ Partial Class Cymn
         Me.BtnRegistration = New System.Windows.Forms.Button()
         Me.TxtPurchaseAmount = New System.Windows.Forms.TextBox()
         Me.LblPurchaseAmount = New System.Windows.Forms.Label()
-        Me.TxtAddress3 = New System.Windows.Forms.TextBox()
-        Me.TxtAddress2 = New System.Windows.Forms.TextBox()
         Me.LblPurchaseDate = New System.Windows.Forms.Label()
         Me.LblRegistration = New System.Windows.Forms.Label()
         Me.TxtSales = New System.Windows.Forms.TextBox()
@@ -311,30 +309,6 @@ Partial Class Cymn
         Me.LblPurchaseAmount.Text = "発注金額"
         Me.LblPurchaseAmount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'TxtAddress3
-        '
-        Me.TxtAddress3.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.TxtAddress3.Enabled = False
-        Me.TxtAddress3.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtAddress3.Location = New System.Drawing.Point(273, 158)
-        Me.TxtAddress3.MaxLength = 100
-        Me.TxtAddress3.Name = "TxtAddress3"
-        Me.TxtAddress3.Size = New System.Drawing.Size(330, 23)
-        Me.TxtAddress3.TabIndex = 71
-        Me.TxtAddress3.TabStop = False
-        '
-        'TxtAddress2
-        '
-        Me.TxtAddress2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.TxtAddress2.Enabled = False
-        Me.TxtAddress2.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtAddress2.Location = New System.Drawing.Point(273, 129)
-        Me.TxtAddress2.MaxLength = 100
-        Me.TxtAddress2.Name = "TxtAddress2"
-        Me.TxtAddress2.Size = New System.Drawing.Size(330, 23)
-        Me.TxtAddress2.TabIndex = 70
-        Me.TxtAddress2.TabStop = False
-        '
         'LblPurchaseDate
         '
         Me.LblPurchaseDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
@@ -501,8 +475,9 @@ Partial Class Cymn
         Me.TxtAddress1.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtAddress1.Location = New System.Drawing.Point(273, 100)
         Me.TxtAddress1.MaxLength = 100
+        Me.TxtAddress1.Multiline = True
         Me.TxtAddress1.Name = "TxtAddress1"
-        Me.TxtAddress1.Size = New System.Drawing.Size(330, 23)
+        Me.TxtAddress1.Size = New System.Drawing.Size(330, 81)
         Me.TxtAddress1.TabIndex = 68
         Me.TxtAddress1.TabStop = False
         '
@@ -673,6 +648,7 @@ Partial Class Cymn
         Me.DgvItemList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.No, Me.メーカー, Me.品名, Me.型式, Me.数量, Me.単位, Me.仕入先, Me.仕入単価, Me.仕入原価, Me.関税率, Me.関税額, Me.前払法人税率, Me.前払法人税額, Me.輸送費率, Me.輸送費額, Me.仕入金額, Me.売単価, Me.売上金額, Me.見積単価, Me.見積金額, Me.粗利額, Me.粗利率, Me.リードタイム, Me.備考, Me.ステータス, Me.間接費率, Me.間接費})
         Me.DgvItemList.Location = New System.Drawing.Point(11, 245)
         Me.DgvItemList.Name = "DgvItemList"
+        Me.DgvItemList.ReadOnly = True
         Me.DgvItemList.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
         Me.DgvItemList.RowHeadersVisible = False
         Me.DgvItemList.RowTemplate.Height = 21
@@ -684,97 +660,112 @@ Partial Class Cymn
         '
         Me.No.HeaderText = "No"
         Me.No.Name = "No"
+        Me.No.ReadOnly = True
         Me.No.Width = 43
         '
         'メーカー
         '
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.メーカー.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.メーカー.DefaultCellStyle = DataGridViewCellStyle12
         Me.メーカー.HeaderText = "メーカー"
         Me.メーカー.Name = "メーカー"
+        Me.メーカー.ReadOnly = True
         Me.メーカー.Width = 220
         '
         '品名
         '
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.品名.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.品名.DefaultCellStyle = DataGridViewCellStyle13
         Me.品名.HeaderText = "品名"
         Me.品名.Name = "品名"
+        Me.品名.ReadOnly = True
         Me.品名.Width = 220
         '
         '型式
         '
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.型式.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle14.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.型式.DefaultCellStyle = DataGridViewCellStyle14
         Me.型式.HeaderText = "型式"
         Me.型式.Name = "型式"
+        Me.型式.ReadOnly = True
         Me.型式.Width = 230
         '
         '数量
         '
         Me.数量.HeaderText = "数量"
         Me.数量.Name = "数量"
+        Me.数量.ReadOnly = True
         Me.数量.Width = 80
         '
         '単位
         '
         Me.単位.HeaderText = "単位"
         Me.単位.Name = "単位"
+        Me.単位.ReadOnly = True
         Me.単位.Width = 80
         '
         '仕入先
         '
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.仕入先.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle15.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.仕入先.DefaultCellStyle = DataGridViewCellStyle15
         Me.仕入先.HeaderText = "仕入先"
         Me.仕入先.Name = "仕入先"
+        Me.仕入先.ReadOnly = True
         Me.仕入先.Width = 85
         '
         '仕入単価
         '
         Me.仕入単価.HeaderText = "仕入単価"
         Me.仕入単価.Name = "仕入単価"
+        Me.仕入単価.ReadOnly = True
         Me.仕入単価.Width = 80
         '
         '仕入原価
         '
         Me.仕入原価.HeaderText = "仕入原価"
         Me.仕入原価.Name = "仕入原価"
+        Me.仕入原価.ReadOnly = True
         '
         '関税率
         '
         Me.関税率.HeaderText = "関税率"
         Me.関税率.Name = "関税率"
+        Me.関税率.ReadOnly = True
         '
         '関税額
         '
         Me.関税額.HeaderText = "関税額"
         Me.関税額.Name = "関税額"
+        Me.関税額.ReadOnly = True
         '
         '前払法人税率
         '
         Me.前払法人税率.HeaderText = "前払法人税率"
         Me.前払法人税率.Name = "前払法人税率"
+        Me.前払法人税率.ReadOnly = True
         '
         '前払法人税額
         '
         Me.前払法人税額.HeaderText = "前払法人税額"
         Me.前払法人税額.Name = "前払法人税額"
+        Me.前払法人税額.ReadOnly = True
         '
         '輸送費率
         '
         Me.輸送費率.HeaderText = "輸送費率"
         Me.輸送費率.Name = "輸送費率"
+        Me.輸送費率.ReadOnly = True
         '
         '輸送費額
         '
         Me.輸送費額.HeaderText = "輸送費額"
         Me.輸送費額.Name = "輸送費額"
+        Me.輸送費額.ReadOnly = True
         '
         '仕入金額
         '
-        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.仕入金額.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle16.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.仕入金額.DefaultCellStyle = DataGridViewCellStyle16
         Me.仕入金額.HeaderText = "仕入金額"
         Me.仕入金額.Name = "仕入金額"
         Me.仕入金額.ReadOnly = True
@@ -783,42 +774,45 @@ Partial Class Cymn
         '
         Me.売単価.HeaderText = "売単価"
         Me.売単価.Name = "売単価"
+        Me.売単価.ReadOnly = True
         Me.売単価.Width = 80
         '
         '売上金額
         '
-        DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.売上金額.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.売上金額.DefaultCellStyle = DataGridViewCellStyle17
         Me.売上金額.HeaderText = "売上金額"
         Me.売上金額.Name = "売上金額"
         Me.売上金額.ReadOnly = True
         '
         '見積単価
         '
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.見積単価.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.見積単価.DefaultCellStyle = DataGridViewCellStyle18
         Me.見積単価.HeaderText = "見積単価"
         Me.見積単価.Name = "見積単価"
+        Me.見積単価.ReadOnly = True
         '
         '見積金額
         '
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.見積金額.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.見積金額.DefaultCellStyle = DataGridViewCellStyle19
         Me.見積金額.HeaderText = "見積金額"
         Me.見積金額.Name = "見積金額"
+        Me.見積金額.ReadOnly = True
         '
         '粗利額
         '
-        DataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.粗利額.DefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle20.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.粗利額.DefaultCellStyle = DataGridViewCellStyle20
         Me.粗利額.HeaderText = "粗利額"
         Me.粗利額.Name = "粗利額"
         Me.粗利額.ReadOnly = True
         '
         '粗利率
         '
-        DataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.粗利率.DefaultCellStyle = DataGridViewCellStyle10
+        DataGridViewCellStyle21.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.粗利率.DefaultCellStyle = DataGridViewCellStyle21
         Me.粗利率.HeaderText = "粗利率"
         Me.粗利率.Name = "粗利率"
         Me.粗利率.ReadOnly = True
@@ -827,30 +821,34 @@ Partial Class Cymn
         '
         Me.リードタイム.HeaderText = "リードタイム"
         Me.リードタイム.Name = "リードタイム"
+        Me.リードタイム.ReadOnly = True
         '
         '備考
         '
         Me.備考.HeaderText = "備考"
         Me.備考.Name = "備考"
+        Me.備考.ReadOnly = True
         Me.備考.Width = 80
         '
         'ステータス
         '
         Me.ステータス.HeaderText = "ステータス"
         Me.ステータス.Name = "ステータス"
+        Me.ステータス.ReadOnly = True
         Me.ステータス.Visible = False
         '
         '間接費率
         '
         Me.間接費率.HeaderText = "間接費率"
         Me.間接費率.Name = "間接費率"
+        Me.間接費率.ReadOnly = True
         Me.間接費率.Visible = False
         Me.間接費率.Width = 85
         '
         '間接費
         '
-        DataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.間接費.DefaultCellStyle = DataGridViewCellStyle11
+        DataGridViewCellStyle22.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.間接費.DefaultCellStyle = DataGridViewCellStyle22
         Me.間接費.HeaderText = "間接費"
         Me.間接費.Name = "間接費"
         Me.間接費.ReadOnly = True
@@ -1130,8 +1128,6 @@ Partial Class Cymn
         Me.Controls.Add(Me.BtnRegistration)
         Me.Controls.Add(Me.TxtPurchaseAmount)
         Me.Controls.Add(Me.LblPurchaseAmount)
-        Me.Controls.Add(Me.TxtAddress3)
-        Me.Controls.Add(Me.TxtAddress2)
         Me.Controls.Add(Me.LblPurchaseDate)
         Me.Controls.Add(Me.LblRegistration)
         Me.Controls.Add(Me.TxtSales)
@@ -1183,8 +1179,6 @@ Partial Class Cymn
     Friend WithEvents BtnRegistration As Button
     Friend WithEvents TxtPurchaseAmount As TextBox
     Friend WithEvents LblPurchaseAmount As Label
-    Friend WithEvents TxtAddress3 As TextBox
-    Friend WithEvents TxtAddress2 As TextBox
     Friend WithEvents LblPurchaseDate As Label
     Friend WithEvents LblRegistration As Label
     Friend WithEvents TxtSales As TextBox

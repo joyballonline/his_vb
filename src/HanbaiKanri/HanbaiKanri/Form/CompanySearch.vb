@@ -205,9 +205,9 @@ Public Class CompanySearch
             frm.TxtCustomerCode.Text = Dgv_Company.Rows(idx).Cells(0).Value
             frm.TxtCustomerName.Text = Dgv_Company.Rows(idx).Cells(1).Value
             frm.TxtPostalCode.Text = Dgv_Company.Rows(idx).Cells(3).Value
-            frm.TxtAddress1.Text = Dgv_Company.Rows(idx).Cells(4).Value
-            frm.TxtAddress2.Text = Dgv_Company.Rows(idx).Cells(5).Value
-            frm.TxtAddress3.Text = Dgv_Company.Rows(idx).Cells(6).Value
+            frm.TxtAddress1.Text = Dgv_Company.Rows(idx).Cells(4).Value & " " & Dgv_Company.Rows(idx).Cells(5).Value & " " & Dgv_Company.Rows(idx).Cells(6).Value
+            'frm.TxtAddress2.Text = Dgv_Company.Rows(idx).Cells(5).Value
+            'frm.TxtAddress3.Text = Dgv_Company.Rows(idx).Cells(6).Value
             frm.TxtTel.Text = Dgv_Company.Rows(idx).Cells(7).Value
             frm.TxtFax.Text = Dgv_Company.Rows(idx).Cells(8).Value
             frm.TxtPosition.Text = Dgv_Company.Rows(idx).Cells(9).Value

@@ -335,12 +335,7 @@ Public Class Quote
             TxtPerson.Text = ds1.Tables(RS).Rows(0)("得意先担当者名").ToString
             TxtPosition.Text = ds1.Tables(RS).Rows(0)("得意先担当者役職").ToString
             TxtPostalCode.Text = ds1.Tables(RS).Rows(0)("得意先郵便番号").ToString
-            Dim Address As String = ds1.Tables(RS).Rows(0)("得意先住所").ToString
-            Dim delimiter As String = " "
-            Dim parts As String() = Split(Address, delimiter, -1, CompareMethod.Text)
-            TxtAddress1.Text = parts(0).ToString
-            TxtAddress2.Text = parts(1).ToString
-            TxtAddress3.Text = parts(2).ToString
+            TxtAddress1.Text = ds1.Tables(RS).Rows(0)("得意先住所").ToString
             'たぶんこの記述だけでDBNull攻略できる（はず）
             'If ds1.Tables(RS).Rows(0)("得意先電話番号") IsNot DBNull.Value Then
             '    TxtTel.Text = ds1.Tables(RS).Rows(0)("得意先電話番号")
@@ -1058,7 +1053,7 @@ Public Class Quote
                 Sql1 += "得意先コード = '" & TxtCustomerCode.Text & "' "
                 Sql1 += ",得意先名 = '" & TxtCustomerName.Text & "' "
                 Sql1 += ",得意先郵便番号 = '" & TxtPostalCode.Text & "' "
-                Sql1 += ",得意先住所 = '" & TxtAddress1.Text & " " & TxtAddress2.Text & " " & TxtAddress3.Text & "' "
+                Sql1 += ",得意先住所 = '" & TxtAddress1.Text & "' "
                 Sql1 += ",得意先電話番号 = '" & TxtTel.Text & "' "
                 Sql1 += ",得意先ＦＡＸ = '" & TxtFax.Text & "' "
                 Sql1 += ",得意先担当者役職 = '" & TxtPosition.Text & "' "
@@ -1217,9 +1212,7 @@ Public Class Quote
                 Sql1 += ", '" & TxtCustomerCode.Text & "'"                      '得意先コード
                 Sql1 += ", '" & TxtCustomerName.Text & "'"                      '得意先名
                 Sql1 += ", '" & TxtPostalCode.Text & "'"                        '得意先郵便番号
-                Sql1 += ", '" & TxtAddress1.Text                                '得意先住所
-                Sql1 += " " & TxtAddress2.Text
-                Sql1 += " " & TxtAddress3.Text & "'"
+                Sql1 += ", '" & TxtAddress1.Text & "'"                          '得意先住所
                 Sql1 += ", '" & TxtTel.Text & "'"                               '得意先電話番号
                 Sql1 += ", '" & TxtFax.Text & "'"                               '得意先ＦＡＸ
                 Sql1 += ", '" & TxtPosition.Text & "'"                          '得意先担当者役職
@@ -1833,8 +1826,6 @@ Public Class Quote
         Dim CustomerName As String = TxtCustomerName.Text
         Dim PostalCode As String = TxtPostalCode.Text
         Dim Address1 As String = TxtAddress1.Text
-        Dim Address2 As String = TxtAddress2.Text
-        Dim Address3 As String = TxtAddress3.Text
         Dim Tel As String = TxtTel.Text
         Dim Fax As String = TxtFax.Text
         Dim Person As String = TxtPerson.Text
@@ -1908,8 +1899,6 @@ Public Class Quote
             sheet.Range("N1").Value = Expiration
             sheet.Range("B2").Value = CustomerName
             sheet.Range("B3").Value = PostalCode & " " & Address1
-            sheet.Range("B4").Value = Address2
-            sheet.Range("B5").Value = Address3
             sheet.Range("I2").Value = Tel
             sheet.Range("I3").Value = Fax
             sheet.Range("I4").Value = Person
@@ -2014,9 +2003,7 @@ Public Class Quote
         If dsCode.Tables(RS).Rows.Count > 0 Then
             TxtCustomerName.Text = dsCode.Tables(RS).Rows(0)("得意先名").ToString
             TxtPostalCode.Text = dsCode.Tables(RS).Rows(0)("郵便番号").ToString
-            TxtAddress1.Text = dsCode.Tables(RS).Rows(0)("住所１").ToString
-            TxtAddress2.Text = dsCode.Tables(RS).Rows(0)("住所２").ToString
-            TxtAddress3.Text = dsCode.Tables(RS).Rows(0)("住所３").ToString
+            TxtAddress1.Text = dsCode.Tables(RS).Rows(0)("住所１").ToString & " " & dsCode.Tables(RS).Rows(0)("住所２").ToString & " " & dsCode.Tables(RS).Rows(0)("住所３").ToString
             TxtTel.Text = dsCode.Tables(RS).Rows(0)("電話番号").ToString
             TxtFax.Text = dsCode.Tables(RS).Rows(0)("ＦＡＸ番号").ToString
             TxtPerson.Text = dsCode.Tables(RS).Rows(0)("担当者名").ToString

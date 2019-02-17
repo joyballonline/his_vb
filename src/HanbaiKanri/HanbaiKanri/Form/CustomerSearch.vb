@@ -177,11 +177,11 @@ Public Class CustomerSearch
             End If
             If Dgv_Customer.Rows(idx).Cells(6).Value Is DBNull.Value Then
             Else
-                frm.TxtAddress2.Text = Dgv_Customer.Rows(idx).Cells(6).Value
+                frm.TxtAddress1.Text = frm.TxtAddress1.Text & " " & Dgv_Customer.Rows(idx).Cells(6).Value
             End If
             If Dgv_Customer.Rows(idx).Cells(7).Value Is DBNull.Value Then
             Else
-                frm.TxtAddress3.Text = Dgv_Customer.Rows(idx).Cells(7).Value
+                frm.TxtAddress1.Text = frm.TxtAddress1.Text & " " & Dgv_Customer.Rows(idx).Cells(7).Value
             End If
             If Dgv_Customer.Rows(idx).Cells(8).Value Is DBNull.Value Then
             Else
