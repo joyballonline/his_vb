@@ -689,10 +689,17 @@ Public Class DepositManagement
                 Sql += " = '"
                 Sql += SellingBalance.ToString
                 Sql += "', "
-                Sql += "入金完了日"
-                Sql += " = '"
-                Sql += dtToday
-                Sql += "', "
+
+                '請求額請求金額と入金額が一致したら入金完了日を設定する
+                If dsSkyuhd.Tables(RS).Rows(i)("請求金額計") = DsDeposit.ToString Then
+
+                    Sql += "入金完了日"
+                    Sql += " = '"
+                    Sql += dtToday
+                    Sql += "', "
+
+                End If
+
                 Sql += "更新日"
                 Sql += " = '"
                 Sql += dtToday

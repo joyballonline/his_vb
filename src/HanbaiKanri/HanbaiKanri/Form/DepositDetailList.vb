@@ -423,10 +423,17 @@ Public Class DepositDetailList
             Sql += "更新日"
             Sql += " = '"
             Sql += dtNow
-            Sql += "' "
 
+            '売掛が残るなら入金完了日は削除する
+            If dsSkyuhd.Tables(RS).Rows(0)("請求金額計") <> decNyukinKei.ToString Then
 
-            Sql += "WHERE"
+                Sql += "', "
+                Sql += "入金完了日"
+                Sql += " = NULL "
+
+            End If
+
+            Sql += " WHERE "
             Sql += " 会社コード"
             Sql += "='"
             Sql += frmC01F10_Login.loginValue.BumonNM
@@ -444,9 +451,9 @@ Public Class DepositDetailList
 
         Else
 
-            '画面を開いたときの日時とデータの日時が異なっていた場合
-            'データが誰かに変更された旨を伝える
-            _msgHd.dspMSG("chkData", frmC01F10_Login.loginValue.Language)
+                '画面を開いたときの日時とデータの日時が異なっていた場合
+                'データが誰かに変更された旨を伝える
+                _msgHd.dspMSG("chkData", frmC01F10_Login.loginValue.Language)
 
             '表示データを更新
             setDgvBilling()
