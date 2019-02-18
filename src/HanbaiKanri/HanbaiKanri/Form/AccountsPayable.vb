@@ -255,8 +255,10 @@ Public Class AccountsPayable
         Sql3 += "'"
         Sql3 += " AND "
         Sql3 += "発注番号枝番"
-        Sql3 += "="
+        Sql3 += " ILIKE "
+        Sql3 += "'"
         Sql3 += Suffix
+        Sql3 += "'"
 
         Dim reccnt As Integer = 0
         Dim ds1 As DataSet = _db.selectDB(Sql1, RS, reccnt)
@@ -464,8 +466,10 @@ Public Class AccountsPayable
             Sql2 += "'"
             Sql2 += " AND "
             Sql2 += "発注番号枝番"
-            Sql2 += "="
+            Sql2 += " ILIKE "
+            Sql2 += "'"
             Sql2 += Suffix
+            Sql2 += "'"
 
             Dim ds2 As DataSet = _db.selectDB(Sql2, RS, reccnt)
 
