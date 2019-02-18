@@ -77,37 +77,41 @@ Public Class CustomerOrderList
         _init = True
 
     End Sub
+
+    '初期表示
+    Private Sub CustomerOrderList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+            LblCustomerName.Text = "CustomerName"
+            BtnSearch.Text = "Search"
+            BtnInvoice.Text = "Invoicing"
+            BtnBack.Text = "Back"
+        End If
+
+        '一覧取得
+        PurchaseListLoad()
+    End Sub
+
+    '一覧表示処理
     Private Sub PurchaseListLoad(Optional ByRef Status As String = "")
         Dim Sql As String = ""
         Try
-            Sql += "SELECT "
-            Sql += "* "
-            Sql += "FROM "
-            Sql += "public"
-            Sql += "."
-            Sql += "t23_skyuhd"
-            Sql += " WHERE "
-            Sql += "取消区分"
-            Sql += " = "
-            Sql += "'"
-            Sql += "0"
-            Sql += "'"
-            Sql += " AND "
-            Sql += "会社コード"
-            Sql += " ILIKE "
-            Sql += "'%"
-            Sql += CompanyCode
-            Sql += "%'"
-            Sql += " AND "
+            Sql = " AND "
             Sql += "得意先コード"
             Sql += " ILIKE "
             Sql += "'%"
             Sql += CustomerCode
             Sql += "%'"
+            Sql += " AND "
+            Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+
+            '請求基本取得
+            Dim dsSkyuhd As DataSet = getDsData("t23_skyuhd")
 
             Dim reccnt As Integer = 0
-            ds = _db.selectDB(Sql, RS, reccnt)
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
+
+            'ds = _db.selectDB(Sql, RS, reccnt)
+
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 DgvBilling.Columns.Add("請求番号", "InvoiceNumber")
                 DgvBilling.Columns.Add("請求区分", "BillingClassification")
                 DgvBilling.Columns.Add("請求日", "BillingDate")
@@ -141,21 +145,21 @@ Public Class CustomerOrderList
             DgvBilling.Columns("請求金額計").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             DgvBilling.Columns("売掛残高").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
-            For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+            For i As Integer = 0 To dsSkyuhd.Tables(RS).Rows.Count - 1
                 DgvBilling.Rows.Add()
-                DgvBilling.Rows(index).Cells("請求番号").Value = ds.Tables(RS).Rows(index)("請求番号")
-                DgvBilling.Rows(index).Cells("請求区分").Value = ds.Tables(RS).Rows(index)("請求区分")
-                DgvBilling.Rows(index).Cells("請求日").Value = ds.Tables(RS).Rows(index)("請求日")
-                DgvBilling.Rows(index).Cells("受注番号").Value = ds.Tables(RS).Rows(index)("受注番号")
-                DgvBilling.Rows(index).Cells("受注番号枝番").Value = ds.Tables(RS).Rows(index)("受注番号枝番")
-                DgvBilling.Rows(index).Cells("得意先コード").Value = ds.Tables(RS).Rows(index)("得意先コード")
-                DgvBilling.Rows(index).Cells("得意先名").Value = ds.Tables(RS).Rows(index)("得意先名")
-                DgvBilling.Rows(index).Cells("請求金額計").Value = ds.Tables(RS).Rows(index)("請求金額計")
-                DgvBilling.Rows(index).Cells("売掛残高").Value = ds.Tables(RS).Rows(index)("売掛残高")
-                DgvBilling.Rows(index).Cells("備考1").Value = ds.Tables(RS).Rows(index)("備考1")
-                DgvBilling.Rows(index).Cells("備考2").Value = ds.Tables(RS).Rows(index)("備考2")
-                DgvBilling.Rows(index).Cells("登録日").Value = ds.Tables(RS).Rows(index)("登録日")
-                DgvBilling.Rows(index).Cells("更新者").Value = ds.Tables(RS).Rows(index)("更新者")
+                DgvBilling.Rows(i).Cells("請求番号").Value = dsSkyuhd.Tables(RS).Rows(i)("請求番号")
+                DgvBilling.Rows(i).Cells("請求区分").Value = dsSkyuhd.Tables(RS).Rows(i)("請求区分")
+                DgvBilling.Rows(i).Cells("請求日").Value = dsSkyuhd.Tables(RS).Rows(i)("請求日")
+                DgvBilling.Rows(i).Cells("受注番号").Value = dsSkyuhd.Tables(RS).Rows(i)("受注番号")
+                DgvBilling.Rows(i).Cells("受注番号枝番").Value = dsSkyuhd.Tables(RS).Rows(i)("受注番号枝番")
+                DgvBilling.Rows(i).Cells("得意先コード").Value = dsSkyuhd.Tables(RS).Rows(i)("得意先コード")
+                DgvBilling.Rows(i).Cells("得意先名").Value = dsSkyuhd.Tables(RS).Rows(i)("得意先名")
+                DgvBilling.Rows(i).Cells("請求金額計").Value = dsSkyuhd.Tables(RS).Rows(i)("請求金額計")
+                DgvBilling.Rows(i).Cells("売掛残高").Value = dsSkyuhd.Tables(RS).Rows(i)("売掛残高")
+                DgvBilling.Rows(i).Cells("備考1").Value = dsSkyuhd.Tables(RS).Rows(i)("備考1")
+                DgvBilling.Rows(i).Cells("備考2").Value = dsSkyuhd.Tables(RS).Rows(i)("備考2")
+                DgvBilling.Rows(i).Cells("登録日").Value = dsSkyuhd.Tables(RS).Rows(i)("登録日")
+                DgvBilling.Rows(i).Cells("更新者").Value = dsSkyuhd.Tables(RS).Rows(i)("更新者")
             Next
 
         Catch ue As UsrDefException
@@ -166,28 +170,21 @@ Public Class CustomerOrderList
             Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
         End Try
     End Sub
-    Private Sub MstHanyoue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        PurchaseListLoad()
-        If frmC01F10_Login.loginValue.Language = "ENG" Then
-            LblCustomerName.Text = "CustomerName"
-            BtnSearch.Text = "Search"
-            BtnInvoice.Text = "Invoicing"
-            BtnBack.Text = "Back"
-        End If
-    End Sub
 
+    '戻るボタン押下時
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
         _parentForm.Show()
         _parentForm.Enabled = True
         Me.Dispose()
     End Sub
 
-    Private Sub BtnInvoice_Click(sender As Object, e As EventArgs) Handles BtnInvoice.Click '請求書発行
+    '請求書発行ボタン押下時
+    Private Sub BtnInvoice_Click(sender As Object, e As EventArgs) Handles BtnInvoice.Click
         Dim BillingNo As String = ""
         Dim OrderNo As String = ""
         Dim OrderSuffix As String = ""
         Dim BillingSubTotal As Integer = 0
-        Dim Sql1 As String = ""
+        Dim Sql As String = ""
         Dim Sql2 As String = ""
         Dim Sql3 As String = ""
         Dim reccnt As Integer = 0
@@ -245,36 +242,26 @@ Public Class CustomerOrderList
                 OrderSuffix = DgvBilling.Rows(r.Index).Cells("受注番号枝番").Value
                 BillingSubTotal += DgvBilling.Rows(r.Index).Cells("請求金額計").Value
 
-                Sql1 += "SELECT "
-                Sql1 += "* "
-                Sql1 += "FROM "
-                Sql1 += "public"
-                Sql1 += "."
-                Sql1 += "t10_cymnhd"
-                Sql1 += " WHERE "
-                Sql1 += "受注番号"
-                Sql1 += " = "
-                Sql1 += "'"
-                Sql1 += OrderNo
-                Sql1 += "'"
-                Sql1 += " AND "
-                Sql1 += "受注番号枝番"
-                Sql1 += " = "
-                Sql1 += "'"
-                Sql1 += OrderSuffix
-                Sql1 += "'"
+                Sql = " AND "
+                Sql += "受注番号 = '" & OrderNo & "'"
+                Sql += " AND "
+                Sql += "受注番号枝番 = '" & OrderSuffix & "'"
+                Sql += " AND "
+                Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
 
-                Dim ds1 As DataSet = _db.selectDB(Sql1, RS, reccnt) '受注基本（請求債情報）
+                '受注基本（請求債情報）
+                Dim dsCymnhd As DataSet = getDsData("t10_cymnhd")
 
+                '初回だけ
                 If flg2 = False Then
-                    sheet.Range("B8").Value = ds1.Tables(RS).Rows(0)("得意先名")
-                    sheet.Range("B9").Value = ds1.Tables(RS).Rows(0)("得意先郵便番号")
-                    sheet.Range("B10").Value = ds1.Tables(RS).Rows(0)("得意先住所")
-                    sheet.Range("B14").Value = ds1.Tables(RS).Rows(0)("得意先担当者役職") & " " & ds1.Tables(RS).Rows(0)("得意先担当者名")
-                    sheet.Range("A15").Value = "Telp." & ds1.Tables(RS).Rows(0)("得意先電話番号") & "　Fax." & ds1.Tables(RS).Rows(0)("得意先ＦＡＸ")
+                    sheet.Range("B8").Value = dsCymnhd.Tables(RS).Rows(0)("得意先名")
+                    sheet.Range("B9").Value = dsCymnhd.Tables(RS).Rows(0)("得意先郵便番号")
+                    sheet.Range("B10").Value = dsCymnhd.Tables(RS).Rows(0)("得意先住所")
+                    sheet.Range("B14").Value = dsCymnhd.Tables(RS).Rows(0)("得意先担当者役職") & " " & dsCymnhd.Tables(RS).Rows(0)("得意先担当者名")
+                    sheet.Range("A15").Value = "Telp." & dsCymnhd.Tables(RS).Rows(0)("得意先電話番号") & "　Fax." & dsCymnhd.Tables(RS).Rows(0)("得意先ＦＡＸ")
                     sheet.Range("E8").Value = BillingNo
                     sheet.Range("E9").Value = System.DateTime.Now
-                    sheet.Range("E13").Value = ds1.Tables(RS).Rows(0)("支払条件")
+                    sheet.Range("E13").Value = dsCymnhd.Tables(RS).Rows(0)("支払条件")
 
                     flg2 = True
 
@@ -283,31 +270,19 @@ Public Class CustomerOrderList
 
                 End If
 
+                Sql = " AND "
+                Sql += "受注番号 = '" & OrderNo & "'"
+                Sql += " AND "
+                Sql += "受注番号枝番 = '" & OrderSuffix & "'"
+                Sql += " AND "
+                Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
 
-                Sql2 += "SELECT "
-                Sql2 += "* "
-                Sql2 += "FROM "
-                Sql2 += "public"
-                Sql2 += "."
-                Sql2 += "t11_cymndt"
-                Sql2 += " WHERE "
-                Sql2 += "受注番号"
-                Sql2 += " = "
-                Sql2 += "'"
-                Sql2 += OrderNo
-                Sql2 += "'"
-                Sql2 += " AND "
-                Sql2 += "受注番号枝番"
-                Sql2 += " = "
-                Sql2 += "'"
-                Sql2 += OrderSuffix
-                Sql2 += "'"
+                '受注明細（商品情報）
+                Dim dsCymndt As DataSet = getDsData("t11_cymndt")
 
-                Dim ds2 As DataSet = _db.selectDB(Sql2, RS, reccnt) '受注明細（商品情報）
+                'Dim dsCymndt As DataSet = _db.selectDB(Sql2, RS, reccnt) '受注明細（商品情報）
 
-
-
-                For index As Integer = 0 To ds2.Tables(RS).Rows.Count - 1
+                For i As Integer = 0 To dsCymndt.Tables(RS).Rows.Count - 1
                     If currentNum > 3 Then
                         Dim obj As Object
                         Dim cellPos = lastRow & ":" & lastRow
@@ -320,19 +295,14 @@ Public Class CustomerOrderList
                         lastRow += 1
                     End If
                     sheet.Range("A" & currentRow).Value = currentNum
-                    sheet.Range("B" & currentRow).Value = ds2.Tables(RS).Rows(index)("メーカー") & " / " & ds2.Tables(RS).Rows(index)("品名") & " / " & ds2.Tables(RS).Rows(index)("型式")
-                    sheet.Range("C" & currentRow).Value = ds2.Tables(RS).Rows(index)("受注数量")
-                    sheet.Range("D" & currentRow).Value = ds2.Tables(RS).Rows(index)("売単価")
-                    sheet.Range("E" & currentRow).Value = ds2.Tables(RS).Rows(index)("売上金額")
+                    sheet.Range("B" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("メーカー") & " / " & dsCymndt.Tables(RS).Rows(i)("品名") & " / " & dsCymndt.Tables(RS).Rows(i)("型式")
+                    sheet.Range("C" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("受注数量")
+                    sheet.Range("D" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("売単価")
+                    sheet.Range("E" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("売上金額")
                     currentNum += 1
                     currentRow += 1
-                Next index
+                Next i
 
-
-
-
-                Sql1 = ""
-                Sql2 = ""
             Next r
 
             sheet.Range("E" & lastRow + 1).Value = BillingSubTotal
@@ -340,23 +310,6 @@ Public Class CustomerOrderList
             sheet.Range("E" & lastRow + 3).Value = BillingSubTotal * 1.1
 
             sheet.Range("C" & lastRow + 5).Value = sheet.Range("E" & lastRow + 3).Value
-
-            Sql3 += "SELECT "
-            Sql3 += "* "
-            Sql3 += "FROM "
-            Sql3 += "public"
-            Sql3 += "."
-            Sql3 += "m01_company"
-            Sql3 += " WHERE "
-            Sql3 += "会社コード"
-            Sql3 += " = "
-            Sql3 += "'"
-            Sql3 += frmC01F10_Login.loginValue.BumonNM
-            Sql3 += "'"
-
-            Dim ds3 As DataSet = _db.selectDB(Sql3, RS, reccnt) '会社情報（振込先情報）
-
-
 
             book.SaveAs(sOutFile)
             app.Visible = True
@@ -378,4 +331,25 @@ Public Class CustomerOrderList
     Private Sub BtnSearch_Click(sender As Object, e As EventArgs) Handles BtnSearch.Click
 
     End Sub
+
+    'param1：String テーブル名
+    'param2：String 詳細条件
+    'Return: DataSet
+    Private Function getDsData(ByVal tableName As String, Optional ByRef txtParam As String = "") As DataSet
+        Dim reccnt As Integer = 0 'DB用（デフォルト）
+        Dim Sql As String = ""
+
+        Sql += "SELECT"
+        Sql += " *"
+        Sql += " FROM "
+
+        Sql += "public." & tableName
+        Sql += " WHERE "
+        Sql += "会社コード"
+        Sql += " ILIKE  "
+        Sql += "'" & frmC01F10_Login.loginValue.BumonNM & "'"
+        Sql += txtParam
+        Return _db.selectDB(Sql, RS, reccnt)
+    End Function
+
 End Class
