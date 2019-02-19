@@ -714,6 +714,7 @@ Public Class Quote
                     End If
                 End If
 
+                '仕入先コード入力時、仕入先マスタより各項目を抽出
                 If DgvItemList.Rows(e.RowIndex).Cells("仕入先コード").Value IsNot Nothing Then
                     Sql = ""
                     Sql += "SELECT * FROM public.m11_supplier"
@@ -723,14 +724,23 @@ Public Class Quote
                     Dim reccnt As Integer = 0
                     Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-                    DgvItemList.Rows(e.RowIndex).Cells("仕入先").Value = ds.Tables(RS).Rows(0)("仕入先名").ToString
-                    DgvItemList.Rows(e.RowIndex).Cells("間接費率").Value = ds.Tables(RS).Rows(0)("既定間接費率").ToString
-                    DgvItemList.Rows(e.RowIndex).Cells("関税率").Value = ds.Tables(RS).Rows(0)("関税率").ToString
-                    DgvItemList.Rows(e.RowIndex).Cells("前払法人税率").Value = ds.Tables(RS).Rows(0)("前払法人税率").ToString
-                    DgvItemList.Rows(e.RowIndex).Cells("輸送費率").Value = ds.Tables(RS).Rows(0)("輸送費率").ToString
+                    If reccnt > 0 Then
+                        DgvItemList.Rows(e.RowIndex).Cells("仕入先").Value = ds.Tables(RS).Rows(0)("仕入先名").ToString
+                        DgvItemList.Rows(e.RowIndex).Cells("間接費率").Value = ds.Tables(RS).Rows(0)("既定間接費率").ToString
+                        DgvItemList.Rows(e.RowIndex).Cells("関税率").Value = ds.Tables(RS).Rows(0)("関税率").ToString
+                        DgvItemList.Rows(e.RowIndex).Cells("前払法人税率").Value = ds.Tables(RS).Rows(0)("前払法人税率").ToString
+                        DgvItemList.Rows(e.RowIndex).Cells("輸送費率").Value = ds.Tables(RS).Rows(0)("輸送費率").ToString
+                    Else
+                        DgvItemList.Rows(e.RowIndex).Cells("仕入先").Value = ""
+                        DgvItemList.Rows(e.RowIndex).Cells("間接費率").Value = 0
+                        DgvItemList.Rows(e.RowIndex).Cells("関税率").Value = 0
+                        DgvItemList.Rows(e.RowIndex).Cells("前払法人税率").Value = 0
+                        DgvItemList.Rows(e.RowIndex).Cells("輸送費率").Value = 0
+
+                    End If
                 End If
 
-            End If
+                End If
 
             For index As Integer = 0 To DgvItemList.Rows.Count - 1
                 PurchaseTotal += DgvItemList.Rows(index).Cells("仕入金額").Value
