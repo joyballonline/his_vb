@@ -1059,7 +1059,18 @@ Public Class Quote
             Dim result As DialogResult = MessageBox.Show(strMessage, strMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Exit Sub
         End If
-
+        '明細行がゼロ件の場合はエラーとする
+        If DgvItemList.Rows.Count = 0 Then
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                strMessage = "Please enter the details. "
+                strMessageTitle = "details Error"
+            Else
+                strMessage = "明細を入力してください。"
+                strMessageTitle = "明細入力エラー"
+            End If
+            Dim result As DialogResult = MessageBox.Show(strMessage, strMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Exit Sub
+        End If
 
         Dim dtToday As DateTime = DateTime.Now
         If Status Is "PRICE" Then
