@@ -714,6 +714,7 @@ Public Class Quote
                     End If
                 End If
 
+                '仕入先コード入力時、仕入先マスタより各項目を抽出
                 If DgvItemList.Rows(e.RowIndex).Cells("仕入先コード").Value IsNot Nothing Then
                     Sql = ""
                     Sql += "SELECT * FROM public.m11_supplier"
@@ -723,14 +724,23 @@ Public Class Quote
                     Dim reccnt As Integer = 0
                     Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-                    DgvItemList.Rows(e.RowIndex).Cells("仕入先").Value = ds.Tables(RS).Rows(0)("仕入先名").ToString
-                    DgvItemList.Rows(e.RowIndex).Cells("間接費率").Value = ds.Tables(RS).Rows(0)("既定間接費率").ToString
-                    DgvItemList.Rows(e.RowIndex).Cells("関税率").Value = ds.Tables(RS).Rows(0)("関税率").ToString
-                    DgvItemList.Rows(e.RowIndex).Cells("前払法人税率").Value = ds.Tables(RS).Rows(0)("前払法人税率").ToString
-                    DgvItemList.Rows(e.RowIndex).Cells("輸送費率").Value = ds.Tables(RS).Rows(0)("輸送費率").ToString
+                    If reccnt > 0 Then
+                        DgvItemList.Rows(e.RowIndex).Cells("仕入先").Value = ds.Tables(RS).Rows(0)("仕入先名").ToString
+                        DgvItemList.Rows(e.RowIndex).Cells("間接費率").Value = ds.Tables(RS).Rows(0)("既定間接費率").ToString
+                        DgvItemList.Rows(e.RowIndex).Cells("関税率").Value = ds.Tables(RS).Rows(0)("関税率").ToString
+                        DgvItemList.Rows(e.RowIndex).Cells("前払法人税率").Value = ds.Tables(RS).Rows(0)("前払法人税率").ToString
+                        DgvItemList.Rows(e.RowIndex).Cells("輸送費率").Value = ds.Tables(RS).Rows(0)("輸送費率").ToString
+                    Else
+                        DgvItemList.Rows(e.RowIndex).Cells("仕入先").Value = ""
+                        DgvItemList.Rows(e.RowIndex).Cells("間接費率").Value = 0
+                        DgvItemList.Rows(e.RowIndex).Cells("関税率").Value = 0
+                        DgvItemList.Rows(e.RowIndex).Cells("前払法人税率").Value = 0
+                        DgvItemList.Rows(e.RowIndex).Cells("輸送費率").Value = 0
+
+                    End If
                 End If
 
-            End If
+                End If
 
             For index As Integer = 0 To DgvItemList.Rows.Count - 1
                 PurchaseTotal += DgvItemList.Rows(index).Cells("仕入金額").Value
@@ -1043,6 +1053,35 @@ Public Class Quote
     End Sub
 
     Private Sub BtnRegistration_Click(sender As Object, e As EventArgs) Handles BtnRegistration.Click
+
+        '項目チェック
+        Dim strMessage As String = ""    'メッセージ本文
+        Dim strMessageTitle As String = ""      'メッセージタイトル
+        ''得意先は必須入力としましょう
+        If TxtCustomerCode.Text = "" Then
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                strMessage = "Please enter Customer Code. "
+                strMessageTitle = "CustomerCode Error"
+            Else
+                strMessage = "得意先を入力してください。"
+                strMessageTitle = "得意先入力エラー"
+            End If
+            Dim result As DialogResult = MessageBox.Show(strMessage, strMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Exit Sub
+        End If
+        '明細行がゼロ件の場合はエラーとする
+        If DgvItemList.Rows.Count = 0 Then
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                strMessage = "Please enter the details. "
+                strMessageTitle = "details Error"
+            Else
+                strMessage = "明細を入力してください。"
+                strMessageTitle = "明細入力エラー"
+            End If
+            Dim result As DialogResult = MessageBox.Show(strMessage, strMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Exit Sub
+        End If
+
         Dim dtToday As DateTime = DateTime.Now
         If Status Is "PRICE" Then
             Try
