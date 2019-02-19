@@ -8,6 +8,7 @@ Imports UtilMDL.DataGridView
 Imports UtilMDL.FileDirectory
 Imports UtilMDL.xls
 Imports System.Text.RegularExpressions
+Imports System.Globalization
 
 Public Class DepositDetailList
     Inherits System.Windows.Forms.Form
@@ -287,7 +288,7 @@ Public Class DepositDetailList
     '選択データをもとに以下テーブル更新
     't25_nkinhd, t27_nkinkshihd, t23_skyuhd
     Private Sub updateData()
-        Dim dtNow As DateTime = DateTime.Now
+        Dim dtNow As String = formatDatetime(DateTime.Now)
         Dim Sql As String = ""
         Dim ds As DataSet
 
@@ -370,7 +371,6 @@ Public Class DepositDetailList
             Dim decUrikakeZan As Decimal = dsSkyuhd.Tables(RS).Rows(0)("売掛残高") + strNyukinGaku
             Dim decNyukinKei As Decimal = dsSkyuhd.Tables(RS).Rows(0)("入金額計") - strNyukinGaku
 
-
             Sql = "UPDATE "
             Sql += "Public.t27_nkinkshihd "
             Sql += "SET "
@@ -404,17 +404,19 @@ Public Class DepositDetailList
             '入金消込基本を更新
             _db.executeDB(Sql)
 
+            Dim nfi As NumberFormatInfo = New CultureInfo(CommonConst.CI_JP, False).NumberFormat
+
             Sql = "UPDATE "
             Sql += "Public.t23_skyuhd "
             Sql += "SET "
 
             Sql += "売掛残高"
             Sql += " = '"
-            Sql += decUrikakeZan.ToString '売掛残高を増やす
+            Sql += formatNumber(decUrikakeZan) '売掛残高を増やす
             Sql += "', "
             Sql += "入金額計"
             Sql += " = '"
-            Sql += decNyukinKei.ToString '入金額計を減らす
+            Sql += formatNumber(decNyukinKei) '入金額計を減らす
             Sql += "', "
             Sql += "更新者"
             Sql += " = '"
@@ -425,7 +427,7 @@ Public Class DepositDetailList
             Sql += dtNow
 
             '売掛が残るなら入金完了日は削除する
-            If dsSkyuhd.Tables(RS).Rows(0)("請求金額計") <> decNyukinKei.ToString Then
+            If dsSkyuhd.Tables(RS).Rows(0)("請求金額計") <> formatNumber(decNyukinKei) Then
 
                 Sql += "', "
                 Sql += "入金完了日"
@@ -451,9 +453,9 @@ Public Class DepositDetailList
 
         Else
 
-                '画面を開いたときの日時とデータの日時が異なっていた場合
-                'データが誰かに変更された旨を伝える
-                _msgHd.dspMSG("chkData", frmC01F10_Login.loginValue.Language)
+            '画面を開いたときの日時とデータの日時が異なっていた場合
+            'データが誰かに変更された旨を伝える
+            _msgHd.dspMSG("chkData", frmC01F10_Login.loginValue.Language)
 
             '表示データを更新
             setDgvBilling()
@@ -486,8 +488,8 @@ Public Class DepositDetailList
         '抽出条件
         Dim customerName As String = escapeSql(TxtCustomerName.Text)
         Dim customerCode As String = escapeSql(TxtCustomerCode.Text)
-        Dim sinceDate As String = escapeSql(dtBillingDateSince.Text)
-        Dim untilDate As String = escapeSql(dtBillingDateUntil.Text)
+        Dim sinceDate As String = strFormatDate(dtBillingDateSince.Text) '日付の書式を日本の形式に合わせる
+        Dim untilDate As String = strFormatDate(dtBillingDateUntil.Text) '日付の書式を日本の形式に合わせる
         Dim sinceNum As String = escapeSql(TxtBillingNo1.Text)
         Dim untilNum As String = escapeSql(TxtBillingNo2.Text)
 
@@ -570,5 +572,43 @@ Public Class DepositDetailList
                                     "")
         Return reDelKbn
     End Function
+
+    'どんなカルチャーであっても、日本の形式に変換する
+    Private Function strFormatDate(ByVal prmDate As String) As String
+
+        'PCのカルチャーを取得し、それに応じてStringからDatetimeを作成
+        Dim ci As New System.Globalization.CultureInfo(CultureInfo.CurrentCulture.Name.ToString)
+        Dim dateFormat As DateTime = DateTime.Parse(prmDate, ci, System.Globalization.DateTimeStyles.AssumeLocal)
+
+        '日本の形式に書き換える
+        Return dateFormat.ToString("yyyy/MM/dd")
+    End Function
+
+    'どんなカルチャーであっても、日本の形式に変換する
+    Private Function formatDatetime(ByVal prmDatetime As DateTime) As String
+
+        'PCのカルチャーを取得し、それに応じてStringからDatetimeを作成
+        Dim ciCurrent As New System.Globalization.CultureInfo(CultureInfo.CurrentCulture.Name.ToString)
+        Dim dateFormat As DateTime = DateTime.Parse(prmDatetime.ToString, ciCurrent, System.Globalization.DateTimeStyles.AssumeLocal)
+
+        Dim changeFormat As String = dateFormat.ToString("yyyy/MM/dd HH:mm:ss")
+
+        Dim ciJP As New System.Globalization.CultureInfo(CommonConst.CI_JP)
+        Dim rtnDatetime As DateTime = DateTime.Parse(changeFormat, ciJP, System.Globalization.DateTimeStyles.AssumeLocal)
+
+
+        '日本の形式に書き換える
+        Return changeFormat
+    End Function
+
+    'どんなカルチャーであっても、日本の形式に変換する
+    Private Function formatNumber(ByVal prmVal As Decimal) As String
+
+        Dim nfi As NumberFormatInfo = New CultureInfo(CommonConst.CI_JP, False).NumberFormat
+
+        '日本の形式に書き換える
+        Return prmVal.ToString("F3", nfi) '売掛残高を増やす
+    End Function
+
 
 End Class
