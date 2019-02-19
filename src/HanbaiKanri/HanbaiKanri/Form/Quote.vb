@@ -1043,6 +1043,24 @@ Public Class Quote
     End Sub
 
     Private Sub BtnRegistration_Click(sender As Object, e As EventArgs) Handles BtnRegistration.Click
+
+        '項目チェック
+        Dim strMessage As String = ""    'メッセージ本文
+        Dim strMessageTitle As String = ""      'メッセージタイトル
+        ''得意先は必須入力としましょう
+        If TxtCustomerCode.Text = "" Then
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                strMessage = "Please enter Customer Code. "
+                strMessageTitle = "CustomerCode Error"
+            Else
+                strMessage = "得意先を入力してください。"
+                strMessageTitle = "得意先入力エラー"
+            End If
+            Dim result As DialogResult = MessageBox.Show(strMessage, strMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Exit Sub
+        End If
+
+
         Dim dtToday As DateTime = DateTime.Now
         If Status Is "PRICE" Then
             Try
