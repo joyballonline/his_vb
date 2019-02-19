@@ -1081,6 +1081,41 @@ Public Class Quote
             Dim result As DialogResult = MessageBox.Show(strMessage, strMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Exit Sub
         End If
+        'TxtVatの属性チェック
+        If Not IsNumeric(TxtVat.Text) Then
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                strMessage = "Please enter with 0<= VAT <=1. "
+                strMessageTitle = "VAT Error"
+            Else
+                strMessage = "0<= VAT <=1 の範囲で入力してください。"
+                strMessageTitle = "ＶＡＴ入力エラー"
+            End If
+            Dim result As DialogResult = MessageBox.Show(strMessage, strMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Exit Sub
+        End If
+        If CDec(TxtVat.Text) < 0 Then
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                strMessage = "Please enter with 0<= VAT <=1. "
+                strMessageTitle = "VAT Error"
+            Else
+                strMessage = "0<= VAT <=1 の範囲で入力してください。"
+                strMessageTitle = "ＶＡＴ入力エラー"
+            End If
+            Dim result As DialogResult = MessageBox.Show(strMessage, strMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Exit Sub
+        End If
+        If CDec(TxtVat.Text) > 1 Then
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                strMessage = "Please enter with 0<= VAT <=1. "
+                strMessageTitle = "VAT Error"
+            Else
+                strMessage = "0<= VAT <=1 の範囲で入力してください。"
+                strMessageTitle = "ＶＡＴ入力エラー"
+            End If
+            Dim result As DialogResult = MessageBox.Show(strMessage, strMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Exit Sub
+        End If
+
 
         Dim dtToday As DateTime = DateTime.Now
         If Status Is "PRICE" Then
