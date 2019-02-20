@@ -753,6 +753,10 @@ Public Class AccountsPayableList
         Sql1 += " = '"
         Sql1 += dtNow
         Sql1 += "', "
+        Sql1 += "更新日"
+        Sql1 += " = '"
+        Sql1 += dtNow
+        Sql1 += "', "
         Sql1 += "更新者"
         Sql1 += " = '"
         Sql1 += frmC01F10_Login.loginValue.TantoNM
