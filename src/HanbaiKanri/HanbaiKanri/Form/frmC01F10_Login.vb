@@ -157,14 +157,11 @@ Public Class frmC01F10_Login
             '・検索キー：　IF)会社コード、IF)ユーザID、画面)パスワード			
             '	   IF)世代番号 - 10 よりも大（過去10世代と重複しない）
             Try
-                sql = sql & N & "SELECT "
-                sql = sql & N & "    略名 "
-                sql = sql & N & "  , 言語 "
-                sql = sql & N & " FROM m02_user "
-                sql = sql & N & " WHERE "
-                sql = sql & N & "    会社コード = '" & _db.rmSQ(cmbCampany.SelectedValue) & "'"
-                sql = sql & N & "    and ユーザＩＤ = '" & _db.rmSQ(txtTanto.Text) & "'"
-                sql = sql & N & "    and 無効フラグ = 0 "
+                sql = "SELECT * FROM m02_user "
+                sql += " WHERE "
+                sql += "    会社コード = '" & _db.rmSQ(cmbCampany.SelectedValue) & "'"
+                sql += "    and ユーザＩＤ = '" & _db.rmSQ(txtTanto.Text) & "'"
+                sql += "    and 無効フラグ = 0 "
                 Dim reccnt As Integer = 0
                 Dim ds As DataSet = _db.selectDB(sql, RS, reccnt)
 
