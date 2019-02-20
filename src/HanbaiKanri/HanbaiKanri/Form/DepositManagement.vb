@@ -648,7 +648,7 @@ Public Class DepositManagement
                 Sql += "', '"
                 Sql += CustomerName
                 Sql += "', '"
-                Sql += DgvBillingInfo.Rows(i).Cells("入金額").Value.ToString
+                Sql += formatNumber(DgvBillingInfo.Rows(i).Cells("入金額").Value)
                 Sql += "', '"
                 Sql += TxtRemarks.Text
                 Sql += "', '"
