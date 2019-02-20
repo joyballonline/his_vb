@@ -7,7 +7,7 @@ Imports UtilMDL.DB
 Imports UtilMDL.DataGridView
 Imports UtilMDL.FileDirectory
 Imports UtilMDL.xls
-
+Imports System.Text.RegularExpressions
 
 Public Class MstHanyou
     Inherits System.Windows.Forms.Form
@@ -63,28 +63,18 @@ Public Class MstHanyou
 
     End Sub
 
-    Private Sub MstHanyoue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If frmC01F10_Login.loginValue.Language = "ENG" Then
-            Label1.Text = "FixedKey"
-            Label2.Text = "Char1"
-            Label5.Text = "Char2"
-            Label7.Text = "Char3"
-            Label9.Text = "Char4"
-            Label11.Text = "Char5"
-            Label13.Text = "Char6"
-            Label3.Text = "Num1"
-            Label4.Text = "Num2"
-            Label6.Text = "Num3"
-            Label8.Text = "Num4"
-            Label10.Text = "Num5"
-            Label12.Text = "Num6"
+    '画面表示時
+    Private Sub MstHanyou_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+            TxtSearchString.Text = "String"
+            TxtSearchNumber.Text = "Number"
 
             BtnSearch.Text = "Search"
             BtnAdd.Text = "Add"
             BtnEdit.Text = "Edit"
             BtnBack.Text = "Back"
 
-            Dgv_Hanyo.Columns("会社コード").HeaderText = "CompanyCode"
             Dgv_Hanyo.Columns("固定キー").HeaderText = "FixedKey"
             Dgv_Hanyo.Columns("可変キー").HeaderText = "VariableKey"
             Dgv_Hanyo.Columns("表示順").HeaderText = "DisplayOrder"
@@ -105,78 +95,17 @@ Public Class MstHanyou
             Dgv_Hanyo.Columns("更新日").HeaderText = "UpDateDate"
 
         End If
-        Dim Sql As String = ""
-        Try
-            Sql += "SELECT "
-            Sql += "会社コード, "
-            Sql += "固定キー, "
-            Sql += "可変キー, "
-            Sql += "表示順, "
-            Sql += "文字１, "
-            Sql += "文字２, "
-            Sql += "文字３, "
-            Sql += "文字４, "
-            Sql += "文字５, "
-            Sql += "文字６, "
-            Sql += "数値１, "
-            Sql += "数値２, "
-            Sql += "数値３, "
-            Sql += "数値４, "
-            Sql += "数値５, "
-            Sql += "数値６, "
-            Sql += "メモ, "
-            Sql += "更新者, "
-            Sql += "更新日 "
-            Sql += "FROM "
-            Sql += "public"
-            Sql += "."
-            Sql += "m90_hanyo"
-            Sql += " WHERE "
-            Sql += "会社コード"
-            Sql += " ILIKE "
-            Sql += "'"
-            Sql += frmC01F10_Login.loginValue.BumonNM
-            Sql += "'"
 
-            Dim reccnt As Integer = 0
-            Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
+        '一覧を取得
+        getList()
 
-            For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-                Dgv_Hanyo.Rows.Add()
-                Dgv_Hanyo.Rows(index).Cells(0).Value = ds.Tables(RS).Rows(index)(0)        '会社コード
-                Dgv_Hanyo.Rows(index).Cells(1).Value = ds.Tables(RS).Rows(index)(1)        '言語コード
-                Dgv_Hanyo.Rows(index).Cells(2).Value = ds.Tables(RS).Rows(index)(2)        '氏名
-                Dgv_Hanyo.Rows(index).Cells(3).Value = ds.Tables(RS).Rows(index)(3)      '略名
-                Dgv_Hanyo.Rows(index).Cells(4).Value = ds.Tables(RS).Rows(index)(4)      '備考
-                Dgv_Hanyo.Rows(index).Cells(5).Value = ds.Tables(RS).Rows(index)(5)      '無効フラグ
-                Dgv_Hanyo.Rows(index).Cells(6).Value = ds.Tables(RS).Rows(index)(6)      '更新者
-                Dgv_Hanyo.Rows(index).Cells(7).Value = ds.Tables(RS).Rows(index)(7)      '更新日
-                Dgv_Hanyo.Rows(index).Cells(8).Value = ds.Tables(RS).Rows(index)(8)        '会社コード
-                Dgv_Hanyo.Rows(index).Cells(9).Value = ds.Tables(RS).Rows(index)(9)        '言語コード
-                Dgv_Hanyo.Rows(index).Cells(10).Value = ds.Tables(RS).Rows(index)(10)        '氏名
-                Dgv_Hanyo.Rows(index).Cells(11).Value = ds.Tables(RS).Rows(index)(11)      '略名
-                Dgv_Hanyo.Rows(index).Cells(12).Value = ds.Tables(RS).Rows(index)(12)      '備考
-                Dgv_Hanyo.Rows(index).Cells(13).Value = ds.Tables(RS).Rows(index)(13)      '無効フラグ
-                Dgv_Hanyo.Rows(index).Cells(14).Value = ds.Tables(RS).Rows(index)(14)      '更新者
-                Dgv_Hanyo.Rows(index).Cells(15).Value = ds.Tables(RS).Rows(index)(15)      '更新日
-                Dgv_Hanyo.Rows(index).Cells(16).Value = ds.Tables(RS).Rows(index)(16)      '備考
-                Dgv_Hanyo.Rows(index).Cells(17).Value = ds.Tables(RS).Rows(index)(17)      '無効フラグ
-                Dgv_Hanyo.Rows(index).Cells(18).Value = ds.Tables(RS).Rows(index)(18)      '更新者
-            Next
-
-        Catch ue As UsrDefException
-            ue.dspMsg()
-            Throw ue
-        Catch ex As Exception
-            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
-        End Try
     End Sub
 
-    Private Sub BtnSelect_Click(sender As Object, e As EventArgs) Handles BtnEdit.Click
+    '編集ボタン押下時
+    Private Sub BtnEdit_Click(sender As Object, e As EventArgs) Handles BtnEdit.Click
         Dim openForm As Form = Nothing
         Dim Status As String = "EDIT"
-        Dim Code As String = Dgv_Hanyo.Rows(Dgv_Hanyo.CurrentCell.RowIndex).Cells("会社コード").Value
+        Dim Code As String = frmC01F10_Login.loginValue.BumonNM
         Dim Key1 As String = Dgv_Hanyo.Rows(Dgv_Hanyo.CurrentCell.RowIndex).Cells("固定キー").Value
         Dim Key2 As String = Dgv_Hanyo.Rows(Dgv_Hanyo.CurrentCell.RowIndex).Cells("可変キー").Value
 
@@ -185,6 +114,7 @@ Public Class MstHanyou
         Me.Hide()   ' 自分は隠れる
     End Sub
 
+    '戻るボタン押下時
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
         Dim frmC01F30_Menu As frmC01F30_Menu
         frmC01F30_Menu = New frmC01F30_Menu(_msgHd, _langHd, _db)
@@ -192,6 +122,7 @@ Public Class MstHanyou
         Me.Close()
     End Sub
 
+    '追加ボタン押下時
     Private Sub BtnAdd_Click(sender As Object, e As EventArgs) Handles BtnAdd.Click
         Dim openForm As Form = Nothing
         Dim Status As String = "ADD"
@@ -200,164 +131,50 @@ Public Class MstHanyou
         Me.Hide()   ' 自分は隠れる
     End Sub
 
+    '検索ボタン押下時
     Private Sub BtnSearch_Click(sender As Object, e As EventArgs) Handles BtnSearch.Click
+        '一覧を取得
+        getList()
+    End Sub
+
+    Public Sub getList()
+        Dim Sql As String = ""
+
+        If IsNumeric(TxtSearchNumber.Text) <> True And TxtSearchNumber.Text IsNot "" Then
+            '数値以外が入っていたらアラート
+            _msgHd.dspMSG("IsNotNumeric", frmC01F10_Login.loginValue.Language)
+
+            Return
+        End If
+
+        '一覧クリア
         Dgv_Hanyo.Rows.Clear()
 
-        Dim Sql As String = ""
+        Sql = searchConditions()
+
         Try
-            Sql += "SELECT "
-            Sql += "* "
-            Sql += "FROM "
-            Sql += "public"
-            Sql += "."
-            Sql += "m90_hanyo"
-            Sql += " WHERE "
-            Sql += "会社コード"
-            Sql += " ILIKE "
-            Sql += "'"
-            Sql += frmC01F10_Login.loginValue.BumonNM
-            Sql += "'"
+            Dim ds As DataSet = getDsData("m90_hanyo", Sql)
 
-            If TxtFixedkey.Text = "" Then
-            Else
-                Sql += " AND "
-                Sql += "固定キー"
-                Sql += " ILIKE "
-                Sql += "'"
-                Sql += TxtFixedkey.Text
-                Sql += "'"
-            End If
-
-            If TxtText1.Text = "" Then
-            Else
-
-                Sql += " AND "
-                Sql += "文字１"
-                Sql += " ILIKE "
-                Sql += "'%"
-                Sql += TxtText1.Text
-                Sql += "%'"
-            End If
-
-            If TxtText2.Text = "" Then
-            Else
-                Sql += " AND "
-                Sql += "文字２"
-                Sql += " ILIKE "
-                Sql += "'%"
-                Sql += TxtText2.Text
-                Sql += "%'"
-            End If
-
-            If TxtText3.Text = "" Then
-            Else
-                Sql += " AND "
-                Sql += "文字３"
-                Sql += " ILIKE "
-                Sql += "'%"
-                Sql += TxtText3.Text
-                Sql += "%'"
-            End If
-
-            If TxtText4.Text = "" Then
-            Else
-                Sql += " AND "
-                Sql += "文字４"
-                Sql += " ILIKE "
-                Sql += "'%"
-                Sql += TxtText4.Text
-                Sql += "%'"
-            End If
-
-            If TxtText5.Text = "" Then
-            Else
-                Sql += " AND "
-                Sql += "文字５"
-                Sql += " ILIKE "
-                Sql += "'%"
-                Sql += TxtText5.Text
-                Sql += "%'"
-            End If
-
-            If TxtText6.Text = "" Then
-            Else
-                Sql += " AND "
-                Sql += "文字６"
-                Sql += " ILIKE "
-                Sql += "'%"
-                Sql += TxtText6.Text
-                Sql += "%'"
-            End If
-
-            If TxtNumber1.Text = "" Then
-            Else
-                Sql += " AND "
-                Sql += "数値１"
-                Sql += " = "
-                Sql += TxtNumber1.Text
-            End If
-
-            If TxtNumber2.Text = "" Then
-            Else
-                Sql += " AND "
-                Sql += "数値２"
-                Sql += " = "
-                Sql += TxtNumber2.Text
-            End If
-
-            If TxtNumber3.Text = "" Then
-            Else
-                Sql += " AND "
-                Sql += "数値３"
-                Sql += " = "
-                Sql += TxtNumber3.Text
-            End If
-
-            If TxtNumber4.Text = "" Then
-            Else
-                Sql += " AND "
-                Sql += "数値４"
-                Sql += " = "
-                Sql += TxtNumber4.Text
-            End If
-
-            If TxtNumber5.Text = "" Then
-            Else
-                Sql += " AND "
-                Sql += "数値５"
-                Sql += " = "
-                Sql += TxtNumber5.Text
-            End If
-
-            If TxtNumber6.Text = "" Then
-            Else
-                Sql += " AND "
-                Sql += "数値６"
-                Sql += " = "
-                Sql += TxtNumber6.Text
-            End If
-
-            Dim reccnt As Integer = 0
-            Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-            For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+            For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
                 Dgv_Hanyo.Rows.Add()
-                Dgv_Hanyo.Rows(index).Cells(0).Value = ds.Tables(RS).Rows(index)(0)        '会社コード
-                Dgv_Hanyo.Rows(index).Cells(1).Value = ds.Tables(RS).Rows(index)(1)        '言語コード
-                Dgv_Hanyo.Rows(index).Cells(2).Value = ds.Tables(RS).Rows(index)(2)        '氏名
-                Dgv_Hanyo.Rows(index).Cells(3).Value = ds.Tables(RS).Rows(index)(3)      '略名
-                Dgv_Hanyo.Rows(index).Cells(4).Value = ds.Tables(RS).Rows(index)(4)      '備考
-                Dgv_Hanyo.Rows(index).Cells(5).Value = ds.Tables(RS).Rows(index)(5)      '無効フラグ
-                Dgv_Hanyo.Rows(index).Cells(6).Value = ds.Tables(RS).Rows(index)(6)      '更新者
-                Dgv_Hanyo.Rows(index).Cells(7).Value = ds.Tables(RS).Rows(index)(7)      '更新日
-                Dgv_Hanyo.Rows(index).Cells(8).Value = ds.Tables(RS).Rows(index)(8)        '会社コード
-                Dgv_Hanyo.Rows(index).Cells(9).Value = ds.Tables(RS).Rows(index)(9)        '言語コード
-                Dgv_Hanyo.Rows(index).Cells(10).Value = ds.Tables(RS).Rows(index)(10)        '氏名
-                Dgv_Hanyo.Rows(index).Cells(11).Value = ds.Tables(RS).Rows(index)(11)      '略名
-                Dgv_Hanyo.Rows(index).Cells(12).Value = ds.Tables(RS).Rows(index)(12)      '備考
-                Dgv_Hanyo.Rows(index).Cells(13).Value = ds.Tables(RS).Rows(index)(13)      '無効フラグ
-                Dgv_Hanyo.Rows(index).Cells(14).Value = ds.Tables(RS).Rows(index)(14)      '更新者
-                Dgv_Hanyo.Rows(index).Cells(15).Value = ds.Tables(RS).Rows(index)(15)      '更新日
+                Dgv_Hanyo.Rows(i).Cells("固定キー").Value = ds.Tables(RS).Rows(i)("固定キー")        '固定キー
+                Dgv_Hanyo.Rows(i).Cells("可変キー").Value = ds.Tables(RS).Rows(i)("可変キー")        '可変キー
+                Dgv_Hanyo.Rows(i).Cells("表示順").Value = ds.Tables(RS).Rows(i)("表示順")         '表示順
+                Dgv_Hanyo.Rows(i).Cells("文字１").Value = ds.Tables(RS).Rows(i)("文字１")         '文字１
+                Dgv_Hanyo.Rows(i).Cells("文字２").Value = ds.Tables(RS).Rows(i)("文字２")         '文字２
+                Dgv_Hanyo.Rows(i).Cells("文字３").Value = ds.Tables(RS).Rows(i)("文字３")         '文字３
+                Dgv_Hanyo.Rows(i).Cells("文字４").Value = ds.Tables(RS).Rows(i)("文字４")         '文字４
+                Dgv_Hanyo.Rows(i).Cells("文字５").Value = ds.Tables(RS).Rows(i)("文字５")         '文字５
+                Dgv_Hanyo.Rows(i).Cells("文字６").Value = ds.Tables(RS).Rows(i)("文字６")         '文字６
+                Dgv_Hanyo.Rows(i).Cells("数値１").Value = ds.Tables(RS).Rows(i)("数値１")        '数値１
+                Dgv_Hanyo.Rows(i).Cells("数値２").Value = ds.Tables(RS).Rows(i)("数値２")        '数値２
+                Dgv_Hanyo.Rows(i).Cells("数値３").Value = ds.Tables(RS).Rows(i)("数値３")        '数値３
+                Dgv_Hanyo.Rows(i).Cells("数値４").Value = ds.Tables(RS).Rows(i)("数値４")        '数値４
+                Dgv_Hanyo.Rows(i).Cells("数値５").Value = ds.Tables(RS).Rows(i)("数値５")        '数値５
+                Dgv_Hanyo.Rows(i).Cells("数値６").Value = ds.Tables(RS).Rows(i)("数値６")        '数値６
+                Dgv_Hanyo.Rows(i).Cells("メモ").Value = ds.Tables(RS).Rows(i)("メモ")         'メモ
+                Dgv_Hanyo.Rows(i).Cells("更新者").Value = ds.Tables(RS).Rows(i)("更新者")        '更新者
+                Dgv_Hanyo.Rows(i).Cells("更新日").Value = ds.Tables(RS).Rows(i)("更新日")        '更新日
             Next
 
         Catch ue As UsrDefException
@@ -368,4 +185,88 @@ Public Class MstHanyou
             Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
         End Try
     End Sub
+
+    '抽出条件取得
+    Private Function searchConditions() As String
+        Dim Sql As String = ""
+
+        '抽出条件
+        Dim searchString As String = escapeSql(TxtSearchString.Text)
+        Dim searchNumber As String = escapeSql(TxtSearchNumber.Text)
+
+        If searchString <> Nothing Then
+
+            Sql += " AND ("
+            Sql += " 固定キー ILIKE '%" & searchString & "%' "
+            Sql += " OR "
+            Sql += " 文字１ ILIKE '%" & searchString & "%' "
+            Sql += " OR "
+            Sql += " 文字２ ILIKE '%" & searchString & "%' "
+            Sql += " OR "
+            Sql += " 文字３ ILIKE '%" & searchString & "%' "
+            Sql += " OR "
+            Sql += " 文字４ ILIKE '%" & searchString & "%' "
+            Sql += " OR "
+            Sql += " 文字５ ILIKE '%" & searchString & "%' "
+            Sql += " OR "
+            Sql += " 文字６ ILIKE '%" & searchString & "%' "
+            Sql += " OR "
+            Sql += " メモ ILIKE '%" & searchString & "%' "
+            Sql += " )"
+
+        End If
+
+        If searchNumber <> Nothing Then
+
+            Sql += " AND ("
+            Sql += " 数値１ = " & searchNumber
+            Sql += " OR "
+            Sql += " 数値２ = " & searchNumber
+            Sql += " OR "
+            Sql += " 数値３ = " & searchNumber
+            Sql += " OR "
+            Sql += " 数値４ = " & searchNumber
+            Sql += " OR "
+            Sql += " 数値５ = " & searchNumber
+            Sql += " OR "
+            Sql += " 数値６ = " & searchNumber
+            Sql += " )"
+
+        End If
+
+
+        Return Sql
+
+    End Function
+
+    'sqlで実行する文字列からシングルクォーテーションを文字コードにする
+    Private Function escapeSql(ByVal prmSql As String) As String
+        Dim sql As String = prmSql
+
+        sql = sql.Replace("'"c, "''") 'シングルクォーテーションを置換
+
+        Return Regex.Escape(sql)
+        Return sql
+    End Function
+
+    'param1：String テーブル名
+    'param2：String 詳細条件
+    'Return: DataSet
+    Private Function getDsData(ByVal tableName As String, Optional ByRef txtParam As String = "") As DataSet
+        Dim reccnt As Integer = 0 'DB用（デフォルト）
+        Dim Sql As String = ""
+
+        Sql += "SELECT"
+        Sql += " *"
+        Sql += " FROM "
+
+        Sql += "public." & tableName
+        Sql += " WHERE "
+        Sql += "会社コード"
+        Sql += " ILIKE  "
+        Sql += "'" & frmC01F10_Login.loginValue.BumonNM & "'"
+        Sql += txtParam
+        Return _db.selectDB(Sql, RS, reccnt)
+    End Function
+
 End Class
