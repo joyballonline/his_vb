@@ -7,7 +7,7 @@ Imports UtilMDL.DB
 Imports UtilMDL.DataGridView
 Imports UtilMDL.FileDirectory
 Imports UtilMDL.xls
-
+Imports System.Globalization
 
 Public Class PaidList
     Inherits System.Windows.Forms.Form
@@ -285,7 +285,7 @@ Public Class PaidList
     '選択データをもとに以下テーブル更新
     't47_shrihd, t49_shrikshihd, t46_kikehd
     Private Sub updateData()
-        Dim dtNow As DateTime = DateTime.Now
+        Dim dtNow As String = formatDatetime(DateTime.Now)
         Dim Sql As String = ""
         Dim ds As DataSet
 
@@ -408,15 +408,19 @@ Public Class PaidList
 
             Sql += "買掛残高"
             Sql += " = '"
-            Sql += decKaikakeZan.ToString '買掛残高を増やす
+            Sql += formatNumber(decKaikakeZan) '買掛残高を増やす
             Sql += "', "
             Sql += "支払金額計"
             Sql += " = '"
-            Sql += decSiharaiKei.ToString '支払金額計を減らす
+            Sql += formatNumber(decSiharaiKei) '支払金額計を減らす
             Sql += "', "
             Sql += "更新者"
             Sql += " = '"
             Sql += frmC01F10_Login.loginValue.TantoNM
+            Sql += "', "
+            Sql += "更新日"
+            Sql += " = '"
+            Sql += dtNow
             Sql += "' "
 
             Sql += "WHERE"
@@ -462,8 +466,8 @@ Public Class PaidList
         '抽出条件
         Dim customerName As String = TxtSupplierName.Text
         Dim customerCode As String = TxtSupplierCode.Text
-        Dim sinceDate As String = dtPaidDateSince.Text
-        Dim untilDate As String = dtPaidDateUntil.Text
+        Dim sinceDate As String = strFormatDate(dtPaidDateSince.Text)
+        Dim untilDate As String = strFormatDate(dtPaidDateUntil.Text)
         Dim sinceNum As String = TxtPaidNoSince.Text
         Dim untilNum As String = TxtPaidNoUntil.Text
 
@@ -546,5 +550,44 @@ Public Class PaidList
                                     "")
         Return reDelKbn
     End Function
+
+    'ユーザーのカルチャーから、日本の形式に変換する
+    Private Function strFormatDate(ByVal prmDate As String, Optional ByRef prmFormat As String = "yyyy/MM/dd") As String
+
+        'PCのカルチャーを取得し、それに応じてStringからDatetimeを作成
+        Dim ci As New System.Globalization.CultureInfo(CultureInfo.CurrentCulture.Name.ToString)
+        Dim dateFormat As DateTime = DateTime.Parse(prmDate, ci, System.Globalization.DateTimeStyles.AssumeLocal)
+
+        '日本の形式に書き換える
+        Return dateFormat.ToString(prmFormat)
+    End Function
+
+    'ユーザーのカルチャーから、日本の形式に変換する
+    Private Function formatDatetime(ByVal prmDatetime As DateTime) As String
+
+        'PCのカルチャーを取得し、それに応じてStringからDatetimeを作成
+        Dim ciCurrent As New System.Globalization.CultureInfo(CultureInfo.CurrentCulture.Name.ToString)
+        Dim dateFormat As DateTime = DateTime.Parse(prmDatetime.ToString, ciCurrent, System.Globalization.DateTimeStyles.AssumeLocal)
+
+        Dim changeFormat As String = dateFormat.ToString("yyyy/MM/dd HH:mm:ss")
+
+        Dim ciJP As New System.Globalization.CultureInfo(CommonConst.CI_JP)
+        Dim rtnDatetime As DateTime = DateTime.Parse(changeFormat, ciJP, System.Globalization.DateTimeStyles.AssumeLocal)
+
+
+        '日本の形式に書き換える
+        Return changeFormat
+    End Function
+
+    '金額フォーマット（登録の際の小数点指定子）を日本の形式に合わせる
+    '桁区切り記号は外す
+    Private Function formatNumber(ByVal prmVal As Decimal) As String
+
+        Dim nfi As NumberFormatInfo = New CultureInfo(CommonConst.CI_JP, False).NumberFormat
+
+        '日本の形式に書き換える
+        Return prmVal.ToString("F3", nfi) '売掛残高を増やす
+    End Function
+
 
 End Class
