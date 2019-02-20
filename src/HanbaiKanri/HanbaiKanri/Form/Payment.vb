@@ -7,7 +7,7 @@ Imports UtilMDL.DB
 Imports UtilMDL.DataGridView
 Imports UtilMDL.FileDirectory
 Imports UtilMDL.xls
-
+Imports System.Globalization
 
 Public Class Payment
     Inherits System.Windows.Forms.Form
@@ -446,7 +446,7 @@ Public Class Payment
             Sql += "', "
             Sql += "更新日"
             Sql += " = '"
-            Sql += today
+            Sql += formatDatetime(today)
             Sql += "' "
             Sql += "WHERE"
             Sql += " 会社コード"
@@ -469,18 +469,37 @@ Public Class Payment
     '登録処理
     Private Sub BtnRegist_Click(sender As Object, e As EventArgs) Handles BtnRegist.Click
         Dim errflg As Boolean = True
-        Dim dtToday As DateTime = DateTime.Now
+        Dim dtToday As String = formatDatetime(DateTime.Now)
         Dim reccnt As Integer = 0
         Dim PaymentAmount As Integer = 0
 
         Dim Sql As String = ""
 
-        Dim APSaiban As String = getSaiban("110", dtToday)
+        '買掛残高がなかったら
+        If DgvSupplier.Rows(0).Cells("買掛残高").Value = 0 Then
+            '操作できるデータではないことをアラートする
+            _msgHd.dspMSG("chkActionPropriety", frmC01F10_Login.loginValue.Language)
 
-        '入力した入金額を合算
+            Return
+        End If
+
+        '入力内容チェック
+
+        '入力した支払金額を合算
         For i As Integer = 0 To DgvPayment.Rows.Count - 1
             PaymentAmount += DgvPayment.Rows(i).Cells("入力支払金額").Value
         Next
+
+        '支払入力がなかったら、或いは合計が0だったら
+        If DgvPayment.Rows.Count = 0 Or PaymentAmount = 0 Then
+            '対象データがないメッセージを表示
+            _msgHd.dspMSG("NonData", frmC01F10_Login.loginValue.Language)
+
+            Return
+        End If
+
+        '採番テーブルから支払番号取得
+        Dim APSaiban As String = getSaiban("110", dtToday)
 
         Sql = " AND "
         Sql += "仕入先コード"
@@ -497,35 +516,82 @@ Public Class Payment
         '会社情報の取得
         Dim dsCompany As DataSet = getDsData("m01_company")
 
-        '入力内容チェック
-        '支払入力がなかったら
-        If DgvPayment.Rows.Count = -1 Then
-            '対象データがないメッセージを表示
-            _msgHd.dspMSG("NonData", frmC01F10_Login.loginValue.Language)
 
-            Return
-        End If
+        't47_shrihd 仕入基本テーブルに新規追加
+        Sql = "INSERT INTO "
+        Sql += "Public."
+        Sql += "t47_shrihd("
+        Sql += "会社コード, 支払番号, 支払日, 支払先コード, 支払先名, 支払先, 買掛金額, 支払金額計, 買掛残高, 備考, 取消区分, 登録日, 更新者, 更新日)"
+        Sql += " VALUES('"
+        Sql += CompanyCode
+        Sql += "', '"
+        Sql += APSaiban
+        Sql += "', '"
+        Sql += dtToday
+        Sql += "', '"
+        Sql += SupplierCode
+        Sql += "', '"
+        Sql += SupplierName
+        Sql += "', '"
+        Sql += dsCompany.Tables(RS).Rows(0)("銀行名")
+        Sql += " "
+        Sql += dsCompany.Tables(RS).Rows(0)("支店名")
+        Sql += " "
+        Sql += dsCompany.Tables(RS).Rows(0)("預金種目")
+        Sql += " "
+        Sql += dsCompany.Tables(RS).Rows(0)("口座番号")
+        Sql += " "
+        Sql += dsCompany.Tables(RS).Rows(0)("口座名義")
+        Sql += "', '"
+        Sql += formatNumber(KikeAmount)
+        Sql += "', '"
+        Sql += formatNumber(PaymentAmount)
+        Sql += "', '"
+        Sql += formatNumber(Balance)
+        Sql += "', '"
+        Sql += TxtRemarks.Text
+        Sql += "', '"
+        Sql += "0"
+        Sql += "', '"
+        Sql += dtToday
+        Sql += "', '"
+        Sql += frmC01F10_Login.loginValue.TantoNM
+        Sql += "', '"
+        Sql += dtToday
+        Sql += "')"
 
-        For index As Integer = 0 To DgvPayment.Rows.Count - 1
-            If DgvPayment.Rows(index).Cells("入力支払金額").Value <= 0 Then
-                '対象データがないメッセージを表示
-                _msgHd.dspMSG("chkAddData", frmC01F10_Login.loginValue.Language)
+        _db.executeDB(Sql)
 
-                Return
-            End If
-        Next
-
-        If errflg Then
-
-            't47_shrihd 仕入基本テーブルに新規追加
+        't48_shridt 支払明細テーブルに入金入力テーブルの明細を追加
+        For i As Integer = 0 To DgvPayment.Rows.Count - 1
             Sql = "INSERT INTO "
             Sql += "Public."
-            Sql += "t47_shrihd("
-            Sql += "会社コード, 支払番号, 支払日, 支払先コード, 支払先名, 支払先, 買掛金額, 支払金額計, 買掛残高, 備考, 取消区分, 登録日, 更新者, 更新日)"
+            Sql += "t48_shridt("
+            Sql += "会社コード, 支払番号, 行番号, 支払種別, 支払種別名, 支払先, 支払金額, 更新者, 更新日, 支払先コード, 支払先名, 支払日, 備考)"
             Sql += " VALUES('"
             Sql += CompanyCode
             Sql += "', '"
             Sql += APSaiban
+            Sql += "', '"
+            Sql += DgvPayment.Rows(i).Cells("行番号").Value.ToString
+            Sql += "', '"
+            Sql += DgvPayment.Rows(i).Cells("支払種目").Value.ToString
+            Sql += "', '"
+            Sql += DgvPayment.Rows(i).Cells("支払種目").Value.ToString
+            Sql += "', '"
+            Sql += dsCompany.Tables(RS).Rows(0)("銀行名").ToString
+            Sql += " "
+            Sql += dsCompany.Tables(RS).Rows(0)("支店名").ToString
+            Sql += " "
+            Sql += dsCompany.Tables(RS).Rows(0)("預金種目").ToString
+            Sql += " "
+            Sql += dsCompany.Tables(RS).Rows(0)("口座番号").ToString
+            Sql += " "
+            Sql += dsCompany.Tables(RS).Rows(0)("口座名義").ToString
+            Sql += "', '"
+            Sql += formatNumber(DgvPayment.Rows(i).Cells("入力支払金額").Value)
+            Sql += "', '"
+            Sql += frmC01F10_Login.loginValue.TantoNM
             Sql += "', '"
             Sql += dtToday
             Sql += "', '"
@@ -533,137 +599,73 @@ Public Class Payment
             Sql += "', '"
             Sql += SupplierName
             Sql += "', '"
-            Sql += dsCompany.Tables(RS).Rows(0)("銀行名")
-            Sql += " "
-            Sql += dsCompany.Tables(RS).Rows(0)("支店名")
-            Sql += " "
-            Sql += dsCompany.Tables(RS).Rows(0)("預金種目")
-            Sql += " "
-            Sql += dsCompany.Tables(RS).Rows(0)("口座番号")
-            Sql += " "
-            Sql += dsCompany.Tables(RS).Rows(0)("口座名義")
-            Sql += "', '"
-            Sql += KikeAmount.ToString
-            Sql += "', '"
-            Sql += PaymentAmount.ToString
-            Sql += "', '"
-            Sql += Balance.ToString
+            Sql += dtToday
             Sql += "', '"
             Sql += TxtRemarks.Text
-            Sql += "', '"
-            Sql += "0"
-            Sql += "', '"
-            Sql += dtToday
-            Sql += "', '"
-            Sql += frmC01F10_Login.loginValue.TantoNM
-            Sql += "', '"
-            Sql += dtToday
-            Sql += " ')"
+            Sql += "')"
 
             _db.executeDB(Sql)
 
-            't48_shridt 支払明細テーブルに入金入力テーブルの明細を追加
-            For i As Integer = 0 To DgvPayment.Rows.Count - 1
+            Sql = ""
+        Next
+
+        't49_shrikshihd 支払消込テーブルに新規追加
+        For i As Integer = 0 To DgvKikeInfo.Rows.Count - 1
+
+            '複数の買掛情報がある場合、支払金額が0のものは登録しない
+            If DgvKikeInfo.Rows(i).Cells("支払金額").Value <> 0 Then
+
                 Sql = "INSERT INTO "
                 Sql += "Public."
-                Sql += "t48_shridt("
-                Sql += "会社コード, 支払番号, 行番号, 支払種別, 支払種別名, 支払先, 支払金額, 更新者, 更新日, 支払先コード, 支払先名, 支払日, 備考)"
+                Sql += "t49_shrikshihd("
+                Sql += "会社コード, 支払番号, 支払日, 買掛番号, 支払先コード, 支払先名, 支払消込額計, 備考, 取消区分, 更新者, 更新日)"
                 Sql += " VALUES('"
                 Sql += CompanyCode
                 Sql += "', '"
                 Sql += APSaiban
                 Sql += "', '"
-                Sql += DgvPayment.Rows(i).Cells("行番号").Value.ToString
-                Sql += "', '"
-                Sql += DgvPayment.Rows(i).Cells("支払種目").Value.ToString
-                Sql += "', '"
-                Sql += DgvPayment.Rows(i).Cells("支払種目").Value.ToString
-                Sql += "', '"
-                Sql += dsCompany.Tables(RS).Rows(0)("銀行名").ToString
-                Sql += " "
-                Sql += dsCompany.Tables(RS).Rows(0)("支店名").ToString
-                Sql += " "
-                Sql += dsCompany.Tables(RS).Rows(0)("預金種目").ToString
-                Sql += " "
-                Sql += dsCompany.Tables(RS).Rows(0)("口座番号").ToString
-                Sql += " "
-                Sql += dsCompany.Tables(RS).Rows(0)("口座名義").ToString
-                Sql += "', '"
-                Sql += DgvPayment.Rows(i).Cells("入力支払金額").Value.ToString
-                Sql += "', '"
-                Sql += frmC01F10_Login.loginValue.TantoNM
-                Sql += "', '"
                 Sql += dtToday
+                Sql += "', '"
+                Sql += DgvKikeInfo.Rows(i).Cells("買掛情報買掛番号").Value.ToString
                 Sql += "', '"
                 Sql += SupplierCode
                 Sql += "', '"
                 Sql += SupplierName
                 Sql += "', '"
-                Sql += dtToday
+                Sql += formatNumber(DgvKikeInfo.Rows(i).Cells("支払金額").Value)
                 Sql += "', '"
                 Sql += TxtRemarks.Text
-                Sql += " ')"
+                Sql += "', '"
+                Sql += "0"
+                Sql += "', '"
+                Sql += frmC01F10_Login.loginValue.TantoNM
+                Sql += "', '"
+                Sql += dtToday
+                Sql += "')"
 
                 _db.executeDB(Sql)
 
-                Sql = ""
-            Next
+            End If
+        Next
 
-            't49_shrikshihd 支払消込テーブルに新規追加
-            For i As Integer = 0 To DgvKikeInfo.Rows.Count - 1
+        Dim DsPayment As Integer = 0
+        Dim APBalance As Integer = 0
 
-                '複数の買掛情報がある場合、支払金額が0のものは登録しない
-                If DgvKikeInfo.Rows(i).Cells("支払金額").Value <> 0 Then
+        't46_kikehd 買掛基本テーブルを更新
+        For i As Integer = 0 To dsKikehd.Tables(RS).Rows.Count - 1
 
-                    Sql = "INSERT INTO "
-                    Sql += "Public."
-                    Sql += "t49_shrikshihd("
-                    Sql += "会社コード, 支払番号, 支払日, 買掛番号, 支払先コード, 支払先名, 支払消込額計, 備考, 取消区分, 更新者, 更新日)"
-                    Sql += " VALUES('"
-                    Sql += CompanyCode
-                    Sql += "', '"
-                    Sql += APSaiban
-                    Sql += "', '"
-                    Sql += dtToday
-                    Sql += "', '"
-                    Sql += DgvKikeInfo.Rows(i).Cells("買掛情報買掛番号").Value.ToString
-                    Sql += "', '"
-                    Sql += SupplierCode
-                    Sql += "', '"
-                    Sql += SupplierName
-                    Sql += "', '"
-                    Sql += DgvKikeInfo.Rows(i).Cells("支払金額").Value.ToString
-                    Sql += "', '"
-                    Sql += TxtRemarks.Text
-                    Sql += "', '"
-                    Sql += "0"
-                    Sql += "', '"
-                    Sql += frmC01F10_Login.loginValue.TantoNM
-                    Sql += "', '"
-                    Sql += dtToday
-                    Sql += " ')"
+            If DgvKikeInfo.Rows(i).Cells("支払金額").Value <> 0 Then
 
-                    _db.executeDB(Sql)
-
-                End If
-            Next
-
-            Dim DsPayment As Integer = 0
-            Dim APBalance As Integer = 0
-
-            't46_kikehd 買掛基本テーブルを更新
-            For index As Integer = 0 To dsKikehd.Tables(RS).Rows.Count - 1
-
-                If dsKikehd.Tables(RS).Rows(index)("支払金額計") Is DBNull.Value Then
+                If dsKikehd.Tables(RS).Rows(i)("支払金額計") Is DBNull.Value Then
                     '買掛基本の支払金額がなかったら支払金額をそのまま登録
-                    DsPayment = DgvKikeInfo.Rows(index).Cells("支払金額").Value
+                    DsPayment = DgvKikeInfo.Rows(i).Cells("支払金額").Value
                 Else
                     '支払金額計があったら支払金額を加算する
-                    DsPayment = DgvKikeInfo.Rows(index).Cells("支払金額").Value + dsKikehd.Tables(RS).Rows(index)("支払金額計")
+                    DsPayment = DgvKikeInfo.Rows(i).Cells("支払金額").Value + dsKikehd.Tables(RS).Rows(i)("支払金額計")
                 End If
 
                 '残高を更新
-                APBalance = dsKikehd.Tables(RS).Rows(index)("買掛残高") - DgvKikeInfo.Rows(index).Cells("支払金額").Value
+                APBalance = dsKikehd.Tables(RS).Rows(i)("買掛残高") - DgvKikeInfo.Rows(i).Cells("支払金額").Value
 
                 Sql = "UPDATE "
                 Sql += "Public."
@@ -671,13 +673,24 @@ Public Class Payment
                 Sql += "SET "
                 Sql += " 支払金額計"
                 Sql += " = '"
-                Sql += DsPayment.ToString
+                Sql += formatNumber(DsPayment)
                 Sql += "', "
                 Sql += "買掛残高"
                 Sql += " = '"
-                Sql += APBalance.ToString
+                Sql += formatNumber(APBalance)
                 Sql += "', "
-                Sql += "支払完了日"
+
+                '買掛金額計と支払金額計が一致したら支払完了日を設定する
+                If formatNumber(dsKikehd.Tables(RS).Rows(i)("買掛金額計")) = formatNumber(DsPayment) Then
+
+                    Sql += "支払完了日"
+                    Sql += " = '"
+                    Sql += dtToday
+                    Sql += "', "
+
+                End If
+
+                Sql += "更新日"
                 Sql += " = '"
                 Sql += dtToday
                 Sql += "' "
@@ -689,18 +702,19 @@ Public Class Payment
                 Sql += " AND"
                 Sql += " 買掛番号"
                 Sql += "='"
-                Sql += dsKikehd.Tables(RS).Rows(index)("買掛番号")
+                Sql += dsKikehd.Tables(RS).Rows(i)("買掛番号")
                 Sql += "' "
 
                 _db.executeDB(Sql)
 
-            Next
+            End If
 
-            Dim openForm As Form = Nothing
-            openForm = New PaymentList(_msgHd, _db, _langHd)
-            openForm.ShowDialog(Me)
-            Me.Dispose()
-        End If
+        Next
+
+        Dim openForm As Form = Nothing
+        openForm = New PaymentList(_msgHd, _db, _langHd)
+        openForm.ShowDialog(Me)
+        Me.Dispose()
     End Sub
 
     'param1：String テーブル名
@@ -723,6 +737,44 @@ Public Class Payment
 
         Console.WriteLine(Sql)
         Return _db.selectDB(Sql, RS, reccnt)
+    End Function
+
+    'ユーザーのカルチャーから、日本の形式に変換する
+    Private Function strFormatDate(ByVal prmDate As String, Optional ByRef prmFormat As String = "yyyy/MM/dd") As String
+
+        'PCのカルチャーを取得し、それに応じてStringからDatetimeを作成
+        Dim ci As New System.Globalization.CultureInfo(CultureInfo.CurrentCulture.Name.ToString)
+        Dim dateFormat As DateTime = DateTime.Parse(prmDate, ci, System.Globalization.DateTimeStyles.AssumeLocal)
+
+        '日本の形式に書き換える
+        Return dateFormat.ToString(prmFormat)
+    End Function
+
+    'ユーザーのカルチャーから、日本の形式に変換する
+    Private Function formatDatetime(ByVal prmDatetime As DateTime) As String
+
+        'PCのカルチャーを取得し、それに応じてStringからDatetimeを作成
+        Dim ciCurrent As New System.Globalization.CultureInfo(CultureInfo.CurrentCulture.Name.ToString)
+        Dim dateFormat As DateTime = DateTime.Parse(prmDatetime.ToString, ciCurrent, System.Globalization.DateTimeStyles.AssumeLocal)
+
+        Dim changeFormat As String = dateFormat.ToString("yyyy/MM/dd HH:mm:ss")
+
+        Dim ciJP As New System.Globalization.CultureInfo(CommonConst.CI_JP)
+        Dim rtnDatetime As DateTime = DateTime.Parse(changeFormat, ciJP, System.Globalization.DateTimeStyles.AssumeLocal)
+
+
+        '日本の形式に書き換える
+        Return changeFormat
+    End Function
+
+    '金額フォーマット（登録の際の小数点指定子）を日本の形式に合わせる
+    '桁区切り記号は外す
+    Private Function formatNumber(ByVal prmVal As Decimal) As String
+
+        Dim nfi As NumberFormatInfo = New CultureInfo(CommonConst.CI_JP, False).NumberFormat
+
+        '日本の形式に書き換える
+        Return prmVal.ToString("F3", nfi) '売掛残高を増やす
     End Function
 
 End Class

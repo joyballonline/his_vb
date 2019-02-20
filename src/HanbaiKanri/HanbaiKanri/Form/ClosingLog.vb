@@ -1516,6 +1516,10 @@ Public Class ClosingLog
             Sql17 += " = '"
             Sql17 += dtToday
             Sql17 += "', "
+            Sql17 += "更新日 "
+            Sql17 += " = '"
+            Sql17 += dtToday
+            Sql17 += "', "
             Sql17 += "更新者"
             Sql17 += " = '"
             Sql17 += frmC01F10_Login.loginValue.TantoNM

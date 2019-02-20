@@ -1293,8 +1293,9 @@ Public Class PurchasingManagement
         Sql2 += "'"
         Sql2 += " AND "
         Sql2 += "発注番号枝番"
-        Sql2 += "="
+        Sql2 += " ILIKE '"
         Sql2 += Suffix
+        Sql2 += "'"
 
         Dim ds2 As DataSet = _db.selectDB(Sql2, RS, reccnt)
         Dim kikePrice As Integer = 0
@@ -1309,7 +1310,7 @@ Public Class PurchasingManagement
         Sql3 += "INSERT INTO "
         Sql3 += "Public."
         Sql3 += "t46_kikehd("
-        Sql3 += "会社コード, 買掛番号, 客先番号, 買掛区分, 買掛日, 発注番号, 発注番号枝番, 仕入先コード, 仕入先名, 買掛金額計, 買掛残高, 備考1, 備考2, 取消区分, 登録日, 更新者)"
+        Sql3 += "会社コード, 買掛番号, 客先番号, 買掛区分, 買掛日, 発注番号, 発注番号枝番, 仕入先コード, 仕入先名, 買掛金額計, 買掛残高, 備考1, 備考2, 取消区分, 登録日, 更新者, 更新日)"
         Sql3 += " VALUES('"
         Sql3 += ds1.Tables(RS).Rows(0)("会社コード").ToString
         Sql3 += "', '"
@@ -1343,6 +1344,8 @@ Public Class PurchasingManagement
         Sql3 += dtToday
         Sql3 += "', '"
         Sql3 += frmC01F10_Login.loginValue.TantoNM
+        Sql3 += "', '"
+        Sql3 += dtToday
         Sql3 += " ')"
         Sql3 += "RETURNING 会社コード"
         Sql3 += ", "

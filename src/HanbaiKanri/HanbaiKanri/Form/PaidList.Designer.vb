@@ -259,7 +259,7 @@ Partial Class PaidList
         'dtPaidDateSince
         '
         Me.dtPaidDateSince.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.dtPaidDateSince.CustomFormat = "yyyy/MM/dd"
+        Me.dtPaidDateSince.CustomFormat = ""
         Me.dtPaidDateSince.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.dtPaidDateSince.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtPaidDateSince.Location = New System.Drawing.Point(760, 39)
@@ -272,7 +272,7 @@ Partial Class PaidList
         'dtPaidDateUntil
         '
         Me.dtPaidDateUntil.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.dtPaidDateUntil.CustomFormat = "yyyy/MM/dd"
+        Me.dtPaidDateUntil.CustomFormat = ""
         Me.dtPaidDateUntil.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.dtPaidDateUntil.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtPaidDateUntil.Location = New System.Drawing.Point(959, 39)

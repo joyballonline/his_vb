@@ -506,7 +506,7 @@ Public Class AccountsPayable
                 Sql3 += "INSERT INTO "
                 Sql3 += "Public."
                 Sql3 += "t46_kikehd("
-                Sql3 += "会社コード, 買掛番号, 買掛区分, 買掛日, 発注番号, 発注番号枝番, 客先番号, 仕入先コード, 仕入先名, 買掛金額計, 買掛残高, 備考1, 備考2, 取消区分, 登録日, 更新者)"
+                Sql3 += "会社コード, 買掛番号, 買掛区分, 買掛日, 発注番号, 発注番号枝番, 客先番号, 仕入先コード, 仕入先名, 買掛金額計, 買掛残高, 備考1, 備考2, 取消区分, 登録日, 更新者, 更新日)"
                 Sql3 += " VALUES('"
                 Sql3 += ds1.Tables(RS).Rows(0)("会社コード").ToString
                 Sql3 += "', '"
@@ -539,6 +539,8 @@ Public Class AccountsPayable
                 Sql3 += dtToday
                 Sql3 += "', '"
                 Sql3 += frmC01F10_Login.loginValue.TantoNM
+                Sql3 += "', '"
+                Sql3 += dtToday
                 Sql3 += " ')"
                 Sql3 += "RETURNING 会社コード"
                 Sql3 += ", "
