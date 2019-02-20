@@ -95,17 +95,15 @@ Public Class CustomerOrderList
     Private Sub PurchaseListLoad(Optional ByRef Status As String = "")
         Dim Sql As String = ""
         Try
+
             Sql = " AND "
-            Sql += "得意先コード"
-            Sql += " ILIKE "
-            Sql += "'%"
-            Sql += CustomerCode
-            Sql += "%'"
+            Sql += "得意先コード ILIKE '%" & CustomerCode & "%'"
             Sql += " AND "
             Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+            Sql += " ORDER BY 更新日 DESC "
 
             '請求基本取得
-            Dim dsSkyuhd As DataSet = getDsData("t23_skyuhd")
+            Dim dsSkyuhd As DataSet = getDsData("t23_skyuhd", Sql)
 
             Dim reccnt As Integer = 0
 
@@ -148,7 +146,10 @@ Public Class CustomerOrderList
             For i As Integer = 0 To dsSkyuhd.Tables(RS).Rows.Count - 1
                 DgvBilling.Rows.Add()
                 DgvBilling.Rows(i).Cells("請求番号").Value = dsSkyuhd.Tables(RS).Rows(i)("請求番号")
-                DgvBilling.Rows(i).Cells("請求区分").Value = dsSkyuhd.Tables(RS).Rows(i)("請求区分")
+                DgvBilling.Rows(i).Cells("請求区分").Value = IIf(dsSkyuhd.Tables(RS).Rows(i)("請求区分") = CommonConst.BILLING_KBN_DEPOSIT,
+                                                             CommonConst.BILLING_KBN_DEPOSIT_TXT,
+                                                            CommonConst.BILLING_KBN_NORMAL_TXT)
+
                 DgvBilling.Rows(i).Cells("請求日").Value = dsSkyuhd.Tables(RS).Rows(i)("請求日")
                 DgvBilling.Rows(i).Cells("受注番号").Value = dsSkyuhd.Tables(RS).Rows(i)("受注番号")
                 DgvBilling.Rows(i).Cells("受注番号枝番").Value = dsSkyuhd.Tables(RS).Rows(i)("受注番号枝番")

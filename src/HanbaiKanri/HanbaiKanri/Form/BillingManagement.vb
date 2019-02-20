@@ -101,7 +101,9 @@ Public Class BillingManagement
         'DataGridView1に追加する
         DgvAdd.Columns.Insert(1, column)
 
+        '一覧系取得
         BillLoad()
+
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
             LblBillingDate.Text = "BillingDate"
             LblNo1.Text = "Record"
@@ -198,29 +200,53 @@ Public Class BillingManagement
     End Sub
 
     Private Sub BillLoad()
-
+        Dim reccnt As Integer = 0 'DB用（デフォルト）
         Dim Sql As String = ""
 
         Sql = " AND "
         Sql += "受注番号 ILIKE '" & CymnNo & "'"
         Sql += " AND "
         Sql += "受注番号枝番 ILIKE '" & Suffix & "'"
+        Sql += " AND "
+        Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
 
         '受注基本取得
         Dim dsCymnhd As DataSet = getDsData("t10_cymnhd", Sql)
 
-        Sql = " AND "
-        Sql += "受注番号 ILIKE '" & CymnNo & "'"
+        'joinするのでとりあえず直書き
+        Sql = "SELECT"
+        Sql += " t11.行番号, t11.メーカー, t11.品名, t11.型式, t11.受注数量, t11.単位, t11.売上数量, t11.売単価, t11.売上金額"
+        Sql += " FROM "
+        Sql += " public.t11_cymndt t11 "
+
+        Sql += " INNER JOIN "
+        Sql += " t10_cymnhd t10"
+        Sql += " ON "
+
+        Sql += " t11.会社コード = t10.会社コード"
         Sql += " AND "
-        Sql += "受注番号枝番 ILIKE '" & Suffix & "'"
+        Sql += " t11.受注番号 = t10.受注番号"
+        Sql += " AND "
+        Sql += " t11.受注番号 = t10.受注番号"
+
+        Sql += " WHERE "
+        Sql += " t11.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonNM & "'"
+        Sql += " AND "
+        Sql += " t11.受注番号 ILIKE '" & CymnNo & "'"
+        Sql += " AND "
+        Sql += " t11.受注番号枝番 ILIKE '" & Suffix & "'"
+        Sql += " AND "
+        Sql += "t10.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
 
         '受注明細取得
-        Dim dsCymndt As DataSet = getDsData("t11_cymndt", Sql)
+        Dim dsCymndt As DataSet = _db.selectDB(Sql, RS, reccnt)
 
         Sql = " AND "
         Sql += "受注番号 ILIKE '" & CymnNo & "'"
         Sql += " AND "
         Sql += "受注番号枝番 ILIKE '" & Suffix & "'"
+        Sql += " AND "
+        Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
 
         '請求基本取得
         Dim dsSkyuhd As DataSet = getDsData("t23_skyuhd", Sql)
