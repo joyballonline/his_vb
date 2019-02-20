@@ -7,7 +7,7 @@ Imports UtilMDL.DB
 Imports UtilMDL.DataGridView
 Imports UtilMDL.FileDirectory
 Imports UtilMDL.xls
-
+Imports System.Text.RegularExpressions
 
 Public Class CustomerList
     Inherits System.Windows.Forms.Form
@@ -91,6 +91,7 @@ Public Class CustomerList
         DgvCustomer.Rows.Clear()
 
         Sql += searchConditions()
+
         Dim dsCustomer As DataSet = getDsData("m10_customer", Sql)
 
         Dim Count As Integer = 0
@@ -98,8 +99,8 @@ Public Class CustomerList
         Dim CustomerOrderCount As Integer
         Dim CustomerBillingCount As Integer
 
-        Dim CustomerBillingAmount As Integer
-        Dim CustomerOrderAmount As Integer
+        Dim CustomerBillingAmount As Decimal
+        Dim CustomerOrderAmount As Decimal
 
         For i As Integer = 0 To dsCustomer.Tables(RS).Rows.Count - 1
 
@@ -194,7 +195,7 @@ Public Class CustomerList
         Dim Sql As String = ""
 
         '抽出条件
-        Dim customerName As String = TxtSearch.Text
+        Dim customerName As String = escapeSql(TxtSearch.Text)
 
         If customerName <> Nothing Then
             Sql += " AND "
@@ -203,6 +204,16 @@ Public Class CustomerList
 
         Return Sql
 
+    End Function
+
+    'sqlで実行する文字列からシングルクォーテーションを文字コードにする
+    Private Function escapeSql(ByVal prmSql As String) As String
+        Dim sql As String = prmSql
+
+        sql = sql.Replace("'"c, "''") 'シングルクォーテーションを置換
+
+        Return Regex.Escape(sql)
+        Return sql
     End Function
 
     'param1：String テーブル名

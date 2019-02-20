@@ -9,7 +9,7 @@ Imports UtilMDL.FileDirectory
 Imports UtilMDL.xls
 Imports Microsoft.Office.Interop
 Imports System.Runtime.InteropServices
-
+Imports System.Text.RegularExpressions
 
 Public Class CustomerOrderList
     Inherits System.Windows.Forms.Form
@@ -92,10 +92,9 @@ Public Class CustomerOrderList
     End Sub
 
     '一覧表示処理
-    Private Sub PurchaseListLoad(Optional ByRef Status As String = "")
+    Private Sub PurchaseListLoad()
         Dim Sql As String = ""
         Try
-
             Sql = " AND "
             Sql += "得意先コード ILIKE '%" & CustomerCode & "%'"
             Sql += " AND "
@@ -330,8 +329,19 @@ Public Class CustomerOrderList
     End Sub
 
     Private Sub BtnSearch_Click(sender As Object, e As EventArgs) Handles BtnSearch.Click
-
+        '一覧再表示
+        PurchaseListLoad()
     End Sub
+
+    'sqlで実行する文字列からシングルクォーテーションを文字コードにする
+    Private Function escapeSql(ByVal prmSql As String) As String
+        Dim sql As String = prmSql
+
+        sql = sql.Replace("'"c, "''") 'シングルクォーテーションを置換
+
+        Return Regex.Escape(sql)
+        Return sql
+    End Function
 
     'param1：String テーブル名
     'param2：String 詳細条件

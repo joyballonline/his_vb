@@ -8,6 +8,7 @@ Imports UtilMDL.DataGridView
 Imports UtilMDL.FileDirectory
 Imports UtilMDL.xls
 Imports System.Globalization
+Imports System.Text.RegularExpressions
 
 Public Class PaidList
     Inherits System.Windows.Forms.Form
@@ -464,12 +465,12 @@ Public Class PaidList
         Dim Sql As String = ""
 
         '抽出条件
-        Dim customerName As String = TxtSupplierName.Text
-        Dim customerCode As String = TxtSupplierCode.Text
+        Dim customerName As String = escapeSql(TxtSupplierName.Text)
+        Dim customerCode As String = escapeSql(TxtSupplierCode.Text)
         Dim sinceDate As String = strFormatDate(dtPaidDateSince.Text)
         Dim untilDate As String = strFormatDate(dtPaidDateUntil.Text)
-        Dim sinceNum As String = TxtPaidNoSince.Text
-        Dim untilNum As String = TxtPaidNoUntil.Text
+        Dim sinceNum As String = escapeSql(TxtPaidNoSince.Text)
+        Dim untilNum As String = escapeSql(TxtPaidNoUntil.Text)
 
         If customerName <> Nothing Then
             Sql += " AND "
@@ -536,6 +537,16 @@ Public Class PaidList
         Sql += txtParam
 
         Return _db.selectDB(Sql, RS, reccnt)
+    End Function
+
+    'sqlで実行する文字列からシングルクォーテーションを文字コードにする
+    Private Function escapeSql(ByVal prmSql As String) As String
+        Dim sql As String = prmSql
+
+        sql = sql.Replace("'"c, "''") 'シングルクォーテーションを置換
+
+        Return Regex.Escape(sql)
+        Return sql
     End Function
 
     '取消区分の表示テキストを返す

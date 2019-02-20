@@ -27,7 +27,7 @@ Partial Class CustomerOrderList
         Me.BtnBack = New System.Windows.Forms.Button()
         Me.DgvBilling = New System.Windows.Forms.DataGridView()
         Me.BtnSearch = New System.Windows.Forms.Button()
-        Me.Search = New System.Windows.Forms.TextBox()
+        Me.TxtSearch = New System.Windows.Forms.TextBox()
         Me.LblCustomerName = New System.Windows.Forms.Label()
         CType(Me.DgvBilling, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -87,13 +87,13 @@ Partial Class CustomerOrderList
         Me.BtnSearch.Text = "検索"
         Me.BtnSearch.UseVisualStyleBackColor = True
         '
-        'Search
+        'TxtSearch
         '
-        Me.Search.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Search.Location = New System.Drawing.Point(133, 6)
-        Me.Search.Name = "Search"
-        Me.Search.Size = New System.Drawing.Size(100, 22)
-        Me.Search.TabIndex = 1
+        Me.TxtSearch.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtSearch.Location = New System.Drawing.Point(133, 6)
+        Me.TxtSearch.Name = "TxtSearch"
+        Me.TxtSearch.Size = New System.Drawing.Size(100, 22)
+        Me.TxtSearch.TabIndex = 1
         '
         'LblCustomerName
         '
@@ -110,7 +110,7 @@ Partial Class CustomerOrderList
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 287)
         Me.Controls.Add(Me.BtnSearch)
-        Me.Controls.Add(Me.Search)
+        Me.Controls.Add(Me.TxtSearch)
         Me.Controls.Add(Me.LblCustomerName)
         Me.Controls.Add(Me.DgvBilling)
         Me.Controls.Add(Me.ChkCancelData)
@@ -130,6 +130,6 @@ Partial Class CustomerOrderList
     Friend WithEvents BtnBack As Button
     Friend WithEvents DgvBilling As DataGridView
     Friend WithEvents BtnSearch As Button
-    Friend WithEvents Search As TextBox
+    Friend WithEvents TxtSearch As TextBox
     Friend WithEvents LblCustomerName As Label
 End Class

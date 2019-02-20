@@ -407,7 +407,7 @@ Public Class BillingList
         '取消データを含めない場合
         If ChkCancelData.Checked = False Then
             Sql += " AND "
-            Sql += " 取消区分 = 0 "
+            Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
         End If
 
         Return Sql

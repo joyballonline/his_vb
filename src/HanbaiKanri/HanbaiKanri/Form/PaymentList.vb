@@ -7,7 +7,7 @@ Imports UtilMDL.DB
 Imports UtilMDL.DataGridView
 Imports UtilMDL.FileDirectory
 Imports UtilMDL.xls
-
+Imports System.Text.RegularExpressions
 
 Public Class PaymentList
     Inherits System.Windows.Forms.Form
@@ -204,10 +204,10 @@ Public Class PaymentList
         Dim Sql As String = ""
 
         '抽出条件
-        Dim customerName As String = TxtCustomerName.Text
-        Dim customerAddress As String = TxtAddress.Text
-        Dim customerTel As String = TxtTel.Text
-        Dim customerCode As String = TxtCustomerCode.Text
+        Dim customerName As String = escapeSql(TxtCustomerName.Text)
+        Dim customerAddress As String = escapeSql(TxtAddress.Text)
+        Dim customerTel As String = escapeSql(TxtTel.Text)
+        Dim customerCode As String = escapeSql(TxtCustomerCode.Text)
 
         If customerName <> Nothing Then
             Sql += " AND "
@@ -263,4 +263,15 @@ Public Class PaymentList
         '一覧取得
         getSiharaiList()
     End Sub
+
+    'sqlで実行する文字列からシングルクォーテーションを文字コードにする
+    Private Function escapeSql(ByVal prmSql As String) As String
+        Dim sql As String = prmSql
+
+        sql = sql.Replace("'"c, "''") 'シングルクォーテーションを置換
+
+        Return Regex.Escape(sql)
+        Return sql
+    End Function
+
 End Class
