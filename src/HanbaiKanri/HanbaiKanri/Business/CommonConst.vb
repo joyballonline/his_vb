@@ -10,6 +10,7 @@
 '-------------------------------------------------------------------------------
 '　(1)   狩野        2018/02/22                 新規              
 '-------------------------------------------------------------------------------
+
 Public Class CommonConst
 
     '汎用マスタ固定KEY
@@ -273,5 +274,8 @@ Public Class CommonConst
 
     '検索系 開始日のデフォルト値
     Public Const SINCE_DEFAULT_DAY As Integer = -14                          '二週間
+
+    'カルチャー JP
+    Public Const CI_JP As String = "ja-JP"               'カルチャー 日本
 
 End Class

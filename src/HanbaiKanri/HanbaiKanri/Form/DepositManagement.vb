@@ -7,7 +7,7 @@ Imports UtilMDL.DB
 Imports UtilMDL.DataGridView
 Imports UtilMDL.FileDirectory
 Imports UtilMDL.xls
-
+Imports System.Globalization
 
 Public Class DepositManagement
     Inherits System.Windows.Forms.Form
@@ -436,7 +436,7 @@ Public Class DepositManagement
             Dim dsSaiban As DataSet = _db.selectDB(Sql, RS, reccnt)
 
             saibanID = dsSaiban.Tables(RS).Rows(0)("接頭文字")
-            saibanID += today.ToString("MMdd")
+            saibanID += strFormatDate(today.ToString, "MMdd")
             saibanID += dsSaiban.Tables(RS).Rows(0)("最新値").ToString.PadLeft(dsSaiban.Tables(RS).Rows(0)("連番桁数"), "0")
 
             Dim keyNo As Integer
@@ -462,7 +462,7 @@ Public Class DepositManagement
             Sql += "', "
             Sql += "更新日"
             Sql += " = '"
-            Sql += today
+            Sql += formatDatetime(today)
             Sql += "' "
             Sql += "WHERE"
             Sql += " 会社コード"
@@ -484,19 +484,39 @@ Public Class DepositManagement
 
     '登録処理
     Private Sub BtnRegist_Click(sender As Object, e As EventArgs) Handles BtnRegist.Click
-
-        Dim dtToday As DateTime = DateTime.Now
+        Dim dtToday As String = formatDatetime(DateTime.Now)
         Dim reccnt As Integer = 0
-        Dim DepositAmount As Long = 0
+        Dim DepositAmount As Decimal = 0
 
         Dim Sql As String = ""
 
-        Dim PMSaiban As String = getSaiban("90", dtToday)
+        '請求残高がなかったら
+        If DgvCustomer.Rows(0).Cells("請求残高").Value = 0 Then
+            '操作できるデータではないことをアラートする
+            _msgHd.dspMSG("chkActionPropriety", frmC01F10_Login.loginValue.Language)
 
+            Return
+        End If
+
+        '入力内容チェック
+
+        '入金入力があっても入金額が0だったら
         '入力した入金額を合算
         For i As Integer = 0 To DgvDeposit.Rows.Count - 1
             DepositAmount += DgvDeposit.Rows(i).Cells("入力入金額").Value
         Next
+
+        '入金入力がない、或いは合計が0だったら
+        If DgvDeposit.Rows.Count = 0 Or DepositAmount = 0 Then
+            '対象データがないメッセージを表示
+            _msgHd.dspMSG("NonData", frmC01F10_Login.loginValue.Language)
+
+            Return
+        End If
+
+
+        '採番テーブルから入金番号取得
+        Dim PMSaiban As String = getSaiban("90", dtToday)
 
         Sql = " AND "
         Sql += "得意先コード"
@@ -512,25 +532,6 @@ Public Class DepositManagement
 
         '会社情報の取得
         Dim dsCompany As DataSet = getDsData("m01_company")
-
-        '入力内容チェック
-        '入金入力がなかったら
-        If DgvDeposit.Rows.Count = 0 Then
-            '対象データがないメッセージを表示
-            _msgHd.dspMSG("NonData", frmC01F10_Login.loginValue.Language)
-
-            Return
-        End If
-
-        '入金入力があっても入金額が0だったら
-        For index As Integer = 0 To DgvDeposit.Rows.Count - 1
-            If DgvDeposit.Rows(index).Cells("入力入金額").Value <= 0 Then
-                '対象データがないメッセージを表示
-                _msgHd.dspMSG("NonData", frmC01F10_Login.loginValue.Language)
-
-                Return
-            End If
-        Next
 
         't25_nkinhd 入金基本テーブルに新規追加
         Sql = "INSERT INTO "
@@ -558,7 +559,7 @@ Public Class DepositManagement
         Sql += " "
         Sql += dsCompany.Tables(RS).Rows(0)("口座名義")
         Sql += "', '"
-        Sql += DepositAmount.ToString
+        Sql += formatNumber(DepositAmount)
         Sql += "', '"
         Sql += TxtRemarks.Text
         Sql += "', '"
@@ -575,47 +576,52 @@ Public Class DepositManagement
 
         't26_nkindt 入金明細テーブルに入金入力テーブルの明細を追加
         For i As Integer = 0 To DgvDeposit.Rows.Count - 1
-            Sql = "INSERT INTO "
-            Sql += "Public."
-            Sql += "t26_nkindt("
-            Sql += "会社コード, 入金番号, 行番号, 入金種別, 入金種別名, 振込先, 入金額, 更新者, 更新日, 請求先コード, 請求先名, 入金日, 備考)"
-            Sql += " VALUES('"
-            Sql += CompanyCode
-            Sql += "', '"
-            Sql += PMSaiban
-            Sql += "', '"
-            Sql += DgvDeposit.Rows(i).Cells("行番号").Value.ToString
-            Sql += "', '"
-            Sql += DgvDeposit.Rows(i).Cells("入金種目").Value.ToString
-            Sql += "', '"
-            Sql += DgvDeposit.Rows(i).Cells("入金種目").Value.ToString
-            Sql += "', '"
-            Sql += dsCompany.Tables(RS).Rows(0)("銀行名").ToString
-            Sql += " "
-            Sql += dsCompany.Tables(RS).Rows(0)("支店名").ToString
-            Sql += " "
-            Sql += dsCompany.Tables(RS).Rows(0)("預金種目").ToString
-            Sql += " "
-            Sql += dsCompany.Tables(RS).Rows(0)("口座番号").ToString
-            Sql += " "
-            Sql += dsCompany.Tables(RS).Rows(0)("口座名義").ToString
-            Sql += "', '"
-            Sql += DgvDeposit.Rows(i).Cells("入力入金額").Value.ToString
-            Sql += "', '"
-            Sql += frmC01F10_Login.loginValue.TantoNM
-            Sql += "', '"
-            Sql += dtToday
-            Sql += "', '"
-            Sql += CustomerCode
-            Sql += "', '"
-            Sql += CustomerName
-            Sql += "', '"
-            Sql += dtToday
-            Sql += "', '"
-            Sql += TxtRemarks.Text
-            Sql += " ')"
+            '入金入力額が0のものは省く
+            If DgvDeposit.Rows(i).Cells("入力入金額").Value <> 0 Then
 
-            _db.executeDB(Sql)
+                Sql = "INSERT INTO "
+                Sql += "Public."
+                Sql += "t26_nkindt("
+                Sql += "会社コード, 入金番号, 行番号, 入金種別, 入金種別名, 振込先, 入金額, 更新者, 更新日, 請求先コード, 請求先名, 入金日, 備考)"
+                Sql += " VALUES('"
+                Sql += CompanyCode
+                Sql += "', '"
+                Sql += PMSaiban
+                Sql += "', '"
+                Sql += DgvDeposit.Rows(i).Cells("行番号").Value.ToString
+                Sql += "', '"
+                Sql += DgvDeposit.Rows(i).Cells("入金種目").Value.ToString
+                Sql += "', '"
+                Sql += DgvDeposit.Rows(i).Cells("入金種目").Value.ToString
+                Sql += "', '"
+                Sql += dsCompany.Tables(RS).Rows(0)("銀行名").ToString
+                Sql += " "
+                Sql += dsCompany.Tables(RS).Rows(0)("支店名").ToString
+                Sql += " "
+                Sql += dsCompany.Tables(RS).Rows(0)("預金種目").ToString
+                Sql += " "
+                Sql += dsCompany.Tables(RS).Rows(0)("口座番号").ToString
+                Sql += " "
+                Sql += dsCompany.Tables(RS).Rows(0)("口座名義").ToString
+                Sql += "', '"
+                Sql += DgvDeposit.Rows(i).Cells("入力入金額").Value.ToString
+                Sql += "', '"
+                Sql += frmC01F10_Login.loginValue.TantoNM
+                Sql += "', '"
+                Sql += dtToday
+                Sql += "', '"
+                Sql += CustomerCode
+                Sql += "', '"
+                Sql += CustomerName
+                Sql += "', '"
+                Sql += dtToday
+                Sql += "', '"
+                Sql += TxtRemarks.Text
+                Sql += " ')"
+
+                _db.executeDB(Sql)
+
+            End If
 
         Next
 
@@ -658,8 +664,8 @@ Public Class DepositManagement
             End If
         Next
 
-        Dim DsDeposit As Integer = 0
-        Dim SellingBalance As Integer = 0
+        Dim DsDeposit As Decimal = 0
+        Dim SellingBalance As Decimal = 0
 
         't23_skyuhd 請求基本テーブルを更新
         For i As Integer = 0 To dsSkyuhd.Tables(RS).Rows.Count - 1
@@ -683,15 +689,15 @@ Public Class DepositManagement
                 Sql += "SET "
                 Sql += " 入金額計"
                 Sql += " = '"
-                Sql += DsDeposit.ToString
+                Sql += formatNumber(DsDeposit)
                 Sql += "', "
                 Sql += "売掛残高"
                 Sql += " = '"
-                Sql += SellingBalance.ToString
+                Sql += formatNumber(SellingBalance)
                 Sql += "', "
 
                 '請求額請求金額と入金額が一致したら入金完了日を設定する
-                If dsSkyuhd.Tables(RS).Rows(i)("請求金額計") = DsDeposit.ToString Then
+                If formatNumber(dsSkyuhd.Tables(RS).Rows(i)("請求金額計")) = formatNumber(DsDeposit) Then
 
                     Sql += "入金完了日"
                     Sql += " = '"
@@ -754,6 +760,44 @@ Public Class DepositManagement
 
         Console.WriteLine(Sql)
         Return _db.selectDB(Sql, RS, reccnt)
+    End Function
+
+    'どんなカルチャーであっても、日本の形式に変換する
+    Private Function strFormatDate(ByVal prmDate As String, Optional ByRef prmFormat As String = "yyyy/MM/dd") As String
+
+        'PCのカルチャーを取得し、それに応じてStringからDatetimeを作成
+        Dim ci As New System.Globalization.CultureInfo(CultureInfo.CurrentCulture.Name.ToString)
+        Dim dateFormat As DateTime = DateTime.Parse(prmDate, ci, System.Globalization.DateTimeStyles.AssumeLocal)
+
+        '日本の形式に書き換える
+        Return dateFormat.ToString(prmFormat)
+    End Function
+
+    'どんなカルチャーであっても、日本の形式に変換する
+    Private Function formatDatetime(ByVal prmDatetime As DateTime) As String
+
+        'PCのカルチャーを取得し、それに応じてStringからDatetimeを作成
+        Dim ciCurrent As New System.Globalization.CultureInfo(CultureInfo.CurrentCulture.Name.ToString)
+        Dim dateFormat As DateTime = DateTime.Parse(prmDatetime.ToString, ciCurrent, System.Globalization.DateTimeStyles.AssumeLocal)
+
+        Dim changeFormat As String = dateFormat.ToString("yyyy/MM/dd HH:mm:ss")
+
+        Dim ciJP As New System.Globalization.CultureInfo(CommonConst.CI_JP)
+        Dim rtnDatetime As DateTime = DateTime.Parse(changeFormat, ciJP, System.Globalization.DateTimeStyles.AssumeLocal)
+
+
+        '日本の形式に書き換える
+        Return changeFormat
+    End Function
+
+    '金額フォーマット（登録の際の小数点指定子）を日本の形式に合わせる
+    '桁区切り記号は外す
+    Private Function formatNumber(ByVal prmVal As Decimal) As String
+
+        Dim nfi As NumberFormatInfo = New CultureInfo(CommonConst.CI_JP, False).NumberFormat
+
+        '日本の形式に書き換える
+        Return prmVal.ToString("F3", nfi) '売掛残高を増やす
     End Function
 
 End Class

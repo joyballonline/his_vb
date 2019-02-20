@@ -601,7 +601,8 @@ Public Class DepositDetailList
         Return changeFormat
     End Function
 
-    'どんなカルチャーであっても、日本の形式に変換する
+    '金額フォーマット（登録の際の小数点指定子）を日本の形式に合わせる
+    '桁区切り記号は外す
     Private Function formatNumber(ByVal prmVal As Decimal) As String
 
         Dim nfi As NumberFormatInfo = New CultureInfo(CommonConst.CI_JP, False).NumberFormat
