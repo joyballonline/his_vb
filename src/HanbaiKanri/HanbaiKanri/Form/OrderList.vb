@@ -7,7 +7,8 @@ Imports UtilMDL.DB
 Imports UtilMDL.DataGridView
 Imports UtilMDL.FileDirectory
 Imports UtilMDL.xls
-
+Imports System.Globalization
+Imports System.Text.RegularExpressions
 
 Public Class OrderList
     Inherits System.Windows.Forms.Form
@@ -147,16 +148,16 @@ Public Class OrderList
                 Sql += " t11.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonNM & "'"
 
                 '抽出条件
-                Dim customerName As String = TxtCustomerName.Text
-                Dim customerAddress As String = TxtAddress.Text
-                Dim customerTel As String = TxtTel.Text
-                Dim customerCode As String = TxtCustomerCode.Text
-                Dim sinceDate As String = dtOrderDateSince.Text
-                Dim untilDate As String = dtOrderDateUntil.Text
-                Dim sinceNum As String = TxtOrderSince.Text
-                Dim untilNum As String = TxtOrderUntil.Text
-                Dim salesName As String = TxtSales.Text
-                Dim customerPO As String = TxtCustomerPO.Text
+                Dim customerName As String = escapeSql(TxtCustomerName.Text)
+                Dim customerAddress As String = escapeSql(TxtAddress.Text)
+                Dim customerTel As String = escapeSql(TxtTel.Text)
+                Dim customerCode As String = escapeSql(TxtCustomerCode.Text)
+                Dim sinceDate As String = strFormatDate(dtOrderDateSince.Text)
+                Dim untilDate As String = strFormatDate(dtOrderDateUntil.Text)
+                Dim sinceNum As String = escapeSql(TxtOrderSince.Text)
+                Dim untilNum As String = escapeSql(TxtOrderUntil.Text)
+                Dim salesName As String = escapeSql(TxtSales.Text)
+                Dim customerPO As String = escapeSql(TxtCustomerPO.Text)
 
                 If customerName <> Nothing Then
                     Sql += " AND "
@@ -209,7 +210,7 @@ Public Class OrderList
                 '取消データを含めない場合
                 If ChkCancelData.Checked = False Then
                     Sql += " AND "
-                    Sql += " t10.取消区分 = 0 "
+                    Sql += " t10.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
                 End If
 
                 Sql += " ORDER BY "
@@ -477,8 +478,24 @@ Public Class OrderList
 
     '受注取消
     Private Sub BtnOrderCancel_Click(sender As Object, e As EventArgs) Handles BtnOrderCancel.Click
-        Dim dtNow As DateTime = DateTime.Now
+        Dim dtNow As String = formatDatetime(DateTime.Now)
         Dim Sql1 As String = ""
+
+        '明細表示時は取消操作不可能
+        If RbtnDetails.Checked Then
+
+            '操作できないアラートを出す
+            _msgHd.dspMSG("NonAction", frmC01F10_Login.loginValue.Language)
+            Return
+
+        End If
+
+        '取消済みデータは取消操作不可能
+        If DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("取消").Value = CommonConst.CANCEL_KBN_DISABLED_TXT Then
+            '取消データは選択できないアラートを出す
+            _msgHd.dspMSG("cannotSelectTorikeshiData", frmC01F10_Login.loginValue.Language)
+            Return
+        End If
 
         Try
             Sql1 = "UPDATE "
@@ -699,19 +716,20 @@ Public Class OrderList
 
     '抽出条件取得
     Private Function searchConditions() As String
+
         Dim Sql As String = ""
 
         '抽出条件
-        Dim customerName As String = TxtCustomerName.Text
-        Dim customerAddress As String = TxtAddress.Text
-        Dim customerTel As String = TxtTel.Text
-        Dim customerCode As String = TxtCustomerCode.Text
-        Dim sinceDate As String = dtOrderDateSince.Text
-        Dim untilDate As String = dtOrderDateUntil.Text
-        Dim sinceNum As String = TxtOrderSince.Text
-        Dim untilNum As String = TxtOrderUntil.Text
-        Dim salesName As String = TxtSales.Text
-        Dim customerPO As String = TxtCustomerPO.Text
+        Dim customerName As String = escapeSql(TxtCustomerName.Text)
+        Dim customerAddress As String = escapeSql(TxtAddress.Text)
+        Dim customerTel As String = escapeSql(TxtTel.Text)
+        Dim customerCode As String = escapeSql(TxtCustomerCode.Text)
+        Dim sinceDate As String = strFormatDate(dtOrderDateSince.Text)
+        Dim untilDate As String = strFormatDate(dtOrderDateUntil.Text)
+        Dim sinceNum As String = escapeSql(TxtOrderSince.Text)
+        Dim untilNum As String = escapeSql(TxtOrderUntil.Text)
+        Dim salesName As String = escapeSql(TxtSales.Text)
+        Dim customerPO As String = escapeSql(TxtCustomerPO.Text)
 
         If customerName <> Nothing Then
             Sql += " AND "
@@ -772,7 +790,7 @@ Public Class OrderList
         '取消データを含めない場合
         If ChkCancelData.Checked = False Then
             Sql += " AND "
-            Sql += " 取消区分 = 0 "
+            Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
         End If
 
         Return Sql
@@ -810,6 +828,44 @@ Public Class OrderList
         Sql += "'" & frmC01F10_Login.loginValue.BumonNM & "'"
         Sql += txtParam
         Return _db.selectDB(Sql, RS, reccnt)
+    End Function
+
+    'sqlで実行する文字列からシングルクォーテーションを文字コードにする
+    Private Function escapeSql(ByVal prmSql As String) As String
+        Dim sql As String = prmSql
+
+        sql = sql.Replace("'"c, "''") 'シングルクォーテーションを置換
+
+        Return Regex.Escape(sql)
+        Return sql
+    End Function
+
+    'どんなカルチャーであっても、日本の形式に変換する
+    Private Function strFormatDate(ByVal prmDate As String, Optional ByRef prmFormat As String = "yyyy/MM/dd") As String
+
+        'PCのカルチャーを取得し、それに応じてStringからDatetimeを作成
+        Dim ci As New System.Globalization.CultureInfo(CultureInfo.CurrentCulture.Name.ToString)
+        Dim dateFormat As DateTime = DateTime.Parse(prmDate, ci, System.Globalization.DateTimeStyles.AssumeLocal)
+
+        '日本の形式に書き換える
+        Return dateFormat.ToString(prmFormat)
+    End Function
+
+    'どんなカルチャーであっても、日本の形式に変換する
+    Private Function formatDatetime(ByVal prmDatetime As DateTime) As String
+
+        'PCのカルチャーを取得し、それに応じてStringからDatetimeを作成
+        Dim ciCurrent As New System.Globalization.CultureInfo(CultureInfo.CurrentCulture.Name.ToString)
+        Dim dateFormat As DateTime = DateTime.Parse(prmDatetime.ToString, ciCurrent, System.Globalization.DateTimeStyles.AssumeLocal)
+
+        Dim changeFormat As String = dateFormat.ToString("yyyy/MM/dd HH:mm:ss")
+
+        Dim ciJP As New System.Globalization.CultureInfo(CommonConst.CI_JP)
+        Dim rtnDatetime As DateTime = DateTime.Parse(changeFormat, ciJP, System.Globalization.DateTimeStyles.AssumeLocal)
+
+
+        '日本の形式に書き換える
+        Return changeFormat
     End Function
 
 End Class
