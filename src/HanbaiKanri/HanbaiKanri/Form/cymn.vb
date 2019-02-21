@@ -592,7 +592,7 @@ Public Class Cymn
                 Sql += ", '" & TxtQuoteSuffix.Text & "'"    '見積番号枝番
                 Sql += ", '" & TxtOrderNo.Text & "'"        '受注番号
                 Sql += ", '" & TxtOrderSuffix.Text & "'"    '受注番号枝番
-                Sql += ", '" & TxtCustomerPO.Text & "'"     '客先番号
+                Sql += ", '" & RevoveChars(TxtCustomerPO.Text) & "'"     '客先番号
                 Sql += ", '" & TxtCustomerCode.Text & "'"   '得意先コード
                 Sql += ", '" & TxtCustomerName.Text & "'"   '得意先名
                 Sql += ", '" & TxtPostalCode.Text & "'"     '得意先郵便番号
@@ -740,7 +740,7 @@ Public Class Cymn
                 Sql3 += "', '"
                 Sql3 += "1"
                 Sql3 += "', '"
-                Sql3 += TxtCustomerPO.Text
+                Sql3 += RevoveChars(TxtCustomerPO.Text)
                 Sql3 += "', '"
                 Sql3 += TxtOrderNo.Text
                 Sql3 += "', '"
