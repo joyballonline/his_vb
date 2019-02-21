@@ -358,7 +358,7 @@ Public Class CustomerOrderList
         Sql += " WHERE "
         Sql += "会社コード"
         Sql += " ILIKE  "
-        Sql += "'" & frmC01F10_Login.loginValue.BumonNM & "'"
+        Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql += txtParam
         Return _db.selectDB(Sql, RS, reccnt)
     End Function

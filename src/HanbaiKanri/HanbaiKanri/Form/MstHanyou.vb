@@ -137,6 +137,7 @@ Public Class MstHanyou
         getList()
     End Sub
 
+    '一覧表示
     Public Sub getList()
         Dim Sql As String = ""
 
@@ -264,7 +265,7 @@ Public Class MstHanyou
         Sql += " WHERE "
         Sql += "会社コード"
         Sql += " ILIKE  "
-        Sql += "'" & frmC01F10_Login.loginValue.BumonNM & "'"
+        Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql += txtParam
         Return _db.selectDB(Sql, RS, reccnt)
     End Function

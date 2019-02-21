@@ -458,7 +458,7 @@ Public Class Payment
             Sql += "WHERE"
             Sql += " 会社コード"
             Sql += "='"
-            Sql += frmC01F10_Login.loginValue.BumonNM
+            Sql += frmC01F10_Login.loginValue.BumonCD
             Sql += "'"
             Sql += " AND"
             Sql += " 採番キー = '" & key & "'"
@@ -739,7 +739,7 @@ Public Class Payment
         Sql += " WHERE "
         Sql += "会社コード"
         Sql += " ILIKE  "
-        Sql += "'" & frmC01F10_Login.loginValue.BumonNM & "'"
+        Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql += txtParam
 
         Console.WriteLine(Sql)

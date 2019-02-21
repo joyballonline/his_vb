@@ -99,7 +99,7 @@ Public Class MstLanguage
             Sql += "会社コード"
             Sql += " ILIKE "
             Sql += "'"
-            Sql += frmC01F10_Login.loginValue.BumonNM
+            Sql += frmC01F10_Login.loginValue.BumonCD
             Sql += "'"
 
             Dim reccnt As Integer = 0
@@ -166,7 +166,7 @@ Public Class MstLanguage
             Sql += "会社コード"
             Sql += " ILIKE "
             Sql += "'"
-            Sql += frmC01F10_Login.loginValue.BumonNM
+            Sql += frmC01F10_Login.loginValue.BumonCD
             Sql += "'"
             Sql += " AND "
             Sql += "言語名称"

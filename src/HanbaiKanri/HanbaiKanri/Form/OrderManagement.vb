@@ -1078,7 +1078,7 @@ Public Class OrderManagement
                 Sql += "WHERE"
                 Sql += " 会社コード"
                 Sql += "='"
-                Sql += frmC01F10_Login.loginValue.BumonNM
+                Sql += frmC01F10_Login.loginValue.BumonCD
                 Sql += "'"
                 Sql += " AND "
                 Sql += "出庫番号"

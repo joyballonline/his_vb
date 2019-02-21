@@ -7,7 +7,8 @@ Imports UtilMDL.DB
 Imports UtilMDL.DataGridView
 Imports UtilMDL.FileDirectory
 Imports UtilMDL.xls
-
+Imports System.Globalization
+Imports System.Text.RegularExpressions
 
 Public Class OrderingList
     Inherits System.Windows.Forms.Form
@@ -72,248 +73,10 @@ Public Class OrderingList
         DgvHtyhd.AutoSizeColumnsMode = DataGridViewAutoSizeColumnMode.DisplayedCells
     End Sub
 
-    'Private Sub SelectList()
-
-    '    Dim reccnt As Integer = 0
-
-    '    Dim Sql1 As String = ""
-    '    Sql1 += "SELECT "
-    '    Sql1 += "* "
-    '    Sql1 += "FROM "
-    '    Sql1 += "public"
-    '    Sql1 += "."
-    '    Sql1 += "t21_hattyu"
-    '    Sql1 += " WHERE "
-    '    Sql1 += "発注残数"
-    '    Sql1 += " > "
-    '    Sql1 += "'"
-    '    Sql1 += "0"
-    '    Sql1 += "'"
-    '    Dim ds1 As DataSet = _db.selectDB(Sql1, RS, reccnt)
-
-    '    Dim NoSuffix As String()
-    '    Dim Count As Integer = ds1.Tables(RS).Rows.Count - 1
-    '    ReDim NoSuffix(Count)
-
-    '    For i As Integer = 0 To ds1.Tables(RS).Rows.Count - 1
-    '        NoSuffix(i) += ds1.Tables(RS).Rows(i)("発注番号")
-    '        NoSuffix(i) += " "
-    '        NoSuffix(i) += ds1.Tables(RS).Rows(i)("発注番号枝番")
-    '    Next
-
-    '    For i As Integer = 0 To ds1.Tables(RS).Rows.Count - 1
-    '        If List.Contains(NoSuffix(i)) = False Then
-    '            List.Add(NoSuffix(i))
-    '        End If
-    '    Next
-    'End Sub
-
-
-    Private Sub PurchaseListLoad(Optional ByRef Status As String = "")
-        If Status = "EXCLUSION" Then
-            Dim Sql As String = ""
-            Try
-                Sql += "SELECT "
-                Sql += "* "
-                Sql += "FROM "
-                Sql += "public"
-                Sql += "."
-                Sql += "t20_hattyu"
-                Sql += " WHERE "
-                Sql += "取消区分"
-                Sql += " = "
-                Sql += "'"
-                Sql += "0"
-                Sql += "'"
-                Sql += " ORDER BY "
-                Sql += "発注日 DESC"
-                'Dim stData As String = ""
-                'Dim stArrayData() As String
-                'For i As Integer = 0 To List.Count - 1
-                '    stData = List(i)
-                '    stArrayData = Split(stData, " ")
-
-                '    Sql += " AND "
-                '    Sql += "発注番号"
-                '    Sql += " = "
-                '    Sql += "'"
-                '    Sql += stArrayData(0)
-                '    Sql += "'"
-                '    Sql += " AND "
-                '    Sql += "発注番号枝番"
-                '    Sql += " = "
-                '    Sql += "'"
-                '    Sql += stArrayData(1)
-                '    Sql += "'"
-
-                '    stData = ""
-                '    Erase stArrayData
-                'Next
-
-                Dim reccnt As Integer = 0
-                ds = _db.selectDB(Sql, RS, reccnt)
-                If frmC01F10_Login.loginValue.Language = "ENG" Then
-                    DgvHtyhd.Columns.Add("発注番号", "PurchaseNumber")
-                    DgvHtyhd.Columns.Add("発注番号枝番", "PurchaseOrderSubNumber")
-                    DgvHtyhd.Columns.Add("客先番号", "CustomerNumber")
-                    DgvHtyhd.Columns.Add("発注日", "PurchaseDate")
-                    DgvHtyhd.Columns.Add("仕入先コード", "SupplierCode")
-                    DgvHtyhd.Columns.Add("仕入先名", "SupplierName")
-                    DgvHtyhd.Columns.Add("仕入先郵便番号", "PostalCode")
-                    DgvHtyhd.Columns.Add("仕入先住所", "Address")
-                    DgvHtyhd.Columns.Add("仕入先電話番号", "PhoneNumber")
-                    DgvHtyhd.Columns.Add("仕入先ＦＡＸ", "FAX")
-                    DgvHtyhd.Columns.Add("仕入先担当者名", "NameOfPIC")
-                    DgvHtyhd.Columns.Add("仕入先担当者役職", "PositionPICSupplier")
-                    DgvHtyhd.Columns.Add("仕入金額", "PurchaseAmount")
-                    DgvHtyhd.Columns.Add("支払条件", "PaymentTerms")
-                    DgvHtyhd.Columns.Add("営業担当者", "SalesPersonInCharge")
-                    DgvHtyhd.Columns.Add("入力担当者", "PICForInputting")
-                    DgvHtyhd.Columns.Add("備考", "Remarks")
-                    DgvHtyhd.Columns.Add("登録日", "RegistrationDate")
-                Else
-                    DgvHtyhd.Columns.Add("発注番号", "発注番号")
-                    DgvHtyhd.Columns.Add("発注番号枝番", "発注番号枝番")
-                    DgvHtyhd.Columns.Add("客先番号", "客先番号")
-                    DgvHtyhd.Columns.Add("発注日", "発注日")
-                    DgvHtyhd.Columns.Add("仕入先コード", "仕入先コード")
-                    DgvHtyhd.Columns.Add("仕入先名", "仕入先名")
-                    DgvHtyhd.Columns.Add("仕入先郵便番号", "仕入先郵便番号")
-                    DgvHtyhd.Columns.Add("仕入先住所", "仕入先先住所")
-                    DgvHtyhd.Columns.Add("仕入先電話番号", "仕入先電話番号")
-                    DgvHtyhd.Columns.Add("仕入先ＦＡＸ", "仕入先ＦＡＸ")
-                    DgvHtyhd.Columns.Add("仕入先担当者名", "仕入先担当者名")
-                    DgvHtyhd.Columns.Add("仕入先担当者役職", "仕入先担当者役職")
-                    DgvHtyhd.Columns.Add("仕入金額", "仕入金額")
-                    DgvHtyhd.Columns.Add("支払条件", "支払条件")
-                    DgvHtyhd.Columns.Add("営業担当者", "営業担当者")
-                    DgvHtyhd.Columns.Add("入力担当者", "入力担当者")
-                    DgvHtyhd.Columns.Add("備考", "備考")
-                    DgvHtyhd.Columns.Add("登録日", "登録日")
-                End If
-
-                DgvHtyhd.Columns("仕入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-
-                For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-                    DgvHtyhd.Rows.Add()
-                    DgvHtyhd.Rows(index).Cells(0).Value = ds.Tables(RS).Rows(index)("発注番号")
-                    DgvHtyhd.Rows(index).Cells(1).Value = ds.Tables(RS).Rows(index)("発注番号枝番")
-                    DgvHtyhd.Rows(index).Cells(2).Value = ds.Tables(RS).Rows(index)("客先番号")
-                    DgvHtyhd.Rows(index).Cells(3).Value = ds.Tables(RS).Rows(index)("発注日")
-                    DgvHtyhd.Rows(index).Cells(4).Value = ds.Tables(RS).Rows(index)("仕入先コード")
-                    DgvHtyhd.Rows(index).Cells(5).Value = ds.Tables(RS).Rows(index)("仕入先名")
-                    DgvHtyhd.Rows(index).Cells(6).Value = ds.Tables(RS).Rows(index)("仕入先郵便番号")
-                    DgvHtyhd.Rows(index).Cells(7).Value = ds.Tables(RS).Rows(index)("仕入先住所")
-                    DgvHtyhd.Rows(index).Cells(8).Value = ds.Tables(RS).Rows(index)("仕入先電話番号")
-                    DgvHtyhd.Rows(index).Cells(9).Value = ds.Tables(RS).Rows(index)("仕入先ＦＡＸ")
-                    DgvHtyhd.Rows(index).Cells(10).Value = ds.Tables(RS).Rows(index)("仕入先担当者名")
-                    DgvHtyhd.Rows(index).Cells(11).Value = ds.Tables(RS).Rows(index)("仕入先担当者役職")
-                    DgvHtyhd.Rows(index).Cells(12).Value = ds.Tables(RS).Rows(index)("仕入金額")
-                    DgvHtyhd.Rows(index).Cells(13).Value = ds.Tables(RS).Rows(index)("支払条件")
-                    DgvHtyhd.Rows(index).Cells(14).Value = ds.Tables(RS).Rows(index)("営業担当者")
-                    DgvHtyhd.Rows(index).Cells(15).Value = ds.Tables(RS).Rows(index)("入力担当者")
-                    DgvHtyhd.Rows(index).Cells(16).Value = ds.Tables(RS).Rows(index)("備考")
-                    DgvHtyhd.Rows(index).Cells(17).Value = ds.Tables(RS).Rows(index)("登録日")
-                Next
-
-            Catch ue As UsrDefException
-                ue.dspMsg()
-                Throw ue
-            Catch ex As Exception
-                'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-                Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
-            End Try
-        Else
-            Dim Sql As String = ""
-            Try
-                Sql += "SELECT "
-                Sql += "* "
-                Sql += "FROM "
-                Sql += "public"
-                Sql += "."
-                Sql += "t20_hattyu"
-                Sql += " ORDER BY "
-                Sql += "発注日 DESC"
-
-                Dim reccnt As Integer = 0
-                ds = _db.selectDB(Sql, RS, reccnt)
-                If frmC01F10_Login.loginValue.Language = "ENG" Then
-                    DgvHtyhd.Columns.Add("発注番号", "PurchaseNumber")
-                    DgvHtyhd.Columns.Add("発注番号枝番", "PurchaseOrderSubNumber")
-                    DgvHtyhd.Columns.Add("客先番号", "CustomerNumber")
-                    DgvHtyhd.Columns.Add("発注日", "PurchaseDate")
-                    DgvHtyhd.Columns.Add("仕入先コード", "SupplierCode")
-                    DgvHtyhd.Columns.Add("仕入先名", "SupplierName")
-                    DgvHtyhd.Columns.Add("仕入先郵便番号", "PostalCode")
-                    DgvHtyhd.Columns.Add("仕入先住所", "Address")
-                    DgvHtyhd.Columns.Add("仕入先電話番号", "PhoneNumber")
-                    DgvHtyhd.Columns.Add("仕入先ＦＡＸ", "FAX")
-                    DgvHtyhd.Columns.Add("仕入先担当者名", "NameOfPIC")
-                    DgvHtyhd.Columns.Add("仕入先担当者役職", "PositionPICSupplier")
-                    DgvHtyhd.Columns.Add("仕入金額", "PurchaseAmount")
-                    DgvHtyhd.Columns.Add("支払条件", "PaymentTerms")
-                    DgvHtyhd.Columns.Add("営業担当者", "SalesPersonInCharge")
-                    DgvHtyhd.Columns.Add("入力担当者", "PICForInputting")
-                    DgvHtyhd.Columns.Add("備考", "Remarks")
-                    DgvHtyhd.Columns.Add("登録日", "RegistrationDate")
-                Else
-                    DgvHtyhd.Columns.Add("発注番号", "発注番号")
-                    DgvHtyhd.Columns.Add("発注番号枝番", "発注番号枝番")
-                    DgvHtyhd.Columns.Add("客先番号", "客先番号")
-                    DgvHtyhd.Columns.Add("発注日", "発注日")
-                    DgvHtyhd.Columns.Add("仕入先コード", "仕入先コード")
-                    DgvHtyhd.Columns.Add("仕入先名", "仕入先名")
-                    DgvHtyhd.Columns.Add("仕入先郵便番号", "仕入先郵便番号")
-                    DgvHtyhd.Columns.Add("仕入先住所", "仕入先先住所")
-                    DgvHtyhd.Columns.Add("仕入先電話番号", "仕入先電話番号")
-                    DgvHtyhd.Columns.Add("仕入先ＦＡＸ", "仕入先ＦＡＸ")
-                    DgvHtyhd.Columns.Add("仕入先担当者名", "仕入先担当者名")
-                    DgvHtyhd.Columns.Add("仕入先担当者役職", "仕入先担当者役職")
-                    DgvHtyhd.Columns.Add("仕入金額", "仕入金額")
-                    DgvHtyhd.Columns.Add("支払条件", "支払条件")
-                    DgvHtyhd.Columns.Add("営業担当者", "営業担当者")
-                    DgvHtyhd.Columns.Add("入力担当者", "入力担当者")
-                    DgvHtyhd.Columns.Add("備考", "備考")
-                    DgvHtyhd.Columns.Add("登録日", "登録日")
-                End If
-
-                DgvHtyhd.Columns("仕入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-
-                For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-                    DgvHtyhd.Rows.Add()
-                    DgvHtyhd.Rows(index).Cells(0).Value = ds.Tables(RS).Rows(index)("発注番号")
-                    DgvHtyhd.Rows(index).Cells(1).Value = ds.Tables(RS).Rows(index)("発注番号枝番")
-                    DgvHtyhd.Rows(index).Cells(2).Value = ds.Tables(RS).Rows(index)("客先番号")
-                    DgvHtyhd.Rows(index).Cells(3).Value = ds.Tables(RS).Rows(index)("発注日")
-                    DgvHtyhd.Rows(index).Cells(4).Value = ds.Tables(RS).Rows(index)("仕入先コード")
-                    DgvHtyhd.Rows(index).Cells(5).Value = ds.Tables(RS).Rows(index)("仕入先名")
-                    DgvHtyhd.Rows(index).Cells(6).Value = ds.Tables(RS).Rows(index)("仕入先郵便番号")
-                    DgvHtyhd.Rows(index).Cells(7).Value = ds.Tables(RS).Rows(index)("仕入先住所")
-                    DgvHtyhd.Rows(index).Cells(8).Value = ds.Tables(RS).Rows(index)("仕入先電話番号")
-                    DgvHtyhd.Rows(index).Cells(9).Value = ds.Tables(RS).Rows(index)("仕入先ＦＡＸ")
-                    DgvHtyhd.Rows(index).Cells(10).Value = ds.Tables(RS).Rows(index)("仕入先担当者名")
-                    DgvHtyhd.Rows(index).Cells(11).Value = ds.Tables(RS).Rows(index)("仕入先担当者役職")
-                    DgvHtyhd.Rows(index).Cells(12).Value = ds.Tables(RS).Rows(index)("仕入金額")
-                    DgvHtyhd.Rows(index).Cells(13).Value = ds.Tables(RS).Rows(index)("支払条件")
-                    DgvHtyhd.Rows(index).Cells(14).Value = ds.Tables(RS).Rows(index)("営業担当者")
-                    DgvHtyhd.Rows(index).Cells(15).Value = ds.Tables(RS).Rows(index)("入力担当者")
-                    DgvHtyhd.Rows(index).Cells(16).Value = ds.Tables(RS).Rows(index)("備考")
-                    DgvHtyhd.Rows(index).Cells(17).Value = ds.Tables(RS).Rows(index)("登録日")
-                Next
-
-            Catch ue As UsrDefException
-                ue.dspMsg()
-                Throw ue
-            Catch ex As Exception
-                'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-                Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
-            End Try
-        End If
-
-    End Sub
-    Private Sub MstHanyoue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    '画面表示時
+    Private Sub OrderingList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If _status = "ORDING" Then
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "PurchasedInputMode"
             Else
                 LblMode.Text = "仕入入力モード"
@@ -322,7 +85,7 @@ Public Class OrderingList
             BtnOrding.Visible = True
             BtnOrding.Location = New Point(997, 509)
         ElseIf _status = "RECEIPT" Then
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "GoodsReceiptInputMode"
             Else
                 LblMode.Text = "入庫入力モード"
@@ -331,7 +94,7 @@ Public Class OrderingList
             BtnReceipt.Visible = True
             BtnReceipt.Location = New Point(997, 509)
         ElseIf _status = "EDIT" Then
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "EditMode"
             Else
                 LblMode.Text = "編集モード"
@@ -340,7 +103,7 @@ Public Class OrderingList
             BtnPurchaseEdit.Visible = True
             BtnPurchaseEdit.Location = New Point(997, 509)
         ElseIf _status = "VIEW" Then
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "ViewMode"
             Else
                 LblMode.Text = "参照モード"
@@ -349,7 +112,7 @@ Public Class OrderingList
             BtnPurchaseView.Visible = True
             BtnPurchaseView.Location = New Point(997, 509)
         ElseIf _status = "CANCEL" Then
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "CancelMode"
             Else
                 LblMode.Text = "取消モード"
@@ -358,7 +121,7 @@ Public Class OrderingList
             BtnPurchaseCancel.Visible = True
             BtnPurchaseCancel.Location = New Point(997, 509)
         ElseIf _status = "CLONE" Then
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "NewCopyMode"
             Else
                 LblMode.Text = "新規複写モード"
@@ -367,7 +130,7 @@ Public Class OrderingList
             BtnPurchaseClone.Visible = True
             BtnPurchaseClone.Location = New Point(997, 509)
         ElseIf _status = "AP" Then
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "AccountsPayableInputMode"
             Else
                 LblMode.Text = "買掛入力モード"
@@ -377,10 +140,14 @@ Public Class OrderingList
             BtnAP.Location = New Point(997, 509)
         End If
 
-        Dim Status As String = "EXCLUSION"
-        PurchaseListLoad(Status)
+        '検索（Date）の初期値
+        dtPurchaseDateSince.Value = DateAdd("d", CommonConst.SINCE_DEFAULT_DAY, DateTime.Today)
+        dtPurchaseDateUntil.Value = DateTime.Today
 
-        If frmC01F10_Login.loginValue.Language = "ENG" Then
+        '一覧再表示
+        getList()
+
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
             LblConditions.Text = "TermsOfSelection" '抽出条件
             Label1.Text = "SupplierName"
             Label2.Text = "Address"
@@ -412,660 +179,304 @@ Public Class OrderingList
         End If
     End Sub
 
-    Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
-        Dim openForm As Form = Nothing
-        openForm = New frmC01F30_Menu(_msgHd, _langHd, _db)
-        openForm.Show()
-        Me.Close()
-    End Sub
-
-    Private Sub RbtnDetails_CheckedChanged(sender As Object, e As EventArgs) Handles RbtnDetails.CheckedChanged
+    Private Sub getList()
+        '一覧クリア
         DgvHtyhd.Rows.Clear()
         DgvHtyhd.Columns.Clear()
 
-        If RbtnSlip.Checked Then
-            Dim Sql As String = ""
-            Sql += "SELECT "
-            Sql += " * "
-            Sql += "FROM "
-            Sql += "public"
-            Sql += "."
-            Sql += "t20_hattyu"
-            If OrderNo IsNot Nothing Then
-                For i As Integer = 0 To OrderNo.Length - 1
-                    If i = 0 Then
-                        Sql += " WHERE "
-                        Sql += "発注番号"
-                        Sql += " ILIKE "
-                        Sql += "'%"
-                        Sql += OrderNo(i)
-                        Sql += "%'"
-                    Else
-                        Sql += " OR "
-                        Sql += "発注番号"
-                        Sql += " ILIKE "
-                        Sql += "'%"
-                        Sql += OrderNo(i)
-                        Sql += "%'"
-                    End If
-                Next
-            End If
-            Sql += " ORDER BY "
-            Sql += "登録日 DESC"
-
-
-
-            Dim reccnt As Integer = 0
-            ds = _db.selectDB(Sql, RS, reccnt)
-
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
-                DgvHtyhd.Columns.Add("発注番号", "PurchaseNumber")
-                DgvHtyhd.Columns.Add("発注番号枝番", "PurchaseOrderSubNumber")
-                DgvHtyhd.Columns.Add("客先番号", "CustomerNumber")
-                DgvHtyhd.Columns.Add("発注日", "PurchaseDate")
-                DgvHtyhd.Columns.Add("仕入先コード", "SupplierCode")
-                DgvHtyhd.Columns.Add("仕入先名", "SupplierName")
-                DgvHtyhd.Columns.Add("仕入先郵便番号", "PostalCode")
-                DgvHtyhd.Columns.Add("仕入先住所", "Address")
-                DgvHtyhd.Columns.Add("仕入先電話番号", "PhoneNumber")
-                DgvHtyhd.Columns.Add("仕入先ＦＡＸ", "FAX")
-                DgvHtyhd.Columns.Add("仕入先担当者名", "NameOfPIC")
-                DgvHtyhd.Columns.Add("仕入先担当者役職", "PositionPICSupplier")
-                DgvHtyhd.Columns.Add("仕入金額", "PurchaseAmount")
-                DgvHtyhd.Columns.Add("支払条件", "PaymentTerms")
-                DgvHtyhd.Columns.Add("営業担当者", "SalesPersonInCharge")
-                DgvHtyhd.Columns.Add("入力担当者", "PICForInputting")
-                DgvHtyhd.Columns.Add("備考", "Remarks")
-                DgvHtyhd.Columns.Add("登録日", "RegistrationDate")
-            Else
-                DgvHtyhd.Columns.Add("発注番号", "発注番号")
-                DgvHtyhd.Columns.Add("発注番号枝番", "発注番号枝番")
-                DgvHtyhd.Columns.Add("客先番号", "客先番号")
-                DgvHtyhd.Columns.Add("発注日", "発注日")
-                DgvHtyhd.Columns.Add("仕入先コード", "仕入先コード")
-                DgvHtyhd.Columns.Add("仕入先名", "仕入先名")
-                DgvHtyhd.Columns.Add("仕入先郵便番号", "仕入先郵便番号")
-                DgvHtyhd.Columns.Add("仕入先住所", "仕入先先住所")
-                DgvHtyhd.Columns.Add("仕入先電話番号", "仕入先電話番号")
-                DgvHtyhd.Columns.Add("仕入先ＦＡＸ", "仕入先ＦＡＸ")
-                DgvHtyhd.Columns.Add("仕入先担当者名", "仕入先担当者名")
-                DgvHtyhd.Columns.Add("仕入先担当者役職", "仕入先担当者役職")
-                DgvHtyhd.Columns.Add("仕入金額", "仕入金額")
-                DgvHtyhd.Columns.Add("支払条件", "支払条件")
-                DgvHtyhd.Columns.Add("営業担当者", "営業担当者")
-                DgvHtyhd.Columns.Add("入力担当者", "入力担当者")
-                DgvHtyhd.Columns.Add("備考", "備考")
-                DgvHtyhd.Columns.Add("登録日", "登録日")
-            End If
-
-
-
-            DgvHtyhd.Columns("仕入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-
-            For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-                DgvHtyhd.Rows.Add()
-                DgvHtyhd.Rows(index).Cells(0).Value = ds.Tables(RS).Rows(index)("発注番号")
-                DgvHtyhd.Rows(index).Cells(1).Value = ds.Tables(RS).Rows(index)("発注番号枝番")
-                DgvHtyhd.Rows(index).Cells(2).Value = ds.Tables(RS).Rows(index)("客先番号")
-                DgvHtyhd.Rows(index).Cells(3).Value = ds.Tables(RS).Rows(index)("発注日")
-                DgvHtyhd.Rows(index).Cells(4).Value = ds.Tables(RS).Rows(index)("仕入先コード")
-                DgvHtyhd.Rows(index).Cells(5).Value = ds.Tables(RS).Rows(index)("仕入先名")
-                DgvHtyhd.Rows(index).Cells(6).Value = ds.Tables(RS).Rows(index)("仕入先郵便番号")
-                DgvHtyhd.Rows(index).Cells(7).Value = ds.Tables(RS).Rows(index)("仕入先住所")
-                DgvHtyhd.Rows(index).Cells(8).Value = ds.Tables(RS).Rows(index)("仕入先電話番号")
-                DgvHtyhd.Rows(index).Cells(9).Value = ds.Tables(RS).Rows(index)("仕入先ＦＡＸ")
-                DgvHtyhd.Rows(index).Cells(10).Value = ds.Tables(RS).Rows(index)("仕入先担当者名")
-                DgvHtyhd.Rows(index).Cells(11).Value = ds.Tables(RS).Rows(index)("仕入先担当者役職")
-                DgvHtyhd.Rows(index).Cells(12).Value = ds.Tables(RS).Rows(index)("仕入金額")
-                DgvHtyhd.Rows(index).Cells(13).Value = ds.Tables(RS).Rows(index)("支払条件")
-                DgvHtyhd.Rows(index).Cells(14).Value = ds.Tables(RS).Rows(index)("営業担当者")
-                DgvHtyhd.Rows(index).Cells(15).Value = ds.Tables(RS).Rows(index)("入力担当者")
-                DgvHtyhd.Rows(index).Cells(16).Value = ds.Tables(RS).Rows(index)("備考")
-                DgvHtyhd.Rows(index).Cells(17).Value = ds.Tables(RS).Rows(index)("登録日")
-            Next
-        Else
-            Dim Sql As String = ""
-
-            Sql += "SELECT "
-            Sql += " * "
-            Sql += "FROM "
-            Sql += "public"
-            Sql += "."
-            Sql += "t21_hattyu"
-
-            If OrderNo IsNot Nothing Then
-                For i As Integer = 0 To OrderNo.Length - 1
-                    If i = 0 Then
-                        Sql += " WHERE "
-                        Sql += "発注番号"
-                        Sql += " ILIKE "
-                        Sql += "'%"
-                        Sql += OrderNo(i)
-                        Sql += "%'"
-                    Else
-                        Sql += " OR "
-                        Sql += "発注番号"
-                        Sql += " ILIKE "
-                        Sql += "'%"
-                        Sql += OrderNo(i)
-                        Sql += "%'"
-                    End If
-                Next
-            End If
-            Sql += " ORDER BY "
-            Sql += "登録日 DESC"
-
-            Dim reccnt As Integer = 0
-            ds = _db.selectDB(Sql, RS, reccnt)
-
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
-                DgvHtyhd.Columns.Add("発注番号", "PurchaseNumber")
-                DgvHtyhd.Columns.Add("発注番号枝番", "PurchaseOrderSubNumber")
-                DgvHtyhd.Columns.Add("行番号", "LineNumber")
-                DgvHtyhd.Columns.Add("仕入区分", "PurchaseClassification")
-                DgvHtyhd.Columns.Add("メーカー", "Manufacturer")
-                DgvHtyhd.Columns.Add("品名", "ItemName")
-                DgvHtyhd.Columns.Add("型式", "Spec")
-                DgvHtyhd.Columns.Add("仕入先名", "SupplierName")
-                DgvHtyhd.Columns.Add("仕入値", "PurchaseAmount")
-                DgvHtyhd.Columns.Add("発注数量", "OrderQuantity")
-                DgvHtyhd.Columns.Add("仕入数量", "PurchasedQuantity")
-                DgvHtyhd.Columns.Add("発注残数", "NumberOfOrderRemaining ")
-                DgvHtyhd.Columns.Add("単位", "Unit")
-                DgvHtyhd.Columns.Add("間接費", "OverHead")
-                DgvHtyhd.Columns.Add("仕入金額", "PurchaseAmount")
-                DgvHtyhd.Columns.Add("リードタイム", "LeadTime")
-                DgvHtyhd.Columns.Add("貿易条件", "TradeTerms")
-                DgvHtyhd.Columns.Add("入庫数", "GoodsReceiptQuantity")
-                DgvHtyhd.Columns.Add("未入庫数", "NoGoodsReceiptQuantity")
-                DgvHtyhd.Columns.Add("備考", "Remarks")
-                DgvHtyhd.Columns.Add("更新者", "ModifiedBy")
-                DgvHtyhd.Columns.Add("登録日", "RegistrationDate")
-            Else
-                DgvHtyhd.Columns.Add("発注番号", "発注番号")
-                DgvHtyhd.Columns.Add("発注番号枝番", "発注番号枝番")
-                DgvHtyhd.Columns.Add("行番号", "行番号")
-                DgvHtyhd.Columns.Add("仕入区分", "仕入区分")
-                DgvHtyhd.Columns.Add("メーカー", "メーカー")
-                DgvHtyhd.Columns.Add("品名", "品名")
-                DgvHtyhd.Columns.Add("型式", "型式")
-                DgvHtyhd.Columns.Add("仕入先名", "仕入先名")
-                DgvHtyhd.Columns.Add("仕入値", "仕入値")
-                DgvHtyhd.Columns.Add("発注数量", "発注数量")
-                DgvHtyhd.Columns.Add("仕入数量", "仕入数量")
-                DgvHtyhd.Columns.Add("発注残数", "発注残数")
-                DgvHtyhd.Columns.Add("単位", "単位")
-                DgvHtyhd.Columns.Add("間接費", "間接費")
-                DgvHtyhd.Columns.Add("仕入金額", "仕入金額")
-                DgvHtyhd.Columns.Add("リードタイム", "リードタイム")
-                DgvHtyhd.Columns.Add("貿易条件", "貿易条件")
-                DgvHtyhd.Columns.Add("入庫数", "入庫数")
-                DgvHtyhd.Columns.Add("未入庫数", "未入庫数")
-                DgvHtyhd.Columns.Add("備考", "備考")
-                DgvHtyhd.Columns.Add("更新者", "更新者")
-                DgvHtyhd.Columns.Add("登録日", "登録日")
-            End If
-
-
-            DgvHtyhd.Columns("仕入値").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvHtyhd.Columns("発注数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvHtyhd.Columns("仕入数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvHtyhd.Columns("発注残数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvHtyhd.Columns("間接費").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvHtyhd.Columns("仕入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvHtyhd.Columns("入庫数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvHtyhd.Columns("未入庫数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-
-            Dim Sql2 As String = ""
-            Dim tmp1 As String = ""
-
-            Dim Sql3 As String = ""
-            Dim tmp2 As String = ""
-            For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-                DgvHtyhd.Rows.Add()
-                DgvHtyhd.Rows(index).Cells(0).Value = ds.Tables(RS).Rows(index)("発注番号")
-                DgvHtyhd.Rows(index).Cells(1).Value = ds.Tables(RS).Rows(index)("発注番号枝番")
-                DgvHtyhd.Rows(index).Cells(2).Value = ds.Tables(RS).Rows(index)("行番号")
-                If ds.Tables(RS).Rows(index)("仕入区分") = 1 Then
-                    DgvHtyhd.Rows(index).Cells(3).Value = "仕入"
-                ElseIf ds.Tables(RS).Rows(index)("仕入区分") = 2 Then
-                    DgvHtyhd.Rows(index).Cells(3).Value = "在庫"
-                Else
-                    DgvHtyhd.Rows(index).Cells(3).Value = "サービス"
-                End If
-                DgvHtyhd.Rows(index).Cells(4).Value = ds.Tables(RS).Rows(index)("メーカー")
-                DgvHtyhd.Rows(index).Cells(5).Value = ds.Tables(RS).Rows(index)("品名")
-                DgvHtyhd.Rows(index).Cells(6).Value = ds.Tables(RS).Rows(index)("型式")
-                DgvHtyhd.Rows(index).Cells(7).Value = ds.Tables(RS).Rows(index)("仕入先名")
-                DgvHtyhd.Rows(index).Cells(8).Value = ds.Tables(RS).Rows(index)("仕入値")
-                DgvHtyhd.Rows(index).Cells(9).Value = ds.Tables(RS).Rows(index)("発注数量")
-                DgvHtyhd.Rows(index).Cells(10).Value = ds.Tables(RS).Rows(index)("仕入数量")
-                DgvHtyhd.Rows(index).Cells(11).Value = ds.Tables(RS).Rows(index)("発注残数")
-                DgvHtyhd.Rows(index).Cells(12).Value = ds.Tables(RS).Rows(index)("単位")
-                DgvHtyhd.Rows(index).Cells(13).Value = ds.Tables(RS).Rows(index)("間接費")
-                DgvHtyhd.Rows(index).Cells(14).Value = ds.Tables(RS).Rows(index)("仕入金額")
-                If ds.Tables(RS).Rows(index)("リードタイム単位") Is DBNull.Value Then
-                    DgvHtyhd.Rows(index).Cells(15).Value = ds.Tables(RS).Rows(index)("リードタイム")
-                Else
-                    tmp1 = ""
-                    Sql2 = ""
-                    Sql2 += "SELECT "
-                    Sql2 += "* "
-                    Sql2 += "FROM "
-                    Sql2 += "public"
-                    Sql2 += "."
-                    Sql2 += "m90_hanyo"
-                    Sql2 += " WHERE "
-                    Sql2 += "会社コード"
-                    Sql2 += " ILIKE "
-                    Sql2 += "'"
-                    Sql2 += frmC01F10_Login.loginValue.BumonNM
-                    Sql2 += "'"
-                    Sql2 += " AND "
-                    Sql2 += "固定キー"
-                    Sql2 += " ILIKE "
-                    Sql2 += "'"
-                    Sql2 += "4"
-                    Sql2 += "'"
-                    Sql2 += " AND "
-                    Sql2 += "可変キー"
-                    Sql2 += " ILIKE "
-                    Sql2 += "'"
-                    Sql2 += ds.Tables(RS).Rows(index)("リードタイム単位").ToString
-                    Sql2 += "'"
-
-                    Dim ds2 As DataSet = _db.selectDB(Sql2, RS, reccnt)
-                    tmp1 += ds.Tables(RS).Rows(index)("リードタイム")
-                    tmp1 += ds2.Tables(RS).Rows(0)("文字１")
-                    DgvHtyhd.Rows(index).Cells(15).Value = tmp1
-                End If
-
-                If ds.Tables(RS).Rows(index)("貿易条件") Is DBNull.Value Then
-
-                Else
-                    tmp2 = ""
-                    Sql3 = ""
-                    Sql3 += "SELECT "
-                    Sql3 += "* "
-                    Sql3 += "FROM "
-                    Sql3 += "public"
-                    Sql3 += "."
-                    Sql3 += "m90_hanyo"
-                    Sql3 += " WHERE "
-                    Sql3 += "会社コード"
-                    Sql3 += " ILIKE "
-                    Sql3 += "'"
-                    Sql3 += frmC01F10_Login.loginValue.BumonNM
-                    Sql3 += "'"
-                    Sql3 += " AND "
-                    Sql3 += "固定キー"
-                    Sql3 += " ILIKE "
-                    Sql3 += "'"
-                    Sql3 += "5"
-                    Sql3 += "'"
-                    Sql3 += " AND "
-                    Sql3 += "可変キー"
-                    Sql3 += " ILIKE "
-                    Sql3 += "'"
-                    Sql3 += ds.Tables(RS).Rows(index)("貿易条件").ToString
-                    Sql3 += "'"
-
-                    Dim ds3 As DataSet = _db.selectDB(Sql3, RS, reccnt)
-                    DgvHtyhd.Rows(index).Cells(16).Value = ds3.Tables(RS).Rows(0)("文字１").ToString
-                End If
-                DgvHtyhd.Rows(index).Cells(17).Value = ds.Tables(RS).Rows(index)("入庫数")
-                DgvHtyhd.Rows(index).Cells(18).Value = ds.Tables(RS).Rows(index)("未入庫数")
-                DgvHtyhd.Rows(index).Cells(19).Value = ds.Tables(RS).Rows(index)("備考")
-                DgvHtyhd.Rows(index).Cells(20).Value = ds.Tables(RS).Rows(index)("更新者")
-                DgvHtyhd.Rows(index).Cells(21).Value = ds.Tables(RS).Rows(index)("登録日")
-            Next
-        End If
-    End Sub
-
-    Private Sub BtnPurchaseeEdit_Click(sender As Object, e As EventArgs) Handles BtnPurchaseEdit.Click
-        Dim RowIdx As Integer
-        RowIdx = Me.DgvHtyhd.CurrentCell.RowIndex
-        Dim No As String = DgvHtyhd.Rows(RowIdx).Cells(0).Value
-        Dim Suffix As String = DgvHtyhd.Rows(RowIdx).Cells(1).Value
-        Dim status As String = "EDIT"
-
-        Dim openForm As Form = Nothing
-        openForm = New Ordering(_msgHd, _db, _langHd, No, Suffix, status)   '処理選択
-        openForm.ShowDialog(Me)
-        DgvHtyhd.Rows.Clear()
-        DgvHtyhd.Columns.Clear()
-        Dim ListStatus As String = "EXCLUSION"
-        PurchaseListLoad(ListStatus)
-    End Sub
-
-    Private Sub BtnPurchaseSearch_Click(sender As Object, e As EventArgs) Handles BtnPurchaseSearch.Click
-        DgvHtyhd.Rows.Clear()
-        DgvHtyhd.Columns.Clear()
-
-        Dim count As Integer = 0
+        Dim ds As DataSet
         Dim Sql As String = ""
+
+        Sql = searchConditions() '検索条件
+        Sql += viewFormat() '表示条件
+
+        Sql += " ORDER BY "
+        Sql += "更新日 DESC"
+
         Try
-            Sql += "SELECT "
-            Sql += "* "
-            Sql += "FROM "
-            Sql += "public"
-            Sql += "."
-            Sql += "t20_hattyu"
-            If TxtSupplierName.Text = "" Then
-            Else
+
+            '伝票単位
+            If RbtnSlip.Checked Then
+
+                '発注基本を取得
+                ds = getDsData("t20_hattyu", Sql)
+
+                If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+                    DgvHtyhd.Columns.Add("取消", "Cancel")
+                    DgvHtyhd.Columns.Add("発注番号", "PurchaseNumber")
+                    DgvHtyhd.Columns.Add("発注番号枝番", "PurchaseOrderSubNumber")
+                    DgvHtyhd.Columns.Add("客先番号", "CustomerNumber")
+                    DgvHtyhd.Columns.Add("発注日", "PurchaseDate")
+                    DgvHtyhd.Columns.Add("仕入先コード", "SupplierCode")
+                    DgvHtyhd.Columns.Add("仕入先名", "SupplierName")
+                    DgvHtyhd.Columns.Add("仕入先郵便番号", "PostalCode")
+                    DgvHtyhd.Columns.Add("仕入先住所", "Address")
+                    DgvHtyhd.Columns.Add("仕入先電話番号", "PhoneNumber")
+                    DgvHtyhd.Columns.Add("仕入先ＦＡＸ", "FAX")
+                    DgvHtyhd.Columns.Add("仕入先担当者名", "NameOfPIC")
+                    DgvHtyhd.Columns.Add("仕入先担当者役職", "PositionPICSupplier")
+                    DgvHtyhd.Columns.Add("仕入金額", "PurchaseAmount")
+                    DgvHtyhd.Columns.Add("支払条件", "PaymentTerms")
+                    DgvHtyhd.Columns.Add("営業担当者", "SalesPersonInCharge")
+                    DgvHtyhd.Columns.Add("入力担当者", "PICForInputting")
+                    DgvHtyhd.Columns.Add("備考", "Remarks")
+                    DgvHtyhd.Columns.Add("登録日", "RegistrationDate")
+                Else
+                    DgvHtyhd.Columns.Add("取消", "取消")
+                    DgvHtyhd.Columns.Add("発注番号", "発注番号")
+                    DgvHtyhd.Columns.Add("発注番号枝番", "発注番号枝番")
+                    DgvHtyhd.Columns.Add("客先番号", "客先番号")
+                    DgvHtyhd.Columns.Add("発注日", "発注日")
+                    DgvHtyhd.Columns.Add("仕入先コード", "仕入先コード")
+                    DgvHtyhd.Columns.Add("仕入先名", "仕入先名")
+                    DgvHtyhd.Columns.Add("仕入先郵便番号", "仕入先郵便番号")
+                    DgvHtyhd.Columns.Add("仕入先住所", "仕入先先住所")
+                    DgvHtyhd.Columns.Add("仕入先電話番号", "仕入先電話番号")
+                    DgvHtyhd.Columns.Add("仕入先ＦＡＸ", "仕入先ＦＡＸ")
+                    DgvHtyhd.Columns.Add("仕入先担当者名", "仕入先担当者名")
+                    DgvHtyhd.Columns.Add("仕入先担当者役職", "仕入先担当者役職")
+                    DgvHtyhd.Columns.Add("仕入金額", "仕入金額")
+                    DgvHtyhd.Columns.Add("支払条件", "支払条件")
+                    DgvHtyhd.Columns.Add("営業担当者", "営業担当者")
+                    DgvHtyhd.Columns.Add("入力担当者", "入力担当者")
+                    DgvHtyhd.Columns.Add("備考", "備考")
+                    DgvHtyhd.Columns.Add("登録日", "登録日")
+                End If
+
+                '伝票単位時のセル書式
+                DgvHtyhd.Columns("仕入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+                For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+                    DgvHtyhd.Rows.Add()
+                    DgvHtyhd.Rows(i).Cells("取消").Value = getDelKbnTxt(ds.Tables(RS).Rows(i)("取消区分"))
+                    DgvHtyhd.Rows(i).Cells("発注番号").Value = ds.Tables(RS).Rows(i)("発注番号")
+                    DgvHtyhd.Rows(i).Cells("発注番号枝番").Value = ds.Tables(RS).Rows(i)("発注番号枝番")
+                    DgvHtyhd.Rows(i).Cells("客先番号").Value = ds.Tables(RS).Rows(i)("客先番号")
+                    DgvHtyhd.Rows(i).Cells("発注日").Value = ds.Tables(RS).Rows(i)("発注日")
+                    DgvHtyhd.Rows(i).Cells("仕入先コード").Value = ds.Tables(RS).Rows(i)("仕入先コード")
+                    DgvHtyhd.Rows(i).Cells("仕入先名").Value = ds.Tables(RS).Rows(i)("仕入先名")
+                    DgvHtyhd.Rows(i).Cells("仕入先郵便番号").Value = ds.Tables(RS).Rows(i)("仕入先郵便番号")
+                    DgvHtyhd.Rows(i).Cells("仕入先住所").Value = ds.Tables(RS).Rows(i)("仕入先住所")
+                    DgvHtyhd.Rows(i).Cells("仕入先電話番号").Value = ds.Tables(RS).Rows(i)("仕入先電話番号")
+                    DgvHtyhd.Rows(i).Cells("仕入先ＦＡＸ").Value = ds.Tables(RS).Rows(i)("仕入先ＦＡＸ")
+                    DgvHtyhd.Rows(i).Cells("仕入先担当者名").Value = ds.Tables(RS).Rows(i)("仕入先担当者名")
+                    DgvHtyhd.Rows(i).Cells("仕入先担当者役職").Value = ds.Tables(RS).Rows(i)("仕入先担当者役職")
+                    DgvHtyhd.Rows(i).Cells("仕入金額").Value = ds.Tables(RS).Rows(i)("仕入金額")
+                    DgvHtyhd.Rows(i).Cells("支払条件").Value = ds.Tables(RS).Rows(i)("支払条件")
+                    DgvHtyhd.Rows(i).Cells("営業担当者").Value = ds.Tables(RS).Rows(i)("営業担当者")
+                    DgvHtyhd.Rows(i).Cells("入力担当者").Value = ds.Tables(RS).Rows(i)("入力担当者")
+                    DgvHtyhd.Rows(i).Cells("備考").Value = ds.Tables(RS).Rows(i)("備考")
+                    DgvHtyhd.Rows(i).Cells("登録日").Value = ds.Tables(RS).Rows(i)("登録日")
+                Next
+
+            Else '明細単位
+
+                '発注基本を取得
+
+                Dim reccnt As Integer = 0 'DB用（デフォルト）
+
+                '抽出条件
+                Dim supplierName As String = escapeSql(TxtSupplierName.Text)
+                Dim supplierAddress As String = escapeSql(TxtAddress.Text)
+                Dim supplierTel As String = escapeSql(TxtTel.Text)
+                Dim supplierCode As String = escapeSql(TxtSupplierCode.Text)
+                Dim sinceDate As String = strFormatDate(dtPurchaseDateSince.Text) '日付の書式を日本の形式に合わせる
+                Dim untilDate As String = strFormatDate(dtPurchaseDateUntil.Text) '日付の書式を日本の形式に合わせる
+                Dim sinceNum As String = escapeSql(TxtPurchaseSince.Text)
+                Dim untilNum As String = escapeSql(TxtPurchaseUntil.Text)
+                Dim salesName As String = escapeSql(TxtSales.Text)
+                Dim poCode As String = escapeSql(TxtCustomerPO.Text)
+
+                'joinするのでとりあえず直書き
+                Sql = "SELECT"
+                Sql += " t21.発注番号, t21.発注番号枝番, t21.行番号, t21.仕入区分, t21.メーカー, t21.品名"
+                Sql += ", t21.型式, t21.仕入先名, t21.仕入値, t21.発注数量, t21.仕入数量, t21.発注残数"
+                Sql += ", t21.単位, t21.間接費, t21.仕入金額, t21.リードタイム, t21.貿易条件, t21.入庫数"
+                Sql += ", t21.未入庫数, t21.備考, t21.更新者, t21.登録日, t20.取消区分"
+                Sql += " FROM "
+                Sql += " public.t21_hattyu t21 "
+
+                Sql += " INNER JOIN "
+                Sql += " t20_hattyu t20"
+                Sql += " ON "
+
+                Sql += " t21.会社コード = t20.会社コード"
+                Sql += " AND "
+                Sql += " t21.発注番号 = t20.発注番号"
+                Sql += " AND "
+                Sql += " t21.発注番号枝番 = t20.発注番号枝番"
+
                 Sql += " WHERE "
-                Sql += "仕入先名"
-                Sql += " ILIKE "
-                Sql += "'%"
-                Sql += TxtSupplierName.Text
-                Sql += "%'"
-                count += 1
-            End If
-            If TxtAddress.Text = "" Then
-            Else
-                If count > 0 Then
-                    Sql += " AND "
-                    Sql += "仕入先住所"
-                    Sql += " ILIKE "
-                    Sql += "'%"
-                    Sql += TxtAddress.Text
-                    Sql += "%'"
-                Else
-                    Sql += " WHERE "
-                    Sql += "仕入先住所"
-                    Sql += " ILIKE "
-                    Sql += "'%"
-                    Sql += TxtAddress.Text
-                    Sql += "%'"
-                    count += 1
-                End If
-            End If
-            If TxtTel.Text = "" Then
-            Else
-                If count > 0 Then
-                    Sql += " AND "
-                    Sql += "仕入先電話番号"
-                    Sql += " ILIKE "
-                    Sql += "'%"
-                    Sql += TxtTel.Text
-                    Sql += "%'"
-                Else
-                    Sql += " WHERE "
-                    Sql += "仕入先電話番号"
-                    Sql += " ILIKE "
-                    Sql += "'%"
-                    Sql += TxtTel.Text
-                    Sql += "%'"
-                    count += 1
-                End If
-            End If
-            If TxtSupplierCode.Text = "" Then
-            Else
-                If count > 0 Then
-                    Sql += " AND "
-                    Sql += "仕入先コード"
-                    Sql += " ILIKE "
-                    Sql += "'%"
-                    Sql += TxtSupplierCode.Text
-                    Sql += "%'"
-                Else
-                    Sql += " WHERE "
-                    Sql += "仕入先コード"
-                    Sql += " ILIKE "
-                    Sql += "'%"
-                    Sql += TxtSupplierCode.Text
-                    Sql += "%'"
-                    count += 1
-                End If
-            End If
-            If TxtPurchaseDate1.Text = "" Then
-                If TxtPurchaseDate2.Text = "" Then
-                Else
-                    If count > 0 Then
-                        Sql += " AND "
-                        Sql += "発注日"
-                        Sql += " <=  "
-                        Sql += "'"
-                        Sql += TxtPurchaseDate2.Text
-                        Sql += "'"
-                    Else
-                        Sql += " WHERE "
-                        Sql += "発注日"
-                        Sql += " <=  "
-                        Sql += "'"
-                        Sql += TxtPurchaseDate2.Text
-                        Sql += "'"
-                        count += 1
-                    End If
-                End If
-            Else
-                If TxtPurchaseDate2.Text = "" Then
-                    If count > 0 Then
-                        Sql += " AND "
-                        Sql += "発注日"
-                        Sql += " >=  "
-                        Sql += "'"
-                        Sql += TxtPurchaseDate1.Text
-                        Sql += "'"
-                    Else
-                        Sql += " WHERE "
-                        Sql += "発注日"
-                        Sql += " >=  "
-                        Sql += "'"
-                        Sql += TxtPurchaseDate1.Text
-                        Sql += "'"
-                        count += 1
-                    End If
-                Else
-                    If count > 0 Then
-                        Sql += " AND "
-                        Sql += "発注日"
-                        Sql += " >=  "
-                        Sql += "'"
-                        Sql += TxtPurchaseDate1.Text
-                        Sql += "' "
-                        Sql += "AND  "
-                        Sql += "発注日"
-                        Sql += " <=  "
-                        Sql += "'"
-                        Sql += TxtPurchaseDate2.Text
-                        Sql += "'"
-                    Else
-                        Sql += " WHERE "
-                        Sql += "発注日"
-                        Sql += " >=  "
-                        Sql += "'"
-                        Sql += TxtPurchaseDate1.Text
-                        Sql += "' "
-                        Sql += "AND  "
-                        Sql += "発注日"
-                        Sql += " <=  "
-                        Sql += "'"
-                        Sql += TxtPurchaseDate2.Text
-                        Sql += "'"
-                        count += 1
-                    End If
-                End If
-            End If
-            If TxtPurchaseNo1.Text = "" Then
-                If TxtPurchaseNo2.Text = "" Then
-                Else
-                    If count > 0 Then
-                        Sql += " AND "
-                        Sql += "発注番号"
-                        Sql += " <=  "
-                        Sql += "'"
-                        Sql += TxtPurchaseNo2.Text
-                        Sql += "'"
-                    Else
-                        Sql += " WHERE "
-                        Sql += "発注番号"
-                        Sql += " <=  "
-                        Sql += "'"
-                        Sql += TxtPurchaseNo2.Text
-                        Sql += "'"
-                        count += 1
-                    End If
-                End If
-            Else
-                If TxtPurchaseNo2.Text = "" Then
-                    If count > 0 Then
-                        Sql += " AND "
-                        Sql += "発注番号"
-                        Sql += " >=  "
-                        Sql += "'"
-                        Sql += TxtPurchaseNo1.Text
-                        Sql += "'"
-                    Else
-                        Sql += " WHERE "
-                        Sql += "発注番号"
-                        Sql += " >=  "
-                        Sql += "'"
-                        Sql += TxtPurchaseNo1.Text
-                        Sql += "'"
-                        count += 1
-                    End If
-                Else
-                    If count > 0 Then
-                        Sql += " AND "
-                        Sql += "発注番号"
-                        Sql += " >= "
-                        Sql += "'"
-                        Sql += TxtPurchaseNo1.Text
-                        Sql += "' "
-                        Sql += "AND "
-                        Sql += "発注番号"
-                        Sql += " <=  "
-                        Sql += "'"
-                        Sql += TxtPurchaseNo2.Text
-                        Sql += "'"
-                    Else
-                        Sql += " WHERE "
-                        Sql += "発注番号"
-                        Sql += " >= "
-                        Sql += "'"
-                        Sql += TxtPurchaseNo1.Text
-                        Sql += "' "
-                        Sql += "AND  "
-                        Sql += "発注番号"
-                        Sql += " <= "
-                        Sql += "'"
-                        Sql += TxtPurchaseNo2.Text
-                        Sql += "'"
-                        count += 1
-                    End If
-                End If
-            End If
-            If TxtSales.Text = "" Then
-            Else
-                If count > 0 Then
-                    Sql += " AND "
-                    Sql += "営業担当者"
-                    Sql += " ILIKE "
-                    Sql += "'%"
-                    Sql += TxtSales.Text
-                    Sql += "%'"
-                Else
-                    Sql += " WHERE "
-                    Sql += "営業担当者"
-                    Sql += " ILIKE "
-                    Sql += "'%"
-                    Sql += TxtSales.Text
-                    Sql += "%'"
-                    count += 1
-                End If
-            End If
-            If TxtCustomerPO.Text = "" Then
-            Else
-                If count > 0 Then
-                    Sql += " AND "
-                    Sql += "客先番号"
-                    Sql += " ILIKE "
-                    Sql += "'%"
-                    Sql += TxtCustomerPO.Text
-                    Sql += "%'"
-                Else
-                    Sql += " WHERE "
-                    Sql += "客先番号"
-                    Sql += " ILIKE "
-                    Sql += "'%"
-                    Sql += TxtCustomerPO.Text
-                    Sql += "%'"
-                    count += 1
-                End If
-            End If
-            Sql += " ORDER BY "
-            Sql += "登録日 DESC"
+                Sql += " t21.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonNM & "'"
 
-            Dim reccnt As Integer = 0
-            Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
+                If supplierName <> Nothing Then
+                    Sql += " AND "
+                    Sql += " 仕入先名 ILIKE '%" & supplierName & "%' "
+                End If
 
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
-                DgvHtyhd.Columns.Add("発注番号", "PurchaseNumber")
-                DgvHtyhd.Columns.Add("発注番号枝番", "PurchaseOrderSubNumber")
-                DgvHtyhd.Columns.Add("客先番号", "CustomerNumber")
-                DgvHtyhd.Columns.Add("発注日", "PurchaseDate")
-                DgvHtyhd.Columns.Add("仕入先コード", "SupplierCode")
-                DgvHtyhd.Columns.Add("仕入先名", "SupplierName")
-                DgvHtyhd.Columns.Add("仕入先郵便番号", "PostalCode")
-                DgvHtyhd.Columns.Add("仕入先住所", "Address")
-                DgvHtyhd.Columns.Add("仕入先電話番号", "PhoneNumber")
-                DgvHtyhd.Columns.Add("仕入先ＦＡＸ", "FAX")
-                DgvHtyhd.Columns.Add("仕入先担当者名", "NameOfPIC")
-                DgvHtyhd.Columns.Add("仕入先担当者役職", "PositionPICSupplier")
-                DgvHtyhd.Columns.Add("仕入金額", "PurchaseAmount")
-                DgvHtyhd.Columns.Add("支払条件", "PaymentTerms")
-                DgvHtyhd.Columns.Add("営業担当者", "SalesPersonInCharge")
-                DgvHtyhd.Columns.Add("入力担当者", "PICForInputting")
-                DgvHtyhd.Columns.Add("備考", "Remarks")
-                DgvHtyhd.Columns.Add("登録日", "RegistrationDate")
-            Else
-                DgvHtyhd.Columns.Add("発注番号", "発注番号")
-                DgvHtyhd.Columns.Add("発注番号枝番", "発注番号枝番")
-                DgvHtyhd.Columns.Add("客先番号", "客先番号")
-                DgvHtyhd.Columns.Add("発注日", "発注日")
-                DgvHtyhd.Columns.Add("仕入先コード", "仕入先コード")
-                DgvHtyhd.Columns.Add("仕入先名", "仕入先名")
-                DgvHtyhd.Columns.Add("仕入先郵便番号", "仕入先郵便番号")
-                DgvHtyhd.Columns.Add("仕入先住所", "仕入先先住所")
-                DgvHtyhd.Columns.Add("仕入先電話番号", "仕入先電話番号")
-                DgvHtyhd.Columns.Add("仕入先ＦＡＸ", "仕入先ＦＡＸ")
-                DgvHtyhd.Columns.Add("仕入先担当者名", "仕入先担当者名")
-                DgvHtyhd.Columns.Add("仕入先担当者役職", "仕入先担当者役職")
-                DgvHtyhd.Columns.Add("仕入金額", "仕入金額")
-                DgvHtyhd.Columns.Add("支払条件", "支払条件")
-                DgvHtyhd.Columns.Add("営業担当者", "営業担当者")
-                DgvHtyhd.Columns.Add("入力担当者", "入力担当者")
-                DgvHtyhd.Columns.Add("備考", "備考")
-                DgvHtyhd.Columns.Add("登録日", "登録日")
+                If supplierAddress <> Nothing Then
+                    Sql += " AND "
+                    Sql += " t20.仕入先住所 ILIKE '%" & supplierAddress & "%' "
+                End If
+
+                If supplierTel <> Nothing Then
+                    Sql += " AND "
+                    Sql += " t20.仕入先電話番号 ILIKE '%" & supplierTel & "%' "
+                End If
+
+                If supplierCode <> Nothing Then
+                    Sql += " AND "
+                    Sql += " t20.仕入先コード ILIKE '%" & supplierCode & "%' "
+                End If
+
+                If sinceDate <> Nothing Then
+                    Sql += " AND "
+                    Sql += " t20.発注日 >= '" & sinceDate & "'"
+                End If
+                If untilDate <> Nothing Then
+                    Sql += " AND "
+                    Sql += " t20.発注日 <= '" & untilDate & "'"
+                End If
+
+                If sinceNum <> Nothing Then
+                    Sql += " AND "
+                    Sql += " t20.発注番号 >= '" & sinceNum & "' "
+                End If
+                If untilNum <> Nothing Then
+                    Sql += " AND "
+                    Sql += " t20.発注番号 <= '" & untilNum & "' "
+                End If
+
+                If salesName <> Nothing Then
+                    Sql += " AND "
+                    Sql += " t20.営業担当者 ILIKE '%" & salesName & "%' "
+                End If
+
+                If poCode <> Nothing Then
+                    Sql += " AND "
+                    Sql += " t20.客先番号 ILIKE '%" & poCode & "%' "
+                End If
+
+                If ChkCancelData.Checked = False Then
+                    Sql += " AND "
+                    Sql += "t20.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+                End If
+
+                Sql += " ORDER BY "
+                Sql += "更新日 DESC"
+
+                '得意先と一致する入金明細を取得
+                ds = _db.selectDB(Sql, RS, reccnt)
+
+                If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+                    DgvHtyhd.Columns.Add("取消", "Cancel")
+                    DgvHtyhd.Columns.Add("発注番号", "PurchaseNumber")
+                    DgvHtyhd.Columns.Add("発注番号枝番", "PurchaseOrderSubNumber")
+                    DgvHtyhd.Columns.Add("行番号", "LineNumber")
+                    DgvHtyhd.Columns.Add("仕入区分", "PurchaseClassification")
+                    DgvHtyhd.Columns.Add("メーカー", "Manufacturer")
+                    DgvHtyhd.Columns.Add("品名", "ItemName")
+                    DgvHtyhd.Columns.Add("型式", "Spec")
+                    DgvHtyhd.Columns.Add("仕入先名", "SupplierName")
+                    DgvHtyhd.Columns.Add("仕入値", "PurchaseAmount")
+                    DgvHtyhd.Columns.Add("発注数量", "OrderQuantity")
+                    DgvHtyhd.Columns.Add("仕入数量", "PurchasedQuantity")
+                    DgvHtyhd.Columns.Add("発注残数", "NumberOfOrderRemaining ")
+                    DgvHtyhd.Columns.Add("単位", "Unit")
+                    DgvHtyhd.Columns.Add("間接費", "OverHead")
+                    DgvHtyhd.Columns.Add("仕入金額", "PurchaseAmount")
+                    DgvHtyhd.Columns.Add("リードタイム", "LeadTime")
+                    DgvHtyhd.Columns.Add("貿易条件", "TradeTerms")
+                    DgvHtyhd.Columns.Add("入庫数", "GoodsReceiptQuantity")
+                    DgvHtyhd.Columns.Add("未入庫数", "NoGoodsReceiptQuantity")
+                    DgvHtyhd.Columns.Add("備考", "Remarks")
+                    DgvHtyhd.Columns.Add("更新者", "ModifiedBy")
+                    DgvHtyhd.Columns.Add("登録日", "RegistrationDate")
+                Else
+                    DgvHtyhd.Columns.Add("取消", "取消")
+                    DgvHtyhd.Columns.Add("発注番号", "発注番号")
+                    DgvHtyhd.Columns.Add("発注番号枝番", "発注番号枝番")
+                    DgvHtyhd.Columns.Add("行番号", "行番号")
+                    DgvHtyhd.Columns.Add("仕入区分", "仕入区分")
+                    DgvHtyhd.Columns.Add("メーカー", "メーカー")
+                    DgvHtyhd.Columns.Add("品名", "品名")
+                    DgvHtyhd.Columns.Add("型式", "型式")
+                    DgvHtyhd.Columns.Add("仕入先名", "仕入先名")
+                    DgvHtyhd.Columns.Add("仕入値", "仕入値")
+                    DgvHtyhd.Columns.Add("発注数量", "発注数量")
+                    DgvHtyhd.Columns.Add("仕入数量", "仕入数量")
+                    DgvHtyhd.Columns.Add("発注残数", "発注残数")
+                    DgvHtyhd.Columns.Add("単位", "単位")
+                    DgvHtyhd.Columns.Add("間接費", "間接費")
+                    DgvHtyhd.Columns.Add("仕入金額", "仕入金額")
+                    DgvHtyhd.Columns.Add("リードタイム", "リードタイム")
+                    DgvHtyhd.Columns.Add("貿易条件", "貿易条件")
+                    DgvHtyhd.Columns.Add("入庫数", "入庫数")
+                    DgvHtyhd.Columns.Add("未入庫数", "未入庫数")
+                    DgvHtyhd.Columns.Add("備考", "備考")
+                    DgvHtyhd.Columns.Add("更新者", "更新者")
+                    DgvHtyhd.Columns.Add("登録日", "登録日")
+                End If
+
+                '伝票単位時のセル書式
+                DgvHtyhd.Columns("仕入値").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                DgvHtyhd.Columns("発注数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                DgvHtyhd.Columns("仕入数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                DgvHtyhd.Columns("発注残数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                DgvHtyhd.Columns("間接費").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                DgvHtyhd.Columns("仕入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                DgvHtyhd.Columns("入庫数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                DgvHtyhd.Columns("未入庫数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+                Dim dsHanyou As DataSet
+
+                '発注明細ぶん回し
+                For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+
+                    DgvHtyhd.Rows.Add()
+                    DgvHtyhd.Rows(i).Cells("取消").Value = getDelKbnTxt(ds.Tables(RS).Rows(i)("取消区分"))
+                    DgvHtyhd.Rows(i).Cells("発注番号").Value = ds.Tables(RS).Rows(i)("発注番号")
+                    DgvHtyhd.Rows(i).Cells("発注番号枝番").Value = ds.Tables(RS).Rows(i)("発注番号枝番")
+                    DgvHtyhd.Rows(i).Cells("行番号").Value = ds.Tables(RS).Rows(i)("行番号")
+
+                    'リードタイムのリストを汎用マスタから取得
+                    dsHanyou = getDsHanyoData(CommonConst.FIXED_KEY_PURCHASING_CLASS, ds.Tables(RS).Rows(i)("仕入区分"))
+                    DgvHtyhd.Rows(i).Cells("仕入区分").Value = ds.Tables(RS).Rows(i)("仕入区分") & dsHanyou.Tables(RS).Rows(0)("文字１")
+                    DgvHtyhd.Rows(i).Cells("メーカー").Value = ds.Tables(RS).Rows(i)("メーカー")
+                    DgvHtyhd.Rows(i).Cells("品名").Value = ds.Tables(RS).Rows(i)("品名")
+                    DgvHtyhd.Rows(i).Cells("型式").Value = ds.Tables(RS).Rows(i)("型式")
+                    DgvHtyhd.Rows(i).Cells("仕入先名").Value = ds.Tables(RS).Rows(i)("仕入先名")
+                    DgvHtyhd.Rows(i).Cells("仕入値").Value = ds.Tables(RS).Rows(i)("仕入値")
+                    DgvHtyhd.Rows(i).Cells("発注数量").Value = ds.Tables(RS).Rows(i)("発注数量")
+                    DgvHtyhd.Rows(i).Cells("仕入数量").Value = ds.Tables(RS).Rows(i)("仕入数量")
+                    DgvHtyhd.Rows(i).Cells("発注残数").Value = ds.Tables(RS).Rows(i)("発注残数")
+                    DgvHtyhd.Rows(i).Cells("単位").Value = ds.Tables(RS).Rows(i)("単位")
+                    DgvHtyhd.Rows(i).Cells("間接費").Value = ds.Tables(RS).Rows(i)("間接費")
+                    DgvHtyhd.Rows(i).Cells("仕入金額").Value = ds.Tables(RS).Rows(i)("仕入金額")
+                    If ds.Tables(RS).Rows(i)("リードタイム") Is "" Then
+                        DgvHtyhd.Rows(i).Cells("リードタイム").Value = ds.Tables(RS).Rows(i)("リードタイム")
+                    Else
+
+                        'リードタイムのリストを汎用マスタから取得
+                        dsHanyou = getDsHanyoData(CommonConst.FIXED_KEY_READTIME, ds.Tables(RS).Rows(i)("リードタイム").ToString)
+                        DgvHtyhd.Rows(i).Cells("リードタイム").Value = ds.Tables(RS).Rows(i)("リードタイム") & dsHanyou.Tables(RS).Rows(0)("文字１")
+
+                    End If
+
+                    If ds.Tables(RS).Rows(i)("貿易条件") IsNot DBNull.Value Then
+
+                        '貿易条件のリストを汎用マスタから取得
+                        dsHanyou = getDsHanyoData(CommonConst.FIXED_KEY_TRADE_TERMS, ds.Tables(RS).Rows(i)("貿易条件").ToString)
+                        DgvHtyhd.Rows(i).Cells("貿易条件").Value = dsHanyou.Tables(RS).Rows(0)("文字１").ToString
+                    End If
+                    DgvHtyhd.Rows(i).Cells("入庫数").Value = ds.Tables(RS).Rows(i)("入庫数")
+                    DgvHtyhd.Rows(i).Cells("未入庫数").Value = ds.Tables(RS).Rows(i)("未入庫数")
+                    DgvHtyhd.Rows(i).Cells("備考").Value = ds.Tables(RS).Rows(i)("備考")
+                    DgvHtyhd.Rows(i).Cells("更新者").Value = ds.Tables(RS).Rows(i)("更新者")
+                    DgvHtyhd.Rows(i).Cells("登録日").Value = ds.Tables(RS).Rows(i)("登録日")
+                Next
+
             End If
-
-            DgvHtyhd.Columns(11).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-
-            Dim tmp As Integer = ds.Tables(RS).Rows.Count - 1
-            ReDim OrderNo(tmp)
-
-            For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-                DgvHtyhd.Rows.Add()
-                DgvHtyhd.Rows(index).Cells(0).Value = ds.Tables(RS).Rows(index)("発注番号")
-                DgvHtyhd.Rows(index).Cells(1).Value = ds.Tables(RS).Rows(index)("発注番号枝番")
-                DgvHtyhd.Rows(index).Cells(2).Value = ds.Tables(RS).Rows(index)("客先番号")
-                DgvHtyhd.Rows(index).Cells(3).Value = ds.Tables(RS).Rows(index)("発注日")
-                DgvHtyhd.Rows(index).Cells(4).Value = ds.Tables(RS).Rows(index)("仕入先コード")
-                DgvHtyhd.Rows(index).Cells(5).Value = ds.Tables(RS).Rows(index)("仕入先名")
-                DgvHtyhd.Rows(index).Cells(6).Value = ds.Tables(RS).Rows(index)("仕入先郵便番号")
-                DgvHtyhd.Rows(index).Cells(7).Value = ds.Tables(RS).Rows(index)("仕入先住所")
-                DgvHtyhd.Rows(index).Cells(8).Value = ds.Tables(RS).Rows(index)("仕入先電話番号")
-                DgvHtyhd.Rows(index).Cells(9).Value = ds.Tables(RS).Rows(index)("仕入先ＦＡＸ")
-                DgvHtyhd.Rows(index).Cells(10).Value = ds.Tables(RS).Rows(index)("仕入先担当者名")
-                DgvHtyhd.Rows(index).Cells(11).Value = ds.Tables(RS).Rows(index)("仕入先担当者役職")
-                DgvHtyhd.Rows(index).Cells(12).Value = ds.Tables(RS).Rows(index)("仕入金額")
-                DgvHtyhd.Rows(index).Cells(13).Value = ds.Tables(RS).Rows(index)("支払条件")
-                DgvHtyhd.Rows(index).Cells(14).Value = ds.Tables(RS).Rows(index)("営業担当者")
-                DgvHtyhd.Rows(index).Cells(15).Value = ds.Tables(RS).Rows(index)("入力担当者")
-                DgvHtyhd.Rows(index).Cells(16).Value = ds.Tables(RS).Rows(index)("備考")
-                DgvHtyhd.Rows(index).Cells(17).Value = ds.Tables(RS).Rows(index)("登録日")
-            Next
 
         Catch ue As UsrDefException
             ue.dspMsg()
@@ -1074,249 +485,389 @@ Public Class OrderingList
             'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
             Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
         End Try
+
     End Sub
 
+    '検索ボタン押下時
+    Private Sub BtnPurchaseSearch_Click(sender As Object, e As EventArgs) Handles BtnPurchaseSearch.Click
+        '一覧再表示
+        getList()
+    End Sub
+
+    '取消データチェックイベント
+    Private Sub ChkCancelData_CheckedChanged(sender As Object, e As EventArgs) Handles ChkCancelData.CheckedChanged
+        '一覧再表示
+        getList()
+    End Sub
+
+    'ラジオボタン変更時
+    Private Sub RbtnDetails_CheckedChanged(sender As Object, e As EventArgs) Handles RbtnDetails.CheckedChanged
+        '一覧再表示
+        getList()
+    End Sub
+
+    '発注参照ボタン押下時
     Private Sub BtnPurchaseView_Click(sender As Object, e As EventArgs) Handles BtnPurchaseView.Click
         Dim RowIdx As Integer
         RowIdx = Me.DgvHtyhd.CurrentCell.RowIndex
-        Dim No As String = DgvHtyhd.Rows(RowIdx).Cells(0).Value
-        Dim Suffix As String = DgvHtyhd.Rows(RowIdx).Cells(1).Value
+        Dim No As String = DgvHtyhd.Rows(RowIdx).Cells("発注番号").Value
+        Dim Suffix As String = DgvHtyhd.Rows(RowIdx).Cells("発注番号枝番").Value
         Dim Status As String = "VIEW"
         Dim openForm As Form = Nothing
         openForm = New Ordering(_msgHd, _db, _langHd, No, Suffix, Status)   '処理選択
         openForm.Show(Me)
     End Sub
 
+    '発注複製ボタン押下時
+    Private Sub BtnPurchaseClone_Click(sender As Object, e As EventArgs) Handles BtnPurchaseClone.Click
+        Dim RowIdx As Integer
+        RowIdx = Me.DgvHtyhd.CurrentCell.RowIndex
+        Dim No As String = DgvHtyhd.Rows(RowIdx).Cells("発注番号").Value
+        Dim Suffix As String = DgvHtyhd.Rows(RowIdx).Cells("発注番号枝番").Value
+        Dim Status As String = "CLONE"
+        Dim openForm As Form = Nothing
+        openForm = New Ordering(_msgHd, _db, _langHd, No, Suffix, Status)   '処理選択
+        openForm.ShowDialog(Me)
+
+        '一覧再表示
+        getList()
+
+    End Sub
+
+    '発注修正ボタン押下時
+    Private Sub BtnPurchaseeEdit_Click(sender As Object, e As EventArgs) Handles BtnPurchaseEdit.Click
+        Dim RowIdx As Integer
+        RowIdx = Me.DgvHtyhd.CurrentCell.RowIndex
+        Dim No As String = DgvHtyhd.Rows(RowIdx).Cells("発注番号").Value
+        Dim Suffix As String = DgvHtyhd.Rows(RowIdx).Cells("発注番号枝番").Value
+        Dim status As String = "EDIT"
+
+        Dim openForm As Form = Nothing
+        openForm = New Ordering(_msgHd, _db, _langHd, No, Suffix, status)   '処理選択
+        openForm.ShowDialog(Me)
+
+        '一覧再表示
+        getList()
+    End Sub
+
+    '発注取消ボタン押下時
+    Private Sub BtnPurchaseCancel_Click(sender As Object, e As EventArgs) Handles BtnPurchaseCancel.Click
+
+        '明細表示時は取消操作不可能
+        If RbtnDetails.Checked Then
+
+            '操作できないアラートを出す
+            _msgHd.dspMSG("NonAction", frmC01F10_Login.loginValue.Language)
+            Return
+
+        End If
+
+
+        '取消済みデータは取消操作不可能
+        If DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("取消").Value = CommonConst.CANCEL_KBN_DISABLED_TXT Then
+            '取消データは選択できないアラートを出す
+            _msgHd.dspMSG("cannotSelectTorikeshiData", frmC01F10_Login.loginValue.Language)
+            Return
+        End If
+
+        Try
+
+            '取消確認のアラート
+            Dim result As DialogResult = _msgHd.dspMSG("confirmCancel", frmC01F10_Login.loginValue.Language)
+
+            If result = DialogResult.Yes Then
+                updateData() 'データ更新
+            End If
+
+        Catch ex As Exception
+
+            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
+            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
+
+        End Try
+
+    End Sub
+
+    '選択データをもとに以下テーブル更新
+    't25_nkinhd, t27_nkinkshihd, t23_skyuhd
+    Private Sub updateData()
+        Dim dtNow As String = formatDatetime(DateTime.Now)
+        Dim Sql As String = ""
+
+        Sql = "UPDATE "
+        Sql += "Public."
+        Sql += "t20_hattyu "
+        Sql += "SET "
+
+        Sql += "取消区分"
+        Sql += " = '"
+        Sql += "1"
+        Sql += "', "
+        Sql += "取消日"
+        Sql += " = '"
+        Sql += dtNow
+        Sql += "', "
+        Sql += "更新日"
+        Sql += " = '"
+        Sql += dtNow
+        Sql += "', "
+        Sql += "更新者"
+        Sql += " = '"
+        Sql += frmC01F10_Login.loginValue.TantoNM
+        Sql += " ' "
+
+        Sql += "WHERE"
+        Sql += " 会社コード"
+        Sql += "='"
+        Sql += frmC01F10_Login.loginValue.BumonCD
+        Sql += "'"
+        Sql += " AND"
+        Sql += " 発注番号"
+        Sql += "='"
+        Sql += DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("発注番号").Value
+        Sql += "' "
+        Sql += " AND"
+        Sql += " 発注番号枝番"
+        Sql += "='"
+        Sql += DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("発注番号枝番").Value
+        Sql += "' "
+
+        _db.executeDB(Sql)
+
+        '一覧再表示
+        getList()
+
+    End Sub
+
+    '仕入入力ボタン押下時
     Private Sub BtnOrding_Click(sender As Object, e As EventArgs) Handles BtnOrding.Click
         Dim RowIdx As Integer
         RowIdx = Me.DgvHtyhd.CurrentCell.RowIndex
-        Dim No As String = DgvHtyhd.Rows(RowIdx).Cells(0).Value
-        Dim Suffix As String = DgvHtyhd.Rows(RowIdx).Cells(1).Value
+        Dim No As String = DgvHtyhd.Rows(RowIdx).Cells("発注番号").Value
+        Dim Suffix As String = DgvHtyhd.Rows(RowIdx).Cells("発注番号枝番").Value
         Dim openForm As Form = Nothing
         openForm = New PurchasingManagement(_msgHd, _db, _langHd, No, Suffix)   '処理選択
         openForm.Show(Me)
 
     End Sub
 
+    '入庫入力ボタン押下時
     Private Sub BtnGoodsIssue_Click(sender As Object, e As EventArgs) Handles BtnReceipt.Click
         Dim RowIdx As Integer
         RowIdx = Me.DgvHtyhd.CurrentCell.RowIndex
-        Dim No As String = DgvHtyhd.Rows(RowIdx).Cells(0).Value
-        Dim Suffix As String = DgvHtyhd.Rows(RowIdx).Cells(1).Value
+        Dim No As String = DgvHtyhd.Rows(RowIdx).Cells("発注番号").Value
+        Dim Suffix As String = DgvHtyhd.Rows(RowIdx).Cells("発注番号枝番").Value
         Dim openForm As Form = Nothing
         openForm = New Receipt(_msgHd, _db, _langHd, No, Suffix)   '処理選択
         openForm.Show(Me)
 
     End Sub
 
-    Private Sub BtnPurchaseClone_Click(sender As Object, e As EventArgs) Handles BtnPurchaseClone.Click
-        Dim RowIdx As Integer
-        RowIdx = Me.DgvHtyhd.CurrentCell.RowIndex
-        Dim No As String = DgvHtyhd.Rows(RowIdx).Cells(0).Value
-        Dim Suffix As String = DgvHtyhd.Rows(RowIdx).Cells(1).Value
-        Dim Status As String = "CLONE"
-        Dim openForm As Form = Nothing
-        openForm = New Ordering(_msgHd, _db, _langHd, No, Suffix, Status)   '処理選択
-        openForm.ShowDialog(Me)
-        DgvHtyhd.Rows.Clear()
-        DgvHtyhd.Columns.Clear()
-        Dim ListStatus As String = "EXCLUSION"
-        PurchaseListLoad(ListStatus)
-    End Sub
-
-    Private Sub ChkCancelData_CheckedChanged(sender As Object, e As EventArgs) Handles ChkCancelData.CheckedChanged
-        DgvHtyhd.Rows.Clear()
-        DgvHtyhd.Columns.Clear()
-
-        If ChkCancelData.Checked = False Then
-            Dim Status As String = "EXCLUSION"
-            PurchaseListLoad(Status)
-        Else
-            PurchaseListLoad()
-        End If
-    End Sub
-
-    Private Sub BtnPurchaseCancel_Click(sender As Object, e As EventArgs) Handles BtnPurchaseCancel.Click
-        Dim dtNow As DateTime = DateTime.Now
-        Dim Sql1 As String = ""
-        Sql1 = ""
-        Sql1 += "UPDATE "
-        Sql1 += "Public."
-        Sql1 += "t20_hattyu "
-        Sql1 += "SET "
-
-        Sql1 += "取消区分"
-        Sql1 += " = '"
-        Sql1 += "1"
-        Sql1 += "', "
-        Sql1 += "取消日"
-        Sql1 += " = '"
-        Sql1 += dtNow
-        Sql1 += "', "
-        Sql1 += "更新日"
-        Sql1 += " = '"
-        Sql1 += dtNow
-        Sql1 += "', "
-        Sql1 += "更新者"
-        Sql1 += " = '"
-        Sql1 += frmC01F10_Login.loginValue.TantoNM
-        Sql1 += " ' "
-
-        Sql1 += "WHERE"
-        Sql1 += " 会社コード"
-        Sql1 += "='"
-        Sql1 += frmC01F10_Login.loginValue.BumonNM
-        Sql1 += "'"
-        Sql1 += " AND"
-        Sql1 += " 発注番号"
-        Sql1 += "='"
-        Sql1 += DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("発注番号").Value
-        Sql1 += "' "
-        Sql1 += " AND"
-        Sql1 += " 発注番号枝番"
-        Sql1 += "='"
-        Sql1 += DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("発注番号枝番").Value
-        Sql1 += "' "
-        Sql1 += "RETURNING 会社コード"
-        Sql1 += ", "
-        Sql1 += "発注番号"
-        Sql1 += ", "
-        Sql1 += "発注番号枝番"
-        Sql1 += ", "
-        Sql1 += "受注番号"
-        Sql1 += ", "
-        Sql1 += "受注番号枝番"
-        Sql1 += ", "
-        Sql1 += "見積番号"
-        Sql1 += ", "
-        Sql1 += "見積番号枝番"
-        Sql1 += ", "
-        Sql1 += "仕入先コード"
-        Sql1 += ", "
-        Sql1 += "仕入先名"
-        Sql1 += ", "
-        Sql1 += "仕入先郵便番号"
-        Sql1 += ", "
-        Sql1 += "仕入先住所"
-        Sql1 += ", "
-        Sql1 += "仕入先電話番号"
-        Sql1 += ", "
-        Sql1 += "仕入先ＦＡＸ"
-        Sql1 += ", "
-        Sql1 += "仕入先担当者役職"
-        Sql1 += ", "
-        Sql1 += "仕入先担当者名"
-        Sql1 += ", "
-        Sql1 += "見積日"
-        Sql1 += ", "
-        Sql1 += "見積有効期限"
-        Sql1 += ", "
-        Sql1 += "インボイス日"
-        Sql1 += ", "
-        Sql1 += "検品完了日"
-        Sql1 += ", "
-        Sql1 += "支払条件"
-        Sql1 += ", "
-        Sql1 += "見積金額"
-        Sql1 += ", "
-        Sql1 += "仕入金額"
-        Sql1 += ", "
-        Sql1 += "粗利額"
-        Sql1 += ", "
-        Sql1 += "営業担当者"
-        Sql1 += ", "
-        Sql1 += "入力担当者"
-        Sql1 += ", "
-        Sql1 += "備考"
-        Sql1 += ", "
-        Sql1 += "取消日"
-        Sql1 += ", "
-        Sql1 += "取消区分"
-        Sql1 += ", "
-        Sql1 += "ＶＡＴ"
-        Sql1 += ", "
-        Sql1 += "ＰＰＨ"
-        Sql1 += ", "
-        Sql1 += "受注日"
-        Sql1 += ", "
-        Sql1 += "発注日"
-        Sql1 += ", "
-        Sql1 += "登録日"
-        Sql1 += ", "
-        Sql1 += "更新日"
-        Sql1 += ", "
-        Sql1 += "更新者"
-        Sql1 += ", "
-        Sql1 += "得意先コード"
-        Sql1 += ", "
-        Sql1 += "得意先名"
-        Sql1 += ", "
-        Sql1 += "得意先郵便番号"
-        Sql1 += ", "
-        Sql1 += "得意先住所"
-        Sql1 += ", "
-        Sql1 += "得意先電話番号"
-        Sql1 += ", "
-        Sql1 += "得意先ＦＡＸ"
-        Sql1 += ", "
-        Sql1 += "得意先担当者役職"
-        Sql1 += ", "
-        Sql1 += "得意先担当者名"
-
-        If frmC01F10_Login.loginValue.Language = "ENG" Then
-            Dim result As DialogResult = MessageBox.Show("Would you like to cancel the purchase order？",
-                                             "Question",
-                                             MessageBoxButtons.YesNoCancel,
-                                             MessageBoxIcon.Exclamation,
-                                             MessageBoxDefaultButton.Button2)
-
-            If result = DialogResult.Yes Then
-                _db.executeDB(Sql1)
-                DgvHtyhd.Rows.Clear()
-                DgvHtyhd.Columns.Clear()
-                Dim Status As String = "EXCLUSION"
-                PurchaseListLoad(Status)
-            ElseIf result = DialogResult.No Then
-
-            ElseIf result = DialogResult.Cancel Then
-
-            End If
-        Else
-            Dim result As DialogResult = MessageBox.Show("発注を取り消しますか？",
-                                             "質問",
-                                             MessageBoxButtons.YesNoCancel,
-                                             MessageBoxIcon.Exclamation,
-                                             MessageBoxDefaultButton.Button2)
-
-            If result = DialogResult.Yes Then
-                _db.executeDB(Sql1)
-                DgvHtyhd.Rows.Clear()
-                DgvHtyhd.Columns.Clear()
-                Dim Status As String = "EXCLUSION"
-                PurchaseListLoad(Status)
-            ElseIf result = DialogResult.No Then
-
-            ElseIf result = DialogResult.Cancel Then
-
-            End If
-        End If
-    End Sub
-
+    '買掛登録ボタン押下時
     Private Sub BtnAP_Click(sender As Object, e As EventArgs) Handles BtnAP.Click
         Dim RowIdx As Integer
         RowIdx = Me.DgvHtyhd.CurrentCell.RowIndex
-        Dim No As String = DgvHtyhd.Rows(RowIdx).Cells(0).Value
-        Dim Suffix As String = DgvHtyhd.Rows(RowIdx).Cells(1).Value
+        Dim No As String = DgvHtyhd.Rows(RowIdx).Cells("発注番号").Value
+        Dim Suffix As String = DgvHtyhd.Rows(RowIdx).Cells("発注番号枝番").Value
         Dim openForm As Form = Nothing
         openForm = New AccountsPayable(_msgHd, _db, _langHd, Me, No, Suffix)   '処理選択
         Me.Enabled = False
         Me.Hide()
         openForm.ShowDialog(Me)
 
-        DgvHtyhd.Rows.Clear()
-        DgvHtyhd.Columns.Clear()
+        '一覧再表示
+        getList()
 
-        Dim ListStatus As String = "EXCLUSION"
-        PurchaseListLoad(ListStatus)
     End Sub
+
+    '戻るボタン押下時
+    Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
+        Dim openForm As Form = Nothing
+        openForm = New frmC01F30_Menu(_msgHd, _langHd, _db)
+        openForm.Show()
+        Me.Close()
+    End Sub
+
+    '抽出条件取得
+    Private Function searchConditions() As String
+        Dim Sql As String = ""
+
+        '抽出条件
+        Dim supplierName As String = escapeSql(TxtSupplierName.Text)
+        Dim supplierAddress As String = escapeSql(TxtAddress.Text)
+        Dim supplierTel As String = escapeSql(TxtTel.Text)
+        Dim supplierCode As String = escapeSql(TxtSupplierCode.Text)
+        Dim sinceDate As String = strFormatDate(dtPurchaseDateSince.Text) '日付の書式を日本の形式に合わせる
+        Dim untilDate As String = strFormatDate(dtPurchaseDateUntil.Text) '日付の書式を日本の形式に合わせる
+        Dim sinceNum As String = escapeSql(TxtPurchaseSince.Text)
+        Dim untilNum As String = escapeSql(TxtPurchaseUntil.Text)
+        Dim salesName As String = escapeSql(TxtSales.Text)
+        Dim poCode As String = escapeSql(TxtCustomerPO.Text)
+
+        If supplierName <> Nothing Then
+            Sql += " AND "
+            Sql += " 仕入先名 ILIKE '%" & supplierName & "%' "
+        End If
+
+        If supplierAddress <> Nothing Then
+            Sql += " AND "
+            Sql += " 仕入先住所 ILIKE '%" & supplierAddress & "%' "
+        End If
+
+        If supplierTel <> Nothing Then
+            Sql += " AND "
+            Sql += " 仕入先電話番号 ILIKE '%" & supplierTel & "%' "
+        End If
+
+        If supplierCode <> Nothing Then
+            Sql += " AND "
+            Sql += " 仕入先コード ILIKE '%" & supplierCode & "%' "
+        End If
+
+        If sinceDate <> Nothing Then
+            Sql += " AND "
+            Sql += " 発注日 >= '" & sinceDate & "'"
+        End If
+        If untilDate <> Nothing Then
+            Sql += " AND "
+            Sql += " 発注日 <= '" & untilDate & "'"
+        End If
+
+        If sinceNum <> Nothing Then
+            Sql += " AND "
+            Sql += " 発注番号 >= '" & sinceNum & "' "
+        End If
+        If untilNum <> Nothing Then
+            Sql += " AND "
+            Sql += " 発注番号 <= '" & untilNum & "' "
+        End If
+
+        If salesName <> Nothing Then
+            Sql += " AND "
+            Sql += " 営業担当者 ILIKE '%" & salesName & "%' "
+        End If
+
+        If poCode <> Nothing Then
+            Sql += " AND "
+            Sql += " 客先番号 ILIKE '%" & poCode & "%' "
+        End If
+
+        Return Sql
+
+    End Function
+
+    '表示形式条件
+    Private Function viewFormat() As String
+        Dim Sql As String = ""
+
+        '取消データを含めない場合
+        If ChkCancelData.Checked = False Then
+            Sql += " AND "
+            Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+        End If
+
+        Return Sql
+
+    End Function
+
+    'sqlで実行する文字列からシングルクォーテーションを文字コードにする
+    Private Function escapeSql(ByVal prmSql As String) As String
+        Dim sql As String = prmSql
+
+        sql = sql.Replace("'"c, "''") 'シングルクォーテーションを置換
+
+        Return Regex.Escape(sql)
+        Return sql
+    End Function
+
+    'param1：String テーブル名
+    'param2：String 詳細条件
+    'Return: DataSet
+    Private Function getDsData(ByVal tableName As String, Optional ByRef txtParam As String = "") As DataSet
+        Dim reccnt As Integer = 0 'DB用（デフォルト）
+        Dim Sql As String = ""
+
+        Sql += "SELECT"
+        Sql += " *"
+        Sql += " FROM "
+
+        Sql += "public." & tableName
+        Sql += " WHERE "
+        Sql += "会社コード"
+        Sql += " ILIKE  "
+        Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += txtParam
+
+        Return _db.selectDB(Sql, RS, reccnt)
+    End Function
+
+    '汎用マスタから固定キー、可変キーに応じた結果を返す
+    'param1：String 固定キー
+    'param2：String 可変キー
+    'Return: DataSet
+    Private Function getDsHanyoData(ByVal prmFixed As String, ByVal prmVariable As String) As DataSet
+        Dim Sql As String = ""
+
+        Sql = " AND "
+        Sql += "固定キー ILIKE '" & prmFixed & "'"
+        Sql += " AND "
+        Sql += "可変キー ILIKE '" & prmVariable & "'"
+
+        'リードタイムのリストを汎用マスタから取得
+        Return getDsData("m90_hanyo", Sql)
+
+    End Function
+
+    '取消区分の表示テキストを返す
+    'param1：String テーブル名
+    'param2：String 詳細条件
+    'Return: DataSet
+    Public Function getDelKbnTxt(ByVal delKbn As String) As String
+        '区分の値を取得し、使用言語に応じて値を返却
+
+        Dim reDelKbn As String = IIf(delKbn = CommonConst.CANCEL_KBN_DISABLED,
+                                    IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_JPN, CommonConst.CANCEL_KBN_JPN_TXT, CommonConst.CANCEL_KBN_ENG_TXT),
+                                    "")
+        Return reDelKbn
+    End Function
+
+    'どんなカルチャーであっても、日本の形式に変換する
+    Private Function strFormatDate(ByVal prmDate As String) As String
+
+        'PCのカルチャーを取得し、それに応じてStringからDatetimeを作成
+        Dim ci As New System.Globalization.CultureInfo(CultureInfo.CurrentCulture.Name.ToString)
+        Dim dateFormat As DateTime = DateTime.Parse(prmDate, ci, System.Globalization.DateTimeStyles.AssumeLocal)
+
+        '日本の形式に書き換える
+        Return dateFormat.ToString("yyyy/MM/dd")
+    End Function
+
+    'どんなカルチャーであっても、日本の形式に変換する
+    Private Function formatDatetime(ByVal prmDatetime As DateTime) As String
+
+        'PCのカルチャーを取得し、それに応じてStringからDatetimeを作成
+        Dim ciCurrent As New System.Globalization.CultureInfo(CultureInfo.CurrentCulture.Name.ToString)
+        Dim dateFormat As DateTime = DateTime.Parse(prmDatetime.ToString, ciCurrent, System.Globalization.DateTimeStyles.AssumeLocal)
+
+        Dim changeFormat As String = dateFormat.ToString("yyyy/MM/dd HH:mm:ss")
+
+        Dim ciJP As New System.Globalization.CultureInfo(CommonConst.CI_JP)
+        Dim rtnDatetime As DateTime = DateTime.Parse(changeFormat, ciJP, System.Globalization.DateTimeStyles.AssumeLocal)
+
+
+        '日本の形式に書き換える
+        Return changeFormat
+    End Function
+
+    '金額フォーマット（登録の際の小数点指定子）を日本の形式に合わせる
+    '桁区切り記号は外す
+    Private Function formatNumber(ByVal prmVal As Decimal) As String
+
+        Dim nfi As NumberFormatInfo = New CultureInfo(CommonConst.CI_JP, False).NumberFormat
+
+        '日本の形式に書き換える
+        Return prmVal.ToString("F3", nfi) '売掛残高を増やす
+    End Function
+
+
 End Class

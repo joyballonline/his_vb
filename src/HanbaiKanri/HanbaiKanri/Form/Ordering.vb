@@ -1056,7 +1056,7 @@ Public Class Ordering
                     Sql4 += "INSERT INTO "
                     Sql4 += "Public."
                     Sql4 += "t21_hattyu("
-                    Sql4 += "会社コード, 発注番号, 発注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 単位, 仕入値, 発注数量, 仕入数量, 発注残数, 間接費, 仕入単価, 仕入金額, リードタイム, リードタイム単位, 入庫数, 未入庫数, 備考, 更新者, 登録日"
+                    Sql4 += "会社コード, 発注番号, 発注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 単位, 仕入値, 発注数量, 仕入数量, 発注残数, 間接費, 仕入単価, 仕入金額, リードタイム, リードタイム単位, 入庫数, 未入庫数, 備考, 更新者, 登録日, 更新日"
 
                     Sql4 += IIf(
                     DgvItemList.Rows(hattyuIdx).Cells("貿易条件").Value IsNot Nothing,
@@ -1106,6 +1106,8 @@ Public Class Ordering
                     Sql4 += DgvItemList.Rows(hattyuIdx).Cells("備考").Value
                     Sql4 += "', '"
                     Sql4 += frmC01F10_Login.loginValue.TantoNM
+                    Sql4 += "', '"
+                    Sql4 += dtNow
                     Sql4 += "', '"
                     Sql4 += dtNow
                     Sql4 += "'"

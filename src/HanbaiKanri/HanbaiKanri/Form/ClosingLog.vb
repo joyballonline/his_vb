@@ -1605,7 +1605,7 @@ Public Class ClosingLog
         Sql += "会社コード"
         Sql += " ILIKE  "
         Sql += "'"
-        Sql += frmC01F10_Login.loginValue.BumonNM
+        Sql += frmC01F10_Login.loginValue.BumonCD
         Sql += "'"
         Dim dsCompany As DataSet = _db.selectDB(Sql, RS, reccnt)
 
@@ -1621,7 +1621,7 @@ Public Class ClosingLog
         Sql += "会社コード"
         Sql += " ILIKE  "
         Sql += "'"
-        Sql += frmC01F10_Login.loginValue.BumonNM
+        Sql += frmC01F10_Login.loginValue.BumonCD
         Sql += "'"
         Sql += " AND "
         Sql += "入金日"
@@ -1654,7 +1654,7 @@ Public Class ClosingLog
             Sql += "会社コード"
             Sql += " ILIKE  "
             Sql += "'"
-            Sql += frmC01F10_Login.loginValue.BumonNM
+            Sql += frmC01F10_Login.loginValue.BumonCD
             Sql += "'"
             Sql += " AND "
             Sql += "請求番号"
@@ -1679,7 +1679,7 @@ Public Class ClosingLog
                 Sql += "会社コード"
                 Sql += " ILIKE  "
                 Sql += "'"
-                Sql += frmC01F10_Login.loginValue.BumonNM
+                Sql += frmC01F10_Login.loginValue.BumonCD
                 Sql += "'"
                 Sql += " AND "
                 Sql += "受注番号"
@@ -1694,7 +1694,7 @@ Public Class ClosingLog
                 Sql += "t66_swkhd("
                 Sql += "会社コード, 見積番号, 受注番号, 客先番号, 取引先名, 仕分日, 借方勘定科目, 借方勘定科目金額, 貸方勘定科目, 貸方勘定科目金額)"
                 Sql += " VALUES('"
-                Sql += frmC01F10_Login.loginValue.BumonNM
+                Sql += frmC01F10_Login.loginValue.BumonCD
                 Sql += "', '"
                 Sql += dsNkinCymn.Tables(RS).Rows(0)("見積番号").ToString
                 Sql += "', '"
@@ -1742,7 +1742,7 @@ Public Class ClosingLog
                 Sql += "t66_swkhd("
                 Sql += "会社コード, 見積番号, 受注番号, 客先番号, 取引先名, 仕分日, 借方勘定科目, 借方勘定科目金額, 貸方勘定科目, 貸方勘定科目金額)"
                 Sql += " VALUES('"
-                Sql += frmC01F10_Login.loginValue.BumonNM
+                Sql += frmC01F10_Login.loginValue.BumonCD
                 Sql += "', '"
                 Sql += dsNkinCymn.Tables(RS).Rows(0)("見積番号").ToString
                 Sql += "', '"
@@ -1795,7 +1795,7 @@ Public Class ClosingLog
                 Sql += "会社コード"
                 Sql += " ILIKE  "
                 Sql += "'"
-                Sql += frmC01F10_Login.loginValue.BumonNM
+                Sql += frmC01F10_Login.loginValue.BumonCD
                 Sql += "'"
                 Sql += " AND "
                 Sql += "受注番号"
@@ -1810,7 +1810,7 @@ Public Class ClosingLog
                 Sql += "t66_swkhd("
                 Sql += "会社コード, 見積番号, 受注番号, 客先番号, 取引先名, 仕分日, 借方勘定科目, 借方勘定科目金額, 貸方勘定科目, 貸方勘定科目金額)"
                 Sql += " VALUES('"
-                Sql += frmC01F10_Login.loginValue.BumonNM
+                Sql += frmC01F10_Login.loginValue.BumonCD
                 Sql += "', '"
                 Sql += dsNkinCymn.Tables(RS).Rows(0)("見積番号").ToString
                 Sql += "', '"
@@ -1868,7 +1868,7 @@ Public Class ClosingLog
         Sql += "会社コード"
         Sql += " ILIKE  "
         Sql += "'"
-        Sql += frmC01F10_Login.loginValue.BumonNM
+        Sql += frmC01F10_Login.loginValue.BumonCD
         Sql += "'"
         Sql += " AND "
         Sql += "売上日"
@@ -1895,7 +1895,7 @@ Public Class ClosingLog
             Sql += "t66_swkhd("
             Sql += "会社コード, 見積番号, 受注番号, 客先番号, 取引先名, 仕分日, 借方勘定科目, 借方勘定科目金額, 貸方勘定科目, 貸方勘定科目金額)"
             Sql += " VALUES('"
-            Sql += frmC01F10_Login.loginValue.BumonNM
+            Sql += frmC01F10_Login.loginValue.BumonCD
             Sql += "', '"
             Sql += dsSwkUrighd.Tables(RS).Rows(i)("見積番号").ToString
             Sql += "', '"
@@ -1945,7 +1945,7 @@ Public Class ClosingLog
             Sql += "t66_swkhd("
             Sql += "会社コード, 見積番号, 受注番号, 客先番号, 取引先名, 仕分日, 借方勘定科目, 借方勘定科目金額, 貸方勘定科目, 貸方勘定科目金額)"
             Sql += " VALUES('"
-            Sql += frmC01F10_Login.loginValue.BumonNM
+            Sql += frmC01F10_Login.loginValue.BumonCD
             Sql += "', '"
             Sql += dsSwkUrighd.Tables(RS).Rows(i)("見積番号").ToString
             Sql += "', '"
@@ -2001,7 +2001,7 @@ Public Class ClosingLog
         Sql += "会社コード"
         Sql += " ILIKE  "
         Sql += "'"
-        Sql += frmC01F10_Login.loginValue.BumonNM
+        Sql += frmC01F10_Login.loginValue.BumonCD
         Sql += "'"
         Sql += " AND "
         Sql += "支払日"
@@ -2033,7 +2033,7 @@ Public Class ClosingLog
             Sql += "会社コード"
             Sql += " ILIKE  "
             Sql += "'"
-            Sql += frmC01F10_Login.loginValue.BumonNM
+            Sql += frmC01F10_Login.loginValue.BumonCD
             Sql += "'"
             Sql += " AND "
             Sql += "買掛番号"
@@ -2055,7 +2055,7 @@ Public Class ClosingLog
                 Sql += "会社コード"
                 Sql += " ILIKE  "
                 Sql += "'"
-                Sql += frmC01F10_Login.loginValue.BumonNM
+                Sql += frmC01F10_Login.loginValue.BumonCD
                 Sql += "'"
                 Sql += " AND "
                 Sql += "発注番号"
@@ -2071,7 +2071,7 @@ Public Class ClosingLog
                 Sql += "t66_swkhd("
                 Sql += "会社コード, 見積番号, 受注番号, 客先番号, 取引先名, 仕分日, 借方勘定科目, 借方勘定科目金額, 貸方勘定科目, 貸方勘定科目金額)"
                 Sql += " VALUES('"
-                Sql += frmC01F10_Login.loginValue.BumonNM
+                Sql += frmC01F10_Login.loginValue.BumonCD
                 Sql += "', '"
                 Sql += dsShriHattyu.Tables(RS).Rows(0)("見積番号").ToString
                 Sql += "', '"
@@ -2119,7 +2119,7 @@ Public Class ClosingLog
                 Sql += "t66_swkhd("
                 Sql += "会社コード, 見積番号, 受注番号, 客先番号, 取引先名, 仕分日, 借方勘定科目, 借方勘定科目金額, 貸方勘定科目, 貸方勘定科目金額)"
                 Sql += " VALUES('"
-                Sql += frmC01F10_Login.loginValue.BumonNM
+                Sql += frmC01F10_Login.loginValue.BumonCD
                 Sql += "', '"
                 Sql += dsShriHattyu.Tables(RS).Rows(0)("見積番号").ToString
                 Sql += "', '"
@@ -2172,7 +2172,7 @@ Public Class ClosingLog
                 Sql += "会社コード"
                 Sql += " ILIKE  "
                 Sql += "'"
-                Sql += frmC01F10_Login.loginValue.BumonNM
+                Sql += frmC01F10_Login.loginValue.BumonCD
                 Sql += "'"
                 Sql += " AND "
                 Sql += "発注番号"
@@ -2188,7 +2188,7 @@ Public Class ClosingLog
                 Sql += "t66_swkhd("
                 Sql += "会社コード, 見積番号, 受注番号, 客先番号, 取引先名, 仕分日, 借方勘定科目, 借方勘定科目金額, 貸方勘定科目, 貸方勘定科目金額)"
                 Sql += " VALUES('"
-                Sql += frmC01F10_Login.loginValue.BumonNM
+                Sql += frmC01F10_Login.loginValue.BumonCD
                 Sql += "', '"
                 Sql += dsShriHattyu.Tables(RS).Rows(0)("見積番号").ToString
                 Sql += "', '"
@@ -2246,7 +2246,7 @@ Public Class ClosingLog
         Sql += "会社コード"
         Sql += " ILIKE  "
         Sql += "'"
-        Sql += frmC01F10_Login.loginValue.BumonNM
+        Sql += frmC01F10_Login.loginValue.BumonCD
         Sql += "'"
         Sql += " AND "
         Sql += "仕入日"
@@ -2278,7 +2278,7 @@ Public Class ClosingLog
             Sql += "会社コード"
             Sql += " ILIKE  "
             Sql += "'"
-            Sql += frmC01F10_Login.loginValue.BumonNM
+            Sql += frmC01F10_Login.loginValue.BumonCD
             Sql += "'"
             Sql += " AND "
             Sql += "発注番号"
@@ -2300,7 +2300,7 @@ Public Class ClosingLog
             Sql += "会社コード"
             Sql += " ILIKE  "
             Sql += "'"
-            Sql += frmC01F10_Login.loginValue.BumonNM
+            Sql += frmC01F10_Login.loginValue.BumonCD
             Sql += "'"
             Sql += " AND "
             Sql += "発注番号"
@@ -2318,7 +2318,7 @@ Public Class ClosingLog
                 Sql += "t66_swkhd("
                 Sql += "会社コード, 見積番号, 受注番号, 客先番号, 取引先名, 仕分日, 借方勘定科目, 借方勘定科目金額, 貸方勘定科目, 貸方勘定科目金額)"
                 Sql += " VALUES('"
-                Sql += frmC01F10_Login.loginValue.BumonNM
+                Sql += frmC01F10_Login.loginValue.BumonCD
                 Sql += "', '"
                 Sql += dsSwkHattyu.Tables(RS).Rows(0)("見積番号").ToString
                 Sql += "', '"
@@ -2366,7 +2366,7 @@ Public Class ClosingLog
                 Sql += "t66_swkhd("
                 Sql += "会社コード, 見積番号, 受注番号, 客先番号, 取引先名, 仕分日, 借方勘定科目, 借方勘定科目金額, 貸方勘定科目, 貸方勘定科目金額)"
                 Sql += " VALUES('"
-                Sql += frmC01F10_Login.loginValue.BumonNM
+                Sql += frmC01F10_Login.loginValue.BumonCD
                 Sql += "', '"
                 Sql += dsSwkHattyu.Tables(RS).Rows(0)("見積番号").ToString
                 Sql += "', '"
@@ -2417,7 +2417,7 @@ Public Class ClosingLog
             Sql += "t66_swkhd("
             Sql += "会社コード, 見積番号, 受注番号, 客先番号, 取引先名, 仕分日, 借方勘定科目, 借方勘定科目金額, 貸方勘定科目, 貸方勘定科目金額)"
             Sql += " VALUES('"
-            Sql += frmC01F10_Login.loginValue.BumonNM
+            Sql += frmC01F10_Login.loginValue.BumonCD
             Sql += "', '"
             Sql += dsSwkHattyu.Tables(RS).Rows(0)("見積番号").ToString
             Sql += "', '"
@@ -2476,7 +2476,7 @@ Public Class ClosingLog
         Sql += "会社コード"
         Sql += " ILIKE  "
         Sql += "'"
-        Sql += frmC01F10_Login.loginValue.BumonNM
+        Sql += frmC01F10_Login.loginValue.BumonCD
         Sql += "'"
         Sql += " AND "
         Sql += "売上日"
@@ -2503,7 +2503,7 @@ Public Class ClosingLog
             Sql += "t52_krurighd("
             Sql += "会社コード, 売上番号, 客先番号, 受注番号, 受注番号枝番, 見積番号, 見積番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額, 仕入金額, 売上金額, 粗利額, 営業担当者, 入力担当者, 備考, ＶＡＴ, ＰＰＨ, 受注日, 売上日, 締処理日, 入金予定日, 登録日, 更新日, 更新者, 取消日, 取消区分)"
             Sql += " VALUES('"
-            Sql += frmC01F10_Login.loginValue.BumonNM
+            Sql += frmC01F10_Login.loginValue.BumonCD
             Sql += "', '"
             Sql += dsUrighd.Tables(RS).Rows(i)("売上番号").ToString
             Sql += "', '"
@@ -2712,7 +2712,7 @@ Public Class ClosingLog
                     Sql += "会社コード"
                     Sql += " ILIKE  "
                     Sql += "'"
-                    Sql += frmC01F10_Login.loginValue.BumonNM
+                    Sql += frmC01F10_Login.loginValue.BumonCD
                     Sql += "'"
                     Sql += " AND "
                     Sql += "メーカー"
@@ -2776,7 +2776,7 @@ Public Class ClosingLog
                             Sql += "t53_krurigdt("
                             Sql += "会社コード, 売上番号, 受注番号, 受注番号枝番, 行番号, 行番号枝番, 仕入区分, メーカー, 品名, 型式, 仕入先名, 仕入値, 受注数量, 売上数量, 受注残数, 単位, 仕入原価, 関税率, 関税額, 前払法人税率, 前払法人税額, 輸送費率, 輸送費額, 間接費, 仕入金額, 売単価, 売上金額, 見積単価, 見積金額, 粗利額, 粗利率, リードタイム, 備考, 入金有無, 入金番号, 入金日, 更新者, 更新日)"
                             Sql += " VALUES('"
-                            Sql += frmC01F10_Login.loginValue.BumonNM
+                            Sql += frmC01F10_Login.loginValue.BumonCD
                             Sql += "', '"
                             Sql += dsUrigdt.Tables(RS).Rows(x)("売上番号").ToString
                             Sql += "', '"
@@ -2963,7 +2963,7 @@ Public Class ClosingLog
                             Sql += "会社コード"
                             Sql += " ILIKE  "
                             Sql += "'"
-                            Sql += frmC01F10_Login.loginValue.BumonNM
+                            Sql += frmC01F10_Login.loginValue.BumonCD
                             Sql += "'"
                             Sql += " AND "
                             Sql += "仕入番号"
@@ -2994,7 +2994,7 @@ Public Class ClosingLog
                     Sql += "t53_krurigdt("
                     Sql += "会社コード, 売上番号, 受注番号, 受注番号枝番, 行番号, 行番号枝番, 仕入区分, メーカー, 品名, 型式, 仕入先名, 仕入値, 受注数量, 売上数量, 受注残数, 単位, 仕入原価, 関税率, 関税額, 前払法人税率, 前払法人税額, 輸送費率, 輸送費額, 間接費, 仕入金額, 売単価, 売上金額, 見積単価, 見積金額, 粗利額, 粗利率, リードタイム, 備考, 入金有無, 入金番号, 入金日, 更新者, 更新日)"
                     Sql += " VALUES('"
-                    Sql += frmC01F10_Login.loginValue.BumonNM
+                    Sql += frmC01F10_Login.loginValue.BumonCD
                     Sql += "', '"
                     Sql += dsUrigdt.Tables(RS).Rows(x)("売上番号").ToString
                     Sql += "', '"
@@ -3181,7 +3181,7 @@ Public Class ClosingLog
         Sql += "会社コード"
         Sql += " ILIKE  "
         Sql += "'"
-        Sql += frmC01F10_Login.loginValue.BumonNM
+        Sql += frmC01F10_Login.loginValue.BumonCD
         Sql += "'"
         Sql += " AND "
         Sql += "仕入日"
@@ -3208,7 +3208,7 @@ Public Class ClosingLog
             Sql += "t54_krsirehd("
             Sql += "会社コード, 仕入番号, 発注番号, 発注番号枝番, 客先番号, 仕入先コード, 仕入先名, 仕入先郵便番号, 仕入先住所, 仕入先電話番号, 仕入先ＦＡＸ, 仕入先担当者役職, 仕入先担当者名, 支払条件, 仕入金額, 粗利額, 営業担当者, 入力担当者, 備考, 取消日, 取消区分, ＶＡＴ, ＰＰＨ, 仕入日, 登録日, 締処理日, 更新日, 更新者)"
             Sql += " VALUES('"
-            Sql += frmC01F10_Login.loginValue.BumonNM
+            Sql += frmC01F10_Login.loginValue.BumonCD
             Sql += "', '"
             Sql += dsSirehd.Tables(RS).Rows(i)("仕入番号").ToString
             Sql += "', '"
@@ -3354,7 +3354,7 @@ Public Class ClosingLog
                 Sql += "t55_krsiredt("
                 Sql += "会社コード, 仕入番号, 発注番号, 発注番号枝番, 支払番号, 行番号, 仕入区分, メーカー, 品名, 型式, 仕入先名, 仕入値, 発注数量, 仕入数量, 発注残数, 単位, 仕入単価, 仕入金額, 間接費, リードタイム, 備考, 仕入日, 支払日, 支払有無, 更新者, 更新日)"
                 Sql += " VALUES('"
-                Sql += frmC01F10_Login.loginValue.BumonNM
+                Sql += frmC01F10_Login.loginValue.BumonCD
                 Sql += "', '"
                 Sql += dssiredt.Tables(RS).Rows(x)("仕入番号").ToString
                 Sql += "', '"
@@ -3487,7 +3487,7 @@ Public Class ClosingLog
         Sql += "会社コード"
         Sql += " ILIKE  "
         Sql += "'"
-        Sql += frmC01F10_Login.loginValue.BumonNM
+        Sql += frmC01F10_Login.loginValue.BumonCD
         Sql += "'"
         Sql += " AND "
         Sql += "請求日"
@@ -3514,7 +3514,7 @@ Public Class ClosingLog
             Sql += "t56_krskyuhd("
             Sql += "会社コード, 請求番号, 請求区分, 請求日, 受注番号, 受注番号枝番, 客先番号, 得意先コード, 得意先名, 請求金額計, 入金額計, 売掛残高, 備考１, 備考２, 入金番号, 入金完了日, 取消日, 取消区分, 登録日, 締処理日, 更新者)"
             Sql += " VALUES('"
-            Sql += frmC01F10_Login.loginValue.BumonNM
+            Sql += frmC01F10_Login.loginValue.BumonCD
             Sql += "', '"
             Sql += dsSkyuhd.Tables(RS).Rows(i)("請求番号").ToString
             Sql += "', '"
@@ -3646,7 +3646,7 @@ Public Class ClosingLog
         Sql += "会社コード"
         Sql += " ILIKE  "
         Sql += "'"
-        Sql += frmC01F10_Login.loginValue.BumonNM
+        Sql += frmC01F10_Login.loginValue.BumonCD
         Sql += "'"
         Sql += " AND "
         Sql += "買掛日"
@@ -3673,7 +3673,7 @@ Public Class ClosingLog
             Sql += "t57_krkikehd("
             Sql += "会社コード, 買掛番号, 買掛区分, 買掛日, 発注番号, 発注番号枝番, 客先番号, 仕入先コード, 仕入先名, 買掛金額計, 支払金額計, 買掛残高, 備考１, 備考２, 支払完了日, 取消日, 取消区分, 登録日, 更新者, 締処理日)"
             Sql += " VALUES('"
-            Sql += frmC01F10_Login.loginValue.BumonNM
+            Sql += frmC01F10_Login.loginValue.BumonCD
             Sql += "', '"
             Sql += dsKikehd.Tables(RS).Rows(i)("買掛番号").ToString
             Sql += "', '"
@@ -3800,7 +3800,7 @@ Public Class ClosingLog
         Sql += "会社コード"
         Sql += " ILIKE  "
         Sql += "'"
-        Sql += frmC01F10_Login.loginValue.BumonNM
+        Sql += frmC01F10_Login.loginValue.BumonCD
         Sql += "'"
         Sql += " AND "
         Sql += "入庫日"
@@ -3827,7 +3827,7 @@ Public Class ClosingLog
             Sql += "t58_krnyukohd("
             Sql += "会社コード, 入庫番号, 客先番号, 発注番号, 発注番号枝番, 仕入先コード, 仕入先名, 仕入先郵便番号, 仕入先住所, 仕入先電話番号, 仕入先ＦＡＸ, 仕入先担当者役職, 仕入先担当者名, 支払条件, 仕入金額, 粗利額, ＶＡＴ, ＰＰＨ, 営業担当者, 入力担当者, 備考, 入庫日, 登録日, 更新日, 更新者, 取消日, 取消区分, 締処理日)"
             Sql += " VALUES('"
-            Sql += frmC01F10_Login.loginValue.BumonNM
+            Sql += frmC01F10_Login.loginValue.BumonCD
             Sql += "', '"
             Sql += dsNyukohd.Tables(RS).Rows(i)("入庫番号").ToString
             Sql += "', '"
@@ -3986,7 +3986,7 @@ Public Class ClosingLog
                 Sql += "t59_krnyukodt("
                 Sql += "会社コード, 入庫番号, 発注番号, 発注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 仕入先名, 仕入値, 入庫数量, 単位, 備考, 更新者, 更新日)"
                 Sql += " VALUES('"
-                Sql += frmC01F10_Login.loginValue.BumonNM
+                Sql += frmC01F10_Login.loginValue.BumonCD
                 Sql += "', '"
                 Sql += dsNyukodt.Tables(RS).Rows(x)("入庫番号").ToString
                 Sql += "', '"
@@ -4068,7 +4068,7 @@ Public Class ClosingLog
         Sql += "会社コード"
         Sql += " ILIKE  "
         Sql += "'"
-        Sql += frmC01F10_Login.loginValue.BumonNM
+        Sql += frmC01F10_Login.loginValue.BumonCD
         Sql += "'"
         Sql += " AND "
         Sql += "出庫日"
@@ -4095,7 +4095,7 @@ Public Class ClosingLog
             Sql += "t60_krshukohd("
             Sql += "会社コード, 出庫番号, 客先番号, 見積番号, 見積番号枝番, 受注番号, 受注番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 営業担当者, 入力担当者, 備考, 出庫日, 登録日, 更新日, 更新者, 取消日, 取消区分, 締処理日)"
             Sql += " VALUES('"
-            Sql += frmC01F10_Login.loginValue.BumonNM
+            Sql += frmC01F10_Login.loginValue.BumonCD
             Sql += "', '"
             Sql += dsShukohd.Tables(RS).Rows(i)("出庫番号").ToString
             Sql += "', '"
@@ -4234,7 +4234,7 @@ Public Class ClosingLog
                 Sql += "t61_krshukodt("
                 Sql += "会社コード, 出庫番号, 受注番号, 受注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 仕入先名, 出庫数量, 単位, 売単価, 備考, 更新者, 更新日)"
                 Sql += " VALUES('"
-                Sql += frmC01F10_Login.loginValue.BumonNM
+                Sql += frmC01F10_Login.loginValue.BumonCD
                 Sql += "', '"
                 Sql += dsShukodt.Tables(RS).Rows(x)("出庫番号").ToString
                 Sql += "', '"
@@ -4315,7 +4315,7 @@ Public Class ClosingLog
         Sql += "会社コード"
         Sql += " ILIKE  "
         Sql += "'"
-        Sql += frmC01F10_Login.loginValue.BumonNM
+        Sql += frmC01F10_Login.loginValue.BumonCD
         Sql += "'"
         Sql += " AND "
         Sql += "支払日"
@@ -4342,7 +4342,7 @@ Public Class ClosingLog
             Sql += "t64_krshrihd("
             Sql += "会社コード, 支払番号, 客先番号, 支払先コード, 支払先名, 支払先, 買掛金額, 支払金額計, 買掛残高, 備考, 支払日, 登録日, 更新日, 更新者, 取消日, 取消区分, 締処理日)"
             Sql += " VALUES('"
-            Sql += frmC01F10_Login.loginValue.BumonNM
+            Sql += frmC01F10_Login.loginValue.BumonCD
             Sql += "', '"
             Sql += dsShrihd.Tables(RS).Rows(i)("支払番号").ToString
             Sql += "', '"
@@ -4449,7 +4449,7 @@ Public Class ClosingLog
                 Sql += "t65_krshridt("
                 Sql += "会社コード, 支払番号, 行番号, 支払種別, 支払種別名, 支払先コード, 支払先名, 支払先, 支払金額, 備考, 支払日, 更新者, 更新日)"
                 Sql += " VALUES('"
-                Sql += frmC01F10_Login.loginValue.BumonNM
+                Sql += frmC01F10_Login.loginValue.BumonCD
                 Sql += "', '"
                 Sql += dsShridt.Tables(RS).Rows(x)("支払番号").ToString
                 Sql += "', '"
@@ -4518,7 +4518,7 @@ Public Class ClosingLog
         Sql += "会社コード"
         Sql += " ILIKE  "
         Sql += "'"
-        Sql += frmC01F10_Login.loginValue.BumonNM
+        Sql += frmC01F10_Login.loginValue.BumonCD
         Sql += "'"
         Sql += " AND "
         Sql += "入金日"
@@ -4545,7 +4545,7 @@ Public Class ClosingLog
             Sql += "t62_krnkinhd("
             Sql += "会社コード, 入金番号, 客先番号, 請求先コード, 請求先名, 振込先, 請求金額, 入金額計, 請求残高, 備考, 入金日, 登録日, 更新日, 更新者, 取消日, 取消区分, 締処理日)"
             Sql += " VALUES('"
-            Sql += frmC01F10_Login.loginValue.BumonNM
+            Sql += frmC01F10_Login.loginValue.BumonCD
             Sql += "', '"
             Sql += dsNkinhd.Tables(RS).Rows(i)("入金番号").ToString
             Sql += "', '"
@@ -4652,7 +4652,7 @@ Public Class ClosingLog
                 Sql += "t63_krnkindt("
                 Sql += "会社コード, 入金番号, 行番号, 入金種別, 入金種別名, 請求先コード, 請求先名, 振込先, 入金額, 備考, 入金日, 更新者, 更新日)"
                 Sql += " VALUES('"
-                Sql += frmC01F10_Login.loginValue.BumonNM
+                Sql += frmC01F10_Login.loginValue.BumonCD
                 Sql += "', '"
                 Sql += dsNkindt.Tables(RS).Rows(x)("入金番号").ToString
                 Sql += "', '"
@@ -4721,7 +4721,7 @@ Public Class ClosingLog
         Sql += "会社コード"
         Sql += " ILIKE  "
         Sql += "'"
-        Sql += frmC01F10_Login.loginValue.BumonNM
+        Sql += frmC01F10_Login.loginValue.BumonCD
         Sql += "'"
         Sql += " AND "
         Sql += "締処理日"
@@ -4744,7 +4744,7 @@ Public Class ClosingLog
         Sql += "会社コード"
         Sql += " ILIKE  "
         Sql += "'"
-        Sql += frmC01F10_Login.loginValue.BumonNM
+        Sql += frmC01F10_Login.loginValue.BumonCD
         Sql += "'"
         Sql += " AND "
         Sql += "締処理日"
@@ -4767,7 +4767,7 @@ Public Class ClosingLog
         Sql += "会社コード"
         Sql += " ILIKE  "
         Sql += "'"
-        Sql += frmC01F10_Login.loginValue.BumonNM
+        Sql += frmC01F10_Login.loginValue.BumonCD
         Sql += "'"
         Sql += " AND "
         Sql += "締処理日"
@@ -4790,7 +4790,7 @@ Public Class ClosingLog
         Sql += "会社コード"
         Sql += " ILIKE  "
         Sql += "'"
-        Sql += frmC01F10_Login.loginValue.BumonNM
+        Sql += frmC01F10_Login.loginValue.BumonCD
         Sql += "'"
         Sql += " AND "
         Sql += "締処理日"
@@ -4813,7 +4813,7 @@ Public Class ClosingLog
         Sql += "会社コード"
         Sql += " ILIKE  "
         Sql += "'"
-        Sql += frmC01F10_Login.loginValue.BumonNM
+        Sql += frmC01F10_Login.loginValue.BumonCD
         Sql += "'"
         Sql += " AND "
         Sql += "締処理日"
@@ -4836,7 +4836,7 @@ Public Class ClosingLog
         Sql += "会社コード"
         Sql += " ILIKE  "
         Sql += "'"
-        Sql += frmC01F10_Login.loginValue.BumonNM
+        Sql += frmC01F10_Login.loginValue.BumonCD
         Sql += "'"
         Sql += " AND "
         Sql += "締処理日"
@@ -4859,7 +4859,7 @@ Public Class ClosingLog
         Sql += "会社コード"
         Sql += " ILIKE  "
         Sql += "'"
-        Sql += frmC01F10_Login.loginValue.BumonNM
+        Sql += frmC01F10_Login.loginValue.BumonCD
         Sql += "'"
         Sql += " AND "
         Sql += "締処理日"
@@ -4882,7 +4882,7 @@ Public Class ClosingLog
         Sql += "会社コード"
         Sql += " ILIKE  "
         Sql += "'"
-        Sql += frmC01F10_Login.loginValue.BumonNM
+        Sql += frmC01F10_Login.loginValue.BumonCD
         Sql += "'"
         Sql += " AND "
         Sql += "締処理日"
@@ -4905,7 +4905,7 @@ Public Class ClosingLog
         Sql += "会社コード"
         Sql += " ILIKE  "
         Sql += "'"
-        Sql += frmC01F10_Login.loginValue.BumonNM
+        Sql += frmC01F10_Login.loginValue.BumonCD
         Sql += "'"
         Sql += " AND "
         Sql += "仕分日"
@@ -4949,7 +4949,7 @@ Public Class ClosingLog
             Sql += "会社コード"
             Sql += " ILIKE  "
             Sql += "'"
-            Sql += frmC01F10_Login.loginValue.BumonNM
+            Sql += frmC01F10_Login.loginValue.BumonCD
             Sql += "'"
             Sql += " AND "
             Sql += ColName
@@ -5095,7 +5095,7 @@ Public Class ClosingLog
         Sql += "会社コード"
         Sql += " ILIKE  "
         Sql += "'"
-        Sql += frmC01F10_Login.loginValue.BumonNM
+        Sql += frmC01F10_Login.loginValue.BumonCD
         Sql += "'"
         Dim dsCompany As DataSet = _db.selectDB(Sql, RS, reccnt)
 
@@ -5111,7 +5111,7 @@ Public Class ClosingLog
         Sql += "会社コード"
         Sql += " ILIKE  "
         Sql += "'"
-        Sql += frmC01F10_Login.loginValue.BumonNM
+        Sql += frmC01F10_Login.loginValue.BumonCD
         Sql += "'"
         Sql += " AND "
         Sql += "入金日"
@@ -5143,7 +5143,7 @@ Public Class ClosingLog
             Sql += "会社コード"
             Sql += " ILIKE  "
             Sql += "'"
-            Sql += frmC01F10_Login.loginValue.BumonNM
+            Sql += frmC01F10_Login.loginValue.BumonCD
             Sql += "'"
             Sql += " AND "
             Sql += "請求番号"
@@ -5164,7 +5164,7 @@ Public Class ClosingLog
                 Sql += "会社コード"
                 Sql += " ILIKE  "
                 Sql += "'"
-                Sql += frmC01F10_Login.loginValue.BumonNM
+                Sql += frmC01F10_Login.loginValue.BumonCD
                 Sql += "'"
                 Sql += " AND "
                 Sql += "受注番号"
@@ -5179,7 +5179,7 @@ Public Class ClosingLog
                 Sql += "t66_swkhd("
                 Sql += "会社コード, 見積番号, 受注番号, 客先番号, 取引先名, 仕分日, 借方勘定科目, 借方勘定科目金額, 貸方勘定科目, 貸方勘定科目金額)"
                 Sql += " VALUES('"
-                Sql += frmC01F10_Login.loginValue.BumonNM
+                Sql += frmC01F10_Login.loginValue.BumonCD
                 Sql += "', '"
                 Sql += dsNkinCymn.Tables(RS).Rows(0)("見積番号").ToString
                 Sql += "', '"
@@ -5227,7 +5227,7 @@ Public Class ClosingLog
                 Sql += "t66_swkhd("
                 Sql += "会社コード, 見積番号, 受注番号, 客先番号, 取引先名, 仕分日, 借方勘定科目, 借方勘定科目金額, 貸方勘定科目, 貸方勘定科目金額)"
                 Sql += " VALUES('"
-                Sql += frmC01F10_Login.loginValue.BumonNM
+                Sql += frmC01F10_Login.loginValue.BumonCD
                 Sql += "', '"
                 Sql += dsNkinCymn.Tables(RS).Rows(0)("見積番号").ToString
                 Sql += "', '"
@@ -5280,7 +5280,7 @@ Public Class ClosingLog
                 Sql += "会社コード"
                 Sql += " ILIKE  "
                 Sql += "'"
-                Sql += frmC01F10_Login.loginValue.BumonNM
+                Sql += frmC01F10_Login.loginValue.BumonCD
                 Sql += "'"
                 Sql += " AND "
                 Sql += "受注番号"
@@ -5295,7 +5295,7 @@ Public Class ClosingLog
                 Sql += "t66_swkhd("
                 Sql += "会社コード, 見積番号, 受注番号, 客先番号, 取引先名, 仕分日, 借方勘定科目, 借方勘定科目金額, 貸方勘定科目, 貸方勘定科目金額)"
                 Sql += " VALUES('"
-                Sql += frmC01F10_Login.loginValue.BumonNM
+                Sql += frmC01F10_Login.loginValue.BumonCD
                 Sql += "', '"
                 Sql += dsNkinCymn.Tables(RS).Rows(0)("見積番号").ToString
                 Sql += "', '"
@@ -5353,7 +5353,7 @@ Public Class ClosingLog
         Sql += "会社コード"
         Sql += " ILIKE  "
         Sql += "'"
-        Sql += frmC01F10_Login.loginValue.BumonNM
+        Sql += frmC01F10_Login.loginValue.BumonCD
         Sql += "'"
         Sql += " AND "
         Sql += "売上日"
@@ -5380,7 +5380,7 @@ Public Class ClosingLog
             Sql += "t66_swkhd("
             Sql += "会社コード, 見積番号, 受注番号, 客先番号, 取引先名, 仕分日, 借方勘定科目, 借方勘定科目金額, 貸方勘定科目, 貸方勘定科目金額)"
             Sql += " VALUES('"
-            Sql += frmC01F10_Login.loginValue.BumonNM
+            Sql += frmC01F10_Login.loginValue.BumonCD
             Sql += "', '"
             Sql += dsSwkUrighd.Tables(RS).Rows(i)("見積番号").ToString
             Sql += "', '"
@@ -5430,7 +5430,7 @@ Public Class ClosingLog
             Sql += "t66_swkhd("
             Sql += "会社コード, 見積番号, 受注番号, 客先番号, 取引先名, 仕分日, 借方勘定科目, 借方勘定科目金額, 貸方勘定科目, 貸方勘定科目金額)"
             Sql += " VALUES('"
-            Sql += frmC01F10_Login.loginValue.BumonNM
+            Sql += frmC01F10_Login.loginValue.BumonCD
             Sql += "', '"
             Sql += dsSwkUrighd.Tables(RS).Rows(i)("見積番号").ToString
             Sql += "', '"
@@ -5486,7 +5486,7 @@ Public Class ClosingLog
         Sql += "会社コード"
         Sql += " ILIKE  "
         Sql += "'"
-        Sql += frmC01F10_Login.loginValue.BumonNM
+        Sql += frmC01F10_Login.loginValue.BumonCD
         Sql += "'"
         Sql += " AND "
         Sql += "支払日"
@@ -5518,7 +5518,7 @@ Public Class ClosingLog
             Sql += "会社コード"
             Sql += " ILIKE  "
             Sql += "'"
-            Sql += frmC01F10_Login.loginValue.BumonNM
+            Sql += frmC01F10_Login.loginValue.BumonCD
             Sql += "'"
             Sql += " AND "
             Sql += "買掛番号"
@@ -5540,7 +5540,7 @@ Public Class ClosingLog
                 Sql += "会社コード"
                 Sql += " ILIKE  "
                 Sql += "'"
-                Sql += frmC01F10_Login.loginValue.BumonNM
+                Sql += frmC01F10_Login.loginValue.BumonCD
                 Sql += "'"
                 Sql += " AND "
                 Sql += "発注番号"
@@ -5556,7 +5556,7 @@ Public Class ClosingLog
                 Sql += "t66_swkhd("
                 Sql += "会社コード, 見積番号, 受注番号, 客先番号, 取引先名, 仕分日, 借方勘定科目, 借方勘定科目金額, 貸方勘定科目, 貸方勘定科目金額)"
                 Sql += " VALUES('"
-                Sql += frmC01F10_Login.loginValue.BumonNM
+                Sql += frmC01F10_Login.loginValue.BumonCD
                 Sql += "', '"
                 Sql += dsShriHattyu.Tables(RS).Rows(0)("見積番号").ToString
                 Sql += "', '"
@@ -5604,7 +5604,7 @@ Public Class ClosingLog
                 Sql += "t66_swkhd("
                 Sql += "会社コード, 見積番号, 受注番号, 客先番号, 取引先名, 仕分日, 借方勘定科目, 借方勘定科目金額, 貸方勘定科目, 貸方勘定科目金額)"
                 Sql += " VALUES('"
-                Sql += frmC01F10_Login.loginValue.BumonNM
+                Sql += frmC01F10_Login.loginValue.BumonCD
                 Sql += "', '"
                 Sql += dsShriHattyu.Tables(RS).Rows(0)("見積番号").ToString
                 Sql += "', '"
@@ -5657,7 +5657,7 @@ Public Class ClosingLog
                 Sql += "会社コード"
                 Sql += " ILIKE  "
                 Sql += "'"
-                Sql += frmC01F10_Login.loginValue.BumonNM
+                Sql += frmC01F10_Login.loginValue.BumonCD
                 Sql += "'"
                 Sql += " AND "
                 Sql += "発注番号"
@@ -5673,7 +5673,7 @@ Public Class ClosingLog
                 Sql += "t66_swkhd("
                 Sql += "会社コード, 見積番号, 受注番号, 客先番号, 取引先名, 仕分日, 借方勘定科目, 借方勘定科目金額, 貸方勘定科目, 貸方勘定科目金額)"
                 Sql += " VALUES('"
-                Sql += frmC01F10_Login.loginValue.BumonNM
+                Sql += frmC01F10_Login.loginValue.BumonCD
                 Sql += "', '"
                 Sql += dsShriHattyu.Tables(RS).Rows(0)("見積番号").ToString
                 Sql += "', '"
@@ -5731,7 +5731,7 @@ Public Class ClosingLog
         Sql += "会社コード"
         Sql += " ILIKE  "
         Sql += "'"
-        Sql += frmC01F10_Login.loginValue.BumonNM
+        Sql += frmC01F10_Login.loginValue.BumonCD
         Sql += "'"
         Sql += " AND "
         Sql += "仕入日"
@@ -5763,7 +5763,7 @@ Public Class ClosingLog
             Sql += "会社コード"
             Sql += " ILIKE  "
             Sql += "'"
-            Sql += frmC01F10_Login.loginValue.BumonNM
+            Sql += frmC01F10_Login.loginValue.BumonCD
             Sql += "'"
             Sql += " AND "
             Sql += "発注番号"
@@ -5785,7 +5785,7 @@ Public Class ClosingLog
             Sql += "会社コード"
             Sql += " ILIKE  "
             Sql += "'"
-            Sql += frmC01F10_Login.loginValue.BumonNM
+            Sql += frmC01F10_Login.loginValue.BumonCD
             Sql += "'"
             Sql += " AND "
             Sql += "発注番号"
@@ -5803,7 +5803,7 @@ Public Class ClosingLog
                 Sql += "t66_swkhd("
                 Sql += "会社コード, 見積番号, 受注番号, 客先番号, 取引先名, 仕分日, 借方勘定科目, 借方勘定科目金額, 貸方勘定科目, 貸方勘定科目金額)"
                 Sql += " VALUES('"
-                Sql += frmC01F10_Login.loginValue.BumonNM
+                Sql += frmC01F10_Login.loginValue.BumonCD
                 Sql += "', '"
                 Sql += dsSwkHattyu.Tables(RS).Rows(0)("見積番号").ToString
                 Sql += "', '"
@@ -5851,7 +5851,7 @@ Public Class ClosingLog
                 Sql += "t66_swkhd("
                 Sql += "会社コード, 見積番号, 受注番号, 客先番号, 取引先名, 仕分日, 借方勘定科目, 借方勘定科目金額, 貸方勘定科目, 貸方勘定科目金額)"
                 Sql += " VALUES('"
-                Sql += frmC01F10_Login.loginValue.BumonNM
+                Sql += frmC01F10_Login.loginValue.BumonCD
                 Sql += "', '"
                 Sql += dsSwkHattyu.Tables(RS).Rows(0)("見積番号").ToString
                 Sql += "', '"
@@ -5902,7 +5902,7 @@ Public Class ClosingLog
             Sql += "t66_swkhd("
             Sql += "会社コード, 見積番号, 受注番号, 客先番号, 取引先名, 仕分日, 借方勘定科目, 借方勘定科目金額, 貸方勘定科目, 貸方勘定科目金額)"
             Sql += " VALUES('"
-            Sql += frmC01F10_Login.loginValue.BumonNM
+            Sql += frmC01F10_Login.loginValue.BumonCD
             Sql += "', '"
             Sql += dsSwkHattyu.Tables(RS).Rows(0)("見積番号").ToString
             Sql += "', '"
@@ -5959,7 +5959,7 @@ Public Class ClosingLog
         Sql += "会社コード"
         Sql += " ILIKE  "
         Sql += "'"
-        Sql += frmC01F10_Login.loginValue.BumonNM
+        Sql += frmC01F10_Login.loginValue.BumonCD
         Sql += "'"
         Sql += " AND "
         Sql += "仕分日"

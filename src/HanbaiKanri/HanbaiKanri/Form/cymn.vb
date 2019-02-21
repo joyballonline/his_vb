@@ -833,7 +833,7 @@ Public Class Cymn
                         Sql4 += "INSERT INTO "
                         Sql4 += "Public."
                         Sql4 += "t21_hattyu("
-                        Sql4 += "会社コード, 発注番号, 発注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 単位, 仕入先名, 仕入値, 発注数量, 仕入数量, 発注残数, 仕入単価, 仕入金額, 間接費, リードタイム, リードタイム単位, 入庫数, 未入庫数, 備考, 更新者, 登録日)"
+                        Sql4 += "会社コード, 発注番号, 発注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 単位, 仕入先名, 仕入値, 発注数量, 仕入数量, 発注残数, 仕入単価, 仕入金額, 間接費, リードタイム, リードタイム単位, 入庫数, 未入庫数, 備考, 更新者, 登録日, 更新日)"
                         Sql4 += " VALUES('"
                         Sql4 += CompanyCode
                         Sql4 += "', '"
@@ -883,6 +883,8 @@ Public Class Cymn
                         Sql4 += DgvItemList.Rows(hattyuIdx).Cells("備考").Value.ToString
                         Sql4 += "', '"
                         Sql4 += "zenbi01"
+                        Sql4 += "', '"
+                        Sql4 += dtNow
                         Sql4 += "', '"
                         Sql4 += dtNow
                         Sql4 += " ')"

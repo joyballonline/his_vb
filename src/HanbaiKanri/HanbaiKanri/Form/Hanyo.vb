@@ -97,7 +97,7 @@ Public Class Hanyo
                 Sql += "m90_hanyo("
                 Sql += "会社コード, 固定キー, 可変キー, 表示順, 文字１, 文字２, 文字３, 文字４, 文字５, 文字６, 数値１, 数値２, 数値３, 数値４, 数値５, 数値６, メモ, 更新者, 更新日)"
                 Sql += " VALUES('"
-                Sql += frmC01F10_Login.loginValue.BumonNM
+                Sql += frmC01F10_Login.loginValue.BumonCD
                 Sql += "', '"
                 Sql += TxtFixedKey.Text
                 Sql += "', '"
@@ -214,7 +214,7 @@ Public Class Hanyo
                 Sql += "SET "
                 Sql += " 会社コード"
                 Sql += " = '"
-                Sql += frmC01F10_Login.loginValue.BumonNM
+                Sql += frmC01F10_Login.loginValue.BumonCD
                 Sql += "', "
                 Sql += "固定キー"
                 Sql += " = '"

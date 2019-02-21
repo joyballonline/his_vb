@@ -103,7 +103,7 @@ Public Class Customer
                 Sql += "m10_customer("
                 Sql += "会社コード, 得意先コード, 得意先名, 得意先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 担当者役職, 既定支払条件, メモ, 会計用得意先コード, 更新者, 更新日)"
                 Sql += " VALUES('"
-                Sql += frmC01F10_Login.loginValue.BumonNM
+                Sql += frmC01F10_Login.loginValue.BumonCD
                 Sql += "', '"
                 Sql += TxtCustomerCode.Text
                 Sql += "', '"

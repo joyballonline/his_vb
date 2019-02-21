@@ -85,7 +85,7 @@ Public Class Language
                 Sql += "m05_language("
                 Sql += "会社コード, 言語コード, 言語名称, 言語略称, 備考, 無効フラグ, 更新者, 更新日)"
                 Sql += "VALUES('"
-                Sql += frmC01F10_Login.loginValue.BumonNM
+                Sql += frmC01F10_Login.loginValue.BumonCD
                 Sql += "', '"
                 Sql += TxtLanguage.Text
                 Sql += "', '"

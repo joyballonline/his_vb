@@ -988,7 +988,7 @@ Public Class Shiwake
         Sql += " WHERE "
         Sql += "会社コード"
         Sql += " ILIKE  "
-        Sql += "'" & frmC01F10_Login.loginValue.BumonNM & "'"
+        Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql += txtParam
         Console.WriteLine(Sql)
         Return _db.selectDB(Sql, RS, reccnt)
@@ -1020,7 +1020,7 @@ Public Class Shiwake
         Sql += ",""DESCRIPTION"""
         Sql += ") "
         Sql += " VALUES("
-        Sql += "'" & frmC01F10_Login.loginValue.BumonNM & "'"
+        Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql += param
         Sql += ") "
         'Console.WriteLine(Sql)
@@ -1085,7 +1085,7 @@ Public Class Shiwake
         Sql += " WHERE "
         Sql += "会社コード"
         Sql += " ILIKE "
-        Sql += "'" & frmC01F10_Login.loginValue.BumonNM & "'"
+        Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql += " AND "
         Sql += "勘定科目コード"
         Sql += " ILIKE "

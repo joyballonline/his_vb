@@ -87,7 +87,7 @@ Public Class Account
                 Sql += "m92_kanjo("
                 Sql += "会社コード, 勘定科目コード, 勘定科目名称１, 勘定科目名称２, 勘定科目名称３, 会計用勘定科目コード, 備考, 有効区分, 更新者, 更新日)"
                 Sql += " VALUES('"
-                Sql += frmC01F10_Login.loginValue.BumonNM
+                Sql += frmC01F10_Login.loginValue.BumonCD
                 Sql += "', '"
                 Sql += TxtAccountCode.Text
                 Sql += "', '"
@@ -283,7 +283,7 @@ Public Class Account
         Sql += " WHERE "
         Sql += "会社コード"
         Sql += " ILIKE  "
-        Sql += "'" & frmC01F10_Login.loginValue.BumonNM & "'"
+        Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql += txtParam
         Return _db.selectDB(Sql, RS, reccnt)
     End Function

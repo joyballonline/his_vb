@@ -324,7 +324,7 @@ Public Class PaidList
             Sql += "WHERE"
             Sql += " 会社コード"
             Sql += "='"
-            Sql += frmC01F10_Login.loginValue.BumonNM
+            Sql += frmC01F10_Login.loginValue.BumonCD
             Sql += "'"
             Sql += " AND"
             Sql += " 支払番号"
@@ -392,7 +392,7 @@ Public Class PaidList
             Sql += "WHERE"
             Sql += " 会社コード"
             Sql += "='"
-            Sql += frmC01F10_Login.loginValue.BumonNM
+            Sql += frmC01F10_Login.loginValue.BumonCD
             Sql += "'"
             Sql += " AND"
             Sql += " 支払番号"
@@ -427,7 +427,7 @@ Public Class PaidList
             Sql += "WHERE"
             Sql += " 会社コード"
             Sql += "='"
-            Sql += frmC01F10_Login.loginValue.BumonNM
+            Sql += frmC01F10_Login.loginValue.BumonCD
             Sql += "'"
             Sql += " AND"
             Sql += " 買掛番号"
@@ -533,7 +533,7 @@ Public Class PaidList
         Sql += " WHERE "
         Sql += "会社コード"
         Sql += " ILIKE  "
-        Sql += "'" & frmC01F10_Login.loginValue.BumonNM & "'"
+        Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql += txtParam
 
         Return _db.selectDB(Sql, RS, reccnt)
