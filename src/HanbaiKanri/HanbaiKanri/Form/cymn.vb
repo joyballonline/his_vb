@@ -607,8 +607,8 @@ Public Class Cymn
                 Sql += ", null"     '取消日
                 Sql += ", null"     '取消区分
                 Sql += ", current_date"     '出庫日
-                Sql += ", current_timestamp"    '登録日
-                Sql += ", current_date"     '更新日
+                Sql += ", '" & dtNow & "'"                 '登録日
+                Sql += ", '" & dtNow & "'"                 '更新日
                 Sql += ", '" & frmC01F10_Login.loginValue.TantoNM & "'"     '更新者
                 Sql += " )"
 
@@ -635,7 +635,7 @@ Public Class Cymn
                     Sql += ", '" & DgvItemList.Rows(index).Cells("単位").Value.ToString & "'"         '単位
                     Sql += ", '" & DgvItemList.Rows(index).Cells("備考").Value.ToString & "'"         '備考
                     Sql += ", '" & frmC01F10_Login.loginValue.TantoNM & "'"                           '更新者
-                    Sql += ", current_timestamp"                '更新日
+                    Sql += ", '" & dtNow & "'"                 '更新日
                     Sql += ", '1')"
 
                     _db.executeDB(Sql)
@@ -654,7 +654,7 @@ Public Class Cymn
                 Sql += "UPDATE Public.m80_saiban "
                 Sql += "SET  最新値 = '" & LSNo.ToString & "'"
                 Sql += ", 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
-                Sql += ", 更新日 = current_timestamp "
+                Sql += ", 更新日 = '" & dtNow & "'"
                 Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
                 Sql += " AND 採番キー ='70' "
 
@@ -897,7 +897,7 @@ Public Class Cymn
             Saiban4 += "UPDATE Public.m80_saiban "
             Saiban4 += "SET  最新値 = '" & PurchaseCount.ToString & "'"
             Saiban4 += ", 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
-            Saiban4 += ", 更新日 = current_timestamp "
+            Saiban4 += ", 更新日 ='" & dtNow & "'"
             Saiban4 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
             Saiban4 += " AND 採番キー ='30' "
             _db.executeDB(Saiban4)
@@ -907,7 +907,7 @@ Public Class Cymn
             Sql += "UPDATE Public.t01_mithd "
             Sql += "SET  受注日 = '" & DtpOrderDate.Value & "'"
             Sql += ", 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
-            Sql += ", 更新日 = current_timestamp "
+            Sql += ", 更新日 = '" & dtNow & "'"
             Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
             Sql += " AND 見積番号 = '" & QuoteNo.ToString & "'"
             Sql += " AND 見積番号枝番 = '" & QuoteSuffix.ToString & "'"
