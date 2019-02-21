@@ -152,13 +152,13 @@ Public Class frmC01F20_ChangePasswd
             '・検索キー：　IF)会社コード、IF)ユーザID、画面)パスワード
             '   IF)世代番号 - 10 よりも大（過去10世代と重複しない）
             Dim sql As String = ""
-            sql = sql & N & "SELECT count(*) as 件数"
-            sql = sql & N & " FROM m03_pswd "
-            sql = sql & N & " WHERE "
-            sql = sql & N & "    会社コード = '" & _db.rmSQ(frmC01F10_Login.loginValue.BumonCD) & "'"
-            sql = sql & N & "   and ユーザＩＤ = '" & _db.rmSQ(frmC01F10_Login.loginValue.TantoCD) & "'"
-            sql = sql & N & "   and パスワード = '" & _db.rmSQ(txtPasswd.Text) & "'"
-            sql = sql & N & "   and 世代番号 > " & _db.rmSQ(frmC01F10_Login.loginValue.Generation) - 10
+            sql = sql & "SELECT count(*) as 件数"
+            sql = sql & " FROM m03_pswd "
+            sql = sql & " WHERE "
+            sql = sql & "    会社コード = '" & _db.rmSQ(frmC01F10_Login.loginValue.BumonCD) & "'"
+            sql = sql & "   and ユーザＩＤ = '" & _db.rmSQ(frmC01F10_Login.loginValue.TantoCD) & "'"
+            sql = sql & "   and パスワード = '" & _db.rmSQ(txtPasswd.Text) & "'"
+            sql = sql & "   and 世代番号 > " & _db.rmSQ(frmC01F10_Login.loginValue.Generation) - 10
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(sql, RS, reccnt)
 
@@ -170,27 +170,6 @@ Public Class frmC01F20_ChangePasswd
                 txtPasswd.Focus()
                 Exit Sub
             End If
-            '②　該当するレコードが存在しない場合
-            '→　以降の処理を行う
-            '3)	パスワードマスタ更新
-            '下記要領にしたがって、パスワードマスタにレコードを更新する。（1件）											
-            '・対象条件											
-            '　　　画面)会社コード、画面)ユーザID、適用開始日≦システム日付≦適用終了日											
-            '・更新要領											
-            '	①　適用終了日		システム日付の前日	
-            '	②　更新者		IF)ユーザID	
-            '	③　更新日		システム日時	
-            'sql = ""
-            'sql = sql & N & "UPDATE m03_pswd SET "
-            'sql = sql & N & "    適用終了日 = current_date -1 "                      '適用終了日
-            'sql = sql & N & "  , 更新者 = '" & _db.rmSQ(lblTanto.Text) & "'"         '更新者
-            'sql = sql & N & "  , 更新日 = current_date "                             '更新日
-            'sql = sql & N & " WHERE "
-            'sql = sql & N & "    会社コード = '" & _db.rmSQ(frmC01F10_Login.loginValue.BumonCD) & "'"
-            'sql = sql & N & "   and ユーザＩＤ = '" & _db.rmSQ(frmC01F10_Login.loginValue.TantoCD) & "'"
-            'sql = sql & N & "   and 適用開始日 <= current_date "
-            'sql = sql & N & "   and 適用終了日 >= current_date "
-            '_db.executeDB(sql)
 
             Dim currentdateCnt As Integer = 0
 
@@ -198,12 +177,12 @@ Public Class frmC01F20_ChangePasswd
             'sql編集
             sql = ""
             sql = "SELECT count(*) 件数"
-            sql = sql & N & " FROM"
-            sql = sql & N & " m03_pswd"
-            sql = sql & N & " WHERE"
-            sql = sql & N & "       会社コード = '" & _db.rmSQ(frmC01F10_Login.loginValue.BumonCD) & "'"
-            sql = sql & N & "   AND ユーザＩＤ = '" & _db.rmSQ(frmC01F10_Login.loginValue.TantoCD) & "'"
-            sql = sql & N & "   AND 適用開始日 = current_date "
+            sql = sql & " FROM"
+            sql = sql & " m03_pswd"
+            sql = sql & " WHERE"
+            sql = sql & "       会社コード = '" & _db.rmSQ(frmC01F10_Login.loginValue.BumonCD) & "'"
+            sql = sql & "   AND ユーザＩＤ = '" & _db.rmSQ(frmC01F10_Login.loginValue.TantoCD) & "'"
+            sql = sql & "   AND 適用開始日 = current_date "
 
             Dim iRecCnt As Integer = 0
             'sql発行
@@ -216,15 +195,15 @@ Public Class frmC01F20_ChangePasswd
                 '適用終了日を（システム日付-1）で更新
                 sql = ""
                 sql = "UPDATE m03_pswd"
-                sql = sql & N & " SET"
-                sql = sql & N & "  適用終了日 = current_date - 1"                                      '適用終了日
-                sql = sql & N & " ,更新者 = '" & _db.rmSQ(lblTanto.Text) & "'"                         '更新者
-                sql = sql & N & " ,更新日 = current_timestamp"                                         '更新日
-                sql = sql & N & " WHERE 会社コード = '" & _db.rmSQ(frmC01F10_Login.loginValue.BumonCD) & "'"     '会社コード
-                sql = sql & N & "   AND ユーザＩＤ = '" & _db.rmSQ(frmC01F10_Login.loginValue.TantoCD) & "'"                      'ユーザＩＤ
-                sql = sql & N & "   AND 適用終了日 = (SELECT max(適用終了日) FROM m03_pswd "
-                sql = sql & N & "                     WHERE 会社コード = '" & _db.rmSQ(frmC01F10_Login.loginValue.BumonCD) & "'"     '会社コード
-                sql = sql & N & "                     AND ユーザＩＤ = '" & _db.rmSQ(frmC01F10_Login.loginValue.TantoCD) & "')"                      'ユーザＩＤ
+                sql = sql & " SET"
+                sql = sql & "  適用終了日 = current_date - 1"                                      '適用終了日
+                sql = sql & " ,更新者 = '" & _db.rmSQ(lblTanto.Text) & "'"                         '更新者
+                sql = sql & " ,更新日 = current_timestamp"                                         '更新日
+                sql = sql & " WHERE 会社コード = '" & _db.rmSQ(frmC01F10_Login.loginValue.BumonCD) & "'"     '会社コード
+                sql = sql & "   AND ユーザＩＤ = '" & _db.rmSQ(frmC01F10_Login.loginValue.TantoCD) & "'"                      'ユーザＩＤ
+                sql = sql & "   AND 適用終了日 = (SELECT max(適用終了日) FROM m03_pswd "
+                sql = sql & "                     WHERE 会社コード = '" & _db.rmSQ(frmC01F10_Login.loginValue.BumonCD) & "'"     '会社コード
+                sql = sql & "                     AND ユーザＩＤ = '" & _db.rmSQ(frmC01F10_Login.loginValue.TantoCD) & "')"                      'ユーザＩＤ
 
                 'sql発行
                 _db.executeDB(sql)
@@ -233,15 +212,15 @@ Public Class frmC01F20_ChangePasswd
                 '適用終了日をシステム日付で更新
                 sql = ""
                 sql = "UPDATE m03_pswd"
-                sql = sql & N & " SET"
-                sql = sql & N & "  適用終了日 = current_date"                                          '適用終了日
-                sql = sql & N & " ,更新者 = '" & _db.rmSQ(lblTanto.Text) & "'"           '更新者
-                sql = sql & N & " ,更新日 = current_timestamp"                                         '更新日
-                sql = sql & N & " WHERE 会社コード = '" & _db.rmSQ(frmC01F10_Login.loginValue.BumonCD) & "'"     '会社コード
-                sql = sql & N & "   AND ユーザＩＤ = '" & _db.rmSQ(frmC01F10_Login.loginValue.TantoCD) & "'"                      'ユーザＩＤ
-                sql = sql & N & "   AND 適用終了日 = (SELECT max(適用終了日) FROM m03_pswd "
-                sql = sql & N & "                     WHERE 会社コード = '" & _db.rmSQ(frmC01F10_Login.loginValue.BumonCD) & "'"     '会社コード
-                sql = sql & N & "                     AND ユーザＩＤ = '" & _db.rmSQ(frmC01F10_Login.loginValue.TantoCD) & "')"                      'ユーザＩＤ
+                sql = sql & " SET"
+                sql = sql & "  適用終了日 = current_date"                                          '適用終了日
+                sql = sql & " ,更新者 = '" & _db.rmSQ(lblTanto.Text) & "'"           '更新者
+                sql = sql & " ,更新日 = current_timestamp"                                         '更新日
+                sql = sql & " WHERE 会社コード = '" & _db.rmSQ(frmC01F10_Login.loginValue.BumonCD) & "'"     '会社コード
+                sql = sql & "   AND ユーザＩＤ = '" & _db.rmSQ(frmC01F10_Login.loginValue.TantoCD) & "'"                      'ユーザＩＤ
+                sql = sql & "   AND 適用終了日 = (SELECT max(適用終了日) FROM m03_pswd "
+                sql = sql & "                     WHERE 会社コード = '" & _db.rmSQ(frmC01F10_Login.loginValue.BumonCD) & "'"     '会社コード
+                sql = sql & "                     AND ユーザＩＤ = '" & _db.rmSQ(frmC01F10_Login.loginValue.TantoCD) & "')"                      'ユーザＩＤ
 
                 'sql発行
                 _db.executeDB(sql)
@@ -250,30 +229,29 @@ Public Class frmC01F20_ChangePasswd
 
             'レコード追加
             sql = ""
-            sql = sql & N & "INSERT INTO m03_pswd ( "
-            sql = sql & N & "    会社コード "
-            sql = sql & N & "  , ユーザＩＤ "
-            sql = sql & N & "  , 適用開始日 "
-            sql = sql & N & "  , 適用終了日 "
-            sql = sql & N & "  , パスワード "
-            sql = sql & N & "  , パスワード変更方法 "
-            sql = sql & N & "  , 世代番号 "
-            sql = sql & N & "  , 有効期限 "
-            sql = sql & N & "  , 更新者 "
-            sql = sql & N & "  , 更新日 "
-            sql = sql & N & ") VALUES ( "
-            sql = sql & N & "    '" & _db.rmSQ(frmC01F10_Login.loginValue.BumonCD) & "' "       '会社コード
-            sql = sql & N & "  , '" & _db.rmSQ(frmC01F10_Login.loginValue.TantoCD) & "' "       'ユーザＩＤ
-            sql = sql & N & "  , current_date "     '運用開始日
-            sql = sql & N & "  , '2099-12-31' "     '運用終了日
-            sql = sql & N & "  , '" & _db.rmSQ(txtPasswd.Text) & "' "       '新パスワード     ★暗号化予定★
-            sql = sql & N & "  , 1 "                'パスワード変更方法　固定値"1"（画面変更）
-            sql = sql & N & "  , " & _db.rmSQ(frmC01F10_Login.loginValue.Generation) + 1           '世代番号
-            sql = sql & N & "  , '2099-12-31' "     '有効期限
-            sql = sql & N & "  , '" & _db.rmSQ(lblTanto.Text) & "' "        '更新者
-            'sql = sql & N & "  , current_date "                                  '更新日
-            sql = sql & N & "  , current_timestamp "                                  '更新日
-            sql = sql & N & ") "
+            sql = sql & "INSERT INTO m03_pswd ( "
+            sql = sql & "    会社コード "
+            sql = sql & "  , ユーザＩＤ "
+            sql = sql & "  , 適用開始日 "
+            sql = sql & "  , 適用終了日 "
+            sql = sql & "  , パスワード "
+            sql = sql & "  , パスワード変更方法 "
+            sql = sql & "  , 世代番号 "
+            sql = sql & "  , 有効期限 "
+            sql = sql & "  , 更新者 "
+            sql = sql & "  , 更新日 "
+            sql = sql & ") VALUES ( "
+            sql = sql & "    '" & _db.rmSQ(frmC01F10_Login.loginValue.BumonCD) & "' "       '会社コード
+            sql = sql & "  , '" & _db.rmSQ(frmC01F10_Login.loginValue.TantoCD) & "' "       'ユーザＩＤ
+            sql = sql & "  , current_date "     '運用開始日
+            sql = sql & "  , '2099-12-31' "     '運用終了日
+            sql = sql & "  , '" & _db.rmSQ(txtPasswd.Text) & "' "       '新パスワード     ★暗号化予定★
+            sql = sql & "  , 1 "                'パスワード変更方法　固定値"1"（画面変更）
+            sql = sql & "  , " & _db.rmSQ(frmC01F10_Login.loginValue.Generation) + 1           '世代番号
+            sql = sql & "  , '2099-12-31' "     '有効期限
+            sql = sql & "  , '" & _db.rmSQ(lblTanto.Text) & "' "        '更新者
+            sql = sql & "  , current_timestamp "                                  '更新日
+            sql = sql & ") "
             _db.executeDB(sql)
 
             '更新完了メッセージ

@@ -179,14 +179,14 @@ Public Class frmC01F10_Login
                 '	・取得項目：　パスワード、世代番号
 
                 sql = ""
-                sql = sql & N & "SELECT "
-                sql = sql & N & "   パスワード "        'パスワード
-                sql = sql & N & "  , 世代番号 "         '世代番号
-                sql = sql & N & " FROM m03_pswd "
-                sql = sql & N & " where 適用開始日 <= current_date "
-                sql = sql & N & "   and 適用終了日 >= current_date "
-                sql = sql & N & "   and 会社コード = '" & _db.rmSQ(cmbCampany.SelectedValue) & "'"
-                sql = sql & N & "   and ユーザＩＤ = '" & _db.rmSQ(txtTanto.Text) & "'"
+                sql = sql & "SELECT "
+                sql = sql & "   パスワード "        'パスワード
+                sql = sql & "  , 世代番号 "         '世代番号
+                sql = sql & " FROM m03_pswd "
+                sql = sql & " where 適用開始日 <= current_date "
+                sql = sql & "   and 適用終了日 >= current_date "
+                sql = sql & "   and 会社コード = '" & _db.rmSQ(cmbCampany.SelectedValue) & "'"
+                sql = sql & "   and ユーザＩＤ = '" & _db.rmSQ(txtTanto.Text) & "'"
                 Dim reccnt2 As Integer = 0
                 Dim ds2 = _db.selectDB(sql, RS, reccnt2)
 

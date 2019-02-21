@@ -85,43 +85,43 @@ Public Class CommonLogic
                                   ByVal num1 As Object, ByVal num2 As Object, ByVal num3 As Object, ByVal num4 As Object, ByVal num5 As Object, ByVal userId As String)
 
         Dim sql As String = ""
-        sql = sql & N & "INSERT INTO l10_proclog ( "
-        sql = sql & N & "   会社コード "
-        sql = sql & N & " , 業務ＩＤ "
-        sql = sql & N & " , 処理ＩＤ "
-        sql = sql & N & " , 操作契機 "
-        sql = sql & N & " , 処理結果 "
-        sql = sql & N & " , 文字１ "
-        sql = sql & N & " , 文字２ "
-        sql = sql & N & " , 文字３ "
-        sql = sql & N & " , 文字４ "
-        sql = sql & N & " , 文字５ "
-        sql = sql & N & " , 数値１ "
-        sql = sql & N & " , 数値２ "
-        sql = sql & N & " , 数値３ "
-        sql = sql & N & " , 数値４ "
-        sql = sql & N & " , 数値５ "
-        sql = sql & N & " , 更新者 "
-        sql = sql & N & " , 更新日 "
-        sql = sql & N & ") VALUES ( "
-        sql = sql & N & "   " & nullToStr(companyCd)          '会社コード
-        sql = sql & N & " , " & nullToStr(gyomuId)            '業務ＩＤ
-        sql = sql & N & " , " & nullToStr(shoriId)            '処理ＩＤ
-        sql = sql & N & " , " & nullToStr(sousa)              '操作契機
-        sql = sql & N & " , " & nullToStr(kekka)              '操作結果
-        sql = sql & N & " , " & nullToStr(str1)
-        sql = sql & N & " , " & nullToStr(str2)
-        sql = sql & N & " , " & nullToStr(str3)
-        sql = sql & N & " , " & nullToStr(str4)
-        sql = sql & N & " , " & nullToStr(str5)
-        sql = sql & N & " , " & nullToNum(num1)
-        sql = sql & N & " , " & nullToNum(num2)
-        sql = sql & N & " , " & nullToNum(num3)
-        sql = sql & N & " , " & nullToNum(num4)
-        sql = sql & N & " , " & nullToNum(num5)
-        sql = sql & N & " , '" & _db.rmSQ(userId) & "' "      '更新者
-        sql = sql & N & " , now() "
-        sql = sql & N & ") "
+        sql = sql & "INSERT INTO l10_proclog ( "
+        sql = sql & "   会社コード "
+        sql = sql & " , 業務ＩＤ "
+        sql = sql & " , 処理ＩＤ "
+        sql = sql & " , 操作契機 "
+        sql = sql & " , 処理結果 "
+        sql = sql & " , 文字１ "
+        sql = sql & " , 文字２ "
+        sql = sql & " , 文字３ "
+        sql = sql & " , 文字４ "
+        sql = sql & " , 文字５ "
+        sql = sql & " , 数値１ "
+        sql = sql & " , 数値２ "
+        sql = sql & " , 数値３ "
+        sql = sql & " , 数値４ "
+        sql = sql & " , 数値５ "
+        sql = sql & " , 更新者 "
+        sql = sql & " , 更新日 "
+        sql = sql & ") VALUES ( "
+        sql = sql & "   " & nullToStr(companyCd)          '会社コード
+        sql = sql & " , " & nullToStr(gyomuId)            '業務ＩＤ
+        sql = sql & " , " & nullToStr(shoriId)            '処理ＩＤ
+        sql = sql & " , " & nullToStr(sousa)              '操作契機
+        sql = sql & " , " & nullToStr(kekka)              '操作結果
+        sql = sql & " , " & nullToStr(str1)
+        sql = sql & " , " & nullToStr(str2)
+        sql = sql & " , " & nullToStr(str3)
+        sql = sql & " , " & nullToStr(str4)
+        sql = sql & " , " & nullToStr(str5)
+        sql = sql & " , " & nullToNum(num1)
+        sql = sql & " , " & nullToNum(num2)
+        sql = sql & " , " & nullToNum(num3)
+        sql = sql & " , " & nullToNum(num4)
+        sql = sql & " , " & nullToNum(num5)
+        sql = sql & " , '" & _db.rmSQ(userId) & "' "      '更新者
+        sql = sql & " , now() "
+        sql = sql & ") "
         _db.executeDB(sql)
 
     End Sub
@@ -133,7 +133,7 @@ Public Class CommonLogic
     Public Function getSysDdate() As String
 
         Dim sql As String = ""
-        sql = sql & N & "SELECT to_char(current_timestamp, 'YYYY/MM/DD') AS SYSDATE"
+        sql = sql & "SELECT to_char(current_timestamp, 'YYYY/MM/DD') AS SYSDATE"
         Dim reccnt As Integer = 0
         Dim ds As DataSet = _db.selectDB(sql, RS, reccnt)
 
@@ -152,7 +152,7 @@ Public Class CommonLogic
     Public Function getSysWeek() As String
 
         Dim sql As String = ""
-        sql = sql & N & "SELECT to_char(current_timestamp, 'TMDy') AS SYSWEEK"
+        sql = sql & "SELECT to_char(current_timestamp, 'TMDy') AS SYSWEEK"
         Dim reccnt As Integer = 0
         Dim ds As DataSet = _db.selectDB(sql, RS, reccnt)
 
@@ -197,15 +197,15 @@ Public Class CommonLogic
 
         '①採番マスタ(M80)から、入力P)採番区分に対応したレコードを取得する
         Dim sql As String = ""
-        sql = sql & N & "SELECT "
-        sql = sql & N & "    最新値 "
-        sql = sql & N & "   ,最小値 "
-        sql = sql & N & "   ,最大値 "
-        sql = sql & N & "   ,接頭文字 "
-        sql = sql & N & "   ,連番桁数 "
-        sql = sql & N & "FROM M80_SAIBAN "
-        sql = sql & N & "WHERE 会社コード = '" & _db.rmSQ(prmCompanyCd) & "' "
-        sql = sql & N & "  AND 採番キー = '" & _db.rmSQ(prmSaibanKbn) & "' "
+        sql = sql & "SELECT "
+        sql = sql & "    最新値 "
+        sql = sql & "   ,最小値 "
+        sql = sql & "   ,最大値 "
+        sql = sql & "   ,接頭文字 "
+        sql = sql & "   ,連番桁数 "
+        sql = sql & "FROM M80_SAIBAN "
+        sql = sql & "WHERE 会社コード = '" & _db.rmSQ(prmCompanyCd) & "' "
+        sql = sql & "  AND 採番キー = '" & _db.rmSQ(prmSaibanKbn) & "' "
         Dim reccnt As Integer = 0
         Dim ds As DataSet = _db.selectDB(sql, RS, reccnt)
 
@@ -223,12 +223,12 @@ Public Class CommonLogic
             curnum = _db.rmNullInt(ds.Tables(RS).Rows(0)("最新値")) + 1
         End If
         sql = ""
-        sql = sql & N & "UPDATE M80_SAIBAN SET "
-        sql = sql & N & "    最新値 = " & curnum
-        sql = sql & N & "   ,更新者 = 'SYSTEM' "
-        sql = sql & N & "   ,更新日 = current_timestamp "
-        sql = sql & N & "WHERE 会社コード = '" & _db.rmSQ(prmCompanyCd) & "' "
-        sql = sql & N & "  AND 採番キー = '" & _db.rmSQ(prmSaibanKbn) & "' "
+        sql = sql & "UPDATE M80_SAIBAN SET "
+        sql = sql & "    最新値 = " & curnum
+        sql = sql & "   ,更新者 = 'SYSTEM' "
+        sql = sql & "   ,更新日 = current_timestamp "
+        sql = sql & "WHERE 会社コード = '" & _db.rmSQ(prmCompanyCd) & "' "
+        sql = sql & "  AND 採番キー = '" & _db.rmSQ(prmSaibanKbn) & "' "
         _db.executeDB(sql)
 
         '③②取得値から、M80)連番桁数分を切り取り（右から）不足桁には前ゼロを埋め込み
@@ -265,15 +265,15 @@ Public Class CommonLogic
 
         '①出荷先別期間指定特売単価ありの場合（該当レコードが存在しない場合、②へ）
         Dim sql As String = ""
-        sql = sql & N & "SELECT "
-        sql = sql & N & "    販売単価 "
-        sql = sql & N & "FROM M25_SLPRICE "
-        sql = sql & N & "WHERE 会社コード = '" & _db.rmSQ(prmCompanyCd) & "' "
-        sql = sql & N & "  AND 商品コード = '" & _db.rmSQ(prmGoodsCd) & "' "
-        sql = sql & N & "  AND 特売区分 = '" & _db.rmSQ(CommonConst.TOKUBAI_KBN_BARGAIN) & "' "       '1:特売
-        sql = sql & N & "  AND 取引先コード = '" & _db.rmSQ(prmCustomerCd) & "' "
-        sql = sql & N & "  AND 適用開始日 <= '" & prmChakuDt & "' "
-        sql = sql & N & "  AND 適用終了日 >= '" & prmChakuDt & "' "
+        sql = sql & "SELECT "
+        sql = sql & "    販売単価 "
+        sql = sql & "FROM M25_SLPRICE "
+        sql = sql & "WHERE 会社コード = '" & _db.rmSQ(prmCompanyCd) & "' "
+        sql = sql & "  AND 商品コード = '" & _db.rmSQ(prmGoodsCd) & "' "
+        sql = sql & "  AND 特売区分 = '" & _db.rmSQ(CommonConst.TOKUBAI_KBN_BARGAIN) & "' "       '1:特売
+        sql = sql & "  AND 取引先コード = '" & _db.rmSQ(prmCustomerCd) & "' "
+        sql = sql & "  AND 適用開始日 <= '" & prmChakuDt & "' "
+        sql = sql & "  AND 適用終了日 >= '" & prmChakuDt & "' "
         Dim reccnt As Integer = 0
         Dim ds As DataSet = _db.selectDB(sql, RS, reccnt)
 
@@ -285,15 +285,15 @@ Public Class CommonLogic
 
         '②出荷先別通常単価ありの場合（該当レコードが存在しない場合、③へ）
         sql = ""
-        sql = sql & N & "SELECT "
-        sql = sql & N & "    販売単価 "
-        sql = sql & N & "FROM M25_SLPRICE "
-        sql = sql & N & "WHERE 会社コード = '" & _db.rmSQ(prmCompanyCd) & "' "
-        sql = sql & N & "  AND 商品コード = '" & _db.rmSQ(prmGoodsCd) & "' "
-        sql = sql & N & "  AND 特売区分 = '" & _db.rmSQ(CommonConst.TOKUBAI_KBN_NORMAL) & "' "        '0:通常
-        sql = sql & N & "  AND 取引先コード = '" & _db.rmSQ(prmCustomerCd) & "' "
-        sql = sql & N & "  AND 適用開始日 <= '" & prmChakuDt & "' "
-        sql = sql & N & "  AND 適用終了日 >= '" & prmChakuDt & "' "
+        sql = sql & "SELECT "
+        sql = sql & "    販売単価 "
+        sql = sql & "FROM M25_SLPRICE "
+        sql = sql & "WHERE 会社コード = '" & _db.rmSQ(prmCompanyCd) & "' "
+        sql = sql & "  AND 商品コード = '" & _db.rmSQ(prmGoodsCd) & "' "
+        sql = sql & "  AND 特売区分 = '" & _db.rmSQ(CommonConst.TOKUBAI_KBN_NORMAL) & "' "        '0:通常
+        sql = sql & "  AND 取引先コード = '" & _db.rmSQ(prmCustomerCd) & "' "
+        sql = sql & "  AND 適用開始日 <= '" & prmChakuDt & "' "
+        sql = sql & "  AND 適用終了日 >= '" & prmChakuDt & "' "
         reccnt = 0
         ds = _db.selectDB(sql, RS, reccnt)
 
@@ -305,15 +305,15 @@ Public Class CommonLogic
 
         '③出荷先別通常単価ありの場合（該当レコードが存在しない場合、④へ）
         sql = ""
-        sql = sql & N & "SELECT "
-        sql = sql & N & "    販売単価 "
-        sql = sql & N & "FROM M25_SLPRICE "
-        sql = sql & N & "WHERE 会社コード = '" & _db.rmSQ(prmCompanyCd) & "' "
-        sql = sql & N & "  AND 商品コード = '" & _db.rmSQ(prmGoodsCd) & "' "
-        sql = sql & N & "  AND 特売区分 = '" & _db.rmSQ(CommonConst.TOKUBAI_KBN_NORMAL) & "' "        '0:通常
-        sql = sql & N & "  AND 取引先コード = '" & _db.rmSQ(CommonConst.CUSTOMER_CODE_ALL) & "' "     'ALL:指定なし
-        sql = sql & N & "  AND 適用開始日 <= '" & prmChakuDt & "' "
-        sql = sql & N & "  AND 適用終了日 >= '" & prmChakuDt & "' "
+        sql = sql & "SELECT "
+        sql = sql & "    販売単価 "
+        sql = sql & "FROM M25_SLPRICE "
+        sql = sql & "WHERE 会社コード = '" & _db.rmSQ(prmCompanyCd) & "' "
+        sql = sql & "  AND 商品コード = '" & _db.rmSQ(prmGoodsCd) & "' "
+        sql = sql & "  AND 特売区分 = '" & _db.rmSQ(CommonConst.TOKUBAI_KBN_NORMAL) & "' "        '0:通常
+        sql = sql & "  AND 取引先コード = '" & _db.rmSQ(CommonConst.CUSTOMER_CODE_ALL) & "' "     'ALL:指定なし
+        sql = sql & "  AND 適用開始日 <= '" & prmChakuDt & "' "
+        sql = sql & "  AND 適用終了日 >= '" & prmChakuDt & "' "
         reccnt = 0
         ds = _db.selectDB(sql, RS, reccnt)
 
@@ -329,72 +329,6 @@ Public Class CommonLogic
 
     End Sub
 
-    '-------------------------------------------------------------------------------
-    '   仕入単価取得処理
-    '   （処理概要）仕入単価マスタから、入力パラメータに対応した単価を取得する
-    '   ●入力パラメタ   ：prmCompanyCd   会社コード
-    '                    ：prmGoodsCd     商品コード
-    '                    ：prmCustomerCd  取引先コード
-    '                    ：prmShiireDt    仕入日
-    '   ●出力パラメタ   ：prmShiireTanka 仕入単価
-    '                    ：prmTankaPtn    単価パターン（2:出荷先別単価,3:商品別単価,9:単価なし）
-    '   ●メソッド戻り値 ：なし
-    '-------------------------------------------------------------------------------
-    ''' <summary>
-    ''' 仕入単価取得処理（GetHanbaiTanka）
-    ''' </summary>
-    ''' <param name="prmCompanyCd"></param>
-    ''' <param name="prmGoodsCd"></param>
-    ''' <param name="prmCustomerCd"></param>
-    ''' <param name="prmShiireDt"></param>
-    ''' <param name="prmShiireTanka"></param>
-    ''' <param name="prmTankaPtn"></param>
-    Public Sub GetShiireTanka(ByVal prmCompanyCd As String, ByVal prmGoodsCd As String, ByVal prmCustomerCd As String, ByVal prmShiireDt As String,
-                             ByRef prmShiireTanka As Decimal, ByRef prmTankaPtn As String)
-
-        '①出荷先別単価ありの場合（該当レコードが存在しない場合、②へ）
-        Dim sql As String = ""
-        sql = sql & N & "SELECT "
-        sql = sql & N & "    仕入単価 "
-        sql = sql & N & "FROM M26_PCPRICE "
-        sql = sql & N & "WHERE 会社コード = '" & _db.rmSQ(prmCompanyCd) & "' "
-        sql = sql & N & "  AND 商品コード = '" & _db.rmSQ(prmGoodsCd) & "' "
-        sql = sql & N & "  AND 取引先コード = '" & _db.rmSQ(prmCustomerCd) & "' "
-        sql = sql & N & "  AND 適用開始日 <= '" & prmShiireDt & "' "
-        sql = sql & N & "  AND 適用終了日 >= '" & prmShiireDt & "' "
-        Dim reccnt As Integer = 0
-        Dim ds As DataSet = _db.selectDB(sql, RS, reccnt)
-
-        If reccnt > 0 Then
-            prmTankaPtn = CommonConst.SHIIRE_TANKA_PTN_CUSTOMER                                       '2:出荷先別単価
-            prmShiireTanka = _db.rmNullDouble(ds.Tables(RS).Rows(0)("仕入単価"))
-            Exit Sub
-        End If
-
-        '②商品別単価ありの場合（該当レコードが存在しない場合、③へ）
-        sql = ""
-        sql = sql & N & "SELECT "
-        sql = sql & N & "    仕入単価 "
-        sql = sql & N & "FROM M26_PCPRICE "
-        sql = sql & N & "WHERE 会社コード = '" & _db.rmSQ(prmCompanyCd) & "' "
-        sql = sql & N & "  AND 商品コード = '" & _db.rmSQ(prmGoodsCd) & "' "
-        sql = sql & N & "  AND 取引先コード = '" & _db.rmSQ(CommonConst.CUSTOMER_CODE_ALL) & "' "     'ALL:指定なし
-        sql = sql & N & "  AND 適用開始日 <= '" & prmShiireDt & "' "
-        sql = sql & N & "  AND 適用終了日 >= '" & prmShiireDt & "' "
-        reccnt = 0
-        ds = _db.selectDB(sql, RS, reccnt)
-
-        If reccnt > 0 Then
-            prmTankaPtn = CommonConst.SHIIRE_TANKA_PTN_GOODS                                          '3:商品別単価
-            prmShiireTanka = _db.rmNullDouble(ds.Tables(RS).Rows(0)("仕入単価"))
-            Exit Sub
-        End If
-
-        '③値を返却する（該当単価なしの場合）
-        prmTankaPtn = CommonConst.SHIIRE_TANKA_PTN_NONE                                               '9:単価なし
-        prmShiireTanka = 0
-
-    End Sub
 
     '-------------------------------------------------------------------------------
     '  汎用マスタデータ取得
