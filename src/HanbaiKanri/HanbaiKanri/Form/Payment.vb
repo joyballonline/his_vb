@@ -366,31 +366,38 @@ Public Class Payment
 
     '自動振分の実行
     Private Sub BtnCal_Click(sender As Object, e As EventArgs) Handles BtnCal.Click
-        Dim Total As Integer = 0
+        Dim Total As Decimal = 0
         Dim count As Integer = 0
 
         For index As Integer = 0 To DgvPayment.Rows.Count - 1
             Total += DgvPayment.Rows(index).Cells("入力支払金額").Value
         Next
 
-        For index As Integer = 0 To DgvKikeInfo.Rows.Count - 1
-            If DgvKikeInfo.Rows(index).Cells("買掛情報買掛残高").Value > 0 Then
-                If Total - DgvKikeInfo.Rows(index).Cells("買掛情報買掛残高").Value > 0 Then
-                    DgvKikeInfo.Rows(index).Cells("支払金額").Value = DgvKikeInfo.Rows(index).Cells("買掛情報買掛残高").Value
-                    DgvKikeInfo.Rows(index).Cells("買掛情報支払金額計").Value = DgvKikeInfo.Rows(index).Cells("買掛情報支払金額計").Value + DgvKikeInfo.Rows(index).Cells("支払金額").Value
-                    DgvKikeInfo.Rows(index).Cells("買掛情報買掛残高").Value = 0
-                    Total -= DgvKikeInfo.Rows(index).Cells("支払金額").Value
+        '買掛金額より支払金額が大きい場合はアラート
+        If Total > DgvSupplier.Rows(0).Cells("買掛残高").Value Then
+            _msgHd.dspMSG("chkPaymentBalanceError", frmC01F10_Login.loginValue.Language)
+
+            Return
+        End If
+
+        For i As Integer = 0 To DgvKikeInfo.Rows.Count - 1
+            If DgvKikeInfo.Rows(i).Cells("買掛情報買掛残高").Value > 0 Then
+                If Total - DgvKikeInfo.Rows(i).Cells("買掛情報買掛残高").Value > 0 Then
+                    DgvKikeInfo.Rows(i).Cells("支払金額").Value = DgvKikeInfo.Rows(i).Cells("買掛情報買掛残高").Value
+                    DgvKikeInfo.Rows(i).Cells("買掛情報支払金額計").Value = DgvKikeInfo.Rows(i).Cells("買掛情報支払金額計").Value + DgvKikeInfo.Rows(i).Cells("支払金額").Value
+                    DgvKikeInfo.Rows(i).Cells("買掛情報買掛残高").Value = 0
+                    Total -= DgvKikeInfo.Rows(i).Cells("支払金額").Value
                 ElseIf Total > 0 Then
-                    DgvKikeInfo.Rows(index).Cells("支払金額").Value = Total
-                    If DgvKikeInfo.Rows(index).Cells("買掛情報買掛残高").Value - Total > 0 Then
-                        DgvKikeInfo.Rows(index).Cells("買掛情報支払金額計").Value = DgvKikeInfo.Rows(index).Cells("買掛情報支払金額計").Value + DgvKikeInfo.Rows(index).Cells("支払金額").Value
-                    ElseIf DgvKikeInfo.Rows(index).Cells("買掛情報買掛残高").Value - Total = 0 Then
-                        DgvKikeInfo.Rows(index).Cells("買掛情報支払金額計").Value = DgvKikeInfo.Rows(index).Cells("買掛情報支払金額計").Value + DgvKikeInfo.Rows(index).Cells("支払金額").Value
+                    DgvKikeInfo.Rows(i).Cells("支払金額").Value = Total
+                    If DgvKikeInfo.Rows(i).Cells("買掛情報買掛残高").Value - Total > 0 Then
+                        DgvKikeInfo.Rows(i).Cells("買掛情報支払金額計").Value = DgvKikeInfo.Rows(i).Cells("買掛情報支払金額計").Value + DgvKikeInfo.Rows(i).Cells("支払金額").Value
+                    ElseIf DgvKikeInfo.Rows(i).Cells("買掛情報買掛残高").Value - Total = 0 Then
+                        DgvKikeInfo.Rows(i).Cells("買掛情報支払金額計").Value = DgvKikeInfo.Rows(i).Cells("買掛情報支払金額計").Value + DgvKikeInfo.Rows(i).Cells("支払金額").Value
                     Else
-                        DgvKikeInfo.Rows(index).Cells("買掛情報支払金額計").Value = Total
+                        DgvKikeInfo.Rows(i).Cells("買掛情報支払金額計").Value = Total
                     End If
 
-                    DgvKikeInfo.Rows(index).Cells("買掛情報買掛残高").Value = DgvKikeInfo.Rows(index).Cells("買掛情報買掛残高").Value - Total
+                    DgvKikeInfo.Rows(i).Cells("買掛情報買掛残高").Value = DgvKikeInfo.Rows(i).Cells("買掛情報買掛残高").Value - Total
                     Total -= Total
                 End If
             End If

@@ -111,6 +111,8 @@ Public Class DepositList
             Sql += "'%"
             Sql += dsCustomer.Tables(RS).Rows(i)("得意先コード")
             Sql += "%'"
+            Sql += " AND "
+            Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
 
             '得意先と一致する請求基本を取得
             Dim dsSkyuhd As DataSet = getDsData("t23_skyuhd", Sql)
@@ -124,6 +126,8 @@ Public Class DepositList
             Sql += "'%"
             Sql += dsCustomer.Tables(RS).Rows(i)("得意先コード")
             Sql += "%'"
+            Sql += " AND "
+            Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
 
             '得意先と一致する受注基本を取得
             Dim dsCymnhd As DataSet = getDsData("t10_cymnhd", Sql)

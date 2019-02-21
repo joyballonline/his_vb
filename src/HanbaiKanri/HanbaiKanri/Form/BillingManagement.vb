@@ -395,14 +395,24 @@ Public Class BillingManagement
         Dim errflg As Boolean = True
         Dim dtToday As DateTime = DateTime.Now
         Dim reccnt As Integer = 0
-        Dim BillingAmount As Integer = 0
+        Dim BillingAmount As Decimal = 0
 
         Dim Sql As String = ""
+
+        If Decimal.Parse(DgvAdd.Rows(0).Cells("今回請求金額計").Value) > Decimal.Parse(DgvCymn.Rows(0).Cells("請求残高").Value) Then
+            '請求残高より請求金額が大きい場合はアラート
+            _msgHd.dspMSG("chkBillingBalanceError", frmC01F10_Login.loginValue.Language)
+
+            Return
+        End If
+
 
         Sql = " AND "
         Sql += "受注番号 ILIKE '" & CymnNo & "'"
         Sql += " AND "
         Sql += "受注番号枝番 ILIKE '" & Suffix & "'"
+        Sql += " AND "
+        Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
 
         Dim dsCymnhd As DataSet = getDsData("t10_cymnhd", Sql)
 
@@ -410,6 +420,8 @@ Public Class BillingManagement
         Sql += "受注番号 ILIKE '" & CymnNo & "'"
         Sql += " AND "
         Sql += "受注番号枝番 ILIKE '" & Suffix & "'"
+        Sql += " AND "
+        Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
 
         Dim dsSkyuhd As DataSet = getDsData("t23_skyuhd", Sql)
 
@@ -419,8 +431,8 @@ Public Class BillingManagement
             0
         )
 
-        Dim BillTotal As Long = DgvAdd.Rows(0).Cells("今回請求金額計").Value + BillingAmount
-        Dim Balance As Long = dsCymnhd.Tables(RS).Rows(0)("見積金額") - BillTotal
+        Dim BillTotal As Decimal = DgvAdd.Rows(0).Cells("今回請求金額計").Value + BillingAmount
+        Dim Balance As Decimal = dsCymnhd.Tables(RS).Rows(0)("見積金額") - BillTotal
 
         If Balance < 0 Then
             '対象データがないメッセージを表示
