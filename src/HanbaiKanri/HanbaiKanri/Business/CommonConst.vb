@@ -235,6 +235,15 @@ Public Class CommonConst
 
     'フラグ等
 
+    '無効フラグ
+    Public Const FLAG_ENABLED As Integer = 0                  '有効
+    Public Const FLAG_DISABLED As Integer = 1                 '無効
+
+    '無効フラグ テキスト
+    Public Const FLAG_ENABLED_TXT As String = "有効"         '有効
+    Public Const FLAG_DISABLED_TXT As String = "無効"        '無効
+
+
     '請求区分
     Public Const BILLING_KBN_DEPOSIT As Integer = 1                         '前受請求
     Public Const BILLING_KBN_NORMAL As Integer = 2                          '通常請求
@@ -277,5 +286,6 @@ Public Class CommonConst
 
     'カルチャー JP
     Public Const CI_JP As String = "ja-JP"               'カルチャー 日本
+
 
 End Class

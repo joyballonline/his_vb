@@ -7,6 +7,7 @@ Imports UtilMDL.DB
 Imports UtilMDL.DataGridView
 Imports UtilMDL.FileDirectory
 Imports UtilMDL.xls
+Imports System.Text.RegularExpressions
 
 Public Class MstAccount
 
@@ -63,8 +64,10 @@ Public Class MstAccount
 
     End Sub
 
+    '画面表示時
     Private Sub MstAccount_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If frmC01F10_Login.loginValue.Language = "ENG" Then
+
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
             LblAccountName.Text = "AccountName"
             TxtSearch.Location = New Point(120, 6)
             BtnSearch.Text = "Search"
@@ -73,7 +76,7 @@ Public Class MstAccount
             btnAccountEdit.Text = "Edit"
             BtnBack.Text = "Back"
 
-            Dgv_Account.Columns("会社コード").HeaderText = "CompanyCode"
+            'Dgv_Account.Columns("会社コード").HeaderText = "CompanyCode"
             Dgv_Account.Columns("勘定科目コード").HeaderText = "AccountCode"
             Dgv_Account.Columns("勘定科目名称１").HeaderText = "AccountName1"
             Dgv_Account.Columns("勘定科目名称２").HeaderText = "AccountName2"
@@ -85,38 +88,54 @@ Public Class MstAccount
             Dgv_Account.Columns("更新日").HeaderText = "UpdateDate"
 
         End If
+
+        '一覧取得
+        getList()
+    End Sub
+
+    '一覧取得
+    Private Sub getList()
+
+        '一覧クリア
+        Dgv_Account.Rows.Clear()
+
         Dim Sql As String = ""
         Try
-            Sql += "SELECT "
-            Sql += "* "
-            Sql += "FROM "
-            Sql += "public"
-            Sql += "."
-            Sql += "m92_kanjo"
-            Sql += " WHERE "
-            Sql += "会社コード"
+            Sql = " AND "
+            Sql += " ( 勘定科目名称１"
             Sql += " ILIKE "
-            Sql += "'"
-            Sql += frmC01F10_Login.loginValue.BumonNM
-            Sql += "'"
+            Sql += "'%"
+            Sql += escapeSql(TxtSearch.Text)
+            Sql += "%'"
+            Sql += " OR "
+            Sql += "勘定科目名称２"
+            Sql += " ILIKE "
+            Sql += "'%"
+            Sql += escapeSql(TxtSearch.Text)
+            Sql += "%'"
+            Sql += " OR "
+            Sql += "勘定科目名称３"
+            Sql += " ILIKE "
+            Sql += "'%"
+            Sql += escapeSql(TxtSearch.Text)
+            Sql += "%')"
 
-            Dim reccnt As Integer = 0
-            Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
+            Dim ds As DataSet = getDsData("m92_kanjo", Sql)
 
-            For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+            For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
 
                 Dgv_Account.Rows.Add()
-                Dgv_Account.Rows(index).Cells("会社コード").Value = ds.Tables(RS).Rows(index)("会社コード")
-                Dgv_Account.Rows(index).Cells("勘定科目コード").Value = ds.Tables(RS).Rows(index)("勘定科目コード")
-                Dgv_Account.Rows(index).Cells("勘定科目名称１").Value = ds.Tables(RS).Rows(index)("勘定科目名称１")
-                Dgv_Account.Rows(index).Cells("勘定科目名称２").Value = ds.Tables(RS).Rows(index)("勘定科目名称２")
-                Dgv_Account.Rows(index).Cells("勘定科目名称３").Value = ds.Tables(RS).Rows(index)("勘定科目名称３")
-                Dgv_Account.Rows(index).Cells("会計用勘定科目コード").Value = ds.Tables(RS).Rows(index)("会計用勘定科目コード")
-                Dgv_Account.Rows(index).Cells("備考").Value = ds.Tables(RS).Rows(index)("備考")
-                Dgv_Account.Rows(index).Cells("有効区分").Value = ds.Tables(RS).Rows(index)("有効区分")
-                Dgv_Account.Rows(index).Cells("更新者").Value = ds.Tables(RS).Rows(index)("更新者")
-                Dgv_Account.Rows(index).Cells("更新日").Value = ds.Tables(RS).Rows(index)("更新日")
 
+                'Dgv_Account.Rows(i).Cells("会社コード").Value = ds.Tables(RS).Rows(i)("会社コード")
+                Dgv_Account.Rows(i).Cells("勘定科目コード").Value = ds.Tables(RS).Rows(i)("勘定科目コード")
+                Dgv_Account.Rows(i).Cells("勘定科目名称１").Value = ds.Tables(RS).Rows(i)("勘定科目名称１")
+                Dgv_Account.Rows(i).Cells("勘定科目名称２").Value = ds.Tables(RS).Rows(i)("勘定科目名称２")
+                Dgv_Account.Rows(i).Cells("勘定科目名称３").Value = ds.Tables(RS).Rows(i)("勘定科目名称３")
+                Dgv_Account.Rows(i).Cells("会計用勘定科目コード").Value = ds.Tables(RS).Rows(i)("会計用勘定科目コード")
+                Dgv_Account.Rows(i).Cells("備考").Value = ds.Tables(RS).Rows(i)("備考")
+                Dgv_Account.Rows(i).Cells("有効区分").Value = setEnabledText(ds.Tables(RS).Rows(i)("有効区分"))
+                Dgv_Account.Rows(i).Cells("更新者").Value = ds.Tables(RS).Rows(i)("更新者")
+                Dgv_Account.Rows(i).Cells("更新日").Value = ds.Tables(RS).Rows(i)("更新日")
             Next
 
         Catch ue As UsrDefException
@@ -126,8 +145,10 @@ Public Class MstAccount
             'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
             Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
         End Try
+
     End Sub
 
+    '追加ボタン押下時
     Private Sub btnCompanyrAdd_Click(sender As Object, e As EventArgs) Handles btnAccountAdd.Click
         Dim openForm As Form = Nothing
         Dim Status As String = "ADD"
@@ -136,11 +157,12 @@ Public Class MstAccount
         Me.Hide()   ' 自分は隠れる
     End Sub
 
-    Private Sub btnSelectCompany_Click(sender As Object, e As EventArgs) Handles btnAccountEdit.Click
+    '編集ボタン押下時
+    Private Sub btnAccountEdit_Click(sender As Object, e As EventArgs) Handles btnAccountEdit.Click
         If Dgv_Account.Rows.Count > 0 Then
             Dim openForm As Form = Nothing
             Dim Status As String = "EDIT"
-            Dim CompanyCode As String = Dgv_Account.Rows(Dgv_Account.CurrentCell.RowIndex).Cells("会社コード").Value
+            Dim CompanyCode As String = frmC01F10_Login.loginValue.BumonNM
             Dim AccountCode As String = Dgv_Account.Rows(Dgv_Account.CurrentCell.RowIndex).Cells("勘定科目コード").Value
             openForm = New Account(_msgHd, _db, _langHd, Status, CompanyCode, AccountCode)   '処理選択
             openForm.Show()
@@ -152,6 +174,7 @@ Public Class MstAccount
 
     End Sub
 
+    '戻るボタン押下時
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
         Dim frmMenu As frmC01F30_Menu
         frmMenu = New frmC01F30_Menu(_msgHd, _langHd, _db)
@@ -159,70 +182,46 @@ Public Class MstAccount
         Me.Close()
     End Sub
 
+    '検索ボタン押下時
     Private Sub BtnSearch_Click(sender As Object, e As EventArgs) Handles BtnSearch.Click
-        Dgv_Account.Rows.Clear()
-
-        Dim Sql As String = ""
-        Try
-            Sql += "SELECT "
-            Sql += "* "
-            Sql += "FROM "
-            Sql += "public"
-            Sql += "."
-            Sql += "m92_kanjo"
-            Sql += " WHERE "
-            Sql += "会社コード"
-            Sql += " ILIKE "
-            Sql += "'"
-            Sql += frmC01F10_Login.loginValue.BumonNM
-            Sql += "'"
-            Sql += " AND "
-            Sql += " ( 勘定科目名称１"
-            Sql += " ILIKE "
-            Sql += "'%"
-            Sql += TxtSearch.Text
-            Sql += "%'"
-            Sql += " OR "
-            Sql += "勘定科目名称２"
-            Sql += " ILIKE "
-            Sql += "'%"
-            Sql += TxtSearch.Text
-            Sql += "%'"
-            Sql += " OR "
-            Sql += "勘定科目名称３"
-            Sql += " ILIKE "
-            Sql += "'%"
-            Sql += TxtSearch.Text
-            Sql += "%')"
-
-            Dim reccnt As Integer = 0
-            Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-            For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-
-                Dgv_Account.Rows.Add()
-
-                Dgv_Account.Rows(index).Cells("会社コード").Value = ds.Tables(RS).Rows(index)("会社コード")
-                Dgv_Account.Rows(index).Cells("勘定科目コード").Value = ds.Tables(RS).Rows(index)("勘定科目コード")
-                Dgv_Account.Rows(index).Cells("勘定科目名称１").Value = ds.Tables(RS).Rows(index)("勘定科目名称１")
-                Dgv_Account.Rows(index).Cells("勘定科目名称２").Value = ds.Tables(RS).Rows(index)("勘定科目名称２")
-                Dgv_Account.Rows(index).Cells("勘定科目名称３").Value = ds.Tables(RS).Rows(index)("勘定科目名称３")
-                Dgv_Account.Rows(index).Cells("会計用勘定科目コード").Value = ds.Tables(RS).Rows(index)("会計用勘定科目コード")
-                Dgv_Account.Rows(index).Cells("備考").Value = ds.Tables(RS).Rows(index)("備考")
-                Dgv_Account.Rows(index).Cells("有効区分").Value = ds.Tables(RS).Rows(index)("有効区分")
-                Dgv_Account.Rows(index).Cells("更新者").Value = ds.Tables(RS).Rows(index)("更新者")
-                Dgv_Account.Rows(index).Cells("更新日").Value = ds.Tables(RS).Rows(index)("更新日")
-            Next
-
-        Catch ue As UsrDefException
-            ue.dspMsg()
-            Throw ue
-        Catch ex As Exception
-            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
-        End Try
-
+        '一覧取得
+        getList()
     End Sub
 
+    'param1：String テーブル名
+    'param2：String 詳細条件
+    'Return: DataSet
+    Private Function getDsData(ByVal tableName As String, Optional ByRef txtParam As String = "") As DataSet
+        Dim reccnt As Integer = 0 'DB用（デフォルト）
+        Dim Sql As String = ""
+
+        Sql += "SELECT"
+        Sql += " *"
+        Sql += " FROM "
+
+        Sql += "public." & tableName
+        Sql += " WHERE "
+        Sql += "会社コード"
+        Sql += " ILIKE  "
+        Sql += "'" & frmC01F10_Login.loginValue.BumonNM & "'"
+        Sql += txtParam
+        Return _db.selectDB(Sql, RS, reccnt)
+    End Function
+
+    Private Function setEnabledText(ByVal prmVal As String) As String
+        Dim reVal As String = IIf(Integer.Parse(prmVal) = CommonConst.FLAG_ENABLED, CommonConst.FLAG_ENABLED_TXT, CommonConst.FLAG_DISABLED_TXT)
+
+        Return reVal
+    End Function
+
+    'sqlで実行する文字列からシングルクォーテーションを文字コードにする
+    Private Function escapeSql(ByVal prmSql As String) As String
+        Dim sql As String = prmSql
+
+        sql = sql.Replace("'"c, "''") 'シングルクォーテーションを置換
+
+        Return Regex.Escape(sql)
+        Return sql
+    End Function
 
 End Class

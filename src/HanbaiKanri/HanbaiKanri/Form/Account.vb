@@ -7,6 +7,7 @@ Imports UtilMDL.DB
 Imports UtilMDL.DataGridView
 Imports UtilMDL.FileDirectory
 Imports UtilMDL.xls
+Imports System.Globalization
 
 Public Class Account
 
@@ -75,13 +76,13 @@ Public Class Account
     End Sub
 
     Private Sub btnAddAccount_Click(sender As Object, e As EventArgs) Handles btnAddAccount.Click
-        Dim dtToday As DateTime = DateTime.Now
+        Dim dtToday As String = formatDatetime(DateTime.Now)
         Try
-            If _status = "ADD" Then
-                Dim Sql As String = ""
+            Dim Sql As String = ""
 
-                Sql = ""
-                Sql += "INSERT INTO "
+            If _status = "ADD" Then
+
+                Sql = "INSERT INTO "
                 Sql += "Public."
                 Sql += "m92_kanjo("
                 Sql += "会社コード, 勘定科目コード, 勘定科目名称１, 勘定科目名称２, 勘定科目名称３, 会計用勘定科目コード, 備考, 有効区分, 更新者, 更新日)"
@@ -100,45 +101,20 @@ Public Class Account
                 Sql += "', '"
                 Sql += TxtRemarks.Text
                 Sql += "', '"
-                Sql += TxtEffectiveClassification.Text
+                Sql += cmbEffectiveClassification.SelectedValue.ToString
                 Sql += "', '"
                 Sql += frmC01F10_Login.loginValue.TantoNM
                 Sql += "', '"
                 Sql += dtToday
                 Sql += "')"
-                Sql += "RETURNING 会社コード"
-                Sql += ", "
-                Sql += "勘定科目コード"
-                Sql += ", "
-                Sql += "勘定科目名称１"
-                Sql += ", "
-                Sql += "勘定科目名称２"
-                Sql += ", "
-                Sql += "勘定科目名称３"
-                Sql += ", "
-                Sql += "会計用勘定科目コード"
-                Sql += ", "
-                Sql += "備考"
-                Sql += ", "
-                Sql += "有効区分"
-                Sql += ", "
-                Sql += "更新者"
-                Sql += ", "
-                Sql += "更新日"
 
                 _db.executeDB(Sql)
             Else
-                Dim Sql As String = ""
 
-                Sql = ""
-                Sql += "UPDATE "
+                Sql = "UPDATE "
                 Sql += "Public."
                 Sql += "m92_kanjo "
                 Sql += "SET "
-                Sql += "勘定科目コード"
-                Sql += " = '"
-                Sql += TxtAccountCode.Text
-                Sql += "', "
                 Sql += "勘定科目名称１"
                 Sql += " = '"
                 Sql += TxtAccountName1.Text
@@ -161,7 +137,7 @@ Public Class Account
                 Sql += "', "
                 Sql += "有効区分"
                 Sql += " = '"
-                Sql += TxtEffectiveClassification.Text
+                Sql += cmbEffectiveClassification.SelectedValue.ToString
                 Sql += "', "
                 Sql += "更新者"
                 Sql += " = '"
@@ -181,25 +157,6 @@ Public Class Account
                 Sql += "='"
                 Sql += _AccountCode
                 Sql += "' "
-                Sql += "RETURNING 会社コード"
-                Sql += ", "
-                Sql += "勘定科目コード"
-                Sql += ", "
-                Sql += "勘定科目名称１"
-                Sql += ", "
-                Sql += "勘定科目名称２"
-                Sql += ", "
-                Sql += "勘定科目名称３"
-                Sql += ", "
-                Sql += "会計用勘定科目コード"
-                Sql += ", "
-                Sql += "備考"
-                Sql += ", "
-                Sql += "有効区分"
-                Sql += ", "
-                Sql += "更新者"
-                Sql += ", "
-                Sql += "更新日"
 
                 _db.executeDB(Sql)
             End If
@@ -218,6 +175,7 @@ Public Class Account
         End Try
     End Sub
 
+    '戻るボタン押下時
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
         Dim MstAccount As MstAccount
         MstAccount = New MstAccount(_msgHd, _db, _langHd)
@@ -225,8 +183,11 @@ Public Class Account
         Me.Close()
     End Sub
 
+    '画面表示時
     Private Sub Account_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If frmC01F10_Login.loginValue.Language = "ENG" Then
+
+
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
             LblAccountCode.Text = "CustomerCode"
             LblAccountName1.Text = "CustomerName"
             LblAccountName2.Text = "CustomerCode"
@@ -234,80 +195,114 @@ Public Class Account
             LblAccountingAccountCode.Text = "ShortName"
             LblRemarks.Text = "PostalCode"
             LblEffectiveClassification.Text = "EffectiveClassification"
-            ExEffectiveClassification.Text = "(0:True 1:False)"
+            'ExEffectiveClassification.Text = "(0:True 1:False)"
             btnAddAccount.Text = "Registration"
             btnBack.Text = "Back"
         End If
+
         If _status = "EDIT" Then
+
             Dim Sql As String = ""
-            Sql += "SELECT "
-            Sql += "会社コード, "
-            Sql += "勘定科目コード, "
-            Sql += "勘定科目名称１, "
-            Sql += "勘定科目名称２, "
-            Sql += "勘定科目名称３, "
-            Sql += "会計用勘定科目コード, "
-            Sql += "備考, "
-            Sql += "有効区分, "
-            Sql += "更新者, "
-            Sql += "更新日 "
-            Sql += "FROM "
-            Sql += "public"
-            Sql += "."
-            Sql += "m92_kanjo"
-            Sql += " WHERE "
-            Sql += "会社コード"
-            Sql += " ILIKE "
-            Sql += "'"
-            Sql += _companyCode
-            Sql += "'"
-            Sql += " AND "
+
+            Sql = " AND "
             Sql += "勘定科目コード"
             Sql += " ILIKE "
             Sql += "'"
             Sql += _AccountCode
             Sql += "'"
 
-            Dim reccnt As Integer = 0
-            Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
+            Dim ds As DataSet = getDsData("m92_kanjo", Sql)
 
-            If ds.Tables(RS).Rows(0)("勘定科目コード") Is DBNull.Value Then
-            Else
+            If ds.Tables(RS).Rows(0)("勘定科目コード") IsNot DBNull.Value Then
                 TxtAccountCode.Text = ds.Tables(RS).Rows(0)("勘定科目コード")
             End If
 
-            If ds.Tables(RS).Rows(0)("勘定科目名称１") Is DBNull.Value Then
-            Else
+            If ds.Tables(RS).Rows(0)("勘定科目名称１") IsNot DBNull.Value Then
                 TxtAccountName1.Text = ds.Tables(RS).Rows(0)("勘定科目名称１")
             End If
 
-            If ds.Tables(RS).Rows(0)("勘定科目名称２") Is DBNull.Value Then
-            Else
+            If ds.Tables(RS).Rows(0)("勘定科目名称２") IsNot DBNull.Value Then
                 TxtAccountName2.Text = ds.Tables(RS).Rows(0)("勘定科目名称２")
             End If
 
-            If ds.Tables(RS).Rows(0)("勘定科目名称３") Is DBNull.Value Then
-            Else
+            If ds.Tables(RS).Rows(0)("勘定科目名称３") IsNot DBNull.Value Then
                 TxtAccountName3.Text = ds.Tables(RS).Rows(0)("勘定科目名称３")
             End If
 
-            If ds.Tables(RS).Rows(0)("会計用勘定科目コード") Is DBNull.Value Then
-            Else
+            If ds.Tables(RS).Rows(0)("会計用勘定科目コード") IsNot DBNull.Value Then
                 TxtAccountingAccountCode.Text = ds.Tables(RS).Rows(0)("会計用勘定科目コード")
             End If
 
-            If ds.Tables(RS).Rows(0)("備考") Is DBNull.Value Then
-            Else
+            If ds.Tables(RS).Rows(0)("備考") IsNot DBNull.Value Then
                 TxtRemarks.Text = ds.Tables(RS).Rows(0)("備考")
             End If
 
-            If ds.Tables(RS).Rows(0)("有効区分") Is DBNull.Value Then
-            Else
-                TxtEffectiveClassification.Text = ds.Tables(RS).Rows(0)("有効区分")
+            If ds.Tables(RS).Rows(0)("有効区分") IsNot DBNull.Value Then
+                createCombobox(ds.Tables(RS).Rows(0)("有効区分"))
+                'TxtEffectiveClassification.Text = ds.Tables(RS).Rows(0)("有効区分")
             End If
 
+        Else
+
+            createCombobox()
 
         End If
     End Sub
+
+    '有効無効のコンボボックスを作成
+    '編集モードの時は値を渡してセットさせる
+    Private Sub createCombobox(Optional ByRef prmVal As String = "")
+        cmbEffectiveClassification.DisplayMember = "Text"
+        cmbEffectiveClassification.ValueMember = "Value"
+
+        Dim tb As New DataTable
+        tb.Columns.Add("Text", GetType(String))
+        tb.Columns.Add("Value", GetType(Integer))
+        tb.Rows.Add(CommonConst.FLAG_ENABLED_TXT, CommonConst.FLAG_ENABLED)
+        tb.Rows.Add(CommonConst.FLAG_DISABLED_TXT, CommonConst.FLAG_DISABLED)
+        cmbEffectiveClassification.DataSource = tb
+
+        If prmVal IsNot Nothing Then
+            cmbEffectiveClassification.SelectedValue = prmVal
+        End If
+
+    End Sub
+
+    'param1：String テーブル名
+    'param2：String 詳細条件
+    'Return: DataSet
+    Private Function getDsData(ByVal tableName As String, Optional ByRef txtParam As String = "") As DataSet
+        Dim reccnt As Integer = 0 'DB用（デフォルト）
+        Dim Sql As String = ""
+
+        Sql += "SELECT"
+        Sql += " *"
+        Sql += " FROM "
+
+        Sql += "public." & tableName
+        Sql += " WHERE "
+        Sql += "会社コード"
+        Sql += " ILIKE  "
+        Sql += "'" & frmC01F10_Login.loginValue.BumonNM & "'"
+        Sql += txtParam
+        Return _db.selectDB(Sql, RS, reccnt)
+    End Function
+
+    'どんなカルチャーであっても、日本の形式に変換する
+    Private Function formatDatetime(ByVal prmDatetime As DateTime) As String
+
+        'PCのカルチャーを取得し、それに応じてStringからDatetimeを作成
+        Dim ciCurrent As New System.Globalization.CultureInfo(CultureInfo.CurrentCulture.Name.ToString)
+        Dim dateFormat As DateTime = DateTime.Parse(prmDatetime.ToString, ciCurrent, System.Globalization.DateTimeStyles.AssumeLocal)
+
+        Dim changeFormat As String = dateFormat.ToString("yyyy/MM/dd HH:mm:ss")
+
+        Dim ciJP As New System.Globalization.CultureInfo(CommonConst.CI_JP)
+        Dim rtnDatetime As DateTime = DateTime.Parse(changeFormat, ciJP, System.Globalization.DateTimeStyles.AssumeLocal)
+
+
+        '日本の形式に書き換える
+        Return changeFormat
+    End Function
 
 End Class
