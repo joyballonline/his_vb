@@ -75,6 +75,23 @@ Public Class Customer
     End Sub
 
     Private Sub btnAddCustomer_Click(sender As Object, e As EventArgs) Handles btnRegistrarion.Click
+        '項目チェック
+        Dim strMessage As String = ""    'メッセージ本文
+        Dim strMessageTitle As String = ""      'メッセージタイトル
+        ''得意先コードは必須
+        If TxtCustomerCode.Text = "" Then
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                strMessage = "Please enter Customer Code. "
+                strMessageTitle = "CustomerCode Error"
+            Else
+                strMessage = "得意先コードを入力してください。"
+                strMessageTitle = "得意先コード入力エラー"
+            End If
+            Dim result As DialogResult = MessageBox.Show(strMessage, strMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Exit Sub
+        End If
+
+        '登録処理はここから
         Dim dtToday As DateTime = DateTime.Now
         Try
             If _status = "ADD" Then

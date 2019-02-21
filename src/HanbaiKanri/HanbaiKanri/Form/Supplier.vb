@@ -76,9 +76,24 @@ Public Class Supplier
     End Sub
 
     Private Sub btnAddSupplier_Click(sender As Object, e As EventArgs) Handles BtnRegistration.Click
+        '項目チェック
+        Dim strMessage As String = ""    'メッセージ本文
+        Dim strMessageTitle As String = ""      'メッセージタイトル
+        ''得意先コードは必須
+        If TxtSupplierCode.Text = "" Then
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                strMessage = "Please enter Supplier Code. "
+                strMessageTitle = "SupplierCode Error"
+            Else
+                strMessage = "仕入先コードを入力してください。"
+                strMessageTitle = "仕入先コード入力エラー"
+            End If
+            Dim result As DialogResult = MessageBox.Show(strMessage, strMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Exit Sub
+        End If
+
+        '登録処理はここから
         Dim dtToday As DateTime = DateTime.Now
-
-
         Try
             If _status = "ADD" Then
                 Dim Sql As String = ""
