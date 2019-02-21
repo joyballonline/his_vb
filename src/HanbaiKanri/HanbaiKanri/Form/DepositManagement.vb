@@ -207,7 +207,7 @@ Public Class DepositManagement
         Sql += CustomerCode
         Sql += "%'"
         Sql += " AND "
-        Sql += "取消区分 = 0"
+        Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
 
         '得意先と一致する請求基本を取得
         Dim dsSkyuhd As DataSet = getDsData("t23_skyuhd", Sql)
@@ -253,7 +253,7 @@ Public Class DepositManagement
         Sql += CustomerCode
         Sql += "%'"
         Sql += " AND "
-        Sql += "t25.取消区分 = 0"
+        Sql += "t25.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
 
         '得意先と一致する入金明細を取得
         Dim dsNkindt As DataSet = _db.selectDB(Sql, RS, reccnt)
@@ -293,9 +293,7 @@ Public Class DepositManagement
         Sql += CustomerCode
         Sql += "%'"
         Sql += " AND "
-        Sql += "取消区分"
-        Sql += " = "
-        Sql += "0"
+        Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
 
         '得意先と一致する請求基本を取得
         Dim dsSkyuhd As DataSet = getDsData("t23_skyuhd", Sql)
@@ -383,30 +381,37 @@ Public Class DepositManagement
 
     '自動振分の実行
     Private Sub BtnCal_Click(sender As Object, e As EventArgs) Handles BtnCal.Click
-        Dim Total As Long = 0
+        Dim Total As Decimal = 0
         Dim count As Integer = 0
 
         For index As Integer = 0 To DgvDeposit.Rows.Count - 1
             Total += DgvDeposit.Rows(index).Cells("入力入金額").Value
         Next
 
-        For index As Integer = 0 To DgvBillingInfo.Rows.Count - 1
-            If DgvBillingInfo.Rows(index).Cells("請求情報請求残高").Value > 0 Then
-                If Total - DgvBillingInfo.Rows(index).Cells("請求情報請求残高").Value > 0 Then
-                    DgvBillingInfo.Rows(index).Cells("入金額").Value = DgvBillingInfo.Rows(index).Cells("請求情報請求残高").Value
-                    DgvBillingInfo.Rows(index).Cells("請求情報入金額計").Value = DgvBillingInfo.Rows(index).Cells("請求情報入金額計").Value + DgvBillingInfo.Rows(index).Cells("入金額").Value
-                    DgvBillingInfo.Rows(index).Cells("請求情報請求残高").Value = 0
-                    Total -= DgvBillingInfo.Rows(index).Cells("入金額").Value
+        '買掛金額より支払金額が大きい場合はアラート
+        If Total > DgvCustomer.Rows(0).Cells("請求残高").Value Then
+            _msgHd.dspMSG("chkReceiptBalanceError", frmC01F10_Login.loginValue.Language)
+
+            Return
+        End If
+
+        For i As Integer = 0 To DgvBillingInfo.Rows.Count - 1
+            If DgvBillingInfo.Rows(i).Cells("請求情報請求残高").Value > 0 Then
+                If Total - DgvBillingInfo.Rows(i).Cells("請求情報請求残高").Value > 0 Then
+                    DgvBillingInfo.Rows(i).Cells("入金額").Value = DgvBillingInfo.Rows(i).Cells("請求情報請求残高").Value
+                    DgvBillingInfo.Rows(i).Cells("請求情報入金額計").Value = DgvBillingInfo.Rows(i).Cells("請求情報入金額計").Value + DgvBillingInfo.Rows(i).Cells("入金額").Value
+                    DgvBillingInfo.Rows(i).Cells("請求情報請求残高").Value = 0
+                    Total -= DgvBillingInfo.Rows(i).Cells("入金額").Value
                 ElseIf Total > 0 Then
-                    DgvBillingInfo.Rows(index).Cells("入金額").Value = Total
-                    If DgvBillingInfo.Rows(index).Cells("請求情報請求残高").Value - Total > 0 Then
-                        DgvBillingInfo.Rows(index).Cells("請求情報入金額計").Value = DgvBillingInfo.Rows(index).Cells("請求情報入金額計").Value + DgvBillingInfo.Rows(index).Cells("入金額").Value
-                    ElseIf DgvBillingInfo.Rows(index).Cells("請求情報請求残高").Value - Total = 0 Then
-                        DgvBillingInfo.Rows(index).Cells("請求情報入金額計").Value = DgvBillingInfo.Rows(index).Cells("請求情報入金額計").Value + DgvBillingInfo.Rows(index).Cells("入金額").Value
+                    DgvBillingInfo.Rows(i).Cells("入金額").Value = Total
+                    If DgvBillingInfo.Rows(i).Cells("請求情報請求残高").Value - Total > 0 Then
+                        DgvBillingInfo.Rows(i).Cells("請求情報入金額計").Value = DgvBillingInfo.Rows(i).Cells("請求情報入金額計").Value + DgvBillingInfo.Rows(i).Cells("入金額").Value
+                    ElseIf DgvBillingInfo.Rows(i).Cells("請求情報請求残高").Value - Total = 0 Then
+                        DgvBillingInfo.Rows(i).Cells("請求情報入金額計").Value = DgvBillingInfo.Rows(i).Cells("請求情報入金額計").Value + DgvBillingInfo.Rows(i).Cells("入金額").Value
                     Else
-                        DgvBillingInfo.Rows(index).Cells("請求情報入金額計").Value = Total
+                        DgvBillingInfo.Rows(i).Cells("請求情報入金額計").Value = Total
                     End If
-                    DgvBillingInfo.Rows(index).Cells("請求情報請求残高").Value = DgvBillingInfo.Rows(index).Cells("請求情報請求残高").Value - Total
+                    DgvBillingInfo.Rows(i).Cells("請求情報請求残高").Value = DgvBillingInfo.Rows(i).Cells("請求情報請求残高").Value - Total
                     Total -= Total
                 End If
             End If
@@ -525,7 +530,7 @@ Public Class DepositManagement
         Sql += CustomerCode
         Sql += "%'"
         Sql += " AND "
-        Sql += "取消区分 = 0"
+        Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
 
         '請求基本データ取得
         Dim dsSkyuhd As DataSet = getDsData("t23_skyuhd", Sql)
