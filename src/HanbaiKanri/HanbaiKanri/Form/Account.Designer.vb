@@ -165,7 +165,7 @@ Partial Class Account
         Me.TxtAccountingAccountCode.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.TxtAccountingAccountCode.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtAccountingAccountCode.Location = New System.Drawing.Point(157, 115)
-        Me.TxtAccountingAccountCode.MaxLength = 20
+        Me.TxtAccountingAccountCode.MaxLength = 50
         Me.TxtAccountingAccountCode.Name = "TxtAccountingAccountCode"
         Me.TxtAccountingAccountCode.Size = New System.Drawing.Size(234, 22)
         Me.TxtAccountingAccountCode.TabIndex = 5
