@@ -1296,7 +1296,7 @@ Dim RtnDir As String = UtilDirectorySelector.choiceFolder("C:\WINDOWS", "○○�
  <param name="prmFileName">フルパスメッセージファイル名</param>
  <remarks></remarks>
 </member>
-<member name="M:UtilMDL.MSG.UtilMsgHandler.dspMSG(System.String,System.String)">
+<member name="M:UtilMDL.MSG.UtilMsgHandler.dspMSG(System.String,System.String,System.String)">
  <summary>
  メッセージ表示 通知されたメッセージIDに対応するMSGを編集して表示する
  </summary>
@@ -1305,7 +1305,7 @@ Dim RtnDir As String = UtilDirectorySelector.choiceFolder("C:\WINDOWS", "○○�
  <returns></returns>
  <remarks></remarks>
 </member>
-<member name="M:UtilMDL.MSG.UtilMsgHandler.getMSG(System.String,System.String)">
+<member name="M:UtilMDL.MSG.UtilMsgHandler.getMSG(System.String,System.String,System.String)">
  <summary>
  メッセージ取得 通知されたメッセージIDに対応するMSGを編集して返却する
  </summary>

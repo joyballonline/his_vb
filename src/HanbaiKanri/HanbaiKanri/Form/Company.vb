@@ -108,283 +108,116 @@ Public Class Company
     End Sub
 
     Private Sub btnAddCompany_Click_1(sender As Object, e As EventArgs) Handles BtnRegistration.Click
+        '項目チェック
+        Dim strMessage As String = ""    'メッセージ本文
+        Dim strMessageTitle As String = ""      'メッセージタイトル
+        ''会社コードは必須
+        If TxtCompanyCode.Text = "" Then
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                strMessage = "Please enter Company Code. "
+                strMessageTitle = "CompanyCode Error"
+            Else
+                strMessage = "会社コードを入力してください。"
+                strMessageTitle = "会社コード入力エラー"
+            End If
+            Dim result As DialogResult = MessageBox.Show(strMessage, strMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Exit Sub
+        End If
+        '表示順の属性チェック（表示順のみ数値項目）
+        If Not IsNumeric(TxtDisplayOrder.Text) And Not TxtDisplayOrder.Text = "" Then
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                strMessage = "Please enter with numeric value. "
+                strMessageTitle = "DisplayOrder Error"
+            Else
+                strMessage = "数値で入力してください。"
+                strMessageTitle = "表示順入力エラー"
+            End If
+            Dim result As DialogResult = MessageBox.Show(strMessage, strMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Exit Sub
+        End If
+
+
         Dim dtToday As DateTime = DateTime.Now
         Try
             If _status = "ADD" Then
                 Dim Sql As String = ""
 
-                Sql = ""
-                Sql += "INSERT INTO "
-                Sql += "Public."
-                Sql += "m01_company("
-                Sql += "会社コード, 会社名, 会社略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, ＦＡＸ番号, 代表者役職, 代表者名, 表示順, 備考, 銀行名, 銀行コード, 支店名, 支店コード, 預金種目, 口座番号, 口座名義, 在庫単価評価法, 前払法人税率, 会計用コード, 更新者, 更新日)"
-                Sql += " VALUES('"
-                Sql += TxtCompanyCode.Text
-                Sql += "', '"
-                Sql += TxtCompanyName.Text
-                Sql += "', '"
-                Sql += TxtCompanyShortName.Text
-                Sql += "', '"
-                Sql += TxtPostalCode.Text
-                Sql += "', '"
-                Sql += TxtAddress1.Text
-                Sql += "', '"
-                Sql += TxtAddress2.Text
-                Sql += "', '"
-                Sql += TxtAddress3.Text
-                Sql += "', '"
-                Sql += TxtTel.Text
-                Sql += "', '"
-                Sql += TxtFax.Text
-                Sql += "', '"
-                Sql += TxtRepresentativePosition.Text
-                Sql += "', '"
-                Sql += TxtRepresentativeName.Text
-                Sql += "', '"
+                Sql += "INSERT INTO Public.m01_company ( "
+                Sql += "会社コード, 会社名, 会社略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, ＦＡＸ番号, 代表者役職, 代表者名, 表示順, 備考, 銀行名, 銀行コード, 支店名, 支店コード, 預金種目, 口座番号, 口座名義, 在庫単価評価法, 前払法人税率, 会計用コード, 更新者, 更新日"
+                Sql += " ) VALUES("
+                Sql += " '" & TxtCompanyCode.Text & "'"     '会社コード
+                Sql += ", '" & TxtCompanyName.Text & "'"    '会社名
+                Sql += ", '" & TxtCompanyShortName.Text & "'"   '会社略称
+                Sql += ", '" & TxtPostalCode.Text & "'"     '郵便番号
+                Sql += ", '" & TxtAddress1.Text & "'"       '住所１
+                Sql += ", '" & TxtAddress2.Text & "'"       '住所２
+                Sql += ", '" & TxtAddress3.Text & "'"       '住所３
+                Sql += ", '" & TxtTel.Text & "'"            '電話番号
+                Sql += ", '" & TxtFax.Text & "'"            'ＦＡＸ番号
+                Sql += ", '" & TxtRepresentativePosition.Text & "'"     '代表者役職
+                Sql += ", '" & TxtRepresentativeName.Text & "'"     '代表者名
+                Sql += ", '"        '表示順
                 If TxtDisplayOrder.Text = "" Then
                     Sql += "0"
                 Else
                     Sql += TxtDisplayOrder.Text
                 End If
-
-                Sql += "', '"
-                Sql += TxtRemarks.Text
-                Sql += "', '"
-                Sql += TxtBankName.Text
-                Sql += "', '"
-                Sql += TxtBankCode.Text
-                Sql += "', '"
-                Sql += TxtBranchName.Text
-                Sql += "', '"
-                Sql += TxtBranchOfficeCode.Text
-                Sql += "', '"
-                Sql += TxtDepositCategory.Text
-                Sql += "', '"
-                Sql += TxtAccountNumber.Text
-                Sql += "', '"
-                Sql += TxtAccountName.Text
-                Sql += "', '"
-                Sql += CbEvaluation.SelectedValue.ToString
-                Sql += "', '"
-                Sql += TxtPph.Text
-                Sql += "', '"
-                Sql += TxtBranchCode.Text
-                Sql += "', '"
-                Sql += frmC01F10_Login.loginValue.TantoNM
-                Sql += "', '"
-                Sql += dtToday
-                Sql += " ')"
-                Sql += "RETURNING 会社コード"
-                Sql += ", "
-                Sql += "会社名"
-                Sql += ", "
-                Sql += "会社略称"
-                Sql += ", "
-                Sql += "郵便番号"
-                Sql += ", "
-                Sql += "住所１"
-                Sql += ", "
-                Sql += "住所２"
-                Sql += ", "
-                Sql += "住所３"
-                Sql += ", "
-                Sql += "電話番号"
-                Sql += ", "
-                Sql += "代表者役職"
-                Sql += ", "
-                Sql += "代表者名"
-                Sql += ", "
-                Sql += "表示順"
-                Sql += ", "
-                Sql += "備考"
-                Sql += ", "
-                Sql += "銀行名"
-                Sql += ", "
-                Sql += "銀行コード"
-                Sql += ", "
-                Sql += "支店名"
-                Sql += ", "
-                Sql += "支店コード"
-                Sql += ", "
-                Sql += "預金種目"
-                Sql += ", "
-                Sql += "口座番号"
-                Sql += ", "
-                Sql += "口座名義"
-                Sql += ", "
-                Sql += "在庫単価評価法"
-                Sql += ", "
-                Sql += "前払法人税率"
-                Sql += ", "
-                Sql += "会計用コード"
-                Sql += ", "
-                Sql += "更新者"
-                Sql += ", "
-                Sql += "更新日"
+                Sql += ", '" & TxtRemarks.Text & "'"        '備考
+                Sql += ", '" & TxtBankName.Text & "'"      '銀行名
+                Sql += ", '" & TxtBankCode.Text & "'"      '銀行コード
+                Sql += ", '" & TxtBranchName.Text & "'"    '支店名
+                Sql += ", '" & TxtBranchOfficeCode.Text & "'"       '支店コード
+                Sql += ", '" & TxtDepositCategory.Text & "'"        '預金種目
+                Sql += ", '" & TxtAccountNumber.Text & "'"          '口座番号
+                Sql += ", '" & TxtAccountName.Text & "'"            '口座名義
+                Sql += ", '" & CbEvaluation.SelectedValue.ToString & "'"        '在庫単価評価法
+                Sql += ", '"        '前払法人税率
+                If TxtPph.Text = "" Then
+                    Sql += "0"
+                Else
+                    Sql += TxtPph.Text
+                End If
+                Sql += ", '" & TxtBranchCode.Text & "'"     '会計用コード
+                Sql += ", '" & frmC01F10_Login.loginValue.TantoNM & "'"     '更新者
+                Sql += ", '" & dtToday & "'"        '更新日
+                Sql += " )"
 
                 _db.executeDB(Sql)
             Else
                 Dim Sql As String = ""
-
-                Sql = ""
-                Sql += "UPDATE "
-                Sql += "Public."
-                Sql += "m01_company "
+                Sql += "UPDATE Public.m01_company "
                 Sql += "SET "
-                Sql += " 会社コード"
-                Sql += " = '"
-                Sql += TxtCompanyCode.Text
-                Sql += "', "
-                Sql += "会社名"
-                Sql += " = '"
-                Sql += TxtCompanyName.Text
-                Sql += "', "
-                Sql += "会社略称"
-                Sql += " = '"
-                Sql += TxtCompanyShortName.Text
-                Sql += "', "
-                Sql += "郵便番号"
-                Sql += " = '"
-                Sql += TxtPostalCode.Text
-                Sql += "', "
-                Sql += "住所１"
-                Sql += " = '"
-                Sql += TxtAddress1.Text
-                Sql += "', "
-                Sql += "住所２"
-                Sql += " = '"
-                Sql += TxtAddress2.Text
-                Sql += "', "
-                Sql += "住所３"
-                Sql += " = '"
-                Sql += TxtAddress3.Text
-                Sql += "', "
-                Sql += "電話番号"
-                Sql += " = '"
-                Sql += TxtTel.Text
-                Sql += "', "
-                Sql += "ＦＡＸ番号"
-                Sql += " = '"
-                Sql += TxtFax.Text
-                Sql += "', "
-                Sql += "代表者役職"
-                Sql += " = '"
-                Sql += TxtRepresentativePosition.Text
-                Sql += "', "
-                Sql += "代表者名"
-                Sql += " = '"
-                Sql += TxtRepresentativeName.Text
-                Sql += "', "
-                Sql += "表示順"
-                Sql += " = '"
-                Sql += TxtDisplayOrder.Text
-                Sql += "', "
-                Sql += "備考"
-                Sql += " = '"
-                Sql += TxtRemarks.Text
-                Sql += "', "
-                Sql += "銀行名"
-                Sql += " = '"
-                Sql += TxtBankName.Text
-                Sql += "', "
-                Sql += "銀行コード"
-                Sql += " = '"
-                Sql += TxtBankCode.Text
-                Sql += "', "
-                Sql += "支店名"
-                Sql += " = '"
-                Sql += TxtBranchName.Text
-                Sql += "', "
-                Sql += "支店コード"
-                Sql += " = '"
-                Sql += TxtBranchOfficeCode.Text
-                Sql += "', "
-                Sql += "預金種目"
-                Sql += " = '"
-                Sql += TxtDepositCategory.Text
-                Sql += "', "
-                Sql += "口座番号"
-                Sql += " = '"
-                Sql += TxtAccountNumber.Text
-                Sql += "', "
-                Sql += "口座名義"
-                Sql += " = '"
-                Sql += TxtAccountName.Text
-                Sql += "', "
-                Sql += "在庫単価評価法"
-                Sql += " = '"
-                Sql += CbEvaluation.SelectedValue.ToString
-                Sql += "', "
-                Sql += "前払法人税率"
-                Sql += " = '"
-                Sql += TxtPph.Text
-                Sql += "', "
-                Sql += "会計用コード"
-                Sql += " = '"
-                Sql += TxtBranchCode.Text
-                Sql += "', "
-                Sql += "更新者"
-                Sql += " = '"
-                Sql += frmC01F10_Login.loginValue.TantoNM
-                Sql += "', "
-                Sql += "更新日"
-                Sql += " = '"
-                Sql += dtToday
-                Sql += "' "
-                Sql += "WHERE"
-                Sql += " 会社コード"
-                Sql += "='"
-                Sql += _companyCode
-                Sql += "'"
-                Sql += "RETURNING 会社コード"
-                Sql += ", "
-                Sql += "会社名"
-                Sql += ", "
-                Sql += "会社略称"
-                Sql += ", "
-                Sql += "郵便番号"
-                Sql += ", "
-                Sql += "住所１"
-                Sql += ", "
-                Sql += "住所２"
-                Sql += ", "
-                Sql += "住所３"
-                Sql += ", "
-                Sql += "電話番号"
-                Sql += ", "
-                Sql += "ＦＡＸ番号"
-                Sql += ", "
-                Sql += "代表者役職"
-                Sql += ", "
-                Sql += "代表者名"
-                Sql += ", "
-                Sql += "表示順"
-                Sql += ", "
-                Sql += "備考"
-                Sql += ", "
-                Sql += "銀行名"
-                Sql += ", "
-                Sql += "銀行コード"
-                Sql += ", "
-                Sql += "支店名"
-                Sql += ", "
-                Sql += "支店コード"
-                Sql += ", "
-                Sql += "預金種目"
-                Sql += ", "
-                Sql += "口座番号"
-                Sql += ", "
-                Sql += "口座名義"
-                Sql += ", "
-                Sql += "在庫単価評価法"
-                Sql += ", "
-                Sql += "前払法人税率"
-                Sql += ", "
-                Sql += "会計用コード"
-                Sql += ", "
-                Sql += "更新者"
-                Sql += ", "
-                Sql += "更新日"
+                Sql += " 会社コード = '" & TxtCompanyCode.Text & "'"
+                Sql += ", 会社名 = '" & TxtCompanyName.Text & "'"
+                Sql += ", 会社略称 = '" & TxtCompanyShortName.Text & "'"
+                Sql += ", 郵便番号 = '" & TxtPostalCode.Text & "'"
+                Sql += ", 住所１ = '" & TxtAddress1.Text & "'"
+                Sql += ", 住所２ = '" & TxtAddress2.Text & "'"
+                Sql += ", 住所３ = '" & TxtAddress3.Text & "'"
+                Sql += ", 電話番号 = '" & TxtTel.Text & "'"
+                Sql += ", ＦＡＸ番号 = '" & TxtFax.Text & "'"
+                Sql += ", 代表者役職 = '" & TxtRepresentativePosition.Text & "'"
+                Sql += ", 代表者名 = '" & TxtRepresentativeName.Text & "'"
+                Sql += ", 表示順 = "
+                If TxtDisplayOrder.Text = "" Then
+                    Sql += "0"
+                Else
+                    Sql += TxtDisplayOrder.Text
+                End If
+                Sql += ", 備考 = '" & TxtRemarks.Text & "'"
+                Sql += ", 銀行名 = '" & TxtBankName.Text & "'"
+                Sql += ", 銀行コード = '" & TxtBankCode.Text & "'"
+                Sql += ", 支店名 = '" & TxtBranchName.Text & "'"
+                Sql += ", 支店コード = '" & TxtBranchOfficeCode.Text & "'"
+                Sql += ", 預金種目 = '" & TxtDepositCategory.Text & "'"
+                Sql += ", 口座番号 = '" & TxtAccountNumber.Text & "'"
+                Sql += ", 口座名義 = '" & TxtAccountName.Text & "'"
+                Sql += ", 在庫単価評価法 = " & CbEvaluation.SelectedValue.ToString
+                Sql += ", 前払法人税率 = " & TxtPph.Text
+                Sql += ", 会計用コード = '" & TxtBranchCode.Text & "'"
+                Sql += ", 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+                Sql += ", 更新日 = '" & dtToday & "'"
+                Sql += "WHERE 会社コード ='" & _companyCode & "'"
 
                 _db.executeDB(Sql)
             End If
