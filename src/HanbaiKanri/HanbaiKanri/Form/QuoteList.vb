@@ -707,63 +707,25 @@ Public Class QuoteList
         Sql1 += "WHERE 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql1 += " AND 見積番号 ='" & DgvMithd.Rows(DgvMithd.CurrentCell.RowIndex).Cells("見積番号").Value & "' "
         Sql1 += " AND 見積番号枝番 ='" & DgvMithd.Rows(DgvMithd.CurrentCell.RowIndex).Cells("見積番号枝番").Value & "' "
-        Sql1 += "RETURNING 会社コード"
-        Sql1 += ",見積番号 "
-        Sql1 += ",見積番号枝番 "
-        Sql1 += ",得意先コード "
-        Sql1 += ",得意先名 "
-        Sql1 += ",得意先郵便番号 "
-        Sql1 += ",得意先住所 "
-        Sql1 += ",得意先電話番号 "
-        Sql1 += ",得意先ＦＡＸ "
-        Sql1 += ",得意先担当者役職 "
-        Sql1 += ",得意先担当者名 "
-        Sql1 += ",見積日 "
-        Sql1 += ",見積有効期限 "
-        Sql1 += ",支払条件 "
-        Sql1 += ",見積金額 "
-        Sql1 += ",仕入金額 "
-        Sql1 += ",営業担当者 "
-        Sql1 += ",入力担当者 "
-        Sql1 += ",備考 "
-        Sql1 += ",ＶＡＴ "
-        Sql1 += ",取消日 "
-        Sql1 += ",取消区分 "
-        Sql1 += ",登録日 "
-        Sql1 += ",受注日 "
-        Sql1 += ",更新日 "
-        Sql1 += ",更新者"
+
+        Dim strMessage As String = ""    'メッセージ本文
+        Dim strMessageTitle As String = ""      'メッセージタイトル
 
         If frmC01F10_Login.loginValue.Language = "ENG" Then
-            Dim result As DialogResult = MessageBox.Show("Would you like to cancel the Quotation？",
-                                            "Question",
-                                            MessageBoxButtons.YesNoCancel,
-                                            MessageBoxIcon.Question,
-                                            MessageBoxDefaultButton.Button2)
-
-            If result = DialogResult.Yes Then
-                _db.executeDB(Sql1)
-                QuoteListLoad()
-            ElseIf result = DialogResult.No Then
-
-            ElseIf result = DialogResult.Cancel Then
-
-            End If
+            strMessage = "Would you like to cancel the Quotation？"
+            strMessageTitle = "Question"
         Else
-            Dim result As DialogResult = MessageBox.Show("見積を取り消しますか？",
-                                            "質問",
-                                            MessageBoxButtons.YesNoCancel,
-                                            MessageBoxIcon.Question,
-                                            MessageBoxDefaultButton.Button2)
+            strMessage = "見積を取り消しますか？"
+            strMessageTitle = "質問"
+        End If
+        Dim result As DialogResult = MessageBox.Show(strMessage, strMessageTitle, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+        If result = DialogResult.Yes Then
+            _db.executeDB(Sql1)
+            QuoteListLoad()
+        ElseIf result = DialogResult.No Then
 
-            If result = DialogResult.Yes Then
-                _db.executeDB(Sql1)
-                QuoteListLoad()
-            ElseIf result = DialogResult.No Then
+        ElseIf result = DialogResult.Cancel Then
 
-            ElseIf result = DialogResult.Cancel Then
-
-            End If
         End If
     End Sub
 
