@@ -278,24 +278,9 @@ Public Class Company
         End If
         Dim Sql1 As String = ""
 
-        Sql1 += "SELECT "
-        Sql1 += "* "
-        Sql1 += "FROM "
-        Sql1 += "public"
-        Sql1 += "."
-        Sql1 += "m90_hanyo"
-        Sql1 += " WHERE "
-        Sql1 += "会社コード"
-        Sql1 += " ILIKE "
-        Sql1 += "'"
-        Sql1 += frmC01F10_Login.loginValue.BumonNM
-        Sql1 += "'"
-        Sql1 += " AND "
-        Sql1 += "固定キー"
-        Sql1 += " ILIKE "
-        Sql1 += "'"
-        Sql1 += "3"
-        Sql1 += "'"
+        Sql1 += "SELECT * FROM public.m90_hanyo"
+        Sql1 += " WHERE 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql1 += " AND 固定キー ='3'"
 
         Dim reccnt As Integer = 0
         Dim ds1 As DataSet = _db.selectDB(Sql1, RS, reccnt)
@@ -318,18 +303,8 @@ Public Class Company
         If _status = "EDIT" Then
             Dim Sql As String = ""
 
-            Sql += "SELECT "
-            Sql += "* "
-            Sql += "FROM "
-            Sql += "public"
-            Sql += "."
-            Sql += "m01_company"
-            Sql += " WHERE "
-            Sql += "会社コード"
-            Sql += " ILIKE "
-            Sql += "'"
-            Sql += _companyCode
-            Sql += "'"
+            Sql += "SELECT * FROM public.m01_company"
+            Sql += " WHERE 会社コード = '" & _companyCode & "'"
 
 
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
