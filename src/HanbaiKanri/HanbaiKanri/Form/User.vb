@@ -74,193 +74,113 @@ Public Class User
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles BtnRegistration.Click
+        '項目チェック
+        Dim strMessage As String = ""    'メッセージ本文
+        Dim strMessageTitle As String = ""      'メッセージタイトル
+        ''ユーザＩＤは必須
+        If TxtUserId.Text = "" Then
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                strMessage = "Please enter User ID. "
+                strMessageTitle = "User ID Error"
+            Else
+                strMessage = "ユーザＩＤを入力してください。"
+                strMessageTitle = "ユーザＩＤ入力エラー"
+            End If
+            Dim result As DialogResult = MessageBox.Show(strMessage, strMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Exit Sub
+        End If
+        '無効フラグの属性チェック（表示順のみ数値項目）
+        If Not IsNumeric(TxtFlg.Text) And Not TxtFlg.Text = "" Then
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                strMessage = "Please enter with numeric value. "
+                strMessageTitle = "Disable Error"
+            Else
+                strMessage = "数値で入力してください。"
+                strMessageTitle = "無効フラグ入力エラー"
+            End If
+            Dim result As DialogResult = MessageBox.Show(strMessage, strMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Exit Sub
+        End If
+        '権限の属性チェック（表示順のみ数値項目）
+        If Not IsNumeric(TxtAuthority.Text) And Not TxtAuthority.Text = "" Then
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                strMessage = "Please enter with numeric value. "
+                strMessageTitle = "Authority Error"
+            Else
+                strMessage = "数値で入力してください。"
+                strMessageTitle = "権限入力エラー"
+            End If
+            Dim result As DialogResult = MessageBox.Show(strMessage, strMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Exit Sub
+        End If
+
+        '登録処理ここから
         Dim dtToday As DateTime = DateTime.Now
         Try
             If _status = "ADD" Then
                 Dim Sql As String = ""
 
-                Sql = ""
-                Sql += "INSERT INTO "
-                Sql += "Public."
-                Sql += "m02_user("
+                Sql += "INSERT INTO Public.m02_user("
                 Sql += "会社コード, ユーザＩＤ, 氏名, 略名, 備考, 無効フラグ, 権限, 言語, 更新者, 更新日)"
-                Sql += "VALUES('"
-                Sql += frmC01F10_Login.loginValue.BumonNM
-                Sql += "', '"
-                Sql += TxtUserId.Text
-                Sql += "', '"
-                Sql += TxtName.Text
-                Sql += "', '"
-                Sql += TxtShortName.Text
-                Sql += "', '"
-                Sql += TxtRemarks.Text
-                Sql += "', '"
+                Sql += "VALUES("
+                Sql += " '" & frmC01F10_Login.loginValue.BumonCD & "'"  '会社コード
+                Sql += ", '" & TxtUserId.Text & "'"         'ユーザＩＤ
+                Sql += ", '" & TxtName.Text & "'"           '氏名
+                Sql += ", '" & TxtShortName.Text & "'"      '略名
+                Sql += ", '" & TxtRemarks.Text & "'"        '備考
+                Sql += ", "                    '無効フラグ
                 If TxtFlg.Text = "" Then
                     Sql += "0"
                 Else
                     Sql += TxtFlg.Text
                 End If
-                Sql += "', '"
+                Sql += ", "                     '権限
                 If TxtAuthority.Text = "" Then
                     Sql += "0"
                 Else
                     Sql += TxtAuthority.Text
                 End If
-                Sql += "', '"
-                Sql += TxtLangage.Text
-                Sql += "', '"
-                Sql += frmC01F10_Login.loginValue.TantoNM
-                Sql += "', '"
-                Sql += dtToday
-                Sql += " ')"
-                Sql += "RETURNING 会社コード"
-                Sql += ", "
-                Sql += "ユーザＩＤ"
-                Sql += ", "
-                Sql += "氏名"
-                Sql += ", "
-                Sql += "略名"
-                Sql += ", "
-                Sql += "備考"
-                Sql += ", "
-                Sql += "無効フラグ"
-                Sql += ", "
-                Sql += "権限"
-                Sql += ", "
-                Sql += "言語"
-                Sql += ", "
-                Sql += "更新者"
-                Sql += ", "
-                Sql += "更新日"
+                Sql += ", '" & TxtLangage.Text & "'"        '言語
+                Sql += ", '" & frmC01F10_Login.loginValue.TantoNM & "'"     '更新者
+                Sql += ", '" & dtToday & "'"                '更新日
+                Sql += " )"
 
                 _db.executeDB(Sql)
 
                 Sql = ""
-                Sql += "INSERT INTO "
-                Sql += "Public."
-                Sql += "m03_pswd("
-                Sql += "会社コード, ユーザＩＤ, 世代番号, 適用開始日, 適用終了日, パスワード, パスワード変更方法, 有効期限, 更新者, 更新日)"
-                Sql += "VALUES('"
-                Sql += frmC01F10_Login.loginValue.BumonNM
-                Sql += "', '"
-                Sql += TxtUserId.Text
-                Sql += "', '"
-                Sql += "1"
-                Sql += "', '"
-                Sql += dtToday
-                Sql += "', '"
-                Sql += "2099-12-31"
-                Sql += "', '"
-                Sql += TxtPassword.Text
-                Sql += "', '"
-                Sql += "1"
-                Sql += "', '"
-                Sql += "2099-12-31"
-                Sql += "', '"
-                Sql += frmC01F10_Login.loginValue.TantoNM
-                Sql += "', '"
-                Sql += dtToday
-                Sql += " ')"
-                Sql += "RETURNING 会社コード"
-                Sql += ", "
-                Sql += "ユーザＩＤ"
-                Sql += ", "
-                Sql += "世代番号"
-                Sql += ", "
-                Sql += "適用開始日"
-                Sql += ", "
-                Sql += "適用終了日"
-                Sql += ", "
-                Sql += "パスワード"
-                Sql += ", "
-                Sql += "パスワード変更方法"
-                Sql += ", "
-                Sql += "有効期限"
-                Sql += ", "
-                Sql += "更新者"
-                Sql += ", "
-                Sql += "更新日"
+                Sql += "INSERT INTO Public.m03_pswd"
+                Sql += "(会社コード, ユーザＩＤ, 世代番号, 適用開始日, 適用終了日, パスワード, パスワード変更方法, 有効期限, 更新者, 更新日)"
+                Sql += "VALUES("
+                Sql += " '" & frmC01F10_Login.loginValue.BumonCD & "'"      '会社コード
+                Sql += ", '" & TxtUserId.Text & "'"         'ユーザＩＤ
+                Sql += ", '1'"                              '世代番号
+                Sql += ", '" & dtToday & "'"                '適用開始日
+                Sql += ", '2099-12-31'"                     '適用終了日
+                Sql += ", '" & TxtPassword.Text & "'"       'パスワード
+                Sql += ", 1"                                'パスワード変更方法
+                Sql += ", '2099-12-31'"                     '有効期限
+                Sql += ", '" & frmC01F10_Login.loginValue.TantoNM & "'"     '更新者
+                Sql += ", '" & dtToday & "'"                '更新日
+                Sql += " )"
 
                 _db.executeDB(Sql)
 
             Else
                 Dim Sql As String = ""
 
-                Sql = ""
-                Sql += "UPDATE "
-                Sql += "Public."
-                Sql += "m02_user "
+                Sql += "UPDATE Public.m02_user "
                 Sql += "SET "
-                Sql += " 会社コード"
-                Sql += " = '"
-                Sql += TxtCompanyCode.Text
-                Sql += "', "
-                Sql += "ユーザＩＤ"
-                Sql += " = '"
-                Sql += TxtUserId.Text
-                Sql += "', "
-                Sql += "氏名"
-                Sql += " = '"
-                Sql += TxtName.Text
-                Sql += "', "
-                Sql += "略名"
-                Sql += " = '"
-                Sql += TxtShortName.Text
-                Sql += "', "
-                Sql += "備考"
-                Sql += " = '"
-                Sql += TxtRemarks.Text
-                Sql += "', "
-                Sql += "無効フラグ"
-                Sql += " = '"
-                Sql += TxtFlg.Text
-                Sql += "', "
-                Sql += "権限"
-                Sql += " = '"
-                Sql += TxtAuthority.Text
-                Sql += "', "
-                Sql += "言語"
-                Sql += " = '"
-                Sql += TxtLangage.Text
-                Sql += "', "
-                Sql += "更新者"
-                Sql += " = '"
-                Sql += frmC01F10_Login.loginValue.TantoNM
-                Sql += "', "
-                Sql += "更新日"
-                Sql += " = '"
-                Sql += dtToday
-                Sql += "' "
-                Sql += "WHERE"
-                Sql += " 会社コード"
-                Sql += "='"
-                Sql += _companyCode
-                Sql += "'"
-                Sql += " AND"
-                Sql += " ユーザＩＤ"
-                Sql += "='"
-                Sql += _userId
-                Sql += "' "
-                Sql += "RETURNING 会社コード"
-                Sql += ", "
-                Sql += "ユーザＩＤ"
-                Sql += ", "
-                Sql += "氏名"
-                Sql += ", "
-                Sql += "略名"
-                Sql += ", "
-                Sql += "備考"
-                Sql += ", "
-                Sql += "無効フラグ"
-                Sql += ", "
-                Sql += "権限"
-                Sql += ", "
-                Sql += "言語"
-                Sql += ", "
-                Sql += "更新者"
-                Sql += ", "
-                Sql += "更新日"
-
+                Sql += " ユーザＩＤ = '" & TxtUserId.Text & "'"
+                Sql += " , 氏名 = '" & TxtName.Text & "'"
+                Sql += " , 略名 = '" & TxtShortName.Text & "'"
+                Sql += " , 備考 = '" & TxtRemarks.Text & "'"
+                Sql += " , 無効フラグ = " & TxtFlg.Text
+                Sql += " , 権限 = " & TxtAuthority.Text
+                Sql += " , 言語 = '" & TxtLangage.Text & "'"
+                Sql += " , 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+                Sql += " , 更新日 = '" & dtToday & "'"
+                Sql += "WHERE 会社コード ='" & _companyCode & "'"
+                Sql += " AND ユーザＩＤ ='" & _userId & "' "
                 _db.executeDB(Sql)
             End If
 
@@ -311,31 +231,10 @@ Public Class User
 
             Dim Sql As String = ""
 
-            Sql += "SELECT "
-            Sql += "会社コード, "
-            Sql += "ユーザＩＤ, "
-            Sql += "氏名, "
-            Sql += "略名, "
-            Sql += "備考, "
-            Sql += "無効フラグ, "
-            Sql += "権限, "
-            Sql += "言語, "
-            Sql += "更新者, "
-            Sql += "更新日 "
-            Sql += "FROM "
-            Sql += "public"
-            Sql += "."
-            Sql += "m02_user "
-            Sql += "WHERE"
-            Sql += " 会社コード"
-            Sql += "='"
-            Sql += _companyCode
-            Sql += "'"
-            Sql += " AND"
-            Sql += " ユーザＩＤ"
-            Sql += "='"
-            Sql += _userId
-            Sql += "' "
+            Sql += "SELECT 会社コード, ユーザＩＤ, 氏名, 略名, 備考, 無効フラグ, 権限, 言語, 更新者, 更新日 "
+            Sql += "FROM public.m02_user "
+            Sql += "WHERE 会社コード ='" & _companyCode & "'"
+            Sql += " AND ユーザＩＤ ='" & _userId & "'"
 
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
