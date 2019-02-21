@@ -288,6 +288,11 @@ Public Class QuoteList
                 strWhere += " and "
                 strWhere += " 取消区分 = '0'"
             End If
+            '受注済みの見積は取消できない
+            '受注済みの見積は仕入単価入力もできない
+            If _status = "CANCEL" Or _status = "PRICE" Then
+                strWhere += " and 受注日 is null"
+            End If
 
             Sql += strWhere
             Sql += " ORDER BY 見積番号 DESC,見積番号枝番 DESC"
