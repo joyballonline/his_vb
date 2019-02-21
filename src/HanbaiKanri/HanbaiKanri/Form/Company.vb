@@ -156,7 +156,7 @@ Public Class Company
                 Sql += ", '" & TxtFax.Text & "'"            'ＦＡＸ番号
                 Sql += ", '" & TxtRepresentativePosition.Text & "'"     '代表者役職
                 Sql += ", '" & TxtRepresentativeName.Text & "'"     '代表者名
-                Sql += ", '"        '表示順
+                Sql += ", "        '表示順
                 If TxtDisplayOrder.Text = "" Then
                     Sql += "0"
                 Else
@@ -171,7 +171,7 @@ Public Class Company
                 Sql += ", '" & TxtAccountNumber.Text & "'"          '口座番号
                 Sql += ", '" & TxtAccountName.Text & "'"            '口座名義
                 Sql += ", '" & CbEvaluation.SelectedValue.ToString & "'"        '在庫単価評価法
-                Sql += ", '"        '前払法人税率
+                Sql += ", "        '前払法人税率
                 If TxtPph.Text = "" Then
                     Sql += "0"
                 Else
