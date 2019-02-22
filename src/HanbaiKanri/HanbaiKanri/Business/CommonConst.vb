@@ -292,5 +292,4 @@ Public Class CommonConst
     Public Const FIXED_KEY_TRADE_TERMS As String = "5"          '貿易条件
     Public Const FIXED_KEY_PURCHASING_CLASS As String = "1002"       '仕入区分
 
-
 End Class
