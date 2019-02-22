@@ -131,21 +131,12 @@ Public Class OrderList
 
                 '明細単位の場合
                 'joinするのでとりあえず直書き
-                Sql = "SELECT"
-                Sql += " *"
-                Sql += " FROM "
-                Sql += " public.t11_cymndt t11 "
+                Sql = "SELECT * FROM  public.t11_cymndt t11 "
+                Sql += " INNER JOIN  t10_cymnhd t10"
+                Sql += " ON t11.会社コード = t10.会社コード"
+                Sql += " AND  t11.受注番号 = t10.受注番号"
 
-                Sql += " INNER JOIN "
-                Sql += " t10_cymnhd t10"
-                Sql += " ON "
-
-                Sql += " t11.会社コード = t10.会社コード"
-                Sql += " AND "
-                Sql += " t11.受注番号 = t10.受注番号"
-
-                Sql += " WHERE "
-                Sql += " t11.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonNM & "'"
+                Sql += " WHERE t11.会社コード = '" & frmC01F10_Login.loginValue.BumonNM & "'"
 
                 '抽出条件
                 Dim customerName As String = escapeSql(TxtCustomerName.Text)
@@ -261,18 +252,8 @@ Public Class OrderList
                     Else
 
                         'リードタイムが入っていたら汎用マスタから単位を取得して連結する
-                        Sql = " AND "
-                        Sql += "固定キー"
-                        Sql += " ILIKE "
-                        Sql += "'"
-                        Sql += "4"
-                        Sql += "'"
-                        Sql += " AND "
-                        Sql += "可変キー"
-                        Sql += " ILIKE "
-                        Sql += "'"
-                        Sql += ds.Tables(RS).Rows(index)("リードタイム単位").ToString
-                        Sql += "'"
+                        Sql = " AND 固定キー = '4'"
+                        Sql += " AND 可変キー = '" & ds.Tables(RS).Rows(index)("リードタイム単位").ToString & "'"
 
                         Dim dsHanyo As DataSet = getDsData("m90_hanyo", Sql)
 
@@ -532,21 +513,9 @@ Public Class OrderList
             Sql1 += ", 更新日 = '" & dtNow & "'"
             Sql1 += ", 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
 
-            Sql1 += " WHERE "
-            Sql1 += " 会社コード "
-            Sql1 += "='"
-            Sql1 += frmC01F10_Login.loginValue.BumonNM
-            Sql1 += "'"
-            Sql1 += " AND "
-            Sql1 += " 受注番号"
-            Sql1 += "='"
-            Sql1 += DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号").Value
-            Sql1 += "' "
-            Sql1 += " AND"
-            Sql1 += " 受注番号枝番"
-            Sql1 += "='"
-            Sql1 += DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号枝番").Value
-            Sql1 += "' "
+            Sql1 += " WHERE 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql1 += " AND 受注番号 ='" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号").Value & "'"
+            Sql1 += " AND 受注番号枝番 ='" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号枝番").Value & "'"
 
             '取消確認のアラート
             Dim result As DialogResult = _msgHd.dspMSG("confirmCancel", frmC01F10_Login.loginValue.Language)
@@ -866,15 +835,9 @@ Public Class OrderList
         Dim reccnt As Integer = 0 'DB用（デフォルト）
         Dim Sql As String = ""
 
-        Sql += "SELECT"
-        Sql += " *"
-        Sql += " FROM "
-
-        Sql += "public." & tableName
+        Sql += "SELECT * FROM public." & tableName
         Sql += " WHERE "
-        Sql += "会社コード"
-        Sql += " ILIKE  "
-        Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += "会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql += txtParam
         Return _db.selectDB(Sql, RS, reccnt)
     End Function
