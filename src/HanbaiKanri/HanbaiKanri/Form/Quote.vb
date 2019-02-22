@@ -499,6 +499,7 @@ Public Class Quote
             End If
 
         ElseIf Status Is "PRICE" Then
+            '仕入単価入力モード
             If frmC01F10_Login.loginValue.Language = "ENG" Then
                 LblMode.Text = "PurchasePriceInputMode"
             Else
@@ -512,6 +513,16 @@ Public Class Quote
             BtnClone.Visible = False
             BtnInsert.Visible = False
             BtnQuote.Visible = False
+            'グリッドの入力項目を制限
+            DgvItemList.Columns("仕入区分").ReadOnly = True
+            DgvItemList.Columns("メーカー").ReadOnly = True
+            DgvItemList.Columns("品名").ReadOnly = True
+            DgvItemList.Columns("型式").ReadOnly = True
+            DgvItemList.Columns("数量").ReadOnly = True
+            DgvItemList.Columns("単位").ReadOnly = True
+            DgvItemList.Columns("仕入先コード").ReadOnly = True
+            DgvItemList.Columns("仕入先").ReadOnly = True
+
         ElseIf Status Is "EDIT" Then
             If frmC01F10_Login.loginValue.Language = "ENG" Then
                 LblMode.Text = "EditMode"
@@ -948,6 +959,10 @@ Public Class Quote
     'Dgv内での検索
     Private Sub DgvItemList_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) _
      Handles DgvItemList.CellDoubleClick
+        '仕入単価入力時は各項目変更しないので検索も起動しない
+        If Status Is "PRICE" Then
+            Exit Sub
+        End If
 
         Dim ColIdx As Integer
         ColIdx = DgvItemList.CurrentCell.ColumnIndex
@@ -987,7 +1002,7 @@ Public Class Quote
             End If
         End If
 
-        If ColIdx = 4 Then
+        If ColIdx = 4 Then      '型式検索
             If Maker IsNot Nothing And Item IsNot Nothing Then
                 Dim openForm As Form = Nothing
                 openForm = New MakerSearch(_msgHd, _db, Me, RowIdx, ColIdx, Maker, Item, Model)
