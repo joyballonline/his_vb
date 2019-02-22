@@ -363,7 +363,7 @@ Public Class OrderingList
                 End If
 
                 Sql += " ORDER BY "
-                Sql += "更新日 DESC"
+                Sql += "t21.更新日 DESC"
 
                 '得意先と一致する入金明細を取得
                 ds = _db.selectDB(Sql, RS, reccnt)
