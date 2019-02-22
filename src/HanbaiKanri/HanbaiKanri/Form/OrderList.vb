@@ -429,6 +429,11 @@ Public Class OrderList
     '機能としては使用しない
     '受注修正
     Private Sub BtnOrderEdit_Click(sender As Object, e As EventArgs) Handles BtnOrderEdit.Click
+        '実行できるデータがあるかチェック
+        If actionChk() = False Then
+            Return
+        End If
+
         Dim RowIdx As Integer
         RowIdx = Me.DgvCymnhd.CurrentCell.RowIndex
         Dim No As String = DgvCymnhd.Rows(RowIdx).Cells("受注番号").Value
@@ -443,6 +448,11 @@ Public Class OrderList
 
     '受注参照
     Private Sub BtnOrderView_Click(sender As Object, e As EventArgs) Handles BtnOrderView.Click
+        '実行できるデータがあるかチェック
+        If actionChk() = False Then
+            Return
+        End If
+
         Dim RowIdx As Integer
         RowIdx = Me.DgvCymnhd.CurrentCell.RowIndex
         Dim No As String = DgvCymnhd.Rows(RowIdx).Cells("受注番号").Value
@@ -456,6 +466,11 @@ Public Class OrderList
 
     '売上入力
     Private Sub BtnOrder_Click(sender As Object, e As EventArgs) Handles BtnSales.Click
+        '実行できるデータがあるかチェック
+        If actionChk() = False Then
+            Return
+        End If
+
         Dim RowIdx As Integer
         RowIdx = Me.DgvCymnhd.CurrentCell.RowIndex
         Dim No As String = DgvCymnhd.Rows(RowIdx).Cells("受注番号").Value
@@ -467,6 +482,11 @@ Public Class OrderList
 
     '出庫入力
     Private Sub BtnReceipt_Click(sender As Object, e As EventArgs) Handles BtnGoodsIssue.Click
+        '実行できるデータがあるかチェック
+        If actionChk() = False Then
+            Return
+        End If
+
         Dim RowIdx As Integer
         RowIdx = Me.DgvCymnhd.CurrentCell.RowIndex
         Dim No As String = DgvCymnhd.Rows(RowIdx).Cells("受注番号").Value
@@ -478,6 +498,11 @@ Public Class OrderList
 
     '受注取消
     Private Sub BtnOrderCancel_Click(sender As Object, e As EventArgs) Handles BtnOrderCancel.Click
+        '実行できるデータがあるかチェック
+        If actionChk() = False Then
+            Return
+        End If
+
         Dim dtNow As String = formatDatetime(DateTime.Now)
         Dim Sql1 As String = ""
 
@@ -547,6 +572,10 @@ Public Class OrderList
 
     '受注複写
     Private Sub BtnOrderClone_Click(sender As Object, e As EventArgs) Handles BtnOrderClone.Click
+        '実行できるデータがあるかチェック
+        If actionChk() = False Then
+            Return
+        End If
         Dim RowIdx As Integer
         RowIdx = Me.DgvCymnhd.CurrentCell.RowIndex
         Dim No As String = DgvCymnhd.Rows(RowIdx).Cells("受注番号").Value
@@ -563,6 +592,10 @@ Public Class OrderList
 
     '請求登録
     Private Sub BtnBill_Click(sender As Object, e As EventArgs) Handles BtnBill.Click
+        '実行できるデータがあるかチェック
+        If actionChk() = False Then
+            Return
+        End If
         Dim RowIdx As Integer
         RowIdx = Me.DgvCymnhd.CurrentCell.RowIndex
         Dim No As String = DgvCymnhd.Rows(RowIdx).Cells("受注番号").Value
@@ -781,6 +814,22 @@ Public Class OrderList
 
         Return Sql
 
+    End Function
+
+    Private Function actionChk() As Boolean
+        '対象データがない場合は取消操作不可能
+        If DgvCymnhd.Rows.Count = 0 Then
+
+            '操作できないアラートを出す
+            _msgHd.dspMSG("NonAction", frmC01F10_Login.loginValue.Language)
+
+            Return False
+
+        Else
+
+            Return True
+
+        End If
     End Function
 
     '表示形式条件

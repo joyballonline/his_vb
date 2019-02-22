@@ -553,8 +553,8 @@ Public Class OrderingList
     '発注取消ボタン押下時
     Private Sub BtnPurchaseCancel_Click(sender As Object, e As EventArgs) Handles BtnPurchaseCancel.Click
 
-        '明細表示時は取消操作不可能
-        If RbtnDetails.Checked Then
+        '明細表示時、または対象データがない場合は取消操作不可能
+        If RbtnDetails.Checked Or DgvHtyhd.Rows.Count = 0 Then
 
             '操作できないアラートを出す
             _msgHd.dspMSG("NonAction", frmC01F10_Login.loginValue.Language)
@@ -589,50 +589,92 @@ Public Class OrderingList
     End Sub
 
     '選択データをもとに以下テーブル更新
-    't25_nkinhd, t27_nkinkshihd, t23_skyuhd
+    't20_hattyu, t21_hattyu
     Private Sub updateData()
         Dim dtNow As String = formatDatetime(DateTime.Now)
         Dim Sql As String = ""
 
-        Sql = "UPDATE "
-        Sql += "Public."
-        Sql += "t20_hattyu "
-        Sql += "SET "
+        Try
 
-        Sql += "取消区分"
-        Sql += " = '"
-        Sql += "1"
-        Sql += "', "
-        Sql += "取消日"
-        Sql += " = '"
-        Sql += dtNow
-        Sql += "', "
-        Sql += "更新日"
-        Sql += " = '"
-        Sql += dtNow
-        Sql += "', "
-        Sql += "更新者"
-        Sql += " = '"
-        Sql += frmC01F10_Login.loginValue.TantoNM
-        Sql += " ' "
+            Sql = "UPDATE "
+            Sql += "Public."
+            Sql += "t20_hattyu "
+            Sql += "SET "
 
-        Sql += "WHERE"
-        Sql += " 会社コード"
-        Sql += "='"
-        Sql += frmC01F10_Login.loginValue.BumonCD
-        Sql += "'"
-        Sql += " AND"
-        Sql += " 発注番号"
-        Sql += "='"
-        Sql += DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("発注番号").Value
-        Sql += "' "
-        Sql += " AND"
-        Sql += " 発注番号枝番"
-        Sql += "='"
-        Sql += DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("発注番号枝番").Value
-        Sql += "' "
+            Sql += "取消区分"
+            Sql += " = '"
+            Sql += "1"
+            Sql += "', "
+            Sql += "取消日"
+            Sql += " = '"
+            Sql += dtNow
+            Sql += "', "
+            Sql += "更新日"
+            Sql += " = '"
+            Sql += dtNow
+            Sql += "', "
+            Sql += "更新者"
+            Sql += " = '"
+            Sql += frmC01F10_Login.loginValue.TantoNM
+            Sql += " ' "
 
-        _db.executeDB(Sql)
+            Sql += "WHERE"
+            Sql += " 会社コード"
+            Sql += "='"
+            Sql += frmC01F10_Login.loginValue.BumonCD
+            Sql += "'"
+            Sql += " AND"
+            Sql += " 発注番号"
+            Sql += "='"
+            Sql += DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("発注番号").Value
+            Sql += "' "
+            Sql += " AND"
+            Sql += " 発注番号枝番"
+            Sql += "='"
+            Sql += DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("発注番号枝番").Value
+            Sql += "' "
+
+            _db.executeDB(Sql)
+
+            Sql = "UPDATE "
+            Sql += "Public."
+            Sql += "t21_hattyu "
+            Sql += "SET "
+
+            Sql += "更新日"
+            Sql += " = '"
+            Sql += dtNow
+            Sql += "', "
+            Sql += "更新者"
+            Sql += " = '"
+            Sql += frmC01F10_Login.loginValue.TantoNM
+            Sql += " ' "
+
+            Sql += "WHERE"
+            Sql += " 会社コード"
+            Sql += "='"
+            Sql += frmC01F10_Login.loginValue.BumonCD
+            Sql += "'"
+            Sql += " AND"
+            Sql += " 発注番号"
+            Sql += "='"
+            Sql += DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("発注番号").Value
+            Sql += "' "
+            Sql += " AND"
+            Sql += " 発注番号枝番"
+            Sql += "='"
+            Sql += DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("発注番号枝番").Value
+            Sql += "' "
+
+            _db.executeDB(Sql)
+
+        Catch ue As UsrDefException
+            ue.dspMsg()
+            Throw ue
+        Catch ex As Exception
+            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
+            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
+        End Try
 
         '一覧再表示
         getList()

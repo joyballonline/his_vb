@@ -248,8 +248,8 @@ Public Class PaidList
     '支払取消処理
     Private Sub BtnPurchaseCancel_Click(sender As Object, e As EventArgs) Handles BtnCancel.Click
 
-        '明細表示時は取消操作不可能
-        If RbtnDetails.Checked Then
+        '明細表示時、または対象データがない場合は取消操作不可能
+        If RbtnDetails.Checked Or DgvHtyhd.Rows.Count = 0 Then
 
             '操作できないアラートを出す
             _msgHd.dspMSG("NonAction", frmC01F10_Login.loginValue.Language)

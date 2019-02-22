@@ -224,6 +224,11 @@ Public Class BillingList
 
     '参照ボタン押下時
     Private Sub BtnBillingView_Click(sender As Object, e As EventArgs) Handles BtnBillingView.Click
+        '実行できるデータがあるかチェック
+        If actionChk() = False Then
+            Return
+        End If
+
         Dim RowIdx As Integer
         RowIdx = Me.DgvBilling.CurrentCell.RowIndex
         Dim No As String = DgvBilling.Rows(RowIdx).Cells("受注番号").Value
@@ -241,6 +246,10 @@ Public Class BillingList
 
     '取消ボタン押下時
     Private Sub BtnBillingCancel_Click(sender As Object, e As EventArgs) Handles BtnBillingCancel.Click
+        '実行できるデータがあるかチェック
+        If actionChk() = False Then
+            Return
+        End If
 
         '取消済みデータは取消操作不可能
         If DgvBilling.Rows(DgvBilling.CurrentCell.RowIndex).Cells("取消").Value = CommonConst.CANCEL_KBN_DISABLED_TXT Then
@@ -399,6 +408,21 @@ Public Class BillingList
         Return sql
     End Function
 
+    Private Function actionChk() As Boolean
+        '対象データがない場合は取消操作不可能
+        If DgvBilling.Rows.Count = 0 Then
+
+            '操作できないアラートを出す
+            _msgHd.dspMSG("NonAction", frmC01F10_Login.loginValue.Language)
+
+            Return False
+
+        Else
+
+            Return True
+
+        End If
+    End Function
 
     '表示形式条件
     Private Function viewFormat() As String

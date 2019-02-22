@@ -184,6 +184,16 @@ Public Class DepositList
 
     '入金入力ボタン押下時
     Private Sub BtnDeposit_Click(sender As Object, e As EventArgs) Handles BtnDeposit.Click
+
+        '対象データがない場合は取消操作不可能
+        If DgvCustomer.Rows.Count = 0 Then
+
+            '操作できないアラートを出す
+            _msgHd.dspMSG("NonAction", frmC01F10_Login.loginValue.Language)
+            Return
+
+        End If
+
         Dim RowIdx As Integer
         RowIdx = Me.DgvCustomer.CurrentCell.RowIndex
         Dim Company As String = DgvCustomer.Rows(RowIdx).Cells("会社コード").Value
