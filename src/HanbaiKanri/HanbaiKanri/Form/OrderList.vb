@@ -410,6 +410,10 @@ Public Class OrderList
     '機能としては使用しない
     '受注修正
     Private Sub BtnOrderEdit_Click(sender As Object, e As EventArgs) Handles BtnOrderEdit.Click
+        'グリッドに何もないときは次画面へ移動しない
+        If Me.DgvCymnhd.RowCount = 0 Then
+            Exit Sub
+        End If
         '実行できるデータがあるかチェック
         If actionChk() = False Then
             Return
@@ -429,6 +433,10 @@ Public Class OrderList
 
     '受注参照
     Private Sub BtnOrderView_Click(sender As Object, e As EventArgs) Handles BtnOrderView.Click
+        'グリッドに何もないときは次画面へ移動しない
+        If Me.DgvCymnhd.RowCount = 0 Then
+            Exit Sub
+        End If
         '実行できるデータがあるかチェック
         If actionChk() = False Then
             Return
@@ -447,6 +455,10 @@ Public Class OrderList
 
     '売上入力
     Private Sub BtnOrder_Click(sender As Object, e As EventArgs) Handles BtnSales.Click
+        'グリッドに何もないときは次画面へ移動しない
+        If Me.DgvCymnhd.RowCount = 0 Then
+            Exit Sub
+        End If
         '実行できるデータがあるかチェック
         If actionChk() = False Then
             Return
@@ -463,6 +475,10 @@ Public Class OrderList
 
     '出庫入力
     Private Sub BtnReceipt_Click(sender As Object, e As EventArgs) Handles BtnGoodsIssue.Click
+        'グリッドに何もないときは次画面へ移動しない
+        If Me.DgvCymnhd.RowCount = 0 Then
+            Exit Sub
+        End If
         '実行できるデータがあるかチェック
         If actionChk() = False Then
             Return
@@ -479,6 +495,10 @@ Public Class OrderList
 
     '受注取消
     Private Sub BtnOrderCancel_Click(sender As Object, e As EventArgs) Handles BtnOrderCancel.Click
+        'グリッドに何もないときは次画面へ移動しない
+        If Me.DgvCymnhd.RowCount = 0 Then
+            Exit Sub
+        End If
         '実行できるデータがあるかチェック
         If actionChk() = False Then
             Return
@@ -541,6 +561,10 @@ Public Class OrderList
 
     '受注複写
     Private Sub BtnOrderClone_Click(sender As Object, e As EventArgs) Handles BtnOrderClone.Click
+        'グリッドに何もないときは次画面へ移動しない
+        If Me.DgvCymnhd.RowCount = 0 Then
+            Exit Sub
+        End If
         '実行できるデータがあるかチェック
         If actionChk() = False Then
             Return
@@ -561,6 +585,11 @@ Public Class OrderList
 
     '請求登録
     Private Sub BtnBill_Click(sender As Object, e As EventArgs) Handles BtnBill.Click
+        'グリッドに何もないときは次画面へ移動しない
+        'グリッドに何もないときは次画面へ移動しない
+        If Me.DgvCymnhd.RowCount = 0 Then
+            Exit Sub
+        End If
         '実行できるデータがあるかチェック
         If actionChk() = False Then
             Return

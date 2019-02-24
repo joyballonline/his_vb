@@ -801,7 +801,7 @@ Public Class Order
                 Sql2 += "', '"
                 Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("数量").Value.ToString
                 Sql2 += "', '"
-                Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("備考").Value.ToString
+                Sql2 += RevoveChars(DgvItemList.Rows(cymnhdIdx).Cells("備考").Value.ToString)
                 Sql2 += "', '"
                 Sql2 += "zenbi01"
                 Sql2 += "', '"

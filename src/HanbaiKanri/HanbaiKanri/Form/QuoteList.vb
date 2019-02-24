@@ -615,6 +615,10 @@ Public Class QuoteList
     Private Sub BtnQuoteEdit_Click(sender As Object, e As EventArgs) Handles BtnQuoteEdit.Click
 
         'グリッドにリストが存在しない場合は処理しない
+        If Me.DgvMithd.RowCount = 0 Then
+            Exit Sub
+        End If
+
         Try
 
 
@@ -654,6 +658,9 @@ Public Class QuoteList
     Private Sub BtnQuoteView_Click(sender As Object, e As EventArgs) Handles BtnQuoteView.Click
 
         'グリッドに何もないときは次画面へ移動しない
+        If Me.DgvMithd.RowCount = 0 Then
+            Exit Sub
+        End If
         Try
             Dim RowIdx As Integer
             RowIdx = Me.DgvMithd.CurrentCell.RowIndex
@@ -671,9 +678,14 @@ Public Class QuoteList
 
     End Sub
 
+    '単価入力
+    '
     Private Sub BtnUnitPrice_Click(sender As Object, e As EventArgs) Handles BtnUnitPrice.Click
 
         'グリッドに何もないときは次画面へ移動しない
+        If Me.DgvMithd.RowCount = 0 Then
+            Exit Sub
+        End If
         Try
             Dim RowIdx As Integer
             RowIdx = Me.DgvMithd.CurrentCell.RowIndex
