@@ -290,8 +290,13 @@ Public Class QuoteList
             End If
             '受注済みの見積は取消できない
             '受注済みの見積は仕入単価入力もできない
-            If _status = "CANCEL" Or _status = "PRICE" Then
+            '受発注登録の時も受注済みは表示しない
+            If _status = "CANCEL" Or _status = "PRICE" Or _status = "ORDER_NEW" Then
                 strWhere += " and 受注日 is null"
+            End If
+            '受発注登録の時は有効期限切れは表示しない
+            If _status = "ORDER_NEW" Then
+                strWhere += " and 見積有効期限 <= current_date"
             End If
 
             Sql += strWhere
@@ -500,6 +505,16 @@ Public Class QuoteList
             If Not ChkCancel.Checked Then
                 strWhere += " and "
                 strWhere += " t01.取消区分 = '0'"
+            End If
+            '受注済みの見積は取消できない
+            '受注済みの見積は仕入単価入力もできない
+            '受発注登録の時も受注済みは表示しない
+            If _status = "CANCEL" Or _status = "PRICE" Or _status = "ORDER_NEW" Then
+                strWhere += " and t01.受注日 is null"
+            End If
+            '受発注登録の時は有効期限切れは表示しない
+            If _status = "ORDER_NEW" Then
+                strWhere += " and t01.見積有効期限 <= current_date"
             End If
 
             Sql += strWhere
