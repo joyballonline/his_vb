@@ -833,6 +833,18 @@ Public Class Order
 
                 Sql2 = ""
             Next
+            '呼び出した見積に受注日を入れる
+            Sql = ""
+            Sql += "UPDATE Public.t01_mithd "
+            Sql += "SET  受注日 = '" & DtpOrderDate.Value & "'"
+            Sql += ", 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+            Sql += ", 更新日 = '" & dtNow & "'"
+            Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += " AND 見積番号 = '" & QuoteNo.ToString & "'"
+            Sql += " AND 見積番号枝番 = '" & QuoteSuffix.ToString & "'"
+
+            _db.executeDB(Sql)
+
         Else
             Dim Sql1 As String = ""
             Sql1 = ""
