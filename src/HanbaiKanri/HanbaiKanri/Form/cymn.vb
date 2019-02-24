@@ -88,7 +88,6 @@ Public Class Cymn
         DgvItemList.Columns(0).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvItemList.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvItemList.Columns(7).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        DgvItemList.Columns(8).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvItemList.Columns(9).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvItemList.Columns(10).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvItemList.Columns(11).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -96,6 +95,7 @@ Public Class Cymn
         DgvItemList.Columns(13).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvItemList.Columns(14).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvItemList.Columns(15).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvItemList.Columns(16).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
         'セルの内容に合わせて、行の高さが自動的に調節されるようにする
         DgvItemList.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
@@ -147,7 +147,7 @@ Public Class Cymn
         column2.HeaderText = "リードタイム単位"
         column2.Name = "リードタイム単位"
 
-        DgvItemList.Columns.Insert(24, column2)
+        DgvItemList.Columns.Insert(25, column2)
 
 
         Dim SqlSaiban As String = ""
@@ -241,7 +241,9 @@ Public Class Cymn
         TxtAddress1.Text = ds1.Tables(RS).Rows(0)("得意先住所").ToString
         TxtTel.Text = ds1.Tables(RS).Rows(0)("得意先電話番号").ToString
         TxtFax.Text = ds1.Tables(RS).Rows(0)("得意先ＦＡＸ").ToString
+        TxtSales.Tag = ds1.Tables(RS).Rows(0)("営業担当者コード").ToString
         TxtSales.Text = ds1.Tables(RS).Rows(0)("営業担当者").ToString
+        TxtInput.Tag = ds1.Tables(RS).Rows(0)("入力担当者コード").ToString
         TxtInput.Text = ds1.Tables(RS).Rows(0)("入力担当者").ToString
         TxtPaymentTerms.Text = ds1.Tables(RS).Rows(0)("支払条件").ToString
         TxtQuoteRemarks.Text = ds1.Tables(RS).Rows(0)("備考").ToString
@@ -284,27 +286,28 @@ Public Class Cymn
             DgvItemList.Rows(index).Cells(4).Value = ds3.Tables(RS).Rows(index)("型式")
             DgvItemList.Rows(index).Cells(5).Value = ds3.Tables(RS).Rows(index)("数量")
             DgvItemList.Rows(index).Cells(6).Value = ds3.Tables(RS).Rows(index)("単位")
-            DgvItemList.Rows(index).Cells(7).Value = ds3.Tables(RS).Rows(index)("仕入先名称")
-            DgvItemList.Rows(index).Cells(8).Value = ds3.Tables(RS).Rows(index)("仕入単価")
-            DgvItemList.Rows(index).Cells(9).Value = ds3.Tables(RS).Rows(index)("仕入原価")
-            DgvItemList.Rows(index).Cells(10).Value = ds3.Tables(RS).Rows(index)("関税率")
-            DgvItemList.Rows(index).Cells(11).Value = ds3.Tables(RS).Rows(index)("関税額")
-            DgvItemList.Rows(index).Cells(12).Value = ds3.Tables(RS).Rows(index)("前払法人税率")
-            DgvItemList.Rows(index).Cells(13).Value = ds3.Tables(RS).Rows(index)("前払法人税額")
-            DgvItemList.Rows(index).Cells(14).Value = ds3.Tables(RS).Rows(index)("輸送費率")
-            DgvItemList.Rows(index).Cells(15).Value = ds3.Tables(RS).Rows(index)("輸送費額")
-            DgvItemList.Rows(index).Cells(16).Value = ds3.Tables(RS).Rows(index)("仕入金額")
-            DgvItemList.Rows(index).Cells(17).Value = ds3.Tables(RS).Rows(index)("売単価")
-            DgvItemList.Rows(index).Cells(18).Value = ds3.Tables(RS).Rows(index)("売上金額")
-            DgvItemList.Rows(index).Cells(19).Value = ds3.Tables(RS).Rows(index)("見積単価")
-            DgvItemList.Rows(index).Cells(20).Value = ds3.Tables(RS).Rows(index)("見積金額")
-            DgvItemList.Rows(index).Cells(21).Value = ds3.Tables(RS).Rows(index)("粗利額")
-            DgvItemList.Rows(index).Cells(22).Value = ds3.Tables(RS).Rows(index)("粗利率")
-            DgvItemList.Rows(index).Cells(23).Value = ds3.Tables(RS).Rows(index)("リードタイム")
+            DgvItemList.Rows(index).Cells(7).Value = ds3.Tables(RS).Rows(index)("仕入先コード")
+            DgvItemList.Rows(index).Cells(8).Value = ds3.Tables(RS).Rows(index)("仕入先名称")
+            DgvItemList.Rows(index).Cells(9).Value = ds3.Tables(RS).Rows(index)("仕入単価")
+            DgvItemList.Rows(index).Cells(10).Value = ds3.Tables(RS).Rows(index)("仕入原価")
+            DgvItemList.Rows(index).Cells(11).Value = ds3.Tables(RS).Rows(index)("関税率")
+            DgvItemList.Rows(index).Cells(12).Value = ds3.Tables(RS).Rows(index)("関税額")
+            DgvItemList.Rows(index).Cells(13).Value = ds3.Tables(RS).Rows(index)("前払法人税率")
+            DgvItemList.Rows(index).Cells(14).Value = ds3.Tables(RS).Rows(index)("前払法人税額")
+            DgvItemList.Rows(index).Cells(15).Value = ds3.Tables(RS).Rows(index)("輸送費率")
+            DgvItemList.Rows(index).Cells(16).Value = ds3.Tables(RS).Rows(index)("輸送費額")
+            DgvItemList.Rows(index).Cells(17).Value = ds3.Tables(RS).Rows(index)("仕入金額")
+            DgvItemList.Rows(index).Cells(18).Value = ds3.Tables(RS).Rows(index)("売単価")
+            DgvItemList.Rows(index).Cells(19).Value = ds3.Tables(RS).Rows(index)("売上金額")
+            DgvItemList.Rows(index).Cells(20).Value = ds3.Tables(RS).Rows(index)("見積単価")
+            DgvItemList.Rows(index).Cells(21).Value = ds3.Tables(RS).Rows(index)("見積金額")
+            DgvItemList.Rows(index).Cells(22).Value = ds3.Tables(RS).Rows(index)("粗利額")
+            DgvItemList.Rows(index).Cells(23).Value = ds3.Tables(RS).Rows(index)("粗利率")
+            DgvItemList.Rows(index).Cells(24).Value = ds3.Tables(RS).Rows(index)("リードタイム")
             tmp5 = ds3.Tables(RS).Rows(index)("リードタイム単位")
-            DgvItemList.Rows(index).Cells(24).Value = tmp5
-            DgvItemList.Rows(index).Cells(25).Value = ds3.Tables(RS).Rows(index)("備考")
-            DgvItemList.Rows(index).Cells(26).Value = ""
+            DgvItemList.Rows(index).Cells(25).Value = tmp5
+            DgvItemList.Rows(index).Cells(26).Value = ds3.Tables(RS).Rows(index)("備考")
+            DgvItemList.Rows(index).Cells(27).Value = ""
 
             tmp2 = ds3.Tables(RS).Rows(index)("関税率")
             tmp2 = tmp2 / 100
@@ -410,6 +413,7 @@ Public Class Cymn
             DgvItemList.Columns("型式").HeaderText = "Spec"
             DgvItemList.Columns("数量").HeaderText = "Quantity"
             DgvItemList.Columns("単位").HeaderText = "Unit"
+            DgvItemList.Columns("仕入先コード").HeaderText = "SupplierCode"
             DgvItemList.Columns("仕入先").HeaderText = "SupplierName"
             DgvItemList.Columns("仕入単価").HeaderText = "PurchaseUnitPrice"
             DgvItemList.Columns("仕入原価").HeaderText = "PurchsingCost"
@@ -489,7 +493,7 @@ Public Class Cymn
                 Sql1 += "INSERT INTO "
                 Sql1 += "Public."
                 Sql1 += "t10_cymnhd("
-                Sql1 += "会社コード, 受注番号, 受注番号枝番, 客先番号, 見積番号, 見積番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額,仕入金額, 粗利額, 営業担当者, 入力担当者, 備考, 見積備考, ＶＡＴ, 受注日, 登録日, 更新日, 更新者, 取消区分)"
+                Sql1 += "会社コード, 受注番号, 受注番号枝番, 客先番号, 見積番号, 見積番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額,仕入金額, 粗利額, 営業担当者コード, 営業担当者, 入力担当者コード, 入力担当者, 備考, 見積備考, ＶＡＴ, 受注日, 登録日, 更新日, 更新者, 取消区分)"
                 Sql1 += " VALUES('" & frmC01F10_Login.loginValue.BumonCD & "'"     '会社コード
                 Sql1 += ", '" & TxtOrderNo.Text & "'"       '受注番号
                 Sql1 += ", '" & TxtOrderSuffix.Text & "'"   '受注番号枝番
@@ -510,7 +514,9 @@ Public Class Cymn
                 Sql1 += ", " & TxtOrderAmount.Text          '見積金額
                 Sql1 += ", " & TxtPurchaseAmount.Text       '仕入金額
                 Sql1 += "," & TxtGrossProfit.Text           '粗利額
+                Sql1 += ", '" & TxtSales.Tag & "'"         '営業担当者コード
                 Sql1 += ", '" & TxtSales.Text & "'"         '営業担当者
+                Sql1 += ", '" & TxtInput.Tag & "'"         '入力担当者コード
                 Sql1 += ", '" & TxtInput.Text & "'"         '入力担当者
                 Sql1 += ", '" & TxtOrderRemark.Text & "'"   '備考
                 Sql1 += ", '" & RevoveChars(TxtQuoteRemarks.Text) & "'" '見積備考
@@ -732,7 +738,7 @@ Public Class Cymn
                 Sql3 += "INSERT INTO "
                 Sql3 += "Public."
                 Sql3 += "t20_hattyu("
-                Sql3 += "会社コード, 発注番号, 発注番号枝番, 客先番号, 受注番号, 受注番号枝番, 見積番号, 見積番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 仕入先コード, 仕入先名, 仕入先郵便番号, 仕入先住所, 仕入先電話番号, 仕入先ＦＡＸ, 仕入先担当者役職, 仕入先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額,仕入金額, 粗利額, 営業担当者, 入力担当者, 備考, 見積備考, ＶＡＴ, ＰＰＨ, 受注日, 発注日, 登録日, 更新日, 更新者, 取消区分)"
+                Sql3 += "会社コード, 発注番号, 発注番号枝番, 客先番号, 受注番号, 受注番号枝番, 見積番号, 見積番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 仕入先コード, 仕入先名, 仕入先郵便番号, 仕入先住所, 仕入先電話番号, 仕入先ＦＡＸ, 仕入先担当者役職, 仕入先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額,仕入金額, 粗利額, 営業担当者, 営業担当者コード, 入力担当者, 入力担当者コード, 備考, 見積備考, ＶＡＴ, ＰＰＨ, 受注日, 発注日, 登録日, 更新日, 更新者, 取消区分)"
                 Sql3 += " VALUES('"
                 Sql3 += CompanyCode
                 Sql3 += "', '"
@@ -800,7 +806,11 @@ Public Class Cymn
                 Sql3 += "', '"
                 Sql3 += TxtSales.Text
                 Sql3 += "', '"
+                Sql3 += TxtSales.Tag
+                Sql3 += "', '"
                 Sql3 += TxtInput.Text
+                Sql3 += "', '"
+                Sql3 += TxtInput.Tag
                 Sql3 += "', '"
                 Sql3 += TxtPurchaseRemark.Text
                 Sql3 += "', '"

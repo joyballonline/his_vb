@@ -57,8 +57,6 @@ Partial Class Order
         Me.BtnBack = New System.Windows.Forms.Button()
         Me.DtpOrderRegistration = New System.Windows.Forms.DateTimePicker()
         Me.BtnRegistration = New System.Windows.Forms.Button()
-        Me.TxtAddress3 = New System.Windows.Forms.TextBox()
-        Me.TxtAddress2 = New System.Windows.Forms.TextBox()
         Me.LblRegistration = New System.Windows.Forms.Label()
         Me.TxtSales = New System.Windows.Forms.TextBox()
         Me.LblSales = New System.Windows.Forms.Label()
@@ -438,30 +436,6 @@ Partial Class Order
         Me.BtnRegistration.Text = "登録"
         Me.BtnRegistration.UseVisualStyleBackColor = True
         '
-        'TxtAddress3
-        '
-        Me.TxtAddress3.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.TxtAddress3.Enabled = False
-        Me.TxtAddress3.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtAddress3.Location = New System.Drawing.Point(273, 158)
-        Me.TxtAddress3.MaxLength = 100
-        Me.TxtAddress3.Name = "TxtAddress3"
-        Me.TxtAddress3.Size = New System.Drawing.Size(330, 23)
-        Me.TxtAddress3.TabIndex = 138
-        Me.TxtAddress3.TabStop = False
-        '
-        'TxtAddress2
-        '
-        Me.TxtAddress2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.TxtAddress2.Enabled = False
-        Me.TxtAddress2.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtAddress2.Location = New System.Drawing.Point(273, 129)
-        Me.TxtAddress2.MaxLength = 100
-        Me.TxtAddress2.Name = "TxtAddress2"
-        Me.TxtAddress2.Size = New System.Drawing.Size(330, 23)
-        Me.TxtAddress2.TabIndex = 137
-        Me.TxtAddress2.TabStop = False
-        '
         'LblRegistration
         '
         Me.LblRegistration.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
@@ -616,8 +590,9 @@ Partial Class Order
         Me.TxtAddress1.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtAddress1.Location = New System.Drawing.Point(273, 100)
         Me.TxtAddress1.MaxLength = 100
+        Me.TxtAddress1.Multiline = True
         Me.TxtAddress1.Name = "TxtAddress1"
-        Me.TxtAddress1.Size = New System.Drawing.Size(330, 23)
+        Me.TxtAddress1.Size = New System.Drawing.Size(330, 81)
         Me.TxtAddress1.TabIndex = 135
         Me.TxtAddress1.TabStop = False
         '
@@ -1061,8 +1036,6 @@ Partial Class Order
         Me.Controls.Add(Me.BtnBack)
         Me.Controls.Add(Me.DtpOrderRegistration)
         Me.Controls.Add(Me.BtnRegistration)
-        Me.Controls.Add(Me.TxtAddress3)
-        Me.Controls.Add(Me.TxtAddress2)
         Me.Controls.Add(Me.LblRegistration)
         Me.Controls.Add(Me.TxtSales)
         Me.Controls.Add(Me.LblSales)
@@ -1125,8 +1098,6 @@ Partial Class Order
     Friend WithEvents BtnBack As Button
     Friend WithEvents DtpOrderRegistration As DateTimePicker
     Friend WithEvents BtnRegistration As Button
-    Friend WithEvents TxtAddress3 As TextBox
-    Friend WithEvents TxtAddress2 As TextBox
     Friend WithEvents LblRegistration As Label
     Friend WithEvents TxtSales As TextBox
     Friend WithEvents LblSales As Label

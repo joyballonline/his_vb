@@ -1130,6 +1130,18 @@ Public Class Quote
             Dim result As DialogResult = MessageBox.Show(strMessage, strMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Exit Sub
         End If
+        '有効期限として指定できる日付は見積日以降
+        If DtpQuote.Value > DtpExpiration.Value Then
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                strMessage = "Please enter with QuoteDate <= ExpirationDate. "
+                strMessageTitle = "ExpirationDate Error"
+            Else
+                strMessage = "見積有効期限は見積日以降で入力してください。"
+                strMessageTitle = "見積有効期限入力エラー"
+            End If
+            Dim result As DialogResult = MessageBox.Show(strMessage, strMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Exit Sub
+        End If
 
 
         Dim dtToday As DateTime = DateTime.Now
