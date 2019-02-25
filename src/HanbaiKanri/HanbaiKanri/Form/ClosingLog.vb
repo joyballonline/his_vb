@@ -196,223 +196,101 @@ Public Class ClosingLog
         Dim dtToday As DateTime = DateTime.Now
 
         Dim Sql1 As String = ""
-        Sql1 += "SELECT "
-        Sql1 += "* "
-        Sql1 += "FROM "
-        Sql1 += "public"
-        Sql1 += "."
-        Sql1 += "m01_company"
-        Sql1 += " WHERE "
-        Sql1 += "会社コード"
-        Sql1 += " ILIKE  "
-        Sql1 += "'"
-        Sql1 += frmC01F10_Login.loginValue.BumonNM
-        Sql1 += "'"
+        Sql1 += "SELECT * FROM public.m01_company"
+        Sql1 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
 
         Dim ds1 As DataSet = _db.selectDB(Sql1, RS, reccnt)
 
-
+        '仕訳データ作成
+        'CSVファイルの書き出し処理
         Accounting()
 
 
         Dim Sql2 As String = ""
-        Sql2 += "SELECT "
-        Sql2 += "* "
-        Sql2 += "FROM "
-        Sql2 += "public"
-        Sql2 += "."
-        Sql2 += "t30_urighd"
-        Sql2 += " WHERE "
-        Sql2 += "売上日"
-        Sql2 += " >  "
-        Sql2 += "'"
-        Sql2 += ds1.Tables(RS).Rows(0)("前回締日")
-        Sql2 += "'"
-        Sql2 += " AND "
-        Sql2 += "売上日"
-        Sql2 += " <=  "
-        Sql2 += "'"
-        Sql2 += ds1.Tables(RS).Rows(0)("今回締日")
-        Sql2 += "'"
-        Sql2 += " AND "
-        Sql2 += "締処理日"
-        Sql2 += " IS NULL "
+        Sql2 += "SELECT * FROM public.t30_urighd"
+        Sql2 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        '20190225 テストのため条件をいったんコメントアウト
+        'Sql2 += " AND 売上日 > '" & ds1.Tables(RS).Rows(0)("前回締日") & "'"
+        'Sql2 += " AND 売上日 <= '" & ds1.Tables(RS).Rows(0)("今回締日") & "'"
+        'Sql2 += " AND 締処理日 IS NULL "
         Dim dsUrigdt As DataSet = _db.selectDB(Sql2, RS, reccnt)
 
 
         Dim Sql3 As String = ""
-        Sql3 += "SELECT "
-        Sql3 += "* "
-        Sql3 += "FROM "
-        Sql3 += "public"
-        Sql3 += "."
-        Sql3 += "t40_sirehd"
-        Sql3 += " WHERE "
-        Sql3 += "仕入日"
-        Sql3 += " >  "
-        Sql3 += "'"
-        Sql3 += ds1.Tables(RS).Rows(0)("前回締日")
-        Sql3 += "'"
-        Sql3 += " AND "
-        Sql3 += "仕入日"
-        Sql3 += " <=  "
-        Sql3 += "'"
-        Sql3 += ds1.Tables(RS).Rows(0)("今回締日")
-        Sql3 += "'"
-        Sql3 += " AND "
-        Sql3 += "締処理日"
-        Sql3 += " IS NULL "
+        Sql3 += "SELECT * FROM public.t40_sirehd"
+        Sql3 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        '20190225 テストのため条件をいったんコメントアウト
+        'Sql3 += " AND 仕入日 > '" & ds1.Tables(RS).Rows(0)("前回締日") & "'"
+        'Sql3 += " AND 仕入日 <= '" & ds1.Tables(RS).Rows(0)("今回締日") & "'"
+        'Sql3 += " AND 締処理日 IS NULL "
         Dim ds3 As DataSet = _db.selectDB(Sql3, RS, reccnt)
 
 
         Dim Sql4 As String = ""
-        Sql4 += "SELECT "
-        Sql4 += "* "
-        Sql4 += "FROM "
-        Sql4 += "public"
-        Sql4 += "."
-        Sql4 += "t23_skyuhd"
-        Sql4 += " WHERE "
-        Sql4 += "請求日"
-        Sql4 += " >  "
-        Sql4 += "'"
-        Sql4 += ds1.Tables(RS).Rows(0)("前回締日")
-        Sql4 += "'"
-        Sql4 += " AND "
-        Sql4 += "請求日"
-        Sql4 += " <=  "
-        Sql4 += "'"
-        Sql4 += ds1.Tables(RS).Rows(0)("今回締日")
-        Sql4 += "'"
-        Sql4 += " AND "
-        Sql4 += "締処理日"
-        Sql4 += " IS NULL "
+        Sql4 += "SELECT * FROM public.t23_skyuhd"
+        Sql4 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        '20190225 テストのため条件をいったんコメントアウト
+        'Sql4 += " AND 請求日 > '" & ds1.Tables(RS).Rows(0)("前回締日") & "'"
+        'Sql4 += " AND 請求日 <= '" & ds1.Tables(RS).Rows(0)("今回締日") & "'"
+        'Sql4 += " AND 締処理日 IS NULL "
         Dim ds4 As DataSet = _db.selectDB(Sql4, RS, reccnt)
 
 
         Sql4 = ""
-        Sql4 += "SELECT "
-        Sql4 += "* "
-        Sql4 += "FROM "
-        Sql4 += "public"
-        Sql4 += "."
-        Sql4 += "t46_kikehd"
-        Sql4 += " WHERE "
-        Sql4 += "買掛日"
-        Sql4 += " >  "
-        Sql4 += "'"
-        Sql4 += ds1.Tables(RS).Rows(0)("前回締日")
-        Sql4 += "'"
-        Sql4 += " AND "
-        Sql4 += "買掛日"
-        Sql4 += " <=  "
-        Sql4 += "'"
-        Sql4 += ds1.Tables(RS).Rows(0)("今回締日")
-        Sql4 += "'"
-        Sql4 += " AND "
-        Sql4 += "締処理日"
-        Sql4 += " IS NULL "
+        Sql4 += "SELECT * FROM public.t46_kikehd"
+        Sql4 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        '20190225 テストのため条件をいったんコメントアウト
+        'Sql4 += " AND 買掛日 > '" & ds1.Tables(RS).Rows(0)("前回締日") & "'"
+        'Sql4 += " AND 買掛日 <= '" & ds1.Tables(RS).Rows(0)("今回締日") & "'"
+        'Sql4 += " AND 締処理日 IS NULL "
         Dim dsKike As DataSet = _db.selectDB(Sql4, RS, reccnt)
 
         Dim Sql5 As String = ""
-        Sql5 += "SELECT "
-        Sql5 += "* "
-        Sql5 += "FROM "
-        Sql5 += "public"
-        Sql5 += "."
-        Sql5 += "t31_urigdt"
-        For i As Integer = 0 To dsUrigdt.Tables(RS).Rows.Count - 1
-            If i = 0 Then
-                Sql5 += " WHERE "
-                Sql5 += "売上番号"
-                Sql5 += " ILIKE  "
-                Sql5 += "'"
-                Sql5 += dsUrigdt.Tables(RS).Rows(i)("売上番号")
-                Sql5 += "'"
-            Else
-                Sql5 += " OR "
-                Sql5 += "売上番号"
-                Sql5 += " ILIKE  "
-                Sql5 += "'"
-                Sql5 += dsUrigdt.Tables(RS).Rows(i)("売上番号")
-                Sql5 += "'"
-            End If
-        Next
+        Sql5 += "SELECT * FROM public.t31_urigdt"
+        Sql5 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        '20190225 テストのため条件をいったんコメントアウト
+        'Sql5 += " AND 売上番号 IN ("
+        'For i As Integer = 0 To dsUrigdt.Tables(RS).Rows.Count - 1
+        '    If i = 0 Then
+        '    Else
+        '        Sql5 += ","
+        '    End If
+        '    Sql5 += "'" & dsUrigdt.Tables(RS).Rows(i)("売上番号") & "'"
+        'Next
+        'Sql5 += ")"
 
         Dim Sql6 As String = ""
-        Sql6 += "SELECT "
-        Sql6 += "* "
-        Sql6 += "FROM "
-        Sql6 += "public"
-        Sql6 += "."
-        Sql6 += "t41_siredt"
-        For i As Integer = 0 To ds3.Tables(RS).Rows.Count - 1
-            If i = 0 Then
-                Sql6 += " WHERE "
-                Sql6 += "仕入番号"
-                Sql6 += " ILIKE  "
-                Sql6 += "'"
-                Sql6 += ds3.Tables(RS).Rows(i)("仕入番号")
-                Sql6 += "'"
-            Else
-                Sql6 += " OR "
-                Sql6 += "仕入番号"
-                Sql6 += " ILIKE  "
-                Sql6 += "'"
-                Sql6 += ds3.Tables(RS).Rows(i)("仕入番号")
-                Sql6 += "'"
-            End If
-        Next
+        Sql6 += "SELECT * FROM public.t41_siredt"
+        Sql6 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        '20190225 テストのため条件をいったんコメントアウト
+        'Sql6 += " AND 仕入番号 IN ("
+        'For i As Integer = 0 To ds3.Tables(RS).Rows.Count - 1
+        '    If i = 0 Then
+        '    Else
+        '        Sql6 += ","
+        '    End If
+        '    Sql6 += "'" & ds3.Tables(RS).Rows(i)("仕入番号") & "'"
+        'Next
 
         Dim ds5 As DataSet = _db.selectDB(Sql5, RS, reccnt)
         Dim ds6 As DataSet = _db.selectDB(Sql6, RS, reccnt)
 
         Dim zaiko As String = ""
-        zaiko += "SELECT "
-        zaiko += "* "
-        zaiko += "FROM "
-        zaiko += "public"
-        zaiko += "."
-        zaiko += "t50_zikhd"
+        zaiko += "SELECT * FROM public.t50_zikhd"
+        zaiko += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
 
         Dim dszaiko As DataSet = _db.selectDB(zaiko, RS, reccnt)
         Dim SqlZaiko As String = ""
 
         For i As Integer = 0 To dszaiko.Tables(RS).Rows.Count - 1
             Dim purchase As String = ""
-            purchase += "SELECT "
-            purchase += "* "
-            purchase += "FROM "
-            purchase += "public"
-            purchase += "."
-            purchase += "t41_siredt"
-            purchase += " WHERE "
-            purchase += "会社コード"
-            purchase += " ILIKE  "
-            purchase += "'"
-            purchase += frmC01F10_Login.loginValue.BumonNM
-            purchase += "'"
-            purchase += " AND "
-            purchase += "メーカー"
-            purchase += " ILIKE  "
-            purchase += "'"
-            purchase += dszaiko.Tables(RS).Rows(i)("メーカー")
-            purchase += "'"
-            purchase += " AND "
-            purchase += "品名"
-            purchase += " ILIKE  "
-            purchase += "'"
-            purchase += dszaiko.Tables(RS).Rows(i)("品名")
-            purchase += "'"
-            purchase += " AND "
-            purchase += "型式"
-            purchase += " ILIKE  "
-            purchase += "'"
-            purchase += dszaiko.Tables(RS).Rows(i)("型式")
-            purchase += "'"
-            purchase += " AND "
-            purchase += "締処理日"
-            purchase += " IS NULL "
+            purchase += "SELECT * FROM public.t41_siredt"
+            purchase += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            purchase += " AND メーカー = '" & dszaiko.Tables(RS).Rows(i)("メーカー") & "'"
+            purchase += " AND 品名 = '" & dszaiko.Tables(RS).Rows(i)("品名") & "'"
+            purchase += " AND 型式 = '" & dszaiko.Tables(RS).Rows(i)("型式") & "'"
+            '20190225 テストのため条件をいったんコメントアウト
+            'purchase += " AND 締処理日 IS NULL "
 
             Dim dsPurchase As DataSet = _db.selectDB(purchase, RS, reccnt)
             Dim PurchaseSum As Double = 0
@@ -425,87 +303,15 @@ Public Class ClosingLog
                 PurchaseQuantity += dsPurchase.Tables(RS).Rows(x)("仕入数量")
 
                 purchase = ""
-                purchase += "UPDATE "
-                purchase += "Public."
-                purchase += "t41_siredt "
-                purchase += "SET "
-                purchase += " 締処理日"
-                purchase += " = '"
-                purchase += dtToday
-                purchase += "' "
+                purchase += "UPDATE Public.t41_siredt "
+                purchase += "SET 締処理日 = '" & dtToday & "'"
 
-                purchase += " WHERE "
-                purchase += "会社コード"
-                purchase += " ILIKE  "
-                purchase += "'"
-                purchase += frmC01F10_Login.loginValue.BumonNM
-                purchase += "'"
-                purchase += " AND "
-                purchase += "仕入番号"
-                purchase += " ILIKE  "
-                purchase += "'"
-                purchase += dsPurchase.Tables(RS).Rows(x)("仕入番号")
-                purchase += "'"
-                purchase += " AND "
-                purchase += "行番号"
-                purchase += " =  "
-                purchase += "'"
-                purchase += dsPurchase.Tables(RS).Rows(x)("行番号").ToString
-                purchase += "'"
+                purchase += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                purchase += " AND 仕入番号 = '" & dsPurchase.Tables(RS).Rows(x)("仕入番号") & "'"
+                purchase += " AND 行番号 = '" & dsPurchase.Tables(RS).Rows(x)("行番号").ToString & "'"
 
-                purchase += "RETURNING 会社コード"
-                purchase += ", "
-                purchase += "仕入番号"
-                purchase += ", "
-                purchase += "発注番号"
-                purchase += ", "
-                purchase += "発注番号枝番"
-                purchase += ", "
-                purchase += "行番号"
-                purchase += ", "
-                purchase += "仕入区分"
-                purchase += ", "
-                purchase += "メーカー"
-                purchase += ", "
-                purchase += "品名"
-                purchase += ", "
-                purchase += "型式"
-                purchase += ", "
-                purchase += "仕入先名"
-                purchase += ", "
-                purchase += "仕入値"
-                purchase += ", "
-                purchase += "発注数量"
-                purchase += ", "
-                purchase += "仕入数量"
-                purchase += ", "
-                purchase += "発注残数"
-                purchase += ", "
-                purchase += "単位"
-                purchase += ", "
-                purchase += "仕入単価"
-                purchase += ", "
-                purchase += "仕入金額"
-                purchase += ", "
-                purchase += "間接費"
-                purchase += ", "
-                purchase += "リードタイム"
-                purchase += ", "
-                purchase += "支払有無"
-                purchase += ", "
-                purchase += "支払番号"
-                purchase += ", "
-                purchase += "支払日"
-                purchase += ", "
-                purchase += "備考"
-                purchase += ", "
-                purchase += "仕入日"
-                purchase += ", "
-                purchase += "更新者"
-                purchase += ", "
-                purchase += "更新日"
-
-                _db.executeDB(purchase)
+                '20190225 テストのため締め日更新をいったんコメントアウト
+                '_db.executeDB(purchase)
 
             Next
             Dim sum1 As Double = 0
@@ -531,240 +337,69 @@ Public Class ClosingLog
 
 
             SqlZaiko = ""
-            SqlZaiko += "UPDATE "
-            SqlZaiko += "Public."
-            SqlZaiko += "t50_zikhd "
-            SqlZaiko += "SET "
-            SqlZaiko += " 前月末数量"
-            SqlZaiko += " = '"
-            SqlZaiko += dszaiko.Tables(RS).Rows(i)("今月末数量").ToString
-            SqlZaiko += "', "
-            SqlZaiko += " 前月末単価"
-            SqlZaiko += " = '"
-            SqlZaiko += dszaiko.Tables(RS).Rows(i)("今月単価").ToString
-            SqlZaiko += "', "
-            SqlZaiko += " 前月末間接費"
-            SqlZaiko += " = '"
-            SqlZaiko += dszaiko.Tables(RS).Rows(i)("今月間接費").ToString
-            SqlZaiko += "', "
-            SqlZaiko += "今月末数量"
-            SqlZaiko += " = '"
-            SqlZaiko += "0"
-            SqlZaiko += "', "
-            If unitPrice.ToString = "∞" Or "-∞" Then
-                SqlZaiko += "今月単価"
-                SqlZaiko += " = '"
-                SqlZaiko += "0"
+            SqlZaiko += "UPDATE Public.t50_zikhd "
+            SqlZaiko += "SET 前月末数量 = '" & dszaiko.Tables(RS).Rows(i)("今月末数量").ToString & "'"
+            SqlZaiko += " , 前月末単価 = " & dszaiko.Tables(RS).Rows(i)("今月単価").ToString
+            SqlZaiko += " , 前月末間接費 = " & dszaiko.Tables(RS).Rows(i)("今月間接費").ToString
+            SqlZaiko += " , 今月末数量 = 0"
+            SqlZaiko += " , "
+            If unitPrice.ToString = "∞" Or unitPrice.ToString = "-∞" Then
+                SqlZaiko += "今月単価 = 0"
             Else
-                SqlZaiko += "今月単価"
-                SqlZaiko += " = '"
-                SqlZaiko += unitPrice.ToString
+                SqlZaiko += "今月単価 = " & unitPrice.ToString
             End If
-            SqlZaiko += "', "
-            SqlZaiko += "今月入庫数"
-            SqlZaiko += " = '"
-            SqlZaiko += "0"
-            SqlZaiko += "', "
-            SqlZaiko += "今月出庫数"
-            SqlZaiko += " = '"
-            SqlZaiko += "0"
-            SqlZaiko += "', "
-            If OverHead.ToString = "∞" Or "-∞" Then
-                SqlZaiko += "今月間接費"
-                SqlZaiko += " = '"
-                SqlZaiko += "0"
+            SqlZaiko += " , 今月入庫数 = 0"
+            SqlZaiko += " , 今月出庫数 = 0"
+            SqlZaiko += " , "
+            If OverHead.ToString = "∞" Or OverHead.ToString = "-∞" Then
+                SqlZaiko += "今月間接費 = 0"
             Else
-                SqlZaiko += "今月間接費"
-                SqlZaiko += " = '"
-                SqlZaiko += OverHead.ToString
+                SqlZaiko += "今月間接費 = " & OverHead.ToString
             End If
 
-            SqlZaiko += "', "
-            SqlZaiko += "更新者"
-            SqlZaiko += " = '"
-            SqlZaiko += frmC01F10_Login.loginValue.TantoNM
-            SqlZaiko += "', "
-            SqlZaiko += "更新日"
-            SqlZaiko += " = '"
-            SqlZaiko += dtToday
-            SqlZaiko += "' "
+            SqlZaiko += " , 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+            SqlZaiko += " , 更新日 = '" & dtToday & "'"
 
-            SqlZaiko += " WHERE "
-            SqlZaiko += "会社コード"
-            SqlZaiko += " ILIKE  "
-            SqlZaiko += "'"
-            SqlZaiko += frmC01F10_Login.loginValue.BumonNM
-            SqlZaiko += "'"
-            SqlZaiko += " AND "
-            SqlZaiko += "メーカー"
-            SqlZaiko += " ILIKE  "
-            SqlZaiko += "'"
-            SqlZaiko += dszaiko.Tables(RS).Rows(i)("メーカー")
-            SqlZaiko += "'"
-            SqlZaiko += " AND "
-            SqlZaiko += "品名"
-            SqlZaiko += " ILIKE  "
-            SqlZaiko += "'"
-            SqlZaiko += dszaiko.Tables(RS).Rows(i)("品名")
-            SqlZaiko += "'"
-            SqlZaiko += " AND "
-            SqlZaiko += "型式"
-            SqlZaiko += " ILIKE  "
-            SqlZaiko += "'"
-            SqlZaiko += dszaiko.Tables(RS).Rows(i)("型式")
-            SqlZaiko += "'"
+            SqlZaiko += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            SqlZaiko += " AND メーカー = '" & dszaiko.Tables(RS).Rows(i)("メーカー") & "'"
+            SqlZaiko += " AND 品名 = '" & dszaiko.Tables(RS).Rows(i)("品名") & "'"
+            SqlZaiko += " AND 型式 = '" & dszaiko.Tables(RS).Rows(i)("型式") & "'"
 
-            SqlZaiko += "RETURNING 会社コード"
-            SqlZaiko += ", "
-            SqlZaiko += "年月"
-            SqlZaiko += ", "
-            SqlZaiko += "メーカー"
-            SqlZaiko += ", "
-            SqlZaiko += "品名"
-            SqlZaiko += ", "
-            SqlZaiko += "型式"
-            SqlZaiko += ", "
-            SqlZaiko += "前月末数量"
-            SqlZaiko += ", "
-            SqlZaiko += "前月末間接費"
-            SqlZaiko += ", "
-            SqlZaiko += "今月末数量"
-            SqlZaiko += ", "
-            SqlZaiko += "今月入庫数"
-            SqlZaiko += ", "
-            SqlZaiko += "今月出庫数"
-            SqlZaiko += ", "
-            SqlZaiko += "今月間接費"
-            SqlZaiko += ", "
-            SqlZaiko += "前月末単価"
-            SqlZaiko += ", "
-            SqlZaiko += "今月単価"
-            SqlZaiko += ", "
-            SqlZaiko += "更新者"
-            SqlZaiko += ", "
-            SqlZaiko += "更新日"
-
-            _db.executeDB(SqlZaiko)
+            '20190225 テストのため締め日更新をいったんコメントアウト
+            '_db.executeDB(SqlZaiko)
         Next
 
 
         For i As Integer = 0 To dszaiko.Tables(RS).Rows.Count - 1
             SqlZaiko = ""
-            SqlZaiko += "UPDATE "
-            SqlZaiko += "Public."
-            SqlZaiko += "t50_zikhd "
-            SqlZaiko += "SET "
-            SqlZaiko += " 前月末数量"
-            SqlZaiko += " = '"
-            SqlZaiko += dszaiko.Tables(RS).Rows(i)("今月末数量").ToString
-            SqlZaiko += "', "
-            SqlZaiko += "今月末数量"
-            SqlZaiko += " = '"
-            SqlZaiko += "0"
-            SqlZaiko += "', "
-            SqlZaiko += "今月入庫数"
-            SqlZaiko += " = '"
-            SqlZaiko += "0"
-            SqlZaiko += "', "
-            SqlZaiko += "今月出庫数"
-            SqlZaiko += " = '"
-            SqlZaiko += "0"
-            SqlZaiko += "', "
-            SqlZaiko += "更新者"
-            SqlZaiko += " = '"
-            SqlZaiko += frmC01F10_Login.loginValue.TantoNM
-            SqlZaiko += "', "
-            SqlZaiko += "更新日"
-            SqlZaiko += " = '"
-            SqlZaiko += dtToday
-            SqlZaiko += "' "
+            SqlZaiko += "UPDATE Public.t50_zikhd "
+            SqlZaiko += "SET 前月末数量 = " & dszaiko.Tables(RS).Rows(i)("今月末数量").ToString
+            SqlZaiko += " , 今月末数量 = 0"
+            SqlZaiko += " , 今月入庫数 = 0"
+            SqlZaiko += " , 今月出庫数 = 0"
+            SqlZaiko += " , 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+            SqlZaiko += " , 更新日 = '" & dtToday & "'"
 
-            SqlZaiko += " WHERE "
-            SqlZaiko += "会社コード"
-            SqlZaiko += " ILIKE  "
-            SqlZaiko += "'"
-            SqlZaiko += frmC01F10_Login.loginValue.BumonNM
-            SqlZaiko += "'"
-            SqlZaiko += " AND "
-            SqlZaiko += "メーカー"
-            SqlZaiko += " ILIKE  "
-            SqlZaiko += "'"
-            SqlZaiko += dszaiko.Tables(RS).Rows(i)("メーカー")
-            SqlZaiko += "'"
-            SqlZaiko += " AND "
-            SqlZaiko += "品名"
-            SqlZaiko += " ILIKE  "
-            SqlZaiko += "'"
-            SqlZaiko += dszaiko.Tables(RS).Rows(i)("品名")
-            SqlZaiko += "'"
-            SqlZaiko += " AND "
-            SqlZaiko += "型式"
-            SqlZaiko += " ILIKE  "
-            SqlZaiko += "'"
-            SqlZaiko += dszaiko.Tables(RS).Rows(i)("型式")
-            SqlZaiko += "'"
+            SqlZaiko += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            SqlZaiko += " AND メーカー = '" & dszaiko.Tables(RS).Rows(i)("メーカー") & "'"
+            SqlZaiko += " AND 品名 = '" & dszaiko.Tables(RS).Rows(i)("品名") & "'"
+            SqlZaiko += " AND 型式 = '" & dszaiko.Tables(RS).Rows(i)("型式") & "'"
 
-            SqlZaiko += "RETURNING 会社コード"
-            SqlZaiko += ", "
-            SqlZaiko += "年月"
-            SqlZaiko += ", "
-            SqlZaiko += "メーカー"
-            SqlZaiko += ", "
-            SqlZaiko += "品名"
-            SqlZaiko += ", "
-            SqlZaiko += "型式"
-            SqlZaiko += ", "
-            SqlZaiko += "前月末数量"
-            SqlZaiko += ", "
-            SqlZaiko += "前月末間接費"
-            SqlZaiko += ", "
-            SqlZaiko += "今月末数量"
-            SqlZaiko += ", "
-            SqlZaiko += "今月入庫数"
-            SqlZaiko += ", "
-            SqlZaiko += "今月出庫数"
-            SqlZaiko += ", "
-            SqlZaiko += "今月間接費"
-            SqlZaiko += ", "
-            SqlZaiko += "更新者"
-            SqlZaiko += ", "
-            SqlZaiko += "更新日"
-
-            _db.executeDB(SqlZaiko)
+            '20190225 テストのため締め日更新をいったんコメントアウト
+            '_db.executeDB(SqlZaiko)
         Next
 
         Dim Sql7 As String = ""
+        '20190225 テストのため月次用テーブルのデータを削除  ここから
+        _db.executeDB("truncate table t50_zikhd")
+        '20190225 テストのため月次用テーブルのデータを削除  ここまで
+
         For i As Integer = 0 To ds6.Tables(RS).Rows.Count - 1
-            Sql7 += "SELECT "
-            Sql7 += "* "
-            Sql7 += "FROM "
-            Sql7 += "public"
-            Sql7 += "."
-            Sql7 += "t50_zikhd"
-            Sql7 += " WHERE "
-            Sql7 += "会社コード"
-            Sql7 += " ILIKE  "
-            Sql7 += "'"
-            Sql7 += frmC01F10_Login.loginValue.BumonNM
-            Sql7 += "'"
-            Sql7 += " AND "
-            Sql7 += "メーカー"
-            Sql7 += " ILIKE  "
-            Sql7 += "'"
-            Sql7 += ds6.Tables(RS).Rows(i)("メーカー")
-            Sql7 += "'"
-            Sql7 += " AND "
-            Sql7 += "品名"
-            Sql7 += " ILIKE  "
-            Sql7 += "'"
-            Sql7 += ds6.Tables(RS).Rows(i)("品名")
-            Sql7 += "'"
-            Sql7 += " AND "
-            Sql7 += "型式"
-            Sql7 += " ILIKE  "
-            Sql7 += "'"
-            Sql7 += ds6.Tables(RS).Rows(i)("型式")
-            Sql7 += "'"
+            Sql7 += "SELECT * FROM public.t50_zikhd"
+            Sql7 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql7 += " AND メーカー = '" & ds6.Tables(RS).Rows(i)("メーカー") & "'"
+            Sql7 += " AND 品名 = '" & ds6.Tables(RS).Rows(i)("品名") & "'"
+            Sql7 += " AND 型式 = '" & ds6.Tables(RS).Rows(i)("型式") & "'"
 
             Dim ds7 As DataSet = _db.selectDB(Sql7, RS, reccnt)
             Sql7 = ""
@@ -773,148 +408,45 @@ Public Class ClosingLog
 
             If ds7.Tables(RS).Rows.Count = 0 Then
                 Sql8 = ""
-                Sql8 += "INSERT INTO "
-                Sql8 += "Public."
-                Sql8 += "t50_zikhd("
+                Sql8 += "INSERT INTO Public.t50_zikhd("
                 Sql8 += "会社コード, 年月, メーカー, 品名, 型式, 前月末数量, 前月末間接費, 今月末数量, 今月入庫数, 今月出庫数, 今月間接費, 更新者, 更新日,前月末単価, 今月単価)"
-                Sql8 += " VALUES('"
-                Sql8 += frmC01F10_Login.loginValue.BumonNM
-                Sql8 += "', '"
-                Sql8 += dtToday
-                Sql8 += "', '"
-                Sql8 += ds6.Tables(RS).Rows(i)("メーカー")
-                Sql8 += "', '"
-                Sql8 += ds6.Tables(RS).Rows(i)("品名")
-                Sql8 += "', '"
-                Sql8 += ds6.Tables(RS).Rows(i)("型式")
-                Sql8 += "', '"
-                Sql8 += "0"
-                Sql8 += "', '"
-                Sql8 += "0"
-                Sql8 += "', '"
-                Sql8 += ds6.Tables(RS).Rows(i)("仕入数量").ToString
-                Sql8 += "', '"
-                Sql8 += ds6.Tables(RS).Rows(i)("仕入数量").ToString
-                Sql8 += "', '"
-                Sql8 += "0"
-                Sql8 += "', '"
-                Sql8 += ds6.Tables(RS).Rows(i)("間接費").ToString
-                Sql8 += "', '"
-                Sql8 += frmC01F10_Login.loginValue.TantoNM
-                Sql8 += "', '"
-                Sql8 += dtToday
-                Sql8 += "', '"
-                Sql8 += "0"
-                Sql8 += "', '"
-                Sql8 += ds6.Tables(RS).Rows(i)("仕入単価").ToString
-                Sql8 += " ')"
-                Sql8 += "RETURNING 会社コード"
-                Sql8 += ", "
-                Sql8 += "年月"
-                Sql8 += ", "
-                Sql8 += "メーカー"
-                Sql8 += ", "
-                Sql8 += "品名"
-                Sql8 += ", "
-                Sql8 += "型式"
-                Sql8 += ", "
-                Sql8 += "前月末数量"
-                Sql8 += ", "
-                Sql8 += "前月末間接費"
-                Sql8 += ", "
-                Sql8 += "今月末数量"
-                Sql8 += ", "
-                Sql8 += "今月入庫数"
-                Sql8 += ", "
-                Sql8 += "今月出庫数"
-                Sql8 += ", "
-                Sql8 += "今月間接費"
-                Sql8 += ", "
-                Sql8 += "更新者"
-                Sql8 += ", "
-                Sql8 += "更新日"
-                Sql8 += ", "
-                Sql8 += "前月末単価"
-                Sql8 += ", "
-                Sql8 += "今月単価"
+                Sql8 += " VALUES("
+                Sql8 += " '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                Sql8 += " , '" & dtToday & "'"
+                Sql8 += " , '" & ds6.Tables(RS).Rows(i)("メーカー") & "'"
+                Sql8 += " , '" & ds6.Tables(RS).Rows(i)("品名") & "'"
+                Sql8 += " , '" & ds6.Tables(RS).Rows(i)("型式") & "'"
+                Sql8 += " , 0"          '前月末数量
+                Sql8 += " , 0"          '前月末間接費
+                Sql8 += " , " & ds6.Tables(RS).Rows(i)("仕入数量").ToString     '今月末数量
+                Sql8 += " , " & ds6.Tables(RS).Rows(i)("仕入数量").ToString     '今月入庫数
+                Sql8 += " , 0"          '今月出庫数
+                Sql8 += " , " & ds6.Tables(RS).Rows(i)("間接費").ToString      '今月間接費
+                Sql8 += " , '" & frmC01F10_Login.loginValue.TantoNM & "'"        '更新者
+                Sql8 += " , '" & dtToday & "'"      '更新日
+                Sql8 += " , 0"          '前月末単価
+                Sql8 += " , " & ds6.Tables(RS).Rows(i)("仕入単価").ToString     '今月単価
+                Sql8 += " )"
                 _db.executeDB(Sql8)
             Else
                 Dim tmp1 As Double = 0
                 Dim tmp2 As Double = 0
                 Sql8 = ""
-                Sql8 += "UPDATE "
-                Sql8 += "Public."
-                Sql8 += "t50_zikhd "
+                Sql8 += "UPDATE Public.t50_zikhd "
                 Sql8 += "SET "
-                Sql8 += " 今月末数量"
-                Sql8 += " = '"
+                Sql8 += " 今月末数量 = "
                 tmp1 = ds7.Tables(RS).Rows(0)("今月末数量") + ds6.Tables(RS).Rows(i)("仕入数量")
                 Sql8 += tmp1.ToString
-                Sql8 += "', "
-                Sql8 += "今月入庫数"
-                Sql8 += " = '"
+                Sql8 += " , 今月入庫数 = "
                 tmp2 = ds7.Tables(RS).Rows(0)("今月入庫数") + ds6.Tables(RS).Rows(i)("仕入数量")
                 Sql8 += tmp2.ToString
-                Sql8 += "', "
-                Sql8 += "更新者"
-                Sql8 += " = '"
-                Sql8 += frmC01F10_Login.loginValue.TantoNM
-                Sql8 += "', "
-                Sql8 += "更新日"
-                Sql8 += " = '"
-                Sql8 += dtToday
-                Sql8 += "' "
+                Sql8 += " , 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+                Sql8 += " , 更新日 = '" & dtToday & "'"
 
-                Sql8 += " WHERE "
-                Sql8 += "会社コード"
-                Sql8 += " ILIKE  "
-                Sql8 += "'"
-                Sql8 += frmC01F10_Login.loginValue.BumonNM
-                Sql8 += "'"
-                Sql8 += " AND "
-                Sql8 += "メーカー"
-                Sql8 += " ILIKE  "
-                Sql8 += "'"
-                Sql8 += ds6.Tables(RS).Rows(i)("メーカー")
-                Sql8 += "'"
-                Sql8 += " AND "
-                Sql8 += "品名"
-                Sql8 += " ILIKE  "
-                Sql8 += "'"
-                Sql8 += ds6.Tables(RS).Rows(i)("品名")
-                Sql8 += "'"
-                Sql8 += " AND "
-                Sql8 += "型式"
-                Sql8 += " ILIKE  "
-                Sql8 += "'"
-                Sql8 += ds6.Tables(RS).Rows(i)("型式")
-                Sql8 += "'"
-
-                Sql8 += "RETURNING 会社コード"
-                Sql8 += ", "
-                Sql8 += "年月"
-                Sql8 += ", "
-                Sql8 += "メーカー"
-                Sql8 += ", "
-                Sql8 += "品名"
-                Sql8 += ", "
-                Sql8 += "型式"
-                Sql8 += ", "
-                Sql8 += "前月末数量"
-                Sql8 += ", "
-                Sql8 += "前月末間接費"
-                Sql8 += ", "
-                Sql8 += "今月末数量"
-                Sql8 += ", "
-                Sql8 += "今月入庫数"
-                Sql8 += ", "
-                Sql8 += "今月出庫数"
-                Sql8 += ", "
-                Sql8 += "今月間接費"
-                Sql8 += ", "
-                Sql8 += "更新者"
-                Sql8 += ", "
-                Sql8 += "更新日"
+                Sql8 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                Sql8 += " AND メーカー = '" & ds6.Tables(RS).Rows(i)("メーカー") & "'"
+                Sql8 += " AND 品名 = '" & ds6.Tables(RS).Rows(i)("品名") & "'"
+                Sql8 += " AND 型式 = '" & ds6.Tables(RS).Rows(i)("型式") & "'"
 
                 _db.executeDB(Sql8)
             End If
@@ -922,36 +454,11 @@ Public Class ClosingLog
 
         Sql7 = ""
         For i As Integer = 0 To ds5.Tables(RS).Rows.Count - 1
-            Sql7 += "SELECT "
-            Sql7 += "* "
-            Sql7 += "FROM "
-            Sql7 += "public"
-            Sql7 += "."
-            Sql7 += "t50_zikhd"
-            Sql7 += " WHERE "
-            Sql7 += "会社コード"
-            Sql7 += " ILIKE  "
-            Sql7 += "'"
-            Sql7 += frmC01F10_Login.loginValue.BumonNM
-            Sql7 += "'"
-            Sql7 += " AND "
-            Sql7 += "メーカー"
-            Sql7 += " ILIKE  "
-            Sql7 += "'"
-            Sql7 += ds5.Tables(RS).Rows(i)("メーカー")
-            Sql7 += "'"
-            Sql7 += " AND "
-            Sql7 += "品名"
-            Sql7 += " ILIKE  "
-            Sql7 += "'"
-            Sql7 += ds5.Tables(RS).Rows(i)("品名")
-            Sql7 += "'"
-            Sql7 += " AND "
-            Sql7 += "型式"
-            Sql7 += " ILIKE  "
-            Sql7 += "'"
-            Sql7 += ds5.Tables(RS).Rows(i)("型式")
-            Sql7 += "'"
+            Sql7 += "SELECT * FROM public.t50_zikhd"
+            Sql7 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql7 += " AND メーカー = '" & ds5.Tables(RS).Rows(i)("メーカー") & "'"
+            Sql7 += " AND 品名 = '" & ds5.Tables(RS).Rows(i)("品名") & "'"
+            Sql7 += " AND 型式 = '" & ds5.Tables(RS).Rows(i)("型式") & "'"
 
             Dim ds7 As DataSet = _db.selectDB(Sql7, RS, reccnt)
             Sql7 = ""
@@ -960,70 +467,25 @@ Public Class ClosingLog
 
             If ds7.Tables(RS).Rows.Count = 0 Then
                 Sql9 = ""
-                Sql9 += "INSERT INTO "
-                Sql9 += "Public."
-                Sql9 += "t50_zikhd("
+                Sql9 += "INSERT INTO Public.t50_zikhd("
                 Sql9 += "会社コード, 年月, メーカー, 品名, 型式, 前月末数量, 前月末間接費, 今月末数量, 今月入庫数, 今月出庫数, 今月間接費, 更新者, 更新日, 前月末単価, 今月単価)"
-                Sql9 += " VALUES('"
-                Sql9 += frmC01F10_Login.loginValue.BumonNM
-                Sql9 += "', '"
-                Sql9 += dtToday
-                Sql9 += "', '"
-                Sql9 += ds5.Tables(RS).Rows(i)("メーカー")
-                Sql9 += "', '"
-                Sql9 += ds5.Tables(RS).Rows(i)("品名")
-                Sql9 += "', '"
-                Sql9 += ds5.Tables(RS).Rows(i)("型式")
-                Sql9 += "', '"
-                Sql9 += "0"
-                Sql9 += "', '"
-                Sql9 += "0"
-                Sql9 += "', '"
-                Sql9 += ds5.Tables(RS).Rows(i)("売上数量").ToString
-                Sql9 += "', '"
-                Sql9 += "0"
-                Sql9 += "', '"
-                Sql9 += ds5.Tables(RS).Rows(i)("売上数量").ToString
-                Sql9 += "', '"
-                Sql9 += "0"
-                Sql9 += "', '"
-                Sql9 += frmC01F10_Login.loginValue.TantoNM
-                Sql9 += "', '"
-                Sql9 += dtToday
-                Sql9 += "', '"
-                Sql9 += "0"
-                Sql9 += "', '"
-                Sql9 += "0"
-                Sql9 += " ')"
-                Sql9 += "RETURNING 会社コード"
-                Sql9 += ", "
-                Sql9 += "年月"
-                Sql9 += ", "
-                Sql9 += "メーカー"
-                Sql9 += ", "
-                Sql9 += "品名"
-                Sql9 += ", "
-                Sql9 += "型式"
-                Sql9 += ", "
-                Sql9 += "前月末数量"
-                Sql9 += ", "
-                Sql9 += "前月末間接費"
-                Sql9 += ", "
-                Sql9 += "今月末数量"
-                Sql9 += ", "
-                Sql9 += "今月入庫数"
-                Sql9 += ", "
-                Sql9 += "今月出庫数"
-                Sql9 += ", "
-                Sql9 += "今月間接費"
-                Sql9 += ", "
-                Sql9 += "更新者"
-                Sql9 += ", "
-                Sql9 += "更新日"
-                Sql9 += ", "
-                Sql9 += "前月末単価"
-                Sql9 += ", "
-                Sql9 += "今月単価"
+                Sql9 += " VALUES("
+                Sql9 += " '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                Sql9 += " , '" & dtToday & "'"          '年月
+                Sql9 += " , '" & ds5.Tables(RS).Rows(i)("メーカー") & "'"
+                Sql9 += " , '" & ds5.Tables(RS).Rows(i)("品名") & "'"
+                Sql9 += " , '" & ds5.Tables(RS).Rows(i)("型式") & "'"
+                Sql9 += " , 0"      '前月末数量
+                Sql9 += " , 0"      '前月末間接費
+                Sql9 += " , " & ds5.Tables(RS).Rows(i)("売上数量").ToString     '今月末数量
+                Sql9 += " , 0"      '今月入庫数
+                Sql9 += " , " & ds5.Tables(RS).Rows(i)("売上数量").ToString     '今月出庫数
+                Sql9 += " , 0"      '今月間接費
+                Sql9 += " , '" & frmC01F10_Login.loginValue.TantoNM & "'"       '更新者
+                Sql9 += " , '" & dtToday & "'"                                  '更新日
+                Sql9 += " , 0"      '前月末単価
+                Sql9 += " , 0"      '今月単価
+                Sql9 += " )"
 
                 _db.executeDB(Sql9)
 
@@ -1031,91 +493,28 @@ Public Class ClosingLog
                 Dim tmp3 As Double = 0
                 Dim tmp4 As Double = 0
                 Sql9 = ""
-                Sql9 += "UPDATE "
-                Sql9 += "Public."
-                Sql9 += "t50_zikhd "
+                Sql9 += "UPDATE Public.t50_zikhd "
                 Sql9 += "SET "
-                Sql9 += " 今月末数量"
-                Sql9 += " = '"
+                Sql9 += " 今月末数量 = "
                 tmp3 = ds7.Tables(RS).Rows(0)("今月末数量") - ds5.Tables(RS).Rows(i)("売上数量")
                 Sql9 += tmp3.ToString
-                Sql9 += "', "
-                Sql9 += "今月出庫数"
-                Sql9 += " = '"
+                Sql9 += " , 今月出庫数 = "
                 tmp4 = ds7.Tables(RS).Rows(0)("今月出庫数") + ds5.Tables(RS).Rows(i)("売上数量")
                 Sql9 += tmp4.ToString
-                Sql9 += "', "
-                Sql9 += "更新者"
-                Sql9 += " = '"
-                Sql9 += frmC01F10_Login.loginValue.TantoNM
-                Sql9 += "', "
-                Sql9 += "更新日"
-                Sql9 += " = '"
-                Sql9 += dtToday
-                Sql9 += "' "
+                Sql9 += " , 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+                Sql9 += " , 更新日 = '" & dtToday & "'"
 
-                Sql9 += " WHERE "
-                Sql9 += "会社コード"
-                Sql9 += " ILIKE  "
-                Sql9 += "'"
-                Sql9 += frmC01F10_Login.loginValue.BumonNM
-                Sql9 += "'"
-                Sql9 += " AND "
-                Sql9 += "メーカー"
-                Sql9 += " ILIKE  "
-                Sql9 += "'"
-                Sql9 += ds5.Tables(RS).Rows(i)("メーカー")
-                Sql9 += "'"
-                Sql9 += " AND "
-                Sql9 += "品名"
-                Sql9 += " ILIKE  "
-                Sql9 += "'"
-                Sql9 += ds5.Tables(RS).Rows(i)("品名")
-                Sql9 += "'"
-                Sql9 += " AND "
-                Sql9 += "型式"
-                Sql9 += " ILIKE  "
-                Sql9 += "'"
-                Sql9 += ds5.Tables(RS).Rows(i)("型式")
-                Sql9 += "'"
-
-                Sql9 += "RETURNING 会社コード"
-                Sql9 += ", "
-                Sql9 += "年月"
-                Sql9 += ", "
-                Sql9 += "メーカー"
-                Sql9 += ", "
-                Sql9 += "品名"
-                Sql9 += ", "
-                Sql9 += "型式"
-                Sql9 += ", "
-                Sql9 += "前月末数量"
-                Sql9 += ", "
-                Sql9 += "前月末間接費"
-                Sql9 += ", "
-                Sql9 += "今月末数量"
-                Sql9 += ", "
-                Sql9 += "今月入庫数"
-                Sql9 += ", "
-                Sql9 += "今月出庫数"
-                Sql9 += ", "
-                Sql9 += "今月間接費"
-                Sql9 += ", "
-                Sql9 += "更新者"
-                Sql9 += ", "
-                Sql9 += "更新日"
-
+                Sql9 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                Sql9 += " AND メーカー = '" & ds5.Tables(RS).Rows(i)("メーカー") & "'"
+                Sql9 += " AND 品名 = '" & ds5.Tables(RS).Rows(i)("品名") & "'"
+                Sql9 += " AND 型式 = '" & ds5.Tables(RS).Rows(i)("型式") & "'"
                 _db.executeDB(Sql9)
             End If
         Next
 
         Dim Sql10 As String = ""
-        Sql10 += "SELECT "
-        Sql10 += "* "
-        Sql10 += "FROM "
-        Sql10 += "public"
-        Sql10 += "."
-        Sql10 += "t50_zikhd"
+        Sql10 += "SELECT * FROM public.t50_zikhd"
+        Sql10 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
 
         Dim ds10 As DataSet = _db.selectDB(Sql10, RS, reccnt)
 
@@ -1123,259 +522,65 @@ Public Class ClosingLog
         For i As Integer = 0 To ds10.Tables(RS).Rows.Count - 1
             Dim tmp5 As Double = 0
             Sql11 = ""
-            Sql11 += "UPDATE "
-            Sql11 += "Public."
-            Sql11 += "t50_zikhd "
+            Sql11 += "UPDATE Public.t50_zikhd "
             Sql11 += "SET "
-            Sql11 += " 今月末数量"
-            Sql11 += " = '"
+            Sql11 += " 今月末数量 = "
             tmp5 = ds10.Tables(RS).Rows(i)("今月末数量") + ds10.Tables(RS).Rows(i)("前月末数量")
             Sql11 += tmp5.ToString
-            Sql11 += "', "
-            Sql11 += "更新者"
-            Sql11 += " = '"
-            Sql11 += frmC01F10_Login.loginValue.TantoNM
-            Sql11 += "', "
-            Sql11 += "更新日"
-            Sql11 += " = '"
-            Sql11 += dtToday
-            Sql11 += "' "
+            Sql11 += " , 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+            Sql11 += " , 更新日 = '" & dtToday & "'"
 
-            Sql11 += " WHERE "
-            Sql11 += "会社コード"
-            Sql11 += " ILIKE  "
-            Sql11 += "'"
-            Sql11 += frmC01F10_Login.loginValue.BumonNM
-            Sql11 += "'"
-            Sql11 += " AND "
-            Sql11 += "メーカー"
-            Sql11 += " ILIKE  "
-            Sql11 += "'"
-            Sql11 += ds10.Tables(RS).Rows(i)("メーカー")
-            Sql11 += "'"
-            Sql11 += " AND "
-            Sql11 += "品名"
-            Sql11 += " ILIKE  "
-            Sql11 += "'"
-            Sql11 += ds10.Tables(RS).Rows(i)("品名")
-            Sql11 += "'"
-            Sql11 += " AND "
-            Sql11 += "型式"
-            Sql11 += " ILIKE  "
-            Sql11 += "'"
-            Sql11 += ds10.Tables(RS).Rows(i)("型式")
-            Sql11 += "'"
-
-            Sql11 += "RETURNING 会社コード"
-            Sql11 += ", "
-            Sql11 += "年月"
-            Sql11 += ", "
-            Sql11 += "メーカー"
-            Sql11 += ", "
-            Sql11 += "品名"
-            Sql11 += ", "
-            Sql11 += "型式"
-            Sql11 += ", "
-            Sql11 += "前月末数量"
-            Sql11 += ", "
-            Sql11 += "前月末間接費"
-            Sql11 += ", "
-            Sql11 += "今月末数量"
-            Sql11 += ", "
-            Sql11 += "今月入庫数"
-            Sql11 += ", "
-            Sql11 += "今月出庫数"
-            Sql11 += ", "
-            Sql11 += "今月間接費"
-            Sql11 += ", "
-            Sql11 += "更新者"
-            Sql11 += ", "
-            Sql11 += "更新日"
+            Sql11 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql11 += " AND メーカー = '" & ds10.Tables(RS).Rows(i)("メーカー") & "'"
+            Sql11 += " AND 品名 = '" & ds10.Tables(RS).Rows(i)("品名") & "'"
+            Sql11 += " AND 型式 = '" & ds10.Tables(RS).Rows(i)("型式") & "'"
 
             _db.executeDB(Sql11)
         Next
         Dim Sql12 As String = ""
         For i As Integer = 0 To ds5.Tables(RS).Rows.Count - 1
             Sql12 = ""
-            Sql12 += "UPDATE "
-            Sql12 += "Public."
-            Sql12 += "t30_urighd "
+            Sql12 += "UPDATE Public.t30_urighd "
             Sql12 += "SET "
-            Sql12 += "締処理日 "
-            Sql12 += " = '"
-            Sql12 += dtToday
-            Sql12 += "', "
-            Sql12 += "更新者"
-            Sql12 += " = '"
-            Sql12 += frmC01F10_Login.loginValue.TantoNM
-            Sql12 += "', "
-            Sql12 += "更新日"
-            Sql12 += " = '"
-            Sql12 += dtToday
-            Sql12 += "' "
+            Sql12 += "締処理日  = '" & dtToday & "'"
+            Sql12 += " , 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+            Sql12 += " , 更新日 = '" & dtToday & "'"
 
-            Sql12 += " WHERE "
-            Sql12 += "会社コード"
-            Sql12 += " ILIKE  "
-            Sql12 += "'"
-            Sql12 += frmC01F10_Login.loginValue.BumonNM
-            Sql12 += "'"
-            Sql12 += " AND "
-            Sql12 += "売上番号"
-            Sql12 += " ILIKE  "
-            Sql12 += "'"
-            Sql12 += ds5.Tables(RS).Rows(i)("売上番号")
-            Sql12 += "'"
-
-            Sql12 += "RETURNING 会社コード"
-            Sql12 += ", "
-            Sql12 += "売上番号"
-            Sql12 += ", "
-            Sql12 += "売上番号枝番"
-            Sql12 += ", "
-            Sql12 += "客先番号"
-            Sql12 += ", "
-            Sql12 += "受注番号"
-            Sql12 += ", "
-            Sql12 += "受注番号枝番"
-            Sql12 += ", "
-            Sql12 += "見積番号"
-            Sql12 += ", "
-            Sql12 += "見積番号枝番"
-            Sql12 += ", "
-            Sql12 += "得意先コード"
-            Sql12 += ", "
-            Sql12 += "得意先名"
-            Sql12 += ", "
-            Sql12 += "得意先郵便番号"
-            Sql12 += ", "
-            Sql12 += "得意先住所"
-            Sql12 += ", "
-            Sql12 += "得意先電話番号"
-            Sql12 += ", "
-            Sql12 += "得意先ＦＡＸ"
-            Sql12 += ", "
-            Sql12 += "得意先担当者役職"
-            Sql12 += ", "
-            Sql12 += "得意先担当者名"
-            Sql12 += ", "
-            Sql12 += "見積日"
-            Sql12 += ", "
-            Sql12 += "見積有効期限"
-            Sql12 += ", "
-            Sql12 += "支払条件"
-            Sql12 += ", "
-            Sql12 += "見積金額"
-            Sql12 += ", "
-            Sql12 += "売上金額"
-            Sql12 += ", "
-            Sql12 += "粗利額"
-            Sql12 += ", "
-            Sql12 += "営業担当者"
-            Sql12 += ", "
-            Sql12 += "入力担当者"
-            Sql12 += ", "
-            Sql12 += "備考"
-            Sql12 += ", "
-            Sql12 += "取消日"
-            Sql12 += ", "
-            Sql12 += "取消区分"
-            Sql12 += ", "
-            Sql12 += "ＶＡＴ"
-            Sql12 += ", "
-            Sql12 += "ＰＰＨ"
-            Sql12 += ", "
-            Sql12 += "受注日"
-            Sql12 += ", "
-            Sql12 += "売上日"
-            Sql12 += ", "
-            Sql12 += "入金予定日"
-            Sql12 += ", "
-            Sql12 += "登録日"
-            Sql12 += ", "
-            Sql12 += "更新日"
-            Sql12 += ", "
-            Sql12 += "更新者"
-
-            _db.executeDB(Sql12)
+            Sql12 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql12 += " AND 売上番号 = '" & ds5.Tables(RS).Rows(i)("売上番号") & "'"
+            '20190225 テストのため締め日更新をいったんコメントアウト
+            '_db.executeDB(Sql12)
         Next
 
         Dim Sql13 As String = ""
         For i As Integer = 0 To ds6.Tables(RS).Rows.Count - 1
             Sql13 = ""
-            Sql13 += "UPDATE "
-            Sql13 += "Public."
-            Sql13 += "t40_sirehd "
+            Sql13 += "UPDATE Public.t40_sirehd "
             Sql13 += "SET "
-            Sql13 += "締処理日 "
-            Sql13 += " = '"
-            Sql13 += dtToday
-            Sql13 += "', "
-            Sql13 += "更新者"
-            Sql13 += " = '"
-            Sql13 += frmC01F10_Login.loginValue.TantoNM
-            Sql13 += "', "
-            Sql13 += "更新日"
-            Sql13 += " = '"
-            Sql13 += dtToday
-            Sql13 += "' "
+            Sql13 += "締処理日  = '" & dtToday & "'"
+            Sql13 += " , 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+            Sql13 += " , 更新日 = '" & dtToday & "'"
 
-            Sql13 += " WHERE "
-            Sql13 += "会社コード"
-            Sql13 += " ILIKE  "
-            Sql13 += "'"
-            Sql13 += frmC01F10_Login.loginValue.BumonNM
-            Sql13 += "'"
-            Sql13 += " AND "
-            Sql13 += "仕入番号"
-            Sql13 += " ILIKE  "
-            Sql13 += "'"
-            Sql13 += ds6.Tables(RS).Rows(i)("仕入番号")
-            Sql13 += "'"
-
-            Sql13 += "RETURNING 締処理日"
-            Sql13 += ", "
-            Sql13 += "更新日"
-            Sql13 += ", "
-            Sql13 += "更新者"
-
-            _db.executeDB(Sql13)
+            Sql13 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql13 += " AND 仕入番号 = '" & ds6.Tables(RS).Rows(i)("仕入番号") & "'"
+            '20190225 テストのため締め日更新をいったんコメントアウト
+            '_db.executeDB(Sql13)
         Next
 
         Dim Sql14 As String = ""
 
         Sql14 = ""
-        Sql14 += "INSERT INTO "
-        Sql14 += "Public."
-        Sql14 += "t51_smlog("
+        Sql14 += "INSERT INTO Public.t51_smlog("
         Sql14 += "会社コード, 処理日時, 前回締日, 今回締日, 次回締日, 担当者)"
-        Sql14 += " VALUES('"
-        Sql14 += frmC01F10_Login.loginValue.BumonNM
-        Sql14 += "', '"
-        Sql14 += dtToday
-        Sql14 += "', '"
-        Sql14 += ds1.Tables(RS).Rows(0)("前回締日")
-        Sql14 += "', '"
-        Sql14 += ds1.Tables(RS).Rows(0)("今回締日")
-        Sql14 += "', '"
-        Sql14 += ds1.Tables(RS).Rows(0)("次回締日")
-        Sql14 += "', '"
-        Sql14 += frmC01F10_Login.loginValue.TantoNM
-        Sql14 += " ')"
-        Sql14 += "RETURNING "
-        Sql14 += "会社コード"
-        Sql14 += ", "
-        Sql14 += "処理日時"
-        Sql14 += ", "
-        Sql14 += "前回締日"
-        Sql14 += ", "
-        Sql14 += "今回締日"
-        Sql14 += ", "
-        Sql14 += "次回締日"
-        Sql14 += ", "
-        Sql14 += "担当者"
-
-        _db.executeDB(Sql14)
+        Sql14 += " VALUES('" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql14 += " , '" & dtToday & "'"
+        Sql14 += " , '" & ds1.Tables(RS).Rows(0)("前回締日") & "'"
+        Sql14 += " , '" & ds1.Tables(RS).Rows(0)("今回締日") & "'"
+        Sql14 += " , '" & ds1.Tables(RS).Rows(0)("次回締日") & "'"
+        Sql14 += " , '" & frmC01F10_Login.loginValue.TantoNM & "'"
+        Sql14 += " )"
+        '20190225 テストのため締め日更新をいったんコメントアウト
+        '_db.executeDB(Sql14)
 
         Dim thisClosingDate As DateTime = DateTime.Parse(ds1.Tables(RS).Rows(0)("次回締日"))
         Dim dtYear As Integer = thisClosingDate.Year
@@ -1391,116 +596,29 @@ Public Class ClosingLog
         Dim nextClosingDate = New DateTime(dtYear, dtMonth, dtdays)
         Dim Sql15 As String = ""
         Sql15 = ""
-        Sql15 += "UPDATE "
-        Sql15 += "Public."
-        Sql15 += "m01_company "
+        Sql15 += "UPDATE Public.m01_company "
         Sql15 += "SET "
-        Sql15 += "前回締日 "
-        Sql15 += " = '"
-        Sql15 += ds1.Tables(RS).Rows(0)("今回締日")
-        Sql15 += "', "
-        Sql15 += "今回締日"
-        Sql15 += " = '"
-        Sql15 += ds1.Tables(RS).Rows(0)("次回締日")
-        Sql15 += "', "
-        Sql15 += "次回締日"
-        Sql15 += " = '"
-        Sql15 += nextClosingDate
-        Sql15 += "' "
+        Sql15 += "前回締日  = '" & ds1.Tables(RS).Rows(0)("今回締日") & "'"
+        Sql15 += " , 今回締日 = '" & ds1.Tables(RS).Rows(0)("次回締日") & "'"
+        Sql15 += " , 次回締日 = '" & nextClosingDate & "'"
 
-        Sql15 += " WHERE "
-        Sql15 += "会社コード"
-        Sql15 += " ILIKE  "
-        Sql15 += "'"
-        Sql15 += frmC01F10_Login.loginValue.BumonNM
-        Sql15 += "'"
-
-        Sql15 += "RETURNING 会社コード"
-        Sql15 += ", "
-        Sql15 += "会社名"
-        Sql15 += ", "
-        Sql15 += "会社略称"
-        Sql15 += ", "
-        Sql15 += "郵便番号"
-        Sql15 += ", "
-        Sql15 += "住所１"
-        Sql15 += ", "
-        Sql15 += "住所２"
-        Sql15 += ", "
-        Sql15 += "住所３"
-        Sql15 += ", "
-        Sql15 += "電話番号"
-        Sql15 += ", "
-        Sql15 += "ＦＡＸ番号"
-        Sql15 += ", "
-        Sql15 += "代表者役職"
-        Sql15 += ", "
-        Sql15 += "代表者名"
-        Sql15 += ", "
-        Sql15 += "表示順"
-        Sql15 += ", "
-        Sql15 += "備考"
-        Sql15 += ", "
-        Sql15 += "銀行コード"
-        Sql15 += ", "
-        Sql15 += "支店コード"
-        Sql15 += ", "
-        Sql15 += "預金種目"
-        Sql15 += ", "
-        Sql15 += "口座番号"
-        Sql15 += ", "
-        Sql15 += "口座名義"
-        Sql15 += ", "
-        Sql15 += "更新者"
-        Sql15 += ", "
-        Sql15 += "更新日"
-        Sql15 += ", "
-        Sql15 += "前回締日"
-        Sql15 += ", "
-        Sql15 += "今回締日"
-        Sql15 += ", "
-        Sql15 += "次回締日"
-        Sql15 += ", "
-        Sql15 += "在庫単価評価法"
-
-        _db.executeDB(Sql15)
+        Sql15 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        '20190225 テストのため締め日更新をいったんコメントアウト
+        '_db.executeDB(Sql15)
 
         '請求締処理日更新
         Dim Sql16 As String = ""
         For i As Integer = 0 To ds4.Tables(RS).Rows.Count - 1
             Sql16 = ""
-            Sql16 += "UPDATE "
-            Sql16 += "Public."
-            Sql16 += "t23_skyuhd "
+            Sql16 += "UPDATE Public.t23_skyuhd "
             Sql16 += "SET "
-            Sql16 += "締処理日 "
-            Sql16 += " = '"
-            Sql16 += dtToday
-            Sql16 += "', "
-            Sql16 += "更新者"
-            Sql16 += " = '"
-            Sql16 += frmC01F10_Login.loginValue.TantoNM
-            Sql16 += "' "
+            Sql16 += "締処理日  = '" & dtToday & "'"
+            Sql16 += " , 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
 
-
-            Sql16 += " WHERE "
-            Sql16 += "会社コード"
-            Sql16 += " ILIKE  "
-            Sql16 += "'"
-            Sql16 += frmC01F10_Login.loginValue.BumonNM
-            Sql16 += "'"
-            Sql16 += " AND "
-            Sql16 += "請求番号"
-            Sql16 += " ILIKE  "
-            Sql16 += "'"
-            Sql16 += ds4.Tables(RS).Rows(i)("請求番号")
-            Sql16 += "'"
-
-            Sql16 += "RETURNING 締処理日"
-            Sql16 += ", "
-            Sql16 += "更新者"
-
-            _db.executeDB(Sql16)
+            Sql16 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql16 += " AND 請求番号 = '" & ds4.Tables(RS).Rows(i)("請求番号") & "'"
+            '20190225 テストのため締め日更新をいったんコメントアウト
+            '_db.executeDB(Sql16)
         Next
 
 
@@ -1508,78 +626,31 @@ Public Class ClosingLog
         Dim Sql17 As String = ""
         For i As Integer = 0 To dsKike.Tables(RS).Rows.Count - 1
             Sql17 = ""
-            Sql17 += "UPDATE "
-            Sql17 += "Public."
-            Sql17 += "t46_kikehd "
+            Sql17 += "UPDATE Public.t46_kikehd "
             Sql17 += "SET "
-            Sql17 += "締処理日 "
-            Sql17 += " = '"
-            Sql17 += dtToday
-            Sql17 += "', "
-            Sql17 += "更新日 "
-            Sql17 += " = '"
-            Sql17 += dtToday
-            Sql17 += "', "
-            Sql17 += "更新者"
-            Sql17 += " = '"
-            Sql17 += frmC01F10_Login.loginValue.TantoNM
-            Sql17 += "' "
+            Sql17 += "締処理日 = '" & dtToday & "'"
+            Sql17 += " , 更新日 = '" & dtToday & "'"
+            Sql17 += " , 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
 
-            Sql17 += " WHERE "
-            Sql17 += "会社コード"
-            Sql17 += " ILIKE  "
-            Sql17 += "'"
-            Sql17 += frmC01F10_Login.loginValue.BumonNM
-            Sql17 += "'"
-            Sql17 += " AND "
-            Sql17 += "買掛番号"
-            Sql17 += " ILIKE  "
-            Sql17 += "'"
-            Sql17 += dsKike.Tables(RS).Rows(i)("買掛番号")
-            Sql17 += "'"
-
-            Sql17 += "RETURNING 締処理日"
-            Sql17 += ", "
-            Sql17 += "更新者"
-
-            _db.executeDB(Sql17)
+            Sql17 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql17 += " AND 買掛番号 = '" & dsKike.Tables(RS).Rows(i)("買掛番号") & "'"
+            '20190225 テストのため締め日更新をいったんコメントアウト
+            '_db.executeDB(Sql17)
         Next
 
         '仕入明細締処理日更新
         Dim Sql18 As String = ""
         For i As Integer = 0 To ds6.Tables(RS).Rows.Count - 1
             Sql18 = ""
-            Sql18 += "UPDATE "
-            Sql18 += "Public."
-            Sql18 += "t41_siredt "
+            Sql18 += "UPDATE Public.t41_siredt "
             Sql18 += "SET "
-            Sql18 += "締処理日 "
-            Sql18 += " = '"
-            Sql18 += dtToday
-            Sql18 += "', "
-            Sql18 += "更新者"
-            Sql18 += " = '"
-            Sql18 += frmC01F10_Login.loginValue.TantoNM
-            Sql18 += "' "
+            Sql18 += "締処理日  = '" & dtToday & "'"
+            Sql18 += " , 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
 
-            Sql18 += " WHERE "
-            Sql18 += "会社コード"
-            Sql18 += " ILIKE  "
-            Sql18 += "'"
-            Sql18 += frmC01F10_Login.loginValue.BumonNM
-            Sql18 += "'"
-            Sql18 += " AND "
-            Sql18 += "仕入番号"
-            Sql18 += " ILIKE  "
-            Sql18 += "'"
-            Sql18 += ds6.Tables(RS).Rows(i)("仕入番号")
-            Sql18 += "'"
-
-            Sql18 += "RETURNING 締処理日"
-            Sql18 += ", "
-            Sql18 += "更新者"
-
-            _db.executeDB(Sql18)
+            Sql18 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql18 += " AND 仕入番号 = '" & ds6.Tables(RS).Rows(i)("仕入番号") & "'"
+            '20190225 テストのため締め日更新をいったんコメントアウト
+            '_db.executeDB(Sql18)
         Next
 
 
@@ -1587,57 +658,55 @@ Public Class ClosingLog
         ClosingLogLoad()
     End Sub
 
-
-
+    '仕訳データ作成処理
+    '
     Private Sub Accounting()
         Dim dtToday As DateTime = DateTime.Now
         Dim reccnt As Integer = 0
         Dim Sql As String = ""
 
+        '20190225 テストのため締処理用テーブルを全件消去してから処理を行う
+        _db.executeDB("truncate table t52_krurighd")
+        _db.executeDB("truncate table t53_krurigdt")
+        _db.executeDB("truncate table t54_krsirehd")
+        _db.executeDB("truncate table t55_krsiredt")
+        _db.executeDB("truncate table t56_krskyuhd")
+        _db.executeDB("truncate table t57_krkikehd")
+        _db.executeDB("truncate table t58_krnyukohd")
+        _db.executeDB("truncate table t59_krnyukodt")
+        _db.executeDB("truncate table t60_krshukohd")
+        _db.executeDB("truncate table t61_krshukodt")
+        _db.executeDB("truncate table t62_krnkinhd")
+        _db.executeDB("truncate table t63_krnkindt")
+        _db.executeDB("truncate table t64_krshrihd")
+        _db.executeDB("truncate table t65_krshridt")
+        _db.executeDB("truncate table t66_swkhd")
+
+
         Sql = ""
-        Sql += "SELECT "
-        Sql += "* "
-        Sql += "FROM "
-        Sql += "public"
-        Sql += "."
-        Sql += "m01_company"
-        Sql += " WHERE "
-        Sql += "会社コード"
-        Sql += " ILIKE  "
-        Sql += "'"
-        Sql += frmC01F10_Login.loginValue.BumonCD
-        Sql += "'"
+        Sql += "SELECT * FROM public.m01_company"
+        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
         Dim dsCompany As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-#Region "仕分前受金"
+#Region "仕訳前受金"
         Sql = ""
-        Sql += "SELECT "
-        Sql += "* "
-        Sql += "FROM "
-        Sql += "public"
-        Sql += "."
-        Sql += "t27_nkinkshihd"
-        Sql += " WHERE "
-        Sql += "会社コード"
-        Sql += " ILIKE  "
-        Sql += "'"
-        Sql += frmC01F10_Login.loginValue.BumonCD
-        Sql += "'"
-        Sql += " AND "
-        Sql += "入金日"
-        Sql += " >  "
-        Sql += "'"
-        Sql += dsCompany.Tables(RS).Rows(0)("前回締日")
-        Sql += "'"
-        Sql += " AND "
-        Sql += "入金日"
-        Sql += " <=  "
-        Sql += "'"
-        Sql += dsCompany.Tables(RS).Rows(0)("今回締日")
-        Sql += "'"
-        Sql += " AND "
-        Sql += "締処理日"
-        Sql += " IS NULL "
+        Sql += "SELECT * FROM public.t27_nkinkshihd"
+        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        'Sql += " AND "
+        'Sql += "入金日"
+        'Sql += " >  "
+        'Sql += "'"
+        'Sql += dsCompany.Tables(RS).Rows(0)("前回締日")
+        'Sql += "'"
+        'Sql += " AND "
+        'Sql += "入金日"
+        'Sql += " <=  "
+        'Sql += "'"
+        'Sql += dsCompany.Tables(RS).Rows(0)("今回締日")
+        'Sql += "'"
+        'Sql += " AND "
+        'Sql += "締処理日"
+        'Sql += " IS NULL "
 
         Dim dsNkinkshihd As DataSet = _db.selectDB(Sql, RS, reccnt)
 
@@ -1714,25 +783,6 @@ Public Class ClosingLog
                 Sql += "', '"
                 Sql += dsNkinkshihd.Tables(RS).Rows(i)("入金消込額計").ToString
                 Sql += " ')"
-                Sql += "RETURNING 会社コード"
-                Sql += ", "
-                Sql += "見積番号"
-                Sql += ", "
-                Sql += "受注番号"
-                Sql += ", "
-                Sql += "客先番号"
-                Sql += ", "
-                Sql += "取引先名"
-                Sql += ", "
-                Sql += "仕分日"
-                Sql += ", "
-                Sql += "借方勘定科目"
-                Sql += ", "
-                Sql += "借方勘定科目金額"
-                Sql += ", "
-                Sql += "貸方勘定科目"
-                Sql += ", "
-                Sql += "貸方勘定科目金額"
 
                 _db.executeDB(Sql)
 
@@ -1762,25 +812,6 @@ Public Class ClosingLog
                 Sql += "', '"
                 Sql += dsNkinkshihd.Tables(RS).Rows(i)("入金消込額計").ToString
                 Sql += " ')"
-                Sql += "RETURNING 会社コード"
-                Sql += ", "
-                Sql += "見積番号"
-                Sql += ", "
-                Sql += "受注番号"
-                Sql += ", "
-                Sql += "客先番号"
-                Sql += ", "
-                Sql += "取引先名"
-                Sql += ", "
-                Sql += "仕分日"
-                Sql += ", "
-                Sql += "借方勘定科目"
-                Sql += ", "
-                Sql += "借方勘定科目金額"
-                Sql += ", "
-                Sql += "貸方勘定科目"
-                Sql += ", "
-                Sql += "貸方勘定科目金額"
 
                 _db.executeDB(Sql)
             Else
@@ -1830,25 +861,6 @@ Public Class ClosingLog
                 Sql += "', '"
                 Sql += dsNkinkshihd.Tables(RS).Rows(i)("入金消込額計").ToString
                 Sql += " ')"
-                Sql += "RETURNING 会社コード"
-                Sql += ", "
-                Sql += "見積番号"
-                Sql += ", "
-                Sql += "受注番号"
-                Sql += ", "
-                Sql += "客先番号"
-                Sql += ", "
-                Sql += "取引先名"
-                Sql += ", "
-                Sql += "仕分日"
-                Sql += ", "
-                Sql += "借方勘定科目"
-                Sql += ", "
-                Sql += "借方勘定科目金額"
-                Sql += ", "
-                Sql += "貸方勘定科目"
-                Sql += ", "
-                Sql += "貸方勘定科目金額"
 
                 _db.executeDB(Sql)
             End If
@@ -1870,21 +882,21 @@ Public Class ClosingLog
         Sql += "'"
         Sql += frmC01F10_Login.loginValue.BumonCD
         Sql += "'"
-        Sql += " AND "
-        Sql += "売上日"
-        Sql += " >  "
-        Sql += "'"
-        Sql += dsCompany.Tables(RS).Rows(0)("前回締日")
-        Sql += "'"
-        Sql += " AND "
-        Sql += "売上日"
-        Sql += " <=  "
-        Sql += "'"
-        Sql += dsCompany.Tables(RS).Rows(0)("今回締日")
-        Sql += "'"
-        Sql += " AND "
-        Sql += "締処理日"
-        Sql += " IS NULL "
+        'Sql += " AND "
+        'Sql += "売上日"
+        'Sql += " >  "
+        'Sql += "'"
+        'Sql += dsCompany.Tables(RS).Rows(0)("前回締日")
+        'Sql += "'"
+        'Sql += " AND "
+        'Sql += "売上日"
+        'Sql += " <=  "
+        'Sql += "'"
+        'Sql += dsCompany.Tables(RS).Rows(0)("今回締日")
+        'Sql += "'"
+        'Sql += " AND "
+        'Sql += "締処理日"
+        'Sql += " IS NULL "
 
         Dim dsSwkUrighd As DataSet = _db.selectDB(Sql, RS, reccnt)
 
@@ -1915,26 +927,6 @@ Public Class ClosingLog
             Sql += "', '"
             Sql += dsSwkUrighd.Tables(RS).Rows(i)("売上金額").ToString
             Sql += " ')"
-            Sql += "RETURNING 会社コード"
-            Sql += ", "
-            Sql += "見積番号"
-            Sql += ", "
-            Sql += "受注番号"
-            Sql += ", "
-            Sql += "客先番号"
-            Sql += ", "
-            Sql += "取引先名"
-            Sql += ", "
-            Sql += "仕分日"
-            Sql += ", "
-            Sql += "借方勘定科目"
-            Sql += ", "
-            Sql += "借方勘定科目金額"
-            Sql += ", "
-            Sql += "貸方勘定科目"
-            Sql += ", "
-            Sql += "貸方勘定科目金額"
-
             _db.executeDB(Sql)
 
             Dim VATOUT As Double = 0
@@ -1965,31 +957,12 @@ Public Class ClosingLog
             Sql += "', '"
             Sql += VATOUT.ToString
             Sql += " ')"
-            Sql += "RETURNING 会社コード"
-            Sql += ", "
-            Sql += "見積番号"
-            Sql += ", "
-            Sql += "受注番号"
-            Sql += ", "
-            Sql += "客先番号"
-            Sql += ", "
-            Sql += "取引先名"
-            Sql += ", "
-            Sql += "仕分日"
-            Sql += ", "
-            Sql += "借方勘定科目"
-            Sql += ", "
-            Sql += "借方勘定科目金額"
-            Sql += ", "
-            Sql += "貸方勘定科目"
-            Sql += ", "
-            Sql += "貸方勘定科目金額"
 
             _db.executeDB(Sql)
         Next
 #End Region
 
-#Region "仕分前払金"
+#Region "仕訳前払金"
         Sql = ""
         Sql += "SELECT "
         Sql += "* "
@@ -2003,21 +976,21 @@ Public Class ClosingLog
         Sql += "'"
         Sql += frmC01F10_Login.loginValue.BumonCD
         Sql += "'"
-        Sql += " AND "
-        Sql += "支払日"
-        Sql += " >  "
-        Sql += "'"
-        Sql += dsCompany.Tables(RS).Rows(0)("前回締日")
-        Sql += "'"
-        Sql += " AND "
-        Sql += "支払日"
-        Sql += " <=  "
-        Sql += "'"
-        Sql += dsCompany.Tables(RS).Rows(0)("今回締日")
-        Sql += "'"
-        Sql += " AND "
-        Sql += "締処理日"
-        Sql += " IS NULL "
+        'Sql += " AND "
+        'Sql += "支払日"
+        'Sql += " >  "
+        'Sql += "'"
+        'Sql += dsCompany.Tables(RS).Rows(0)("前回締日")
+        'Sql += "'"
+        'Sql += " AND "
+        'Sql += "支払日"
+        'Sql += " <=  "
+        'Sql += "'"
+        'Sql += dsCompany.Tables(RS).Rows(0)("今回締日")
+        'Sql += "'"
+        'Sql += " AND "
+        'Sql += "締処理日"
+        'Sql += " IS NULL "
 
         Dim dsShrikshihd As DataSet = _db.selectDB(Sql, RS, reccnt)
 
@@ -2234,7 +1207,7 @@ Public Class ClosingLog
         Next
 #End Region
 
-#Region "仕分買掛金"
+#Region "仕訳買掛金"
         Sql = ""
         Sql += "SELECT "
         Sql += "* "
@@ -2248,21 +1221,21 @@ Public Class ClosingLog
         Sql += "'"
         Sql += frmC01F10_Login.loginValue.BumonCD
         Sql += "'"
-        Sql += " AND "
-        Sql += "仕入日"
-        Sql += " >  "
-        Sql += "'"
-        Sql += dsCompany.Tables(RS).Rows(0)("前回締日")
-        Sql += "'"
-        Sql += " AND "
-        Sql += "仕入日"
-        Sql += " <=  "
-        Sql += "'"
-        Sql += dsCompany.Tables(RS).Rows(0)("今回締日")
-        Sql += "'"
-        Sql += " AND "
-        Sql += "締処理日"
-        Sql += " IS NULL "
+        'Sql += " AND "
+        'Sql += "仕入日"
+        'Sql += " >  "
+        'Sql += "'"
+        'Sql += dsCompany.Tables(RS).Rows(0)("前回締日")
+        'Sql += "'"
+        'Sql += " AND "
+        'Sql += "仕入日"
+        'Sql += " <=  "
+        'Sql += "'"
+        'Sql += dsCompany.Tables(RS).Rows(0)("今回締日")
+        'Sql += "'"
+        'Sql += " AND "
+        'Sql += "締処理日"
+        'Sql += " IS NULL "
 
         Dim dsSwkSirehd As DataSet = _db.selectDB(Sql, RS, reccnt)
 
@@ -2478,21 +1451,21 @@ Public Class ClosingLog
         Sql += "'"
         Sql += frmC01F10_Login.loginValue.BumonCD
         Sql += "'"
-        Sql += " AND "
-        Sql += "売上日"
-        Sql += " >  "
-        Sql += "'"
-        Sql += dsCompany.Tables(RS).Rows(0)("前回締日")
-        Sql += "'"
-        Sql += " AND "
-        Sql += "売上日"
-        Sql += " <=  "
-        Sql += "'"
-        Sql += dsCompany.Tables(RS).Rows(0)("今回締日")
-        Sql += "'"
-        Sql += " AND "
-        Sql += "締処理日"
-        Sql += " IS NULL "
+        'Sql += " AND "
+        'Sql += "売上日"
+        'Sql += " >  "
+        'Sql += "'"
+        'Sql += dsCompany.Tables(RS).Rows(0)("前回締日")
+        'Sql += "'"
+        'Sql += " AND "
+        'Sql += "売上日"
+        'Sql += " <=  "
+        'Sql += "'"
+        'Sql += dsCompany.Tables(RS).Rows(0)("今回締日")
+        'Sql += "'"
+        'Sql += " AND "
+        'Sql += "締処理日"
+        'Sql += " IS NULL "
 
         Dim dsUrighd As DataSet = _db.selectDB(Sql, RS, reccnt)
 
@@ -2606,77 +1579,6 @@ Public Class ClosingLog
             End If
 
             Sql += " ')"
-            Sql += "RETURNING 会社コード"
-            Sql += ", "
-            Sql += "売上番号"
-            Sql += ", "
-            Sql += "客先番号"
-            Sql += ", "
-            Sql += "受注番号"
-            Sql += ", "
-            Sql += "受注番号枝番"
-            Sql += ", "
-            Sql += "見積番号"
-            Sql += ", "
-            Sql += "見積番号枝番"
-            Sql += ", "
-            Sql += "得意先コード"
-            Sql += ", "
-            Sql += "得意先名"
-            Sql += ", "
-            Sql += "得意先郵便番号"
-            Sql += ", "
-            Sql += "得意先住所"
-            Sql += ", "
-            Sql += "得意先電話番号"
-            Sql += ", "
-            Sql += "得意先ＦＡＸ"
-            Sql += ", "
-            Sql += "得意先担当者役職"
-            Sql += ", "
-            Sql += "得意先担当者名"
-            Sql += ", "
-            Sql += "見積日"
-            Sql += ", "
-            Sql += "見積有効期限"
-            Sql += ", "
-            Sql += "支払条件"
-            Sql += ", "
-            Sql += "見積金額"
-            Sql += ", "
-            Sql += "仕入金額"
-            Sql += ", "
-            Sql += "売上金額"
-            Sql += ", "
-            Sql += "粗利額"
-            Sql += ", "
-            Sql += "営業担当者"
-            Sql += ", "
-            Sql += "入力担当者"
-            Sql += ", "
-            Sql += "備考"
-            Sql += ", "
-            Sql += "ＶＡＴ"
-            Sql += ", "
-            Sql += "ＰＰＨ"
-            Sql += ", "
-            Sql += "受注日"
-            Sql += ", "
-            Sql += "売上日"
-            Sql += ", "
-            Sql += "締処理日"
-            Sql += ", "
-            Sql += "入金予定日"
-            Sql += ", "
-            Sql += "登録日"
-            Sql += ", "
-            Sql += "更新日"
-            Sql += ", "
-            Sql += "更新者"
-            Sql += ", "
-            Sql += "取消日"
-            Sql += ", "
-            Sql += "取消区分"
 
             _db.executeDB(Sql)
         Next
@@ -2732,23 +1634,23 @@ Public Class ClosingLog
                     Sql += "'"
                     Sql += dsUrigdt.Tables(RS).Rows(x)("型式")
                     Sql += "'"
-                    Sql += " AND "
-                    Sql += "仕入日"
-                    Sql += " >  "
-                    Sql += "'"
-                    Sql += dsCompany.Tables(RS).Rows(0)("前回締日")
-                    Sql += "'"
-                    Sql += " AND "
-                    Sql += "仕入日"
-                    Sql += " <=  "
-                    Sql += "'"
-                    Sql += dsCompany.Tables(RS).Rows(0)("今回締日")
-                    Sql += "'"
-                    Sql += " AND "
-                    Sql += "締処理日"
-                    Sql += " IS NULL "
-                    Sql += " AND "
-                    Sql += "カウント IS NULL"
+                    'Sql += " AND "
+                    'Sql += "仕入日"
+                    'Sql += " >  "
+                    'Sql += "'"
+                    'Sql += dsCompany.Tables(RS).Rows(0)("前回締日")
+                    'Sql += "'"
+                    'Sql += " AND "
+                    'Sql += "仕入日"
+                    'Sql += " <=  "
+                    'Sql += "'"
+                    'Sql += dsCompany.Tables(RS).Rows(0)("今回締日")
+                    'Sql += "'"
+                    'Sql += " AND "
+                    'Sql += "締処理日"
+                    'Sql += " IS NULL "
+                    'Sql += " AND "
+                    'Sql += "カウント IS NULL"
 
                     Dim dsSiredt As DataSet = _db.selectDB(Sql, RS, reccnt)
 
@@ -2869,83 +1771,6 @@ Public Class ClosingLog
                             Sql += "', '"
                             Sql += dtToday
                             Sql += " ')"
-                            Sql += "RETURNING 会社コード"
-                            Sql += ", "
-                            Sql += "売上番号"
-                            Sql += ", "
-                            Sql += "受注番号"
-                            Sql += ", "
-                            Sql += "受注番号枝番"
-                            Sql += ", "
-                            Sql += "行番号"
-                            Sql += ", "
-                            Sql += "行番号枝番"
-                            Sql += ", "
-                            Sql += "仕入区分"
-                            Sql += ", "
-                            Sql += "メーカー"
-                            Sql += ", "
-                            Sql += "品名"
-                            Sql += ", "
-                            Sql += "型式"
-                            Sql += ", "
-                            Sql += "仕入先名"
-                            Sql += ", "
-                            Sql += "仕入値"
-                            Sql += ", "
-                            Sql += "受注数量"
-                            Sql += ", "
-                            Sql += "売上数量"
-                            Sql += ", "
-                            Sql += "受注残数"
-                            Sql += ", "
-                            Sql += "単位"
-                            Sql += ", "
-                            Sql += "仕入原価"
-                            Sql += ", "
-                            Sql += "関税率"
-                            Sql += ", "
-                            Sql += "関税額"
-                            Sql += ", "
-                            Sql += "前払法人税率"
-                            Sql += ", "
-                            Sql += "前払法人税額"
-                            Sql += ", "
-                            Sql += "輸送費率"
-                            Sql += ", "
-                            Sql += "輸送費額"
-                            Sql += ", "
-                            Sql += "間接費"
-                            Sql += ", "
-                            Sql += "仕入金額"
-                            Sql += ", "
-                            Sql += "売単価"
-                            Sql += ", "
-                            Sql += "売上金額"
-                            Sql += ", "
-                            Sql += "見積単価"
-                            Sql += ", "
-                            Sql += "見積金額"
-                            Sql += ", "
-                            Sql += "粗利額"
-                            Sql += ", "
-                            Sql += "粗利率"
-                            Sql += ", "
-                            Sql += "リードタイム"
-                            Sql += ", "
-                            Sql += "備考"
-                            Sql += ", "
-                            Sql += "入金有無"
-                            Sql += ", "
-                            Sql += "入金番号"
-                            Sql += ", "
-                            Sql += "入金日"
-                            Sql += ", "
-                            Sql += "備考"
-                            Sql += ", "
-                            Sql += "更新者"
-                            Sql += ", "
-                            Sql += "更新日"
 
                             _db.executeDB(Sql)
 
@@ -2977,8 +1802,6 @@ Public Class ClosingLog
                             Sql += "'"
                             Sql += dsSiredt.Tables(RS).Rows(y)("行番号").ToString
                             Sql += "'"
-
-                            Sql += "RETURNING カウント"
 
                             _db.executeDB(Sql)
 
@@ -3085,84 +1908,6 @@ Public Class ClosingLog
                     Sql += "', '"
                     Sql += dtToday
                     Sql += " ')"
-                    Sql += "RETURNING 会社コード"
-                    Sql += ", "
-                    Sql += "売上番号"
-                    Sql += ", "
-                    Sql += "受注番号"
-                    Sql += ", "
-                    Sql += "受注番号枝番"
-                    Sql += ", "
-                    Sql += "行番号"
-                    Sql += ", "
-                    Sql += "行番号枝番"
-                    Sql += ", "
-                    Sql += "仕入区分"
-                    Sql += ", "
-                    Sql += "メーカー"
-                    Sql += ", "
-                    Sql += "品名"
-                    Sql += ", "
-                    Sql += "型式"
-                    Sql += ", "
-                    Sql += "仕入先名"
-                    Sql += ", "
-                    Sql += "仕入値"
-                    Sql += ", "
-                    Sql += "受注数量"
-                    Sql += ", "
-                    Sql += "売上数量"
-                    Sql += ", "
-                    Sql += "受注残数"
-                    Sql += ", "
-                    Sql += "単位"
-                    Sql += ", "
-                    Sql += "仕入原価"
-                    Sql += ", "
-                    Sql += "関税率"
-                    Sql += ", "
-                    Sql += "関税額"
-                    Sql += ", "
-                    Sql += "前払法人税率"
-                    Sql += ", "
-                    Sql += "前払法人税額"
-                    Sql += ", "
-                    Sql += "輸送費率"
-                    Sql += ", "
-                    Sql += "輸送費額"
-                    Sql += ", "
-                    Sql += "間接費"
-                    Sql += ", "
-                    Sql += "仕入金額"
-                    Sql += ", "
-                    Sql += "売単価"
-                    Sql += ", "
-                    Sql += "売上金額"
-                    Sql += ", "
-                    Sql += "見積単価"
-                    Sql += ", "
-                    Sql += "見積金額"
-                    Sql += ", "
-                    Sql += "粗利額"
-                    Sql += ", "
-                    Sql += "粗利率"
-                    Sql += ", "
-                    Sql += "リードタイム"
-                    Sql += ", "
-                    Sql += "備考"
-                    Sql += ", "
-                    Sql += "入金有無"
-                    Sql += ", "
-                    Sql += "入金番号"
-                    Sql += ", "
-                    Sql += "入金日"
-                    Sql += ", "
-                    Sql += "備考"
-                    Sql += ", "
-                    Sql += "更新者"
-                    Sql += ", "
-                    Sql += "更新日"
-
                     _db.executeDB(Sql)
                 Next
             End If
@@ -3183,21 +1928,21 @@ Public Class ClosingLog
         Sql += "'"
         Sql += frmC01F10_Login.loginValue.BumonCD
         Sql += "'"
-        Sql += " AND "
-        Sql += "仕入日"
-        Sql += " >  "
-        Sql += "'"
-        Sql += dsCompany.Tables(RS).Rows(0)("前回締日")
-        Sql += "'"
-        Sql += " AND "
-        Sql += "仕入日"
-        Sql += " <=  "
-        Sql += "'"
-        Sql += dsCompany.Tables(RS).Rows(0)("今回締日")
-        Sql += "'"
-        Sql += " AND "
-        Sql += "締処理日"
-        Sql += " IS NULL "
+        'Sql += " AND "
+        'Sql += "仕入日"
+        'Sql += " >  "
+        'Sql += "'"
+        'Sql += dsCompany.Tables(RS).Rows(0)("前回締日")
+        'Sql += "'"
+        'Sql += " AND "
+        'Sql += "仕入日"
+        'Sql += " <=  "
+        'Sql += "'"
+        'Sql += dsCompany.Tables(RS).Rows(0)("今回締日")
+        'Sql += "'"
+        'Sql += " AND "
+        'Sql += "締処理日"
+        'Sql += " IS NULL "
 
         Dim dsSirehd As DataSet = _db.selectDB(Sql, RS, reccnt)
 
@@ -3272,61 +2017,6 @@ Public Class ClosingLog
             Sql += "', '"
             Sql += frmC01F10_Login.loginValue.TantoNM
             Sql += " ')"
-            Sql += "RETURNING 会社コード"
-            Sql += ", "
-            Sql += "仕入番号"
-            Sql += ", "
-            Sql += "発注番号"
-            Sql += ", "
-            Sql += "発注番号枝番"
-            Sql += ", "
-            Sql += "客先番号"
-            Sql += ", "
-            Sql += "仕入先コード"
-            Sql += ", "
-            Sql += "仕入先名"
-            Sql += ", "
-            Sql += "仕入先郵便番号"
-            Sql += ", "
-            Sql += "仕入先住所"
-            Sql += ", "
-            Sql += "仕入先電話番号"
-            Sql += ", "
-            Sql += "仕入先ＦＡＸ"
-            Sql += ", "
-            Sql += "仕入先担当者役職"
-            Sql += ", "
-            Sql += "仕入先担当者名"
-            Sql += ", "
-            Sql += "支払条件"
-            Sql += ", "
-            Sql += "仕入金額"
-            Sql += ", "
-            Sql += "粗利額"
-            Sql += ", "
-            Sql += "営業担当者"
-            Sql += ", "
-            Sql += "入力担当者"
-            Sql += ", "
-            Sql += "備考"
-            Sql += ", "
-            Sql += "取消日"
-            Sql += ", "
-            Sql += "取消区分"
-            Sql += ", "
-            Sql += "ＶＡＴ"
-            Sql += ", "
-            Sql += "ＰＰＨ"
-            Sql += ", "
-            Sql += "仕入日"
-            Sql += ", "
-            Sql += "登録日"
-            Sql += ", "
-            Sql += "締処理日"
-            Sql += ", "
-            Sql += "更新日"
-            Sql += ", "
-            Sql += "更新者"
 
             _db.executeDB(Sql)
         Next
@@ -3419,57 +2109,6 @@ Public Class ClosingLog
                 Sql += "', '"
                 Sql += dtToday
                 Sql += " ')"
-                Sql += "RETURNING 会社コード"
-                Sql += ", "
-                Sql += "仕入番号"
-                Sql += ", "
-                Sql += "発注番号"
-                Sql += ", "
-                Sql += "発注番号枝番"
-                Sql += ", "
-                Sql += "行番号"
-                Sql += ", "
-                Sql += "仕入区分"
-                Sql += ", "
-                Sql += "メーカー"
-                Sql += ", "
-                Sql += "品名"
-                Sql += ", "
-                Sql += "型式"
-                Sql += ", "
-                Sql += "仕入先名"
-                Sql += ", "
-                Sql += "仕入値"
-                Sql += ", "
-                Sql += "発注数量"
-                Sql += ", "
-                Sql += "仕入数量"
-                Sql += ", "
-                Sql += "発注残数"
-                Sql += ", "
-                Sql += "単位"
-                Sql += ", "
-                Sql += "仕入単価"
-                Sql += ", "
-                Sql += "仕入金額"
-                Sql += ", "
-                Sql += "間接費"
-                Sql += ", "
-                Sql += "リードタイム"
-                Sql += ", "
-                Sql += "支払有無"
-                Sql += ", "
-                Sql += "支払番号"
-                Sql += ", "
-                Sql += "支払日"
-                Sql += ", "
-                Sql += "備考"
-                Sql += ", "
-                Sql += "仕入日"
-                Sql += ", "
-                Sql += "更新者"
-                Sql += ", "
-                Sql += "更新日"
                 _db.executeDB(Sql)
             Next
         Next
@@ -3489,21 +2128,21 @@ Public Class ClosingLog
         Sql += "'"
         Sql += frmC01F10_Login.loginValue.BumonCD
         Sql += "'"
-        Sql += " AND "
-        Sql += "請求日"
-        Sql += " >  "
-        Sql += "'"
-        Sql += dsCompany.Tables(RS).Rows(0)("前回締日")
-        Sql += "'"
-        Sql += " AND "
-        Sql += "請求日"
-        Sql += " <=  "
-        Sql += "'"
-        Sql += dsCompany.Tables(RS).Rows(0)("今回締日")
-        Sql += "'"
-        Sql += " AND "
-        Sql += "締処理日"
-        Sql += " IS NULL "
+        'Sql += " AND "
+        'Sql += "請求日"
+        'Sql += " >  "
+        'Sql += "'"
+        'Sql += dsCompany.Tables(RS).Rows(0)("前回締日")
+        'Sql += "'"
+        'Sql += " AND "
+        'Sql += "請求日"
+        'Sql += " <=  "
+        'Sql += "'"
+        'Sql += dsCompany.Tables(RS).Rows(0)("今回締日")
+        'Sql += "'"
+        'Sql += " AND "
+        'Sql += "締処理日"
+        'Sql += " IS NULL "
 
         Dim dsSkyuhd As DataSet = _db.selectDB(Sql, RS, reccnt)
 
@@ -3588,47 +2227,6 @@ Public Class ClosingLog
             Sql += "', '"
             Sql += frmC01F10_Login.loginValue.TantoNM
             Sql += " ')"
-            Sql += "RETURNING 会社コード"
-            Sql += ", "
-            Sql += "請求番号"
-            Sql += ", "
-            Sql += "請求区分"
-            Sql += ", "
-            Sql += "請求日"
-            Sql += ", "
-            Sql += "受注番号"
-            Sql += ", "
-            Sql += "受注番号枝番"
-            Sql += ", "
-            Sql += "客先番号"
-            Sql += ", "
-            Sql += "得意先コード"
-            Sql += ", "
-            Sql += "得意先名"
-            Sql += ", "
-            Sql += "請求金額計"
-            Sql += ", "
-            Sql += "入金額計"
-            Sql += ", "
-            Sql += "売掛残高"
-            Sql += ", "
-            Sql += "備考１"
-            Sql += ", "
-            Sql += "備考２"
-            Sql += ", "
-            Sql += "入金番号"
-            Sql += ", "
-            Sql += "入金完了日"
-            Sql += ", "
-            Sql += "取消日"
-            Sql += ", "
-            Sql += "取消区分"
-            Sql += ", "
-            Sql += "登録日"
-            Sql += ", "
-            Sql += "締処理日"
-            Sql += ", "
-            Sql += "更新者"
 
             _db.executeDB(Sql)
         Next
@@ -3648,21 +2246,21 @@ Public Class ClosingLog
         Sql += "'"
         Sql += frmC01F10_Login.loginValue.BumonCD
         Sql += "'"
-        Sql += " AND "
-        Sql += "買掛日"
-        Sql += " >  "
-        Sql += "'"
-        Sql += dsCompany.Tables(RS).Rows(0)("前回締日")
-        Sql += "'"
-        Sql += " AND "
-        Sql += "買掛日"
-        Sql += " <=  "
-        Sql += "'"
-        Sql += dsCompany.Tables(RS).Rows(0)("今回締日")
-        Sql += "'"
-        Sql += " AND "
-        Sql += "締処理日"
-        Sql += " IS NULL "
+        'Sql += " AND "
+        'Sql += "買掛日"
+        'Sql += " >  "
+        'Sql += "'"
+        'Sql += dsCompany.Tables(RS).Rows(0)("前回締日")
+        'Sql += "'"
+        'Sql += " AND "
+        'Sql += "買掛日"
+        'Sql += " <=  "
+        'Sql += "'"
+        'Sql += dsCompany.Tables(RS).Rows(0)("今回締日")
+        'Sql += "'"
+        'Sql += " AND "
+        'Sql += "締処理日"
+        'Sql += " IS NULL "
 
         Dim dsKikehd As DataSet = _db.selectDB(Sql, RS, reccnt)
 
@@ -3744,45 +2342,6 @@ Public Class ClosingLog
             Sql += "', '"
             Sql += dtToday
             Sql += " ')"
-            Sql += "RETURNING 会社コード"
-            Sql += ", "
-            Sql += "買掛番号"
-            Sql += ", "
-            Sql += "買掛区分"
-            Sql += ", "
-            Sql += "買掛日"
-            Sql += ", "
-            Sql += "発注番号"
-            Sql += ", "
-            Sql += "発注番号枝番"
-            Sql += ", "
-            Sql += "客先番号"
-            Sql += ", "
-            Sql += "仕入先コード"
-            Sql += ", "
-            Sql += "仕入先名"
-            Sql += ", "
-            Sql += "買掛金額計"
-            Sql += ", "
-            Sql += "支払金額計"
-            Sql += ", "
-            Sql += "買掛残高"
-            Sql += ", "
-            Sql += "備考１"
-            Sql += ", "
-            Sql += "備考２"
-            Sql += ", "
-            Sql += "支払完了日"
-            Sql += ", "
-            Sql += "取消日"
-            Sql += ", "
-            Sql += "取消区分"
-            Sql += ", "
-            Sql += "登録日"
-            Sql += ", "
-            Sql += "更新者"
-            Sql += ", "
-            Sql += "締処理日"
 
             _db.executeDB(Sql)
         Next
@@ -3802,21 +2361,21 @@ Public Class ClosingLog
         Sql += "'"
         Sql += frmC01F10_Login.loginValue.BumonCD
         Sql += "'"
-        Sql += " AND "
-        Sql += "入庫日"
-        Sql += " >  "
-        Sql += "'"
-        Sql += dsCompany.Tables(RS).Rows(0)("前回締日")
-        Sql += "'"
-        Sql += " AND "
-        Sql += "入庫日"
-        Sql += " <=  "
-        Sql += "'"
-        Sql += dsCompany.Tables(RS).Rows(0)("今回締日")
-        Sql += "'"
-        Sql += " AND "
-        Sql += "締処理日"
-        Sql += " IS NULL "
+        'Sql += " AND "
+        'Sql += "入庫日"
+        'Sql += " >  "
+        'Sql += "'"
+        'Sql += dsCompany.Tables(RS).Rows(0)("前回締日")
+        'Sql += "'"
+        'Sql += " AND "
+        'Sql += "入庫日"
+        'Sql += " <=  "
+        'Sql += "'"
+        'Sql += dsCompany.Tables(RS).Rows(0)("今回締日")
+        'Sql += "'"
+        'Sql += " AND "
+        'Sql += "締処理日"
+        'Sql += " IS NULL "
 
         Dim dsNyukohd As DataSet = _db.selectDB(Sql, RS, reccnt)
 
@@ -3903,61 +2462,6 @@ Public Class ClosingLog
             Sql += dtToday
             Sql += " ')"
 
-            Sql += "RETURNING 会社コード"
-            Sql += ", "
-            Sql += "入庫番号"
-            Sql += ", "
-            Sql += "客先番号"
-            Sql += ", "
-            Sql += "発注番号"
-            Sql += ", "
-            Sql += "発注番号枝番"
-            Sql += ", "
-            Sql += "仕入先コード"
-            Sql += ", "
-            Sql += "仕入先名"
-            Sql += ", "
-            Sql += "仕入先郵便番号"
-            Sql += ", "
-            Sql += "仕入先住所"
-            Sql += ", "
-            Sql += "仕入先電話番号"
-            Sql += ", "
-            Sql += "仕入先ＦＡＸ"
-            Sql += ", "
-            Sql += "仕入先担当者役職"
-            Sql += ", "
-            Sql += "仕入先担当者名"
-            Sql += ", "
-            Sql += "支払条件"
-            Sql += ", "
-            Sql += "仕入金額"
-            Sql += ", "
-            Sql += "粗利額"
-            Sql += ", "
-            Sql += "ＶＡＴ"
-            Sql += ", "
-            Sql += "ＰＰＨ"
-            Sql += ", "
-            Sql += "営業担当者"
-            Sql += ", "
-            Sql += "入力担当者"
-            Sql += ", "
-            Sql += "備考"
-            Sql += ", "
-            Sql += "入庫日"
-            Sql += ", "
-            Sql += "登録日"
-            Sql += ", "
-            Sql += "更新日"
-            Sql += ", "
-            Sql += "更新者"
-            Sql += ", "
-            Sql += "取消日"
-            Sql += ", "
-            Sql += "取消区分"
-            Sql += ", "
-            Sql += "締処理日"
 
             _db.executeDB(Sql)
         Next
@@ -4018,37 +2522,6 @@ Public Class ClosingLog
                 Sql += "', '"
                 Sql += dtToday
                 Sql += " ')"
-                Sql += "RETURNING 会社コード"
-                Sql += ", "
-                Sql += "入庫番号"
-                Sql += ", "
-                Sql += "発注番号"
-                Sql += ", "
-                Sql += "発注番号枝番"
-                Sql += ", "
-                Sql += "行番号"
-                Sql += ", "
-                Sql += "仕入区分"
-                Sql += ", "
-                Sql += "メーカー"
-                Sql += ", "
-                Sql += "品名"
-                Sql += ", "
-                Sql += "型式"
-                Sql += ", "
-                Sql += "仕入先名"
-                Sql += ", "
-                Sql += "仕入値"
-                Sql += ", "
-                Sql += "入庫数量"
-                Sql += ", "
-                Sql += "単位"
-                Sql += ", "
-                Sql += "備考"
-                Sql += ", "
-                Sql += "更新者"
-                Sql += ", "
-                Sql += "更新日"
 
                 _db.executeDB(Sql)
             Next
@@ -4070,21 +2543,21 @@ Public Class ClosingLog
         Sql += "'"
         Sql += frmC01F10_Login.loginValue.BumonCD
         Sql += "'"
-        Sql += " AND "
-        Sql += "出庫日"
-        Sql += " >  "
-        Sql += "'"
-        Sql += dsCompany.Tables(RS).Rows(0)("前回締日")
-        Sql += "'"
-        Sql += " AND "
-        Sql += "出庫日"
-        Sql += " <=  "
-        Sql += "'"
-        Sql += dsCompany.Tables(RS).Rows(0)("今回締日")
-        Sql += "'"
-        Sql += " AND "
-        Sql += "締処理日"
-        Sql += " IS NULL "
+        'Sql += " AND "
+        'Sql += "出庫日"
+        'Sql += " >  "
+        'Sql += "'"
+        'Sql += dsCompany.Tables(RS).Rows(0)("前回締日")
+        'Sql += "'"
+        'Sql += " AND "
+        'Sql += "出庫日"
+        'Sql += " <=  "
+        'Sql += "'"
+        'Sql += dsCompany.Tables(RS).Rows(0)("今回締日")
+        'Sql += "'"
+        'Sql += " AND "
+        'Sql += "締処理日"
+        'Sql += " IS NULL "
 
         Dim dsShukohd As DataSet = _db.selectDB(Sql, RS, reccnt)
 
@@ -4157,56 +2630,6 @@ Public Class ClosingLog
             Sql += dtToday
             Sql += " ')"
 
-            Sql += "RETURNING 会社コード"
-            Sql += ", "
-            Sql += "出庫番号"
-            Sql += ", "
-            Sql += "客先番号"
-            Sql += ", "
-            Sql += "見積番号"
-            Sql += ", "
-            Sql += "見積番号枝番"
-            Sql += ", "
-            Sql += "受注番号"
-            Sql += ", "
-            Sql += "受注番号枝番"
-            Sql += ", "
-            Sql += "得意先コード"
-            Sql += ", "
-            Sql += "得意先名"
-            Sql += ", "
-            Sql += "得意先郵便番号"
-            Sql += ", "
-            Sql += "得意先住所"
-            Sql += ", "
-            Sql += "得意先電話番号"
-            Sql += ", "
-            Sql += "得意先ＦＡＸ"
-            Sql += ", "
-            Sql += "得意先担当者役職"
-            Sql += ", "
-            Sql += "得意先担当者名"
-            Sql += ", "
-            Sql += "営業担当者"
-            Sql += ", "
-            Sql += "入力担当者"
-            Sql += ", "
-            Sql += "備考"
-            Sql += ", "
-            Sql += "出庫日"
-            Sql += ", "
-            Sql += "登録日"
-            Sql += ", "
-            Sql += "更新日"
-            Sql += ", "
-            Sql += "更新者"
-            Sql += ", "
-            Sql += "取消日"
-            Sql += ", "
-            Sql += "取消区分"
-            Sql += ", "
-            Sql += "締処理日"
-
             _db.executeDB(Sql)
         Next
 
@@ -4266,37 +2689,6 @@ Public Class ClosingLog
                 Sql += "', '"
                 Sql += dtToday
                 Sql += " ')"
-                Sql += "RETURNING 会社コード"
-                Sql += ", "
-                Sql += "出庫番号"
-                Sql += ", "
-                Sql += "受注番号"
-                Sql += ", "
-                Sql += "受注番号枝番"
-                Sql += ", "
-                Sql += "行番号"
-                Sql += ", "
-                Sql += "仕入区分"
-                Sql += ", "
-                Sql += "メーカー"
-                Sql += ", "
-                Sql += "品名"
-                Sql += ", "
-                Sql += "型式"
-                Sql += ", "
-                Sql += "仕入先名"
-                Sql += ", "
-                Sql += "出庫数量"
-                Sql += ", "
-                Sql += "単位"
-                Sql += ", "
-                Sql += "売単価"
-                Sql += ", "
-                Sql += "備考"
-                Sql += ", "
-                Sql += "更新者"
-                Sql += ", "
-                Sql += "更新日"
 
                 _db.executeDB(Sql)
             Next
@@ -4317,21 +2709,21 @@ Public Class ClosingLog
         Sql += "'"
         Sql += frmC01F10_Login.loginValue.BumonCD
         Sql += "'"
-        Sql += " AND "
-        Sql += "支払日"
-        Sql += " >  "
-        Sql += "'"
-        Sql += dsCompany.Tables(RS).Rows(0)("前回締日")
-        Sql += "'"
-        Sql += " AND "
-        Sql += "支払日"
-        Sql += " <=  "
-        Sql += "'"
-        Sql += dsCompany.Tables(RS).Rows(0)("今回締日")
-        Sql += "'"
-        Sql += " AND "
-        Sql += "締処理日"
-        Sql += " IS NULL "
+        'Sql += " AND "
+        'Sql += "支払日"
+        'Sql += " >  "
+        'Sql += "'"
+        'Sql += dsCompany.Tables(RS).Rows(0)("前回締日")
+        'Sql += "'"
+        'Sql += " AND "
+        'Sql += "支払日"
+        'Sql += " <=  "
+        'Sql += "'"
+        'Sql += dsCompany.Tables(RS).Rows(0)("今回締日")
+        'Sql += "'"
+        'Sql += " AND "
+        'Sql += "締処理日"
+        'Sql += " IS NULL "
 
         Dim dsShrihd As DataSet = _db.selectDB(Sql, RS, reccnt)
 
@@ -4388,40 +2780,6 @@ Public Class ClosingLog
             Sql += dtToday
             Sql += " ')"
 
-            Sql += "RETURNING 会社コード"
-            Sql += ", "
-            Sql += "支払番号"
-            Sql += ", "
-            Sql += "客先番号"
-            Sql += ", "
-            Sql += "支払先コード"
-            Sql += ", "
-            Sql += "支払先名"
-            Sql += ", "
-            Sql += "支払先"
-            Sql += ", "
-            Sql += "買掛金額"
-            Sql += ", "
-            Sql += "支払金額計"
-            Sql += ", "
-            Sql += "買掛残高"
-            Sql += ", "
-            Sql += "備考"
-            Sql += ", "
-            Sql += "支払日"
-            Sql += ", "
-            Sql += "登録日"
-            Sql += ", "
-            Sql += "更新日"
-            Sql += ", "
-            Sql += "更新者"
-            Sql += ", "
-            Sql += "取消日"
-            Sql += ", "
-            Sql += "取消区分"
-            Sql += ", "
-            Sql += "締処理日"
-
             _db.executeDB(Sql)
         Next
 
@@ -4475,31 +2833,6 @@ Public Class ClosingLog
                 Sql += "', '"
                 Sql += dtToday
                 Sql += " ')"
-                Sql += "RETURNING 会社コード"
-                Sql += ", "
-                Sql += "支払番号"
-                Sql += ", "
-                Sql += "行番号"
-                Sql += ", "
-                Sql += "支払種別"
-                Sql += ", "
-                Sql += "支払種別名"
-                Sql += ", "
-                Sql += "支払先コード"
-                Sql += ", "
-                Sql += "支払先名"
-                Sql += ", "
-                Sql += "支払先"
-                Sql += ", "
-                Sql += "支払金額"
-                Sql += ", "
-                Sql += "備考"
-                Sql += ", "
-                Sql += "支払日"
-                Sql += ", "
-                Sql += "更新者"
-                Sql += ", "
-                Sql += "更新日"
 
                 _db.executeDB(Sql)
             Next
@@ -4520,21 +2853,21 @@ Public Class ClosingLog
         Sql += "'"
         Sql += frmC01F10_Login.loginValue.BumonCD
         Sql += "'"
-        Sql += " AND "
-        Sql += "入金日"
-        Sql += " >  "
-        Sql += "'"
-        Sql += dsCompany.Tables(RS).Rows(0)("前回締日")
-        Sql += "'"
-        Sql += " AND "
-        Sql += "入金日"
-        Sql += " <=  "
-        Sql += "'"
-        Sql += dsCompany.Tables(RS).Rows(0)("今回締日")
-        Sql += "'"
-        Sql += " AND "
-        Sql += "締処理日"
-        Sql += " IS NULL "
+        'Sql += " AND "
+        'Sql += "入金日"
+        'Sql += " >  "
+        'Sql += "'"
+        'Sql += dsCompany.Tables(RS).Rows(0)("前回締日")
+        'Sql += "'"
+        'Sql += " AND "
+        'Sql += "入金日"
+        'Sql += " <=  "
+        'Sql += "'"
+        'Sql += dsCompany.Tables(RS).Rows(0)("今回締日")
+        'Sql += "'"
+        'Sql += " AND "
+        'Sql += "締処理日"
+        'Sql += " IS NULL "
 
         Dim dsNkinhd As DataSet = _db.selectDB(Sql, RS, reccnt)
 
@@ -4591,40 +2924,6 @@ Public Class ClosingLog
             Sql += dtToday
             Sql += " ')"
 
-            Sql += "RETURNING 会社コード"
-            Sql += ", "
-            Sql += "入金番号"
-            Sql += ", "
-            Sql += "客先番号"
-            Sql += ", "
-            Sql += "請求先コード"
-            Sql += ", "
-            Sql += "請求先名"
-            Sql += ", "
-            Sql += "振込先"
-            Sql += ", "
-            Sql += "請求金額"
-            Sql += ", "
-            Sql += "入金額計"
-            Sql += ", "
-            Sql += "請求残高"
-            Sql += ", "
-            Sql += "備考"
-            Sql += ", "
-            Sql += "入金日"
-            Sql += ", "
-            Sql += "登録日"
-            Sql += ", "
-            Sql += "更新日"
-            Sql += ", "
-            Sql += "更新者"
-            Sql += ", "
-            Sql += "取消日"
-            Sql += ", "
-            Sql += "取消区分"
-            Sql += ", "
-            Sql += "締処理日"
-
             _db.executeDB(Sql)
         Next
 
@@ -4678,31 +2977,6 @@ Public Class ClosingLog
                 Sql += "', '"
                 Sql += dtToday
                 Sql += " ')"
-                Sql += "RETURNING 会社コード"
-                Sql += ", "
-                Sql += "入金番号"
-                Sql += ", "
-                Sql += "行番号"
-                Sql += ", "
-                Sql += "入金種別"
-                Sql += ", "
-                Sql += "入金種別名"
-                Sql += ", "
-                Sql += "請求先コード"
-                Sql += ", "
-                Sql += "請求先名"
-                Sql += ", "
-                Sql += "振込先"
-                Sql += ", "
-                Sql += "入金額"
-                Sql += ", "
-                Sql += "備考"
-                Sql += ", "
-                Sql += "入金日"
-                Sql += ", "
-                Sql += "更新者"
-                Sql += ", "
-                Sql += "更新日"
 
                 _db.executeDB(Sql)
             Next
@@ -4723,12 +2997,12 @@ Public Class ClosingLog
         Sql += "'"
         Sql += frmC01F10_Login.loginValue.BumonCD
         Sql += "'"
-        Sql += " AND "
-        Sql += "締処理日"
-        Sql += " = "
-        Sql += "'"
-        Sql += dtToday
-        Sql += "'"
+        'Sql += " AND "
+        'Sql += "締処理日"
+        'Sql += " = "
+        'Sql += "'"
+        'Sql += dtToday
+        'Sql += "'"
         Dim csvUrighd As DataSet = _db.selectDB(Sql, RS, reccnt)
 
         ConvertDataTableToCsv(csvUrighd, "t53_krurigdt", "売上番号", "Uriage")
@@ -4746,12 +3020,12 @@ Public Class ClosingLog
         Sql += "'"
         Sql += frmC01F10_Login.loginValue.BumonCD
         Sql += "'"
-        Sql += " AND "
-        Sql += "締処理日"
-        Sql += " = "
-        Sql += "'"
-        Sql += dtToday
-        Sql += "'"
+        'Sql += " AND "
+        'Sql += "締処理日"
+        'Sql += " = "
+        'Sql += "'"
+        'Sql += dtToday
+        'Sql += "'"
         Dim csvSirehd As DataSet = _db.selectDB(Sql, RS, reccnt)
 
         ConvertDataTableToCsv(csvSirehd, "t55_krsiredt", "仕入番号", "Siire")
@@ -4769,12 +3043,12 @@ Public Class ClosingLog
         Sql += "'"
         Sql += frmC01F10_Login.loginValue.BumonCD
         Sql += "'"
-        Sql += " AND "
-        Sql += "締処理日"
-        Sql += " = "
-        Sql += "'"
-        Sql += dtToday
-        Sql += "'"
+        'Sql += " AND "
+        'Sql += "締処理日"
+        'Sql += " = "
+        'Sql += "'"
+        'Sql += dtToday
+        'Sql += "'"
         Dim csvSkyuhd As DataSet = _db.selectDB(Sql, RS, reccnt)
 
         ConvertDataTableToCsvSingle(csvSkyuhd, "Maeuke")
@@ -4792,12 +3066,12 @@ Public Class ClosingLog
         Sql += "'"
         Sql += frmC01F10_Login.loginValue.BumonCD
         Sql += "'"
-        Sql += " AND "
-        Sql += "締処理日"
-        Sql += " = "
-        Sql += "'"
-        Sql += dtToday
-        Sql += "'"
+        'Sql += " AND "
+        'Sql += "締処理日"
+        'Sql += " = "
+        'Sql += "'"
+        'Sql += dtToday
+        'Sql += "'"
         Dim csvKikehd As DataSet = _db.selectDB(Sql, RS, reccnt)
 
         ConvertDataTableToCsvSingle(csvKikehd, "Maebarai")
@@ -4815,12 +3089,12 @@ Public Class ClosingLog
         Sql += "'"
         Sql += frmC01F10_Login.loginValue.BumonCD
         Sql += "'"
-        Sql += " AND "
-        Sql += "締処理日"
-        Sql += " = "
-        Sql += "'"
-        Sql += dtToday
-        Sql += "'"
+        'Sql += " AND "
+        'Sql += "締処理日"
+        'Sql += " = "
+        'Sql += "'"
+        'Sql += dtToday
+        'Sql += "'"
         Dim csvNyukohd As DataSet = _db.selectDB(Sql, RS, reccnt)
 
         ConvertDataTableToCsv(csvNyukohd, "t59_krnyukodt", "入庫番号", "Nyuko")
@@ -4838,12 +3112,12 @@ Public Class ClosingLog
         Sql += "'"
         Sql += frmC01F10_Login.loginValue.BumonCD
         Sql += "'"
-        Sql += " AND "
-        Sql += "締処理日"
-        Sql += " = "
-        Sql += "'"
-        Sql += dtToday
-        Sql += "'"
+        'Sql += " AND "
+        'Sql += "締処理日"
+        'Sql += " = "
+        'Sql += "'"
+        'Sql += dtToday
+        'Sql += "'"
         Dim csvShukohd As DataSet = _db.selectDB(Sql, RS, reccnt)
 
         ConvertDataTableToCsv(csvShukohd, "t61_krshukodt", "出庫番号", "Shuko")
@@ -4861,12 +3135,12 @@ Public Class ClosingLog
         Sql += "'"
         Sql += frmC01F10_Login.loginValue.BumonCD
         Sql += "'"
-        Sql += " AND "
-        Sql += "締処理日"
-        Sql += " = "
-        Sql += "'"
-        Sql += dtToday
-        Sql += "'"
+        'Sql += " AND "
+        'Sql += "締処理日"
+        'Sql += " = "
+        'Sql += "'"
+        'Sql += dtToday
+        'Sql += "'"
         Dim csvNkinhd As DataSet = _db.selectDB(Sql, RS, reccnt)
 
         ConvertDataTableToCsv(csvNkinhd, "t63_krnkindt", "入金番号", "Nyukin")
@@ -4884,12 +3158,12 @@ Public Class ClosingLog
         Sql += "'"
         Sql += frmC01F10_Login.loginValue.BumonCD
         Sql += "'"
-        Sql += " AND "
-        Sql += "締処理日"
-        Sql += " = "
-        Sql += "'"
-        Sql += dtToday
-        Sql += "'"
+        'Sql += " AND "
+        'Sql += "締処理日"
+        'Sql += " = "
+        'Sql += "'"
+        'Sql += dtToday
+        'Sql += "'"
         Dim csvShrihd As DataSet = _db.selectDB(Sql, RS, reccnt)
 
         ConvertDataTableToCsv(csvShrihd, "t65_krshridt", "支払番号", "Siharai")
@@ -4907,12 +3181,12 @@ Public Class ClosingLog
         Sql += "'"
         Sql += frmC01F10_Login.loginValue.BumonCD
         Sql += "'"
-        Sql += " AND "
-        Sql += "仕分日"
-        Sql += " = "
-        Sql += "'"
-        Sql += dtToday
-        Sql += "'"
+        'Sql += " AND "
+        'Sql += "仕分日"
+        'Sql += " = "
+        'Sql += "'"
+        'Sql += dtToday
+        'Sql += "'"
         Dim csvSwkhd As DataSet = _db.selectDB(Sql, RS, reccnt)
 
         ConvertDataTableToCsvSingle(csvSwkhd, "Shiwake")
