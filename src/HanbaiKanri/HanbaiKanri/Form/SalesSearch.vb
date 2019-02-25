@@ -33,7 +33,7 @@ Public Class SalesSearch
     Private _db As UtilDBIf
     Private _parentForm As Form
     Private _status As String
-    Private _companyCode As String = frmC01F10_Login.loginValue.BumonNM
+    Private _companyCode As String = frmC01F10_Login.loginValue.BumonCD
     Private _gh As UtilDataGridViewHandler
     Private _init As Boolean                             '初期処理済フラグ
 

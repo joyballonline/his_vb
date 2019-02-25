@@ -906,7 +906,7 @@ Public Class PurchaseList
         Sql1 += "WHERE"
         Sql1 += " 会社コード"
         Sql1 += "='"
-        Sql1 += frmC01F10_Login.loginValue.BumonNM
+        Sql1 += frmC01F10_Login.loginValue.BumonCD
         Sql1 += "'"
         Sql1 += " AND"
         Sql1 += " 発注番号"
@@ -931,7 +931,7 @@ Public Class PurchaseList
         Sql2 += "WHERE"
         Sql2 += " 会社コード"
         Sql2 += "='"
-        Sql2 += frmC01F10_Login.loginValue.BumonNM
+        Sql2 += frmC01F10_Login.loginValue.BumonCD
         Sql2 += "'"
         Sql2 += " AND"
         Sql2 += " 仕入番号"
@@ -968,7 +968,7 @@ Public Class PurchaseList
         Sql3 += "WHERE"
         Sql3 += " 会社コード"
         Sql3 += "='"
-        Sql3 += frmC01F10_Login.loginValue.BumonNM
+        Sql3 += frmC01F10_Login.loginValue.BumonCD
         Sql3 += "'"
         Sql3 += " AND"
         Sql3 += " 仕入番号"

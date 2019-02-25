@@ -589,7 +589,7 @@ Public Class SalesList
                 '    Sql2 += "会社コード"
                 '    Sql2 += " ILIKE "
                 '    Sql2 += "'"
-                '    Sql2 += frmC01F10_Login.loginValue.BumonNM
+                '    Sql2 += frmC01F10_Login.loginValue.BumonCD
                 '    Sql2 += "'"
                 '    Sql2 += " AND "
                 '    Sql2 += "固定キー"
@@ -987,7 +987,7 @@ Public Class SalesList
         Sql1 += "WHERE"
         Sql1 += " 会社コード"
         Sql1 += "='"
-        Sql1 += frmC01F10_Login.loginValue.BumonNM
+        Sql1 += frmC01F10_Login.loginValue.BumonCD
         Sql1 += "'"
         Sql1 += " AND"
         Sql1 += " 受注番号"
@@ -1012,7 +1012,7 @@ Public Class SalesList
         Sql2 += "WHERE"
         Sql2 += " 会社コード"
         Sql2 += "='"
-        Sql2 += frmC01F10_Login.loginValue.BumonNM
+        Sql2 += frmC01F10_Login.loginValue.BumonCD
         Sql2 += "'"
         Sql2 += " AND"
         Sql2 += " 売上番号"

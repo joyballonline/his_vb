@@ -765,7 +765,7 @@ Public Class AccountsPayableList
         Sql1 += "WHERE"
         Sql1 += " 会社コード"
         Sql1 += "='"
-        Sql1 += frmC01F10_Login.loginValue.BumonNM
+        Sql1 += frmC01F10_Login.loginValue.BumonCD
         Sql1 += "'"
         Sql1 += " AND"
         Sql1 += " 買掛番号"

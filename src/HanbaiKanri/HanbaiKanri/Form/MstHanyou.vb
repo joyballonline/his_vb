@@ -105,7 +105,7 @@ Public Class MstHanyou
     Private Sub BtnEdit_Click(sender As Object, e As EventArgs) Handles BtnEdit.Click
         Dim openForm As Form = Nothing
         Dim Status As String = "EDIT"
-        Dim Code As String = frmC01F10_Login.loginValue.BumonNM
+        Dim Code As String = frmC01F10_Login.loginValue.BumonCD
         Dim Key1 As String = Dgv_Hanyo.Rows(Dgv_Hanyo.CurrentCell.RowIndex).Cells("固定キー").Value
         Dim Key2 As String = Dgv_Hanyo.Rows(Dgv_Hanyo.CurrentCell.RowIndex).Cells("可変キー").Value
 

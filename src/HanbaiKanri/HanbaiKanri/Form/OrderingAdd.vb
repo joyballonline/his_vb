@@ -122,7 +122,7 @@ Public Class OrderingAdd
         Saiban4 += "WHERE"
         Saiban4 += " 会社コード"
         Saiban4 += "='"
-        Saiban4 += frmC01F10_Login.loginValue.BumonNM
+        Saiban4 += frmC01F10_Login.loginValue.BumonCD
         Saiban4 += "'"
         Saiban4 += " AND"
         Saiban4 += " 採番キー"
@@ -422,7 +422,7 @@ Public Class OrderingAdd
         Sql3 += "t20_hattyu("
         Sql3 += "会社コード, 発注番号, 発注番号枝番, 仕入先コード, 仕入先名, 仕入先郵便番号, 仕入先住所, 仕入先電話番号, 仕入先ＦＡＸ, 仕入先担当者役職, 仕入先担当者名, 支払条件, 仕入金額, 営業担当者, 入力担当者, 備考, 発注日, 登録日, 更新日, 更新者, 取消区分)"
         Sql3 += " VALUES('"
-        Sql3 += frmC01F10_Login.loginValue.BumonNM
+        Sql3 += frmC01F10_Login.loginValue.BumonCD
         Sql3 += "', '"
         Sql3 += TxtOrderingNo.Text
         Sql3 += "', '"
@@ -524,7 +524,7 @@ Public Class OrderingAdd
             Sql4 += "t21_hattyu("
             Sql4 += "会社コード, 発注番号, 発注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 単位, 仕入値, 発注数量, 仕入数量, 発注残数, 間接費, 仕入単価, 仕入金額, リードタイム, 入庫数, 未入庫数, 備考, 更新者, 登録日)"
             Sql4 += " VALUES('"
-            Sql4 += frmC01F10_Login.loginValue.BumonNM
+            Sql4 += frmC01F10_Login.loginValue.BumonCD
             Sql4 += "', '"
             Sql4 += TxtOrderingNo.Text
             Sql4 += "', '"

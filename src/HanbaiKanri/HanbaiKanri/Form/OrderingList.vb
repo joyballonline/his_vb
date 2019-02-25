@@ -307,7 +307,7 @@ Public Class OrderingList
                 Sql += " t21.発注番号枝番 = t20.発注番号枝番"
 
                 Sql += " WHERE "
-                Sql += " t21.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonNM & "'"
+                Sql += " t21.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
 
                 If supplierName <> Nothing Then
                     Sql += " AND "

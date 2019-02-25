@@ -245,7 +245,7 @@ Public Class DepositManagement
         Sql += " t26.入金番号 = t25.入金番号"
 
         Sql += " WHERE "
-        Sql += " t26.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonNM & "'"
+        Sql += " t26.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql += " AND "
         Sql += "t26.請求先コード"
         Sql += " ILIKE "
@@ -434,7 +434,7 @@ Public Class DepositManagement
             Sql += "FROM "
             Sql += "public.m80_saiban"
             Sql += " WHERE "
-            Sql += "会社コード = '" & frmC01F10_Login.loginValue.BumonNM & "'"
+            Sql += "会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
             Sql += " AND "
             Sql += "採番キー = '" & key & "'"
 

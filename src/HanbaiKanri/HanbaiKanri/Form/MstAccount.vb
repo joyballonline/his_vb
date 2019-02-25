@@ -162,7 +162,7 @@ Public Class MstAccount
         If Dgv_Account.Rows.Count > 0 Then
             Dim openForm As Form = Nothing
             Dim Status As String = "EDIT"
-            Dim CompanyCode As String = frmC01F10_Login.loginValue.BumonNM
+            Dim CompanyCode As String = frmC01F10_Login.loginValue.BumonCD
             Dim AccountCode As String = Dgv_Account.Rows(Dgv_Account.CurrentCell.RowIndex).Cells("勘定科目コード").Value
             openForm = New Account(_msgHd, _db, _langHd, Status, CompanyCode, AccountCode)   '処理選択
             openForm.Show()

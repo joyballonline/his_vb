@@ -35,7 +35,7 @@ Public Class CustomerSearch
     Private _parentForm As Form
     'Private _gh As UtilDataGridViewHandler
     Private _init As Boolean                             '初期処理済フラグ
-    Private _companyCode As String = frmC01F10_Login.loginValue.BumonNM
+    Private _companyCode As String = frmC01F10_Login.loginValue.BumonCD
 
     '-------------------------------------------------------------------------------
     'デフォルトコンストラクタ（隠蔽）

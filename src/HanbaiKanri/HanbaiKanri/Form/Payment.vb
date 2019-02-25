@@ -239,7 +239,7 @@ Public Class Payment
         Sql += " t48.支払番号 = t47.支払番号"
 
         Sql += " WHERE "
-        Sql += " t48.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonNM & "'"
+        Sql += " t48.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql += " AND "
         Sql += "t48.支払先コード"
         Sql += " ILIKE "
@@ -420,7 +420,7 @@ Public Class Payment
             Sql += "FROM "
             Sql += "public.m80_saiban"
             Sql += " WHERE "
-            Sql += "会社コード = '" & frmC01F10_Login.loginValue.BumonNM & "'"
+            Sql += "会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
             Sql += " AND "
             Sql += "採番キー = '" & key & "'"
 
