@@ -9,7 +9,7 @@ Imports UtilMDL.FileDirectory
 Imports UtilMDL.xls
 Imports Microsoft.Office.Interop
 Imports System.Runtime.InteropServices
-
+Imports System.Globalization
 
 Public Class Quote
     Inherits System.Windows.Forms.Form
@@ -751,7 +751,7 @@ Public Class Quote
                     End If
                 End If
 
-                End If
+            End If
 
             For index As Integer = 0 To DgvItemList.Rows.Count - 1
                 PurchaseTotal += DgvItemList.Rows(index).Cells("仕入金額").Value
@@ -1641,15 +1641,15 @@ Public Class Quote
 
             sheet.Range("E8").Value = CmnData(6)                       '得意先名
             sheet.Range("E9").Value = CmnData(8) & " " & CmnData(7)    '得意先担当者
-            sheet.Range("E11").Value = CmnData(11)                       '得意先名
-            sheet.Range("E12").Value = CmnData(12)                       '得意先名
+            sheet.Range("E11").Value = CmnData(11)                       '電話番号
+            sheet.Range("E12").Value = CmnData(12)                       'FAX
 
             sheet.Range("S8").Value = CmnData(1) & "-" & CmnData(2)    '見積番号
-            sheet.Range("S9").Value = CmnData(3)                       '見積番号
+            sheet.Range("S9").Value = CmnData(3).ToShortDateString()     '見積日
 
-            sheet.Range("H27").Value = CmnData(15)                       '見積番号
-            sheet.Range("H28").Value = CmnData(10) & " " & CmnData(11)                        '見積番号
-            sheet.Range("H29").Value = CmnData(4)                       '見積番号
+            sheet.Range("H27").Value = CmnData(15)                       '支払条件
+            sheet.Range("H28").Value = CmnData(10) & " " & CmnData(11)   '納品先
+            sheet.Range("H29").Value = CmnData(4).ToShortDateString()    '有効期限？
             sheet.Range("H30").Value = CmnData(16)                       '備考
 
             sheet.Range("E34").Value = CmnData(13)                       '営業担当者
@@ -1845,9 +1845,9 @@ Public Class Quote
                     sheet = CType(book.Worksheets(1), Excel.Worksheet)
 
                     sheet.Range("AA2").Value = CmnData("見積番号") & "-" & CmnData("見積番号枝番")
-                    sheet.Range("AA3").Value = System.DateTime.Today
+                    sheet.Range("AA3").Value = System.DateTime.Now.ToShortDateString()
                     sheet.Range("A12").Value = supplierlist(i)
-                    sheet.Range("A14").Value = sheet.Range("A14").Value & DateAdd("d", 5, System.DateTime.Today).ToString("d/M/yyyy") & "."
+                    sheet.Range("A14").Value = sheet.Range("A14").Value & DateAdd("d", 5, System.DateTime.Today).ToShortDateString() & "."
                     sheet.Range("V19").Value = CmnData("営業担当者")
                     sheet.Range("V20").Value = CmnData("入力担当者")
 
@@ -2127,6 +2127,34 @@ Public Class Quote
             buf.Replace(c.ToString(), "")
         Next
         Return buf.ToString()
+    End Function
+
+    'どんなカルチャーであっても、日本の形式に変換する
+    Private Function strFormatDate(ByVal prmDate As String, Optional ByRef prmFormat As String = "yyyy/MM/dd") As String
+
+        'PCのカルチャーを取得し、それに応じてStringからDatetimeを作成
+        Dim ci As New System.Globalization.CultureInfo(CultureInfo.CurrentCulture.Name.ToString)
+        Dim dateFormat As DateTime = DateTime.Parse(prmDate, ci, System.Globalization.DateTimeStyles.AssumeLocal)
+
+        '日本の形式に書き換える
+        Return dateFormat.ToString(prmFormat)
+    End Function
+
+    'どんなカルチャーであっても、日本の形式に変換する
+    Private Function formatDatetime(ByVal prmDatetime As DateTime) As String
+
+        'PCのカルチャーを取得し、それに応じてStringからDatetimeを作成
+        Dim ciCurrent As New System.Globalization.CultureInfo(CultureInfo.CurrentCulture.Name.ToString)
+        Dim dateFormat As DateTime = DateTime.Parse(prmDatetime.ToString, ciCurrent, System.Globalization.DateTimeStyles.AssumeLocal)
+
+        Dim changeFormat As String = dateFormat.ToString("yyyy/MM/dd HH:mm:ss")
+
+        Dim ciJP As New System.Globalization.CultureInfo(CommonConst.CI_JP)
+        Dim rtnDatetime As DateTime = DateTime.Parse(changeFormat, ciJP, System.Globalization.DateTimeStyles.AssumeLocal)
+
+
+        '日本の形式に書き換える
+        Return changeFormat
     End Function
 
 End Class
