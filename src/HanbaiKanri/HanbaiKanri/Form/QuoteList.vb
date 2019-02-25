@@ -296,7 +296,7 @@ Public Class QuoteList
             End If
             '受発注登録の時は有効期限切れは表示しない
             If _status = "ORDER_NEW" Then
-                strWhere += " and 見積有効期限 <= current_date"
+                strWhere += " and 見積有効期限 >= current_date"
             End If
 
             Sql += strWhere
