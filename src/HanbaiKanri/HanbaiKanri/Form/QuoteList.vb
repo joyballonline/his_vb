@@ -710,6 +710,10 @@ Public Class QuoteList
     End Sub
 
     Private Sub BtnOrder_Click(sender As Object, e As EventArgs) Handles BtnOrderPurchase.Click
+        'グリッドに何もないときは次画面へ移動しない
+        If Me.DgvMithd.RowCount = 0 Then
+            Exit Sub
+        End If
         Dim RowIdx As Integer
         RowIdx = Me.DgvMithd.CurrentCell.RowIndex
         Dim No As String = DgvMithd.Rows(RowIdx).Cells(0).Value
@@ -762,7 +766,14 @@ Public Class QuoteList
 
     End Sub
 
+    '受注登録ボタンクリック時
+    '
     Private Sub BtnOrder_Click_1(sender As Object, e As EventArgs) Handles BtnOrder.Click
+        'グリッドに何もないときは次画面へ移動しない
+        If Me.DgvMithd.RowCount = 0 Then
+            Exit Sub
+        End If
+
         Dim RowIdx As Integer
         RowIdx = DgvMithd.CurrentCell.RowIndex
         Dim No As String = DgvMithd.Rows(RowIdx).Cells(0).Value
