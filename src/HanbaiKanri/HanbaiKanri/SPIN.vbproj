@@ -298,6 +298,12 @@
     <Compile Include="Form\OrderingAdd.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form\OrderRemainingList.Designer.vb">
+      <DependentUpon>OrderRemainingList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\OrderRemainingList.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\OrderList.Designer.vb">
       <DependentUpon>OrderList.vb</DependentUpon>
     </Compile>
@@ -550,6 +556,9 @@
     <EmbeddedResource Include="Form\OrderingAdd.resx">
       <DependentUpon>OrderingAdd.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form\OrderRemainingList.resx">
+      <DependentUpon>OrderRemainingList.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\OrderList.resx">
       <DependentUpon>OrderList.vb</DependentUpon>
     </EmbeddedResource>
@@ -630,6 +639,16 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="bin\BaseXls\DeliveryNote.xlsx" />
+    <None Include="bin\BaseXls\Invoice.xlsx" />
+    <None Include="bin\BaseXls\OrderRemainingList.xlsx" />
+    <None Include="bin\BaseXls\PackingList.xlsx" />
+    <None Include="bin\BaseXls\Proof.xlsx" />
+    <None Include="bin\BaseXls\PurchaseOrder.xlsx" />
+    <None Include="bin\BaseXls\Quotation.xlsx" />
+    <None Include="bin\BaseXls\QuotationRequest.xlsx" />
+    <None Include="bin\BaseXls\Quotation_xxx.xlsx" />
+    <None Include="bin\BaseXls\Receipt.xlsx" />
     <None Include="bin\Setting\HanbaiKanri.ini" />
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
@@ -650,6 +669,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\BaseXls\readme.txt" />
+    <Content Include="bin\OutXls\readme.txt" />
     <Content Include="bin\Setting\HanbaiKanri-Lang.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -659,9 +680,7 @@
     <Content Include="dotNetIco.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="bin\BaseXls\" />
     <Folder Include="bin\Log\" />
-    <Folder Include="bin\OutXls\" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
