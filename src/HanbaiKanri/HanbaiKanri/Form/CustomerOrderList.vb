@@ -250,7 +250,7 @@ Public Class CustomerOrderList
                 Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
 
                 '受注基本（請求債情報）
-                Dim dsCymnhd As DataSet = getDsData("t10_cymnhd")
+                Dim dsCymnhd As DataSet = getDsData("t10_cymnhd", Sql)
 
                 '初回だけ
                 If flg2 = False Then
@@ -270,17 +270,34 @@ Public Class CustomerOrderList
 
                 End If
 
-                Sql = " AND "
-                Sql += "受注番号 = '" & OrderNo & "'"
+
+                'joinするのでとりあえず直書き
+                Sql = "SELECT"
+                Sql += " t11.メーカー, t11.品名, t11.型式, t11.受注数量, t11.売単価, t11.売上金額"
+                Sql += " FROM "
+                Sql += " public.t11_cymndt t11 "
+
+                Sql += " INNER JOIN "
+                Sql += " t10_cymnhd t10"
+                Sql += " ON "
+
+                Sql += " t11.会社コード = t10.会社コード"
                 Sql += " AND "
-                Sql += "受注番号枝番 = '" & OrderSuffix & "'"
+                Sql += " t11.受注番号 = t10.受注番号"
                 Sql += " AND "
-                Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+                Sql += " t11.受注番号枝番 = t10.受注番号枝番"
+
+                Sql += " WHERE "
+                Sql += " t11.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                Sql += " AND "
+                Sql += "t11.受注番号 ILIKE '%" & OrderNo & "%'"
+                Sql += " AND "
+                Sql += "t11.受注番号枝番 ILIKE '%" & OrderSuffix & "%'"
+                Sql += " AND "
+                Sql += "t10.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
 
                 '受注明細（商品情報）
-                Dim dsCymndt As DataSet = getDsData("t11_cymndt")
-
-                'Dim dsCymndt As DataSet = _db.selectDB(Sql2, RS, reccnt) '受注明細（商品情報）
+                Dim dsCymndt As DataSet = _db.selectDB(Sql, RS, reccnt)
 
                 For i As Integer = 0 To dsCymndt.Tables(RS).Rows.Count - 1
                     If currentNum > 3 Then
