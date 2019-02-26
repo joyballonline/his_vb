@@ -179,72 +179,78 @@ Public Class OrderRemainingList
         Dim sheet As Excel.Worksheet = Nothing
 
 
-        For i As Integer = 0 To DgvCymndt.RowCount - 1
 
-            Try
-                '雛形パス
-                Dim sHinaPath As String = StartUp._iniVal.BaseXlsPath
-                '雛形ファイル名
-                Dim sHinaFile As String = sHinaPath & "\" & "OrderRemainingList.xlsx"
-                '出力先パス
-                Dim sOutPath As String = StartUp._iniVal.OutXlsPath
-                '出力ファイル名
-                Dim sOutFile As String = sOutPath & "\OrderRemainingList_" & DateTime.Now.ToString("yyyyMMddHHmm") & ".xlsx"
+        Try
+            '雛形パス
+            Dim sHinaPath As String = StartUp._iniVal.BaseXlsPath
+            '雛形ファイル名
+            Dim sHinaFile As String = sHinaPath & "\" & "OrderRemainingList.xlsx"
+            '出力先パス
+            Dim sOutPath As String = StartUp._iniVal.OutXlsPath
+            '出力ファイル名
+            Dim sOutFile As String = sOutPath & "\OrderRemainingList_" & DateTime.Now.ToString("yyyyMMddHHmm") & ".xlsx"
 
-                app = New Excel.Application()
-                book = app.Workbooks.Add(sHinaFile)  'テンプレート
-                sheet = CType(book.Worksheets(1), Excel.Worksheet)
+            app = New Excel.Application()
+            book = app.Workbooks.Add(sHinaFile)  'テンプレート
+            sheet = CType(book.Worksheets(1), Excel.Worksheet)
 
-                sheet.PageSetup.RightHeader = "出力日：" & DateTime.Now.ToShortDateString
+            sheet.PageSetup.RightHeader = "出力日：" & DateTime.Now.ToShortDateString
 
-                If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-                    sheet.PageSetup.RightHeader = "OutputDate：" & DateTime.Now.ToShortDateString
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+                sheet.PageSetup.RightHeader = "OutputDate：" & DateTime.Now.ToShortDateString
 
-                    sheet.Range("A1").Value = "JobOrderNo"
-                    sheet.Range("B1").Value = "JobOrderDate"
-                    sheet.Range("C1").Value = "CustomerName"
-                    sheet.Range("D1").Value = "Manufacturer"
-                    sheet.Range("E1").Value = "ItemName"
-                    sheet.Range("F1").Value = "Spec"
-                    sheet.Range("G1").Value = "Quantity"
-                    sheet.Range("H1").Value = "Unit"
-                    sheet.Range("I1").Value = "UnitPrice"
-                    sheet.Range("J1").Value = "ＶＡＴ"
-                    sheet.Range("K1").Value = "Amount"
-                    sheet.Range("L1").Value = "OrderRemainingAmount"
-                    sheet.Range("M1").Value = "Remarks"
-                End If
-                sheet.Range("A2").Value = DgvCymndt.Rows(i).Cells("受注番号").Value
-                sheet.Range("B2").Value = DgvCymndt.Rows(i).Cells("受注日").Value
-                sheet.Range("C2").Value = DgvCymndt.Rows(i).Cells("得意先名").Value
-                sheet.Range("D2").Value = DgvCymndt.Rows(i).Cells("メーカー").Value
-                sheet.Range("E2").Value = DgvCymndt.Rows(i).Cells("品名").Value
-                sheet.Range("F2").Value = DgvCymndt.Rows(i).Cells("型式").Value
-                sheet.Range("G2").Value = DgvCymndt.Rows(i).Cells("数量").Value
-                sheet.Range("H2").Value = DgvCymndt.Rows(i).Cells("単位").Value
-                sheet.Range("I2").Value = DgvCymndt.Rows(i).Cells("単価").Value
-                sheet.Range("J2").Value = DgvCymndt.Rows(i).Cells("ＶＡＴ").Value
-                sheet.Range("K2").Value = DgvCymndt.Rows(i).Cells("計").Value
-                sheet.Range("L2").Value = DgvCymndt.Rows(i).Cells("受注残数").Value
-                sheet.Range("M2").Value = DgvCymndt.Rows(i).Cells("備考").Value
+                sheet.Range("A1").Value = "JobOrderNo"
+                sheet.Range("B1").Value = "JobOrderDate"
+                sheet.Range("C1").Value = "CustomerName"
+                sheet.Range("D1").Value = "Manufacturer"
+                sheet.Range("E1").Value = "ItemName"
+                sheet.Range("F1").Value = "Spec"
+                sheet.Range("G1").Value = "Quantity"
+                sheet.Range("H1").Value = "Unit"
+                sheet.Range("I1").Value = "UnitPrice"
+                sheet.Range("J1").Value = "ＶＡＴ"
+                sheet.Range("K1").Value = "Amount"
+                sheet.Range("L1").Value = "OrderRemainingAmount"
+                sheet.Range("M1").Value = "Remarks"
+            End If
 
-                book.SaveAs(sOutFile)
-                app.Visible = True
+            For i As Integer = 0 To DgvCymndt.RowCount - 1
+                Dim cellRowIndex As Integer = 2
+                cellRowIndex += i
 
-                _msgHd.dspMSG("CreateExcel", frmC01F10_Login.loginValue.Language)
-            Catch ex As Exception
-                Throw ex
+                sheet.Range("A" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("受注番号").Value
+                sheet.Range("B" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("受注日").Value
+                sheet.Range("C" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("得意先名").Value
+                sheet.Range("D" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("メーカー").Value
+                sheet.Range("E" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("品名").Value
+                sheet.Range("F" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("型式").Value
+                sheet.Range("G" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("数量").Value
+                sheet.Range("H" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("単位").Value
+                sheet.Range("I" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("単価").Value
+                sheet.Range("J" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("ＶＡＴ").Value
+                sheet.Range("K" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("計").Value
+                sheet.Range("L" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("受注残数").Value
+                sheet.Range("M" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("備考").Value
+
+            Next
+
+            book.SaveAs(sOutFile)
+            app.Visible = True
+
+            _msgHd.dspMSG("CreateExcel", frmC01F10_Login.loginValue.Language)
+
+        Catch ex As Exception
+            Throw ex
 
 
-            Finally
-                'app.Quit()
-                'Marshal.ReleaseComObject(sheet)
-                'Marshal.ReleaseComObject(book)
-                'Marshal.ReleaseComObject(app)
+        Finally
+            'app.Quit()
+            'Marshal.ReleaseComObject(sheet)
+            'Marshal.ReleaseComObject(book)
+            'Marshal.ReleaseComObject(app)
 
-            End Try
+        End Try
 
-        Next
 
     End Sub
 
