@@ -173,6 +173,13 @@ Public Class CustomerList
 
     '請求計算ボタン押下時
     Private Sub BtnBillingCalculation_Click(sender As Object, e As EventArgs) Handles BtnBillingCalculation.Click
+        If DgvCustomer.Rows.Count = 0 Then
+            '対象データがないメッセージを表示
+            _msgHd.dspMSG("NonData", frmC01F10_Login.loginValue.Language)
+
+            Return
+        End If
+
         Dim RowIdx As Integer
         RowIdx = Me.DgvCustomer.CurrentCell.RowIndex
         Dim Company As String = DgvCustomer.Rows(RowIdx).Cells("会社コード").Value
