@@ -262,7 +262,7 @@ Public Class Payment
             DgvHistory.Rows(index).Cells("No").Value = index + 1
             DgvHistory.Rows(index).Cells("支払済支払先").Value = dsShridt.Tables(RS).Rows(index)("支払先名")
             DgvHistory.Rows(index).Cells("支払番号").Value = dsShridt.Tables(RS).Rows(index)("支払番号")
-            DgvHistory.Rows(index).Cells("支払日").Value = dsShridt.Tables(RS).Rows(index)("支払日")
+            DgvHistory.Rows(index).Cells("支払日").Value = dsShridt.Tables(RS).Rows(index)("支払日").ToShortDateString()
             DgvHistory.Rows(index).Cells("支払種目").Value = dsShridt.Tables(RS).Rows(index)("支払種別名")
             DgvHistory.Rows(index).Cells("支払済支払金額計").Value = dsShridt.Tables(RS).Rows(index)("支払金額")
             DgvHistory.Rows(index).Cells("備考").Value = dsShridt.Tables(RS).Rows(index)("備考")
@@ -308,7 +308,7 @@ Public Class Payment
             DgvKikeInfo.Rows.Add()
             DgvKikeInfo.Rows(i).Cells("InfoNo").Value = i + 1
             DgvKikeInfo.Rows(i).Cells("買掛情報買掛番号").Value = dsKikehd.Tables(RS).Rows(i)("買掛番号")
-            DgvKikeInfo.Rows(i).Cells("買掛日").Value = dsKikehd.Tables(RS).Rows(i)("買掛日")
+            DgvKikeInfo.Rows(i).Cells("買掛日").Value = dsKikehd.Tables(RS).Rows(i)("買掛日").ToShortDateString()
             DgvKikeInfo.Rows(i).Cells("買掛金額").Value = dsKikehd.Tables(RS).Rows(i)("買掛金額計")
             If dsKikehd.Tables(RS).Rows(i)("支払金額計") Is DBNull.Value Then
                 DgvKikeInfo.Rows(i).Cells("買掛情報支払金額計").Value = 0

@@ -267,7 +267,7 @@ Public Class DepositManagement
             DgvHistory.Rows(index).Cells("No").Value = index + 1
             DgvHistory.Rows(index).Cells("入金済請求先").Value = dsNkindt.Tables(RS).Rows(index)("請求先名")
             DgvHistory.Rows(index).Cells("入金番号").Value = dsNkindt.Tables(RS).Rows(index)("入金番号")
-            DgvHistory.Rows(index).Cells("入金日").Value = dsNkindt.Tables(RS).Rows(index)("更新日")
+            DgvHistory.Rows(index).Cells("入金日").Value = dsNkindt.Tables(RS).Rows(index)("更新日").ToShortDateString()
             DgvHistory.Rows(index).Cells("入金種目").Value = dsNkindt.Tables(RS).Rows(index)("入金種別名")
             DgvHistory.Rows(index).Cells("入金済入金額計").Value = dsNkindt.Tables(RS).Rows(index)("入金額")
             DgvHistory.Rows(index).Cells("備考").Value = dsNkindt.Tables(RS).Rows(index)("備考")
@@ -314,7 +314,7 @@ Public Class DepositManagement
             DgvBillingInfo.Rows.Add()
             DgvBillingInfo.Rows(i).Cells("InfoNo").Value = i + 1
             DgvBillingInfo.Rows(i).Cells("請求情報請求番号").Value = dsSkyuhd.Tables(RS).Rows(i)("請求番号")
-            DgvBillingInfo.Rows(i).Cells("請求日").Value = dsSkyuhd.Tables(RS).Rows(i)("請求日")
+            DgvBillingInfo.Rows(i).Cells("請求日").Value = dsSkyuhd.Tables(RS).Rows(i)("請求日").ToShortDateString()
             DgvBillingInfo.Rows(i).Cells("請求金額").Value = dsSkyuhd.Tables(RS).Rows(i)("請求金額計")
             If dsSkyuhd.Tables(RS).Rows(i)("入金額計") Is DBNull.Value Then
                 DgvBillingInfo.Rows(i).Cells("請求情報入金額計").Value = 0
