@@ -146,16 +146,17 @@ Public Class CustomerList
             )
 
             If CustomerOrderCount > 0 Then
+                Dim idx = DgvCustomer.Rows.Count()
 
                 DgvCustomer.Rows.Add()
-                DgvCustomer.Rows(i).Cells("得意先名").Value = dsCustomer.Tables(RS).Rows(i)("得意先名")
-                DgvCustomer.Rows(i).Cells("受注金額計").Value = CustomerOrderAmount
-                DgvCustomer.Rows(i).Cells("請求金額計").Value = CustomerBillingAmount
-                DgvCustomer.Rows(i).Cells("請求残高").Value = CustomerOrderAmount - CustomerBillingAmount
-                DgvCustomer.Rows(i).Cells("受注件数").Value = CustomerOrderCount
-                DgvCustomer.Rows(i).Cells("請求件数").Value = CustomerBillingCount
-                DgvCustomer.Rows(i).Cells("得意先コード").Value = dsCustomer.Tables(RS).Rows(i)("得意先コード")
-                DgvCustomer.Rows(i).Cells("会社コード").Value = dsCustomer.Tables(RS).Rows(i)("会社コード")
+                DgvCustomer.Rows(idx).Cells("得意先名").Value = dsCustomer.Tables(RS).Rows(i)("得意先名")
+                DgvCustomer.Rows(idx).Cells("受注金額計").Value = CustomerOrderAmount
+                DgvCustomer.Rows(idx).Cells("請求金額計").Value = CustomerBillingAmount
+                DgvCustomer.Rows(idx).Cells("請求残高").Value = CustomerOrderAmount - CustomerBillingAmount
+                DgvCustomer.Rows(idx).Cells("受注件数").Value = CustomerOrderCount
+                DgvCustomer.Rows(idx).Cells("請求件数").Value = CustomerBillingCount
+                DgvCustomer.Rows(idx).Cells("得意先コード").Value = dsCustomer.Tables(RS).Rows(i)("得意先コード")
+                DgvCustomer.Rows(idx).Cells("会社コード").Value = dsCustomer.Tables(RS).Rows(i)("会社コード")
 
             End If
 

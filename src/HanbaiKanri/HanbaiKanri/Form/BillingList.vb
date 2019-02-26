@@ -186,7 +186,7 @@ Public Class BillingList
                     )
 
                 DgvBilling.Rows(i).Cells("取消").Value = getDelKbnTxt(ds.Tables(RS).Rows(i)("取消区分"))
-                DgvBilling.Rows(i).Cells("請求日").Value = ds.Tables(RS).Rows(i)("請求日")
+                DgvBilling.Rows(i).Cells("請求日").Value = ds.Tables(RS).Rows(i)("請求日").ToShortDateString()
                 DgvBilling.Rows(i).Cells("客先番号").Value = ds.Tables(RS).Rows(i)("客先番号")
                 DgvBilling.Rows(i).Cells("受注番号").Value = ds.Tables(RS).Rows(i)("受注番号")
                 DgvBilling.Rows(i).Cells("受注番号枝番").Value = ds.Tables(RS).Rows(i)("受注番号枝番")
@@ -280,7 +280,7 @@ Public Class BillingList
     '選択データをもとに以下テーブル更新
     't23_skyuhd
     Private Sub updateData()
-        Dim dtNow As DateTime = DateTime.Now
+        Dim dtNow As String = formatDatetime(DateTime.Now)
         Dim Sql As String = ""
         Dim ds As DataSet
 

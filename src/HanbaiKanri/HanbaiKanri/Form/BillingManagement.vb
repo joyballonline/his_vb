@@ -7,7 +7,7 @@ Imports UtilMDL.DB
 Imports UtilMDL.DataGridView
 Imports UtilMDL.FileDirectory
 Imports UtilMDL.xls
-
+Imports System.Globalization
 
 Public Class BillingManagement
     Inherits System.Windows.Forms.Form
@@ -263,7 +263,7 @@ Public Class BillingManagement
         '受注データ、見積データから対象の請求金額・請求残高を表示
         DgvCymn.Rows.Add()
         DgvCymn.Rows(0).Cells("受注番号").Value = dsCymnhd.Tables(RS).Rows(0)("受注番号")
-        DgvCymn.Rows(0).Cells("受注日").Value = dsCymnhd.Tables(RS).Rows(0)("受注日")
+        DgvCymn.Rows(0).Cells("受注日").Value = dsCymnhd.Tables(RS).Rows(0)("受注日").ToShortDateString()
         DgvCymn.Rows(0).Cells("得意先").Value = dsCymnhd.Tables(RS).Rows(0)("得意先名")
         DgvCymn.Rows(0).Cells("客先番号").Value = dsCymnhd.Tables(RS).Rows(0)("客先番号").ToString
         DgvCymn.Rows(0).Cells("受注金額").Value = dsCymnhd.Tables(RS).Rows(0)("見積金額")
@@ -292,7 +292,7 @@ Public Class BillingManagement
             DgvHistory.Rows.Add()
             DgvHistory.Rows(i).Cells("No").Value = i + 1
             DgvHistory.Rows(i).Cells("請求番号").Value = dsSkyuhd.Tables(RS).Rows(i)("請求番号")
-            DgvHistory.Rows(i).Cells("請求日").Value = dsSkyuhd.Tables(RS).Rows(i)("請求日")
+            DgvHistory.Rows(i).Cells("請求日").Value = dsSkyuhd.Tables(RS).Rows(i)("請求日").ToShortDateString()
 
             DgvHistory.Rows(i).Cells("請求区分").Value = IIf(
                 DgvHistory.Rows(i).Cells("請求区分").Value,
@@ -392,8 +392,9 @@ Public Class BillingManagement
 
     '請求登録
     Private Sub BtnRegist_Click(sender As Object, e As EventArgs) Handles BtnRegist.Click
-        Dim errflg As Boolean = True
+        'Dim errflg As Boolean = True
         Dim dtToday As DateTime = DateTime.Now
+        Dim strToday As String = formatDatetime(dtToday)
         Dim reccnt As Integer = 0
         Dim BillingAmount As Decimal = 0
 
@@ -462,7 +463,7 @@ Public Class BillingManagement
         Sql += "', '"
         Sql += DgvAdd.Rows(0).Cells("請求区分").Value.ToString
         Sql += "', '"
-        Sql += DtpBillingDate.Value
+        Sql += strFormatDate(DtpBillingDate.Value)
         Sql += "', '"
         Sql += dsCymnhd.Tables(RS).Rows(0)("受注番号").ToString
         Sql += "', '"
@@ -484,11 +485,11 @@ Public Class BillingManagement
         Sql += "', '"
         Sql += "0"
         Sql += "', '"
-        Sql += dtToday
+        Sql += strToday
         Sql += "', '"
         Sql += frmC01F10_Login.loginValue.TantoNM
         Sql += "', '"
-        Sql += dtToday
+        Sql += strToday
         Sql += " ')"
 
         _db.executeDB(Sql)
@@ -567,7 +568,7 @@ Public Class BillingManagement
             Sql += "', "
             Sql += "更新日"
             Sql += " = '"
-            Sql += today
+            Sql += formatDatetime(today)
             Sql += "' "
             Sql += "WHERE"
             Sql += " 会社コード"
@@ -576,7 +577,7 @@ Public Class BillingManagement
             Sql += "'"
             Sql += " AND"
             Sql += " 採番キー = '" & key & "'"
-            Console.WriteLine(Sql)
+
             _db.executeDB(Sql)
 
             Return saibanID
@@ -585,6 +586,44 @@ Public Class BillingManagement
             Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
         End Try
 
+    End Function
+
+    'ユーザーのカルチャーから、日本の形式に変換する
+    Private Function strFormatDate(ByVal prmDate As String, Optional ByRef prmFormat As String = "yyyy/MM/dd") As String
+
+        'PCのカルチャーを取得し、それに応じてStringからDatetimeを作成
+        Dim ci As New System.Globalization.CultureInfo(CultureInfo.CurrentCulture.Name.ToString)
+        Dim dateFormat As DateTime = DateTime.Parse(prmDate, ci, System.Globalization.DateTimeStyles.AssumeLocal)
+
+        '日本の形式に書き換える
+        Return dateFormat.ToString(prmFormat)
+    End Function
+
+    'ユーザーのカルチャーから、日本の形式に変換する
+    Private Function formatDatetime(ByVal prmDatetime As DateTime) As String
+
+        'PCのカルチャーを取得し、それに応じてStringからDatetimeを作成
+        Dim ciCurrent As New System.Globalization.CultureInfo(CultureInfo.CurrentCulture.Name.ToString)
+        Dim dateFormat As DateTime = DateTime.Parse(prmDatetime.ToString, ciCurrent, System.Globalization.DateTimeStyles.AssumeLocal)
+
+        Dim changeFormat As String = dateFormat.ToString("yyyy/MM/dd HH:mm:ss")
+
+        Dim ciJP As New System.Globalization.CultureInfo(CommonConst.CI_JP)
+        Dim rtnDatetime As DateTime = DateTime.Parse(changeFormat, ciJP, System.Globalization.DateTimeStyles.AssumeLocal)
+
+
+        '日本の形式に書き換える
+        Return changeFormat
+    End Function
+
+    '金額フォーマット（登録の際の小数点指定子）を日本の形式に合わせる
+    '桁区切り記号は外す
+    Private Function formatNumber(ByVal prmVal As Decimal) As String
+
+        Dim nfi As NumberFormatInfo = New CultureInfo(CommonConst.CI_JP, False).NumberFormat
+
+        '日本の形式に書き換える
+        Return prmVal.ToString("F3", nfi) '売掛残高を増やす
     End Function
 
 End Class
