@@ -110,6 +110,7 @@ Public Class OrderRemainingList
         Sql += " t11.受注残数 <> 0 "
         Sql += " AND "
         Sql += " t10.取消区分 = 0 "
+        Sql += " ORDER BY t10.受注日 DESC"
 
         Try
 
