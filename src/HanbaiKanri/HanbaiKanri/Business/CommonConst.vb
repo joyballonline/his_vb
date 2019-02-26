@@ -257,6 +257,10 @@ Public Class CommonConst
     Public Const APC_KBN_DEPOSIT As Integer = 1                         '前払買掛
     Public Const APC_KBN_NORMAL As Integer = 2                          '通常買掛
 
+    '買掛区分テキスト
+    Public Const APC_KBN_DEPOSIT_TXT As String = "前払金買掛"                         '前払買掛
+    Public Const APC_KBN_NORMAL_TXT As String = "通常買掛"                          '通常買掛
+
     '仕入区分
     Public Const Sire_KBN_Sire As Integer = 1                           '仕入
     Public Const Sire_KBN_Zaiko As Integer = 2                          '在庫
