@@ -859,6 +859,17 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <MEMO></MEMO>
   </MSG_DATA>
   <MSG_DATA>
+    <ID>chkAPDataError</ID>
+    <MSG1>買掛金額計が買掛残高を超えています。</MSG1>
+    <MSG1_EN>The accounts payable total exceeds the accounts payable.</MSG1_EN>
+    <MSG2>再度確認してから実行してください。</MSG2>
+    <MSG2_EN>Please check again and try again.</MSG2_EN>
+    <BUTTON_TYPE>OK</BUTTON_TYPE>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+    <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
+    <MEMO></MEMO>
+  </MSG_DATA>
+  <MSG_DATA>
     <ID>chkBalanceDataError</ID>
     <MSG1>請求金額計が受注金額を超えています。</MSG1>
     <MSG1_EN>Total billing amount exceeds order amount.</MSG1_EN>
@@ -908,6 +919,17 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <MSG1_EN>No further operation is possible.</MSG1_EN>
     <MSG2>対象のデータかどうか、再度確認してください。</MSG2>
     <MSG2_EN>Please check again whether it is target data.</MSG2_EN>
+    <BUTTON_TYPE>OK</BUTTON_TYPE>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+    <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
+    <MEMO></MEMO>
+  </MSG_DATA>
+  <MSG_DATA>
+    <ID>chkAPAddError</ID>
+    <MSG1>入金入力または請求情報がありません。</MSG1>
+    <MSG1_EN>There is no deposit input or billing information.</MSG1_EN>
+    <MSG2>再度確認してから実行してください。</MSG2>
+    <MSG2_EN>Please check again and try again.</MSG2_EN>
     <BUTTON_TYPE>OK</BUTTON_TYPE>
     <ICONT_TYPE>Warning</ICONT_TYPE>
     <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>

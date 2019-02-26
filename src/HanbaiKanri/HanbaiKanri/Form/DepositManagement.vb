@@ -514,7 +514,7 @@ Public Class DepositManagement
         '入金入力がない、或いは合計が0だったら
         If DgvDeposit.Rows.Count = 0 Or DepositAmount = 0 Then
             '対象データがないメッセージを表示
-            _msgHd.dspMSG("NonData", frmC01F10_Login.loginValue.Language)
+            _msgHd.dspMSG("chkAPAddError", frmC01F10_Login.loginValue.Language)
 
             Return
         End If
