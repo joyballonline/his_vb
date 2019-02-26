@@ -158,8 +158,8 @@ Public Class AccountsPayableList
                 DgvKike.Rows(i).Cells("取消").Value = getDelKbnTxt(ds.Tables(RS).Rows(i)("取消区分"))
                 DgvKike.Rows(i).Cells("買掛番号").Value = ds.Tables(RS).Rows(i)("買掛番号")
                 DgvKike.Rows(i).Cells("買掛区分").Value = IIf(ds.Tables(RS).Rows(i)("買掛区分") = CommonConst.APC_KBN_DEPOSIT.ToString,
-                                                                                                    CommonConst.BILLING_KBN_DEPOSIT_TXT,
-                                                                                                    CommonConst.BILLING_KBN_NORMAL_TXT)
+                                                                                                    CommonConst.APC_KBN_DEPOSIT_TXT,
+                                                                                                    CommonConst.APC_KBN_NORMAL_TXT)
                 DgvKike.Rows(i).Cells("買掛日").Value = ds.Tables(RS).Rows(i)("買掛日").ToShortDateString()
                 DgvKike.Rows(i).Cells("客先番号").Value = ds.Tables(RS).Rows(i)("客先番号")
                 DgvKike.Rows(i).Cells("発注番号").Value = ds.Tables(RS).Rows(i)("発注番号")

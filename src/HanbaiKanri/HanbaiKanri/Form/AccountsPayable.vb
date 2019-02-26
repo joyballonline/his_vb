@@ -80,7 +80,8 @@ Public Class AccountsPayable
 
     End Sub
 
-    Private Sub Quote_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    '画面表示時
+    Private Sub AccountsPayable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'ComboBoxに表示する項目のリストを作成する
         Dim table As New DataTable("Table")
         table.Columns.Add("Display", GetType(String))
@@ -97,12 +98,14 @@ Public Class AccountsPayable
         column.DisplayMember = "Display"
         column.HeaderText = "買掛区分"
         column.Name = "買掛区分"
-        'column.ValueMember = 1
+
         'DataGridView1に追加する
         DgvAdd.Columns.Insert(1, column)
 
         BillLoad()
-        If frmC01F10_Login.loginValue.Language = "ENG" Then
+
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+
             LblAccountsPayableDate.Text = "AccountsPayableDate"
             LblAccountsPayableDate.Location = New Point(237, 379)
             LblAccountsPayableDate.Size = New Size(205, 22)
@@ -116,20 +119,19 @@ Public Class AccountsPayable
             LblNo3.Text = "Record"
             LblNo3.Location = New Point(1272, 387)
             LblNo3.Size = New Size(66, 22)
-            LblRemarks1.Text = "Remarks1"
-            LblRemarks2.Text = "Remarks2"
             LblPurchaseOrder.Text = "PurchaseOrderDetails"
             LblHistory.Text = "AccountsPayableHistoryData"
             LblAdd.Text = "AcceptAccountPayableThisTime"
 
-            TxtCount1.Location = New Point(1228, 111)
-            TxtCount2.Location = New Point(1228, 245)
+            TxtHattyudtCount.Location = New Point(1228, 111)
+            TxtKikehdCount.Location = New Point(1228, 245)
             TxtCount3.Location = New Point(1228, 387)
 
             BtnRegist.Text = "Registration"
             BtnBack.Text = "Back"
 
             DgvCymn.Columns("発注番号").HeaderText = "PurchaseOrderNumber"
+            DgvCymn.Columns("発注番号枝番").HeaderText = "PurchaseOrderSubNumber"
             DgvCymn.Columns("発注日").HeaderText = "OrderDate"
             DgvCymn.Columns("仕入先").HeaderText = "SupplierName"
             DgvCymn.Columns("客先番号").HeaderText = "CustomerNumber"
@@ -164,11 +166,11 @@ Public Class AccountsPayable
         End If
 
         If _status = "VIEW" Then
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
-                LblMode.Text = "ViewMode"
-            Else
-                LblMode.Text = "参照モード"
-            End If
+
+            LblMode.Text = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
+                            "ViewMode",
+                            "参照モード")
+
             LblNo1.Visible = False
             LblNo2.Visible = False
             LblNo2.Visible = False
@@ -176,8 +178,8 @@ Public Class AccountsPayable
             LblAdd.Visible = False
             LblAccountsPayableDate.Visible = False
             DtpAPDate.Visible = False
-            TxtCount1.Visible = False
-            TxtCount2.Visible = False
+            TxtHattyudtCount.Visible = False
+            TxtKikehdCount.Visible = False
             TxtCount3.Visible = False
             DgvCymn.Visible = False
             DgvCymndt.Visible = False
@@ -190,142 +192,121 @@ Public Class AccountsPayable
 
             BtnRegist.Visible = False
         Else
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
-                LblMode.Text = "AccountsPayableInputMode"
-            Else
-                LblMode.Text = "買掛入力モード"
-            End If
+
+            LblMode.Text = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
+                            "AccountsPayableInputMode",
+                            "買掛入力モード")
         End If
 
     End Sub
 
+    '発注基本
     Private Sub BillLoad()
-        Dim Sql1 As String = ""
-        Sql1 += "SELECT "
-        Sql1 += "* "
-        Sql1 += "FROM "
-        Sql1 += "public"
-        Sql1 += "."
-        Sql1 += "t20_hattyu"
-        Sql1 += " WHERE "
-        Sql1 += "発注番号"
-        Sql1 += " ILIKE "
-        Sql1 += "'"
-        Sql1 += HattyuNo
-        Sql1 += "'"
-        Sql1 += " AND "
-        Sql1 += "発注番号枝番"
-        Sql1 += " ILIKE "
-        Sql1 += "'"
-        Sql1 += Suffix
-        Sql1 += "'"
-
-        Dim Sql2 As String = ""
-        Sql2 += "SELECT "
-        Sql2 += "* "
-        Sql2 += "FROM "
-        Sql2 += "public"
-        Sql2 += "."
-        Sql2 += "t21_hattyu"
-        Sql2 += " WHERE "
-        Sql2 += "発注番号"
-        Sql2 += " ILIKE "
-        Sql2 += "'"
-        Sql2 += HattyuNo
-        Sql2 += "'"
-        Sql2 += " AND "
-        Sql2 += "発注番号枝番"
-        Sql2 += " ILIKE "
-        Sql2 += "'"
-        Sql2 += Suffix
-        Sql2 += "'"
-
-        Dim Sql3 As String = ""
-        Sql3 += "SELECT "
-        Sql3 += "* "
-        Sql3 += "FROM "
-        Sql3 += "public"
-        Sql3 += "."
-        Sql3 += "t46_kikehd"
-        Sql3 += " WHERE "
-        Sql3 += "発注番号"
-        Sql3 += " ILIKE "
-        Sql3 += "'"
-        Sql3 += HattyuNo
-        Sql3 += "'"
-        Sql3 += " AND "
-        Sql3 += "発注番号枝番"
-        Sql3 += " ILIKE "
-        Sql3 += "'"
-        Sql3 += Suffix
-        Sql3 += "'"
 
         Dim reccnt As Integer = 0
-        Dim ds1 As DataSet = _db.selectDB(Sql1, RS, reccnt)
-        Dim ds2 As DataSet = _db.selectDB(Sql2, RS, reccnt)
-        Dim ds3 As DataSet = _db.selectDB(Sql3, RS, reccnt)
-        Dim AccountsPayable As Integer = 0
+        Dim Sql As String = ""
+        Dim AccountsPayable As Integer = 0 '買掛残高を集計
 
-        For index As Integer = 0 To ds3.Tables(RS).Rows.Count - 1
-            AccountsPayable += ds3.Tables(RS).Rows(index)("買掛金額計")
-        Next
+        Sql = " AND "
+        Sql += "発注番号 ILIKE '" & HattyuNo & "'"
+        Sql += " AND "
+        Sql += "発注番号枝番 ILIKE '" & Suffix & "'"
+        Sql += " AND "
+        Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+        Sql += " ORDER BY 更新日 DESC "
+
+        Dim dsHattyu As DataSet = getDsData("t20_hattyu", Sql)
+
+        Sql = " SELECT t21.* "
+        Sql += " FROM "
+        Sql += " t20_hattyu t20"
+        Sql += " INNER JOIN t21_hattyu t21 ON "
+
+        Sql += " t20.""発注番号"" = t21.""発注番号"""
+        Sql += " AND "
+        Sql += " t20.""発注番号枝番"" = t21.""発注番号枝番"""
+
+        Sql += " where "
+        Sql += " t20.""会社コード"" = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+
+        Sql += " AND "
+        Sql += " t20.""発注番号"" ILIKE '" & dsHattyu.Tables(RS).Rows(0)("発注番号") & "'"
+        Sql += " AND "
+        Sql += " t20.""発注番号枝番"" ILIKE '" & Suffix & "'"
+        Sql += " AND "
+        Sql += " t20.""取消区分"" = " & CommonConst.CANCEL_KBN_ENABLED
+        Sql += " ORDER BY 行番号 DESC "
+
+        Dim dsHattyudt As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+        Sql = " AND "
+        Sql += "発注番号 ILIKE '" & HattyuNo & "'"
+        Sql += " AND "
+        Sql += "発注番号枝番 ILIKE '" & Suffix & "'"
+        Sql += " AND "
+        Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+        Sql += " ORDER BY 更新日 DESC "
+
+        Dim dsKikehd As DataSet = getDsData("t46_kikehd", Sql)
+
+        '買掛残高を集計
+        AccountsPayable = IIf(
+            dsKikehd.Tables(RS).Compute("SUM(買掛金額計)", Nothing) IsNot DBNull.Value,
+            dsKikehd.Tables(RS).Compute("SUM(買掛金額計)", Nothing),
+            0
+        )
 
         DgvCymn.Rows.Add()
-        DgvCymn.Rows(0).Cells("発注番号").Value = ds1.Tables(RS).Rows(0)("発注番号")
-        DgvCymn.Rows(0).Cells("発注日").Value = ds1.Tables(RS).Rows(0)("発注日")
-        DgvCymn.Rows(0).Cells("仕入先").Value = ds1.Tables(RS).Rows(0)("仕入先名")
-        DgvCymn.Rows(0).Cells("客先番号").Value = ds1.Tables(RS).Rows(0)("客先番号").ToString
-        DgvCymn.Rows(0).Cells("発注金額").Value = ds1.Tables(RS).Rows(0)("仕入金額")
+        DgvCymn.Rows(0).Cells("発注番号").Value = dsHattyu.Tables(RS).Rows(0)("発注番号")
+        DgvCymn.Rows(0).Cells("発注番号枝番").Value = dsHattyu.Tables(RS).Rows(0)("発注番号枝番")
+        DgvCymn.Rows(0).Cells("発注日").Value = dsHattyu.Tables(RS).Rows(0)("発注日").ToShortDateString()
+        DgvCymn.Rows(0).Cells("仕入先").Value = dsHattyu.Tables(RS).Rows(0)("仕入先名")
+        DgvCymn.Rows(0).Cells("客先番号").Value = dsHattyu.Tables(RS).Rows(0)("客先番号").ToString
+        DgvCymn.Rows(0).Cells("発注金額").Value = dsHattyu.Tables(RS).Rows(0)("仕入金額")
         DgvCymn.Rows(0).Cells("買掛金額計").Value = AccountsPayable
-        DgvCymn.Rows(0).Cells("買掛残高").Value = ds1.Tables(RS).Rows(0)("仕入金額") - AccountsPayable
+        DgvCymn.Rows(0).Cells("買掛残高").Value = dsHattyu.Tables(RS).Rows(0)("仕入金額") - AccountsPayable
 
         checkAdd = DgvCymn.Rows(0).Cells("買掛残高").Value
 
-        'If checkAdd = 0 Then
-        '    BtnRegist.Enabled = False
-        'End If
-
-        For index As Integer = 0 To ds2.Tables(RS).Rows.Count - 1
+        For i As Integer = 0 To dsHattyudt.Tables(RS).Rows.Count - 1
             DgvCymndt.Rows.Add()
-            DgvCymndt.Rows(index).Cells("明細").Value = ds2.Tables(RS).Rows(index)("行番号")
-            DgvCymndt.Rows(index).Cells("メーカー").Value = ds2.Tables(RS).Rows(index)("メーカー")
-            DgvCymndt.Rows(index).Cells("品名").Value = ds2.Tables(RS).Rows(index)("品名")
-            DgvCymndt.Rows(index).Cells("型式").Value = ds2.Tables(RS).Rows(index)("型式")
-            DgvCymndt.Rows(index).Cells("発注個数").Value = ds2.Tables(RS).Rows(index)("発注数量")
-            DgvCymndt.Rows(index).Cells("単位").Value = ds2.Tables(RS).Rows(index)("単位")
-            DgvCymndt.Rows(index).Cells("仕入数量").Value = ds2.Tables(RS).Rows(index)("仕入数量")
-            DgvCymndt.Rows(index).Cells("仕入単価").Value = ds2.Tables(RS).Rows(index)("仕入値")
-            DgvCymndt.Rows(index).Cells("仕入金額").Value = ds2.Tables(RS).Rows(index)("仕入金額")
+            DgvCymndt.Rows(i).Cells("明細").Value = dsHattyudt.Tables(RS).Rows(i)("行番号")
+            DgvCymndt.Rows(i).Cells("メーカー").Value = dsHattyudt.Tables(RS).Rows(i)("メーカー")
+            DgvCymndt.Rows(i).Cells("品名").Value = dsHattyudt.Tables(RS).Rows(i)("品名")
+            DgvCymndt.Rows(i).Cells("型式").Value = dsHattyudt.Tables(RS).Rows(i)("型式")
+            DgvCymndt.Rows(i).Cells("発注個数").Value = dsHattyudt.Tables(RS).Rows(i)("発注数量")
+            DgvCymndt.Rows(i).Cells("単位").Value = dsHattyudt.Tables(RS).Rows(i)("単位")
+            DgvCymndt.Rows(i).Cells("仕入数量").Value = dsHattyudt.Tables(RS).Rows(i)("仕入数量")
+            DgvCymndt.Rows(i).Cells("仕入単価").Value = dsHattyudt.Tables(RS).Rows(i)("仕入値")
+            DgvCymndt.Rows(i).Cells("仕入金額").Value = dsHattyudt.Tables(RS).Rows(i)("仕入金額")
         Next
 
-        TxtCount1.Text = ds2.Tables(RS).Rows.Count
+        TxtHattyudtCount.Text = dsHattyudt.Tables(RS).Rows.Count
 
-        For index As Integer = 0 To ds3.Tables(RS).Rows.Count - 1
+        For i As Integer = 0 To dsKikehd.Tables(RS).Rows.Count - 1
             DgvHistory.Rows.Add()
-            DgvHistory.Rows(index).Cells("No").Value = index + 1
-            DgvHistory.Rows(index).Cells("買掛番号").Value = ds3.Tables(RS).Rows(index)("買掛番号")
-            DgvHistory.Rows(index).Cells("買掛日").Value = ds3.Tables(RS).Rows(index)("買掛日")
-            If ds3.Tables(RS).Rows(index)("買掛区分") = 1 Then
-                DgvHistory.Rows(index).Cells("買掛区分").Value = "前払金買掛"
-            Else
-                DgvHistory.Rows(index).Cells("買掛区分").Value = "通常買掛"
-            End If
-            DgvHistory.Rows(index).Cells("支払先").Value = ds3.Tables(RS).Rows(index)("仕入先名")
-                DgvHistory.Rows(index).Cells("買掛金額").Value = ds3.Tables(RS).Rows(index)("買掛金額計")
-            DgvHistory.Rows(index).Cells("備考1").Value = ds3.Tables(RS).Rows(index)("備考1")
-            DgvHistory.Rows(index).Cells("備考2").Value = ds3.Tables(RS).Rows(index)("備考2")
-            DgvHistory.Rows(index).Cells("買掛済み発注番号").Value = ds3.Tables(RS).Rows(index)("発注番号")
-            DgvHistory.Rows(index).Cells("買掛済み発注番号枝番").Value = ds3.Tables(RS).Rows(index)("発注番号枝番")
+            DgvHistory.Rows(i).Cells("No").Value = i + 1
+            DgvHistory.Rows(i).Cells("買掛番号").Value = dsKikehd.Tables(RS).Rows(i)("買掛番号")
+            DgvHistory.Rows(i).Cells("買掛日").Value = dsKikehd.Tables(RS).Rows(i)("買掛日").ToShortDateString()
+            DgvHistory.Rows(i).Cells("買掛区分").Value = IIf(dsKikehd.Tables(RS).Rows(i)("買掛区分") = CommonConst.APC_KBN_DEPOSIT.ToString,
+                                                                                                    CommonConst.APC_KBN_DEPOSIT_TXT,
+                                                                                                    CommonConst.APC_KBN_NORMAL_TXT)
+            DgvHistory.Rows(i).Cells("支払先").Value = dsKikehd.Tables(RS).Rows(i)("仕入先名")
+            DgvHistory.Rows(i).Cells("買掛金額").Value = dsKikehd.Tables(RS).Rows(i)("買掛金額計")
+            DgvHistory.Rows(i).Cells("備考1").Value = dsKikehd.Tables(RS).Rows(i)("備考1")
+            DgvHistory.Rows(i).Cells("備考2").Value = dsKikehd.Tables(RS).Rows(i)("備考2")
+            DgvHistory.Rows(i).Cells("買掛済み発注番号").Value = dsKikehd.Tables(RS).Rows(i)("発注番号")
+            DgvHistory.Rows(i).Cells("買掛済み発注番号枝番").Value = dsKikehd.Tables(RS).Rows(i)("発注番号枝番")
         Next
 
-        TxtCount2.Text = ds3.Tables(RS).Rows.Count
+        TxtKikehdCount.Text = dsKikehd.Tables(RS).Rows.Count
 
         If DgvCymn.Rows(0).Cells("買掛残高").Value = 0 Then
         Else
             DgvAdd.Rows.Add()
             DgvAdd.Rows(0).Cells("AddNo").Value = 1
             DgvAdd(1, 0).Value = 2
-            DgvAdd.Rows(0).Cells("今回支払先").Value = ds1.Tables(RS).Rows(0)("仕入先名")
+            DgvAdd.Rows(0).Cells("今回支払先").Value = dsHattyu.Tables(RS).Rows(0)("仕入先名")
             DgvAdd.Rows(0).Cells("今回買掛金額計").Value = 0
 
             TxtCount3.Text = 1
@@ -339,70 +320,12 @@ Public Class AccountsPayable
         Me.Dispose()
     End Sub
 
-    Private Sub BtnClone_Click(sender As Object, e As EventArgs) Handles BtnClone.Click
-        'メニュー選択処理
-        Dim RowIdx As Integer
-        Dim Item(5) As String
-
-        '一覧選択行インデックスの取得
-
-        RowIdx = DgvAdd.CurrentCell.RowIndex
-
-
-        '選択行の値を格納
-        For c As Integer = 0 To 5
-            Item(c) = DgvAdd.Rows(RowIdx).Cells(c).Value
-        Next c
-
-        '行を挿入
-        DgvAdd.Rows.Insert(RowIdx + 1)
-
-        '追加した行に複製元の値を格納
-        For c As Integer = 0 To 5
-            If c = 1 Then
-                If Item(c) IsNot Nothing Then
-                    Dim tmp As Integer = Item(c)
-                    DgvAdd(1, RowIdx + 1).Value = tmp
-                End If
-            Else
-                DgvAdd.Rows(RowIdx + 1).Cells(c).Value = Item(c)
-            End If
-
-        Next c
-
-        '最終行のインデックスを取得
-        Dim index As Integer = DgvAdd.Rows.Count()
-        '行番号の振り直し
-        Dim No As Integer = 1
-        For c As Integer = 0 To index - 1
-            DgvAdd.Rows(c).Cells(0).Value = No
-            No += 1
-        Next c
-        TxtCount3.Text = DgvAdd.Rows.Count()
-    End Sub
-
-    Private Sub BtnDelete_Click(sender As Object, e As EventArgs) Handles BtnDelete.Click
-        For Each r As DataGridViewCell In DgvAdd.SelectedCells
-            DgvAdd.Rows.RemoveAt(r.RowIndex)
-        Next r
-
-        '行番号の振り直し
-        Dim index As Integer = DgvAdd.Rows.Count()
-        Dim No As Integer = 1
-        For c As Integer = 0 To index - 1
-            DgvAdd.Rows(c).Cells(0).Value = No
-            No += 1
-        Next c
-        TxtCount3.Text = DgvAdd.Rows.Count()
-    End Sub
-
+    '登録ボタン押下時
     Private Sub BtnRegist_Click(sender As Object, e As EventArgs) Handles BtnRegist.Click
         Dim errflg As Boolean = True
         Dim dtToday As DateTime = DateTime.Now
         Dim reccnt As Integer = 0
         Dim AccountsPayable As Integer = 0
-
-
 
         If DgvAdd.Rows.Count() > 0 Then
 
@@ -482,7 +405,7 @@ Public Class AccountsPayable
             Dim Balance As Integer = ds1.Tables(RS).Rows(0)("仕入金額") - APTotal
 
             If Balance < 0 Then
-                If frmC01F10_Login.loginValue.Language = "ENG" Then
+                If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                     MessageBox.Show("Total accounts payable amount exceeds purchase order amount.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Else
                     MessageBox.Show("買掛金額計が発注金額を超えています。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -492,7 +415,7 @@ Public Class AccountsPayable
             End If
 
             If DgvAdd.Rows(0).Cells("今回買掛金額計").Value = 0 Then
-                If frmC01F10_Login.loginValue.Language = "ENG" Then
+                If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                     MessageBox.Show("Total accounts payable amount is 0.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Else
                     MessageBox.Show("買掛金額計が0になっています。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -643,4 +566,19 @@ Public Class AccountsPayable
 
 
     End Sub
+
+    'param1：String テーブル名
+    'param2：String 詳細条件
+    'Return: DataSet
+    Private Function getDsData(ByVal tableName As String, Optional ByRef txtParam As String = "") As DataSet
+        Dim reccnt As Integer = 0 'DB用（デフォルト）
+        Dim Sql As String = ""
+
+        Sql += "SELECT * FROM public." & tableName
+        Sql += " WHERE "
+        Sql += "会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += txtParam
+        Return _db.selectDB(Sql, RS, reccnt)
+    End Function
+
 End Class
