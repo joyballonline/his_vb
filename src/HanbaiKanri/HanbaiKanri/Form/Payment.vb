@@ -500,7 +500,7 @@ Public Class Payment
         '支払入力がなかったら、或いは合計が0だったら
         If DgvPayment.Rows.Count = 0 Or PaymentAmount = 0 Then
             '対象データがないメッセージを表示
-            _msgHd.dspMSG("NonData", frmC01F10_Login.loginValue.Language)
+            _msgHd.dspMSG("chkPayAddError", frmC01F10_Login.loginValue.Language)
 
             Return
         End If
