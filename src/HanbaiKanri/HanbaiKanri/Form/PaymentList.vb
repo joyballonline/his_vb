@@ -125,6 +125,9 @@ Public Class PaymentList
             Sql += "'%"
             Sql += dsSupplier.Tables(RS).Rows(i)("仕入先コード")
             Sql += "%'"
+            Sql += " AND "
+            Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+
 
             '仕入先と一致する買掛基本を取得
             Dim dsKikehd As DataSet = getDsData("t46_kikehd", Sql)
@@ -138,6 +141,9 @@ Public Class PaymentList
             Sql += "'%"
             Sql += dsSupplier.Tables(RS).Rows(i)("仕入先コード")
             Sql += "%'"
+            Sql += " AND "
+            Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+
 
             '仕入先と一致する発注基本を取得
             Dim dsHattyu As DataSet = getDsData("t20_hattyu", Sql)
