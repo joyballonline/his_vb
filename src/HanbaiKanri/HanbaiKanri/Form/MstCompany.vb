@@ -165,7 +165,7 @@ Public Class MstCompany
 
     Private Sub btnCompanyrAdd_Click(sender As Object, e As EventArgs) Handles btnCompanyAdd.Click
         Dim openForm As Form = Nothing
-        Dim Status As String = "ADD"
+        Dim Status As String = CommonConst.STATUS_ADD
         openForm = New Company(_msgHd, _db, _langHd, Status)   '処理選択
         openForm.Show()
         Me.Hide()   ' 自分は隠れる
@@ -173,7 +173,7 @@ Public Class MstCompany
 
     Private Sub btnSelectCompany_Click(sender As Object, e As EventArgs) Handles btnCompanyEdit.Click
         Dim openForm As Form = Nothing
-        Dim Status As String = "EDIT"
+        Dim Status As String = CommonConst.STATUS_EDIT
         Dim CompanyCode As String = Dgv_Company.Rows(Dgv_Company.CurrentCell.RowIndex).Cells("会社コード").Value
         openForm = New Company(_msgHd, _db, _langHd, Status, CompanyCode)   '処理選択
         openForm.Show()

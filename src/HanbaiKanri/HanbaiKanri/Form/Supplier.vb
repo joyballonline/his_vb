@@ -95,7 +95,7 @@ Public Class Supplier
         '登録処理はここから
         Dim dtToday As DateTime = DateTime.Now
         Try
-            If _status = "ADD" Then
+            If _status = CommonConst.STATUS_ADD Then
                 Dim Sql As String = ""
 
                 Sql = ""
@@ -470,7 +470,7 @@ Public Class Supplier
             BtnRegistration.Text = "Registration"
             BtnBack.Text = "Back"
         End If
-        If _status = "EDIT" Then
+        If _status = CommonConst.STATUS_EDIT Then
             Dim Sql As String = ""
 
             Sql += "SELECT "

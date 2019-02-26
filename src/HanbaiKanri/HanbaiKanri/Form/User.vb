@@ -117,7 +117,7 @@ Public Class User
         '登録処理ここから
         Dim dtToday As DateTime = DateTime.Now
         Try
-            If _status = "ADD" Then
+            If _status = CommonConst.STATUS_ADD Then
                 Dim Sql As String = ""
 
                 Sql += "INSERT INTO Public.m02_user("
@@ -225,7 +225,7 @@ Public Class User
             BtnRegistration.Text = "Registration"
             BtnBack.Text = "Back"
         End If
-        If _status = "EDIT" Then
+        If _status = CommonConst.STATUS_EDIT Then
             LblPassword.Visible = False
             TxtPassword.Visible = False
 

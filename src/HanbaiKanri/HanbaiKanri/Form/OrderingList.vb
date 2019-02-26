@@ -75,7 +75,7 @@ Public Class OrderingList
 
     '画面表示時
     Private Sub OrderingList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If _status = "ORDING" Then
+        If _status = CommonConst.STATUS_ORDING Then
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "PurchasedInputMode"
             Else
@@ -84,7 +84,7 @@ Public Class OrderingList
 
             BtnOrding.Visible = True
             BtnOrding.Location = New Point(997, 509)
-        ElseIf _status = "RECEIPT" Then
+        ElseIf _status = CommonConst.STATUS_RECEIPT Then
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "GoodsReceiptInputMode"
             Else
@@ -93,7 +93,7 @@ Public Class OrderingList
 
             BtnReceipt.Visible = True
             BtnReceipt.Location = New Point(997, 509)
-        ElseIf _status = "EDIT" Then
+        ElseIf _status = CommonConst.STATUS_EDIT Then
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "EditMode"
             Else
@@ -102,7 +102,7 @@ Public Class OrderingList
 
             BtnPurchaseEdit.Visible = True
             BtnPurchaseEdit.Location = New Point(997, 509)
-        ElseIf _status = "VIEW" Then
+        ElseIf _status = CommonConst.STATUS_VIEW Then
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "ViewMode"
             Else
@@ -111,7 +111,7 @@ Public Class OrderingList
 
             BtnPurchaseView.Visible = True
             BtnPurchaseView.Location = New Point(997, 509)
-        ElseIf _status = "CANCEL" Then
+        ElseIf _status = CommonConst.STATUS_CANCEL Then
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "CancelMode"
             Else
@@ -120,7 +120,7 @@ Public Class OrderingList
 
             BtnPurchaseCancel.Visible = True
             BtnPurchaseCancel.Location = New Point(997, 509)
-        ElseIf _status = "CLONE" Then
+        ElseIf _status = CommonConst.STATUS_CLONE Then
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "NewCopyMode"
             Else
@@ -129,7 +129,7 @@ Public Class OrderingList
 
             BtnPurchaseClone.Visible = True
             BtnPurchaseClone.Location = New Point(997, 509)
-        ElseIf _status = "AP" Then
+        ElseIf _status = CommonConst.STATUS_AP Then
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "AccountsPayableInputMode"
             Else
@@ -512,7 +512,7 @@ Public Class OrderingList
         RowIdx = Me.DgvHtyhd.CurrentCell.RowIndex
         Dim No As String = DgvHtyhd.Rows(RowIdx).Cells("発注番号").Value
         Dim Suffix As String = DgvHtyhd.Rows(RowIdx).Cells("発注番号枝番").Value
-        Dim Status As String = "VIEW"
+        Dim Status As String = CommonConst.STATUS_VIEW
         Dim openForm As Form = Nothing
         openForm = New Ordering(_msgHd, _db, _langHd, No, Suffix, Status)   '処理選択
         openForm.Show(Me)
@@ -524,7 +524,7 @@ Public Class OrderingList
         RowIdx = Me.DgvHtyhd.CurrentCell.RowIndex
         Dim No As String = DgvHtyhd.Rows(RowIdx).Cells("発注番号").Value
         Dim Suffix As String = DgvHtyhd.Rows(RowIdx).Cells("発注番号枝番").Value
-        Dim Status As String = "CLONE"
+        Dim Status As String = CommonConst.STATUS_CLONE
         Dim openForm As Form = Nothing
         openForm = New Ordering(_msgHd, _db, _langHd, No, Suffix, Status)   '処理選択
         openForm.ShowDialog(Me)
@@ -540,7 +540,7 @@ Public Class OrderingList
         RowIdx = Me.DgvHtyhd.CurrentCell.RowIndex
         Dim No As String = DgvHtyhd.Rows(RowIdx).Cells("発注番号").Value
         Dim Suffix As String = DgvHtyhd.Rows(RowIdx).Cells("発注番号枝番").Value
-        Dim status As String = "EDIT"
+        Dim status As String = CommonConst.STATUS_EDIT
 
         Dim openForm As Form = Nothing
         openForm = New Ordering(_msgHd, _db, _langHd, No, Suffix, status)   '処理選択

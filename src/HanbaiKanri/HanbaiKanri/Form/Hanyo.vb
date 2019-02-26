@@ -88,7 +88,7 @@ Public Class Hanyo
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles BtnRegistration.Click
         Dim dtToday As DateTime = DateTime.Now
         Try
-            If _status = "ADD" Then
+            If _status = CommonConst.STATUS_ADD Then
                 Dim Sql As String = ""
 
                 Sql = ""
@@ -411,7 +411,7 @@ Public Class Hanyo
             BtnRegistration.Text = "Registration"
             BtnBack.Text = "Back"
         End If
-        If _status = "EDIT" Then
+        If _status = CommonConst.STATUS_EDIT Then
             Dim Sql As String = ""
             Sql += "SELECT "
             Sql += "* "

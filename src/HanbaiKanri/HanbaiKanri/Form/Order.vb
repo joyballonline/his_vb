@@ -153,30 +153,30 @@ Public Class Order
 
 
         If frmC01F10_Login.loginValue.Language = "ENG" Then
-            If OrderStatus = "ADD" Then
+            If OrderStatus = CommonConst.STATUS_ADD Then
                 LblMode.Text = "NewRegistrationMode"
-            ElseIf OrderStatus = "EDIT" Then
+            ElseIf OrderStatus = CommonConst.STATUS_EDIT Then
                 LblMode.Text = "EditMode"
-            ElseIf OrderStatus = "CLONE" Then
+            ElseIf OrderStatus = CommonConst.STATUS_CLONE Then
                 LblMode.Text = "NewCopyMode"
-            ElseIf OrderStatus = "VIEW" Then
+            ElseIf OrderStatus = CommonConst.STATUS_VIEW Then
                 LblMode.Text = "ViewMode"
             End If
         Else
-            If OrderStatus = "ADD" Then
+            If OrderStatus = CommonConst.STATUS_ADD Then
                 LblMode.Text = "新規登録モード"
-            ElseIf OrderStatus = "EDIT" Then
+            ElseIf OrderStatus = CommonConst.STATUS_EDIT Then
                 LblMode.Text = "編集モード"
-            ElseIf OrderStatus = "CLONE" Then
+            ElseIf OrderStatus = CommonConst.STATUS_CLONE Then
                 LblMode.Text = "新規複写モード"
-            ElseIf OrderStatus = "VIEW" Then
+            ElseIf OrderStatus = CommonConst.STATUS_VIEW Then
                 LblMode.Text = "参照モード"
             End If
         End If
 
         Dim dtNow As DateTime = DateTime.Now
 
-        If OrderStatus = "ADD" Then
+        If OrderStatus = CommonConst.STATUS_ADD Then
             '見積基本情報
             Dim SqlSaiban As String = ""
             SqlSaiban += "SELECT "
@@ -357,7 +357,7 @@ Public Class Order
             Next
 
             CompanyCode = ds1.Tables(RS).Rows(0)("会社コード")
-            If OrderStatus = "CLONE" Then
+            If OrderStatus = CommonConst.STATUS_CLONE Then
                 Dim SqlSaiban As String = ""
                 SqlSaiban += "SELECT "
                 SqlSaiban += "会社コード, "
@@ -389,9 +389,9 @@ Public Class Order
                 End If
             End If
 
-            If OrderStatus = "CLONE" Then
+            If OrderStatus = CommonConst.STATUS_CLONE Then
                 TxtOrderSuffix.Text = 1
-            ElseIf OrderStatus = "EDIT" Then
+            ElseIf OrderStatus = CommonConst.STATUS_EDIT Then
                 TxtOrderSuffix.Text = MaxSuffix + 1
             Else
                 If ds1.Tables(RS).Rows(0)("受注番号枝番") IsNot DBNull.Value Then
@@ -399,7 +399,7 @@ Public Class Order
                 End If
             End If
 
-            If OrderStatus = "CLONE" Then
+            If OrderStatus = CommonConst.STATUS_CLONE Then
                 DtpOrderDate.Value = dtNow
             Else
                 If ds1.Tables(RS).Rows(0)("受注日") IsNot DBNull.Value Then
@@ -407,7 +407,7 @@ Public Class Order
                 End If
             End If
 
-            If OrderStatus = "CLONE" Then
+            If OrderStatus = CommonConst.STATUS_CLONE Then
                 If ds1.Tables(RS).Rows(0)("登録日") IsNot DBNull.Value Then
                     DtpQuoteRegistration.Value = ds1.Tables(RS).Rows(0)("登録日")
                 End If
@@ -537,7 +537,7 @@ Public Class Order
                 No += 1
             Next c
             TxtItemCount.Text = DgvItemList.Rows.Count()
-            If OrderStatus = "VIEW" Then
+            If OrderStatus = CommonConst.STATUS_VIEW Then
                 DtpOrderDate.Enabled = False
                 TxtOrderRemark.Enabled = False
                 DtpQuoteDate.Enabled = False
@@ -667,7 +667,7 @@ Public Class Order
         Dim reccnt As Integer = 0
         Dim dtNow As DateTime = DateTime.Now
 
-        If OrderStatus = "ADD" Or OrderStatus = "EDIT" Or OrderStatus = "CLONE" Then
+        If OrderStatus = CommonConst.STATUS_ADD Or OrderStatus = CommonConst.STATUS_EDIT Or OrderStatus = CommonConst.STATUS_CLONE Then
             Dim Sql1 As String = ""
             Sql1 = ""
             Sql1 += "INSERT INTO "

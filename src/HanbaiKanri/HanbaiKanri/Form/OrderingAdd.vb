@@ -357,7 +357,7 @@ Public Class OrderingAdd
     Private Sub TxtCustomerCode_DoubleClick(sender As Object, e As EventArgs) Handles TxtSupplierCode.DoubleClick
         Dim openForm As Form = Nothing
         Dim idx As Integer = 0
-        Dim Status As String = "ADD"
+        Dim Status As String = CommonConst.STATUS_ADD
         openForm = New SupplierSearch(_msgHd, _db, _langHd, idx, Me, Status)   '処理選択
         openForm.Show(Me)
         Me.Enabled = False
@@ -365,7 +365,7 @@ Public Class OrderingAdd
 
     Private Sub DgvItemList_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) _
      Handles DgvItemList.CellDoubleClick
-        Dim Status As String = "ADD"
+        Dim Status As String = CommonConst.STATUS_ADD
         Dim ColIdx As Integer
         ColIdx = DgvItemList.CurrentCell.ColumnIndex
         Dim RowIdx As Integer

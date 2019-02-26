@@ -258,7 +258,7 @@ Public Class ReceiptList
     End Sub
 
     Private Sub MstHanyoue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If ReceiptStatus = "CANCEL" Then
+        If ReceiptStatus = CommonConst.STATUS_CANCEL Then
             If frmC01F10_Login.loginValue.Language = "ENG" Then
                 LblMode.Text = "CancelMode"
             Else
@@ -267,7 +267,7 @@ Public Class ReceiptList
 
             BtnReceiptCancel.Visible = True
             BtnReceiptCancel.Location = New Point(997, 509)
-        ElseIf ReceiptStatus = "VIEW" Then
+        ElseIf ReceiptStatus = CommonConst.STATUS_VIEW Then
             If frmC01F10_Login.loginValue.Language = "ENG" Then
                 LblMode.Text = "ViewMode"
             Else
@@ -968,7 +968,7 @@ Public Class ReceiptList
         RowIdx = Me.DgvCymnhd.CurrentCell.RowIndex
         Dim No As String = DgvCymnhd.Rows(RowIdx).Cells("発注番号").Value
         Dim Suffix As String = DgvCymnhd.Rows(RowIdx).Cells("発注番号枝番").Value
-        Dim Status As String = "VIEW"
+        Dim Status As String = CommonConst.STATUS_VIEW
 
         Dim openForm As Form = Nothing
         openForm = New Receipt(_msgHd, _db, _langHd, No, Suffix, Status)   '処理選択

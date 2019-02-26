@@ -127,7 +127,7 @@ Public Class SupplierSearch
     '
     Private Sub btnSupplierSelect_Click(sender As Object, e As EventArgs) Handles btnSupplierSelect.Click, Dgv_Supplier.DoubleClick
 
-        If _status = "ADD" Then
+        If _status = CommonConst.STATUS_ADD Then
             Dim frm As OrderingAdd = CType(Me.Owner, OrderingAdd)
             Dim idx As Integer = Dgv_Supplier.CurrentCell.RowIndex
 
@@ -141,7 +141,7 @@ Public Class SupplierSearch
             frm.TxtFax.Text = Dgv_Supplier.Rows(idx).Cells("FAX番号").Value
             frm.TxtPerson.Text = Dgv_Supplier.Rows(idx).Cells("担当者名").Value
             frm.TxtPosition.Text = Dgv_Supplier.Rows(idx).Cells("担当者役職").Value
-        ElseIf _status = "CLONE" Then
+        ElseIf _status = CommonConst.STATUS_CLONE Then
             Dim frm As Ordering = CType(Me.Owner, Ordering)
             Dim idx As Integer = Dgv_Supplier.CurrentCell.RowIndex
 

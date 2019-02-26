@@ -161,7 +161,7 @@ Public Class BillingManagement
             DgvAdd.Columns("今回備考2").HeaderText = "Remarks2"
 
         End If
-        If _status = "VIEW" Then
+        If _status = CommonConst.STATUS_VIEW Then
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "ViewMode"
             Else

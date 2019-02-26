@@ -258,7 +258,7 @@ Public Class MakerSearch
     End Sub
 
     Private Sub BtnSelectMaker_Click(sender As Object, e As EventArgs) Handles BtnSelect.Click
-        If _status = "ADD" Then
+        If _status = CommonConst.STATUS_ADD Then
             Dim frm As OrderingAdd = CType(Me.Owner, OrderingAdd)
             If LbMaker.SelectedIndex > -1 Then
                 frm.DgvItemList.Rows(RowIdx).Cells(2).Value = LbMaker.SelectedItem
@@ -269,7 +269,7 @@ Public Class MakerSearch
                     End If
                 End If
             End If
-        ElseIf _status = "CLONE" Then
+        ElseIf _status = CommonConst.STATUS_CLONE Then
             Dim frm As Ordering = CType(Me.Owner, Ordering)
             If LbMaker.SelectedIndex > -1 Then
                 frm.DgvItemList.Rows(RowIdx).Cells(2).Value = LbMaker.SelectedItem

@@ -125,7 +125,7 @@ Public Class SalesSearch
             frm.TxtSales.Text = DgvUser.Rows(RowIndex).Cells("氏名").Value
             frm.TxtSales.Tag = DgvUser.Rows(RowIndex).Cells(1).Value
 
-        ElseIf _status = "CLONE" Then
+        ElseIf _status = CommonConst.STATUS_CLONE Then
             Dim frm As Ordering = CType(Me.Owner, Ordering)
             Dim RowIndex As Integer = DgvUser.CurrentCell.RowIndex
 

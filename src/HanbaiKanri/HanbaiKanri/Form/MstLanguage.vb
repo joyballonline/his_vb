@@ -135,7 +135,7 @@ Public Class MstLanguage
 
     Private Sub BtnAdd_Click(sender As Object, e As EventArgs) Handles BtnAdd.Click
         Dim openForm As Form = Nothing
-        Dim Status As String = "ADD"
+        Dim Status As String = CommonConst.STATUS_ADD
         openForm = New Language(_msgHd, _db, _langHd, Status)   '処理選択
         openForm.Show()
         Me.Hide()   ' 自分は隠れる
@@ -143,7 +143,7 @@ Public Class MstLanguage
 
     Private Sub BtnEdit_Click(sender As Object, e As EventArgs) Handles BtnEdit.Click
         Dim openForm As Form = Nothing
-        Dim Status As String = "EDIT"
+        Dim Status As String = CommonConst.STATUS_EDIT
         Dim CompanyCode As String = Dgv_Language.Rows(Dgv_Language.CurrentCell.RowIndex).Cells("会社コード").Value
         Dim LangCode As String = Dgv_Language.Rows(Dgv_Language.CurrentCell.RowIndex).Cells("言語コード").Value
         openForm = New Language(_msgHd, _db, _langHd, Status, CompanyCode, LangCode)   '処理選択

@@ -109,7 +109,7 @@ Public Class GoodsIssue
             BtnRegist.Text = "Registration"
             BtnBack.Text = "Back"
         End If
-        If _status = "VIEW" Then
+        If _status = CommonConst.STATUS_VIEW Then
             If frmC01F10_Login.loginValue.Language = "ENG" Then
                 LblMode.Text = "ViewMode"
             Else

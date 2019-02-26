@@ -151,7 +151,7 @@ Public Class MstAccount
     '追加ボタン押下時
     Private Sub btnCompanyrAdd_Click(sender As Object, e As EventArgs) Handles btnAccountAdd.Click
         Dim openForm As Form = Nothing
-        Dim Status As String = "ADD"
+        Dim Status As String = CommonConst.STATUS_ADD
         openForm = New Account(_msgHd, _db, _langHd, Status)   '処理選択
         openForm.Show()
         Me.Hide()   ' 自分は隠れる
@@ -161,7 +161,7 @@ Public Class MstAccount
     Private Sub btnAccountEdit_Click(sender As Object, e As EventArgs) Handles btnAccountEdit.Click
         If Dgv_Account.Rows.Count > 0 Then
             Dim openForm As Form = Nothing
-            Dim Status As String = "EDIT"
+            Dim Status As String = CommonConst.STATUS_EDIT
             Dim CompanyCode As String = frmC01F10_Login.loginValue.BumonCD
             Dim AccountCode As String = Dgv_Account.Rows(Dgv_Account.CurrentCell.RowIndex).Cells("勘定科目コード").Value
             openForm = New Account(_msgHd, _db, _langHd, Status, CompanyCode, AccountCode)   '処理選択

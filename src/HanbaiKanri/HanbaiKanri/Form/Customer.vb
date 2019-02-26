@@ -94,7 +94,7 @@ Public Class Customer
         '登録処理はここから
         Dim dtToday As DateTime = DateTime.Now
         Try
-            If _status = "ADD" Then
+            If _status = CommonConst.STATUS_ADD Then
                 Dim Sql As String = ""
 
                 Sql = ""
@@ -354,7 +354,7 @@ Public Class Customer
             btnRegistrarion.Text = "Registration"
             btnBack.Text = "Back"
         End If
-        If _status = "EDIT" Then
+        If _status = CommonConst.STATUS_EDIT Then
             Dim Sql As String = ""
             Sql += "SELECT "
             Sql += "会社コード, "

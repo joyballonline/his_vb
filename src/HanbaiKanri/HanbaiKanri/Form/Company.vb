@@ -139,7 +139,7 @@ Public Class Company
 
         Dim dtToday As DateTime = DateTime.Now
         Try
-            If _status = "ADD" Then
+            If _status = CommonConst.STATUS_ADD Then
                 Dim Sql As String = ""
 
                 Sql += "INSERT INTO Public.m01_company ( "
@@ -300,7 +300,7 @@ Public Class Company
         CbEvaluation.DataSource = Evaluation
         CbEvaluation.SelectedIndex = 0
 
-        If _status = "EDIT" Then
+        If _status = CommonConst.STATUS_EDIT Then
             Dim Sql As String = ""
 
             Sql += "SELECT * FROM public.m01_company"

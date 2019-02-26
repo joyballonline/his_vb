@@ -81,15 +81,16 @@ Partial Class Receipt
         'DtpReceiptDate
         '
         Me.DtpReceiptDate.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.DtpReceiptDate.CustomFormat = "yyyy/MM/dd"
+        Me.DtpReceiptDate.CustomFormat = ""
         Me.DtpReceiptDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpReceiptDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.DtpReceiptDate.Location = New System.Drawing.Point(292, 343)
+        Me.DtpReceiptDate.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.DtpReceiptDate.Name = "DtpReceiptDate"
         Me.DtpReceiptDate.Size = New System.Drawing.Size(148, 22)
         Me.DtpReceiptDate.TabIndex = 3
         Me.DtpReceiptDate.TabStop = False
-        Me.DtpReceiptDate.Value = New Date(2018, 7, 16, 0, 0, 0, 0)
+        Me.DtpReceiptDate.Value = New Date(2019, 1, 1, 0, 0, 0, 0)
         '
         'LblRemarks
         '
@@ -352,7 +353,7 @@ Partial Class Receipt
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(12, 10)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(0, 13)
+        Me.Label1.Size = New System.Drawing.Size(0, 12)
         Me.Label1.TabIndex = 232
         '
         'LblMode

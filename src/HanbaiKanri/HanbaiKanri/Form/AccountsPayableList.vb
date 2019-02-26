@@ -74,13 +74,13 @@ Public Class AccountsPayableList
 
     '画面表示時
     Private Sub MstHanyoue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If _status = "VIEW" Then
+        If _status = CommonConst.STATUS_VIEW Then
 
             LblMode.Text = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
                             "ViewMode",
                             "参照モード")
 
-        ElseIf _status = "CANCEL" Then
+        ElseIf _status = CommonConst.STATUS_CANCEL Then
 
             LblMode.Text = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
                             "CancelMode",
@@ -205,7 +205,7 @@ Public Class AccountsPayableList
         RowIdx = Me.DgvKike.CurrentCell.RowIndex
         Dim No As String = DgvKike.Rows(RowIdx).Cells("発注番号").Value
         Dim Suffix As String = DgvKike.Rows(RowIdx).Cells("発注番号枝番").Value
-        Dim Status As String = "VIEW"
+        Dim Status As String = CommonConst.STATUS_VIEW
         Dim openForm As Form = Nothing
         openForm = New BillingManagement(_msgHd, _db, _langHd, Me, No, Suffix, Status)   '処理選択
         openForm.Show(Me)

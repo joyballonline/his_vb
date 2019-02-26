@@ -113,7 +113,7 @@ Public Class Receipt
             BtnRegist.Text = "Registration"
             BtnBack.Text = "Back"
         End If
-        If _status = "VIEW" Then
+        If _status = CommonConst.STATUS_VIEW Then
             If frmC01F10_Login.loginValue.Language = "ENG" Then
                 LblMode.Text = "ViewMode"
             Else
@@ -1176,7 +1176,7 @@ Public Class Receipt
 
             _db.executeDB(Sql9)
             Dim openForm As Form = Nothing
-            openForm = New OrderingList(_msgHd, _db, _langHd)
+            openForm = New OrderingList(_msgHd, _db, _langHd, CommonConst.STATUS_RECEIPT)
             openForm.Show()
             Me.Close()
         End If

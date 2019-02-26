@@ -107,7 +107,7 @@ Public Class OrderManagement
             BtnRegist.Text = "Registration"
             BtnBack.Text = "Back"
         End If
-        If _status = "VIEW" Then
+        If _status = CommonConst.STATUS_VIEW Then
             If frmC01F10_Login.loginValue.Language = "ENG" Then
                 LblMode.Text = "ViewMode"
             Else
@@ -420,7 +420,7 @@ Public Class OrderManagement
             TxtCustomerCode.Text = ds1.Tables(RS).Rows(0)("得意先コード")
             TxtCustomerName.Text = ds1.Tables(RS).Rows(0)("得意先名")
 
-            If _status = "VIEW" Then
+            If _status = CommonConst.STATUS_VIEW Then
                 DtpOrderDate.Value = ds4.Tables(RS).Rows(0)("売上日")
                 TxtRemarks.Text = ds4.Tables(RS).Rows(0)("備考")
             End If
@@ -1377,7 +1377,7 @@ Public Class OrderManagement
             End If
 
             Dim openForm As Form = Nothing
-            Dim Status As String = "SALES"
+            Dim Status As String = CommonConst.STATUS_SALES
             openForm = New OrderList(_msgHd, _db, _langHd, Status)
             openForm.Show()
             Me.Close()

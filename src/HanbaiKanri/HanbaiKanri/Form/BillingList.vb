@@ -74,7 +74,7 @@ Public Class BillingList
 
     Private Sub BillingList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        If _status = "VIEW" Then
+        If _status = CommonConst.STATUS_VIEW Then
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "ViewMode"
             Else
@@ -83,7 +83,7 @@ Public Class BillingList
 
             'BtnBillingView.Visible = True
             'BtnBillingView.Location = New Point(997, 677)
-        ElseIf _status = "CANCEL" Then
+        ElseIf _status = CommonConst.STATUS_CANCEL Then
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "CancelMode"
             Else
@@ -233,7 +233,7 @@ Public Class BillingList
         RowIdx = Me.DgvBilling.CurrentCell.RowIndex
         Dim No As String = DgvBilling.Rows(RowIdx).Cells("受注番号").Value
         Dim Suffix As String = DgvBilling.Rows(RowIdx).Cells("受注番号枝番").Value
-        Dim Status As String = "VIEW"
+        Dim Status As String = CommonConst.STATUS_VIEW
         Dim openForm As Form = Nothing
         openForm = New BillingManagement(_msgHd, _db, _langHd, Me, No, Suffix, Status)   '処理選択
         openForm.Show(Me)

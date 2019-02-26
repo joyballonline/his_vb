@@ -165,7 +165,7 @@ Public Class AccountsPayable
 
         End If
 
-        If _status = "VIEW" Then
+        If _status = CommonConst.STATUS_VIEW Then
 
             LblMode.Text = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
                             "ViewMode",

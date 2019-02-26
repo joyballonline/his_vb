@@ -74,7 +74,7 @@ Public Class QuoteList
 
     Private Sub MstHanyoue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        If _status = "EDIT" Then
+        If _status = CommonConst.STATUS_EDIT Then
             If frmC01F10_Login.loginValue.Language = "ENG" Then
                 LblMode.Text = "EditMode"
             Else
@@ -83,7 +83,7 @@ Public Class QuoteList
 
             BtnQuoteEdit.Visible = True
             BtnQuoteEdit.Location = New Point(997, 509)
-        ElseIf _status = "CLONE" Then
+        ElseIf _status = CommonConst.STATUS_CLONE Then
             If frmC01F10_Login.loginValue.Language = "ENG" Then
                 LblMode.Text = "CopyMode"
             Else
@@ -92,7 +92,7 @@ Public Class QuoteList
 
             BtnQuoteClone.Visible = True
             BtnQuoteClone.Location = New Point(997, 509)
-        ElseIf _status = "CANCEL" Then
+        ElseIf _status = CommonConst.STATUS_CANCEL Then
             If frmC01F10_Login.loginValue.Language = "ENG" Then
                 LblMode.Text = "CancelMode"
             Else
@@ -101,7 +101,7 @@ Public Class QuoteList
 
             BtnCancel.Visible = True
             BtnCancel.Location = New Point(997, 509)
-        ElseIf _status = "VIEW" Then
+        ElseIf _status = CommonConst.STATUS_VIEW Then
             If frmC01F10_Login.loginValue.Language = "ENG" Then
                 LblMode.Text = "ViewMode"
             Else
@@ -110,7 +110,7 @@ Public Class QuoteList
 
             BtnQuoteView.Visible = True
             BtnQuoteView.Location = New Point(997, 509)
-        ElseIf _status = "PRICE" Then
+        ElseIf _status = CommonConst.STATUS_PRICE Then
             If frmC01F10_Login.loginValue.Language = "ENG" Then
                 LblMode.Text = "PurchasePriceInputMode"
             Else
@@ -119,7 +119,7 @@ Public Class QuoteList
 
             BtnUnitPrice.Visible = True
             BtnUnitPrice.Location = New Point(997, 509)
-        ElseIf _status = "ORDER_NEW" Then
+        ElseIf _status = CommonConst.STATUS_ORDER_NEW Then
             If frmC01F10_Login.loginValue.Language = "ENG" Then
                 LblMode.Text = "NewOrderRegistrationMode"
             Else
@@ -137,7 +137,7 @@ Public Class QuoteList
 
             BtnPurchase.Visible = True
             BtnPurchase.Location = New Point(997, 509)
-        ElseIf _status = "ORDER_PURCHASE" Then
+        ElseIf _status = CommonConst.STATUS_ORDER_PURCHASE Then
             If frmC01F10_Login.loginValue.Language = "ENG" Then
                 LblMode.Text = "JobOrderingAndPurchasingMode"
             Else
@@ -291,11 +291,11 @@ Public Class QuoteList
             '受注済みの見積は取消できない
             '受注済みの見積は仕入単価入力もできない
             '受発注登録の時も受注済みは表示しない
-            If _status = "CANCEL" Or _status = "PRICE" Or _status = "ORDER_NEW" Then
+            If _status = CommonConst.STATUS_CANCEL Or _status = CommonConst.STATUS_PRICE Or _status = CommonConst.STATUS_ORDER_NEW Then
                 strWhere += " and 受注日 is null"
             End If
             '受発注登録の時は有効期限切れは表示しない
-            If _status = "ORDER_NEW" Then
+            If _status = CommonConst.STATUS_ORDER_NEW Then
                 strWhere += " and 見積有効期限 >= current_date"
             End If
 
@@ -509,11 +509,11 @@ Public Class QuoteList
             '受注済みの見積は取消できない
             '受注済みの見積は仕入単価入力もできない
             '受発注登録の時も受注済みは表示しない
-            If _status = "CANCEL" Or _status = "PRICE" Or _status = "ORDER_NEW" Then
+            If _status = CommonConst.STATUS_CANCEL Or _status = CommonConst.STATUS_PRICE Or _status = CommonConst.STATUS_ORDER_NEW Then
                 strWhere += " and t01.受注日 is null"
             End If
             '受発注登録の時は有効期限切れは表示しない
-            If _status = "ORDER_NEW" Then
+            If _status = CommonConst.STATUS_ORDER_NEW Then
                 strWhere += " and t01.見積有効期限 <= current_date"
             End If
 
@@ -602,7 +602,7 @@ Public Class QuoteList
     End Sub
 
     Private Sub BtnQuoteAdd_Click(sender As Object, e As EventArgs) Handles BtnQuoteAdd.Click
-        Dim Status As String = "ADD"
+        Dim Status As String = CommonConst.STATUS_ADD
         Dim openForm As Form = Nothing
         openForm = New Quote(_msgHd, _db, _langHd, Me, , Status)
         Me.Hide()
@@ -645,7 +645,7 @@ Public Class QuoteList
         RowIdx = Me.DgvMithd.CurrentCell.RowIndex
         Dim No As String = DgvMithd.Rows(RowIdx).Cells(0).Value
         Dim Suffix As String = DgvMithd.Rows(RowIdx).Cells(1).Value
-        Dim Status As String = "CLONE"
+        Dim Status As String = CommonConst.STATUS_CLONE
         Dim openForm As Form = Nothing
         openForm = New Quote(_msgHd, _db, _langHd, Me, No, Suffix, Status)   '処理選択
         Me.Enabled = False
@@ -666,7 +666,7 @@ Public Class QuoteList
             RowIdx = Me.DgvMithd.CurrentCell.RowIndex
             Dim No As String = DgvMithd.Rows(RowIdx).Cells(0).Value
             Dim Suffix As String = DgvMithd.Rows(RowIdx).Cells(1).Value
-            Dim Status As String = "VIEW"
+            Dim Status As String = CommonConst.STATUS_VIEW
             Dim openForm As Form = Nothing
             openForm = New Quote(_msgHd, _db, _langHd, Me, No, Suffix, Status)   '処理選択
             Me.Enabled = False
@@ -691,7 +691,7 @@ Public Class QuoteList
             RowIdx = Me.DgvMithd.CurrentCell.RowIndex
             Dim No As String = DgvMithd.Rows(RowIdx).Cells(0).Value
             Dim Suffix As String = DgvMithd.Rows(RowIdx).Cells(1).Value
-            Dim Status As String = "PRICE"
+            Dim Status As String = CommonConst.STATUS_PRICE
             Dim openForm As Form = Nothing
             openForm = New Quote(_msgHd, _db, _langHd, Me, No, Suffix, Status)   '処理選択
             Me.Enabled = False
@@ -778,7 +778,7 @@ Public Class QuoteList
         RowIdx = DgvMithd.CurrentCell.RowIndex
         Dim No As String = DgvMithd.Rows(RowIdx).Cells(0).Value
         Dim Suffix As String = DgvMithd.Rows(RowIdx).Cells(1).Value
-        Dim Status As String = "ADD"
+        Dim Status As String = CommonConst.STATUS_ADD
         Dim openForm As Form = Nothing
         openForm = New Order(_msgHd, _db, _langHd, Me, No, Suffix, Status)   '処理選択
         openForm.Show(Me)

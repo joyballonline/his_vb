@@ -79,7 +79,7 @@ Public Class PurchasingManagement
     End Sub
 
     Private Sub PurchaseManagement_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If Status = "VIEW" Then
+        If Status = CommonConst.STATUS_VIEW Then
             If frmC01F10_Login.loginValue.Language = "ENG" Then
                 LblMode.Text = "ViewMode"
             Else
@@ -1217,7 +1217,7 @@ Public Class PurchasingManagement
 
 
             Dim openForm As Form = Nothing
-            Dim Status As String = "ORDING"
+            Dim Status As String = CommonConst.STATUS_ORDING
             openForm = New OrderingList(_msgHd, _db, _langHd, Status)
             openForm.Show()
             Me.Close()

@@ -297,4 +297,20 @@ Public Class CommonConst
     Public Const FIXED_KEY_TRADE_TERMS As String = "5"          '貿易条件
     Public Const FIXED_KEY_PURCHASING_CLASS As String = "1002"       '仕入区分
 
+    'メニュー ステータス
+    Public Const STATUS_ADD As String = "ADD"          '登録モード
+    Public Const STATUS_PRICE As String = "PRICE"          '仕入単価入力
+    Public Const STATUS_EDIT As String = "EDIT"          '修正モード
+    Public Const STATUS_CLONE As String = "CLONE"          '複写モード
+    Public Const STATUS_VIEW As String = "VIEW"          '参照モード
+    Public Const STATUS_CANCEL As String = "CANCEL"          '取消モード
+    Public Const STATUS_ORDER_PURCHASE As String = "ORDER_PURCHASE"          '受発注登録モード
+    Public Const STATUS_ORDER_NEW As String = "ORDER_NEW"          '受注登録モード
+    Public Const STATUS_SALES As String = "SALES"          '売上登録・編集モード
+    Public Const STATUS_GOODS_ISSUE As String = "GOODS_ISSUE"          '出庫登録・編集モード
+    Public Const STATUS_ORDING As String = "ORDING"          '仕入登録・編集モード
+    Public Const STATUS_RECEIPT As String = "RECEIPT"          '入庫登録・編集モード
+    Public Const STATUS_BILL As String = "BILL"          '請求登録・編集モード
+    Public Const STATUS_AP As String = "AP"          '売掛登録・編集モード
+
 End Class

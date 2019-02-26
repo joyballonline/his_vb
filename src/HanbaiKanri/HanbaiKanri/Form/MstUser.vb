@@ -135,7 +135,7 @@ Public Class MstUser
 
     Private Sub btn_userAdd_Click(sender As Object, e As EventArgs) Handles BtnAdd.Click
         Dim openForm As Form = Nothing
-        Dim Status As String = "ADD"
+        Dim Status As String = CommonConst.STATUS_ADD
         openForm = New User(_msgHd, _db, _langHd, Status)   '処理選択
         openForm.Show()
         Me.Hide()   ' 自分は隠れる
@@ -143,7 +143,7 @@ Public Class MstUser
 
     Private Sub btn_selectedRow_Click(sender As Object, e As EventArgs) Handles BtnEdit.Click
         Dim openForm As Form = Nothing
-        Dim Status As String = "EDIT"
+        Dim Status As String = CommonConst.STATUS_EDIT
         Dim CompanyCode As String = Dgv_User.Rows(Dgv_User.CurrentCell.RowIndex).Cells("会社コード").Value
         Dim UserId As String = Dgv_User.Rows(Dgv_User.CurrentCell.RowIndex).Cells("ユーザID").Value
         openForm = New User(_msgHd, _db, _langHd, Status, CompanyCode, UserId)   '処理選択

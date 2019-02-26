@@ -80,7 +80,7 @@ Public Class Account
         Try
             Dim Sql As String = ""
 
-            If _status = "ADD" Then
+            If _status = CommonConst.STATUS_ADD Then
 
                 Sql = "INSERT INTO "
                 Sql += "Public."
@@ -200,7 +200,7 @@ Public Class Account
             btnBack.Text = "Back"
         End If
 
-        If _status = "EDIT" Then
+        If _status = CommonConst.STATUS_EDIT Then
 
             Dim Sql As String = ""
 

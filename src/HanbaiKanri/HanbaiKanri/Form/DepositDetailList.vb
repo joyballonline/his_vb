@@ -76,14 +76,14 @@ Public Class DepositDetailList
 
     '画面表示時
     Private Sub DepositDetailList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If _status = "VIEW" Then
+        If _status = CommonConst.STATUS_VIEW Then
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "ViewMode"
             Else
                 LblMode.Text = "参照モード"
             End If
 
-        ElseIf _status = "CANCEL" Then
+        ElseIf _status = CommonConst.STATUS_CANCEL Then
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "CancelMode"
             Else
@@ -190,7 +190,7 @@ Public Class DepositDetailList
                 ds = getDsData("t27_nkinkshihd", Sql)
 
                 If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-                    DgvBilling.Columns.Add("取消", "Cancel")
+                    DgvBilling.Columns.Add("取消", CommonConst.STATUS_CANCEL)
                     DgvBilling.Columns.Add("入金番号", "MoneyReceiptNumber")
                     DgvBilling.Columns.Add("請求番号", "BillingNumber")
                     DgvBilling.Columns.Add("入金日", "MoneyReceiptDate")

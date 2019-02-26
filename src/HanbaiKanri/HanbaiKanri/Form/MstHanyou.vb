@@ -104,7 +104,7 @@ Public Class MstHanyou
     '編集ボタン押下時
     Private Sub BtnEdit_Click(sender As Object, e As EventArgs) Handles BtnEdit.Click
         Dim openForm As Form = Nothing
-        Dim Status As String = "EDIT"
+        Dim Status As String = CommonConst.STATUS_EDIT
         Dim Code As String = frmC01F10_Login.loginValue.BumonCD
         Dim Key1 As String = Dgv_Hanyo.Rows(Dgv_Hanyo.CurrentCell.RowIndex).Cells("固定キー").Value
         Dim Key2 As String = Dgv_Hanyo.Rows(Dgv_Hanyo.CurrentCell.RowIndex).Cells("可変キー").Value
@@ -125,7 +125,7 @@ Public Class MstHanyou
     '追加ボタン押下時
     Private Sub BtnAdd_Click(sender As Object, e As EventArgs) Handles BtnAdd.Click
         Dim openForm As Form = Nothing
-        Dim Status As String = "ADD"
+        Dim Status As String = CommonConst.STATUS_ADD
         openForm = New Hanyo(_msgHd, _db, _langHd, Status)   '処理選択
         openForm.Show()
         Me.Hide()   ' 自分は隠れる

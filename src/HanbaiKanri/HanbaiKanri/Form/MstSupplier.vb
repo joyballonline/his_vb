@@ -167,7 +167,7 @@ Public Class MstSupplier
 
     Private Sub btnSupplierAdd_Click(sender As Object, e As EventArgs) Handles btnSupplierAdd.Click
         Dim openForm As Form = Nothing
-        Dim Status As String = "ADD"
+        Dim Status As String = CommonConst.STATUS_ADD
 
         openForm = New Supplier(_msgHd, _db, _langHd, Status)   '処理選択
         openForm.Show()
@@ -176,7 +176,7 @@ Public Class MstSupplier
 
     Private Sub btnSupplierEdit_Click(sender As Object, e As EventArgs) Handles btnSupplierEdit.Click
         Dim openForm As Form = Nothing
-        Dim Status As String = "EDIT"
+        Dim Status As String = CommonConst.STATUS_EDIT
         Dim CompanyCode As String = Dgv_Supplier.Rows(Dgv_Supplier.CurrentCell.RowIndex).Cells("会社コード").Value
         Dim SupplierCode As String = Dgv_Supplier.Rows(Dgv_Supplier.CurrentCell.RowIndex).Cells("仕入先コード").Value
         openForm = New Supplier(_msgHd, _db, _langHd, Status, CompanyCode, SupplierCode)   '処理選択

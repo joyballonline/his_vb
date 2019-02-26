@@ -252,7 +252,7 @@ Public Class GoodsIssueList
     End Sub
 
     Private Sub MstHanyoue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If GoodsIssueStatus = "CANCEL" Then
+        If GoodsIssueStatus = CommonConst.STATUS_CANCEL Then
             If frmC01F10_Login.loginValue.Language = "ENG" Then
                 LblMode.Text = "CancelMode"
             Else
@@ -261,7 +261,7 @@ Public Class GoodsIssueList
 
             BtnGoodsIssueCancel.Visible = True
             BtnGoodsIssueCancel.Location = New Point(997, 509)
-        ElseIf GoodsIssueStatus = "VIEW" Then
+        ElseIf GoodsIssueStatus = CommonConst.STATUS_VIEW Then
             If frmC01F10_Login.loginValue.Language = "ENG" Then
                 LblMode.Text = "ViewMode"
             Else
@@ -966,7 +966,7 @@ Public Class GoodsIssueList
         RowIdx = Me.DgvCymnhd.CurrentCell.RowIndex
         Dim No As String = DgvCymnhd.Rows(RowIdx).Cells("受注番号").Value
         Dim Suffix As String = DgvCymnhd.Rows(RowIdx).Cells("受注番号枝番").Value
-        Dim Status As String = "VIEW"
+        Dim Status As String = CommonConst.STATUS_VIEW
 
         Dim openForm As Form = Nothing
         openForm = New GoodsIssue(_msgHd, _db, _langHd, No, Suffix, Status)   '処理選択

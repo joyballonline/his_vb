@@ -258,7 +258,7 @@ Public Class PurchaseList
         End If
     End Sub
     Private Sub MstHanyoue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If _status = "VIEW" Then
+        If _status = CommonConst.STATUS_VIEW Then
             If frmC01F10_Login.loginValue.Language = "ENG" Then
                 LblMode.Text = "ViewMode"
             Else
@@ -267,7 +267,7 @@ Public Class PurchaseList
 
             BtnPurchaseView.Visible = True
             BtnPurchaseView.Location = New Point(997, 509)
-        ElseIf _status = "CANCEL" Then
+        ElseIf _status = CommonConst.STATUS_CANCEL Then
             If frmC01F10_Login.loginValue.Language = "ENG" Then
                 LblMode.Text = "CancelMode"
             Else
@@ -874,7 +874,7 @@ Public Class PurchaseList
         RowIdx = Me.DgvHtyhd.CurrentCell.RowIndex
         Dim No As String = DgvHtyhd.Rows(RowIdx).Cells("発注番号").Value
         Dim Suffix As String = DgvHtyhd.Rows(RowIdx).Cells("発注番号枝番").Value
-        Dim Status As String = "VIEW"
+        Dim Status As String = CommonConst.STATUS_VIEW
         Dim openForm As Form = Nothing
         openForm = New PurchasingManagement(_msgHd, _db, _langHd, No, Suffix, Status)   '処理選択
         openForm.Show(Me)

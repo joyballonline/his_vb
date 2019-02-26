@@ -344,7 +344,7 @@ Public Class Ordering
 
 
         '参照モード
-        If PurchaseStatus = "VIEW" Then
+        If PurchaseStatus = CommonConst.STATUS_VIEW Then
 
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "ViewMode"
@@ -361,7 +361,7 @@ Public Class Ordering
             BtnPurchase.Location = New Point(1004, 509)
 
             '複写モード
-        ElseIf PurchaseStatus = "CLONE" Then
+        ElseIf PurchaseStatus = CommonConst.STATUS_CLONE Then
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "NewCopyMode"
             Else
@@ -390,7 +390,7 @@ Public Class Ordering
             '枝番は1
             TxtOrderingSuffix.Text = 1
 
-        ElseIf PurchaseStatus = "EDIT" Then
+        ElseIf PurchaseStatus = CommonConst.STATUS_EDIT Then
 
             LblMode.Text = "編集モード"
 
@@ -697,7 +697,7 @@ Public Class Ordering
     Private Sub TxtCustomerCode_DoubleClick(sender As Object, e As EventArgs) Handles TxtSupplierCode.DoubleClick
         Dim openForm As Form = Nothing
         Dim idx As Integer = 0
-        Dim Status As String = "CLONE"
+        Dim Status As String = CommonConst.STATUS_CLONE
         openForm = New SupplierSearch(_msgHd, _db, _langHd, idx, Me, Status)   '処理選択
         openForm.Show(Me)
         Me.Enabled = False
@@ -705,7 +705,7 @@ Public Class Ordering
 
     Private Sub TxtSales_DoubleClick(sender As Object, e As EventArgs) Handles TxtSales.DoubleClick
         Dim openForm As Form = Nothing
-        Dim Status As String = "CLONE"
+        Dim Status As String = CommonConst.STATUS_CLONE
         openForm = New SalesSearch(_msgHd, _db, _langHd, Me, Status)   '処理選択
         openForm.Show(Me)
         Me.Enabled = False
@@ -713,7 +713,7 @@ Public Class Ordering
 
     Private Sub DgvItemList_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) _
      Handles DgvItemList.CellDoubleClick
-        Dim Status As String = "CLONE"
+        Dim Status As String = CommonConst.STATUS_CLONE
         Dim ColIdx As Integer
         ColIdx = DgvItemList.CurrentCell.ColumnIndex
         Dim RowIdx As Integer
@@ -779,7 +779,7 @@ Public Class Ordering
 
         Try
             '複写か編集の時
-            If PurchaseStatus = "CLONE" Or PurchaseStatus = "EDIT" Then
+            If PurchaseStatus = CommonConst.STATUS_CLONE Or PurchaseStatus = CommonConst.STATUS_EDIT Then
                 Sql = "INSERT INTO "
                 Sql += "Public."
                 Sql += "t20_hattyu("

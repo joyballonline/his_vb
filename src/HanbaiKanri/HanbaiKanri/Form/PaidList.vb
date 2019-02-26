@@ -76,7 +76,7 @@ Public Class PaidList
 
     '画面表示時
     Private Sub PaidList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If _status = "CANCEL" Then
+        If _status = CommonConst.STATUS_CANCEL Then
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "CancelMode"
             Else

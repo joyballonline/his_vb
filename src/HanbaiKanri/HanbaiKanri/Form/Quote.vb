@@ -281,7 +281,7 @@ Public Class Quote
 
             Dim ds2 = _db.selectDB(Sql2, RS, reccnt)
             Dim SuffixMax As Integer = 0
-            If Status Is "CLONE" Then
+            If Status Is CommonConst.STATUS_CLONE Then
                 Dim Sql As String = ""
                 Sql += "SELECT "
                 Sql += "会社コード, "
@@ -322,7 +322,7 @@ Public Class Quote
 
             CompanyCode = ds1.Tables(RS).Rows(0)(0)
 
-            If Status IsNot "PRICE" Then
+            If Status IsNot CommonConst.STATUS_PRICE Then
                 TxtSuffixNo.Text = SuffixMax + 1
             Else
                 TxtSuffixNo.Text = ds1.Tables(RS).Rows(0)("見積番号枝番")
@@ -456,7 +456,7 @@ Public Class Quote
             SaibanSave()
         End If
 
-        If Status Is "VIEW" Then
+        If Status Is CommonConst.STATUS_VIEW Then
             If frmC01F10_Login.loginValue.Language = "ENG" Then
                 LblMode.Text = "ViewMode"
             Else
@@ -498,7 +498,7 @@ Public Class Quote
                 BtnQuote.Location = New Point(1004, 509)
             End If
 
-        ElseIf Status Is "PRICE" Then
+        ElseIf Status Is CommonConst.STATUS_PRICE Then
             '仕入単価入力モード
             If frmC01F10_Login.loginValue.Language = "ENG" Then
                 LblMode.Text = "PurchasePriceInputMode"
@@ -523,14 +523,14 @@ Public Class Quote
             DgvItemList.Columns("仕入先コード").ReadOnly = True
             DgvItemList.Columns("仕入先").ReadOnly = True
 
-        ElseIf Status Is "EDIT" Then
+        ElseIf Status Is CommonConst.STATUS_EDIT Then
             If frmC01F10_Login.loginValue.Language = "ENG" Then
                 LblMode.Text = "EditMode"
             Else
                 LblMode.Text = "編集モード"
             End If
 
-        ElseIf Status Is "ADD" Then
+        ElseIf Status Is CommonConst.STATUS_ADD Then
             If frmC01F10_Login.loginValue.Language = "ENG" Then
                 LblMode.Text = "NewRegistrationMode"
             Else
@@ -960,7 +960,7 @@ Public Class Quote
     Private Sub DgvItemList_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) _
      Handles DgvItemList.CellDoubleClick
         '仕入単価入力時は各項目変更しないので検索も起動しない
-        If Status Is "PRICE" Then
+        If Status Is CommonConst.STATUS_PRICE Then
             Exit Sub
         End If
 
@@ -1145,7 +1145,7 @@ Public Class Quote
 
 
         Dim dtToday As DateTime = DateTime.Now
-        If Status Is "PRICE" Then
+        If Status Is CommonConst.STATUS_PRICE Then
             Try
                 Dim Sql1 As String = ""
                 Sql1 = ""
