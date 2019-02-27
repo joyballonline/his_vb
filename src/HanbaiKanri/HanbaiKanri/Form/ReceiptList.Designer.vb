@@ -28,14 +28,12 @@ Partial Class ReceiptList
         Me.RbtnDetails = New System.Windows.Forms.RadioButton()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.TxtReceiptNo2 = New System.Windows.Forms.TextBox()
-        Me.TxtReceiptDate2 = New System.Windows.Forms.TextBox()
+        Me.TxtReceiptUntil = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.TxtSales = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.TxtReceiptNo1 = New System.Windows.Forms.TextBox()
+        Me.TxtReceiptSince = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.TxtReceiptDate1 = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.TxtSupplierCode = New System.Windows.Forms.TextBox()
@@ -46,14 +44,16 @@ Partial Class ReceiptList
         Me.Label1 = New System.Windows.Forms.Label()
         Me.LblConditions = New System.Windows.Forms.Label()
         Me.TxtSupplierName = New System.Windows.Forms.TextBox()
-        Me.BtnOrderSearch = New System.Windows.Forms.Button()
+        Me.BtnSearch = New System.Windows.Forms.Button()
         Me.BtnBack = New System.Windows.Forms.Button()
         Me.BtnReceiptCancel = New System.Windows.Forms.Button()
-        Me.DgvCymnhd = New System.Windows.Forms.DataGridView()
+        Me.DgvNyuko = New System.Windows.Forms.DataGridView()
         Me.LblMode = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.TxtCustomerPO = New System.Windows.Forms.TextBox()
-        CType(Me.DgvCymnhd, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.dtReceiptDateSince = New System.Windows.Forms.DateTimePicker()
+        Me.dtReceiptDateUntil = New System.Windows.Forms.DateTimePicker()
+        CType(Me.DgvNyuko, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'ChkCancelData
@@ -117,25 +117,17 @@ Partial Class ReceiptList
         Me.Label5.AutoSize = True
         Me.Label5.Location = New System.Drawing.Point(936, 46)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(19, 13)
+        Me.Label5.Size = New System.Drawing.Size(17, 12)
         Me.Label5.TabIndex = 144
         Me.Label5.Text = "～"
         '
-        'TxtReceiptNo2
+        'TxtReceiptUntil
         '
-        Me.TxtReceiptNo2.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtReceiptNo2.Location = New System.Drawing.Point(959, 68)
-        Me.TxtReceiptNo2.Name = "TxtReceiptNo2"
-        Me.TxtReceiptNo2.Size = New System.Drawing.Size(170, 22)
-        Me.TxtReceiptNo2.TabIndex = 8
-        '
-        'TxtReceiptDate2
-        '
-        Me.TxtReceiptDate2.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtReceiptDate2.Location = New System.Drawing.Point(959, 40)
-        Me.TxtReceiptDate2.Name = "TxtReceiptDate2"
-        Me.TxtReceiptDate2.Size = New System.Drawing.Size(170, 22)
-        Me.TxtReceiptDate2.TabIndex = 6
+        Me.TxtReceiptUntil.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtReceiptUntil.Location = New System.Drawing.Point(959, 68)
+        Me.TxtReceiptUntil.Name = "TxtReceiptUntil"
+        Me.TxtReceiptUntil.Size = New System.Drawing.Size(170, 22)
+        Me.TxtReceiptUntil.TabIndex = 8
         '
         'Label6
         '
@@ -169,13 +161,13 @@ Partial Class ReceiptList
         Me.Label7.Text = "入庫番号"
         Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'TxtReceiptNo1
+        'TxtReceiptSince
         '
-        Me.TxtReceiptNo1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtReceiptNo1.Location = New System.Drawing.Point(760, 67)
-        Me.TxtReceiptNo1.Name = "TxtReceiptNo1"
-        Me.TxtReceiptNo1.Size = New System.Drawing.Size(170, 22)
-        Me.TxtReceiptNo1.TabIndex = 7
+        Me.TxtReceiptSince.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtReceiptSince.Location = New System.Drawing.Point(760, 67)
+        Me.TxtReceiptSince.Name = "TxtReceiptSince"
+        Me.TxtReceiptSince.Size = New System.Drawing.Size(170, 22)
+        Me.TxtReceiptSince.TabIndex = 7
         '
         'Label8
         '
@@ -188,14 +180,6 @@ Partial Class ReceiptList
         Me.Label8.TabIndex = 137
         Me.Label8.Text = "入庫日"
         Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'TxtReceiptDate1
-        '
-        Me.TxtReceiptDate1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtReceiptDate1.Location = New System.Drawing.Point(760, 40)
-        Me.TxtReceiptDate1.Name = "TxtReceiptDate1"
-        Me.TxtReceiptDate1.Size = New System.Drawing.Size(170, 22)
-        Me.TxtReceiptDate1.TabIndex = 5
         '
         'Label4
         '
@@ -214,7 +198,7 @@ Partial Class ReceiptList
         Me.Label9.AutoSize = True
         Me.Label9.Location = New System.Drawing.Point(936, 74)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(19, 13)
+        Me.Label9.Size = New System.Drawing.Size(17, 12)
         Me.Label9.TabIndex = 145
         Me.Label9.Text = "～"
         '
@@ -296,15 +280,15 @@ Partial Class ReceiptList
         Me.TxtSupplierName.Size = New System.Drawing.Size(350, 22)
         Me.TxtSupplierName.TabIndex = 1
         '
-        'BtnOrderSearch
+        'BtnSearch
         '
-        Me.BtnOrderSearch.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.BtnOrderSearch.Location = New System.Drawing.Point(1174, 41)
-        Me.BtnOrderSearch.Name = "BtnOrderSearch"
-        Me.BtnOrderSearch.Size = New System.Drawing.Size(165, 40)
-        Me.BtnOrderSearch.TabIndex = 11
-        Me.BtnOrderSearch.Text = "検索"
-        Me.BtnOrderSearch.UseVisualStyleBackColor = True
+        Me.BtnSearch.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.BtnSearch.Location = New System.Drawing.Point(1174, 41)
+        Me.BtnSearch.Name = "BtnSearch"
+        Me.BtnSearch.Size = New System.Drawing.Size(165, 40)
+        Me.BtnSearch.TabIndex = 11
+        Me.BtnSearch.Text = "検索"
+        Me.BtnSearch.UseVisualStyleBackColor = True
         '
         'BtnBack
         '
@@ -327,18 +311,18 @@ Partial Class ReceiptList
         Me.BtnReceiptCancel.UseVisualStyleBackColor = True
         Me.BtnReceiptCancel.Visible = False
         '
-        'DgvCymnhd
+        'DgvNyuko
         '
-        Me.DgvCymnhd.AllowUserToAddRows = False
-        Me.DgvCymnhd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvCymnhd.Location = New System.Drawing.Point(13, 236)
-        Me.DgvCymnhd.Name = "DgvCymnhd"
-        Me.DgvCymnhd.ReadOnly = True
-        Me.DgvCymnhd.RowHeadersVisible = False
-        Me.DgvCymnhd.RowTemplate.Height = 21
-        Me.DgvCymnhd.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvCymnhd.Size = New System.Drawing.Size(1326, 267)
-        Me.DgvCymnhd.TabIndex = 15
+        Me.DgvNyuko.AllowUserToAddRows = False
+        Me.DgvNyuko.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DgvNyuko.Location = New System.Drawing.Point(13, 236)
+        Me.DgvNyuko.Name = "DgvNyuko"
+        Me.DgvNyuko.ReadOnly = True
+        Me.DgvNyuko.RowHeadersVisible = False
+        Me.DgvNyuko.RowTemplate.Height = 21
+        Me.DgvNyuko.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.DgvNyuko.Size = New System.Drawing.Size(1326, 267)
+        Me.DgvNyuko.TabIndex = 15
         '
         'LblMode
         '
@@ -372,10 +356,38 @@ Partial Class ReceiptList
         Me.TxtCustomerPO.Size = New System.Drawing.Size(170, 22)
         Me.TxtCustomerPO.TabIndex = 10
         '
+        'dtReceiptDateSince
+        '
+        Me.dtReceiptDateSince.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.dtReceiptDateSince.CustomFormat = ""
+        Me.dtReceiptDateSince.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.dtReceiptDateSince.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtReceiptDateSince.Location = New System.Drawing.Point(760, 39)
+        Me.dtReceiptDateSince.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
+        Me.dtReceiptDateSince.Name = "dtReceiptDateSince"
+        Me.dtReceiptDateSince.Size = New System.Drawing.Size(170, 22)
+        Me.dtReceiptDateSince.TabIndex = 332
+        Me.dtReceiptDateSince.Value = New Date(2019, 1, 1, 0, 0, 0, 0)
+        '
+        'dtReceiptDateUntil
+        '
+        Me.dtReceiptDateUntil.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.dtReceiptDateUntil.CustomFormat = ""
+        Me.dtReceiptDateUntil.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.dtReceiptDateUntil.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtReceiptDateUntil.Location = New System.Drawing.Point(959, 40)
+        Me.dtReceiptDateUntil.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
+        Me.dtReceiptDateUntil.Name = "dtReceiptDateUntil"
+        Me.dtReceiptDateUntil.Size = New System.Drawing.Size(170, 22)
+        Me.dtReceiptDateUntil.TabIndex = 333
+        Me.dtReceiptDateUntil.Value = New Date(2019, 1, 1, 0, 0, 0, 0)
+        '
         'ReceiptList
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.dtReceiptDateUntil)
+        Me.Controls.Add(Me.dtReceiptDateSince)
         Me.Controls.Add(Me.RbtnDetails)
         Me.Controls.Add(Me.RbtnSlip)
         Me.Controls.Add(Me.Label11)
@@ -385,14 +397,12 @@ Partial Class ReceiptList
         Me.Controls.Add(Me.BtnReceiptView)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.TxtReceiptNo2)
-        Me.Controls.Add(Me.TxtReceiptDate2)
+        Me.Controls.Add(Me.TxtReceiptUntil)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.TxtSales)
         Me.Controls.Add(Me.Label7)
-        Me.Controls.Add(Me.TxtReceiptNo1)
+        Me.Controls.Add(Me.TxtReceiptSince)
         Me.Controls.Add(Me.Label8)
-        Me.Controls.Add(Me.TxtReceiptDate1)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.TxtSupplierCode)
@@ -403,14 +413,14 @@ Partial Class ReceiptList
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.LblConditions)
         Me.Controls.Add(Me.TxtSupplierName)
-        Me.Controls.Add(Me.BtnOrderSearch)
+        Me.Controls.Add(Me.BtnSearch)
         Me.Controls.Add(Me.BtnBack)
         Me.Controls.Add(Me.BtnReceiptCancel)
-        Me.Controls.Add(Me.DgvCymnhd)
+        Me.Controls.Add(Me.DgvNyuko)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "ReceiptList"
         Me.Text = "ReceiptList"
-        CType(Me.DgvCymnhd, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DgvNyuko, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -422,14 +432,12 @@ Partial Class ReceiptList
     Friend WithEvents RbtnDetails As RadioButton
     Friend WithEvents Label10 As Label
     Friend WithEvents Label5 As Label
-    Friend WithEvents TxtReceiptNo2 As TextBox
-    Friend WithEvents TxtReceiptDate2 As TextBox
+    Friend WithEvents TxtReceiptUntil As TextBox
     Friend WithEvents Label6 As Label
     Friend WithEvents TxtSales As TextBox
     Friend WithEvents Label7 As Label
-    Friend WithEvents TxtReceiptNo1 As TextBox
+    Friend WithEvents TxtReceiptSince As TextBox
     Friend WithEvents Label8 As Label
-    Friend WithEvents TxtReceiptDate1 As TextBox
     Friend WithEvents Label4 As Label
     Friend WithEvents Label9 As Label
     Friend WithEvents TxtSupplierCode As TextBox
@@ -440,11 +448,13 @@ Partial Class ReceiptList
     Friend WithEvents Label1 As Label
     Friend WithEvents LblConditions As Label
     Friend WithEvents TxtSupplierName As TextBox
-    Friend WithEvents BtnOrderSearch As Button
+    Friend WithEvents BtnSearch As Button
     Friend WithEvents BtnBack As Button
     Friend WithEvents BtnReceiptCancel As Button
-    Friend WithEvents DgvCymnhd As DataGridView
+    Friend WithEvents DgvNyuko As DataGridView
     Friend WithEvents LblMode As Label
     Friend WithEvents Label11 As Label
     Friend WithEvents TxtCustomerPO As TextBox
+    Friend WithEvents dtReceiptDateSince As DateTimePicker
+    Friend WithEvents dtReceiptDateUntil As DateTimePicker
 End Class

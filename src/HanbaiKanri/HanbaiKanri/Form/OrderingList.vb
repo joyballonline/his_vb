@@ -601,10 +601,8 @@ Public Class OrderingList
             Sql += "t20_hattyu "
             Sql += "SET "
 
-            Sql += "取消区分"
-            Sql += " = '"
-            Sql += "1"
-            Sql += "', "
+            Sql += "取消区分 = " & CommonConst.CANCEL_KBN_DISABLED
+            Sql += ", "
             Sql += "取消日"
             Sql += " = '"
             Sql += dtNow
