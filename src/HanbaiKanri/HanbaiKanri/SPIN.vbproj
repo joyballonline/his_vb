@@ -394,6 +394,12 @@
     <Compile Include="Form\RemarksInput.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form\SalesProfitList.Designer.vb">
+      <DependentUpon>SalesProfitList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\SalesProfitList.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\SalesList.Designer.vb">
       <DependentUpon>SalesList.vb</DependentUpon>
     </Compile>
@@ -603,6 +609,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\RemarksInput.resx">
       <DependentUpon>RemarksInput.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\SalesProfitList.resx">
+      <DependentUpon>SalesProfitList.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\SalesList.resx">
       <DependentUpon>SalesList.vb</DependentUpon>

@@ -155,6 +155,7 @@ Public Class CommonConst
     Public Const MENU_H0320 As String = "H0320"           '売上編集
     Public Const MENU_H0330 As String = "H0330"           '売上取消
     Public Const MENU_H0340 As String = "H0340"           '売上参照
+    Public Const MENU_H0350 As String = "H0350"           '売上利益一覧
 
     Public Const MENU_H0410 As String = "H0410"           '出庫登録
     Public Const MENU_H0420 As String = "H0420"           '出庫編集
@@ -312,5 +313,8 @@ Public Class CommonConst
     Public Const STATUS_RECEIPT As String = "RECEIPT"          '入庫登録・編集モード
     Public Const STATUS_BILL As String = "BILL"          '請求登録・編集モード
     Public Const STATUS_AP As String = "AP"          '売掛登録・編集モード
+
+    '検索時のスタート初期値（年）
+    Public Const SINCE_DEFAULT_YEAR As Integer = 2019                          '二週間
 
 End Class

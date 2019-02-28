@@ -178,8 +178,6 @@ Public Class OrderRemainingList
         Dim book As Excel.Workbook = Nothing
         Dim sheet As Excel.Worksheet = Nothing
 
-
-
         Try
             '雛形パス
             Dim sHinaPath As String = StartUp._iniVal.BaseXlsPath
