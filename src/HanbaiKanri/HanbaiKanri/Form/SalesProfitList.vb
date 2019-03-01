@@ -78,39 +78,33 @@ Public Class SalesProfitList
     Private Sub SalesProfitList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-            LblConditions.Text = "TermsOfSelection"
-            Label8.Text = "SalesDate"
-            LblConditions.Text = "TermsOfSelection"
-            BtnExcelOutput.Text = "SalesDataView"
-            BtnBack.Text = "Back"
         End If
 
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
 
-            DgvList.Columns.Add("売上番号", "SalesNumber")
-            DgvList.Columns.Add("売上番号枝番", "SalesSubNumber")
-            DgvList.Columns.Add("客先番号", "CustomerNumber")
-            DgvList.Columns.Add("売上日", "SalesDate")
-            DgvList.Columns.Add("受注番号", "OrderNumber")
-            DgvList.Columns.Add("受注番号枝番", "JobOrderSubNumber")
-            DgvList.Columns.Add("受注日", "JobOrderDate")
-            DgvList.Columns.Add("得意先コード", "CustomerCode")
-            DgvList.Columns.Add("得意先名", "CustomerName")
-            DgvList.Columns.Add("得意先郵便番号", "PostalCode")
-            DgvList.Columns.Add("得意先住所", "Address")
-            DgvList.Columns.Add("得意先電話番号", "PhoneNumber")
-            DgvList.Columns.Add("得意先ＦＡＸ", "FAX")
-            DgvList.Columns.Add("得意先担当者名", "NameOfPIC")
-            DgvList.Columns.Add("得意先担当者役職", "PositionPICCustomer")
-            DgvList.Columns.Add("ＶＡＴ", "ＶＡＴ")
-            DgvList.Columns.Add("受注金額", "OrderAmount")
-            DgvList.Columns.Add("売上金額", "SalesAmount")
-            DgvList.Columns.Add("粗利額", "GrossMargin")
-            DgvList.Columns.Add("支払条件", "PeymentTerms")
-            DgvList.Columns.Add("営業担当者", "SalesPersonInCharge")
-            DgvList.Columns.Add("入力担当者", "PICForInputting")
-            DgvList.Columns.Add("備考", "Remarks")
-            DgvList.Columns.Add("登録日", "RegistrationDate")
+            DgvList.Columns("売上番号").HeaderText = "SalesNumber"
+            DgvList.Columns("売上日").HeaderText = "SalesDate"
+            DgvList.Columns("得意先名").HeaderText = "CustomerName"
+            DgvList.Columns("売上計").HeaderText = "SalesAmount"
+            DgvList.Columns("ＶＡＴ").HeaderText = "ＶＡＴ"
+            DgvList.Columns("売上金額計").HeaderText = "SalesAmount+ＶＡＴ"
+            DgvList.Columns("間接費").HeaderText = "Overhead"
+            DgvList.Columns("売上原価計").HeaderText = "SalesCost"
+            DgvList.Columns("粗利").HeaderText = "GrossMargin"
+            DgvList.Columns("粗利率").HeaderText = "GrossMarginRate"
+
+
+            Label8.Text = "SalesDate"
+            BtnExcelOutput.Text = "SalesDataView"
+            BtnBack.Text = "Back"
+            LblMonth.Text = "Month"
+            LblYear.Text = "Year"
+
+            LblSalesAmount.Text = "SalesAmount"
+            LblTotalSalesAmount.Text = "TotalSalesAmount"
+            LblSalesCostAmount.Text = "SalesCost"
+            LblGrossMargin.Text = "GrossMargin"
+            LblGrossMarginRate.Text = "GrossMarginRate"
 
         End If
 
@@ -145,8 +139,8 @@ Public Class SalesProfitList
 
 
 
-        Sql = "SELECT t30.売上番号,t30.売上日,t30.得意先名,t30.売上金額,t30.ＶＡＴ,t30.仕入金額,t30.粗利額"
-        Sql += " ,sum(t31.粗利率) as 粗利率,sum(t31.間接費) as 間接費"
+        Sql = "SELECT t30.売上番号,t30.売上日,t30.得意先名,t30.売上金額,t30.ＶＡＴ,t30.仕入金額,t30.粗利額, t31.受注数量, t31.仕入値"
+        Sql += " ,sum(t31.粗利率) as 粗利率,sum(t31.間接費) as 間接費, sum(t31.売上数量) as 売上数量, t31.売単価, t31.仕入原価, t31.関税率, t31.輸送費率, t31.前払法人税率, t31.関税額"
         Sql += " FROM  public.t30_urighd t30 "
         Sql += " INNER JOIN  t31_urigdt t31"
         Sql += " ON t30.会社コード = t31.会社コード"
@@ -154,62 +148,95 @@ Public Class SalesProfitList
 
         Sql += " WHERE t30.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql += " AND "
-        Sql += " t30.売上日 >= '" & uriDateSince & "'"
+        Sql += " t30.売上日 >= '" & strFormatDate(uriDateSince) & "'"
         Sql += " AND "
-        Sql += " t30.売上日 <= '" & uriDateUntil & "'"
+        Sql += " t30.売上日 <= '" & strFormatDate(uriDateUntil) & "'"
         Sql += " AND "
         Sql += "t30.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '取消区分=0
-        Sql += " GROUP BY t30.売上番号,t30.売上日,t30.得意先名,t30.売上金額,t30.ＶＡＴ,t30.仕入金額,t30.粗利額,粗利率,間接費,t30.更新日"
+        Sql += " GROUP BY t31.受注数量,t30.売上番号,t30.売上日,t30.得意先名,t30.売上金額,t30.ＶＡＴ,t30.仕入金額,t30.粗利額,粗利率,間接費,t30.更新日,売上数量, t31.仕入原価, t31.売単価, t31.関税率, t31.仕入値, t31.輸送費率, t31.前払法人税率, t31.関税額"
         Sql += " ORDER BY t30.更新日 DESC "
 
         Try
 
+            Dim totalSales As Decimal = 0
+            Dim totalSalesAmount As Decimal = 0
+            Dim salesUnitPrice As Decimal = 0
+            Dim totalArari As Decimal = 0
+            Dim totalArariRate As Decimal = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-            'Dim ds As DataSet = getDsData("t30_urighd", Sql)
 
             For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+                '売上計
+                Dim salesAmount As Decimal = ds.Tables(RS).Rows(i)("売上数量") * ds.Tables(RS).Rows(i)("売単価")
+                'VAT
+                Dim vatAmount As Decimal = Format((salesAmount * ds.Tables(RS).Rows(i)("ＶＡＴ")) / 100, "0.000")
+                '仕入原価
+                Dim sireGenka As Decimal = ds.Tables(RS).Rows(i)("仕入値") * ds.Tables(RS).Rows(i)("売上数量")
+
+                '関税額
+                Dim kanzeiGaku As Decimal = sireGenka * ds.Tables(RS).Rows(i)("関税率")
+                '前払法人税額
+                Dim maehoujinzeiGaku As Decimal = (sireGenka + kanzeiGaku) * ds.Tables(RS).Rows(i)("前払法人税率")
+                '輸送費額
+                Dim yusouhiGaku As Decimal = sireGenka * ds.Tables(RS).Rows(i)("輸送費率")
+
+                '間接費
+                Dim kansetuhi As Decimal = (kanzeiGaku + maehoujinzeiGaku + yusouhiGaku)
+
+                Dim sireKingaku As Decimal = sireGenka + kansetuhi
+                Dim arariAmount As Decimal = Math.Truncate(salesAmount + vatAmount - sireGenka)
+
+
                 DgvList.Rows.Add()
                 DgvList.Rows(i).Cells("売上番号").Value = ds.Tables(RS).Rows(i)("売上番号")
                 DgvList.Rows(i).Cells("売上日").Value = ds.Tables(RS).Rows(i)("売上日").ToShortDateString()
                 DgvList.Rows(i).Cells("得意先名").Value = ds.Tables(RS).Rows(i)("得意先名")
-                DgvList.Rows(i).Cells("売上計").Value = ds.Tables(RS).Rows(i)("売上金額")
-                DgvList.Rows(i).Cells("ＶＡＴ").Value = ds.Tables(RS).Rows(i)("ＶＡＴ")
-                DgvList.Rows(i).Cells("売上金額計").Value = ds.Tables(RS).Rows(i)("売上金額") + ds.Tables(RS).Rows(i)("ＶＡＴ")
-                DgvList.Rows(i).Cells("売上原価計").Value = ds.Tables(RS).Rows(i)("仕入金額")
-                DgvList.Rows(i).Cells("間接費").Value = ds.Tables(RS).Rows(i)("間接費")
-                DgvList.Rows(i).Cells("粗利").Value = Math.Truncate(ds.Tables(RS).Rows(i)("粗利額"))
-                DgvList.Rows(i).Cells("粗利率").Value = ToRoundDown((ds.Tables(RS).Rows(i)("粗利額") / ds.Tables(RS).Rows(i)("売上金額")) * 100, 2)
+                DgvList.Rows(i).Cells("売上計").Value = salesAmount
+                DgvList.Rows(i).Cells("ＶＡＴ").Value = vatAmount
+                DgvList.Rows(i).Cells("売上金額計").Value = salesAmount + vatAmount
+
+                DgvList.Rows(i).Cells("間接費").Value = Format((sireKingaku - sireGenka), "0.000")
+                DgvList.Rows(i).Cells("売上原価計").Value = Format(salesAmount + vatAmount - kansetuhi, "0.000")
+                DgvList.Rows(i).Cells("粗利").Value = arariAmount
+                DgvList.Rows(i).Cells("粗利率").Value = 1 - (ds.Tables(RS).Rows(i)("仕入値") / ds.Tables(RS).Rows(i)("売単価"))
+
+                totalSales += salesAmount
+                totalSalesAmount += salesAmount + vatAmount
+                salesUnitPrice += Format(salesAmount + vatAmount - kansetuhi, "0.000")
+                totalArari += arariAmount
             Next
-
-            TxtSalesAmount.Text = IIf(
-                ds.Tables(RS).Compute("SUM(売上金額)", Nothing) IsNot DBNull.Value,
-                ds.Tables(RS).Compute("SUM(売上金額)", Nothing),
-                0
-            )
-
-            If ds.Tables(RS).Compute("SUM(売上金額)", Nothing) IsNot DBNull.Value And ds.Tables(RS).Compute("SUM(ＶＡＴ)", Nothing) IsNot DBNull.Value Then
-                TxtTotalSalesAmount.Text = ds.Tables(RS).Compute("SUM(売上金額)", Nothing) + ds.Tables(RS).Compute("SUM(ＶＡＴ)", Nothing)
+            If totalArari <> 0 And totalSalesAmount <> 0 Then
+                totalArariRate = Format((totalArari / totalSalesAmount), "0.000")
             Else
-                TxtTotalSalesAmount.Text = 0
+                totalArariRate = 0
             End If
 
+            TxtSalesAmount.Text = IIf(
+                totalSales <> 0,
+                totalSales,
+                0
+            )
+            TxtTotalSalesAmount.Text = IIf(
+                totalSalesAmount <> 0,
+                totalSalesAmount,
+                0
+            )
             TxtSalesCostAmount.Text = IIf(
-                ds.Tables(RS).Compute("SUM(仕入金額)", Nothing) IsNot DBNull.Value,
-                ds.Tables(RS).Compute("SUM(仕入金額)", Nothing),
+                salesUnitPrice <> 0,
+                Format(salesUnitPrice, "0.000"),
                 0
             )
             TxtGrossMargin.Text = IIf(
-                ds.Tables(RS).Compute("SUM(粗利額)", Nothing) IsNot DBNull.Value,
-                ds.Tables(RS).Compute("SUM(粗利額)", Nothing),
+                totalArari <> 0,
+                totalArari,
                 0
             )
-
-            If ds.Tables(RS).Compute("SUM(粗利額)", Nothing) IsNot DBNull.Value And ds.Tables(RS).Compute("SUM(売上金額)", Nothing) IsNot DBNull.Value Then
-                TxtGrossMarginRate.Text = ToRoundDown((ds.Tables(RS).Compute("SUM(粗利額)", Nothing) / ds.Tables(RS).Compute("SUM(売上金額)", Nothing)) * 100, 2)
-            Else
-                TxtGrossMarginRate.Text = 0
-            End If
+            TxtGrossMarginRate.Text = IIf(
+                totalArariRate <> 0,
+                totalArariRate,
+                0
+            )
 
         Catch ue As UsrDefException
             ue.dspMsg()
@@ -416,11 +443,11 @@ Public Class SalesProfitList
             If combo.Name = "cmbYear" Then
                 Dim nowDate As Integer = Integer.Parse(dtToday.Year)
                 For i As Integer = CommonConst.SINCE_DEFAULT_YEAR To nowDate
-                    dic(i.ToString & "年") = i  '表示値 = 値
+                    dic(i.ToString) = i  '表示値 = 値
                 Next
             Else
                 For i As Integer = 1 To 12
-                    dic(i.ToString & "月") = i  '表示値 = 値
+                    dic(i.ToString) = i  '表示値 = 値
                 Next
             End If
         End If
