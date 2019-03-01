@@ -92,9 +92,9 @@ Public Class Quote
     Private Sub Quote_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         'DateTimePickerのフォーマットを指定
-        DtpRegistration.Text = DateAdd("m", 0, Now).ToString("yyyy/MM/dd")
-        DtpQuote.Text = DateAdd("m", 0, Now).ToString("yyyy/MM/dd")
-        DtpExpiration.Text = DateAdd("d", 7, Now).ToString("yyyy/MM/dd")
+        DtpRegistration.Text = DateTime.Today
+        DtpQuote.Text = DateTime.Today
+        DtpExpiration.Text = DateAdd("d", CommonConst.DEADLINE_DEFAULT_DAY, DateTime.Today)
 
         DgvItemList.Columns("No").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvItemList.Columns("数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -1145,6 +1145,8 @@ Public Class Quote
 
 
         Dim dtToday As DateTime = DateTime.Now
+        Dim strToday As String = formatDatetime(dtToday)
+
         If Status Is CommonConst.STATUS_PRICE Then
             Try
                 Dim Sql1 As String = ""
@@ -1159,9 +1161,9 @@ Public Class Quote
                 Sql1 += ",得意先ＦＡＸ = '" & TxtFax.Text & "' "
                 Sql1 += ",得意先担当者役職 = '" & TxtPosition.Text & "' "
                 Sql1 += ",得意先担当者名 = '" & TxtPerson.Text & "' "
-                Sql1 += ",見積日 = '" & DtpQuote.Text & "' "
+                Sql1 += ",見積日 = '" & strFormatDate(DtpQuote.Text) & "' "
                 Sql1 += ",見積有効期限 = '" & DtpExpiration.Text & "' "
-                Sql1 += ",支払条件 = '" & TxtPaymentTerms.Text & "' "
+                Sql1 += ",支払条件 = '" & strFormatDate(TxtPaymentTerms.Text) & "' "
                 Sql1 += ",見積金額 = " & TxtTotal.Text
                 Sql1 += ",仕入金額 = " & TxtPurchaseTotal.Text
                 Sql1 += ",粗利額 = " & TxtGrossProfit.Text
@@ -1171,8 +1173,8 @@ Public Class Quote
                 Sql1 += ",入力担当者 = '" & TxtInput.Text & "' "
                 Sql1 += ",備考 = '" & RevoveChars(TxtRemarks.Text) & "' "
                 Sql1 += ",ＶＡＴ = " & TxtVat.Text
-                Sql1 += ",登録日 = '" & DtpRegistration.Text & "' "
-                Sql1 += ",更新日 = '" & dtToday & "' "
+                Sql1 += ",登録日 = '" & strFormatDate(DtpRegistration.Text) & "' "
+                Sql1 += ",更新日 = '" & strToday & "' "
                 Sql1 += ",更新者 = '" & Input & "' "
                 Sql1 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
                 Sql1 += " AND 見積番号 = '" & TxtQuoteNo.Text & "' "
@@ -1284,7 +1286,7 @@ Public Class Quote
 
                     Sql2 += ",備考 = '" & RevoveChars(DgvItemList.Rows(index).Cells("備考").Value.ToString) & "' "
                     Sql2 += ",更新者 = '" & Input & "' "
-                    Sql2 += ",登録日 = '" & DtpRegistration.Text & "' "
+                    Sql2 += ",登録日 = '" & strFormatDate(DtpRegistration.Text) & "' "
                     Sql2 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
                     Sql2 += " AND 見積番号 = '" & TxtQuoteNo.Text & "' "
                     Sql2 += " AND 見積番号枝番 = '" & TxtSuffixNo.Text & "' "
@@ -1318,8 +1320,8 @@ Public Class Quote
                 Sql1 += ", '" & TxtFax.Text & "'"                               '得意先ＦＡＸ
                 Sql1 += ", '" & TxtPosition.Text & "'"                          '得意先担当者役職
                 Sql1 += ", '" & TxtPerson.Text & "'"                            '得意先担当者名
-                Sql1 += ", '" & DtpQuote.Text & "'"                             '見積日
-                Sql1 += ", '" & DtpExpiration.Text & "'"                        '見積有効期限
+                Sql1 += ", '" & strFormatDate(DtpQuote.Text) & "'"              '見積日
+                Sql1 += ", '" & strFormatDate(DtpExpiration.Text) & "'"         '見積有効期限
                 Sql1 += ", '" & TxtPaymentTerms.Text & "'"                      '支払条件
                 Sql1 += ", " & TxtTotal.Text                                    '見積金額
                 Sql1 += ", " & TxtPurchaseTotal.Text                            '仕入金額
@@ -1336,8 +1338,8 @@ Public Class Quote
                     Sql1 += TxtVat.Text
                 End If
                 Sql1 += ",0"                                                    '取消区分
-                Sql1 += ", '" & DtpRegistration.Text & "'"                      '登録日
-                Sql1 += ", '" & dtToday & "'"                                   '更新日
+                Sql1 += ", '" & strFormatDate(DtpRegistration.Text) & "'"       '登録日
+                Sql1 += ", '" & strToday & "'"                                   '更新日
                 Sql1 += ", '" & Input & "'"                                    '更新者
                 Sql1 += ")"
 
@@ -1485,7 +1487,7 @@ Public Class Quote
                     End If
 
                     Sql2 += " ,'" & Input & "'"                   '更新者
-                    Sql2 += " ,'" & DtpRegistration.Text & "'"    '登録日
+                    Sql2 += " ,'" & strFormatDate(DtpRegistration.Text) & "'"    '登録日
                     Sql2 += " )"
 
                     _db.executeDB(Sql2)
