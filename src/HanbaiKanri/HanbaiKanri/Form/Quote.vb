@@ -1164,15 +1164,15 @@ Public Class Quote
                 Sql1 += ",見積日 = '" & strFormatDate(DtpQuote.Text) & "' "
                 Sql1 += ",見積有効期限 = '" & DtpExpiration.Text & "' "
                 Sql1 += ",支払条件 = '" & strFormatDate(TxtPaymentTerms.Text) & "' "
-                Sql1 += ",見積金額 = " & TxtTotal.Text
-                Sql1 += ",仕入金額 = " & TxtPurchaseTotal.Text
-                Sql1 += ",粗利額 = " & TxtGrossProfit.Text
+                Sql1 += ",見積金額 = " & formatStringToNumber(TxtTotal.Text)
+                Sql1 += ",仕入金額 = " & formatStringToNumber(TxtPurchaseTotal.Text)
+                Sql1 += ",粗利額 = " & formatStringToNumber(TxtGrossProfit.Text)
                 Sql1 += ",営業担当者コード = '" & TxtSales.Tag & "' "
                 Sql1 += ",営業担当者 = '" & TxtSales.Text & "' "
                 Sql1 += ",入力担当者コード = '" & frmC01F10_Login.loginValue.TantoCD & "' "
                 Sql1 += ",入力担当者 = '" & TxtInput.Text & "' "
                 Sql1 += ",備考 = '" & RevoveChars(TxtRemarks.Text) & "' "
-                Sql1 += ",ＶＡＴ = " & TxtVat.Text
+                Sql1 += ",ＶＡＴ = " & formatStringToNumber(TxtVat.Text)
                 Sql1 += ",登録日 = '" & strFormatDate(DtpRegistration.Text) & "' "
                 Sql1 += ",更新日 = '" & strToday & "' "
                 Sql1 += ",更新者 = '" & Input & "' "
@@ -1199,81 +1199,81 @@ Public Class Quote
                     Sql2 += ",仕入先コード = '" & DgvItemList.Rows(index).Cells("仕入先コード").Value.ToString & "' "
                     Sql2 += ",仕入先名称 = '" & DgvItemList.Rows(index).Cells("仕入先").Value.ToString & "' "
                     If DgvItemList.Rows(index).Cells("仕入単価").Value IsNot Nothing Then
-                        Sql2 += ",仕入単価 = " & DgvItemList.Rows(index).Cells("仕入単価").Value.ToString
+                        Sql2 += ",仕入単価 = " & formatStringToNumber(DgvItemList.Rows(index).Cells("仕入単価").Value.ToString)
                     Else
                         Sql2 += ",仕入単価 = 0"
                     End If
 
                     If DgvItemList.Rows(index).Cells("仕入金額").Value IsNot Nothing Then
-                        Sql2 += ",仕入金額 = " & DgvItemList.Rows(index).Cells("仕入金額").Value.ToString
+                        Sql2 += ",仕入金額 = " & formatStringToNumber(DgvItemList.Rows(index).Cells("仕入金額").Value.ToString)
                     Else
                         Sql2 += ",仕入金額 = 0"
                     End If
                     If DgvItemList.Rows(index).Cells("仕入原価").Value IsNot Nothing Then
-                        Sql2 += ",仕入原価 = " & DgvItemList.Rows(index).Cells("仕入原価").Value.ToString
+                        Sql2 += ",仕入原価 = " & formatStringToNumber(DgvItemList.Rows(index).Cells("仕入原価").Value.ToString)
                     Else
                         Sql2 += ",仕入原価 = 0"
                     End If
                     If DgvItemList.Rows(index).Cells("関税率").Value IsNot Nothing Then
-                        Sql2 += ",関税率 = " & DgvItemList.Rows(index).Cells("関税率").Value.ToString
+                        Sql2 += ",関税率 = " & formatStringToNumber(DgvItemList.Rows(index).Cells("関税率").Value.ToString)
                     Else
                         Sql2 += ",関税率 = 0"
                     End If
                     If DgvItemList.Rows(index).Cells("関税額").Value IsNot Nothing Then
-                        Sql2 += ",関税額 = " & DgvItemList.Rows(index).Cells("関税額").Value.ToString
+                        Sql2 += ",関税額 = " & formatStringToNumber(DgvItemList.Rows(index).Cells("関税額").Value.ToString)
                     Else
                         Sql2 += ",関税額 = 0"
                     End If
                     If DgvItemList.Rows(index).Cells("前払法人税率").Value IsNot Nothing Then
-                        Sql2 += ",前払法人税率 = " & DgvItemList.Rows(index).Cells("前払法人税率").Value.ToString
+                        Sql2 += ",前払法人税率 = " & formatStringToNumber(DgvItemList.Rows(index).Cells("前払法人税率").Value.ToString)
                     Else
                         Sql2 += ",前払法人税率 = 0"
                     End If
                     If DgvItemList.Rows(index).Cells("前払法人税額").Value IsNot Nothing Then
-                        Sql2 += ",前払法人税額 = " & DgvItemList.Rows(index).Cells("前払法人税額").Value.ToString
+                        Sql2 += ",前払法人税額 = " & formatStringToNumber(DgvItemList.Rows(index).Cells("前払法人税額").Value.ToString)
                     Else
                         Sql2 += ",前払法人税額 = 0"
                     End If
                     If DgvItemList.Rows(index).Cells("輸送費率").Value IsNot Nothing Then
-                        Sql2 += ",輸送費率 = " & DgvItemList.Rows(index).Cells("輸送費率").Value.ToString
+                        Sql2 += ",輸送費率 = " & formatStringToNumber(DgvItemList.Rows(index).Cells("輸送費率").Value.ToString)
                     Else
                         Sql2 += ",輸送費率 = 0"
                     End If
                     If DgvItemList.Rows(index).Cells("輸送費額").Value IsNot Nothing Then
-                        Sql2 += ",輸送費額 = " & DgvItemList.Rows(index).Cells("輸送費額").Value.ToString
+                        Sql2 += ",輸送費額 = " & formatStringToNumber(DgvItemList.Rows(index).Cells("輸送費額").Value.ToString)
                     Else
                         Sql2 += ",輸送費額 = 0"
                     End If
                     If DgvItemList.Rows(index).Cells("売単価").Value IsNot Nothing Then
-                        Sql2 += ",売単価 = " & DgvItemList.Rows(index).Cells("売単価").Value.ToString
+                        Sql2 += ",売単価 = " & formatStringToNumber(DgvItemList.Rows(index).Cells("売単価").Value.ToString)
                     Else
                         Sql2 += ",売単価 = 0"
                     End If
                     If DgvItemList.Rows(index).Cells("売上金額").Value IsNot Nothing Then
-                        Sql2 += ",売上金額 = " & DgvItemList.Rows(index).Cells("売上金額").Value.ToString
+                        Sql2 += ",売上金額 = " & formatStringToNumber(DgvItemList.Rows(index).Cells("売上金額").Value.ToString)
                     Else
                         Sql2 += ",売上金額 = 0"
                     End If
 
                     If DgvItemList.Rows(index).Cells("見積単価").Value IsNot Nothing Then
-                        Sql2 += ",見積単価 = " & DgvItemList.Rows(index).Cells("見積単価").Value.ToString
+                        Sql2 += ",見積単価 = " & formatStringToNumber(DgvItemList.Rows(index).Cells("見積単価").Value.ToString)
                     Else
                         Sql2 += ",見積単価 = 0"
                     End If
 
                     If DgvItemList.Rows(index).Cells("見積金額").Value IsNot Nothing Then
-                        Sql2 += ",見積金額 = " & DgvItemList.Rows(index).Cells("見積金額").Value.ToString
+                        Sql2 += ",見積金額 = " & formatStringToNumber(DgvItemList.Rows(index).Cells("見積金額").Value.ToString)
                     Else
                         Sql2 += ",見積金額 = 0"
                     End If
 
                     If DgvItemList.Rows(index).Cells("粗利額").Value IsNot Nothing Then
-                        Sql2 += ",粗利額 = " & DgvItemList.Rows(index).Cells("粗利額").Value.ToString
+                        Sql2 += ",粗利額 = " & formatStringToNumber(DgvItemList.Rows(index).Cells("粗利額").Value.ToString)
                     Else
                         Sql2 += ",粗利額 = 0"
                     End If
                     If DgvItemList.Rows(index).Cells("粗利率").Value IsNot Nothing Then
-                        Sql2 += ",粗利率 = " & DgvItemList.Rows(index).Cells("粗利率").Value.ToString
+                        Sql2 += ",粗利率 = " & formatStringToNumber(DgvItemList.Rows(index).Cells("粗利率").Value.ToString)
                     Else
                         Sql2 += ",粗利率 = 0"
                     End If
@@ -1400,77 +1400,77 @@ Public Class Quote
                         Sql2 += " ,''"
                     End If
                     If DgvItemList.Rows(index).Cells("仕入単価").Value IsNot Nothing Then   '仕入単価
-                        Sql2 += " ," & DgvItemList.Rows(index).Cells("仕入単価").Value.ToString
+                        Sql2 += " ," & formatStringToNumber(DgvItemList.Rows(index).Cells("仕入単価").Value.ToString)
                     Else
                         Sql2 += " ,0"
                     End If
                     If DgvItemList.Rows(index).Cells("仕入原価").Value IsNot Nothing Then   '仕入原価
-                        Sql2 += " ," & DgvItemList.Rows(index).Cells("仕入原価").Value.ToString
+                        Sql2 += " ," & formatStringToNumber(DgvItemList.Rows(index).Cells("仕入原価").Value.ToString)
                     Else
                         Sql2 += " ,0"
                     End If
                     If DgvItemList.Rows(index).Cells("関税率").Value IsNot Nothing Then    '関税率
-                        Sql2 += " ," & DgvItemList.Rows(index).Cells("関税率").Value.ToString
+                        Sql2 += " ," & formatStringToNumber(DgvItemList.Rows(index).Cells("関税率").Value.ToString)
                     Else
                         Sql2 += " ,0"
                     End If
                     If DgvItemList.Rows(index).Cells("関税額").Value IsNot Nothing Then    '関税額
-                        Sql2 += " ," & DgvItemList.Rows(index).Cells("関税額").Value.ToString
+                        Sql2 += " ," & formatStringToNumber(DgvItemList.Rows(index).Cells("関税額").Value.ToString)
                     Else
                         Sql2 += " ,0"
                     End If
                     If DgvItemList.Rows(index).Cells("前払法人税率").Value IsNot Nothing Then     '前払法人税率
-                        Sql2 += " ," & DgvItemList.Rows(index).Cells("前払法人税率").Value.ToString
+                        Sql2 += " ," & formatStringToNumber(DgvItemList.Rows(index).Cells("前払法人税率").Value.ToString)
                     Else
                         Sql2 += " ,0"
                     End If
                     If DgvItemList.Rows(index).Cells("前払法人税額").Value IsNot Nothing Then     '前払法人税額
-                        Sql2 += " ," & DgvItemList.Rows(index).Cells("前払法人税額").Value.ToString
+                        Sql2 += " ," & formatStringToNumber(DgvItemList.Rows(index).Cells("前払法人税額").Value.ToString)
                     Else
                         Sql2 += " ,0"
                     End If
                     If DgvItemList.Rows(index).Cells("輸送費率").Value IsNot Nothing Then       '輸送費率
-                        Sql2 += " ," & DgvItemList.Rows(index).Cells("輸送費率").Value.ToString
+                        Sql2 += " ," & formatStringToNumber(DgvItemList.Rows(index).Cells("輸送費率").Value.ToString)
                     Else
                         Sql2 += " ,0"
                     End If
                     If DgvItemList.Rows(index).Cells("輸送費額").Value IsNot Nothing Then       '輸送費額
-                        Sql2 += " ," & DgvItemList.Rows(index).Cells("輸送費額").Value.ToString
+                        Sql2 += " ," & formatStringToNumber(DgvItemList.Rows(index).Cells("輸送費額").Value.ToString)
                     Else
                         Sql2 += " ,0"
                     End If
                     If DgvItemList.Rows(index).Cells("仕入金額").Value IsNot Nothing Then       '仕入金額
-                        Sql2 += " ," & DgvItemList.Rows(index).Cells("仕入金額").Value.ToString
+                        Sql2 += " ," & formatStringToNumber(DgvItemList.Rows(index).Cells("仕入金額").Value.ToString)
                     Else
                         Sql2 += " ,0"
                     End If
                     If DgvItemList.Rows(index).Cells("売単価").Value IsNot Nothing Then        '売単価
-                        Sql2 += " ," & DgvItemList.Rows(index).Cells("売単価").Value.ToString
+                        Sql2 += " ," & formatStringToNumber(DgvItemList.Rows(index).Cells("売単価").Value.ToString)
                     Else
                         Sql2 += " ,0"
                     End If
                     If DgvItemList.Rows(index).Cells("売上金額").Value IsNot Nothing Then       '売上金額
-                        Sql2 += " ," & DgvItemList.Rows(index).Cells("売上金額").Value.ToString
+                        Sql2 += " ," & formatStringToNumber(DgvItemList.Rows(index).Cells("売上金額").Value.ToString)
                     Else
                         Sql2 += " ,0"
                     End If
                     If DgvItemList.Rows(index).Cells("見積単価").Value IsNot Nothing Then       '見積単価
-                        Sql2 += " ," & DgvItemList.Rows(index).Cells("見積単価").Value.ToString
+                        Sql2 += " ," & formatStringToNumber(DgvItemList.Rows(index).Cells("見積単価").Value.ToString)
                     Else
                         Sql2 += " ,0"
                     End If
                     If DgvItemList.Rows(index).Cells("見積金額").Value IsNot Nothing Then       '見積金額
-                        Sql2 += " ," & DgvItemList.Rows(index).Cells("見積金額").Value.ToString
+                        Sql2 += " ," & formatStringToNumber(DgvItemList.Rows(index).Cells("見積金額").Value.ToString)
                     Else
                         Sql2 += " ,0"
                     End If
                     If DgvItemList.Rows(index).Cells("粗利額").Value IsNot Nothing Then        '粗利額
-                        Sql2 += " ," & DgvItemList.Rows(index).Cells("粗利額").Value.ToString
+                        Sql2 += " ," & formatStringToNumber(DgvItemList.Rows(index).Cells("粗利額").Value.ToString)
                     Else
                         Sql2 += " ,0"
                     End If
                     If DgvItemList.Rows(index).Cells("粗利率").Value IsNot Nothing Then        '粗利率
-                        Sql2 += " ," & DgvItemList.Rows(index).Cells("粗利率").Value.ToString
+                        Sql2 += " ," & formatStringToNumber(DgvItemList.Rows(index).Cells("粗利率").Value.ToString)
                     Else
                         Sql2 += " ,0"
                     End If
@@ -2157,6 +2157,28 @@ Public Class Quote
 
         '日本の形式に書き換える
         Return changeFormat
+    End Function
+
+    '金額フォーマット（登録の際の小数点指定子）を日本の形式に合わせる
+    '桁区切り記号は外す
+    Private Function formatNumber(ByVal prmVal As Decimal) As String
+
+        Dim nfi As NumberFormatInfo = New CultureInfo(CommonConst.CI_JP, False).NumberFormat
+
+        '日本の形式に書き換える
+        Return prmVal.ToString("F3", nfi)
+    End Function
+
+    '金額フォーマット（登録の際の小数点指定子）を日本の形式に合わせる
+    '桁区切り記号は外す
+    Private Function formatStringToNumber(ByVal prmVal As String) As String
+
+        Dim decVal As Decimal = Decimal.Parse(prmVal)
+
+        Dim nfi As NumberFormatInfo = New CultureInfo(CommonConst.CI_JP, False).NumberFormat
+
+        '日本の形式に書き換える
+        Return decVal.ToString("F3", nfi)
     End Function
 
 End Class

@@ -4,7 +4,7 @@ Imports UtilMDL
 Imports UtilMDL.MSG
 Imports UtilMDL.LANG
 Imports UtilMDL.DB
-
+Imports System.Globalization
 
 Public Class QuoteList
     Inherits System.Windows.Forms.Form
@@ -37,6 +37,7 @@ Public Class QuoteList
     Private CompanyCode As String = ""
     Private QuoteNo As String()
     Private dtToday As DateTime = DateTime.Now
+    Private strToday As String = formatDatetime(DateTime.Now)
 
     '-------------------------------------------------------------------------------
     'デフォルトコンストラクタ（隠蔽）
@@ -148,8 +149,6 @@ Public Class QuoteList
             BtnOrderPurchase.Location = New Point(997, 509)
         End If
 
-        QuoteListLoad()
-
         If frmC01F10_Login.loginValue.Language = "ENG" Then
             LblConditions.Text = "TermsOfSelection"
             Label1.Text = "CustomerName"
@@ -182,8 +181,9 @@ Public Class QuoteList
         End If
 
         '見積日の範囲指定を初期設定
-        TxtQuoteDate1.Value = DateAdd("d", -14, Now())
-        TxtQuoteDate2.Value = Now()
+        TxtQuoteDate1.Value = DateAdd("d", CommonConst.SINCE_DEFAULT_DAY, DateTime.Today)
+        TxtQuoteDate2.Value = DateTime.Today
+
         'グリッドの初期表示
         QuoteListLoad()
 
@@ -243,7 +243,7 @@ Public Class QuoteList
                 strWhere += "見積日"
                 strWhere += " >=  "
                 strWhere += "'"
-                strWhere += RevoveChars(TxtQuoteDate1.Text)
+                strWhere += strFormatDate(RevoveChars(TxtQuoteDate1.Text))
                 strWhere += "'"
             End If
             If TxtQuoteDate2.Text <> "" Then
@@ -251,7 +251,7 @@ Public Class QuoteList
                 strWhere += "見積日"
                 strWhere += " <=  "
                 strWhere += "'"
-                strWhere += RevoveChars(TxtQuoteDate2.Text)
+                strWhere += strFormatDate(RevoveChars(TxtQuoteDate2.Text))
                 strWhere += "'"
             End If
             If TxtQuoteNo1.Text <> "" Then
@@ -281,7 +281,7 @@ Public Class QuoteList
             If Not ChkExpired.Checked Then
                 strWhere += " and "
                 strWhere += "見積有効期限 >= '"
-                strWhere += dtToday
+                strWhere += strFormatDate(strToday)
                 strWhere += "'"
             End If
             If Not ChkCancel.Checked Then
@@ -804,6 +804,33 @@ Public Class QuoteList
             buf.Replace(c.ToString(), "")
         Next
         Return buf.ToString()
+    End Function
+    'ユーザーのカルチャーから、日本の形式に変換する
+    Private Function strFormatDate(ByVal prmDate As String, Optional ByRef prmFormat As String = "yyyy/MM/dd") As String
+
+        'PCのカルチャーを取得し、それに応じてStringからDatetimeを作成
+        Dim ci As New System.Globalization.CultureInfo(CultureInfo.CurrentCulture.Name.ToString)
+        Dim dateFormat As DateTime = DateTime.Parse(prmDate, ci, System.Globalization.DateTimeStyles.AssumeLocal)
+
+        '日本の形式に書き換える
+        Return dateFormat.ToString(prmFormat)
+    End Function
+
+    'ユーザーのカルチャーから、日本の形式に変換する
+    Private Function formatDatetime(ByVal prmDatetime As DateTime) As String
+
+        'PCのカルチャーを取得し、それに応じてStringからDatetimeを作成
+        Dim ciCurrent As New System.Globalization.CultureInfo(CultureInfo.CurrentCulture.Name.ToString)
+        Dim dateFormat As DateTime = DateTime.Parse(prmDatetime.ToString, ciCurrent, System.Globalization.DateTimeStyles.AssumeLocal)
+
+        Dim changeFormat As String = dateFormat.ToString("yyyy/MM/dd HH:mm:ss")
+
+        Dim ciJP As New System.Globalization.CultureInfo(CommonConst.CI_JP)
+        Dim rtnDatetime As DateTime = DateTime.Parse(changeFormat, ciJP, System.Globalization.DateTimeStyles.AssumeLocal)
+
+
+        '日本の形式に書き換える
+        Return changeFormat
     End Function
 
 End Class

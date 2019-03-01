@@ -430,10 +430,11 @@ Partial Class QuoteList
         'TxtQuoteDate1
         '
         Me.TxtQuoteDate1.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtQuoteDate1.CustomFormat = "yyyy/MM/dd"
+        Me.TxtQuoteDate1.CustomFormat = ""
         Me.TxtQuoteDate1.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtQuoteDate1.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.TxtQuoteDate1.Location = New System.Drawing.Point(759, 46)
+        Me.TxtQuoteDate1.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.TxtQuoteDate1.Name = "TxtQuoteDate1"
         Me.TxtQuoteDate1.Size = New System.Drawing.Size(170, 22)
         Me.TxtQuoteDate1.TabIndex = 5
@@ -442,10 +443,11 @@ Partial Class QuoteList
         'TxtQuoteDate2
         '
         Me.TxtQuoteDate2.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtQuoteDate2.CustomFormat = "yyyy/MM/dd"
+        Me.TxtQuoteDate2.CustomFormat = ""
         Me.TxtQuoteDate2.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtQuoteDate2.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.TxtQuoteDate2.Location = New System.Drawing.Point(958, 46)
+        Me.TxtQuoteDate2.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.TxtQuoteDate2.Name = "TxtQuoteDate2"
         Me.TxtQuoteDate2.Size = New System.Drawing.Size(170, 22)
         Me.TxtQuoteDate2.TabIndex = 6
