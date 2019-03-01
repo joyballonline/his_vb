@@ -322,11 +322,19 @@ Public Class Quote
 
             CompanyCode = ds1.Tables(RS).Rows(0)(0)
 
-            If Status IsNot CommonConst.STATUS_PRICE Then
-                TxtSuffixNo.Text = SuffixMax + 1
-            Else
-                TxtSuffixNo.Text = ds1.Tables(RS).Rows(0)("見積番号枝番")
-            End If
+            Select Case Status
+                Case CommonConst.STATUS_PRICE
+                    TxtSuffixNo.Text = ds1.Tables(RS).Rows(0)("見積番号枝番")
+                Case CommonConst.STATUS_VIEW
+                    TxtSuffixNo.Text = ds1.Tables(RS).Rows(0)("見積番号枝番")
+                Case Else
+                    TxtSuffixNo.Text = SuffixMax + 1
+            End Select
+            'If (Status IsNot CommonConst.STATUS_PRICE) And (Status Is CommonConst.STATUS_VIEW) Then
+            '    TxtSuffixNo.Text = SuffixMax + 1
+            'Else
+            '    TxtSuffixNo.Text = ds1.Tables(RS).Rows(0)("見積番号枝番")
+            'End If
 
             DtpQuote.Value = ds1.Tables(RS).Rows(0)("見積日").ToString
             DtpExpiration.Value = ds1.Tables(RS).Rows(0)("見積有効期限").ToString
@@ -1164,7 +1172,7 @@ Public Class Quote
                 Sql1 += ",見積日 = '" & strFormatDate(DtpQuote.Text) & "' "
                 Sql1 += ",見積有効期限 = '" & DtpExpiration.Text & "' "
                 Sql1 += ",支払条件 = '" & strFormatDate(TxtPaymentTerms.Text) & "' "
-                Sql1 += ",見積金額 = " & formatStringToNumber(TxtTotal.Text)
+                Sql1 += ",見積金額 = " & formatStringToNumber(TxtQuoteTotal.Text)
                 Sql1 += ",仕入金額 = " & formatStringToNumber(TxtPurchaseTotal.Text)
                 Sql1 += ",粗利額 = " & formatStringToNumber(TxtGrossProfit.Text)
                 Sql1 += ",営業担当者コード = '" & TxtSales.Tag & "' "
@@ -1506,6 +1514,8 @@ Public Class Quote
 
     End Sub
 
+    '見積書印刷
+    '
     Private Sub BtnQuote_Click(sender As Object, e As EventArgs) Handles BtnQuote.Click
 
         '見積基本情報
@@ -1528,6 +1538,8 @@ Public Class Quote
         Sql1 += ", 入力担当者 "
         Sql1 += ", 支払条件 "
         Sql1 += ", 備考 "
+        Sql1 += ", 見積金額 "
+        Sql1 += ", ＶＡＴ "
         Sql1 += ", 登録日 "
         Sql1 += ", 更新日 "
         Sql1 += ", 更新者 "
@@ -1567,6 +1579,8 @@ Public Class Quote
         Sql3 += ", 粗利率 "
         Sql3 += ", リードタイム "
         Sql3 += ", リードタイム単位 "
+        Sql3 += ", 見積単価 "
+        Sql3 += ", 見積金額 "
         Sql3 += ", 備考 "
         Sql3 += ", 登録日 "
         Sql3 += "FROM public.t02_mitdt"
@@ -1649,6 +1663,10 @@ Public Class Quote
             sheet.Range("S8").Value = CmnData(1) & "-" & CmnData(2)    '見積番号
             sheet.Range("S9").Value = CmnData(3).ToShortDateString()     '見積日
 
+            sheet.Range("V23").Value = CmnData(17)                       '見積額
+            sheet.Range("V24").Value = CmnData(17) * CmnData(18) * 0.01      'VAT
+            sheet.Range("V25").Value = CmnData(17) * CmnData(18) * 0.01 + CmnData(17)      '見積額 + VAT
+
             sheet.Range("H27").Value = CmnData(15)                       '支払条件
             sheet.Range("H28").Value = CmnData(10) & " " & CmnData(11)   '納品先
             sheet.Range("H29").Value = CmnData(4).ToShortDateString()    '有効期限？
@@ -1686,9 +1704,10 @@ Public Class Quote
             Dim totalPrice As Integer = 0
             Dim Sql5 As String = ""
             Dim tmp1 As String = ""
+            Dim cell As String
 
             For index As Integer = 0 To ds3.Tables(RS).Rows.Count - 1
-                Dim cell As String
+
 
                 cell = "A" & currentCnt
                 sheet.Range(cell).Value = num
@@ -1699,11 +1718,11 @@ Public Class Quote
                 cell = "O" & currentCnt
                 sheet.Range(cell).Value = ds3.Tables(RS).Rows(index)("単位")
                 cell = "R" & currentCnt
-                sheet.Range(cell).Value = ds3.Tables(RS).Rows(index)("売単価")
+                sheet.Range(cell).Value = ds3.Tables(RS).Rows(index)("見積単価")
                 cell = "V" & currentCnt
-                sheet.Range(cell).Value = ds3.Tables(RS).Rows(index)("売上金額")
+                sheet.Range(cell).Value = ds3.Tables(RS).Rows(index)("見積金額")
 
-                totalPrice = totalPrice + ds3.Tables(RS).Rows(index)("売上金額")
+                totalPrice = totalPrice + ds3.Tables(RS).Rows(index)("見積金額")
 
                 '↑のSQL文でINNER JOIN使えばここで呼び出す必要はない
                 Sql5 = ""
@@ -1724,10 +1743,14 @@ Public Class Quote
                 num = num + 1
             Next
 
-
-            sheet.Range("S" & lstRow + 1).Value = totalPrice
-            sheet.Range("S" & lstRow + 2).Value = totalPrice * 10 * 0.01
-            sheet.Range("S" & lstRow + 3).Value = totalPrice * 10 * 0.01 + totalPrice
+            'この部分がなぜか入らない
+            'CmnData(18)=VAT
+            'cell = "S" & lstRow + 1
+            'sheet.Range(cell).Value = totalPrice
+            'cell = "S" & lstRow + 2
+            'sheet.Range(cell).Value = totalPrice * CmnData(18) * 0.01
+            'cell = "S" & lstRow + 3
+            'sheet.Range(cell).Value = totalPrice * CmnData(18) * 0.01 + totalPrice
             sheet.Rows.AutoFit()
             book.SaveAs(sOutFile)
             app.Visible = True
