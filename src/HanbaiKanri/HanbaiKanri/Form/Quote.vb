@@ -1323,8 +1323,8 @@ Public Class Quote
                 Sql1 += ", '" & strFormatDate(DtpQuote.Text) & "'"              '見積日
                 Sql1 += ", '" & strFormatDate(DtpExpiration.Text) & "'"         '見積有効期限
                 Sql1 += ", '" & TxtPaymentTerms.Text & "'"                      '支払条件
-                Sql1 += ", " & TxtTotal.Text                                    '見積金額
-                Sql1 += ", " & TxtPurchaseTotal.Text                            '仕入金額
+                Sql1 += ", " & formatStringToNumber(TxtTotal.Text)                                    '見積金額
+                Sql1 += ", " & formatStringToNumber(TxtPurchaseTotal.Text)                            '仕入金額
                 Sql1 += ", " & TxtGrossProfit.Text                              '粗利額
                 Sql1 += ", '" & TxtSales.Tag & "'"                              '営業担当者コード
                 Sql1 += ", '" & TxtSales.Text & "'"                             '営業担当者
@@ -1380,7 +1380,7 @@ Public Class Quote
                         Sql2 += " ,''"
                     End If
                     If DgvItemList.Rows(index).Cells("数量").Value IsNot Nothing Then     '数量
-                        Sql2 += " ," & DgvItemList.Rows(index).Cells("数量").Value.ToString
+                        Sql2 += " ," & formatStringToNumber(DgvItemList.Rows(index).Cells("数量").Value.ToString)
                     Else
                         Sql2 += " ,0"
                     End If
