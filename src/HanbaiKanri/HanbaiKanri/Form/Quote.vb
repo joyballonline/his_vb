@@ -1331,8 +1331,8 @@ Public Class Quote
                 Sql1 += ", '" & strFormatDate(DtpQuote.Text) & "'"              '見積日
                 Sql1 += ", '" & strFormatDate(DtpExpiration.Text) & "'"         '見積有効期限
                 Sql1 += ", '" & TxtPaymentTerms.Text & "'"                      '支払条件
-                Sql1 += ", " & formatStringToNumber(TxtTotal.Text)                                    '見積金額
-                Sql1 += ", " & formatStringToNumber(TxtPurchaseTotal.Text)                            '仕入金額
+                Sql1 += ", " & formatStringToNumber(TxtQuoteTotal.Text)         '見積金額
+                Sql1 += ", " & formatStringToNumber(TxtPurchaseTotal.Text)      '仕入金額
                 Sql1 += ", " & TxtGrossProfit.Text                              '粗利額
                 Sql1 += ", '" & TxtSales.Tag & "'"                              '営業担当者コード
                 Sql1 += ", '" & TxtSales.Text & "'"                             '営業担当者
@@ -1663,9 +1663,9 @@ Public Class Quote
             sheet.Range("S8").Value = CmnData(1) & "-" & CmnData(2)    '見積番号
             sheet.Range("S9").Value = CmnData(3).ToShortDateString()     '見積日
 
-            sheet.Range("V23").Value = CmnData(17)                       '見積額
-            sheet.Range("V24").Value = CmnData(17) * CmnData(18) * 0.01      'VAT
-            sheet.Range("V25").Value = CmnData(17) * CmnData(18) * 0.01 + CmnData(17)      '見積額 + VAT
+            'sheet.Range("V23").Value = CmnData(17)                       '見積額
+            'sheet.Range("V24").Value = CmnData(17) * CmnData(18) * 0.01      'VAT
+            'sheet.Range("V25").Value = CmnData(17) * CmnData(18) * 0.01 + CmnData(17)      '見積額 + VAT
 
             sheet.Range("H27").Value = CmnData(15)                       '支払条件
             sheet.Range("H28").Value = CmnData(10) & " " & CmnData(11)   '納品先
@@ -1744,13 +1744,13 @@ Public Class Quote
             Next
 
             'この部分がなぜか入らない
-            'CmnData(18)=VAT
-            'cell = "S" & lstRow + 1
-            'sheet.Range(cell).Value = totalPrice
-            'cell = "S" & lstRow + 2
-            'sheet.Range(cell).Value = totalPrice * CmnData(18) * 0.01
-            'cell = "S" & lstRow + 3
-            'sheet.Range(cell).Value = totalPrice * CmnData(18) * 0.01 + totalPrice
+            'CmnData(18) = VAT
+            cell = "V" & lstRow + 1
+            sheet.Range(cell).Value = totalPrice
+            cell = "V" & lstRow + 2
+            sheet.Range(cell).Value = totalPrice * CmnData(18) * 0.01
+            cell = "V" & lstRow + 3
+            sheet.Range(cell).Value = totalPrice * CmnData(18) * 0.01 + totalPrice
             sheet.Rows.AutoFit()
             book.SaveAs(sOutFile)
             app.Visible = True
