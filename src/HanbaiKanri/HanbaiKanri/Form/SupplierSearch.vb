@@ -126,6 +126,10 @@ Public Class SupplierSearch
     '選択ボタンクリック時　＆　グリッド内ダブルクリック時
     '
     Private Sub btnSupplierSelect_Click(sender As Object, e As EventArgs) Handles btnSupplierSelect.Click, Dgv_Supplier.DoubleClick
+        '明細が１行もない場合は選択不能
+        If Dgv_Supplier.Rows.Count = 0 Then
+            Exit Sub
+        End If
 
         If _status = CommonConst.STATUS_ADD Then
             Dim frm As OrderingAdd = CType(Me.Owner, OrderingAdd)

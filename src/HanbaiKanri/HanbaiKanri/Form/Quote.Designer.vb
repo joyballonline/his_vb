@@ -971,6 +971,7 @@ Partial Class Quote
         Me.TxtVat.Name = "TxtVat"
         Me.TxtVat.Size = New System.Drawing.Size(231, 23)
         Me.TxtVat.TabIndex = 21
+        Me.TxtVat.Text = "10"
         Me.TxtVat.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'LblVat

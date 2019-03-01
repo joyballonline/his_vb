@@ -158,6 +158,10 @@ Public Class CustomerSearch
             'メニュー選択処理
             Dim idx As Integer
             Dim frm As Quote = CType(Me.Owner, Quote)
+            '明細が１行もない場合は選択不能
+            If Dgv_Customer.Rows.Count = 0 Then
+                Exit Sub
+            End If
 
             '一覧選択行インデックスの取得
             For Each c As DataGridViewRow In Dgv_Customer.SelectedRows
