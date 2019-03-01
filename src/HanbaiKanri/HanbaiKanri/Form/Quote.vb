@@ -1170,8 +1170,8 @@ Public Class Quote
                 Sql1 += ",得意先担当者役職 = '" & TxtPosition.Text & "' "
                 Sql1 += ",得意先担当者名 = '" & TxtPerson.Text & "' "
                 Sql1 += ",見積日 = '" & strFormatDate(DtpQuote.Text) & "' "
-                Sql1 += ",見積有効期限 = '" & DtpExpiration.Text & "' "
-                Sql1 += ",支払条件 = '" & strFormatDate(TxtPaymentTerms.Text) & "' "
+                Sql1 += ",見積有効期限 = '" & strFormatDate(DtpExpiration.Text) & "' "
+                Sql1 += ",支払条件 = '" & TxtPaymentTerms.Text & "' "
                 Sql1 += ",見積金額 = " & formatStringToNumber(TxtQuoteTotal.Text)
                 Sql1 += ",仕入金額 = " & formatStringToNumber(TxtPurchaseTotal.Text)
                 Sql1 += ",粗利額 = " & formatStringToNumber(TxtGrossProfit.Text)
