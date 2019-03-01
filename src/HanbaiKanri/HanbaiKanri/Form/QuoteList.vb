@@ -727,13 +727,14 @@ Public Class QuoteList
 
     Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles BtnCancel.Click
         Dim dtToday As DateTime = DateTime.Now
+        Dim strToday As DateTime = formatDatetime(DateTime.Now)
 
         Dim Sql1 As String = ""
         Sql1 = ""
         Sql1 += "UPDATE Public.t01_mithd "
         Sql1 += "SET 取消区分 = '1' "
-        Sql1 += ",取消日 = '" & dtToday & "' "
-        Sql1 += ",更新日 = '" & dtToday & "' "
+        Sql1 += ",取消日 = '" & strToday & "' "
+        Sql1 += ",更新日 = '" & strToday & "' "
         Sql1 += ",更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "' "
         Sql1 += "WHERE 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql1 += " AND 見積番号 ='" & DgvMithd.Rows(DgvMithd.CurrentCell.RowIndex).Cells("見積番号").Value & "' "
