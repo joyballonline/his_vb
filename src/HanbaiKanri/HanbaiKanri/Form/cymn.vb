@@ -7,7 +7,7 @@ Imports UtilMDL.DB
 Imports UtilMDL.DataGridView
 Imports UtilMDL.FileDirectory
 Imports UtilMDL.xls
-
+Imports System.Globalization
 
 Public Class Cymn
     Inherits System.Windows.Forms.Form
@@ -77,25 +77,17 @@ Public Class Cymn
     End Sub
 
     Private Sub Quote_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'DateTimePickerのフォーマットを指定
-        DtpOrderRegistration.Text = DateAdd("m", 0, Now).ToString("yyyy/MM/dd")
-        DtpOrderDate.Text = DateAdd("m", 0, Now).ToString("yyyy/MM/dd")
-        DtpExpiration.Text = DateAdd("d", 7, Now).ToString("yyyy/MM/dd")
-        DtpPurchaseDate.Text = DateAdd("m", 0, Now).ToString("yyyy/MM/dd")
-        DtpQuoteDate.Text = DateAdd("m", 0, Now).ToString("yyyy/MM/dd")
-        DtpQuoteRegistration.Text = DateAdd("d", 7, Now).ToString("yyyy/MM/dd")
 
-        DgvItemList.Columns(0).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        DgvItemList.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        DgvItemList.Columns(7).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        DgvItemList.Columns(9).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        DgvItemList.Columns(10).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        DgvItemList.Columns(11).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        DgvItemList.Columns(12).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        DgvItemList.Columns(13).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        DgvItemList.Columns(14).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        DgvItemList.Columns(15).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        DgvItemList.Columns(16).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        'DateTimePickerのフォーマットを指定
+        DtpOrderRegistration.Text = DateTime.Today '受発注登録日
+        DtpOrderDate.Text = DateTime.Today '受注日
+        DtpPurchaseDate.Text = DateTime.Today '発注日
+
+
+        '-----受発注時に今ベースで入れることはないので、コメントアウト
+        'DtpQuoteDate.Text = DateAdd("m", 0, Now).ToString("yyyy/MM/dd") '見積日
+        'DtpExpiration.Text = DateAdd("d", 7, Now).ToString("yyyy/MM/dd") '見積有効期限
+        'DtpQuoteRegistration.Text = DateAdd("d", 7, Now).ToString("yyyy/MM/dd") '見積登録日
 
         'セルの内容に合わせて、行の高さが自動的に調節されるようにする
         DgvItemList.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
@@ -450,10 +442,15 @@ Public Class Cymn
         Dim reccnt As Integer = 0
         Dim itemCount As Integer = 0
         Dim errFlg As Boolean = True
+
         Dim dtNow As DateTime = DateTime.Now
+        Dim strNow As String = formatDatetime(dtNow)
+
 
         If TxtCustomerCode.Text = "stock" Then
+
         Else
+
             For i As Integer = 0 To DgvItemList.Rows.Count - 1
                 If DgvItemList.Rows(i).Cells("仕入区分").Value = 2 Then
                     itemCount = 0
@@ -508,22 +505,22 @@ Public Class Cymn
                 Sql1 += ", '" & TxtFax.Text & "'"           '得意先ＦＡＸ
                 Sql1 += ", '" & TxtPosition.Text & "'"      '得意先担当者役職
                 Sql1 += ", '" & TxtPerson.Text & "'"        '得意先担当者名
-                Sql1 += ", '" & DtpQuoteDate.Value & "'"    '見積日
-                Sql1 += ", '" & DtpExpiration.Value & "'"   '見積有効期限
+                Sql1 += ", '" & strFormatDate(DtpQuoteDate.Value) & "'"    '見積日
+                Sql1 += ", '" & strFormatDate(DtpExpiration.Value) & "'"   '見積有効期限
                 Sql1 += ", '" & TxtPaymentTerms.Text & "'"  '支払条件
-                Sql1 += ", " & TxtOrderAmount.Text          '見積金額
-                Sql1 += ", " & TxtPurchaseAmount.Text       '仕入金額
-                Sql1 += "," & TxtGrossProfit.Text           '粗利額
+                Sql1 += ", " & formatStringToNumber(TxtOrderAmount.Text)          '見積金額
+                Sql1 += ", " & formatStringToNumber(TxtPurchaseAmount.Text)       '仕入金額
+                Sql1 += "," & formatStringToNumber(TxtGrossProfit.Text)           '粗利額
                 Sql1 += ", '" & TxtSales.Tag & "'"         '営業担当者コード
                 Sql1 += ", '" & TxtSales.Text & "'"         '営業担当者
                 Sql1 += ", '" & TxtInput.Tag & "'"         '入力担当者コード
                 Sql1 += ", '" & TxtInput.Text & "'"         '入力担当者
                 Sql1 += ", '" & TxtOrderRemark.Text & "'"   '備考
                 Sql1 += ", '" & RevoveChars(TxtQuoteRemarks.Text) & "'" '見積備考
-                Sql1 += ", " & TxtVat.Text      'ＶＡＴ
-                Sql1 += ", '" & DtpOrderDate.Value & "'"    '受注日
-                Sql1 += ", '" & DtpOrderRegistration.Value & "'"     '登録日
-                Sql1 += ", '" & dtNow & "'"                 '更新日
+                Sql1 += ", " & formatStringToNumber(TxtVat.Text)      'ＶＡＴ
+                Sql1 += ", '" & strFormatDate(DtpOrderDate.Value) & "'"    '受注日
+                Sql1 += ", '" & formatDatetime(DtpOrderRegistration.Value) & "'"     '登録日
+                Sql1 += ", '" & strNow & "'"                 '更新日
                 Sql1 += ", '" & frmC01F10_Login.loginValue.TantoNM & "'"
                 Sql1 += ", 0"
                 Sql1 += " )"
@@ -536,8 +533,11 @@ Public Class Cymn
                     Sql2 += "INSERT INTO "
                     Sql2 += "Public."
                     Sql2 += "t11_cymndt("
-                    Sql2 += "会社コード, 受注番号, 受注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 単位, 仕入先名, 仕入値, 受注数量, 売上数量, 受注残数, 売単価, 売上金額, 見積単価, 見積金額, 粗利額, 粗利率, 間接費, リードタイム, リードタイム単位, 出庫数, 未出庫数, 備考, 更新者, 登録日, 関税率, 関税額, 前払法人税率, 前払法人税額, 輸送費率, 輸送費額, 仕入原価, 仕入金額)"
-                    Sql2 += " VALUES('" & frmC01F10_Login.loginValue.BumonCD & "'"  '会社コード
+                    Sql2 += "会社コード, 受注番号, 受注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 単位, 仕入先名, 仕入値, 受注数量"
+                    Sql2 += ", 売上数量, 受注残数, 売単価, 売上金額, 見積単価, 見積金額, 粗利額, 粗利率, 間接費, リードタイム, リードタイム単位"
+                    Sql2 += ", 出庫数, 未出庫数, 備考, 更新者, 登録日, 関税率, 関税額, 前払法人税率, 前払法人税額, 輸送費率, 輸送費額, 仕入原価, 仕入金額)"
+                    Sql2 += " VALUES("
+                    Sql2 += " '" & frmC01F10_Login.loginValue.BumonCD & "'"  '会社コード
                     Sql2 += ", '" & TxtOrderNo.Text & "'"       '受注番号
                     Sql2 += ", '" & TxtOrderSuffix.Text & "'"   '受注番号枝番
                     Sql2 += ", " & DgvItemList.Rows(cymnhdIdx).Cells("No").Value.ToString      '行番号
@@ -547,32 +547,32 @@ Public Class Cymn
                     Sql2 += ", '" & DgvItemList.Rows(cymnhdIdx).Cells("型式").Value.ToString & "'"    '型式
                     Sql2 += ", '" & DgvItemList.Rows(cymnhdIdx).Cells("単位").Value.ToString & "'"    '単位
                     Sql2 += ", '" & DgvItemList.Rows(cymnhdIdx).Cells("仕入先").Value.ToString & "'"   '仕入先名
-                    Sql2 += ", " & DgvItemList.Rows(cymnhdIdx).Cells("仕入単価").Value.ToString       '仕入値
+                    Sql2 += ", " & formatStringToNumber(DgvItemList.Rows(cymnhdIdx).Cells("仕入単価").Value.ToString)       '仕入値
                     Sql2 += ", " & DgvItemList.Rows(cymnhdIdx).Cells("数量").Value.ToString           '受注数量
                     Sql2 += ", 0"   '売上数量
                     Sql2 += ", " & DgvItemList.Rows(cymnhdIdx).Cells("数量").Value.ToString       '受注残数
-                    Sql2 += ", " & DgvItemList.Rows(cymnhdIdx).Cells("売単価").Value.ToString      '売単価
-                    Sql2 += ", " & DgvItemList.Rows(cymnhdIdx).Cells("売上金額").Value.ToString     '売上金額
-                    Sql2 += ", " & DgvItemList.Rows(cymnhdIdx).Cells("見積単価").Value.ToString     '見積単価
-                    Sql2 += ", " & DgvItemList.Rows(cymnhdIdx).Cells("見積金額").Value.ToString     '見積金額
-                    Sql2 += ", " & DgvItemList.Rows(cymnhdIdx).Cells("粗利額").Value.ToString      '粗利額
-                    Sql2 += ", " & DgvItemList.Rows(cymnhdIdx).Cells("粗利率").Value.ToString      '粗利率
-                    Sql2 += ", " & DgvItemList.Rows(cymnhdIdx).Cells("仕入金額").Value.ToString - DgvItemList.Rows(cymnhdIdx).Cells("仕入原価").Value.ToString     '間接費
+                    Sql2 += ", " & formatStringToNumber(DgvItemList.Rows(cymnhdIdx).Cells("売単価").Value.ToString)      '売単価
+                    Sql2 += ", " & formatStringToNumber(DgvItemList.Rows(cymnhdIdx).Cells("売上金額").Value.ToString)     '売上金額
+                    Sql2 += ", " & formatStringToNumber(DgvItemList.Rows(cymnhdIdx).Cells("見積単価").Value.ToString)     '見積単価
+                    Sql2 += ", " & formatStringToNumber(DgvItemList.Rows(cymnhdIdx).Cells("見積金額").Value.ToString)     '見積金額
+                    Sql2 += ", " & formatStringToNumber(DgvItemList.Rows(cymnhdIdx).Cells("粗利額").Value.ToString)      '粗利額
+                    Sql2 += ", " & formatStringToNumber(DgvItemList.Rows(cymnhdIdx).Cells("粗利率").Value.ToString)      '粗利率
+                    Sql2 += ", " & formatStringToNumber(DgvItemList.Rows(cymnhdIdx).Cells("仕入金額").Value.ToString) - formatStringToNumber(DgvItemList.Rows(cymnhdIdx).Cells("仕入原価").Value.ToString)     '間接費
                     Sql2 += ", '" & DgvItemList.Rows(cymnhdIdx).Cells("リードタイム").Value.ToString & "'"    'リードタイム
                     Sql2 += ", " & DgvItemList.Rows(cymnhdIdx).Cells("リードタイム単位").Value.ToString     'リードタイム単位
                     Sql2 += ", 0"       '出庫数
                     Sql2 += ", " & DgvItemList.Rows(cymnhdIdx).Cells("数量").Value.ToString       '未出庫数
                     Sql2 += ", '" & RevoveChars(DgvItemList.Rows(cymnhdIdx).Cells("備考").Value.ToString) & "'"   '備考
                     Sql2 += ", '" & frmC01F10_Login.loginValue.TantoNM & "'"       '更新者
-                    Sql2 += ", '" & dtNow & "'"      '登録日
-                    Sql2 += ", " & DgvItemList.Rows(cymnhdIdx).Cells("関税率").Value.ToString      '関税率
-                    Sql2 += ", " & DgvItemList.Rows(cymnhdIdx).Cells("関税額").Value.ToString      '関税額
-                    Sql2 += ", " & DgvItemList.Rows(cymnhdIdx).Cells("前払法人税率").Value.ToString       '前払法人税率
-                    Sql2 += ", " & DgvItemList.Rows(cymnhdIdx).Cells("前払法人税額").Value.ToString       '前払法人税額
-                    Sql2 += ", " & DgvItemList.Rows(cymnhdIdx).Cells("輸送費率").Value.ToString         '輸送費率
-                    Sql2 += ", " & DgvItemList.Rows(cymnhdIdx).Cells("輸送費額").Value.ToString         '輸送費額
-                    Sql2 += ", " & DgvItemList.Rows(cymnhdIdx).Cells("仕入原価").Value.ToString         '仕入原価
-                    Sql2 += ", " & DgvItemList.Rows(cymnhdIdx).Cells("仕入金額").Value.ToString         '仕入金額
+                    Sql2 += ", '" & formatDatetime(dtNow) & "'"      '登録日
+                    Sql2 += ", " & formatStringToNumber(DgvItemList.Rows(cymnhdIdx).Cells("関税率").Value.ToString)             '関税率
+                    Sql2 += ", " & formatStringToNumber(DgvItemList.Rows(cymnhdIdx).Cells("関税額").Value.ToString)             '関税額
+                    Sql2 += ", " & formatStringToNumber(DgvItemList.Rows(cymnhdIdx).Cells("前払法人税率").Value.ToString)       '前払法人税率
+                    Sql2 += ", " & formatStringToNumber(DgvItemList.Rows(cymnhdIdx).Cells("前払法人税額").Value.ToString)       '前払法人税額
+                    Sql2 += ", " & formatStringToNumber(DgvItemList.Rows(cymnhdIdx).Cells("輸送費率").Value.ToString)         '輸送費率
+                    Sql2 += ", " & formatStringToNumber(DgvItemList.Rows(cymnhdIdx).Cells("輸送費額").Value.ToString)         '輸送費額
+                    Sql2 += ", " & formatStringToNumber(DgvItemList.Rows(cymnhdIdx).Cells("仕入原価").Value.ToString)         '仕入原価
+                    Sql2 += ", " & formatStringToNumber(DgvItemList.Rows(cymnhdIdx).Cells("仕入金額").Value.ToString)         '仕入金額
                     Sql2 += ")"
                     _db.executeDB(Sql2)
 
@@ -613,8 +613,8 @@ Public Class Cymn
                 Sql += ", null"     '取消日
                 Sql += ", null"     '取消区分
                 Sql += ", current_date"     '出庫日
-                Sql += ", '" & dtNow & "'"                 '登録日
-                Sql += ", '" & dtNow & "'"                 '更新日
+                Sql += ", '" & formatDatetime(dtNow) & "'"                 '登録日
+                Sql += ", '" & formatDatetime(dtNow) & "'"                 '更新日
                 Sql += ", '" & frmC01F10_Login.loginValue.TantoNM & "'"     '更新者
                 Sql += " )"
 
@@ -636,12 +636,12 @@ Public Class Cymn
                     Sql += ", '" & DgvItemList.Rows(index).Cells("品名").Value.ToString & "'"       '品名
                     Sql += ", '" & DgvItemList.Rows(index).Cells("型式").Value.ToString & "'"         '型式
                     Sql += ", '" & DgvItemList.Rows(index).Cells("仕入先").Value.ToString & "'"        '仕入先名
-                    Sql += ", " & DgvItemList.Rows(index).Cells("売単価").Value.ToString               '売単価
+                    Sql += ", " & formatStringToNumber(DgvItemList.Rows(index).Cells("売単価").Value.ToString)               '売単価
                     Sql += ", " & DgvItemList.Rows(index).Cells("数量").Value.ToString               '出庫数量
                     Sql += ", '" & DgvItemList.Rows(index).Cells("単位").Value.ToString & "'"         '単位
                     Sql += ", '" & DgvItemList.Rows(index).Cells("備考").Value.ToString & "'"         '備考
                     Sql += ", '" & frmC01F10_Login.loginValue.TantoNM & "'"                           '更新者
-                    Sql += ", '" & dtNow & "'"                 '更新日
+                    Sql += ", '" & formatDatetime(dtNow) & "'"                 '更新日
                     Sql += ", '1')"
 
                     _db.executeDB(Sql)
@@ -660,7 +660,7 @@ Public Class Cymn
                 Sql += "UPDATE Public.m80_saiban "
                 Sql += "SET  最新値 = '" & LSNo.ToString & "'"
                 Sql += ", 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
-                Sql += ", 更新日 = '" & dtNow & "'"
+                Sql += ", 更新日 = '" & formatDatetime(dtNow) & "'"
                 Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
                 Sql += " AND 採番キー ='70' "
 
@@ -738,99 +738,103 @@ Public Class Cymn
                 Sql3 += "INSERT INTO "
                 Sql3 += "Public."
                 Sql3 += "t20_hattyu("
-                Sql3 += "会社コード, 発注番号, 発注番号枝番, 客先番号, 受注番号, 受注番号枝番, 見積番号, 見積番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 仕入先コード, 仕入先名, 仕入先郵便番号, 仕入先住所, 仕入先電話番号, 仕入先ＦＡＸ, 仕入先担当者役職, 仕入先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額,仕入金額, 粗利額, 営業担当者, 営業担当者コード, 入力担当者, 入力担当者コード, 備考, 見積備考, ＶＡＴ, ＰＰＨ, 受注日, 発注日, 登録日, 更新日, 更新者, 取消区分)"
+                Sql3 += "会社コード, 発注番号, 発注番号枝番, 客先番号, 受注番号, 受注番号枝番, 見積番号, 見積番号枝番, 得意先コード, 得意先名"
+                Sql3 += ", 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 仕入先コード, 仕入先名"
+                Sql3 += ", 仕入先郵便番号, 仕入先住所, 仕入先電話番号, 仕入先ＦＡＸ, 仕入先担当者役職, 仕入先担当者名, 見積日, 見積有効期限"
+                Sql3 += ", 支払条件, 見積金額,仕入金額, 粗利額, 営業担当者, 営業担当者コード, 入力担当者, 入力担当者コード, 備考, 見積備考"
+                Sql3 += ", ＶＡＴ, ＰＰＨ, 受注日, 発注日, 登録日, 更新日, 更新者, 取消区分)"
                 Sql3 += " VALUES('"
-                Sql3 += CompanyCode
+                Sql3 += CompanyCode '会社コード
                 Sql3 += "', '"
-                Sql3 += PurchaseNo
+                Sql3 += PurchaseNo '発注番号
                 Sql3 += "', '"
-                Sql3 += "1"
+                Sql3 += "1" '発注番号枝番
                 Sql3 += "', '"
-                Sql3 += RevoveChars(TxtCustomerPO.Text)
+                Sql3 += RevoveChars(TxtCustomerPO.Text) '客先番号
                 Sql3 += "', '"
-                Sql3 += TxtOrderNo.Text
+                Sql3 += TxtOrderNo.Text '受注番号
                 Sql3 += "', '"
-                Sql3 += TxtOrderSuffix.Text
+                Sql3 += TxtOrderSuffix.Text '受注番号枝番
                 Sql3 += "', '"
-                Sql3 += TxtQuoteNo.Text
+                Sql3 += TxtQuoteNo.Text '見積番号
                 Sql3 += "', '"
-                Sql3 += TxtQuoteSuffix.Text
+                Sql3 += TxtQuoteSuffix.Text '見積番号枝番
                 Sql3 += "', '"
-                Sql3 += TxtCustomerCode.Text
+                Sql3 += TxtCustomerCode.Text '得意先コード
                 Sql3 += "', '"
-                Sql3 += TxtCustomerName.Text
+                Sql3 += TxtCustomerName.Text '得意先名
                 Sql3 += "', '"
-                Sql3 += TxtPostalCode.Text
+                Sql3 += TxtPostalCode.Text '得意先郵便番号
                 Sql3 += "', '"
-                Sql3 += TxtAddress1.Text
+                Sql3 += TxtAddress1.Text '得意先住所
                 Sql3 += "', '"
-                Sql3 += TxtTel.Text
+                Sql3 += TxtTel.Text '得意先電話番号
                 Sql3 += "', '"
-                Sql3 += TxtFax.Text
+                Sql3 += TxtFax.Text '得意先ＦＡＸ
                 Sql3 += "', '"
-                Sql3 += TxtPosition.Text
+                Sql3 += TxtPosition.Text '得意先担当者役職
                 Sql3 += "', '"
-                Sql3 += TxtPerson.Text
+                Sql3 += TxtPerson.Text '得意先担当者名
                 Sql3 += "', '"
-                Sql3 += ds1.Tables(RS).Rows(0)("仕入先コード").ToString
+                Sql3 += ds1.Tables(RS).Rows(0)("仕入先コード").ToString '仕入先コード
                 Sql3 += "', '"
-                Sql3 += ds1.Tables(RS).Rows(0)("仕入先名").ToString
+                Sql3 += ds1.Tables(RS).Rows(0)("仕入先名").ToString '仕入先名
                 Sql3 += "', '"
-                Sql3 += ds1.Tables(RS).Rows(0)("郵便番号").ToString
+                Sql3 += ds1.Tables(RS).Rows(0)("郵便番号").ToString '仕入先郵便番号
                 Sql3 += "', '"
-                Sql3 += ds1.Tables(RS).Rows(0)("住所１").ToString
+                Sql3 += ds1.Tables(RS).Rows(0)("住所１").ToString '仕入先住所
                 Sql3 += " "
-                Sql3 += ds1.Tables(RS).Rows(0)("住所２").ToString
+                Sql3 += ds1.Tables(RS).Rows(0)("住所２").ToString '仕入先住所
                 Sql3 += " "
-                Sql3 += ds1.Tables(RS).Rows(0)("住所３").ToString
+                Sql3 += ds1.Tables(RS).Rows(0)("住所３").ToString '仕入先住所
                 Sql3 += "', '"
-                Sql3 += ds1.Tables(RS).Rows(0)("電話番号").ToString
+                Sql3 += ds1.Tables(RS).Rows(0)("電話番号").ToString '仕入先電話番号
                 Sql3 += "', '"
-                Sql3 += ds1.Tables(RS).Rows(0)("ＦＡＸ番号").ToString
+                Sql3 += ds1.Tables(RS).Rows(0)("ＦＡＸ番号").ToString '仕入先ＦＡＸ
                 Sql3 += "', '"
-                Sql3 += ds1.Tables(RS).Rows(0)("担当者役職").ToString
+                Sql3 += ds1.Tables(RS).Rows(0)("担当者役職").ToString '仕入先担当者役職
                 Sql3 += "', '"
-                Sql3 += ds1.Tables(RS).Rows(0)("担当者名").ToString
+                Sql3 += ds1.Tables(RS).Rows(0)("担当者名").ToString '仕入先担当者名
                 Sql3 += "', '"
-                Sql3 += DtpQuoteDate.Value
+                Sql3 += strFormatDate(DtpQuoteDate.Value) '見積日
                 Sql3 += "', '"
-                Sql3 += DtpExpiration.Value
+                Sql3 += strFormatDate(DtpExpiration.Value) '見積有効期限
                 Sql3 += "', '"
-                Sql3 += TxtPaymentTerms.Text
+                Sql3 += TxtPaymentTerms.Text '支払条件
                 Sql3 += "', '"
-                Sql3 += TxtOrderAmount.Text
+                Sql3 += formatStringToNumber(TxtOrderAmount.Text) '見積金額
                 Sql3 += "', '"
-                Sql3 += cost.ToString
+                Sql3 += formatStringToNumber(cost.ToString) '仕入金額
                 Sql3 += "', '"
-                Sql3 += TxtGrossProfit.Text
+                Sql3 += formatStringToNumber(TxtGrossProfit.Text) '粗利額
                 Sql3 += "', '"
-                Sql3 += TxtSales.Text
+                Sql3 += TxtSales.Text '営業担当者
                 Sql3 += "', '"
-                Sql3 += TxtSales.Tag
+                Sql3 += TxtSales.Tag '営業担当者コード
                 Sql3 += "', '"
-                Sql3 += TxtInput.Text
+                Sql3 += TxtInput.Text '入力担当者
                 Sql3 += "', '"
-                Sql3 += TxtInput.Tag
+                Sql3 += TxtInput.Tag '入力担当者コード
                 Sql3 += "', '"
-                Sql3 += TxtPurchaseRemark.Text
+                Sql3 += TxtPurchaseRemark.Text '備考
                 Sql3 += "', '"
-                Sql3 += TxtQuoteRemarks.Text
+                Sql3 += TxtQuoteRemarks.Text '見積備考
                 Sql3 += "', '"
-                Sql3 += TxtVat.Text
+                Sql3 += formatStringToNumber(TxtVat.Text) 'ＶＡＴ
                 Sql3 += "', '"
-                Sql3 += TxtPph.Text
+                Sql3 += formatStringToNumber(TxtPph.Text) 'ＰＰＨ
                 Sql3 += "', '"
-                Sql3 += DtpOrderDate.Value
+                Sql3 += strFormatDate(DtpOrderDate.Value) '受注日
                 Sql3 += "', '"
-                Sql3 += DtpPurchaseDate.Value
+                Sql3 += strFormatDate(DtpPurchaseDate.Value) '発注日
                 Sql3 += "', '"
-                Sql3 += DtpOrderRegistration.Value
+                Sql3 += strFormatDate(DtpOrderRegistration.Value) '登録日（受発注登録日）
                 Sql3 += "', '"
-                Sql3 += dtNow
+                Sql3 += formatDatetime(dtNow) '更新日
                 Sql3 += "', '"
-                Sql3 += "zenbi01"
+                Sql3 += "zenbi01" '更新者
                 Sql3 += "', '"
-                Sql3 += "0"
+                Sql3 += "0" '取消区分
                 Sql3 += " ')"
 
                 _db.executeDB(Sql3)
@@ -865,7 +869,7 @@ Public Class Cymn
                         Sql4 += "', '"
                         Sql4 += DgvItemList.Rows(hattyuIdx).Cells("仕入先").Value.ToString
                         Sql4 += "', '"
-                        Sql4 += DgvItemList.Rows(hattyuIdx).Cells("仕入単価").Value.ToString
+                        Sql4 += formatStringToNumber(DgvItemList.Rows(hattyuIdx).Cells("仕入単価").Value.ToString)
                         Sql4 += "', '"
                         Sql4 += DgvItemList.Rows(hattyuIdx).Cells("数量").Value.ToString
                         Sql4 += "', '"
@@ -873,13 +877,13 @@ Public Class Cymn
                         Sql4 += "', '"
                         Sql4 += DgvItemList.Rows(hattyuIdx).Cells("数量").Value.ToString
                         Sql4 += "', '"
-                        Sql4 += DgvItemList.Rows(hattyuIdx).Cells("売単価").Value.ToString
+                        Sql4 += formatStringToNumber(DgvItemList.Rows(hattyuIdx).Cells("売単価").Value.ToString)
                         Sql4 += "', '"
-                        Sql4 += DgvItemList.Rows(hattyuIdx).Cells("仕入原価").Value.ToString
+                        Sql4 += formatStringToNumber(DgvItemList.Rows(hattyuIdx).Cells("仕入原価").Value.ToString)
                         Sql4 += "', '"
                         Dim overhead As Double = 0
                         overhead = DgvItemList.Rows(hattyuIdx).Cells("仕入金額").Value - DgvItemList.Rows(hattyuIdx).Cells("仕入原価").Value
-                        Sql4 += overhead.ToString
+                        Sql4 += formatStringToNumber(overhead.ToString)
                         Sql4 += "', '"
                         Sql4 += DgvItemList.Rows(hattyuIdx).Cells("リードタイム").Value.ToString
                         Sql4 += "', '"
@@ -894,9 +898,9 @@ Public Class Cymn
                         Sql4 += "', '"
                         Sql4 += "zenbi01"
                         Sql4 += "', '"
-                        Sql4 += dtNow
+                        Sql4 += formatDatetime(dtNow)
                         Sql4 += "', '"
-                        Sql4 += dtNow
+                        Sql4 += formatDatetime(dtNow)
                         Sql4 += " ')"
                         _db.executeDB(Sql4)
                     End If
@@ -909,7 +913,7 @@ Public Class Cymn
             Saiban4 += "UPDATE Public.m80_saiban "
             Saiban4 += "SET  最新値 = '" & PurchaseCount.ToString & "'"
             Saiban4 += ", 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
-            Saiban4 += ", 更新日 ='" & dtNow & "'"
+            Saiban4 += ", 更新日 ='" & formatDatetime(dtNow) & "'"
             Saiban4 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
             Saiban4 += " AND 採番キー ='30' "
             _db.executeDB(Saiban4)
@@ -919,7 +923,7 @@ Public Class Cymn
             Sql += "UPDATE Public.t01_mithd "
             Sql += "SET  受注日 = '" & DtpOrderDate.Value & "'"
             Sql += ", 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
-            Sql += ", 更新日 = '" & dtNow & "'"
+            Sql += ", 更新日 = '" & formatDatetime(dtNow) & "'"
             Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
             Sql += " AND 見積番号 = '" & QuoteNo.ToString & "'"
             Sql += " AND 見積番号枝番 = '" & QuoteSuffix.ToString & "'"
@@ -949,4 +953,55 @@ Public Class Cymn
         Next
         Return buf.ToString()
     End Function
+
+    'どんなカルチャーであっても、日本の形式に変換する
+    Private Function strFormatDate(ByVal prmDate As String, Optional ByRef prmFormat As String = "yyyy/MM/dd") As String
+
+        'PCのカルチャーを取得し、それに応じてStringからDatetimeを作成
+        Dim ci As New System.Globalization.CultureInfo(CultureInfo.CurrentCulture.Name.ToString)
+        Dim dateFormat As DateTime = DateTime.Parse(prmDate, ci, System.Globalization.DateTimeStyles.AssumeLocal)
+
+        '日本の形式に書き換える
+        Return dateFormat.ToString(prmFormat)
+    End Function
+
+    'どんなカルチャーであっても、日本の形式に変換する
+    Private Function formatDatetime(ByVal prmDatetime As DateTime) As String
+
+        'PCのカルチャーを取得し、それに応じてStringからDatetimeを作成
+        Dim ciCurrent As New System.Globalization.CultureInfo(CultureInfo.CurrentCulture.Name.ToString)
+        Dim dateFormat As DateTime = DateTime.Parse(prmDatetime.ToString, ciCurrent, System.Globalization.DateTimeStyles.AssumeLocal)
+
+        Dim changeFormat As String = dateFormat.ToString("yyyy/MM/dd HH:mm:ss")
+
+        Dim ciJP As New System.Globalization.CultureInfo(CommonConst.CI_JP)
+        Dim rtnDatetime As DateTime = DateTime.Parse(changeFormat, ciJP, System.Globalization.DateTimeStyles.AssumeLocal)
+
+
+        '日本の形式に書き換える
+        Return changeFormat
+    End Function
+
+    '金額フォーマット（登録の際の小数点指定子）を日本の形式に合わせる
+    '桁区切り記号は外す
+    Private Function formatNumber(ByVal prmVal As Decimal) As String
+
+        Dim nfi As NumberFormatInfo = New CultureInfo(CommonConst.CI_JP, False).NumberFormat
+
+        '日本の形式に書き換える
+        Return prmVal.ToString("F3", nfi)
+    End Function
+
+    '金額フォーマット（登録の際の小数点指定子）を日本の形式に合わせる
+    '桁区切り記号は外す
+    Private Function formatStringToNumber(ByVal prmVal As String) As String
+
+        Dim decVal As Decimal = Decimal.Parse(prmVal)
+
+        Dim nfi As NumberFormatInfo = New CultureInfo(CommonConst.CI_JP, False).NumberFormat
+
+        '日本の形式に書き換える
+        Return decVal.ToString("F3", nfi)
+    End Function
+
 End Class

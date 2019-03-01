@@ -22,17 +22,30 @@ Partial Class Cymn
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle25 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle26 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle27 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle28 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle29 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle30 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle31 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle32 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle33 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle34 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle35 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle36 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle37 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle38 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle39 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle40 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle41 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle42 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle43 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle44 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle45 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle46 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle47 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle48 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.DtpPurchaseDate = New System.Windows.Forms.DateTimePicker()
         Me.DtpOrderDate = New System.Windows.Forms.DateTimePicker()
         Me.TxtOrderAmount = New System.Windows.Forms.TextBox()
@@ -130,10 +143,11 @@ Partial Class Cymn
         'DtpPurchaseDate
         '
         Me.DtpPurchaseDate.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.DtpPurchaseDate.CustomFormat = "yyyy/MM/dd"
+        Me.DtpPurchaseDate.CustomFormat = ""
         Me.DtpPurchaseDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpPurchaseDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.DtpPurchaseDate.Location = New System.Drawing.Point(863, 12)
+        Me.DtpPurchaseDate.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.DtpPurchaseDate.Name = "DtpPurchaseDate"
         Me.DtpPurchaseDate.Size = New System.Drawing.Size(140, 22)
         Me.DtpPurchaseDate.TabIndex = 3
@@ -142,10 +156,11 @@ Partial Class Cymn
         'DtpOrderDate
         '
         Me.DtpOrderDate.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.DtpOrderDate.CustomFormat = "yyyy/MM/dd"
+        Me.DtpOrderDate.CustomFormat = ""
         Me.DtpOrderDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpOrderDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.DtpOrderDate.Location = New System.Drawing.Point(601, 12)
+        Me.DtpOrderDate.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.DtpOrderDate.Name = "DtpOrderDate"
         Me.DtpOrderDate.Size = New System.Drawing.Size(140, 22)
         Me.DtpOrderDate.TabIndex = 2
@@ -263,11 +278,12 @@ Partial Class Cymn
         'DtpOrderRegistration
         '
         Me.DtpOrderRegistration.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.DtpOrderRegistration.CustomFormat = "yyyy/MM/dd"
+        Me.DtpOrderRegistration.CustomFormat = ""
         Me.DtpOrderRegistration.Enabled = False
         Me.DtpOrderRegistration.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpOrderRegistration.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.DtpOrderRegistration.Location = New System.Drawing.Point(1127, 11)
+        Me.DtpOrderRegistration.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.DtpOrderRegistration.Name = "DtpOrderRegistration"
         Me.DtpOrderRegistration.Size = New System.Drawing.Size(152, 22)
         Me.DtpOrderRegistration.TabIndex = 4
@@ -660,11 +676,12 @@ Partial Class Cymn
         'DtpExpiration
         '
         Me.DtpExpiration.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.DtpExpiration.CustomFormat = "yyyy/MM/dd"
+        Me.DtpExpiration.CustomFormat = ""
         Me.DtpExpiration.Enabled = False
         Me.DtpExpiration.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpExpiration.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.DtpExpiration.Location = New System.Drawing.Point(935, 43)
+        Me.DtpExpiration.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.DtpExpiration.Name = "DtpExpiration"
         Me.DtpExpiration.Size = New System.Drawing.Size(140, 22)
         Me.DtpExpiration.TabIndex = 108
@@ -674,11 +691,12 @@ Partial Class Cymn
         'DtpQuoteDate
         '
         Me.DtpQuoteDate.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.DtpQuoteDate.CustomFormat = "yyyy/MM/dd"
+        Me.DtpQuoteDate.CustomFormat = ""
         Me.DtpQuoteDate.Enabled = False
         Me.DtpQuoteDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpQuoteDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.DtpQuoteDate.Location = New System.Drawing.Point(663, 43)
+        Me.DtpQuoteDate.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.DtpQuoteDate.Name = "DtpQuoteDate"
         Me.DtpQuoteDate.Size = New System.Drawing.Size(150, 22)
         Me.DtpQuoteDate.TabIndex = 107
@@ -688,11 +706,12 @@ Partial Class Cymn
         'DtpQuoteRegistration
         '
         Me.DtpQuoteRegistration.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.DtpQuoteRegistration.CustomFormat = "yyyy/MM/dd"
+        Me.DtpQuoteRegistration.CustomFormat = ""
         Me.DtpQuoteRegistration.Enabled = False
         Me.DtpQuoteRegistration.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpQuoteRegistration.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.DtpQuoteRegistration.Location = New System.Drawing.Point(389, 42)
+        Me.DtpQuoteRegistration.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.DtpQuoteRegistration.Name = "DtpQuoteRegistration"
         Me.DtpQuoteRegistration.Size = New System.Drawing.Size(150, 22)
         Me.DtpQuoteRegistration.TabIndex = 99
@@ -896,6 +915,8 @@ Partial Class Cymn
         '
         'No
         '
+        DataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.No.DefaultCellStyle = DataGridViewCellStyle25
         Me.No.HeaderText = "No"
         Me.No.Name = "No"
         Me.No.ReadOnly = True
@@ -903,8 +924,8 @@ Partial Class Cymn
         '
         'メーカー
         '
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.メーカー.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle26.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.メーカー.DefaultCellStyle = DataGridViewCellStyle26
         Me.メーカー.HeaderText = "メーカー"
         Me.メーカー.Name = "メーカー"
         Me.メーカー.ReadOnly = True
@@ -912,8 +933,8 @@ Partial Class Cymn
         '
         '品名
         '
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.品名.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle27.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.品名.DefaultCellStyle = DataGridViewCellStyle27
         Me.品名.HeaderText = "品名"
         Me.品名.Name = "品名"
         Me.品名.ReadOnly = True
@@ -921,8 +942,8 @@ Partial Class Cymn
         '
         '型式
         '
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.型式.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle28.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.型式.DefaultCellStyle = DataGridViewCellStyle28
         Me.型式.HeaderText = "型式"
         Me.型式.Name = "型式"
         Me.型式.ReadOnly = True
@@ -930,6 +951,8 @@ Partial Class Cymn
         '
         '数量
         '
+        DataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.数量.DefaultCellStyle = DataGridViewCellStyle29
         Me.数量.HeaderText = "数量"
         Me.数量.Name = "数量"
         Me.数量.ReadOnly = True
@@ -937,6 +960,8 @@ Partial Class Cymn
         '
         '単位
         '
+        DataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.単位.DefaultCellStyle = DataGridViewCellStyle30
         Me.単位.HeaderText = "単位"
         Me.単位.Name = "単位"
         Me.単位.ReadOnly = True
@@ -950,8 +975,8 @@ Partial Class Cymn
         '
         '仕入先
         '
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.仕入先.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle31.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.仕入先.DefaultCellStyle = DataGridViewCellStyle31
         Me.仕入先.HeaderText = "仕入先"
         Me.仕入先.Name = "仕入先"
         Me.仕入先.ReadOnly = True
@@ -959,6 +984,8 @@ Partial Class Cymn
         '
         '仕入単価
         '
+        DataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.仕入単価.DefaultCellStyle = DataGridViewCellStyle32
         Me.仕入単価.HeaderText = "仕入単価"
         Me.仕入単価.Name = "仕入単価"
         Me.仕入単価.ReadOnly = True
@@ -966,56 +993,73 @@ Partial Class Cymn
         '
         '仕入原価
         '
+        DataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.仕入原価.DefaultCellStyle = DataGridViewCellStyle33
         Me.仕入原価.HeaderText = "仕入原価"
         Me.仕入原価.Name = "仕入原価"
         Me.仕入原価.ReadOnly = True
         '
         '関税率
         '
+        DataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.関税率.DefaultCellStyle = DataGridViewCellStyle34
         Me.関税率.HeaderText = "関税率"
         Me.関税率.Name = "関税率"
         Me.関税率.ReadOnly = True
         '
         '関税額
         '
+        DataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.関税額.DefaultCellStyle = DataGridViewCellStyle35
         Me.関税額.HeaderText = "関税額"
         Me.関税額.Name = "関税額"
         Me.関税額.ReadOnly = True
         '
         '前払法人税率
         '
+        DataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.前払法人税率.DefaultCellStyle = DataGridViewCellStyle36
         Me.前払法人税率.HeaderText = "前払法人税率"
         Me.前払法人税率.Name = "前払法人税率"
         Me.前払法人税率.ReadOnly = True
         '
         '前払法人税額
         '
+        DataGridViewCellStyle37.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.前払法人税額.DefaultCellStyle = DataGridViewCellStyle37
         Me.前払法人税額.HeaderText = "前払法人税額"
         Me.前払法人税額.Name = "前払法人税額"
         Me.前払法人税額.ReadOnly = True
         '
         '輸送費率
         '
+        DataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.輸送費率.DefaultCellStyle = DataGridViewCellStyle38
         Me.輸送費率.HeaderText = "輸送費率"
         Me.輸送費率.Name = "輸送費率"
         Me.輸送費率.ReadOnly = True
         '
         '輸送費額
         '
+        DataGridViewCellStyle39.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.輸送費額.DefaultCellStyle = DataGridViewCellStyle39
         Me.輸送費額.HeaderText = "輸送費額"
         Me.輸送費額.Name = "輸送費額"
         Me.輸送費額.ReadOnly = True
         '
         '仕入金額
         '
-        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.仕入金額.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle40.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle40.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.仕入金額.DefaultCellStyle = DataGridViewCellStyle40
         Me.仕入金額.HeaderText = "仕入金額"
         Me.仕入金額.Name = "仕入金額"
         Me.仕入金額.ReadOnly = True
         '
         '売単価
         '
+        DataGridViewCellStyle41.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.売単価.DefaultCellStyle = DataGridViewCellStyle41
         Me.売単価.HeaderText = "売単価"
         Me.売単価.Name = "売単価"
         Me.売単価.ReadOnly = True
@@ -1023,40 +1067,43 @@ Partial Class Cymn
         '
         '売上金額
         '
-        DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.売上金額.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle42.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle42.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.売上金額.DefaultCellStyle = DataGridViewCellStyle42
         Me.売上金額.HeaderText = "売上金額"
         Me.売上金額.Name = "売上金額"
         Me.売上金額.ReadOnly = True
         '
         '見積単価
         '
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.見積単価.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle43.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.見積単価.DefaultCellStyle = DataGridViewCellStyle43
         Me.見積単価.HeaderText = "見積単価"
         Me.見積単価.Name = "見積単価"
         Me.見積単価.ReadOnly = True
         '
         '見積金額
         '
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.見積金額.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle44.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.見積金額.DefaultCellStyle = DataGridViewCellStyle44
         Me.見積金額.HeaderText = "見積金額"
         Me.見積金額.Name = "見積金額"
         Me.見積金額.ReadOnly = True
         '
         '粗利額
         '
-        DataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.粗利額.DefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle45.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle45.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.粗利額.DefaultCellStyle = DataGridViewCellStyle45
         Me.粗利額.HeaderText = "粗利額"
         Me.粗利額.Name = "粗利額"
         Me.粗利額.ReadOnly = True
         '
         '粗利率
         '
-        DataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.粗利率.DefaultCellStyle = DataGridViewCellStyle10
+        DataGridViewCellStyle46.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle46.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.粗利率.DefaultCellStyle = DataGridViewCellStyle46
         Me.粗利率.HeaderText = "粗利率"
         Me.粗利率.Name = "粗利率"
         Me.粗利率.ReadOnly = True
@@ -1083,6 +1130,8 @@ Partial Class Cymn
         '
         '間接費率
         '
+        DataGridViewCellStyle47.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.間接費率.DefaultCellStyle = DataGridViewCellStyle47
         Me.間接費率.HeaderText = "間接費率"
         Me.間接費率.Name = "間接費率"
         Me.間接費率.ReadOnly = True
@@ -1091,8 +1140,9 @@ Partial Class Cymn
         '
         '間接費
         '
-        DataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.間接費.DefaultCellStyle = DataGridViewCellStyle11
+        DataGridViewCellStyle48.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle48.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.間接費.DefaultCellStyle = DataGridViewCellStyle48
         Me.間接費.HeaderText = "間接費"
         Me.間接費.Name = "間接費"
         Me.間接費.ReadOnly = True

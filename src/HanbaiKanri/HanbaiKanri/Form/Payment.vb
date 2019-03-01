@@ -781,7 +781,7 @@ Public Class Payment
         Dim nfi As NumberFormatInfo = New CultureInfo(CommonConst.CI_JP, False).NumberFormat
 
         '日本の形式に書き換える
-        Return prmVal.ToString("F3", nfi) '売掛残高を増やす
+        Return prmVal.ToString("F3", nfi)
     End Function
 
 End Class
