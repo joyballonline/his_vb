@@ -291,11 +291,11 @@ Public Class QuoteList
             '受注済みの見積は取消できない
             '受注済みの見積は仕入単価入力もできない
             '受発注登録の時も受注済みは表示しない
-            If _status = CommonConst.STATUS_CANCEL Or _status = CommonConst.STATUS_PRICE Or _status = CommonConst.STATUS_ORDER_NEW Then
+            If (_status = CommonConst.STATUS_CANCEL) Or (_status = CommonConst.STATUS_PRICE) Or (_status = CommonConst.STATUS_ORDER_NEW) Or (_status = CommonConst.STATUS_ORDER_PURCHASE) Then
                 strWhere += " and 受注日 is null"
             End If
             '受発注登録の時は有効期限切れは表示しない
-            If _status = CommonConst.STATUS_ORDER_NEW Then
+            If (_status = CommonConst.STATUS_ORDER_NEW) Or (_status = CommonConst.STATUS_ORDER_PURCHASE) Then
                 strWhere += " and 見積有効期限 >= current_date"
             End If
 
