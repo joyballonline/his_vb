@@ -324,9 +324,9 @@ Public Class SalesProfitList
                 sheet.Range("J1").Value = "GrossMarginRate"
             End If
 
-            Dim cellRowIndex As Integer = 2
+            Dim cellRowIndex As Integer = 1
             For i As Integer = 0 To DgvList.RowCount - 1
-                cellRowIndex += i
+                cellRowIndex += 1
                 sheet.Rows(cellRowIndex).Insert
                 sheet.Range("A" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("売上番号").Value '売上番号
                 sheet.Range("B" & cellRowIndex.ToString).Value = strFormatDate(DgvList.Rows(i).Cells("売上日").Value) '売上日
