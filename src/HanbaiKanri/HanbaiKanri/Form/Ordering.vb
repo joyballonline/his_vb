@@ -197,21 +197,9 @@ Public Class Ordering
         Dim Sql As String = ""
 
         'ここで最大値の高いものを取得するSQLを実行する
-
-        Sql = " AND "
-        Sql += "発注番号"
-        Sql += " ILIKE "
-        Sql += "'"
-        Sql += PurchaseNo.ToString
-        Sql += "'"
-        Sql += " AND "
-        Sql += "発注番号枝番"
-        Sql += " ILIKE "
-        Sql += "'"
-        Sql += PurchaseSuffix.ToString
-        Sql += "'"
-        Sql += " AND "
-        Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+        Sql = " AND 発注番号 = '" & PurchaseNo.ToString & "'"
+        Sql += " AND 発注番号枝番 = '" & PurchaseSuffix.ToString & "'"
+        Sql += " AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
 
         Dim dsHattyu As DataSet = getDsData("t20_hattyu", Sql)
         CompanyCode = dsHattyu.Tables(RS).Rows(0)("会社コード")
@@ -246,12 +234,7 @@ Public Class Ordering
             TxtPostalCode.Text = dsHattyu.Tables(RS).Rows(0)("仕入先郵便番号")
         End If
         If dsHattyu.Tables(RS).Rows(0)("仕入先住所") IsNot DBNull.Value Then
-            Dim Address As String = dsHattyu.Tables(RS).Rows(0)("仕入先住所")
-            Dim delimiter As String = " "
-            Dim parts As String() = Split(Address, delimiter, -1, CompareMethod.Text)
-            TxtAddress1.Text = parts(0).ToString
-            TxtAddress2.Text = parts(1).ToString
-            TxtAddress3.Text = parts(2).ToString
+            TxtAddress1.Text = dsHattyu.Tables(RS).Rows(0)("仕入先住所")
         End If
         If dsHattyu.Tables(RS).Rows(0)("仕入先電話番号") IsNot DBNull.Value Then
             TxtTel.Text = dsHattyu.Tables(RS).Rows(0)("仕入先電話番号")
@@ -373,8 +356,6 @@ Public Class Ordering
             TxtSupplierName.Enabled = True
             TxtPostalCode.Enabled = True
             TxtAddress1.Enabled = True
-            TxtAddress2.Enabled = True
-            TxtAddress3.Enabled = True
             TxtTel.Enabled = True
             TxtFax.Enabled = True
             TxtPosition.Enabled = True
@@ -829,10 +810,6 @@ Public Class Ordering
                 Sql += TxtPostalCode.Text '仕入先郵便番号
                 Sql += "', '"
                 Sql += TxtAddress1.Text '仕入先住所
-                Sql += " "
-                Sql += TxtAddress2.Text '仕入先住所
-                Sql += " "
-                Sql += TxtAddress3.Text '仕入先住所
                 Sql += "', '"
                 Sql += TxtTel.Text '仕入先電話番号
                 Sql += "', '"
@@ -1036,6 +1013,7 @@ Public Class Ordering
 
         Dim dsHattyuhd = getDsData("t20_hattyu", Sql)
 
+        Sql = ""
         Sql += " AND "
         Sql += "発注番号"
         Sql += " ILIKE "
@@ -1048,8 +1026,6 @@ Public Class Ordering
         Sql += "'"
         Sql += PurchaseSuffix.ToString
         Sql += "'"
-        Sql += " AND "
-        Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
 
         Dim dsHattyudt = getDsData("t21_hattyu", Sql)
 
@@ -1087,8 +1063,13 @@ Public Class Ordering
             sheet.Range("A15").Value = "Telp." & dsHattyuhd.Tables(RS).Rows(0)("仕入先電話番号") & "　Fax." & dsHattyuhd.Tables(RS).Rows(0)("仕入先ＦＡＸ")
             sheet.Range("T8").Value = dsHattyuhd.Tables(RS).Rows(0)("発注番号") & "-" & dsHattyuhd.Tables(RS).Rows(0)("発注番号枝番")
             sheet.Range("T9").Value = dsHattyuhd.Tables(RS).Rows(0)("発注日")
-            Dim tmp = CbShippedBy.Items(dsHattyuhd.Tables(RS).Rows(0)("出荷方法"))
-            sheet.Range("T10").Value = tmp
+            If dsHattyuhd.Tables(RS).Rows(0)("出荷方法") Is DBNull.Value Then
+                sheet.Range("T10").Value = ""
+            Else
+                Dim tmp = CbShippedBy.Items(dsHattyuhd.Tables(RS).Rows(0)("出荷方法"))
+                sheet.Range("T10").Value = tmp
+            End If
+
             sheet.Range("T11").Value = dsHattyuhd.Tables(RS).Rows(0)("出荷日")
             sheet.Range("T12").Value = dsHattyuhd.Tables(RS).Rows(0)("仕入先名")
             sheet.Range("T13").Value = dsHattyuhd.Tables(RS).Rows(0)("客先番号")
@@ -1192,9 +1173,7 @@ Public Class Ordering
         If dsSupplier.Tables(RS).Rows.Count > 0 Then
             TxtSupplierName.Text = dsSupplier.Tables(RS).Rows(0)("仕入先名").ToString
             TxtPostalCode.Text = dsSupplier.Tables(RS).Rows(0)("郵便番号").ToString
-            TxtAddress1.Text = dsSupplier.Tables(RS).Rows(0)("住所１").ToString
-            TxtAddress2.Text = dsSupplier.Tables(RS).Rows(0)("住所２").ToString
-            TxtAddress3.Text = dsSupplier.Tables(RS).Rows(0)("住所３").ToString
+            TxtAddress1.Text = dsSupplier.Tables(RS).Rows(0)("住所１").ToString & " " & dsSupplier.Tables(RS).Rows(0)("住所２").ToString & " " & dsSupplier.Tables(RS).Rows(0)("住所３").ToString
             TxtTel.Text = dsSupplier.Tables(RS).Rows(0)("電話番号").ToString
             TxtFax.Text = dsSupplier.Tables(RS).Rows(0)("ＦＡＸ番号").ToString
             TxtPerson.Text = dsSupplier.Tables(RS).Rows(0)("担当者名").ToString
@@ -1210,15 +1189,8 @@ Public Class Ordering
         Dim reccnt As Integer = 0 'DB用（デフォルト）
         Dim Sql As String = ""
 
-        Sql += "SELECT"
-        Sql += " *"
-        Sql += " FROM "
-
-        Sql += "public." & tableName
-        Sql += " WHERE "
-        Sql += "会社コード"
-        Sql += " ILIKE  "
-        Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += "SELECT * FROM public." & tableName
+        Sql += " WHERE 会社コード =  '" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql += txtParam
 
         Return _db.selectDB(Sql, RS, reccnt)
@@ -1231,12 +1203,10 @@ Public Class Ordering
     Private Function getDsHanyoData(ByVal prmFixed As String, Optional ByRef prmVariable As String = "") As DataSet
         Dim Sql As String = ""
 
-        Sql = " AND "
-        Sql += "固定キー ILIKE '" & prmFixed & "'"
+        Sql = " AND 固定キー = '" & prmFixed & "'"
 
         If prmVariable IsNot "" Then
-            Sql += " AND "
-            Sql += "可変キー ILIKE '" & prmVariable & "'"
+            Sql += " AND 可変キー = '" & prmVariable & "'"
         End If
 
         'リードタイムのリストを汎用マスタから取得
@@ -1254,14 +1224,9 @@ Public Class Ordering
         Dim reccnt As Integer = 0 'DB用（デフォルト）
 
         Try
-            Sql = "SELECT "
-            Sql += "* "
-            Sql += "FROM "
-            Sql += "public.m80_saiban"
-            Sql += " WHERE "
-            Sql += "会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Sql += " AND "
-            Sql += "採番キー = '" & key & "'"
+            Sql = "SELECT * FROM public.m80_saiban"
+            Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += " AND 採番キー = '" & key & "'"
 
             Dim dsSaiban As DataSet = _db.selectDB(Sql, RS, reccnt)
 
@@ -1279,28 +1244,12 @@ Public Class Ordering
                 keyNo = dsSaiban.Tables(RS).Rows(0)("最新値") + 1
             End If
 
-            Sql = "UPDATE "
-            Sql += "Public.m80_saiban "
-            Sql += "SET "
-            Sql += " 最新値 "
-            Sql += " = '"
-            Sql += keyNo.ToString
-            Sql += "', "
-            Sql += "更新者"
-            Sql += " = '"
-            Sql += frmC01F10_Login.loginValue.TantoNM
-            Sql += "', "
-            Sql += "更新日"
-            Sql += " = '"
-            Sql += today
-            Sql += "' "
-            Sql += "WHERE"
-            Sql += " 会社コード"
-            Sql += "='"
-            Sql += frmC01F10_Login.loginValue.BumonCD
-            Sql += "'"
-            Sql += " AND"
-            Sql += " 採番キー = '" & key & "'"
+            Sql = "UPDATE Public.m80_saiban "
+            Sql += "SET  最新値  = '" & keyNo.ToString & "'"
+            Sql += " , 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+            Sql += " , 更新日 = '" & today & "'"
+            Sql += "WHERE 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += " AND 採番キー = '" & key & "'"
             Console.WriteLine(Sql)
             _db.executeDB(Sql)
 

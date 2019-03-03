@@ -152,9 +152,7 @@ Public Class SupplierSearch
             frm.TxtSupplierCode.Text = Dgv_Supplier.Rows(idx).Cells("仕入先コード").Value
             frm.TxtSupplierName.Text = Dgv_Supplier.Rows(idx).Cells("仕入先名").Value
             frm.TxtPostalCode.Text = Dgv_Supplier.Rows(idx).Cells("郵便番号").Value
-            frm.TxtAddress1.Text = Dgv_Supplier.Rows(idx).Cells("住所１").Value
-            frm.TxtAddress2.Text = Dgv_Supplier.Rows(idx).Cells("住所２").Value
-            frm.TxtAddress3.Text = Dgv_Supplier.Rows(idx).Cells("住所３").Value
+            frm.TxtAddress1.Text = Dgv_Supplier.Rows(idx).Cells("住所１").Value & " " & Dgv_Supplier.Rows(idx).Cells("住所２").Value & " " & Dgv_Supplier.Rows(idx).Cells("住所３").Value
             frm.TxtTel.Text = Dgv_Supplier.Rows(idx).Cells("電話番号").Value
             frm.TxtFax.Text = Dgv_Supplier.Rows(idx).Cells("FAX番号").Value
             frm.TxtPerson.Text = Dgv_Supplier.Rows(idx).Cells("担当者名").Value

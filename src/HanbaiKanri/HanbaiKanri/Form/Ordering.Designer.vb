@@ -73,8 +73,6 @@ Partial Class Ordering
         Me.BtnBack = New System.Windows.Forms.Button()
         Me.DtpRegistrationDate = New System.Windows.Forms.DateTimePicker()
         Me.BtnRegistration = New System.Windows.Forms.Button()
-        Me.TxtAddress3 = New System.Windows.Forms.TextBox()
-        Me.TxtAddress2 = New System.Windows.Forms.TextBox()
         Me.LblRegistrationDate = New System.Windows.Forms.Label()
         Me.TxtSales = New System.Windows.Forms.TextBox()
         Me.LblSales = New System.Windows.Forms.Label()
@@ -127,12 +125,13 @@ Partial Class Ordering
         '
         'TxtTel
         '
-        Me.TxtTel.BackColor = System.Drawing.Color.White
+        Me.TxtTel.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.TxtTel.Enabled = False
         Me.TxtTel.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtTel.Location = New System.Drawing.Point(765, 42)
         Me.TxtTel.MaxLength = 15
         Me.TxtTel.Name = "TxtTel"
+        Me.TxtTel.ReadOnly = True
         Me.TxtTel.Size = New System.Drawing.Size(200, 23)
         Me.TxtTel.TabIndex = 13
         '
@@ -150,13 +149,15 @@ Partial Class Ordering
         '
         'TxtAddress1
         '
-        Me.TxtAddress1.BackColor = System.Drawing.Color.White
+        Me.TxtAddress1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.TxtAddress1.Enabled = False
         Me.TxtAddress1.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtAddress1.Location = New System.Drawing.Point(273, 71)
         Me.TxtAddress1.MaxLength = 100
+        Me.TxtAddress1.Multiline = True
         Me.TxtAddress1.Name = "TxtAddress1"
-        Me.TxtAddress1.Size = New System.Drawing.Size(330, 23)
+        Me.TxtAddress1.ReadOnly = True
+        Me.TxtAddress1.Size = New System.Drawing.Size(330, 81)
         Me.TxtAddress1.TabIndex = 7
         '
         'TxtPerson
@@ -184,23 +185,25 @@ Partial Class Ordering
         '
         'TxtFax
         '
-        Me.TxtFax.BackColor = System.Drawing.Color.White
+        Me.TxtFax.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.TxtFax.Enabled = False
         Me.TxtFax.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtFax.Location = New System.Drawing.Point(765, 71)
         Me.TxtFax.MaxLength = 15
         Me.TxtFax.Name = "TxtFax"
+        Me.TxtFax.ReadOnly = True
         Me.TxtFax.Size = New System.Drawing.Size(200, 23)
         Me.TxtFax.TabIndex = 14
         '
         'TxtPostalCode
         '
-        Me.TxtPostalCode.BackColor = System.Drawing.Color.White
+        Me.TxtPostalCode.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.TxtPostalCode.Enabled = False
         Me.TxtPostalCode.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtPostalCode.Location = New System.Drawing.Point(127, 71)
         Me.TxtPostalCode.MaxLength = 3
         Me.TxtPostalCode.Name = "TxtPostalCode"
+        Me.TxtPostalCode.ReadOnly = True
         Me.TxtPostalCode.Size = New System.Drawing.Size(140, 23)
         Me.TxtPostalCode.TabIndex = 6
         Me.TxtPostalCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -231,12 +234,13 @@ Partial Class Ordering
         '
         'TxtSupplierName
         '
-        Me.TxtSupplierName.BackColor = System.Drawing.Color.White
+        Me.TxtSupplierName.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.TxtSupplierName.Enabled = False
         Me.TxtSupplierName.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtSupplierName.Location = New System.Drawing.Point(273, 42)
         Me.TxtSupplierName.MaxLength = 50
         Me.TxtSupplierName.Name = "TxtSupplierName"
+        Me.TxtSupplierName.ReadOnly = True
         Me.TxtSupplierName.Size = New System.Drawing.Size(330, 23)
         Me.TxtSupplierName.TabIndex = 5
         '
@@ -565,28 +569,6 @@ Partial Class Ordering
         Me.BtnRegistration.Text = "登録"
         Me.BtnRegistration.UseVisualStyleBackColor = True
         '
-        'TxtAddress3
-        '
-        Me.TxtAddress3.BackColor = System.Drawing.Color.White
-        Me.TxtAddress3.Enabled = False
-        Me.TxtAddress3.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtAddress3.Location = New System.Drawing.Point(273, 129)
-        Me.TxtAddress3.MaxLength = 100
-        Me.TxtAddress3.Name = "TxtAddress3"
-        Me.TxtAddress3.Size = New System.Drawing.Size(330, 23)
-        Me.TxtAddress3.TabIndex = 9
-        '
-        'TxtAddress2
-        '
-        Me.TxtAddress2.BackColor = System.Drawing.Color.White
-        Me.TxtAddress2.Enabled = False
-        Me.TxtAddress2.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtAddress2.Location = New System.Drawing.Point(273, 100)
-        Me.TxtAddress2.MaxLength = 100
-        Me.TxtAddress2.Name = "TxtAddress2"
-        Me.TxtAddress2.Size = New System.Drawing.Size(330, 23)
-        Me.TxtAddress2.TabIndex = 8
-        '
         'LblRegistrationDate
         '
         Me.LblRegistrationDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
@@ -892,8 +874,6 @@ Partial Class Ordering
         Me.Controls.Add(Me.BtnBack)
         Me.Controls.Add(Me.DtpRegistrationDate)
         Me.Controls.Add(Me.BtnRegistration)
-        Me.Controls.Add(Me.TxtAddress3)
-        Me.Controls.Add(Me.TxtAddress2)
         Me.Controls.Add(Me.LblRegistrationDate)
         Me.Controls.Add(Me.TxtSales)
         Me.Controls.Add(Me.LblSales)
@@ -941,8 +921,6 @@ Partial Class Ordering
     Friend WithEvents BtnBack As Button
     Friend WithEvents DtpRegistrationDate As DateTimePicker
     Friend WithEvents BtnRegistration As Button
-    Friend WithEvents TxtAddress3 As TextBox
-    Friend WithEvents TxtAddress2 As TextBox
     Friend WithEvents LblRegistrationDate As Label
     Friend WithEvents TxtSales As TextBox
     Friend WithEvents LblSales As Label
