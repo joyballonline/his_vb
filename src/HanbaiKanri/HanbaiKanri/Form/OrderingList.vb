@@ -508,6 +508,16 @@ Public Class OrderingList
 
     '発注参照ボタン押下時
     Private Sub BtnPurchaseView_Click(sender As Object, e As EventArgs) Handles BtnPurchaseView.Click
+
+        '明細表示時、または対象データがない場合は取消操作不可能
+        If DgvHtyhd.Rows.Count = 0 Then
+
+            '操作できないアラートを出す
+            _msgHd.dspMSG("NonAction", frmC01F10_Login.loginValue.Language)
+            Return
+
+        End If
+
         Dim RowIdx As Integer
         RowIdx = Me.DgvHtyhd.CurrentCell.RowIndex
         Dim No As String = DgvHtyhd.Rows(RowIdx).Cells("発注番号").Value
@@ -520,6 +530,15 @@ Public Class OrderingList
 
     '発注複製ボタン押下時
     Private Sub BtnPurchaseClone_Click(sender As Object, e As EventArgs) Handles BtnPurchaseClone.Click
+        '明細表示時、または対象データがない場合は取消操作不可能
+        If DgvHtyhd.Rows.Count = 0 Then
+
+            '操作できないアラートを出す
+            _msgHd.dspMSG("NonAction", frmC01F10_Login.loginValue.Language)
+            Return
+
+        End If
+
         Dim RowIdx As Integer
         RowIdx = Me.DgvHtyhd.CurrentCell.RowIndex
         Dim No As String = DgvHtyhd.Rows(RowIdx).Cells("発注番号").Value
@@ -536,6 +555,16 @@ Public Class OrderingList
 
     '発注修正ボタン押下時
     Private Sub BtnPurchaseeEdit_Click(sender As Object, e As EventArgs) Handles BtnPurchaseEdit.Click
+
+        '明細表示時、または対象データがない場合は取消操作不可能
+        If DgvHtyhd.Rows.Count = 0 Then
+
+            '操作できないアラートを出す
+            _msgHd.dspMSG("NonAction", frmC01F10_Login.loginValue.Language)
+            Return
+
+        End If
+
         Dim RowIdx As Integer
         RowIdx = Me.DgvHtyhd.CurrentCell.RowIndex
         Dim No As String = DgvHtyhd.Rows(RowIdx).Cells("発注番号").Value
@@ -681,6 +710,16 @@ Public Class OrderingList
 
     '仕入入力ボタン押下時
     Private Sub BtnOrding_Click(sender As Object, e As EventArgs) Handles BtnOrding.Click
+
+        '明細表示時、または対象データがない場合は取消操作不可能
+        If DgvHtyhd.Rows.Count = 0 Then
+
+            '操作できないアラートを出す
+            _msgHd.dspMSG("NonAction", frmC01F10_Login.loginValue.Language)
+            Return
+
+        End If
+
         Dim RowIdx As Integer
         RowIdx = Me.DgvHtyhd.CurrentCell.RowIndex
         Dim No As String = DgvHtyhd.Rows(RowIdx).Cells("発注番号").Value
@@ -693,6 +732,16 @@ Public Class OrderingList
 
     '入庫入力ボタン押下時
     Private Sub BtnGoodsIssue_Click(sender As Object, e As EventArgs) Handles BtnReceipt.Click
+
+        '明細表示時、または対象データがない場合は取消操作不可能
+        If DgvHtyhd.Rows.Count = 0 Then
+
+            '操作できないアラートを出す
+            _msgHd.dspMSG("NonAction", frmC01F10_Login.loginValue.Language)
+            Return
+
+        End If
+
         Dim RowIdx As Integer
         RowIdx = Me.DgvHtyhd.CurrentCell.RowIndex
         Dim No As String = DgvHtyhd.Rows(RowIdx).Cells("発注番号").Value
@@ -705,6 +754,16 @@ Public Class OrderingList
 
     '買掛登録ボタン押下時
     Private Sub BtnAP_Click(sender As Object, e As EventArgs) Handles BtnAP.Click
+
+        '明細表示時、または対象データがない場合は取消操作不可能
+        If DgvHtyhd.Rows.Count = 0 Then
+
+            '操作できないアラートを出す
+            _msgHd.dspMSG("NonAction", frmC01F10_Login.loginValue.Language)
+            Return
+
+        End If
+
         Dim RowIdx As Integer
         RowIdx = Me.DgvHtyhd.CurrentCell.RowIndex
         Dim No As String = DgvHtyhd.Rows(RowIdx).Cells("発注番号").Value

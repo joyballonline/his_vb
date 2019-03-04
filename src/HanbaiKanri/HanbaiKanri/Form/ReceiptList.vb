@@ -506,7 +506,18 @@ Public Class ReceiptList
 
     End Sub
 
+    '参照ボタン押下時
     Private Sub BtnSalesView_Click(sender As Object, e As EventArgs) Handles BtnReceiptView.Click
+
+        '明細表示時、または対象データがない場合は取消操作不可能
+        If RbtnDetails.Checked Or DgvNyuko.Rows.Count = 0 Then
+
+            '操作できないアラートを出す
+            _msgHd.dspMSG("NonAction", frmC01F10_Login.loginValue.Language)
+            Return
+
+        End If
+
         Dim RowIdx As Integer
         RowIdx = Me.DgvNyuko.CurrentCell.RowIndex
         Dim No As String = DgvNyuko.Rows(RowIdx).Cells("発注番号").Value
