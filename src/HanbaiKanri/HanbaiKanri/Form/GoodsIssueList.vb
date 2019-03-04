@@ -171,6 +171,9 @@ Public Class GoodsIssueList
                 DgvCymnhd.Columns.Add("取消", "Cancel")
                 DgvCymnhd.Columns.Add("出庫番号", "GoodsDeliveryNumber")
                 DgvCymnhd.Columns.Add("行番号", "LineNumber")
+                DgvCymnhd.Columns.Add("出庫日", "GoodsDeliveryDate")
+                DgvCymnhd.Columns.Add("受注番号", "JobOrderNumber")
+                DgvCymnhd.Columns.Add("受注番号枝番", "JobOrderSubNumber")
                 DgvCymnhd.Columns.Add("仕入区分", "PurchasingClassification")
                 DgvCymnhd.Columns.Add("メーカー", "Manufacturer")
                 DgvCymnhd.Columns.Add("品名", "ItemName")
@@ -186,6 +189,9 @@ Public Class GoodsIssueList
                 DgvCymnhd.Columns.Add("取消", "取消")
                 DgvCymnhd.Columns.Add("出庫番号", "出庫番号")
                 DgvCymnhd.Columns.Add("行番号", "行番号")
+                DgvCymnhd.Columns.Add("出庫日", "出庫日")
+                DgvCymnhd.Columns.Add("受注番号", "受注番号")
+                DgvCymnhd.Columns.Add("受注番号枝番", "受注番号枝番")
                 DgvCymnhd.Columns.Add("仕入区分", "仕入区分")
                 DgvCymnhd.Columns.Add("メーカー", "メーカー")
                 DgvCymnhd.Columns.Add("品名", "品名")
@@ -204,7 +210,7 @@ Public Class GoodsIssueList
 
             Dim reccnt As Integer = 0
 
-            Sql = " SELECT t45.*, t44.取消区分 "
+            Sql = " SELECT t45.*, t44.取消区分, t44.出庫日, t44.受注番号, t44.受注番号枝番 "
             Sql += " FROM "
             Sql += " t45_shukodt t45"
             Sql += " INNER JOIN t44_shukohd t44 ON "
@@ -297,9 +303,12 @@ Public Class GoodsIssueList
                     DgvCymnhd.Rows(i).Cells("取消").Value = getDelKbnTxt(ds.Tables(RS).Rows(i)("取消区分"))
                     DgvCymnhd.Rows(i).Cells("出庫番号").Value = ds.Tables(RS).Rows(i)("出庫番号")
                     DgvCymnhd.Rows(i).Cells("行番号").Value = ds.Tables(RS).Rows(i)("行番号")
+                    DgvCymnhd.Rows(i).Cells("出庫日").Value = ds.Tables(RS).Rows(i)("出庫日").ToShortDateString()
+                    DgvCymnhd.Rows(i).Cells("受注番号").Value = ds.Tables(RS).Rows(i)("受注番号")
+                    DgvCymnhd.Rows(i).Cells("受注番号枝番").Value = ds.Tables(RS).Rows(i)("受注番号枝番")
                     DgvCymnhd.Rows(i).Cells("仕入区分").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
-                                                                sireKbn.Tables(RS).Rows(0)("文字１"),
-                                                                sireKbn.Tables(RS).Rows(0)("文字２"))
+                                                                sireKbn.Tables(RS).Rows(0)("文字２"),
+                                                                sireKbn.Tables(RS).Rows(0)("文字１"))
                     DgvCymnhd.Rows(i).Cells("メーカー").Value = ds.Tables(RS).Rows(i)("メーカー")
                     DgvCymnhd.Rows(i).Cells("品名").Value = ds.Tables(RS).Rows(i)("品名")
                     DgvCymnhd.Rows(i).Cells("型式").Value = ds.Tables(RS).Rows(i)("型式")

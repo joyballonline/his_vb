@@ -345,11 +345,17 @@ Public Class ReceiptList
                 ds = _db.selectDB(Sql, RS, reccnt)
 
                 For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+                    '汎用マスタから仕入区分名称取得
+                    Dim sireKbn As DataSet = getDsHanyoData(CommonConst.FIXED_KEY_PURCHASING_CLASS, ds.Tables(RS).Rows(i)("仕入区分").ToString)
+
                     DgvNyuko.Rows.Add()
                     DgvNyuko.Rows(i).Cells("取消").Value = getDelKbnTxt(ds.Tables(RS).Rows(i)("取消区分"))
                     DgvNyuko.Rows(i).Cells("入庫番号").Value = ds.Tables(RS).Rows(i)("入庫番号")
                     DgvNyuko.Rows(i).Cells("行番号").Value = ds.Tables(RS).Rows(i)("行番号")
                     DgvNyuko.Rows(i).Cells("仕入区分").Value = ds.Tables(RS).Rows(i)("仕入区分")
+                    DgvNyuko.Rows(i).Cells("仕入区分").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
+                                                                sireKbn.Tables(RS).Rows(0)("文字２"),
+                                                                sireKbn.Tables(RS).Rows(0)("文字１"))
                     DgvNyuko.Rows(i).Cells("メーカー").Value = ds.Tables(RS).Rows(i)("メーカー")
                     DgvNyuko.Rows(i).Cells("品名").Value = ds.Tables(RS).Rows(i)("品名")
                     DgvNyuko.Rows(i).Cells("型式").Value = ds.Tables(RS).Rows(i)("型式")
@@ -648,6 +654,23 @@ Public Class ReceiptList
                                     IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_JPN, CommonConst.CANCEL_KBN_JPN_TXT, CommonConst.CANCEL_KBN_ENG_TXT),
                                     "")
         Return reDelKbn
+    End Function
+
+    '汎用マスタから固定キー、可変キーに応じた結果を返す
+    'param1：String 固定キー
+    'param2：String 可変キー
+    'Return: DataSet
+    Private Function getDsHanyoData(ByVal prmFixed As String, ByVal prmVariable As String) As DataSet
+        Dim Sql As String = ""
+
+        Sql = " AND "
+        Sql += "固定キー ILIKE '" & prmFixed & "'"
+        Sql += " AND "
+        Sql += "可変キー ILIKE '" & prmVariable & "'"
+
+        'リードタイムのリストを汎用マスタから取得
+        Return getDsData("m90_hanyo", Sql)
+
     End Function
 
     'param1：String テーブル名
