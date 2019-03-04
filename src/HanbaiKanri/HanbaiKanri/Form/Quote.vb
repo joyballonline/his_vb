@@ -404,21 +404,22 @@ Public Class Quote
             Next
 
             '金額計算
-            Dim Total As Integer = 0
-            Dim QuoteTotal As Integer = 0
-            Dim PurchaseTotal As Integer = 0
-            Dim GrossProfit As Decimal = 0
+            Dim Total As Decimal = 0            '売上金額
+            Dim QuoteTotal As Decimal = 0       '見積金額
+            Dim PurchaseTotal As Decimal = 0    '仕入金額
+            Dim GrossProfit As Decimal = 0      '粗利
 
             For index As Integer = 0 To DgvItemList.Rows.Count - 1
                 PurchaseTotal += DgvItemList.Rows(index).Cells("仕入金額").Value
                 Total += DgvItemList.Rows(index).Cells("売上金額").Value
                 QuoteTotal += DgvItemList.Rows(index).Cells("見積金額").Value
+                GrossProfit += DgvItemList.Rows(index).Cells("粗利額").Value
             Next
 
-            TxtPurchaseTotal.Text = PurchaseTotal
-            TxtTotal.Text = Total
-            TxtQuoteTotal.Text = QuoteTotal
-            TxtGrossProfit.Text = Total - PurchaseTotal
+            TxtPurchaseTotal.Text = PurchaseTotal.ToString("F0")
+            TxtTotal.Text = Total.ToString("F0")
+            TxtQuoteTotal.Text = QuoteTotal.ToString("F0")
+            TxtGrossProfit.Text = GrossProfit.ToString("F0")
 
             '行番号の振り直し
             Dim i As Integer = DgvItemList.Rows.Count()
@@ -1962,9 +1963,10 @@ Public Class Quote
         Dim QuoteRemarks As String = TxtRemarks.Text
         Dim ItemCount As String = TxtItemCount.Text
         Dim Vat As String = TxtVat.Text
-        Dim PurchaseTotal As String = TxtPurchaseTotal.Text
-        Dim QuoteAmount As String = TxtTotal.Text
-        Dim GrossProfitAmount As String = TxtGrossProfit.Text
+        Dim PurchaseTotal As String = TxtPurchaseTotal.Text     '仕入
+        Dim Total As String = TxtTotal.Text                     '売上
+        Dim QuoteAmount As String = TxtQuoteTotal.Text          '見積
+        Dim GrossProfitAmount As String = TxtGrossProfit.Text   '粗利
 
         Dim No(DgvItemList.Rows.Count - 1) As String
         Dim PurchaseCategory(DgvItemList.Rows.Count - 1) As String
@@ -2033,9 +2035,10 @@ Public Class Quote
             sheet.Range("N3").Value = Input
             sheet.Range("B6").Value = PaymentTerms
             sheet.Range("B7").Value = QuoteRemarks
-            sheet.Range("W14").Value = PurchaseTotal
-            sheet.Range("W15").Value = QuoteAmount
-            sheet.Range("W16").Value = GrossProfitAmount
+            sheet.Range("Y14").Value = PurchaseTotal        '仕入
+            sheet.Range("Y15").Value = Total                '売上
+            sheet.Range("Y16").Value = QuoteAmount          '見積
+            sheet.Range("Y17").Value = GrossProfitAmount    '粗利
 
 
 
@@ -2085,13 +2088,15 @@ Public Class Quote
                 sheet.Range("Q" & currentRow).Value = DgvItemList.Rows(index).Cells("仕入金額").Value
                 sheet.Range("R" & currentRow).Value = DgvItemList.Rows(index).Cells("売単価").Value
                 sheet.Range("S" & currentRow).Value = DgvItemList.Rows(index).Cells("売上金額").Value
-                sheet.Range("T" & currentRow).Value = DgvItemList.Rows(index).Cells("粗利額").Value
-                sheet.Range("U" & currentRow).Value = DgvItemList.Rows(index).Cells("粗利率").Value
+                sheet.Range("T" & currentRow).Value = DgvItemList.Rows(index).Cells("見積単価").Value
+                sheet.Range("U" & currentRow).Value = DgvItemList.Rows(index).Cells("見積金額").Value
+                sheet.Range("V" & currentRow).Value = DgvItemList.Rows(index).Cells("粗利額").Value
+                sheet.Range("W" & currentRow).Value = DgvItemList.Rows(index).Cells("粗利率").Value
                 tmp = ""
                 tmp += DgvItemList.Rows(index).Cells("リードタイム").Value
                 tmp += DgvItemList.Item("リードタイム単位", index).FormattedValue
-                sheet.Range("V" & currentRow).Value = tmp
-                sheet.Range("W" & currentRow).Value = DgvItemList.Rows(index).Cells("備考").Value
+                sheet.Range("X" & currentRow).Value = tmp
+                sheet.Range("Y" & currentRow).Value = DgvItemList.Rows(index).Cells("備考").Value
 
 
                 currentRow += 1
