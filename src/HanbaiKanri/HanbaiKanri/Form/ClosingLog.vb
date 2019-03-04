@@ -2621,12 +2621,11 @@ Public Class ClosingLog
                 Sql += ", "
             End If
             If dsShukohd.Tables(RS).Rows(i)("取消区分") IsNot DBNull.Value Then
-                Sql += "'"
                 Sql += dsShukohd.Tables(RS).Rows(i)("取消区分").ToString
             Else
                 Sql += "0"
             End If
-            Sql += "', '"
+            Sql += ", '"
             Sql += dtToday
             Sql += " ')"
 
