@@ -28,14 +28,12 @@ Partial Class GoodsIssueList
         Me.RbtnDetails = New System.Windows.Forms.RadioButton()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.TxtGoodsNo2 = New System.Windows.Forms.TextBox()
-        Me.TxtSalesDate2 = New System.Windows.Forms.TextBox()
+        Me.TxtGoodsUntil = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.TxtSales = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.TxtGoodsNo1 = New System.Windows.Forms.TextBox()
+        Me.TxtGoodsSince = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.TxtSalesDate1 = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.TxtCustomerCode = New System.Windows.Forms.TextBox()
@@ -53,6 +51,8 @@ Partial Class GoodsIssueList
         Me.LblMode = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.TxtCustomerPO = New System.Windows.Forms.TextBox()
+        Me.dtDateSince = New System.Windows.Forms.DateTimePicker()
+        Me.dtDateUntil = New System.Windows.Forms.DateTimePicker()
         CType(Me.DgvCymnhd, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -117,25 +117,17 @@ Partial Class GoodsIssueList
         Me.Label5.AutoSize = True
         Me.Label5.Location = New System.Drawing.Point(936, 46)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(19, 13)
+        Me.Label5.Size = New System.Drawing.Size(17, 12)
         Me.Label5.TabIndex = 117
         Me.Label5.Text = "～"
         '
-        'TxtGoodsNo2
+        'TxtGoodsUntil
         '
-        Me.TxtGoodsNo2.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtGoodsNo2.Location = New System.Drawing.Point(959, 68)
-        Me.TxtGoodsNo2.Name = "TxtGoodsNo2"
-        Me.TxtGoodsNo2.Size = New System.Drawing.Size(170, 22)
-        Me.TxtGoodsNo2.TabIndex = 8
-        '
-        'TxtSalesDate2
-        '
-        Me.TxtSalesDate2.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtSalesDate2.Location = New System.Drawing.Point(959, 40)
-        Me.TxtSalesDate2.Name = "TxtSalesDate2"
-        Me.TxtSalesDate2.Size = New System.Drawing.Size(170, 22)
-        Me.TxtSalesDate2.TabIndex = 6
+        Me.TxtGoodsUntil.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtGoodsUntil.Location = New System.Drawing.Point(959, 68)
+        Me.TxtGoodsUntil.Name = "TxtGoodsUntil"
+        Me.TxtGoodsUntil.Size = New System.Drawing.Size(170, 22)
+        Me.TxtGoodsUntil.TabIndex = 8
         '
         'Label6
         '
@@ -169,13 +161,13 @@ Partial Class GoodsIssueList
         Me.Label7.Text = "出庫番号"
         Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'TxtGoodsNo1
+        'TxtGoodsSince
         '
-        Me.TxtGoodsNo1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtGoodsNo1.Location = New System.Drawing.Point(760, 67)
-        Me.TxtGoodsNo1.Name = "TxtGoodsNo1"
-        Me.TxtGoodsNo1.Size = New System.Drawing.Size(170, 22)
-        Me.TxtGoodsNo1.TabIndex = 7
+        Me.TxtGoodsSince.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtGoodsSince.Location = New System.Drawing.Point(760, 67)
+        Me.TxtGoodsSince.Name = "TxtGoodsSince"
+        Me.TxtGoodsSince.Size = New System.Drawing.Size(170, 22)
+        Me.TxtGoodsSince.TabIndex = 7
         '
         'Label8
         '
@@ -188,14 +180,6 @@ Partial Class GoodsIssueList
         Me.Label8.TabIndex = 110
         Me.Label8.Text = "出庫日"
         Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'TxtSalesDate1
-        '
-        Me.TxtSalesDate1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtSalesDate1.Location = New System.Drawing.Point(760, 40)
-        Me.TxtSalesDate1.Name = "TxtSalesDate1"
-        Me.TxtSalesDate1.Size = New System.Drawing.Size(170, 22)
-        Me.TxtSalesDate1.TabIndex = 5
         '
         'Label4
         '
@@ -214,7 +198,7 @@ Partial Class GoodsIssueList
         Me.Label9.AutoSize = True
         Me.Label9.Location = New System.Drawing.Point(936, 74)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(19, 13)
+        Me.Label9.Size = New System.Drawing.Size(17, 12)
         Me.Label9.TabIndex = 118
         Me.Label9.Text = "～"
         '
@@ -372,10 +356,38 @@ Partial Class GoodsIssueList
         Me.TxtCustomerPO.Size = New System.Drawing.Size(170, 22)
         Me.TxtCustomerPO.TabIndex = 10
         '
+        'dtDateSince
+        '
+        Me.dtDateSince.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.dtDateSince.CustomFormat = ""
+        Me.dtDateSince.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.dtDateSince.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtDateSince.Location = New System.Drawing.Point(760, 39)
+        Me.dtDateSince.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
+        Me.dtDateSince.Name = "dtDateSince"
+        Me.dtDateSince.Size = New System.Drawing.Size(170, 22)
+        Me.dtDateSince.TabIndex = 332
+        Me.dtDateSince.Value = New Date(2019, 1, 1, 0, 0, 0, 0)
+        '
+        'dtDateUntil
+        '
+        Me.dtDateUntil.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.dtDateUntil.CustomFormat = ""
+        Me.dtDateUntil.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.dtDateUntil.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtDateUntil.Location = New System.Drawing.Point(959, 40)
+        Me.dtDateUntil.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
+        Me.dtDateUntil.Name = "dtDateUntil"
+        Me.dtDateUntil.Size = New System.Drawing.Size(170, 22)
+        Me.dtDateUntil.TabIndex = 333
+        Me.dtDateUntil.Value = New Date(2019, 1, 1, 0, 0, 0, 0)
+        '
         'GoodsIssueList
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.dtDateUntil)
+        Me.Controls.Add(Me.dtDateSince)
         Me.Controls.Add(Me.RbtnDetails)
         Me.Controls.Add(Me.RbtnSlip)
         Me.Controls.Add(Me.Label11)
@@ -385,14 +397,12 @@ Partial Class GoodsIssueList
         Me.Controls.Add(Me.BtnGoodsIssueView)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.TxtGoodsNo2)
-        Me.Controls.Add(Me.TxtSalesDate2)
+        Me.Controls.Add(Me.TxtGoodsUntil)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.TxtSales)
         Me.Controls.Add(Me.Label7)
-        Me.Controls.Add(Me.TxtGoodsNo1)
+        Me.Controls.Add(Me.TxtGoodsSince)
         Me.Controls.Add(Me.Label8)
-        Me.Controls.Add(Me.TxtSalesDate1)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.TxtCustomerCode)
@@ -422,14 +432,12 @@ Partial Class GoodsIssueList
     Friend WithEvents RbtnDetails As RadioButton
     Friend WithEvents Label10 As Label
     Friend WithEvents Label5 As Label
-    Friend WithEvents TxtGoodsNo2 As TextBox
-    Friend WithEvents TxtSalesDate2 As TextBox
+    Friend WithEvents TxtGoodsUntil As TextBox
     Friend WithEvents Label6 As Label
     Friend WithEvents TxtSales As TextBox
     Friend WithEvents Label7 As Label
-    Friend WithEvents TxtGoodsNo1 As TextBox
+    Friend WithEvents TxtGoodsSince As TextBox
     Friend WithEvents Label8 As Label
-    Friend WithEvents TxtSalesDate1 As TextBox
     Friend WithEvents Label4 As Label
     Friend WithEvents Label9 As Label
     Friend WithEvents TxtCustomerCode As TextBox
@@ -447,4 +455,6 @@ Partial Class GoodsIssueList
     Friend WithEvents LblMode As Label
     Friend WithEvents Label11 As Label
     Friend WithEvents TxtCustomerPO As TextBox
+    Friend WithEvents dtDateSince As DateTimePicker
+    Friend WithEvents dtDateUntil As DateTimePicker
 End Class
