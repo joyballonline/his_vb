@@ -115,8 +115,13 @@ Public Class OrderRemainingList
         Try
 
             Dim dsCymndt As DataSet = _db.selectDB(Sql, RS, reccnt)
+            Dim calVat As Decimal = 0
+            Dim calAmount As Decimal = 0
 
             For i As Integer = 0 To dsCymndt.Tables(RS).Rows.Count - 1
+                calVat = Format(dsCymndt.Tables(RS).Rows(i)("見積単価") * dsCymndt.Tables(RS).Rows(i)("ＶＡＴ") / 100, "0.000")
+                calAmount = (dsCymndt.Tables(RS).Rows(i)("見積単価") + calVat) * dsCymndt.Tables(RS).Rows(i)("受注数量")
+
                 DgvCymndt.Rows.Add()
                 DgvCymndt.Rows(i).Cells("受注番号").Value = dsCymndt.Tables(RS).Rows(i)("受注番号")
                 DgvCymndt.Rows(i).Cells("受注番号枝番").Value = dsCymndt.Tables(RS).Rows(i)("受注番号枝番")
@@ -129,9 +134,9 @@ Public Class OrderRemainingList
                 DgvCymndt.Rows(i).Cells("数量").Value = dsCymndt.Tables(RS).Rows(i)("受注数量")
                 DgvCymndt.Rows(i).Cells("単位").Value = dsCymndt.Tables(RS).Rows(i)("単位")
                 DgvCymndt.Rows(i).Cells("単価").Value = dsCymndt.Tables(RS).Rows(i)("見積単価")
-                DgvCymndt.Rows(i).Cells("ＶＡＴ").Value = dsCymndt.Tables(RS).Rows(i)("ＶＡＴ")
-                DgvCymndt.Rows(i).Cells("計").Value = dsCymndt.Tables(RS).Rows(i)("受注数量") * dsCymndt.Tables(RS).Rows(i)("見積単価")
-                DgvCymndt.Rows(i).Cells("受注残数").Value = dsCymndt.Tables(RS).Rows(i)("受注残数")
+                DgvCymndt.Rows(i).Cells("ＶＡＴ").Value = calVat
+                DgvCymndt.Rows(i).Cells("計").Value = calAmount
+                DgvCymndt.Rows(i).Cells("受注残数").Value = dsCymndt.Tables(RS).Rows(i)("受注残数") '受注数量に係るものはここだけ
                 DgvCymndt.Rows(i).Cells("備考").Value = dsCymndt.Tables(RS).Rows(i)("備考")
             Next
 
