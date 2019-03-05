@@ -1670,7 +1670,7 @@ Public Class Quote
             sheet.Range("S9").Value = CmnData(3).ToShortDateString()     '見積日
 
             sheet.Range("H27").Value = CmnData(15)                       '支払条件
-            sheet.Range("H28").Value = CmnData(9) & " " & CmnData(10)   '納品先（得意先郵便番号と得意先住所
+            sheet.Range("H28").Value = CmnData(6)                       '納品先（得意先名
             sheet.Range("H29").Value = CmnData(4).ToShortDateString()    '有効期限？
             sheet.Range("H30").Value = CmnData(16)                       '備考
 
