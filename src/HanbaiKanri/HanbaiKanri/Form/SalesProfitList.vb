@@ -82,7 +82,7 @@ Public Class SalesProfitList
 
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
 
-            LblMode.Text = "View Mode"
+            LblMode.Text = SalesStatus & " Mode"
 
             DgvList.Columns("売上番号").HeaderText = "SalesNumber"
             DgvList.Columns("売上日").HeaderText = "SalesDate"
@@ -309,9 +309,11 @@ Public Class SalesProfitList
 
             sheet.PageSetup.LeftHeader = "売上・売上原価・利益・利益率一覧表（月次）"
             sheet.PageSetup.CenterHeader = strSelectYear & "/" & strSelectMonth
+            sheet.PageSetup.RightHeader = "OutputDate：" & DateTime.Now.ToShortDateString
 
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-                sheet.PageSetup.RightHeader = "OutputDate：" & DateTime.Now.ToShortDateString
+                sheet.PageSetup.LeftHeader = "SalesProfitList（Monthly）"
+                sheet.PageSetup.CenterHeader = strSelectMonth & "/" & strSelectYear
 
                 sheet.Range("A1").Value = "SalesNumber"
                 sheet.Range("B1").Value = "SalesDate"
