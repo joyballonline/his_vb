@@ -400,6 +400,12 @@
     <Compile Include="Form\JobOrderList.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form\SalesVATList.Designer.vb">
+      <DependentUpon>SalesVATList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\SalesVATList.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\SalesProfitList.Designer.vb">
       <DependentUpon>SalesProfitList.vb</DependentUpon>
     </Compile>
@@ -619,6 +625,9 @@
     <EmbeddedResource Include="Form\JobOrderList.resx">
       <DependentUpon>JobOrderList.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form\SalesVATList.resx">
+      <DependentUpon>SalesVATList.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\SalesProfitList.resx">
       <DependentUpon>SalesProfitList.vb</DependentUpon>
     </EmbeddedResource>
@@ -669,6 +678,7 @@
     <None Include="bin\BaseXls\Quotation_xxx.xlsx" />
     <None Include="bin\BaseXls\Receipt.xlsx" />
     <None Include="bin\BaseXls\SalesProfitList.xlsx" />
+    <None Include="bin\BaseXls\SalesVATList.xlsx" />
     <None Include="bin\Setting\HanbaiKanri.ini" />
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">

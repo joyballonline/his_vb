@@ -956,6 +956,12 @@ Public Class frmC01F30_Menu
                 openForm = New SalesProfitList(_msgHd, _db, _langHd, Status)
                 openForm.Show()
                 Me.Hide()
+            Case CommonConst.MENU_H0360  '売上金・ＶＡＴ一覧
+                Dim Status As String = CommonConst.STATUS_VIEW
+                Dim openForm As Form = Nothing
+                openForm = New SalesVATList(_msgHd, _db, _langHd, Status)
+                openForm.Show()
+                Me.Hide()
             '-----------------------------------出庫業務（H04）
             Case CommonConst.MENU_H0410  '出庫登録
                 Dim Status As String = CommonConst.STATUS_GOODS_ISSUE

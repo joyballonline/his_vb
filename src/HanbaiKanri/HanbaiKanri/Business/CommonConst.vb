@@ -157,6 +157,7 @@ Public Class CommonConst
     Public Const MENU_H0330 As String = "H0330"           '売上取消
     Public Const MENU_H0340 As String = "H0340"           '売上参照
     Public Const MENU_H0350 As String = "H0350"           '売上利益一覧
+    Public Const MENU_H0360 As String = "H0360"           '売上金・ＶＡＴ一覧
 
     Public Const MENU_H0410 As String = "H0410"           '出庫登録
     Public Const MENU_H0420 As String = "H0420"           '出庫編集
