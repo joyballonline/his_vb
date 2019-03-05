@@ -256,7 +256,7 @@ Public Class JobOrderList
                 cellRowIndex += 1
 
                 sheet.Range("A" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("受注番号").Value '受注番号
-                sheet.Range("B" & cellRowIndex.ToString).Value = strFormatDate(DgvList.Rows(i).Cells("受注日").Value) '受注日
+                sheet.Range("B" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("受注日").Value '受注日
                 sheet.Range("C" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("得意先名").Value '得意先
                 sheet.Range("D" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("メーカー").Value 'メーカー
                 sheet.Range("E" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("品名").Value '品名
@@ -406,6 +406,14 @@ Public Class JobOrderList
 
         '日本の形式に書き換える
         Return changeFormat
+    End Function
+
+    '金額フォーマット（登録の際の小数点指定子）を日本の形式に合わせる
+    '桁区切り記号は外す
+    Private Function useFormatNumber(ByVal prmVal As Decimal) As String
+
+        '使用形式に書き換える
+        Return prmVal.ToString("N3", CultureInfo.InvariantCulture)
     End Function
 
 End Class

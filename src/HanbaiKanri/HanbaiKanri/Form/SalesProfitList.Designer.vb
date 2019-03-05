@@ -22,13 +22,13 @@ Partial Class SalesProfitList
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.BtnExcelOutput = New System.Windows.Forms.Button()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.BtnBack = New System.Windows.Forms.Button()
@@ -132,8 +132,8 @@ Partial Class SalesProfitList
         '
         '売上計
         '
-        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.売上計.DefaultCellStyle = DataGridViewCellStyle15
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.売上計.DefaultCellStyle = DataGridViewCellStyle1
         Me.売上計.HeaderText = "売上計"
         Me.売上計.Name = "売上計"
         Me.売上計.ReadOnly = True
@@ -141,8 +141,8 @@ Partial Class SalesProfitList
         '
         'ＶＡＴ
         '
-        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.ＶＡＴ.DefaultCellStyle = DataGridViewCellStyle16
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.ＶＡＴ.DefaultCellStyle = DataGridViewCellStyle2
         Me.ＶＡＴ.HeaderText = "ＶＡＴ"
         Me.ＶＡＴ.Name = "ＶＡＴ"
         Me.ＶＡＴ.ReadOnly = True
@@ -150,8 +150,8 @@ Partial Class SalesProfitList
         '
         '売上金額計
         '
-        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.売上金額計.DefaultCellStyle = DataGridViewCellStyle17
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.売上金額計.DefaultCellStyle = DataGridViewCellStyle3
         Me.売上金額計.HeaderText = "売上 + VAT"
         Me.売上金額計.Name = "売上金額計"
         Me.売上金額計.ReadOnly = True
@@ -159,8 +159,8 @@ Partial Class SalesProfitList
         '
         '間接費
         '
-        DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.間接費.DefaultCellStyle = DataGridViewCellStyle18
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.間接費.DefaultCellStyle = DataGridViewCellStyle4
         Me.間接費.HeaderText = "間接費"
         Me.間接費.Name = "間接費"
         Me.間接費.ReadOnly = True
@@ -168,8 +168,8 @@ Partial Class SalesProfitList
         '
         '売上原価計
         '
-        DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.売上原価計.DefaultCellStyle = DataGridViewCellStyle19
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.売上原価計.DefaultCellStyle = DataGridViewCellStyle5
         Me.売上原価計.HeaderText = "売上原価計"
         Me.売上原価計.Name = "売上原価計"
         Me.売上原価計.ReadOnly = True
@@ -177,8 +177,8 @@ Partial Class SalesProfitList
         '
         '粗利
         '
-        DataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.粗利.DefaultCellStyle = DataGridViewCellStyle20
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.粗利.DefaultCellStyle = DataGridViewCellStyle6
         Me.粗利.HeaderText = "粗利"
         Me.粗利.Name = "粗利"
         Me.粗利.ReadOnly = True
@@ -186,8 +186,8 @@ Partial Class SalesProfitList
         '
         '粗利率
         '
-        DataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.粗利率.DefaultCellStyle = DataGridViewCellStyle21
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.粗利率.DefaultCellStyle = DataGridViewCellStyle7
         Me.粗利率.HeaderText = "粗利率"
         Me.粗利率.Name = "粗利率"
         Me.粗利率.ReadOnly = True
@@ -202,7 +202,7 @@ Partial Class SalesProfitList
         Me.LblMode.Name = "LblMode"
         Me.LblMode.Size = New System.Drawing.Size(165, 22)
         Me.LblMode.TabIndex = 96
-        Me.LblMode.Text = "モード"
+        Me.LblMode.Text = "参照モード"
         Me.LblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'cmbYear

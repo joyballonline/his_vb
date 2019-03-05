@@ -30,6 +30,11 @@ Partial Class JobOrderList
         Me.Label8 = New System.Windows.Forms.Label()
         Me.BtnBack = New System.Windows.Forms.Button()
         Me.DgvList = New System.Windows.Forms.DataGridView()
+        Me.LblMode = New System.Windows.Forms.Label()
+        Me.cmbYear = New System.Windows.Forms.ComboBox()
+        Me.cmbMonth = New System.Windows.Forms.ComboBox()
+        Me.LblMonth = New System.Windows.Forms.Label()
+        Me.LblYear = New System.Windows.Forms.Label()
         Me.受注番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.受注日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.得意先名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -41,11 +46,6 @@ Partial Class JobOrderList
         Me.単価 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ＶＡＴ = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.LblMode = New System.Windows.Forms.Label()
-        Me.cmbYear = New System.Windows.Forms.ComboBox()
-        Me.cmbMonth = New System.Windows.Forms.ComboBox()
-        Me.LblMonth = New System.Windows.Forms.Label()
-        Me.LblYear = New System.Windows.Forms.Label()
         CType(Me.DgvList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -96,6 +96,58 @@ Partial Class JobOrderList
         Me.DgvList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvList.Size = New System.Drawing.Size(1326, 390)
         Me.DgvList.TabIndex = 14
+        '
+        'LblMode
+        '
+        Me.LblMode.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblMode.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblMode.Location = New System.Drawing.Point(1173, 9)
+        Me.LblMode.Name = "LblMode"
+        Me.LblMode.Size = New System.Drawing.Size(165, 22)
+        Me.LblMode.TabIndex = 96
+        Me.LblMode.Text = "参照モード"
+        Me.LblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'cmbYear
+        '
+        Me.cmbYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbYear.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.cmbYear.FormattingEnabled = True
+        Me.cmbYear.Location = New System.Drawing.Point(85, 70)
+        Me.cmbYear.Name = "cmbYear"
+        Me.cmbYear.Size = New System.Drawing.Size(111, 23)
+        Me.cmbYear.TabIndex = 335
+        '
+        'cmbMonth
+        '
+        Me.cmbMonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbMonth.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.cmbMonth.FormattingEnabled = True
+        Me.cmbMonth.Location = New System.Drawing.Point(85, 40)
+        Me.cmbMonth.Name = "cmbMonth"
+        Me.cmbMonth.Size = New System.Drawing.Size(111, 23)
+        Me.cmbMonth.TabIndex = 336
+        '
+        'LblMonth
+        '
+        Me.LblMonth.AutoSize = True
+        Me.LblMonth.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblMonth.Location = New System.Drawing.Point(34, 43)
+        Me.LblMonth.Name = "LblMonth"
+        Me.LblMonth.Size = New System.Drawing.Size(23, 15)
+        Me.LblMonth.TabIndex = 343
+        Me.LblMonth.Text = "月"
+        '
+        'LblYear
+        '
+        Me.LblYear.AutoSize = True
+        Me.LblYear.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblYear.Location = New System.Drawing.Point(34, 73)
+        Me.LblYear.Name = "LblYear"
+        Me.LblYear.Size = New System.Drawing.Size(23, 15)
+        Me.LblYear.TabIndex = 344
+        Me.LblYear.Text = "年"
         '
         '受注番号
         '
@@ -181,58 +233,6 @@ Partial Class JobOrderList
         Me.計.Name = "計"
         Me.計.ReadOnly = True
         Me.計.Width = 42
-        '
-        'LblMode
-        '
-        Me.LblMode.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.LblMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblMode.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblMode.Location = New System.Drawing.Point(1173, 9)
-        Me.LblMode.Name = "LblMode"
-        Me.LblMode.Size = New System.Drawing.Size(165, 22)
-        Me.LblMode.TabIndex = 96
-        Me.LblMode.Text = "参照モード"
-        Me.LblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'cmbYear
-        '
-        Me.cmbYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbYear.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.cmbYear.FormattingEnabled = True
-        Me.cmbYear.Location = New System.Drawing.Point(85, 70)
-        Me.cmbYear.Name = "cmbYear"
-        Me.cmbYear.Size = New System.Drawing.Size(111, 23)
-        Me.cmbYear.TabIndex = 335
-        '
-        'cmbMonth
-        '
-        Me.cmbMonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbMonth.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.cmbMonth.FormattingEnabled = True
-        Me.cmbMonth.Location = New System.Drawing.Point(85, 40)
-        Me.cmbMonth.Name = "cmbMonth"
-        Me.cmbMonth.Size = New System.Drawing.Size(111, 23)
-        Me.cmbMonth.TabIndex = 336
-        '
-        'LblMonth
-        '
-        Me.LblMonth.AutoSize = True
-        Me.LblMonth.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblMonth.Location = New System.Drawing.Point(34, 43)
-        Me.LblMonth.Name = "LblMonth"
-        Me.LblMonth.Size = New System.Drawing.Size(23, 15)
-        Me.LblMonth.TabIndex = 343
-        Me.LblMonth.Text = "月"
-        '
-        'LblYear
-        '
-        Me.LblYear.AutoSize = True
-        Me.LblYear.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblYear.Location = New System.Drawing.Point(34, 73)
-        Me.LblYear.Name = "LblYear"
-        Me.LblYear.Size = New System.Drawing.Size(23, 15)
-        Me.LblYear.TabIndex = 344
-        Me.LblYear.Text = "年"
         '
         'JobOrderList
         '

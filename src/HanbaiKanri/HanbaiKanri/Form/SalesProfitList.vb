@@ -82,6 +82,8 @@ Public Class SalesProfitList
 
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
 
+            LblMode.Text = "View Mode"
+
             DgvList.Columns("売上番号").HeaderText = "SalesNumber"
             DgvList.Columns("売上日").HeaderText = "SalesDate"
             DgvList.Columns("得意先名").HeaderText = "CustomerName"
@@ -93,9 +95,8 @@ Public Class SalesProfitList
             DgvList.Columns("粗利").HeaderText = "GrossMargin"
             DgvList.Columns("粗利率").HeaderText = "GrossMarginRate"
 
-
             Label8.Text = "SalesDate"
-            BtnExcelOutput.Text = "SalesDataView"
+            BtnExcelOutput.Text = "ExcelOutput"
             BtnBack.Text = "Back"
             LblMonth.Text = "Month"
             LblYear.Text = "Year"
@@ -329,7 +330,7 @@ Public Class SalesProfitList
                 cellRowIndex += 1
                 sheet.Rows(cellRowIndex).Insert
                 sheet.Range("A" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("売上番号").Value '売上番号
-                sheet.Range("B" & cellRowIndex.ToString).Value = strFormatDate(DgvList.Rows(i).Cells("売上日").Value) '売上日
+                sheet.Range("B" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("売上日").Value '売上日
                 sheet.Range("C" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("得意先名").Value '得意先
                 sheet.Range("D" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("売上計").Value '売上計
                 sheet.Range("E" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("ＶＡＴ").Value 'VAT
