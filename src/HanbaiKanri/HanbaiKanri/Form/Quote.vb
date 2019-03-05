@@ -2033,8 +2033,8 @@ Public Class Quote
             sheet = CType(book.Worksheets(1), Excel.Worksheet)
 
             Dim rowCnt As Integer = 0
-            Dim currentRow As Integer = 10
-            Dim lastRow As Integer = 12
+            Dim currentRow As Integer = 11
+            Dim lastRow As Integer = 13
 
             sheet.Range("B1").Value = QuoteNo & "-" & QuoteSuffix
             sheet.Range("I1").Value = QuoteDate & "(" & RegistrationDate & ")"
@@ -2049,15 +2049,15 @@ Public Class Quote
             sheet.Range("N3").Value = Input
             sheet.Range("B6").Value = PaymentTerms
             sheet.Range("B7").Value = QuoteRemarks
-            sheet.Range("Y14").Value = PurchaseTotal        '仕入
-            sheet.Range("Y15").Value = Total                '売上
-            sheet.Range("Y16").Value = QuoteAmount          '見積
-            sheet.Range("Y17").Value = GrossProfitAmount    '粗利
+            sheet.Range("T15").Value = PurchaseTotal        '仕入
+            sheet.Range("T16").Value = Total                '売上
+            sheet.Range("T17").Value = QuoteAmount          '見積
+            sheet.Range("T18").Value = GrossProfitAmount    '粗利
 
 
 
             For index As Integer = 0 To DgvItemList.Rows.Count - 1
-                If rowCnt > 3 Then
+                If rowCnt >= 3 Then
                     Dim R As Object
                     R = sheet.Range(lastRow - 2 & ":" & lastRow - 2)
                     R.Copy()
@@ -2067,59 +2067,49 @@ Public Class Quote
                     End If
                     lastRow += 1
                 End If
+                rowCnt += 1
+            Next
 
-                sheet.Range("A" & currentRow).Value = DgvItemList.Rows(index).Cells("No").Value
-                'sheet.Range("B" & currentRow).Value = PurchaseCategory(index) = DgvItemList(1, index).Value
-                'sheet.Range("B" & currentRow).Value = DgvItemList.Rows(index).Cells("仕入区分").Value
-                'DGVのコンボボックスから値を取る方法が良くわからなかったのでＤＢを読みに行くように変更
-                Dim reccnt As Integer = 0
-                Dim Sql As String = ""
-                Sql += "SELECT * FROM public.m90_hanyo"
-                Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-                Sql += " AND 固定キー = '1002'"
-                Sql += " AND 可変キー = '" & DgvItemList.Rows(index).Cells("仕入区分").Value & "'"
-                Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
-                If reccnt = 0 Then
-                    sheet.Range("B" & currentRow).Value = ""
-                Else
-                    If frmC01F10_Login.loginValue.Language = "ENG" Then
-                        sheet.Range("B" & currentRow).Value = ds.Tables(RS).Rows(0)("文字２").ToString
-                    Else
-                        sheet.Range("B" & currentRow).Value = ds.Tables(RS).Rows(0)("文字１").ToString
-                    End If
-
+            For index As Integer = 0 To DgvItemList.Rows.Count - 1
+                '明細からヘッダへ移動
+                If DgvItemList.Rows(index).Cells("関税率").Value <> 0 Then
+                    sheet.Range("I6").Value = DgvItemList.Rows(index).Cells("関税率").Value
+                End If
+                If DgvItemList.Rows(index).Cells("前払法人税率").Value <> 0 Then
+                    sheet.Range("I7").Value = DgvItemList.Rows(index).Cells("前払法人税率").Value
+                End If
+                If DgvItemList.Rows(index).Cells("輸送費率").Value <> 0 Then
+                    sheet.Range("I8").Value = DgvItemList.Rows(index).Cells("輸送費率").Value
                 End If
 
-                sheet.Range("C" & currentRow).Value = DgvItemList.Rows(index).Cells("メーカー").Value
-                sheet.Range("D" & currentRow).Value = DgvItemList.Rows(index).Cells("品名").Value
-                sheet.Range("E" & currentRow).Value = DgvItemList.Rows(index).Cells("型式").Value
-                sheet.Range("F" & currentRow).Value = DgvItemList.Rows(index).Cells("数量").Value
-                sheet.Range("G" & currentRow).Value = DgvItemList.Rows(index).Cells("単位").Value
-                sheet.Range("H" & currentRow).Value = DgvItemList.Rows(index).Cells("仕入先").Value
-                sheet.Range("I" & currentRow).Value = DgvItemList.Rows(index).Cells("仕入単価").Value
-                sheet.Range("J" & currentRow).Value = DgvItemList.Rows(index).Cells("仕入原価").Value
-                sheet.Range("K" & currentRow).Value = DgvItemList.Rows(index).Cells("関税率").Value
-                sheet.Range("L" & currentRow).Value = DgvItemList.Rows(index).Cells("関税額").Value
-                sheet.Range("M" & currentRow).Value = DgvItemList.Rows(index).Cells("前払法人税率").Value
-                sheet.Range("N" & currentRow).Value = DgvItemList.Rows(index).Cells("前払法人税額").Value
-                sheet.Range("O" & currentRow).Value = DgvItemList.Rows(index).Cells("輸送費率").Value
-                sheet.Range("P" & currentRow).Value = DgvItemList.Rows(index).Cells("輸送費額").Value
-                sheet.Range("Q" & currentRow).Value = DgvItemList.Rows(index).Cells("仕入金額").Value
-                sheet.Range("R" & currentRow).Value = DgvItemList.Rows(index).Cells("売単価").Value
-                sheet.Range("S" & currentRow).Value = DgvItemList.Rows(index).Cells("売上金額").Value
-                sheet.Range("T" & currentRow).Value = DgvItemList.Rows(index).Cells("見積単価").Value
-                sheet.Range("U" & currentRow).Value = DgvItemList.Rows(index).Cells("見積金額").Value
-                sheet.Range("V" & currentRow).Value = DgvItemList.Rows(index).Cells("粗利額").Value
-                sheet.Range("W" & currentRow).Value = DgvItemList.Rows(index).Cells("粗利率").Value
+
+                sheet.Range("A" & currentRow).Value = DgvItemList.Rows(index).Cells("No").Value
+
+                sheet.Range("B" & currentRow).Value = DgvItemList.Rows(index).Cells("メーカー").Value
+                sheet.Range("C" & currentRow).Value = DgvItemList.Rows(index).Cells("品名").Value
+                sheet.Range("D" & currentRow).Value = DgvItemList.Rows(index).Cells("型式").Value
+                sheet.Range("E" & currentRow).Value = DgvItemList.Rows(index).Cells("数量").Value
+                sheet.Range("F" & currentRow).Value = DgvItemList.Rows(index).Cells("単位").Value
+                sheet.Range("G" & currentRow).Value = DgvItemList.Rows(index).Cells("仕入先").Value
+                sheet.Range("H" & currentRow).Value = DgvItemList.Rows(index).Cells("仕入単価").Value
+                sheet.Range("I" & currentRow).Value = DgvItemList.Rows(index).Cells("仕入原価").Value
+                sheet.Range("J" & currentRow).Value = Math.Ceiling(DgvItemList.Rows(index).Cells("関税額").Value)
+                sheet.Range("K" & currentRow).Value = Math.Ceiling(DgvItemList.Rows(index).Cells("前払法人税額").Value)
+                sheet.Range("L" & currentRow).Value = Math.Ceiling(DgvItemList.Rows(index).Cells("輸送費額").Value)
+                sheet.Range("M" & currentRow).Value = DgvItemList.Rows(index).Cells("仕入金額").Value
+                sheet.Range("N" & currentRow).Value = DgvItemList.Rows(index).Cells("売単価").Value
+                sheet.Range("O" & currentRow).Value = DgvItemList.Rows(index).Cells("売上金額").Value
+                sheet.Range("P" & currentRow).Value = DgvItemList.Rows(index).Cells("見積単価").Value
+                sheet.Range("Q" & currentRow).Value = DgvItemList.Rows(index).Cells("見積金額").Value
+                sheet.Range("R" & currentRow).Value = DgvItemList.Rows(index).Cells("粗利額").Value
+                sheet.Range("S" & currentRow).Value = DgvItemList.Rows(index).Cells("粗利率").Value
                 tmp = ""
                 tmp += DgvItemList.Rows(index).Cells("リードタイム").Value
                 tmp += DgvItemList.Item("リードタイム単位", index).FormattedValue
-                sheet.Range("X" & currentRow).Value = tmp
-                sheet.Range("Y" & currentRow).Value = DgvItemList.Rows(index).Cells("備考").Value
+                sheet.Range("T" & currentRow).Value = tmp
 
 
                 currentRow += 1
-                rowCnt += 1
 
             Next
 
