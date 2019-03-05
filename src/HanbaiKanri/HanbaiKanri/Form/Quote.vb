@@ -1674,8 +1674,8 @@ Public Class Quote
             sheet.Range("H29").Value = CmnData(4).ToShortDateString()    '有効期限？
             sheet.Range("H30").Value = CmnData(16)                       '備考
 
-            sheet.Range("E34").Value = CmnData(13)                       '営業担当者
-            sheet.Range("E35").Value = CmnData(14)                       '入力担当者
+            sheet.Range("S11").Value = CmnData(13)                       '営業担当者
+            sheet.Range("S12").Value = CmnData(14)                       '入力担当者
 
             Dim rowCnt As Integer = 0
             Dim lstRow As Integer = 22
@@ -1771,6 +1771,8 @@ Public Class Quote
         End Try
     End Sub
 
+    '見積依頼書発行
+    '
     Private Sub BtnQuoteRequest_Click(sender As Object, e As EventArgs) Handles BtnQuoteRequest.Click
         Dim createFlg = False
 
