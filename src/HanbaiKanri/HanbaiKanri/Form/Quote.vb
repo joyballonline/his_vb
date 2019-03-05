@@ -149,7 +149,12 @@ Public Class Quote
         table2.Columns.Add("Value", GetType(Integer))
 
         For i As Integer = 0 To ds12.Tables(RS).Rows.Count - 1
-            table2.Rows.Add(ds12.Tables(RS).Rows(i)("文字１"), ds12.Tables(RS).Rows(i)("可変キー"))
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                table2.Rows.Add(ds12.Tables(RS).Rows(i)("文字２"), ds12.Tables(RS).Rows(i)("可変キー"))
+            Else
+                table2.Rows.Add(ds12.Tables(RS).Rows(i)("文字１"), ds12.Tables(RS).Rows(i)("可変キー"))
+            End If
+
         Next
 
         Dim column2 As New DataGridViewComboBoxColumn()
@@ -1664,12 +1669,8 @@ Public Class Quote
             sheet.Range("S8").Value = CmnData(1) & "-" & CmnData(2)    '見積番号
             sheet.Range("S9").Value = CmnData(3).ToShortDateString()     '見積日
 
-            'sheet.Range("V23").Value = CmnData(17)                       '見積額
-            'sheet.Range("V24").Value = CmnData(17) * CmnData(18) * 0.01      'VAT
-            'sheet.Range("V25").Value = CmnData(17) * CmnData(18) * 0.01 + CmnData(17)      '見積額 + VAT
-
             sheet.Range("H27").Value = CmnData(15)                       '支払条件
-            sheet.Range("H28").Value = CmnData(10) & " " & CmnData(11)   '納品先
+            sheet.Range("H28").Value = CmnData(9) & " " & CmnData(10)   '納品先（得意先郵便番号と得意先住所
             sheet.Range("H29").Value = CmnData(4).ToShortDateString()    '有効期限？
             sheet.Range("H30").Value = CmnData(16)                       '備考
 
@@ -1713,7 +1714,7 @@ Public Class Quote
                 cell = "A" & currentCnt
                 sheet.Range(cell).Value = num
                 cell = "C" & currentCnt
-                sheet.Range(cell).Value = ds3.Tables(RS).Rows(index)("メーカー") & "/" & ds3.Tables(RS).Rows(index)("品名") & "/" & ds3.Tables(RS).Rows(index)("型式") & vbCrLf & ds3.Tables(RS).Rows(index)("備考")
+                sheet.Range(cell).Value = ds3.Tables(RS).Rows(index)("メーカー") & vbLf & ds3.Tables(RS).Rows(index)("品名") & vbLf & ds3.Tables(RS).Rows(index)("型式") & vbLf & ds3.Tables(RS).Rows(index)("備考")
                 cell = "L" & currentCnt
                 sheet.Range(cell).Value = ds3.Tables(RS).Rows(index)("数量")
                 cell = "O" & currentCnt
@@ -1736,15 +1737,19 @@ Public Class Quote
                 cell = "Z" & currentCnt
                 tmp1 = ""
                 tmp1 += ds3.Tables(RS).Rows(index)("リードタイム")
-                tmp1 += ds5.Tables(RS).Rows(0)("文字１")
-
+                If frmC01F10_Login.loginValue.Language = "ENG" Then
+                    tmp1 += ds5.Tables(RS).Rows(0)("文字２")
+                Else
+                    tmp1 += ds5.Tables(RS).Rows(0)("文字１")
+                End If
                 sheet.Range(cell).Value = tmp1
+
+
 
                 currentCnt = currentCnt + 1
                 num = num + 1
             Next
 
-            'この部分がなぜか入らない
             'CmnData(18) = VAT
             cell = "V" & lstRow + 1
             sheet.Range(cell).Value = totalPrice
@@ -1752,7 +1757,7 @@ Public Class Quote
             sheet.Range(cell).Value = totalPrice * CmnData(18) * 0.01
             cell = "V" & lstRow + 3
             sheet.Range(cell).Value = totalPrice * CmnData(18) * 0.01 + totalPrice
-            sheet.Rows.AutoFit()
+            'sheet.Rows.AutoFit()
             book.SaveAs(sOutFile)
             app.Visible = True
 
@@ -2072,7 +2077,12 @@ Public Class Quote
                 If reccnt = 0 Then
                     sheet.Range("B" & currentRow).Value = ""
                 Else
-                    sheet.Range("B" & currentRow).Value = ds.Tables(RS).Rows(0)("文字１").ToString
+                    If frmC01F10_Login.loginValue.Language = "ENG" Then
+                        sheet.Range("B" & currentRow).Value = ds.Tables(RS).Rows(0)("文字２").ToString
+                    Else
+                        sheet.Range("B" & currentRow).Value = ds.Tables(RS).Rows(0)("文字１").ToString
+                    End If
+
                 End If
 
                 sheet.Range("C" & currentRow).Value = DgvItemList.Rows(index).Cells("メーカー").Value
