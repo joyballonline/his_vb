@@ -85,14 +85,9 @@ Public Class OrderingAdd
         SqlSaiban += "最大値, "
         SqlSaiban += "接頭文字, "
         SqlSaiban += "連番桁数 "
-        SqlSaiban += "FROM "
-        SqlSaiban += "public"
-        SqlSaiban += "."
-        SqlSaiban += "m80_saiban"
-        SqlSaiban += " WHERE "
-        SqlSaiban += "採番キー"
-        SqlSaiban += " ILIKE "
-        SqlSaiban += "'%30%'"
+        SqlSaiban += "FROM public.m80_saiban"
+        SqlSaiban += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        SqlSaiban += " AND 採番キー = '30'"
 
         Dim Saiban As DataSet = _db.selectDB(SqlSaiban, RS, reccnt)
 
@@ -129,23 +124,6 @@ Public Class OrderingAdd
         Saiban4 += "='"
         Saiban4 += "30"
         Saiban4 += "' "
-        Saiban4 += "RETURNING 会社コード"
-        Saiban4 += ", "
-        Saiban4 += "採番キー"
-        Saiban4 += ", "
-        Saiban4 += "最新値"
-        Saiban4 += ", "
-        Saiban4 += "最小値"
-        Saiban4 += ", "
-        Saiban4 += "最大値"
-        Saiban4 += ", "
-        Saiban4 += "接頭文字"
-        Saiban4 += ", "
-        Saiban4 += "連番桁数"
-        Saiban4 += ", "
-        Saiban4 += "更新者"
-        Saiban4 += ", "
-        Saiban4 += "更新日"
         _db.executeDB(Saiban4)
 
         TxtOrderingNo.Text = NewPurchaseNo
@@ -154,18 +132,6 @@ Public Class OrderingAdd
         'DateTimePickerのフォーマットを指定
         DtpPurchaseRegistration.Text = DateAdd("m", 0, Now).ToString("yyyy/MM/dd")
         DtpPurchaseDate.Text = DateAdd("m", 0, Now).ToString("yyyy/MM/dd")
-
-        'DgvItemList.Columns(0).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        'DgvItemList.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        'DgvItemList.Columns(7).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        'DgvItemList.Columns(8).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        'DgvItemList.Columns(9).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        'DgvItemList.Columns(10).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        'DgvItemList.Columns(11).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        'DgvItemList.Columns(12).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        'DgvItemList.Columns(13).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        'DgvItemList.Columns(14).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        'DgvItemList.Columns(15).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
         'セルの内容に合わせて、行の高さが自動的に調節されるようにする
         DgvItemList.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
@@ -435,10 +401,6 @@ Public Class OrderingAdd
         Sql3 += TxtPostalCode.Text
         Sql3 += "', '"
         Sql3 += TxtAddress1.Text
-        Sql3 += " "
-        Sql3 += TxtAddress2.Text
-        Sql3 += " "
-        Sql3 += TxtAddress3.Text
         Sql3 += "', '"
         Sql3 += TxtTel.Text
         Sql3 += "', '"
@@ -472,47 +434,6 @@ Public Class OrderingAdd
         Sql3 += "', '"
         Sql3 += "0"
         Sql3 += " ')"
-        Sql3 += "RETURNING 会社コード"
-        Sql3 += ", "
-        Sql3 += "発注番号"
-        Sql3 += ", "
-        Sql3 += "発注番号枝番"
-        Sql3 += ", "
-        Sql3 += "仕入先コード"
-        Sql3 += ", "
-        Sql3 += "仕入先名"
-        Sql3 += ", "
-        Sql3 += "仕入先郵便番号"
-        Sql3 += ", "
-        Sql3 += "仕入先住所"
-        Sql3 += ", "
-        Sql3 += "仕入先電話番号"
-        Sql3 += ", "
-        Sql3 += "仕入先ＦＡＸ"
-        Sql3 += ", "
-        Sql3 += "仕入先担当者役職"
-        Sql3 += ", "
-        Sql3 += "仕入先担当者名"
-        Sql3 += ", "
-        Sql3 += "支払条件"
-        Sql3 += ", "
-        Sql3 += "仕入金額"
-        Sql3 += ", "
-        Sql3 += "営業担当者"
-        Sql3 += ", "
-        Sql3 += "入力担当者"
-        Sql3 += ", "
-        Sql3 += "備考"
-        Sql3 += ", "
-        Sql3 += "発注日"
-        Sql3 += ", "
-        Sql3 += "登録日"
-        Sql3 += ", "
-        Sql3 += "更新日"
-        Sql3 += ", "
-        Sql3 += "更新者"
-        Sql3 += ", "
-        Sql3 += "取消区分"
 
         _db.executeDB(Sql3)
 
@@ -596,49 +517,6 @@ Public Class OrderingAdd
             Sql4 += "', '"
             Sql4 += dtNow
             Sql4 += " ')"
-            Sql4 += "RETURNING 会社コード"
-            Sql4 += ", "
-            Sql4 += "発注番号"
-            Sql4 += ", "
-            Sql4 += "発注番号枝番"
-            Sql4 += ", "
-            Sql4 += "行番号"
-            Sql4 += ", "
-            Sql4 += "仕入区分"
-            Sql4 += ", "
-            Sql4 += "メーカー"
-            Sql4 += ", "
-            Sql4 += "品名"
-            Sql4 += ", "
-            Sql4 += "型式"
-            Sql4 += ", "
-            Sql4 += "単位"
-            Sql4 += ", "
-            Sql4 += "仕入値"
-            Sql4 += ", "
-            Sql4 += "発注数量"
-            Sql4 += ", "
-            Sql4 += "仕入数量"
-            Sql4 += ", "
-            Sql4 += "発注残数"
-            Sql4 += ", "
-            Sql4 += "間接費"
-            Sql4 += ", "
-            Sql4 += "仕入単価"
-            Sql4 += ", "
-            Sql4 += "仕入金額"
-            Sql4 += ", "
-            Sql4 += "リードタイム"
-            Sql4 += ", "
-            Sql4 += "入庫数"
-            Sql4 += ", "
-            Sql4 += "未入庫数"
-            Sql4 += ", "
-            Sql4 += "備考"
-            Sql4 += ", "
-            Sql4 += "更新者"
-            Sql4 += ", "
-            Sql4 += "登録日"
 
             _db.executeDB(Sql4)
         Next
