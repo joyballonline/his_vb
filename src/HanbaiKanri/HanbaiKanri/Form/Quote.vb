@@ -2149,6 +2149,7 @@ Public Class Quote
             TxtPerson.Text = dsCode.Tables(RS).Rows(0)("担当者名").ToString
             TxtPosition.Text = dsCode.Tables(RS).Rows(0)("担当者役職").ToString
             TxtPaymentTerms.Text = dsCode.Tables(RS).Rows(0)("既定支払条件").ToString
+
         End If
     End Sub
 
