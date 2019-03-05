@@ -10,6 +10,7 @@ Imports UtilMDL.xls
 Imports Microsoft.Office.Interop
 Imports System.Runtime.InteropServices
 Imports System.Globalization
+Imports System.Text.RegularExpressions
 
 Public Class Ordering
     Inherits System.Windows.Forms.Form
@@ -111,9 +112,85 @@ Public Class Ordering
     '画面表示時
     Private Sub Ordering_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        '翻訳
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+            LblPurchaseNo.Text = "PurchaseOrderNo"
+            LblPurchaseNo.Size = New Size(145, 23)
+            TxtOrderingNo.Location = New Point(162, 12)
+            Label2.Location = New Point(256, 13)
+            TxtOrderingSuffix.Location = New Point(273, 13)
+            LblCustomerPO.Text = "CustomerNo"
+            LblCustomerPO.Location = New Point(308, 13)
+            LblCustomerPO.Size = New Size(142, 23)
+            TxtCustomerPO.Location = New Point(456, 13)
+            LblPurchaseDate.Text = "OrderDate"
+            LblPurchaseDate.Location = New Point(550, 13)
+            DtpPurchaseDate.Location = New Point(668, 13)
+            DtpPurchaseDate.Size = New Size(130, 22)
+            LblRegistrationDate.Text = "OrderRegistrationDate"
+            LblRegistrationDate.Size = New Size(158, 23)
+            LblRegistrationDate.Location = New Point(802, 13)
+            DtpRegistrationDate.Location = New Point(968, 13)
+            DtpRegistrationDate.Size = New Size(130, 22)
+
+            LblSupplierName.Text = "SupplierName"
+            LblAddress.Text = "Address"
+            LblTel.Text = "PhoneNumber"
+            LblFax.Text = "FAX"
+            LblPerson.Text = "NameOfPIC"
+            LblPosition.Text = "PositionPICSupplier"
+            LblSales.Text = "SalesPersonInCharge"
+            LblInput.Text = "PICForInputting"
+            LblPaymentTerms.Text = "PaymentTerms"
+            TxtPaymentTerms.Location = New Point(181, 158)
+            LblPaymentTerms.Size = New Size(162, 23)
+            LblPurchaseRemarks.Text = "PurchaseRemarks"
+            LblPurchaseRemarks.Size = New Size(162, 23)
+            TxtPurchaseRemark.Location = New Point(181, 187)
+            LblRemarks.Text = "QuotationRemarks"
+            LblRemarks.Size = New Size(162, 23)
+            TxtQuoteRemarks.Location = New Point(181, 216)
+            LblItemCount.Text = "ItemCount"
+            LblMethod.Text = "ShippingMethod"
+            LblShipDate.Text = "ShipDate"
+
+            LblPurchaseAmount.Text = "PurchaseOrderAmount"
+            LblPurchaseAmount.Size = New Size(180, 23)
+            LblPurchaseAmount.Location = New Point(923, 465)
+
+            TxtSupplierCode.Size = New Point(62, 23)
+            BtnCodeSearch.Text = "Search"
+            BtnCodeSearch.Location = New Point(195, 42)
+            BtnCodeSearch.Size = New Size(72, 23)
+            BtnInsert.Text = "InsertLine"
+            BtnUp.Text = "ShiftLineUp"
+            BtnDown.Text = "ShiftLineDown"
+            BtnRowsAdd.Text = "AddLine"
+            BtnRowsDel.Text = "DeleteLine"
+            BtnClone.Text = "LineDuplication"
+
+            BtnPurchase.Text = "IssuePurchaseOrder"
+            BtnRegistration.Text = "Registrartion"
+            BtnBack.Text = "Back"
+
+            DgvItemList.Columns("仕入区分").HeaderText = "PurchasingClassification"
+            DgvItemList.Columns("メーカー").HeaderText = "Manufacturer"
+            DgvItemList.Columns("品名").HeaderText = "ItemName"
+            DgvItemList.Columns("型式").HeaderText = "Spec"
+            DgvItemList.Columns("数量").HeaderText = "Quantity"
+            DgvItemList.Columns("単位").HeaderText = "Unit"
+            DgvItemList.Columns("仕入単価").HeaderText = "PurchaseUnitPrice"
+            DgvItemList.Columns("仕入金額").HeaderText = "PurchaseAmount"
+            DgvItemList.Columns("リードタイム").HeaderText = "LeadTime"
+            DgvItemList.Columns("リードタイム単位").HeaderText = "LeadTimeUnit"
+            DgvItemList.Columns("貿易条件").HeaderText = "TradeTerms"
+            DgvItemList.Columns("備考").HeaderText = "Remarks"
+        End If
+
         '検索（Date）の初期値
         DtpRegistrationDate.Value = DateTime.Today
         DtpPurchaseDate.Value = DateTime.Today
+        DtpShippedDate.Value = DateTime.Today
 
         'セルの内容に合わせて、行の高さが自動的に調節されるようにする
         DgvItemList.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
@@ -274,21 +351,21 @@ Public Class Ordering
             DtpShippedDate.Value = dsHattyu.Tables(RS).Rows(0)("出荷日")
         End If
 
-        Sql = " AND "
-        Sql += "発注番号"
-        Sql += " ILIKE "
-        Sql += "'"
-        Sql += PurchaseNo.ToString
-        Sql += "'"
-        Sql += " AND "
-        Sql += "発注番号枝番"
-        Sql += " ILIKE "
-        Sql += "'"
-        Sql += PurchaseSuffix.ToString
-        Sql += "'"
+        Sql = "SELECT t21.*"
+        Sql += " FROM  public.t21_hattyu t21 "
+        Sql += " INNER JOIN  t20_hattyu t20"
+        Sql += " ON t21.会社コード = t20.会社コード"
+        Sql += " And  t21.発注番号 = t20.発注番号"
+        Sql += " And  t21.発注番号枝番 = t20.発注番号枝番"
 
-        '対象データの発注明細を取得し、表示
-        Dim dsHattyudt As DataSet = getDsData("t21_hattyu", Sql)
+        Sql += " WHERE t21.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " AND t21.発注番号 ILIKE '" & PurchaseNo.ToString & "'"
+        Sql += " AND t21.発注番号枝番 ILIKE '" & PurchaseSuffix.ToString & "'"
+        Sql += " AND t20.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+        Sql += " ORDER BY t21.行番号 "
+
+        Dim dsHattyudt As DataSet = _db.selectDB(Sql, RS, reccnt)
+        'Dim dsHattyudt As DataSet = getDsData("t21_hattyu", Sql)
 
         For i As Integer = 0 To dsHattyudt.Tables(RS).Rows.Count - 1
             DgvItemList.Rows.Add()
@@ -411,81 +488,7 @@ Public Class Ordering
 
             '枝番は+1
             TxtOrderingSuffix.Text = ds2.Tables(RS).Rows(0)("発注番号枝番") + 1
-        End If
 
-        '翻訳
-        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-            LblPurchaseNo.Text = "PurchaseOrderNo"
-            LblPurchaseNo.Size = New Size(145, 23)
-            TxtOrderingNo.Location = New Point(162, 12)
-            Label2.Location = New Point(256, 13)
-            TxtOrderingSuffix.Location = New Point(273, 13)
-            LblCustomerPO.Text = "CustomerNo"
-            LblCustomerPO.Location = New Point(308, 13)
-            LblCustomerPO.Size = New Size(142, 23)
-            TxtCustomerPO.Location = New Point(456, 13)
-            LblPurchaseDate.Text = "OrderDate"
-            LblPurchaseDate.Location = New Point(550, 13)
-            DtpPurchaseDate.Location = New Point(668, 13)
-            DtpPurchaseDate.Size = New Size(130, 22)
-            LblRegistrationDate.Text = "OrderRegistrationDate"
-            LblRegistrationDate.Size = New Size(158, 23)
-            LblRegistrationDate.Location = New Point(802, 13)
-            DtpRegistrationDate.Location = New Point(968, 13)
-            DtpRegistrationDate.Size = New Size(130, 22)
-
-            LblSupplierName.Text = "SupplierName"
-            LblAddress.Text = "Address"
-            LblTel.Text = "PhoneNumber"
-            LblFax.Text = "FAX"
-            LblPerson.Text = "NameOfPIC"
-            LblPosition.Text = "PositionPICSupplier"
-            LblSales.Text = "SalesPersonInCharge"
-            LblInput.Text = "PICForInputting"
-            LblPaymentTerms.Text = "PaymentTerms"
-            TxtPaymentTerms.Location = New Point(181, 158)
-            LblPaymentTerms.Size = New Size(162, 23)
-            LblPurchaseRemarks.Text = "PurchaseRemarks"
-            LblPurchaseRemarks.Size = New Size(162, 23)
-            TxtPurchaseRemark.Location = New Point(181, 187)
-            LblRemarks.Text = "QuotationRemarks"
-            LblRemarks.Size = New Size(162, 23)
-            TxtQuoteRemarks.Location = New Point(181, 216)
-            LblItemCount.Text = "ItemCount"
-            LblMethod.Text = "ShippingMethod"
-            LblShipDate.Text = "ShipDate"
-
-            LblPurchaseAmount.Text = "PurchaseOrderAmount"
-            LblPurchaseAmount.Size = New Size(180, 23)
-            LblPurchaseAmount.Location = New Point(923, 465)
-
-            TxtSupplierCode.Size = New Point(62, 23)
-            BtnCodeSearch.Text = "Search"
-            BtnCodeSearch.Location = New Point(195, 42)
-            BtnCodeSearch.Size = New Size(72, 23)
-            BtnInsert.Text = "InsertLine"
-            BtnUp.Text = "ShiftLineUp"
-            BtnDown.Text = "ShiftLineDown"
-            BtnRowsAdd.Text = "AddLine"
-            BtnRowsDel.Text = "DeleteLine"
-            BtnClone.Text = "LineDuplication"
-
-            BtnPurchase.Text = "IssuePurchaseOrder"
-            BtnRegistration.Text = "Registrartion"
-            BtnBack.Text = "Back"
-
-            DgvItemList.Columns("仕入区分").HeaderText = "PurchasingClassification"
-            DgvItemList.Columns("メーカー").HeaderText = "Manufacturer"
-            DgvItemList.Columns("品名").HeaderText = "ItemName"
-            DgvItemList.Columns("型式").HeaderText = "Spec"
-            DgvItemList.Columns("数量").HeaderText = "Quantity"
-            DgvItemList.Columns("単位").HeaderText = "Unit"
-            DgvItemList.Columns("仕入単価").HeaderText = "PurchaseUnitPrice"
-            DgvItemList.Columns("仕入金額").HeaderText = "PurchaseAmount"
-            DgvItemList.Columns("リードタイム").HeaderText = "LeadTime"
-            DgvItemList.Columns("リードタイム単位").HeaderText = "LeadTimeUnit"
-            DgvItemList.Columns("貿易条件").HeaderText = "TradeTerms"
-            DgvItemList.Columns("備考").HeaderText = "Remarks"
         End If
 
     End Sub
@@ -828,7 +831,7 @@ Public Class Ordering
                 Sql += "', '"
                 Sql += "0" '見積金額
                 Sql += "', '"
-                Sql += TxtPurchaseAmount.Text '仕入金額
+                Sql += formatNumber(TxtPurchaseAmount.Text) '仕入金額
                 Sql += "', '"
                 Sql += "0" '粗利額
                 Sql += "', '"
@@ -846,7 +849,7 @@ Public Class Ordering
                 Sql += "', "
                 Sql += "null" '受注日
                 Sql += ", '"
-                Sql += DtpPurchaseDate.Value '発注日
+                Sql += strFormatDate(DtpPurchaseDate.Value) '発注日
                 Sql += "', '"
                 Sql += dtNow '登録日
                 Sql += "', '"
@@ -859,7 +862,7 @@ Public Class Ordering
                 Sql += "', '"
                 Sql += CbShippedBy.SelectedIndex.ToString '出荷方法
                 Sql += "', '"
-                Sql += DtpShippedDate.Value '出荷日
+                Sql += strFormatDate(DtpShippedDate.Value) '出荷日
                 Sql += "', '"
                 Sql += TxtSales.Tag '営業担当者コード
                 Sql += "', '"
@@ -898,19 +901,19 @@ Public Class Ordering
                     Sql += "', '"
                     Sql += DgvItemList.Rows(hattyuIdx).Cells("単位").Value.ToString
                     Sql += "', '"
-                    Sql += DgvItemList.Rows(hattyuIdx).Cells("仕入単価").Value.ToString
+                    Sql += formatNumber(DgvItemList.Rows(hattyuIdx).Cells("仕入単価").Value.ToString)
                     Sql += "', '"
-                    Sql += DgvItemList.Rows(hattyuIdx).Cells("数量").Value.ToString
+                    Sql += formatNumber(DgvItemList.Rows(hattyuIdx).Cells("数量").Value.ToString)
                     Sql += "', '"
                     Sql += "0"
                     Sql += "', '"
-                    Sql += DgvItemList.Rows(hattyuIdx).Cells("数量").Value.ToString
+                    Sql += formatNumber(DgvItemList.Rows(hattyuIdx).Cells("数量").Value.ToString)
                     Sql += "', '"
-                    Sql += DgvItemList.Rows(hattyuIdx).Cells("間接費").Value.ToString
+                    Sql += formatNumber(DgvItemList.Rows(hattyuIdx).Cells("間接費").Value.ToString)
                     Sql += "', '"
-                    Sql += DgvItemList.Rows(hattyuIdx).Cells("仕入単価").Value.ToString
+                    Sql += formatNumber(DgvItemList.Rows(hattyuIdx).Cells("仕入単価").Value.ToString)
                     Sql += "', '"
-                    Sql += DgvItemList.Rows(hattyuIdx).Cells("仕入金額").Value.ToString
+                    Sql += formatNumber(DgvItemList.Rows(hattyuIdx).Cells("仕入金額").Value.ToString)
                     Sql += "', '"
                     Sql += DgvItemList.Rows(hattyuIdx).Cells("リードタイム").Value.ToString
                     Sql += "', '"
@@ -1182,6 +1185,26 @@ Public Class Ordering
         End If
     End Sub
 
+    '金額フォーマット（登録の際の小数点指定子）を日本の形式に合わせる
+    '桁区切り記号は外す
+    Private Function formatNumber(ByVal prmVal As Decimal) As String
+
+        Dim nfi As NumberFormatInfo = New CultureInfo(CommonConst.CI_JP, False).NumberFormat
+
+        '日本の形式に書き換える
+        Return prmVal.ToString("F3", nfi) '売掛残高を増やす
+    End Function
+
+    'sqlで実行する文字列からシングルクォーテーションを文字コードにする
+    Private Function escapeSql(ByVal prmSql As String) As String
+        Dim sql As String = prmSql
+
+        sql = sql.Replace("'"c, "''") 'シングルクォーテーションを置換
+
+        Return Regex.Escape(sql)
+        Return sql
+    End Function
+
     'param1：String テーブル名
     'param2：String 詳細条件
     'Return: DataSet
@@ -1288,5 +1311,14 @@ Public Class Ordering
         '日本の形式に書き換える
         Return changeFormat
     End Function
-    
+
+    '発注日変更時、出荷日のMinDate及びValueを変更
+    Private Sub DtpPurchaseDate_ValueChanged(sender As Object, e As EventArgs) Handles DtpPurchaseDate.ValueChanged
+        '出荷日が発注日より小さかったら
+        If DtpPurchaseDate.Value.ToString("yyyyMMdd") > DtpShippedDate.Value.ToString("yyyyMMdd") Then
+            DtpShippedDate.MinDate = DtpPurchaseDate.Value
+            DtpShippedDate.Value = DtpPurchaseDate.Value
+        End If
+
+    End Sub
 End Class
