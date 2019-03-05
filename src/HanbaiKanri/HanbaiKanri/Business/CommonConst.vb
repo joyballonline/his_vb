@@ -150,6 +150,7 @@ Public Class CommonConst
     Public Const MENU_H0240 As String = "H0240"           '受注取消
     Public Const MENU_H0250 As String = "H0250"           '受注参照
     Public Const MENU_H0260 As String = "H0260"           '受注残一覧
+    Public Const MENU_H0270 As String = "H0270"           '受注一覧
 
     Public Const MENU_H0310 As String = "H0310"           '売上登録
     Public Const MENU_H0320 As String = "H0320"           '売上編集

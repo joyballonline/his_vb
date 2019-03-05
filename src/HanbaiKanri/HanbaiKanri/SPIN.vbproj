@@ -394,6 +394,12 @@
     <Compile Include="Form\RemarksInput.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form\JobOrderList.Designer.vb">
+      <DependentUpon>JobOrderList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\JobOrderList.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\SalesProfitList.Designer.vb">
       <DependentUpon>SalesProfitList.vb</DependentUpon>
     </Compile>
@@ -610,6 +616,9 @@
     <EmbeddedResource Include="Form\RemarksInput.resx">
       <DependentUpon>RemarksInput.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form\JobOrderList.resx">
+      <DependentUpon>JobOrderList.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\SalesProfitList.resx">
       <DependentUpon>SalesProfitList.vb</DependentUpon>
     </EmbeddedResource>
@@ -650,6 +659,7 @@
     </None>
     <None Include="bin\BaseXls\DeliveryNote.xlsx" />
     <None Include="bin\BaseXls\Invoice.xlsx" />
+    <None Include="bin\BaseXls\JobOrderList.xlsx" />
     <None Include="bin\BaseXls\OrderRemainingList.xlsx" />
     <None Include="bin\BaseXls\PackingList.xlsx" />
     <None Include="bin\BaseXls\Proof.xlsx" />
@@ -658,6 +668,7 @@
     <None Include="bin\BaseXls\QuotationRequest.xlsx" />
     <None Include="bin\BaseXls\Quotation_xxx.xlsx" />
     <None Include="bin\BaseXls\Receipt.xlsx" />
+    <None Include="bin\BaseXls\SalesProfitList.xlsx" />
     <None Include="bin\Setting\HanbaiKanri.ini" />
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">

@@ -919,7 +919,13 @@ Public Class frmC01F30_Menu
                 openForm = New OrderRemainingList(_msgHd, _db, _langHd, Status)
                 openForm.Show()
                 Me.Hide()
-            '-----------------------------------売上業務（H03）
+            Case CommonConst.MENU_H0270  '受注一覧
+                Dim Status As String = CommonConst.STATUS_VIEW
+                Dim openForm As Form = Nothing
+                openForm = New JobOrderList(_msgHd, _db, _langHd, Status)
+                openForm.Show()
+                Me.Hide()
+           '-----------------------------------売上業務（H03）
             Case CommonConst.MENU_H0310  '売上登録
                 Dim Status As String = CommonConst.STATUS_SALES
                 Dim openForm As Form = Nothing
