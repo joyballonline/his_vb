@@ -611,7 +611,7 @@ Public Class Cymn
                 Sql += ", '" & TxtInput.Text & "'"          '入力担当者
                 Sql += ", '" & TxtOrderRemark.Text & "'"    '備考
                 Sql += ", null"     '取消日
-                Sql += ", null"     '取消区分
+                Sql += ", 0"     '取消区分
                 Sql += ", current_date"     '出庫日
                 Sql += ", '" & formatDatetime(dtNow) & "'"                 '登録日
                 Sql += ", '" & formatDatetime(dtNow) & "'"                 '更新日
