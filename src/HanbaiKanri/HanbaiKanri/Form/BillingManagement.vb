@@ -75,6 +75,7 @@ Public Class BillingManagement
         Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
         Me.ControlBox = Not Me.ControlBox
         DtpBillingDate.Value = Date.Now
+        DtpDepositDate.Value = Date.Now
         _init = True
 
     End Sub
@@ -106,6 +107,7 @@ Public Class BillingManagement
 
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
             LblBillingDate.Text = "BillingDate"
+            LblDepositDate.Text = "DepositDate"
             LblNo1.Text = "Record"
             LblNo1.Location = New Point(1272, 118)
             LblNo1.Size = New Size(66, 22)
@@ -455,7 +457,8 @@ Public Class BillingManagement
         Sql = "INSERT INTO "
         Sql += "Public."
         Sql += "t23_skyuhd("
-        Sql += "会社コード, 請求番号, 請求区分, 請求日, 受注番号, 受注番号枝番, 客先番号, 得意先コード, 得意先名, 請求金額計, 入金額計, 売掛残高, 備考1, 備考2, 取消区分, 登録日, 更新者, 更新日)"
+        Sql += "会社コード, 請求番号, 請求区分, 請求日, 受注番号, 受注番号枝番, 客先番号, 得意先コード, 得意先名"
+        Sql += ", 請求金額計, 入金額計, 売掛残高, 備考1, 備考2, 取消区分, 入金予定日, 登録日, 更新者, 更新日)"
         Sql += " VALUES('"
         Sql += dsCymnhd.Tables(RS).Rows(0)("会社コード").ToString
         Sql += "', '"
@@ -485,6 +488,8 @@ Public Class BillingManagement
         Sql += DgvAdd.Rows(0).Cells("今回備考2").Value
         Sql += "', '"
         Sql += "0"
+        Sql += "', '"
+        Sql += strFormatDate(DtpDepositDate.Value)
         Sql += "', '"
         Sql += strToday
         Sql += "', '"

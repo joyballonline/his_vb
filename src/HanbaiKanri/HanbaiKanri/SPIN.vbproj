@@ -111,6 +111,12 @@
     <Compile Include="Business\CommonLogic.vb" />
     <Compile Include="Business\RepSectionIF.vb" />
     <Compile Include="Business\StartUp.vb" />
+    <Compile Include="Form\ARScheduledCollectionDateList.Designer.vb">
+      <DependentUpon>ARScheduledCollectionDateList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\ARScheduledCollectionDateList.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\MstAccount.Designer.vb">
       <DependentUpon>MstAccount.vb</DependentUpon>
     </Compile>
@@ -509,6 +515,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Customer.resx">
       <DependentUpon>Customer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\ARScheduledCollectionDateList.resx">
+      <DependentUpon>ARScheduledCollectionDateList.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\CustomerList.resx">
       <DependentUpon>CustomerList.vb</DependentUpon>

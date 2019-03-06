@@ -7,7 +7,7 @@ Imports UtilMDL.DB
 Imports UtilMDL.DataGridView
 Imports UtilMDL.FileDirectory
 Imports UtilMDL.xls
-
+Imports System.Globalization
 
 Public Class OrderManagement
     Inherits System.Windows.Forms.Form
@@ -74,12 +74,16 @@ Public Class OrderManagement
         Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
         Me.ControlBox = Not Me.ControlBox
         DtpOrderDate.Value = Date.Now
+        DtpDepositDate.Value = Date.Now
         _init = True
 
     End Sub
 
-    Private Sub PurchaseManagement_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If frmC01F10_Login.loginValue.Language = "ENG" Then
+    '画面表示時
+    Private Sub OrderManagement_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+
             LblOrderNo.Text = "OrderNumber"
             LblCutomerNo.Text = "CustomerNumber"
             LblOrderDate.Text = "OrderDate"
@@ -88,6 +92,7 @@ Public Class OrderManagement
             LblHistory.Text = "SalesHistoryData"
             LblAdd.Text = "SalesThisTime"
             LblSalesDate.Text = "SalesDate"
+            LblDepositDate.Text = "DepositDate"
             LblRemarks.Text = "Remarks"
             LblNo1.Text = "Record"
             LblNo1.Location = New Point(1272, 82)
@@ -102,13 +107,13 @@ Public Class OrderManagement
             TxtCount1.Location = New Point(1228, 82)
             TxtCount2.Location = New Point(1228, 212)
             TxtCount3.Location = New Point(1228, 343)
-            TxtRemarks.Size = New Size(600, 22)
+            'TxtRemarks.Size = New Size(600, 22)
 
             BtnRegist.Text = "Registration"
             BtnBack.Text = "Back"
         End If
         If _status = CommonConst.STATUS_VIEW Then
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "ViewMode"
             Else
                 LblMode.Text = "参照モード"
@@ -141,7 +146,7 @@ Public Class OrderManagement
             DgvHistory.Size = New Point(1326, 400)
             BtnRegist.Visible = False
         Else
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "SalesInputMode"
             Else
                 LblMode.Text = "売上入力モード"
@@ -177,7 +182,7 @@ Public Class OrderManagement
             Dim ds2 As DataSet = _db.selectDB(Sql2, RS, reccnt)
             Dim ds3 As DataSet = _db.selectDB(Sql3, RS, reccnt)
             Dim ds4 As DataSet = _db.selectDB(Sql4, RS, reccnt)
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 DgvOrder.Columns.Add("明細", "DetailData")
                 DgvOrder.Columns.Add("メーカー", "Manufacturer")
                 DgvOrder.Columns.Add("品名", "ItemName")
@@ -221,7 +226,7 @@ Public Class OrderManagement
                 DgvOrder.Rows(index).Cells(9).Value = ds3.Tables(RS).Rows(index)("受注残数")
             Next
 
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 DgvHistory.Columns.Add("No", "No")
                 DgvHistory.Columns.Add("売上番号", "SalesNumber")
                 DgvHistory.Columns.Add("行番号", "LineNumber")
@@ -268,7 +273,7 @@ Public Class OrderManagement
                 DgvHistory.Rows(index).Cells("備考").Value = ds2.Tables(RS).Rows(index)("備考")
             Next
 
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 DgvAdd.Columns.Add("No", "No")
                 DgvAdd.Columns.Add("行番号", "LineNumber")
                 DgvAdd.Columns.Add("仕入区分", "PurchasingClassification")
@@ -364,6 +369,10 @@ Public Class OrderManagement
             TxtCustomerCode.Text = ds1.Tables(RS).Rows(0)("得意先コード")
             TxtCustomerName.Text = ds1.Tables(RS).Rows(0)("得意先名")
 
+            '売上日、入金予定日のMinDateを受注日に設定
+            DtpOrderDate.MinDate = ds1.Tables(RS).Rows(0)("受注日").ToShortDateString()
+            DtpDepositDate.MinDate = ds1.Tables(RS).Rows(0)("受注日").ToShortDateString()
+
             If _status = CommonConst.STATUS_VIEW Then
                 DtpOrderDate.Value = ds4.Tables(RS).Rows(0)("売上日")
                 TxtRemarks.Text = ds4.Tables(RS).Rows(0)("備考")
@@ -405,6 +414,7 @@ Public Class OrderManagement
         Sql1 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql1 += " AND 受注番号 = '" & No & "'"
         Sql1 += " AND 受注番号枝番 = '" & Suffix & "'"
+        Sql1 += " AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
 
         Dim reccnt As Integer = 0
         Dim ds1 As DataSet = _db.selectDB(Sql1, RS, reccnt)
@@ -419,7 +429,7 @@ Public Class OrderManagement
 
         For i As Integer = 0 To DgvAdd.Rows.Count() - 1
             If ds2.Tables(RS).Rows(i)("受注数量") < ds2.Tables(RS).Rows(i)("売上数量") + DgvAdd.Rows(i).Cells("売上数量").Value Then
-                If frmC01F10_Login.loginValue.Language = "ENG" Then
+                If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                     MessageBox.Show("Please enter the correct value.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Else
                     MessageBox.Show("正しい値を入力してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -430,7 +440,7 @@ Public Class OrderManagement
         Next
 
         If TxtOrderDate.Text >= DtpOrderDate.Value Then
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 MessageBox.Show("The sales date is before the order date.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Else
                 MessageBox.Show("売上日の値が受注日以前になっています。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -446,7 +456,7 @@ Public Class OrderManagement
             End If
         Next
         If DgvAdd.Rows.Count() = nullCount Then
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 MessageBox.Show("Sales Quantity is all 0.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Else
                 MessageBox.Show("売上数量がすべて0になっています。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -474,87 +484,88 @@ Public Class OrderManagement
             LS += dtToday.ToString("MMdd")
             LS += dsSaiban2.Tables(RS).Rows(0)("最新値").ToString.PadLeft(dsSaiban2.Tables(RS).Rows(0)("連番桁数"), "0")
 
-            Sql3 = ""
-            Sql3 += "INSERT INTO "
+            Sql3 = "INSERT INTO "
             Sql3 += "Public."
             Sql3 += "t30_urighd("
-            Sql3 += "会社コード, 売上番号, 売上番号枝番, 客先番号, 受注番号, 受注番号枝番, 見積番号, 見積番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額, 売上金額, 粗利額, 営業担当者, 入力担当者, 備考, 取消日, 取消区分, ＶＡＴ, ＰＰＨ, 受注日, 売上日, 入金予定日, 登録日, 更新日, 更新者, 仕入金額)"
+            Sql3 += "会社コード, 売上番号, 売上番号枝番, 客先番号, 受注番号, 受注番号枝番, 見積番号, 見積番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所"
+            Sql3 += ", 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額, 売上金額, 粗利額, 営業担当者, 入力担当者, 備考"
+            Sql3 += ", 取消日, 取消区分, ＶＡＴ, ＰＰＨ, 受注日, 売上日, 入金予定日, 登録日, 更新日, 更新者, 仕入金額)"
             Sql3 += " VALUES('"
-            Sql3 += ds1.Tables(RS).Rows(0)("会社コード").ToString
+            Sql3 += ds1.Tables(RS).Rows(0)("会社コード").ToString '会社コード
             Sql3 += "', '"
-            Sql3 += ER
+            Sql3 += ER '売上番号
             Sql3 += "', '"
-            Sql3 += "1"
+            Sql3 += "1" '売上番号枝番
             Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("客先番号").ToString
+            Sql3 += ds1.Tables(RS).Rows(0)("客先番号").ToString '客先番号
             Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("受注番号").ToString
+            Sql3 += ds1.Tables(RS).Rows(0)("受注番号").ToString '受注番号
             Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("受注番号枝番").ToString
+            Sql3 += ds1.Tables(RS).Rows(0)("受注番号枝番").ToString '受注番号枝番
             Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("見積番号").ToString
+            Sql3 += ds1.Tables(RS).Rows(0)("見積番号").ToString '見積番号
             Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("見積番号枝番").ToString
+            Sql3 += ds1.Tables(RS).Rows(0)("見積番号枝番").ToString '見積番号枝番
             Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("得意先コード").ToString
+            Sql3 += ds1.Tables(RS).Rows(0)("得意先コード").ToString '得意先コード
             Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("得意先名").ToString
+            Sql3 += ds1.Tables(RS).Rows(0)("得意先名").ToString '得意先名
             Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("得意先郵便番号").ToString
+            Sql3 += ds1.Tables(RS).Rows(0)("得意先郵便番号").ToString '得意先郵便番号
             Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("得意先住所").ToString
+            Sql3 += ds1.Tables(RS).Rows(0)("得意先住所").ToString '得意先住所
             Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("得意先電話番号").ToString
+            Sql3 += ds1.Tables(RS).Rows(0)("得意先電話番号").ToString '得意先電話番号
             Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("得意先ＦＡＸ").ToString
+            Sql3 += ds1.Tables(RS).Rows(0)("得意先ＦＡＸ").ToString '得意先ＦＡＸ
             Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("得意先担当者役職").ToString
+            Sql3 += ds1.Tables(RS).Rows(0)("得意先担当者役職").ToString '得意先担当者役職
             Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("得意先担当者名").ToString
+            Sql3 += ds1.Tables(RS).Rows(0)("得意先担当者名").ToString '得意先担当者名
             Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("見積日").ToString
+            Sql3 += ds1.Tables(RS).Rows(0)("見積日").ToString '見積日
             Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("見積有効期限").ToString
+            Sql3 += ds1.Tables(RS).Rows(0)("見積有効期限").ToString '見積有効期限
             Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("支払条件").ToString
+            Sql3 += ds1.Tables(RS).Rows(0)("支払条件").ToString '支払条件
             Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("見積金額").ToString
+            Sql3 += ds1.Tables(RS).Rows(0)("見積金額").ToString '見積金額
             Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("見積金額").ToString
+            Sql3 += ds1.Tables(RS).Rows(0)("見積金額").ToString '売上金額
             Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("粗利額").ToString
+            Sql3 += ds1.Tables(RS).Rows(0)("粗利額").ToString '粗利額
             Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("営業担当者").ToString
+            Sql3 += ds1.Tables(RS).Rows(0)("営業担当者").ToString '営業担当者
             Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("入力担当者").ToString
+            Sql3 += ds1.Tables(RS).Rows(0)("入力担当者").ToString '入力担当者
             Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("備考").ToString
+            Sql3 += ds1.Tables(RS).Rows(0)("備考").ToString '備考
             Sql3 += "', "
-            Sql3 += "null"
+            Sql3 += "null" '取消日
             Sql3 += ", "
-            Sql3 += "0"
+            Sql3 += "0" '取消区分
             Sql3 += ", '"
-            Sql3 += ds1.Tables(RS).Rows(0)("ＶＡＴ").ToString
+            Sql3 += ds1.Tables(RS).Rows(0)("ＶＡＴ").ToString 'ＶＡＴ
             Sql3 += "', '"
             If ds1.Tables(RS).Rows(0)("ＰＰＨ") Is DBNull.Value Then
-                Sql3 += "0"
+                Sql3 += "0" 'ＰＰＨ
             Else
-                Sql3 += ds1.Tables(RS).Rows(0)("ＰＰＨ").ToString
+                Sql3 += ds1.Tables(RS).Rows(0)("ＰＰＨ").ToString 'ＰＰＨ
             End If
             Sql3 += "', '"
-            Sql3 += dtToday
+            Sql3 += dtToday '受注日
             Sql3 += "', '"
-            Sql3 += dtToday
+            Sql3 += strFormatDate(DtpOrderDate.Text) '売上日
             Sql3 += "', '"
-            Sql3 += dtToday
+            Sql3 += strFormatDate(DtpDepositDate.Text) '入金予定日
             Sql3 += "', '"
-            Sql3 += dtToday
+            Sql3 += dtToday '登録日
             Sql3 += "', '"
-            Sql3 += dtToday
+            Sql3 += dtToday '更新日
             Sql3 += "', '"
-            Sql3 += Input
+            Sql3 += Input '仕入金額
             Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("仕入金額").ToString
+            Sql3 += ds1.Tables(RS).Rows(0)("仕入金額").ToString '会社コード
             Sql3 += " ')"
 
 
@@ -777,7 +788,7 @@ Public Class OrderManagement
             Next
 
 
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 Dim result As DialogResult = MessageBox.Show("Create billing data?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2)
                 If result = DialogResult.Yes Then
                     Biilng()
@@ -799,6 +810,8 @@ Public Class OrderManagement
 
     Private Sub Biilng()
         Dim dtToday As DateTime = DateTime.Now
+        Dim strToday As DateTime = formatDatetime(DateTime.Now)
+
         Dim reccnt As Integer = 0
         Dim BillingAmount As Integer = 0
         For index As Integer = 0 To DgvAdd.Rows.Count - 1
@@ -841,12 +854,13 @@ Public Class OrderManagement
             Next
         End If
 
-        Dim tmp As Integer = 0
+        Dim tmp As Decimal = 0
         Sql3 = ""
         Sql3 += "INSERT INTO "
         Sql3 += "Public."
         Sql3 += "t23_skyuhd("
-        Sql3 += "会社コード, 請求番号, 客先番号, 請求区分, 請求日, 受注番号, 受注番号枝番, 得意先コード, 得意先名, 請求金額計, 売掛残高, 備考1, 備考2, 取消区分, 登録日, 更新者, 更新日)"
+        Sql3 += "会社コード, 請求番号, 客先番号, 請求区分, 請求日, 受注番号, 受注番号枝番, 得意先コード"
+        Sql3 += ", 得意先名, 請求金額計, 入金額計, 売掛残高, 備考1, 備考2, 取消区分, 入金予定日, 登録日, 更新者, 更新日)"
         Sql3 += " VALUES('"
         Sql3 += ds1.Tables(RS).Rows(0)("会社コード").ToString
         Sql3 += "', '"
@@ -867,9 +881,10 @@ Public Class OrderManagement
         Sql3 += ds1.Tables(RS).Rows(0)("得意先名").ToString
         Sql3 += "', '"
         tmp = BillingAmount.ToString - skyuPrice
-        Sql3 += tmp.ToString
-        Sql3 += "', '"
-        Sql3 += tmp.ToString
+        Sql3 += formatNumber(tmp)
+        Sql3 += "', 0"
+        Sql3 += ", '"
+        Sql3 += formatNumber(tmp)
         Sql3 += "', '"
         Sql3 += TxtRemarks.Text
         Sql3 += "', '"
@@ -877,11 +892,13 @@ Public Class OrderManagement
         Sql3 += "', '"
         Sql3 += "0"
         Sql3 += "', '"
-        Sql3 += dtToday
+        Sql3 += strFormatDate(DtpDepositDate.Text)
+        Sql3 += "', '"
+        Sql3 += strToday
         Sql3 += "', '"
         Sql3 += frmC01F10_Login.loginValue.TantoNM
         Sql3 += "', '"
-        Sql3 += dtToday
+        Sql3 += strToday
         Sql3 += " ')"
 
         _db.executeDB(Sql3)
@@ -894,8 +911,7 @@ Public Class OrderManagement
             DMNo = dsSaiban1.Tables(RS).Rows(0)("最新値") + 1
         End If
 
-        Sql4 = ""
-        Sql4 += "UPDATE "
+        Sql4 = "UPDATE "
         Sql4 += "Public."
         Sql4 += "m80_saiban "
         Sql4 += "SET "
@@ -909,7 +925,7 @@ Public Class OrderManagement
         Sql4 += "', "
         Sql4 += "更新日"
         Sql4 += " = '"
-        Sql4 += dtToday
+        Sql4 += strToday
         Sql4 += "' "
         Sql4 += "WHERE"
         Sql4 += " 会社コード"
@@ -924,4 +940,43 @@ Public Class OrderManagement
 
         _db.executeDB(Sql4)
     End Sub
+
+    'どんなカルチャーであっても、日本の形式に変換する
+    Private Function strFormatDate(ByVal prmDate As String, Optional ByRef prmFormat As String = "yyyy/MM/dd") As String
+
+        'PCのカルチャーを取得し、それに応じてStringからDatetimeを作成
+        Dim ci As New System.Globalization.CultureInfo(CultureInfo.CurrentCulture.Name.ToString)
+        Dim dateFormat As DateTime = DateTime.Parse(prmDate, ci, System.Globalization.DateTimeStyles.AssumeLocal)
+
+        '日本の形式に書き換える
+        Return dateFormat.ToString(prmFormat)
+    End Function
+
+    'どんなカルチャーであっても、日本の形式に変換する
+    Private Function formatDatetime(ByVal prmDatetime As DateTime) As String
+
+        'PCのカルチャーを取得し、それに応じてStringからDatetimeを作成
+        Dim ciCurrent As New System.Globalization.CultureInfo(CultureInfo.CurrentCulture.Name.ToString)
+        Dim dateFormat As DateTime = DateTime.Parse(prmDatetime.ToString, ciCurrent, System.Globalization.DateTimeStyles.AssumeLocal)
+
+        Dim changeFormat As String = dateFormat.ToString("yyyy/MM/dd HH:mm:ss")
+
+        Dim ciJP As New System.Globalization.CultureInfo(CommonConst.CI_JP)
+        Dim rtnDatetime As DateTime = DateTime.Parse(changeFormat, ciJP, System.Globalization.DateTimeStyles.AssumeLocal)
+
+
+        '日本の形式に書き換える
+        Return changeFormat
+    End Function
+
+    '金額フォーマット（登録の際の小数点指定子）を日本の形式に合わせる
+    '桁区切り記号は外す
+    Private Function formatNumber(ByVal prmVal As Decimal) As String
+
+        Dim nfi As NumberFormatInfo = New CultureInfo(CommonConst.CI_JP, False).NumberFormat
+
+        '日本の形式に書き換える
+        Return prmVal.ToString("F3", nfi) '売掛残高を増やす
+    End Function
+
 End Class

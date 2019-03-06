@@ -1103,7 +1103,12 @@ Public Class frmC01F30_Menu
                 openForm = New CustomerARList(_msgHd, _db, _langHd)
                 openForm.Show()
                 Me.Hide()
-               '-----------------------------------入金業務（H05）
+            Case CommonConst.MENU_H0970  '回収予定期日別売掛金一覧
+                Dim openForm As Form = Nothing
+                openForm = New ARScheduledCollectionDateList(_msgHd, _db, _langHd)
+                openForm.Show()
+                Me.Hide()
+              '-----------------------------------入金業務（H05）
             Case CommonConst.MENU_H1010  '入金登録
                 Dim openForm As Form = Nothing
                 openForm = New DepositList(_msgHd, _db, _langHd)

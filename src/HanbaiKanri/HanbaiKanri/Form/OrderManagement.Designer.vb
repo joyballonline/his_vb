@@ -52,6 +52,8 @@ Partial Class OrderManagement
         Me.LblMode = New System.Windows.Forms.Label()
         Me.LblCutomerNo = New System.Windows.Forms.Label()
         Me.TxtCustomerPO = New System.Windows.Forms.TextBox()
+        Me.DtpDepositDate = New System.Windows.Forms.DateTimePicker()
+        Me.LblDepositDate = New System.Windows.Forms.Label()
         CType(Me.DgvAdd, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvHistory, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvOrder, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -81,10 +83,11 @@ Partial Class OrderManagement
         'DtpOrderDate
         '
         Me.DtpOrderDate.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.DtpOrderDate.CustomFormat = "yyyy/MM/dd"
+        Me.DtpOrderDate.CustomFormat = ""
         Me.DtpOrderDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpOrderDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.DtpOrderDate.Location = New System.Drawing.Point(292, 343)
+        Me.DtpOrderDate.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.DtpOrderDate.Name = "DtpOrderDate"
         Me.DtpOrderDate.Size = New System.Drawing.Size(148, 22)
         Me.DtpOrderDate.TabIndex = 3
@@ -96,9 +99,9 @@ Partial Class OrderManagement
         Me.LblRemarks.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblRemarks.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblRemarks.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblRemarks.Location = New System.Drawing.Point(446, 343)
+        Me.LblRemarks.Location = New System.Drawing.Point(724, 343)
         Me.LblRemarks.Name = "LblRemarks"
-        Me.LblRemarks.Size = New System.Drawing.Size(170, 22)
+        Me.LblRemarks.Size = New System.Drawing.Size(114, 22)
         Me.LblRemarks.TabIndex = 255
         Me.LblRemarks.Text = "備考"
         Me.LblRemarks.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -106,9 +109,9 @@ Partial Class OrderManagement
         'TxtRemarks
         '
         Me.TxtRemarks.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtRemarks.Location = New System.Drawing.Point(622, 343)
+        Me.TxtRemarks.Location = New System.Drawing.Point(844, 343)
         Me.TxtRemarks.Name = "TxtRemarks"
-        Me.TxtRemarks.Size = New System.Drawing.Size(600, 22)
+        Me.TxtRemarks.Size = New System.Drawing.Size(375, 22)
         Me.TxtRemarks.TabIndex = 4
         '
         'LblSalesDate
@@ -116,9 +119,9 @@ Partial Class OrderManagement
         Me.LblSalesDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblSalesDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblSalesDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblSalesDate.Location = New System.Drawing.Point(188, 343)
+        Me.LblSalesDate.Location = New System.Drawing.Point(172, 343)
         Me.LblSalesDate.Name = "LblSalesDate"
-        Me.LblSalesDate.Size = New System.Drawing.Size(98, 22)
+        Me.LblSalesDate.Size = New System.Drawing.Size(114, 22)
         Me.LblSalesDate.TabIndex = 253
         Me.LblSalesDate.Text = "売上日"
         Me.LblSalesDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -355,7 +358,7 @@ Partial Class OrderManagement
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(12, 10)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(0, 13)
+        Me.Label1.Size = New System.Drawing.Size(0, 12)
         Me.Label1.TabIndex = 232
         '
         'LblMode
@@ -393,10 +396,38 @@ Partial Class OrderManagement
         Me.TxtCustomerPO.TabIndex = 260
         Me.TxtCustomerPO.TabStop = False
         '
+        'DtpDepositDate
+        '
+        Me.DtpDepositDate.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.DtpDepositDate.CustomFormat = ""
+        Me.DtpDepositDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.DtpDepositDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.DtpDepositDate.Location = New System.Drawing.Point(567, 343)
+        Me.DtpDepositDate.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
+        Me.DtpDepositDate.Name = "DtpDepositDate"
+        Me.DtpDepositDate.Size = New System.Drawing.Size(148, 22)
+        Me.DtpDepositDate.TabIndex = 262
+        Me.DtpDepositDate.TabStop = False
+        Me.DtpDepositDate.Value = New Date(2018, 7, 25, 13, 29, 25, 0)
+        '
+        'LblDepositDate
+        '
+        Me.LblDepositDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblDepositDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblDepositDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblDepositDate.Location = New System.Drawing.Point(447, 343)
+        Me.LblDepositDate.Name = "LblDepositDate"
+        Me.LblDepositDate.Size = New System.Drawing.Size(114, 22)
+        Me.LblDepositDate.TabIndex = 263
+        Me.LblDepositDate.Text = "入金予定日"
+        Me.LblDepositDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'OrderManagement
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.DtpDepositDate)
+        Me.Controls.Add(Me.LblDepositDate)
         Me.Controls.Add(Me.LblCutomerNo)
         Me.Controls.Add(Me.TxtCustomerPO)
         Me.Controls.Add(Me.LblMode)
@@ -468,4 +499,6 @@ Partial Class OrderManagement
     Friend WithEvents LblMode As Label
     Friend WithEvents LblCutomerNo As Label
     Friend WithEvents TxtCustomerPO As TextBox
+    Friend WithEvents DtpDepositDate As DateTimePicker
+    Friend WithEvents LblDepositDate As Label
 End Class

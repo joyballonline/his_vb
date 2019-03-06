@@ -188,6 +188,7 @@ Public Class CommonConst
     Public Const MENU_H0940 As String = "H0940"           '請求参照
     Public Const MENU_H0950 As String = "H0950"           '請求計算
     Public Const MENU_H0960 As String = "H0960"           '得意先別売掛金一覧
+    Public Const MENU_H0970 As String = "H0970"           '回収予定期日別売掛金一覧
 
     Public Const MENU_H1010 As String = "H1010"           '入金登録
     Public Const MENU_H1020 As String = "H1020"           '入金取消

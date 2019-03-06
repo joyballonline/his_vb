@@ -94,6 +94,8 @@ Partial Class BillingManagement
         Me.BtnClone = New System.Windows.Forms.Button()
         Me.BtnDelete = New System.Windows.Forms.Button()
         Me.LblMode = New System.Windows.Forms.Label()
+        Me.DtpDepositDate = New System.Windows.Forms.DateTimePicker()
+        Me.LblDepositDate = New System.Windows.Forms.Label()
         CType(Me.DgvAdd, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvHistory, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvCymndt, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -496,9 +498,9 @@ Partial Class BillingManagement
         Me.LblBillingDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblBillingDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblBillingDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblBillingDate.Location = New System.Drawing.Point(185, 383)
+        Me.LblBillingDate.Location = New System.Drawing.Point(167, 383)
         Me.LblBillingDate.Name = "LblBillingDate"
-        Me.LblBillingDate.Size = New System.Drawing.Size(98, 22)
+        Me.LblBillingDate.Size = New System.Drawing.Size(116, 22)
         Me.LblBillingDate.TabIndex = 259
         Me.LblBillingDate.Text = "請求日"
         Me.LblBillingDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -645,10 +647,38 @@ Partial Class BillingManagement
         Me.LblMode.Text = "モード"
         Me.LblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'DtpDepositDate
+        '
+        Me.DtpDepositDate.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.DtpDepositDate.CustomFormat = ""
+        Me.DtpDepositDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.DtpDepositDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.DtpDepositDate.Location = New System.Drawing.Point(565, 383)
+        Me.DtpDepositDate.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
+        Me.DtpDepositDate.Name = "DtpDepositDate"
+        Me.DtpDepositDate.Size = New System.Drawing.Size(148, 22)
+        Me.DtpDepositDate.TabIndex = 307
+        Me.DtpDepositDate.TabStop = False
+        Me.DtpDepositDate.Value = New Date(2019, 1, 1, 0, 0, 0, 0)
+        '
+        'LblDepositDate
+        '
+        Me.LblDepositDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblDepositDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblDepositDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblDepositDate.Location = New System.Drawing.Point(443, 383)
+        Me.LblDepositDate.Name = "LblDepositDate"
+        Me.LblDepositDate.Size = New System.Drawing.Size(116, 22)
+        Me.LblDepositDate.TabIndex = 308
+        Me.LblDepositDate.Text = "入金予定日"
+        Me.LblDepositDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'BillingManagement
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.DtpDepositDate)
+        Me.Controls.Add(Me.LblDepositDate)
         Me.Controls.Add(Me.LblMode)
         Me.Controls.Add(Me.BtnDelete)
         Me.Controls.Add(Me.BtnClone)
@@ -740,4 +770,6 @@ Partial Class BillingManagement
     Friend WithEvents 今回請求金額計 As DataGridViewTextBoxColumn
     Friend WithEvents 今回備考1 As DataGridViewTextBoxColumn
     Friend WithEvents 今回備考2 As DataGridViewTextBoxColumn
+    Friend WithEvents DtpDepositDate As DateTimePicker
+    Friend WithEvents LblDepositDate As Label
 End Class
