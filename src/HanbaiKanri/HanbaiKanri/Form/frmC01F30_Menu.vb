@@ -989,8 +989,9 @@ Public Class frmC01F30_Menu
                 Me.Hide()
             '-----------------------------------発注業務（H05）
             Case CommonConst.MENU_H0510  '発注登録
+                Dim Status As String = CommonConst.STATUS_ADD
                 Dim openForm As Form = Nothing
-                openForm = New OrderingAdd(_msgHd, _db, _langHd, Me)
+                openForm = New Ordering(_msgHd, _db, _langHd, Me, , , Status)
                 openForm.Show()
                 Me.Hide()
             Case CommonConst.MENU_H0520  '発注編集
