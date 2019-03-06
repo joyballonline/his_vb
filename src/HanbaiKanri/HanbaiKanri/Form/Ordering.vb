@@ -1107,36 +1107,15 @@ Public Class Ordering
         Dim reccnt As Integer = 0
         Dim Sql As String = ""
 
-        Sql = " AND "
-        Sql += "発注番号"
-        Sql += " ILIKE "
-        Sql += "'"
-        Sql += PurchaseNo.ToString
-        Sql += "'"
-        Sql += " AND "
-        Sql += "発注番号枝番"
-        Sql += " ILIKE "
-        Sql += "'"
-        Sql += PurchaseSuffix.ToString
-        Sql += "'"
-        Sql += " AND "
-        Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+        Sql = " AND 発注番号 = '" & PurchaseNo.ToString & "'"
+        Sql += " AND 発注番号枝番 = '" & PurchaseSuffix.ToString & "'"
+        Sql += " AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
 
         Dim dsHattyuhd = getDsData("t20_hattyu", Sql)
 
         Sql = ""
-        Sql += " AND "
-        Sql += "発注番号"
-        Sql += " ILIKE "
-        Sql += "'"
-        Sql += PurchaseNo.ToString
-        Sql += "'"
-        Sql += " AND "
-        Sql += "発注番号枝番"
-        Sql += " ILIKE "
-        Sql += "'"
-        Sql += PurchaseSuffix.ToString
-        Sql += "'"
+        Sql += " AND 発注番号 = '" & PurchaseNo.ToString & "'"
+        Sql += " AND 発注番号枝番 = '" & PurchaseSuffix.ToString & "'"
 
         Dim dsHattyudt = getDsData("t21_hattyu", Sql)
 
@@ -1186,7 +1165,7 @@ Public Class Ordering
             sheet.Range("T13").Value = dsHattyuhd.Tables(RS).Rows(0)("客先番号")
             sheet.Range("T14").Value = dsHattyuhd.Tables(RS).Rows(0)("支払条件")
 
-            sheet.Range("H26").Value = dsHattyuhd.Tables(RS).Rows(0)("仕入金額")
+            'sheet.Range("H26").Value = dsHattyuhd.Tables(RS).Rows(0)("仕入金額")
             sheet.Range("H27").Value = dsHattyuhd.Tables(RS).Rows(0)("備考")
 
             sheet.Range("A34").Value = dsHattyuhd.Tables(RS).Rows(0)("営業担当者")
@@ -1236,7 +1215,7 @@ Public Class Ordering
                 cell = "O" & currentCnt
                 sheet.Range(cell).Value = dsHanyo.Tables(RS).Rows(0)("文字１")
                 cell = "R" & currentCnt
-                sheet.Range(cell).Value = dsHattyudt.Tables(RS).Rows(i)("仕入単価")
+                sheet.Range(cell).Value = dsHattyudt.Tables(RS).Rows(i)("仕入値")
                 cell = "W" & currentCnt
                 sheet.Range(cell).Value = dsHattyudt.Tables(RS).Rows(i)("仕入金額")
 
@@ -1250,6 +1229,7 @@ Public Class Ordering
             sheet.Range("W" & lstRow + 1).Value = totalPrice
             sheet.Range("W" & lstRow + 2).Value = totalPrice * 10 * 0.01
             sheet.Range("W" & lstRow + 3).Value = totalPrice * 10 * 0.01 + totalPrice
+            sheet.Range("H" & lstRow + 5).Value = totalPrice * 10 * 0.01 + totalPrice
 
             book.SaveAs(sOutFile)
             app.Visible = True
