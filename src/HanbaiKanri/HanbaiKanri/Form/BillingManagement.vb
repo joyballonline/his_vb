@@ -455,7 +455,7 @@ Public Class BillingManagement
         Sql = "INSERT INTO "
         Sql += "Public."
         Sql += "t23_skyuhd("
-        Sql += "会社コード, 請求番号, 請求区分, 請求日, 受注番号, 受注番号枝番, 客先番号, 得意先コード, 得意先名, 請求金額計, 売掛残高, 備考1, 備考2, 取消区分, 登録日, 更新者, 更新日)"
+        Sql += "会社コード, 請求番号, 請求区分, 請求日, 受注番号, 受注番号枝番, 客先番号, 得意先コード, 得意先名, 請求金額計, 入金額計, 売掛残高, 備考1, 備考2, 取消区分, 登録日, 更新者, 更新日)"
         Sql += " VALUES('"
         Sql += dsCymnhd.Tables(RS).Rows(0)("会社コード").ToString
         Sql += "', '"
@@ -476,7 +476,8 @@ Public Class BillingManagement
         Sql += dsCymnhd.Tables(RS).Rows(0)("得意先名").ToString
         Sql += "', '"
         Sql += DgvAdd.Rows(0).Cells("今回請求金額計").Value
-        Sql += "', '"
+        Sql += "', 0" '入金額計を0で設定
+        Sql += ", '"
         Sql += DgvAdd.Rows(0).Cells("今回請求金額計").Value
         Sql += "', '"
         Sql += DgvAdd.Rows(0).Cells("今回備考1").Value
