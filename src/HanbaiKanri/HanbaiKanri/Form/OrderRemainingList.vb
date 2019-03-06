@@ -78,8 +78,14 @@ Public Class OrderRemainingList
         Dim reccnt As Integer = 0 'DB用（デフォルト）
         Dim Sql As String = ""
 
+        LblMode.Text = "参照モード"
+
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
             LblMode.Text = OrderStatus & " Mode"
+
+            BtnExcelOutput.Text = "ExcelOutput"
+            BtnBack.Text = "Back"
+
             DgvCymndt.Columns("受注番号").HeaderText = "JobOrderNo"
             DgvCymndt.Columns("受注日").HeaderText = "JobOrderDate"
             DgvCymndt.Columns("得意先名").HeaderText = "CustomerName"
@@ -95,8 +101,6 @@ Public Class OrderRemainingList
             DgvCymndt.Columns("備考").HeaderText = "Remarks"
 
         End If
-
-        LblMode.Text = "参照モード"
 
         Sql = "SELECT t10.受注番号, t10.受注番号枝番, t11.行番号, t10.受注日, t10.得意先名, t11.メーカー, t11.品名, t11.型式, t11.受注数量"
         Sql += ",t11.単位, t11.見積単価, t10.ＶＡＴ, t11.売上金額, t11.受注残数, t11.備考"
