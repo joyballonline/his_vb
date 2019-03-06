@@ -96,6 +96,14 @@ Public Class frmC01F30_Menu
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.btnSelect = New System.Windows.Forms.Button()
         Me.cmdExit = New System.Windows.Forms.Button()
         Me.chkM01 = New System.Windows.Forms.CheckBox()
@@ -114,7 +122,22 @@ Public Class frmC01F30_Menu
         Me.前回操作日時 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.chkH06 = New System.Windows.Forms.CheckBox()
         Me.chkH03 = New System.Windows.Forms.CheckBox()
+        Me.TabProcessingMenu = New System.Windows.Forms.TabControl()
+        Me.TabGeneral = New System.Windows.Forms.TabPage()
+        Me.TabMenu = New System.Windows.Forms.TabPage()
+        Me.dgvMasterList = New System.Windows.Forms.DataGridView()
+        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.dgvLIST, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabProcessingMenu.SuspendLayout()
+        Me.TabGeneral.SuspendLayout()
+        Me.TabMenu.SuspendLayout()
+        CType(Me.dgvMasterList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnSelect
@@ -230,6 +253,8 @@ Public Class frmC01F30_Menu
         '
         'dgvLIST
         '
+        Me.dgvLIST.AllowUserToAddRows = False
+        Me.dgvLIST.AllowUserToDeleteRows = False
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         DataGridViewCellStyle1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
@@ -240,14 +265,16 @@ Public Class frmC01F30_Menu
         Me.dgvLIST.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.dgvLIST.ColumnHeadersHeight = 25
         Me.dgvLIST.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.処理ID, Me.業務, Me.処理名, Me.説明, Me.My前回操作日時, Me.操作者, Me.前回操作日時})
+        Me.dgvLIST.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgvLIST.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
-        Me.dgvLIST.Location = New System.Drawing.Point(12, 37)
+        Me.dgvLIST.Location = New System.Drawing.Point(3, 3)
         Me.dgvLIST.MultiSelect = False
         Me.dgvLIST.Name = "dgvLIST"
+        Me.dgvLIST.ReadOnly = True
         Me.dgvLIST.RowHeadersVisible = False
         Me.dgvLIST.RowHeadersWidth = 25
         Me.dgvLIST.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvLIST.Size = New System.Drawing.Size(1326, 457)
+        Me.dgvLIST.Size = New System.Drawing.Size(1312, 442)
         Me.dgvLIST.TabIndex = 11
         '
         '処理ID
@@ -256,6 +283,7 @@ Public Class frmC01F30_Menu
         Me.処理ID.DefaultCellStyle = DataGridViewCellStyle2
         Me.処理ID.HeaderText = "処理ID"
         Me.処理ID.Name = "処理ID"
+        Me.処理ID.ReadOnly = True
         Me.処理ID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.処理ID.Visible = False
         Me.処理ID.Width = 300
@@ -266,6 +294,7 @@ Public Class frmC01F30_Menu
         Me.業務.DefaultCellStyle = DataGridViewCellStyle3
         Me.業務.HeaderText = "業務"
         Me.業務.Name = "業務"
+        Me.業務.ReadOnly = True
         Me.業務.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.業務.Width = 300
         '
@@ -275,6 +304,7 @@ Public Class frmC01F30_Menu
         Me.処理名.DefaultCellStyle = DataGridViewCellStyle4
         Me.処理名.HeaderText = "処理名"
         Me.処理名.Name = "処理名"
+        Me.処理名.ReadOnly = True
         Me.処理名.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.処理名.Width = 200
         '
@@ -284,6 +314,7 @@ Public Class frmC01F30_Menu
         Me.説明.DefaultCellStyle = DataGridViewCellStyle5
         Me.説明.HeaderText = "説明"
         Me.説明.Name = "説明"
+        Me.説明.ReadOnly = True
         Me.説明.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.説明.Width = 640
         '
@@ -294,6 +325,7 @@ Public Class frmC01F30_Menu
         Me.My前回操作日時.DefaultCellStyle = DataGridViewCellStyle6
         Me.My前回操作日時.HeaderText = " My前回操作日時"
         Me.My前回操作日時.Name = "My前回操作日時"
+        Me.My前回操作日時.ReadOnly = True
         Me.My前回操作日時.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.My前回操作日時.Visible = False
         Me.My前回操作日時.Width = 200
@@ -304,6 +336,7 @@ Public Class frmC01F30_Menu
         Me.操作者.DefaultCellStyle = DataGridViewCellStyle7
         Me.操作者.HeaderText = "　操作者"
         Me.操作者.Name = "操作者"
+        Me.操作者.ReadOnly = True
         Me.操作者.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.操作者.Visible = False
         Me.操作者.Width = 200
@@ -315,6 +348,7 @@ Public Class frmC01F30_Menu
         Me.前回操作日時.DefaultCellStyle = DataGridViewCellStyle8
         Me.前回操作日時.HeaderText = "前回操作日時"
         Me.前回操作日時.Name = "前回操作日時"
+        Me.前回操作日時.ReadOnly = True
         Me.前回操作日時.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.前回操作日時.Visible = False
         Me.前回操作日時.Width = 200
@@ -349,10 +383,145 @@ Public Class frmC01F30_Menu
         Me.chkH03.UseVisualStyleBackColor = True
         Me.chkH03.Visible = False
         '
+        'TabProcessingMenu
+        '
+        Me.TabProcessingMenu.Controls.Add(Me.TabGeneral)
+        Me.TabProcessingMenu.Controls.Add(Me.TabMenu)
+        Me.TabProcessingMenu.Location = New System.Drawing.Point(12, 12)
+        Me.TabProcessingMenu.Name = "TabProcessingMenu"
+        Me.TabProcessingMenu.SelectedIndex = 0
+        Me.TabProcessingMenu.Size = New System.Drawing.Size(1326, 474)
+        Me.TabProcessingMenu.TabIndex = 23
+        '
+        'TabGeneral
+        '
+        Me.TabGeneral.BackColor = System.Drawing.Color.Transparent
+        Me.TabGeneral.Controls.Add(Me.dgvLIST)
+        Me.TabGeneral.Location = New System.Drawing.Point(4, 22)
+        Me.TabGeneral.Name = "TabGeneral"
+        Me.TabGeneral.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabGeneral.Size = New System.Drawing.Size(1318, 448)
+        Me.TabGeneral.TabIndex = 0
+        Me.TabGeneral.Text = "一般処理"
+        '
+        'TabMenu
+        '
+        Me.TabMenu.BackColor = System.Drawing.Color.Transparent
+        Me.TabMenu.Controls.Add(Me.dgvMasterList)
+        Me.TabMenu.Location = New System.Drawing.Point(4, 22)
+        Me.TabMenu.Name = "TabMenu"
+        Me.TabMenu.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabMenu.Size = New System.Drawing.Size(1318, 448)
+        Me.TabMenu.TabIndex = 1
+        Me.TabMenu.Text = "マスタ"
+        '
+        'dgvMasterList
+        '
+        Me.dgvMasterList.AllowUserToAddRows = False
+        Me.dgvMasterList.AllowUserToDeleteRows = False
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle9.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvMasterList.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle9
+        Me.dgvMasterList.ColumnHeadersHeight = 25
+        Me.dgvMasterList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5, Me.DataGridViewTextBoxColumn6, Me.DataGridViewTextBoxColumn7})
+        Me.dgvMasterList.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.dgvMasterList.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
+        Me.dgvMasterList.Location = New System.Drawing.Point(3, 3)
+        Me.dgvMasterList.MultiSelect = False
+        Me.dgvMasterList.Name = "dgvMasterList"
+        Me.dgvMasterList.ReadOnly = True
+        Me.dgvMasterList.RowHeadersVisible = False
+        Me.dgvMasterList.RowHeadersWidth = 25
+        Me.dgvMasterList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.dgvMasterList.Size = New System.Drawing.Size(1312, 442)
+        Me.dgvMasterList.TabIndex = 12
+        '
+        'DataGridViewTextBoxColumn1
+        '
+        DataGridViewCellStyle10.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle10
+        Me.DataGridViewTextBoxColumn1.HeaderText = "処理ID"
+        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
+        Me.DataGridViewTextBoxColumn1.ReadOnly = True
+        Me.DataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.DataGridViewTextBoxColumn1.Visible = False
+        Me.DataGridViewTextBoxColumn1.Width = 300
+        '
+        'DataGridViewTextBoxColumn2
+        '
+        DataGridViewCellStyle11.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle11
+        Me.DataGridViewTextBoxColumn2.HeaderText = "業務"
+        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
+        Me.DataGridViewTextBoxColumn2.ReadOnly = True
+        Me.DataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.DataGridViewTextBoxColumn2.Width = 300
+        '
+        'DataGridViewTextBoxColumn3
+        '
+        DataGridViewCellStyle12.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        Me.DataGridViewTextBoxColumn3.DefaultCellStyle = DataGridViewCellStyle12
+        Me.DataGridViewTextBoxColumn3.HeaderText = "処理名"
+        Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
+        Me.DataGridViewTextBoxColumn3.ReadOnly = True
+        Me.DataGridViewTextBoxColumn3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.DataGridViewTextBoxColumn3.Width = 200
+        '
+        'DataGridViewTextBoxColumn4
+        '
+        DataGridViewCellStyle13.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        Me.DataGridViewTextBoxColumn4.DefaultCellStyle = DataGridViewCellStyle13
+        Me.DataGridViewTextBoxColumn4.HeaderText = "説明"
+        Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
+        Me.DataGridViewTextBoxColumn4.ReadOnly = True
+        Me.DataGridViewTextBoxColumn4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.DataGridViewTextBoxColumn4.Width = 640
+        '
+        'DataGridViewTextBoxColumn5
+        '
+        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle14.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        Me.DataGridViewTextBoxColumn5.DefaultCellStyle = DataGridViewCellStyle14
+        Me.DataGridViewTextBoxColumn5.HeaderText = " My前回操作日時"
+        Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
+        Me.DataGridViewTextBoxColumn5.ReadOnly = True
+        Me.DataGridViewTextBoxColumn5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.DataGridViewTextBoxColumn5.Visible = False
+        Me.DataGridViewTextBoxColumn5.Width = 200
+        '
+        'DataGridViewTextBoxColumn6
+        '
+        DataGridViewCellStyle15.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        Me.DataGridViewTextBoxColumn6.DefaultCellStyle = DataGridViewCellStyle15
+        Me.DataGridViewTextBoxColumn6.HeaderText = "　操作者"
+        Me.DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
+        Me.DataGridViewTextBoxColumn6.ReadOnly = True
+        Me.DataGridViewTextBoxColumn6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.DataGridViewTextBoxColumn6.Visible = False
+        Me.DataGridViewTextBoxColumn6.Width = 200
+        '
+        'DataGridViewTextBoxColumn7
+        '
+        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle16.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        Me.DataGridViewTextBoxColumn7.DefaultCellStyle = DataGridViewCellStyle16
+        Me.DataGridViewTextBoxColumn7.HeaderText = "前回操作日時"
+        Me.DataGridViewTextBoxColumn7.Name = "DataGridViewTextBoxColumn7"
+        Me.DataGridViewTextBoxColumn7.ReadOnly = True
+        Me.DataGridViewTextBoxColumn7.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.DataGridViewTextBoxColumn7.Visible = False
+        Me.DataGridViewTextBoxColumn7.Width = 200
+        '
         'frmC01F30_Menu
         '
         Me.ClientSize = New System.Drawing.Size(1350, 561)
         Me.ControlBox = False
+        Me.Controls.Add(Me.TabProcessingMenu)
         Me.Controls.Add(Me.chkH03)
         Me.Controls.Add(Me.chkH06)
         Me.Controls.Add(Me.btnSelect)
@@ -363,10 +532,13 @@ Public Class frmC01F30_Menu
         Me.Controls.Add(Me.chkH04)
         Me.Controls.Add(Me.chkH02)
         Me.Controls.Add(Me.chkH01)
-        Me.Controls.Add(Me.dgvLIST)
         Me.Name = "frmC01F30_Menu"
         Me.Text = "処理メニュー（C01F30）"
         CType(Me.dgvLIST, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabProcessingMenu.ResumeLayout(False)
+        Me.TabGeneral.ResumeLayout(False)
+        Me.TabMenu.ResumeLayout(False)
+        CType(Me.dgvMasterList, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -384,8 +556,8 @@ Public Class frmC01F30_Menu
         '一覧クリア
         dgvLIST.Rows.Clear()
 
-        ' ユーザ操作による行追加を無効(禁止)
-        dgvLIST.AllowUserToAddRows = False
+        '' ユーザ操作による行追加を無効(禁止)
+        'dgvLIST.AllowUserToAddRows = False
 
         '列の幅をユーザー変更可
         dgvLIST.AllowUserToResizeColumns = True
@@ -398,12 +570,15 @@ Public Class frmC01F30_Menu
 
         'メニュー表示
         getMenuList(strcheckMenu())
-        If frmC01F10_Login.loginValue.Language = "ENG" Then
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
             dgvLIST.Columns("業務").HeaderText = "Business"
             dgvLIST.Columns("処理名").HeaderText = "ProcessingName"
             dgvLIST.Columns("説明").HeaderText = "Description"
             btnSelect.Text = "Select(&G)"
             cmdExit.Text = "Exit(&B)"
+
+            TabProcessingMenu.TabPages(0).Text = "GeneralProcessing"
+            TabProcessingMenu.TabPages(1).Text = "Master"
         End If
 
     End Sub
@@ -630,6 +805,7 @@ Public Class frmC01F30_Menu
 
         '一覧をクリア
         dgvLIST.Rows.Clear()
+        dgvMasterList.Rows.Clear() 'マスタ
 
         'チェックボックス未選択だったら処理終了
         If getMenuSql Is "" Then
@@ -647,86 +823,120 @@ Public Class frmC01F30_Menu
 
         'メニューを読み込み
         Try
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
-                strSql = "SELECT "
-                strSql = strSql & "    m.会社コード "
+            strSql = "SELECT "
+            strSql = strSql & "    m.会社コード "
+
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+
                 strSql = strSql & "  , m.処理ＩＤ "
                 strSql = strSql & "  , m.英語用処理名 "
                 strSql = strSql & "  , m.業務ＩＤ "
                 strSql = strSql & "  , m.英語用業務名"
                 strSql = strSql & "  , m.表示順 "
                 strSql = strSql & "  , m.英語用説明 "
-                strSql = strSql & "  , m.削除フラグ "
-                strSql = strSql & "  , to_char(p.更新日, 'yyyy/mm/dd hh24:mi') My前回操作日時 "
-                strSql = strSql & "  , p2.更新者 "
-                strSql = strSql & "  , to_char(p2.更新日, 'yyyy/mm/dd hh24:mi') 前回操作日時"
-                strSql = strSql & " FROM m04_menu m "
-                strSql = strSql & " left join l10_proclog p on "
-                strSql = strSql & "           p.会社コード = m.会社コード "
-                strSql = strSql & "      and  p.処理ＩＤ   = m.処理ＩＤ "
-                strSql = strSql & "      and  p.更新日     = (SELECT MAX(更新日) "
-                strSql = strSql & "                           FROM l10_proclog "
-                strSql = strSql & "                           WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-                strSql = strSql & "                             and 処理ＩＤ   = m.処理ＩＤ "
-                strSql = strSql & "                             and 更新者     = '" & frmC01F10_Login.loginValue.TantoCD & "'"
-                strSql = strSql & "                          ) "
-                strSql = strSql & " left join l10_proclog p2 on "
-                strSql = strSql & "           p2.会社コード = m.会社コード "
-                strSql = strSql & "      and  p2.処理ＩＤ   = m.処理ＩＤ "
-                strSql = strSql & "      and  p2.更新日     = (SELECT MAX(更新日) "
-                strSql = strSql & "                            FROM l10_proclog "
-                strSql = strSql & "                            WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-                strSql = strSql & "                              and 処理ＩＤ   = m.処理ＩＤ "
-                strSql = strSql & "                           ) "
-                strSql = strSql & " Where m.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-                strSql = strSql & " and "
-                strSql = strSql & " m.削除フラグ = 0 "
-                strSql = strSql & likeSql
-                strSql = strSql & " order by m.表示順 "
             Else
-                strSql = "SELECT "
-                strSql = strSql & "    m.会社コード "
+
                 strSql = strSql & "  , m.処理ＩＤ "
                 strSql = strSql & "  , m.処理名 "
                 strSql = strSql & "  , m.業務ＩＤ "
                 strSql = strSql & "  , m.業務名"
                 strSql = strSql & "  , m.表示順 "
                 strSql = strSql & "  , m.説明 "
-                strSql = strSql & "  , m.削除フラグ "
-                strSql = strSql & "  , to_char(p.更新日, 'yyyy/mm/dd hh24:mi') My前回操作日時 "
-                strSql = strSql & "  , p2.更新者 "
-                strSql = strSql & "  , to_char(p2.更新日, 'yyyy/mm/dd hh24:mi') 前回操作日時"
-                strSql = strSql & " FROM m04_menu m "
-                strSql = strSql & " left join l10_proclog p on "
-                strSql = strSql & "           p.会社コード = m.会社コード "
-                strSql = strSql & "      and  p.処理ＩＤ   = m.処理ＩＤ "
-                strSql = strSql & "      and  p.更新日     = (SELECT MAX(更新日) "
-                strSql = strSql & "                           FROM l10_proclog "
-                strSql = strSql & "                           WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-                strSql = strSql & "                             and 処理ＩＤ   = m.処理ＩＤ "
-                strSql = strSql & "                             and 更新者     = '" & frmC01F10_Login.loginValue.TantoCD & "'"
-                strSql = strSql & "                          ) "
-                strSql = strSql & " left join l10_proclog p2 on "
-                strSql = strSql & "           p2.会社コード = m.会社コード "
-                strSql = strSql & "      and  p2.処理ＩＤ   = m.処理ＩＤ "
-                strSql = strSql & "      and  p2.更新日     = (SELECT MAX(更新日) "
-                strSql = strSql & "                            FROM l10_proclog "
-                strSql = strSql & "                            WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-                strSql = strSql & "                              and 処理ＩＤ   = m.処理ＩＤ "
-                strSql = strSql & "                           ) "
-                strSql = strSql & " Where m.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-                strSql = strSql & " and "
-                strSql = strSql & " m.削除フラグ = 0 "
-                strSql = strSql & likeSql
-                strSql = strSql & " order by m.表示順 "
+
             End If
 
+            strSql = strSql & "  , m.削除フラグ "
+            strSql = strSql & "  , to_char(p.更新日, 'yyyy/mm/dd hh24:mi') My前回操作日時 "
+            strSql = strSql & "  , p2.更新者 "
+            strSql = strSql & "  , to_char(p2.更新日, 'yyyy/mm/dd hh24:mi') 前回操作日時"
+            strSql = strSql & " FROM m04_menu m "
+            strSql = strSql & " left join l10_proclog p on "
+            strSql = strSql & "           p.会社コード = m.会社コード "
+            strSql = strSql & "      and  p.処理ＩＤ   = m.処理ＩＤ "
+            strSql = strSql & "      and  p.更新日     = (SELECT MAX(更新日) "
+            strSql = strSql & "                           FROM l10_proclog "
+            strSql = strSql & "                           WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            strSql = strSql & "                             and 処理ＩＤ   = m.処理ＩＤ "
+            strSql = strSql & "                             and 更新者     = '" & frmC01F10_Login.loginValue.TantoCD & "'"
+            strSql = strSql & "                          ) "
+            strSql = strSql & " left join l10_proclog p2 on "
+            strSql = strSql & "           p2.会社コード = m.会社コード "
+            strSql = strSql & "      and  p2.処理ＩＤ   = m.処理ＩＤ "
+            strSql = strSql & "      and  p2.更新日     = (SELECT MAX(更新日) "
+            strSql = strSql & "                            FROM l10_proclog "
+            strSql = strSql & "                            WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            strSql = strSql & "                              and 処理ＩＤ   = m.処理ＩＤ "
+            strSql = strSql & "                           ) "
+            strSql = strSql & " Where m.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            strSql = strSql & " and "
+            strSql = strSql & " m.削除フラグ = 0 "
+            strSql = strSql & " and "
+            strSql = strSql & " m.業務ＩＤ <> 'M01' "
+            strSql = strSql & likeSql
+            strSql = strSql & " order by m.表示順 "
 
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(strSql, RS, reccnt)
 
+            strSql = "SELECT "
+            strSql = strSql & "    m.会社コード "
+
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+
+                strSql = strSql & "  , m.処理ＩＤ "
+                strSql = strSql & "  , m.英語用処理名 "
+                strSql = strSql & "  , m.業務ＩＤ "
+                strSql = strSql & "  , m.英語用業務名"
+                strSql = strSql & "  , m.表示順 "
+                strSql = strSql & "  , m.英語用説明
+"
+            Else
+
+                strSql = strSql & "  , m.処理ＩＤ "
+                strSql = strSql & "  , m.処理名 "
+                strSql = strSql & "  , m.業務ＩＤ "
+                strSql = strSql & "  , m.業務名"
+                strSql = strSql & "  , m.表示順 "
+                strSql = strSql & "  , m.説明 "
+
+            End If
+
+            strSql = strSql & "  , m.削除フラグ "
+            strSql = strSql & "  , to_char(p.更新日, 'yyyy/mm/dd hh24:mi') My前回操作日時 "
+            strSql = strSql & "  , p2.更新者 "
+            strSql = strSql & "  , to_char(p2.更新日, 'yyyy/mm/dd hh24:mi') 前回操作日時"
+            strSql = strSql & " FROM m04_menu m "
+            strSql = strSql & " left join l10_proclog p on "
+            strSql = strSql & "           p.会社コード = m.会社コード "
+            strSql = strSql & "      and  p.処理ＩＤ   = m.処理ＩＤ "
+            strSql = strSql & "      and  p.更新日     = (SELECT MAX(更新日) "
+            strSql = strSql & "                           FROM l10_proclog "
+            strSql = strSql & "                           WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            strSql = strSql & "                             and 処理ＩＤ   = m.処理ＩＤ "
+            strSql = strSql & "                             and 更新者     = '" & frmC01F10_Login.loginValue.TantoCD & "'"
+            strSql = strSql & "                          ) "
+            strSql = strSql & " left join l10_proclog p2 on "
+            strSql = strSql & "           p2.会社コード = m.会社コード "
+            strSql = strSql & "      and  p2.処理ＩＤ   = m.処理ＩＤ "
+            strSql = strSql & "      and  p2.更新日     = (SELECT MAX(更新日) "
+            strSql = strSql & "                            FROM l10_proclog "
+            strSql = strSql & "                            WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            strSql = strSql & "                              and 処理ＩＤ   = m.処理ＩＤ "
+            strSql = strSql & "                           ) "
+            strSql = strSql & " Where m.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            strSql = strSql & " and "
+            strSql = strSql & " m.削除フラグ = 0 "
+            strSql = strSql & " and "
+            strSql = strSql & " m.業務ＩＤ = 'M01' "
+            strSql = strSql & likeSql
+            strSql = strSql & " order by m.表示順 "
+
+            Dim dsMaster As DataSet = _db.selectDB(strSql, RS, reccnt)
+
             '業務IDの間にハイフンレコード追加
             Dim ds2 As DataSet = add_Haifun(ds)
+
+            Dim dsMasterList As DataSet = add_Haifun(dsMaster)
 
             '対象データの有無チェック
             If reccnt = 0 Then
@@ -739,15 +949,26 @@ Public Class frmC01F30_Menu
                 Me.btnSelect.Enabled = True
             End If
 
-            For index As Integer = 0 To ds2.Tables(RS).Rows.Count - 1
+            For i As Integer = 0 To ds2.Tables(RS).Rows.Count - 1
                 dgvLIST.Rows.Add()
-                dgvLIST.Rows(index).Cells(0).Value = _db.rmNullStr(ds2.Tables(RS).Rows(index)("処理ＩＤ"))          '処理ID
-                dgvLIST.Rows(index).Cells(1).Value = _db.rmNullStr(ds2.Tables(RS).Rows(index)("業務名"))            '業務
-                dgvLIST.Rows(index).Cells(2).Value = _db.rmNullStr(ds2.Tables(RS).Rows(index)("処理名"))            '処理名
-                dgvLIST.Rows(index).Cells(3).Value = _db.rmNullStr(ds2.Tables(RS).Rows(index)("説明"))              '説明
-                dgvLIST.Rows(index).Cells(4).Value = _db.rmNullStr(ds2.Tables(RS).Rows(index)("My前回操作日時"))    'My前回操作日時
-                dgvLIST.Rows(index).Cells(5).Value = _db.rmNullStr(ds2.Tables(RS).Rows(index)("更新者"))            '操作者
-                dgvLIST.Rows(index).Cells(6).Value = _db.rmNullStr(ds2.Tables(RS).Rows(index)("前回操作日時"))      '前回操作日時
+                dgvLIST.Rows(i).Cells(0).Value = _db.rmNullStr(ds2.Tables(RS).Rows(i)("処理ＩＤ"))          '処理ID
+                dgvLIST.Rows(i).Cells(1).Value = _db.rmNullStr(ds2.Tables(RS).Rows(i)("業務名"))            '業務
+                dgvLIST.Rows(i).Cells(2).Value = _db.rmNullStr(ds2.Tables(RS).Rows(i)("処理名"))            '処理名
+                dgvLIST.Rows(i).Cells(3).Value = _db.rmNullStr(ds2.Tables(RS).Rows(i)("説明"))              '説明
+                dgvLIST.Rows(i).Cells(4).Value = _db.rmNullStr(ds2.Tables(RS).Rows(i)("My前回操作日時"))    'My前回操作日時
+                dgvLIST.Rows(i).Cells(5).Value = _db.rmNullStr(ds2.Tables(RS).Rows(i)("更新者"))            '操作者
+                dgvLIST.Rows(i).Cells(6).Value = _db.rmNullStr(ds2.Tables(RS).Rows(i)("前回操作日時"))      '前回操作日時
+            Next
+
+            For i As Integer = 0 To dsMasterList.Tables(RS).Rows.Count - 1
+                dgvMasterList.Rows.Add()
+                dgvMasterList.Rows(i).Cells(0).Value = _db.rmNullStr(dsMasterList.Tables(RS).Rows(i)("処理ＩＤ"))          '処理ID
+                dgvMasterList.Rows(i).Cells(1).Value = _db.rmNullStr(dsMasterList.Tables(RS).Rows(i)("業務名"))            '業務
+                dgvMasterList.Rows(i).Cells(2).Value = _db.rmNullStr(dsMasterList.Tables(RS).Rows(i)("処理名"))            '処理名
+                dgvMasterList.Rows(i).Cells(3).Value = _db.rmNullStr(dsMasterList.Tables(RS).Rows(i)("説明"))              '説明
+                dgvMasterList.Rows(i).Cells(4).Value = _db.rmNullStr(dsMasterList.Tables(RS).Rows(i)("My前回操作日時"))    'My前回操作日時
+                dgvMasterList.Rows(i).Cells(5).Value = _db.rmNullStr(dsMasterList.Tables(RS).Rows(i)("更新者"))            '操作者
+                dgvMasterList.Rows(i).Cells(6).Value = _db.rmNullStr(dsMasterList.Tables(RS).Rows(i)("前回操作日時"))      '前回操作日時
             Next
 
         Catch ue As UsrDefException
@@ -833,7 +1054,16 @@ Public Class frmC01F30_Menu
             Exit For
         Next c
 
-        Dim selectID As String = dgvLIST.Rows(idx).Cells(0).Value   '選択処理ＩＤ
+        Console.WriteLine(TabProcessingMenu.SelectedIndex.ToString())
+
+        Dim selectID As String = ""
+
+        If TabProcessingMenu.SelectedIndex.ToString() = 0 Then
+            selectID = dgvLIST.Rows(idx).Cells(0).Value   '選択処理ＩＤ
+        ElseIf TabProcessingMenu.SelectedIndex.ToString() = 1 Then
+            selectID = dgvMasterList.Rows(idx).Cells(0).Value   '選択処理ＩＤ
+        End If
+
 
         Select Case selectID
             '-----------------------------------注文業務（H01）
@@ -1279,7 +1509,7 @@ Public Class frmC01F30_Menu
             'keyブレイク用
             sGyomuId = _db.rmNullStr(paraDs.Tables(RS).Rows(index)("業務ＩＤ"))
 
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 newRow("会社コード") = _db.rmNullStr(paraDs.Tables(RS).Rows(index)("会社コード"))
                 newRow("処理ＩＤ") = _db.rmNullStr(paraDs.Tables(RS).Rows(index)("処理ＩＤ"))
                 newRow("処理名") = _db.rmNullStr(paraDs.Tables(RS).Rows(index)("英語用処理名"))
@@ -1322,5 +1552,10 @@ Public Class frmC01F30_Menu
         If intRet = vbOK Then
             Application.Exit()
         End If
+    End Sub
+
+    'タブを変更したら
+    Private Sub TabProcessingMenu_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TabProcessingMenu.SelectedIndexChanged
+
     End Sub
 End Class

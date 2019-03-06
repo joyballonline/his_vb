@@ -34,6 +34,17 @@ Partial Class frmC01F30_Menu
     Friend WithEvents My前回操作日時 As DataGridViewTextBoxColumn
     Friend WithEvents 操作者 As DataGridViewTextBoxColumn
     Friend WithEvents 前回操作日時 As DataGridViewTextBoxColumn
+    Friend WithEvents TabProcessingMenu As TabControl
+    Friend WithEvents TabGeneral As TabPage
+    Friend WithEvents TabMenu As TabPage
+    Friend WithEvents dgvMasterList As DataGridView
+    Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn4 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn5 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn6 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn7 As DataGridViewTextBoxColumn
 
     'メモ: 以下のプロシージャは Windows フォーム デザイナーで必要です。
     'Windows フォーム デザイナーを使用して変更できます。  
