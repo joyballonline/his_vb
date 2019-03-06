@@ -22,11 +22,11 @@ Partial Class OrderingAdd
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.DtpPurchaseDate = New System.Windows.Forms.DateTimePicker()
         Me.TxtOrderingAmount = New System.Windows.Forms.TextBox()
         Me.LblOrderAmount = New System.Windows.Forms.Label()
@@ -84,6 +84,7 @@ Partial Class OrderingAdd
         Me.BtnRowsDel = New System.Windows.Forms.Button()
         Me.BtnRowsAdd = New System.Windows.Forms.Button()
         Me.LblMode = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
         CType(Me.DgvItemList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -494,24 +495,24 @@ Partial Class OrderingAdd
         '
         'メーカー
         '
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.メーカー.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.メーカー.DefaultCellStyle = DataGridViewCellStyle6
         Me.メーカー.HeaderText = "メーカー"
         Me.メーカー.Name = "メーカー"
         Me.メーカー.Width = 220
         '
         '品名
         '
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.品名.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.品名.DefaultCellStyle = DataGridViewCellStyle7
         Me.品名.HeaderText = "品名"
         Me.品名.Name = "品名"
         Me.品名.Width = 220
         '
         '型式
         '
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.型式.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.型式.DefaultCellStyle = DataGridViewCellStyle8
         Me.型式.HeaderText = "型式"
         Me.型式.Name = "型式"
         Me.型式.Width = 230
@@ -536,8 +537,8 @@ Partial Class OrderingAdd
         '
         '間接費
         '
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.間接費.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.間接費.DefaultCellStyle = DataGridViewCellStyle9
         Me.間接費.HeaderText = "間接費"
         Me.間接費.Name = "間接費"
         Me.間接費.ReadOnly = True
@@ -545,8 +546,8 @@ Partial Class OrderingAdd
         '
         '仕入金額
         '
-        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.仕入金額.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.仕入金額.DefaultCellStyle = DataGridViewCellStyle10
         Me.仕入金額.HeaderText = "仕入金額"
         Me.仕入金額.Name = "仕入金額"
         Me.仕入金額.ReadOnly = True
@@ -677,10 +678,24 @@ Partial Class OrderingAdd
         Me.LblMode.Text = "新規登録モード"
         Me.LblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'Label1
+        '
+        Me.Label1.BackColor = System.Drawing.Color.Yellow
+        Me.Label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label1.Font = New System.Drawing.Font("MS UI Gothic", 72.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Label1.ForeColor = System.Drawing.Color.Red
+        Me.Label1.Location = New System.Drawing.Point(12, 9)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(1328, 543)
+        Me.Label1.TabIndex = 297
+        Me.Label1.Text = "Ordering.vbへ一本化するので、こちらは廃止"
+        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'OrderingAdd
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.LblMode)
         Me.Controls.Add(Me.BtnClone)
         Me.Controls.Add(Me.BtnDown)
@@ -790,4 +805,5 @@ Partial Class OrderingAdd
     Friend WithEvents 未入庫数 As DataGridViewTextBoxColumn
     Friend WithEvents 備考 As DataGridViewTextBoxColumn
     Friend WithEvents LblMode As Label
+    Friend WithEvents Label1 As Label
 End Class

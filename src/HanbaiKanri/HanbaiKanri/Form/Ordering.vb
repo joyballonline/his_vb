@@ -83,6 +83,8 @@ Public Class Ordering
         Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
         Me.ControlBox = Not Me.ControlBox
         _init = True
+        TxtInput.Text = frmC01F10_Login.loginValue.TantoNM
+        CompanyCode = frmC01F10_Login.loginValue.BumonCD
 
     End Sub
 
@@ -221,7 +223,7 @@ Public Class Ordering
             BtnRegistration.Text = "Registrartion"
             BtnBack.Text = "Back"
 
-            DgvItemList.Columns("仕入区分").HeaderText = "PurchasingClassification"
+            'DgvItemList.Columns("仕入区分").HeaderText = "PurchasingClassification"
             DgvItemList.Columns("メーカー").HeaderText = "Manufacturer"
             DgvItemList.Columns("品名").HeaderText = "ItemName"
             DgvItemList.Columns("型式").HeaderText = "Spec"
@@ -249,16 +251,16 @@ Public Class Ordering
         Dim reccnt As Integer = 0
 
         'ComboBoxに表示する項目のリストを作成する
-        '汎用マスタから仕入区分を取得
-        Dim dsHanyo As DataSet = getDsHanyoData(CommonConst.FIXED_KEY_PURCHASING_CLASS)
+        ''汎用マスタから仕入区分を取得
+        'Dim dsHanyo As DataSet = getDsHanyoData(CommonConst.FIXED_KEY_PURCHASING_CLASS)
 
-        Dim dtPurchasingClass As New DataTable("Table")
-        dtPurchasingClass.Columns.Add("Display", GetType(String))
-        dtPurchasingClass.Columns.Add("Value", GetType(Integer))
+        'Dim dtPurchasingClass As New DataTable("Table")
+        'dtPurchasingClass.Columns.Add("Display", GetType(String))
+        'dtPurchasingClass.Columns.Add("Value", GetType(Integer))
 
-        For index As Integer = 0 To dsHanyo.Tables(RS).Rows.Count - 1
-            dtPurchasingClass.Rows.Add(dsHanyo.Tables(RS).Rows(index)("文字１"), dsHanyo.Tables(RS).Rows(index)("可変キー"))
-        Next
+        'For index As Integer = 0 To dsHanyo.Tables(RS).Rows.Count - 1
+        '    dtPurchasingClass.Rows.Add(dsHanyo.Tables(RS).Rows(index)("文字１"), dsHanyo.Tables(RS).Rows(index)("可変キー"))
+        'Next
 
         'DataGridViewComboBoxColumnを作成
         'Dim column As New DataGridViewComboBoxColumn()
@@ -278,7 +280,7 @@ Public Class Ordering
         Dim dtToday As String = formatDatetime(DateTime.Now)
 
         '汎用マスタからリードタイム単位を取得
-        dsHanyo = getDsHanyoData(CommonConst.FIXED_KEY_READTIME)
+        Dim dsHanyo = getDsHanyoData(CommonConst.FIXED_KEY_READTIME)
 
         Dim dtReadtime As New DataTable("Table2")
         dtReadtime.Columns.Add("Display", GetType(String))
@@ -321,6 +323,24 @@ Public Class Ordering
         '新規登録時の伝票番号取得
         If PurchaseStatus = CommonConst.STATUS_ADD Then
             GetSiireNo_New()
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+                LblMode.Text = "AddNewMode"
+            Else
+                LblMode.Text = "新規登録モード"
+            End If
+
+            TxtSupplierCode.Enabled = True
+            TxtSupplierName.Enabled = True
+            TxtPostalCode.Enabled = True
+            TxtAddress1.Enabled = True
+            TxtTel.Enabled = True
+            TxtFax.Enabled = True
+            TxtPosition.Enabled = True
+            TxtPerson.Enabled = True
+            TxtSales.Enabled = True
+            TxtPaymentTerms.Enabled = True
+            DtpRegistrationDate.Enabled = True
+
             Exit Sub
         End If
 
@@ -482,7 +502,6 @@ Public Class Ordering
                 LblMode.Text = "新規複写モード"
             End If
 
-            LblMode.Text = "新規複写モード"
             TxtSupplierCode.Enabled = True
             TxtSupplierName.Enabled = True
             TxtPostalCode.Enabled = True
@@ -503,12 +522,16 @@ Public Class Ordering
             TxtOrderingSuffix.Text = 1
 
         ElseIf PurchaseStatus = CommonConst.STATUS_EDIT Then
-
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+                LblMode.Text = "EditMode"
+            Else
             LblMode.Text = "編集モード"
+        End If
 
-            '枝番の最大値を取得し、 +1 加算する
 
-            Sql = " SELECT public.t20_hattyu.* "
+        '枝番の最大値を取得し、 +1 加算する
+
+        Sql = " SELECT public.t20_hattyu.* "
             Sql += " FROM "
             Sql += "t20_hattyu"
 
@@ -602,12 +625,12 @@ Public Class Ordering
             Dim RowIdx As Integer = DgvItemList.CurrentCell.RowIndex
             '行を挿入
             DgvItemList.Rows.Insert(RowIdx + 1)
-            DgvItemList.Rows(RowIdx + 1).Cells("仕入区分").Value = 1
+            'DgvItemList.Rows(RowIdx + 1).Cells("仕入区分").Value = 1
             DgvItemList.Rows(RowIdx + 1).Cells("リードタイム単位").Value = 1
             'DgvItemList.Rows(RowIdx + 1).Cells("貿易条件").Value = 1 '固定で入れているので一旦コメントアウト
         Else
             DgvItemList.Rows.Add()
-            DgvItemList.Rows(0).Cells("仕入区分").Value = 1
+            'DgvItemList.Rows(0).Cells("仕入区分").Value = 1
             DgvItemList.Rows(0).Cells("リードタイム単位").Value = 1
             TxtItemCount.Text = DgvItemList.Rows.Count()
         End If
@@ -628,7 +651,7 @@ Public Class Ordering
     '行追加（DGVの最終行に追加）
     Private Sub BtnRowsAdd_Click(sender As Object, e As EventArgs) Handles BtnRowsAdd.Click
         DgvItemList.Rows.Add()
-        DgvItemList.Rows(DgvItemList.Rows.Count() - 1).Cells("仕入区分").Value = 1
+        'DgvItemList.Rows(DgvItemList.Rows.Count() - 1).Cells("仕入区分").Value = 1
         DgvItemList.Rows(DgvItemList.Rows.Count() - 1).Cells("リードタイム単位").Value = 1
         'DgvItemList.Rows(DgvItemList.Rows.Count() - 1).Cells("貿易条件").Value = 1 '固定で入れているので一旦コメントアウト
 
@@ -811,13 +834,41 @@ Public Class Ordering
 
     '登録ボタン押下時
     Private Sub BtnRegistration_Click(sender As Object, e As EventArgs) Handles BtnRegistration.Click
+        '項目チェック
+        Dim strMessage As String = ""    'メッセージ本文
+        Dim strMessageTitle As String = ""      'メッセージタイトル
+        ''仕入先は必須入力としましょう
+        If TxtSupplierCode.Text = "" Then
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                strMessage = "Please enter Supplier Code. "
+                strMessageTitle = "SupplierCode Error"
+            Else
+                strMessage = "仕入先を入力してください。"
+                strMessageTitle = "仕入先入力エラー"
+            End If
+            Dim result As DialogResult = MessageBox.Show(strMessage, strMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Exit Sub
+        End If
+        '明細行がゼロ件の場合はエラーとする
+        If DgvItemList.Rows.Count = 0 Then
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                strMessage = "Please enter the details. "
+                strMessageTitle = "details Error"
+            Else
+                strMessage = "明細を入力してください。"
+                strMessageTitle = "明細入力エラー"
+            End If
+            Dim result As DialogResult = MessageBox.Show(strMessage, strMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Exit Sub
+        End If
+
         Dim reccnt As Integer = 0
         Dim dtNow As String = formatDatetime(DateTime.Now)
         Dim Sql As String = ""
 
         Try
             '複写か編集の時
-            If PurchaseStatus = CommonConst.STATUS_CLONE Or PurchaseStatus = CommonConst.STATUS_EDIT Then
+            If PurchaseStatus = CommonConst.STATUS_CLONE Or PurchaseStatus = CommonConst.STATUS_EDIT Or PurchaseStatus = CommonConst.STATUS_ADD Then
                 Sql = "INSERT INTO "
                 Sql += "Public."
                 Sql += "t20_hattyu("
@@ -944,8 +995,8 @@ Public Class Ordering
                     Sql += TxtOrderingSuffix.Text
                     Sql += "', '"
                     Sql += DgvItemList.Rows(hattyuIdx).Cells("No").Value.ToString
-                    Sql += "', '"
-                    Sql += DgvItemList.Rows(hattyuIdx).Cells("仕入区分").Value.ToString
+                    Sql += "', '2"
+                    'Sql += DgvItemList.Rows(hattyuIdx).Cells("仕入区分").Value.ToString
                     Sql += "', '"
                     Sql += DgvItemList.Rows(hattyuIdx).Cells("メーカー").Value.ToString
                     Sql += "', '"
@@ -962,9 +1013,9 @@ Public Class Ordering
                     Sql += "0"
                     Sql += "', '"
                     Sql += formatNumber(DgvItemList.Rows(hattyuIdx).Cells("数量").Value.ToString)
-                    Sql += "', '"
-                    Sql += formatNumber(DgvItemList.Rows(hattyuIdx).Cells("間接費").Value.ToString)
-                    Sql += "', '"
+                    Sql += "', 0"
+                    'Sql += formatNumber(DgvItemList.Rows(hattyuIdx).Cells("間接費").Value.ToString)
+                    Sql += ", '"
                     Sql += formatNumber(DgvItemList.Rows(hattyuIdx).Cells("仕入単価").Value.ToString)
                     Sql += "', '"
                     Sql += formatNumber(DgvItemList.Rows(hattyuIdx).Cells("仕入金額").Value.ToString)
@@ -1038,7 +1089,10 @@ Public Class Ordering
                 _db.executeDB(Sql)
             End If
 
-            Me.Close()
+            'Me.Close()
+            _parentForm.Enabled = True
+            _parentForm.Show()
+            Me.Dispose()
 
         Catch ex As Exception
             'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
@@ -1280,7 +1334,8 @@ Public Class Ordering
     Private Function getDsHanyoData(ByVal prmFixed As String, Optional ByRef prmVariable As String = "") As DataSet
         Dim Sql As String = ""
 
-        Sql = " AND 固定キー = '" & prmFixed & "'"
+        Sql = " AND 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " AND 固定キー = '" & prmFixed & "'"
 
         If prmVariable IsNot "" Then
             Sql += " AND 可変キー = '" & prmVariable & "'"
