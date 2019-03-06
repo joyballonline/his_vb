@@ -568,12 +568,12 @@ Public Class GoodsIssueList
 
         If supplierAddress <> Nothing Then
             Sql += " AND "
-            Sql += " 住所 ILIKE '%" & supplierAddress & "%' "
+            Sql += " 得意先住所 ILIKE '%" & supplierAddress & "%' "
         End If
 
         If supplierTel <> Nothing Then
             Sql += " AND "
-            Sql += " 電話番号 ILIKE '%" & supplierTel & "%' "
+            Sql += " 得意先電話番号 ILIKE '%" & supplierTel & "%' "
         End If
 
         If customerCode <> Nothing Then
@@ -640,9 +640,7 @@ Public Class GoodsIssueList
 
         Sql += "public." & tableName
         Sql += " WHERE "
-        Sql += "会社コード"
-        Sql += " ILIKE  "
-        Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += "会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql += txtParam
 
         Console.WriteLine(Sql)
@@ -695,10 +693,8 @@ Public Class GoodsIssueList
     Private Function getDsHanyoData(ByVal prmFixed As String, ByVal prmVariable As String) As DataSet
         Dim Sql As String = ""
 
-        Sql = " AND "
-        Sql += "固定キー ILIKE '" & prmFixed & "'"
-        Sql += " AND "
-        Sql += "可変キー ILIKE '" & prmVariable & "'"
+        Sql = " AND 固定キー = '" & prmFixed & "'"
+        Sql += " AND 可変キー = '" & prmVariable & "'"
 
         'リードタイムのリストを汎用マスタから取得
         Return getDsData("m90_hanyo", Sql)
