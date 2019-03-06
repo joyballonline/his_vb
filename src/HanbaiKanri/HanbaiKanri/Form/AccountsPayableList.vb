@@ -157,11 +157,17 @@ Public Class AccountsPayableList
                 DgvKike.Rows.Add()
                 DgvKike.Rows(i).Cells("取消").Value = getDelKbnTxt(ds.Tables(RS).Rows(i)("取消区分"))
                 DgvKike.Rows(i).Cells("買掛番号").Value = ds.Tables(RS).Rows(i)("買掛番号")
-                DgvKike.Rows(i).Cells("買掛区分").Value = IIf(ds.Tables(RS).Rows(i)("買掛区分") = CommonConst.APC_KBN_DEPOSIT.ToString,
+                If frmC01F10_Login.loginValue.Language = "ENG" Then
+                    DgvKike.Rows(i).Cells("買掛区分").Value = IIf(ds.Tables(RS).Rows(i)("買掛区分") = CommonConst.APC_KBN_DEPOSIT.ToString,
+                                                                                                    CommonConst.APC_KBN_DEPOSIT_TXT_E,
+                                                                                                    CommonConst.APC_KBN_NORMAL_TXT_E)
+                Else
+                    DgvKike.Rows(i).Cells("買掛区分").Value = IIf(ds.Tables(RS).Rows(i)("買掛区分") = CommonConst.APC_KBN_DEPOSIT.ToString,
                                                                                                     CommonConst.APC_KBN_DEPOSIT_TXT,
                                                                                                     CommonConst.APC_KBN_NORMAL_TXT)
+                End If
                 DgvKike.Rows(i).Cells("買掛日").Value = ds.Tables(RS).Rows(i)("買掛日").ToShortDateString()
-                DgvKike.Rows(i).Cells("客先番号").Value = ds.Tables(RS).Rows(i)("客先番号")
+                    DgvKike.Rows(i).Cells("客先番号").Value = ds.Tables(RS).Rows(i)("客先番号")
                 DgvKike.Rows(i).Cells("発注番号").Value = ds.Tables(RS).Rows(i)("発注番号")
                 DgvKike.Rows(i).Cells("発注番号枝番").Value = ds.Tables(RS).Rows(i)("発注番号枝番")
                 DgvKike.Rows(i).Cells("仕入先コード").Value = ds.Tables(RS).Rows(i)("仕入先コード")
@@ -298,36 +304,16 @@ Public Class AccountsPayableList
 
         If ds.Tables(RS).Rows(0)("更新日") = DgvKike.Rows(DgvKike.CurrentCell.RowIndex).Cells("更新日").Value Then
 
-            Sql = "UPDATE "
-            Sql += "Public."
-            Sql += "t46_kikehd "
+            Sql = "UPDATE Public.t46_kikehd "
             Sql += "SET "
 
             Sql += "取消区分 = " & CommonConst.CANCEL_KBN_DISABLED
-            Sql += ", "
-            Sql += "取消日"
-            Sql += " = '"
-            Sql += dtNow
-            Sql += "', "
-            Sql += "更新日"
-            Sql += " = '"
-            Sql += dtNow
-            Sql += "', "
-            Sql += "更新者"
-            Sql += " = '"
-            Sql += frmC01F10_Login.loginValue.TantoNM
-            Sql += " ' "
+            Sql += " , 取消日 = '" & dtNow & "'"
+            Sql += " , 更新日 = '" & dtNow & "'"
+            Sql += " , 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
 
-            Sql += "WHERE"
-            Sql += " 会社コード"
-            Sql += "='"
-            Sql += frmC01F10_Login.loginValue.BumonCD
-            Sql += "'"
-            Sql += " AND"
-            Sql += " 買掛番号"
-            Sql += "='"
-            Sql += DgvKike.Rows(DgvKike.CurrentCell.RowIndex).Cells("買掛番号").Value
-            Sql += "' "
+            Sql += "WHERE 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += " AND 買掛番号 ='" & DgvKike.Rows(DgvKike.CurrentCell.RowIndex).Cells("買掛番号").Value & "'"
 
             '買掛基本を更新
             _db.executeDB(Sql)

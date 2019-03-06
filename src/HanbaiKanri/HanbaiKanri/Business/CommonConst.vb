@@ -264,6 +264,8 @@ Public Class CommonConst
     '買掛区分テキスト
     Public Const APC_KBN_DEPOSIT_TXT As String = "前払金買掛"                         '前払買掛
     Public Const APC_KBN_NORMAL_TXT As String = "通常買掛"                          '通常買掛
+    Public Const APC_KBN_DEPOSIT_TXT_E As String = "Prepaid"                         '前払買掛（英語表記）
+    Public Const APC_KBN_NORMAL_TXT_E As String = "Normal"                          '通常買掛（英語表記）
 
     '仕入区分
     Public Const Sire_KBN_Sire As Integer = 1                           '仕入
