@@ -200,8 +200,8 @@ Public Class SalesProfitList
                 DgvList.Rows(i).Cells("間接費").Value = Format((sireKingaku - sireGenka), "0.000")
                 DgvList.Rows(i).Cells("売上原価計").Value = Format(salesAmount + vatAmount - kansetuhi, "0.000")
                 DgvList.Rows(i).Cells("粗利").Value = arariAmount
-                DgvList.Rows(i).Cells("粗利率").Value = 1 - (ds.Tables(RS).Rows(i)("仕入値") / ds.Tables(RS).Rows(i)("売単価"))
-
+                'DgvList.Rows(i).Cells("粗利率").Value = (1 - (ds.Tables(RS).Rows(i)("仕入値") / ds.Tables(RS).Rows(i)("売単価"))).ToString("N3")
+                DgvList.Rows(i).Cells("粗利率").Value = Format(arariAmount / salesAmount, "0.000")
                 totalSales += salesAmount
                 totalSalesAmount += salesAmount + vatAmount
                 salesUnitPrice += Format(salesAmount + vatAmount - kansetuhi, "0.000")
