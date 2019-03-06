@@ -98,32 +98,13 @@ Public Class OrderingAdd
 
         PurchaseCount += 1
         Dim Saiban4 As String = ""
-        Saiban4 += "UPDATE "
-        Saiban4 += "Public."
-        Saiban4 += "m80_saiban "
+        Saiban4 += "UPDATE Public.m80_saiban "
         Saiban4 += "SET "
-        Saiban4 += " 最新値"
-        Saiban4 += " = '"
-        Saiban4 += PurchaseCount.ToString
-        Saiban4 += "', "
-        Saiban4 += "更新者"
-        Saiban4 += " = '"
-        Saiban4 += "Admin"
-        Saiban4 += "', "
-        Saiban4 += "更新日"
-        Saiban4 += " = '"
-        Saiban4 += dtNow
-        Saiban4 += "' "
-        Saiban4 += "WHERE"
-        Saiban4 += " 会社コード"
-        Saiban4 += "='"
-        Saiban4 += frmC01F10_Login.loginValue.BumonCD
-        Saiban4 += "'"
-        Saiban4 += " AND"
-        Saiban4 += " 採番キー"
-        Saiban4 += "='"
-        Saiban4 += "30"
-        Saiban4 += "' "
+        Saiban4 += " 最新値 = '" & PurchaseCount.ToString & "'"
+        Saiban4 += " , 更新者 = 'Admin'"
+        Saiban4 += " , 更新日 = '" & dtNow & "'"
+        Saiban4 += " WHERE 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Saiban4 += " AND 採番キー ='30' "
         _db.executeDB(Saiban4)
 
         TxtOrderingNo.Text = NewPurchaseNo
@@ -147,17 +128,17 @@ Public Class OrderingAdd
         table.Rows.Add("サービス", 9)
 
         'DataGridViewComboBoxColumnを作成
-        Dim column As New DataGridViewComboBoxColumn()
+        'Dim column As New DataGridViewComboBoxColumn()
         'DataGridViewComboBoxColumnのDataSourceを設定
-        column.DataSource = table
+        'column.DataSource = table
         '実際の値が"Value"列、表示するテキストが"Display"列とする
-        column.ValueMember = "Value"
-        column.DisplayMember = "Display"
-        column.HeaderText = "仕入区分"
-        column.Name = "仕入区分"
+        'column.ValueMember = "Value"
+        'column.DisplayMember = "Display"
+        'column.HeaderText = "仕入区分"
+        'column.Name = "仕入区分"
         'column.ValueMember = 1
         'DataGridView1に追加する
-        DgvItemList.Columns.Insert(1, column)
+        'DgvItemList.Columns.Insert(1, column)
     End Sub
 
     Private Sub CellValueChanged(ByVal sender As Object,
@@ -341,14 +322,14 @@ Public Class OrderingAdd
         Dim Item As String = DgvItemList.Rows(RowIdx).Cells(3).Value
         Dim Model As String = DgvItemList.Rows(RowIdx).Cells(4).Value
 
-        If ColIdx = 2 Then                  'メーカー検索
+        If ColIdx = 1 Then                  'メーカー検索
             Dim openForm As Form = Nothing
             openForm = New MakerSearch(_msgHd, _db, Me, RowIdx, ColIdx, Maker, Item, Model, Status)   '処理選択
             openForm.Show(Me)
             Me.Enabled = False
         End If
 
-        If ColIdx = 3 Then              '品名検索
+        If ColIdx = 2 Then              '品名検索
             If Maker IsNot Nothing Then
                 Dim openForm As Form = Nothing
                 openForm = New MakerSearch(_msgHd, _db, Me, RowIdx, ColIdx, Maker, Item, Model, Status)   '処理選択
@@ -362,7 +343,7 @@ Public Class OrderingAdd
             End If
         End If
 
-        If ColIdx = 4 Then
+        If ColIdx = 3 Then
             If Maker IsNot Nothing And Item IsNot Nothing Then
                 Dim openForm As Form = Nothing
                 openForm = New MakerSearch(_msgHd, _db, Me, RowIdx, ColIdx, Maker, Item, Model, Status)
@@ -383,9 +364,7 @@ Public Class OrderingAdd
 
         Dim Sql3 As String = ""
         Sql3 = ""
-        Sql3 += "INSERT INTO "
-        Sql3 += "Public."
-        Sql3 += "t20_hattyu("
+        Sql3 += "INSERT INTO Public.t20_hattyu("
         Sql3 += "会社コード, 発注番号, 発注番号枝番, 仕入先コード, 仕入先名, 仕入先郵便番号, 仕入先住所, 仕入先電話番号, 仕入先ＦＡＸ, 仕入先担当者役職, 仕入先担当者名, 支払条件, 仕入金額, 営業担当者, 入力担当者, 備考, 発注日, 登録日, 更新日, 更新者, 取消区分)"
         Sql3 += " VALUES('"
         Sql3 += frmC01F10_Login.loginValue.BumonCD
@@ -452,8 +431,8 @@ Public Class OrderingAdd
             Sql4 += TxtOrderingSuffix.Text
             Sql4 += "', '"
             Sql4 += DgvItemList.Rows(hattyuIdx).Cells("No").Value.ToString
-            Sql4 += "', '"
-            Sql4 += DgvItemList.Rows(hattyuIdx).Cells("仕入区分").Value.ToString
+            Sql4 += "', '2"
+            'Sql4 += DgvItemList.Rows(hattyuIdx).Cells("仕入区分").Value.ToString
             Sql4 += "', '"
             Sql4 += DgvItemList.Rows(hattyuIdx).Cells("メーカー").Value.ToString
             Sql4 += "', '"

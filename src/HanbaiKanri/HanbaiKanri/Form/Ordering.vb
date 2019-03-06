@@ -36,11 +36,14 @@ Public Class Ordering
     Private _langHd As UtilLangHandler
     Private _gh As UtilDataGridViewHandler
     Private _init As Boolean                             '初期処理済フラグ
+    Private _parentForm As Form
 
     Private CompanyCode As String = ""
     Private PurchaseNo As String = ""
     Private PurchaseSuffix As String = ""
     Private PurchaseStatus As String = ""
+    Private PurchaseCount As String = ""
+
     Private OrderCount As String = ""
 
     '-------------------------------------------------------------------------------
@@ -57,6 +60,7 @@ Public Class Ordering
     Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler,
                    ByRef prmRefDbHd As UtilDBIf,
                    ByRef prmRefLang As UtilLangHandler,
+                   ByRef prmRefForm As Form,
                    Optional ByRef prmRefNo As String = Nothing,
                    Optional ByRef prmRefSuffix As String = Nothing,
                    Optional ByRef prmRefStatus As String = Nothing)
@@ -68,6 +72,8 @@ Public Class Ordering
         _msgHd = prmRefMsgHd                                                'MSGハンドラの設定
         _db = prmRefDbHd                                                    'DBハンドラの設定
         _langHd = prmRefLang
+        _parentForm = prmRefForm
+
         PurchaseNo = prmRefNo
         PurchaseSuffix = prmRefSuffix
         PurchaseStatus = prmRefStatus
@@ -108,6 +114,48 @@ Public Class Ordering
         End Property
 
     End Class
+
+    '新規登録時の発注番号採番処理
+    '
+    Private Sub GetSiireNo_New()
+        Dim reccnt As Integer = 0
+        Dim dtNow As DateTime = DateTime.Now
+
+        Dim SqlSaiban As String = ""
+        SqlSaiban += "SELECT "
+        SqlSaiban += "会社コード, "
+        SqlSaiban += "採番キー, "
+        SqlSaiban += "最新値, "
+        SqlSaiban += "最小値, "
+        SqlSaiban += "最大値, "
+        SqlSaiban += "接頭文字, "
+        SqlSaiban += "連番桁数 "
+        SqlSaiban += "FROM public.m80_saiban"
+        SqlSaiban += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        SqlSaiban += " AND 採番キー = '30'"
+
+        Dim Saiban As DataSet = _db.selectDB(SqlSaiban, RS, reccnt)
+
+        PurchaseCount = Saiban.Tables(RS).Rows(0)(2)
+        PurchaseNo = Saiban.Tables(RS).Rows(0)(5)
+        PurchaseNo += dtNow.ToString("MMdd")
+        PurchaseNo += PurchaseCount.PadLeft(Saiban.Tables(RS).Rows(0)(6), "0")
+
+        PurchaseCount += 1
+        Dim Saiban4 As String = ""
+        Saiban4 += "UPDATE Public.m80_saiban "
+        Saiban4 += "SET "
+        Saiban4 += " 最新値 = '" & PurchaseCount.ToString & "'"
+        Saiban4 += " , 更新者 = 'Admin'"
+        Saiban4 += " , 更新日 = '" & dtNow & "'"
+        Saiban4 += " WHERE 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Saiban4 += " AND 採番キー ='30' "
+        _db.executeDB(Saiban4)
+
+        TxtOrderingNo.Text = PurchaseNo
+        TxtOrderingSuffix.Text = 1
+
+    End Sub
 
     '画面表示時
     Private Sub Ordering_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -213,17 +261,17 @@ Public Class Ordering
         Next
 
         'DataGridViewComboBoxColumnを作成
-        Dim column As New DataGridViewComboBoxColumn()
+        'Dim column As New DataGridViewComboBoxColumn()
         'DataGridViewComboBoxColumnのDataSourceを設定
-        column.DataSource = dtPurchasingClass
+        'column.DataSource = dtPurchasingClass
         '実際の値が"Value"列、表示するテキストが"Display"列とする
-        column.ValueMember = "Value" '実際の値
-        column.DisplayMember = "Display" '表示用の値
-        column.HeaderText = "仕入区分"
-        column.Name = "仕入区分"
+        'column.ValueMember = "Value" '実際の値
+        'column.DisplayMember = "Display" '表示用の値
+        'column.HeaderText = "仕入区分"
+        'column.Name = "仕入区分"
         'column.ValueMember = 1
         'DataGridView1に追加する
-        DgvItemList.Columns.Insert(1, column)
+        'DgvItemList.Columns.Insert(1, column)
 
 
         Dim dtNow As DateTime = DateTime.Now
@@ -269,6 +317,12 @@ Public Class Ordering
 
         DgvItemList.Columns.Insert(14, column3)
         CbShippedBy.SelectedIndex = 0
+
+        '新規登録時の伝票番号取得
+        If PurchaseStatus = CommonConst.STATUS_ADD Then
+            GetSiireNo_New()
+            Exit Sub
+        End If
 
         '発注基本情報
         Dim Sql As String = ""
@@ -369,7 +423,7 @@ Public Class Ordering
 
         For i As Integer = 0 To dsHattyudt.Tables(RS).Rows.Count - 1
             DgvItemList.Rows.Add()
-            DgvItemList.Rows(i).Cells("仕入区分").Value = Integer.Parse(dsHattyudt.Tables(RS).Rows(i)("仕入区分"))
+            'DgvItemList.Rows(i).Cells("仕入区分").Value = Integer.Parse(dsHattyudt.Tables(RS).Rows(i)("仕入区分"))
             DgvItemList.Rows(i).Cells("メーカー").Value = dsHattyudt.Tables(RS).Rows(i)("メーカー")
             DgvItemList.Rows(i).Cells("品名").Value = dsHattyudt.Tables(RS).Rows(i)("品名")
             DgvItemList.Rows(i).Cells("型式").Value = dsHattyudt.Tables(RS).Rows(i)("型式")

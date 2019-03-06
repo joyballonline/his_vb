@@ -524,7 +524,7 @@ Public Class OrderingList
         Dim Suffix As String = DgvHtyhd.Rows(RowIdx).Cells("発注番号枝番").Value
         Dim Status As String = CommonConst.STATUS_VIEW
         Dim openForm As Form = Nothing
-        openForm = New Ordering(_msgHd, _db, _langHd, No, Suffix, Status)   '処理選択
+        openForm = New Ordering(_msgHd, _db, _langHd, Me, No, Suffix, Status)   '処理選択
         openForm.Show(Me)
     End Sub
 
@@ -545,7 +545,7 @@ Public Class OrderingList
         Dim Suffix As String = DgvHtyhd.Rows(RowIdx).Cells("発注番号枝番").Value
         Dim Status As String = CommonConst.STATUS_CLONE
         Dim openForm As Form = Nothing
-        openForm = New Ordering(_msgHd, _db, _langHd, No, Suffix, Status)   '処理選択
+        openForm = New Ordering(_msgHd, _db, _langHd, Me, No, Suffix, Status)   '処理選択
         openForm.ShowDialog(Me)
 
         '一覧再表示
@@ -572,7 +572,7 @@ Public Class OrderingList
         Dim status As String = CommonConst.STATUS_EDIT
 
         Dim openForm As Form = Nothing
-        openForm = New Ordering(_msgHd, _db, _langHd, No, Suffix, status)   '処理選択
+        openForm = New Ordering(_msgHd, _db, _langHd, Me, No, Suffix, status)   '処理選択
         openForm.ShowDialog(Me)
 
         '一覧再表示
