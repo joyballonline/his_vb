@@ -572,10 +572,9 @@ Public Class Ordering
 
     '前の画面に戻る
     Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
-        'Dim QuoteList As QuoteList
-        'QuoteList = New QuoteList(_msgHd, _db)
-        'QuoteList.Show()
-        Me.Close()
+        _parentForm.Enabled = True
+        _parentForm.Show()
+        Me.Dispose()
     End Sub
 
     'セルの値が変更されたら
