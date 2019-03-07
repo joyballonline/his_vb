@@ -145,6 +145,7 @@ Public Class OrderManagement
             TxtRemarks.BackColor = Color.FromArgb(255, 255, 192)
             DgvHistory.Size = New Point(1326, 400)
             BtnRegist.Visible = False
+            DtpDepositDate.Enabled = False
         Else
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "SalesInputMode"

@@ -76,6 +76,7 @@ Public Class AccountsPayable
         Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
         Me.ControlBox = Not Me.ControlBox
         DtpAPDate.Value = Date.Now
+        DtpPaymentDate.Value = Date.Now
         _init = True
 
     End Sub
@@ -178,6 +179,7 @@ Public Class AccountsPayable
             LblAdd.Visible = False
             LblAccountsPayableDate.Visible = False
             DtpAPDate.Visible = False
+            DtpPaymentDate.Visible = False
             TxtHattyudtCount.Visible = False
             TxtKikehdCount.Visible = False
             TxtCount3.Visible = False
@@ -265,6 +267,9 @@ Public Class AccountsPayable
         DgvCymn.Rows(0).Cells("発注金額").Value = dsHattyu.Tables(RS).Rows(0)("仕入金額")
         DgvCymn.Rows(0).Cells("買掛金額計").Value = AccountsPayable
         DgvCymn.Rows(0).Cells("買掛残高").Value = dsHattyu.Tables(RS).Rows(0)("仕入金額") - AccountsPayable
+
+        DtpAPDate.MinDate = dsHattyu.Tables(RS).Rows(0)("発注日").ToShortDateString()
+        DtpPaymentDate.MinDate = dsHattyu.Tables(RS).Rows(0)("発注日").ToShortDateString()
 
         checkAdd = DgvCymn.Rows(0).Cells("買掛残高").Value
 
@@ -379,41 +384,44 @@ Public Class AccountsPayable
             Sql = "INSERT INTO "
             Sql += "Public."
             Sql += "t46_kikehd("
-            Sql += "会社コード, 買掛番号, 買掛区分, 買掛日, 発注番号, 発注番号枝番, 客先番号, 仕入先コード, 仕入先名, 買掛金額計, 買掛残高, 備考1, 備考2, 取消区分, 登録日, 更新者, 更新日)"
+            Sql += "会社コード, 買掛番号, 買掛区分, 買掛日, 発注番号, 発注番号枝番, 客先番号, 仕入先コード, 仕入先名, 買掛金額計, 買掛残高"
+            Sql += ", 備考1, 備考2, 取消区分, 登録日, 更新者, 更新日, 支払予定日)"
             Sql += " VALUES('"
-            Sql += dsHattyu.Tables(RS).Rows(0)("会社コード").ToString
+            Sql += dsHattyu.Tables(RS).Rows(0)("会社コード").ToString '会社コード
             Sql += "', '"
-            Sql += AP
+            Sql += AP '買掛番号
             Sql += "', '"
-            Sql += DgvAdd.Rows(0).Cells("買掛区分").Value.ToString
+            Sql += DgvAdd.Rows(0).Cells("買掛区分").Value.ToString '買掛区分
             Sql += "', '"
-            Sql += strFormatDate(DtpAPDate.Value)
+            Sql += strFormatDate(DtpAPDate.Value) '買掛日
             Sql += "', '"
-            Sql += dsHattyu.Tables(RS).Rows(0)("発注番号").ToString
+            Sql += dsHattyu.Tables(RS).Rows(0)("発注番号").ToString '発注番号
             Sql += "', '"
-            Sql += dsHattyu.Tables(RS).Rows(0)("発注番号枝番").ToString
+            Sql += dsHattyu.Tables(RS).Rows(0)("発注番号枝番").ToString '発注番号枝番
             Sql += "', '"
-            Sql += dsHattyu.Tables(RS).Rows(0)("客先番号").ToString
+            Sql += dsHattyu.Tables(RS).Rows(0)("客先番号").ToString '客先番号
             Sql += "', '"
-            Sql += dsHattyu.Tables(RS).Rows(0)("仕入先コード").ToString
+            Sql += dsHattyu.Tables(RS).Rows(0)("仕入先コード").ToString '仕入先コード
             Sql += "', '"
-            Sql += dsHattyu.Tables(RS).Rows(0)("仕入先名").ToString
+            Sql += dsHattyu.Tables(RS).Rows(0)("仕入先名").ToString '仕入先名
             Sql += "', '"
-            Sql += DgvAdd.Rows(0).Cells("今回買掛金額計").Value
+            Sql += DgvAdd.Rows(0).Cells("今回買掛金額計").Value '買掛金額計
             Sql += "', '"
-            Sql += DgvAdd.Rows(0).Cells("今回買掛金額計").Value
+            Sql += DgvAdd.Rows(0).Cells("今回買掛金額計").Value '買掛残高
             Sql += "', '"
-            Sql += DgvAdd.Rows(0).Cells("今回備考1").Value
+            Sql += DgvAdd.Rows(0).Cells("今回備考1").Value '備考1
             Sql += "', '"
-            Sql += DgvAdd.Rows(0).Cells("今回備考2").Value
+            Sql += DgvAdd.Rows(0).Cells("今回備考2").Value '備考2
             Sql += "', '"
-            Sql += "0"
+            Sql += "0" '取消区分
             Sql += "', '"
-            Sql += strToday
+            Sql += strToday '登録日
             Sql += "', '"
-            Sql += frmC01F10_Login.loginValue.TantoNM
+            Sql += frmC01F10_Login.loginValue.TantoNM '更新者
             Sql += "', '"
-            Sql += strToday
+            Sql += strToday '更新日
+            Sql += "', '"
+            Sql += strFormatDate(DtpPaymentDate.Value) '支払予定日
             Sql += " ')"
 
             _db.executeDB(Sql)

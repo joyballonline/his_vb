@@ -1069,7 +1069,7 @@ Public Class frmC01F30_Menu
             '-----------------------------------注文業務（H01）
             Case HAIFUN_ID               'ハイフン
                 Exit Sub
-            '-----------------------------------注文業務（H01）
+            '-----------------------------------見積業務（H01）
             Case CommonConst.MENU_H0110  '見積登録
                 Dim Status As String = CommonConst.STATUS_ADD
                 Dim openForm As Form = Nothing
@@ -1106,7 +1106,7 @@ Public Class frmC01F30_Menu
                 openForm = New QuoteList(_msgHd, _db, _langHd, Me, Status)
                 openForm.Show()
                 Me.Hide()
-            Case CommonConst.MENU_H0810  '受発注登録
+            Case CommonConst.MENU_H0810  '受発注登録(H08)
                 Dim Status As String = CommonConst.STATUS_ORDER_PURCHASE
                 Dim openForm As Form = Nothing
                 openForm = New QuoteList(_msgHd, _db, _langHd, Me, Status)
@@ -1248,7 +1248,7 @@ Public Class frmC01F30_Menu
                 openForm = New OrderingList(_msgHd, _db, _langHd, Status)
                 openForm.Show()
                 Me.Hide()
-            '-----------------------------------仕入業務（H05）
+            '-----------------------------------仕入業務（H06）
             Case CommonConst.MENU_H0610  '仕入登録
                 Dim Status As String = CommonConst.STATUS_ORDING
                 Dim openForm As Form = Nothing
@@ -1273,7 +1273,7 @@ Public Class frmC01F30_Menu
                 openForm = New PurchaseList(_msgHd, _db, _langHd, Status)
                 openForm.Show()
                 Me.Hide()
-            '-----------------------------------入庫業務（H05）
+            '-----------------------------------入庫業務（H07）
             Case CommonConst.MENU_H0710  '入庫登録
                 Dim Status As String = CommonConst.STATUS_RECEIPT
                 Dim openForm As Form = Nothing
@@ -1298,7 +1298,7 @@ Public Class frmC01F30_Menu
                 openForm = New ReceiptList(_msgHd, _db, _langHd, Status)
                 openForm.Show()
                 Me.Hide()
-            '-----------------------------------請求業務（H05）
+            '-----------------------------------請求業務（H09）
             Case CommonConst.MENU_H0910  '請求登録
                 Dim Status As String = CommonConst.STATUS_BILL
                 Dim openForm As Form = Nothing
@@ -1338,7 +1338,7 @@ Public Class frmC01F30_Menu
                 openForm = New ARScheduledCollectionDateList(_msgHd, _db, _langHd)
                 openForm.Show()
                 Me.Hide()
-              '-----------------------------------入金業務（H05）
+              '-----------------------------------入金業務（H10）
             Case CommonConst.MENU_H1010  '入金登録
                 Dim openForm As Form = Nothing
                 openForm = New DepositList(_msgHd, _db, _langHd)
@@ -1356,32 +1356,44 @@ Public Class frmC01F30_Menu
                 openForm = New DepositDetailList(_msgHd, _db, _langHd, Status)
                 openForm.Show()
                 Me.Hide()
-            '-----------------------------------売掛業務（H05）
-            Case CommonConst.MENU_H1110  '売掛登録
+            '-----------------------------------買掛管理（H11）
+            Case CommonConst.MENU_H1110  '買掛登録
                 Dim Status As String = CommonConst.STATUS_AP
                 Dim openForm As Form = Nothing
                 openForm = New OrderingList(_msgHd, _db, _langHd, Status)
                 openForm.Show()
                 Me.Hide()
-            Case CommonConst.MENU_H1120  '売掛編集
+            Case CommonConst.MENU_H1120  '買掛編集
                 Dim Status As String = CommonConst.STATUS_AP
                 Dim openForm As Form = Nothing
                 openForm = New OrderingList(_msgHd, _db, _langHd, Status)
                 openForm.Show()
                 Me.Hide()
-            Case CommonConst.MENU_H1130  '売掛取消
+            Case CommonConst.MENU_H1130  '買掛取消
                 Dim Status As String = CommonConst.STATUS_CANCEL
                 Dim openForm As Form = Nothing
                 openForm = New AccountsPayableList(_msgHd, _db, _langHd, Status)
                 openForm.Show()
                 Me.Hide()
-            Case CommonConst.MENU_H1140  '売掛参照
+            Case CommonConst.MENU_H1140  '買掛参照
                 Dim Status As String = CommonConst.STATUS_VIEW
                 Dim openForm As Form = Nothing
                 openForm = New AccountsPayableList(_msgHd, _db, _langHd, Status)
                 openForm.Show()
                 Me.Hide()
-            '-----------------------------------入金業務（H05）
+            Case CommonConst.MENU_H1150  '仕入先別買掛金一覧
+                Dim Status As String = CommonConst.STATUS_VIEW
+                Dim openForm As Form = Nothing
+                openForm = New SupplierAPList(_msgHd, _db, _langHd, Status)
+                openForm.Show()
+                Me.Hide()
+            Case CommonConst.MENU_H1160  '支払予定期日別買掛金一覧
+                Dim Status As String = CommonConst.STATUS_VIEW
+                Dim openForm As Form = Nothing
+                openForm = New APScheduledCollectionDateList(_msgHd, _db, _langHd, Status)
+                openForm.Show()
+                Me.Hide()
+           '-----------------------------------支払管理（H12）
             Case CommonConst.MENU_H1210  '支払登録
                 Dim openForm As Form = Nothing
                 openForm = New PaymentList(_msgHd, _db, _langHd)
@@ -1398,7 +1410,7 @@ Public Class frmC01F30_Menu
                 openForm = New PaidList(_msgHd, _db, _langHd)
                 openForm.Show()
                 Me.Hide()
-            '-----------------------------------締処理業務（H05）
+            '-----------------------------------締処理業務（H13）
             Case CommonConst.MENU_H1310  '締処理ログ参照
                 Dim openForm As Form = Nothing
                 openForm = New ClosingLog(_msgHd, _db, _langHd)

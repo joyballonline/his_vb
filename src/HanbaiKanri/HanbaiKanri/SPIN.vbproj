@@ -111,10 +111,22 @@
     <Compile Include="Business\CommonLogic.vb" />
     <Compile Include="Business\RepSectionIF.vb" />
     <Compile Include="Business\StartUp.vb" />
+    <Compile Include="Form\APScheduledCollectionDateList.Designer.vb">
+      <DependentUpon>APScheduledCollectionDateList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\APScheduledCollectionDateList.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\ARScheduledCollectionDateList.Designer.vb">
       <DependentUpon>ARScheduledCollectionDateList.vb</DependentUpon>
     </Compile>
     <Compile Include="Form\ARScheduledCollectionDateList.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\SupplierAPList.Designer.vb">
+      <DependentUpon>SupplierAPList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\SupplierAPList.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form\MstAccount.Designer.vb">
@@ -498,6 +510,9 @@
     <EmbeddedResource Include="Form\AccountsPayableList.resx">
       <DependentUpon>AccountsPayableList.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form\APScheduledCollectionDateList.resx">
+      <DependentUpon>APScheduledCollectionDateList.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\BillingList.resx">
       <DependentUpon>BillingList.vb</DependentUpon>
     </EmbeddedResource>
@@ -518,6 +533,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\ARScheduledCollectionDateList.resx">
       <DependentUpon>ARScheduledCollectionDateList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\SupplierAPList.resx">
+      <DependentUpon>SupplierAPList.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\CustomerList.resx">
       <DependentUpon>CustomerList.vb</DependentUpon>
@@ -684,6 +702,7 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="bin\BaseXls\ARScheduledCollectionDateList.xlsx" />
     <None Include="bin\BaseXls\CustomerARList.xlsx" />
     <None Include="bin\BaseXls\DeliveryNote.xlsx" />
     <None Include="bin\BaseXls\Invoice.xlsx" />
@@ -698,6 +717,7 @@
     <None Include="bin\BaseXls\Receipt.xlsx" />
     <None Include="bin\BaseXls\SalesProfitList.xlsx" />
     <None Include="bin\BaseXls\SalesVATList.xlsx" />
+    <None Include="bin\BaseXls\SupplierAPList.xlsx" />
     <None Include="bin\Setting\HanbaiKanri.ini" />
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">

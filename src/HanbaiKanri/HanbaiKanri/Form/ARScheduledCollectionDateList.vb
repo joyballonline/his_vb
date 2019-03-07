@@ -106,11 +106,25 @@ Public Class ARScheduledCollectionDateList
 
         Try
             Dim dsSkyuhd As DataSet = getDsData("t23_skyuhd", Sql)
+            Dim tmpDueDate As String = ""
 
             For i As Integer = 0 To dsSkyuhd.Tables(RS).Rows.Count - 1
 
+                '入金予定日が変わったら取得
+                If dsSkyuhd.Tables(RS).Rows(i)("入金予定日") IsNot DBNull.Value Then
+
+                    If (tmpDueDate <> dsSkyuhd.Tables(RS).Rows(i)("入金予定日").ToShortDateString()) Then
+                        tmpDueDate = dsSkyuhd.Tables(RS).Rows(i)("入金予定日").ToShortDateString()
+                    Else
+                        tmpDueDate = ""
+                    End If
+
+                Else
+                    tmpDueDate = ""
+                End If
+
                 DgvCymndt.Rows.Add()
-                DgvCymndt.Rows(i).Cells("回収期日").Value = dsSkyuhd.Tables(RS).Rows(i)("入金予定日").ToShortDateString()
+                DgvCymndt.Rows(i).Cells("回収期日").Value = tmpDueDate
                 DgvCymndt.Rows(i).Cells("得意先名").Value = dsSkyuhd.Tables(RS).Rows(i)("得意先名")
                 DgvCymndt.Rows(i).Cells("請求番号").Value = dsSkyuhd.Tables(RS).Rows(i)("請求番号")
                 DgvCymndt.Rows(i).Cells("請求日").Value = dsSkyuhd.Tables(RS).Rows(i)("請求日").ToShortDateString()

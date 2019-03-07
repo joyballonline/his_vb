@@ -11,7 +11,7 @@ Imports System.Globalization
 Imports System.Text.RegularExpressions
 Imports Microsoft.Office.Interop
 
-Public Class CustomerARList
+Public Class SupplierAPList
     Inherits System.Windows.Forms.Form
 
     '------------------------------------------------------------------------------------------------------
@@ -86,46 +86,46 @@ Public Class CustomerARList
             BtnExcelOutput.Text = "ExcelOutput"
             BtnBack.Text = "Back"
 
-            DgvCymndt.Columns("得意先名").HeaderText = "CustomerName"
-            DgvCymndt.Columns("請求番号").HeaderText = "InvoiceNumber"
-            DgvCymndt.Columns("請求日").HeaderText = "BillingDate"
-            DgvCymndt.Columns("請求金額").HeaderText = "TotalBillingAmount"
-            DgvCymndt.Columns("入金額").HeaderText = "MoneyReceiptAmount"
-            DgvCymndt.Columns("売掛金残高").HeaderText = "ARBalance"
+            DgvCymndt.Columns("仕入先名").HeaderText = "SupplierName"
+            DgvCymndt.Columns("発注番号").HeaderText = "PurchaseOrderNumber"
+            DgvCymndt.Columns("買掛日").HeaderText = "AccountsPayableDate"
+            DgvCymndt.Columns("買掛金額計").HeaderText = "TotalAccountsPayable"
+            DgvCymndt.Columns("支払金額計").HeaderText = "TotalPaymentAmount"
+            DgvCymndt.Columns("買掛金残高").HeaderText = "APBalance"
             DgvCymndt.Columns("備考").HeaderText = "Remarks"
 
         End If
 
         Sql = " AND "
-        Sql += "売掛残高 > 0 "
+        Sql += "買掛残高 > 0 "
         Sql += " AND "
         Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '取消区分=0
-        Sql += " ORDER BY 得意先コード, 請求日 "
+        Sql += " ORDER BY 仕入先コード, 買掛日 "
 
 
         Try
-            Dim dsSkyuhd As DataSet = getDsData("t23_skyuhd", Sql)
-            Dim tmpCustomerCd As String = ""
-            Dim tmpCustomerName As String = ""
+            Dim dsKikehd As DataSet = getDsData("t46_kikehd", Sql)
+            Dim tmpSupplierCd As String = ""
+            Dim tmpSupplierName As String = ""
 
-            For i As Integer = 0 To dsSkyuhd.Tables(RS).Rows.Count - 1
+            For i As Integer = 0 To dsKikehd.Tables(RS).Rows.Count - 1
 
                 '得意先コードが変わったら取得
-                If (tmpCustomerCd <> dsSkyuhd.Tables(RS).Rows(i)("得意先コード").ToString) Then
-                    tmpCustomerName = dsSkyuhd.Tables(RS).Rows(i)("得意先名")
-                    tmpCustomerCd = dsSkyuhd.Tables(RS).Rows(i)("得意先コード").ToString
+                If (tmpSupplierCd <> dsKikehd.Tables(RS).Rows(i)("仕入先コード").ToString) Then
+                    tmpSupplierName = dsKikehd.Tables(RS).Rows(i)("仕入先名")
+                    tmpSupplierCd = dsKikehd.Tables(RS).Rows(i)("仕入先コード").ToString
                 Else
-                    tmpCustomerName = ""
+                    tmpSupplierName = ""
                 End If
 
                 DgvCymndt.Rows.Add()
-                DgvCymndt.Rows(i).Cells("得意先名").Value = tmpCustomerName
-                DgvCymndt.Rows(i).Cells("請求番号").Value = dsSkyuhd.Tables(RS).Rows(i)("請求番号")
-                DgvCymndt.Rows(i).Cells("請求日").Value = dsSkyuhd.Tables(RS).Rows(i)("請求日").ToShortDateString()
-                DgvCymndt.Rows(i).Cells("請求金額").Value = dsSkyuhd.Tables(RS).Rows(i)("請求金額計")
-                DgvCymndt.Rows(i).Cells("入金額").Value = dsSkyuhd.Tables(RS).Rows(i)("入金額計")
-                DgvCymndt.Rows(i).Cells("売掛金残高").Value = dsSkyuhd.Tables(RS).Rows(i)("売掛残高")
-                DgvCymndt.Rows(i).Cells("備考").Value = dsSkyuhd.Tables(RS).Rows(i)("備考1")
+                DgvCymndt.Rows(i).Cells("仕入先名").Value = tmpSupplierName
+                DgvCymndt.Rows(i).Cells("発注番号").Value = dsKikehd.Tables(RS).Rows(i)("発注番号")
+                DgvCymndt.Rows(i).Cells("買掛日").Value = dsKikehd.Tables(RS).Rows(i)("買掛日").ToShortDateString()
+                DgvCymndt.Rows(i).Cells("買掛金額計").Value = dsKikehd.Tables(RS).Rows(i)("買掛金額計")
+                DgvCymndt.Rows(i).Cells("支払金額計").Value = dsKikehd.Tables(RS).Rows(i)("支払金額計")
+                DgvCymndt.Rows(i).Cells("買掛金残高").Value = dsKikehd.Tables(RS).Rows(i)("買掛残高")
+                DgvCymndt.Rows(i).Cells("備考").Value = dsKikehd.Tables(RS).Rows(i)("備考1")
             Next
 
         Catch ue As UsrDefException
@@ -175,11 +175,11 @@ Public Class CustomerARList
             '雛形パス
             Dim sHinaPath As String = StartUp._iniVal.BaseXlsPath
             '雛形ファイル名
-            Dim sHinaFile As String = sHinaPath & "\" & "CustomerARList.xlsx"
+            Dim sHinaFile As String = sHinaPath & "\" & "SupplierAPList.xlsx"
             '出力先パス
             Dim sOutPath As String = StartUp._iniVal.OutXlsPath
             '出力ファイル名
-            Dim sOutFile As String = sOutPath & "\CustomerARList_" & DateTime.Now.ToString("yyyyMMddHHmm") & ".xlsx"
+            Dim sOutFile As String = sOutPath & "\SupplierAPList_" & DateTime.Now.ToString("yyyyMMddHHmm") & ".xlsx"
 
             app = New Excel.Application()
             book = app.Workbooks.Add(sHinaFile)  'テンプレート
@@ -188,15 +188,15 @@ Public Class CustomerARList
             sheet.PageSetup.RightHeader = "出力日：" & DateTime.Now.ToShortDateString
 
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-                sheet.PageSetup.LeftHeader = "Customer AR list"
+                sheet.PageSetup.LeftHeader = "Supplier AP list"
                 sheet.PageSetup.RightHeader = "OutputDate：" & DateTime.Now.ToShortDateString
 
-                sheet.Range("A1").Value = "CustomerName"
-                sheet.Range("B1").Value = "InvoiceNumber"
-                sheet.Range("C1").Value = "BillingDate"
-                sheet.Range("D1").Value = "TotalBillingAmount"
-                sheet.Range("E1").Value = "MoneyReceiptAmount"
-                sheet.Range("F1").Value = "ARBalance"
+                sheet.Range("A1").Value = "SupplierName"
+                sheet.Range("B1").Value = "PurchaseOrderNumber"
+                sheet.Range("C1").Value = "AccountsPayableDate"
+                sheet.Range("D1").Value = "TotalAccountsPayable"
+                sheet.Range("E1").Value = "TotalPaymentAmount"
+                sheet.Range("F1").Value = "APBalance"
                 sheet.Range("G1").Value = "Remarks"
 
             End If
@@ -205,12 +205,12 @@ Public Class CustomerARList
                 Dim cellRowIndex As Integer = 2
                 cellRowIndex += i
 
-                sheet.Range("A" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("得意先名").Value
-                sheet.Range("B" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("請求番号").Value
-                sheet.Range("C" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("請求日").Value
-                sheet.Range("D" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("請求金額").Value
-                sheet.Range("E" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("入金額").Value
-                sheet.Range("F" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("売掛金残高").Value
+                sheet.Range("A" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("仕入先名").Value
+                sheet.Range("B" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("発注番号").Value
+                sheet.Range("C" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("買掛日").Value
+                sheet.Range("D" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("買掛金額計").Value
+                sheet.Range("E" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("支払金額計").Value
+                sheet.Range("F" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("買掛金残高").Value
                 sheet.Range("G" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("備考").Value
 
             Next

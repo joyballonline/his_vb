@@ -52,6 +52,8 @@ Partial Class PurchasingManagement
         Me.LblMode = New System.Windows.Forms.Label()
         Me.LblCustomerNo = New System.Windows.Forms.Label()
         Me.TxtCustomerPO = New System.Windows.Forms.TextBox()
+        Me.DtpPaymentDate = New System.Windows.Forms.DateTimePicker()
+        Me.LblPaymentDate = New System.Windows.Forms.Label()
         CType(Me.DgvPurchase, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvHistory, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvAdd, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -62,7 +64,7 @@ Partial Class PurchasingManagement
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(12, 9)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(0, 13)
+        Me.Label1.Size = New System.Drawing.Size(0, 12)
         Me.Label1.TabIndex = 0
         '
         'LblPurchaseNo
@@ -294,9 +296,9 @@ Partial Class PurchasingManagement
         Me.LblPurchasedDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblPurchasedDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblPurchasedDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblPurchasedDate.Location = New System.Drawing.Point(188, 342)
+        Me.LblPurchasedDate.Location = New System.Drawing.Point(172, 341)
         Me.LblPurchasedDate.Name = "LblPurchasedDate"
-        Me.LblPurchasedDate.Size = New System.Drawing.Size(129, 22)
+        Me.LblPurchasedDate.Size = New System.Drawing.Size(114, 22)
         Me.LblPurchasedDate.TabIndex = 93
         Me.LblPurchasedDate.Text = "仕入日"
         Me.LblPurchasedDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -306,9 +308,9 @@ Partial Class PurchasingManagement
         Me.LblRemarks.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblRemarks.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblRemarks.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblRemarks.Location = New System.Drawing.Point(446, 342)
+        Me.LblRemarks.Location = New System.Drawing.Point(724, 342)
         Me.LblRemarks.Name = "LblRemarks"
-        Me.LblRemarks.Size = New System.Drawing.Size(170, 22)
+        Me.LblRemarks.Size = New System.Drawing.Size(114, 22)
         Me.LblRemarks.TabIndex = 95
         Me.LblRemarks.Text = "備考"
         Me.LblRemarks.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -316,9 +318,9 @@ Partial Class PurchasingManagement
         'TxtRemarks
         '
         Me.TxtRemarks.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtRemarks.Location = New System.Drawing.Point(622, 342)
+        Me.TxtRemarks.Location = New System.Drawing.Point(844, 342)
         Me.TxtRemarks.Name = "TxtRemarks"
-        Me.TxtRemarks.Size = New System.Drawing.Size(644, 22)
+        Me.TxtRemarks.Size = New System.Drawing.Size(375, 22)
         Me.TxtRemarks.TabIndex = 4
         '
         'DtpPurchaseDate
@@ -327,9 +329,9 @@ Partial Class PurchasingManagement
         Me.DtpPurchaseDate.CustomFormat = "yyyy/MM/dd"
         Me.DtpPurchaseDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpPurchaseDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DtpPurchaseDate.Location = New System.Drawing.Point(323, 342)
+        Me.DtpPurchaseDate.Location = New System.Drawing.Point(292, 341)
         Me.DtpPurchaseDate.Name = "DtpPurchaseDate"
-        Me.DtpPurchaseDate.Size = New System.Drawing.Size(117, 22)
+        Me.DtpPurchaseDate.Size = New System.Drawing.Size(148, 22)
         Me.DtpPurchaseDate.TabIndex = 3
         Me.DtpPurchaseDate.TabStop = False
         Me.DtpPurchaseDate.Value = New Date(2018, 7, 16, 0, 0, 0, 0)
@@ -390,10 +392,38 @@ Partial Class PurchasingManagement
         Me.TxtCustomerPO.TabIndex = 304
         Me.TxtCustomerPO.TabStop = False
         '
+        'DtpPaymentDate
+        '
+        Me.DtpPaymentDate.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.DtpPaymentDate.CustomFormat = ""
+        Me.DtpPaymentDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.DtpPaymentDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.DtpPaymentDate.Location = New System.Drawing.Point(567, 341)
+        Me.DtpPaymentDate.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
+        Me.DtpPaymentDate.Name = "DtpPaymentDate"
+        Me.DtpPaymentDate.Size = New System.Drawing.Size(148, 22)
+        Me.DtpPaymentDate.TabIndex = 306
+        Me.DtpPaymentDate.TabStop = False
+        Me.DtpPaymentDate.Value = New Date(2018, 7, 25, 13, 29, 25, 0)
+        '
+        'LblPaymentDate
+        '
+        Me.LblPaymentDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblPaymentDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblPaymentDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblPaymentDate.Location = New System.Drawing.Point(447, 341)
+        Me.LblPaymentDate.Name = "LblPaymentDate"
+        Me.LblPaymentDate.Size = New System.Drawing.Size(114, 22)
+        Me.LblPaymentDate.TabIndex = 307
+        Me.LblPaymentDate.Text = "支払予定日"
+        Me.LblPaymentDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'PurchasingManagement
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.DtpPaymentDate)
+        Me.Controls.Add(Me.LblPaymentDate)
         Me.Controls.Add(Me.LblCustomerNo)
         Me.Controls.Add(Me.TxtCustomerPO)
         Me.Controls.Add(Me.LblMode)
@@ -465,4 +495,6 @@ Partial Class PurchasingManagement
     Friend WithEvents LblMode As Label
     Friend WithEvents LblCustomerNo As Label
     Friend WithEvents TxtCustomerPO As TextBox
+    Friend WithEvents DtpPaymentDate As DateTimePicker
+    Friend WithEvents LblPaymentDate As Label
 End Class

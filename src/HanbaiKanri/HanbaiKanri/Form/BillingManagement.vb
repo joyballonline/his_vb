@@ -272,6 +272,9 @@ Public Class BillingManagement
         DgvCymn.Rows(0).Cells("請求金額計").Value = BillingAmount
         DgvCymn.Rows(0).Cells("請求残高").Value = dsCymnhd.Tables(RS).Rows(0)("見積金額") - BillingAmount
 
+        DtpBillingDate.MinDate = dsCymnhd.Tables(RS).Rows(0)("受注日").ToShortDateString()
+        DtpDepositDate.MinDate = dsCymnhd.Tables(RS).Rows(0)("受注日").ToShortDateString()
+
         '受注明細データから対象のデータの詳細を表示
         For i As Integer = 0 To dsCymndt.Tables(RS).Rows.Count - 1
             DgvCymndt.Rows.Add()
