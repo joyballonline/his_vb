@@ -91,7 +91,7 @@ Public Class CustomerARList
             DgvCymndt.Columns("請求日").HeaderText = "BillingDate"
             DgvCymndt.Columns("請求金額").HeaderText = "TotalBillingAmount"
             DgvCymndt.Columns("入金額").HeaderText = "MoneyReceiptAmount"
-            DgvCymndt.Columns("売掛金残高").HeaderText = "APBalance"
+            DgvCymndt.Columns("売掛金残高").HeaderText = "ARBalance"
             DgvCymndt.Columns("備考").HeaderText = "Remarks"
 
         End If
