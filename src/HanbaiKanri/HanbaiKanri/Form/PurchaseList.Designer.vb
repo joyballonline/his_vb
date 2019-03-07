@@ -29,14 +29,12 @@ Partial Class PurchaseList
         Me.RbtnDetails = New System.Windows.Forms.RadioButton()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.TxtPurchaseNo2 = New System.Windows.Forms.TextBox()
-        Me.TxtPurchaseDate2 = New System.Windows.Forms.TextBox()
+        Me.TxtPurchaseUntil = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.TxtSales = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.TxtPurchaseNo1 = New System.Windows.Forms.TextBox()
+        Me.TxtPurchaseSince = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.TxtPurchaseDate1 = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.TxtSupplierCode = New System.Windows.Forms.TextBox()
@@ -53,6 +51,8 @@ Partial Class PurchaseList
         Me.LblMode = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.TxtCustomerPO = New System.Windows.Forms.TextBox()
+        Me.dtPurchaseDateSince = New System.Windows.Forms.DateTimePicker()
+        Me.dtPurchaseDateUntil = New System.Windows.Forms.DateTimePicker()
         CType(Me.DgvHtyhd, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -128,25 +128,17 @@ Partial Class PurchaseList
         Me.Label5.AutoSize = True
         Me.Label5.Location = New System.Drawing.Point(936, 46)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(19, 13)
+        Me.Label5.Size = New System.Drawing.Size(17, 12)
         Me.Label5.TabIndex = 113
         Me.Label5.Text = "～"
         '
-        'TxtPurchaseNo2
+        'TxtPurchaseUntil
         '
-        Me.TxtPurchaseNo2.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtPurchaseNo2.Location = New System.Drawing.Point(959, 68)
-        Me.TxtPurchaseNo2.Name = "TxtPurchaseNo2"
-        Me.TxtPurchaseNo2.Size = New System.Drawing.Size(170, 22)
-        Me.TxtPurchaseNo2.TabIndex = 8
-        '
-        'TxtPurchaseDate2
-        '
-        Me.TxtPurchaseDate2.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtPurchaseDate2.Location = New System.Drawing.Point(959, 40)
-        Me.TxtPurchaseDate2.Name = "TxtPurchaseDate2"
-        Me.TxtPurchaseDate2.Size = New System.Drawing.Size(170, 22)
-        Me.TxtPurchaseDate2.TabIndex = 6
+        Me.TxtPurchaseUntil.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtPurchaseUntil.Location = New System.Drawing.Point(959, 67)
+        Me.TxtPurchaseUntil.Name = "TxtPurchaseUntil"
+        Me.TxtPurchaseUntil.Size = New System.Drawing.Size(170, 22)
+        Me.TxtPurchaseUntil.TabIndex = 8
         '
         'Label6
         '
@@ -180,13 +172,13 @@ Partial Class PurchaseList
         Me.Label7.Text = "仕入番号"
         Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'TxtPurchaseNo1
+        'TxtPurchaseSince
         '
-        Me.TxtPurchaseNo1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtPurchaseNo1.Location = New System.Drawing.Point(760, 67)
-        Me.TxtPurchaseNo1.Name = "TxtPurchaseNo1"
-        Me.TxtPurchaseNo1.Size = New System.Drawing.Size(170, 22)
-        Me.TxtPurchaseNo1.TabIndex = 7
+        Me.TxtPurchaseSince.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtPurchaseSince.Location = New System.Drawing.Point(760, 67)
+        Me.TxtPurchaseSince.Name = "TxtPurchaseSince"
+        Me.TxtPurchaseSince.Size = New System.Drawing.Size(170, 22)
+        Me.TxtPurchaseSince.TabIndex = 7
         '
         'Label8
         '
@@ -199,14 +191,6 @@ Partial Class PurchaseList
         Me.Label8.TabIndex = 106
         Me.Label8.Text = "仕入日"
         Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'TxtPurchaseDate1
-        '
-        Me.TxtPurchaseDate1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtPurchaseDate1.Location = New System.Drawing.Point(760, 40)
-        Me.TxtPurchaseDate1.Name = "TxtPurchaseDate1"
-        Me.TxtPurchaseDate1.Size = New System.Drawing.Size(170, 22)
-        Me.TxtPurchaseDate1.TabIndex = 5
         '
         'Label4
         '
@@ -225,7 +209,7 @@ Partial Class PurchaseList
         Me.Label9.AutoSize = True
         Me.Label9.Location = New System.Drawing.Point(936, 74)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(19, 13)
+        Me.Label9.Size = New System.Drawing.Size(17, 12)
         Me.Label9.TabIndex = 114
         Me.Label9.Text = "～"
         '
@@ -372,10 +356,38 @@ Partial Class PurchaseList
         Me.TxtCustomerPO.Size = New System.Drawing.Size(170, 22)
         Me.TxtCustomerPO.TabIndex = 10
         '
+        'dtPurchaseDateSince
+        '
+        Me.dtPurchaseDateSince.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.dtPurchaseDateSince.CustomFormat = ""
+        Me.dtPurchaseDateSince.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.dtPurchaseDateSince.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtPurchaseDateSince.Location = New System.Drawing.Point(760, 39)
+        Me.dtPurchaseDateSince.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
+        Me.dtPurchaseDateSince.Name = "dtPurchaseDateSince"
+        Me.dtPurchaseDateSince.Size = New System.Drawing.Size(170, 22)
+        Me.dtPurchaseDateSince.TabIndex = 332
+        Me.dtPurchaseDateSince.Value = New Date(2019, 1, 1, 0, 0, 0, 0)
+        '
+        'dtPurchaseDateUntil
+        '
+        Me.dtPurchaseDateUntil.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.dtPurchaseDateUntil.CustomFormat = ""
+        Me.dtPurchaseDateUntil.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.dtPurchaseDateUntil.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtPurchaseDateUntil.Location = New System.Drawing.Point(959, 39)
+        Me.dtPurchaseDateUntil.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
+        Me.dtPurchaseDateUntil.Name = "dtPurchaseDateUntil"
+        Me.dtPurchaseDateUntil.Size = New System.Drawing.Size(170, 22)
+        Me.dtPurchaseDateUntil.TabIndex = 333
+        Me.dtPurchaseDateUntil.Value = New Date(2019, 1, 1, 0, 0, 0, 0)
+        '
         'PurchaseList
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.dtPurchaseDateUntil)
+        Me.Controls.Add(Me.dtPurchaseDateSince)
         Me.Controls.Add(Me.RbtnDetails)
         Me.Controls.Add(Me.RbtnSlip)
         Me.Controls.Add(Me.Label11)
@@ -386,14 +398,12 @@ Partial Class PurchaseList
         Me.Controls.Add(Me.BtnPurchaseView)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.TxtPurchaseNo2)
-        Me.Controls.Add(Me.TxtPurchaseDate2)
+        Me.Controls.Add(Me.TxtPurchaseUntil)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.TxtSales)
         Me.Controls.Add(Me.Label7)
-        Me.Controls.Add(Me.TxtPurchaseNo1)
+        Me.Controls.Add(Me.TxtPurchaseSince)
         Me.Controls.Add(Me.Label8)
-        Me.Controls.Add(Me.TxtPurchaseDate1)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.TxtSupplierCode)
@@ -423,14 +433,12 @@ Partial Class PurchaseList
     Friend WithEvents RbtnDetails As RadioButton
     Friend WithEvents Label10 As Label
     Friend WithEvents Label5 As Label
-    Friend WithEvents TxtPurchaseNo2 As TextBox
-    Friend WithEvents TxtPurchaseDate2 As TextBox
+    Friend WithEvents TxtPurchaseUntil As TextBox
     Friend WithEvents Label6 As Label
     Friend WithEvents TxtSales As TextBox
     Friend WithEvents Label7 As Label
-    Friend WithEvents TxtPurchaseNo1 As TextBox
+    Friend WithEvents TxtPurchaseSince As TextBox
     Friend WithEvents Label8 As Label
-    Friend WithEvents TxtPurchaseDate1 As TextBox
     Friend WithEvents Label4 As Label
     Friend WithEvents Label9 As Label
     Friend WithEvents TxtSupplierCode As TextBox
@@ -447,4 +455,6 @@ Partial Class PurchaseList
     Friend WithEvents LblMode As Label
     Friend WithEvents Label11 As Label
     Friend WithEvents TxtCustomerPO As TextBox
+    Friend WithEvents dtPurchaseDateSince As DateTimePicker
+    Friend WithEvents dtPurchaseDateUntil As DateTimePicker
 End Class

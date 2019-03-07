@@ -92,16 +92,21 @@ Public Class PurchasingManagement
             LblNo1.Visible = False
             LblNo2.Visible = False
             LblNo3.Visible = False
-            LblPurchase.Visible = False
+            'LblPurchase.Visible = False
             LblAdd.Visible = False
-            LblPurchasedDate.Visible = False
-            LblRemarks.Visible = False
-            DtpPurchaseDate.Visible = False
-            DtpPaymentDate.Visible = False
+            LblPurchasedDate.Location = New Point(172, 80)
+            DtpPurchaseDate.Enabled = False
+            DtpPurchaseDate.Location = New Point(292, 80)
+            LblPaymentDate.Location = New Point(447, 80)
+            'DtpPaymentDate.Visible = False
+            DtpPaymentDate.Enabled = False
+            DtpPaymentDate.Location = New Point(567, 80)
+            LblRemarks.Location = New Point(724, 80)
+            TxtRemarks.Enabled = False
+            TxtRemarks.Location = New Point(844, 80)
             TxtCount1.Visible = False
             TxtCount2.Visible = False
             TxtCount3.Visible = False
-            TxtRemarks.Visible = False
             DgvPurchase.Visible = False
             DgvAdd.Visible = False
             DgvHistory.ReadOnly = False
@@ -465,26 +470,11 @@ Public Class PurchasingManagement
         End If
 
         If errFlg Then
-            Saiban1 += "SELECT * FROM public.m80_saiban"
-            Saiban1 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Saiban1 += " AND 採番キー = '50'"
 
-            Saiban2 += "SELECT * FROM public.m80_saiban"
-            Saiban2 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Saiban2 += " AND 採番キー = '60'"
+            Dim PC As String = getSaiban("50", dtToday)
+            Dim WH As String = getSaiban("60", dtToday)
 
-            Dim dsSaiban1 As DataSet = _db.selectDB(Saiban1, RS, reccnt)
-            Dim dsSaiban2 As DataSet = _db.selectDB(Saiban2, RS, reccnt)
-
-            Dim PC As String = dsSaiban1.Tables(RS).Rows(0)("接頭文字")
-            PC += dtToday.ToString("MMdd")
-            PC += dsSaiban1.Tables(RS).Rows(0)("最新値").ToString.PadLeft(dsSaiban1.Tables(RS).Rows(0)("連番桁数"), "0")
-
-            Dim WH As String = dsSaiban2.Tables(RS).Rows(0)("接頭文字")
-            WH += dtToday.ToString("MMdd")
-            WH += dsSaiban2.Tables(RS).Rows(0)("最新値").ToString.PadLeft(dsSaiban2.Tables(RS).Rows(0)("連番桁数"), "0")
-
-            Dim PurchaseAmount As Double = 0
+            Dim PurchaseAmount As Decimal = 0
             For i As Integer = 0 To ds2.Tables(RS).Rows.Count - 1
                 PurchaseAmount += ds2.Tables(RS).Rows(i)("仕入金額")
             Next
@@ -525,9 +515,9 @@ Public Class PurchasingManagement
             Sql3 += "', '"
             Sql3 += ds1.Tables(RS).Rows(0)("支払条件").ToString '支払条件
             Sql3 += "', '"
-            Sql3 += PurchaseAmount.ToString '仕入金額
+            Sql3 += formatNumber(PurchaseAmount) '仕入金額
             Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("粗利額").ToString '粗利額
+            Sql3 += formatNumber(Decimal.Parse(ds1.Tables(RS).Rows(0)("粗利額"))) '粗利額
             Sql3 += "', '"
             Sql3 += ds1.Tables(RS).Rows(0)("営業担当者").ToString '営業担当者
             Sql3 += "', '"
@@ -539,12 +529,12 @@ Public Class PurchasingManagement
             Sql3 += ", "
             Sql3 += CommonConst.CANCEL_KBN_ENABLED.ToString() '取消区分 = 0
             Sql3 += ", '"
-            Sql3 += ds1.Tables(RS).Rows(0)("ＶＡＴ").ToString 'ＶＡＴ
+            Sql3 += formatNumber(Decimal.Parse(ds1.Tables(RS).Rows(0)("ＶＡＴ").ToString)) 'ＶＡＴ
             Sql3 += "', '"
             If ds1.Tables(RS).Rows(0)("ＰＰＨ") Is DBNull.Value Then
                 Sql3 += "0" 'ＰＰＨ
             Else
-                Sql3 += ds1.Tables(RS).Rows(0)("ＰＰＨ").ToString 'ＰＰＨ
+                Sql3 += formatNumber(Decimal.Parse(ds1.Tables(RS).Rows(0)("ＰＰＨ").ToString)) 'ＰＰＨ
             End If
             Sql3 += "', '"
             Sql3 += strFormatDate(DtpPurchaseDate.Text) '仕入日
@@ -588,7 +578,7 @@ Public Class PurchasingManagement
                 Sql4 += "', '"
                 Sql4 += DgvAdd.Rows(index).Cells("仕入先").Value.ToString '仕入先名
                 Sql4 += "', '"
-                Sql4 += DgvAdd.Rows(index).Cells("仕入値").Value.ToString '仕入値
+                Sql4 += formatNumber(Decimal.Parse(DgvAdd.Rows(index).Cells("仕入値").Value.ToString)) '仕入値
                 Sql4 += "', '"
                 Sql4 += ds2.Tables(RS).Rows(index)("発注数量").ToString '発注数量
                 Sql4 += "', '"
@@ -603,11 +593,11 @@ Public Class PurchasingManagement
                 Sql4 += "', '"
                 Sql4 += DgvAdd.Rows(index).Cells("単位").Value.ToString '単位
                 Sql4 += "', '"
-                Sql4 += ds2.Tables(RS).Rows(index)("仕入値").ToString '仕入単価
+                Sql4 += formatNumber(Decimal.Parse(ds2.Tables(RS).Rows(index)("仕入値").ToString)) '仕入単価
                 Sql4 += "', '"
-                Sql4 += ds2.Tables(RS).Rows(index)("仕入金額").ToString '仕入金額
+                Sql4 += formatNumber(Decimal.Parse(ds2.Tables(RS).Rows(index)("仕入金額").ToString)) '仕入金額
                 Sql4 += "', '"
-                Sql4 += ds2.Tables(RS).Rows(index)("間接費").ToString '間接費
+                Sql4 += formatNumber(Decimal.Parse(ds2.Tables(RS).Rows(index)("間接費").ToString)) '間接費
                 Sql4 += "', '"
                 Sql4 += ds2.Tables(RS).Rows(index)("リードタイム").ToString 'リードタイム
                 Sql4 += "', '"
@@ -624,44 +614,6 @@ Public Class PurchasingManagement
                     _db.executeDB(Sql4)
                 End If
             Next
-
-            Dim PCNo As Integer
-
-            If dsSaiban1.Tables(RS).Rows(0)("最新値") = dsSaiban1.Tables(RS).Rows(0)("最大値") Then
-                PCNo = dsSaiban1.Tables(RS).Rows(0)("最小値")
-            Else
-                PCNo = dsSaiban1.Tables(RS).Rows(0)("最新値") + 1
-            End If
-
-            Sql5 = ""
-            Sql5 += "UPDATE "
-            Sql5 += "Public."
-            Sql5 += "m80_saiban "
-            Sql5 += "SET "
-            Sql5 += " 最新値"
-            Sql5 += " = '"
-            Sql5 += PCNo.ToString
-            Sql5 += "', "
-            Sql5 += "更新者"
-            Sql5 += " = '"
-            Sql5 += Input
-            Sql5 += "', "
-            Sql5 += "更新日"
-            Sql5 += " = '"
-            Sql5 += dtToday
-            Sql5 += "' "
-            Sql5 += "WHERE"
-            Sql5 += " 会社コード"
-            Sql5 += "='"
-            Sql5 += ds1.Tables(RS).Rows(0)("会社コード").ToString
-            Sql5 += "'"
-            Sql5 += " AND"
-            Sql5 += " 採番キー"
-            Sql5 += "='"
-            Sql5 += "50"
-            Sql5 += "' "
-
-            _db.executeDB(Sql5)
 
             Dim PurchaseNum As Integer
             Dim OrdingNum As Integer
@@ -743,9 +695,9 @@ Public Class PurchasingManagement
             Sql7 += "', '"
             Sql7 += ds1.Tables(RS).Rows(0)("支払条件").ToString
             Sql7 += "', '"
-            Sql7 += ds1.Tables(RS).Rows(0)("仕入金額").ToString
+            Sql7 += formatNumber(Decimal.Parse(ds1.Tables(RS).Rows(0)("仕入金額").ToString))
             Sql7 += "', '"
-            Sql7 += ds1.Tables(RS).Rows(0)("粗利額").ToString
+            Sql7 += formatNumber(Decimal.Parse(ds1.Tables(RS).Rows(0)("粗利額").ToString))
             Sql7 += "', '"
             Sql7 += ds1.Tables(RS).Rows(0)("営業担当者").ToString
             Sql7 += "', '"
@@ -757,9 +709,9 @@ Public Class PurchasingManagement
             Sql7 += ", "
             Sql7 += "0"
             Sql7 += ", '"
-            Sql7 += ds1.Tables(RS).Rows(0)("ＶＡＴ").ToString
+            Sql7 += formatNumber(Decimal.Parse(ds1.Tables(RS).Rows(0)("ＶＡＴ").ToString))
             Sql7 += "', '"
-            Sql7 += ds1.Tables(RS).Rows(0)("ＰＰＨ").ToString
+            Sql7 += formatNumber(Decimal.Parse(ds1.Tables(RS).Rows(0)("ＰＰＨ").ToString))
             Sql7 += "', '"
             Sql7 += dtToday
             Sql7 += "', '"
@@ -799,7 +751,7 @@ Public Class PurchasingManagement
                 Sql8 += "', '"
                 Sql8 += DgvAdd.Rows(index).Cells("仕入先").Value.ToString
                 Sql8 += "', '"
-                Sql8 += DgvAdd.Rows(index).Cells("仕入値").Value.ToString
+                Sql8 += formatNumber(Decimal.Parse(DgvAdd.Rows(index).Cells("仕入値").Value.ToString))
                 Sql8 += "', '"
                 Sql8 += DgvAdd.Rows(index).Cells("仕入数量").Value.ToString
                 Sql8 += "', '"
@@ -817,43 +769,6 @@ Public Class PurchasingManagement
                 End If
 
             Next
-
-            Dim WHNo As Integer
-
-            If dsSaiban2.Tables(RS).Rows(0)("最新値") = dsSaiban2.Tables(RS).Rows(0)("最大値") Then
-                WHNo = dsSaiban2.Tables(RS).Rows(0)("最小値")
-            Else
-                WHNo = dsSaiban2.Tables(RS).Rows(0)("最新値") + 1
-            End If
-
-            Sql9 = ""
-            Sql9 += "UPDATE "
-            Sql9 += "Public."
-            Sql9 += "m80_saiban "
-            Sql9 += "SET "
-            Sql9 += " 最新値"
-            Sql9 += " = '"
-            Sql9 += WHNo.ToString
-            Sql9 += "', "
-            Sql9 += "更新者"
-            Sql9 += " = '"
-            Sql9 += Input
-            Sql9 += "', "
-            Sql9 += "更新日"
-            Sql9 += " = '"
-            Sql9 += dtToday
-            Sql9 += "' "
-            Sql9 += "WHERE"
-            Sql9 += " 会社コード"
-            Sql9 += "='"
-            Sql9 += ds1.Tables(RS).Rows(0)("会社コード").ToString
-            Sql9 += "'"
-            Sql9 += " AND"
-            Sql9 += " 採番キー"
-            Sql9 += "='"
-            Sql9 += "60"
-            Sql9 += "' "
-            _db.executeDB(Sql9)
 
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 Dim result As DialogResult = MessageBox.Show("Create accounts payable data?",
@@ -903,15 +818,7 @@ Public Class PurchasingManagement
         Dim Sql3 As String = ""
         Dim Sql4 As String = ""
 
-        Saiban1 += "SELECT * FROM public.m80_saiban"
-        Saiban1 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        Saiban1 += " AND 採番キー = '100'"
-
-        Dim dsSaiban1 As DataSet = _db.selectDB(Saiban1, RS, reccnt)
-
-        Dim AP As String = dsSaiban1.Tables(RS).Rows(0)("接頭文字")
-        AP += dtToday.ToString("MMdd")
-        AP += dsSaiban1.Tables(RS).Rows(0)("最新値").ToString.PadLeft(dsSaiban1.Tables(RS).Rows(0)("連番桁数"), "0")
+        Dim AP As String = getSaiban("100", dtToday)
 
         Sql1 += "SELECT * FROM public.t20_hattyu"
         Sql1 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
@@ -981,44 +888,75 @@ Public Class PurchasingManagement
 
         _db.executeDB(Sql3)
 
-        Dim APNo As Integer
-
-        If dsSaiban1.Tables(RS).Rows(0)("最新値") = dsSaiban1.Tables(RS).Rows(0)("最大値") Then
-            APNo = dsSaiban1.Tables(RS).Rows(0)("最小値")
-        Else
-            APNo = dsSaiban1.Tables(RS).Rows(0)("最新値") + 1
-        End If
-
-        Sql4 = ""
-        Sql4 += "UPDATE "
-        Sql4 += "Public."
-        Sql4 += "m80_saiban "
-        Sql4 += "SET "
-        Sql4 += " 最新値"
-        Sql4 += " = '"
-        Sql4 += APNo.ToString
-        Sql4 += "', "
-        Sql4 += "更新者"
-        Sql4 += " = '"
-        Sql4 += frmC01F10_Login.loginValue.TantoNM
-        Sql4 += "', "
-        Sql4 += "更新日"
-        Sql4 += " = '"
-        Sql4 += strToday
-        Sql4 += "' "
-        Sql4 += "WHERE"
-        Sql4 += " 会社コード"
-        Sql4 += "='"
-        Sql4 += ds1.Tables(RS).Rows(0)("会社コード").ToString
-        Sql4 += "'"
-        Sql4 += " AND"
-        Sql4 += " 採番キー"
-        Sql4 += "='"
-        Sql4 += "100"
-        Sql4 += "' "
-
-        _db.executeDB(Sql4)
     End Sub
+
+    'param1：String 採番キー
+    'param2：DateTime 登録日
+    'Return: String 伝票番号
+    '伝票番号を取得
+    Private Function getSaiban(ByVal key As String, ByVal today As DateTime) As String
+        Dim Sql As String = ""
+        Dim saibanID As String = ""
+        Dim reccnt As Integer = 0 'DB用（デフォルト）
+
+        Try
+            Sql = "SELECT "
+            Sql += "* "
+            Sql += "FROM "
+            Sql += "public.m80_saiban"
+            Sql += " WHERE "
+            Sql += "会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += " AND "
+            Sql += "採番キー = '" & key & "'"
+
+            Dim dsSaiban As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+            saibanID = dsSaiban.Tables(RS).Rows(0)("接頭文字")
+            saibanID += today.ToString("MMdd")
+            saibanID += dsSaiban.Tables(RS).Rows(0)("最新値").ToString.PadLeft(dsSaiban.Tables(RS).Rows(0)("連番桁数"), "0")
+
+            Dim keyNo As Integer
+
+            If dsSaiban.Tables(RS).Rows(0)("最新値") = dsSaiban.Tables(RS).Rows(0)("最大値") Then
+                '最新値が最大と同じ場合、最小値にリセット
+                keyNo = dsSaiban.Tables(RS).Rows(0)("最小値")
+            Else
+                '最新値+1
+                keyNo = dsSaiban.Tables(RS).Rows(0)("最新値") + 1
+            End If
+
+            Sql = "UPDATE "
+            Sql += "Public.m80_saiban "
+            Sql += "SET "
+            Sql += " 最新値 "
+            Sql += " = '"
+            Sql += keyNo.ToString
+            Sql += "', "
+            Sql += "更新者"
+            Sql += " = '"
+            Sql += frmC01F10_Login.loginValue.TantoNM
+            Sql += "', "
+            Sql += "更新日"
+            Sql += " = '"
+            Sql += formatDatetime(today)
+            Sql += "' "
+            Sql += "WHERE"
+            Sql += " 会社コード"
+            Sql += "='"
+            Sql += frmC01F10_Login.loginValue.BumonCD
+            Sql += "'"
+            Sql += " AND"
+            Sql += " 採番キー = '" & key & "'"
+            Console.WriteLine(Sql)
+            _db.executeDB(Sql)
+
+            Return saibanID
+        Catch ex As Exception
+            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
+            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
+        End Try
+
+    End Function
 
     'どんなカルチャーであっても、日本の形式に変換する
     Private Function strFormatDate(ByVal prmDate As String, Optional ByRef prmFormat As String = "yyyy/MM/dd") As String

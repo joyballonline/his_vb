@@ -326,10 +326,11 @@ Partial Class PurchasingManagement
         'DtpPurchaseDate
         '
         Me.DtpPurchaseDate.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.DtpPurchaseDate.CustomFormat = "yyyy/MM/dd"
+        Me.DtpPurchaseDate.CustomFormat = ""
         Me.DtpPurchaseDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpPurchaseDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.DtpPurchaseDate.Location = New System.Drawing.Point(292, 341)
+        Me.DtpPurchaseDate.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.DtpPurchaseDate.Name = "DtpPurchaseDate"
         Me.DtpPurchaseDate.Size = New System.Drawing.Size(148, 22)
         Me.DtpPurchaseDate.TabIndex = 3
