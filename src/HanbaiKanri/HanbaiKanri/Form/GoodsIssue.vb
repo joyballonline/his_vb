@@ -481,6 +481,7 @@ Public Class GoodsIssue
             '対象データがないメッセージを表示
             _msgHd.dspMSG("chkGoodsIssueAddError", frmC01F10_Login.loginValue.Language)
 
+            Return
         End If
 
         For i As Integer = 0 To DgvAdd.Rows.Count() - 1

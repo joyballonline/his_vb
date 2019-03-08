@@ -179,6 +179,7 @@ Public Class CommonConst
     Public Const MENU_H0720 As String = "H0720"           '入庫編集
     Public Const MENU_H0730 As String = "H0730"           '入庫複写
     Public Const MENU_H0740 As String = "H0740"           '入庫取消
+    Public Const MENU_H0750 As String = "H0750"           '当月購入在庫金額・VAT一覧
 
     Public Const MENU_H0810 As String = "H0810"           '受発注登録
 
@@ -273,7 +274,7 @@ Public Class CommonConst
     '仕入区分
     Public Const Sire_KBN_Sire As Integer = 1                           '仕入
     Public Const Sire_KBN_Zaiko As Integer = 2                          '在庫
-    Public Const Sire_KBN_SERVICE As Integer = 3                          'サービス
+    Public Const Sire_KBN_SERVICE As Integer = 3                        'サービス
 
     '仕入区分 テキスト
     Public Const Sire_KBN_Sire_TXT As String = "仕入"                           '仕入

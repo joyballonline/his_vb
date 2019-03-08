@@ -1298,7 +1298,13 @@ Public Class frmC01F30_Menu
                 openForm = New ReceiptList(_msgHd, _db, _langHd, Status)
                 openForm.Show()
                 Me.Hide()
-            '-----------------------------------請求業務（H09）
+            Case CommonConst.MENU_H0750  '当月購入在庫金額・VAT一覧
+                Dim Status As String = CommonConst.STATUS_VIEW
+                Dim openForm As Form = Nothing
+                openForm = New PurchaseStockAmountList(_msgHd, _db, _langHd, Status)
+                openForm.Show()
+                Me.Hide()
+           '-----------------------------------請求業務（H09）
             Case CommonConst.MENU_H0910  '請求登録
                 Dim Status As String = CommonConst.STATUS_BILL
                 Dim openForm As Form = Nothing
