@@ -771,11 +771,12 @@ Public Class Quote
                 PurchaseTotal += DgvItemList.Rows(index).Cells("仕入金額").Value
                 Total += DgvItemList.Rows(index).Cells("売上金額").Value
                 QuoteTotal += DgvItemList.Rows(index).Cells("見積金額").Value
+                GrossProfit += DgvItemList.Rows(index).Cells("粗利額").Value
             Next
             TxtPurchaseTotal.Text = PurchaseTotal
             TxtTotal.Text = Total
             TxtQuoteTotal.Text = QuoteTotal
-            TxtGrossProfit.Text = Total - PurchaseTotal
+            TxtGrossProfit.Text = GrossProfit
         End If
     End Sub
 
@@ -879,11 +880,12 @@ Public Class Quote
             PurchaseTotal += DgvItemList.Rows(c).Cells("仕入金額").Value
             Total += DgvItemList.Rows(c).Cells("売上金額").Value
             QuoteTotal += DgvItemList.Rows(c).Cells("見積金額").Value
+            GrossProfit += DgvItemList.Rows(c).Cells("粗利額").Value
         Next
         TxtPurchaseTotal.Text = PurchaseTotal
         TxtTotal.Text = Total
         TxtQuoteTotal.Text = QuoteTotal
-        TxtGrossProfit.Text = Total - PurchaseTotal
+        TxtGrossProfit.Text = GrossProfit
 
         '行番号の振り直し
         Dim index As Integer = DgvItemList.Rows.Count()
@@ -2219,4 +2221,7 @@ Public Class Quote
         Return decVal.ToString("F3", nfi)
     End Function
 
+    Private Sub TxtGrossProfit_TextChanged(sender As Object, e As EventArgs) Handles TxtGrossProfit.TextChanged
+
+    End Sub
 End Class
