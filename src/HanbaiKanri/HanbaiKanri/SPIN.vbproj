@@ -123,6 +123,12 @@
     <Compile Include="Form\ARScheduledCollectionDateList.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form\PurchaseStockAmountList.Designer.vb">
+      <DependentUpon>PurchaseStockAmountList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\PurchaseStockAmountList.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\SupplierAPList.Designer.vb">
       <DependentUpon>SupplierAPList.vb</DependentUpon>
     </Compile>
@@ -534,6 +540,9 @@
     <EmbeddedResource Include="Form\ARScheduledCollectionDateList.resx">
       <DependentUpon>ARScheduledCollectionDateList.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form\PurchaseStockAmountList.resx">
+      <DependentUpon>PurchaseStockAmountList.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\SupplierAPList.resx">
       <DependentUpon>SupplierAPList.vb</DependentUpon>
     </EmbeddedResource>
@@ -702,6 +711,7 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="bin\BaseXls\APScheduledCollectionDateList.xlsx" />
     <None Include="bin\BaseXls\ARScheduledCollectionDateList.xlsx" />
     <None Include="bin\BaseXls\CustomerARList.xlsx" />
     <None Include="bin\BaseXls\DeliveryNote.xlsx" />
