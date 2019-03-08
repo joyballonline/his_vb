@@ -26,14 +26,12 @@ Partial Class SalesList
         Me.BtnSalesView = New System.Windows.Forms.Button()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.TxtSalesNo2 = New System.Windows.Forms.TextBox()
-        Me.TxtSalesDate2 = New System.Windows.Forms.TextBox()
+        Me.TxtSalesUntil = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.TxtSales = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.TxtSalesNo1 = New System.Windows.Forms.TextBox()
+        Me.TxtSalesSince = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.TxtSalesDate1 = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.TxtCustomerCode = New System.Windows.Forms.TextBox()
@@ -44,7 +42,7 @@ Partial Class SalesList
         Me.Label1 = New System.Windows.Forms.Label()
         Me.LblConditions = New System.Windows.Forms.Label()
         Me.TxtCustomerName = New System.Windows.Forms.TextBox()
-        Me.BtnOrderSearch = New System.Windows.Forms.Button()
+        Me.BtnSearch = New System.Windows.Forms.Button()
         Me.BtnBack = New System.Windows.Forms.Button()
         Me.DgvCymnhd = New System.Windows.Forms.DataGridView()
         Me.BtnSalesCancel = New System.Windows.Forms.Button()
@@ -53,6 +51,8 @@ Partial Class SalesList
         Me.TxtCustomerPO = New System.Windows.Forms.TextBox()
         Me.RbtnDetails = New System.Windows.Forms.RadioButton()
         Me.RbtnSlip = New System.Windows.Forms.RadioButton()
+        Me.dtDateSince = New System.Windows.Forms.DateTimePicker()
+        Me.dtDateUntil = New System.Windows.Forms.DateTimePicker()
         CType(Me.DgvCymnhd, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -97,21 +97,13 @@ Partial Class SalesList
         Me.Label5.TabIndex = 87
         Me.Label5.Text = "～"
         '
-        'TxtSalesNo2
+        'TxtSalesUntil
         '
-        Me.TxtSalesNo2.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtSalesNo2.Location = New System.Drawing.Point(959, 68)
-        Me.TxtSalesNo2.Name = "TxtSalesNo2"
-        Me.TxtSalesNo2.Size = New System.Drawing.Size(170, 22)
-        Me.TxtSalesNo2.TabIndex = 8
-        '
-        'TxtSalesDate2
-        '
-        Me.TxtSalesDate2.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtSalesDate2.Location = New System.Drawing.Point(959, 40)
-        Me.TxtSalesDate2.Name = "TxtSalesDate2"
-        Me.TxtSalesDate2.Size = New System.Drawing.Size(170, 22)
-        Me.TxtSalesDate2.TabIndex = 6
+        Me.TxtSalesUntil.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtSalesUntil.Location = New System.Drawing.Point(959, 68)
+        Me.TxtSalesUntil.Name = "TxtSalesUntil"
+        Me.TxtSalesUntil.Size = New System.Drawing.Size(170, 22)
+        Me.TxtSalesUntil.TabIndex = 8
         '
         'Label6
         '
@@ -145,13 +137,13 @@ Partial Class SalesList
         Me.Label7.Text = "売上番号"
         Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'TxtSalesNo1
+        'TxtSalesSince
         '
-        Me.TxtSalesNo1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtSalesNo1.Location = New System.Drawing.Point(760, 67)
-        Me.TxtSalesNo1.Name = "TxtSalesNo1"
-        Me.TxtSalesNo1.Size = New System.Drawing.Size(170, 22)
-        Me.TxtSalesNo1.TabIndex = 7
+        Me.TxtSalesSince.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtSalesSince.Location = New System.Drawing.Point(760, 67)
+        Me.TxtSalesSince.Name = "TxtSalesSince"
+        Me.TxtSalesSince.Size = New System.Drawing.Size(170, 22)
+        Me.TxtSalesSince.TabIndex = 7
         '
         'Label8
         '
@@ -164,14 +156,6 @@ Partial Class SalesList
         Me.Label8.TabIndex = 80
         Me.Label8.Text = "売上日"
         Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'TxtSalesDate1
-        '
-        Me.TxtSalesDate1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtSalesDate1.Location = New System.Drawing.Point(760, 40)
-        Me.TxtSalesDate1.Name = "TxtSalesDate1"
-        Me.TxtSalesDate1.Size = New System.Drawing.Size(170, 22)
-        Me.TxtSalesDate1.TabIndex = 5
         '
         'Label4
         '
@@ -272,15 +256,15 @@ Partial Class SalesList
         Me.TxtCustomerName.Size = New System.Drawing.Size(350, 22)
         Me.TxtCustomerName.TabIndex = 1
         '
-        'BtnOrderSearch
+        'BtnSearch
         '
-        Me.BtnOrderSearch.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.BtnOrderSearch.Location = New System.Drawing.Point(1173, 41)
-        Me.BtnOrderSearch.Name = "BtnOrderSearch"
-        Me.BtnOrderSearch.Size = New System.Drawing.Size(166, 40)
-        Me.BtnOrderSearch.TabIndex = 69
-        Me.BtnOrderSearch.Text = "検索"
-        Me.BtnOrderSearch.UseVisualStyleBackColor = True
+        Me.BtnSearch.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.BtnSearch.Location = New System.Drawing.Point(1173, 41)
+        Me.BtnSearch.Name = "BtnSearch"
+        Me.BtnSearch.Size = New System.Drawing.Size(166, 40)
+        Me.BtnSearch.TabIndex = 69
+        Me.BtnSearch.Text = "検索"
+        Me.BtnSearch.UseVisualStyleBackColor = True
         '
         'BtnBack
         '
@@ -299,6 +283,7 @@ Partial Class SalesList
         Me.DgvCymnhd.Location = New System.Drawing.Point(13, 236)
         Me.DgvCymnhd.Name = "DgvCymnhd"
         Me.DgvCymnhd.ReadOnly = True
+        Me.DgvCymnhd.RowHeadersVisible = False
         Me.DgvCymnhd.RowTemplate.Height = 21
         Me.DgvCymnhd.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvCymnhd.Size = New System.Drawing.Size(1326, 267)
@@ -371,10 +356,38 @@ Partial Class SalesList
         Me.RbtnSlip.Text = "伝票単位"
         Me.RbtnSlip.UseVisualStyleBackColor = True
         '
+        'dtDateSince
+        '
+        Me.dtDateSince.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.dtDateSince.CustomFormat = ""
+        Me.dtDateSince.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.dtDateSince.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtDateSince.Location = New System.Drawing.Point(760, 40)
+        Me.dtDateSince.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
+        Me.dtDateSince.Name = "dtDateSince"
+        Me.dtDateSince.Size = New System.Drawing.Size(170, 22)
+        Me.dtDateSince.TabIndex = 333
+        Me.dtDateSince.Value = New Date(2019, 1, 1, 0, 0, 0, 0)
+        '
+        'dtDateUntil
+        '
+        Me.dtDateUntil.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.dtDateUntil.CustomFormat = ""
+        Me.dtDateUntil.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.dtDateUntil.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtDateUntil.Location = New System.Drawing.Point(959, 39)
+        Me.dtDateUntil.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
+        Me.dtDateUntil.Name = "dtDateUntil"
+        Me.dtDateUntil.Size = New System.Drawing.Size(170, 22)
+        Me.dtDateUntil.TabIndex = 334
+        Me.dtDateUntil.Value = New Date(2019, 1, 1, 0, 0, 0, 0)
+        '
         'SalesList
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.dtDateUntil)
+        Me.Controls.Add(Me.dtDateSince)
         Me.Controls.Add(Me.RbtnDetails)
         Me.Controls.Add(Me.RbtnSlip)
         Me.Controls.Add(Me.Label11)
@@ -384,14 +397,12 @@ Partial Class SalesList
         Me.Controls.Add(Me.BtnSalesView)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.TxtSalesNo2)
-        Me.Controls.Add(Me.TxtSalesDate2)
+        Me.Controls.Add(Me.TxtSalesUntil)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.TxtSales)
         Me.Controls.Add(Me.Label7)
-        Me.Controls.Add(Me.TxtSalesNo1)
+        Me.Controls.Add(Me.TxtSalesSince)
         Me.Controls.Add(Me.Label8)
-        Me.Controls.Add(Me.TxtSalesDate1)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.TxtCustomerCode)
@@ -402,7 +413,7 @@ Partial Class SalesList
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.LblConditions)
         Me.Controls.Add(Me.TxtCustomerName)
-        Me.Controls.Add(Me.BtnOrderSearch)
+        Me.Controls.Add(Me.BtnSearch)
         Me.Controls.Add(Me.BtnBack)
         Me.Controls.Add(Me.BtnSalesCancel)
         Me.Controls.Add(Me.DgvCymnhd)
@@ -419,14 +430,12 @@ Partial Class SalesList
     Friend WithEvents BtnSalesView As Button
     Friend WithEvents Label10 As Label
     Friend WithEvents Label5 As Label
-    Friend WithEvents TxtSalesNo2 As TextBox
-    Friend WithEvents TxtSalesDate2 As TextBox
+    Friend WithEvents TxtSalesUntil As TextBox
     Friend WithEvents Label6 As Label
     Friend WithEvents TxtSales As TextBox
     Friend WithEvents Label7 As Label
-    Friend WithEvents TxtSalesNo1 As TextBox
+    Friend WithEvents TxtSalesSince As TextBox
     Friend WithEvents Label8 As Label
-    Friend WithEvents TxtSalesDate1 As TextBox
     Friend WithEvents Label4 As Label
     Friend WithEvents Label9 As Label
     Friend WithEvents TxtCustomerCode As TextBox
@@ -437,7 +446,7 @@ Partial Class SalesList
     Friend WithEvents Label1 As Label
     Friend WithEvents LblConditions As Label
     Friend WithEvents TxtCustomerName As TextBox
-    Friend WithEvents BtnOrderSearch As Button
+    Friend WithEvents BtnSearch As Button
     Friend WithEvents BtnBack As Button
     Friend WithEvents DgvCymnhd As DataGridView
     Friend WithEvents BtnSalesCancel As Button
@@ -446,4 +455,6 @@ Partial Class SalesList
     Friend WithEvents TxtCustomerPO As TextBox
     Friend WithEvents RbtnDetails As RadioButton
     Friend WithEvents RbtnSlip As RadioButton
+    Friend WithEvents dtDateSince As DateTimePicker
+    Friend WithEvents dtDateUntil As DateTimePicker
 End Class

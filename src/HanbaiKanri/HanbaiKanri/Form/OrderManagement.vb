@@ -166,21 +166,64 @@ Public Class OrderManagement
             Sql1 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
             Sql1 += " AND 受注番号 = '" & No & "'"
             Sql1 += " AND 受注番号枝番 = '" & Suffix & "'"
+            Sql1 += " AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
 
-            Sql2 += "SELECT * FROM public.t31_urigdt"
-            Sql2 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Sql2 += " AND 受注番号 = '" & No & "'"
-            Sql2 += " AND 受注番号枝番 = '" & Suffix & "'"
+            Sql2 = "SELECT"
+            Sql2 += " t31.*, t30.取消区分"
+            Sql2 += " FROM "
+            Sql2 += " public.t31_urigdt t31 "
 
-            Sql3 += "SELECT * FROM public.t11_cymndt"
-            Sql3 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Sql3 += " AND 受注番号 = '" & No & "'"
-            Sql3 += " AND 受注番号枝番 = '" & Suffix & "'"
+            Sql2 += " INNER JOIN "
+            Sql2 += " t30_urighd t30"
+            Sql2 += " ON "
+
+            Sql2 += " t31.会社コード = t30.会社コード"
+            Sql2 += " AND "
+            Sql2 += " t31.受注番号 = t30.受注番号"
+            Sql2 += " AND "
+            Sql2 += " t31.受注番号枝番 = t30.受注番号枝番"
+
+            Sql2 += " WHERE "
+            Sql2 += " t31.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql2 += " AND "
+            Sql2 += " t31.受注番号 = '" & No & "'"
+            Sql2 += " AND "
+            Sql2 += " t31.受注番号枝番 = '" & Suffix & "'"
+            Sql2 += " AND "
+            Sql2 += " t30.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
+
+
+            Sql3 = "SELECT"
+            Sql3 += " t11.*, t10.取消区分"
+            Sql3 += " FROM "
+            Sql3 += " public.t11_cymndt t11 "
+
+            Sql3 += " INNER JOIN "
+            Sql3 += " t10_cymnhd t10"
+            Sql3 += " ON "
+
+            Sql3 += " t11.会社コード = t10.会社コード"
+            Sql3 += " AND "
+            Sql3 += " t11.受注番号 = t10.受注番号"
+            Sql3 += " AND "
+            Sql3 += " t11.受注番号枝番 = t10.受注番号枝番"
+
+            Sql3 += " WHERE "
+            Sql3 += " t11.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql3 += " AND "
+            Sql3 += " t11.受注番号 = '" & No & "'"
+            Sql3 += " AND "
+            Sql3 += " t11.受注番号枝番 = '" & Suffix & "'"
+            Sql3 += " AND "
+            Sql3 += " t10.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
+
 
             Sql4 += "SELECT * FROM public.t30_urighd"
             Sql4 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
             Sql4 += " AND 受注番号 = '" & No & "'"
             Sql4 += " AND 受注番号枝番 = '" & Suffix & "'"
+            Sql4 += " AND "
+            Sql4 += " 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
 
             Dim reccnt As Integer = 0
             Dim ds1 As DataSet = _db.selectDB(Sql1, RS, reccnt)

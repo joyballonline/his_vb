@@ -1,4 +1,5 @@
 Imports System.Globalization
+Imports System.Text.RegularExpressions
 Imports System.Windows.Forms
 '===============================================================================
 '
@@ -920,5 +921,14 @@ Public Class UtilClass
         Return prmVal.ToString("F3", nfi)
     End Function
 
+    'sqlで実行する文字列からシングルクォーテーションを文字コードにする
+    Public Shared Function escapeSql(ByVal prmSql As String) As String
+        Dim sql As String = prmSql
+
+        sql = sql.Replace("'"c, "''") 'シングルクォーテーションを置換
+
+        Return Regex.Escape(sql)
+        Return sql
+    End Function
 
 End Class
