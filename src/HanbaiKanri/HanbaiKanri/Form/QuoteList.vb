@@ -37,7 +37,7 @@ Public Class QuoteList
     Private CompanyCode As String = ""
     Private QuoteNo As String()
     Private dtToday As DateTime = DateTime.Now
-    Private strToday As String = formatDatetime(DateTime.Now)
+    Private strToday As String = formatDatetime(dtToday)
 
     '-------------------------------------------------------------------------------
     'デフォルトコンストラクタ（隠蔽）
@@ -727,7 +727,7 @@ Public Class QuoteList
 
     Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles BtnCancel.Click
         Dim dtToday As DateTime = DateTime.Now
-        Dim strToday As DateTime = formatDatetime(DateTime.Now)
+        Dim strToday As DateTime = formatDatetime(dtToday)
 
         Dim Sql1 As String = ""
         Sql1 = ""

@@ -277,7 +277,7 @@ Public Class Ordering
 
 
         Dim dtNow As DateTime = DateTime.Now
-        Dim dtToday As String = formatDatetime(DateTime.Now)
+        Dim dtToday As String = formatDatetime(dtNow)
 
         '汎用マスタからリードタイム単位を取得
         Dim dsHanyo = getDsHanyoData(CommonConst.FIXED_KEY_READTIME)

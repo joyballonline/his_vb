@@ -467,7 +467,7 @@ Public Class PurchasingManagement
     Private Sub BtnRegist_Click(sender As Object, e As EventArgs) Handles BtnRegist.Click
 
         Dim dtToday As DateTime = DateTime.Now
-        Dim strToday As String = formatDatetime(DateTime.Now)
+        Dim strToday As String = formatDatetime(dtToday)
         Dim errFlg As Boolean = True
 
         Dim Sql As String = ""
@@ -851,7 +851,7 @@ Public Class PurchasingManagement
 
     Private Sub Accounts()
         Dim dtToday As DateTime = DateTime.Now
-        Dim strToday As String = formatDatetime(DateTime.Now)
+        Dim strToday As String = formatDatetime(dtToday)
 
         Dim reccnt As Integer = 0
         Dim APAmount As Integer = 0

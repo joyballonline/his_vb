@@ -815,7 +815,7 @@ Public Class OrderManagement
 
     Private Sub Biilng()
         Dim dtToday As DateTime = DateTime.Now
-        Dim strToday As DateTime = formatDatetime(DateTime.Now)
+        Dim strToday As DateTime = formatDatetime(dtToday)
 
         Dim reccnt As Integer = 0
         Dim BillingAmount As Integer = 0
