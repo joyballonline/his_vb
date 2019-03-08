@@ -1,3 +1,4 @@
+Imports System.Globalization
 Imports System.Windows.Forms
 '===============================================================================
 '
@@ -797,7 +798,7 @@ Public Class UtilClass
     '               yyMMdd   → yy/MM/dd   or yy/MM/dd   → yyMMdd
     '   ●入力パラメタ　　：なし
     '   ●メソッド戻り値　：変換後文字列（日付としておかしい場合は空白("")を返します。）
-    '                                               2006.11.10 Created By Akiyoshi.Yamazaki
+    '                                               2006.11.10 Created By Laevigata inc.
     '-------------------------------------------------------------------------------
     Public Shared Function convertDateSlash(ByVal prmstrDate As String) As String
         Dim w_Date As System.DateTime
@@ -839,7 +840,7 @@ Public Class UtilClass
     '   （処理概要）文字列が空白かを判定する
     '   ●入力パラメタ　　：なし
     '   ●メソッド戻り値　：True=空白では無い, False=空白
-    '                                               2006.11.10 Created By Akiyoshi.Yamazaki
+    '                                               2006.11.10 Created By Laevigata inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
     ''' 空白判定
@@ -861,4 +862,63 @@ Public Class UtilClass
         End If
         Return True
     End Function
+
+    '-------------------------------------------------------------------------------
+    '  データ更新時の日時フォーマット
+    '   （処理概要）日付表示は環境に合わせるため、登録時は日本形式にする
+    '   ●入力パラメタ　　：Datetime
+    '   ●メソッド戻り値　：Datetime
+    '                                               2019.02.07 Created By Laevigata inc.
+    '-------------------------------------------------------------------------------
+    ''' <summary>
+    ''' 空白判定
+    ''' </summary>
+    ''' <returns>True=空白では無い, False=空白</returns>
+    ''' <remarks></remarks>
+    Public Shared Function jaDatetimeFormat(ByVal prmDate As DateTime) As String
+
+        '日本の日付形式にする
+        Return Format(prmDate, "yyyy/MM/dd HH:mm:ss").ToString
+
+    End Function
+
+    'String型のDateを日本の形式に直す
+    Public Shared Function strFormatDate(ByVal prmDate As String, Optional ByRef prmFormat As String = "yyyy/MM/dd") As String
+
+        'PCのカルチャーを取得し、それに応じてStringからDatetimeを作成
+        Dim ci As New System.Globalization.CultureInfo(CultureInfo.CurrentCulture.Name.ToString)
+        Dim dateFormat As DateTime = DateTime.Parse(prmDate, ci, System.Globalization.DateTimeStyles.AssumeLocal)
+
+        '日本の形式に書き換える
+        Return dateFormat.ToString(prmFormat)
+    End Function
+
+    'Datetime型を日本の形式に直す
+    Public Shared Function formatDatetime(ByVal prmDatetime As DateTime) As String
+
+        'PCのカルチャーを取得し、それに応じてStringからDatetimeを作成
+        Dim ciCurrent As New System.Globalization.CultureInfo(CultureInfo.CurrentCulture.Name.ToString)
+        Dim dateFormat As DateTime = DateTime.Parse(prmDatetime.ToString, ciCurrent, System.Globalization.DateTimeStyles.AssumeLocal)
+
+        Dim changeFormat As String = dateFormat.ToString("yyyy/MM/dd HH:mm:ss")
+
+        Dim ciJP As New System.Globalization.CultureInfo("ja-JP")
+        Dim rtnDatetime As DateTime = DateTime.Parse(changeFormat, ciJP, System.Globalization.DateTimeStyles.AssumeLocal)
+
+
+        '日本の形式に書き換える
+        Return changeFormat
+    End Function
+
+    '金額フォーマット（登録の際の小数点指定子）を日本の形式に合わせる
+    '桁区切り記号は外す（小数点のみのフォーマットに変換している）
+    Public Shared Function formatNumber(ByVal prmVal As Decimal) As String
+
+        Dim nfi As NumberFormatInfo = New CultureInfo("ja-JP", False).NumberFormat
+
+        '日本の形式に書き換える
+        Return prmVal.ToString("F3", nfi)
+    End Function
+
+
 End Class
