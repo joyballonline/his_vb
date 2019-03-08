@@ -179,11 +179,21 @@ Public Class BillingList
                 DgvBilling.Rows.Add()
                 DgvBilling.Rows(i).Cells("請求番号").Value = ds.Tables(RS).Rows(i)("請求番号")
 
-                DgvBilling.Rows(i).Cells("請求区分").Value = IIf(
+                If frmC01F10_Login.loginValue.Language = "ENG" Then
+                    DgvBilling.Rows(i).Cells("請求区分").Value = IIf(
+                        ds.Tables(RS).Rows(i)("請求区分") = CommonConst.BILLING_KBN_DEPOSIT,
+                        CommonConst.BILLING_KBN_DEPOSIT_TXT_E,
+                        CommonConst.BILLING_KBN_NORMAL_TXT_E
+                        )
+                Else
+                    DgvBilling.Rows(i).Cells("請求区分").Value = IIf(
                         ds.Tables(RS).Rows(i)("請求区分") = CommonConst.BILLING_KBN_DEPOSIT,
                         CommonConst.BILLING_KBN_DEPOSIT_TXT,
                         CommonConst.BILLING_KBN_NORMAL_TXT
-                    )
+                        )
+                End If
+
+
 
                 DgvBilling.Rows(i).Cells("取消").Value = getDelKbnTxt(ds.Tables(RS).Rows(i)("取消区分"))
                 DgvBilling.Rows(i).Cells("請求日").Value = ds.Tables(RS).Rows(i)("請求日").ToShortDateString()

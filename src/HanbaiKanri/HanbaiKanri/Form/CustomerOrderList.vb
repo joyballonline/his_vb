@@ -149,9 +149,17 @@ Public Class CustomerOrderList
             For i As Integer = 0 To dsSkyuhd.Tables(RS).Rows.Count - 1
                 DgvBilling.Rows.Add()
                 DgvBilling.Rows(i).Cells("請求番号").Value = dsSkyuhd.Tables(RS).Rows(i)("請求番号")
-                DgvBilling.Rows(i).Cells("請求区分").Value = IIf(dsSkyuhd.Tables(RS).Rows(i)("請求区分") = CommonConst.BILLING_KBN_DEPOSIT,
+                If frmC01F10_Login.loginValue.Language = "ENG" Then
+                    DgvBilling.Rows(i).Cells("請求区分").Value = IIf(dsSkyuhd.Tables(RS).Rows(i)("請求区分") = CommonConst.BILLING_KBN_DEPOSIT,
+                                                             CommonConst.BILLING_KBN_DEPOSIT_TXT_E,
+                                                            CommonConst.BILLING_KBN_NORMAL_TXT_E)
+
+                Else
+                    DgvBilling.Rows(i).Cells("請求区分").Value = IIf(dsSkyuhd.Tables(RS).Rows(i)("請求区分") = CommonConst.BILLING_KBN_DEPOSIT,
                                                              CommonConst.BILLING_KBN_DEPOSIT_TXT,
                                                             CommonConst.BILLING_KBN_NORMAL_TXT)
+
+                End If
 
                 DgvBilling.Rows(i).Cells("請求日").Value = dsSkyuhd.Tables(RS).Rows(i)("請求日").ToShortDateString()
                 DgvBilling.Rows(i).Cells("受注番号").Value = dsSkyuhd.Tables(RS).Rows(i)("受注番号")

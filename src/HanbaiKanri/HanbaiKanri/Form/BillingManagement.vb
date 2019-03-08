@@ -298,12 +298,20 @@ Public Class BillingManagement
             DgvHistory.Rows(i).Cells("No").Value = i + 1
             DgvHistory.Rows(i).Cells("請求番号").Value = dsSkyuhd.Tables(RS).Rows(i)("請求番号")
             DgvHistory.Rows(i).Cells("請求日").Value = dsSkyuhd.Tables(RS).Rows(i)("請求日").ToShortDateString()
-
-            DgvHistory.Rows(i).Cells("請求区分").Value = IIf(
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                DgvHistory.Rows(i).Cells("請求区分").Value = IIf(
+                DgvHistory.Rows(i).Cells("請求区分").Value,
+                CommonConst.BILLING_KBN_DEPOSIT_TXT_E,
+                CommonConst.BILLING_KBN_NORMAL_TXT_E
+            )
+            Else
+                DgvHistory.Rows(i).Cells("請求区分").Value = IIf(
                 DgvHistory.Rows(i).Cells("請求区分").Value,
                 CommonConst.BILLING_KBN_DEPOSIT_TXT,
                 CommonConst.BILLING_KBN_NORMAL_TXT
             )
+            End If
+
 
             DgvHistory.Rows(i).Cells("請求先").Value = dsSkyuhd.Tables(RS).Rows(i)("得意先名")
             DgvHistory.Rows(i).Cells("請求金額").Value = dsSkyuhd.Tables(RS).Rows(i)("請求金額計")

@@ -260,6 +260,8 @@ Public Class CommonConst
     '請求区分テキスト
     Public Const BILLING_KBN_DEPOSIT_TXT As String = "前受金請求"                         '前受請求
     Public Const BILLING_KBN_NORMAL_TXT As String = "通常請求"                          '通常請求
+    Public Const BILLING_KBN_DEPOSIT_TXT_E As String = "Prepaid"                         '前受請求（英語表記）
+    Public Const BILLING_KBN_NORMAL_TXT_E As String = "Normal"                          '通常請求（英語表記）
 
     '買掛区分
     Public Const APC_KBN_DEPOSIT As Integer = 1                         '前払買掛
