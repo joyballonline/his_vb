@@ -1001,7 +1001,7 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <MEMO></MEMO>
   </MSG_DATA>
   <MSG_DATA>
-    <ID>chkAPAddError</ID>
+    <ID>chkPurchaseAddError</ID>
     <MSG1>仕入情報がありません。</MSG1>
     <MSG1_EN>There is no purchase information.</MSG1_EN>
     <MSG2>再度確認してから実行してください。</MSG2>
@@ -1022,5 +1022,26 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
     <MEMO></MEMO>
   </MSG_DATA>
-
+  <MSG_DATA>
+    <ID>chkUriageBalanceError</ID>
+    <MSG1>売上数量が受注数量を超えています。</MSG1>
+    <MSG1_EN>The quantity of sales exceeds the order quantity.</MSG1_EN>
+    <MSG2>再度確認してから実行してください。</MSG2>
+    <MSG2_EN>Please check again and try again.</MSG2_EN>
+    <BUTTON_TYPE>OK</BUTTON_TYPE>
+    <ICONT_TYPE>Error</ICONT_TYPE>
+    <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
+    <MEMO></MEMO>
+  </MSG_DATA>
+  <MSG_DATA>
+    <ID>chkUriageAddError</ID>
+    <MSG1>売上情報がありません。</MSG1>
+    <MSG1_EN>There is no sales information.</MSG1_EN>
+    <MSG2>再度確認してから実行してください。</MSG2>
+    <MSG2_EN>Please check again and try again.</MSG2_EN>
+    <BUTTON_TYPE>OK</BUTTON_TYPE>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+    <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
+    <MEMO></MEMO>
+  </MSG_DATA>
 </MSG_DEF>
