@@ -76,7 +76,7 @@ Public Class QuoteList
     Private Sub MstHanyoue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         If _status = CommonConst.STATUS_EDIT Then
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "EditMode"
             Else
                 LblMode.Text = "編集モード"
@@ -85,7 +85,7 @@ Public Class QuoteList
             BtnQuoteEdit.Visible = True
             BtnQuoteEdit.Location = New Point(997, 509)
         ElseIf _status = CommonConst.STATUS_CLONE Then
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "CopyMode"
             Else
                 LblMode.Text = "複写モード"
@@ -94,7 +94,7 @@ Public Class QuoteList
             BtnQuoteClone.Visible = True
             BtnQuoteClone.Location = New Point(997, 509)
         ElseIf _status = CommonConst.STATUS_CANCEL Then
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "CancelMode"
             Else
                 LblMode.Text = "取消モード"
@@ -103,7 +103,7 @@ Public Class QuoteList
             BtnCancel.Visible = True
             BtnCancel.Location = New Point(997, 509)
         ElseIf _status = CommonConst.STATUS_VIEW Then
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "ViewMode"
             Else
                 LblMode.Text = "参照モード"
@@ -112,7 +112,7 @@ Public Class QuoteList
             BtnQuoteView.Visible = True
             BtnQuoteView.Location = New Point(997, 509)
         ElseIf _status = CommonConst.STATUS_PRICE Then
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "PurchasePriceInputMode"
             Else
                 LblMode.Text = "仕入単価入力モード"
@@ -121,7 +121,7 @@ Public Class QuoteList
             BtnUnitPrice.Visible = True
             BtnUnitPrice.Location = New Point(997, 509)
         ElseIf _status = CommonConst.STATUS_ORDER_NEW Then
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "NewOrderRegistrationMode"
             Else
                 LblMode.Text = "受注新規入力モード"
@@ -130,7 +130,7 @@ Public Class QuoteList
             BtnOrder.Visible = True
             BtnOrder.Location = New Point(997, 509)
         ElseIf _status = "PURCHASE_NEW" Then
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "NewPurchaseRegistrationMode"
             Else
                 LblMode.Text = "仕入新規入力モード"
@@ -139,7 +139,7 @@ Public Class QuoteList
             BtnPurchase.Visible = True
             BtnPurchase.Location = New Point(997, 509)
         ElseIf _status = CommonConst.STATUS_ORDER_PURCHASE Then
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "JobOrderingAndPurchasingMode"
             Else
                 LblMode.Text = "受発注登録モード"
@@ -149,7 +149,7 @@ Public Class QuoteList
             BtnOrderPurchase.Location = New Point(997, 509)
         End If
 
-        If frmC01F10_Login.loginValue.Language = "ENG" Then
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
             LblConditions.Text = "TermsOfSelection"
             Label1.Text = "CustomerName"
             Label2.Text = "Address"
@@ -305,7 +305,7 @@ Public Class QuoteList
             Dim reccnt As Integer = 0
             ds = _db.selectDB(Sql, RS, reccnt)
 
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 DgvMithd.Columns.Add("見積番号", "QuotationNumber")
                 DgvMithd.Columns.Add("見積番号枝番", "BranchNumber")
                 DgvMithd.Columns.Add("見積日", "QuotationDate")
@@ -523,7 +523,7 @@ Public Class QuoteList
             Dim reccnt As Integer = 0
             ds = _db.selectDB(Sql, RS, reccnt)
 
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 DgvMithd.Columns.Add("見積番号", "QuotationNumber")
                 DgvMithd.Columns.Add("見積番号枝番", "BranchNumber")
                 DgvMithd.Columns.Add("仕入区分", "PurchasingClassification")
@@ -725,13 +725,13 @@ Public Class QuoteList
         openForm.Show(Me)
     End Sub
 
+    '見積取消
     Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles BtnCancel.Click
         Dim dtToday As DateTime = DateTime.Now
         Dim strToday As DateTime = formatDatetime(dtToday)
 
         Dim Sql1 As String = ""
-        Sql1 = ""
-        Sql1 += "UPDATE Public.t01_mithd "
+        Sql1 = "UPDATE Public.t01_mithd "
         Sql1 += "SET 取消区分 = '1' "
         Sql1 += ",取消日 = '" & strToday & "' "
         Sql1 += ",更新日 = '" & strToday & "' "
@@ -743,21 +743,12 @@ Public Class QuoteList
         Dim strMessage As String = ""    'メッセージ本文
         Dim strMessageTitle As String = ""      'メッセージタイトル
 
-        If frmC01F10_Login.loginValue.Language = "ENG" Then
-            strMessage = "Would you like to cancel the Quotation？"
-            strMessageTitle = "Question"
-        Else
-            strMessage = "見積を取り消しますか？"
-            strMessageTitle = "質問"
-        End If
-        Dim result As DialogResult = MessageBox.Show(strMessage, strMessageTitle, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+        Dim result As DialogResult = _msgHd.dspMSG("confirmCancel", frmC01F10_Login.loginValue.Language)
         If result = DialogResult.Yes Then
+
             _db.executeDB(Sql1)
+
             QuoteListLoad()
-        ElseIf result = DialogResult.No Then
-
-        ElseIf result = DialogResult.Cancel Then
-
         End If
     End Sub
 
