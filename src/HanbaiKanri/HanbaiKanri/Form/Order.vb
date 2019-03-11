@@ -735,7 +735,7 @@ Public Class Order
             Sql1 += "', '"
             Sql1 += dtNow
             Sql1 += "', '"
-            Sql1 += "zenbi01"
+            Sql1 += frmC01F10_Login.loginValue.TantoNM
             Sql1 += "', '"
             Sql1 += "0"
             Sql1 += " ')"
@@ -803,7 +803,7 @@ Public Class Order
                 Sql2 += "', '"
                 Sql2 += RevoveChars(DgvItemList.Rows(cymnhdIdx).Cells("備考").Value.ToString)
                 Sql2 += "', '"
-                Sql2 += "zenbi01"
+                Sql2 += frmC01F10_Login.loginValue.TantoNM
                 Sql2 += "', '"
                 Sql2 += dtNow
 
@@ -854,7 +854,7 @@ Public Class Order
             Sql1 += " , 備考 = '" & RevoveChars(TxtOrderRemark.Text) & "'"
             Sql1 += " , 受注日 = '" & DtpOrderDate.Value & "'"
             Sql1 += " , 更新日 = '" & dtNow & "'"
-            Sql1 += " , 更新者 = 'zenbi01' "
+            Sql1 += " , 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
 
             Sql1 += " WHERE 会社コード ='" & CompanyCode & "'"
             Sql1 += " AND 受注番号 ='" & OrderNo & "'"

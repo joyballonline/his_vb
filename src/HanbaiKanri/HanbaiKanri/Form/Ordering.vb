@@ -1037,7 +1037,7 @@ Public Class Ordering
                 Sql += "', "
                 Sql += "更新者"
                 Sql += " = '"
-                Sql += "zenbi01"
+                Sql += frmC01F10_Login.loginValue.TantoNM
                 Sql += " ' "
 
                 Sql += "WHERE"

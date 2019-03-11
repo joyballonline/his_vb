@@ -832,7 +832,7 @@ Public Class Cymn
                 Sql3 += "', '"
                 Sql3 += formatDatetime(dtNow) '更新日
                 Sql3 += "', '"
-                Sql3 += "zenbi01" '更新者
+                Sql3 += frmC01F10_Login.loginValue.BumonCD '更新者
                 Sql3 += "', '"
                 Sql3 += "0" '取消区分
                 Sql3 += " ')"
@@ -896,7 +896,7 @@ Public Class Cymn
                         Sql4 += "', '"
                         Sql4 += DgvItemList.Rows(hattyuIdx).Cells("備考").Value.ToString
                         Sql4 += "', '"
-                        Sql4 += "zenbi01"
+                        Sql4 += frmC01F10_Login.loginValue.TantoNM
                         Sql4 += "', '"
                         Sql4 += formatDatetime(dtNow)
                         Sql4 += "', '"

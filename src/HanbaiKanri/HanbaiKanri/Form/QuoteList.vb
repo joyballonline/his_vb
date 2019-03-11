@@ -461,7 +461,7 @@ Public Class QuoteList
                 strWhere += "t01.見積日"
                 strWhere += " >=  "
                 strWhere += "'"
-                strWhere += TxtQuoteDate1.Text
+                strWhere += UtilClass.strFormatDate(TxtQuoteDate1.Text)
                 strWhere += "'"
             End If
             If TxtQuoteDate2.Text <> "" Then
@@ -469,7 +469,7 @@ Public Class QuoteList
                 strWhere += "t01.見積日"
                 strWhere += " <=  "
                 strWhere += "'"
-                strWhere += TxtQuoteDate2.Text
+                strWhere += UtilClass.strFormatDate(TxtQuoteDate2.Text)
                 strWhere += "'"
             End If
             If TxtQuoteNo1.Text <> "" Then
@@ -499,7 +499,7 @@ Public Class QuoteList
             If Not ChkExpired.Checked Then
                 strWhere += " and "
                 strWhere += "t01.見積有効期限 >= '"
-                strWhere += dtToday
+                strWhere += strToday
                 strWhere += "'"
             End If
             If Not ChkCancel.Checked Then
@@ -514,7 +514,7 @@ Public Class QuoteList
             End If
             '受発注登録の時は有効期限切れは表示しない
             If _status = CommonConst.STATUS_ORDER_NEW Then
-                strWhere += " and t01.見積有効期限 <= current_date"
+                strWhere += " and t01.見積有効期限 <= '" & UtilClass.strFormatDate(DateTime.Today.ToShortDateString) & "'"
             End If
 
             Sql += strWhere
