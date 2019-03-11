@@ -292,7 +292,7 @@ Public Class OrderingList
                 Sql += " t21.発注番号, t21.発注番号枝番, t21.行番号, t21.仕入区分, t21.メーカー, t21.品名"
                 Sql += ", t21.型式, t21.仕入先名, t21.仕入値, t21.発注数量, t21.仕入数量, t21.発注残数"
                 Sql += ", t21.単位, t21.間接費, t21.仕入金額, t21.リードタイム, t21.貿易条件, t21.入庫数"
-                Sql += ", t21.未入庫数, t21.備考, t21.更新者, t21.登録日, t20.取消区分"
+                Sql += ", t21.未入庫数, t21.備考, t21.リードタイム単位, t21.更新者, t21.登録日, t20.取消区分"
                 Sql += " FROM "
                 Sql += " public.t21_hattyu t21 "
 
@@ -311,7 +311,7 @@ Public Class OrderingList
 
                 If supplierName <> Nothing Then
                     Sql += " AND "
-                    Sql += " 仕入先名 ILIKE '%" & supplierName & "%' "
+                    Sql += " t20.仕入先名 ILIKE '%" & supplierName & "%' "
                 End If
 
                 If supplierAddress <> Nothing Then
@@ -454,12 +454,12 @@ Public Class OrderingList
                     DgvHtyhd.Rows(i).Cells("間接費").Value = ds.Tables(RS).Rows(i)("間接費")
                     DgvHtyhd.Rows(i).Cells("仕入金額").Value = ds.Tables(RS).Rows(i)("仕入金額")
                     If ds.Tables(RS).Rows(i)("リードタイム") Is "" Then
-                        DgvHtyhd.Rows(i).Cells("リードタイム").Value = ds.Tables(RS).Rows(i)("リードタイム")
+                        DgvHtyhd.Rows(i).Cells("リードタイム").Value = ""
                     Else
 
                         'リードタイムのリストを汎用マスタから取得
-                        dsHanyou = getDsHanyoData(CommonConst.FIXED_KEY_READTIME, ds.Tables(RS).Rows(i)("リードタイム").ToString)
-                        DgvHtyhd.Rows(i).Cells("リードタイム").Value = ds.Tables(RS).Rows(i)("リードタイム") & dsHanyou.Tables(RS).Rows(0)("文字１")
+                        dsHanyou = getDsHanyoData(CommonConst.FIXED_KEY_READTIME, ds.Tables(RS).Rows(i)("リードタイム単位").ToString)
+                        DgvHtyhd.Rows(i).Cells("リードタイム").Value = ds.Tables(RS).Rows(i)("リードタイム") & dsHanyou.Tables(RS).Rows(0)("文字１").ToString
 
                     End If
 
