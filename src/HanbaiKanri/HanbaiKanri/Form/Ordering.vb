@@ -162,6 +162,50 @@ Public Class Ordering
     '画面表示時
     Private Sub Ordering_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        Dim dtNow As DateTime = DateTime.Now
+        Dim dtToday As String = formatDatetime(dtNow)
+
+        '汎用マスタからリードタイム単位を取得
+        Dim dsHanyo = getDsHanyoData(CommonConst.FIXED_KEY_READTIME)
+
+        Dim dtReadtime As New DataTable("Table2")
+        dtReadtime.Columns.Add("Display", GetType(String))
+        dtReadtime.Columns.Add("Value", GetType(Integer))
+
+        For index As Integer = 0 To dsHanyo.Tables(RS).Rows.Count - 1
+            dtReadtime.Rows.Add(dsHanyo.Tables(RS).Rows(index)("文字１"), dsHanyo.Tables(RS).Rows(index)("可変キー"))
+        Next
+
+        Dim column2 As New DataGridViewComboBoxColumn()
+        column2.DataSource = dtReadtime
+        column2.ValueMember = "Value"
+        column2.DisplayMember = "Display"
+        column2.HeaderText = "リードタイム単位"
+        column2.Name = "リードタイム単位"
+
+        DgvItemList.Columns.Insert(12, column2)
+
+        '汎用マスタから貿易条件を取得
+        dsHanyo = getDsHanyoData(CommonConst.FIXED_KEY_TRADE_TERMS)
+
+        Dim table3 As New DataTable("Table3")
+        table3.Columns.Add("Display", GetType(String))
+        table3.Columns.Add("Value", GetType(Integer))
+
+        For index As Integer = 0 To dsHanyo.Tables(RS).Rows.Count - 1
+            table3.Rows.Add(dsHanyo.Tables(RS).Rows(index)("文字１"), dsHanyo.Tables(RS).Rows(index)("可変キー"))
+        Next
+
+        Dim column3 As New DataGridViewComboBoxColumn()
+        column3.DataSource = table3
+        column3.ValueMember = "Value"
+        column3.DisplayMember = "Display"
+        column3.HeaderText = "貿易条件"
+        column3.Name = "貿易条件"
+
+        DgvItemList.Columns.Insert(14, column3)
+        CbShippedBy.SelectedIndex = 0
+
         '翻訳
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
             LblPurchaseNo.Text = "PurchaseOrderNo"
@@ -276,49 +320,6 @@ Public Class Ordering
         'DgvItemList.Columns.Insert(1, column)
 
 
-        Dim dtNow As DateTime = DateTime.Now
-        Dim dtToday As String = formatDatetime(dtNow)
-
-        '汎用マスタからリードタイム単位を取得
-        Dim dsHanyo = getDsHanyoData(CommonConst.FIXED_KEY_READTIME)
-
-        Dim dtReadtime As New DataTable("Table2")
-        dtReadtime.Columns.Add("Display", GetType(String))
-        dtReadtime.Columns.Add("Value", GetType(Integer))
-
-        For index As Integer = 0 To dsHanyo.Tables(RS).Rows.Count - 1
-            dtReadtime.Rows.Add(dsHanyo.Tables(RS).Rows(index)("文字１"), dsHanyo.Tables(RS).Rows(index)("可変キー"))
-        Next
-
-        Dim column2 As New DataGridViewComboBoxColumn()
-        column2.DataSource = dtReadtime
-        column2.ValueMember = "Value"
-        column2.DisplayMember = "Display"
-        column2.HeaderText = "リードタイム単位"
-        column2.Name = "リードタイム単位"
-
-        DgvItemList.Columns.Insert(12, column2)
-
-        '汎用マスタから貿易条件を取得
-        dsHanyo = getDsHanyoData(CommonConst.FIXED_KEY_TRADE_TERMS)
-
-        Dim table3 As New DataTable("Table3")
-        table3.Columns.Add("Display", GetType(String))
-        table3.Columns.Add("Value", GetType(Integer))
-
-        For index As Integer = 0 To dsHanyo.Tables(RS).Rows.Count - 1
-            table3.Rows.Add(dsHanyo.Tables(RS).Rows(index)("文字１"), dsHanyo.Tables(RS).Rows(index)("可変キー"))
-        Next
-
-        Dim column3 As New DataGridViewComboBoxColumn()
-        column3.DataSource = table3
-        column3.ValueMember = "Value"
-        column3.DisplayMember = "Display"
-        column3.HeaderText = "貿易条件"
-        column3.Name = "貿易条件"
-
-        DgvItemList.Columns.Insert(14, column3)
-        CbShippedBy.SelectedIndex = 0
 
         '新規登録時の伝票番号取得
         If PurchaseStatus = CommonConst.STATUS_ADD Then
@@ -809,7 +810,7 @@ Public Class Ordering
         Dim strMessageTitle As String = ""      'メッセージタイトル
         ''仕入先は必須入力としましょう
         If TxtSupplierCode.Text = "" Then
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 strMessage = "Please enter Supplier Code. "
                 strMessageTitle = "SupplierCode Error"
             Else
@@ -821,7 +822,7 @@ Public Class Ordering
         End If
         '明細行がゼロ件の場合はエラーとする
         If DgvItemList.Rows.Count = 0 Then
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 strMessage = "Please enter the details. "
                 strMessageTitle = "details Error"
             Else
