@@ -230,6 +230,7 @@ Public Class OrderManagement
             Dim ds2 As DataSet = _db.selectDB(Sql2, RS, reccnt)
             Dim ds3 As DataSet = _db.selectDB(Sql3, RS, reccnt)
             Dim ds4 As DataSet = _db.selectDB(Sql4, RS, reccnt)
+
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 DgvOrder.Columns.Add("明細", "DetailData")
                 DgvOrder.Columns.Add("メーカー", "Manufacturer")
@@ -261,17 +262,17 @@ Public Class OrderManagement
             DgvOrder.Columns(8).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             DgvOrder.Columns(9).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
-            For index As Integer = 0 To ds3.Tables(RS).Rows.Count - 1
+            For i As Integer = 0 To ds3.Tables(RS).Rows.Count - 1
                 DgvOrder.Rows.Add()
-                DgvOrder.Rows(index).Cells(1).Value = ds3.Tables(RS).Rows(index)("メーカー")
-                DgvOrder.Rows(index).Cells(2).Value = ds3.Tables(RS).Rows(index)("品名")
-                DgvOrder.Rows(index).Cells(3).Value = ds3.Tables(RS).Rows(index)("型式")
-                DgvOrder.Rows(index).Cells(4).Value = ds3.Tables(RS).Rows(index)("受注数量")
-                DgvOrder.Rows(index).Cells(5).Value = ds3.Tables(RS).Rows(index)("単位")
-                DgvOrder.Rows(index).Cells(6).Value = ds3.Tables(RS).Rows(index)("売上数量")
-                DgvOrder.Rows(index).Cells(7).Value = ds3.Tables(RS).Rows(index)("売単価")
-                DgvOrder.Rows(index).Cells(8).Value = ds3.Tables(RS).Rows(index)("売上金額")
-                DgvOrder.Rows(index).Cells(9).Value = ds3.Tables(RS).Rows(index)("受注残数")
+                DgvOrder.Rows(i).Cells(1).Value = ds3.Tables(RS).Rows(i)("メーカー")
+                DgvOrder.Rows(i).Cells(2).Value = ds3.Tables(RS).Rows(i)("品名")
+                DgvOrder.Rows(i).Cells(3).Value = ds3.Tables(RS).Rows(i)("型式")
+                DgvOrder.Rows(i).Cells(4).Value = ds3.Tables(RS).Rows(i)("受注数量")
+                DgvOrder.Rows(i).Cells(5).Value = ds3.Tables(RS).Rows(i)("単位")
+                DgvOrder.Rows(i).Cells(6).Value = ds3.Tables(RS).Rows(i)("売上数量")
+                DgvOrder.Rows(i).Cells(7).Value = ds3.Tables(RS).Rows(i)("売単価")
+                DgvOrder.Rows(i).Cells(8).Value = ds3.Tables(RS).Rows(i)("売上金額")
+                DgvOrder.Rows(i).Cells(9).Value = ds3.Tables(RS).Rows(i)("受注残数")
             Next
 
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
@@ -444,6 +445,7 @@ Public Class OrderManagement
 
     Private Sub BtnRegist_Click(sender As Object, e As EventArgs) Handles BtnRegist.Click
         Dim dtToday As DateTime = DateTime.Now
+        Dim strToday As String = UtilClass.formatDatetime(dtToday)
         Dim errFlg As Boolean = True
 
         Dim Sql1 As String = ""
@@ -571,17 +573,17 @@ Public Class OrderManagement
             Sql3 += "', '"
             Sql3 += ds1.Tables(RS).Rows(0)("得意先担当者名").ToString '得意先担当者名
             Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("見積日").ToString '見積日
+            Sql3 += UtilClass.strFormatDate(ds1.Tables(RS).Rows(0)("見積日").ToString) '見積日
             Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("見積有効期限").ToString '見積有効期限
+            Sql3 += UtilClass.strFormatDate(ds1.Tables(RS).Rows(0)("見積有効期限").ToString) '見積有効期限
             Sql3 += "', '"
             Sql3 += ds1.Tables(RS).Rows(0)("支払条件").ToString '支払条件
             Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("見積金額").ToString '見積金額
+            Sql3 += UtilClass.formatNumber(ds1.Tables(RS).Rows(0)("見積金額").ToString) '見積金額
             Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("見積金額").ToString '売上金額
+            Sql3 += UtilClass.formatNumber(ds1.Tables(RS).Rows(0)("見積金額").ToString) '売上金額
             Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("粗利額").ToString '粗利額
+            Sql3 += UtilClass.formatNumber(ds1.Tables(RS).Rows(0)("粗利額").ToString) '粗利額
             Sql3 += "', '"
             Sql3 += ds1.Tables(RS).Rows(0)("営業担当者").ToString '営業担当者
             Sql3 += "', '"
@@ -593,27 +595,27 @@ Public Class OrderManagement
             Sql3 += ", "
             Sql3 += "0" '取消区分
             Sql3 += ", '"
-            Sql3 += ds1.Tables(RS).Rows(0)("ＶＡＴ").ToString 'ＶＡＴ
+            Sql3 += UtilClass.formatNumber(ds1.Tables(RS).Rows(0)("ＶＡＴ").ToString) 'ＶＡＴ
             Sql3 += "', '"
             If ds1.Tables(RS).Rows(0)("ＰＰＨ") Is DBNull.Value Then
                 Sql3 += "0" 'ＰＰＨ
             Else
-                Sql3 += ds1.Tables(RS).Rows(0)("ＰＰＨ").ToString 'ＰＰＨ
+                Sql3 += UtilClass.formatNumber(ds1.Tables(RS).Rows(0)("ＰＰＨ").ToString) 'ＰＰＨ
             End If
             Sql3 += "', '"
-            Sql3 += dtToday '受注日
+            Sql3 += strToday '受注日
             Sql3 += "', '"
-            Sql3 += strFormatDate(DtpOrderDate.Text) '売上日
+            Sql3 += UtilClass.strFormatDate(DtpOrderDate.Text) '売上日
             Sql3 += "', '"
-            Sql3 += strFormatDate(DtpDepositDate.Text) '入金予定日
+            Sql3 += UtilClass.strFormatDate(DtpDepositDate.Text) '入金予定日
             Sql3 += "', '"
-            Sql3 += dtToday '登録日
+            Sql3 += strToday '登録日
             Sql3 += "', '"
-            Sql3 += dtToday '更新日
+            Sql3 += strToday '更新日
             Sql3 += "', '"
-            Sql3 += Input '仕入金額
+            Sql3 += Input '更新者
             Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("仕入金額").ToString '会社コード
+            Sql3 += UtilClass.formatNumber(ds1.Tables(RS).Rows(0)("仕入金額").ToString) '仕入金額
             Sql3 += " ')"
 
 
@@ -648,30 +650,30 @@ Public Class OrderManagement
                 Sql4 += "', '"
                 Sql4 += DgvAdd.Rows(index).Cells("仕入先").Value.ToString
                 Sql4 += "', '"
-                Sql4 += ds2.Tables(RS).Rows(index)("仕入値").ToString
+                Sql4 += UtilClass.formatNumber(ds2.Tables(RS).Rows(index)("仕入値").ToString)
                 Sql4 += "', '"
-                Sql4 += ds2.Tables(RS).Rows(index)("受注数量").ToString
+                Sql4 += UtilClass.formatNumber(ds2.Tables(RS).Rows(index)("受注数量").ToString)
                 Sql4 += "', '"
-                Sql4 += DgvAdd.Rows(index).Cells("売上数量").Value.ToString
+                Sql4 += UtilClass.formatNumber(DgvAdd.Rows(index).Cells("売上数量").Value.ToString)
                 Sql4 += "', '"
 
                 Dim OrderNo As Integer = ds2.Tables(RS).Rows(index)("受注数量")
                 Dim PurchaseNo As Integer = DgvAdd.Rows(index).Cells("売上数量").Value
                 Dim RemainingNo As Integer = OrderNo - PurchaseNo
 
-                Sql4 += RemainingNo.ToString
+                Sql4 += (RemainingNo.ToString)
                 Sql4 += "', '"
                 Sql4 += DgvAdd.Rows(index).Cells("単位").Value
                 Sql4 += "', '"
-                Sql4 += ds2.Tables(RS).Rows(index)("売単価").ToString
+                Sql4 += UtilClass.formatNumber(ds2.Tables(RS).Rows(index)("売単価").ToString)
                 Sql4 += "', '"
-                Sql4 += ds2.Tables(RS).Rows(index)("売上金額").ToString
+                Sql4 += UtilClass.formatNumber(ds2.Tables(RS).Rows(index)("売上金額").ToString)
                 Sql4 += "', '"
-                Sql4 += ds2.Tables(RS).Rows(index)("粗利額").ToString
+                Sql4 += UtilClass.formatNumber(ds2.Tables(RS).Rows(index)("粗利額").ToString)
                 Sql4 += "', '"
-                Sql4 += ds2.Tables(RS).Rows(index)("粗利率").ToString
+                Sql4 += UtilClass.formatNumber(ds2.Tables(RS).Rows(index)("粗利率").ToString)
                 Sql4 += "', '"
-                Sql4 += ds2.Tables(RS).Rows(index)("間接費").ToString
+                Sql4 += UtilClass.formatNumber(ds2.Tables(RS).Rows(index)("間接費").ToString)
                 Sql4 += "', '"
                 Sql4 += ds2.Tables(RS).Rows(index)("リードタイム").ToString
                 Sql4 += "', '"
@@ -679,27 +681,27 @@ Public Class OrderManagement
                 Sql4 += "', '"
                 Sql4 += Input
                 Sql4 += "', '"
-                Sql4 += dtToday
+                Sql4 += strToday
                 Sql4 += "', '"
-                Sql4 += ds2.Tables(RS).Rows(index)("仕入原価").ToString
+                Sql4 += UtilClass.formatNumber(ds2.Tables(RS).Rows(index)("仕入原価").ToString)
                 Sql4 += "', '"
-                Sql4 += ds2.Tables(RS).Rows(index)("関税率").ToString
+                Sql4 += UtilClass.formatNumber(ds2.Tables(RS).Rows(index)("関税率").ToString)
                 Sql4 += "', '"
-                Sql4 += ds2.Tables(RS).Rows(index)("関税額").ToString
+                Sql4 += UtilClass.formatNumber(ds2.Tables(RS).Rows(index)("関税額").ToString)
                 Sql4 += "', '"
-                Sql4 += ds2.Tables(RS).Rows(index)("前払法人税率").ToString
+                Sql4 += UtilClass.formatNumber(ds2.Tables(RS).Rows(index)("前払法人税率").ToString)
                 Sql4 += "', '"
-                Sql4 += ds2.Tables(RS).Rows(index)("前払法人税額").ToString
+                Sql4 += UtilClass.formatNumber(ds2.Tables(RS).Rows(index)("前払法人税額").ToString)
                 Sql4 += "', '"
-                Sql4 += ds2.Tables(RS).Rows(index)("輸送費率").ToString
+                Sql4 += UtilClass.formatNumber(ds2.Tables(RS).Rows(index)("輸送費率").ToString)
                 Sql4 += "', '"
-                Sql4 += ds2.Tables(RS).Rows(index)("輸送費額").ToString
+                Sql4 += UtilClass.formatNumber(ds2.Tables(RS).Rows(index)("輸送費額").ToString)
                 Sql4 += "', '"
-                Sql4 += ds2.Tables(RS).Rows(index)("仕入金額").ToString
+                Sql4 += UtilClass.formatNumber(ds2.Tables(RS).Rows(index)("仕入金額").ToString)
                 Sql4 += "', '"
-                Sql4 += ds2.Tables(RS).Rows(index)("見積単価").ToString
+                Sql4 += UtilClass.formatNumber(ds2.Tables(RS).Rows(index)("見積単価").ToString)
                 Sql4 += "', '"
-                Sql4 += ds2.Tables(RS).Rows(index)("見積金額").ToString
+                Sql4 += UtilClass.formatNumber(ds2.Tables(RS).Rows(index)("見積金額").ToString)
                 Sql4 += " ')"
                 If DgvAdd.Rows(index).Cells("売上数量").Value = 0 Then
                 Else
@@ -730,7 +732,7 @@ Public Class OrderManagement
             Sql5 += "', "
             Sql5 += "更新日"
             Sql5 += " = '"
-            Sql5 += dtToday
+            Sql5 += strToday
             Sql5 += "' "
             Sql5 += "WHERE"
             Sql5 += " 会社コード"
@@ -756,12 +758,12 @@ Public Class OrderManagement
                 Sql6 += "売上数量"
                 Sql6 += " = '"
                 PurchaseNum = ds2.Tables(RS).Rows(index)("売上数量") + DgvAdd.Rows(index).Cells("売上数量").Value
-                Sql6 += PurchaseNum.ToString
+                Sql6 += UtilClass.formatNumber(PurchaseNum.ToString)
                 Sql6 += "', "
                 Sql6 += " 受注残数"
                 Sql6 += " = '"
                 OrdingNum = ds2.Tables(RS).Rows(index)("受注残数") - DgvAdd.Rows(index).Cells("売上数量").Value
-                Sql6 += OrdingNum.ToString
+                Sql6 += UtilClass.formatNumber(OrdingNum.ToString)
                 Sql6 += "', "
                 Sql6 += "更新者"
                 Sql6 += " = '"
@@ -814,7 +816,7 @@ Public Class OrderManagement
                 Sql += "', "
                 Sql += "更新日"
                 Sql += " = '"
-                Sql += dtToday
+                Sql += strToday
                 Sql += "' "
                 Sql += "WHERE"
                 Sql += " 会社コード"
@@ -858,7 +860,7 @@ Public Class OrderManagement
 
     Private Sub Biilng()
         Dim dtToday As DateTime = DateTime.Now
-        Dim strToday As DateTime = formatDatetime(dtToday)
+        Dim strToday As String = UtilClass.formatDatetime(dtToday)
 
         Dim reccnt As Integer = 0
         Dim BillingAmount As Integer = 0
@@ -918,7 +920,7 @@ Public Class OrderManagement
         Sql3 += "', '"
         Sql3 += "1"
         Sql3 += "', '"
-        Sql3 += DtpOrderDate.Value
+        Sql3 += UtilClass.strFormatDate(DtpOrderDate.Value)
         Sql3 += "', '"
         Sql3 += ds1.Tables(RS).Rows(0)("受注番号").ToString
         Sql3 += "', '"
@@ -940,7 +942,7 @@ Public Class OrderManagement
         Sql3 += "', '"
         Sql3 += "0"
         Sql3 += "', '"
-        Sql3 += strFormatDate(DtpDepositDate.Text)
+        Sql3 += UtilClass.strFormatDate(DtpDepositDate.Text)
         Sql3 += "', '"
         Sql3 += strToday
         Sql3 += "', '"
@@ -988,43 +990,5 @@ Public Class OrderManagement
 
         _db.executeDB(Sql4)
     End Sub
-
-    'どんなカルチャーであっても、日本の形式に変換する
-    Private Function strFormatDate(ByVal prmDate As String, Optional ByRef prmFormat As String = "yyyy/MM/dd") As String
-
-        'PCのカルチャーを取得し、それに応じてStringからDatetimeを作成
-        Dim ci As New System.Globalization.CultureInfo(CultureInfo.CurrentCulture.Name.ToString)
-        Dim dateFormat As DateTime = DateTime.Parse(prmDate, ci, System.Globalization.DateTimeStyles.AssumeLocal)
-
-        '日本の形式に書き換える
-        Return dateFormat.ToString(prmFormat)
-    End Function
-
-    'どんなカルチャーであっても、日本の形式に変換する
-    Private Function formatDatetime(ByVal prmDatetime As DateTime) As String
-
-        'PCのカルチャーを取得し、それに応じてStringからDatetimeを作成
-        Dim ciCurrent As New System.Globalization.CultureInfo(CultureInfo.CurrentCulture.Name.ToString)
-        Dim dateFormat As DateTime = DateTime.Parse(prmDatetime.ToString, ciCurrent, System.Globalization.DateTimeStyles.AssumeLocal)
-
-        Dim changeFormat As String = dateFormat.ToString("yyyy/MM/dd HH:mm:ss")
-
-        Dim ciJP As New System.Globalization.CultureInfo(CommonConst.CI_JP)
-        Dim rtnDatetime As DateTime = DateTime.Parse(changeFormat, ciJP, System.Globalization.DateTimeStyles.AssumeLocal)
-
-
-        '日本の形式に書き換える
-        Return changeFormat
-    End Function
-
-    '金額フォーマット（登録の際の小数点指定子）を日本の形式に合わせる
-    '桁区切り記号は外す
-    Private Function formatNumber(ByVal prmVal As Decimal) As String
-
-        Dim nfi As NumberFormatInfo = New CultureInfo(CommonConst.CI_JP, False).NumberFormat
-
-        '日本の形式に書き換える
-        Return prmVal.ToString("F3", nfi) '売掛残高を増やす
-    End Function
 
 End Class
