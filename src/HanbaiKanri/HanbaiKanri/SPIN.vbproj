@@ -740,6 +740,7 @@
     <None Include="bin\BaseXls\PackingList.xlsx" />
     <None Include="bin\BaseXls\Proof.xlsx" />
     <None Include="bin\BaseXls\PurchaseOrder.xlsx" />
+    <None Include="bin\BaseXls\PurchaseStockAmountList.xlsx" />
     <None Include="bin\BaseXls\Quotation.xlsx" />
     <None Include="bin\BaseXls\QuotationRequest.xlsx" />
     <None Include="bin\BaseXls\Quotation_xxx.xlsx" />
