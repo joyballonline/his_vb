@@ -1047,20 +1047,23 @@ Public Class frmC01F30_Menu
     Private Sub selectMenu()
 
         Dim idx As Integer
-
-        '一覧選択行インデックスの取得
-        For Each c As DataGridViewRow In dgvLIST.SelectedRows
-            idx = c.Index
-            Exit For
-        Next c
-
-        Console.WriteLine(TabProcessingMenu.SelectedIndex.ToString())
-
         Dim selectID As String = ""
 
         If TabProcessingMenu.SelectedIndex.ToString() = 0 Then
+            '一覧選択行インデックスの取得
+            For Each c As DataGridViewRow In dgvLIST.SelectedRows
+                idx = c.Index
+                Exit For
+            Next c
+
             selectID = dgvLIST.Rows(idx).Cells(0).Value   '選択処理ＩＤ
         ElseIf TabProcessingMenu.SelectedIndex.ToString() = 1 Then
+            '一覧選択行インデックスの取得
+            For Each c As DataGridViewRow In dgvMasterList.SelectedRows
+                idx = c.Index
+                Exit For
+            Next c
+
             selectID = dgvMasterList.Rows(idx).Cells(0).Value   '選択処理ＩＤ
         End If
 
@@ -1468,6 +1471,12 @@ Public Class frmC01F30_Menu
             Case CommonConst.MENU_M0180    '勘定科目マスタ一覧
                 Dim openForm As Form = Nothing
                 openForm = New MstAccount(_msgHd, _db, _langHd)
+                openForm.Show()
+                Me.Hide()
+                 '-----------------------------------
+            Case CommonConst.MENU_M0190    '倉庫マスタ一覧
+                Dim openForm As Form = Nothing
+                openForm = New MstWarehouse(_msgHd, _db, _langHd)
                 openForm.Show()
                 Me.Hide()
                 '-----------------------------------
