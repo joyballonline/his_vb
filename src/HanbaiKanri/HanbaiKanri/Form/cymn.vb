@@ -209,6 +209,7 @@ Public Class Cymn
         DtpOrderRegistration.Value = dtNow
         DtpOrderDate.Value = dtNow
         DtpPurchaseDate.Value = dtNow
+
         'たぶんこの記述だけでDBNull攻略できる（はず）
         '見積入力と同様
         'If ds1.Tables(RS).Rows(0)("見積番号") IsNot DBNull.Value Then
@@ -311,6 +312,11 @@ Public Class Cymn
         Next
 
         TxtPph.Text = Total
+
+        '日付のMinDate設定
+        DtpOrderDate.MinDate = DtpQuoteDate.Value
+        DtpPurchaseDate.MinDate = DtpQuoteDate.Value
+
 
         '行番号の振り直し
         Dim i As Integer = DgvItemList.Rows.Count()
@@ -1004,4 +1010,22 @@ Public Class Cymn
         Return decVal.ToString("F3", nfi)
     End Function
 
+    '受注日変更時
+    Private Sub DtpOrderDate_ValueChanged(sender As Object, e As EventArgs) Handles DtpOrderDate.ValueChanged
+
+        '発注日が受注日より小さかったら
+        If DtpOrderDate.Value.ToString("yyyyMMdd") > DtpPurchaseDate.Value.ToString("yyyyMMdd") Then
+            DtpPurchaseDate.Value = DtpOrderDate.Value
+        End If
+
+    End Sub
+
+    '発注日変更時
+    Private Sub DtpPurchaseDate_ValueChanged(sender As Object, e As EventArgs) Handles DtpPurchaseDate.ValueChanged
+        '発注日が受注日より小さかったら
+        If DtpOrderDate.Value.ToString("yyyyMMdd") > DtpPurchaseDate.Value.ToString("yyyyMMdd") Then
+            DtpOrderDate.Value = DtpPurchaseDate.Value
+        End If
+
+    End Sub
 End Class
