@@ -38,6 +38,7 @@ Public Class MakerSearch
     Private Maker As String
     Private Item As String
     Private Model As String
+    Private SelectColumn As String
     Private _status As String
     '-------------------------------------------------------------------------------
     'デフォルトコンストラクタ（隠蔽）
@@ -58,6 +59,7 @@ Public Class MakerSearch
                    ByRef prmRefMaker As String,
                    ByRef prmRefItem As String,
                    ByRef prmRefModel As String,
+                   Optional ByRef prmRefSelectColumn As String = "",
                    Optional ByRef prmRefStatus As String = "")
         Call Me.New()
 
@@ -70,6 +72,7 @@ Public Class MakerSearch
         _parentForm = prmRefForm
         RowIdx = prmRefRowIdx
         ColIdx = prmRefColIdx
+        SelectColumn = prmRefSelectColumn
         Maker = prmRefMaker
         Item = prmRefItem
         Model = prmRefModel
@@ -83,7 +86,7 @@ Public Class MakerSearch
     End Sub
 
     Private Sub MstHanyoue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If frmC01F10_Login.loginValue.Language = "ENG" Then
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
             LblMaker.Text = "Maker"
             LblItem.Text = "Item"
             LblModel.Text = "Model"
@@ -91,35 +94,39 @@ Public Class MakerSearch
             BtnBack.Text = "Back"
 
         End If
+
         Dim Sql As String = ""
+        Dim reccnt As Integer = 0
+
         Try
-            If ColIdx = 2 Then
-                LbMaker.Items.Clear()
-                LbItem.Items.Clear()
-                LbModel.Items.Clear()
-                Sql += "SELECT "
+            '一覧クリア
+            LbMaker.Items.Clear()
+            LbItem.Items.Clear()
+            LbModel.Items.Clear()
+
+            If SelectColumn = "メーカー" Then
+                Sql = "SELECT "
                 Sql += "メーカー "
                 Sql += "FROM "
                 Sql += "public"
                 Sql += "."
                 Sql += "t02_mitdt"
+                Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
 
-                Dim reccnt As Integer = 0
                 Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
 
                 '重複無しのメーカリスト
-                For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-                    If LbMaker.Items.Contains(ds.Tables(RS).Rows(index)(0)) = False Then
-                        LbMaker.Items.Add(ds.Tables(RS).Rows(index)(0))
+                For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+                    If LbMaker.Items.Contains(ds.Tables(RS).Rows(i)(0)) = False Then
+                        LbMaker.Items.Add(ds.Tables(RS).Rows(i)(0))
                     End If
                 Next
-            ElseIf ColIdx = 3 Then
-                LbMaker.Items.Clear()
-                LbItem.Items.Clear()
-                LbModel.Items.Clear()
+
+            ElseIf SelectColumn = "品名" Then
+
                 LbMaker.Items.Add(Maker)
                 LbMaker.SetSelected(0, True)
-                Sql += "SELECT "
+                Sql = "SELECT "
                 Sql += " 品名 "
                 Sql += "FROM "
                 Sql += "public"
@@ -127,23 +134,20 @@ Public Class MakerSearch
                 Sql += "t02_mitdt"
                 Sql += " WHERE "
                 Sql += "メーカー"
-                Sql += " ILIKE "
-                Sql += "'%"
+                Sql += " = "
+                Sql += "'"
                 Sql += Maker
-                Sql += "%'"
+                Sql += "'"
+                Sql += " AND 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
 
-                Dim reccnt As Integer = 0
                 Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-                For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-                    If LbItem.Items.Contains(ds.Tables(RS).Rows(index)(0)) = False Then
-                        LbItem.Items.Add(ds.Tables(RS).Rows(index)(0))
+                For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+                    If LbItem.Items.Contains(ds.Tables(RS).Rows(i)(0)) = False Then
+                        LbItem.Items.Add(ds.Tables(RS).Rows(i)(0))
                     End If
                 Next
-            ElseIf ColIdx = 4 Then
-                LbMaker.Items.Clear()
-                LbItem.Items.Clear()
-                LbModel.Items.Clear()
+            ElseIf SelectColumn = "型式" Then
                 LbMaker.Items.Add(Maker)
                 LbMaker.SetSelected(0, True)
                 LbItem.Items.Add(Item)
@@ -157,17 +161,16 @@ Public Class MakerSearch
                 Sql += "t02_mitdt"
                 Sql += " WHERE "
                 Sql += "品名"
-                Sql += " ILIKE "
-                Sql += "'%"
+                Sql += " = '"
                 Sql += Item
-                Sql += "%'"
+                Sql += "'"
+                Sql += " AND 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
 
-                Dim reccnt As Integer = 0
                 Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-                For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-                    If LbModel.Items.Contains(ds.Tables(RS).Rows(index)(0)) = False Then
-                        LbModel.Items.Add(ds.Tables(RS).Rows(index)(0))
+                For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+                    If LbModel.Items.Contains(ds.Tables(RS).Rows(i)(0)) = False Then
+                        LbModel.Items.Add(ds.Tables(RS).Rows(i)(0))
                     End If
                 Next
             End If
@@ -257,41 +260,27 @@ Public Class MakerSearch
 
     End Sub
 
+    '選択ボタン押下時
     Private Sub BtnSelectMaker_Click(sender As Object, e As EventArgs) Handles BtnSelect.Click
-        If _status = CommonConst.STATUS_ADD Then
-            Dim frm As OrderingAdd = CType(Me.Owner, OrderingAdd)
-            If LbMaker.SelectedIndex > -1 Then
-                frm.DgvItemList.Rows(RowIdx).Cells(2).Value = LbMaker.SelectedItem
-                If LbItem.SelectedIndex > -1 Then
-                    frm.DgvItemList.Rows(RowIdx).Cells(3).Value = LbItem.SelectedItem
-                    If LbModel.SelectedIndex > -1 Then
-                        frm.DgvItemList.Rows(RowIdx).Cells(4).Value = LbModel.SelectedItem
-                    End If
-                End If
-            End If
-        ElseIf _status = CommonConst.STATUS_CLONE Then
+
+        If _status = CommonConst.STATUS_CLONE Then
+            '複製モード
             Dim frm As Ordering = CType(Me.Owner, Ordering)
-            If LbMaker.SelectedIndex > -1 Then
-                frm.DgvItemList.Rows(RowIdx).Cells(2).Value = LbMaker.SelectedItem
-                If LbItem.SelectedIndex > -1 Then
-                    frm.DgvItemList.Rows(RowIdx).Cells(3).Value = LbItem.SelectedItem
-                    If LbModel.SelectedIndex > -1 Then
-                        frm.DgvItemList.Rows(RowIdx).Cells(4).Value = LbModel.SelectedItem
-                    End If
-                End If
-            End If
+
+            frm.DgvItemList("メーカー", RowIdx).Value = IIf(LbMaker.SelectedIndex > -1, LbMaker.SelectedItem, "")
+            frm.DgvItemList("品名", RowIdx).Value = IIf(LbItem.SelectedIndex > -1, LbItem.SelectedItem, "")
+            frm.DgvItemList("型式", RowIdx).Value = IIf(LbModel.SelectedIndex > -1, LbModel.SelectedItem, "")
+
         Else
+            '見積登録モード
             Dim frm As Quote = CType(Me.Owner, Quote)
-            If LbMaker.SelectedIndex > -1 Then
-                frm.DgvItemList.Rows(RowIdx).Cells(2).Value = LbMaker.SelectedItem
-                If LbItem.SelectedIndex > -1 Then
-                    frm.DgvItemList.Rows(RowIdx).Cells(3).Value = LbItem.SelectedItem
-                    If LbModel.SelectedIndex > -1 Then
-                        frm.DgvItemList.Rows(RowIdx).Cells(4).Value = LbModel.SelectedItem
-                    End If
-                End If
-            End If
+            frm.DgvItemList("メーカー", RowIdx).Value = IIf(LbMaker.SelectedIndex > -1, LbMaker.SelectedItem, "")
+            frm.DgvItemList("品名", RowIdx).Value = IIf(LbItem.SelectedIndex > -1, LbItem.SelectedItem, "")
+            frm.DgvItemList("型式", RowIdx).Value = IIf(LbModel.SelectedIndex > -1, LbModel.SelectedItem, "")
+
         End If
+
+
         _parentForm.Enabled = True
         _parentForm.Show()
         Me.Dispose()

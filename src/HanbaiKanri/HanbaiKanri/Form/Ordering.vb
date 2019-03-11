@@ -774,61 +774,32 @@ Public Class Ordering
     Private Sub DgvItemList_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) _
      Handles DgvItemList.CellDoubleClick
         Dim Status As String = CommonConst.STATUS_CLONE
-        Dim ColIdx As Integer
-        ColIdx = DgvItemList.CurrentCell.ColumnIndex
-        Dim RowIdx As Integer
-        RowIdx = DgvItemList.CurrentCell.RowIndex
 
-        Dim Maker As String = DgvItemList.Rows(RowIdx).Cells(2).Value
-        Dim Item As String = DgvItemList.Rows(RowIdx).Cells(3).Value
-        Dim Model As String = DgvItemList.Rows(RowIdx).Cells(4).Value
+        Dim selectColumn As String = DgvItemList.Columns(e.ColumnIndex).HeaderText
 
-        If ColIdx = 2 Then                  'メーカー検索
+        Dim Maker As String = DgvItemList("メーカー", e.RowIndex).Value
+        Dim Item As String = DgvItemList("品名", e.RowIndex).Value
+        Dim Model As String = DgvItemList("型式", e.RowIndex).Value
+
+        If selectColumn = "メーカー" Or selectColumn = "品名" Or selectColumn = "型式" Then
+            '各項目チェック
+            If selectColumn = "型式" And (Maker Is Nothing And Item Is Nothing) Then
+                'メーカー、品名を入力してください。
+                _msgHd.dspMSG("chkManufacturerItemNameError", frmC01F10_Login.loginValue.Language)
+                Return
+
+            ElseIf selectColumn = "品名" And (Maker Is Nothing) Then
+                'メーカーを入力してください。
+                _msgHd.dspMSG("chkManufacturerError", frmC01F10_Login.loginValue.Language)
+                Return
+            End If
+
             Dim openForm As Form = Nothing
-            openForm = New MakerSearch(_msgHd, _db, Me, RowIdx, ColIdx, Maker, Item, Model, Status)   '処理選択
+            openForm = New MakerSearch(_msgHd, _db, Me, e.RowIndex, e.ColumnIndex, Maker, Item, Model, selectColumn, Status)   '処理選択
             openForm.Show(Me)
             Me.Enabled = False
         End If
 
-        If ColIdx = 3 Then              '品名検索
-            If Maker IsNot Nothing Then
-                Dim openForm As Form = Nothing
-                openForm = New MakerSearch(_msgHd, _db, Me, RowIdx, ColIdx, Maker, Item, Model, Status)   '処理選択
-                openForm.Show(Me)
-                Me.Enabled = False
-            Else
-                If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-                    MessageBox.Show("Please enter the maker.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                Else
-                    MessageBox.Show("メーカーを入力してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                End If
-
-            End If
-        End If
-
-        If ColIdx = 4 Then
-            If Maker IsNot Nothing And Item IsNot Nothing Then
-                Dim openForm As Form = Nothing
-                openForm = New MakerSearch(_msgHd, _db, Me, RowIdx, ColIdx, Maker, Item, Model, Status)
-                openForm.Show(Me)
-                Me.Enabled = False
-            Else
-                If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-                    MessageBox.Show("Please enter the maker and item.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                Else
-                    MessageBox.Show("メーカー、品名を入力してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                End If
-
-            End If
-        End If
-
-        If ColIdx = 15 Then
-            Dim PageStatus As String = "Ordering"
-            Dim openForm As Form = Nothing
-            openForm = New RemarksInput(_msgHd, _db, _langHd, RowIdx, Me, PageStatus)
-            openForm.Show(Me)
-            Me.Enabled = False
-        End If
     End Sub
 
     '登録ボタン押下時

@@ -149,7 +149,7 @@ Public Class Quote
         table2.Columns.Add("Value", GetType(Integer))
 
         For i As Integer = 0 To ds12.Tables(RS).Rows.Count - 1
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 table2.Rows.Add(ds12.Tables(RS).Rows(i)("文字２"), ds12.Tables(RS).Rows(i)("可変キー"))
             Else
                 table2.Rows.Add(ds12.Tables(RS).Rows(i)("文字１"), ds12.Tables(RS).Rows(i)("可変キー"))
@@ -166,7 +166,7 @@ Public Class Quote
 
         DgvItemList.Columns.Insert(25, column2)
 
-        If frmC01F10_Login.loginValue.Language = "ENG" Then
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
             LblMode.Text = "Mode"
             LblQuoteNo.Text = "QuotationNo"
             LblRegistration.Text = "RegistrationDate"
@@ -471,7 +471,7 @@ Public Class Quote
         End If
 
         If Status Is CommonConst.STATUS_VIEW Then
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "ViewMode"
             Else
                 LblMode.Text = "参照モード"
@@ -514,7 +514,7 @@ Public Class Quote
 
         ElseIf Status Is CommonConst.STATUS_PRICE Then
             '仕入単価入力モード
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "PurchasePriceInputMode"
             Else
                 LblMode.Text = "仕入単価入力モード"
@@ -538,14 +538,14 @@ Public Class Quote
             DgvItemList.Columns("仕入先").ReadOnly = True
 
         ElseIf Status Is CommonConst.STATUS_EDIT Then
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "EditMode"
             Else
                 LblMode.Text = "編集モード"
             End If
 
         ElseIf Status Is CommonConst.STATUS_ADD Then
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "NewRegistrationMode"
             Else
                 LblMode.Text = "新規登録モード"
@@ -980,78 +980,39 @@ Public Class Quote
             Exit Sub
         End If
 
-        Dim ColIdx As Integer
-        ColIdx = DgvItemList.CurrentCell.ColumnIndex
-        Dim RowIdx As Integer
-        RowIdx = DgvItemList.CurrentCell.RowIndex
+        Dim selectColumn As String = DgvItemList.Columns(e.ColumnIndex).HeaderText
 
-        Dim Maker As String = DgvItemList.Rows(RowIdx).Cells("メーカー").Value
-        Dim Item As String = DgvItemList.Rows(RowIdx).Cells("品名").Value
-        Dim Model As String = DgvItemList.Rows(RowIdx).Cells("型式").Value
+        Dim Maker As String = DgvItemList("メーカー", e.RowIndex).Value
+        Dim Item As String = DgvItemList("品名", e.RowIndex).Value
+        Dim Model As String = DgvItemList("型式", e.RowIndex).Value
 
-        If ColIdx = 2 Then                  'メーカー検索
-            Dim openForm As Form = Nothing
-            openForm = New MakerSearch(_msgHd, _db, Me, RowIdx, ColIdx, Maker, Item, Model)   '処理選択
-            openForm.Show(Me)
-            Me.Enabled = False
-        End If
+        If selectColumn = "メーカー" Or selectColumn = "品名" Or selectColumn = "型式" Then
+            '各項目チェック
+            If selectColumn = "型式" And (Maker Is Nothing And Item Is Nothing) Then
+                'メーカー、品名を入力してください。
+                _msgHd.dspMSG("chkManufacturerItemNameError", frmC01F10_Login.loginValue.Language)
+                Return
 
-        If ColIdx = 3 Then              '品名検索
-            If Maker IsNot Nothing Then
-                Dim openForm As Form = Nothing
-                openForm = New MakerSearch(_msgHd, _db, Me, RowIdx, ColIdx, Maker, Item, Model)   '処理選択
-                openForm.Show(Me)
-                Me.Enabled = False
-            Else
-                If frmC01F10_Login.loginValue.Language = "ENG" Then
-                    MessageBox.Show("Please enter the maker.",
-                "エラー",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Error)
-                Else
-                    MessageBox.Show("メーカーを入力してください。",
-                "エラー",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Error)
-                End If
-
+            ElseIf selectColumn = "品名" And (Maker Is Nothing) Then
+                'メーカーを入力してください。
+                _msgHd.dspMSG("chkManufacturerError", frmC01F10_Login.loginValue.Language)
+                Return
             End If
-        End If
 
-        If ColIdx = 4 Then      '型式検索
-            If Maker IsNot Nothing And Item IsNot Nothing Then
-                Dim openForm As Form = Nothing
-                openForm = New MakerSearch(_msgHd, _db, Me, RowIdx, ColIdx, Maker, Item, Model)
-                openForm.Show(Me)
-                Me.Enabled = False
-            Else
-                If frmC01F10_Login.loginValue.Language = "ENG" Then
-                    MessageBox.Show("Please enter the maker and item.",
-                "エラー",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Error)
-                Else
-                    MessageBox.Show("メーカー、品名を入力してください。",
-                "エラー",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Error)
-                End If
-            End If
-        End If
-
-        If ColIdx = 8 Then '仕入先検索
             Dim openForm As Form = Nothing
-            openForm = New SupplierSearch(_msgHd, _db, _langHd, RowIdx, Me)
+            openForm = New MakerSearch(_msgHd, _db, Me, e.RowIndex, e.ColumnIndex, Maker, Item, Model, selectColumn)   '処理選択
             openForm.Show(Me)
             Me.Enabled = False
         End If
 
-        If ColIdx = 26 Then
+
+        If selectColumn = "仕入先名" Then '仕入先検索
             Dim openForm As Form = Nothing
-            openForm = New RemarksInput(_msgHd, _db, _langHd, RowIdx, Me)
+            openForm = New SupplierSearch(_msgHd, _db, _langHd, e.RowIndex, Me)
             openForm.Show(Me)
             Me.Enabled = False
         End If
+
     End Sub
 
     Private Sub BtnUp_Click(sender As Object, e As EventArgs) Handles BtnUp.Click
@@ -1090,7 +1051,7 @@ Public Class Quote
         Dim strMessageTitle As String = ""      'メッセージタイトル
         ''得意先は必須入力としましょう
         If TxtCustomerCode.Text = "" Then
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 strMessage = "Please enter Customer Code. "
                 strMessageTitle = "CustomerCode Error"
             Else
@@ -1102,7 +1063,7 @@ Public Class Quote
         End If
         '明細行がゼロ件の場合はエラーとする
         If DgvItemList.Rows.Count = 0 Then
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 strMessage = "Please enter the details. "
                 strMessageTitle = "details Error"
             Else
@@ -1114,7 +1075,7 @@ Public Class Quote
         End If
         'TxtVatの属性チェック
         If Not IsNumeric(TxtVat.Text) Then
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 strMessage = "Please enter with 0<= VAT <100. "
                 strMessageTitle = "VAT Error"
             Else
@@ -1125,7 +1086,7 @@ Public Class Quote
             Exit Sub
         End If
         If CDec(TxtVat.Text) < 0 Then
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 strMessage = "Please enter with 0<= VAT <100. "
                 strMessageTitle = "VAT Error"
             Else
@@ -1136,7 +1097,7 @@ Public Class Quote
             Exit Sub
         End If
         If CDec(TxtVat.Text) >= 100 Then
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 strMessage = "Please enter with 0<= VAT <100. "
                 strMessageTitle = "VAT Error"
             Else
@@ -1148,7 +1109,7 @@ Public Class Quote
         End If
         '有効期限として指定できる日付は見積日以降
         If DtpQuote.Value > DtpExpiration.Value Then
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 strMessage = "Please enter with QuoteDate <= ExpirationDate. "
                 strMessageTitle = "ExpirationDate Error"
             Else
@@ -1739,7 +1700,7 @@ Public Class Quote
                 cell = "Z" & currentCnt
                 tmp1 = ""
                 tmp1 += ds3.Tables(RS).Rows(index)("リードタイム")
-                If frmC01F10_Login.loginValue.Language = "ENG" Then
+                If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                     tmp1 += ds5.Tables(RS).Rows(0)("文字２")
                 Else
                     tmp1 += ds5.Tables(RS).Rows(0)("文字１")

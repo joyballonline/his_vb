@@ -1044,4 +1044,23 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
     <MEMO></MEMO>
   </MSG_DATA>
+  <MSG_DATA>
+    <ID>chkManufacturerError</ID>
+    <MSG1>メーカーを入力してください。</MSG1>
+    <MSG1_EN>Please enter the manufacturer.</MSG1_EN>
+    <BUTTON_TYPE>OK</BUTTON_TYPE>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+    <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
+    <MEMO></MEMO>
+  </MSG_DATA>
+  <MSG_DATA>
+    <ID>chkManufacturerItemNameError</ID>
+    <MSG1>メーカー、品名を入力してください。</MSG1>
+    <MSG1_EN>Please enter manufacturer and item name.</MSG1_EN>
+    <BUTTON_TYPE>OK</BUTTON_TYPE>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+    <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
+    <MEMO></MEMO>
+  </MSG_DATA>
+
 </MSG_DEF>

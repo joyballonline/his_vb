@@ -516,7 +516,7 @@ Public Class PurchasingManagement
 
         If chkCount <= 0 Then
             '対象データがないメッセージを表示
-            _msgHd.dspMSG("chkAPAddError", frmC01F10_Login.loginValue.Language)
+            _msgHd.dspMSG("chkPurchaseAddError", frmC01F10_Login.loginValue.Language)
 
             Return
         End If
