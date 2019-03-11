@@ -80,6 +80,7 @@ Public Class MstWarehouse
             Dgv_Account.Columns("倉庫コード").HeaderText = "WarehouseCode"
             Dgv_Account.Columns("名称").HeaderText = "Name"
             Dgv_Account.Columns("略称").HeaderText = "ShortName"
+            Dgv_Account.Columns("保税有無").HeaderText = "PresenceOfBondedBonds"
             Dgv_Account.Columns("備考").HeaderText = "Remarks"
             Dgv_Account.Columns("無効フラグ").HeaderText = "InvalidFlag"
             Dgv_Account.Columns("更新者").HeaderText = "ModifiedBy"
@@ -126,6 +127,7 @@ Public Class MstWarehouse
                 Dgv_Account.Rows(i).Cells("倉庫コード").Value = ds.Tables(RS).Rows(i)("倉庫コード")
                 Dgv_Account.Rows(i).Cells("名称").Value = ds.Tables(RS).Rows(i)("名称")
                 Dgv_Account.Rows(i).Cells("略称").Value = ds.Tables(RS).Rows(i)("略称")
+                Dgv_Account.Rows(i).Cells("保税有無").Value = setCBText(ds.Tables(RS).Rows(i)("保税有無"))
                 Dgv_Account.Rows(i).Cells("備考").Value = ds.Tables(RS).Rows(i)("備考")
                 Dgv_Account.Rows(i).Cells("無効フラグ").Value = setEnabledText(ds.Tables(RS).Rows(i)("無効フラグ"))
                 Dgv_Account.Rows(i).Cells("更新者").Value = ds.Tables(RS).Rows(i)("更新者")
@@ -203,7 +205,25 @@ Public Class MstWarehouse
     End Function
 
     Private Function setEnabledText(ByVal prmVal As String) As String
-        Dim reVal As String = IIf(Integer.Parse(prmVal) = CommonConst.FLAG_ENABLED, CommonConst.FLAG_ENABLED_TXT, CommonConst.FLAG_DISABLED_TXT)
+        Dim reVal As String
+
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+            reVal = IIf(Integer.Parse(prmVal) = CommonConst.FLAG_ENABLED, CommonConst.FLAG_ENABLED_TXT_ENG, CommonConst.FLAG_DISABLED_TXT_ENG)
+        Else
+            reVal = IIf(Integer.Parse(prmVal) = CommonConst.FLAG_ENABLED, CommonConst.FLAG_ENABLED_TXT, CommonConst.FLAG_DISABLED_TXT)
+        End If
+
+        Return reVal
+    End Function
+
+    Private Function setCBText(ByVal prmVal As String) As String
+        Dim reVal As String
+
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+            reVal = IIf(Integer.Parse(prmVal) = CommonConst.CB_KBN_MOT_AVAILABLE, CommonConst.FLAG_ENABLED_TXT_ENG, CommonConst.FLAG_DISABLED_TXT_ENG)
+        Else
+            reVal = IIf(Integer.Parse(prmVal) = CommonConst.CB_KBN_MOT_AVAILABLE, CommonConst.FLAG_ENABLED_TXT, CommonConst.FLAG_DISABLED_TXT)
+        End If
 
         Return reVal
     End Function

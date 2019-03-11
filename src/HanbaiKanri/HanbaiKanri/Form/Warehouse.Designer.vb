@@ -35,6 +35,8 @@ Partial Class Warehouse
         Me.btnBack = New System.Windows.Forms.Button()
         Me.cmbInvalidFlag = New System.Windows.Forms.ComboBox()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.LblCustomsBondKbn = New System.Windows.Forms.Label()
+        Me.cmCustomsBondKbn = New System.Windows.Forms.ComboBox()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -74,12 +76,11 @@ Partial Class Warehouse
         'LblRemarks
         '
         Me.LblRemarks.AutoSize = True
-        Me.LblRemarks.Dock = System.Windows.Forms.DockStyle.Top
         Me.LblRemarks.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblRemarks.Location = New System.Drawing.Point(3, 84)
+        Me.LblRemarks.Location = New System.Drawing.Point(3, 113)
         Me.LblRemarks.Name = "LblRemarks"
         Me.LblRemarks.Padding = New System.Windows.Forms.Padding(0, 3, 0, 0)
-        Me.LblRemarks.Size = New System.Drawing.Size(148, 18)
+        Me.LblRemarks.Size = New System.Drawing.Size(37, 18)
         Me.LblRemarks.TabIndex = 182
         Me.LblRemarks.Text = "備考"
         '
@@ -88,7 +89,7 @@ Partial Class Warehouse
         Me.LblInvalidFlag.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.LblInvalidFlag.AutoSize = True
         Me.LblInvalidFlag.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblInvalidFlag.Location = New System.Drawing.Point(3, 228)
+        Me.LblInvalidFlag.Location = New System.Drawing.Point(3, 257)
         Me.LblInvalidFlag.Name = "LblInvalidFlag"
         Me.LblInvalidFlag.Size = New System.Drawing.Size(69, 15)
         Me.LblInvalidFlag.TabIndex = 188
@@ -128,20 +129,20 @@ Partial Class Warehouse
         '
         Me.TxtRemarks.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.TxtRemarks.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtRemarks.Location = New System.Drawing.Point(157, 87)
+        Me.TxtRemarks.Location = New System.Drawing.Point(157, 116)
         Me.TxtRemarks.MaxLength = 50
         Me.TxtRemarks.Multiline = True
         Me.TxtRemarks.Name = "TxtRemarks"
         Me.TxtRemarks.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal
         Me.TxtRemarks.Size = New System.Drawing.Size(234, 129)
-        Me.TxtRemarks.TabIndex = 4
+        Me.TxtRemarks.TabIndex = 5
         '
         'btnAddAccount
         '
         Me.btnAddAccount.Location = New System.Drawing.Point(381, 509)
         Me.btnAddAccount.Name = "btnAddAccount"
         Me.btnAddAccount.Size = New System.Drawing.Size(165, 40)
-        Me.btnAddAccount.TabIndex = 2
+        Me.btnAddAccount.TabIndex = 7
         Me.btnAddAccount.Text = "登録"
         Me.btnAddAccount.UseVisualStyleBackColor = True
         '
@@ -151,7 +152,7 @@ Partial Class Warehouse
         Me.btnBack.Location = New System.Drawing.Point(552, 509)
         Me.btnBack.Name = "btnBack"
         Me.btnBack.Size = New System.Drawing.Size(165, 40)
-        Me.btnBack.TabIndex = 3
+        Me.btnBack.TabIndex = 8
         Me.btnBack.Text = "戻る"
         Me.btnBack.UseVisualStyleBackColor = True
         '
@@ -161,10 +162,11 @@ Partial Class Warehouse
         Me.cmbInvalidFlag.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbInvalidFlag.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.cmbInvalidFlag.FormattingEnabled = True
-        Me.cmbInvalidFlag.Location = New System.Drawing.Point(157, 224)
+        Me.cmbInvalidFlag.ItemHeight = 15
+        Me.cmbInvalidFlag.Location = New System.Drawing.Point(157, 253)
         Me.cmbInvalidFlag.Name = "cmbInvalidFlag"
         Me.cmbInvalidFlag.Size = New System.Drawing.Size(234, 23)
-        Me.cmbInvalidFlag.TabIndex = 7
+        Me.cmbInvalidFlag.TabIndex = 6
         '
         'TableLayoutPanel1
         '
@@ -173,24 +175,49 @@ Partial Class Warehouse
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70.07722!))
         Me.TableLayoutPanel1.Controls.Add(Me.LblWarehouseCode, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.TxtWarehouseCode, 1, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.TxtName, 1, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.LblShortName, 0, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.TxtShortName, 1, 2)
-        Me.TableLayoutPanel1.Controls.Add(Me.LblRemarks, 0, 3)
-        Me.TableLayoutPanel1.Controls.Add(Me.TxtRemarks, 1, 3)
         Me.TableLayoutPanel1.Controls.Add(Me.LblName, 0, 1)
-        Me.TableLayoutPanel1.Controls.Add(Me.LblInvalidFlag, 0, 4)
-        Me.TableLayoutPanel1.Controls.Add(Me.cmbInvalidFlag, 1, 4)
+        Me.TableLayoutPanel1.Controls.Add(Me.LblInvalidFlag, 0, 5)
+        Me.TableLayoutPanel1.Controls.Add(Me.LblCustomsBondKbn, 0, 3)
+        Me.TableLayoutPanel1.Controls.Add(Me.TxtRemarks, 1, 4)
+        Me.TableLayoutPanel1.Controls.Add(Me.LblRemarks, 0, 4)
+        Me.TableLayoutPanel1.Controls.Add(Me.cmbInvalidFlag, 1, 5)
+        Me.TableLayoutPanel1.Controls.Add(Me.cmCustomsBondKbn, 1, 3)
+        Me.TableLayoutPanel1.Controls.Add(Me.TxtName, 1, 1)
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(12, 12)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
-        Me.TableLayoutPanel1.RowCount = 5
+        Me.TableLayoutPanel1.RowCount = 6
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(518, 253)
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(518, 282)
         Me.TableLayoutPanel1.TabIndex = 1
+        '
+        'LblCustomsBondKbn
+        '
+        Me.LblCustomsBondKbn.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.LblCustomsBondKbn.AutoSize = True
+        Me.LblCustomsBondKbn.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblCustomsBondKbn.Location = New System.Drawing.Point(3, 91)
+        Me.LblCustomsBondKbn.Name = "LblCustomsBondKbn"
+        Me.LblCustomsBondKbn.Size = New System.Drawing.Size(67, 15)
+        Me.LblCustomsBondKbn.TabIndex = 189
+        Me.LblCustomsBondKbn.Text = "保税有無"
+        '
+        'cmCustomsBondKbn
+        '
+        Me.cmCustomsBondKbn.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.cmCustomsBondKbn.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmCustomsBondKbn.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.cmCustomsBondKbn.FormattingEnabled = True
+        Me.cmCustomsBondKbn.Location = New System.Drawing.Point(157, 87)
+        Me.cmCustomsBondKbn.Name = "cmCustomsBondKbn"
+        Me.cmCustomsBondKbn.Size = New System.Drawing.Size(234, 23)
+        Me.cmCustomsBondKbn.TabIndex = 4
         '
         'Warehouse
         '
@@ -220,4 +247,6 @@ Partial Class Warehouse
     Friend WithEvents btnBack As Button
     Friend WithEvents cmbInvalidFlag As ComboBox
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
+    Friend WithEvents LblCustomsBondKbn As Label
+    Friend WithEvents cmCustomsBondKbn As ComboBox
 End Class

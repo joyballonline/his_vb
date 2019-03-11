@@ -85,7 +85,7 @@ Public Class Warehouse
                 Sql = "INSERT INTO "
                 Sql += "Public."
                 Sql += "m20_warehouse("
-                Sql += "会社コード, 倉庫コード, 名称, 略称, 備考, 無効フラグ, 更新者, 更新日)"
+                Sql += "会社コード, 倉庫コード, 名称, 略称, 保税有無, 備考, 無効フラグ, 更新者, 更新日)"
                 Sql += " VALUES('"
                 Sql += frmC01F10_Login.loginValue.BumonCD
                 Sql += "', '"
@@ -94,6 +94,8 @@ Public Class Warehouse
                 Sql += TxtName.Text
                 Sql += "', '"
                 Sql += TxtShortName.Text
+                Sql += "', '"
+                Sql += cmCustomsBondKbn.SelectedValue.ToString
                 Sql += "', '"
                 Sql += TxtRemarks.Text
                 Sql += "', '"
@@ -118,6 +120,10 @@ Public Class Warehouse
                 Sql += "略称"
                 Sql += " = '"
                 Sql += TxtShortName.Text
+                Sql += "', "
+                Sql += "保税有無"
+                Sql += " = '"
+                Sql += cmCustomsBondKbn.SelectedValue.ToString
                 Sql += "', "
                 Sql += "備考"
                 Sql += " = '"
@@ -179,6 +185,8 @@ Public Class Warehouse
             LblWarehouseCode.Text = "WarehouseCode"
             LblName.Text = "Name"
             LblShortName.Text = "ShortName"
+            LblCustomsBondKbn.Text = "PresenceOfBondedBonds"
+            'cmCustomsBondKbn.Text = "(0:保税なし, 1:保税あり)"
             LblRemarks.Text = "Remarks"
             LblInvalidFlag.Text = "InvalidFlag"
             'InvalidFlag.Text = "(0:True 1:False)"
@@ -211,19 +219,23 @@ Public Class Warehouse
                 TxtShortName.Text = ds.Tables(RS).Rows(0)("略称")
             End If
 
+            If ds.Tables(RS).Rows(0)("保税有無") IsNot DBNull.Value Then
+                customsBondKbnCombobox(ds.Tables(RS).Rows(0)("保税有無"))
+            End If
+
             If ds.Tables(RS).Rows(0)("備考") IsNot DBNull.Value Then
                 TxtRemarks.Text = ds.Tables(RS).Rows(0)("備考")
             End If
 
             If ds.Tables(RS).Rows(0)("無効フラグ") IsNot DBNull.Value Then
                 createCombobox(ds.Tables(RS).Rows(0)("無効フラグ"))
-                'TxtEffectiveClassification.Text = ds.Tables(RS).Rows(0)("有効区分")
             End If
 
             TxtWarehouseCode.Enabled = False
         Else
 
             createCombobox()
+            customsBondKbnCombobox()
 
         End If
     End Sub
@@ -237,12 +249,48 @@ Public Class Warehouse
         Dim tb As New DataTable
         tb.Columns.Add("Text", GetType(String))
         tb.Columns.Add("Value", GetType(Integer))
-        tb.Rows.Add(CommonConst.FLAG_ENABLED_TXT, CommonConst.FLAG_ENABLED)
-        tb.Rows.Add(CommonConst.FLAG_DISABLED_TXT, CommonConst.FLAG_DISABLED)
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+            tb.Rows.Add(CommonConst.FLAG_ENABLED_TXT_ENG, CommonConst.FLAG_ENABLED)
+            tb.Rows.Add(CommonConst.FLAG_DISABLED_TXT_ENG, CommonConst.FLAG_DISABLED)
+
+        Else
+            tb.Rows.Add(CommonConst.FLAG_ENABLED_TXT, CommonConst.FLAG_ENABLED)
+            tb.Rows.Add(CommonConst.FLAG_DISABLED_TXT, CommonConst.FLAG_DISABLED)
+
+        End If
+
         cmbInvalidFlag.DataSource = tb
 
         If prmVal IsNot "" Then
             cmbInvalidFlag.SelectedValue = prmVal
+        End If
+
+    End Sub
+
+    '保税区分のコンボボックスを作成
+    '編集モードの時は値を渡してセットさせる
+    Private Sub customsBondKbnCombobox(Optional ByRef prmVal As String = "")
+        cmCustomsBondKbn.DisplayMember = "Text"
+        cmCustomsBondKbn.ValueMember = "Value"
+
+        Dim tb As New DataTable
+        tb.Columns.Add("Text", GetType(String))
+        tb.Columns.Add("Value", GetType(Integer))
+
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+            tb.Rows.Add(CommonConst.CB_KBN_MOT_AVAILABLE_TXT_ENG, CommonConst.CB_KBN_MOT_AVAILABLE)
+            tb.Rows.Add(CommonConst.CB_KBN_AVAILABLE_TXT_ENG, CommonConst.CB_KBN_AVAILABLE)
+
+        Else
+            tb.Rows.Add(CommonConst.CB_KBN_MOT_AVAILABLE_TXT, CommonConst.CB_KBN_MOT_AVAILABLE)
+            tb.Rows.Add(CommonConst.CB_KBN_AVAILABLE_TXT, CommonConst.CB_KBN_AVAILABLE)
+
+        End If
+
+        cmCustomsBondKbn.DataSource = tb
+
+        If prmVal IsNot "" Then
+            cmCustomsBondKbn.SelectedValue = prmVal
         End If
 
     End Sub

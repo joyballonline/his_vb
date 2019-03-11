@@ -331,4 +331,12 @@ Public Class CommonConst
     '検索時のスタート初期値（年）
     Public Const SINCE_DEFAULT_YEAR As Integer = 2019                          '二週間
 
+    '保税有無
+    Public Const CB_KBN_MOT_AVAILABLE As Integer = 0                  '保税なし
+    Public Const CB_KBN_AVAILABLE As Integer = 1                 '保税あり
+
+    '保税有無 テキスト
+    Public Const CB_KBN_MOT_AVAILABLE_TXT As String = "保税なし"         '保税なし
+    Public Const CB_KBN_AVAILABLE_TXT As String = "保税あり"        '保税あり
+
 End Class
