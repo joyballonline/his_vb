@@ -257,7 +257,7 @@ Public Class frmC01F30_Menu
         Me.dgvLIST.AllowUserToDeleteRows = False
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("MS UI Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
         DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
@@ -274,7 +274,7 @@ Public Class frmC01F30_Menu
         Me.dgvLIST.RowHeadersVisible = False
         Me.dgvLIST.RowHeadersWidth = 25
         Me.dgvLIST.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvLIST.Size = New System.Drawing.Size(1312, 442)
+        Me.dgvLIST.Size = New System.Drawing.Size(1312, 436)
         Me.dgvLIST.TabIndex = 11
         '
         '処理ID
@@ -387,20 +387,23 @@ Public Class frmC01F30_Menu
         '
         Me.TabProcessingMenu.Controls.Add(Me.TabGeneral)
         Me.TabProcessingMenu.Controls.Add(Me.TabMenu)
+        Me.TabProcessingMenu.Font = New System.Drawing.Font("MS UI Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TabProcessingMenu.ItemSize = New System.Drawing.Size(96, 24)
         Me.TabProcessingMenu.Location = New System.Drawing.Point(12, 12)
         Me.TabProcessingMenu.Name = "TabProcessingMenu"
         Me.TabProcessingMenu.SelectedIndex = 0
         Me.TabProcessingMenu.Size = New System.Drawing.Size(1326, 474)
+        Me.TabProcessingMenu.SizeMode = System.Windows.Forms.TabSizeMode.Fixed
         Me.TabProcessingMenu.TabIndex = 23
         '
         'TabGeneral
         '
         Me.TabGeneral.BackColor = System.Drawing.Color.Transparent
         Me.TabGeneral.Controls.Add(Me.dgvLIST)
-        Me.TabGeneral.Location = New System.Drawing.Point(4, 22)
+        Me.TabGeneral.Location = New System.Drawing.Point(4, 28)
         Me.TabGeneral.Name = "TabGeneral"
         Me.TabGeneral.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabGeneral.Size = New System.Drawing.Size(1318, 448)
+        Me.TabGeneral.Size = New System.Drawing.Size(1318, 442)
         Me.TabGeneral.TabIndex = 0
         Me.TabGeneral.Text = "一般処理"
         '
@@ -408,10 +411,10 @@ Public Class frmC01F30_Menu
         '
         Me.TabMenu.BackColor = System.Drawing.Color.Transparent
         Me.TabMenu.Controls.Add(Me.dgvMasterList)
-        Me.TabMenu.Location = New System.Drawing.Point(4, 22)
+        Me.TabMenu.Location = New System.Drawing.Point(4, 28)
         Me.TabMenu.Name = "TabMenu"
         Me.TabMenu.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabMenu.Size = New System.Drawing.Size(1318, 448)
+        Me.TabMenu.Size = New System.Drawing.Size(1318, 442)
         Me.TabMenu.TabIndex = 1
         Me.TabMenu.Text = "マスタ"
         '
@@ -421,7 +424,7 @@ Public Class frmC01F30_Menu
         Me.dgvMasterList.AllowUserToDeleteRows = False
         DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle9.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle9.Font = New System.Drawing.Font("MS UI Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         DataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText
         DataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText
@@ -438,7 +441,7 @@ Public Class frmC01F30_Menu
         Me.dgvMasterList.RowHeadersVisible = False
         Me.dgvMasterList.RowHeadersWidth = 25
         Me.dgvMasterList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvMasterList.Size = New System.Drawing.Size(1312, 442)
+        Me.dgvMasterList.Size = New System.Drawing.Size(1312, 436)
         Me.dgvMasterList.TabIndex = 12
         '
         'DataGridViewTextBoxColumn1
