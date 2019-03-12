@@ -103,18 +103,10 @@ Public Class Order
         '"Column1"列のセルのテキストを折り返して表示する
         DgvItemList.Columns("型式").DefaultCellStyle.WrapMode = DataGridViewTriState.True
 
-        'ComboBoxに表示する項目のリストを作成する
-        Dim table As New DataTable("Table")
-        table.Columns.Add("Display", GetType(String))
-        table.Columns.Add("Value", GetType(Integer))
-        table.Rows.Add("仕入", 1)
-        table.Rows.Add("在庫", 2)
-        table.Rows.Add("サービス", 9)
-
         'DataGridViewComboBoxColumnを作成
         Dim column As New DataGridViewComboBoxColumn()
         'DataGridViewComboBoxColumnのDataSourceを設定
-        column.DataSource = table
+        column.DataSource = getSireKbn()
         '実際の値が"Value"列、表示するテキストが"Display"列とする
         column.ValueMember = "Value"
         column.DisplayMember = "Display"
@@ -129,7 +121,7 @@ Public Class Order
 
         Sql12 += "SELECT * FROM public.m90_hanyo"
         Sql12 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        Sql12 += " AND 固定キー = '4'"
+        Sql12 += " AND 固定キー = '" & CommonConst.FIXED_KEY_READTIME & "'"
 
         Dim ds12 As DataSet = _db.selectDB(Sql12, RS, reccnt)
 
@@ -884,4 +876,50 @@ Public Class Order
         Return buf.ToString()
     End Function
 
+    'param1：String テーブル名
+    'param2：String 詳細条件
+    'Return: DataSet
+    Private Function getDsData(ByVal tableName As String, Optional ByRef txtParam As String = "") As DataSet
+        Dim reccnt As Integer = 0 'DB用（デフォルト）
+        Dim Sql As String = ""
+
+        Sql += "SELECT"
+        Sql += " *"
+        Sql += " FROM "
+
+        Sql += "public." & tableName
+        Sql += " WHERE "
+        Sql += "会社コード"
+        Sql += " ILIKE  "
+        Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += txtParam
+
+        Return _db.selectDB(Sql, RS, reccnt)
+    End Function
+
+    'Return: DataTable
+    Private Function getSireKbn() As DataTable
+        Dim Sql As String = ""
+        Dim strViewText As String = ""
+
+        Sql = " AND "
+        Sql += "固定キー ILIKE '" & CommonConst.FIXED_KEY_PURCHASING_CLASS & "'"
+        Sql += " ORDER BY 表示順"
+
+        'リードタイムのリストを汎用マスタから取得
+        Dim dsHanyo As DataSet = getDsData("m90_hanyo", Sql)
+
+        'ComboBoxに表示する項目のリストを作成する
+        Dim table As New DataTable("Table")
+        table.Columns.Add("Display", GetType(String))
+        table.Columns.Add("Value", GetType(Integer))
+
+        strViewText = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG, "文字２", "文字１")
+
+        For x As Integer = 0 To dsHanyo.Tables(RS).Rows.Count - 1
+            table.Rows.Add(dsHanyo.Tables(RS).Rows(x)(strViewText), dsHanyo.Tables(RS).Rows(x)("可変キー"))
+        Next
+
+        Return table
+    End Function
 End Class
