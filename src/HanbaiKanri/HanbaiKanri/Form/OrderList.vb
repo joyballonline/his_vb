@@ -143,8 +143,8 @@ Public Class OrderList
                 Dim customerAddress As String = escapeSql(TxtAddress.Text)
                 Dim customerTel As String = escapeSql(TxtTel.Text)
                 Dim customerCode As String = escapeSql(TxtCustomerCode.Text)
-                Dim sinceDate As String = strFormatDate(dtOrderDateSince.Text)
-                Dim untilDate As String = strFormatDate(dtOrderDateUntil.Text)
+                Dim sinceDate As String = UtilClass.strFormatDate(dtOrderDateSince.Text)
+                Dim untilDate As String = UtilClass.strFormatDate(dtOrderDateUntil.Text)
                 Dim sinceNum As String = escapeSql(TxtOrderSince.Text)
                 Dim untilNum As String = escapeSql(TxtOrderUntil.Text)
                 Dim salesName As String = escapeSql(TxtSales.Text)
@@ -220,14 +220,11 @@ Public Class OrderList
                     DgvCymnhd.Rows(index).Cells("受注番号枝番").Value = ds.Tables(RS).Rows(index)("受注番号枝番")
                     DgvCymnhd.Rows(index).Cells("行番号").Value = ds.Tables(RS).Rows(index)("行番号")
 
-                    '★汎用マスタからの取得に変更する
-                    If ds.Tables(RS).Rows(index)("仕入区分") = CommonConst.Sire_KBN_Sire Then
-                        DgvCymnhd.Rows(index).Cells("仕入区分").Value = CommonConst.Sire_KBN_Sire_TXT
-                    ElseIf ds.Tables(RS).Rows(index)("仕入区分") = CommonConst.Sire_KBN_Zaiko Then
-                        DgvCymnhd.Rows(index).Cells("仕入区分").Value = CommonConst.Sire_KBN_Zaiko_TXT
-                    Else
-                        DgvCymnhd.Rows(index).Cells("仕入区分").Value = CommonConst.Sire_KBN_SERVICE_TXT
-                    End If
+                    '汎用マスタから仕入区分を取得
+                    Dim dsSireKbn As DataSet = getDsHanyoData(CommonConst.FIXED_KEY_PURCHASING_CLASS, ds.Tables(RS).Rows(index)("仕入区分").ToString)
+                    DgvCymnhd.Rows(index).Cells("仕入区分").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
+                                                                dsSireKbn.Tables(RS).Rows(0)("文字２"),
+                                                                dsSireKbn.Tables(RS).Rows(0)("文字１"))
 
                     DgvCymnhd.Rows(index).Cells("メーカー").Value = ds.Tables(RS).Rows(index)("メーカー")
                     DgvCymnhd.Rows(index).Cells("品名").Value = ds.Tables(RS).Rows(index)("品名")
@@ -504,7 +501,7 @@ Public Class OrderList
             Return
         End If
 
-        Dim dtNow As String = formatDatetime(DateTime.Now)
+        Dim dtNow As String = UtilClass.formatDatetime(DateTime.Now)
         Dim Sql1 As String = ""
 
         '明細表示時は取消操作不可能
@@ -755,8 +752,8 @@ Public Class OrderList
         Dim customerAddress As String = escapeSql(TxtAddress.Text)
         Dim customerTel As String = escapeSql(TxtTel.Text)
         Dim customerCode As String = escapeSql(TxtCustomerCode.Text)
-        Dim sinceDate As String = strFormatDate(dtOrderDateSince.Text)
-        Dim untilDate As String = strFormatDate(dtOrderDateUntil.Text)
+        Dim sinceDate As String = UtilClass.strFormatDate(dtOrderDateSince.Text)
+        Dim untilDate As String = UtilClass.strFormatDate(dtOrderDateUntil.Text)
         Dim sinceNum As String = escapeSql(TxtOrderSince.Text)
         Dim untilNum As String = escapeSql(TxtOrderUntil.Text)
         Dim salesName As String = escapeSql(TxtSales.Text)
@@ -881,32 +878,24 @@ Public Class OrderList
         Return sql
     End Function
 
-    'どんなカルチャーであっても、日本の形式に変換する
-    Private Function strFormatDate(ByVal prmDate As String, Optional ByRef prmFormat As String = "yyyy/MM/dd") As String
+    '汎用マスタから固定キー、可変キーに応じた結果を返す
+    'param1：String 固定キー
+    'param2：String 可変キー
+    'Return: DataSet
+    Private Function getDsHanyoData(ByVal prmFixed As String, Optional ByVal prmVariable As String = "") As DataSet
+        Dim Sql As String = ""
 
-        'PCのカルチャーを取得し、それに応じてStringからDatetimeを作成
-        Dim ci As New System.Globalization.CultureInfo(CultureInfo.CurrentCulture.Name.ToString)
-        Dim dateFormat As DateTime = DateTime.Parse(prmDate, ci, System.Globalization.DateTimeStyles.AssumeLocal)
+        Sql = " AND "
+        Sql += "固定キー ILIKE '" & prmFixed & "'"
 
-        '日本の形式に書き換える
-        Return dateFormat.ToString(prmFormat)
-    End Function
+        If prmVariable IsNot "" Then
+            Sql += " AND "
+            Sql += "可変キー ILIKE '" & prmVariable & "'"
+        End If
 
-    'どんなカルチャーであっても、日本の形式に変換する
-    Private Function formatDatetime(ByVal prmDatetime As DateTime) As String
+        'リードタイムのリストを汎用マスタから取得
+        Return getDsData("m90_hanyo", Sql)
 
-        'PCのカルチャーを取得し、それに応じてStringからDatetimeを作成
-        Dim ciCurrent As New System.Globalization.CultureInfo(CultureInfo.CurrentCulture.Name.ToString)
-        Dim dateFormat As DateTime = DateTime.Parse(prmDatetime.ToString, ciCurrent, System.Globalization.DateTimeStyles.AssumeLocal)
-
-        Dim changeFormat As String = dateFormat.ToString("yyyy/MM/dd HH:mm:ss")
-
-        Dim ciJP As New System.Globalization.CultureInfo(CommonConst.CI_JP)
-        Dim rtnDatetime As DateTime = DateTime.Parse(changeFormat, ciJP, System.Globalization.DateTimeStyles.AssumeLocal)
-
-
-        '日本の形式に書き換える
-        Return changeFormat
     End Function
 
 End Class

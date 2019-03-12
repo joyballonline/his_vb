@@ -147,7 +147,7 @@ Public Class SalesList
 
                 'joinするのでとりあえず直書き
                 Sql = "SELECT"
-                Sql += " t31.*, t30.取消区分"
+                Sql += " t31.*, t30.取消区分, t30.受注番号, t30.受注番号枝番"
                 Sql += " FROM "
                 Sql += " public.t31_urigdt t31 "
 
@@ -230,14 +230,16 @@ Public Class SalesList
                     DgvCymnhd.Rows(i).Cells("売上番号").Value = ds.Tables(RS).Rows(i)("売上番号")
                     DgvCymnhd.Rows(i).Cells("売上番号枝番").Value = ds.Tables(RS).Rows(i)("売上番号枝番")
                     DgvCymnhd.Rows(i).Cells("行番号").Value = ds.Tables(RS).Rows(i)("行番号")
-                    If ds.Tables(RS).Rows(i)("仕入区分") = 1 Then
-                        DgvCymnhd.Rows(i).Cells("仕入区分").Value = "仕入"
-                    ElseIf ds.Tables(RS).Rows(i)("仕入区分") = 2 Then
-                        DgvCymnhd.Rows(i).Cells("仕入区分").Value = "在庫"
-                    Else
-                        DgvCymnhd.Rows(i).Cells("仕入区分").Value = "サービス"
-                    End If
+
+                    'リードタイムのリストを汎用マスタから取得
+                    Dim dsHanyou As DataSet = getDsHanyoData(CommonConst.FIXED_KEY_PURCHASING_CLASS, ds.Tables(RS).Rows(i)("仕入区分"))
+                    DgvCymnhd.Rows(i).Cells("仕入区分").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
+                                                                dsHanyou.Tables(RS).Rows(0)("文字２"),
+                                                                dsHanyou.Tables(RS).Rows(0)("文字１"))
+
                     DgvCymnhd.Rows(i).Cells("取消").Value = getDelKbnTxt(ds.Tables(RS).Rows(i)("取消区分"))
+                    DgvCymnhd.Rows(i).Cells("受注番号").Value = ds.Tables(RS).Rows(i)("受注番号")
+                    DgvCymnhd.Rows(i).Cells("受注番号枝番").Value = ds.Tables(RS).Rows(i)("受注番号枝番")
                     DgvCymnhd.Rows(i).Cells("メーカー").Value = ds.Tables(RS).Rows(i)("メーカー")
                     DgvCymnhd.Rows(i).Cells("品名").Value = ds.Tables(RS).Rows(i)("品名")
                     DgvCymnhd.Rows(i).Cells("型式").Value = ds.Tables(RS).Rows(i)("型式")
@@ -338,6 +340,8 @@ Public Class SalesList
             DgvCymnhd.Columns.Add("売上番号", "SalesNumber")
             DgvCymnhd.Columns.Add("売上番号枝番", "SalesSubNumber")
             DgvCymnhd.Columns.Add("行番号", "LineNumber")
+            DgvCymnhd.Columns.Add("受注番号", "OrderNumber")
+            DgvCymnhd.Columns.Add("受注番号枝番", "JobOrderSubNumber")
             DgvCymnhd.Columns.Add("仕入区分", "PurchasingClassification")
             DgvCymnhd.Columns.Add("メーカー", "Manufacturer")
             DgvCymnhd.Columns.Add("品名", "ItemName")
@@ -363,6 +367,8 @@ Public Class SalesList
             DgvCymnhd.Columns.Add("売上番号", "売上番号")
             DgvCymnhd.Columns.Add("売上番号枝番", "売上番号枝番")
             DgvCymnhd.Columns.Add("行番号", "行番号")
+            DgvCymnhd.Columns.Add("受注番号", "受注番号")
+            DgvCymnhd.Columns.Add("受注番号枝番", "受注番号枝番")
             DgvCymnhd.Columns.Add("仕入区分", "仕入区分")
             DgvCymnhd.Columns.Add("メーカー", "メーカー")
             DgvCymnhd.Columns.Add("品名", "品名")
@@ -392,6 +398,9 @@ Public Class SalesList
         DgvCymnhd.Columns("売上金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvCymnhd.Columns("粗利額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvCymnhd.Columns("粗利率").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+        DgvCymnhd.Columns("受注番号").Visible = False
+        DgvCymnhd.Columns("受注番号枝番").Visible = False
 
     End Sub
 
@@ -736,6 +745,7 @@ Public Class SalesList
 
     '参照ボタン押下時
     Private Sub BtnSalesView_Click(sender As Object, e As EventArgs) Handles BtnSalesView.Click
+
         Dim RowIdx As Integer
         RowIdx = Me.DgvCymnhd.CurrentCell.RowIndex
         Dim No As String = DgvCymnhd.Rows(RowIdx).Cells("受注番号").Value
@@ -876,6 +886,23 @@ Public Class SalesList
                                     IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_JPN, CommonConst.CANCEL_KBN_JPN_TXT, CommonConst.CANCEL_KBN_ENG_TXT),
                                     "")
         Return reDelKbn
+    End Function
+
+    '汎用マスタから固定キー、可変キーに応じた結果を返す
+    'param1：String 固定キー
+    'param2：String 可変キー
+    'Return: DataSet
+    Private Function getDsHanyoData(ByVal prmFixed As String, ByVal prmVariable As String) As DataSet
+        Dim Sql As String = ""
+
+        Sql = " AND "
+        Sql += "固定キー ILIKE '" & prmFixed & "'"
+        Sql += " AND "
+        Sql += "可変キー ILIKE '" & prmVariable & "'"
+
+        'リードタイムのリストを汎用マスタから取得
+        Return getDsData("m90_hanyo", Sql)
+
     End Function
 
 End Class

@@ -441,7 +441,10 @@ Public Class OrderingList
 
                     'リードタイムのリストを汎用マスタから取得
                     dsHanyou = getDsHanyoData(CommonConst.FIXED_KEY_PURCHASING_CLASS, ds.Tables(RS).Rows(i)("仕入区分"))
-                    DgvHtyhd.Rows(i).Cells("仕入区分").Value = ds.Tables(RS).Rows(i)("仕入区分") & dsHanyou.Tables(RS).Rows(0)("文字１")
+                    DgvHtyhd.Rows(i).Cells("仕入区分").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
+                                                                dsHanyou.Tables(RS).Rows(0)("文字２"),
+                                                                dsHanyou.Tables(RS).Rows(0)("文字１"))
+
                     DgvHtyhd.Rows(i).Cells("メーカー").Value = ds.Tables(RS).Rows(i)("メーカー")
                     DgvHtyhd.Rows(i).Cells("品名").Value = ds.Tables(RS).Rows(i)("品名")
                     DgvHtyhd.Rows(i).Cells("型式").Value = ds.Tables(RS).Rows(i)("型式")
