@@ -252,6 +252,8 @@ Public Class CommonConst
     '無効フラグ テキスト
     Public Const FLAG_ENABLED_TXT As String = "有効"         '有効
     Public Const FLAG_DISABLED_TXT As String = "無効"        '無効
+    Public Const FLAG_ENABLED_TXT_ENG As String = "Enabled"         'Enabled
+    Public Const FLAG_DISABLED_TXT_ENG As String = "Disabled"        'Disabled
 
 
     '請求区分
@@ -338,5 +340,9 @@ Public Class CommonConst
     '保税有無 テキスト
     Public Const CB_KBN_MOT_AVAILABLE_TXT As String = "保税なし"         '保税なし
     Public Const CB_KBN_AVAILABLE_TXT As String = "保税あり"        '保税あり
+
+    '保税有無 テキスト 英語
+    Public Const CB_KBN_MOT_AVAILABLE_TXT_ENG As String = "No Bonded"     'No Bonded
+    Public Const CB_KBN_AVAILABLE_TXT_ENG As String = "Bonded"        'Bonded
 
 End Class
