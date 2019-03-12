@@ -362,13 +362,11 @@ Public Class PurchasingManagement
                     DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("行番号").Value = dsHattyuDt.Tables(RS).Rows(i)("行番号")
                     DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("仕入区分値").Value = dsHattyuDt.Tables(RS).Rows(i)("仕入区分")
 
-                    If dsHattyuDt.Tables(RS).Rows(i)("仕入区分") = CommonConst.Sire_KBN_Sire Then
-                        DgvAdd.Rows(i).Cells("仕入区分").Value = CommonConst.Sire_KBN_Sire_TXT
-                    ElseIf dsHattyuDt.Tables(RS).Rows(i)("仕入区分") = CommonConst.Sire_KBN_Zaiko Then
-                        DgvAdd.Rows(i).Cells("仕入区分").Value = CommonConst.Sire_KBN_Zaiko_TXT
-                    Else
-                        DgvAdd.Rows(i).Cells("仕入区分").Value = CommonConst.Sire_KBN_SERVICE_TXT
-                    End If
+                    '汎用マスタから仕入区分を取得
+                    Dim dsSireKbn As DataSet = getDsHanyoData(CommonConst.FIXED_KEY_PURCHASING_CLASS, dsHattyuDt.Tables(RS).Rows(i)("仕入区分").ToString)
+                    DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("仕入区分").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
+                                                                dsSireKbn.Tables(RS).Rows(0)("文字２"),
+                                                                dsSireKbn.Tables(RS).Rows(0)("文字１"))
 
                     DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("メーカー").Value = dsHattyuDt.Tables(RS).Rows(i)("メーカー")
                     DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("品名").Value = dsHattyuDt.Tables(RS).Rows(i)("品名")

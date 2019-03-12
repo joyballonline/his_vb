@@ -329,6 +329,7 @@ Public Class OrderManagement
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 DgvAdd.Columns.Add("No", "No")
                 DgvAdd.Columns.Add("行番号", "LineNumber")
+                DgvAdd.Columns.Add("仕入区分値", "仕入区分値")
                 DgvAdd.Columns.Add("仕入区分", "PurchasingClassification")
                 DgvAdd.Columns.Add("メーカー", "Manufacturer")
                 DgvAdd.Columns.Add("品名", "ItemName")
@@ -341,6 +342,7 @@ Public Class OrderManagement
             Else
                 DgvAdd.Columns.Add("No", "No")
                 DgvAdd.Columns.Add("行番号", "行番号")
+                DgvAdd.Columns.Add("仕入区分値", "仕入区分値")
                 DgvAdd.Columns.Add("仕入区分", "仕入区分")
                 DgvAdd.Columns.Add("メーカー", "メーカー")
                 DgvAdd.Columns.Add("品名", "品名")
@@ -351,7 +353,6 @@ Public Class OrderManagement
                 DgvAdd.Columns.Add("売上数量", "売上数量")
                 DgvAdd.Columns.Add("備考", "備考")
             End If
-
 
             DgvAdd.Columns("売単価").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             DgvAdd.Columns("売上数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -373,11 +374,14 @@ Public Class OrderManagement
             DgvAdd.Columns("仕入先").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
             DgvAdd.Columns("仕入先").ReadOnly = True
 
+            DgvAdd.Columns("仕入区分値").Visible = False
+
             For index As Integer = 0 To ds3.Tables(RS).Rows.Count - 1
                 If ds3.Tables(RS).Rows(index)("受注残数") = 0 Then
                 Else
                     DgvAdd.Rows.Add()
                     DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("行番号").Value = ds3.Tables(RS).Rows(index)("行番号")
+                    DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("仕入区分値").Value = ds3.Tables(RS).Rows(index)("仕入区分")
                     '汎用マスタから仕入区分を取得
                     Dim dsSireKbn As DataSet = getDsHanyoData(CommonConst.FIXED_KEY_PURCHASING_CLASS, ds3.Tables(RS).Rows(index)("仕入区分").ToString)
                     DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("仕入区分").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
@@ -633,7 +637,7 @@ Public Class OrderManagement
                 Sql4 += "', '"
                 Sql4 += DgvAdd.Rows(index).Cells("行番号").Value.ToString
                 Sql4 += "', '"
-                Sql4 += DgvAdd.Rows(index).Cells("仕入区分").Value.ToString
+                Sql4 += DgvAdd.Rows(index).Cells("仕入区分値").Value.ToString
                 Sql4 += "', '"
                 Sql4 += DgvAdd.Rows(index).Cells("メーカー").Value.ToString
                 Sql4 += "', '"
