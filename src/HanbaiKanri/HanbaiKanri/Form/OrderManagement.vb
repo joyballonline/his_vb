@@ -311,7 +311,11 @@ Public Class OrderManagement
                 DgvHistory.Rows.Add()
                 DgvHistory.Rows(i).Cells("売上番号").Value = ds2.Tables(RS).Rows(i)("売上番号")
                 DgvHistory.Rows(i).Cells("行番号").Value = ds2.Tables(RS).Rows(i)("行番号")
-                DgvHistory.Rows(i).Cells("仕入区分").Value = ds2.Tables(RS).Rows(i)("仕入区分")
+                '汎用マスタから仕入区分を取得
+                Dim dsSireKbn As DataSet = getDsHanyoData(CommonConst.FIXED_KEY_PURCHASING_CLASS, ds2.Tables(RS).Rows(i)("仕入区分").ToString)
+                DgvHistory.Rows(i).Cells("仕入区分").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
+                                                                dsSireKbn.Tables(RS).Rows(0)("文字２"),
+                                                                dsSireKbn.Tables(RS).Rows(0)("文字１"))
                 DgvHistory.Rows(i).Cells("メーカー").Value = ds2.Tables(RS).Rows(i)("メーカー")
                 DgvHistory.Rows(i).Cells("品名").Value = ds2.Tables(RS).Rows(i)("品名")
                 DgvHistory.Rows(i).Cells("型式").Value = ds2.Tables(RS).Rows(i)("型式")
@@ -374,7 +378,11 @@ Public Class OrderManagement
                 Else
                     DgvAdd.Rows.Add()
                     DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("行番号").Value = ds3.Tables(RS).Rows(index)("行番号")
-                    DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("仕入区分").Value = ds3.Tables(RS).Rows(index)("仕入区分")
+                    '汎用マスタから仕入区分を取得
+                    Dim dsSireKbn As DataSet = getDsHanyoData(CommonConst.FIXED_KEY_PURCHASING_CLASS, ds3.Tables(RS).Rows(index)("仕入区分").ToString)
+                    DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("仕入区分").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
+                                                                dsSireKbn.Tables(RS).Rows(0)("文字２"),
+                                                                dsSireKbn.Tables(RS).Rows(0)("文字１"))
                     DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("メーカー").Value = ds3.Tables(RS).Rows(index)("メーカー")
                     DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("品名").Value = ds3.Tables(RS).Rows(index)("品名")
                     DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("型式").Value = ds3.Tables(RS).Rows(index)("型式")
@@ -989,5 +997,45 @@ Public Class OrderManagement
         End Try
 
     End Sub
+
+    'param1：String テーブル名
+    'param2：String 詳細条件
+    'Return: DataSet
+    Private Function getDsData(ByVal tableName As String, Optional ByRef txtParam As String = "") As DataSet
+        Dim reccnt As Integer = 0 'DB用（デフォルト）
+        Dim Sql As String = ""
+
+        Sql += "SELECT"
+        Sql += " *"
+        Sql += " FROM "
+
+        Sql += "public." & tableName
+        Sql += " WHERE "
+        Sql += "会社コード"
+        Sql += " ILIKE  "
+        Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += txtParam
+        Return _db.selectDB(Sql, RS, reccnt)
+    End Function
+
+    '汎用マスタから固定キー、可変キーに応じた結果を返す
+    'param1：String 固定キー
+    'param2：String 可変キー
+    'Return: DataSet
+    Private Function getDsHanyoData(ByVal prmFixed As String, Optional ByVal prmVariable As String = "") As DataSet
+        Dim Sql As String = ""
+
+        Sql = " AND "
+        Sql += "固定キー ILIKE '" & prmFixed & "'"
+
+        If prmVariable IsNot "" Then
+            Sql += " AND "
+            Sql += "可変キー ILIKE '" & prmVariable & "'"
+        End If
+
+        'リードタイムのリストを汎用マスタから取得
+        Return getDsData("m90_hanyo", Sql)
+
+    End Function
 
 End Class
