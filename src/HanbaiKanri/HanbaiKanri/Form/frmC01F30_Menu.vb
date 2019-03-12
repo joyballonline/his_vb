@@ -744,7 +744,7 @@ Public Class frmC01F30_Menu
     End Sub
 
     '一覧セルダブルクリック
-    Private Sub dgvLIST_CellDoubleClick(sender As Object, e As EventArgs) Handles dgvLIST.CellDoubleClick
+    Private Sub dgvLIST_CellDoubleClick(sender As Object, e As EventArgs) Handles dgvLIST.CellDoubleClick, dgvMasterList.CellDoubleClick
 
         Try
             'ヘッダー行ダブルクリックの場合、処理終了
