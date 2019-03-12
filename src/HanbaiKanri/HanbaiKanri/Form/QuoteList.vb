@@ -336,25 +336,22 @@ Public Class QuoteList
                     Sql += RevoveChars(TxtSales.Text)
                     Sql += "%'"
                 End If
-                If Not ChkExpired.Checked Then
-                    Sql += " and "
-                    Sql += "t01.見積有効期限 >= '"
-                    Sql += strToday
-                    Sql += "'"
-                End If
                 If Not ChkCancel.Checked Then
                     Sql += " and "
                     Sql += " t01.取消区分 = '0'"
                 End If
+
                 '受注済みの見積は取消できない
                 '受注済みの見積は仕入単価入力もできない
                 '受発注登録の時も受注済みは表示しない
-                If _status = CommonConst.STATUS_CANCEL Or _status = CommonConst.STATUS_PRICE Or _status = CommonConst.STATUS_ORDER_NEW Then
+                If (_status = CommonConst.STATUS_CANCEL) Or (_status = CommonConst.STATUS_PRICE) Or (_status = CommonConst.STATUS_ORDER_NEW) Or (_status = CommonConst.STATUS_ORDER_PURCHASE) Then
                     Sql += " and t01.受注日 is null"
                 End If
+
+
                 '受発注登録の時は有効期限切れは表示しない
-                If _status = CommonConst.STATUS_ORDER_NEW Then
-                    Sql += " and t01.見積有効期限 <= '" & UtilClass.strFormatDate(DateTime.Today.ToShortDateString) & "'"
+                If _status = CommonConst.STATUS_ORDER_NEW Or ChkCancel.Checked = True Then
+                    Sql += " and t01.見積有効期限 >= '" & UtilClass.strFormatDate(DateTime.Today.ToShortDateString) & "'"
                 End If
 
                 Sql += " ORDER BY t02.見積番号 DESC,t02.見積番号枝番 DESC ,t02.行番号"
@@ -882,7 +879,7 @@ Public Class QuoteList
         End If
 
         '有効期限の切れたデータを含めない場合
-        If ChkExpired.Checked = False Then
+        If ChkExpired.Checked = False Or _status = CommonConst.STATUS_ORDER_NEW Then
             Sql += " AND "
             Sql += "見積有効期限 >= '" & UtilClass.strFormatDate(strToday) & "'"
         End If

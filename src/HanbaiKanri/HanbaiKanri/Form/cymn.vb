@@ -94,18 +94,10 @@ Public Class Cymn
         '"Column1"列のセルのテキストを折り返して表示する
         DgvItemList.Columns("型式").DefaultCellStyle.WrapMode = DataGridViewTriState.True
 
-        'ComboBoxに表示する項目のリストを作成する
-        Dim table As New DataTable("Table")
-        table.Columns.Add("Display", GetType(String))
-        table.Columns.Add("Value", GetType(Integer))
-        table.Rows.Add("仕入", 1)
-        table.Rows.Add("在庫", 2)
-        table.Rows.Add("サービス", 9)
-
         'DataGridViewComboBoxColumnを作成
         Dim column As New DataGridViewComboBoxColumn()
         'DataGridViewComboBoxColumnのDataSourceを設定
-        column.DataSource = table
+        column.DataSource = getSireKbn()
         '実際の値が"Value"列、表示するテキストが"Display"列とする
         column.ValueMember = "Value"
         column.DisplayMember = "Display"
@@ -450,7 +442,7 @@ Public Class Cymn
         Dim errFlg As Boolean = True
 
         Dim dtNow As DateTime = DateTime.Now
-        Dim strNow As String = formatDatetime(dtNow)
+        Dim strNow As String = UtilClass.formatDatetime(dtNow)
 
 
         If TxtCustomerCode.Text = "stock" Then
@@ -511,8 +503,8 @@ Public Class Cymn
                 Sql1 += ", '" & TxtFax.Text & "'"           '得意先ＦＡＸ
                 Sql1 += ", '" & TxtPosition.Text & "'"      '得意先担当者役職
                 Sql1 += ", '" & TxtPerson.Text & "'"        '得意先担当者名
-                Sql1 += ", '" & strFormatDate(DtpQuoteDate.Value) & "'"    '見積日
-                Sql1 += ", '" & strFormatDate(DtpExpiration.Value) & "'"   '見積有効期限
+                Sql1 += ", '" & UtilClass.strFormatDate(DtpQuoteDate.Value) & "'"    '見積日
+                Sql1 += ", '" & UtilClass.strFormatDate(DtpExpiration.Value) & "'"   '見積有効期限
                 Sql1 += ", '" & TxtPaymentTerms.Text & "'"  '支払条件
                 Sql1 += ", " & formatStringToNumber(TxtOrderAmount.Text)          '見積金額
                 Sql1 += ", " & formatStringToNumber(TxtPurchaseAmount.Text)       '仕入金額
@@ -524,8 +516,8 @@ Public Class Cymn
                 Sql1 += ", '" & TxtOrderRemark.Text & "'"   '備考
                 Sql1 += ", '" & RevoveChars(TxtQuoteRemarks.Text) & "'" '見積備考
                 Sql1 += ", " & formatStringToNumber(TxtVat.Text)      'ＶＡＴ
-                Sql1 += ", '" & strFormatDate(DtpOrderDate.Value) & "'"    '受注日
-                Sql1 += ", '" & formatDatetime(DtpOrderRegistration.Value) & "'"     '登録日
+                Sql1 += ", '" & UtilClass.strFormatDate(DtpOrderDate.Value) & "'"    '受注日
+                Sql1 += ", '" & UtilClass.formatDatetime(DtpOrderRegistration.Value) & "'"     '登録日
                 Sql1 += ", '" & strNow & "'"                 '更新日
                 Sql1 += ", '" & frmC01F10_Login.loginValue.TantoNM & "'"
                 Sql1 += ", 0"
@@ -570,7 +562,7 @@ Public Class Cymn
                     Sql2 += ", " & DgvItemList.Rows(cymnhdIdx).Cells("数量").Value.ToString       '未出庫数
                     Sql2 += ", '" & RevoveChars(DgvItemList.Rows(cymnhdIdx).Cells("備考").Value.ToString) & "'"   '備考
                     Sql2 += ", '" & frmC01F10_Login.loginValue.TantoNM & "'"       '更新者
-                    Sql2 += ", '" & formatDatetime(dtNow) & "'"      '登録日
+                    Sql2 += ", '" & UtilClass.formatDatetime(dtNow) & "'"      '登録日
                     Sql2 += ", " & formatStringToNumber(DgvItemList.Rows(cymnhdIdx).Cells("関税率").Value.ToString)             '関税率
                     Sql2 += ", " & formatStringToNumber(DgvItemList.Rows(cymnhdIdx).Cells("関税額").Value.ToString)             '関税額
                     Sql2 += ", " & formatStringToNumber(DgvItemList.Rows(cymnhdIdx).Cells("前払法人税率").Value.ToString)       '前払法人税率
@@ -619,8 +611,8 @@ Public Class Cymn
                 Sql += ", null"     '取消日
                 Sql += ", 0"     '取消区分
                 Sql += ", current_date"     '出庫日
-                Sql += ", '" & formatDatetime(dtNow) & "'"                 '登録日
-                Sql += ", '" & formatDatetime(dtNow) & "'"                 '更新日
+                Sql += ", '" & UtilClass.formatDatetime(dtNow) & "'"                 '登録日
+                Sql += ", '" & UtilClass.formatDatetime(dtNow) & "'"                 '更新日
                 Sql += ", '" & frmC01F10_Login.loginValue.TantoNM & "'"     '更新者
                 Sql += " )"
 
@@ -647,7 +639,7 @@ Public Class Cymn
                     Sql += ", '" & DgvItemList.Rows(index).Cells("単位").Value.ToString & "'"         '単位
                     Sql += ", '" & DgvItemList.Rows(index).Cells("備考").Value.ToString & "'"         '備考
                     Sql += ", '" & frmC01F10_Login.loginValue.TantoNM & "'"                           '更新者
-                    Sql += ", '" & formatDatetime(dtNow) & "'"                 '更新日
+                    Sql += ", '" & UtilClass.formatDatetime(dtNow) & "'"                 '更新日
                     Sql += ", '1')"
 
                     _db.executeDB(Sql)
@@ -666,7 +658,7 @@ Public Class Cymn
                 Sql += "UPDATE Public.m80_saiban "
                 Sql += "SET  最新値 = '" & LSNo.ToString & "'"
                 Sql += ", 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
-                Sql += ", 更新日 = '" & formatDatetime(dtNow) & "'"
+                Sql += ", 更新日 = '" & UtilClass.formatDatetime(dtNow) & "'"
                 Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
                 Sql += " AND 採番キー ='70' "
 
@@ -802,9 +794,9 @@ Public Class Cymn
                 Sql3 += "', '"
                 Sql3 += ds1.Tables(RS).Rows(0)("担当者名").ToString '仕入先担当者名
                 Sql3 += "', '"
-                Sql3 += strFormatDate(DtpQuoteDate.Value) '見積日
+                Sql3 += UtilClass.strFormatDate(DtpQuoteDate.Value) '見積日
                 Sql3 += "', '"
-                Sql3 += strFormatDate(DtpExpiration.Value) '見積有効期限
+                Sql3 += UtilClass.strFormatDate(DtpExpiration.Value) '見積有効期限
                 Sql3 += "', '"
                 Sql3 += TxtPaymentTerms.Text '支払条件
                 Sql3 += "', '"
@@ -830,13 +822,13 @@ Public Class Cymn
                 Sql3 += "', '"
                 Sql3 += formatStringToNumber(TxtPph.Text) 'ＰＰＨ
                 Sql3 += "', '"
-                Sql3 += strFormatDate(DtpOrderDate.Value) '受注日
+                Sql3 += UtilClass.strFormatDate(DtpOrderDate.Value) '受注日
                 Sql3 += "', '"
-                Sql3 += strFormatDate(DtpPurchaseDate.Value) '発注日
+                Sql3 += UtilClass.strFormatDate(DtpPurchaseDate.Value) '発注日
                 Sql3 += "', '"
-                Sql3 += strFormatDate(DtpOrderRegistration.Value) '登録日（受発注登録日）
+                Sql3 += UtilClass.strFormatDate(DtpOrderRegistration.Value) '登録日（受発注登録日）
                 Sql3 += "', '"
-                Sql3 += formatDatetime(dtNow) '更新日
+                Sql3 += UtilClass.formatDatetime(dtNow) '更新日
                 Sql3 += "', '"
                 Sql3 += frmC01F10_Login.loginValue.BumonCD '更新者
                 Sql3 += "', '"
@@ -904,9 +896,9 @@ Public Class Cymn
                         Sql4 += "', '"
                         Sql4 += frmC01F10_Login.loginValue.TantoNM
                         Sql4 += "', '"
-                        Sql4 += formatDatetime(dtNow)
+                        Sql4 += UtilClass.formatDatetime(dtNow)
                         Sql4 += "', '"
-                        Sql4 += formatDatetime(dtNow)
+                        Sql4 += UtilClass.formatDatetime(dtNow)
                         Sql4 += " ')"
                         _db.executeDB(Sql4)
                     End If
@@ -919,7 +911,7 @@ Public Class Cymn
             Saiban4 += "UPDATE Public.m80_saiban "
             Saiban4 += "SET  最新値 = '" & PurchaseCount.ToString & "'"
             Saiban4 += ", 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
-            Saiban4 += ", 更新日 ='" & formatDatetime(dtNow) & "'"
+            Saiban4 += ", 更新日 ='" & UtilClass.formatDatetime(dtNow) & "'"
             Saiban4 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
             Saiban4 += " AND 採番キー ='30' "
             _db.executeDB(Saiban4)
@@ -929,7 +921,7 @@ Public Class Cymn
             Sql += "UPDATE Public.t01_mithd "
             Sql += "SET  受注日 = '" & DtpOrderDate.Value & "'"
             Sql += ", 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
-            Sql += ", 更新日 = '" & formatDatetime(dtNow) & "'"
+            Sql += ", 更新日 = '" & UtilClass.formatDatetime(dtNow) & "'"
             Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
             Sql += " AND 見積番号 = '" & QuoteNo.ToString & "'"
             Sql += " AND 見積番号枝番 = '" & QuoteSuffix.ToString & "'"
@@ -958,34 +950,6 @@ Public Class Cymn
             buf.Replace(c.ToString(), "")
         Next
         Return buf.ToString()
-    End Function
-
-    'どんなカルチャーであっても、日本の形式に変換する
-    Private Function strFormatDate(ByVal prmDate As String, Optional ByRef prmFormat As String = "yyyy/MM/dd") As String
-
-        'PCのカルチャーを取得し、それに応じてStringからDatetimeを作成
-        Dim ci As New System.Globalization.CultureInfo(CultureInfo.CurrentCulture.Name.ToString)
-        Dim dateFormat As DateTime = DateTime.Parse(prmDate, ci, System.Globalization.DateTimeStyles.AssumeLocal)
-
-        '日本の形式に書き換える
-        Return dateFormat.ToString(prmFormat)
-    End Function
-
-    'どんなカルチャーであっても、日本の形式に変換する
-    Private Function formatDatetime(ByVal prmDatetime As DateTime) As String
-
-        'PCのカルチャーを取得し、それに応じてStringからDatetimeを作成
-        Dim ciCurrent As New System.Globalization.CultureInfo(CultureInfo.CurrentCulture.Name.ToString)
-        Dim dateFormat As DateTime = DateTime.Parse(prmDatetime.ToString, ciCurrent, System.Globalization.DateTimeStyles.AssumeLocal)
-
-        Dim changeFormat As String = dateFormat.ToString("yyyy/MM/dd HH:mm:ss")
-
-        Dim ciJP As New System.Globalization.CultureInfo(CommonConst.CI_JP)
-        Dim rtnDatetime As DateTime = DateTime.Parse(changeFormat, ciJP, System.Globalization.DateTimeStyles.AssumeLocal)
-
-
-        '日本の形式に書き換える
-        Return changeFormat
     End Function
 
     '金額フォーマット（登録の際の小数点指定子）を日本の形式に合わせる
@@ -1028,4 +992,52 @@ Public Class Cymn
         End If
 
     End Sub
+
+    'param1：String テーブル名
+    'param2：String 詳細条件
+    'Return: DataSet
+    Private Function getDsData(ByVal tableName As String, Optional ByRef txtParam As String = "") As DataSet
+        Dim reccnt As Integer = 0 'DB用（デフォルト）
+        Dim Sql As String = ""
+
+        Sql += "SELECT"
+        Sql += " *"
+        Sql += " FROM "
+
+        Sql += "public." & tableName
+        Sql += " WHERE "
+        Sql += "会社コード"
+        Sql += " ILIKE  "
+        Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += txtParam
+
+        Return _db.selectDB(Sql, RS, reccnt)
+    End Function
+
+    'Return: DataTable
+    Private Function getSireKbn() As DataTable
+        Dim Sql As String = ""
+        Dim strViewText As String = ""
+
+        Sql = " AND "
+        Sql += "固定キー ILIKE '" & CommonConst.FIXED_KEY_PURCHASING_CLASS & "'"
+        Sql += " ORDER BY 表示順"
+
+        'リードタイムのリストを汎用マスタから取得
+        Dim dsHanyo As DataSet = getDsData("m90_hanyo", Sql)
+
+        'ComboBoxに表示する項目のリストを作成する
+        Dim table As New DataTable("Table")
+        table.Columns.Add("Display", GetType(String))
+        table.Columns.Add("Value", GetType(Integer))
+
+        strViewText = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG, "文字２", "文字１")
+
+        For x As Integer = 0 To dsHanyo.Tables(RS).Rows.Count - 1
+            table.Rows.Add(dsHanyo.Tables(RS).Rows(x)(strViewText), dsHanyo.Tables(RS).Rows(x)("可変キー"))
+        Next
+
+        Return table
+    End Function
+
 End Class
