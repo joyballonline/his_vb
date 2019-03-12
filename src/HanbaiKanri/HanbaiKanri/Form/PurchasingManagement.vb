@@ -336,12 +336,12 @@ Public Class PurchasingManagement
                 DgvHistory.Rows(i).Cells("仕入番号").Value = dsSireDt.Tables(RS).Rows(i)("仕入番号")
                 DgvHistory.Rows(i).Cells("行番号").Value = dsSireDt.Tables(RS).Rows(i)("行番号")
 
-                If dsSireDt.Tables(RS).Rows(i)("仕入区分") = CommonConst.Sire_KBN_Sire Then
-                    DgvHistory.Rows(i).Cells("仕入区分").Value = CommonConst.Sire_KBN_Sire_TXT
-                ElseIf dsSireDt.Tables(RS).Rows(i)("仕入区分") = CommonConst.Sire_KBN_Zaiko Then
-                    DgvHistory.Rows(i).Cells("仕入区分").Value = CommonConst.Sire_KBN_Zaiko_TXT
+                'リードタイムのリストを汎用マスタから取得
+                Dim dsHanyou As DataSet = getDsHanyoData(CommonConst.FIXED_KEY_PURCHASING_CLASS, dsSireDt.Tables(RS).Rows(i)("仕入区分"))
+                If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+                    DgvHistory.Rows(i).Cells("仕入区分").Value = dsHanyou.Tables(RS).Rows(0)("文字２")
                 Else
-                    DgvHistory.Rows(i).Cells("仕入区分").Value = CommonConst.Sire_KBN_SERVICE_TXT
+                    DgvHistory.Rows(i).Cells("仕入区分").Value = dsHanyou.Tables(RS).Rows(0)("文字１")
                 End If
 
                 DgvHistory.Rows(i).Cells("メーカー").Value = dsSireDt.Tables(RS).Rows(i)("メーカー")
@@ -467,7 +467,7 @@ Public Class PurchasingManagement
     Private Sub BtnRegist_Click(sender As Object, e As EventArgs) Handles BtnRegist.Click
 
         Dim dtToday As DateTime = DateTime.Now
-        Dim strToday As String = formatDatetime(dtToday)
+        Dim strToday As String = UtilClass.formatDatetime(dtToday)
         Dim errFlg As Boolean = True
 
         Dim Sql As String = ""
@@ -600,7 +600,7 @@ Public Class PurchasingManagement
             Sql3 += formatNumber(Decimal.Parse(ds1.Tables(RS).Rows(0)("ＰＰＨ").ToString)) 'ＰＰＨ
         End If
         Sql3 += "', '"
-        Sql3 += strFormatDate(DtpPurchaseDate.Text) '仕入日
+        Sql3 += UtilClass.strFormatDate(DtpPurchaseDate.Text) '仕入日
         Sql3 += "', '"
         Sql3 += strToday '登録日
         Sql3 += "', '"
@@ -608,7 +608,7 @@ Public Class PurchasingManagement
         Sql3 += "', '"
         Sql3 += Input '更新者
         Sql3 += "', '"
-        Sql3 += strFormatDate(DtpPaymentDate.Text) '支払予定日
+        Sql3 += UtilClass.strFormatDate(DtpPaymentDate.Text) '支払予定日
         Sql3 += " ')"
 
         _db.executeDB(Sql3)
@@ -666,11 +666,11 @@ Public Class PurchasingManagement
             Sql4 += "', '"
             Sql4 += DgvAdd.Rows(index).Cells("備考").Value.ToString '備考
             Sql4 += "', '"
-            Sql4 += dtToday '仕入日
+            Sql4 += strToday '仕入日
             Sql4 += "', '"
             Sql4 += Input '更新者
             Sql4 += "', '"
-            Sql4 += dtToday '更新日
+            Sql4 += strToday '更新日
             Sql4 += " ')"
             If DgvAdd.Rows(index).Cells("仕入数量").Value.ToString = 0 Then
             Else
@@ -776,11 +776,11 @@ Public Class PurchasingManagement
         Sql7 += "', '"
         Sql7 += formatNumber(Decimal.Parse(ds1.Tables(RS).Rows(0)("ＰＰＨ").ToString))
         Sql7 += "', '"
-        Sql7 += dtToday
+        Sql7 += strToday
         Sql7 += "', '"
-        Sql7 += dtToday
+        Sql7 += strToday
         Sql7 += "', '"
-        Sql7 += dtToday
+        Sql7 += strToday
         Sql7 += "', '"
         Sql7 += Input
         Sql7 += " ')"
@@ -824,7 +824,7 @@ Public Class PurchasingManagement
             Sql8 += "', '"
             Sql8 += Input
             Sql8 += "', '"
-            Sql8 += dtToday
+            Sql8 += strToday
             Sql8 += " ')"
             If DgvAdd.Rows(index).Cells("仕入数量").Value.ToString = 0 Then
             Else
@@ -851,7 +851,7 @@ Public Class PurchasingManagement
 
     Private Sub Accounts()
         Dim dtToday As DateTime = DateTime.Now
-        Dim strToday As String = formatDatetime(dtToday)
+        Dim strToday As String = UtilClass.formatDatetime(dtToday)
 
         Dim reccnt As Integer = 0
         Dim APAmount As Integer = 0
@@ -903,7 +903,7 @@ Public Class PurchasingManagement
         Sql3 += "', '"
         Sql3 += "1"
         Sql3 += "', '"
-        Sql3 += DtpPurchaseDate.Value
+        Sql3 += UtilClass.strFormatDate(DtpPurchaseDate.Value)
         Sql3 += "', '"
         Sql3 += ds1.Tables(RS).Rows(0)("発注番号").ToString
         Sql3 += "', '"
@@ -914,9 +914,9 @@ Public Class PurchasingManagement
         Sql3 += ds1.Tables(RS).Rows(0)("仕入先名").ToString
         Sql3 += "', '"
         tmp = APAmount.ToString - kikePrice
-        Sql3 += formatNumber(tmp.ToString)
+        Sql3 += UtilClass.formatNumber(tmp.ToString)
         Sql3 += "', '"
-        Sql3 += formatNumber(tmp.ToString)
+        Sql3 += UtilClass.formatNumber(tmp.ToString)
         Sql3 += "', '"
         Sql3 += TxtRemarks.Text
         Sql3 += "', '"
@@ -930,7 +930,7 @@ Public Class PurchasingManagement
         Sql3 += "', '"
         Sql3 += strToday
         Sql3 += "', '"
-        Sql3 += strFormatDate(DtpPaymentDate.Text)
+        Sql3 += UtilClass.strFormatDate(DtpPaymentDate.Text)
         Sql3 += " ')"
 
         _db.executeDB(Sql3)
@@ -985,7 +985,7 @@ Public Class PurchasingManagement
             Sql += "', "
             Sql += "更新日"
             Sql += " = '"
-            Sql += formatDatetime(today)
+            Sql += UtilClass.formatDatetime(today)
             Sql += "' "
             Sql += "WHERE"
             Sql += " 会社コード"
@@ -1019,34 +1019,6 @@ Public Class PurchasingManagement
         Return _db.selectDB(Sql, RS, reccnt)
     End Function
 
-    'どんなカルチャーであっても、日本の形式に変換する
-    Private Function strFormatDate(ByVal prmDate As String, Optional ByRef prmFormat As String = "yyyy/MM/dd") As String
-
-        'PCのカルチャーを取得し、それに応じてStringからDatetimeを作成
-        Dim ci As New System.Globalization.CultureInfo(CultureInfo.CurrentCulture.Name.ToString)
-        Dim dateFormat As DateTime = DateTime.Parse(prmDate, ci, System.Globalization.DateTimeStyles.AssumeLocal)
-
-        '日本の形式に書き換える
-        Return dateFormat.ToString(prmFormat)
-    End Function
-
-    'どんなカルチャーであっても、日本の形式に変換する
-    Private Function formatDatetime(ByVal prmDatetime As DateTime) As String
-
-        'PCのカルチャーを取得し、それに応じてStringからDatetimeを作成
-        Dim ciCurrent As New System.Globalization.CultureInfo(CultureInfo.CurrentCulture.Name.ToString)
-        Dim dateFormat As DateTime = DateTime.Parse(prmDatetime.ToString, ciCurrent, System.Globalization.DateTimeStyles.AssumeLocal)
-
-        Dim changeFormat As String = dateFormat.ToString("yyyy/MM/dd HH:mm:ss")
-
-        Dim ciJP As New System.Globalization.CultureInfo(CommonConst.CI_JP)
-        Dim rtnDatetime As DateTime = DateTime.Parse(changeFormat, ciJP, System.Globalization.DateTimeStyles.AssumeLocal)
-
-
-        '日本の形式に書き換える
-        Return changeFormat
-    End Function
-
     '金額フォーマット（登録の際の小数点指定子）を日本の形式に合わせる
     '桁区切り記号は外す
     Private Function formatNumber(ByVal prmVal As Decimal) As String
@@ -1055,6 +1027,23 @@ Public Class PurchasingManagement
 
         '日本の形式に書き換える
         Return prmVal.ToString("F3", nfi) '売掛残高を増やす
+    End Function
+
+    '汎用マスタから固定キー、可変キーに応じた結果を返す
+    'param1：String 固定キー
+    'param2：String 可変キー
+    'Return: DataSet
+    Private Function getDsHanyoData(ByVal prmFixed As String, ByVal prmVariable As String) As DataSet
+        Dim Sql As String = ""
+
+        Sql = " AND "
+        Sql += "固定キー ILIKE '" & prmFixed & "'"
+        Sql += " AND "
+        Sql += "可変キー ILIKE '" & prmVariable & "'"
+
+        'リードタイムのリストを汎用マスタから取得
+        Return getDsData("m90_hanyo", Sql)
+
     End Function
 
 End Class

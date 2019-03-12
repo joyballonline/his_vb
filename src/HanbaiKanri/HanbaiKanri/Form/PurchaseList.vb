@@ -211,13 +211,12 @@ Public Class PurchaseList
                     DgvHtyhd.Rows(i).Cells("行番号").Value = ds.Tables(RS).Rows(i)("行番号")
                     DgvHtyhd.Rows(i).Cells("仕入区分").Value = ds.Tables(RS).Rows(i)("仕入区分")
 
-                    '★汎用マスタからの取得に変更する
-                    If ds.Tables(RS).Rows(i)("仕入区分") = CommonConst.Sire_KBN_Sire Then
-                        DgvHtyhd.Rows(i).Cells("仕入区分").Value = CommonConst.Sire_KBN_Sire_TXT
-                    ElseIf ds.Tables(RS).Rows(i)("仕入区分") = CommonConst.Sire_KBN_Zaiko Then
-                        DgvHtyhd.Rows(i).Cells("仕入区分").Value = CommonConst.Sire_KBN_Zaiko_TXT
+                    'リードタイムのリストを汎用マスタから取得
+                    Dim dsHanyou As DataSet = getDsHanyoData(CommonConst.FIXED_KEY_PURCHASING_CLASS, ds.Tables(RS).Rows(i)("仕入区分"))
+                    If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+                        DgvHtyhd.Rows(i).Cells("仕入区分").Value = dsHanyou.Tables(RS).Rows(0)("文字２")
                     Else
-                        DgvHtyhd.Rows(i).Cells("仕入区分").Value = CommonConst.Sire_KBN_SERVICE_TXT
+                        DgvHtyhd.Rows(i).Cells("仕入区分").Value = dsHanyou.Tables(RS).Rows(0)("文字１")
                     End If
 
                     DgvHtyhd.Rows(i).Cells("メーカー").Value = ds.Tables(RS).Rows(i)("メーカー")
@@ -845,6 +844,23 @@ Public Class PurchaseList
 
         '日本の形式に書き換える
         Return changeFormat
+    End Function
+
+    '汎用マスタから固定キー、可変キーに応じた結果を返す
+    'param1：String 固定キー
+    'param2：String 可変キー
+    'Return: DataSet
+    Private Function getDsHanyoData(ByVal prmFixed As String, ByVal prmVariable As String) As DataSet
+        Dim Sql As String = ""
+
+        Sql = " AND "
+        Sql += "固定キー ILIKE '" & prmFixed & "'"
+        Sql += " AND "
+        Sql += "可変キー ILIKE '" & prmVariable & "'"
+
+        'リードタイムのリストを汎用マスタから取得
+        Return getDsData("m90_hanyo", Sql)
+
     End Function
 
 End Class
