@@ -242,8 +242,12 @@ Public Class QuoteList
                 '明細形式表示時
 
                 setListDt() '見出し行セット
+                If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+                    Sql = "SELECT t02.* ,m901.文字２ as 仕入区分名 ,m902.文字２ as リードタイム単位名, t01.取消区分 "
+                Else
+                    Sql = "SELECT t02.* ,m901.文字１ as 仕入区分名 ,m902.文字１ as リードタイム単位名, t01.取消区分 "
+                End If
 
-                Sql = "SELECT t02.* ,m901.文字１ as 仕入区分名 ,m902.文字１ as リードタイム単位名, t01.取消区分 "
                 Sql += "FROM public.t01_mithd t01 ,public.t02_mitdt  t02  "
                 Sql += "INNER JOIN public.m90_hanyo m901 "
                 Sql += " ON m901.会社コード = t02.会社コード "
