@@ -634,7 +634,7 @@ Public Class Order
     End Sub
 
     Private Sub SaibanSave()
-        Dim dtNow As DateTime = DateTime.Now
+        Dim dtNow As String = UtilClass.formatDatetime(DateTime.Now)
         OrderCount += 1
         Dim Saiban3 As String = ""
         Saiban3 += "UPDATE Public.m80_saiban "
@@ -655,208 +655,230 @@ Public Class Order
         Me.Dispose()
     End Sub
 
+    '登録ボタン押下時
     Private Sub BtnRegistration_Click(sender As Object, e As EventArgs) Handles BtnRegistration.Click
         Dim reccnt As Integer = 0
-        Dim dtNow As DateTime = DateTime.Now
+        Dim dtNow As String = UtilClass.formatDatetime(DateTime.Now)
 
+        '登録、編集、複写モードの時
         If OrderStatus = CommonConst.STATUS_ADD Or OrderStatus = CommonConst.STATUS_EDIT Or OrderStatus = CommonConst.STATUS_CLONE Then
-            Dim Sql1 As String = ""
-            Sql1 = ""
-            Sql1 += "INSERT INTO "
-            Sql1 += "Public."
-            Sql1 += "t10_cymnhd("
-            Sql1 += "会社コード, 受注番号, 受注番号枝番, 客先番号, 見積番号, 見積番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額,仕入金額, 粗利額, 営業担当者, 営業担当者コード, 入力担当者, 入力担当者コード, 備考, 見積備考, ＶＡＴ, 受注日, 登録日, 更新日, 更新者, 取消区分)"
-            Sql1 += " VALUES('"
-            Sql1 += CompanyCode
-            Sql1 += "', '"
-            Sql1 += TxtOrderNo.Text
-            Sql1 += "', '"
-            Sql1 += TxtOrderSuffix.Text
-            Sql1 += "', '"
-            Sql1 += RevoveChars(TxtCustomerPO.Text)
-            Sql1 += "', '"
-            Sql1 += TxtQuoteNo.Text
-            Sql1 += "', '"
-            Sql1 += TxtQuoteSuffix.Text
-            Sql1 += "', '"
-            Sql1 += TxtCustomerCode.Text
-            Sql1 += "', '"
-            Sql1 += TxtCustomerName.Text
-            Sql1 += "', '"
-            Sql1 += TxtPostalCode.Text
-            Sql1 += "', '"
-            Sql1 += TxtAddress1.Text
-            Sql1 += "', '"
-            Sql1 += TxtTel.Text
-            Sql1 += "', '"
-            Sql1 += TxtFax.Text
-            Sql1 += "', '"
-            Sql1 += TxtPosition.Text
-            Sql1 += "', '"
-            Sql1 += TxtPerson.Text
-            Sql1 += "', '"
-            Sql1 += DtpQuoteDate.Value
-            Sql1 += "', '"
-            Sql1 += DtpExpiration.Value
-            Sql1 += "', '"
-            Sql1 += TxtPaymentTerms.Text
-            Sql1 += "', '"
-            Sql1 += TxtOrderAmount.Text
-            Sql1 += "', '"
-            Sql1 += TxtPurchaseAmount.Text
-            Sql1 += "', '"
-            Sql1 += TxtGrossProfit.Text
-            Sql1 += "', '"
-            Sql1 += TxtSales.Text
-            Sql1 += "', '"
-            Sql1 += TxtSales.Tag
-            Sql1 += "', '"
-            Sql1 += TxtInput.Text
-            Sql1 += "', '"
-            Sql1 += TxtInput.Tag
-            Sql1 += "', '"
-            Sql1 += RevoveChars(TxtOrderRemark.Text)
-            Sql1 += "', '"
-            Sql1 += TxtQuoteRemarks.Text
-            Sql1 += "', '"
-            Sql1 += TxtVat.Text
-            Sql1 += "', '"
-            Sql1 += DtpOrderDate.Value
-            Sql1 += "', '"
-            Sql1 += DtpOrderRegistration.Value
-            Sql1 += "', '"
-            Sql1 += dtNow
-            Sql1 += "', '"
-            Sql1 += frmC01F10_Login.loginValue.TantoNM
-            Sql1 += "', '"
-            Sql1 += "0"
-            Sql1 += " ')"
 
-            _db.executeDB(Sql1)
+            Try
+                Dim Sql1 As String = ""
+                Sql1 = ""
+                Sql1 += "INSERT INTO "
+                Sql1 += "Public."
+                Sql1 += "t10_cymnhd("
+                Sql1 += "会社コード, 受注番号, 受注番号枝番, 客先番号, 見積番号, 見積番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額,仕入金額, 粗利額, 営業担当者, 営業担当者コード, 入力担当者, 入力担当者コード, 備考, 見積備考, ＶＡＴ, 受注日, 登録日, 更新日, 更新者, 取消区分)"
+                Sql1 += " VALUES('"
+                Sql1 += CompanyCode
+                Sql1 += "', '"
+                Sql1 += TxtOrderNo.Text
+                Sql1 += "', '"
+                Sql1 += TxtOrderSuffix.Text
+                Sql1 += "', '"
+                Sql1 += RevoveChars(TxtCustomerPO.Text)
+                Sql1 += "', '"
+                Sql1 += TxtQuoteNo.Text
+                Sql1 += "', '"
+                Sql1 += TxtQuoteSuffix.Text
+                Sql1 += "', '"
+                Sql1 += TxtCustomerCode.Text
+                Sql1 += "', '"
+                Sql1 += TxtCustomerName.Text
+                Sql1 += "', '"
+                Sql1 += TxtPostalCode.Text
+                Sql1 += "', '"
+                Sql1 += TxtAddress1.Text
+                Sql1 += "', '"
+                Sql1 += TxtTel.Text
+                Sql1 += "', '"
+                Sql1 += TxtFax.Text
+                Sql1 += "', '"
+                Sql1 += TxtPosition.Text
+                Sql1 += "', '"
+                Sql1 += TxtPerson.Text
+                Sql1 += "', '"
+                Sql1 += UtilClass.strFormatDate(DtpQuoteDate.Value)
+                Sql1 += "', '"
+                Sql1 += UtilClass.strFormatDate(DtpExpiration.Value)
+                Sql1 += "', '"
+                Sql1 += TxtPaymentTerms.Text
+                Sql1 += "', '"
+                Sql1 += UtilClass.formatNumber(TxtOrderAmount.Text)
+                Sql1 += "', '"
+                Sql1 += UtilClass.formatNumber(TxtPurchaseAmount.Text)
+                Sql1 += "', '"
+                Sql1 += UtilClass.formatNumber(TxtGrossProfit.Text)
+                Sql1 += "', '"
+                Sql1 += TxtSales.Text
+                Sql1 += "', '"
+                Sql1 += TxtSales.Tag
+                Sql1 += "', '"
+                Sql1 += TxtInput.Text
+                Sql1 += "', '"
+                Sql1 += TxtInput.Tag
+                Sql1 += "', '"
+                Sql1 += RevoveChars(TxtOrderRemark.Text)
+                Sql1 += "', '"
+                Sql1 += TxtQuoteRemarks.Text
+                Sql1 += "', '"
+                Sql1 += UtilClass.formatNumber(TxtVat.Text)
+                Sql1 += "', '"
+                Sql1 += UtilClass.strFormatDate(DtpOrderDate.Value)
+                Sql1 += "', '"
+                Sql1 += UtilClass.strFormatDate(DtpOrderRegistration.Value)
+                Sql1 += "', '"
+                Sql1 += dtNow
+                Sql1 += "', '"
+                Sql1 += frmC01F10_Login.loginValue.TantoNM
+                Sql1 += "', '"
+                Sql1 += "0"
+                Sql1 += " ')"
 
-            Dim Sql2 As String = ""
-            For cymnhdIdx As Integer = 0 To DgvItemList.Rows.Count - 1
-                Sql2 = ""
-                Sql2 += "INSERT INTO "
-                Sql2 += "Public."
-                Sql2 += "t11_cymndt("
-                Sql2 += "会社コード, 受注番号, 受注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 単位, 仕入先名, 仕入値, 受注数量, 売上数量, 受注残数, 間接費, 売単価, 売上金額, 粗利額, 粗利率, リードタイム, リードタイム単位, 出庫数, 未出庫数, 備考, 更新者, 登録日, 見積単価, 見積金額, 関税率, 関税額, 前払法人税率, 前払法人税額, 輸送費率, 輸送費額, 仕入原価, 仕入金額)"
-                Sql2 += " VALUES('"
-                Sql2 += CompanyCode
-                Sql2 += "', '"
-                Sql2 += TxtOrderNo.Text
-                Sql2 += "', '"
-                Sql2 += TxtOrderSuffix.Text
-                Sql2 += "', '"
-                Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("No").Value.ToString
-                Sql2 += "', '"
-                Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("仕入区分").Value.ToString
-                Sql2 += "', '"
-                Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("メーカー").Value.ToString
-                Sql2 += "', '"
-                Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("品名").Value.ToString
-                Sql2 += "', '"
-                Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("型式").Value.ToString
-                Sql2 += "', '"
-                Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("単位").Value.ToString
-                Sql2 += "', '"
-                Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("仕入先").Value.ToString
-                Sql2 += "', '"
-                Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("仕入値").Value.ToString
-                Sql2 += "', '"
-                Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("数量").Value.ToString
-                Sql2 += "', '"
-                Sql2 += "0"
-                Sql2 += "', '"
-                Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("数量").Value.ToString
-                Sql2 += "', '"
+                _db.executeDB(Sql1)
 
-                If DgvItemList.Rows(cymnhdIdx).Cells("間接費").Value.ToString = "" Then
+                Dim Sql2 As String = ""
+                For cymnhdIdx As Integer = 0 To DgvItemList.Rows.Count - 1
+                    Sql2 = ""
+                    Sql2 += "INSERT INTO "
+                    Sql2 += "Public."
+                    Sql2 += "t11_cymndt("
+                    Sql2 += "会社コード, 受注番号, 受注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 単位, 仕入先名, 仕入値, 受注数量, 売上数量, 受注残数, 間接費, 売単価, 売上金額, 粗利額, 粗利率, リードタイム, リードタイム単位, 出庫数, 未出庫数, 備考, 更新者, 登録日, 見積単価, 見積金額, 関税率, 関税額, 前払法人税率, 前払法人税額, 輸送費率, 輸送費額, 仕入原価, 仕入金額)"
+                    Sql2 += " VALUES('"
+                    Sql2 += CompanyCode
+                    Sql2 += "', '"
+                    Sql2 += TxtOrderNo.Text
+                    Sql2 += "', '"
+                    Sql2 += TxtOrderSuffix.Text
+                    Sql2 += "', '"
+                    Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("No").Value.ToString
+                    Sql2 += "', '"
+                    Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("仕入区分").Value.ToString
+                    Sql2 += "', '"
+                    Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("メーカー").Value.ToString
+                    Sql2 += "', '"
+                    Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("品名").Value.ToString
+                    Sql2 += "', '"
+                    Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("型式").Value.ToString
+                    Sql2 += "', '"
+                    Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("単位").Value.ToString
+                    Sql2 += "', '"
+                    Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("仕入先").Value.ToString
+                    Sql2 += "', '"
+                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(cymnhdIdx).Cells("仕入値").Value.ToString)
+                    Sql2 += "', '"
+                    Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("数量").Value.ToString
+                    Sql2 += "', '"
                     Sql2 += "0"
-                Else
-                    Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("間接費").Value.ToString
-                End If
-                Sql2 += "', '"
-                Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("売単価").Value.ToString
-                Sql2 += "', '"
-                Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("売上金額").Value.ToString
-                Sql2 += "', '"
-                Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("粗利額").Value.ToString
-                Sql2 += "', '"
-                Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("粗利率").Value.ToString
-                Sql2 += "', '"
-                Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("リードタイム").Value.ToString
-                Sql2 += "', '"
-                Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("リードタイム単位").Value.ToString
-                Sql2 += "', '"
-                Sql2 += "0"
-                Sql2 += "', '"
-                Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("数量").Value.ToString
-                Sql2 += "', '"
-                Sql2 += RevoveChars(DgvItemList.Rows(cymnhdIdx).Cells("備考").Value.ToString)
-                Sql2 += "', '"
-                Sql2 += frmC01F10_Login.loginValue.TantoNM
-                Sql2 += "', '"
-                Sql2 += dtNow
+                    Sql2 += "', '"
+                    Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("数量").Value.ToString
+                    Sql2 += "', '"
 
-                Sql2 += "', '"
-                Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("見積単価").Value.ToString
-                Sql2 += "', '"
-                Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("見積金額").Value.ToString
-                Sql2 += "', '"
-                Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("関税率").Value.ToString
-                Sql2 += "', '"
-                Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("関税額").Value.ToString
-                Sql2 += "', '"
-                Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("前払法人税率").Value.ToString
-                Sql2 += "', '"
-                Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("前払法人税額").Value.ToString
-                Sql2 += "', '"
-                Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("輸送費率").Value.ToString
-                Sql2 += "', '"
-                Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("輸送費額").Value.ToString
-                Sql2 += "', '"
-                Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("仕入原価").Value.ToString
-                Sql2 += "', '"
-                Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("仕入金額").Value.ToString
-                Sql2 += " ')"
+                    If DgvItemList.Rows(cymnhdIdx).Cells("間接費").Value.ToString = "" Then
+                        Sql2 += "0"
+                    Else
+                        Sql2 += UtilClass.formatNumber(DgvItemList.Rows(cymnhdIdx).Cells("間接費").Value.ToString)
+                    End If
+                    Sql2 += "', '"
+                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(cymnhdIdx).Cells("売単価").Value.ToString)
+                    Sql2 += "', '"
+                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(cymnhdIdx).Cells("売上金額").Value.ToString)
+                    Sql2 += "', '"
+                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(cymnhdIdx).Cells("粗利額").Value.ToString)
+                    Sql2 += "', '"
+                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(cymnhdIdx).Cells("粗利率").Value.ToString)
+                    Sql2 += "', '"
+                    Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("リードタイム").Value.ToString
+                    Sql2 += "', '"
+                    Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("リードタイム単位").Value.ToString
+                    Sql2 += "', '"
+                    Sql2 += "0"
+                    Sql2 += "', '"
+                    Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("数量").Value.ToString
+                    Sql2 += "', '"
+                    Sql2 += RevoveChars(DgvItemList.Rows(cymnhdIdx).Cells("備考").Value.ToString)
+                    Sql2 += "', '"
+                    Sql2 += frmC01F10_Login.loginValue.TantoNM
+                    Sql2 += "', '"
+                    Sql2 += dtNow
 
-                _db.executeDB(Sql2)
+                    Sql2 += "', '"
+                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(cymnhdIdx).Cells("見積単価").Value.ToString)
+                    Sql2 += "', '"
+                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(cymnhdIdx).Cells("見積金額").Value.ToString)
+                    Sql2 += "', '"
+                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(cymnhdIdx).Cells("関税率").Value.ToString)
+                    Sql2 += "', '"
+                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(cymnhdIdx).Cells("関税額").Value.ToString)
+                    Sql2 += "', '"
+                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(cymnhdIdx).Cells("前払法人税率").Value.ToString)
+                    Sql2 += "', '"
+                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(cymnhdIdx).Cells("前払法人税額").Value.ToString)
+                    Sql2 += "', '"
+                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(cymnhdIdx).Cells("輸送費率").Value.ToString)
+                    Sql2 += "', '"
+                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(cymnhdIdx).Cells("輸送費額").Value.ToString)
+                    Sql2 += "', '"
+                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(cymnhdIdx).Cells("仕入原価").Value.ToString)
+                    Sql2 += "', '"
+                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(cymnhdIdx).Cells("仕入金額").Value.ToString)
+                    Sql2 += " ')"
 
-                Sql2 = ""
-            Next
-            Dim Sql As String = ""
-            '呼び出した見積に受注日を入れる
-            Sql = ""
-            Sql += "UPDATE Public.t01_mithd "
-            Sql += "SET  受注日 = '" & DtpOrderDate.Value & "'"
-            Sql += ", 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
-            Sql += ", 更新日 = '" & dtNow & "'"
-            Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Sql += " AND 見積番号 = '" & TxtQuoteNo.Text & "'"
-            Sql += " AND 見積番号枝番 = '" & TxtQuoteSuffix.Text & "'"
+                    _db.executeDB(Sql2)
 
-            _db.executeDB(Sql)
+                    Sql2 = ""
+                Next
+                Dim Sql As String = ""
+                '呼び出した見積に受注日を入れる
+                Sql = ""
+                Sql += "UPDATE Public.t01_mithd "
+                Sql += "SET  受注日 = '" & UtilClass.strFormatDate(DtpOrderDate.Value) & "'"
+                Sql += ", 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+                Sql += ", 更新日 = '" & dtNow & "'"
+                Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                Sql += " AND 見積番号 = '" & TxtQuoteNo.Text & "'"
+                Sql += " AND 見積番号枝番 = '" & TxtQuoteSuffix.Text & "'"
+
+                _db.executeDB(Sql)
+
+            Catch ue As UsrDefException
+                ue.dspMsg()
+                Throw ue
+            Catch ex As Exception
+                'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
+                Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
+            End Try
 
         Else
-            Dim Sql1 As String = ""
-            Sql1 = ""
-            Sql1 += "UPDATE Public.t10_cymnhd "
-            Sql1 += "SET 客先番号 = '" & RevoveChars(TxtCustomerPO.Text) & "'"
-            Sql1 += " , 備考 = '" & RevoveChars(TxtOrderRemark.Text) & "'"
-            Sql1 += " , 受注日 = '" & DtpOrderDate.Value & "'"
-            Sql1 += " , 更新日 = '" & dtNow & "'"
-            Sql1 += " , 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+            Try
 
-            Sql1 += " WHERE 会社コード ='" & CompanyCode & "'"
-            Sql1 += " AND 受注番号 ='" & OrderNo & "'"
-            Sql1 += " AND 受注番号枝番 ='" & OrderSuffix & "'"
+                Dim Sql1 As String = ""
+                Sql1 = ""
+                Sql1 += "UPDATE Public.t10_cymnhd "
+                Sql1 += "SET 客先番号 = '" & RevoveChars(TxtCustomerPO.Text) & "'"
+                Sql1 += " , 備考 = '" & RevoveChars(TxtOrderRemark.Text) & "'"
+                Sql1 += " , 受注日 = '" & DtpOrderDate.Value & "'"
+                Sql1 += " , 更新日 = '" & dtNow & "'"
+                Sql1 += " , 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
 
-            _db.executeDB(Sql1)
+                Sql1 += " WHERE 会社コード ='" & CompanyCode & "'"
+                Sql1 += " AND 受注番号 ='" & OrderNo & "'"
+                Sql1 += " AND 受注番号枝番 ='" & OrderSuffix & "'"
+
+                _db.executeDB(Sql1)
+
+            Catch ue As UsrDefException
+                ue.dspMsg()
+                Throw ue
+            Catch ex As Exception
+                'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
+                Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
+            End Try
         End If
 
-        _parentForm.Enabled = True
-        _parentForm.Show()
+        _ParentForm.Enabled = True
+        _ParentForm.Show()
         Me.Dispose()
 
     End Sub
