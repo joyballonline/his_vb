@@ -170,7 +170,8 @@ Public Class PurchaseStockAmountList
                 DgvList.Rows(i).Cells("仕入単価").Value = Format(ds.Tables(RS).Rows(i)("仕入単価"), "0.000")
                 DgvList.Rows(i).Cells("ＶＡＴ").Value = Format(calVAT, "0.000")
                 DgvList.Rows(i).Cells("間接費").Value = Format(ds.Tables(RS).Rows(i)("間接費"), "0.000")
-                DgvList.Rows(i).Cells("仕入計").Value = Format((ds.Tables(RS).Rows(i)("仕入単価") + calVAT + ds.Tables(RS).Rows(i)("間接費")) * ds.Tables(RS).Rows(i)("仕入数量"), "0.000")
+                'DgvList.Rows(i).Cells("仕入計").Value = Format((ds.Tables(RS).Rows(i)("仕入単価") + calVAT + ds.Tables(RS).Rows(i)("間接費")) * ds.Tables(RS).Rows(i)("仕入数量"), "0.000")
+                DgvList.Rows(i).Cells("仕入計").Value = Format(ds.Tables(RS).Rows(i)("仕入金額"), "0.000")
 
                 totalAmount += ds.Tables(RS).Rows(i)("仕入金額")
 
