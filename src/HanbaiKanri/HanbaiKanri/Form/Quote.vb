@@ -570,7 +570,7 @@ Public Class Quote
     End Sub
 
     Private Sub SaibanSave()
-        Dim dtToday As DateTime = DateTime.Now
+        Dim dtToday As String = UtilClass.formatDatetime(DateTime.Now)
 
         If QuoteNo = QuoteNoMax Then
             QuoteNo = QuoteNoMin
