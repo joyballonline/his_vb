@@ -1136,6 +1136,7 @@ Public Class Quote
         Dim dtToday As DateTime = DateTime.Now
         Dim strToday As String = UtilClass.formatDatetime(dtToday)
 
+        '仕入単価入力
         If Status Is CommonConst.STATUS_PRICE Then
             Try
                 Dim Sql1 As String = ""
@@ -1290,7 +1291,10 @@ Public Class Quote
                 'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
                 Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
             End Try
+
         Else
+            '仕入単価入力以外
+
             Try
                 Dim Sql1 As String = ""
                 Sql1 = ""
@@ -1320,13 +1324,13 @@ Public Class Quote
                 Sql1 += ", '" & frmC01F10_Login.loginValue.TantoCD & "' "       '入力担当者コード
                 Sql1 += ", '" & TxtInput.Text & "'"                             '入力担当者
                 Sql1 += ", '" & RevoveChars(TxtRemarks.Text) & "'"              '備考
-                Sql1 += ","                                                     'ＶＡＴ
+                Sql1 += ",'"                                                     'ＶＡＴ
                 If TxtVat.Text = Nothing Then
                     Sql1 += "0"
                 Else
-                    Sql1 += TxtVat.Text
+                    Sql1 += UtilClass.formatNumber(TxtVat.Text)
                 End If
-                Sql1 += ",0"                                                    '取消区分
+                Sql1 += "',0"                                                    '取消区分
                 Sql1 += ", '" & UtilClass.strFormatDate(DtpRegistration.Text) & "'"       '登録日
                 Sql1 += ", '" & strToday & "'"                                   '更新日
                 Sql1 += ", '" & Input & "'"                                    '更新者

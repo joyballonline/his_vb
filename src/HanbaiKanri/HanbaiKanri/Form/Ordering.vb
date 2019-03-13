@@ -122,7 +122,7 @@ Public Class Ordering
     Private Sub GetSiireNo_New()
         Dim reccnt As Integer = 0
         Dim dtNow As DateTime = DateTime.Now
-
+        Dim strNow As String = UtilClass.formatDatetime(dtNow)
         Dim SqlSaiban As String = ""
         SqlSaiban += "SELECT "
         SqlSaiban += "会社コード, "
@@ -149,7 +149,7 @@ Public Class Ordering
         Saiban4 += "SET "
         Saiban4 += " 最新値 = '" & PurchaseCount.ToString & "'"
         Saiban4 += " , 更新者 = 'Admin'"
-        Saiban4 += " , 更新日 = '" & dtNow & "'"
+        Saiban4 += " , 更新日 = '" & strNow & "'"
         Saiban4 += " WHERE 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
         Saiban4 += " AND 採番キー ='30' "
         _db.executeDB(Saiban4)
@@ -947,7 +947,7 @@ Public Class Ordering
 
                 _db.executeDB(Sql)
 
-                For hattyuIdx As Integer = 0 To DgvItemList.Rows.Count - 1
+                For i As Integer = 0 To DgvItemList.Rows.Count - 1
 
                     Sql = "INSERT INTO "
                     Sql += "Public."
@@ -955,7 +955,7 @@ Public Class Ordering
                     Sql += "会社コード, 発注番号, 発注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 単位, 仕入値, 発注数量, 仕入数量, 発注残数, 間接費, 仕入単価, 仕入金額, リードタイム, リードタイム単位, 入庫数, 未入庫数, 備考, 更新者, 登録日, 更新日"
 
                     Sql += IIf(
-                    DgvItemList.Rows(hattyuIdx).Cells("貿易条件").Value IsNot Nothing,
+                    DgvItemList.Rows(i).Cells("貿易条件").Value IsNot Nothing,
                     ", 貿易条件",
                     "")
                     Sql += " )VALUES('"
@@ -965,41 +965,44 @@ Public Class Ordering
                     Sql += "', '"
                     Sql += TxtOrderingSuffix.Text
                     Sql += "', '"
-                    Sql += DgvItemList.Rows(hattyuIdx).Cells("No").Value.ToString
+                    Sql += DgvItemList.Rows(i).Cells("No").Value.ToString
                     Sql += "', '2"
                     'Sql += DgvItemList.Rows(hattyuIdx).Cells("仕入区分").Value.ToString
                     Sql += "', '"
-                    Sql += DgvItemList.Rows(hattyuIdx).Cells("メーカー").Value.ToString
+                    Sql += DgvItemList.Rows(i).Cells("メーカー").Value.ToString
                     Sql += "', '"
-                    Sql += DgvItemList.Rows(hattyuIdx).Cells("品名").Value.ToString
+                    Sql += DgvItemList.Rows(i).Cells("品名").Value.ToString
                     Sql += "', '"
-                    Sql += DgvItemList.Rows(hattyuIdx).Cells("型式").Value.ToString
+                    Sql += DgvItemList.Rows(i).Cells("型式").Value.ToString
                     Sql += "', '"
-                    Sql += DgvItemList.Rows(hattyuIdx).Cells("単位").Value.ToString
+                    Sql += DgvItemList.Rows(i).Cells("単位").Value.ToString
                     Sql += "', '"
-                    Sql += formatNumber(DgvItemList.Rows(hattyuIdx).Cells("仕入単価").Value.ToString)
+                    Sql += formatNumber(DgvItemList.Rows(i).Cells("仕入単価").Value.ToString)
                     Sql += "', '"
-                    Sql += formatNumber(DgvItemList.Rows(hattyuIdx).Cells("数量").Value.ToString)
+                    Sql += formatNumber(DgvItemList.Rows(i).Cells("数量").Value.ToString)
                     Sql += "', '"
                     Sql += "0"
                     Sql += "', '"
-                    Sql += formatNumber(DgvItemList.Rows(hattyuIdx).Cells("数量").Value.ToString)
+                    Sql += formatNumber(DgvItemList.Rows(i).Cells("数量").Value.ToString)
                     Sql += "', 0"
                     'Sql += formatNumber(DgvItemList.Rows(hattyuIdx).Cells("間接費").Value.ToString)
                     Sql += ", '"
-                    Sql += formatNumber(DgvItemList.Rows(hattyuIdx).Cells("仕入単価").Value.ToString)
+                    Sql += formatNumber(DgvItemList.Rows(i).Cells("仕入単価").Value.ToString)
                     Sql += "', '"
-                    Sql += formatNumber(DgvItemList.Rows(hattyuIdx).Cells("仕入金額").Value.ToString)
+                    Sql += formatNumber(DgvItemList.Rows(i).Cells("仕入金額").Value.ToString)
                     Sql += "', '"
-                    Sql += DgvItemList.Rows(hattyuIdx).Cells("リードタイム").Value.ToString
+                    Sql += IIf(
+                                DgvItemList.Rows(i).Cells("リードタイム").Value IsNot Nothing,
+                                DgvItemList.Rows(i).Cells("リードタイム").Value,
+                                "")
                     Sql += "', '"
-                    Sql += DgvItemList.Rows(hattyuIdx).Cells("リードタイム単位").Value.ToString
+                    Sql += DgvItemList.Rows(i).Cells("リードタイム単位").Value.ToString
                     Sql += "', '"
                     Sql += "0"
                     Sql += "', '"
-                    Sql += DgvItemList.Rows(hattyuIdx).Cells("数量").Value.ToString
+                    Sql += DgvItemList.Rows(i).Cells("数量").Value.ToString
                     Sql += "', '"
-                    Sql += DgvItemList.Rows(hattyuIdx).Cells("備考").Value
+                    Sql += DgvItemList.Rows(i).Cells("備考").Value
                     Sql += "', '"
                     Sql += frmC01F10_Login.loginValue.TantoNM
                     Sql += "', '"
@@ -1008,8 +1011,8 @@ Public Class Ordering
                     Sql += dtNow
                     Sql += "'"
                     Sql += IIf(
-                    DgvItemList.Rows(hattyuIdx).Cells("貿易条件").Value IsNot Nothing,
-                    ", '" & DgvItemList.Rows(hattyuIdx).Cells("貿易条件").Value & "'",
+                    DgvItemList.Rows(i).Cells("貿易条件").Value IsNot Nothing,
+                    ", '" & DgvItemList.Rows(i).Cells("貿易条件").Value & "'",
                     "")
                     Sql += " )"
 
