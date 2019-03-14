@@ -1114,153 +1114,325 @@ Public Class Shiwake
         Dim reccnt As Integer = 0 'DB用（デフォルト）
         Dim Sql As String
 
+        Dim dbName As String = frmC01F10_Login.loginValue.BumonCD
+
         't01_mithd
-        Sql = "DELETE FROM t01_mithd WHERE ""会社コード"" = 'ZENBI';"
+        Sql = "DELETE FROM t01_mithd WHERE ""会社コード"" = '" & dbName & "';"
         _db.executeDB(Sql)
 
         't02_mitdt
-        Sql = "DELETE FROM t02_mitdt WHERE ""会社コード"" = 'ZENBI';"
+        Sql = "DELETE FROM t02_mitdt WHERE ""会社コード"" = '" & dbName & "';"
         _db.executeDB(Sql)
 
         't10_cymnhd
-        Sql = "DELETE FROM t10_cymnhd WHERE ""会社コード"" = 'ZENBI';"
+        Sql = "DELETE FROM t10_cymnhd WHERE ""会社コード"" = '" & dbName & "';"
         _db.executeDB(Sql)
 
         't11_cymndt
-        Sql = "DELETE FROM t11_cymndt WHERE ""会社コード"" = 'ZENBI';"
+        Sql = "DELETE FROM t11_cymndt WHERE ""会社コード"" = '" & dbName & "';"
         _db.executeDB(Sql)
 
         't20_hattyu
-        Sql = "DELETE FROM t20_hattyu WHERE ""会社コード"" = 'ZENBI';"
+        Sql = "DELETE FROM t20_hattyu WHERE ""会社コード"" = '" & dbName & "';"
         _db.executeDB(Sql)
 
         't21_hattyu
-        Sql = "DELETE FROM t21_hattyu WHERE ""会社コード"" = 'ZENBI';"
+        Sql = "DELETE FROM t21_hattyu WHERE ""会社コード"" = '" & dbName & "';"
         _db.executeDB(Sql)
 
         't23_skyuhd
-        Sql = "DELETE FROM t23_skyuhd WHERE ""会社コード"" = 'ZENBI';"
+        Sql = "DELETE FROM t23_skyuhd WHERE ""会社コード"" = '" & dbName & "';"
         _db.executeDB(Sql)
 
         't25_nkinhd
-        Sql = "DELETE FROM t25_nkinhd WHERE ""会社コード"" = 'ZENBI';"
+        Sql = "DELETE FROM t25_nkinhd WHERE ""会社コード"" = '" & dbName & "';"
         _db.executeDB(Sql)
 
         't26_nkindt
-        Sql = "DELETE FROM t26_nkindt WHERE ""会社コード"" = 'ZENBI';"
+        Sql = "DELETE FROM t26_nkindt WHERE ""会社コード"" = '" & dbName & "';"
         _db.executeDB(Sql)
 
         't27_nkinkshihd
-        Sql = "DELETE FROM t27_nkinkshihd WHERE ""会社コード"" = 'ZENBI';"
+        Sql = "DELETE FROM t27_nkinkshihd WHERE ""会社コード"" = '" & dbName & "';"
         _db.executeDB(Sql)
 
         't30_urighd
-        Sql = "DELETE FROM t30_urighd WHERE ""会社コード"" = 'ZENBI';"
+        Sql = "DELETE FROM t30_urighd WHERE ""会社コード"" = '" & dbName & "';"
         _db.executeDB(Sql)
 
         't31_urigdt
-        Sql = "DELETE FROM t31_urigdt WHERE ""会社コード"" = 'ZENBI';"
+        Sql = "DELETE FROM t31_urigdt WHERE ""会社コード"" = '" & dbName & "';"
         _db.executeDB(Sql)
 
         't40_sirehd
-        Sql = "DELETE FROM t40_sirehd WHERE ""会社コード"" = 'ZENBI';"
+        Sql = "DELETE FROM t40_sirehd WHERE ""会社コード"" = '" & dbName & "';"
         _db.executeDB(Sql)
 
         't41_siredt
-        Sql = "DELETE FROM t41_siredt WHERE ""会社コード"" = 'ZENBI';"
+        Sql = "DELETE FROM t41_siredt WHERE ""会社コード"" = '" & dbName & "';"
         _db.executeDB(Sql)
 
         't42_nyukohd
-        Sql = "DELETE FROM t42_nyukohd WHERE ""会社コード"" = 'ZENBI';"
+        Sql = "DELETE FROM t42_nyukohd WHERE ""会社コード"" = '" & dbName & "';"
         _db.executeDB(Sql)
 
         't43_nyukodt
-        Sql = "DELETE FROM t43_nyukodt WHERE ""会社コード"" = 'ZENBI';"
+        Sql = "DELETE FROM t43_nyukodt WHERE ""会社コード"" = '" & dbName & "';"
         _db.executeDB(Sql)
 
         't44_shukohd
-        Sql = "DELETE FROM t44_shukohd WHERE ""会社コード"" = 'ZENBI';"
+        Sql = "DELETE FROM t44_shukohd WHERE ""会社コード"" = '" & dbName & "';"
         _db.executeDB(Sql)
 
         't45_shukodt
-        Sql = "DELETE FROM t45_shukodt WHERE ""会社コード"" = 'ZENBI';"
+        Sql = "DELETE FROM t45_shukodt WHERE ""会社コード"" = '" & dbName & "';"
         _db.executeDB(Sql)
 
         't46_kikehd
-        Sql = "DELETE FROM t46_kikehd WHERE ""会社コード"" = 'ZENBI';"
+        Sql = "DELETE FROM t46_kikehd WHERE ""会社コード"" = '" & dbName & "';"
         _db.executeDB(Sql)
 
         't47_shrihd
-        Sql = "DELETE FROM t47_shrihd WHERE ""会社コード"" = 'ZENBI';"
+        Sql = "DELETE FROM t47_shrihd WHERE ""会社コード"" = '" & dbName & "';"
         _db.executeDB(Sql)
 
         't48_shridt
-        Sql = "DELETE FROM t48_shridt WHERE ""会社コード"" = 'ZENBI';"
+        Sql = "DELETE FROM t48_shridt WHERE ""会社コード"" = '" & dbName & "';"
         _db.executeDB(Sql)
 
         't49_shrikshihd
-        Sql = "DELETE FROM t49_shrikshihd WHERE ""会社コード"" = 'ZENBI';"
+        Sql = "DELETE FROM t49_shrikshihd WHERE ""会社コード"" = '" & dbName & "';"
         _db.executeDB(Sql)
 
         't50_zikhd
-        Sql = "DELETE FROM t50_zikhd WHERE ""会社コード"" = 'ZENBI';"
+        Sql = "DELETE FROM t50_zikhd WHERE ""会社コード"" = '" & dbName & "';"
         _db.executeDB(Sql)
 
         ''t52_krurighd
-        'Sql = "DELETE FROM t52_krurighd WHERE ""会社コード"" = 'ZENBI';"
+        'Sql = "DELETE FROM t52_krurighd WHERE ""会社コード"" = '" & dbName & "';"
         '_db.executeDB(Sql)
 
         ''t53_krurigdt
-        'Sql = "DELETE FROM t53_krurigdt WHERE ""会社コード"" = 'ZENBI';"
+        'Sql = "DELETE FROM t53_krurigdt WHERE ""会社コード"" = '" & dbName & "';"
         '_db.executeDB(Sql)
 
         ''t54_krsirehd
-        'Sql = "DELETE FROM t54_krsirehd WHERE ""会社コード"" = 'ZENBI';"
+        'Sql = "DELETE FROM t54_krsirehd WHERE ""会社コード"" = '" & dbName & "';"
         '_db.executeDB(Sql)
 
         ''t55_krsiredt
-        'Sql = "DELETE FROM t55_krsiredt WHERE ""会社コード"" = 'ZENBI';"
+        'Sql = "DELETE FROM t55_krsiredt WHERE ""会社コード"" = '" & dbName & "';"
         '_db.executeDB(Sql)
 
         ''t56_krskyuhd
-        'Sql = "DELETE FROM t56_krskyuhd WHERE ""会社コード"" = 'ZENBI';"
+        'Sql = "DELETE FROM t56_krskyuhd WHERE ""会社コード"" = '" & dbName & "';"
         '_db.executeDB(Sql)
 
         ''t57_krkikehd
-        'Sql = "DELETE FROM t57_krkikehd WHERE ""会社コード"" = 'ZENBI';"
+        'Sql = "DELETE FROM t57_krkikehd WHERE ""会社コード"" = '" & dbName & "';"
         '_db.executeDB(Sql)
 
         ''t58_krnyukohd
-        'Sql = "DELETE FROM t58_krnyukohd WHERE ""会社コード"" = 'ZENBI';"
+        'Sql = "DELETE FROM t58_krnyukohd WHERE ""会社コード"" = '" & dbName & "';"
         '_db.executeDB(Sql)
 
         ''t59_krnyukodt
-        'Sql = "DELETE FROM t59_krnyukodt WHERE ""会社コード"" = 'ZENBI';"
+        'Sql = "DELETE FROM t59_krnyukodt WHERE ""会社コード"" = '" & dbName & "';"
         '_db.executeDB(Sql)
 
         ''t60_krshukohd
-        'Sql = "DELETE FROM t60_krshukohd WHERE ""会社コード"" = 'ZENBI';"
+        'Sql = "DELETE FROM t60_krshukohd WHERE ""会社コード"" = '" & dbName & "';"
         '_db.executeDB(Sql)
 
         ''t61_krshukodt
-        'Sql = "DELETE FROM t61_krshukodt WHERE ""会社コード"" = 'ZENBI';"
+        'Sql = "DELETE FROM t61_krshukodt WHERE ""会社コード"" = '" & dbName & "';"
         '_db.executeDB(Sql)
 
         ''t62_krnkinhd
-        'Sql = "DELETE FROM t62_krnkinhd WHERE ""会社コード"" = 'ZENBI';"
+        'Sql = "DELETE FROM t62_krnkinhd WHERE ""会社コード"" = '" & dbName & "';"
         '_db.executeDB(Sql)
 
         ''t63_krnkindt
-        'Sql = "DELETE FROM t63_krnkindt WHERE ""会社コード"" = 'ZENBI';"
+        'Sql = "DELETE FROM t63_krnkindt WHERE ""会社コード"" = '" & dbName & "';"
         '_db.executeDB(Sql)
 
         ''t64_krshrihd
-        'Sql = "DELETE FROM t64_krshrihd WHERE ""会社コード"" = 'ZENBI';"
+        'Sql = "DELETE FROM t64_krshrihd WHERE ""会社コード"" = '" & dbName & "';"
         '_db.executeDB(Sql)
 
         ''t65_krshridt
-        'Sql = "DELETE FROM t65_krshridt WHERE ""会社コード"" = 'ZENBI';"
+        'Sql = "DELETE FROM t65_krshridt WHERE ""会社コード"" = '" & dbName & "';"
         '_db.executeDB(Sql)
 
     End Sub
+
+    ''新規作成ボタンを押したら
+    'Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+    '    Dim companyCode As String = txtCompanyCd.Text
+    '    Dim companyName As String = txtCompanyName.Text
+    '    Dim userCode As String = txtUserCd.Text
+    '    Dim userName As String = txtUserName.Text
+
+    '    Dim Sql As String = ""
+
+    '    Try
+    '        '会社マスタを作成
+    '        Sql = "INSERT INTO Public.m01_company( "
+    '        Sql += "会社コード, 会社名, 会社略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 
+    '            ＦＡＸ番号, 代表者役職, 代表者名, 表示順, 備考, 更新者, 更新日, 銀行コード, 
+    '            支店コード, 預金種目, 口座番号, 口座名義, 銀行名, 支店名, 前回締日, 今回締日, 
+    '            次回締日, 在庫単価評価法, 前払法人税率, 会計用コード"
+    '        Sql += ") VALUES ("
+    '        Sql += "'" & companyCode & "', '" & companyName & "', 'テスト', '1310045', '東京都', '墨田区押上', '１丁目１−２', 'xxx-xxxx-xxxx', 
+    '            'xxx-xxxx-xxxx', null, 'テスト太郎', 1, null, 'mikami', now(), '0123', 
+    '            '03', 1, '0123456789', 'テスト株式会社', '東京銀行', 'スカイツリー支店', null, null, 
+    '            null, 1, '0.025', null)"
+
+    '        _db.executeDB(Sql)
+
+    '        '会社マスタを作成
+    '        Sql = "INSERT INTO public.m04_menu("
+    '        Sql += "会社コード,処理ＩＤ,処理名,業務ＩＤ,業務名,説明,表示順,削除フラグ,更新者,更新日,英語用処理名,英語用業務名,英語用説明) VALUES "
+    '        Sql += "('" & companyCode & "','H0110','見積登録','H01','見積業務','見積情報を新規登録します。',110,0,'" & userCode & "',now(),'Quotation registration','Quotation job',NULL),"
+    '        Sql += "('" & companyCode & "','H0120','仕入単価入力','H01','見積業務','仕入単価の入力します。',130,0,'" & userCode & "',now(),'Purchase unit pric','Quotation job',NULL),"
+    '        Sql += "('" & companyCode & "','H0130','見積修正','H01','見積業務','見積情報の修正をします。',140,0,'" & userCode & "',now(),'Quotation edit','Quotation job',NULL),"
+    '        Sql += "('" & companyCode & "','H0140','見積複写','H01','見積業務','既存の見積情報を複写し、新規見積として登録します。',150,0,'" & userCode & "',now(),'Quotation copy','Quotation job',NULL),"
+    '        Sql += "('" & companyCode & "','H0150','見積参照','H01','見積業務','見積情報を参照できます。見積依頼書・見積書の発行も行えます。',120,0,'" & userCode & "',now(),'Quotation data view','Quotation job',NULL),"
+    '        Sql += "('" & companyCode & "','H0160','見積取消','H01','見積業務','見積情報を取消します。',160,0,'" & userCode & "',now(),'Cancel of quotation','Quotation job',NULL),"
+    '        Sql += "('" & companyCode & "','H0210','受注登録','H02','受注業務','見積情報を基に受注を新規登録します。',210,0,'" & userCode & "',now(),'Job order registration','Job of receiving job order',NULL),"
+    '        Sql += "('" & companyCode & "','H0220','受注編集','H02','受注業務','受注情報の修正をします。',220,1,'" & userCode & "',now(),'Edit job order','Job of receiving job order',NULL),"
+    '        Sql += "('" & companyCode & "','H0240','受注取消','H02','受注業務','受注情報を取消します。',240,0,'" & userCode & "',now(),'Cancel of order','Job of receiving job order',NULL),"
+    '        Sql += "('" & companyCode & "','H0250','受注参照','H02','受注業務','受注情報を参照できます。',240,0,'" & userCode & "',now(),'Order view','Job of receiving job order',NULL),"
+    '        'Sql += "('" & companyCode & "','H0260','受注残一覧','H02','受注業務','受注残一覧を参照、発行できます。',250,0,'" & userCode & "',now(),'Order remaining list','Job of receiving job order',NULL),"
+    '        Sql += "('" & companyCode & "','H0310','売上登録','H03','売上業務','売上情報の新規登録・編集が行えます。',310,0,'" & userCode & "',now(),'Sales registration','Sales operations',NULL),"
+    '        Sql += "('" & companyCode & "','H0330','売上取消','H03','売上業務','売上情報を取消します。',330,0,'" & userCode & "',now(),'Cancel of sales','Sales operations',NULL),"
+    '        Sql += "('" & companyCode & "','H0340','売上参照','H03','売上業務','売上情報を参照できます。',340,0,'" & userCode & "',now(),'Sales data view','Sales operations',NULL),"
+    '        Sql += "('" & companyCode & "','H0410','出庫登録','H04','出庫業務','出庫情報の新規登録・編集が行えます。',410,0,'" & userCode & "',now(),'Goods delivery  registration','Goods delivery ',NULL),"
+    '        Sql += "('" & companyCode & "','H0430','出庫取消','H04','出庫業務','出庫情報を取消します。',430,0,'" & userCode & "',now(),'Cancel of goods delivery ','Goods delivery ',NULL),"
+    '        Sql += "('" & companyCode & "','H0440','出庫参照','H04','出庫業務','出庫情報を参照できます。納品書・受領書の発行も行えます。',440,0,'" & userCode & "',now(),'Goods delively data view ','Goods delivery ',NULL),"
+    '        Sql += "('" & companyCode & "','H0510','発注登録','H05','発注業務','発注情報の新規登録をします。',510,0,'" & userCode & "',now(),'Order registration','Type of order',NULL),"
+    '        Sql += "('" & companyCode & "','H0520','発注編集','H05','発注業務','発注情報の修正をします。',520,0,'" & userCode & "',now(),'Purchase order edit','Type of order',NULL),"
+    '        Sql += "('" & companyCode & "','H0530','発注複写','H05','発注業務','既存の発注情報を複写し、新規発注として登録します。',530,0,'" & userCode & "',now(),'Purchase order copy','Type of order',NULL),"
+    '        Sql += "('" & companyCode & "','H0540','発注取消','H05','発注業務','発注情報を取消します。',540,0,'" & userCode & "',now(),'Cancel of Purchase order','Type of order',NULL),"
+    '        Sql += "('" & companyCode & "','H0550','発注参照','H05','発注業務','発注情報を参照できます。発注書の発行も行えます。',550,0,'" & userCode & "',now(),'Purchase order data view','Type of order',NULL),"
+    '        Sql += "('" & companyCode & "','H0610','仕入登録','H06','仕入業務','仕入情報の新規登録・編集が行えます。',610,0,'" & userCode & "',now(),'Purchase registration','Purchasing job',NULL),"
+    '        Sql += "('" & companyCode & "','H0630','仕入取消','H06','仕入業務','仕入情報を取消します。',630,0,'" & userCode & "',now(),'Cancel of purchase ','Purchasing job',NULL),"
+    '        Sql += "('" & companyCode & "','H0640','仕入参照','H06','仕入業務','仕入情報を参照できます。',640,0,'" & userCode & "',now(),'Purchase data view','Purchasing job',NULL),"
+    '        Sql += "('" & companyCode & "','H0710','入庫登録','H07','入庫業務','入庫情報の新規登録・編集が行えます。',710,0,'" & userCode & "',now(),'Goods receipt registration','Job (Goods receipt)',NULL),"
+    '        Sql += "('" & companyCode & "','H0730','入庫取消','H07','入庫業務','入庫情報を取消します。',730,0,'" & userCode & "',now(),'Cancel of goods receipt','Job (Goods receipt)',NULL),"
+    '        Sql += "('" & companyCode & "','H0740','入庫参照','H07','入庫業務','入庫情報を参照できます。',740,0,'" & userCode & "',now(),'Goods receipt view','Job (Goods receipt)',NULL),"
+    '        Sql += "('" & companyCode & "','H0810','受発注登録','H08','受発注業務','見積情報を基に受注・発注を新規登録します。',170,0,'" & userCode & "',now(),'Job of job ordering and purchasing registration','Job of job ordering and purchasing',NULL),"
+    '        Sql += "('" & companyCode & "','H0910','請求登録','H09','請求管理','請求情報の新規登録・編集が行えます。',810,0,'" & userCode & "',now(),'Billing registration','Control of Billing',NULL),"
+    '        Sql += "('" & companyCode & "','H0930','請求取消','H09','請求管理','請求情報を取消します。',830,0,'" & userCode & "',now(),'Cancel of invoic','Control of Billing',NULL),"
+    '        Sql += "('" & companyCode & "','H0940','請求参照','H09','請求管理','請求情報を参照できます。',840,0,'" & userCode & "',now(),'Billing data view','Control of Billing',NULL),"
+    '        Sql += "('" & companyCode & "','H0950','請求書発行','H09','請求管理','請求計算をします。',850,0,'" & userCode & "',now(),'Invoicing','Control of Billing',NULL),"
+    '        Sql += "('" & companyCode & "','H1010','入金登録','H10','入金管理','入金情報を登録できます。',910,0,'" & userCode & "',now(),'Money receipt registration','Money receipt management',NULL),"
+    '        Sql += "('" & companyCode & "','H1020','入金取消','H10','入金管理','入金情報を取消します。',920,0,'" & userCode & "',now(),'Cancel of money receipt','Money receipt management',NULL),"
+    '        Sql += "('" & companyCode & "','H1030','入金参照','H10','入金管理','入金情報を参照できます。',930,0,'" & userCode & "',now(),'Money receipt view','Money receipt management',NULL),"
+    '        Sql += "('" & companyCode & "','H1110','買掛登録','H11','買掛管理','買掛情報の新規登録・編集が行えます。',1010,0,'" & userCode & "',now(),'Accounts Payable registration','Contorl of Accounts Payabl',NULL),"
+    '        Sql += "('" & companyCode & "','H1130','買掛取消','H11','買掛管理','買掛情報を取消します。',1030,0,'" & userCode & "',now(),'Cancel of accounts payabl','Contorl of Accounts Payabl',NULL),"
+    '        Sql += "('" & companyCode & "','H1140','買掛参照','H11','買掛管理','買掛情報を参照できます。',1040,0,'" & userCode & "',now(),'Payment data view','Contorl of Accounts Payabl',NULL),"
+    '        Sql += "('" & companyCode & "','H1210','支払登録','H12','支払管理','支払情報を登録できます。',1110,0,'" & userCode & "',now(),'Payment registration','Control of payment',NULL),"
+    '        Sql += "('" & companyCode & "','H1220','支払取消','H12','支払管理','支払情報を取消します。',1120,0,'" & userCode & "',now(),'Cancel of payment','Control of payment',NULL),"
+    '        Sql += "('" & companyCode & "','H1230','支払参照','H12','支払管理','支払情報を参照できます。',1130,0,'" & userCode & "',now(),'Payment view','Control of payment',NULL),"
+    '        Sql += "('" & companyCode & "','H1310','締処理ログ参照','H13','締処理業務','締処理ログを参照、締処理ができます。',1210,0,'" & userCode & "',now(),'Closing log view','Closing procedures job',NULL),"
+    '        Sql += "('" & companyCode & "','H1320','仕訳出力','H13','締処理業務','仕訳出力ができます。',1220,1,NULL,NULL,NULL,NULL,NULL),"
+    '        Sql += "('" & companyCode & "','M0110','汎用マスタ','M01','マスタ管理','汎用情報を登録できます。',2010,0,'" & userCode & "',now(),'Master','Master data registration',NULL),"
+    '        Sql += "('" & companyCode & "','M0120','得意先マスタ','M01','マスタ管理','得意先情報を登録できます。',2020,0,'" & userCode & "',now(),'Customer master data','Master data registration',NULL),"
+    '        Sql += "('" & companyCode & "','M0130','仕入先マスタ','M01','マスタ管理','仕入先情報を登録できます。',2030,0,'" & userCode & "',now(),'Supplier master data','Master data registration',NULL),"
+    '        Sql += "('" & companyCode & "','M0140','会社マスタ','M01','マスタ管理','会社情報を登録できます。',2040,0,'" & userCode & "',now(),'Company master data','Master data registration',NULL),"
+    '        Sql += "('" & companyCode & "','M0150','ユーザマスタ','M01','マスタ管理','ユーザ情報を登録できます。',2050,0,'" & userCode & "',now(),'User master data','Master data registration',NULL),"
+    '        Sql += "('" & companyCode & "','M0160','言語マスタ','M01','マスタ管理','言語情報を登録できます。',2060,0,'" & userCode & "',now(),'Language master','Master data registration',NULL),"
+    '        Sql += "('" & companyCode & "','M0170','在庫マスタ','M01','マスタ管理','在庫状況の参照ができます。',2070,0,'" & userCode & "',now(),'Inventory master','Master data registration',NULL),"
+    '        Sql += "('" & companyCode & "','M0180','勘定科目マスタ','M01','マスタ管理','勘定科目の登録ができます。',2080,0,'" & userCode & "',now(),'Account master','Master data registration',NULL);"
+
+    '        _db.executeDB(Sql)
+
+    '        '汎用マスタ
+    '        Sql = "INSERT INTO public.m90_hanyo"
+    '        Sql += "(会社コード,固定キー,可変キー,表示順,文字１,文字２,文字３,文字４,文字５,文字６,数値１,数値２,数値３,数値４,数値５,数値６,メモ,更新者,更新日) VALUES "
+    '        Sql += "('" & companyCode & "','1','1',1,'振込入金','Transfer payment',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'notes','" & userCode & "',now()),"
+    '        Sql += "('" & companyCode & "','1','10',10,'諸口','Sundry',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'notes','" & userCode & "',now()),"
+    '        Sql += "('" & companyCode & "','1','2',2,'振込手数料','Transfer fe',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'notes','" & userCode & "',now()),"
+    '        Sql += "('" & companyCode & "','1','3',3,'現金入金','Cash payment',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'notes','" & userCode & "',now()),"
+    '        Sql += "('" & companyCode & "','1','4',4,'手形受入','Bill acceptanc',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'notes','" & userCode & "',now()),"
+    '        Sql += "('" & companyCode & "','1','5',5,'電子債権','Electronic Monetary Claim',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'notes','" & userCode & "',now()),"
+    '        Sql += "('" & companyCode & "','1','6',6,'売上割引','Sales discount',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'notes','" & userCode & "',now()),"
+    '        Sql += "('" & companyCode & "','1','7',7,'売上値引','Sales discounts',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'notes','" & userCode & "',now()),"
+    '        Sql += "('" & companyCode & "','1','8',8,'リベート','Rebat',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'notes','" & userCode & "',now()),"
+    '        Sql += "('" & companyCode & "','1','9',9,'相殺','Setoff',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'notes','" & userCode & "',now()),"
+    '        Sql += "('" & companyCode & "','1002','1',1,'仕入','仕入',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),"
+    '        Sql += "('" & companyCode & "','1002','2',2,'在庫','在庫',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),"
+    '        Sql += "('" & companyCode & "','1002','9',9,'サービス','サービス',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),"
+    '        Sql += "('" & companyCode & "','2','1',1,'振込入金',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'notes','" & userCode & "',now()),"
+    '        Sql += "('" & companyCode & "','2','10',10,'諸口',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'notes','" & userCode & "',now()),"
+    '        Sql += "('" & companyCode & "','2','2',2,'振込手数料',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'notes','" & userCode & "',now()),"
+    '        Sql += "('" & companyCode & "','2','3',3,'現金入金',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'notes','" & userCode & "',now()),"
+    '        Sql += "('" & companyCode & "','2','4',4,'手形受入',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'notes','" & userCode & "',now()),"
+    '        Sql += "('" & companyCode & "','2','5',5,'電子債権',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'notes','" & userCode & "',now()),"
+    '        Sql += "('" & companyCode & "','2','6',6,'売上割引',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'notes','" & userCode & "',now()),"
+    '        Sql += "('" & companyCode & "','2','7',7,'売上値引',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'notes','" & userCode & "',now()),"
+    '        Sql += "('" & companyCode & "','2','8',8,'リベート',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'notes','" & userCode & "',now()),"
+    '        Sql += "('" & companyCode & "','2','9',9,'相殺',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'notes','" & userCode & "',now()),"
+    '        Sql += "('" & companyCode & "','3','1',1,'先入先出法',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'notes','" & userCode & "',now()),"
+    '        Sql += "('" & companyCode & "','3','2',2,'平均法',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'notes','" & userCode & "',now()),"
+    '        Sql += "('" & companyCode & "','4','1',1,'日','day',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'notes','" & userCode & "',now()),"
+    '        Sql += "('" & companyCode & "','4','2',2,'週','week',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'notes','" & userCode & "',now()),"
+    '        Sql += "('" & companyCode & "','4','3',3,'ヶ月','month',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'notes','" & userCode & "',now()),"
+    '        Sql += "('" & companyCode & "','5','1',1,'DDU','DDU',NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,NULL,NULL,'notes','" & userCode & "',now()),"
+    '        Sql += "('" & companyCode & "','5','2',2,'DDP','DDP',NULL,NULL,NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,'notes','" & userCode & "',now()),"
+    '        Sql += "('" & companyCode & "','5','3',3,'FOB','FOB',NULL,NULL,NULL,NULL,3,NULL,NULL,NULL,NULL,NULL,'notes','" & userCode & "',now()),"
+    '        Sql += "('" & companyCode & "','5','4',4,'CIF','CIF',NULL,NULL,NULL,NULL,4,NULL,NULL,NULL,NULL,NULL,'notes','" & userCode & "',now()),"
+    '        Sql += "('" & companyCode & "','5','5',5,'EXW','EXW',NULL,NULL,NULL,NULL,5,NULL,NULL,NULL,NULL,NULL,'notes','" & userCode & "',now()),"
+    '        Sql += "('" & companyCode & "','5','6',6,'FCA','FCA',NULL,NULL,NULL,NULL,6,NULL,NULL,NULL,NULL,NULL,'notes','" & userCode & "',now()),"
+    '        Sql += "('" & companyCode & "','5','7',7,'FAS','FAS',NULL,NULL,NULL,NULL,7,NULL,NULL,NULL,NULL,NULL,'notes','" & userCode & "',now()),"
+    '        Sql += "('" & companyCode & "','5','8',8,'CFR','CFR',NULL,NULL,NULL,NULL,8,NULL,NULL,NULL,NULL,NULL,'notes','" & userCode & "',now()),"
+    '        Sql += "('" & companyCode & "','5','9',9,'NA','NA','','','','',9,0,0,0,0,0,'','" & userCode & "',now())"
+
+    '        _db.executeDB(Sql)
+
+
+    '        'ユーザーマスタを作成
+    '        Sql = "INSERT INTO public.m02_user( "
+    '        Sql += "会社コード,ユーザＩＤ,氏名,略名,備考,無効フラグ,権限,言語,更新者,更新日"
+    '        Sql += ") VALUES ("
+    '        Sql += "'" & companyCode & "','" & userCode & "','" & userName & "','" & userName & "',null,0,0,'JPN','" & userCode & "',now())"
+
+    '        _db.executeDB(Sql)
+
+    '        'パスワードマスタを作成
+    '        Sql = "INSERT INTO public.m03_pswd( "
+    '        Sql += "会社コード,ユーザＩＤ,世代番号,適用開始日,適用終了日,パスワード,パスワード変更方法,有効期限,更新者,更新日"
+    '        Sql += ") VALUES ("
+    '        Sql += "'" & companyCode & "','" & userCode & "',1,CURRENT_DATE,'2099-12-31','" & userCode & "',1,'2099-12-31','" & userCode & "',now())"
+
+    '        _db.executeDB(Sql)
+
+    '        '採番マスタを作成
+    '        Sql = "INSERT INTO public.m80_saiban( "
+    '        Sql += "会社コード,採番キー,最新値,最小値,最大値,接頭文字,連番桁数,更新者,更新日"
+    '        Sql += ") VALUES "
+    '        Sql += "('" & companyCode & "','10',288,1,9999,'QT',4,'" & userCode & "',now()),"
+    '        Sql += "('" & companyCode & "','100',8,1,9999,'AP',4,'" & userCode & "',now()),"
+    '        Sql += "('" & companyCode & "','110',10,1,9999,'P',4,'" & userCode & "',now()),"
+    '        Sql += "('" & companyCode & "','20',83,1,9999,'AO',4,'" & userCode & "',now()),"
+    '        Sql += "('" & companyCode & "','30',17,1,9999,'PO',4,'" & userCode & "',now()),"
+    '        Sql += "('" & companyCode & "','40',7,1,9999,'ER',4,'" & userCode & "',now()),"
+    '        Sql += "('" & companyCode & "','50',7,1,9999,'PC',4,'" & userCode & "',now()),"
+    '        Sql += "('" & companyCode & "','60',7,1,9999,'WH',4,'" & userCode & "',now()),"
+    '        Sql += "('" & companyCode & "','70',8,1,9999,'LS',4,'" & userCode & "',now()),"
+    '        Sql += "('" & companyCode & "','80',9,1,9999,'DM',4,'" & userCode & "',now()),"
+    '        Sql += "('" & companyCode & "','90',8,1,9999,'PM',4,'" & userCode & "',now())"
+
+    '        _db.executeDB(Sql)
+
+    '    Catch ue As UsrDefException
+    '        ue.dspMsg()
+    '        Throw ue
+    '    Catch ex As Exception
+    '        'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
+    '        Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
+    '    End Try
+
+    'End Sub
 End Class
