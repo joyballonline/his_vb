@@ -279,7 +279,7 @@ Public Class GoodsIssueList
 
             If poNum <> Nothing Then
                 Sql += " AND "
-                Sql += " t44.客先番号 ILIKE '%" & salesName & "%' "
+                Sql += " t44.客先番号 ILIKE '%" & poNum & "%' "
             End If
 
             '取消データを含めない場合
@@ -606,7 +606,7 @@ Public Class GoodsIssueList
 
         If poNum <> Nothing Then
             Sql += " AND "
-            Sql += " 客先番号 ILIKE '%" & salesName & "%' "
+            Sql += " 客先番号 ILIKE '%" & poNum & "%' "
         End If
 
         Return Sql

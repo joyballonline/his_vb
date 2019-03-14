@@ -1001,6 +1001,16 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <MEMO></MEMO>
   </MSG_DATA>
   <MSG_DATA>
+    <ID>addBillingData</ID>
+    <MSG1>請求データを作成しますか？</MSG1>
+    <MSG1_EN>Create billing data?</MSG1_EN>
+    <BUTTON_TYPE>YesNo</BUTTON_TYPE>
+    <ICONT_TYPE>Question</ICONT_TYPE>
+    <DEFAULT_BUTTON>Button2</DEFAULT_BUTTON>
+    <CREATE_DATE>2018/03/05 18:00</CREATE_DATE>
+    <MEMO></MEMO>
+  </MSG_DATA>
+  <MSG_DATA>
     <ID>chkPurchaseAddError</ID>
     <MSG1>仕入情報がありません。</MSG1>
     <MSG1_EN>There is no purchase information.</MSG1_EN>
