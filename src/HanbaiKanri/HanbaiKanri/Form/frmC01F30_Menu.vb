@@ -385,11 +385,13 @@ Public Class frmC01F30_Menu
         '
         'TabProcessingMenu
         '
+        Me.TabProcessingMenu.Appearance = System.Windows.Forms.TabAppearance.FlatButtons
         Me.TabProcessingMenu.Controls.Add(Me.TabGeneral)
         Me.TabProcessingMenu.Controls.Add(Me.TabMenu)
         Me.TabProcessingMenu.Font = New System.Drawing.Font("MS UI Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TabProcessingMenu.ItemSize = New System.Drawing.Size(96, 24)
+        Me.TabProcessingMenu.ItemSize = New System.Drawing.Size(150, 24)
         Me.TabProcessingMenu.Location = New System.Drawing.Point(12, 12)
+        Me.TabProcessingMenu.Multiline = True
         Me.TabProcessingMenu.Name = "TabProcessingMenu"
         Me.TabProcessingMenu.SelectedIndex = 0
         Me.TabProcessingMenu.Size = New System.Drawing.Size(1326, 474)
