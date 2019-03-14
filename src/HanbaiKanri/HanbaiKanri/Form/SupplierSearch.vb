@@ -76,6 +76,42 @@ Public Class SupplierSearch
 
     Private Sub MstSupplier_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim Sql As String = ""
+
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+            LblSupplierCd.Text = "SupplierCode"
+            BtnSearch.Text = "Search"
+            btnSupplierSelect.Text = "Select"
+            BtnBack.Text = "Back"
+
+            '英語用見出し
+            Dgv_Supplier.Columns("仕入先コード").HeaderText = "SupplierCode"
+            Dgv_Supplier.Columns("仕入先名").HeaderText = "SupplierName"
+            Dgv_Supplier.Columns("仕入先名略名").HeaderText = "SupplierShortName"
+            Dgv_Supplier.Columns("郵便番号").HeaderText = "PostalCode"
+            Dgv_Supplier.Columns("住所１").HeaderText = "Address1"
+            Dgv_Supplier.Columns("住所２").HeaderText = "Address2"
+            Dgv_Supplier.Columns("住所３").HeaderText = "Address3"
+            Dgv_Supplier.Columns("電話番号").HeaderText = "PhoneNumber"
+            Dgv_Supplier.Columns("電話番号検索用").HeaderText = "SearchPhoneNumber"
+            Dgv_Supplier.Columns("FAX番号").HeaderText = "FAX"
+            Dgv_Supplier.Columns("担当者名").HeaderText = "PIC"
+            Dgv_Supplier.Columns("既定間接費率").HeaderText = "DefaultOverheadRate"
+            Dgv_Supplier.Columns("メモ").HeaderText = "Memo"
+            Dgv_Supplier.Columns("銀行コード").HeaderText = "BankCode"
+            Dgv_Supplier.Columns("支店コード").HeaderText = "BranchCode"
+            Dgv_Supplier.Columns("預金種目").HeaderText = "DepositCategory"
+            Dgv_Supplier.Columns("口座番号").HeaderText = "AccountNumber"
+            Dgv_Supplier.Columns("口座名義").HeaderText = "AccountHolder"
+            Dgv_Supplier.Columns("更新者").HeaderText = "Modified By"
+            Dgv_Supplier.Columns("更新日").HeaderText = "UpdateDate"
+            Dgv_Supplier.Columns("担当者役職").HeaderText = "PositionPICCustomer"
+            Dgv_Supplier.Columns("関税率").HeaderText = "CustomsDutyRate"
+            Dgv_Supplier.Columns("前払法人税率").HeaderText = "PrepaidCorporateTaxRate"
+            Dgv_Supplier.Columns("輸送費率").HeaderText = "TransportationCostRate"
+
+        End If
+
+
         Try
             Sql += "SELECT * FROM public.m11_supplier"
             Sql += " WHERE "
@@ -84,33 +120,32 @@ Public Class SupplierSearch
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-            For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+            For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
                 Dgv_Supplier.Rows.Add()
-                Dgv_Supplier.Rows(index).Cells("会社コード").Value = ds.Tables(RS).Rows(index)("会社コード")
-                Dgv_Supplier.Rows(index).Cells("仕入先コード").Value = ds.Tables(RS).Rows(index)("仕入先コード")
-                Dgv_Supplier.Rows(index).Cells("仕入先名").Value = ds.Tables(RS).Rows(index)("仕入先名")
-                Dgv_Supplier.Rows(index).Cells("仕入先名略名").Value = ds.Tables(RS).Rows(index)("仕入先名略称")
-                Dgv_Supplier.Rows(index).Cells("郵便番号").Value = ds.Tables(RS).Rows(index)("郵便番号")
-                Dgv_Supplier.Rows(index).Cells("住所１").Value = ds.Tables(RS).Rows(index)("住所１")
-                Dgv_Supplier.Rows(index).Cells("住所２").Value = ds.Tables(RS).Rows(index)("住所２")
-                Dgv_Supplier.Rows(index).Cells("住所３").Value = ds.Tables(RS).Rows(index)("住所３")
-                Dgv_Supplier.Rows(index).Cells("電話番号").Value = ds.Tables(RS).Rows(index)("電話番号")
-                Dgv_Supplier.Rows(index).Cells("電話番号検索用").Value = ds.Tables(RS).Rows(index)("電話番号検索用")
-                Dgv_Supplier.Rows(index).Cells("FAX番号").Value = ds.Tables(RS).Rows(index)("ＦＡＸ番号")
-                Dgv_Supplier.Rows(index).Cells("担当者名").Value = ds.Tables(RS).Rows(index)("担当者名")
-                Dgv_Supplier.Rows(index).Cells("既定間接費率").Value = ds.Tables(RS).Rows(index)("既定間接費率")
-                Dgv_Supplier.Rows(index).Cells("メモ").Value = ds.Tables(RS).Rows(index)("メモ")
-                Dgv_Supplier.Rows(index).Cells("銀行コード").Value = ds.Tables(RS).Rows(index)("銀行コード")
-                Dgv_Supplier.Rows(index).Cells("支店コード").Value = ds.Tables(RS).Rows(index)("支店コード")
-                Dgv_Supplier.Rows(index).Cells("預金種目").Value = ds.Tables(RS).Rows(index)("預金種目")
-                Dgv_Supplier.Rows(index).Cells("口座番号").Value = ds.Tables(RS).Rows(index)("口座番号")
-                Dgv_Supplier.Rows(index).Cells("口座名義").Value = ds.Tables(RS).Rows(index)("口座名義")
-                Dgv_Supplier.Rows(index).Cells("更新者").Value = ds.Tables(RS).Rows(index)("更新者")
-                Dgv_Supplier.Rows(index).Cells("更新日").Value = ds.Tables(RS).Rows(index)("更新日")
-                Dgv_Supplier.Rows(index).Cells("担当者役職").Value = ds.Tables(RS).Rows(index)("担当者役職")
-                Dgv_Supplier.Rows(index).Cells("関税率").Value = ds.Tables(RS).Rows(index)("関税率")
-                Dgv_Supplier.Rows(index).Cells("前払法人税率").Value = ds.Tables(RS).Rows(index)("前払法人税率")
-                Dgv_Supplier.Rows(index).Cells("輸送費率").Value = ds.Tables(RS).Rows(index)("輸送費率")
+                Dgv_Supplier.Rows(i).Cells("仕入先コード").Value = ds.Tables(RS).Rows(i)("仕入先コード")
+                Dgv_Supplier.Rows(i).Cells("仕入先名").Value = ds.Tables(RS).Rows(i)("仕入先名")
+                Dgv_Supplier.Rows(i).Cells("仕入先名略名").Value = ds.Tables(RS).Rows(i)("仕入先名略称")
+                Dgv_Supplier.Rows(i).Cells("郵便番号").Value = ds.Tables(RS).Rows(i)("郵便番号")
+                Dgv_Supplier.Rows(i).Cells("住所１").Value = ds.Tables(RS).Rows(i)("住所１")
+                Dgv_Supplier.Rows(i).Cells("住所２").Value = ds.Tables(RS).Rows(i)("住所２")
+                Dgv_Supplier.Rows(i).Cells("住所３").Value = ds.Tables(RS).Rows(i)("住所３")
+                Dgv_Supplier.Rows(i).Cells("電話番号").Value = ds.Tables(RS).Rows(i)("電話番号")
+                Dgv_Supplier.Rows(i).Cells("電話番号検索用").Value = ds.Tables(RS).Rows(i)("電話番号検索用")
+                Dgv_Supplier.Rows(i).Cells("FAX番号").Value = ds.Tables(RS).Rows(i)("ＦＡＸ番号")
+                Dgv_Supplier.Rows(i).Cells("担当者名").Value = ds.Tables(RS).Rows(i)("担当者名")
+                Dgv_Supplier.Rows(i).Cells("既定間接費率").Value = ds.Tables(RS).Rows(i)("既定間接費率")
+                Dgv_Supplier.Rows(i).Cells("メモ").Value = ds.Tables(RS).Rows(i)("メモ")
+                Dgv_Supplier.Rows(i).Cells("銀行コード").Value = ds.Tables(RS).Rows(i)("銀行コード")
+                Dgv_Supplier.Rows(i).Cells("支店コード").Value = ds.Tables(RS).Rows(i)("支店コード")
+                Dgv_Supplier.Rows(i).Cells("預金種目").Value = ds.Tables(RS).Rows(i)("預金種目")
+                Dgv_Supplier.Rows(i).Cells("口座番号").Value = ds.Tables(RS).Rows(i)("口座番号")
+                Dgv_Supplier.Rows(i).Cells("口座名義").Value = ds.Tables(RS).Rows(i)("口座名義")
+                Dgv_Supplier.Rows(i).Cells("更新者").Value = ds.Tables(RS).Rows(i)("更新者")
+                Dgv_Supplier.Rows(i).Cells("更新日").Value = ds.Tables(RS).Rows(i)("更新日")
+                Dgv_Supplier.Rows(i).Cells("担当者役職").Value = ds.Tables(RS).Rows(i)("担当者役職")
+                Dgv_Supplier.Rows(i).Cells("関税率").Value = ds.Tables(RS).Rows(i)("関税率")
+                Dgv_Supplier.Rows(i).Cells("前払法人税率").Value = ds.Tables(RS).Rows(i)("前払法人税率")
+                Dgv_Supplier.Rows(i).Cells("輸送費率").Value = ds.Tables(RS).Rows(i)("輸送費率")
 
             Next
 
@@ -191,33 +226,32 @@ Public Class SupplierSearch
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-            For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+            For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
                 Dgv_Supplier.Rows.Add()
-                Dgv_Supplier.Rows(index).Cells("会社コード").Value = ds.Tables(RS).Rows(index)("会社コード")
-                Dgv_Supplier.Rows(index).Cells("仕入先コード").Value = ds.Tables(RS).Rows(index)("仕入先コード")
-                Dgv_Supplier.Rows(index).Cells("仕入先名").Value = ds.Tables(RS).Rows(index)("仕入先名")
-                Dgv_Supplier.Rows(index).Cells("仕入先名略名").Value = ds.Tables(RS).Rows(index)("仕入先名略称")
-                Dgv_Supplier.Rows(index).Cells("郵便番号").Value = ds.Tables(RS).Rows(index)("郵便番号")
-                Dgv_Supplier.Rows(index).Cells("住所１").Value = ds.Tables(RS).Rows(index)("住所１")
-                Dgv_Supplier.Rows(index).Cells("住所２").Value = ds.Tables(RS).Rows(index)("住所２")
-                Dgv_Supplier.Rows(index).Cells("住所３").Value = ds.Tables(RS).Rows(index)("住所３")
-                Dgv_Supplier.Rows(index).Cells("電話番号").Value = ds.Tables(RS).Rows(index)("電話番号")
-                Dgv_Supplier.Rows(index).Cells("電話番号検索用").Value = ds.Tables(RS).Rows(index)("電話番号検索用")
-                Dgv_Supplier.Rows(index).Cells("FAX番号").Value = ds.Tables(RS).Rows(index)("ＦＡＸ番号")
-                Dgv_Supplier.Rows(index).Cells("担当者名").Value = ds.Tables(RS).Rows(index)("担当者名")
-                Dgv_Supplier.Rows(index).Cells("既定間接費率").Value = ds.Tables(RS).Rows(index)("既定間接費率")
-                Dgv_Supplier.Rows(index).Cells("メモ").Value = ds.Tables(RS).Rows(index)("メモ")
-                Dgv_Supplier.Rows(index).Cells("銀行コード").Value = ds.Tables(RS).Rows(index)("銀行コード")
-                Dgv_Supplier.Rows(index).Cells("支店コード").Value = ds.Tables(RS).Rows(index)("支店コード")
-                Dgv_Supplier.Rows(index).Cells("預金種目").Value = ds.Tables(RS).Rows(index)("預金種目")
-                Dgv_Supplier.Rows(index).Cells("口座番号").Value = ds.Tables(RS).Rows(index)("口座番号")
-                Dgv_Supplier.Rows(index).Cells("口座名義").Value = ds.Tables(RS).Rows(index)("口座名義")
-                Dgv_Supplier.Rows(index).Cells("更新者").Value = ds.Tables(RS).Rows(index)("更新者")
-                Dgv_Supplier.Rows(index).Cells("更新日").Value = ds.Tables(RS).Rows(index)("更新日")
-                Dgv_Supplier.Rows(index).Cells("担当者役職").Value = ds.Tables(RS).Rows(index)("担当者役職")
-                Dgv_Supplier.Rows(index).Cells("関税率").Value = ds.Tables(RS).Rows(index)("関税率")
-                Dgv_Supplier.Rows(index).Cells("前払法人税率").Value = ds.Tables(RS).Rows(index)("前払法人税率")
-                Dgv_Supplier.Rows(index).Cells("輸送費率").Value = ds.Tables(RS).Rows(index)("輸送費率")
+                Dgv_Supplier.Rows(i).Cells("仕入先コード").Value = ds.Tables(RS).Rows(i)("仕入先コード")
+                Dgv_Supplier.Rows(i).Cells("仕入先名").Value = ds.Tables(RS).Rows(i)("仕入先名")
+                Dgv_Supplier.Rows(i).Cells("仕入先名略名").Value = ds.Tables(RS).Rows(i)("仕入先名略称")
+                Dgv_Supplier.Rows(i).Cells("郵便番号").Value = ds.Tables(RS).Rows(i)("郵便番号")
+                Dgv_Supplier.Rows(i).Cells("住所１").Value = ds.Tables(RS).Rows(i)("住所１")
+                Dgv_Supplier.Rows(i).Cells("住所２").Value = ds.Tables(RS).Rows(i)("住所２")
+                Dgv_Supplier.Rows(i).Cells("住所３").Value = ds.Tables(RS).Rows(i)("住所３")
+                Dgv_Supplier.Rows(i).Cells("電話番号").Value = ds.Tables(RS).Rows(i)("電話番号")
+                Dgv_Supplier.Rows(i).Cells("電話番号検索用").Value = ds.Tables(RS).Rows(i)("電話番号検索用")
+                Dgv_Supplier.Rows(i).Cells("FAX番号").Value = ds.Tables(RS).Rows(i)("ＦＡＸ番号")
+                Dgv_Supplier.Rows(i).Cells("担当者名").Value = ds.Tables(RS).Rows(i)("担当者名")
+                Dgv_Supplier.Rows(i).Cells("既定間接費率").Value = ds.Tables(RS).Rows(i)("既定間接費率")
+                Dgv_Supplier.Rows(i).Cells("メモ").Value = ds.Tables(RS).Rows(i)("メモ")
+                Dgv_Supplier.Rows(i).Cells("銀行コード").Value = ds.Tables(RS).Rows(i)("銀行コード")
+                Dgv_Supplier.Rows(i).Cells("支店コード").Value = ds.Tables(RS).Rows(i)("支店コード")
+                Dgv_Supplier.Rows(i).Cells("預金種目").Value = ds.Tables(RS).Rows(i)("預金種目")
+                Dgv_Supplier.Rows(i).Cells("口座番号").Value = ds.Tables(RS).Rows(i)("口座番号")
+                Dgv_Supplier.Rows(i).Cells("口座名義").Value = ds.Tables(RS).Rows(i)("口座名義")
+                Dgv_Supplier.Rows(i).Cells("更新者").Value = ds.Tables(RS).Rows(i)("更新者")
+                Dgv_Supplier.Rows(i).Cells("更新日").Value = ds.Tables(RS).Rows(i)("更新日")
+                Dgv_Supplier.Rows(i).Cells("担当者役職").Value = ds.Tables(RS).Rows(i)("担当者役職")
+                Dgv_Supplier.Rows(i).Cells("関税率").Value = ds.Tables(RS).Rows(i)("関税率")
+                Dgv_Supplier.Rows(i).Cells("前払法人税率").Value = ds.Tables(RS).Rows(i)("前払法人税率")
+                Dgv_Supplier.Rows(i).Cells("輸送費率").Value = ds.Tables(RS).Rows(i)("輸送費率")
             Next
 
         Catch ue As UsrDefException

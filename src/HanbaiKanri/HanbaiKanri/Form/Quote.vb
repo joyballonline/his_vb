@@ -1018,7 +1018,7 @@ Public Class Quote
         End If
 
 
-        If selectColumn = "仕入先名" Then '仕入先検索
+        If selectColumn = "仕入先" Then '仕入先検索
             Dim openForm As Form = Nothing
             openForm = New SupplierSearch(_msgHd, _db, _langHd, e.RowIndex, Me)
             openForm.Show(Me)
