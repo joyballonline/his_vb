@@ -67,8 +67,8 @@ Public Class MstHanyou
     Private Sub MstHanyou_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-            TxtSearchString.Text = "String"
-            TxtSearchNumber.Text = "Number"
+            Label2.Text = "String"
+            Label3.Text = "Number"
 
             BtnSearch.Text = "Search"
             BtnAdd.Text = "Add"

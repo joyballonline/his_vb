@@ -221,7 +221,7 @@ Partial Class MstHanyou
         'TxtSearchString
         '
         Me.TxtSearchString.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtSearchString.Location = New System.Drawing.Point(66, 27)
+        Me.TxtSearchString.Location = New System.Drawing.Point(73, 27)
         Me.TxtSearchString.Name = "TxtSearchString"
         Me.TxtSearchString.Size = New System.Drawing.Size(172, 22)
         Me.TxtSearchString.TabIndex = 1
@@ -250,7 +250,7 @@ Partial Class MstHanyou
         '
         Me.TxtSearchNumber.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtSearchNumber.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.TxtSearchNumber.Location = New System.Drawing.Point(66, 55)
+        Me.TxtSearchNumber.Location = New System.Drawing.Point(73, 55)
         Me.TxtSearchNumber.Name = "TxtSearchNumber"
         Me.TxtSearchNumber.Size = New System.Drawing.Size(172, 22)
         Me.TxtSearchNumber.TabIndex = 2
