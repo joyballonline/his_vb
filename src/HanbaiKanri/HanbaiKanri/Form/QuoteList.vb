@@ -176,6 +176,7 @@ Public Class QuoteList
             BtnQuoteEdit.Text = "QuotationEdit"
             BtnQuoteClone.Text = "QuotationCopy"
             BtnQuoteView.Text = "QuotationView"
+            BtnOrder.Text = "JobOrderRegistration"
             BtnCancel.Text = "QuotationCancel"
             BtnBack.Text = "Back"
         End If
