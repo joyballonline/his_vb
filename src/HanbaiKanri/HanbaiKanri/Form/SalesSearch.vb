@@ -146,7 +146,7 @@ Public Class SalesSearch
             Dim RowIndex As Integer = DgvUser.CurrentCell.RowIndex
 
             frm.TxtSales.Text = DgvUser.Rows(RowIndex).Cells("氏名").Value
-            frm.TxtSales.Tag = DgvUser.Rows(RowIndex).Cells("ユーザＩＤ").Value
+            frm.TxtSales.Tag = DgvUser.Rows(RowIndex).Cells("ユーザID").Value
 
         ElseIf _status = CommonConst.STATUS_CLONE Then
             '複製
@@ -154,14 +154,14 @@ Public Class SalesSearch
             Dim RowIndex As Integer = DgvUser.CurrentCell.RowIndex
 
             frm.TxtSales.Text = DgvUser.Rows(RowIndex).Cells("氏名").Value
-            frm.TxtSales.Tag = DgvUser.Rows(RowIndex).Cells("ユーザＩＤ").Value
+            frm.TxtSales.Tag = DgvUser.Rows(RowIndex).Cells("ユーザID").Value
         Else
             '見積
             Dim frm As Quote = CType(Me.Owner, Quote)
             Dim RowIndex As Integer = DgvUser.CurrentCell.RowIndex
 
             frm.TxtSales.Text = DgvUser.Rows(RowIndex).Cells("氏名").Value
-            frm.TxtSales.Tag = DgvUser.Rows(RowIndex).Cells("ユーザＩＤ").Value
+            frm.TxtSales.Tag = DgvUser.Rows(RowIndex).Cells("ユーザID").Value
         End If
 
 
