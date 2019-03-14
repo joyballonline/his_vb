@@ -992,7 +992,7 @@ Public Class Quote
             Exit Sub
         End If
 
-        Dim selectColumn As String = DgvItemList.Columns(e.ColumnIndex).HeaderText
+        Dim selectColumn As String = DgvItemList.Columns(e.ColumnIndex).Name
 
         Dim Maker As String = DgvItemList("メーカー", e.RowIndex).Value
         Dim Item As String = DgvItemList("品名", e.RowIndex).Value
