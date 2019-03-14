@@ -657,7 +657,7 @@ Public Class Cymn
                     Sql += ", '" & DgvItemList.Rows(i).Cells("品名").Value.ToString & "'"       '品名
                     Sql += ", '" & DgvItemList.Rows(i).Cells("型式").Value.ToString & "'"         '型式
                     Sql += ", '" & DgvItemList.Rows(i).Cells("仕入先").Value.ToString & "'"        '仕入先名
-                    Sql += ", " & formatStringToNumber(DgvItemList.Rows(i).Cells("売単価").Value.ToString)               '売単価
+                    Sql += ", " & formatStringToNumber(DgvItemList.Rows(i).Cells("見積単価").Value.ToString)    '見積単価
                     Sql += ", " & DgvItemList.Rows(i).Cells("数量").Value.ToString               '出庫数量
                     Sql += ", '" & DgvItemList.Rows(i).Cells("単位").Value.ToString & "'"         '単位
                     Sql += ", '" & DgvItemList.Rows(i).Cells("備考").Value.ToString & "'"         '備考
