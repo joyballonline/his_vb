@@ -72,40 +72,60 @@ Public Class SalesSearch
     End Sub
 
     Private Sub UserMaintenance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+            LblString.Text = "String"
+            BtnSearch.Text = "Search"
+            BtnSelect.Text = "Select"
+            BtnBack.Text = "Back"
+
+            '英語用見出し
+            DgvUser.Columns("ユーザID").HeaderText = "UserID"
+            DgvUser.Columns("氏名").HeaderText = "Name"
+            DgvUser.Columns("略名").HeaderText = "ShortName"
+            DgvUser.Columns("備考").HeaderText = "Remarks"
+            DgvUser.Columns("無効フラグ").HeaderText = "InvalidFlag"
+            DgvUser.Columns("権限").HeaderText = "Authority"
+            DgvUser.Columns("言語").HeaderText = "Language"
+            DgvUser.Columns("更新者").HeaderText = "ModifiedBy"
+            DgvUser.Columns("更新日").HeaderText = "UpdateDate"
+
+        End If
+
+        setList() '一覧再表示
+    End Sub
+
+    Private Sub setList()
+        DgvUser.Rows.Clear() '一覧クリア
+
         Dim Sql As String = ""
         Try
-            Sql += "SELECT "
-            Sql += " 会社コード "
-            Sql += ", ユーザＩＤ "
-            Sql += ", 氏名 "
-            Sql += ", 略名 "
-            Sql += ", 備考 "
-            Sql += ", 無効フラグ "
-            Sql += ", 権限 "
-            Sql += ", 言語 "
-            Sql += ", 更新者 "
-            Sql += ", 更新日 "
-            Sql += "FROM public.m02_user"
+            Sql += "SELECT * FROM public.m02_user"
             Sql += " WHERE "
             Sql += "会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += " and (ユーザＩＤ  ILIKE '%" & UtilClass.escapeSql(Search.Text) & "%'"
+            Sql += " OR 氏名  ILIKE '%" & UtilClass.escapeSql(Search.Text) & "%'"
+            Sql += " OR 略名  ILIKE '%" & UtilClass.escapeSql(Search.Text) & "%'"
+            Sql += " OR 備考  ILIKE '%" & UtilClass.escapeSql(Search.Text) & "%'"
+            Sql += " OR 更新者  ILIKE '%" & UtilClass.escapeSql(Search.Text) & "%'"
+            Sql += " ) "
 
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
 
             'DataGridView1.DataSource = ds
 
-            For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+            For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
                 DgvUser.Rows.Add()
-                DgvUser.Rows(index).Cells(0).Value = ds.Tables(RS).Rows(index)(0)        '会社コード
-                DgvUser.Rows(index).Cells(1).Value = ds.Tables(RS).Rows(index)(1)        'ユーザＩＤ
-                DgvUser.Rows(index).Cells(2).Value = ds.Tables(RS).Rows(index)(2)              '氏名
-                DgvUser.Rows(index).Cells(3).Value = ds.Tables(RS).Rows(index)(3)              '略名
-                DgvUser.Rows(index).Cells(4).Value = ds.Tables(RS).Rows(index)(4)              '備考
-                DgvUser.Rows(index).Cells(5).Value = ds.Tables(RS).Rows(index)(5)        '無効フラグ
-                DgvUser.Rows(index).Cells(6).Value = ds.Tables(RS).Rows(index)(6)              '権限
-                DgvUser.Rows(index).Cells(7).Value = ds.Tables(RS).Rows(index)(7)              '言語
-                DgvUser.Rows(index).Cells(8).Value = ds.Tables(RS).Rows(index)(8)              '更新者
-                DgvUser.Rows(index).Cells(9).Value = ds.Tables(RS).Rows(index)(9)              '更新日
+                DgvUser.Rows(i).Cells("ユーザID").Value = ds.Tables(RS).Rows(i)("ユーザＩＤ")        'ユーザＩＤ
+                DgvUser.Rows(i).Cells("氏名").Value = ds.Tables(RS).Rows(i)("氏名")              '氏名
+                DgvUser.Rows(i).Cells("略名").Value = ds.Tables(RS).Rows(i)("略名")              '略名
+                DgvUser.Rows(i).Cells("備考").Value = ds.Tables(RS).Rows(i)("備考")              '備考
+                DgvUser.Rows(i).Cells("無効フラグ").Value = ds.Tables(RS).Rows(i)("無効フラグ")        '無効フラグ
+                DgvUser.Rows(i).Cells("権限").Value = ds.Tables(RS).Rows(i)("権限")              '権限
+                DgvUser.Rows(i).Cells("言語").Value = ds.Tables(RS).Rows(i)("言語")              '言語
+                DgvUser.Rows(i).Cells("更新者").Value = ds.Tables(RS).Rows(i)("更新者")              '更新者
+                DgvUser.Rows(i).Cells("更新日").Value = ds.Tables(RS).Rows(i)("更新日")              '更新日
             Next
 
         Catch ue As UsrDefException
@@ -115,28 +135,33 @@ Public Class SalesSearch
             'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
             Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
         End Try
+
     End Sub
 
     Private Sub BtnSelect_Click(sender As Object, e As EventArgs) Handles BtnSelect.Click, DgvUser.DoubleClick
+
         If _status = "PURCHASE" Then
+            '発注
             Dim frm As OrderingAdd = CType(Me.Owner, OrderingAdd)
             Dim RowIndex As Integer = DgvUser.CurrentCell.RowIndex
 
             frm.TxtSales.Text = DgvUser.Rows(RowIndex).Cells("氏名").Value
-            frm.TxtSales.Tag = DgvUser.Rows(RowIndex).Cells(1).Value
+            frm.TxtSales.Tag = DgvUser.Rows(RowIndex).Cells("ユーザＩＤ").Value
 
         ElseIf _status = CommonConst.STATUS_CLONE Then
+            '複製
             Dim frm As Ordering = CType(Me.Owner, Ordering)
             Dim RowIndex As Integer = DgvUser.CurrentCell.RowIndex
 
             frm.TxtSales.Text = DgvUser.Rows(RowIndex).Cells("氏名").Value
-            frm.TxtSales.Tag = DgvUser.Rows(RowIndex).Cells(1).Value
+            frm.TxtSales.Tag = DgvUser.Rows(RowIndex).Cells("ユーザＩＤ").Value
         Else
+            '見積
             Dim frm As Quote = CType(Me.Owner, Quote)
             Dim RowIndex As Integer = DgvUser.CurrentCell.RowIndex
 
             frm.TxtSales.Text = DgvUser.Rows(RowIndex).Cells("氏名").Value
-            frm.TxtSales.Tag = DgvUser.Rows(RowIndex).Cells(1).Value
+            frm.TxtSales.Tag = DgvUser.Rows(RowIndex).Cells("ユーザＩＤ").Value
         End If
 
 
@@ -153,49 +178,9 @@ Public Class SalesSearch
         Me.Dispose()
     End Sub
 
+    '検索ボタン押下時
     Private Sub BtnSearch_Click(sender As Object, e As EventArgs) Handles BtnSearch.Click
-        DgvUser.Rows.Clear()
-
-        Dim Sql As String = ""
-        Try
-            Sql += "SELECT "
-            Sql += " 会社コード, "
-            Sql += ", ユーザＩＤ "
-            Sql += ", 氏名 "
-            Sql += ", 略名 "
-            Sql += ", 備考 "
-            Sql += ", 無効フラグ "
-            Sql += ", 権限 "
-            Sql += ", 言語 "
-            Sql += ", 更新者 "
-            Sql += ", 更新日 "
-            Sql += "FROM public.m02_user"
-            Sql += " WHERE "
-            Sql += "会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Sql += " WHERE 氏名 ILIKE '%" & Search.Text & "%'"
-
-            Dim reccnt As Integer = 0
-            Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-            For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-                DgvUser.Rows.Add()
-                DgvUser.Rows(index).Cells(0).Value = ds.Tables(RS).Rows(index)(0)        '会社コード
-                DgvUser.Rows(index).Cells(1).Value = ds.Tables(RS).Rows(index)(1)        'ユーザＩＤ
-                DgvUser.Rows(index).Cells(2).Value = ds.Tables(RS).Rows(index)(2)        '氏名
-                DgvUser.Rows(index).Cells(3).Value = ds.Tables(RS).Rows(index)(3)      '略名
-                DgvUser.Rows(index).Cells(4).Value = ds.Tables(RS).Rows(index)(4)      '備考
-                DgvUser.Rows(index).Cells(5).Value = ds.Tables(RS).Rows(index)(5)      '無効フラグ
-                DgvUser.Rows(index).Cells(6).Value = ds.Tables(RS).Rows(index)(6)      '更新者
-                DgvUser.Rows(index).Cells(7).Value = ds.Tables(RS).Rows(index)(7)      '更新日
-            Next
-
-        Catch ue As UsrDefException
-            ue.dspMsg()
-            Throw ue
-        Catch ex As Exception
-            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
-        End Try
+        setList() '一覧再表示
     End Sub
 
 End Class

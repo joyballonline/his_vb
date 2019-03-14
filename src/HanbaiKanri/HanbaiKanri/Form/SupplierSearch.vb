@@ -78,7 +78,7 @@ Public Class SupplierSearch
         Dim Sql As String = ""
 
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-            LblSupplierCd.Text = "SupplierCode"
+            LblString.Text = "String"
             BtnSearch.Text = "Search"
             btnSupplierSelect.Text = "Select"
             BtnBack.Text = "Back"
@@ -221,7 +221,18 @@ Public Class SupplierSearch
             Sql += "SELECT * FROM public.m11_supplier"
             Sql += " WHERE "
             Sql += "会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Sql += " and 仕入先コード  ILIKE '%" & Search.Text & "%'"
+            Sql += " and (仕入先コード  ILIKE '%" & UtilClass.escapeSql(Search.Text) & "%'"
+            Sql += " OR 仕入先名  ILIKE '%" & UtilClass.escapeSql(Search.Text) & "%'"
+            Sql += " OR 仕入先名略称  ILIKE '%" & UtilClass.escapeSql(Search.Text) & "%'"
+            Sql += " OR 住所１  ILIKE '%" & UtilClass.escapeSql(Search.Text) & "%'"
+            Sql += " OR 住所２  ILIKE '%" & UtilClass.escapeSql(Search.Text) & "%'"
+            Sql += " OR 住所３  ILIKE '%" & UtilClass.escapeSql(Search.Text) & "%'"
+            Sql += " OR 電話番号検索用  ILIKE '%" & UtilClass.escapeSql(Search.Text) & "%'"
+            Sql += " OR 担当者名  ILIKE '%" & UtilClass.escapeSql(Search.Text) & "%'"
+            Sql += " OR メモ  ILIKE '%" & UtilClass.escapeSql(Search.Text) & "%'"
+            Sql += " OR 口座名義  ILIKE '%" & UtilClass.escapeSql(Search.Text) & "%'"
+            Sql += " OR 担当者役職  ILIKE '%" & UtilClass.escapeSql(Search.Text) & "%'"
+            Sql += " ) "
 
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)

@@ -26,7 +26,7 @@ Partial Class SupplierSearch
         Me.Search = New System.Windows.Forms.TextBox()
         Me.BtnBack = New System.Windows.Forms.Button()
         Me.btnSupplierSelect = New System.Windows.Forms.Button()
-        Me.LblSupplierCd = New System.Windows.Forms.Label()
+        Me.LblString = New System.Windows.Forms.Label()
         Me.Dgv_Supplier = New System.Windows.Forms.DataGridView()
         Me.仕入先コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.仕入先名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -93,15 +93,15 @@ Partial Class SupplierSearch
         Me.btnSupplierSelect.Text = "選択"
         Me.btnSupplierSelect.UseVisualStyleBackColor = True
         '
-        'LblSupplierCd
+        'LblString
         '
-        Me.LblSupplierCd.AutoSize = True
-        Me.LblSupplierCd.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblSupplierCd.Location = New System.Drawing.Point(12, 9)
-        Me.LblSupplierCd.Name = "LblSupplierCd"
-        Me.LblSupplierCd.Size = New System.Drawing.Size(85, 15)
-        Me.LblSupplierCd.TabIndex = 24
-        Me.LblSupplierCd.Text = "仕入先コード"
+        Me.LblString.AutoSize = True
+        Me.LblString.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblString.Location = New System.Drawing.Point(12, 9)
+        Me.LblString.Name = "LblString"
+        Me.LblString.Size = New System.Drawing.Size(37, 15)
+        Me.LblString.TabIndex = 24
+        Me.LblString.Text = "文字"
         '
         'Dgv_Supplier
         '
@@ -270,7 +270,7 @@ Partial Class SupplierSearch
         Me.Controls.Add(Me.Search)
         Me.Controls.Add(Me.BtnBack)
         Me.Controls.Add(Me.btnSupplierSelect)
-        Me.Controls.Add(Me.LblSupplierCd)
+        Me.Controls.Add(Me.LblString)
         Me.Controls.Add(Me.Dgv_Supplier)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "SupplierSearch"
@@ -285,7 +285,7 @@ Partial Class SupplierSearch
     Friend WithEvents Search As TextBox
     Friend WithEvents BtnBack As Button
     Friend WithEvents btnSupplierSelect As Button
-    Friend WithEvents LblSupplierCd As Label
+    Friend WithEvents LblString As Label
     Friend WithEvents Dgv_Supplier As DataGridView
     Friend WithEvents 仕入先コード As DataGridViewTextBoxColumn
     Friend WithEvents 仕入先名 As DataGridViewTextBoxColumn
