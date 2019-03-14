@@ -343,6 +343,34 @@ Public Class Ordering
             DtpRegistrationDate.Enabled = True
 
             Exit Sub
+
+        ElseIf PurchaseStatus Is CommonConst.STATUS_VIEW Then
+
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+                LblMode.Text = "ViewMode"
+            Else
+                LblMode.Text = "参照モード"
+            End If
+
+            BtnRegistration.Visible = False
+            TxtCustomerPO.Enabled = False
+            DtpPurchaseDate.Enabled = False
+            DtpRegistrationDate.Enabled = False
+            TxtSales.Enabled = False
+            TxtPerson.Enabled = False
+            TxtPosition.Enabled = False
+            TxtPaymentTerms.Enabled = False
+            TxtPurchaseRemark.Enabled = False
+            CbShippedBy.Enabled = False
+            DtpShippedDate.Enabled = False
+
+            BtnInsert.Visible = False
+            BtnUp.Visible = False
+            BtnDown.Visible = False
+            BtnRowsAdd.Visible = False
+            BtnRowsDel.Visible = False
+            BtnClone.Visible = False
+
         End If
 
         '発注基本情報
@@ -1333,7 +1361,7 @@ Public Class Ordering
             Sql = "UPDATE Public.m80_saiban "
             Sql += "SET  最新値  = '" & keyNo.ToString & "'"
             Sql += " , 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
-            Sql += " , 更新日 = '" & today & "'"
+            Sql += " , 更新日 = '" & UtilClass.formatDatetime(today) & "'"
             Sql += "WHERE 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
             Sql += " AND 採番キー = '" & key & "'"
             Console.WriteLine(Sql)
