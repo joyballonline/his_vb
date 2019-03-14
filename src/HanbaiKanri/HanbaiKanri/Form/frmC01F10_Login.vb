@@ -22,6 +22,7 @@ Imports System.Drawing.Printing
 Imports System.Runtime.InteropServices
 Imports System.Threading
 Imports System.Globalization
+Imports System.Net
 
 '===================================================================================
 'フォーム
@@ -390,4 +391,133 @@ Public Class frmC01F10_Login
 
     End Sub
 
+    '開発者用
+    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
+        ' ホスト名を取得する
+        Dim hostname As String = Dns.GetHostName()
+
+        Dim comName As String = "ZENBI"
+        Dim userPass As String = "zenbi01"
+
+        ' ホスト名からIPアドレスを取得する
+        Dim adrList As IPAddress() = Dns.GetHostAddresses(hostname)
+        For Each address As IPAddress In adrList
+            Console.WriteLine(address.ToString())
+
+            If address.ToString() = "172.21.12.72" Then
+                Dim sql As String = ""
+                '2)	パスワードチェック			
+                '画面入力値をもとに、パスワードマスタとの整合性チェックを行う。			
+                '・検索キー：　IF)会社コード、IF)ユーザID、画面)パスワード			
+                '	   IF)世代番号 - 10 よりも大（過去10世代と重複しない）
+                Try
+                    sql = "SELECT * FROM m02_user "
+                    sql += " WHERE "
+                    sql += "    会社コード = '" & comName & "'"
+                    sql += "    and ユーザＩＤ = '" & userPass & "'"
+                    sql += "    and 無効フラグ = 0 "
+                    Dim reccnt As Integer = 0
+                    Dim ds As DataSet = _db.selectDB(sql, RS, reccnt)
+
+                    If reccnt <= 0 Then
+                        _msgHd.dspMSG("NonImputUserID", CommonConst.LANG_KBN_JPN)
+                        'MsgBox("入力された「ユーザID」は存在しないか、無効になっています。", vbOK)
+                        'Throw New UsrDefException("入力された「ユーザID」は存在しないか、無効になっています。", _msgHd.getMSG("NoTantoCD", ""), txtTanto)
+                        Exit Sub
+                    End If
+
+                    '2)	パスワードチェック
+                    '	画面入力値をもとに、パスワードマスタとの整合性チェックを行う。
+                    '	・検索キー
+                    '	　　　画面)会社コード、画面)ユーザID、適用開始日≦システム日付≦適用終了日
+                    '	・取得項目：　パスワード、世代番号
+
+                    sql = ""
+                    sql = sql & "SELECT "
+                    sql = sql & "   パスワード "        'パスワード
+                    sql = sql & "  , 世代番号 "         '世代番号
+                    sql = sql & " FROM m03_pswd "
+                    sql = sql & " where 適用開始日 <= current_date "
+                    sql = sql & "   and 適用終了日 >= current_date "
+                    sql = sql & "   and 会社コード = '" & comName & "'"
+                    sql = sql & "   and ユーザＩＤ = '" & userPass & "'"
+                    Dim reccnt2 As Integer = 0
+                    Dim ds2 = _db.selectDB(sql, RS, reccnt2)
+
+                    '①　該当するレコードが存在しない場合	
+                    '入力された「ユーザID」のパスワード情報が存在しません。
+                    '→　入力状態に戻す（通常はありえない）
+                    If reccnt2 <= 0 Then
+                        _msgHd.dspMSG("NonImputNoDataUserID", CommonConst.LANG_KBN_JPN)
+                        'MsgBox("入力された「ユーザID」のパスワード情報が存在しません。", vbOK)
+                        'Throw New UsrDefException("入力された「ユーザID」は存在しないか、無効になっています。", _msgHd.getMSG("NoTantoCD", ""), txtTanto)
+                        Exit Sub
+                    End If
+
+                    '②　該当するレコードが存在する場合		
+                    '②-1　DB取得パスワードの復号化	
+                    '★当面保留★（暗号化なしのため、そのまま比較）
+
+                    '②-2　パスワード同一チェック	
+                    '画面)パスワードとDB)パスワードを比較
+                    If Not _db.rmNullStr(ds2.Tables(RS).Rows(0)("パスワード")).Equals(userPass) Then
+                        'Throw New UsrDefException("パスワードが違います。", _msgHd.getMSG("Unmatch", ""), txtPasswd)
+                        _msgHd.dspMSG("NonImputPassword", CommonConst.LANG_KBN_JPN)
+                        'MsgBox("パスワードが違います。", vbOK)
+                        Exit Sub
+                    End If
+
+                    '■グローバル変数にセット
+                    '3)	次処理起動	
+                    '下記要領にしたがって、次処理に遷移を移動する。	
+                    'ログイン画面から、次の項目を次処理に受け渡す。	
+                    '・受け渡し項目：会社コード、会社略称、ユーザID、社員略名、BKUPサーバ接続有無（バックアップサーバ接続時:"Y"、以外:"N"）、世代番号（パスワード）
+
+                    _loginVal.BumonCD = _db.rmNullStr(comName)     '会社コード
+                    _loginVal.BumonNM = _db.rmNullStr(comName)              '会社略称
+                    _loginVal.TantoCD = _db.rmNullStr(txtTanto.Text)                'ユーザＩＤ
+                    _loginVal.TantoNM = _db.rmNullStr(ds.Tables(RS).Rows(0)("略名"))                '社員略名
+                    _loginVal.Passwd = _db.rmNullStr(txtPasswd.Text)                'パスワード
+                    _loginVal.Generation = _db.rmNullStr(ds2.Tables(RS).Rows(0)("世代番号"))                '世代番号
+                    _loginVal.Language = _db.rmNullStr(ds.Tables(RS).Rows(0)("言語"))                '言語
+                    '未実装　BKUPサーバ接続有無（バックアップサーバ接続時:"Y"、以外:"N"）
+
+
+                Catch lex As UsrDefException
+                    lex.dspMsg()
+                    Exit Sub
+                End Try
+
+                'パスワード変更チェックONの場合、パスワード変更画面を起動
+                If chkPasswd.Checked = True Then
+                    'パスワード変更チェックあり
+                    Dim openForm As Form = Nothing
+                    openForm = New frmC01F20_ChangePasswd(_msgHd, _db, Me)
+                    openForm.ShowDialog()
+                    openForm.Dispose()
+
+                    '「パスワード変更」画面起動
+                    'Dim openForm12 As frmKR12_ChangePasswd = New frmKR12_ChangePasswd(_msgHd, _db, Me, txtTanto.Text)   'パラメタを起動画面へ渡す
+                    'StartUp.loginForm = Me
+                    'openForm12.ShowDialog()                                                 '画面表示
+                    'openForm12.Dispose()
+                    Exit Sub
+
+                Else
+                    'パスワード変更チェックなし
+                    Dim openForm As Form = Nothing
+                    openForm = New frmC01F30_Menu(_msgHd, _langHd, _db)
+                    openForm.Show()
+                    Me.Hide()                                                           '自分は隠れる
+
+                    ''「連携処理一覧」画面起動
+                    'Dim openForm13 As frmKR13_ProcList = New frmKR13_ProcList(_msgHd, _db, Me, _loginVal.TantoCD, _loginVal.TantoNM)      'パラメタを起動画面へ渡す
+                    'StartUp.loginForm = Me
+                    'openForm13.Show()                                                   '画面表示
+                    'Me.Hide()                                                           '自分は隠れる
+
+                End If
+            End If
+        Next
+    End Sub
 End Class

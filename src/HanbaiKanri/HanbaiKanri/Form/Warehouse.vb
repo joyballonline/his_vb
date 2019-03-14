@@ -85,7 +85,7 @@ Public Class Warehouse
                 Sql = "INSERT INTO "
                 Sql += "Public."
                 Sql += "m20_warehouse("
-                Sql += "会社コード, 倉庫コード, 名称, 略称, 保税有無, 備考, 無効フラグ, 更新者, 更新日)"
+                Sql += "会社コード, 倉庫コード, 名称, 略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, ＦＡＸ番号, 保税有無, 備考, 無効フラグ, 更新者, 更新日)"
                 Sql += " VALUES('"
                 Sql += frmC01F10_Login.loginValue.BumonCD
                 Sql += "', '"
@@ -94,6 +94,18 @@ Public Class Warehouse
                 Sql += TxtName.Text
                 Sql += "', '"
                 Sql += TxtShortName.Text
+                Sql += "', '"
+                Sql += LblPostalCode.Text
+                Sql += "', '"
+                Sql += LblAddress1.Text
+                Sql += "', '"
+                Sql += LblAddress2.Text
+                Sql += "', '"
+                Sql += LblAddress3.Text
+                Sql += "', '"
+                Sql += LblPhone.Text
+                Sql += "', '"
+                Sql += LblFax.Text
                 Sql += "', '"
                 Sql += cmCustomsBondKbn.SelectedValue.ToString
                 Sql += "', '"
@@ -120,6 +132,30 @@ Public Class Warehouse
                 Sql += "略称"
                 Sql += " = '"
                 Sql += TxtShortName.Text
+                Sql += "', "
+                Sql += "郵便番号"
+                Sql += " = '"
+                Sql += TxtPostalCode.Text
+                Sql += "', "
+                Sql += "住所１"
+                Sql += " = '"
+                Sql += TxtAddress1.Text
+                Sql += "', "
+                Sql += "住所２"
+                Sql += " = '"
+                Sql += TxtAddress2.Text
+                Sql += "', "
+                Sql += "住所３"
+                Sql += " = '"
+                Sql += TxtAddress3.Text
+                Sql += "', "
+                Sql += "電話番号"
+                Sql += " = '"
+                Sql += TxtPhone.Text
+                Sql += "', "
+                Sql += "ＦＡＸ番号"
+                Sql += " = '"
+                Sql += TxtFax.Text
                 Sql += "', "
                 Sql += "保税有無"
                 Sql += " = '"
@@ -169,14 +205,6 @@ Public Class Warehouse
         End Try
     End Sub
 
-    '戻るボタン押下時
-    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        Dim MstAccount As MstWarehouse
-        MstAccount = New MstWarehouse(_msgHd, _db, _langHd)
-        MstAccount.Show()
-        Me.Close()
-    End Sub
-
     '画面表示時
     Private Sub Account_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -185,13 +213,19 @@ Public Class Warehouse
             LblWarehouseCode.Text = "WarehouseCode"
             LblName.Text = "Name"
             LblShortName.Text = "ShortName"
+            LblPostalCode.Text = "PostalCode"
+            LblAddress1.Text = "Address1"
+            LblAddress2.Text = "Address2"
+            LblAddress3.Text = "Address3"
+            LblPhone.Text = "PhoneNumber"
+            LblFax.Text = "FAX"
             LblCustomsBondKbn.Text = "PresenceOfBondedBonds"
-            'cmCustomsBondKbn.Text = "(0:保税なし, 1:保税あり)"
-            LblRemarks.Text = "Remarks"
+            cmCustomsBondKbn.Text = "(0:保税なし, 1:保税あり)"
             LblInvalidFlag.Text = "InvalidFlag"
             'InvalidFlag.Text = "(0:True 1:False)"
+            LblRemarks.Text = "Remarks"
             btnAddAccount.Text = "Registration"
-            btnBack.Text = "Back"
+            LblPhone.Text = "Back"
         End If
 
         If _status = CommonConst.STATUS_EDIT Then
@@ -217,6 +251,30 @@ Public Class Warehouse
 
             If ds.Tables(RS).Rows(0)("略称") IsNot DBNull.Value Then
                 TxtShortName.Text = ds.Tables(RS).Rows(0)("略称")
+            End If
+
+            If ds.Tables(RS).Rows(0)("郵便番号") IsNot DBNull.Value Then
+                TxtPostalCode.Text = ds.Tables(RS).Rows(0)("郵便番号")
+            End If
+
+            If ds.Tables(RS).Rows(0)("住所１") IsNot DBNull.Value Then
+                TxtAddress1.Text = ds.Tables(RS).Rows(0)("住所１")
+            End If
+
+            If ds.Tables(RS).Rows(0)("住所２") IsNot DBNull.Value Then
+                TxtAddress2.Text = ds.Tables(RS).Rows(0)("住所２")
+            End If
+
+            If ds.Tables(RS).Rows(0)("住所３") IsNot DBNull.Value Then
+                TxtAddress3.Text = ds.Tables(RS).Rows(0)("住所３")
+            End If
+
+            If ds.Tables(RS).Rows(0)("電話番号") IsNot DBNull.Value Then
+                TxtPhone.Text = ds.Tables(RS).Rows(0)("電話番号")
+            End If
+
+            If ds.Tables(RS).Rows(0)("ＦＡＸ番号") IsNot DBNull.Value Then
+                TxtFax.Text = ds.Tables(RS).Rows(0)("ＦＡＸ番号")
             End If
 
             If ds.Tables(RS).Rows(0)("保税有無") IsNot DBNull.Value Then
@@ -331,5 +389,13 @@ Public Class Warehouse
         '日本の形式に書き換える
         Return changeFormat
     End Function
+
+    '戻るボタン押下時
+    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+        Dim MstAccount As MstWarehouse
+        MstAccount = New MstWarehouse(_msgHd, _db, _langHd)
+        MstAccount.Show()
+        Me.Close()
+    End Sub
 
 End Class

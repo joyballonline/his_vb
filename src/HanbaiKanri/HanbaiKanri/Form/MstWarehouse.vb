@@ -76,10 +76,15 @@ Public Class MstWarehouse
             btnEdit.Text = "Edit"
             BtnBack.Text = "Back"
 
-            'Dgv_Account.Columns("会社コード").HeaderText = "CompanyCode"
             Dgv_Account.Columns("倉庫コード").HeaderText = "WarehouseCode"
             Dgv_Account.Columns("名称").HeaderText = "Name"
             Dgv_Account.Columns("略称").HeaderText = "ShortName"
+            Dgv_Account.Columns("郵便番号").HeaderText = "PostalCode"
+            Dgv_Account.Columns("住所１").HeaderText = "Address１"
+            Dgv_Account.Columns("住所２").HeaderText = "Address２"
+            Dgv_Account.Columns("住所３").HeaderText = "Address３"
+            Dgv_Account.Columns("電話番号").HeaderText = "PhoneNumber"
+            Dgv_Account.Columns("ＦＡＸ番号").HeaderText = "ＦＡＸ"
             Dgv_Account.Columns("保税有無").HeaderText = "PresenceOfBondedBonds"
             Dgv_Account.Columns("備考").HeaderText = "Remarks"
             Dgv_Account.Columns("無効フラグ").HeaderText = "InvalidFlag"
@@ -127,6 +132,12 @@ Public Class MstWarehouse
                 Dgv_Account.Rows(i).Cells("倉庫コード").Value = ds.Tables(RS).Rows(i)("倉庫コード")
                 Dgv_Account.Rows(i).Cells("名称").Value = ds.Tables(RS).Rows(i)("名称")
                 Dgv_Account.Rows(i).Cells("略称").Value = ds.Tables(RS).Rows(i)("略称")
+                Dgv_Account.Rows(i).Cells("郵便番号").Value = ds.Tables(RS).Rows(i)("郵便番号")
+                Dgv_Account.Rows(i).Cells("住所１").Value = ds.Tables(RS).Rows(i)("住所１")
+                Dgv_Account.Rows(i).Cells("住所２").Value = ds.Tables(RS).Rows(i)("住所２")
+                Dgv_Account.Rows(i).Cells("住所３").Value = ds.Tables(RS).Rows(i)("住所３")
+                Dgv_Account.Rows(i).Cells("電話番号").Value = ds.Tables(RS).Rows(i)("電話番号")
+                Dgv_Account.Rows(i).Cells("ＦＡＸ番号").Value = ds.Tables(RS).Rows(i)("ＦＡＸ番号")
                 Dgv_Account.Rows(i).Cells("保税有無").Value = setCBText(ds.Tables(RS).Rows(i)("保税有無"))
                 Dgv_Account.Rows(i).Cells("備考").Value = ds.Tables(RS).Rows(i)("備考")
                 Dgv_Account.Rows(i).Cells("無効フラグ").Value = setEnabledText(ds.Tables(RS).Rows(i)("無効フラグ"))

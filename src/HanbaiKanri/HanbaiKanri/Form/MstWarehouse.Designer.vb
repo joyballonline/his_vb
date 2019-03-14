@@ -32,8 +32,14 @@ Partial Class MstWarehouse
         Me.倉庫コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.名称 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.略称 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.備考 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.郵便番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.住所１ = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.住所２ = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.住所３ = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.電話番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ＦＡＸ番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.保税有無 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.備考 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.無効フラグ = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.更新者 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.更新日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -44,7 +50,7 @@ Partial Class MstWarehouse
         '
         Me.Dgv_Account.AllowUserToAddRows = False
         Me.Dgv_Account.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.Dgv_Account.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.倉庫コード, Me.名称, Me.略称, Me.備考, Me.保税有無, Me.無効フラグ, Me.更新者, Me.更新日})
+        Me.Dgv_Account.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.倉庫コード, Me.名称, Me.略称, Me.郵便番号, Me.住所１, Me.住所２, Me.住所３, Me.電話番号, Me.ＦＡＸ番号, Me.保税有無, Me.備考, Me.無効フラグ, Me.更新者, Me.更新日})
         Me.Dgv_Account.Location = New System.Drawing.Point(12, 33)
         Me.Dgv_Account.Name = "Dgv_Account"
         Me.Dgv_Account.ReadOnly = True
@@ -130,17 +136,53 @@ Partial Class MstWarehouse
         Me.略称.Name = "略称"
         Me.略称.ReadOnly = True
         '
-        '備考
+        '郵便番号
         '
-        Me.備考.HeaderText = "備考"
-        Me.備考.Name = "備考"
-        Me.備考.ReadOnly = True
+        Me.郵便番号.HeaderText = "郵便番号"
+        Me.郵便番号.Name = "郵便番号"
+        Me.郵便番号.ReadOnly = True
+        '
+        '住所１
+        '
+        Me.住所１.HeaderText = "住所１"
+        Me.住所１.Name = "住所１"
+        Me.住所１.ReadOnly = True
+        '
+        '住所２
+        '
+        Me.住所２.HeaderText = "住所２"
+        Me.住所２.Name = "住所２"
+        Me.住所２.ReadOnly = True
+        '
+        '住所３
+        '
+        Me.住所３.HeaderText = "住所３"
+        Me.住所３.Name = "住所３"
+        Me.住所３.ReadOnly = True
+        '
+        '電話番号
+        '
+        Me.電話番号.HeaderText = "電話番号"
+        Me.電話番号.Name = "電話番号"
+        Me.電話番号.ReadOnly = True
+        '
+        'ＦＡＸ番号
+        '
+        Me.ＦＡＸ番号.HeaderText = "ＦＡＸ番号"
+        Me.ＦＡＸ番号.Name = "ＦＡＸ番号"
+        Me.ＦＡＸ番号.ReadOnly = True
         '
         '保税有無
         '
         Me.保税有無.HeaderText = "保税有無"
         Me.保税有無.Name = "保税有無"
         Me.保税有無.ReadOnly = True
+        '
+        '備考
+        '
+        Me.備考.HeaderText = "備考"
+        Me.備考.Name = "備考"
+        Me.備考.ReadOnly = True
         '
         '無効フラグ
         '
@@ -190,8 +232,14 @@ Partial Class MstWarehouse
     Friend WithEvents 倉庫コード As DataGridViewTextBoxColumn
     Friend WithEvents 名称 As DataGridViewTextBoxColumn
     Friend WithEvents 略称 As DataGridViewTextBoxColumn
-    Friend WithEvents 備考 As DataGridViewTextBoxColumn
+    Friend WithEvents 郵便番号 As DataGridViewTextBoxColumn
+    Friend WithEvents 住所１ As DataGridViewTextBoxColumn
+    Friend WithEvents 住所２ As DataGridViewTextBoxColumn
+    Friend WithEvents 住所３ As DataGridViewTextBoxColumn
+    Friend WithEvents 電話番号 As DataGridViewTextBoxColumn
+    Friend WithEvents ＦＡＸ番号 As DataGridViewTextBoxColumn
     Friend WithEvents 保税有無 As DataGridViewTextBoxColumn
+    Friend WithEvents 備考 As DataGridViewTextBoxColumn
     Friend WithEvents 無効フラグ As DataGridViewTextBoxColumn
     Friend WithEvents 更新者 As DataGridViewTextBoxColumn
     Friend WithEvents 更新日 As DataGridViewTextBoxColumn
