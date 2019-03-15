@@ -350,10 +350,10 @@ Public Class QuoteList
                 End If
 
 
-                '受発注登録の時は有効期限切れは表示しない
-                If _status = CommonConst.STATUS_ORDER_NEW Or ChkCancel.Checked = True Then
+                If ChkExpired.Checked = False Then
                     Sql += " and t01.見積有効期限 >= '" & UtilClass.strFormatDate(DateTime.Today.ToShortDateString) & "'"
                 End If
+
 
                 Sql += " ORDER BY t02.見積番号 DESC,t02.見積番号枝番 DESC ,t02.行番号"
 
