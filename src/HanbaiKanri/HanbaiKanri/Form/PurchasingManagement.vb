@@ -847,91 +847,106 @@ Public Class PurchasingManagement
 
     End Sub
 
+    '買掛登録
     Private Sub Accounts()
         Dim dtToday As DateTime = DateTime.Now
         Dim strToday As String = UtilClass.formatDatetime(dtToday)
 
         Dim reccnt As Integer = 0
-        Dim APAmount As Integer = 0
-        For index As Integer = 0 To DgvAdd.Rows.Count - 1
-            APAmount += DgvAdd.Rows(index).Cells("仕入値").Value * DgvAdd.Rows(index).Cells("仕入数量").Value
+        Dim APAmount As Decimal = 0
+        For i As Integer = 0 To DgvAdd.Rows.Count - 1
+            APAmount += DgvAdd.Rows(i).Cells("仕入値").Value * DgvAdd.Rows(i).Cells("仕入数量").Value
         Next
 
         Dim Saiban1 As String = ""
-        Dim Sql1 As String = ""
-        Dim Sql2 As String = ""
-        Dim Sql3 As String = ""
-        Dim Sql4 As String = ""
+        Dim Sql As String = ""
+        Dim tmp As Decimal = 0
 
         Dim AP As String = getSaiban("100", dtToday)
 
-        Sql1 += "SELECT * FROM public.t20_hattyu"
-        Sql1 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        Sql1 += " AND 発注番号 = '" & No & "'"
-        Sql1 += " AND 発注番号枝番 = '" & Suffix & "'"
+        Sql = "SELECT * FROM public.t20_hattyu"
+        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " AND 発注番号 = '" & No & "'"
+        Sql += " AND 発注番号枝番 = '" & Suffix & "'"
+        Sql += " AND 取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'" '未取消
 
-        Dim ds1 As DataSet = _db.selectDB(Sql1, RS, reccnt)
+        '発注データから該当データを取得
+        Dim dsHattyu As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-        Sql2 += "SELECT * FROM public.t46_kikehd"
-        Sql2 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        Sql2 += " AND 発注番号 = '" & No & "'"
-        Sql2 += " AND 発注番号枝番 = '" & Suffix & "'"
+        Sql = "SELECT * FROM public.t46_kikehd"
+        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " AND 発注番号 = '" & No & "'"
+        Sql += " AND 発注番号枝番 = '" & Suffix & "'"
+        Sql += " AND 取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'" '未取消
 
-        Dim ds2 As DataSet = _db.selectDB(Sql2, RS, reccnt)
-        Dim kikePrice As Integer = 0
-        If ds2.Tables(RS).Rows.Count > 0 Then
-            For i As Integer = 0 To ds2.Tables(RS).Rows.Count - 1
-                kikePrice += ds2.Tables(RS).Rows(i)("買掛金額計")
-            Next
+        '買掛データから該当データを取得
+        Dim dsKikehd As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+        '買掛済みの金額を算出
+        Dim kikePrice As Decimal = 0
+
+        '買掛金額計を集計
+        kikePrice = IIf(dsKikehd.Tables(RS).Compute("SUM(買掛金額計)", Nothing) IsNot DBNull.Value,
+                        dsKikehd.Tables(RS).Compute("SUM(買掛金額計)", Nothing),
+                        0)
+
+        '発注金額（仕入金額） - 買掛金合計
+        '未買掛金
+        Dim calKikeZan As Decimal = dsHattyu.Tables(RS).Rows(0)("仕入金額") - kikePrice
+
+        calKikeZan = APAmount - calKikeZan
+
+        '今回仕入分で起こせる買掛金よりも発注金額を上回る場合、仕入金額から買掛金額を引いた金額で買掛データを作成する
+        If APAmount <= calKikeZan Then
+            tmp = APAmount
+        Else
+            tmp = dsHattyu.Tables(RS).Rows(0)("仕入金額") - kikePrice
         End If
 
-        Dim tmp As Decimal = 0
-        Sql3 = ""
-        Sql3 += "INSERT INTO "
-        Sql3 += "Public."
-        Sql3 += "t46_kikehd("
-        Sql3 += "会社コード, 買掛番号, 客先番号, 買掛区分, 買掛日, 発注番号, 発注番号枝番, 仕入先コード, 仕入先名"
-        Sql3 += ", 買掛金額計, 買掛残高, 備考1, 備考2, 取消区分, 登録日, 更新者, 更新日,支払予定日)"
-        Sql3 += " VALUES('"
-        Sql3 += ds1.Tables(RS).Rows(0)("会社コード").ToString
-        Sql3 += "', '"
-        Sql3 += AP
-        Sql3 += "', '"
-        Sql3 += ds1.Tables(RS).Rows(0)("客先番号").ToString
-        Sql3 += "', '"
-        Sql3 += "1"
-        Sql3 += "', '"
-        Sql3 += UtilClass.strFormatDate(DtpPurchaseDate.Value)
-        Sql3 += "', '"
-        Sql3 += ds1.Tables(RS).Rows(0)("発注番号").ToString
-        Sql3 += "', '"
-        Sql3 += ds1.Tables(RS).Rows(0)("発注番号枝番").ToString
-        Sql3 += "', '"
-        Sql3 += ds1.Tables(RS).Rows(0)("仕入先コード").ToString
-        Sql3 += "', '"
-        Sql3 += ds1.Tables(RS).Rows(0)("仕入先名").ToString
-        Sql3 += "', '"
-        tmp = APAmount.ToString - kikePrice
-        Sql3 += UtilClass.formatNumber(tmp.ToString)
-        Sql3 += "', '"
-        Sql3 += UtilClass.formatNumber(tmp.ToString)
-        Sql3 += "', '"
-        Sql3 += TxtRemarks.Text
-        Sql3 += "', '"
-        Sql3 += DgvAdd.Rows(0).Cells("備考").Value
-        Sql3 += "', '"
-        Sql3 += "0"
-        Sql3 += "', '"
-        Sql3 += strToday
-        Sql3 += "', '"
-        Sql3 += frmC01F10_Login.loginValue.TantoNM
-        Sql3 += "', '"
-        Sql3 += strToday
-        Sql3 += "', '"
-        Sql3 += UtilClass.strFormatDate(DtpPaymentDate.Text)
-        Sql3 += " ')"
+        Sql = "INSERT INTO "
+        Sql += "Public."
+        Sql += "t46_kikehd("
+        Sql += "会社コード, 買掛番号, 客先番号, 買掛区分, 買掛日, 発注番号, 発注番号枝番, 仕入先コード, 仕入先名"
+        Sql += ", 買掛金額計, 買掛残高, 備考1, 備考2, 取消区分, 登録日, 更新者, 更新日,支払予定日)"
+        Sql += " VALUES('"
+        Sql += dsHattyu.Tables(RS).Rows(0)("会社コード").ToString
+        Sql += "', '"
+        Sql += AP
+        Sql += "', '"
+        Sql += dsHattyu.Tables(RS).Rows(0)("客先番号").ToString
+        Sql += "', '"
+        Sql += CommonConst.APC_KBN_NORMAL.ToString
+        Sql += "', '"
+        Sql += UtilClass.strFormatDate(DtpPurchaseDate.Value)
+        Sql += "', '"
+        Sql += dsHattyu.Tables(RS).Rows(0)("発注番号").ToString
+        Sql += "', '"
+        Sql += dsHattyu.Tables(RS).Rows(0)("発注番号枝番").ToString
+        Sql += "', '"
+        Sql += dsHattyu.Tables(RS).Rows(0)("仕入先コード").ToString
+        Sql += "', '"
+        Sql += dsHattyu.Tables(RS).Rows(0)("仕入先名").ToString
+        Sql += "', '"
+        Sql += UtilClass.formatNumber(tmp.ToString)
+        Sql += "', '"
+        Sql += UtilClass.formatNumber(tmp.ToString)
+        Sql += "', '"
+        Sql += TxtRemarks.Text
+        Sql += "', '"
+        Sql += DgvAdd.Rows(0).Cells("備考").Value
+        Sql += "', '"
+        Sql += "0"
+        Sql += "', '"
+        Sql += strToday
+        Sql += "', '"
+        Sql += frmC01F10_Login.loginValue.TantoNM
+        Sql += "', '"
+        Sql += strToday
+        Sql += "', '"
+        Sql += UtilClass.strFormatDate(DtpPaymentDate.Text)
+        Sql += " ')"
 
-        _db.executeDB(Sql3)
+        _db.executeDB(Sql)
 
     End Sub
 
