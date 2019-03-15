@@ -296,6 +296,21 @@ Public Class AccountsPayable
             DgvHistory.Rows(i).Cells("買掛区分").Value = IIf(dsKikehd.Tables(RS).Rows(i)("買掛区分") = CommonConst.APC_KBN_DEPOSIT.ToString,
                                                                                                     CommonConst.APC_KBN_DEPOSIT_TXT,
                                                                                                     CommonConst.APC_KBN_NORMAL_TXT)
+            If frmC01F10_Login.loginValue.Language = "ENG" Then
+                DgvHistory.Rows(i).Cells("買掛区分").Value = IIf(
+                dsKikehd.Tables(RS).Rows(i)("買掛区分") = CommonConst.APC_KBN_DEPOSIT,
+                CommonConst.APC_KBN_DEPOSIT_TXT_E,
+                CommonConst.APC_KBN_NORMAL_TXT_E
+            )
+            Else
+                DgvHistory.Rows(i).Cells("買掛区分").Value = IIf(
+                dsKikehd.Tables(RS).Rows(i)("買掛区分") = CommonConst.APC_KBN_DEPOSIT,
+                CommonConst.APC_KBN_DEPOSIT_TXT,
+                CommonConst.APC_KBN_NORMAL_TXT
+            )
+            End If
+
+
             DgvHistory.Rows(i).Cells("支払先").Value = dsKikehd.Tables(RS).Rows(i)("仕入先名")
             DgvHistory.Rows(i).Cells("買掛金額").Value = dsKikehd.Tables(RS).Rows(i)("買掛金額計")
             DgvHistory.Rows(i).Cells("備考1").Value = dsKikehd.Tables(RS).Rows(i)("備考1")

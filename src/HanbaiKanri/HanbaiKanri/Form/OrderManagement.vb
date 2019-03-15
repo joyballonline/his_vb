@@ -862,143 +862,108 @@ Public Class OrderManagement
 
     End Sub
 
+    '請求データ作成
     Private Sub Biilng()
         Dim dtToday As DateTime = DateTime.Now
         Dim strToday As String = UtilClass.formatDatetime(dtToday)
 
         Dim reccnt As Integer = 0
         Dim BillingAmount As Decimal = 0
-        For index As Integer = 0 To DgvAdd.Rows.Count - 1
-            BillingAmount += DgvAdd.Rows(index).Cells("売単価").Value * DgvAdd.Rows(index).Cells("売上数量").Value
+        For i As Integer = 0 To DgvAdd.Rows.Count - 1
+            BillingAmount += DgvAdd.Rows(i).Cells("売単価").Value * DgvAdd.Rows(i).Cells("売上数量").Value
         Next
 
         Dim Saiban1 As String = ""
-        Dim Sql1 As String = ""
-        Dim Sql2 As String = ""
-        Dim Sql3 As String = ""
-        Dim Sql4 As String = ""
-
-        Saiban1 += "SELECT * FROM public.m80_saiban"
-        Saiban1 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        Saiban1 += " AND 採番キー = '80'"
-
-        Dim dsSaiban1 As DataSet = _db.selectDB(Saiban1, RS, reccnt)
-
-        Dim DM As String = dsSaiban1.Tables(RS).Rows(0)("接頭文字")
-        DM += dtToday.ToString("MMdd")
-        DM += dsSaiban1.Tables(RS).Rows(0)("最新値").ToString.PadLeft(dsSaiban1.Tables(RS).Rows(0)("連番桁数"), "0")
-
-        Sql1 += "SELECT * FROM public.t10_cymnhd"
-        Sql1 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        Sql1 += " AND 受注番号 = '" & No & "'"
-        Sql1 += " AND 受注番号枝番 = '" & Suffix & "'"
-        Sql1 += " AND 取消区分 = " & CommonConst.FLAG_ENABLED.ToString
-
-        Dim ds1 As DataSet = _db.selectDB(Sql1, RS, reccnt)
-
-        Sql2 += "SELECT * FROM public.t23_skyuhd"
-        Sql2 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        Sql2 += " AND 受注番号 = '" & No & "'"
-        Sql2 += " AND 受注番号枝番 ='" & Suffix & "'"
-        Sql2 += " AND 取消区分 = " & CommonConst.FLAG_ENABLED.ToString
-
-        Dim ds2 As DataSet = _db.selectDB(Sql2, RS, reccnt)
-        Dim skyuPrice As Integer = 0
-        If ds2.Tables(RS).Rows.Count > 0 Then
-            For i As Integer = 0 To ds2.Tables(RS).Rows.Count - 1
-                skyuPrice += ds2.Tables(RS).Rows(i)("請求金額計")
-            Next
-        End If
-
+        Dim Sql As String = ""
         Dim tmp As Decimal = 0
 
-        tmp = BillingAmount.ToString - skyuPrice
+        Dim DM As String = getSaiban("80", dtToday)
+
+        Sql = "SELECT * FROM public.t10_cymnhd"
+        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " AND 受注番号 = '" & No & "'"
+        Sql += " AND 受注番号枝番 = '" & Suffix & "'"
+        Sql += " AND 取消区分 = " & CommonConst.FLAG_ENABLED.ToString
+
+        '受注データ取得
+        Dim dsCymnhd As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+        Sql = "SELECT * FROM public.t23_skyuhd"
+        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " AND 受注番号 = '" & No & "'"
+        Sql += " AND 受注番号枝番 ='" & Suffix & "'"
+        Sql += " AND 取消区分 = " & CommonConst.FLAG_ENABLED.ToString
+
+        '請求データ取得
+        Dim dsSkyhd As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+        Dim skyuPrice As Integer = 0
+
+        '請求金額計を集計
+        skyuPrice = IIf(dsSkyhd.Tables(RS).Compute("SUM(請求金額計)", Nothing) IsNot DBNull.Value,
+                        dsSkyhd.Tables(RS).Compute("SUM(請求金額計)", Nothing),
+                        0)
+
+        '受注金額（見積金額） - 請求金合計
+        '未請求金
+        Dim calSkyuZan As Decimal = dsCymnhd.Tables(RS).Rows(0)("見積金額") - skyuPrice
+
+        calSkyuZan = BillingAmount - calSkyuZan
+
+        '今回売上分で起こせる請求金よりも見積金額を上回る場合、見積金額から請求金額を引いた金額で請求データを作成する
+        If BillingAmount <= calSkyuZan Then
+            tmp = BillingAmount
+        Else
+            tmp = dsCymnhd.Tables(RS).Rows(0)("見積金額") - skyuPrice
+        End If
 
         Try
 
-            Sql3 = ""
-            Sql3 += "INSERT INTO "
-            Sql3 += "Public."
-            Sql3 += "t23_skyuhd("
-            Sql3 += "会社コード, 請求番号, 客先番号, 請求区分, 請求日, 受注番号, 受注番号枝番, 得意先コード"
-            Sql3 += ", 得意先名, 請求金額計, 入金額計, 売掛残高, 備考1, 備考2, 取消区分, 入金予定日, 登録日, 更新者, 更新日)"
-            Sql3 += " VALUES('"
-            Sql3 += ds1.Tables(RS).Rows(0)("会社コード").ToString
-            Sql3 += "', '"
-            Sql3 += DM
-            Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("客先番号").ToString
-            Sql3 += "', '"
-            Sql3 += "1"
-            Sql3 += "', '"
-            Sql3 += UtilClass.strFormatDate(DtpOrderDate.Value)
-            Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("受注番号").ToString
-            Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("受注番号枝番").ToString
-            Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("得意先コード").ToString
-            Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("得意先名").ToString
-            Sql3 += "', '"
-            Sql3 += UtilClass.formatNumber(BillingAmount) '請求金額計
-            Sql3 += "', 0"
-            Sql3 += ", '"
-            Sql3 += UtilClass.formatNumber(BillingAmount) '売掛残高
-            Sql3 += "', '"
-            Sql3 += TxtRemarks.Text
-            Sql3 += "', '"
-            Sql3 += DgvAdd.Rows(0).Cells("備考").Value
-            Sql3 += "', '"
-            Sql3 += "0"
-            Sql3 += "', '"
-            Sql3 += UtilClass.strFormatDate(DtpDepositDate.Text)
-            Sql3 += "', '"
-            Sql3 += strToday
-            Sql3 += "', '"
-            Sql3 += frmC01F10_Login.loginValue.TantoNM
-            Sql3 += "', '"
-            Sql3 += strToday
-            Sql3 += " ')"
+            Sql = "INSERT INTO "
+            Sql += "Public."
+            Sql += "t23_skyuhd("
+            Sql += "会社コード, 請求番号, 客先番号, 請求区分, 請求日, 受注番号, 受注番号枝番, 得意先コード"
+            Sql += ", 得意先名, 請求金額計, 入金額計, 売掛残高, 備考1, 備考2, 取消区分, 入金予定日, 登録日, 更新者, 更新日)"
+            Sql += " VALUES('"
+            Sql += dsCymnhd.Tables(RS).Rows(0)("会社コード").ToString
+            Sql += "', '"
+            Sql += DM
+            Sql += "', '"
+            Sql += dsCymnhd.Tables(RS).Rows(0)("客先番号").ToString
+            Sql += "', '"
+            Sql += CommonConst.BILLING_KBN_NORMAL.ToString
+            Sql += "', '"
+            Sql += UtilClass.strFormatDate(DtpOrderDate.Value)
+            Sql += "', '"
+            Sql += dsCymnhd.Tables(RS).Rows(0)("受注番号").ToString
+            Sql += "', '"
+            Sql += dsCymnhd.Tables(RS).Rows(0)("受注番号枝番").ToString
+            Sql += "', '"
+            Sql += dsCymnhd.Tables(RS).Rows(0)("得意先コード").ToString
+            Sql += "', '"
+            Sql += dsCymnhd.Tables(RS).Rows(0)("得意先名").ToString
+            Sql += "', '"
+            Sql += UtilClass.formatNumber(tmp.ToString) '請求金額計
+            Sql += "', 0"
+            Sql += ", '"
+            Sql += UtilClass.formatNumber(tmp.ToString) '売掛残高
+            Sql += "', '"
+            Sql += TxtRemarks.Text
+            Sql += "', '"
+            Sql += DgvAdd.Rows(0).Cells("備考").Value
+            Sql += "', '"
+            Sql += "0"
+            Sql += "', '"
+            Sql += UtilClass.strFormatDate(DtpDepositDate.Text)
+            Sql += "', '"
+            Sql += strToday
+            Sql += "', '"
+            Sql += frmC01F10_Login.loginValue.TantoNM
+            Sql += "', '"
+            Sql += strToday
+            Sql += " ')"
 
-            _db.executeDB(Sql3)
-
-            Dim DMNo As Integer
-
-            If dsSaiban1.Tables(RS).Rows(0)("最新値") = dsSaiban1.Tables(RS).Rows(0)("最大値") Then
-                DMNo = dsSaiban1.Tables(RS).Rows(0)("最小値")
-            Else
-                DMNo = dsSaiban1.Tables(RS).Rows(0)("最新値") + 1
-            End If
-
-            Sql4 = "UPDATE "
-            Sql4 += "Public."
-            Sql4 += "m80_saiban "
-            Sql4 += "SET "
-            Sql4 += " 最新値"
-            Sql4 += " = '"
-            Sql4 += DMNo.ToString
-            Sql4 += "', "
-            Sql4 += "更新者"
-            Sql4 += " = '"
-            Sql4 += frmC01F10_Login.loginValue.TantoNM
-            Sql4 += "', "
-            Sql4 += "更新日"
-            Sql4 += " = '"
-            Sql4 += strToday
-            Sql4 += "' "
-            Sql4 += "WHERE"
-            Sql4 += " 会社コード"
-            Sql4 += "='"
-            Sql4 += ds1.Tables(RS).Rows(0)("会社コード").ToString
-            Sql4 += "'"
-            Sql4 += " AND"
-            Sql4 += " 採番キー"
-            Sql4 += "='"
-            Sql4 += "80"
-            Sql4 += "' "
-
-            _db.executeDB(Sql4)
+            _db.executeDB(Sql)
 
         Catch ue As UsrDefException
             ue.dspMsg()
