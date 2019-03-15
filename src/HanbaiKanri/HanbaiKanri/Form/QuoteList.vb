@@ -536,16 +536,24 @@ Public Class QuoteList
 
     '見積編集ボタン押下時
     Private Sub BtnQuoteEdit_Click(sender As Object, e As EventArgs) Handles BtnQuoteEdit.Click
+        Dim RowIdx As Integer
+        RowIdx = Me.DgvMithd.CurrentCell.RowIndex
 
         'グリッドにリストが存在しない場合は処理しない
         If actionChk() = False Then
             Return
         End If
 
+        If DgvMithd.Rows(RowIdx).Cells("取消").Value = CommonConst.CANCEL_KBN_DISABLED_TXT Then
+            '対象のデータではないことをアラートする
+            _msgHd.dspMSG("cannotSelectTorikeshiData", frmC01F10_Login.loginValue.Language)
+
+            Return
+
+        End If
+
         Try
 
-            Dim RowIdx As Integer
-            RowIdx = Me.DgvMithd.CurrentCell.RowIndex
             Dim No As String = DgvMithd.Rows(RowIdx).Cells("見積番号").Value
             Dim Suffix As String = DgvMithd.Rows(RowIdx).Cells("見積番号枝番").Value
 
@@ -630,15 +638,23 @@ Public Class QuoteList
     '単価入力
     '
     Private Sub BtnUnitPrice_Click(sender As Object, e As EventArgs) Handles BtnUnitPrice.Click
+        Dim RowIdx As Integer
+        RowIdx = Me.DgvMithd.CurrentCell.RowIndex
 
         'グリッドに何もないときは次画面へ移動しない
         If actionChk() = False Then
             Return
         End If
 
+        If DgvMithd.Rows(RowIdx).Cells("取消").Value = CommonConst.CANCEL_KBN_DISABLED_TXT Then
+            '対象のデータではないことをアラートする
+            _msgHd.dspMSG("cannotSelectTorikeshiData", frmC01F10_Login.loginValue.Language)
+
+            Return
+
+        End If
+
         Try
-            Dim RowIdx As Integer
-            RowIdx = Me.DgvMithd.CurrentCell.RowIndex
             Dim No As String = DgvMithd.Rows(RowIdx).Cells("見積番号").Value
             Dim Suffix As String = DgvMithd.Rows(RowIdx).Cells("見積番号枝番").Value
             Dim Status As String = CommonConst.STATUS_PRICE
@@ -666,15 +682,25 @@ Public Class QuoteList
 
     '受発注ボタン押下時
     Private Sub BtnOrder_Click(sender As Object, e As EventArgs) Handles BtnOrderPurchase.Click
+
+        Dim RowIdx As Integer
+        RowIdx = Me.DgvMithd.CurrentCell.RowIndex
+
         'グリッドに何もないときは次画面へ移動しない
         If actionChk() = False Then
             Return
         End If
 
+        If DgvMithd.Rows(RowIdx).Cells("取消").Value = CommonConst.CANCEL_KBN_DISABLED_TXT Then
+            '対象のデータではないことをアラートする
+            _msgHd.dspMSG("cannotSelectTorikeshiData", frmC01F10_Login.loginValue.Language)
+
+            Return
+
+        End If
+
         Try
 
-            Dim RowIdx As Integer
-            RowIdx = Me.DgvMithd.CurrentCell.RowIndex
             Dim No As String = DgvMithd.Rows(RowIdx).Cells("見積番号").Value
             Dim Suffix As String = DgvMithd.Rows(RowIdx).Cells("見積番号枝番").Value
 
@@ -693,10 +719,20 @@ Public Class QuoteList
 
     '見積取消
     Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles BtnCancel.Click
+        Dim RowIdx As Integer
+        RowIdx = Me.DgvMithd.CurrentCell.RowIndex
 
         'グリッドに何もないときは次画面へ移動しない
         If actionChk() = False Then
             Return
+        End If
+
+        If DgvMithd.Rows(RowIdx).Cells("取消").Value = CommonConst.CANCEL_KBN_DISABLED_TXT Then
+            '対象のデータではないことをアラートする
+            _msgHd.dspMSG("cannotSelectTorikeshiData", frmC01F10_Login.loginValue.Language)
+
+            Return
+
         End If
 
         Dim dtToday As DateTime = DateTime.Now
@@ -739,14 +775,23 @@ Public Class QuoteList
     '受注登録ボタンクリック時
     '
     Private Sub BtnOrder_Click_1(sender As Object, e As EventArgs) Handles BtnOrder.Click
+        Dim RowIdx As Integer
+        RowIdx = DgvMithd.CurrentCell.RowIndex
+
         'グリッドに何もないときは次画面へ移動しない
         If actionChk() = False Then
             Return
         End If
 
+        If DgvMithd.Rows(RowIdx).Cells("取消").Value = CommonConst.CANCEL_KBN_DISABLED_TXT Then
+            '対象のデータではないことをアラートする
+            _msgHd.dspMSG("cannotSelectTorikeshiData", frmC01F10_Login.loginValue.Language)
+
+            Return
+
+        End If
+
         Try
-            Dim RowIdx As Integer
-            RowIdx = DgvMithd.CurrentCell.RowIndex
             Dim No As String = DgvMithd.Rows(RowIdx).Cells("見積番号").Value
             Dim Suffix As String = DgvMithd.Rows(RowIdx).Cells("見積番号枝番").Value
             Dim Status As String = CommonConst.STATUS_ADD
