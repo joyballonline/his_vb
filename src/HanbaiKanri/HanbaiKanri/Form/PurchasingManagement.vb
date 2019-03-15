@@ -375,7 +375,7 @@ Public Class PurchasingManagement
                     DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("単位").Value = dsHattyuDt.Tables(RS).Rows(i)("単位")
                     DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("仕入値").Value = dsHattyuDt.Tables(RS).Rows(i)("仕入値")
                     DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("仕入数量").Value = 0
-                    DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("備考").Value = dsHattyuDt.Tables(RS).Rows(i)("備考")
+                    'DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("備考").Value = dsHattyuDt.Tables(RS).Rows(i)("備考")
                 End If
             Next
 
