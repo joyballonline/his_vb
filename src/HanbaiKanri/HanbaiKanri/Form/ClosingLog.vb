@@ -2405,14 +2405,20 @@ Public Class ClosingLog
             Sql += "', '"
             Sql += dsNkinhd.Tables(RS).Rows(i)("請求先名").ToString
             Sql += "', '"
-            Sql += dsNkinhd.Tables(RS).Rows(i)("振込先").ToString
-            Sql += "', '"
-            Sql += dsNkinhd.Tables(RS).Rows(i)("請求金額").ToString
-            Sql += "', '"
-            Sql += dsNkinhd.Tables(RS).Rows(i)("入金額").ToString
-            Sql += "', '"
-            Sql += dsNkinhd.Tables(RS).Rows(i)("請求残高").ToString
-            Sql += "', '"
+            Sql += dsNkinhd.Tables(RS).Rows(i)("振込先").ToString & "'"
+            If dsNkinhd.Tables(RS).Rows(i)("請求金額") IsNot DBNull.Value Then
+                Sql += " , " & dsNkinhd.Tables(RS).Rows(i)("請求金額").ToString
+            Else
+                Sql += " , 0"
+            End If
+            Sql += ", '"
+            Sql += dsNkinhd.Tables(RS).Rows(i)("入金額").ToString & "'"
+            If dsNkinhd.Tables(RS).Rows(i)("請求残高") IsNot DBNull.Value Then
+                Sql += " , " & dsNkinhd.Tables(RS).Rows(i)("請求残高").ToString
+            Else
+                Sql += " , 0"
+            End If
+            Sql += ", '"
             Sql += dsNkinhd.Tables(RS).Rows(i)("備考").ToString
             Sql += "', '"
             Sql += dsNkinhd.Tables(RS).Rows(i)("入金日").ToString
