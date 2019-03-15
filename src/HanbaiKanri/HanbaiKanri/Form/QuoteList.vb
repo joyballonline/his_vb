@@ -664,7 +664,7 @@ Public Class QuoteList
         QuoteListLoad() '一覧再表示
     End Sub
 
-    '発注ボタン押下時
+    '受発注ボタン押下時
     Private Sub BtnOrder_Click(sender As Object, e As EventArgs) Handles BtnOrderPurchase.Click
         'グリッドに何もないときは次画面へ移動しない
         If actionChk() = False Then
@@ -680,6 +680,7 @@ Public Class QuoteList
 
             Dim openForm As Form = Nothing
             openForm = New Cymn(_msgHd, _db, _langHd, Me, No, Suffix)   '処理選択
+
             Me.Hide()
             openForm.Show(Me)
 
@@ -765,6 +766,11 @@ Public Class QuoteList
 
         QuoteListLoad() '一覧取得
 
+    End Sub
+
+    '画面がアクティブになるときのイベント
+    Private Sub QuoteList_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
+        QuoteListLoad()
     End Sub
 
     '抽出条件取得
