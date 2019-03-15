@@ -177,7 +177,7 @@ Public Class DepositDetailList
                     DgvBilling.Rows.Add()
                     DgvBilling.Rows(i).Cells("取消").Value = getDelKbnTxt(ds.Tables(RS).Rows(i)("取消区分"))
                     DgvBilling.Rows(i).Cells("入金番号").Value = ds.Tables(RS).Rows(i)("入金番号")
-                    DgvBilling.Rows(i).Cells("入金日").Value = ds.Tables(RS).Rows(i)("入金日")
+                    DgvBilling.Rows(i).Cells("入金日").Value = ds.Tables(RS).Rows(i)("入金日").ToShortDateString
                     DgvBilling.Rows(i).Cells("請求先名").Value = ds.Tables(RS).Rows(i)("請求先名")
                     DgvBilling.Rows(i).Cells("振込先").Value = ds.Tables(RS).Rows(i)("振込先")
                     DgvBilling.Rows(i).Cells("入金額").Value = ds.Tables(RS).Rows(i)("入金額")
@@ -215,7 +215,7 @@ Public Class DepositDetailList
                     DgvBilling.Rows(i).Cells("取消").Value = getDelKbnTxt(ds.Tables(RS).Rows(i)("取消区分"))
                     DgvBilling.Rows(i).Cells("入金番号").Value = ds.Tables(RS).Rows(i)("入金番号")
                     DgvBilling.Rows(i).Cells("請求番号").Value = ds.Tables(RS).Rows(i)("請求番号")
-                    DgvBilling.Rows(i).Cells("入金日").Value = ds.Tables(RS).Rows(i)("入金日")
+                    DgvBilling.Rows(i).Cells("入金日").Value = ds.Tables(RS).Rows(i)("入金日").ToShortDateString
                     DgvBilling.Rows(i).Cells("請求先名").Value = ds.Tables(RS).Rows(i)("請求先名")
                     DgvBilling.Rows(i).Cells("入金額").Value = ds.Tables(RS).Rows(i)("入金消込額計")
                     DgvBilling.Rows(i).Cells("備考").Value = ds.Tables(RS).Rows(i)("備考")

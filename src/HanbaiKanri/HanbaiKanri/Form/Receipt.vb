@@ -266,6 +266,7 @@ Public Class Receipt
             Sql += " AND "
             Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
 
+            '発注基本取得
             Dim dsHattyu As DataSet = getDsData("t20_hattyu", Sql)
 
             Sql = " SELECT t43.*, t42.取消区分 "
@@ -290,6 +291,7 @@ Public Class Receipt
             Sql += " ORDER BY "
             Sql += "t42.更新日 DESC"
 
+            '入庫明細取得
             Dim dsNyukodt As DataSet = _db.selectDB(Sql, RS, reccnt)
 
             Sql = " SELECT t21.メーカー, t21.品名, t21.型式, t21.発注数量, t21.単位, t21.仕入数量, t21.仕入値, t21.仕入金額"
@@ -315,6 +317,7 @@ Public Class Receipt
             Sql += " AND "
             Sql += "t20.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
 
+            '発注明細取得
             Dim dsHattyudt As DataSet = _db.selectDB(Sql, RS, reccnt)
 
             For i As Integer = 0 To dsHattyudt.Tables(RS).Rows.Count - 1
@@ -439,7 +442,7 @@ Public Class Receipt
     Private Sub BtnRegist_Click(sender As Object, e As EventArgs) Handles BtnRegist.Click
 
         Dim dtToday As String = DateTime.Now
-        Dim strToday As String = formatDatetime(dtToday)
+        Dim strToday As String = UtilClass.formatDatetime(dtToday)
         Dim reccnt As Integer = 0
 
         Dim Sql As String = ""
@@ -540,9 +543,9 @@ Public Class Receipt
             Sql += "', '"
             Sql += dsHattyu.Tables(RS).Rows(0)("支払条件").ToString
             Sql += "', '"
-            Sql += dsHattyu.Tables(RS).Rows(0)("仕入金額").ToString
+            Sql += UtilClass.formatNumber(dsHattyu.Tables(RS).Rows(0)("仕入金額"))
             Sql += "', '"
-            Sql += dsHattyu.Tables(RS).Rows(0)("粗利額").ToString
+            Sql += UtilClass.formatNumber(dsHattyu.Tables(RS).Rows(0)("粗利額"))
             Sql += "', '"
             Sql += dsHattyu.Tables(RS).Rows(0)("営業担当者").ToString
             Sql += "', '"
@@ -552,9 +555,9 @@ Public Class Receipt
             Sql += "', '"
             Sql += CommonConst.CANCEL_KBN_ENABLED.ToString
             Sql += "', '"
-            Sql += dsHattyu.Tables(RS).Rows(0)("ＶＡＴ").ToString
+            Sql += UtilClass.formatNumber(dsHattyu.Tables(RS).Rows(0)("ＶＡＴ"))
             Sql += "', '"
-            Sql += dsHattyu.Tables(RS).Rows(0)("ＰＰＨ").ToString
+            Sql += UtilClass.formatNumber(dsHattyu.Tables(RS).Rows(0)("ＰＰＨ"))
             Sql += "', '"
             Sql += strToday
             Sql += "', '"
@@ -610,9 +613,9 @@ Public Class Receipt
                     Sql += "', '"
                     Sql += DgvAdd.Rows(i).Cells("仕入先").Value.ToString
                     Sql += "', '"
-                    Sql += formatNumber(DgvAdd.Rows(i).Cells("仕入値").Value.ToString)
+                    Sql += UtilClass.formatNumber(DgvAdd.Rows(i).Cells("仕入値").Value.ToString)
                     Sql += "', '"
-                    Sql += formatNumber(DgvAdd.Rows(i).Cells("入庫数量").Value.ToString)
+                    Sql += UtilClass.formatNumber(DgvAdd.Rows(i).Cells("入庫数量").Value.ToString)
                     Sql += "', '"
                     Sql += DgvAdd.Rows(i).Cells("単位").Value.ToString
                     Sql += "', '"
@@ -692,7 +695,7 @@ Public Class Receipt
             Sql += "', "
             Sql += "更新日"
             Sql += " = '"
-            Sql += formatDatetime(today)
+            Sql += UtilClass.formatDatetime(today)
             Sql += "' "
             Sql += "WHERE"
             Sql += " 会社コード"
@@ -724,44 +727,6 @@ Public Class Receipt
         Sql += "会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql += txtParam
         Return _db.selectDB(Sql, RS, reccnt)
-    End Function
-
-    'ユーザーのカルチャーから、日本の形式に変換する
-    Private Function strFormatDate(ByVal prmDate As String, Optional ByRef prmFormat As String = "yyyy/MM/dd") As String
-
-        'PCのカルチャーを取得し、それに応じてStringからDatetimeを作成
-        Dim ci As New System.Globalization.CultureInfo(CultureInfo.CurrentCulture.Name.ToString)
-        Dim dateFormat As DateTime = DateTime.Parse(prmDate, ci, System.Globalization.DateTimeStyles.AssumeLocal)
-
-        '日本の形式に書き換える
-        Return dateFormat.ToString(prmFormat)
-    End Function
-
-    'ユーザーのカルチャーから、日本の形式に変換する
-    Private Function formatDatetime(ByVal prmDatetime As DateTime) As String
-
-        'PCのカルチャーを取得し、それに応じてStringからDatetimeを作成
-        Dim ciCurrent As New System.Globalization.CultureInfo(CultureInfo.CurrentCulture.Name.ToString)
-        Dim dateFormat As DateTime = DateTime.Parse(prmDatetime.ToString, ciCurrent, System.Globalization.DateTimeStyles.AssumeLocal)
-
-        Dim changeFormat As String = dateFormat.ToString("yyyy/MM/dd HH:mm:ss")
-
-        Dim ciJP As New System.Globalization.CultureInfo(CommonConst.CI_JP)
-        Dim rtnDatetime As DateTime = DateTime.Parse(changeFormat, ciJP, System.Globalization.DateTimeStyles.AssumeLocal)
-
-
-        '日本の形式に書き換える
-        Return changeFormat
-    End Function
-
-    '金額フォーマット（登録の際の小数点指定子）を日本の形式に合わせる
-    '桁区切り記号は外す
-    Private Function formatNumber(ByVal prmVal As Decimal) As String
-
-        Dim nfi As NumberFormatInfo = New CultureInfo(CommonConst.CI_JP, False).NumberFormat
-
-        '日本の形式に書き換える
-        Return prmVal.ToString("F3", nfi) '売掛残高を増やす
     End Function
 
 End Class

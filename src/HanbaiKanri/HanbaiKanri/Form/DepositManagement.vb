@@ -294,6 +294,7 @@ Public Class DepositManagement
         Sql += "%'"
         Sql += " AND "
         Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+        Sql += " ORDER BY 会社コード, 請求番号"
 
         '得意先と一致する請求基本を取得
         Dim dsSkyuhd As DataSet = getDsData("t23_skyuhd", Sql)
@@ -492,6 +493,7 @@ Public Class DepositManagement
         Dim dtToday As String = formatDatetime(DateTime.Now)
         Dim reccnt As Integer = 0
         Dim DepositAmount As Decimal = 0
+        Dim BillingAmount As Decimal = 0
 
         Dim Sql As String = ""
 
@@ -511,6 +513,11 @@ Public Class DepositManagement
             DepositAmount += DgvDeposit.Rows(i).Cells("入力入金額").Value
         Next
 
+        '請求情報の合算が0だったら
+        For i As Integer = 0 To DgvBillingInfo.Rows.Count - 1
+            BillingAmount += DgvBillingInfo.Rows(i).Cells("入金額").Value
+        Next
+
         '入金入力がない、或いは合計が0だったら
         If DgvDeposit.Rows.Count = 0 Or DepositAmount = 0 Then
             '対象データがないメッセージを表示
@@ -519,6 +526,21 @@ Public Class DepositManagement
             Return
         End If
 
+        '入金入力はあるが、請求情報に反映されていない場合
+        If DepositAmount > 0 And BillingAmount = 0 Then
+            '入金入力が請求情報に反映されていないメッセージを表示
+            _msgHd.dspMSG("chkPtoBBalanceError", frmC01F10_Login.loginValue.Language)
+
+            Return
+        End If
+
+        '入金入力と請求情報の金額が不一致だったら
+        If DepositAmount <> BillingAmount Then
+            '金額があっていないアラートを表示
+            _msgHd.dspMSG("chkPEqualBBalanceError", frmC01F10_Login.loginValue.Language)
+
+            Return
+        End If
 
         '採番テーブルから入金番号取得
         Dim PMSaiban As String = getSaiban("90", dtToday)
