@@ -96,7 +96,7 @@ Public Class frmC01F20_ChangePasswd
     Private Sub btnBack_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnback.Click
 
         Dim intRet As Integer
-        intRet = _msgHd.dspMSG("rejectPWEdit", CommonConst.LANG_KBN_JPN)
+        intRet = _msgHd.dspMSG("rejectPWEdit", frmC01F10_Login.loginValue.Language)
         If intRet = vbNo Then
             Exit Sub
         End If
@@ -127,6 +127,14 @@ Public Class frmC01F20_ChangePasswd
             'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力
             Dim te As UsrDefException = New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))     '握りつぶす
         End Try
+
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+            LblTitle.Text = "ChangePassword"
+            LblUserCd.Text = "UserCode"
+            LblNewPassword.Text = "NewPassword"
+            LblConfirmation.Text = "Confirmation"
+            btnback.Text = "Back"
+        End If
 
     End Sub
 
@@ -304,17 +312,25 @@ Public Class frmC01F20_ChangePasswd
 
         '新パスワード
         If "".Equals(txtPasswd.Text) Then
-            Throw New UsrDefException("「新パスワード」を入力してください。", _msgHd.getMSG("requiredImputNewPassword", frmC01F10_Login.loginValue.Language), txtPasswd)
+
+            '「新パスワード」を入力してください。
+            Throw New UsrDefException(_msgHd.dspMSG("noInputNewPasswordError", frmC01F10_Login.loginValue.Language))
+
         End If
 
         '確認用
         If "".Equals(txtKakunin.Text) Then
-            Throw New UsrDefException("「確認用パスワード」を入力してください。", _msgHd.getMSG("requiredImputConfirmationPassword", frmC01F10_Login.loginValue.Language), txtKakunin)
+
+            '「確認用パスワード」を入力してください。
+            Throw New UsrDefException(_msgHd.dspMSG("noInputConfirmationError", frmC01F10_Login.loginValue.Language))
+
         End If
 
         '新パスワードと確認用パスワードの一致確認
         If Not txtPasswd.Text.Equals(txtKakunin.Text) Then
-            Throw New UsrDefException("「新パスワード」と「確認用パスワード」が不一致です。", _msgHd.getMSG("UnmatchPasswd", frmC01F10_Login.loginValue.Language), txtKakunin)
+            '「新パスワード」と「確認用パスワード」が不一致です。
+            Throw New UsrDefException(_msgHd.dspMSG("noInputPasswordVotEqualError", frmC01F10_Login.loginValue.Language))
+
         End If
 
     End Sub

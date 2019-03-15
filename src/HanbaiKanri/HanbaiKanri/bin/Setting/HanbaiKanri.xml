@@ -1094,5 +1094,32 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
     <MEMO></MEMO>
   </MSG_DATA>
+  <MSG_DATA>
+    <ID>noInputNewPasswordError</ID>
+    <MSG1>「新パスワード」を入力してください。</MSG1>
+    <MSG1_EN>Please enter "New Password".</MSG1_EN>
+    <BUTTON_TYPE>OK</BUTTON_TYPE>
+    <ICONT_TYPE>Error</ICONT_TYPE>
+    <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
+    <MEMO></MEMO>
+  </MSG_DATA>
+  <MSG_DATA>
+    <ID>noInputConfirmationError</ID>
+    <MSG1>「新確認用パスワード」を入力してください。</MSG1>
+    <MSG1_EN>Please enter "Password for confirmation".</MSG1_EN>
+    <BUTTON_TYPE>OK</BUTTON_TYPE>
+    <ICONT_TYPE>Error</ICONT_TYPE>
+    <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
+    <MEMO></MEMO>
+  </MSG_DATA>
+  <MSG_DATA>
+    <ID>noInputPasswordVotEqualError</ID>
+    <MSG1>「新パスワード」と「確認用パスワード」が不一致です。</MSG1>
+    <MSG1_EN>"New password" and "Password for confirmation" do not match.</MSG1_EN>
+    <BUTTON_TYPE>OK</BUTTON_TYPE>
+    <ICONT_TYPE>Error</ICONT_TYPE>
+    <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
+    <MEMO></MEMO>
+  </MSG_DATA>
 
 </MSG_DEF>
