@@ -980,7 +980,7 @@ Public Class Ordering
                     Sql = "INSERT INTO "
                     Sql += "Public."
                     Sql += "t21_hattyu("
-                    Sql += "会社コード, 発注番号, 発注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 単位, 仕入値, 発注数量, 仕入数量, 発注残数, 間接費, 仕入単価, 仕入金額, リードタイム, リードタイム単位, 入庫数, 未入庫数, 備考, 更新者, 登録日, 更新日"
+                    Sql += "会社コード, 発注番号, 発注番号枝番, 行番号, 仕入区分, 仕入先名, メーカー, 品名, 型式, 単位, 仕入値, 発注数量, 仕入数量, 発注残数, 間接費, 仕入単価, 仕入金額, リードタイム, リードタイム単位, 入庫数, 未入庫数, 備考, 更新者, 登録日, 更新日"
 
                     Sql += IIf(
                     DgvItemList.Rows(i).Cells("貿易条件").Value IsNot Nothing,
@@ -997,13 +997,15 @@ Public Class Ordering
                     Sql += "', '2"
                     'Sql += DgvItemList.Rows(hattyuIdx).Cells("仕入区分").Value.ToString
                     Sql += "', '"
+                    Sql += TxtSupplierName.Text
+                    Sql += "', '"
                     Sql += DgvItemList.Rows(i).Cells("メーカー").Value.ToString
                     Sql += "', '"
                     Sql += DgvItemList.Rows(i).Cells("品名").Value.ToString
                     Sql += "', '"
                     Sql += DgvItemList.Rows(i).Cells("型式").Value.ToString
                     Sql += "', '"
-                    Sql += DgvItemList.Rows(i).Cells("単位").Value.ToString
+                    Sql += DgvItemList.Rows(i).Cells("単位").Value
                     Sql += "', '"
                     Sql += formatNumber(DgvItemList.Rows(i).Cells("仕入単価").Value.ToString)
                     Sql += "', '"
