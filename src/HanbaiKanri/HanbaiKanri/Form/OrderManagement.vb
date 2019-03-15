@@ -271,7 +271,7 @@ Public Class OrderManagement
                 DgvOrder.Rows(i).Cells("単位").Value = ds3.Tables(RS).Rows(i)("単位")
                 DgvOrder.Rows(i).Cells("売上数量").Value = ds3.Tables(RS).Rows(i)("売上数量")
                 DgvOrder.Rows(i).Cells("売単価").Value = ds3.Tables(RS).Rows(i)("見積単価") '売単価 = 見積単価
-                DgvOrder.Rows(i).Cells("売上金額").Value = ds3.Tables(RS).Rows(i)("売上金額")
+                DgvOrder.Rows(i).Cells("売上金額").Value = ds3.Tables(RS).Rows(i)("見積金額")
                 DgvOrder.Rows(i).Cells("受注残数").Value = ds3.Tables(RS).Rows(i)("受注残数")
             Next
 
