@@ -451,6 +451,10 @@ Public Class Ordering
             CbShippedBy.SelectedIndex = dsHattyu.Tables(RS).Rows(0)("出荷方法")
         End If
         If dsHattyu.Tables(RS).Rows(0)("出荷日") IsNot DBNull.Value Then
+            '出荷日の最小値を調べて出荷日が入るようにする
+            If DtpShippedDate.MinDate > dsHattyu.Tables(RS).Rows(0)("出荷日") Then
+                DtpShippedDate.MinDate = dsHattyu.Tables(RS).Rows(0)("出荷日")
+            End If
             DtpShippedDate.Value = dsHattyu.Tables(RS).Rows(0)("出荷日")
         End If
 
