@@ -162,20 +162,20 @@ Public Class MstHanyou
                 Dgv_Hanyo.Rows(i).Cells("可変キー").Value = ds.Tables(RS).Rows(i)("可変キー")        '可変キー
                 Dgv_Hanyo.Rows(i).Cells("表示順").Value = ds.Tables(RS).Rows(i)("表示順")         '表示順
                 Dgv_Hanyo.Rows(i).Cells("文字１").Value = ds.Tables(RS).Rows(i)("文字１")         '文字１
-                Dgv_Hanyo.Rows(i).Cells("文字２").Value = ds.Tables(RS).Rows(i)("文字２")         '文字２
-                Dgv_Hanyo.Rows(i).Cells("文字３").Value = ds.Tables(RS).Rows(i)("文字３")         '文字３
-                Dgv_Hanyo.Rows(i).Cells("文字４").Value = ds.Tables(RS).Rows(i)("文字４")         '文字４
-                Dgv_Hanyo.Rows(i).Cells("文字５").Value = ds.Tables(RS).Rows(i)("文字５")         '文字５
-                Dgv_Hanyo.Rows(i).Cells("文字６").Value = ds.Tables(RS).Rows(i)("文字６")         '文字６
+                Dgv_Hanyo.Rows(i).Cells("文字２").Value = ds.Tables(RS).Rows(i)("文字２").ToString         '文字２
+                Dgv_Hanyo.Rows(i).Cells("文字３").Value = ds.Tables(RS).Rows(i)("文字３").ToString         '文字３
+                Dgv_Hanyo.Rows(i).Cells("文字４").Value = ds.Tables(RS).Rows(i)("文字４").ToString         '文字４
+                Dgv_Hanyo.Rows(i).Cells("文字５").Value = ds.Tables(RS).Rows(i)("文字５").ToString         '文字５
+                Dgv_Hanyo.Rows(i).Cells("文字６").Value = ds.Tables(RS).Rows(i)("文字６").ToString         '文字６
                 Dgv_Hanyo.Rows(i).Cells("数値１").Value = ds.Tables(RS).Rows(i)("数値１")        '数値１
                 Dgv_Hanyo.Rows(i).Cells("数値２").Value = ds.Tables(RS).Rows(i)("数値２")        '数値２
                 Dgv_Hanyo.Rows(i).Cells("数値３").Value = ds.Tables(RS).Rows(i)("数値３")        '数値３
                 Dgv_Hanyo.Rows(i).Cells("数値４").Value = ds.Tables(RS).Rows(i)("数値４")        '数値４
                 Dgv_Hanyo.Rows(i).Cells("数値５").Value = ds.Tables(RS).Rows(i)("数値５")        '数値５
                 Dgv_Hanyo.Rows(i).Cells("数値６").Value = ds.Tables(RS).Rows(i)("数値６")        '数値６
-                Dgv_Hanyo.Rows(i).Cells("メモ").Value = ds.Tables(RS).Rows(i)("メモ")         'メモ
-                Dgv_Hanyo.Rows(i).Cells("更新者").Value = ds.Tables(RS).Rows(i)("更新者")        '更新者
-                Dgv_Hanyo.Rows(i).Cells("更新日").Value = ds.Tables(RS).Rows(i)("更新日")        '更新日
+                Dgv_Hanyo.Rows(i).Cells("メモ").Value = ds.Tables(RS).Rows(i)("メモ").ToString         'メモ
+                Dgv_Hanyo.Rows(i).Cells("更新者").Value = ds.Tables(RS).Rows(i)("更新者").ToString        '更新者
+                Dgv_Hanyo.Rows(i).Cells("更新日").Value = ds.Tables(RS).Rows(i)("更新日").ToString        '更新日
             Next
 
         Catch ue As UsrDefException
