@@ -687,14 +687,13 @@ Public Class QuoteList
 
     '受発注ボタン押下時
     Private Sub BtnOrder_Click(sender As Object, e As EventArgs) Handles BtnOrderPurchase.Click
-
-        Dim RowIdx As Integer
-        RowIdx = Me.DgvMithd.CurrentCell.RowIndex
-
         'グリッドに何もないときは次画面へ移動しない
         If actionChk() = False Then
             Return
         End If
+
+        Dim RowIdx As Integer
+        RowIdx = Me.DgvMithd.CurrentCell.RowIndex
 
         If DgvMithd.Rows(RowIdx).Cells("取消").Value = CommonConst.CANCEL_KBN_DISABLED_TXT Then
             '対象のデータではないことをアラートする

@@ -891,14 +891,8 @@ Public Class PurchasingManagement
                         dsKikehd.Tables(RS).Compute("SUM(買掛金額計)", Nothing),
                         0)
 
-        '発注金額（仕入金額） - 買掛金合計
-        '未買掛金
-        Dim calKikeZan As Decimal = dsHattyu.Tables(RS).Rows(0)("仕入金額") - kikePrice
-
-        calKikeZan = APAmount - calKikeZan
-
         '今回仕入分で起こせる買掛金よりも発注金額を上回る場合、仕入金額から買掛金額を引いた金額で買掛データを作成する
-        If APAmount <= calKikeZan Then
+        If dsHattyu.Tables(RS).Rows(0)("仕入金額") >= (kikePrice + APAmount) Then
             tmp = APAmount
         Else
             tmp = dsHattyu.Tables(RS).Rows(0)("仕入金額") - kikePrice

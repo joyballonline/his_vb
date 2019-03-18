@@ -321,8 +321,7 @@ Public Class AccountsPayable
 
         TxtKikehdCount.Text = dsKikehd.Tables(RS).Rows.Count
 
-        If DgvCymn.Rows(0).Cells("買掛残高").Value = 0 Then
-        Else
+        If dsHattyu.Tables(RS).Rows(0)("仕入金額") - AccountsPayable <> 0 Then
             DgvAdd.Rows.Add()
             DgvAdd.Rows(0).Cells("AddNo").Value = 1
             DgvAdd(1, 0).Value = 2

@@ -912,14 +912,10 @@ Public Class OrderManagement
                         dsSkyhd.Tables(RS).Compute("SUM(請求金額計)", Nothing),
                         0)
 
-        '受注金額（見積金額） - 請求金合計
-        '未請求金
-        Dim calSkyuZan As Decimal = dsCymnhd.Tables(RS).Rows(0)("見積金額") - skyuPrice
 
-        calSkyuZan = BillingAmount - calSkyuZan
+        '今回売上分で起こせる請求金よりも受注金額（見積金額）が上回る場合、売上金額から請求金額を引いた金額で請求データを作成
 
-        '今回売上分で起こせる請求金よりも見積金額を上回る場合、見積金額から請求金額を引いた金額で請求データを作成する
-        If BillingAmount <= calSkyuZan Then
+        If dsCymnhd.Tables(RS).Rows(0)("見積金額") >= (BillingAmount + skyuPrice) Then
             tmp = BillingAmount
         Else
             tmp = dsCymnhd.Tables(RS).Rows(0)("見積金額") - skyuPrice
