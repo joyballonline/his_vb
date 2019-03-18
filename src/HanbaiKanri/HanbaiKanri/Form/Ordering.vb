@@ -172,8 +172,12 @@ Public Class Ordering
         dtReadtime.Columns.Add("Display", GetType(String))
         dtReadtime.Columns.Add("Value", GetType(Integer))
 
-        For index As Integer = 0 To dsHanyo.Tables(RS).Rows.Count - 1
-            dtReadtime.Rows.Add(dsHanyo.Tables(RS).Rows(index)("文字１"), dsHanyo.Tables(RS).Rows(index)("可変キー"))
+        For i As Integer = 0 To dsHanyo.Tables(RS).Rows.Count - 1
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+                dtReadtime.Rows.Add(dsHanyo.Tables(RS).Rows(i)("文字２"), dsHanyo.Tables(RS).Rows(i)("可変キー"))
+            Else
+                dtReadtime.Rows.Add(dsHanyo.Tables(RS).Rows(i)("文字１"), dsHanyo.Tables(RS).Rows(i)("可変キー"))
+            End If
         Next
 
         Dim column2 As New DataGridViewComboBoxColumn()
@@ -657,12 +661,9 @@ Public Class Ordering
             Dim RowIdx As Integer = DgvItemList.CurrentCell.RowIndex
             '行を挿入
             DgvItemList.Rows.Insert(RowIdx + 1)
-            'DgvItemList.Rows(RowIdx + 1).Cells("仕入区分").Value = 1
             DgvItemList.Rows(RowIdx + 1).Cells("リードタイム単位").Value = 1
-            'DgvItemList.Rows(RowIdx + 1).Cells("貿易条件").Value = 1 '固定で入れているので一旦コメントアウト
         Else
             DgvItemList.Rows.Add()
-            'DgvItemList.Rows(0).Cells("仕入区分").Value = 1
             DgvItemList.Rows(0).Cells("リードタイム単位").Value = 1
             TxtItemCount.Text = DgvItemList.Rows.Count()
         End If
@@ -683,9 +684,7 @@ Public Class Ordering
     '行追加（DGVの最終行に追加）
     Private Sub BtnRowsAdd_Click(sender As Object, e As EventArgs) Handles BtnRowsAdd.Click
         DgvItemList.Rows.Add()
-        'DgvItemList.Rows(DgvItemList.Rows.Count() - 1).Cells("仕入区分").Value = 1
         DgvItemList.Rows(DgvItemList.Rows.Count() - 1).Cells("リードタイム単位").Value = 1
-        'DgvItemList.Rows(DgvItemList.Rows.Count() - 1).Cells("貿易条件").Value = 1 '固定で入れているので一旦コメントアウト
 
         '行番号の振り直し
         Dim index As Integer = DgvItemList.Rows.Count()
@@ -732,15 +731,20 @@ Public Class Ordering
         Try
             'メニュー選択処理
             Dim RowIdx As Integer
-            Dim Item(16) As String
+            Dim Item(15) As String
 
             '一覧選択行インデックスの取得
+            'グリッドに何もないときは処理しない
+            If DgvItemList.CurrentCell Is Nothing Then
+                Exit Sub
+            End If
 
             RowIdx = DgvItemList.CurrentCell.RowIndex
 
+            Console.WriteLine("列数カウント：" & DgvItemList.Rows(RowIdx).Cells.Count)
 
             '選択行の値を格納
-            For c As Integer = 0 To 16
+            For c As Integer = 0 To 15
                 Item(c) = DgvItemList.Rows(RowIdx).Cells(c).Value
             Next c
 
@@ -748,21 +752,11 @@ Public Class Ordering
             DgvItemList.Rows.Insert(RowIdx + 1)
 
             '追加した行に複製元の値を格納
-            For c As Integer = 0 To 16
-                If c = 1 Then
+            For c As Integer = 0 To 15
+                If c = 12 Or c = 14 Then
                     If Item(c) IsNot Nothing Then
                         Dim tmp As Integer = Item(c)
-                        DgvItemList(1, RowIdx + 1).Value = tmp
-                    End If
-                ElseIf c = 12 Then
-                    If Item(c) IsNot Nothing Then
-                        Dim tmp As Integer = Item(c)
-                        DgvItemList(12, RowIdx + 1).Value = tmp
-                    End If
-                ElseIf c = 14 Then
-                    If Item(c) IsNot Nothing Then
-                        Dim tmp As Integer = Item(c)
-                        DgvItemList(14, RowIdx + 1).Value = tmp
+                        DgvItemList(c, RowIdx + 1).Value = tmp
                     End If
                 Else
                     DgvItemList.Rows(RowIdx + 1).Cells(c).Value = Item(c)
@@ -1221,7 +1215,12 @@ Public Class Ordering
                 Dim dsHanyo = getDsHanyoData(CommonConst.FIXED_KEY_TRADE_TERMS, dsHattyudt.Tables(RS).Rows(i)("貿易条件").ToString)
 
                 cell = "O" & currentCnt
-                sheet.Range(cell).Value = dsHanyo.Tables(RS).Rows(0)("文字１")
+                If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+                    sheet.Range(cell).Value = dsHanyo.Tables(RS).Rows(0)("文字２")
+                Else
+                    sheet.Range(cell).Value = dsHanyo.Tables(RS).Rows(0)("文字１")
+                End If
+
                 cell = "R" & currentCnt
                 sheet.Range(cell).Value = dsHattyudt.Tables(RS).Rows(i)("仕入値")
                 cell = "W" & currentCnt
