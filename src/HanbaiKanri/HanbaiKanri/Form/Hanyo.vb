@@ -86,7 +86,7 @@ Public Class Hanyo
     End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles BtnRegistration.Click
-        Dim dtToday As DateTime = DateTime.Now
+        Dim dtToday As String = UtilClass.formatDatetime(DateTime.Now)
         Try
             If _status = CommonConst.STATUS_ADD Then
                 Dim Sql As String = ""

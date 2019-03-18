@@ -92,7 +92,7 @@ Public Class Customer
         End If
 
         '登録処理はここから
-        Dim dtToday As DateTime = DateTime.Now
+        Dim dtToday As String = UtilClass.formatDatetime(DateTime.Now)
         Try
             If _status = CommonConst.STATUS_ADD Then
                 Dim Sql As String = ""

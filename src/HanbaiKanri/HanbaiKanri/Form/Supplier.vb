@@ -93,7 +93,7 @@ Public Class Supplier
         End If
 
         '登録処理はここから
-        Dim dtToday As DateTime = DateTime.Now
+        Dim dtToday As String = UtilClass.formatDatetime(DateTime.Now)
         Try
             If _status = CommonConst.STATUS_ADD Then
                 Dim Sql As String = ""
@@ -133,19 +133,19 @@ Public Class Supplier
                 If TxtTariffRate.Text = "" Then
                     Sql += "0"
                 Else
-                    Sql += TxtTariffRate.Text
+                    Sql += UtilClass.formatNumber(TxtTariffRate.Text)
                 End If
                 Sql += "', '"
                 If TxtPph.Text = "" Then
                     Sql += "0"
                 Else
-                    Sql += TxtPph.Text
+                    Sql += UtilClass.formatNumber(TxtPph.Text)
                 End If
                 Sql += "', '"
                 If TxtTransportationCost.Text = "" Then
                     Sql += "0"
                 Else
-                    Sql += TxtTransportationCost.Text
+                    Sql += UtilClass.formatNumber(TxtTransportationCost.Text)
                 End If
                 Sql += "', '"
                 Sql += TxtMemo.Text
@@ -169,60 +169,7 @@ Public Class Supplier
                 Sql += frmC01F10_Login.loginValue.TantoNM
                 Sql += "', '"
                 Sql += dtToday
-                Sql += " ')"
-                Sql += "RETURNING 会社コード"
-                Sql += ", "
-                Sql += "仕入先コード"
-                Sql += ", "
-                Sql += "仕入先名"
-                Sql += ", "
-                Sql += "仕入先名略称"
-                Sql += ", "
-                Sql += "郵便番号"
-                Sql += ", "
-                Sql += "住所１"
-                Sql += ", "
-                Sql += "住所２"
-                Sql += ", "
-                Sql += "住所３"
-                Sql += ", "
-                Sql += "電話番号"
-                Sql += ", "
-                Sql += "電話番号検索用"
-                Sql += ", "
-                Sql += "ＦＡＸ番号"
-                Sql += ", "
-                Sql += "担当者名"
-                Sql += ", "
-                Sql += "担当者役職"
-                Sql += ", "
-                Sql += "関税率"
-                Sql += ", "
-                Sql += "前払法人税率"
-                Sql += ", "
-                Sql += "輸送費率"
-                Sql += ", "
-                Sql += "メモ"
-                Sql += ", "
-                Sql += "銀行名"
-                Sql += ", "
-                Sql += "銀行コード"
-                Sql += ", "
-                Sql += "支店名"
-                Sql += ", "
-                Sql += "支店コード"
-                Sql += ", "
-                Sql += "預金種目"
-                Sql += ", "
-                Sql += "口座番号"
-                Sql += ", "
-                Sql += "口座名義"
-                Sql += ", "
-                Sql += "会計用仕入先コード"
-                Sql += ", "
-                Sql += "更新者"
-                Sql += ", "
-                Sql += "更新日"
+                Sql += "')"
 
                 _db.executeDB(Sql)
             Else
@@ -287,15 +234,15 @@ Public Class Supplier
                 Sql += "', "
                 Sql += "関税率"
                 Sql += " = '"
-                Sql += TxtTariffRate.Text
+                Sql += UtilClass.formatNumber(TxtTariffRate.Text)
                 Sql += "', "
                 Sql += "前払法人税率"
                 Sql += " = '"
-                Sql += TxtPph.Text
+                Sql += UtilClass.formatNumber(TxtPph.Text)
                 Sql += "', "
                 Sql += "輸送費率"
                 Sql += " = '"
-                Sql += TxtTransportationCost.Text
+                Sql += UtilClass.formatNumber(TxtTransportationCost.Text)
                 Sql += "', "
                 Sql += "メモ"
                 Sql += " = '"

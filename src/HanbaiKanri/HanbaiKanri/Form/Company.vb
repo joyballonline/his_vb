@@ -137,7 +137,7 @@ Public Class Company
         End If
 
 
-        Dim dtToday As DateTime = DateTime.Now
+        Dim dtToday As String = UtilClass.formatDatetime(DateTime.Now)
         Try
             If _status = CommonConst.STATUS_ADD Then
                 Dim Sql As String = ""
@@ -175,7 +175,7 @@ Public Class Company
                 If TxtPph.Text = "" Then
                     Sql += "0"
                 Else
-                    Sql += TxtPph.Text
+                    Sql += UtilClass.formatNumber(TxtPph.Text)
                 End If
                 Sql += ", '" & TxtBranchCode.Text & "'"     '会計用コード
                 Sql += ", '" & frmC01F10_Login.loginValue.TantoNM & "'"     '更新者
@@ -213,7 +213,7 @@ Public Class Company
                 Sql += ", 口座番号 = '" & TxtAccountNumber.Text & "'"
                 Sql += ", 口座名義 = '" & TxtAccountName.Text & "'"
                 Sql += ", 在庫単価評価法 = " & CbEvaluation.SelectedValue.ToString
-                Sql += ", 前払法人税率 = " & TxtPph.Text
+                Sql += ", 前払法人税率 = " & UtilClass.formatNumber(TxtPph.Text)
                 Sql += ", 会計用コード = '" & TxtBranchCode.Text & "'"
                 Sql += ", 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
                 Sql += ", 更新日 = '" & dtToday & "'"
