@@ -1131,7 +1131,7 @@ Partial Class Cymn
         Me.TxtCustomerPO.BackColor = System.Drawing.Color.White
         Me.TxtCustomerPO.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtCustomerPO.Location = New System.Drawing.Point(389, 12)
-        Me.TxtCustomerPO.MaxLength = 8
+        Me.TxtCustomerPO.MaxLength = 20
         Me.TxtCustomerPO.Name = "TxtCustomerPO"
         Me.TxtCustomerPO.Size = New System.Drawing.Size(88, 23)
         Me.TxtCustomerPO.TabIndex = 1

@@ -86,7 +86,7 @@ Partial Class frmC01F10_Login
         Me.txtTanto.Font = New System.Drawing.Font("ＭＳ ゴシック", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.txtTanto.ImeMode = System.Windows.Forms.ImeMode.Disable
         Me.txtTanto.Location = New System.Drawing.Point(198, 251)
-        Me.txtTanto.MaxLength = 10
+        Me.txtTanto.MaxLength = 20
         Me.txtTanto.Name = "txtTanto"
         Me.txtTanto.Size = New System.Drawing.Size(270, 23)
         Me.txtTanto.TabIndex = 0
