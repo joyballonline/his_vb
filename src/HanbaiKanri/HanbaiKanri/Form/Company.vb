@@ -32,6 +32,7 @@ Public Class Company
     Private _msgHd As UtilMsgHandler
     Private _db As UtilDBIf
     Private _langHd As UtilLangHandler
+    Private _parentForm As Form
     'Private _gh As UtilDataGridViewHandler
     Private _init As Boolean                             '初期処理済フラグ
     Private _status As String
@@ -51,6 +52,7 @@ Public Class Company
     Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler,
                    ByRef prmRefDbHd As UtilDBIf,
                    ByRef prmRefLang As UtilLangHandler,
+                   ByRef prmRefForm As Form,
                    ByRef prmRefStatus As String,
                    Optional ByRef prmRefCompany As String = "")
         Call Me.New()
@@ -61,6 +63,7 @@ Public Class Company
         _msgHd = prmRefMsgHd                                                'MSGハンドラの設定
         _db = prmRefDbHd                                                    'DBハンドラの設定
         _langHd = prmRefLang
+        _parentForm = prmRefForm
         _status = prmRefStatus
         _companyCode = prmRefCompany
         '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
@@ -101,10 +104,9 @@ Public Class Company
     End Class
 
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
-        Dim MC As MstCompany
-        MC = New MstCompany(_msgHd, _db, _langHd)
-        MC.Show()
-        Me.Close()
+        _parentForm.Enabled = True
+        _parentForm.Show()
+        Me.Dispose()
     End Sub
 
     Private Sub btnAddCompany_Click_1(sender As Object, e As EventArgs) Handles BtnRegistration.Click
@@ -222,10 +224,9 @@ Public Class Company
                 _db.executeDB(Sql)
             End If
 
-            Dim frmMC As MstCompany
-            frmMC = New MstCompany(_msgHd, _db, _langHd)
-            frmMC.Show()
-            Me.Close()
+            _parentForm.Enabled = True
+            _parentForm.Show()
+            Me.Dispose()
 
         Catch ue As UsrDefException
             ue.dspMsg()

@@ -718,10 +718,10 @@ Public Class Payment
 
         Next
 
-        Dim openForm As Form = Nothing
-        openForm = New PaymentList(_msgHd, _db, _langHd)
-        openForm.ShowDialog(Me)
+        _parentForm.Enabled = True
+        _parentForm.Show()
         Me.Dispose()
+
     End Sub
 
     'param1：String テーブル名

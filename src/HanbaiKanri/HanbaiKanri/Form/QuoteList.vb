@@ -638,6 +638,11 @@ Public Class QuoteList
     '単価入力
     '
     Private Sub BtnUnitPrice_Click(sender As Object, e As EventArgs) Handles BtnUnitPrice.Click
+        'グリッドに何もないときは次画面へ移動しない
+        If actionChk() = False Then
+            Return
+        End If
+
         Dim RowIdx As Integer
         RowIdx = Me.DgvMithd.CurrentCell.RowIndex
 

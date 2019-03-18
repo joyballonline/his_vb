@@ -555,11 +555,11 @@ Public Class GoodsIssue
         Sql += ", '"
         Sql += CommonConst.CANCEL_KBN_ENABLED.ToString
         Sql += "', '"
-        Sql += dtToday
+        Sql += UtilClass.formatDatetime(dtToday)
         Sql += "', '"
-        Sql += dtToday
+        Sql += UtilClass.formatDatetime(dtToday)
         Sql += "', '"
-        Sql += dtToday
+        Sql += UtilClass.formatDatetime(dtToday)
         Sql += "', '"
         Sql += Input
         Sql += " ')"
@@ -603,7 +603,7 @@ Public Class GoodsIssue
             Sql += "', '"
             Sql += Input
             Sql += "', '"
-            Sql += dtToday
+            Sql += UtilClass.formatDatetime(dtToday)
             Sql += " ')"
 
             If DgvAdd.Rows(i).Cells("出庫数量").Value > 0 Then
@@ -611,11 +611,12 @@ Public Class GoodsIssue
             End If
         Next
 
-        Dim openForm As Form = Nothing
-        openForm = New OrderingList(_msgHd, _db, _langHd, CommonConst.STATUS_GOODS_ISSUE)
-        openForm.Show()
-        Me.Close()
+        'Dim openForm As Form = Nothing
+        'openForm = New OrderingList(_msgHd, _db, _langHd, Me, CommonConst.STATUS_GOODS_ISSUE)
+        'openForm.Show()
+        'Me.Close()
 
+        Me.Dispose()
     End Sub
 
     Private Sub BtnDeliveryNote_Click(sender As Object, e As EventArgs) Handles BtnDeliveryNote.Click

@@ -336,15 +336,9 @@ Public Class DepositManagement
 
     '前の画面に戻る
     Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
-        '_parentForm.Enabled = True
-        '_parentForm.Show()
-
-        Dim openForm As Form = Nothing
-        openForm = New DepositList(_msgHd, _db, _langHd)
-        openForm.Show()
-
+        _parentForm.Enabled = True
+        _parentForm.Show()
         Me.Dispose()
-
     End Sub
 
     '入金入力行の追加
@@ -760,11 +754,16 @@ Public Class DepositManagement
         '_parentForm.Enabled = True
         '_parentForm.Show()
 
-        Dim openForm As Form = Nothing
-        openForm = New DepositList(_msgHd, _db, _langHd)
-        openForm.Show()
+        'Dim openForm As Form = Nothing
+        'openForm = New DepositList(_msgHd, _db, _langHd, _parentForm)
+        'openForm.Show()
 
+        'Me.Dispose()
+
+        _parentForm.Enabled = True
+        _parentForm.Show()
         Me.Dispose()
+
     End Sub
 
     'param1：String テーブル名

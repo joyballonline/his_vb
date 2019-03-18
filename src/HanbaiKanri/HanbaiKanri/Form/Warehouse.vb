@@ -33,6 +33,7 @@ Public Class Warehouse
     Private _msgHd As UtilMsgHandler
     Private _db As UtilDBIf
     Private _langHd As UtilLangHandler
+    Private _parentForm As Form
     'Private _gh As UtilDataGridViewHandler
     Private _init As Boolean                             '初期処理済フラグ
     Private _status As String = ""
@@ -53,6 +54,7 @@ Public Class Warehouse
     Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler,
                    ByRef prmRefDbHd As UtilDBIf,
                    ByRef prmRefLang As UtilLangHandler,
+                   ByRef prmRefForm As Form,
                    ByRef prmRefStatus As String,
                    Optional ByRef prmRefCompany As String = "",
                    Optional ByRef prmRefAccount As String = "")
@@ -64,6 +66,7 @@ Public Class Warehouse
         _msgHd = prmRefMsgHd                                                'MSGハンドラの設定
         _db = prmRefDbHd                                                    'DBハンドラの設定
         _langHd = prmRefLang
+        _parentForm = prmRefForm
         _status = prmRefStatus
         _companyCode = prmRefCompany
         _AccountCode = prmRefAccount
@@ -191,10 +194,9 @@ Public Class Warehouse
                 _db.executeDB(Sql)
             End If
 
-            Dim frmMC As MstWarehouse
-            frmMC = New MstWarehouse(_msgHd, _db, _langHd)
-            frmMC.Show()
-            Me.Close()
+            _parentForm.Enabled = True
+            _parentForm.Show()
+            Me.Dispose()
 
         Catch ue As UsrDefException
             ue.dspMsg()
@@ -392,10 +394,9 @@ Public Class Warehouse
 
     '戻るボタン押下時
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        Dim MstAccount As MstWarehouse
-        MstAccount = New MstWarehouse(_msgHd, _db, _langHd)
-        MstAccount.Show()
-        Me.Close()
+        _parentForm.Enabled = True
+        _parentForm.Show()
+        Me.Dispose()
     End Sub
 
 End Class

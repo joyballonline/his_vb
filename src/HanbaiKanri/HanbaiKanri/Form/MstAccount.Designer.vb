@@ -23,12 +23,6 @@ Partial Class MstAccount
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.Dgv_Account = New System.Windows.Forms.DataGridView()
-        Me.btnAccountAdd = New System.Windows.Forms.Button()
-        Me.btnAccountEdit = New System.Windows.Forms.Button()
-        Me.BtnBack = New System.Windows.Forms.Button()
-        Me.LblAccountName = New System.Windows.Forms.Label()
-        Me.TxtSearch = New System.Windows.Forms.TextBox()
-        Me.BtnSearch = New System.Windows.Forms.Button()
         Me.勘定科目コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.勘定科目名称１ = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.勘定科目名称２ = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -38,6 +32,12 @@ Partial Class MstAccount
         Me.有効区分 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.更新者 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.更新日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnAccountAdd = New System.Windows.Forms.Button()
+        Me.btnAccountEdit = New System.Windows.Forms.Button()
+        Me.BtnBack = New System.Windows.Forms.Button()
+        Me.LblAccountName = New System.Windows.Forms.Label()
+        Me.TxtSearch = New System.Windows.Forms.TextBox()
+        Me.BtnSearch = New System.Windows.Forms.Button()
         CType(Me.Dgv_Account, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -54,6 +54,60 @@ Partial Class MstAccount
         Me.Dgv_Account.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.Dgv_Account.Size = New System.Drawing.Size(1326, 470)
         Me.Dgv_Account.TabIndex = 4
+        '
+        '勘定科目コード
+        '
+        Me.勘定科目コード.HeaderText = "勘定科目コード"
+        Me.勘定科目コード.Name = "勘定科目コード"
+        Me.勘定科目コード.ReadOnly = True
+        '
+        '勘定科目名称１
+        '
+        Me.勘定科目名称１.HeaderText = "勘定科目名称１"
+        Me.勘定科目名称１.Name = "勘定科目名称１"
+        Me.勘定科目名称１.ReadOnly = True
+        '
+        '勘定科目名称２
+        '
+        Me.勘定科目名称２.HeaderText = "勘定科目名称２"
+        Me.勘定科目名称２.Name = "勘定科目名称２"
+        Me.勘定科目名称２.ReadOnly = True
+        '
+        '勘定科目名称３
+        '
+        Me.勘定科目名称３.HeaderText = "勘定科目名称３"
+        Me.勘定科目名称３.Name = "勘定科目名称３"
+        Me.勘定科目名称３.ReadOnly = True
+        '
+        '会計用勘定科目コード
+        '
+        Me.会計用勘定科目コード.HeaderText = "会計用勘定科目コード"
+        Me.会計用勘定科目コード.Name = "会計用勘定科目コード"
+        Me.会計用勘定科目コード.ReadOnly = True
+        '
+        '備考
+        '
+        Me.備考.HeaderText = "備考"
+        Me.備考.Name = "備考"
+        Me.備考.ReadOnly = True
+        '
+        '有効区分
+        '
+        Me.有効区分.HeaderText = "有効区分"
+        Me.有効区分.Name = "有効区分"
+        Me.有効区分.ReadOnly = True
+        '
+        '更新者
+        '
+        Me.更新者.HeaderText = "更新者"
+        Me.更新者.Name = "更新者"
+        Me.更新者.ReadOnly = True
+        '
+        '更新日
+        '
+        Me.更新日.HeaderText = "更新日"
+        Me.更新日.Name = "更新日"
+        Me.更新日.ReadOnly = True
         '
         'btnAccountAdd
         '
@@ -113,60 +167,6 @@ Partial Class MstAccount
         Me.BtnSearch.TabIndex = 11
         Me.BtnSearch.Text = "検索"
         Me.BtnSearch.UseVisualStyleBackColor = True
-        '
-        '勘定科目コード
-        '
-        Me.勘定科目コード.HeaderText = "勘定科目コード"
-        Me.勘定科目コード.Name = "勘定科目コード"
-        Me.勘定科目コード.ReadOnly = True
-        '
-        '勘定科目名称１
-        '
-        Me.勘定科目名称１.HeaderText = "勘定科目名称１"
-        Me.勘定科目名称１.Name = "勘定科目名称１"
-        Me.勘定科目名称１.ReadOnly = True
-        '
-        '勘定科目名称２
-        '
-        Me.勘定科目名称２.HeaderText = "勘定科目名称２"
-        Me.勘定科目名称２.Name = "勘定科目名称２"
-        Me.勘定科目名称２.ReadOnly = True
-        '
-        '勘定科目名称３
-        '
-        Me.勘定科目名称３.HeaderText = "勘定科目名称３"
-        Me.勘定科目名称３.Name = "勘定科目名称３"
-        Me.勘定科目名称３.ReadOnly = True
-        '
-        '会計用勘定科目コード
-        '
-        Me.会計用勘定科目コード.HeaderText = "会計用勘定科目コード"
-        Me.会計用勘定科目コード.Name = "会計用勘定科目コード"
-        Me.会計用勘定科目コード.ReadOnly = True
-        '
-        '備考
-        '
-        Me.備考.HeaderText = "備考"
-        Me.備考.Name = "備考"
-        Me.備考.ReadOnly = True
-        '
-        '有効区分
-        '
-        Me.有効区分.HeaderText = "有効区分"
-        Me.有効区分.Name = "有効区分"
-        Me.有効区分.ReadOnly = True
-        '
-        '更新者
-        '
-        Me.更新者.HeaderText = "更新者"
-        Me.更新者.Name = "更新者"
-        Me.更新者.ReadOnly = True
-        '
-        '更新日
-        '
-        Me.更新日.HeaderText = "更新日"
-        Me.更新日.Name = "更新日"
-        Me.更新日.ReadOnly = True
         '
         'MstAccount
         '

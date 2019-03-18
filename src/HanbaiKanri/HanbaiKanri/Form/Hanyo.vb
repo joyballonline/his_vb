@@ -32,6 +32,7 @@ Public Class Hanyo
     Private _msgHd As UtilMsgHandler
     Private _db As UtilDBIf
     Private _langHd As UtilLangHandler
+    Private _parentForm As Form
     'Private _gh As UtilDataGridViewHandler
     Private _init As Boolean                             '初期処理済フラグ
     Private _status As String = ""
@@ -54,6 +55,7 @@ Public Class Hanyo
     Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler,
                    ByRef prmRefDbHd As UtilDBIf,
                    ByRef prmRefLang As UtilLangHandler,
+                   ByRef prmRefForm As Form,
                    ByRef prmRefStatus As String,
                    Optional ByRef prmRefCode As String = Nothing,
                    Optional ByRef prmRefKey1 As String = Nothing,
@@ -66,6 +68,7 @@ Public Class Hanyo
         _msgHd = prmRefMsgHd                                                'MSGハンドラの設定
         _db = prmRefDbHd                                                    'DBハンドラの設定
         _langHd = prmRefLang
+        _parentForm = prmRefForm
         _status = prmRefStatus
         _companyCode = prmRefCode
         _key1 = prmRefKey1
@@ -79,10 +82,9 @@ Public Class Hanyo
     End Sub
 
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
-        Dim MstHanyou As MstHanyou
-        MstHanyou = New MstHanyou(_msgHd, _db, _langHd)
-        MstHanyou.Show()
-        Me.Close()
+        _parentForm.Enabled = True
+        _parentForm.Show()
+        Me.Dispose()
     End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles BtnRegistration.Click
@@ -165,43 +167,6 @@ Public Class Hanyo
                 Sql += "', '"
                 Sql += dtToday
                 Sql += " ')"
-                Sql += "RETURNING 会社コード"
-                Sql += ", "
-                Sql += "固定キー"
-                Sql += ", "
-                Sql += "可変キー"
-                Sql += ", "
-                Sql += "表示順"
-                Sql += ", "
-                Sql += "文字１"
-                Sql += ", "
-                Sql += "文字２"
-                Sql += ", "
-                Sql += "文字３"
-                Sql += ", "
-                Sql += "文字４"
-                Sql += ", "
-                Sql += "文字５"
-                Sql += ", "
-                Sql += "文字６"
-                Sql += ", "
-                Sql += "数値１"
-                Sql += ", "
-                Sql += "数値２"
-                Sql += ", "
-                Sql += "数値３"
-                Sql += ", "
-                Sql += "数値４"
-                Sql += ", "
-                Sql += "数値５"
-                Sql += ", "
-                Sql += "数値６"
-                Sql += ", "
-                Sql += "メモ"
-                Sql += ", "
-                Sql += "更新者"
-                Sql += ", "
-                Sql += "更新日"
 
                 _db.executeDB(Sql)
             Else
@@ -330,51 +295,13 @@ Public Class Hanyo
                 Sql += "='"
                 Sql += _key2
                 Sql += "' "
-                Sql += "RETURNING 会社コード"
-                Sql += ", "
-                Sql += "固定キー"
-                Sql += ", "
-                Sql += "可変キー"
-                Sql += ", "
-                Sql += "表示順"
-                Sql += ", "
-                Sql += "文字１"
-                Sql += ", "
-                Sql += "文字２"
-                Sql += ", "
-                Sql += "文字３"
-                Sql += ", "
-                Sql += "文字４"
-                Sql += ", "
-                Sql += "文字５"
-                Sql += ", "
-                Sql += "文字６"
-                Sql += ", "
-                Sql += "数値１"
-                Sql += ", "
-                Sql += "数値２"
-                Sql += ", "
-                Sql += "数値３"
-                Sql += ", "
-                Sql += "数値４"
-                Sql += ", "
-                Sql += "数値５"
-                Sql += ", "
-                Sql += "数値６"
-                Sql += ", "
-                Sql += "メモ"
-                Sql += ", "
-                Sql += "更新者"
-                Sql += ", "
-                Sql += "更新日"
 
                 _db.executeDB(Sql)
             End If
 
-            Dim MstHanyou As MstHanyou
-            MstHanyou = New MstHanyou(_msgHd, _db, _langHd)
-            MstHanyou.Show()
-            Me.Close()
+            _parentForm.Enabled = True
+            _parentForm.Show()
+            Me.Dispose()
 
         Catch ue As UsrDefException
             ue.dspMsg()
@@ -386,6 +313,7 @@ Public Class Hanyo
     End Sub
 
     Private Sub Hanyo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         If frmC01F10_Login.loginValue.Language = "ENG" Then
             Label2.Text = "FixedKey"
             Label3.Text = "VariableKey"
@@ -411,6 +339,7 @@ Public Class Hanyo
             BtnRegistration.Text = "Registration"
             BtnBack.Text = "Back"
         End If
+
         If _status = CommonConst.STATUS_EDIT Then
             Dim Sql As String = ""
             Sql += "SELECT "

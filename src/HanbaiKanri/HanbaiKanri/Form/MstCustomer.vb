@@ -32,6 +32,7 @@ Public Class MstCustomer
     Private _msgHd As UtilMsgHandler
     Private _langHd As UtilLangHandler
     Private _db As UtilDBIf
+    Private _parentForm As Form
     'Private _gh As UtilDataGridViewHandler
     Private _init As Boolean                             '初期処理済フラグ
 
@@ -46,7 +47,10 @@ Public Class MstCustomer
     '-------------------------------------------------------------------------------
     'コンストラクタ　メニューから呼ばれる
     '-------------------------------------------------------------------------------
-    Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler, ByRef prmRefDbHd As UtilDBIf, ByRef prmRefLang As UtilLangHandler)
+    Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler,
+                   ByRef prmRefDbHd As UtilDBIf,
+                   ByRef prmRefLang As UtilLangHandler,
+                   ByRef prmRefForm As Form)
         Call Me.New()
 
         _init = False
@@ -55,6 +59,7 @@ Public Class MstCustomer
         _msgHd = prmRefMsgHd                                                'MSGハンドラの設定
         _db = prmRefDbHd                                                    'DBハンドラの設定
         _langHd = prmRefLang
+        _parentForm = prmRefForm
         '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
         StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
         Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
@@ -93,6 +98,13 @@ Public Class MstCustomer
             Dgv_Customer.Columns("更新日").HeaderText = "UpdateDate"
 
         End If
+
+    End Sub
+
+    '一覧取得
+    Private Sub setList()
+        Dgv_Customer.Rows.Clear()
+
         Dim Sql As String = ""
         Try
             Sql += "SELECT "
@@ -128,26 +140,26 @@ Public Class MstCustomer
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-            For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+            For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
                 Dgv_Customer.Rows.Add()
-                Dgv_Customer.Rows(index).Cells(0).Value = ds.Tables(RS).Rows(index)("会社コード")
-                Dgv_Customer.Rows(index).Cells(1).Value = ds.Tables(RS).Rows(index)("得意先コード")
-                Dgv_Customer.Rows(index).Cells(2).Value = ds.Tables(RS).Rows(index)("得意先名")
-                Dgv_Customer.Rows(index).Cells(3).Value = ds.Tables(RS).Rows(index)("得意先名略称")
-                Dgv_Customer.Rows(index).Cells(4).Value = ds.Tables(RS).Rows(index)("郵便番号")
-                Dgv_Customer.Rows(index).Cells(5).Value = ds.Tables(RS).Rows(index)("住所１")
-                Dgv_Customer.Rows(index).Cells(6).Value = ds.Tables(RS).Rows(index)("住所２")
-                Dgv_Customer.Rows(index).Cells(7).Value = ds.Tables(RS).Rows(index)("住所３")
-                Dgv_Customer.Rows(index).Cells(8).Value = ds.Tables(RS).Rows(index)("電話番号")
-                Dgv_Customer.Rows(index).Cells(9).Value = ds.Tables(RS).Rows(index)("電話番号検索用")
-                Dgv_Customer.Rows(index).Cells(10).Value = ds.Tables(RS).Rows(index)("ＦＡＸ番号")
-                Dgv_Customer.Rows(index).Cells(11).Value = ds.Tables(RS).Rows(index)("担当者名")
-                Dgv_Customer.Rows(index).Cells(12).Value = ds.Tables(RS).Rows(index)("担当者役職")
-                Dgv_Customer.Rows(index).Cells(13).Value = ds.Tables(RS).Rows(index)("既定支払条件")
-                Dgv_Customer.Rows(index).Cells(14).Value = ds.Tables(RS).Rows(index)("メモ")
-                Dgv_Customer.Rows(index).Cells(15).Value = ds.Tables(RS).Rows(index)("会計用得意先コード")
-                Dgv_Customer.Rows(index).Cells(16).Value = ds.Tables(RS).Rows(index)("更新者")
-                Dgv_Customer.Rows(index).Cells(17).Value = ds.Tables(RS).Rows(index)("更新日")
+                Dgv_Customer.Rows(i).Cells(0).Value = ds.Tables(RS).Rows(i)("会社コード")
+                Dgv_Customer.Rows(i).Cells(1).Value = ds.Tables(RS).Rows(i)("得意先コード")
+                Dgv_Customer.Rows(i).Cells(2).Value = ds.Tables(RS).Rows(i)("得意先名")
+                Dgv_Customer.Rows(i).Cells(3).Value = ds.Tables(RS).Rows(i)("得意先名略称")
+                Dgv_Customer.Rows(i).Cells(4).Value = ds.Tables(RS).Rows(i)("郵便番号")
+                Dgv_Customer.Rows(i).Cells(5).Value = ds.Tables(RS).Rows(i)("住所１")
+                Dgv_Customer.Rows(i).Cells(6).Value = ds.Tables(RS).Rows(i)("住所２")
+                Dgv_Customer.Rows(i).Cells(7).Value = ds.Tables(RS).Rows(i)("住所３")
+                Dgv_Customer.Rows(i).Cells(8).Value = ds.Tables(RS).Rows(i)("電話番号")
+                Dgv_Customer.Rows(i).Cells(9).Value = ds.Tables(RS).Rows(i)("電話番号検索用")
+                Dgv_Customer.Rows(i).Cells(10).Value = ds.Tables(RS).Rows(i)("ＦＡＸ番号")
+                Dgv_Customer.Rows(i).Cells(11).Value = ds.Tables(RS).Rows(i)("担当者名")
+                Dgv_Customer.Rows(i).Cells(12).Value = ds.Tables(RS).Rows(i)("担当者役職")
+                Dgv_Customer.Rows(i).Cells(13).Value = ds.Tables(RS).Rows(i)("既定支払条件")
+                Dgv_Customer.Rows(i).Cells(14).Value = ds.Tables(RS).Rows(i)("メモ")
+                Dgv_Customer.Rows(i).Cells(15).Value = ds.Tables(RS).Rows(i)("会計用得意先コード")
+                Dgv_Customer.Rows(i).Cells(16).Value = ds.Tables(RS).Rows(i)("更新者")
+                Dgv_Customer.Rows(i).Cells(17).Value = ds.Tables(RS).Rows(i)("更新日")
 
             Next
 
@@ -158,12 +170,13 @@ Public Class MstCustomer
             'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
             Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
         End Try
+
     End Sub
 
     Private Sub btnCustomerAdd_Click(sender As Object, e As EventArgs) Handles btnCustomerAdd.Click
         Dim openForm As Form = Nothing
         Dim Status As String = CommonConst.STATUS_ADD
-        openForm = New Customer(_msgHd, _db, _langHd, Status)   '処理選択
+        openForm = New Customer(_msgHd, _db, _langHd, Me, Status)   '処理選択
         openForm.Show()
         Me.Hide()   ' 自分は隠れる
     End Sub
@@ -173,16 +186,15 @@ Public Class MstCustomer
         Dim Status As String = CommonConst.STATUS_EDIT
         Dim CompanyCode As String = Dgv_Customer.Rows(Dgv_Customer.CurrentCell.RowIndex).Cells("会社コード").Value
         Dim CustomerCode As String = Dgv_Customer.Rows(Dgv_Customer.CurrentCell.RowIndex).Cells("得意先コード").Value
-        openForm = New Customer(_msgHd, _db, _langHd, Status, CompanyCode, CustomerCode)   '処理選択
+        openForm = New Customer(_msgHd, _db, _langHd, Me, Status, CompanyCode, CustomerCode)   '処理選択
         openForm.Show()
         Me.Hide()   ' 自分は隠れる
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        Dim frmMenu As frmC01F30_Menu
-        frmMenu = New frmC01F30_Menu(_msgHd, _langHd, _db)
-        frmMenu.Show()
-        Me.Close()
+        _parentForm.Enabled = True
+        _parentForm.Show()
+        Me.Dispose()
     End Sub
 
     Private Sub BtnSearch_Click(sender As Object, e As EventArgs) Handles BtnSearch.Click
@@ -244,5 +256,9 @@ Public Class MstCustomer
             'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
             Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
         End Try
+    End Sub
+
+    Private Sub MstCustomer_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
+        setList() '一覧取得
     End Sub
 End Class

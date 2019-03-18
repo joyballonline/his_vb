@@ -34,6 +34,7 @@ Public Class OrderingList
     Private _msgHd As UtilMsgHandler
     Private _langHd As UtilLangHandler
     Private _db As UtilDBIf
+    Private _parentForm As Form
     'Private _gh As UtilDataGridViewHandler
     Private _init As Boolean                             '初期処理済フラグ
     Private CompanyCode As String = ""
@@ -55,6 +56,7 @@ Public Class OrderingList
     Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler,
                    ByRef prmRefDbHd As UtilDBIf,
                    ByRef prmRefLang As UtilLangHandler,
+                   ByRef prmRefForm As Form,
                    Optional ByRef prmRefStatus As String = "")
         Call Me.New()
 
@@ -64,6 +66,7 @@ Public Class OrderingList
         _msgHd = prmRefMsgHd                                                'MSGハンドラの設定
         _db = prmRefDbHd                                                    'DBハンドラの設定
         _langHd = prmRefLang
+        _parentForm = prmRefForm
         _status = prmRefStatus
         '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
         StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
@@ -786,10 +789,9 @@ Public Class OrderingList
 
     '戻るボタン押下時
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
-        Dim openForm As Form = Nothing
-        openForm = New frmC01F30_Menu(_msgHd, _langHd, _db)
-        openForm.Show()
-        Me.Close()
+        _parentForm.Enabled = True
+        _parentForm.Show()
+        Me.Dispose()
     End Sub
 
     '抽出条件取得
@@ -973,5 +975,8 @@ Public Class OrderingList
         Return prmVal.ToString("F3", nfi) '売掛残高を増やす
     End Function
 
-
+    Private Sub OrderingList_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
+        '一覧再表示
+        getList()
+    End Sub
 End Class

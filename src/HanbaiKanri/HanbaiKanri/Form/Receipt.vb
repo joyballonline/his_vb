@@ -381,7 +381,7 @@ Public Class Receipt
                     DgvAdd.Rows(index).Cells("単位").Value = dsHattyudt.Tables(RS).Rows(index)("単位")
                     DgvAdd.Rows(index).Cells("仕入値").Value = dsHattyudt.Tables(RS).Rows(index)("仕入値")
                     DgvAdd.Rows(index).Cells("入庫数量").Value = 0
-                    DgvAdd.Rows(index).Cells("備考").Value = dsHattyudt.Tables(RS).Rows(index)("備考")
+                    'DgvAdd.Rows(index).Cells("備考").Value = dsHattyudt.Tables(RS).Rows(index)("備考")
                 End If
             Next
 
@@ -619,7 +619,7 @@ Public Class Receipt
                     Sql += "', '"
                     Sql += DgvAdd.Rows(i).Cells("単位").Value.ToString
                     Sql += "', '"
-                    Sql += DgvAdd.Rows(i).Cells("備考").Value.ToString
+                    Sql += DgvAdd.Rows(i).Cells("備考").Value
                     Sql += "', '"
                     Sql += Input
                     Sql += "', '"
@@ -640,11 +640,12 @@ Public Class Receipt
 
         Next
 
-        Dim openForm As Form = Nothing
-        openForm = New OrderingList(_msgHd, _db, _langHd, CommonConst.STATUS_RECEIPT)
-        openForm.Show()
-        Me.Close()
+        'Dim openForm As Form = Nothing
+        'openForm = New OrderingList(_msgHd, _db, _langHd, Me, CommonConst.STATUS_RECEIPT)
+        'openForm.Show()
+        'Me.Close()
 
+        Me.Dispose()
     End Sub
 
     'param1：String 採番キー

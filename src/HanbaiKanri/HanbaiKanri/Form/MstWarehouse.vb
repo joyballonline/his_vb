@@ -33,6 +33,7 @@ Public Class MstWarehouse
     Private _msgHd As UtilMsgHandler
     Private _langHd As UtilLangHandler
     Private _db As UtilDBIf
+    Private _parentForm As Form
     'Private _gh As UtilDataGridViewHandler
     Private _init As Boolean                             '初期処理済フラグ
 
@@ -47,7 +48,10 @@ Public Class MstWarehouse
     '-------------------------------------------------------------------------------
     'コンストラクタ　メニューから呼ばれる
     '-------------------------------------------------------------------------------
-    Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler, ByRef prmRefDbHd As UtilDBIf, ByRef prmRefLang As UtilLangHandler)
+    Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler,
+                   ByRef prmRefDbHd As UtilDBIf,
+                   ByRef prmRefLang As UtilLangHandler,
+                   ByRef prmRefForm As Form)
         Call Me.New()
 
         _init = False
@@ -56,6 +60,7 @@ Public Class MstWarehouse
         _msgHd = prmRefMsgHd                                                'MSGハンドラの設定
         _db = prmRefDbHd                                                    'DBハンドラの設定
         _langHd = prmRefLang
+        _parentForm = prmRefForm
         '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
         StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
         Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
@@ -94,11 +99,11 @@ Public Class MstWarehouse
         End If
 
         '一覧取得
-        getList()
+        setList()
     End Sub
 
     '一覧取得
-    Private Sub getList()
+    Private Sub setList()
 
         '一覧クリア
         Dgv_Account.Rows.Clear()
@@ -159,7 +164,7 @@ Public Class MstWarehouse
     Private Sub btnCompanyrAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
         Dim openForm As Form = Nothing
         Dim Status As String = CommonConst.STATUS_ADD
-        openForm = New Warehouse(_msgHd, _db, _langHd, Status)   '処理選択
+        openForm = New Warehouse(_msgHd, _db, _langHd, Me, Status)   '処理選択
         openForm.Show()
         Me.Hide()   ' 自分は隠れる
     End Sub
@@ -171,7 +176,7 @@ Public Class MstWarehouse
             Dim Status As String = CommonConst.STATUS_EDIT
             Dim CompanyCode As String = frmC01F10_Login.loginValue.BumonCD
             Dim AccountCode As String = Dgv_Account.Rows(Dgv_Account.CurrentCell.RowIndex).Cells("倉庫コード").Value
-            openForm = New Warehouse(_msgHd, _db, _langHd, Status, CompanyCode, AccountCode)   '処理選択
+            openForm = New Warehouse(_msgHd, _db, _langHd, Me, Status, CompanyCode, AccountCode)   '処理選択
             openForm.Show()
             Me.Hide()   ' 自分は隠れる
         Else
@@ -183,16 +188,15 @@ Public Class MstWarehouse
 
     '戻るボタン押下時
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
-        Dim frmMenu As frmC01F30_Menu
-        frmMenu = New frmC01F30_Menu(_msgHd, _langHd, _db)
-        frmMenu.Show()
-        Me.Close()
+        _parentForm.Enabled = True
+        _parentForm.Show()
+        Me.Dispose()
     End Sub
 
     '検索ボタン押下時
     Private Sub BtnSearch_Click(sender As Object, e As EventArgs) Handles BtnSearch.Click
         '一覧取得
-        getList()
+        setList()
     End Sub
 
     'param1：String テーブル名
@@ -249,4 +253,7 @@ Public Class MstWarehouse
         Return sql
     End Function
 
+    Private Sub MstWarehouse_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
+        setList()
+    End Sub
 End Class

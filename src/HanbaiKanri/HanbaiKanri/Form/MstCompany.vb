@@ -32,6 +32,7 @@ Public Class MstCompany
     Private _msgHd As UtilMsgHandler
     Private _langHd As UtilLangHandler
     Private _db As UtilDBIf
+    Private _parentForm As Form
     'Private _gh As UtilDataGridViewHandler
     Private _init As Boolean                             '初期処理済フラグ
 
@@ -46,7 +47,10 @@ Public Class MstCompany
     '-------------------------------------------------------------------------------
     'コンストラクタ　メニューから呼ばれる
     '-------------------------------------------------------------------------------
-    Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler, ByRef prmRefDbHd As UtilDBIf, ByRef prmRefLang As UtilLangHandler)
+    Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler,
+                   ByRef prmRefDbHd As UtilDBIf,
+                   ByRef prmRefLang As UtilLangHandler,
+                   ByRef prmRefForm As Form)
         Call Me.New()
 
         _init = False
@@ -55,6 +59,7 @@ Public Class MstCompany
         _msgHd = prmRefMsgHd                                                'MSGハンドラの設定
         _db = prmRefDbHd                                                    'DBハンドラの設定
         _langHd = prmRefLang
+        _parentForm = prmRefForm
         '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
         StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
         Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
@@ -103,6 +108,12 @@ Public Class MstCompany
             Dgv_Company.Columns("更新日").HeaderText = "UpdateDate"
 
         End If
+
+    End Sub
+
+    Private Sub setList()
+        Dgv_Company.Rows.Clear()
+
         Dim Sql As String = ""
         Try
             Sql += "SELECT "
@@ -121,36 +132,36 @@ Public Class MstCompany
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-            For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+            For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
                 Dgv_Company.Rows.Add()
-                Dgv_Company.Rows(index).Cells("会社コード").Value = ds.Tables(RS).Rows(index)("会社コード")
-                Dgv_Company.Rows(index).Cells("会社名").Value = ds.Tables(RS).Rows(index)("会社名")
-                Dgv_Company.Rows(index).Cells("会社略称").Value = ds.Tables(RS).Rows(index)("会社略称")
-                Dgv_Company.Rows(index).Cells("郵便番号").Value = ds.Tables(RS).Rows(index)("郵便番号")
-                Dgv_Company.Rows(index).Cells("住所１").Value = ds.Tables(RS).Rows(index)("住所１")
-                Dgv_Company.Rows(index).Cells("住所２").Value = ds.Tables(RS).Rows(index)("住所２")
-                Dgv_Company.Rows(index).Cells("住所３").Value = ds.Tables(RS).Rows(index)("住所３")
-                Dgv_Company.Rows(index).Cells("電話番号").Value = ds.Tables(RS).Rows(index)("電話番号")
-                Dgv_Company.Rows(index).Cells("FAX番号").Value = ds.Tables(RS).Rows(index)("ＦＡＸ番号")
-                Dgv_Company.Rows(index).Cells("代表者役職").Value = ds.Tables(RS).Rows(index)("代表者役職")
-                Dgv_Company.Rows(index).Cells("代表者名").Value = ds.Tables(RS).Rows(index)("代表者名")
-                Dgv_Company.Rows(index).Cells("表示順").Value = ds.Tables(RS).Rows(index)("表示順")
-                Dgv_Company.Rows(index).Cells("備考").Value = ds.Tables(RS).Rows(index)("備考")
-                Dgv_Company.Rows(index).Cells("更新者").Value = ds.Tables(RS).Rows(index)("更新者")
-                Dgv_Company.Rows(index).Cells("更新日").Value = ds.Tables(RS).Rows(index)("更新日")
-                Dgv_Company.Rows(index).Cells("銀行コード").Value = ds.Tables(RS).Rows(index)("銀行コード")
-                Dgv_Company.Rows(index).Cells("支店コード").Value = ds.Tables(RS).Rows(index)("支店コード")
-                Dgv_Company.Rows(index).Cells("預金種目").Value = ds.Tables(RS).Rows(index)("預金種目")
-                Dgv_Company.Rows(index).Cells("口座番号").Value = ds.Tables(RS).Rows(index)("口座番号")
-                Dgv_Company.Rows(index).Cells("口座名義").Value = ds.Tables(RS).Rows(index)("口座名義")
-                Dgv_Company.Rows(index).Cells("銀行名").Value = ds.Tables(RS).Rows(index)("銀行名")
-                Dgv_Company.Rows(index).Cells("支店名").Value = ds.Tables(RS).Rows(index)("支店名")
-                Dgv_Company.Rows(index).Cells("前回締日").Value = ds.Tables(RS).Rows(index)("前回締日")
-                Dgv_Company.Rows(index).Cells("今回締日").Value = ds.Tables(RS).Rows(index)("今回締日")
-                Dgv_Company.Rows(index).Cells("次回締日").Value = ds.Tables(RS).Rows(index)("次回締日")
-                Dgv_Company.Rows(index).Cells("在庫単価評価法").Value = ds.Tables(RS).Rows(index)("在庫単価評価法")
-                Dgv_Company.Rows(index).Cells("前払法人税率").Value = ds.Tables(RS).Rows(index)("前払法人税率")
-                Dgv_Company.Rows(index).Cells("会計用コード").Value = ds.Tables(RS).Rows(index)("会計用コード")
+                Dgv_Company.Rows(i).Cells("会社コード").Value = ds.Tables(RS).Rows(i)("会社コード")
+                Dgv_Company.Rows(i).Cells("会社名").Value = ds.Tables(RS).Rows(i)("会社名")
+                Dgv_Company.Rows(i).Cells("会社略称").Value = ds.Tables(RS).Rows(i)("会社略称")
+                Dgv_Company.Rows(i).Cells("郵便番号").Value = ds.Tables(RS).Rows(i)("郵便番号")
+                Dgv_Company.Rows(i).Cells("住所１").Value = ds.Tables(RS).Rows(i)("住所１")
+                Dgv_Company.Rows(i).Cells("住所２").Value = ds.Tables(RS).Rows(i)("住所２")
+                Dgv_Company.Rows(i).Cells("住所３").Value = ds.Tables(RS).Rows(i)("住所３")
+                Dgv_Company.Rows(i).Cells("電話番号").Value = ds.Tables(RS).Rows(i)("電話番号")
+                Dgv_Company.Rows(i).Cells("FAX番号").Value = ds.Tables(RS).Rows(i)("ＦＡＸ番号")
+                Dgv_Company.Rows(i).Cells("代表者役職").Value = ds.Tables(RS).Rows(i)("代表者役職")
+                Dgv_Company.Rows(i).Cells("代表者名").Value = ds.Tables(RS).Rows(i)("代表者名")
+                Dgv_Company.Rows(i).Cells("表示順").Value = ds.Tables(RS).Rows(i)("表示順")
+                Dgv_Company.Rows(i).Cells("備考").Value = ds.Tables(RS).Rows(i)("備考")
+                Dgv_Company.Rows(i).Cells("更新者").Value = ds.Tables(RS).Rows(i)("更新者")
+                Dgv_Company.Rows(i).Cells("更新日").Value = ds.Tables(RS).Rows(i)("更新日")
+                Dgv_Company.Rows(i).Cells("銀行コード").Value = ds.Tables(RS).Rows(i)("銀行コード")
+                Dgv_Company.Rows(i).Cells("支店コード").Value = ds.Tables(RS).Rows(i)("支店コード")
+                Dgv_Company.Rows(i).Cells("預金種目").Value = ds.Tables(RS).Rows(i)("預金種目")
+                Dgv_Company.Rows(i).Cells("口座番号").Value = ds.Tables(RS).Rows(i)("口座番号")
+                Dgv_Company.Rows(i).Cells("口座名義").Value = ds.Tables(RS).Rows(i)("口座名義")
+                Dgv_Company.Rows(i).Cells("銀行名").Value = ds.Tables(RS).Rows(i)("銀行名")
+                Dgv_Company.Rows(i).Cells("支店名").Value = ds.Tables(RS).Rows(i)("支店名")
+                Dgv_Company.Rows(i).Cells("前回締日").Value = ds.Tables(RS).Rows(i)("前回締日")
+                Dgv_Company.Rows(i).Cells("今回締日").Value = ds.Tables(RS).Rows(i)("今回締日")
+                Dgv_Company.Rows(i).Cells("次回締日").Value = ds.Tables(RS).Rows(i)("次回締日")
+                Dgv_Company.Rows(i).Cells("在庫単価評価法").Value = ds.Tables(RS).Rows(i)("在庫単価評価法")
+                Dgv_Company.Rows(i).Cells("前払法人税率").Value = ds.Tables(RS).Rows(i)("前払法人税率")
+                Dgv_Company.Rows(i).Cells("会計用コード").Value = ds.Tables(RS).Rows(i)("会計用コード")
 
             Next
 
@@ -161,12 +172,13 @@ Public Class MstCompany
             'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
             Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
         End Try
+
     End Sub
 
     Private Sub btnCompanyrAdd_Click(sender As Object, e As EventArgs) Handles btnCompanyAdd.Click
         Dim openForm As Form = Nothing
         Dim Status As String = CommonConst.STATUS_ADD
-        openForm = New Company(_msgHd, _db, _langHd, Status)   '処理選択
+        openForm = New Company(_msgHd, _db, _langHd, Me, Status)   '処理選択
         openForm.Show()
         Me.Hide()   ' 自分は隠れる
     End Sub
@@ -175,16 +187,15 @@ Public Class MstCompany
         Dim openForm As Form = Nothing
         Dim Status As String = CommonConst.STATUS_EDIT
         Dim CompanyCode As String = Dgv_Company.Rows(Dgv_Company.CurrentCell.RowIndex).Cells("会社コード").Value
-        openForm = New Company(_msgHd, _db, _langHd, Status, CompanyCode)   '処理選択
+        openForm = New Company(_msgHd, _db, _langHd, Me, Status, CompanyCode)   '処理選択
         openForm.Show()
         Me.Hide()   ' 自分は隠れる
     End Sub
 
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
-        Dim frmMenu As frmC01F30_Menu
-        frmMenu = New frmC01F30_Menu(_msgHd, _langHd, _db)
-        frmMenu.Show()
-        Me.Close()
+        _parentForm.Enabled = True
+        _parentForm.Show()
+        Me.Dispose()
     End Sub
 
     Private Sub BtnSearch_Click(sender As Object, e As EventArgs) Handles BtnSearch.Click
@@ -253,5 +264,9 @@ Public Class MstCompany
             'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
             Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
         End Try
+    End Sub
+
+    Private Sub MstCompany_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
+        setList()
     End Sub
 End Class

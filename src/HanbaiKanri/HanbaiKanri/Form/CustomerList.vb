@@ -32,6 +32,7 @@ Public Class CustomerList
     Private _msgHd As UtilMsgHandler
     Private _langHd As UtilLangHandler
     Private _db As UtilDBIf
+    Private _parentForm As Form
     'Private _gh As UtilDataGridViewHandler
     Private _init As Boolean                             '初期処理済フラグ
 
@@ -46,7 +47,10 @@ Public Class CustomerList
     '-------------------------------------------------------------------------------
     'コンストラクタ　メニューから呼ばれる
     '-------------------------------------------------------------------------------
-    Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler, ByRef prmRefDbHd As UtilDBIf, ByRef prmRefLang As UtilLangHandler)
+    Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler,
+                   ByRef prmRefDbHd As UtilDBIf,
+                   ByRef prmRefLang As UtilLangHandler,
+                   ByRef prmRefForm As Form)
         Call Me.New()
 
         _init = False
@@ -55,6 +59,7 @@ Public Class CustomerList
         _msgHd = prmRefMsgHd                                                'MSGハンドラの設定
         _db = prmRefDbHd                                                    'DBハンドラの設定
         _langHd = prmRefLang
+        _parentForm = prmRefForm
         '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
         StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
         Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
@@ -165,10 +170,9 @@ Public Class CustomerList
 
     '戻るボタン押下時
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        Dim frmMenu As frmC01F30_Menu
-        frmMenu = New frmC01F30_Menu(_msgHd, _langHd, _db)
-        frmMenu.Show()
-        Me.Close()
+        _parentForm.Enabled = True
+        _parentForm.Show()
+        Me.Dispose()
     End Sub
 
     '請求計算ボタン押下時

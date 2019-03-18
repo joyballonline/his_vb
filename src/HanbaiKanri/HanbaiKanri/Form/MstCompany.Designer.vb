@@ -63,6 +63,8 @@ Partial Class MstCompany
         'Dgv_Company
         '
         Me.Dgv_Company.AllowUserToAddRows = False
+        Me.Dgv_Company.AllowUserToDeleteRows = False
+        Me.Dgv_Company.AllowUserToResizeRows = False
         Me.Dgv_Company.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.Dgv_Company.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.会社コード, Me.会社名, Me.会社略称, Me.郵便番号, Me.住所１, Me.住所２, Me.住所３, Me.電話番号, Me.FAX番号, Me.代表者役職, Me.代表者名, Me.表示順, Me.備考, Me.銀行名, Me.銀行コード, Me.支店名, Me.支店コード, Me.預金種目, Me.口座番号, Me.口座名義, Me.前回締日, Me.今回締日, Me.次回締日, Me.在庫単価評価法, Me.前払法人税率, Me.会計用コード, Me.更新者, Me.更新日})
         Me.Dgv_Company.Location = New System.Drawing.Point(12, 33)

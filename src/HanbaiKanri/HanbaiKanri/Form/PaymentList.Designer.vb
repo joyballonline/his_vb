@@ -22,8 +22,8 @@ Partial Class PaymentList
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.BtnSerach = New System.Windows.Forms.Button()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.TxtCustomerCode = New System.Windows.Forms.TextBox()
@@ -184,8 +184,8 @@ Partial Class PaymentList
         '
         '仕入金額計
         '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.仕入金額計.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.仕入金額計.DefaultCellStyle = DataGridViewCellStyle1
         Me.仕入金額計.HeaderText = "仕入金額計"
         Me.仕入金額計.Name = "仕入金額計"
         Me.仕入金額計.ReadOnly = True
@@ -201,8 +201,8 @@ Partial Class PaymentList
         '
         '支払残高
         '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.支払残高.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.支払残高.DefaultCellStyle = DataGridViewCellStyle2
         Me.支払残高.HeaderText = "支払残高"
         Me.支払残高.Name = "支払残高"
         Me.支払残高.ReadOnly = True

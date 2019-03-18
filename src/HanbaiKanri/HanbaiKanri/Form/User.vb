@@ -31,6 +31,7 @@ Public Class User
     Private _msgHd As UtilMsgHandler
     Private _db As UtilDBIf
     Private _langHd As UtilLangHandler
+    Private _parentForm As Form
     'Private _gh As UtilDataGridViewHandler
     Private _init As Boolean                             '初期処理済フラグ
     Private _status As String = ""
@@ -51,7 +52,8 @@ Public Class User
     Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler,
                    ByRef prmRefDbHd As UtilDBIf,
                    ByRef prmRefLang As UtilLangHandler,
-                   ByRef prmRefStatsu As String,
+                   ByRef prmRefForm As Form,
+                   ByRef prmRefStatus As String,
                    Optional ByRef prmRefCompany As String = "",
                    Optional ByRef prmRefUser As String = "")
         Call Me.New()
@@ -62,7 +64,8 @@ Public Class User
         _msgHd = prmRefMsgHd                                                'MSGハンドラの設定
         _db = prmRefDbHd                                                    'DBハンドラの設定
         _langHd = prmRefLang
-        _status = prmRefStatsu
+        _parentForm = prmRefForm
+        _status = prmRefStatus
         _companyCode = prmRefCompany
         _userId = prmRefUser
         '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
@@ -185,10 +188,9 @@ Public Class User
             End If
 
 
-            Dim frmUM As MstUser
-            frmUM = New MstUser(_msgHd, _db, _langHd)
-            frmUM.Show()
-            Me.Close()
+            _parentForm.Enabled = True
+            _parentForm.Show()
+            Me.Dispose()
 
         Catch ue As UsrDefException
             ue.dspMsg()
@@ -200,10 +202,9 @@ Public Class User
     End Sub
 
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
-        Dim MstUser As MstUser
-        MstUser = New MstUser(_msgHd, _db, _langHd)
-        MstUser.Show()
-        Me.Close()
+        _parentForm.Enabled = True
+        _parentForm.Show()
+        Me.Dispose()
     End Sub
 
     Private Sub User_Load(sender As Object, e As EventArgs) Handles MyBase.Load

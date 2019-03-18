@@ -32,6 +32,7 @@ Public Class MstHanyou
     Private _msgHd As UtilMsgHandler
     Private _langHd As UtilLangHandler
     Private _db As UtilDBIf
+    Private _parentForm As Form
     'Private _gh As UtilDataGridViewHandler
     Private _init As Boolean                             '初期処理済フラグ
 
@@ -46,7 +47,10 @@ Public Class MstHanyou
     '-------------------------------------------------------------------------------
     'コンストラクタ　メニューから呼ばれる
     '-------------------------------------------------------------------------------
-    Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler, ByRef prmRefDbHd As UtilDBIf, ByRef prmRefLang As UtilLangHandler)
+    Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler,
+                   ByRef prmRefDbHd As UtilDBIf,
+                   ByRef prmRefLang As UtilLangHandler,
+                   ByRef prmRefForm As Form)
         Call Me.New()
 
         _init = False
@@ -55,6 +59,7 @@ Public Class MstHanyou
         _msgHd = prmRefMsgHd                                                'MSGハンドラの設定
         _db = prmRefDbHd                                                    'DBハンドラの設定
         _langHd = prmRefLang
+        _parentForm = prmRefForm
         '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
         StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
         Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
@@ -109,24 +114,23 @@ Public Class MstHanyou
         Dim Key1 As String = Dgv_Hanyo.Rows(Dgv_Hanyo.CurrentCell.RowIndex).Cells("固定キー").Value
         Dim Key2 As String = Dgv_Hanyo.Rows(Dgv_Hanyo.CurrentCell.RowIndex).Cells("可変キー").Value
 
-        openForm = New Hanyo(_msgHd, _db, _langHd, Status, Code, Key1, Key2)   '処理選択
+        openForm = New Hanyo(_msgHd, _db, _langHd, Me, Status, Code, Key1, Key2)   '処理選択
         openForm.Show()
         Me.Hide()   ' 自分は隠れる
     End Sub
 
     '戻るボタン押下時
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
-        Dim frmC01F30_Menu As frmC01F30_Menu
-        frmC01F30_Menu = New frmC01F30_Menu(_msgHd, _langHd, _db)
-        frmC01F30_Menu.Show()
-        Me.Close()
+        _parentForm.Enabled = True
+        _parentForm.Show()
+        Me.Dispose()
     End Sub
 
     '追加ボタン押下時
     Private Sub BtnAdd_Click(sender As Object, e As EventArgs) Handles BtnAdd.Click
         Dim openForm As Form = Nothing
         Dim Status As String = CommonConst.STATUS_ADD
-        openForm = New Hanyo(_msgHd, _db, _langHd, Status)   '処理選択
+        openForm = New Hanyo(_msgHd, _db, _langHd, Me, Status)   '処理選択
         openForm.Show()
         Me.Hide()   ' 自分は隠れる
     End Sub
@@ -270,4 +274,8 @@ Public Class MstHanyou
         Return _db.selectDB(Sql, RS, reccnt)
     End Function
 
+    Private Sub MstHanyou_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
+        '一覧を取得
+        getList()
+    End Sub
 End Class

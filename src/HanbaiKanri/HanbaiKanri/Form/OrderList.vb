@@ -56,8 +56,8 @@ Public Class OrderList
     Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler,
                    ByRef prmRefDbHd As UtilDBIf,
                    ByRef prmRefLang As UtilLangHandler,
-                    ByRef prmRefForm As Form,
-                  Optional ByRef prmRefStatus As String = "")
+                   ByRef prmRefForm As Form,
+                   Optional ByRef prmRefStatus As String = "")
         Call Me.New()
 
         _init = False
@@ -900,4 +900,7 @@ Public Class OrderList
 
     End Function
 
+    Private Sub OrderList_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
+        OrderListLoad() '一覧を再表示
+    End Sub
 End Class

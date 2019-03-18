@@ -23,12 +23,6 @@ Partial Class MstWarehouse
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.Dgv_Account = New System.Windows.Forms.DataGridView()
-        Me.btnAdd = New System.Windows.Forms.Button()
-        Me.btnEdit = New System.Windows.Forms.Button()
-        Me.BtnBack = New System.Windows.Forms.Button()
-        Me.LblAccountName = New System.Windows.Forms.Label()
-        Me.TxtSearch = New System.Windows.Forms.TextBox()
-        Me.BtnSearch = New System.Windows.Forms.Button()
         Me.倉庫コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.名称 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.略称 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -43,6 +37,12 @@ Partial Class MstWarehouse
         Me.無効フラグ = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.更新者 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.更新日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnAdd = New System.Windows.Forms.Button()
+        Me.btnEdit = New System.Windows.Forms.Button()
+        Me.BtnBack = New System.Windows.Forms.Button()
+        Me.LblAccountName = New System.Windows.Forms.Label()
+        Me.TxtSearch = New System.Windows.Forms.TextBox()
+        Me.BtnSearch = New System.Windows.Forms.Button()
         CType(Me.Dgv_Account, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -59,64 +59,6 @@ Partial Class MstWarehouse
         Me.Dgv_Account.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.Dgv_Account.Size = New System.Drawing.Size(1326, 470)
         Me.Dgv_Account.TabIndex = 3
-        '
-        'btnAdd
-        '
-        Me.btnAdd.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.btnAdd.Location = New System.Drawing.Point(831, 509)
-        Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(165, 40)
-        Me.btnAdd.TabIndex = 4
-        Me.btnAdd.Text = "追加"
-        Me.btnAdd.UseVisualStyleBackColor = True
-        '
-        'btnEdit
-        '
-        Me.btnEdit.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.btnEdit.Location = New System.Drawing.Point(1002, 509)
-        Me.btnEdit.Name = "btnEdit"
-        Me.btnEdit.Size = New System.Drawing.Size(165, 40)
-        Me.btnEdit.TabIndex = 5
-        Me.btnEdit.Text = "編集"
-        Me.btnEdit.UseVisualStyleBackColor = True
-        '
-        'BtnBack
-        '
-        Me.BtnBack.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.BtnBack.Location = New System.Drawing.Point(1173, 509)
-        Me.BtnBack.Name = "BtnBack"
-        Me.BtnBack.Size = New System.Drawing.Size(165, 40)
-        Me.BtnBack.TabIndex = 6
-        Me.BtnBack.Text = "戻る"
-        Me.BtnBack.UseVisualStyleBackColor = True
-        '
-        'LblAccountName
-        '
-        Me.LblAccountName.AutoSize = True
-        Me.LblAccountName.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblAccountName.Location = New System.Drawing.Point(12, 9)
-        Me.LblAccountName.Name = "LblAccountName"
-        Me.LblAccountName.Size = New System.Drawing.Size(65, 15)
-        Me.LblAccountName.TabIndex = 9
-        Me.LblAccountName.Text = "キーワード"
-        '
-        'TxtSearch
-        '
-        Me.TxtSearch.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtSearch.Location = New System.Drawing.Point(104, 6)
-        Me.TxtSearch.Name = "TxtSearch"
-        Me.TxtSearch.Size = New System.Drawing.Size(142, 22)
-        Me.TxtSearch.TabIndex = 1
-        '
-        'BtnSearch
-        '
-        Me.BtnSearch.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.BtnSearch.Location = New System.Drawing.Point(252, 5)
-        Me.BtnSearch.Name = "BtnSearch"
-        Me.BtnSearch.Size = New System.Drawing.Size(75, 23)
-        Me.BtnSearch.TabIndex = 2
-        Me.BtnSearch.Text = "検索"
-        Me.BtnSearch.UseVisualStyleBackColor = True
         '
         '倉庫コード
         '
@@ -201,6 +143,64 @@ Partial Class MstWarehouse
         Me.更新日.HeaderText = "更新日"
         Me.更新日.Name = "更新日"
         Me.更新日.ReadOnly = True
+        '
+        'btnAdd
+        '
+        Me.btnAdd.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.btnAdd.Location = New System.Drawing.Point(831, 509)
+        Me.btnAdd.Name = "btnAdd"
+        Me.btnAdd.Size = New System.Drawing.Size(165, 40)
+        Me.btnAdd.TabIndex = 4
+        Me.btnAdd.Text = "追加"
+        Me.btnAdd.UseVisualStyleBackColor = True
+        '
+        'btnEdit
+        '
+        Me.btnEdit.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.btnEdit.Location = New System.Drawing.Point(1002, 509)
+        Me.btnEdit.Name = "btnEdit"
+        Me.btnEdit.Size = New System.Drawing.Size(165, 40)
+        Me.btnEdit.TabIndex = 5
+        Me.btnEdit.Text = "編集"
+        Me.btnEdit.UseVisualStyleBackColor = True
+        '
+        'BtnBack
+        '
+        Me.BtnBack.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.BtnBack.Location = New System.Drawing.Point(1173, 509)
+        Me.BtnBack.Name = "BtnBack"
+        Me.BtnBack.Size = New System.Drawing.Size(165, 40)
+        Me.BtnBack.TabIndex = 6
+        Me.BtnBack.Text = "戻る"
+        Me.BtnBack.UseVisualStyleBackColor = True
+        '
+        'LblAccountName
+        '
+        Me.LblAccountName.AutoSize = True
+        Me.LblAccountName.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblAccountName.Location = New System.Drawing.Point(12, 9)
+        Me.LblAccountName.Name = "LblAccountName"
+        Me.LblAccountName.Size = New System.Drawing.Size(65, 15)
+        Me.LblAccountName.TabIndex = 9
+        Me.LblAccountName.Text = "キーワード"
+        '
+        'TxtSearch
+        '
+        Me.TxtSearch.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtSearch.Location = New System.Drawing.Point(104, 6)
+        Me.TxtSearch.Name = "TxtSearch"
+        Me.TxtSearch.Size = New System.Drawing.Size(142, 22)
+        Me.TxtSearch.TabIndex = 1
+        '
+        'BtnSearch
+        '
+        Me.BtnSearch.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.BtnSearch.Location = New System.Drawing.Point(252, 5)
+        Me.BtnSearch.Name = "BtnSearch"
+        Me.BtnSearch.Size = New System.Drawing.Size(75, 23)
+        Me.BtnSearch.TabIndex = 2
+        Me.BtnSearch.Text = "検索"
+        Me.BtnSearch.UseVisualStyleBackColor = True
         '
         'MstWarehouse
         '

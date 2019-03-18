@@ -191,11 +191,7 @@ Public Class Language
                 _db.executeDB(Sql)
             End If
 
-
-            Dim frmUM As MstLanguage
-            frmUM = New MstLanguage(_msgHd, _db, _langHd)
-            frmUM.Show()
-            Me.Close()
+            Me.Dispose()
 
         Catch ue As UsrDefException
             ue.dspMsg()
@@ -207,10 +203,13 @@ Public Class Language
     End Sub
 
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
-        Dim MstLanguage As MstLanguage
-        MstLanguage = New MstLanguage(_msgHd, _db, _langHd)
-        MstLanguage.Show()
-        Me.Close()
+        'Dim MstLanguage As MstLanguage
+        'MstLanguage = New MstLanguage(_msgHd, _db, _langHd)
+        'MstLanguage.Show()
+        'Me.Close()
+
+        Me.Dispose()
+
     End Sub
 
     Private Sub User_Load(sender As Object, e As EventArgs) Handles MyBase.Load

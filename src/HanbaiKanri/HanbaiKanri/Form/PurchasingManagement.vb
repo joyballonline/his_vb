@@ -662,7 +662,7 @@ Public Class PurchasingManagement
             Sql4 += "', '"
             Sql4 += ds2.Tables(RS).Rows(index)("リードタイム").ToString 'リードタイム
             Sql4 += "', '"
-            Sql4 += DgvAdd.Rows(index).Cells("備考").Value.ToString '備考
+            Sql4 += DgvAdd.Rows(index).Cells("備考").Value '備考
             Sql4 += "', '"
             Sql4 += strToday '仕入日
             Sql4 += "', '"
@@ -818,7 +818,7 @@ Public Class PurchasingManagement
             Sql8 += "', '"
             Sql8 += DgvAdd.Rows(index).Cells("単位").Value.ToString
             Sql8 += "', '"
-            Sql8 += DgvAdd.Rows(index).Cells("備考").Value.ToString
+            Sql8 += DgvAdd.Rows(index).Cells("備考").Value
             Sql8 += "', '"
             Sql8 += Input
             Sql8 += "', '"
@@ -839,12 +839,13 @@ Public Class PurchasingManagement
         End If
 
 
-        Dim openForm As Form = Nothing
-        Dim Status As String = CommonConst.STATUS_ORDING
-        openForm = New OrderingList(_msgHd, _db, _langHd, Status)
-        openForm.Show()
-        Me.Close()
+        'Dim openForm As Form = Nothing
+        'Dim Status As String = CommonConst.STATUS_ORDING
+        'openForm = New OrderingList(_msgHd, _db, _langHd, Me, Status)
+        'openForm.Show()
+        'Me.Close()
 
+        Me.Dispose()
     End Sub
 
     '買掛登録
