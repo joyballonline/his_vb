@@ -33,6 +33,7 @@ Public Class SalesList
     Private _msgHd As UtilMsgHandler
     Private _langHd As UtilLangHandler
     Private _db As UtilDBIf
+    Private _parentForm As Form
     'Private _gh As UtilDataGridViewHandler
     Private _init As Boolean                             '初期処理済フラグ
     Private CompanyCode As String = ""
@@ -56,7 +57,8 @@ Public Class SalesList
     Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler,
                    ByRef prmRefDbHd As UtilDBIf,
                    ByRef prmRefLang As UtilLangHandler,
-                   ByRef prmRefStatus As String)
+                   ByRef prmRefForm As Form,
+    ByRef prmRefStatus As String)
         Call Me.New()
 
         _init = False
@@ -65,6 +67,7 @@ Public Class SalesList
         _msgHd = prmRefMsgHd                                                'MSGハンドラの設定
         _db = prmRefDbHd                                                    'DBハンドラの設定
         _langHd = prmRefLang
+        _parentForm = prmRefForm
         SalesStatus = prmRefStatus
         '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
         StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
@@ -462,10 +465,9 @@ Public Class SalesList
     End Sub
 
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
-        Dim openForm As Form = Nothing
-        openForm = New frmC01F30_Menu(_msgHd, _langHd, _db)
-        openForm.Show()
-        Me.Close()
+        _parentForm.Enabled = True
+        _parentForm.Show()
+        Me.Dispose()
     End Sub
 
     '表示形式の変更イベント
@@ -753,7 +755,7 @@ Public Class SalesList
         Dim Status As String = CommonConst.STATUS_VIEW
 
         Dim openForm As Form = Nothing
-        openForm = New OrderManagement(_msgHd, _db, _langHd, No, Suffix, Status)   '処理選択
+        openForm = New OrderManagement(_msgHd, _db, _langHd, Me, No, Suffix, Status)   '処理選択
         openForm.Show(Me)
     End Sub
 

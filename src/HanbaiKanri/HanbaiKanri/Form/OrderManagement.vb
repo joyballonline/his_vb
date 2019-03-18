@@ -32,6 +32,7 @@ Public Class OrderManagement
     '-------------------------------------------------------------------------------
     Private _msgHd As UtilMsgHandler
     Private _db As UtilDBIf
+    Private _parentForm As Form
     'Private _gh As UtilDataGridViewHandler
     Private _init As Boolean                             '初期処理済フラグ
     Private CompanyCode As String = ""
@@ -55,7 +56,8 @@ Public Class OrderManagement
     Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler,
                    ByRef prmRefDbHd As UtilDBIf,
                    ByRef prmRefLang As UtilLangHandler,
-                   ByRef prmRefNo As String,
+                   ByRef prmRefForm As Form,
+                 ByRef prmRefNo As String,
                    ByRef prmRefSuffix As String,
                    Optional ByRef prmRefStatus As String = "")
         Call Me.New()
@@ -66,6 +68,7 @@ Public Class OrderManagement
         _msgHd = prmRefMsgHd                                                'MSGハンドラの設定
         _db = prmRefDbHd                                                    'DBハンドラの設定
         _langHd = prmRefLang
+        _parentForm = prmRefForm
         No = prmRefNo
         Suffix = prmRefSuffix
         _status = prmRefStatus
@@ -845,11 +848,16 @@ Public Class OrderManagement
             '    End If
             'End If
 
-            Dim openForm As Form = Nothing
-            Dim Status As String = CommonConst.STATUS_SALES
-            openForm = New OrderList(_msgHd, _db, _langHd, Status)
-            openForm.Show()
-            Me.Close()
+            'Dim openForm As Form = Nothing
+            'Dim Status As String = CommonConst.STATUS_SALES
+            'openForm = New OrderList(_msgHd, _db, _langHd, Status)
+            'openForm.Show()
+            'Me.Close()
+
+            _parentForm.Enabled = True
+            _parentForm.Show()
+            Me.Dispose()
+
 
         Catch ex As Exception
 
