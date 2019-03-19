@@ -27,9 +27,6 @@ Partial Class User
         Me.TxtName = New System.Windows.Forms.TextBox()
         Me.TxtShortName = New System.Windows.Forms.TextBox()
         Me.TxtRemarks = New System.Windows.Forms.TextBox()
-        Me.TxtFlg = New System.Windows.Forms.TextBox()
-        Me.TxtAuthority = New System.Windows.Forms.TextBox()
-        Me.TxtLangage = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -45,6 +42,9 @@ Partial Class User
         Me.Label26 = New System.Windows.Forms.Label()
         Me.LblPassword = New System.Windows.Forms.Label()
         Me.TxtPassword = New System.Windows.Forms.TextBox()
+        Me.cmAuthority = New System.Windows.Forms.ComboBox()
+        Me.cmLangage = New System.Windows.Forms.ComboBox()
+        Me.cmbInvalidFlag = New System.Windows.Forms.ComboBox()
         Me.SuspendLayout()
         '
         'TxtCompanyCode
@@ -89,33 +89,6 @@ Partial Class User
         Me.TxtRemarks.Name = "TxtRemarks"
         Me.TxtRemarks.Size = New System.Drawing.Size(234, 22)
         Me.TxtRemarks.TabIndex = 4
-        '
-        'TxtFlg
-        '
-        Me.TxtFlg.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtFlg.Location = New System.Drawing.Point(99, 102)
-        Me.TxtFlg.MaxLength = 1
-        Me.TxtFlg.Name = "TxtFlg"
-        Me.TxtFlg.Size = New System.Drawing.Size(234, 22)
-        Me.TxtFlg.TabIndex = 5
-        '
-        'TxtAuthority
-        '
-        Me.TxtAuthority.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtAuthority.Location = New System.Drawing.Point(483, 102)
-        Me.TxtAuthority.MaxLength = 1
-        Me.TxtAuthority.Name = "TxtAuthority"
-        Me.TxtAuthority.Size = New System.Drawing.Size(234, 22)
-        Me.TxtAuthority.TabIndex = 6
-        '
-        'TxtLangage
-        '
-        Me.TxtLangage.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtLangage.Location = New System.Drawing.Point(99, 147)
-        Me.TxtLangage.MaxLength = 10
-        Me.TxtLangage.Name = "TxtLangage"
-        Me.TxtLangage.Size = New System.Drawing.Size(234, 22)
-        Me.TxtLangage.TabIndex = 7
         '
         'Label2
         '
@@ -266,10 +239,51 @@ Partial Class User
         Me.TxtPassword.Size = New System.Drawing.Size(234, 22)
         Me.TxtPassword.TabIndex = 8
         '
+        'cmAuthority
+        '
+        Me.cmAuthority.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.cmAuthority.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmAuthority.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.cmAuthority.FormattingEnabled = True
+        Me.cmAuthority.ItemHeight = 15
+        Me.cmAuthority.Location = New System.Drawing.Point(483, 101)
+        Me.cmAuthority.Name = "cmAuthority"
+        Me.cmAuthority.Size = New System.Drawing.Size(234, 23)
+        Me.cmAuthority.TabIndex = 241
+        '
+        'cmLangage
+        '
+        Me.cmLangage.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.cmLangage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmLangage.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.cmLangage.FormattingEnabled = True
+        Me.cmLangage.ItemHeight = 15
+        Me.cmLangage.Location = New System.Drawing.Point(99, 146)
+        Me.cmLangage.Name = "cmLangage"
+        Me.cmLangage.Size = New System.Drawing.Size(234, 23)
+        Me.cmLangage.TabIndex = 242
+        '
+        'cmbInvalidFlag
+        '
+        Me.cmbInvalidFlag.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.cmbInvalidFlag.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbInvalidFlag.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.cmbInvalidFlag.FormattingEnabled = True
+        Me.cmbInvalidFlag.ItemHeight = 15
+        Me.cmbInvalidFlag.Location = New System.Drawing.Point(99, 101)
+        Me.cmbInvalidFlag.Name = "cmbInvalidFlag"
+        Me.cmbInvalidFlag.Size = New System.Drawing.Size(234, 23)
+        Me.cmbInvalidFlag.TabIndex = 243
+        '
         'User
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(729, 561)
+        Me.Controls.Add(Me.cmbInvalidFlag)
+        Me.Controls.Add(Me.cmLangage)
+        Me.Controls.Add(Me.cmAuthority)
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.TxtUserId)
         Me.Controls.Add(Me.LblPassword)
         Me.Controls.Add(Me.TxtPassword)
         Me.Controls.Add(Me.Label26)
@@ -284,14 +298,9 @@ Partial Class User
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.TxtLangage)
-        Me.Controls.Add(Me.TxtAuthority)
-        Me.Controls.Add(Me.TxtFlg)
         Me.Controls.Add(Me.TxtRemarks)
         Me.Controls.Add(Me.TxtShortName)
         Me.Controls.Add(Me.TxtName)
-        Me.Controls.Add(Me.TxtUserId)
         Me.Controls.Add(Me.TxtCompanyCode)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "User"
@@ -306,9 +315,6 @@ Partial Class User
     Friend WithEvents TxtName As TextBox
     Friend WithEvents TxtShortName As TextBox
     Friend WithEvents TxtRemarks As TextBox
-    Friend WithEvents TxtFlg As TextBox
-    Friend WithEvents TxtAuthority As TextBox
-    Friend WithEvents TxtLangage As TextBox
     Friend WithEvents Label2 As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents Label4 As Label
@@ -324,4 +330,7 @@ Partial Class User
     Friend WithEvents Label26 As Label
     Friend WithEvents LblPassword As Label
     Friend WithEvents TxtPassword As TextBox
+    Friend WithEvents cmAuthority As ComboBox
+    Friend WithEvents cmLangage As ComboBox
+    Friend WithEvents cmbInvalidFlag As ComboBox
 End Class

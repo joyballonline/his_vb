@@ -119,14 +119,16 @@ Public Class MstUser
 
             For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
                 Dgv_User.Rows.Add()
-                Dgv_User.Rows(i).Cells(0).Value = ds.Tables(RS).Rows(i)(0)        '会社コード
-                Dgv_User.Rows(i).Cells(1).Value = ds.Tables(RS).Rows(i)(1)        '言語コード
-                Dgv_User.Rows(i).Cells(2).Value = ds.Tables(RS).Rows(i)(2)        '氏名
-                Dgv_User.Rows(i).Cells(3).Value = ds.Tables(RS).Rows(i)(3)      '略名
-                Dgv_User.Rows(i).Cells(4).Value = ds.Tables(RS).Rows(i)(4)      '備考
-                Dgv_User.Rows(i).Cells(5).Value = ds.Tables(RS).Rows(i)(5)      '無効フラグ
-                Dgv_User.Rows(i).Cells(6).Value = ds.Tables(RS).Rows(i)(6)      '更新者
-                Dgv_User.Rows(i).Cells(7).Value = ds.Tables(RS).Rows(i)(7)      '更新日
+                Dgv_User.Rows(i).Cells("会社コード").Value = ds.Tables(RS).Rows(i)("会社コード")        '会社コード
+                Dgv_User.Rows(i).Cells("ユーザID").Value = ds.Tables(RS).Rows(i)("ユーザＩＤ")        '言語コード
+                Dgv_User.Rows(i).Cells("氏名").Value = ds.Tables(RS).Rows(i)("氏名")        '氏名
+                Dgv_User.Rows(i).Cells("略名").Value = ds.Tables(RS).Rows(i)("略名")      '略名
+                Dgv_User.Rows(i).Cells("備考").Value = ds.Tables(RS).Rows(i)("備考")      '備考
+                Dgv_User.Rows(i).Cells("無効フラグ").Value = setEnabledText(ds.Tables(RS).Rows(i)("無効フラグ"))      '無効フラグ
+                Dgv_User.Rows(i).Cells("権限").Value = setAuthText(ds.Tables(RS).Rows(i)("権限"))      '権限
+                Dgv_User.Rows(i).Cells("言語").Value = setLangText(ds.Tables(RS).Rows(i)("言語"))      '備考
+                Dgv_User.Rows(i).Cells("更新者").Value = ds.Tables(RS).Rows(i)("更新者")      '更新者
+                Dgv_User.Rows(i).Cells("更新日").Value = ds.Tables(RS).Rows(i)("更新日")      '更新日
             Next
 
         Catch ue As UsrDefException
@@ -170,4 +172,43 @@ Public Class MstUser
     Private Sub MstUser_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
         setList()
     End Sub
+
+    '無効フラグ
+    Private Function setEnabledText(ByVal prmVal As String) As String
+        Dim reVal As String
+
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+            reVal = IIf(Integer.Parse(prmVal) = CommonConst.FLAG_ENABLED, CommonConst.FLAG_ENABLED_TXT_ENG, CommonConst.FLAG_DISABLED_TXT_ENG)
+        Else
+            reVal = IIf(Integer.Parse(prmVal) = CommonConst.FLAG_ENABLED, CommonConst.FLAG_ENABLED_TXT, CommonConst.FLAG_DISABLED_TXT)
+        End If
+
+        Return reVal
+    End Function
+
+    '言語
+    Private Function setLangText(ByVal prmVal As String) As String
+        Dim reVal As String
+
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+            reVal = IIf(prmVal = CommonConst.LANG_KBN_JPN, CommonConst.LANG_KBN_JPN, CommonConst.LANG_KBN_ENG)
+        Else
+            reVal = IIf(prmVal = CommonConst.LANG_KBN_JPN, CommonConst.LANG_KBN_JPN_TXT, CommonConst.LANG_KBN_ENG_TXT)
+        End If
+
+        Return reVal
+    End Function
+
+    '権限
+    Private Function setAuthText(ByVal prmVal As String) As String
+        Dim reVal As String
+
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+            reVal = IIf(Integer.Parse(prmVal) = CommonConst.Auth_KBN_GENERAL, CommonConst.Auth_KBN_GENERAL_TXT_ENG, CommonConst.Auth_KBN_ADMIN_TXT_ENG)
+        Else
+            reVal = IIf(Integer.Parse(prmVal) = CommonConst.Auth_KBN_GENERAL, CommonConst.Auth_KBN_GENERAL_TXT, CommonConst.Auth_KBN_ADMIN_TXT)
+        End If
+
+        Return reVal
+    End Function
 End Class

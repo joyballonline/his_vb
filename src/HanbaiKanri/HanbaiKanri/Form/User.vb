@@ -92,30 +92,6 @@ Public Class User
             Dim result As DialogResult = MessageBox.Show(strMessage, strMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Exit Sub
         End If
-        '無効フラグの属性チェック（表示順のみ数値項目）
-        If Not IsNumeric(TxtFlg.Text) And Not TxtFlg.Text = "" Then
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
-                strMessage = "Please enter with numeric value. "
-                strMessageTitle = "Disable Error"
-            Else
-                strMessage = "数値で入力してください。"
-                strMessageTitle = "無効フラグ入力エラー"
-            End If
-            Dim result As DialogResult = MessageBox.Show(strMessage, strMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-            Exit Sub
-        End If
-        '権限の属性チェック（表示順のみ数値項目）
-        If Not IsNumeric(TxtAuthority.Text) And Not TxtAuthority.Text = "" Then
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
-                strMessage = "Please enter with numeric value. "
-                strMessageTitle = "Authority Error"
-            Else
-                strMessage = "数値で入力してください。"
-                strMessageTitle = "権限入力エラー"
-            End If
-            Dim result As DialogResult = MessageBox.Show(strMessage, strMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-            Exit Sub
-        End If
 
         '登録処理ここから
         Dim dtToday As String = UtilClass.formatDatetime(DateTime.Now)
@@ -131,19 +107,9 @@ Public Class User
                 Sql += ", '" & TxtName.Text & "'"           '氏名
                 Sql += ", '" & TxtShortName.Text & "'"      '略名
                 Sql += ", '" & TxtRemarks.Text & "'"        '備考
-                Sql += ", "                    '無効フラグ
-                If TxtFlg.Text = "" Then
-                    Sql += "0"
-                Else
-                    Sql += TxtFlg.Text
-                End If
-                Sql += ", "                     '権限
-                If TxtAuthority.Text = "" Then
-                    Sql += "0"
-                Else
-                    Sql += TxtAuthority.Text
-                End If
-                Sql += ", '" & TxtLangage.Text & "'"        '言語
+                Sql += ", " & cmbInvalidFlag.SelectedValue '無効フラグ
+                Sql += ", " & cmAuthority.SelectedValue '権限
+                Sql += ", '" & cmLangage.SelectedValue.ToString & "'"        '言語
                 Sql += ", '" & frmC01F10_Login.loginValue.TantoNM & "'"     '更新者
                 Sql += ", '" & dtToday & "'"                '更新日
                 Sql += " )"
@@ -171,15 +137,15 @@ Public Class User
             Else
                 Dim Sql As String = ""
 
-                Sql += "UPDATE Public.m02_user "
+                Sql = "UPDATE Public.m02_user "
                 Sql += "SET "
                 Sql += " ユーザＩＤ = '" & TxtUserId.Text & "'"
                 Sql += " , 氏名 = '" & TxtName.Text & "'"
                 Sql += " , 略名 = '" & TxtShortName.Text & "'"
                 Sql += " , 備考 = '" & TxtRemarks.Text & "'"
-                Sql += " , 無効フラグ = " & TxtFlg.Text
-                Sql += " , 権限 = " & TxtAuthority.Text
-                Sql += " , 言語 = '" & TxtLangage.Text & "'"
+                Sql += " , 無効フラグ = " & cmbInvalidFlag.SelectedValue.ToString
+                Sql += " , 権限 = " & cmAuthority.SelectedValue
+                Sql += " , 言語 = '" & cmLangage.SelectedValue.ToString & "'"
                 Sql += " , 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
                 Sql += " , 更新日 = '" & dtToday & "'"
                 Sql += "WHERE 会社コード ='" & _companyCode & "'"
@@ -208,7 +174,12 @@ Public Class User
     End Sub
 
     Private Sub User_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If frmC01F10_Login.loginValue.Language = "ENG" Then
+
+        createCombobox()
+        customsLangKbnCombobox()
+        createAuthCombobox()
+
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
             Label2.Text = "UserID"
             Label3.Text = "Name"
             Label4.Text = "ShortName"
@@ -222,10 +193,11 @@ Public Class User
             Label9.Text = "(0:Common 1:Management)"
             Label1.Text = "(JPN:Japanese ENG:English)"
 
-
             BtnRegistration.Text = "Registration"
             BtnBack.Text = "Back"
+
         End If
+
         If _status = CommonConst.STATUS_EDIT Then
             LblPassword.Visible = False
             TxtPassword.Visible = False
@@ -268,19 +240,109 @@ Public Class User
 
             If ds.Tables(RS).Rows(0)("無効フラグ") Is DBNull.Value Then
             Else
-                TxtFlg.Text = ds.Tables(RS).Rows(0)("無効フラグ")
+                createCombobox(ds.Tables(RS).Rows(0)("無効フラグ"))
             End If
 
             If ds.Tables(RS).Rows(0)("権限") Is DBNull.Value Then
             Else
-                TxtAuthority.Text = ds.Tables(RS).Rows(0)("権限")
+                createAuthCombobox(ds.Tables(RS).Rows(0)("権限"))
             End If
 
             If ds.Tables(RS).Rows(0)("言語") Is DBNull.Value Then
             Else
-                TxtLangage.Text = ds.Tables(RS).Rows(0)("言語")
+                customsLangKbnCombobox(ds.Tables(RS).Rows(0)("言語"))
             End If
 
         End If
     End Sub
+
+    '有効無効のコンボボックスを作成
+    '編集モードの時は値を渡してセットさせる
+    Private Sub createCombobox(Optional ByRef prmVal As String = "")
+        cmbInvalidFlag.DisplayMember = "Text"
+        cmbInvalidFlag.ValueMember = "Value"
+
+        Dim tb As New DataTable
+        tb.Columns.Add("Text", GetType(String))
+        tb.Columns.Add("Value", GetType(Integer))
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+            tb.Rows.Add(CommonConst.FLAG_ENABLED_TXT_ENG, CommonConst.FLAG_ENABLED)
+            tb.Rows.Add(CommonConst.FLAG_DISABLED_TXT_ENG, CommonConst.FLAG_DISABLED)
+
+        Else
+            tb.Rows.Add(CommonConst.FLAG_ENABLED_TXT, CommonConst.FLAG_ENABLED)
+            tb.Rows.Add(CommonConst.FLAG_DISABLED_TXT, CommonConst.FLAG_DISABLED)
+
+        End If
+
+        cmbInvalidFlag.DataSource = tb
+
+        If prmVal IsNot "" Then
+            cmbInvalidFlag.SelectedValue = prmVal
+        Else
+            cmbInvalidFlag.SelectedValue = CommonConst.FLAG_ENABLED
+        End If
+
+    End Sub
+
+
+    '言語のコンボボックスを作成
+    '編集モードの時は値を渡してセットさせる
+    Private Sub customsLangKbnCombobox(Optional ByRef prmVal As String = "")
+        cmLangage.DisplayMember = "Text"
+        cmLangage.ValueMember = "Value"
+
+        Dim tb As New DataTable
+        tb.Columns.Add("Text", GetType(String))
+        tb.Columns.Add("Value", GetType(String))
+
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+            tb.Rows.Add(CommonConst.LANG_KBN_JPN, CommonConst.LANG_KBN_JPN)
+            tb.Rows.Add(CommonConst.LANG_KBN_ENG, CommonConst.LANG_KBN_ENG)
+
+        Else
+            tb.Rows.Add(CommonConst.LANG_KBN_JPN_TXT, CommonConst.LANG_KBN_JPN)
+            tb.Rows.Add(CommonConst.LANG_KBN_ENG_TXT, CommonConst.LANG_KBN_ENG)
+
+        End If
+
+        cmLangage.DataSource = tb
+
+        If prmVal IsNot "" Then
+            cmLangage.SelectedValue = prmVal
+        Else
+            cmLangage.SelectedValue = CommonConst.LANG_KBN_JPN
+        End If
+
+    End Sub
+
+    '有効無効のコンボボックスを作成
+    '編集モードの時は値を渡してセットさせる
+    Private Sub createAuthCombobox(Optional ByRef prmVal As String = "")
+        cmAuthority.DisplayMember = "Text"
+        cmAuthority.ValueMember = "Value"
+
+        Dim tb As New DataTable
+        tb.Columns.Add("Text", GetType(String))
+        tb.Columns.Add("Value", GetType(Integer))
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+            tb.Rows.Add(CommonConst.Auth_KBN_GENERAL_TXT_ENG, CommonConst.Auth_KBN_GENERAL)
+            tb.Rows.Add(CommonConst.Auth_KBN_ADMIN_TXT_ENG, CommonConst.Auth_KBN_ADMIN)
+
+        Else
+            tb.Rows.Add(CommonConst.Auth_KBN_GENERAL_TXT, CommonConst.Auth_KBN_GENERAL)
+            tb.Rows.Add(CommonConst.Auth_KBN_ADMIN_TXT, CommonConst.Auth_KBN_ADMIN)
+
+        End If
+
+        cmAuthority.DataSource = tb
+
+        If prmVal IsNot "" Then
+            cmAuthority.SelectedValue = prmVal
+        Else
+            cmAuthority.SelectedValue = CommonConst.Auth_KBN_GENERAL
+        End If
+
+    End Sub
+
 End Class
