@@ -925,9 +925,13 @@ Public Class UtilClass
     Public Shared Function escapeSql(ByVal prmSql As String) As String
         Dim sql As String = prmSql
 
-        sql = sql.Replace("'"c, "''") 'シングルクォーテーションを置換
+        If prmSql IsNot Nothing Then
+            sql = sql.Replace("'"c, "''") 'シングルクォーテーションを置換
 
-        Return Regex.Escape(sql)
+            Return Regex.Escape(sql)
+
+        End If
+
         Return sql
     End Function
 
