@@ -563,13 +563,13 @@ Public Class Ordering
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "EditMode"
             Else
-            LblMode.Text = "編集モード"
-        End If
+                LblMode.Text = "編集モード"
+            End If
 
 
-        '枝番の最大値を取得し、 +1 加算する
+            '枝番の最大値を取得し、 +1 加算する
 
-        Sql = " SELECT public.t20_hattyu.* "
+            Sql = " SELECT public.t20_hattyu.* "
             Sql += " FROM "
             Sql += "t20_hattyu"
 
@@ -617,19 +617,35 @@ Public Class Ordering
 
     'セルの値が変更されたら
     Private Sub CellValueChanged(ByVal sender As Object,
-    ByVal e As DataGridViewCellEventArgs) _
-    Handles DgvItemList.CellValueChanged
+    ByVal e As DataGridViewCellEventArgs) Handles DgvItemList.CellValueChanged
+
         Dim PurchaseTotal As Integer = 0
 
         '発注金額をクリア
         TxtPurchaseAmount.Clear()
 
+
+
         'ヘッダー以外だったら
         If e.RowIndex > -1 Then
+
+            '各項目の属性チェック
+            If Not IsNumeric(DgvItemList.Rows(e.RowIndex).Cells("数量").Value) And (DgvItemList.Rows(e.RowIndex).Cells("数量").Value IsNot Nothing) Then
+                MessageBox.Show("Please enter with numeric value.", "Quantity Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                DgvItemList.Rows(e.RowIndex).Cells("数量").Value = Nothing
+                Exit Sub
+            End If
+            If Not IsNumeric(DgvItemList.Rows(e.RowIndex).Cells("仕入単価").Value) And (DgvItemList.Rows(e.RowIndex).Cells("仕入単価").Value IsNot Nothing) Then
+                MessageBox.Show("Please enter with numeric value.", "PurchaseAmount Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                DgvItemList.Rows(e.RowIndex).Cells("仕入単価").Value = Nothing
+                Exit Sub
+            End If
+
             '数量と仕入単価が入力されていたら
             If DgvItemList.Rows(e.RowIndex).Cells("数量").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("仕入単価").Value IsNot Nothing Then
                 '仕入金額 = 数量 * 仕入単価
                 DgvItemList.Rows(e.RowIndex).Cells("仕入金額").Value = DgvItemList.Rows(e.RowIndex).Cells("数量").Value * DgvItemList.Rows(e.RowIndex).Cells("仕入単価").Value
+
             End If
         End If
 
@@ -799,8 +815,8 @@ Public Class Ordering
         Me.Enabled = False
     End Sub
 
-    Private Sub DgvItemList_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) _
-     Handles DgvItemList.CellDoubleClick
+    Private Sub DgvItemList_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DgvItemList.CellDoubleClick
+
         If PurchaseStatus Is CommonConst.STATUS_VIEW Then
             Exit Sub
         End If
@@ -1423,4 +1439,5 @@ Public Class Ordering
         End If
 
     End Sub
+
 End Class
