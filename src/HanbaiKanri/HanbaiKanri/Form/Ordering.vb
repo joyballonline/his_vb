@@ -374,6 +374,7 @@ Public Class Ordering
             BtnRowsAdd.Visible = False
             BtnRowsDel.Visible = False
             BtnClone.Visible = False
+            DgvItemList.ReadOnly = True
 
         End If
 
@@ -800,6 +801,11 @@ Public Class Ordering
 
     Private Sub DgvItemList_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) _
      Handles DgvItemList.CellDoubleClick
+        If PurchaseStatus Is CommonConst.STATUS_VIEW Then
+            Exit Sub
+        End If
+
+
         Dim Status As String = CommonConst.STATUS_CLONE
 
         Dim selectColumn As String = DgvItemList.Columns(e.ColumnIndex).Name
