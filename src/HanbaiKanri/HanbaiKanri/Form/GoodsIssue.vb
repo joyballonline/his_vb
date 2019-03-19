@@ -133,7 +133,7 @@ Public Class GoodsIssue
             TxtRemarks.Visible = False
             DgvOrder.Visible = False
             DgvAdd.Visible = False
-            DgvHistory.ReadOnly = False
+            DgvHistory.ReadOnly = True
 
             LblHistory.Location = New Point(12, 82)
             DgvHistory.Location = New Point(12, 106)
