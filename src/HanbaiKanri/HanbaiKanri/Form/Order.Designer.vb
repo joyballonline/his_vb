@@ -84,6 +84,11 @@ Partial Class Order
         Me.LblOrderDate = New System.Windows.Forms.Label()
         Me.LblOrderNo = New System.Windows.Forms.Label()
         Me.DgvItemList = New System.Windows.Forms.DataGridView()
+        Me.TxtPurchaseAmount = New System.Windows.Forms.TextBox()
+        Me.LblPurchaseAmount = New System.Windows.Forms.Label()
+        Me.LblMode = New System.Windows.Forms.Label()
+        Me.TxtCustomerPO = New System.Windows.Forms.TextBox()
+        Me.LblCustomerPO = New System.Windows.Forms.Label()
         Me.No = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.メーカー = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.品名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -111,11 +116,6 @@ Partial Class Order
         Me.備考 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.出庫数 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.未出庫数 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TxtPurchaseAmount = New System.Windows.Forms.TextBox()
-        Me.LblPurchaseAmount = New System.Windows.Forms.Label()
-        Me.LblMode = New System.Windows.Forms.Label()
-        Me.TxtCustomerPO = New System.Windows.Forms.TextBox()
-        Me.LblCustomerPO = New System.Windows.Forms.Label()
         CType(Me.DgvItemList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -770,10 +770,72 @@ Partial Class Order
         Me.DgvItemList.Size = New System.Drawing.Size(1329, 171)
         Me.DgvItemList.TabIndex = 3
         '
+        'TxtPurchaseAmount
+        '
+        Me.TxtPurchaseAmount.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TxtPurchaseAmount.Enabled = False
+        Me.TxtPurchaseAmount.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtPurchaseAmount.Location = New System.Drawing.Point(1109, 422)
+        Me.TxtPurchaseAmount.MaxLength = 10
+        Me.TxtPurchaseAmount.Name = "TxtPurchaseAmount"
+        Me.TxtPurchaseAmount.ReadOnly = True
+        Me.TxtPurchaseAmount.Size = New System.Drawing.Size(231, 23)
+        Me.TxtPurchaseAmount.TabIndex = 186
+        Me.TxtPurchaseAmount.TabStop = False
+        Me.TxtPurchaseAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'LblPurchaseAmount
+        '
+        Me.LblPurchaseAmount.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblPurchaseAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblPurchaseAmount.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblPurchaseAmount.Location = New System.Drawing.Point(1003, 422)
+        Me.LblPurchaseAmount.Name = "LblPurchaseAmount"
+        Me.LblPurchaseAmount.Size = New System.Drawing.Size(100, 23)
+        Me.LblPurchaseAmount.TabIndex = 187
+        Me.LblPurchaseAmount.Text = "発注金額"
+        Me.LblPurchaseAmount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LblMode
+        '
+        Me.LblMode.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblMode.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblMode.Location = New System.Drawing.Point(1127, 9)
+        Me.LblMode.Name = "LblMode"
+        Me.LblMode.Size = New System.Drawing.Size(211, 23)
+        Me.LblMode.TabIndex = 188
+        Me.LblMode.Text = "モード"
+        Me.LblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'TxtCustomerPO
+        '
+        Me.TxtCustomerPO.BackColor = System.Drawing.Color.White
+        Me.TxtCustomerPO.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtCustomerPO.Location = New System.Drawing.Point(389, 13)
+        Me.TxtCustomerPO.MaxLength = 8
+        Me.TxtCustomerPO.Name = "TxtCustomerPO"
+        Me.TxtCustomerPO.Size = New System.Drawing.Size(88, 23)
+        Me.TxtCustomerPO.TabIndex = 1
+        '
+        'LblCustomerPO
+        '
+        Me.LblCustomerPO.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblCustomerPO.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblCustomerPO.Cursor = System.Windows.Forms.Cursors.Default
+        Me.LblCustomerPO.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblCustomerPO.Location = New System.Drawing.Point(273, 13)
+        Me.LblCustomerPO.Name = "LblCustomerPO"
+        Me.LblCustomerPO.Size = New System.Drawing.Size(110, 23)
+        Me.LblCustomerPO.TabIndex = 189
+        Me.LblCustomerPO.Text = "客先番号"
+        Me.LblCustomerPO.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'No
         '
         Me.No.HeaderText = "No"
         Me.No.Name = "No"
+        Me.No.ReadOnly = True
         Me.No.Width = 43
         '
         'メーカー
@@ -939,67 +1001,6 @@ Partial Class Order
         Me.未出庫数.HeaderText = "未出庫数"
         Me.未出庫数.Name = "未出庫数"
         Me.未出庫数.Visible = False
-        '
-        'TxtPurchaseAmount
-        '
-        Me.TxtPurchaseAmount.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.TxtPurchaseAmount.Enabled = False
-        Me.TxtPurchaseAmount.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtPurchaseAmount.Location = New System.Drawing.Point(1109, 422)
-        Me.TxtPurchaseAmount.MaxLength = 10
-        Me.TxtPurchaseAmount.Name = "TxtPurchaseAmount"
-        Me.TxtPurchaseAmount.ReadOnly = True
-        Me.TxtPurchaseAmount.Size = New System.Drawing.Size(231, 23)
-        Me.TxtPurchaseAmount.TabIndex = 186
-        Me.TxtPurchaseAmount.TabStop = False
-        Me.TxtPurchaseAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'LblPurchaseAmount
-        '
-        Me.LblPurchaseAmount.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.LblPurchaseAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblPurchaseAmount.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblPurchaseAmount.Location = New System.Drawing.Point(1003, 422)
-        Me.LblPurchaseAmount.Name = "LblPurchaseAmount"
-        Me.LblPurchaseAmount.Size = New System.Drawing.Size(100, 23)
-        Me.LblPurchaseAmount.TabIndex = 187
-        Me.LblPurchaseAmount.Text = "発注金額"
-        Me.LblPurchaseAmount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'LblMode
-        '
-        Me.LblMode.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.LblMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblMode.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblMode.Location = New System.Drawing.Point(1127, 9)
-        Me.LblMode.Name = "LblMode"
-        Me.LblMode.Size = New System.Drawing.Size(211, 23)
-        Me.LblMode.TabIndex = 188
-        Me.LblMode.Text = "モード"
-        Me.LblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'TxtCustomerPO
-        '
-        Me.TxtCustomerPO.BackColor = System.Drawing.Color.White
-        Me.TxtCustomerPO.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtCustomerPO.Location = New System.Drawing.Point(389, 13)
-        Me.TxtCustomerPO.MaxLength = 8
-        Me.TxtCustomerPO.Name = "TxtCustomerPO"
-        Me.TxtCustomerPO.Size = New System.Drawing.Size(88, 23)
-        Me.TxtCustomerPO.TabIndex = 1
-        '
-        'LblCustomerPO
-        '
-        Me.LblCustomerPO.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.LblCustomerPO.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblCustomerPO.Cursor = System.Windows.Forms.Cursors.Default
-        Me.LblCustomerPO.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblCustomerPO.Location = New System.Drawing.Point(273, 13)
-        Me.LblCustomerPO.Name = "LblCustomerPO"
-        Me.LblCustomerPO.Size = New System.Drawing.Size(110, 23)
-        Me.LblCustomerPO.TabIndex = 189
-        Me.LblCustomerPO.Text = "客先番号"
-        Me.LblCustomerPO.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Order
         '

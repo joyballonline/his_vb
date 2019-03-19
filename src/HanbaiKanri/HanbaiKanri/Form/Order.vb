@@ -142,9 +142,7 @@ Public Class Order
 
         DgvItemList.Columns.Insert(25, column2)
 
-
-
-        If frmC01F10_Login.loginValue.Language = "ENG" Then
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
             If OrderStatus = CommonConst.STATUS_ADD Then
                 LblMode.Text = "NewRegistrationMode"
             ElseIf OrderStatus = CommonConst.STATUS_EDIT Then
@@ -168,6 +166,7 @@ Public Class Order
 
         Dim dtNow As DateTime = DateTime.Now
 
+        '登録モード
         If OrderStatus = CommonConst.STATUS_ADD Then
             '見積基本情報
             Dim SqlSaiban As String = ""
@@ -273,7 +272,7 @@ Public Class Order
                 TxtVat.Text = ds1.Tables(RS).Rows(0)("ＶＡＴ")
             End If
 
-            ''見積明細情報
+            '見積明細情報
             Dim Sql3 As String = ""
             Sql3 += "SELECT * FROM public.t02_mitdt"
             Sql3 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
@@ -324,6 +323,31 @@ Public Class Order
                 No += 1
             Next c
             TxtItemCount.Text = DgvItemList.Rows.Count()
+
+            '明細は操作させない
+            DgvItemList.Columns("仕入区分").ReadOnly = True
+            DgvItemList.Columns("メーカー").ReadOnly = True
+            DgvItemList.Columns("品名").ReadOnly = True
+            DgvItemList.Columns("型式").ReadOnly = True
+            DgvItemList.Columns("数量").ReadOnly = True
+            DgvItemList.Columns("単位").ReadOnly = True
+            DgvItemList.Columns("仕入先").ReadOnly = True
+            DgvItemList.Columns("仕入値").ReadOnly = True
+            DgvItemList.Columns("間接費").ReadOnly = True
+            DgvItemList.Columns("売単価").ReadOnly = True
+            DgvItemList.Columns("売上金額").ReadOnly = True
+            DgvItemList.Columns("粗利額").ReadOnly = True
+            DgvItemList.Columns("粗利率").ReadOnly = True
+            DgvItemList.Columns("見積単価").ReadOnly = True
+            DgvItemList.Columns("見積金額").ReadOnly = True
+            DgvItemList.Columns("関税率").ReadOnly = True
+            DgvItemList.Columns("関税額").ReadOnly = True
+            DgvItemList.Columns("前払法人税率").ReadOnly = True
+            DgvItemList.Columns("前払法人税額").ReadOnly = True
+            DgvItemList.Columns("輸送費率").ReadOnly = True
+            DgvItemList.Columns("輸送費額").ReadOnly = True
+            DgvItemList.Columns("仕入原価").ReadOnly = True
+
         Else
             '受注基本情報
 
@@ -539,7 +563,7 @@ Public Class Order
             End If
         End If
 
-        If frmC01F10_Login.loginValue.Language = "ENG" Then
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
             LblOrderNo.Text = "OrderNumber"
             LblCustomerPO.Text = "CustomerNumber"
             LblCustomerPO.Location = New Point(273, 12)
