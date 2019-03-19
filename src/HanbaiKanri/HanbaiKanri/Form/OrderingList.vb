@@ -547,6 +547,7 @@ Public Class OrderingList
 
         End If
 
+
         Dim RowIdx As Integer
         RowIdx = Me.DgvHtyhd.CurrentCell.RowIndex
         Dim No As String = DgvHtyhd.Rows(RowIdx).Cells("発注番号").Value
@@ -571,6 +572,13 @@ Public Class OrderingList
             _msgHd.dspMSG("NonAction", frmC01F10_Login.loginValue.Language)
             Return
 
+        End If
+
+        '取消済みデータは取消操作不可能
+        If DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("取消").Value = CommonConst.CANCEL_KBN_DISABLED_TXT Then
+            '取消データは選択できないアラートを出す
+            _msgHd.dspMSG("cannotSelectTorikeshiData", frmC01F10_Login.loginValue.Language)
+            Return
         End If
 
         Dim RowIdx As Integer
@@ -599,6 +607,8 @@ Public Class OrderingList
 
         End If
 
+        Dim dtNow As String = formatDatetime(DateTime.Now)
+        Dim Sql As String = ""
 
         '取消済みデータは取消操作不可能
         If DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("取消").Value = CommonConst.CANCEL_KBN_DISABLED_TXT Then
@@ -608,31 +618,6 @@ Public Class OrderingList
         End If
 
         Try
-
-            '取消確認のアラート
-            Dim result As DialogResult = _msgHd.dspMSG("confirmCancel", frmC01F10_Login.loginValue.Language)
-
-            If result = DialogResult.Yes Then
-                updateData() 'データ更新
-            End If
-
-        Catch ex As Exception
-
-            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
-
-        End Try
-
-    End Sub
-
-    '選択データをもとに以下テーブル更新
-    't20_hattyu, t21_hattyu
-    Private Sub updateData()
-        Dim dtNow As String = formatDatetime(DateTime.Now)
-        Dim Sql As String = ""
-
-        Try
-
             Sql = "UPDATE "
             Sql += "Public."
             Sql += "t20_hattyu "
@@ -669,50 +654,21 @@ Public Class OrderingList
             Sql += DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("発注番号枝番").Value
             Sql += "' "
 
-            _db.executeDB(Sql)
 
-            Sql = "UPDATE "
-            Sql += "Public."
-            Sql += "t21_hattyu "
-            Sql += "SET "
+            '取消確認のアラート
+            Dim result As DialogResult = _msgHd.dspMSG("confirmCancel", frmC01F10_Login.loginValue.Language)
 
-            Sql += "更新日"
-            Sql += " = '"
-            Sql += dtNow
-            Sql += "', "
-            Sql += "更新者"
-            Sql += " = '"
-            Sql += frmC01F10_Login.loginValue.TantoNM
-            Sql += " ' "
+            If result = DialogResult.Yes Then
+                _db.executeDB(Sql)
+                getList() 'データ更新
+            End If
 
-            Sql += "WHERE"
-            Sql += " 会社コード"
-            Sql += "='"
-            Sql += frmC01F10_Login.loginValue.BumonCD
-            Sql += "'"
-            Sql += " AND"
-            Sql += " 発注番号"
-            Sql += "='"
-            Sql += DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("発注番号").Value
-            Sql += "' "
-            Sql += " AND"
-            Sql += " 発注番号枝番"
-            Sql += "='"
-            Sql += DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("発注番号枝番").Value
-            Sql += "' "
-
-            _db.executeDB(Sql)
-
-        Catch ue As UsrDefException
-            ue.dspMsg()
-            Throw ue
         Catch ex As Exception
+
             'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
             Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
-        End Try
 
-        '一覧再表示
-        getList()
+        End Try
 
     End Sub
 
