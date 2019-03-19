@@ -296,7 +296,6 @@ Public Class Ordering
         DgvItemList.Columns("型式").DefaultCellStyle.WrapMode = DataGridViewTriState.True
         DgvItemList.Columns("備考").DefaultCellStyle.WrapMode = DataGridViewTriState.True
 
-        Dim reccnt As Integer = 0
 
         'ComboBoxに表示する項目のリストを作成する
         ''汎用マスタから仕入区分を取得
@@ -323,9 +322,9 @@ Public Class Ordering
         'DataGridView1に追加する
         'DgvItemList.Columns.Insert(1, column)
 
+        Dim reccnt As Integer = 0
 
-
-        '新規登録時の伝票番号取得
+        '新規登録モード 伝票番号取得
         If PurchaseStatus = CommonConst.STATUS_ADD Then
             GetSiireNo_New()
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
@@ -349,6 +348,7 @@ Public Class Ordering
             Exit Sub
 
         ElseIf PurchaseStatus Is CommonConst.STATUS_VIEW Then
+            '参照モード
 
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "ViewMode"
@@ -384,7 +384,7 @@ Public Class Ordering
         'ここで最大値の高いものを取得するSQLを実行する
         Sql = " AND 発注番号 = '" & PurchaseNo.ToString & "'"
         Sql += " AND 発注番号枝番 = '" & PurchaseSuffix.ToString & "'"
-        Sql += " AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+        'Sql += " AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
 
         Dim dsHattyu As DataSet = getDsData("t20_hattyu", Sql)
         CompanyCode = dsHattyu.Tables(RS).Rows(0)("会社コード")
@@ -473,7 +473,7 @@ Public Class Ordering
         Sql += " WHERE t21.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql += " AND t21.発注番号 ILIKE '" & PurchaseNo.ToString & "'"
         Sql += " AND t21.発注番号枝番 ILIKE '" & PurchaseSuffix.ToString & "'"
-        Sql += " AND t20.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+        'Sql += " AND t20.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
         Sql += " ORDER BY t21.行番号 "
 
         Dim dsHattyudt As DataSet = _db.selectDB(Sql, RS, reccnt)
@@ -607,7 +607,6 @@ Public Class Ordering
         End If
 
     End Sub
-
     '前の画面に戻る
     Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
         _parentForm.Enabled = True
@@ -904,7 +903,7 @@ Public Class Ordering
                 Sql += "', '"
                 Sql += TxtOrderingSuffix.Text '発注番号枝番
                 Sql += "', '"
-                Sql += TxtCustomerPO.Text '客先番号
+                Sql += UtilClass.escapeSql(TxtCustomerPO.Text) '客先番号
                 Sql += "', '"
                 Sql += "" '受注番号
                 Sql += "', '"
@@ -942,16 +941,16 @@ Public Class Ordering
                 Sql += "', '"
                 Sql += TxtFax.Text '仕入先ＦＡＸ
                 Sql += "', '"
-                Sql += TxtPosition.Text '仕入先担当者役職
+                Sql += UtilClass.escapeSql(TxtPosition.Text) '仕入先担当者役職
                 Sql += "', '"
-                Sql += TxtPerson.Text '仕入先担当者名
+                Sql += UtilClass.escapeSql(TxtPerson.Text) '仕入先担当者名
 
                 Sql += "', "
                 Sql += "null" '見積日
                 Sql += ", "
                 Sql += "null" '見積有効期限
                 Sql += ", '"
-                Sql += TxtPaymentTerms.Text '支払条件
+                Sql += UtilClass.escapeSql(TxtPaymentTerms.Text) '支払条件
                 Sql += "', '"
                 Sql += "0" '見積金額
                 Sql += "', '"
@@ -963,7 +962,7 @@ Public Class Ordering
                 Sql += "', '"
                 Sql += TxtInput.Text '入力担当者
                 Sql += "', '"
-                Sql += TxtPurchaseRemark.Text '備考
+                Sql += UtilClass.escapeSql(TxtPurchaseRemark.Text) '備考
                 Sql += "', '"
                 Sql += "" '見積備考
                 Sql += "', '"
@@ -1025,7 +1024,7 @@ Public Class Ordering
                     Sql += "', '"
                     Sql += DgvItemList.Rows(i).Cells("型式").Value.ToString
                     Sql += "', '"
-                    Sql += DgvItemList.Rows(i).Cells("単位").Value
+                    Sql += UtilClass.escapeSql(DgvItemList.Rows(i).Cells("単位").Value)
                     Sql += "', '"
                     Sql += formatNumber(DgvItemList.Rows(i).Cells("仕入単価").Value.ToString)
                     Sql += "', '"
@@ -1052,7 +1051,7 @@ Public Class Ordering
                     Sql += "', '"
                     Sql += DgvItemList.Rows(i).Cells("数量").Value.ToString
                     Sql += "', '"
-                    Sql += DgvItemList.Rows(i).Cells("備考").Value
+                    Sql += UtilClass.escapeSql(DgvItemList.Rows(i).Cells("備考").Value)
                     Sql += "', '"
                     Sql += frmC01F10_Login.loginValue.TantoNM
                     Sql += "', '"
@@ -1079,7 +1078,7 @@ Public Class Ordering
 
                 Sql += "備考"
                 Sql += " = '"
-                Sql += TxtPurchaseRemark.Text
+                Sql += UtilClass.escapeSql(TxtPurchaseRemark.Text)
                 Sql += "', "
                 Sql += "受注日"
                 Sql += " = '"
