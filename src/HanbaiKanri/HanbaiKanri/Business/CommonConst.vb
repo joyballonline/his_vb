@@ -292,6 +292,20 @@ Public Class CommonConst
     Public Const LANG_KBN_JPN As String = "JPN"                         '日本語
     Public Const LANG_KBN_ENG As String = "ENG"                         '英語
 
+    Public Const LANG_KBN_JPN_TXT As String = "日本語"                         '日本語
+    Public Const LANG_KBN_ENG_TXT As String = "英語"                         '英語
+
+    '権限
+    Public Const Auth_KBN_GENERAL As Integer = 0                         '一般権限
+    Public Const Auth_KBN_ADMIN As Integer = 1                         '管理権限
+
+
+    Public Const Auth_KBN_GENERAL_TXT As String = "一般権限"                         '一般権限
+    Public Const Auth_KBN_ADMIN_TXT As String = "管理権限"                         '管理権限
+
+    Public Const Auth_KBN_GENERAL_TXT_ENG As String = "General authority"                         '一般権限
+    Public Const Auth_KBN_ADMIN_TXT_ENG As String = "Administrative authority"                    '管理権限
+
     Public Const CANCEL_KBN_JPN_TXT As String = "済"                         '済
     Public Const CANCEL_KBN_ENG_TXT As String = "Del"                         'Del
 
