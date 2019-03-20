@@ -69,6 +69,7 @@ Public Class StartUp
         Public TantoSign As String          '’S“–ƒTƒCƒ“
         Public Generation As Integer        '¢‘ã”Ô†
         Public Language As String           'Œ¾Œê
+        Public Auth As String               'Œ ŒÀ
     End Structure
 
     '-------------------------------------------------------------------------------

@@ -76,104 +76,10 @@ Public Class User
 
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles BtnRegistration.Click
-        '項目チェック
-        Dim strMessage As String = ""    'メッセージ本文
-        Dim strMessageTitle As String = ""      'メッセージタイトル
-        ''ユーザＩＤは必須
-        If TxtUserId.Text = "" Then
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
-                strMessage = "Please enter User ID. "
-                strMessageTitle = "User ID Error"
-            Else
-                strMessage = "ユーザＩＤを入力してください。"
-                strMessageTitle = "ユーザＩＤ入力エラー"
-            End If
-            Dim result As DialogResult = MessageBox.Show(strMessage, strMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-            Exit Sub
-        End If
-
-        '登録処理ここから
-        Dim dtToday As String = UtilClass.formatDatetime(DateTime.Now)
-        Try
-            If _status = CommonConst.STATUS_ADD Then
-                Dim Sql As String = ""
-
-                Sql += "INSERT INTO Public.m02_user("
-                Sql += "会社コード, ユーザＩＤ, 氏名, 略名, 備考, 無効フラグ, 権限, 言語, 更新者, 更新日)"
-                Sql += "VALUES("
-                Sql += " '" & frmC01F10_Login.loginValue.BumonCD & "'"  '会社コード
-                Sql += ", '" & TxtUserId.Text & "'"         'ユーザＩＤ
-                Sql += ", '" & TxtName.Text & "'"           '氏名
-                Sql += ", '" & TxtShortName.Text & "'"      '略名
-                Sql += ", '" & TxtRemarks.Text & "'"        '備考
-                Sql += ", " & cmbInvalidFlag.SelectedValue '無効フラグ
-                Sql += ", " & cmAuthority.SelectedValue '権限
-                Sql += ", '" & cmLangage.SelectedValue.ToString & "'"        '言語
-                Sql += ", '" & frmC01F10_Login.loginValue.TantoNM & "'"     '更新者
-                Sql += ", '" & dtToday & "'"                '更新日
-                Sql += " )"
-
-                _db.executeDB(Sql)
-
-                Sql = ""
-                Sql += "INSERT INTO Public.m03_pswd"
-                Sql += "(会社コード, ユーザＩＤ, 世代番号, 適用開始日, 適用終了日, パスワード, パスワード変更方法, 有効期限, 更新者, 更新日)"
-                Sql += "VALUES("
-                Sql += " '" & frmC01F10_Login.loginValue.BumonCD & "'"      '会社コード
-                Sql += ", '" & TxtUserId.Text & "'"         'ユーザＩＤ
-                Sql += ", '1'"                              '世代番号
-                Sql += ", '" & dtToday & "'"                '適用開始日
-                Sql += ", '2099-12-31'"                     '適用終了日
-                Sql += ", '" & TxtPassword.Text & "'"       'パスワード
-                Sql += ", 1"                                'パスワード変更方法
-                Sql += ", '2099-12-31'"                     '有効期限
-                Sql += ", '" & frmC01F10_Login.loginValue.TantoNM & "'"     '更新者
-                Sql += ", '" & dtToday & "'"                '更新日
-                Sql += " )"
-
-                _db.executeDB(Sql)
-
-            Else
-                Dim Sql As String = ""
-
-                Sql = "UPDATE Public.m02_user "
-                Sql += "SET "
-                Sql += " ユーザＩＤ = '" & TxtUserId.Text & "'"
-                Sql += " , 氏名 = '" & TxtName.Text & "'"
-                Sql += " , 略名 = '" & TxtShortName.Text & "'"
-                Sql += " , 備考 = '" & TxtRemarks.Text & "'"
-                Sql += " , 無効フラグ = " & cmbInvalidFlag.SelectedValue.ToString
-                Sql += " , 権限 = " & cmAuthority.SelectedValue
-                Sql += " , 言語 = '" & cmLangage.SelectedValue.ToString & "'"
-                Sql += " , 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
-                Sql += " , 更新日 = '" & dtToday & "'"
-                Sql += "WHERE 会社コード ='" & _companyCode & "'"
-                Sql += " AND ユーザＩＤ ='" & _userId & "' "
-                _db.executeDB(Sql)
-            End If
-
-
-            _parentForm.Enabled = True
-            _parentForm.Show()
-            Me.Dispose()
-
-        Catch ue As UsrDefException
-            ue.dspMsg()
-            Throw ue
-        Catch ex As Exception
-            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
-        End Try
-    End Sub
-
-    Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
-        _parentForm.Enabled = True
-        _parentForm.Show()
-        Me.Dispose()
-    End Sub
-
+    '画面表示時
     Private Sub User_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        Dim dtToday As String = UtilClass.formatDatetime(DateTime.Now)
 
         createCombobox()
         customsLangKbnCombobox()
@@ -189,9 +95,7 @@ Public Class User
             Label8.Text = "Language"
             LblPassword.Text = "Password"
             Label26.Text = "(Non-Overlapping string)"
-            Label27.Text = "(0:Valid 1:Disable)"
-            Label9.Text = "(0:Common 1:Management)"
-            Label1.Text = "(JPN:Japanese ENG:English)"
+            LblConfirmPassword.Text = "ConfirmPassword"
 
             BtnRegistration.Text = "Registration"
             BtnBack.Text = "Back"
@@ -199,12 +103,23 @@ Public Class User
         End If
 
         If _status = CommonConst.STATUS_EDIT Then
-            LblPassword.Visible = False
-            TxtPassword.Visible = False
+
+            '一般権限ユーザーは以下操作不可
+            If frmC01F10_Login.loginValue.Auth = CommonConst.Auth_KBN_GENERAL Then
+                LblPassword.Visible = False
+                TxtPassword.Visible = False
+                LblConfirmPassword.Visible = False
+                TxtConfirmPassword.Visible = False
+
+                cmbInvalidFlag.Enabled = False
+                cmAuthority.Enabled = False
+            End If
+
+            TxtUserId.Enabled = False
 
             Dim Sql As String = ""
 
-            Sql += "SELECT 会社コード, ユーザＩＤ, 氏名, 略名, 備考, 無効フラグ, 権限, 言語, 更新者, 更新日 "
+            Sql = "SELECT 会社コード, ユーザＩＤ, 氏名, 略名, 備考, 無効フラグ, 権限, 言語, 更新者, 更新日 "
             Sql += "FROM public.m02_user "
             Sql += "WHERE 会社コード ='" & _companyCode & "'"
             Sql += " AND ユーザＩＤ ='" & _userId & "'"
@@ -253,7 +168,266 @@ Public Class User
                 customsLangKbnCombobox(ds.Tables(RS).Rows(0)("言語"))
             End If
 
+            Sql = "SELECT "
+            Sql += "   パスワード "        'パスワード
+            Sql += "  , 世代番号 "         '世代番号
+            Sql += " FROM m03_pswd "
+            Sql += " where 適用開始日 <= '" & dtToday & "'"
+            Sql += "   and 適用終了日 >= '" & dtToday & "'"
+            Sql += "   and 会社コード = '" & _db.rmSQ(frmC01F10_Login.loginValue.BumonCD) & "'"
+            Sql += "   and ユーザＩＤ = '" & _db.rmSQ(_userId) & "'"
+            Dim ds2 = _db.selectDB(Sql, RS, reccnt)
+
+            If ds2.Tables(RS).Rows.Count > 0 Then
+
+                If ds2.Tables(RS).Rows(0)("世代番号") IsNot DBNull.Value Then
+                    TxtGeneration.Text = ds2.Tables(RS).Rows(0)("世代番号")
+                End If
+            End If
+
         End If
+    End Sub
+
+    '登録ボタン押下時
+    Private Sub BtnRegistration_Click(sender As Object, e As EventArgs) Handles BtnRegistration.Click
+
+        '項目チェック
+        Dim strMessage As String = ""    'メッセージ本文
+        Dim strMessageTitle As String = ""      'メッセージタイトル
+        ''ユーザＩＤは必須
+        If TxtUserId.Text = "" Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+                strMessage = "Please enter User ID. "
+                strMessageTitle = "User ID Error"
+            Else
+                strMessage = "ユーザＩＤを入力してください。"
+                strMessageTitle = "ユーザＩＤ入力エラー"
+            End If
+            Dim result As DialogResult = MessageBox.Show(strMessage, strMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Exit Sub
+        End If
+
+        '登録処理ここから
+        Dim dtToday As String = UtilClass.formatDatetime(DateTime.Now)
+        Try
+            Dim Sql As String = ""
+
+            '登録モード
+            If _status = CommonConst.STATUS_ADD Then
+
+                Sql = "INSERT INTO Public.m02_user("
+                Sql += "会社コード, ユーザＩＤ, 氏名, 略名, 備考, 無効フラグ, 権限, 言語, 更新者, 更新日)"
+                Sql += "VALUES("
+                Sql += " '" & frmC01F10_Login.loginValue.BumonCD & "'"  '会社コード
+                Sql += ", '" & TxtUserId.Text & "'"         'ユーザＩＤ
+                Sql += ", '" & TxtName.Text & "'"           '氏名
+                Sql += ", '" & TxtShortName.Text & "'"      '略名
+                Sql += ", '" & TxtRemarks.Text & "'"        '備考
+                Sql += ", " & cmbInvalidFlag.SelectedValue '無効フラグ
+                Sql += ", " & cmAuthority.SelectedValue '権限
+                Sql += ", '" & cmLangage.SelectedValue.ToString & "'"        '言語
+                Sql += ", '" & frmC01F10_Login.loginValue.TantoNM & "'"     '更新者
+                Sql += ", '" & dtToday & "'"                '更新日
+                Sql += " )"
+
+                _db.executeDB(Sql)
+
+                Sql = "INSERT INTO Public.m03_pswd"
+                Sql += "(会社コード, ユーザＩＤ, 世代番号, 適用開始日, 適用終了日, パスワード, パスワード変更方法, 有効期限, 更新者, 更新日)"
+                Sql += "VALUES("
+                Sql += " '" & frmC01F10_Login.loginValue.BumonCD & "'"      '会社コード
+                Sql += ", '" & TxtUserId.Text & "'"         'ユーザＩＤ
+                Sql += ", '1'"                              '世代番号
+                Sql += ", '" & dtToday & "'"                '適用開始日
+                Sql += ", '2099-12-31'"                     '適用終了日
+                Sql += ", '" & TxtPassword.Text & "'"       'パスワード
+                Sql += ", 1"                                'パスワード変更方法
+                Sql += ", '2099-12-31'"                     '有効期限
+                Sql += ", '" & frmC01F10_Login.loginValue.TantoNM & "'"     '更新者
+                Sql += ", '" & dtToday & "'"                '更新日
+                Sql += " )"
+
+                _db.executeDB(Sql)
+
+            Else
+                '編集モード
+
+                Sql = "UPDATE Public.m02_user "
+                Sql += "SET "
+                Sql += " ユーザＩＤ = '" & _userId & "'"
+                Sql += " , 氏名 = '" & TxtName.Text & "'"
+                Sql += " , 略名 = '" & TxtShortName.Text & "'"
+
+                Sql += " , 備考 = '" & TxtRemarks.Text & "'"
+                Sql += " , 無効フラグ = " & cmbInvalidFlag.SelectedValue.ToString
+                Sql += " , 権限 = " & cmAuthority.SelectedValue
+                Sql += " , 言語 = '" & cmLangage.SelectedValue.ToString & "'"
+                Sql += " , 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+                Sql += " , 更新日 = '" & dtToday & "'"
+                Sql += "WHERE 会社コード ='" & _companyCode & "'"
+                Sql += " AND ユーザＩＤ ='" & _userId & "' "
+                _db.executeDB(Sql)
+
+
+                If TxtPassword.Text IsNot "" Then
+                    Try
+
+                        '入力チェック---------------------------------------------------------------
+                        '1)	パスワード入力チェック
+                        Try
+                            Call checkInput()
+                        Catch lex As UsrDefException
+                            lex.dspMsg()
+                            Exit Sub
+                        End Try
+
+                        '以前使用したものかどうかはチェックしない
+                        '
+                        ''2)パスワードチェック
+                        ''画面入力値をもとに、パスワードマスタとの整合性チェックを行う。
+                        ''・検索キー：　IF)会社コード、IF)ユーザID、画面)パスワード
+                        '''   IF)世代番号 - 10 よりも大（過去10世代と重複しない）
+                        'Sql = "SELECT count(*) as 件数"
+                        'Sql += " FROM m03_pswd "
+                        'Sql += " WHERE "
+                        'Sql += "    会社コード = '" & _db.rmSQ(frmC01F10_Login.loginValue.BumonCD) & "'"
+                        'Sql += "   and ユーザＩＤ = '" & _db.rmSQ(_userId) & "'"
+                        'Sql += "   and パスワード = '" & _db.rmSQ(TxtPassword.Text) & "'"
+                        'Sql += "   and 世代番号 > " & _db.rmSQ(TxtGeneration.Text) - 10
+                        'Dim reccnt As Integer = 0
+                        'Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+                        ''①　該当するレコードが存在する場合
+                        ''以前に使用されたパスワードです。
+                        ''→　入力状態に戻る
+                        'If _db.rmNullInt(ds.Tables(RS).Rows(0)("件数")) > 0 Then
+                        '    _msgHd.dspMSG("ReusePasswd", CommonConst.LANG_KBN_JPN)
+                        '    TxtPassword.Focus()
+                        '    Exit Sub
+                        'End If
+
+                        Dim currentdateCnt As Integer = 0
+
+                        '運用開始日=システム日付のデータ件数を取得
+                        'sql編集
+                        Sql = "SELECT count(*) 件数"
+                        Sql += " FROM"
+                        Sql += " m03_pswd"
+                        Sql += " WHERE"
+                        Sql += "       会社コード = '" & _db.rmSQ(frmC01F10_Login.loginValue.BumonCD) & "'"
+                        Sql += "   AND ユーザＩＤ = '" & _db.rmSQ(_userId) & "'"
+                        Sql += "   AND 適用開始日 = current_date "
+
+                        Dim iRecCnt As Integer = 0
+                        'sql発行
+                        Dim oDataSet As DataSet = _db.selectDB(Sql, RS, iRecCnt)    '抽出結果をDSへ格納
+                        currentdateCnt = _db.rmNullInt(oDataSet.Tables(RS).Rows(0)("件数"))
+
+                        'パスワードマスタ更新
+                        '運用開始日=システム日付のデータ件数が存在していない場合
+                        If currentdateCnt = 0 Then
+                            '適用終了日を（システム日付-1）で更新
+                            Sql = "UPDATE m03_pswd"
+                            Sql += " SET"
+                            Sql += "  適用終了日 = current_date - 1"                                      '適用終了日
+                            Sql += " ,更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"                         '更新者
+                            Sql += " ,更新日 = current_timestamp"                                         '更新日
+                            Sql += " WHERE 会社コード = '" & _db.rmSQ(frmC01F10_Login.loginValue.BumonCD) & "'"     '会社コード
+                            Sql += "   AND ユーザＩＤ = '" & _db.rmSQ(_userId) & "'"                      'ユーザＩＤ
+                            Sql += "   AND 適用終了日 = (SELECT max(適用終了日) FROM m03_pswd "
+                            Sql += "                     WHERE 会社コード = '" & _db.rmSQ(frmC01F10_Login.loginValue.BumonCD) & "'"     '会社コード
+                            Sql += "                     AND ユーザＩＤ = '" & _db.rmSQ(_userId) & "')"                      'ユーザＩＤ
+
+                            'sql発行
+                            _db.executeDB(Sql)
+                            '運用開始日=システム日付のデータ件数が存在している場合
+                        Else
+                            '適用終了日をシステム日付で更新
+                            Sql = "UPDATE m03_pswd"
+                            Sql += " SET"
+                            Sql += "  適用終了日 = current_date"                                          '適用終了日
+                            Sql += " ,更新者 = '" & _db.rmSQ(frmC01F10_Login.loginValue.TantoNM) & "'"           '更新者
+                            Sql += " ,更新日 = current_timestamp"                                         '更新日
+                            Sql += " WHERE 会社コード = '" & _db.rmSQ(frmC01F10_Login.loginValue.BumonCD) & "'"     '会社コード
+                            Sql += "   AND ユーザＩＤ = '" & _db.rmSQ(frmC01F10_Login.loginValue.TantoCD) & "'"                      'ユーザＩＤ
+                            Sql += "   AND 適用終了日 = (SELECT max(適用終了日) FROM m03_pswd "
+                            Sql += "                     WHERE 会社コード = '" & _db.rmSQ(frmC01F10_Login.loginValue.BumonCD) & "'"     '会社コード
+                            Sql += "                     AND ユーザＩＤ = '" & _db.rmSQ(_userId) & "')"                      'ユーザＩＤ
+
+                            'sql発行
+                            _db.executeDB(Sql)
+
+                        End If
+
+                        'レコード追加
+                        Sql = "INSERT INTO m03_pswd ( "
+                        Sql += "    会社コード "
+                        Sql += "  , ユーザＩＤ "
+                        Sql += "  , 適用開始日 "
+                        Sql += "  , 適用終了日 "
+                        Sql += "  , パスワード "
+                        Sql += "  , パスワード変更方法 "
+                        Sql += "  , 世代番号 "
+                        Sql += "  , 有効期限 "
+                        Sql += "  , 更新者 "
+                        Sql += "  , 更新日 "
+                        Sql += ") VALUES ( "
+                        Sql += "    '" & _db.rmSQ(frmC01F10_Login.loginValue.BumonCD) & "' "       '会社コード
+                        Sql += "  , '" & _db.rmSQ(_userId) & "' "       'ユーザＩＤ
+                        Sql += "  , current_date "     '運用開始日
+                        Sql += "  , '2099-12-31' "     '運用終了日
+                        Sql += "  , '" & _db.rmSQ(TxtPassword.Text) & "' "       '新パスワード     ★暗号化予定★
+                        Sql += "  , 1 "                'パスワード変更方法　固定値"1"（画面変更）
+                        Sql += "  , " & _db.rmSQ(frmC01F10_Login.loginValue.Generation) + 1           '世代番号
+                        Sql += "  , '2099-12-31' "     '有効期限
+                        Sql += "  , '" & _db.rmSQ(frmC01F10_Login.loginValue.TantoNM) & "' "        '更新者
+                        Sql += "  , current_timestamp "                                  '更新日
+                        Sql += ") "
+                        _db.executeDB(Sql)
+
+                        '更新完了メッセージ
+                        _msgHd.dspMSG("completePWChanged", CommonConst.LANG_KBN_JPN)
+
+
+                        ''「連携処理一覧」画面起動
+                        'Dim openForm As Form = Nothing
+                        'openForm = New frmC01F30_Menu(_msgHd, _langHd, _db)
+                        'openForm.Show()
+                        Me.Close()
+                        _parentForm.Enabled = True
+
+                    Catch ue As UsrDefException
+                        ue.dspMsg()
+                        Throw ue
+                    Catch ex As Exception
+                        'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
+                        Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
+                    End Try
+                End If
+
+
+
+            End If
+
+
+            _parentForm.Enabled = True
+            _parentForm.Show()
+            Me.Dispose()
+
+        Catch ue As UsrDefException
+            ue.dspMsg()
+            Throw ue
+        Catch ex As Exception
+            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
+            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
+        End Try
+    End Sub
+
+    '戻るボタン押下時
+    Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
+        _parentForm.Enabled = True
+        _parentForm.Show()
+        Me.Dispose()
     End Sub
 
     '有効無効のコンボボックスを作成
@@ -341,6 +515,36 @@ Public Class User
             cmAuthority.SelectedValue = prmVal
         Else
             cmAuthority.SelectedValue = CommonConst.Auth_KBN_GENERAL
+        End If
+
+    End Sub
+
+    '------------------------------------------------------------------------------------------------------
+    '   入力チェック
+    '------------------------------------------------------------------------------------------------------
+    Private Sub checkInput()
+
+        '新パスワード
+        If "".Equals(TxtPassword.Text) Then
+
+            '「新パスワード」を入力してください。
+            Throw New UsrDefException(_msgHd.dspMSG("noInputNewPasswordError", frmC01F10_Login.loginValue.Language))
+
+        End If
+
+        '確認用
+        If "".Equals(TxtConfirmPassword.Text) Then
+
+            '「確認用パスワード」を入力してください。
+            Throw New UsrDefException(_msgHd.dspMSG("noInputConfirmationError", frmC01F10_Login.loginValue.Language))
+
+        End If
+
+        '新パスワードと確認用パスワードの一致確認
+        If Not TxtPassword.Text.Equals(TxtConfirmPassword.Text) Then
+            '「新パスワード」と「確認用パスワード」が不一致です。
+            Throw New UsrDefException(_msgHd.dspMSG("noInputPasswordVotEqualError", frmC01F10_Login.loginValue.Language))
+
         End If
 
     End Sub

@@ -227,6 +227,7 @@ Public Class frmC01F10_Login
                 _loginVal.Passwd = _db.rmNullStr(txtPasswd.Text)                'パスワード
                 _loginVal.Generation = _db.rmNullStr(ds2.Tables(RS).Rows(0)("世代番号"))                '世代番号
                 _loginVal.Language = _db.rmNullStr(ds.Tables(RS).Rows(0)("言語"))                '言語
+                _loginVal.Auth = _db.rmNullStr(ds.Tables(RS).Rows(0)("権限"))               '権限
                 '未実装　BKUPサーバ接続有無（バックアップサーバ接続時:"Y"、以外:"N"）
 
 
@@ -473,13 +474,14 @@ Public Class frmC01F10_Login
                     'ログイン画面から、次の項目を次処理に受け渡す。	
                     '・受け渡し項目：会社コード、会社略称、ユーザID、社員略名、BKUPサーバ接続有無（バックアップサーバ接続時:"Y"、以外:"N"）、世代番号（パスワード）
 
-                    _loginVal.BumonCD = _db.rmNullStr(comName)     '会社コード
-                    _loginVal.BumonNM = _db.rmNullStr(comName)              '会社略称
-                    _loginVal.TantoCD = _db.rmNullStr(txtTanto.Text)                'ユーザＩＤ
-                    _loginVal.TantoNM = _db.rmNullStr(ds.Tables(RS).Rows(0)("略名"))                '社員略名
-                    _loginVal.Passwd = _db.rmNullStr(txtPasswd.Text)                'パスワード
-                    _loginVal.Generation = _db.rmNullStr(ds2.Tables(RS).Rows(0)("世代番号"))                '世代番号
-                    _loginVal.Language = _db.rmNullStr(ds.Tables(RS).Rows(0)("言語"))                '言語
+                    _loginVal.BumonCD = _db.rmNullStr(comName)                                  '会社コード
+                    _loginVal.BumonNM = _db.rmNullStr(comName)                                  '会社略称
+                    _loginVal.TantoCD = _db.rmNullStr(txtTanto.Text)                            'ユーザＩＤ
+                    _loginVal.TantoNM = _db.rmNullStr(ds.Tables(RS).Rows(0)("略名"))            '社員略名
+                    _loginVal.Passwd = _db.rmNullStr(txtPasswd.Text)                            'パスワード
+                    _loginVal.Generation = _db.rmNullStr(ds2.Tables(RS).Rows(0)("世代番号"))    '世代番号
+                    _loginVal.Language = _db.rmNullStr(ds.Tables(RS).Rows(0)("言語"))           '言語
+                    _loginVal.Auth = _db.rmNullStr(ds.Tables(RS).Rows(0)("権限"))               '権限
                     '未実装　BKUPサーバ接続有無（バックアップサーバ接続時:"Y"、以外:"N"）
 
 
