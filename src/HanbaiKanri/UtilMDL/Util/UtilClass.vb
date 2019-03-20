@@ -928,7 +928,8 @@ Public Class UtilClass
         If prmSql IsNot Nothing Then
             sql = sql.Replace("'"c, "''") 'シングルクォーテーションを置換
 
-            Return Regex.Escape(sql)
+            'Return Regex.Escape(sql)
+            Return sql
 
         End If
 
