@@ -210,6 +210,8 @@ Public Class Ordering
         DgvItemList.Columns.Insert(14, column3)
         CbShippedBy.SelectedIndex = 0
 
+        createWarehouseCombobox() '倉庫コンボボックス
+
         '翻訳
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
             LblPurchaseNo.Text = "PurchaseOrderNo"
@@ -251,6 +253,7 @@ Public Class Ordering
             LblItemCount.Text = "ItemCount"
             LblMethod.Text = "ShippingMethod"
             LblShipDate.Text = "ShipDate"
+            LblWarehouse.Text = "Warehouse"
 
             LblPurchaseAmount.Text = "PurchaseOrderAmount"
             LblPurchaseAmount.Size = New Size(180, 23)
@@ -367,6 +370,7 @@ Public Class Ordering
             TxtPurchaseRemark.Enabled = False
             CbShippedBy.Enabled = False
             DtpShippedDate.Enabled = False
+            CmWarehouse.Enabled = False
 
             BtnInsert.Visible = False
             BtnUp.Visible = False
@@ -461,6 +465,9 @@ Public Class Ordering
                 DtpShippedDate.MinDate = dsHattyu.Tables(RS).Rows(0)("出荷日")
             End If
             DtpShippedDate.Value = dsHattyu.Tables(RS).Rows(0)("出荷日")
+        End If
+        If dsHattyu.Tables(RS).Rows(0)("倉庫コード") IsNot DBNull.Value Then
+            CmWarehouse.SelectedIndex = dsHattyu.Tables(RS).Rows(0)("倉庫コード")
         End If
 
         Sql = "SELECT t21.*"
@@ -890,10 +897,12 @@ Public Class Ordering
                 Sql = "INSERT INTO "
                 Sql += "Public."
                 Sql += "t20_hattyu("
-                Sql += "会社コード, 発注番号, 発注番号枝番, 客先番号, 受注番号, 受注番号枝番, 見積番号, 見積番号枝番, 得意先コード, 得意先名, 得意先郵便番号,"
-                Sql += "得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 仕入先コード, 仕入先名, 仕入先郵便番号, 仕入先住所,"
-                Sql += "仕入先電話番号, 仕入先ＦＡＸ, 仕入先担当者役職, 仕入先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額,仕入金額, 粗利額, 営業担当者,"
-                Sql += "入力担当者, 備考, 見積備考, ＶＡＴ, ＰＰＨ, 受注日, 発注日, 登録日, 更新日, 更新者, 取消区分, 出荷方法, 出荷日, 営業担当者コード, 入力担当者コード)"
+                Sql += "会社コード, 発注番号, 発注番号枝番, 客先番号, 受注番号, 受注番号枝番, 見積番号, 見積番号枝番"
+                Sql += ", 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ"
+                Sql += ", 得意先担当者役職, 得意先担当者名, 仕入先コード, 仕入先名, 仕入先郵便番号, 仕入先住所"
+                Sql += ", 仕入先電話番号, 仕入先ＦＡＸ, 仕入先担当者役職, 仕入先担当者名, 見積日, 見積有効期限"
+                Sql += ", 支払条件, 見積金額,仕入金額, 粗利額, 営業担当者,入力担当者, 備考, 見積備考, ＶＡＴ, ＰＰＨ"
+                Sql += ", 受注日, 発注日, 登録日, 更新日, 更新者, 取消区分, 出荷方法, 出荷日, 営業担当者コード, 入力担当者コード, 倉庫コード)"
 
                 Sql += " VALUES('"
 
@@ -990,6 +999,8 @@ Public Class Ordering
                 Sql += TxtSales.Tag '営業担当者コード
                 Sql += "', '"
                 Sql += frmC01F10_Login.loginValue.TantoCD '入力担当者コード
+                Sql += "', '"
+                Sql += CmWarehouse.SelectedIndex.ToString '倉庫コード
                 Sql += "') "
 
                 _db.executeDB(Sql)
@@ -1435,6 +1446,35 @@ Public Class Ordering
         If DtpPurchaseDate.Value.ToString("yyyyMMdd") > DtpShippedDate.Value.ToString("yyyyMMdd") Then
             DtpShippedDate.MinDate = DtpPurchaseDate.Value
             DtpShippedDate.Value = DtpPurchaseDate.Value
+        End If
+
+    End Sub
+
+    '倉庫のコンボボックスを作成
+    '編集モードの時は値を渡してセットさせる
+    Private Sub createWarehouseCombobox(Optional ByRef prmVal As String = "")
+        CmWarehouse.DisplayMember = "Text"
+        CmWarehouse.ValueMember = "Value"
+
+        Dim Sql As String = " AND 無効フラグ = '" & CommonConst.FLAG_ENABLED & "'"
+
+        Dim ds As DataSet = getDsData("m20_warehouse", Sql)
+
+        Dim tb As New DataTable
+        tb.Columns.Add("Text", GetType(String))
+        tb.Columns.Add("Value", GetType(String))
+
+        For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+            tb.Rows.Add(ds.Tables(RS).Rows(i)("名称"), ds.Tables(RS).Rows(i)("倉庫コード"))
+
+        Next
+
+        CmWarehouse.DataSource = tb
+
+        If prmVal IsNot "" Then
+            CmWarehouse.SelectedIndex = prmVal
+        Else
+            CmWarehouse.SelectedValue = 1
         End If
 
     End Sub

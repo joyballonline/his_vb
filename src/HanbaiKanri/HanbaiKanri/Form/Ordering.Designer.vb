@@ -96,6 +96,8 @@ Partial Class Ordering
         Me.LblMethod = New System.Windows.Forms.Label()
         Me.DtpShippedDate = New System.Windows.Forms.DateTimePicker()
         Me.LblShipDate = New System.Windows.Forms.Label()
+        Me.LblWarehouse = New System.Windows.Forms.Label()
+        Me.CmWarehouse = New System.Windows.Forms.ComboBox()
         CType(Me.DgvItemList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -825,10 +827,34 @@ Partial Class Ordering
         Me.LblShipDate.Text = "出荷日"
         Me.LblShipDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'LblWarehouse
+        '
+        Me.LblWarehouse.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblWarehouse.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblWarehouse.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblWarehouse.Location = New System.Drawing.Point(545, 244)
+        Me.LblWarehouse.Name = "LblWarehouse"
+        Me.LblWarehouse.Size = New System.Drawing.Size(110, 23)
+        Me.LblWarehouse.TabIndex = 311
+        Me.LblWarehouse.Text = "倉庫"
+        Me.LblWarehouse.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'CmWarehouse
+        '
+        Me.CmWarehouse.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.CmWarehouse.FormattingEnabled = True
+        Me.CmWarehouse.Items.AddRange(New Object() {"RegularShip", "DHL", "Air", "Ship"})
+        Me.CmWarehouse.Location = New System.Drawing.Point(661, 244)
+        Me.CmWarehouse.Name = "CmWarehouse"
+        Me.CmWarehouse.Size = New System.Drawing.Size(200, 23)
+        Me.CmWarehouse.TabIndex = 310
+        '
         'Ordering
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.LblWarehouse)
+        Me.Controls.Add(Me.CmWarehouse)
         Me.Controls.Add(Me.DtpShippedDate)
         Me.Controls.Add(Me.LblShipDate)
         Me.Controls.Add(Me.LblMethod)
@@ -959,4 +985,6 @@ Partial Class Ordering
     Friend WithEvents LblMethod As Label
     Friend WithEvents DtpShippedDate As DateTimePicker
     Friend WithEvents LblShipDate As Label
+    Friend WithEvents LblWarehouse As Label
+    Friend WithEvents CmWarehouse As ComboBox
 End Class
