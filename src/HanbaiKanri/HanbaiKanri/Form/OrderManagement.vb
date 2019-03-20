@@ -731,7 +731,7 @@ Public Class OrderManagement
             Sql3 += "', '"
             Sql3 += dsCymnHd.Tables(RS).Rows(0)("営業担当者コード").ToString '営業担当者コード
             Sql3 += "', '"
-            Sql3 += dsCymnHd.Tables(RS).Rows(0)("入力担当者コード").ToString '入力担当者コード
+            Sql3 += frmC01F10_Login.loginValue.TantoCD '入力担当者コード
             Sql3 += " ')"
 
             _db.executeDB(Sql3)
