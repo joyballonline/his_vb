@@ -147,7 +147,7 @@ Public Class Receipt
             BtnRegist.Visible = False
         Else
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-                LblMode.Text = "ReceiptInputMode"
+                LblMode.Text = "GoodsReceiptInputMode"
             Else
                 LblMode.Text = "入庫入力モード"
             End If
@@ -165,6 +165,7 @@ Public Class Receipt
             DgvPurchase.Columns.Add("仕入単価", "PurchaseUnitPrice")
             DgvPurchase.Columns.Add("仕入金額", "PurchaseAmount")
             DgvPurchase.Columns.Add("発注残数", "NumberOfOrderRemaining")
+            DgvPurchase.Columns.Add("未入庫数", "NoGoodsReceiptQntity")
             DgvPurchase.Columns.Add("更新日", "UpdateDate")
         Else
             DgvPurchase.Columns.Add("明細", "明細")
@@ -177,6 +178,7 @@ Public Class Receipt
             DgvPurchase.Columns.Add("仕入単価", "仕入単価")
             DgvPurchase.Columns.Add("仕入金額", "仕入金額")
             DgvPurchase.Columns.Add("発注残数", "発注残数")
+            DgvPurchase.Columns.Add("未入庫数", "未入庫数")
             DgvPurchase.Columns.Add("更新日", "更新日")
         End If
 
@@ -185,6 +187,7 @@ Public Class Receipt
         DgvPurchase.Columns("仕入単価").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvPurchase.Columns("仕入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvPurchase.Columns("発注残数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvPurchase.Columns("未入庫数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvPurchase.Columns("更新日").Visible = False
 
         '入庫済みエリア
@@ -295,7 +298,7 @@ Public Class Receipt
             Dim dsNyukodt As DataSet = _db.selectDB(Sql, RS, reccnt)
 
             Sql = " SELECT t21.メーカー, t21.品名, t21.型式, t21.発注数量, t21.単位, t21.仕入数量, t21.仕入値, t21.仕入金額"
-            Sql += ", t21.発注残数, t21.行番号, t21.仕入区分, t21.仕入先名, t21.備考, t20.取消区分, t20.更新日 "
+            Sql += ", t21.発注残数, t21.未入庫数, t21.行番号, t21.仕入区分, t21.仕入先名, t21.備考, t20.取消区分, t20.更新日 "
             Sql += " FROM "
             Sql += " t21_hattyu t21"
             Sql += " INNER JOIN t20_hattyu t20 ON "
@@ -332,6 +335,7 @@ Public Class Receipt
                 DgvPurchase.Rows(i).Cells("仕入単価").Value = dsHattyudt.Tables(RS).Rows(i)("仕入値")
                 DgvPurchase.Rows(i).Cells("仕入金額").Value = dsHattyudt.Tables(RS).Rows(i)("仕入金額")
                 DgvPurchase.Rows(i).Cells("発注残数").Value = dsHattyudt.Tables(RS).Rows(i)("発注残数")
+                DgvPurchase.Rows(i).Cells("未入庫数").Value = dsHattyudt.Tables(RS).Rows(i)("未入庫数")
                 DgvPurchase.Rows(i).Cells("更新日").Value = dsHattyudt.Tables(RS).Rows(i)("更新日")
             Next
 
@@ -428,6 +432,25 @@ Public Class Receipt
             'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
             Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
         End Try
+    End Sub
+
+    'セルの値が変更されたら
+    Private Sub CellValueChanged(ByVal sender As Object,
+    ByVal e As DataGridViewCellEventArgs) Handles DgvAdd.CellValueChanged
+
+        Dim PurchaseTotal As Integer = 0
+
+        'ヘッダー以外だったら
+        If e.RowIndex > -1 Then
+
+            '各項目の属性チェック
+            If Not IsNumeric(DgvAdd.Rows(e.RowIndex).Cells("入庫数量").Value) And (DgvAdd.Rows(e.RowIndex).Cells("入庫数量").Value IsNot Nothing) Then
+                _msgHd.dspMSG("IsNotNumeric", frmC01F10_Login.loginValue.Language)
+                DgvAdd.Rows(e.RowIndex).Cells("入庫数量").Value = 0
+                Exit Sub
+            End If
+        End If
+
     End Sub
 
     '戻るボタン押下時
