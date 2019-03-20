@@ -133,6 +133,7 @@ Public Class Cymn
 
         DgvItemList.Columns.Insert(25, column2)
 
+        createWarehouseCombobox() '倉庫コンボボックス
 
         Dim SqlSaiban As String = ""
         SqlSaiban += "SELECT "
@@ -228,8 +229,8 @@ Public Class Cymn
         TxtFax.Text = ds1.Tables(RS).Rows(0)("得意先ＦＡＸ").ToString
         TxtSales.Tag = ds1.Tables(RS).Rows(0)("営業担当者コード").ToString
         TxtSales.Text = ds1.Tables(RS).Rows(0)("営業担当者").ToString
-        TxtInput.Tag = ds1.Tables(RS).Rows(0)("入力担当者コード").ToString
-        TxtInput.Text = ds1.Tables(RS).Rows(0)("入力担当者").ToString
+        TxtInput.Tag = frmC01F10_Login.loginValue.TantoCD
+        TxtInput.Text = frmC01F10_Login.loginValue.TantoNM
         TxtPaymentTerms.Text = ds1.Tables(RS).Rows(0)("支払条件").ToString
         TxtQuoteRemarks.Text = ds1.Tables(RS).Rows(0)("備考").ToString
         TxtVat.Text = ds1.Tables(RS).Rows(0)("ＶＡＴ").ToString
@@ -393,6 +394,7 @@ Public Class Cymn
             LblGrossProfit.Text = "GrossMargin"
             LblGrossProfit.Size = New Size(180, 23)
             LblGrossProfit.Location = New Point(923, 480)
+            LblWarehouse.Text = "Warehouse"
 
             BtnRegistration.Text = "Registrartion"
             BtnBack.Text = "Back"
@@ -767,7 +769,7 @@ Public Class Cymn
                 Sql3 += ", 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 仕入先コード, 仕入先名"
                 Sql3 += ", 仕入先郵便番号, 仕入先住所, 仕入先電話番号, 仕入先ＦＡＸ, 仕入先担当者役職, 仕入先担当者名, 見積日, 見積有効期限"
                 Sql3 += ", 支払条件, 見積金額,仕入金額, 粗利額, 営業担当者, 営業担当者コード, 入力担当者, 入力担当者コード, 備考, 見積備考"
-                Sql3 += ", ＶＡＴ, ＰＰＨ, 受注日, 発注日, 登録日, 更新日, 更新者, 取消区分)"
+                Sql3 += ", ＶＡＴ, ＰＰＨ, 受注日, 発注日, 登録日, 更新日, 更新者, 取消区分, 倉庫コード)"
                 Sql3 += " VALUES('"
                 Sql3 += CompanyCode '会社コード
                 Sql3 += "', '"
@@ -860,6 +862,8 @@ Public Class Cymn
                 Sql3 += frmC01F10_Login.loginValue.BumonCD '更新者
                 Sql3 += "', '"
                 Sql3 += "0" '取消区分
+                Sql3 += "', '"
+                Sql3 += CmWarehouse.SelectedValue.ToString '倉庫コード
                 Sql3 += " ')"
 
                 _db.executeDB(Sql3)
@@ -1066,5 +1070,34 @@ Public Class Cymn
 
         Return table
     End Function
+
+    '倉庫のコンボボックスを作成
+    '編集モードの時は値を渡してセットさせる
+    Private Sub createWarehouseCombobox(Optional ByRef prmVal As String = "")
+        CmWarehouse.DisplayMember = "Text"
+        CmWarehouse.ValueMember = "Value"
+
+        Dim Sql As String = " AND 無効フラグ = '" & CommonConst.FLAG_ENABLED & "'"
+
+        Dim ds As DataSet = getDsData("m20_warehouse", Sql)
+
+        Dim tb As New DataTable
+        tb.Columns.Add("Text", GetType(String))
+        tb.Columns.Add("Value", GetType(String))
+
+        For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+            tb.Rows.Add(ds.Tables(RS).Rows(i)("名称"), ds.Tables(RS).Rows(i)("倉庫コード"))
+
+        Next
+
+        CmWarehouse.DataSource = tb
+
+        If prmVal IsNot "" Then
+            CmWarehouse.SelectedIndex = prmVal
+        Else
+            CmWarehouse.SelectedValue = 1
+        End If
+
+    End Sub
 
 End Class
