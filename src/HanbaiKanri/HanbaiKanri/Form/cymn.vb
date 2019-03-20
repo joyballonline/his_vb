@@ -863,7 +863,11 @@ Public Class Cymn
                 Sql3 += "', '"
                 Sql3 += "0" '取消区分
                 Sql3 += "', '"
-                Sql3 += CmWarehouse.SelectedValue.ToString '倉庫コード
+                If CmWarehouse.SelectedIndex <> -1 Then
+                    Sql += CmWarehouse.SelectedValue.ToString '倉庫コード
+                Else
+                    Sql += "" '倉庫コード
+                End If
                 Sql3 += " ')"
 
                 _db.executeDB(Sql3)
