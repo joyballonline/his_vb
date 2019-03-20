@@ -217,6 +217,7 @@ Public Class GoodsIssue
                 DgvOrder.Columns.Add("売単価", "SellingPrice")
                 DgvOrder.Columns.Add("売上金額", "SalesAmount")
                 DgvOrder.Columns.Add("受注残数", "OrderRemainingAmount")
+                DgvOrder.Columns.Add("未出庫数", "NoShippedQntity")
                 DgvOrder.Columns.Add("更新日", "更新日")
             Else
                 DgvOrder.Columns.Add("明細", "明細")
@@ -229,6 +230,7 @@ Public Class GoodsIssue
                 DgvOrder.Columns.Add("売単価", "売単価")
                 DgvOrder.Columns.Add("売上金額", "売上金額")
                 DgvOrder.Columns.Add("受注残数", "受注残数")
+                DgvOrder.Columns.Add("未出庫数", "未出庫数")
                 DgvOrder.Columns.Add("更新日", "更新日")
             End If
 
@@ -237,6 +239,7 @@ Public Class GoodsIssue
             DgvOrder.Columns("売単価").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             DgvOrder.Columns("売上金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             DgvOrder.Columns("受注残数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            DgvOrder.Columns("未出庫数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             DgvOrder.Columns("更新日").Visible = False
 
             For i As Integer = 0 To dsCymndt.Tables(RS).Rows.Count - 1
@@ -250,6 +253,7 @@ Public Class GoodsIssue
                 DgvOrder.Rows(i).Cells("売単価").Value = dsCymndt.Tables(RS).Rows(i)("売単価")
                 DgvOrder.Rows(i).Cells("売上金額").Value = dsCymndt.Tables(RS).Rows(i)("売上金額")
                 DgvOrder.Rows(i).Cells("受注残数").Value = dsCymndt.Tables(RS).Rows(i)("受注残数")
+                DgvOrder.Rows(i).Cells("未出庫数").Value = dsCymndt.Tables(RS).Rows(i)("未出庫数")
                 DgvOrder.Rows(i).Cells("更新日").Value = dsCymndt.Tables(RS).Rows(i)("更新日")
             Next
 
@@ -423,6 +427,25 @@ Public Class GoodsIssue
 
     End Sub
 
+    'セルの値が変更されたら
+    Private Sub CellValueChanged(ByVal sender As Object,
+    ByVal e As DataGridViewCellEventArgs) Handles DgvAdd.CellValueChanged
+
+        Dim PurchaseTotal As Integer = 0
+
+        'ヘッダー以外だったら
+        If e.RowIndex > -1 Then
+
+            '各項目の属性チェック
+            If Not IsNumeric(DgvAdd.Rows(e.RowIndex).Cells("出庫数量").Value) And (DgvAdd.Rows(e.RowIndex).Cells("出庫数量").Value IsNot Nothing) Then
+                _msgHd.dspMSG("IsNotNumeric", frmC01F10_Login.loginValue.Language)
+                DgvAdd.Rows(e.RowIndex).Cells("出庫数量").Value = 0
+                Exit Sub
+            End If
+        End If
+
+    End Sub
+
     '戻るボタン押下時
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
         'Dim openForm As Form = Nothing
@@ -440,14 +463,6 @@ Public Class GoodsIssue
         Dim reccnt As Integer = 0
 
         Dim Sql As String = ""
-        ''Dim Sql2 As String = ""
-        ''Dim Sql3 As String = ""
-        ''Dim Sql4 As String = ""
-        ''Dim Sql5 As String = ""
-        ''Dim Sql6 As String = ""
-        'Dim Sql As String = ""
-        'Dim Sql As String = ""
-        ''Dim Sql9 As String = ""
 
         Sql = " AND "
         Sql += "受注番号 ILIKE '" & No & "'"
