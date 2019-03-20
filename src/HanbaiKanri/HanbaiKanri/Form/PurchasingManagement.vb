@@ -546,7 +546,7 @@ Public Class PurchasingManagement
         Sql3 += "t40_sirehd("
         Sql3 += "会社コード, 仕入番号, 発注番号, 発注番号枝番, 客先番号, 仕入先コード, 仕入先名, 仕入先郵便番号, 仕入先住所, 仕入先電話番号"
         Sql3 += ", 仕入先ＦＡＸ, 仕入先担当者役職, 仕入先担当者名, 支払条件, 仕入金額, 粗利額, 営業担当者, 入力担当者, 備考, 取消日, 取消区分"
-        Sql3 += ", ＶＡＴ, ＰＰＨ, 仕入日, 登録日, 更新日, 更新者, 支払予定日)"
+        Sql3 += ", ＶＡＴ, ＰＰＨ, 仕入日, 登録日, 更新日, 更新者, 支払予定日, 営業担当者コード, 入力担当者コード)"
         Sql3 += " VALUES('"
         Sql3 += ds1.Tables(RS).Rows(0)("会社コード").ToString '会社コード
         Sql3 += "', '"
@@ -607,6 +607,10 @@ Public Class PurchasingManagement
         Sql3 += Input '更新者
         Sql3 += "', '"
         Sql3 += UtilClass.strFormatDate(DtpPaymentDate.Text) '支払予定日
+        Sql3 += "', '"
+        Sql3 += ds1.Tables(RS).Rows(0)("営業担当者コード").ToString '営業担当者コード
+        Sql3 += "', '"
+        Sql3 += frmC01F10_Login.loginValue.TantoCD '入力担当者コード
         Sql3 += " ')"
 
         _db.executeDB(Sql3)
