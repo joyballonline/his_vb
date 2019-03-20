@@ -127,16 +127,12 @@ Public Class OrderManagement
             LblNo3.Visible = False
             LblOrder.Visible = False
             LblAdd.Visible = False
-            'LblOrderDate.Visible = False
-            'LblRemarks.Visible = False
-            'DtpOrderDate.Visible = False
             TxtCount1.Visible = False
             TxtCount2.Visible = False
             TxtCount3.Visible = False
-            'TxtRemarks.Visible = False
             DgvOrder.Visible = False
             DgvAdd.Visible = False
-            DgvHistory.ReadOnly = False
+            DgvHistory.ReadOnly = True
             LblHistory.Location = New Point(12, 82)
             DgvHistory.Location = New Point(12, 106)
             LblSalesDate.Location = New Point(172, 82)
@@ -153,6 +149,7 @@ Public Class OrderManagement
             DgvHistory.Size = New Point(1326, 400)
             BtnRegist.Visible = False
             DtpDepositDate.Enabled = False
+
         Else
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "SalesInputMode"
@@ -217,16 +214,11 @@ Public Class OrderManagement
             Sql3 += " t11.受注番号 = '" & No & "'"
             Sql3 += " AND "
             Sql3 += " t11.受注番号枝番 = '" & Suffix & "'"
-            Sql3 += " AND "
-            Sql3 += " t10.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
-
 
             Sql4 += "SELECT * FROM public.t30_urighd"
             Sql4 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
             Sql4 += " AND 受注番号 = '" & No & "'"
             Sql4 += " AND 受注番号枝番 = '" & Suffix & "'"
-            Sql4 += " AND "
-            Sql4 += " 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
 
             Dim reccnt As Integer = 0
             Dim ds1 As DataSet = _db.selectDB(Sql1, RS, reccnt)
@@ -376,6 +368,7 @@ Public Class OrderManagement
             DgvAdd.Columns("単位").ReadOnly = True
             DgvAdd.Columns("仕入先").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
             DgvAdd.Columns("仕入先").ReadOnly = True
+            DgvAdd.Columns("売単価").ReadOnly = True
 
             DgvAdd.Columns("仕入区分値").Visible = False
 
@@ -549,9 +542,10 @@ Public Class OrderManagement
                 Sql4 = "INSERT INTO "
                 Sql4 += "Public."
                 Sql4 += "t31_urigdt("
-                Sql4 += "会社コード, 売上番号, 売上番号枝番, 受注番号, 受注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 仕入先名, 仕入値"
-                Sql4 += ", 受注数量, 売上数量, 受注残数, 単位, 売単価, 売上金額, 粗利額, 粗利率, 間接費, リードタイム, 備考, 更新者, 更新日"
-                Sql4 += ", 仕入原価, 関税率, 関税額, 前払法人税率, 前払法人税額, 輸送費率, 輸送費額, 仕入金額, 見積単価, 見積金額)"
+                Sql4 += "会社コード, 売上番号, 売上番号枝番, 受注番号, 受注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式"
+                Sql4 += ", 仕入先名, 仕入値, 受注数量, 売上数量, 受注残数, 単位, 売単価, 売上金額, 粗利額, 粗利率, 間接費"
+                Sql4 += ", リードタイム, 備考, 更新者, 更新日, 仕入原価, 関税率, 関税額, 前払法人税率, 前払法人税額"
+                Sql4 += ", 輸送費率, 輸送費額, 仕入金額, 見積単価, 見積金額)"
                 Sql4 += " VALUES('"
                 Sql4 += dsCymndt.Tables(RS).Rows(i)("会社コード").ToString
                 Sql4 += "', '"
@@ -651,9 +645,11 @@ Public Class OrderManagement
             Sql3 = "INSERT INTO "
             Sql3 += "Public."
             Sql3 += "t30_urighd("
-            Sql3 += "会社コード, 売上番号, 売上番号枝番, 客先番号, 受注番号, 受注番号枝番, 見積番号, 見積番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所"
-            Sql3 += ", 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額, 売上金額, 粗利額, 営業担当者, 入力担当者, 備考"
-            Sql3 += ", 取消日, 取消区分, ＶＡＴ, ＰＰＨ, 受注日, 売上日, 入金予定日, 登録日, 更新日, 更新者, 仕入金額)"
+            Sql3 += "会社コード, 売上番号, 売上番号枝番, 客先番号, 受注番号, 受注番号枝番, 見積番号, 見積番号枝番"
+            Sql3 += ", 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職"
+            Sql3 += ", 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額, 売上金額, 粗利額, 営業担当者, 入力担当者"
+            Sql3 += ", 備考, 取消日, 取消区分, ＶＡＴ, ＰＰＨ, 受注日, 売上日, 入金予定日, 登録日, 更新日, 更新者, 仕入金額"
+            Sql3 += ", 営業担当者コード, 入力担当者コード)"
             Sql3 += " VALUES('"
             Sql3 += dsCymnHd.Tables(RS).Rows(0)("会社コード").ToString '会社コード
             Sql3 += "', '"
@@ -732,6 +728,10 @@ Public Class OrderManagement
             Sql3 += Input '更新者
             Sql3 += "', '"
             Sql3 += UtilClass.formatNumber(dsCymnHd.Tables(RS).Rows(0)("仕入金額").ToString) '仕入金額
+            Sql3 += "', '"
+            Sql3 += dsCymnHd.Tables(RS).Rows(0)("営業担当者コード").ToString '営業担当者コード
+            Sql3 += "', '"
+            Sql3 += dsCymnHd.Tables(RS).Rows(0)("入力担当者コード").ToString '入力担当者コード
             Sql3 += " ')"
 
             _db.executeDB(Sql3)
@@ -836,28 +836,10 @@ Public Class OrderManagement
                 Biilng() 'データ更新
             End If
 
-            'If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-            '    Dim result As DialogResult = MessageBox.Show("Create billing data?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2)
-            '    If result = DialogResult.Yes Then
-            '        Biilng()
-            '    End If
-            'Else
-            '    Dim result As DialogResult = MessageBox.Show("請求データを作成しますか？", "質問", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2)
-            '    If result = DialogResult.Yes Then
-            '        Biilng()
-            '    End If
-            'End If
-
-            'Dim openForm As Form = Nothing
-            'Dim Status As String = CommonConst.STATUS_SALES
-            'openForm = New OrderList(_msgHd, _db, _langHd, Status)
-            'openForm.Show()
-            'Me.Close()
-
+            '登録後は親画面（一覧）に戻る
             _parentForm.Enabled = True
             _parentForm.Show()
             Me.Dispose()
-
 
         Catch ex As Exception
 

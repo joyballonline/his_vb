@@ -411,11 +411,16 @@ Public Class OrderList
     Private Sub BtnOrderEdit_Click(sender As Object, e As EventArgs) Handles BtnOrderEdit.Click
         'グリッドに何もないときは次画面へ移動しない
         If Me.DgvCymnhd.RowCount = 0 Then
+            '操作できないアラートを出す
+            _msgHd.dspMSG("NonAction", frmC01F10_Login.loginValue.Language)
             Exit Sub
         End If
-        '実行できるデータがあるかチェック
-        If actionChk() = False Then
-            Return
+
+        '取消済みデータは取消操作不可能
+        If DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("取消").Value = CommonConst.CANCEL_KBN_DISABLED_TXT Then
+            '取消データは選択できないアラートを出す
+            _msgHd.dspMSG("cannotSelectTorikeshiData", frmC01F10_Login.loginValue.Language)
+            Exit Sub
         End If
 
         Dim RowIdx As Integer
@@ -434,11 +439,9 @@ Public Class OrderList
     Private Sub BtnOrderView_Click(sender As Object, e As EventArgs) Handles BtnOrderView.Click
         'グリッドに何もないときは次画面へ移動しない
         If Me.DgvCymnhd.RowCount = 0 Then
+            '操作できないアラートを出す
+            _msgHd.dspMSG("NonAction", frmC01F10_Login.loginValue.Language)
             Exit Sub
-        End If
-        '実行できるデータがあるかチェック
-        If actionChk() = False Then
-            Return
         End If
 
         Dim RowIdx As Integer
@@ -456,11 +459,16 @@ Public Class OrderList
     Private Sub BtnOrder_Click(sender As Object, e As EventArgs) Handles BtnSales.Click
         'グリッドに何もないときは次画面へ移動しない
         If Me.DgvCymnhd.RowCount = 0 Then
+            '操作できないアラートを出す
+            _msgHd.dspMSG("NonAction", frmC01F10_Login.loginValue.Language)
             Exit Sub
         End If
-        '実行できるデータがあるかチェック
-        If actionChk() = False Then
-            Return
+
+        '取消済みデータは取消操作不可能
+        If DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("取消").Value = CommonConst.CANCEL_KBN_DISABLED_TXT Then
+            '取消データは選択できないアラートを出す
+            _msgHd.dspMSG("cannotSelectTorikeshiData", frmC01F10_Login.loginValue.Language)
+            Exit Sub
         End If
 
         Dim RowIdx As Integer
@@ -476,11 +484,16 @@ Public Class OrderList
     Private Sub BtnReceipt_Click(sender As Object, e As EventArgs) Handles BtnGoodsIssue.Click
         'グリッドに何もないときは次画面へ移動しない
         If Me.DgvCymnhd.RowCount = 0 Then
+            '操作できないアラートを出す
+            _msgHd.dspMSG("NonAction", frmC01F10_Login.loginValue.Language)
             Exit Sub
         End If
-        '実行できるデータがあるかチェック
-        If actionChk() = False Then
-            Return
+
+        '取消済みデータは取消操作不可能
+        If DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("取消").Value = CommonConst.CANCEL_KBN_DISABLED_TXT Then
+            '取消データは選択できないアラートを出す
+            _msgHd.dspMSG("cannotSelectTorikeshiData", frmC01F10_Login.loginValue.Language)
+            Exit Sub
         End If
 
         Dim RowIdx As Integer
@@ -496,11 +509,9 @@ Public Class OrderList
     Private Sub BtnOrderCancel_Click(sender As Object, e As EventArgs) Handles BtnOrderCancel.Click
         'グリッドに何もないときは次画面へ移動しない
         If Me.DgvCymnhd.RowCount = 0 Then
+            '操作できないアラートを出す
+            _msgHd.dspMSG("NonAction", frmC01F10_Login.loginValue.Language)
             Exit Sub
-        End If
-        '実行できるデータがあるかチェック
-        If actionChk() = False Then
-            Return
         End If
 
         Dim dtNow As String = UtilClass.formatDatetime(DateTime.Now)
@@ -562,12 +573,18 @@ Public Class OrderList
     Private Sub BtnOrderClone_Click(sender As Object, e As EventArgs) Handles BtnOrderClone.Click
         'グリッドに何もないときは次画面へ移動しない
         If Me.DgvCymnhd.RowCount = 0 Then
+            '操作できないアラートを出す
+            _msgHd.dspMSG("NonAction", frmC01F10_Login.loginValue.Language)
             Exit Sub
         End If
-        '実行できるデータがあるかチェック
-        If actionChk() = False Then
-            Return
+
+        '取消済みデータは取消操作不可能
+        If DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("取消").Value = CommonConst.CANCEL_KBN_DISABLED_TXT Then
+            '取消データは選択できないアラートを出す
+            _msgHd.dspMSG("cannotSelectTorikeshiData", frmC01F10_Login.loginValue.Language)
+            Exit Sub
         End If
+
         Dim RowIdx As Integer
         RowIdx = Me.DgvCymnhd.CurrentCell.RowIndex
         Dim No As String = DgvCymnhd.Rows(RowIdx).Cells("受注番号").Value
@@ -585,14 +602,19 @@ Public Class OrderList
     '請求登録
     Private Sub BtnBill_Click(sender As Object, e As EventArgs) Handles BtnBill.Click
         'グリッドに何もないときは次画面へ移動しない
-        'グリッドに何もないときは次画面へ移動しない
         If Me.DgvCymnhd.RowCount = 0 Then
+            '操作できないアラートを出す
+            _msgHd.dspMSG("NonAction", frmC01F10_Login.loginValue.Language)
             Exit Sub
         End If
-        '実行できるデータがあるかチェック
-        If actionChk() = False Then
-            Return
+
+        '取消済みデータは取消操作不可能
+        If DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("取消").Value = CommonConst.CANCEL_KBN_DISABLED_TXT Then
+            '取消データは選択できないアラートを出す
+            _msgHd.dspMSG("cannotSelectTorikeshiData", frmC01F10_Login.loginValue.Language)
+            Exit Sub
         End If
+
         Dim RowIdx As Integer
         RowIdx = Me.DgvCymnhd.CurrentCell.RowIndex
         Dim No As String = DgvCymnhd.Rows(RowIdx).Cells("受注番号").Value

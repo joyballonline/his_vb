@@ -170,8 +170,7 @@ Public Class GoodsIssue
             Sql += "受注番号 ILIKE '" & No & "'"
             Sql += " AND "
             Sql += "受注番号枝番 ILIKE '" & Suffix & "'"
-            Sql += " AND "
-            Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '取消区分=0
+
 
             Dim dsCymnhd As DataSet = getDsData("t10_cymnhd", Sql)
 
@@ -187,8 +186,6 @@ Public Class GoodsIssue
             Sql += "t45.受注番号 ILIKE '" & No & "'"
             Sql += " AND "
             Sql += "t45.受注番号枝番 ILIKE '" & Suffix & "'"
-            Sql += " AND "
-            Sql += "t44.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '取消区分=0
             Sql += " ORDER BY t45.行番号"
 
             Dim dsShukodt As DataSet = _db.selectDB(Sql, RS, reccnt)
@@ -205,8 +202,6 @@ Public Class GoodsIssue
             Sql += "t11.受注番号 ILIKE '" & No & "'"
             Sql += " AND "
             Sql += "t11.受注番号枝番 ILIKE '" & Suffix & "'"
-            Sql += " AND "
-            Sql += "t10.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '取消区分=0
             Sql += " ORDER BY t11.行番号"
 
             Dim dsCymndt As DataSet = _db.selectDB(Sql, RS, reccnt)
