@@ -467,7 +467,7 @@ Public Class Ordering
             DtpShippedDate.Value = dsHattyu.Tables(RS).Rows(0)("出荷日")
         End If
         If dsHattyu.Tables(RS).Rows(0)("倉庫コード") IsNot DBNull.Value Then
-            CmWarehouse.SelectedIndex = dsHattyu.Tables(RS).Rows(0)("倉庫コード")
+            CmWarehouse.SelectedValue = dsHattyu.Tables(RS).Rows(0)("倉庫コード")
         End If
 
         Sql = "SELECT t21.*"
@@ -1000,7 +1000,13 @@ Public Class Ordering
                 Sql += "', '"
                 Sql += frmC01F10_Login.loginValue.TantoCD '入力担当者コード
                 Sql += "', '"
-                Sql += CmWarehouse.SelectedIndex.ToString '倉庫コード
+
+                If CmWarehouse.SelectedIndex <> -1 Then
+                    Sql += CmWarehouse.SelectedValue.ToString '倉庫コード
+                Else
+                    Sql += "" '倉庫コード
+                End If
+
                 Sql += "') "
 
                 _db.executeDB(Sql)
