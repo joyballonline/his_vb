@@ -766,6 +766,42 @@ Public Class DepositManagement
 
     End Sub
 
+    '入金入力セルの値が変更されたら
+    Private Sub DgvDepositCellValueChanged(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles DgvDeposit.CellValueChanged
+
+        Dim PurchaseTotal As Integer = 0
+
+        'ヘッダー以外だったら
+        If e.RowIndex > -1 Then
+
+            '各項目の属性チェック
+            If Not IsNumeric(DgvDeposit.Rows(e.RowIndex).Cells("入力入金額").Value) And (DgvDeposit.Rows(e.RowIndex).Cells("入力入金額").Value IsNot Nothing) Then
+                _msgHd.dspMSG("IsNotNumeric", frmC01F10_Login.loginValue.Language)
+                DgvDeposit.Rows(e.RowIndex).Cells("入力入金額").Value = 0
+                Exit Sub
+            End If
+        End If
+
+    End Sub
+
+    '請求情報セルの値が変更されたら
+    Private Sub DgvBillingInfoCellValueChanged(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles DgvBillingInfo.CellValueChanged
+
+        Dim PurchaseTotal As Integer = 0
+
+        'ヘッダー以外だったら
+        If e.RowIndex > -1 Then
+
+            '各項目の属性チェック
+            If Not IsNumeric(DgvBillingInfo.Rows(e.RowIndex).Cells("入金額").Value) And (DgvBillingInfo.Rows(e.RowIndex).Cells("入金額").Value IsNot Nothing) Then
+                _msgHd.dspMSG("IsNotNumeric", frmC01F10_Login.loginValue.Language)
+                DgvBillingInfo.Rows(e.RowIndex).Cells("入金額").Value = 0
+                Exit Sub
+            End If
+        End If
+
+    End Sub
+
     'param1：String テーブル名
     'param2：String 詳細条件
     'Return: DataSet

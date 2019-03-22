@@ -406,7 +406,7 @@ Public Class Payment
     End Sub
 
     '支払入力セルの値が変更されたら
-    Private Sub DgvHistoryCellValueChanged(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles DgvPayment.CellValueChanged
+    Private Sub DgvPaymentCellValueChanged(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles DgvPayment.CellValueChanged
 
         Dim PurchaseTotal As Integer = 0
 
@@ -424,7 +424,7 @@ Public Class Payment
     End Sub
 
     '買掛情報セルの値が変更されたら
-    Private Sub DgvAddCellValueChanged(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles DgvKikeInfo.CellValueChanged
+    Private Sub DgvKikeInfoCellValueChanged(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles DgvKikeInfo.CellValueChanged
 
         Dim PurchaseTotal As Integer = 0
 
