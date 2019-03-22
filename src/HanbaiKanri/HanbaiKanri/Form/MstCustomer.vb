@@ -136,6 +136,7 @@ Public Class MstCustomer
             Sql += "'"
             Sql += frmC01F10_Login.loginValue.BumonCD
             Sql += "'"
+            Sql += " order by 会社コード, 得意先コード "
 
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)

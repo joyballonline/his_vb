@@ -355,7 +355,11 @@ Public Class Customer
             btnRegistrarion.Text = "Registration"
             btnBack.Text = "Back"
         End If
+
         If _status = CommonConst.STATUS_EDIT Then
+
+            TxtCustomerCode.Enabled = False '編集不可
+
             Dim Sql As String = ""
             Sql += "SELECT "
             Sql += "会社コード, "
