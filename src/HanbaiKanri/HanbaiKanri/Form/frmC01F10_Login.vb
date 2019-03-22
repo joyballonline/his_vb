@@ -476,9 +476,9 @@ Public Class frmC01F10_Login
 
                     _loginVal.BumonCD = _db.rmNullStr(comName)                                  '会社コード
                     _loginVal.BumonNM = _db.rmNullStr(comName)                                  '会社略称
-                    _loginVal.TantoCD = _db.rmNullStr(txtTanto.Text)                            'ユーザＩＤ
+                    _loginVal.TantoCD = _db.rmNullStr(userPass)                            'ユーザＩＤ
                     _loginVal.TantoNM = _db.rmNullStr(ds.Tables(RS).Rows(0)("略名"))            '社員略名
-                    _loginVal.Passwd = _db.rmNullStr(txtPasswd.Text)                            'パスワード
+                    _loginVal.Passwd = _db.rmNullStr(userPass)                            'パスワード
                     _loginVal.Generation = _db.rmNullStr(ds2.Tables(RS).Rows(0)("世代番号"))    '世代番号
                     _loginVal.Language = _db.rmNullStr(ds.Tables(RS).Rows(0)("言語"))           '言語
                     _loginVal.Auth = _db.rmNullStr(ds.Tables(RS).Rows(0)("権限"))               '権限
