@@ -405,6 +405,42 @@ Public Class Payment
 
     End Sub
 
+    '支払入力セルの値が変更されたら
+    Private Sub DgvHistoryCellValueChanged(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles DgvPayment.CellValueChanged
+
+        Dim PurchaseTotal As Integer = 0
+
+        'ヘッダー以外だったら
+        If e.RowIndex > -1 Then
+
+            '各項目の属性チェック
+            If Not IsNumeric(DgvPayment.Rows(e.RowIndex).Cells("入力支払金額").Value) And (DgvPayment.Rows(e.RowIndex).Cells("入力支払金額").Value IsNot Nothing) Then
+                _msgHd.dspMSG("IsNotNumeric", frmC01F10_Login.loginValue.Language)
+                DgvPayment.Rows(e.RowIndex).Cells("入力支払金額").Value = 0
+                Exit Sub
+            End If
+        End If
+
+    End Sub
+
+    '買掛情報セルの値が変更されたら
+    Private Sub DgvAddCellValueChanged(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles DgvKikeInfo.CellValueChanged
+
+        Dim PurchaseTotal As Integer = 0
+
+        'ヘッダー以外だったら
+        If e.RowIndex > -1 Then
+
+            '各項目の属性チェック
+            If Not IsNumeric(DgvKikeInfo.Rows(e.RowIndex).Cells("支払金額").Value) And (DgvKikeInfo.Rows(e.RowIndex).Cells("支払金額").Value IsNot Nothing) Then
+                _msgHd.dspMSG("IsNotNumeric", frmC01F10_Login.loginValue.Language)
+                DgvKikeInfo.Rows(e.RowIndex).Cells("支払金額").Value = 0
+                Exit Sub
+            End If
+        End If
+
+    End Sub
+
     'param1：String 採番キー
     'param2：DateTime 登録日
     'Return: String 伝票番号
