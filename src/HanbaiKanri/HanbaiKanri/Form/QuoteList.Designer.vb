@@ -341,6 +341,7 @@ Partial Class QuoteList
         '
         'BtnCancel
         '
+        Me.BtnCancel.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnCancel.Location = New System.Drawing.Point(1360, 585)
         Me.BtnCancel.Name = "BtnCancel"
         Me.BtnCancel.Size = New System.Drawing.Size(165, 40)

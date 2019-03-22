@@ -129,15 +129,16 @@ Public Class QuoteList
 
             BtnOrder.Visible = True
             BtnOrder.Location = New Point(997, 509)
-        ElseIf _status = "PURCHASE_NEW" Then
-            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-                LblMode.Text = "NewPurchaseRegistrationMode"
-            Else
-                LblMode.Text = "仕入新規入力モード"
-            End If
+            '使用していない
+            'ElseIf _status = "PURCHASE_NEW" Then
+            '    If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+            '        LblMode.Text = "NewPurchaseRegistrationMode"
+            '    Else
+            '        LblMode.Text = "仕入新規入力モード"
+            '    End If
 
-            BtnPurchase.Visible = True
-            BtnPurchase.Location = New Point(997, 509)
+            '    BtnPurchase.Visible = True
+            '    BtnPurchase.Location = New Point(997, 509)
         ElseIf _status = CommonConst.STATUS_ORDER_PURCHASE Then
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "JobOrderingAndPurchasingMode"
@@ -909,10 +910,11 @@ Public Class QuoteList
             Sql += " and "
             Sql += " 取消区分 = '0'"
         End If
-        '受注済みの見積は取消できない
-        '受注済みの見積は仕入単価入力もできない
+
+        '受注済みの見積は　編集、取消、仕入単価入力　できない
         '受発注登録の時も受注済みは表示しない
-        If (_status = CommonConst.STATUS_CANCEL) Or (_status = CommonConst.STATUS_PRICE) Or (_status = CommonConst.STATUS_ORDER_NEW) Or (_status = CommonConst.STATUS_ORDER_PURCHASE) Then
+        If (_status = CommonConst.STATUS_CANCEL) Or (_status = CommonConst.STATUS_PRICE) Or (_status = CommonConst.STATUS_EDIT) Or
+                        (_status = CommonConst.STATUS_ORDER_NEW) Or (_status = CommonConst.STATUS_ORDER_PURCHASE) Then
             Sql += " and 受注日 is null"
         End If
         '受発注登録の時は有効期限切れは表示しない
