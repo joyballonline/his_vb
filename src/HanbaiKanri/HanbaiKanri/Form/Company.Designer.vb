@@ -30,7 +30,6 @@ Partial Class Company
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.TxtAccountNumber = New System.Windows.Forms.TextBox()
-        Me.TxtDepositCategory = New System.Windows.Forms.TextBox()
         Me.TxtBranchOfficeCode = New System.Windows.Forms.TextBox()
         Me.TxtBranchName = New System.Windows.Forms.TextBox()
         Me.Label14 = New System.Windows.Forms.Label()
@@ -63,7 +62,6 @@ Partial Class Company
         Me.Label21 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label20 = New System.Windows.Forms.Label()
-        Me.Label27 = New System.Windows.Forms.Label()
         Me.Label30 = New System.Windows.Forms.Label()
         Me.CbEvaluation = New System.Windows.Forms.ComboBox()
         Me.Label24 = New System.Windows.Forms.Label()
@@ -80,6 +78,7 @@ Partial Class Company
         Me.Label28 = New System.Windows.Forms.Label()
         Me.TxtBranchCode = New System.Windows.Forms.TextBox()
         Me.Label31 = New System.Windows.Forms.Label()
+        Me.cmDCKbn = New System.Windows.Forms.ComboBox()
         Me.SuspendLayout()
         '
         'Label4
@@ -157,14 +156,6 @@ Partial Class Company
         Me.TxtAccountNumber.Name = "TxtAccountNumber"
         Me.TxtAccountNumber.Size = New System.Drawing.Size(234, 22)
         Me.TxtAccountNumber.TabIndex = 19
-        '
-        'TxtDepositCategory
-        '
-        Me.TxtDepositCategory.Location = New System.Drawing.Point(483, 377)
-        Me.TxtDepositCategory.MaxLength = 1
-        Me.TxtDepositCategory.Name = "TxtDepositCategory"
-        Me.TxtDepositCategory.Size = New System.Drawing.Size(234, 22)
-        Me.TxtDepositCategory.TabIndex = 18
         '
         'TxtBranchOfficeCode
         '
@@ -454,16 +445,6 @@ Partial Class Company
         Me.Label20.TabIndex = 211
         Me.Label20.Text = "(例：0123456789)"
         '
-        'Label27
-        '
-        Me.Label27.AutoSize = True
-        Me.Label27.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label27.Location = New System.Drawing.Point(483, 403)
-        Me.Label27.Name = "Label27"
-        Me.Label27.Size = New System.Drawing.Size(104, 15)
-        Me.Label27.TabIndex = 216
-        Me.Label27.Text = "(1:普通 2:預金)"
-        '
         'Label30
         '
         Me.Label30.AutoSize = True
@@ -613,10 +594,23 @@ Partial Class Company
         Me.Label31.TabIndex = 238
         Me.Label31.Text = "(アキュレートの会社コード)"
         '
+        'cmDCKbn
+        '
+        Me.cmDCKbn.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.cmDCKbn.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmDCKbn.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.cmDCKbn.FormattingEnabled = True
+        Me.cmDCKbn.ItemHeight = 15
+        Me.cmDCKbn.Location = New System.Drawing.Point(483, 376)
+        Me.cmDCKbn.Name = "cmDCKbn"
+        Me.cmDCKbn.Size = New System.Drawing.Size(234, 23)
+        Me.cmDCKbn.TabIndex = 250
+        '
         'Company
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(729, 561)
+        Me.Controls.Add(Me.cmDCKbn)
         Me.Controls.Add(Me.Label31)
         Me.Controls.Add(Me.TxtBranchCode)
         Me.Controls.Add(Me.Label28)
@@ -633,7 +627,6 @@ Partial Class Company
         Me.Controls.Add(Me.Label29)
         Me.Controls.Add(Me.CbEvaluation)
         Me.Controls.Add(Me.Label30)
-        Me.Controls.Add(Me.Label27)
         Me.Controls.Add(Me.Label20)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.Label21)
@@ -647,7 +640,6 @@ Partial Class Company
         Me.Controls.Add(Me.Label17)
         Me.Controls.Add(Me.Label18)
         Me.Controls.Add(Me.TxtAccountNumber)
-        Me.Controls.Add(Me.TxtDepositCategory)
         Me.Controls.Add(Me.TxtBranchOfficeCode)
         Me.Controls.Add(Me.TxtBranchName)
         Me.Controls.Add(Me.Label14)
@@ -692,7 +684,6 @@ Partial Class Company
     Friend WithEvents Label17 As Label
     Friend WithEvents Label18 As Label
     Friend WithEvents TxtAccountNumber As TextBox
-    Friend WithEvents TxtDepositCategory As TextBox
     Friend WithEvents TxtBranchOfficeCode As TextBox
     Friend WithEvents TxtBranchName As TextBox
     Friend WithEvents Label14 As Label
@@ -725,7 +716,6 @@ Partial Class Company
     Friend WithEvents Label21 As Label
     Friend WithEvents Label10 As Label
     Friend WithEvents Label20 As Label
-    Friend WithEvents Label27 As Label
     Friend WithEvents Label30 As Label
     Friend WithEvents CbEvaluation As ComboBox
     Friend WithEvents Label24 As Label
@@ -742,4 +732,5 @@ Partial Class Company
     Friend WithEvents Label28 As Label
     Friend WithEvents TxtBranchCode As TextBox
     Friend WithEvents Label31 As Label
+    Friend WithEvents cmDCKbn As ComboBox
 End Class

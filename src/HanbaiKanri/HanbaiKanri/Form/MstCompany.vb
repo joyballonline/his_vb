@@ -69,7 +69,8 @@ Public Class MstCompany
     End Sub
 
     Private Sub MstHanyoue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If frmC01F10_Login.loginValue.Language = "ENG" Then
+
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
             Label1.Text = "CompanyName"
             TxtSearch.Location = New Point(120, 6)
             BtnSearch.Text = "Search"
@@ -128,11 +129,20 @@ Public Class MstCompany
             Sql += "'"
             Sql += frmC01F10_Login.loginValue.BumonCD
             Sql += "'"
+            Sql += " AND "
+            Sql += "会社名"
+            Sql += " ILIKE "
+            Sql += "'%"
+            Sql += TxtSearch.Text
+            Sql += "%'"
 
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
 
             For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+                Dim getDCHanyo As DataSet = getDsHanyoData(CommonConst.DC_CODE, ds.Tables(RS).Rows(i)("預金種目"))
+                Dim getIPHanyo As DataSet = getDsHanyoData(CommonConst.IP_CODE, ds.Tables(RS).Rows(i)("在庫単価評価法"))
+
                 Dgv_Company.Rows.Add()
                 Dgv_Company.Rows(i).Cells("会社コード").Value = ds.Tables(RS).Rows(i)("会社コード")
                 Dgv_Company.Rows(i).Cells("会社名").Value = ds.Tables(RS).Rows(i)("会社名")
@@ -151,7 +161,9 @@ Public Class MstCompany
                 Dgv_Company.Rows(i).Cells("更新日").Value = ds.Tables(RS).Rows(i)("更新日")
                 Dgv_Company.Rows(i).Cells("銀行コード").Value = ds.Tables(RS).Rows(i)("銀行コード")
                 Dgv_Company.Rows(i).Cells("支店コード").Value = ds.Tables(RS).Rows(i)("支店コード")
-                Dgv_Company.Rows(i).Cells("預金種目").Value = ds.Tables(RS).Rows(i)("預金種目")
+                Dgv_Company.Rows(i).Cells("預金種目").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
+                                                               getDCHanyo.Tables(RS).Rows(0)("文字２"),
+                                                               getDCHanyo.Tables(RS).Rows(0)("文字１"))
                 Dgv_Company.Rows(i).Cells("口座番号").Value = ds.Tables(RS).Rows(i)("口座番号")
                 Dgv_Company.Rows(i).Cells("口座名義").Value = ds.Tables(RS).Rows(i)("口座名義")
                 Dgv_Company.Rows(i).Cells("銀行名").Value = ds.Tables(RS).Rows(i)("銀行名")
@@ -159,7 +171,9 @@ Public Class MstCompany
                 Dgv_Company.Rows(i).Cells("前回締日").Value = ds.Tables(RS).Rows(i)("前回締日")
                 Dgv_Company.Rows(i).Cells("今回締日").Value = ds.Tables(RS).Rows(i)("今回締日")
                 Dgv_Company.Rows(i).Cells("次回締日").Value = ds.Tables(RS).Rows(i)("次回締日")
-                Dgv_Company.Rows(i).Cells("在庫単価評価法").Value = ds.Tables(RS).Rows(i)("在庫単価評価法")
+                Dgv_Company.Rows(i).Cells("在庫単価評価法").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
+                                                               getIPHanyo.Tables(RS).Rows(0)("文字２"),
+                                                               getIPHanyo.Tables(RS).Rows(0)("文字１"))
                 Dgv_Company.Rows(i).Cells("前払法人税率").Value = ds.Tables(RS).Rows(i)("前払法人税率")
                 Dgv_Company.Rows(i).Cells("会計用コード").Value = ds.Tables(RS).Rows(i)("会計用コード")
 
@@ -199,74 +213,50 @@ Public Class MstCompany
     End Sub
 
     Private Sub BtnSearch_Click(sender As Object, e As EventArgs) Handles BtnSearch.Click
-        Dgv_Company.Rows.Clear()
-
-        Dim Sql As String = ""
-        Try
-            Sql += "SELECT "
-            Sql += "* "
-            Sql += "FROM "
-            Sql += "public"
-            Sql += "."
-            Sql += "m01_company"
-            Sql += " WHERE "
-            Sql += "会社コード"
-            Sql += " ILIKE "
-            Sql += "'"
-            Sql += frmC01F10_Login.loginValue.BumonCD
-            Sql += "'"
-            Sql += " AND "
-            Sql += "会社名"
-            Sql += " ILIKE "
-            Sql += "'%"
-            Sql += TxtSearch.Text
-            Sql += "%'"
-
-            Dim reccnt As Integer = 0
-            Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-            For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-                Dgv_Company.Rows.Add()
-                Dgv_Company.Rows(index).Cells("会社コード").Value = ds.Tables(RS).Rows(index)("会社コード")
-                Dgv_Company.Rows(index).Cells("会社名").Value = ds.Tables(RS).Rows(index)("会社名")
-                Dgv_Company.Rows(index).Cells("会社略称").Value = ds.Tables(RS).Rows(index)("会社略称")
-                Dgv_Company.Rows(index).Cells("郵便番号").Value = ds.Tables(RS).Rows(index)("郵便番号")
-                Dgv_Company.Rows(index).Cells("住所１").Value = ds.Tables(RS).Rows(index)("住所１")
-                Dgv_Company.Rows(index).Cells("住所２").Value = ds.Tables(RS).Rows(index)("住所２")
-                Dgv_Company.Rows(index).Cells("住所３").Value = ds.Tables(RS).Rows(index)("住所３")
-                Dgv_Company.Rows(index).Cells("電話番号").Value = ds.Tables(RS).Rows(index)("電話番号")
-                Dgv_Company.Rows(index).Cells("FAX番号").Value = ds.Tables(RS).Rows(index)("ＦＡＸ番号")
-                Dgv_Company.Rows(index).Cells("代表者役職").Value = ds.Tables(RS).Rows(index)("代表者役職")
-                Dgv_Company.Rows(index).Cells("代表者名").Value = ds.Tables(RS).Rows(index)("代表者名")
-                Dgv_Company.Rows(index).Cells("表示順").Value = ds.Tables(RS).Rows(index)("表示順")
-                Dgv_Company.Rows(index).Cells("備考").Value = ds.Tables(RS).Rows(index)("備考")
-                Dgv_Company.Rows(index).Cells("更新者").Value = ds.Tables(RS).Rows(index)("更新者")
-                Dgv_Company.Rows(index).Cells("更新日").Value = ds.Tables(RS).Rows(index)("更新日")
-                Dgv_Company.Rows(index).Cells("銀行コード").Value = ds.Tables(RS).Rows(index)("銀行コード")
-                Dgv_Company.Rows(index).Cells("支店コード").Value = ds.Tables(RS).Rows(index)("支店コード")
-                Dgv_Company.Rows(index).Cells("預金種目").Value = ds.Tables(RS).Rows(index)("預金種目")
-                Dgv_Company.Rows(index).Cells("口座番号").Value = ds.Tables(RS).Rows(index)("口座番号")
-                Dgv_Company.Rows(index).Cells("口座名義").Value = ds.Tables(RS).Rows(index)("口座名義")
-                Dgv_Company.Rows(index).Cells("銀行名").Value = ds.Tables(RS).Rows(index)("銀行名")
-                Dgv_Company.Rows(index).Cells("支店名").Value = ds.Tables(RS).Rows(index)("支店名")
-                Dgv_Company.Rows(index).Cells("前回締日").Value = ds.Tables(RS).Rows(index)("前回締日")
-                Dgv_Company.Rows(index).Cells("今回締日").Value = ds.Tables(RS).Rows(index)("今回締日")
-                Dgv_Company.Rows(index).Cells("次回締日").Value = ds.Tables(RS).Rows(index)("次回締日")
-                Dgv_Company.Rows(index).Cells("在庫単価評価法").Value = ds.Tables(RS).Rows(index)("在庫単価評価法")
-                Dgv_Company.Rows(index).Cells("前払法人税率").Value = ds.Tables(RS).Rows(index)("前払法人税率")
-                Dgv_Company.Rows(index).Cells("会計用コード").Value = ds.Tables(RS).Rows(index)("会計用コード")
-            Next
-
-        Catch ue As UsrDefException
-            ue.dspMsg()
-            Throw ue
-        Catch ex As Exception
-            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
-        End Try
+        setList()
     End Sub
 
     Private Sub MstCompany_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
         setList()
     End Sub
+
+    'param1：String テーブル名
+    'param2：String 詳細条件
+    'Return: DataSet
+    Private Function getDsData(ByVal tableName As String, Optional ByRef txtParam As String = "") As DataSet
+        Dim reccnt As Integer = 0 'DB用（デフォルト）
+        Dim Sql As String = ""
+
+        Sql += "SELECT"
+        Sql += " *"
+        Sql += " FROM "
+
+        Sql += "public." & tableName
+        Sql += " WHERE "
+        Sql += "会社コード"
+        Sql += " ILIKE  "
+        Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += txtParam
+        Return _db.selectDB(Sql, RS, reccnt)
+    End Function
+
+    '汎用マスタから固定キー、可変キーに応じた結果を返す
+    'param1：String 固定キー
+    'param2：String 可変キー
+    'Return: DataSet
+    Private Function getDsHanyoData(ByVal prmFixed As String, Optional ByVal prmVariable As String = "") As DataSet
+        Dim Sql As String = ""
+
+        Sql = " AND "
+        Sql += "固定キー ILIKE '" & prmFixed & "'"
+
+        If prmVariable IsNot "" Then
+            Sql += " AND "
+            Sql += "可変キー ILIKE '" & prmVariable & "'"
+        End If
+
+        'リードタイムのリストを汎用マスタから取得
+        Return getDsData("m90_hanyo", Sql)
+    End Function
+
 End Class

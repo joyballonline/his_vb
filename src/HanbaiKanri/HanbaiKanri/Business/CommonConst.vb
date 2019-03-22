@@ -356,4 +356,6 @@ Public Class CommonConst
     '預金種目固定キー
     Public Const DC_CODE As String = "DC"           '預金種目固定キー
 
+    Public Const IP_CODE As String = "3"           '在庫単価評価法
+
 End Class
