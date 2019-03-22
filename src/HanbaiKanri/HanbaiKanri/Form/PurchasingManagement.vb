@@ -204,6 +204,7 @@ Public Class PurchasingManagement
         DgvAdd.Columns("型式").ReadOnly = True
         DgvAdd.Columns("単位").ReadOnly = True
         DgvAdd.Columns("仕入先").ReadOnly = True
+        DgvAdd.Columns("仕入値").ReadOnly = True
 
         DgvAdd.Columns("仕入区分値").Visible = False
 

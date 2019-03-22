@@ -371,6 +371,7 @@ Public Class Receipt
             DgvAdd.Columns("単位").ReadOnly = True
             DgvAdd.Columns("仕入先").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
             DgvAdd.Columns("仕入先").ReadOnly = True
+            DgvAdd.Columns("仕入値").ReadOnly = True
 
             For index As Integer = 0 To dsHattyudt.Tables(RS).Rows.Count - 1
                 If dsHattyudt.Tables(RS).Rows(index)("発注残数") = 0 Then
