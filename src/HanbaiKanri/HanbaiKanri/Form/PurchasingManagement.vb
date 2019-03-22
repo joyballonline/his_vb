@@ -1017,6 +1017,25 @@ Public Class PurchasingManagement
 
     End Function
 
+    'セルの値が変更されたら
+    Private Sub CellValueChanged(ByVal sender As Object,
+    ByVal e As DataGridViewCellEventArgs) Handles DgvAdd.CellValueChanged
+
+        Dim PurchaseTotal As Integer = 0
+
+        'ヘッダー以外だったら
+        If e.RowIndex > -1 Then
+
+            '各項目の属性チェック
+            If Not IsNumeric(DgvAdd.Rows(e.RowIndex).Cells("仕入数量").Value) And (DgvAdd.Rows(e.RowIndex).Cells("仕入数量").Value IsNot Nothing) Then
+                _msgHd.dspMSG("IsNotNumeric", frmC01F10_Login.loginValue.Language)
+                DgvAdd.Rows(e.RowIndex).Cells("仕入数量").Value = 0
+                Exit Sub
+            End If
+        End If
+
+    End Sub
+
     'param1：String テーブル名
     'param2：String 詳細条件
     'Return: DataSet
