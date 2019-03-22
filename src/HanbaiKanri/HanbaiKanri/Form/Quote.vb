@@ -1090,10 +1090,19 @@ Public Class Quote
         '仕入先と数量がなかったらエラーで戻す
         For i As Integer = 0 To DgvItemList.RowCount - 1
             If DgvItemList.Rows(i).Cells("仕入先コード").Value Is Nothing Or DgvItemList.Rows(i).Cells("数量").Value Is Nothing Then
+
                 '対象データがないメッセージを表示
                 _msgHd.dspMSG("chkQuoteInputError", frmC01F10_Login.loginValue.Language)
 
                 Exit Sub
+            Else
+                If DgvItemList.Rows(i).Cells("数量").Value = 0 Then
+                    '対象データがないメッセージを表示
+                    _msgHd.dspMSG("chkQuantityError", frmC01F10_Login.loginValue.Language)
+
+                    Exit Sub
+                End If
+
             End If
         Next
 
