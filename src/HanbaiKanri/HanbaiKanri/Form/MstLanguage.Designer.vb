@@ -23,6 +23,12 @@ Partial Class MstLanguage
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.Dgv_Language = New System.Windows.Forms.DataGridView()
+        Me.BtnBack = New System.Windows.Forms.Button()
+        Me.BtnAdd = New System.Windows.Forms.Button()
+        Me.BtnEdit = New System.Windows.Forms.Button()
+        Me.BtnSearch = New System.Windows.Forms.Button()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Search = New System.Windows.Forms.TextBox()
         Me.会社コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.言語コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.言語名称 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -31,12 +37,6 @@ Partial Class MstLanguage
         Me.無効フラグ = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.更新者 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.更新日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.BtnBack = New System.Windows.Forms.Button()
-        Me.BtnAdd = New System.Windows.Forms.Button()
-        Me.BtnEdit = New System.Windows.Forms.Button()
-        Me.BtnSearch = New System.Windows.Forms.Button()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Search = New System.Windows.Forms.TextBox()
         CType(Me.Dgv_Language, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -52,46 +52,6 @@ Partial Class MstLanguage
         Me.Dgv_Language.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.Dgv_Language.Size = New System.Drawing.Size(1326, 469)
         Me.Dgv_Language.TabIndex = 3
-        '
-        '会社コード
-        '
-        Me.会社コード.HeaderText = "会社コード"
-        Me.会社コード.Name = "会社コード"
-        '
-        '言語コード
-        '
-        Me.言語コード.HeaderText = "言語コード"
-        Me.言語コード.Name = "言語コード"
-        '
-        '言語名称
-        '
-        Me.言語名称.HeaderText = "言語名称"
-        Me.言語名称.Name = "言語名称"
-        '
-        '言語略称
-        '
-        Me.言語略称.HeaderText = "言語略称"
-        Me.言語略称.Name = "言語略称"
-        '
-        '備考
-        '
-        Me.備考.HeaderText = "備考"
-        Me.備考.Name = "備考"
-        '
-        '無効フラグ
-        '
-        Me.無効フラグ.HeaderText = "無効フラグ"
-        Me.無効フラグ.Name = "無効フラグ"
-        '
-        '更新者
-        '
-        Me.更新者.HeaderText = "更新者"
-        Me.更新者.Name = "更新者"
-        '
-        '更新日
-        '
-        Me.更新日.HeaderText = "更新日"
-        Me.更新日.Name = "更新日"
         '
         'BtnBack
         '
@@ -150,6 +110,55 @@ Partial Class MstLanguage
         Me.Search.Size = New System.Drawing.Size(100, 22)
         Me.Search.TabIndex = 1
         '
+        '会社コード
+        '
+        Me.会社コード.HeaderText = "会社コード"
+        Me.会社コード.Name = "会社コード"
+        Me.会社コード.ReadOnly = True
+        Me.会社コード.Visible = False
+        '
+        '言語コード
+        '
+        Me.言語コード.HeaderText = "言語コード"
+        Me.言語コード.Name = "言語コード"
+        Me.言語コード.ReadOnly = True
+        '
+        '言語名称
+        '
+        Me.言語名称.HeaderText = "言語名称"
+        Me.言語名称.Name = "言語名称"
+        Me.言語名称.ReadOnly = True
+        '
+        '言語略称
+        '
+        Me.言語略称.HeaderText = "言語略称"
+        Me.言語略称.Name = "言語略称"
+        Me.言語略称.ReadOnly = True
+        '
+        '備考
+        '
+        Me.備考.HeaderText = "備考"
+        Me.備考.Name = "備考"
+        Me.備考.ReadOnly = True
+        '
+        '無効フラグ
+        '
+        Me.無効フラグ.HeaderText = "無効フラグ"
+        Me.無効フラグ.Name = "無効フラグ"
+        Me.無効フラグ.ReadOnly = True
+        '
+        '更新者
+        '
+        Me.更新者.HeaderText = "更新者"
+        Me.更新者.Name = "更新者"
+        Me.更新者.ReadOnly = True
+        '
+        '更新日
+        '
+        Me.更新日.HeaderText = "更新日"
+        Me.更新日.Name = "更新日"
+        Me.更新日.ReadOnly = True
+        '
         'MstLanguage
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
@@ -171,6 +180,12 @@ Partial Class MstLanguage
     End Sub
 
     Friend WithEvents Dgv_Language As DataGridView
+    Friend WithEvents BtnBack As Button
+    Friend WithEvents BtnAdd As Button
+    Friend WithEvents BtnEdit As Button
+    Friend WithEvents BtnSearch As Button
+    Friend WithEvents Label1 As Label
+    Friend WithEvents Search As TextBox
     Friend WithEvents 会社コード As DataGridViewTextBoxColumn
     Friend WithEvents 言語コード As DataGridViewTextBoxColumn
     Friend WithEvents 言語名称 As DataGridViewTextBoxColumn
@@ -179,10 +194,4 @@ Partial Class MstLanguage
     Friend WithEvents 無効フラグ As DataGridViewTextBoxColumn
     Friend WithEvents 更新者 As DataGridViewTextBoxColumn
     Friend WithEvents 更新日 As DataGridViewTextBoxColumn
-    Friend WithEvents BtnBack As Button
-    Friend WithEvents BtnAdd As Button
-    Friend WithEvents BtnEdit As Button
-    Friend WithEvents BtnSearch As Button
-    Friend WithEvents Label1 As Label
-    Friend WithEvents Search As TextBox
 End Class

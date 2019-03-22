@@ -23,6 +23,12 @@ Partial Class MstUser
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.Dgv_User = New System.Windows.Forms.DataGridView()
+        Me.BtnAdd = New System.Windows.Forms.Button()
+        Me.BtnEdit = New System.Windows.Forms.Button()
+        Me.BtnBack = New System.Windows.Forms.Button()
+        Me.BtnSearch = New System.Windows.Forms.Button()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Search = New System.Windows.Forms.TextBox()
         Me.会社コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ユーザID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.氏名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -33,12 +39,6 @@ Partial Class MstUser
         Me.言語 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.更新者 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.更新日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.BtnAdd = New System.Windows.Forms.Button()
-        Me.BtnEdit = New System.Windows.Forms.Button()
-        Me.BtnBack = New System.Windows.Forms.Button()
-        Me.BtnSearch = New System.Windows.Forms.Button()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Search = New System.Windows.Forms.TextBox()
         CType(Me.Dgv_User, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -58,66 +58,6 @@ Partial Class MstUser
         Me.Dgv_User.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.Dgv_User.Size = New System.Drawing.Size(1326, 469)
         Me.Dgv_User.TabIndex = 3
-        '
-        '会社コード
-        '
-        Me.会社コード.HeaderText = "会社コード"
-        Me.会社コード.Name = "会社コード"
-        Me.会社コード.ReadOnly = True
-        '
-        'ユーザID
-        '
-        Me.ユーザID.HeaderText = "ユーザID"
-        Me.ユーザID.Name = "ユーザID"
-        Me.ユーザID.ReadOnly = True
-        '
-        '氏名
-        '
-        Me.氏名.HeaderText = "氏名"
-        Me.氏名.Name = "氏名"
-        Me.氏名.ReadOnly = True
-        '
-        '略名
-        '
-        Me.略名.HeaderText = "略名"
-        Me.略名.Name = "略名"
-        Me.略名.ReadOnly = True
-        '
-        '備考
-        '
-        Me.備考.HeaderText = "備考"
-        Me.備考.Name = "備考"
-        Me.備考.ReadOnly = True
-        '
-        '無効フラグ
-        '
-        Me.無効フラグ.HeaderText = "無効フラグ"
-        Me.無効フラグ.Name = "無効フラグ"
-        Me.無効フラグ.ReadOnly = True
-        '
-        '権限
-        '
-        Me.権限.HeaderText = "権限"
-        Me.権限.Name = "権限"
-        Me.権限.ReadOnly = True
-        '
-        '言語
-        '
-        Me.言語.HeaderText = "言語"
-        Me.言語.Name = "言語"
-        Me.言語.ReadOnly = True
-        '
-        '更新者
-        '
-        Me.更新者.HeaderText = "更新者"
-        Me.更新者.Name = "更新者"
-        Me.更新者.ReadOnly = True
-        '
-        '更新日
-        '
-        Me.更新日.HeaderText = "更新日"
-        Me.更新日.Name = "更新日"
-        Me.更新日.ReadOnly = True
         '
         'BtnAdd
         '
@@ -177,6 +117,67 @@ Partial Class MstUser
         Me.Search.Size = New System.Drawing.Size(100, 22)
         Me.Search.TabIndex = 1
         '
+        '会社コード
+        '
+        Me.会社コード.HeaderText = "会社コード"
+        Me.会社コード.Name = "会社コード"
+        Me.会社コード.ReadOnly = True
+        Me.会社コード.Visible = False
+        '
+        'ユーザID
+        '
+        Me.ユーザID.HeaderText = "ユーザID"
+        Me.ユーザID.Name = "ユーザID"
+        Me.ユーザID.ReadOnly = True
+        '
+        '氏名
+        '
+        Me.氏名.HeaderText = "氏名"
+        Me.氏名.Name = "氏名"
+        Me.氏名.ReadOnly = True
+        '
+        '略名
+        '
+        Me.略名.HeaderText = "略名"
+        Me.略名.Name = "略名"
+        Me.略名.ReadOnly = True
+        '
+        '備考
+        '
+        Me.備考.HeaderText = "備考"
+        Me.備考.Name = "備考"
+        Me.備考.ReadOnly = True
+        '
+        '無効フラグ
+        '
+        Me.無効フラグ.HeaderText = "無効フラグ"
+        Me.無効フラグ.Name = "無効フラグ"
+        Me.無効フラグ.ReadOnly = True
+        '
+        '権限
+        '
+        Me.権限.HeaderText = "権限"
+        Me.権限.Name = "権限"
+        Me.権限.ReadOnly = True
+        '
+        '言語
+        '
+        Me.言語.HeaderText = "言語"
+        Me.言語.Name = "言語"
+        Me.言語.ReadOnly = True
+        '
+        '更新者
+        '
+        Me.更新者.HeaderText = "更新者"
+        Me.更新者.Name = "更新者"
+        Me.更新者.ReadOnly = True
+        '
+        '更新日
+        '
+        Me.更新日.HeaderText = "更新日"
+        Me.更新日.Name = "更新日"
+        Me.更新日.ReadOnly = True
+        '
         'MstUser
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
@@ -200,6 +201,10 @@ Partial Class MstUser
     Friend WithEvents Dgv_User As DataGridView
     Friend WithEvents BtnAdd As Button
     Friend WithEvents BtnEdit As Button
+    Friend WithEvents BtnBack As Button
+    Friend WithEvents BtnSearch As Button
+    Friend WithEvents Label1 As Label
+    Friend WithEvents Search As TextBox
     Friend WithEvents 会社コード As DataGridViewTextBoxColumn
     Friend WithEvents ユーザID As DataGridViewTextBoxColumn
     Friend WithEvents 氏名 As DataGridViewTextBoxColumn
@@ -210,8 +215,4 @@ Partial Class MstUser
     Friend WithEvents 言語 As DataGridViewTextBoxColumn
     Friend WithEvents 更新者 As DataGridViewTextBoxColumn
     Friend WithEvents 更新日 As DataGridViewTextBoxColumn
-    Friend WithEvents BtnBack As Button
-    Friend WithEvents BtnSearch As Button
-    Friend WithEvents Label1 As Label
-    Friend WithEvents Search As TextBox
 End Class

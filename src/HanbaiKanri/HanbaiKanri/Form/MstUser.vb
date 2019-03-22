@@ -113,6 +113,7 @@ Public Class MstUser
             Sql += "'%"
             Sql += Search.Text
             Sql += "%'"
+            Sql += " order by 会社コード, ユーザＩＤ "
 
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)

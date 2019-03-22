@@ -123,7 +123,8 @@ Public Class MstAccount
             Sql += " ILIKE "
             Sql += "'%"
             Sql += escapeSql(TxtSearch.Text)
-            Sql += "%')"
+            Sql += "%') "
+            Sql += " order by 会社コード, 勘定科目コード "
 
             Dim ds As DataSet = getDsData("m92_kanjo", Sql)
 
@@ -131,7 +132,6 @@ Public Class MstAccount
 
                 Dgv_Account.Rows.Add()
 
-                'Dgv_Account.Rows(i).Cells("会社コード").Value = ds.Tables(RS).Rows(i)("会社コード")
                 Dgv_Account.Rows(i).Cells("勘定科目コード").Value = ds.Tables(RS).Rows(i)("勘定科目コード")
                 Dgv_Account.Rows(i).Cells("勘定科目名称１").Value = ds.Tables(RS).Rows(i)("勘定科目名称１")
                 Dgv_Account.Rows(i).Cells("勘定科目名称２").Value = ds.Tables(RS).Rows(i)("勘定科目名称２")
