@@ -291,8 +291,8 @@ Public Class Receipt
             Sql += " ILIKE '" & Suffix & "'"
             Sql += " AND "
             Sql += "t42.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
-            Sql += " ORDER BY "
-            Sql += "t42.更新日 DESC"
+            'Sql += " ORDER BY "
+            'Sql += "t42.更新日 DESC"
 
             '入庫明細取得
             Dim dsNyukodt As DataSet = _db.selectDB(Sql, RS, reccnt)
@@ -536,8 +536,11 @@ Public Class Receipt
             Sql = "INSERT INTO "
             Sql += "Public."
             Sql += "t42_nyukohd("
-            Sql += "会社コード, 入庫番号, 発注番号, 発注番号枝番, 客先番号, 仕入先コード, 仕入先名, 仕入先郵便番号, 仕入先住所, 仕入先電話番号, 仕入先ＦＡＸ, 仕入先担当者役職, 仕入先担当者名, 支払条件, 仕入金額, 粗利額, 営業担当者, 入力担当者, 備考, 取消区分, ＶＡＴ, ＰＰＨ, 入庫日, 登録日, 更新日, 更新者)"
-            Sql += " VALUES ("
+            Sql += "会社コード, 入庫番号, 発注番号, 発注番号枝番, 客先番号, 仕入先コード, 仕入先名, 仕入先郵便番号"
+            Sql += ", 仕入先住所, 仕入先電話番号, 仕入先ＦＡＸ, 仕入先担当者役職, 仕入先担当者名, 支払条件, 仕入金額"
+            Sql += ", 粗利額, 営業担当者, 入力担当者, 備考, 取消区分, ＶＡＴ, ＰＰＨ, 入庫日, 登録日, 更新日, 更新者"
+            Sql += ", 営業担当者コード, 入力担当者コード"
+            Sql += ") VALUES ("
             Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'"
             Sql += ", '"
             Sql += WH
@@ -589,6 +592,10 @@ Public Class Receipt
             Sql += strToday
             Sql += "', '"
             Sql += Input
+            Sql += "', '"
+            Sql += dsHattyu.Tables(RS).Rows(0)("営業担当者コード").ToString
+            Sql += "', '"
+            Sql += frmC01F10_Login.loginValue.TantoCD
             Sql += " ')"
 
             _db.executeDB(Sql)
