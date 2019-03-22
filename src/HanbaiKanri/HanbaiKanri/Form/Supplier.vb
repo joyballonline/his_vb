@@ -123,6 +123,9 @@ Public Class Supplier
         createCombobox()
 
         If _status = CommonConst.STATUS_EDIT Then
+
+            TxtSupplierCode.Enabled = False '変更不可
+
             Dim Sql As String = ""
 
             Sql += "SELECT "
