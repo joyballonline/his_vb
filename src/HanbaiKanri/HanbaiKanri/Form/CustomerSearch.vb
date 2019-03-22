@@ -114,43 +114,43 @@ Public Class CustomerSearch
                 Exit For
             Next c
 
-            frm.TxtCustomerCode.Text = Dgv_Customer.Rows(idx).Cells(1).Value
-            frm.TxtCustomerName.Text = Dgv_Customer.Rows(idx).Cells(2).Value
-            If Dgv_Customer.Rows(idx).Cells(4).Value Is DBNull.Value Then
+            frm.TxtCustomerCode.Text = Dgv_Customer.Rows(idx).Cells("得意先コード").Value
+            frm.TxtCustomerName.Text = Dgv_Customer.Rows(idx).Cells("得意先名").Value
+            If Dgv_Customer.Rows(idx).Cells("郵便番号").Value Is DBNull.Value Then
             Else
-                frm.TxtPostalCode.Text = Dgv_Customer.Rows(idx).Cells(4).Value
+                frm.TxtPostalCode.Text = Dgv_Customer.Rows(idx).Cells("郵便番号").Value
             End If
-            If Dgv_Customer.Rows(idx).Cells(5).Value Is DBNull.Value Then
+            If Dgv_Customer.Rows(idx).Cells("住所１").Value Is DBNull.Value Then
             Else
-                frm.TxtAddress1.Text = Dgv_Customer.Rows(idx).Cells(5).Value
+                frm.TxtAddress1.Text = Dgv_Customer.Rows(idx).Cells("住所１").Value
             End If
-            If Dgv_Customer.Rows(idx).Cells(6).Value Is DBNull.Value Then
+            If Dgv_Customer.Rows(idx).Cells("住所２").Value Is DBNull.Value Then
             Else
-                frm.TxtAddress1.Text = frm.TxtAddress1.Text & " " & Dgv_Customer.Rows(idx).Cells(6).Value
+                frm.TxtAddress1.Text = frm.TxtAddress1.Text & " " & Dgv_Customer.Rows(idx).Cells("住所２").Value
             End If
-            If Dgv_Customer.Rows(idx).Cells(7).Value Is DBNull.Value Then
+            If Dgv_Customer.Rows(idx).Cells("住所３").Value Is DBNull.Value Then
             Else
-                frm.TxtAddress1.Text = frm.TxtAddress1.Text & " " & Dgv_Customer.Rows(idx).Cells(7).Value
+                frm.TxtAddress1.Text = frm.TxtAddress1.Text & " " & Dgv_Customer.Rows(idx).Cells("住所３").Value
             End If
-            If Dgv_Customer.Rows(idx).Cells(8).Value Is DBNull.Value Then
+            If Dgv_Customer.Rows(idx).Cells("電話番号").Value Is DBNull.Value Then
             Else
-                frm.TxtTel.Text = Dgv_Customer.Rows(idx).Cells(8).Value
+                frm.TxtTel.Text = Dgv_Customer.Rows(idx).Cells("電話番号").Value
             End If
-            If Dgv_Customer.Rows(idx).Cells(10).Value Is DBNull.Value Then
+            If Dgv_Customer.Rows(idx).Cells("FAX番号").Value Is DBNull.Value Then
             Else
-                frm.TxtFax.Text = Dgv_Customer.Rows(idx).Cells(10).Value
+                frm.TxtFax.Text = Dgv_Customer.Rows(idx).Cells("FAX番号").Value
             End If
-            If Dgv_Customer.Rows(idx).Cells(11).Value Is DBNull.Value Then
+            If Dgv_Customer.Rows(idx).Cells("担当者名").Value Is DBNull.Value Then
             Else
-                frm.TxtPerson.Text = Dgv_Customer.Rows(idx).Cells(11).Value
+                frm.TxtPerson.Text = Dgv_Customer.Rows(idx).Cells("担当者名").Value
             End If
-            If Dgv_Customer.Rows(idx).Cells(12).Value Is DBNull.Value Then
+            If Dgv_Customer.Rows(idx).Cells("担当者役職").Value Is DBNull.Value Then
             Else
-                frm.TxtPosition.Text = Dgv_Customer.Rows(idx).Cells(12).Value
+                frm.TxtPosition.Text = Dgv_Customer.Rows(idx).Cells("担当者役職").Value
             End If
-            If Dgv_Customer.Rows(idx).Cells(13).Value Is DBNull.Value Then
+            If Dgv_Customer.Rows(idx).Cells("既定支払条件").Value Is DBNull.Value Then
             Else
-                frm.TxtPaymentTerms.Text = Dgv_Customer.Rows(idx).Cells(13).Value
+                frm.TxtPaymentTerms.Text = Dgv_Customer.Rows(idx).Cells("既定支払条件").Value
             End If
 
             _parentForm.Enabled = True
