@@ -129,11 +129,14 @@ Public Class MstSupplier
             Sql += "'"
             Sql += frmC01F10_Login.loginValue.BumonCD
             Sql += "'"
+            Sql += " order by 会社コード, 仕入先コード "
 
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
 
             For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+                Dim getHanyo As DataSet = getDsHanyoData(CommonConst.DC_CODE, ds.Tables(RS).Rows(i)("預金種目"))
+
                 Dgv_Supplier.Rows.Add()
                 Dgv_Supplier.Rows(i).Cells("会社コード").Value = ds.Tables(RS).Rows(i)("会社コード")
                 Dgv_Supplier.Rows(i).Cells("仕入先コード").Value = ds.Tables(RS).Rows(i)("仕入先コード")
@@ -152,7 +155,9 @@ Public Class MstSupplier
                 Dgv_Supplier.Rows(i).Cells("銀行コード").Value = ds.Tables(RS).Rows(i)("銀行コード")
                 Dgv_Supplier.Rows(i).Cells("支店名").Value = ds.Tables(RS).Rows(i)("支店名")
                 Dgv_Supplier.Rows(i).Cells("支店コード").Value = ds.Tables(RS).Rows(i)("支店コード")
-                Dgv_Supplier.Rows(i).Cells("預金種目").Value = ds.Tables(RS).Rows(i)("預金種目")
+                Dgv_Supplier.Rows(i).Cells("預金種目").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
+                                                               getHanyo.Tables(RS).Rows(0)("文字２"),
+                                                               getHanyo.Tables(RS).Rows(0)("文字１"))
                 Dgv_Supplier.Rows(i).Cells("口座番号").Value = ds.Tables(RS).Rows(i)("口座番号")
                 Dgv_Supplier.Rows(i).Cells("口座名義").Value = ds.Tables(RS).Rows(i)("口座名義")
                 Dgv_Supplier.Rows(i).Cells("更新者").Value = ds.Tables(RS).Rows(i)("更新者")
@@ -270,4 +275,44 @@ Public Class MstSupplier
     Private Sub MstSupplier_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
         setList()
     End Sub
+
+    'param1：String テーブル名
+    'param2：String 詳細条件
+    'Return: DataSet
+    Private Function getDsData(ByVal tableName As String, Optional ByRef txtParam As String = "") As DataSet
+        Dim reccnt As Integer = 0 'DB用（デフォルト）
+        Dim Sql As String = ""
+
+        Sql += "SELECT"
+        Sql += " *"
+        Sql += " FROM "
+
+        Sql += "public." & tableName
+        Sql += " WHERE "
+        Sql += "会社コード"
+        Sql += " ILIKE  "
+        Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += txtParam
+        Return _db.selectDB(Sql, RS, reccnt)
+    End Function
+
+    '汎用マスタから固定キー、可変キーに応じた結果を返す
+    'param1：String 固定キー
+    'param2：String 可変キー
+    'Return: DataSet
+    Private Function getDsHanyoData(ByVal prmFixed As String, Optional ByVal prmVariable As String = "") As DataSet
+        Dim Sql As String = ""
+
+        Sql = " AND "
+        Sql += "固定キー ILIKE '" & prmFixed & "'"
+
+        If prmVariable IsNot "" Then
+            Sql += " AND "
+            Sql += "可変キー ILIKE '" & prmVariable & "'"
+        End If
+
+        'リードタイムのリストを汎用マスタから取得
+        Return getDsData("m90_hanyo", Sql)
+    End Function
+
 End Class

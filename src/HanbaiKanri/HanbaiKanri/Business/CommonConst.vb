@@ -353,4 +353,7 @@ Public Class CommonConst
     Public Const CB_KBN_MOT_AVAILABLE_TXT_ENG As String = "No Bonded"     'No Bonded
     Public Const CB_KBN_AVAILABLE_TXT_ENG As String = "Bonded"        'Bonded
 
+    '預金種目固定キー
+    Public Const DC_CODE As String = "DC"           '預金種目固定キー
+
 End Class

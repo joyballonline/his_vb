@@ -78,307 +78,9 @@ Public Class Supplier
 
     End Sub
 
-    Private Sub btnAddSupplier_Click(sender As Object, e As EventArgs) Handles BtnRegistration.Click
-        '項目チェック
-        Dim strMessage As String = ""    'メッセージ本文
-        Dim strMessageTitle As String = ""      'メッセージタイトル
-        ''得意先コードは必須
-        If TxtSupplierCode.Text = "" Then
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
-                strMessage = "Please enter Supplier Code. "
-                strMessageTitle = "SupplierCode Error"
-            Else
-                strMessage = "仕入先コードを入力してください。"
-                strMessageTitle = "仕入先コード入力エラー"
-            End If
-            Dim result As DialogResult = MessageBox.Show(strMessage, strMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-            Exit Sub
-        End If
-
-        '登録処理はここから
-        Dim dtToday As String = UtilClass.formatDatetime(DateTime.Now)
-        Try
-            If _status = CommonConst.STATUS_ADD Then
-                Dim Sql As String = ""
-
-                Sql = ""
-                Sql += "INSERT INTO "
-                Sql += "Public."
-                Sql += "m11_supplier("
-                Sql += "会社コード, 仕入先コード, 仕入先名, 仕入先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 担当者役職, 関税率, 前払法人税率, 輸送費率, メモ, 銀行名, 銀行コード, 支店名, 支店コード, 預金種目, 口座番号, 口座名義, 会計用仕入先コード, 更新者, 更新日)"
-                Sql += " VALUES('"
-                Sql += frmC01F10_Login.loginValue.BumonCD
-                Sql += "', '"
-                Sql += TxtSupplierCode.Text
-                Sql += "', '"
-                Sql += TxtSupplierName.Text
-                Sql += "', '"
-                Sql += TxtSupplierShortName.Text
-                Sql += "', '"
-                Sql += TxtPostalCode.Text
-                Sql += "', '"
-                Sql += TxtAddress1.Text
-                Sql += "', '"
-                Sql += TxtAddress2.Text
-                Sql += "', '"
-                Sql += TxtAddress3.Text
-                Sql += "', '"
-                Sql += TxtTel.Text
-                Sql += "', '"
-                Sql += TxtTelSearch.Text
-                Sql += "', '"
-                Sql += TxtFax.Text
-                Sql += "', '"
-                Sql += TxtPerson.Text
-                Sql += "', '"
-                Sql += TxtPosition.Text
-                Sql += "', '"
-                If TxtTariffRate.Text = "" Then
-                    Sql += "0"
-                Else
-                    Sql += UtilClass.formatNumber(TxtTariffRate.Text)
-                End If
-                Sql += "', '"
-                If TxtPph.Text = "" Then
-                    Sql += "0"
-                Else
-                    Sql += UtilClass.formatNumber(TxtPph.Text)
-                End If
-                Sql += "', '"
-                If TxtTransportationCost.Text = "" Then
-                    Sql += "0"
-                Else
-                    Sql += UtilClass.formatNumber(TxtTransportationCost.Text)
-                End If
-                Sql += "', '"
-                Sql += TxtMemo.Text
-                Sql += "', '"
-                Sql += TxtBankName.Text
-                Sql += "', '"
-                Sql += TxtBankCode.Text
-                Sql += "', '"
-                Sql += TxtBranchName.Text
-                Sql += "', '"
-                Sql += TxtBranchOfficeCode.Text
-                Sql += "', '"
-                Sql += TxtDepositCategory.Text
-                Sql += "', '"
-                Sql += TxtAccountNumber.Text
-                Sql += "', '"
-                Sql += TxtAccountName.Text
-                Sql += "', '"
-                Sql += TxtAccountingVendorCode.Text
-                Sql += "', '"
-                Sql += frmC01F10_Login.loginValue.TantoNM
-                Sql += "', '"
-                Sql += dtToday
-                Sql += "')"
-
-                _db.executeDB(Sql)
-            Else
-                Dim Sql As String = ""
-
-                Sql = ""
-                Sql += "UPDATE "
-                Sql += "Public."
-                Sql += "m11_Supplier "
-                Sql += "SET "
-                Sql += " 会社コード"
-                Sql += " = '"
-                Sql += TxtCompanyCode.Text
-                Sql += "', "
-                Sql += "仕入先コード"
-                Sql += " = '"
-                Sql += TxtSupplierCode.Text
-                Sql += "', "
-                Sql += "仕入先名"
-                Sql += " = '"
-                Sql += TxtSupplierName.Text
-                Sql += "', "
-                Sql += "仕入先名略称"
-                Sql += " = '"
-                Sql += TxtSupplierShortName.Text
-                Sql += "', "
-                Sql += "郵便番号"
-                Sql += " = '"
-                Sql += TxtPostalCode.Text
-                Sql += "', "
-                Sql += "住所１"
-                Sql += " = '"
-                Sql += TxtAddress1.Text
-                Sql += "', "
-                Sql += "住所２"
-                Sql += " = '"
-                Sql += TxtAddress2.Text
-                Sql += "', "
-                Sql += "住所３"
-                Sql += " = '"
-                Sql += TxtAddress3.Text
-                Sql += "', "
-                Sql += "電話番号"
-                Sql += " = '"
-                Sql += TxtTel.Text
-                Sql += "', "
-                Sql += "電話番号検索用"
-                Sql += " = '"
-                Sql += TxtTelSearch.Text
-                Sql += "', "
-                Sql += "ＦＡＸ番号"
-                Sql += " = '"
-                Sql += TxtFax.Text
-                Sql += "', "
-                Sql += "担当者名"
-                Sql += " = '"
-                Sql += TxtPerson.Text
-                Sql += "', "
-                Sql += "担当者役職"
-                Sql += " = '"
-                Sql += TxtPosition.Text
-                Sql += "', "
-                Sql += "関税率"
-                Sql += " = '"
-                Sql += UtilClass.formatNumber(TxtTariffRate.Text)
-                Sql += "', "
-                Sql += "前払法人税率"
-                Sql += " = '"
-                Sql += UtilClass.formatNumber(TxtPph.Text)
-                Sql += "', "
-                Sql += "輸送費率"
-                Sql += " = '"
-                Sql += UtilClass.formatNumber(TxtTransportationCost.Text)
-                Sql += "', "
-                Sql += "メモ"
-                Sql += " = '"
-                Sql += TxtMemo.Text
-                Sql += "', "
-                Sql += "銀行名"
-                Sql += " = '"
-                Sql += TxtBankName.Text
-                Sql += "', "
-                Sql += "銀行コード"
-                Sql += " = '"
-                Sql += TxtBankCode.Text
-                Sql += "', "
-                Sql += "支店名"
-                Sql += " = '"
-                Sql += TxtBranchName.Text
-                Sql += "', "
-                Sql += "支店コード"
-                Sql += " = '"
-                Sql += TxtBranchOfficeCode.Text
-                Sql += "', "
-                Sql += "預金種目"
-                Sql += " = '"
-                Sql += TxtDepositCategory.Text
-                Sql += "', "
-                Sql += "口座番号"
-                Sql += " = '"
-                Sql += TxtAccountNumber.Text
-                Sql += "', "
-                Sql += "口座名義"
-                Sql += " = '"
-                Sql += TxtAccountName.Text
-                Sql += "', "
-                Sql += "会計用仕入先コード"
-                Sql += " = '"
-                Sql += TxtAccountingVendorCode.Text
-                Sql += "', "
-                Sql += "更新者"
-                Sql += " = '"
-                Sql += frmC01F10_Login.loginValue.TantoNM
-                Sql += "', "
-                Sql += "更新日"
-                Sql += " = '"
-                Sql += dtToday
-                Sql += "' "
-                Sql += "WHERE"
-                Sql += " 会社コード"
-                Sql += "='"
-                Sql += _companyCode
-                Sql += "'"
-                Sql += " AND"
-                Sql += " 仕入先コード"
-                Sql += "='"
-                Sql += _supplierCode
-                Sql += "' "
-                Sql += "RETURNING 会社コード"
-                Sql += ", "
-                Sql += "仕入先コード"
-                Sql += ", "
-                Sql += "仕入先名"
-                Sql += ", "
-                Sql += "仕入先名略称"
-                Sql += ", "
-                Sql += "郵便番号"
-                Sql += ", "
-                Sql += "住所１"
-                Sql += ", "
-                Sql += "住所２"
-                Sql += ", "
-                Sql += "住所３"
-                Sql += ", "
-                Sql += "電話番号"
-                Sql += ", "
-                Sql += "電話番号検索用"
-                Sql += ", "
-                Sql += "ＦＡＸ番号"
-                Sql += ", "
-                Sql += "担当者名"
-                Sql += ", "
-                Sql += "担当者役職"
-                Sql += ", "
-                Sql += "関税率"
-                Sql += ", "
-                Sql += "前払法人税率"
-                Sql += ", "
-                Sql += "輸送費率"
-                Sql += ", "
-                Sql += "メモ"
-                Sql += ", "
-                Sql += "銀行名"
-                Sql += ", "
-                Sql += "銀行コード"
-                Sql += ", "
-                Sql += "支店名"
-                Sql += ", "
-                Sql += "支店コード"
-                Sql += ", "
-                Sql += "預金種目"
-                Sql += ", "
-                Sql += "口座番号"
-                Sql += ", "
-                Sql += "口座名義"
-                Sql += ", "
-                Sql += "会計用仕入先コード"
-                Sql += ", "
-                Sql += "更新者"
-                Sql += ", "
-                Sql += "更新日"
-
-                _db.executeDB(Sql)
-            End If
-
-            _parentForm.Enabled = True
-            _parentForm.Show()
-            Me.Dispose()
-
-        Catch ue As UsrDefException
-            ue.dspMsg()
-            Throw ue
-        Catch ex As Exception
-            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
-        End Try
-    End Sub
-
-    Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
-        _parentForm.Enabled = True
-        _parentForm.Show()
-        Me.Dispose()
-    End Sub
-
     Private Sub Supplier_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If frmC01F10_Login.loginValue.Language = "ENG" Then
+
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
             LblSupplierCode.Text = "SupplierCode"
             LblSupplierName.Text = "SupplierName"
             LblShortName.Text = "ShortName"
@@ -412,12 +114,14 @@ Public Class Supplier
             LblPphText.Text = "(Example:0.025)"
             LblBankCodeText.Text = "(Example:012)"
             LblBranchCodeText.Text = "(Example:012)"
-            LblDepositCategoryText.Text = "(1:Normal 2:Deposit)"
             LblAccountNumberText.Text = "(Example:0123456)"
 
             BtnRegistration.Text = "Registration"
             BtnBack.Text = "Back"
         End If
+
+        createCombobox()
+
         If _status = CommonConst.STATUS_EDIT Then
             Dim Sql As String = ""
 
@@ -550,7 +254,7 @@ Public Class Supplier
 
             If ds.Tables(RS).Rows(0)("預金種目") Is DBNull.Value Then
             Else
-                TxtDepositCategory.Text = ds.Tables(RS).Rows(0)("預金種目")
+                createCombobox(ds.Tables(RS).Rows(0)("預金種目"))
             End If
 
             If ds.Tables(RS).Rows(0)("口座番号") Is DBNull.Value Then
@@ -570,4 +274,319 @@ Public Class Supplier
 
         End If
     End Sub
+
+    Private Sub btnAddSupplier_Click(sender As Object, e As EventArgs) Handles BtnRegistration.Click
+        '項目チェック
+        Dim strMessage As String = ""    'メッセージ本文
+        Dim strMessageTitle As String = ""      'メッセージタイトル
+        ''得意先コードは必須
+        If TxtSupplierCode.Text = "" Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+                strMessage = "Please enter Supplier Code. "
+                strMessageTitle = "SupplierCode Error"
+            Else
+                strMessage = "仕入先コードを入力してください。"
+                strMessageTitle = "仕入先コード入力エラー"
+            End If
+            Dim result As DialogResult = MessageBox.Show(strMessage, strMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Exit Sub
+        End If
+
+        '登録処理はここから
+        Dim dtToday As String = UtilClass.formatDatetime(DateTime.Now)
+        Try
+            If _status = CommonConst.STATUS_ADD Then
+                Dim Sql As String = ""
+
+                Sql = ""
+                Sql += "INSERT INTO "
+                Sql += "Public."
+                Sql += "m11_supplier("
+                Sql += "会社コード, 仕入先コード, 仕入先名, 仕入先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 担当者役職, 関税率, 前払法人税率, 輸送費率, メモ, 銀行名, 銀行コード, 支店名, 支店コード, 預金種目, 口座番号, 口座名義, 会計用仕入先コード, 更新者, 更新日)"
+                Sql += " VALUES('"
+                Sql += frmC01F10_Login.loginValue.BumonCD
+                Sql += "', '"
+                Sql += TxtSupplierCode.Text
+                Sql += "', '"
+                Sql += TxtSupplierName.Text
+                Sql += "', '"
+                Sql += TxtSupplierShortName.Text
+                Sql += "', '"
+                Sql += TxtPostalCode.Text
+                Sql += "', '"
+                Sql += TxtAddress1.Text
+                Sql += "', '"
+                Sql += TxtAddress2.Text
+                Sql += "', '"
+                Sql += TxtAddress3.Text
+                Sql += "', '"
+                Sql += TxtTel.Text
+                Sql += "', '"
+                Sql += TxtTelSearch.Text
+                Sql += "', '"
+                Sql += TxtFax.Text
+                Sql += "', '"
+                Sql += TxtPerson.Text
+                Sql += "', '"
+                Sql += TxtPosition.Text
+                Sql += "', '"
+                If TxtTariffRate.Text = "" Then
+                    Sql += "0"
+                Else
+                    Sql += UtilClass.formatNumber(TxtTariffRate.Text)
+                End If
+                Sql += "', '"
+                If TxtPph.Text = "" Then
+                    Sql += "0"
+                Else
+                    Sql += UtilClass.formatNumber(TxtPph.Text)
+                End If
+                Sql += "', '"
+                If TxtTransportationCost.Text = "" Then
+                    Sql += "0"
+                Else
+                    Sql += UtilClass.formatNumber(TxtTransportationCost.Text)
+                End If
+                Sql += "', '"
+                Sql += TxtMemo.Text
+                Sql += "', '"
+                Sql += TxtBankName.Text
+                Sql += "', '"
+                Sql += TxtBankCode.Text
+                Sql += "', '"
+                Sql += TxtBranchName.Text
+                Sql += "', '"
+                Sql += TxtBranchOfficeCode.Text
+                Sql += "', '"
+                Sql += cmDCKbn.SelectedValue.ToString
+                Sql += "', '"
+                Sql += TxtAccountNumber.Text
+                Sql += "', '"
+                Sql += TxtAccountName.Text
+                Sql += "', '"
+                Sql += TxtAccountingVendorCode.Text
+                Sql += "', '"
+                Sql += frmC01F10_Login.loginValue.TantoNM
+                Sql += "', '"
+                Sql += dtToday
+                Sql += "')"
+
+                _db.executeDB(Sql)
+            Else
+                Dim Sql As String = ""
+
+                Sql = ""
+                Sql += "UPDATE "
+                Sql += "Public."
+                Sql += "m11_Supplier "
+                Sql += "SET "
+                Sql += " 会社コード"
+                Sql += " = '"
+                Sql += TxtCompanyCode.Text
+                Sql += "', "
+                Sql += "仕入先コード"
+                Sql += " = '"
+                Sql += TxtSupplierCode.Text
+                Sql += "', "
+                Sql += "仕入先名"
+                Sql += " = '"
+                Sql += TxtSupplierName.Text
+                Sql += "', "
+                Sql += "仕入先名略称"
+                Sql += " = '"
+                Sql += TxtSupplierShortName.Text
+                Sql += "', "
+                Sql += "郵便番号"
+                Sql += " = '"
+                Sql += TxtPostalCode.Text
+                Sql += "', "
+                Sql += "住所１"
+                Sql += " = '"
+                Sql += TxtAddress1.Text
+                Sql += "', "
+                Sql += "住所２"
+                Sql += " = '"
+                Sql += TxtAddress2.Text
+                Sql += "', "
+                Sql += "住所３"
+                Sql += " = '"
+                Sql += TxtAddress3.Text
+                Sql += "', "
+                Sql += "電話番号"
+                Sql += " = '"
+                Sql += TxtTel.Text
+                Sql += "', "
+                Sql += "電話番号検索用"
+                Sql += " = '"
+                Sql += TxtTelSearch.Text
+                Sql += "', "
+                Sql += "ＦＡＸ番号"
+                Sql += " = '"
+                Sql += TxtFax.Text
+                Sql += "', "
+                Sql += "担当者名"
+                Sql += " = '"
+                Sql += TxtPerson.Text
+                Sql += "', "
+                Sql += "担当者役職"
+                Sql += " = '"
+                Sql += TxtPosition.Text
+                Sql += "', "
+                Sql += "関税率"
+                Sql += " = '"
+                Sql += UtilClass.formatNumber(TxtTariffRate.Text)
+                Sql += "', "
+                Sql += "前払法人税率"
+                Sql += " = '"
+                Sql += UtilClass.formatNumber(TxtPph.Text)
+                Sql += "', "
+                Sql += "輸送費率"
+                Sql += " = '"
+                Sql += UtilClass.formatNumber(TxtTransportationCost.Text)
+                Sql += "', "
+                Sql += "メモ"
+                Sql += " = '"
+                Sql += TxtMemo.Text
+                Sql += "', "
+                Sql += "銀行名"
+                Sql += " = '"
+                Sql += TxtBankName.Text
+                Sql += "', "
+                Sql += "銀行コード"
+                Sql += " = '"
+                Sql += TxtBankCode.Text
+                Sql += "', "
+                Sql += "支店名"
+                Sql += " = '"
+                Sql += TxtBranchName.Text
+                Sql += "', "
+                Sql += "支店コード"
+                Sql += " = '"
+                Sql += TxtBranchOfficeCode.Text
+                Sql += "', "
+                Sql += "預金種目"
+                Sql += " = '"
+                Sql += cmDCKbn.SelectedValue.ToString
+                Sql += "', "
+                Sql += "口座番号"
+                Sql += " = '"
+                Sql += TxtAccountNumber.Text
+                Sql += "', "
+                Sql += "口座名義"
+                Sql += " = '"
+                Sql += TxtAccountName.Text
+                Sql += "', "
+                Sql += "会計用仕入先コード"
+                Sql += " = '"
+                Sql += TxtAccountingVendorCode.Text
+                Sql += "', "
+                Sql += "更新者"
+                Sql += " = '"
+                Sql += frmC01F10_Login.loginValue.TantoNM
+                Sql += "', "
+                Sql += "更新日"
+                Sql += " = '"
+                Sql += dtToday
+                Sql += "' "
+                Sql += "WHERE"
+                Sql += " 会社コード"
+                Sql += "='"
+                Sql += _companyCode
+                Sql += "'"
+                Sql += " AND"
+                Sql += " 仕入先コード"
+                Sql += "='"
+                Sql += _supplierCode
+                Sql += "' "
+
+                _db.executeDB(Sql)
+            End If
+
+            _parentForm.Enabled = True
+            _parentForm.Show()
+            Me.Dispose()
+
+        Catch ue As UsrDefException
+            ue.dspMsg()
+            Throw ue
+        Catch ex As Exception
+            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
+            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
+        End Try
+    End Sub
+
+    Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
+        _parentForm.Enabled = True
+        _parentForm.Show()
+        Me.Dispose()
+    End Sub
+
+    '有効無効のコンボボックスを作成
+    '編集モードの時は値を渡してセットさせる
+    Private Sub createCombobox(Optional ByRef prmVal As String = "")
+
+        cmDCKbn.DisplayMember = "Text"
+        cmDCKbn.ValueMember = "Value"
+
+        Dim dsHanyo As DataSet = getDsHanyoData(CommonConst.DC_CODE)
+
+        Dim dtDC As New DataTable("Table")
+        dtDC.Columns.Add("Text", GetType(String))
+        dtDC.Columns.Add("Value", GetType(Integer))
+
+        For i As Integer = 0 To dsHanyo.Tables(RS).Rows.Count - 1
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+                dtDC.Rows.Add(dsHanyo.Tables(RS).Rows(i)("文字２"), dsHanyo.Tables(RS).Rows(i)("可変キー"))
+            Else
+                dtDC.Rows.Add(dsHanyo.Tables(RS).Rows(i)("文字１"), dsHanyo.Tables(RS).Rows(i)("可変キー"))
+            End If
+        Next
+
+        cmDCKbn.DataSource = dtDC
+
+        If prmVal IsNot "" Then
+            cmDCKbn.SelectedValue = prmVal
+        End If
+
+    End Sub
+
+    'param1：String テーブル名
+    'param2：String 詳細条件
+    'Return: DataSet
+    Private Function getDsData(ByVal tableName As String, Optional ByRef txtParam As String = "") As DataSet
+        Dim reccnt As Integer = 0 'DB用（デフォルト）
+        Dim Sql As String = ""
+
+        Sql += "SELECT"
+        Sql += " *"
+        Sql += " FROM "
+
+        Sql += "public." & tableName
+        Sql += " WHERE "
+        Sql += "会社コード"
+        Sql += " ILIKE  "
+        Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += txtParam
+        Return _db.selectDB(Sql, RS, reccnt)
+    End Function
+
+    '汎用マスタから固定キー、可変キーに応じた結果を返す
+    'param1：String 固定キー
+    'param2：String 可変キー
+    'Return: DataSet
+    Private Function getDsHanyoData(ByVal prmFixed As String, Optional ByVal prmVariable As String = "") As DataSet
+        Dim Sql As String = ""
+
+        Sql = " AND "
+        Sql += "固定キー ILIKE '" & prmFixed & "'"
+
+        If prmVariable IsNot "" Then
+            Sql += " AND "
+            Sql += "可変キー ILIKE '" & prmVariable & "'"
+        End If
+
+        'リードタイムのリストを汎用マスタから取得
+        Return getDsData("m90_hanyo", Sql)
+    End Function
+
 End Class

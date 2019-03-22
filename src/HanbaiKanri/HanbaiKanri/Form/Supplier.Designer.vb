@@ -55,7 +55,6 @@ Partial Class Supplier
         Me.LblBranchCode = New System.Windows.Forms.Label()
         Me.LblBankCode = New System.Windows.Forms.Label()
         Me.TxtAccountNumber = New System.Windows.Forms.TextBox()
-        Me.TxtDepositCategory = New System.Windows.Forms.TextBox()
         Me.TxtBranchOfficeCode = New System.Windows.Forms.TextBox()
         Me.TxtBankCode = New System.Windows.Forms.TextBox()
         Me.LblAccountHolder = New System.Windows.Forms.Label()
@@ -80,11 +79,11 @@ Partial Class Supplier
         Me.TxtBranchName = New System.Windows.Forms.TextBox()
         Me.LblBankCodeText = New System.Windows.Forms.Label()
         Me.LblBranchCodeText = New System.Windows.Forms.Label()
-        Me.LblDepositCategoryText = New System.Windows.Forms.Label()
         Me.LblAccountNumberText = New System.Windows.Forms.Label()
         Me.LblSupplierCodeText = New System.Windows.Forms.Label()
         Me.TxtAccountingVendorCode = New System.Windows.Forms.TextBox()
         Me.LblAccountingVendorCode = New System.Windows.Forms.Label()
+        Me.cmDCKbn = New System.Windows.Forms.ComboBox()
         Me.SuspendLayout()
         '
         'LblMemo
@@ -402,15 +401,6 @@ Partial Class Supplier
         Me.TxtAccountNumber.Size = New System.Drawing.Size(234, 22)
         Me.TxtAccountNumber.TabIndex = 21
         '
-        'TxtDepositCategory
-        '
-        Me.TxtDepositCategory.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtDepositCategory.Location = New System.Drawing.Point(483, 418)
-        Me.TxtDepositCategory.MaxLength = 1
-        Me.TxtDepositCategory.Name = "TxtDepositCategory"
-        Me.TxtDepositCategory.Size = New System.Drawing.Size(234, 22)
-        Me.TxtDepositCategory.TabIndex = 20
-        '
         'TxtBranchOfficeCode
         '
         Me.TxtBranchOfficeCode.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
@@ -643,16 +633,6 @@ Partial Class Supplier
         Me.LblBranchCodeText.TabIndex = 244
         Me.LblBranchCodeText.Text = "(例：012)"
         '
-        'LblDepositCategoryText
-        '
-        Me.LblDepositCategoryText.AutoSize = True
-        Me.LblDepositCategoryText.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblDepositCategoryText.Location = New System.Drawing.Point(486, 443)
-        Me.LblDepositCategoryText.Name = "LblDepositCategoryText"
-        Me.LblDepositCategoryText.Size = New System.Drawing.Size(127, 15)
-        Me.LblDepositCategoryText.TabIndex = 245
-        Me.LblDepositCategoryText.Text = "(例：1:普通 2:預金)"
-        '
         'LblAccountNumberText
         '
         Me.LblAccountNumberText.AutoSize = True
@@ -692,15 +672,27 @@ Partial Class Supplier
         Me.LblAccountingVendorCode.TabIndex = 248
         Me.LblAccountingVendorCode.Text = "会計用仕入先コード"
         '
+        'cmDCKbn
+        '
+        Me.cmDCKbn.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.cmDCKbn.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmDCKbn.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.cmDCKbn.FormattingEnabled = True
+        Me.cmDCKbn.ItemHeight = 15
+        Me.cmDCKbn.Location = New System.Drawing.Point(483, 417)
+        Me.cmDCKbn.Name = "cmDCKbn"
+        Me.cmDCKbn.Size = New System.Drawing.Size(234, 23)
+        Me.cmDCKbn.TabIndex = 249
+        '
         'Supplier
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(729, 561)
+        Me.Controls.Add(Me.cmDCKbn)
         Me.Controls.Add(Me.LblAccountingVendorCode)
         Me.Controls.Add(Me.TxtAccountingVendorCode)
         Me.Controls.Add(Me.LblSupplierCodeText)
         Me.Controls.Add(Me.LblAccountNumberText)
-        Me.Controls.Add(Me.LblDepositCategoryText)
         Me.Controls.Add(Me.LblBranchCodeText)
         Me.Controls.Add(Me.LblBankCodeText)
         Me.Controls.Add(Me.LblBranchName)
@@ -728,7 +720,6 @@ Partial Class Supplier
         Me.Controls.Add(Me.LblBranchCode)
         Me.Controls.Add(Me.LblBankCode)
         Me.Controls.Add(Me.TxtAccountNumber)
-        Me.Controls.Add(Me.TxtDepositCategory)
         Me.Controls.Add(Me.TxtBranchOfficeCode)
         Me.Controls.Add(Me.TxtBankCode)
         Me.Controls.Add(Me.LblMemo)
@@ -800,7 +791,6 @@ Partial Class Supplier
     Friend WithEvents LblBranchCode As Label
     Friend WithEvents LblBankCode As Label
     Friend WithEvents TxtAccountNumber As TextBox
-    Friend WithEvents TxtDepositCategory As TextBox
     Friend WithEvents TxtBranchOfficeCode As TextBox
     Friend WithEvents TxtBankCode As TextBox
     Friend WithEvents LblAccountHolder As Label
@@ -825,9 +815,9 @@ Partial Class Supplier
     Friend WithEvents TxtBranchName As TextBox
     Friend WithEvents LblBankCodeText As Label
     Friend WithEvents LblBranchCodeText As Label
-    Friend WithEvents LblDepositCategoryText As Label
     Friend WithEvents LblAccountNumberText As Label
     Friend WithEvents LblSupplierCodeText As Label
     Friend WithEvents TxtAccountingVendorCode As TextBox
     Friend WithEvents LblAccountingVendorCode As Label
+    Friend WithEvents cmDCKbn As ComboBox
 End Class
