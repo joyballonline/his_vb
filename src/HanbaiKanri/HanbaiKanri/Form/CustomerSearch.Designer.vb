@@ -28,7 +28,6 @@ Partial Class CustomerSearch
         Me.btnSelectCustomer = New System.Windows.Forms.Button()
         Me.LblCustomerName = New System.Windows.Forms.Label()
         Me.Dgv_Customer = New System.Windows.Forms.DataGridView()
-        Me.会社コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.得意先コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.得意先名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.得意先名略称 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -103,7 +102,7 @@ Partial Class CustomerSearch
         Me.Dgv_Customer.AllowUserToResizeColumns = False
         Me.Dgv_Customer.AllowUserToResizeRows = False
         Me.Dgv_Customer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.Dgv_Customer.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.会社コード, Me.得意先コード, Me.得意先名, Me.得意先名略称, Me.郵便番号, Me.住所１, Me.住所２, Me.住所３, Me.電話番号, Me.電話番号検索用, Me.FAX番号, Me.担当者名, Me.担当者役職, Me.既定支払条件, Me.メモ, Me.更新者, Me.更新日})
+        Me.Dgv_Customer.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.得意先コード, Me.得意先名, Me.得意先名略称, Me.郵便番号, Me.住所１, Me.住所２, Me.住所３, Me.電話番号, Me.電話番号検索用, Me.FAX番号, Me.担当者名, Me.担当者役職, Me.既定支払条件, Me.メモ, Me.更新者, Me.更新日})
         Me.Dgv_Customer.Location = New System.Drawing.Point(12, 34)
         Me.Dgv_Customer.MultiSelect = False
         Me.Dgv_Customer.Name = "Dgv_Customer"
@@ -113,12 +112,6 @@ Partial Class CustomerSearch
         Me.Dgv_Customer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.Dgv_Customer.Size = New System.Drawing.Size(1326, 195)
         Me.Dgv_Customer.TabIndex = 3
-        '
-        '会社コード
-        '
-        Me.会社コード.HeaderText = "会社コード"
-        Me.会社コード.Name = "会社コード"
-        Me.会社コード.ReadOnly = True
         '
         '得意先コード
         '
@@ -241,7 +234,6 @@ Partial Class CustomerSearch
     Friend WithEvents btnSelectCustomer As Button
     Friend WithEvents LblCustomerName As Label
     Friend WithEvents Dgv_Customer As DataGridView
-    Friend WithEvents 会社コード As DataGridViewTextBoxColumn
     Friend WithEvents 得意先コード As DataGridViewTextBoxColumn
     Friend WithEvents 得意先名 As DataGridViewTextBoxColumn
     Friend WithEvents 得意先名略称 As DataGridViewTextBoxColumn

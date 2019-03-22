@@ -84,7 +84,6 @@ Public Class SalesSearch
             DgvUser.Columns("氏名").HeaderText = "Name"
             DgvUser.Columns("略名").HeaderText = "ShortName"
             DgvUser.Columns("備考").HeaderText = "Remarks"
-            DgvUser.Columns("無効フラグ").HeaderText = "InvalidFlag"
             DgvUser.Columns("権限").HeaderText = "Authority"
             DgvUser.Columns("言語").HeaderText = "Language"
             DgvUser.Columns("更新者").HeaderText = "ModifiedBy"
@@ -109,11 +108,11 @@ Public Class SalesSearch
             Sql += " OR 備考  ILIKE '%" & UtilClass.escapeSql(Search.Text) & "%'"
             Sql += " OR 更新者  ILIKE '%" & UtilClass.escapeSql(Search.Text) & "%'"
             Sql += " ) "
+            Sql += " and 無効フラグ ='" & CommonConst.FLAG_ENABLED & "'"
+            Sql += " order by 会社コード, ユーザＩＤ "
 
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-            'DataGridView1.DataSource = ds
 
             For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
                 DgvUser.Rows.Add()
@@ -121,9 +120,8 @@ Public Class SalesSearch
                 DgvUser.Rows(i).Cells("氏名").Value = ds.Tables(RS).Rows(i)("氏名")              '氏名
                 DgvUser.Rows(i).Cells("略名").Value = ds.Tables(RS).Rows(i)("略名")              '略名
                 DgvUser.Rows(i).Cells("備考").Value = ds.Tables(RS).Rows(i)("備考")              '備考
-                DgvUser.Rows(i).Cells("無効フラグ").Value = ds.Tables(RS).Rows(i)("無効フラグ")        '無効フラグ
-                DgvUser.Rows(i).Cells("権限").Value = ds.Tables(RS).Rows(i)("権限")              '権限
-                DgvUser.Rows(i).Cells("言語").Value = ds.Tables(RS).Rows(i)("言語")              '言語
+                DgvUser.Rows(i).Cells("権限").Value = setAuthText(ds.Tables(RS).Rows(i)("権限"))              '権限
+                DgvUser.Rows(i).Cells("言語").Value = setLangText(ds.Tables(RS).Rows(i)("言語"))              '言語
                 DgvUser.Rows(i).Cells("更新者").Value = ds.Tables(RS).Rows(i)("更新者")              '更新者
                 DgvUser.Rows(i).Cells("更新日").Value = ds.Tables(RS).Rows(i)("更新日")              '更新日
             Next
@@ -182,5 +180,29 @@ Public Class SalesSearch
     Private Sub BtnSearch_Click(sender As Object, e As EventArgs) Handles BtnSearch.Click
         setList() '一覧再表示
     End Sub
+
+    Private Function setAuthText(ByVal prmVal As String) As String
+        Dim reVal As String
+
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+            reVal = IIf(Integer.Parse(prmVal) = CommonConst.Auth_KBN_GENERAL, CommonConst.Auth_KBN_GENERAL_TXT_ENG, CommonConst.Auth_KBN_ADMIN_TXT_ENG)
+        Else
+            reVal = IIf(Integer.Parse(prmVal) = CommonConst.Auth_KBN_GENERAL, CommonConst.Auth_KBN_GENERAL_TXT, CommonConst.Auth_KBN_ADMIN_TXT)
+        End If
+
+        Return reVal
+    End Function
+
+    Private Function setLangText(ByVal prmVal As String) As String
+        Dim reVal As String
+
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+            reVal = IIf(prmVal = CommonConst.LANG_KBN_JPN, CommonConst.LANG_KBN_JPN, CommonConst.LANG_KBN_ENG)
+        Else
+            reVal = IIf(prmVal = CommonConst.LANG_KBN_JPN, CommonConst.LANG_KBN_JPN_TXT, CommonConst.LANG_KBN_ENG_TXT)
+        End If
+
+        Return reVal
+    End Function
 
 End Class

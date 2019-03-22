@@ -111,51 +111,8 @@ Public Class SupplierSearch
 
         End If
 
+        setList() '一覧セット
 
-        Try
-            Sql += "SELECT * FROM public.m11_supplier"
-            Sql += " WHERE "
-            Sql += "会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
-
-            Dim reccnt As Integer = 0
-            Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-            For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-                Dgv_Supplier.Rows.Add()
-                Dgv_Supplier.Rows(i).Cells("仕入先コード").Value = ds.Tables(RS).Rows(i)("仕入先コード")
-                Dgv_Supplier.Rows(i).Cells("仕入先名").Value = ds.Tables(RS).Rows(i)("仕入先名")
-                Dgv_Supplier.Rows(i).Cells("仕入先名略名").Value = ds.Tables(RS).Rows(i)("仕入先名略称")
-                Dgv_Supplier.Rows(i).Cells("郵便番号").Value = ds.Tables(RS).Rows(i)("郵便番号")
-                Dgv_Supplier.Rows(i).Cells("住所１").Value = ds.Tables(RS).Rows(i)("住所１")
-                Dgv_Supplier.Rows(i).Cells("住所２").Value = ds.Tables(RS).Rows(i)("住所２")
-                Dgv_Supplier.Rows(i).Cells("住所３").Value = ds.Tables(RS).Rows(i)("住所３")
-                Dgv_Supplier.Rows(i).Cells("電話番号").Value = ds.Tables(RS).Rows(i)("電話番号")
-                Dgv_Supplier.Rows(i).Cells("電話番号検索用").Value = ds.Tables(RS).Rows(i)("電話番号検索用")
-                Dgv_Supplier.Rows(i).Cells("FAX番号").Value = ds.Tables(RS).Rows(i)("ＦＡＸ番号")
-                Dgv_Supplier.Rows(i).Cells("担当者名").Value = ds.Tables(RS).Rows(i)("担当者名")
-                Dgv_Supplier.Rows(i).Cells("既定間接費率").Value = ds.Tables(RS).Rows(i)("既定間接費率")
-                Dgv_Supplier.Rows(i).Cells("メモ").Value = ds.Tables(RS).Rows(i)("メモ")
-                Dgv_Supplier.Rows(i).Cells("銀行コード").Value = ds.Tables(RS).Rows(i)("銀行コード")
-                Dgv_Supplier.Rows(i).Cells("支店コード").Value = ds.Tables(RS).Rows(i)("支店コード")
-                Dgv_Supplier.Rows(i).Cells("預金種目").Value = ds.Tables(RS).Rows(i)("預金種目")
-                Dgv_Supplier.Rows(i).Cells("口座番号").Value = ds.Tables(RS).Rows(i)("口座番号")
-                Dgv_Supplier.Rows(i).Cells("口座名義").Value = ds.Tables(RS).Rows(i)("口座名義")
-                Dgv_Supplier.Rows(i).Cells("更新者").Value = ds.Tables(RS).Rows(i)("更新者")
-                Dgv_Supplier.Rows(i).Cells("更新日").Value = ds.Tables(RS).Rows(i)("更新日")
-                Dgv_Supplier.Rows(i).Cells("担当者役職").Value = ds.Tables(RS).Rows(i)("担当者役職")
-                Dgv_Supplier.Rows(i).Cells("関税率").Value = ds.Tables(RS).Rows(i)("関税率")
-                Dgv_Supplier.Rows(i).Cells("前払法人税率").Value = ds.Tables(RS).Rows(i)("前払法人税率")
-                Dgv_Supplier.Rows(i).Cells("輸送費率").Value = ds.Tables(RS).Rows(i)("輸送費率")
-
-            Next
-
-        Catch ue As UsrDefException
-            ue.dspMsg()
-            Throw ue
-        Catch ex As Exception
-            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
-        End Try
     End Sub
 
     '選択ボタンクリック時　＆　グリッド内ダブルクリック時
@@ -214,6 +171,10 @@ Public Class SupplierSearch
     End Sub
 
     Private Sub BtnSearch_Click(sender As Object, e As EventArgs) Handles BtnSearch.Click
+        setList() '一覧セット
+    End Sub
+
+    Private Sub setList()
         Dgv_Supplier.Rows.Clear()
 
         Dim Sql As String = ""
@@ -233,6 +194,7 @@ Public Class SupplierSearch
             Sql += " OR 口座名義  ILIKE '%" & UtilClass.escapeSql(Search.Text) & "%'"
             Sql += " OR 担当者役職  ILIKE '%" & UtilClass.escapeSql(Search.Text) & "%'"
             Sql += " ) "
+            Sql += " order by 会社コード, 仕入先コード "
 
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
@@ -273,5 +235,4 @@ Public Class SupplierSearch
             Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
         End Try
     End Sub
-
 End Class

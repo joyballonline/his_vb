@@ -1056,6 +1056,7 @@ Public Class Quote
         Me.Dispose()
     End Sub
 
+    '登録ボタン押下時
     Private Sub BtnRegistration_Click(sender As Object, e As EventArgs) Handles BtnRegistration.Click
 
         '項目チェック
@@ -1085,6 +1086,17 @@ Public Class Quote
             Dim result As DialogResult = MessageBox.Show(strMessage, strMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Exit Sub
         End If
+
+        '仕入先と数量がなかったらエラーで戻す
+        For i As Integer = 0 To DgvItemList.RowCount - 1
+            If DgvItemList.Rows(i).Cells("仕入先コード").Value Is Nothing Or DgvItemList.Rows(i).Cells("数量").Value Is Nothing Then
+                '対象データがないメッセージを表示
+                _msgHd.dspMSG("chkQuoteInputError", frmC01F10_Login.loginValue.Language)
+
+                Exit Sub
+            End If
+        Next
+
         'TxtVatの属性チェック
         If Not IsNumeric(TxtVat.Text) Then
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
@@ -1301,7 +1313,10 @@ Public Class Quote
                 Sql1 += "INSERT INTO "
                 Sql1 += "Public."
                 Sql1 += "t01_mithd("
-                Sql1 += "会社コード, 見積番号, 見積番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額, 仕入金額, 粗利額, 営業担当者コード, 営業担当者, 入力担当者コード, 入力担当者, 備考, ＶＡＴ, 取消区分, 登録日, 更新日, 更新者)"
+                Sql1 += "会社コード, 見積番号, 見積番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所"
+                Sql1 += ", 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 見積日, 見積有効期限"
+                Sql1 += ", 支払条件, 見積金額, 仕入金額, 粗利額, 営業担当者コード, 営業担当者, 入力担当者コード"
+                Sql1 += ", 入力担当者, 備考, ＶＡＴ, 取消区分, 登録日, 更新日, 更新者)"
                 Sql1 += " VALUES('" & frmC01F10_Login.loginValue.BumonCD & "'"  '会社コード
                 Sql1 += ",'" & TxtQuoteNo.Text & "'"                            '見積番号
                 Sql1 += ", '" & TxtSuffixNo.Text & "'"                          '見積番号枝番

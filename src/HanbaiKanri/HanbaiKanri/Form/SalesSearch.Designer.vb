@@ -32,7 +32,6 @@ Partial Class SalesSearch
         Me.氏名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.略名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.備考 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.無効フラグ = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.権限 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.言語 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.更新者 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -95,7 +94,7 @@ Partial Class SalesSearch
         Me.DgvUser.AllowUserToResizeColumns = False
         Me.DgvUser.AllowUserToResizeRows = False
         Me.DgvUser.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvUser.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ユーザID, Me.氏名, Me.略名, Me.備考, Me.無効フラグ, Me.権限, Me.言語, Me.更新者, Me.更新日})
+        Me.DgvUser.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ユーザID, Me.氏名, Me.略名, Me.備考, Me.権限, Me.言語, Me.更新者, Me.更新日})
         Me.DgvUser.Location = New System.Drawing.Point(12, 34)
         Me.DgvUser.Name = "DgvUser"
         Me.DgvUser.ReadOnly = True
@@ -128,12 +127,6 @@ Partial Class SalesSearch
         Me.備考.HeaderText = "備考"
         Me.備考.Name = "備考"
         Me.備考.ReadOnly = True
-        '
-        '無効フラグ
-        '
-        Me.無効フラグ.HeaderText = "無効フラグ"
-        Me.無効フラグ.Name = "無効フラグ"
-        Me.無効フラグ.ReadOnly = True
         '
         '権限
         '
@@ -188,7 +181,6 @@ Partial Class SalesSearch
     Friend WithEvents 氏名 As DataGridViewTextBoxColumn
     Friend WithEvents 略名 As DataGridViewTextBoxColumn
     Friend WithEvents 備考 As DataGridViewTextBoxColumn
-    Friend WithEvents 無効フラグ As DataGridViewTextBoxColumn
     Friend WithEvents 権限 As DataGridViewTextBoxColumn
     Friend WithEvents 言語 As DataGridViewTextBoxColumn
     Friend WithEvents 更新者 As DataGridViewTextBoxColumn
