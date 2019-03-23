@@ -1,15 +1,15 @@
 '===================================================================================
-'@ iƒVƒXƒeƒ€–¼j      SPINŒü‚¯@Œ´‰¿ŠÇ—ƒVƒXƒeƒ€
+'ã€€ ï¼ˆã‚·ã‚¹ãƒ†ãƒ åï¼‰      SPINå‘ã‘ã€€åŸä¾¡ç®¡ç†ã‚·ã‚¹ãƒ†ãƒ 
 '
-'   i‹@”\–¼j          ƒXƒ^[ƒgƒAƒbƒvƒNƒ‰ƒXiSub Main‚ğŠÜ‚Şj
-'   iƒNƒ‰ƒX–¼j        StartUp
-'   iˆ—‹@”\–¼j      ƒAƒvƒŠƒP[ƒVƒ‡ƒ“ŠJn‚Ìˆ—
-'   i”õlj            ‰Šúƒ`ƒFƒbƒNŒã‚Éƒƒjƒ…[‰æ–Ê‚ğ•\¦‚·‚éB
+'   ï¼ˆæ©Ÿèƒ½åï¼‰          ã‚¹ã‚¿ãƒ¼ãƒˆã‚¢ãƒƒãƒ—ã‚¯ãƒ©ã‚¹ï¼ˆSub Mainã‚’å«ã‚€ï¼‰
+'   ï¼ˆã‚¯ãƒ©ã‚¹åï¼‰        StartUp
+'   ï¼ˆå‡¦ç†æ©Ÿèƒ½åï¼‰      ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³é–‹å§‹æ™‚ã®å‡¦ç†
+'   ï¼ˆå‚™è€ƒï¼‰            åˆæœŸãƒã‚§ãƒƒã‚¯å¾Œã«ãƒ¡ãƒ‹ãƒ¥ãƒ¼ç”»é¢ã‚’è¡¨ç¤ºã™ã‚‹ã€‚
 '
 '===================================================================================
-' —š—ğ  –¼‘O                “ú•t       ƒ}[ƒN       “à—e
+' å±¥æ­´  åå‰                æ—¥ä»˜       ãƒãƒ¼ã‚¯       å†…å®¹
 '-----------------------------------------------------------------------------------
-'  (1)  °Œ´                2018/01/05              V‹K
+'  (1)  é´«åŸ                2018/01/05              æ–°è¦
 '-----------------------------------------------------------------------------------
 Imports UtilMDL
 Imports UtilMDL.MSG
@@ -18,38 +18,38 @@ Imports UtilMDL.API
 Imports UtilMDL.DB
 
 '===================================================================================
-'ƒXƒ^[ƒgƒAƒbƒvƒNƒ‰ƒX
+'ã‚¹ã‚¿ãƒ¼ãƒˆã‚¢ãƒƒãƒ—ã‚¯ãƒ©ã‚¹
 '===================================================================================
 Public Class StartUp
 
     Public Lang As String = "en"
 
     '-------------------------------------------------------------------------------
-    '\‘¢‘ÌéŒ¾
+    'æ§‹é€ ä½“å®£è¨€
     '-------------------------------------------------------------------------------
-    Public Structure iniType                    'INIƒtƒ@ƒCƒ‹Ši”[—p
-        Public LogType As String                'ƒƒOƒŒƒxƒ‹
-        Public LogFilePath As String            'ƒƒOƒtƒ@ƒCƒ‹ƒpƒX(ƒtƒ@ƒCƒ‹–¼‚àŠÜ‚Ş)
-        Public MsgFileName As String            'ƒƒbƒZ[ƒWƒtƒ@ƒCƒ‹–¼
-        Public LangFileName As String           'Œ¾Œêƒtƒ@ƒCƒ‹–¼
-        Public SVAddr As String                 'ƒT[ƒo–¼iƒƒCƒ“ƒT[ƒoj
-        Public PortNo As String                 'ƒ|[ƒg”Ô†iƒƒCƒ“ƒT[ƒoj
-        Public DBName As String                 '‚c‚aiƒƒCƒ“ƒT[ƒoj
-        Public UserId As String                 'ƒ†[ƒUiƒƒCƒ“ƒT[ƒoj
-        Public Password As String               'ƒpƒXƒ[ƒhiƒƒCƒ“ƒT[ƒoj
-        Public SVAddr_stby As String            'ƒT[ƒo–¼iƒoƒbƒNƒAƒbƒvƒT[ƒoj
-        Public PortNo_stby As String            'ƒ|[ƒg”Ô†iƒoƒbƒNƒAƒbƒvƒT[ƒoj
-        Public DBName_stby As String            '‚c‚aiƒoƒbƒNƒAƒbƒvƒT[ƒoj
-        Public UserId_stby As String            'ƒ†[ƒUiƒoƒbƒNƒAƒbƒvƒT[ƒoj
-        Public Password_stby As String          'ƒpƒXƒ[ƒhiƒoƒbƒNƒAƒbƒvƒT[ƒoj
-        Public SystemCaption As String          'ƒƒOƒCƒ“•\¦ƒVƒXƒeƒ€–¼
-        Public GamenSelUpperCnt As Integer      'Šeí“ü—Í‰æ–ÊŒŸõAŒx•\¦‚·‚éãŒÀŒ”
-        Public PrintSelUpperCnt As Integer      '’ •[o—Íw¦‰æ–ÊŒŸõAŒx•\¦‚·‚éãŒÀŒ”
-        Public BaseXlsPath As String            'EXCElo—Í‚Ì—Œ`ƒtƒHƒ‹ƒ_ƒpƒX
-        Public OutXlsPath As String             'EXCElo—ÍæƒtƒHƒ‹ƒ_ƒpƒX
+    Public Structure iniType                    'INIãƒ•ã‚¡ã‚¤ãƒ«æ ¼ç´ç”¨
+        Public LogType As String                'ãƒ­ã‚°ãƒ¬ãƒ™ãƒ«
+        Public LogFilePath As String            'ãƒ­ã‚°ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹(ãƒ•ã‚¡ã‚¤ãƒ«åã‚‚å«ã‚€)
+        Public MsgFileName As String            'ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒ•ã‚¡ã‚¤ãƒ«å
+        Public LangFileName As String           'è¨€èªãƒ•ã‚¡ã‚¤ãƒ«å
+        Public SVAddr As String                 'ã‚µãƒ¼ãƒåï¼ˆãƒ¡ã‚¤ãƒ³ã‚µãƒ¼ãƒï¼‰
+        Public PortNo As String                 'ãƒãƒ¼ãƒˆç•ªå·ï¼ˆãƒ¡ã‚¤ãƒ³ã‚µãƒ¼ãƒï¼‰
+        Public DBName As String                 'ï¼¤ï¼¢ï¼ˆãƒ¡ã‚¤ãƒ³ã‚µãƒ¼ãƒï¼‰
+        Public UserId As String                 'ãƒ¦ãƒ¼ã‚¶ï¼ˆãƒ¡ã‚¤ãƒ³ã‚µãƒ¼ãƒï¼‰
+        Public Password As String               'ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ï¼ˆãƒ¡ã‚¤ãƒ³ã‚µãƒ¼ãƒï¼‰
+        Public SVAddr_stby As String            'ã‚µãƒ¼ãƒåï¼ˆãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ã‚µãƒ¼ãƒï¼‰
+        Public PortNo_stby As String            'ãƒãƒ¼ãƒˆç•ªå·ï¼ˆãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ã‚µãƒ¼ãƒï¼‰
+        Public DBName_stby As String            'ï¼¤ï¼¢ï¼ˆãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ã‚µãƒ¼ãƒï¼‰
+        Public UserId_stby As String            'ãƒ¦ãƒ¼ã‚¶ï¼ˆãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ã‚µãƒ¼ãƒï¼‰
+        Public Password_stby As String          'ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ï¼ˆãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ã‚µãƒ¼ãƒï¼‰
+        Public SystemCaption As String          'ãƒ­ã‚°ã‚¤ãƒ³è¡¨ç¤ºã‚·ã‚¹ãƒ†ãƒ å
+        Public GamenSelUpperCnt As Integer      'å„ç¨®å…¥åŠ›ç”»é¢æ¤œç´¢æ™‚ã€è­¦å‘Šè¡¨ç¤ºã™ã‚‹ä¸Šé™ä»¶æ•°
+        Public PrintSelUpperCnt As Integer      'å¸³ç¥¨å‡ºåŠ›æŒ‡ç¤ºç”»é¢æ¤œç´¢æ™‚ã€è­¦å‘Šè¡¨ç¤ºã™ã‚‹ä¸Šé™ä»¶æ•°
+        Public BaseXlsPath As String            'EXCElå‡ºåŠ›ã®é››å½¢ãƒ•ã‚©ãƒ«ãƒ€ãƒ‘ã‚¹
+        Public OutXlsPath As String             'EXCElå‡ºåŠ›å…ˆãƒ•ã‚©ãƒ«ãƒ€ãƒ‘ã‚¹
     End Structure
 
-    '”Ä—pƒ}ƒXƒ^ƒf[ƒ^Ši”[—p•Ï”
+    'æ±ç”¨ãƒã‚¹ã‚¿ãƒ‡ãƒ¼ã‚¿æ ¼ç´ç”¨å¤‰æ•°
     Public Structure hanyouM
         Public KoteiKey As String
         Public KahenKey As String
@@ -57,188 +57,188 @@ Public Class StartUp
         Public Mei2 As String
     End Structure
 
-    'ƒƒOƒCƒ“î•ñŠi”[•Ï”
-    Public Structure loginType              'ƒƒOƒCƒ“î•ñŠi”[—p
-        Public TantoCD As String            'ƒ†[ƒU‚h‚c
-        Public Passwd As String             'ƒpƒXƒ[ƒh
-        Public Kengen As String             'Œ ŒÀ
-        Public TantoNM As String            '’S“–Ò–¼
-        Public PcName As String             '’[–––¼
-        Public BumonCD As String            '‰ïĞƒR[ƒh
-        Public BumonNM As String            '‰ïĞ—ªÌ
-        Public TantoSign As String          '’S“–ƒTƒCƒ“
-        Public Generation As Integer        '¢‘ã”Ô†
-        Public Language As String           'Œ¾Œê
-        Public Auth As String               'Œ ŒÀ
+    'ãƒ­ã‚°ã‚¤ãƒ³æƒ…å ±æ ¼ç´å¤‰æ•°
+    Public Structure loginType              'ãƒ­ã‚°ã‚¤ãƒ³æƒ…å ±æ ¼ç´ç”¨
+        Public TantoCD As String            'ãƒ¦ãƒ¼ã‚¶ï¼©ï¼¤
+        Public Passwd As String             'ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰
+        Public Kengen As String             'æ¨©é™
+        Public TantoNM As String            'æ‹…å½“è€…å
+        Public PcName As String             'ç«¯æœ«å
+        Public BumonCD As String            'ä¼šç¤¾ã‚³ãƒ¼ãƒ‰
+        Public BumonNM As String            'ä¼šç¤¾ç•¥ç§°
+        Public TantoSign As String          'æ‹…å½“ã‚µã‚¤ãƒ³
+        Public Generation As Integer        'ä¸–ä»£ç•ªå·
+        Public Language As String           'è¨€èª
+        Public Auth As String               'æ¨©é™
     End Structure
 
     '-------------------------------------------------------------------------------
-    '’è”éŒ¾
+    'å®šæ•°å®£è¨€
     '-------------------------------------------------------------------------------
-    'ŒÅ’è‚Ìƒtƒ@ƒCƒ‹–¼‚âƒpƒX–¼
-    Public Const INI_FILE As String = "HanbaiKanri.ini"                                'Iniƒtƒ@ƒCƒ‹–¼
+    'å›ºå®šã®ãƒ•ã‚¡ã‚¤ãƒ«åã‚„ãƒ‘ã‚¹å
+    Public Const INI_FILE As String = "HanbaiKanri.ini"                                'Iniãƒ•ã‚¡ã‚¤ãƒ«å
 
-    '‚h‚m‚hƒtƒ@ƒCƒ‹‚ÌƒZƒNƒVƒ‡ƒ“–¼Ì
-    Private Const INIITEM1_LOGFILE As String = "Logging"                                'ƒƒOƒŒƒxƒ‹/ƒƒOƒtƒ@ƒCƒ‹î•ñ
-    Private Const INIITEM1_MSGFILE As String = "msg File"                               'ƒƒbƒZ[ƒWƒtƒ@ƒCƒ‹î•ñ
-    Private Const INIITEM1_LANGFILE As String = "lang File"                             'Œ¾Œêƒtƒ@ƒCƒ‹î•ñ
-    Private Const INIITEM1_DB As String = "DB"                                          'ƒƒCƒ“ƒT[ƒoDBÚ‘±î•ñ
-    Private Const INIITEM1_DB_STBY As String = "DB_Standby"                             'ƒoƒbƒNƒAƒbƒvƒT[ƒoDBÚ‘±î•ñ
-    Private Const INIITEM1_PRODUCT_INFO As String = "Product Info"                      'ƒVƒXƒeƒ€‹K’èî•ñ
-    Private Const INIITEM1_EXCEL As String = "Excel Objects"                            'ŠeíEXCEL
+    'ï¼©ï¼®ï¼©ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚»ã‚¯ã‚·ãƒ§ãƒ³åç§°
+    Private Const INIITEM1_LOGFILE As String = "Logging"                                'ãƒ­ã‚°ãƒ¬ãƒ™ãƒ«/ãƒ­ã‚°ãƒ•ã‚¡ã‚¤ãƒ«æƒ…å ±
+    Private Const INIITEM1_MSGFILE As String = "msg File"                               'ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒ•ã‚¡ã‚¤ãƒ«æƒ…å ±
+    Private Const INIITEM1_LANGFILE As String = "lang File"                             'è¨€èªãƒ•ã‚¡ã‚¤ãƒ«æƒ…å ±
+    Private Const INIITEM1_DB As String = "DB"                                          'ãƒ¡ã‚¤ãƒ³ã‚µãƒ¼ãƒDBæ¥ç¶šæƒ…å ±
+    Private Const INIITEM1_DB_STBY As String = "DB_Standby"                             'ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ã‚µãƒ¼ãƒDBæ¥ç¶šæƒ…å ±
+    Private Const INIITEM1_PRODUCT_INFO As String = "Product Info"                      'ã‚·ã‚¹ãƒ†ãƒ è¦å®šæƒ…å ±
+    Private Const INIITEM1_EXCEL As String = "Excel Objects"                            'å„ç¨®EXCEL
 
-    '‚h‚m‚hƒtƒ@ƒCƒ‹‚ÌƒL[–¼Ì
-    Private Const INIITEM2_LOGTYPE As String = "LogType"                                'ƒƒOƒŒƒxƒ‹
-    Private Const INIITEM2_LOGFILEPATH As String = "LogFilePath"                        'ƒƒOƒtƒ@ƒCƒ‹ƒpƒX(ƒtƒ@ƒCƒ‹–¼‚àŠÜ‚Ş)
-    Private Const INIITEM2_MSGFILENAME As String = "msgFileName"                        'ƒƒbƒZ[ƒWƒtƒ@ƒCƒ‹–¼
-    Private Const INIITEM2_LANGFILENAME As String = "LangFileName"                      'Œ¾Œêƒtƒ@ƒCƒ‹–¼
-    Private Const INIITEM2_SVADDR As String = "SVAddr"                                  'ƒT[ƒo–¼iƒƒCƒ“ƒT[ƒoj
-    Private Const INIITEM2_PORTNO As String = "PortNo"                                  'ƒ|[ƒg”Ô†iƒƒCƒ“ƒT[ƒoj
-    Private Const INIITEM2_DBNAME As String = "DBName"                                  '‚c‚aiƒƒCƒ“ƒT[ƒoj
-    Private Const INIITEM2_USERID As String = "UserId"                                  'ƒ†[ƒUiƒƒCƒ“ƒT[ƒoj
-    Private Const INIITEM2_PASSWORD As String = "Password"                              'ƒpƒXƒ[ƒhiƒƒCƒ“ƒT[ƒoj
-    Private Const INIITEM2_SVADDR_STBY As String = "SVAddr"                             'ƒT[ƒo–¼iƒoƒbƒNƒAƒbƒvƒT[ƒoj
-    Private Const INIITEM2_PORTNO_STBY As String = "PortNo"                             'ƒ|[ƒg”Ô†iƒoƒbƒNƒAƒbƒvƒT[ƒoj
-    Private Const INIITEM2_DBNAME_STBY As String = "DBName"                             '‚c‚aiƒoƒbƒNƒAƒbƒvƒT[ƒoj
-    Private Const INIITEM2_USERID_STBY As String = "UserId"                             'ƒ†[ƒUiƒoƒbƒNƒAƒbƒvƒT[ƒoj
-    Private Const INIITEM2_PASSWORD_STBY As String = "Password"                         'ƒpƒXƒ[ƒhiƒoƒbƒNƒAƒbƒvƒT[ƒoj
-    Private Const INIITEM2_SYSTEMCAPTION As String = "SystemCaption"                    'ƒƒOƒCƒ“•\¦ƒVƒXƒeƒ€–¼
-    Private Const INIITEM2_GAMENSELUPPERCNT As String = "GamenSelUpperCnt"              'Šeí“ü—Í‰æ–ÊŒŸõAŒx•\¦‚·‚éãŒÀŒ”
-    Private Const INIITEM2_PRINTSELUPPERCNT As String = "PrintSelUpperCnt"              '’ •[o—Íw¦‰æ–ÊŒŸõAŒx•\¦‚·‚éãŒÀŒ”
-    Private Const INIITEM2_BASEXLSPATH As String = "BaseXLSPath"                        'EXCEL—Œ`ƒtƒ@ƒCƒ‹ƒpƒX
-    Private Const INIITEM2_OUTXLSPATH As String = "OutXLSPath"                          'EXCELo—ÍæƒtƒHƒ‹ƒ_ƒpƒX
+    'ï¼©ï¼®ï¼©ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚­ãƒ¼åç§°
+    Private Const INIITEM2_LOGTYPE As String = "LogType"                                'ãƒ­ã‚°ãƒ¬ãƒ™ãƒ«
+    Private Const INIITEM2_LOGFILEPATH As String = "LogFilePath"                        'ãƒ­ã‚°ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹(ãƒ•ã‚¡ã‚¤ãƒ«åã‚‚å«ã‚€)
+    Private Const INIITEM2_MSGFILENAME As String = "msgFileName"                        'ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒ•ã‚¡ã‚¤ãƒ«å
+    Private Const INIITEM2_LANGFILENAME As String = "LangFileName"                      'è¨€èªãƒ•ã‚¡ã‚¤ãƒ«å
+    Private Const INIITEM2_SVADDR As String = "SVAddr"                                  'ã‚µãƒ¼ãƒåï¼ˆãƒ¡ã‚¤ãƒ³ã‚µãƒ¼ãƒï¼‰
+    Private Const INIITEM2_PORTNO As String = "PortNo"                                  'ãƒãƒ¼ãƒˆç•ªå·ï¼ˆãƒ¡ã‚¤ãƒ³ã‚µãƒ¼ãƒï¼‰
+    Private Const INIITEM2_DBNAME As String = "DBName"                                  'ï¼¤ï¼¢ï¼ˆãƒ¡ã‚¤ãƒ³ã‚µãƒ¼ãƒï¼‰
+    Private Const INIITEM2_USERID As String = "UserId"                                  'ãƒ¦ãƒ¼ã‚¶ï¼ˆãƒ¡ã‚¤ãƒ³ã‚µãƒ¼ãƒï¼‰
+    Private Const INIITEM2_PASSWORD As String = "Password"                              'ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ï¼ˆãƒ¡ã‚¤ãƒ³ã‚µãƒ¼ãƒï¼‰
+    Private Const INIITEM2_SVADDR_STBY As String = "SVAddr"                             'ã‚µãƒ¼ãƒåï¼ˆãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ã‚µãƒ¼ãƒï¼‰
+    Private Const INIITEM2_PORTNO_STBY As String = "PortNo"                             'ãƒãƒ¼ãƒˆç•ªå·ï¼ˆãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ã‚µãƒ¼ãƒï¼‰
+    Private Const INIITEM2_DBNAME_STBY As String = "DBName"                             'ï¼¤ï¼¢ï¼ˆãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ã‚µãƒ¼ãƒï¼‰
+    Private Const INIITEM2_USERID_STBY As String = "UserId"                             'ãƒ¦ãƒ¼ã‚¶ï¼ˆãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ã‚µãƒ¼ãƒï¼‰
+    Private Const INIITEM2_PASSWORD_STBY As String = "Password"                         'ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ï¼ˆãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ã‚µãƒ¼ãƒï¼‰
+    Private Const INIITEM2_SYSTEMCAPTION As String = "SystemCaption"                    'ãƒ­ã‚°ã‚¤ãƒ³è¡¨ç¤ºã‚·ã‚¹ãƒ†ãƒ å
+    Private Const INIITEM2_GAMENSELUPPERCNT As String = "GamenSelUpperCnt"              'å„ç¨®å…¥åŠ›ç”»é¢æ¤œç´¢ã€æ™‚è­¦å‘Šè¡¨ç¤ºã™ã‚‹ä¸Šé™ä»¶æ•°
+    Private Const INIITEM2_PRINTSELUPPERCNT As String = "PrintSelUpperCnt"              'å¸³ç¥¨å‡ºåŠ›æŒ‡ç¤ºç”»é¢æ¤œç´¢æ™‚ã€è­¦å‘Šè¡¨ç¤ºã™ã‚‹ä¸Šé™ä»¶æ•°
+    Private Const INIITEM2_BASEXLSPATH As String = "BaseXLSPath"                        'EXCELé››å½¢ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹
+    Private Const INIITEM2_OUTXLSPATH As String = "OutXLSPath"                          'EXCELå‡ºåŠ›å…ˆãƒ•ã‚©ãƒ«ãƒ€ãƒ‘ã‚¹
 
-    Private Const RS As String = "RecSet"                           'ƒŒƒR[ƒhƒZƒbƒgƒe[ƒuƒ‹
+    Private Const RS As String = "RecSet"                           'ãƒ¬ã‚³ãƒ¼ãƒ‰ã‚»ãƒƒãƒˆãƒ†ãƒ¼ãƒ–ãƒ«
 
-    '”Ä—pƒ}ƒXƒ^æ“¾—p—ñ–¼
-    Private Const HYM_KOTEIKEY As String = "clHYM_KOTEIKEY"         '”Ä—pƒ}ƒXƒ^@ŒÅ’èƒL[
-    Private Const HYM_KAHENKEY As String = "clHYM_KAHENKEY"         '”Ä—pƒ}ƒXƒ^@‰Â•ÏƒL[
-    Private Const HYM_MEI1 As String = "clHYM_MEI1"                 '”Ä—pƒ}ƒXƒ^@–¼Ì‚P
-    Private Const HYM_MEI2 As String = "clHYM_MEI2"                 '”Ä—pƒ}ƒXƒ^@–¼Ì‚Q
+    'æ±ç”¨ãƒã‚¹ã‚¿å–å¾—ç”¨åˆ—å
+    Private Const HYM_KOTEIKEY As String = "clHYM_KOTEIKEY"         'æ±ç”¨ãƒã‚¹ã‚¿ã€€å›ºå®šã‚­ãƒ¼
+    Private Const HYM_KAHENKEY As String = "clHYM_KAHENKEY"         'æ±ç”¨ãƒã‚¹ã‚¿ã€€å¯å¤‰ã‚­ãƒ¼
+    Private Const HYM_MEI1 As String = "clHYM_MEI1"                 'æ±ç”¨ãƒã‚¹ã‚¿ã€€åç§°ï¼‘
+    Private Const HYM_MEI2 As String = "clHYM_MEI2"                 'æ±ç”¨ãƒã‚¹ã‚¿ã€€åç§°ï¼’
 
-    'ƒƒbƒZ[ƒWID
-    Private Const SYSERR As String = "SystemErr"                'ƒVƒXƒeƒ€ƒGƒ‰[
-    Private Const NOHANYOUMST As String = "noHanyouMst"         '”Ä—pƒ}ƒXƒ^‚Ì’l‚Ìæ“¾‚É¸”s‚µ‚Ü‚µ‚½B
+    'ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ID
+    Private Const SYSERR As String = "SystemErr"                'ã‚·ã‚¹ãƒ†ãƒ ã‚¨ãƒ©ãƒ¼
+    Private Const NOHANYOUMST As String = "noHanyouMst"         'æ±ç”¨ãƒã‚¹ã‚¿ã®å€¤ã®å–å¾—ã«å¤±æ•—ã—ã¾ã—ãŸã€‚
 
-    Private Const SETUZOKUSTR As String = "_,_"                 '”Ä—pƒ}ƒXƒ^‚Ì’l‚ğ\‘¢‘Ì‚©‚çæ“¾‚·‚é‚½‚ß‚Ì•¶š—ñ‚Ìˆê•”
+    Private Const SETUZOKUSTR As String = "_,_"                 'æ±ç”¨ãƒã‚¹ã‚¿ã®å€¤ã‚’æ§‹é€ ä½“ã‹ã‚‰å–å¾—ã™ã‚‹ãŸã‚ã®æ–‡å­—åˆ—ã®ä¸€éƒ¨
 
-    'ƒR[ƒh‘I‘ğ‹¤’Êq‰æ–Ê‚©‚ç•Ô‚µ‚Ä‚à‚ç‚¤’l
-    Public Const HANYO_BACK_NAME1 As String = "NAME1"           '–¼Ì1
-    Public Const HANYO_BACK_NAME2 As String = "NAME2"           '–¼Ì2
-    Public Const HANYO_BACK_NAME3 As String = "NAME3"           '–¼Ì3
-    Public Const HANYO_BACK_NAME4 As String = "NAME4"           '–¼Ì4
-    Public Const HANYO_BACK_NAME5 As String = "NAME5"           '–¼Ì5
+    'ã‚³ãƒ¼ãƒ‰é¸æŠå…±é€šå­ç”»é¢ã‹ã‚‰è¿”ã—ã¦ã‚‚ã‚‰ã†å€¤
+    Public Const HANYO_BACK_NAME1 As String = "NAME1"           'åç§°1
+    Public Const HANYO_BACK_NAME2 As String = "NAME2"           'åç§°2
+    Public Const HANYO_BACK_NAME3 As String = "NAME3"           'åç§°3
+    Public Const HANYO_BACK_NAME4 As String = "NAME4"           'åç§°4
+    Public Const HANYO_BACK_NAME5 As String = "NAME5"           'åç§°5
 
-    '‹Æ–±‚h‚c
-    Public Const GYOMU_H01 As String = "H01"           '’•¶
-    Public Const GYOMU_H10 As String = "H10"           '’•¶
-    Public Const GYOMU_H03 As String = "H03"           'ˆÏ‘õ”„ã
-    Public Const GYOMU_H04 As String = "H04"           '¿‹
-    Public Const GYOMU_H05 As String = "H05"           '“ü‹à
-    Public Const GYOMU_H06 As String = "H06"           'd“ü
-    Public Const GYOMU_H07 As String = "H07"           'x•¥
-    Public Const GYOMU_G01 As String = "G01"           'Œ´‰¿
-    Public Const GYOMU_M01 As String = "M01"           'ƒ}ƒXƒ^•Ûç
+    'æ¥­å‹™ï¼©ï¼¤
+    Public Const GYOMU_H01 As String = "H01"           'æ³¨æ–‡
+    Public Const GYOMU_H10 As String = "H10"           'æ³¨æ–‡
+    Public Const GYOMU_H03 As String = "H03"           'å§”è¨—å£²ä¸Š
+    Public Const GYOMU_H04 As String = "H04"           'è«‹æ±‚
+    Public Const GYOMU_H05 As String = "H05"           'å…¥é‡‘
+    Public Const GYOMU_H06 As String = "H06"           'ä»•å…¥
+    Public Const GYOMU_H07 As String = "H07"           'æ”¯æ‰•
+    Public Const GYOMU_G01 As String = "G01"           'åŸä¾¡
+    Public Const GYOMU_M01 As String = "M01"           'ãƒã‚¹ã‚¿ä¿å®ˆ
 
 
     '-------------------------------------------------------------------------------
-    'ƒƒ“ƒo[•Ï”éŒ¾
+    'ãƒ¡ãƒ³ãƒãƒ¼å¤‰æ•°å®£è¨€
     '-------------------------------------------------------------------------------
-    Private Shared _assembly As System.Reflection.Assembly          'ƒAƒZƒ“ƒuƒŠ(ƒAƒvƒŠƒP[ƒVƒ‡ƒ“î•ñ)
-    Private Shared _msgHd As UtilMsgHandler                         'ƒƒbƒZ[ƒWƒnƒ“ƒhƒ‰
-    Private Shared _langHd As UtilLangHandler                       'Œ¾Œêƒnƒ“ƒhƒ‰
-    Private Shared _db As UtilDBIf                                  '‰c‹Æó’ DBƒnƒ“ƒhƒ‰
-    Private Shared _debugMode As Boolean                            'ƒfƒoƒbƒOƒ‚[ƒh(ƒƒOƒŒƒxƒ‹‚ªDEBUG‚Ìê‡‚ÉTrue)
+    Private Shared _assembly As System.Reflection.Assembly          'ã‚¢ã‚»ãƒ³ãƒ–ãƒª(ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³æƒ…å ±)
+    Private Shared _msgHd As UtilMsgHandler                         'ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒãƒ³ãƒ‰ãƒ©
+    Private Shared _langHd As UtilLangHandler                       'è¨€èªãƒãƒ³ãƒ‰ãƒ©
+    Private Shared _db As UtilDBIf                                  'å–¶æ¥­å—æ³¨ DBãƒãƒ³ãƒ‰ãƒ©
+    Private Shared _debugMode As Boolean                            'ãƒ‡ãƒãƒƒã‚°ãƒ¢ãƒ¼ãƒ‰(ãƒ­ã‚°ãƒ¬ãƒ™ãƒ«ãŒDEBUGã®å ´åˆã«True)
 
-    'Iniƒtƒ@ƒCƒ‹Ši”[•Ï”
+    'Iniãƒ•ã‚¡ã‚¤ãƒ«æ ¼ç´å¤‰æ•°
     Public Shared _iniVal As iniType
 
-    '”Ä—pƒ}ƒXƒ^Ši”[•Ï”
+    'æ±ç”¨ãƒã‚¹ã‚¿æ ¼ç´å¤‰æ•°
     Private Shared _hanyou_tb As Hashtable = New Hashtable
 
-    'ƒoƒbƒNƒAƒbƒvƒT[ƒoÚ‘±”»’è—p@True:šƒoƒbƒNƒAƒbƒvƒT[ƒoÚ‘±’†š@False:ƒoƒbƒNƒAƒbƒvƒT[ƒo–¢Ú‘±
+    'ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ã‚µãƒ¼ãƒæ¥ç¶šåˆ¤å®šç”¨ã€€True:â˜…ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ã‚µãƒ¼ãƒæ¥ç¶šä¸­â˜…ã€€False:ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ã‚µãƒ¼ãƒæœªæ¥ç¶š
     Private Shared _BackUpServer As Boolean = False
 
     '-------------------------------------------------------------------------------
-    'ƒvƒƒpƒeƒBéŒ¾
+    'ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£å®£è¨€
     '-------------------------------------------------------------------------------   
-    Public Shared ReadOnly Property assembly() As System.Reflection.Assembly    'ƒAƒZƒ“ƒuƒŠ
+    Public Shared ReadOnly Property assembly() As System.Reflection.Assembly    'ã‚¢ã‚»ãƒ³ãƒ–ãƒª
         Get
             Return _assembly
         End Get
     End Property
-    Public Shared ReadOnly Property iniValue() As iniType                       '‚‰‚‚‰ƒtƒ@ƒCƒ‹\‘¢‘Ì‚ğ•Ô‹p
+    Public Shared ReadOnly Property iniValue() As iniType                       'ï½‰ï½ï½‰ãƒ•ã‚¡ã‚¤ãƒ«æ§‹é€ ä½“ã‚’è¿”å´
         Get
             Return _iniVal
         End Get
     End Property
-    Public Shared ReadOnly Property DebugMode() As Boolean                      'ƒfƒoƒbƒOƒ‚[ƒh‚ğ•Ô‹p
+    Public Shared ReadOnly Property DebugMode() As Boolean                      'ãƒ‡ãƒãƒƒã‚°ãƒ¢ãƒ¼ãƒ‰ã‚’è¿”å´
         Get
             Return _debugMode
         End Get
     End Property
-    Public Shared ReadOnly Property lCOLOR_YELLOW() As Color                    '‰æ–Ê•\¦F‚ğ•Ô‹p
+    Public Shared ReadOnly Property lCOLOR_YELLOW() As Color                    'ç”»é¢è¡¨ç¤ºè‰²ã‚’è¿”å´
         Get
             Return ColorTranslator.FromWin32(12648447)
         End Get
     End Property
-    Public Shared ReadOnly Property lCOLOR_BLUE() As Color                      '‰æ–Ê•\¦F‚ğ•Ô‹p
+    Public Shared ReadOnly Property lCOLOR_BLUE() As Color                      'ç”»é¢è¡¨ç¤ºè‰²ã‚’è¿”å´
         Get
             Return ColorTranslator.FromWin32(16777152)
         End Get
     End Property
-    Public Shared ReadOnly Property lCOLOR_WHITE() As Color                     '‰æ–Ê•\¦F‚ğ•Ô‹p
+    Public Shared ReadOnly Property lCOLOR_WHITE() As Color                     'ç”»é¢è¡¨ç¤ºè‰²ã‚’è¿”å´
         Get
             Return Color.White
         End Get
     End Property
-    '    Public Shared ReadOnly Property lCOLOR_GREEN() As Color                     '‰æ–Ê•\¦F‚ğ•Ô‹p
+    '    Public Shared ReadOnly Property lCOLOR_GREEN() As Color                     'ç”»é¢è¡¨ç¤ºè‰²ã‚’è¿”å´
     '        Get
     '            Return ColorTranslator.FromWin32(&H80FF80)
     '        End Get
     '    End Property
-    '    Public Shared ReadOnly Property lCOLOR_GLAY() As Color                      '‰æ–Ê•\¦F‚ğ•Ô‹p
+    '    Public Shared ReadOnly Property lCOLOR_GLAY() As Color                      'ç”»é¢è¡¨ç¤ºè‰²ã‚’è¿”å´
     '        Get
     '            Return ColorTranslator.FromWin32(12632256)
     '        End Get
     '    End Property
-    Public Shared ReadOnly Property lCOLOR_PINK() As Color                      '‰æ–Ê•\¦F‚ğ•Ô‹p
+    Public Shared ReadOnly Property lCOLOR_PINK() As Color                      'ç”»é¢è¡¨ç¤ºè‰²ã‚’è¿”å´
         Get
             Return ColorTranslator.FromWin32(&HFFC0FF)
         End Get
     End Property
-    Public Shared ReadOnly Property lCOLOR_RED() As Color                       '‰æ–Ê•\¦F‚ğ•Ô‹p
+    Public Shared ReadOnly Property lCOLOR_RED() As Color                       'ç”»é¢è¡¨ç¤ºè‰²ã‚’è¿”å´
         Get
             Return ColorTranslator.FromWin32(&HFF&)
         End Get
     End Property
-    '    Public Shared ReadOnly Property lCOLOR_SPR_TANCHO() As Color                '‰æ–Ê•\¦F‚ğ•Ô‹p
+    '    Public Shared ReadOnly Property lCOLOR_SPR_TANCHO() As Color                'ç”»é¢è¡¨ç¤ºè‰²ã‚’è¿”å´
     '        Get
     '            Return ColorTranslator.FromWin32(11528071)
     '        End Get
     '    End Property
-    '    Public Shared ReadOnly Property lCOLOR_SPR_HON() As Color                   '‰æ–Ê•\¦F‚ğ•Ô‹p
+    '    Public Shared ReadOnly Property lCOLOR_SPR_HON() As Color                   'ç”»é¢è¡¨ç¤ºè‰²ã‚’è¿”å´
     '        Get
     '            Return ColorTranslator.FromWin32(14942152)
     '        End Get
     '    End Property
-    '    Public Shared ReadOnly Property lCOLOR_SPR_YELLOW() As Color                '‰æ–Ê•\¦F‚ğ•Ô‹p
+    '    Public Shared ReadOnly Property lCOLOR_SPR_YELLOW() As Color                'ç”»é¢è¡¨ç¤ºè‰²ã‚’è¿”å´
     '        Get
     '            Return ColorTranslator.FromWin32(8454143)
     '        End Get
     '    End Property
-    '    Public Shared ReadOnly Property batMode() As String                         'ƒoƒbƒ`‹N“®ƒ‚[ƒh
+    '    Public Shared ReadOnly Property batMode() As String                         'ãƒãƒƒãƒèµ·å‹•ãƒ¢ãƒ¼ãƒ‰
     '        Get
     '            Return _batMode
     '        End Get
     '    End Property
-    'ƒoƒbƒNƒAƒbƒvƒT[ƒoÚ‘±’†
+    'ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ã‚µãƒ¼ãƒæ¥ç¶šä¸­
     Shared ReadOnly Property BackUpServer() As Boolean
         Get
             Return _BackUpServer
         End Get
     End Property
-    'ƒoƒbƒNƒAƒbƒvƒT[ƒoÚ‘±’†(ƒtƒH[ƒ€ƒ^ƒCƒgƒ‹•\¦—pj
+    'ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ã‚µãƒ¼ãƒæ¥ç¶šä¸­(ãƒ•ã‚©ãƒ¼ãƒ ã‚¿ã‚¤ãƒˆãƒ«è¡¨ç¤ºç”¨ï¼‰
     Shared ReadOnly Property BackUpServerPrint() As String
         Get
             If _BackUpServer Then
@@ -250,12 +250,12 @@ Public Class StartUp
     End Property
 
     '-------------------------------------------------------------------------------
-    '   ‰‚ß‚É‹N“®‚·‚éƒƒ\ƒbƒh
-    '   iˆ—ŠT—vjƒAƒvƒŠƒP[ƒVƒ‡ƒ“ŠJn‚Ìˆ—‚ğs‚¤B
-    '               Šeíƒ`ƒFƒbƒNŒã‚ÉAƒƒjƒ…[ƒtƒH[ƒ€‚Ì•\¦‚ğs‚¤B
-    '   œ“ü—Íƒpƒ‰ƒƒ^   F‚È‚µ
-    '   œƒƒ\ƒbƒh–ß‚è’l F‚È‚µ
-    '   œ”­¶—áŠO       F‚È‚µ(‚±‚ê‚æ‚èãˆÊ‚Ö—áŠO‚Í–ß‚¹‚È‚¢)
+    '   åˆã‚ã«èµ·å‹•ã™ã‚‹ãƒ¡ã‚½ãƒƒãƒ‰
+    '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³é–‹å§‹æ™‚ã®å‡¦ç†ã‚’è¡Œã†ã€‚
+    '               å„ç¨®ãƒã‚§ãƒƒã‚¯å¾Œã«ã€ãƒ¡ãƒ‹ãƒ¥ãƒ¼ãƒ•ã‚©ãƒ¼ãƒ ã®è¡¨ç¤ºã‚’è¡Œã†ã€‚
+    '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šãªã—
+    '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šãªã—
+    '   â—ç™ºç”Ÿä¾‹å¤–       ï¼šãªã—(ã“ã‚Œã‚ˆã‚Šä¸Šä½ã¸ä¾‹å¤–ã¯æˆ»ã›ãªã„)
     '-------------------------------------------------------------------------------
     Shared Sub main(ByVal cmds() As String)
 
@@ -264,69 +264,69 @@ Public Class StartUp
 
             _iniVal.LogFilePath = ""
 
-            '“ñd‹N“®ƒ`ƒFƒbƒN
+            'äºŒé‡èµ·å‹•ãƒã‚§ãƒƒã‚¯
             m = New System.Threading.Mutex(False, "HanbaiKanri")
-            '==>uƒVƒXƒeƒ€I—¹v‚ÉGC.KeepAlive(m)‚ğCall‚·‚é‚±‚Æ
+            '==>ã€Œã‚·ã‚¹ãƒ†ãƒ çµ‚äº†æ™‚ã€ã«GC.KeepAlive(m)ã‚’Callã™ã‚‹ã“ã¨
             If Not m.WaitOne(0, False) Then
-                MessageBox.Show("Šù‚É“¯ˆê‚ÌƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚ª‹N“®‚µ‚Ä‚¢‚Ü‚·B",
+                MessageBox.Show("æ—¢ã«åŒä¸€ã®ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ãŒèµ·å‹•ã—ã¦ã„ã¾ã™ã€‚",
                                     System.Reflection.Assembly.GetExecutingAssembly.GetName().Name,
                                     MessageBoxButtons.OK,
                                     MessageBoxIcon.Information)
                 Exit Sub
             End If
 
-            '©•ª©g‚ÌƒCƒ“ƒXƒ^ƒ“ƒX¶¬ ©•ª©g‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬‚µ‚È‚¢‚ÆSharedƒƒ\ƒbƒhˆÈŠO‚ÍŒÄ‚Ño‚¹‚È‚¢
-            Dim _instance As StartUp        '©•ª©g
+            'è‡ªåˆ†è‡ªèº«ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ç”Ÿæˆ è‡ªåˆ†è‡ªèº«ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆã—ãªã„ã¨Sharedãƒ¡ã‚½ãƒƒãƒ‰ä»¥å¤–ã¯å‘¼ã³å‡ºã›ãªã„
+            Dim _instance As StartUp        'è‡ªåˆ†è‡ªèº«
             _instance = New StartUp()
-            _assembly = System.Reflection.Assembly.GetExecutingAssembly() 'ƒAƒZƒ“ƒuƒŠ‚ğƒƒ“ƒo[‚ÉŠi”[
+            _assembly = System.Reflection.Assembly.GetExecutingAssembly() 'ã‚¢ã‚»ãƒ³ãƒ–ãƒªã‚’ãƒ¡ãƒ³ãƒãƒ¼ã«æ ¼ç´
 
             '-----------------------------------------------------------------------
-            '‚h‚m‚hƒtƒ@ƒCƒ‹“Ç‚İ‚İBiƒtƒ@ƒCƒ‹‚Ì—L–³A‚h‚m‚hƒtƒ@ƒCƒ‹‚ÌƒZƒNƒVƒ‡ƒ““™‚ÌŠeíƒ`ƒFƒbƒN‚às‚¤j
+            'ï¼©ï¼®ï¼©ãƒ•ã‚¡ã‚¤ãƒ«èª­ã¿è¾¼ã¿ã€‚ï¼ˆãƒ•ã‚¡ã‚¤ãƒ«ã®æœ‰ç„¡ã€ï¼©ï¼®ï¼©ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚»ã‚¯ã‚·ãƒ§ãƒ³ç­‰ã®å„ç¨®ãƒã‚§ãƒƒã‚¯ã‚‚è¡Œã†ï¼‰
             '-----------------------------------------------------------------------
             Try
 
-                'ƒƒbƒZ[ƒW—pXmlƒtƒ@ƒCƒ‹‚Ì‘¶İƒ`ƒFƒbƒN
+                'ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ç”¨Xmlãƒ•ã‚¡ã‚¤ãƒ«ã®å­˜åœ¨ãƒã‚§ãƒƒã‚¯
                 Call _instance.checkMesXmlFile()
 
-                'Œ¾Œê—pXmlƒtƒ@ƒCƒ‹‚Ì‘¶İƒ`ƒFƒbƒN
+                'è¨€èªç”¨Xmlãƒ•ã‚¡ã‚¤ãƒ«ã®å­˜åœ¨ãƒã‚§ãƒƒã‚¯
                 Call _instance.checkLangXmlFile()
 
-                '‰Šúİ’èƒtƒ@ƒCƒ‹“Ç
+                'åˆæœŸè¨­å®šãƒ•ã‚¡ã‚¤ãƒ«èª­è¾¼
                 Call _instance.setIniVal()
 
-                '‰Šúİ’èƒtƒ@ƒCƒ‹ƒ`ƒFƒbƒN
+                'åˆæœŸè¨­å®šãƒ•ã‚¡ã‚¤ãƒ«ãƒã‚§ãƒƒã‚¯
                 Call _instance.checkIniFile()
 
-            Catch ue As UsrDefException             'ƒ†[ƒU[’è‹`—áŠO(‚¾‚¯ƒLƒƒƒbƒ`‚·‚é)B‘¼‚Ì—áŠO‚ÍeƒuƒƒbƒN‚É”C‚¹‚éB
-                Call ue.dspMsg()                    'ƒGƒ‰[o—Í
-                Exit Sub                            '“Ç‚İ‚İ/ƒ`ƒFƒbƒNƒGƒ‰[(ƒ†[ƒU[’è‹`—áŠO‚Ìê‡AƒGƒ‰[ˆ—Ï‚È‚Ì‚ÅI—¹)
+            Catch ue As UsrDefException             'ãƒ¦ãƒ¼ã‚¶ãƒ¼å®šç¾©ä¾‹å¤–(ã ã‘ã‚­ãƒ£ãƒƒãƒã™ã‚‹)ã€‚ä»–ã®ä¾‹å¤–ã¯è¦ªãƒ–ãƒ­ãƒƒã‚¯ã«ä»»ã›ã‚‹ã€‚
+                Call ue.dspMsg()                    'ã‚¨ãƒ©ãƒ¼å‡ºåŠ›
+                Exit Sub                            'èª­ã¿è¾¼ã¿/ãƒã‚§ãƒƒã‚¯ã‚¨ãƒ©ãƒ¼(ãƒ¦ãƒ¼ã‚¶ãƒ¼å®šç¾©ä¾‹å¤–ã®å ´åˆã€ã‚¨ãƒ©ãƒ¼å‡¦ç†æ¸ˆãªã®ã§çµ‚äº†)
             End Try
 
             '-----------------------------------------------------------------------
-            'DBƒnƒ“ƒhƒ‰‚Ìæ“¾‚¨‚æ‚ÑƒRƒlƒNƒVƒ‡ƒ“Ú‘±
-            'Ú‘±‚É¸”s‚µ‚½ê‡Auƒf[ƒ^ƒx[ƒX‚ÉÚ‘±‚Å‚«‚Ü‚¹‚ñ‚Å‚µ‚½v‚ğo—Í‚µ‚ÄI—¹‚·‚é
+            'DBãƒãƒ³ãƒ‰ãƒ©ã®å–å¾—ãŠã‚ˆã³ã‚³ãƒã‚¯ã‚·ãƒ§ãƒ³æ¥ç¶š
+            'æ¥ç¶šã«å¤±æ•—ã—ãŸå ´åˆã€ã€Œãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ã«æ¥ç¶šã§ãã¾ã›ã‚“ã§ã—ãŸã€ã‚’å‡ºåŠ›ã—ã¦çµ‚äº†ã™ã‚‹
             '-----------------------------------------------------------------------
-            'UtilPostgresDebugger‚ÍƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬‚·‚é‚ÆADBƒRƒlƒNƒVƒ‡ƒ“‚Ü‚Å¶¬‚µ‚Ä‚­‚ê‚é
+            'UtilPostgresDebuggerã¯ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆã™ã‚‹ã¨ã€DBã‚³ãƒã‚¯ã‚·ãƒ§ãƒ³ã¾ã§ç”Ÿæˆã—ã¦ãã‚Œã‚‹
             Dim _db As UtilDBIf
             Try
                 _db = New UtilPostgresDebugger(_iniVal.SVAddr, _iniVal.PortNo, _iniVal.DBName, _iniVal.UserId, _iniVal.Password, _iniVal.LogFilePath, _debugMode)
             Catch ex As Exception
-                'Šm”FƒƒbƒZ[ƒW‚ğ•\¦‚·‚é
+                'ç¢ºèªãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’è¡¨ç¤ºã™ã‚‹
                 Dim piRtn As Integer
-                piRtn = _msgHd.dspMSG("NonPriDb", CommonConst.LANG_KBN_JPN)  'ƒT[ƒo‚ÉÚ‘±‚Å‚«‚Ü‚¹‚ñBƒoƒbƒNƒAƒbƒvƒT[ƒo‚ÉÚ‘±‚µ‚Ü‚·‚©H
+                piRtn = _msgHd.dspMSG("NonPriDb", CommonConst.LANG_KBN_JPN)  'ã‚µãƒ¼ãƒã«æ¥ç¶šã§ãã¾ã›ã‚“ã€‚ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ã‚µãƒ¼ãƒã«æ¥ç¶šã—ã¾ã™ã‹ï¼Ÿ
                 If piRtn = vbNo Then
-                    'E[‚¢‚¢‚¦]‘I‘ğ‚Ìê‡	
-                    '	ƒVƒXƒeƒ€‚ğI—¹‚µ‚Ü‚·B
+                    'ãƒ»[ã„ã„ãˆ]é¸æŠã®å ´åˆ	
+                    '	ã‚·ã‚¹ãƒ†ãƒ ã‚’çµ‚äº†ã—ã¾ã™ã€‚
                     GC.KeepAlive(m)
                     Exit Sub
                 End If
 
-                'DBÚ‘±¸”s@ƒoƒbƒNƒAƒbƒvƒT[ƒo‚ÖÚ‘±
+                'DBæ¥ç¶šå¤±æ•—ã€€ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ã‚µãƒ¼ãƒã¸æ¥ç¶š
                 Try
                     _db = New UtilPostgresDebugger(_iniVal.SVAddr_stby, _iniVal.PortNo_stby, _iniVal.DBName_stby, _iniVal.UserId_stby, _iniVal.Password_stby, _iniVal.LogFilePath, _debugMode)
                     _BackUpServer = True
                 Catch eex As Exception
-                    piRtn = _msgHd.dspMSG("NonBackDb", CommonConst.LANG_KBN_JPN)  'ƒT[ƒo‚ÉÚ‘±‚Å‚«‚Ü‚¹‚ñB
+                    piRtn = _msgHd.dspMSG("NonBackDb", CommonConst.LANG_KBN_JPN)  'ã‚µãƒ¼ãƒã«æ¥ç¶šã§ãã¾ã›ã‚“ã€‚
                     GC.KeepAlive(m)
                     Exit Sub
                 End Try
@@ -337,37 +337,37 @@ Public Class StartUp
             Try
 
                 Try
-                    '”Ä—pƒ}ƒXƒ^“à—e‚ğ\‘¢‘Ì‚ÉŠi”[
+                    'æ±ç”¨ãƒã‚¹ã‚¿å†…å®¹ã‚’æ§‹é€ ä½“ã«æ ¼ç´
                     'Call _instance.getHanyouMST()
 
-                Catch ex As UsrDefException             'ƒ†[ƒU[’è‹`—áŠO(‚¾‚¯ƒLƒƒƒbƒ`‚·‚é)B‘¼‚Ì—áŠO‚ÍeƒuƒƒbƒN‚É”C‚¹‚éB
-                    Call ex.dspMsg()                    'ƒGƒ‰[o—Í
-                    Exit Sub                            '“Ç‚İ‚İ/ƒ`ƒFƒbƒNƒGƒ‰[(ƒ†[ƒU[’è‹`—áŠO‚Ìê‡AƒGƒ‰[ˆ—Ï‚È‚Ì‚ÅI—¹)
+                Catch ex As UsrDefException             'ãƒ¦ãƒ¼ã‚¶ãƒ¼å®šç¾©ä¾‹å¤–(ã ã‘ã‚­ãƒ£ãƒƒãƒã™ã‚‹)ã€‚ä»–ã®ä¾‹å¤–ã¯è¦ªãƒ–ãƒ­ãƒƒã‚¯ã«ä»»ã›ã‚‹ã€‚
+                    Call ex.dspMsg()                    'ã‚¨ãƒ©ãƒ¼å‡ºåŠ›
+                    Exit Sub                            'èª­ã¿è¾¼ã¿/ãƒã‚§ãƒƒã‚¯ã‚¨ãƒ©ãƒ¼(ãƒ¦ãƒ¼ã‚¶ãƒ¼å®šç¾©ä¾‹å¤–ã®å ´åˆã€ã‚¨ãƒ©ãƒ¼å‡¦ç†æ¸ˆãªã®ã§çµ‚äº†)
                 End Try
 
                 '-----------------------------------------------------------------------
-                '@‰æ–Ê‹N“®
+                'ã€€ç”»é¢èµ·å‹•
                 '-----------------------------------------------------------------------
 
-                'ƒƒjƒ…[‰æ–Ê
+                'ãƒ¡ãƒ‹ãƒ¥ãƒ¼ç”»é¢
                 Dim openForm As Form = Nothing
                 openForm = New frmC01F10_Login(_msgHd, _langHd, _db)
 
-                'ƒtƒH[ƒ€ƒI[ƒvƒ“
+                'ãƒ•ã‚©ãƒ¼ãƒ ã‚ªãƒ¼ãƒ—ãƒ³
                 Application.Run(openForm)
-                'ƒƒOƒCƒ“‰æ–ÊƒI[ƒvƒ“
+                'ãƒ­ã‚°ã‚¤ãƒ³ç”»é¢ã‚ªãƒ¼ãƒ—ãƒ³
                 'openForm.ShowDialog()
 
-            Finally                                                                         '•K‚¸’Ê‰ß‚·‚é•”•ª‚ÅŒãˆ—‚ğs‚¤
+            Finally                                                                         'å¿…ãšé€šéã™ã‚‹éƒ¨åˆ†ã§å¾Œå‡¦ç†ã‚’è¡Œã†
                 '_db.close()
             End Try
 
-        Catch ex As Exception                       'ƒVƒXƒeƒ€—áŠO
-            'ƒVƒXƒeƒ€ƒGƒ‰[MSGo—Í
+        Catch ex As Exception                       'ã‚·ã‚¹ãƒ†ãƒ ä¾‹å¤–
+            'ã‚·ã‚¹ãƒ†ãƒ ã‚¨ãƒ©ãƒ¼MSGå‡ºåŠ›
             Dim tmp As UsrDefException = New UsrDefException(ex, _msgHd.getMSG("SystemErr", CommonConst.LANG_KBN_JPN, UtilClass.getErrDetail(ex)))
         Finally
             Try
-                '“ñd‹N“®ƒ`ƒFƒbƒN—p‚ÌƒCƒ“ƒXƒ^ƒ“ƒXŠJ•ú‚ğ‹–‰Â‚·‚é
+                'äºŒé‡èµ·å‹•ãƒã‚§ãƒƒã‚¯ç”¨ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹é–‹æ”¾ã‚’è¨±å¯ã™ã‚‹
                 GC.KeepAlive(m)
             Catch ex As Exception
             End Try
@@ -377,40 +377,40 @@ Public Class StartUp
     End Sub
 
     '-------------------------------------------------------------------------------
-    '   ƒƒbƒZ[ƒW—pXmlƒtƒ@ƒCƒ‹‚Ì‘¶İƒ`ƒFƒbƒN
-    '   iˆ—ŠT—vjƒtƒ@ƒCƒ‹‚ª‘¶İ‚µ‚È‚¢ê‡AƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚ğI—¹‚·‚é
-    '   œ“ü—Íƒpƒ‰ƒƒ^   F‚È‚µ
-    '   œƒƒ\ƒbƒh–ß‚è’l F‚È‚µ
-    '   œ”­¶—áŠO       F‚È‚µ
+    '   ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ç”¨Xmlãƒ•ã‚¡ã‚¤ãƒ«ã®å­˜åœ¨ãƒã‚§ãƒƒã‚¯
+    '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰ãƒ•ã‚¡ã‚¤ãƒ«ãŒå­˜åœ¨ã—ãªã„å ´åˆã€ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã‚’çµ‚äº†ã™ã‚‹
+    '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šãªã—
+    '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šãªã—
+    '   â—ç™ºç”Ÿä¾‹å¤–       ï¼šãªã—
     '-------------------------------------------------------------------------------
     Private Sub checkMesXmlFile()
         Try
 
-            'ƒƒbƒZ[ƒW—pXml‘¶İƒ`ƒFƒbƒN
+            'ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ç”¨Xmlå­˜åœ¨ãƒã‚§ãƒƒã‚¯
             Dim msgFileName As String
-            msgFileName = UtilClass.getAppPath(_assembly)               'ƒAƒvƒŠƒP[ƒVƒ‡ƒ“ÀsƒpƒX‚ğæ“¾
-            If Not msgFileName.EndsWith("\") Then                       '"\"‚ÅI‚í‚Á‚Ä‚¢‚È‚¢‚È‚ç
+            msgFileName = UtilClass.getAppPath(_assembly)               'ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³å®Ÿè¡Œãƒ‘ã‚¹ã‚’å–å¾—
+            If Not msgFileName.EndsWith("\") Then                       '"\"ã§çµ‚ã‚ã£ã¦ã„ãªã„ãªã‚‰
                 msgFileName = msgFileName & "\"
             End If
 
-            'ƒƒbƒZ[ƒWƒtƒ@ƒCƒ‹–¼‚ğŒ‹‡
+            'ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒ•ã‚¡ã‚¤ãƒ«åã‚’çµåˆ
             Dim ini As String = UtilClass.getAppPath(_assembly) & "\..\Setting\" & INI_FILE
             Dim fileWk As String = (New UtilIniFileHandler(ini)).getIni(INIITEM1_MSGFILE, INIITEM2_MSGFILENAME)
             msgFileName = msgFileName & "..\Setting\" & fileWk
 
-            If UtilClass.isFileExists(msgFileName) Then                 'ƒtƒ@ƒCƒ‹‚ª‘¶İ‚·‚é‚È‚ç
-                'ƒƒbƒZ[ƒWƒnƒ“ƒhƒ‰‚ğ¶¬
-                _msgHd = New UtilMsgHandler(msgFileName)                '‚±‚êˆÈ~_msgHd‚ğg—p‚µ‚Ä
+            If UtilClass.isFileExists(msgFileName) Then                 'ãƒ•ã‚¡ã‚¤ãƒ«ãŒå­˜åœ¨ã™ã‚‹ãªã‚‰
+                'ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒãƒ³ãƒ‰ãƒ©ã‚’ç”Ÿæˆ
+                _msgHd = New UtilMsgHandler(msgFileName)                'ã“ã‚Œä»¥é™_msgHdã‚’ä½¿ç”¨ã—ã¦
             Else
-                '‘¶İ‚µ‚È‚¢‚Ì‚ÅƒGƒ‰[
-                Throw New UsrDefException(fileWk & "‚ª—L‚è‚Ü‚¹‚ñB" & ControlChars.NewLine &
-                                          "ƒVƒXƒeƒ€‚Ì‹N“®‚ğ’†~‚µ‚Ü‚·B" & ControlChars.NewLine &
-                                          "ƒƒbƒZ[ƒWƒtƒ@ƒCƒ‹æ“¾@ƒGƒ‰[")
+                'å­˜åœ¨ã—ãªã„ã®ã§ã‚¨ãƒ©ãƒ¼
+                Throw New UsrDefException(fileWk & "ãŒæœ‰ã‚Šã¾ã›ã‚“ã€‚" & ControlChars.NewLine &
+                                          "ã‚·ã‚¹ãƒ†ãƒ ã®èµ·å‹•ã‚’ä¸­æ­¢ã—ã¾ã™ã€‚" & ControlChars.NewLine &
+                                          "ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒ•ã‚¡ã‚¤ãƒ«å–å¾—ã€€ã‚¨ãƒ©ãƒ¼")
             End If
         Catch ex As Exception
-            'MSG‚ªo—Í‚Å‚«‚È‚¢
-            Dim t As UsrDefException = New UsrDefException("ƒVƒXƒeƒ€ƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½B" & ControlChars.NewLine &
-                                      "ƒVƒXƒeƒ€‚Ì‹N“®‚ğ’†~‚µ‚Ü‚·B" & ControlChars.NewLine & ControlChars.NewLine &
+            'MSGãŒå‡ºåŠ›ã§ããªã„
+            Dim t As UsrDefException = New UsrDefException("ã‚·ã‚¹ãƒ†ãƒ ã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ã¾ã—ãŸã€‚" & ControlChars.NewLine &
+                                      "ã‚·ã‚¹ãƒ†ãƒ ã®èµ·å‹•ã‚’ä¸­æ­¢ã—ã¾ã™ã€‚" & ControlChars.NewLine & ControlChars.NewLine &
                                       UtilClass.getErrDetail(ex) &
                                       ex.Message & ControlChars.NewLine &
                                       ex.StackTrace)
@@ -420,40 +420,40 @@ Public Class StartUp
     End Sub
 
     '-------------------------------------------------------------------------------
-    '   Œ¾Œê—pXmlƒtƒ@ƒCƒ‹‚Ì‘¶İƒ`ƒFƒbƒN
-    '   iˆ—ŠT—vjƒtƒ@ƒCƒ‹‚ª‘¶İ‚µ‚È‚¢ê‡AƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚ğI—¹‚·‚é
-    '   œ“ü—Íƒpƒ‰ƒƒ^   F‚È‚µ
-    '   œƒƒ\ƒbƒh–ß‚è’l F‚È‚µ
-    '   œ”­¶—áŠO       F‚È‚µ
+    '   è¨€èªç”¨Xmlãƒ•ã‚¡ã‚¤ãƒ«ã®å­˜åœ¨ãƒã‚§ãƒƒã‚¯
+    '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰ãƒ•ã‚¡ã‚¤ãƒ«ãŒå­˜åœ¨ã—ãªã„å ´åˆã€ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã‚’çµ‚äº†ã™ã‚‹
+    '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šãªã—
+    '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šãªã—
+    '   â—ç™ºç”Ÿä¾‹å¤–       ï¼šãªã—
     '-------------------------------------------------------------------------------
     Private Sub checkLangXmlFile()
         Try
 
-            'Œ¾Œê—pXml‘¶İƒ`ƒFƒbƒN
+            'è¨€èªç”¨Xmlå­˜åœ¨ãƒã‚§ãƒƒã‚¯
             Dim langFileName As String
-            langFileName = UtilClass.getAppPath(_assembly)               'ƒAƒvƒŠƒP[ƒVƒ‡ƒ“ÀsƒpƒX‚ğæ“¾
-            If Not langFileName.EndsWith("\") Then                       '"\"‚ÅI‚í‚Á‚Ä‚¢‚È‚¢‚È‚ç
+            langFileName = UtilClass.getAppPath(_assembly)               'ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³å®Ÿè¡Œãƒ‘ã‚¹ã‚’å–å¾—
+            If Not langFileName.EndsWith("\") Then                       '"\"ã§çµ‚ã‚ã£ã¦ã„ãªã„ãªã‚‰
                 langFileName = langFileName & "\"
             End If
 
-            'Œ¾Œêƒtƒ@ƒCƒ‹–¼‚ğŒ‹‡
+            'è¨€èªãƒ•ã‚¡ã‚¤ãƒ«åã‚’çµåˆ
             Dim ini As String = UtilClass.getAppPath(_assembly) & "\..\Setting\" & INI_FILE
             Dim fileWk As String = (New UtilIniFileHandler(ini)).getIni(INIITEM1_LANGFILE, INIITEM2_LANGFILENAME)
             langFileName = langFileName & "..\Setting\" & fileWk
 
-            If UtilClass.isFileExists(langFileName) Then                 'ƒtƒ@ƒCƒ‹‚ª‘¶İ‚·‚é‚È‚ç
-                'Œ¾Œêƒnƒ“ƒhƒ‰‚ğ¶¬
-                _langHd = New UtilLangHandler(langFileName)                '‚±‚êˆÈ~_msgHd‚ğg—p‚µ‚Ä
+            If UtilClass.isFileExists(langFileName) Then                 'ãƒ•ã‚¡ã‚¤ãƒ«ãŒå­˜åœ¨ã™ã‚‹ãªã‚‰
+                'è¨€èªãƒãƒ³ãƒ‰ãƒ©ã‚’ç”Ÿæˆ
+                _langHd = New UtilLangHandler(langFileName)                'ã“ã‚Œä»¥é™_msgHdã‚’ä½¿ç”¨ã—ã¦
             Else
-                '‘¶İ‚µ‚È‚¢‚Ì‚ÅƒGƒ‰[
-                Throw New UsrDefException(fileWk & "‚ª—L‚è‚Ü‚¹‚ñB" & ControlChars.NewLine &
-                                          "ƒVƒXƒeƒ€‚Ì‹N“®‚ğ’†~‚µ‚Ü‚·B" & ControlChars.NewLine &
-                                          "Œ¾Œêƒtƒ@ƒCƒ‹æ“¾@ƒGƒ‰[")
+                'å­˜åœ¨ã—ãªã„ã®ã§ã‚¨ãƒ©ãƒ¼
+                Throw New UsrDefException(fileWk & "ãŒæœ‰ã‚Šã¾ã›ã‚“ã€‚" & ControlChars.NewLine &
+                                          "ã‚·ã‚¹ãƒ†ãƒ ã®èµ·å‹•ã‚’ä¸­æ­¢ã—ã¾ã™ã€‚" & ControlChars.NewLine &
+                                          "è¨€èªãƒ•ã‚¡ã‚¤ãƒ«å–å¾—ã€€ã‚¨ãƒ©ãƒ¼")
             End If
         Catch ex As Exception
-            'Œ¾Œê‚ªo—Í‚Å‚«‚È‚¢
-            Dim t As UsrDefException = New UsrDefException("ƒVƒXƒeƒ€ƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½B" & ControlChars.NewLine &
-                                      "ƒVƒXƒeƒ€‚Ì‹N“®‚ğ’†~‚µ‚Ü‚·B" & ControlChars.NewLine & ControlChars.NewLine &
+            'è¨€èªãŒå‡ºåŠ›ã§ããªã„
+            Dim t As UsrDefException = New UsrDefException("ã‚·ã‚¹ãƒ†ãƒ ã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ã¾ã—ãŸã€‚" & ControlChars.NewLine &
+                                      "ã‚·ã‚¹ãƒ†ãƒ ã®èµ·å‹•ã‚’ä¸­æ­¢ã—ã¾ã™ã€‚" & ControlChars.NewLine & ControlChars.NewLine &
                                       UtilClass.getErrDetail(ex) &
                                       ex.Message & ControlChars.NewLine &
                                       ex.StackTrace)
@@ -463,62 +463,62 @@ Public Class StartUp
     End Sub
 
     '-------------------------------------------------------------------------------
-    '   ‚h‚m‚hƒtƒ@ƒCƒ‹æ“¾
-    '   iˆ—ŠT—vj‚h‚m‚hƒtƒ@ƒCƒ‹‚Ìİ’èî•ñ‚ğæ“¾‚·‚éB
-    '   œ“ü—Íƒpƒ‰ƒƒ^   F‚È‚µ
-    '   œƒƒ\ƒbƒh–ß‚è’l F‚È‚µ
-    '   œ”­¶—áŠO       FUsrDefException
+    '   ï¼©ï¼®ï¼©ãƒ•ã‚¡ã‚¤ãƒ«å–å¾—
+    '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰ï¼©ï¼®ï¼©ãƒ•ã‚¡ã‚¤ãƒ«ã®è¨­å®šæƒ…å ±ã‚’å–å¾—ã™ã‚‹ã€‚
+    '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šãªã—
+    '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šãªã—
+    '   â—ç™ºç”Ÿä¾‹å¤–       ï¼šUsrDefException
     '-------------------------------------------------------------------------------
     Private Sub setIniVal()
         Try
             '-----------------------------------------------------------------------
-            'INIƒtƒ@ƒCƒ‹iƒtƒ‹ƒpƒXjì¬
+            'INIãƒ•ã‚¡ã‚¤ãƒ«ï¼ˆãƒ•ãƒ«ãƒ‘ã‚¹ï¼‰ä½œæˆ
             '-----------------------------------------------------------------------
             Dim iniFileName As String
-            iniFileName = UtilClass.getAppPath(_assembly)               'ƒAƒvƒŠƒP[ƒVƒ‡ƒ“ÀsƒpƒX‚ğæ“¾
-            If Not iniFileName.EndsWith("\") Then                       '"\"‚ÅI‚í‚Á‚Ä‚¢‚È‚¢‚È‚ç
+            iniFileName = UtilClass.getAppPath(_assembly)               'ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³å®Ÿè¡Œãƒ‘ã‚¹ã‚’å–å¾—
+            If Not iniFileName.EndsWith("\") Then                       '"\"ã§çµ‚ã‚ã£ã¦ã„ãªã„ãªã‚‰
                 iniFileName = iniFileName & "\"
             End If
 
-            'INIƒtƒ@ƒCƒ‹–¼‚ğŒ‹‡
+            'INIãƒ•ã‚¡ã‚¤ãƒ«åã‚’çµåˆ
             iniFileName = iniFileName & "..\Setting\" & INI_FILE
 
             '-----------------------------------------------------------------------
-            'INIƒtƒ@ƒCƒ‹‘¶İƒ`ƒFƒbƒN
+            'INIãƒ•ã‚¡ã‚¤ãƒ«å­˜åœ¨ãƒã‚§ãƒƒã‚¯
             '-----------------------------------------------------------------------
             If Not UtilClass.isFileExists(iniFileName) Then
-                Throw New UsrDefException("INIƒtƒ@ƒCƒ‹‘¶İƒ`ƒFƒbƒNƒGƒ‰[", _msgHd.getMSG("nonIniFile", CommonConst.LANG_KBN_JPN))
+                Throw New UsrDefException("INIãƒ•ã‚¡ã‚¤ãƒ«å­˜åœ¨ãƒã‚§ãƒƒã‚¯ã‚¨ãƒ©ãƒ¼", _msgHd.getMSG("nonIniFile", CommonConst.LANG_KBN_JPN))
             End If
 
             '-----------------------------------------------------------------------
-            'Iniƒtƒ@ƒCƒ‹ƒnƒ“ƒhƒ‰‚ğ¶¬‚·‚é
+            'Iniãƒ•ã‚¡ã‚¤ãƒ«ãƒãƒ³ãƒ‰ãƒ©ã‚’ç”Ÿæˆã™ã‚‹
             '-----------------------------------------------------------------------
             Dim ini As UtilIniFileHandler = New UtilIniFileHandler(iniFileName)
 
             '-----------------------------------------------------------------------
-            'Iniƒtƒ@ƒCƒ‹İ’è’lŠi”[
+            'Iniãƒ•ã‚¡ã‚¤ãƒ«è¨­å®šå€¤æ ¼ç´
             '-----------------------------------------------------------------------
-            Dim errXMLstrkey As String = ""      'ƒLƒƒƒbƒ`‚µ‚½ê‡‚ÉƒGƒ‰[‚Æ‚È‚éXML‚ÌKey
+            Dim errXMLstrkey As String = ""      'ã‚­ãƒ£ãƒƒãƒã—ãŸå ´åˆã«ã‚¨ãƒ©ãƒ¼ã¨ãªã‚‹XMLã®Key
 
             Try
                 errXMLstrkey = "NonIniKey"
-                _iniVal.LogType = ini.getIni(INIITEM1_LOGFILE, INIITEM2_LOGTYPE)            'ƒƒOƒ^ƒCƒv‚Ì“Ç‚İ‚İ‚ÆƒfƒoƒbƒOƒ‚[ƒh‚Ìİ’è
+                _iniVal.LogType = ini.getIni(INIITEM1_LOGFILE, INIITEM2_LOGTYPE)            'ãƒ­ã‚°ã‚¿ã‚¤ãƒ—ã®èª­ã¿è¾¼ã¿ã¨ãƒ‡ãƒãƒƒã‚°ãƒ¢ãƒ¼ãƒ‰ã®è¨­å®š
 
-                'ƒfƒoƒbƒOƒ‚[ƒh‚ğİ’è
+                'ãƒ‡ãƒãƒƒã‚°ãƒ¢ãƒ¼ãƒ‰ã‚’è¨­å®š
                 If _iniVal.LogType.ToUpper.Equals("DEBUG") Then
                     _debugMode = True
                 Else
                     _debugMode = False
                 End If
 
-                'ƒƒbƒZ[ƒWƒtƒ@ƒCƒ‹–¼‚Ì“Ç‚İ‚İ
+                'ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒ•ã‚¡ã‚¤ãƒ«åã®èª­ã¿è¾¼ã¿
                 _iniVal.MsgFileName = ini.getIni(INIITEM1_MSGFILE, INIITEM2_MSGFILENAME)
 
-                'Œ¾Œêƒtƒ@ƒCƒ‹–¼‚Ì“Ç‚İ‚İ
+                'è¨€èªãƒ•ã‚¡ã‚¤ãƒ«åã®èª­ã¿è¾¼ã¿
                 _iniVal.LangFileName = ini.getIni(INIITEM1_LANGFILE, INIITEM2_LANGFILENAME)
 
-                'Logƒtƒ@ƒCƒ‹
-                errXMLstrkey = "NonLogDirKey"               'Logƒtƒ@ƒCƒ‹Ši”[êŠ‚Ìæ“¾‚É¸”s‚µ‚Ü‚µ‚½B
+                'Logãƒ•ã‚¡ã‚¤ãƒ«
+                errXMLstrkey = "NonLogDirKey"               'Logãƒ•ã‚¡ã‚¤ãƒ«æ ¼ç´å ´æ‰€ã®å–å¾—ã«å¤±æ•—ã—ã¾ã—ãŸã€‚
                 _iniVal.LogFilePath = ini.getIni(INIITEM1_LOGFILE, INIITEM2_LOGFILEPATH)
                 If _iniVal.LogFilePath IsNot Nothing AndAlso
                    (Not _iniVal.LogFilePath.StartsWith("..") And _iniVal.LogFilePath.StartsWith(".")) Then
@@ -529,7 +529,7 @@ Public Class StartUp
                 End If
                 _iniVal.LogFilePath = UtilClass.getAppPath(_assembly) & _iniVal.LogFilePath
 
-                '‚c‚a
+                'ï¼¤ï¼¢
                 errXMLstrkey = "NonDbIniKey"
                 _iniVal.SVAddr = ini.getIni(INIITEM1_DB, INIITEM2_SVADDR)
                 errXMLstrkey = "NonDbIniKey"
@@ -551,7 +551,7 @@ Public Class StartUp
                 errXMLstrkey = "NonDbIniKey"
                 _iniVal.Password_stby = ini.getIni(INIITEM1_DB_STBY, INIITEM2_PASSWORD_STBY)
 
-                'ƒVƒXƒeƒ€‹K’èî•ñ
+                'ã‚·ã‚¹ãƒ†ãƒ è¦å®šæƒ…å ±
                 errXMLstrkey = "NonProductInfoIniKey"
                 _iniVal.SystemCaption = ini.getIni(INIITEM1_PRODUCT_INFO, INIITEM2_SYSTEMCAPTION)
                 errXMLstrkey = "NonProductInfoIniKey"
@@ -559,8 +559,8 @@ Public Class StartUp
                 errXMLstrkey = "NonProductInfoIniKey"
                 _iniVal.PrintSelUpperCnt = ini.getIni(INIITEM1_PRODUCT_INFO, INIITEM2_PRINTSELUPPERCNT)
 
-                'EXCEl—Œ`ƒtƒHƒ‹ƒ_ƒpƒX
-                errXMLstrkey = "NonXlsBaseDir"                'EXCEL—Œ`ƒtƒ@ƒCƒ‹‚ÌŠi”[êŠ‚Ìæ“¾‚É¸”s‚µ‚Ü‚µ‚½B
+                'EXCElé››å½¢ãƒ•ã‚©ãƒ«ãƒ€ãƒ‘ã‚¹
+                errXMLstrkey = "NonXlsBaseDir"                'EXCELé››å½¢ãƒ•ã‚¡ã‚¤ãƒ«ã®æ ¼ç´å ´æ‰€ã®å–å¾—ã«å¤±æ•—ã—ã¾ã—ãŸã€‚
                 _iniVal.BaseXlsPath = ini.getIni(INIITEM1_EXCEL, INIITEM2_BASEXLSPATH)
                 If _iniVal.BaseXlsPath IsNot Nothing AndAlso
                    (Not _iniVal.BaseXlsPath.StartsWith("..") And _iniVal.BaseXlsPath.StartsWith(".")) Then
@@ -571,8 +571,8 @@ Public Class StartUp
                 End If
                 _iniVal.BaseXlsPath = UtilClass.getAppPath(_assembly) & _iniVal.BaseXlsPath
 
-                'EXCElo—ÍæƒtƒHƒ‹ƒ_ƒtƒ@ƒCƒ‹
-                errXMLstrkey = "NonXlsOutDir"                'EXCELo—Íƒtƒ@ƒCƒ‹‚ÌŠi”[êŠ‚Ìæ“¾‚É¸”s‚µ‚Ü‚µ‚½B
+                'EXCElå‡ºåŠ›å…ˆãƒ•ã‚©ãƒ«ãƒ€ãƒ•ã‚¡ã‚¤ãƒ«
+                errXMLstrkey = "NonXlsOutDir"                'EXCELå‡ºåŠ›ãƒ•ã‚¡ã‚¤ãƒ«ã®æ ¼ç´å ´æ‰€ã®å–å¾—ã«å¤±æ•—ã—ã¾ã—ãŸã€‚
                 _iniVal.OutXlsPath = ini.getIni(INIITEM1_EXCEL, INIITEM2_OUTXLSPATH)
                 If _iniVal.OutXlsPath IsNot Nothing AndAlso
                    (Not _iniVal.OutXlsPath.StartsWith("..") And _iniVal.OutXlsPath.StartsWith(".")) Then
@@ -584,62 +584,62 @@ Public Class StartUp
                 _iniVal.OutXlsPath = UtilClass.getAppPath(_assembly) & _iniVal.OutXlsPath
 
             Catch ex As Exception
-                '•Ï”ierrXMLstrkeyj‚ğƒƒbƒZ[ƒW‚h‚c‚Æ‚µ‚ÄAƒGƒ‰[‚ğo—Í‚µ‚Ü‚·B
-                Throw New UsrDefException("€–Ú–¢İ’èƒGƒ‰[", _msgHd.getMSG(errXMLstrkey, CommonConst.LANG_KBN_JPN))
+                'å¤‰æ•°ï¼ˆerrXMLstrkeyï¼‰ã‚’ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ï¼©ï¼¤ã¨ã—ã¦ã€ã‚¨ãƒ©ãƒ¼ã‚’å‡ºåŠ›ã—ã¾ã™ã€‚
+                Throw New UsrDefException("é …ç›®æœªè¨­å®šã‚¨ãƒ©ãƒ¼", _msgHd.getMSG(errXMLstrkey, CommonConst.LANG_KBN_JPN))
             End Try
-        Catch ue As UsrDefException 'ƒ†[ƒU[’è‹`—áŠO(‹Lq‚µ‚È‚¢ê‡AException‚ÅƒLƒƒƒbƒ`‚³‚ê‚é‚½‚ß)
+        Catch ue As UsrDefException 'ãƒ¦ãƒ¼ã‚¶ãƒ¼å®šç¾©ä¾‹å¤–(è¨˜è¿°ã—ãªã„å ´åˆã€Exceptionã§ã‚­ãƒ£ãƒƒãƒã•ã‚Œã‚‹ãŸã‚)
             Call ue.dspMsg()
-            Throw ue                'ƒLƒƒƒbƒ`‚µ‚½—áŠO‚ğ‚»‚Ì‚Ü‚ÜƒXƒ[(ŒÄ‚Ño‚µŒ³‚ÅƒGƒ‰[ˆ—)
-        Catch ex As Exception       'ƒVƒXƒeƒ€—áŠO
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", CommonConst.LANG_KBN_JPN, UtilClass.getErrDetail(ex))) 'ƒLƒƒƒbƒ`‚µ‚½—áŠO‚ğƒ†[ƒU[’è‹`—áŠO‚ÉˆÚ‚µ•Ï‚¦ƒXƒ[
+            Throw ue                'ã‚­ãƒ£ãƒƒãƒã—ãŸä¾‹å¤–ã‚’ãã®ã¾ã¾ã‚¹ãƒ­ãƒ¼(å‘¼ã³å‡ºã—å…ƒã§ã‚¨ãƒ©ãƒ¼å‡¦ç†)
+        Catch ex As Exception       'ã‚·ã‚¹ãƒ†ãƒ ä¾‹å¤–
+            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", CommonConst.LANG_KBN_JPN, UtilClass.getErrDetail(ex))) 'ã‚­ãƒ£ãƒƒãƒã—ãŸä¾‹å¤–ã‚’ãƒ¦ãƒ¼ã‚¶ãƒ¼å®šç¾©ä¾‹å¤–ã«ç§»ã—å¤‰ãˆã‚¹ãƒ­ãƒ¼
         End Try
     End Sub
     '-------------------------------------------------------------------------------
-    '   ‚h‚m‚hƒtƒ@ƒCƒ‹İ’è“à—eƒ`ƒFƒbƒN
-    '   iˆ—ŠT—vj‚h‚m‚hƒtƒ@ƒCƒ‹‚Ìİ’è“à—e‚ğƒ`ƒFƒbƒN‚·‚éB
-    '   œ“ü—Íƒpƒ‰ƒƒ^   F‚È‚µ
-    '   œƒƒ\ƒbƒh–ß‚è’l F‚È‚µ
-    '   œ”­¶—áŠO       FUsrDefException
+    '   ï¼©ï¼®ï¼©ãƒ•ã‚¡ã‚¤ãƒ«è¨­å®šå†…å®¹ãƒã‚§ãƒƒã‚¯
+    '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰ï¼©ï¼®ï¼©ãƒ•ã‚¡ã‚¤ãƒ«ã®è¨­å®šå†…å®¹ã‚’ãƒã‚§ãƒƒã‚¯ã™ã‚‹ã€‚
+    '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šãªã—
+    '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šãªã—
+    '   â—ç™ºç”Ÿä¾‹å¤–       ï¼šUsrDefException
     '-------------------------------------------------------------------------------
     Private Sub checkIniFile()
         Try
 
-            'ƒƒOƒtƒ@ƒCƒ‹‚Ìo—ÍæƒpƒX‚Ì‘¶İƒ`ƒFƒbƒN
+            'ãƒ­ã‚°ãƒ•ã‚¡ã‚¤ãƒ«ã®å‡ºåŠ›å…ˆãƒ‘ã‚¹ã®å­˜åœ¨ãƒã‚§ãƒƒã‚¯
             Dim fullPath As String = _iniVal.LogFilePath
             Dim pathName As String = ""
             Dim fileName As String = ""
             UtilClass.dividePathAndFile(fullPath, pathName, fileName)
             If Not UtilClass.isDirExists(pathName) Then
-                _iniVal.LogFilePath = "" 'ƒƒOƒtƒ@ƒCƒ‹‚ªŠÔˆá‚Á‚Ä‚¢‚éê‡‚ÉƒƒOo—Í‚·‚é‚ÆÀsƒGƒ‰[‚ªo‚éˆ×A‰Šú‰»‚µ‚Ä‚¨‚­
-                Throw New UsrDefException("ƒƒOƒtƒ@ƒCƒ‹‚Ìo—Íæ‚ª‘¶İ‚µ‚È‚¢ƒGƒ‰[", _msgHd.getMSG("NonLogDir", CommonConst.LANG_KBN_JPN))
+                _iniVal.LogFilePath = "" 'ãƒ­ã‚°ãƒ•ã‚¡ã‚¤ãƒ«ãŒé–“é•ã£ã¦ã„ã‚‹å ´åˆã«ãƒ­ã‚°å‡ºåŠ›ã™ã‚‹ã¨å®Ÿè¡Œã‚¨ãƒ©ãƒ¼ãŒå‡ºã‚‹ç‚ºã€åˆæœŸåŒ–ã—ã¦ãŠã
+                Throw New UsrDefException("ãƒ­ã‚°ãƒ•ã‚¡ã‚¤ãƒ«ã®å‡ºåŠ›å…ˆãŒå­˜åœ¨ã—ãªã„ã‚¨ãƒ©ãƒ¼", _msgHd.getMSG("NonLogDir", CommonConst.LANG_KBN_JPN))
             End If
 
-            '—Œ`ƒtƒHƒ‹ƒ_‘¶İƒ`ƒFƒbƒN
+            'é››å½¢ãƒ•ã‚©ãƒ«ãƒ€å­˜åœ¨ãƒã‚§ãƒƒã‚¯
             If Not UtilClass.isDirExists(_iniVal.BaseXlsPath) Then
-                Throw New UsrDefException("—Œ`ƒtƒ@ƒCƒ‹Ši”[ƒtƒHƒ‹ƒ_‚ª‚ ‚è‚Ü‚¹‚ñB", _msgHd.getMSG("noHinaDir", CommonConst.LANG_KBN_JPN))
+                Throw New UsrDefException("é››å½¢ãƒ•ã‚¡ã‚¤ãƒ«æ ¼ç´ãƒ•ã‚©ãƒ«ãƒ€ãŒã‚ã‚Šã¾ã›ã‚“ã€‚", _msgHd.getMSG("noHinaDir", CommonConst.LANG_KBN_JPN))
             End If
 
-            'EXCELo—ÍæƒtƒHƒ‹ƒ_‘¶İƒ`ƒFƒbƒN
+            'EXCELå‡ºåŠ›å…ˆãƒ•ã‚©ãƒ«ãƒ€å­˜åœ¨ãƒã‚§ãƒƒã‚¯
             If Not UtilClass.isDirExists(_iniVal.OutXlsPath) Then
-                Throw New UsrDefException("EXCELƒtƒ@ƒCƒ‹o—ÍæƒtƒHƒ‹ƒ_‚ª‚ ‚è‚Ü‚¹‚ñB", _msgHd.getMSG("noOutExcelDir", CommonConst.LANG_KBN_JPN))
+                Throw New UsrDefException("EXCELãƒ•ã‚¡ã‚¤ãƒ«å‡ºåŠ›å…ˆãƒ•ã‚©ãƒ«ãƒ€ãŒã‚ã‚Šã¾ã›ã‚“ã€‚", _msgHd.getMSG("noOutExcelDir", CommonConst.LANG_KBN_JPN))
             End If
 
-        Catch ue As UsrDefException 'ƒ†[ƒU[’è‹`—áŠO
+        Catch ue As UsrDefException 'ãƒ¦ãƒ¼ã‚¶ãƒ¼å®šç¾©ä¾‹å¤–
             Call ue.dspMsg()
-            Throw ue                'ƒLƒƒƒbƒ`‚µ‚½—áŠO‚ğ‚»‚Ì‚Ü‚ÜƒXƒ[
-        Catch ex As Exception       'ƒVƒXƒeƒ€—áŠO
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", CommonConst.LANG_KBN_JPN, UtilClass.getErrDetail(ex))) 'ƒLƒƒƒbƒ`‚µ‚½—áŠO‚ğƒ†[ƒU[’è‹`—áŠO‚ÉˆÚ‚µ•Ï‚¦ƒXƒ[
+            Throw ue                'ã‚­ãƒ£ãƒƒãƒã—ãŸä¾‹å¤–ã‚’ãã®ã¾ã¾ã‚¹ãƒ­ãƒ¼
+        Catch ex As Exception       'ã‚·ã‚¹ãƒ†ãƒ ä¾‹å¤–
+            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", CommonConst.LANG_KBN_JPN, UtilClass.getErrDetail(ex))) 'ã‚­ãƒ£ãƒƒãƒã—ãŸä¾‹å¤–ã‚’ãƒ¦ãƒ¼ã‚¶ãƒ¼å®šç¾©ä¾‹å¤–ã«ç§»ã—å¤‰ãˆã‚¹ãƒ­ãƒ¼
         End Try
     End Sub
 
     '-------------------------------------------------------------------------------
-    '@”Ä—pƒ}ƒXƒ^ƒf[ƒ^æ“¾
-    '   iˆ—ŠT—vj”Ä—pƒ}ƒXƒ^‚Ìƒf[ƒ^‚ğ“Ç‚İ‚İA“à•”ƒe[ƒuƒ‹‚ÉŠi”[‚·‚é
+    'ã€€æ±ç”¨ãƒã‚¹ã‚¿ãƒ‡ãƒ¼ã‚¿å–å¾—
+    '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰æ±ç”¨ãƒã‚¹ã‚¿ã®ãƒ‡ãƒ¼ã‚¿ã‚’èª­ã¿è¾¼ã¿ã€å†…éƒ¨ãƒ†ãƒ¼ãƒ–ãƒ«ã«æ ¼ç´ã™ã‚‹
     '-------------------------------------------------------------------------------
     Private Sub getHanyouMST()
         Try
 
-            Dim SQL As String = ""               'SQL•Û—p•Ï”
+            Dim SQL As String = ""               'SQLä¿æŒç”¨å¤‰æ•°
             SQL = "SELECT "
             SQL = SQL & "  HYM_KOTEIKEY         " & HYM_KOTEIKEY
             SQL = SQL & " ,HYM_KAHENKEY         " & HYM_KAHENKEY
@@ -647,24 +647,24 @@ Public Class StartUp
             SQL = SQL & " ,HYM_MEI2             " & HYM_MEI2
             SQL = SQL & " FROM MZ09_HANYOU_MST "
 
-            'SQL”­s
-            Dim iRecCnt As Integer          'ƒf[ƒ^ƒZƒbƒg‚Ìs”
+            'SQLç™ºè¡Œ
+            Dim iRecCnt As Integer          'ãƒ‡ãƒ¼ã‚¿ã‚»ãƒƒãƒˆã®è¡Œæ•°
             Dim ds As DataSet = _db.selectDB(SQL, RS, iRecCnt)
 
-            If iRecCnt <= 0 Then             '’ŠoƒŒƒR[ƒh‚ª‚PŒ‚à‚È‚¢ê‡
-                Throw New UsrDefException("”Ä—pƒ}ƒXƒ^‚Ì’l‚Ìæ“¾‚É¸”s‚µ‚Ü‚µ‚½B", _msgHd.getMSG("noHanyouMst", CommonConst.LANG_KBN_JPN))
+            If iRecCnt <= 0 Then             'æŠ½å‡ºãƒ¬ã‚³ãƒ¼ãƒ‰ãŒï¼‘ä»¶ã‚‚ãªã„å ´åˆ
+                Throw New UsrDefException("æ±ç”¨ãƒã‚¹ã‚¿ã®å€¤ã®å–å¾—ã«å¤±æ•—ã—ã¾ã—ãŸã€‚", _msgHd.getMSG("noHanyouMst", CommonConst.LANG_KBN_JPN))
             End If
 
-            'ŒŸõŒ‹‰Ê‚ğ\‘¢‘Ì‚ÉŠi”[
+            'æ¤œç´¢çµæœã‚’æ§‹é€ ä½“ã«æ ¼ç´
             With ds.Tables(RS)
                 For iCnt As Integer = 0 To iRecCnt - 1
 
                     Dim recKey As String = _db.rmNullStr(.Rows(iCnt)(HYM_KOTEIKEY)) & SETUZOKUSTR & _db.rmNullStr(.Rows(iCnt)(HYM_KAHENKEY))
                     Dim rec As hanyouM = New hanyouM
-                    rec.KoteiKey = _db.rmNullStr(.Rows(iCnt)(HYM_KOTEIKEY))      'ŒÅ’èƒL[
-                    rec.KahenKey = _db.rmNullStr(.Rows(iCnt)(HYM_KAHENKEY))      '‰Â•ÏƒL[
-                    rec.Mei1 = _db.rmNullStr(.Rows(iCnt)(HYM_MEI1))              '–¼Ì‚P
-                    rec.Mei2 = _db.rmNullStr(.Rows(iCnt)(HYM_MEI2))              '–¼Ì‚Q
+                    rec.KoteiKey = _db.rmNullStr(.Rows(iCnt)(HYM_KOTEIKEY))      'å›ºå®šã‚­ãƒ¼
+                    rec.KahenKey = _db.rmNullStr(.Rows(iCnt)(HYM_KAHENKEY))      'å¯å¤‰ã‚­ãƒ¼
+                    rec.Mei1 = _db.rmNullStr(.Rows(iCnt)(HYM_MEI1))              'åç§°ï¼‘
+                    rec.Mei2 = _db.rmNullStr(.Rows(iCnt)(HYM_MEI2))              'åç§°ï¼’
                     _hanyou_tb.Add(recKey, rec)
 
                 Next
@@ -673,18 +673,18 @@ Public Class StartUp
 
             ds = Nothing
 
-        Catch ue As UsrDefException         'ƒ†[ƒU[’è‹`—áŠO
+        Catch ue As UsrDefException         'ãƒ¦ãƒ¼ã‚¶ãƒ¼å®šç¾©ä¾‹å¤–
             Call ue.dspMsg()
-            Throw ue                        'ƒLƒƒƒbƒ`‚µ‚½—áŠO‚ğ‚»‚Ì‚Ü‚ÜƒXƒ[
-        Catch ex As Exception               'ƒVƒXƒeƒ€—áŠO
-            Throw New UsrDefException(ex, _msgHd.getMSG(SYSERR, CommonConst.LANG_KBN_JPN, UtilClass.getErrDetail(ex)))   'ƒLƒƒƒbƒ`‚µ‚½—áŠO‚ğƒ†[ƒU[’è‹`—áŠO‚ÉˆÚ‚µ•Ï‚¦ƒXƒ[
+            Throw ue                        'ã‚­ãƒ£ãƒƒãƒã—ãŸä¾‹å¤–ã‚’ãã®ã¾ã¾ã‚¹ãƒ­ãƒ¼
+        Catch ex As Exception               'ã‚·ã‚¹ãƒ†ãƒ ä¾‹å¤–
+            Throw New UsrDefException(ex, _msgHd.getMSG(SYSERR, CommonConst.LANG_KBN_JPN, UtilClass.getErrDetail(ex)))   'ã‚­ãƒ£ãƒƒãƒã—ãŸä¾‹å¤–ã‚’ãƒ¦ãƒ¼ã‚¶ãƒ¼å®šç¾©ä¾‹å¤–ã«ç§»ã—å¤‰ãˆã‚¹ãƒ­ãƒ¼
         End Try
 
     End Sub
 
     '-------------------------------------------------------------------------------
-    '@”Ä—pƒ}ƒXƒ^–¼Ì•Ô‹p
-    '   iˆ—ŠT—vj“n‚³‚ê‚½ŒÅ’è¥‰Â•ÏƒL[‚ğŒ³‚ÉA”Ä—pƒ}ƒXƒ^‚Ì–¼Ì‚PE‚Q‚ğ•Ô‹p‚·‚é
+    'ã€€æ±ç”¨ãƒã‚¹ã‚¿åç§°è¿”å´
+    '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰æ¸¡ã•ã‚ŒãŸå›ºå®šï½¥å¯å¤‰ã‚­ãƒ¼ã‚’å…ƒã«ã€æ±ç”¨ãƒã‚¹ã‚¿ã®åç§°ï¼‘ãƒ»ï¼’ã‚’è¿”å´ã™ã‚‹
     '-------------------------------------------------------------------------------
     Public Shared Function cnvKeyToName(ByVal sPrmKoteiKey As String, ByVal sPrmKahenKey As String,
                                         Optional ByVal sPrmName2 As String = "") As String
@@ -694,11 +694,11 @@ Public Class StartUp
             sPrmName2 = rec.Mei2
             Return rec.Mei1
 
-        Catch ue As UsrDefException         'ƒ†[ƒU[’è‹`—áŠO
+        Catch ue As UsrDefException         'ãƒ¦ãƒ¼ã‚¶ãƒ¼å®šç¾©ä¾‹å¤–
             Call ue.dspMsg()
-            Throw ue                        'ƒLƒƒƒbƒ`‚µ‚½—áŠO‚ğ‚»‚Ì‚Ü‚ÜƒXƒ[
-        Catch ex As Exception               'ƒVƒXƒeƒ€—áŠO
-            Throw New UsrDefException(ex, _msgHd.getMSG(SYSERR, CommonConst.LANG_KBN_JPN, UtilClass.getErrDetail(ex)))   'ƒLƒƒƒbƒ`‚µ‚½—áŠO‚ğƒ†[ƒU[’è‹`—áŠO‚ÉˆÚ‚µ•Ï‚¦ƒXƒ[
+            Throw ue                        'ã‚­ãƒ£ãƒƒãƒã—ãŸä¾‹å¤–ã‚’ãã®ã¾ã¾ã‚¹ãƒ­ãƒ¼
+        Catch ex As Exception               'ã‚·ã‚¹ãƒ†ãƒ ä¾‹å¤–
+            Throw New UsrDefException(ex, _msgHd.getMSG(SYSERR, CommonConst.LANG_KBN_JPN, UtilClass.getErrDetail(ex)))   'ã‚­ãƒ£ãƒƒãƒã—ãŸä¾‹å¤–ã‚’ãƒ¦ãƒ¼ã‚¶ãƒ¼å®šç¾©ä¾‹å¤–ã«ç§»ã—å¤‰ãˆã‚¹ãƒ­ãƒ¼
         End Try
 
     End Function
