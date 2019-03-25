@@ -130,7 +130,12 @@ Public Class Order
         table2.Columns.Add("Value", GetType(Integer))
 
         For index As Integer = 0 To ds12.Tables(RS).Rows.Count - 1
-            table2.Rows.Add(ds12.Tables(RS).Rows(index)("文字１"), ds12.Tables(RS).Rows(index)("可変キー"))
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+                table2.Rows.Add(ds12.Tables(RS).Rows(index)("文字２"), ds12.Tables(RS).Rows(index)("可変キー"))
+            Else
+                table2.Rows.Add(ds12.Tables(RS).Rows(index)("文字１"), ds12.Tables(RS).Rows(index)("可変キー"))
+            End If
+
         Next
 
         Dim column2 As New DataGridViewComboBoxColumn()
