@@ -434,6 +434,7 @@ Public Class PurchasingManagement
             LblHistory.Text = "PurchaseHistory"
             LblAdd.Text = "PurchaseThisTime"
             LblPurchasedDate.Text = "PurchaseDate"
+            LblPaymentDate.Text = "PaymentDate"
             LblRemarks.Text = "Remarks"
             LblNo1.Text = "Record"
             LblNo1.Location = New Point(1272, 82)
