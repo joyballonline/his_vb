@@ -141,6 +141,7 @@ Public Class Quote
         table2.Columns.Add("Display", GetType(String))
         table2.Columns.Add("Value", GetType(Integer))
 
+        'リードタイム単位の多言語対応
         For i As Integer = 0 To ds12.Tables(RS).Rows.Count - 1
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 table2.Rows.Add(ds12.Tables(RS).Rows(i)("文字２"), ds12.Tables(RS).Rows(i)("可変キー"))
@@ -1526,6 +1527,8 @@ Public Class Quote
     '見積書印刷
     '
     Private Sub BtnQuote_Click(sender As Object, e As EventArgs) Handles BtnQuote.Click
+        'カーソルを砂時計にする
+        Cursor.Current = Cursors.WaitCursor
 
         '見積基本情報
         Dim Sql1 As String = ""
@@ -1763,6 +1766,8 @@ Public Class Quote
             'sheet.Rows.AutoFit()
             book.SaveAs(sOutFile)
             app.Visible = True
+            'カーソルを砂時計から元に戻す
+            Cursor.Current = Cursors.Default
 
             _msgHd.dspMSG("CreateExcel", frmC01F10_Login.loginValue.Language)
 
@@ -1777,6 +1782,9 @@ Public Class Quote
     '見積依頼書発行
     '
     Private Sub BtnQuoteRequest_Click(sender As Object, e As EventArgs) Handles BtnQuoteRequest.Click
+        'カーソルを砂時計にする
+        Cursor.Current = Cursors.WaitCursor
+
         Dim createFlg = False
 
         '見積基本情報
@@ -1934,6 +1942,8 @@ Public Class Quote
 
                     book.SaveAs(sOutFile)
                     app.Visible = True
+                    'カーソルを砂時計から元に戻す
+                    Cursor.Current = Cursors.Default
 
                     '_msgHd.dspMSG("CreateExcel")
                     createFlg = True
@@ -2013,6 +2023,8 @@ Public Class Quote
 
 
         Try
+            'カーソルを砂時計にする
+            Cursor.Current = Cursors.WaitCursor
             '雛形パス
             Dim sHinaPath As String = ""
             sHinaPath = StartUp._iniVal.BaseXlsPath
@@ -2118,6 +2130,8 @@ Public Class Quote
 
             book.SaveAs(sOutFile)
             app.Visible = True
+            'カーソルを砂時計から元に戻す
+            Cursor.Current = Cursors.Default
 
             _msgHd.dspMSG("CreateExcel", frmC01F10_Login.loginValue.Language)
 
