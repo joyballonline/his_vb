@@ -181,15 +181,13 @@ Public Class frmC01F10_Login
 
                 sql = ""
                 sql = sql & "SELECT "
-                sql = sql & "   * "        'パスワード
+                sql = sql & "   パスワード "        'パスワード
+                sql = sql & "  , 世代番号 "         '世代番号
                 sql = sql & " FROM m03_pswd "
                 sql = sql & " where 適用開始日 <= current_date "
                 sql = sql & "   and 適用終了日 >= current_date "
                 sql = sql & "   and 会社コード = '" & _db.rmSQ(cmbCampany.SelectedValue) & "'"
                 sql = sql & "   and ユーザＩＤ = '" & _db.rmSQ(txtTanto.Text) & "'"
-                sql = sql & "   and 世代番号 = (SELECT max(世代番号) FROM m03_pswd"
-                sql = sql & "                     WHERE 会社コード = '" & _db.rmSQ(cmbCampany.SelectedValue) & "'"     '会社コード
-                sql = sql & "                     AND ユーザＩＤ = '" & _db.rmSQ(txtTanto.Text) & "')"                      'ユーザＩＤ
 
                 Dim reccnt2 As Integer = 0
                 Dim ds2 = _db.selectDB(sql, RS, reccnt2)
