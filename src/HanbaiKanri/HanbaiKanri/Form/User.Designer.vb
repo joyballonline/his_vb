@@ -124,7 +124,7 @@ Partial Class User
         Me.Label6.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label6.Location = New System.Drawing.Point(3, 119)
+        Me.Label6.Location = New System.Drawing.Point(3, 177)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(69, 15)
         Me.Label6.TabIndex = 14
@@ -135,7 +135,7 @@ Partial Class User
         Me.Label7.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label7.Location = New System.Drawing.Point(3, 148)
+        Me.Label7.Location = New System.Drawing.Point(3, 119)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(37, 15)
         Me.Label7.TabIndex = 15
@@ -146,7 +146,7 @@ Partial Class User
         Me.Label8.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label8.Location = New System.Drawing.Point(3, 177)
+        Me.Label8.Location = New System.Drawing.Point(3, 148)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(37, 15)
         Me.Label8.TabIndex = 16
@@ -214,7 +214,7 @@ Partial Class User
         Me.cmAuthority.Location = New System.Drawing.Point(154, 115)
         Me.cmAuthority.Name = "cmAuthority"
         Me.cmAuthority.Size = New System.Drawing.Size(260, 23)
-        Me.cmAuthority.TabIndex = 241
+        Me.cmAuthority.TabIndex = 5
         '
         'cmLangage
         '
@@ -226,7 +226,7 @@ Partial Class User
         Me.cmLangage.Location = New System.Drawing.Point(154, 144)
         Me.cmLangage.Name = "cmLangage"
         Me.cmLangage.Size = New System.Drawing.Size(260, 23)
-        Me.cmLangage.TabIndex = 242
+        Me.cmLangage.TabIndex = 6
         '
         'cmbInvalidFlag
         '
@@ -238,7 +238,7 @@ Partial Class User
         Me.cmbInvalidFlag.Location = New System.Drawing.Point(154, 173)
         Me.cmbInvalidFlag.Name = "cmbInvalidFlag"
         Me.cmbInvalidFlag.Size = New System.Drawing.Size(260, 23)
-        Me.cmbInvalidFlag.TabIndex = 243
+        Me.cmbInvalidFlag.TabIndex = 7
         '
         'TableLayoutPanel1
         '
@@ -251,13 +251,11 @@ Partial Class User
         Me.TableLayoutPanel1.Controls.Add(Me.TxtUserId, 1, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.Label26, 2, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.Label3, 0, 1)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label6, 0, 6)
         Me.TableLayoutPanel1.Controls.Add(Me.TxtName, 1, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.Label4, 0, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.TxtShortName, 1, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.Label5, 0, 3)
-        Me.TableLayoutPanel1.Controls.Add(Me.Label6, 0, 4)
-        Me.TableLayoutPanel1.Controls.Add(Me.Label7, 0, 5)
-        Me.TableLayoutPanel1.Controls.Add(Me.Label8, 0, 6)
         Me.TableLayoutPanel1.Controls.Add(Me.LblPassword, 0, 7)
         Me.TableLayoutPanel1.Controls.Add(Me.LblConfirmPassword, 0, 8)
         Me.TableLayoutPanel1.Controls.Add(Me.TxtRemarks, 1, 3)
@@ -267,6 +265,8 @@ Partial Class User
         Me.TableLayoutPanel1.Controls.Add(Me.TxtConfirmPassword, 1, 8)
         Me.TableLayoutPanel1.Controls.Add(Me.TxtPassword, 1, 7)
         Me.TableLayoutPanel1.Controls.Add(Me.TxtGeneration, 2, 7)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label7, 0, 4)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label8, 0, 5)
         Me.TableLayoutPanel1.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(12, 12)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
@@ -323,7 +323,7 @@ Partial Class User
         Me.TxtConfirmPassword.MaxLength = 255
         Me.TxtConfirmPassword.Name = "TxtConfirmPassword"
         Me.TxtConfirmPassword.Size = New System.Drawing.Size(260, 22)
-        Me.TxtConfirmPassword.TabIndex = 245
+        Me.TxtConfirmPassword.TabIndex = 10
         '
         'TxtGeneration
         '
@@ -333,7 +333,7 @@ Partial Class User
         Me.TxtGeneration.MaxLength = 255
         Me.TxtGeneration.Name = "TxtGeneration"
         Me.TxtGeneration.Size = New System.Drawing.Size(234, 22)
-        Me.TxtGeneration.TabIndex = 246
+        Me.TxtGeneration.TabIndex = 9
         Me.TxtGeneration.Visible = False
         '
         'User
