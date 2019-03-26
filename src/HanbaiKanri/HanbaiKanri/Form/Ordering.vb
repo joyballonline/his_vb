@@ -1143,6 +1143,8 @@ Public Class Ordering
 
     '発注書発行のボタン押下時
     Private Sub BtnPurchase_Click(sender As Object, e As EventArgs) Handles BtnPurchase.Click
+        'カーソルを砂時計にする
+        Cursor.Current = Cursors.WaitCursor
 
         Dim reccnt As Integer = 0
         Dim Sql As String = ""
@@ -1210,6 +1212,7 @@ Public Class Ordering
 
             sheet.Range("A34").Value = dsHattyuhd.Tables(RS).Rows(0)("営業担当者")
             sheet.Range("A35").Value = dsHattyuhd.Tables(RS).Rows(0)("入力担当者")
+            sheet.Range("R30").Value = dsHattyuhd.Tables(RS).Rows(0)("仕入先名")
 
 
             Dim rowCnt As Integer = 0
@@ -1272,12 +1275,15 @@ Public Class Ordering
 
 
             sheet.Range("W" & lstRow + 1).Value = totalPrice
-            sheet.Range("W" & lstRow + 2).Value = totalPrice * 10 * 0.01
-            sheet.Range("W" & lstRow + 3).Value = totalPrice * 10 * 0.01 + totalPrice
-            sheet.Range("H" & lstRow + 5).Value = totalPrice * 10 * 0.01 + totalPrice
+            sheet.Range("W" & lstRow + 2).Value = Math.Ceiling(totalPrice * 10 * 0.01)
+            sheet.Range("W" & lstRow + 3).Value = Math.Ceiling(totalPrice * 10 * 0.01) + totalPrice
+            sheet.Range("H" & lstRow + 5).Value = Math.Ceiling(totalPrice * 10 * 0.01) + totalPrice
 
             book.SaveAs(sOutFile)
             app.Visible = True
+
+            'カーソルを砂時計から元に戻す
+            Cursor.Current = Cursors.Default
 
             _msgHd.dspMSG("CreateExcel", frmC01F10_Login.loginValue.Language)
 
