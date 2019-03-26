@@ -974,8 +974,11 @@ Public Class Quote
     Private Sub TxtCustomerCode_DoubleClick(sender As Object, e As EventArgs) Handles TxtCustomerCode.DoubleClick
         Dim openForm As Form = Nothing
         openForm = New CustomerSearch(_msgHd, _db, _langHd, Me)   '処理選択
-        openForm.Show(Me)
-        Me.Enabled = False
+        openForm.ShowDialog(Me)
+        openForm.Dispose()
+        '得意先マスタ読み込み
+        Read_Customer()
+
     End Sub
 
     Private Sub TxtSales_DoubleClick(sender As Object, e As EventArgs) Handles TxtSales.DoubleClick
@@ -2148,7 +2151,16 @@ Public Class Quote
 
     End Sub
 
+    '得意先検索ボタンクリック
+    '
     Private Sub BtnCodeSearch_Click(sender As Object, e As EventArgs) Handles BtnCodeSearch.Click
+        '得意先マスタ読み込み
+        Read_Customer()
+
+    End Sub
+
+    '得意先マスタより得意先情報を読み込む
+    Private Sub Read_Customer()
         Dim SqlCode As String = ""
         SqlCode += "SELECT * "
         SqlCode += "FROM public.m10_customer"
@@ -2168,8 +2180,8 @@ Public Class Quote
             TxtPaymentTerms.Text = dsCode.Tables(RS).Rows(0)("既定支払条件").ToString
 
         End If
-    End Sub
 
+    End Sub
     ''' <summary>
     ''' 指定した文字列から指定した文字を全て削除する
     ''' </summary>
