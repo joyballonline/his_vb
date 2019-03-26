@@ -172,6 +172,8 @@ Public Class CustomerARList
         Dim app As Excel.Application = Nothing
         Dim book As Excel.Workbook = Nothing
         Dim sheet As Excel.Worksheet = Nothing
+        'カーソルを砂時計にする
+        Cursor.Current = Cursors.WaitCursor
 
         Try
             '雛形パス
@@ -219,6 +221,8 @@ Public Class CustomerARList
 
             book.SaveAs(sOutFile)
             app.Visible = True
+            'カーソルを砂時計から元に戻す
+            Cursor.Current = Cursors.Default
 
             _msgHd.dspMSG("CreateExcel", frmC01F10_Login.loginValue.Language)
 
