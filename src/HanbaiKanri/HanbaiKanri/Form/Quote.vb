@@ -181,7 +181,7 @@ Public Class Quote
             LblOrderAmount.Text = "SalesAmount"
             LblQuoteAmount.Text = "QuotationAmount"
             LblGrossProfit.Text = "GrossMargin"
-            LblVat.Text = "Vat"
+            LblVat.Text = "Vat(%)"
 
             RbtnGP.Text = "GrossMarginInput" '粗利入力
             RbtnUP.Text = "InputUnitPrice " '単価入力
