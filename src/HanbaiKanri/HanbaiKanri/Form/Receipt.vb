@@ -369,13 +369,20 @@ Public Class Receipt
                 DgvHistory.Rows(i).Cells("仕入先").Value = dsNyukodt.Tables(RS).Rows(i)("仕入先名")
                 DgvHistory.Rows(i).Cells("仕入値").Value = dsNyukodt.Tables(RS).Rows(i)("仕入値")
                 DgvHistory.Rows(i).Cells("入庫数量").Value = dsNyukodt.Tables(RS).Rows(i)("入庫数量")
-                DgvHistory.Rows(i).Cells("倉庫").Value = getWarehouseName(dsNyukodt.Tables(RS).Rows(i)("倉庫コード"))
-                DgvHistory.Rows(i).Cells("入出庫種別").Value = getInOutName(dsNyukodt.Tables(RS).Rows(i)("入出庫種別"))
-                DgvHistory.Rows(i).Cells("引当区分").Value = getAssignName(dsNyukodt.Tables(RS).Rows(i)("引当区分"))
+
+                If dsNyukodt.Tables(RS).Rows(i).IsNull(("倉庫コード")) = False Then
+                    DgvHistory.Rows(i).Cells("倉庫").Value = getWarehouseName(dsNyukodt.Tables(RS).Rows(i)("倉庫コード"))
+                End If
+                If dsNyukodt.Tables(RS).Rows(i).IsNull(("入出庫種別")) = False Then
+                    DgvHistory.Rows(i).Cells("入出庫種別").Value = getInOutName(dsNyukodt.Tables(RS).Rows(i)("入出庫種別"))
+                End If
+                If dsNyukodt.Tables(RS).Rows(i).IsNull(("引当区分")) = False Then
+                    DgvHistory.Rows(i).Cells("引当区分").Value = getAssignName(dsNyukodt.Tables(RS).Rows(i)("引当区分"))
+                End If
+
                 DgvHistory.Rows(i).Cells("入庫日").Value = dsNyukodt.Tables(RS).Rows(i)("入庫日").ToShortDateString
                 DgvHistory.Rows(i).Cells("備考").Value = dsNyukodt.Tables(RS).Rows(i)("備考")
             Next
-
 
             DgvAdd.Columns("No").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
             DgvAdd.Columns("No").ReadOnly = True
@@ -987,10 +994,18 @@ Public Class Receipt
 
 
     Private Function getWarehouseName(ByVal prmString As String) As String
-        Dim Sql As String = " AND 倉庫コード ILIKE '" & prmString & "'"
-        Dim dsWarehouse As DataSet = getDsData("m20_warehouse", Sql)
+        Dim val As String = ""
 
-        Return dsWarehouse.Tables(RS).Rows(0)("名称")
+        If val IsNot Nothing Then
+            Dim Sql As String = " AND 倉庫コード ILIKE '" & prmString & "'"
+            Dim dsWarehouse As DataSet = getDsData("m20_warehouse", Sql)
+
+            If dsWarehouse.Tables(RS).Rows.Count <> 0 Then
+                val = dsWarehouse.Tables(RS).Rows(0)("名称")
+            End If
+        End If
+
+        Return val
     End Function
 
     'Return: DataTable

@@ -253,10 +253,17 @@ Public Class GoodsIssue
                 DgvHistory.Rows(i).Cells("仕入先").Value = dsShukodt.Tables(RS).Rows(i)("仕入先名")
                 DgvHistory.Rows(i).Cells("売単価").Value = dsShukodt.Tables(RS).Rows(i)("売単価")
                 DgvHistory.Rows(i).Cells("出庫数量").Value = dsShukodt.Tables(RS).Rows(i)("出庫数量")
-                DgvHistory.Rows(i).Cells("倉庫").Value = getWarehouseName(dsShukodt.Tables(RS).Rows(i)("倉庫コード"))
 
-                DgvHistory.Rows(i).Cells("入出庫種別").Value = getInOutName(dsShukodt.Tables(RS).Rows(i)("入出庫種別"))
-                DgvHistory.Rows(i).Cells("引当区分").Value = getAssignName(dsShukodt.Tables(RS).Rows(i)("引当区分"))
+                If dsShukodt.Tables(RS).Rows(i).IsNull(("倉庫コード")) = False Then
+                    DgvHistory.Rows(i).Cells("倉庫").Value = getWarehouseName(dsShukodt.Tables(RS).Rows(i)("倉庫コード"))
+                End If
+                If dsShukodt.Tables(RS).Rows(i).IsNull(("入出庫種別")) = False Then
+                    DgvHistory.Rows(i).Cells("入出庫種別").Value = getInOutName(dsShukodt.Tables(RS).Rows(i)("入出庫種別"))
+                End If
+                If dsShukodt.Tables(RS).Rows(i).IsNull(("引当区分")) = False Then
+                    DgvHistory.Rows(i).Cells("引当区分").Value = getAssignName(dsShukodt.Tables(RS).Rows(i)("引当区分"))
+                End If
+
                 DgvHistory.Rows(i).Cells("出庫日").Value = dsShukodt.Tables(RS).Rows(i)("出庫日").ToShortDateString
                 DgvHistory.Rows(i).Cells("備考").Value = dsShukodt.Tables(RS).Rows(i)("備考")
             Next
@@ -1289,10 +1296,18 @@ Public Class GoodsIssue
     End Function
 
     Private Function getWarehouseName(ByVal prmString As String) As String
-        Dim Sql As String = " AND 倉庫コード ILIKE '" & prmString & "'"
-        Dim dsWarehouse As DataSet = getDsData("m20_warehouse", Sql)
+        Dim val As String = ""
 
-        Return dsWarehouse.Tables(RS).Rows(0)("名称")
+        If val IsNot Nothing Then
+            Dim Sql As String = " AND 倉庫コード ILIKE '" & prmString & "'"
+            Dim dsWarehouse As DataSet = getDsData("m20_warehouse", Sql)
+
+            If dsWarehouse.Tables(RS).Rows.Count <> 0 Then
+                val = dsWarehouse.Tables(RS).Rows(0)("名称")
+            End If
+        End If
+
+        Return val
     End Function
 
     'Return: DataTable
