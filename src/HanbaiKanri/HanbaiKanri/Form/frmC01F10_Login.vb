@@ -325,7 +325,7 @@ Public Class frmC01F10_Login
     Private Sub clearControl()
 
         'システム名称表示
-        lblTitle.Text = StartUp.iniValue.SystemCaption
+        'lblTitle.Text = StartUp.iniValue.SystemCaption
 
         Label1.Text = "User ID"
         Label2.Text = "Password"

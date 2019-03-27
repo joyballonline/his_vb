@@ -97,11 +97,11 @@ Partial Class frmC01F10_Login
         Me.lblTitle.AutoSize = True
         Me.lblTitle.Font = New System.Drawing.Font("游ゴシック", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.lblTitle.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.lblTitle.Location = New System.Drawing.Point(188, 72)
+        Me.lblTitle.Location = New System.Drawing.Point(102, 78)
         Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New System.Drawing.Size(188, 25)
+        Me.lblTitle.Size = New System.Drawing.Size(380, 25)
         Me.lblTitle.TabIndex = 6
-        Me.lblTitle.Text = "Sales Management"
+        Me.lblTitle.Text = "Sales, Purchase & Inventory Management"
         '
         'lblVer
         '
