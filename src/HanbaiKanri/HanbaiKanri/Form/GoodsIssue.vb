@@ -713,7 +713,7 @@ Public Class GoodsIssue
         Sql += dsCymnhd.Tables(RS).Rows(0)("営業担当者コード").ToString
         Sql += "', '"
         Sql += frmC01F10_Login.loginValue.TantoCD
-        Sql += " ')"
+        Sql += "')"
 
         _db.executeDB(Sql)
 

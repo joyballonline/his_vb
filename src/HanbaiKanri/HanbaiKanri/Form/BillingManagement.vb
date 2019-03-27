@@ -507,7 +507,7 @@ Public Class BillingManagement
         Sql += frmC01F10_Login.loginValue.TantoNM
         Sql += "', '"
         Sql += strToday
-        Sql += " ')"
+        Sql += "')"
 
         _db.executeDB(Sql)
 

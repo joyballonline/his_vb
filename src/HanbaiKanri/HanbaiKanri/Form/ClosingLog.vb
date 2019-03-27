@@ -753,7 +753,7 @@ Public Class ClosingLog
                 Sql += "前受金"
                 Sql += "', '"
                 Sql += dsNkinkshihd.Tables(RS).Rows(i)("入金消込額計").ToString
-                Sql += " ')"
+                Sql += "')"
 
                 _db.executeDB(Sql)
 
@@ -780,7 +780,7 @@ Public Class ClosingLog
                 Sql += "売掛金"
                 Sql += "', '"
                 Sql += dsNkinkshihd.Tables(RS).Rows(i)("入金消込額計").ToString
-                Sql += " ')"
+                Sql += "')"
 
                 _db.executeDB(Sql)
             Else
@@ -812,7 +812,7 @@ Public Class ClosingLog
                 Sql += "売掛金"
                 Sql += "', '"
                 Sql += dsNkinkshihd.Tables(RS).Rows(i)("入金消込額計").ToString
-                Sql += " ')"
+                Sql += "')"
 
                 _db.executeDB(Sql)
             End If
@@ -866,7 +866,7 @@ Public Class ClosingLog
             Sql += "売上"
             Sql += "', '"
             Sql += dsSwkUrighd.Tables(RS).Rows(i)("売上金額").ToString
-            Sql += " ')"
+            Sql += "')"
             _db.executeDB(Sql)
 
             Dim VATOUT As Double = 0
@@ -894,7 +894,7 @@ Public Class ClosingLog
             Sql += "VAT-OUT"
             Sql += "', '"
             Sql += VATOUT.ToString
-            Sql += " ')"
+            Sql += "')"
 
             _db.executeDB(Sql)
         Next
@@ -959,7 +959,7 @@ Public Class ClosingLog
                 Sql += "現金預金"
                 Sql += "', '"
                 Sql += dsShrikshihd.Tables(RS).Rows(i)("支払消込額計").ToString
-                Sql += " ')"
+                Sql += "')"
 
                 _db.executeDB(Sql)
 
@@ -986,7 +986,7 @@ Public Class ClosingLog
                 Sql += "前払金"
                 Sql += "', '"
                 Sql += dsShrikshihd.Tables(RS).Rows(i)("支払消込額計").ToString
-                Sql += " ')"
+                Sql += "')"
 
                 _db.executeDB(Sql)
             Else
@@ -1019,7 +1019,7 @@ Public Class ClosingLog
                 Sql += "現金預金"
                 Sql += "', '"
                 Sql += dsShrikshihd.Tables(RS).Rows(i)("支払消込額計").ToString
-                Sql += " ')"
+                Sql += "')"
 
                 _db.executeDB(Sql)
             End If
@@ -1088,7 +1088,7 @@ Public Class ClosingLog
                 Sql += "買掛金"
                 Sql += "', '"
                 Sql += dsSWKNyukohd.Tables(RS).Rows(x)("仕入金額").ToString
-                Sql += " ')"
+                Sql += "')"
                 _db.executeDB(Sql)
 
                 Sql = ""
@@ -1114,7 +1114,7 @@ Public Class ClosingLog
                 Sql += "棚卸資産"
                 Sql += "', '"
                 Sql += dsSWKNyukohd.Tables(RS).Rows(x)("仕入金額").ToString
-                Sql += " ')"
+                Sql += "')"
 
 
                 _db.executeDB(Sql)
@@ -1145,7 +1145,7 @@ Public Class ClosingLog
             Sql += "買掛金"
             Sql += "', '"
             Sql += VATIN.ToString
-            Sql += " ')"
+            Sql += "')"
             _db.executeDB(Sql)
 
         Next
@@ -1282,7 +1282,7 @@ Public Class ClosingLog
                 Sql += "0"
             End If
 
-            Sql += " ')"
+            Sql += "')"
 
             _db.executeDB(Sql)
         Next
@@ -1440,7 +1440,7 @@ Public Class ClosingLog
                             Sql += frmC01F10_Login.loginValue.TantoNM
                             Sql += "', '"
                             Sql += dtToday
-                            Sql += " ')"
+                            Sql += "')"
 
                             _db.executeDB(Sql)
 
@@ -1555,7 +1555,7 @@ Public Class ClosingLog
                     Sql += frmC01F10_Login.loginValue.TantoNM
                     Sql += "', '"
                     Sql += dtToday
-                    Sql += " ')"
+                    Sql += "')"
                     _db.executeDB(Sql)
                 Next
             End If
@@ -1652,7 +1652,7 @@ Public Class ClosingLog
             Sql += dtToday
             Sql += "', '"
             Sql += frmC01F10_Login.loginValue.TantoNM
-            Sql += " ')"
+            Sql += "')"
 
             _db.executeDB(Sql)
         Next
@@ -1733,7 +1733,7 @@ Public Class ClosingLog
                 Sql += frmC01F10_Login.loginValue.TantoNM
                 Sql += "', '"
                 Sql += dtToday
-                Sql += " ')"
+                Sql += "')"
                 _db.executeDB(Sql)
             Next
         Next
@@ -1839,7 +1839,7 @@ Public Class ClosingLog
             Sql += dtToday
             Sql += "', '"
             Sql += frmC01F10_Login.loginValue.TantoNM
-            Sql += " ')"
+            Sql += "')"
 
             _db.executeDB(Sql)
         Next
@@ -1942,7 +1942,7 @@ Public Class ClosingLog
             Sql += frmC01F10_Login.loginValue.TantoNM
             Sql += "', '"
             Sql += dtToday
-            Sql += " ')"
+            Sql += "')"
 
             _db.executeDB(Sql)
         Next
@@ -2049,7 +2049,7 @@ Public Class ClosingLog
             End If
             Sql += "', '"
             Sql += dtToday
-            Sql += " ')"
+            Sql += "')"
 
 
             _db.executeDB(Sql)
@@ -2099,7 +2099,7 @@ Public Class ClosingLog
                 Sql += frmC01F10_Login.loginValue.TantoNM
                 Sql += "', '"
                 Sql += dtToday
-                Sql += " ')"
+                Sql += "')"
 
                 _db.executeDB(Sql)
             Next
@@ -2193,7 +2193,7 @@ Public Class ClosingLog
             End If
             Sql += ", '"
             Sql += dtToday
-            Sql += " ')"
+            Sql += "')"
 
             _db.executeDB(Sql)
         Next
@@ -2242,7 +2242,7 @@ Public Class ClosingLog
                 Sql += frmC01F10_Login.loginValue.TantoNM
                 Sql += "', '"
                 Sql += dtToday
-                Sql += " ')"
+                Sql += "')"
 
                 _db.executeDB(Sql)
             Next
@@ -2320,7 +2320,7 @@ Public Class ClosingLog
             End If
             Sql += "', '"
             Sql += dtToday
-            Sql += " ')"
+            Sql += "')"
 
             _db.executeDB(Sql)
         Next
@@ -2363,7 +2363,7 @@ Public Class ClosingLog
                 Sql += frmC01F10_Login.loginValue.TantoNM
                 Sql += "', '"
                 Sql += dtToday
-                Sql += " ')"
+                Sql += "')"
 
                 _db.executeDB(Sql)
             Next
@@ -2447,7 +2447,7 @@ Public Class ClosingLog
             End If
             Sql += "', '"
             Sql += dtToday
-            Sql += " ')"
+            Sql += "')"
 
             _db.executeDB(Sql)
         Next
@@ -2490,7 +2490,7 @@ Public Class ClosingLog
                 Sql += frmC01F10_Login.loginValue.TantoNM
                 Sql += "', '"
                 Sql += dtToday
-                Sql += " ')"
+                Sql += "')"
 
                 _db.executeDB(Sql)
             Next

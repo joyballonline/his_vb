@@ -591,7 +591,7 @@ Public Class DepositManagement
         Sql += frmC01F10_Login.loginValue.TantoNM
         Sql += "', '"
         Sql += dtToday
-        Sql += " ')"
+        Sql += "')"
 
         _db.executeDB(Sql)
 
@@ -638,7 +638,7 @@ Public Class DepositManagement
                 Sql += dtToday
                 Sql += "', '"
                 Sql += TxtRemarks.Text
-                Sql += " ')"
+                Sql += "')"
 
                 _db.executeDB(Sql)
 
@@ -678,7 +678,7 @@ Public Class DepositManagement
                 Sql += frmC01F10_Login.loginValue.TantoNM
                 Sql += "', '"
                 Sql += dtToday
-                Sql += " ')"
+                Sql += "')"
 
                 _db.executeDB(Sql)
 

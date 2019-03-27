@@ -1144,16 +1144,15 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <MEMO></MEMO>
   </MSG_DATA>
   <MSG_DATA>
-    <ID>chkOrderingInputError</ID>
-    <MSG1>明細の内容が不十分です。</MSG1>
-    <MSG1_EN>The content of the item is insufficient.</MSG1_EN>
-    <MSG2>数量、仕入単価などが入力されているか確認してください。</MSG2>
-    <MSG2_EN>Make sure that the quantity, purchase price, etc. are entered.</MSG2_EN>
+    <ID>chkPriceError</ID>
+    <MSG1>本システムでは取扱いできない金額です。</MSG1>
+    <MSG1_EN>It is an amount that can not be handled by this system.</MSG1_EN>
+    <MSG2>再度確認してから実行してください。</MSG2>
+    <MSG2_EN>Please check again and try again.</MSG2_EN>
     <BUTTON_TYPE>OK</BUTTON_TYPE>
     <ICONT_TYPE>Error</ICONT_TYPE>
     <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
     <MEMO></MEMO>
   </MSG_DATA>
-
 
 </MSG_DEF>

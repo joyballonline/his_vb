@@ -166,7 +166,7 @@ Public Class Hanyo
                 Sql += frmC01F10_Login.loginValue.TantoNM
                 Sql += "', '"
                 Sql += dtToday
-                Sql += " ')"
+                Sql += "')"
 
                 _db.executeDB(Sql)
             Else

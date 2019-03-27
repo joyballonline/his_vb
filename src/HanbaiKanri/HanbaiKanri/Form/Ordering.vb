@@ -1503,9 +1503,9 @@ Public Class Ordering
         CmWarehouse.DataSource = tb
 
         If prmVal IsNot "" Then
-            CmWarehouse.SelectedIndex = prmVal
+            CmWarehouse.SelectedValue = prmVal
         Else
-            CmWarehouse.SelectedValue = 1
+            CmWarehouse.SelectedIndex = 1
         End If
 
     End Sub

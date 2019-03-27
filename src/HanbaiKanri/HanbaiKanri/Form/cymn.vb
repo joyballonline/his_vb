@@ -894,7 +894,7 @@ Public Class Cymn
                 Else
                     Sql3 += "" '倉庫コード
                 End If
-                Sql3 += " ')"
+                Sql3 += "')"
 
                 _db.executeDB(Sql3)
 
@@ -965,7 +965,7 @@ Public Class Cymn
                         Sql4 += UtilClass.formatDatetime(dtNow)
                         Sql4 += "', '"
                         Sql4 += UtilClass.formatDatetime(dtNow)
-                        Sql4 += " ')"
+                        Sql4 += "')"
                         _db.executeDB(Sql4)
                     End If
                 Next
@@ -1132,9 +1132,9 @@ Public Class Cymn
         CmWarehouse.DataSource = tb
 
         If prmVal IsNot "" Then
-            CmWarehouse.SelectedIndex = prmVal
+            CmWarehouse.SelectedValue = prmVal
         Else
-            CmWarehouse.SelectedValue = 1
+            CmWarehouse.SelectedIndex = -1
         End If
 
     End Sub

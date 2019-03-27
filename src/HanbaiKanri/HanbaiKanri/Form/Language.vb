@@ -104,7 +104,7 @@ Public Class Language
                 Sql += frmC01F10_Login.loginValue.TantoNM
                 Sql += "', '"
                 Sql += dtToday
-                Sql += " ')"
+                Sql += "')"
                 Sql += "RETURNING 会社コード"
                 Sql += ", "
                 Sql += "言語コード"

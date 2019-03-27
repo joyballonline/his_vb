@@ -614,7 +614,7 @@ Public Class PurchasingManagement
             Sql3 += ds1.Tables(RS).Rows(0)("営業担当者コード").ToString '営業担当者コード
             Sql3 += "', '"
             Sql3 += frmC01F10_Login.loginValue.TantoCD '入力担当者コード
-            Sql3 += " ')"
+            Sql3 += "')"
 
             _db.executeDB(Sql3)
 
@@ -676,7 +676,7 @@ Public Class PurchasingManagement
                 Sql4 += Input '更新者
                 Sql4 += "', '"
                 Sql4 += strToday '更新日
-                Sql4 += " ')"
+                Sql4 += "')"
                 If DgvAdd.Rows(index).Cells("仕入数量").Value.ToString = 0 Then
                 Else
                     _db.executeDB(Sql4)
@@ -845,7 +845,7 @@ Public Class PurchasingManagement
         Sql += strToday
         Sql += "', '"
         Sql += UtilClass.strFormatDate(DtpPaymentDate.Text)
-        Sql += " ')"
+        Sql += "')"
 
         _db.executeDB(Sql)
 

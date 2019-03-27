@@ -141,7 +141,7 @@ Public Class Customer
                 Sql += frmC01F10_Login.loginValue.TantoNM
                 Sql += "', '"
                 Sql += dtToday
-                Sql += " ')"
+                Sql += "')"
                 Sql += "RETURNING 会社コード"
                 Sql += ", "
                 Sql += "得意先コード"

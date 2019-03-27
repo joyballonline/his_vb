@@ -436,7 +436,7 @@ Public Class AccountsPayable
             Sql += strToday '更新日
             Sql += "', '"
             Sql += strFormatDate(DtpPaymentDate.Value) '支払予定日
-            Sql += " ')"
+            Sql += "')"
 
             _db.executeDB(Sql)
 

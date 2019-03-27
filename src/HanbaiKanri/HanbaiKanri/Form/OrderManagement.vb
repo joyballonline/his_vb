@@ -631,7 +631,7 @@ Public Class OrderManagement
                 Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(i)("見積単価").ToString)
                 Sql4 += "', '"
                 Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(i)("見積金額").ToString)
-                Sql4 += " ')"
+                Sql4 += "')"
                 If DgvAdd.Rows(i).Cells("売上数量").Value <> 0 Then
                     _db.executeDB(Sql4)
                 End If
@@ -732,7 +732,7 @@ Public Class OrderManagement
             Sql3 += dsCymnHd.Tables(RS).Rows(0)("営業担当者コード").ToString '営業担当者コード
             Sql3 += "', '"
             Sql3 += frmC01F10_Login.loginValue.TantoCD '入力担当者コード
-            Sql3 += " ')"
+            Sql3 += "')"
 
             _db.executeDB(Sql3)
 
@@ -904,7 +904,7 @@ Public Class OrderManagement
             Sql += frmC01F10_Login.loginValue.TantoNM
             Sql += "', '"
             Sql += strToday
-            Sql += " ')"
+            Sql += "')"
 
             _db.executeDB(Sql)
 

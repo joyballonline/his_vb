@@ -435,6 +435,8 @@ Public Class Receipt
             'リードタイムのリストを汎用マスタから取得
             Dim dsHanyo As DataSet = getDsHanyoData(CommonConst.INOUT_CLASS)
 
+            createWarehouseCombobox(dsHattyu.Tables(RS).Rows(0)("倉庫コード").ToString)
+
             For index As Integer = 0 To dsHattyudt.Tables(RS).Rows.Count - 1
                 If dsHattyudt.Tables(RS).Rows(index)("発注残数") <> 0 Then
 
@@ -692,7 +694,7 @@ Public Class Receipt
             Sql += frmC01F10_Login.loginValue.TantoCD
             Sql += "', '"
             Sql += CmWarehouse.SelectedValue.ToString
-            Sql += " ')"
+            Sql += "')"
 
             _db.executeDB(Sql)
 
@@ -751,7 +753,7 @@ Public Class Receipt
                     Sql += Input
                     Sql += "', '"
                     Sql += strToday
-                    Sql += " ')"
+                    Sql += "')"
 
                     _db.executeDB(Sql)
 
@@ -966,9 +968,9 @@ Public Class Receipt
         CmWarehouse.DataSource = tb
 
         If prmVal IsNot "" Then
-            CmWarehouse.SelectedIndex = prmVal
+            CmWarehouse.SelectedValue = prmVal
         Else
-            CmWarehouse.SelectedValue = 1
+            CmWarehouse.SelectedIndex = 0
         End If
 
     End Sub

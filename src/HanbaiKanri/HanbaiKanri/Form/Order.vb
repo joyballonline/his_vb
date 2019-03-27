@@ -763,7 +763,7 @@ Public Class Order
                 Sql1 += frmC01F10_Login.loginValue.TantoNM
                 Sql1 += "', '"
                 Sql1 += "0"
-                Sql1 += " ')"
+                Sql1 += "')"
 
                 _db.executeDB(Sql1)
 
@@ -852,7 +852,7 @@ Public Class Order
                     Sql2 += UtilClass.formatNumber(DgvItemList.Rows(cymnhdIdx).Cells("仕入原価").Value.ToString)
                     Sql2 += "', '"
                     Sql2 += UtilClass.formatNumber(DgvItemList.Rows(cymnhdIdx).Cells("仕入金額").Value.ToString)
-                    Sql2 += " ')"
+                    Sql2 += "')"
 
                     _db.executeDB(Sql2)
 
