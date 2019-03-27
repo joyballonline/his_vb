@@ -887,6 +887,25 @@ Public Class Ordering
             Exit Sub
         End If
 
+        '数量と仕入単価がなかったらエラーで戻す
+        For i As Integer = 0 To DgvItemList.RowCount - 1
+            If DgvItemList.Rows(i).Cells("仕入単価").Value Is Nothing Or DgvItemList.Rows(i).Cells("数量").Value Is Nothing Then
+
+                '対象データがないメッセージを表示
+                _msgHd.dspMSG("chkOrderingInputError", frmC01F10_Login.loginValue.Language)
+
+                Exit Sub
+            Else
+                If DgvItemList.Rows(i).Cells("数量").Value = 0 Then
+                    '対象データがないメッセージを表示
+                    _msgHd.dspMSG("chkQuantityError", frmC01F10_Login.loginValue.Language)
+
+                    Exit Sub
+                End If
+
+            End If
+        Next
+
         Dim reccnt As Integer = 0
         Dim dtNow As String = formatDatetime(DateTime.Now)
         Dim Sql As String = ""
