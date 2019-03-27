@@ -983,7 +983,7 @@ Partial Class Quote
         Me.LblVat.Name = "LblVat"
         Me.LblVat.Size = New System.Drawing.Size(100, 23)
         Me.LblVat.TabIndex = 47
-        Me.LblVat.Text = "VAT"
+        Me.LblVat.Text = "VAT(%)"
         Me.LblVat.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'LblMode
