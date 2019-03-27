@@ -188,6 +188,7 @@ Public Class frmC01F10_Login
                 sql = sql & "   and 適用終了日 >= current_date "
                 sql = sql & "   and 会社コード = '" & _db.rmSQ(cmbCampany.SelectedValue) & "'"
                 sql = sql & "   and ユーザＩＤ = '" & _db.rmSQ(txtTanto.Text) & "'"
+
                 Dim reccnt2 As Integer = 0
                 Dim ds2 = _db.selectDB(sql, RS, reccnt2)
 

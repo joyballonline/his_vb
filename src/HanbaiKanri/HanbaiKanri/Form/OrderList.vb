@@ -94,7 +94,7 @@ Public Class OrderList
                 Sql += viewFormat() '表示形式条件
 
                 Sql += " ORDER BY "
-                Sql += "登録日 DESC"
+                Sql += "更新日 DESC"
 
                 ds = getDsData("t10_cymnhd", Sql)
 
@@ -128,6 +128,8 @@ Public Class OrderList
                     DgvCymnhd.Rows(index).Cells("入力担当者").Value = ds.Tables(RS).Rows(index)("入力担当者")
                     DgvCymnhd.Rows(index).Cells("備考").Value = ds.Tables(RS).Rows(index)("備考")
                     DgvCymnhd.Rows(index).Cells("登録日").Value = ds.Tables(RS).Rows(index)("登録日")
+                    DgvCymnhd.Rows(index).Cells("更新者").Value = ds.Tables(RS).Rows(index)("更新者")
+                    DgvCymnhd.Rows(index).Cells("更新日").Value = ds.Tables(RS).Rows(index)("更新日")
                 Next
 
             Else
@@ -657,6 +659,8 @@ Public Class OrderList
             DgvCymnhd.Columns.Add("入力担当者", "PICForInputting")
             DgvCymnhd.Columns.Add("備考", "Remarks")
             DgvCymnhd.Columns.Add("登録日", "RegistrationDate")
+            DgvCymnhd.Columns.Add("更新日", "UpdateDate")
+            DgvCymnhd.Columns.Add("更新者", "ModifiedBy")
         Else
             DgvCymnhd.Columns.Add("取消", "取消")
             DgvCymnhd.Columns.Add("受注番号", "受注番号")
@@ -684,6 +688,8 @@ Public Class OrderList
             DgvCymnhd.Columns.Add("入力担当者", "入力担当者")
             DgvCymnhd.Columns.Add("備考", "備考")
             DgvCymnhd.Columns.Add("登録日", "登録日")
+            DgvCymnhd.Columns.Add("更新日", "更新日")
+            DgvCymnhd.Columns.Add("更新者", "更新者")
         End If
 
         DgvCymnhd.Columns("ＶＡＴ").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight

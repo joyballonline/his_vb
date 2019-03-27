@@ -441,12 +441,29 @@ Public Class ReceiptList
 
         Try
 
+            '発注データ
+            Sql = " AND "
+            Sql += "発注番号 ILIKE '" & DgvNyuko.Rows(DgvNyuko.CurrentCell.RowIndex).Cells("発注番号").Value & "'"
+            Sql += " AND "
+            Sql += "発注番号枝番 ILIKE '" & DgvNyuko.Rows(DgvNyuko.CurrentCell.RowIndex).Cells("発注番号枝番").Value & "'"
+
+            Dim dsCymndt As DataSet = getDsData("t21_hattyu", Sql)
+
+            '入庫データ
+            Sql = " AND"
+            Sql += " 入庫番号"
+            Sql += "='"
+            Sql += DgvNyuko.Rows(DgvNyuko.CurrentCell.RowIndex).Cells("入庫番号").Value
+            Sql += "'"
+
+            Dim dsNyukodt As DataSet = getDsData("t43_nyukodt", Sql)
+
             Sql = "UPDATE "
             Sql += "Public."
             Sql += "t42_nyukohd "
             Sql += "SET "
 
-            Sql += "取消区分 = " & CommonConst.CANCEL_KBN_DISABLED
+            Sql += "取消区分 = " & CommonConst.CANCEL_KBN_DISABLED '取消区分：1
             Sql += ", "
             Sql += "取消日"
             Sql += " = '"
@@ -495,6 +512,83 @@ Public Class ReceiptList
             Sql += "'"
             Sql += " AND"
             Sql += " 入庫番号"
+            Sql += "='"
+            Sql += DgvNyuko.Rows(DgvNyuko.CurrentCell.RowIndex).Cells("入庫番号").Value
+            Sql += "' "
+
+            _db.executeDB(Sql)
+
+            '発注データを更新する
+            For i As Integer = 0 To dsCymndt.Tables(RS).Rows.Count - 1
+                For x As Integer = 0 To dsNyukodt.Tables(RS).Rows.Count - 1
+
+                    '行番号が一致したら
+                    If dsCymndt.Tables(RS).Rows(i)("行番号") = dsNyukodt.Tables(RS).Rows(x)("行番号") Then
+                        Dim calShukko As Integer = dsCymndt.Tables(RS).Rows(i)("入庫数") - dsNyukodt.Tables(RS).Rows(x)("入庫数量")
+                        Dim calUnShukko As Integer = dsCymndt.Tables(RS).Rows(i)("未入庫数") + dsNyukodt.Tables(RS).Rows(x)("入庫数量")
+
+                        Sql = "update t21_hattyu set "
+                        Sql += "入庫数 = '" & calShukko & "'"
+                        Sql += ",未入庫数 = '" & calUnShukko & "'"
+                        Sql += ",更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+                        Sql += " where 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                        Sql += " AND "
+                        Sql += "発注番号 ILIKE '" & DgvNyuko.Rows(DgvNyuko.CurrentCell.RowIndex).Cells("発注番号").Value & "'"
+                        Sql += " AND "
+                        Sql += "発注番号枝番 ILIKE '" & DgvNyuko.Rows(DgvNyuko.CurrentCell.RowIndex).Cells("発注番号枝番").Value & "'"
+                        Sql += " AND "
+                        Sql += "行番号 = '" & dsCymndt.Tables(RS).Rows(i)("行番号") & "'"
+
+                        _db.executeDB(Sql)
+
+                        Sql = "update t20_hattyu set "
+                        Sql += "更新日 = '" & dtNow & "'"
+                        Sql += ",更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+                        Sql += " where 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                        Sql += " AND "
+                        Sql += "発注番号 ILIKE '" & DgvNyuko.Rows(DgvNyuko.CurrentCell.RowIndex).Cells("発注番号").Value & "'"
+                        Sql += " AND "
+                        Sql += "発注番号枝番 ILIKE '" & DgvNyuko.Rows(DgvNyuko.CurrentCell.RowIndex).Cells("発注番号枝番").Value & "'"
+                        Sql += " AND "
+                        Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '取消区分=0
+
+                        _db.executeDB(Sql)
+
+                    End If
+
+                Next
+
+            Next
+
+            Sql = "UPDATE "
+            Sql += "Public."
+            Sql += "t70_inout "
+            Sql += "SET "
+
+            Sql += "取消日"
+            Sql += " = '"
+            Sql += dtNow
+            Sql += "', "
+            Sql += "取消区分"
+            Sql += " = '"
+            Sql += CommonConst.CANCEL_KBN_DISABLED.ToString
+            Sql += "', "
+            Sql += "更新日"
+            Sql += " = '"
+            Sql += dtNow
+            Sql += "', "
+            Sql += "更新者"
+            Sql += " = '"
+            Sql += frmC01F10_Login.loginValue.TantoNM
+            Sql += " ' "
+
+            Sql += "WHERE"
+            Sql += " 会社コード"
+            Sql += "='"
+            Sql += frmC01F10_Login.loginValue.BumonCD
+            Sql += "'"
+            Sql += " AND"
+            Sql += " 伝票番号"
             Sql += "='"
             Sql += DgvNyuko.Rows(DgvNyuko.CurrentCell.RowIndex).Cells("入庫番号").Value
             Sql += "' "

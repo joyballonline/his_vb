@@ -176,6 +176,9 @@ Public Class User
             Sql += "   and 適用終了日 >= '" & dtToday & "'"
             Sql += "   and 会社コード = '" & _db.rmSQ(frmC01F10_Login.loginValue.BumonCD) & "'"
             Sql += "   and ユーザＩＤ = '" & _db.rmSQ(_userId) & "'"
+            Sql += "   AND 世代番号 = (SELECT max(世代番号) FROM m03_pswd "
+            Sql += "                     WHERE 会社コード = '" & _db.rmSQ(frmC01F10_Login.loginValue.BumonCD) & "'"     '会社コード
+            Sql += "                     AND ユーザＩＤ = '" & _db.rmSQ(_userId) & "')"                      'ユーザＩＤ
             Dim ds2 = _db.selectDB(Sql, RS, reccnt)
 
             If ds2.Tables(RS).Rows.Count > 0 Then
@@ -349,7 +352,7 @@ Public Class User
                             Sql += " ,更新者 = '" & _db.rmSQ(frmC01F10_Login.loginValue.TantoNM) & "'"           '更新者
                             Sql += " ,更新日 = current_timestamp"                                         '更新日
                             Sql += " WHERE 会社コード = '" & _db.rmSQ(frmC01F10_Login.loginValue.BumonCD) & "'"     '会社コード
-                            Sql += "   AND ユーザＩＤ = '" & _db.rmSQ(frmC01F10_Login.loginValue.TantoCD) & "'"                      'ユーザＩＤ
+                            Sql += "   AND ユーザＩＤ = '" & _db.rmSQ(_userId) & "'"                      'ユーザＩＤ
                             Sql += "   AND 適用終了日 = (SELECT max(適用終了日) FROM m03_pswd "
                             Sql += "                     WHERE 会社コード = '" & _db.rmSQ(frmC01F10_Login.loginValue.BumonCD) & "'"     '会社コード
                             Sql += "                     AND ユーザＩＤ = '" & _db.rmSQ(_userId) & "')"                      'ユーザＩＤ
@@ -378,7 +381,7 @@ Public Class User
                         Sql += "  , '2099-12-31' "     '運用終了日
                         Sql += "  , '" & _db.rmSQ(TxtPassword.Text) & "' "       '新パスワード     ★暗号化予定★
                         Sql += "  , 1 "                'パスワード変更方法　固定値"1"（画面変更）
-                        Sql += "  , " & _db.rmSQ(frmC01F10_Login.loginValue.Generation) + 1           '世代番号
+                        Sql += "  , " & TxtGeneration.Text + 1           '世代番号
                         Sql += "  , '2099-12-31' "     '有効期限
                         Sql += "  , '" & _db.rmSQ(frmC01F10_Login.loginValue.TantoNM) & "' "        '更新者
                         Sql += "  , current_timestamp "                                  '更新日

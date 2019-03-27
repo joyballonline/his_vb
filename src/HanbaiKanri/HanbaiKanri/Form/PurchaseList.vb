@@ -76,7 +76,7 @@ Public Class PurchaseList
     End Sub
 
     '仕入一覧を表示
-    Private Sub PurchaseListLoad(Optional ByRef Status As String = "")
+    Private Sub PurchaseListLoad()
 
         '一覧をクリア
         DgvHtyhd.Rows.Clear()
@@ -129,16 +129,16 @@ Public Class PurchaseList
                 '明細単位の場合
 
                 '抽出条件
-                Dim customerName As String = escapeSql(TxtSupplierName.Text)
-                Dim customerAddress As String = escapeSql(TxtAddress.Text)
-                Dim customerTel As String = escapeSql(TxtTel.Text)
-                Dim customerCode As String = escapeSql(TxtSupplierCode.Text)
-                Dim sinceDate As String = strFormatDate(dtPurchaseDateSince.Text)
-                Dim untilDate As String = strFormatDate(dtPurchaseDateUntil.Text)
-                Dim sinceNum As String = escapeSql(TxtPurchaseSince.Text)
-                Dim untilNum As String = escapeSql(TxtPurchaseUntil.Text)
-                Dim salesName As String = escapeSql(TxtSales.Text)
-                Dim customerPO As String = escapeSql(TxtCustomerPO.Text)
+                Dim customerName As String = UtilClass.escapeSql(TxtSupplierName.Text)
+                Dim customerAddress As String = UtilClass.escapeSql(TxtAddress.Text)
+                Dim customerTel As String = UtilClass.escapeSql(TxtTel.Text)
+                Dim customerCode As String = UtilClass.escapeSql(TxtSupplierCode.Text)
+                Dim sinceDate As String = UtilClass.strFormatDate(dtPurchaseDateSince.Text)
+                Dim untilDate As String = UtilClass.strFormatDate(dtPurchaseDateUntil.Text)
+                Dim sinceNum As String = UtilClass.escapeSql(TxtPurchaseSince.Text)
+                Dim untilNum As String = UtilClass.escapeSql(TxtPurchaseUntil.Text)
+                Dim salesName As String = UtilClass.escapeSql(TxtSales.Text)
+                Dim customerPO As String = UtilClass.escapeSql(TxtCustomerPO.Text)
 
                 'joinするのでとりあえず直書き
                 Sql = "SELECT * FROM  public.t41_siredt t41 "
@@ -447,13 +447,7 @@ Public Class PurchaseList
             Exit Sub
         End If
 
-        '実行できるデータがあるかチェック
-        If actionChk() = False Then
-            Return
-        End If
-
-
-        Dim dtNow As String = formatDatetime(DateTime.Now)
+        Dim dtNow As String = UtilClass.formatDatetime(DateTime.Now)
         Dim reccnt As Integer = 0
 
         Dim Sql As String = ""
@@ -537,151 +531,70 @@ Public Class PurchaseList
         Sql3 += DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("仕入番号").Value
         Sql3 += "' "
 
-        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-            Dim result As DialogResult = MessageBox.Show("Would you like to cancel the purchase？",
-                                             "Question",
-                                             MessageBoxButtons.YesNoCancel,
-                                             MessageBoxIcon.Exclamation,
-                                             MessageBoxDefaultButton.Button2)
+        '取消確認のアラート
+        Dim result As DialogResult = _msgHd.dspMSG("confirmCancel", frmC01F10_Login.loginValue.Language)
 
-            If result = DialogResult.Yes Then
-                _db.executeDB(Sql3)
+        If result = DialogResult.Yes Then
+            _db.executeDB(Sql3)
 
+            Dim Sql4 As String = ""
+            Dim PurchaseNum As Integer = 0
+            Dim OrderingNum As Integer = 0
 
-                Dim Sql4 As String = ""
-                Dim PurchaseNum As Integer = 0
-                Dim OrderingNum As Integer = 0
+            For index1 As Integer = 0 To ds1.Tables(RS).Rows.Count() - 1
+                For index2 As Integer = 0 To ds2.Tables(RS).Rows.Count() - 1
+                    If ds1.Tables(RS).Rows(index1)("行番号") = ds2.Tables(RS).Rows(index2)("行番号") Then
+                        Sql4 = ""
+                        Sql4 += "UPDATE "
+                        Sql4 += "Public."
+                        Sql4 += "t21_hattyu "
+                        Sql4 += "SET "
+                        Sql4 += "仕入数量"
+                        Sql4 += " = '"
+                        PurchaseNum = ds1.Tables(RS).Rows(index1)("仕入数量") - ds2.Tables(RS).Rows(index1)("仕入数量")
+                        Sql4 += PurchaseNum.ToString
+                        Sql4 += "', "
+                        Sql4 += " 発注残数"
+                        Sql4 += " = '"
+                        OrderingNum = ds1.Tables(RS).Rows(index1)("発注残数") + ds2.Tables(RS).Rows(index2)("仕入数量")
+                        Sql4 += OrderingNum.ToString
+                        Sql4 += "', "
+                        Sql4 += "更新者"
+                        Sql4 += " = '"
+                        Sql4 += frmC01F10_Login.loginValue.TantoNM
+                        Sql4 += "' "
+                        Sql4 += "WHERE"
+                        Sql4 += " 会社コード"
+                        Sql4 += "='"
+                        Sql4 += ds1.Tables(RS).Rows(index1)("会社コード")
+                        Sql4 += "'"
+                        Sql4 += " AND"
+                        Sql4 += " 発注番号"
+                        Sql4 += "='"
+                        Sql4 += ds1.Tables(RS).Rows(index1)("発注番号")
+                        Sql4 += "'"
+                        Sql4 += " AND"
+                        Sql4 += " 発注番号枝番"
+                        Sql4 += "='"
+                        Sql4 += ds1.Tables(RS).Rows(index1)("発注番号枝番")
+                        Sql4 += "'"
+                        Sql4 += " AND"
+                        Sql4 += " 行番号"
+                        Sql4 += "='"
+                        Sql4 += ds1.Tables(RS).Rows(index1)("行番号").ToString
+                        Sql4 += "' "
 
-                For index1 As Integer = 0 To ds1.Tables(RS).Rows.Count() - 1
-                    For index2 As Integer = 0 To ds2.Tables(RS).Rows.Count() - 1
-                        If ds1.Tables(RS).Rows(index1)("行番号") = ds2.Tables(RS).Rows(index2)("行番号") Then
-                            Sql4 = ""
-                            Sql4 += "UPDATE "
-                            Sql4 += "Public."
-                            Sql4 += "t21_hattyu "
-                            Sql4 += "SET "
-                            Sql4 += "仕入数量"
-                            Sql4 += " = '"
-                            PurchaseNum = ds1.Tables(RS).Rows(index1)("仕入数量") - ds2.Tables(RS).Rows(index1)("仕入数量")
-                            Sql4 += PurchaseNum.ToString
-                            Sql4 += "', "
-                            Sql4 += " 発注残数"
-                            Sql4 += " = '"
-                            OrderingNum = ds1.Tables(RS).Rows(index1)("発注残数") + ds2.Tables(RS).Rows(index2)("仕入数量")
-                            Sql4 += OrderingNum.ToString
-                            Sql4 += "', "
-                            Sql4 += "更新者"
-                            Sql4 += " = '"
-                            Sql4 += frmC01F10_Login.loginValue.TantoNM
-                            Sql4 += "' "
-                            Sql4 += "WHERE"
-                            Sql4 += " 会社コード"
-                            Sql4 += "='"
-                            Sql4 += ds1.Tables(RS).Rows(index1)("会社コード")
-                            Sql4 += "'"
-                            Sql4 += " AND"
-                            Sql4 += " 発注番号"
-                            Sql4 += "='"
-                            Sql4 += ds1.Tables(RS).Rows(index1)("発注番号")
-                            Sql4 += "'"
-                            Sql4 += " AND"
-                            Sql4 += " 発注番号枝番"
-                            Sql4 += "='"
-                            Sql4 += ds1.Tables(RS).Rows(index1)("発注番号枝番")
-                            Sql4 += "'"
-                            Sql4 += " AND"
-                            Sql4 += " 行番号"
-                            Sql4 += "='"
-                            Sql4 += ds1.Tables(RS).Rows(index1)("行番号").ToString
-                            Sql4 += "' "
+                        _db.executeDB(Sql4)
 
-                            _db.executeDB(Sql4)
-
-                            Sql4 = ""
-                            PurchaseNum = 0
-                            OrderingNum = 0
-                        End If
-                    Next
+                        Sql4 = ""
+                        PurchaseNum = 0
+                        OrderingNum = 0
+                    End If
                 Next
-                DgvHtyhd.Rows.Clear()
-                DgvHtyhd.Columns.Clear()
-                Dim Status As String = "EXCLUSION"
-                PurchaseListLoad(Status)
-            End If
-        Else
-            Dim result As DialogResult = MessageBox.Show("仕入を取り消しますか？",
-                                             "質問",
-                                             MessageBoxButtons.YesNoCancel,
-                                             MessageBoxIcon.Exclamation,
-                                             MessageBoxDefaultButton.Button2)
+            Next
 
-            If result = DialogResult.Yes Then
-                _db.executeDB(Sql3)
-
-
-                Dim Sql4 As String = ""
-                Dim PurchaseNum As Integer = 0
-                Dim OrderingNum As Integer = 0
-
-                For index1 As Integer = 0 To ds1.Tables(RS).Rows.Count() - 1
-                    For index2 As Integer = 0 To ds2.Tables(RS).Rows.Count() - 1
-                        If ds1.Tables(RS).Rows(index1)("行番号") = ds2.Tables(RS).Rows(index2)("行番号") Then
-                            Sql4 = ""
-                            Sql4 += "UPDATE "
-                            Sql4 += "Public."
-                            Sql4 += "t21_hattyu "
-                            Sql4 += "SET "
-                            Sql4 += "仕入数量"
-                            Sql4 += " = '"
-                            PurchaseNum = ds1.Tables(RS).Rows(index1)("仕入数量") - ds2.Tables(RS).Rows(index1)("仕入数量")
-                            Sql4 += PurchaseNum.ToString
-                            Sql4 += "', "
-                            Sql4 += " 発注残数"
-                            Sql4 += " = '"
-                            OrderingNum = ds1.Tables(RS).Rows(index1)("発注残数") + ds2.Tables(RS).Rows(index2)("仕入数量")
-                            Sql4 += OrderingNum.ToString
-                            Sql4 += "', "
-                            Sql4 += "更新者"
-                            Sql4 += " = '"
-                            Sql4 += frmC01F10_Login.loginValue.TantoNM
-                            Sql4 += "' "
-                            Sql4 += "WHERE"
-                            Sql4 += " 会社コード"
-                            Sql4 += "='"
-                            Sql4 += ds1.Tables(RS).Rows(index1)("会社コード")
-                            Sql4 += "'"
-                            Sql4 += " AND"
-                            Sql4 += " 発注番号"
-                            Sql4 += "='"
-                            Sql4 += ds1.Tables(RS).Rows(index1)("発注番号")
-                            Sql4 += "'"
-                            Sql4 += " AND"
-                            Sql4 += " 発注番号枝番"
-                            Sql4 += "='"
-                            Sql4 += ds1.Tables(RS).Rows(index1)("発注番号枝番")
-                            Sql4 += "'"
-                            Sql4 += " AND"
-                            Sql4 += " 行番号"
-                            Sql4 += "='"
-                            Sql4 += ds1.Tables(RS).Rows(index1)("行番号").ToString
-                            Sql4 += "' "
-
-                            _db.executeDB(Sql4)
-
-                            Sql4 = ""
-                            PurchaseNum = 0
-                            OrderingNum = 0
-                        End If
-                    Next
-                Next
-                DgvHtyhd.Rows.Clear()
-                DgvHtyhd.Columns.Clear()
-                Dim Status As String = "EXCLUSION"
-                PurchaseListLoad(Status)
-            End If
+            PurchaseListLoad()
         End If
-
-
     End Sub
 
     '抽出条件取得
@@ -690,16 +603,16 @@ Public Class PurchaseList
         Dim Sql As String = ""
 
         '抽出条件
-        Dim customerName As String = escapeSql(TxtSupplierName.Text)
-        Dim customerAddress As String = escapeSql(TxtAddress.Text)
-        Dim customerTel As String = escapeSql(TxtTel.Text)
-        Dim customerCode As String = escapeSql(TxtSupplierCode.Text)
-        Dim sinceDate As String = strFormatDate(dtPurchaseDateSince.Text)
-        Dim untilDate As String = strFormatDate(dtPurchaseDateUntil.Text)
-        Dim sinceNum As String = escapeSql(TxtPurchaseSince.Text)
-        Dim untilNum As String = escapeSql(TxtPurchaseUntil.Text)
-        Dim salesName As String = escapeSql(TxtSales.Text)
-        Dim customerPO As String = escapeSql(TxtCustomerPO.Text)
+        Dim customerName As String = UtilClass.escapeSql(TxtSupplierName.Text)
+        Dim customerAddress As String = UtilClass.escapeSql(TxtAddress.Text)
+        Dim customerTel As String = UtilClass.escapeSql(TxtTel.Text)
+        Dim customerCode As String = UtilClass.escapeSql(TxtSupplierCode.Text)
+        Dim sinceDate As String = UtilClass.strFormatDate(dtPurchaseDateSince.Text)
+        Dim untilDate As String = UtilClass.strFormatDate(dtPurchaseDateUntil.Text)
+        Dim sinceNum As String = UtilClass.escapeSql(TxtPurchaseSince.Text)
+        Dim untilNum As String = UtilClass.escapeSql(TxtPurchaseUntil.Text)
+        Dim salesName As String = UtilClass.escapeSql(TxtSales.Text)
+        Dim customerPO As String = UtilClass.escapeSql(TxtCustomerPO.Text)
 
         If customerName <> Nothing Then
             Sql += " AND "
@@ -753,22 +666,6 @@ Public Class PurchaseList
 
     End Function
 
-    Private Function actionChk() As Boolean
-        '対象データがない場合は取消操作不可能
-        If DgvHtyhd.Rows.Count = 0 Then
-
-            '操作できないアラートを出す
-            _msgHd.dspMSG("NonAction", frmC01F10_Login.loginValue.Language)
-
-            Return False
-
-        Else
-
-            Return True
-
-        End If
-    End Function
-
     '表示形式条件
     Private Function viewFormat() As String
         Dim Sql As String = ""
@@ -808,44 +705,6 @@ Public Class PurchaseList
         Sql += "会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql += txtParam
         Return _db.selectDB(Sql, RS, reccnt)
-    End Function
-
-    'sqlで実行する文字列からシングルクォーテーションを文字コードにする
-    Private Function escapeSql(ByVal prmSql As String) As String
-        Dim sql As String = prmSql
-
-        sql = sql.Replace("'"c, "''") 'シングルクォーテーションを置換
-
-        Return Regex.Escape(sql)
-        Return sql
-    End Function
-
-    'どんなカルチャーであっても、日本の形式に変換する
-    Private Function strFormatDate(ByVal prmDate As String, Optional ByRef prmFormat As String = "yyyy/MM/dd") As String
-
-        'PCのカルチャーを取得し、それに応じてStringからDatetimeを作成
-        Dim ci As New System.Globalization.CultureInfo(CultureInfo.CurrentCulture.Name.ToString)
-        Dim dateFormat As DateTime = DateTime.Parse(prmDate, ci, System.Globalization.DateTimeStyles.AssumeLocal)
-
-        '日本の形式に書き換える
-        Return dateFormat.ToString(prmFormat)
-    End Function
-
-    'どんなカルチャーであっても、日本の形式に変換する
-    Private Function formatDatetime(ByVal prmDatetime As DateTime) As String
-
-        'PCのカルチャーを取得し、それに応じてStringからDatetimeを作成
-        Dim ciCurrent As New System.Globalization.CultureInfo(CultureInfo.CurrentCulture.Name.ToString)
-        Dim dateFormat As DateTime = DateTime.Parse(prmDatetime.ToString, ciCurrent, System.Globalization.DateTimeStyles.AssumeLocal)
-
-        Dim changeFormat As String = dateFormat.ToString("yyyy/MM/dd HH:mm:ss")
-
-        Dim ciJP As New System.Globalization.CultureInfo(CommonConst.CI_JP)
-        Dim rtnDatetime As DateTime = DateTime.Parse(changeFormat, ciJP, System.Globalization.DateTimeStyles.AssumeLocal)
-
-
-        '日本の形式に書き換える
-        Return changeFormat
     End Function
 
     '汎用マスタから固定キー、可変キーに応じた結果を返す

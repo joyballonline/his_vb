@@ -643,4 +643,14 @@ Public Class BillingManagement
         Return prmVal.ToString("F3", nfi) '売掛残高を増やす
     End Function
 
+    'DGV内で指定列名(プルダウン)は一度のクリックで開く
+    'それ以外は一回で入力状態にする
+    Private Sub DgvAdd_CellEnter(sender As Object, e As DataGridViewCellEventArgs) Handles DgvAdd.CellEnter
+        If DgvAdd.Columns(e.ColumnIndex).Name = "請求区分" Then
+            SendKeys.Send("{F4}")
+            'Else
+            '    SendKeys.Send("{F2}")
+        End If
+    End Sub
+
 End Class
