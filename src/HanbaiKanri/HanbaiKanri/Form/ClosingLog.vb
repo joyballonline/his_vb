@@ -2694,6 +2694,7 @@ Public Class ClosingLog
 
     Public Sub ConvertDataTableToCsvSingle(ds1 As DataSet, Name As String)
 
+
         Dim enc As System.Text.Encoding = System.Text.Encoding.GetEncoding("Shift_JIS")
         '出力先パス
         Dim sOutPath As String = ""
@@ -2702,6 +2703,9 @@ Public Class ClosingLog
         '出力ファイル名
         Dim sOutFile As String = ""
         sOutFile = sOutPath & "\" & Name & ".csv"
+
+        'カーソルをビジー状態にする
+        Cursor.Current = Cursors.WaitCursor
 
         '書き込むファイルを開く
         Dim sr As New System.IO.StreamWriter(sOutFile, False, enc)
@@ -2734,6 +2738,10 @@ Public Class ClosingLog
             sr.Write(vbCrLf)
         Next
         sr.Close()
+
+        'カーソルをビジー状態から元に戻す
+        Cursor.Current = Cursors.Default
+
     End Sub
 
     Private Function EncloseDoubleQuotesIfNeed(field As String) As String

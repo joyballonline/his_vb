@@ -900,7 +900,8 @@ Public Class GoodsIssue
         Dim book As Excel.Workbook = Nothing
         Dim sheet As Excel.Worksheet = Nothing
 
-
+        'カーソルをビジー状態にする
+        Cursor.Current = Cursors.WaitCursor
 
         Try
             '雛形パス
@@ -976,14 +977,17 @@ Public Class GoodsIssue
             Next
 
             book.SaveAs(sOutFile)
+
             app.Visible = True
 
             '_msgHd.dspMSG("CreateExcel")
             createFlg = True
 
         Catch ex As Exception
-            Throw ex
+            'カーソルをビジー状態から元に戻す
+            Cursor.Current = Cursors.Default
 
+            Throw ex
         Finally
             'app.Quit()
             'Marshal.ReleaseComObject(sheet)
@@ -993,6 +997,7 @@ Public Class GoodsIssue
         End Try
 
         Try
+
             '雛形パス
             Dim sHinaPath As String = ""
             sHinaPath = StartUp._iniVal.BaseXlsPath
@@ -1001,8 +1006,6 @@ Public Class GoodsIssue
             Dim sHinaFile As String = ""
             sHinaFile = sHinaPath & "\" & "PackingList.xlsx"
 
-
-
             '出力先パス
             Dim sOutPath As String = ""
             sOutPath = StartUp._iniVal.OutXlsPath
@@ -1010,8 +1013,6 @@ Public Class GoodsIssue
             '出力ファイル名
             Dim sOutFile As String = ""
             sOutFile = sOutPath & "\PackingList_" & ds2.Tables(RS).Rows(0)("出庫番号") & ".xlsx"
-
-
 
             app = New Excel.Application()
             book = app.Workbooks.Add(sHinaFile)  'テンプレート
@@ -1068,8 +1069,10 @@ Public Class GoodsIssue
             createFlg = True
 
         Catch ex As Exception
-            Throw ex
+            'カーソルをビジー状態から元に戻す
+            Cursor.Current = Cursors.Default
 
+            Throw ex
         Finally
             'app.Quit()
             'Marshal.ReleaseComObject(sheet)
@@ -1155,8 +1158,10 @@ Public Class GoodsIssue
             createFlg = True
 
         Catch ex As Exception
-            Throw ex
+            'カーソルをビジー状態から元に戻す
+            Cursor.Current = Cursors.Default
 
+            Throw ex
         Finally
             'app.Quit()
             'Marshal.ReleaseComObject(sheet)
@@ -1165,6 +1170,10 @@ Public Class GoodsIssue
 
         End Try
         'Dim test As String = ds1.Tables(RS).Rows(0)("")
+
+        'カーソルをビジー状態から元に戻す
+        Cursor.Current = Cursors.Default
+
         If createFlg = True Then
             _msgHd.dspMSG("CreateExcel", frmC01F10_Login.loginValue.Language)
         End If
