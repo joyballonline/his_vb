@@ -52,6 +52,8 @@ Partial Class Receipt
         Me.LblMode = New System.Windows.Forms.Label()
         Me.LblCustomerNo = New System.Windows.Forms.Label()
         Me.TxtCustomerPO = New System.Windows.Forms.TextBox()
+        Me.LblWarehouse = New System.Windows.Forms.Label()
+        Me.CmWarehouse = New System.Windows.Forms.ComboBox()
         CType(Me.DgvAdd, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvHistory, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvPurchase, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -84,7 +86,7 @@ Partial Class Receipt
         Me.DtpReceiptDate.CustomFormat = ""
         Me.DtpReceiptDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpReceiptDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DtpReceiptDate.Location = New System.Drawing.Point(292, 343)
+        Me.DtpReceiptDate.Location = New System.Drawing.Point(344, 343)
         Me.DtpReceiptDate.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.DtpReceiptDate.Name = "DtpReceiptDate"
         Me.DtpReceiptDate.Size = New System.Drawing.Size(148, 22)
@@ -97,7 +99,7 @@ Partial Class Receipt
         Me.LblRemarks.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblRemarks.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblRemarks.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblRemarks.Location = New System.Drawing.Point(446, 343)
+        Me.LblRemarks.Location = New System.Drawing.Point(12, 474)
         Me.LblRemarks.Name = "LblRemarks"
         Me.LblRemarks.Size = New System.Drawing.Size(170, 22)
         Me.LblRemarks.TabIndex = 255
@@ -107,7 +109,7 @@ Partial Class Receipt
         'TxtRemarks
         '
         Me.TxtRemarks.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtRemarks.Location = New System.Drawing.Point(622, 343)
+        Me.TxtRemarks.Location = New System.Drawing.Point(188, 474)
         Me.TxtRemarks.Name = "TxtRemarks"
         Me.TxtRemarks.Size = New System.Drawing.Size(644, 22)
         Me.TxtRemarks.TabIndex = 4
@@ -117,9 +119,9 @@ Partial Class Receipt
         Me.LblReceiptDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblReceiptDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblReceiptDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblReceiptDate.Location = New System.Drawing.Point(188, 343)
+        Me.LblReceiptDate.Location = New System.Drawing.Point(198, 343)
         Me.LblReceiptDate.Name = "LblReceiptDate"
-        Me.LblReceiptDate.Size = New System.Drawing.Size(98, 22)
+        Me.LblReceiptDate.Size = New System.Drawing.Size(140, 22)
         Me.LblReceiptDate.TabIndex = 253
         Me.LblReceiptDate.Text = "入庫日"
         Me.LblReceiptDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -393,10 +395,34 @@ Partial Class Receipt
         Me.TxtCustomerPO.TabIndex = 306
         Me.TxtCustomerPO.TabStop = False
         '
+        'LblWarehouse
+        '
+        Me.LblWarehouse.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblWarehouse.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblWarehouse.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblWarehouse.Location = New System.Drawing.Point(498, 343)
+        Me.LblWarehouse.Name = "LblWarehouse"
+        Me.LblWarehouse.Size = New System.Drawing.Size(140, 22)
+        Me.LblWarehouse.TabIndex = 309
+        Me.LblWarehouse.Text = "倉庫"
+        Me.LblWarehouse.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'CmWarehouse
+        '
+        Me.CmWarehouse.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.CmWarehouse.FormattingEnabled = True
+        Me.CmWarehouse.Items.AddRange(New Object() {"RegularShip", "DHL", "Air", "Ship"})
+        Me.CmWarehouse.Location = New System.Drawing.Point(644, 342)
+        Me.CmWarehouse.Name = "CmWarehouse"
+        Me.CmWarehouse.Size = New System.Drawing.Size(200, 23)
+        Me.CmWarehouse.TabIndex = 315
+        '
         'Receipt
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.CmWarehouse)
+        Me.Controls.Add(Me.LblWarehouse)
         Me.Controls.Add(Me.LblCustomerNo)
         Me.Controls.Add(Me.TxtCustomerPO)
         Me.Controls.Add(Me.LblMode)
@@ -468,4 +494,6 @@ Partial Class Receipt
     Friend WithEvents LblMode As Label
     Friend WithEvents LblCustomerNo As Label
     Friend WithEvents TxtCustomerPO As TextBox
+    Friend WithEvents LblWarehouse As Label
+    Friend WithEvents CmWarehouse As ComboBox
 End Class

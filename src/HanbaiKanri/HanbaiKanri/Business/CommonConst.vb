@@ -321,6 +321,9 @@ Public Class CommonConst
     Public Const FIXED_KEY_READTIME As String = "4"          'リードタイム単位
     Public Const FIXED_KEY_TRADE_TERMS As String = "5"          '貿易条件
     Public Const FIXED_KEY_PURCHASING_CLASS As String = "1002"       '仕入区分
+    Public Const INOUT_CLASS As String = "1003"       '入出庫種別
+    Public Const DC_CODE As String = "DC"           '預金種目固定キー
+    Public Const IP_CODE As String = "3"           '在庫単価評価法
 
     'メニュー ステータス
     Public Const STATUS_ADD As String = "ADD"          '登録モード
@@ -353,9 +356,17 @@ Public Class CommonConst
     Public Const CB_KBN_MOT_AVAILABLE_TXT_ENG As String = "No Bonded"     'No Bonded
     Public Const CB_KBN_AVAILABLE_TXT_ENG As String = "Bonded"        'Bonded
 
-    '預金種目固定キー
-    Public Const DC_CODE As String = "DC"           '預金種目固定キー
+    '引当区分
+    Public Const AC_KBN_NORMAL As Integer = 0                  '通常
+    Public Const AC_KBN_ASSIGN As Integer = 1                 '引き当て
 
-    Public Const IP_CODE As String = "3"           '在庫単価評価法
+    '引当区分 テキスト
+    Public Const AC_KBN_NORMAL_TXT As String = "通常"         '通常
+    Public Const AC_KBN_ASSIGN_TXT As String = "引き当て"        '引き当て
+
+    '引当区分 テキスト 英語
+    Public Const AC_KBN_NORMAL_TXT_ENG As String = "Normal"     'Normal
+    Public Const AC_KBN_ASSIGN_TXT_ENG As String = "Assign"   'Assign
+
 
 End Class
