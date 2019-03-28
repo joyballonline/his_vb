@@ -23,12 +23,6 @@ Partial Class MstCustomer
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.Dgv_Customer = New System.Windows.Forms.DataGridView()
-        Me.btnCustomerEdit = New System.Windows.Forms.Button()
-        Me.btnCustomerAdd = New System.Windows.Forms.Button()
-        Me.btnBack = New System.Windows.Forms.Button()
-        Me.BtnSearch = New System.Windows.Forms.Button()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.TxtSearch = New System.Windows.Forms.TextBox()
         Me.会社コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.得意先コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.得意先名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -47,6 +41,13 @@ Partial Class MstCustomer
         Me.会計用得意先コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.更新者 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.更新日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnCustomerEdit = New System.Windows.Forms.Button()
+        Me.btnCustomerAdd = New System.Windows.Forms.Button()
+        Me.btnBack = New System.Windows.Forms.Button()
+        Me.BtnSearch = New System.Windows.Forms.Button()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.TxtSearch = New System.Windows.Forms.TextBox()
+        Me.BtnOutputCustomer = New System.Windows.Forms.Button()
         CType(Me.Dgv_Customer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -67,64 +68,6 @@ Partial Class MstCustomer
         Me.Dgv_Customer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.Dgv_Customer.Size = New System.Drawing.Size(1326, 470)
         Me.Dgv_Customer.TabIndex = 3
-        '
-        'btnCustomerEdit
-        '
-        Me.btnCustomerEdit.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.btnCustomerEdit.Location = New System.Drawing.Point(1002, 509)
-        Me.btnCustomerEdit.Name = "btnCustomerEdit"
-        Me.btnCustomerEdit.Size = New System.Drawing.Size(165, 40)
-        Me.btnCustomerEdit.TabIndex = 5
-        Me.btnCustomerEdit.Text = "得意先編集"
-        Me.btnCustomerEdit.UseVisualStyleBackColor = True
-        '
-        'btnCustomerAdd
-        '
-        Me.btnCustomerAdd.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.btnCustomerAdd.Location = New System.Drawing.Point(831, 509)
-        Me.btnCustomerAdd.Name = "btnCustomerAdd"
-        Me.btnCustomerAdd.Size = New System.Drawing.Size(165, 40)
-        Me.btnCustomerAdd.TabIndex = 4
-        Me.btnCustomerAdd.Text = "得意先追加"
-        Me.btnCustomerAdd.UseVisualStyleBackColor = True
-        '
-        'btnBack
-        '
-        Me.btnBack.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.btnBack.Location = New System.Drawing.Point(1173, 509)
-        Me.btnBack.Name = "btnBack"
-        Me.btnBack.Size = New System.Drawing.Size(165, 40)
-        Me.btnBack.TabIndex = 6
-        Me.btnBack.Text = "戻る"
-        Me.btnBack.UseVisualStyleBackColor = True
-        '
-        'BtnSearch
-        '
-        Me.BtnSearch.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.BtnSearch.Location = New System.Drawing.Point(191, 5)
-        Me.BtnSearch.Name = "BtnSearch"
-        Me.BtnSearch.Size = New System.Drawing.Size(75, 23)
-        Me.BtnSearch.TabIndex = 2
-        Me.BtnSearch.Text = "検索"
-        Me.BtnSearch.UseVisualStyleBackColor = True
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label1.Location = New System.Drawing.Point(12, 9)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(67, 15)
-        Me.Label1.TabIndex = 11
-        Me.Label1.Text = "得意先名"
-        '
-        'TxtSearch
-        '
-        Me.TxtSearch.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtSearch.Location = New System.Drawing.Point(85, 6)
-        Me.TxtSearch.Name = "TxtSearch"
-        Me.TxtSearch.Size = New System.Drawing.Size(100, 22)
-        Me.TxtSearch.TabIndex = 1
         '
         '会社コード
         '
@@ -235,10 +178,78 @@ Partial Class MstCustomer
         Me.更新日.Name = "更新日"
         Me.更新日.ReadOnly = True
         '
+        'btnCustomerEdit
+        '
+        Me.btnCustomerEdit.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.btnCustomerEdit.Location = New System.Drawing.Point(1002, 509)
+        Me.btnCustomerEdit.Name = "btnCustomerEdit"
+        Me.btnCustomerEdit.Size = New System.Drawing.Size(165, 40)
+        Me.btnCustomerEdit.TabIndex = 5
+        Me.btnCustomerEdit.Text = "得意先編集"
+        Me.btnCustomerEdit.UseVisualStyleBackColor = True
+        '
+        'btnCustomerAdd
+        '
+        Me.btnCustomerAdd.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.btnCustomerAdd.Location = New System.Drawing.Point(831, 509)
+        Me.btnCustomerAdd.Name = "btnCustomerAdd"
+        Me.btnCustomerAdd.Size = New System.Drawing.Size(165, 40)
+        Me.btnCustomerAdd.TabIndex = 4
+        Me.btnCustomerAdd.Text = "得意先追加"
+        Me.btnCustomerAdd.UseVisualStyleBackColor = True
+        '
+        'btnBack
+        '
+        Me.btnBack.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.btnBack.Location = New System.Drawing.Point(1173, 509)
+        Me.btnBack.Name = "btnBack"
+        Me.btnBack.Size = New System.Drawing.Size(165, 40)
+        Me.btnBack.TabIndex = 6
+        Me.btnBack.Text = "戻る"
+        Me.btnBack.UseVisualStyleBackColor = True
+        '
+        'BtnSearch
+        '
+        Me.BtnSearch.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.BtnSearch.Location = New System.Drawing.Point(191, 5)
+        Me.BtnSearch.Name = "BtnSearch"
+        Me.BtnSearch.Size = New System.Drawing.Size(75, 23)
+        Me.BtnSearch.TabIndex = 2
+        Me.BtnSearch.Text = "検索"
+        Me.BtnSearch.UseVisualStyleBackColor = True
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Label1.Location = New System.Drawing.Point(12, 9)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(67, 15)
+        Me.Label1.TabIndex = 11
+        Me.Label1.Text = "得意先名"
+        '
+        'TxtSearch
+        '
+        Me.TxtSearch.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtSearch.Location = New System.Drawing.Point(85, 6)
+        Me.TxtSearch.Name = "TxtSearch"
+        Me.TxtSearch.Size = New System.Drawing.Size(100, 22)
+        Me.TxtSearch.TabIndex = 1
+        '
+        'BtnOutputCustomer
+        '
+        Me.BtnOutputCustomer.Location = New System.Drawing.Point(660, 509)
+        Me.BtnOutputCustomer.Name = "BtnOutputCustomer"
+        Me.BtnOutputCustomer.Size = New System.Drawing.Size(165, 40)
+        Me.BtnOutputCustomer.TabIndex = 12
+        Me.BtnOutputCustomer.Text = "Excel出力"
+        Me.BtnOutputCustomer.UseVisualStyleBackColor = True
+        '
         'MstCustomer
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.BtnOutputCustomer)
         Me.Controls.Add(Me.BtnSearch)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.TxtSearch)
@@ -280,4 +291,5 @@ Partial Class MstCustomer
     Friend WithEvents 会計用得意先コード As DataGridViewTextBoxColumn
     Friend WithEvents 更新者 As DataGridViewTextBoxColumn
     Friend WithEvents 更新日 As DataGridViewTextBoxColumn
+    Friend WithEvents BtnOutputCustomer As Button
 End Class

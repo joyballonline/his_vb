@@ -272,7 +272,7 @@ Public Class Supplier
 
             If ds.Tables(RS).Rows(0)("会計用仕入先コード") Is DBNull.Value Then
             Else
-                TxtAccountName.Text = ds.Tables(RS).Rows(0)("会計用仕入先コード")
+                TxtAccountingVendorCode.Text = ds.Tables(RS).Rows(0)("会計用仕入先コード")
             End If
 
         End If

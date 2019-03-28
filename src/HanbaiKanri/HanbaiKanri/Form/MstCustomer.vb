@@ -7,6 +7,8 @@ Imports UtilMDL.DB
 Imports UtilMDL.DataGridView
 Imports UtilMDL.FileDirectory
 Imports UtilMDL.xls
+Imports Microsoft.Office.Interop
+Imports Microsoft.Office.Interop.Excel
 
 
 Public Class MstCustomer
@@ -71,12 +73,13 @@ Public Class MstCustomer
     Private Sub MstCustomere_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If frmC01F10_Login.loginValue.Language = "ENG" Then
             Label1.Text = "CustomerName"
-            TxtSearch.Location = New Point(120, 6)
+            TxtSearch.Location = New System.Drawing.Point(120, 6)
             BtnSearch.Text = "Search"
-            BtnSearch.Location = New Point(226, 6)
+            BtnSearch.Location = New System.Drawing.Point(226, 6)
             btnCustomerAdd.Text = "Add"
             btnCustomerEdit.Text = "Edit"
             btnBack.Text = "Back"
+            BtnOutputCustomer.Text = "Output EXCEL"
 
             Dgv_Customer.Columns("会社コード").HeaderText = "CompanyCode"
             Dgv_Customer.Columns("得意先コード").HeaderText = "CustomerCode"
@@ -262,4 +265,132 @@ Public Class MstCustomer
     Private Sub MstCustomer_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
         setList() '一覧取得
     End Sub
+
+    Private Sub BtnOutputCustomer_Click(sender As Object, e As EventArgs) Handles BtnOutputCustomer.Click
+        Dim c_ As Cursor = Me.Cursor
+        Me.Cursor = Cursors.WaitCursor
+        outputExcel()
+        Me.Cursor = c_
+    End Sub
+
+    'excel出力処理
+    Private Sub outputExcel()
+
+        '定義
+        Dim app As Excel.Application = Nothing
+        Dim book As Excel.Workbook = Nothing
+        Dim sheet As Excel.Worksheet = Nothing
+
+        'Dim strSelectYear As String = cmbYear.SelectedValue.ToString()
+        'Dim strSelectMonth As String = cmbMonth.SelectedValue.ToString()
+
+        ' セル
+        Dim xlRngTmp As Range = Nothing
+        Dim xlRng As Range = Nothing
+
+        ' セル境界線（枠）
+        Dim xlBorders As Borders = Nothing
+        Dim xlBorder As Border = Nothing
+
+        Try
+            '雛形パス
+            Dim sHinaPath As String = StartUp._iniVal.BaseXlsPath
+            '雛形ファイル名
+            Dim sHinaFile As String = sHinaPath & "\" & "CustomerList.xlsx"
+            '出力先パス
+            Dim sOutPath As String = StartUp._iniVal.OutXlsPath
+            '出力ファイル名
+            Dim sOutFile As String = sOutPath & "\CustomerList_" & DateTime.Now.ToString("yyyyMMddHHmm") & ".xlsx"
+
+            app = New Excel.Application()
+            book = app.Workbooks.Add(sHinaFile)  'テンプレート
+            sheet = CType(book.Worksheets(1), Excel.Worksheet)
+
+            sheet.PageSetup.LeftHeader = "SPIN"
+            sheet.PageSetup.CenterHeader = "Customer List"
+            sheet.PageSetup.RightHeader = "OutputDate：" & DateTime.Now.ToShortDateString
+
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+                sheet.PageSetup.LeftHeader = "SPIN"
+                sheet.PageSetup.CenterHeader = "Customer List"
+                sheet.Range("A1").Value = "CustomerCode"
+                sheet.Range("B1").Value = "CustomerName"
+                sheet.Range("C1").Value = "CustomerShortName"
+                sheet.Range("D1").Value = "PostalCode"
+                sheet.Range("E1").Value = "Address1"
+                sheet.Range("F1").Value = "Address2"
+                sheet.Range("G1").Value = "Address3"
+                sheet.Range("H1").Value = "TEL"
+                sheet.Range("I1").Value = "TEL(ForSearch)"
+                sheet.Range("J1").Value = "FAX"
+                sheet.Range("K1").Value = "ContactPersonName"
+                sheet.Range("L1").Value = "ContactPersonPosition"
+                sheet.Range("M1").Value = "PaymentTerms"
+                sheet.Range("N1").Value = "Memo"
+                sheet.Range("O1").Value = "AccountingCustomerCode"
+                sheet.Range("P1").Value = "ModifiedBy"
+                sheet.Range("Q1").Value = "UpdateDate"
+
+            End If
+
+            Dim cellRowIndex As Integer = 1
+
+            For i As Integer = 0 To Dgv_Customer.RowCount - 1
+
+                cellRowIndex += 1
+                sheet.Rows(cellRowIndex).Insert
+                sheet.Range("A" & cellRowIndex.ToString).Value = Dgv_Customer.Rows(i).Cells("得意先コード").Value '
+                sheet.Range("B" & cellRowIndex.ToString).Value = Dgv_Customer.Rows(i).Cells("得意先名").Value '
+                sheet.Range("C" & cellRowIndex.ToString).Value = Dgv_Customer.Rows(i).Cells("得意先名略称").Value '
+                sheet.Range("D" & cellRowIndex.ToString).Value = Dgv_Customer.Rows(i).Cells("郵便番号").Value '
+                sheet.Range("E" & cellRowIndex.ToString).Value = Dgv_Customer.Rows(i).Cells("住所１").Value '
+                sheet.Range("F" & cellRowIndex.ToString).Value = Dgv_Customer.Rows(i).Cells("住所２").Value '
+                sheet.Range("G" & cellRowIndex.ToString).Value = Dgv_Customer.Rows(i).Cells("住所３").Value '
+                sheet.Range("H" & cellRowIndex.ToString).Value = Dgv_Customer.Rows(i).Cells("電話番号").Value '
+                sheet.Range("I" & cellRowIndex.ToString).Value = Dgv_Customer.Rows(i).Cells("電話番号検索用").Value '
+                sheet.Range("J" & cellRowIndex.ToString).Value = Dgv_Customer.Rows(i).Cells("FAX番号").Value '
+                sheet.Range("K" & cellRowIndex.ToString).Value = Dgv_Customer.Rows(i).Cells("担当者名").Value '
+                sheet.Range("L" & cellRowIndex.ToString).Value = Dgv_Customer.Rows(i).Cells("担当者役職").Value '
+                sheet.Range("M" & cellRowIndex.ToString).Value = Dgv_Customer.Rows(i).Cells("既定支払条件").Value '
+                sheet.Range("N" & cellRowIndex.ToString).Value = Dgv_Customer.Rows(i).Cells("メモ").Value '
+                sheet.Range("O" & cellRowIndex.ToString).Value = Dgv_Customer.Rows(i).Cells("会計用得意先コード").Value '
+                sheet.Range("P" & cellRowIndex.ToString).Value = Dgv_Customer.Rows(i).Cells("更新者").Value '
+                sheet.Range("Q" & cellRowIndex.ToString).Value = Dgv_Customer.Rows(i).Cells("更新日").Value '
+            Next
+
+            'app.Visible = True
+
+            ' 行7全体のオブジェクトを作成
+            xlRngTmp = sheet.Rows
+            xlRng = xlRngTmp(cellRowIndex)
+
+            '最後に合計行の追加
+            cellRowIndex += 1
+            'sheet.Range("K" & cellRowIndex.ToString).Value = TxtSalesAmount.Text '粗利率
+
+            ' 境界線オブジェクトを作成 →7行目の下部に罫線を描画する
+            xlBorders = xlRngTmp.Borders
+            xlBorder = xlBorders(XlBordersIndex.xlEdgeBottom)
+            xlBorder.LineStyle = XlLineStyle.xlContinuous
+
+            book.SaveAs(sOutFile)
+            app.Visible = True
+
+            _msgHd.dspMSG("CreateExcel", frmC01F10_Login.loginValue.Language)
+
+        Catch ex As Exception
+            Throw ex
+
+
+        Finally
+            'app.Quit()
+            'Marshal.ReleaseComObject(sheet)
+            'Marshal.ReleaseComObject(book)
+            'Marshal.ReleaseComObject(app)
+
+        End Try
+
+
+    End Sub
+
 End Class
