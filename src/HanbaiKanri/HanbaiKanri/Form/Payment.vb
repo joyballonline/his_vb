@@ -564,8 +564,6 @@ Public Class Payment
         '会社情報の取得
         Dim dsCompany As DataSet = getDsData("m01_company")
 
-        Dim getHanyo As DataSet = getDsHanyoData(CommonConst.DC_CODE, dsCompany.Tables(RS).Rows(0)("預金種目"))
-
         't47_shrihd 仕入基本テーブルに新規追加
         Sql = "INSERT INTO "
         Sql += "Public."
@@ -586,9 +584,7 @@ Public Class Payment
         Sql += " "
         Sql += dsCompany.Tables(RS).Rows(0)("支店名")
         Sql += " "
-        Sql += IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
-                                                               getHanyo.Tables(RS).Rows(0)("文字２"),
-                                                               getHanyo.Tables(RS).Rows(0)("文字１"))
+        Sql += dsCompany.Tables(RS).Rows(0)("預金種目")
         Sql += " "
         Sql += dsCompany.Tables(RS).Rows(0)("口座番号")
         Sql += " "
