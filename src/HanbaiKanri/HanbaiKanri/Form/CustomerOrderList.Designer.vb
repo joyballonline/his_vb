@@ -86,6 +86,7 @@ Partial Class CustomerOrderList
         Me.BtnSearch.TabIndex = 2
         Me.BtnSearch.Text = "検索"
         Me.BtnSearch.UseVisualStyleBackColor = True
+        Me.BtnSearch.Visible = False
         '
         'TxtSearch
         '
@@ -94,6 +95,7 @@ Partial Class CustomerOrderList
         Me.TxtSearch.Name = "TxtSearch"
         Me.TxtSearch.Size = New System.Drawing.Size(100, 22)
         Me.TxtSearch.TabIndex = 1
+        Me.TxtSearch.Visible = False
         '
         'LblCustomerName
         '
@@ -104,6 +106,7 @@ Partial Class CustomerOrderList
         Me.LblCustomerName.Size = New System.Drawing.Size(67, 15)
         Me.LblCustomerName.TabIndex = 156
         Me.LblCustomerName.Text = "得意先名"
+        Me.LblCustomerName.Visible = False
         '
         'CustomerOrderList
         '
