@@ -412,7 +412,7 @@ Public Class OrderingAdd
         Sql3 += frmC01F10_Login.loginValue.TantoNM
         Sql3 += "', '"
         Sql3 += "0"
-        Sql3 += " ')"
+        Sql3 += "')"
 
         _db.executeDB(Sql3)
 
@@ -495,7 +495,7 @@ Public Class OrderingAdd
             Sql4 += frmC01F10_Login.loginValue.TantoNM
             Sql4 += "', '"
             Sql4 += dtNow
-            Sql4 += " ')"
+            Sql4 += "')"
 
             _db.executeDB(Sql4)
         Next

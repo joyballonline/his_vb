@@ -188,6 +188,7 @@ Public Class frmC01F10_Login
                 sql = sql & "   and 適用終了日 >= current_date "
                 sql = sql & "   and 会社コード = '" & _db.rmSQ(cmbCampany.SelectedValue) & "'"
                 sql = sql & "   and ユーザＩＤ = '" & _db.rmSQ(txtTanto.Text) & "'"
+
                 Dim reccnt2 As Integer = 0
                 Dim ds2 = _db.selectDB(sql, RS, reccnt2)
 
@@ -324,7 +325,7 @@ Public Class frmC01F10_Login
     Private Sub clearControl()
 
         'システム名称表示
-        lblTitle.Text = StartUp.iniValue.SystemCaption
+        'lblTitle.Text = StartUp.iniValue.SystemCaption
 
         Label1.Text = "User ID"
         Label2.Text = "Password"

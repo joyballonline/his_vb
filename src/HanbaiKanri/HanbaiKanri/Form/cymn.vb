@@ -107,6 +107,7 @@ Public Class Cymn
         'DataGridView1に追加する
         DgvItemList.Columns.Insert(1, column)
 
+        'リードタイム単位の設定
         Dim reccnt As Integer = 0
         Dim Sql12 As String = ""
 
@@ -121,7 +122,12 @@ Public Class Cymn
         table2.Columns.Add("Value", GetType(Integer))
 
         For index As Integer = 0 To ds12.Tables(RS).Rows.Count - 1
-            table2.Rows.Add(ds12.Tables(RS).Rows(index)("文字１"), ds12.Tables(RS).Rows(index)("可変キー"))
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+                table2.Rows.Add(ds12.Tables(RS).Rows(index)("文字２"), ds12.Tables(RS).Rows(index)("可変キー"))
+            Else
+                table2.Rows.Add(ds12.Tables(RS).Rows(index)("文字１"), ds12.Tables(RS).Rows(index)("可変キー"))
+            End If
+
         Next
 
         Dim column2 As New DataGridViewComboBoxColumn()
@@ -888,7 +894,7 @@ Public Class Cymn
                 Else
                     Sql3 += "" '倉庫コード
                 End If
-                Sql3 += " ')"
+                Sql3 += "')"
 
                 _db.executeDB(Sql3)
 
@@ -959,7 +965,7 @@ Public Class Cymn
                         Sql4 += UtilClass.formatDatetime(dtNow)
                         Sql4 += "', '"
                         Sql4 += UtilClass.formatDatetime(dtNow)
-                        Sql4 += " ')"
+                        Sql4 += "')"
                         _db.executeDB(Sql4)
                     End If
                 Next
@@ -1126,9 +1132,9 @@ Public Class Cymn
         CmWarehouse.DataSource = tb
 
         If prmVal IsNot "" Then
-            CmWarehouse.SelectedIndex = prmVal
+            CmWarehouse.SelectedValue = prmVal
         Else
-            CmWarehouse.SelectedValue = 1
+            CmWarehouse.SelectedIndex = -1
         End If
 
     End Sub

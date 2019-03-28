@@ -247,6 +247,7 @@ Partial Class Quote
         Me.数量.DefaultCellStyle = DataGridViewCellStyle4
         Me.数量.HeaderText = "数量"
         Me.数量.Name = "数量"
+        Me.数量.MaxInputLength = 8
         Me.数量.Width = 150
         '
         '単位
@@ -276,6 +277,7 @@ Partial Class Quote
         Me.仕入単価.DefaultCellStyle = DataGridViewCellStyle6
         Me.仕入単価.HeaderText = "仕入単価"
         Me.仕入単価.Name = "仕入単価"
+        Me.仕入単価.MaxInputLength = 15
         Me.仕入単価.Width = 150
         '
         '仕入原価
@@ -352,6 +354,7 @@ Partial Class Quote
         Me.売単価.DefaultCellStyle = DataGridViewCellStyle13
         Me.売単価.HeaderText = "売単価"
         Me.売単価.Name = "売単価"
+        Me.売単価.MaxInputLength = 15
         Me.売単価.Width = 150
         '
         '売上金額
@@ -983,7 +986,7 @@ Partial Class Quote
         Me.LblVat.Name = "LblVat"
         Me.LblVat.Size = New System.Drawing.Size(100, 23)
         Me.LblVat.TabIndex = 47
-        Me.LblVat.Text = "VAT"
+        Me.LblVat.Text = "VAT(%)"
         Me.LblVat.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'LblMode

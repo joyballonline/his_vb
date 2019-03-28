@@ -887,6 +887,25 @@ Public Class Ordering
             Exit Sub
         End If
 
+        '数量と仕入単価がなかったらエラーで戻す
+        For i As Integer = 0 To DgvItemList.RowCount - 1
+            If DgvItemList.Rows(i).Cells("仕入単価").Value Is Nothing Or DgvItemList.Rows(i).Cells("数量").Value Is Nothing Then
+
+                '対象データがないメッセージを表示
+                _msgHd.dspMSG("chkOrderingInputError", frmC01F10_Login.loginValue.Language)
+
+                Exit Sub
+            Else
+                If DgvItemList.Rows(i).Cells("数量").Value = 0 Then
+                    '対象データがないメッセージを表示
+                    _msgHd.dspMSG("chkQuantityError", frmC01F10_Login.loginValue.Language)
+
+                    Exit Sub
+                End If
+
+            End If
+        Next
+
         Dim reccnt As Integer = 0
         Dim dtNow As String = formatDatetime(DateTime.Now)
         Dim Sql As String = ""
@@ -1143,6 +1162,8 @@ Public Class Ordering
 
     '発注書発行のボタン押下時
     Private Sub BtnPurchase_Click(sender As Object, e As EventArgs) Handles BtnPurchase.Click
+        'カーソルを砂時計にする
+        Cursor.Current = Cursors.WaitCursor
 
         Dim reccnt As Integer = 0
         Dim Sql As String = ""
@@ -1210,6 +1231,7 @@ Public Class Ordering
 
             sheet.Range("A34").Value = dsHattyuhd.Tables(RS).Rows(0)("営業担当者")
             sheet.Range("A35").Value = dsHattyuhd.Tables(RS).Rows(0)("入力担当者")
+            sheet.Range("R30").Value = dsHattyuhd.Tables(RS).Rows(0)("仕入先名")
 
 
             Dim rowCnt As Integer = 0
@@ -1246,7 +1268,7 @@ Public Class Ordering
                 cell = "A" & currentCnt
                 sheet.Range(cell).Value = num
                 cell = "C" & currentCnt
-                sheet.Range(cell).Value = dsHattyudt.Tables(RS).Rows(i)("メーカー") & "/" & dsHattyudt.Tables(RS).Rows(i)("品名") & "/" & dsHattyudt.Tables(RS).Rows(i)("型式")
+                sheet.Range(cell).Value = dsHattyudt.Tables(RS).Rows(i)("メーカー") & vbLf & dsHattyudt.Tables(RS).Rows(i)("品名") & vbLf & dsHattyudt.Tables(RS).Rows(i)("型式")
                 cell = "L" & currentCnt
                 sheet.Range(cell).Value = dsHattyudt.Tables(RS).Rows(i)("発注数量") & " " & dsHattyudt.Tables(RS).Rows(i)("単位")
 
@@ -1272,12 +1294,15 @@ Public Class Ordering
 
 
             sheet.Range("W" & lstRow + 1).Value = totalPrice
-            sheet.Range("W" & lstRow + 2).Value = totalPrice * 10 * 0.01
-            sheet.Range("W" & lstRow + 3).Value = totalPrice * 10 * 0.01 + totalPrice
-            sheet.Range("H" & lstRow + 5).Value = totalPrice * 10 * 0.01 + totalPrice
+            sheet.Range("W" & lstRow + 2).Value = Math.Ceiling(totalPrice * 10 * 0.01)
+            sheet.Range("W" & lstRow + 3).Value = Math.Ceiling(totalPrice * 10 * 0.01) + totalPrice
+            sheet.Range("H" & lstRow + 5).Value = Math.Ceiling(totalPrice * 10 * 0.01) + totalPrice
 
             book.SaveAs(sOutFile)
             app.Visible = True
+
+            'カーソルを砂時計から元に戻す
+            Cursor.Current = Cursors.Default
 
             _msgHd.dspMSG("CreateExcel", frmC01F10_Login.loginValue.Language)
 
@@ -1478,9 +1503,9 @@ Public Class Ordering
         CmWarehouse.DataSource = tb
 
         If prmVal IsNot "" Then
-            CmWarehouse.SelectedIndex = prmVal
+            CmWarehouse.SelectedValue = prmVal
         Else
-            CmWarehouse.SelectedValue = 1
+            CmWarehouse.SelectedIndex = 1
         End If
 
     End Sub

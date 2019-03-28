@@ -169,7 +169,7 @@ Public Class OrderManagement
             Sql1 += " AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
 
             Sql2 = "SELECT"
-            Sql2 += " t31.*, t30.取消区分"
+            Sql2 += " t31.*, t30.取消区分, t30.売上日"
             Sql2 += " FROM "
             Sql2 += " public.t31_urigdt t31 "
 
@@ -282,6 +282,7 @@ Public Class OrderManagement
                 DgvHistory.Columns.Add("仕入先", "SupplierName")
                 DgvHistory.Columns.Add("売単価", "SellingPrice")
                 DgvHistory.Columns.Add("売上数量", "SalesQuantity")
+                DgvHistory.Columns.Add("売上日", "SalesDate")
                 DgvHistory.Columns.Add("備考", "Remarks")
             Else
                 DgvHistory.Columns.Add("No", "No")
@@ -295,6 +296,7 @@ Public Class OrderManagement
                 DgvHistory.Columns.Add("仕入先", "仕入先")
                 DgvHistory.Columns.Add("売単価", "売単価")
                 DgvHistory.Columns.Add("売上数量", "売上数量")
+                DgvHistory.Columns.Add("売上日", "売上日")
                 DgvHistory.Columns.Add("備考", "備考")
             End If
 
@@ -318,6 +320,7 @@ Public Class OrderManagement
                 DgvHistory.Rows(i).Cells("仕入先").Value = ds2.Tables(RS).Rows(i)("仕入先名")
                 DgvHistory.Rows(i).Cells("売単価").Value = ds2.Tables(RS).Rows(i)("見積単価") '売単価 = 見積単価
                 DgvHistory.Rows(i).Cells("売上数量").Value = ds2.Tables(RS).Rows(i)("売上数量")
+                DgvHistory.Rows(i).Cells("売上日").Value = ds2.Tables(RS).Rows(i)("売上日").ToShortDateString
                 DgvHistory.Rows(i).Cells("備考").Value = ds2.Tables(RS).Rows(i)("備考")
             Next
 
@@ -528,11 +531,12 @@ Public Class OrderManagement
 
         End If
 
-        Dim ER As String = getSaiban("40", dtToday)
-        Dim LS As String = getSaiban("70", dtToday)
 
         't30_urighd 売上基本、t31_urigdt 売上明細、t11_cymndt 受注明細、
         Try
+
+            Dim ER As String = getSaiban("40", dtToday)
+            Dim LS As String = getSaiban("70", dtToday)
 
             Dim totalUriAmount As Decimal = 0
             Dim totalArariAmount As Decimal = 0
@@ -587,12 +591,10 @@ Public Class OrderManagement
                 Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(i)("見積単価").ToString)
                 Sql4 += "', '"
 
-                'Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(i)("売上金額").ToString)
                 Dim uriAmount As Decimal = Decimal.Parse(dsCymndt.Tables(RS).Rows(i)("見積単価").ToString * DgvAdd.Rows(i).Cells("売上数量").Value)
 
                 Sql4 += UtilClass.formatNumber(Format(uriAmount, "0.000"))
                 Sql4 += "', '"
-                'Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(i)("粗利額").ToString)
 
                 Dim arariAmount As Decimal = Decimal.Parse((dsCymndt.Tables(RS).Rows(i)("見積単価").ToString - dsCymndt.Tables(RS).Rows(i)("見積単価").ToString) * DgvAdd.Rows(i).Cells("売上数量").Value)
 
@@ -629,7 +631,7 @@ Public Class OrderManagement
                 Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(i)("見積単価").ToString)
                 Sql4 += "', '"
                 Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(i)("見積金額").ToString)
-                Sql4 += " ')"
+                Sql4 += "')"
                 If DgvAdd.Rows(i).Cells("売上数量").Value <> 0 Then
                     _db.executeDB(Sql4)
                 End If
@@ -691,10 +693,8 @@ Public Class OrderManagement
             Sql3 += "', '"
             Sql3 += UtilClass.formatNumber(dsCymnHd.Tables(RS).Rows(0)("見積金額").ToString) '見積金額
             Sql3 += "', '"
-            'Sql3 += UtilClass.formatNumber(dsCymnHd.Tables(RS).Rows(0)("見積金額").ToString) '売上金額
             Sql3 += UtilClass.formatNumber(totalUriAmount) '売上金額（見積単価 * 数量）
             Sql3 += "', '"
-            'Sql3 += UtilClass.formatNumber(dsCymnHd.Tables(RS).Rows(0)("粗利額").ToString) '粗利額
             Sql3 += UtilClass.formatNumber(totalArariAmount) '粗利額
             Sql3 += "', '"
             Sql3 += dsCymnHd.Tables(RS).Rows(0)("営業担当者").ToString '営業担当者
@@ -732,7 +732,7 @@ Public Class OrderManagement
             Sql3 += dsCymnHd.Tables(RS).Rows(0)("営業担当者コード").ToString '営業担当者コード
             Sql3 += "', '"
             Sql3 += frmC01F10_Login.loginValue.TantoCD '入力担当者コード
-            Sql3 += " ')"
+            Sql3 += "')"
 
             _db.executeDB(Sql3)
 
@@ -786,55 +786,12 @@ Public Class OrderManagement
                 End If
             Next
 
-            Sql = "SELECT * FROM public.t45_shukodt"
-            Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Sql += " AND 受注番号 = '" & No & "'"
-            Sql += " AND 受注番号枝番 = '" & Suffix & "'"
+            ''請求データ作成の確認
+            'Dim result As DialogResult = _msgHd.dspMSG("addBillingData", frmC01F10_Login.loginValue.Language)
 
-            Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-            't45_shukodt 出庫明細更新
-            For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-
-                Sql = "UPDATE Public.t45_shukodt "
-                Sql += "SET "
-                Sql += " 出庫区分"
-                Sql += " = '"
-                Sql += "2"
-                Sql += "', "
-                Sql += "更新者"
-                Sql += " = '"
-                Sql += frmC01F10_Login.loginValue.TantoNM
-                Sql += "', "
-                Sql += "更新日"
-                Sql += " = '"
-                Sql += strToday
-                Sql += "' "
-                Sql += "WHERE"
-                Sql += " 会社コード"
-                Sql += "='"
-                Sql += frmC01F10_Login.loginValue.BumonCD
-                Sql += "'"
-                Sql += " AND "
-                Sql += "出庫番号"
-                Sql += "='"
-                Sql += ds.Tables(RS).Rows(i)("出庫番号").ToString
-                Sql += "' "
-                Sql += " AND "
-                Sql += "行番号"
-                Sql += "='"
-                Sql += ds.Tables(RS).Rows(i)("行番号").ToString
-                Sql += "' "
-
-                _db.executeDB(Sql)
-            Next
-
-            '請求データ作成の確認
-            Dim result As DialogResult = _msgHd.dspMSG("addBillingData", frmC01F10_Login.loginValue.Language)
-
-            If result = DialogResult.Yes Then
-                Biilng() 'データ更新
-            End If
+            'If result = DialogResult.Yes Then
+            '    Biilng() 'データ更新
+            'End If
 
             '登録後は親画面（一覧）に戻る
             _parentForm.Enabled = True
@@ -947,7 +904,7 @@ Public Class OrderManagement
             Sql += frmC01F10_Login.loginValue.TantoNM
             Sql += "', '"
             Sql += strToday
-            Sql += " ')"
+            Sql += "')"
 
             _db.executeDB(Sql)
 

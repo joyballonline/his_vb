@@ -970,8 +970,8 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
   </MSG_DATA>
   <MSG_DATA>
     <ID>chkGIBalanceError</ID>
-    <MSG1>出庫数量が受注残数を超えています。</MSG1>
-    <MSG1_EN>Goods issue quantity exceeds the backlog number.</MSG1_EN>
+    <MSG1>出庫数量が未出庫数を超えています。</MSG1>
+    <MSG1_EN>The number of shipments has exceeded the number of shipments.</MSG1_EN>
     <MSG2>再度確認してから実行してください。</MSG2>
     <MSG2_EN>Please check again and try again.</MSG2_EN>
     <BUTTON_TYPE>OK</BUTTON_TYPE>
@@ -1143,6 +1143,16 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
     <MEMO></MEMO>
   </MSG_DATA>
-
+  <MSG_DATA>
+    <ID>chkPriceError</ID>
+    <MSG1>本システムでは取扱いできない金額です。</MSG1>
+    <MSG1_EN>It is an amount that can not be handled by this system.</MSG1_EN>
+    <MSG2>再度確認してから実行してください。</MSG2>
+    <MSG2_EN>Please check again and try again.</MSG2_EN>
+    <BUTTON_TYPE>OK</BUTTON_TYPE>
+    <ICONT_TYPE>Error</ICONT_TYPE>
+    <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
+    <MEMO></MEMO>
+  </MSG_DATA>
 
 </MSG_DEF>

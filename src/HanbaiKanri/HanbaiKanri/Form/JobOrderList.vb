@@ -216,6 +216,9 @@ Public Class JobOrderList
         Dim strSelectYear As String = cmbYear.SelectedValue.ToString()
         Dim strSelectMonth As String = cmbMonth.SelectedValue.ToString()
 
+        'カーソルをビジー状態にする
+        Cursor.Current = Cursors.WaitCursor
+
         Try
             '雛形パス
             Dim sHinaPath As String = StartUp._iniVal.BaseXlsPath
@@ -277,11 +280,17 @@ Public Class JobOrderList
             Next
 
             book.SaveAs(sOutFile)
-            app.Visible = True
 
+            'カーソルをビジー状態から元に戻す
+            Cursor.Current = Cursors.Default
+
+            app.Visible = True
             _msgHd.dspMSG("CreateExcel", frmC01F10_Login.loginValue.Language)
 
         Catch ue As UsrDefException
+            'カーソルをビジー状態から元に戻す
+            Cursor.Current = Cursors.Default
+
             ue.dspMsg()
             Throw ue
         Catch ex As Exception

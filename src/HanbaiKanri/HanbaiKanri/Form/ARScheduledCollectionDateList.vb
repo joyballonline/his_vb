@@ -180,6 +180,9 @@ Public Class ARScheduledCollectionDateList
         Dim book As Excel.Workbook = Nothing
         Dim sheet As Excel.Worksheet = Nothing
 
+        'カーソルを砂時計にする
+        Cursor.Current = Cursors.WaitCursor
+
         Try
             '雛形パス
             Dim sHinaPath As String = StartUp._iniVal.BaseXlsPath
@@ -229,11 +232,16 @@ Public Class ARScheduledCollectionDateList
             book.SaveAs(sOutFile)
             app.Visible = True
 
+            'カーソルを砂時計から元に戻す
+            Cursor.Current = Cursors.Default
+
             _msgHd.dspMSG("CreateExcel", frmC01F10_Login.loginValue.Language)
 
         Catch ex As Exception
-            Throw ex
+            'カーソルをビジー状態から元に戻す
+            Cursor.Current = Cursors.Default
 
+            Throw ex
 
         Finally
             'app.Quit()
