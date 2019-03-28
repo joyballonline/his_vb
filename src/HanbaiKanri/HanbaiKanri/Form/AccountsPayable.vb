@@ -237,7 +237,7 @@ Public Class AccountsPayable
         Sql += " t20.""発注番号枝番"" ILIKE '" & Suffix & "'"
         Sql += " AND "
         Sql += " t20.""取消区分"" = " & CommonConst.CANCEL_KBN_ENABLED
-        Sql += " ORDER BY 行番号 DESC "
+        Sql += " ORDER BY 行番号 ASC "
 
         Dim dsHattyudt As DataSet = _db.selectDB(Sql, RS, reccnt)
 
@@ -519,6 +519,24 @@ Public Class AccountsPayable
         End Try
 
     End Function
+
+    '支払入力セルの値が変更されたら
+    Private Sub DgvAddCellValueChanged(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles DgvAdd.CellValueChanged
+
+        Dim PurchaseTotal As Integer = 0
+
+        'ヘッダー以外だったら
+        If e.RowIndex > -1 Then
+
+            '各項目の属性チェック
+            If Not IsNumeric(DgvAdd.Rows(e.RowIndex).Cells("今回買掛金額計").Value) And (DgvAdd.Rows(e.RowIndex).Cells("今回買掛金額計").Value IsNot Nothing) Then
+                _msgHd.dspMSG("IsNotNumeric", frmC01F10_Login.loginValue.Language)
+                DgvAdd.Rows(e.RowIndex).Cells("今回買掛金額計").Value = 0
+                Exit Sub
+            End If
+        End If
+
+    End Sub
 
     'param1：String テーブル名
     'param2：String 詳細条件
