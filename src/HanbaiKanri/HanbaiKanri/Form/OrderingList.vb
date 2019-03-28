@@ -255,7 +255,7 @@ Public Class OrderingList
                     DgvHtyhd.Rows(i).Cells("発注番号").Value = ds.Tables(RS).Rows(i)("発注番号")
                     DgvHtyhd.Rows(i).Cells("発注番号枝番").Value = ds.Tables(RS).Rows(i)("発注番号枝番")
                     DgvHtyhd.Rows(i).Cells("客先番号").Value = ds.Tables(RS).Rows(i)("客先番号")
-                    DgvHtyhd.Rows(i).Cells("発注日").Value = ds.Tables(RS).Rows(i)("発注日")
+                    DgvHtyhd.Rows(i).Cells("発注日").Value = ds.Tables(RS).Rows(i)("発注日").ToShortDateString
                     DgvHtyhd.Rows(i).Cells("仕入先コード").Value = ds.Tables(RS).Rows(i)("仕入先コード")
                     DgvHtyhd.Rows(i).Cells("仕入先名").Value = ds.Tables(RS).Rows(i)("仕入先名")
                     DgvHtyhd.Rows(i).Cells("仕入先郵便番号").Value = ds.Tables(RS).Rows(i)("仕入先郵便番号")
