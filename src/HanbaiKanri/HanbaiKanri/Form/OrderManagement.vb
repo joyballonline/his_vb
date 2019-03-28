@@ -135,20 +135,16 @@ Public Class OrderManagement
             DgvHistory.ReadOnly = True
             LblHistory.Location = New Point(12, 82)
             DgvHistory.Location = New Point(12, 106)
-            LblSalesDate.Location = New Point(172, 82)
-            DtpOrderDate.Location = New Point(292, 82)
-            LblDepositDate.Location = New Point(447, 82)
-            DtpDepositDate.Location = New Point(567, 82)
-            LblRemarks.Location = New Point(724, 82)
-            TxtRemarks.Location = New Point(844, 82)
-            DtpOrderDate.Enabled = False
-            LblDepositDate.Enabled = False
-            DtpDepositDate.Enabled = False
-            TxtRemarks.Enabled = False
-            TxtRemarks.BackColor = Color.FromArgb(255, 255, 192)
+
+            LblSalesDate.Visible = False
+            DtpOrderDate.Visible = False
+            LblDepositDate.Visible = False
+            DtpDepositDate.Visible = False
+            LblRemarks.Visible = False
+            TxtRemarks.Visible = False
+
             DgvHistory.Size = New Point(1326, 400)
             BtnRegist.Visible = False
-            DtpDepositDate.Enabled = False
 
         Else
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
@@ -169,7 +165,7 @@ Public Class OrderManagement
             Sql1 += " AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
 
             Sql2 = "SELECT"
-            Sql2 += " t31.*, t30.取消区分, t30.売上日"
+            Sql2 += " t31.*, t30.取消区分, t30.売上日, t30.入金予定日"
             Sql2 += " FROM "
             Sql2 += " public.t31_urigdt t31 "
 
@@ -283,6 +279,7 @@ Public Class OrderManagement
                 DgvHistory.Columns.Add("売単価", "SellingPrice")
                 DgvHistory.Columns.Add("売上数量", "SalesQuantity")
                 DgvHistory.Columns.Add("売上日", "SalesDate")
+                DgvHistory.Columns.Add("入金予定日", "PlannedDepositDate")
                 DgvHistory.Columns.Add("備考", "Remarks")
             Else
                 DgvHistory.Columns.Add("No", "No")
@@ -297,6 +294,7 @@ Public Class OrderManagement
                 DgvHistory.Columns.Add("売単価", "売単価")
                 DgvHistory.Columns.Add("売上数量", "売上数量")
                 DgvHistory.Columns.Add("売上日", "売上日")
+                DgvHistory.Columns.Add("入金予定日", "入金予定日")
                 DgvHistory.Columns.Add("備考", "備考")
             End If
 
@@ -321,6 +319,7 @@ Public Class OrderManagement
                 DgvHistory.Rows(i).Cells("売単価").Value = ds2.Tables(RS).Rows(i)("見積単価") '売単価 = 見積単価
                 DgvHistory.Rows(i).Cells("売上数量").Value = ds2.Tables(RS).Rows(i)("売上数量")
                 DgvHistory.Rows(i).Cells("売上日").Value = ds2.Tables(RS).Rows(i)("売上日").ToShortDateString
+                DgvHistory.Rows(i).Cells("入金予定日").Value = ds2.Tables(RS).Rows(i)("入金予定日").ToShortDateString
                 DgvHistory.Rows(i).Cells("備考").Value = ds2.Tables(RS).Rows(i)("備考")
             Next
 
