@@ -438,7 +438,7 @@ Public Class Receipt
             createWarehouseCombobox(dsHattyu.Tables(RS).Rows(0)("倉庫コード").ToString)
 
             For index As Integer = 0 To dsHattyudt.Tables(RS).Rows.Count - 1
-                If dsHattyudt.Tables(RS).Rows(index)("発注残数") <> 0 Then
+                If dsHattyudt.Tables(RS).Rows(index)("未入庫数") <> 0 Then
 
                     '汎用マスタから仕入区分名称取得
                     sireKbn = getDsHanyoData(CommonConst.FIXED_KEY_PURCHASING_CLASS, dsHattyudt.Tables(RS).Rows(index)("仕入区分").ToString)

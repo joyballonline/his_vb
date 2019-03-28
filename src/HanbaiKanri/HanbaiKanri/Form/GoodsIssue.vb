@@ -329,7 +329,7 @@ Public Class GoodsIssue
 
 
             For i As Integer = 0 To dsCymndt.Tables(RS).Rows.Count - 1
-                If dsCymndt.Tables(RS).Rows(i)("受注残数") <> 0 Then
+                If dsCymndt.Tables(RS).Rows(i)("未出庫数") <> 0 Then
                     '汎用マスタから仕入区分名称取得
                     sireKbn = getDsHanyoData(CommonConst.FIXED_KEY_PURCHASING_CLASS, dsCymndt.Tables(RS).Rows(i)("仕入区分").ToString)
 
