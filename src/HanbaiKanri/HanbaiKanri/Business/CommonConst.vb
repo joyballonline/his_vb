@@ -209,6 +209,8 @@ Public Class CommonConst
     Public Const MENU_H1310 As String = "H1310"           '締処理ログ参照
     Public Const MENU_H1320 As String = "H1320"           '仕訳処理
 
+    Public Const MENU_H1410 As String = "H1410"           '在庫リスト
+
     Public Const MENU_M0110 As String = "M0110"           '汎用マスタ
     Public Const MENU_M0120 As String = "M0120"           '得意先マスタ
     Public Const MENU_M0130 As String = "M0130"           '仕入先マスタ
@@ -318,6 +320,7 @@ Public Class CommonConst
     Public Const CI_JP As String = "ja-JP"               'カルチャー 日本
 
     '固定キー
+    Public Const FIXED_KEY_PAYMENT_TYPE As String = "1"          '支払種目
     Public Const FIXED_KEY_READTIME As String = "4"          'リードタイム単位
     Public Const FIXED_KEY_TRADE_TERMS As String = "5"          '貿易条件
     Public Const FIXED_KEY_PURCHASING_CLASS As String = "1002"       '仕入区分

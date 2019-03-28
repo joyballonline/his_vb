@@ -257,13 +257,18 @@ Public Class Payment
 
         '入金済みデータの出力
         For index As Integer = 0 To dsShridt.Tables(RS).Rows.Count - 1
+
+            Dim getHanyo As DataSet = getDsHanyoData(CommonConst.FIXED_KEY_PAYMENT_TYPE, dsShridt.Tables(RS).Rows(index)("支払種別名"))
+
             DgvHistory.Rows.Add()
 
             DgvHistory.Rows(index).Cells("No").Value = index + 1
             DgvHistory.Rows(index).Cells("支払済支払先").Value = dsShridt.Tables(RS).Rows(index)("支払先名")
             DgvHistory.Rows(index).Cells("支払番号").Value = dsShridt.Tables(RS).Rows(index)("支払番号")
             DgvHistory.Rows(index).Cells("支払日").Value = dsShridt.Tables(RS).Rows(index)("支払日").ToShortDateString()
-            DgvHistory.Rows(index).Cells("支払種目").Value = dsShridt.Tables(RS).Rows(index)("支払種別名")
+            DgvHistory.Rows(index).Cells("支払種目").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
+                                                               getHanyo.Tables(RS).Rows(0)("文字２"),
+                                                               getHanyo.Tables(RS).Rows(0)("文字１"))
             DgvHistory.Rows(index).Cells("支払済支払金額計").Value = dsShridt.Tables(RS).Rows(index)("支払金額")
             DgvHistory.Rows(index).Cells("備考").Value = dsShridt.Tables(RS).Rows(index)("備考")
         Next
@@ -559,6 +564,7 @@ Public Class Payment
         '会社情報の取得
         Dim dsCompany As DataSet = getDsData("m01_company")
 
+        Dim getHanyo As DataSet = getDsHanyoData(CommonConst.DC_CODE, dsCompany.Tables(RS).Rows(0)("預金種目"))
 
         't47_shrihd 仕入基本テーブルに新規追加
         Sql = "INSERT INTO "
@@ -580,7 +586,9 @@ Public Class Payment
         Sql += " "
         Sql += dsCompany.Tables(RS).Rows(0)("支店名")
         Sql += " "
-        Sql += dsCompany.Tables(RS).Rows(0)("預金種目")
+        Sql += IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
+                                                               getHanyo.Tables(RS).Rows(0)("文字２"),
+                                                               getHanyo.Tables(RS).Rows(0)("文字１"))
         Sql += " "
         Sql += dsCompany.Tables(RS).Rows(0)("口座番号")
         Sql += " "
@@ -829,4 +837,24 @@ Public Class Payment
             '    SendKeys.Send("{F2}")
         End If
     End Sub
+
+    '汎用マスタから固定キー、可変キーに応じた結果を返す
+    'param1：String 固定キー
+    'param2：String 可変キー
+    'Return: DataSet
+    Private Function getDsHanyoData(ByVal prmFixed As String, Optional ByVal prmVariable As String = "") As DataSet
+        Dim Sql As String = ""
+
+        Sql = " AND "
+        Sql += "固定キー ILIKE '" & prmFixed & "'"
+
+        If prmVariable IsNot "" Then
+            Sql += " AND "
+            Sql += "可変キー ILIKE '" & prmVariable & "'"
+        End If
+
+        'リードタイムのリストを汎用マスタから取得
+        Return getDsData("m90_hanyo", Sql)
+    End Function
+
 End Class
