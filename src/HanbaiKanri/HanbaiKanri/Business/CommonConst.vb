@@ -320,7 +320,8 @@ Public Class CommonConst
     Public Const CI_JP As String = "ja-JP"               'カルチャー 日本
 
     '固定キー
-    Public Const FIXED_KEY_PAYMENT_TYPE As String = "1"          '支払種目
+    Public Const FIXED_KEY_RECEIPT_TYPE As String = "1"          '入金種目
+    Public Const FIXED_KEY_PAYMENT_TYPE As String = "2"          '支払種目
     Public Const FIXED_KEY_READTIME As String = "4"          'リードタイム単位
     Public Const FIXED_KEY_TRADE_TERMS As String = "5"          '貿易条件
     Public Const FIXED_KEY_PURCHASING_CLASS As String = "1002"       '仕入区分
