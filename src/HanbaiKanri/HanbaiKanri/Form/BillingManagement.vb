@@ -217,7 +217,8 @@ Public Class BillingManagement
 
         'joinするのでとりあえず直書き
         Sql = "SELECT"
-        Sql += " t11.行番号, t11.メーカー, t11.品名, t11.型式, t11.受注数量, t11.単位, t11.売上数量, t11.売単価, t11.売上金額"
+        Sql += " t11.行番号, t11.メーカー, t11.品名, t11.型式, t11.受注数量, t11.単位"
+        Sql += " , t11.売上数量, t11.売単価, t11.売上金額, t11.見積単価, t11.見積金額"
         Sql += " FROM "
         Sql += " public.t11_cymndt t11 "
 
@@ -285,8 +286,8 @@ Public Class BillingManagement
             DgvCymndt.Rows(i).Cells("受注個数").Value = dsCymndt.Tables(RS).Rows(i)("受注数量")
             DgvCymndt.Rows(i).Cells("単位").Value = dsCymndt.Tables(RS).Rows(i)("単位")
             DgvCymndt.Rows(i).Cells("売上数量").Value = dsCymndt.Tables(RS).Rows(i)("売上数量")
-            DgvCymndt.Rows(i).Cells("売上単価").Value = dsCymndt.Tables(RS).Rows(i)("売単価")
-            DgvCymndt.Rows(i).Cells("売上金額").Value = dsCymndt.Tables(RS).Rows(i)("売上金額")
+            DgvCymndt.Rows(i).Cells("売上単価").Value = dsCymndt.Tables(RS).Rows(i)("見積単価")
+            DgvCymndt.Rows(i).Cells("売上金額").Value = dsCymndt.Tables(RS).Rows(i)("見積金額")
         Next
 
         '受注明細の件数カウント
