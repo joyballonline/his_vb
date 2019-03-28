@@ -107,6 +107,12 @@
     <Compile Include="Form\MstWarehouse.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form\InventoryList.Designer.vb">
+      <DependentUpon>InventoryList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\InventoryList.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\Warehouse.Designer.vb">
       <DependentUpon>Warehouse.vb</DependentUpon>
     </Compile>
@@ -522,6 +528,9 @@
     <EmbeddedResource Include="Form\MstWarehouse.resx">
       <DependentUpon>MstWarehouse.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\InventoryList.resx">
+      <DependentUpon>InventoryList.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Warehouse.resx">
       <DependentUpon>Warehouse.vb</DependentUpon>

@@ -1009,6 +1009,9 @@ Public Class frmC01F30_Menu
         checkMenu += " or "
         checkMenu += " m.処理ＩＤ like 'H13%' "
 
+        checkMenu += " or "
+        checkMenu += " m.処理ＩＤ like 'H14%' "
+
         If chkH02.Checked Then
             If checkMenu IsNot "" Then checkMenu += " or "
             checkMenu += " m.処理ＩＤ like 'H02%' "
@@ -1435,7 +1438,14 @@ Public Class frmC01F30_Menu
                 openForm = New Shiwake(_msgHd, _db, _langHd, Me)
                 openForm.Show()
                 Me.Hide()
-            '-----------------------------------マスタ管理（M01）
+             '-----------------------------------在庫業務（H14）
+            Case CommonConst.MENU_H1410  '在庫リスト
+                Dim openForm As Form = Nothing
+                Dim Status As String = CommonConst.STATUS_VIEW
+                openForm = New InventoryList(_msgHd, _db, _langHd, Me, Status)
+                openForm.Show()
+                Me.Hide()
+           '-----------------------------------マスタ管理（M01）
             Case CommonConst.MENU_M0110    '汎用マスタ一覧
                 Dim openForm As Form = Nothing
                 openForm = New MstHanyou(_msgHd, _db, _langHd, Me)
