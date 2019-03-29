@@ -89,7 +89,7 @@ Public Class DepositManagement
         Dim Sql As String = ""
 
         Sql = " AND "
-        Sql += "固定キー ILIKE '2'"
+        Sql += "固定キー ILIKE '" & CommonConst.FIXED_KEY_RECEIPT_TYPE & "'"
 
         Dim reccnt As Integer = 0
 
@@ -263,12 +263,18 @@ Public Class DepositManagement
 
         '入金済みデータの出力
         For index As Integer = 0 To dsNkindt.Tables(RS).Rows.Count - 1
+
+            Dim nyukinKbn As DataSet = getDsHanyoData(CommonConst.FIXED_KEY_RECEIPT_TYPE, dsNkindt.Tables(RS).Rows(index)("入金種別名").ToString)
+
+
             DgvHistory.Rows.Add()
             DgvHistory.Rows(index).Cells("No").Value = index + 1
             DgvHistory.Rows(index).Cells("入金済請求先").Value = dsNkindt.Tables(RS).Rows(index)("請求先名")
             DgvHistory.Rows(index).Cells("入金番号").Value = dsNkindt.Tables(RS).Rows(index)("入金番号")
             DgvHistory.Rows(index).Cells("入金日").Value = dsNkindt.Tables(RS).Rows(index)("更新日").ToShortDateString()
-            DgvHistory.Rows(index).Cells("入金種目").Value = dsNkindt.Tables(RS).Rows(index)("入金種別名")
+            DgvHistory.Rows(index).Cells("入金種目").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
+                                                                nyukinKbn.Tables(RS).Rows(0)("文字２"),
+                                                                nyukinKbn.Tables(RS).Rows(0)("文字１"))
             DgvHistory.Rows(index).Cells("入金済入金額計").Value = dsNkindt.Tables(RS).Rows(index)("入金額")
             DgvHistory.Rows(index).Cells("備考").Value = dsNkindt.Tables(RS).Rows(index)("備考")
         Next
@@ -871,5 +877,24 @@ Public Class DepositManagement
             '    SendKeys.Send("{F2}")
         End If
     End Sub
+
+    '汎用マスタから固定キー、可変キーに応じた結果を返す
+    'param1：String 固定キー
+    'param2：String 可変キー
+    'Return: DataSet
+    Private Function getDsHanyoData(ByVal prmFixed As String, Optional ByVal prmVariable As String = "") As DataSet
+        Dim Sql As String = ""
+
+        Sql = " AND "
+        Sql += "固定キー ILIKE '" & prmFixed & "'"
+
+        If prmVariable IsNot "" Then
+            Sql += " AND "
+            Sql += "可変キー ILIKE '" & prmVariable & "'"
+        End If
+
+        'リードタイムのリストを汎用マスタから取得
+        Return getDsData("m90_hanyo", Sql)
+    End Function
 
 End Class

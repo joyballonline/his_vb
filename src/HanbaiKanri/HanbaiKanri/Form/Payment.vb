@@ -88,7 +88,7 @@ Public Class Payment
         Dim Sql As String = ""
 
         Sql = " AND "
-        Sql += "固定キー ILIKE '1'"
+        Sql += "固定キー ILIKE '" & CommonConst.FIXED_KEY_PAYMENT_TYPE & "'"
 
         '汎用マスタから入金種目一覧を取得、プルダウンを作成
         Dim dsHanyo As DataSet = getDsData("m90_hanyo", Sql)
