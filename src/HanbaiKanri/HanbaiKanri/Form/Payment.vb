@@ -561,8 +561,15 @@ Public Class Payment
         '買掛基本データ取得
         Dim dsKikehd As DataSet = getDsData("t46_kikehd", Sql)
 
-        '会社情報の取得
-        Dim dsCompany As DataSet = getDsData("m01_company")
+        Sql = " AND "
+        Sql += "仕入先コード"
+        Sql += " ILIKE "
+        Sql += "'%"
+        Sql += SupplierCode
+        Sql += "%'"
+
+        '仕入先情報の取得
+        Dim dsSupplier As DataSet = getDsData("m11_supplier", Sql)
 
         't47_shrihd 仕入基本テーブルに新規追加
         Sql = "INSERT INTO "
@@ -580,15 +587,15 @@ Public Class Payment
         Sql += "', '"
         Sql += SupplierName
         Sql += "', '"
-        Sql += dsCompany.Tables(RS).Rows(0)("銀行名")
+        Sql += dsSupplier.Tables(RS).Rows(0)("銀行名")
         Sql += " "
-        Sql += dsCompany.Tables(RS).Rows(0)("支店名")
+        Sql += dsSupplier.Tables(RS).Rows(0)("支店名")
         Sql += " "
-        Sql += dsCompany.Tables(RS).Rows(0)("預金種目")
+        Sql += dsSupplier.Tables(RS).Rows(0)("預金種目")
         Sql += " "
-        Sql += dsCompany.Tables(RS).Rows(0)("口座番号")
+        Sql += dsSupplier.Tables(RS).Rows(0)("口座番号")
         Sql += " "
-        Sql += dsCompany.Tables(RS).Rows(0)("口座名義")
+        Sql += dsSupplier.Tables(RS).Rows(0)("口座名義")
         Sql += "', '"
         Sql += formatNumber(KikeAmount)
         Sql += "', '"
@@ -626,15 +633,15 @@ Public Class Payment
             Sql += "', '"
             Sql += DgvPayment.Rows(i).Cells("支払種目").Value.ToString
             Sql += "', '"
-            Sql += dsCompany.Tables(RS).Rows(0)("銀行名").ToString
+            Sql += dsSupplier.Tables(RS).Rows(0)("銀行名").ToString
             Sql += " "
-            Sql += dsCompany.Tables(RS).Rows(0)("支店名").ToString
+            Sql += dsSupplier.Tables(RS).Rows(0)("支店名").ToString
             Sql += " "
-            Sql += dsCompany.Tables(RS).Rows(0)("預金種目").ToString
+            Sql += dsSupplier.Tables(RS).Rows(0)("預金種目").ToString
             Sql += " "
-            Sql += dsCompany.Tables(RS).Rows(0)("口座番号").ToString
+            Sql += dsSupplier.Tables(RS).Rows(0)("口座番号").ToString
             Sql += " "
-            Sql += dsCompany.Tables(RS).Rows(0)("口座名義").ToString
+            Sql += dsSupplier.Tables(RS).Rows(0)("口座名義").ToString
             Sql += "', '"
             Sql += formatNumber(DgvPayment.Rows(i).Cells("入力支払金額").Value)
             Sql += "', '"
