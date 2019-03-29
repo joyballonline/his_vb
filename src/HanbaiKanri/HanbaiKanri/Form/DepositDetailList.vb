@@ -135,20 +135,72 @@ Public Class DepositDetailList
     'DgvBilling内を再描画
     Private Sub setDgvBilling()
         clearDGV() 'テーブルクリア
+
+        Dim ds As DataSet
+        Dim reccnt As Integer = 0 'DB用（デフォルト）
         Dim Sql As String = ""
 
-        Sql += searchConditions() '抽出条件取得
-        Sql += viewFormat() '表示形式条件
-
-        Sql += " ORDER BY "
-        Sql += "更新日 DESC"
+        'Sql += searchConditions() '抽出条件取得
+        'Sql += viewFormat() '表示形式条件
 
         Try
 
             '伝票単位
             If RbtnSlip.Checked Then
 
-                ds = getDsData("t25_nkinhd", Sql)
+                Sql = " SELECT m01.銀行コード , m01.銀行名 , m01.支店名, m01.預金種目 , m01.口座番号, m01.口座名義, t25.* "
+                Sql += " FROM t25_nkinhd t25 "
+                Sql += " LEFT JOIN m01_company m01 "
+                Sql += " ON t25.会社コード = m01.会社コード "
+                'Sql += " AND t25.請求先コード = m01.得意先コード "
+                Sql += " WHERE t25.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+
+                '抽出条件
+                Dim customerName As String = escapeSql(TxtCustomerName.Text)
+                Dim customerCode As String = escapeSql(TxtCustomerCode.Text)
+                Dim sinceDate As String = strFormatDate(dtBillingDateSince.Text) '日付の書式を日本の形式に合わせる
+                Dim untilDate As String = strFormatDate(dtBillingDateUntil.Text) '日付の書式を日本の形式に合わせる
+                Dim sinceNum As String = escapeSql(TxtBillingNo1.Text)
+                Dim untilNum As String = escapeSql(TxtBillingNo2.Text)
+
+                If customerName <> Nothing Then
+                    Sql += " AND "
+                    Sql += " t25.請求先名 ILIKE '%" & customerName & "%' "
+                End If
+
+                If customerCode <> Nothing Then
+                    Sql += " AND "
+                    Sql += " t25.請求先コード ILIKE '%" & customerCode & "%' "
+                End If
+
+                If sinceDate <> Nothing Then
+                    Sql += " AND "
+                    Sql += " t25.入金日 >= '" & sinceDate & "'"
+                End If
+                If untilDate <> Nothing Then
+                    Sql += " AND "
+                    Sql += " t25.入金日 <= '" & untilDate & "'"
+                End If
+
+                If sinceNum <> Nothing Then
+                    Sql += " AND "
+                    Sql += " t25.入金番号 >= '" & sinceNum & "' "
+                End If
+                If untilNum <> Nothing Then
+                    Sql += " AND "
+                    Sql += " t25.入金番号 <= '" & untilNum & "' "
+                End If
+
+                '取消データを含めない場合
+                If ChkCancelData.Checked = False Then
+                    Sql += " AND "
+                    Sql += " t25.取消区分 = 0 "
+                End If
+
+                Sql += " ORDER BY "
+                Sql += "t25.更新日 DESC"
+
+                ds = _db.selectDB(Sql, RS, reccnt)
 
                 '英語の表記
                 If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
@@ -176,18 +228,34 @@ Public Class DepositDetailList
 
                 For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
 
+                    Dim dsHanyo As DataSet = getDsHanyoData(CommonConst.DC_CODE, ds.Tables(RS).Rows(i)("預金種目"))
+                    Dim dcName As String = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
+                                                                dsHanyo.Tables(RS).Rows(0)("文字２"),
+                                                                dsHanyo.Tables(RS).Rows(0)("文字１"))
+
                     DgvBilling.Rows.Add()
                     DgvBilling.Rows(i).Cells("取消").Value = getDelKbnTxt(ds.Tables(RS).Rows(i)("取消区分"))
                     DgvBilling.Rows(i).Cells("入金番号").Value = ds.Tables(RS).Rows(i)("入金番号")
                     DgvBilling.Rows(i).Cells("入金日").Value = ds.Tables(RS).Rows(i)("入金日").ToShortDateString
                     DgvBilling.Rows(i).Cells("請求先名").Value = ds.Tables(RS).Rows(i)("請求先名")
                     DgvBilling.Rows(i).Cells("振込先").Value = ds.Tables(RS).Rows(i)("振込先")
+                    DgvBilling.Rows(i).Cells("振込先").Value = ds.Tables(RS).Rows(0)("銀行名") & " " &
+                                                                    ds.Tables(RS).Rows(0)("支店名") & " " &
+                                                                    dcName & " " &
+                                                                    ds.Tables(RS).Rows(0)("口座番号") & " " &
+                                                                    ds.Tables(RS).Rows(0)("口座名義")
                     DgvBilling.Rows(i).Cells("入金額").Value = ds.Tables(RS).Rows(i)("入金額")
                     DgvBilling.Rows(i).Cells("更新日").Value = ds.Tables(RS).Rows(i)("更新日")
                     DgvBilling.Rows(i).Cells("備考").Value = ds.Tables(RS).Rows(i)("備考")
                 Next
 
             Else '明細単位
+
+                Sql += searchConditions() '抽出条件取得
+                Sql += viewFormat() '表示形式条件
+
+                Sql += " ORDER BY "
+                Sql += "更新日 DESC"
 
                 ds = getDsData("t27_nkinkshihd", Sql)
 
@@ -613,5 +681,23 @@ Public Class DepositDetailList
         Return prmVal.ToString("F3", nfi) '売掛残高を増やす
     End Function
 
+    '汎用マスタから固定キー、可変キーに応じた結果を返す
+    'param1：String 固定キー
+    'param2：String 可変キー
+    'Return: DataSet
+    Private Function getDsHanyoData(ByVal prmFixed As String, Optional ByVal prmVariable As String = "") As DataSet
+        Dim Sql As String = ""
+
+        Sql = " AND "
+        Sql += "固定キー ILIKE '" & prmFixed & "'"
+
+        If prmVariable IsNot "" Then
+            Sql += " AND "
+            Sql += "可変キー ILIKE '" & prmVariable & "'"
+        End If
+
+        'リードタイムのリストを汎用マスタから取得
+        Return getDsData("m90_hanyo", Sql)
+    End Function
 
 End Class

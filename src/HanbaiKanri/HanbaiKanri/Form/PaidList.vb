@@ -133,6 +133,7 @@ Public Class PaidList
     'DgvHtyhd内を再描画
     Private Sub setDgvHtyhd()
         clearDGV() 'テーブルクリア
+        Dim reccnt As Integer = 0 'DB用（デフォルト）
         Dim Sql As String = ""
 
         Sql += searchConditions() '抽出条件取得
@@ -145,7 +146,61 @@ Public Class PaidList
             '伝票単位
             If RbtnSlip.Checked Then
 
-                ds = getDsData("t47_shrihd", Sql)
+                Sql = " SELECT m11.銀行コード , m11.銀行名 , m11.支店名, m11.預金種目 , m11.口座番号, m11.口座名義, t47.* "
+                Sql += " FROM t47_shrihd t47 "
+                Sql += " LEFT JOIN m11_supplier m11 "
+                Sql += " ON t47.会社コード = m11.会社コード "
+                Sql += " AND t47.支払先コード = m11.仕入先コード "
+                Sql += " WHERE t47.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+
+                '抽出条件
+                Dim customerName As String = escapeSql(TxtSupplierName.Text)
+                Dim customerCode As String = escapeSql(TxtSupplierCode.Text)
+                Dim sinceDate As String = strFormatDate(dtPaidDateSince.Text)
+                Dim untilDate As String = strFormatDate(dtPaidDateUntil.Text)
+                Dim sinceNum As String = escapeSql(TxtPaidNoSince.Text)
+                Dim untilNum As String = escapeSql(TxtPaidNoUntil.Text)
+
+                If customerName <> Nothing Then
+                    Sql += " AND "
+                    Sql += " t47.支払先名 ILIKE '%" & customerName & "%' "
+                End If
+
+                If customerCode <> Nothing Then
+                    Sql += " AND "
+                    Sql += " t47.支払先コード ILIKE '%" & customerCode & "%' "
+                End If
+
+                If sinceDate <> Nothing Then
+                    Sql += " AND "
+                    Sql += " t47.支払日 >= '" & sinceDate & "'"
+                End If
+                If untilDate <> Nothing Then
+                    Sql += " AND "
+                    Sql += " t47.支払日 <= '" & untilDate & "'"
+                End If
+
+                If sinceNum <> Nothing Then
+                    Sql += " AND "
+                    Sql += " t47.支払番号 >= '" & sinceNum & "' "
+                End If
+                If untilNum <> Nothing Then
+                    Sql += " AND "
+                    Sql += " t47.支払番号 <= '" & untilNum & "' "
+                End If
+
+                '取消データを含めない場合
+                If ChkCancelData.Checked = False Then
+                    Sql += " AND "
+                    Sql += " t47.取消区分 = 0 "
+                End If
+
+                Sql += " ORDER BY "
+                Sql += "t47.更新日 DESC"
+
+                ds = _db.selectDB(Sql, RS, reccnt)
+
+                'ds = getDsData("t47_shrihd", Sql)
 
                 '英語の表記
                 If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
@@ -172,18 +227,35 @@ Public Class PaidList
                 DgvHtyhd.Columns("支払金額計").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
                 For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+
+                    Dim dsHanyo As DataSet = getDsHanyoData(CommonConst.DC_CODE, ds.Tables(RS).Rows(index)("預金種目"))
+                    Dim dcName As String = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
+                                                                dsHanyo.Tables(RS).Rows(0)("文字２"),
+                                                                dsHanyo.Tables(RS).Rows(0)("文字１"))
+
                     DgvHtyhd.Rows.Add()
                     DgvHtyhd.Rows(index).Cells("取消").Value = getDelKbnTxt(ds.Tables(RS).Rows(index)("取消区分"))
                     DgvHtyhd.Rows(index).Cells("支払番号").Value = ds.Tables(RS).Rows(index)("支払番号")
                     DgvHtyhd.Rows(index).Cells("支払日").Value = ds.Tables(RS).Rows(index)("支払日").ToShortDateString
                     DgvHtyhd.Rows(index).Cells("支払先名").Value = ds.Tables(RS).Rows(index)("支払先名")
-                    DgvHtyhd.Rows(index).Cells("支払先").Value = ds.Tables(RS).Rows(index)("支払先")
+                    'DgvHtyhd.Rows(index).Cells("支払先").Value = ds.Tables(RS).Rows(index)("支払先")
+                    DgvHtyhd.Rows(index).Cells("支払先").Value = ds.Tables(RS).Rows(0)("銀行名") & " " &
+                                                                    ds.Tables(RS).Rows(0)("支店名") & " " &
+                                                                    dcName & " " &
+                                                                    ds.Tables(RS).Rows(0)("口座番号") & " " &
+                                                                    ds.Tables(RS).Rows(0)("口座名義")
                     DgvHtyhd.Rows(index).Cells("支払金額計").Value = ds.Tables(RS).Rows(index)("支払金額計")
                     DgvHtyhd.Rows(index).Cells("更新日").Value = ds.Tables(RS).Rows(index)("更新日")
                     DgvHtyhd.Rows(index).Cells("備考").Value = ds.Tables(RS).Rows(index)("備考")
                 Next
 
             Else '明細単位
+
+                Sql = searchConditions() '抽出条件取得
+                Sql += viewFormat() '表示形式条件
+
+                Sql += " ORDER BY "
+                Sql += "更新日 DESC"
 
                 ds = getDsData("t49_shrikshihd", Sql)
 
@@ -602,5 +674,23 @@ Public Class PaidList
         Return prmVal.ToString("F3", nfi) '売掛残高を増やす
     End Function
 
+    '汎用マスタから固定キー、可変キーに応じた結果を返す
+    'param1：String 固定キー
+    'param2：String 可変キー
+    'Return: DataSet
+    Private Function getDsHanyoData(ByVal prmFixed As String, Optional ByVal prmVariable As String = "") As DataSet
+        Dim Sql As String = ""
+
+        Sql = " AND "
+        Sql += "固定キー ILIKE '" & prmFixed & "'"
+
+        If prmVariable IsNot "" Then
+            Sql += " AND "
+            Sql += "可変キー ILIKE '" & prmVariable & "'"
+        End If
+
+        'リードタイムのリストを汎用マスタから取得
+        Return getDsData("m90_hanyo", Sql)
+    End Function
 
 End Class
