@@ -239,6 +239,7 @@ Public Class MstHanyou
 
         End If
 
+        Sql += " ORDER BY 固定キー, 表示順"
 
         Return Sql
 

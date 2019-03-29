@@ -90,6 +90,7 @@ Public Class DepositManagement
 
         Sql = " AND "
         Sql += "固定キー ILIKE '" & CommonConst.FIXED_KEY_RECEIPT_TYPE & "'"
+        Sql += " ORDER BY 表示順 ASC "
 
         Dim reccnt As Integer = 0
 
@@ -892,6 +893,8 @@ Public Class DepositManagement
             Sql += " AND "
             Sql += "可変キー ILIKE '" & prmVariable & "'"
         End If
+
+        Sql += " ORDER BY 表示順 ASC "
 
         'リードタイムのリストを汎用マスタから取得
         Return getDsData("m90_hanyo", Sql)

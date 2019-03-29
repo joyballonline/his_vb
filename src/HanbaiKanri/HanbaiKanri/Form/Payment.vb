@@ -89,6 +89,7 @@ Public Class Payment
 
         Sql = " AND "
         Sql += "固定キー ILIKE '" & CommonConst.FIXED_KEY_PAYMENT_TYPE & "'"
+        Sql += " ORDER BY 表示順 ASC "
 
         '汎用マスタから入金種目一覧を取得、プルダウンを作成
         Dim dsHanyo As DataSet = getDsData("m90_hanyo", Sql)
