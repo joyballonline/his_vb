@@ -1154,5 +1154,16 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
     <MEMO></MEMO>
   </MSG_DATA>
+  <MSG_DATA>
+    <ID>chkUserIdError</ID>
+    <MSG1>そのユーザーＩＤは使用できません。</MSG1>
+    <MSG1_EN>You can not use that user ID.</MSG1_EN>
+    <MSG2>再度確認してから実行してください。</MSG2>
+    <MSG2_EN>Please check again and try again.</MSG2_EN>
+    <BUTTON_TYPE>OK</BUTTON_TYPE>
+    <ICONT_TYPE>Error</ICONT_TYPE>
+    <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
+    <MEMO></MEMO>
+  </MSG_DATA>
 
 </MSG_DEF>

@@ -197,6 +197,9 @@ Public Class User
         '項目チェック
         Dim strMessage As String = ""    'メッセージ本文
         Dim strMessageTitle As String = ""      'メッセージタイトル
+
+        Dim Sql As String = ""
+
         ''ユーザＩＤは必須
         If TxtUserId.Text = "" Then
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
@@ -208,12 +211,28 @@ Public Class User
             End If
             Dim result As DialogResult = MessageBox.Show(strMessage, strMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Exit Sub
+
+        Else
+
+            If _status = CommonConst.STATUS_ADD Then
+
+                Sql = " AND ユーザＩＤ ILIKE '" & TxtUserId.Text & "'"
+
+                Dim ds As DataSet = getDsData("m02_user", Sql)
+
+                If ds.Tables(RS).Rows.Count > 0 Then
+                    _msgHd.dspMSG("chkUserIdError", frmC01F10_Login.loginValue.Language)
+
+                    Exit Sub
+                End If
+
+            End If
+
         End If
 
         '登録処理ここから
         Dim dtToday As String = UtilClass.formatDatetime(DateTime.Now)
         Try
-            Dim Sql As String = ""
 
             '登録モード
             If _status = CommonConst.STATUS_ADD Then
@@ -551,5 +570,26 @@ Public Class User
         End If
 
     End Sub
+
+    'param1：String テーブル名
+    'param2：String 詳細条件
+    'Return: DataSet
+    Private Function getDsData(ByVal tableName As String, Optional ByRef txtParam As String = "") As DataSet
+        Dim reccnt As Integer = 0 'DB用（デフォルト）
+        Dim Sql As String = ""
+
+        Sql += "SELECT"
+        Sql += " *"
+        Sql += " FROM "
+
+        Sql += "public." & tableName
+        Sql += " WHERE "
+        Sql += "会社コード"
+        Sql += " ILIKE  "
+        Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += txtParam
+
+        Return _db.selectDB(Sql, RS, reccnt)
+    End Function
 
 End Class
