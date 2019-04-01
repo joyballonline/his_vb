@@ -1222,17 +1222,16 @@ Public Class Ordering
             End If
 
             sheet.Range("T11").Value = dsHattyuhd.Tables(RS).Rows(0)("出荷日")
-            sheet.Range("T12").Value = dsHattyuhd.Tables(RS).Rows(0)("仕入先名")
-            sheet.Range("T13").Value = dsHattyuhd.Tables(RS).Rows(0)("客先番号")
-            sheet.Range("T14").Value = dsHattyuhd.Tables(RS).Rows(0)("支払条件")
+            'sheet.Range("T12").Value = dsHattyuhd.Tables(RS).Rows(0)("仕入先名")
+            'sheet.Range("T13").Value = dsHattyuhd.Tables(RS).Rows(0)("客先番号")
+            sheet.Range("T13").Value = dsHattyuhd.Tables(RS).Rows(0)("支払条件")
 
             'sheet.Range("H26").Value = dsHattyuhd.Tables(RS).Rows(0)("仕入金額")
             sheet.Range("H27").Value = dsHattyuhd.Tables(RS).Rows(0)("備考")
 
-            sheet.Range("A34").Value = dsHattyuhd.Tables(RS).Rows(0)("営業担当者")
-            sheet.Range("A35").Value = dsHattyuhd.Tables(RS).Rows(0)("入力担当者")
+            'sheet.Range("A34").Value = dsHattyuhd.Tables(RS).Rows(0)("営業担当者")
+            'sheet.Range("A35").Value = dsHattyuhd.Tables(RS).Rows(0)("入力担当者")
             sheet.Range("R30").Value = dsHattyuhd.Tables(RS).Rows(0)("仕入先名")
-
 
             Dim rowCnt As Integer = 0
             Dim lstRow As Integer = 21
