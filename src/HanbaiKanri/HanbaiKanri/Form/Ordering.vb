@@ -1505,7 +1505,7 @@ Public Class Ordering
         If prmVal IsNot "" Then
             CmWarehouse.SelectedValue = prmVal
         Else
-            CmWarehouse.SelectedIndex = 1
+            CmWarehouse.SelectedIndex = 0
         End If
 
     End Sub
