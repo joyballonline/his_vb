@@ -87,8 +87,19 @@ Public Class AccountsPayable
         Dim table As New DataTable("Table")
         table.Columns.Add("Display", GetType(String))
         table.Columns.Add("Value", GetType(Integer))
-        table.Rows.Add("前払金買掛", 1)
-        table.Rows.Add("通常買掛", 2)
+
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+
+            table.Rows.Add(CommonConst.APC_KBN_DEPOSIT_TXT_E, 1)
+            table.Rows.Add(CommonConst.APC_KBN_NORMAL_TXT_E, 2)
+
+        Else
+
+            table.Rows.Add(CommonConst.APC_KBN_DEPOSIT_TXT, 1)
+            table.Rows.Add(CommonConst.APC_KBN_NORMAL_TXT, 2)
+
+        End If
+
 
         'DataGridViewComboBoxColumnを作成
         Dim column As New DataGridViewComboBoxColumn()
