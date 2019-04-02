@@ -235,9 +235,10 @@ Public Class InventoryControlTable
                     DgvList.Rows(i).Cells("型式").Value = tmpSpec
 
                 Else
-                    tmpMaker = ""
-                    tmpItemName = ""
-                    tmpSpec = ""
+                    tmpMaker = dsZaiko.Tables(RS).Rows(i)("メーカー").ToString
+                    tmpItemName = dsZaiko.Tables(RS).Rows(i)("品名").ToString
+                    tmpSpec = dsZaiko.Tables(RS).Rows(i)("型式").ToString
+
                 End If
 
                 DgvList.Rows(i).Cells("年月日").Value = dsZaiko.Tables(RS).Rows(i)("入出庫日").ToShortDateString
