@@ -1740,11 +1740,11 @@ Public Class Quote
                 sheet.Range(cell).Value = ds3.Tables(RS).Rows(index)("メーカー") & vbLf & ds3.Tables(RS).Rows(index)("品名") & vbLf & ds3.Tables(RS).Rows(index)("型式") & vbLf & ds3.Tables(RS).Rows(index)("備考")
                 cell = "L" & currentCnt
                 sheet.Range(cell).Value = ds3.Tables(RS).Rows(index)("数量")
-                cell = "O" & currentCnt
+                cell = "N" & currentCnt
                 sheet.Range(cell).Value = ds3.Tables(RS).Rows(index)("単位")
-                cell = "R" & currentCnt
+                cell = "P" & currentCnt
                 sheet.Range(cell).Value = ds3.Tables(RS).Rows(index)("見積単価")
-                cell = "V" & currentCnt
+                cell = "T" & currentCnt
                 sheet.Range(cell).Value = ds3.Tables(RS).Rows(index)("見積金額")
 
                 totalPrice = totalPrice + ds3.Tables(RS).Rows(index)("見積金額")
@@ -1757,9 +1757,9 @@ Public Class Quote
                 Sql5 += " AND 可変キー = '" & ds3.Tables(RS).Rows(index)("リードタイム単位").ToString & "'"
                 Dim ds5 = _db.selectDB(Sql5, RS, reccnt)
 
-                cell = "Z" & currentCnt
+                cell = "X" & currentCnt
                 tmp1 = ""
-                tmp1 += ds3.Tables(RS).Rows(index)("リードタイム")
+                tmp1 += "ABOUT" & Environment.NewLine & ds3.Tables(RS).Rows(index)("リードタイム")
                 If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                     tmp1 += ds5.Tables(RS).Rows(0)("文字２")
                 Else
@@ -1774,11 +1774,11 @@ Public Class Quote
             Next
 
             'CmnData(18) = VAT
-            cell = "V" & lstRow + 1
+            cell = "T" & lstRow + 1
             sheet.Range(cell).Value = totalPrice
-            cell = "V" & lstRow + 2
+            cell = "T" & lstRow + 2
             sheet.Range(cell).Value = totalPrice * CmnData(18) * 0.01
-            cell = "V" & lstRow + 3
+            cell = "T" & lstRow + 3
             sheet.Range(cell).Value = totalPrice * CmnData(18) * 0.01 + totalPrice
             'sheet.Rows.AutoFit()
             book.SaveAs(sOutFile)
