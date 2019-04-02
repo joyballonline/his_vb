@@ -101,6 +101,12 @@
     <Import Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Form\InventoryControlTable.Designer.vb">
+      <DependentUpon>InventoryControlTable.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\InventoryControlTable.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\MstWarehouse.Designer.vb">
       <DependentUpon>MstWarehouse.vb</DependentUpon>
     </Compile>
@@ -525,6 +531,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Form\InventoryControlTable.resx">
+      <DependentUpon>InventoryControlTable.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\MstWarehouse.resx">
       <DependentUpon>MstWarehouse.vb</DependentUpon>
       <SubType>Designer</SubType>
