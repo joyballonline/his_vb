@@ -1947,7 +1947,7 @@ Public Class Quote
 
                                 sheet.Range("A" & lstRow).Value = ds3.tables(RS).rows(j)("メーカー") & vbLf & ds3.tables(RS).rows(j)("品名") & vbLf & ds3.tables(RS).rows(j)("型式")
                                 sheet.Range("B" & lstRow).Value = ds3.tables(RS).rows(j)("数量") & " " & ds3.tables(RS).rows(j)("単位")
-                                sheet.Range("B" & lstRow).HorizontalAlignment = Excel.XlHAlign.xlHAlignRight
+                                sheet.Range("B" & lstRow).HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter
 
                                 'sheet.Rows(lstRow & ":" & lstRow).AutoFit
 
