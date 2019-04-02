@@ -121,6 +121,7 @@ Public Class AccountsPayable
             LblNo3.Location = New Point(1272, 387)
             LblNo3.Size = New Size(66, 22)
             LblPurchaseOrder.Text = "PurchaseOrderDetails"
+            LblPaymentDate.Text = "PaymentDueDate"
             LblHistory.Text = "AccountsPayableHistoryData"
             LblAdd.Text = "AcceptAccountPayableThisTime"
 
