@@ -1680,7 +1680,7 @@ Public Class Quote
 
             '↓この辺マジックナンバーが多いので、後できっちり見直す必要あり
             sheet.Range("D1").Value = ds4.Tables(RS).Rows(0)(1)
-            sheet.Range("D2").Value = ds4.Tables(RS).Rows(0)(3) & " " & ds4.Tables(RS).Rows(0)(4)
+            sheet.Range("D2").Value = ds4.Tables(RS).Rows(0)(4) & " " & ds4.Tables(RS).Rows(0)(3)
             sheet.Range("D3").Value = ds4.Tables(RS).Rows(0)(5) & " " & ds4.Tables(RS).Rows(0)(6)
             sheet.Range("D4").Value = "telp. " & ds4.Tables(RS).Rows(0)(7) & " Fax." & ds4.Tables(RS).Rows(0)(8)
 
