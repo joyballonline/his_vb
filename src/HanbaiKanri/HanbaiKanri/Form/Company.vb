@@ -292,6 +292,11 @@ Public Class Company
                 CbEvaluation.SelectedValue = tmp
             End If
 
+            If ds.Tables(RS).Rows(0)("会計用コード") Is DBNull.Value Then
+            Else
+                Dim tmp = ds.Tables(RS).Rows(0)("会計用コード").ToString
+                TxtBranchCode.Text = tmp
+            End If
 
         End If
     End Sub
