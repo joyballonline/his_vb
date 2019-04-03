@@ -33,16 +33,6 @@ Partial Class SalesProfitList
         Me.Label8 = New System.Windows.Forms.Label()
         Me.BtnBack = New System.Windows.Forms.Button()
         Me.DgvList = New System.Windows.Forms.DataGridView()
-        Me.売上番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.売上日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.得意先名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.売上計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ＶＡＴ = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.売上金額計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.間接費 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.売上原価計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.粗利 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.粗利率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LblMode = New System.Windows.Forms.Label()
         Me.cmbYear = New System.Windows.Forms.ComboBox()
         Me.cmbMonth = New System.Windows.Forms.ComboBox()
@@ -58,6 +48,18 @@ Partial Class SalesProfitList
         Me.TxtGrossMargin = New System.Windows.Forms.TextBox()
         Me.LblMonth = New System.Windows.Forms.Label()
         Me.LblYear = New System.Windows.Forms.Label()
+        Me.売上番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.売上日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.得意先名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.客先番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.営業担当者 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.売上計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ＶＡＴ = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.売上金額計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.間接費 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.売上原価計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.粗利 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.粗利率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DgvList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -99,7 +101,7 @@ Partial Class SalesProfitList
         Me.DgvList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.DgvList.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.DgvList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.売上番号, Me.売上日, Me.得意先名, Me.売上計, Me.ＶＡＴ, Me.売上金額計, Me.間接費, Me.売上原価計, Me.粗利, Me.粗利率})
+        Me.DgvList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.売上番号, Me.売上日, Me.得意先名, Me.客先番号, Me.営業担当者, Me.売上計, Me.ＶＡＴ, Me.売上金額計, Me.間接費, Me.売上原価計, Me.粗利, Me.粗利率})
         Me.DgvList.Location = New System.Drawing.Point(13, 102)
         Me.DgvList.Name = "DgvList"
         Me.DgvList.ReadOnly = True
@@ -108,90 +110,6 @@ Partial Class SalesProfitList
         Me.DgvList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvList.Size = New System.Drawing.Size(1326, 345)
         Me.DgvList.TabIndex = 14
-        '
-        '売上番号
-        '
-        Me.売上番号.HeaderText = "売上番号"
-        Me.売上番号.Name = "売上番号"
-        Me.売上番号.ReadOnly = True
-        Me.売上番号.Width = 78
-        '
-        '売上日
-        '
-        Me.売上日.HeaderText = "売上日"
-        Me.売上日.Name = "売上日"
-        Me.売上日.ReadOnly = True
-        Me.売上日.Width = 66
-        '
-        '得意先名
-        '
-        Me.得意先名.HeaderText = "得意先名"
-        Me.得意先名.Name = "得意先名"
-        Me.得意先名.ReadOnly = True
-        Me.得意先名.Width = 78
-        '
-        '売上計
-        '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.売上計.DefaultCellStyle = DataGridViewCellStyle1
-        Me.売上計.HeaderText = "売上計"
-        Me.売上計.Name = "売上計"
-        Me.売上計.ReadOnly = True
-        Me.売上計.Width = 66
-        '
-        'ＶＡＴ
-        '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.ＶＡＴ.DefaultCellStyle = DataGridViewCellStyle2
-        Me.ＶＡＴ.HeaderText = "ＶＡＴ"
-        Me.ＶＡＴ.Name = "ＶＡＴ"
-        Me.ＶＡＴ.ReadOnly = True
-        Me.ＶＡＴ.Width = 55
-        '
-        '売上金額計
-        '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.売上金額計.DefaultCellStyle = DataGridViewCellStyle3
-        Me.売上金額計.HeaderText = "売上 + VAT"
-        Me.売上金額計.Name = "売上金額計"
-        Me.売上金額計.ReadOnly = True
-        Me.売上金額計.Width = 91
-        '
-        '間接費
-        '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.間接費.DefaultCellStyle = DataGridViewCellStyle4
-        Me.間接費.HeaderText = "間接費"
-        Me.間接費.Name = "間接費"
-        Me.間接費.ReadOnly = True
-        Me.間接費.Width = 66
-        '
-        '売上原価計
-        '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.売上原価計.DefaultCellStyle = DataGridViewCellStyle5
-        Me.売上原価計.HeaderText = "売上原価計"
-        Me.売上原価計.Name = "売上原価計"
-        Me.売上原価計.ReadOnly = True
-        Me.売上原価計.Width = 90
-        '
-        '粗利
-        '
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.粗利.DefaultCellStyle = DataGridViewCellStyle6
-        Me.粗利.HeaderText = "粗利"
-        Me.粗利.Name = "粗利"
-        Me.粗利.ReadOnly = True
-        Me.粗利.Width = 54
-        '
-        '粗利率
-        '
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.粗利率.DefaultCellStyle = DataGridViewCellStyle7
-        Me.粗利率.HeaderText = "粗利率"
-        Me.粗利率.Name = "粗利率"
-        Me.粗利率.ReadOnly = True
-        Me.粗利率.Width = 66
         '
         'LblMode
         '
@@ -375,6 +293,112 @@ Partial Class SalesProfitList
         Me.LblYear.TabIndex = 344
         Me.LblYear.Text = "年"
         '
+        '売上番号
+        '
+        Me.売上番号.HeaderText = "売上番号"
+        Me.売上番号.Name = "売上番号"
+        Me.売上番号.ReadOnly = True
+        Me.売上番号.Width = 78
+        '
+        '売上日
+        '
+        Me.売上日.HeaderText = "売上日"
+        Me.売上日.Name = "売上日"
+        Me.売上日.ReadOnly = True
+        Me.売上日.Width = 66
+        '
+        '得意先名
+        '
+        Me.得意先名.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.得意先名.HeaderText = "得意先名"
+        Me.得意先名.Name = "得意先名"
+        Me.得意先名.ReadOnly = True
+        Me.得意先名.Width = 78
+        '
+        '客先番号
+        '
+        Me.客先番号.HeaderText = "客先番号"
+        Me.客先番号.Name = "客先番号"
+        Me.客先番号.ReadOnly = True
+        Me.客先番号.Width = 78
+        '
+        '営業担当者
+        '
+        Me.営業担当者.HeaderText = "営業担当者"
+        Me.営業担当者.Name = "営業担当者"
+        Me.営業担当者.ReadOnly = True
+        Me.営業担当者.Width = 90
+        '
+        '売上計
+        '
+        Me.売上計.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.売上計.DefaultCellStyle = DataGridViewCellStyle1
+        Me.売上計.HeaderText = "売上計"
+        Me.売上計.Name = "売上計"
+        Me.売上計.ReadOnly = True
+        Me.売上計.Width = 66
+        '
+        'ＶＡＴ
+        '
+        Me.ＶＡＴ.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.ＶＡＴ.DefaultCellStyle = DataGridViewCellStyle2
+        Me.ＶＡＴ.HeaderText = "ＶＡＴ"
+        Me.ＶＡＴ.Name = "ＶＡＴ"
+        Me.ＶＡＴ.ReadOnly = True
+        Me.ＶＡＴ.Width = 55
+        '
+        '売上金額計
+        '
+        Me.売上金額計.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.売上金額計.DefaultCellStyle = DataGridViewCellStyle3
+        Me.売上金額計.HeaderText = "売上 + VAT"
+        Me.売上金額計.Name = "売上金額計"
+        Me.売上金額計.ReadOnly = True
+        Me.売上金額計.Width = 91
+        '
+        '間接費
+        '
+        Me.間接費.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.間接費.DefaultCellStyle = DataGridViewCellStyle4
+        Me.間接費.HeaderText = "間接費"
+        Me.間接費.Name = "間接費"
+        Me.間接費.ReadOnly = True
+        Me.間接費.Width = 66
+        '
+        '売上原価計
+        '
+        Me.売上原価計.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.売上原価計.DefaultCellStyle = DataGridViewCellStyle5
+        Me.売上原価計.HeaderText = "売上原価計"
+        Me.売上原価計.Name = "売上原価計"
+        Me.売上原価計.ReadOnly = True
+        Me.売上原価計.Width = 90
+        '
+        '粗利
+        '
+        Me.粗利.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.粗利.DefaultCellStyle = DataGridViewCellStyle6
+        Me.粗利.HeaderText = "粗利"
+        Me.粗利.Name = "粗利"
+        Me.粗利.ReadOnly = True
+        Me.粗利.Width = 54
+        '
+        '粗利率
+        '
+        Me.粗利率.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.粗利率.DefaultCellStyle = DataGridViewCellStyle7
+        Me.粗利率.HeaderText = "粗利率"
+        Me.粗利率.Name = "粗利率"
+        Me.粗利率.ReadOnly = True
+        Me.粗利率.Width = 66
+        '
         'SalesProfitList
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
@@ -423,9 +447,13 @@ Partial Class SalesProfitList
     Friend WithEvents TxtGrossMarginRate As TextBox
     Friend WithEvents LblGrossMargin As Label
     Friend WithEvents TxtGrossMargin As TextBox
+    Friend WithEvents LblMonth As Label
+    Friend WithEvents LblYear As Label
     Friend WithEvents 売上番号 As DataGridViewTextBoxColumn
     Friend WithEvents 売上日 As DataGridViewTextBoxColumn
     Friend WithEvents 得意先名 As DataGridViewTextBoxColumn
+    Friend WithEvents 客先番号 As DataGridViewTextBoxColumn
+    Friend WithEvents 営業担当者 As DataGridViewTextBoxColumn
     Friend WithEvents 売上計 As DataGridViewTextBoxColumn
     Friend WithEvents ＶＡＴ As DataGridViewTextBoxColumn
     Friend WithEvents 売上金額計 As DataGridViewTextBoxColumn
@@ -433,6 +461,4 @@ Partial Class SalesProfitList
     Friend WithEvents 売上原価計 As DataGridViewTextBoxColumn
     Friend WithEvents 粗利 As DataGridViewTextBoxColumn
     Friend WithEvents 粗利率 As DataGridViewTextBoxColumn
-    Friend WithEvents LblMonth As Label
-    Friend WithEvents LblYear As Label
 End Class

@@ -90,6 +90,8 @@ Public Class SalesProfitList
             DgvList.Columns("売上番号").HeaderText = "SalesNumber"
             DgvList.Columns("売上日").HeaderText = "SalesDate"
             DgvList.Columns("得意先名").HeaderText = "CustomerName"
+            DgvList.Columns("客先番号").HeaderText = "CustomerNumber"
+            DgvList.Columns("営業担当者").HeaderText = "SalesPersonInCharge"
             DgvList.Columns("売上計").HeaderText = "SalesAmount"
             DgvList.Columns("ＶＡＴ").HeaderText = "ＶＡＴ"
             DgvList.Columns("売上金額計").HeaderText = "SalesAmount+ＶＡＴ"
@@ -123,6 +125,7 @@ Public Class SalesProfitList
 
     '一覧取得
     Private Sub getList()
+
         Dim reccnt As Integer = 0 'DB用（デフォルト）
         Dim Sql As String = ""
         Dim selectYear As Integer = cmbYear.SelectedValue
@@ -133,31 +136,18 @@ Public Class SalesProfitList
         Dim uriDateSince As New Date(strSelectYear, strSelectMonth, "01")
         Dim uriDateUntil As New Date(selectYear, selectMonth, Date.DaysInMonth(selectYear, selectMonth))
 
-        'Dim salesAmount As Decimal = 0
-        'Dim totalSalesAmount As Decimal = 0
-        'Dim salesCostAmount As Decimal = 0
-        'Dim grossMargin As Decimal = 0
-        'Dim grossMarginRate As Decimal = 0
+        DgvList.Rows.Clear() '一覧クリア
 
-        DgvList.Rows.Clear()
-
-
-
-        Sql = "SELECT t30.売上番号,t30.売上日,t30.得意先名,t30.売上金額,t30.ＶＡＴ,t30.仕入金額,t30.粗利額, t31.受注数量, t31.仕入値"
-        Sql += " ,sum(t31.粗利率) as 粗利率,sum(t31.間接費) as 間接費, sum(t31.売上数量) as 売上数量, t31.売単価, t31.仕入原価, t31.関税率, t31.輸送費率, t31.前払法人税率, t31.関税額"
-        Sql += " FROM  public.t30_urighd t30 "
-        Sql += " INNER JOIN  t31_urigdt t31"
-        Sql += " ON t30.会社コード = t31.会社コード"
-        Sql += " And  t30.売上番号 = t31.売上番号"
-
-        Sql += " WHERE t30.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        Sql += " AND "
-        Sql += " t30.売上日 >= '" & strFormatDate(uriDateSince) & "'"
-        Sql += " AND "
-        Sql += " t30.売上日 <= '" & strFormatDate(uriDateUntil) & "'"
-        Sql += " AND "
-        Sql += "t30.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '取消区分=0
-        Sql += " GROUP BY t31.受注数量,t30.売上番号,t30.売上日,t30.得意先名,t30.売上金額,t30.ＶＡＴ,t30.仕入金額,t30.粗利額,粗利率,間接費,t30.更新日,売上数量, t31.仕入原価, t31.売単価, t31.関税率, t31.仕入値, t31.輸送費率, t31.前払法人税率, t31.関税額"
+        Sql = " SELECT t30.*, SUM(t31.見積金額) as 見積金額, SUM(t31.間接費) as 間接費 "
+        Sql += " , SUM(t31.売上金額) as 売上金額, SUM(t31.粗利額) as 粗利額 "
+        Sql += " FROM t30_urighd t30 "
+        Sql += " INNER JOIN t31_urigdt t31 "
+        Sql += " ON t30.会社コード = t31.会社コード "
+        Sql += " AND t30.売上番号 = t31.売上番号"
+        Sql += " AND t30.売上番号枝番 = t31.売上番号枝番 "
+        Sql += " WHERE t30.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '取消区分=0
+        Sql += " AND t30.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " GROUP BY t30.会社コード, t30.売上番号, t30.売上番号枝番 "
         Sql += " ORDER BY t30.更新日 DESC "
 
         Try
@@ -167,50 +157,34 @@ Public Class SalesProfitList
             Dim salesUnitPrice As Decimal = 0
             Dim totalArari As Decimal = 0
             Dim totalArariRate As Decimal = 0
+
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-
             For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-                '売上計
-                Dim salesAmount As Decimal = ds.Tables(RS).Rows(i)("売上数量") * ds.Tables(RS).Rows(i)("売単価")
-                'VAT
-                Dim vatAmount As Decimal = Format((salesAmount * ds.Tables(RS).Rows(i)("ＶＡＴ")) / 100, "0.000")
-                '仕入原価
-                Dim sireGenka As Decimal = ds.Tables(RS).Rows(i)("仕入値") * ds.Tables(RS).Rows(i)("売上数量")
-
-                '関税額
-                Dim kanzeiGaku As Decimal = sireGenka * ds.Tables(RS).Rows(i)("関税率")
-                '前払法人税額
-                Dim maehoujinzeiGaku As Decimal = (sireGenka + kanzeiGaku) * ds.Tables(RS).Rows(i)("前払法人税率")
-                '輸送費額
-                Dim yusouhiGaku As Decimal = sireGenka * ds.Tables(RS).Rows(i)("輸送費率")
-
-                '間接費
-                Dim kansetuhi As Decimal = (kanzeiGaku + maehoujinzeiGaku + yusouhiGaku)
-
-                Dim sireKingaku As Decimal = sireGenka + kansetuhi
-                Dim arariAmount As Decimal = Math.Truncate(salesAmount + vatAmount - sireGenka)
-
 
                 DgvList.Rows.Add()
                 DgvList.Rows(i).Cells("売上番号").Value = ds.Tables(RS).Rows(i)("売上番号")
                 DgvList.Rows(i).Cells("売上日").Value = ds.Tables(RS).Rows(i)("売上日").ToShortDateString()
                 DgvList.Rows(i).Cells("得意先名").Value = ds.Tables(RS).Rows(i)("得意先名")
-                DgvList.Rows(i).Cells("売上計").Value = salesAmount
-                DgvList.Rows(i).Cells("ＶＡＴ").Value = vatAmount
-                DgvList.Rows(i).Cells("売上金額計").Value = salesAmount + vatAmount
+                DgvList.Rows(i).Cells("客先番号").Value = ds.Tables(RS).Rows(i)("客先番号")
+                DgvList.Rows(i).Cells("営業担当者").Value = ds.Tables(RS).Rows(i)("営業担当者")
+                DgvList.Rows(i).Cells("売上計").Value = ds.Tables(RS).Rows(i)("見積金額")
+                DgvList.Rows(i).Cells("ＶＡＴ").Value = Format(ds.Tables(RS).Rows(i)("見積金額") / ds.Tables(RS).Rows(i)("ＶＡＴ"), "0.00")
+                DgvList.Rows(i).Cells("売上金額計").Value = Format(ds.Tables(RS).Rows(i)("見積金額") + (ds.Tables(RS).Rows(i)("見積金額") / ds.Tables(RS).Rows(i)("ＶＡＴ")), "0.000")
+                DgvList.Rows(i).Cells("間接費").Value = ds.Tables(RS).Rows(i)("間接費")
+                DgvList.Rows(i).Cells("売上原価計").Value = ds.Tables(RS).Rows(i)("売上金額")
+                DgvList.Rows(i).Cells("粗利").Value = ds.Tables(RS).Rows(i)("粗利額")
+                DgvList.Rows(i).Cells("粗利率").Value = Format((ds.Tables(RS).Rows(i)("粗利額") / ds.Tables(RS).Rows(i)("見積金額")) * 100, "0.0")
 
-                DgvList.Rows(i).Cells("間接費").Value = Format((sireKingaku - sireGenka), "0.000")
-                DgvList.Rows(i).Cells("売上原価計").Value = Format(salesAmount + vatAmount - kansetuhi, "0.000")
-                DgvList.Rows(i).Cells("粗利").Value = arariAmount
-                DgvList.Rows(i).Cells("粗利率").Value = Format((1 - (ds.Tables(RS).Rows(i)("仕入値") / ds.Tables(RS).Rows(i)("売単価"))), "0.000")
-                totalSales += salesAmount
-                totalSalesAmount += salesAmount + vatAmount
-                salesUnitPrice += Format(salesAmount + vatAmount - kansetuhi, "0.000")
-                totalArari += arariAmount
+                totalSales += ds.Tables(RS).Rows(i)("見積金額")
+                totalSalesAmount += ds.Tables(RS).Rows(i)("見積金額") + (ds.Tables(RS).Rows(i)("見積金額") * ds.Tables(RS).Rows(i)("ＶＡＴ"))
+                salesUnitPrice += ds.Tables(RS).Rows(i)("売上金額")
+                totalArari += ds.Tables(RS).Rows(i)("粗利額")
+
             Next
+
             If totalArari <> 0 And totalSalesAmount <> 0 Then
-                totalArariRate = Format((totalArari / totalSalesAmount), "0.000")
+                totalArariRate = (totalArari / totalSales) * 100
             Else
                 totalArariRate = 0
             End If
@@ -222,7 +196,7 @@ Public Class SalesProfitList
             )
             TxtTotalSalesAmount.Text = IIf(
                 totalSalesAmount <> 0,
-                totalSalesAmount,
+                Format(totalSalesAmount, "0.000"),
                 0
             )
             TxtSalesCostAmount.Text = IIf(
@@ -237,7 +211,7 @@ Public Class SalesProfitList
             )
             TxtGrossMarginRate.Text = IIf(
                 totalArariRate <> 0,
-                totalArariRate,
+                Format(totalArariRate, "0.0"),
                 0
             )
 
@@ -324,11 +298,13 @@ Public Class SalesProfitList
                 sheet.Range("C1").Value = "CustomerName"
                 sheet.Range("D1").Value = "SalesAmount"
                 sheet.Range("E1").Value = "ＶＡＴ"
-                sheet.Range("F1").Value = "TotalSalesAmount"
-                sheet.Range("G1").Value = "Overhead"
-                sheet.Range("H1").Value = "SalesCost"
-                sheet.Range("I1").Value = "GrossMargin"
-                sheet.Range("J1").Value = "GrossMarginRate"
+                sheet.Range("F1").Value = "CustomerNumber"
+                sheet.Range("G1").Value = "SalesPersonInCharge"
+                sheet.Range("H1").Value = "TotalSalesAmount"
+                sheet.Range("I1").Value = "Overhead"
+                sheet.Range("J1").Value = "SalesCost"
+                sheet.Range("K1").Value = "GrossMargin"
+                sheet.Range("L1").Value = "GrossMarginRate"
             End If
 
             Dim cellRowIndex As Integer = 1
@@ -338,21 +314,23 @@ Public Class SalesProfitList
                 sheet.Range("A" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("売上番号").Value '売上番号
                 sheet.Range("B" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("売上日").Value '売上日
                 sheet.Range("C" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("得意先名").Value '得意先
-                sheet.Range("D" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("売上計").Value '売上計
-                sheet.Range("E" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("ＶＡＴ").Value 'VAT
-                sheet.Range("F" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("売上金額計").Value '売上 + VAT
-                sheet.Range("G" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("間接費").Value '間接費
-                sheet.Range("H" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("売上原価計").Value '売上原価計
-                sheet.Range("I" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("粗利").Value '粗利
-                sheet.Range("J" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("粗利率").Value '粗利率
+                sheet.Range("D" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("客先番号").Value '客先番号
+                sheet.Range("E" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("営業担当者").Value '営業担当者
+                sheet.Range("F" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("売上計").Value '売上計
+                sheet.Range("G" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("ＶＡＴ").Value 'VAT
+                sheet.Range("H" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("売上金額計").Value '売上 + VAT
+                sheet.Range("I" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("間接費").Value '間接費
+                sheet.Range("J" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("売上原価計").Value '売上原価計
+                sheet.Range("K" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("粗利").Value '粗利
+                sheet.Range("L" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("粗利率").Value '粗利率
 
-                sheet.Range("D" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight
-                sheet.Range("E" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight
                 sheet.Range("F" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight
                 sheet.Range("G" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight
                 sheet.Range("H" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight
                 sheet.Range("I" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight
                 sheet.Range("J" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight
+                sheet.Range("K" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight
+                sheet.Range("L" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight
             Next
 
             ' 行7全体のオブジェクトを作成
@@ -361,11 +339,11 @@ Public Class SalesProfitList
 
             '最後に合計行の追加
             cellRowIndex += 1
-            sheet.Range("D" & cellRowIndex.ToString).Value = TxtSalesAmount.Text '売上計
-            sheet.Range("F" & cellRowIndex.ToString).Value = TxtTotalSalesAmount.Text '売上 + VAT
-            sheet.Range("H" & cellRowIndex.ToString).Value = TxtSalesCostAmount.Text '売上原価計
-            sheet.Range("I" & cellRowIndex.ToString).Value = TxtGrossMargin.Text '粗利
-            sheet.Range("J" & cellRowIndex.ToString).Value = TxtGrossMarginRate.Text '粗利率
+            sheet.Range("H" & cellRowIndex.ToString).Value = TxtSalesAmount.Text '売上計
+            sheet.Range("I" & cellRowIndex.ToString).Value = TxtTotalSalesAmount.Text '売上 + VAT
+            sheet.Range("J" & cellRowIndex.ToString).Value = TxtSalesCostAmount.Text '売上原価計
+            sheet.Range("K" & cellRowIndex.ToString).Value = TxtGrossMargin.Text '粗利
+            sheet.Range("L" & cellRowIndex.ToString).Value = TxtGrossMarginRate.Text '粗利率
 
             ' 境界線オブジェクトを作成 →7行目の下部に罫線を描画する
             xlBorders = xlRngTmp.Borders
