@@ -99,9 +99,9 @@ Partial Class frmC01F10_Login
         Me.lblTitle.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.lblTitle.Location = New System.Drawing.Point(102, 78)
         Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New System.Drawing.Size(380, 25)
+        Me.lblTitle.Size = New System.Drawing.Size(394, 25)
         Me.lblTitle.TabIndex = 6
-        Me.lblTitle.Text = "Sales, Purchase & Inventory Management"
+        Me.lblTitle.Text = "Sales, Purchase && Inventory Management"
         '
         'lblVer
         '
