@@ -492,6 +492,7 @@ Public Class DepositManagement
     '登録処理
     Private Sub BtnRegist_Click(sender As Object, e As EventArgs) Handles BtnRegist.Click
         Dim dtToday As String = formatDatetime(DateTime.Now)
+        Dim dtNyukinday As String = formatDatetime(DtpDepositDate.Value)
         Dim reccnt As Integer = 0
         Dim DepositAmount As Decimal = 0
         Dim BillingAmount As Decimal = 0
@@ -567,15 +568,15 @@ Public Class DepositManagement
         Sql += "t25_nkinhd("
         Sql += "会社コード, 入金番号, 入金日, 請求先コード, 請求先名, 振込先, 入金額,  備考, 取消区分, 登録日, 更新者, 更新日"
         Sql += ") VALUES ('"
-        Sql += CompanyCode
+        Sql += CompanyCode      '会社コード
         Sql += "', '"
-        Sql += PMSaiban
+        Sql += PMSaiban         '入金番号
         Sql += "', '"
-        Sql += dtToday
+        Sql += dtNyukinday      '入金日
         Sql += "', '"
-        Sql += CustomerCode
+        Sql += CustomerCode     '請求先コード
         Sql += "', '"
-        Sql += CustomerName
+        Sql += CustomerName     '請求先名
         Sql += "', '"
         Sql += dsCompany.Tables(RS).Rows(0)("銀行名")
         Sql += " "
@@ -636,7 +637,7 @@ Public Class DepositManagement
                 Sql += "', '"
                 Sql += frmC01F10_Login.loginValue.TantoNM
                 Sql += "', '"
-                Sql += dtToday
+                Sql += dtNyukinday      '入金日
                 Sql += "', '"
                 Sql += CustomerCode
                 Sql += "', '"
@@ -668,7 +669,7 @@ Public Class DepositManagement
                 Sql += "', '"
                 Sql += PMSaiban
                 Sql += "', '"
-                Sql += dtToday
+                Sql += dtNyukinday      '入金日
                 Sql += "', '"
                 Sql += DgvBillingInfo.Rows(i).Cells("請求情報請求番号").Value.ToString
                 Sql += "', '"
@@ -729,7 +730,7 @@ Public Class DepositManagement
 
                     Sql += "入金完了日"
                     Sql += " = '"
-                    Sql += dtToday
+                    Sql += dtNyukinday      '入金日
                     Sql += "', "
 
                 End If
@@ -758,14 +759,6 @@ Public Class DepositManagement
 
         Next
 
-        '_parentForm.Enabled = True
-        '_parentForm.Show()
-
-        'Dim openForm As Form = Nothing
-        'openForm = New DepositList(_msgHd, _db, _langHd, _parentForm)
-        'openForm.Show()
-
-        'Me.Dispose()
 
         _parentForm.Enabled = True
         _parentForm.Show()
