@@ -101,6 +101,12 @@
     <Import Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Form\StockSearch.Designer.vb">
+      <DependentUpon>StockSearch.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\StockSearch.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\InventoryControlTable.Designer.vb">
       <DependentUpon>InventoryControlTable.vb</DependentUpon>
     </Compile>
@@ -531,6 +537,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Form\StockSearch.resx">
+      <DependentUpon>StockSearch.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\InventoryControlTable.resx">
       <DependentUpon>InventoryControlTable.vb</DependentUpon>
     </EmbeddedResource>

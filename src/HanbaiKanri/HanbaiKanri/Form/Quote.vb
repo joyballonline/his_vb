@@ -594,12 +594,12 @@ Public Class Quote
     End Sub
 
     '金額自動計算
-    Private Sub CellValueChanged(ByVal sender As Object,
-    ByVal e As DataGridViewCellEventArgs) _
-    Handles DgvItemList.CellValueChanged
+    Private Sub CellValueChanged(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles DgvItemList.CellValueChanged
+
         If LoadFlg Then
-            TxtPurchaseTotal.Clear()
+
             TxtTotal.Clear()
+            TxtPurchaseTotal.Clear()
             TxtQuoteTotal.Clear()
             TxtGrossProfit.Clear()
 
@@ -614,6 +614,51 @@ Public Class Quote
             Dim tmp3 As Decimal = 0
             Dim tmp4 As Decimal = 0
             Dim Sql As String = ""
+
+
+            '仕入区分「在庫引当」時処理
+            Dim currentColumn As String = DgvItemList.Columns(e.ColumnIndex).Name
+
+            If currentColumn = "仕入区分" Or currentColumn = "メーカー" Or currentColumn = "品名" And currentColumn = "型式" Then
+
+                '仕入区分が「在庫引当」の場合
+                If DgvItemList("仕入区分", e.RowIndex).Value = CommonConst.Sire_KBN_Zaiko Then
+
+                    Dim manufactuer As String = DgvItemList("メーカー", e.RowIndex).Value
+                    Dim itemName As String = DgvItemList("品名", e.RowIndex).Value
+                    Dim spec As String = DgvItemList("型式", e.RowIndex).Value
+
+                    manufactuer = IIf(manufactuer <> Nothing, manufactuer, "")
+                    itemName = IIf(itemName <> Nothing, itemName, "")
+                    spec = IIf(spec <> Nothing, spec, "")
+
+                    'メーカー、品名、型式があったら
+                    If manufactuer <> "" And itemName <> "" And spec <> "" Then
+
+                        Sql = " AND "
+                        Sql += " t44.取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'"
+                        Sql += " AND "
+                        Sql += " t45.メーカー ILIKE '" & manufactuer & "'"
+                        Sql += " AND "
+                        Sql += " t45.品名 ILIKE '" & itemName & "'"
+                        Sql += " AND "
+                        Sql += " t45.型式 ILIKE '" & spec & "'"
+                        Sql = " ORDER BY 仕入日 "
+
+                        Dim ds As DataSet = getDsData("t41_siredt", Sql)
+
+                        If ds.Tables(RS).Rows.Count > 0 Then
+
+                            DgvItemList("仕入単価", e.RowIndex).Value = ds.Tables(RS).Rows(0)("仕入単価").ToString()
+
+                        End If
+
+                    End If
+
+                End If
+
+            End If
+
 
             '各項目の属性チェック
             If Not IsNumeric(DgvItemList.Rows(e.RowIndex).Cells("数量").Value) And (DgvItemList.Rows(e.RowIndex).Cells("数量").Value IsNot Nothing) Then
@@ -1101,9 +1146,11 @@ Public Class Quote
             Exit Sub
         End If
 
-        '仕入先と数量がなかったらエラーで戻す
+        '仕入区分が「在庫引当」以外かつ仕入先と数量がなかったらエラーで戻す
         For i As Integer = 0 To DgvItemList.RowCount - 1
-            If DgvItemList.Rows(i).Cells("仕入先コード").Value Is Nothing Or DgvItemList.Rows(i).Cells("数量").Value Is Nothing Then
+            If DgvItemList.Rows(i).Cells("仕入区分").Value <> CommonConst.Sire_KBN_Zaiko And
+                DgvItemList.Rows(i).Cells("仕入先コード").Value Is Nothing Or
+                DgvItemList.Rows(i).Cells("数量").Value Is Nothing Then
 
                 '対象データがないメッセージを表示
                 _msgHd.dspMSG("chkQuoteInputError", frmC01F10_Login.loginValue.Language)
@@ -2172,6 +2219,35 @@ Public Class Quote
         Read_Customer()
 
     End Sub
+
+    'キーイベント取得
+    Private Sub DgvItemList_KeyDown(sender As Object, e As KeyEventArgs) Handles DgvItemList.KeyDown
+        'F4キー押下
+        Dim currentColumn As String = DgvItemList.Columns(DgvItemList.CurrentCell.ColumnIndex).Name
+        Dim sireKbn As Integer = DgvItemList("仕入区分", DgvItemList.CurrentCell.RowIndex).Value
+
+        Dim manufactuer As String = DgvItemList("メーカー", DgvItemList.CurrentCell.RowIndex).Value
+        Dim itemName As String = DgvItemList("品名", DgvItemList.CurrentCell.RowIndex).Value
+        Dim spec As String = DgvItemList("型式", DgvItemList.CurrentCell.RowIndex).Value
+
+        '仕入区分[ 在庫引当 ] + 数量にいた場合
+        If e.KeyData = Keys.F4 Then
+
+            If sireKbn = CommonConst.Sire_KBN_Zaiko And currentColumn = "数量" Then
+                manufactuer = IIf(manufactuer <> Nothing, manufactuer, "")
+                itemName = IIf(itemName <> Nothing, itemName, "")
+                spec = IIf(spec <> Nothing, spec, "")
+
+                Dim openForm As Form = Nothing
+                openForm = New StockSearch(_msgHd, _db, _langHd, Me, manufactuer, itemName, spec)
+                openForm.Show()
+                Me.Enabled = False
+
+            End If
+
+        End If
+    End Sub
+
 
     '得意先マスタより得意先情報を読み込む
     Private Sub Read_Customer()
