@@ -88,6 +88,8 @@ Public Class SalesVATList
             DgvList.Columns("売上番号").HeaderText = "SalesNumber"
             DgvList.Columns("売上日").HeaderText = "SalesDate"
             DgvList.Columns("得意先名").HeaderText = "CustomerName"
+            DgvList.Columns("客先番号").HeaderText = "CustomerNumber"
+            DgvList.Columns("営業担当者").HeaderText = "SalesPersonInCharge"
             DgvList.Columns("メーカー").HeaderText = "Manufacturer"
             DgvList.Columns("品名").HeaderText = "ItemName"
             DgvList.Columns("型式").HeaderText = "Spec"
@@ -133,7 +135,8 @@ Public Class SalesVATList
         DgvList.Rows.Clear() '一覧クリア
 
         Sql = "SELECT "
-        Sql += "t30.売上番号, t30.売上日, t30.得意先名, t31.メーカー, t31.品名, t31.型式, t31.売上数量, t31.単位, t31.売単価, t31.見積単価, t30.ＶＡＴ"
+        Sql += "t30.売上番号, t30.売上日, t30.得意先名, t31.メーカー, t31.品名, t31.型式"
+        Sql += ", t31.売上数量, t31.単位, t31.売単価, t31.見積単価, t30.ＶＡＴ, t30.客先番号, t30.営業担当者 "
         Sql += " FROM  public.t30_urighd t30 "
         Sql += " INNER JOIN  t31_urigdt t31"
         Sql += " ON t30.会社コード = t31.会社コード"
@@ -165,6 +168,8 @@ Public Class SalesVATList
                 DgvList.Rows(i).Cells("売上番号").Value = ds.Tables(RS).Rows(i)("売上番号")
                 DgvList.Rows(i).Cells("売上日").Value = ds.Tables(RS).Rows(i)("売上日").ToShortDateString()
                 DgvList.Rows(i).Cells("得意先名").Value = ds.Tables(RS).Rows(i)("得意先名")
+                DgvList.Rows(i).Cells("客先番号").Value = ds.Tables(RS).Rows(i)("客先番号")
+                DgvList.Rows(i).Cells("営業担当者").Value = ds.Tables(RS).Rows(i)("営業担当者")
                 DgvList.Rows(i).Cells("メーカー").Value = ds.Tables(RS).Rows(i)("メーカー")
                 DgvList.Rows(i).Cells("品名").Value = ds.Tables(RS).Rows(i)("品名")
                 DgvList.Rows(i).Cells("型式").Value = ds.Tables(RS).Rows(i)("型式")
@@ -260,14 +265,16 @@ Public Class SalesVATList
                 sheet.Range("A1").Value = "SalesNumber"
                 sheet.Range("B1").Value = "SalesDate"
                 sheet.Range("C1").Value = "CustomerName"
-                sheet.Range("D1").Value = "Manufacturer"
-                sheet.Range("E1").Value = "ItemName"
-                sheet.Range("F1").Value = "Spec"
-                sheet.Range("G1").Value = "Quantity"
-                sheet.Range("H1").Value = "Unit"
-                sheet.Range("I1").Value = "UnitPrice"
-                sheet.Range("J1").Value = "ＶＡＴ"
-                sheet.Range("K1").Value = "Amount"
+                sheet.Range("D1").Value = "CustomerNumber"
+                sheet.Range("E1").Value = "SalesPersonInCharge"
+                sheet.Range("F1").Value = "Manufacturer"
+                sheet.Range("G1").Value = "ItemName"
+                sheet.Range("H1").Value = "Spec"
+                sheet.Range("I1").Value = "Quantity"
+                sheet.Range("J1").Value = "Unit"
+                sheet.Range("K1").Value = "UnitPrice"
+                sheet.Range("L1").Value = "ＶＡＴ"
+                sheet.Range("M1").Value = "Amount"
             End If
 
             Dim cellRowIndex As Integer = 1
@@ -279,14 +286,16 @@ Public Class SalesVATList
                 sheet.Range("A" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("売上番号").Value '売上番号
                 sheet.Range("B" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("売上日").Value '売上日
                 sheet.Range("C" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("得意先名").Value '得意先
-                sheet.Range("D" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("メーカー").Value 'メーカー
-                sheet.Range("E" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("品名").Value '品名
-                sheet.Range("F" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("型式").Value '型式
-                sheet.Range("G" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("数量").Value '数量
-                sheet.Range("H" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("単位").Value '単位
-                sheet.Range("I" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("売単価").Value '売単価
-                sheet.Range("J" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("ＶＡＴ").Value 'ＶＡＴ
-                sheet.Range("K" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("売上計").Value '売上金額計
+                sheet.Range("D" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("客先番号").Value '客先番号
+                sheet.Range("E" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("営業担当者").Value '営業担当者
+                sheet.Range("F" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("メーカー").Value 'メーカー
+                sheet.Range("G" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("品名").Value '品名
+                sheet.Range("H" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("型式").Value '型式
+                sheet.Range("I" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("数量").Value '数量
+                sheet.Range("J" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("単位").Value '単位
+                sheet.Range("K" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("売単価").Value '売単価
+                sheet.Range("L" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("ＶＡＴ").Value 'ＶＡＴ
+                sheet.Range("M" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("売上計").Value '売上金額計
 
             Next
 
@@ -296,7 +305,7 @@ Public Class SalesVATList
 
             '最後に合計行の追加
             cellRowIndex += 1
-            sheet.Range("K" & cellRowIndex.ToString).Value = TxtSalesAmount.Text '粗利率
+            sheet.Range("M" & cellRowIndex.ToString).Value = TxtSalesAmount.Text '粗利率
 
             ' 境界線オブジェクトを作成 →7行目の下部に罫線を描画する
             xlBorders = xlRngTmp.Borders

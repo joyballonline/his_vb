@@ -40,6 +40,8 @@ Partial Class SalesVATList
         Me.売上番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.売上日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.得意先名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.客先番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.営業担当者 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.メーカー = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.品名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.型式 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -89,7 +91,7 @@ Partial Class SalesVATList
         Me.DgvList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.DgvList.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.DgvList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.売上番号, Me.売上日, Me.得意先名, Me.メーカー, Me.品名, Me.型式, Me.数量, Me.単位, Me.売単価, Me.ＶＡＴ, Me.売上計})
+        Me.DgvList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.売上番号, Me.売上日, Me.得意先名, Me.客先番号, Me.営業担当者, Me.メーカー, Me.品名, Me.型式, Me.数量, Me.単位, Me.売単価, Me.ＶＡＴ, Me.売上計})
         Me.DgvList.Location = New System.Drawing.Point(13, 102)
         Me.DgvList.Name = "DgvList"
         Me.DgvList.ReadOnly = True
@@ -198,6 +200,20 @@ Partial Class SalesVATList
         Me.得意先名.ReadOnly = True
         Me.得意先名.Width = 78
         '
+        '客先番号
+        '
+        Me.客先番号.HeaderText = "客先番号"
+        Me.客先番号.Name = "客先番号"
+        Me.客先番号.ReadOnly = True
+        Me.客先番号.Width = 78
+        '
+        '営業担当者
+        '
+        Me.営業担当者.HeaderText = "営業担当者"
+        Me.営業担当者.Name = "営業担当者"
+        Me.営業担当者.ReadOnly = True
+        Me.営業担当者.Width = 90
+        '
         'メーカー
         '
         Me.メーカー.HeaderText = "メーカー"
@@ -221,6 +237,7 @@ Partial Class SalesVATList
         '
         '数量
         '
+        Me.数量.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         Me.数量.DefaultCellStyle = DataGridViewCellStyle1
         Me.数量.HeaderText = "数量"
@@ -237,6 +254,7 @@ Partial Class SalesVATList
         '
         '売単価
         '
+        Me.売単価.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         Me.売単価.DefaultCellStyle = DataGridViewCellStyle2
         Me.売単価.HeaderText = "売単価"
@@ -246,6 +264,7 @@ Partial Class SalesVATList
         '
         'ＶＡＴ
         '
+        Me.ＶＡＴ.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         Me.ＶＡＴ.DefaultCellStyle = DataGridViewCellStyle3
         Me.ＶＡＴ.HeaderText = "ＶＡＴ"
@@ -255,6 +274,7 @@ Partial Class SalesVATList
         '
         '売上計
         '
+        Me.売上計.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
         DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         Me.売上計.DefaultCellStyle = DataGridViewCellStyle4
         Me.売上計.HeaderText = "売上計"
@@ -299,6 +319,8 @@ Partial Class SalesVATList
     Friend WithEvents 売上番号 As DataGridViewTextBoxColumn
     Friend WithEvents 売上日 As DataGridViewTextBoxColumn
     Friend WithEvents 得意先名 As DataGridViewTextBoxColumn
+    Friend WithEvents 客先番号 As DataGridViewTextBoxColumn
+    Friend WithEvents 営業担当者 As DataGridViewTextBoxColumn
     Friend WithEvents メーカー As DataGridViewTextBoxColumn
     Friend WithEvents 品名 As DataGridViewTextBoxColumn
     Friend WithEvents 型式 As DataGridViewTextBoxColumn
