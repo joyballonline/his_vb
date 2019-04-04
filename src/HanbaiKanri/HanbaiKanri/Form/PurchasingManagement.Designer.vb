@@ -190,6 +190,7 @@ Partial Class PurchasingManagement
         Me.TxtCount1.Size = New System.Drawing.Size(38, 22)
         Me.TxtCount1.TabIndex = 77
         Me.TxtCount1.TabStop = False
+        Me.TxtCount1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'LblNo2
         '
@@ -212,6 +213,7 @@ Partial Class PurchasingManagement
         Me.TxtCount2.Size = New System.Drawing.Size(38, 22)
         Me.TxtCount2.TabIndex = 80
         Me.TxtCount2.TabStop = False
+        Me.TxtCount2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'DgvHistory
         '
@@ -279,6 +281,7 @@ Partial Class PurchasingManagement
         Me.TxtCount3.Size = New System.Drawing.Size(38, 22)
         Me.TxtCount3.TabIndex = 89
         Me.TxtCount3.TabStop = False
+        Me.TxtCount3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'DgvAdd
         '

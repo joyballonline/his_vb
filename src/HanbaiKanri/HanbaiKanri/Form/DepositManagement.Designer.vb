@@ -118,6 +118,7 @@ Partial Class DepositManagement
         Me.TxtHistoryCount.Size = New System.Drawing.Size(38, 22)
         Me.TxtHistoryCount.TabIndex = 290
         Me.TxtHistoryCount.TabStop = False
+        Me.TxtHistoryCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'DtpDepositDate
         '
@@ -185,6 +186,7 @@ Partial Class DepositManagement
         Me.TxtDepositCount.Size = New System.Drawing.Size(38, 22)
         Me.TxtDepositCount.TabIndex = 280
         Me.TxtDepositCount.TabStop = False
+        Me.TxtDepositCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'DgvCustomer
         '
@@ -444,6 +446,7 @@ Partial Class DepositManagement
         Me.TxtBillingCount.Size = New System.Drawing.Size(38, 22)
         Me.TxtBillingCount.TabIndex = 295
         Me.TxtBillingCount.TabStop = False
+        Me.TxtBillingCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'BtnDelete
         '

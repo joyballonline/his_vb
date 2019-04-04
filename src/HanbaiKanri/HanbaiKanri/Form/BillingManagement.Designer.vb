@@ -526,6 +526,7 @@ Partial Class BillingManagement
         Me.TxtDgvHistoryCount.Size = New System.Drawing.Size(38, 22)
         Me.TxtDgvHistoryCount.TabIndex = 257
         Me.TxtDgvHistoryCount.TabStop = False
+        Me.TxtDgvHistoryCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'LblRemarks2
         '
@@ -559,6 +560,7 @@ Partial Class BillingManagement
         Me.TxtDgvAddCount.Size = New System.Drawing.Size(38, 22)
         Me.TxtDgvAddCount.TabIndex = 263
         Me.TxtDgvAddCount.TabStop = False
+        Me.TxtDgvAddCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.TxtDgvAddCount.Visible = False
         '
         'LblNo3
@@ -594,6 +596,7 @@ Partial Class BillingManagement
         Me.TxtDgvCymndtCount.Size = New System.Drawing.Size(38, 22)
         Me.TxtDgvCymndtCount.TabIndex = 267
         Me.TxtDgvCymndtCount.TabStop = False
+        Me.TxtDgvCymndtCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'BtnRegist
         '

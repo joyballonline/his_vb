@@ -158,6 +158,7 @@ Partial Class Receipt
         Me.TxtCount3.Size = New System.Drawing.Size(38, 22)
         Me.TxtCount3.TabIndex = 250
         Me.TxtCount3.TabStop = False
+        Me.TxtCount3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'DgvAdd
         '
@@ -213,6 +214,7 @@ Partial Class Receipt
         Me.TxtCount2.Size = New System.Drawing.Size(38, 22)
         Me.TxtCount2.TabIndex = 245
         Me.TxtCount2.TabStop = False
+        Me.TxtCount2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'DgvHistory
         '
@@ -248,6 +250,7 @@ Partial Class Receipt
         Me.TxtCount1.Size = New System.Drawing.Size(38, 22)
         Me.TxtCount1.TabIndex = 242
         Me.TxtCount1.TabStop = False
+        Me.TxtCount1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'DgvPurchase
         '

@@ -157,6 +157,7 @@ Partial Class GoodsIssue
         Me.TxtCount3.Size = New System.Drawing.Size(38, 22)
         Me.TxtCount3.TabIndex = 277
         Me.TxtCount3.TabStop = False
+        Me.TxtCount3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'DgvAdd
         '
@@ -212,6 +213,7 @@ Partial Class GoodsIssue
         Me.TxtCount2.Size = New System.Drawing.Size(38, 22)
         Me.TxtCount2.TabIndex = 272
         Me.TxtCount2.TabStop = False
+        Me.TxtCount2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'DgvHistory
         '
@@ -248,6 +250,7 @@ Partial Class GoodsIssue
         Me.TxtCount1.Size = New System.Drawing.Size(38, 22)
         Me.TxtCount1.TabIndex = 269
         Me.TxtCount1.TabStop = False
+        Me.TxtCount1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'DgvOrder
         '
