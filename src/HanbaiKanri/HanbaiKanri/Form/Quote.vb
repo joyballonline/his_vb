@@ -595,6 +595,61 @@ Public Class Quote
 
     '金額自動計算
     Private Sub CellValueChanged(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles DgvItemList.CellValueChanged
+        Dim reccnt As Integer = 0 'DB用（デフォルト）
+        Dim Sql As String = ""
+
+        '仕入区分「在庫引当」時処理
+        Dim currentColumn As String = DgvItemList.Columns(e.ColumnIndex).Name
+
+        If currentColumn = "仕入区分" Or currentColumn = "メーカー" Or currentColumn = "品名" Or currentColumn = "型式" Then
+
+            '仕入区分が「在庫引当」の場合
+            If DgvItemList("仕入区分", e.RowIndex).Value = CommonConst.Sire_KBN_Zaiko Then
+
+                Dim manufactuer As String = DgvItemList("メーカー", e.RowIndex).Value
+                Dim itemName As String = DgvItemList("品名", e.RowIndex).Value
+                Dim spec As String = DgvItemList("型式", e.RowIndex).Value
+
+                manufactuer = IIf(manufactuer <> Nothing, manufactuer, "")
+                itemName = IIf(itemName <> Nothing, itemName, "")
+                spec = IIf(spec <> Nothing, spec, "")
+
+                'メーカー、品名、型式があったら
+                If manufactuer <> "" And itemName <> "" And spec <> "" Then
+
+                    Sql = " SELECT "
+                    Sql += " t41.* "
+                    Sql += " FROM t41_siredt t41 "
+                    Sql += " INNER JOIN t40_sirehd t40 "
+                    Sql += " ON "
+                    Sql += " t41.会社コード = t40.会社コード "
+                    Sql += " AND "
+                    Sql += " t41.仕入番号 = t40.仕入番号 "
+                    Sql += " WHERE "
+                    Sql += " t41.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                    Sql += " AND "
+                    Sql += " t40.取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'"
+                    Sql += " AND "
+                    Sql += " t41.メーカー ILIKE '" & manufactuer & "'"
+                    Sql += " AND "
+                    Sql += " t41.品名 ILIKE '" & itemName & "'"
+                    Sql += " AND "
+                    Sql += " t41.型式 ILIKE '" & spec & "'"
+                    Sql += " ORDER BY 仕入日 "
+
+                    Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+                    If ds.Tables(RS).Rows.Count > 0 Then
+
+                        DgvItemList("仕入単価", e.RowIndex).Value = ds.Tables(RS).Rows(0)("仕入単価").ToString()
+
+                    End If
+
+                End If
+
+            End If
+
+        End If
 
         If LoadFlg Then
 
@@ -613,52 +668,6 @@ Public Class Quote
             Dim tmp2 As Decimal = 0
             Dim tmp3 As Decimal = 0
             Dim tmp4 As Decimal = 0
-            Dim Sql As String = ""
-
-
-            '仕入区分「在庫引当」時処理
-            Dim currentColumn As String = DgvItemList.Columns(e.ColumnIndex).Name
-
-            If currentColumn = "仕入区分" Or currentColumn = "メーカー" Or currentColumn = "品名" And currentColumn = "型式" Then
-
-                '仕入区分が「在庫引当」の場合
-                If DgvItemList("仕入区分", e.RowIndex).Value = CommonConst.Sire_KBN_Zaiko Then
-
-                    Dim manufactuer As String = DgvItemList("メーカー", e.RowIndex).Value
-                    Dim itemName As String = DgvItemList("品名", e.RowIndex).Value
-                    Dim spec As String = DgvItemList("型式", e.RowIndex).Value
-
-                    manufactuer = IIf(manufactuer <> Nothing, manufactuer, "")
-                    itemName = IIf(itemName <> Nothing, itemName, "")
-                    spec = IIf(spec <> Nothing, spec, "")
-
-                    'メーカー、品名、型式があったら
-                    If manufactuer <> "" And itemName <> "" And spec <> "" Then
-
-                        Sql = " AND "
-                        Sql += " t44.取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'"
-                        Sql += " AND "
-                        Sql += " t45.メーカー ILIKE '" & manufactuer & "'"
-                        Sql += " AND "
-                        Sql += " t45.品名 ILIKE '" & itemName & "'"
-                        Sql += " AND "
-                        Sql += " t45.型式 ILIKE '" & spec & "'"
-                        Sql = " ORDER BY 仕入日 "
-
-                        Dim ds As DataSet = getDsData("t41_siredt", Sql)
-
-                        If ds.Tables(RS).Rows.Count > 0 Then
-
-                            DgvItemList("仕入単価", e.RowIndex).Value = ds.Tables(RS).Rows(0)("仕入単価").ToString()
-
-                        End If
-
-                    End If
-
-                End If
-
-            End If
-
 
             '各項目の属性チェック
             If Not IsNumeric(DgvItemList.Rows(e.RowIndex).Cells("数量").Value) And (DgvItemList.Rows(e.RowIndex).Cells("数量").Value IsNot Nothing) Then
@@ -894,7 +903,6 @@ Public Class Quote
                         Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
                         Sql += " and 仕入先コード = '" & DgvItemList.Rows(e.RowIndex).Cells("仕入先コード").Value.ToString & "'"
 
-                        Dim reccnt As Integer = 0
                         Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
 
                         If reccnt > 0 Then
