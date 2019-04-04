@@ -145,6 +145,12 @@ Public Class SalesProfitList
         Sql += " ON t30.会社コード = t31.会社コード "
         Sql += " AND t30.売上番号 = t31.売上番号"
         Sql += " AND t30.売上番号枝番 = t31.売上番号枝番 "
+
+        Sql += " AND "
+        Sql += " t30.売上日 >= '" & strFormatDate(uriDateSince) & "'"
+        Sql += " AND "
+        Sql += " t30.売上日 <= '" & strFormatDate(uriDateUntil) & "'"
+
         Sql += " WHERE t30.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '取消区分=0
         Sql += " AND t30.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql += " GROUP BY t30.会社コード, t30.売上番号, t30.売上番号枝番 "
@@ -174,7 +180,8 @@ Public Class SalesProfitList
                 DgvList.Rows(i).Cells("間接費").Value = ds.Tables(RS).Rows(i)("間接費")
                 DgvList.Rows(i).Cells("売上原価計").Value = ds.Tables(RS).Rows(i)("売上金額")
                 DgvList.Rows(i).Cells("粗利").Value = ds.Tables(RS).Rows(i)("粗利額")
-                DgvList.Rows(i).Cells("粗利率").Value = Format((ds.Tables(RS).Rows(i)("粗利額") / ds.Tables(RS).Rows(i)("見積金額")) * 100, "0.0")
+                'DgvList.Rows(i).Cells("粗利率").Value = Format((ds.Tables(RS).Rows(i)("粗利額") / ds.Tables(RS).Rows(i)("見積金額")) * 100, "0.0")
+                DgvList.Rows(i).Cells("粗利率").Value = ds.Tables(RS).Rows(i)("粗利率")
 
                 totalSales += ds.Tables(RS).Rows(i)("見積金額")
                 totalSalesAmount += ds.Tables(RS).Rows(i)("見積金額") + (ds.Tables(RS).Rows(i)("見積金額") * ds.Tables(RS).Rows(i)("ＶＡＴ"))
