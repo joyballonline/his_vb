@@ -931,7 +931,7 @@ Public Class Quote
                 Next
 
                 TxtPurchaseTotal.Text = PurchaseTotal
-                TxtTotal.Text = Total
+                TxtTotal.Text = Total.ToString("F0")
                 TxtQuoteTotal.Text = QuoteTotal
                 TxtGrossProfit.Text = GrossProfit
 
