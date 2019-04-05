@@ -108,6 +108,10 @@ Public Class Quote
         DgvItemList.Columns("粗利率").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvItemList.Columns("リードタイム").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
+        '仕入原価の制御
+        DgvItemList.Columns("仕入原価").ReadOnly = True
+        DgvItemList.Columns("仕入原価").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
+
         'セルの内容に合わせて、行の高さが自動的に調節されるようにする
         DgvItemList.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
         '"Column1"列のセルのテキストを折り返して表示する
@@ -799,37 +803,6 @@ Public Class Quote
                             End If
                         End If
 
-                        ''数量, 仕入単価 <> Nothing
-                        'If DgvItemList.Rows(e.RowIndex).Cells("数量").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("仕入単価").Value IsNot Nothing Then
-                        '    DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value = DgvItemList.Rows(e.RowIndex).Cells("仕入単価").Value * DgvItemList.Rows(e.RowIndex).Cells("数量").Value
-                        'End If
-                        ''関税率, 仕入単価 <> Nothing
-                        'If DgvItemList.Rows(e.RowIndex).Cells("関税率").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("仕入単価").Value IsNot Nothing Then
-                        '    DgvItemList.Rows(e.RowIndex).Cells("関税額").Value = DgvItemList.Rows(e.RowIndex).Cells("仕入単価").Value * DgvItemList.Rows(e.RowIndex).Cells("関税率").Value
-                        'End If
-                        ''前払法人税率, 仕入額, 仕入単価 <> Nothing
-                        'If DgvItemList.Rows(e.RowIndex).Cells("前払法人税率").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("関税額").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("仕入単価").Value IsNot Nothing Then
-                        '    tmp = DgvItemList.Rows(e.RowIndex).Cells("仕入単価").Value + DgvItemList.Rows(e.RowIndex).Cells("関税額").Value
-                        '    tmp1 = tmp * DgvItemList.Rows(e.RowIndex).Cells("前払法人税率").Value
-                        '    tmp1 = Math.Ceiling(tmp1)
-                        '    DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value = tmp1
-                        'End If
-                        ''輸送費率, 仕入単価 <> Nothing
-                        'If DgvItemList.Rows(e.RowIndex).Cells("輸送費率").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("仕入単価").Value IsNot Nothing Then
-                        '    DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value = DgvItemList.Rows(e.RowIndex).Cells("仕入単価").Value * DgvItemList.Rows(e.RowIndex).Cells("輸送費率").Value
-                        'End If
-                        ''仕入原価, 関税額, 前払法人税額, 輸送費額 <> Nothing
-                        'If DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("関税額").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value IsNot Nothing Then
-                        '    DgvItemList.Rows(e.RowIndex).Cells("仕入金額").Value = DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value + (DgvItemList.Rows(e.RowIndex).Cells("関税額").Value + DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value + DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value) * DgvItemList.Rows(e.RowIndex).Cells("数量").Value
-                        'End If
-                        ''売単価, 関税額, 前払法人税額, 輸送費額 <> Nothing
-                        'If DgvItemList.Rows(e.RowIndex).Cells("売単価").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("関税額").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value IsNot Nothing Then
-                        '    DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value = Math.Ceiling(DgvItemList.Rows(e.RowIndex).Cells("売単価").Value + DgvItemList.Rows(e.RowIndex).Cells("関税額").Value + DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value + DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value)
-                        'End If
-                        ''数量, 見積単価 <> Nothing
-                        'If DgvItemList.Rows(e.RowIndex).Cells("数量").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value IsNot Nothing Then
-                        '    DgvItemList.Rows(e.RowIndex).Cells("見積金額").Value = DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value * DgvItemList.Rows(e.RowIndex).Cells("数量").Value
-                        'End If
                     End If
 
                     '--------------------------
@@ -904,21 +877,24 @@ Public Class Quote
                         Sql += " and 仕入先コード = '" & DgvItemList.Rows(e.RowIndex).Cells("仕入先コード").Value.ToString & "'"
 
                         Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
+                        '仕入先コードにカーソルがあるときだけ各率を再表示
+                        If DgvItemList.Columns(e.ColumnIndex).Name = "仕入先コード" Then
+                            If reccnt > 0 Then
+                                DgvItemList.Rows(e.RowIndex).Cells("仕入先").Value = ds.Tables(RS).Rows(0)("仕入先名").ToString
+                                DgvItemList.Rows(e.RowIndex).Cells("間接費率").Value = ds.Tables(RS).Rows(0)("既定間接費率").ToString
+                                DgvItemList.Rows(e.RowIndex).Cells("関税率").Value = ds.Tables(RS).Rows(0)("関税率").ToString
+                                DgvItemList.Rows(e.RowIndex).Cells("前払法人税率").Value = ds.Tables(RS).Rows(0)("前払法人税率").ToString
+                                DgvItemList.Rows(e.RowIndex).Cells("輸送費率").Value = ds.Tables(RS).Rows(0)("輸送費率").ToString
+                            Else
+                                DgvItemList.Rows(e.RowIndex).Cells("仕入先").Value = ""
+                                DgvItemList.Rows(e.RowIndex).Cells("間接費率").Value = 0
+                                DgvItemList.Rows(e.RowIndex).Cells("関税率").Value = 0
+                                DgvItemList.Rows(e.RowIndex).Cells("前払法人税率").Value = 0
+                                DgvItemList.Rows(e.RowIndex).Cells("輸送費率").Value = 0
 
-                        If reccnt > 0 Then
-                            DgvItemList.Rows(e.RowIndex).Cells("仕入先").Value = ds.Tables(RS).Rows(0)("仕入先名").ToString
-                            DgvItemList.Rows(e.RowIndex).Cells("間接費率").Value = ds.Tables(RS).Rows(0)("既定間接費率").ToString
-                            DgvItemList.Rows(e.RowIndex).Cells("関税率").Value = ds.Tables(RS).Rows(0)("関税率").ToString
-                            DgvItemList.Rows(e.RowIndex).Cells("前払法人税率").Value = ds.Tables(RS).Rows(0)("前払法人税率").ToString
-                            DgvItemList.Rows(e.RowIndex).Cells("輸送費率").Value = ds.Tables(RS).Rows(0)("輸送費率").ToString
-                        Else
-                            DgvItemList.Rows(e.RowIndex).Cells("仕入先").Value = ""
-                            DgvItemList.Rows(e.RowIndex).Cells("間接費率").Value = 0
-                            DgvItemList.Rows(e.RowIndex).Cells("関税率").Value = 0
-                            DgvItemList.Rows(e.RowIndex).Cells("前払法人税率").Value = 0
-                            DgvItemList.Rows(e.RowIndex).Cells("輸送費率").Value = 0
-
+                            End If
                         End If
+
                     End If
 
                 End If
