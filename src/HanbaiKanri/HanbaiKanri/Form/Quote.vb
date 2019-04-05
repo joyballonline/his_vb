@@ -111,6 +111,15 @@ Public Class Quote
         '仕入原価の制御
         DgvItemList.Columns("仕入原価").ReadOnly = True
         DgvItemList.Columns("仕入原価").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
+        '関税額の制御
+        DgvItemList.Columns("関税額").ReadOnly = True
+        DgvItemList.Columns("関税額").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
+        '前払法人税額の制御
+        DgvItemList.Columns("前払法人税額").ReadOnly = True
+        DgvItemList.Columns("前払法人税額").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
+        '輸送費額の制御
+        DgvItemList.Columns("輸送費額").ReadOnly = True
+        DgvItemList.Columns("輸送費額").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
 
         'セルの内容に合わせて、行の高さが自動的に調節されるようにする
         DgvItemList.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
@@ -352,11 +361,6 @@ Public Class Quote
                 Case Else
                     TxtSuffixNo.Text = SuffixMax + 1
             End Select
-            'If (Status IsNot CommonConst.STATUS_PRICE) And (Status Is CommonConst.STATUS_VIEW) Then
-            '    TxtSuffixNo.Text = SuffixMax + 1
-            'Else
-            '    TxtSuffixNo.Text = ds1.Tables(RS).Rows(0)("見積番号枝番")
-            'End If
 
             DtpQuote.Value = ds1.Tables(RS).Rows(0)("見積日").ToString
             DtpExpiration.Value = ds1.Tables(RS).Rows(0)("見積有効期限").ToString
