@@ -539,6 +539,8 @@ Public Class OrderManagement
 
             Dim totalUriAmount As Decimal = 0
             Dim totalArariAmount As Decimal = 0
+            Dim totalmitsuAmount As Decimal = 0
+
             't31_urigdt 売上明細更新
             For i As Integer = 0 To DgvAdd.Rows.Count() - 1
 
@@ -556,52 +558,55 @@ Public Class OrderManagement
                 Sql4 += "', '"
                 Sql4 += "1" '売上番号枝番
                 Sql4 += "', '"
-                Sql4 += dsCymndt.Tables(RS).Rows(i)("受注番号").ToString
+                Sql4 += dsCymndt.Tables(RS).Rows(i)("受注番号").ToString '受注番号
                 Sql4 += "', '"
-                Sql4 += dsCymndt.Tables(RS).Rows(i)("受注番号枝番").ToString
+                Sql4 += dsCymndt.Tables(RS).Rows(i)("受注番号枝番").ToString '受注番号枝番
                 Sql4 += "', '"
-                Sql4 += DgvAdd.Rows(i).Cells("行番号").Value.ToString
+                Sql4 += DgvAdd.Rows(i).Cells("行番号").Value.ToString '行番号
                 Sql4 += "', '"
-                Sql4 += DgvAdd.Rows(i).Cells("仕入区分値").Value.ToString
+                Sql4 += DgvAdd.Rows(i).Cells("仕入区分値").Value.ToString '仕入区分値
                 Sql4 += "', '"
-                Sql4 += DgvAdd.Rows(i).Cells("メーカー").Value.ToString
+                Sql4 += DgvAdd.Rows(i).Cells("メーカー").Value.ToString 'メーカー
                 Sql4 += "', '"
-                Sql4 += DgvAdd.Rows(i).Cells("品名").Value.ToString
+                Sql4 += DgvAdd.Rows(i).Cells("品名").Value.ToString '品名
                 Sql4 += "', '"
-                Sql4 += DgvAdd.Rows(i).Cells("型式").Value.ToString
+                Sql4 += DgvAdd.Rows(i).Cells("型式").Value.ToString '型式
                 Sql4 += "', '"
-                Sql4 += DgvAdd.Rows(i).Cells("仕入先").Value.ToString
+                Sql4 += DgvAdd.Rows(i).Cells("仕入先").Value.ToString '仕入先名
                 Sql4 += "', '"
-                Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(i)("仕入値").ToString)
+                Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(i)("仕入値").ToString) '仕入値
                 Sql4 += "', '"
-                Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(i)("受注数量").ToString)
+                Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(i)("受注数量").ToString) '受注数量
                 Sql4 += "', '"
-                Sql4 += UtilClass.formatNumber(DgvAdd.Rows(i).Cells("売上数量").Value.ToString)
+                Sql4 += UtilClass.formatNumber(DgvAdd.Rows(i).Cells("売上数量").Value.ToString) '売上数量
                 Sql4 += "', '"
 
                 Dim OrderNo As Integer = dsCymndt.Tables(RS).Rows(i)("受注数量")
                 Dim PurchaseNo As Integer = DgvAdd.Rows(i).Cells("売上数量").Value
                 Dim RemainingNo As Integer = OrderNo - PurchaseNo
 
-                Sql4 += (RemainingNo.ToString) '受注残数
+                Sql4 += RemainingNo.ToString '受注残数
                 Sql4 += "', '"
-                Sql4 += DgvAdd.Rows(i).Cells("単位").Value
+                Sql4 += DgvAdd.Rows(i).Cells("単位").Value '単位
                 Sql4 += "', '"
-                Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(i)("見積単価").ToString)
-                Sql4 += "', '"
-
-                Dim uriAmount As Decimal = Decimal.Parse(dsCymndt.Tables(RS).Rows(i)("見積単価").ToString * DgvAdd.Rows(i).Cells("売上数量").Value)
-
-                Sql4 += UtilClass.formatNumber(Format(uriAmount, "0.000"))
+                Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(i)("売単価").ToString) '売単価
                 Sql4 += "', '"
 
-                Dim arariAmount As Decimal = Decimal.Parse((dsCymndt.Tables(RS).Rows(i)("見積単価").ToString - dsCymndt.Tables(RS).Rows(i)("見積単価").ToString) * DgvAdd.Rows(i).Cells("売上数量").Value)
+                Dim uriAmount As Decimal = Decimal.Parse(dsCymndt.Tables(RS).Rows(i)("売単価").ToString * DgvAdd.Rows(i).Cells("売上数量").Value.ToString)
 
-                Sql4 += UtilClass.formatNumber(Format(arariAmount, "0.000"))
+                Sql4 += UtilClass.formatNumber(Format(uriAmount, "0.000")) '売上金額
                 Sql4 += "', '"
-                Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(i)("粗利率").ToString)
+
+                Dim arariAmount As Decimal = Decimal.Parse((dsCymndt.Tables(RS).Rows(i)("売単価").ToString - dsCymndt.Tables(RS).Rows(i)("仕入値").ToString) * DgvAdd.Rows(i).Cells("売上数量").Value)
+
+                Sql4 += UtilClass.formatNumber(Format(arariAmount, "0.000")) '粗利額
                 Sql4 += "', '"
-                Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(i)("間接費").ToString)
+                Sql4 += UtilClass.formatNumber(Format(dsCymndt.Tables(RS).Rows(i)("仕入値").ToString / (dsCymndt.Tables(RS).Rows(i)("売単価").ToString) * 100, "0.0")) '粗利率
+                Sql4 += "', '"
+
+                Dim kansetsuhi As Decimal = dsCymndt.Tables(RS).Rows(i)("関税額") + dsCymndt.Tables(RS).Rows(i)("前払法人税額") + dsCymndt.Tables(RS).Rows(i)("輸送費額")
+
+                Sql4 += UtilClass.formatNumber(kansetsuhi) '間接費
                 Sql4 += "', '"
                 Sql4 += dsCymndt.Tables(RS).Rows(i)("リードタイム").ToString
                 Sql4 += "', '"
@@ -611,7 +616,7 @@ Public Class OrderManagement
                 Sql4 += "', '"
                 Sql4 += strToday '更新日
                 Sql4 += "', '"
-                Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(i)("仕入原価").ToString)
+                Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(i)("仕入値").ToString * DgvAdd.Rows(i).Cells("売上数量").Value.ToString)
                 Sql4 += "', '"
                 Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(i)("関税率").ToString)
                 Sql4 += "', '"
@@ -625,11 +630,14 @@ Public Class OrderManagement
                 Sql4 += "', '"
                 Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(i)("輸送費額").ToString)
                 Sql4 += "', '"
-                Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(i)("仕入金額").ToString)
+                Sql4 += UtilClass.formatNumber((dsCymndt.Tables(RS).Rows(i)("仕入値").ToString + kansetsuhi) * DgvAdd.Rows(i).Cells("売上数量").Value.ToString)
                 Sql4 += "', '"
                 Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(i)("見積単価").ToString)
                 Sql4 += "', '"
-                Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(i)("見積金額").ToString)
+
+                Dim mitsuAmount As Decimal = dsCymndt.Tables(RS).Rows(i)("見積単価").ToString * DgvAdd.Rows(i).Cells("売上数量").Value.ToString
+
+                Sql4 += UtilClass.formatNumber(mitsuAmount) '見積金額
                 Sql4 += "')"
                 If DgvAdd.Rows(i).Cells("売上数量").Value <> 0 Then
                     _db.executeDB(Sql4)
@@ -637,6 +645,7 @@ Public Class OrderManagement
 
                 totalUriAmount += uriAmount
                 totalArariAmount += arariAmount
+                totalmitsuAmount += mitsuAmount
 
             Next
 
@@ -690,7 +699,7 @@ Public Class OrderManagement
             Sql3 += "', '"
             Sql3 += dsCymnHd.Tables(RS).Rows(0)("支払条件").ToString '支払条件
             Sql3 += "', '"
-            Sql3 += UtilClass.formatNumber(dsCymnHd.Tables(RS).Rows(0)("見積金額").ToString) '見積金額
+            Sql3 += UtilClass.formatNumber(totalmitsuAmount) '見積金額
             Sql3 += "', '"
             Sql3 += UtilClass.formatNumber(totalUriAmount) '売上金額（見積単価 * 数量）
             Sql3 += "', '"
@@ -706,7 +715,7 @@ Public Class OrderManagement
             Sql3 += ", "
             Sql3 += "0" '取消区分
             Sql3 += ", '"
-            Sql3 += UtilClass.formatNumber(dsCymnHd.Tables(RS).Rows(0)("ＶＡＴ").ToString) 'ＶＡＴ
+            Sql3 += UtilClass.formatNumber(totalUriAmount * 0.1) 'ＶＡＴ
             Sql3 += "', '"
             If dsCymnHd.Tables(RS).Rows(0)("ＰＰＨ") Is DBNull.Value Then
                 Sql3 += "0" 'ＰＰＨ
