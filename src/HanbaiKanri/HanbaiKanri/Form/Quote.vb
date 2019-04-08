@@ -612,44 +612,47 @@ Public Class Quote
         If currentColumn = "仕入区分" Or currentColumn = "メーカー" Or currentColumn = "品名" Or currentColumn = "型式" Then
 
             '仕入区分が「在庫引当」の場合
-            If DgvItemList("仕入区分", e.RowIndex).Value = CommonConst.Sire_KBN_Zaiko Then
+            If e.RowIndex > 0 Then
+                If DgvItemList("仕入区分", e.RowIndex).Value = CommonConst.Sire_KBN_Zaiko Then
 
-                Dim manufactuer As String = DgvItemList("メーカー", e.RowIndex).Value
-                Dim itemName As String = DgvItemList("品名", e.RowIndex).Value
-                Dim spec As String = DgvItemList("型式", e.RowIndex).Value
+                    Dim manufactuer As String = DgvItemList("メーカー", e.RowIndex).Value
+                    Dim itemName As String = DgvItemList("品名", e.RowIndex).Value
+                    Dim spec As String = DgvItemList("型式", e.RowIndex).Value
 
-                manufactuer = IIf(manufactuer <> Nothing, manufactuer, "")
-                itemName = IIf(itemName <> Nothing, itemName, "")
-                spec = IIf(spec <> Nothing, spec, "")
+                    manufactuer = IIf(manufactuer <> Nothing, manufactuer, "")
+                    itemName = IIf(itemName <> Nothing, itemName, "")
+                    spec = IIf(spec <> Nothing, spec, "")
 
-                'メーカー、品名、型式があったら
-                If manufactuer <> "" And itemName <> "" And spec <> "" Then
+                    'メーカー、品名、型式があったら
+                    If manufactuer <> "" And itemName <> "" And spec <> "" Then
 
-                    Sql = " SELECT "
-                    Sql += " t41.* "
-                    Sql += " FROM t41_siredt t41 "
-                    Sql += " INNER JOIN t40_sirehd t40 "
-                    Sql += " ON "
-                    Sql += " t41.会社コード = t40.会社コード "
-                    Sql += " AND "
-                    Sql += " t41.仕入番号 = t40.仕入番号 "
-                    Sql += " WHERE "
-                    Sql += " t41.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-                    Sql += " AND "
-                    Sql += " t40.取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'"
-                    Sql += " AND "
-                    Sql += " t41.メーカー ILIKE '" & manufactuer & "'"
-                    Sql += " AND "
-                    Sql += " t41.品名 ILIKE '" & itemName & "'"
-                    Sql += " AND "
-                    Sql += " t41.型式 ILIKE '" & spec & "'"
-                    Sql += " ORDER BY 仕入日 "
+                        Sql = " SELECT "
+                        Sql += " t41.* "
+                        Sql += " FROM t41_siredt t41 "
+                        Sql += " INNER JOIN t40_sirehd t40 "
+                        Sql += " ON "
+                        Sql += " t41.会社コード = t40.会社コード "
+                        Sql += " AND "
+                        Sql += " t41.仕入番号 = t40.仕入番号 "
+                        Sql += " WHERE "
+                        Sql += " t41.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                        Sql += " AND "
+                        Sql += " t40.取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'"
+                        Sql += " AND "
+                        Sql += " t41.メーカー ILIKE '" & manufactuer & "'"
+                        Sql += " AND "
+                        Sql += " t41.品名 ILIKE '" & itemName & "'"
+                        Sql += " AND "
+                        Sql += " t41.型式 ILIKE '" & spec & "'"
+                        Sql += " ORDER BY 仕入日 "
 
-                    Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
+                        Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-                    If ds.Tables(RS).Rows.Count > 0 Then
+                        If ds.Tables(RS).Rows.Count > 0 Then
 
-                        DgvItemList("仕入単価", e.RowIndex).Value = ds.Tables(RS).Rows(0)("仕入単価").ToString()
+                            DgvItemList("仕入単価", e.RowIndex).Value = ds.Tables(RS).Rows(0)("仕入単価").ToString()
+
+                        End If
 
                     End If
 
