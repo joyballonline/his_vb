@@ -1033,8 +1033,8 @@ Public Class GoodsIssue
             sheet = CType(book.Worksheets(1), Excel.Worksheet)
 
             sheet.Range("B8").Value = ds1.Tables(RS).Rows(0)("得意先名")
-            sheet.Range("B10").Value = ds1.Tables(RS).Rows(0)("得意先郵便番号")
-            sheet.Range("B9").Value = ds1.Tables(RS).Rows(0)("得意先住所")
+            'sheet.Range("B10").Value = ds1.Tables(RS).Rows(0)("得意先郵便番号")
+            sheet.Range("B9").Value = ds1.Tables(RS).Rows(0)("得意先住所") & " " & ds1.Tables(RS).Rows(0)("得意先郵便番号")
             sheet.Range("B11").Value = "'" & ds1.Tables(RS).Rows(0)("得意先電話番号")
 
             sheet.Range("G8").Value = ds1.Tables(RS).Rows(0)("出庫番号")
