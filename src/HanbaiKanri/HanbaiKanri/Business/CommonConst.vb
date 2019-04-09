@@ -281,6 +281,7 @@ Public Class CommonConst
     Public Const APC_KBN_NORMAL_TXT_E As String = "Normal"                          '通常買掛（英語表記）
 
     '仕入区分
+    Public Const Sire_KBN_Move As Integer = 0                           '移動
     Public Const Sire_KBN_Sire As Integer = 1                           '仕入
     Public Const Sire_KBN_Zaiko As Integer = 2                          '在庫
     Public Const Sire_KBN_SERVICE As Integer = 9                        'サービス

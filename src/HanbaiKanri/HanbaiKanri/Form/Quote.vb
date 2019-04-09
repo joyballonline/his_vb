@@ -2417,6 +2417,8 @@ Public Class Quote
 
         Sql = " AND "
         Sql += "固定キー ILIKE '" & CommonConst.FIXED_KEY_PURCHASING_CLASS & "'"
+        Sql += " AND "
+        Sql += "可変キー <> '" & CommonConst.Sire_KBN_Move & "'" '「移動」以外
         Sql += " ORDER BY 表示順"
 
         'リードタイムのリストを汎用マスタから取得
