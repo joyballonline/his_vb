@@ -219,7 +219,7 @@ Public Class QuoteList
                     DgvMithd.Rows(i).Cells("取消").Value = getDelKbnTxt(ds.Tables(RS).Rows(i)("取消区分"))
                     DgvMithd.Rows(i).Cells("見積番号").Value = ds.Tables(RS).Rows(i)("見積番号")
                     DgvMithd.Rows(i).Cells("見積番号枝番").Value = ds.Tables(RS).Rows(i)("見積番号枝番")
-                    DgvMithd.Rows(i).Cells("見積日").Value = ds.Tables(RS).Rows(i)("見積日")
+                    DgvMithd.Rows(i).Cells("見積日").Value = ds.Tables(RS).Rows(i)("見積日").ToShortDateString
                     DgvMithd.Rows(i).Cells("見積有効期限").Value = ds.Tables(RS).Rows(i)("見積有効期限")
                     DgvMithd.Rows(i).Cells("得意先コード").Value = ds.Tables(RS).Rows(i)("得意先コード")
                     DgvMithd.Rows(i).Cells("得意先名").Value = ds.Tables(RS).Rows(i)("得意先名")
