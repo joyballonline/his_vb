@@ -701,7 +701,7 @@ Public Class OrderManagement
             Sql3 += "', '"
             Sql3 += UtilClass.formatNumber(totalmitsuAmount) '見積金額
             Sql3 += "', '"
-            Sql3 += UtilClass.formatNumber(totalUriAmount) '売上金額（見積単価 * 数量）
+            Sql3 += UtilClass.formatNumber(totalUriAmount) '売上金額（売単価 * 数量）
             Sql3 += "', '"
             Sql3 += UtilClass.formatNumber(totalArariAmount) '粗利額
             Sql3 += "', '"
@@ -715,7 +715,7 @@ Public Class OrderManagement
             Sql3 += ", "
             Sql3 += "0" '取消区分
             Sql3 += ", '"
-            Sql3 += UtilClass.formatNumber(totalUriAmount * 0.1) 'ＶＡＴ
+            Sql3 += UtilClass.formatNumber(totalmitsuAmount * (dsCymnHd.Tables(RS).Rows(0)("ＶＡＴ").ToString / 100)) 'ＶＡＴ
             Sql3 += "', '"
             If dsCymnHd.Tables(RS).Rows(0)("ＰＰＨ") Is DBNull.Value Then
                 Sql3 += "0" 'ＰＰＨ
