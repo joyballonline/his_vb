@@ -84,12 +84,22 @@ Public Class MovementInput
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
             LblMode.Text = OrderStatus & " Mode"
 
+            LblProcessingClassification.Text = "ProcessingClassification"
+            LblProcessingDate.Text = "ProcessingDate"
+            LblWarehouseFrom.Text = "TargetWarehouse"
+            LblWarehouseTo.Text = "Destination"
+            LblInOutKbn.Text = "StorageType"
+
             BtnRegistration.Text = "Registration"
             BtnBack.Text = "Back"
 
             DgvList.Columns("メーカー").HeaderText = "Manufacturer"
             DgvList.Columns("品名").HeaderText = "ItemName"
             DgvList.Columns("型式").HeaderText = "Spec"
+            DgvList.Columns("数量").HeaderText = "Quantity"
+
+            BtnRowsAdd.Text = "AddLine"
+            BtnRowsDel.Text = "DeleteLine"
         End If
 
         DtpProcessingDate.Text = DateTime.Today
