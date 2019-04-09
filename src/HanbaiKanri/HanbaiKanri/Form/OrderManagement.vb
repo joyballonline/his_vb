@@ -604,7 +604,7 @@ Public Class OrderManagement
                 Sql4 += UtilClass.formatNumber(Format(dsCymndt.Tables(RS).Rows(i)("仕入値").ToString / (dsCymndt.Tables(RS).Rows(i)("売単価").ToString) * 100, "0.0")) '粗利率
                 Sql4 += "', '"
 
-                Dim kansetsuhi As Decimal = dsCymndt.Tables(RS).Rows(i)("関税額") + dsCymndt.Tables(RS).Rows(i)("前払法人税額") + dsCymndt.Tables(RS).Rows(i)("輸送費額")
+                Dim kansetsuhi As Decimal = (dsCymndt.Tables(RS).Rows(i)("関税額") + dsCymndt.Tables(RS).Rows(i)("前払法人税額") + dsCymndt.Tables(RS).Rows(i)("輸送費額")) * DgvAdd.Rows(i).Cells("売上数量").Value.ToString
 
                 Sql4 += UtilClass.formatNumber(kansetsuhi) '間接費
                 Sql4 += "', '"
