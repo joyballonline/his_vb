@@ -938,7 +938,7 @@ Public Class GoodsIssue
 
             sheet.Range("B7").Value = ds1.Tables(RS).Rows(0)("得意先名")
             sheet.Range("B8").Value = ds1.Tables(RS).Rows(0)("得意先住所") & " " & ds1.Tables(RS).Rows(0)("得意先郵便番号")
-            sheet.Range("B10").Value = "'" & ds1.Tables(RS).Rows(0)("得意先電話番号")
+            sheet.Range("B11").Value = "'" & ds1.Tables(RS).Rows(0)("得意先電話番号")
 
             sheet.Range("E7").Value = ds1.Tables(RS).Rows(0)("出庫番号")
             sheet.Range("E8").Value = ds1.Tables(RS).Rows(0)("出庫日")
@@ -946,7 +946,7 @@ Public Class GoodsIssue
 
 
             Dim rowCnt As Integer = 0
-            Dim lstRow As Integer = 13
+            Dim lstRow As Integer = 14
             'Dim addRowCnt As Integer = 0
             'Dim currentCnt As Integer = 20
             Dim num As Integer = 1
