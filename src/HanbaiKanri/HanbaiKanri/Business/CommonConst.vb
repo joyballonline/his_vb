@@ -211,6 +211,7 @@ Public Class CommonConst
 
     Public Const MENU_H1410 As String = "H1410"           '在庫リスト
     Public Const MENU_H1420 As String = "H1420"           '在庫管理表
+    Public Const MENU_H1430 As String = "H1430"           '移動入力
 
     Public Const MENU_M0110 As String = "M0110"           '汎用マスタ
     Public Const MENU_M0120 As String = "M0120"           '得意先マスタ
@@ -329,6 +330,7 @@ Public Class CommonConst
     Public Const INOUT_CLASS As String = "1003"       '入出庫種別
     Public Const DC_CODE As String = "DC"           '預金種目固定キー
     Public Const IP_CODE As String = "3"           '在庫単価評価法
+    Public Const PC_CODE As String = "PC"           '処理区分
 
     'メニュー ステータス
     Public Const STATUS_ADD As String = "ADD"          '登録モード

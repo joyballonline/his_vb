@@ -271,13 +271,19 @@ Public Class MakerSearch
             frm.DgvItemList("品名", RowIdx).Value = IIf(LbItem.SelectedIndex > -1, LbItem.SelectedItem, "")
             frm.DgvItemList("型式", RowIdx).Value = IIf(LbModel.SelectedIndex > -1, LbModel.SelectedItem, "")
 
-        Else
+        ElseIf _status = CommonConst.STATUS_ADD Then
             '見積登録モード
             Dim frm As Quote = CType(Me.Owner, Quote)
             frm.DgvItemList("メーカー", RowIdx).Value = IIf(LbMaker.SelectedIndex > -1, LbMaker.SelectedItem, "")
             frm.DgvItemList("品名", RowIdx).Value = IIf(LbItem.SelectedIndex > -1, LbItem.SelectedItem, "")
             frm.DgvItemList("型式", RowIdx).Value = IIf(LbModel.SelectedIndex > -1, LbModel.SelectedItem, "")
 
+        Else
+            '移動入力画面
+            Dim frm As MovementInput = CType(Me.Owner, MovementInput)
+            frm.DgvList("メーカー", RowIdx).Value = IIf(LbMaker.SelectedIndex > -1, LbMaker.SelectedItem, "")
+            frm.DgvList("品名", RowIdx).Value = IIf(LbItem.SelectedIndex > -1, LbItem.SelectedItem, "")
+            frm.DgvList("型式", RowIdx).Value = IIf(LbModel.SelectedIndex > -1, LbModel.SelectedItem, "")
         End If
 
 

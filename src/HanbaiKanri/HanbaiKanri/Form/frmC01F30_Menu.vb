@@ -1451,7 +1451,13 @@ Public Class frmC01F30_Menu
                 openForm = New InventoryControlTable(_msgHd, _db, _langHd, Me, Status)
                 openForm.Show()
                 Me.Hide()
-          '-----------------------------------マスタ管理（M01）
+            Case CommonConst.MENU_H1430  '移動入力
+                Dim openForm As Form = Nothing
+                Dim Status As String = CommonConst.STATUS_VIEW
+                openForm = New MovementInput(_msgHd, _db, _langHd, Me, Status)
+                openForm.Show()
+                Me.Hide()
+         '-----------------------------------マスタ管理（M01）
             Case CommonConst.MENU_M0110    '汎用マスタ一覧
                 Dim openForm As Form = Nothing
                 openForm = New MstHanyou(_msgHd, _db, _langHd, Me)

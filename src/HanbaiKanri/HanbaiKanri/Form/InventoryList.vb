@@ -104,16 +104,14 @@ Public Class InventoryList
             DgvList.Columns.Add("メーカー", "Manufacturer")
             DgvList.Columns.Add("品名", "ItemName")
             DgvList.Columns.Add("型式", "Spec")
-            'DgvList.Columns.Add("仕入先", "SupplierName")
             DgvList.Columns.Add("在庫数", "StockQuontity")
-            DgvList.Columns.Add("単位", "Unit")
+            'DgvList.Columns.Add("単位", "Unit")
         Else
             DgvList.Columns.Add("メーカー", "メーカー")
             DgvList.Columns.Add("品名", "品名")
             DgvList.Columns.Add("型式", "型式")
-            'DgvList.Columns.Add("仕入先", "仕入先")
             DgvList.Columns.Add("在庫数", "在庫数")
-            DgvList.Columns.Add("単位", "単位")
+            'DgvList.Columns.Add("単位", "単位")
 
             DgvList.Columns("在庫数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
@@ -130,17 +128,15 @@ Public Class InventoryList
             DgvList.Columns.Add("メーカー", "Manufacturer")
             DgvList.Columns.Add("品名", "ItemName")
             DgvList.Columns.Add("型式", "Spec")
-            'DgvList.Columns.Add("仕入先", "SupplierName")
             DgvList.Columns.Add("在庫数", "StockQuontity")
-            DgvList.Columns.Add("単位", "Unit")
+            'DgvList.Columns.Add("単位", "Unit")
         Else
             DgvList.Columns.Add("倉庫", "倉庫")
             DgvList.Columns.Add("メーカー", "メーカー")
             DgvList.Columns.Add("品名", "品名")
             DgvList.Columns.Add("型式", "型式")
-            'DgvList.Columns.Add("仕入先", "仕入先")
             DgvList.Columns.Add("在庫数", "在庫数")
-            DgvList.Columns.Add("単位", "単位")
+            'DgvList.Columns.Add("単位", "単位")
 
             DgvList.Columns("在庫数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
@@ -165,7 +161,8 @@ Public Class InventoryList
                 '入庫データの取得
                 '
                 Sql = " select "
-                Sql += " t43.メーカー, t43.品名, t43.型式, sum(t43.入庫数量) as 入庫数量, t43.単位 "
+                'Sql += " t43.メーカー, t43.品名, t43.型式, sum(t43.入庫数量) as 入庫数量, t43.単位 "
+                Sql += " t43.メーカー, t43.品名, t43.型式, sum(t43.入庫数量) as 入庫数量 "
                 Sql += " from "
                 Sql += " t43_nyukodt t43 "
 
@@ -179,7 +176,8 @@ Public Class InventoryList
                 Sql += " AND "
                 Sql += " t42.取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'"
                 Sql += " GROUP BY "
-                Sql += " t43.メーカー, t43.品名, t43.型式, t43.単位 "
+                'Sql += " t43.メーカー, t43.品名, t43.型式, t43.単位 "
+                Sql += " t43.メーカー, t43.品名, t43.型式 "
                 Sql += " order by "
                 Sql += " t43.メーカー, t43.品名, t43.型式 "
 
@@ -188,19 +186,23 @@ Public Class InventoryList
                 '出庫データの取得
                 '
                 Sql = " select "
-                Sql += " t45.メーカー, t45.品名, t45.型式, sum(t45.出庫数量) as 出庫数量, t45.単位 "
+                'Sql += " t45.メーカー, t45.品名, t45.型式, sum(t45.出庫数量) as 出庫数量, t45.単位 "
+                Sql += " t45.メーカー, t45.品名, t45.型式, sum(t45.出庫数量) as 出庫数量 "
                 Sql += " from "
                 Sql += " t45_shukodt t45 "
+
                 Sql += " LEFT JOIN "
                 Sql += " t44_shukohd t44 "
                 Sql += " ON  t45.会社コード = t44.会社コード "
                 Sql += " AND  t45.出庫番号 = t44.出庫番号 "
+
                 Sql += " where "
                 Sql += " t45.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
                 Sql += " AND "
                 Sql += " t44.取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'"
                 Sql += " GROUP BY "
-                Sql += " t45.メーカー, t45.品名, t45.型式, t45.単位 "
+                'Sql += " t45.メーカー, t45.品名, t45.型式, t45.単位 "
+                Sql += " t45.メーカー, t45.品名, t45.型式 "
                 Sql += " order by "
                 Sql += " t45.メーカー, t45.品名, t45.型式 "
 
@@ -220,9 +222,8 @@ Public Class InventoryList
                             DgvList.Rows(i).Cells("メーカー").Value = dsNyuko.Tables(RS).Rows(i)("メーカー")
                             DgvList.Rows(i).Cells("品名").Value = dsNyuko.Tables(RS).Rows(i)("品名")
                             DgvList.Rows(i).Cells("型式").Value = dsNyuko.Tables(RS).Rows(i)("型式")
-                            'DgvList.Rows(i).Cells("仕入先").Value = dsNyuko.Tables(RS).Rows(i)("仕入先名")
                             DgvList.Rows(i).Cells("在庫数").Value = dsNyuko.Tables(RS).Rows(i)("入庫数量") - dsShukko.Tables(RS).Rows(x)("出庫数量")
-                            DgvList.Rows(i).Cells("単位").Value = dsNyuko.Tables(RS).Rows(i)("単位")
+                            'DgvList.Rows(i).Cells("単位").Value = dsNyuko.Tables(RS).Rows(i)("単位")
 
                             chkFlg = True '入庫データと出庫データがある場合は true
 
@@ -237,9 +238,8 @@ Public Class InventoryList
                         DgvList.Rows(i).Cells("メーカー").Value = dsNyuko.Tables(RS).Rows(i)("メーカー")
                         DgvList.Rows(i).Cells("品名").Value = dsNyuko.Tables(RS).Rows(i)("品名")
                         DgvList.Rows(i).Cells("型式").Value = dsNyuko.Tables(RS).Rows(i)("型式")
-                        'DgvList.Rows(i).Cells("仕入先").Value = dsNyuko.Tables(RS).Rows(i)("仕入先名")
                         DgvList.Rows(i).Cells("在庫数").Value = dsNyuko.Tables(RS).Rows(i)("入庫数量")
-                        DgvList.Rows(i).Cells("単位").Value = dsNyuko.Tables(RS).Rows(i)("単位")
+                        'DgvList.Rows(i).Cells("単位").Value = dsNyuko.Tables(RS).Rows(i)("単位")
 
                     Else
                         chkFlg = False '初期化
@@ -265,7 +265,8 @@ Public Class InventoryList
                 '入庫データの取得
                 '
                 Sql = " select "
-                Sql += " t43.メーカー, t43.品名, t43.型式, sum(t43.入庫数量) as 入庫数量, t43.単位, t42.倉庫コード, m20.名称 "
+                'Sql += " t43.メーカー, t43.品名, t43.型式, sum(t43.入庫数量) as 入庫数量, t43.単位, t42.倉庫コード, m20.名称 "
+                Sql += " t43.メーカー, t43.品名, t43.型式, sum(t43.入庫数量) as 入庫数量, t42.倉庫コード, m20.名称 "
                 Sql += " from "
                 Sql += " t43_nyukodt t43 "
 
@@ -283,8 +284,11 @@ Public Class InventoryList
                 Sql += " t43.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
                 Sql += " AND "
                 Sql += " t42.取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'"
+
                 Sql += " GROUP BY "
-                Sql += " t43.メーカー, t43.品名, t43.型式, t43.単位, t42.倉庫コード, m20.名称 "
+                'Sql += " t43.メーカー, t43.品名, t43.型式, t43.単位, t42.倉庫コード, m20.名称 "
+                Sql += " t43.メーカー, t43.品名, t43.型式, t42.倉庫コード, m20.名称 "
+
                 Sql += " order by "
                 Sql += " t42.倉庫コード, t43.メーカー, t43.品名, t43.型式 "
 
@@ -293,7 +297,8 @@ Public Class InventoryList
                 '出庫データの取得
                 '
                 Sql = " select "
-                Sql += " t45.メーカー, t45.品名, t45.型式, sum(t45.出庫数量) as 出庫数量, t45.単位, t45.倉庫コード, m20.名称 "
+                'Sql += " t45.メーカー, t45.品名, t45.型式, sum(t45.出庫数量) as 出庫数量, t45.単位, t45.倉庫コード, m20.名称 "
+                Sql += " t45.メーカー, t45.品名, t45.型式, sum(t45.出庫数量) as 出庫数量, t45.倉庫コード, m20.名称 "
                 Sql += " from "
                 Sql += " t45_shukodt t45 "
 
@@ -312,7 +317,8 @@ Public Class InventoryList
                 Sql += " AND "
                 Sql += " t44.取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'"
                 Sql += " GROUP BY "
-                Sql += " t45.メーカー, t45.品名, t45.型式, t45.単位, t45.倉庫コード, m20.名称 "
+                'Sql += " t45.メーカー, t45.品名, t45.型式, t45.単位, t45.倉庫コード, m20.名称 "
+                Sql += " t45.メーカー, t45.品名, t45.型式, t45.倉庫コード, m20.名称 "
                 Sql += " order by "
                 Sql += " t45.倉庫コード, t45.メーカー, t45.品名, t45.型式 "
 
@@ -346,9 +352,8 @@ Public Class InventoryList
                             DgvList.Rows(i).Cells("メーカー").Value = dsNyuko.Tables(RS).Rows(i)("メーカー")
                             DgvList.Rows(i).Cells("品名").Value = dsNyuko.Tables(RS).Rows(i)("品名")
                             DgvList.Rows(i).Cells("型式").Value = dsNyuko.Tables(RS).Rows(i)("型式")
-                            'DgvList.Rows(i).Cells("仕入先").Value = dsNyuko.Tables(RS).Rows(i)("仕入先名")
                             DgvList.Rows(i).Cells("在庫数").Value = dsNyuko.Tables(RS).Rows(i)("入庫数量") - dsShukko.Tables(RS).Rows(x)("出庫数量")
-                            DgvList.Rows(i).Cells("単位").Value = dsNyuko.Tables(RS).Rows(i)("単位")
+                            'DgvList.Rows(i).Cells("単位").Value = dsNyuko.Tables(RS).Rows(i)("単位")
 
                             chkFlg = True '入庫データと出庫データがある場合は true
                         End If
@@ -359,18 +364,16 @@ Public Class InventoryList
                     If chkFlg = False Then
 
                         DgvList.Rows.Add()
+                        DgvList.Rows(i).Cells("倉庫").Value = tmpWarehouseName
                         DgvList.Rows(i).Cells("メーカー").Value = dsNyuko.Tables(RS).Rows(i)("メーカー")
                         DgvList.Rows(i).Cells("品名").Value = dsNyuko.Tables(RS).Rows(i)("品名")
                         DgvList.Rows(i).Cells("型式").Value = dsNyuko.Tables(RS).Rows(i)("型式")
-                        'DgvList.Rows(i).Cells("仕入先").Value = dsNyuko.Tables(RS).Rows(i)("仕入先名")
                         DgvList.Rows(i).Cells("在庫数").Value = dsNyuko.Tables(RS).Rows(i)("入庫数量")
-                        DgvList.Rows(i).Cells("単位").Value = dsNyuko.Tables(RS).Rows(i)("単位")
+                        'DgvList.Rows(i).Cells("単位").Value = dsNyuko.Tables(RS).Rows(i)("単位")
 
                     Else
                         chkFlg = False '初期化
                     End If
-
-
 
                 Next
 
@@ -456,7 +459,7 @@ Public Class InventoryList
                     sheet.Range("B1").Value = "ItemName"
                     sheet.Range("C1").Value = "Spec"
                     sheet.Range("D1").Value = "StockQuontity"
-                    sheet.Range("E1").Value = "Unit"
+                    'sheet.Range("E1").Value = "Unit"
                 End If
 
                 For i As Integer = 0 To DgvList.RowCount - 1
@@ -467,7 +470,7 @@ Public Class InventoryList
                     sheet.Range("B" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("品名").Value
                     sheet.Range("C" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("型式").Value
                     sheet.Range("D" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("在庫数").Value
-                    sheet.Range("E" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("単位").Value
+                    'sheet.Range("E" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("単位").Value
 
                 Next
 
@@ -482,7 +485,7 @@ Public Class InventoryList
                     sheet.Range("C1").Value = "ItemName"
                     sheet.Range("D1").Value = "Spec"
                     sheet.Range("E1").Value = "StockQuontity"
-                    sheet.Range("F1").Value = "Unit"
+                    'sheet.Range("F1").Value = "Unit"
                 End If
 
                 For i As Integer = 0 To DgvList.RowCount - 1
@@ -494,7 +497,7 @@ Public Class InventoryList
                     sheet.Range("C" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("品名").Value
                     sheet.Range("D" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("型式").Value
                     sheet.Range("E" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("在庫数").Value
-                    sheet.Range("F" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("単位").Value
+                    'sheet.Range("F" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("単位").Value
 
                 Next
             End If

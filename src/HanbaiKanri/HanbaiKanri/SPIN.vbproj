@@ -101,6 +101,12 @@
     <Import Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Form\MovementInput.Designer.vb">
+      <DependentUpon>MovementInput.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\MovementInput.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\StockSearch.Designer.vb">
       <DependentUpon>StockSearch.vb</DependentUpon>
     </Compile>
@@ -537,6 +543,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Form\MovementInput.resx">
+      <DependentUpon>MovementInput.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\StockSearch.resx">
       <DependentUpon>StockSearch.vb</DependentUpon>
     </EmbeddedResource>

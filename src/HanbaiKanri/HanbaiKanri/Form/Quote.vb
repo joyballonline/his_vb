@@ -1150,7 +1150,7 @@ Public Class Quote
             End If
 
             Dim openForm As Form = Nothing
-            openForm = New MakerSearch(_msgHd, _db, Me, e.RowIndex, e.ColumnIndex, Maker, Item, Model, selectColumn)   '処理選択
+            openForm = New MakerSearch(_msgHd, _db, Me, e.RowIndex, e.ColumnIndex, Maker, Item, Model, selectColumn, CommonConst.STATUS_ADD)   '処理選択
             openForm.Show(Me)
             Me.Enabled = False
         End If

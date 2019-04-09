@@ -96,7 +96,8 @@ Public Class StockSearch
             '入庫データの取得
             '
             Sql = " select "
-            Sql += " t43.メーカー, t43.品名, t43.型式, sum(t43.入庫数量) as 入庫数量, t43.単位, t42.倉庫コード, m20.名称 "
+            'Sql += " t43.メーカー, t43.品名, t43.型式, sum(t43.入庫数量) as 入庫数量, t43.単位, t42.倉庫コード, m20.名称 "
+            Sql += " t43.メーカー, t43.品名, t43.型式, sum(t43.入庫数量) as 入庫数量, t42.倉庫コード, m20.名称 "
             Sql += " from "
             Sql += " t43_nyukodt t43 "
 
@@ -121,7 +122,8 @@ Public Class StockSearch
             Sql += " AND "
             Sql += " t43.型式 ILIKE '" & spec & "'"
             Sql += " GROUP BY "
-            Sql += " t43.メーカー, t43.品名, t43.型式, t43.単位, t42.倉庫コード, m20.名称 "
+            'Sql += " t43.メーカー, t43.品名, t43.型式, t43.単位, t42.倉庫コード, m20.名称 "
+            Sql += " t43.メーカー, t43.品名, t43.型式, t42.倉庫コード, m20.名称 "
             Sql += " order by "
             Sql += " t42.倉庫コード, t43.メーカー, t43.品名, t43.型式 "
 
@@ -130,7 +132,8 @@ Public Class StockSearch
             '出庫データの取得
             '
             Sql = " select "
-            Sql += " t45.メーカー, t45.品名, t45.型式, sum(t45.出庫数量) as 出庫数量, t45.単位, t45.倉庫コード, m20.名称 "
+            'Sql += " t45.メーカー, t45.品名, t45.型式, sum(t45.出庫数量) as 出庫数量, t45.単位, t45.倉庫コード, m20.名称 "
+            Sql += " t45.メーカー, t45.品名, t45.型式, sum(t45.出庫数量) as 出庫数量, t45.倉庫コード, m20.名称 "
             Sql += " from "
             Sql += " t45_shukodt t45 "
 
@@ -155,7 +158,8 @@ Public Class StockSearch
             Sql += " AND "
             Sql += " t45.型式 ILIKE '" & spec & "'"
             Sql += " GROUP BY "
-            Sql += " t45.メーカー, t45.品名, t45.型式, t45.単位, t45.倉庫コード, m20.名称 "
+            'Sql += " t45.メーカー, t45.品名, t45.型式, t45.単位, t45.倉庫コード, m20.名称 "
+            Sql += " t45.メーカー, t45.品名, t45.型式, t45.倉庫コード, m20.名称 "
             Sql += " order by "
             Sql += " t45.倉庫コード, t45.メーカー, t45.品名, t45.型式 "
 
