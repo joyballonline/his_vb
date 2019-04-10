@@ -85,14 +85,14 @@ Public Class MakerSearch
 
     End Sub
 
-    Private Sub MstHanyoue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub MakerSearch_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-            LblMaker.Text = "Maker"
-            LblItem.Text = "Item"
-            LblModel.Text = "Model"
+            LblManufacturer.Text = "Maker"
+            LblItemName.Text = "Item"
+            LblSpec.Text = "Model"
             BtnSelect.Text = "Select"
             BtnBack.Text = "Back"
-
         End If
 
         Dim Sql As String = ""
@@ -100,82 +100,33 @@ Public Class MakerSearch
 
         Try
             '一覧クリア
-            LbMaker.Items.Clear()
-            LbItem.Items.Clear()
-            LbModel.Items.Clear()
+            LbManufacturer.Items.Clear()
+            LbItemName.Items.Clear()
+            LbSpec.Items.Clear()
 
+            '選択していたカラムによって振分
             If SelectColumn = "メーカー" Then
-                Sql = "SELECT "
-                Sql += "メーカー "
-                Sql += "FROM "
-                Sql += "public"
-                Sql += "."
-                Sql += "t02_mitdt"
-                Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
 
-                Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-                '重複無しのメーカリスト
-                For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-                    If LbMaker.Items.Contains(ds.Tables(RS).Rows(i)(0)) = False Then
-                        LbMaker.Items.Add(ds.Tables(RS).Rows(i)(0))
-                    End If
-                Next
+                setManufacturer()
 
             ElseIf SelectColumn = "品名" Then
 
-                LbMaker.Items.Add(Maker)
-                LbMaker.SetSelected(0, True)
-                Sql = "SELECT "
-                Sql += " 品名 "
-                Sql += "FROM "
-                Sql += "public"
-                Sql += "."
-                Sql += "t02_mitdt"
-                Sql += " WHERE "
-                Sql += "メーカー"
-                Sql += " = "
-                Sql += "'"
-                Sql += Maker
-                Sql += "'"
-                Sql += " AND 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                LbManufacturer.Items.Add(Maker)
+                LbManufacturer.SetSelected(0, True)
 
-                Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
+                setItemName(Maker)
 
-                For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-                    If LbItem.Items.Contains(ds.Tables(RS).Rows(i)(0)) = False Then
-                        LbItem.Items.Add(ds.Tables(RS).Rows(i)(0))
-                    End If
-                Next
             ElseIf SelectColumn = "型式" Then
-                LbMaker.Items.Add(Maker)
-                LbMaker.SetSelected(0, True)
-                LbItem.Items.Add(Item)
-                LbItem.SetSelected(0, True)
 
-                Sql += "SELECT "
-                Sql += " 型式 "
-                Sql += "FROM "
-                Sql += "public"
-                Sql += "."
-                Sql += "t02_mitdt"
-                Sql += " WHERE "
-                Sql += "品名"
-                Sql += " = '"
-                Sql += Item
-                Sql += "'"
-                Sql += " AND 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                LbManufacturer.Items.Add(Maker)
+                LbManufacturer.SetSelected(0, True)
+                LbItemName.Items.Add(Item)
+                LbItemName.SetSelected(0, True)
 
-                Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
+                setSpec(Maker, Item)
 
-                For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-                    If LbModel.Items.Contains(ds.Tables(RS).Rows(i)(0)) = False Then
-                        LbModel.Items.Add(ds.Tables(RS).Rows(i)(0))
-                    End If
-                Next
             End If
 
-
         Catch ue As UsrDefException
             ue.dspMsg()
             Throw ue
@@ -185,33 +136,16 @@ Public Class MakerSearch
         End Try
     End Sub
 
-    Private Sub LbMaker_IndexChanged(sender As Object, e As EventArgs) Handles LbMaker.MouseClick
-        LbItem.Items.Clear()
-        LbModel.Items.Clear()
+    'メーカーリストボックス選択時
+    Private Sub LbMaker_IndexChanged(sender As Object, e As EventArgs) Handles LbManufacturer.MouseClick
+        'リストボックス初期化
+        LbItemName.Items.Clear()
+        LbSpec.Items.Clear()
 
         Dim Sql As String = ""
         Try
-            Sql += "SELECT "
-            Sql += " 品名 "
-            Sql += "FROM "
-            Sql += "public"
-            Sql += "."
-            Sql += "t02_mitdt"
-            Sql += " WHERE "
-            Sql += "メーカー"
-            Sql += " ILIKE "
-            Sql += "'%"
-            Sql += LbMaker.SelectedItem
-            Sql += "%'"
 
-            Dim reccnt As Integer = 0
-            Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-            For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-                If LbItem.Items.Contains(ds.Tables(RS).Rows(index)(0)) = False Then
-                    LbItem.Items.Add(ds.Tables(RS).Rows(index)(0))
-                End If
-            Next
+            setItemName(LbManufacturer.SelectedItem)
 
         Catch ue As UsrDefException
             ue.dspMsg()
@@ -223,32 +157,14 @@ Public Class MakerSearch
 
     End Sub
 
-    Private Sub LbItem_IndexChanged(sender As Object, e As EventArgs) Handles LbItem.MouseClick
-        LbModel.Items.Clear()
+    '品名リストボックス選択時
+    Private Sub LbItem_IndexChanged(sender As Object, e As EventArgs) Handles LbItemName.MouseClick
+        LbSpec.Items.Clear()
 
         Dim Sql As String = ""
         Try
-            Sql += "SELECT "
-            Sql += " 型式 "
-            Sql += "FROM "
-            Sql += "public"
-            Sql += "."
-            Sql += "t02_mitdt"
-            Sql += " WHERE "
-            Sql += "品名"
-            Sql += " ILIKE "
-            Sql += "'%"
-            Sql += LbItem.SelectedItem
-            Sql += "%'"
 
-            Dim reccnt As Integer = 0
-            Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-            For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-                If LbModel.Items.Contains(ds.Tables(RS).Rows(index)(0)) = False Then
-                    LbModel.Items.Add(ds.Tables(RS).Rows(index)(0))
-                End If
-            Next
+            setSpec(LbManufacturer.SelectedItem, LbItemName.SelectedItem)
 
         Catch ue As UsrDefException
             ue.dspMsg()
@@ -267,23 +183,23 @@ Public Class MakerSearch
             '複製モード
             Dim frm As Ordering = CType(Me.Owner, Ordering)
 
-            frm.DgvItemList("メーカー", RowIdx).Value = IIf(LbMaker.SelectedIndex > -1, LbMaker.SelectedItem, "")
-            frm.DgvItemList("品名", RowIdx).Value = IIf(LbItem.SelectedIndex > -1, LbItem.SelectedItem, "")
-            frm.DgvItemList("型式", RowIdx).Value = IIf(LbModel.SelectedIndex > -1, LbModel.SelectedItem, "")
+            frm.DgvItemList("メーカー", RowIdx).Value = IIf(LbManufacturer.SelectedIndex > -1, LbManufacturer.SelectedItem, "")
+            frm.DgvItemList("品名", RowIdx).Value = IIf(LbItemName.SelectedIndex > -1, LbItemName.SelectedItem, "")
+            frm.DgvItemList("型式", RowIdx).Value = IIf(LbSpec.SelectedIndex > -1, LbSpec.SelectedItem, "")
 
         ElseIf _status = CommonConst.STATUS_ADD Then
             '見積登録モード
             Dim frm As Quote = CType(Me.Owner, Quote)
-            frm.DgvItemList("メーカー", RowIdx).Value = IIf(LbMaker.SelectedIndex > -1, LbMaker.SelectedItem, "")
-            frm.DgvItemList("品名", RowIdx).Value = IIf(LbItem.SelectedIndex > -1, LbItem.SelectedItem, "")
-            frm.DgvItemList("型式", RowIdx).Value = IIf(LbModel.SelectedIndex > -1, LbModel.SelectedItem, "")
+            frm.DgvItemList("メーカー", RowIdx).Value = IIf(LbManufacturer.SelectedIndex > -1, LbManufacturer.SelectedItem, "")
+            frm.DgvItemList("品名", RowIdx).Value = IIf(LbItemName.SelectedIndex > -1, LbItemName.SelectedItem, "")
+            frm.DgvItemList("型式", RowIdx).Value = IIf(LbSpec.SelectedIndex > -1, LbSpec.SelectedItem, "")
 
         Else
             '移動入力画面
             Dim frm As MovementInput = CType(Me.Owner, MovementInput)
-            frm.DgvList("メーカー", RowIdx).Value = IIf(LbMaker.SelectedIndex > -1, LbMaker.SelectedItem, "")
-            frm.DgvList("品名", RowIdx).Value = IIf(LbItem.SelectedIndex > -1, LbItem.SelectedItem, "")
-            frm.DgvList("型式", RowIdx).Value = IIf(LbModel.SelectedIndex > -1, LbModel.SelectedItem, "")
+            frm.DgvList("メーカー", RowIdx).Value = IIf(LbManufacturer.SelectedIndex > -1, LbManufacturer.SelectedItem, "")
+            frm.DgvList("品名", RowIdx).Value = IIf(LbItemName.SelectedIndex > -1, LbItemName.SelectedItem, "")
+            frm.DgvList("型式", RowIdx).Value = IIf(LbSpec.SelectedIndex > -1, LbSpec.SelectedItem, "")
         End If
 
 
@@ -292,9 +208,108 @@ Public Class MakerSearch
         Me.Dispose()
     End Sub
 
+    '戻るボタン押下時
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
         _parentForm.Enabled = True
         _parentForm.Show()
         Me.Dispose()
     End Sub
+
+    'メーカーセット
+    Private Sub setManufacturer(Optional ByRef prmManufacturer As String = "")
+        Dim Sql As String = ""
+        Dim reccnt As Integer = 0
+
+        Sql = "SELECT "
+        Sql += "メーカー "
+        Sql += "FROM t02_mitdt"
+
+        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += IIf(prmManufacturer <> "", " AND メーカー ILIKE '%" & prmManufacturer & "%'", "")
+        Sql += " GROUP BY メーカー "
+        Sql += " ORDER BY メーカー"
+
+        Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+        '重複無しのメーカリスト
+        For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+            LbManufacturer.Items.Add(ds.Tables(RS).Rows(i)(0))
+        Next
+
+    End Sub
+
+    '品名セット
+    Private Sub setItemName(ByVal prmManufacturer As String, Optional ByRef prmItemName As String = "")
+        Dim Sql As String = ""
+        Dim reccnt As Integer = 0
+
+        Sql = "SELECT "
+        Sql += " 品名 "
+        Sql += "FROM t02_mitdt"
+
+        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " AND "
+        Sql += "メーカー = '" & prmManufacturer & "'"
+        Sql += IIf(prmItemName <> "", " AND 品名 ILIKE '%" & prmItemName & "%'", "")
+        Sql += " GROUP BY メーカー, 品名"
+        Sql += " ORDER BY メーカー, 品名"
+
+        Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+        For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+            LbItemName.Items.Add(ds.Tables(RS).Rows(i)(0))
+        Next
+
+    End Sub
+
+    '型式セット
+    Private Sub setSpec(ByVal prmManufacturer As String, ByVal prmItemName As String, Optional ByRef prmSpec As String = "")
+        Dim Sql As String = ""
+        Dim reccnt As Integer = 0
+
+        Sql += "SELECT "
+        Sql += " 型式 "
+        Sql += "FROM t02_mitdt"
+
+        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " AND "
+        Sql += "メーカー = '" & prmManufacturer & "'"
+        Sql += " AND "
+        Sql += "品名 = '" & prmItemName & "'"
+        Sql += IIf(prmSpec <> "", " AND 型式 ILIKE '%" & prmSpec & "%'", "")
+        Sql += " GROUP BY メーカー, 品名, 型式"
+        Sql += " ORDER BY メーカー, 品名, 型式"
+
+        Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+        For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+            LbSpec.Items.Add(ds.Tables(RS).Rows(i)(0))
+        Next
+
+    End Sub
+
+    'メーカー検索
+    Private Sub TxtManufacturer_TextChanged(sender As Object, e As EventArgs) Handles TxtManufacturer.TextChanged
+        LbManufacturer.Items.Clear()
+        LbItemName.Items.Clear()
+        LbSpec.Items.Clear()
+
+        setManufacturer(TxtManufacturer.Text)
+    End Sub
+
+    '品名検索
+    Private Sub TxtItemName_TextChanged(sender As Object, e As EventArgs) Handles TxtItemName.TextChanged
+        LbItemName.Items.Clear()
+        LbSpec.Items.Clear()
+
+        setItemName(LbManufacturer.SelectedItem, TxtItemName.Text)
+    End Sub
+
+    '型式検索
+    Private Sub TxtSpec_TextChanged(sender As Object, e As EventArgs) Handles TxtSpec.TextChanged
+        LbSpec.Items.Clear()
+
+        setSpec(LbManufacturer.SelectedItem, LbItemName.SelectedItem, TxtSpec.Text)
+    End Sub
+
 End Class
