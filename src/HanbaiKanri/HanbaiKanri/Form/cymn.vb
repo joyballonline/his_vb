@@ -453,6 +453,14 @@ Public Class Cymn
         Dim dtNow As DateTime = DateTime.Now
         Dim strNow As String = UtilClass.formatDatetime(dtNow)
 
+        '受発注登録時に受注金額が0の場合アラートで警告
+        If TxtOrderAmount.Text = 0 Then
+            '対象のデータではないことをアラートする
+            Dim result = _msgHd.dspMSG("confirmOrderAmountZERO", frmC01F10_Login.loginValue.Language)
+            If result = DialogResult.No Then
+                Exit Sub
+            End If
+        End If
 
         '仕入先が stockじゃなかったら
         If TxtCustomerCode.Text <> "stock" Then
