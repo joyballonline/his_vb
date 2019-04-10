@@ -76,6 +76,109 @@ Public Class OrderList
         DgvCymnhd.AutoSizeColumnsMode = DataGridViewAutoSizeColumnMode.DisplayedCells
     End Sub
 
+    Private Sub MstHanyoue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If OrderStatus = CommonConst.STATUS_SALES Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+                LblMode.Text = "SalesInputMode"
+            Else
+                LblMode.Text = "売上入力モード"
+            End If
+
+            BtnSales.Visible = True
+            BtnSales.Location = New Point(997, 509)
+        ElseIf OrderStatus = CommonConst.STATUS_GOODS_ISSUE Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+                LblMode.Text = "GoodsDeliveryInputMode"
+            Else
+                LblMode.Text = "出庫入力モード"
+            End If
+
+            BtnGoodsIssue.Visible = True
+            BtnGoodsIssue.Location = New Point(997, 509)
+        ElseIf OrderStatus = CommonConst.STATUS_EDIT Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+                LblMode.Text = "EditMode"
+            Else
+                LblMode.Text = "編集モード"
+            End If
+
+            BtnOrderEdit.Visible = True
+            BtnOrderEdit.Location = New Point(997, 509)
+        ElseIf OrderStatus = CommonConst.STATUS_VIEW Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+                LblMode.Text = "ViewMode"
+            Else
+                LblMode.Text = "参照モード"
+            End If
+
+            BtnOrderView.Visible = True
+            BtnOrderView.Location = New Point(997, 509)
+        ElseIf OrderStatus = CommonConst.STATUS_CANCEL Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+                LblMode.Text = "CancelMode"
+            Else
+                LblMode.Text = "取消モード"
+            End If
+
+            BtnOrderCancel.Visible = True
+            BtnOrderCancel.Location = New Point(997, 509)
+        ElseIf OrderStatus = CommonConst.STATUS_CLONE Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+                LblMode.Text = "NewCopyMode"
+            Else
+                LblMode.Text = "新規複写モード"
+            End If
+
+            BtnOrderClone.Visible = True
+            BtnOrderClone.Location = New Point(997, 509)
+        ElseIf OrderStatus = CommonConst.STATUS_BILL Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+                LblMode.Text = "BillingRegistrationMode"
+            Else
+                LblMode.Text = "請求登録モード"
+            End If
+
+            BtnBill.Visible = True
+            BtnBill.Location = New Point(997, 509)
+        End If
+
+        '検索（Date）の初期値
+        dtOrderDateSince.Value = DateAdd("d", CommonConst.SINCE_DEFAULT_DAY, DateTime.Today)
+        dtOrderDateUntil.Value = DateTime.Today
+
+        OrderListLoad() '一覧表示
+
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+            LblConditions.Text = "TermsOfSelection"
+            Label1.Text = "CustomerName"
+            Label2.Text = "Address"
+            Label3.Text = "PhoneNumber"
+            Label4.Text = "CustomerCode"
+            Label8.Text = "OrderDate"
+            Label7.Text = "OrdernNumber"
+            Label6.Text = "SalesPersonInCharge"
+            Label11.Text = "CustomerNumber"
+            Label10.Text = "DisplayFormat"
+            RbtnSlip.Text = "UnitOfVoucher"
+
+            RbtnDetails.Text = "LineItemUnit"
+            RbtnDetails.Location = New Point(166, 202)
+
+            ChkCancelData.Text = "IncludeCancelData"
+            ChkCancelData.Location = New Point(556, 203)
+
+            BtnOrderSearch.Text = "Search"
+            BtnBill.Text = "BillingRegistration"
+            BtnOrderCancel.Text = "CancelOfOrder"
+            BtnSales.Text = "SalesRagistration"
+            BtnGoodsIssue.Text = "GoodsIssueRegistration"
+            BtnOrderClone.Text = "OrderCopy"
+            BtnOrderView.Text = "OrderView"
+            BtnOrderEdit.Text = "OrderEdit"
+            BtnBack.Text = "Back"
+        End If
+    End Sub
+
     '受注一覧を表示
     Private Sub OrderListLoad(Optional ByRef prmRefStatus As String = "")
         '一覧をクリア
@@ -85,7 +188,290 @@ Public Class OrderList
         Dim reccnt As Integer = 0 'DB用（デフォルト）
         Dim Sql As String = ""
 
+        '抽出条件
+        Dim customerName As String = escapeSql(TxtCustomerName.Text)
+        Dim customerAddress As String = escapeSql(TxtAddress.Text)
+        Dim customerTel As String = escapeSql(TxtTel.Text)
+        Dim customerCode As String = escapeSql(TxtCustomerCode.Text)
+        Dim sinceDate As String = UtilClass.strFormatDate(dtOrderDateSince.Text)
+        Dim untilDate As String = UtilClass.strFormatDate(dtOrderDateUntil.Text)
+        Dim sinceNum As String = escapeSql(TxtOrderSince.Text)
+        Dim untilNum As String = escapeSql(TxtOrderUntil.Text)
+        Dim salesName As String = escapeSql(TxtSales.Text)
+        Dim customerPO As String = escapeSql(TxtCustomerPO.Text)
+
         Try
+
+            '出庫登録時は入庫されているデータのみ出力
+            If OrderStatus = CommonConst.STATUS_GOODS_ISSUE Then
+
+                '伝票単位の場合
+                If RbtnSlip.Checked Then
+
+                    Sql = " SELECT t10.*, t42.入庫番号 "
+                    Sql += " FROM t10_cymnhd t10 "
+
+                    Sql += " LEFT JOIN t20_hattyu t20 "
+                    Sql += " ON t10.会社コード = t20.会社コード "
+                    Sql += " AND t10.受注番号 = t20.受注番号 "
+                    Sql += " AND t10.受注番号枝番 = t20.受注番号枝番 "
+
+                    Sql += " LEFT JOIN t42_nyukohd t42 "
+                    Sql += " ON t20.会社コード = t42.会社コード "
+                    Sql += " AND t20.発注番号 = t42.発注番号 "
+                    Sql += " AND t20.発注番号枝番 = t42.発注番号枝番 "
+
+                    Sql += " WHERE t10.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "' "
+                    Sql += " AND t20.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
+                    Sql += " AND t42.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
+
+                    If customerName <> Nothing Then
+                        Sql += " AND "
+                        Sql += " t10.得意先名 ILIKE '%" & customerName & "%' "
+                    End If
+
+                    If customerAddress <> Nothing Then
+                        Sql += " AND "
+                        Sql += " t10.得意先住所 ILIKE '%" & customerAddress & "%' "
+                    End If
+
+                    If customerTel <> Nothing Then
+                        Sql += " AND "
+                        Sql += " t10.得意先電話番号 ILIKE '%" & customerTel & "%' "
+                    End If
+
+                    If customerCode <> Nothing Then
+                        Sql += " AND "
+                        Sql += " t10.得意先コード ILIKE '%" & customerCode & "%' "
+                    End If
+
+                    If sinceDate <> Nothing Then
+                        Sql += " AND "
+                        Sql += " t10.受注日 >= '" & sinceDate & "'"
+                    End If
+                    If untilDate <> Nothing Then
+                        Sql += " AND "
+                        Sql += " t10.受注日 <= '" & untilDate & "'"
+                    End If
+
+                    If sinceNum <> Nothing Then
+                        Sql += " AND "
+                        Sql += " t10.受注番号 >= '" & sinceNum & "' "
+                    End If
+                    If untilNum <> Nothing Then
+                        Sql += " AND "
+                        Sql += " t10.受注番号 <= '" & untilNum & "' "
+                    End If
+
+                    If salesName <> Nothing Then
+                        Sql += " AND "
+                        Sql += " t10.営業担当者 ILIKE '%" & salesName & "%' "
+                    End If
+
+                    If customerPO <> Nothing Then
+                        Sql += " AND "
+                        Sql += " t10.客先番号 ILIKE '%" & customerPO & "%' "
+                    End If
+
+                    '取消データを含めない場合
+                    If ChkCancelData.Checked = False Then
+                        Sql += " AND "
+                        Sql += " t10.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+                    End If
+
+                    Sql += " ORDER BY "
+                    Sql += " t10.登録日 DESC"
+
+                    'Console.WriteLine(Sql)
+
+                    ds = _db.selectDB(Sql, RS, reccnt)
+
+                    setHdColumns() '表示カラムの設定
+
+                    For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+
+                        If ds.Tables(RS).Rows(i)("入庫番号") <> "" Then
+
+                            DgvCymnhd.Rows.Add()
+                            DgvCymnhd.Rows(i).Cells("取消").Value = getDelKbnTxt(ds.Tables(RS).Rows(i)("取消区分"))
+                            DgvCymnhd.Rows(i).Cells("受注番号").Value = ds.Tables(RS).Rows(i)("受注番号")
+                            DgvCymnhd.Rows(i).Cells("受注番号枝番").Value = ds.Tables(RS).Rows(i)("受注番号枝番")
+                            DgvCymnhd.Rows(i).Cells("客先番号").Value = ds.Tables(RS).Rows(i)("客先番号")
+                            DgvCymnhd.Rows(i).Cells("受注日").Value = ds.Tables(RS).Rows(i)("受注日").ToShortDateString()
+                            DgvCymnhd.Rows(i).Cells("見積番号").Value = ds.Tables(RS).Rows(i)("見積番号")
+                            DgvCymnhd.Rows(i).Cells("見積番号枝番").Value = ds.Tables(RS).Rows(i)("見積番号枝番")
+                            DgvCymnhd.Rows(i).Cells("見積日").Value = ds.Tables(RS).Rows(i)("見積日").ToShortDateString()
+                            DgvCymnhd.Rows(i).Cells("見積有効期限").Value = ds.Tables(RS).Rows(i)("見積有効期限").ToShortDateString()
+                            DgvCymnhd.Rows(i).Cells("得意先コード").Value = ds.Tables(RS).Rows(i)("得意先コード")
+                            DgvCymnhd.Rows(i).Cells("得意先名").Value = ds.Tables(RS).Rows(i)("得意先名")
+                            DgvCymnhd.Rows(i).Cells("得意先郵便番号").Value = ds.Tables(RS).Rows(i)("得意先郵便番号")
+                            DgvCymnhd.Rows(i).Cells("得意先住所").Value = ds.Tables(RS).Rows(i)("得意先住所")
+                            DgvCymnhd.Rows(i).Cells("得意先電話番号").Value = ds.Tables(RS).Rows(i)("得意先電話番号")
+                            DgvCymnhd.Rows(i).Cells("得意先ＦＡＸ").Value = ds.Tables(RS).Rows(i)("得意先ＦＡＸ")
+                            DgvCymnhd.Rows(i).Cells("得意先担当者名").Value = ds.Tables(RS).Rows(i)("得意先担当者名")
+                            DgvCymnhd.Rows(i).Cells("得意先担当者役職").Value = ds.Tables(RS).Rows(i)("得意先担当者役職")
+                            DgvCymnhd.Rows(i).Cells("ＶＡＴ").Value = ds.Tables(RS).Rows(i)("ＶＡＴ")
+                            DgvCymnhd.Rows(i).Cells("受注金額").Value = ds.Tables(RS).Rows(i)("見積金額")
+                            DgvCymnhd.Rows(i).Cells("仕入金額").Value = ds.Tables(RS).Rows(i)("仕入金額")
+                            DgvCymnhd.Rows(i).Cells("粗利額").Value = ds.Tables(RS).Rows(i)("粗利額")
+                            DgvCymnhd.Rows(i).Cells("支払条件").Value = ds.Tables(RS).Rows(i)("支払条件")
+                            DgvCymnhd.Rows(i).Cells("営業担当者").Value = ds.Tables(RS).Rows(i)("営業担当者")
+                            DgvCymnhd.Rows(i).Cells("入力担当者").Value = ds.Tables(RS).Rows(i)("入力担当者")
+                            DgvCymnhd.Rows(i).Cells("備考").Value = ds.Tables(RS).Rows(i)("備考")
+                            DgvCymnhd.Rows(i).Cells("登録日").Value = ds.Tables(RS).Rows(i)("登録日")
+                            DgvCymnhd.Rows(i).Cells("更新者").Value = ds.Tables(RS).Rows(i)("更新者")
+                            DgvCymnhd.Rows(i).Cells("更新日").Value = ds.Tables(RS).Rows(i)("更新日")
+
+                        End If
+
+                    Next
+
+                Else
+                    '明細単位
+
+                    Sql = "SELECT t11.*, t10.取消区分, t42.入庫番号 "
+                    Sql += " FROM t11_cymndt t11 "
+
+                    Sql += " LEFT JOIN  t10_cymnhd t10 "
+                    Sql += " ON t11.会社コード = t10.会社コード "
+                    Sql += " AND t11.受注番号 = t10.受注番号 "
+                    Sql += " AND t11.受注番号枝番 = t10.受注番号枝番 "
+
+                    Sql += " LEFT JOIN t20_hattyu t20 "
+                    Sql += " ON t10.会社コード = t20.会社コード "
+                    Sql += " AND t10.受注番号 = t20.受注番号 "
+                    Sql += " AND t10.受注番号枝番 = t20.受注番号枝番 "
+
+                    Sql += " LEFT JOIN t42_nyukohd t42 "
+                    Sql += " ON t20.会社コード = t42.会社コード "
+                    Sql += " AND t20.発注番号 = t42.発注番号 "
+                    Sql += " AND t20.発注番号枝番 = t42.発注番号枝番 "
+
+                    Sql += " WHERE t11.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                    Sql += " AND t20.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
+                    Sql += " AND t42.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
+
+                    If customerName <> Nothing Then
+                        Sql += " AND "
+                        Sql += " t10.得意先名 ILIKE '%" & customerName & "%' "
+                    End If
+
+                    If customerAddress <> Nothing Then
+                        Sql += " AND "
+                        Sql += " t10.得意先住所 ILIKE '%" & customerAddress & "%' "
+                    End If
+
+                    If customerTel <> Nothing Then
+                        Sql += " AND "
+                        Sql += " t10.得意先電話番号 ILIKE '%" & customerTel & "%' "
+                    End If
+
+                    If customerCode <> Nothing Then
+                        Sql += " AND "
+                        Sql += " t10.得意先コード ILIKE '%" & customerCode & "%' "
+                    End If
+
+                    If sinceDate <> Nothing Then
+                        Sql += " AND "
+                        Sql += " t10.受注日 >= '" & sinceDate & "'"
+                    End If
+                    If untilDate <> Nothing Then
+                        Sql += " AND "
+                        Sql += " t10.受注日 <= '" & untilDate & "'"
+                    End If
+
+                    If sinceNum <> Nothing Then
+                        Sql += " AND "
+                        Sql += " t11.受注番号 >= '" & sinceNum & "' "
+                    End If
+                    If untilNum <> Nothing Then
+                        Sql += " AND "
+                        Sql += " t11.受注番号 <= '" & untilNum & "' "
+                    End If
+
+                    If salesName <> Nothing Then
+                        Sql += " AND "
+                        Sql += " t10.営業担当者 ILIKE '%" & salesName & "%' "
+                    End If
+
+                    If customerPO <> Nothing Then
+                        Sql += " AND "
+                        Sql += " t10.客先番号 ILIKE '%" & customerPO & "%' "
+                    End If
+
+                    '取消データを含めない場合
+                    If ChkCancelData.Checked = False Then
+                        Sql += " AND "
+                        Sql += " t10.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+                    End If
+
+                    Sql += " ORDER BY "
+                    Sql += " t11.登録日 DESC"
+
+                    ds = _db.selectDB(Sql, RS, reccnt)
+
+                    setDtColumns() '表示カラムの設定
+
+                    Dim tmp1 As String = ""
+                    For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+
+                        DgvCymnhd.Rows.Add()
+                        DgvCymnhd.Rows(index).Cells("取消").Value = getDelKbnTxt(ds.Tables(RS).Rows(index)("取消区分"))
+                        DgvCymnhd.Rows(index).Cells("受注番号").Value = ds.Tables(RS).Rows(index)("受注番号")
+                        DgvCymnhd.Rows(index).Cells("受注番号枝番").Value = ds.Tables(RS).Rows(index)("受注番号枝番")
+                        DgvCymnhd.Rows(index).Cells("行番号").Value = ds.Tables(RS).Rows(index)("行番号")
+
+                        '汎用マスタから仕入区分を取得
+                        Dim dsSireKbn As DataSet = getDsHanyoData(CommonConst.FIXED_KEY_PURCHASING_CLASS, ds.Tables(RS).Rows(index)("仕入区分").ToString)
+                        DgvCymnhd.Rows(index).Cells("仕入区分").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
+                                                                    dsSireKbn.Tables(RS).Rows(0)("文字２"),
+                                                                    dsSireKbn.Tables(RS).Rows(0)("文字１"))
+
+                        DgvCymnhd.Rows(index).Cells("メーカー").Value = ds.Tables(RS).Rows(index)("メーカー")
+                        DgvCymnhd.Rows(index).Cells("品名").Value = ds.Tables(RS).Rows(index)("品名")
+                        DgvCymnhd.Rows(index).Cells("型式").Value = ds.Tables(RS).Rows(index)("型式")
+                        DgvCymnhd.Rows(index).Cells("仕入先名").Value = ds.Tables(RS).Rows(index)("仕入先名")
+                        DgvCymnhd.Rows(index).Cells("仕入値").Value = ds.Tables(RS).Rows(index)("仕入値")
+                        DgvCymnhd.Rows(index).Cells("受注数量").Value = ds.Tables(RS).Rows(index)("受注数量")
+                        DgvCymnhd.Rows(index).Cells("売上数量").Value = ds.Tables(RS).Rows(index)("売上数量")
+                        DgvCymnhd.Rows(index).Cells("受注残数").Value = ds.Tables(RS).Rows(index)("受注残数")
+                        DgvCymnhd.Rows(index).Cells("単位").Value = ds.Tables(RS).Rows(index)("単位")
+                        DgvCymnhd.Rows(index).Cells("間接費").Value = ds.Tables(RS).Rows(index)("間接費")
+                        DgvCymnhd.Rows(index).Cells("売単価").Value = ds.Tables(RS).Rows(index)("売単価")
+                        DgvCymnhd.Rows(index).Cells("売上金額").Value = ds.Tables(RS).Rows(index)("売上金額")
+                        DgvCymnhd.Rows(index).Cells("粗利額").Value = ds.Tables(RS).Rows(index)("粗利額")
+                        DgvCymnhd.Rows(index).Cells("粗利率").Value = ds.Tables(RS).Rows(index)("粗利率")
+
+                        If ds.Tables(RS).Rows(index)("リードタイム単位") Is DBNull.Value Then
+
+                            'リードタイムが空だったらそのまま
+                            DgvCymnhd.Rows(index).Cells("リードタイム").Value = ds.Tables(RS).Rows(index)("リードタイム")
+
+                        Else
+
+                            'リードタイムが入っていたら汎用マスタから単位を取得して連結する
+                            Sql = " AND 固定キー = '4'"
+                            Sql += " AND 可変キー = '" & ds.Tables(RS).Rows(index)("リードタイム単位").ToString & "'"
+
+                            Dim dsHanyo As DataSet = getDsData("m90_hanyo", Sql)
+
+                            tmp1 = ""
+                            tmp1 += ds.Tables(RS).Rows(index)("リードタイム")
+                            tmp1 += dsHanyo.Tables(RS).Rows(0)("文字１")
+                            DgvCymnhd.Rows(index).Cells("リードタイム").Value = tmp1
+                        End If
+
+                        DgvCymnhd.Rows(index).Cells("出庫数").Value = ds.Tables(RS).Rows(index)("出庫数")
+                        DgvCymnhd.Rows(index).Cells("未出庫数").Value = ds.Tables(RS).Rows(index)("未出庫数")
+                        DgvCymnhd.Rows(index).Cells("備考").Value = ds.Tables(RS).Rows(index)("備考")
+                        DgvCymnhd.Rows(index).Cells("更新者").Value = ds.Tables(RS).Rows(index)("更新者")
+                        DgvCymnhd.Rows(index).Cells("登録日").Value = ds.Tables(RS).Rows(index)("登録日")
+                    Next
+                End If
+
+                Exit Sub
+
+            End If
 
             '伝票単位の場合
             If RbtnSlip.Checked Then
@@ -100,60 +486,49 @@ Public Class OrderList
 
                 setHdColumns() '表示カラムの設定
 
-                For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+                For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
                     DgvCymnhd.Rows.Add()
-                    DgvCymnhd.Rows(index).Cells("取消").Value = getDelKbnTxt(ds.Tables(RS).Rows(index)("取消区分"))
-                    DgvCymnhd.Rows(index).Cells("受注番号").Value = ds.Tables(RS).Rows(index)("受注番号")
-                    DgvCymnhd.Rows(index).Cells("受注番号枝番").Value = ds.Tables(RS).Rows(index)("受注番号枝番")
-                    DgvCymnhd.Rows(index).Cells("客先番号").Value = ds.Tables(RS).Rows(index)("客先番号")
-                    DgvCymnhd.Rows(index).Cells("受注日").Value = ds.Tables(RS).Rows(index)("受注日").ToShortDateString()
-                    DgvCymnhd.Rows(index).Cells("見積番号").Value = ds.Tables(RS).Rows(index)("見積番号")
-                    DgvCymnhd.Rows(index).Cells("見積番号枝番").Value = ds.Tables(RS).Rows(index)("見積番号枝番")
-                    DgvCymnhd.Rows(index).Cells("見積日").Value = ds.Tables(RS).Rows(index)("見積日").ToShortDateString()
-                    DgvCymnhd.Rows(index).Cells("見積有効期限").Value = ds.Tables(RS).Rows(index)("見積有効期限").ToShortDateString()
-                    DgvCymnhd.Rows(index).Cells("得意先コード").Value = ds.Tables(RS).Rows(index)("得意先コード")
-                    DgvCymnhd.Rows(index).Cells("得意先名").Value = ds.Tables(RS).Rows(index)("得意先名")
-                    DgvCymnhd.Rows(index).Cells("得意先郵便番号").Value = ds.Tables(RS).Rows(index)("得意先郵便番号")
-                    DgvCymnhd.Rows(index).Cells("得意先住所").Value = ds.Tables(RS).Rows(index)("得意先住所")
-                    DgvCymnhd.Rows(index).Cells("得意先電話番号").Value = ds.Tables(RS).Rows(index)("得意先電話番号")
-                    DgvCymnhd.Rows(index).Cells("得意先ＦＡＸ").Value = ds.Tables(RS).Rows(index)("得意先ＦＡＸ")
-                    DgvCymnhd.Rows(index).Cells("得意先担当者名").Value = ds.Tables(RS).Rows(index)("得意先担当者名")
-                    DgvCymnhd.Rows(index).Cells("得意先担当者役職").Value = ds.Tables(RS).Rows(index)("得意先担当者役職")
-                    DgvCymnhd.Rows(index).Cells("ＶＡＴ").Value = ds.Tables(RS).Rows(index)("ＶＡＴ")
-                    DgvCymnhd.Rows(index).Cells("受注金額").Value = ds.Tables(RS).Rows(index)("見積金額")
-                    DgvCymnhd.Rows(index).Cells("仕入金額").Value = ds.Tables(RS).Rows(index)("仕入金額")
-                    DgvCymnhd.Rows(index).Cells("粗利額").Value = ds.Tables(RS).Rows(index)("粗利額")
-                    DgvCymnhd.Rows(index).Cells("支払条件").Value = ds.Tables(RS).Rows(index)("支払条件")
-                    DgvCymnhd.Rows(index).Cells("営業担当者").Value = ds.Tables(RS).Rows(index)("営業担当者")
-                    DgvCymnhd.Rows(index).Cells("入力担当者").Value = ds.Tables(RS).Rows(index)("入力担当者")
-                    DgvCymnhd.Rows(index).Cells("備考").Value = ds.Tables(RS).Rows(index)("備考")
-                    DgvCymnhd.Rows(index).Cells("登録日").Value = ds.Tables(RS).Rows(index)("登録日")
-                    DgvCymnhd.Rows(index).Cells("更新者").Value = ds.Tables(RS).Rows(index)("更新者")
-                    DgvCymnhd.Rows(index).Cells("更新日").Value = ds.Tables(RS).Rows(index)("更新日")
+                    DgvCymnhd.Rows(i).Cells("取消").Value = getDelKbnTxt(ds.Tables(RS).Rows(i)("取消区分"))
+                    DgvCymnhd.Rows(i).Cells("受注番号").Value = ds.Tables(RS).Rows(i)("受注番号")
+                    DgvCymnhd.Rows(i).Cells("受注番号枝番").Value = ds.Tables(RS).Rows(i)("受注番号枝番")
+                    DgvCymnhd.Rows(i).Cells("客先番号").Value = ds.Tables(RS).Rows(i)("客先番号")
+                    DgvCymnhd.Rows(i).Cells("受注日").Value = ds.Tables(RS).Rows(i)("受注日").ToShortDateString()
+                    DgvCymnhd.Rows(i).Cells("見積番号").Value = ds.Tables(RS).Rows(i)("見積番号")
+                    DgvCymnhd.Rows(i).Cells("見積番号枝番").Value = ds.Tables(RS).Rows(i)("見積番号枝番")
+                    DgvCymnhd.Rows(i).Cells("見積日").Value = ds.Tables(RS).Rows(i)("見積日").ToShortDateString()
+                    DgvCymnhd.Rows(i).Cells("見積有効期限").Value = ds.Tables(RS).Rows(i)("見積有効期限").ToShortDateString()
+                    DgvCymnhd.Rows(i).Cells("得意先コード").Value = ds.Tables(RS).Rows(i)("得意先コード")
+                    DgvCymnhd.Rows(i).Cells("得意先名").Value = ds.Tables(RS).Rows(i)("得意先名")
+                    DgvCymnhd.Rows(i).Cells("得意先郵便番号").Value = ds.Tables(RS).Rows(i)("得意先郵便番号")
+                    DgvCymnhd.Rows(i).Cells("得意先住所").Value = ds.Tables(RS).Rows(i)("得意先住所")
+                    DgvCymnhd.Rows(i).Cells("得意先電話番号").Value = ds.Tables(RS).Rows(i)("得意先電話番号")
+                    DgvCymnhd.Rows(i).Cells("得意先ＦＡＸ").Value = ds.Tables(RS).Rows(i)("得意先ＦＡＸ")
+                    DgvCymnhd.Rows(i).Cells("得意先担当者名").Value = ds.Tables(RS).Rows(i)("得意先担当者名")
+                    DgvCymnhd.Rows(i).Cells("得意先担当者役職").Value = ds.Tables(RS).Rows(i)("得意先担当者役職")
+                    DgvCymnhd.Rows(i).Cells("ＶＡＴ").Value = ds.Tables(RS).Rows(i)("ＶＡＴ")
+                    DgvCymnhd.Rows(i).Cells("受注金額").Value = ds.Tables(RS).Rows(i)("見積金額")
+                    DgvCymnhd.Rows(i).Cells("仕入金額").Value = ds.Tables(RS).Rows(i)("仕入金額")
+                    DgvCymnhd.Rows(i).Cells("粗利額").Value = ds.Tables(RS).Rows(i)("粗利額")
+                    DgvCymnhd.Rows(i).Cells("支払条件").Value = ds.Tables(RS).Rows(i)("支払条件")
+                    DgvCymnhd.Rows(i).Cells("営業担当者").Value = ds.Tables(RS).Rows(i)("営業担当者")
+                    DgvCymnhd.Rows(i).Cells("入力担当者").Value = ds.Tables(RS).Rows(i)("入力担当者")
+                    DgvCymnhd.Rows(i).Cells("備考").Value = ds.Tables(RS).Rows(i)("備考")
+                    DgvCymnhd.Rows(i).Cells("登録日").Value = ds.Tables(RS).Rows(i)("登録日")
+                    DgvCymnhd.Rows(i).Cells("更新者").Value = ds.Tables(RS).Rows(i)("更新者")
+                    DgvCymnhd.Rows(i).Cells("更新日").Value = ds.Tables(RS).Rows(i)("更新日")
                 Next
 
             Else
 
                 '明細単位の場合
                 'joinするのでとりあえず直書き
-                Sql = "SELECT * FROM  public.t11_cymndt t11 "
+                Sql = "SELECT t11.*, t10.取消区分 FROM  public.t11_cymndt t11 "
                 Sql += " INNER JOIN  t10_cymnhd t10"
                 Sql += " ON t11.会社コード = t10.会社コード"
                 Sql += " AND  t11.受注番号 = t10.受注番号"
+                Sql += " AND  t11.受注番号枝番 = t10.受注番号枝番"
 
                 Sql += " WHERE t11.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-
-                '抽出条件
-                Dim customerName As String = escapeSql(TxtCustomerName.Text)
-                Dim customerAddress As String = escapeSql(TxtAddress.Text)
-                Dim customerTel As String = escapeSql(TxtTel.Text)
-                Dim customerCode As String = escapeSql(TxtCustomerCode.Text)
-                Dim sinceDate As String = UtilClass.strFormatDate(dtOrderDateSince.Text)
-                Dim untilDate As String = UtilClass.strFormatDate(dtOrderDateUntil.Text)
-                Dim sinceNum As String = escapeSql(TxtOrderSince.Text)
-                Dim untilNum As String = escapeSql(TxtOrderUntil.Text)
-                Dim salesName As String = escapeSql(TxtSales.Text)
-                Dim customerPO As String = escapeSql(TxtCustomerPO.Text)
 
                 If customerName <> Nothing Then
                     Sql += " AND "
@@ -283,109 +658,6 @@ Public Class OrderList
             Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
         End Try
 
-    End Sub
-
-    Private Sub MstHanyoue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If OrderStatus = CommonConst.STATUS_SALES Then
-            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-                LblMode.Text = "SalesInputMode"
-            Else
-                LblMode.Text = "売上入力モード"
-            End If
-
-            BtnSales.Visible = True
-            BtnSales.Location = New Point(997, 509)
-        ElseIf OrderStatus = CommonConst.STATUS_GOODS_ISSUE Then
-            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-                LblMode.Text = "GoodsDeliveryInputMode"
-            Else
-                LblMode.Text = "出庫入力モード"
-            End If
-
-            BtnGoodsIssue.Visible = True
-            BtnGoodsIssue.Location = New Point(997, 509)
-        ElseIf OrderStatus = CommonConst.STATUS_EDIT Then
-            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-                LblMode.Text = "EditMode"
-            Else
-                LblMode.Text = "編集モード"
-            End If
-
-            BtnOrderEdit.Visible = True
-            BtnOrderEdit.Location = New Point(997, 509)
-        ElseIf OrderStatus = CommonConst.STATUS_VIEW Then
-            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-                LblMode.Text = "ViewMode"
-            Else
-                LblMode.Text = "参照モード"
-            End If
-
-            BtnOrderView.Visible = True
-            BtnOrderView.Location = New Point(997, 509)
-        ElseIf OrderStatus = CommonConst.STATUS_CANCEL Then
-            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-                LblMode.Text = "CancelMode"
-            Else
-                LblMode.Text = "取消モード"
-            End If
-
-            BtnOrderCancel.Visible = True
-            BtnOrderCancel.Location = New Point(997, 509)
-        ElseIf OrderStatus = CommonConst.STATUS_CLONE Then
-            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-                LblMode.Text = "NewCopyMode"
-            Else
-                LblMode.Text = "新規複写モード"
-            End If
-
-            BtnOrderClone.Visible = True
-            BtnOrderClone.Location = New Point(997, 509)
-        ElseIf OrderStatus = CommonConst.STATUS_BILL Then
-            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-                LblMode.Text = "BillingRegistrationMode"
-            Else
-                LblMode.Text = "請求登録モード"
-            End If
-
-            BtnBill.Visible = True
-            BtnBill.Location = New Point(997, 509)
-        End If
-
-        '検索（Date）の初期値
-        dtOrderDateSince.Value = DateAdd("d", CommonConst.SINCE_DEFAULT_DAY, DateTime.Today)
-        dtOrderDateUntil.Value = DateTime.Today
-
-        OrderListLoad() '一覧表示
-
-        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-            LblConditions.Text = "TermsOfSelection"
-            Label1.Text = "CustomerName"
-            Label2.Text = "Address"
-            Label3.Text = "PhoneNumber"
-            Label4.Text = "CustomerCode"
-            Label8.Text = "OrderDate"
-            Label7.Text = "OrdernNumber"
-            Label6.Text = "SalesPersonInCharge"
-            Label11.Text = "CustomerNumber"
-            Label10.Text = "DisplayFormat"
-            RbtnSlip.Text = "UnitOfVoucher"
-
-            RbtnDetails.Text = "LineItemUnit"
-            RbtnDetails.Location = New Point(166, 202)
-
-            ChkCancelData.Text = "IncludeCancelData"
-            ChkCancelData.Location = New Point(556, 203)
-
-            BtnOrderSearch.Text = "Search"
-            BtnBill.Text = "BillingRegistration"
-            BtnOrderCancel.Text = "CancelOfOrder"
-            BtnSales.Text = "SalesRagistration"
-            BtnGoodsIssue.Text = "GoodsIssueRegistration"
-            BtnOrderClone.Text = "OrderCopy"
-            BtnOrderView.Text = "OrderView"
-            BtnOrderEdit.Text = "OrderEdit"
-            BtnBack.Text = "Back"
-        End If
     End Sub
 
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
