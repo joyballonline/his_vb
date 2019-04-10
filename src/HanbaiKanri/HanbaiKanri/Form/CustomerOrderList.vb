@@ -280,7 +280,7 @@ Public Class CustomerOrderList
                     sheet.Range("A15").Value = "Telp." & dsCymnhd.Tables(RS).Rows(0)("得意先電話番号") & "　Fax." & dsCymnhd.Tables(RS).Rows(0)("得意先ＦＡＸ")
                     sheet.Range("E8").Value = BillingNo
                     sheet.Range("E9").Value = System.DateTime.Now
-                    sheet.Range("E13").Value = dsCymnhd.Tables(RS).Rows(0)("支払条件")
+                    sheet.Range("D13").Value = dsCymnhd.Tables(RS).Rows(0)("支払条件")
 
                     flg2 = True
 
