@@ -611,7 +611,7 @@ Public Class Receipt
         '発注明細をループさせながら
         '入庫数量が発注残数を超えない範囲か確認
         For i As Integer = 0 To DgvPurchase.RowCount - 1
-            If (DgvPurchase.Rows(i).Cells("発注残数").Value < Integer.Parse(DgvAdd.Rows(i).Cells("入庫数量").Value)) Then
+            If (DgvPurchase.Rows(i).Cells("未入庫数").Value >= Integer.Parse(DgvAdd.Rows(i).Cells("入庫数量").Value)) Then
 
                 '対象データがないメッセージを表示
                 _msgHd.dspMSG("chkGRBalanceError", frmC01F10_Login.loginValue.Language)
