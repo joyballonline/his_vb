@@ -507,7 +507,6 @@ Public Class Quote
                                "ViewMode",
                                "参照モード")
 
-
             DtpQuote.Enabled = False
             DtpExpiration.Enabled = False
             TxtCustomerCode.Enabled = False
@@ -525,23 +524,23 @@ Public Class Quote
             BtnClone.Visible = False
             BtnInsert.Visible = False
             BtnProof.Visible = True
-            BtnProof.Location = New Point(828, 509)
+            BtnProof.Location = New Point(657, 509)
             BtnCodeSearch.Enabled = False
 
-            Dim RequestFlg As Boolean = False
-            For i As Integer = 0 To DgvItemList.Rows.Count() - 1
-                If DgvItemList.Rows(i).Cells("仕入区分").Value = 1 And DgvItemList.Rows(i).Cells("仕入単価").Value = 0 Then
-                    RequestFlg = True
-                End If
-            Next
+            'Dim RequestFlg As Boolean = False
+            'For i As Integer = 0 To DgvItemList.Rows.Count() - 1
+            '    If DgvItemList.Rows(i).Cells("仕入区分").Value = 1 And DgvItemList.Rows(i).Cells("仕入単価").Value = 0 Then
+            '        RequestFlg = True
+            '    End If
+            'Next
 
-            If RequestFlg Then
-                BtnQuoteRequest.Visible = True
-                BtnQuoteRequest.Location = New Point(1004, 509)
-            Else
-                BtnQuote.Visible = True
-                BtnQuote.Location = New Point(1004, 509)
-            End If
+            'If RequestFlg Then
+            BtnQuoteRequest.Visible = True
+            BtnQuoteRequest.Location = New Point(828, 509)
+            'Else
+            BtnQuote.Visible = True
+            BtnQuote.Location = New Point(1004, 509)
+            'End If
 
         ElseIf Status Is CommonConst.STATUS_PRICE Then
             '仕入単価入力モード
