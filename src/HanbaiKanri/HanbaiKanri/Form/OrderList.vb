@@ -208,7 +208,7 @@ Public Class OrderList
                 '伝票単位の場合
                 If RbtnSlip.Checked Then
 
-                    Sql = " SELECT t10.*, t42.入庫番号 "
+                    Sql = " SELECT t10.*, t42.入庫番号, t42.発注番号, t42.発注番号枝番 "
                     Sql += " FROM t10_cymnhd t10 "
 
                     Sql += " LEFT JOIN t20_hattyu t20 "
@@ -286,50 +286,13 @@ Public Class OrderList
 
                     ds = _db.selectDB(Sql, RS, reccnt)
 
-                    setHdColumns() '表示カラムの設定
 
-                    For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-
-                        If ds.Tables(RS).Rows(i)("入庫番号") <> "" Then
-
-                            DgvCymnhd.Rows.Add()
-                            DgvCymnhd.Rows(i).Cells("取消").Value = getDelKbnTxt(ds.Tables(RS).Rows(i)("取消区分"))
-                            DgvCymnhd.Rows(i).Cells("受注番号").Value = ds.Tables(RS).Rows(i)("受注番号")
-                            DgvCymnhd.Rows(i).Cells("受注番号枝番").Value = ds.Tables(RS).Rows(i)("受注番号枝番")
-                            DgvCymnhd.Rows(i).Cells("客先番号").Value = ds.Tables(RS).Rows(i)("客先番号")
-                            DgvCymnhd.Rows(i).Cells("受注日").Value = ds.Tables(RS).Rows(i)("受注日").ToShortDateString()
-                            DgvCymnhd.Rows(i).Cells("見積番号").Value = ds.Tables(RS).Rows(i)("見積番号")
-                            DgvCymnhd.Rows(i).Cells("見積番号枝番").Value = ds.Tables(RS).Rows(i)("見積番号枝番")
-                            DgvCymnhd.Rows(i).Cells("見積日").Value = ds.Tables(RS).Rows(i)("見積日").ToShortDateString()
-                            DgvCymnhd.Rows(i).Cells("見積有効期限").Value = ds.Tables(RS).Rows(i)("見積有効期限").ToShortDateString()
-                            DgvCymnhd.Rows(i).Cells("得意先コード").Value = ds.Tables(RS).Rows(i)("得意先コード")
-                            DgvCymnhd.Rows(i).Cells("得意先名").Value = ds.Tables(RS).Rows(i)("得意先名")
-                            DgvCymnhd.Rows(i).Cells("得意先郵便番号").Value = ds.Tables(RS).Rows(i)("得意先郵便番号")
-                            DgvCymnhd.Rows(i).Cells("得意先住所").Value = ds.Tables(RS).Rows(i)("得意先住所")
-                            DgvCymnhd.Rows(i).Cells("得意先電話番号").Value = ds.Tables(RS).Rows(i)("得意先電話番号")
-                            DgvCymnhd.Rows(i).Cells("得意先ＦＡＸ").Value = ds.Tables(RS).Rows(i)("得意先ＦＡＸ")
-                            DgvCymnhd.Rows(i).Cells("得意先担当者名").Value = ds.Tables(RS).Rows(i)("得意先担当者名")
-                            DgvCymnhd.Rows(i).Cells("得意先担当者役職").Value = ds.Tables(RS).Rows(i)("得意先担当者役職")
-                            DgvCymnhd.Rows(i).Cells("ＶＡＴ").Value = ds.Tables(RS).Rows(i)("ＶＡＴ")
-                            DgvCymnhd.Rows(i).Cells("受注金額").Value = ds.Tables(RS).Rows(i)("見積金額")
-                            DgvCymnhd.Rows(i).Cells("仕入金額").Value = ds.Tables(RS).Rows(i)("仕入金額")
-                            DgvCymnhd.Rows(i).Cells("粗利額").Value = ds.Tables(RS).Rows(i)("粗利額")
-                            DgvCymnhd.Rows(i).Cells("支払条件").Value = ds.Tables(RS).Rows(i)("支払条件")
-                            DgvCymnhd.Rows(i).Cells("営業担当者").Value = ds.Tables(RS).Rows(i)("営業担当者")
-                            DgvCymnhd.Rows(i).Cells("入力担当者").Value = ds.Tables(RS).Rows(i)("入力担当者")
-                            DgvCymnhd.Rows(i).Cells("備考").Value = ds.Tables(RS).Rows(i)("備考")
-                            DgvCymnhd.Rows(i).Cells("登録日").Value = ds.Tables(RS).Rows(i)("登録日")
-                            DgvCymnhd.Rows(i).Cells("更新者").Value = ds.Tables(RS).Rows(i)("更新者")
-                            DgvCymnhd.Rows(i).Cells("更新日").Value = ds.Tables(RS).Rows(i)("更新日")
-
-                        End If
-
-                    Next
+                    setRows(ds) '行をセット
 
                 Else
                     '明細単位
 
-                    Sql = "SELECT t11.*, t10.取消区分, t42.入庫番号 "
+                    Sql = "SELECT t11.*, t10.取消区分, t42.入庫番号, t42.発注番号, t42.発注番号枝番 "
                     Sql += " FROM t11_cymndt t11 "
 
                     Sql += " LEFT JOIN  t10_cymnhd t10 "
@@ -410,63 +373,8 @@ Public Class OrderList
 
                     ds = _db.selectDB(Sql, RS, reccnt)
 
-                    setDtColumns() '表示カラムの設定
+                    setRows(ds) '行をセット
 
-                    Dim tmp1 As String = ""
-                    For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-
-                        DgvCymnhd.Rows.Add()
-                        DgvCymnhd.Rows(index).Cells("取消").Value = getDelKbnTxt(ds.Tables(RS).Rows(index)("取消区分"))
-                        DgvCymnhd.Rows(index).Cells("受注番号").Value = ds.Tables(RS).Rows(index)("受注番号")
-                        DgvCymnhd.Rows(index).Cells("受注番号枝番").Value = ds.Tables(RS).Rows(index)("受注番号枝番")
-                        DgvCymnhd.Rows(index).Cells("行番号").Value = ds.Tables(RS).Rows(index)("行番号")
-
-                        '汎用マスタから仕入区分を取得
-                        Dim dsSireKbn As DataSet = getDsHanyoData(CommonConst.FIXED_KEY_PURCHASING_CLASS, ds.Tables(RS).Rows(index)("仕入区分").ToString)
-                        DgvCymnhd.Rows(index).Cells("仕入区分").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
-                                                                    dsSireKbn.Tables(RS).Rows(0)("文字２"),
-                                                                    dsSireKbn.Tables(RS).Rows(0)("文字１"))
-
-                        DgvCymnhd.Rows(index).Cells("メーカー").Value = ds.Tables(RS).Rows(index)("メーカー")
-                        DgvCymnhd.Rows(index).Cells("品名").Value = ds.Tables(RS).Rows(index)("品名")
-                        DgvCymnhd.Rows(index).Cells("型式").Value = ds.Tables(RS).Rows(index)("型式")
-                        DgvCymnhd.Rows(index).Cells("仕入先名").Value = ds.Tables(RS).Rows(index)("仕入先名")
-                        DgvCymnhd.Rows(index).Cells("仕入値").Value = ds.Tables(RS).Rows(index)("仕入値")
-                        DgvCymnhd.Rows(index).Cells("受注数量").Value = ds.Tables(RS).Rows(index)("受注数量")
-                        DgvCymnhd.Rows(index).Cells("売上数量").Value = ds.Tables(RS).Rows(index)("売上数量")
-                        DgvCymnhd.Rows(index).Cells("受注残数").Value = ds.Tables(RS).Rows(index)("受注残数")
-                        DgvCymnhd.Rows(index).Cells("単位").Value = ds.Tables(RS).Rows(index)("単位")
-                        DgvCymnhd.Rows(index).Cells("間接費").Value = ds.Tables(RS).Rows(index)("間接費")
-                        DgvCymnhd.Rows(index).Cells("売単価").Value = ds.Tables(RS).Rows(index)("売単価")
-                        DgvCymnhd.Rows(index).Cells("売上金額").Value = ds.Tables(RS).Rows(index)("売上金額")
-                        DgvCymnhd.Rows(index).Cells("粗利額").Value = ds.Tables(RS).Rows(index)("粗利額")
-                        DgvCymnhd.Rows(index).Cells("粗利率").Value = ds.Tables(RS).Rows(index)("粗利率")
-
-                        If ds.Tables(RS).Rows(index)("リードタイム単位") Is DBNull.Value Then
-
-                            'リードタイムが空だったらそのまま
-                            DgvCymnhd.Rows(index).Cells("リードタイム").Value = ds.Tables(RS).Rows(index)("リードタイム")
-
-                        Else
-
-                            'リードタイムが入っていたら汎用マスタから単位を取得して連結する
-                            Sql = " AND 固定キー = '4'"
-                            Sql += " AND 可変キー = '" & ds.Tables(RS).Rows(index)("リードタイム単位").ToString & "'"
-
-                            Dim dsHanyo As DataSet = getDsData("m90_hanyo", Sql)
-
-                            tmp1 = ""
-                            tmp1 += ds.Tables(RS).Rows(index)("リードタイム")
-                            tmp1 += dsHanyo.Tables(RS).Rows(0)("文字１")
-                            DgvCymnhd.Rows(index).Cells("リードタイム").Value = tmp1
-                        End If
-
-                        DgvCymnhd.Rows(index).Cells("出庫数").Value = ds.Tables(RS).Rows(index)("出庫数")
-                        DgvCymnhd.Rows(index).Cells("未出庫数").Value = ds.Tables(RS).Rows(index)("未出庫数")
-                        DgvCymnhd.Rows(index).Cells("備考").Value = ds.Tables(RS).Rows(index)("備考")
-                        DgvCymnhd.Rows(index).Cells("更新者").Value = ds.Tables(RS).Rows(index)("更新者")
-                        DgvCymnhd.Rows(index).Cells("登録日").Value = ds.Tables(RS).Rows(index)("登録日")
-                    Next
                 End If
 
                 Exit Sub
@@ -484,39 +392,7 @@ Public Class OrderList
 
                 ds = getDsData("t10_cymnhd", Sql)
 
-                setHdColumns() '表示カラムの設定
-
-                For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-                    DgvCymnhd.Rows.Add()
-                    DgvCymnhd.Rows(i).Cells("取消").Value = getDelKbnTxt(ds.Tables(RS).Rows(i)("取消区分"))
-                    DgvCymnhd.Rows(i).Cells("受注番号").Value = ds.Tables(RS).Rows(i)("受注番号")
-                    DgvCymnhd.Rows(i).Cells("受注番号枝番").Value = ds.Tables(RS).Rows(i)("受注番号枝番")
-                    DgvCymnhd.Rows(i).Cells("客先番号").Value = ds.Tables(RS).Rows(i)("客先番号")
-                    DgvCymnhd.Rows(i).Cells("受注日").Value = ds.Tables(RS).Rows(i)("受注日").ToShortDateString()
-                    DgvCymnhd.Rows(i).Cells("見積番号").Value = ds.Tables(RS).Rows(i)("見積番号")
-                    DgvCymnhd.Rows(i).Cells("見積番号枝番").Value = ds.Tables(RS).Rows(i)("見積番号枝番")
-                    DgvCymnhd.Rows(i).Cells("見積日").Value = ds.Tables(RS).Rows(i)("見積日").ToShortDateString()
-                    DgvCymnhd.Rows(i).Cells("見積有効期限").Value = ds.Tables(RS).Rows(i)("見積有効期限").ToShortDateString()
-                    DgvCymnhd.Rows(i).Cells("得意先コード").Value = ds.Tables(RS).Rows(i)("得意先コード")
-                    DgvCymnhd.Rows(i).Cells("得意先名").Value = ds.Tables(RS).Rows(i)("得意先名")
-                    DgvCymnhd.Rows(i).Cells("得意先郵便番号").Value = ds.Tables(RS).Rows(i)("得意先郵便番号")
-                    DgvCymnhd.Rows(i).Cells("得意先住所").Value = ds.Tables(RS).Rows(i)("得意先住所")
-                    DgvCymnhd.Rows(i).Cells("得意先電話番号").Value = ds.Tables(RS).Rows(i)("得意先電話番号")
-                    DgvCymnhd.Rows(i).Cells("得意先ＦＡＸ").Value = ds.Tables(RS).Rows(i)("得意先ＦＡＸ")
-                    DgvCymnhd.Rows(i).Cells("得意先担当者名").Value = ds.Tables(RS).Rows(i)("得意先担当者名")
-                    DgvCymnhd.Rows(i).Cells("得意先担当者役職").Value = ds.Tables(RS).Rows(i)("得意先担当者役職")
-                    DgvCymnhd.Rows(i).Cells("ＶＡＴ").Value = ds.Tables(RS).Rows(i)("ＶＡＴ")
-                    DgvCymnhd.Rows(i).Cells("受注金額").Value = ds.Tables(RS).Rows(i)("見積金額")
-                    DgvCymnhd.Rows(i).Cells("仕入金額").Value = ds.Tables(RS).Rows(i)("仕入金額")
-                    DgvCymnhd.Rows(i).Cells("粗利額").Value = ds.Tables(RS).Rows(i)("粗利額")
-                    DgvCymnhd.Rows(i).Cells("支払条件").Value = ds.Tables(RS).Rows(i)("支払条件")
-                    DgvCymnhd.Rows(i).Cells("営業担当者").Value = ds.Tables(RS).Rows(i)("営業担当者")
-                    DgvCymnhd.Rows(i).Cells("入力担当者").Value = ds.Tables(RS).Rows(i)("入力担当者")
-                    DgvCymnhd.Rows(i).Cells("備考").Value = ds.Tables(RS).Rows(i)("備考")
-                    DgvCymnhd.Rows(i).Cells("登録日").Value = ds.Tables(RS).Rows(i)("登録日")
-                    DgvCymnhd.Rows(i).Cells("更新者").Value = ds.Tables(RS).Rows(i)("更新者")
-                    DgvCymnhd.Rows(i).Cells("更新日").Value = ds.Tables(RS).Rows(i)("更新日")
-                Next
+                setRows(ds) '行をセット
 
             Else
 
@@ -589,66 +465,9 @@ Public Class OrderList
 
                 ds = _db.selectDB(Sql, RS, reccnt)
 
-                setDtColumns() '表示カラムの設定
+                setRows(ds) '行をセット
 
-                Dim tmp1 As String = ""
-                For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-
-                    DgvCymnhd.Rows.Add()
-                    DgvCymnhd.Rows(index).Cells("取消").Value = getDelKbnTxt(ds.Tables(RS).Rows(index)("取消区分"))
-                    DgvCymnhd.Rows(index).Cells("受注番号").Value = ds.Tables(RS).Rows(index)("受注番号")
-                    DgvCymnhd.Rows(index).Cells("受注番号枝番").Value = ds.Tables(RS).Rows(index)("受注番号枝番")
-                    DgvCymnhd.Rows(index).Cells("行番号").Value = ds.Tables(RS).Rows(index)("行番号")
-
-                    '汎用マスタから仕入区分を取得
-                    Dim dsSireKbn As DataSet = getDsHanyoData(CommonConst.FIXED_KEY_PURCHASING_CLASS, ds.Tables(RS).Rows(index)("仕入区分").ToString)
-                    DgvCymnhd.Rows(index).Cells("仕入区分").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
-                                                                dsSireKbn.Tables(RS).Rows(0)("文字２"),
-                                                                dsSireKbn.Tables(RS).Rows(0)("文字１"))
-
-                    DgvCymnhd.Rows(index).Cells("メーカー").Value = ds.Tables(RS).Rows(index)("メーカー")
-                    DgvCymnhd.Rows(index).Cells("品名").Value = ds.Tables(RS).Rows(index)("品名")
-                    DgvCymnhd.Rows(index).Cells("型式").Value = ds.Tables(RS).Rows(index)("型式")
-                    DgvCymnhd.Rows(index).Cells("仕入先名").Value = ds.Tables(RS).Rows(index)("仕入先名")
-                    DgvCymnhd.Rows(index).Cells("仕入値").Value = ds.Tables(RS).Rows(index)("仕入値")
-                    DgvCymnhd.Rows(index).Cells("受注数量").Value = ds.Tables(RS).Rows(index)("受注数量")
-                    DgvCymnhd.Rows(index).Cells("売上数量").Value = ds.Tables(RS).Rows(index)("売上数量")
-                    DgvCymnhd.Rows(index).Cells("受注残数").Value = ds.Tables(RS).Rows(index)("受注残数")
-                    DgvCymnhd.Rows(index).Cells("単位").Value = ds.Tables(RS).Rows(index)("単位")
-                    DgvCymnhd.Rows(index).Cells("間接費").Value = ds.Tables(RS).Rows(index)("間接費")
-                    DgvCymnhd.Rows(index).Cells("売単価").Value = ds.Tables(RS).Rows(index)("売単価")
-                    DgvCymnhd.Rows(index).Cells("売上金額").Value = ds.Tables(RS).Rows(index)("売上金額")
-                    DgvCymnhd.Rows(index).Cells("粗利額").Value = ds.Tables(RS).Rows(index)("粗利額")
-                    DgvCymnhd.Rows(index).Cells("粗利率").Value = ds.Tables(RS).Rows(index)("粗利率")
-
-                    If ds.Tables(RS).Rows(index)("リードタイム単位") Is DBNull.Value Then
-
-                        'リードタイムが空だったらそのまま
-                        DgvCymnhd.Rows(index).Cells("リードタイム").Value = ds.Tables(RS).Rows(index)("リードタイム")
-
-                    Else
-
-                        'リードタイムが入っていたら汎用マスタから単位を取得して連結する
-                        Sql = " AND 固定キー = '4'"
-                        Sql += " AND 可変キー = '" & ds.Tables(RS).Rows(index)("リードタイム単位").ToString & "'"
-
-                        Dim dsHanyo As DataSet = getDsData("m90_hanyo", Sql)
-
-                        tmp1 = ""
-                        tmp1 += ds.Tables(RS).Rows(index)("リードタイム")
-                        tmp1 += dsHanyo.Tables(RS).Rows(0)("文字１")
-                        DgvCymnhd.Rows(index).Cells("リードタイム").Value = tmp1
-                    End If
-
-                    DgvCymnhd.Rows(index).Cells("出庫数").Value = ds.Tables(RS).Rows(index)("出庫数")
-                    DgvCymnhd.Rows(index).Cells("未出庫数").Value = ds.Tables(RS).Rows(index)("未出庫数")
-                    DgvCymnhd.Rows(index).Cells("備考").Value = ds.Tables(RS).Rows(index)("備考")
-                    DgvCymnhd.Rows(index).Cells("更新者").Value = ds.Tables(RS).Rows(index)("更新者")
-                    DgvCymnhd.Rows(index).Cells("登録日").Value = ds.Tables(RS).Rows(index)("登録日")
-                Next
             End If
-
-
 
         Catch ue As UsrDefException
             ue.dspMsg()
@@ -657,6 +476,138 @@ Public Class OrderList
             'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
             Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
         End Try
+
+    End Sub
+
+    '検索内容をListにセット（行）
+    Private Sub setRows(ByVal prmDataset As DataSet)
+        Dim ds As DataSet = prmDataset
+
+        '伝票単位の場合
+        '------------------------------
+        If RbtnSlip.Checked Then
+
+            setHdColumns() '表示カラムの設定
+
+            For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+
+                '出庫登録時は入庫されているデータのみ出力
+                If OrderStatus = CommonConst.STATUS_GOODS_ISSUE Then
+                    If ds.Tables(RS).Rows(i)("入庫番号") = "" Then
+                        Continue For '次のループへ
+                    End If
+                End If
+
+                DgvCymnhd.Rows.Add()
+                DgvCymnhd.Rows(i).Cells("取消").Value = getDelKbnTxt(ds.Tables(RS).Rows(i)("取消区分"))
+                DgvCymnhd.Rows(i).Cells("受注番号").Value = ds.Tables(RS).Rows(i)("受注番号")
+                DgvCymnhd.Rows(i).Cells("受注番号枝番").Value = ds.Tables(RS).Rows(i)("受注番号枝番")
+
+                '出庫登録時のみ出力
+                If OrderStatus = CommonConst.STATUS_GOODS_ISSUE Then
+                    DgvCymnhd.Rows(i).Cells("発注番号").Value = ds.Tables(RS).Rows(i)("発注番号")
+                    DgvCymnhd.Rows(i).Cells("発注番号枝番").Value = ds.Tables(RS).Rows(i)("発注番号枝番")
+                End If
+
+                DgvCymnhd.Rows(i).Cells("客先番号").Value = ds.Tables(RS).Rows(i)("客先番号")
+                DgvCymnhd.Rows(i).Cells("受注日").Value = ds.Tables(RS).Rows(i)("受注日").ToShortDateString()
+                DgvCymnhd.Rows(i).Cells("見積番号").Value = ds.Tables(RS).Rows(i)("見積番号")
+                DgvCymnhd.Rows(i).Cells("見積番号枝番").Value = ds.Tables(RS).Rows(i)("見積番号枝番")
+                DgvCymnhd.Rows(i).Cells("見積日").Value = ds.Tables(RS).Rows(i)("見積日").ToShortDateString()
+                DgvCymnhd.Rows(i).Cells("見積有効期限").Value = ds.Tables(RS).Rows(i)("見積有効期限").ToShortDateString()
+                DgvCymnhd.Rows(i).Cells("得意先コード").Value = ds.Tables(RS).Rows(i)("得意先コード")
+                DgvCymnhd.Rows(i).Cells("得意先名").Value = ds.Tables(RS).Rows(i)("得意先名")
+                DgvCymnhd.Rows(i).Cells("得意先郵便番号").Value = ds.Tables(RS).Rows(i)("得意先郵便番号")
+                DgvCymnhd.Rows(i).Cells("得意先住所").Value = ds.Tables(RS).Rows(i)("得意先住所")
+                DgvCymnhd.Rows(i).Cells("得意先電話番号").Value = ds.Tables(RS).Rows(i)("得意先電話番号")
+                DgvCymnhd.Rows(i).Cells("得意先ＦＡＸ").Value = ds.Tables(RS).Rows(i)("得意先ＦＡＸ")
+                DgvCymnhd.Rows(i).Cells("得意先担当者名").Value = ds.Tables(RS).Rows(i)("得意先担当者名")
+                DgvCymnhd.Rows(i).Cells("得意先担当者役職").Value = ds.Tables(RS).Rows(i)("得意先担当者役職")
+                DgvCymnhd.Rows(i).Cells("ＶＡＴ").Value = ds.Tables(RS).Rows(i)("ＶＡＴ")
+                DgvCymnhd.Rows(i).Cells("受注金額").Value = ds.Tables(RS).Rows(i)("見積金額")
+                DgvCymnhd.Rows(i).Cells("仕入金額").Value = ds.Tables(RS).Rows(i)("仕入金額")
+                DgvCymnhd.Rows(i).Cells("粗利額").Value = ds.Tables(RS).Rows(i)("粗利額")
+                DgvCymnhd.Rows(i).Cells("支払条件").Value = ds.Tables(RS).Rows(i)("支払条件")
+                DgvCymnhd.Rows(i).Cells("営業担当者").Value = ds.Tables(RS).Rows(i)("営業担当者")
+                DgvCymnhd.Rows(i).Cells("入力担当者").Value = ds.Tables(RS).Rows(i)("入力担当者")
+                DgvCymnhd.Rows(i).Cells("備考").Value = ds.Tables(RS).Rows(i)("備考")
+                DgvCymnhd.Rows(i).Cells("登録日").Value = ds.Tables(RS).Rows(i)("登録日")
+                DgvCymnhd.Rows(i).Cells("更新者").Value = ds.Tables(RS).Rows(i)("更新者")
+                DgvCymnhd.Rows(i).Cells("更新日").Value = ds.Tables(RS).Rows(i)("更新日")
+
+            Next
+
+        Else
+
+            '明細単位の場合
+            '------------------------------
+            Dim Sql As String = ""
+            Dim tmp1 As String = ""
+
+            setDtColumns() '表示カラムの設定
+
+            For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+
+                DgvCymnhd.Rows.Add()
+                DgvCymnhd.Rows(i).Cells("取消").Value = getDelKbnTxt(ds.Tables(RS).Rows(i)("取消区分"))
+                DgvCymnhd.Rows(i).Cells("受注番号").Value = ds.Tables(RS).Rows(i)("受注番号")
+                DgvCymnhd.Rows(i).Cells("受注番号枝番").Value = ds.Tables(RS).Rows(i)("受注番号枝番")
+                DgvCymnhd.Rows(i).Cells("行番号").Value = ds.Tables(RS).Rows(i)("行番号")
+
+                '出庫登録時のみ出力
+                If OrderStatus = CommonConst.STATUS_GOODS_ISSUE Then
+                    DgvCymnhd.Rows(i).Cells("発注番号").Value = ds.Tables(RS).Rows(i)("発注番号")
+                    DgvCymnhd.Rows(i).Cells("発注番号枝番").Value = ds.Tables(RS).Rows(i)("発注番号枝番")
+                End If
+
+                '汎用マスタから仕入区分を取得
+                Dim dsSireKbn As DataSet = getDsHanyoData(CommonConst.FIXED_KEY_PURCHASING_CLASS, ds.Tables(RS).Rows(i)("仕入区分").ToString)
+                DgvCymnhd.Rows(i).Cells("仕入区分").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
+                                                        dsSireKbn.Tables(RS).Rows(0)("文字２"),
+                                                        dsSireKbn.Tables(RS).Rows(0)("文字１"))
+
+                DgvCymnhd.Rows(i).Cells("メーカー").Value = ds.Tables(RS).Rows(i)("メーカー")
+                DgvCymnhd.Rows(i).Cells("品名").Value = ds.Tables(RS).Rows(i)("品名")
+                DgvCymnhd.Rows(i).Cells("型式").Value = ds.Tables(RS).Rows(i)("型式")
+                DgvCymnhd.Rows(i).Cells("仕入先名").Value = ds.Tables(RS).Rows(i)("仕入先名")
+                DgvCymnhd.Rows(i).Cells("仕入値").Value = ds.Tables(RS).Rows(i)("仕入値")
+                DgvCymnhd.Rows(i).Cells("受注数量").Value = ds.Tables(RS).Rows(i)("受注数量")
+                DgvCymnhd.Rows(i).Cells("売上数量").Value = ds.Tables(RS).Rows(i)("売上数量")
+                DgvCymnhd.Rows(i).Cells("受注残数").Value = ds.Tables(RS).Rows(i)("受注残数")
+                DgvCymnhd.Rows(i).Cells("単位").Value = ds.Tables(RS).Rows(i)("単位")
+                DgvCymnhd.Rows(i).Cells("間接費").Value = ds.Tables(RS).Rows(i)("間接費")
+                DgvCymnhd.Rows(i).Cells("売単価").Value = ds.Tables(RS).Rows(i)("売単価")
+                DgvCymnhd.Rows(i).Cells("売上金額").Value = ds.Tables(RS).Rows(i)("売上金額")
+                DgvCymnhd.Rows(i).Cells("粗利額").Value = ds.Tables(RS).Rows(i)("粗利額")
+                DgvCymnhd.Rows(i).Cells("粗利率").Value = ds.Tables(RS).Rows(i)("粗利率")
+
+                If ds.Tables(RS).Rows(i)("リードタイム単位") Is DBNull.Value Then
+
+                    'リードタイムが空だったらそのまま
+                    DgvCymnhd.Rows(i).Cells("リードタイム").Value = ds.Tables(RS).Rows(i)("リードタイム")
+
+                Else
+
+                    'リードタイムが入っていたら汎用マスタから単位を取得して連結する
+                    Sql = " AND 固定キー = '4'"
+                    Sql += " AND 可変キー = '" & ds.Tables(RS).Rows(i)("リードタイム単位").ToString & "'"
+
+                    Dim dsHanyo As DataSet = getDsData("m90_hanyo", Sql)
+
+                    tmp1 = ""
+                    tmp1 += ds.Tables(RS).Rows(i)("リードタイム")
+                    tmp1 += dsHanyo.Tables(RS).Rows(0)("文字１")
+                    DgvCymnhd.Rows(i).Cells("リードタイム").Value = tmp1
+                End If
+
+                DgvCymnhd.Rows(i).Cells("出庫数").Value = ds.Tables(RS).Rows(i)("出庫数")
+                DgvCymnhd.Rows(i).Cells("未出庫数").Value = ds.Tables(RS).Rows(i)("未出庫数")
+                DgvCymnhd.Rows(i).Cells("備考").Value = ds.Tables(RS).Rows(i)("備考")
+                DgvCymnhd.Rows(i).Cells("更新者").Value = ds.Tables(RS).Rows(i)("更新者")
+                DgvCymnhd.Rows(i).Cells("登録日").Value = ds.Tables(RS).Rows(i)("登録日")
+            Next
+
+        End If
 
     End Sub
 
@@ -908,6 +859,13 @@ Public Class OrderList
             DgvCymnhd.Columns.Add("取消", "Cancel")
             DgvCymnhd.Columns.Add("受注番号", "OrderNumber")
             DgvCymnhd.Columns.Add("受注番号枝番", "JobOrderSubNumber")
+
+            '出庫登録時
+            If OrderStatus = CommonConst.STATUS_GOODS_ISSUE Then
+                DgvCymnhd.Columns.Add("発注番号", "PurchaseNumber")
+                DgvCymnhd.Columns.Add("発注番号枝番", "PurchaseOrderSubNumber")
+            End If
+
             DgvCymnhd.Columns.Add("客先番号", "CustomerNumber")
             DgvCymnhd.Columns.Add("受注日", "JobOrderDate")
             DgvCymnhd.Columns.Add("見積番号", "QuotationNumber")
@@ -937,6 +895,13 @@ Public Class OrderList
             DgvCymnhd.Columns.Add("取消", "取消")
             DgvCymnhd.Columns.Add("受注番号", "受注番号")
             DgvCymnhd.Columns.Add("受注番号枝番", "受注番号枝番")
+
+            '出庫登録時
+            If OrderStatus = CommonConst.STATUS_GOODS_ISSUE Then
+                DgvCymnhd.Columns.Add("発注番号", "発注番号")
+                DgvCymnhd.Columns.Add("発注番号枝番", "発注番号枝番")
+            End If
+
             DgvCymnhd.Columns.Add("客先番号", "客先番号")
             DgvCymnhd.Columns.Add("受注日", "受注日")
             DgvCymnhd.Columns.Add("見積番号", "見積番号")
@@ -978,6 +943,13 @@ Public Class OrderList
             DgvCymnhd.Columns.Add("受注番号", "OrderNumber")
             DgvCymnhd.Columns.Add("受注番号枝番", "OrderSuffixNumber")
             DgvCymnhd.Columns.Add("行番号", "LineNumber")
+
+            '出庫登録時
+            If OrderStatus = CommonConst.STATUS_GOODS_ISSUE Then
+                DgvCymnhd.Columns.Add("発注番号", "PurchaseNumber")
+                DgvCymnhd.Columns.Add("発注番号枝番", "PurchaseOrderSubNumber")
+            End If
+
             DgvCymnhd.Columns.Add("仕入区分", "PurchasingClassification")
             DgvCymnhd.Columns.Add("メーカー", "Manufacturer")
             DgvCymnhd.Columns.Add("品名", "ItemName")
@@ -1004,6 +976,13 @@ Public Class OrderList
             DgvCymnhd.Columns.Add("受注番号", "受注番号")
             DgvCymnhd.Columns.Add("受注番号枝番", "受注番号枝番")
             DgvCymnhd.Columns.Add("行番号", "行番号")
+
+            '出庫登録時
+            If OrderStatus = CommonConst.STATUS_GOODS_ISSUE Then
+                DgvCymnhd.Columns.Add("発注番号", "発注番号")
+                DgvCymnhd.Columns.Add("発注番号枝番", "発注番号枝番")
+            End If
+
             DgvCymnhd.Columns.Add("仕入区分", "仕入区分")
             DgvCymnhd.Columns.Add("メーカー", "メーカー")
             DgvCymnhd.Columns.Add("品名", "品名")
