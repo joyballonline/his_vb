@@ -108,7 +108,7 @@ Public Class GoodsIssue
             TxtRemarks.Size = New Size(600, 22)
 
             'BtnDeliveryNote.Text = "Invoice/Receipt Issue"
-            BtnDeliveryNote.Text = "Delivery Note"
+            BtnDeliveryNote.Text = "Delivery Note" & Environment.NewLine & "Receipt Issue"
             BtnRegist.Text = "Registration"
             BtnBack.Text = "Back"
         End If
