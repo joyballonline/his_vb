@@ -10,6 +10,7 @@ Imports UtilMDL.xls
 Imports Microsoft.Office.Interop
 Imports Microsoft.Office.Interop.Excel
 Imports System.Globalization
+Imports System.IO
 
 Public Class JobOrderList
     Inherits System.Windows.Forms.Form
@@ -279,7 +280,15 @@ Public Class JobOrderList
 
             Next
 
-            book.SaveAs(sOutFile)
+            app.DisplayAlerts = False 'Microsoft Excelのアラート一旦無効化
+
+            Dim excelChk As Boolean = excelOutput(sOutFile)
+            If excelChk = False Then
+                Exit Sub
+            End If
+            book.SaveAs(sOutFile) '書き込み実行
+
+            app.DisplayAlerts = True 'アラート無効化を解除
 
             'カーソルをビジー状態から元に戻す
             Cursor.Current = Cursors.Default
@@ -425,6 +434,31 @@ Public Class JobOrderList
 
         '使用形式に書き換える
         Return prmVal.ToString("N3", CultureInfo.InvariantCulture)
+    End Function
+
+    'Excel出力する際のチェック
+    Private Function excelOutput(ByVal prmFilePath As String)
+        Dim fileChk As String = Dir(prmFilePath)
+        '同名ファイルがあるかどうかチェック
+        If fileChk <> "" Then
+            Dim result = _msgHd.dspMSG("confirmFileExist", frmC01F10_Login.loginValue.Language, prmFilePath)
+            If result = DialogResult.No Then
+                Return False
+            End If
+
+            Try
+                'ファイルが開けるかどうかチェック
+                Dim sr As StreamReader = New StreamReader(prmFilePath)
+                sr.Close() '処理が通ったら閉じる
+            Catch ex As Exception
+                '開けない場合はアラートを表示してリターンさせる
+                MessageBox.Show(ex.Message, CommonConst.AP_NAME, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return False
+            End Try
+
+            Return True
+        End If
+        Return True
     End Function
 
 End Class
