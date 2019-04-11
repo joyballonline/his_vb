@@ -904,6 +904,15 @@ Public Class QuoteList
             Return
         End If
 
+        '明細表示時は取消操作不可能
+        If RbtnDetails.Checked Then
+
+            '操作できないアラートを出す
+            _msgHd.dspMSG("NonAction", frmC01F10_Login.loginValue.Language)
+            Return
+
+        End If
+
         If DgvMithd.Rows(RowIdx).Cells("取消").Value = CommonConst.CANCEL_KBN_DISABLED_TXT Then
             '対象のデータではないことをアラートする
             _msgHd.dspMSG("cannotSelectTorikeshiData", frmC01F10_Login.loginValue.Language)
