@@ -10,6 +10,7 @@ Imports UtilMDL.xls
 Imports Microsoft.Office.Interop
 Imports System.Runtime.InteropServices
 Imports System.Globalization
+Imports System.IO
 
 Public Class GoodsIssue
     Inherits System.Windows.Forms.Form
@@ -964,14 +965,14 @@ Public Class GoodsIssue
                 '    'sheet.Rows(lstRow & ":" & lstRow).AutoFit
                 'Else
                 Dim cellPos As String = lstRow & ":" & lstRow
-                    Dim R As Object
-                    cellPos = lstRow & ":" & lstRow
-                    R = sheet.Range(cellPos)
-                    R.Copy()
-                    R.Insert()
-                    If Marshal.IsComObject(R) Then
-                        Marshal.ReleaseComObject(R)
-                    End If
+                Dim R As Object
+                cellPos = lstRow & ":" & lstRow
+                R = sheet.Range(cellPos)
+                R.Copy()
+                R.Insert()
+                If Marshal.IsComObject(R) Then
+                    Marshal.ReleaseComObject(R)
+                End If
 
                 'lstRow = lstRow + 1
 
@@ -991,7 +992,15 @@ Public Class GoodsIssue
 
             sheet.Cells.Rows.AutoFit()
 
-            book.SaveAs(sOutFile)
+            app.DisplayAlerts = False 'Microsoft Excelのアラート一旦無効化
+
+            Dim excelChk As Boolean = excelOutput(sOutFile)
+            If excelChk = False Then
+                Exit Sub
+            End If
+            book.SaveAs(sOutFile) '書き込み実行
+
+            app.DisplayAlerts = True 'アラート無効化を解除
 
             app.Visible = True
 
@@ -1058,28 +1067,36 @@ Public Class GoodsIssue
                 '    'sheet.Rows(lstRow & ":" & lstRow).AutoFit
                 'Else
                 Dim cellPos As String = lstRow & ":" & lstRow
-                    Dim R As Object
-                    cellPos = lstRow & ":" & lstRow
-                    R = sheet.Range(cellPos)
-                    R.Copy()
-                    R.Insert()
-                    If Marshal.IsComObject(R) Then
-                        Marshal.ReleaseComObject(R)
-                    End If
+                Dim R As Object
+                cellPos = lstRow & ":" & lstRow
+                R = sheet.Range(cellPos)
+                R.Copy()
+                R.Insert()
+                If Marshal.IsComObject(R) Then
+                    Marshal.ReleaseComObject(R)
+                End If
 
-                    'lstRow = lstRow + 1
+                'lstRow = lstRow + 1
 
-                    sheet.Range("A" & lstRow).Value = num
-                    sheet.Range("B" & lstRow).Value = ds2.Tables(RS).Rows(j)("メーカー") & Environment.NewLine & ds2.Tables(RS).Rows(j)("品名") & Environment.NewLine & ds2.Tables(RS).Rows(j)("型式")
-                    sheet.Range("F" & lstRow).Value = ds2.Tables(RS).Rows(j)("出庫数量") & " " & ds2.Tables(RS).Rows(j)("単位")
-                    'sheet.Rows(lstRow & ":" & lstRow).AutoFit
+                sheet.Range("A" & lstRow).Value = num
+                sheet.Range("B" & lstRow).Value = ds2.Tables(RS).Rows(j)("メーカー") & Environment.NewLine & ds2.Tables(RS).Rows(j)("品名") & Environment.NewLine & ds2.Tables(RS).Rows(j)("型式")
+                sheet.Range("F" & lstRow).Value = ds2.Tables(RS).Rows(j)("出庫数量") & " " & ds2.Tables(RS).Rows(j)("単位")
+                'sheet.Rows(lstRow & ":" & lstRow).AutoFit
 
-                    'End If
-                    num += 1
+                'End If
+                num += 1
                 lstRow = lstRow + 1
             Next
 
-            book.SaveAs(sOutFile)
+            app.DisplayAlerts = False 'Microsoft Excelのアラート一旦無効化
+
+            Dim excelChk As Boolean = excelOutput(sOutFile)
+            If excelChk = False Then
+                Exit Sub
+            End If
+            book.SaveAs(sOutFile) '書き込み実行
+
+            app.DisplayAlerts = True 'アラート無効化を解除
             app.Visible = True
 
             '_msgHd.dspMSG("CreateExcel")
@@ -1168,7 +1185,15 @@ Public Class GoodsIssue
                 End If
             Next
 
-            book.SaveAs(sOutFile)
+            app.DisplayAlerts = False 'Microsoft Excelのアラート一旦無効化
+
+            Dim excelChk As Boolean = excelOutput(sOutFile)
+            If excelChk = False Then
+                Exit Sub
+            End If
+            book.SaveAs(sOutFile) '書き込み実行
+
+            app.DisplayAlerts = True 'アラート無効化を解除
             app.Visible = True
 
             '_msgHd.dspMSG("CreateExcel")
@@ -1451,4 +1476,30 @@ Public Class GoodsIssue
         End If
 
     End Sub
+
+    'Excel出力する際のチェック
+    Private Function excelOutput(ByVal prmFilePath As String)
+        Dim fileChk As String = Dir(prmFilePath)
+        '同名ファイルがあるかどうかチェック
+        If fileChk <> "" Then
+            Dim result = _msgHd.dspMSG("confirmFileExist", frmC01F10_Login.loginValue.Language, prmFilePath)
+            If result = DialogResult.No Then
+                Return False
+            End If
+
+            Try
+                'ファイルが開けるかどうかチェック
+                Dim sr As StreamReader = New StreamReader(prmFilePath)
+                sr.Close() '処理が通ったら閉じる
+            Catch ex As Exception
+                '開けない場合はアラートを表示してリターンさせる
+                MessageBox.Show(ex.Message, CommonConst.AP_NAME, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return False
+            End Try
+
+            Return True
+        End If
+        Return True
+    End Function
+
 End Class
