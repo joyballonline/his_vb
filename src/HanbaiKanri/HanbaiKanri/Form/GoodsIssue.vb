@@ -218,6 +218,8 @@ Public Class GoodsIssue
             Sql += "t11.受注番号枝番 ILIKE '" & Suffix & "'"
             Sql += " AND "
             Sql += "t10.取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'"
+            Sql += " AND "
+            Sql += " t11.未出庫数 <> 0"
             Sql += " ORDER BY t11.行番号"
 
             Dim dsCymndt As DataSet = _db.selectDB(Sql, RS, reccnt)
@@ -331,28 +333,26 @@ Public Class GoodsIssue
 
 
             For i As Integer = 0 To dsCymndt.Tables(RS).Rows.Count - 1
-                If dsCymndt.Tables(RS).Rows(i)("未出庫数") <> 0 Then
-                    '汎用マスタから仕入区分名称取得
-                    sireKbn = getDsHanyoData(CommonConst.FIXED_KEY_PURCHASING_CLASS, dsCymndt.Tables(RS).Rows(i)("仕入区分").ToString)
+                '汎用マスタから仕入区分名称取得
+                sireKbn = getDsHanyoData(CommonConst.FIXED_KEY_PURCHASING_CLASS, dsCymndt.Tables(RS).Rows(i)("仕入区分").ToString)
 
-                    DgvAdd.Rows.Add()
-                    DgvAdd.Rows(i).Cells("行番号").Value = dsCymndt.Tables(RS).Rows(i)("行番号")
-                    DgvAdd.Rows(i).Cells("仕入区分").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
+                DgvAdd.Rows.Add()
+                DgvAdd.Rows(i).Cells("行番号").Value = dsCymndt.Tables(RS).Rows(i)("行番号")
+                DgvAdd.Rows(i).Cells("仕入区分").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
                                                                 sireKbn.Tables(RS).Rows(0)("文字２"),
                                                                 sireKbn.Tables(RS).Rows(0)("文字１"))
-                    DgvAdd.Rows(i).Cells("仕入区分値").Value = dsCymndt.Tables(RS).Rows(i)("仕入区分")
-                    DgvAdd.Rows(i).Cells("メーカー").Value = dsCymndt.Tables(RS).Rows(i)("メーカー")
-                    DgvAdd.Rows(i).Cells("品名").Value = dsCymndt.Tables(RS).Rows(i)("品名")
-                    DgvAdd.Rows(i).Cells("型式").Value = dsCymndt.Tables(RS).Rows(i)("型式")
-                    DgvAdd.Rows(i).Cells("仕入先").Value = dsCymndt.Tables(RS).Rows(i)("仕入先名")
-                    DgvAdd.Rows(i).Cells("単位").Value = dsCymndt.Tables(RS).Rows(i)("単位")
-                    DgvAdd.Rows(i).Cells("売単価").Value = dsCymndt.Tables(RS).Rows(i)("見積単価")
-                    DgvAdd.Rows(i).Cells("出庫数量").Value = 0
-                    DgvAdd.Rows(i).Cells("倉庫").Value = dsWarehouse.Tables(RS).Rows(0)("倉庫コード")
-                    DgvAdd.Rows(i).Cells("入出庫種別").Value = dsHanyo.Tables(RS).Rows(0)("可変キー")
-                    DgvAdd.Rows(i).Cells("引当区分").Value = CommonConst.AC_KBN_NORMAL
-                    DgvAdd.Rows(i).Cells("備考").Value = dsCymndt.Tables(RS).Rows(i)("備考")
-                End If
+                DgvAdd.Rows(i).Cells("仕入区分値").Value = dsCymndt.Tables(RS).Rows(i)("仕入区分")
+                DgvAdd.Rows(i).Cells("メーカー").Value = dsCymndt.Tables(RS).Rows(i)("メーカー")
+                DgvAdd.Rows(i).Cells("品名").Value = dsCymndt.Tables(RS).Rows(i)("品名")
+                DgvAdd.Rows(i).Cells("型式").Value = dsCymndt.Tables(RS).Rows(i)("型式")
+                DgvAdd.Rows(i).Cells("仕入先").Value = dsCymndt.Tables(RS).Rows(i)("仕入先名")
+                DgvAdd.Rows(i).Cells("単位").Value = dsCymndt.Tables(RS).Rows(i)("単位")
+                DgvAdd.Rows(i).Cells("売単価").Value = dsCymndt.Tables(RS).Rows(i)("見積単価")
+                DgvAdd.Rows(i).Cells("出庫数量").Value = 0
+                DgvAdd.Rows(i).Cells("倉庫").Value = dsWarehouse.Tables(RS).Rows(0)("倉庫コード")
+                DgvAdd.Rows(i).Cells("入出庫種別").Value = dsHanyo.Tables(RS).Rows(0)("可変キー")
+                DgvAdd.Rows(i).Cells("引当区分").Value = CommonConst.AC_KBN_NORMAL
+                DgvAdd.Rows(i).Cells("備考").Value = dsCymndt.Tables(RS).Rows(i)("備考")
             Next
 
             '行番号の振り直し
