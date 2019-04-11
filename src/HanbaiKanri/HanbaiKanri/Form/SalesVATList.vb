@@ -10,6 +10,7 @@ Imports UtilMDL.xls
 Imports Microsoft.Office.Interop
 Imports Microsoft.Office.Interop.Excel
 Imports System.Globalization
+Imports System.IO
 
 Public Class SalesVATList
     Inherits System.Windows.Forms.Form
@@ -160,7 +161,7 @@ Public Class SalesVATList
 
             For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
                 'VAT
-                Dim vatAmount As Decimal = Format((ds.Tables(RS).Rows(i)("見積単価") * ds.Tables(RS).Rows(i)("ＶＡＴ")) / 100, "0.000")
+                'Dim vatAmount As Decimal = Format((ds.Tables(RS).Rows(i)("見積単価") * ds.Tables(RS).Rows(i)("ＶＡＴ")) / 100, "0.000")
                 '売上計
                 Dim salesAmount As Decimal = ds.Tables(RS).Rows(i)("売上数量") * ds.Tables(RS).Rows(i)("売単価")
 
@@ -176,10 +177,10 @@ Public Class SalesVATList
                 DgvList.Rows(i).Cells("数量").Value = ds.Tables(RS).Rows(i)("売上数量")
                 DgvList.Rows(i).Cells("単位").Value = ds.Tables(RS).Rows(i)("単位")
                 DgvList.Rows(i).Cells("売単価").Value = ds.Tables(RS).Rows(i)("見積単価")
-                DgvList.Rows(i).Cells("ＶＡＴ").Value = vatAmount
-                DgvList.Rows(i).Cells("売上計").Value = (ds.Tables(RS).Rows(i)("見積単価") + vatAmount) * ds.Tables(RS).Rows(i)("売上数量")
+                DgvList.Rows(i).Cells("ＶＡＴ").Value = ds.Tables(RS).Rows(i)("ＶＡＴ")
+                DgvList.Rows(i).Cells("売上計").Value = (ds.Tables(RS).Rows(i)("見積単価") + ds.Tables(RS).Rows(i)("ＶＡＴ")) * ds.Tables(RS).Rows(i)("売上数量")
 
-                totalSalesAmount += (ds.Tables(RS).Rows(i)("見積単価") + vatAmount) * ds.Tables(RS).Rows(i)("売上数量")
+                totalSalesAmount += (ds.Tables(RS).Rows(i)("見積単価") + ds.Tables(RS).Rows(i)("ＶＡＴ")) * ds.Tables(RS).Rows(i)("売上数量")
             Next
 
             TxtSalesAmount.Text = totalSalesAmount.ToString()
@@ -312,7 +313,17 @@ Public Class SalesVATList
             xlBorder = xlBorders(XlBordersIndex.xlEdgeBottom)
             xlBorder.LineStyle = XlLineStyle.xlContinuous
 
-            book.SaveAs(sOutFile)
+            app.DisplayAlerts = False 'Microsoft Excelのアラート一旦無効化
+
+            Dim excelChk As Boolean = excelOutput(sOutFile)
+            If excelChk = False Then
+                Exit Sub
+            End If
+            book.SaveAs(sOutFile) '書き込み実行
+
+            app.DisplayAlerts = True 'アラート無効化を解除
+
+            app.Visible = True
 
             'カーソルをビジー状態から元に戻す
             Cursor.Current = Cursors.Default
@@ -452,6 +463,31 @@ Public Class SalesVATList
 
         '日本の形式に書き換える
         Return changeFormat
+    End Function
+
+    'Excel出力する際のチェック
+    Private Function excelOutput(ByVal prmFilePath As String)
+        Dim fileChk As String = Dir(prmFilePath)
+        '同名ファイルがあるかどうかチェック
+        If fileChk <> "" Then
+            Dim result = _msgHd.dspMSG("confirmFileExist", frmC01F10_Login.loginValue.Language, prmFilePath)
+            If result = DialogResult.No Then
+                Return False
+            End If
+
+            Try
+                'ファイルが開けるかどうかチェック
+                Dim sr As StreamReader = New StreamReader(prmFilePath)
+                sr.Close() '処理が通ったら閉じる
+            Catch ex As Exception
+                '開けない場合はアラートを表示してリターンさせる
+                MessageBox.Show(ex.Message, CommonConst.AP_NAME, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return False
+            End Try
+
+            Return True
+        End If
+        Return True
     End Function
 
 End Class
