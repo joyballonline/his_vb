@@ -422,6 +422,7 @@ Partial Class GoodsIssue
         'TableLayoutPanel1
         '
         Me.TableLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.TableLayoutPanel1.BackColor = System.Drawing.Color.Transparent
         Me.TableLayoutPanel1.ColumnCount = 5
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.09228!))
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.92135!))

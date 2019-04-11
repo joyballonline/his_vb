@@ -141,6 +141,8 @@ Public Class GoodsIssue
             DgvHistory.Location = New Point(12, 106)
             DgvHistory.Size = New Point(1326, 400)
 
+            TableLayoutPanel1.Visible = False
+
             BtnRegist.Visible = False
             BtnDeliveryNote.Visible = True
             BtnDeliveryNote.Location = New Point(1002, 509)
