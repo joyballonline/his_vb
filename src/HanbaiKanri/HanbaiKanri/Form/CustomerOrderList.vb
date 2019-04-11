@@ -10,6 +10,7 @@ Imports UtilMDL.xls
 Imports Microsoft.Office.Interop
 Imports System.Runtime.InteropServices
 Imports System.Text.RegularExpressions
+Imports System.IO
 
 Public Class CustomerOrderList
     Inherits System.Windows.Forms.Form
@@ -216,6 +217,9 @@ Public Class CustomerOrderList
         Dim book As Excel.Workbook = Nothing
         Dim sheet As Excel.Worksheet = Nothing
 
+        'カーソルをビジー状態にする
+        Cursor.Current = Cursors.WaitCursor
+
         For Each r As DataGridViewRow In DgvBilling.SelectedRows
             If flg1 = False Then
                 BillingNo = DgvBilling.Rows(r.Index).Cells("請求番号").Value
@@ -347,14 +351,27 @@ Public Class CustomerOrderList
 
             sheet.Range("C" & lastRow + 5).Value = sheet.Range("E" & lastRow + 3).Value
 
-            book.SaveAs(sOutFile)
+            app.DisplayAlerts = False 'Microsoft Excelのアラート一旦無効化
+
+            Dim excelChk As Boolean = excelOutput(sOutFile)
+            If excelChk = False Then
+                Exit Sub
+            End If
+            book.SaveAs(sOutFile) '書き込み実行
+
+            app.DisplayAlerts = True 'アラート無効化を解除
             app.Visible = True
+
+            'カーソルをビジー状態から元に戻す
+            Cursor.Current = Cursors.Default
 
             _msgHd.dspMSG("CreateExcel", frmC01F10_Login.loginValue.Language)
 
         Catch ex As Exception
-            Throw ex
+            'カーソルをビジー状態から元に戻す
+            Cursor.Current = Cursors.Default
 
+            Throw ex
         Finally
             'app.Quit()
             'Marshal.ReleaseComObject(sheet)
@@ -397,6 +414,31 @@ Public Class CustomerOrderList
         Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql += txtParam
         Return _db.selectDB(Sql, RS, reccnt)
+    End Function
+
+    'Excel出力する際のチェック
+    Private Function excelOutput(ByVal prmFilePath As String)
+        Dim fileChk As String = Dir(prmFilePath)
+        '同名ファイルがあるかどうかチェック
+        If fileChk <> "" Then
+            Dim result = _msgHd.dspMSG("confirmFileExist", frmC01F10_Login.loginValue.Language, prmFilePath)
+            If result = DialogResult.No Then
+                Return False
+            End If
+
+            Try
+                'ファイルが開けるかどうかチェック
+                Dim sr As StreamReader = New StreamReader(prmFilePath)
+                sr.Close() '処理が通ったら閉じる
+            Catch ex As Exception
+                '開けない場合はアラートを表示してリターンさせる
+                MessageBox.Show(ex.Message, CommonConst.AP_NAME, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return False
+            End Try
+
+            Return True
+        End If
+        Return True
     End Function
 
 End Class
