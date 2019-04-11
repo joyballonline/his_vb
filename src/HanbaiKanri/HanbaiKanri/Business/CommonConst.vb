@@ -379,4 +379,8 @@ Public Class CommonConst
     'DB登録可能金額
     Public Const DIGIT_CHECK As Decimal = 99999999999.999     '整数部11桁、小数点3桁まで
 
+    'アプリ名
+    Public Const AP_NAME As String = "SPIN"   'SPIN
+
+
 End Class
