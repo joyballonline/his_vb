@@ -621,7 +621,7 @@ Public Class Quote
         If currentColumn = "仕入区分" Or currentColumn = "メーカー" Or currentColumn = "品名" Or currentColumn = "型式" Then
 
             '仕入区分が「在庫引当」の場合
-            If e.RowIndex > 0 Then
+            If e.RowIndex >= 0 Then
                 If DgvItemList("仕入区分", e.RowIndex).Value = CommonConst.Sire_KBN_Zaiko Then
 
                     Dim manufactuer As String = DgvItemList("メーカー", e.RowIndex).Value
