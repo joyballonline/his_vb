@@ -462,6 +462,13 @@ Public Class Cymn
             End If
         End If
 
+        '受発注登録時に受注金額が0の場合アラートで警告
+        If CmWarehouse.SelectedValue = "" Then
+            '倉庫データがないことをアラートする
+            Dim result = _msgHd.dspMSG("chkWarehouseError", frmC01F10_Login.loginValue.Language)
+            Exit Sub
+        End If
+
         '仕入先が stockじゃなかったら
         If TxtCustomerCode.Text <> "stock" Then
 
@@ -1139,10 +1146,13 @@ Public Class Cymn
 
         CmWarehouse.DataSource = tb
 
-        If prmVal IsNot "" Then
-            CmWarehouse.SelectedValue = prmVal
-        Else
-            CmWarehouse.SelectedIndex = -1
+        '倉庫データがあったら
+        If ds.Tables(RS).Rows.Count > 0 Then
+            If prmVal IsNot "" Then
+                CmWarehouse.SelectedValue = prmVal
+            Else
+                CmWarehouse.SelectedIndex = 0
+            End If
         End If
 
     End Sub
