@@ -941,22 +941,22 @@ Public Class Quote
             DgvItemList.Columns("粗利率").ReadOnly = True
             DgvItemList.Columns("売単価").ReadOnly = False
             DgvItemList.Columns("見積単価").ReadOnly = True
-            DgvItemList.Columns("粗利率").DefaultCellStyle.BackColor = Color.Gray
+            DgvItemList.Columns("粗利率").DefaultCellStyle.BackColor = Color.LightGray
             DgvItemList.Columns("売単価").DefaultCellStyle.BackColor = Color.White
-            DgvItemList.Columns("見積単価").DefaultCellStyle.BackColor = Color.Gray
+            DgvItemList.Columns("見積単価").DefaultCellStyle.BackColor = Color.LightGray
         ElseIf RbtnGP.Checked Then
             DgvItemList.Columns("売単価").ReadOnly = True
             DgvItemList.Columns("粗利率").ReadOnly = False
             DgvItemList.Columns("見積単価").ReadOnly = True
-            DgvItemList.Columns("売単価").DefaultCellStyle.BackColor = Color.Gray
+            DgvItemList.Columns("売単価").DefaultCellStyle.BackColor = Color.LightGray
             DgvItemList.Columns("粗利率").DefaultCellStyle.BackColor = Color.White
-            DgvItemList.Columns("見積単価").DefaultCellStyle.BackColor = Color.Gray
+            DgvItemList.Columns("見積単価").DefaultCellStyle.BackColor = Color.LightGray
         Else
             DgvItemList.Columns("売単価").ReadOnly = True
             DgvItemList.Columns("粗利率").ReadOnly = True
             DgvItemList.Columns("見積単価").ReadOnly = False
-            DgvItemList.Columns("売単価").DefaultCellStyle.BackColor = Color.Gray
-            DgvItemList.Columns("粗利率").DefaultCellStyle.BackColor = Color.Gray
+            DgvItemList.Columns("売単価").DefaultCellStyle.BackColor = Color.LightGray
+            DgvItemList.Columns("粗利率").DefaultCellStyle.BackColor = Color.LightGray
             DgvItemList.Columns("見積単価").DefaultCellStyle.BackColor = Color.White
 
         End If
