@@ -1157,15 +1157,15 @@ Public Class GoodsIssue
 
 
             For j As Integer = 0 To ds2.Tables(RS).Rows.Count - 1
-                If rowCnt = 0 Then
-                    sheet.Range("A14").Value = num
-                    sheet.Range("C14").Value = ds2.Tables(RS).Rows(j)("メーカー") & " / " & ds2.Tables(RS).Rows(j)("品名") & " / " & ds2.Tables(RS).Rows(j)("型式")
-                    sheet.Range("N14").Value = ds2.Tables(RS).Rows(j)("出庫数量")
-                    sheet.Range("Q14").Value = ds2.Tables(RS).Rows(j)("単位")
-                    sheet.Range("T14").Value = ds2.Tables(RS).Rows(j)("備考")
-                    'sheet.Rows(lstRow & ":" & lstRow).AutoFit
-                Else
-                    Dim cellPos As String = lstRow & ":" & lstRow
+                'If rowCnt = 0 Then
+                '    sheet.Range("A14").Value = num
+                '    sheet.Range("C14").Value = ds2.Tables(RS).Rows(j)("メーカー") & " / " & ds2.Tables(RS).Rows(j)("品名") & " / " & ds2.Tables(RS).Rows(j)("型式")
+                '    sheet.Range("N14").Value = ds2.Tables(RS).Rows(j)("出庫数量")
+                '    sheet.Range("Q14").Value = ds2.Tables(RS).Rows(j)("単位")
+                '    sheet.Range("T14").Value = ds2.Tables(RS).Rows(j)("備考")
+                '    'sheet.Rows(lstRow & ":" & lstRow).AutoFit
+                'Else
+                Dim cellPos As String = lstRow & ":" & lstRow
                     Dim R As Object
                     cellPos = lstRow & ":" & lstRow
                     R = sheet.Range(cellPos)
@@ -1175,16 +1175,18 @@ Public Class GoodsIssue
                         Marshal.ReleaseComObject(R)
                     End If
 
-                    lstRow = lstRow + 1
+                'lstRow = lstRow + 1
 
-                    sheet.Range("A" & lstRow).Value = num
-                    sheet.Range("C" & lstRow).Value = ds2.Tables(RS).Rows(j)("メーカー") & " / " & ds2.Tables(RS).Rows(j)("品名") & " / " & ds2.Tables(RS).Rows(j)("型式")
-                    sheet.Range("N" & lstRow).Value = ds2.Tables(RS).Rows(j)("出庫数量")
-                    sheet.Range("Q" & lstRow).Value = ds2.Tables(RS).Rows(j)("単位")
-                    sheet.Range("T" & lstRow).Value = ds2.Tables(RS).Rows(j)("備考")
-                    'sheet.Rows(lstRow & ":" & lstRow).AutoFit
+                sheet.Range("A" & lstRow).Value = num
+                sheet.Range("C" & lstRow).Value = ds2.Tables(RS).Rows(j)("メーカー") & Environment.NewLine & ds2.Tables(RS).Rows(j)("品名") & Environment.NewLine & ds2.Tables(RS).Rows(j)("型式")
+                sheet.Range("N" & lstRow).Value = ds2.Tables(RS).Rows(j)("出庫数量")
+                sheet.Range("Q" & lstRow).Value = ds2.Tables(RS).Rows(j)("単位")
+                sheet.Range("T" & lstRow).Value = ds2.Tables(RS).Rows(j)("備考")
+                'sheet.Rows(lstRow & ":" & lstRow).AutoFit
 
-                End If
+                'End If
+                num += 1
+                lstRow = lstRow + 1
             Next
 
             app.DisplayAlerts = False 'Microsoft Excelのアラート一旦無効化
