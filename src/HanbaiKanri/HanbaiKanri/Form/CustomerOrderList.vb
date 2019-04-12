@@ -358,7 +358,7 @@ Public Class CustomerOrderList
                         lastRow += 1
                     End If
                     sheet.Range("A" & currentRow).Value = currentNum
-                    sheet.Range("B" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("メーカー") & " / " & dsCymndt.Tables(RS).Rows(i)("品名") & " / " & dsCymndt.Tables(RS).Rows(i)("型式")
+                    sheet.Range("B" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("メーカー") & Environment.NewLine & dsCymndt.Tables(RS).Rows(i)("品名") & Environment.NewLine & dsCymndt.Tables(RS).Rows(i)("型式")
                     sheet.Range("C" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("受注数量")
                     sheet.Range("D" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("売単価")
                     sheet.Range("E" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("売上金額")
