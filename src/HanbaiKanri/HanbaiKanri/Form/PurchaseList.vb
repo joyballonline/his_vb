@@ -212,6 +212,8 @@ Public Class PurchaseList
                     DgvHtyhd.Rows.Add()
                     DgvHtyhd.Rows(i).Cells("仕入番号").Value = ds.Tables(RS).Rows(i)("仕入番号")
                     DgvHtyhd.Rows(i).Cells("行番号").Value = ds.Tables(RS).Rows(i)("行番号")
+                    DgvHtyhd.Rows(i).Cells("発注番号").Value = ds.Tables(RS).Rows(i)("発注番号")
+                    DgvHtyhd.Rows(i).Cells("発注番号枝番").Value = ds.Tables(RS).Rows(i)("発注番号枝番")
                     DgvHtyhd.Rows(i).Cells("仕入区分").Value = ds.Tables(RS).Rows(i)("仕入区分")
 
                     'リードタイムのリストを汎用マスタから取得
@@ -310,6 +312,8 @@ Public Class PurchaseList
             DgvHtyhd.Columns.Add("取消", "Cancel")
             DgvHtyhd.Columns.Add("仕入番号", "PurchaseNumber")
             DgvHtyhd.Columns.Add("行番号", "LineNumber")
+            DgvHtyhd.Columns.Add("発注番号", "PurchaseOrderNumber")
+            DgvHtyhd.Columns.Add("発注番号枝番", "PurchaseOrderSubNumber")
             DgvHtyhd.Columns.Add("仕入区分", "PurchasingClassification")
             DgvHtyhd.Columns.Add("メーカー", "Manufacturer")
             DgvHtyhd.Columns.Add("品名", "ItemName")
@@ -329,6 +333,8 @@ Public Class PurchaseList
             DgvHtyhd.Columns.Add("取消", "取消")
             DgvHtyhd.Columns.Add("仕入番号", "仕入番号")
             DgvHtyhd.Columns.Add("行番号", "行番号")
+            DgvHtyhd.Columns.Add("発注番号", "発注番号")
+            DgvHtyhd.Columns.Add("発注番号枝番", "発注番号枝番")
             DgvHtyhd.Columns.Add("仕入区分", "仕入区分")
             DgvHtyhd.Columns.Add("メーカー", "メーカー")
             DgvHtyhd.Columns.Add("品名", "品名")
