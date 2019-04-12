@@ -258,7 +258,7 @@ Public Class CustomerOrderList
             Dim addRow As Integer = 0
             Dim currentNum As Integer = 1
 
-
+            '選択したものだけ請求書を発行する
             For Each r As DataGridViewRow In DgvBilling.SelectedRows
                 BillingNo = DgvBilling.Rows(r.Index).Cells("請求番号").Value
                 OrderNo = DgvBilling.Rows(r.Index).Cells("受注番号").Value
@@ -275,6 +275,20 @@ Public Class CustomerOrderList
                 '受注基本（請求債情報）
                 Dim dsCymnhd As DataSet = getDsData("t10_cymnhd", Sql)
 
+                Sql = " SELECT t44.出庫番号 "
+                Sql += " FROM t44_shukohd t44 "
+                Sql += " LEFT JOIN t10_cymnhd t10 "
+                Sql += " ON t44.会社コード = t10.会社コード "
+                Sql += " AND t44.受注番号 = t10.受注番号 "
+                Sql += " AND t44.受注番号枝番 = t10.受注番号枝番 "
+                Sql += " WHERE t44.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                Sql += " AND t44.受注番号 = '" & OrderNo & "'"
+                Sql += " AND t44.受注番号枝番 = '" & OrderSuffix & "'"
+                Sql += " AND t44.取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'"
+
+                '出庫データ取得
+                Dim dsShukkoHd As DataSet = _db.selectDB(Sql, RS, reccnt)
+
                 '初回だけ
                 If flg2 = False Then
                     sheet.Range("B8").Value = dsCymnhd.Tables(RS).Rows(0)("得意先名")
@@ -283,7 +297,16 @@ Public Class CustomerOrderList
                     sheet.Range("B14").Value = dsCymnhd.Tables(RS).Rows(0)("得意先担当者役職") & " " & dsCymnhd.Tables(RS).Rows(0)("得意先担当者名")
                     sheet.Range("A15").Value = "Telp." & dsCymnhd.Tables(RS).Rows(0)("得意先電話番号") & "　Fax." & dsCymnhd.Tables(RS).Rows(0)("得意先ＦＡＸ")
                     sheet.Range("E8").Value = BillingNo
-                    sheet.Range("E9").Value = System.DateTime.Now
+                    'sheet.Range("E9").Value = System.DateTime.Now
+                    sheet.Range("E9").Value = DgvBilling.Rows(r.Index).Cells("請求日").Value
+                    sheet.Range("E11").Value = dsCymnhd.Tables(RS).Rows(0)("客先番号")
+
+                    If dsShukkoHd.Tables(RS).Rows.Count > 0 Then
+                        For x As Integer = 0 To dsShukkoHd.Tables(RS).Rows.Count - 1
+                            sheet.Range("E12").Value += IIf(x > 0, ", " & dsShukkoHd.Tables(RS).Rows(x)("出庫番号"), dsShukkoHd.Tables(RS).Rows(x)("出庫番号"))
+                        Next
+                    End If
+
                     sheet.Range("D13").Value = dsCymnhd.Tables(RS).Rows(0)("支払条件")
 
                     flg2 = True
