@@ -77,285 +77,39 @@ Public Class Customer
 
     End Sub
 
-    Private Sub btnAddCustomer_Click(sender As Object, e As EventArgs) Handles btnRegistrarion.Click
-        '項目チェック
-        Dim strMessage As String = ""    'メッセージ本文
-        Dim strMessageTitle As String = ""      'メッセージタイトル
-        ''得意先コードは必須
-        If TxtCustomerCode.Text = "" Then
-            If frmC01F10_Login.loginValue.Language = "ENG" Then
-                strMessage = "Please enter Customer Code. "
-                strMessageTitle = "CustomerCode Error"
-            Else
-                strMessage = "得意先コードを入力してください。"
-                strMessageTitle = "得意先コード入力エラー"
-            End If
-            Dim result As DialogResult = MessageBox.Show(strMessage, strMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-            Exit Sub
-        End If
-
-        '登録処理はここから
-        Dim dtToday As String = UtilClass.formatDatetime(DateTime.Now)
-        Try
-            If _status = CommonConst.STATUS_ADD Then
-                Dim Sql As String = ""
-
-                Sql = ""
-                Sql += "INSERT INTO "
-                Sql += "Public."
-                Sql += "m10_customer("
-                Sql += "会社コード, 得意先コード, 得意先名, 得意先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 担当者役職, 既定支払条件, メモ, 会計用得意先コード, 更新者, 更新日)"
-                Sql += " VALUES('"
-                Sql += frmC01F10_Login.loginValue.BumonCD
-                Sql += "', '"
-                Sql += TxtCustomerCode.Text
-                Sql += "', '"
-                Sql += TxtCustomerName.Text
-                Sql += "', '"
-                Sql += TxtCustomerShortName.Text
-                Sql += "', '"
-                Sql += TxtPostalCode.Text
-                Sql += "', '"
-                Sql += TxtAddress1.Text
-                Sql += "', '"
-                Sql += TxtAddress2.Text
-                Sql += "', '"
-                Sql += TxtAddress3.Text
-                Sql += "', '"
-                Sql += TxtTel.Text
-                Sql += "', '"
-                Sql += TxtTelSearch.Text
-                Sql += "', '"
-                Sql += TxtFax.Text
-                Sql += "', '"
-                Sql += TxtPerson.Text
-                Sql += "', '"
-                Sql += TxtPosition.Text
-                Sql += "', '"
-                Sql += TxtPaymentTerms.Text
-                Sql += "', '"
-                Sql += TxtMemo.Text
-                Sql += "', '"
-                Sql += TxtAccountingVendorCode.Text
-                Sql += "', '"
-                Sql += frmC01F10_Login.loginValue.TantoNM
-                Sql += "', '"
-                Sql += dtToday
-                Sql += "')"
-                Sql += "RETURNING 会社コード"
-                Sql += ", "
-                Sql += "得意先コード"
-                Sql += ", "
-                Sql += "得意先名"
-                Sql += ", "
-                Sql += "得意先名略称"
-                Sql += ", "
-                Sql += "郵便番号"
-                Sql += ", "
-                Sql += "住所１"
-                Sql += ", "
-                Sql += "住所２"
-                Sql += ", "
-                Sql += "住所３"
-                Sql += ", "
-                Sql += "電話番号"
-                Sql += ", "
-                Sql += "電話番号検索用"
-                Sql += ", "
-                Sql += "ＦＡＸ番号"
-                Sql += ", "
-                Sql += "担当者名"
-                Sql += ", "
-                Sql += "担当者役職"
-                Sql += ", "
-                Sql += "既定支払条件"
-                Sql += ", "
-                Sql += "メモ"
-                Sql += ", "
-                Sql += "会計用得意先コード"
-                Sql += ", "
-                Sql += "更新者"
-                Sql += ", "
-                Sql += "更新日"
-
-                _db.executeDB(Sql)
-            Else
-                Dim Sql As String = ""
-
-                Sql = ""
-                Sql += "UPDATE "
-                Sql += "Public."
-                Sql += "m10_customer "
-                Sql += "SET "
-                Sql += " 会社コード"
-                Sql += " = '"
-                Sql += TxtCompanyCode.Text
-                Sql += "', "
-                Sql += "得意先コード"
-                Sql += " = '"
-                Sql += TxtCustomerCode.Text
-                Sql += "', "
-                Sql += "得意先名"
-                Sql += " = '"
-                Sql += TxtCustomerName.Text
-                Sql += "', "
-                Sql += "得意先名略称"
-                Sql += " = '"
-                Sql += TxtCustomerShortName.Text
-                Sql += "', "
-                Sql += "郵便番号"
-                Sql += " = '"
-                Sql += TxtPostalCode.Text
-                Sql += "', "
-                Sql += "住所１"
-                Sql += " = '"
-                Sql += TxtAddress1.Text
-                Sql += "', "
-                Sql += "住所２"
-                Sql += " = '"
-                Sql += TxtAddress2.Text
-                Sql += "', "
-                Sql += "住所３"
-                Sql += " = '"
-                Sql += TxtAddress3.Text
-                Sql += "', "
-                Sql += "電話番号"
-                Sql += " = '"
-                Sql += TxtTel.Text
-                Sql += "', "
-                Sql += "電話番号検索用"
-                Sql += " = '"
-                Sql += TxtTelSearch.Text
-                Sql += "', "
-                Sql += "ＦＡＸ番号"
-                Sql += " = '"
-                Sql += TxtFax.Text
-                Sql += "', "
-                Sql += "担当者名"
-                Sql += " = '"
-                Sql += TxtPerson.Text
-                Sql += "', "
-                Sql += "担当者役職"
-                Sql += " = '"
-                Sql += TxtPosition.Text
-                Sql += "', "
-                Sql += "既定支払条件"
-                Sql += " = '"
-                Sql += TxtPaymentTerms.Text
-                Sql += "', "
-                Sql += "メモ"
-                Sql += " = '"
-                Sql += TxtMemo.Text
-                Sql += "', "
-                Sql += "会計用得意先コード"
-                Sql += " = '"
-                Sql += TxtAccountingVendorCode.Text
-                Sql += "', "
-                Sql += "更新者"
-                Sql += " = '"
-                Sql += "Admin"
-                Sql += "', "
-                Sql += "更新日"
-                Sql += " = '"
-                Sql += dtToday
-                Sql += "' "
-                Sql += "WHERE"
-                Sql += " 会社コード"
-                Sql += "='"
-                Sql += _companyCode
-                Sql += "'"
-                Sql += " AND"
-                Sql += " 得意先コード"
-                Sql += "='"
-                Sql += _customerCode
-                Sql += "' "
-                Sql += "RETURNING 会社コード"
-                Sql += ", "
-                Sql += "得意先コード"
-                Sql += ", "
-                Sql += "得意先名"
-                Sql += ", "
-                Sql += "得意先名略称"
-                Sql += ", "
-                Sql += "郵便番号"
-                Sql += ", "
-                Sql += "住所１"
-                Sql += ", "
-                Sql += "住所２"
-                Sql += ", "
-                Sql += "住所３"
-                Sql += ", "
-                Sql += "電話番号"
-                Sql += ", "
-                Sql += "電話番号検索用"
-                Sql += ", "
-                Sql += "ＦＡＸ番号"
-                Sql += ", "
-                Sql += "担当者名"
-                Sql += ", "
-                Sql += "担当者役職"
-                Sql += ", "
-                Sql += "既定支払条件"
-                Sql += ", "
-                Sql += "メモ"
-                Sql += ", "
-                Sql += "会計用得意先コード"
-                Sql += ", "
-                Sql += "更新者"
-                Sql += ", "
-                Sql += "更新日"
-
-                _db.executeDB(Sql)
-            End If
-
-            _parentForm.Enabled = True
-            _parentForm.Show()
-            Me.Dispose()
-
-        Catch ue As UsrDefException
-            ue.dspMsg()
-            Throw ue
-        Catch ex As Exception
-            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
-        End Try
-    End Sub
-
-    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        _parentForm.Enabled = True
-        _parentForm.Show()
-        Me.Dispose()
-    End Sub
-
     Private Sub Customer_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If frmC01F10_Login.loginValue.Language = "ENG" Then
-            Label2.Text = "CustomerCode"
-            Label3.Text = "CustomerName"
-            Label4.Text = "ShortName"
-            Label5.Text = "PostalCode"
-            Label6.Text = "Address1"
-            Label7.Text = "Address2"
-            Label8.Text = "Address3"
-            Label9.Text = "TEL"
-            Label10.Text = "TEL(Search)"
-            Label11.Text = "FAX"
-            Label12.Text = "Person"
-            Label15.Text = "Position"
-            Label13.Text = "PaymentTerms"
-            Label14.Text = "Memo"
+
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+            LblCustomerCode.Text = "CustomerCode"
+            LblCustomerName.Text = "CustomerName"
+            LblCustomerShortName.Text = "ShortName"
+            LblPostalCode.Text = "PostalCode"
+            LblAddress1.Text = "Address1"
+            LblAddress2.Text = "Address2"
+            LblAddress3.Text = "Address3"
+            LblTEL.Text = "TEL"
+            LblTelSearch.Text = "TEL(Search)"
+            LblFax.Text = "FAX"
+            LblPerson.Text = "Person"
+            LblPosition.Text = "Position"
+            LblPaymentTerms.Text = "PaymentTerms"
+            LblMemo.Text = "Memo"
             LblAccountingVendorCode.Text = "AccountingVendorCode"
+            LblDomesticKbn.Text = "DomesticDivision"
 
-            Label26.Text = "(Non-Overlapping string)"
-            Label1.Text = "(Example:0123456)"
-            Label17.Text = "(Example:0123456789)"
-            Label16.Text = "(Example:0123456789)"
-            Label18.Text = "(Example:0123456789)"
-
+            LblCustomerCodeRemarks.Text = "(Non-Overlapping string)"
+            LblPostalCodeEx.Text = "(Example:0123456)"
+            LblTelEx.Text = "(Example:0123456789)"
+            LblTelSearchEx.Text = "(Example:0123456789)"
+            LblFaxEx.Text = "(Example:0123456789)"
 
             btnRegistrarion.Text = "Registration"
             btnBack.Text = "Back"
         End If
 
+        createCombobox() '国内区分コンボボックスを設定
+
+        '編集時
         If _status = CommonConst.STATUS_EDIT Then
 
             TxtCustomerCode.Enabled = False '編集不可
@@ -378,6 +132,7 @@ Public Class Customer
             Sql += "既定支払条件, "
             Sql += "メモ, "
             Sql += "会計用得意先コード, "
+            Sql += "国内区分, "
             Sql += "更新者, "
             Sql += "更新日 "
             Sql += "FROM "
@@ -480,7 +235,269 @@ Public Class Customer
                 TxtAccountingVendorCode.Text = ds.Tables(RS).Rows(0)("会計用得意先コード")
             End If
 
+            If ds.Tables(RS).Rows(0)("国内区分") Is DBNull.Value Then
+            Else
+                createCombobox(ds.Tables(RS).Rows(0)("国内区分"))
+            End If
 
         End If
     End Sub
+
+    Private Sub btnAddCustomer_Click(sender As Object, e As EventArgs) Handles btnRegistrarion.Click
+        '項目チェック
+        Dim strMessage As String = ""    'メッセージ本文
+        Dim strMessageTitle As String = ""      'メッセージタイトル
+        '得意先コードは必須
+        If TxtCustomerCode.Text = "" Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+                strMessage = "Please enter Customer Code. "
+                strMessageTitle = "CustomerCode Error"
+            Else
+                strMessage = "得意先コードを入力してください。"
+                strMessageTitle = "得意先コード入力エラー"
+            End If
+            Dim result As DialogResult = MessageBox.Show(strMessage, strMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Exit Sub
+        End If
+
+        '登録処理はここから
+        Dim dtToday As String = UtilClass.formatDatetime(DateTime.Now)
+        Try
+            If _status = CommonConst.STATUS_ADD Then
+                Dim Sql As String = ""
+
+                Sql = ""
+                Sql += "INSERT INTO "
+                Sql += "Public."
+                Sql += "m10_customer("
+                Sql += "会社コード, 得意先コード, 得意先名, 得意先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用"
+                Sql += ", ＦＡＸ番号, 担当者名, 担当者役職, 既定支払条件, メモ, 会計用得意先コード, 国内区分, 更新者, 更新日)"
+                Sql += " VALUES('"
+                Sql += frmC01F10_Login.loginValue.BumonCD '会社コード
+                Sql += "', '"
+                Sql += TxtCustomerCode.Text '得意先コード
+                Sql += "', '"
+                Sql += TxtCustomerName.Text '得意先名
+                Sql += "', '"
+                Sql += TxtCustomerShortName.Text '得意先名略称
+                Sql += "', '"
+                Sql += TxtPostalCode.Text '郵便番号
+                Sql += "', '"
+                Sql += TxtAddress1.Text '住所１
+                Sql += "', '"
+                Sql += TxtAddress2.Text '住所２
+                Sql += "', '"
+                Sql += TxtAddress3.Text '住所３
+                Sql += "', '"
+                Sql += TxtTel.Text '電話番号
+                Sql += "', '"
+                Sql += TxtTelSearch.Text '電話番号検索用
+                Sql += "', '"
+                Sql += TxtFax.Text 'ＦＡＸ番号
+                Sql += "', '"
+                Sql += TxtPerson.Text '担当者名
+                Sql += "', '"
+                Sql += TxtPosition.Text '担当者役職
+                Sql += "', '"
+                Sql += TxtPaymentTerms.Text '既定支払条件
+                Sql += "', '"
+                Sql += TxtMemo.Text 'メモ
+                Sql += "', '"
+                Sql += TxtAccountingVendorCode.Text '会計用得意先コード
+                Sql += "', '"
+                Sql += cmDomesticKbn.SelectedValue.ToString '国内区分
+                Sql += "', '"
+                Sql += frmC01F10_Login.loginValue.TantoNM '更新者
+                Sql += "', '"
+                Sql += dtToday '更新日
+                Sql += "')"
+
+                _db.executeDB(Sql)
+
+            Else
+
+                Dim Sql As String = ""
+
+                Sql = ""
+                Sql += "UPDATE "
+                Sql += "Public."
+                Sql += "m10_customer "
+                Sql += "SET "
+                Sql += " 会社コード"
+                Sql += " = '"
+                Sql += TxtCompanyCode.Text
+                Sql += "', "
+                Sql += "得意先コード"
+                Sql += " = '"
+                Sql += TxtCustomerCode.Text
+                Sql += "', "
+                Sql += "得意先名"
+                Sql += " = '"
+                Sql += TxtCustomerName.Text
+                Sql += "', "
+                Sql += "得意先名略称"
+                Sql += " = '"
+                Sql += TxtCustomerShortName.Text
+                Sql += "', "
+                Sql += "郵便番号"
+                Sql += " = '"
+                Sql += TxtPostalCode.Text
+                Sql += "', "
+                Sql += "住所１"
+                Sql += " = '"
+                Sql += TxtAddress1.Text
+                Sql += "', "
+                Sql += "住所２"
+                Sql += " = '"
+                Sql += TxtAddress2.Text
+                Sql += "', "
+                Sql += "住所３"
+                Sql += " = '"
+                Sql += TxtAddress3.Text
+                Sql += "', "
+                Sql += "電話番号"
+                Sql += " = '"
+                Sql += TxtTel.Text
+                Sql += "', "
+                Sql += "電話番号検索用"
+                Sql += " = '"
+                Sql += TxtTelSearch.Text
+                Sql += "', "
+                Sql += "ＦＡＸ番号"
+                Sql += " = '"
+                Sql += TxtFax.Text
+                Sql += "', "
+                Sql += "担当者名"
+                Sql += " = '"
+                Sql += TxtPerson.Text
+                Sql += "', "
+                Sql += "担当者役職"
+                Sql += " = '"
+                Sql += TxtPosition.Text
+                Sql += "', "
+                Sql += "既定支払条件"
+                Sql += " = '"
+                Sql += TxtPaymentTerms.Text
+                Sql += "', "
+                Sql += "メモ"
+                Sql += " = '"
+                Sql += TxtMemo.Text
+                Sql += "', "
+                Sql += "会計用得意先コード"
+                Sql += " = '"
+                Sql += TxtAccountingVendorCode.Text
+                Sql += "', "
+                Sql += "国内区分"
+                Sql += " = '"
+                Sql += cmDomesticKbn.SelectedValue.ToString
+                Sql += "', "
+                Sql += "更新者"
+                Sql += " = '"
+                Sql += frmC01F10_Login.loginValue.TantoNM
+                Sql += "', "
+                Sql += "更新日"
+                Sql += " = '"
+                Sql += dtToday
+                Sql += "' "
+                Sql += "WHERE"
+                Sql += " 会社コード"
+                Sql += "='"
+                Sql += _companyCode
+                Sql += "'"
+                Sql += " AND"
+                Sql += " 得意先コード"
+                Sql += "='"
+                Sql += _customerCode
+                Sql += "' "
+
+                _db.executeDB(Sql)
+            End If
+
+            _parentForm.Enabled = True
+            _parentForm.Show()
+            Me.Dispose()
+
+        Catch ue As UsrDefException
+            ue.dspMsg()
+            Throw ue
+        Catch ex As Exception
+            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
+            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
+        End Try
+    End Sub
+
+    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+        _parentForm.Enabled = True
+        _parentForm.Show()
+        Me.Dispose()
+    End Sub
+
+    '国内区分のコンボボックスを作成
+    '編集モードの時は値を渡してセットさせる
+    Private Sub createCombobox(Optional ByRef prmVal As String = "")
+
+        cmDomesticKbn.DisplayMember = "Text"
+        cmDomesticKbn.ValueMember = "Value"
+
+        Dim dsHanyo As DataSet = getDsHanyoData(CommonConst.DD_CODE)
+
+        Dim dtDD As New DataTable("Table")
+        dtDD.Columns.Add("Text", GetType(String))
+        dtDD.Columns.Add("Value", GetType(Integer))
+
+        For i As Integer = 0 To dsHanyo.Tables(RS).Rows.Count - 1
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+                dtDD.Rows.Add(dsHanyo.Tables(RS).Rows(i)("文字２"), dsHanyo.Tables(RS).Rows(i)("可変キー"))
+            Else
+                dtDD.Rows.Add(dsHanyo.Tables(RS).Rows(i)("文字１"), dsHanyo.Tables(RS).Rows(i)("可変キー"))
+            End If
+        Next
+
+        cmDomesticKbn.DataSource = dtDD
+
+        If prmVal IsNot "" Then
+            cmDomesticKbn.SelectedValue = prmVal
+        End If
+
+    End Sub
+
+    'param1：String テーブル名
+    'param2：String 詳細条件
+    'Return: DataSet
+    Private Function getDsData(ByVal tableName As String, Optional ByRef txtParam As String = "") As DataSet
+        Dim reccnt As Integer = 0 'DB用（デフォルト）
+        Dim Sql As String = ""
+
+        Sql += "SELECT"
+        Sql += " *"
+        Sql += " FROM "
+
+        Sql += "public." & tableName
+        Sql += " WHERE "
+        Sql += "会社コード"
+        Sql += " ILIKE  "
+        Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += txtParam
+        Return _db.selectDB(Sql, RS, reccnt)
+    End Function
+
+    '汎用マスタから固定キー、可変キーに応じた結果を返す
+    'param1：String 固定キー
+    'param2：String 可変キー
+    'Return: DataSet
+    Private Function getDsHanyoData(ByVal prmFixed As String, Optional ByVal prmVariable As String = "") As DataSet
+        Dim Sql As String = ""
+
+        Sql = " AND "
+        Sql += "固定キー ILIKE '" & prmFixed & "'"
+
+        If prmVariable IsNot "" Then
+            Sql += " AND "
+            Sql += "可変キー ILIKE '" & prmVariable & "'"
+        End If
+
+        'リードタイムのリストを汎用マスタから取得
+        Return getDsData("m90_hanyo", Sql)
+    End Function
+
 End Class

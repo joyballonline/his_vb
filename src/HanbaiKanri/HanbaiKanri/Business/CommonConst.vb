@@ -332,6 +332,7 @@ Public Class CommonConst
     Public Const DC_CODE As String = "DC"           '預金種目固定キー
     Public Const IP_CODE As String = "3"           '在庫単価評価法
     Public Const PC_CODE As String = "PC"           '処理区分
+    Public Const DD_CODE As String = "DD"           '国内区分
 
     'メニュー ステータス
     Public Const STATUS_ADD As String = "ADD"          '登録モード

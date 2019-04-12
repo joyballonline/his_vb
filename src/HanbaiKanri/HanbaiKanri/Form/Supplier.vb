@@ -120,7 +120,8 @@ Public Class Supplier
             BtnBack.Text = "Back"
         End If
 
-        createCombobox()
+        createCombobox() '預金種目コンボボックス
+        createDomesticKbnCombobox() '国内区分コンボボックス
 
         If _status = CommonConst.STATUS_EDIT Then
 
@@ -149,11 +150,6 @@ Public Class Supplier
 
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-            If ds.Tables(RS).Rows(0)("会社コード") Is DBNull.Value Then
-            Else
-                TxtCompanyCode.Text = ds.Tables(RS).Rows(0)("会社コード")
-            End If
 
             If ds.Tables(RS).Rows(0)("仕入先コード") Is DBNull.Value Then
             Else
@@ -275,6 +271,11 @@ Public Class Supplier
                 TxtAccountingVendorCode.Text = ds.Tables(RS).Rows(0)("会計用仕入先コード")
             End If
 
+            If ds.Tables(RS).Rows(0)("国内区分") Is DBNull.Value Then
+            Else
+                createDomesticKbnCombobox(ds.Tables(RS).Rows(0)("国内区分"))
+            End If
+
         End If
     End Sub
 
@@ -305,7 +306,9 @@ Public Class Supplier
                 Sql += "INSERT INTO "
                 Sql += "Public."
                 Sql += "m11_supplier("
-                Sql += "会社コード, 仕入先コード, 仕入先名, 仕入先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用, ＦＡＸ番号, 担当者名, 担当者役職, 関税率, 前払法人税率, 輸送費率, メモ, 銀行名, 銀行コード, 支店名, 支店コード, 預金種目, 口座番号, 口座名義, 会計用仕入先コード, 更新者, 更新日)"
+                Sql += "会社コード, 仕入先コード, 仕入先名, 仕入先名略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, 電話番号検索用"
+                Sql += ", ＦＡＸ番号, 担当者名, 担当者役職, 関税率, 前払法人税率, 輸送費率, メモ, 銀行名, 銀行コード, 支店名, 支店コード"
+                Sql += ", 預金種目, 口座番号, 口座名義, 会計用仕入先コード, 国内区分, 更新者, 更新日)"
                 Sql += " VALUES('"
                 Sql += frmC01F10_Login.loginValue.BumonCD
                 Sql += "', '"
@@ -369,6 +372,8 @@ Public Class Supplier
                 Sql += "', '"
                 Sql += TxtAccountingVendorCode.Text
                 Sql += "', '"
+                Sql += cmDomesticKbn.SelectedValue.ToString
+                Sql += "', '"
                 Sql += frmC01F10_Login.loginValue.TantoNM
                 Sql += "', '"
                 Sql += dtToday
@@ -385,7 +390,7 @@ Public Class Supplier
                 Sql += "SET "
                 Sql += " 会社コード"
                 Sql += " = '"
-                Sql += TxtCompanyCode.Text
+                Sql += frmC01F10_Login.loginValue.BumonCD
                 Sql += "', "
                 Sql += "仕入先コード"
                 Sql += " = '"
@@ -483,6 +488,10 @@ Public Class Supplier
                 Sql += " = '"
                 Sql += TxtAccountingVendorCode.Text
                 Sql += "', "
+                Sql += "国内区分"
+                Sql += " = '"
+                Sql += cmDomesticKbn.SelectedValue.ToString
+                Sql += "', "
                 Sql += "更新者"
                 Sql += " = '"
                 Sql += frmC01F10_Login.loginValue.TantoNM
@@ -549,6 +558,35 @@ Public Class Supplier
 
         If prmVal IsNot "" Then
             cmDCKbn.SelectedValue = prmVal
+        End If
+
+    End Sub
+
+    '国内区分のコンボボックスを作成
+    '編集モードの時は値を渡してセットさせる
+    Private Sub createDomesticKbnCombobox(Optional ByRef prmVal As String = "")
+
+        cmDomesticKbn.DisplayMember = "Text"
+        cmDomesticKbn.ValueMember = "Value"
+
+        Dim dsHanyo As DataSet = getDsHanyoData(CommonConst.DD_CODE)
+
+        Dim dtDD As New DataTable("Table")
+        dtDD.Columns.Add("Text", GetType(String))
+        dtDD.Columns.Add("Value", GetType(Integer))
+
+        For i As Integer = 0 To dsHanyo.Tables(RS).Rows.Count - 1
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+                dtDD.Rows.Add(dsHanyo.Tables(RS).Rows(i)("文字２"), dsHanyo.Tables(RS).Rows(i)("可変キー"))
+            Else
+                dtDD.Rows.Add(dsHanyo.Tables(RS).Rows(i)("文字１"), dsHanyo.Tables(RS).Rows(i)("可変キー"))
+            End If
+        Next
+
+        cmDomesticKbn.DataSource = dtDD
+
+        If prmVal IsNot "" Then
+            cmDomesticKbn.SelectedValue = prmVal
         End If
 
     End Sub
