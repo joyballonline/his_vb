@@ -26,7 +26,7 @@ Partial Class Supplier
         Me.LblTariffRate = New System.Windows.Forms.Label()
         Me.LblPerson = New System.Windows.Forms.Label()
         Me.LblFax = New System.Windows.Forms.Label()
-        Me.Label10 = New System.Windows.Forms.Label()
+        Me.LblTelSearch = New System.Windows.Forms.Label()
         Me.LblTel = New System.Windows.Forms.Label()
         Me.TxtMemo = New System.Windows.Forms.TextBox()
         Me.TxtTariffRate = New System.Windows.Forms.TextBox()
@@ -139,16 +139,16 @@ Partial Class Supplier
         Me.LblFax.TabIndex = 74
         Me.LblFax.Text = "FAX番号"
         '
-        'Label10
+        'LblTelSearch
         '
-        Me.Label10.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.Label10.AutoSize = True
-        Me.Label10.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label10.Location = New System.Drawing.Point(3, 303)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(112, 15)
-        Me.Label10.TabIndex = 73
-        Me.Label10.Text = "電話番号検索用"
+        Me.LblTelSearch.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.LblTelSearch.AutoSize = True
+        Me.LblTelSearch.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblTelSearch.Location = New System.Drawing.Point(3, 303)
+        Me.LblTelSearch.Name = "LblTelSearch"
+        Me.LblTelSearch.Size = New System.Drawing.Size(112, 15)
+        Me.LblTelSearch.TabIndex = 73
+        Me.LblTelSearch.Text = "電話番号検索用"
         '
         'LblTel
         '
@@ -744,7 +744,7 @@ Partial Class Supplier
         '
         'TableLayoutPanel1
         '
-        Me.TableLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(253, Byte), Integer), CType(CType(253, Byte), Integer), CType(CType(253, Byte), Integer))
+        Me.TableLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.TableLayoutPanel1.ColumnCount = 2
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 36.06911!))
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 63.93089!))
@@ -767,7 +767,7 @@ Partial Class Supplier
         Me.TableLayoutPanel1.Controls.Add(Me.TxtAddress3, 1, 8)
         Me.TableLayoutPanel1.Controls.Add(Me.LblTel, 0, 9)
         Me.TableLayoutPanel1.Controls.Add(Me.TxtTel, 1, 9)
-        Me.TableLayoutPanel1.Controls.Add(Me.Label10, 0, 11)
+        Me.TableLayoutPanel1.Controls.Add(Me.LblTelSearch, 0, 11)
         Me.TableLayoutPanel1.Controls.Add(Me.TxtTelSearch, 1, 11)
         Me.TableLayoutPanel1.Controls.Add(Me.TxtPosition, 1, 16)
         Me.TableLayoutPanel1.Controls.Add(Me.LblPosition, 0, 16)
@@ -811,7 +811,7 @@ Partial Class Supplier
         Me.TableLayoutPanel2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TableLayoutPanel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(253, Byte), Integer), CType(CType(253, Byte), Integer), CType(CType(253, Byte), Integer))
+        Me.TableLayoutPanel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.TableLayoutPanel2.ColumnCount = 2
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 41.54176!))
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 58.45824!))
@@ -853,7 +853,7 @@ Partial Class Supplier
         '
         Me.TableLayoutPanel3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TableLayoutPanel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(253, Byte), Integer), CType(CType(253, Byte), Integer), CType(CType(253, Byte), Integer))
+        Me.TableLayoutPanel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.TableLayoutPanel3.ColumnCount = 2
         Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 41.54176!))
         Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 58.45824!))
@@ -947,7 +947,7 @@ Partial Class Supplier
     Friend WithEvents LblTariffRate As Label
     Friend WithEvents LblPerson As Label
     Friend WithEvents LblFax As Label
-    Friend WithEvents Label10 As Label
+    Friend WithEvents LblTelSearch As Label
     Friend WithEvents LblTel As Label
     Friend WithEvents TxtMemo As TextBox
     Friend WithEvents TxtTariffRate As TextBox

@@ -89,6 +89,7 @@ Public Class Supplier
             LblAddress2.Text = "Address2"
             Lbladdress3.Text = "Address3"
             LblTel.Text = "TEL"
+            LblTelSearch.Text = "TEL(Search)"
             LblFax.Text = "FAX"
             LblPerson.Text = "Person"
             LblPosition.Text = "Position"
@@ -104,6 +105,7 @@ Public Class Supplier
             LblAccountNumber.Text = "AccountNumber"
             LblAccountHolder.Text = "AccountHolder"
             LblAccountingVendorCode.Text = "AccountingVendorCode"
+            LblDomesticKbn.Text = "DomesticDivision"
 
             LblSupplierCodeText.Text = "(Non-Overlapping string)"
             LblPostalCodeText.Text = "(Example:0123456)"
