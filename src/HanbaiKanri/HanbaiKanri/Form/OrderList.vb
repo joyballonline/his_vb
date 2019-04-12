@@ -208,7 +208,7 @@ Public Class OrderList
                 '伝票単位の場合
                 If RbtnSlip.Checked Then
 
-                    Sql = " SELECT t10.*, t42.入庫番号, t42.発注番号, t42.発注番号枝番 "
+                    Sql = " SELECT t10.*, t42.発注番号, t42.発注番号枝番 "
                     Sql += " FROM t10_cymnhd t10 "
 
                     Sql += " LEFT JOIN t20_hattyu t20 "
@@ -279,13 +279,14 @@ Public Class OrderList
                         Sql += " t10.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
                     End If
 
+                    Sql += " AND "
+                    Sql += "t42.入庫番号 <> ''"
+                    Sql += " GROUP BY "
+                    Sql += " t10.会社コード, t10.受注番号, t10.受注番号枝番, t42.発注番号, t42.発注番号枝番"
                     Sql += " ORDER BY "
                     Sql += " t10.登録日 DESC"
 
-                    'Console.WriteLine(Sql)
-
                     ds = _db.selectDB(Sql, RS, reccnt)
-
 
                     setRows(ds) '行をセット
 
@@ -490,13 +491,6 @@ Public Class OrderList
             setHdColumns() '表示カラムの設定
 
             For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-
-                '出庫登録時は入庫されているデータのみ出力
-                If OrderStatus = CommonConst.STATUS_GOODS_ISSUE Then
-                    If ds.Tables(RS).Rows(i)("入庫番号") = "" Then
-                        Continue For '次のループへ
-                    End If
-                End If
 
                 DgvCymnhd.Rows.Add()
                 DgvCymnhd.Rows(i).Cells("取消").Value = getDelKbnTxt(ds.Tables(RS).Rows(i)("取消区分"))
