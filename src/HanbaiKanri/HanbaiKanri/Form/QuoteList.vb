@@ -206,7 +206,32 @@ Public Class QuoteList
             '伝票形式
             If RbtnSlip.Checked Then
 
-                Sql = " SELECT * "
+                Sql = " SELECT "
+
+                Sql += " t01.会社コード"
+                Sql += ",t01.取消区分"
+                Sql += ",t01.見積番号"
+                Sql += ",t01.見積番号枝番"
+                Sql += ",t01.見積日"
+                Sql += ",t01.見積有効期限"
+                Sql += ",t01.得意先コード"
+                Sql += ",t01.得意先名"
+                Sql += ",t01.得意先郵便番号"
+                Sql += ",t01.得意先住所"
+                Sql += ",t01.得意先電話番号"
+                Sql += ",t01.得意先ＦＡＸ"
+                Sql += ",t01.見積金額"
+                Sql += ",t01.仕入金額"
+                Sql += ",t01.ＶＡＴ"
+                Sql += ",t01.粗利額"
+                Sql += ",t01.支払条件"
+                Sql += ",t01.営業担当者"
+                Sql += ",t01.入力担当者"
+                Sql += ",t01.備考"
+                Sql += ",t01.登録日"
+                Sql += ",t01.更新者"
+                Sql += ",t01.更新日"
+
                 Sql += " FROM t01_mithd t01 "
 
                 Sql += " LEFT JOIN t02_mitdt t02 "
@@ -216,7 +241,6 @@ Public Class QuoteList
 
                 Sql += " WHERE "
                 Sql += "  t01.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-
 
                 '抽出条件
                 If TxtCustomerName.Text <> "" Then
@@ -348,6 +372,12 @@ Public Class QuoteList
                     Sql += " AND "
                     Sql += "t01.見積有効期限 >= '" & UtilClass.strFormatDate(strToday) & "'"
                 End If
+
+                Sql += " GROUP BY "
+                Sql += " t01.会社コード"
+                Sql += ",t01.取消区分"
+                Sql += ",t01.見積番号"
+                Sql += ",t01.見積番号枝番"
 
                 Sql += " ORDER BY t01.見積番号 DESC,t01.見積番号枝番 DESC"
 
