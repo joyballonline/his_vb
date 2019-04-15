@@ -292,8 +292,8 @@ Public Class CustomerOrderList
                 '初回だけ
                 If flg2 = False Then
                     sheet.Range("B8").Value = dsCymnhd.Tables(RS).Rows(0)("得意先名")
-                    sheet.Range("B9").Value = dsCymnhd.Tables(RS).Rows(0)("得意先郵便番号")
-                    sheet.Range("B10").Value = dsCymnhd.Tables(RS).Rows(0)("得意先住所")
+                    sheet.Range("B13").Value = dsCymnhd.Tables(RS).Rows(0)("得意先郵便番号")
+                    sheet.Range("B9").Value = dsCymnhd.Tables(RS).Rows(0)("得意先住所")
                     sheet.Range("B14").Value = dsCymnhd.Tables(RS).Rows(0)("得意先担当者役職") & " " & dsCymnhd.Tables(RS).Rows(0)("得意先担当者名")
                     sheet.Range("A15").Value = "Telp." & dsCymnhd.Tables(RS).Rows(0)("得意先電話番号") & "　Fax." & dsCymnhd.Tables(RS).Rows(0)("得意先ＦＡＸ")
                     sheet.Range("E8").Value = BillingNo
