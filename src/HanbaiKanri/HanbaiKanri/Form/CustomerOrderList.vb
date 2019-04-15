@@ -368,11 +368,24 @@ Public Class CustomerOrderList
 
             Next r
 
+            Sql = " AND "
+            Sql += "会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+
+            Dim dsCompany As DataSet = getDsData("m01_company", Sql)
+
+            Dim getHanyo As DataSet = getDsHanyoData(CommonConst.DC_CODE, dsCompany.Tables(RS).Rows(0)("預金種目"))
+
             sheet.Range("E" & lastRow + 1).Value = BillingSubTotal
             sheet.Range("E" & lastRow + 2).Value = BillingSubTotal * 0.1
             sheet.Range("E" & lastRow + 3).Value = BillingSubTotal * 1.1
 
             sheet.Range("C" & lastRow + 5).Value = sheet.Range("E" & lastRow + 3).Value
+            sheet.Range("C" & lastRow + 8).Value = dsCompany.Tables(RS).Rows(0)("銀行名") & " " & dsCompany.Tables(RS).Rows(0)("支店名") & " " & getHanyo.Tables(RS).Rows(0)("文字2")
+            sheet.Range("C" & lastRow + 9).Value = dsCompany.Tables(RS).Rows(0)("口座名義")
+            sheet.Range("C" & lastRow + 10).Value = dsCompany.Tables(RS).Rows(0)("口座番号")
+            sheet.Range("C" & lastRow + 11).Value = dsCompany.Tables(RS).Rows(0)("住所1") & " " & dsCompany.Tables(RS).Rows(0)("住所2") & " " & dsCompany.Tables(RS).Rows(0)("住所3") & " " & dsCompany.Tables(RS).Rows(0)("郵便番号")
+
+            sheet.Range("A" & lastRow + 14).Value = dsCompany.Tables(RS).Rows(0)("会社名")
 
             app.DisplayAlerts = False 'Microsoft Excelのアラート一旦無効化
 
@@ -464,4 +477,21 @@ Public Class CustomerOrderList
         Return True
     End Function
 
+    '汎用マスタから固定キー、可変キーに応じた結果を返す
+    'param1：String 固定キー
+    'param2：String 可変キー
+    'Return: DataSet
+    Private Function getDsHanyoData(ByVal prmFixed As String, Optional ByVal prmVariable As String = "") As DataSet
+        Dim Sql As String = ""
+
+        Sql = " AND "
+        Sql += "固定キー ILIKE '" & prmFixed & "'"
+
+        If prmVariable IsNot "" Then
+            Sql += " AND "
+            Sql += "可変キー ILIKE '" & prmVariable & "'"
+        End If
+        'リードタイムのリストを汎用マスタから取得
+        Return getDsData("m90_hanyo", Sql)
+    End Function
 End Class
