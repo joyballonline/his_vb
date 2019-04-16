@@ -223,64 +223,6 @@ Public Class MstCustomer
 
     Private Sub BtnSearch_Click(sender As Object, e As EventArgs) Handles BtnSearch.Click
         setList()
-        'Dgv_Customer.Rows.Clear()
-
-        'Dim Sql As String = ""
-        'Try
-        '    Sql += "SELECT "
-        '    Sql += "* "
-        '    Sql += "FROM "
-        '    Sql += "public"
-        '    Sql += "."
-        '    Sql += "m10_customer"
-        '    Sql += " WHERE "
-        '    Sql += "会社コード"
-        '    Sql += " ILIKE "
-        '    Sql += "'"
-        '    Sql += frmC01F10_Login.loginValue.BumonCD
-        '    Sql += "'"
-        '    Sql += " AND "
-        '    Sql += "得意先名"
-        '    Sql += " ILIKE "
-        '    Sql += "'%"
-        '    Sql += TxtSearch.Text
-        '    Sql += "%'"
-
-        '    Dim reccnt As Integer = 0
-        '    Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-        '    For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-
-        '        Dgv_Customer.Rows.Add()
-
-        '        Dgv_Customer.Rows(index).Cells(0).Value = ds.Tables(RS).Rows(index)("会社コード")
-        '        Dgv_Customer.Rows(index).Cells(1).Value = ds.Tables(RS).Rows(index)("得意先コード")
-        '        Dgv_Customer.Rows(index).Cells(2).Value = ds.Tables(RS).Rows(index)("得意先名")
-        '        Dgv_Customer.Rows(index).Cells(3).Value = ds.Tables(RS).Rows(index)("得意先名略称")
-        '        Dgv_Customer.Rows(index).Cells(4).Value = ds.Tables(RS).Rows(index)("郵便番号")
-        '        Dgv_Customer.Rows(index).Cells(5).Value = ds.Tables(RS).Rows(index)("住所１")
-        '        Dgv_Customer.Rows(index).Cells(6).Value = ds.Tables(RS).Rows(index)("住所２")
-        '        Dgv_Customer.Rows(index).Cells(7).Value = ds.Tables(RS).Rows(index)("住所３")
-        '        Dgv_Customer.Rows(index).Cells(8).Value = ds.Tables(RS).Rows(index)("電話番号")
-        '        Dgv_Customer.Rows(index).Cells(9).Value = ds.Tables(RS).Rows(index)("電話番号検索用")
-        '        Dgv_Customer.Rows(index).Cells(10).Value = ds.Tables(RS).Rows(index)("ＦＡＸ番号")
-        '        Dgv_Customer.Rows(index).Cells(11).Value = ds.Tables(RS).Rows(index)("担当者名")
-        '        Dgv_Customer.Rows(index).Cells(12).Value = ds.Tables(RS).Rows(index)("担当者役職")
-        '        Dgv_Customer.Rows(index).Cells(13).Value = ds.Tables(RS).Rows(index)("既定支払条件")
-        '        Dgv_Customer.Rows(index).Cells(14).Value = ds.Tables(RS).Rows(index)("メモ")
-        '        Dgv_Customer.Rows(index).Cells(15).Value = ds.Tables(RS).Rows(index)("会計用得意先コード")
-        '        Dgv_Customer.Rows(index).Cells(16).Value = ds.Tables(RS).Rows(index)("更新者")
-        '        Dgv_Customer.Rows(index).Cells(17).Value = ds.Tables(RS).Rows(index)("更新日")
-
-        '    Next
-
-        'Catch ue As UsrDefException
-        '    ue.dspMsg()
-        '    Throw ue
-        'Catch ex As Exception
-        '    'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-        '    Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
-        'End Try
     End Sub
 
     Private Sub MstCustomer_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated

@@ -107,11 +107,13 @@ Public Class MstSupplier
             Dgv_Supplier.Columns("前払法人税率").HeaderText = "PPH"
             Dgv_Supplier.Columns("輸送費率").HeaderText = "TransportationCostRate"
             Dgv_Supplier.Columns("会計用仕入先コード").HeaderText = "AccountingVendorCode"
+            Dgv_Supplier.Columns("国内区分").HeaderText = "DomesticDivision"
             Dgv_Supplier.Columns("更新者").HeaderText = "ModifiedBy"
             Dgv_Supplier.Columns("更新日").HeaderText = "UpdateDate"
 
         End If
 
+        setList()
     End Sub
 
     Private Sub setList()
@@ -120,18 +122,55 @@ Public Class MstSupplier
         Dim Sql As String = ""
         Try
             Sql += "SELECT "
-            Sql += "* "
-            Sql += "FROM "
-            Sql += "public"
-            Sql += "."
-            Sql += "m11_supplier"
+
+            Sql += "m11.会社コード, "
+            Sql += "m11.仕入先コード, "
+            Sql += "m11.仕入先名, "
+            Sql += "m11.仕入先名略称, "
+            Sql += "m11.郵便番号, "
+            Sql += "m11.住所１, "
+            Sql += "m11.住所２, "
+            Sql += "m11.住所３, "
+            Sql += "m11.電話番号, "
+            Sql += "m11.電話番号検索用, "
+            Sql += "m11.ＦＡＸ番号, "
+            Sql += "m11.担当者名, "
+            Sql += "m11.担当者役職, "
+            Sql += "m11.既定間接費率, "
+            Sql += "m11.メモ, "
+            Sql += "m11.銀行コード, "
+            Sql += "m11.銀行名, "
+            Sql += "m11.支店コード, "
+            Sql += "m11.支店名, "
+            Sql += "m11.預金種目, "
+            Sql += "m11.口座番号, "
+            Sql += "m11.口座名義, "
+            Sql += "m11.関税率, "
+            Sql += "m11.前払法人税率, "
+            Sql += "m11.輸送費率, "
+            Sql += "m11.会計用仕入先コード, "
+            Sql += "m90.文字１, "
+            Sql += "m90.文字２, "
+            Sql += "m11.更新者, "
+            Sql += "m11.更新日 "
+
+            Sql += " FROM m11_supplier m11"
+            Sql += " LEFT JOIN m90_hanyo m90"
+            Sql += " ON m11.会社コード = m90.会社コード "
+            Sql += " AND m90.固定キー = '" & CommonConst.DD_CODE & "'"
+            Sql += " AND m11.国内区分 = m90.可変キー "
+
             Sql += " WHERE "
-            Sql += "会社コード"
+            Sql += " m11.会社コード"
             Sql += " ILIKE "
             Sql += "'"
             Sql += frmC01F10_Login.loginValue.BumonCD
             Sql += "'"
-            Sql += " order by 会社コード, 仕入先コード "
+            Sql += " AND m11.仕入先名 ILIKE "
+            Sql += "'%"
+            Sql += TxtSearch.Text
+            Sql += "%'"
+            Sql += " order by m11.会社コード, m11.仕入先コード "
 
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
@@ -162,13 +201,16 @@ Public Class MstSupplier
                                                                getHanyo.Tables(RS).Rows(0)("文字１"))
                 Dgv_Supplier.Rows(i).Cells("口座番号").Value = ds.Tables(RS).Rows(i)("口座番号")
                 Dgv_Supplier.Rows(i).Cells("口座名義").Value = ds.Tables(RS).Rows(i)("口座名義")
-                Dgv_Supplier.Rows(i).Cells("更新者").Value = ds.Tables(RS).Rows(i)("更新者")
-                Dgv_Supplier.Rows(i).Cells("更新日").Value = ds.Tables(RS).Rows(i)("更新日")
                 Dgv_Supplier.Rows(i).Cells("担当者役職").Value = ds.Tables(RS).Rows(i)("担当者役職")
                 Dgv_Supplier.Rows(i).Cells("関税率").Value = ds.Tables(RS).Rows(i)("関税率")
                 Dgv_Supplier.Rows(i).Cells("前払法人税率").Value = ds.Tables(RS).Rows(i)("前払法人税率")
                 Dgv_Supplier.Rows(i).Cells("輸送費率").Value = ds.Tables(RS).Rows(i)("輸送費率")
                 Dgv_Supplier.Rows(i).Cells("会計用仕入先コード").Value = ds.Tables(RS).Rows(i)("会計用仕入先コード")
+                Dgv_Supplier.Rows(i).Cells("国内区分").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
+                                                               ds.Tables(RS).Rows(i)("文字２"),
+                                                               ds.Tables(RS).Rows(i)("文字１"))
+                Dgv_Supplier.Rows(i).Cells("更新者").Value = ds.Tables(RS).Rows(i)("更新者")
+                Dgv_Supplier.Rows(i).Cells("更新日").Value = ds.Tables(RS).Rows(i)("更新日")
 
             Next
 
@@ -208,70 +250,7 @@ Public Class MstSupplier
     End Sub
 
     Private Sub BtnSearch_Click(sender As Object, e As EventArgs) Handles BtnSearch.Click
-        Dgv_Supplier.Rows.Clear()
-
-        Dim Sql As String = ""
-        Try
-            Sql += "SELECT "
-            Sql += "* "
-            Sql += "FROM "
-            Sql += "public"
-            Sql += "."
-            Sql += "m11_supplier"
-            Sql += " WHERE "
-            Sql += "会社コード"
-            Sql += " ILIKE "
-            Sql += "'"
-            Sql += frmC01F10_Login.loginValue.BumonCD
-            Sql += "'"
-            Sql += " AND "
-            Sql += "仕入先名"
-            Sql += " ILIKE "
-            Sql += "'%"
-            Sql += TxtSearch.Text
-            Sql += "%'"
-
-            Dim reccnt As Integer = 0
-            Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-            For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-                Dgv_Supplier.Rows.Add()
-                Dgv_Supplier.Rows(index).Cells("会社コード").Value = ds.Tables(RS).Rows(index)("会社コード")
-                Dgv_Supplier.Rows(index).Cells("仕入先コード").Value = ds.Tables(RS).Rows(index)("仕入先コード")
-                Dgv_Supplier.Rows(index).Cells("仕入先名").Value = ds.Tables(RS).Rows(index)("仕入先名")
-                Dgv_Supplier.Rows(index).Cells("仕入先名略称").Value = ds.Tables(RS).Rows(index)("仕入先名略称")
-                Dgv_Supplier.Rows(index).Cells("郵便番号").Value = ds.Tables(RS).Rows(index)("郵便番号")
-                Dgv_Supplier.Rows(index).Cells("住所１").Value = ds.Tables(RS).Rows(index)("住所１")
-                Dgv_Supplier.Rows(index).Cells("住所２").Value = ds.Tables(RS).Rows(index)("住所２")
-                Dgv_Supplier.Rows(index).Cells("住所３").Value = ds.Tables(RS).Rows(index)("住所３")
-                Dgv_Supplier.Rows(index).Cells("電話番号").Value = ds.Tables(RS).Rows(index)("電話番号")
-                Dgv_Supplier.Rows(index).Cells("電話番号検索用").Value = ds.Tables(RS).Rows(index)("電話番号検索用")
-                Dgv_Supplier.Rows(index).Cells("FAX番号").Value = ds.Tables(RS).Rows(index)("ＦＡＸ番号")
-                Dgv_Supplier.Rows(index).Cells("担当者名").Value = ds.Tables(RS).Rows(index)("担当者名")
-                Dgv_Supplier.Rows(index).Cells("メモ").Value = ds.Tables(RS).Rows(index)("メモ")
-                Dgv_Supplier.Rows(index).Cells("銀行名").Value = ds.Tables(RS).Rows(index)("銀行名")
-                Dgv_Supplier.Rows(index).Cells("銀行コード").Value = ds.Tables(RS).Rows(index)("銀行コード")
-                Dgv_Supplier.Rows(index).Cells("支店名").Value = ds.Tables(RS).Rows(index)("支店名")
-                Dgv_Supplier.Rows(index).Cells("支店コード").Value = ds.Tables(RS).Rows(index)("支店コード")
-                Dgv_Supplier.Rows(index).Cells("預金種目").Value = ds.Tables(RS).Rows(index)("預金種目")
-                Dgv_Supplier.Rows(index).Cells("口座番号").Value = ds.Tables(RS).Rows(index)("口座番号")
-                Dgv_Supplier.Rows(index).Cells("口座名義").Value = ds.Tables(RS).Rows(index)("口座名義")
-                Dgv_Supplier.Rows(index).Cells("更新者").Value = ds.Tables(RS).Rows(index)("更新者")
-                Dgv_Supplier.Rows(index).Cells("更新日").Value = ds.Tables(RS).Rows(index)("更新日")
-                Dgv_Supplier.Rows(index).Cells("担当者役職").Value = ds.Tables(RS).Rows(index)("担当者役職")
-                Dgv_Supplier.Rows(index).Cells("関税率").Value = ds.Tables(RS).Rows(index)("関税率")
-                Dgv_Supplier.Rows(index).Cells("前払法人税率").Value = ds.Tables(RS).Rows(index)("前払法人税率")
-                Dgv_Supplier.Rows(index).Cells("輸送費率").Value = ds.Tables(RS).Rows(index)("輸送費率")
-                Dgv_Supplier.Rows(index).Cells("会計用仕入先コード").Value = ds.Tables(RS).Rows(index)("会計用仕入先コード")
-            Next
-
-        Catch ue As UsrDefException
-            ue.dspMsg()
-            Throw ue
-        Catch ex As Exception
-            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
-        End Try
+        setList()
     End Sub
 
     Private Sub MstSupplier_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
@@ -382,8 +361,9 @@ Public Class MstSupplier
                 sheet.Range("V1").Value = "PPH"
                 sheet.Range("W1").Value = "TransportationCostRate"
                 sheet.Range("X1").Value = "AccountingVendorCode"
-                sheet.Range("Y1").Value = "ModifiedBy"
-                sheet.Range("Z1").Value = "UpdateDate"
+                sheet.Range("Y1").Value = "DomesticClassification"
+                sheet.Range("Z1").Value = "ModifiedBy"
+                sheet.Range("AA1").Value = "UpdateDate"
 
             End If
 
@@ -417,8 +397,9 @@ Public Class MstSupplier
                 sheet.Range("V" & cellRowIndex.ToString).Value = Dgv_Supplier.Rows(i).Cells("前払法人税率").Value '
                 sheet.Range("W" & cellRowIndex.ToString).Value = Dgv_Supplier.Rows(i).Cells("輸送費率").Value '
                 sheet.Range("X" & cellRowIndex.ToString).Value = Dgv_Supplier.Rows(i).Cells("会計用仕入先コード").Value '
-                sheet.Range("Y" & cellRowIndex.ToString).Value = Dgv_Supplier.Rows(i).Cells("更新者").Value '
-                sheet.Range("Z" & cellRowIndex.ToString).Value = Dgv_Supplier.Rows(i).Cells("更新日").Value '
+                sheet.Range("Y" & cellRowIndex.ToString).Value = Dgv_Supplier.Rows(i).Cells("国内区分").Value '
+                sheet.Range("Z" & cellRowIndex.ToString).Value = Dgv_Supplier.Rows(i).Cells("更新者").Value '
+                sheet.Range("AA" & cellRowIndex.ToString).Value = Dgv_Supplier.Rows(i).Cells("更新日").Value '
             Next
 
             'app.Visible = True
