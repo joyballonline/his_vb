@@ -418,6 +418,7 @@ Public Class BillingManagement
 
         Dim Sql As String = ""
 
+
         If Decimal.Parse(DgvAdd.Rows(0).Cells("今回請求金額計").Value) > Decimal.Parse(DgvCymn.Rows(0).Cells("請求残高").Value) Then
             '請求残高より請求金額が大きい場合はアラート
             _msgHd.dspMSG("chkBillingBalanceError", frmC01F10_Login.loginValue.Language)
@@ -449,9 +450,12 @@ Public Class BillingManagement
             dsSkyuhd.Tables(RS).Compute("SUM(請求金額計)", Nothing),
             0
         )
+        '受注額にVAT額を加算
+        Dim total As Decimal = 0    '見積金額+VAT=受注金額
+        total = dsCymnhd.Tables(RS).Rows(0)("見積金額") + dsCymnhd.Tables(RS).Rows(0)("見積金額") * dsCymnhd.Tables(RS).Rows(0)("ＶＡＴ") / 100
 
         Dim BillTotal As Decimal = DgvAdd.Rows(0).Cells("今回請求金額計").Value + BillingAmount
-        Dim Balance As Decimal = dsCymnhd.Tables(RS).Rows(0)("見積金額") - BillTotal
+        Dim Balance As Decimal = total - BillTotal
 
         If Balance < 0 Then
             '対象データがないメッセージを表示

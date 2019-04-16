@@ -108,7 +108,6 @@ Public Class ClosingLog
     Private Sub ClosingLog_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ClosingLogLoad()
         If frmC01F10_Login.loginValue.Language = "ENG" Then
-            LblClosingDate.Text = "ClosingDate"
             LblPerson.Text = "Name of PIC"
             BtnClosing.Text = "Closing"
             BtnBack.Text = "Back"
@@ -140,35 +139,12 @@ Public Class ClosingLog
             Sql += "public"
             Sql += "."
             Sql += "t51_smlog"
-            If TxtClosingDate.Text = "" Then
-            Else
-                Sql += " WHERE "
-                Sql += "処理日時"
-                Sql += " ILIKE "
-                Sql += "'%"
-                Sql += TxtClosingDate.Text
-                Sql += "%'"
-                count += 1
-            End If
-            If TxtPerson.Text = "" Then
-            Else
-                If count > 0 Then
-                    Sql += " AND "
-                    Sql += "担当者"
-                    Sql += " ILIKE "
-                    Sql += "'%"
-                    Sql += TxtPerson.Text
-                    Sql += "%'"
-                Else
-                    Sql += " WHERE "
-                    Sql += "担当者"
-                    Sql += " ILIKE "
-                    Sql += "'%"
-                    Sql += TxtPerson.Text
-                    Sql += "%'"
-                    count += 1
-                End If
-            End If
+            Sql += " WHERE "
+            Sql += "担当者"
+            Sql += " ILIKE "
+            Sql += "'%"
+            Sql += TxtPerson.Text
+            Sql += "%'"
 
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)

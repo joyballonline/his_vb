@@ -22,13 +22,11 @@ Partial Class ClosingLog
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LblMode = New System.Windows.Forms.Label()
         Me.LblPerson = New System.Windows.Forms.Label()
         Me.TxtPerson = New System.Windows.Forms.TextBox()
-        Me.LblClosingDate = New System.Windows.Forms.Label()
         Me.LblConditions = New System.Windows.Forms.Label()
-        Me.TxtClosingDate = New System.Windows.Forms.TextBox()
         Me.BtnSearch = New System.Windows.Forms.Button()
         Me.DgvClosingLog = New System.Windows.Forms.DataGridView()
         Me.締処理日時 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -60,7 +58,7 @@ Partial Class ClosingLog
         Me.LblPerson.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblPerson.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblPerson.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblPerson.Location = New System.Drawing.Point(15, 63)
+        Me.LblPerson.Location = New System.Drawing.Point(17, 44)
         Me.LblPerson.Name = "LblPerson"
         Me.LblPerson.Size = New System.Drawing.Size(170, 22)
         Me.LblPerson.TabIndex = 314
@@ -70,22 +68,10 @@ Partial Class ClosingLog
         'TxtPerson
         '
         Me.TxtPerson.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtPerson.Location = New System.Drawing.Point(191, 64)
+        Me.TxtPerson.Location = New System.Drawing.Point(193, 45)
         Me.TxtPerson.Name = "TxtPerson"
         Me.TxtPerson.Size = New System.Drawing.Size(200, 22)
         Me.TxtPerson.TabIndex = 2
-        '
-        'LblClosingDate
-        '
-        Me.LblClosingDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.LblClosingDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblClosingDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblClosingDate.Location = New System.Drawing.Point(15, 36)
-        Me.LblClosingDate.Name = "LblClosingDate"
-        Me.LblClosingDate.Size = New System.Drawing.Size(170, 22)
-        Me.LblClosingDate.TabIndex = 310
-        Me.LblClosingDate.Text = "締処理日時"
-        Me.LblClosingDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'LblConditions
         '
@@ -96,14 +82,6 @@ Partial Class ClosingLog
         Me.LblConditions.Size = New System.Drawing.Size(87, 15)
         Me.LblConditions.TabIndex = 309
         Me.LblConditions.Text = "■抽出条件"
-        '
-        'TxtClosingDate
-        '
-        Me.TxtClosingDate.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtClosingDate.Location = New System.Drawing.Point(191, 36)
-        Me.TxtClosingDate.Name = "TxtClosingDate"
-        Me.TxtClosingDate.Size = New System.Drawing.Size(200, 22)
-        Me.TxtClosingDate.TabIndex = 1
         '
         'BtnSearch
         '
@@ -118,8 +96,8 @@ Partial Class ClosingLog
         'DgvClosingLog
         '
         Me.DgvClosingLog.AllowUserToAddRows = False
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.DgvClosingLog.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.DgvClosingLog.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.DgvClosingLog.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader
         Me.DgvClosingLog.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvClosingLog.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.締処理日時, Me.前回締日, Me.今回締日, Me.次回締日, Me.担当者})
@@ -203,9 +181,7 @@ Partial Class ClosingLog
         Me.Controls.Add(Me.LblMode)
         Me.Controls.Add(Me.LblPerson)
         Me.Controls.Add(Me.TxtPerson)
-        Me.Controls.Add(Me.LblClosingDate)
         Me.Controls.Add(Me.LblConditions)
-        Me.Controls.Add(Me.TxtClosingDate)
         Me.Controls.Add(Me.BtnSearch)
         Me.Name = "ClosingLog"
         Me.Text = "ClosingLog"
@@ -218,9 +194,7 @@ Partial Class ClosingLog
     Friend WithEvents LblMode As Label
     Friend WithEvents LblPerson As Label
     Friend WithEvents TxtPerson As TextBox
-    Friend WithEvents LblClosingDate As Label
     Friend WithEvents LblConditions As Label
-    Friend WithEvents TxtClosingDate As TextBox
     Friend WithEvents BtnSearch As Button
     Friend WithEvents DgvClosingLog As DataGridView
     Friend WithEvents BtnClosing As Button
