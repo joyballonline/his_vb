@@ -240,6 +240,7 @@ Partial Class DataOutput
         '
         Me.DgvList.AllowUserToAddRows = False
         Me.DgvList.AllowUserToDeleteRows = False
+        Me.DgvList.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.DgvList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvList.Location = New System.Drawing.Point(12, 72)
         Me.DgvList.Name = "DgvList"

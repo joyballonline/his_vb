@@ -86,19 +86,6 @@ Public Class DataOutput
 
             LblMode.Text = SalesStatus & " Mode"
 
-            'DgvList.Columns("仕入番号").HeaderText = "PurchaseNumber"
-            'DgvList.Columns("仕入日").HeaderText = "PurchaseDate"
-            'DgvList.Columns("仕入先名").HeaderText = "SupplierName"
-            'DgvList.Columns("メーカー").HeaderText = "Manufacturer"
-            'DgvList.Columns("品名").HeaderText = "ItemName"
-            'DgvList.Columns("型式").HeaderText = "Spec"
-            'DgvList.Columns("数量").HeaderText = "PurchasedQuantity"
-            'DgvList.Columns("単位").HeaderText = "Unit"
-            'DgvList.Columns("仕入単価").HeaderText = "PurchaseUnitPrice"
-            'DgvList.Columns("ＶＡＴ").HeaderText = "ＶＡＴ"
-            'DgvList.Columns("間接費").HeaderText = "Overhead"
-            'DgvList.Columns("仕入計").HeaderText = "PurchaseAmount"
-
             LblTarget.Text = "Target"
             LblPeriod.Text = "Period"
             RbtnQuotation.Text = "Quotation"
@@ -176,13 +163,11 @@ Public Class DataOutput
             Sql += ",t02.売単価"
             Sql += ",t02.売上金額"
             Sql += ",t02.間接費"
-            'Sql += ",t02.更新者"
-            'Sql += ",t02.登録日"
             Sql += ",t02.備考 as 明細備考"
             Sql += ",t02.リードタイム"
             Sql += ",t02.粗利額 As 明細粗利額"
             Sql += ",t02.粗利率"
-            Sql += ",t02.仕入金額"
+            Sql += ",t02.仕入金額 as 明細仕入金額"
             Sql += ",t02.間接費率"
             Sql += ",t02.間接費無仕入金額"
             Sql += ",t02.仕入原価"
@@ -399,227 +384,14 @@ Public Class DataOutput
                 Next
             Next
 
-            '見出し追加
-            'If RbtnQuotation.Checked Then
-
-            '    quontityHd()
-
-            '    'データを回す
-            '    For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-
-            '        DgvList.Rows.Add()
-            '        DgvList.Rows(i).Cells("会社コード").Value = ds.Tables(RS).Rows(i)("会社コード")
-            '        DgvList.Rows(i).Cells("見積番号").Value = ds.Tables(RS).Rows(i)("見積番号")
-            '        DgvList.Rows(i).Cells("見積番号枝番").Value = ds.Tables(RS).Rows(i)("見積番号枝番")
-            '        DgvList.Rows(i).Cells("行番号").Value = ds.Tables(RS).Rows(i)("行番号")
-            '        DgvList.Rows(i).Cells("得意先コード").Value = ds.Tables(RS).Rows(i)("得意先コード")
-            '        DgvList.Rows(i).Cells("得意先名").Value = ds.Tables(RS).Rows(i)("得意先名")
-            '        DgvList.Rows(i).Cells("得意先担当者役職").Value = ds.Tables(RS).Rows(i)("得意先担当者役職")
-            '        DgvList.Rows(i).Cells("得意先担当者名").Value = ds.Tables(RS).Rows(i)("得意先担当者名")
-            '        DgvList.Rows(i).Cells("得意先郵便番号").Value = ds.Tables(RS).Rows(i)("得意先郵便番号")
-            '        DgvList.Rows(i).Cells("得意先住所").Value = ds.Tables(RS).Rows(i)("得意先住所")
-            '        DgvList.Rows(i).Cells("得意先電話番号").Value = ds.Tables(RS).Rows(i)("得意先電話番号")
-            '        DgvList.Rows(i).Cells("得意先ＦＡＸ").Value = ds.Tables(RS).Rows(i)("得意先ＦＡＸ")
-            '        DgvList.Rows(i).Cells("支払条件").Value = ds.Tables(RS).Rows(i)("支払条件")
-            '        DgvList.Rows(i).Cells("見積日").Value = ds.Tables(RS).Rows(i)("見積日")
-            '        DgvList.Rows(i).Cells("見積有効期限").Value = ds.Tables(RS).Rows(i)("見積有効期限")
-            '        DgvList.Rows(i).Cells("営業担当者コード").Value = ds.Tables(RS).Rows(i)("営業担当者コード")
-            '        DgvList.Rows(i).Cells("営業担当者").Value = ds.Tables(RS).Rows(i)("営業担当者")
-            '        DgvList.Rows(i).Cells("入力担当者コード").Value = ds.Tables(RS).Rows(i)("入力担当者コード")
-            '        DgvList.Rows(i).Cells("入力担当者").Value = ds.Tables(RS).Rows(i)("入力担当者")
-            '        DgvList.Rows(i).Cells("備考").Value = ds.Tables(RS).Rows(i)("備考")
-            '        DgvList.Rows(i).Cells("仕入金額").Value = ds.Tables(RS).Rows(i)("仕入金額")
-            '        DgvList.Rows(i).Cells("ＶＡＴ").Value = ds.Tables(RS).Rows(i)("ＶＡＴ")
-            '        DgvList.Rows(i).Cells("見積金額").Value = ds.Tables(RS).Rows(i)("見積金額")
-            '        DgvList.Rows(i).Cells("粗利額").Value = ds.Tables(RS).Rows(i)("粗利額")
-            '        DgvList.Rows(i).Cells("仕入区分").Value = ds.Tables(RS).Rows(i)("仕入区分")
-            '        DgvList.Rows(i).Cells("仕入先コード").Value = ds.Tables(RS).Rows(i)("仕入先コード")
-            '        DgvList.Rows(i).Cells("仕入先名称").Value = ds.Tables(RS).Rows(i)("仕入先名称")
-            '        DgvList.Rows(i).Cells("メーカー").Value = ds.Tables(RS).Rows(i)("メーカー")
-            '        DgvList.Rows(i).Cells("品名").Value = ds.Tables(RS).Rows(i)("品名")
-            '        DgvList.Rows(i).Cells("型式").Value = ds.Tables(RS).Rows(i)("型式")
-            '        DgvList.Rows(i).Cells("受注数量").Value = ds.Tables(RS).Rows(i)("受注数量")
-            '        DgvList.Rows(i).Cells("売上数量").Value = ds.Tables(RS).Rows(i)("売上数量")
-            '        DgvList.Rows(i).Cells("受注残数").Value = ds.Tables(RS).Rows(i)("受注残数")
-            '        DgvList.Rows(i).Cells("出庫数").Value = ds.Tables(RS).Rows(i)("出庫数")
-            '        DgvList.Rows(i).Cells("出庫数").Value = ds.Tables(RS).Rows(i)("出庫数")
-            '        DgvList.Rows(i).Cells("単位").Value = ds.Tables(RS).Rows(i)("単位")
-            '        DgvList.Rows(i).Cells("仕入単価").Value = ds.Tables(RS).Rows(i)("仕入単価")
-            '        DgvList.Rows(i).Cells("仕入金額").Value = ds.Tables(RS).Rows(i)("仕入金額")
-            '        DgvList.Rows(i).Cells("売単価").Value = ds.Tables(RS).Rows(i)("売単価")
-            '        DgvList.Rows(i).Cells("売上金額").Value = ds.Tables(RS).Rows(i)("売上金額")
-            '        DgvList.Rows(i).Cells("間接費").Value = ds.Tables(RS).Rows(i)("間接費")
-            '        DgvList.Rows(i).Cells("仕入先名称").Value = ds.Tables(RS).Rows(i)("仕入先名称")
-            '        DgvList.Rows(i).Cells("粗利率").Value = ds.Tables(RS).Rows(i)("粗利率")
-            '        DgvList.Rows(i).Cells("粗利額").Value = ds.Tables(RS).Rows(i)("粗利額")
-            '        DgvList.Rows(i).Cells("間接費率").Value = ds.Tables(RS).Rows(i)("間接費率")
-            '        DgvList.Rows(i).Cells("間接費無仕入金額").Value = ds.Tables(RS).Rows(i)("間接費無仕入金額")
-            '        DgvList.Rows(i).Cells("仕入原価").Value = ds.Tables(RS).Rows(i)("仕入原価")
-            '        DgvList.Rows(i).Cells("関税率").Value = ds.Tables(RS).Rows(i)("関税率")
-            '        DgvList.Rows(i).Cells("関税額").Value = ds.Tables(RS).Rows(i)("関税額")
-            '        DgvList.Rows(i).Cells("前払法人税率").Value = ds.Tables(RS).Rows(i)("前払法人税率")
-            '        DgvList.Rows(i).Cells("前払法人税額").Value = ds.Tables(RS).Rows(i)("前払法人税額")
-            '        DgvList.Rows(i).Cells("輸送費率").Value = ds.Tables(RS).Rows(i)("輸送費率")
-            '        DgvList.Rows(i).Cells("輸送費額").Value = ds.Tables(RS).Rows(i)("輸送費額")
-            '        DgvList.Rows(i).Cells("見積単価").Value = ds.Tables(RS).Rows(i)("見積単価")
-            '        DgvList.Rows(i).Cells("見積金額").Value = ds.Tables(RS).Rows(i)("見積金額")
-            '        DgvList.Rows(i).Cells("リードタイム").Value = ds.Tables(RS).Rows(i)("リードタイム")
-            '        DgvList.Rows(i).Cells("リードタイム単位").Value = ds.Tables(RS).Rows(i)("リードタイム単位")
-            '        DgvList.Rows(i).Cells("明細備考").Value = ds.Tables(RS).Rows(i)("備考")
-            '        DgvList.Rows(i).Cells("取消日").Value = ds.Tables(RS).Rows(i)("取消日")
-            '        DgvList.Rows(i).Cells("取消区分").Value = ds.Tables(RS).Rows(i)("取消区分")
-            '        DgvList.Rows(i).Cells("受注日").Value = ds.Tables(RS).Rows(i)("受注日")
-            '        DgvList.Rows(i).Cells("登録日").Value = ds.Tables(RS).Rows(i)("登録日")
-            '        DgvList.Rows(i).Cells("更新日").Value = ds.Tables(RS).Rows(i)("更新日")
-            '        DgvList.Rows(i).Cells("更新者").Value = ds.Tables(RS).Rows(i)("更新者")
-
-            '    Next
-
-            'ElseIf RbtnJobOrder.Checked Then
-            '    JobOrderHd()
-
-            '    'データを回す
-            '    For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-
-            '        DgvList.Rows.Add()
-            '        DgvList.Rows(i).Cells("会社コード").Value = ds.Tables(RS).Rows(i)("会社コード")
-            '        DgvList.Rows(i).Cells("受注番号").Value = ds.Tables(RS).Rows(i)("受注番号")
-            '        DgvList.Rows(i).Cells("受注番号枝番").Value = ds.Tables(RS).Rows(i)("受注番号枝番")
-            '        DgvList.Rows(i).Cells("見積番号").Value = ds.Tables(RS).Rows(i)("見積番号")
-            '        DgvList.Rows(i).Cells("見積番号枝番").Value = ds.Tables(RS).Rows(i)("見積番号枝番")
-            '        DgvList.Rows(i).Cells("行番号").Value = ds.Tables(RS).Rows(i)("行番号")
-            '        DgvList.Rows(i).Cells("得意先コード").Value = ds.Tables(RS).Rows(i)("得意先コード")
-            '        DgvList.Rows(i).Cells("得意先名").Value = ds.Tables(RS).Rows(i)("得意先名")
-            '        DgvList.Rows(i).Cells("得意先担当者役職").Value = ds.Tables(RS).Rows(i)("得意先担当者役職")
-            '        DgvList.Rows(i).Cells("得意先担当者名").Value = ds.Tables(RS).Rows(i)("得意先担当者名")
-            '        DgvList.Rows(i).Cells("得意先郵便番号").Value = ds.Tables(RS).Rows(i)("得意先郵便番号")
-            '        DgvList.Rows(i).Cells("得意先住所").Value = ds.Tables(RS).Rows(i)("得意先住所")
-            '        DgvList.Rows(i).Cells("得意先電話番号").Value = ds.Tables(RS).Rows(i)("得意先電話番号")
-            '        DgvList.Rows(i).Cells("得意先ＦＡＸ").Value = ds.Tables(RS).Rows(i)("得意先ＦＡＸ")
-            '        DgvList.Rows(i).Cells("支払条件").Value = ds.Tables(RS).Rows(i)("支払条件")
-            '        DgvList.Rows(i).Cells("見積日").Value = ds.Tables(RS).Rows(i)("見積日")
-            '        DgvList.Rows(i).Cells("見積有効期限").Value = ds.Tables(RS).Rows(i)("見積有効期限")
-            '        DgvList.Rows(i).Cells("営業担当者コード").Value = ds.Tables(RS).Rows(i)("営業担当者コード")
-            '        DgvList.Rows(i).Cells("営業担当者").Value = ds.Tables(RS).Rows(i)("営業担当者")
-            '        DgvList.Rows(i).Cells("入力担当者コード").Value = ds.Tables(RS).Rows(i)("入力担当者コード")
-            '        DgvList.Rows(i).Cells("入力担当者").Value = ds.Tables(RS).Rows(i)("入力担当者")
-            '        DgvList.Rows(i).Cells("備考").Value = ds.Tables(RS).Rows(i)("備考")
-            '        DgvList.Rows(i).Cells("仕入金額").Value = ds.Tables(RS).Rows(i)("仕入金額")
-            '        DgvList.Rows(i).Cells("ＶＡＴ").Value = ds.Tables(RS).Rows(i)("ＶＡＴ")
-            '        DgvList.Rows(i).Cells("ＰＰＨ").Value = ds.Tables(RS).Rows(i)("ＰＰＨ")
-            '        DgvList.Rows(i).Cells("客先番号").Value = ds.Tables(RS).Rows(i)("ＶＡＴ")
-            '        DgvList.Rows(i).Cells("見積金額").Value = ds.Tables(RS).Rows(i)("客先番号")
-            '        DgvList.Rows(i).Cells("粗利額").Value = ds.Tables(RS).Rows(i)("粗利額")
-            '        DgvList.Rows(i).Cells("仕入区分").Value = ds.Tables(RS).Rows(i)("仕入区分")
-            '        DgvList.Rows(i).Cells("仕入先コード").Value = ds.Tables(RS).Rows(i)("仕入先コード")
-            '        DgvList.Rows(i).Cells("仕入先名").Value = ds.Tables(RS).Rows(i)("仕入先名")
-            '        DgvList.Rows(i).Cells("メーカー").Value = ds.Tables(RS).Rows(i)("メーカー")
-            '        DgvList.Rows(i).Cells("品名").Value = ds.Tables(RS).Rows(i)("品名")
-            '        DgvList.Rows(i).Cells("型式").Value = ds.Tables(RS).Rows(i)("型式")
-            '        DgvList.Rows(i).Cells("数量").Value = ds.Tables(RS).Rows(i)("数量")
-            '        DgvList.Rows(i).Cells("単位").Value = ds.Tables(RS).Rows(i)("単位")
-            '        DgvList.Rows(i).Cells("仕入値").Value = ds.Tables(RS).Rows(i)("仕入値")
-            '        DgvList.Rows(i).Cells("仕入金額").Value = ds.Tables(RS).Rows(i)("仕入金額")
-            '        DgvList.Rows(i).Cells("売単価").Value = ds.Tables(RS).Rows(i)("売単価")
-            '        DgvList.Rows(i).Cells("売上金額").Value = ds.Tables(RS).Rows(i)("売上金額")
-            '        DgvList.Rows(i).Cells("間接費").Value = ds.Tables(RS).Rows(i)("間接費")
-            '        DgvList.Rows(i).Cells("仕入先名称").Value = ds.Tables(RS).Rows(i)("仕入先名称")
-            '        DgvList.Rows(i).Cells("粗利率").Value = ds.Tables(RS).Rows(i)("粗利率")
-            '        DgvList.Rows(i).Cells("粗利額").Value = ds.Tables(RS).Rows(i)("粗利額")
-            '        DgvList.Rows(i).Cells("間接費率").Value = ds.Tables(RS).Rows(i)("間接費率")
-            '        DgvList.Rows(i).Cells("間接費無仕入金額").Value = ds.Tables(RS).Rows(i)("間接費無仕入金額")
-            '        DgvList.Rows(i).Cells("仕入原価").Value = ds.Tables(RS).Rows(i)("仕入原価")
-            '        DgvList.Rows(i).Cells("関税率").Value = ds.Tables(RS).Rows(i)("関税率")
-            '        DgvList.Rows(i).Cells("関税額").Value = ds.Tables(RS).Rows(i)("関税額")
-            '        DgvList.Rows(i).Cells("前払法人税率").Value = ds.Tables(RS).Rows(i)("前払法人税率")
-            '        DgvList.Rows(i).Cells("前払法人税額").Value = ds.Tables(RS).Rows(i)("前払法人税額")
-            '        DgvList.Rows(i).Cells("輸送費率").Value = ds.Tables(RS).Rows(i)("輸送費率")
-            '        DgvList.Rows(i).Cells("輸送費額").Value = ds.Tables(RS).Rows(i)("輸送費額")
-            '        DgvList.Rows(i).Cells("見積単価").Value = ds.Tables(RS).Rows(i)("見積単価")
-            '        DgvList.Rows(i).Cells("見積金額").Value = ds.Tables(RS).Rows(i)("見積金額")
-            '        DgvList.Rows(i).Cells("リードタイム").Value = ds.Tables(RS).Rows(i)("リードタイム")
-            '        DgvList.Rows(i).Cells("リードタイム単位").Value = ds.Tables(RS).Rows(i)("リードタイム単位")
-            '        DgvList.Rows(i).Cells("明細備考").Value = ds.Tables(RS).Rows(i)("備考")
-            '        DgvList.Rows(i).Cells("取消日").Value = ds.Tables(RS).Rows(i)("取消日")
-            '        DgvList.Rows(i).Cells("取消区分").Value = ds.Tables(RS).Rows(i)("取消区分")
-            '        DgvList.Rows(i).Cells("受注日").Value = ds.Tables(RS).Rows(i)("受注日")
-            '        DgvList.Rows(i).Cells("登録日").Value = ds.Tables(RS).Rows(i)("登録日")
-            '        DgvList.Rows(i).Cells("更新日").Value = ds.Tables(RS).Rows(i)("更新日")
-            '        DgvList.Rows(i).Cells("更新者").Value = ds.Tables(RS).Rows(i)("更新者")
-
-            '    Next
-
-            'Else
-
-            'End If
-
-
-            'データを回す
-            'For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-
-            '    DgvList.Rows.Add()
-            '    DgvList.Rows(i).Cells("会社コード").Value = ds.Tables(RS).Rows(i)("会社コード")
-            '    DgvList.Rows(i).Cells("見積番号").Value = ds.Tables(RS).Rows(i)("見積番号")
-            '    DgvList.Rows(i).Cells("見積番号枝番").Value = ds.Tables(RS).Rows(i)("見積番号枝番")
-            '    DgvList.Rows(i).Cells("行番号").Value = ds.Tables(RS).Rows(i)("行番号")
-            '    DgvList.Rows(i).Cells("得意先コード").Value = ds.Tables(RS).Rows(i)("得意先コード")
-            '    DgvList.Rows(i).Cells("得意先名").Value = ds.Tables(RS).Rows(i)("得意先名")
-            '    DgvList.Rows(i).Cells("得意先担当者役職").Value = ds.Tables(RS).Rows(i)("得意先担当者役職")
-            '    DgvList.Rows(i).Cells("得意先担当者名").Value = ds.Tables(RS).Rows(i)("得意先担当者名")
-            '    DgvList.Rows(i).Cells("得意先郵便番号").Value = ds.Tables(RS).Rows(i)("得意先郵便番号")
-            '    DgvList.Rows(i).Cells("得意先住所").Value = ds.Tables(RS).Rows(i)("得意先住所")
-            '    DgvList.Rows(i).Cells("得意先電話番号").Value = ds.Tables(RS).Rows(i)("得意先電話番号")
-            '    DgvList.Rows(i).Cells("得意先ＦＡＸ").Value = ds.Tables(RS).Rows(i)("得意先ＦＡＸ")
-            '    DgvList.Rows(i).Cells("支払条件").Value = ds.Tables(RS).Rows(i)("支払条件")
-            '    DgvList.Rows(i).Cells("見積日").Value = ds.Tables(RS).Rows(i)("見積日")
-            '    DgvList.Rows(i).Cells("見積有効期限").Value = ds.Tables(RS).Rows(i)("見積有効期限")
-            '    DgvList.Rows(i).Cells("営業担当者コード").Value = ds.Tables(RS).Rows(i)("営業担当者コード")
-            '    DgvList.Rows(i).Cells("営業担当者").Value = ds.Tables(RS).Rows(i)("営業担当者")
-            '    DgvList.Rows(i).Cells("入力担当者コード").Value = ds.Tables(RS).Rows(i)("入力担当者コード")
-            '    DgvList.Rows(i).Cells("入力担当者").Value = ds.Tables(RS).Rows(i)("入力担当者")
-            '    DgvList.Rows(i).Cells("備考").Value = ds.Tables(RS).Rows(i)("備考")
-            '    DgvList.Rows(i).Cells("仕入金額").Value = ds.Tables(RS).Rows(i)("仕入金額")
-            '    DgvList.Rows(i).Cells("ＶＡＴ").Value = ds.Tables(RS).Rows(i)("ＶＡＴ")
-            '    DgvList.Rows(i).Cells("見積金額").Value = ds.Tables(RS).Rows(i)("見積金額")
-            '    DgvList.Rows(i).Cells("粗利額").Value = ds.Tables(RS).Rows(i)("粗利額")
-            '    DgvList.Rows(i).Cells("仕入区分").Value = ds.Tables(RS).Rows(i)("仕入区分")
-            '    DgvList.Rows(i).Cells("仕入先コード").Value = ds.Tables(RS).Rows(i)("仕入先コード")
-            '    DgvList.Rows(i).Cells("仕入先名称").Value = ds.Tables(RS).Rows(i)("仕入先名称")
-            '    DgvList.Rows(i).Cells("メーカー").Value = ds.Tables(RS).Rows(i)("メーカー")
-            '    DgvList.Rows(i).Cells("品名").Value = ds.Tables(RS).Rows(i)("品名")
-            '    DgvList.Rows(i).Cells("型式").Value = ds.Tables(RS).Rows(i)("型式")
-            '    DgvList.Rows(i).Cells("数量").Value = ds.Tables(RS).Rows(i)("数量")
-            '    DgvList.Rows(i).Cells("単位").Value = ds.Tables(RS).Rows(i)("単位")
-            '    DgvList.Rows(i).Cells("仕入値").Value = ds.Tables(RS).Rows(i)("仕入値")
-            '    DgvList.Rows(i).Cells("仕入金額").Value = ds.Tables(RS).Rows(i)("仕入金額")
-            '    DgvList.Rows(i).Cells("売単価").Value = ds.Tables(RS).Rows(i)("売単価")
-            '    DgvList.Rows(i).Cells("売上金額").Value = ds.Tables(RS).Rows(i)("売上金額")
-            '    DgvList.Rows(i).Cells("間接費").Value = ds.Tables(RS).Rows(i)("間接費")
-            '    DgvList.Rows(i).Cells("仕入先名称").Value = ds.Tables(RS).Rows(i)("仕入先名称")
-            '    DgvList.Rows(i).Cells("粗利率").Value = ds.Tables(RS).Rows(i)("粗利率")
-            '    DgvList.Rows(i).Cells("粗利額").Value = ds.Tables(RS).Rows(i)("粗利額")
-            '    DgvList.Rows(i).Cells("間接費率").Value = ds.Tables(RS).Rows(i)("間接費率")
-            '    DgvList.Rows(i).Cells("間接費無仕入金額").Value = ds.Tables(RS).Rows(i)("間接費無仕入金額")
-            '    DgvList.Rows(i).Cells("仕入原価").Value = ds.Tables(RS).Rows(i)("仕入原価")
-            '    DgvList.Rows(i).Cells("関税率").Value = ds.Tables(RS).Rows(i)("関税率")
-            '    DgvList.Rows(i).Cells("関税額").Value = ds.Tables(RS).Rows(i)("関税額")
-            '    DgvList.Rows(i).Cells("前払法人税率").Value = ds.Tables(RS).Rows(i)("前払法人税率")
-            '    DgvList.Rows(i).Cells("前払法人税額").Value = ds.Tables(RS).Rows(i)("前払法人税額")
-            '    DgvList.Rows(i).Cells("輸送費率").Value = ds.Tables(RS).Rows(i)("輸送費率")
-            '    DgvList.Rows(i).Cells("輸送費額").Value = ds.Tables(RS).Rows(i)("輸送費額")
-            '    DgvList.Rows(i).Cells("見積単価").Value = ds.Tables(RS).Rows(i)("見積単価")
-            '    DgvList.Rows(i).Cells("見積金額").Value = ds.Tables(RS).Rows(i)("見積金額")
-            '    DgvList.Rows(i).Cells("リードタイム").Value = ds.Tables(RS).Rows(i)("リードタイム")
-            '    DgvList.Rows(i).Cells("リードタイム単位").Value = ds.Tables(RS).Rows(i)("リードタイム単位")
-            '    DgvList.Rows(i).Cells("明細備考").Value = ds.Tables(RS).Rows(i)("備考")
-            '    DgvList.Rows(i).Cells("取消日").Value = ds.Tables(RS).Rows(i)("取消日")
-            '    DgvList.Rows(i).Cells("取消区分").Value = ds.Tables(RS).Rows(i)("取消区分")
-            '    DgvList.Rows(i).Cells("受注日").Value = ds.Tables(RS).Rows(i)("受注日")
-            '    DgvList.Rows(i).Cells("登録日").Value = ds.Tables(RS).Rows(i)("登録日")
-            '    DgvList.Rows(i).Cells("更新日").Value = ds.Tables(RS).Rows(i)("更新日")
-            '    DgvList.Rows(i).Cells("更新者").Value = ds.Tables(RS).Rows(i)("更新者")
-
-            'Next
+            '見出しの英訳・テキスト位置設定
+            If RbtnQuotation.Checked Then
+                quontityHd()
+            ElseIf RbtnJobOrder.Checked Then
+                JobOrderHd()
+            Else
+                SalesHd()
+            End If
 
         Catch ue As UsrDefException
             ue.dspMsg()
@@ -632,147 +404,82 @@ Public Class DataOutput
     End Sub
 
     Private Sub quontityHd()
+        If DgvList.Columns.Count = 0 Then
+            Exit Sub
+        End If
 
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-            DgvList.Columns.Add("会社コード", "CompanyCode")
-            DgvList.Columns.Add("見積番号", "QuotationNumber")
-            DgvList.Columns.Add("見積番号枝番", "QuotationSubNumber")
-            DgvList.Columns.Add("行番号", "LineNumber")
-            DgvList.Columns.Add("得意先コード", "CustomerCode")
-            DgvList.Columns.Add("得意先名", "CustomerName")
-            DgvList.Columns.Add("得意先担当者役職", "PositionPICCustomer")
-            DgvList.Columns.Add("得意先担当者名", "NameOfPIC")
-            DgvList.Columns.Add("得意先郵便番号", "CustomerPostalCode")
-            DgvList.Columns.Add("得意先住所", "CustomerAddress")
-            DgvList.Columns.Add("得意先電話番号", "CustomerPhoneNumber")
-            DgvList.Columns.Add("得意先ＦＡＸ", "CustomerFAX")
-            DgvList.Columns.Add("支払条件", "PaymentTermsAndConditon")
-            DgvList.Columns.Add("見積日", "QuotationDate")
-            DgvList.Columns.Add("見積有効期限", "QuotationExpirationDate")
-            DgvList.Columns.Add("営業担当者コード", "SalesPersonInChargeCode")
-            DgvList.Columns.Add("営業担当者", "SalesPersonInCharge")
-            DgvList.Columns.Add("入力担当者コード", "PICForInputtingCode")
-            DgvList.Columns.Add("入力担当者", "PICForInputting")
-            DgvList.Columns.Add("備考", "Remarks")
-            DgvList.Columns.Add("仕入金額", "PurchaseAmount")
-            DgvList.Columns.Add("ＶＡＴ", "ＶＡＴ")
-            DgvList.Columns.Add("見積金額", "QuotationAmount")
-            DgvList.Columns.Add("粗利額", "GrossMargin")
 
-            DgvList.Columns.Add("仕入区分", "PurchasingClassification")
-            DgvList.Columns.Add("仕入先コード", "SupplierCode")
-            DgvList.Columns.Add("仕入先名称", "SupplierName")
-            DgvList.Columns.Add("メーカー", "Manufacturer")
-            DgvList.Columns.Add("品名", "ItemName")
-            DgvList.Columns.Add("型式", "Spec")
-            DgvList.Columns.Add("数量", "Quantity")
-            DgvList.Columns.Add("単位", "Unit")
-            DgvList.Columns.Add("仕入単価", "PurchaseUnitPrice")
-            DgvList.Columns.Add("仕入金額", "PurchaseAmount")
-            DgvList.Columns.Add("売単価", "SellingPrice")
-            DgvList.Columns.Add("売上金額", "SalesAmount")
-            DgvList.Columns.Add("間接費", "Overhead")
-            'DgvList.Columns.Add("更新者", "ModifiedBy")
-            'DgvList.Columns.Add("登録日", "ModifiedBy")
-            DgvList.Columns.Add("粗利率", "GrossMarginRate")
-            DgvList.Columns.Add("粗利額", "GrossMargin")
-            DgvList.Columns.Add("間接費率", "OverheadRate")
-            DgvList.Columns.Add("間接費無仕入金額", "OverheadNoPurchasePrice")
-            DgvList.Columns.Add("仕入原価", "PurchasingCost")
-            DgvList.Columns.Add("関税率", "CustomsDutyRate")
-            DgvList.Columns.Add("関税額", "CustomsDuty")
-            DgvList.Columns.Add("前払法人税率", "PrepaidCorporateTaxRate")
-            DgvList.Columns.Add("前払法人税額", "PrepaidCorporateTaxAmount")
-            DgvList.Columns.Add("輸送費率", "TransportationCostRate")
-            DgvList.Columns.Add("輸送費額", "TransportationCost")
-            DgvList.Columns.Add("見積単価", "QuotationUnitPrice")
-            DgvList.Columns.Add("見積金額", "QuotationAmount")
+            DgvList.Columns("会社コード").HeaderText = "CompanyCode"
+            DgvList.Columns("見積番号").HeaderText = "QuotationNumber"
+            DgvList.Columns("見積番号枝番").HeaderText = "QuotationSubNumber"
+            DgvList.Columns("行番号").HeaderText = "LineNumber"
+            DgvList.Columns("得意先コード").HeaderText = "CustomerCode"
+            DgvList.Columns("得意先名").HeaderText = "CustomerName"
+            DgvList.Columns("得意先担当者役職").HeaderText = "PositionPICCustomer"
+            DgvList.Columns("得意先担当者名").HeaderText = "NameOfPIC"
+            DgvList.Columns("得意先郵便番号").HeaderText = "CustomerPostalCode"
+            DgvList.Columns("得意先住所").HeaderText = "CustomerAddress"
+            DgvList.Columns("得意先電話番号").HeaderText = "CustomerPhoneNumber"
+            DgvList.Columns("得意先ＦＡＸ").HeaderText = "CustomerFAX"
+            DgvList.Columns("支払条件").HeaderText = "PaymentTermsAndConditon"
+            DgvList.Columns("見積日").HeaderText = "QuotationDate"
+            DgvList.Columns("見積有効期限").HeaderText = "QuotationExpirationDate"
+            DgvList.Columns("営業担当者コード").HeaderText = "SalesPersonInChargeCode"
+            DgvList.Columns("営業担当者").HeaderText = "SalesPersonInCharge"
+            DgvList.Columns("入力担当者コード").HeaderText = "PICForInputtingCode"
+            DgvList.Columns("入力担当者").HeaderText = "PICForInputting"
+            DgvList.Columns("備考").HeaderText = "Remarks"
+            DgvList.Columns("仕入金額").HeaderText = "PurchaseAmount"
+            DgvList.Columns("ＶＡＴ").HeaderText = "ＶＡＴ"
+            DgvList.Columns("見積金額").HeaderText = "QuotationAmount"
+            DgvList.Columns("粗利額").HeaderText = "GrossMargin"
+            DgvList.Columns("仕入区分").HeaderText = "PurchasingClassification"
+            DgvList.Columns("仕入先コード").HeaderText = "SupplierCode"
+            DgvList.Columns("仕入先名称").HeaderText = "SupplierName"
+            DgvList.Columns("メーカー").HeaderText = "Manufacturer"
+            DgvList.Columns("品名").HeaderText = "ItemName"
+            DgvList.Columns("型式").HeaderText = "Spec"
+            DgvList.Columns("数量").HeaderText = "Quantity"
+            DgvList.Columns("単位").HeaderText = "Unit"
+            DgvList.Columns("仕入単価").HeaderText = "PurchaseUnitPrice"
+            DgvList.Columns("明細仕入金額").HeaderText = "DetailsPurchaseAmount"
+            DgvList.Columns("売単価").HeaderText = "SellingPrice"
+            DgvList.Columns("売上金額").HeaderText = "SalesAmount"
+            DgvList.Columns("間接費").HeaderText = "Overhead"
+            DgvList.Columns("更新者").HeaderText = "ModifiedBy"
+            DgvList.Columns("登録日").HeaderText = "RegistrationDate"
+            DgvList.Columns("粗利率").HeaderText = "GrossMarginRate"
+            DgvList.Columns("明細粗利額").HeaderText = "DetailsGrossMargin"
+            DgvList.Columns("間接費率").HeaderText = "OverheadRate"
+            DgvList.Columns("間接費無仕入金額").HeaderText = "OverheadNoPurchasePrice"
+            DgvList.Columns("仕入原価").HeaderText = "PurchasingCost"
+            DgvList.Columns("関税率").HeaderText = "CustomsDutyRate"
+            DgvList.Columns("関税額").HeaderText = "CustomsDuty"
+            DgvList.Columns("前払法人税率").HeaderText = "PrepaidCorporateTaxRate"
+            DgvList.Columns("前払法人税額").HeaderText = "PrepaidCorporateTaxAmount"
+            DgvList.Columns("輸送費率").HeaderText = "TransportationCostRate"
+            DgvList.Columns("輸送費額").HeaderText = "TransportationCost"
+            DgvList.Columns("見積単価").HeaderText = "QuotationUnitPrice"
+            DgvList.Columns("明細見積金額").HeaderText = "DetailsQuotationAmount"
+            DgvList.Columns("リードタイム").HeaderText = "LeadTime"
+            DgvList.Columns("リードタイム単位").HeaderText = "LeadTimUnit"
+            DgvList.Columns("明細備考").HeaderText = "DetailsRemarks"
+            DgvList.Columns("取消日").HeaderText = "CancelDate"
+            DgvList.Columns("取消区分").HeaderText = "CancelClassification"
+            DgvList.Columns("受注日").HeaderText = "JobOrderDate"
+            DgvList.Columns("登録日").HeaderText = "RegistrationDate"
+            DgvList.Columns("更新日").HeaderText = "UpdateDate"
+            DgvList.Columns("更新者").HeaderText = "ModifiedBy"
 
-            DgvList.Columns.Add("リードタイム", "LeadTime")
-            DgvList.Columns.Add("リードタイム単位", "LeadTimUnit")
-            DgvList.Columns.Add("明細備考", "DetailsRemarks")
-
-            DgvList.Columns.Add("取消日", "CancelDate")
-            DgvList.Columns.Add("取消区分", "CancelClassification")
-
-            DgvList.Columns.Add("受注日", "JobOrderDate")
-            DgvList.Columns.Add("登録日", "RegistrationDate")
-            DgvList.Columns.Add("更新日", "UpdateDate")
-            DgvList.Columns.Add("更新者", "ModifiedBy")
-
-        Else
-
-            DgvList.Columns.Add("会社コード", "会社コード")
-            DgvList.Columns.Add("見積番号", "見積番号")
-            DgvList.Columns.Add("見積番号枝番", "見積番号枝番")
-            DgvList.Columns.Add("行番号", "行番号")
-            DgvList.Columns.Add("得意先コード", "得意先コード")
-            DgvList.Columns.Add("得意先名", "得意先名")
-            DgvList.Columns.Add("得意先担当者役職", "得意先担当者役職")
-            DgvList.Columns.Add("得意先担当者名", "得意先担当者名")
-            DgvList.Columns.Add("得意先郵便番号", "得意先郵便番号")
-            DgvList.Columns.Add("得意先住所", "得意先住所")
-            DgvList.Columns.Add("得意先電話番号", "得意先電話番号")
-            DgvList.Columns.Add("得意先ＦＡＸ", "得意先ＦＡＸ")
-            DgvList.Columns.Add("支払条件", "支払条件")
-            DgvList.Columns.Add("見積日", "見積日")
-            DgvList.Columns.Add("見積有効期限", "見積有効期限")
-            DgvList.Columns.Add("営業担当者コード", "営業担当者コード")
-            DgvList.Columns.Add("営業担当者", "営業担当者")
-            DgvList.Columns.Add("入力担当者コード", "入力担当者コード")
-            DgvList.Columns.Add("入力担当者", "入力担当者")
-            DgvList.Columns.Add("備考", "備考")
-            DgvList.Columns.Add("仕入金額", "仕入金額")
-            DgvList.Columns.Add("ＶＡＴ", "ＶＡＴ")
-            DgvList.Columns.Add("見積金額", "見積金額")
-            DgvList.Columns.Add("粗利額", "粗利額")
-
-            DgvList.Columns.Add("仕入区分", "仕入区分")
-            DgvList.Columns.Add("仕入先コード", "仕入先コード")
-            DgvList.Columns.Add("仕入先名称", "仕入先名称")
-            DgvList.Columns.Add("メーカー", "メーカー")
-            DgvList.Columns.Add("品名", "品名")
-            DgvList.Columns.Add("型式", "型式")
-            DgvList.Columns.Add("数量", "数量")
-            DgvList.Columns.Add("単位", "単位")
-            DgvList.Columns.Add("仕入単価", "仕入単価")
-            DgvList.Columns.Add("仕入金額", "仕入金額")
-            DgvList.Columns.Add("売単価", "売単価")
-            DgvList.Columns.Add("売上金額", "売上金額")
-            DgvList.Columns.Add("間接費", "間接費")
-            'DgvList.Columns.Add("更新者", "更新者")
-            'DgvList.Columns.Add("登録日", "登録日")
-            DgvList.Columns.Add("粗利率", "粗利率")
-            DgvList.Columns.Add("粗利額", "粗利額")
-            DgvList.Columns.Add("間接費率", "間接費率")
-            DgvList.Columns.Add("間接費無仕入金額", "間接費無仕入金額")
-            DgvList.Columns.Add("仕入原価", "仕入原価")
-            DgvList.Columns.Add("関税率", "関税率")
-            DgvList.Columns.Add("関税額", "関税額")
-            DgvList.Columns.Add("前払法人税率", "前払法人税率")
-            DgvList.Columns.Add("前払法人税額", "前払法人税額")
-            DgvList.Columns.Add("輸送費率", "輸送費率")
-            DgvList.Columns.Add("輸送費額", "輸送費額")
-            DgvList.Columns.Add("見積単価", "見積単価")
-            DgvList.Columns.Add("見積金額", "見積金額")
-
-            DgvList.Columns.Add("リードタイム", "リードタイム")
-            DgvList.Columns.Add("リードタイム単位", "リードタイム単位")
-            DgvList.Columns.Add("明細備考", "明細備考")
-
-            DgvList.Columns.Add("取消日", "取消日")
-            DgvList.Columns.Add("取消区分", "取消区分")
-
-            DgvList.Columns.Add("受注日", "受注日")
-            DgvList.Columns.Add("登録日", "登録日")
-            DgvList.Columns.Add("更新日", "更新日")
-            DgvList.Columns.Add("更新者", "更新者")
         End If
 
         DgvList.Columns("見積金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvList.Columns("仕入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvList.Columns("粗利額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("ＶＡＴ").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
+        DgvList.Columns("仕入原価").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvList.Columns("仕入単価").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvList.Columns("数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvList.Columns("売単価").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -792,191 +499,237 @@ Public Class DataOutput
         DgvList.Columns("リードタイム").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvList.Columns("見積単価").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvList.Columns("見積金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("明細粗利額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("明細仕入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("明細見積金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
     End Sub
 
     Private Sub JobOrderHd()
-
-        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-            DgvList.Columns.Add("会社コード", "CompanyCode")
-            DgvList.Columns.Add("受注番号", "QuotationNumber")
-            DgvList.Columns.Add("受注番号枝番", "QuotationSubNumber")
-            DgvList.Columns.Add("見積番号", "QuotationNumber")
-            DgvList.Columns.Add("見積番号枝番", "QuotationSubNumber")
-
-            DgvList.Columns.Add("行番号", "LineNumber")
-            DgvList.Columns.Add("得意先コード", "CustomerCode")
-            DgvList.Columns.Add("得意先名", "CustomerName")
-            DgvList.Columns.Add("得意先担当者役職", "PositionPICCustomer")
-            DgvList.Columns.Add("得意先担当者名", "NameOfPIC")
-            DgvList.Columns.Add("得意先郵便番号", "CustomerPostalCode")
-            DgvList.Columns.Add("得意先住所", "CustomerAddress")
-            DgvList.Columns.Add("得意先電話番号", "CustomerPhoneNumber")
-            DgvList.Columns.Add("得意先ＦＡＸ", "CustomerFAX")
-            DgvList.Columns.Add("支払条件", "PaymentTermsAndConditon")
-            DgvList.Columns.Add("見積日", "QuotationDate")
-            DgvList.Columns.Add("見積有効期限", "QuotationExpirationDate")
-
-            DgvList.Columns.Add("営業担当者コード", "SalesPersonInChargeCode")
-            DgvList.Columns.Add("営業担当者", "SalesPersonInCharge")
-            DgvList.Columns.Add("入力担当者コード", "PICForInputtingCode")
-            DgvList.Columns.Add("入力担当者", "PICForInputting")
-            DgvList.Columns.Add("備考", "Remarks")
-            DgvList.Columns.Add("見積備考", "QuotationRemarks")
-            DgvList.Columns.Add("仕入金額", "PurchaseAmount")
-            DgvList.Columns.Add("ＶＡＴ", "ＶＡＴ")
-            DgvList.Columns.Add("ＰＰＨ", "ＰＰＨ")
-            DgvList.Columns.Add("客先番号", "PO")
-            DgvList.Columns.Add("見積金額", "QuotationAmount")
-            DgvList.Columns.Add("粗利額", "GrossMargin")
-
-            DgvList.Columns.Add("仕入区分", "PurchasingClassification")
-            'DgvList.Columns.Add("仕入先コード", "SupplierCode")
-            DgvList.Columns.Add("仕入先名", "SupplierName")
-            DgvList.Columns.Add("メーカー", "Manufacturer")
-            DgvList.Columns.Add("品名", "ItemName")
-            DgvList.Columns.Add("型式", "Spec")
-
-            DgvList.Columns.Add("受注数量", "JobOrderQuantity")
-            DgvList.Columns.Add("売上数量", "SalesQuantity")
-            DgvList.Columns.Add("受注残数", "OrderRemainingAmount")
-            DgvList.Columns.Add("出庫数", "GoodsDeliveryQuantity")
-            DgvList.Columns.Add("未出庫数", "GoodsDeliveryRemainingQuantity")
-
-            DgvList.Columns.Add("単位", "Unit")
-            DgvList.Columns.Add("仕入値", "PurchaseUnitPrice")
-            DgvList.Columns.Add("仕入金額", "PurchaseAmount")
-            DgvList.Columns.Add("売単価", "SellingPrice")
-            DgvList.Columns.Add("売上金額", "SalesAmount")
-            DgvList.Columns.Add("間接費", "Overhead")
-            'DgvList.Columns.Add("更新者", "ModifiedBy")
-            'DgvList.Columns.Add("登録日", "ModifiedBy")
-            DgvList.Columns.Add("粗利率", "GrossMarginRate")
-            DgvList.Columns.Add("粗利額", "GrossMargin")
-            DgvList.Columns.Add("間接費率", "OverheadRate")
-
-            DgvList.Columns.Add("仕入原価", "PurchasingCost")
-            DgvList.Columns.Add("関税率", "CustomsDutyRate")
-            DgvList.Columns.Add("関税額", "CustomsDuty")
-            DgvList.Columns.Add("前払法人税率", "PrepaidCorporateTaxRate")
-            DgvList.Columns.Add("前払法人税額", "PrepaidCorporateTaxAmount")
-            DgvList.Columns.Add("輸送費率", "TransportationCostRate")
-            DgvList.Columns.Add("輸送費額", "TransportationCost")
-            DgvList.Columns.Add("見積単価", "QuotationUnitPrice")
-            DgvList.Columns.Add("見積金額", "QuotationAmount")
-
-            DgvList.Columns.Add("リードタイム", "LeadTime")
-            DgvList.Columns.Add("リードタイム単位", "LeadTimUnit")
-            DgvList.Columns.Add("明細備考", "DetailsRemarks")
-
-            DgvList.Columns.Add("取消日", "CancelDate")
-            DgvList.Columns.Add("取消区分", "CancelClassification")
-
-            DgvList.Columns.Add("受注日", "JobOrderDate")
-            DgvList.Columns.Add("登録日", "RegistrationDate")
-            DgvList.Columns.Add("更新日", "UpdateDate")
-            DgvList.Columns.Add("更新者", "ModifiedBy")
-
-        Else
-
-            DgvList.Columns.Add("会社コード", "会社コード")
-            DgvList.Columns.Add("受注番号", "受注番号")
-            DgvList.Columns.Add("受注番号枝番", "受注番号枝番")
-            DgvList.Columns.Add("見積番号", "見積番号")
-            DgvList.Columns.Add("見積番号枝番", "見積番号枝番")
-            DgvList.Columns.Add("行番号", "行番号")
-            DgvList.Columns.Add("得意先コード", "得意先コード")
-            DgvList.Columns.Add("得意先名", "得意先名")
-            DgvList.Columns.Add("得意先担当者役職", "得意先担当者役職")
-            DgvList.Columns.Add("得意先担当者名", "得意先担当者名")
-            DgvList.Columns.Add("得意先郵便番号", "得意先郵便番号")
-            DgvList.Columns.Add("得意先住所", "得意先住所")
-            DgvList.Columns.Add("得意先電話番号", "得意先電話番号")
-            DgvList.Columns.Add("得意先ＦＡＸ", "得意先ＦＡＸ")
-            DgvList.Columns.Add("支払条件", "支払条件")
-            DgvList.Columns.Add("見積日", "見積日")
-            DgvList.Columns.Add("見積有効期限", "見積有効期限")
-            DgvList.Columns.Add("営業担当者コード", "営業担当者コード")
-            DgvList.Columns.Add("営業担当者", "営業担当者")
-            DgvList.Columns.Add("入力担当者コード", "入力担当者コード")
-            DgvList.Columns.Add("入力担当者", "入力担当者")
-            DgvList.Columns.Add("備考", "備考")
-            DgvList.Columns.Add("見積備考", "見積備考")
-            DgvList.Columns.Add("仕入金額", "仕入金額")
-            DgvList.Columns.Add("ＶＡＴ", "ＶＡＴ")
-            DgvList.Columns.Add("ＰＰＨ", "ＰＰＨ")
-            DgvList.Columns.Add("客先番号", "客先番号")
-            DgvList.Columns.Add("見積金額", "見積金額")
-            DgvList.Columns.Add("粗利額", "粗利額")
-
-            DgvList.Columns.Add("仕入区分", "仕入区分")
-            DgvList.Columns.Add("仕入先コード", "仕入先コード")
-            DgvList.Columns.Add("仕入先名", "仕入先名")
-            DgvList.Columns.Add("メーカー", "メーカー")
-            DgvList.Columns.Add("品名", "品名")
-            DgvList.Columns.Add("型式", "型式")
-            DgvList.Columns.Add("受注数量", "受注数量")
-            DgvList.Columns.Add("売上数量", "売上数量")
-            DgvList.Columns.Add("受注残数", "受注残数")
-            DgvList.Columns.Add("出庫数", "出庫数")
-            DgvList.Columns.Add("未出庫数", "未出庫数")
-            DgvList.Columns.Add("単位", "単位")
-            DgvList.Columns.Add("仕入単価", "仕入単価")
-            DgvList.Columns.Add("仕入金額", "仕入金額")
-            DgvList.Columns.Add("売単価", "売単価")
-            DgvList.Columns.Add("売上金額", "売上金額")
-            DgvList.Columns.Add("間接費", "間接費")
-            'DgvList.Columns.Add("更新者", "更新者")
-            'DgvList.Columns.Add("登録日", "登録日")
-            DgvList.Columns.Add("粗利率", "粗利率")
-            DgvList.Columns.Add("粗利額", "粗利額")
-            DgvList.Columns.Add("間接費率", "間接費率")
-            DgvList.Columns.Add("仕入原価", "仕入原価")
-            DgvList.Columns.Add("関税率", "関税率")
-            DgvList.Columns.Add("関税額", "関税額")
-            DgvList.Columns.Add("前払法人税率", "前払法人税率")
-            DgvList.Columns.Add("前払法人税額", "前払法人税額")
-            DgvList.Columns.Add("輸送費率", "輸送費率")
-            DgvList.Columns.Add("輸送費額", "輸送費額")
-            DgvList.Columns.Add("見積単価", "見積単価")
-            DgvList.Columns.Add("見積金額", "見積金額")
-
-            DgvList.Columns.Add("リードタイム", "リードタイム")
-            DgvList.Columns.Add("リードタイム単位", "リードタイム単位")
-            DgvList.Columns.Add("明細備考", "明細備考")
-
-            DgvList.Columns.Add("取消日", "取消日")
-            DgvList.Columns.Add("取消区分", "取消区分")
-
-            DgvList.Columns.Add("受注日", "受注日")
-            DgvList.Columns.Add("登録日", "登録日")
-            DgvList.Columns.Add("更新日", "更新日")
-            DgvList.Columns.Add("更新者", "更新者")
+        If DgvList.Columns.Count = 0 Then
+            Exit Sub
         End If
 
-        'DgvList.Columns("見積金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        'DgvList.Columns("仕入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        'DgvList.Columns("粗利額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+            DgvList.Columns("会社コード").HeaderText = "CompanyCode"
+            DgvList.Columns("受注番号").HeaderText = "QuotationNumber"
+            DgvList.Columns("受注番号枝番").HeaderText = "QuotationSubNumber"
+            DgvList.Columns("見積番号").HeaderText = "QuotationNumber"
+            DgvList.Columns("見積番号枝番").HeaderText = "QuotationSubNumber"
+            DgvList.Columns("行番号").HeaderText = "LineNumber"
+            DgvList.Columns("得意先コード").HeaderText = "CustomerCode"
+            DgvList.Columns("得意先名").HeaderText = "CustomerName"
+            DgvList.Columns("得意先担当者役職").HeaderText = "PositionPICCustomer"
+            DgvList.Columns("得意先担当者名").HeaderText = "NameOfPIC"
+            DgvList.Columns("得意先郵便番号").HeaderText = "CustomerPostalCode"
+            DgvList.Columns("得意先住所").HeaderText = "CustomerAddress"
+            DgvList.Columns("得意先電話番号").HeaderText = "CustomerPhoneNumber"
+            DgvList.Columns("得意先ＦＡＸ").HeaderText = "CustomerFAX"
+            DgvList.Columns("支払条件").HeaderText = "PaymentTermsAndConditon"
+            DgvList.Columns("見積日").HeaderText = "QuotationDate"
+            DgvList.Columns("見積有効期限").HeaderText = "QuotationExpirationDate"
+            DgvList.Columns("営業担当者コード").HeaderText = "SalesPersonInChargeCode"
+            DgvList.Columns("営業担当者").HeaderText = "SalesPersonInCharge"
+            DgvList.Columns("入力担当者コード").HeaderText = "PICForInputtingCode"
+            DgvList.Columns("入力担当者").HeaderText = "PICForInputting"
+            DgvList.Columns("見積備考").HeaderText = "QuotationRemarks"
+            DgvList.Columns("備考").HeaderText = "Remarks"
+            DgvList.Columns("仕入金額").HeaderText = "PurchaseAmount"
+            DgvList.Columns("ＶＡＴ").HeaderText = "ＶＡＴ"
+            DgvList.Columns("見積金額").HeaderText = "QuotationAmount"
+            DgvList.Columns("粗利額").HeaderText = "GrossMargin"
+            DgvList.Columns("仕入区分").HeaderText = "PurchasingClassification"
+            DgvList.Columns("客先番号").HeaderText = "PO"
+            DgvList.Columns("仕入先名").HeaderText = "SupplierName"
+            DgvList.Columns("メーカー").HeaderText = "Manufacturer"
+            DgvList.Columns("品名").HeaderText = "ItemName"
+            DgvList.Columns("型式").HeaderText = "Spec"
+            DgvList.Columns("受注数量").HeaderText = "JobOrderQuantity"
+            DgvList.Columns("売上数量").HeaderText = "SalesQuantity"
+            DgvList.Columns("受注残数").HeaderText = "OrderRemainingAmount"
+            DgvList.Columns("出庫数").HeaderText = "GoodsDeliveryQuantity"
+            DgvList.Columns("未出庫数").HeaderText = "GoodsDeliveryRemainingQuantity"
+            DgvList.Columns("単位").HeaderText = "Unit"
+            DgvList.Columns("仕入値").HeaderText = "PurchaseAmount"
+            DgvList.Columns("明細仕入金額").HeaderText = "DetailsPurchaseAmount"
+            DgvList.Columns("売単価").HeaderText = "SellingPrice"
+            DgvList.Columns("売上金額").HeaderText = "SalesAmount"
+            DgvList.Columns("間接費").HeaderText = "Overhead"
+            DgvList.Columns("更新者").HeaderText = "ModifiedBy"
+            DgvList.Columns("登録日").HeaderText = "RegistrationDate"
+            DgvList.Columns("粗利率").HeaderText = "GrossMarginRate"
+            DgvList.Columns("粗利額").HeaderText = "GrossMargin"
+            DgvList.Columns("明細粗利額").HeaderText = "DetailsGrossMargin"
+            DgvList.Columns("仕入原価").HeaderText = "PurchasingCost"
+            DgvList.Columns("関税率").HeaderText = "CustomsDutyRate"
+            DgvList.Columns("関税額").HeaderText = "CustomsDuty"
+            DgvList.Columns("前払法人税率").HeaderText = "PrepaidCorporateTaxRate"
+            DgvList.Columns("前払法人税額").HeaderText = "PrepaidCorporateTaxAmount"
+            DgvList.Columns("輸送費率").HeaderText = "TransportationCostRate"
+            DgvList.Columns("輸送費額").HeaderText = "TransportationCost"
+            DgvList.Columns("見積単価").HeaderText = "QuotationUnitPrice"
+            DgvList.Columns("明細見積金額").HeaderText = "DetailsQuotationAmount"
+            DgvList.Columns("リードタイム").HeaderText = "LeadTime"
+            DgvList.Columns("リードタイム単位").HeaderText = "LeadTimUnit"
+            DgvList.Columns("明細備考").HeaderText = "DetailsRemarks"
+            DgvList.Columns("取消日").HeaderText = "CancelDate"
+            DgvList.Columns("取消区分").HeaderText = "CancelClassification"
+            DgvList.Columns("受注日").HeaderText = "JobOrderDate"
+            DgvList.Columns("登録日").HeaderText = "RegistrationDate"
+            DgvList.Columns("更新日").HeaderText = "UpdateDate"
+            DgvList.Columns("更新者").HeaderText = "ModifiedBy"
 
-        'DgvList.Columns("仕入単価").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        'DgvList.Columns("数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        'DgvList.Columns("売単価").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        'DgvList.Columns("売上金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        'DgvList.Columns("間接費").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        'DgvList.Columns("粗利額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        'DgvList.Columns("粗利率").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        'DgvList.Columns("仕入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        'DgvList.Columns("間接費率").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        'DgvList.Columns("間接費無仕入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        'DgvList.Columns("関税率").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        'DgvList.Columns("関税額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        'DgvList.Columns("前払法人税率").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        'DgvList.Columns("前払法人税額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        'DgvList.Columns("輸送費率").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        'DgvList.Columns("輸送費額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        'DgvList.Columns("リードタイム").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        'DgvList.Columns("見積単価").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        'DgvList.Columns("見積金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        End If
+
+        DgvList.Columns("見積金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("仕入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("粗利額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("ＶＡＴ").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("ＰＰＨ").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+        DgvList.Columns("仕入原価").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("仕入値").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("受注数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("売上数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("受注残数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("出庫数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("未出庫数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("売単価").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("売上金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("間接費").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("粗利額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("粗利率").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("仕入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("関税率").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("関税額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("前払法人税率").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("前払法人税額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("輸送費率").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("輸送費額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("リードタイム").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("見積単価").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("見積金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("明細粗利額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("明細仕入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("明細見積金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+    End Sub
+
+    Private Sub SalesHd()
+        If DgvList.Columns.Count = 0 Then
+            Exit Sub
+        End If
+
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+
+            DgvList.Columns("会社コード").HeaderText = "CompanyCode"
+            DgvList.Columns("売上番号").HeaderText = "SalesNumber"
+            DgvList.Columns("売上番号枝番").HeaderText = "SalesSubNumber"
+            DgvList.Columns("受注番号").HeaderText = "QuotationNumber"
+            DgvList.Columns("受注番号枝番").HeaderText = "QuotationSubNumber"
+            DgvList.Columns("見積番号").HeaderText = "QuotationNumber"
+            DgvList.Columns("見積番号枝番").HeaderText = "QuotationSubNumber"
+            DgvList.Columns("行番号").HeaderText = "LineNumber"
+            DgvList.Columns("得意先コード").HeaderText = "CustomerCode"
+            DgvList.Columns("得意先名").HeaderText = "CustomerName"
+            DgvList.Columns("得意先担当者役職").HeaderText = "PositionPICCustomer"
+            DgvList.Columns("得意先担当者名").HeaderText = "NameOfPIC"
+            DgvList.Columns("得意先郵便番号").HeaderText = "CustomerPostalCode"
+            DgvList.Columns("得意先住所").HeaderText = "CustomerAddress"
+            DgvList.Columns("得意先電話番号").HeaderText = "CustomerPhoneNumber"
+            DgvList.Columns("得意先ＦＡＸ").HeaderText = "CustomerFAX"
+            DgvList.Columns("支払条件").HeaderText = "PaymentTermsAndConditon"
+            DgvList.Columns("見積有効期限").HeaderText = "QuotationExpirationDate"
+            DgvList.Columns("営業担当者コード").HeaderText = "SalesPersonInChargeCode"
+            DgvList.Columns("営業担当者").HeaderText = "SalesPersonInCharge"
+            DgvList.Columns("入力担当者コード").HeaderText = "PICForInputtingCode"
+            DgvList.Columns("入力担当者").HeaderText = "PICForInputting"
+            'DgvList.Columns("見積備考").HeaderText = "QuotationRemarks"
+            DgvList.Columns("備考").HeaderText = "Remarks"
+            DgvList.Columns("仕入金額").HeaderText = "PurchaseAmount"
+            DgvList.Columns("ＶＡＴ").HeaderText = "ＶＡＴ"
+            DgvList.Columns("見積金額").HeaderText = "QuotationAmount"
+            DgvList.Columns("粗利額").HeaderText = "GrossMargin"
+            DgvList.Columns("仕入区分").HeaderText = "PurchasingClassification"
+            DgvList.Columns("客先番号").HeaderText = "PO"
+            DgvList.Columns("仕入先名").HeaderText = "SupplierName"
+            DgvList.Columns("メーカー").HeaderText = "Manufacturer"
+            DgvList.Columns("品名").HeaderText = "ItemName"
+            DgvList.Columns("型式").HeaderText = "Spec"
+            DgvList.Columns("受注数量").HeaderText = "JobOrderQuantity"
+            DgvList.Columns("売上数量").HeaderText = "SalesQuantity"
+            DgvList.Columns("受注残数").HeaderText = "OrderRemainingAmount"
+            'DgvList.Columns("出庫数").HeaderText = "GoodsDeliveryQuantity"
+            'DgvList.Columns("未出庫数").HeaderText = "GoodsDeliveryRemainingQuantity"
+            DgvList.Columns("単位").HeaderText = "Unit"
+            DgvList.Columns("仕入値").HeaderText = "PurchaseAmount"
+            DgvList.Columns("明細仕入金額").HeaderText = "DetailsPurchaseAmount"
+            DgvList.Columns("売単価").HeaderText = "SellingPrice"
+            DgvList.Columns("売上金額").HeaderText = "SalesAmount"
+            DgvList.Columns("間接費").HeaderText = "Overhead"
+            DgvList.Columns("更新者").HeaderText = "ModifiedBy"
+            DgvList.Columns("登録日").HeaderText = "RegistrationDate"
+            DgvList.Columns("粗利率").HeaderText = "GrossMarginRate"
+            DgvList.Columns("粗利額").HeaderText = "GrossMargin"
+            DgvList.Columns("明細粗利額").HeaderText = "DetailsGrossMargin"
+            DgvList.Columns("仕入原価").HeaderText = "PurchasingCost"
+            DgvList.Columns("関税率").HeaderText = "CustomsDutyRate"
+            DgvList.Columns("関税額").HeaderText = "CustomsDuty"
+            DgvList.Columns("前払法人税率").HeaderText = "PrepaidCorporateTaxRate"
+            DgvList.Columns("前払法人税額").HeaderText = "PrepaidCorporateTaxAmount"
+            DgvList.Columns("輸送費率").HeaderText = "TransportationCostRate"
+            DgvList.Columns("輸送費額").HeaderText = "TransportationCost"
+            DgvList.Columns("見積単価").HeaderText = "QuotationUnitPrice"
+            DgvList.Columns("明細見積金額").HeaderText = "DetailsQuotationAmount"
+            DgvList.Columns("リードタイム").HeaderText = "LeadTime"
+            'DgvList.Columns("リードタイム単位").HeaderText = "LeadTimUnit"
+            DgvList.Columns("入金有無").HeaderText = "PaymentConfirmation"
+            DgvList.Columns("入金番号").HeaderText = "MoneyReceiptNumber"
+            DgvList.Columns("明細備考").HeaderText = "DetailsRemarks"
+            DgvList.Columns("取消日").HeaderText = "CancelDate"
+            DgvList.Columns("取消区分").HeaderText = "CancelClassification"
+            DgvList.Columns("見積日").HeaderText = "QuotationDate"
+            DgvList.Columns("受注日").HeaderText = "JobOrderDate"
+            DgvList.Columns("売上日").HeaderText = "SalesDate"
+            DgvList.Columns("入金予定日").HeaderText = "DepositDate"
+            DgvList.Columns("入金日").HeaderText = "MoneyReceiptDate"
+            DgvList.Columns("登録日").HeaderText = "RegistrationDate"
+            DgvList.Columns("更新日").HeaderText = "UpdateDate"
+            DgvList.Columns("更新者").HeaderText = "ModifiedBy"
+
+        End If
+
+        DgvList.Columns("見積金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("売上金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("粗利額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("ＶＡＴ").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("ＰＰＨ").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("仕入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+        DgvList.Columns("仕入原価").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("仕入値").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("受注数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("売上数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("受注残数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+        DgvList.Columns("売単価").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("売上金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("間接費").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("粗利額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("粗利率").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("仕入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("関税率").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("関税額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("前払法人税率").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("前払法人税額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("輸送費率").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("輸送費額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("リードタイム").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("見積単価").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("見積金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("明細粗利額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("明細仕入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("明細見積金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
     End Sub
 
