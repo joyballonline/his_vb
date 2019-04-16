@@ -181,7 +181,12 @@ Public Class SalesProfitList
                 DgvList.Rows(i).Cells("間接費").Value = ds.Tables(RS).Rows(i)("間接費")
                 DgvList.Rows(i).Cells("売上原価計").Value = ds.Tables(RS).Rows(i)("売上金額")
                 DgvList.Rows(i).Cells("粗利").Value = ds.Tables(RS).Rows(i)("粗利額")
-                DgvList.Rows(i).Cells("粗利率").Value = Format((ds.Tables(RS).Rows(i)("粗利額") / ds.Tables(RS).Rows(i)("見積金額")) * 100, "0.0")
+
+                If ds.Tables(RS).Rows(i)("粗利額") And ds.Tables(RS).Rows(i)("見積金額") Then
+                    DgvList.Rows(i).Cells("粗利率").Value = Format((ds.Tables(RS).Rows(i)("粗利額") / ds.Tables(RS).Rows(i)("見積金額")) * 100, "0.0")
+                Else
+                    DgvList.Rows(i).Cells("粗利率").Value = 0
+                End If
 
                 totalSales += ds.Tables(RS).Rows(i)("見積金額")
                 totalSalesAmount += ds.Tables(RS).Rows(i)("見積金額") + ds.Tables(RS).Rows(i)("ＶＡＴ")
