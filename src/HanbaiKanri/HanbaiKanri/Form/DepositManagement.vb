@@ -326,14 +326,18 @@ Public Class DepositManagement
             DgvBillingInfo.Rows(i).Cells("請求金額").Value = dsSkyuhd.Tables(RS).Rows(i)("請求金額計")
             If dsSkyuhd.Tables(RS).Rows(i)("入金額計") Is DBNull.Value Then
                 DgvBillingInfo.Rows(i).Cells("請求情報入金額計").Value = 0
+                DgvBillingInfo.Rows(i).Cells("請求情報入金額計固定").Value = 0
             Else
                 DgvBillingInfo.Rows(i).Cells("請求情報入金額計").Value = dsSkyuhd.Tables(RS).Rows(i)("入金額計")
+                DgvBillingInfo.Rows(i).Cells("請求情報入金額計固定").Value = dsSkyuhd.Tables(RS).Rows(i)("入金額計")
             End If
 
             If dsSkyuhd.Tables(RS).Rows(i)("入金額計") Is DBNull.Value Then
                 DgvBillingInfo.Rows(i).Cells("請求情報請求残高").Value = dsSkyuhd.Tables(RS).Rows(i)("請求金額計")
+                DgvBillingInfo.Rows(i).Cells("請求情報請求残高固定").Value = dsSkyuhd.Tables(RS).Rows(i)("請求金額計")
             Else
                 DgvBillingInfo.Rows(i).Cells("請求情報請求残高").Value = dsSkyuhd.Tables(RS).Rows(i)("請求金額計") - dsSkyuhd.Tables(RS).Rows(i)("入金額計")
+                DgvBillingInfo.Rows(i).Cells("請求情報請求残高固定").Value = dsSkyuhd.Tables(RS).Rows(i)("請求金額計") - dsSkyuhd.Tables(RS).Rows(i)("入金額計")
             End If
             DgvBillingInfo.Rows(i).Cells("入金額").Value = 0
         Next
@@ -388,6 +392,12 @@ Public Class DepositManagement
 
         For index As Integer = 0 To DgvDeposit.Rows.Count - 1
             Total += DgvDeposit.Rows(index).Cells("入力入金額").Value
+        Next
+
+        '一旦自動振分をリセット
+        For i As Integer = 0 To DgvBillingInfo.Rows.Count - 1
+            DgvBillingInfo.Rows(i).Cells("請求情報入金額計").Value = DgvBillingInfo.Rows(i).Cells("請求情報入金額計固定").Value
+            DgvBillingInfo.Rows(i).Cells("請求情報請求残高").Value = DgvBillingInfo.Rows(i).Cells("請求情報請求残高固定").Value
         Next
 
         '買掛金額より支払金額が大きい場合はアラート
