@@ -389,7 +389,7 @@ Public Class DataOutput
 
             '見出しの英訳・テキスト位置設定
             If RbtnQuotation.Checked Then
-                quontityHd()
+                quantityHd()
             ElseIf RbtnJobOrder.Checked Then
                 JobOrderHd()
             Else
@@ -409,7 +409,7 @@ Public Class DataOutput
 
     End Sub
 
-    Private Sub quontityHd()
+    Private Sub quantityHd()
         If DgvList.Columns.Count = 0 Then
             Exit Sub
         End If

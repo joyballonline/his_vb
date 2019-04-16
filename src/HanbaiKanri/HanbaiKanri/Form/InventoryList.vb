@@ -105,7 +105,7 @@ Public Class InventoryList
             DgvList.Columns.Add("メーカー", "Manufacturer")
             DgvList.Columns.Add("品名", "ItemName")
             DgvList.Columns.Add("型式", "Spec")
-            DgvList.Columns.Add("在庫数", "StockQuontity")
+            DgvList.Columns.Add("在庫数", "StockQuantity")
             'DgvList.Columns.Add("単位", "Unit")
         Else
             DgvList.Columns.Add("メーカー", "メーカー")
@@ -129,7 +129,7 @@ Public Class InventoryList
             DgvList.Columns.Add("メーカー", "Manufacturer")
             DgvList.Columns.Add("品名", "ItemName")
             DgvList.Columns.Add("型式", "Spec")
-            DgvList.Columns.Add("在庫数", "StockQuontity")
+            DgvList.Columns.Add("在庫数", "StockQuantity")
             'DgvList.Columns.Add("単位", "Unit")
         Else
             DgvList.Columns.Add("倉庫", "倉庫")
@@ -459,7 +459,7 @@ Public Class InventoryList
                     sheet.Range("A1").Value = "Manufacturer"
                     sheet.Range("B1").Value = "ItemName"
                     sheet.Range("C1").Value = "Spec"
-                    sheet.Range("D1").Value = "StockQuontity"
+                    sheet.Range("D1").Value = "StockQuantity"
                     'sheet.Range("E1").Value = "Unit"
                 End If
 
@@ -485,7 +485,7 @@ Public Class InventoryList
                     sheet.Range("B1").Value = "Manufacturer"
                     sheet.Range("C1").Value = "ItemName"
                     sheet.Range("D1").Value = "Spec"
-                    sheet.Range("E1").Value = "StockQuontity"
+                    sheet.Range("E1").Value = "StockQuantity"
                     'sheet.Range("F1").Value = "Unit"
                 End If
 

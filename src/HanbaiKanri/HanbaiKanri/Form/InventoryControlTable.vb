@@ -143,7 +143,7 @@ Public Class InventoryControlTable
             DgvList.Columns.Add("入庫単価", "ReceiptUnitPrice")
             DgvList.Columns.Add("出庫数量", "DeliveryQuantiy")
             DgvList.Columns.Add("出庫単価", "DeliveryUnitPrice")
-            DgvList.Columns.Add("在庫数", "StockQuontity")
+            DgvList.Columns.Add("在庫数", "StockQuantity")
             DgvList.Columns.Add("備考", "Remarks")
         Else
             DgvList.Columns.Add("メーカー", "メーカー")
@@ -217,12 +217,13 @@ Public Class InventoryControlTable
             Dim tmpMaker As String = ""
             Dim tmpItemName As String = ""
             Dim tmpSpec As String = ""
+            Dim tmpQuantity As Integer = 0
 
             For i As Integer = 0 To dsZaiko.Tables(RS).Rows.Count - 1 '在庫データ
 
                 DgvList.Rows.Add()
 
-                '得意先コードが変わったら取得
+                '商品が変わったら取得
                 If (tmpMaker <> dsZaiko.Tables(RS).Rows(i)("メーカー").ToString And
                     tmpItemName <> dsZaiko.Tables(RS).Rows(i)("品名").ToString And
                     tmpSpec <> dsZaiko.Tables(RS).Rows(i)("型式").ToString) Then
@@ -230,10 +231,12 @@ Public Class InventoryControlTable
                     tmpMaker = dsZaiko.Tables(RS).Rows(i)("メーカー").ToString
                     tmpItemName = dsZaiko.Tables(RS).Rows(i)("品名").ToString
                     tmpSpec = dsZaiko.Tables(RS).Rows(i)("型式").ToString
+                    tmpQuantity = 0
 
                     DgvList.Rows(i).Cells("メーカー").Value = tmpMaker
                     DgvList.Rows(i).Cells("品名").Value = tmpItemName
                     DgvList.Rows(i).Cells("型式").Value = tmpSpec
+
 
                 Else
                     tmpMaker = dsZaiko.Tables(RS).Rows(i)("メーカー").ToString
@@ -241,6 +244,13 @@ Public Class InventoryControlTable
                     tmpSpec = dsZaiko.Tables(RS).Rows(i)("型式").ToString
 
                 End If
+
+                If dsZaiko.Tables(RS).Rows(i)("入出庫区分") = 1 Then
+                    tmpQuantity += dsZaiko.Tables(RS).Rows(i)("数量")
+                Else
+                    tmpQuantity -= dsZaiko.Tables(RS).Rows(i)("数量")
+                End If
+
 
                 DgvList.Rows(i).Cells("年月日").Value = dsZaiko.Tables(RS).Rows(i)("入出庫日").ToShortDateString
                 DgvList.Rows(i).Cells("取引先").Value = IIf(dsZaiko.Tables(RS).Rows(i)("入出庫区分") = 1,
@@ -258,7 +268,7 @@ Public Class InventoryControlTable
 
                 End If
 
-                DgvList.Rows(i).Cells("在庫数").Value = dsZaiko.Tables(RS).Rows(i)("数量")
+                DgvList.Rows(i).Cells("在庫数").Value = tmpQuantity
                 DgvList.Rows(i).Cells("備考").Value = dsZaiko.Tables(RS).Rows(i)("備考")
 
             Next
@@ -361,7 +371,7 @@ Public Class InventoryControlTable
                     sheet.Range("D" & cellRowIndex.ToString).Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG, "UnitPrice", "単価")
                     sheet.Range("E" & cellRowIndex.ToString).Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG, "Quantity", "数量")
                     sheet.Range("F" & cellRowIndex.ToString).Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG, "UnitPrice", "単価")
-                    sheet.Range("G" & cellRowIndex.ToString).Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG, "StockQuontity", "在庫数")
+                    sheet.Range("G" & cellRowIndex.ToString).Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG, "StockQuantity", "在庫数")
                     sheet.Range("H" & cellRowIndex.ToString).Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG, "Remarks", "備考")
 
                     sheet.Range("A" & cellRowIndex.ToString, "H" & cellRowIndex.ToString).Borders(XlBordersIndex.xlEdgeBottom).LineStyle = XlLineStyle.xlContinuous　　　　　'底の罫線
