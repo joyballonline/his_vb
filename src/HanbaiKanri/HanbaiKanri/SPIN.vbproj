@@ -107,6 +107,12 @@
     <Compile Include="Form\MovementInput.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form\DataOutput.Designer.vb">
+      <DependentUpon>DataOutput.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\DataOutput.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\StockSearch.Designer.vb">
       <DependentUpon>StockSearch.vb</DependentUpon>
     </Compile>
@@ -545,6 +551,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Form\MovementInput.resx">
       <DependentUpon>MovementInput.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\DataOutput.resx">
+      <DependentUpon>DataOutput.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\StockSearch.resx">
       <DependentUpon>StockSearch.vb</DependentUpon>

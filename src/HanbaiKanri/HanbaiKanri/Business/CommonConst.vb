@@ -213,6 +213,8 @@ Public Class CommonConst
     Public Const MENU_H1420 As String = "H1420"           '在庫管理表
     Public Const MENU_H1430 As String = "H1430"           '移動入力
 
+    Public Const MENU_H1510 As String = "H1510"           'データ出力
+
     Public Const MENU_M0110 As String = "M0110"           '汎用マスタ
     Public Const MENU_M0120 As String = "M0120"           '得意先マスタ
     Public Const MENU_M0130 As String = "M0130"           '仕入先マスタ
