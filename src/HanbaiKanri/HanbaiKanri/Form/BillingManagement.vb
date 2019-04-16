@@ -218,7 +218,7 @@ Public Class BillingManagement
         'joinするのでとりあえず直書き
         Sql = "SELECT"
         Sql += " t11.行番号, t11.メーカー, t11.品名, t11.型式, t11.受注数量, t11.単位"
-        Sql += " , t11.売上数量, t11.売単価, t11.売上金額, t11.見積単価, t11.見積金額"
+        Sql += " , t11.売上数量, t11.売単価, t11.売上金額, t11.見積単価, t11.見積金額 ,t10.ＶＡＴ"
         Sql += " FROM "
         Sql += " public.t11_cymndt t11 "
 
@@ -233,11 +233,11 @@ Public Class BillingManagement
         Sql += " t11.受注番号 = t10.受注番号"
 
         Sql += " WHERE "
-        Sql += " t11.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " t11.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql += " AND "
-        Sql += " t11.受注番号 ILIKE '" & CymnNo & "'"
+        Sql += " t11.受注番号 = '" & CymnNo & "'"
         Sql += " AND "
-        Sql += " t11.受注番号枝番 ILIKE '" & Suffix & "'"
+        Sql += " t11.受注番号枝番 = '" & Suffix & "'"
         Sql += " AND "
         Sql += "t10.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
 
@@ -245,9 +245,9 @@ Public Class BillingManagement
         Dim dsCymndt As DataSet = _db.selectDB(Sql, RS, reccnt)
 
         Sql = " AND "
-        Sql += "受注番号 ILIKE '" & CymnNo & "'"
+        Sql += "受注番号 = '" & CymnNo & "'"
         Sql += " AND "
-        Sql += "受注番号枝番 ILIKE '" & Suffix & "'"
+        Sql += "受注番号枝番 = '" & Suffix & "'"
         Sql += " AND "
         Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
 
@@ -263,15 +263,19 @@ Public Class BillingManagement
             0
         )
 
+        '受注額にVAT額を加算
+        Dim total As Decimal = 0    '見積金額+VAT=受注金額
+        total = dsCymnhd.Tables(RS).Rows(0)("見積金額") + dsCymnhd.Tables(RS).Rows(0)("見積金額") * dsCymnhd.Tables(RS).Rows(0)("ＶＡＴ") / 100
+
         '受注データ、見積データから対象の請求金額・請求残高を表示
         DgvCymn.Rows.Add()
         DgvCymn.Rows(0).Cells("受注番号").Value = dsCymnhd.Tables(RS).Rows(0)("受注番号")
         DgvCymn.Rows(0).Cells("受注日").Value = dsCymnhd.Tables(RS).Rows(0)("受注日").ToShortDateString()
         DgvCymn.Rows(0).Cells("得意先").Value = dsCymnhd.Tables(RS).Rows(0)("得意先名")
         DgvCymn.Rows(0).Cells("客先番号").Value = dsCymnhd.Tables(RS).Rows(0)("客先番号").ToString
-        DgvCymn.Rows(0).Cells("受注金額").Value = dsCymnhd.Tables(RS).Rows(0)("見積金額")
+        DgvCymn.Rows(0).Cells("受注金額").Value = total.ToString("F0")
         DgvCymn.Rows(0).Cells("請求金額計").Value = BillingAmount
-        DgvCymn.Rows(0).Cells("請求残高").Value = dsCymnhd.Tables(RS).Rows(0)("見積金額") - BillingAmount
+        DgvCymn.Rows(0).Cells("請求残高").Value = (total - BillingAmount).ToString("F0")
 
         DtpBillingDate.MinDate = dsCymnhd.Tables(RS).Rows(0)("受注日").ToShortDateString()
         DtpDepositDate.MinDate = dsCymnhd.Tables(RS).Rows(0)("受注日").ToShortDateString()
