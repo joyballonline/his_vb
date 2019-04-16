@@ -117,6 +117,9 @@ Public Class DataOutput
         DgvList.Columns.Clear()
         DgvList.Rows.Clear()
 
+        'カーソルをビジー状態にする
+        Cursor.Current = Cursors.WaitCursor
+
         If RbtnQuotation.Checked Then
 
             '見積選択時
@@ -392,6 +395,9 @@ Public Class DataOutput
             Else
                 SalesHd()
             End If
+
+            'カーソルをビジー状態から元に戻す
+            Cursor.Current = Cursors.Default
 
         Catch ue As UsrDefException
             ue.dspMsg()
@@ -744,23 +750,31 @@ Public Class DataOutput
     Private Sub BtnCSVOutput_Click(sender As Object, e As EventArgs) Handles BtnCSVOutput.Click
 
         '対象データがない場合は取消操作不可能
-        If ds.Tables(RS).Rows.Count = 0 Then
+        If DgvList.Rows.Count = 0 Then
             '該当データがないアラートを出す
             _msgHd.dspMSG("noTargetData", frmC01F10_Login.loginValue.Language)
             Return
         Else
 
+            'カーソルをビジー状態にする
+            Cursor.Current = Cursors.WaitCursor
+
             'Excel出力処理
-            outputCSV(ds)
+            outputCSV()
+
+            'カーソルをビジー状態から元に戻す
+            Cursor.Current = Cursors.Default
+
+            '完了アラート
+            _msgHd.dspMSG("CreateCSV", frmC01F10_Login.loginValue.Language)
+
         End If
 
     End Sub
 
     'CSV出力処理
-    Private Sub outputCSV(ByVal prmDataSet As DataSet)
+    Private Sub outputCSV()
 
-        'カーソルをビジー状態にする
-        Cursor.Current = Cursors.WaitCursor
 
         Dim enc As System.Text.Encoding = System.Text.Encoding.GetEncoding("UTF-8")
         '出力先パス
@@ -803,9 +817,6 @@ Public Class DataOutput
         Next
 
         sr.Close()
-
-        'カーソルをビジー状態から元に戻す
-        Cursor.Current = Cursors.Default
 
     End Sub
 
