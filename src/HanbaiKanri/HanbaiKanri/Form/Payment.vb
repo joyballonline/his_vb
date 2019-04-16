@@ -318,14 +318,18 @@ Public Class Payment
             DgvKikeInfo.Rows(i).Cells("買掛金額").Value = dsKikehd.Tables(RS).Rows(i)("買掛金額計")
             If dsKikehd.Tables(RS).Rows(i)("支払金額計") Is DBNull.Value Then
                 DgvKikeInfo.Rows(i).Cells("買掛情報支払金額計").Value = 0
+                DgvKikeInfo.Rows(i).Cells("支払金額計固定").Value = 0
             Else
                 DgvKikeInfo.Rows(i).Cells("買掛情報支払金額計").Value = dsKikehd.Tables(RS).Rows(i)("支払金額計")
+                DgvKikeInfo.Rows(i).Cells("支払金額計固定").Value = dsKikehd.Tables(RS).Rows(i)("支払金額計")
             End If
 
             If dsKikehd.Tables(RS).Rows(i)("支払金額計") Is DBNull.Value Then
                 DgvKikeInfo.Rows(i).Cells("買掛情報買掛残高").Value = dsKikehd.Tables(RS).Rows(i)("買掛金額計")
+                DgvKikeInfo.Rows(i).Cells("買掛情報買掛残高固定").Value = dsKikehd.Tables(RS).Rows(i)("買掛金額計")
             Else
                 DgvKikeInfo.Rows(i).Cells("買掛情報買掛残高").Value = dsKikehd.Tables(RS).Rows(i)("買掛金額計") - dsKikehd.Tables(RS).Rows(i)("支払金額計")
+                DgvKikeInfo.Rows(i).Cells("買掛情報買掛残高固定").Value = dsKikehd.Tables(RS).Rows(i)("買掛金額計") - dsKikehd.Tables(RS).Rows(i)("支払金額計")
             End If
             DgvKikeInfo.Rows(i).Cells("支払金額").Value = 0
         Next
@@ -378,6 +382,13 @@ Public Class Payment
         For index As Integer = 0 To DgvPayment.Rows.Count - 1
             Total += DgvPayment.Rows(index).Cells("入力支払金額").Value
         Next
+
+        '一旦自動振分をリセット
+        For i As Integer = 0 To DgvKikeInfo.Rows.Count - 1
+            DgvKikeInfo.Rows(i).Cells("買掛情報支払金額計").Value = DgvKikeInfo.Rows(i).Cells("支払金額計固定").Value
+            DgvKikeInfo.Rows(i).Cells("買掛情報買掛残高").Value = DgvKikeInfo.Rows(i).Cells("買掛情報買掛残高固定").Value
+        Next
+
 
         '買掛金額より支払金額が大きい場合はアラート
         If Total > DgvSupplier.Rows(0).Cells("買掛残高").Value Then

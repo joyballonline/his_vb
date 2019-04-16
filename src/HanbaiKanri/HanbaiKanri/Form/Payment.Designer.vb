@@ -62,15 +62,17 @@ Partial Class Payment
         Me.LblAPInfo = New System.Windows.Forms.Label()
         Me.LblPayment = New System.Windows.Forms.Label()
         Me.DgvKikeInfo = New System.Windows.Forms.DataGridView()
+        Me.LblHistory = New System.Windows.Forms.Label()
+        Me.LblMode = New System.Windows.Forms.Label()
         Me.InfoNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.買掛情報買掛番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.買掛日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.買掛金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.買掛情報支払金額計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.支払金額計固定 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.買掛情報買掛残高 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.買掛情報買掛残高固定 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.支払金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.LblHistory = New System.Windows.Forms.Label()
-        Me.LblMode = New System.Windows.Forms.Label()
         CType(Me.DgvHistory, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvPayment, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvSupplier, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -395,13 +397,35 @@ Partial Class Payment
         '
         Me.DgvKikeInfo.AllowUserToAddRows = False
         Me.DgvKikeInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvKikeInfo.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.InfoNo, Me.買掛情報買掛番号, Me.買掛日, Me.買掛金額, Me.買掛情報支払金額計, Me.買掛情報買掛残高, Me.支払金額})
-        Me.DgvKikeInfo.Location = New System.Drawing.Point(13, 363)
+        Me.DgvKikeInfo.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.InfoNo, Me.買掛情報買掛番号, Me.買掛日, Me.買掛金額, Me.買掛情報支払金額計, Me.支払金額計固定, Me.買掛情報買掛残高, Me.買掛情報買掛残高固定, Me.支払金額})
+        Me.DgvKikeInfo.Location = New System.Drawing.Point(12, 363)
         Me.DgvKikeInfo.Name = "DgvKikeInfo"
         Me.DgvKikeInfo.RowHeadersVisible = False
         Me.DgvKikeInfo.RowTemplate.Height = 21
         Me.DgvKikeInfo.Size = New System.Drawing.Size(1327, 100)
         Me.DgvKikeInfo.TabIndex = 8
+        '
+        'LblHistory
+        '
+        Me.LblHistory.AutoSize = True
+        Me.LblHistory.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblHistory.Location = New System.Drawing.Point(13, 68)
+        Me.LblHistory.Name = "LblHistory"
+        Me.LblHistory.Size = New System.Drawing.Size(80, 15)
+        Me.LblHistory.TabIndex = 304
+        Me.LblHistory.Text = "■支払済み"
+        '
+        'LblMode
+        '
+        Me.LblMode.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblMode.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblMode.Location = New System.Drawing.Point(1172, 9)
+        Me.LblMode.Name = "LblMode"
+        Me.LblMode.Size = New System.Drawing.Size(165, 22)
+        Me.LblMode.TabIndex = 321
+        Me.LblMode.Text = "支払登録モード"
+        Me.LblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'InfoNo
         '
@@ -442,6 +466,13 @@ Partial Class Payment
         Me.買掛情報支払金額計.ReadOnly = True
         Me.買掛情報支払金額計.Width = 150
         '
+        '支払金額計固定
+        '
+        Me.支払金額計固定.HeaderText = "支払金額計固定"
+        Me.支払金額計固定.Name = "支払金額計固定"
+        Me.支払金額計固定.ReadOnly = True
+        Me.支払金額計固定.Visible = False
+        '
         '買掛情報買掛残高
         '
         DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
@@ -451,6 +482,13 @@ Partial Class Payment
         Me.買掛情報買掛残高.ReadOnly = True
         Me.買掛情報買掛残高.Width = 150
         '
+        '買掛情報買掛残高固定
+        '
+        Me.買掛情報買掛残高固定.HeaderText = "買掛情報買掛残高固定"
+        Me.買掛情報買掛残高固定.Name = "買掛情報買掛残高固定"
+        Me.買掛情報買掛残高固定.ReadOnly = True
+        Me.買掛情報買掛残高固定.Visible = False
+        '
         '支払金額
         '
         DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
@@ -459,28 +497,6 @@ Partial Class Payment
         Me.支払金額.MaxInputLength = 14
         Me.支払金額.Name = "支払金額"
         Me.支払金額.Width = 150
-        '
-        'LblHistory
-        '
-        Me.LblHistory.AutoSize = True
-        Me.LblHistory.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblHistory.Location = New System.Drawing.Point(13, 68)
-        Me.LblHistory.Name = "LblHistory"
-        Me.LblHistory.Size = New System.Drawing.Size(80, 15)
-        Me.LblHistory.TabIndex = 304
-        Me.LblHistory.Text = "■支払済み"
-        '
-        'LblMode
-        '
-        Me.LblMode.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.LblMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblMode.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblMode.Location = New System.Drawing.Point(1172, 9)
-        Me.LblMode.Name = "LblMode"
-        Me.LblMode.Size = New System.Drawing.Size(165, 22)
-        Me.LblMode.TabIndex = 321
-        Me.LblMode.Text = "支払登録モード"
-        Me.LblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Payment
         '
@@ -561,6 +577,8 @@ Partial Class Payment
     Friend WithEvents 買掛日 As DataGridViewTextBoxColumn
     Friend WithEvents 買掛金額 As DataGridViewTextBoxColumn
     Friend WithEvents 買掛情報支払金額計 As DataGridViewTextBoxColumn
+    Friend WithEvents 支払金額計固定 As DataGridViewTextBoxColumn
     Friend WithEvents 買掛情報買掛残高 As DataGridViewTextBoxColumn
+    Friend WithEvents 買掛情報買掛残高固定 As DataGridViewTextBoxColumn
     Friend WithEvents 支払金額 As DataGridViewTextBoxColumn
 End Class
