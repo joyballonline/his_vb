@@ -97,6 +97,7 @@ Public Class MstCustomer
             Dgv_Customer.Columns("既定支払条件").HeaderText = "PaymentTerms"
             Dgv_Customer.Columns("メモ").HeaderText = "Memo"
             Dgv_Customer.Columns("会計用得意先コード").HeaderText = "AccountingCustomerCode"
+            Dgv_Customer.Columns("国内区分").HeaderText = "DomesticClassification"
             Dgv_Customer.Columns("更新者").HeaderText = "ModifiedBy"
             Dgv_Customer.Columns("更新日").HeaderText = "UpdateDate"
 
@@ -111,59 +112,69 @@ Public Class MstCustomer
         Dim Sql As String = ""
         Try
             Sql += "SELECT "
-            Sql += "会社コード, "
-            Sql += "得意先コード, "
-            Sql += "得意先名, "
-            Sql += "得意先名略称, "
-            Sql += "郵便番号, "
-            Sql += "住所１, "
-            Sql += "住所２, "
-            Sql += "住所３, "
-            Sql += "電話番号, "
-            Sql += "電話番号検索用, "
-            Sql += "ＦＡＸ番号, "
-            Sql += "担当者名, "
-            Sql += "担当者役職, "
-            Sql += "既定支払条件, "
-            Sql += "メモ, "
-            Sql += "会計用得意先コード, "
-            Sql += "更新者, "
-            Sql += "更新日 "
+            Sql += "m10.会社コード, "
+            Sql += "m10.得意先コード, "
+            Sql += "m10.得意先名, "
+            Sql += "m10.得意先名略称, "
+            Sql += "m10.郵便番号, "
+            Sql += "m10.住所１, "
+            Sql += "m10.住所２, "
+            Sql += "m10.住所３, "
+            Sql += "m10.電話番号, "
+            Sql += "m10.電話番号検索用, "
+            Sql += "m10.ＦＡＸ番号, "
+            Sql += "m10.担当者名, "
+            Sql += "m10.担当者役職, "
+            Sql += "m10.既定支払条件, "
+            Sql += "m10.メモ, "
+            Sql += "m10.会計用得意先コード, "
+            Sql += "m90.文字１, "
+            Sql += "m90.文字２, "
+            Sql += "m10.更新者, "
+            Sql += "m10.更新日 "
             Sql += "FROM "
             Sql += "public"
             Sql += "."
-            Sql += "m10_customer"
+            Sql += "m10_customer m10"
+            Sql += " LEFT JOIN m90_hanyo m90"
+            Sql += " ON m10.会社コード = m90.会社コード "
+            Sql += " AND m90.固定キー = '" & CommonConst.DD_CODE & "'"
+            Sql += " AND m10.国内区分 = m90.可変キー "
+
             Sql += " WHERE "
-            Sql += "会社コード"
+            Sql += " m10.会社コード"
             Sql += " ILIKE "
             Sql += "'"
             Sql += frmC01F10_Login.loginValue.BumonCD
             Sql += "'"
-            Sql += " order by 会社コード, 得意先コード "
+            Sql += " order by m10.会社コード, m10.得意先コード "
 
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
 
             For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
                 Dgv_Customer.Rows.Add()
-                Dgv_Customer.Rows(i).Cells(0).Value = ds.Tables(RS).Rows(i)("会社コード")
-                Dgv_Customer.Rows(i).Cells(1).Value = ds.Tables(RS).Rows(i)("得意先コード")
-                Dgv_Customer.Rows(i).Cells(2).Value = ds.Tables(RS).Rows(i)("得意先名")
-                Dgv_Customer.Rows(i).Cells(3).Value = ds.Tables(RS).Rows(i)("得意先名略称")
-                Dgv_Customer.Rows(i).Cells(4).Value = ds.Tables(RS).Rows(i)("郵便番号")
-                Dgv_Customer.Rows(i).Cells(5).Value = ds.Tables(RS).Rows(i)("住所１")
-                Dgv_Customer.Rows(i).Cells(6).Value = ds.Tables(RS).Rows(i)("住所２")
-                Dgv_Customer.Rows(i).Cells(7).Value = ds.Tables(RS).Rows(i)("住所３")
-                Dgv_Customer.Rows(i).Cells(8).Value = ds.Tables(RS).Rows(i)("電話番号")
-                Dgv_Customer.Rows(i).Cells(9).Value = ds.Tables(RS).Rows(i)("電話番号検索用")
-                Dgv_Customer.Rows(i).Cells(10).Value = ds.Tables(RS).Rows(i)("ＦＡＸ番号")
-                Dgv_Customer.Rows(i).Cells(11).Value = ds.Tables(RS).Rows(i)("担当者名")
-                Dgv_Customer.Rows(i).Cells(12).Value = ds.Tables(RS).Rows(i)("担当者役職")
-                Dgv_Customer.Rows(i).Cells(13).Value = ds.Tables(RS).Rows(i)("既定支払条件")
-                Dgv_Customer.Rows(i).Cells(14).Value = ds.Tables(RS).Rows(i)("メモ")
-                Dgv_Customer.Rows(i).Cells(15).Value = ds.Tables(RS).Rows(i)("会計用得意先コード")
-                Dgv_Customer.Rows(i).Cells(16).Value = ds.Tables(RS).Rows(i)("更新者")
-                Dgv_Customer.Rows(i).Cells(17).Value = ds.Tables(RS).Rows(i)("更新日")
+                Dgv_Customer.Rows(i).Cells("会社コード").Value = ds.Tables(RS).Rows(i)("会社コード")
+                Dgv_Customer.Rows(i).Cells("得意先コード").Value = ds.Tables(RS).Rows(i)("得意先コード")
+                Dgv_Customer.Rows(i).Cells("得意先名").Value = ds.Tables(RS).Rows(i)("得意先名")
+                Dgv_Customer.Rows(i).Cells("得意先名略称").Value = ds.Tables(RS).Rows(i)("得意先名略称")
+                Dgv_Customer.Rows(i).Cells("郵便番号").Value = ds.Tables(RS).Rows(i)("郵便番号")
+                Dgv_Customer.Rows(i).Cells("住所１").Value = ds.Tables(RS).Rows(i)("住所１")
+                Dgv_Customer.Rows(i).Cells("住所２").Value = ds.Tables(RS).Rows(i)("住所２")
+                Dgv_Customer.Rows(i).Cells("住所３").Value = ds.Tables(RS).Rows(i)("住所３")
+                Dgv_Customer.Rows(i).Cells("電話番号").Value = ds.Tables(RS).Rows(i)("電話番号")
+                Dgv_Customer.Rows(i).Cells("電話番号検索用").Value = ds.Tables(RS).Rows(i)("電話番号検索用")
+                Dgv_Customer.Rows(i).Cells("FAX番号").Value = ds.Tables(RS).Rows(i)("ＦＡＸ番号")
+                Dgv_Customer.Rows(i).Cells("担当者名").Value = ds.Tables(RS).Rows(i)("担当者名")
+                Dgv_Customer.Rows(i).Cells("担当者役職").Value = ds.Tables(RS).Rows(i)("担当者役職")
+                Dgv_Customer.Rows(i).Cells("既定支払条件").Value = ds.Tables(RS).Rows(i)("既定支払条件")
+                Dgv_Customer.Rows(i).Cells("メモ").Value = ds.Tables(RS).Rows(i)("メモ")
+                Dgv_Customer.Rows(i).Cells("会計用得意先コード").Value = ds.Tables(RS).Rows(i)("会計用得意先コード")
+                Dgv_Customer.Rows(i).Cells("国内区分").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
+                                                               ds.Tables(RS).Rows(i)("文字２"),
+                                                               ds.Tables(RS).Rows(i)("文字１"))
+                Dgv_Customer.Rows(i).Cells("更新者").Value = ds.Tables(RS).Rows(i)("更新者")
+                Dgv_Customer.Rows(i).Cells("更新日").Value = ds.Tables(RS).Rows(i)("更新日")
 
             Next
 
@@ -328,8 +339,9 @@ Public Class MstCustomer
                 sheet.Range("M1").Value = "PaymentTerms"
                 sheet.Range("N1").Value = "Memo"
                 sheet.Range("O1").Value = "AccountingCustomerCode"
-                sheet.Range("P1").Value = "ModifiedBy"
-                sheet.Range("Q1").Value = "UpdateDate"
+                sheet.Range("P1").Value = "DomesticClassification"
+                sheet.Range("Q1").Value = "ModifiedBy"
+                sheet.Range("R1").Value = "UpdateDate"
 
             End If
 
@@ -354,8 +366,9 @@ Public Class MstCustomer
                 sheet.Range("M" & cellRowIndex.ToString).Value = Dgv_Customer.Rows(i).Cells("既定支払条件").Value '
                 sheet.Range("N" & cellRowIndex.ToString).Value = Dgv_Customer.Rows(i).Cells("メモ").Value '
                 sheet.Range("O" & cellRowIndex.ToString).Value = Dgv_Customer.Rows(i).Cells("会計用得意先コード").Value '
-                sheet.Range("P" & cellRowIndex.ToString).Value = Dgv_Customer.Rows(i).Cells("更新者").Value '
-                sheet.Range("Q" & cellRowIndex.ToString).Value = Dgv_Customer.Rows(i).Cells("更新日").Value '
+                sheet.Range("P" & cellRowIndex.ToString).Value = Dgv_Customer.Rows(i).Cells("国内区分").Value '
+                sheet.Range("Q" & cellRowIndex.ToString).Value = Dgv_Customer.Rows(i).Cells("更新者").Value '
+                sheet.Range("R" & cellRowIndex.ToString).Value = Dgv_Customer.Rows(i).Cells("更新日").Value '
             Next
 
             'app.Visible = True
