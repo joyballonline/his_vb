@@ -592,12 +592,16 @@ Public Class OrderManagement
                 Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(i)("売単価").ToString) '売単価
                 Sql4 += "', '"
 
-                Dim uriAmount As Decimal = Decimal.Parse(dsCymndt.Tables(RS).Rows(i)("売単価").ToString * DgvAdd.Rows(i).Cells("売上数量").Value.ToString)
+                Dim uriAmount As Decimal = IIf(dsCymndt.Tables(RS).Rows(i)("売単価").ToString <> 0,
+                                              Decimal.Parse(dsCymndt.Tables(RS).Rows(i)("売単価").ToString * DgvAdd.Rows(i).Cells("売上数量").Value.ToString),
+                                              0)
 
                 Sql4 += UtilClass.formatNumber(Format(uriAmount, "0.000")) '売上金額
                 Sql4 += "', '"
 
-                Dim arariAmount As Decimal = Decimal.Parse((dsCymndt.Tables(RS).Rows(i)("売単価").ToString - dsCymndt.Tables(RS).Rows(i)("仕入値").ToString) * DgvAdd.Rows(i).Cells("売上数量").Value)
+                Dim arariAmount As Decimal = IIf(dsCymndt.Tables(RS).Rows(i)("売単価").ToString <> 0,
+                                              Decimal.Parse((dsCymndt.Tables(RS).Rows(i)("売単価").ToString - dsCymndt.Tables(RS).Rows(i)("仕入値").ToString) * DgvAdd.Rows(i).Cells("売上数量").Value),
+                                              0)
 
                 Sql4 += UtilClass.formatNumber(Format(arariAmount, "0.000")) '粗利額
                 Sql4 += "', '"
