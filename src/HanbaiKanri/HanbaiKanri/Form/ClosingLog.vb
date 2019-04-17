@@ -2895,7 +2895,7 @@ Public Class ClosingLog
                     strXml += "<TRANSACTIONS OnError='CONTINUE'>"
                 End If
 
-                Dim totalJvamount As Integer = 0
+                Dim totalJvamount As Decimal = 0
 
                 'TRANSACTIONID が同じ場合のみ
                 If valTransactionid = checkTransactionid Then
@@ -3220,7 +3220,8 @@ Public Class ClosingLog
             '売掛金, 売上 = 仕入金額 * (VAT / 100)
             Dim calGlamount As Decimal = dsSwkUrighd.Tables(RS).Rows(i)("売上金額") * (dsSwkUrighd.Tables(RS).Rows(i)("VAT") / 100)
             '売掛金, VAT-OUT = calGLAMOUNT * (VAT / 100)
-            Dim calGlamountVat As Decimal = calGlamount * (dsSwkUrighd.Tables(RS).Rows(i)("VAT") / 100)
+            'Dim calGlamountVat As Decimal = calGlamount * (dsSwkUrighd.Tables(RS).Rows(i)("VAT") / 100)
+            Dim calGlamountVat As Decimal = dsSwkUrighd.Tables(RS).Rows(i)("VAT")
             '仕入金額（棚卸資産を減らすため）
             Dim calSiire = dsSwkUrighd.Tables(RS).Rows(i)("仕入金額")
 
