@@ -681,7 +681,7 @@ Public Class Cymn
                             Sql = "INSERT INTO "
                             Sql += "Public."
                             Sql += "t45_shukodt("
-                            Sql += "会社コード, 出庫番号, 受注番号, 受注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 仕入先名, 売単価, 出庫数量, 単位, 備考, 更新者, 更新日, 出庫区分)"
+                            Sql += "会社コード, 出庫番号, 受注番号, 受注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 仕入先名, 売単価, 出庫数量, 単位, 備考, 更新者, 更新日, 出庫区分, 倉庫コード)"
                             Sql += " VALUES('" & frmC01F10_Login.loginValue.BumonCD & "'"   '会社コード
                             Sql += ", '" & LS & "'"     '出庫番号
                             Sql += ", '" & TxtOrderNo.Text & "'"    '受注番号
@@ -698,7 +698,8 @@ Public Class Cymn
                             Sql += ", '" & DgvItemList.Rows(i).Cells("備考").Value.ToString & "'"         '備考
                             Sql += ", '" & frmC01F10_Login.loginValue.TantoNM & "'"                           '更新者
                             Sql += ", '" & UtilClass.formatDatetime(dtNow) & "'"                 '更新日
-                            Sql += ", '1')"
+                            Sql += ", '1'"
+                            Sql += ", '" & CmWarehouse.SelectedValue & "')"
 
                             _db.executeDB(Sql)
                         End If

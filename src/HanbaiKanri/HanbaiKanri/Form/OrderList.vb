@@ -215,15 +215,21 @@ Public Class OrderList
                     Sql += " ON t10.会社コード = t20.会社コード "
                     Sql += " AND t10.受注番号 = t20.受注番号 "
                     Sql += " AND t10.受注番号枝番 = t20.受注番号枝番 "
+                    Sql += " AND t20.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
 
                     Sql += " LEFT JOIN t42_nyukohd t42 "
                     Sql += " ON t20.会社コード = t42.会社コード "
                     Sql += " AND t20.発注番号 = t42.発注番号 "
                     Sql += " AND t20.発注番号枝番 = t42.発注番号枝番 "
+                    Sql += " AND t42.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
+
+                    Sql += " LEFT JOIN t44_shukohd t44 "
+                    Sql += " ON t10.会社コード = t44.会社コード "
+                    Sql += " AND t10.受注番号 = t44.受注番号 "
+                    Sql += " AND t10.受注番号枝番 = t44.受注番号枝番 "
+                    Sql += " AND t44.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
 
                     Sql += " WHERE t10.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "' "
-                    Sql += " AND t20.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
-                    Sql += " AND t42.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
 
                     If customerName <> Nothing Then
                         Sql += " AND "
@@ -280,7 +286,9 @@ Public Class OrderList
                     End If
 
                     Sql += " AND "
-                    Sql += "t42.入庫番号 <> ''"
+                    Sql += "(t42.入庫番号 <> ''"
+                    Sql += " OR "
+                    Sql += "t44.出庫番号 <> '' )"
                     Sql += " GROUP BY "
                     Sql += " t10.会社コード, t10.受注番号, t10.受注番号枝番, t42.発注番号, t42.発注番号枝番"
                     Sql += " ORDER BY "
@@ -753,23 +761,56 @@ Public Class OrderList
         End If
 
         Try
-            Sql1 = "UPDATE "
-            Sql1 += " Public.t10_cymnhd "
-            Sql1 += " SET "
-
-            Sql1 += " 取消区分 = 1"
-            Sql1 += ", 取消日 = '" & dtNow & "'"
-            Sql1 += ", 更新日 = '" & dtNow & "'"
-            Sql1 += ", 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
-
-            Sql1 += " WHERE 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Sql1 += " AND 受注番号 ='" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号").Value & "'"
-            Sql1 += " AND 受注番号枝番 ='" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号枝番").Value & "'"
 
             '取消確認のアラート
             Dim result As DialogResult = _msgHd.dspMSG("confirmCancel", frmC01F10_Login.loginValue.Language)
 
             If result = DialogResult.Yes Then
+
+                '出庫データ登録前に、「在庫引当」の商品があるかどうかチェック
+                Sql1 = "AND "
+                Sql1 += "受注番号 = '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号").Value & "'"
+                Sql1 += "AND "
+                Sql1 += "受注番号枝番 = '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号枝番").Value & "'"
+
+                ds = getDsData("t11_cymndt", Sql1)
+
+                For i As Integer = 0 To ds.Tables(RS).Rows.Count() - 1
+
+                    '仕入区分が2（在庫引当）の場合、作成済みの仮出庫データを「取消区分=0, 取消日=Datetime.Date」でUPDATEする
+                    If ds.Tables(RS).Rows(i)("仕入区分").ToString = CommonConst.Sire_KBN_Zaiko Then
+
+                        Sql1 = "UPDATE "
+                        Sql1 += " t44_shukohd "
+                        Sql1 += " SET "
+                        Sql1 += " 取消区分 = " & CommonConst.CANCEL_KBN_DISABLED.ToString
+                        Sql1 += " ,取消日 = '" & UtilClass.formatDatetime(dtNow) & "'"
+
+                        Sql1 += " WHERE "
+                        Sql1 += " 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                        Sql1 += " AND "
+                        Sql1 += " 受注番号 = '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号").Value & "'"
+                        Sql1 += " AND "
+                        Sql1 += " 受注番号枝番 = '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号枝番").Value & "'"
+
+                        _db.executeDB(Sql1)
+
+                    End If
+                Next
+
+                Sql1 = "UPDATE "
+                Sql1 += " Public.t10_cymnhd "
+                Sql1 += " SET "
+
+                Sql1 += " 取消区分 = 1"
+                Sql1 += ", 取消日 = '" & dtNow & "'"
+                Sql1 += ", 更新日 = '" & dtNow & "'"
+                Sql1 += ", 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+
+                Sql1 += " WHERE 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
+                Sql1 += " AND 受注番号 ='" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号").Value & "'"
+                Sql1 += " AND 受注番号枝番 ='" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号枝番").Value & "'"
+
                 _db.executeDB(Sql1)
                 OrderListLoad() 'データ更新
             End If
