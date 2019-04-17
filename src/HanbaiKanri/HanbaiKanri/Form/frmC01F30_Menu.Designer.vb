@@ -46,6 +46,36 @@ Partial Class frmC01F30_Menu
     Friend WithEvents DataGridViewTextBoxColumn6 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn7 As DataGridViewTextBoxColumn
     Friend WithEvents BtnLogout As Button
+    Friend WithEvents MenuLayput As TabPage
+    Friend WithEvents ImageList1 As ImageList
+    Friend WithEvents TabControl1 As TabControl
+    Friend WithEvents TabPage1 As TabPage
+    Friend WithEvents TabPage2 As TabPage
+    Friend WithEvents TabPage3 As TabPage
+    Friend WithEvents TabPage4 As TabPage
+    Friend WithEvents TabPage5 As TabPage
+    Friend WithEvents gbH01 As GroupBox
+    Friend WithEvents TableLayoutPanel23 As TableLayoutPanel
+    Friend WithEvents gbH02 As GroupBox
+    Friend WithEvents gbH08 As GroupBox
+    Friend WithEvents gbH05 As GroupBox
+    Friend WithEvents TableLayoutPanel24 As TableLayoutPanel
+    Friend WithEvents gbH06 As GroupBox
+    Friend WithEvents gbH07 As GroupBox
+    Friend WithEvents gbH03 As GroupBox
+    Friend WithEvents gbH04 As GroupBox
+    Friend WithEvents TableLayoutPanel25 As TableLayoutPanel
+    Friend WithEvents gbH11 As GroupBox
+    Friend WithEvents gbH12 As GroupBox
+    Friend WithEvents gbH09 As GroupBox
+    Friend WithEvents gbH10 As GroupBox
+    Friend WithEvents TableLayoutPanel26 As TableLayoutPanel
+    Friend WithEvents gbH13 As GroupBox
+    Friend WithEvents gbH14 As GroupBox
+    Friend WithEvents gbH15 As GroupBox
+    Friend WithEvents GroupBox3 As GroupBox
+    Friend WithEvents TableLayoutPanel27 As TableLayoutPanel
+    Friend WithEvents gbM01 As FlowLayoutPanel
 
     'メモ: 以下のプロシージャは Windows フォーム デザイナーで必要です。
     'Windows フォーム デザイナーを使用して変更できます。  
