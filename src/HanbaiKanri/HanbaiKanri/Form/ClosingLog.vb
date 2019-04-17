@@ -846,7 +846,8 @@ Public Class ClosingLog
             _db.executeDB(Sql)
 
             Dim VATOUT As Double = 0
-            VATOUT = dsSwkUrighd.Tables(RS).Rows(i)("売上金額") * dsSwkUrighd.Tables(RS).Rows(i)("ＶＡＴ") / 100
+            'VATOUT = dsSwkUrighd.Tables(RS).Rows(i)("売上金額") * dsSwkUrighd.Tables(RS).Rows(i)("ＶＡＴ") / 100
+            VATOUT = dsSwkUrighd.Tables(RS).Rows(i)("ＶＡＴ")
             Sql = ""
             Sql += "INSERT INTO Public.t66_swkhd("
             Sql += "会社コード, 見積番号, 受注番号, 客先番号, 取引先名, 仕分日, 借方勘定科目, 借方勘定科目金額, 貸方勘定科目, 貸方勘定科目金額)"
