@@ -467,6 +467,7 @@ Partial Class DepositManagement
         Me.請求情報入金額計固定.HeaderText = "請求情報入金額計固定"
         Me.請求情報入金額計固定.Name = "請求情報入金額計固定"
         Me.請求情報入金額計固定.ReadOnly = True
+        Me.請求情報入金額計固定.Visible = False
         '
         '請求情報請求残高
         '
@@ -482,6 +483,7 @@ Partial Class DepositManagement
         Me.請求情報請求残高固定.HeaderText = "請求情報請求残高固定"
         Me.請求情報請求残高固定.Name = "請求情報請求残高固定"
         Me.請求情報請求残高固定.ReadOnly = True
+        Me.請求情報請求残高固定.Visible = False
         '
         '入金額
         '
