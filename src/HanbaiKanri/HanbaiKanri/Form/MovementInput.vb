@@ -917,6 +917,10 @@ Public Class MovementInput
 
     'Dgv内での検索
     Private Sub DgvList_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DgvList.CellDoubleClick
+        '行ヘッダークリック時は無効
+        If e.RowIndex < 0 Then
+            Exit Sub
+        End If
 
         Dim selectColumn As String = DgvList.Columns(e.ColumnIndex).Name
 

@@ -834,6 +834,11 @@ Public Class Ordering
 
     Private Sub DgvItemList_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DgvItemList.CellDoubleClick
 
+        '行ヘッダークリック時は無効
+        If e.RowIndex < 0 Then
+            Exit Sub
+        End If
+
         If PurchaseStatus Is CommonConst.STATUS_VIEW Then
             Exit Sub
         End If

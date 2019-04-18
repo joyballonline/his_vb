@@ -1134,6 +1134,11 @@ Public Class Quote
     'Dgv内での検索
     Private Sub DgvItemList_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) _
      Handles DgvItemList.CellDoubleClick
+        '行ヘッダークリック時は無効
+        If e.RowIndex < 0 Then
+            Exit Sub
+        End If
+
         '仕入単価入力時は各項目変更しないので検索も起動しない
         If Status Is CommonConst.STATUS_PRICE Then
             Exit Sub
