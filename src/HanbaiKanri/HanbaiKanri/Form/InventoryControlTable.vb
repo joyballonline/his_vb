@@ -144,6 +144,7 @@ Public Class InventoryControlTable
             DgvList.Columns.Add("出庫数量", "DeliveryQuantiy")
             DgvList.Columns.Add("出庫単価", "DeliveryUnitPrice")
             DgvList.Columns.Add("在庫数", "StockQuantity")
+            DgvList.Columns.Add("入出庫種別", "InOutClassification")
             DgvList.Columns.Add("備考", "Remarks")
         Else
             DgvList.Columns.Add("メーカー", "メーカー")
@@ -156,6 +157,7 @@ Public Class InventoryControlTable
             DgvList.Columns.Add("出庫数量", "出庫数量")
             DgvList.Columns.Add("出庫単価", "出庫単価")
             DgvList.Columns.Add("在庫数", "在庫数")
+            DgvList.Columns.Add("入出庫種別", "入出庫種別")
             DgvList.Columns.Add("備考", "備考")
 
             DgvList.Columns("入庫数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -184,7 +186,7 @@ Public Class InventoryControlTable
             '
             Sql = " SELECT "
             Sql += " t70.メーカー, t70.品名, t70.型式, t70.数量, t70.入出庫日, t70.入出庫区分, t43.仕入先名 AS 入庫仕入先 "
-            Sql += " ,t45.仕入先名 AS 出庫仕入先, t43.仕入値, t45.売単価, t70.備考 "
+            Sql += " ,t45.仕入先名 AS 出庫仕入先, t43.仕入値, t45.売単価, t70.備考, t70.入出庫種別 "
             Sql += " FROM "
             Sql += " t70_inout t70 "
 
@@ -218,6 +220,10 @@ Public Class InventoryControlTable
             Dim tmpItemName As String = ""
             Dim tmpSpec As String = ""
             Dim tmpQuantity As Integer = 0
+
+
+
+            Dim dsHanyoInOut As DataSet = getDsHanyoData(CommonConst.INOUT_CLASS)
 
             For i As Integer = 0 To dsZaiko.Tables(RS).Rows.Count - 1 '在庫データ
 
@@ -269,6 +275,15 @@ Public Class InventoryControlTable
                 End If
 
                 DgvList.Rows(i).Cells("在庫数").Value = tmpQuantity
+
+                For x As Integer = 0 To dsHanyoInOut.Tables(RS).Rows.Count - 1
+                    If dsZaiko.Tables(RS).Rows(i)("入出庫種別") = dsHanyoInOut.Tables(RS).Rows(x)("可変キー") Then
+                        DgvList.Rows(i).Cells("入出庫種別").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
+                                                                   dsHanyoInOut.Tables(RS).Rows(x)("文字２"),
+                                                                   dsHanyoInOut.Tables(RS).Rows(x)("文字１"))
+                    End If
+                Next
+
                 DgvList.Rows(i).Cells("備考").Value = dsZaiko.Tables(RS).Rows(i)("備考")
 
             Next
@@ -329,7 +344,7 @@ Public Class InventoryControlTable
 
                 If DgvList.Rows(i).Cells("メーカー").Value <> "" Then
 
-                    sheet.Range("A" & cellRowIndex.ToString, "H" & cellRowIndex.ToString).Borders(XlBordersIndex.xlEdgeTop).LineStyle = XlLineStyle.xlDouble
+                    sheet.Range("A" & cellRowIndex.ToString, "I" & cellRowIndex.ToString).Borders(XlBordersIndex.xlEdgeTop).LineStyle = XlLineStyle.xlDouble
 
                     'メーカー、品名、型式 の列結合
                     sheet.Range("A" & cellRowIndex.ToString, "B" & cellRowIndex.ToString).Merge() 'メーカー
@@ -344,7 +359,7 @@ Public Class InventoryControlTable
                     sheet.Range("C" & cellRowIndex.ToString).HorizontalAlignment = Constants.xlLeft
                     sheet.Range("F" & cellRowIndex.ToString).HorizontalAlignment = Constants.xlLeft
 
-                    sheet.Range("A" & cellRowIndex.ToString, "H" & cellRowIndex.ToString).Borders(XlBordersIndex.xlEdgeBottom).LineStyle = XlLineStyle.xlDouble
+                    sheet.Range("A" & cellRowIndex.ToString, "I" & cellRowIndex.ToString).Borders(XlBordersIndex.xlEdgeBottom).LineStyle = XlLineStyle.xlDouble
 
                     cellRowIndex += 1 '次の行
 
@@ -372,9 +387,10 @@ Public Class InventoryControlTable
                     sheet.Range("E" & cellRowIndex.ToString).Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG, "Quantity", "数量")
                     sheet.Range("F" & cellRowIndex.ToString).Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG, "UnitPrice", "単価")
                     sheet.Range("G" & cellRowIndex.ToString).Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG, "StockQuantity", "在庫数")
-                    sheet.Range("H" & cellRowIndex.ToString).Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG, "Remarks", "備考")
+                    sheet.Range("H" & cellRowIndex.ToString).Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG, "InOutClassification", "入出庫種別")
+                    sheet.Range("I" & cellRowIndex.ToString).Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG, "Remarks", "備考")
 
-                    sheet.Range("A" & cellRowIndex.ToString, "H" & cellRowIndex.ToString).Borders(XlBordersIndex.xlEdgeBottom).LineStyle = XlLineStyle.xlContinuous　　　　　'底の罫線
+                    sheet.Range("A" & cellRowIndex.ToString, "I" & cellRowIndex.ToString).Borders(XlBordersIndex.xlEdgeBottom).LineStyle = XlLineStyle.xlContinuous　　　　　'底の罫線
 
                     cellRowIndex += 1 '次の行
 
@@ -388,9 +404,10 @@ Public Class InventoryControlTable
                 sheet.Range("E" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("出庫数量").Value
                 sheet.Range("F" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("出庫単価").Value
                 sheet.Range("G" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("在庫数").Value
-                sheet.Range("H" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("備考").Value
+                sheet.Range("H" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("入出庫種別").Value
+                sheet.Range("I" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("備考").Value
 
-                sheet.Range("A" & cellRowIndex.ToString, "H" & cellRowIndex.ToString).Borders(XlBordersIndex.xlEdgeBottom).LineStyle = XlLineStyle.xlContinuous　　　　　'底の罫線
+                sheet.Range("A" & cellRowIndex.ToString, "I" & cellRowIndex.ToString).Borders(XlBordersIndex.xlEdgeBottom).LineStyle = XlLineStyle.xlContinuous　　　　　'底の罫線
             Next
 
             app.DisplayAlerts = True 'アラート無効化を解除
@@ -492,6 +509,25 @@ Public Class InventoryControlTable
             Return True
         End If
         Return True
+    End Function
+
+    '汎用マスタから固定キー、可変キーに応じた結果を返す
+    'param1：String 固定キー
+    'param2：String 可変キー
+    'Return: DataSet
+    Private Function getDsHanyoData(ByVal prmFixed As String, Optional ByVal prmVariable As String = "") As DataSet
+        Dim Sql As String = ""
+
+        Sql = " AND "
+        Sql += "固定キー ILIKE '" & prmFixed & "'"
+
+        If prmVariable IsNot "" Then
+            Sql += " AND "
+            Sql += "可変キー ILIKE '" & prmVariable & "'"
+        End If
+
+        'リードタイムのリストを汎用マスタから取得
+        Return getDsData("m90_hanyo", Sql)
     End Function
 
 End Class
