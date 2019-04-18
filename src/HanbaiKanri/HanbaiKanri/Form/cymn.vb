@@ -484,11 +484,15 @@ Public Class Cymn
                     itemCount = 0
 
                     '入庫データから該当商品を検索し、入庫数量を算出
-                    Sql = "Select * FROM Public.t43_nyukodt"
-                    Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-                    Sql += " AND メーカー = '" & DgvItemList.Rows(i).Cells("メーカー").Value & "'"
-                    Sql += " AND 品名 = '" & DgvItemList.Rows(i).Cells("品名").Value & "'"
-                    Sql += " AND 型式 = '" & DgvItemList.Rows(i).Cells("型式").Value & "'"
+                    Sql = "Select t43.*, t42.取消区分 FROM Public.t43_nyukodt t43 "
+                    Sql += " LEFT JOIN t42_nyukohd t42 "
+                    Sql += " ON t43.会社コード = t42.会社コード "
+                    Sql += " AND t43.入庫番号 = t42.入庫番号 "
+                    Sql += " WHERE t43.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                    Sql += " AND t43.メーカー = '" & DgvItemList.Rows(i).Cells("メーカー").Value & "'"
+                    Sql += " AND t43.品名 = '" & DgvItemList.Rows(i).Cells("品名").Value & "'"
+                    Sql += " AND t43.型式 = '" & DgvItemList.Rows(i).Cells("型式").Value & "'"
+                    Sql += " AND t42.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '取消区分=0
                     Dim ds1 = _db.selectDB(Sql, RS, reccnt)
 
                     '入庫数量を集計
@@ -497,11 +501,15 @@ Public Class Cymn
                                         0)
 
                     '出庫データから該当商品を検索し、出庫数量を算出
-                    Sql = "SELECT * FROM public.t45_shukodt"
-                    Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-                    Sql += " AND メーカー = '" & DgvItemList.Rows(i).Cells("メーカー").Value & "'"
-                    Sql += " AND 品名 = '" & DgvItemList.Rows(i).Cells("品名").Value & "'"
-                    Sql += " AND 型式 = '" & DgvItemList.Rows(i).Cells("型式").Value & "'"
+                    Sql = "SELECT t45.*, t44.取消区分 FROM public.t45_shukodt t45"
+                    Sql += " LEFT JOIN t44_shukohd t44 "
+                    Sql += " ON t45.会社コード = t44.会社コード "
+                    Sql += " AND t45.出庫番号 = t44.出庫番号 "
+                    Sql += " WHERE t45.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                    Sql += " AND t45.メーカー = '" & DgvItemList.Rows(i).Cells("メーカー").Value & "'"
+                    Sql += " AND t45.品名 = '" & DgvItemList.Rows(i).Cells("品名").Value & "'"
+                    Sql += " AND t45.型式 = '" & DgvItemList.Rows(i).Cells("型式").Value & "'"
+                    Sql += " AND t44.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '取消区分=0
                     Dim ds2 = _db.selectDB(Sql, RS, reccnt)
 
                     '出庫数量を集計
