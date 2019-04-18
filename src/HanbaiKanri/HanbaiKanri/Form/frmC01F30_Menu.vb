@@ -1281,10 +1281,10 @@ Public Class frmC01F30_Menu
             strSql = strSql & " Where m.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
             strSql = strSql & " and "
             strSql = strSql & " m.削除フラグ = 0 "
-            'strSql = strSql & " and "
-            'strSql = strSql & " m.業務ＩＤ <> 'M01' "
+            strSql = strSql & " and "
+            strSql = strSql & " m.業務ＩＤ <> 'M01' "
             strSql = strSql & likeSql
-            strSql = strSql & " order by m.業務ＩＤ, m.処理ＩＤ, m.表示順 "
+            strSql = strSql & " order by m.表示順 "
 
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(strSql, RS, reccnt)
