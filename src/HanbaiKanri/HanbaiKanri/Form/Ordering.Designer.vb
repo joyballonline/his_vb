@@ -47,20 +47,6 @@ Partial Class Ordering
         Me.LblPurchaseDate = New System.Windows.Forms.Label()
         Me.LblPurchaseNo = New System.Windows.Forms.Label()
         Me.DgvItemList = New System.Windows.Forms.DataGridView()
-        Me.No = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.メーカー = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.品名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.型式 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.数量 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.単位 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.仕入先 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.仕入単価 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.間接費 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.仕入金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.リードタイム = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.入庫数 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.未入庫数 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.備考 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LblPurchaseRemarks = New System.Windows.Forms.Label()
         Me.TxtPurchaseRemark = New System.Windows.Forms.TextBox()
         Me.DtpPurchaseDate = New System.Windows.Forms.DateTimePicker()
@@ -98,6 +84,20 @@ Partial Class Ordering
         Me.LblShipDate = New System.Windows.Forms.Label()
         Me.LblWarehouse = New System.Windows.Forms.Label()
         Me.CmWarehouse = New System.Windows.Forms.ComboBox()
+        Me.No = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.メーカー = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.品名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.型式 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.数量 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.単位 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入先 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入単価 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.間接費 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.リードタイム = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.入庫数 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.未入庫数 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.備考 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DgvItemList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -334,103 +334,6 @@ Partial Class Ordering
         Me.DgvItemList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
         Me.DgvItemList.Size = New System.Drawing.Size(1329, 185)
         Me.DgvItemList.TabIndex = 18
-        '
-        'No
-        '
-        Me.No.HeaderText = "No"
-        Me.No.Name = "No"
-        Me.No.Width = 43
-        '
-        'メーカー
-        '
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.メーカー.DefaultCellStyle = DataGridViewCellStyle1
-        Me.メーカー.HeaderText = "メーカー"
-        Me.メーカー.Name = "メーカー"
-        Me.メーカー.Width = 220
-        '
-        '品名
-        '
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.品名.DefaultCellStyle = DataGridViewCellStyle2
-        Me.品名.HeaderText = "品名"
-        Me.品名.Name = "品名"
-        Me.品名.Width = 220
-        '
-        '型式
-        '
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.型式.DefaultCellStyle = DataGridViewCellStyle3
-        Me.型式.HeaderText = "型式"
-        Me.型式.Name = "型式"
-        Me.型式.Width = 230
-        '
-        '数量
-        '
-        Me.数量.HeaderText = "数量"
-        Me.数量.Name = "数量"
-        Me.数量.Width = 80
-        '
-        '単位
-        '
-        Me.単位.HeaderText = "単位"
-        Me.単位.Name = "単位"
-        Me.単位.Width = 80
-        '
-        '仕入先
-        '
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.仕入先.DefaultCellStyle = DataGridViewCellStyle4
-        Me.仕入先.HeaderText = "仕入先"
-        Me.仕入先.Name = "仕入先"
-        Me.仕入先.Visible = False
-        Me.仕入先.Width = 85
-        '
-        '仕入単価
-        '
-        Me.仕入単価.HeaderText = "仕入単価"
-        Me.仕入単価.Name = "仕入単価"
-        Me.仕入単価.Width = 80
-        '
-        '間接費
-        '
-        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.間接費.DefaultCellStyle = DataGridViewCellStyle5
-        Me.間接費.HeaderText = "間接費"
-        Me.間接費.Name = "間接費"
-        Me.間接費.ReadOnly = True
-        Me.間接費.Visible = False
-        '
-        '仕入金額
-        '
-        DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.仕入金額.DefaultCellStyle = DataGridViewCellStyle6
-        Me.仕入金額.HeaderText = "仕入金額"
-        Me.仕入金額.Name = "仕入金額"
-        Me.仕入金額.ReadOnly = True
-        '
-        'リードタイム
-        '
-        Me.リードタイム.HeaderText = "リードタイム"
-        Me.リードタイム.Name = "リードタイム"
-        '
-        '入庫数
-        '
-        Me.入庫数.HeaderText = "入庫数"
-        Me.入庫数.Name = "入庫数"
-        Me.入庫数.Visible = False
-        '
-        '未入庫数
-        '
-        Me.未入庫数.HeaderText = "未入庫数"
-        Me.未入庫数.Name = "未入庫数"
-        Me.未入庫数.Visible = False
-        '
-        '備考
-        '
-        Me.備考.HeaderText = "備考"
-        Me.備考.Name = "備考"
-        Me.備考.Width = 80
         '
         'LblPurchaseRemarks
         '
@@ -849,6 +752,116 @@ Partial Class Ordering
         Me.CmWarehouse.Size = New System.Drawing.Size(200, 23)
         Me.CmWarehouse.TabIndex = 310
         '
+        'No
+        '
+        Me.No.HeaderText = "No"
+        Me.No.Name = "No"
+        Me.No.Width = 43
+        '
+        'メーカー
+        '
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.メーカー.DefaultCellStyle = DataGridViewCellStyle1
+        Me.メーカー.HeaderText = "メーカー"
+        Me.メーカー.MaxInputLength = 50
+        Me.メーカー.Name = "メーカー"
+        Me.メーカー.Width = 220
+        '
+        '品名
+        '
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.品名.DefaultCellStyle = DataGridViewCellStyle2
+        Me.品名.HeaderText = "品名"
+        Me.品名.MaxInputLength = 50
+        Me.品名.Name = "品名"
+        Me.品名.Width = 220
+        '
+        '型式
+        '
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.型式.DefaultCellStyle = DataGridViewCellStyle3
+        Me.型式.HeaderText = "型式"
+        Me.型式.MaxInputLength = 255
+        Me.型式.Name = "型式"
+        Me.型式.Width = 230
+        '
+        '数量
+        '
+        Me.数量.HeaderText = "数量"
+        Me.数量.MaxInputLength = 8
+        Me.数量.Name = "数量"
+        Me.数量.Width = 80
+        '
+        '単位
+        '
+        Me.単位.HeaderText = "単位"
+        Me.単位.MaxInputLength = 10
+        Me.単位.Name = "単位"
+        Me.単位.Width = 80
+        '
+        '仕入先
+        '
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.仕入先.DefaultCellStyle = DataGridViewCellStyle4
+        Me.仕入先.HeaderText = "仕入先"
+        Me.仕入先.MaxInputLength = 100
+        Me.仕入先.Name = "仕入先"
+        Me.仕入先.Visible = False
+        Me.仕入先.Width = 85
+        '
+        '仕入単価
+        '
+        Me.仕入単価.HeaderText = "仕入単価"
+        Me.仕入単価.MaxInputLength = 15
+        Me.仕入単価.Name = "仕入単価"
+        Me.仕入単価.Width = 80
+        '
+        '間接費
+        '
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.間接費.DefaultCellStyle = DataGridViewCellStyle5
+        Me.間接費.HeaderText = "間接費"
+        Me.間接費.MaxInputLength = 15
+        Me.間接費.Name = "間接費"
+        Me.間接費.ReadOnly = True
+        Me.間接費.Visible = False
+        '
+        '仕入金額
+        '
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.仕入金額.DefaultCellStyle = DataGridViewCellStyle6
+        Me.仕入金額.HeaderText = "仕入金額"
+        Me.仕入金額.MaxInputLength = 15
+        Me.仕入金額.Name = "仕入金額"
+        Me.仕入金額.ReadOnly = True
+        '
+        'リードタイム
+        '
+        Me.リードタイム.HeaderText = "リードタイム"
+        Me.リードタイム.MaxInputLength = 20
+        Me.リードタイム.Name = "リードタイム"
+        '
+        '入庫数
+        '
+        Me.入庫数.HeaderText = "入庫数"
+        Me.入庫数.MaxInputLength = 8
+        Me.入庫数.Name = "入庫数"
+        Me.入庫数.Visible = False
+        '
+        '未入庫数
+        '
+        Me.未入庫数.HeaderText = "未入庫数"
+        Me.未入庫数.MaxInputLength = 8
+        Me.未入庫数.Name = "未入庫数"
+        Me.未入庫数.Visible = False
+        '
+        '備考
+        '
+        Me.備考.HeaderText = "備考"
+        Me.備考.MaxInputLength = 255
+        Me.備考.Name = "備考"
+        Me.備考.Width = 80
+        '
         'Ordering
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
@@ -957,20 +970,6 @@ Partial Class Ordering
     Friend WithEvents LblRemarks As Label
     Friend WithEvents TxtPosition As TextBox
     Friend WithEvents BtnPurchase As Button
-    Friend WithEvents No As DataGridViewTextBoxColumn
-    Friend WithEvents メーカー As DataGridViewTextBoxColumn
-    Friend WithEvents 品名 As DataGridViewTextBoxColumn
-    Friend WithEvents 型式 As DataGridViewTextBoxColumn
-    Friend WithEvents 数量 As DataGridViewTextBoxColumn
-    Friend WithEvents 単位 As DataGridViewTextBoxColumn
-    Friend WithEvents 仕入先 As DataGridViewTextBoxColumn
-    Friend WithEvents 仕入単価 As DataGridViewTextBoxColumn
-    Friend WithEvents 間接費 As DataGridViewTextBoxColumn
-    Friend WithEvents 仕入金額 As DataGridViewTextBoxColumn
-    Friend WithEvents リードタイム As DataGridViewTextBoxColumn
-    Friend WithEvents 入庫数 As DataGridViewTextBoxColumn
-    Friend WithEvents 未入庫数 As DataGridViewTextBoxColumn
-    Friend WithEvents 備考 As DataGridViewTextBoxColumn
     Friend WithEvents BtnClone As Button
     Friend WithEvents BtnDown As Button
     Friend WithEvents BtnUp As Button
@@ -987,4 +986,18 @@ Partial Class Ordering
     Friend WithEvents LblShipDate As Label
     Friend WithEvents LblWarehouse As Label
     Friend WithEvents CmWarehouse As ComboBox
+    Friend WithEvents No As DataGridViewTextBoxColumn
+    Friend WithEvents メーカー As DataGridViewTextBoxColumn
+    Friend WithEvents 品名 As DataGridViewTextBoxColumn
+    Friend WithEvents 型式 As DataGridViewTextBoxColumn
+    Friend WithEvents 数量 As DataGridViewTextBoxColumn
+    Friend WithEvents 単位 As DataGridViewTextBoxColumn
+    Friend WithEvents 仕入先 As DataGridViewTextBoxColumn
+    Friend WithEvents 仕入単価 As DataGridViewTextBoxColumn
+    Friend WithEvents 間接費 As DataGridViewTextBoxColumn
+    Friend WithEvents 仕入金額 As DataGridViewTextBoxColumn
+    Friend WithEvents リードタイム As DataGridViewTextBoxColumn
+    Friend WithEvents 入庫数 As DataGridViewTextBoxColumn
+    Friend WithEvents 未入庫数 As DataGridViewTextBoxColumn
+    Friend WithEvents 備考 As DataGridViewTextBoxColumn
 End Class
