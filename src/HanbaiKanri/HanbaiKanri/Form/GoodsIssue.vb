@@ -175,13 +175,15 @@ Public Class GoodsIssue
             Sql += "受注番号 ILIKE '" & No & "'"
             Sql += " AND "
             Sql += "受注番号枝番 ILIKE '" & Suffix & "'"
-            Sql += " AND "
-            Sql += "取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'"
+            If _status <> CommonConst.STATUS_VIEW Then
+                Sql += " AND "
+                Sql += "取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'"
+            End If
             Sql += " order by 会社コード, 受注番号, 受注番号枝番 "
 
             Dim dsCymnhd As DataSet = getDsData("t10_cymnhd", Sql)
 
-            Sql = "SELECT t45.*, t44.出庫日, t70.入出庫種別, t70.引当区分"
+            Sql = "SELECT t45.*, t44.出庫日, t44.取消区分, t70.入出庫種別, t70.引当区分"
             Sql += " FROM  public.t45_shukodt t45 "
 
             Sql += " INNER JOIN  t44_shukohd t44"
@@ -200,11 +202,19 @@ Public Class GoodsIssue
             Sql += "t45.受注番号 ILIKE '" & No & "'"
             Sql += " AND "
             Sql += "t45.受注番号枝番 ILIKE '" & Suffix & "'"
-            Sql += " AND "
-            Sql += "t44.取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'"
+            If _status <> CommonConst.STATUS_VIEW Then
+                Sql += " AND "
+                Sql += "t44.取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'"
+            End If
             Sql += " ORDER BY t45.行番号"
 
             Dim dsShukodt As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+            If _status = CommonConst.STATUS_VIEW And dsShukodt.Tables(RS).Rows.Count > 0 Then
+                If dsShukodt.Tables(RS).Rows(0)("取消区分") = CommonConst.CANCEL_KBN_DISABLED Then
+                    BtnDeliveryNote.Visible = False
+                End If
+            End If
 
             Sql = "SELECT t11.*, t10.更新日"
             Sql += " FROM  public.t11_cymndt t11 "
@@ -218,8 +228,12 @@ Public Class GoodsIssue
             Sql += "t11.受注番号 ILIKE '" & No & "'"
             Sql += " AND "
             Sql += "t11.受注番号枝番 ILIKE '" & Suffix & "'"
-            Sql += " AND "
-            Sql += "t10.取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'"
+
+            If _status <> CommonConst.STATUS_VIEW Then
+                Sql += " AND "
+                Sql += "t10.取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'"
+            End If
+
             Sql += " ORDER BY t11.行番号"
 
             Dim dsCymndt As DataSet = _db.selectDB(Sql, RS, reccnt)
@@ -382,6 +396,8 @@ Public Class GoodsIssue
                 No3 += 1
             Next i
             TxtCount3.Text = DgvAdd.Rows.Count()
+
+
 
             TxtOrderNo.Text = dsCymnhd.Tables(RS).Rows(0)("受注番号")
             TxtSuffixNo.Text = dsCymnhd.Tables(RS).Rows(0)("受注番号枝番")
