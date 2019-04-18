@@ -1210,6 +1210,10 @@ Public Class Shiwake
         Sql = "DELETE FROM t50_zikhd WHERE ""会社コード"" = '" & dbName & "';"
         _db.executeDB(Sql)
 
+        't70_inout
+        Sql = "DELETE FROM t70_inout WHERE ""会社コード"" = '" & dbName & "';"
+        _db.executeDB(Sql)
+
         ''t52_krurighd
         'Sql = "DELETE FROM t52_krurighd WHERE ""会社コード"" = '" & dbName & "';"
         '_db.executeDB(Sql)
