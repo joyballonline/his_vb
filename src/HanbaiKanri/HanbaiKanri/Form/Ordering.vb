@@ -666,6 +666,11 @@ Public Class Ordering
 
     '行移動上
     Private Sub BtnUp_Click(sender As Object, e As EventArgs) Handles BtnUp.Click
+        'グリッドに何もないときは処理しない
+        If DgvItemList.CurrentCell Is Nothing Then
+            Exit Sub
+        End If
+
         If DgvItemList.CurrentCell.RowIndex > 0 Then
             DgvItemList.CurrentCell = DgvItemList(DgvItemList.CurrentCell.ColumnIndex, DgvItemList.CurrentCell.RowIndex - 1)
         End If
@@ -673,6 +678,11 @@ Public Class Ordering
 
     '行移動下
     Private Sub BtnDown_Click(sender As Object, e As EventArgs) Handles BtnDown.Click
+        'グリッドに何もないときは処理しない
+        If DgvItemList.CurrentCell Is Nothing Then
+            Exit Sub
+        End If
+
         If DgvItemList.CurrentCell.RowIndex + 1 < DgvItemList.Rows.Count Then
             DgvItemList.CurrentCell = DgvItemList(DgvItemList.CurrentCell.ColumnIndex, DgvItemList.CurrentCell.RowIndex + 1)
         End If
