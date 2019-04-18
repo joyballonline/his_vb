@@ -591,7 +591,7 @@ Public Class OrderList
                 Else
 
                     'リードタイムが入っていたら汎用マスタから単位を取得して連結する
-                    Sql = " AND 固定キー = '4'"
+                    Sql = " AND 固定キー = '" & CommonConst.FIXED_KEY_READTIME & "'"
                     Sql += " AND 可変キー = '" & ds.Tables(RS).Rows(i)("リードタイム単位").ToString & "'"
 
                     Dim dsHanyo As DataSet = getDsData("m90_hanyo", Sql)

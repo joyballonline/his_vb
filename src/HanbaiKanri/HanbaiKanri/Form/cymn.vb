@@ -113,7 +113,7 @@ Public Class Cymn
 
         Sql12 += "SELECT * FROM public.m90_hanyo"
         Sql12 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        Sql12 += " AND 固定キー = '4'"
+        Sql12 += " AND 固定キー = '" & CommonConst.FIXED_KEY_READTIME & "'"
 
         Dim ds12 As DataSet = _db.selectDB(Sql12, RS, reccnt)
 

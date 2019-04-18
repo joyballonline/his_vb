@@ -157,7 +157,7 @@ Public Class Quote
 
         Sql12 += "SELECT * FROM public.m90_hanyo"
         Sql12 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        Sql12 += " AND 固定キー = '4'"
+        Sql12 += " AND 固定キー = '" & CommonConst.FIXED_KEY_READTIME & "'"
         Dim ds12 As DataSet = _db.selectDB(Sql12, RS, reccnt)
 
         Dim table2 As New DataTable("Table")
@@ -1893,7 +1893,7 @@ Public Class Quote
                 Sql5 = ""
                 Sql5 += "SELECT * FROM public.m90_hanyo"
                 Sql5 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-                Sql5 += " AND 固定キー = '4'"
+                Sql5 += " AND 固定キー = '" & CommonConst.FIXED_KEY_READTIME & "'"
                 Sql5 += " AND 可変キー = '" & ds3.Tables(RS).Rows(index)("リードタイム単位").ToString & "'"
                 Dim ds5 = _db.selectDB(Sql5, RS, reccnt)
 

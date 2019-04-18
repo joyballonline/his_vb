@@ -149,7 +149,7 @@ Public Class Company
 
         Sql1 += "SELECT * FROM public.m90_hanyo"
         Sql1 += " WHERE 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
-        Sql1 += " AND 固定キー ='3'"
+        Sql1 += " AND 固定キー ='" & CommonConst.IP_CODE & "'"
 
         Dim reccnt As Integer = 0
         Dim ds1 As DataSet = _db.selectDB(Sql1, RS, reccnt)
