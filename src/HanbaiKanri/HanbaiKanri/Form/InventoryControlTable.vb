@@ -277,10 +277,12 @@ Public Class InventoryControlTable
                 DgvList.Rows(i).Cells("在庫数").Value = tmpQuantity
 
                 For x As Integer = 0 To dsHanyoInOut.Tables(RS).Rows.Count - 1
-                    If dsZaiko.Tables(RS).Rows(i)("入出庫種別") = dsHanyoInOut.Tables(RS).Rows(x)("可変キー") Then
-                        DgvList.Rows(i).Cells("入出庫種別").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
+                    If dsZaiko.Tables(RS).Rows(i)("入出庫種別") IsNot DBNull.Value Then
+                        If dsZaiko.Tables(RS).Rows(i)("入出庫種別") = dsHanyoInOut.Tables(RS).Rows(x)("可変キー") Then
+                            DgvList.Rows(i).Cells("入出庫種別").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
                                                                    dsHanyoInOut.Tables(RS).Rows(x)("文字２"),
                                                                    dsHanyoInOut.Tables(RS).Rows(x)("文字１"))
+                        End If
                     End If
                 Next
 
