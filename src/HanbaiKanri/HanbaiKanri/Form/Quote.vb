@@ -653,7 +653,7 @@ Public Class Quote
                         Sql += " t41.品名 ILIKE '" & itemName & "'"
                         Sql += " AND "
                         Sql += " t41.型式 ILIKE '" & spec & "'"
-                        Sql += " ORDER BY 仕入日 "
+                        Sql += " ORDER BY 仕入日 DESC "
 
                         Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
 
