@@ -86,18 +86,6 @@ Public Class Order
         DtpQuoteDate.Text = DateAdd("m", 0, Now).ToString("yyyy/MM/dd")
         DtpQuoteRegistration.Text = DateAdd("m", 0, Now).ToString("yyyy/MM/dd")
 
-        'DgvItemList.Columns(0).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        'DgvItemList.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        'DgvItemList.Columns(7).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        'DgvItemList.Columns(8).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        'DgvItemList.Columns(9).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        'DgvItemList.Columns(10).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        'DgvItemList.Columns(11).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        'DgvItemList.Columns(12).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        'DgvItemList.Columns(13).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        'DgvItemList.Columns(14).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        'DgvItemList.Columns(15).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-
         'セルの内容に合わせて、行の高さが自動的に調節されるようにする
         DgvItemList.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
         '"Column1"列のセルのテキストを折り返して表示する
@@ -135,7 +123,6 @@ Public Class Order
             Else
                 table2.Rows.Add(ds12.Tables(RS).Rows(index)("文字１"), ds12.Tables(RS).Rows(index)("可変キー"))
             End If
-
         Next
 
         Dim column2 As New DataGridViewComboBoxColumn()
@@ -870,6 +857,24 @@ Public Class Order
                 Sql += " AND 見積番号枝番 = '" & TxtQuoteSuffix.Text & "'"
 
                 _db.executeDB(Sql)
+
+
+                '受注編集時に登録した場合、一つ前の枝番を取り消す
+                If OrderStatus = CommonConst.STATUS_EDIT Then
+
+                    Sql = "UPDATE t10_cymnhd SET "
+                    Sql += " 取消日 = '" & dtNow & "'"
+                    Sql += " ,取消区分 = " & CommonConst.CANCEL_KBN_DISABLED.ToString
+                    Sql += " WHERE "
+                    Sql += " 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                    Sql += " AND "
+                    Sql += " 受注番号 = '" & OrderNo & "'"
+                    Sql += " AND "
+                    Sql += " 受注番号枝番 = '" & OrderSuffix & "'"
+
+                    _db.executeDB(Sql)
+
+                End If
 
             Catch ue As UsrDefException
                 ue.dspMsg()
