@@ -1120,6 +1120,23 @@ Public Class Ordering
                     _db.executeDB(Sql)
                 Next
 
+                '発注編集時に登録した場合、一つ前の枝番を取り消す
+                If PurchaseStatus = CommonConst.STATUS_EDIT Then
+
+                    Sql = "UPDATE t20_hattyu SET "
+                    Sql += " 取消日 = '" & dtNow & "'"
+                    Sql += " ,取消区分 = " & CommonConst.CANCEL_KBN_DISABLED.ToString
+                    Sql += " WHERE "
+                    Sql += " 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                    Sql += " AND "
+                    Sql += " 発注番号 = '" & PurchaseNo & "'"
+                    Sql += " AND "
+                    Sql += " 発注番号枝番 = '" & PurchaseSuffix & "'"
+
+                    _db.executeDB(Sql)
+
+                End If
+
                 '複写か編集の時以外
             Else
 
@@ -1162,6 +1179,7 @@ Public Class Ordering
                 Sql += "' "
 
                 _db.executeDB(Sql)
+
             End If
 
             'Me.Close()
