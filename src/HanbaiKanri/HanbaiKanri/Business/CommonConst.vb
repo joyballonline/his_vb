@@ -385,5 +385,8 @@ Public Class CommonConst
     'アプリ名
     Public Const AP_NAME As String = "SPIN"   'SPIN
 
+    '国内区分
+    Public Const DD_KBN_DOMESTIC As Integer = 0                  '通常
+    Public Const DD_KBN_OVERSEAS As Integer = 1                 '引き当て
 
 End Class
