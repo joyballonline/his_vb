@@ -1196,6 +1196,11 @@ Public Class Ordering
 
         Dim dsHattyudt = getDsData("t21_hattyu", Sql)
 
+        Sql = " AND "
+        Sql += " 仕入先コード =  '" & dsHattyuhd.Tables(RS).Rows(0)("仕入先コード") & "'"
+
+        Dim supplierData = getDsData("m11_supplier", Sql)
+
         '====================================
         ' Excel作成
         '====================================
@@ -1307,11 +1312,12 @@ Public Class Ordering
                 num = num + 1
             Next
 
-
-            sheet.Range("W" & lstRow + 1).Value = totalPrice
-            sheet.Range("W" & lstRow + 2).Value = Math.Ceiling(totalPrice * 10 * 0.01)
-            sheet.Range("W" & lstRow + 3).Value = Math.Ceiling(totalPrice * 10 * 0.01) + totalPrice
-            sheet.Range("H" & lstRow + 5).Value = Math.Ceiling(totalPrice * 10 * 0.01) + totalPrice
+            sheet.Range("W" & lstRow + 1).Value = totalPrice 'Subtotal
+            sheet.Range("W" & lstRow + 2).Value = IIf(supplierData.Tables(RS).Rows(0)("国内区分") = CommonConst.DD_KBN_OVERSEAS,
+                                                      "",
+                                                      Math.Ceiling(totalPrice * 10 * 0.01)) 'VAT
+            sheet.Range("W" & lstRow + 3).Value = Math.Ceiling(totalPrice * 10 * 0.01) + totalPrice 'TOTAL
+            sheet.Range("H" & lstRow + 5).Value = Math.Ceiling(totalPrice * 10 * 0.01) + totalPrice 'REMARKS ?
 
             app.DisplayAlerts = False 'Microsoft Excelのアラート一旦無効化
 
