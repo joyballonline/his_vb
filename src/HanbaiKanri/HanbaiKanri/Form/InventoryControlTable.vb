@@ -230,24 +230,20 @@ Public Class InventoryControlTable
                 DgvList.Rows.Add()
 
                 '商品が変わったら取得
-                If (tmpMaker <> dsZaiko.Tables(RS).Rows(i)("メーカー").ToString And
-                    tmpItemName <> dsZaiko.Tables(RS).Rows(i)("品名").ToString And
+                If (tmpMaker <> dsZaiko.Tables(RS).Rows(i)("メーカー").ToString Or
+                    tmpItemName <> dsZaiko.Tables(RS).Rows(i)("品名").ToString Or
                     tmpSpec <> dsZaiko.Tables(RS).Rows(i)("型式").ToString) Then
 
+                    '一致していなければ変数に格納
                     tmpMaker = dsZaiko.Tables(RS).Rows(i)("メーカー").ToString
                     tmpItemName = dsZaiko.Tables(RS).Rows(i)("品名").ToString
                     tmpSpec = dsZaiko.Tables(RS).Rows(i)("型式").ToString
-                    tmpQuantity = 0
+
+                    tmpQuantity = 0 '在庫計算用の変数も初期化
 
                     DgvList.Rows(i).Cells("メーカー").Value = tmpMaker
                     DgvList.Rows(i).Cells("品名").Value = tmpItemName
                     DgvList.Rows(i).Cells("型式").Value = tmpSpec
-
-
-                Else
-                    tmpMaker = dsZaiko.Tables(RS).Rows(i)("メーカー").ToString
-                    tmpItemName = dsZaiko.Tables(RS).Rows(i)("品名").ToString
-                    tmpSpec = dsZaiko.Tables(RS).Rows(i)("型式").ToString
 
                 End If
 
