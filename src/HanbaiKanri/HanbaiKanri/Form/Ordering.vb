@@ -220,6 +220,14 @@ Public Class Ordering
             TxtOrderingNo.Location = New Point(162, 12)
             Label2.Location = New Point(256, 13)
             TxtOrderingSuffix.Location = New Point(273, 13)
+
+            LblQuoteNo.Text = "QuoteNo"
+            LblQuoteNo.Size = New Size(145, 23)
+            LblPurchaseNo.Size = New Size(145, 23)
+            TxtQuoteNo.Location = New Point(162, 42)
+            LblHyphen.Location = New Point(256, 43)
+            TxtQuoteSuffix.Location = New Point(273, 43)
+
             LblCustomerPO.Text = "CustomerNo"
             LblCustomerPO.Location = New Point(308, 13)
             LblCustomerPO.Size = New Size(142, 23)
@@ -243,14 +251,16 @@ Public Class Ordering
             LblSales.Text = "SalesPersonInCharge"
             LblInput.Text = "PICForInputting"
             LblPaymentTerms.Text = "PaymentTerms"
-            TxtPaymentTerms.Location = New Point(181, 158)
-            LblPaymentTerms.Size = New Size(162, 23)
+            'TxtPaymentTerms.Location = New Point(181, 158)
+            'LblPaymentTerms.Size = New Size(162, 23)
             LblPurchaseRemarks.Text = "PurchaseRemarks"
-            LblPurchaseRemarks.Size = New Size(162, 23)
-            TxtPurchaseRemark.Location = New Point(181, 187)
+            LblPurchaseRemarks.Font = New Font("MS UI Gothic", 9.0!, FontStyle.Regular, GraphicsUnit.Point, 128)
+            LblRemarks.Font = New Font("MS UI Gothic", 9.0!, FontStyle.Regular, GraphicsUnit.Point, 128)
+            'LblPurchaseRemarks.Size = New Size(162, 23)
+            'TxtPurchaseRemark.Location = New Point(181, 187)
             LblRemarks.Text = "QuotationRemarks"
-            LblRemarks.Size = New Size(162, 23)
-            TxtQuoteRemarks.Location = New Point(181, 216)
+            'LblRemarks.Size = New Size(162, 23)
+            'TxtQuoteRemarks.Location = New Point(181, 216)
             LblItemCount.Text = "ItemCount"
             LblMethod.Text = "ShippingMethod"
             LblShipDate.Text = "ShipDate"
@@ -262,7 +272,7 @@ Public Class Ordering
 
             TxtSupplierCode.Size = New Point(62, 23)
             BtnCodeSearch.Text = "Search"
-            BtnCodeSearch.Location = New Point(195, 42)
+            'BtnCodeSearch.Location = New Point(195, 42)
             BtnCodeSearch.Size = New Size(72, 23)
             BtnInsert.Text = "InsertLine"
             BtnUp.Text = "ShiftLineUp"
@@ -401,6 +411,20 @@ Public Class Ordering
         End If
         If dsHattyu.Tables(RS).Rows(0)("発注番号枝番") IsNot DBNull.Value Then
             TxtOrderingSuffix.Text = dsHattyu.Tables(RS).Rows(0)("発注番号枝番")
+        End If
+        If dsHattyu.Tables(RS).Rows(0)("見積番号") IsNot DBNull.Value Then
+            TxtQuoteNo.Text = dsHattyu.Tables(RS).Rows(0)("見積番号")
+        End If
+
+        If dsHattyu.Tables(RS).Rows(0)("見積番号").ToString = "" Then
+            LblQuoteNo.Visible = False
+            TxtQuoteNo.Visible = False
+            LblHyphen.Visible = False
+            TxtQuoteSuffix.Visible = False
+        End If
+
+        If dsHattyu.Tables(RS).Rows(0)("見積番号枝番") IsNot DBNull.Value Then
+            TxtQuoteSuffix.Text = dsHattyu.Tables(RS).Rows(0)("見積番号枝番")
         End If
         If dsHattyu.Tables(RS).Rows(0)("発注日") IsNot DBNull.Value Then
             DtpPurchaseDate.Value = dsHattyu.Tables(RS).Rows(0)("発注日")
@@ -953,9 +977,9 @@ Public Class Ordering
                 Sql += "', '"
                 Sql += "" '受注番号枝番
                 Sql += "', '"
-                Sql += "" '見積番号
+                Sql += IIf(TxtQuoteNo.Text <> "", TxtQuoteNo.Text, "") '見積番号
                 Sql += "', '"
-                Sql += "" '見積番号枝番
+                Sql += IIf(TxtQuoteSuffix.Text <> "", TxtQuoteSuffix.Text, "") '見積番号枝番
                 Sql += "', '"
                 Sql += "" '得意先コード
                 Sql += "', '"

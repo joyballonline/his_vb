@@ -22,12 +22,12 @@ Partial Class Ordering
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LblPaymentTerms = New System.Windows.Forms.Label()
         Me.LblPosition = New System.Windows.Forms.Label()
         Me.TxtTel = New System.Windows.Forms.TextBox()
@@ -47,6 +47,20 @@ Partial Class Ordering
         Me.LblPurchaseDate = New System.Windows.Forms.Label()
         Me.LblPurchaseNo = New System.Windows.Forms.Label()
         Me.DgvItemList = New System.Windows.Forms.DataGridView()
+        Me.No = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.メーカー = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.品名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.型式 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.数量 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.単位 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入先 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入単価 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.間接費 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.リードタイム = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.入庫数 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.未入庫数 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.備考 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LblPurchaseRemarks = New System.Windows.Forms.Label()
         Me.TxtPurchaseRemark = New System.Windows.Forms.TextBox()
         Me.DtpPurchaseDate = New System.Windows.Forms.DateTimePicker()
@@ -84,20 +98,10 @@ Partial Class Ordering
         Me.LblShipDate = New System.Windows.Forms.Label()
         Me.LblWarehouse = New System.Windows.Forms.Label()
         Me.CmWarehouse = New System.Windows.Forms.ComboBox()
-        Me.No = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.メーカー = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.品名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.型式 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.数量 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.単位 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.仕入先 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.仕入単価 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.間接費 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.仕入金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.リードタイム = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.入庫数 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.未入庫数 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.備考 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.LblHyphen = New System.Windows.Forms.Label()
+        Me.TxtQuoteSuffix = New System.Windows.Forms.TextBox()
+        Me.TxtQuoteNo = New System.Windows.Forms.TextBox()
+        Me.LblQuoteNo = New System.Windows.Forms.Label()
         CType(Me.DgvItemList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -106,7 +110,7 @@ Partial Class Ordering
         Me.LblPaymentTerms.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblPaymentTerms.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblPaymentTerms.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblPaymentTerms.Location = New System.Drawing.Point(11, 158)
+        Me.LblPaymentTerms.Location = New System.Drawing.Point(11, 184)
         Me.LblPaymentTerms.Name = "LblPaymentTerms"
         Me.LblPaymentTerms.Size = New System.Drawing.Size(110, 23)
         Me.LblPaymentTerms.TabIndex = 190
@@ -118,7 +122,7 @@ Partial Class Ordering
         Me.LblPosition.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblPosition.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblPosition.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblPosition.Location = New System.Drawing.Point(609, 129)
+        Me.LblPosition.Location = New System.Drawing.Point(971, 126)
         Me.LblPosition.Name = "LblPosition"
         Me.LblPosition.Size = New System.Drawing.Size(150, 23)
         Me.LblPosition.TabIndex = 201
@@ -130,7 +134,7 @@ Partial Class Ordering
         Me.TxtTel.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.TxtTel.Enabled = False
         Me.TxtTel.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtTel.Location = New System.Drawing.Point(765, 42)
+        Me.TxtTel.Location = New System.Drawing.Point(765, 68)
         Me.TxtTel.MaxLength = 15
         Me.TxtTel.Name = "TxtTel"
         Me.TxtTel.ReadOnly = True
@@ -142,7 +146,7 @@ Partial Class Ordering
         Me.LblPerson.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblPerson.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblPerson.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblPerson.Location = New System.Drawing.Point(609, 100)
+        Me.LblPerson.Location = New System.Drawing.Point(609, 126)
         Me.LblPerson.Name = "LblPerson"
         Me.LblPerson.Size = New System.Drawing.Size(150, 23)
         Me.LblPerson.TabIndex = 197
@@ -154,7 +158,7 @@ Partial Class Ordering
         Me.TxtAddress1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.TxtAddress1.Enabled = False
         Me.TxtAddress1.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtAddress1.Location = New System.Drawing.Point(273, 71)
+        Me.TxtAddress1.Location = New System.Drawing.Point(273, 97)
         Me.TxtAddress1.MaxLength = 100
         Me.TxtAddress1.Multiline = True
         Me.TxtAddress1.Name = "TxtAddress1"
@@ -167,7 +171,7 @@ Partial Class Ordering
         Me.TxtPerson.BackColor = System.Drawing.Color.White
         Me.TxtPerson.Enabled = False
         Me.TxtPerson.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtPerson.Location = New System.Drawing.Point(765, 100)
+        Me.TxtPerson.Location = New System.Drawing.Point(765, 126)
         Me.TxtPerson.MaxLength = 50
         Me.TxtPerson.Name = "TxtPerson"
         Me.TxtPerson.Size = New System.Drawing.Size(200, 23)
@@ -178,7 +182,7 @@ Partial Class Ordering
         Me.LblFax.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblFax.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblFax.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblFax.Location = New System.Drawing.Point(609, 71)
+        Me.LblFax.Location = New System.Drawing.Point(609, 97)
         Me.LblFax.Name = "LblFax"
         Me.LblFax.Size = New System.Drawing.Size(150, 23)
         Me.LblFax.TabIndex = 192
@@ -190,7 +194,7 @@ Partial Class Ordering
         Me.TxtFax.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.TxtFax.Enabled = False
         Me.TxtFax.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtFax.Location = New System.Drawing.Point(765, 71)
+        Me.TxtFax.Location = New System.Drawing.Point(765, 97)
         Me.TxtFax.MaxLength = 15
         Me.TxtFax.Name = "TxtFax"
         Me.TxtFax.ReadOnly = True
@@ -202,7 +206,7 @@ Partial Class Ordering
         Me.TxtPostalCode.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.TxtPostalCode.Enabled = False
         Me.TxtPostalCode.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtPostalCode.Location = New System.Drawing.Point(127, 71)
+        Me.TxtPostalCode.Location = New System.Drawing.Point(127, 97)
         Me.TxtPostalCode.MaxLength = 3
         Me.TxtPostalCode.Name = "TxtPostalCode"
         Me.TxtPostalCode.ReadOnly = True
@@ -215,7 +219,7 @@ Partial Class Ordering
         Me.LblTel.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblTel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblTel.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblTel.Location = New System.Drawing.Point(609, 42)
+        Me.LblTel.Location = New System.Drawing.Point(609, 68)
         Me.LblTel.Name = "LblTel"
         Me.LblTel.Size = New System.Drawing.Size(150, 23)
         Me.LblTel.TabIndex = 187
@@ -227,7 +231,7 @@ Partial Class Ordering
         Me.LblAddress.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblAddress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblAddress.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblAddress.Location = New System.Drawing.Point(11, 71)
+        Me.LblAddress.Location = New System.Drawing.Point(11, 97)
         Me.LblAddress.Name = "LblAddress"
         Me.LblAddress.Size = New System.Drawing.Size(110, 81)
         Me.LblAddress.TabIndex = 203
@@ -239,7 +243,7 @@ Partial Class Ordering
         Me.TxtSupplierName.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.TxtSupplierName.Enabled = False
         Me.TxtSupplierName.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtSupplierName.Location = New System.Drawing.Point(273, 42)
+        Me.TxtSupplierName.Location = New System.Drawing.Point(273, 68)
         Me.TxtSupplierName.MaxLength = 50
         Me.TxtSupplierName.Name = "TxtSupplierName"
         Me.TxtSupplierName.ReadOnly = True
@@ -251,7 +255,7 @@ Partial Class Ordering
         Me.TxtInput.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.TxtInput.Enabled = False
         Me.TxtInput.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtInput.Location = New System.Drawing.Point(1127, 71)
+        Me.TxtInput.Location = New System.Drawing.Point(1127, 97)
         Me.TxtInput.MaxLength = 20
         Me.TxtInput.Name = "TxtInput"
         Me.TxtInput.ReadOnly = True
@@ -264,7 +268,7 @@ Partial Class Ordering
         Me.LblSupplierName.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblSupplierName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblSupplierName.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblSupplierName.Location = New System.Drawing.Point(11, 42)
+        Me.LblSupplierName.Location = New System.Drawing.Point(11, 68)
         Me.LblSupplierName.Name = "LblSupplierName"
         Me.LblSupplierName.Size = New System.Drawing.Size(110, 23)
         Me.LblSupplierName.TabIndex = 188
@@ -289,7 +293,7 @@ Partial Class Ordering
         Me.LblInput.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblInput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblInput.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblInput.Location = New System.Drawing.Point(971, 71)
+        Me.LblInput.Location = New System.Drawing.Point(971, 97)
         Me.LblInput.Name = "LblInput"
         Me.LblInput.Size = New System.Drawing.Size(150, 23)
         Me.LblInput.TabIndex = 207
@@ -335,12 +339,122 @@ Partial Class Ordering
         Me.DgvItemList.Size = New System.Drawing.Size(1329, 185)
         Me.DgvItemList.TabIndex = 18
         '
+        'No
+        '
+        Me.No.HeaderText = "No"
+        Me.No.Name = "No"
+        Me.No.Width = 43
+        '
+        'メーカー
+        '
+        DataGridViewCellStyle19.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.メーカー.DefaultCellStyle = DataGridViewCellStyle19
+        Me.メーカー.HeaderText = "メーカー"
+        Me.メーカー.MaxInputLength = 50
+        Me.メーカー.Name = "メーカー"
+        Me.メーカー.Width = 220
+        '
+        '品名
+        '
+        DataGridViewCellStyle20.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.品名.DefaultCellStyle = DataGridViewCellStyle20
+        Me.品名.HeaderText = "品名"
+        Me.品名.MaxInputLength = 50
+        Me.品名.Name = "品名"
+        Me.品名.Width = 220
+        '
+        '型式
+        '
+        DataGridViewCellStyle21.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.型式.DefaultCellStyle = DataGridViewCellStyle21
+        Me.型式.HeaderText = "型式"
+        Me.型式.MaxInputLength = 255
+        Me.型式.Name = "型式"
+        Me.型式.Width = 230
+        '
+        '数量
+        '
+        Me.数量.HeaderText = "数量"
+        Me.数量.MaxInputLength = 8
+        Me.数量.Name = "数量"
+        Me.数量.Width = 80
+        '
+        '単位
+        '
+        Me.単位.HeaderText = "単位"
+        Me.単位.MaxInputLength = 10
+        Me.単位.Name = "単位"
+        Me.単位.Width = 80
+        '
+        '仕入先
+        '
+        DataGridViewCellStyle22.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.仕入先.DefaultCellStyle = DataGridViewCellStyle22
+        Me.仕入先.HeaderText = "仕入先"
+        Me.仕入先.MaxInputLength = 100
+        Me.仕入先.Name = "仕入先"
+        Me.仕入先.Visible = False
+        Me.仕入先.Width = 85
+        '
+        '仕入単価
+        '
+        Me.仕入単価.HeaderText = "仕入単価"
+        Me.仕入単価.MaxInputLength = 15
+        Me.仕入単価.Name = "仕入単価"
+        Me.仕入単価.Width = 80
+        '
+        '間接費
+        '
+        DataGridViewCellStyle23.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.間接費.DefaultCellStyle = DataGridViewCellStyle23
+        Me.間接費.HeaderText = "間接費"
+        Me.間接費.MaxInputLength = 15
+        Me.間接費.Name = "間接費"
+        Me.間接費.ReadOnly = True
+        Me.間接費.Visible = False
+        '
+        '仕入金額
+        '
+        DataGridViewCellStyle24.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.仕入金額.DefaultCellStyle = DataGridViewCellStyle24
+        Me.仕入金額.HeaderText = "仕入金額"
+        Me.仕入金額.MaxInputLength = 15
+        Me.仕入金額.Name = "仕入金額"
+        Me.仕入金額.ReadOnly = True
+        '
+        'リードタイム
+        '
+        Me.リードタイム.HeaderText = "リードタイム"
+        Me.リードタイム.MaxInputLength = 20
+        Me.リードタイム.Name = "リードタイム"
+        '
+        '入庫数
+        '
+        Me.入庫数.HeaderText = "入庫数"
+        Me.入庫数.MaxInputLength = 8
+        Me.入庫数.Name = "入庫数"
+        Me.入庫数.Visible = False
+        '
+        '未入庫数
+        '
+        Me.未入庫数.HeaderText = "未入庫数"
+        Me.未入庫数.MaxInputLength = 8
+        Me.未入庫数.Name = "未入庫数"
+        Me.未入庫数.Visible = False
+        '
+        '備考
+        '
+        Me.備考.HeaderText = "備考"
+        Me.備考.MaxInputLength = 255
+        Me.備考.Name = "備考"
+        Me.備考.Width = 80
+        '
         'LblPurchaseRemarks
         '
         Me.LblPurchaseRemarks.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblPurchaseRemarks.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblPurchaseRemarks.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblPurchaseRemarks.Location = New System.Drawing.Point(11, 187)
+        Me.LblPurchaseRemarks.Location = New System.Drawing.Point(11, 213)
         Me.LblPurchaseRemarks.Name = "LblPurchaseRemarks"
         Me.LblPurchaseRemarks.Size = New System.Drawing.Size(110, 23)
         Me.LblPurchaseRemarks.TabIndex = 239
@@ -350,7 +464,7 @@ Partial Class Ordering
         'TxtPurchaseRemark
         '
         Me.TxtPurchaseRemark.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtPurchaseRemark.Location = New System.Drawing.Point(127, 187)
+        Me.TxtPurchaseRemark.Location = New System.Drawing.Point(127, 213)
         Me.TxtPurchaseRemark.MaxLength = 50
         Me.TxtPurchaseRemark.Name = "TxtPurchaseRemark"
         Me.TxtPurchaseRemark.Size = New System.Drawing.Size(476, 23)
@@ -435,7 +549,7 @@ Partial Class Ordering
         Me.TxtSupplierCode.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.TxtSupplierCode.Enabled = False
         Me.TxtSupplierCode.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtSupplierCode.Location = New System.Drawing.Point(127, 42)
+        Me.TxtSupplierCode.Location = New System.Drawing.Point(127, 68)
         Me.TxtSupplierCode.MaxLength = 50
         Me.TxtSupplierCode.Name = "TxtSupplierCode"
         Me.TxtSupplierCode.Size = New System.Drawing.Size(62, 23)
@@ -491,7 +605,7 @@ Partial Class Ordering
         Me.TxtSales.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.TxtSales.Enabled = False
         Me.TxtSales.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtSales.Location = New System.Drawing.Point(1127, 42)
+        Me.TxtSales.Location = New System.Drawing.Point(1127, 68)
         Me.TxtSales.MaxLength = 20
         Me.TxtSales.Name = "TxtSales"
         Me.TxtSales.Size = New System.Drawing.Size(213, 23)
@@ -502,7 +616,7 @@ Partial Class Ordering
         Me.LblSales.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblSales.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblSales.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblSales.Location = New System.Drawing.Point(971, 42)
+        Me.LblSales.Location = New System.Drawing.Point(971, 68)
         Me.LblSales.Name = "LblSales"
         Me.LblSales.Size = New System.Drawing.Size(150, 23)
         Me.LblSales.TabIndex = 219
@@ -527,7 +641,7 @@ Partial Class Ordering
         Me.TxtQuoteRemarks.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.TxtQuoteRemarks.Enabled = False
         Me.TxtQuoteRemarks.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtQuoteRemarks.Location = New System.Drawing.Point(127, 216)
+        Me.TxtQuoteRemarks.Location = New System.Drawing.Point(127, 242)
         Me.TxtQuoteRemarks.MaxLength = 100
         Me.TxtQuoteRemarks.Multiline = True
         Me.TxtQuoteRemarks.Name = "TxtQuoteRemarks"
@@ -539,7 +653,7 @@ Partial Class Ordering
         Me.TxtPaymentTerms.BackColor = System.Drawing.Color.White
         Me.TxtPaymentTerms.Enabled = False
         Me.TxtPaymentTerms.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtPaymentTerms.Location = New System.Drawing.Point(127, 158)
+        Me.TxtPaymentTerms.Location = New System.Drawing.Point(127, 184)
         Me.TxtPaymentTerms.MaxLength = 50
         Me.TxtPaymentTerms.Multiline = True
         Me.TxtPaymentTerms.Name = "TxtPaymentTerms"
@@ -551,7 +665,7 @@ Partial Class Ordering
         Me.LblRemarks.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblRemarks.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblRemarks.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblRemarks.Location = New System.Drawing.Point(11, 216)
+        Me.LblRemarks.Location = New System.Drawing.Point(11, 242)
         Me.LblRemarks.Name = "LblRemarks"
         Me.LblRemarks.Size = New System.Drawing.Size(110, 23)
         Me.LblRemarks.TabIndex = 189
@@ -563,10 +677,10 @@ Partial Class Ordering
         Me.TxtPosition.BackColor = System.Drawing.Color.White
         Me.TxtPosition.Enabled = False
         Me.TxtPosition.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtPosition.Location = New System.Drawing.Point(765, 129)
+        Me.TxtPosition.Location = New System.Drawing.Point(1127, 126)
         Me.TxtPosition.MaxLength = 50
         Me.TxtPosition.Name = "TxtPosition"
-        Me.TxtPosition.Size = New System.Drawing.Size(200, 23)
+        Me.TxtPosition.Size = New System.Drawing.Size(213, 23)
         Me.TxtPosition.TabIndex = 16
         '
         'BtnPurchase
@@ -676,7 +790,7 @@ Partial Class Ordering
         'BtnCodeSearch
         '
         Me.BtnCodeSearch.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.BtnCodeSearch.Location = New System.Drawing.Point(195, 42)
+        Me.BtnCodeSearch.Location = New System.Drawing.Point(195, 68)
         Me.BtnCodeSearch.Name = "BtnCodeSearch"
         Me.BtnCodeSearch.Size = New System.Drawing.Size(72, 23)
         Me.BtnCodeSearch.TabIndex = 304
@@ -688,9 +802,9 @@ Partial Class Ordering
         Me.CbShippedBy.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.CbShippedBy.FormattingEnabled = True
         Me.CbShippedBy.Items.AddRange(New Object() {"RegularShip", "DHL", "Air", "Ship"})
-        Me.CbShippedBy.Location = New System.Drawing.Point(127, 245)
+        Me.CbShippedBy.Location = New System.Drawing.Point(765, 184)
         Me.CbShippedBy.Name = "CbShippedBy"
-        Me.CbShippedBy.Size = New System.Drawing.Size(140, 23)
+        Me.CbShippedBy.Size = New System.Drawing.Size(200, 23)
         Me.CbShippedBy.TabIndex = 305
         '
         'LblMethod
@@ -698,9 +812,9 @@ Partial Class Ordering
         Me.LblMethod.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblMethod.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblMethod.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblMethod.Location = New System.Drawing.Point(11, 245)
+        Me.LblMethod.Location = New System.Drawing.Point(610, 184)
         Me.LblMethod.Name = "LblMethod"
-        Me.LblMethod.Size = New System.Drawing.Size(110, 23)
+        Me.LblMethod.Size = New System.Drawing.Size(149, 23)
         Me.LblMethod.TabIndex = 306
         Me.LblMethod.Text = "出荷方法"
         Me.LblMethod.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -711,10 +825,10 @@ Partial Class Ordering
         Me.DtpShippedDate.CustomFormat = ""
         Me.DtpShippedDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpShippedDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DtpShippedDate.Location = New System.Drawing.Point(389, 245)
+        Me.DtpShippedDate.Location = New System.Drawing.Point(766, 213)
         Me.DtpShippedDate.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.DtpShippedDate.Name = "DtpShippedDate"
-        Me.DtpShippedDate.Size = New System.Drawing.Size(150, 22)
+        Me.DtpShippedDate.Size = New System.Drawing.Size(199, 22)
         Me.DtpShippedDate.TabIndex = 307
         Me.DtpShippedDate.Value = New Date(2018, 6, 5, 23, 23, 58, 0)
         '
@@ -723,9 +837,9 @@ Partial Class Ordering
         Me.LblShipDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblShipDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblShipDate.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblShipDate.Location = New System.Drawing.Point(273, 245)
+        Me.LblShipDate.Location = New System.Drawing.Point(610, 213)
         Me.LblShipDate.Name = "LblShipDate"
-        Me.LblShipDate.Size = New System.Drawing.Size(110, 23)
+        Me.LblShipDate.Size = New System.Drawing.Size(150, 23)
         Me.LblShipDate.TabIndex = 308
         Me.LblShipDate.Text = "出荷日"
         Me.LblShipDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -735,9 +849,9 @@ Partial Class Ordering
         Me.LblWarehouse.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblWarehouse.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblWarehouse.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblWarehouse.Location = New System.Drawing.Point(545, 244)
+        Me.LblWarehouse.Location = New System.Drawing.Point(610, 242)
         Me.LblWarehouse.Name = "LblWarehouse"
-        Me.LblWarehouse.Size = New System.Drawing.Size(110, 23)
+        Me.LblWarehouse.Size = New System.Drawing.Size(149, 23)
         Me.LblWarehouse.TabIndex = 311
         Me.LblWarehouse.Text = "倉庫"
         Me.LblWarehouse.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -747,125 +861,66 @@ Partial Class Ordering
         Me.CmWarehouse.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.CmWarehouse.FormattingEnabled = True
         Me.CmWarehouse.Items.AddRange(New Object() {"RegularShip", "DHL", "Air", "Ship"})
-        Me.CmWarehouse.Location = New System.Drawing.Point(661, 244)
+        Me.CmWarehouse.Location = New System.Drawing.Point(765, 243)
         Me.CmWarehouse.Name = "CmWarehouse"
         Me.CmWarehouse.Size = New System.Drawing.Size(200, 23)
         Me.CmWarehouse.TabIndex = 310
         '
-        'No
+        'LblHyphen
         '
-        Me.No.HeaderText = "No"
-        Me.No.Name = "No"
-        Me.No.Width = 43
+        Me.LblHyphen.AutoSize = True
+        Me.LblHyphen.Location = New System.Drawing.Point(280, 48)
+        Me.LblHyphen.Name = "LblHyphen"
+        Me.LblHyphen.Size = New System.Drawing.Size(11, 12)
+        Me.LblHyphen.TabIndex = 315
+        Me.LblHyphen.Text = "-"
         '
-        'メーカー
+        'TxtQuoteSuffix
         '
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.メーカー.DefaultCellStyle = DataGridViewCellStyle1
-        Me.メーカー.HeaderText = "メーカー"
-        Me.メーカー.MaxInputLength = 50
-        Me.メーカー.Name = "メーカー"
-        Me.メーカー.Width = 220
+        Me.TxtQuoteSuffix.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TxtQuoteSuffix.Enabled = False
+        Me.TxtQuoteSuffix.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtQuoteSuffix.Location = New System.Drawing.Point(297, 42)
+        Me.TxtQuoteSuffix.MaxLength = 1
+        Me.TxtQuoteSuffix.Name = "TxtQuoteSuffix"
+        Me.TxtQuoteSuffix.ReadOnly = True
+        Me.TxtQuoteSuffix.Size = New System.Drawing.Size(29, 23)
+        Me.TxtQuoteSuffix.TabIndex = 314
+        Me.TxtQuoteSuffix.TabStop = False
         '
-        '品名
+        'TxtQuoteNo
         '
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.品名.DefaultCellStyle = DataGridViewCellStyle2
-        Me.品名.HeaderText = "品名"
-        Me.品名.MaxInputLength = 50
-        Me.品名.Name = "品名"
-        Me.品名.Width = 220
+        Me.TxtQuoteNo.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TxtQuoteNo.Enabled = False
+        Me.TxtQuoteNo.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtQuoteNo.Location = New System.Drawing.Point(186, 42)
+        Me.TxtQuoteNo.MaxLength = 8
+        Me.TxtQuoteNo.Name = "TxtQuoteNo"
+        Me.TxtQuoteNo.ReadOnly = True
+        Me.TxtQuoteNo.Size = New System.Drawing.Size(88, 23)
+        Me.TxtQuoteNo.TabIndex = 313
+        Me.TxtQuoteNo.TabStop = False
         '
-        '型式
+        'LblQuoteNo
         '
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.型式.DefaultCellStyle = DataGridViewCellStyle3
-        Me.型式.HeaderText = "型式"
-        Me.型式.MaxInputLength = 255
-        Me.型式.Name = "型式"
-        Me.型式.Width = 230
-        '
-        '数量
-        '
-        Me.数量.HeaderText = "数量"
-        Me.数量.MaxInputLength = 8
-        Me.数量.Name = "数量"
-        Me.数量.Width = 80
-        '
-        '単位
-        '
-        Me.単位.HeaderText = "単位"
-        Me.単位.MaxInputLength = 10
-        Me.単位.Name = "単位"
-        Me.単位.Width = 80
-        '
-        '仕入先
-        '
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.仕入先.DefaultCellStyle = DataGridViewCellStyle4
-        Me.仕入先.HeaderText = "仕入先"
-        Me.仕入先.MaxInputLength = 100
-        Me.仕入先.Name = "仕入先"
-        Me.仕入先.Visible = False
-        Me.仕入先.Width = 85
-        '
-        '仕入単価
-        '
-        Me.仕入単価.HeaderText = "仕入単価"
-        Me.仕入単価.MaxInputLength = 15
-        Me.仕入単価.Name = "仕入単価"
-        Me.仕入単価.Width = 80
-        '
-        '間接費
-        '
-        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.間接費.DefaultCellStyle = DataGridViewCellStyle5
-        Me.間接費.HeaderText = "間接費"
-        Me.間接費.MaxInputLength = 15
-        Me.間接費.Name = "間接費"
-        Me.間接費.ReadOnly = True
-        Me.間接費.Visible = False
-        '
-        '仕入金額
-        '
-        DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.仕入金額.DefaultCellStyle = DataGridViewCellStyle6
-        Me.仕入金額.HeaderText = "仕入金額"
-        Me.仕入金額.MaxInputLength = 15
-        Me.仕入金額.Name = "仕入金額"
-        Me.仕入金額.ReadOnly = True
-        '
-        'リードタイム
-        '
-        Me.リードタイム.HeaderText = "リードタイム"
-        Me.リードタイム.MaxInputLength = 20
-        Me.リードタイム.Name = "リードタイム"
-        '
-        '入庫数
-        '
-        Me.入庫数.HeaderText = "入庫数"
-        Me.入庫数.MaxInputLength = 8
-        Me.入庫数.Name = "入庫数"
-        Me.入庫数.Visible = False
-        '
-        '未入庫数
-        '
-        Me.未入庫数.HeaderText = "未入庫数"
-        Me.未入庫数.MaxInputLength = 8
-        Me.未入庫数.Name = "未入庫数"
-        Me.未入庫数.Visible = False
-        '
-        '備考
-        '
-        Me.備考.HeaderText = "備考"
-        Me.備考.MaxInputLength = 255
-        Me.備考.Name = "備考"
-        Me.備考.Width = 80
+        Me.LblQuoteNo.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblQuoteNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblQuoteNo.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblQuoteNo.Location = New System.Drawing.Point(11, 40)
+        Me.LblQuoteNo.Name = "LblQuoteNo"
+        Me.LblQuoteNo.Size = New System.Drawing.Size(169, 23)
+        Me.LblQuoteNo.TabIndex = 312
+        Me.LblQuoteNo.Text = "見積番号"
+        Me.LblQuoteNo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Ordering
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.LblHyphen)
+        Me.Controls.Add(Me.TxtQuoteSuffix)
+        Me.Controls.Add(Me.TxtQuoteNo)
+        Me.Controls.Add(Me.LblQuoteNo)
         Me.Controls.Add(Me.LblWarehouse)
         Me.Controls.Add(Me.CmWarehouse)
         Me.Controls.Add(Me.DtpShippedDate)
@@ -1000,4 +1055,8 @@ Partial Class Ordering
     Friend WithEvents 入庫数 As DataGridViewTextBoxColumn
     Friend WithEvents 未入庫数 As DataGridViewTextBoxColumn
     Friend WithEvents 備考 As DataGridViewTextBoxColumn
+    Friend WithEvents LblHyphen As Label
+    Friend WithEvents TxtQuoteSuffix As TextBox
+    Friend WithEvents TxtQuoteNo As TextBox
+    Friend WithEvents LblQuoteNo As Label
 End Class
