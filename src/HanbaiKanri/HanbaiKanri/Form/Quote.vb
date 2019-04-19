@@ -937,7 +937,9 @@ Public Class Quote
     End Sub
 
     Private Sub RbtnGP_CheckedChanged(sender As Object, e As EventArgs) Handles RbtnGP.CheckedChanged, RbtnUP.CheckedChanged, RbtnQuote.CheckedChanged
+
         If RbtnUP.Checked Then
+            '単価入力選択時
             DgvItemList.Columns("粗利率").ReadOnly = True
             DgvItemList.Columns("売単価").ReadOnly = False
             DgvItemList.Columns("見積単価").ReadOnly = True
@@ -945,6 +947,7 @@ Public Class Quote
             DgvItemList.Columns("売単価").DefaultCellStyle.BackColor = Color.White
             DgvItemList.Columns("見積単価").DefaultCellStyle.BackColor = Color.LightGray
         ElseIf RbtnGP.Checked Then
+            '粗利入力
             DgvItemList.Columns("売単価").ReadOnly = True
             DgvItemList.Columns("粗利率").ReadOnly = False
             DgvItemList.Columns("見積単価").ReadOnly = True
@@ -952,13 +955,13 @@ Public Class Quote
             DgvItemList.Columns("粗利率").DefaultCellStyle.BackColor = Color.White
             DgvItemList.Columns("見積単価").DefaultCellStyle.BackColor = Color.LightGray
         Else
+            '見積単価入力
             DgvItemList.Columns("売単価").ReadOnly = True
             DgvItemList.Columns("粗利率").ReadOnly = True
             DgvItemList.Columns("見積単価").ReadOnly = False
             DgvItemList.Columns("売単価").DefaultCellStyle.BackColor = Color.LightGray
             DgvItemList.Columns("粗利率").DefaultCellStyle.BackColor = Color.LightGray
             DgvItemList.Columns("見積単価").DefaultCellStyle.BackColor = Color.White
-
         End If
 
     End Sub
@@ -1116,17 +1119,18 @@ Public Class Quote
     '得意先コードをダブルクリック時得意先マスタから得意先を取得
     Private Sub TxtCustomerCode_DoubleClick(sender As Object, e As EventArgs) Handles TxtCustomerCode.DoubleClick
         Dim openForm As Form = Nothing
-        openForm = New CustomerSearch(_msgHd, _db, _langHd, Me)   '処理選択
+        openForm = New CustomerSearch(_msgHd, _db, _langHd, Me) '処理選択
         openForm.ShowDialog(Me)
         openForm.Dispose()
-        '得意先マスタ読み込み
-        Read_Customer()
+
+        Read_Customer() '得意先マスタ読み込み
 
     End Sub
 
+    '営業担当者コードをダブルクリック時ユーザマスタからユーザID、氏名を取得
     Private Sub TxtSales_DoubleClick(sender As Object, e As EventArgs) Handles TxtSales.DoubleClick
         Dim openForm As Form = Nothing
-        openForm = New SalesSearch(_msgHd, _db, _langHd, Me)   '処理選択
+        openForm = New SalesSearch(_msgHd, _db, _langHd, Me) '処理選択
         openForm.Show(Me)
         Me.Enabled = False
     End Sub
@@ -1294,6 +1298,7 @@ Public Class Quote
             Dim result As DialogResult = MessageBox.Show(strMessage, strMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Exit Sub
         End If
+
         '有効期限として指定できる日付は見積日以降
         If DtpQuote.Value > DtpExpiration.Value Then
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
@@ -1307,6 +1312,7 @@ Public Class Quote
             Exit Sub
         End If
 
+        '数値チェック（DBの桁数を超えたらエラーで返す
         If TxtQuoteTotal.Text > CommonConst.DIGIT_CHECK Or TxtPurchaseTotal.Text > CommonConst.DIGIT_CHECK Or TxtTotal.Text > CommonConst.DIGIT_CHECK Then
             _msgHd.dspMSG("chkPriceError", frmC01F10_Login.loginValue.Language)
             Exit Sub
@@ -1721,7 +1727,6 @@ Public Class Quote
 
         Dim SuffixMax As Integer = 0
 
-
         CompanyCode = ds1.Tables(RS).Rows(0)("会社コード")
 
         Dim CmnData = ds1.Tables(RS).Rows(0)
@@ -1810,7 +1815,7 @@ Public Class Quote
 
             '出力ファイル名
             Dim sOutFile As String = ""
-            sOutFile = sOutPath & "\" & CmnData(1) & "-" & CmnData(2) & ".xlsx"
+            sOutFile = sOutPath & "\" & CmnData("見積番号") & "-" & CmnData("見積番号枝番") & ".xlsx"
 
 
 
@@ -1819,26 +1824,26 @@ Public Class Quote
             sheet = CType(book.Worksheets(1), Excel.Worksheet)
 
             '↓この辺マジックナンバーが多いので、後できっちり見直す必要あり
-            sheet.Range("D1").Value = ds4.Tables(RS).Rows(0)(1)
-            sheet.Range("D2").Value = ds4.Tables(RS).Rows(0)(4) & " " & ds4.Tables(RS).Rows(0)(3)
-            sheet.Range("D3").Value = ds4.Tables(RS).Rows(0)(5) & " " & ds4.Tables(RS).Rows(0)(6)
-            sheet.Range("D4").Value = "telp. " & ds4.Tables(RS).Rows(0)(7) & " Fax." & ds4.Tables(RS).Rows(0)(8)
+            sheet.Range("D1").Value = ds4.Tables(RS).Rows(0)("会社名")
+            sheet.Range("D2").Value = ds4.Tables(RS).Rows(0)("住所１") & " " & ds4.Tables(RS).Rows(0)("郵便番号")
+            sheet.Range("D3").Value = ds4.Tables(RS).Rows(0)("住所２") & " " & ds4.Tables(RS).Rows(0)("住所３")
+            sheet.Range("D4").Value = "telp. " & ds4.Tables(RS).Rows(0)("電話番号") & " Fax." & ds4.Tables(RS).Rows(0)("ＦＡＸ番号")
 
-            sheet.Range("E8").Value = CmnData(6)                       '得意先名
-            sheet.Range("E9").Value = CmnData(8) & " " & CmnData(7)    '得意先担当者
-            sheet.Range("E11").Value = CmnData(11)                       '電話番号
-            sheet.Range("E12").Value = CmnData(12)                       'FAX
+            sheet.Range("E8").Value = CmnData("得意先名") '得意先名
+            sheet.Range("E9").Value = CmnData("得意先担当者役職") & " " & CmnData("得意先担当者名") '得意先担当者
+            sheet.Range("E11").Value = CmnData("得意先電話番号") '電話番号
+            sheet.Range("E12").Value = CmnData("得意先ＦＡＸ") 'FAX
 
-            sheet.Range("S8").Value = CmnData(1) & "-" & CmnData(2)    '見積番号
-            sheet.Range("S9").Value = CmnData(3).ToShortDateString()     '見積日
+            sheet.Range("S8").Value = CmnData("見積番号") & "-" & CmnData("見積番号枝番")    '見積番号
+            sheet.Range("S9").Value = CmnData("見積日").ToShortDateString() '見積日
 
-            sheet.Range("H27").Value = CmnData(15)                       '支払条件
-            sheet.Range("H28").Value = CmnData(6)                       '納品先（得意先名
-            sheet.Range("H29").Value = CmnData(4).ToShortDateString()    '有効期限？
-            sheet.Range("H30").Value = CmnData(16)                       '備考
+            sheet.Range("H27").Value = CmnData("支払条件") '支払条件
+            sheet.Range("H28").Value = CmnData("得意先名")                       '納品先（得意先名
+            sheet.Range("H29").Value = CmnData("見積有効期限").ToShortDateString() '見積有効期限
+            sheet.Range("H30").Value = CmnData("備考") '備考
 
-            sheet.Range("S11").Value = CmnData(13)                       '営業担当者
-            sheet.Range("S12").Value = CmnData(14)                       '入力担当者
+            sheet.Range("S11").Value = CmnData("営業担当者") '営業担当者
+            sheet.Range("S12").Value = CmnData("入力担当者") '入力担当者
 
             Dim rowCnt As Integer = 0
             Dim lstRow As Integer = 22
@@ -1917,9 +1922,9 @@ Public Class Quote
             cell = "T" & lstRow + 1
             sheet.Range(cell).Value = totalPrice
             cell = "T" & lstRow + 2
-            sheet.Range(cell).Value = totalPrice * CmnData(18) * 0.01
+            sheet.Range(cell).Value = totalPrice * CmnData("ＶＡＴ") * 0.01
             cell = "T" & lstRow + 3
-            sheet.Range(cell).Value = totalPrice * CmnData(18) * 0.01 + totalPrice
+            sheet.Range(cell).Value = totalPrice * CmnData("ＶＡＴ") * 0.01 + totalPrice
             'sheet.Rows.AutoFit()
 
             app.DisplayAlerts = False 'Microsoft Excelのアラート一旦無効化
