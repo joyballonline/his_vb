@@ -328,13 +328,13 @@ Public Class SalesProfitList
                 sheet.Range("C" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("得意先名").Value '得意先
                 sheet.Range("D" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("客先番号").Value '客先番号
                 sheet.Range("E" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("営業担当者").Value '営業担当者
-                sheet.Range("F" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("売上計").Value '売上計
-                sheet.Range("G" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("ＶＡＴ").Value 'VAT
-                sheet.Range("H" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("売上金額計").Value '売上 + VAT
-                sheet.Range("I" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("間接費").Value '間接費
-                sheet.Range("J" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("売上原価計").Value '売上原価計
-                sheet.Range("K" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("粗利").Value '粗利
-                sheet.Range("L" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("粗利率").Value '粗利率
+                sheet.Range("F" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("売上計").Value.ToString '売上計
+                sheet.Range("G" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("ＶＡＴ").Value.ToString 'VAT
+                sheet.Range("H" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("売上金額計").Value.ToString '売上 + VAT
+                sheet.Range("I" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("間接費").Value.ToString '間接費
+                sheet.Range("J" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("売上原価計").Value.ToString '売上原価計
+                sheet.Range("K" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("粗利").Value.ToString '粗利
+                sheet.Range("L" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("粗利率").Value.ToString '粗利率
 
                 sheet.Range("F" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight
                 sheet.Range("G" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight
