@@ -421,6 +421,11 @@ Public Class Ordering
             TxtQuoteNo.Visible = False
             LblHyphen.Visible = False
             TxtQuoteSuffix.Visible = False
+        Else
+            LblMethod.Visible = False
+            CbShippedBy.Visible = False
+            LblShipDate.Visible = False
+            DtpShippedDate.Visible = False
         End If
 
         If dsHattyu.Tables(RS).Rows(0)("見積番号枝番") IsNot DBNull.Value Then
@@ -513,7 +518,7 @@ Public Class Ordering
 
         For i As Integer = 0 To dsHattyudt.Tables(RS).Rows.Count - 1
             DgvItemList.Rows.Add()
-            'DgvItemList.Rows(i).Cells("仕入区分").Value = Integer.Parse(dsHattyudt.Tables(RS).Rows(i)("仕入区分"))
+            DgvItemList.Rows(i).Cells("仕入区分").Value = Integer.Parse(dsHattyudt.Tables(RS).Rows(i)("仕入区分"))
             DgvItemList.Rows(i).Cells("メーカー").Value = dsHattyudt.Tables(RS).Rows(i)("メーカー")
             DgvItemList.Rows(i).Cells("品名").Value = dsHattyudt.Tables(RS).Rows(i)("品名")
             DgvItemList.Rows(i).Cells("型式").Value = dsHattyudt.Tables(RS).Rows(i)("型式")
@@ -1147,14 +1152,31 @@ Public Class Ordering
                 Sql += dtNow '更新日
                 Sql += "', '"
                 Sql += frmC01F10_Login.loginValue.TantoNM '更新者
-                Sql += "', '"
+                Sql += "', "
                 Sql += "0" '取消区分
 
-                Sql += "', '"
-                Sql += CbShippedBy.SelectedIndex.ToString '出荷方法
-                Sql += "', '"
-                Sql += strFormatDate(DtpShippedDate.Value) '出荷日
-                Sql += "', '"
+                Sql += ", "
+
+                If dsCompany.Tables(RS).Rows.Count > 0 Then
+                    Sql += IIf(dsCompany.Tables(RS).Rows(0)("見積番号") IsNot DBNull.Value, "NULL", CbShippedBy.SelectedIndex.ToString) '出荷方法
+                Else
+                    Sql += "NULL"
+                End If
+
+                Sql += ", "
+
+                If dsCompany.Tables(RS).Rows.Count > 0 Then
+                    Sql += IIf(dsCompany.Tables(RS).Rows(0)("見積番号") IsNot DBNull.Value, "NULL", "'" & strFormatDate(DtpShippedDate.Value) & "'") '出荷日
+                Else
+                    Sql += "NULL"
+                End If
+
+                'Sql += CbShippedBy.SelectedIndex.ToString '出荷方法
+                'Sql += "', '"
+                'Sql += strFormatDate(DtpShippedDate.Value) '出荷日
+
+
+                Sql += ", '"
                 Sql += TxtSales.Tag '営業担当者コード
                 Sql += "', '"
                 Sql += frmC01F10_Login.loginValue.TantoCD '入力担当者コード
@@ -1189,9 +1211,16 @@ Public Class Ordering
                     Sql += TxtOrderingSuffix.Text
                     Sql += "', '"
                     Sql += DgvItemList.Rows(i).Cells("No").Value.ToString
-                    Sql += "', '2"
-                    'Sql += DgvItemList.Rows(hattyuIdx).Cells("仕入区分").Value.ToString
-                    Sql += "', '"
+                    'Sql += "', '2"
+                    Sql += "', "
+
+                    If DgvItemList.Rows(i).Cells("仕入区分").Value <> Nothing Then
+                        Sql += DgvItemList.Rows(i).Cells("仕入区分").Value.ToString
+                    Else
+                        Sql += "2"
+                    End If
+
+                    Sql += ", '"
                     Sql += TxtSupplierName.Text
                     Sql += "', '"
                     Sql += DgvItemList.Rows(i).Cells("メーカー").Value.ToString
