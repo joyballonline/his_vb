@@ -224,6 +224,7 @@ Public Class OrderingList
                     DgvHtyhd.Columns.Add("入力担当者", "PICForInputting")
                     DgvHtyhd.Columns.Add("備考", "Remarks")
                     DgvHtyhd.Columns.Add("登録日", "RegistrationDate")
+                    DgvHtyhd.Columns.Add("更新日", "UpdateDate")
                 Else
                     DgvHtyhd.Columns.Add("取消", "取消")
                     DgvHtyhd.Columns.Add("発注番号", "発注番号")
@@ -244,6 +245,7 @@ Public Class OrderingList
                     DgvHtyhd.Columns.Add("入力担当者", "入力担当者")
                     DgvHtyhd.Columns.Add("備考", "備考")
                     DgvHtyhd.Columns.Add("登録日", "登録日")
+                    DgvHtyhd.Columns.Add("更新日", "更新日")
                 End If
 
                 '伝票単位時のセル書式
@@ -270,6 +272,7 @@ Public Class OrderingList
                     DgvHtyhd.Rows(i).Cells("入力担当者").Value = ds.Tables(RS).Rows(i)("入力担当者")
                     DgvHtyhd.Rows(i).Cells("備考").Value = ds.Tables(RS).Rows(i)("備考")
                     DgvHtyhd.Rows(i).Cells("登録日").Value = ds.Tables(RS).Rows(i)("登録日")
+                    DgvHtyhd.Rows(i).Cells("更新日").Value = ds.Tables(RS).Rows(i)("更新日")
                 Next
 
             Else '明細単位
@@ -295,7 +298,7 @@ Public Class OrderingList
                 Sql += " t21.発注番号, t21.発注番号枝番, t21.行番号, t21.仕入区分, t21.メーカー, t21.品名"
                 Sql += ", t21.型式, t21.仕入先名, t21.仕入値, t21.発注数量, t21.仕入数量, t21.発注残数"
                 Sql += ", t21.単位, t21.間接費, t21.仕入金額, t21.リードタイム, t21.貿易条件, t21.入庫数"
-                Sql += ", t21.未入庫数, t21.備考, t21.リードタイム単位, t21.更新者, t21.登録日, t20.取消区分"
+                Sql += ", t21.未入庫数, t21.備考, t21.リードタイム単位, t20.更新者, t20.登録日, t20.更新日, t20.取消区分"
                 Sql += " FROM "
                 Sql += " public.t21_hattyu t21 "
 
@@ -366,7 +369,7 @@ Public Class OrderingList
                 End If
 
                 Sql += " ORDER BY "
-                Sql += "t21.更新日 DESC"
+                Sql += "t20.更新日 DESC"
 
                 '得意先と一致する入金明細を取得
                 ds = _db.selectDB(Sql, RS, reccnt)
@@ -395,6 +398,7 @@ Public Class OrderingList
                     DgvHtyhd.Columns.Add("備考", "Remarks")
                     DgvHtyhd.Columns.Add("更新者", "ModifiedBy")
                     DgvHtyhd.Columns.Add("登録日", "RegistrationDate")
+                    DgvHtyhd.Columns.Add("更新日", "UpdateDate")
                 Else
                     DgvHtyhd.Columns.Add("取消", "取消")
                     DgvHtyhd.Columns.Add("発注番号", "発注番号")
@@ -419,6 +423,7 @@ Public Class OrderingList
                     DgvHtyhd.Columns.Add("備考", "備考")
                     DgvHtyhd.Columns.Add("更新者", "更新者")
                     DgvHtyhd.Columns.Add("登録日", "登録日")
+                    DgvHtyhd.Columns.Add("更新日", "更新日")
                 End If
 
                 '伝票単位時のセル書式
@@ -482,6 +487,7 @@ Public Class OrderingList
                     DgvHtyhd.Rows(i).Cells("備考").Value = ds.Tables(RS).Rows(i)("備考")
                     DgvHtyhd.Rows(i).Cells("更新者").Value = ds.Tables(RS).Rows(i)("更新者")
                     DgvHtyhd.Rows(i).Cells("登録日").Value = ds.Tables(RS).Rows(i)("登録日")
+                    DgvHtyhd.Rows(i).Cells("更新日").Value = ds.Tables(RS).Rows(i)("更新日")
                 Next
 
             End If
