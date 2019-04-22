@@ -399,7 +399,7 @@ Public Class MstSupplier
                 sheet.Range("X" & cellRowIndex.ToString).Value = Dgv_Supplier.Rows(i).Cells("会計用仕入先コード").Value '
                 sheet.Range("Y" & cellRowIndex.ToString).Value = Dgv_Supplier.Rows(i).Cells("国内区分").Value '
                 sheet.Range("Z" & cellRowIndex.ToString).Value = Dgv_Supplier.Rows(i).Cells("更新者").Value '
-                sheet.Range("AA" & cellRowIndex.ToString).Value = Dgv_Supplier.Rows(i).Cells("更新日").Value '
+                sheet.Range("AA" & cellRowIndex.ToString).Value = Dgv_Supplier.Rows(i).Cells("更新日").Value.ToString '
             Next
 
             'app.Visible = True

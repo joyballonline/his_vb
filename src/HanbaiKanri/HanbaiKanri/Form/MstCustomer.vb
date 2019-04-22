@@ -320,7 +320,7 @@ Public Class MstCustomer
                 sheet.Range("O" & cellRowIndex.ToString).Value = Dgv_Customer.Rows(i).Cells("会計用得意先コード").Value '
                 sheet.Range("P" & cellRowIndex.ToString).Value = Dgv_Customer.Rows(i).Cells("国内区分").Value '
                 sheet.Range("Q" & cellRowIndex.ToString).Value = Dgv_Customer.Rows(i).Cells("更新者").Value '
-                sheet.Range("R" & cellRowIndex.ToString).Value = Dgv_Customer.Rows(i).Cells("更新日").Value '
+                sheet.Range("R" & cellRowIndex.ToString).Value = Dgv_Customer.Rows(i).Cells("更新日").Value.ToString '
             Next
 
             'app.Visible = True
