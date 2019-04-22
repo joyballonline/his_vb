@@ -902,7 +902,7 @@ Public Class Ordering
         '項目チェック
         Dim strMessage As String = ""    'メッセージ本文
         Dim strMessageTitle As String = ""      'メッセージタイトル
-        ''仕入先は必須入力としましょう
+        '仕入先は必須入力としましょう
         If TxtSupplierCode.Text = "" Then
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 strMessage = "Please enter Supplier Code. "
@@ -953,6 +953,15 @@ Public Class Ordering
         Try
             '複写か編集の時
             If PurchaseStatus = CommonConst.STATUS_CLONE Or PurchaseStatus = CommonConst.STATUS_EDIT Or PurchaseStatus = CommonConst.STATUS_ADD Then
+
+                Sql = " AND "
+                Sql += " 見積番号 = '" & TxtQuoteNo.Text & "'"
+                Sql += " AND "
+                Sql += " 見積番号枝番 = '" & TxtQuoteSuffix.Text & "'"
+
+                Dim dsCompany As DataSet = getDsData("t01_mithd", Sql)
+
+
                 Sql = "INSERT INTO "
                 Sql += "Public."
                 Sql += "t20_hattyu("
@@ -981,21 +990,83 @@ Public Class Ordering
                 Sql += "', '"
                 Sql += IIf(TxtQuoteSuffix.Text <> "", TxtQuoteSuffix.Text, "") '見積番号枝番
                 Sql += "', '"
-                Sql += "" '得意先コード
+
+                If dsCompany.Tables(RS).Rows.Count > 0 Then
+                    Sql += IIf(dsCompany.Tables(RS).Rows(0)("得意先コード") IsNot DBNull.Value, dsCompany.Tables(RS).Rows(0)("得意先コード"), 0)
+                Else
+                    Sql += ""
+                End If
+
                 Sql += "', '"
-                Sql += "" '得意先名
+
+                If dsCompany.Tables(RS).Rows.Count > 0 Then
+                    Sql += IIf(dsCompany.Tables(RS).Rows(0)("得意先名") IsNot DBNull.Value, dsCompany.Tables(RS).Rows(0)("得意先名"), 0)
+                Else
+                    Sql += ""
+                End If
+
                 Sql += "', '"
-                Sql += "" '得意先郵便番号
+
+                If dsCompany.Tables(RS).Rows.Count > 0 Then
+                    Sql += IIf(dsCompany.Tables(RS).Rows(0)("得意先郵便番号") IsNot DBNull.Value, dsCompany.Tables(RS).Rows(0)("得意先郵便番号"), 0)
+                Else
+                    Sql += ""
+                End If
+
                 Sql += "', '"
-                Sql += "" '得意先住所
+
+                If dsCompany.Tables(RS).Rows.Count > 0 Then
+                    Sql += IIf(dsCompany.Tables(RS).Rows(0)("得意先住所") IsNot DBNull.Value, dsCompany.Tables(RS).Rows(0)("得意先住所"), 0)
+                Else
+                    Sql += ""
+                End If
+
                 Sql += "', '"
-                Sql += "" '得意先電話番号
+
+                If dsCompany.Tables(RS).Rows.Count > 0 Then
+                    Sql += IIf(dsCompany.Tables(RS).Rows(0)("得意先電話番号") IsNot DBNull.Value, dsCompany.Tables(RS).Rows(0)("得意先電話番号"), 0)
+                Else
+                    Sql += ""
+                End If
+
                 Sql += "', '"
-                Sql += "" '得意先ＦＡＸ
+
+                If dsCompany.Tables(RS).Rows.Count > 0 Then
+                    Sql += IIf(dsCompany.Tables(RS).Rows(0)("得意先ＦＡＸ") IsNot DBNull.Value, dsCompany.Tables(RS).Rows(0)("得意先ＦＡＸ"), 0)
+                Else
+                    Sql += ""
+                End If
+
                 Sql += "', '"
-                Sql += "" '得意先担当者役職
+
+                If dsCompany.Tables(RS).Rows.Count > 0 Then
+                    Sql += IIf(dsCompany.Tables(RS).Rows(0)("得意先担当者役職") IsNot DBNull.Value, dsCompany.Tables(RS).Rows(0)("得意先担当者役職"), 0)
+                Else
+                    Sql += ""
+                End If
+
                 Sql += "', '"
-                Sql += "" '得意先担当者名
+
+                If dsCompany.Tables(RS).Rows.Count > 0 Then
+                    Sql += IIf(dsCompany.Tables(RS).Rows(0)("得意先担当者名") IsNot DBNull.Value, dsCompany.Tables(RS).Rows(0)("得意先担当者名"), 0)
+                Else
+                    Sql += ""
+                End If
+
+                'Sql += "', '"
+                'Sql += "" '得意先名
+                'Sql += "', '"
+                'Sql += "" '得意先郵便番号
+                'Sql += "', '"
+                'Sql += "" '得意先住所
+                'Sql += "', '"
+                'Sql += "" '得意先電話番号
+                'Sql += "', '"
+                'Sql += "" '得意先ＦＡＸ
+                'Sql += "', '"
+                'Sql += "" '得意先担当者役職
+                'Sql += "', '"
+                'Sql += "" '得意先担当者名
                 Sql += "', '"
                 Sql += TxtSupplierCode.Text '仕入先コード
                 Sql += "', '"
@@ -1014,9 +1085,23 @@ Public Class Ordering
                 Sql += UtilClass.escapeSql(TxtPerson.Text) '仕入先担当者名
 
                 Sql += "', "
-                Sql += "null" '見積日
+
+                If dsCompany.Tables(RS).Rows.Count > 0 Then
+                    Sql += IIf(dsCompany.Tables(RS).Rows(0)("見積日") IsNot DBNull.Value, "'" & UtilClass.strFormatDate(dsCompany.Tables(RS).Rows(0)("見積日")) & "'", 0)
+                Else
+                    Sql += "null"
+                End If
+                'Sql += "null" '見積日
+
                 Sql += ", "
-                Sql += "null" '見積有効期限
+
+                If dsCompany.Tables(RS).Rows.Count > 0 Then
+                    Sql += IIf(dsCompany.Tables(RS).Rows(0)("見積有効期限") IsNot DBNull.Value, "'" & UtilClass.strFormatDate(dsCompany.Tables(RS).Rows(0)("見積有効期限")) & "'", 0)
+                Else
+                    Sql += "null"
+                End If
+                'Sql += "null" '見積有効期限
+
                 Sql += ", '"
                 Sql += UtilClass.escapeSql(TxtPaymentTerms.Text) '支払条件
                 Sql += "', '"
@@ -1032,13 +1117,28 @@ Public Class Ordering
                 Sql += "', '"
                 Sql += UtilClass.escapeSql(TxtPurchaseRemark.Text) '備考
                 Sql += "', '"
-                Sql += "" '見積備考
-                Sql += "', '"
-                Sql += "0" 'ＶＡＴ
-                Sql += "', '"
+                Sql += TxtQuoteRemarks.Text '見積備考
+                Sql += "', "
+                If dsCompany.Tables(RS).Rows.Count > 0 Then
+                    Sql += IIf(dsCompany.Tables(RS).Rows(0)("ＶＡＴ") IsNot DBNull.Value, "'" & UtilClass.formatNumber(dsCompany.Tables(RS).Rows(0)("ＶＡＴ")) & "'", 0)
+                Else
+                    Sql += "0" 'ＶＡＴ
+                End If
+                Sql += ", '"
                 Sql += "0" 'ＰＰＨ
                 Sql += "', "
-                Sql += "null" '受注日
+
+
+                Sql += "" '見積備考
+
+                If dsCompany.Tables(RS).Rows.Count > 0 Then
+                    Sql += IIf(dsCompany.Tables(RS).Rows(0)("受注日") IsNot DBNull.Value, "'" & UtilClass.strFormatDate(dsCompany.Tables(RS).Rows(0)("受注日")) & "'", 0)
+                Else
+                    Sql += "null"
+                End If
+
+                'Sql += "null" '受注日
+
                 Sql += ", '"
                 Sql += strFormatDate(DtpPurchaseDate.Value) '発注日
                 Sql += "', '"
