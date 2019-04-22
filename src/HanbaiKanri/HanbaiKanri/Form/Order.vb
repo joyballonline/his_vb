@@ -1116,7 +1116,7 @@ Public Class Order
                 '操作したカラム名を取得
                 Dim currentColumn As String = DgvItemList.Columns(e.ColumnIndex).Name
 
-                '仕入単価 <> Nothing
+                '仕入値 <> Nothing
                 '--------------------------
                 If currentColumn = "仕入値" And DgvItemList.Rows(e.RowIndex).Cells("仕入値").Value IsNot Nothing Then
 
@@ -1130,14 +1130,14 @@ Public Class Order
                     End If
                     '前払法人税率, 関税額 <> Nothing
                     If DgvItemList.Rows(e.RowIndex).Cells("前払法人税率").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("関税額").Value IsNot Nothing Then
-                        tmp = DgvItemList.Rows(e.RowIndex).Cells("仕入単価").Value + DgvItemList.Rows(e.RowIndex).Cells("関税額").Value
+                        tmp = DgvItemList.Rows(e.RowIndex).Cells("仕入値").Value + DgvItemList.Rows(e.RowIndex).Cells("関税額").Value
                         tmp1 = tmp * DgvItemList.Rows(e.RowIndex).Cells("前払法人税率").Value
                         tmp1 = Math.Ceiling(tmp1)
                         DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value = tmp1
                     End If
                     '輸送費率 <> Nothing
                     If DgvItemList.Rows(e.RowIndex).Cells("輸送費率").Value IsNot Nothing Then
-                        DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value = DgvItemList.Rows(e.RowIndex).Cells("仕入単価").Value * DgvItemList.Rows(e.RowIndex).Cells("輸送費率").Value
+                        DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value = DgvItemList.Rows(e.RowIndex).Cells("仕入値").Value * DgvItemList.Rows(e.RowIndex).Cells("輸送費率").Value
                     End If
 
                 End If
@@ -1183,7 +1183,7 @@ Public Class Order
                     '粗利入力
                     '--------------------------
 
-                    '数量, 仕入単価, 粗利率 <> Nothing
+                    '数量, 仕入値, 粗利率 <> Nothing
                     '--------------------------
                     If DgvItemList.Rows(e.RowIndex).Cells("数量").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("仕入値").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("粗利率").Value IsNot Nothing Then
                         tmp2 = DgvItemList.Rows(e.RowIndex).Cells("粗利率").Value / 100
