@@ -158,7 +158,9 @@ Public Class Order
 
         Dim dtNow As DateTime = DateTime.Now
 
-        '登録モード
+        '受注登録モード
+        '現在未使用 201904
+        '
         If OrderStatus = CommonConst.STATUS_ADD Then
             '見積基本情報
             Dim SqlSaiban As String = ""
@@ -341,6 +343,8 @@ Public Class Order
             DgvItemList.Columns("仕入原価").ReadOnly = True
 
         Else
+            '受注編集、受注参照（受注複写は未使用 201904）
+            '
             '受注基本情報
 
             Dim Sql1 As String = ""
@@ -381,12 +385,12 @@ Public Class Order
 
                 Dim Saiban1 As DataSet = _db.selectDB(SqlSaiban, RS, reccnt)
 
-                CompanyCode = Saiban1.Tables(RS).Rows(0)(0)
-                Dim NewOrderNo As String = Saiban1.Tables(RS).Rows(0)(5)
+                CompanyCode = Saiban1.Tables(RS).Rows(0)("会社コード")
+                Dim NewOrderNo As String = Saiban1.Tables(RS).Rows(0)("接頭文字")
                 NewOrderNo += dtNow.ToString("MMdd")
-                OrderCount = Saiban1.Tables(RS).Rows(0)(2)
-                Dim TmpOrderCount As String = Saiban1.Tables(RS).Rows(0)(2)
-                NewOrderNo += TmpOrderCount.PadLeft(Saiban1.Tables(RS).Rows(0)(6), "0")
+                OrderCount = Saiban1.Tables(RS).Rows(0)("最新値")
+                Dim TmpOrderCount As String = Saiban1.Tables(RS).Rows(0)("最新値")
+                NewOrderNo += TmpOrderCount.PadLeft(Saiban1.Tables(RS).Rows(0)("連番桁数"), "0")
 
                 SaibanSave()
 
@@ -397,24 +401,32 @@ Public Class Order
                 End If
             End If
 
+            '枝番設定
             If OrderStatus = CommonConst.STATUS_CLONE Then
+                '複写モード
                 TxtOrderSuffix.Text = 1
             ElseIf OrderStatus = CommonConst.STATUS_EDIT Then
+                '編集モード
                 TxtOrderSuffix.Text = MaxSuffix + 1
             Else
+                '参照モード
                 If ds1.Tables(RS).Rows(0)("受注番号枝番") IsNot DBNull.Value Then
                     TxtOrderSuffix.Text = ds1.Tables(RS).Rows(0)("受注番号枝番")
                 End If
             End If
 
+            '受注日設定
             If OrderStatus = CommonConst.STATUS_CLONE Then
+                '複写モード
                 DtpOrderDate.Value = dtNow
             Else
+                '編集・参照モード
                 If ds1.Tables(RS).Rows(0)("受注日") IsNot DBNull.Value Then
                     DtpOrderDate.Value = ds1.Tables(RS).Rows(0)("受注日")
                 End If
             End If
 
+            '登録日設定
             If OrderStatus = CommonConst.STATUS_CLONE Then
                 If ds1.Tables(RS).Rows(0)("登録日") IsNot DBNull.Value Then
                     DtpQuoteRegistration.Value = ds1.Tables(RS).Rows(0)("登録日")
@@ -495,13 +507,14 @@ Public Class Order
                 TxtCustomerPO.Text = ds1.Tables(RS).Rows(0)("客先番号")
             End If
 
-            ''見積明細情報
+            '見積明細情報
             Dim Sql3 As String = ""
             Sql3 += "SELECT * FROM public.t11_cymndt"
             Sql3 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
             Sql3 += " AND 受注番号 = '" & OrderNo.ToString & "'"
             Sql3 += " AND 受注番号枝番 = '" & OrderSuffix.ToString & "'"
             Dim ds3 = _db.selectDB(Sql3, RS, reccnt)
+
             For index As Integer = 0 To ds3.Tables(RS).Rows.Count - 1
                 DgvItemList.Rows.Add()
                 Dim tmp As Integer = ds3.Tables(RS).Rows(index)("仕入区分")
@@ -685,71 +698,74 @@ Public Class Order
                 Sql1 += "INSERT INTO "
                 Sql1 += "Public."
                 Sql1 += "t10_cymnhd("
-                Sql1 += "会社コード, 受注番号, 受注番号枝番, 客先番号, 見積番号, 見積番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額,仕入金額, 粗利額, 営業担当者, 営業担当者コード, 入力担当者, 入力担当者コード, 備考, 見積備考, ＶＡＴ, 受注日, 登録日, 更新日, 更新者, 取消区分)"
+                Sql1 += "会社コード, 受注番号, 受注番号枝番, 客先番号, 見積番号, 見積番号枝番, 得意先コード"
+                Sql1 += ", 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職"
+                Sql1 += ", 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額, 仕入金額, 粗利額, 営業担当者"
+                Sql1 += ", 営業担当者コード, 入力担当者, 入力担当者コード, 備考, 見積備考, ＶＡＴ, 受注日, 登録日, 更新日, 更新者, 取消区分)"
                 Sql1 += " VALUES('"
-                Sql1 += CompanyCode
+                Sql1 += CompanyCode '会社コード
                 Sql1 += "', '"
-                Sql1 += TxtOrderNo.Text
+                Sql1 += TxtOrderNo.Text '受注番号
                 Sql1 += "', '"
-                Sql1 += TxtOrderSuffix.Text
+                Sql1 += TxtOrderSuffix.Text '受注番号枝番
                 Sql1 += "', '"
-                Sql1 += RevoveChars(TxtCustomerPO.Text)
+                Sql1 += RevoveChars(TxtCustomerPO.Text) '客先番号
                 Sql1 += "', '"
-                Sql1 += TxtQuoteNo.Text
+                Sql1 += TxtQuoteNo.Text '見積番号
                 Sql1 += "', '"
-                Sql1 += TxtQuoteSuffix.Text
+                Sql1 += TxtQuoteSuffix.Text '見積番号枝番
                 Sql1 += "', '"
-                Sql1 += TxtCustomerCode.Text
+                Sql1 += TxtCustomerCode.Text '得意先コード
                 Sql1 += "', '"
-                Sql1 += TxtCustomerName.Text
+                Sql1 += TxtCustomerName.Text '得意先名
                 Sql1 += "', '"
-                Sql1 += TxtPostalCode.Text
+                Sql1 += TxtPostalCode.Text '得意先郵便番号
                 Sql1 += "', '"
-                Sql1 += TxtAddress1.Text
+                Sql1 += TxtAddress1.Text '得意先住所
                 Sql1 += "', '"
-                Sql1 += TxtTel.Text
+                Sql1 += TxtTel.Text '得意先電話番号
                 Sql1 += "', '"
-                Sql1 += TxtFax.Text
+                Sql1 += TxtFax.Text '得意先ＦＡＸ
                 Sql1 += "', '"
-                Sql1 += TxtPosition.Text
+                Sql1 += TxtPosition.Text '得意先担当者役職
                 Sql1 += "', '"
-                Sql1 += TxtPerson.Text
+                Sql1 += TxtPerson.Text '得意先担当者名
                 Sql1 += "', '"
-                Sql1 += UtilClass.strFormatDate(DtpQuoteDate.Value)
+                Sql1 += UtilClass.strFormatDate(DtpQuoteDate.Value) '見積日
                 Sql1 += "', '"
-                Sql1 += UtilClass.strFormatDate(DtpExpiration.Value)
+                Sql1 += UtilClass.strFormatDate(DtpExpiration.Value) '見積有効期限
                 Sql1 += "', '"
-                Sql1 += TxtPaymentTerms.Text
+                Sql1 += TxtPaymentTerms.Text '支払条件
                 Sql1 += "', '"
-                Sql1 += UtilClass.formatNumber(TxtOrderAmount.Text)
+                Sql1 += UtilClass.formatNumber(TxtOrderAmount.Text) '見積金額
                 Sql1 += "', '"
-                Sql1 += UtilClass.formatNumber(TxtPurchaseAmount.Text)
+                Sql1 += UtilClass.formatNumber(TxtPurchaseAmount.Text) '仕入金額
                 Sql1 += "', '"
-                Sql1 += UtilClass.formatNumber(TxtGrossProfit.Text)
+                Sql1 += UtilClass.formatNumber(TxtGrossProfit.Text) '粗利額
                 Sql1 += "', '"
-                Sql1 += TxtSales.Text
+                Sql1 += TxtSales.Text '営業担当者
                 Sql1 += "', '"
-                Sql1 += TxtSales.Tag
+                Sql1 += TxtSales.Tag '営業担当者コード
                 Sql1 += "', '"
-                Sql1 += TxtInput.Text
+                Sql1 += TxtInput.Text '入力担当者
                 Sql1 += "', '"
-                Sql1 += TxtInput.Tag
+                Sql1 += TxtInput.Tag '入力担当者コード
                 Sql1 += "', '"
-                Sql1 += RevoveChars(TxtOrderRemark.Text)
+                Sql1 += RevoveChars(TxtOrderRemark.Text) '備考
                 Sql1 += "', '"
-                Sql1 += TxtQuoteRemarks.Text
+                Sql1 += TxtQuoteRemarks.Text '見積備考
                 Sql1 += "', '"
-                Sql1 += UtilClass.formatNumber(TxtVat.Text)
+                Sql1 += UtilClass.formatNumber(TxtVat.Text) 'ＶＡＴ
                 Sql1 += "', '"
-                Sql1 += UtilClass.strFormatDate(DtpOrderDate.Value)
+                Sql1 += UtilClass.strFormatDate(DtpOrderDate.Value) '受注日
                 Sql1 += "', '"
-                Sql1 += UtilClass.strFormatDate(DtpOrderRegistration.Value)
+                Sql1 += UtilClass.strFormatDate(DtpOrderRegistration.Value) '登録日
                 Sql1 += "', '"
-                Sql1 += dtNow
+                Sql1 += dtNow '更新日
                 Sql1 += "', '"
-                Sql1 += frmC01F10_Login.loginValue.TantoNM
+                Sql1 += frmC01F10_Login.loginValue.TantoNM '更新者
                 Sql1 += "', '"
-                Sql1 += "0"
+                Sql1 += "0" '取消区分
                 Sql1 += "')"
 
                 _db.executeDB(Sql1)
@@ -760,85 +776,88 @@ Public Class Order
                     Sql2 += "INSERT INTO "
                     Sql2 += "Public."
                     Sql2 += "t11_cymndt("
-                    Sql2 += "会社コード, 受注番号, 受注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 単位, 仕入先名, 仕入値, 受注数量, 売上数量, 受注残数, 間接費, 売単価, 売上金額, 粗利額, 粗利率, リードタイム, リードタイム単位, 出庫数, 未出庫数, 備考, 更新者, 登録日, 見積単価, 見積金額, 関税率, 関税額, 前払法人税率, 前払法人税額, 輸送費率, 輸送費額, 仕入原価, 仕入金額)"
+                    Sql2 += "会社コード, 受注番号, 受注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 単位"
+                    Sql2 += ", 仕入先名, 仕入値, 受注数量, 売上数量, 受注残数, 間接費, 売単価, 売上金額, 粗利額"
+                    Sql2 += ", 粗利率, リードタイム, リードタイム単位, 出庫数, 未出庫数, 備考, 更新者, 登録日"
+                    Sql2 += ", 見積単価, 見積金額, 関税率, 関税額, 前払法人税率, 前払法人税額, 輸送費率, 輸送費額, 仕入原価, 仕入金額)"
                     Sql2 += " VALUES('"
-                    Sql2 += CompanyCode
+                    Sql2 += CompanyCode '会社コード
                     Sql2 += "', '"
-                    Sql2 += TxtOrderNo.Text
+                    Sql2 += TxtOrderNo.Text '受注番号
                     Sql2 += "', '"
-                    Sql2 += TxtOrderSuffix.Text
+                    Sql2 += TxtOrderSuffix.Text '受注番号枝番
                     Sql2 += "', '"
-                    Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("No").Value.ToString
+                    Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("No").Value.ToString '行番号
                     Sql2 += "', '"
-                    Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("仕入区分").Value.ToString
+                    Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("仕入区分").Value.ToString '仕入区分
                     Sql2 += "', '"
-                    Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("メーカー").Value.ToString
+                    Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("メーカー").Value.ToString 'メーカー
                     Sql2 += "', '"
-                    Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("品名").Value.ToString
+                    Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("品名").Value.ToString '品名
                     Sql2 += "', '"
-                    Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("型式").Value.ToString
+                    Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("型式").Value.ToString '型式
                     Sql2 += "', '"
-                    Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("単位").Value.ToString
+                    Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("単位").Value.ToString '単位
                     Sql2 += "', '"
-                    Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("仕入先").Value.ToString
+                    Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("仕入先").Value.ToString '仕入先名
                     Sql2 += "', '"
-                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(cymnhdIdx).Cells("仕入値").Value.ToString)
+                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(cymnhdIdx).Cells("仕入値").Value.ToString) '仕入値
                     Sql2 += "', '"
-                    Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("数量").Value.ToString
+                    Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("数量").Value.ToString '受注数量
                     Sql2 += "', '"
-                    Sql2 += "0"
+                    Sql2 += "0" '売上数量
                     Sql2 += "', '"
-                    Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("数量").Value.ToString
+                    Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("数量").Value.ToString '受注残数
                     Sql2 += "', '"
 
                     If DgvItemList.Rows(cymnhdIdx).Cells("間接費").Value.ToString = "" Then
-                        Sql2 += "0"
+                        Sql2 += "0" '間接費
                     Else
-                        Sql2 += UtilClass.formatNumber(DgvItemList.Rows(cymnhdIdx).Cells("間接費").Value.ToString)
+                        Sql2 += UtilClass.formatNumber(DgvItemList.Rows(cymnhdIdx).Cells("間接費").Value.ToString) '間接費
                     End If
                     Sql2 += "', '"
-                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(cymnhdIdx).Cells("売単価").Value.ToString)
+                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(cymnhdIdx).Cells("売単価").Value.ToString) '売単価
                     Sql2 += "', '"
-                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(cymnhdIdx).Cells("売上金額").Value.ToString)
+                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(cymnhdIdx).Cells("売上金額").Value.ToString) '売上金額
                     Sql2 += "', '"
-                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(cymnhdIdx).Cells("粗利額").Value.ToString)
+                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(cymnhdIdx).Cells("粗利額").Value.ToString) '粗利額
                     Sql2 += "', '"
-                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(cymnhdIdx).Cells("粗利率").Value.ToString)
+                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(cymnhdIdx).Cells("粗利率").Value.ToString) '粗利率
                     Sql2 += "', '"
-                    Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("リードタイム").Value.ToString
+                    Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("リードタイム").Value.ToString 'リードタイム
                     Sql2 += "', '"
-                    Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("リードタイム単位").Value.ToString
+                    Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("リードタイム単位").Value.ToString 'リードタイム単位
                     Sql2 += "', '"
-                    Sql2 += "0"
+                    Sql2 += "0" '出庫数
                     Sql2 += "', '"
-                    Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("数量").Value.ToString
+                    Sql2 += DgvItemList.Rows(cymnhdIdx).Cells("数量").Value.ToString '未出庫数
                     Sql2 += "', '"
-                    Sql2 += RevoveChars(DgvItemList.Rows(cymnhdIdx).Cells("備考").Value.ToString)
+                    Sql2 += RevoveChars(DgvItemList.Rows(cymnhdIdx).Cells("備考").Value.ToString) '備考
                     Sql2 += "', '"
-                    Sql2 += frmC01F10_Login.loginValue.TantoNM
+                    Sql2 += frmC01F10_Login.loginValue.TantoNM '更新者
                     Sql2 += "', '"
-                    Sql2 += dtNow
+                    Sql2 += dtNow '登録日
 
                     Sql2 += "', '"
-                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(cymnhdIdx).Cells("見積単価").Value.ToString)
+                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(cymnhdIdx).Cells("見積単価").Value.ToString) '見積単価
                     Sql2 += "', '"
-                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(cymnhdIdx).Cells("見積金額").Value.ToString)
+                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(cymnhdIdx).Cells("見積金額").Value.ToString) '見積金額
                     Sql2 += "', '"
-                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(cymnhdIdx).Cells("関税率").Value.ToString)
+                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(cymnhdIdx).Cells("関税率").Value.ToString) '関税率
                     Sql2 += "', '"
-                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(cymnhdIdx).Cells("関税額").Value.ToString)
+                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(cymnhdIdx).Cells("関税額").Value.ToString) '関税額
                     Sql2 += "', '"
-                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(cymnhdIdx).Cells("前払法人税率").Value.ToString)
+                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(cymnhdIdx).Cells("前払法人税率").Value.ToString) '前払法人税率
                     Sql2 += "', '"
-                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(cymnhdIdx).Cells("前払法人税額").Value.ToString)
+                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(cymnhdIdx).Cells("前払法人税額").Value.ToString) '前払法人税額
                     Sql2 += "', '"
-                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(cymnhdIdx).Cells("輸送費率").Value.ToString)
+                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(cymnhdIdx).Cells("輸送費率").Value.ToString) '輸送費率
                     Sql2 += "', '"
-                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(cymnhdIdx).Cells("輸送費額").Value.ToString)
+                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(cymnhdIdx).Cells("輸送費額").Value.ToString) '輸送費額
                     Sql2 += "', '"
-                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(cymnhdIdx).Cells("仕入原価").Value.ToString)
+                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(cymnhdIdx).Cells("仕入原価").Value.ToString) '仕入原価
                     Sql2 += "', '"
-                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(cymnhdIdx).Cells("仕入金額").Value.ToString)
+                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(cymnhdIdx).Cells("仕入金額").Value.ToString) '仕入金額
                     Sql2 += "')"
 
                     _db.executeDB(Sql2)
@@ -978,4 +997,276 @@ Public Class Order
 
         Return table
     End Function
+
+    '一覧内テキスト変更イベント
+    Private Sub DgvItemList_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles DgvItemList.CellValueChanged
+        Dim reccnt As Integer = 0 'DB用（デフォルト）
+        Dim Sql As String = ""
+
+        '合計値リセット
+        TxtPurchaseAmount.Clear()
+        TxtOrderAmount.Clear()
+        TxtGrossProfit.Clear()
+
+        Dim Total As Decimal = 0 '売上金額
+        Dim PurchaseTotal As Decimal = 0 '仕入金額
+        Dim QuoteTotal As Decimal = 0 '見積金額
+        Dim GrossProfit As Decimal = 0 '粗利額
+        Dim tmpPurchase As Integer = 0
+        Dim tmp As Decimal = 0
+        Dim tmp1 As Decimal = 0
+        Dim tmp2 As Decimal = 0
+        Dim tmp3 As Decimal = 0
+        Dim tmp4 As Decimal = 0
+
+        If DgvItemList.Rows.Count = 0 Or OrderStatus = CommonConst.STATUS_VIEW Then
+            Exit Sub
+        End If
+
+        '各項目の属性チェック
+        If Not IsNumeric(DgvItemList.Rows(e.RowIndex).Cells("数量").Value) And (DgvItemList.Rows(e.RowIndex).Cells("数量").Value IsNot Nothing) Then
+            MessageBox.Show("Please enter with numeric value.", "Quantity Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            DgvItemList.Rows(e.RowIndex).Cells("数量").Value = Nothing
+            Exit Sub
+        End If
+        If Not IsNumeric(DgvItemList.Rows(e.RowIndex).Cells("仕入値").Value) And (DgvItemList.Rows(e.RowIndex).Cells("仕入値").Value IsNot Nothing) Then
+            MessageBox.Show("Please enter with numeric value.", "PurchaseUnitPrice Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            DgvItemList.Rows(e.RowIndex).Cells("仕入値").Value = Nothing
+            Exit Sub
+        End If
+        If Not IsNumeric(DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value) And (DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value IsNot Nothing) Then
+            MessageBox.Show("Please enter with numeric value.", "PurchasingCost Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value = Nothing
+            Exit Sub
+        End If
+        If Not IsNumeric(DgvItemList.Rows(e.RowIndex).Cells("関税率").Value) And (DgvItemList.Rows(e.RowIndex).Cells("関税率").Value IsNot Nothing) Then
+            MessageBox.Show("Please enter with numeric value.", "CustomsDutyRate Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            DgvItemList.Rows(e.RowIndex).Cells("関税率").Value = Nothing
+            Exit Sub
+        End If
+        If Not IsNumeric(DgvItemList.Rows(e.RowIndex).Cells("関税額").Value) And (DgvItemList.Rows(e.RowIndex).Cells("関税額").Value IsNot Nothing) Then
+            MessageBox.Show("Please enter with numeric value.", "CustomsDuty Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            DgvItemList.Rows(e.RowIndex).Cells("関税額").Value = Nothing
+            Exit Sub
+        End If
+        If Not IsNumeric(DgvItemList.Rows(e.RowIndex).Cells("前払法人税率").Value) And (DgvItemList.Rows(e.RowIndex).Cells("前払法人税率").Value IsNot Nothing) Then
+            MessageBox.Show("Please enter with numeric value.", "PrepaidCorporateTaxRate Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            DgvItemList.Rows(e.RowIndex).Cells("前払法人税率").Value = Nothing
+            Exit Sub
+        End If
+        If Not IsNumeric(DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value) And (DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value IsNot Nothing) Then
+            MessageBox.Show("Please enter with numeric value.", "PrepaidCorporateTaxAmount Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value = Nothing
+            Exit Sub
+        End If
+        If Not IsNumeric(DgvItemList.Rows(e.RowIndex).Cells("輸送費率").Value) And (DgvItemList.Rows(e.RowIndex).Cells("輸送費率").Value IsNot Nothing) Then
+            MessageBox.Show("Please enter with numeric value.", "TransportationCostRate Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            DgvItemList.Rows(e.RowIndex).Cells("輸送費率").Value = Nothing
+            Exit Sub
+        End If
+        If Not IsNumeric(DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value) And (DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value IsNot Nothing) Then
+            MessageBox.Show("Please enter with numeric value.", "TransportationCost Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value = Nothing
+            Exit Sub
+        End If
+        If Not IsNumeric(DgvItemList.Rows(e.RowIndex).Cells("仕入金額").Value) And (DgvItemList.Rows(e.RowIndex).Cells("仕入金額").Value IsNot Nothing) Then
+            MessageBox.Show("Please enter with numeric value.", "PurchaseAmount Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            DgvItemList.Rows(e.RowIndex).Cells("仕入金額").Value = Nothing
+            Exit Sub
+        End If
+        If Not IsNumeric(DgvItemList.Rows(e.RowIndex).Cells("売単価").Value) And (DgvItemList.Rows(e.RowIndex).Cells("売単価").Value IsNot Nothing) Then
+            MessageBox.Show("Please enter with numeric value.", "SellingPrice Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            DgvItemList.Rows(e.RowIndex).Cells("売単価").Value = Nothing
+            Exit Sub
+        End If
+        If Not IsNumeric(DgvItemList.Rows(e.RowIndex).Cells("売上金額").Value) And (DgvItemList.Rows(e.RowIndex).Cells("売上金額").Value IsNot Nothing) Then
+            MessageBox.Show("Please enter with numeric value.", "SalesAmount Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            DgvItemList.Rows(e.RowIndex).Cells("売上金額").Value = Nothing
+            Exit Sub
+        End If
+        If Not IsNumeric(DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value) And (DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value IsNot Nothing) Then
+            MessageBox.Show("Please enter with numeric value.", "QuotetionPrice Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value = Nothing
+            Exit Sub
+        End If
+        If Not IsNumeric(DgvItemList.Rows(e.RowIndex).Cells("見積金額").Value) And (DgvItemList.Rows(e.RowIndex).Cells("見積金額").Value IsNot Nothing) Then
+            MessageBox.Show("Please enter with numeric value.", "QuotetionAmount Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            DgvItemList.Rows(e.RowIndex).Cells("見積金額").Value = Nothing
+            Exit Sub
+        End If
+        If Not IsNumeric(DgvItemList.Rows(e.RowIndex).Cells("粗利額").Value) And (DgvItemList.Rows(e.RowIndex).Cells("粗利額").Value IsNot Nothing) Then
+            MessageBox.Show("Please enter with numeric value.", "GrossMargin Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            DgvItemList.Rows(e.RowIndex).Cells("粗利額").Value = Nothing
+            Exit Sub
+        End If
+        If Not IsNumeric(DgvItemList.Rows(e.RowIndex).Cells("粗利率").Value) And (DgvItemList.Rows(e.RowIndex).Cells("粗利率").Value IsNot Nothing) Then
+            MessageBox.Show("Please enter with numeric value.", "GrossMarginRate(%) Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            DgvItemList.Rows(e.RowIndex).Cells("粗利率").Value = Nothing
+            Exit Sub
+        End If
+
+        Try
+            '計算式を各行に適用
+            If e.RowIndex > -1 Then
+
+                '--------------------------
+                '単価入力 or 粗利入力
+                '--------------------------
+
+                '操作したカラム名を取得
+                Dim currentColumn As String = DgvItemList.Columns(e.ColumnIndex).Name
+
+                '仕入単価 <> Nothing
+                '--------------------------
+                If currentColumn = "仕入値" And DgvItemList.Rows(e.RowIndex).Cells("仕入値").Value IsNot Nothing Then
+
+                    '数量 <> Nothing
+                    If DgvItemList.Rows(e.RowIndex).Cells("数量").Value IsNot Nothing Then
+                        DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value = DgvItemList.Rows(e.RowIndex).Cells("仕入値").Value * DgvItemList.Rows(e.RowIndex).Cells("数量").Value
+                    End If
+                    '関税率 <> Nothing
+                    If DgvItemList.Rows(e.RowIndex).Cells("関税率").Value IsNot Nothing Then
+                        DgvItemList.Rows(e.RowIndex).Cells("関税額").Value = DgvItemList.Rows(e.RowIndex).Cells("仕入値").Value * DgvItemList.Rows(e.RowIndex).Cells("関税率").Value
+                    End If
+                    '前払法人税率, 関税額 <> Nothing
+                    If DgvItemList.Rows(e.RowIndex).Cells("前払法人税率").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("関税額").Value IsNot Nothing Then
+                        tmp = DgvItemList.Rows(e.RowIndex).Cells("仕入単価").Value + DgvItemList.Rows(e.RowIndex).Cells("関税額").Value
+                        tmp1 = tmp * DgvItemList.Rows(e.RowIndex).Cells("前払法人税率").Value
+                        tmp1 = Math.Ceiling(tmp1)
+                        DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value = tmp1
+                    End If
+                    '輸送費率 <> Nothing
+                    If DgvItemList.Rows(e.RowIndex).Cells("輸送費率").Value IsNot Nothing Then
+                        DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value = DgvItemList.Rows(e.RowIndex).Cells("仕入単価").Value * DgvItemList.Rows(e.RowIndex).Cells("輸送費率").Value
+                    End If
+
+                End If
+
+                '関税額, 前払法人税額, 輸送費額 <> Nothing
+                '--------------------------
+                If DgvItemList.Rows(e.RowIndex).Cells("関税額").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value IsNot Nothing Then
+                    '仕入原価 <> Nothing
+                    If DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value IsNot Nothing Then
+                        DgvItemList.Rows(e.RowIndex).Cells("仕入金額").Value = DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value + (DgvItemList.Rows(e.RowIndex).Cells("関税額").Value + DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value + DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value) * DgvItemList.Rows(e.RowIndex).Cells("数量").Value
+                    End If
+                    '売単価 <> Nothing
+                    If DgvItemList.Rows(e.RowIndex).Cells("売単価").Value IsNot Nothing Then
+                        DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value = Math.Ceiling(DgvItemList.Rows(e.RowIndex).Cells("売単価").Value + DgvItemList.Rows(e.RowIndex).Cells("関税額").Value + DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value + DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value)
+                    End If
+                End If
+
+
+                '--------------------------
+                '単価入力
+                '--------------------------
+                If currentColumn = "売単価" Or currentColumn = "数量" Then
+                    '数量, 売単価 <> Nothing
+                    '--------------------------
+                    If DgvItemList.Rows(e.RowIndex).Cells("数量").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("売単価").Value IsNot Nothing Then
+                        DgvItemList.Rows(e.RowIndex).Cells("売上金額").Value = DgvItemList.Rows(e.RowIndex).Cells("数量").Value * DgvItemList.Rows(e.RowIndex).Cells("売単価").Value
+
+                        '仕入原価 <> Nothing
+                        '--------------------------
+                        If DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value IsNot Nothing Then
+                            DgvItemList.Rows(e.RowIndex).Cells("粗利額").Value = Math.Ceiling(DgvItemList.Rows(e.RowIndex).Cells("売上金額").Value - DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value)
+                            '売上金額 <> 0
+                            '--------------------------
+                            If DgvItemList.Rows(e.RowIndex).Cells("売上金額").Value <> 0 Then
+                                DgvItemList.Rows(e.RowIndex).Cells("粗利率").Value = Format(DgvItemList.Rows(e.RowIndex).Cells("粗利額").Value / DgvItemList.Rows(e.RowIndex).Cells("売上金額").Value * 100, "0.0")
+                            End If
+                        End If
+
+                    End If
+
+                ElseIf currentColumn = "粗利率" Or currentColumn = "数量" Then
+                    '--------------------------
+                    '粗利入力
+                    '--------------------------
+
+                    '数量, 仕入単価, 粗利率 <> Nothing
+                    '--------------------------
+                    If DgvItemList.Rows(e.RowIndex).Cells("数量").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("仕入値").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("粗利率").Value IsNot Nothing Then
+                        tmp2 = DgvItemList.Rows(e.RowIndex).Cells("粗利率").Value / 100
+                        tmp3 = DgvItemList.Rows(e.RowIndex).Cells("数量").Value - tmp2 * DgvItemList.Rows(e.RowIndex).Cells("数量").Value
+
+                        '仕入原価 <> Nothing
+                        '--------------------------
+                        If DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value IsNot Nothing Then
+                            DgvItemList.Rows(e.RowIndex).Cells("売単価").Value = DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value / tmp3
+                            DgvItemList.Rows(e.RowIndex).Cells("売上金額").Value = DgvItemList.Rows(e.RowIndex).Cells("売単価").Value * DgvItemList.Rows(e.RowIndex).Cells("数量").Value
+                            DgvItemList.Rows(e.RowIndex).Cells("粗利額").Value = Math.Ceiling(DgvItemList.Rows(e.RowIndex).Cells("売上金額").Value - DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value)
+                        End If
+
+                    End If
+                ElseIf currentColumn = "見積単価" Or currentColumn = "数量" Then
+                    '--------------------------
+                    '見積入力
+                    '--------------------------
+
+                    '見積単価, 売単価, 関税額, 前払法人税額, 輸送費額 <> Nothing
+                    '--------------------------
+                    If DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("関税額").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value IsNot Nothing Then
+                        'If DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("売単価").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("関税額").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value IsNot Nothing Then
+                        tmp4 = DgvItemList.Rows(e.RowIndex).Cells("関税額").Value + DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value + DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value
+                        DgvItemList.Rows(e.RowIndex).Cells("売単価").Value = DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value - tmp4
+                        DgvItemList.Rows(e.RowIndex).Cells("売上金額").Value = DgvItemList.Rows(e.RowIndex).Cells("売単価").Value * DgvItemList.Rows(e.RowIndex).Cells("数量").Value
+                        DgvItemList.Rows(e.RowIndex).Cells("粗利額").Value = Math.Ceiling(DgvItemList.Rows(e.RowIndex).Cells("売上金額").Value - DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value)
+                        DgvItemList.Rows(e.RowIndex).Cells("粗利率").Value = Format(DgvItemList.Rows(e.RowIndex).Cells("粗利額").Value / DgvItemList.Rows(e.RowIndex).Cells("売上金額").Value * 100, "0.0")
+                    End If
+                End If
+
+                '見積金額算出
+                If DgvItemList.Rows(e.RowIndex).Cells("数量").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value IsNot Nothing Then
+                    DgvItemList.Rows(e.RowIndex).Cells("見積金額").Value = DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value * DgvItemList.Rows(e.RowIndex).Cells("数量").Value
+                End If
+
+
+                ''仕入先コード入力時、仕入先マスタより各項目を抽出
+                'If currentColumn = "仕入先コード" And DgvItemList.Rows(e.RowIndex).Cells("仕入先コード").Value IsNot Nothing Then
+                '    Sql = ""
+                '    Sql += "SELECT * FROM public.m11_supplier"
+                '    Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                '    Sql += " and 仕入先コード = '" & DgvItemList.Rows(e.RowIndex).Cells("仕入先コード").Value.ToString & "'"
+
+                '    Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
+                '    '仕入先コードにカーソルがあるときだけ各率を再表示
+                '    If DgvItemList.Columns(e.ColumnIndex).Name = "仕入先コード" Then
+                '        If reccnt > 0 Then
+                '            DgvItemList.Rows(e.RowIndex).Cells("仕入先").Value = ds.Tables(RS).Rows(0)("仕入先名").ToString
+                '            DgvItemList.Rows(e.RowIndex).Cells("間接費率").Value = ds.Tables(RS).Rows(0)("既定間接費率").ToString
+                '            DgvItemList.Rows(e.RowIndex).Cells("関税率").Value = ds.Tables(RS).Rows(0)("関税率").ToString
+                '            DgvItemList.Rows(e.RowIndex).Cells("前払法人税率").Value = ds.Tables(RS).Rows(0)("前払法人税率").ToString
+                '            DgvItemList.Rows(e.RowIndex).Cells("輸送費率").Value = ds.Tables(RS).Rows(0)("輸送費率").ToString
+                '        Else
+                '            DgvItemList.Rows(e.RowIndex).Cells("仕入先").Value = ""
+                '            DgvItemList.Rows(e.RowIndex).Cells("間接費率").Value = 0
+                '            DgvItemList.Rows(e.RowIndex).Cells("関税率").Value = 0
+                '            DgvItemList.Rows(e.RowIndex).Cells("前払法人税率").Value = 0
+                '            DgvItemList.Rows(e.RowIndex).Cells("輸送費率").Value = 0
+
+                '        End If
+                '    End If
+
+                'End If
+
+            End If
+
+            For index As Integer = 0 To DgvItemList.Rows.Count - 1
+                PurchaseTotal += DgvItemList.Rows(index).Cells("仕入金額").Value
+                Total += DgvItemList.Rows(index).Cells("売上金額").Value
+                QuoteTotal += DgvItemList.Rows(index).Cells("見積金額").Value
+                GrossProfit += DgvItemList.Rows(index).Cells("粗利額").Value
+            Next
+
+            TxtPurchaseAmount.Text = PurchaseTotal
+            TxtOrderAmount.Text = QuoteTotal.ToString("F0")
+            TxtGrossProfit.Text = GrossProfit
+
+        Catch ex As OverflowException
+
+            Throw ex
+
+        End Try
+
+    End Sub
 End Class
