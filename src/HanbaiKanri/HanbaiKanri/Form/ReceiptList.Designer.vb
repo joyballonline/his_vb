@@ -28,14 +28,12 @@ Partial Class ReceiptList
         Me.RbtnDetails = New System.Windows.Forms.RadioButton()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.TxtReceiptUntil = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.TxtSales = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.TxtReceiptSince = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label9 = New System.Windows.Forms.Label()
         Me.TxtSupplierCode = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.TxtTel = New System.Windows.Forms.TextBox()
@@ -121,14 +119,6 @@ Partial Class ReceiptList
         Me.Label5.TabIndex = 144
         Me.Label5.Text = "～"
         '
-        'TxtReceiptUntil
-        '
-        Me.TxtReceiptUntil.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtReceiptUntil.Location = New System.Drawing.Point(959, 68)
-        Me.TxtReceiptUntil.Name = "TxtReceiptUntil"
-        Me.TxtReceiptUntil.Size = New System.Drawing.Size(170, 22)
-        Me.TxtReceiptUntil.TabIndex = 8
-        '
         'Label6
         '
         Me.Label6.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
@@ -192,15 +182,6 @@ Partial Class ReceiptList
         Me.Label4.TabIndex = 135
         Me.Label4.Text = "仕入先コード"
         Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(936, 74)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(17, 12)
-        Me.Label9.TabIndex = 145
-        Me.Label9.Text = "～"
         '
         'TxtSupplierCode
         '
@@ -397,14 +378,12 @@ Partial Class ReceiptList
         Me.Controls.Add(Me.BtnReceiptView)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.TxtReceiptUntil)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.TxtSales)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.TxtReceiptSince)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.Label4)
-        Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.TxtSupplierCode)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.TxtTel)
@@ -432,14 +411,12 @@ Partial Class ReceiptList
     Friend WithEvents RbtnDetails As RadioButton
     Friend WithEvents Label10 As Label
     Friend WithEvents Label5 As Label
-    Friend WithEvents TxtReceiptUntil As TextBox
     Friend WithEvents Label6 As Label
     Friend WithEvents TxtSales As TextBox
     Friend WithEvents Label7 As Label
     Friend WithEvents TxtReceiptSince As TextBox
     Friend WithEvents Label8 As Label
     Friend WithEvents Label4 As Label
-    Friend WithEvents Label9 As Label
     Friend WithEvents TxtSupplierCode As TextBox
     Friend WithEvents Label3 As Label
     Friend WithEvents TxtTel As TextBox

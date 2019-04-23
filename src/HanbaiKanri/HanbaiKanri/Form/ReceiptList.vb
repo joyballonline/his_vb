@@ -284,7 +284,7 @@ Public Class ReceiptList
             Dim sinceDate As String = strFormatDate(dtReceiptDateSince.Text)
             Dim untilDate As String = strFormatDate(dtReceiptDateUntil.Text)
             Dim sinceNum As String = escapeSql(TxtReceiptSince.Text)
-            Dim untilNum As String = escapeSql(TxtReceiptUntil.Text)
+            'Dim untilNum As String = escapeSql(TxtReceiptUntil.Text)
             Dim salesName As String = escapeSql(TxtSales.Text)
             Dim poNum As String = escapeSql(TxtCustomerPO.Text)
 
@@ -319,12 +319,12 @@ Public Class ReceiptList
 
             If sinceNum <> Nothing Then
                 Sql += " AND "
-                Sql += " t42.入庫番号 >= '" & sinceNum & "' "
+                Sql += " t42.入庫番号 ILIKE '%" & sinceNum & "%' "
             End If
-            If untilNum <> Nothing Then
-                Sql += " AND "
-                Sql += " t42.入庫番号 <= '" & untilNum & "' "
-            End If
+            'If untilNum <> Nothing Then
+            '    Sql += " AND "
+            '    Sql += " t42.入庫番号 <= '" & untilNum & "' "
+            'End If
 
             If poNum <> Nothing Then
                 Sql += " AND "
@@ -669,7 +669,7 @@ Public Class ReceiptList
         Dim sinceDate As String = strFormatDate(dtReceiptDateSince.Text)
         Dim untilDate As String = strFormatDate(dtReceiptDateUntil.Text)
         Dim sinceNum As String = escapeSql(TxtReceiptSince.Text)
-        Dim untilNum As String = escapeSql(TxtReceiptUntil.Text)
+        'Dim untilNum As String = escapeSql(TxtReceiptUntil.Text)
         Dim salesName As String = escapeSql(TxtSales.Text)
         Dim poNum As String = escapeSql(TxtCustomerPO.Text)
 
@@ -704,12 +704,12 @@ Public Class ReceiptList
 
         If sinceNum <> Nothing Then
             Sql += " AND "
-            Sql += " 入庫番号 >= '" & sinceNum & "' "
+            Sql += " 入庫番号 ILIKE '%" & sinceNum & "%' "
         End If
-        If untilNum <> Nothing Then
-            Sql += " AND "
-            Sql += " 入庫番号 <= '" & untilNum & "' "
-        End If
+        'If untilNum <> Nothing Then
+        '    Sql += " AND "
+        '    Sql += " 入庫番号 <= '" & untilNum & "' "
+        'End If
 
         If poNum <> Nothing Then
             Sql += " AND "
