@@ -212,7 +212,7 @@ Public Class InventoryControlTable
             Sql += " t70.取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'"
 
             Sql += " ORDER BY "
-            Sql += " t70.メーカー, t70.品名, t70.型式, t70.入出庫日 "
+            Sql += " t70.メーカー, t70.品名, t70.型式, t70.入出庫日, t70. 入出庫区分"
 
             Dim dsZaiko As DataSet = _db.selectDB(Sql, RS, reccnt)
 
