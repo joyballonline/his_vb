@@ -26,8 +26,6 @@ Partial Class PaidList
         Me.BtnCancel = New System.Windows.Forms.Button()
         Me.RbtnSlip = New System.Windows.Forms.RadioButton()
         Me.RbtnDetails = New System.Windows.Forms.RadioButton()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.TxtPaidNoUntil = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.TxtPaidNoSince = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
@@ -92,23 +90,6 @@ Partial Class PaidList
         Me.RbtnDetails.TabIndex = 9
         Me.RbtnDetails.Text = "明細単位"
         Me.RbtnDetails.UseVisualStyleBackColor = True
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(936, 72)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(17, 12)
-        Me.Label9.TabIndex = 115
-        Me.Label9.Text = "～"
-        '
-        'TxtPaidNoUntil
-        '
-        Me.TxtPaidNoUntil.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtPaidNoUntil.Location = New System.Drawing.Point(959, 67)
-        Me.TxtPaidNoUntil.Name = "TxtPaidNoUntil"
-        Me.TxtPaidNoUntil.Size = New System.Drawing.Size(170, 22)
-        Me.TxtPaidNoUntil.TabIndex = 6
         '
         'Label7
         '
@@ -293,8 +274,6 @@ Partial Class PaidList
         Me.Controls.Add(Me.LblMode)
         Me.Controls.Add(Me.ChkCancelData)
         Me.Controls.Add(Me.BtnCancel)
-        Me.Controls.Add(Me.Label9)
-        Me.Controls.Add(Me.TxtPaidNoUntil)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.TxtPaidNoSince)
         Me.Controls.Add(Me.Label8)
@@ -320,8 +299,6 @@ Partial Class PaidList
     Friend WithEvents BtnCancel As Button
     Friend WithEvents RbtnSlip As RadioButton
     Friend WithEvents RbtnDetails As RadioButton
-    Friend WithEvents Label9 As Label
-    Friend WithEvents TxtPaidNoUntil As TextBox
     Friend WithEvents Label7 As Label
     Friend WithEvents TxtPaidNoSince As TextBox
     Friend WithEvents Label8 As Label

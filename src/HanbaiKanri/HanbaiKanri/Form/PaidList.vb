@@ -159,7 +159,6 @@ Public Class PaidList
                 Dim sinceDate As String = strFormatDate(dtPaidDateSince.Text)
                 Dim untilDate As String = strFormatDate(dtPaidDateUntil.Text)
                 Dim sinceNum As String = escapeSql(TxtPaidNoSince.Text)
-                Dim untilNum As String = escapeSql(TxtPaidNoUntil.Text)
 
                 If customerName <> Nothing Then
                     Sql += " AND "
@@ -182,11 +181,7 @@ Public Class PaidList
 
                 If sinceNum <> Nothing Then
                     Sql += " AND "
-                    Sql += " t47.支払番号 >= '" & sinceNum & "' "
-                End If
-                If untilNum <> Nothing Then
-                    Sql += " AND "
-                    Sql += " t47.支払番号 <= '" & untilNum & "' "
+                    Sql += " t47.支払番号 ILIKE '%" & sinceNum & "%' "
                 End If
 
                 '取消データを含めない場合
@@ -544,7 +539,6 @@ Public Class PaidList
         Dim sinceDate As String = strFormatDate(dtPaidDateSince.Text)
         Dim untilDate As String = strFormatDate(dtPaidDateUntil.Text)
         Dim sinceNum As String = escapeSql(TxtPaidNoSince.Text)
-        Dim untilNum As String = escapeSql(TxtPaidNoUntil.Text)
 
         If customerName <> Nothing Then
             Sql += " AND "
@@ -567,11 +561,7 @@ Public Class PaidList
 
         If sinceNum <> Nothing Then
             Sql += " AND "
-            Sql += " 支払番号 >= '" & sinceNum & "' "
-        End If
-        If untilNum <> Nothing Then
-            Sql += " AND "
-            Sql += " 支払番号 <= '" & untilNum & "' "
+            Sql += " 支払番号 ILIKE '%" & sinceNum & "%' "
         End If
 
         Return Sql
