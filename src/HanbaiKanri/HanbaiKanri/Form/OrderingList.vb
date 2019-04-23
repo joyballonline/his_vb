@@ -289,7 +289,7 @@ Public Class OrderingList
                 Dim sinceDate As String = strFormatDate(dtPurchaseDateSince.Text) '日付の書式を日本の形式に合わせる
                 Dim untilDate As String = strFormatDate(dtPurchaseDateUntil.Text) '日付の書式を日本の形式に合わせる
                 Dim sinceNum As String = escapeSql(TxtPurchaseSince.Text)
-                Dim untilNum As String = escapeSql(TxtPurchaseUntil.Text)
+                'Dim untilNum As String = escapeSql(TxtPurchaseUntil.Text)
                 Dim salesName As String = escapeSql(TxtSales.Text)
                 Dim poCode As String = escapeSql(TxtCustomerPO.Text)
 
@@ -346,12 +346,12 @@ Public Class OrderingList
 
                 If sinceNum <> Nothing Then
                     Sql += " AND "
-                    Sql += " t20.発注番号 >= '" & sinceNum & "' "
+                    Sql += " t20.発注番号 ILIKE '%" & sinceNum & "%' "
                 End If
-                If untilNum <> Nothing Then
-                    Sql += " AND "
-                    Sql += " t20.発注番号 <= '" & untilNum & "' "
-                End If
+                'If untilNum <> Nothing Then
+                '    Sql += " AND "
+                '    Sql += " t20.発注番号 <= '" & untilNum & "' "
+                'End If
 
                 If salesName <> Nothing Then
                     Sql += " AND "
@@ -789,7 +789,7 @@ Public Class OrderingList
         Dim sinceDate As String = strFormatDate(dtPurchaseDateSince.Text) '日付の書式を日本の形式に合わせる
         Dim untilDate As String = strFormatDate(dtPurchaseDateUntil.Text) '日付の書式を日本の形式に合わせる
         Dim sinceNum As String = escapeSql(TxtPurchaseSince.Text)
-        Dim untilNum As String = escapeSql(TxtPurchaseUntil.Text)
+        'Dim untilNum As String = escapeSql(TxtPurchaseUntil.Text)
         Dim salesName As String = escapeSql(TxtSales.Text)
         Dim poCode As String = escapeSql(TxtCustomerPO.Text)
 
@@ -824,12 +824,12 @@ Public Class OrderingList
 
         If sinceNum <> Nothing Then
             Sql += " AND "
-            Sql += " 発注番号 >= '" & sinceNum & "' "
+            Sql += " 発注番号 ILIKE '%" & sinceNum & "%' "
         End If
-        If untilNum <> Nothing Then
-            Sql += " AND "
-            Sql += " 発注番号 <= '" & untilNum & "' "
-        End If
+        'If untilNum <> Nothing Then
+        '    Sql += " AND "
+        '    Sql += " 発注番号 <= '" & untilNum & "' "
+        'End If
 
         If salesName <> Nothing Then
             Sql += " AND "

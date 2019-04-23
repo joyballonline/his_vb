@@ -26,9 +26,7 @@ Partial Class OrderingList
         Me.RbtnSlip = New System.Windows.Forms.RadioButton()
         Me.RbtnDetails = New System.Windows.Forms.RadioButton()
         Me.Label10 = New System.Windows.Forms.Label()
-        Me.Label9 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.TxtPurchaseUntil = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.TxtSales = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
@@ -106,15 +104,6 @@ Partial Class OrderingList
         Me.Label10.TabIndex = 84
         Me.Label10.Text = "■表示形式"
         '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(936, 74)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(17, 12)
-        Me.Label9.TabIndex = 83
-        Me.Label9.Text = "～"
-        '
         'Label5
         '
         Me.Label5.AutoSize = True
@@ -123,14 +112,6 @@ Partial Class OrderingList
         Me.Label5.Size = New System.Drawing.Size(17, 12)
         Me.Label5.TabIndex = 82
         Me.Label5.Text = "～"
-        '
-        'TxtPurchaseUntil
-        '
-        Me.TxtPurchaseUntil.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtPurchaseUntil.Location = New System.Drawing.Point(959, 68)
-        Me.TxtPurchaseUntil.Name = "TxtPurchaseUntil"
-        Me.TxtPurchaseUntil.Size = New System.Drawing.Size(170, 22)
-        Me.TxtPurchaseUntil.TabIndex = 8
         '
         'Label6
         '
@@ -461,9 +442,7 @@ Partial Class OrderingList
         Me.Controls.Add(Me.BtnOrding)
         Me.Controls.Add(Me.BtnPurchaseView)
         Me.Controls.Add(Me.Label10)
-        Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.TxtPurchaseUntil)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.TxtSales)
         Me.Controls.Add(Me.Label7)
@@ -496,9 +475,7 @@ Partial Class OrderingList
     Friend WithEvents RbtnSlip As RadioButton
     Friend WithEvents RbtnDetails As RadioButton
     Friend WithEvents Label10 As Label
-    Friend WithEvents Label9 As Label
     Friend WithEvents Label5 As Label
-    Friend WithEvents TxtPurchaseUntil As TextBox
     Friend WithEvents Label6 As Label
     Friend WithEvents TxtSales As TextBox
     Friend WithEvents Label7 As Label
