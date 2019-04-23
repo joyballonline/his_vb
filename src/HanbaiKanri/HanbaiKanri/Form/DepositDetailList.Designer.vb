@@ -30,12 +30,10 @@ Partial Class DepositDetailList
         Me.BtnDepositView = New System.Windows.Forms.Button()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.TxtBillingNo2 = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.TxtBillingNo1 = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label9 = New System.Windows.Forms.Label()
         Me.TxtCustomerCode = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.LblConditions = New System.Windows.Forms.Label()
@@ -136,14 +134,6 @@ Partial Class DepositDetailList
         Me.Label5.TabIndex = 321
         Me.Label5.Text = "～"
         '
-        'TxtBillingNo2
-        '
-        Me.TxtBillingNo2.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtBillingNo2.Location = New System.Drawing.Point(959, 70)
-        Me.TxtBillingNo2.Name = "TxtBillingNo2"
-        Me.TxtBillingNo2.Size = New System.Drawing.Size(170, 22)
-        Me.TxtBillingNo2.TabIndex = 6
-        '
         'Label7
         '
         Me.Label7.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
@@ -187,15 +177,6 @@ Partial Class DepositDetailList
         Me.Label4.TabIndex = 314
         Me.Label4.Text = "得意先コード"
         Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(936, 76)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(17, 12)
-        Me.Label9.TabIndex = 322
-        Me.Label9.Text = "～"
         '
         'TxtCustomerCode
         '
@@ -309,12 +290,10 @@ Partial Class DepositDetailList
         Me.Controls.Add(Me.BtnDepositView)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.TxtBillingNo2)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.TxtBillingNo1)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.Label4)
-        Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.TxtCustomerCode)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.LblConditions)
@@ -340,12 +319,10 @@ Partial Class DepositDetailList
     Friend WithEvents BtnDepositView As Button
     Friend WithEvents Label10 As Label
     Friend WithEvents Label5 As Label
-    Friend WithEvents TxtBillingNo2 As TextBox
     Friend WithEvents Label7 As Label
     Friend WithEvents TxtBillingNo1 As TextBox
     Friend WithEvents Label8 As Label
     Friend WithEvents Label4 As Label
-    Friend WithEvents Label9 As Label
     Friend WithEvents TxtCustomerCode As TextBox
     Friend WithEvents Label1 As Label
     Friend WithEvents LblConditions As Label

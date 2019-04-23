@@ -161,7 +161,6 @@ Public Class DepositDetailList
                 Dim sinceDate As String = strFormatDate(dtBillingDateSince.Text) '日付の書式を日本の形式に合わせる
                 Dim untilDate As String = strFormatDate(dtBillingDateUntil.Text) '日付の書式を日本の形式に合わせる
                 Dim sinceNum As String = escapeSql(TxtBillingNo1.Text)
-                Dim untilNum As String = escapeSql(TxtBillingNo2.Text)
 
                 If customerName <> Nothing Then
                     Sql += " AND "
@@ -184,11 +183,7 @@ Public Class DepositDetailList
 
                 If sinceNum <> Nothing Then
                     Sql += " AND "
-                    Sql += " t25.入金番号 >= '" & sinceNum & "' "
-                End If
-                If untilNum <> Nothing Then
-                    Sql += " AND "
-                    Sql += " t25.入金番号 <= '" & untilNum & "' "
+                    Sql += " t25.入金番号 ILIKE '%" & sinceNum & "%' "
                 End If
 
                 '取消データを含めない場合
@@ -561,7 +556,6 @@ Public Class DepositDetailList
         Dim sinceDate As String = strFormatDate(dtBillingDateSince.Text) '日付の書式を日本の形式に合わせる
         Dim untilDate As String = strFormatDate(dtBillingDateUntil.Text) '日付の書式を日本の形式に合わせる
         Dim sinceNum As String = escapeSql(TxtBillingNo1.Text)
-        Dim untilNum As String = escapeSql(TxtBillingNo2.Text)
 
         If customerName <> Nothing Then
             Sql += " AND "
@@ -584,11 +578,7 @@ Public Class DepositDetailList
 
         If sinceNum <> Nothing Then
             Sql += " AND "
-            Sql += " 入金番号 >= '" & sinceNum & "' "
-        End If
-        If untilNum <> Nothing Then
-            Sql += " AND "
-            Sql += " 入金番号 <= '" & untilNum & "' "
+            Sql += " 入金番号 ILIKE '%" & sinceNum & "%' "
         End If
 
         Return Sql
