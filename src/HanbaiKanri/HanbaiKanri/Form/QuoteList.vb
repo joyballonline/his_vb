@@ -299,14 +299,6 @@ Public Class QuoteList
                     Sql += RevoveChars(TxtQuoteNoSince.Text)
                     Sql += "%'"
                 End If
-                'If TxtQuoteNoUntil.Text <> "" Then
-                '    Sql += " and "
-                '    Sql += "t01.見積番号"
-                '    Sql += " <=  "
-                '    Sql += "'"
-                '    Sql += RevoveChars(TxtQuoteNoUntil.Text)
-                '    Sql += "'"
-                'End If
                 If TxtSales.Text <> "" Then
                     Sql += " and "
                     Sql += "t01.営業担当者"
@@ -493,14 +485,6 @@ Public Class QuoteList
                     Sql += RevoveChars(TxtQuoteNoSince.Text)
                     Sql += "%'"
                 End If
-                'If TxtQuoteNoUntil.Text <> "" Then
-                '    Sql += " and "
-                '    Sql += "t01.見積番号"
-                '    Sql += " <=  "
-                '    Sql += "'"
-                '    Sql += RevoveChars(TxtQuoteNoUntil.Text)
-                '    Sql += "'"
-                'End If
                 If TxtSales.Text <> "" Then
                     Sql += " and "
                     Sql += "t01.営業担当者"
