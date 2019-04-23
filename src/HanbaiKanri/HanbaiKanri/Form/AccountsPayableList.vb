@@ -384,7 +384,6 @@ Public Class AccountsPayableList
         Dim sinceDate As String = strFormatDate(dtAPDateSince.Text)
         Dim untilDate As String = strFormatDate(dtAPDateUntil.Text)
         Dim sinceNum As String = escapeSql(TxtAPSince.Text)
-        Dim untilNum As String = escapeSql(TxtAPUntil.Text)
         Dim poNum As String = escapeSql(TxtCustomerPO.Text)
 
         If supplierName <> Nothing Then
@@ -408,11 +407,7 @@ Public Class AccountsPayableList
 
         If sinceNum <> Nothing Then
             Sql += " AND "
-            Sql += " 買掛番号 >= '" & sinceNum & "' "
-        End If
-        If untilNum <> Nothing Then
-            Sql += " AND "
-            Sql += " 買掛番号 <= '" & untilNum & "' "
+            Sql += " 買掛番号 ILIKE '%" & sinceNum & "%' "
         End If
 
         If poNum <> Nothing Then

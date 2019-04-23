@@ -23,7 +23,9 @@ Partial Class AccountsPayableList
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.BtnAPCancel = New System.Windows.Forms.Button()
         Me.ChkCancelData = New System.Windows.Forms.CheckBox()
         Me.BtnAPView = New System.Windows.Forms.Button()
@@ -32,12 +34,10 @@ Partial Class AccountsPayableList
         Me.RbtnDetails = New System.Windows.Forms.RadioButton()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.TxtAPUntil = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.TxtAPSince = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label9 = New System.Windows.Forms.Label()
         Me.TxtSupplierCode = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.LblConditions = New System.Windows.Forms.Label()
@@ -45,11 +45,6 @@ Partial Class AccountsPayableList
         Me.BtnAPSearch = New System.Windows.Forms.Button()
         Me.BtnBack = New System.Windows.Forms.Button()
         Me.DgvKike = New System.Windows.Forms.DataGridView()
-        Me.LblMode = New System.Windows.Forms.Label()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.TxtCustomerPO = New System.Windows.Forms.TextBox()
-        Me.dtAPDateSince = New System.Windows.Forms.DateTimePicker()
-        Me.dtAPDateUntil = New System.Windows.Forms.DateTimePicker()
         Me.取消 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.買掛番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.買掛区分 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -65,6 +60,11 @@ Partial Class AccountsPayableList
         Me.備考2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.更新日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.更新者 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.LblMode = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.TxtCustomerPO = New System.Windows.Forms.TextBox()
+        Me.dtAPDateSince = New System.Windows.Forms.DateTimePicker()
+        Me.dtAPDateUntil = New System.Windows.Forms.DateTimePicker()
         Me.Panel1.SuspendLayout()
         CType(Me.DgvKike, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -156,14 +156,6 @@ Partial Class AccountsPayableList
         Me.Label5.TabIndex = 164
         Me.Label5.Text = "～"
         '
-        'TxtAPUntil
-        '
-        Me.TxtAPUntil.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtAPUntil.Location = New System.Drawing.Point(959, 68)
-        Me.TxtAPUntil.Name = "TxtAPUntil"
-        Me.TxtAPUntil.Size = New System.Drawing.Size(170, 22)
-        Me.TxtAPUntil.TabIndex = 6
-        '
         'Label7
         '
         Me.Label7.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
@@ -207,15 +199,6 @@ Partial Class AccountsPayableList
         Me.Label4.TabIndex = 157
         Me.Label4.Text = "仕入先コード"
         Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(936, 74)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(17, 12)
-        Me.Label9.TabIndex = 165
-        Me.Label9.Text = "～"
         '
         'TxtSupplierCode
         '
@@ -279,8 +262,24 @@ Partial Class AccountsPayableList
         '
         Me.DgvKike.AllowUserToAddRows = False
         Me.DgvKike.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DgvKike.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DgvKike.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvKike.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.取消, Me.買掛番号, Me.買掛区分, Me.買掛日, Me.客先番号, Me.発注番号, Me.発注番号枝番, Me.仕入先コード, Me.仕入先名, Me.買掛金額計, Me.買掛残高, Me.備考1, Me.備考2, Me.更新日, Me.更新者})
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DgvKike.DefaultCellStyle = DataGridViewCellStyle4
         Me.DgvKike.Location = New System.Drawing.Point(13, 236)
         Me.DgvKike.Name = "DgvKike"
         Me.DgvKike.ReadOnly = True
@@ -289,6 +288,130 @@ Partial Class AccountsPayableList
         Me.DgvKike.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvKike.Size = New System.Drawing.Size(1326, 267)
         Me.DgvKike.TabIndex = 12
+        '
+        '取消
+        '
+        Me.取消.HeaderText = "取消"
+        Me.取消.MaxInputLength = 1
+        Me.取消.Name = "取消"
+        Me.取消.ReadOnly = True
+        Me.取消.Width = 51
+        '
+        '買掛番号
+        '
+        Me.買掛番号.HeaderText = "買掛番号"
+        Me.買掛番号.MaxInputLength = 14
+        Me.買掛番号.Name = "買掛番号"
+        Me.買掛番号.ReadOnly = True
+        Me.買掛番号.Width = 61
+        '
+        '買掛区分
+        '
+        Me.買掛区分.HeaderText = "買掛区分"
+        Me.買掛区分.MaxInputLength = 1
+        Me.買掛区分.Name = "買掛区分"
+        Me.買掛区分.ReadOnly = True
+        Me.買掛区分.Width = 61
+        '
+        '買掛日
+        '
+        Me.買掛日.HeaderText = "買掛日"
+        Me.買掛日.MaxInputLength = 10
+        Me.買掛日.Name = "買掛日"
+        Me.買掛日.ReadOnly = True
+        Me.買掛日.Width = 61
+        '
+        '客先番号
+        '
+        Me.客先番号.HeaderText = "客先番号"
+        Me.客先番号.MaxInputLength = 20
+        Me.客先番号.Name = "客先番号"
+        Me.客先番号.ReadOnly = True
+        Me.客先番号.Width = 61
+        '
+        '発注番号
+        '
+        Me.発注番号.HeaderText = "発注番号"
+        Me.発注番号.MaxInputLength = 14
+        Me.発注番号.Name = "発注番号"
+        Me.発注番号.ReadOnly = True
+        Me.発注番号.Width = 61
+        '
+        '発注番号枝番
+        '
+        Me.発注番号枝番.HeaderText = "発注番号枝番"
+        Me.発注番号枝番.MaxInputLength = 2
+        Me.発注番号枝番.Name = "発注番号枝番"
+        Me.発注番号枝番.ReadOnly = True
+        Me.発注番号枝番.Width = 72
+        '
+        '仕入先コード
+        '
+        Me.仕入先コード.HeaderText = "仕入先コード"
+        Me.仕入先コード.MaxInputLength = 8
+        Me.仕入先コード.Name = "仕入先コード"
+        Me.仕入先コード.ReadOnly = True
+        Me.仕入先コード.Width = 69
+        '
+        '仕入先名
+        '
+        Me.仕入先名.HeaderText = "仕入先名"
+        Me.仕入先名.MaxInputLength = 100
+        Me.仕入先名.Name = "仕入先名"
+        Me.仕入先名.ReadOnly = True
+        Me.仕入先名.Width = 61
+        '
+        '買掛金額計
+        '
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.買掛金額計.DefaultCellStyle = DataGridViewCellStyle2
+        Me.買掛金額計.HeaderText = "買掛金額計"
+        Me.買掛金額計.MaxInputLength = 14
+        Me.買掛金額計.Name = "買掛金額計"
+        Me.買掛金額計.ReadOnly = True
+        Me.買掛金額計.Width = 72
+        '
+        '買掛残高
+        '
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.買掛残高.DefaultCellStyle = DataGridViewCellStyle3
+        Me.買掛残高.HeaderText = "買掛残高"
+        Me.買掛残高.MaxInputLength = 14
+        Me.買掛残高.Name = "買掛残高"
+        Me.買掛残高.ReadOnly = True
+        Me.買掛残高.Width = 61
+        '
+        '備考1
+        '
+        Me.備考1.HeaderText = "備考1"
+        Me.備考1.MaxInputLength = 50
+        Me.備考1.Name = "備考1"
+        Me.備考1.ReadOnly = True
+        Me.備考1.Width = 51
+        '
+        '備考2
+        '
+        Me.備考2.HeaderText = "備考2"
+        Me.備考2.MaxInputLength = 50
+        Me.備考2.Name = "備考2"
+        Me.備考2.ReadOnly = True
+        Me.備考2.Width = 51
+        '
+        '更新日
+        '
+        Me.更新日.HeaderText = "更新日"
+        Me.更新日.MaxInputLength = 15
+        Me.更新日.Name = "更新日"
+        Me.更新日.ReadOnly = True
+        Me.更新日.Width = 61
+        '
+        '更新者
+        '
+        Me.更新者.HeaderText = "更新者"
+        Me.更新者.MaxInputLength = 50
+        Me.更新者.Name = "更新者"
+        Me.更新者.ReadOnly = True
+        Me.更新者.Width = 61
         '
         'LblMode
         '
@@ -348,130 +471,6 @@ Partial Class AccountsPayableList
         Me.dtAPDateUntil.TabIndex = 333
         Me.dtAPDateUntil.Value = New Date(2019, 1, 1, 0, 0, 0, 0)
         '
-        '取消
-        '
-        Me.取消.HeaderText = "取消"
-        Me.取消.MaxInputLength = 1
-        Me.取消.Name = "取消"
-        Me.取消.ReadOnly = True
-        Me.取消.Width = 54
-        '
-        '買掛番号
-        '
-        Me.買掛番号.HeaderText = "買掛番号"
-        Me.買掛番号.MaxInputLength = 14
-        Me.買掛番号.Name = "買掛番号"
-        Me.買掛番号.ReadOnly = True
-        Me.買掛番号.Width = 78
-        '
-        '買掛区分
-        '
-        Me.買掛区分.HeaderText = "買掛区分"
-        Me.買掛区分.MaxInputLength = 1
-        Me.買掛区分.Name = "買掛区分"
-        Me.買掛区分.ReadOnly = True
-        Me.買掛区分.Width = 78
-        '
-        '買掛日
-        '
-        Me.買掛日.HeaderText = "買掛日"
-        Me.買掛日.MaxInputLength = 10
-        Me.買掛日.Name = "買掛日"
-        Me.買掛日.ReadOnly = True
-        Me.買掛日.Width = 66
-        '
-        '客先番号
-        '
-        Me.客先番号.HeaderText = "客先番号"
-        Me.客先番号.MaxInputLength = 20
-        Me.客先番号.Name = "客先番号"
-        Me.客先番号.ReadOnly = True
-        Me.客先番号.Width = 78
-        '
-        '発注番号
-        '
-        Me.発注番号.HeaderText = "発注番号"
-        Me.発注番号.MaxInputLength = 14
-        Me.発注番号.Name = "発注番号"
-        Me.発注番号.ReadOnly = True
-        Me.発注番号.Width = 78
-        '
-        '発注番号枝番
-        '
-        Me.発注番号枝番.HeaderText = "発注番号枝番"
-        Me.発注番号枝番.MaxInputLength = 2
-        Me.発注番号枝番.Name = "発注番号枝番"
-        Me.発注番号枝番.ReadOnly = True
-        Me.発注番号枝番.Width = 72
-        '
-        '仕入先コード
-        '
-        Me.仕入先コード.HeaderText = "仕入先コード"
-        Me.仕入先コード.MaxInputLength = 8
-        Me.仕入先コード.Name = "仕入先コード"
-        Me.仕入先コード.ReadOnly = True
-        Me.仕入先コード.Width = 69
-        '
-        '仕入先名
-        '
-        Me.仕入先名.HeaderText = "仕入先名"
-        Me.仕入先名.MaxInputLength = 100
-        Me.仕入先名.Name = "仕入先名"
-        Me.仕入先名.ReadOnly = True
-        Me.仕入先名.Width = 61
-        '
-        '買掛金額計
-        '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.買掛金額計.DefaultCellStyle = DataGridViewCellStyle1
-        Me.買掛金額計.HeaderText = "買掛金額計"
-        Me.買掛金額計.MaxInputLength = 14
-        Me.買掛金額計.Name = "買掛金額計"
-        Me.買掛金額計.ReadOnly = True
-        Me.買掛金額計.Width = 72
-        '
-        '買掛残高
-        '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.買掛残高.DefaultCellStyle = DataGridViewCellStyle2
-        Me.買掛残高.HeaderText = "買掛残高"
-        Me.買掛残高.MaxInputLength = 14
-        Me.買掛残高.Name = "買掛残高"
-        Me.買掛残高.ReadOnly = True
-        Me.買掛残高.Width = 61
-        '
-        '備考1
-        '
-        Me.備考1.HeaderText = "備考1"
-        Me.備考1.MaxInputLength = 50
-        Me.備考1.Name = "備考1"
-        Me.備考1.ReadOnly = True
-        Me.備考1.Width = 51
-        '
-        '備考2
-        '
-        Me.備考2.HeaderText = "備考2"
-        Me.備考2.MaxInputLength = 50
-        Me.備考2.Name = "備考2"
-        Me.備考2.ReadOnly = True
-        Me.備考2.Width = 51
-        '
-        '更新日
-        '
-        Me.更新日.HeaderText = "更新日"
-        Me.更新日.MaxInputLength = 15
-        Me.更新日.Name = "更新日"
-        Me.更新日.ReadOnly = True
-        Me.更新日.Width = 61
-        '
-        '更新者
-        '
-        Me.更新者.HeaderText = "更新者"
-        Me.更新者.MaxInputLength = 50
-        Me.更新者.Name = "更新者"
-        Me.更新者.ReadOnly = True
-        Me.更新者.Width = 61
-        '
         'AccountsPayableList
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
@@ -487,12 +486,10 @@ Partial Class AccountsPayableList
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.TxtAPUntil)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.TxtAPSince)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.Label4)
-        Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.TxtSupplierCode)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.LblConditions)
@@ -520,12 +517,10 @@ Partial Class AccountsPayableList
     Friend WithEvents RbtnDetails As RadioButton
     Friend WithEvents Label10 As Label
     Friend WithEvents Label5 As Label
-    Friend WithEvents TxtAPUntil As TextBox
     Friend WithEvents Label7 As Label
     Friend WithEvents TxtAPSince As TextBox
     Friend WithEvents Label8 As Label
     Friend WithEvents Label4 As Label
-    Friend WithEvents Label9 As Label
     Friend WithEvents TxtSupplierCode As TextBox
     Friend WithEvents Label1 As Label
     Friend WithEvents LblConditions As Label
