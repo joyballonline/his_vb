@@ -136,7 +136,7 @@ Public Class PurchaseList
                 Dim sinceDate As String = UtilClass.strFormatDate(dtPurchaseDateSince.Text)
                 Dim untilDate As String = UtilClass.strFormatDate(dtPurchaseDateUntil.Text)
                 Dim sinceNum As String = UtilClass.escapeSql(TxtPurchaseSince.Text)
-                Dim untilNum As String = UtilClass.escapeSql(TxtPurchaseUntil.Text)
+                'Dim untilNum As String = UtilClass.escapeSql(TxtPurchaseUntil.Text)
                 Dim salesName As String = UtilClass.escapeSql(TxtSales.Text)
                 Dim customerPO As String = UtilClass.escapeSql(TxtCustomerPO.Text)
 
@@ -178,12 +178,12 @@ Public Class PurchaseList
 
                 If sinceNum <> Nothing Then
                     Sql += " AND "
-                    Sql += " t41.仕入番号 >= '" & sinceNum & "' "
+                    Sql += " t41.仕入番号 ILIKE '%" & sinceNum & "%' "
                 End If
-                If untilNum <> Nothing Then
-                    Sql += " AND "
-                    Sql += " t41.仕入番号 <= '" & untilNum & "' "
-                End If
+                'If untilNum <> Nothing Then
+                '    Sql += " AND "
+                '    Sql += " t41.仕入番号 <= '" & untilNum & "' "
+                'End If
 
                 If salesName <> Nothing Then
                     Sql += " AND "
@@ -616,7 +616,7 @@ Public Class PurchaseList
         Dim sinceDate As String = UtilClass.strFormatDate(dtPurchaseDateSince.Text)
         Dim untilDate As String = UtilClass.strFormatDate(dtPurchaseDateUntil.Text)
         Dim sinceNum As String = UtilClass.escapeSql(TxtPurchaseSince.Text)
-        Dim untilNum As String = UtilClass.escapeSql(TxtPurchaseUntil.Text)
+        'Dim untilNum As String = UtilClass.escapeSql(TxtPurchaseUntil.Text)
         Dim salesName As String = UtilClass.escapeSql(TxtSales.Text)
         Dim customerPO As String = UtilClass.escapeSql(TxtCustomerPO.Text)
 
@@ -651,12 +651,12 @@ Public Class PurchaseList
 
         If sinceNum <> Nothing Then
             Sql += " AND "
-            Sql += " 仕入番号 >= '" & sinceNum & "' "
+            Sql += " 仕入番号 ILIKE '%" & sinceNum & "%' "
         End If
-        If untilNum <> Nothing Then
-            Sql += " AND "
-            Sql += " 仕入番号 <= '" & untilNum & "' "
-        End If
+        'If untilNum <> Nothing Then
+        '    Sql += " AND "
+        '    Sql += " 仕入番号 <= '" & untilNum & "' "
+        'End If
 
         If salesName <> Nothing Then
             Sql += " AND "
