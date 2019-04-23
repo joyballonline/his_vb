@@ -631,7 +631,7 @@ Public Class PurchasingManagement
                 Sql4 += "Public."
                 Sql4 += "t41_siredt("
                 Sql4 += "会社コード, 仕入番号, 発注番号, 発注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 仕入先名, 仕入値, 発注数量"
-                Sql4 += ", 仕入数量, 発注残数, 単位, 仕入単価, 仕入金額, 間接費, リードタイム, 備考, 仕入日, 更新者, 更新日)"
+                Sql4 += ", 仕入数量, 発注残数, 単位, 仕入金額, 間接費, リードタイム, 備考, 仕入日, 更新者, 更新日)"
                 Sql4 += " VALUES('"
                 Sql4 += ds1.Tables(RS).Rows(0)("会社コード").ToString '会社コード
                 Sql4 += "', '"
@@ -667,8 +667,6 @@ Public Class PurchasingManagement
                 Sql4 += RemainingNo.ToString '発注残数
                 Sql4 += "', '"
                 Sql4 += DgvAdd.Rows(index).Cells("単位").Value.ToString '単位
-                Sql4 += "', '"
-                Sql4 += formatNumber(Decimal.Parse(ds2.Tables(RS).Rows(index)("仕入値").ToString)) '仕入単価
                 Sql4 += "', '"
                 Sql4 += formatNumber(Decimal.Parse(ds2.Tables(RS).Rows(index)("仕入金額").ToString)) '仕入金額
                 Sql4 += "', '"

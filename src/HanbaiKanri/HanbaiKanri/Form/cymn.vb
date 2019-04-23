@@ -981,7 +981,7 @@ Public Class Cymn
                         Sql4 += "Public."
                         Sql4 += "t21_hattyu("
                         Sql4 += "会社コード, 発注番号, 発注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式"
-                        Sql4 += ", 単位, 仕入先名, 仕入値, 発注数量, 仕入数量, 発注残数, 仕入単価, 仕入金額"
+                        Sql4 += ", 単位, 仕入先名, 仕入値, 発注数量, 仕入数量, 発注残数, 仕入金額"
                         Sql4 += ", 間接費, リードタイム, リードタイム単位, 入庫数, 未入庫数, 備考, 更新者, 登録日, 更新日)"
                         Sql4 += " VALUES('"
                         Sql4 += CompanyCode '会社コード
@@ -1012,8 +1012,6 @@ Public Class Cymn
                         Sql4 += "', '"
                         Sql4 += DgvItemList.Rows(i).Cells("数量").Value.ToString '発注残数
                         Sql4 += "', '"
-                        Sql4 += formatStringToNumber(DgvItemList.Rows(i).Cells("売単価").Value.ToString) '仕入単価
-                        Sql4 += "', '"
                         Sql4 += formatStringToNumber(DgvItemList.Rows(i).Cells("仕入原価").Value.ToString) '仕入金額
                         Sql4 += "', '"
                         Dim overhead As Double = 0
@@ -1023,7 +1021,6 @@ Public Class Cymn
                         Sql4 += DgvItemList.Rows(i).Cells("リードタイム").Value.ToString 'リードタイム
                         Sql4 += "', '"
                         Sql4 += DgvItemList.Rows(i).Cells("リードタイム単位").Value.ToString 'リードタイム単位
-                        'Sql4 += DgvItemList.Item("リードタイム単位", hattyuIdx).FormattedValue.ToString
                         Sql4 += "', '"
                         Sql4 += "0" '入庫数
                         Sql4 += "', '"
