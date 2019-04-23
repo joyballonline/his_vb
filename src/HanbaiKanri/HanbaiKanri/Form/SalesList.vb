@@ -144,7 +144,6 @@ Public Class SalesList
                 Dim sinceDate As String = UtilClass.strFormatDate(dtDateSince.Text)
                 Dim untilDate As String = UtilClass.strFormatDate(dtDateUntil.Text)
                 Dim sinceNum As String = UtilClass.escapeSql(TxtSalesSince.Text)
-                'Dim untilNum As String = UtilClass.escapeSql(TxtSalesUntil.Text)
                 Dim salesName As String = UtilClass.escapeSql(TxtSales.Text)
                 Dim poNum As String = UtilClass.escapeSql(TxtCustomerPO.Text)
 
@@ -200,10 +199,6 @@ Public Class SalesList
                     Sql += " AND "
                     Sql += " t30.売上番号 ILIKE '%" & sinceNum & "%' "
                 End If
-                'If untilNum <> Nothing Then
-                '    Sql += " AND "
-                '    Sql += " t30.売上番号 <= '" & untilNum & "' "
-                'End If
 
                 If salesName <> Nothing Then
                     Sql += " AND "
@@ -771,7 +766,6 @@ Public Class SalesList
         Dim sinceDate As String = UtilClass.strFormatDate(dtDateSince.Text)
         Dim untilDate As String = UtilClass.strFormatDate(dtDateUntil.Text)
         Dim sinceNum As String = UtilClass.escapeSql(TxtSalesSince.Text)
-        'Dim untilNum As String = UtilClass.escapeSql(TxtSalesUntil.Text)
         Dim salesName As String = UtilClass.escapeSql(TxtSales.Text)
         Dim poNum As String = UtilClass.escapeSql(TxtCustomerPO.Text)
 
@@ -808,10 +802,6 @@ Public Class SalesList
             Sql += " AND "
             Sql += " 売上番号 ILIKE '%" & sinceNum & "%' "
         End If
-        'If untilNum <> Nothing Then
-        '    Sql += " AND "
-        '    Sql += " 売上番号 <= '" & untilNum & "' "
-        'End If
 
         If salesName <> Nothing Then
             Sql += " AND "
