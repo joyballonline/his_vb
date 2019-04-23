@@ -29,12 +29,10 @@ Partial Class BillingList
         Me.RbtnDetails = New System.Windows.Forms.RadioButton()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.TxtBillingNoUntil = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.TxtBillingNoSince = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label9 = New System.Windows.Forms.Label()
         Me.TxtCustomerCode = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.LblConditions = New System.Windows.Forms.Label()
@@ -128,14 +126,6 @@ Partial Class BillingList
         Me.Label5.TabIndex = 143
         Me.Label5.Text = "～"
         '
-        'TxtBillingNoUntil
-        '
-        Me.TxtBillingNoUntil.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtBillingNoUntil.Location = New System.Drawing.Point(959, 68)
-        Me.TxtBillingNoUntil.Name = "TxtBillingNoUntil"
-        Me.TxtBillingNoUntil.Size = New System.Drawing.Size(170, 22)
-        Me.TxtBillingNoUntil.TabIndex = 6
-        '
         'Label7
         '
         Me.Label7.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
@@ -179,15 +169,6 @@ Partial Class BillingList
         Me.Label4.TabIndex = 134
         Me.Label4.Text = "得意先コード"
         Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(936, 74)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(17, 12)
-        Me.Label9.TabIndex = 144
-        Me.Label9.Text = "～"
         '
         'TxtCustomerCode
         '
@@ -335,12 +316,10 @@ Partial Class BillingList
         Me.Controls.Add(Me.BtnBillingView)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.TxtBillingNoUntil)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.TxtBillingNoSince)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.Label4)
-        Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.TxtCustomerCode)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.LblConditions)
@@ -365,12 +344,10 @@ Partial Class BillingList
     Friend WithEvents RbtnDetails As RadioButton
     Friend WithEvents Label10 As Label
     Friend WithEvents Label5 As Label
-    Friend WithEvents TxtBillingNoUntil As TextBox
     Friend WithEvents Label7 As Label
     Friend WithEvents TxtBillingNoSince As TextBox
     Friend WithEvents Label8 As Label
     Friend WithEvents Label4 As Label
-    Friend WithEvents Label9 As Label
     Friend WithEvents TxtCustomerCode As TextBox
     Friend WithEvents Label1 As Label
     Friend WithEvents LblConditions As Label

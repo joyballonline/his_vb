@@ -368,7 +368,6 @@ Public Class BillingList
         Dim sinceDate As String = strFormatDate(dtBillingDateSince.Text)
         Dim untilDate As String = strFormatDate(dtBillingDateUntil.Text)
         Dim sinceNum As String = escapeSql(TxtBillingNoSince.Text)
-        Dim untilNum As String = escapeSql(TxtBillingNoUntil.Text)
         Dim poNum As String = escapeSql(TxtCustomerPO.Text)
 
         If customerName <> Nothing Then
@@ -394,11 +393,7 @@ Public Class BillingList
 
         If sinceNum <> Nothing Then
             Sql += " AND "
-            Sql += " 請求番号 >= '" & sinceNum & "' "
-        End If
-        If untilNum <> Nothing Then
-            Sql += " AND "
-            Sql += " 請求番号 <= '" & untilNum & "' "
+            Sql += " 請求番号 ILIKE '%" & sinceNum & "%' "
         End If
 
         If poNum <> Nothing Then
