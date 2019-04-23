@@ -196,7 +196,7 @@ Public Class OrderList
         Dim sinceDate As String = UtilClass.strFormatDate(dtOrderDateSince.Text)
         Dim untilDate As String = UtilClass.strFormatDate(dtOrderDateUntil.Text)
         Dim sinceNum As String = escapeSql(TxtOrderSince.Text)
-        Dim untilNum As String = escapeSql(TxtOrderUntil.Text)
+        'Dim untilNum As String = escapeSql(TxtOrderUntil.Text)
         Dim salesName As String = escapeSql(TxtSales.Text)
         Dim customerPO As String = escapeSql(TxtCustomerPO.Text)
 
@@ -262,12 +262,12 @@ Public Class OrderList
 
                     If sinceNum <> Nothing Then
                         Sql += " AND "
-                        Sql += " t10.受注番号 >= '" & sinceNum & "' "
+                        Sql += " t10.受注番号 ILIKE '%" & sinceNum & "%' "
                     End If
-                    If untilNum <> Nothing Then
-                        Sql += " AND "
-                        Sql += " t10.受注番号 <= '" & untilNum & "' "
-                    End If
+                    'If untilNum <> Nothing Then
+                    '    Sql += " AND "
+                    '    Sql += " t10.受注番号 <= '" & untilNum & "' "
+                    'End If
 
                     If salesName <> Nothing Then
                         Sql += " AND "
@@ -354,12 +354,12 @@ Public Class OrderList
 
                     If sinceNum <> Nothing Then
                         Sql += " AND "
-                        Sql += " t11.受注番号 >= '" & sinceNum & "' "
+                        Sql += " t11.受注番号 ILIKE '%" & sinceNum & "%' "
                     End If
-                    If untilNum <> Nothing Then
-                        Sql += " AND "
-                        Sql += " t11.受注番号 <= '" & untilNum & "' "
-                    End If
+                    'If untilNum <> Nothing Then
+                    '    Sql += " AND "
+                    '    Sql += " t11.受注番号 <= '" & untilNum & "' "
+                    'End If
 
                     If salesName <> Nothing Then
                         Sql += " AND "
@@ -448,10 +448,10 @@ Public Class OrderList
                     Sql += " AND "
                     Sql += " t11.受注番号 >= '" & sinceNum & "' "
                 End If
-                If untilNum <> Nothing Then
-                    Sql += " AND "
-                    Sql += " t11.受注番号 <= '" & untilNum & "' "
-                End If
+                'If untilNum <> Nothing Then
+                '    Sql += " AND "
+                '    Sql += " t11.受注番号 <= '" & untilNum & "' "
+                'End If
 
                 If salesName <> Nothing Then
                     Sql += " AND "
@@ -1071,7 +1071,7 @@ Public Class OrderList
         Dim sinceDate As String = UtilClass.strFormatDate(dtOrderDateSince.Text)
         Dim untilDate As String = UtilClass.strFormatDate(dtOrderDateUntil.Text)
         Dim sinceNum As String = escapeSql(TxtOrderSince.Text)
-        Dim untilNum As String = escapeSql(TxtOrderUntil.Text)
+        'Dim untilNum As String = escapeSql(TxtOrderUntil.Text)
         Dim salesName As String = escapeSql(TxtSales.Text)
         Dim customerPO As String = escapeSql(TxtCustomerPO.Text)
 
@@ -1106,12 +1106,12 @@ Public Class OrderList
 
         If sinceNum <> Nothing Then
             Sql += " AND "
-            Sql += " 受注番号 >= '" & sinceNum & "' "
+            Sql += " 受注番号 ILIKE '%" & sinceNum & "%' "
         End If
-        If untilNum <> Nothing Then
-            Sql += " AND "
-            Sql += " 受注番号 <= '" & untilNum & "' "
-        End If
+        'If untilNum <> Nothing Then
+        '    Sql += " AND "
+        '    Sql += " 受注番号 <= '" & untilNum & "' "
+        'End If
 
         If salesName <> Nothing Then
             Sql += " AND "
