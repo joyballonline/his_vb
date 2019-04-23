@@ -462,14 +462,13 @@ Public Class Cymn
             End If
         End If
 
-        '受発注登録時に受注金額が0の場合アラートで警告
         If CmWarehouse.SelectedValue = "" Then
             '倉庫データがないことをアラートする
             Dim result = _msgHd.dspMSG("chkWarehouseError", frmC01F10_Login.loginValue.Language)
             Exit Sub
         End If
 
-        '仕入先が stockじゃなかったら
+        '得意先が stockじゃなかったら
         If TxtCustomerCode.Text <> "stock" Then
 
 #Region "得意先コード <> 'stock' AND 仕入区分 = 2"
@@ -686,10 +685,12 @@ Public Class Cymn
 
                         '受発注の段階で出庫登録を行うのは「仕入先 <>'stock' && 仕入区分 = 2 」のみ
                         If DgvItemList.Rows(i).Cells("仕入区分").Value = CommonConst.Sire_KBN_Zaiko Then
+
                             Sql = "INSERT INTO "
                             Sql += "Public."
                             Sql += "t45_shukodt("
-                            Sql += "会社コード, 出庫番号, 受注番号, 受注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 仕入先名, 売単価, 出庫数量, 単位, 備考, 更新者, 更新日, 出庫区分, 倉庫コード)"
+                            Sql += "会社コード, 出庫番号, 受注番号, 受注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式"
+                            Sql += ", 仕入先名, 売単価, 出庫数量, 単位, 備考, 更新者, 更新日, 出庫区分, 倉庫コード)"
                             Sql += " VALUES('" & frmC01F10_Login.loginValue.BumonCD & "'"   '会社コード
                             Sql += ", '" & LS & "'"     '出庫番号
                             Sql += ", '" & TxtOrderNo.Text & "'"    '受注番号
@@ -706,8 +707,51 @@ Public Class Cymn
                             Sql += ", '" & DgvItemList.Rows(i).Cells("備考").Value.ToString & "'"         '備考
                             Sql += ", '" & frmC01F10_Login.loginValue.TantoNM & "'"                           '更新者
                             Sql += ", '" & UtilClass.formatDatetime(dtNow) & "'"                 '更新日
-                            Sql += ", '1'"
-                            Sql += ", '" & CmWarehouse.SelectedValue & "')"
+                            Sql += ", '" & CommonConst.SHUKO_KBN_TMP & "'" '仮出庫：2
+                            Sql += ", '" & CmWarehouse.SelectedValue & "')" '倉庫コード
+
+                            _db.executeDB(Sql)
+
+                            't70_inout にデータ登録
+                            Sql = "INSERT INTO "
+                            Sql += "Public."
+                            Sql += "t70_inout("
+                            Sql += "会社コード, 入出庫区分, 倉庫コード, 伝票番号, 行番号"
+                            Sql += ", 引当区分, メーカー, 品名, 型式, 数量, 単位, 備考, 入出庫日"
+                            Sql += ", 取消区分, 更新者, 更新日)"
+                            Sql += " VALUES('"
+                            Sql += frmC01F10_Login.loginValue.BumonCD '会社コード
+                            Sql += "', '"
+                            Sql += "2" '入出庫区分 1.入庫, 2.出庫
+                            Sql += "', '"
+                            Sql += CmWarehouse.SelectedValue '倉庫コード
+                            Sql += "', '"
+                            Sql += LS '伝票番号
+                            Sql += "', '"
+                            Sql += DgvItemList.Rows(i).Cells("No").Value.ToString '行番号
+                            Sql += "', '"
+                            Sql += CommonConst.AC_KBN_ASSIGN.ToString '引当区分
+                            Sql += "', '"
+                            Sql += DgvItemList.Rows(i).Cells("メーカー").Value.ToString 'メーカー
+                            Sql += "', '"
+                            Sql += DgvItemList.Rows(i).Cells("品名").Value.ToString '品名
+                            Sql += "', '"
+                            Sql += DgvItemList.Rows(i).Cells("型式").Value.ToString '型式
+                            Sql += "', '"
+                            Sql += DgvItemList.Rows(i).Cells("数量").Value.ToString '数量
+                            Sql += "', '"
+                            Sql += DgvItemList.Rows(i).Cells("単位").Value.ToString '単位
+                            Sql += "', '"
+                            Sql += DgvItemList.Rows(i).Cells("備考").Value.ToString '備考
+                            Sql += "', '"
+                            Sql += UtilClass.formatDatetime(dtNow) '入出庫日
+                            Sql += "', '"
+                            Sql += CommonConst.CANCEL_KBN_ENABLED.ToString '取消区分
+                            Sql += "', '"
+                            Sql += frmC01F10_Login.loginValue.TantoNM      '更新者
+                            Sql += "', '"
+                            Sql += UtilClass.formatDatetime(dtNow) '更新日
+                            Sql += "')"
 
                             _db.executeDB(Sql)
                         End If
@@ -732,6 +776,7 @@ Public Class Cymn
                     Sql += " AND 採番キー ='70' "
 
                     _db.executeDB(Sql)
+
 
                 End If
 

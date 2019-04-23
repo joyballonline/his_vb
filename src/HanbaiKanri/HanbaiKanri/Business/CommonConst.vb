@@ -386,7 +386,11 @@ Public Class CommonConst
     Public Const AP_NAME As String = "SPIN"   'SPIN
 
     '国内区分
-    Public Const DD_KBN_DOMESTIC As Integer = 0                  '通常
-    Public Const DD_KBN_OVERSEAS As Integer = 1                 '引き当て
+    Public Const DD_KBN_DOMESTIC As Integer = 0                 '国内
+    Public Const DD_KBN_OVERSEAS As Integer = 1                 '国外
+
+    '出庫区分
+    Public Const SHUKO_KBN_NORMAL As String = "1"              '通常出庫
+    Public Const SHUKO_KBN_TMP As String = "2"                 '仮出庫
 
 End Class

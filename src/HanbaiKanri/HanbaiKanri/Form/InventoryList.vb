@@ -162,7 +162,6 @@ Public Class InventoryList
                 '入庫データの取得
                 '
                 Sql = " select "
-                'Sql += " t43.メーカー, t43.品名, t43.型式, sum(t43.入庫数量) as 入庫数量, t43.単位 "
                 Sql += " t43.メーカー, t43.品名, t43.型式, sum(t43.入庫数量) as 入庫数量 "
                 Sql += " from "
                 Sql += " t43_nyukodt t43 "
@@ -177,7 +176,6 @@ Public Class InventoryList
                 Sql += " AND "
                 Sql += " t42.取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'"
                 Sql += " GROUP BY "
-                'Sql += " t43.メーカー, t43.品名, t43.型式, t43.単位 "
                 Sql += " t43.メーカー, t43.品名, t43.型式 "
                 Sql += " order by "
                 Sql += " t43.メーカー, t43.品名, t43.型式 "
@@ -187,7 +185,6 @@ Public Class InventoryList
                 '出庫データの取得
                 '
                 Sql = " select "
-                'Sql += " t45.メーカー, t45.品名, t45.型式, sum(t45.出庫数量) as 出庫数量, t45.単位 "
                 Sql += " t45.メーカー, t45.品名, t45.型式, sum(t45.出庫数量) as 出庫数量 "
                 Sql += " from "
                 Sql += " t45_shukodt t45 "
@@ -202,7 +199,6 @@ Public Class InventoryList
                 Sql += " AND "
                 Sql += " t44.取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'"
                 Sql += " GROUP BY "
-                'Sql += " t45.メーカー, t45.品名, t45.型式, t45.単位 "
                 Sql += " t45.メーカー, t45.品名, t45.型式 "
                 Sql += " order by "
                 Sql += " t45.メーカー, t45.品名, t45.型式 "

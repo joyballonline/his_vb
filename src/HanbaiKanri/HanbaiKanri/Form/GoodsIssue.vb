@@ -206,6 +206,8 @@ Public Class GoodsIssue
             Sql += "t45.受注番号枝番 ILIKE '" & Suffix & "'"
             Sql += " AND "
             Sql += "t44.取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'"
+            Sql += " AND "
+            Sql += " t45.出庫区分 <> '" & CommonConst.SHUKO_KBN_TMP & "' " '仮出庫のものは省く
             Sql += " ORDER BY t45.行番号"
 
             Dim dsShukodt As DataSet = _db.selectDB(Sql, RS, reccnt)
@@ -678,20 +680,65 @@ Public Class GoodsIssue
                 '仕入区分が2（在庫引当）の場合、作成済みの仮出庫データを「取消区分=0, 取消日=Datetime.Date」でUPDATEする
                 If DgvAdd.Rows(i).Cells("仕入区分値").Value = CommonConst.Sire_KBN_Zaiko Then
 
-                    Sql = "UPDATE "
-                    Sql += " t44_shukohd "
-                    Sql += " SET "
-                    Sql += " 取消区分 = " & CommonConst.CANCEL_KBN_DISABLED.ToString
-                    Sql += " ,取消日 = '" & UtilClass.formatDatetime(dtToday) & "'"
-
+                    Sql = " SELECT t44.出庫番号 "
+                    Sql += " FROM "
+                    Sql += " t44_shukohd t44 "
+                    Sql += " INNER JOIN "
+                    Sql += " t45_shukodt t45 "
+                    Sql += " ON t44.会社コード = t45.会社コード "
+                    Sql += " AND t44.出庫番号 = t45.出庫番号 "
                     Sql += " WHERE "
-                    Sql += " 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-                    Sql += " AND "
-                    Sql += " 受注番号 = '" & No & "'"
-                    Sql += " AND "
-                    Sql += " 受注番号枝番 = '" & Suffix & "'"
+                    Sql += " t44.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                    Sql += " AND t44.受注番号 = '" & No & "'"
+                    Sql += " AND t44.受注番号枝番 = '" & Suffix & "'"
+                    Sql += " AND t45.出庫区分 = '" & CommonConst.SHUKO_KBN_TMP & "'" '仮出庫のものを取得
+                    Sql += " AND t44.取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'" '見取消のもの
 
-                    _db.executeDB(Sql)
+                    Dim shukkoTmpData As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+                    '該当データがあったら
+                    If shukkoTmpData.Tables(RS).Rows.Count > 0 Then
+
+                        Sql = "UPDATE "
+                        Sql += " t44_shukohd "
+                        Sql += " SET "
+                        Sql += " 取消区分 = '" & CommonConst.CANCEL_KBN_DISABLED.ToString & "'"
+                        Sql += " ,取消日 = '" & UtilClass.formatDatetime(dtToday) & "'"
+                        Sql += " ,更新日 = '" & UtilClass.formatDatetime(dtToday) & "'"
+                        Sql += " ,更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+                        Sql += " WHERE "
+                        Sql += " 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                        Sql += " AND 出庫番号 = '" & shukkoTmpData.Tables(RS).Rows(0)("出庫番号") & "'"
+
+                        _db.executeDB(Sql)
+
+                        Sql = "UPDATE "
+                        Sql += "Public."
+                        Sql += "t70_inout "
+                        Sql += "SET "
+
+                        Sql += "取消日"
+                        Sql += " = '"
+                        Sql += UtilClass.formatDatetime(dtToday)
+                        Sql += "', "
+                        Sql += "取消区分 = '" & CommonConst.CANCEL_KBN_DISABLED.ToString & "'"
+                        Sql += ", 更新日 = '" & UtilClass.formatDatetime(dtToday) & "'"
+                        Sql += " ,更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+
+                        Sql += "WHERE"
+                        Sql += " 会社コード"
+                        Sql += "='"
+                        Sql += frmC01F10_Login.loginValue.BumonCD
+                        Sql += "'"
+                        Sql += " AND"
+                        Sql += " 伝票番号"
+                        Sql += "='"
+                        Sql += shukkoTmpData.Tables(RS).Rows(0)("出庫番号")
+                        Sql += "' "
+
+                        _db.executeDB(Sql)
+
+                    End If
 
                 End If
             Next
@@ -772,7 +819,7 @@ Public Class GoodsIssue
                     Sql += "t45_shukodt("
                     Sql += "会社コード, 出庫番号, 受注番号, 受注番号枝番, 行番号, 仕入区分"
                     Sql += ", メーカー, 品名, 型式, 仕入先名, 売単価, 出庫数量, 単位, 備考"
-                    Sql += ", 更新者, 更新日, 倉庫コード)"
+                    Sql += ", 更新者, 更新日, 出庫区分, 倉庫コード)"
                     Sql += " VALUES('"
                     Sql += dsCymnhd.Tables(RS).Rows(0)("会社コード").ToString
                     Sql += "', '"
@@ -805,6 +852,8 @@ Public Class GoodsIssue
                     Sql += Input
                     Sql += "', '"
                     Sql += UtilClass.formatDatetime(dtToday)
+                    Sql += "', '"
+                    Sql += CommonConst.SHUKO_KBN_NORMAL '通常出庫時は 1 
                     Sql += "', '"
                     Sql += DgvAdd.Rows(i).Cells("倉庫").Value.ToString
                     Sql += "')"
