@@ -42,9 +42,7 @@ Partial Class QuoteList
         Me.LblQuoteNo = New System.Windows.Forms.Label()
         Me.TxtQuoteNoSince = New System.Windows.Forms.TextBox()
         Me.LblQuoteDate = New System.Windows.Forms.Label()
-        Me.TxtQuoteNoUntil = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label9 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.BtnQuoteView = New System.Windows.Forms.Button()
         Me.BtnUnitPrice = New System.Windows.Forms.Button()
@@ -263,7 +261,7 @@ Partial Class QuoteList
         Me.TxtQuoteNoSince.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtQuoteNoSince.Location = New System.Drawing.Point(759, 62)
         Me.TxtQuoteNoSince.Name = "TxtQuoteNoSince"
-        Me.TxtQuoteNoSince.Size = New System.Drawing.Size(170, 22)
+        Me.TxtQuoteNoSince.Size = New System.Drawing.Size(369, 22)
         Me.TxtQuoteNoSince.TabIndex = 7
         '
         'LblQuoteDate
@@ -278,14 +276,6 @@ Partial Class QuoteList
         Me.LblQuoteDate.Text = "見積日"
         Me.LblQuoteDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'TxtQuoteNoUntil
-        '
-        Me.TxtQuoteNoUntil.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtQuoteNoUntil.Location = New System.Drawing.Point(958, 63)
-        Me.TxtQuoteNoUntil.Name = "TxtQuoteNoUntil"
-        Me.TxtQuoteNoUntil.Size = New System.Drawing.Size(170, 22)
-        Me.TxtQuoteNoUntil.TabIndex = 8
-        '
         'Label5
         '
         Me.Label5.AutoSize = True
@@ -294,15 +284,6 @@ Partial Class QuoteList
         Me.Label5.Size = New System.Drawing.Size(17, 12)
         Me.Label5.TabIndex = 23
         Me.Label5.Text = "～"
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(935, 69)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(17, 12)
-        Me.Label9.TabIndex = 24
-        Me.Label9.Text = "～"
         '
         'Label10
         '
@@ -568,9 +549,7 @@ Partial Class QuoteList
         Me.Controls.Add(Me.BtnUnitPrice)
         Me.Controls.Add(Me.BtnQuoteView)
         Me.Controls.Add(Me.Label10)
-        Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.TxtQuoteNoUntil)
         Me.Controls.Add(Me.LblSales)
         Me.Controls.Add(Me.TxtSales)
         Me.Controls.Add(Me.LblQuoteNo)
@@ -622,9 +601,7 @@ Partial Class QuoteList
     Friend WithEvents LblQuoteNo As Label
     Friend WithEvents TxtQuoteNoSince As TextBox
     Friend WithEvents LblQuoteDate As Label
-    Friend WithEvents TxtQuoteNoUntil As TextBox
     Friend WithEvents Label5 As Label
-    Friend WithEvents Label9 As Label
     Friend WithEvents Label10 As Label
     Friend WithEvents BtnQuoteView As Button
     Friend WithEvents BtnUnitPrice As Button

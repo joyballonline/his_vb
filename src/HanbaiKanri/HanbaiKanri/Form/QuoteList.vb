@@ -294,19 +294,19 @@ Public Class QuoteList
                 If TxtQuoteNoSince.Text <> "" Then
                     Sql += " and "
                     Sql += "t01.見積番号"
-                    Sql += " >=  "
-                    Sql += "'"
+                    Sql += " ILIKE "
+                    Sql += "'%"
                     Sql += RevoveChars(TxtQuoteNoSince.Text)
-                    Sql += "'"
+                    Sql += "%'"
                 End If
-                If TxtQuoteNoUntil.Text <> "" Then
-                    Sql += " and "
-                    Sql += "t01.見積番号"
-                    Sql += " <=  "
-                    Sql += "'"
-                    Sql += RevoveChars(TxtQuoteNoUntil.Text)
-                    Sql += "'"
-                End If
+                'If TxtQuoteNoUntil.Text <> "" Then
+                '    Sql += " and "
+                '    Sql += "t01.見積番号"
+                '    Sql += " <=  "
+                '    Sql += "'"
+                '    Sql += RevoveChars(TxtQuoteNoUntil.Text)
+                '    Sql += "'"
+                'End If
                 If TxtSales.Text <> "" Then
                     Sql += " and "
                     Sql += "t01.営業担当者"
@@ -380,13 +380,6 @@ Public Class QuoteList
                 Sql += ",t01.見積番号枝番"
 
                 Sql += " ORDER BY t01.見積番号 DESC,t01.見積番号枝番 DESC"
-
-
-                'Sql = searchConditions()
-                'Sql += viewFormat()
-                'Sql += " ORDER BY 見積番号 DESC,見積番号枝番 DESC"
-
-                'ds = getDsData("t01_mithd", Sql)
 
                 ds = _db.selectDB(Sql, RS, reccnt)
 
@@ -495,19 +488,19 @@ Public Class QuoteList
                 If TxtQuoteNoSince.Text <> "" Then
                     Sql += " and "
                     Sql += "t01.見積番号"
-                    Sql += " >=  "
-                    Sql += "'"
+                    Sql += " ILIKE "
+                    Sql += "'%"
                     Sql += RevoveChars(TxtQuoteNoSince.Text)
-                    Sql += "'"
+                    Sql += "%'"
                 End If
-                If TxtQuoteNoUntil.Text <> "" Then
-                    Sql += " and "
-                    Sql += "t01.見積番号"
-                    Sql += " <=  "
-                    Sql += "'"
-                    Sql += RevoveChars(TxtQuoteNoUntil.Text)
-                    Sql += "'"
-                End If
+                'If TxtQuoteNoUntil.Text <> "" Then
+                '    Sql += " and "
+                '    Sql += "t01.見積番号"
+                '    Sql += " <=  "
+                '    Sql += "'"
+                '    Sql += RevoveChars(TxtQuoteNoUntil.Text)
+                '    Sql += "'"
+                'End If
                 If TxtSales.Text <> "" Then
                     Sql += " and "
                     Sql += "t01.営業担当者"
@@ -1034,109 +1027,6 @@ Public Class QuoteList
         QuoteListLoad()
     End Sub
 
-    '抽出条件取得
-    Private Function searchConditions() As String
-        Dim Sql As String = ""
-
-        '抽出条件
-        If TxtCustomerName.Text <> "" Then
-            Sql += " and "
-            Sql += "得意先名"
-            Sql += " ILIKE "
-            Sql += "'%"
-            Sql += RevoveChars(TxtCustomerName.Text)
-            Sql += "%'"
-        End If
-        If TxtAddress.Text <> "" Then
-            Sql += " and "
-            Sql += "得意先住所"
-            Sql += " ILIKE "
-            Sql += "'%"
-            Sql += RevoveChars(TxtAddress.Text)
-            Sql += "%'"
-        End If
-        If TxtTel.Text <> "" Then
-            Sql += " and "
-            Sql += "得意先電話番号"
-            Sql += " ILIKE "
-            Sql += "'%"
-            Sql += RevoveChars(TxtTel.Text)
-            Sql += "%'"
-        End If
-        If TxtCustomerCode.Text <> "" Then
-            Sql += " and "
-            Sql += "得意先コード"
-            Sql += " ILIKE "
-            Sql += "'%"
-            Sql += RevoveChars(TxtCustomerCode.Text)
-            Sql += "%'"
-        End If
-        If TxtQuoteDateSince.Text <> "" Then
-            Sql += " and "
-            Sql += "見積日"
-            Sql += " >=  "
-            Sql += "'"
-            Sql += UtilClass.strFormatDate(RevoveChars(TxtQuoteDateSince.Text))
-            Sql += "'"
-        End If
-        If TxtQuoteDateUntil.Text <> "" Then
-            Sql += " and "
-            Sql += "見積日"
-            Sql += " <=  "
-            Sql += "'"
-            Sql += UtilClass.strFormatDate(RevoveChars(TxtQuoteDateUntil.Text))
-            Sql += "'"
-        End If
-        If TxtQuoteNoSince.Text <> "" Then
-            Sql += " and "
-            Sql += "見積番号"
-            Sql += " >=  "
-            Sql += "'"
-            Sql += RevoveChars(TxtQuoteNoSince.Text)
-            Sql += "'"
-        End If
-        If TxtQuoteNoUntil.Text <> "" Then
-            Sql += " and "
-            Sql += "見積番号"
-            Sql += " <=  "
-            Sql += "'"
-            Sql += RevoveChars(TxtQuoteNoUntil.Text)
-            Sql += "'"
-        End If
-        If TxtSales.Text <> "" Then
-            Sql += " and "
-            Sql += "営業担当者"
-            Sql += " ILIKE "
-            Sql += "'%"
-            Sql += RevoveChars(TxtSales.Text)
-            Sql += "%'"
-        End If
-        If Not ChkExpired.Checked Then
-            Sql += " and "
-            Sql += "見積有効期限 >= '"
-            Sql += UtilClass.strFormatDate(strToday)
-            Sql += "'"
-        End If
-        If Not ChkCancel.Checked Then
-            Sql += " and "
-            Sql += " 取消区分 = '0'"
-        End If
-
-        '受注済みの見積は　編集、取消、仕入単価入力　できない
-        '受発注登録の時も受注済みは表示しない
-        If (_status = CommonConst.STATUS_CANCEL) Or (_status = CommonConst.STATUS_PRICE) Or (_status = CommonConst.STATUS_EDIT) Or
-                        (_status = CommonConst.STATUS_ORDER_NEW) Or (_status = CommonConst.STATUS_ORDER_PURCHASE) Then
-            Sql += " and 受注日 is null"
-        End If
-        '受発注登録の時は有効期限切れは表示しない
-        If (_status = CommonConst.STATUS_ORDER_NEW) Or (_status = CommonConst.STATUS_ORDER_PURCHASE) Then
-            Sql += " and 見積有効期限 >= '" & UtilClass.strFormatDate(DateTime.Now.ToShortDateString) & "'"
-        End If
-
-        Return Sql
-
-    End Function
-
     '表示形式条件
     Private Function viewFormat() As String
         Dim Sql As String = ""
@@ -1227,6 +1117,10 @@ Public Class QuoteList
     End Sub
 
     Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TxtManufacturer.TextChanged
+
+    End Sub
+
+    Private Sub TxtQuoteNoSince_TextChanged(sender As Object, e As EventArgs) Handles TxtQuoteNoSince.TextChanged
 
     End Sub
 End Class
