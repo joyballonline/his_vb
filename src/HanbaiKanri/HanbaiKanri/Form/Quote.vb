@@ -659,7 +659,7 @@ Public Class Quote
 
                         If ds.Tables(RS).Rows.Count > 0 Then
 
-                            DgvItemList("仕入単価", e.RowIndex).Value = ds.Tables(RS).Rows(0)("仕入単価").ToString()
+                            DgvItemList("仕入単価", e.RowIndex).Value = ds.Tables(RS).Rows(0)("仕入値").ToString()
 
                         End If
 
