@@ -124,8 +124,75 @@ Public Class frmC01F10_Login
             Me.SetStyle(ControlStyles.UserPaint, True)              'コントロールは、オペレーティング システムによってではなく、独自に描画されるよう設定
             Me.SetStyle(ControlStyles.AllPaintingInWmPaint, True)   'コントロールはウィンドウ メッセージ WM_ERASEBKGND を無視するように設定
 
-            '初期化
-            Call initForm()
+
+            '最初に使用可能ユーザーかどうかチェック
+            Dim reccnt As Integer = 0
+
+            Dim Sql = ""
+
+            Sql = "SELECT "
+            Sql += " マシン名, 初回アクセス日時 "
+            Sql += " FROM l11_aclog "
+            Sql += " WHERE "
+            Sql += " マシン名 = '" & System.Environment.MachineName & "'"
+
+            Dim dsACLog As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+            '該当マシンがあったら
+            If dsACLog.Tables(RS).Rows.Count > 0 Then
+
+                '初期化
+                Call initForm()
+
+            Else
+                '使用数が上限に達しているかどうか
+
+                Sql = "SELECT"
+                Sql += " 数値 "
+                Sql += " FROM s01_config "
+                Sql += " WHERE "
+                Sql += " 項目 = '" & "使用上限数" & "'" '使用上限数
+
+                Dim dsConfig As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+                Sql = "SELECT "
+                Sql += " マシン名, 初回アクセス日時 "
+                Sql += " FROM l11_aclog "
+
+                dsACLog = _db.selectDB(Sql, RS, reccnt)
+
+                If dsConfig.Tables(RS).Rows.Count > 0 Then
+                    '使用上限数未満だったらl11_aclogに新規追加
+                    If dsACLog.Tables(RS).Rows.Count < dsConfig.Tables(RS).Rows(0)("数値") Then
+
+                        Sql = "INSERT INTO l11_aclog ( "
+                        Sql += " マシン名, 初回アクセス日時 "
+                        Sql += " ) VALUES ( "
+                        Sql += " '" & System.Environment.MachineName & "'"
+                        Sql += " , '" & UtilClass.formatDatetime(DateTime.Now)
+                        Sql += "' ) "
+
+                        _db.executeDB(Sql) 'l11_aclogテーブル更新
+
+                        '初期化
+                        Call initForm()
+
+                    Else
+
+                        '上限を超えていたらアラートを表示後に終了
+                        _msgHd.dspMSG("chkAppUseError", CommonConst.LANG_KBN_JPN)
+                        Application.Exit()
+
+                    End If
+                Else
+
+                    '設定がなかったら終了する
+                    _msgHd.dspMSG("chkAppUseSettingError", CommonConst.LANG_KBN_JPN)
+                    Application.Exit()
+
+                End If
+
+            End If
 
         Catch ue As UsrDefException
             ue.dspMsg()                                                                                                     '握りつぶす
@@ -400,6 +467,8 @@ Public Class frmC01F10_Login
 
         Dim comName As String = "ZENBI"
         Dim userPass As String = "zenbi01"
+        'Dim comName As String = "demo"
+        'Dim userPass As String = "demo"
 
         ' ホスト名からIPアドレスを取得する
         Dim adrList As IPAddress() = Dns.GetHostAddresses(hostname)

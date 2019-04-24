@@ -1252,4 +1252,27 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
     <MEMO></MEMO>
   </MSG_DATA>
+  <MSG_DATA>
+    <ID>chkAppUseError</ID>
+    <MSG1>使用可能アクセス数を超えています。</MSG1>
+    <MSG1_EN>The number of available accesses has been exceeded.</MSG1_EN>
+    <MSG2>アプリケーションを終了します。</MSG2>
+    <MSG2_EN>Exit the application.</MSG2_EN>
+    <BUTTON_TYPE>OK</BUTTON_TYPE>
+    <ICONT_TYPE>Error</ICONT_TYPE>
+    <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
+    <MEMO></MEMO>
+  </MSG_DATA>
+  <MSG_DATA>
+    <ID>chkAppUseSettingError</ID>
+    <MSG1>設定が不足しています。</MSG1>
+    <MSG1_EN>Insufficient settings.</MSG1_EN>
+    <MSG2>システム管理者にご連絡ください。</MSG2>
+    <MSG2_EN>Please contact your system administrator.</MSG2_EN>
+    <BUTTON_TYPE>OK</BUTTON_TYPE>
+    <ICONT_TYPE>Error</ICONT_TYPE>
+    <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
+    <MEMO></MEMO>
+  </MSG_DATA>
+
 </MSG_DEF>
