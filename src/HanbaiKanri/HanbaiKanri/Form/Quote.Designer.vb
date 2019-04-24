@@ -213,6 +213,7 @@ Partial Class Quote
         'No
         '
         Me.No.HeaderText = "No"
+        Me.No.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         Me.No.Name = "No"
         Me.No.Width = 43
         '
@@ -245,6 +246,7 @@ Partial Class Quote
         DataGridViewCellStyle4.Format = "N0"
         DataGridViewCellStyle4.NullValue = Nothing
         Me.数量.DefaultCellStyle = DataGridViewCellStyle4
+        Me.数量.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         Me.数量.HeaderText = "数量"
         Me.数量.Name = "数量"
         Me.数量.MaxInputLength = 8
@@ -275,6 +277,7 @@ Partial Class Quote
         DataGridViewCellStyle6.Format = "N0"
         DataGridViewCellStyle6.NullValue = Nothing
         Me.仕入単価.DefaultCellStyle = DataGridViewCellStyle6
+        Me.仕入単価.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         Me.仕入単価.HeaderText = "仕入単価"
         Me.仕入単価.Name = "仕入単価"
         Me.仕入単価.MaxInputLength = 15
@@ -285,6 +288,7 @@ Partial Class Quote
         DataGridViewCellStyle7.Format = "N0"
         DataGridViewCellStyle7.NullValue = Nothing
         Me.仕入原価.DefaultCellStyle = DataGridViewCellStyle7
+        Me.仕入原価.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         Me.仕入原価.HeaderText = "仕入原価"
         Me.仕入原価.Name = "仕入原価"
         Me.仕入原価.Width = 150
@@ -292,6 +296,7 @@ Partial Class Quote
         '関税率
         '
         Me.関税率.HeaderText = "関税率"
+        Me.関税率.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         Me.関税率.Name = "関税率"
         Me.関税率.Width = 150
         '
@@ -300,6 +305,7 @@ Partial Class Quote
         DataGridViewCellStyle8.Format = "N0"
         DataGridViewCellStyle8.NullValue = Nothing
         Me.関税額.DefaultCellStyle = DataGridViewCellStyle8
+        Me.関税額.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         Me.関税額.HeaderText = "関税額"
         Me.関税額.Name = "関税額"
         Me.関税額.Width = 150
@@ -308,6 +314,7 @@ Partial Class Quote
         '
         DataGridViewCellStyle9.NullValue = Nothing
         Me.前払法人税率.DefaultCellStyle = DataGridViewCellStyle9
+        Me.前払法人税率.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         Me.前払法人税率.HeaderText = "前払法人税率"
         Me.前払法人税率.Name = "前払法人税率"
         Me.前払法人税率.Width = 150
@@ -317,6 +324,7 @@ Partial Class Quote
         DataGridViewCellStyle10.Format = "N0"
         DataGridViewCellStyle10.NullValue = Nothing
         Me.前払法人税額.DefaultCellStyle = DataGridViewCellStyle10
+        Me.前払法人税額.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         Me.前払法人税額.HeaderText = "前払法人税額"
         Me.前払法人税額.Name = "前払法人税額"
         Me.前払法人税額.Width = 150
@@ -324,6 +332,7 @@ Partial Class Quote
         '輸送費率
         '
         Me.輸送費率.HeaderText = "輸送費率"
+        Me.輸送費率.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         Me.輸送費率.Name = "輸送費率"
         Me.輸送費率.Width = 150
         '
@@ -332,6 +341,7 @@ Partial Class Quote
         DataGridViewCellStyle11.Format = "N0"
         DataGridViewCellStyle11.NullValue = Nothing
         Me.輸送費額.DefaultCellStyle = DataGridViewCellStyle11
+        Me.輸送費額.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         Me.輸送費額.HeaderText = "輸送費額"
         Me.輸送費額.Name = "輸送費額"
         Me.輸送費額.Width = 150
@@ -342,6 +352,7 @@ Partial Class Quote
         DataGridViewCellStyle12.Format = "N0"
         DataGridViewCellStyle12.NullValue = Nothing
         Me.仕入金額.DefaultCellStyle = DataGridViewCellStyle12
+        Me.仕入金額.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         Me.仕入金額.HeaderText = "仕入金額"
         Me.仕入金額.Name = "仕入金額"
         Me.仕入金額.ReadOnly = True
@@ -352,6 +363,7 @@ Partial Class Quote
         DataGridViewCellStyle13.Format = "N0"
         DataGridViewCellStyle13.NullValue = Nothing
         Me.売単価.DefaultCellStyle = DataGridViewCellStyle13
+        Me.売単価.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         Me.売単価.HeaderText = "売単価"
         Me.売単価.Name = "売単価"
         Me.売単価.MaxInputLength = 15
@@ -363,6 +375,7 @@ Partial Class Quote
         DataGridViewCellStyle14.Format = "N0"
         DataGridViewCellStyle14.NullValue = Nothing
         Me.売上金額.DefaultCellStyle = DataGridViewCellStyle14
+        Me.売上金額.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         Me.売上金額.HeaderText = "売上金額"
         Me.売上金額.Name = "売上金額"
         Me.売上金額.ReadOnly = True
@@ -373,6 +386,7 @@ Partial Class Quote
         DataGridViewCellStyle15.BackColor = System.Drawing.Color.Gray
         Me.見積単価.DefaultCellStyle = DataGridViewCellStyle15
         Me.見積単価.HeaderText = "見積単価"
+        Me.見積単価.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         Me.見積単価.Name = "見積単価"
         Me.見積単価.ReadOnly = True
         Me.見積単価.Width = 150
@@ -382,6 +396,7 @@ Partial Class Quote
         DataGridViewCellStyle16.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.見積金額.DefaultCellStyle = DataGridViewCellStyle16
         Me.見積金額.HeaderText = "見積金額"
+        Me.見積金額.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         Me.見積金額.Name = "見積金額"
         Me.見積金額.ReadOnly = True
         Me.見積金額.Width = 150
@@ -392,6 +407,7 @@ Partial Class Quote
         DataGridViewCellStyle17.Format = "N0"
         DataGridViewCellStyle17.NullValue = Nothing
         Me.粗利額.DefaultCellStyle = DataGridViewCellStyle17
+        Me.粗利額.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         Me.粗利額.HeaderText = "粗利額"
         Me.粗利額.Name = "粗利額"
         Me.粗利額.ReadOnly = True
@@ -403,6 +419,7 @@ Partial Class Quote
         DataGridViewCellStyle18.Format = "N1"
         DataGridViewCellStyle18.NullValue = Nothing
         Me.粗利率.DefaultCellStyle = DataGridViewCellStyle18
+        Me.粗利率.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         Me.粗利率.HeaderText = "粗利率(%)"
         Me.粗利率.Name = "粗利率"
         Me.粗利率.ReadOnly = True
@@ -411,6 +428,7 @@ Partial Class Quote
         'リードタイム
         '
         Me.リードタイム.HeaderText = "リードタイム"
+        Me.リードタイム.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         Me.リードタイム.Name = "リードタイム"
         Me.リードタイム.Width = 150
         '
