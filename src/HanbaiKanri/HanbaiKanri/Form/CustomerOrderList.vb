@@ -319,7 +319,7 @@ Public Class CustomerOrderList
 
                 'joinするのでとりあえず直書き
                 Sql = "SELECT"
-                Sql += " t11.メーカー, t11.品名, t11.型式, t11.受注数量, t11.売単価, t11.売上金額"
+                Sql += " t11.メーカー, t11.品名, t11.型式, t11.受注数量, t11.見積単価, t11.見積金額"
                 Sql += " FROM "
                 Sql += " public.t11_cymndt t11 "
 
@@ -360,8 +360,8 @@ Public Class CustomerOrderList
                     sheet.Range("A" & currentRow).Value = currentNum
                     sheet.Range("B" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("メーカー") & Environment.NewLine & dsCymndt.Tables(RS).Rows(i)("品名") & Environment.NewLine & dsCymndt.Tables(RS).Rows(i)("型式")
                     sheet.Range("C" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("受注数量")
-                    sheet.Range("D" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("売単価")
-                    sheet.Range("E" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("売上金額")
+                    sheet.Range("D" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("見積単価")
+                    sheet.Range("E" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("見積金額")
                     currentNum += 1
                     currentRow += 1
                 Next i
