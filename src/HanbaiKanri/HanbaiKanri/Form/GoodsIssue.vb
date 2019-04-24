@@ -1379,7 +1379,7 @@ Public Class GoodsIssue
             Sql += "'"
             Sql += " AND"
             Sql += " 採番キー = '" & key & "'"
-            Console.WriteLine(Sql)
+
             _db.executeDB(Sql)
 
             Return saibanID
@@ -1427,7 +1427,6 @@ Public Class GoodsIssue
         Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql += txtParam
 
-        Console.WriteLine(Sql)
         Return _db.selectDB(Sql, RS, reccnt)
     End Function
 

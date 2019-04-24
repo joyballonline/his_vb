@@ -137,7 +137,7 @@ Public Class PurchaseStockAmountList
         DgvList.Rows.Clear()
 
         Sql = "SELECT t40.仕入日,t40.取消区分,t41.仕入番号,t41.仕入先名,t41.メーカー,t41.品名,t41.型式, t41.仕入数量, t41.単位"
-        Sql += ", t41.仕入単価, t40.ＶＡＴ, t41.間接費, t41.仕入金額"
+        Sql += ", t41.仕入値, t40.ＶＡＴ, t41.間接費, t41.仕入金額"
         Sql += " FROM  public.t41_siredt t41 "
         Sql += " INNER JOIN  t40_sirehd t40"
         Sql += " ON t41.会社コード = t40.会社コード"
@@ -160,7 +160,7 @@ Public Class PurchaseStockAmountList
             For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
 
                 'VAT
-                Dim calVAT As Decimal = (ds.Tables(RS).Rows(i)("仕入単価") * ds.Tables(RS).Rows(i)("ＶＡＴ")) / 100
+                Dim calVAT As Decimal = (ds.Tables(RS).Rows(i)("仕入値") * ds.Tables(RS).Rows(i)("ＶＡＴ")) / 100
 
                 DgvList.Rows.Add()
                 DgvList.Rows(i).Cells("仕入番号").Value = ds.Tables(RS).Rows(i)("仕入番号")
@@ -171,11 +171,11 @@ Public Class PurchaseStockAmountList
                 DgvList.Rows(i).Cells("型式").Value = ds.Tables(RS).Rows(i)("型式")
                 DgvList.Rows(i).Cells("数量").Value = ds.Tables(RS).Rows(i)("仕入数量")
                 DgvList.Rows(i).Cells("単位").Value = ds.Tables(RS).Rows(i)("単位")
-                DgvList.Rows(i).Cells("仕入単価").Value = Format(ds.Tables(RS).Rows(i)("仕入単価"), "0.000")
+                DgvList.Rows(i).Cells("仕入単価").Value = Format(ds.Tables(RS).Rows(i)("仕入値"), "0.000")
                 DgvList.Rows(i).Cells("ＶＡＴ").Value = Format(calVAT, "0.000")
                 DgvList.Rows(i).Cells("間接費").Value = Format(ds.Tables(RS).Rows(i)("間接費"), "0.000")
-                DgvList.Rows(i).Cells("仕入計").Value = Format((ds.Tables(RS).Rows(i)("仕入単価") + calVAT + ds.Tables(RS).Rows(i)("間接費")) * ds.Tables(RS).Rows(i)("仕入数量"), "0.000")
-                totalAmount += Format((ds.Tables(RS).Rows(i)("仕入単価") + calVAT + ds.Tables(RS).Rows(i)("間接費")) * ds.Tables(RS).Rows(i)("仕入数量"), "0.000")
+                DgvList.Rows(i).Cells("仕入計").Value = Format((ds.Tables(RS).Rows(i)("仕入値") + calVAT + ds.Tables(RS).Rows(i)("間接費")) * ds.Tables(RS).Rows(i)("仕入数量"), "0.000")
+                totalAmount += Format((ds.Tables(RS).Rows(i)("仕入値") + calVAT + ds.Tables(RS).Rows(i)("間接費")) * ds.Tables(RS).Rows(i)("仕入数量"), "0.000")
 
             Next
 

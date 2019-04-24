@@ -404,7 +404,7 @@ Public Class ClosingLog
                 Sql8 += " , '" & frmC01F10_Login.loginValue.TantoNM & "'"        '更新者
                 Sql8 += " , '" & dtToday & "'"      '更新日
                 Sql8 += " , 0"          '前月末単価
-                Sql8 += " , " & ds6.Tables(RS).Rows(i)("仕入単価").ToString     '今月単価
+                Sql8 += " , " & ds6.Tables(RS).Rows(i)("仕入値").ToString     '今月単価
                 Sql8 += " )"
                 _db.executeDB(Sql8)
             Else
