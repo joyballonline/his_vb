@@ -1019,7 +1019,7 @@ Public Class Order
         Dim tmp3 As Decimal = 0
         Dim tmp4 As Decimal = 0
 
-        If DgvItemList.Rows.Count = 0 Or OrderStatus = CommonConst.STATUS_VIEW Then
+        If DgvItemList.Rows.Count = 0 Then
             Exit Sub
         End If
 
