@@ -13,6 +13,9 @@
 
 Public Class CommonConst
 
+    '
+    Public Const CHECK_URL As String = "http://spin.laevigata.co.jp/account_check.php"
+
     '汎用マスタ固定KEY
     Public Const HANYO_KOTEI_SKBUNRUI As String = "1001出荷分類"        '1001出荷分類
     Public Const HANYO_KOTEI_CMNNO As String = "1002注文帳番号"         '1002注文帳番号

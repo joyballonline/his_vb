@@ -1265,10 +1265,32 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
   </MSG_DATA>
   <MSG_DATA>
     <ID>chkAppUseSettingError</ID>
-    <MSG1>設定が不足しています。</MSG1>
+    <MSG1>設定が不足しているため、システムを起動できません。</MSG1>
     <MSG1_EN>Insufficient settings.</MSG1_EN>
     <MSG2>システム管理者にご連絡ください。</MSG2>
+    <MSG2_EN>The system can not be started because the settings are insufficient.</MSG2_EN>
+    <BUTTON_TYPE>OK</BUTTON_TYPE>
+    <ICONT_TYPE>Error</ICONT_TYPE>
+    <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
+    <MEMO></MEMO>
+  </MSG_DATA>
+  <MSG_DATA>
+    <ID>chkAppActiveUserError</ID>
+    <MSG1>ご利用情報がありません。</MSG1>
+    <MSG1_EN>There is no usage information.</MSG1_EN>
+    <MSG2>システム管理者にご連絡ください。</MSG2>
     <MSG2_EN>Please contact your system administrator.</MSG2_EN>
+    <BUTTON_TYPE>OK</BUTTON_TYPE>
+    <ICONT_TYPE>Error</ICONT_TYPE>
+    <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
+    <MEMO></MEMO>
+  </MSG_DATA>
+  <MSG_DATA>
+    <ID>chkNetworkError</ID>
+    <MSG1>インターネットに接続できません。</MSG1>
+    <MSG1_EN>The Internet access does not work.</MSG1_EN>
+    <MSG2>接続状態をご確認ください。</MSG2>
+    <MSG2_EN>Please check the connection status.</MSG2_EN>
     <BUTTON_TYPE>OK</BUTTON_TYPE>
     <ICONT_TYPE>Error</ICONT_TYPE>
     <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>

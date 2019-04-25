@@ -90,7 +90,6 @@ Partial Class frmC01F10_Login
         Me.txtTanto.Name = "txtTanto"
         Me.txtTanto.Size = New System.Drawing.Size(270, 23)
         Me.txtTanto.TabIndex = 0
-        Me.txtTanto.Text = "ID"
         '
         'lblTitle
         '
@@ -123,7 +122,6 @@ Partial Class frmC01F10_Login
         Me.txtPasswd.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtPasswd.Size = New System.Drawing.Size(270, 23)
         Me.txtPasswd.TabIndex = 1
-        Me.txtPasswd.Text = "kaneki01"
         '
         'chkPasswd
         '
@@ -152,7 +150,6 @@ Partial Class frmC01F10_Login
         Me.cmbCampany.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbCampany.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.cmbCampany.FormattingEnabled = True
-        Me.cmbCampany.Items.AddRange(New Object() {"カネキ吉田商店"})
         Me.cmbCampany.Location = New System.Drawing.Point(198, 211)
         Me.cmbCampany.Name = "cmbCampany"
         Me.cmbCampany.Size = New System.Drawing.Size(270, 23)

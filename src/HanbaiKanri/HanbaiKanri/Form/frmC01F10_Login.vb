@@ -38,9 +38,12 @@ Public Class frmC01F10_Login
     Private Const N As String = ControlChars.NewLine                    '改行文字
     Private Const RS As String = "RecSet"                               'レコードセットテーブル
 
+    Private Const COMPANY_FILE As String = "company.txt"                                'txtファイル名
+
     '-------------------------------------------------------------------------------
     'メンバー変数宣言
     '-------------------------------------------------------------------------------
+    Private Shared _assembly As System.Reflection.Assembly          'アセンブリ(アプリケーション情報)
     Private _parentForm As Form
     Private _msgHd As UtilMsgHandler
     Private _langHd As UtilLangHandler
@@ -59,13 +62,19 @@ Public Class frmC01F10_Login
         End Get
     End Property
 
+    Public Shared ReadOnly Property assembly() As System.Reflection.Assembly    'アセンブリ
+        Get
+            Return _Assembly
+        End Get
+    End Property
+
     '-------------------------------------------------------------------------------
     'コンストラクタ（Privateにして、外からは呼べないようにする）
     '-------------------------------------------------------------------------------
     Private Sub New()
         ' この呼び出しは、Windows フォーム デザイナで必要です。
         InitializeComponent()
-        cmbCampany.SelectedIndex = 0
+        'cmbCampany.SelectedIndex = 0
     End Sub
 
     '-------------------------------------------------------------------------------
@@ -87,6 +96,9 @@ Public Class frmC01F10_Login
             'バックアップサーバ接続中
             lblBackup.Visible = True
         End If
+
+        _assembly = System.Reflection.Assembly.GetExecutingAssembly() 'アセンブリをメンバーに格納
+
     End Sub
 
     '-------------------------------------------------------------------------------
@@ -115,91 +127,21 @@ Public Class frmC01F10_Login
     Private Sub frm_E11_Login_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
 
-        Try
+        '描画関係の設定
+        Me.SetStyle(ControlStyles.ResizeRedraw, True)           'サイズが変更されたときに、コントロールがコントロール自体を再描画するかどうかを示す値を設定
+        Me.SetStyle(ControlStyles.DoubleBuffer, True)           '描画はバッファで実行され、完了後に、結果が画面に出力されるよう設定
+        Me.SetStyle(ControlStyles.OptimizedDoubleBuffer, True)  'コントロールは、画面に直接ではなく、まずバッファに描画されます。これにより、ちらつきを抑えることができます。
+        Me.SetStyle(ControlStyles.UserPaint, True)              'コントロールは、オペレーティング システムによってではなく、独自に描画されるよう設定
+        Me.SetStyle(ControlStyles.AllPaintingInWmPaint, True)   'コントロールはウィンドウ メッセージ WM_ERASEBKGND を無視するように設定
 
-            '描画関係の設定
-            Me.SetStyle(ControlStyles.ResizeRedraw, True)           'サイズが変更されたときに、コントロールがコントロール自体を再描画するかどうかを示す値を設定
-            Me.SetStyle(ControlStyles.DoubleBuffer, True)           '描画はバッファで実行され、完了後に、結果が画面に出力されるよう設定
-            Me.SetStyle(ControlStyles.OptimizedDoubleBuffer, True)  'コントロールは、画面に直接ではなく、まずバッファに描画されます。これにより、ちらつきを抑えることができます。
-            Me.SetStyle(ControlStyles.UserPaint, True)              'コントロールは、オペレーティング システムによってではなく、独自に描画されるよう設定
-            Me.SetStyle(ControlStyles.AllPaintingInWmPaint, True)   'コントロールはウィンドウ メッセージ WM_ERASEBKGND を無視するように設定
-
-
-            '最初に使用可能ユーザーかどうかチェック
-            Dim reccnt As Integer = 0
-
-            Dim Sql = ""
-
-            Sql = "SELECT "
-            Sql += " マシン名, 初回アクセス日時 "
-            Sql += " FROM l11_aclog "
-            Sql += " WHERE "
-            Sql += " マシン名 = '" & System.Environment.MachineName & "'"
-
-            Dim dsACLog As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-            '該当マシンがあったら
-            If dsACLog.Tables(RS).Rows.Count > 0 Then
-
-                '初期化
-                Call initForm()
-
-            Else
-                '使用数が上限に達しているかどうか
-
-                Sql = "SELECT"
-                Sql += " 数値 "
-                Sql += " FROM s01_config "
-                Sql += " WHERE "
-                Sql += " 項目 = '" & "使用上限数" & "'" '使用上限数
-
-                Dim dsConfig As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-                Sql = "SELECT "
-                Sql += " マシン名, 初回アクセス日時 "
-                Sql += " FROM l11_aclog "
-
-                dsACLog = _db.selectDB(Sql, RS, reccnt)
-
-                If dsConfig.Tables(RS).Rows.Count > 0 Then
-                    '使用上限数未満だったらl11_aclogに新規追加
-                    If dsACLog.Tables(RS).Rows.Count < dsConfig.Tables(RS).Rows(0)("数値") Then
-
-                        Sql = "INSERT INTO l11_aclog ( "
-                        Sql += " マシン名, 初回アクセス日時 "
-                        Sql += " ) VALUES ( "
-                        Sql += " '" & System.Environment.MachineName & "'"
-                        Sql += " , '" & UtilClass.formatDatetime(DateTime.Now)
-                        Sql += "' ) "
-
-                        _db.executeDB(Sql) 'l11_aclogテーブル更新
-
-                        '初期化
-                        Call initForm()
-
-                    Else
-
-                        '上限を超えていたらアラートを表示後に終了
-                        _msgHd.dspMSG("chkAppUseError", CommonConst.LANG_KBN_JPN)
-                        Application.Exit()
-
-                    End If
-                Else
-
-                    '設定がなかったら終了する
-                    _msgHd.dspMSG("chkAppUseSettingError", CommonConst.LANG_KBN_JPN)
-                    Application.Exit()
-
-                End If
-
-            End If
-
-        Catch ue As UsrDefException
-            ue.dspMsg()                                                                                                     '握りつぶす
-        Catch ex As Exception
-            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力
-            Dim te As UsrDefException = New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))     '握りつぶす
-        End Try
+        Dim netChk As Boolean = networkCheck()
+        If netChk Then
+            accountCheck()
+            useLimitCheck()
+        Else
+            _msgHd.dspMSG("chkNetworkError", CommonConst.LANG_KBN_JPN)
+            Application.Exit()
+        End If
 
     End Sub
 
@@ -457,6 +399,215 @@ Public Class frmC01F10_Login
         If "".Equals(txtPasswd.Text) Then
             Throw New UsrDefException("必須入力項目です。", _msgHd.getMSG("requiredImput", frmC01F10_Login.loginValue.Language), txtPasswd)
         End If
+
+    End Sub
+
+    Private Function networkCheck()
+        'ネットワークに接続されているか調べる
+        If System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable() Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+
+    Private Function fileCheck()
+
+        'メッセージ用Xml存在チェック
+        Dim companyFileName As String
+        companyFileName = UtilClass.getAppPath(_assembly)               'アプリケーション実行パスを取得
+        If Not companyFileName.EndsWith("\") Then                       '"\"で終わっていないなら
+            companyFileName = companyFileName & "\"
+        End If
+        Dim companyFile As String = UtilClass.getAppPath(_assembly) & "\..\Setting\" & COMPANY_FILE
+
+        If UtilClass.isFileExists(companyFile) Then                 'ファイルが存在するなら
+
+
+            Dim name As String = ""
+            name = System.IO.File.ReadAllText(companyFile, System.Text.Encoding.Default)
+
+            'Dim rs As New System.IO.StringReader(companyFile)
+            ''ストリームの末端まで繰り返す
+            'While rs.Peek() > -1
+            '    '一行読み込んで表示する
+            '    Console.WriteLine(rs.ReadLine())
+
+            '    name = rs.ReadLine()
+            'End While
+
+            'rs.Close()
+
+            If name = "" Then
+                '情報が存在しないのでエラー
+                _msgHd.dspMSG("chkAppUseSettingError", CommonConst.LANG_KBN_JPN, "No Setting")
+                Application.Exit()
+
+            End If
+
+            Return name
+        Else
+            'ファイルが存在しないのでエラー
+            _msgHd.dspMSG("chkAppUseSettingError", CommonConst.LANG_KBN_JPN, "No File")
+            Application.Exit()
+        End If
+
+    End Function
+
+    Private Sub accountCheck()
+        Try
+
+            Dim reccnt As Integer = 0
+            Dim Sql = ""
+
+            Sql = " SELECT "
+            Sql += " テキスト "
+            Sql += " FROM "
+            Sql += " s01_config "
+            Sql += " WHERE "
+            Sql += " 項目 = '会社名'"
+            Sql += " AND "
+            Sql += " テキスト = '" & fileCheck() & "'"
+
+            Dim companyName As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+            If companyName.Tables(RS).Rows.Count > 0 Then
+
+                If companyName.Tables(RS).Rows(0)("テキスト").ToString IsNot Nothing Then
+
+                    Dim url As String = CommonConst.CHECK_URL
+
+                    Dim wc As New System.Net.WebClient
+                    'NameValueCollectionの作成
+                    Dim ps As New System.Collections.Specialized.NameValueCollection
+                    '送信するデータ（フィールド名と値の組み合わせ）を追加
+                    ps.Add("name", companyName.Tables(RS).Rows(0)("テキスト").ToString)
+                    'データを送信し、また受信する
+                    Dim resData As Byte() = wc.UploadValues(url, ps)
+                    wc.Dispose()
+
+                    '受信したデータを表示する
+                    Dim resText As String = System.Text.Encoding.UTF8.GetString(resData)
+                    'Console.WriteLine(resText)
+
+                    If resText <> "success" Then
+                        '有効なユーザでない場合、終了する
+                        _msgHd.dspMSG("chkAppActiveUserError", CommonConst.LANG_KBN_JPN)
+                        Application.Exit()
+
+                    End If
+
+                End If
+
+            Else
+
+                '設定がなかったら終了する
+                _msgHd.dspMSG("chkAppUseSettingError", CommonConst.LANG_KBN_JPN)
+                Application.Exit()
+
+            End If
+
+            'Catch ex As WebException
+
+            '    'HTTPプロトコルエラーかどうか調べる
+            '    If ex.Status = System.Net.WebExceptionStatus.ProtocolError Then
+            '        'HttpWebResponseを取得
+            '        Dim errors As System.Net.HttpWebResponse = CType(ex.Response, System.Net.HttpWebResponse)
+            '        '応答したURIを表示する
+            '        Console.WriteLine(errors.ResponseUri)
+            '        '応答ステータスコードを表示する
+            '        Console.WriteLine("{0}:{1}", errors.StatusCode, errors.StatusDescription)
+            '    Else
+            '        Console.WriteLine(ex.Message)
+            '    End If
+
+        Catch ue As UsrDefException
+            ue.dspMsg()                                                                                                     '握りつぶす
+        Catch ex As Exception
+            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力
+            Dim te As UsrDefException = New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))     '握りつぶす
+        End Try
+
+    End Sub
+
+    Private Sub useLimitCheck()
+
+        Try
+            '最初に使用可能ユーザーかどうかチェック
+            Dim reccnt As Integer = 0
+
+            Dim Sql = ""
+
+            Sql = "SELECT "
+            Sql += " マシン名, 初回アクセス日時 "
+            Sql += " FROM l11_aclog "
+            Sql += " WHERE "
+            Sql += " マシン名 = '" & System.Environment.MachineName & "'"
+
+            Dim dsACLog As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+            '該当マシンがあったら
+            If dsACLog.Tables(RS).Rows.Count > 0 Then
+
+                '初期化
+                Call initForm()
+
+            Else
+                '使用数が上限に達しているかどうか
+
+                Sql = "SELECT"
+                Sql += " 数値 "
+                Sql += " FROM s01_config "
+                Sql += " WHERE "
+                Sql += " 項目 = '" & "使用上限数" & "'" '使用上限数
+
+                Dim dsConfig As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+                Sql = "SELECT "
+                Sql += " マシン名, 初回アクセス日時 "
+                Sql += " FROM l11_aclog "
+
+                dsACLog = _db.selectDB(Sql, RS, reccnt)
+
+                If dsConfig.Tables(RS).Rows.Count > 0 Then
+                    '使用上限数未満だったらl11_aclogに新規追加
+                    If dsACLog.Tables(RS).Rows.Count < dsConfig.Tables(RS).Rows(0)("数値") Then
+
+                        Sql = "INSERT INTO l11_aclog ( "
+                        Sql += " マシン名, 初回アクセス日時 "
+                        Sql += " ) VALUES ( "
+                        Sql += " '" & System.Environment.MachineName & "'"
+                        Sql += " , '" & UtilClass.formatDatetime(DateTime.Now)
+                        Sql += "' ) "
+
+                        _db.executeDB(Sql) 'l11_aclogテーブル更新
+
+                        '初期化
+                        Call initForm()
+
+                    Else
+
+                        '上限を超えていたらアラートを表示後に終了
+                        _msgHd.dspMSG("chkAppUseError", CommonConst.LANG_KBN_JPN)
+                        Application.Exit()
+
+                    End If
+                Else
+
+                    '設定がなかったら終了する
+                    _msgHd.dspMSG("chkAppUseSettingError", CommonConst.LANG_KBN_JPN)
+                    Application.Exit()
+
+                End If
+
+            End If
+
+        Catch ue As UsrDefException
+            ue.dspMsg()                                                                                                     '握りつぶす
+        Catch ex As Exception
+            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力
+            Dim te As UsrDefException = New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))     '握りつぶす
+        End Try
 
     End Sub
 
