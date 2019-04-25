@@ -396,6 +396,8 @@ Public Class DataOutput
                 SalesHd()
             End If
 
+            DgvList.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells) 'すべての列の幅を自動調整する
+
             'カーソルをビジー状態から元に戻す
             Cursor.Current = Cursors.Default
 
