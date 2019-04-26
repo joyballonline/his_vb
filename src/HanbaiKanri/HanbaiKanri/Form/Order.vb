@@ -1245,7 +1245,7 @@ Public Class Order
         Next
 
         TxtPurchaseAmount.Text = PurchaseTotal
-        TxtOrderAmount.Text = QuoteTotal.ToString("F0")
+        TxtOrderAmount.Text = QuoteTotal.ToString
         TxtGrossProfit.Text = GrossProfit
 
     End Sub
