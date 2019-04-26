@@ -418,6 +418,12 @@ Public Class BillingManagement
 
         Dim Sql As String = ""
 
+        'グリッドに何もないときは次画面へ移動しない
+        If DgvAdd.RowCount = 0 Then
+            '操作できないメッセージを表示
+            _msgHd.dspMSG("NonAction", frmC01F10_Login.loginValue.Language)
+            Exit Sub
+        End If
 
         If Decimal.Parse(DgvAdd.Rows(0).Cells("今回請求金額計").Value) > Decimal.Parse(DgvCymn.Rows(0).Cells("請求残高").Value) Then
             '請求残高より請求金額が大きい場合はアラート

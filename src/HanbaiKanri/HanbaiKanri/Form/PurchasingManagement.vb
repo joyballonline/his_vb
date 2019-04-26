@@ -764,6 +764,13 @@ Public Class PurchasingManagement
         Dim dtToday As DateTime = DateTime.Now
         Dim strToday As String = UtilClass.formatDatetime(dtToday)
 
+        'グリッドに何もないときは次画面へ移動しない
+        If DgvAdd.RowCount = 0 Then
+            '操作できないメッセージを表示
+            _msgHd.dspMSG("NonAction", frmC01F10_Login.loginValue.Language)
+            Exit Sub
+        End If
+
         Dim reccnt As Integer = 0
         Dim APAmount As Decimal = 0
         For i As Integer = 0 To DgvAdd.Rows.Count - 1
