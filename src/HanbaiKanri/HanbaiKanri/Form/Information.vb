@@ -142,9 +142,13 @@ Public Class Information
 
             Me.Show() '表示する
 
-            LbMessage.Text = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
+            If LbMessage.Text = "" Then
+
+                LbMessage.Text = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
                                  "There is no notification.",
                                  "お知らせはありません。")
+
+            End If
 
         End If
 
