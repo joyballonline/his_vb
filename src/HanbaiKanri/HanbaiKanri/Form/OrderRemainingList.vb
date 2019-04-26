@@ -106,7 +106,7 @@ Public Class OrderRemainingList
 
         Try
 
-            Dim dsCymndt As DataSet = getOrderRemainingList()
+            Dim dsCymndt As DataSet = getJobOrderRemainingList()
 
             Dim calVat As Decimal = 0
             Dim calAmount As Decimal = 0
@@ -145,7 +145,7 @@ Public Class OrderRemainingList
 
     End Sub
 
-    Public Function getOrderRemainingList()
+    Public Function getJobOrderRemainingList()
 
         Dim reccnt As Integer = 0 'DB用（デフォルト）
         Dim Sql As String = ""

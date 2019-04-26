@@ -79,8 +79,6 @@ Public Class CustomerARList
 
     '画面表示時
     Private Sub MstHanyoue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim reccnt As Integer = 0 'DB用（デフォルト）
-        Dim Sql As String = ""
 
         LblMode.Text = "参照モード"
 
@@ -100,45 +98,31 @@ Public Class CustomerARList
 
         End If
 
-        Sql = " AND "
-        Sql += "売掛残高 > 0 "
-        Sql += " AND "
-        Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '取消区分=0
-        Sql += " ORDER BY 得意先コード, 請求日 "
+        Dim dsSkyuhd As DataSet = getARList()
 
+        Dim tmpCustomerCd As String = ""
+        Dim tmpCustomerName As String = ""
 
-        Try
-            Dim dsSkyuhd As DataSet = getDsData("t23_skyuhd", Sql)
-            Dim tmpCustomerCd As String = ""
-            Dim tmpCustomerName As String = ""
+        For i As Integer = 0 To dsSkyuhd.Tables(RS).Rows.Count - 1
 
-            For i As Integer = 0 To dsSkyuhd.Tables(RS).Rows.Count - 1
+            '得意先コードが変わったら取得
+            If (tmpCustomerCd <> dsSkyuhd.Tables(RS).Rows(i)("得意先コード").ToString) Then
+                tmpCustomerName = dsSkyuhd.Tables(RS).Rows(i)("得意先名")
+                tmpCustomerCd = dsSkyuhd.Tables(RS).Rows(i)("得意先コード").ToString
+            Else
+                tmpCustomerName = ""
+            End If
 
-                '得意先コードが変わったら取得
-                If (tmpCustomerCd <> dsSkyuhd.Tables(RS).Rows(i)("得意先コード").ToString) Then
-                    tmpCustomerName = dsSkyuhd.Tables(RS).Rows(i)("得意先名")
-                    tmpCustomerCd = dsSkyuhd.Tables(RS).Rows(i)("得意先コード").ToString
-                Else
-                    tmpCustomerName = ""
-                End If
+            DgvCymndt.Rows.Add()
+            DgvCymndt.Rows(i).Cells("得意先名").Value = tmpCustomerName
+            DgvCymndt.Rows(i).Cells("請求番号").Value = dsSkyuhd.Tables(RS).Rows(i)("請求番号")
+            DgvCymndt.Rows(i).Cells("請求日").Value = dsSkyuhd.Tables(RS).Rows(i)("請求日").ToShortDateString()
+            DgvCymndt.Rows(i).Cells("請求金額").Value = dsSkyuhd.Tables(RS).Rows(i)("請求金額計")
+            DgvCymndt.Rows(i).Cells("入金額").Value = dsSkyuhd.Tables(RS).Rows(i)("入金額計")
+            DgvCymndt.Rows(i).Cells("売掛金残高").Value = dsSkyuhd.Tables(RS).Rows(i)("売掛残高")
+            DgvCymndt.Rows(i).Cells("備考").Value = dsSkyuhd.Tables(RS).Rows(i)("備考1")
 
-                DgvCymndt.Rows.Add()
-                DgvCymndt.Rows(i).Cells("得意先名").Value = tmpCustomerName
-                DgvCymndt.Rows(i).Cells("請求番号").Value = dsSkyuhd.Tables(RS).Rows(i)("請求番号")
-                DgvCymndt.Rows(i).Cells("請求日").Value = dsSkyuhd.Tables(RS).Rows(i)("請求日").ToShortDateString()
-                DgvCymndt.Rows(i).Cells("請求金額").Value = dsSkyuhd.Tables(RS).Rows(i)("請求金額計")
-                DgvCymndt.Rows(i).Cells("入金額").Value = dsSkyuhd.Tables(RS).Rows(i)("入金額計")
-                DgvCymndt.Rows(i).Cells("売掛金残高").Value = dsSkyuhd.Tables(RS).Rows(i)("売掛残高")
-                DgvCymndt.Rows(i).Cells("備考").Value = dsSkyuhd.Tables(RS).Rows(i)("備考1")
-            Next
-
-        Catch ue As UsrDefException
-            ue.dspMsg()
-            Throw ue
-        Catch ex As Exception
-            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
-        End Try
+        Next
 
     End Sub
 
@@ -165,6 +149,31 @@ Public Class CustomerARList
             outputExcel()
         End If
     End Sub
+
+    Public Function getARList()
+        Dim reccnt As Integer = 0 'DB用（デフォルト）
+        Dim Sql As String = ""
+
+        Sql = " AND "
+        Sql += "売掛残高 > 0 "
+        Sql += " AND "
+        Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '取消区分=0
+        Sql += " ORDER BY 得意先コード, 請求日 "
+
+        Try
+            Dim dsSkyuhd As DataSet = getDsData("t23_skyuhd", Sql)
+
+            Return dsSkyuhd
+
+        Catch ue As UsrDefException
+            ue.dspMsg()
+            Throw ue
+        Catch ex As Exception
+            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
+            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
+        End Try
+
+    End Function
 
     'excel出力処理
     Private Sub outputExcel()

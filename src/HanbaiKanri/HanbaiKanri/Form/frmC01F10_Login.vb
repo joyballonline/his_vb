@@ -272,27 +272,10 @@ Public Class frmC01F10_Login
 
 
                 'インフォメーション表示
-
-                Dim informatinoClass = New OrderRemainingList(_msgHd, _db, _langHd, Me)
-                Dim orderRemainingData As DataSet = informatinoClass.getOrderRemainingList()
-
-                If orderRemainingData.Tables(RS).Rows.Count > 0 Then
-                    '受注残があったら
-
-                    Dim openForm As Form = Nothing
-                    openForm = New Information(_msgHd, _db, _langHd, Me)
-                    openForm.Show()
-                    Me.Hide()
-
-                Else
-                    'インフォメーションがなければメニュー表示
-
-                    Dim openForm As Form = Nothing
-                    openForm = New frmC01F30_Menu(_msgHd, _langHd, _db)
-                    openForm.Show()
-                    Me.Hide()                                                           '自分は隠れる
-
-                End If
+                Dim openForm As Form = Nothing
+                openForm = New Information(_msgHd, _db, _langHd, Me)
+                openForm.Show()
+                Me.Hide()
 
             End If
 
@@ -740,44 +723,17 @@ Public Class frmC01F10_Login
                     openForm = New frmC01F20_ChangePasswd(_msgHd, _db, Me)
                     openForm.ShowDialog()
                     openForm.Dispose()
-
-                    '「パスワード変更」画面起動
-                    'Dim openForm12 As frmKR12_ChangePasswd = New frmKR12_ChangePasswd(_msgHd, _db, Me, txtTanto.Text)   'パラメタを起動画面へ渡す
-                    'StartUp.loginForm = Me
-                    'openForm12.ShowDialog()                                                 '画面表示
-                    'openForm12.Dispose()
                     Exit Sub
 
                 Else
                     'パスワード変更チェックなし
                     'インフォメーション表示
 
-                    Dim informatinoClass = New OrderRemainingList(_msgHd, _db, _langHd, Me)
-                    Dim orderRemainingData As DataSet = informatinoClass.getOrderRemainingList()
 
-                    If orderRemainingData.Tables(RS).Rows.Count > 0 Then
-                        '受注残があったら
-
-                        Dim openForm As Form = Nothing
-                        openForm = New Information(_msgHd, _db, _langHd, Me)
-                        openForm.Show()
-                        Me.Hide()
-
-                    Else
-                        'インフォメーションがなければメニュー表示
-
-                        Dim openForm As Form = Nothing
-                        openForm = New frmC01F30_Menu(_msgHd, _langHd, _db)
-                        openForm.Show()
-                        Me.Hide()                                                           '自分は隠れる
-
-                    End If
-
-                    ''「連携処理一覧」画面起動
-                    'Dim openForm13 As frmKR13_ProcList = New frmKR13_ProcList(_msgHd, _db, Me, _loginVal.TantoCD, _loginVal.TantoNM)      'パラメタを起動画面へ渡す
-                    'StartUp.loginForm = Me
-                    'openForm13.Show()                                                   '画面表示
-                    'Me.Hide()                                                           '自分は隠れる
+                    Dim openForm As Form = Nothing
+                    openForm = New Information(_msgHd, _db, _langHd, Me)
+                    openForm.Show()
+                    Me.Hide()
 
                 End If
             End If

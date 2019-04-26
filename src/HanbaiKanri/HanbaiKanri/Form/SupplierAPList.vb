@@ -79,8 +79,6 @@ Public Class SupplierAPList
 
     '画面表示時
     Private Sub MstHanyoue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim reccnt As Integer = 0 'DB用（デフォルト）
-        Dim Sql As String = ""
 
         LblMode.Text = "参照モード"
 
@@ -100,45 +98,30 @@ Public Class SupplierAPList
 
         End If
 
-        Sql = " AND "
-        Sql += "買掛残高 > 0 "
-        Sql += " AND "
-        Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '取消区分=0
-        Sql += " ORDER BY 仕入先コード, 買掛日 "
+        Dim dsKikehd As DataSet = getAPList()
 
+        Dim tmpSupplierCd As String = ""
+        Dim tmpSupplierName As String = ""
 
-        Try
-            Dim dsKikehd As DataSet = getDsData("t46_kikehd", Sql)
-            Dim tmpSupplierCd As String = ""
-            Dim tmpSupplierName As String = ""
+        For i As Integer = 0 To dsKikehd.Tables(RS).Rows.Count - 1
 
-            For i As Integer = 0 To dsKikehd.Tables(RS).Rows.Count - 1
+            '得意先コードが変わったら取得
+            If (tmpSupplierCd <> dsKikehd.Tables(RS).Rows(i)("仕入先コード").ToString) Then
+                tmpSupplierName = dsKikehd.Tables(RS).Rows(i)("仕入先名")
+                tmpSupplierCd = dsKikehd.Tables(RS).Rows(i)("仕入先コード").ToString
+            Else
+                tmpSupplierName = ""
+            End If
 
-                '得意先コードが変わったら取得
-                If (tmpSupplierCd <> dsKikehd.Tables(RS).Rows(i)("仕入先コード").ToString) Then
-                    tmpSupplierName = dsKikehd.Tables(RS).Rows(i)("仕入先名")
-                    tmpSupplierCd = dsKikehd.Tables(RS).Rows(i)("仕入先コード").ToString
-                Else
-                    tmpSupplierName = ""
-                End If
-
-                DgvCymndt.Rows.Add()
-                DgvCymndt.Rows(i).Cells("仕入先名").Value = tmpSupplierName
-                DgvCymndt.Rows(i).Cells("発注番号").Value = dsKikehd.Tables(RS).Rows(i)("発注番号")
-                DgvCymndt.Rows(i).Cells("買掛日").Value = dsKikehd.Tables(RS).Rows(i)("買掛日").ToShortDateString()
-                DgvCymndt.Rows(i).Cells("買掛金額計").Value = dsKikehd.Tables(RS).Rows(i)("買掛金額計")
-                DgvCymndt.Rows(i).Cells("支払金額計").Value = dsKikehd.Tables(RS).Rows(i)("支払金額計")
-                DgvCymndt.Rows(i).Cells("買掛金残高").Value = dsKikehd.Tables(RS).Rows(i)("買掛残高")
-                DgvCymndt.Rows(i).Cells("備考").Value = dsKikehd.Tables(RS).Rows(i)("備考1")
-            Next
-
-        Catch ue As UsrDefException
-            ue.dspMsg()
-            Throw ue
-        Catch ex As Exception
-            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
-        End Try
+            DgvCymndt.Rows.Add()
+            DgvCymndt.Rows(i).Cells("仕入先名").Value = tmpSupplierName
+            DgvCymndt.Rows(i).Cells("発注番号").Value = dsKikehd.Tables(RS).Rows(i)("発注番号")
+            DgvCymndt.Rows(i).Cells("買掛日").Value = dsKikehd.Tables(RS).Rows(i)("買掛日").ToShortDateString()
+            DgvCymndt.Rows(i).Cells("買掛金額計").Value = dsKikehd.Tables(RS).Rows(i)("買掛金額計")
+            DgvCymndt.Rows(i).Cells("支払金額計").Value = dsKikehd.Tables(RS).Rows(i)("支払金額計")
+            DgvCymndt.Rows(i).Cells("買掛金残高").Value = dsKikehd.Tables(RS).Rows(i)("買掛残高")
+            DgvCymndt.Rows(i).Cells("備考").Value = dsKikehd.Tables(RS).Rows(i)("備考1")
+        Next
 
     End Sub
 
@@ -148,6 +131,31 @@ Public Class SupplierAPList
         _parentForm.Show()
         Me.Dispose()
     End Sub
+
+    Public Function getAPList()
+        Dim reccnt As Integer = 0 'DB用（デフォルト）
+        Dim Sql As String = ""
+
+        Sql = " AND "
+        Sql += "買掛残高 > 0 "
+        Sql += " AND "
+        Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '取消区分=0
+        Sql += " ORDER BY 仕入先コード, 買掛日 "
+
+        Try
+            Dim dsKikehd As DataSet = getDsData("t46_kikehd", Sql)
+
+            Return dsKikehd
+
+        Catch ue As UsrDefException
+            ue.dspMsg()
+            Throw ue
+        Catch ex As Exception
+            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
+            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
+        End Try
+
+    End Function
 
     'excel出力ボタン押下時
     Private Sub BtnExcelOutput_Click(sender As Object, e As EventArgs) Handles BtnExcelOutput.Click
