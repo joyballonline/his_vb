@@ -78,9 +78,7 @@ Public Class OrderRemainingList
     End Sub
 
     '画面表示時
-    Private Sub MstHanyoue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim reccnt As Integer = 0 'DB用（デフォルト）
-        Dim Sql As String = ""
+    Private Sub OrderRemaining_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         LblMode.Text = "参照モード"
 
@@ -106,24 +104,10 @@ Public Class OrderRemainingList
 
         End If
 
-        Sql = "SELECT t10.受注番号, t10.受注番号枝番, t11.行番号, t10.受注日, t10.得意先名, t11.メーカー, t11.品名, t11.型式, t11.受注数量"
-        Sql += ",t11.単位, t11.見積単価, t10.ＶＡＴ, t11.売上金額, t11.受注残数, t11.備考"
-        Sql += " FROM  public.t11_cymndt t11 "
-        Sql += " INNER JOIN  t10_cymnhd t10"
-        Sql += " ON t11.会社コード = t10.会社コード"
-        Sql += " AND  t11.受注番号 = t10.受注番号"
-        Sql += " AND  t11.受注番号枝番 = t10.受注番号枝番"
-
-        Sql += " WHERE t11.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        Sql += " AND "
-        Sql += " t11.受注残数 <> 0 "
-        Sql += " AND "
-        Sql += " t10.取消区分 = 0 "
-        Sql += " ORDER BY t10.受注日 DESC"
-
         Try
 
-            Dim dsCymndt As DataSet = _db.selectDB(Sql, RS, reccnt)
+            Dim dsCymndt As DataSet = getOrderRemainingList()
+
             Dim calVat As Decimal = 0
             Dim calAmount As Decimal = 0
 
@@ -157,7 +141,45 @@ Public Class OrderRemainingList
             Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
         End Try
 
+
+
     End Sub
+
+    Public Function getOrderRemainingList()
+
+        Dim reccnt As Integer = 0 'DB用（デフォルト）
+        Dim Sql As String = ""
+
+        Sql = "SELECT t10.受注番号, t10.受注番号枝番, t11.行番号, t10.受注日, t10.得意先名, t11.メーカー, t11.品名, t11.型式, t11.受注数量"
+        Sql += ",t11.単位, t11.見積単価, t10.ＶＡＴ, t11.売上金額, t11.受注残数, t11.備考"
+        Sql += " FROM  public.t11_cymndt t11 "
+        Sql += " INNER JOIN  t10_cymnhd t10"
+        Sql += " ON t11.会社コード = t10.会社コード"
+        Sql += " AND  t11.受注番号 = t10.受注番号"
+        Sql += " AND  t11.受注番号枝番 = t10.受注番号枝番"
+
+        Sql += " WHERE t11.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " AND "
+        Sql += " t11.受注残数 <> 0 "
+        Sql += " AND "
+        Sql += " t10.取消区分 = 0 "
+        Sql += " ORDER BY t10.受注日 DESC"
+
+        Try
+
+            Dim dsCymndt As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+            Return dsCymndt
+
+        Catch ue As UsrDefException
+            ue.dspMsg()
+            Throw ue
+        Catch ex As Exception
+            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
+            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
+        End Try
+
+    End Function
 
     '戻るボタン押下時
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click

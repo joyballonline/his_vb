@@ -1490,7 +1490,12 @@ Public Class frmC01F30_Menu
                 '2-5)TabIndexを設定
                 btnArray(i).TabIndex = i + 1
                 '2-6)ボタンテキストを設定
-                btnArray(i).Text = ds.Tables(RS).Rows(i)("処理名")
+                If ds.Tables(RS).Rows(i)("処理名") IsNot DBNull.Value Then
+                    btnArray(i).Text = ds.Tables(RS).Rows(i)("処理名")
+                Else
+                    btnArray(i).Text = ""
+                End If
+
                 btnArray(i).AutoSize = True
 
                 '2-7)イベントハンドラの登録
@@ -1503,12 +1508,21 @@ Public Class frmC01F30_Menu
                 If cfGroupBox.Length > 0 Then
                     If ds.Tables(RS).Rows(i)("業務ＩＤ").ToString <> "M01" Then
                         CType(cfGroupBox(0), GroupBox).Controls.Add(btnArray(i)) 'H01を追加
-                        CType(cfGroupBox(0), GroupBox).Text = ds.Tables(RS).Rows(i)("業務名")
+
+                        If ds.Tables(RS).Rows(i)("業務名") IsNot DBNull.Value Then
+                            CType(cfGroupBox(0), GroupBox).Text = ds.Tables(RS).Rows(i)("業務名")
+                        Else
+                            CType(cfGroupBox(0), GroupBox).Text = ""
+                        End If
+
+
+                        'CType(cfGroupBox(0), GroupBox).Text = IIf(ds.Tables(RS).Rows(i)("業務名") IsNot "", ds.Tables(RS).Rows(i)("業務名"), "")
                     Else
                         CType(cfGroupBox(0), FlowLayoutPanel).Controls.Add(btnArray(i)) 'H01を追加
                         CType(cfGroupBox(0), FlowLayoutPanel).Text = ds.Tables(RS).Rows(i)("業務名")
                     End If
                 End If
+
 
             Next
 

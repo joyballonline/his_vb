@@ -270,12 +270,13 @@ Public Class frmC01F10_Login
                 'openForm13.Show()                                                   '画面表示
                 'Me.Hide()                                                           '自分は隠れる
 
+
                 'インフォメーション表示
 
-                Dim informatinoClass = New Information(_msgHd, _db, _langHd, Me)
-                Dim resOrderRemaining As Integer = informatinoClass.getOrderRemaining()
+                Dim informatinoClass = New OrderRemainingList(_msgHd, _db, _langHd, Me)
+                Dim orderRemainingData As DataSet = informatinoClass.getOrderRemainingList()
 
-                If resOrderRemaining > 0 Then
+                If orderRemainingData.Tables(RS).Rows.Count > 0 Then
                     '受注残があったら
 
                     Dim openForm As Form = Nothing
@@ -466,9 +467,11 @@ Public Class frmC01F10_Login
 
             Return name
         Else
+
             'ファイルが存在しないのでエラー
             _msgHd.dspMSG("chkAppUseSettingError", CommonConst.LANG_KBN_JPN, "No File")
             Application.Exit()
+
         End If
 
     End Function
@@ -749,10 +752,10 @@ Public Class frmC01F10_Login
                     'パスワード変更チェックなし
                     'インフォメーション表示
 
-                    Dim informatinoClass = New Information(_msgHd, _db, _langHd, Me)
-                    Dim resOrderRemaining As Integer = informatinoClass.getOrderRemaining()
+                    Dim informatinoClass = New OrderRemainingList(_msgHd, _db, _langHd, Me)
+                    Dim orderRemainingData As DataSet = informatinoClass.getOrderRemainingList()
 
-                    If resOrderRemaining > 0 Then
+                    If orderRemainingData.Tables(RS).Rows.Count > 0 Then
                         '受注残があったら
 
                         Dim openForm As Form = Nothing

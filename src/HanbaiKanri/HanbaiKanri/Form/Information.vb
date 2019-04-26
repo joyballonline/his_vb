@@ -79,10 +79,14 @@ Public Class Information
 
         End If
 
-        Dim cntOrderRemaining As Integer = getOrderRemaining()
+        Dim orderRemainingClass = New OrderRemainingList(_msgHd, _db, _langHd, Me)
+        Dim orderRemainingData As DataSet = orderRemainingClass.getOrderRemainingList()
 
-        If cntOrderRemaining > 0 Then
-            Dim i As Integer = DgvList.Rows.Count
+
+        'Dim orderRemainingData As DataSet = getList()
+
+        If orderRemainingData.Tables(RS).Rows.Count > 0 Then
+            Dim i As Integer = orderRemainingData.Tables(RS).Rows.Count
 
             'DgvList.Rows.Add()
             'DgvList.Rows(i).Cells("項目").Value = "受注残"
@@ -90,11 +94,11 @@ Public Class Information
 
             If frmC01F10_Login.loginValue.Language = "ENG" Then
 
-                LbMessage.Text = "There is " & cntOrderRemaining.ToString & " order backlog"
+                LbMessage.Text = "There is " & i.ToString & " order backlog"
 
             Else
 
-                LbMessage.Text = "受注残が " & cntOrderRemaining.ToString & " 件あります"
+                LbMessage.Text = "受注残が " & i.ToString & " 件あります"
 
             End If
 
@@ -125,55 +129,6 @@ Public Class Information
 
         End If
 
-
-
     End Sub
-
-    '受注残カウント
-    '
-    Public Function getOrderRemaining()
-
-        Dim reccnt As Integer = 0 'DB用（デフォルト）
-        Dim Sql As String = ""
-
-        '
-        '受注残
-        '
-        Sql = "SELECT t10.受注番号, t10.受注番号枝番, t11.行番号, t10.受注日, t10.得意先名, t11.メーカー, t11.品名, t11.型式, t11.受注数量"
-        Sql += ",t11.単位, t11.見積単価, t10.ＶＡＴ, t11.売上金額, t11.受注残数, t11.備考"
-        Sql += " FROM  public.t11_cymndt t11 "
-        Sql += " INNER JOIN  t10_cymnhd t10"
-        Sql += " ON t11.会社コード = t10.会社コード"
-        Sql += " AND  t11.受注番号 = t10.受注番号"
-        Sql += " AND  t11.受注番号枝番 = t10.受注番号枝番"
-
-        Sql += " WHERE t11.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        Sql += " AND "
-        Sql += " t11.受注残数 <> 0 "
-        Sql += " AND "
-        Sql += " t10.取消区分 = 0 "
-        Sql += " ORDER BY t10.受注日 DESC"
-
-        Try
-
-            Dim dsCymndt As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-            If dsCymndt.Tables(RS).Rows.Count > 0 Then
-
-                Return dsCymndt.Tables(RS).Rows.Count
-
-            Else
-                Return 0
-            End If
-
-        Catch ue As UsrDefException
-            ue.dspMsg()
-            Throw ue
-        Catch ex As Exception
-            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
-        End Try
-
-    End Function
 
 End Class
