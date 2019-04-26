@@ -90,9 +90,9 @@ Public Class ClosingLog
             For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
                 DgvClosingLog.Rows.Add()
                 DgvClosingLog.Rows(index).Cells("締処理日時").Value = ds.Tables(RS).Rows(index)("処理日時")
-                DgvClosingLog.Rows(index).Cells("前回締日").Value = ds.Tables(RS).Rows(index)("前回締日")
-                DgvClosingLog.Rows(index).Cells("今回締日").Value = ds.Tables(RS).Rows(index)("今回締日")
-                DgvClosingLog.Rows(index).Cells("次回締日").Value = ds.Tables(RS).Rows(index)("次回締日")
+                DgvClosingLog.Rows(index).Cells("前回締日").Value = ds.Tables(RS).Rows(index)("前回締日").ToShortDateString
+                DgvClosingLog.Rows(index).Cells("今回締日").Value = ds.Tables(RS).Rows(index)("今回締日").ToShortDateString
+                DgvClosingLog.Rows(index).Cells("次回締日").Value = ds.Tables(RS).Rows(index)("次回締日").ToShortDateString
                 DgvClosingLog.Rows(index).Cells("担当者").Value = ds.Tables(RS).Rows(index)("担当者")
             Next
 
@@ -103,6 +103,9 @@ Public Class ClosingLog
             'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
             Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
         End Try
+
+        DgvClosingLog.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
+
     End Sub
 
     Private Sub ClosingLog_Load(sender As Object, e As EventArgs) Handles MyBase.Load

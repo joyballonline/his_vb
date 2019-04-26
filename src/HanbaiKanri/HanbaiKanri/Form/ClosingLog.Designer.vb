@@ -23,20 +23,26 @@ Partial Class ClosingLog
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LblMode = New System.Windows.Forms.Label()
         Me.LblPerson = New System.Windows.Forms.Label()
         Me.TxtPerson = New System.Windows.Forms.TextBox()
         Me.LblConditions = New System.Windows.Forms.Label()
         Me.BtnSearch = New System.Windows.Forms.Button()
         Me.DgvClosingLog = New System.Windows.Forms.DataGridView()
+        Me.BtnClosing = New System.Windows.Forms.Button()
+        Me.BtnBack = New System.Windows.Forms.Button()
+        Me.BtnOutput = New System.Windows.Forms.Button()
         Me.締処理日時 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.前回締日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.今回締日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.次回締日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.担当者 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.BtnClosing = New System.Windows.Forms.Button()
-        Me.BtnBack = New System.Windows.Forms.Button()
-        Me.BtnOutput = New System.Windows.Forms.Button()
         CType(Me.DgvClosingLog, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -96,9 +102,17 @@ Partial Class ClosingLog
         'DgvClosingLog
         '
         Me.DgvClosingLog.AllowUserToAddRows = False
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("MS UI Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DgvClosingLog.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.DgvClosingLog.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("MS UI Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DgvClosingLog.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.DgvClosingLog.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvClosingLog.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.締処理日時, Me.前回締日, Me.今回締日, Me.次回締日, Me.担当者})
         Me.DgvClosingLog.Location = New System.Drawing.Point(15, 169)
@@ -108,36 +122,6 @@ Partial Class ClosingLog
         Me.DgvClosingLog.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvClosingLog.Size = New System.Drawing.Size(1325, 334)
         Me.DgvClosingLog.TabIndex = 4
-        '
-        '締処理日時
-        '
-        Me.締処理日時.HeaderText = "締処理日時"
-        Me.締処理日時.Name = "締処理日時"
-        Me.締処理日時.Width = 90
-        '
-        '前回締日
-        '
-        Me.前回締日.HeaderText = "前回締日"
-        Me.前回締日.Name = "前回締日"
-        Me.前回締日.Width = 78
-        '
-        '今回締日
-        '
-        Me.今回締日.HeaderText = "今回締日"
-        Me.今回締日.Name = "今回締日"
-        Me.今回締日.Width = 78
-        '
-        '次回締日
-        '
-        Me.次回締日.HeaderText = "次回締日"
-        Me.次回締日.Name = "次回締日"
-        Me.次回締日.Width = 78
-        '
-        '担当者
-        '
-        Me.担当者.HeaderText = "担当者"
-        Me.担当者.Name = "担当者"
-        Me.担当者.Width = 66
         '
         'BtnClosing
         '
@@ -169,6 +153,46 @@ Partial Class ClosingLog
         Me.BtnOutput.Text = "仕訳出力"
         Me.BtnOutput.UseVisualStyleBackColor = True
         '
+        '締処理日時
+        '
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("MS UI Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.締処理日時.DefaultCellStyle = DataGridViewCellStyle3
+        Me.締処理日時.HeaderText = "締処理日時"
+        Me.締処理日時.Name = "締処理日時"
+        Me.締処理日時.Width = 97
+        '
+        '前回締日
+        '
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("MS UI Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.前回締日.DefaultCellStyle = DataGridViewCellStyle4
+        Me.前回締日.HeaderText = "前回締日"
+        Me.前回締日.Name = "前回締日"
+        Me.前回締日.Width = 84
+        '
+        '今回締日
+        '
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("MS UI Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.今回締日.DefaultCellStyle = DataGridViewCellStyle5
+        Me.今回締日.HeaderText = "今回締日"
+        Me.今回締日.Name = "今回締日"
+        Me.今回締日.Width = 84
+        '
+        '次回締日
+        '
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("MS UI Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.次回締日.DefaultCellStyle = DataGridViewCellStyle6
+        Me.次回締日.HeaderText = "次回締日"
+        Me.次回締日.Name = "次回締日"
+        Me.次回締日.Width = 84
+        '
+        '担当者
+        '
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("MS UI Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.担当者.DefaultCellStyle = DataGridViewCellStyle7
+        Me.担当者.HeaderText = "担当者"
+        Me.担当者.Name = "担当者"
+        Me.担当者.Width = 71
+        '
         'ClosingLog
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
@@ -199,10 +223,10 @@ Partial Class ClosingLog
     Friend WithEvents DgvClosingLog As DataGridView
     Friend WithEvents BtnClosing As Button
     Friend WithEvents BtnBack As Button
+    Friend WithEvents BtnOutput As Button
     Friend WithEvents 締処理日時 As DataGridViewTextBoxColumn
     Friend WithEvents 前回締日 As DataGridViewTextBoxColumn
     Friend WithEvents 今回締日 As DataGridViewTextBoxColumn
     Friend WithEvents 次回締日 As DataGridViewTextBoxColumn
     Friend WithEvents 担当者 As DataGridViewTextBoxColumn
-    Friend WithEvents BtnOutput As Button
 End Class
