@@ -766,8 +766,8 @@ Public Class PurchasingManagement
 
         'グリッドに何もないときは次画面へ移動しない
         If DgvAdd.RowCount = 0 Then
-            '操作できないメッセージを表示
-            _msgHd.dspMSG("NonAction", frmC01F10_Login.loginValue.Language)
+            '操作できるデータではないことをアラートする
+            _msgHd.dspMSG("chkActionPropriety", frmC01F10_Login.loginValue.Language)
             Exit Sub
         End If
 
