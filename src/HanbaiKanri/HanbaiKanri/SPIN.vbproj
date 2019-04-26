@@ -102,6 +102,12 @@
     <Import Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Form\Information.Designer.vb">
+      <DependentUpon>Information.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Information.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\MovementInput.Designer.vb">
       <DependentUpon>MovementInput.vb</DependentUpon>
     </Compile>
@@ -550,6 +556,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Form\Information.resx">
+      <DependentUpon>Information.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\MovementInput.resx">
       <DependentUpon>MovementInput.vb</DependentUpon>
     </EmbeddedResource>
@@ -823,6 +832,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="dotNetIco.ico" />
+    <None Include="Resources\information_icon.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\Log\" />

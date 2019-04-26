@@ -263,16 +263,35 @@ Public Class frmC01F10_Login
 
             Else
                 'パスワード変更チェックなし
-                Dim openForm As Form = Nothing
-                openForm = New frmC01F30_Menu(_msgHd, _langHd, _db)
-                openForm.Show()
-                Me.Hide()                                                           '自分は隠れる
 
                 ''「連携処理一覧」画面起動
                 'Dim openForm13 As frmKR13_ProcList = New frmKR13_ProcList(_msgHd, _db, Me, _loginVal.TantoCD, _loginVal.TantoNM)      'パラメタを起動画面へ渡す
                 'StartUp.loginForm = Me
                 'openForm13.Show()                                                   '画面表示
                 'Me.Hide()                                                           '自分は隠れる
+
+                'インフォメーション表示
+
+                Dim informatinoClass = New Information(_msgHd, _db, _langHd, Me)
+                Dim resOrderRemaining As Integer = informatinoClass.getOrderRemaining()
+
+                If resOrderRemaining > 0 Then
+                    '受注残があったら
+
+                    Dim openForm As Form = Nothing
+                    openForm = New Information(_msgHd, _db, _langHd, Me)
+                    openForm.Show()
+                    Me.Hide()
+
+                Else
+                    'インフォメーションがなければメニュー表示
+
+                    Dim openForm As Form = Nothing
+                    openForm = New frmC01F30_Menu(_msgHd, _langHd, _db)
+                    openForm.Show()
+                    Me.Hide()                                                           '自分は隠れる
+
+                End If
 
             End If
 
@@ -728,10 +747,28 @@ Public Class frmC01F10_Login
 
                 Else
                     'パスワード変更チェックなし
-                    Dim openForm As Form = Nothing
-                    openForm = New frmC01F30_Menu(_msgHd, _langHd, _db)
-                    openForm.Show()
-                    Me.Hide()                                                           '自分は隠れる
+                    'インフォメーション表示
+
+                    Dim informatinoClass = New Information(_msgHd, _db, _langHd, Me)
+                    Dim resOrderRemaining As Integer = informatinoClass.getOrderRemaining()
+
+                    If resOrderRemaining > 0 Then
+                        '受注残があったら
+
+                        Dim openForm As Form = Nothing
+                        openForm = New Information(_msgHd, _db, _langHd, Me)
+                        openForm.Show()
+                        Me.Hide()
+
+                    Else
+                        'インフォメーションがなければメニュー表示
+
+                        Dim openForm As Form = Nothing
+                        openForm = New frmC01F30_Menu(_msgHd, _langHd, _db)
+                        openForm.Show()
+                        Me.Hide()                                                           '自分は隠れる
+
+                    End If
 
                     ''「連携処理一覧」画面起動
                     'Dim openForm13 As frmKR13_ProcList = New frmKR13_ProcList(_msgHd, _db, Me, _loginVal.TantoCD, _loginVal.TantoNM)      'パラメタを起動画面へ渡す

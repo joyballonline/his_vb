@@ -76,6 +76,7 @@ Partial Class frmC01F30_Menu
     Friend WithEvents GroupBox3 As GroupBox
     Friend WithEvents TableLayoutPanel27 As TableLayoutPanel
     Friend WithEvents gbM01 As FlowLayoutPanel
+    Friend WithEvents BtnInformation As Button
 
     'メモ: 以下のプロシージャは Windows フォーム デザイナーで必要です。
     'Windows フォーム デザイナーを使用して変更できます。  

@@ -112,6 +112,7 @@ Public Class OrderRemainingList
         Sql += " INNER JOIN  t10_cymnhd t10"
         Sql += " ON t11.会社コード = t10.会社コード"
         Sql += " AND  t11.受注番号 = t10.受注番号"
+        Sql += " AND  t11.受注番号枝番 = t10.受注番号枝番"
 
         Sql += " WHERE t11.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql += " AND "
