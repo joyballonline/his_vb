@@ -136,12 +136,16 @@ Public Class frmC01F10_Login
 
         Dim netChk As Boolean = networkCheck()
         If netChk Then
-            accountCheck()
-            useLimitCheck()
+            '20190502　いったんコメントアウト
+            'accountCheck()
+            'useLimitCheck()
         Else
             _msgHd.dspMSG("chkNetworkError", CommonConst.LANG_KBN_JPN)
             Application.Exit()
         End If
+
+        '初期化
+        Call initForm()
 
     End Sub
 
