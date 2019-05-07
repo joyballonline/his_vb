@@ -23,8 +23,6 @@ Partial Class OrderingList
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.BtnPurchaseView = New System.Windows.Forms.Button()
-        Me.RbtnSlip = New System.Windows.Forms.RadioButton()
-        Me.RbtnDetails = New System.Windows.Forms.RadioButton()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -48,7 +46,6 @@ Partial Class OrderingList
         Me.BtnOrding = New System.Windows.Forms.Button()
         Me.BtnReceipt = New System.Windows.Forms.Button()
         Me.BtnPurchaseClone = New System.Windows.Forms.Button()
-        Me.ChkCancelData = New System.Windows.Forms.CheckBox()
         Me.BtnPurchaseCancel = New System.Windows.Forms.Button()
         Me.BtnAP = New System.Windows.Forms.Button()
         Me.LblMode = New System.Windows.Forms.Label()
@@ -56,7 +53,16 @@ Partial Class OrderingList
         Me.TxtCustomerPO = New System.Windows.Forms.TextBox()
         Me.dtPurchaseDateSince = New System.Windows.Forms.DateTimePicker()
         Me.dtPurchaseDateUntil = New System.Windows.Forms.DateTimePicker()
+        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.RbtnSlip = New System.Windows.Forms.RadioButton()
+        Me.RbtnDetails = New System.Windows.Forms.RadioButton()
+        Me.ChkCancelData = New System.Windows.Forms.CheckBox()
+        Me.TxtSpec = New System.Windows.Forms.TextBox()
+        Me.LblSpec = New System.Windows.Forms.Label()
+        Me.TxtItemName = New System.Windows.Forms.TextBox()
+        Me.LblItemName = New System.Windows.Forms.Label()
         CType(Me.DgvHtyhd, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'BtnPurchaseView
@@ -70,35 +76,11 @@ Partial Class OrderingList
         Me.BtnPurchaseView.UseVisualStyleBackColor = True
         Me.BtnPurchaseView.Visible = False
         '
-        'RbtnSlip
-        '
-        Me.RbtnSlip.AutoSize = True
-        Me.RbtnSlip.Checked = True
-        Me.RbtnSlip.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.RbtnSlip.Location = New System.Drawing.Point(16, 196)
-        Me.RbtnSlip.Name = "RbtnSlip"
-        Me.RbtnSlip.Size = New System.Drawing.Size(89, 19)
-        Me.RbtnSlip.TabIndex = 12
-        Me.RbtnSlip.TabStop = True
-        Me.RbtnSlip.Text = "伝票単位"
-        Me.RbtnSlip.UseVisualStyleBackColor = True
-        '
-        'RbtnDetails
-        '
-        Me.RbtnDetails.AutoSize = True
-        Me.RbtnDetails.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.RbtnDetails.Location = New System.Drawing.Point(111, 196)
-        Me.RbtnDetails.Name = "RbtnDetails"
-        Me.RbtnDetails.Size = New System.Drawing.Size(89, 19)
-        Me.RbtnDetails.TabIndex = 13
-        Me.RbtnDetails.Text = "明細単位"
-        Me.RbtnDetails.UseVisualStyleBackColor = True
-        '
         'Label10
         '
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label10.Location = New System.Drawing.Point(13, 162)
+        Me.Label10.Location = New System.Drawing.Point(10, 177)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(87, 15)
         Me.Label10.TabIndex = 84
@@ -107,7 +89,7 @@ Partial Class OrderingList
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(936, 46)
+        Me.Label5.Location = New System.Drawing.Point(936, 44)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(17, 12)
         Me.Label5.TabIndex = 82
@@ -118,7 +100,7 @@ Partial Class OrderingList
         Me.Label6.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.Label6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label6.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label6.Location = New System.Drawing.Point(584, 95)
+        Me.Label6.Location = New System.Drawing.Point(14, 149)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(170, 22)
         Me.Label6.TabIndex = 79
@@ -128,9 +110,9 @@ Partial Class OrderingList
         'TxtSales
         '
         Me.TxtSales.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtSales.Location = New System.Drawing.Point(760, 95)
+        Me.TxtSales.Location = New System.Drawing.Point(190, 149)
         Me.TxtSales.Name = "TxtSales"
-        Me.TxtSales.Size = New System.Drawing.Size(170, 22)
+        Me.TxtSales.Size = New System.Drawing.Size(350, 22)
         Me.TxtSales.TabIndex = 9
         '
         'Label7
@@ -138,7 +120,7 @@ Partial Class OrderingList
         Me.Label7.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.Label7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label7.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label7.Location = New System.Drawing.Point(584, 67)
+        Me.Label7.Location = New System.Drawing.Point(584, 65)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(170, 22)
         Me.Label7.TabIndex = 77
@@ -148,9 +130,9 @@ Partial Class OrderingList
         'TxtPurchaseSince
         '
         Me.TxtPurchaseSince.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtPurchaseSince.Location = New System.Drawing.Point(760, 67)
+        Me.TxtPurchaseSince.Location = New System.Drawing.Point(760, 65)
         Me.TxtPurchaseSince.Name = "TxtPurchaseSince"
-        Me.TxtPurchaseSince.Size = New System.Drawing.Size(170, 22)
+        Me.TxtPurchaseSince.Size = New System.Drawing.Size(369, 22)
         Me.TxtPurchaseSince.TabIndex = 7
         '
         'Label8
@@ -158,7 +140,7 @@ Partial Class OrderingList
         Me.Label8.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.Label8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label8.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label8.Location = New System.Drawing.Point(584, 39)
+        Me.Label8.Location = New System.Drawing.Point(584, 37)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(170, 22)
         Me.Label8.TabIndex = 75
@@ -170,7 +152,7 @@ Partial Class OrderingList
         Me.Label4.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.Label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label4.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label4.Location = New System.Drawing.Point(14, 124)
+        Me.Label4.Location = New System.Drawing.Point(14, 121)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(170, 22)
         Me.Label4.TabIndex = 73
@@ -180,7 +162,7 @@ Partial Class OrderingList
         'TxtSupplierCode
         '
         Me.TxtSupplierCode.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtSupplierCode.Location = New System.Drawing.Point(190, 124)
+        Me.TxtSupplierCode.Location = New System.Drawing.Point(190, 121)
         Me.TxtSupplierCode.Name = "TxtSupplierCode"
         Me.TxtSupplierCode.Size = New System.Drawing.Size(350, 22)
         Me.TxtSupplierCode.TabIndex = 4
@@ -190,7 +172,7 @@ Partial Class OrderingList
         Me.Label3.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.Label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label3.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label3.Location = New System.Drawing.Point(14, 96)
+        Me.Label3.Location = New System.Drawing.Point(14, 93)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(170, 22)
         Me.Label3.TabIndex = 71
@@ -200,7 +182,7 @@ Partial Class OrderingList
         'TxtTel
         '
         Me.TxtTel.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtTel.Location = New System.Drawing.Point(190, 96)
+        Me.TxtTel.Location = New System.Drawing.Point(190, 93)
         Me.TxtTel.Name = "TxtTel"
         Me.TxtTel.Size = New System.Drawing.Size(350, 22)
         Me.TxtTel.TabIndex = 3
@@ -210,7 +192,7 @@ Partial Class OrderingList
         Me.Label2.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.Label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label2.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label2.Location = New System.Drawing.Point(14, 68)
+        Me.Label2.Location = New System.Drawing.Point(14, 65)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(170, 22)
         Me.Label2.TabIndex = 69
@@ -220,7 +202,7 @@ Partial Class OrderingList
         'TxtAddress
         '
         Me.TxtAddress.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtAddress.Location = New System.Drawing.Point(190, 68)
+        Me.TxtAddress.Location = New System.Drawing.Point(190, 65)
         Me.TxtAddress.Name = "TxtAddress"
         Me.TxtAddress.Size = New System.Drawing.Size(350, 22)
         Me.TxtAddress.TabIndex = 2
@@ -230,7 +212,7 @@ Partial Class OrderingList
         Me.Label1.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.Label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label1.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label1.Location = New System.Drawing.Point(14, 40)
+        Me.Label1.Location = New System.Drawing.Point(14, 37)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(170, 22)
         Me.Label1.TabIndex = 67
@@ -250,7 +232,7 @@ Partial Class OrderingList
         'TxtSupplierName
         '
         Me.TxtSupplierName.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtSupplierName.Location = New System.Drawing.Point(190, 40)
+        Me.TxtSupplierName.Location = New System.Drawing.Point(190, 37)
         Me.TxtSupplierName.Name = "TxtSupplierName"
         Me.TxtSupplierName.Size = New System.Drawing.Size(350, 22)
         Me.TxtSupplierName.TabIndex = 1
@@ -332,17 +314,6 @@ Partial Class OrderingList
         Me.BtnPurchaseClone.UseVisualStyleBackColor = True
         Me.BtnPurchaseClone.Visible = False
         '
-        'ChkCancelData
-        '
-        Me.ChkCancelData.AutoSize = True
-        Me.ChkCancelData.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.ChkCancelData.Location = New System.Drawing.Point(401, 196)
-        Me.ChkCancelData.Name = "ChkCancelData"
-        Me.ChkCancelData.Size = New System.Drawing.Size(139, 19)
-        Me.ChkCancelData.TabIndex = 14
-        Me.ChkCancelData.Text = "取消データを含める"
-        Me.ChkCancelData.UseVisualStyleBackColor = True
-        '
         'BtnPurchaseCancel
         '
         Me.BtnPurchaseCancel.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
@@ -382,7 +353,7 @@ Partial Class OrderingList
         Me.Label11.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.Label11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label11.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label11.Location = New System.Drawing.Point(584, 123)
+        Me.Label11.Location = New System.Drawing.Point(584, 92)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(170, 22)
         Me.Label11.TabIndex = 95
@@ -392,9 +363,9 @@ Partial Class OrderingList
         'TxtCustomerPO
         '
         Me.TxtCustomerPO.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtCustomerPO.Location = New System.Drawing.Point(760, 123)
+        Me.TxtCustomerPO.Location = New System.Drawing.Point(760, 92)
         Me.TxtCustomerPO.Name = "TxtCustomerPO"
-        Me.TxtCustomerPO.Size = New System.Drawing.Size(170, 22)
+        Me.TxtCustomerPO.Size = New System.Drawing.Size(369, 22)
         Me.TxtCustomerPO.TabIndex = 10
         '
         'dtPurchaseDateSince
@@ -403,7 +374,7 @@ Partial Class OrderingList
         Me.dtPurchaseDateSince.CustomFormat = ""
         Me.dtPurchaseDateSince.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.dtPurchaseDateSince.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtPurchaseDateSince.Location = New System.Drawing.Point(760, 39)
+        Me.dtPurchaseDateSince.Location = New System.Drawing.Point(760, 37)
         Me.dtPurchaseDateSince.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.dtPurchaseDateSince.Name = "dtPurchaseDateSince"
         Me.dtPurchaseDateSince.Size = New System.Drawing.Size(170, 22)
@@ -416,27 +387,127 @@ Partial Class OrderingList
         Me.dtPurchaseDateUntil.CustomFormat = ""
         Me.dtPurchaseDateUntil.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.dtPurchaseDateUntil.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtPurchaseDateUntil.Location = New System.Drawing.Point(959, 40)
+        Me.dtPurchaseDateUntil.Location = New System.Drawing.Point(959, 38)
         Me.dtPurchaseDateUntil.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.dtPurchaseDateUntil.Name = "dtPurchaseDateUntil"
         Me.dtPurchaseDateUntil.Size = New System.Drawing.Size(170, 22)
         Me.dtPurchaseDateUntil.TabIndex = 333
         Me.dtPurchaseDateUntil.Value = New Date(2019, 1, 1, 0, 0, 0, 0)
         '
+        'TableLayoutPanel1
+        '
+        Me.TableLayoutPanel1.BackColor = System.Drawing.Color.Transparent
+        Me.TableLayoutPanel1.ColumnCount = 5
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 22.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel1.Controls.Add(Me.RbtnSlip, 0, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.RbtnDetails, 1, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.ChkCancelData, 4, 0)
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(13, 201)
+        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
+        Me.TableLayoutPanel1.RowCount = 1
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(834, 29)
+        Me.TableLayoutPanel1.TabIndex = 336
+        '
+        'RbtnSlip
+        '
+        Me.RbtnSlip.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.RbtnSlip.AutoSize = True
+        Me.RbtnSlip.Checked = True
+        Me.RbtnSlip.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.RbtnSlip.Location = New System.Drawing.Point(3, 5)
+        Me.RbtnSlip.Name = "RbtnSlip"
+        Me.RbtnSlip.Size = New System.Drawing.Size(89, 19)
+        Me.RbtnSlip.TabIndex = 11
+        Me.RbtnSlip.TabStop = True
+        Me.RbtnSlip.Text = "伝票単位"
+        Me.RbtnSlip.UseVisualStyleBackColor = True
+        '
+        'RbtnDetails
+        '
+        Me.RbtnDetails.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.RbtnDetails.AutoSize = True
+        Me.RbtnDetails.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.RbtnDetails.Location = New System.Drawing.Point(98, 5)
+        Me.RbtnDetails.Name = "RbtnDetails"
+        Me.RbtnDetails.Size = New System.Drawing.Size(89, 19)
+        Me.RbtnDetails.TabIndex = 12
+        Me.RbtnDetails.Text = "明細単位"
+        Me.RbtnDetails.UseVisualStyleBackColor = True
+        '
+        'ChkCancelData
+        '
+        Me.ChkCancelData.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.ChkCancelData.AutoSize = True
+        Me.ChkCancelData.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.ChkCancelData.Location = New System.Drawing.Point(215, 5)
+        Me.ChkCancelData.Name = "ChkCancelData"
+        Me.ChkCancelData.Size = New System.Drawing.Size(139, 19)
+        Me.ChkCancelData.TabIndex = 14
+        Me.ChkCancelData.Text = "取消データを含める"
+        Me.ChkCancelData.UseVisualStyleBackColor = True
+        '
+        'TxtSpec
+        '
+        Me.TxtSpec.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtSpec.Location = New System.Drawing.Point(760, 149)
+        Me.TxtSpec.Name = "TxtSpec"
+        Me.TxtSpec.Size = New System.Drawing.Size(369, 22)
+        Me.TxtSpec.TabIndex = 345
+        '
+        'LblSpec
+        '
+        Me.LblSpec.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblSpec.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblSpec.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblSpec.Location = New System.Drawing.Point(584, 149)
+        Me.LblSpec.Name = "LblSpec"
+        Me.LblSpec.Size = New System.Drawing.Size(170, 22)
+        Me.LblSpec.TabIndex = 344
+        Me.LblSpec.Text = "型式"
+        Me.LblSpec.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'TxtItemName
+        '
+        Me.TxtItemName.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtItemName.Location = New System.Drawing.Point(760, 121)
+        Me.TxtItemName.Name = "TxtItemName"
+        Me.TxtItemName.Size = New System.Drawing.Size(369, 22)
+        Me.TxtItemName.TabIndex = 343
+        '
+        'LblItemName
+        '
+        Me.LblItemName.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblItemName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblItemName.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblItemName.Location = New System.Drawing.Point(584, 121)
+        Me.LblItemName.Name = "LblItemName"
+        Me.LblItemName.Size = New System.Drawing.Size(170, 22)
+        Me.LblItemName.TabIndex = 342
+        Me.LblItemName.Text = "品名"
+        Me.LblItemName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'OrderingList
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.TxtSpec)
+        Me.Controls.Add(Me.LblSpec)
+        Me.Controls.Add(Me.TxtItemName)
+        Me.Controls.Add(Me.LblItemName)
+        Me.Controls.Add(Me.TableLayoutPanel1)
         Me.Controls.Add(Me.dtPurchaseDateUntil)
         Me.Controls.Add(Me.dtPurchaseDateSince)
-        Me.Controls.Add(Me.RbtnDetails)
-        Me.Controls.Add(Me.RbtnSlip)
         Me.Controls.Add(Me.Label11)
         Me.Controls.Add(Me.TxtCustomerPO)
         Me.Controls.Add(Me.LblMode)
         Me.Controls.Add(Me.BtnAP)
         Me.Controls.Add(Me.BtnPurchaseCancel)
-        Me.Controls.Add(Me.ChkCancelData)
         Me.Controls.Add(Me.BtnPurchaseClone)
         Me.Controls.Add(Me.BtnReceipt)
         Me.Controls.Add(Me.BtnOrding)
@@ -466,14 +537,14 @@ Partial Class OrderingList
         Me.Name = "OrderingList"
         Me.Text = "OrderingList"
         CType(Me.DgvHtyhd, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TableLayoutPanel1.ResumeLayout(False)
+        Me.TableLayoutPanel1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents BtnPurchaseView As Button
-    Friend WithEvents RbtnSlip As RadioButton
-    Friend WithEvents RbtnDetails As RadioButton
     Friend WithEvents Label10 As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents Label6 As Label
@@ -497,7 +568,6 @@ Partial Class OrderingList
     Friend WithEvents BtnOrding As Button
     Friend WithEvents BtnReceipt As Button
     Friend WithEvents BtnPurchaseClone As Button
-    Friend WithEvents ChkCancelData As CheckBox
     Friend WithEvents BtnPurchaseCancel As Button
     Friend WithEvents BtnAP As Button
     Friend WithEvents LblMode As Label
@@ -505,4 +575,12 @@ Partial Class OrderingList
     Friend WithEvents TxtCustomerPO As TextBox
     Friend WithEvents dtPurchaseDateSince As DateTimePicker
     Friend WithEvents dtPurchaseDateUntil As DateTimePicker
+    Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
+    Friend WithEvents RbtnSlip As RadioButton
+    Friend WithEvents RbtnDetails As RadioButton
+    Friend WithEvents ChkCancelData As CheckBox
+    Friend WithEvents TxtSpec As TextBox
+    Friend WithEvents LblSpec As Label
+    Friend WithEvents TxtItemName As TextBox
+    Friend WithEvents LblItemName As Label
 End Class
