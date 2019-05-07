@@ -485,6 +485,10 @@ Public Class SalesList
             Label7.Text = "SalesNumber"
             Label6.Text = "SalesPersonInCharge"
             Label11.Text = "CustomerNumber"
+
+            LblItemName.Text = "ItemName"
+            LblSpec.Text = "Spec"
+
             Label10.Text = "DisplayFormat"
             RbtnSlip.Text = "UnitOfVoucher"
             LblConditions.Text = "TermsOfSelection"
