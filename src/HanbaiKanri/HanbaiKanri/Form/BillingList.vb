@@ -111,8 +111,10 @@ Public Class BillingList
             Label8.Text = "BillingDate"
             Label7.Text = "InvoiceNumber"
             Label11.Text = "CustomerNumber"
-            Label10.Text = "DisplayFormat"
+            LblItemName.Text = "ItemName"
+            LblSpec.Text = "Spec"
 
+            Label10.Text = "DisplayFormat"
             ChkCancelData.Text = "IncludeCancelData"
 
             BtnBillingSearch.Text = "Search"
@@ -130,15 +132,46 @@ Public Class BillingList
         DgvBilling.Columns.Clear()
 
         Dim Sql As String = ""
+        Dim reccnt As Integer = 0 'DB用（デフォルト）
 
         Try
-            Sql += searchConditions() '抽出条件取得
-            Sql += viewFormat() '表示形式条件
 
+            Sql = "SELECT"
+            Sql += " t23.*"
+            Sql += " FROM "
+            Sql += " public.t23_skyuhd t23 "
+
+            Sql += " INNER JOIN "
+            Sql += " t10_cymnhd t10"
+            Sql += " ON "
+            Sql += " t23.会社コード = t10.会社コード "
+            Sql += " AND "
+            Sql += " t23.受注番号 = t10.受注番号"
+            Sql += " AND "
+            Sql += " t23.受注番号枝番 = t10.受注番号枝番"
+            Sql += " AND "
+            Sql += " t10.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '受注取消されていないデータ
+
+            Sql += " INNER JOIN "
+            Sql += " t11_cymndt t11"
+            Sql += " ON "
+            Sql += " t10.会社コード = t11.会社コード"
+            Sql += " AND "
+            Sql += " t10.受注番号 = t11.受注番号"
+            Sql += " AND "
+            Sql += " t10.受注番号枝番 = t11.受注番号枝番"
+
+            Sql += " WHERE "
+            Sql += " t23.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
+
+            Sql += viewSearchConditions() '抽出条件取得
+
+            Sql += " GROUP BY "
+            Sql += " t23.会社コード, t23.請求番号, t23.受注番号, t23.受注番号枝番"
             Sql += " ORDER BY "
-            Sql += "更新日 DESC"
+            Sql += " t23.更新日 DESC"
 
-            ds = getDsData("t23_skyuhd", Sql)
+            ds = _db.selectDB(Sql, RS, reccnt)
 
             '英語の表記
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
@@ -195,8 +228,6 @@ Public Class BillingList
                         CommonConst.BILLING_KBN_NORMAL_TXT
                         )
                 End If
-
-
 
                 DgvBilling.Rows(i).Cells("取消").Value = getDelKbnTxt(ds.Tables(RS).Rows(i)("取消区分"))
                 DgvBilling.Rows(i).Cells("請求日").Value = ds.Tables(RS).Rows(i)("請求日").ToShortDateString()
@@ -288,6 +319,66 @@ Public Class BillingList
 
     End Sub
 
+    Private Function viewSearchConditions() As String
+        Dim Sql As String = ""
+
+        '抽出条件
+        Dim customerName As String = UtilClass.escapeSql(TxtCustomerName.Text)
+        Dim customerCode As String = UtilClass.escapeSql(TxtCustomerCode.Text)
+        Dim sinceDate As String = strFormatDate(dtBillingDateSince.Text)
+        Dim untilDate As String = strFormatDate(dtBillingDateUntil.Text)
+        Dim sinceNum As String = escapeSql(TxtBillingNoSince.Text)
+        Dim poNum As String = UtilClass.escapeSql(TxtCustomerPO.Text)
+        Dim itemName As String = UtilClass.escapeSql(TxtItemName.Text)
+        Dim spec As String = UtilClass.escapeSql(TxtSpec.Text)
+
+        If customerName <> Nothing Then
+            Sql += " AND "
+            Sql += " t23.得意先名 ILIKE '%" & customerName & "%' "
+        End If
+
+        If customerCode <> Nothing Then
+            Sql += " AND "
+            Sql += " t23.得意先コード ILIKE '%" & customerCode & "%' "
+        End If
+
+        If sinceDate <> Nothing Then
+            Sql += " AND "
+            Sql += " t23.請求日 >= '" & sinceDate & "'"
+        End If
+        If untilDate <> Nothing Then
+            Sql += " AND "
+            Sql += " t23.請求日 <= '" & untilDate & "'"
+        End If
+
+        If sinceNum <> Nothing Then
+            Sql += " AND "
+            Sql += " t23.請求番号 ILIKE '%" & sinceNum & "%' "
+        End If
+
+        If poNum <> Nothing Then
+            Sql += " AND "
+            Sql += " t23.客先番号 ILIKE '%" & poNum & "%' "
+        End If
+
+        If itemName <> Nothing Then
+            Sql += " AND "
+            Sql += " t11.品名 ILIKE '%" & itemName & "%' "
+        End If
+
+        If spec <> Nothing Then
+            Sql += " AND "
+            Sql += " t11.型式 ILIKE '%" & spec & "%' "
+        End If
+
+        '取消データを含めない場合
+        If ChkCancelData.Checked = False Then
+            Sql += " AND "
+            Sql += "t23.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+        End If
+
+        Return Sql
+    End Function
 
     '選択データをもとに以下テーブル更新
     't23_skyuhd
@@ -357,53 +448,6 @@ Public Class BillingList
         End If
 
     End Sub
-
-    '抽出条件取得
-    Private Function searchConditions() As String
-        Dim Sql As String = ""
-
-        '抽出条件
-        Dim customerName As String = escapeSql(TxtCustomerName.Text)
-        Dim customerCode As String = escapeSql(TxtCustomerCode.Text)
-        Dim sinceDate As String = strFormatDate(dtBillingDateSince.Text)
-        Dim untilDate As String = strFormatDate(dtBillingDateUntil.Text)
-        Dim sinceNum As String = escapeSql(TxtBillingNoSince.Text)
-        Dim poNum As String = escapeSql(TxtCustomerPO.Text)
-
-        If customerName <> Nothing Then
-            Sql += " AND "
-            Sql += " 得意先名 ILIKE '%" & customerName & "%' "
-        End If
-
-        If customerCode <> Nothing Then
-            Sql += " AND "
-            Sql += " 得意先コード ILIKE '%" & customerCode & "%' "
-        End If
-
-        If sinceDate <> Nothing Then
-            Sql += " AND "
-            Sql += " 請求日 >= '" & sinceDate & "'"
-        End If
-        If untilDate <> Nothing Then
-            Sql += " AND "
-            Sql += " 請求日 <= '" & untilDate & "'"
-        End If
-
-        Console.WriteLine(untilDate)
-
-        If sinceNum <> Nothing Then
-            Sql += " AND "
-            Sql += " 請求番号 ILIKE '%" & sinceNum & "%' "
-        End If
-
-        If poNum <> Nothing Then
-            Sql += " AND "
-            Sql += " 客先番号 ILIKE '%" & poNum & "%' "
-        End If
-
-        Return Sql
-
-    End Function
 
     'sqlで実行する文字列からシングルクォーテーションを文字コードにする
     Private Function escapeSql(ByVal prmSql As String) As String

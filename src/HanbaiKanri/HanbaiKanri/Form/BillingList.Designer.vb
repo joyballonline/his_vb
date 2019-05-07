@@ -25,8 +25,6 @@ Partial Class BillingList
         Me.BtnBillingCancel = New System.Windows.Forms.Button()
         Me.ChkCancelData = New System.Windows.Forms.CheckBox()
         Me.BtnBillingView = New System.Windows.Forms.Button()
-        Me.RbtnSlip = New System.Windows.Forms.RadioButton()
-        Me.RbtnDetails = New System.Windows.Forms.RadioButton()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
@@ -45,6 +43,10 @@ Partial Class BillingList
         Me.TxtCustomerPO = New System.Windows.Forms.TextBox()
         Me.dtBillingDateSince = New System.Windows.Forms.DateTimePicker()
         Me.dtBillingDateUntil = New System.Windows.Forms.DateTimePicker()
+        Me.TxtSpec = New System.Windows.Forms.TextBox()
+        Me.LblSpec = New System.Windows.Forms.Label()
+        Me.TxtItemName = New System.Windows.Forms.TextBox()
+        Me.LblItemName = New System.Windows.Forms.Label()
         CType(Me.DgvBilling, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -63,7 +65,7 @@ Partial Class BillingList
         '
         Me.ChkCancelData.AutoSize = True
         Me.ChkCancelData.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.ChkCancelData.Location = New System.Drawing.Point(16, 196)
+        Me.ChkCancelData.Location = New System.Drawing.Point(13, 208)
         Me.ChkCancelData.Name = "ChkCancelData"
         Me.ChkCancelData.Size = New System.Drawing.Size(139, 19)
         Me.ChkCancelData.TabIndex = 9
@@ -81,37 +83,11 @@ Partial Class BillingList
         Me.BtnBillingView.UseVisualStyleBackColor = True
         Me.BtnBillingView.Visible = False
         '
-        'RbtnSlip
-        '
-        Me.RbtnSlip.AutoSize = True
-        Me.RbtnSlip.Checked = True
-        Me.RbtnSlip.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.RbtnSlip.Location = New System.Drawing.Point(1146, 196)
-        Me.RbtnSlip.Name = "RbtnSlip"
-        Me.RbtnSlip.Size = New System.Drawing.Size(89, 19)
-        Me.RbtnSlip.TabIndex = 10
-        Me.RbtnSlip.TabStop = True
-        Me.RbtnSlip.Text = "伝票単位"
-        Me.RbtnSlip.UseVisualStyleBackColor = True
-        Me.RbtnSlip.Visible = False
-        '
-        'RbtnDetails
-        '
-        Me.RbtnDetails.AutoSize = True
-        Me.RbtnDetails.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.RbtnDetails.Location = New System.Drawing.Point(1241, 196)
-        Me.RbtnDetails.Name = "RbtnDetails"
-        Me.RbtnDetails.Size = New System.Drawing.Size(89, 19)
-        Me.RbtnDetails.TabIndex = 11
-        Me.RbtnDetails.Text = "明細単位"
-        Me.RbtnDetails.UseVisualStyleBackColor = True
-        Me.RbtnDetails.Visible = False
-        '
         'Label10
         '
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label10.Location = New System.Drawing.Point(13, 162)
+        Me.Label10.Location = New System.Drawing.Point(10, 181)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(87, 15)
         Me.Label10.TabIndex = 145
@@ -143,7 +119,7 @@ Partial Class BillingList
         Me.TxtBillingNoSince.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtBillingNoSince.Location = New System.Drawing.Point(760, 67)
         Me.TxtBillingNoSince.Name = "TxtBillingNoSince"
-        Me.TxtBillingNoSince.Size = New System.Drawing.Size(170, 22)
+        Me.TxtBillingNoSince.Size = New System.Drawing.Size(369, 22)
         Me.TxtBillingNoSince.TabIndex = 5
         '
         'Label8
@@ -271,7 +247,7 @@ Partial Class BillingList
         Me.TxtCustomerPO.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtCustomerPO.Location = New System.Drawing.Point(760, 95)
         Me.TxtCustomerPO.Name = "TxtCustomerPO"
-        Me.TxtCustomerPO.Size = New System.Drawing.Size(170, 22)
+        Me.TxtCustomerPO.Size = New System.Drawing.Size(369, 22)
         Me.TxtCustomerPO.TabIndex = 7
         '
         'dtBillingDateSince
@@ -300,14 +276,56 @@ Partial Class BillingList
         Me.dtBillingDateUntil.TabIndex = 332
         Me.dtBillingDateUntil.Value = New Date(2019, 1, 1, 0, 0, 0, 0)
         '
+        'TxtSpec
+        '
+        Me.TxtSpec.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtSpec.Location = New System.Drawing.Point(760, 151)
+        Me.TxtSpec.Name = "TxtSpec"
+        Me.TxtSpec.Size = New System.Drawing.Size(369, 22)
+        Me.TxtSpec.TabIndex = 345
+        '
+        'LblSpec
+        '
+        Me.LblSpec.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblSpec.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblSpec.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblSpec.Location = New System.Drawing.Point(584, 151)
+        Me.LblSpec.Name = "LblSpec"
+        Me.LblSpec.Size = New System.Drawing.Size(170, 22)
+        Me.LblSpec.TabIndex = 344
+        Me.LblSpec.Text = "型式"
+        Me.LblSpec.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'TxtItemName
+        '
+        Me.TxtItemName.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtItemName.Location = New System.Drawing.Point(760, 123)
+        Me.TxtItemName.Name = "TxtItemName"
+        Me.TxtItemName.Size = New System.Drawing.Size(369, 22)
+        Me.TxtItemName.TabIndex = 343
+        '
+        'LblItemName
+        '
+        Me.LblItemName.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblItemName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblItemName.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblItemName.Location = New System.Drawing.Point(584, 123)
+        Me.LblItemName.Name = "LblItemName"
+        Me.LblItemName.Size = New System.Drawing.Size(170, 22)
+        Me.LblItemName.TabIndex = 342
+        Me.LblItemName.Text = "品名"
+        Me.LblItemName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'BillingList
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.TxtSpec)
+        Me.Controls.Add(Me.LblSpec)
+        Me.Controls.Add(Me.TxtItemName)
+        Me.Controls.Add(Me.LblItemName)
         Me.Controls.Add(Me.dtBillingDateUntil)
         Me.Controls.Add(Me.dtBillingDateSince)
-        Me.Controls.Add(Me.RbtnDetails)
-        Me.Controls.Add(Me.RbtnSlip)
         Me.Controls.Add(Me.Label11)
         Me.Controls.Add(Me.TxtCustomerPO)
         Me.Controls.Add(Me.LblMode)
@@ -340,8 +358,6 @@ Partial Class BillingList
     Friend WithEvents BtnBillingCancel As Button
     Friend WithEvents ChkCancelData As CheckBox
     Friend WithEvents BtnBillingView As Button
-    Friend WithEvents RbtnSlip As RadioButton
-    Friend WithEvents RbtnDetails As RadioButton
     Friend WithEvents Label10 As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents Label7 As Label
@@ -360,4 +376,8 @@ Partial Class BillingList
     Friend WithEvents TxtCustomerPO As TextBox
     Friend WithEvents dtBillingDateSince As DateTimePicker
     Friend WithEvents dtBillingDateUntil As DateTimePicker
+    Friend WithEvents TxtSpec As TextBox
+    Friend WithEvents LblSpec As Label
+    Friend WithEvents TxtItemName As TextBox
+    Friend WithEvents LblItemName As Label
 End Class
