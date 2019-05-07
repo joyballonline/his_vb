@@ -1184,20 +1184,20 @@ Public Class OrderList
     End Function
 
     Private Function viewSearchConditions() As String
-        Dim Sql As String
+        Dim Sql As String = ""
 
         '抽出条件
-        Dim customerName As String = escapeSql(TxtCustomerName.Text)
-        Dim customerAddress As String = escapeSql(TxtAddress.Text)
-        Dim customerTel As String = escapeSql(TxtTel.Text)
-        Dim customerCode As String = escapeSql(TxtCustomerCode.Text)
+        Dim customerName As String = UtilClass.escapeSql(TxtCustomerName.Text)
+        Dim customerAddress As String = UtilClass.escapeSql(TxtAddress.Text)
+        Dim customerTel As String = UtilClass.escapeSql(TxtTel.Text)
+        Dim customerCode As String = UtilClass.escapeSql(TxtCustomerCode.Text)
         Dim sinceDate As String = UtilClass.strFormatDate(dtOrderDateSince.Text)
         Dim untilDate As String = UtilClass.strFormatDate(dtOrderDateUntil.Text)
-        Dim sinceNum As String = escapeSql(TxtOrderSince.Text)
-        Dim salesName As String = escapeSql(TxtSales.Text)
-        Dim customerPO As String = escapeSql(TxtCustomerPO.Text)
-        Dim itemName As String = escapeSql(TxtItemName.Text)
-        Dim spec As String = escapeSql(TxtSpec.Text)
+        Dim sinceNum As String = UtilClass.escapeSql(TxtOrderSince.Text)
+        Dim salesName As String = UtilClass.escapeSql(TxtSales.Text)
+        Dim customerPO As String = UtilClass.escapeSql(TxtCustomerPO.Text)
+        Dim itemName As String = UtilClass.escapeSql(TxtItemName.Text)
+        Dim spec As String = UtilClass.escapeSql(TxtSpec.Text)
 
         If customerName <> Nothing Then
             Sql += " AND "
