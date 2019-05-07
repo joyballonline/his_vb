@@ -140,58 +140,53 @@ Public Class DepositDetailList
         Dim reccnt As Integer = 0 'DB用（デフォルト）
         Dim Sql As String = ""
 
-        'Sql += searchConditions() '抽出条件取得
-        'Sql += viewFormat() '表示形式条件
-
         Try
 
             '伝票単位
             If RbtnSlip.Checked Then
 
-                Sql = " SELECT m01.銀行コード , m01.銀行名 , m01.支店名, m01.預金種目 , m01.口座番号, m01.口座名義, t25.* "
+                Sql = " SELECT "
+                Sql += " m01.銀行コード , m01.銀行名 , m01.支店名, m01.預金種目 , m01.口座番号, m01.口座名義 "
+                Sql += " , t25.* "
                 Sql += " FROM t25_nkinhd t25 "
-                Sql += " LEFT JOIN m01_company m01 "
+
+                Sql += " INNER JOIN m01_company m01 "
                 Sql += " ON t25.会社コード = m01.会社コード "
-                'Sql += " AND t25.請求先コード = m01.得意先コード "
+
+                Sql += " INNER JOIN t27_nkinkshihd t27 "
+                Sql += " ON t27.会社コード = t25.会社コード "
+                Sql += " AND t27.入金番号 = t25.入金番号 "
+
+                Sql += " INNER JOIN t23_skyuhd t23 "
+                Sql += " ON t27.会社コード = t23.会社コード "
+                Sql += " AND t27.請求番号 = t23.請求番号 "
+
+                Sql += " INNER JOIN "
+                Sql += " t10_cymnhd t10"
+                Sql += " ON "
+                Sql += " t23.会社コード = t10.会社コード "
+                Sql += " AND "
+                Sql += " t23.受注番号 = t10.受注番号"
+                Sql += " AND "
+                Sql += " t23.受注番号枝番 = t10.受注番号枝番"
+                Sql += " AND "
+                Sql += " t10.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '受注取消されていないデータ
+
+                Sql += " INNER JOIN "
+                Sql += " t11_cymndt t11"
+                Sql += " ON "
+                Sql += " t10.会社コード = t11.会社コード"
+                Sql += " AND "
+                Sql += " t10.受注番号 = t11.受注番号"
+                Sql += " AND "
+                Sql += " t10.受注番号枝番 = t11.受注番号枝番"
+
                 Sql += " WHERE t25.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
 
-                '抽出条件
-                Dim customerName As String = escapeSql(TxtCustomerName.Text)
-                Dim customerCode As String = escapeSql(TxtCustomerCode.Text)
-                Dim sinceDate As String = strFormatDate(dtBillingDateSince.Text) '日付の書式を日本の形式に合わせる
-                Dim untilDate As String = strFormatDate(dtBillingDateUntil.Text) '日付の書式を日本の形式に合わせる
-                Dim sinceNum As String = escapeSql(TxtBillingNo1.Text)
+                Sql += viewSearchConditions() '抽出条件取得
 
-                If customerName <> Nothing Then
-                    Sql += " AND "
-                    Sql += " t25.請求先名 ILIKE '%" & customerName & "%' "
-                End If
-
-                If customerCode <> Nothing Then
-                    Sql += " AND "
-                    Sql += " t25.請求先コード ILIKE '%" & customerCode & "%' "
-                End If
-
-                If sinceDate <> Nothing Then
-                    Sql += " AND "
-                    Sql += " t25.入金日 >= '" & sinceDate & "'"
-                End If
-                If untilDate <> Nothing Then
-                    Sql += " AND "
-                    Sql += " t25.入金日 <= '" & untilDate & "'"
-                End If
-
-                If sinceNum <> Nothing Then
-                    Sql += " AND "
-                    Sql += " t25.入金番号 ILIKE '%" & sinceNum & "%' "
-                End If
-
-                '取消データを含めない場合
-                If ChkCancelData.Checked = False Then
-                    Sql += " AND "
-                    Sql += " t25.取消区分 = 0 "
-                End If
-
+                Sql += " GROUP BY "
+                Sql += " t25.会社コード, t25.入金番号, m01.銀行コード , m01.銀行名 , m01.支店名, m01.預金種目 , m01.口座番号, m01.口座名義, t25.更新日"
                 Sql += " ORDER BY "
                 Sql += "t25.更新日 DESC"
 
@@ -246,13 +241,52 @@ Public Class DepositDetailList
 
             Else '明細単位
 
-                Sql += searchConditions() '抽出条件取得
-                Sql += viewFormat() '表示形式条件
+                Sql = " SELECT "
+                Sql += " t27.* "
+                Sql += " FROM t26_nkindt t26 "
 
+                Sql += " INNER JOIN t25_nkinhd t25 "
+                Sql += " ON t26.会社コード = t25.会社コード "
+                Sql += " AND t26.入金番号 = t25.入金番号 "
+
+                Sql += " INNER JOIN t27_nkinkshihd t27 "
+                Sql += " ON t27.会社コード = t25.会社コード "
+                Sql += " AND t27.入金番号 = t25.入金番号 "
+
+                Sql += " INNER JOIN t23_skyuhd t23 "
+                Sql += " ON t27.会社コード = t23.会社コード "
+                Sql += " AND t27.請求番号 = t23.請求番号 "
+
+                Sql += " INNER JOIN "
+                Sql += " t10_cymnhd t10"
+                Sql += " ON "
+                Sql += " t23.会社コード = t10.会社コード "
+                Sql += " AND "
+                Sql += " t23.受注番号 = t10.受注番号"
+                Sql += " AND "
+                Sql += " t23.受注番号枝番 = t10.受注番号枝番"
+                Sql += " AND "
+                Sql += " t10.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '受注取消されていないデータ
+
+                Sql += " INNER JOIN "
+                Sql += " t11_cymndt t11"
+                Sql += " ON "
+                Sql += " t10.会社コード = t11.会社コード"
+                Sql += " AND "
+                Sql += " t10.受注番号 = t11.受注番号"
+                Sql += " AND "
+                Sql += " t10.受注番号枝番 = t11.受注番号枝番"
+
+                Sql += " WHERE t25.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+
+                Sql += viewSearchConditions() '抽出条件取得
+
+                Sql += " GROUP BY "
+                Sql += " t27.会社コード, t27.入金番号, t27.請求番号, t27.入金日, t27.更新日"
                 Sql += " ORDER BY "
-                Sql += "更新日 DESC"
+                Sql += "t27.更新日 DESC"
 
-                ds = getDsData("t27_nkinkshihd", Sql)
+                ds = _db.selectDB(Sql, RS, reccnt)
 
                 If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                     DgvBilling.Columns.Add("取消", CommonConst.STATUS_CANCEL)
@@ -547,7 +581,7 @@ Public Class DepositDetailList
     End Function
 
     '抽出条件取得
-    Private Function searchConditions() As String
+    Private Function viewSearchConditions() As String
         Dim Sql As String = ""
 
         '抽出条件
@@ -556,47 +590,50 @@ Public Class DepositDetailList
         Dim sinceDate As String = strFormatDate(dtBillingDateSince.Text) '日付の書式を日本の形式に合わせる
         Dim untilDate As String = strFormatDate(dtBillingDateUntil.Text) '日付の書式を日本の形式に合わせる
         Dim sinceNum As String = escapeSql(TxtBillingNo1.Text)
+        Dim itemName As String = UtilClass.escapeSql(TxtItemName.Text)
+        Dim spec As String = UtilClass.escapeSql(TxtSpec.Text)
 
         If customerName <> Nothing Then
             Sql += " AND "
-            Sql += " 請求先名 ILIKE '%" & customerName & "%' "
+            Sql += " t25.請求先名 ILIKE '%" & customerName & "%' "
         End If
 
         If customerCode <> Nothing Then
             Sql += " AND "
-            Sql += " 請求先コード ILIKE '%" & customerCode & "%' "
+            Sql += " t25.請求先コード ILIKE '%" & customerCode & "%' "
         End If
 
         If sinceDate <> Nothing Then
             Sql += " AND "
-            Sql += " 入金日 >= '" & sinceDate & "'"
+            Sql += " t25.入金日 >= '" & sinceDate & "'"
         End If
         If untilDate <> Nothing Then
             Sql += " AND "
-            Sql += " 入金日 <= '" & untilDate & "'"
+            Sql += " t25.入金日 <= '" & untilDate & "'"
         End If
 
         If sinceNum <> Nothing Then
             Sql += " AND "
-            Sql += " 入金番号 ILIKE '%" & sinceNum & "%' "
+            Sql += " t25.入金番号 ILIKE '%" & sinceNum & "%' "
         End If
 
-        Return Sql
+        If itemName <> Nothing Then
+            Sql += " AND "
+            Sql += " t11.品名 ILIKE '%" & itemName & "%' "
+        End If
 
-    End Function
-
-    '表示形式条件
-    Private Function viewFormat() As String
-        Dim Sql As String = ""
+        If spec <> Nothing Then
+            Sql += " AND "
+            Sql += " t11.型式 ILIKE '%" & spec & "%' "
+        End If
 
         '取消データを含めない場合
         If ChkCancelData.Checked = False Then
             Sql += " AND "
-            Sql += " 取消区分 = 0 "
+            Sql += "t25.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
         End If
 
         Return Sql
-
     End Function
 
     'param1：String テーブル名

@@ -22,11 +22,8 @@ Partial Class DepositDetailList
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.RbtnSlip = New System.Windows.Forms.RadioButton()
-        Me.RbtnDetails = New System.Windows.Forms.RadioButton()
         Me.LblMode = New System.Windows.Forms.Label()
         Me.BtnDepositCancel = New System.Windows.Forms.Button()
-        Me.ChkCancelData = New System.Windows.Forms.CheckBox()
         Me.BtnDepositView = New System.Windows.Forms.Button()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -43,32 +40,17 @@ Partial Class DepositDetailList
         Me.DgvBilling = New System.Windows.Forms.DataGridView()
         Me.dtBillingDateSince = New System.Windows.Forms.DateTimePicker()
         Me.dtBillingDateUntil = New System.Windows.Forms.DateTimePicker()
+        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.RbtnSlip = New System.Windows.Forms.RadioButton()
+        Me.RbtnDetails = New System.Windows.Forms.RadioButton()
+        Me.ChkCancelData = New System.Windows.Forms.CheckBox()
+        Me.TxtSpec = New System.Windows.Forms.TextBox()
+        Me.LblSpec = New System.Windows.Forms.Label()
+        Me.TxtItemName = New System.Windows.Forms.TextBox()
+        Me.LblItemName = New System.Windows.Forms.Label()
         CType(Me.DgvBilling, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'RbtnSlip
-        '
-        Me.RbtnSlip.AutoSize = True
-        Me.RbtnSlip.Checked = True
-        Me.RbtnSlip.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.RbtnSlip.Location = New System.Drawing.Point(16, 196)
-        Me.RbtnSlip.Name = "RbtnSlip"
-        Me.RbtnSlip.Size = New System.Drawing.Size(89, 19)
-        Me.RbtnSlip.TabIndex = 9
-        Me.RbtnSlip.TabStop = True
-        Me.RbtnSlip.Text = "伝票単位"
-        Me.RbtnSlip.UseVisualStyleBackColor = True
-        '
-        'RbtnDetails
-        '
-        Me.RbtnDetails.AutoSize = True
-        Me.RbtnDetails.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.RbtnDetails.Location = New System.Drawing.Point(111, 195)
-        Me.RbtnDetails.Name = "RbtnDetails"
-        Me.RbtnDetails.Size = New System.Drawing.Size(89, 19)
-        Me.RbtnDetails.TabIndex = 10
-        Me.RbtnDetails.Text = "明細単位"
-        Me.RbtnDetails.UseVisualStyleBackColor = True
         '
         'LblMode
         '
@@ -93,17 +75,6 @@ Partial Class DepositDetailList
         Me.BtnDepositCancel.UseVisualStyleBackColor = True
         Me.BtnDepositCancel.Visible = False
         '
-        'ChkCancelData
-        '
-        Me.ChkCancelData.AutoSize = True
-        Me.ChkCancelData.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.ChkCancelData.Location = New System.Drawing.Point(401, 196)
-        Me.ChkCancelData.Name = "ChkCancelData"
-        Me.ChkCancelData.Size = New System.Drawing.Size(139, 19)
-        Me.ChkCancelData.TabIndex = 8
-        Me.ChkCancelData.Text = "取消データを含める"
-        Me.ChkCancelData.UseVisualStyleBackColor = True
-        '
         'BtnDepositView
         '
         Me.BtnDepositView.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
@@ -119,7 +90,7 @@ Partial Class DepositDetailList
         '
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label10.Location = New System.Drawing.Point(13, 164)
+        Me.Label10.Location = New System.Drawing.Point(10, 179)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(87, 15)
         Me.Label10.TabIndex = 323
@@ -151,7 +122,7 @@ Partial Class DepositDetailList
         Me.TxtBillingNo1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtBillingNo1.Location = New System.Drawing.Point(760, 71)
         Me.TxtBillingNo1.Name = "TxtBillingNo1"
-        Me.TxtBillingNo1.Size = New System.Drawing.Size(170, 22)
+        Me.TxtBillingNo1.Size = New System.Drawing.Size(369, 22)
         Me.TxtBillingNo1.TabIndex = 5
         '
         'Label8
@@ -276,17 +247,117 @@ Partial Class DepositDetailList
         Me.dtBillingDateUntil.TabIndex = 331
         Me.dtBillingDateUntil.Value = New Date(2019, 1, 1, 0, 0, 0, 0)
         '
+        'TableLayoutPanel1
+        '
+        Me.TableLayoutPanel1.BackColor = System.Drawing.Color.Transparent
+        Me.TableLayoutPanel1.ColumnCount = 5
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 22.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel1.Controls.Add(Me.RbtnSlip, 0, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.RbtnDetails, 1, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.ChkCancelData, 4, 0)
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(13, 203)
+        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
+        Me.TableLayoutPanel1.RowCount = 1
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(834, 29)
+        Me.TableLayoutPanel1.TabIndex = 336
+        '
+        'RbtnSlip
+        '
+        Me.RbtnSlip.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.RbtnSlip.AutoSize = True
+        Me.RbtnSlip.Checked = True
+        Me.RbtnSlip.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.RbtnSlip.Location = New System.Drawing.Point(3, 5)
+        Me.RbtnSlip.Name = "RbtnSlip"
+        Me.RbtnSlip.Size = New System.Drawing.Size(89, 19)
+        Me.RbtnSlip.TabIndex = 11
+        Me.RbtnSlip.TabStop = True
+        Me.RbtnSlip.Text = "伝票単位"
+        Me.RbtnSlip.UseVisualStyleBackColor = True
+        '
+        'RbtnDetails
+        '
+        Me.RbtnDetails.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.RbtnDetails.AutoSize = True
+        Me.RbtnDetails.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.RbtnDetails.Location = New System.Drawing.Point(98, 5)
+        Me.RbtnDetails.Name = "RbtnDetails"
+        Me.RbtnDetails.Size = New System.Drawing.Size(89, 19)
+        Me.RbtnDetails.TabIndex = 12
+        Me.RbtnDetails.Text = "明細単位"
+        Me.RbtnDetails.UseVisualStyleBackColor = True
+        '
+        'ChkCancelData
+        '
+        Me.ChkCancelData.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.ChkCancelData.AutoSize = True
+        Me.ChkCancelData.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.ChkCancelData.Location = New System.Drawing.Point(215, 5)
+        Me.ChkCancelData.Name = "ChkCancelData"
+        Me.ChkCancelData.Size = New System.Drawing.Size(139, 19)
+        Me.ChkCancelData.TabIndex = 14
+        Me.ChkCancelData.Text = "取消データを含める"
+        Me.ChkCancelData.UseVisualStyleBackColor = True
+        '
+        'TxtSpec
+        '
+        Me.TxtSpec.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtSpec.Location = New System.Drawing.Point(760, 125)
+        Me.TxtSpec.Name = "TxtSpec"
+        Me.TxtSpec.Size = New System.Drawing.Size(369, 22)
+        Me.TxtSpec.TabIndex = 345
+        '
+        'LblSpec
+        '
+        Me.LblSpec.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblSpec.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblSpec.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblSpec.Location = New System.Drawing.Point(584, 125)
+        Me.LblSpec.Name = "LblSpec"
+        Me.LblSpec.Size = New System.Drawing.Size(170, 22)
+        Me.LblSpec.TabIndex = 344
+        Me.LblSpec.Text = "型式"
+        Me.LblSpec.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'TxtItemName
+        '
+        Me.TxtItemName.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtItemName.Location = New System.Drawing.Point(760, 97)
+        Me.TxtItemName.Name = "TxtItemName"
+        Me.TxtItemName.Size = New System.Drawing.Size(369, 22)
+        Me.TxtItemName.TabIndex = 343
+        '
+        'LblItemName
+        '
+        Me.LblItemName.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblItemName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblItemName.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblItemName.Location = New System.Drawing.Point(584, 97)
+        Me.LblItemName.Name = "LblItemName"
+        Me.LblItemName.Size = New System.Drawing.Size(170, 22)
+        Me.LblItemName.TabIndex = 342
+        Me.LblItemName.Text = "品名"
+        Me.LblItemName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'DepositDetailList
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.TxtSpec)
+        Me.Controls.Add(Me.LblSpec)
+        Me.Controls.Add(Me.TxtItemName)
+        Me.Controls.Add(Me.LblItemName)
+        Me.Controls.Add(Me.TableLayoutPanel1)
         Me.Controls.Add(Me.dtBillingDateUntil)
         Me.Controls.Add(Me.dtBillingDateSince)
-        Me.Controls.Add(Me.RbtnDetails)
-        Me.Controls.Add(Me.RbtnSlip)
         Me.Controls.Add(Me.LblMode)
         Me.Controls.Add(Me.BtnDepositCancel)
-        Me.Controls.Add(Me.ChkCancelData)
         Me.Controls.Add(Me.BtnDepositView)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.Label5)
@@ -306,16 +377,14 @@ Partial Class DepositDetailList
         Me.Name = "DepositDetailList"
         Me.Text = "DepositDetailList"
         CType(Me.DgvBilling, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TableLayoutPanel1.ResumeLayout(False)
+        Me.TableLayoutPanel1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents RbtnSlip As RadioButton
-    Friend WithEvents RbtnDetails As RadioButton
     Friend WithEvents LblMode As Label
     Friend WithEvents BtnDepositCancel As Button
-    Friend WithEvents ChkCancelData As CheckBox
     Friend WithEvents BtnDepositView As Button
     Friend WithEvents Label10 As Label
     Friend WithEvents Label5 As Label
@@ -332,4 +401,12 @@ Partial Class DepositDetailList
     Friend WithEvents DgvBilling As DataGridView
     Friend WithEvents dtBillingDateSince As DateTimePicker
     Friend WithEvents dtBillingDateUntil As DateTimePicker
+    Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
+    Friend WithEvents RbtnSlip As RadioButton
+    Friend WithEvents RbtnDetails As RadioButton
+    Friend WithEvents ChkCancelData As CheckBox
+    Friend WithEvents TxtSpec As TextBox
+    Friend WithEvents LblSpec As Label
+    Friend WithEvents TxtItemName As TextBox
+    Friend WithEvents LblItemName As Label
 End Class
