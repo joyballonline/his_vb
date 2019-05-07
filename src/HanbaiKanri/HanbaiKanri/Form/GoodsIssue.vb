@@ -586,10 +586,8 @@ Public Class GoodsIssue
     Private Sub BtnRegist_Click(sender As Object, e As EventArgs) Handles BtnRegist.Click
 
         Dim dtToday As DateTime = DateTime.Now
-        Dim strToday As String = strFormatDate(DateTime.Now)
 
         Dim reccnt As Integer = 0 'DB用（デフォルト）
-
         Dim Sql As String = ""
 
         Sql = " AND "
@@ -883,7 +881,7 @@ Public Class GoodsIssue
                             _db.executeDB(Sql)
 
                             Sql = "update t10_cymnhd set "
-                            Sql += "更新日 = '" & strToday & "'"
+                            Sql += "更新日 = '" & dtToday & "'"
                             Sql += ",更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
                             Sql += " where 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
                             Sql += " AND "
