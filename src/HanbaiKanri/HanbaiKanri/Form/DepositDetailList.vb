@@ -111,6 +111,8 @@ Public Class DepositDetailList
             Label4.Text = "CustomerCode"
             Label8.Text = "MoneyReceiptDate"
             Label7.Text = "MoneyReceiptNumber"
+            LblItemName.Text = "ItemName"
+            LblSpec.Text = "Spec"
             Label10.Text = "DisplayFormat"
             RbtnSlip.Text = "UnitOfVoucher"
 
