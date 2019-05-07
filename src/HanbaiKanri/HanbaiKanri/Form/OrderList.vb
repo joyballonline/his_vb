@@ -74,6 +74,13 @@ Public Class OrderList
         Me.ControlBox = Not Me.ControlBox
         _init = True
         DgvCymnhd.AutoSizeColumnsMode = DataGridViewAutoSizeColumnMode.DisplayedCells
+
+        '受注参照以外では隠す
+        LblItemName.Visible = False
+        TxtItemName.Visible = False
+        LblSpec.Visible = False
+        TxtSpec.Visible = False
+
     End Sub
 
     Private Sub MstHanyoue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -113,6 +120,12 @@ Public Class OrderList
 
             BtnOrderView.Visible = True
             BtnOrderView.Location = New Point(997, 509)
+
+            LblItemName.Visible = True
+            TxtItemName.Visible = True
+            LblSpec.Visible = True
+            TxtSpec.Visible = True
+
         ElseIf OrderStatus = CommonConst.STATUS_CANCEL Then
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "CancelMode"
@@ -176,6 +189,10 @@ Public Class OrderList
             BtnOrderView.Text = "OrderView"
             BtnOrderEdit.Text = "OrderEdit"
             BtnBack.Text = "Back"
+
+            '受注参照時のみ表示される
+            LblItemName.Text = "ItemName"
+            LblSpec.Text = "Spec"
         End If
     End Sub
 
@@ -198,6 +215,8 @@ Public Class OrderList
         Dim sinceNum As String = escapeSql(TxtOrderSince.Text)
         Dim salesName As String = escapeSql(TxtSales.Text)
         Dim customerPO As String = escapeSql(TxtCustomerPO.Text)
+        Dim itemName As String = escapeSql(TxtItemName.Text)
+        Dim spec As String = escapeSql(TxtSpec.Text)
 
         Try
 
@@ -367,6 +386,61 @@ Public Class OrderList
                         Sql += " AND "
                         Sql += " t10.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
                     End If
+
+                    Sql += " ORDER BY "
+                    Sql += " t11.登録日 DESC"
+
+                    ds = _db.selectDB(Sql, RS, reccnt)
+
+                    setRows(ds) '行をセット
+
+                End If
+
+                Exit Sub
+
+            End If
+
+            '受注参照時、品名と型式も検索
+            If OrderStatus = CommonConst.STATUS_VIEW Then
+
+                '伝票単位の場合
+                If RbtnSlip.Checked Then
+
+                    Sql = " SELECT t10.* "
+                    Sql += " FROM t10_cymnhd t10 "
+
+                    Sql += " LEFT JOIN t11_cymndt t11 "
+                    Sql += " ON t10.会社コード = t11.会社コード "
+                    Sql += " AND t10.受注番号 = t11.受注番号 "
+                    Sql += " AND t10.受注番号枝番 = t11.受注番号枝番 "
+
+                    Sql += " WHERE t10.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "' "
+
+                    Sql += viewSearchConditions() '検索条件
+
+                    Sql += " GROUP BY "
+                    Sql += " t10.会社コード, t10.受注番号, t10.受注番号枝番"
+                    Sql += " ORDER BY "
+                    Sql += " t10.登録日 DESC"
+
+                    ds = _db.selectDB(Sql, RS, reccnt)
+
+                    setRows(ds) '行をセット
+
+                Else
+                    '明細単位
+
+                    Sql = "SELECT t11.*, t10.取消区分 "
+                    Sql += " FROM t11_cymndt t11 "
+
+                    Sql += " LEFT JOIN  t10_cymnhd t10 "
+                    Sql += " ON t11.会社コード = t10.会社コード "
+                    Sql += " AND t11.受注番号 = t10.受注番号 "
+                    Sql += " AND t11.受注番号枝番 = t10.受注番号枝番 "
+
+                    Sql += " WHERE t10.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "' "
+
+                    Sql += viewSearchConditions() '検索条件
 
                     Sql += " ORDER BY "
                     Sql += " t11.登録日 DESC"
@@ -1107,6 +1181,85 @@ Public Class OrderList
 
         Return Sql
 
+    End Function
+
+    Private Function viewSearchConditions() As String
+        Dim Sql As String
+
+        '抽出条件
+        Dim customerName As String = escapeSql(TxtCustomerName.Text)
+        Dim customerAddress As String = escapeSql(TxtAddress.Text)
+        Dim customerTel As String = escapeSql(TxtTel.Text)
+        Dim customerCode As String = escapeSql(TxtCustomerCode.Text)
+        Dim sinceDate As String = UtilClass.strFormatDate(dtOrderDateSince.Text)
+        Dim untilDate As String = UtilClass.strFormatDate(dtOrderDateUntil.Text)
+        Dim sinceNum As String = escapeSql(TxtOrderSince.Text)
+        Dim salesName As String = escapeSql(TxtSales.Text)
+        Dim customerPO As String = escapeSql(TxtCustomerPO.Text)
+        Dim itemName As String = escapeSql(TxtItemName.Text)
+        Dim spec As String = escapeSql(TxtSpec.Text)
+
+        If customerName <> Nothing Then
+            Sql += " AND "
+            Sql += " t10.得意先名 ILIKE '%" & customerName & "%' "
+        End If
+
+        If customerAddress <> Nothing Then
+            Sql += " AND "
+            Sql += " t10.得意先住所 ILIKE '%" & customerAddress & "%' "
+        End If
+
+        If customerTel <> Nothing Then
+            Sql += " AND "
+            Sql += " t10.得意先電話番号 ILIKE '%" & customerTel & "%' "
+        End If
+
+        If customerCode <> Nothing Then
+            Sql += " AND "
+            Sql += " t10.得意先コード ILIKE '%" & customerCode & "%' "
+        End If
+
+        If sinceDate <> Nothing Then
+            Sql += " AND "
+            Sql += " t10.受注日 >= '" & sinceDate & "'"
+        End If
+        If untilDate <> Nothing Then
+            Sql += " AND "
+            Sql += " t10.受注日 <= '" & untilDate & "'"
+        End If
+
+        If sinceNum <> Nothing Then
+            Sql += " AND "
+            Sql += " t11.受注番号 ILIKE '%" & sinceNum & "%' "
+        End If
+
+        If salesName <> Nothing Then
+            Sql += " AND "
+            Sql += " t10.営業担当者 ILIKE '%" & salesName & "%' "
+        End If
+
+        If customerPO <> Nothing Then
+            Sql += " AND "
+            Sql += " t10.客先番号 ILIKE '%" & customerPO & "%' "
+        End If
+
+        If itemName <> Nothing Then
+            Sql += " AND "
+            Sql += " t11.品名 ILIKE '%" & itemName & "%' "
+        End If
+
+        If spec <> Nothing Then
+            Sql += " AND "
+            Sql += " t11.型式 ILIKE '%" & spec & "%' "
+        End If
+
+        '取消データを含めない場合
+        If ChkCancelData.Checked = False Then
+            Sql += " AND "
+            Sql += " t10.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+        End If
+
+        Return Sql
     End Function
 
     Private Function actionChk() As Boolean
