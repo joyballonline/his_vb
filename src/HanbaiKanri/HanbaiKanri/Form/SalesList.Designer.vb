@@ -127,7 +127,7 @@ Partial Class SalesList
         Me.TxtSalesSince.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtSalesSince.Location = New System.Drawing.Point(760, 64)
         Me.TxtSalesSince.Name = "TxtSalesSince"
-        Me.TxtSalesSince.Size = New System.Drawing.Size(170, 22)
+        Me.TxtSalesSince.Size = New System.Drawing.Size(369, 22)
         Me.TxtSalesSince.TabIndex = 7
         '
         'Label8
@@ -305,7 +305,7 @@ Partial Class SalesList
         Me.TxtCustomerPO.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtCustomerPO.Location = New System.Drawing.Point(760, 92)
         Me.TxtCustomerPO.Name = "TxtCustomerPO"
-        Me.TxtCustomerPO.Size = New System.Drawing.Size(170, 22)
+        Me.TxtCustomerPO.Size = New System.Drawing.Size(369, 22)
         Me.TxtCustomerPO.TabIndex = 10
         '
         'dtDateSince
