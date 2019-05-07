@@ -881,7 +881,7 @@ Public Class GoodsIssue
                             _db.executeDB(Sql)
 
                             Sql = "update t10_cymnhd set "
-                            Sql += "更新日 = '" & dtToday & "'"
+                            Sql += "更新日 = '" & UtilClass.formatDatetime(dtToday) & "'"
                             Sql += ",更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
                             Sql += " where 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
                             Sql += " AND "
