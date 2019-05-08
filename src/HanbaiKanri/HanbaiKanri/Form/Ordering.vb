@@ -241,6 +241,7 @@ Public Class Ordering
             LblRegistrationDate.Location = New Point(802, 13)
             DtpRegistrationDate.Location = New Point(968, 13)
             DtpRegistrationDate.Size = New Size(130, 22)
+            DtpRegistrationDate.Enabled = False
 
             LblSupplierName.Text = "SupplierName"
             LblAddress.Text = "Address"
@@ -251,16 +252,10 @@ Public Class Ordering
             LblSales.Text = "SalesPersonInCharge"
             LblInput.Text = "PICForInputting"
             LblPaymentTerms.Text = "PaymentTerms"
-            'TxtPaymentTerms.Location = New Point(181, 158)
-            'LblPaymentTerms.Size = New Size(162, 23)
             LblPurchaseRemarks.Text = "PurchaseRemarks"
             LblPurchaseRemarks.Font = New Font("MS UI Gothic", 9.0!, FontStyle.Regular, GraphicsUnit.Point, 128)
             LblRemarks.Font = New Font("MS UI Gothic", 9.0!, FontStyle.Regular, GraphicsUnit.Point, 128)
-            'LblPurchaseRemarks.Size = New Size(162, 23)
-            'TxtPurchaseRemark.Location = New Point(181, 187)
             LblRemarks.Text = "QuotationRemarks"
-            'LblRemarks.Size = New Size(162, 23)
-            'TxtQuoteRemarks.Location = New Point(181, 216)
             LblItemCount.Text = "ItemCount"
             LblMethod.Text = "ShippingMethod"
             LblShipDate.Text = "ShipDate"
@@ -272,7 +267,6 @@ Public Class Ordering
 
             TxtSupplierCode.Size = New Point(62, 23)
             BtnCodeSearch.Text = "Search"
-            'BtnCodeSearch.Location = New Point(195, 42)
             BtnCodeSearch.Size = New Size(72, 23)
             BtnInsert.Text = "InsertLine"
             BtnUp.Text = "ShiftLineUp"
@@ -285,7 +279,6 @@ Public Class Ordering
             BtnRegistration.Text = "Registrartion"
             BtnBack.Text = "Back"
 
-            'DgvItemList.Columns("仕入区分").HeaderText = "PurchasingClassification"
             DgvItemList.Columns("メーカー").HeaderText = "Manufacturer"
             DgvItemList.Columns("品名").HeaderText = "ItemName"
             DgvItemList.Columns("型式").HeaderText = "Spec"
@@ -357,7 +350,6 @@ Public Class Ordering
             TxtPerson.Enabled = True
             TxtSales.Enabled = True
             TxtPaymentTerms.Enabled = True
-            DtpRegistrationDate.Enabled = True
 
             Exit Sub
 
@@ -373,7 +365,6 @@ Public Class Ordering
             BtnRegistration.Visible = False
             TxtCustomerPO.Enabled = False
             DtpPurchaseDate.Enabled = False
-            DtpRegistrationDate.Enabled = False
             TxtSales.Enabled = False
             TxtPerson.Enabled = False
             TxtPosition.Enabled = False
@@ -399,7 +390,6 @@ Public Class Ordering
         'ここで最大値の高いものを取得するSQLを実行する
         Sql = " AND 発注番号 = '" & PurchaseNo.ToString & "'"
         Sql += " AND 発注番号枝番 = '" & PurchaseSuffix.ToString & "'"
-        'Sql += " AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
 
         Dim dsHattyu As DataSet = getDsData("t20_hattyu", Sql)
         CompanyCode = dsHattyu.Tables(RS).Rows(0)("会社コード")
@@ -432,10 +422,18 @@ Public Class Ordering
             TxtQuoteSuffix.Text = dsHattyu.Tables(RS).Rows(0)("見積番号枝番")
         End If
         If dsHattyu.Tables(RS).Rows(0)("発注日") IsNot DBNull.Value Then
-            DtpPurchaseDate.Value = dsHattyu.Tables(RS).Rows(0)("発注日")
+            If PurchaseStatus Is CommonConst.STATUS_VIEW Then
+                DtpPurchaseDate.Value = dsHattyu.Tables(RS).Rows(0)("発注日")
+            Else
+                DtpPurchaseDate.Value = dtNow
+            End If
         End If
         If dsHattyu.Tables(RS).Rows(0)("登録日") IsNot DBNull.Value Then
-            DtpRegistrationDate.Value = dsHattyu.Tables(RS).Rows(0)("登録日")
+            If PurchaseStatus Is CommonConst.STATUS_VIEW Then
+                DtpRegistrationDate.Value = dsHattyu.Tables(RS).Rows(0)("登録日")
+            Else
+                DtpPurchaseDate.Value = dtNow
+            End If
         End If
         If dsHattyu.Tables(RS).Rows(0)("仕入先コード") IsNot DBNull.Value Then
             TxtSupplierCode.Text = dsHattyu.Tables(RS).Rows(0)("仕入先コード")
@@ -510,11 +508,9 @@ Public Class Ordering
         Sql += " WHERE t21.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql += " AND t21.発注番号 ILIKE '" & PurchaseNo.ToString & "'"
         Sql += " AND t21.発注番号枝番 ILIKE '" & PurchaseSuffix.ToString & "'"
-        'Sql += " AND t20.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
         Sql += " ORDER BY t21.行番号 "
 
         Dim dsHattyudt As DataSet = _db.selectDB(Sql, RS, reccnt)
-        'Dim dsHattyudt As DataSet = getDsData("t21_hattyu", Sql)
 
         For i As Integer = 0 To dsHattyudt.Tables(RS).Rows.Count - 1
             DgvItemList.Rows.Add()
@@ -587,7 +583,6 @@ Public Class Ordering
             TxtPerson.Enabled = True
             TxtSales.Enabled = True
             TxtPaymentTerms.Enabled = True
-            DtpRegistrationDate.Enabled = True
 
             '発注番号を新規発行
             Dim PO As String = getSaiban("30", dtNow)
