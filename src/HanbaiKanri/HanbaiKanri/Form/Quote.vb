@@ -91,11 +91,7 @@ Public Class Quote
     End Sub
 
     Private Sub Quote_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-        'DateTimePickerのフォーマットを指定
-        DtpRegistration.Text = DateTime.Today
-        DtpQuote.Text = DateTime.Today
-        DtpExpiration.Text = DateAdd("d", CommonConst.DEADLINE_DEFAULT_DAY, DateTime.Today)
+        Dim dtNow As DateTime = DateTime.Now
 
         '仕入原価の制御
         DgvItemList.Columns("仕入原価").ReadOnly = True
@@ -215,8 +211,6 @@ Public Class Quote
             TxtCustomerName.Size = New Size(278, 23)
             TxtCustomerName.Location = New Point(326, 63)
 
-            'LblItemCount.Size = New Size(125, 23)
-            'LblItemCount.Location = New Point(1216, 179)
             LblItemCount.Size = New Size(125, 45)
             LblItemCount.Location = New Point(1216, 157)
             TxtItemCount.Size = New Size(125, 23)
@@ -284,26 +278,35 @@ Public Class Quote
 
         End If
 
-        If EditNo IsNot Nothing Then    '見積編集時
-            '見積基本情報
-            Dim Sql1 As String = ""
-            Sql1 += "SELECT * FROM public.t01_mithd"
-            Sql1 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Sql1 += " and 見積番号 = '" & EditNo.ToString & "'"
-            Sql1 += " AND 見積番号枝番 = '" & EditSuffix.ToString & "'"
+        '
+        '新規登録モード以外
+        '
+        If EditNo IsNot Nothing Then
 
-            Dim ds1 = _db.selectDB(Sql1, RS, reccnt)
+            Dim Sql As String = ""
 
-            Dim Sql2 As String = ""
-            Sql2 += "SELECT 見積番号枝番 FROM public.t01_mithd"
-            Sql2 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Sql2 += " and 見積番号 =  '" & EditNo.ToString & "'"
+            '見積基本情報取得
+            Sql = "SELECT * FROM public.t01_mithd"
+            Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += " and 見積番号 = '" & EditNo.ToString & "'"
+            Sql += " AND 見積番号枝番 = '" & EditSuffix.ToString & "'"
 
-            Dim ds2 = _db.selectDB(Sql2, RS, reccnt)
+            Dim ds1 = _db.selectDB(Sql, RS, reccnt)
+
+            '見積番号の最新の枝番を取ろうとしているっぽい
+            Sql = "SELECT 見積番号枝番 FROM public.t01_mithd"
+            Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += " and 見積番号 =  '" & EditNo.ToString & "'"
+
+            Dim ds2 = _db.selectDB(Sql, RS, reccnt)
             Dim SuffixMax As Integer = 0
+
+            '=======================
+            '   複写モード
+            '=======================
             If Status Is CommonConst.STATUS_CLONE Then
-                Dim Sql As String = ""
-                Sql += "SELECT "
+
+                Sql = "SELECT "
                 Sql += "会社コード, "
                 Sql += "採番キー, "
                 Sql += "最新値, "
@@ -315,32 +318,49 @@ Public Class Quote
                 Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
                 Sql += " and 採番キー = '10'"
 
-
                 Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
-                Dim dtNow As DateTime = DateTime.Now
+
                 ' 指定した書式で日付を文字列に変換する
                 Dim QuoteDate As String = dtNow.ToString("MMdd")
 
-                TxtQuoteNo.Text += ds.Tables(RS).Rows(0)(5)
+                TxtQuoteNo.Text += ds.Tables(RS).Rows(0)("接頭文字")
                 TxtQuoteNo.Text += QuoteDate
-                CompanyCode = ds.Tables(RS).Rows(0)(0)
-                KeyNo = ds.Tables(RS).Rows(0)(1)
-                QuoteNo = ds.Tables(RS).Rows(0)(2)
-                QuoteNoMin = ds.Tables(RS).Rows(0)(3)
-                QuoteNoMax = ds.Tables(RS).Rows(0)(4)
-                TxtQuoteNo.Text += QuoteNo.PadLeft(ds.Tables(RS).Rows(0)(6), "0")
+                CompanyCode = ds.Tables(RS).Rows(0)("会社コード")
+                KeyNo = ds.Tables(RS).Rows(0)("採番キー")
+                QuoteNo = ds.Tables(RS).Rows(0)("最新値")
+                QuoteNoMin = ds.Tables(RS).Rows(0)("最小値")
+                QuoteNoMax = ds.Tables(RS).Rows(0)("最大値")
+                TxtQuoteNo.Text += QuoteNo.PadLeft(ds.Tables(RS).Rows(0)("連番桁数"), "0")
 
                 SaibanSave()
+
+                DtpQuote.Value = dtNow.ToShortDateString                                                '見積日
+                DtpExpiration.Text = DateAdd("d", CommonConst.DEADLINE_DEFAULT_DAY, DtpQuote.Value)     '見積有効期限
+
             Else
-                TxtQuoteNo.Text = ds1.Tables(RS).Rows(0)(1)
+                '=======================
+                '   複写モード以外
+                '=======================
+                TxtQuoteNo.Text = ds1.Tables(RS).Rows(0)("見積番号")
                 For index As Integer = 0 To ds2.Tables(RS).Rows.Count - 1
-                    If SuffixMax <= ds2.Tables(RS).Rows(index)(0) Then
-                        SuffixMax = ds2.Tables(RS).Rows(index)(0)
+                    If SuffixMax <= ds2.Tables(RS).Rows(index)("見積番号枝番") Then
+                        SuffixMax = ds2.Tables(RS).Rows(index)("見積番号枝番")
                     End If
                 Next
+
+                Select Case Status
+                    Case CommonConst.STATUS_VIEW
+                        DtpQuote.Value = ds1.Tables(RS).Rows(0)("見積日")                                       '見積日
+                        DtpExpiration.Text = DateAdd("d", CommonConst.DEADLINE_DEFAULT_DAY, DtpQuote.Value)     '見積有効期限
+                    Case Else
+                        DtpQuote.Value = dtNow.ToShortDateString                                                '見積日
+                        DtpExpiration.Text = DateAdd("d", CommonConst.DEADLINE_DEFAULT_DAY, DtpQuote.Value)     '見積有効期限
+                End Select
+
+
             End If
 
-            CompanyCode = ds1.Tables(RS).Rows(0)(0)
+            CompanyCode = ds1.Tables(RS).Rows(0)("会社コード")
 
             Select Case Status
                 Case CommonConst.STATUS_PRICE
@@ -351,18 +371,12 @@ Public Class Quote
                     TxtSuffixNo.Text = SuffixMax + 1
             End Select
 
-            DtpQuote.Value = ds1.Tables(RS).Rows(0)("見積日").ToString
-            DtpExpiration.Value = ds1.Tables(RS).Rows(0)("見積有効期限").ToString
             TxtCustomerCode.Text = ds1.Tables(RS).Rows(0)("得意先コード").ToString
             TxtCustomerName.Text = ds1.Tables(RS).Rows(0)("得意先名").ToString
             TxtPerson.Text = ds1.Tables(RS).Rows(0)("得意先担当者名").ToString
             TxtPosition.Text = ds1.Tables(RS).Rows(0)("得意先担当者役職").ToString
             TxtPostalCode.Text = ds1.Tables(RS).Rows(0)("得意先郵便番号").ToString
             TxtAddress1.Text = ds1.Tables(RS).Rows(0)("得意先住所").ToString
-            'たぶんこの記述だけでDBNull攻略できる（はず）
-            'If ds1.Tables(RS).Rows(0)("得意先電話番号") IsNot DBNull.Value Then
-            '    TxtTel.Text = ds1.Tables(RS).Rows(0)("得意先電話番号")
-            'End If
             TxtTel.Text = ds1.Tables(RS).Rows(0)("得意先電話番号").ToString
             TxtFax.Text = ds1.Tables(RS).Rows(0)("得意先ＦＡＸ").ToString
             TxtSales.Text = ds1.Tables(RS).Rows(0)("営業担当者").ToString
@@ -445,8 +459,12 @@ Public Class Quote
             Next c
             TxtItemCount.Text = DgvItemList.Rows.Count()
 
-        Else    '見積新規追加
-            Dim dtNow As DateTime = DateTime.Now
+        Else
+
+            '=======================
+            '   見積新規登録
+            '=======================
+
             ' 指定した書式で日付を文字列に変換する
             Dim QuoteDate As String = dtNow.ToString("MMdd")
 
@@ -466,21 +484,26 @@ Public Class Quote
 
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-            TxtQuoteNo.Text += ds.Tables(RS).Rows(0)(5)
+            TxtQuoteNo.Text += ds.Tables(RS).Rows(0)("接頭文字")
             TxtQuoteNo.Text += QuoteDate
-            CompanyCode = ds.Tables(RS).Rows(0)(0)
-            KeyNo = ds.Tables(RS).Rows(0)(1)
-            QuoteNo = ds.Tables(RS).Rows(0)(2)
-            QuoteNoMin = ds.Tables(RS).Rows(0)(3)
-            QuoteNoMax = ds.Tables(RS).Rows(0)(4)
-            TxtQuoteNo.Text += QuoteNo.PadLeft(ds.Tables(RS).Rows(0)(6), "0")
+            CompanyCode = ds.Tables(RS).Rows(0)("会社コード")
+            KeyNo = ds.Tables(RS).Rows(0)("採番キー")
+            QuoteNo = ds.Tables(RS).Rows(0)("最新値")
+            QuoteNoMin = ds.Tables(RS).Rows(0)("最小値")
+            QuoteNoMax = ds.Tables(RS).Rows(0)("最大値")
+            TxtQuoteNo.Text += QuoteNo.PadLeft(ds.Tables(RS).Rows(0)("連番桁数"), "0")
+
+            DtpQuote.Value = dtNow.ToShortDateString                                                '見積日
+            DtpExpiration.Text = DateAdd("d", CommonConst.DEADLINE_DEFAULT_DAY, DtpQuote.Value)     '見積有効期限
 
             TxtInput.Text = Input
 
             SaibanSave()
         End If
 
-        '参照モード
+        '=======================
+        '   参照モード
+        '=======================
         If Status Is CommonConst.STATUS_VIEW Then
 
             LblMode.Text = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
@@ -507,23 +530,15 @@ Public Class Quote
             BtnProof.Location = New Point(657, 509)
             BtnCodeSearch.Enabled = False
 
-            'Dim RequestFlg As Boolean = False
-            'For i As Integer = 0 To DgvItemList.Rows.Count() - 1
-            '    If DgvItemList.Rows(i).Cells("仕入区分").Value = 1 And DgvItemList.Rows(i).Cells("仕入単価").Value = 0 Then
-            '        RequestFlg = True
-            '    End If
-            'Next
-
-            'If RequestFlg Then
             BtnQuoteRequest.Visible = True
             BtnQuoteRequest.Location = New Point(828, 509)
-            'Else
             BtnQuote.Visible = True
             BtnQuote.Location = New Point(1004, 509)
-            'End If
 
         ElseIf Status Is CommonConst.STATUS_PRICE Then
-            '仕入単価入力モード
+            '=======================
+            '   仕入単価入力モード
+            '=======================
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "PurchasePriceInputMode"
             Else
@@ -548,6 +563,9 @@ Public Class Quote
             DgvItemList.Columns("仕入先").ReadOnly = True
 
         ElseIf Status Is CommonConst.STATUS_EDIT Then
+            '=======================
+            '   編集モード
+            '=======================
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "EditMode"
             Else
@@ -555,6 +573,9 @@ Public Class Quote
             End If
 
         ElseIf Status Is CommonConst.STATUS_ADD Then
+            '=======================
+            '   新規登録モード
+            '=======================
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "NewRegistrationMode"
             Else

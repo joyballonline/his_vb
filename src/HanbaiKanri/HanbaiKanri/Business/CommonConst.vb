@@ -322,7 +322,7 @@ Public Class CommonConst
     '検索系 開始日のデフォルト値
     Public Const SINCE_DEFAULT_DAY As Integer = -14                          '二週間
 
-    Public Const DEADLINE_DEFAULT_DAY As Integer = 7                          '二週間
+    Public Const DEADLINE_DEFAULT_DAY As Integer = 14                          '二週間
 
     'カルチャー JP
     Public Const CI_JP As String = "ja-JP"               'カルチャー 日本
