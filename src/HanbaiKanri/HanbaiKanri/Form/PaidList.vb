@@ -109,6 +109,8 @@ Public Class PaidList
             Label4.Text = "SupplierCode"
             Label8.Text = "PaymentDate"
             Label7.Text = "PaymentNumber"
+            LblItemName.Text = "ItemName"
+            LblSpec.Text = "Spec"
             Label10.Text = "DisplayFormat"
             RbtnSlip.Text = "UnitOfVoucher"
 
@@ -136,66 +138,57 @@ Public Class PaidList
         Dim reccnt As Integer = 0 'DB用（デフォルト）
         Dim Sql As String = ""
 
-        Sql += searchConditions() '抽出条件取得
-        Sql += viewFormat() '表示形式条件
-
-        Sql += " ORDER BY "
-        Sql += "更新日 DESC"
-
         Try
             '伝票単位
             If RbtnSlip.Checked Then
 
                 Sql = " SELECT m11.銀行コード , m11.銀行名 , m11.支店名, m11.預金種目 , m11.口座番号, m11.口座名義, t47.* "
                 Sql += " FROM t47_shrihd t47 "
-                Sql += " LEFT JOIN m11_supplier m11 "
+
+                Sql += " INNER JOIN m11_supplier m11 "
                 Sql += " ON t47.会社コード = m11.会社コード "
                 Sql += " AND t47.支払先コード = m11.仕入先コード "
+
+                Sql += " INNER JOIN t49_shrikshihd t49 "
+                Sql += " ON t47.会社コード = t49.会社コード "
+                Sql += " AND t47.支払番号 = t49.支払番号 "
+
+                Sql += " INNER JOIN t46_kikehd t46 "
+                Sql += " ON t49.会社コード = t46.会社コード "
+                Sql += " AND t49.買掛番号 = t46.買掛番号 "
+                Sql += " AND "
+                Sql += " t46.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '発注取消されていないデータ
+
+                Sql += " INNER JOIN "
+                Sql += " t20_hattyu t20"
+                Sql += " ON "
+                Sql += " t46.会社コード = t20.会社コード "
+                Sql += " AND "
+                Sql += " t46.発注番号 = t20.発注番号"
+                Sql += " AND "
+                Sql += " t46.発注番号枝番 = t20.発注番号枝番"
+                Sql += " AND "
+                Sql += " t20.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '発注取消されていないデータ
+
+                Sql += " INNER JOIN "
+                Sql += " t21_hattyu t21"
+                Sql += " ON "
+                Sql += " t20.会社コード = t21.会社コード "
+                Sql += " AND "
+                Sql += " t20.発注番号 = t21.発注番号"
+                Sql += " AND "
+                Sql += " t20.発注番号枝番 = t21.発注番号枝番"
+
                 Sql += " WHERE t47.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
 
-                '抽出条件
-                Dim customerName As String = escapeSql(TxtSupplierName.Text)
-                Dim customerCode As String = escapeSql(TxtSupplierCode.Text)
-                Dim sinceDate As String = strFormatDate(dtPaidDateSince.Text)
-                Dim untilDate As String = strFormatDate(dtPaidDateUntil.Text)
-                Dim sinceNum As String = escapeSql(TxtPaidNoSince.Text)
+                Sql += viewSearchConditions() '抽出条件取得
 
-                If customerName <> Nothing Then
-                    Sql += " AND "
-                    Sql += " t47.支払先名 ILIKE '%" & customerName & "%' "
-                End If
-
-                If customerCode <> Nothing Then
-                    Sql += " AND "
-                    Sql += " t47.支払先コード ILIKE '%" & customerCode & "%' "
-                End If
-
-                If sinceDate <> Nothing Then
-                    Sql += " AND "
-                    Sql += " t47.支払日 >= '" & sinceDate & "'"
-                End If
-                If untilDate <> Nothing Then
-                    Sql += " AND "
-                    Sql += " t47.支払日 <= '" & untilDate & "'"
-                End If
-
-                If sinceNum <> Nothing Then
-                    Sql += " AND "
-                    Sql += " t47.支払番号 ILIKE '%" & sinceNum & "%' "
-                End If
-
-                '取消データを含めない場合
-                If ChkCancelData.Checked = False Then
-                    Sql += " AND "
-                    Sql += " t47.取消区分 = 0 "
-                End If
-
+                Sql += " GROUP BY "
+                Sql += " t47.会社コード, t47.支払番号, m11.銀行コード , m11.銀行名 , m11.支店名, m11.預金種目 , m11.口座番号, m11.口座名義, t47.更新日"
                 Sql += " ORDER BY "
                 Sql += "t47.更新日 DESC"
 
                 ds = _db.selectDB(Sql, RS, reccnt)
-
-                'ds = getDsData("t47_shrihd", Sql)
 
                 '英語の表記
                 If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
@@ -233,7 +226,6 @@ Public Class PaidList
                     DgvHtyhd.Rows(index).Cells("支払番号").Value = ds.Tables(RS).Rows(index)("支払番号")
                     DgvHtyhd.Rows(index).Cells("支払日").Value = ds.Tables(RS).Rows(index)("支払日").ToShortDateString
                     DgvHtyhd.Rows(index).Cells("支払先名").Value = ds.Tables(RS).Rows(index)("支払先名")
-                    'DgvHtyhd.Rows(index).Cells("支払先").Value = ds.Tables(RS).Rows(index)("支払先")
                     DgvHtyhd.Rows(index).Cells("支払先").Value = ds.Tables(RS).Rows(0)("銀行名") & " " &
                                                                     ds.Tables(RS).Rows(0)("支店名") & " " &
                                                                     dcName & " " &
@@ -246,14 +238,55 @@ Public Class PaidList
 
             Else '明細単位
 
-                Sql = searchConditions() '抽出条件取得
-                Sql += viewFormat() '表示形式条件
+                Sql = " SELECT t49.* "
+                Sql += " FROM t48_shridt t48 "
 
+                Sql += " INNER JOIN t47_shrihd t47 "
+                Sql += " ON t48.会社コード = t47.会社コード "
+                Sql += " AND t48.支払番号 = t47.支払番号 "
+
+                Sql += " INNER JOIN t49_shrikshihd t49 "
+                Sql += " ON t48.会社コード = t49.会社コード "
+                Sql += " AND t48.支払番号 = t49.支払番号 "
+
+                Sql += " INNER JOIN t46_kikehd t46 "
+                Sql += " ON t49.会社コード = t46.会社コード "
+                Sql += " AND t49.買掛番号 = t46.買掛番号 "
+                Sql += " AND "
+                Sql += " t46.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '発注取消されていないデータ
+
+                Sql += " INNER JOIN "
+                Sql += " t20_hattyu t20"
+                Sql += " ON "
+                Sql += " t46.会社コード = t20.会社コード "
+                Sql += " AND "
+                Sql += " t46.発注番号 = t20.発注番号"
+                Sql += " AND "
+                Sql += " t46.発注番号枝番 = t20.発注番号枝番"
+                Sql += " AND "
+                Sql += " t20.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '発注取消されていないデータ
+
+                Sql += " INNER JOIN "
+                Sql += " t21_hattyu t21"
+                Sql += " ON "
+                Sql += " t20.会社コード = t21.会社コード "
+                Sql += " AND "
+                Sql += " t20.発注番号 = t21.発注番号"
+                Sql += " AND "
+                Sql += " t20.発注番号枝番 = t21.発注番号枝番"
+
+                Sql += " WHERE t47.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+
+                Sql += viewSearchConditions() '抽出条件取得
+
+                Sql += " GROUP BY "
+                Sql += " t49.会社コード, t49.支払番号, t49.買掛番号, t49.支払日"
                 Sql += " ORDER BY "
-                Sql += "更新日 DESC"
+                Sql += "t49.更新日 DESC, t49.支払番号"
 
-                ds = getDsData("t49_shrikshihd", Sql)
+                Console.WriteLine(Sql)
 
+                ds = _db.selectDB(Sql, RS, reccnt)
 
                 '英語の表記
                 If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
@@ -297,6 +330,62 @@ Public Class PaidList
         End Try
 
     End Sub
+
+    '抽出条件取得
+    Private Function viewSearchConditions() As String
+        Dim Sql As String = ""
+
+        '抽出条件
+        Dim customerName As String = UtilClass.escapeSql(TxtSupplierName.Text)
+        Dim customerCode As String = UtilClass.escapeSql(TxtSupplierCode.Text)
+        Dim sinceDate As String = UtilClass.strFormatDate(dtPaidDateSince.Text)
+        Dim untilDate As String = UtilClass.strFormatDate(dtPaidDateUntil.Text)
+        Dim sinceNum As String = UtilClass.escapeSql(TxtPaidNoSince.Text)
+        Dim itemName As String = UtilClass.escapeSql(TxtItemName.Text)
+        Dim spec As String = UtilClass.escapeSql(TxtSpec.Text)
+
+        If customerName <> Nothing Then
+            Sql += " AND "
+            Sql += " t47.支払先名 ILIKE '%" & customerName & "%' "
+        End If
+
+        If customerCode <> Nothing Then
+            Sql += " AND "
+            Sql += " t47.支払先コード ILIKE '%" & customerCode & "%' "
+        End If
+
+        If sinceDate <> Nothing Then
+            Sql += " AND "
+            Sql += " t47.支払日 >= '" & sinceDate & "'"
+        End If
+        If untilDate <> Nothing Then
+            Sql += " AND "
+            Sql += " t47.支払日 <= '" & untilDate & "'"
+        End If
+
+        If sinceNum <> Nothing Then
+            Sql += " AND "
+            Sql += " t47.支払番号 ILIKE '%" & sinceNum & "%' "
+        End If
+
+        If itemName <> Nothing Then
+            Sql += " AND "
+            Sql += " t21.品名 ILIKE '%" & itemName & "%' "
+        End If
+
+        If spec <> Nothing Then
+            Sql += " AND "
+            Sql += " t21.型式 ILIKE '%" & spec & "%' "
+        End If
+
+        '取消データを含めない場合
+        If ChkCancelData.Checked = False Then
+            Sql += " AND "
+            Sql += "t47.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+        End If
+
+        Return Sql
+    End Function
 
     '表示形式を切り替えたら
     Private Sub RbtnDetails_CheckedChanged(sender As Object, e As EventArgs) Handles RbtnDetails.CheckedChanged
@@ -522,65 +611,11 @@ Public Class PaidList
 
     End Sub
 
-
     'テーブルをクリア
     Private Sub clearDGV()
         DgvHtyhd.Rows.Clear()
         DgvHtyhd.Columns.Clear()
     End Sub
-
-    '抽出条件取得
-    Private Function searchConditions() As String
-        Dim Sql As String = ""
-
-        '抽出条件
-        Dim customerName As String = escapeSql(TxtSupplierName.Text)
-        Dim customerCode As String = escapeSql(TxtSupplierCode.Text)
-        Dim sinceDate As String = strFormatDate(dtPaidDateSince.Text)
-        Dim untilDate As String = strFormatDate(dtPaidDateUntil.Text)
-        Dim sinceNum As String = escapeSql(TxtPaidNoSince.Text)
-
-        If customerName <> Nothing Then
-            Sql += " AND "
-            Sql += " 支払先名 ILIKE '%" & customerName & "%' "
-        End If
-
-        If customerCode <> Nothing Then
-            Sql += " AND "
-            Sql += " 支払先コード ILIKE '%" & customerCode & "%' "
-        End If
-
-        If sinceDate <> Nothing Then
-            Sql += " AND "
-            Sql += " 支払日 >= '" & sinceDate & "'"
-        End If
-        If untilDate <> Nothing Then
-            Sql += " AND "
-            Sql += " 支払日 <= '" & untilDate & "'"
-        End If
-
-        If sinceNum <> Nothing Then
-            Sql += " AND "
-            Sql += " 支払番号 ILIKE '%" & sinceNum & "%' "
-        End If
-
-        Return Sql
-
-    End Function
-
-    '表示形式条件
-    Private Function viewFormat() As String
-        Dim Sql As String = ""
-
-        '取消データを含めない場合
-        If ChkCancelData.Checked = False Then
-            Sql += " AND "
-            Sql += " 取消区分 = 0 "
-        End If
-
-        Return Sql
-
-    End Function
 
     'param1：String テーブル名
     'param2：String 詳細条件
