@@ -115,6 +115,8 @@ Public Class ReceiptList
             Label7.Text = "GoodsReceiptNumber"
             Label6.Text = "SalesPersonInCharge"
             Label11.Text = "CustomerNumber"
+            LblItemName.Text = "ItemName"
+            LblSpec.Text = "Spec"
             Label10.Text = "DisplayFormat"
             RbtnSlip.Text = "UnitOfVoucher"
 
@@ -135,6 +137,7 @@ Public Class ReceiptList
     Private Sub nyukoList(Optional ByRef prmRefStatus As String = "")
         Dim Status As String = prmRefStatus
         Dim Sql As String = ""
+        Dim reccnt As Integer = 0 'DB用（デフォルト）
 
         '一覧クリア
         DgvNyuko.Rows.Clear()
@@ -186,12 +189,28 @@ Public Class ReceiptList
 
             Try
 
-                Sql = searchConditions()
-                Sql += viewFormat() '取消有無
-                Sql += " ORDER BY "
-                Sql += "更新日 DESC"
+                Sql = "SELECT"
+                Sql += " t42.*"
+                Sql += " FROM "
+                Sql += " public.t42_nyukohd t42 "
 
-                ds = getDsData("t42_nyukohd", Sql)
+                Sql += " INNER JOIN "
+                Sql += " t43_nyukodt t43"
+                Sql += " ON "
+                Sql += " t42.会社コード = t43.会社コード "
+                Sql += " AND "
+                Sql += " t42.入庫番号 = t43.入庫番号"
+                Sql += " WHERE "
+                Sql += " t42.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
+
+                Sql += viewSearchConditions() '抽出条件取得
+
+                Sql += " GROUP BY "
+                Sql += " t42.会社コード, t42.入庫番号"
+                Sql += " ORDER BY "
+                Sql += "t42.更新日 DESC, t42.入庫番号"
+
+                ds = _db.selectDB(Sql, RS, reccnt)
 
                 For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
                     DgvNyuko.Rows.Add()
@@ -241,7 +260,6 @@ Public Class ReceiptList
                 DgvNyuko.Columns.Add("仕入値", "PurchaseAmount")
                 DgvNyuko.Columns.Add("備考", "Remarks")
                 DgvNyuko.Columns.Add("更新者", "ModifiedBy")
-
             Else
                 DgvNyuko.Columns.Add("取消", "取消")
                 DgvNyuko.Columns.Add("入庫番号", "入庫番号")
@@ -261,90 +279,29 @@ Public Class ReceiptList
             DgvNyuko.Columns("入庫数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             DgvNyuko.Columns("仕入値").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
-
-            Dim reccnt As Integer = 0
-
-            Sql = " SELECT t43.*, t42.取消区分 "
-            Sql += " FROM "
-            Sql += " t43_nyukodt t43"
-            Sql += " INNER JOIN t42_nyukohd t42 ON "
-
-            Sql += " t43.""会社コード"" = t42.""会社コード"""
-            Sql += " AND "
-            Sql += " t43.""入庫番号"" = t42.""入庫番号"""
-
-            Sql += " where "
-            Sql += " t43.""会社コード"" = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-
-            '抽出条件
-            Dim supplierName As String = escapeSql(TxtSupplierName.Text)
-            Dim supplierAddress As String = escapeSql(TxtAddress.Text)
-            Dim supplierTel As String = escapeSql(TxtTel.Text)
-            Dim supplierCode As String = escapeSql(TxtSupplierCode.Text)
-            Dim sinceDate As String = strFormatDate(dtReceiptDateSince.Text)
-            Dim untilDate As String = strFormatDate(dtReceiptDateUntil.Text)
-            Dim sinceNum As String = escapeSql(TxtReceiptSince.Text)
-            'Dim untilNum As String = escapeSql(TxtReceiptUntil.Text)
-            Dim salesName As String = escapeSql(TxtSales.Text)
-            Dim poNum As String = escapeSql(TxtCustomerPO.Text)
-
-            If supplierName <> Nothing Then
-                Sql += " AND "
-                Sql += " t42.仕入先名 ILIKE '%" & supplierName & "%' "
-            End If
-
-            If supplierAddress <> Nothing Then
-                Sql += " AND "
-                Sql += " t42.仕入先住所 ILIKE '%" & supplierAddress & "%' "
-            End If
-
-            If supplierTel <> Nothing Then
-                Sql += " AND "
-                Sql += " t42.仕入先電話番号 ILIKE '%" & supplierTel & "%' "
-            End If
-
-            If supplierCode <> Nothing Then
-                Sql += " AND "
-                Sql += " t42.仕入先コード ILIKE '%" & supplierCode & "%' "
-            End If
-
-            If sinceDate <> Nothing Then
-                Sql += " AND "
-                Sql += " t42.入庫日 >= '" & sinceDate & "'"
-            End If
-            If untilDate <> Nothing Then
-                Sql += " AND "
-                Sql += " t42.入庫日 <= '" & untilDate & "'"
-            End If
-
-            If sinceNum <> Nothing Then
-                Sql += " AND "
-                Sql += " t42.入庫番号 ILIKE '%" & sinceNum & "%' "
-            End If
-            'If untilNum <> Nothing Then
-            '    Sql += " AND "
-            '    Sql += " t42.入庫番号 <= '" & untilNum & "' "
-            'End If
-
-            If poNum <> Nothing Then
-                Sql += " AND "
-                Sql += " t42.営業担当者 ILIKE '%" & salesName & "%' "
-            End If
-
-            If poNum <> Nothing Then
-                Sql += " AND "
-                Sql += " t42.客先番号 ILIKE '%" & salesName & "%' "
-            End If
-
-            If ChkCancelData.Checked = False Then
-                Sql += " AND "
-                Sql += "t42.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
-            End If
-
-            Sql += " ORDER BY "
-            Sql += "t42.更新日 DESC"
-
             Try
+
+                Sql = "SELECT"
+                Sql += " t43.*, t42.取消区分"
+                Sql += " FROM "
+                Sql += " public.t43_nyukodt t43 "
+
+                Sql += " INNER JOIN "
+                Sql += " t42_nyukohd t42"
+                Sql += " ON "
+                Sql += " t43.会社コード = t42.会社コード "
+                Sql += " AND "
+                Sql += " t43.入庫番号 = t42.入庫番号"
+                Sql += " WHERE "
+                Sql += " t43.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
+
+                Sql += viewSearchConditions() '抽出条件取得
+
+                Sql += " GROUP BY "
+                Sql += " t43.会社コード, t43.入庫番号, t43.行番号, t42.取消区分"
+                Sql += " ORDER BY "
+                Sql += "t43.更新日 DESC, t43.入庫番号, t43.行番号"
+
                 ds = _db.selectDB(Sql, RS, reccnt)
 
                 For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
@@ -658,7 +615,7 @@ Public Class ReceiptList
     End Function
 
     '抽出条件取得
-    Private Function searchConditions() As String
+    Private Function viewSearchConditions() As String
         Dim Sql As String = ""
 
         '抽出条件
@@ -669,74 +626,72 @@ Public Class ReceiptList
         Dim sinceDate As String = strFormatDate(dtReceiptDateSince.Text)
         Dim untilDate As String = strFormatDate(dtReceiptDateUntil.Text)
         Dim sinceNum As String = escapeSql(TxtReceiptSince.Text)
-        'Dim untilNum As String = escapeSql(TxtReceiptUntil.Text)
         Dim salesName As String = escapeSql(TxtSales.Text)
         Dim poNum As String = escapeSql(TxtCustomerPO.Text)
+        Dim itemName As String = UtilClass.escapeSql(TxtItemName.Text)
+        Dim spec As String = UtilClass.escapeSql(TxtSpec.Text)
 
         If supplierName <> Nothing Then
             Sql += " AND "
-            Sql += " 仕入先名 ILIKE '%" & supplierName & "%' "
+            Sql += " t42.仕入先名 ILIKE '%" & supplierName & "%' "
         End If
 
         If supplierAddress <> Nothing Then
             Sql += " AND "
-            Sql += " 仕入先住所 ILIKE '%" & supplierAddress & "%' "
+            Sql += " t42.仕入先住所 ILIKE '%" & supplierAddress & "%' "
         End If
 
         If supplierTel <> Nothing Then
             Sql += " AND "
-            Sql += " 仕入先電話番号 ILIKE '%" & supplierTel & "%' "
+            Sql += " t42.仕入先電話番号 ILIKE '%" & supplierTel & "%' "
         End If
 
         If supplierCode <> Nothing Then
             Sql += " AND "
-            Sql += " 仕入先コード ILIKE '%" & supplierCode & "%' "
+            Sql += " t42.仕入先コード ILIKE '%" & supplierCode & "%' "
         End If
 
         If sinceDate <> Nothing Then
             Sql += " AND "
-            Sql += " 入庫日 >= '" & sinceDate & "'"
+            Sql += " t42.入庫日 >= '" & sinceDate & "'"
         End If
         If untilDate <> Nothing Then
             Sql += " AND "
-            Sql += " 入庫日 <= '" & untilDate & "'"
+            Sql += " t42.入庫日 <= '" & untilDate & "'"
         End If
 
         If sinceNum <> Nothing Then
             Sql += " AND "
-            Sql += " 入庫番号 ILIKE '%" & sinceNum & "%' "
-        End If
-        'If untilNum <> Nothing Then
-        '    Sql += " AND "
-        '    Sql += " 入庫番号 <= '" & untilNum & "' "
-        'End If
-
-        If poNum <> Nothing Then
-            Sql += " AND "
-            Sql += " 営業担当者 ILIKE '%" & salesName & "%' "
+            Sql += " t42.入庫番号 ILIKE '%" & sinceNum & "%' "
         End If
 
         If poNum <> Nothing Then
             Sql += " AND "
-            Sql += " 客先番号 ILIKE '%" & salesName & "%' "
+            Sql += " t42.営業担当者 ILIKE '%" & salesName & "%' "
         End If
 
-        Return Sql
+        If poNum <> Nothing Then
+            Sql += " AND "
+            Sql += " t42.客先番号 ILIKE '%" & salesName & "%' "
+        End If
 
-    End Function
+        If itemName <> Nothing Then
+            Sql += " AND "
+            Sql += " t43.品名 ILIKE '%" & itemName & "%' "
+        End If
 
-    '表示形式条件
-    Private Function viewFormat() As String
-        Dim Sql As String = ""
+        If spec <> Nothing Then
+            Sql += " AND "
+            Sql += " t43.型式 ILIKE '%" & spec & "%' "
+        End If
 
         '取消データを含めない場合
         If ChkCancelData.Checked = False Then
             Sql += " AND "
-            Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+            Sql += "t42.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
         End If
 
         Return Sql
-
     End Function
 
     '取消区分の表示テキストを返す
