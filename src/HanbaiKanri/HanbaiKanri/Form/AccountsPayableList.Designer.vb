@@ -22,16 +22,13 @@ Partial Class AccountsPayableList
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.BtnAPCancel = New System.Windows.Forms.Button()
         Me.ChkCancelData = New System.Windows.Forms.CheckBox()
         Me.BtnAPView = New System.Windows.Forms.Button()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.RbtnSlip = New System.Windows.Forms.RadioButton()
-        Me.RbtnDetails = New System.Windows.Forms.RadioButton()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
@@ -65,7 +62,10 @@ Partial Class AccountsPayableList
         Me.TxtCustomerPO = New System.Windows.Forms.TextBox()
         Me.dtAPDateSince = New System.Windows.Forms.DateTimePicker()
         Me.dtAPDateUntil = New System.Windows.Forms.DateTimePicker()
-        Me.Panel1.SuspendLayout()
+        Me.TxtSpec = New System.Windows.Forms.TextBox()
+        Me.LblSpec = New System.Windows.Forms.Label()
+        Me.TxtItemName = New System.Windows.Forms.TextBox()
+        Me.LblItemName = New System.Windows.Forms.Label()
         CType(Me.DgvKike, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -84,7 +84,7 @@ Partial Class AccountsPayableList
         '
         Me.ChkCancelData.AutoSize = True
         Me.ChkCancelData.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.ChkCancelData.Location = New System.Drawing.Point(16, 202)
+        Me.ChkCancelData.Location = New System.Drawing.Point(16, 211)
         Me.ChkCancelData.Name = "ChkCancelData"
         Me.ChkCancelData.Size = New System.Drawing.Size(139, 19)
         Me.ChkCancelData.TabIndex = 9
@@ -102,46 +102,11 @@ Partial Class AccountsPayableList
         Me.BtnAPView.UseVisualStyleBackColor = True
         Me.BtnAPView.Visible = False
         '
-        'Panel1
-        '
-        Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel1.Controls.Add(Me.RbtnSlip)
-        Me.Panel1.Controls.Add(Me.RbtnDetails)
-        Me.Panel1.Location = New System.Drawing.Point(1144, 193)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(195, 37)
-        Me.Panel1.TabIndex = 167
-        Me.Panel1.Visible = False
-        '
-        'RbtnSlip
-        '
-        Me.RbtnSlip.AutoSize = True
-        Me.RbtnSlip.Checked = True
-        Me.RbtnSlip.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.RbtnSlip.Location = New System.Drawing.Point(6, 8)
-        Me.RbtnSlip.Name = "RbtnSlip"
-        Me.RbtnSlip.Size = New System.Drawing.Size(89, 19)
-        Me.RbtnSlip.TabIndex = 10
-        Me.RbtnSlip.TabStop = True
-        Me.RbtnSlip.Text = "伝票単位"
-        Me.RbtnSlip.UseVisualStyleBackColor = True
-        '
-        'RbtnDetails
-        '
-        Me.RbtnDetails.AutoSize = True
-        Me.RbtnDetails.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.RbtnDetails.Location = New System.Drawing.Point(101, 8)
-        Me.RbtnDetails.Name = "RbtnDetails"
-        Me.RbtnDetails.Size = New System.Drawing.Size(89, 19)
-        Me.RbtnDetails.TabIndex = 11
-        Me.RbtnDetails.Text = "明細単位"
-        Me.RbtnDetails.UseVisualStyleBackColor = True
-        '
         'Label10
         '
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label10.Location = New System.Drawing.Point(13, 162)
+        Me.Label10.Location = New System.Drawing.Point(12, 185)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(87, 15)
         Me.Label10.TabIndex = 166
@@ -173,7 +138,7 @@ Partial Class AccountsPayableList
         Me.TxtAPSince.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtAPSince.Location = New System.Drawing.Point(760, 67)
         Me.TxtAPSince.Name = "TxtAPSince"
-        Me.TxtAPSince.Size = New System.Drawing.Size(170, 22)
+        Me.TxtAPSince.Size = New System.Drawing.Size(369, 22)
         Me.TxtAPSince.TabIndex = 5
         '
         'Label8
@@ -262,24 +227,24 @@ Partial Class AccountsPayableList
         '
         Me.DgvKike.AllowUserToAddRows = False
         Me.DgvKike.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DgvKike.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle9.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DgvKike.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle9
         Me.DgvKike.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvKike.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.取消, Me.買掛番号, Me.買掛区分, Me.買掛日, Me.客先番号, Me.発注番号, Me.発注番号枝番, Me.仕入先コード, Me.仕入先名, Me.買掛金額計, Me.買掛残高, Me.備考1, Me.備考2, Me.更新日, Me.更新者})
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DgvKike.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle12.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DgvKike.DefaultCellStyle = DataGridViewCellStyle12
         Me.DgvKike.Location = New System.Drawing.Point(13, 236)
         Me.DgvKike.Name = "DgvKike"
         Me.DgvKike.ReadOnly = True
@@ -363,8 +328,8 @@ Partial Class AccountsPayableList
         '
         '買掛金額計
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.買掛金額計.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.買掛金額計.DefaultCellStyle = DataGridViewCellStyle10
         Me.買掛金額計.HeaderText = "買掛金額計"
         Me.買掛金額計.MaxInputLength = 14
         Me.買掛金額計.Name = "買掛金額計"
@@ -373,8 +338,8 @@ Partial Class AccountsPayableList
         '
         '買掛残高
         '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.買掛残高.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.買掛残高.DefaultCellStyle = DataGridViewCellStyle11
         Me.買掛残高.HeaderText = "買掛残高"
         Me.買掛残高.MaxInputLength = 14
         Me.買掛残高.Name = "買掛残高"
@@ -442,7 +407,7 @@ Partial Class AccountsPayableList
         Me.TxtCustomerPO.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtCustomerPO.Location = New System.Drawing.Point(760, 95)
         Me.TxtCustomerPO.Name = "TxtCustomerPO"
-        Me.TxtCustomerPO.Size = New System.Drawing.Size(170, 22)
+        Me.TxtCustomerPO.Size = New System.Drawing.Size(369, 22)
         Me.TxtCustomerPO.TabIndex = 7
         '
         'dtAPDateSince
@@ -471,10 +436,54 @@ Partial Class AccountsPayableList
         Me.dtAPDateUntil.TabIndex = 333
         Me.dtAPDateUntil.Value = New Date(2019, 1, 1, 0, 0, 0, 0)
         '
+        'TxtSpec
+        '
+        Me.TxtSpec.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtSpec.Location = New System.Drawing.Point(760, 151)
+        Me.TxtSpec.Name = "TxtSpec"
+        Me.TxtSpec.Size = New System.Drawing.Size(369, 22)
+        Me.TxtSpec.TabIndex = 345
+        '
+        'LblSpec
+        '
+        Me.LblSpec.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblSpec.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblSpec.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblSpec.Location = New System.Drawing.Point(584, 151)
+        Me.LblSpec.Name = "LblSpec"
+        Me.LblSpec.Size = New System.Drawing.Size(170, 22)
+        Me.LblSpec.TabIndex = 344
+        Me.LblSpec.Text = "型式"
+        Me.LblSpec.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'TxtItemName
+        '
+        Me.TxtItemName.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtItemName.Location = New System.Drawing.Point(760, 123)
+        Me.TxtItemName.Name = "TxtItemName"
+        Me.TxtItemName.Size = New System.Drawing.Size(369, 22)
+        Me.TxtItemName.TabIndex = 343
+        '
+        'LblItemName
+        '
+        Me.LblItemName.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblItemName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblItemName.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblItemName.Location = New System.Drawing.Point(584, 123)
+        Me.LblItemName.Name = "LblItemName"
+        Me.LblItemName.Size = New System.Drawing.Size(170, 22)
+        Me.LblItemName.TabIndex = 342
+        Me.LblItemName.Text = "品名"
+        Me.LblItemName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'AccountsPayableList
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.TxtSpec)
+        Me.Controls.Add(Me.LblSpec)
+        Me.Controls.Add(Me.TxtItemName)
+        Me.Controls.Add(Me.LblItemName)
         Me.Controls.Add(Me.dtAPDateUntil)
         Me.Controls.Add(Me.dtAPDateSince)
         Me.Controls.Add(Me.Label11)
@@ -483,7 +492,6 @@ Partial Class AccountsPayableList
         Me.Controls.Add(Me.BtnAPCancel)
         Me.Controls.Add(Me.ChkCancelData)
         Me.Controls.Add(Me.BtnAPView)
-        Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Label7)
@@ -501,8 +509,6 @@ Partial Class AccountsPayableList
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "AccountsPayableList"
         Me.Text = "AccountsPayableList"
-        Me.Panel1.ResumeLayout(False)
-        Me.Panel1.PerformLayout()
         CType(Me.DgvKike, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -512,9 +518,6 @@ Partial Class AccountsPayableList
     Friend WithEvents BtnAPCancel As Button
     Friend WithEvents ChkCancelData As CheckBox
     Friend WithEvents BtnAPView As Button
-    Friend WithEvents Panel1 As Panel
-    Friend WithEvents RbtnSlip As RadioButton
-    Friend WithEvents RbtnDetails As RadioButton
     Friend WithEvents Label10 As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents Label7 As Label
@@ -548,4 +551,8 @@ Partial Class AccountsPayableList
     Friend WithEvents 備考2 As DataGridViewTextBoxColumn
     Friend WithEvents 更新日 As DataGridViewTextBoxColumn
     Friend WithEvents 更新者 As DataGridViewTextBoxColumn
+    Friend WithEvents TxtSpec As TextBox
+    Friend WithEvents LblSpec As Label
+    Friend WithEvents TxtItemName As TextBox
+    Friend WithEvents LblItemName As Label
 End Class

@@ -126,9 +126,9 @@ Public Class AccountsPayableList
             Label8.Text = "AccountsPayableDate"
             Label7.Text = "AccountsPayableNumber"
             Label11.Text = "CustomerNumber"
+            LblItemName.Text = "ItemName"
+            LblSpec.Text = "Spec"
             Label10.Text = "DisplayFormat"
-            RbtnSlip.Text = "UnitOfVoucher"
-            RbtnDetails.Text = "UnitOfDetailData"
 
             ChkCancelData.Text = "IncludeCancelData"
 
@@ -143,24 +143,54 @@ Public Class AccountsPayableList
     Private Sub PurchaseListLoad()
         '変数等
         Dim Sql As String = ""
+        Dim reccnt As Integer = 0 'DB用（デフォルト）
 
         '一覧クリア
         DgvKike.Rows.Clear()
 
-        Sql = searchConditions() '詳細条件
-        Sql += viewFormat() '表示形式
-
-        Sql += " ORDER BY "
-        Sql += "更新日 DESC"
-
         Try
-            ds = getDsData("t46_kikehd", Sql)
+            Sql = "SELECT"
+            Sql += " t46.*"
+            Sql += " FROM "
+            Sql += " public.t46_kikehd t46 "
+
+            Sql += " INNER JOIN "
+            Sql += " t20_hattyu t20"
+            Sql += " ON "
+            Sql += " t46.会社コード = t20.会社コード "
+            Sql += " AND "
+            Sql += " t46.発注番号 = t20.発注番号"
+            Sql += " AND "
+            Sql += " t46.発注番号枝番 = t20.発注番号枝番"
+            Sql += " AND "
+            Sql += " t20.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '発注取消されていないデータ
+
+            Sql += " INNER JOIN "
+            Sql += " t21_hattyu t21"
+            Sql += " ON "
+            Sql += " t20.会社コード = t21.会社コード "
+            Sql += " AND "
+            Sql += " t20.発注番号 = t21.発注番号"
+            Sql += " AND "
+            Sql += " t20.発注番号枝番 = t21.発注番号枝番"
+
+            Sql += " WHERE "
+            Sql += " t46.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
+
+            Sql += viewSearchConditions() '抽出条件取得
+
+            Sql += " GROUP BY "
+            Sql += " t46.会社コード, t46.買掛番号"
+            Sql += " ORDER BY "
+            Sql += "t46.更新日 DESC, t46.買掛番号"
+
+            ds = _db.selectDB(Sql, RS, reccnt)
 
             For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
                 DgvKike.Rows.Add()
                 DgvKike.Rows(i).Cells("取消").Value = getDelKbnTxt(ds.Tables(RS).Rows(i)("取消区分"))
                 DgvKike.Rows(i).Cells("買掛番号").Value = ds.Tables(RS).Rows(i)("買掛番号")
-                If frmC01F10_Login.loginValue.Language = "ENG" Then
+                If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                     DgvKike.Rows(i).Cells("買掛区分").Value = IIf(ds.Tables(RS).Rows(i)("買掛区分") = CommonConst.APC_KBN_DEPOSIT.ToString,
                                                                                                     CommonConst.APC_KBN_DEPOSIT_TXT_E,
                                                                                                     CommonConst.APC_KBN_NORMAL_TXT_E)
@@ -228,7 +258,7 @@ Public Class AccountsPayableList
     Private Sub BtnBillingCancel_Click(sender As Object, e As EventArgs) Handles BtnAPCancel.Click
 
         '明細表示時、または対象データがない場合は取消操作不可能
-        If RbtnDetails.Checked Or DgvKike.Rows.Count = 0 Then
+        If DgvKike.Rows.Count = 0 Then
 
             '操作できないアラートを出す
             _msgHd.dspMSG("NonAction", frmC01F10_Login.loginValue.Language)
@@ -258,42 +288,6 @@ Public Class AccountsPayableList
             Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
 
         End Try
-
-        'If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-        '    Dim result As DialogResult = MessageBox.Show("Would you like to cancel the accounts payable?",
-        '                                     "Question",
-        '                                     MessageBoxButtons.YesNoCancel,
-        '                                     MessageBoxIcon.Exclamation,
-        '                                     MessageBoxDefaultButton.Button2)
-
-        '    If result = DialogResult.Yes Then
-        '        _db.executeDB(Sql)
-
-        '        PurchaseListLoad() '一覧再表示
-
-        '    ElseIf result = DialogResult.No Then
-
-        '    ElseIf result = DialogResult.Cancel Then
-
-        '    End If
-        'Else
-        '    Dim result As DialogResult = MessageBox.Show("買掛を取り消しますか？",
-        '                                     "質問",
-        '                                     MessageBoxButtons.YesNoCancel,
-        '                                     MessageBoxIcon.Exclamation,
-        '                                     MessageBoxDefaultButton.Button2)
-
-        '    If result = DialogResult.Yes Then
-        '        _db.executeDB(Sql)
-
-        '        PurchaseListLoad() '一覧再表示
-
-        '    ElseIf result = DialogResult.No Then
-
-        '    ElseIf result = DialogResult.Cancel Then
-
-        '    End If
-        'End If
 
     End Sub
 
@@ -374,8 +368,8 @@ Public Class AccountsPayableList
         End If
     End Function
 
-    '抽出条件取得
-    Private Function searchConditions() As String
+    '抽出条件取得    '抽出条件取得
+    Private Function viewSearchConditions() As String
         Dim Sql As String = ""
 
         '抽出条件
@@ -385,52 +379,55 @@ Public Class AccountsPayableList
         Dim untilDate As String = strFormatDate(dtAPDateUntil.Text)
         Dim sinceNum As String = escapeSql(TxtAPSince.Text)
         Dim poNum As String = escapeSql(TxtCustomerPO.Text)
+        Dim itemName As String = UtilClass.escapeSql(TxtItemName.Text)
+        Dim spec As String = UtilClass.escapeSql(TxtSpec.Text)
 
         If supplierName <> Nothing Then
             Sql += " AND "
-            Sql += " 仕入先名 ILIKE '%" & supplierName & "%' "
+            Sql += " t46.仕入先名 ILIKE '%" & supplierName & "%' "
         End If
 
         If supplierCode <> Nothing Then
             Sql += " AND "
-            Sql += " 仕入先コード ILIKE '%" & supplierCode & "%' "
+            Sql += " t46.仕入先コード ILIKE '%" & supplierCode & "%' "
         End If
 
         If sinceDate <> Nothing Then
             Sql += " AND "
-            Sql += " 買掛日 >= '" & sinceDate & "'"
+            Sql += " t46.買掛日 >= '" & sinceDate & "'"
         End If
         If untilDate <> Nothing Then
             Sql += " AND "
-            Sql += " 買掛日 <= '" & untilDate & "'"
+            Sql += " t46.買掛日 <= '" & untilDate & "'"
         End If
 
         If sinceNum <> Nothing Then
             Sql += " AND "
-            Sql += " 買掛番号 ILIKE '%" & sinceNum & "%' "
+            Sql += " t46.買掛番号 ILIKE '%" & sinceNum & "%' "
         End If
 
         If poNum <> Nothing Then
             Sql += " AND "
-            Sql += " 客先番号 ILIKE '%" & poNum & "%' "
+            Sql += " t46.客先番号 ILIKE '%" & poNum & "%' "
         End If
 
-        Return Sql
+        If itemName <> Nothing Then
+            Sql += " AND "
+            Sql += " t21.品名 ILIKE '%" & itemName & "%' "
+        End If
 
-    End Function
-
-    '表示形式条件
-    Private Function viewFormat() As String
-        Dim Sql As String = ""
+        If spec <> Nothing Then
+            Sql += " AND "
+            Sql += " t21.型式 ILIKE '%" & spec & "%' "
+        End If
 
         '取消データを含めない場合
         If ChkCancelData.Checked = False Then
             Sql += " AND "
-            Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+            Sql += "t46.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
         End If
 
         Return Sql
-
     End Function
 
     'param1：String テーブル名
