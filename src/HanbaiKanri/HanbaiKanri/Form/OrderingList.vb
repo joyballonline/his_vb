@@ -815,6 +815,12 @@ Public Class OrderingList
             Sql += " t21.型式 ILIKE '%" & spec & "%' "
         End If
 
+        '取消データを含めない場合
+        If ChkCancelData.Checked = False Then
+            Sql += " AND "
+            Sql += "t20.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+        End If
+
         Return Sql
 
     End Function

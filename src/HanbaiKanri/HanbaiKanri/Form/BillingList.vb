@@ -475,20 +475,6 @@ Public Class BillingList
         End If
     End Function
 
-    '表示形式条件
-    Private Function viewFormat() As String
-        Dim Sql As String = ""
-
-        '取消データを含めない場合
-        If ChkCancelData.Checked = False Then
-            Sql += " AND "
-            Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
-        End If
-
-        Return Sql
-
-    End Function
-
     'param1：String テーブル名
     'param2：String 詳細条件
     'Return: DataSet

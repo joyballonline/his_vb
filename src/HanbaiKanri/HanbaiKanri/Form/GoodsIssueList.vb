@@ -474,7 +474,7 @@ Public Class GoodsIssueList
     't44_shukohd, t21_hattyu
     Private Sub updateData()
 
-        Dim dtNow As String = formatDatetime(DateTime.Now)
+        Dim dtNow As String = UtilClass.formatDatetime(DateTime.Now)
         Dim Sql As String = ""
 
         Try
@@ -675,84 +675,6 @@ Public Class GoodsIssueList
         openForm.Show(Me)
     End Sub
 
-    '抽出条件取得
-    Private Function searchConditions() As String
-        Dim Sql As String = ""
-
-        '抽出条件
-        Dim customerNam As String = escapeSql(TxtCustomerName.Text)
-        Dim supplierAddress As String = escapeSql(TxtAddress.Text)
-        Dim supplierTel As String = escapeSql(TxtTel.Text)
-        Dim customerCode As String = escapeSql(TxtCustomerCode.Text)
-        Dim sinceDate As String = strFormatDate(dtDateSince.Text)
-        Dim untilDate As String = strFormatDate(dtDateUntil.Text)
-        Dim sinceNum As String = escapeSql(TxtGoodsSince.Text)
-        'Dim untilNum As String = escapeSql(TxtGoodsUntil.Text)
-        Dim salesName As String = escapeSql(TxtSales.Text)
-        Dim poNum As String = escapeSql(TxtCustomerPO.Text)
-
-        If customerNam <> Nothing Then
-            Sql += " AND "
-            Sql += " 得意先名 ILIKE '%" & customerNam & "%' "
-        End If
-
-        If supplierAddress <> Nothing Then
-            Sql += " AND "
-            Sql += " 得意先住所 ILIKE '%" & supplierAddress & "%' "
-        End If
-
-        If supplierTel <> Nothing Then
-            Sql += " AND "
-            Sql += " 得意先電話番号 ILIKE '%" & supplierTel & "%' "
-        End If
-
-        If customerCode <> Nothing Then
-            Sql += " AND "
-            Sql += " 得意先コード ILIKE '%" & customerCode & "%' "
-        End If
-
-        If sinceDate <> Nothing Then
-            Sql += " AND "
-            Sql += " 出庫日 >= '" & sinceDate & "'"
-        End If
-        If untilDate <> Nothing Then
-            Sql += " AND "
-            Sql += " 出庫日 <= '" & untilDate & "'"
-        End If
-
-        If sinceNum <> Nothing Then
-            Sql += " AND "
-            Sql += " 出庫番号 ILIKE '%" & sinceNum & "%' "
-        End If
-
-        If poNum <> Nothing Then
-            Sql += " AND "
-            Sql += " 営業担当者 ILIKE '%" & salesName & "%' "
-        End If
-
-        If poNum <> Nothing Then
-            Sql += " AND "
-            Sql += " 客先番号 ILIKE '%" & poNum & "%' "
-        End If
-
-        Return Sql
-
-    End Function
-
-    '表示形式条件
-    Private Function viewFormat() As String
-        Dim Sql As String = ""
-
-        '取消データを含めない場合
-        If ChkCancelData.Checked = False Then
-            Sql += " AND "
-            Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
-        End If
-
-        Return Sql
-
-    End Function
-
     'param1：String テーブル名
     'param2：String 詳細条件
     'Return: DataSet
@@ -769,7 +691,6 @@ Public Class GoodsIssueList
         Sql += "会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql += txtParam
 
-        Console.WriteLine(Sql)
         Return _db.selectDB(Sql, RS, reccnt)
     End Function
 
@@ -836,23 +757,6 @@ Public Class GoodsIssueList
 
         '日本の形式に書き換える
         Return dateFormat.ToString(prmFormat)
-    End Function
-
-    'ユーザーのカルチャーから、日本の形式に変換する
-    Private Function formatDatetime(ByVal prmDatetime As DateTime) As String
-
-        'PCのカルチャーを取得し、それに応じてStringからDatetimeを作成
-        Dim ciCurrent As New System.Globalization.CultureInfo(CultureInfo.CurrentCulture.Name.ToString)
-        Dim dateFormat As DateTime = DateTime.Parse(prmDatetime.ToString, ciCurrent, System.Globalization.DateTimeStyles.AssumeLocal)
-
-        Dim changeFormat As String = dateFormat.ToString("yyyy/MM/dd HH:mm:ss")
-
-        Dim ciJP As New System.Globalization.CultureInfo(CommonConst.CI_JP)
-        Dim rtnDatetime As DateTime = DateTime.Parse(changeFormat, ciJP, System.Globalization.DateTimeStyles.AssumeLocal)
-
-
-        '日本の形式に書き換える
-        Return changeFormat
     End Function
 
     '金額フォーマット（登録の際の小数点指定子）を日本の形式に合わせる
