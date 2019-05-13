@@ -307,7 +307,7 @@ Public Class CustomerOrderList
                         Next
                     End If
 
-                    sheet.Range("D13").Value = dsCymnhd.Tables(RS).Rows(0)("支払条件")
+                    sheet.Range("E13").Value = dsCymnhd.Tables(RS).Rows(0)("支払条件")
 
                     flg2 = True
 
@@ -319,7 +319,7 @@ Public Class CustomerOrderList
 
                 'joinするのでとりあえず直書き
                 Sql = "SELECT"
-                Sql += " t11.メーカー, t11.品名, t11.型式, t11.受注数量, t11.見積単価, t11.見積金額"
+                Sql += " t11.メーカー, t11.品名, t11.型式, t11.受注数量, t11.見積単価, t11.見積金額,t11.単位"
                 Sql += " FROM "
                 Sql += " public.t11_cymndt t11 "
 
@@ -360,8 +360,9 @@ Public Class CustomerOrderList
                     sheet.Range("A" & currentRow).Value = currentNum
                     sheet.Range("B" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("メーカー") & Environment.NewLine & dsCymndt.Tables(RS).Rows(i)("品名") & Environment.NewLine & dsCymndt.Tables(RS).Rows(i)("型式")
                     sheet.Range("C" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("受注数量")
-                    sheet.Range("D" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("見積単価")
-                    sheet.Range("E" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("見積金額")
+                    sheet.Range("D" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("単位")
+                    sheet.Range("E" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("見積単価")
+                    sheet.Range("F" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("見積金額")
                     currentNum += 1
                     currentRow += 1
                 Next i
@@ -375,9 +376,9 @@ Public Class CustomerOrderList
 
             Dim getHanyo As DataSet = getDsHanyoData(CommonConst.DC_CODE, dsCompany.Tables(RS).Rows(0)("預金種目"))
 
-            sheet.Range("E" & lastRow + 1).Value = BillingSubTotal
-            sheet.Range("E" & lastRow + 2).Value = BillingSubTotal * 0.1
-            sheet.Range("E" & lastRow + 3).Value = BillingSubTotal * 1.1
+            sheet.Range("F" & lastRow + 1).Value = BillingSubTotal
+            sheet.Range("F" & lastRow + 2).Value = BillingSubTotal * 0.1
+            sheet.Range("F" & lastRow + 3).Value = BillingSubTotal * 1.1
 
             sheet.Range("C" & lastRow + 5).Value = sheet.Range("E" & lastRow + 3).Value
             sheet.Range("C" & lastRow + 8).Value = dsCompany.Tables(RS).Rows(0)("銀行名") & " " & dsCompany.Tables(RS).Rows(0)("支店名") & " " & getHanyo.Tables(RS).Rows(0)("文字2")
