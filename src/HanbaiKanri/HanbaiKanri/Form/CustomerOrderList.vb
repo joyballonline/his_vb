@@ -386,7 +386,7 @@ Public Class CustomerOrderList
             sheet.Range("C" & lastRow + 10).Value = dsCompany.Tables(RS).Rows(0)("口座番号")
             sheet.Range("C" & lastRow + 11).Value = dsCompany.Tables(RS).Rows(0)("住所1") & " " & dsCompany.Tables(RS).Rows(0)("住所2") & " " & dsCompany.Tables(RS).Rows(0)("住所3") & " " & dsCompany.Tables(RS).Rows(0)("郵便番号")
 
-            sheet.Range("A" & lastRow + 14).Value = dsCompany.Tables(RS).Rows(0)("会社名")
+            sheet.Range("A" & lastRow + 18).Value = dsCompany.Tables(RS).Rows(0)("会社名")
 
             app.DisplayAlerts = False 'Microsoft Excelのアラート一旦無効化
 
