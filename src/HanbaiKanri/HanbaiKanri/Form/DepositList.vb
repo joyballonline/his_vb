@@ -85,8 +85,8 @@ Public Class DepositList
 
         Dim CustomerOrderCount As Integer
         Dim CustomerBillingCount As Integer
-        Dim CustomerBillingAmount As Integer
-        Dim CustomerOrderAmount As Integer
+        Dim CustomerBillingAmount As Long
+        Dim CustomerOrderAmount As Long
         Dim AccountsReceivable As Integer
 
         'Language=ENGの時
