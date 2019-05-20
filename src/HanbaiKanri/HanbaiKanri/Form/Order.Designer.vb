@@ -312,7 +312,7 @@ Partial Class Order
         Me.DtpOrderDate.CustomFormat = "yyyy/MM/dd"
         Me.DtpOrderDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpOrderDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DtpOrderDate.Location = New System.Drawing.Point(643, 14)
+        Me.DtpOrderDate.Location = New System.Drawing.Point(727, 12)
         Me.DtpOrderDate.Name = "DtpOrderDate"
         Me.DtpOrderDate.Size = New System.Drawing.Size(130, 22)
         Me.DtpOrderDate.TabIndex = 2
@@ -434,7 +434,7 @@ Partial Class Order
         Me.DtpOrderRegistration.Enabled = False
         Me.DtpOrderRegistration.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpOrderRegistration.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DtpOrderRegistration.Location = New System.Drawing.Point(895, 13)
+        Me.DtpOrderRegistration.Location = New System.Drawing.Point(979, 11)
         Me.DtpOrderRegistration.Name = "DtpOrderRegistration"
         Me.DtpOrderRegistration.Size = New System.Drawing.Size(130, 22)
         Me.DtpOrderRegistration.TabIndex = 119
@@ -456,7 +456,7 @@ Partial Class Order
         Me.LblRegistration.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblRegistration.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblRegistration.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblRegistration.Location = New System.Drawing.Point(779, 13)
+        Me.LblRegistration.Location = New System.Drawing.Point(863, 11)
         Me.LblRegistration.Name = "LblRegistration"
         Me.LblRegistration.Size = New System.Drawing.Size(110, 23)
         Me.LblRegistration.TabIndex = 154
@@ -751,7 +751,7 @@ Partial Class Order
         Me.LblOrderDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblOrderDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblOrderDate.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblOrderDate.Location = New System.Drawing.Point(483, 13)
+        Me.LblOrderDate.Location = New System.Drawing.Point(609, 12)
         Me.LblOrderDate.Name = "LblOrderDate"
         Me.LblOrderDate.Size = New System.Drawing.Size(112, 23)
         Me.LblOrderDate.TabIndex = 139
@@ -1032,10 +1032,10 @@ Partial Class Order
         '
         Me.TxtCustomerPO.BackColor = System.Drawing.Color.White
         Me.TxtCustomerPO.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtCustomerPO.Location = New System.Drawing.Point(389, 13)
-        Me.TxtCustomerPO.MaxLength = 8
+        Me.TxtCustomerPO.Location = New System.Drawing.Point(391, 13)
+        Me.TxtCustomerPO.MaxLength = 20
         Me.TxtCustomerPO.Name = "TxtCustomerPO"
-        Me.TxtCustomerPO.Size = New System.Drawing.Size(88, 23)
+        Me.TxtCustomerPO.Size = New System.Drawing.Size(176, 23)
         Me.TxtCustomerPO.TabIndex = 1
         '
         'LblCustomerPO

@@ -573,16 +573,16 @@ Public Class Order
             LblOrderNo.Text = "OrderNumber"
             LblCustomerPO.Text = "CustomerNumber"
             LblCustomerPO.Location = New Point(273, 12)
-            LblCustomerPO.Size = New Size(152, 23)
-            TxtCustomerPO.Location = New Point(431, 12)
+            LblCustomerPO.Size = New Size(145, 23)
+            TxtCustomerPO.Location = New Point(425, 12)
             LblOrderDate.Text = "OrderDate"
-            LblOrderDate.Location = New Point(525, 12)
-            DtpOrderDate.Location = New Point(643, 12)
+            LblOrderDate.Location = New Point(610, 12)
+            DtpOrderDate.Location = New Point(726, 12)
             DtpOrderDate.Size = New Size(130, 22)
 
             LblRegistration.Text = "OrderingDate"
-            LblRegistration.Location = New Point(779, 12)
-            DtpOrderRegistration.Location = New Point(895, 12)
+            LblRegistration.Location = New Point(860, 12)
+            DtpOrderRegistration.Location = New Point(975, 12)
             DtpOrderRegistration.Size = New Size(130, 22)
             LblQuoteNo.Text = "QuotationNumber"
             LblQuoteNo.Location = New Point(11, 42)
