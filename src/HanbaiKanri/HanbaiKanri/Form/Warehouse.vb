@@ -90,35 +90,35 @@ Public Class Warehouse
                 Sql += "m20_warehouse("
                 Sql += "会社コード, 倉庫コード, 名称, 略称, 郵便番号, 住所１, 住所２, 住所３, 電話番号, ＦＡＸ番号, 保税有無, 備考, 無効フラグ, 更新者, 更新日)"
                 Sql += " VALUES('"
-                Sql += frmC01F10_Login.loginValue.BumonCD
+                Sql += frmC01F10_Login.loginValue.BumonCD '会社コード
                 Sql += "', '"
-                Sql += TxtWarehouseCode.Text
+                Sql += TxtWarehouseCode.Text '倉庫コード
                 Sql += "', '"
-                Sql += TxtName.Text
+                Sql += TxtName.Text '名称
                 Sql += "', '"
-                Sql += TxtShortName.Text
+                Sql += TxtShortName.Text '略称
                 Sql += "', '"
-                Sql += LblPostalCode.Text
+                Sql += TxtPostalCode.Text '郵便番号
                 Sql += "', '"
-                Sql += LblAddress1.Text
+                Sql += TxtAddress1.Text '住所１
                 Sql += "', '"
-                Sql += LblAddress2.Text
+                Sql += TxtAddress2.Text '住所２
                 Sql += "', '"
-                Sql += LblAddress3.Text
+                Sql += TxtAddress3.Text '住所３
                 Sql += "', '"
-                Sql += LblPhone.Text
+                Sql += TxtPhone.Text '電話番号
                 Sql += "', '"
-                Sql += LblFax.Text
+                Sql += TxtFax.Text 'ＦＡＸ番号
                 Sql += "', '"
-                Sql += cmCustomsBondKbn.SelectedValue.ToString
+                Sql += cmCustomsBondKbn.SelectedValue.ToString '保税有無
                 Sql += "', '"
-                Sql += TxtRemarks.Text
+                Sql += TxtRemarks.Text '備考
                 Sql += "', '"
-                Sql += cmbInvalidFlag.SelectedValue.ToString
+                Sql += cmbInvalidFlag.SelectedValue.ToString '無効フラグ
                 Sql += "', '"
-                Sql += frmC01F10_Login.loginValue.TantoNM
+                Sql += frmC01F10_Login.loginValue.TantoNM '更新者
                 Sql += "', '"
-                Sql += dtToday
+                Sql += dtToday '更新日
                 Sql += "')"
 
                 _db.executeDB(Sql)
@@ -227,7 +227,7 @@ Public Class Warehouse
             'InvalidFlag.Text = "(0:True 1:False)"
             LblRemarks.Text = "Remarks"
             btnAddAccount.Text = "Registration"
-            LblPhone.Text = "Back"
+            btnBack.Text = "Back"
         End If
 
         If _status = CommonConst.STATUS_EDIT Then
