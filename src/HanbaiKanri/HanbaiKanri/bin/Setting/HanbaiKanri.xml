@@ -1296,5 +1296,27 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
     <MEMO></MEMO>
   </MSG_DATA>
+  <MSG_DATA>
+    <ID>chkCurrencyError</ID>
+    <MSG1>通貨マスタが正しく設定されていません。</MSG1>
+    <MSG1_EN>The currency master has not been set correctly.</MSG1_EN>
+    <MSG2>通貨マスタをご確認ください。</MSG2>
+    <MSG2_EN>Please check the currency master.</MSG2_EN>
+    <BUTTON_TYPE>OK</BUTTON_TYPE>
+    <ICONT_TYPE>Error</ICONT_TYPE>
+    <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
+    <MEMO></MEMO>
+  </MSG_DATA>
+  <MSG_DATA>
+    <ID>chkInputError</ID>
+    <MSG1>入力情報が不足しています。</MSG1>
+    <MSG1_EN>Insufficient input information.</MSG1_EN>
+    <MSG2>入力項目すべてに入力してください。</MSG2>
+    <MSG2_EN>Please fill in all the input items.</MSG2_EN>
+    <BUTTON_TYPE>OK</BUTTON_TYPE>
+    <ICONT_TYPE>Error</ICONT_TYPE>
+    <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
+    <MEMO></MEMO>
+  </MSG_DATA>
 
 </MSG_DEF>

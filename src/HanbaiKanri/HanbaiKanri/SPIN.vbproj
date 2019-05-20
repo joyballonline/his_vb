@@ -102,6 +102,12 @@
     <Import Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Form\ExchangeRate.Designer.vb">
+      <DependentUpon>ExchangeRate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\ExchangeRate.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\Information.Designer.vb">
       <DependentUpon>Information.vb</DependentUpon>
     </Compile>
@@ -124,6 +130,12 @@
       <DependentUpon>MstCurrency.vb</DependentUpon>
     </Compile>
     <Compile Include="Form\MstCurrency.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\ExchangeRateList.Designer.vb">
+      <DependentUpon>ExchangeRateList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\ExchangeRateList.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form\StockSearch.Designer.vb">
@@ -562,6 +574,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Form\ExchangeRate.resx">
+      <DependentUpon>ExchangeRate.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\Information.resx">
       <DependentUpon>Information.vb</DependentUpon>
     </EmbeddedResource>
@@ -574,6 +589,9 @@
     <EmbeddedResource Include="Form\MstCurrency.resx">
       <DependentUpon>MstCurrency.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\ExchangeRateList.resx">
+      <DependentUpon>ExchangeRateList.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\StockSearch.resx">
       <DependentUpon>StockSearch.vb</DependentUpon>

@@ -217,6 +217,7 @@ Public Class CommonConst
     Public Const MENU_H1430 As String = "H1430"           '移動入力
 
     Public Const MENU_H1510 As String = "H1510"           'データ出力
+    Public Const MENU_H1520 As String = "H1520"           '為替レート
 
     Public Const MENU_M0110 As String = "M0110"           '汎用マスタ
     Public Const MENU_M0120 As String = "M0120"           '得意先マスタ
@@ -396,5 +397,11 @@ Public Class CommonConst
     '出庫区分
     Public Const SHUKO_KBN_NORMAL As String = "1"              '通常出庫
     Public Const SHUKO_KBN_TMP As String = "2"                 '仮出庫
+
+    '通貨 採番キー
+    Public Const CURRENCY_CD_IDR As Integer = 1                 'インドネシアルピア
+    Public Const CURRENCY_CD_JPY As Integer = 2                 '円
+    Public Const CURRENCY_CD_USD As Integer = 3                 'ドル
+
 
 End Class

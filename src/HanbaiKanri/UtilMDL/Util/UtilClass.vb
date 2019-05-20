@@ -921,6 +921,16 @@ Public Class UtilClass
         Return prmVal.ToString("F3", nfi)
     End Function
 
+    '金額フォーマット（登録の際の小数点指定子）を日本の形式に合わせる
+    '桁区切り記号は外す（小数点のみのフォーマットに変換している）
+    Public Shared Function formatNumberF10(ByVal prmVal As Decimal) As String
+
+        Dim nfi As NumberFormatInfo = New CultureInfo("ja-JP", False).NumberFormat
+
+        '日本の形式に書き換える
+        Return prmVal.ToString("F10", nfi)
+    End Function
+
     'sqlで実行する文字列からシングルクォーテーションを文字コードにする
     Public Shared Function escapeSql(ByVal prmSql As String) As String
         Dim sql As String = prmSql
