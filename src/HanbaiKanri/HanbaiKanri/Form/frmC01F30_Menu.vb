@@ -1297,7 +1297,7 @@ Public Class frmC01F30_Menu
             strSql = strSql & " and "
             strSql = strSql & " m.業務ＩＤ <> 'M01' "
             strSql = strSql & likeSql
-            strSql = strSql & " order by m.表示順 "
+            strSql = strSql & " order by m.処理ＩＤ ,m.表示順 "
 
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(strSql, RS, reccnt)
@@ -1353,7 +1353,7 @@ Public Class frmC01F30_Menu
             strSql = strSql & " and "
             strSql = strSql & " m.業務ＩＤ = 'M01' "
             strSql = strSql & likeSql
-            strSql = strSql & " order by m.表示順 "
+            strSql = strSql & " order by m.処理ＩＤ ,m.表示順 "
 
             Dim dsMaster As DataSet = _db.selectDB(strSql, RS, reccnt)
 
@@ -1603,6 +1603,8 @@ Public Class frmC01F30_Menu
         If chkM01.Checked Then
             If checkMenu IsNot "" Then checkMenu += " or "
             checkMenu += " m.処理ＩＤ like 'M01%' "
+            If checkMenu IsNot "" Then checkMenu += " or "
+            checkMenu += " m.処理ＩＤ like 'M02%' "
         End If
 
         Dim getMenuSql As String = ""
@@ -1612,6 +1614,7 @@ Public Class frmC01F30_Menu
             getMenuSql += checkMenu
             getMenuSql += ")"
         End If
+
         Return getMenuSql
     End Function
 
@@ -2080,6 +2083,13 @@ Public Class frmC01F30_Menu
                 openForm = New MstWarehouse(_msgHd, _db, _langHd, Me)
                 openForm.Show()
                 Me.Hide()
+                  '-----------------------------------
+            Case CommonConst.MENU_M0210    '通貨マスタ一覧
+                Dim openForm As Form = Nothing
+                openForm = New MstCurrency(_msgHd, _db, _langHd, Me)
+                openForm.Show()
+                Me.Hide()
+
                 '-----------------------------------
             Case Else                      'マスタ設定されていない場合
                 Exit Sub

@@ -227,6 +227,7 @@ Public Class CommonConst
     Public Const MENU_M0170 As String = "M0170"           '在庫マスタ
     Public Const MENU_M0180 As String = "M0180"           '勘定科目マスタ
     Public Const MENU_M0190 As String = "M0190"           '倉庫マスタ
+    Public Const MENU_M0210 As String = "M0210"           '通貨マスタ
 
     '各フォームに引き渡す編集モードの値
     Public Const MODE_ADDNEW = 1                                 '登録
