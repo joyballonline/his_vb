@@ -565,6 +565,7 @@ Public Class Order
                 DtpExpiration.Enabled = False
                 DgvItemList.ReadOnly = True
                 BtnRegistration.Visible = False
+                TxtCustomerPO.Enabled = False
             End If
         End If
 
