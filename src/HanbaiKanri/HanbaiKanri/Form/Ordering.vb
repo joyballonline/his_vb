@@ -411,11 +411,6 @@ Public Class Ordering
             TxtQuoteNo.Visible = False
             LblHyphen.Visible = False
             TxtQuoteSuffix.Visible = False
-        Else
-            LblMethod.Visible = False
-            CbShippedBy.Visible = False
-            LblShipDate.Visible = False
-            DtpShippedDate.Visible = False
         End If
 
         If dsHattyu.Tables(RS).Rows(0)("見積番号枝番") IsNot DBNull.Value Then
