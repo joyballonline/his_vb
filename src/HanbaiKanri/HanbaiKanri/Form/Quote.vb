@@ -449,6 +449,7 @@ Public Class Quote
             TxtTotal.Text = Total.ToString("F0")
             TxtQuoteTotal.Text = QuoteTotal.ToString("F0")
             TxtGrossProfit.Text = GrossProfit.ToString("F0")
+            TxtVatAmount.Text = ((QuoteTotal.ToString("F0") * TxtVat.Text) / 100).ToString("F0")
 
             '行番号の振り直し
             Dim i As Integer = DgvItemList.Rows.Count()
@@ -677,6 +678,7 @@ Public Class Quote
             TxtPurchaseTotal.Clear()
             TxtQuoteTotal.Clear()
             TxtGrossProfit.Clear()
+            TxtVatAmount.Clear()
 
             Dim Total As Decimal = 0 '売上金額
             Dim PurchaseTotal As Decimal = 0 '仕入金額
@@ -926,6 +928,8 @@ Public Class Quote
                 TxtTotal.Text = Total.ToString("F0")
                 TxtQuoteTotal.Text = QuoteTotal
                 TxtGrossProfit.Text = GrossProfit
+                TxtVatAmount.Text = ((QuoteTotal * TxtVat.Text) / 100).ToString("F0")
+
 
             Catch ex As OverflowException
 
@@ -1029,6 +1033,7 @@ Public Class Quote
         TxtTotal.Clear()
         TxtQuoteTotal.Clear()
         TxtGrossProfit.Clear()
+        TxtVatAmount.Clear()
 
         Dim Total As Integer = 0
         Dim QuoteTotal As Integer = 0
@@ -1045,6 +1050,8 @@ Public Class Quote
         TxtTotal.Text = Total
         TxtQuoteTotal.Text = QuoteTotal
         TxtGrossProfit.Text = GrossProfit
+        TxtVatAmount.Text = ((QuoteTotal * TxtVat.Text) / 100).ToString("F0")
+
 
         '行番号の振り直し
         Dim index As Integer = DgvItemList.Rows.Count()
