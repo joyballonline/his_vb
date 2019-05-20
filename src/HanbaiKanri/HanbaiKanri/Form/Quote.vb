@@ -1878,7 +1878,7 @@ Public Class Quote
                 Next
             End If
 
-            Dim totalPrice As Integer = 0
+            Dim totalPrice As Long = 0
             Dim Sql5 As String = ""
             Dim tmp1 As String = ""
             Dim cell As String
@@ -2035,10 +2035,10 @@ Public Class Quote
 
         For i As Integer = 0 To supplierlist.Count - 1
 
-            If supplierChkList(i) = True Then
+            'If supplierChkList(i) = True Then
 
-                '定義
-                Dim app As Excel.Application = Nothing
+            '定義
+            Dim app As Excel.Application = Nothing
                 Dim book As Excel.Workbook = Nothing
                 Dim sheet As Excel.Worksheet = Nothing
 
@@ -2146,7 +2146,7 @@ Public Class Quote
                     'Marshal.ReleaseComObject(app)
 
                 End Try
-            End If
+            'End If
 
             If (createFlg = True) Then
                 _msgHd.dspMSG("CreateExcel", frmC01F10_Login.loginValue.Language)
