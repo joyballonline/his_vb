@@ -390,7 +390,9 @@ Public Class OrderManagement
                     DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("型式").Value = ds3.Tables(RS).Rows(index)("型式")
                     DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("仕入先").Value = ds3.Tables(RS).Rows(index)("仕入先名")
                     DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("単位").Value = ds3.Tables(RS).Rows(index)("単位")
-                    DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("売単価").Value = ds3.Tables(RS).Rows(index)("見積単価") '売単価 = 見積単価
+                    DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("売単価").Value = IIf(ds3.Tables(RS).Rows(index)("仕入区分").ToString = CommonConst.Sire_KBN_SERVICE,
+                                                                                ds3.Tables(RS).Rows(index)("売単価"),
+                                                                                ds3.Tables(RS).Rows(index)("見積単価")) '売単価 = 見積単価
                     DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("売上数量").Value = 0
                     DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("備考").Value = ds3.Tables(RS).Rows(index)("備考")
                 End If
@@ -605,7 +607,12 @@ Public Class OrderManagement
 
                 Sql4 += UtilClass.formatNumber(Format(arariAmount, "0.000")) '粗利額
                 Sql4 += "', '"
-                Sql4 += UtilClass.formatNumber(Format(dsCymndt.Tables(RS).Rows(i)("仕入値").ToString / (dsCymndt.Tables(RS).Rows(i)("売単価").ToString) * 100, "0.0")) '粗利率
+
+                If dsCymndt.Tables(RS).Rows(i)("売単価").ToString > 0 Then
+                    Sql4 += UtilClass.formatNumber(Format(dsCymndt.Tables(RS).Rows(i)("仕入値").ToString / (dsCymndt.Tables(RS).Rows(i)("売単価").ToString) * 100, "0.0")) '粗利率
+                Else
+                    Sql4 += "0" '粗利率
+                End If
                 Sql4 += "', '"
 
                 Dim kansetsuhi As Decimal = (dsCymndt.Tables(RS).Rows(i)("関税額") + dsCymndt.Tables(RS).Rows(i)("前払法人税額") + dsCymndt.Tables(RS).Rows(i)("輸送費額")) * DgvAdd.Rows(i).Cells("売上数量").Value.ToString
