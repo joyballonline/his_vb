@@ -52,7 +52,7 @@ Public Class ExchangeRate
     '-------------------------------------------------------------------------------
     'コンストラクタ　メニューから呼ばれる
     '-------------------------------------------------------------------------------
-     Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler,
+    Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler,
                    ByRef prmRefDbHd As UtilDBIf,
                    ByRef prmRefLang As UtilLangHandler,
                    ByRef prmRefForm As Form,
@@ -169,7 +169,7 @@ Public Class ExchangeRate
     '登録ボタン押下時
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles BtnRegistration.Click
 
-        If TxtBaseCurrency1.Text = "" Or TxtForeignCurrency1.Text = "" Or TxtBaseCurrency2.Text = "" Or TxtForeignCurrency2.Text = "" Then
+        If TxtBaseCurrency1.Text = "" Or NudForeignCurrency1.Text = "" Or TxtBaseCurrency2.Text = "" Or NudForeignCurrency2.Text = "" Then
             '登録できないアラートを出す
             _msgHd.dspMSG("chkInputError", frmC01F10_Login.loginValue.Language)
             Exit Sub
@@ -258,8 +258,8 @@ Public Class ExchangeRate
 
     'IDR → JPY
     Private Sub TxtBaseCurrency1_Validated(sender As Object, e As EventArgs) Handles TxtBaseCurrency1.Validated
-        If TxtForeignCurrency1.Text <> "" And TxtBaseCurrency1.Text <> "" Then
-            Dim rateVal As Decimal = TxtBaseCurrency1.Text / TxtForeignCurrency1.Text
+        If TxtForeignCurrency1.Text <> "" And NudForeignCurrency1.Value > 0 Then
+            Dim rateVal As Decimal = TxtBaseCurrency1.Text / NudForeignCurrency1.Value
             TxtRate1.Text = rateVal.ToString("F10")
         End If
 
@@ -272,20 +272,48 @@ Public Class ExchangeRate
         End If
     End Sub
 
+    Private Sub NudForeignCurrency1_Validated(sender As Object, e As EventArgs) Handles NudForeignCurrency1.Validated
+        If TxtBaseCurrency1.Text <> "" And NudForeignCurrency1.Value > 0 Then
+            Dim rateVal As Decimal = Decimal.Parse(TxtBaseCurrency1.Text) / Decimal.Parse(UtilClass.formatNumberF10(NudForeignCurrency1.Value))
+            TxtRate1.Text = rateVal.ToString("F10")
+        End If
+    End Sub
+
     'IDR → USD
     Private Sub TxtBaseCurrency2_Validated(sender As Object, e As EventArgs) Handles TxtBaseCurrency2.Validated
-        If TxtForeignCurrency2.Text <> "" And TxtBaseCurrency2.Text <> "" Then
-            Dim rateVal As Decimal = TxtBaseCurrency2.Text / TxtForeignCurrency2.Text
+        If TxtBaseCurrency2.Text <> "" And NudForeignCurrency2.Value > 0 Then
+            Dim rateVal As Decimal = Decimal.Parse(TxtBaseCurrency2.Text) / Decimal.Parse(UtilClass.formatNumberF10(NudForeignCurrency2.Value))
             TxtRate2.Text = rateVal.ToString("F10")
         End If
-
     End Sub
 
     Private Sub TxtForeignCurrency2_Validated(sender As Object, e As EventArgs) Handles TxtForeignCurrency2.Validated
-        If TxtBaseCurrency2.Text <> "" And TxtForeignCurrency2.Text <> "" Then
+        If TxtBaseCurrency2.Text <> "" And NudForeignCurrency2.Value <> 0 Then
             Dim rateVal As Decimal = TxtBaseCurrency2.Text / TxtForeignCurrency2.Text
             TxtRate2.Text = rateVal.ToString("F10")
         End If
+    End Sub
 
+    Private Sub NudForeignCurrency2_Validated(sender As Object, e As EventArgs) Handles NudForeignCurrency2.Validated
+        If TxtBaseCurrency2.Text <> "" And NudForeignCurrency2.Value > 0 Then
+            Dim rateVal As Decimal = Decimal.Parse(TxtBaseCurrency2.Text) / Decimal.Parse(UtilClass.formatNumberF10(NudForeignCurrency2.Value))
+            TxtRate2.Text = rateVal.ToString("F10")
+        End If
+    End Sub
+
+    Private Sub NudForeignCurrency1_Enter(sender As Object, e As EventArgs) Handles NudForeignCurrency1.Enter
+        sender.Select(0, sender.Text.Length)
+    End Sub
+
+    Private Sub NudForeignCurrency2_Enter(sender As Object, e As EventArgs) Handles NudForeignCurrency2.Enter
+        sender.Select(0, sender.Text.Length)
+    End Sub
+
+    Private Sub NudForeignCurrency1_Click(sender As Object, e As EventArgs) Handles NudForeignCurrency1.Click
+        sender.Select(0, sender.Text.Length)
+    End Sub
+
+    Private Sub NudForeignCurrency2_Click(sender As Object, e As EventArgs) Handles NudForeignCurrency2.Click
+        sender.Select(0, sender.Text.Length)
     End Sub
 End Class
