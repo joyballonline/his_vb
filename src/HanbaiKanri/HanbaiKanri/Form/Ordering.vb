@@ -1144,29 +1144,11 @@ Public Class Ordering
                 Sql += frmC01F10_Login.loginValue.TantoNM '更新者
                 Sql += "', "
                 Sql += "0" '取消区分
-
                 Sql += ", "
-
-                If dsCompany.Tables(RS).Rows.Count > 0 Then
-                    Sql += IIf(dsCompany.Tables(RS).Rows(0)("見積番号") IsNot DBNull.Value, "NULL", CbShippedBy.SelectedIndex.ToString) '出荷方法
-                Else
-                    Sql += "NULL"
-                End If
-
-                Sql += ", "
-
-                If dsCompany.Tables(RS).Rows.Count > 0 Then
-                    Sql += IIf(dsCompany.Tables(RS).Rows(0)("見積番号") IsNot DBNull.Value, "NULL", "'" & strFormatDate(DtpShippedDate.Value) & "'") '出荷日
-                Else
-                    Sql += "NULL"
-                End If
-
-                'Sql += CbShippedBy.SelectedIndex.ToString '出荷方法
-                'Sql += "', '"
-                'Sql += strFormatDate(DtpShippedDate.Value) '出荷日
-
-
+                Sql += CbShippedBy.SelectedIndex.ToString '出荷方法
                 Sql += ", '"
+                Sql += strFormatDate(DtpShippedDate.Value) '出荷日
+                Sql += "', '"
                 Sql += TxtSales.Tag '営業担当者コード
                 Sql += "', '"
                 Sql += frmC01F10_Login.loginValue.TantoCD '入力担当者コード
