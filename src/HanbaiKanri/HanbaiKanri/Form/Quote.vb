@@ -183,6 +183,10 @@ Public Class Quote
             LblGrossProfit.Text = "GrossMargin" '粗利額
             LblVat.Text = "Vat(%)" 'VAT(%)
 
+            LblCurrencyQuoteAmount.Text = "QuotationAmount" '見積金額
+            LblIDRCurrency.Text = "Currency" '通貨
+            LblChangeCurrency.Text = "Currency" '通貨
+
             RbtnGP.Text = "GrossMarginInput" '粗利入力
             RbtnUP.Text = "InputUnitPrice " '単価入力
             RbtnQuote.Text = "QuotationPriceInput" '見積単価入力
@@ -201,36 +205,36 @@ Public Class Quote
             BtnBack.Text = "Back" '戻る
 
             LblRegistration.Size = New Size(156, 23)
-            LblRegistration.Location = New Point(274, 15)
-            DtpRegistration.Location = New Point(436, 16)
-            LblQuote.Location = New Point(592, 14)
-            DtpQuote.Location = New Point(710, 16)
-            LblExpiration.Location = New Point(866, 15)
-            DtpExpiration.Location = New Point(982, 16)
+            LblRegistration.Location = New Point(274, 10)
+            DtpRegistration.Location = New Point(436, 11)
+            LblQuote.Location = New Point(592, 10)
+            DtpQuote.Location = New Point(710, 11)
+            LblExpiration.Location = New Point(866, 10)
+            DtpExpiration.Location = New Point(982, 11)
 
             BtnCodeSearch.Size = New Size(108, 23)
-            BtnCodeSearch.Location = New Point(212, 63)
+            BtnCodeSearch.Location = New Point(212, 46)
             TxtCustomerName.Size = New Size(278, 23)
-            TxtCustomerName.Location = New Point(326, 63)
+            TxtCustomerName.Location = New Point(326, 46)
 
-            LblItemCount.Size = New Size(125, 45)
-            LblItemCount.Location = New Point(1216, 157)
+            LblItemCount.Size = New Size(125, 23)
+            LblItemCount.Location = New Point(1216, 162)
             TxtItemCount.Size = New Size(125, 23)
-            TxtItemCount.Location = New Point(1216, 208)
-            RbtnUP.Location = New Point(712, 210)
-            RbtnGP.Location = New Point(879, 210)
-            RbtnQuote.Location = New Point(1038, 210)
+            TxtItemCount.Location = New Point(1216, 187)
+            RbtnUP.Location = New Point(712, 193)
+            RbtnGP.Location = New Point(879, 193)
+            RbtnQuote.Location = New Point(1038, 193)
 
-            LblVat.Location = New Point(629, 422)
-            TxtVat.Location = New Point(735, 422)
-            LblGrossProfit.Location = New Point(628, 451)
-            TxtGrossProfit.Location = New Point(734, 451)
-            LblPurchaseAmount.Location = New Point(972, 422)
-            LblPurchaseAmount.Size = New Size(132, 23)
-            LblOrderAmount.Location = New Point(972, 451)
-            LblOrderAmount.Size = New Size(132, 23)
-            LblQuoteAmount.Location = New Point(972, 480)
-            LblQuoteAmount.Size = New Size(132, 23)
+            'LblVat.Location = New Point(629, 422)
+            'TxtVat.Location = New Point(735, 422)
+            'LblGrossProfit.Location = New Point(628, 451)
+            'TxtGrossProfit.Location = New Point(734, 451)
+            'LblPurchaseAmount.Location = New Point(972, 422)
+            'LblPurchaseAmount.Size = New Size(132, 23)
+            'LblOrderAmount.Location = New Point(972, 451)
+            'LblOrderAmount.Size = New Size(132, 23)
+            'LblQuoteAmount.Location = New Point(972, 480)
+            'LblQuoteAmount.Size = New Size(132, 23)
 
             '英語用見出し
             DgvItemList.Columns("仕入区分").HeaderText = "PurchasingClassification"
