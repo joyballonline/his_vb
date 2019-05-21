@@ -403,5 +403,8 @@ Public Class CommonConst
     Public Const CURRENCY_CD_JPY As Integer = 2                 '円
     Public Const CURRENCY_CD_USD As Integer = 3                 'ドル
 
+    'レート表示（インドネシアVer）
+    Public Const BASE_RATE_IDR As String = "1,0000000000"
+    Public Const BASE_RATE_JPY As String = "1.0000000000"
 
 End Class
