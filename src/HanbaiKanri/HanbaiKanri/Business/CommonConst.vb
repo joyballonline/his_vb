@@ -328,6 +328,7 @@ Public Class CommonConst
 
     'カルチャー JP
     Public Const CI_JP As String = "ja-JP"               'カルチャー 日本
+    Public Const CI_ID As String = "en-ID"               'カルチャー インドネシア
 
     '固定キー
     Public Const FIXED_KEY_RECEIPT_TYPE As String = "1"          '入金種目
