@@ -259,22 +259,23 @@ Public Class ExchangeRate
     'IDR → JPY
     Private Sub TxtBaseCurrency1_Validated(sender As Object, e As EventArgs) Handles TxtBaseCurrency1.Validated
         If TxtForeignCurrency1.Text <> "" And NudForeignCurrency1.Value > 0 Then
-            Dim rateVal As Decimal = TxtBaseCurrency1.Text / NudForeignCurrency1.Value
+            'Dim rateVal As Decimal = TxtBaseCurrency1.Text / NudForeignCurrency1.Value
+            Dim rateVal As Decimal = Decimal.Parse(NudForeignCurrency1.Value) / Decimal.Parse(TxtBaseCurrency1.Text)
             TxtRate1.Text = rateVal.ToString("F10")
         End If
 
     End Sub
 
     Private Sub TxtForeignCurrency1_Validated(sender As Object, e As EventArgs) Handles TxtForeignCurrency1.Validated
-        If TxtBaseCurrency1.Text <> "" And TxtForeignCurrency1.Text <> "" Then
-            Dim rateVal As Decimal = TxtBaseCurrency1.Text / TxtForeignCurrency1.Text
-            TxtRate1.Text = rateVal.ToString("F10")
-        End If
+        'If TxtBaseCurrency1.Text <> "" And TxtForeignCurrency1.Text <> "" Then
+        '    Dim rateVal As Decimal = TxtBaseCurrency1.Text / TxtForeignCurrency1.Text
+        '    TxtRate1.Text = rateVal.ToString("F10")
+        'End If
     End Sub
 
     Private Sub NudForeignCurrency1_Validated(sender As Object, e As EventArgs) Handles NudForeignCurrency1.Validated
         If TxtBaseCurrency1.Text <> "" And NudForeignCurrency1.Value > 0 Then
-            Dim rateVal As Decimal = Decimal.Parse(TxtBaseCurrency1.Text) / Decimal.Parse(UtilClass.formatNumberF10(NudForeignCurrency1.Value))
+            Dim rateVal As Decimal = Decimal.Parse(NudForeignCurrency1.Value) / Decimal.Parse(TxtBaseCurrency1.Text)
             TxtRate1.Text = rateVal.ToString("F10")
         End If
     End Sub
@@ -282,21 +283,22 @@ Public Class ExchangeRate
     'IDR → USD
     Private Sub TxtBaseCurrency2_Validated(sender As Object, e As EventArgs) Handles TxtBaseCurrency2.Validated
         If TxtBaseCurrency2.Text <> "" And NudForeignCurrency2.Value > 0 Then
-            Dim rateVal As Decimal = Decimal.Parse(TxtBaseCurrency2.Text) / Decimal.Parse(UtilClass.formatNumberF10(NudForeignCurrency2.Value))
+            'Dim rateVal As Decimal = Decimal.Parse(TxtBaseCurrency2.Text) / Decimal.Parse(UtilClass.formatNumberF10(NudForeignCurrency2.Value))
+            Dim rateVal As Decimal = Decimal.Parse(NudForeignCurrency2.Value) / Decimal.Parse(TxtBaseCurrency2.Text)
             TxtRate2.Text = rateVal.ToString("F10")
         End If
     End Sub
 
     Private Sub TxtForeignCurrency2_Validated(sender As Object, e As EventArgs) Handles TxtForeignCurrency2.Validated
-        If TxtBaseCurrency2.Text <> "" And NudForeignCurrency2.Value <> 0 Then
-            Dim rateVal As Decimal = TxtBaseCurrency2.Text / TxtForeignCurrency2.Text
-            TxtRate2.Text = rateVal.ToString("F10")
-        End If
+        'If TxtBaseCurrency2.Text <> "" And NudForeignCurrency2.Value <> 0 Then
+        '    Dim rateVal As Decimal = TxtBaseCurrency2.Text / TxtForeignCurrency2.Text
+        '    TxtRate2.Text = rateVal.ToString("F10")
+        'End If
     End Sub
 
     Private Sub NudForeignCurrency2_Validated(sender As Object, e As EventArgs) Handles NudForeignCurrency2.Validated
         If TxtBaseCurrency2.Text <> "" And NudForeignCurrency2.Value > 0 Then
-            Dim rateVal As Decimal = Decimal.Parse(TxtBaseCurrency2.Text) / Decimal.Parse(UtilClass.formatNumberF10(NudForeignCurrency2.Value))
+            Dim rateVal As Decimal = Decimal.Parse(NudForeignCurrency2.Value) / Decimal.Parse(TxtBaseCurrency2.Text)
             TxtRate2.Text = rateVal.ToString("F10")
         End If
     End Sub
@@ -315,5 +317,9 @@ Public Class ExchangeRate
 
     Private Sub NudForeignCurrency2_Click(sender As Object, e As EventArgs) Handles NudForeignCurrency2.Click
         sender.Select(0, sender.Text.Length)
+    End Sub
+
+    Private Sub checkDecimalPoint()
+
     End Sub
 End Class
