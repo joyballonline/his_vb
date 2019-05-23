@@ -2781,7 +2781,6 @@ Public Class Quote
         CmCurrency.ValueMember = "Value"
 
         Dim Sql As String = " AND 取消区分 = '" & CommonConst.FLAG_ENABLED & "'"
-        ' Sql += " AND 基準日 <= '" & UtilClass.strFormatDate(DtpQuote.Text) & "'"
 
         Dim ds As DataSet = getDsData("m25_currency", Sql)
 
@@ -2893,10 +2892,10 @@ Public Class Quote
         If DgvItemList.Rows.Count > 0 Then
             For i As Integer = 0 To DgvItemList.Rows.Count - 1
                 delCellValueChanged()
-                If TxtRate.Text <> "" And DgvItemList.Rows(i).Cells("見積単価").Value.ToString <> "" Then
+                If TxtRate.Text <> "" And DgvItemList.Rows(i).Cells("見積単価").Value IsNot Nothing Then
                     DgvItemList.Rows(i).Cells("見積単価_外貨").Value = Math.Ceiling(DgvItemList.Rows(i).Cells("見積単価").Value / TxtRate.Text)
                 End If
-                If DgvItemList.Rows(i).Cells("見積単価_外貨").Value.ToString <> "" And DgvItemList.Rows(i).Cells("数量").Value.ToString <> "" Then
+                If DgvItemList.Rows(i).Cells("見積単価_外貨").Value IsNot Nothing And DgvItemList.Rows(i).Cells("数量").Value IsNot Nothing Then
                     DgvItemList.Rows(i).Cells("見積金額_外貨").Value = DgvItemList.Rows(i).Cells("見積単価_外貨").Value * DgvItemList.Rows(i).Cells("数量").Value
                 End If
                 setCellValueChanged()
