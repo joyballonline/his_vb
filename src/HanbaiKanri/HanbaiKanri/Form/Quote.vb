@@ -1931,7 +1931,8 @@ Public Class Quote
         Sql1 += ", 入力担当者 "
         Sql1 += ", 支払条件 "
         Sql1 += ", 備考 "
-        Sql1 += ", 見積金額 "
+        'Sql1 += ", 見積金額 "
+        Sql1 += ", 見積金額_外貨 "
         Sql1 += ", ＶＡＴ "
         Sql1 += ", 登録日 "
         Sql1 += ", 更新日 "
@@ -1972,9 +1973,9 @@ Public Class Quote
         Sql3 += ", 粗利率 "
         Sql3 += ", リードタイム "
         Sql3 += ", リードタイム単位 "
-        Sql3 += ", 見積単価 "
+        'Sql3 += ", 見積単価 "
         Sql3 += ", 見積単価_外貨 "
-        Sql3 += ", 見積金額 "
+        'Sql3 += ", 見積金額 "
         Sql3 += ", 見積金額_外貨 "
         Sql3 += ", 備考 "
         Sql3 += ", 登録日 "
@@ -2114,11 +2115,11 @@ Public Class Quote
                 cell = "N" & currentCnt
                 sheet.Range(cell).Value = ds3.Tables(RS).Rows(index)("単位")
                 cell = "P" & currentCnt
-                sheet.Range(cell).Value = ds3.Tables(RS).Rows(index)("見積単価")
+                sheet.Range(cell).Value = ds3.Tables(RS).Rows(index)("見積単価_外貨")
                 cell = "T" & currentCnt
-                sheet.Range(cell).Value = ds3.Tables(RS).Rows(index)("見積金額")
+                sheet.Range(cell).Value = ds3.Tables(RS).Rows(index)("見積金額_外貨")
 
-                totalPrice = totalPrice + ds3.Tables(RS).Rows(index)("見積金額")
+                totalPrice = totalPrice + ds3.Tables(RS).Rows(index)("見積金額_外貨")
 
                 '↑のSQL文でINNER JOIN使えばここで呼び出す必要はない
                 Sql5 = ""
