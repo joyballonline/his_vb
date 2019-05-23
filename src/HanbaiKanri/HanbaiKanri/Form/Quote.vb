@@ -1101,15 +1101,15 @@ Public Class Quote
 
             '最終行のインデックスを取得
             Dim index As Integer = DgvItemList.Rows.Count()
-                '行番号の振り直し
-                Dim No As Integer = 1
-                For c As Integer = 0 To index - 1
-                    DgvItemList.Rows(c).Cells("No").Value = No
-                    No += 1
-                Next c
-                TxtItemCount.Text = DgvItemList.Rows.Count()
-            Else
-                DgvItemList.Rows.Add()
+            '行番号の振り直し
+            Dim No As Integer = 1
+            For c As Integer = 0 To index - 1
+                DgvItemList.Rows(c).Cells("No").Value = No
+                No += 1
+            Next c
+            TxtItemCount.Text = DgvItemList.Rows.Count()
+        Else
+            DgvItemList.Rows.Add()
             DgvItemList.Rows(0).Cells("仕入区分").Value = 1
             DgvItemList.Rows(0).Cells("リードタイム単位").Value = 1
             DgvItemList.Rows(0).Cells("仕入通貨").Value = 1
@@ -1121,15 +1121,15 @@ Public Class Quote
             'End If
             TxtItemCount.Text = DgvItemList.Rows.Count()
             DgvItemList.Rows(DgvItemList.Rows.Count() - 1).Cells("ステータス").Value = "ADD"
-                '行番号の振り直し
-                Dim index As Integer = DgvItemList.Rows.Count()
-                Dim No As Integer = 1
-                For c As Integer = 0 To index - 1
-                    DgvItemList.Rows(c).Cells("No").Value = No
-                    No += 1
-                Next c
-                TxtItemCount.Text = DgvItemList.Rows.Count()
-            End If
+            '行番号の振り直し
+            Dim index As Integer = DgvItemList.Rows.Count()
+            Dim No As Integer = 1
+            For c As Integer = 0 To index - 1
+                DgvItemList.Rows(c).Cells("No").Value = No
+                No += 1
+            Next c
+            TxtItemCount.Text = DgvItemList.Rows.Count()
+        End If
     End Sub
 
     '行追加（DGVの最終行に追加）
@@ -2860,8 +2860,8 @@ Public Class Quote
     Private Sub CmCurrency_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmCurrency.SelectedIndexChanged
         setRate()
         setChangeCurrency()
-        setCurrency()
         resetListCurrency()
+        setCurrency()
     End Sub
 
     'Currencyに応じて変換
@@ -2870,9 +2870,16 @@ Public Class Quote
         Dim currencyVal As Decimal = IIf(TxtRate.Text <> "", TxtRate.Text, 0)
         Dim vatVal As Decimal = IIf(TxtVatAmount.Text <> "", TxtVatAmount.Text, 0)
         Dim sumVal As Decimal = IIf(TxtQuoteTotal.Text <> "", TxtQuoteTotal.Text, 0)
+        Dim QuoteCurrencyTotal As Decimal = 0       '見積金額_外貨
 
         TxtCurrencyVatAmount.Text = (vatVal * currencyVal).ToString("F0")
         TxtCurrencyQuoteTotal.Text = (sumVal * currencyVal).ToString("F0")
+
+        For c As Integer = 0 To DgvItemList.Rows.Count - 1
+            QuoteCurrencyTotal += DgvItemList.Rows(c).Cells("見積金額_外貨").Value
+        Next
+        TxtCurrencyQuoteTotal.Text = QuoteCurrencyTotal.ToString("F0")
+
     End Sub
 
     Private Sub setAddHandler()
@@ -2897,7 +2904,7 @@ Public Class Quote
             For i As Integer = 0 To DgvItemList.Rows.Count - 1
                 delCellValueChanged()
                 If TxtRate.Text <> "" And DgvItemList.Rows(i).Cells("見積単価").Value IsNot Nothing Then
-                    DgvItemList.Rows(i).Cells("見積単価_外貨").Value = Math.Ceiling(DgvItemList.Rows(i).Cells("見積単価").Value / TxtRate.Text)
+                    DgvItemList.Rows(i).Cells("見積単価_外貨").Value = Math.Ceiling(DgvItemList.Rows(i).Cells("見積単価").Value * TxtRate.Text)
                 End If
                 If DgvItemList.Rows(i).Cells("見積単価_外貨").Value IsNot Nothing And DgvItemList.Rows(i).Cells("数量").Value IsNot Nothing Then
                     DgvItemList.Rows(i).Cells("見積金額_外貨").Value = DgvItemList.Rows(i).Cells("見積単価_外貨").Value * DgvItemList.Rows(i).Cells("数量").Value
