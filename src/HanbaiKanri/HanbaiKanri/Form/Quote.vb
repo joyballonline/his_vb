@@ -2069,7 +2069,7 @@ Public Class Quote
             sheet.Range("S11").Value = CmnData("営業担当者") '営業担当者
             sheet.Range("S12").Value = CmnData("入力担当者") '入力担当者
 
-            sheet.Range("P19").Value = getCurrency(CmnData("通貨")) '通貨
+            sheet.Range("P19").Value = "Unit Price(" & getCurrency(CmnData("通貨")) & ")" '通貨
 
             Dim rowCnt As Integer = 0
             Dim lstRow As Integer = 22
