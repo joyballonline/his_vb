@@ -1936,6 +1936,7 @@ Public Class Quote
         Sql1 += ", 登録日 "
         Sql1 += ", 更新日 "
         Sql1 += ", 更新者 "
+        Sql1 += ", 通貨 "
         Sql1 += "FROM public.t01_mithd"
         Sql1 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql1 += " AND 見積番号 = '" & EditNo.ToString & "'"
@@ -2067,6 +2068,8 @@ Public Class Quote
 
             sheet.Range("S11").Value = CmnData("営業担当者") '営業担当者
             sheet.Range("S12").Value = CmnData("入力担当者") '入力担当者
+
+            sheet.Range("P19").Value = getCurrency(CmnData("通貨")) '通貨
 
             Dim rowCnt As Integer = 0
             Dim lstRow As Integer = 22
@@ -2925,6 +2928,18 @@ Public Class Quote
             End If
         End If
         Return retVal
+    End Function
+
+    Private Function getCurrency(ByVal prmVal As Integer) As String
+        Dim Sql As String = " AND 取消区分 = '" & CommonConst.FLAG_ENABLED & "'"
+        Sql += " AND 採番キー =" & prmVal.ToString
+
+        Dim ds As DataSet = getDsData("m25_currency", Sql)
+
+        'リードタイム単位の多言語対応
+
+        Return ds.Tables(RS).Rows(0)("通貨コード")
+
     End Function
 
 End Class
