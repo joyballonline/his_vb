@@ -2873,7 +2873,7 @@ Public Class Quote
         Dim QuoteCurrencyTotal As Decimal = 0       '見積金額_外貨
 
         TxtCurrencyVatAmount.Text = (vatVal * currencyVal).ToString("F0")
-        TxtCurrencyQuoteTotal.Text = (sumVal * currencyVal).ToString("F0")
+        'TxtCurrencyQuoteTotal.Text = (sumVal * currencyVal).ToString("F0")
 
         For c As Integer = 0 To DgvItemList.Rows.Count - 1
             QuoteCurrencyTotal += DgvItemList.Rows(c).Cells("見積金額_外貨").Value

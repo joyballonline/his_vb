@@ -1297,7 +1297,7 @@ Public Class frmC01F30_Menu
             strSql = strSql & " and "
             strSql = strSql & " m.業務ＩＤ <> 'M01' "
             strSql = strSql & likeSql
-            strSql = strSql & " order by m.処理ＩＤ ,m.表示順 "
+            strSql = strSql & " order by m.表示順, m.処理ＩＤ "
 
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(strSql, RS, reccnt)
@@ -1353,7 +1353,7 @@ Public Class frmC01F30_Menu
             strSql = strSql & " and "
             strSql = strSql & " m.業務ＩＤ = 'M01' "
             strSql = strSql & likeSql
-            strSql = strSql & " order by m.処理ＩＤ ,m.表示順 "
+            strSql = strSql & " order by m.表示順, m.処理ＩＤ "
 
             Dim dsMaster As DataSet = _db.selectDB(strSql, RS, reccnt)
 
