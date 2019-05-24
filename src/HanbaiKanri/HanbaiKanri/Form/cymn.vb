@@ -78,6 +78,8 @@ Public Class Cymn
 
     Private Sub Quote_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        Dim reccnt As Integer = 0
+
         'DateTimePickerのフォーマットを指定
         DtpOrderRegistration.Text = DateTime.Today '受発注登録日
         DtpOrderDate.Text = DateTime.Today '受注日
@@ -107,37 +109,26 @@ Public Class Cymn
         'DataGridView1に追加する
         DgvItemList.Columns.Insert(1, column)
 
-        'リードタイム単位の設定
-        Dim reccnt As Integer = 0
-        Dim Sql12 As String = ""
-
-        Sql12 += "SELECT * FROM public.m90_hanyo"
-        Sql12 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        Sql12 += " AND 固定キー = '" & CommonConst.FIXED_KEY_READTIME & "'"
-
-        Dim ds12 As DataSet = _db.selectDB(Sql12, RS, reccnt)
-
-        Dim table2 As New DataTable("Table")
-        table2.Columns.Add("Display", GetType(String))
-        table2.Columns.Add("Value", GetType(Integer))
-
-        For index As Integer = 0 To ds12.Tables(RS).Rows.Count - 1
-            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-                table2.Rows.Add(ds12.Tables(RS).Rows(index)("文字２"), ds12.Tables(RS).Rows(index)("可変キー"))
-            Else
-                table2.Rows.Add(ds12.Tables(RS).Rows(index)("文字１"), ds12.Tables(RS).Rows(index)("可変キー"))
-            End If
-
-        Next
-
+        'リードタイム単位コンボボックス作成
         Dim column2 As New DataGridViewComboBoxColumn()
-        column2.DataSource = table2
+        column2.DataSource = getReadTime()
         column2.ValueMember = "Value"
         column2.DisplayMember = "Display"
         column2.HeaderText = "リードタイム単位"
         column2.Name = "リードタイム単位"
 
-        DgvItemList.Columns.Insert(25, column2)
+        'DgvItemList.Columns.Insert(25, column2)
+        DgvItemList.Columns.Insert(29, column2)
+
+        '仕入通貨コンボボックス作成
+        Dim column3 As New DataGridViewComboBoxColumn()
+        column3.DataSource = getSireCurrency()
+        column3.ValueMember = "Value"
+        column3.DisplayMember = "Display"
+        column3.HeaderText = "仕入通貨"
+        column3.Name = "仕入通貨"
+
+        DgvItemList.Columns.Insert(10, column3)
 
         createWarehouseCombobox() '倉庫コンボボックス
 
@@ -156,8 +147,6 @@ Public Class Cymn
 
         Dim dtNow As DateTime = DateTime.Now
         Dim Saiban1 As DataSet = _db.selectDB(SqlSaiban, RS, reccnt)
-
-
 
         Dim SqlSaiban2 As String = ""
         SqlSaiban2 += "SELECT "
@@ -243,8 +232,13 @@ Public Class Cymn
         TxtOrderAmount.Text = ds1.Tables(RS).Rows(0)("見積金額").ToString
         TxtPurchaseAmount.Text = ds1.Tables(RS).Rows(0)("仕入金額").ToString
         TxtGrossProfit.Text = ds1.Tables(RS).Rows(0)("粗利額").ToString
+        TxtVatAmount.Text = ((TxtOrderAmount.Text * TxtVat.Text) / 100).ToString("F0")
 
-        ''見積明細情報
+        '通貨・レート情報設定
+        createCurrencyCombobox(ds1.Tables(RS).Rows(0)("通貨").ToString)
+        setRate()
+
+        '見積明細情報
         Dim Sql3 As String = ""
         Sql3 += "SELECT * "
         Sql3 += "FROM public.t02_mitdt"
@@ -281,6 +275,13 @@ Public Class Cymn
             DgvItemList.Rows(index).Cells("仕入先コード").Value = ds3.Tables(RS).Rows(index)("仕入先コード")
             DgvItemList.Rows(index).Cells("仕入先").Value = ds3.Tables(RS).Rows(index)("仕入先名称")
             DgvItemList.Rows(index).Cells("仕入単価").Value = ds3.Tables(RS).Rows(index)("仕入単価")
+            If ds3.Tables(RS).Rows(index)("仕入通貨") Is DBNull.Value Then
+            Else
+                Dim tmp6 As Integer = ds3.Tables(RS).Rows(index)("仕入通貨")
+                DgvItemList.Rows(index).Cells("仕入通貨").Value = tmp6
+            End If
+            DgvItemList.Rows(index).Cells("仕入レート").Value = ds3.Tables(RS).Rows(index)("仕入レート")
+            DgvItemList.Rows(index).Cells("仕入単価_外貨").Value = ds3.Tables(RS).Rows(index)("仕入単価_外貨")
             DgvItemList.Rows(index).Cells("仕入原価").Value = ds3.Tables(RS).Rows(index)("仕入原価")
             DgvItemList.Rows(index).Cells("関税率").Value = ds3.Tables(RS).Rows(index)("関税率")
             DgvItemList.Rows(index).Cells("関税額").Value = ds3.Tables(RS).Rows(index)("関税額")
@@ -292,14 +293,16 @@ Public Class Cymn
             DgvItemList.Rows(index).Cells("売単価").Value = ds3.Tables(RS).Rows(index)("売単価")
             DgvItemList.Rows(index).Cells("売上金額").Value = ds3.Tables(RS).Rows(index)("売上金額")
             DgvItemList.Rows(index).Cells("見積単価").Value = ds3.Tables(RS).Rows(index)("見積単価")
+            DgvItemList.Rows(index).Cells("見積単価_外貨").Value = ds3.Tables(RS).Rows(index)("見積単価_外貨")
             DgvItemList.Rows(index).Cells("見積金額").Value = ds3.Tables(RS).Rows(index)("見積金額")
+            DgvItemList.Rows(index).Cells("見積金額_外貨").Value = ds3.Tables(RS).Rows(index)("見積金額_外貨")
             DgvItemList.Rows(index).Cells("粗利額").Value = ds3.Tables(RS).Rows(index)("粗利額")
             DgvItemList.Rows(index).Cells("粗利率").Value = ds3.Tables(RS).Rows(index)("粗利率")
             DgvItemList.Rows(index).Cells("リードタイム").Value = ds3.Tables(RS).Rows(index)("リードタイム")
             tmp5 = ds3.Tables(RS).Rows(index)("リードタイム単位")
             DgvItemList.Rows(index).Cells("リードタイム単位").Value = tmp5
             DgvItemList.Rows(index).Cells("備考").Value = ds3.Tables(RS).Rows(index)("備考")
-            DgvItemList.Rows(index).Cells(27).Value = "" 'ステータス？
+            'DgvItemList.Rows(index).Cells(28).Value = "" 'ステータス？
 
             tmp2 = ds3.Tables(RS).Rows(index)("関税率")
             tmp2 = tmp2 / 100
@@ -326,8 +329,16 @@ Public Class Cymn
         Next c
         TxtItemCount.Text = DgvItemList.Rows.Count()
 
+        '通貨表示：ベースの設定
+        setBaseCurrency()
+
+        '通貨表示：変更後の設定
+        setChangeCurrency()
+
+        setCurrency() '通貨に設定した内容に変更
+
         '翻訳
-        If frmC01F10_Login.loginValue.Language = "ENG" Then
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
             LblOrderNo.Text = "JobOrderNo"
             LblCustmerPO.Text = "CustomerNumber"
             LblCustmerPO.Location = New Point(273, 12)
@@ -538,7 +549,11 @@ Public Class Cymn
                 Sql1 = "INSERT INTO "
                 Sql1 += "Public."
                 Sql1 += "t10_cymnhd("
-                Sql1 += "会社コード, 受注番号, 受注番号枝番, 客先番号, 見積番号, 見積番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額,仕入金額, 粗利額, 営業担当者コード, 営業担当者, 入力担当者コード, 入力担当者, 備考, 見積備考, ＶＡＴ, 受注日, 登録日, 更新日, 更新者, 取消区分)"
+                Sql1 += "会社コード, 受注番号, 受注番号枝番, 客先番号, 見積番号, 見積番号枝番, 得意先コード"
+                Sql1 += ", 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職"
+                Sql1 += ", 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額,仕入金額, 粗利額"
+                Sql1 += ", 営業担当者コード, 営業担当者, 入力担当者コード, 入力担当者, 備考, 見積備考, ＶＡＴ"
+                Sql1 += ", 受注日, 登録日, 更新日, 更新者, 取消区分, 見積金額_外貨, 通貨, レート)"
                 Sql1 += " VALUES('" & frmC01F10_Login.loginValue.BumonCD & "'"     '会社コード
                 Sql1 += ", '" & TxtOrderNo.Text & "'"       '受注番号
                 Sql1 += ", '" & TxtOrderSuffix.Text & "'"   '受注番号枝番
@@ -570,7 +585,10 @@ Public Class Cymn
                 Sql1 += ", '" & UtilClass.formatDatetime(DtpOrderRegistration.Value) & "'"     '登録日
                 Sql1 += ", '" & strNow & "'"                 '更新日
                 Sql1 += ", '" & frmC01F10_Login.loginValue.TantoNM & "'"
-                Sql1 += ", 0"
+                Sql1 += ", 0"                               '取消区分
+                Sql1 += ", " & formatStringToNumber(TxtCurrencyOrderTotal.Text)          '見積金額_外貨
+                Sql1 += ", " & CmCurrency.SelectedValue.ToString                            '通貨
+                Sql1 += ", " & UtilClass.formatNumberF10(TxtRate.Text)  'レート
                 Sql1 += " )"
 
                 _db.executeDB(Sql1)
@@ -587,7 +605,8 @@ Public Class Cymn
                     Sql2 += "t11_cymndt("
                     Sql2 += "会社コード, 受注番号, 受注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 単位, 仕入先名, 仕入値, 受注数量"
                     Sql2 += ", 売上数量, 受注残数, 売単価, 売上金額, 見積単価, 見積金額, 粗利額, 粗利率, 間接費, リードタイム, リードタイム単位"
-                    Sql2 += ", 出庫数, 未出庫数, 備考, 更新者, 登録日, 関税率, 関税額, 前払法人税率, 前払法人税額, 輸送費率, 輸送費額, 仕入原価, 仕入金額)"
+                    Sql2 += ", 出庫数, 未出庫数, 備考, 更新者, 登録日, 関税率, 関税額, 前払法人税率, 前払法人税額, 輸送費率, 輸送費額, 仕入原価"
+                    Sql2 += ", 仕入金額, 見積単価_外貨, 見積金額_外貨, 通貨, レート, 仕入単価_外貨, 仕入通貨, 仕入レート)"
                     Sql2 += " VALUES("
                     Sql2 += " '" & frmC01F10_Login.loginValue.BumonCD & "'"  '会社コード
                     Sql2 += ", '" & TxtOrderNo.Text & "'"       '受注番号
@@ -625,6 +644,13 @@ Public Class Cymn
                     Sql2 += ", " & formatStringToNumber(DgvItemList.Rows(i).Cells("輸送費額").Value.ToString)         '輸送費額
                     Sql2 += ", " & formatStringToNumber(DgvItemList.Rows(i).Cells("仕入原価").Value.ToString)         '仕入原価
                     Sql2 += ", " & formatStringToNumber(DgvItemList.Rows(i).Cells("仕入金額").Value.ToString)         '仕入金額
+                    Sql2 += ", " & formatStringToNumber(DgvItemList.Rows(i).Cells("見積単価_外貨").Value.ToString)     '見積単価_外貨
+                    Sql2 += ", " & formatStringToNumber(DgvItemList.Rows(i).Cells("見積金額_外貨").Value.ToString)     '見積金額_外貨
+                    Sql2 += ", " & CmCurrency.SelectedValue.ToString                                   '通貨
+                    Sql2 += ", " & UtilClass.formatNumberF10(TxtRate.Text)                                              'レート
+                    Sql2 += ", " & formatStringToNumber(DgvItemList.Rows(i).Cells("仕入単価_外貨").Value.ToString)    '仕入単価_外貨
+                    Sql2 += ", " & formatStringToNumber(DgvItemList.Rows(i).Cells("仕入通貨").Value.ToString)           '仕入通貨
+                    Sql2 += ", " & formatStringToNumber(DgvItemList.Rows(i).Cells("仕入レート").Value.ToString)          '仕入レート
                     Sql2 += ")"
                     _db.executeDB(Sql2)
 
@@ -814,242 +840,450 @@ Public Class Cymn
                 End If
             Next
 
-#Region "t20_hattyu 発注基本登録"
+            'Dim currencyList As New List(Of Integer)(New Integer() {})
+            'For i As Integer = 0 To DgvItemList.Rows.Count - 1
+            '    If currencyList.Contains(DgvItemList.Rows(i).Cells("仕入通貨").Value) = False And DgvItemList.Rows(i).Cells("仕入区分").Value = 1 Then
+            '        currencyList.Add(DgvItemList.Rows(i).Cells("仕入通貨").Value)
+            '    Else
 
+            '    End If
+            'Next
 
-            Dim SqlSaiban As String = ""
-            SqlSaiban += "SELECT "
-            SqlSaiban += "会社コード "
-            SqlSaiban += ", 採番キー "
-            SqlSaiban += ", 最新値 "
-            SqlSaiban += ", 最小値 "
-            SqlSaiban += ", 最大値 "
-            SqlSaiban += ", 接頭文字 "
-            SqlSaiban += ", 連番桁数 "
-            SqlSaiban += "FROM public.m80_saiban"
-            SqlSaiban += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-            SqlSaiban += " AND 採番キー = '30'"
+            Dim tbl As DataTable = New DataTable("table1")
+            Dim row As DataRow
 
-            Dim Saiban As DataSet = _db.selectDB(SqlSaiban, RS, reccnt)
-
-            Dim PurchaseCount As String = Saiban.Tables(RS).Rows(0)(2)
-            Dim supplier As String = ""
-
-            For s As Integer = 0 To SupplierList.Count - 1
-                supplier = SupplierList(s)
-
-                Sql = ""
-                Sql += "SELECT * FROM public.m11_supplier"
-                Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-                Sql += " AND 仕入先名 = '" & supplier & "'"
-                Dim ds1 As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-                Dim cost As Integer = 0
-                For i As Integer = 0 To DgvItemList.Rows.Count - 1
-                    If DgvItemList.Rows(i).Cells("仕入先").Value = supplier Then
-                        cost += DgvItemList.Rows(i).Cells("仕入原価").Value
-                    End If
-                Next
-
-                Dim PurchaseNo As String = Saiban.Tables(RS).Rows(0)(5)
-                PurchaseNo += dtNow.ToString("MMdd")
-                PurchaseNo += PurchaseCount.PadLeft(Saiban.Tables(RS).Rows(0)(6), "0")
-
-                Dim Sql3 As String = ""
-                Sql3 = ""
-                Sql3 += "INSERT INTO "
-                Sql3 += "Public."
-                Sql3 += "t20_hattyu("
-                Sql3 += "会社コード, 発注番号, 発注番号枝番, 客先番号, 受注番号, 受注番号枝番, 見積番号, 見積番号枝番, 得意先コード, 得意先名"
-                Sql3 += ", 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 仕入先コード, 仕入先名"
-                Sql3 += ", 仕入先郵便番号, 仕入先住所, 仕入先電話番号, 仕入先ＦＡＸ, 仕入先担当者役職, 仕入先担当者名, 見積日, 見積有効期限"
-                Sql3 += ", 支払条件, 見積金額,仕入金額, 粗利額, 営業担当者, 営業担当者コード, 入力担当者, 入力担当者コード, 備考, 見積備考"
-                Sql3 += ", ＶＡＴ, ＰＰＨ, 受注日, 発注日, 登録日, 更新日, 更新者, 取消区分, 倉庫コード)"
-                Sql3 += " VALUES('"
-                Sql3 += CompanyCode '会社コード
-                Sql3 += "', '"
-                Sql3 += PurchaseNo '発注番号
-                Sql3 += "', '"
-                Sql3 += "1" '発注番号枝番
-                Sql3 += "', '"
-                Sql3 += RevoveChars(TxtCustomerPO.Text) '客先番号
-                Sql3 += "', '"
-                Sql3 += TxtOrderNo.Text '受注番号
-                Sql3 += "', '"
-                Sql3 += TxtOrderSuffix.Text '受注番号枝番
-                Sql3 += "', '"
-                Sql3 += TxtQuoteNo.Text '見積番号
-                Sql3 += "', '"
-                Sql3 += TxtQuoteSuffix.Text '見積番号枝番
-                Sql3 += "', '"
-                Sql3 += TxtCustomerCode.Text '得意先コード
-                Sql3 += "', '"
-                Sql3 += TxtCustomerName.Text '得意先名
-                Sql3 += "', '"
-                Sql3 += TxtPostalCode.Text '得意先郵便番号
-                Sql3 += "', '"
-                Sql3 += TxtAddress1.Text '得意先住所
-                Sql3 += "', '"
-                Sql3 += TxtTel.Text '得意先電話番号
-                Sql3 += "', '"
-                Sql3 += TxtFax.Text '得意先ＦＡＸ
-                Sql3 += "', '"
-                Sql3 += TxtPosition.Text '得意先担当者役職
-                Sql3 += "', '"
-                Sql3 += TxtPerson.Text '得意先担当者名
-                Sql3 += "', '"
-                Sql3 += ds1.Tables(RS).Rows(0)("仕入先コード").ToString '仕入先コード
-                Sql3 += "', '"
-                Sql3 += ds1.Tables(RS).Rows(0)("仕入先名").ToString '仕入先名
-                Sql3 += "', '"
-                Sql3 += ds1.Tables(RS).Rows(0)("郵便番号").ToString '仕入先郵便番号
-                Sql3 += "', '"
-                Sql3 += ds1.Tables(RS).Rows(0)("住所１").ToString '仕入先住所
-                Sql3 += " "
-                Sql3 += ds1.Tables(RS).Rows(0)("住所２").ToString '仕入先住所
-                Sql3 += " "
-                Sql3 += ds1.Tables(RS).Rows(0)("住所３").ToString '仕入先住所
-                Sql3 += "', '"
-                Sql3 += ds1.Tables(RS).Rows(0)("電話番号").ToString '仕入先電話番号
-                Sql3 += "', '"
-                Sql3 += ds1.Tables(RS).Rows(0)("ＦＡＸ番号").ToString '仕入先ＦＡＸ
-                Sql3 += "', '"
-                Sql3 += ds1.Tables(RS).Rows(0)("担当者役職").ToString '仕入先担当者役職
-                Sql3 += "', '"
-                Sql3 += ds1.Tables(RS).Rows(0)("担当者名").ToString '仕入先担当者名
-                Sql3 += "', '"
-                Sql3 += UtilClass.strFormatDate(DtpQuoteDate.Value) '見積日
-                Sql3 += "', '"
-                Sql3 += UtilClass.strFormatDate(DtpExpiration.Value) '見積有効期限
-                Sql3 += "', '"
-                Sql3 += TxtPaymentTerms.Text '支払条件
-                Sql3 += "', '"
-                Sql3 += formatStringToNumber(TxtOrderAmount.Text) '見積金額
-                Sql3 += "', '"
-                Sql3 += formatStringToNumber(cost.ToString) '仕入金額
-                Sql3 += "', '"
-                Sql3 += formatStringToNumber(TxtGrossProfit.Text) '粗利額
-                Sql3 += "', '"
-                Sql3 += TxtSales.Text '営業担当者
-                Sql3 += "', '"
-                Sql3 += TxtSales.Tag '営業担当者コード
-                Sql3 += "', '"
-                Sql3 += TxtInput.Text '入力担当者
-                Sql3 += "', '"
-                Sql3 += TxtInput.Tag '入力担当者コード
-                Sql3 += "', '"
-                Sql3 += TxtPurchaseRemark.Text '備考
-                Sql3 += "', '"
-                Sql3 += TxtQuoteRemarks.Text '見積備考
-                Sql3 += "', '"
-                Sql3 += formatStringToNumber(TxtVat.Text) 'ＶＡＴ
-                Sql3 += "', '"
-                Sql3 += formatStringToNumber(TxtPph.Text) 'ＰＰＨ
-                Sql3 += "', '"
-                Sql3 += UtilClass.strFormatDate(DtpOrderDate.Value) '受注日
-                Sql3 += "', '"
-                Sql3 += UtilClass.strFormatDate(DtpPurchaseDate.Value) '発注日
-                Sql3 += "', '"
-                Sql3 += UtilClass.strFormatDate(DtpOrderRegistration.Value) '登録日（受発注登録日）
-                Sql3 += "', '"
-                Sql3 += UtilClass.formatDatetime(dtNow) '更新日
-                Sql3 += "', '"
-                Sql3 += frmC01F10_Login.loginValue.BumonCD '更新者
-                Sql3 += "', '"
-                Sql3 += "0" '取消区分
-                Sql3 += "', '"
-                If CmWarehouse.SelectedIndex <> -1 Then
-                    Sql3 += CmWarehouse.SelectedValue.ToString '倉庫コード
-                Else
-                    Sql3 += "" '倉庫コード
-                End If
-                Sql3 += "')"
-
-                _db.executeDB(Sql3)
-
-#End Region
-
-#Region "t21_hattyu 発注明細登録"
-
-                Sql3 = ""
-                Dim Sql4 As String = ""
-                Dim test As String = ""
-                For i As Integer = 0 To DgvItemList.Rows.Count - 1
-                    If DgvItemList.Rows(i).Cells("仕入先").Value = supplier And DgvItemList.Rows(i).Cells("仕入区分").Value = 1 Then
-                        Sql4 = ""
-                        Sql4 += "INSERT INTO "
-                        Sql4 += "Public."
-                        Sql4 += "t21_hattyu("
-                        Sql4 += "会社コード, 発注番号, 発注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式"
-                        Sql4 += ", 単位, 仕入先名, 仕入値, 発注数量, 仕入数量, 発注残数, 仕入金額"
-                        Sql4 += ", 間接費, リードタイム, リードタイム単位, 入庫数, 未入庫数, 備考, 更新者, 登録日, 更新日)"
-                        Sql4 += " VALUES('"
-                        Sql4 += CompanyCode '会社コード
-                        Sql4 += "', '"
-                        Sql4 += PurchaseNo '発注番号
-                        Sql4 += "', '"
-                        Sql4 += "1" '発注番号枝番
-                        Sql4 += "', '"
-                        Sql4 += DgvItemList.Rows(i).Cells("No").Value.ToString '行番号
-                        Sql4 += "', '"
-                        Sql4 += DgvItemList.Rows(i).Cells("仕入区分").Value.ToString '仕入区分
-                        Sql4 += "', '"
-                        Sql4 += DgvItemList.Rows(i).Cells("メーカー").Value.ToString 'メーカー
-                        Sql4 += "', '"
-                        Sql4 += DgvItemList.Rows(i).Cells("品名").Value.ToString '品名
-                        Sql4 += "', '"
-                        Sql4 += DgvItemList.Rows(i).Cells("型式").Value.ToString '型式
-                        Sql4 += "', '"
-                        Sql4 += DgvItemList.Rows(i).Cells("単位").Value.ToString '単位
-                        Sql4 += "', '"
-                        Sql4 += DgvItemList.Rows(i).Cells("仕入先").Value.ToString '仕入先名
-                        Sql4 += "', '"
-                        Sql4 += formatStringToNumber(DgvItemList.Rows(i).Cells("仕入単価").Value.ToString) '仕入値
-                        Sql4 += "', '"
-                        Sql4 += DgvItemList.Rows(i).Cells("数量").Value.ToString '発注数量
-                        Sql4 += "', '"
-                        Sql4 += "0" '仕入数量
-                        Sql4 += "', '"
-                        Sql4 += DgvItemList.Rows(i).Cells("数量").Value.ToString '発注残数
-                        Sql4 += "', '"
-                        Sql4 += formatStringToNumber(DgvItemList.Rows(i).Cells("仕入原価").Value.ToString) '仕入金額
-                        Sql4 += "', '"
-                        Dim overhead As Double = 0
-                        overhead = DgvItemList.Rows(i).Cells("仕入金額").Value - DgvItemList.Rows(i).Cells("仕入原価").Value
-                        Sql4 += formatStringToNumber(overhead.ToString) '間接費
-                        Sql4 += "', '"
-                        Sql4 += DgvItemList.Rows(i).Cells("リードタイム").Value.ToString 'リードタイム
-                        Sql4 += "', '"
-                        Sql4 += DgvItemList.Rows(i).Cells("リードタイム単位").Value.ToString 'リードタイム単位
-                        Sql4 += "', '"
-                        Sql4 += "0" '入庫数
-                        Sql4 += "', '"
-                        Sql4 += DgvItemList.Rows(i).Cells("数量").Value.ToString '未入庫数
-                        Sql4 += "', '"
-                        Sql4 += DgvItemList.Rows(i).Cells("備考").Value.ToString '備考
-                        Sql4 += "', '"
-                        Sql4 += frmC01F10_Login.loginValue.TantoNM '更新者
-                        Sql4 += "', '"
-                        Sql4 += UtilClass.formatDatetime(dtNow) '登録日
-                        Sql4 += "', '"
-                        Sql4 += UtilClass.formatDatetime(dtNow) '更新日
-                        Sql4 += "')"
-                        _db.executeDB(Sql4)
-                    End If
-                Next
-                PurchaseCount += 1
+            'カラム名
+            For i As Integer = 0 To DgvItemList.ColumnCount - 1
+                tbl.Columns.Add(DgvItemList.Columns(i).Name)
             Next
-#End Region
 
-            PurchaseCount += 1
-            Dim Saiban4 As String = ""
-            Saiban4 += "UPDATE Public.m80_saiban "
-            Saiban4 += "SET  最新値 = '" & PurchaseCount.ToString & "'"
-            Saiban4 += ", 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
-            Saiban4 += ", 更新日 ='" & UtilClass.formatDatetime(dtNow) & "'"
-            Saiban4 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Saiban4 += " AND 採番キー ='30' "
-            _db.executeDB(Saiban4)
+            For i As Integer = 0 To DgvItemList.Rows.Count - 1
+                row = tbl.NewRow
+                For x As Integer = 0 To DgvItemList.ColumnCount - 1
+                    'カラム名
+                    If DgvItemList.Columns(x).Name = "仕入区分" Or DgvItemList.Columns(x).Name = "リードタイム単位" Or DgvItemList.Columns(x).Name = "仕入通貨" Then
+                        row(DgvItemList.Columns(x).Name) = DgvItemList.Rows(i).Cells(DgvItemList.Columns(x).Name).Value
+                    Else
+                        row(DgvItemList.Columns(x).Name) = DgvItemList.Rows(i).Cells(DgvItemList.Columns(x).Name).Value
+
+                    End If
+                    row(DgvItemList.Columns(x).Name) = DgvItemList.Rows(i).Cells(DgvItemList.Columns(x).Name).Value
+                Next
+                tbl.Rows.Add(row)
+            Next
+
+            ' 並び替える
+            Dim dv = New DataView(tbl)
+            dv.Sort = "仕入先コード , 仕入通貨, No" ' 昇順
+            tbl = dv.ToTable ' 並び替え後のデータをDataTableに戻す
+
+            'ループ条件チェック用
+            '仕入先、通貨コード
+            Dim sireCd As String = ""
+            Dim currencyCd As String = ""
+            Dim cost As Long = 0 '仕入先 & 仕入通貨 毎に仕入原価を合算する
+            Dim tmpCuote As Long = 0 '仕入先 & 仕入通貨 毎に見積金額を合算
+
+
+            'DataTableをループしながらデータ登録
+            For i As Integer = 0 To tbl.Rows.Count - 1
+
+                '仕入区分 = 1（受発注）のみ発注登録を行う
+                If tbl.Rows(i)("仕入区分") = 1 Then
+
+                    '採番
+                    Dim SqlSaiban As String = ""
+                    SqlSaiban += "SELECT "
+                    SqlSaiban += "会社コード "
+                    SqlSaiban += ", 採番キー "
+                    SqlSaiban += ", 最新値 "
+                    SqlSaiban += ", 最小値 "
+                    SqlSaiban += ", 最大値 "
+                    SqlSaiban += ", 接頭文字 "
+                    SqlSaiban += ", 連番桁数 "
+                    SqlSaiban += "FROM public.m80_saiban"
+                    SqlSaiban += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                    SqlSaiban += " AND 採番キー = '30'"
+
+                    Dim Saiban As DataSet = _db.selectDB(SqlSaiban, RS, reccnt)
+                    Dim PurchaseCount As String = Saiban.Tables(RS).Rows(0)(2)
+                    Dim PurchaseNo As String = Saiban.Tables(RS).Rows(0)(5)
+                    PurchaseNo += dtNow.ToString("MMdd")
+                    PurchaseNo += PurchaseCount.PadLeft(Saiban.Tables(RS).Rows(0)(6), "0")
+
+                    Sql = " AND 仕入先コード ILIKE '" & tbl.Rows(i)("仕入先コード") & "'"
+                    Dim dsSipper As DataSet = getDsData("m11_supplier", Sql)
+
+                    '明細データ更新
+                    Sql = ""
+                    Sql += "INSERT INTO "
+                    Sql += "Public."
+                    Sql += "t21_hattyu("
+                    Sql += "会社コード, 発注番号, 発注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式"
+                    Sql += ", 単位, 仕入先名, 仕入値, 発注数量, 仕入数量, 発注残数, 仕入金額"
+                    Sql += ", 間接費, リードタイム, リードタイム単位, 入庫数, 未入庫数, 備考, 更新者"
+                    Sql += ", 登録日, 更新日, 見積単価_外貨, 見積金額_外貨, 通貨, レート, 仕入単価_外貨, 仕入通貨, 仕入レート)"
+                    Sql += " VALUES('"
+                    Sql += CompanyCode '会社コード
+                    Sql += "', '"
+                    Sql += PurchaseNo '発注番号
+                    Sql += "', '"
+                    Sql += "1" '発注番号枝番
+                    Sql += "', '"
+                    Sql += tbl.Rows(i)("No") '行番号
+                    Sql += "', '"
+                    Sql += tbl.Rows(i)("仕入区分") '仕入区分
+                    Sql += "', '"
+                    Sql += tbl.Rows(i)("メーカー") 'メーカー
+                    Sql += "', '"
+                    Sql += tbl.Rows(i)("品名") '品名
+                    Sql += "', '"
+                    Sql += tbl.Rows(i)("型式") '型式
+                    Sql += "', '"
+                    Sql += tbl.Rows(i)("単位") '単位
+                    Sql += "', '"
+                    Sql += tbl.Rows(i)("仕入先") '仕入先名
+                    Sql += "', '"
+                    Sql += formatStringToNumber(tbl.Rows(i)("仕入単価")) '仕入値
+                    Sql += "', '"
+                    Sql += tbl.Rows(i)("数量") '発注数量
+                    Sql += "', '"
+                    Sql += "0" '仕入数量
+                    Sql += "', '"
+                    Sql += tbl.Rows(i)("数量") '発注残数
+                    Sql += "', '"
+                    Sql += formatStringToNumber(tbl.Rows(i)("仕入原価")) '仕入金額
+                    Sql += "', '"
+                    Dim overhead As Double = 0
+                    overhead = tbl.Rows(i)("仕入金額") - tbl.Rows(i)("仕入原価")
+                    Sql += formatStringToNumber(overhead.ToString) '間接費
+                    Sql += "', '"
+                    Sql += tbl.Rows(i)("リードタイム") 'リードタイム
+                    Sql += "', '"
+                    Sql += tbl.Rows(i)("リードタイム単位") 'リードタイム単位
+                    Sql += "', '"
+                    Sql += "0" '入庫数
+                    Sql += "', '"
+                    Sql += tbl.Rows(i)("数量") '未入庫数
+                    Sql += "', '"
+                    Sql += tbl.Rows(i)("備考") '備考
+                    Sql += "', '"
+                    Sql += frmC01F10_Login.loginValue.TantoNM '更新者
+                    Sql += "', '"
+                    Sql += UtilClass.formatDatetime(dtNow) '登録日
+                    Sql += "', '"
+                    Sql += UtilClass.formatDatetime(dtNow) '更新日
+                    Sql += "', '"
+                    Sql += formatStringToNumber(tbl.Rows(i)("見積単価_外貨")) '見積単価_外貨
+                    Sql += "', '"
+                    Sql += formatStringToNumber(tbl.Rows(i)("見積金額_外貨")) '見積金額_外貨
+                    Sql += "', "
+                    Sql += CmCurrency.SelectedValue.ToString '通貨
+                    Sql += ", '"
+                    Sql += UtilClass.formatNumberF10(TxtRate.Text) 'レート
+                    Sql += "', '"
+                    Sql += formatStringToNumber(tbl.Rows(i)("仕入単価_外貨")) '仕入単価_外貨
+                    Sql += "', '"
+                    Sql += formatStringToNumber(tbl.Rows(i)("仕入通貨")) '仕入通貨
+                    Sql += "', '"
+                    Sql += UtilClass.formatNumberF10(tbl.Rows(i)("仕入レート")) '仕入レート
+                    Sql += "')"
+                    _db.executeDB(Sql)
+
+                    cost += tbl.Rows(i)("仕入原価")
+                    tmpCuote += tbl.Rows(i)("見積金額_外貨")
+
+                    '前回の明細データの仕入コード、仕入通貨と一致するかチェック
+                    If (sireCd <> tbl.Rows(i)("仕入先コード") Or currencyCd <> tbl.Rows(i)("仕入通貨")) Then
+
+                        If tbl.Rows.Count - 1 = i Then
+                            hattyuHdInsert(PurchaseNo, dsSipper, cost, tmpCuote, dtNow) '発注明細更新
+
+                            '採番データ更新
+                            PurchaseCount += 1
+                            Dim Saiban4 As String = ""
+                            Saiban4 += "UPDATE Public.m80_saiban "
+                            Saiban4 += "SET  最新値 = '" & PurchaseCount.ToString & "'"
+                            Saiban4 += ", 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+                            Saiban4 += ", 更新日 ='" & UtilClass.formatDatetime(dtNow) & "'"
+                            Saiban4 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                            Saiban4 += " AND 採番キー ='30' "
+                            _db.executeDB(Saiban4)
+
+                            Continue For
+                        End If
+
+                        If (tbl.Rows(i)("仕入先コード") <> tbl.Rows(i + 1)("仕入先コード") Or tbl.Rows(i)("仕入通貨") <> tbl.Rows(i + 1)("仕入通貨")) Then
+
+                            '新しい値をセットし、発注基本を登録する
+                            sireCd = tbl.Rows(i)("仕入先コード")
+                            currencyCd = tbl.Rows(i)("仕入通貨")
+
+                            hattyuHdInsert(PurchaseNo, dsSipper, cost, tmpCuote, dtNow) '発注基本更新
+
+                            '採番データ更新
+                            PurchaseCount += 1
+                            Dim Saiban4 As String = ""
+                            Saiban4 += "UPDATE Public.m80_saiban "
+                            Saiban4 += "SET  最新値 = '" & PurchaseCount.ToString & "'"
+                            Saiban4 += ", 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+                            Saiban4 += ", 更新日 ='" & UtilClass.formatDatetime(dtNow) & "'"
+                            Saiban4 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                            Saiban4 += " AND 採番キー ='30' "
+                            _db.executeDB(Saiban4)
+
+                            cost = 0 '伝票単位でリセット
+                            tmpCuote = 0
+                        End If
+
+                    End If
+
+                End If
+
+
+            Next
+
+
+            'Console.Write(tbl)
+
+            ''#Region "t20_hattyu 発注基本登録"
+
+
+            ''            Dim SqlSaiban As String = ""
+            ''            SqlSaiban += "SELECT "
+            ''            SqlSaiban += "会社コード "
+            ''            SqlSaiban += ", 採番キー "
+            ''            SqlSaiban += ", 最新値 "
+            ''            SqlSaiban += ", 最小値 "
+            ''            SqlSaiban += ", 最大値 "
+            ''            SqlSaiban += ", 接頭文字 "
+            ''            SqlSaiban += ", 連番桁数 "
+            ''            SqlSaiban += "FROM public.m80_saiban"
+            ''            SqlSaiban += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            ''            SqlSaiban += " AND 採番キー = '30'"
+
+            ''            Dim Saiban As DataSet = _db.selectDB(SqlSaiban, RS, reccnt)
+
+            ''            Dim PurchaseCount As String = Saiban.Tables(RS).Rows(0)(2)
+
+            ''            '仕入先をまとめた配列を作る
+            ''            Dim supplier As String = ""
+
+            ''            For s As Integer = 0 To SupplierList.Count - 1
+            ''                supplier = SupplierList(s)
+
+            ''                Sql = ""
+            ''                Sql += "SELECT * FROM public.m11_supplier"
+            ''                Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            ''                Sql += " AND 仕入先名 = '" & supplier & "'"
+            ''                Dim ds1 As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+            ''                Dim cost As Integer = 0
+            ''                For i As Integer = 0 To DgvItemList.Rows.Count - 1
+            ''                    If DgvItemList.Rows(i).Cells("仕入先").Value = supplier Then
+            ''                        cost += DgvItemList.Rows(i).Cells("仕入原価").Value
+            ''                    End If
+            ''                Next
+
+            ''                Dim PurchaseNo As String = Saiban.Tables(RS).Rows(0)(5)
+            ''                PurchaseNo += dtNow.ToString("MMdd")
+            ''                PurchaseNo += PurchaseCount.PadLeft(Saiban.Tables(RS).Rows(0)(6), "0")
+
+            ''                Dim Sql3 As String = ""
+            ''                Sql3 = ""
+            ''                Sql3 += "INSERT INTO "
+            ''                Sql3 += "Public."
+            ''                Sql3 += "t20_hattyu("
+            ''                Sql3 += "会社コード, 発注番号, 発注番号枝番, 客先番号, 受注番号, 受注番号枝番, 見積番号, 見積番号枝番, 得意先コード, 得意先名"
+            ''                Sql3 += ", 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 仕入先コード, 仕入先名"
+            ''                Sql3 += ", 仕入先郵便番号, 仕入先住所, 仕入先電話番号, 仕入先ＦＡＸ, 仕入先担当者役職, 仕入先担当者名, 見積日, 見積有効期限"
+            ''                Sql3 += ", 支払条件, 見積金額,仕入金額, 粗利額, 営業担当者, 営業担当者コード, 入力担当者, 入力担当者コード, 備考, 見積備考"
+            ''                Sql3 += ", ＶＡＴ, ＰＰＨ, 受注日, 発注日, 登録日, 更新日, 更新者, 取消区分, 倉庫コード)"
+            ''                Sql3 += " VALUES('"
+            ''                Sql3 += CompanyCode '会社コード
+            ''                Sql3 += "', '"
+            ''                Sql3 += PurchaseNo '発注番号
+            ''                Sql3 += "', '"
+            ''                Sql3 += "1" '発注番号枝番
+            ''                Sql3 += "', '"
+            ''                Sql3 += RevoveChars(TxtCustomerPO.Text) '客先番号
+            ''                Sql3 += "', '"
+            ''                Sql3 += TxtOrderNo.Text '受注番号
+            ''                Sql3 += "', '"
+            ''                Sql3 += TxtOrderSuffix.Text '受注番号枝番
+            ''                Sql3 += "', '"
+            ''                Sql3 += TxtQuoteNo.Text '見積番号
+            ''                Sql3 += "', '"
+            ''                Sql3 += TxtQuoteSuffix.Text '見積番号枝番
+            ''                Sql3 += "', '"
+            ''                Sql3 += TxtCustomerCode.Text '得意先コード
+            ''                Sql3 += "', '"
+            ''                Sql3 += TxtCustomerName.Text '得意先名
+            ''                Sql3 += "', '"
+            ''                Sql3 += TxtPostalCode.Text '得意先郵便番号
+            ''                Sql3 += "', '"
+            ''                Sql3 += TxtAddress1.Text '得意先住所
+            ''                Sql3 += "', '"
+            ''                Sql3 += TxtTel.Text '得意先電話番号
+            ''                Sql3 += "', '"
+            ''                Sql3 += TxtFax.Text '得意先ＦＡＸ
+            ''                Sql3 += "', '"
+            ''                Sql3 += TxtPosition.Text '得意先担当者役職
+            ''                Sql3 += "', '"
+            ''                Sql3 += TxtPerson.Text '得意先担当者名
+            ''                Sql3 += "', '"
+            ''                Sql3 += ds1.Tables(RS).Rows(0)("仕入先コード").ToString '仕入先コード
+            ''                Sql3 += "', '"
+            ''                Sql3 += ds1.Tables(RS).Rows(0)("仕入先名").ToString '仕入先名
+            ''                Sql3 += "', '"
+            ''                Sql3 += ds1.Tables(RS).Rows(0)("郵便番号").ToString '仕入先郵便番号
+            ''                Sql3 += "', '"
+            ''                Sql3 += ds1.Tables(RS).Rows(0)("住所１").ToString '仕入先住所
+            ''                Sql3 += " "
+            ''                Sql3 += ds1.Tables(RS).Rows(0)("住所２").ToString '仕入先住所
+            ''                Sql3 += " "
+            ''                Sql3 += ds1.Tables(RS).Rows(0)("住所３").ToString '仕入先住所
+            ''                Sql3 += "', '"
+            ''                Sql3 += ds1.Tables(RS).Rows(0)("電話番号").ToString '仕入先電話番号
+            ''                Sql3 += "', '"
+            ''                Sql3 += ds1.Tables(RS).Rows(0)("ＦＡＸ番号").ToString '仕入先ＦＡＸ
+            ''                Sql3 += "', '"
+            ''                Sql3 += ds1.Tables(RS).Rows(0)("担当者役職").ToString '仕入先担当者役職
+            ''                Sql3 += "', '"
+            ''                Sql3 += ds1.Tables(RS).Rows(0)("担当者名").ToString '仕入先担当者名
+            ''                Sql3 += "', '"
+            ''                Sql3 += UtilClass.strFormatDate(DtpQuoteDate.Value) '見積日
+            ''                Sql3 += "', '"
+            ''                Sql3 += UtilClass.strFormatDate(DtpExpiration.Value) '見積有効期限
+            ''                Sql3 += "', '"
+            ''                Sql3 += TxtPaymentTerms.Text '支払条件
+            ''                Sql3 += "', '"
+            ''                Sql3 += formatStringToNumber(TxtOrderAmount.Text) '見積金額
+            ''                Sql3 += "', '"
+            ''                Sql3 += formatStringToNumber(cost.ToString) '仕入金額
+            ''                Sql3 += "', '"
+            ''                Sql3 += formatStringToNumber(TxtGrossProfit.Text) '粗利額
+            ''                Sql3 += "', '"
+            ''                Sql3 += TxtSales.Text '営業担当者
+            ''                Sql3 += "', '"
+            ''                Sql3 += TxtSales.Tag '営業担当者コード
+            ''                Sql3 += "', '"
+            ''                Sql3 += TxtInput.Text '入力担当者
+            ''                Sql3 += "', '"
+            ''                Sql3 += TxtInput.Tag '入力担当者コード
+            ''                Sql3 += "', '"
+            ''                Sql3 += TxtPurchaseRemark.Text '備考
+            ''                Sql3 += "', '"
+            ''                Sql3 += TxtQuoteRemarks.Text '見積備考
+            ''                Sql3 += "', '"
+            ''                Sql3 += formatStringToNumber(TxtVat.Text) 'ＶＡＴ
+            ''                Sql3 += "', '"
+            ''                Sql3 += formatStringToNumber(TxtPph.Text) 'ＰＰＨ
+            ''                Sql3 += "', '"
+            ''                Sql3 += UtilClass.strFormatDate(DtpOrderDate.Value) '受注日
+            ''                Sql3 += "', '"
+            ''                Sql3 += UtilClass.strFormatDate(DtpPurchaseDate.Value) '発注日
+            ''                Sql3 += "', '"
+            ''                Sql3 += UtilClass.strFormatDate(DtpOrderRegistration.Value) '登録日（受発注登録日）
+            ''                Sql3 += "', '"
+            ''                Sql3 += UtilClass.formatDatetime(dtNow) '更新日
+            ''                Sql3 += "', '"
+            ''                Sql3 += frmC01F10_Login.loginValue.BumonCD '更新者
+            ''                Sql3 += "', '"
+            ''                Sql3 += "0" '取消区分
+            ''                Sql3 += "', '"
+            ''                If CmWarehouse.SelectedIndex <> -1 Then
+            ''                    Sql3 += CmWarehouse.SelectedValue.ToString '倉庫コード
+            ''                Else
+            ''                    Sql3 += "" '倉庫コード
+            ''                End If
+            ''                Sql3 += "')"
+
+            ''                _db.executeDB(Sql3)
+
+            ''#End Region
+
+            ''#Region "t21_hattyu 発注明細登録"
+
+            ''                Sql3 = ""
+            ''                Dim Sql4 As String = ""
+            ''                Dim test As String = ""
+            ''                For i As Integer = 0 To DgvItemList.Rows.Count - 1
+            ''                    If DgvItemList.Rows(i).Cells("仕入先").Value = supplier And DgvItemList.Rows(i).Cells("仕入区分").Value = 1 Then
+            ''                        Sql4 = ""
+            ''                        Sql4 += "INSERT INTO "
+            ''                        Sql4 += "Public."
+            ''                        Sql4 += "t21_hattyu("
+            ''                        Sql4 += "会社コード, 発注番号, 発注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式"
+            ''                        Sql4 += ", 単位, 仕入先名, 仕入値, 発注数量, 仕入数量, 発注残数, 仕入金額"
+            ''                        Sql4 += ", 間接費, リードタイム, リードタイム単位, 入庫数, 未入庫数, 備考, 更新者, 登録日, 更新日)"
+            ''                        Sql4 += " VALUES('"
+            ''                        Sql4 += CompanyCode '会社コード
+            ''                        Sql4 += "', '"
+            ''                        Sql4 += PurchaseNo '発注番号
+            ''                        Sql4 += "', '"
+            ''                        Sql4 += "1" '発注番号枝番
+            ''                        Sql4 += "', '"
+            ''                        Sql4 += DgvItemList.Rows(i).Cells("No").Value.ToString '行番号
+            ''                        Sql4 += "', '"
+            ''                        Sql4 += DgvItemList.Rows(i).Cells("仕入区分").Value.ToString '仕入区分
+            ''                        Sql4 += "', '"
+            ''                        Sql4 += DgvItemList.Rows(i).Cells("メーカー").Value.ToString 'メーカー
+            ''                        Sql4 += "', '"
+            ''                        Sql4 += DgvItemList.Rows(i).Cells("品名").Value.ToString '品名
+            ''                        Sql4 += "', '"
+            ''                        Sql4 += DgvItemList.Rows(i).Cells("型式").Value.ToString '型式
+            ''                        Sql4 += "', '"
+            ''                        Sql4 += DgvItemList.Rows(i).Cells("単位").Value.ToString '単位
+            ''                        Sql4 += "', '"
+            ''                        Sql4 += DgvItemList.Rows(i).Cells("仕入先").Value.ToString '仕入先名
+            ''                        Sql4 += "', '"
+            ''                        Sql4 += formatStringToNumber(DgvItemList.Rows(i).Cells("仕入単価").Value.ToString) '仕入値
+            ''                        Sql4 += "', '"
+            ''                        Sql4 += DgvItemList.Rows(i).Cells("数量").Value.ToString '発注数量
+            ''                        Sql4 += "', '"
+            ''                        Sql4 += "0" '仕入数量
+            ''                        Sql4 += "', '"
+            ''                        Sql4 += DgvItemList.Rows(i).Cells("数量").Value.ToString '発注残数
+            ''                        Sql4 += "', '"
+            ''                        Sql4 += formatStringToNumber(DgvItemList.Rows(i).Cells("仕入原価").Value.ToString) '仕入金額
+            ''                        Sql4 += "', '"
+            ''                        Dim overhead As Double = 0
+            ''                        overhead = DgvItemList.Rows(i).Cells("仕入金額").Value - DgvItemList.Rows(i).Cells("仕入原価").Value
+            ''                        Sql4 += formatStringToNumber(overhead.ToString) '間接費
+            ''                        Sql4 += "', '"
+            ''                        Sql4 += DgvItemList.Rows(i).Cells("リードタイム").Value.ToString 'リードタイム
+            ''                        Sql4 += "', '"
+            ''                        Sql4 += DgvItemList.Rows(i).Cells("リードタイム単位").Value.ToString 'リードタイム単位
+            ''                        Sql4 += "', '"
+            ''                        Sql4 += "0" '入庫数
+            ''                        Sql4 += "', '"
+            ''                        Sql4 += DgvItemList.Rows(i).Cells("数量").Value.ToString '未入庫数
+            ''                        Sql4 += "', '"
+            ''                        Sql4 += DgvItemList.Rows(i).Cells("備考").Value.ToString '備考
+            ''                        Sql4 += "', '"
+            ''                        Sql4 += frmC01F10_Login.loginValue.TantoNM '更新者
+            ''                        Sql4 += "', '"
+            ''                        Sql4 += UtilClass.formatDatetime(dtNow) '登録日
+            ''                        Sql4 += "', '"
+            ''                        Sql4 += UtilClass.formatDatetime(dtNow) '更新日
+            ''                        Sql4 += "')"
+            ''                        _db.executeDB(Sql4)
+            ''                    End If
+            ''                Next
+            ''                PurchaseCount += 1
+            '            Next
+            '#End Region
+
+            'PurchaseCount += 1
+            'Dim Saiban4 As String = ""
+            'Saiban4 += "UPDATE Public.m80_saiban "
+            'Saiban4 += "SET  最新値 = '" & PurchaseCount.ToString & "'"
+            'Saiban4 += ", 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+            'Saiban4 += ", 更新日 ='" & UtilClass.formatDatetime(dtNow) & "'"
+            'Saiban4 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            'Saiban4 += " AND 採番キー ='30' "
+            '_db.executeDB(Saiban4)
 
 #Region "t01_mithd 見積基本 -受注日登録"
 
@@ -1073,6 +1307,130 @@ Public Class Cymn
         End If
 
     End Sub
+
+    Private Sub hattyuHdInsert(ByVal PurchaseNo As String, ByVal dsSipper As DataSet, ByVal cost As Long, ByVal tmpCuote As Long, ByVal dtNow As DateTime)
+
+        Dim Sql As String = ""
+
+        '基本データ更新
+        Sql = "INSERT INTO "
+        Sql += "Public."
+        Sql += "t20_hattyu("
+        Sql += "会社コード, 発注番号, 発注番号枝番, 客先番号, 受注番号, 受注番号枝番, 見積番号, 見積番号枝番, 得意先コード, 得意先名"
+        Sql += ", 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 仕入先コード, 仕入先名"
+        Sql += ", 仕入先郵便番号, 仕入先住所, 仕入先電話番号, 仕入先ＦＡＸ, 仕入先担当者役職, 仕入先担当者名, 見積日, 見積有効期限"
+        Sql += ", 支払条件, 見積金額,仕入金額, 粗利額, 営業担当者, 営業担当者コード, 入力担当者, 入力担当者コード, 備考, 見積備考"
+        Sql += ", ＶＡＴ, ＰＰＨ, 受注日, 発注日, 登録日, 更新日, 更新者, 取消区分, 倉庫コード, 見積金額_外貨, 通貨, レート)"
+        Sql += " VALUES('"
+        Sql += CompanyCode '会社コード
+        Sql += "', '"
+        Sql += PurchaseNo '発注番号
+        Sql += "', '"
+        Sql += "1" '発注番号枝番
+        Sql += "', '"
+        Sql += RevoveChars(TxtCustomerPO.Text) '客先番号
+        Sql += "', '"
+        Sql += TxtOrderNo.Text '受注番号
+        Sql += "', '"
+        Sql += TxtOrderSuffix.Text '受注番号枝番
+        Sql += "', '"
+        Sql += TxtQuoteNo.Text '見積番号
+        Sql += "', '"
+        Sql += TxtQuoteSuffix.Text '見積番号枝番
+        Sql += "', '"
+        Sql += TxtCustomerCode.Text '得意先コード
+        Sql += "', '"
+        Sql += TxtCustomerName.Text '得意先名
+        Sql += "', '"
+        Sql += TxtPostalCode.Text '得意先郵便番号
+        Sql += "', '"
+        Sql += TxtAddress1.Text '得意先住所
+        Sql += "', '"
+        Sql += TxtTel.Text '得意先電話番号
+        Sql += "', '"
+        Sql += TxtFax.Text '得意先ＦＡＸ
+        Sql += "', '"
+        Sql += TxtPosition.Text '得意先担当者役職
+        Sql += "', '"
+        Sql += TxtPerson.Text '得意先担当者名
+        Sql += "', '"
+        Sql += dsSipper.Tables(RS).Rows(0)("仕入先コード").ToString '仕入先コード
+        Sql += "', '"
+        Sql += dsSipper.Tables(RS).Rows(0)("仕入先名").ToString '仕入先名
+        Sql += "', '"
+        Sql += dsSipper.Tables(RS).Rows(0)("郵便番号").ToString '仕入先郵便番号
+        Sql += "', '"
+        Sql += dsSipper.Tables(RS).Rows(0)("住所１").ToString '仕入先住所
+        Sql += " "
+        Sql += dsSipper.Tables(RS).Rows(0)("住所２").ToString '仕入先住所
+        Sql += " "
+        Sql += dsSipper.Tables(RS).Rows(0)("住所３").ToString '仕入先住所
+        Sql += "', '"
+        Sql += dsSipper.Tables(RS).Rows(0)("電話番号").ToString '仕入先電話番号
+        Sql += "', '"
+        Sql += dsSipper.Tables(RS).Rows(0)("ＦＡＸ番号").ToString '仕入先ＦＡＸ
+        Sql += "', '"
+        Sql += dsSipper.Tables(RS).Rows(0)("担当者役職").ToString '仕入先担当者役職
+        Sql += "', '"
+        Sql += dsSipper.Tables(RS).Rows(0)("担当者名").ToString '仕入先担当者名
+        Sql += "', '"
+        Sql += UtilClass.strFormatDate(DtpQuoteDate.Value) '見積日
+        Sql += "', '"
+        Sql += UtilClass.strFormatDate(DtpExpiration.Value) '見積有効期限
+        Sql += "', '"
+        Sql += TxtPaymentTerms.Text '支払条件
+        Sql += "', '"
+        Sql += formatStringToNumber(TxtOrderAmount.Text) '見積金額
+        Sql += "', '"
+        Sql += formatStringToNumber(cost.ToString) '仕入金額
+        Sql += "', '"
+        Sql += formatStringToNumber(TxtGrossProfit.Text) '粗利額
+        Sql += "', '"
+        Sql += TxtSales.Text '営業担当者
+        Sql += "', '"
+        Sql += TxtSales.Tag '営業担当者コード
+        Sql += "', '"
+        Sql += TxtInput.Text '入力担当者
+        Sql += "', '"
+        Sql += TxtInput.Tag '入力担当者コード
+        Sql += "', '"
+        Sql += TxtPurchaseRemark.Text '備考
+        Sql += "', '"
+        Sql += TxtQuoteRemarks.Text '見積備考
+        Sql += "', '"
+        Sql += formatStringToNumber(TxtVat.Text) 'ＶＡＴ
+        Sql += "', '"
+        Sql += formatStringToNumber(TxtPph.Text) 'ＰＰＨ
+        Sql += "', '"
+        Sql += UtilClass.strFormatDate(DtpOrderDate.Value) '受注日
+        Sql += "', '"
+        Sql += UtilClass.strFormatDate(DtpPurchaseDate.Value) '発注日
+        Sql += "', '"
+        Sql += UtilClass.strFormatDate(DtpOrderRegistration.Value) '登録日（受発注登録日）
+        Sql += "', '"
+        Sql += UtilClass.formatDatetime(dtNow) '更新日
+        Sql += "', '"
+        Sql += frmC01F10_Login.loginValue.BumonCD '更新者
+        Sql += "', '"
+        Sql += "0" '取消区分
+        Sql += "', '"
+        If CmWarehouse.SelectedIndex <> -1 Then
+            Sql += CmWarehouse.SelectedValue.ToString '倉庫コード
+        Else
+            Sql += "" '倉庫コード
+        End If
+        Sql += "', '"
+        Sql += formatStringToNumber(tmpCuote) '見積金額_外貨
+        Sql += "', "
+        Sql += CmCurrency.SelectedValue.ToString '通貨
+        Sql += ", '"
+        Sql += UtilClass.formatNumberF10(TxtRate.Text) 'レート
+        Sql += "')"
+
+        _db.executeDB(Sql)
+
+    End Sub
+
 
     ''' <summary>
     ''' 指定した文字列から指定した文字を全て削除する
@@ -1208,6 +1566,149 @@ Public Class Cymn
             End If
         End If
 
+    End Sub
+
+    '通貨のコンボボックスを作成
+    '編集モードの時は値を渡してセットさせる
+    Private Sub createCurrencyCombobox(Optional ByRef prmVal As String = "")
+        CmCurrency.DisplayMember = "Text"
+        CmCurrency.ValueMember = "Value"
+
+        Dim Sql As String = " AND 取消区分 = '" & CommonConst.FLAG_ENABLED & "'"
+
+        Dim ds As DataSet = getDsData("m25_currency", Sql)
+
+        Dim tb As New DataTable
+        tb.Columns.Add("Text", GetType(String))
+        tb.Columns.Add("Value", GetType(String))
+
+        For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+            tb.Rows.Add(ds.Tables(RS).Rows(i)("通貨コード"), ds.Tables(RS).Rows(i)("採番キー"))
+
+        Next
+
+        CmCurrency.DataSource = tb
+
+        If prmVal IsNot "" Then
+            CmCurrency.SelectedValue = prmVal
+        Else
+            CmCurrency.SelectedIndex = 0
+        End If
+    End Sub
+
+    '通貨の採番キーからレートを取得・設定
+    '基準日が見積日以前の最新のもの
+    Private Sub setRate()
+        Dim Sql As String
+
+        Sql = " AND 採番キー = " & CmCurrency.SelectedValue.ToString & ""
+        Sql += " AND 基準日 <= '" & UtilClass.strFormatDate(DtpQuoteDate.Text) & "'"
+        Sql += " ORDER BY 基準日 DESC "
+
+        Dim ds As DataSet = getDsData("t71_exchangerate", Sql)
+
+        If ds.Tables(RS).Rows.Count > 0 Then
+            TxtRate.Text = ds.Tables(RS).Rows(0)("レート")
+        Else
+            If CultureInfo.CurrentCulture.Name.ToString = CommonConst.CI_ID Then
+                TxtRate.Text = CommonConst.BASE_RATE_IDR
+            Else
+                TxtRate.Text = CommonConst.BASE_RATE_JPY
+            End If
+        End If
+
+    End Sub
+
+    'Return: DataTable
+    Private Function getReadTime() As DataTable
+
+        Dim Sql As String = ""
+        Sql += " AND 固定キー = '" & CommonConst.FIXED_KEY_READTIME & "'"
+
+        Dim ds As DataSet = getDsData("m90_hanyo", Sql)
+
+        Dim table As New DataTable("Table")
+        table.Columns.Add("Display", GetType(String))
+        table.Columns.Add("Value", GetType(Integer))
+
+        'リードタイム単位の多言語対応
+        For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+                table.Rows.Add(ds.Tables(RS).Rows(i)("文字２"), ds.Tables(RS).Rows(i)("可変キー"))
+            Else
+                table.Rows.Add(ds.Tables(RS).Rows(i)("文字１"), ds.Tables(RS).Rows(i)("可変キー"))
+            End If
+
+        Next
+        Return table
+    End Function
+
+    'Return: DataTable
+    Private Function getSireCurrency() As DataTable
+        Dim Sql As String = " AND 取消区分 = '" & CommonConst.FLAG_ENABLED & "'"
+
+        Dim ds As DataSet = getDsData("m25_currency", Sql)
+
+        Dim table As New DataTable("Table")
+        table.Columns.Add("Display", GetType(String))
+        table.Columns.Add("Value", GetType(Integer))
+
+        'リードタイム単位の多言語対応
+        For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+            table.Rows.Add(ds.Tables(RS).Rows(i)("通貨コード"), ds.Tables(RS).Rows(i)("採番キー"))
+        Next
+        Return table
+    End Function
+
+
+    Private Function getCurrency(ByVal prmVal As Integer) As String
+        Dim Sql As String = " AND 取消区分 = '" & CommonConst.FLAG_ENABLED & "'"
+        Sql += " AND 採番キー =" & prmVal.ToString
+
+        Dim ds As DataSet = getDsData("m25_currency", Sql)
+
+        'リードタイム単位の多言語対応
+
+        Return ds.Tables(RS).Rows(0)("通貨コード")
+
+    End Function
+
+    Private Sub setBaseCurrency()
+        Dim Sql As String
+        '通貨表示：ベースの設定
+        Sql = " AND 採番キー = " & CommonConst.CURRENCY_CD_IDR.ToString
+        Sql += " AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
+
+        Dim ds As DataSet = getDsData("m25_currency", Sql)
+        TxtIDRCurrency.Text = ds.Tables(RS).Rows(0)("通貨コード")
+
+    End Sub
+
+    '通貨表示：通貨変更の設定
+    Private Sub setChangeCurrency()
+        Dim Sql As String
+        Sql = " AND 採番キー = " & CmCurrency.SelectedValue.ToString
+        Sql += " AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
+
+        Dim ds As DataSet = getDsData("m25_currency", Sql)
+        TxtChangeCurrency.Text = ds.Tables(RS).Rows(0)("通貨コード")
+    End Sub
+
+    'Currencyに応じて変換
+    Private Sub setCurrency()
+
+        Dim currencyVal As Decimal = IIf(TxtRate.Text <> "", TxtRate.Text, 0)
+        Dim vatVal As Decimal = IIf(TxtVatAmount.Text <> "", TxtVatAmount.Text, 0)
+        Dim sumVal As Decimal = IIf(TxtOrderAmount.Text <> "", TxtOrderAmount.Text, 0)
+        Dim QuoteCurrencyTotal As Decimal = 0       '見積金額_外貨
+
+        TxtCurrencyVatAmount.Text = (vatVal * currencyVal).ToString("F0")
+        'TxtCurrencyOrderTotal.Text = (sumVal * currencyVal).ToString("F0")
+
+        For c As Integer = 0 To DgvItemList.Rows.Count - 1
+            QuoteCurrencyTotal += DgvItemList.Rows(c).Cells("見積金額_外貨").Value
+        Next
+        TxtCurrencyOrderTotal.Text = QuoteCurrencyTotal.ToString("F0")
     End Sub
 
 End Class
