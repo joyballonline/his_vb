@@ -999,7 +999,7 @@ Public Class Quote
                     '見積金額算出
                     If DgvItemList.Rows(e.RowIndex).Cells("数量").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value IsNot Nothing Then
                         DgvItemList.Rows(e.RowIndex).Cells("見積金額").Value = DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value * DgvItemList.Rows(e.RowIndex).Cells("数量").Value
-                        DgvItemList.Rows(e.RowIndex).Cells("見積金額_外貨").Value = DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value * DgvItemList.Rows(e.RowIndex).Cells("数量").Value
+                        DgvItemList.Rows(e.RowIndex).Cells("見積金額_外貨").Value = DgvItemList.Rows(e.RowIndex).Cells("見積単価_外貨").Value * DgvItemList.Rows(e.RowIndex).Cells("数量").Value
                     End If
 
 
