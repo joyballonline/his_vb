@@ -262,8 +262,8 @@ Public Class Ordering
             LblWarehouse.Text = "Warehouse"
 
             LblPurchaseAmount.Text = "PurchaseOrderAmount"
-            LblPurchaseAmount.Size = New Size(180, 23)
-            LblPurchaseAmount.Location = New Point(923, 465)
+            'LblPurchaseAmount.Size = New Size(180, 23)
+            'LblPurchaseAmount.Location = New Point(923, 465)
 
             TxtSupplierCode.Size = New Point(62, 23)
             BtnCodeSearch.Text = "Search"
@@ -274,6 +274,12 @@ Public Class Ordering
             BtnRowsAdd.Text = "AddLine"
             BtnRowsDel.Text = "DeleteLine"
             BtnClone.Text = "LineDuplication"
+            LblCurrency.Text = "Currency" '通貨
+            LblRate.Text = "Rate" 'レート
+
+            LblPurchaseCurrencyAmount.Text = "PurchaseCurrencyAmount" '発注金額
+            LblIDRCurrency.Text = "Currency" '通貨
+            LblChangeCurrency.Text = "Currency" '通貨
 
             BtnPurchase.Text = "IssuePurchaseOrder"
             BtnRegistration.Text = "Registrartion"
