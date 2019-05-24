@@ -365,10 +365,13 @@ Public Class Quote
             Select Case Status
                 Case CommonConst.STATUS_PRICE
                     TxtSuffixNo.Text = ds1.Tables(RS).Rows(0)("見積番号枝番")
+                    DtpRegistration.Value = ds1.Tables(RS).Rows(0)("登録日")
                 Case CommonConst.STATUS_VIEW
                     TxtSuffixNo.Text = ds1.Tables(RS).Rows(0)("見積番号枝番")
+                    DtpRegistration.Value = ds1.Tables(RS).Rows(0)("登録日")
                 Case Else
                     TxtSuffixNo.Text = SuffixMax + 1
+                    DtpRegistration.Value = DateTime.Now
             End Select
 
             TxtCustomerCode.Text = ds1.Tables(RS).Rows(0)("得意先コード").ToString
@@ -481,6 +484,8 @@ Public Class Quote
             '   見積新規登録
             '=======================
 
+            DtpRegistration.Value = DateTime.Now '登録日
+
             ' 指定した書式で日付を文字列に変換する
             Dim QuoteDate As String = dtNow.ToString("MMdd")
 
@@ -557,6 +562,7 @@ Public Class Quote
             BtnProof.Visible = True
             BtnProof.Location = New Point(657, 509)
             BtnCodeSearch.Enabled = False
+            CmCurrency.Enabled = False
 
             BtnQuoteRequest.Visible = True
             BtnQuoteRequest.Location = New Point(828, 509)
@@ -580,6 +586,7 @@ Public Class Quote
             BtnClone.Visible = False
             BtnInsert.Visible = False
             BtnQuote.Visible = False
+            CmCurrency.Enabled = False
             'グリッドの入力項目を制限
             DgvItemList.Columns("仕入区分").ReadOnly = True
             DgvItemList.Columns("メーカー").ReadOnly = True
