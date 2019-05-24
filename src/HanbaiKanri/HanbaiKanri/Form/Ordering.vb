@@ -188,7 +188,7 @@ Public Class Ordering
         column2.HeaderText = "リードタイム単位"
         column2.Name = "リードタイム単位"
 
-        DgvItemList.Columns.Insert(12, column2)
+        DgvItemList.Columns.Insert(14, column2)
 
         '汎用マスタから貿易条件を取得
         dsHanyo = getDsHanyoData(CommonConst.FIXED_KEY_TRADE_TERMS)
@@ -208,7 +208,7 @@ Public Class Ordering
         column3.HeaderText = "貿易条件"
         column3.Name = "貿易条件"
 
-        DgvItemList.Columns.Insert(14, column3)
+        DgvItemList.Columns.Insert(15, column3)
         CbShippedBy.SelectedIndex = 0
 
         createWarehouseCombobox() '倉庫コンボボックス
@@ -285,7 +285,9 @@ Public Class Ordering
             DgvItemList.Columns("数量").HeaderText = "Quantity"
             DgvItemList.Columns("単位").HeaderText = "Unit"
             DgvItemList.Columns("仕入単価").HeaderText = "PurchaseUnitPrice"
+            DgvItemList.Columns("仕入単価_外貨").HeaderText = "PurchaseUnitPriceForeignCurrency"
             DgvItemList.Columns("仕入金額").HeaderText = "PurchaseAmount"
+            DgvItemList.Columns("仕入金額_外貨").HeaderText = "PurchaseAmountForeignCurrency"
             DgvItemList.Columns("リードタイム").HeaderText = "LeadTime"
             DgvItemList.Columns("リードタイム単位").HeaderText = "LeadTimeUnit"
             DgvItemList.Columns("貿易条件").HeaderText = "TradeTerms"
@@ -303,36 +305,11 @@ Public Class Ordering
         DgvItemList.Columns("型式").DefaultCellStyle.WrapMode = DataGridViewTriState.True
         DgvItemList.Columns("備考").DefaultCellStyle.WrapMode = DataGridViewTriState.True
 
-
-        'ComboBoxに表示する項目のリストを作成する
-        ''汎用マスタから仕入区分を取得
-        'Dim dsHanyo As DataSet = getDsHanyoData(CommonConst.FIXED_KEY_PURCHASING_CLASS)
-
-        'Dim dtPurchasingClass As New DataTable("Table")
-        'dtPurchasingClass.Columns.Add("Display", GetType(String))
-        'dtPurchasingClass.Columns.Add("Value", GetType(Integer))
-
-        'For index As Integer = 0 To dsHanyo.Tables(RS).Rows.Count - 1
-        '    dtPurchasingClass.Rows.Add(dsHanyo.Tables(RS).Rows(index)("文字１"), dsHanyo.Tables(RS).Rows(index)("可変キー"))
-        'Next
-
-        'DataGridViewComboBoxColumnを作成
-        'Dim column As New DataGridViewComboBoxColumn()
-        'DataGridViewComboBoxColumnのDataSourceを設定
-        'column.DataSource = dtPurchasingClass
-        '実際の値が"Value"列、表示するテキストが"Display"列とする
-        'column.ValueMember = "Value" '実際の値
-        'column.DisplayMember = "Display" '表示用の値
-        'column.HeaderText = "仕入区分"
-        'column.Name = "仕入区分"
-        'column.ValueMember = 1
-        'DataGridView1に追加する
-        'DgvItemList.Columns.Insert(1, column)
-
         Dim reccnt As Integer = 0
 
         '新規登録モード 伝票番号取得
         If PurchaseStatus = CommonConst.STATUS_ADD Then
+
             GetSiireNo_New()
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "AddNewMode"
@@ -351,6 +328,12 @@ Public Class Ordering
             TxtSales.Enabled = True
             TxtPaymentTerms.Enabled = True
 
+            '通貨・レート情報設定
+            createCurrencyCombobox()
+            setRate()
+
+            setBaseCurrency() '通貨表示：ベースの設定
+            setChangeCurrency() '通貨表示：変更後の設定
             Exit Sub
 
         ElseIf PurchaseStatus Is CommonConst.STATUS_VIEW Then
@@ -373,6 +356,7 @@ Public Class Ordering
             CbShippedBy.Enabled = False
             DtpShippedDate.Enabled = False
             CmWarehouse.Enabled = False
+            CmCurrency.Enabled = False
 
             BtnInsert.Visible = False
             BtnUp.Visible = False
@@ -382,6 +366,11 @@ Public Class Ordering
             BtnClone.Visible = False
             DgvItemList.ReadOnly = True
 
+            ''通貨・レート情報設定
+            'createCurrencyCombobox()
+
+            'setBaseCurrency() '通貨表示：ベースの設定
+            'setChangeCurrency() '通貨表示：変更後の設定
         End If
 
         '発注基本情報
@@ -394,6 +383,19 @@ Public Class Ordering
         Dim dsHattyu As DataSet = getDsData("t20_hattyu", Sql)
         CompanyCode = dsHattyu.Tables(RS).Rows(0)("会社コード")
 
+        Sql = "SELECT t21.*"
+        Sql += " FROM  public.t21_hattyu t21 "
+        Sql += " INNER JOIN  t20_hattyu t20"
+        Sql += " ON t21.会社コード = t20.会社コード"
+        Sql += " And  t21.発注番号 = t20.発注番号"
+        Sql += " And  t21.発注番号枝番 = t20.発注番号枝番"
+
+        Sql += " WHERE t21.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " AND t21.発注番号 ILIKE '" & PurchaseNo.ToString & "'"
+        Sql += " AND t21.発注番号枝番 ILIKE '" & PurchaseSuffix.ToString & "'"
+        Sql += " ORDER BY t21.行番号 "
+
+        Dim dsHattyudt As DataSet = _db.selectDB(Sql, RS, reccnt)
 
         '発注データから各項目を取得、表示
         If dsHattyu.Tables(RS).Rows(0)("発注番号") IsNot DBNull.Value Then
@@ -492,20 +494,39 @@ Public Class Ordering
         If dsHattyu.Tables(RS).Rows(0)("倉庫コード") IsNot DBNull.Value Then
             CmWarehouse.SelectedValue = dsHattyu.Tables(RS).Rows(0)("倉庫コード")
         End If
+        If dsHattyu.Tables(RS).Rows(0)("通貨") IsNot DBNull.Value Then
+            ''通貨・レート情報設定
+            'If PurchaseStatus <> CommonConst.STATUS_VIEW Then
+            '    If dsHattyu.Tables(RS).Rows(0)("見積番号") <> "" Then
+            '        '通貨・レート情報設定
+            '        createCurrencyCombobox(dsHattyudt.Tables(RS).Rows(0)("仕入通貨").ToString)
+            '    Else
+            '        createCurrencyCombobox(dsHattyu.Tables(RS).Rows(0)("通貨").ToString)
+            '    End If
+            'Else
+            '    createCurrencyCombobox(dsHattyu.Tables(RS).Rows(0)("通貨").ToString)
+            'End If
 
-        Sql = "SELECT t21.*"
-        Sql += " FROM  public.t21_hattyu t21 "
-        Sql += " INNER JOIN  t20_hattyu t20"
-        Sql += " ON t21.会社コード = t20.会社コード"
-        Sql += " And  t21.発注番号 = t20.発注番号"
-        Sql += " And  t21.発注番号枝番 = t20.発注番号枝番"
+            createCurrencyCombobox(dsHattyu.Tables(RS).Rows(0)("通貨").ToString)
 
-        Sql += " WHERE t21.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        Sql += " AND t21.発注番号 ILIKE '" & PurchaseNo.ToString & "'"
-        Sql += " AND t21.発注番号枝番 ILIKE '" & PurchaseSuffix.ToString & "'"
-        Sql += " ORDER BY t21.行番号 "
+        End If
+        If dsHattyudt.Tables(RS).Rows(0)("仕入レート") IsNot DBNull.Value Then
+            TxtRate.Text = dsHattyudt.Tables(RS).Rows(0)("仕入レート").ToString
+        End If
 
-        Dim dsHattyudt As DataSet = _db.selectDB(Sql, RS, reccnt)
+        '通貨・レート情報設定
+        If PurchaseStatus <> CommonConst.STATUS_ADD Then
+            'If dsHattyu.Tables(RS).Rows(0)("見積番号") <> "" Then
+            '通貨・レート情報設定
+            createCurrencyCombobox(dsHattyudt.Tables(RS).Rows(0)("仕入通貨").ToString)
+            'End If
+        End If
+
+        setRate()
+        '通貨表示：ベースの設定
+        setBaseCurrency()
+        setChangeCurrency()
+
 
         For i As Integer = 0 To dsHattyudt.Tables(RS).Rows.Count - 1
             DgvItemList.Rows.Add()
@@ -516,6 +537,7 @@ Public Class Ordering
             DgvItemList.Rows(i).Cells("数量").Value = dsHattyudt.Tables(RS).Rows(i)("発注数量")
             DgvItemList.Rows(i).Cells("単位").Value = dsHattyudt.Tables(RS).Rows(i)("単位")
             DgvItemList.Rows(i).Cells("仕入単価").Value = dsHattyudt.Tables(RS).Rows(i)("仕入値")
+            DgvItemList.Rows(i).Cells("仕入単価_外貨").Value = dsHattyudt.Tables(RS).Rows(i)("仕入単価_外貨")
             DgvItemList.Rows(i).Cells("間接費").Value = dsHattyudt.Tables(RS).Rows(i)("間接費")
             DgvItemList.Rows(i).Cells("仕入金額").Value = dsHattyudt.Tables(RS).Rows(i)("仕入金額")
             DgvItemList.Rows(i).Cells("リードタイム").Value = dsHattyudt.Tables(RS).Rows(i)("リードタイム")
@@ -541,7 +563,6 @@ Public Class Ordering
             No += 1
         Next c
         TxtItemCount.Text = DgvItemList.Rows.Count()
-
 
         '参照モード
         If PurchaseStatus = CommonConst.STATUS_VIEW Then
@@ -587,6 +608,7 @@ Public Class Ordering
             TxtOrderingSuffix.Text = 1
 
         ElseIf PurchaseStatus = CommonConst.STATUS_EDIT Then
+
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "EditMode"
             Else
@@ -642,15 +664,37 @@ Public Class Ordering
     End Sub
 
     'セルの値が変更されたら
-    Private Sub CellValueChanged(ByVal sender As Object,
-    ByVal e As DataGridViewCellEventArgs) Handles DgvItemList.CellValueChanged
+    Private Sub CellValueChanged(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles DgvItemList.CellValueChanged
 
-        Dim PurchaseTotal As Integer = 0
+        Dim PurchaseTotal As Long = 0
+        Dim CurrencyTotal As Long = 0
+
+        Dim currentColumn As String = DgvItemList.Columns(e.ColumnIndex).Name
 
         '発注金額をクリア
         TxtPurchaseAmount.Clear()
+        TxtPurchaseCurrencyAmount.Clear()
 
+        '仕入単価_外貨 / 仕入金額_外貨 が変更されたらそれぞれを更新する
+        If currentColumn = "仕入単価" Or currentColumn = "仕入単価_外貨" Then
+            'delCellValueChanged()
+            If DgvItemList.Rows.Count > 0 Then
+                Select Case currentColumn
+                    Case "仕入単価"
+                        If TxtRate.Text <> "" Then
+                            'DgvItemList("仕入単価_外貨", e.RowIndex).Value = DgvItemList("仕入単価", e.RowIndex).Value * DgvItemList("仕入レート", e.RowIndex).Value
+                            DgvItemList.Rows(e.RowIndex).Cells("仕入単価_外貨").Value = DgvItemList.Rows(e.RowIndex).Cells("仕入単価").Value * TxtRate.Text
+                        End If
+                    Case "仕入単価_外貨"
+                        If DgvItemList("仕入単価_外貨", e.RowIndex).Value IsNot Nothing And TxtRate.Text <> "" Then
+                            'DgvItemList("仕入単価", e.RowIndex).Value = DgvItemList("仕入単価_外貨", e.RowIndex).Value / DgvItemList("仕入レート", e.RowIndex).Value
+                            DgvItemList.Rows(e.RowIndex).Cells("仕入単価").Value = DgvItemList.Rows(e.RowIndex).Cells("仕入単価_外貨").Value / Decimal.Parse(TxtRate.Text)
+                        End If
+                End Select
 
+            End If
+            'setCellValueChanged()
+        End If
 
         'ヘッダー以外だったら
         If e.RowIndex > -1 Then
@@ -666,20 +710,27 @@ Public Class Ordering
                 DgvItemList.Rows(e.RowIndex).Cells("仕入単価").Value = Nothing
                 Exit Sub
             End If
+            If Not IsNumeric(DgvItemList.Rows(e.RowIndex).Cells("仕入単価_外貨").Value) And (DgvItemList.Rows(e.RowIndex).Cells("仕入単価_外貨").Value IsNot Nothing) Then
+                MessageBox.Show("Please enter with numeric value.", "PurchaseAmount Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                DgvItemList.Rows(e.RowIndex).Cells("仕入単価_外貨").Value = Nothing
+                Exit Sub
+            End If
 
             '数量と仕入単価が入力されていたら
             If DgvItemList.Rows(e.RowIndex).Cells("数量").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("仕入単価").Value IsNot Nothing Then
                 '仕入金額 = 数量 * 仕入単価
                 DgvItemList.Rows(e.RowIndex).Cells("仕入金額").Value = DgvItemList.Rows(e.RowIndex).Cells("数量").Value * DgvItemList.Rows(e.RowIndex).Cells("仕入単価").Value
-
+                DgvItemList.Rows(e.RowIndex).Cells("仕入金額_外貨").Value = DgvItemList.Rows(e.RowIndex).Cells("数量").Value * DgvItemList.Rows(e.RowIndex).Cells("仕入単価_外貨").Value
             End If
         End If
 
         '明細をループし、仕入金額を合算する
         For i As Integer = 0 To DgvItemList.Rows.Count - 1
             PurchaseTotal += DgvItemList.Rows(i).Cells("仕入金額").Value
+            CurrencyTotal += DgvItemList.Rows(i).Cells("仕入金額_外貨").Value
         Next
         TxtPurchaseAmount.Text = PurchaseTotal
+        TxtPurchaseCurrencyAmount.Text = CurrencyTotal
 
     End Sub
 
@@ -948,13 +999,27 @@ Public Class Ordering
         Try
             '複写か編集の時
             If PurchaseStatus = CommonConst.STATUS_CLONE Or PurchaseStatus = CommonConst.STATUS_EDIT Or PurchaseStatus = CommonConst.STATUS_ADD Then
+                Dim dsCompany As DataSet
+                Dim dsHattyuHd As DataSet
+                Dim dsHattyuDt As DataSet
+
+                'If PurchaseStatus <> CommonConst.STATUS_ADD And PurchaseStatus <> CommonConst.STATUS_CLONE Then
 
                 Sql = " AND "
                 Sql += " 見積番号 = '" & TxtQuoteNo.Text & "'"
                 Sql += " AND "
                 Sql += " 見積番号枝番 = '" & TxtQuoteSuffix.Text & "'"
+                dsCompany = getDsData("t01_mithd", Sql)
 
-                Dim dsCompany As DataSet = getDsData("t01_mithd", Sql)
+                Sql = " AND 発注番号 = '" & PurchaseNo & "'"
+                Sql += " AND 発注番号枝番 = '" & PurchaseSuffix & "'"
+                dsHattyuHd = getDsData("t20_hattyu", Sql)
+
+                Sql = " AND 発注番号 = '" & PurchaseNo & "'"
+                Sql += " AND 発注番号枝番 = '" & PurchaseSuffix & "'"
+                dsHattyuDt = getDsData("t21_hattyu", Sql)
+                'Else
+                'End If
 
 
                 Sql = "INSERT INTO "
@@ -965,9 +1030,15 @@ Public Class Ordering
                 Sql += ", 得意先担当者役職, 得意先担当者名, 仕入先コード, 仕入先名, 仕入先郵便番号, 仕入先住所"
                 Sql += ", 仕入先電話番号, 仕入先ＦＡＸ, 仕入先担当者役職, 仕入先担当者名, 見積日, 見積有効期限"
                 Sql += ", 支払条件, 見積金額,仕入金額, 粗利額, 営業担当者,入力担当者, 備考, 見積備考, ＶＡＴ, ＰＰＨ"
-                Sql += ", 受注日, 発注日, 登録日, 更新日, 更新者, 取消区分, 出荷方法, 出荷日, 営業担当者コード, 入力担当者コード, 倉庫コード)"
+                Sql += ", 受注日, 発注日, 登録日, 更新日, 更新者, 取消区分, 出荷方法, 出荷日, 営業担当者コード"
+                Sql += ", 入力担当者コード, 倉庫コード, 通貨, レート"
 
-                Sql += " VALUES('"
+                If PurchaseStatus <> CommonConst.STATUS_ADD And dsHattyuHd.Tables(RS).Rows(0)("見積番号") <> "" Then
+                    Sql += ", 見積金額_外貨"
+                End If
+
+
+                Sql += ") VALUES ('"
 
                 Sql += CompanyCode '会社コード
                 Sql += "', '"
@@ -988,80 +1059,50 @@ Public Class Ordering
 
                 If dsCompany.Tables(RS).Rows.Count > 0 Then
                     Sql += IIf(dsCompany.Tables(RS).Rows(0)("得意先コード") IsNot DBNull.Value, dsCompany.Tables(RS).Rows(0)("得意先コード"), 0)
-                Else
-                    Sql += ""
                 End If
 
                 Sql += "', '"
 
                 If dsCompany.Tables(RS).Rows.Count > 0 Then
                     Sql += IIf(dsCompany.Tables(RS).Rows(0)("得意先名") IsNot DBNull.Value, dsCompany.Tables(RS).Rows(0)("得意先名"), 0)
-                Else
-                    Sql += ""
                 End If
 
                 Sql += "', '"
 
                 If dsCompany.Tables(RS).Rows.Count > 0 Then
                     Sql += IIf(dsCompany.Tables(RS).Rows(0)("得意先郵便番号") IsNot DBNull.Value, dsCompany.Tables(RS).Rows(0)("得意先郵便番号"), 0)
-                Else
-                    Sql += ""
                 End If
 
                 Sql += "', '"
 
                 If dsCompany.Tables(RS).Rows.Count > 0 Then
                     Sql += IIf(dsCompany.Tables(RS).Rows(0)("得意先住所") IsNot DBNull.Value, dsCompany.Tables(RS).Rows(0)("得意先住所"), 0)
-                Else
-                    Sql += ""
                 End If
 
                 Sql += "', '"
 
                 If dsCompany.Tables(RS).Rows.Count > 0 Then
                     Sql += IIf(dsCompany.Tables(RS).Rows(0)("得意先電話番号") IsNot DBNull.Value, dsCompany.Tables(RS).Rows(0)("得意先電話番号"), 0)
-                Else
-                    Sql += ""
                 End If
 
                 Sql += "', '"
 
                 If dsCompany.Tables(RS).Rows.Count > 0 Then
                     Sql += IIf(dsCompany.Tables(RS).Rows(0)("得意先ＦＡＸ") IsNot DBNull.Value, dsCompany.Tables(RS).Rows(0)("得意先ＦＡＸ"), 0)
-                Else
-                    Sql += ""
                 End If
 
                 Sql += "', '"
 
                 If dsCompany.Tables(RS).Rows.Count > 0 Then
                     Sql += IIf(dsCompany.Tables(RS).Rows(0)("得意先担当者役職") IsNot DBNull.Value, dsCompany.Tables(RS).Rows(0)("得意先担当者役職"), 0)
-                Else
-                    Sql += ""
                 End If
 
                 Sql += "', '"
 
                 If dsCompany.Tables(RS).Rows.Count > 0 Then
                     Sql += IIf(dsCompany.Tables(RS).Rows(0)("得意先担当者名") IsNot DBNull.Value, dsCompany.Tables(RS).Rows(0)("得意先担当者名"), 0)
-                Else
-                    Sql += ""
                 End If
 
-                'Sql += "', '"
-                'Sql += "" '得意先名
-                'Sql += "', '"
-                'Sql += "" '得意先郵便番号
-                'Sql += "', '"
-                'Sql += "" '得意先住所
-                'Sql += "', '"
-                'Sql += "" '得意先電話番号
-                'Sql += "', '"
-                'Sql += "" '得意先ＦＡＸ
-                'Sql += "', '"
-                'Sql += "" '得意先担当者役職
-                'Sql += "', '"
-                'Sql += "" '得意先担当者名
                 Sql += "', '"
                 Sql += TxtSupplierCode.Text '仕入先コード
                 Sql += "', '"
@@ -1081,21 +1122,19 @@ Public Class Ordering
 
                 Sql += "', "
 
-                If dsCompany.Tables(RS).Rows.Count > 0 Then
+                If dsCompany.Tables(RS).Rows.Count > 0 Then '見積日
                     Sql += IIf(dsCompany.Tables(RS).Rows(0)("見積日") IsNot DBNull.Value, "'" & UtilClass.strFormatDate(dsCompany.Tables(RS).Rows(0)("見積日")) & "'", 0)
                 Else
                     Sql += "null"
                 End If
-                'Sql += "null" '見積日
 
                 Sql += ", "
 
-                If dsCompany.Tables(RS).Rows.Count > 0 Then
+                If dsCompany.Tables(RS).Rows.Count > 0 Then '見積有効期限
                     Sql += IIf(dsCompany.Tables(RS).Rows(0)("見積有効期限") IsNot DBNull.Value, "'" & UtilClass.strFormatDate(dsCompany.Tables(RS).Rows(0)("見積有効期限")) & "'", 0)
                 Else
                     Sql += "null"
                 End If
-                'Sql += "null" '見積有効期限
 
                 Sql += ", '"
                 Sql += UtilClass.escapeSql(TxtPaymentTerms.Text) '支払条件
@@ -1123,16 +1162,11 @@ Public Class Ordering
                 Sql += "0" 'ＰＰＨ
                 Sql += "', "
 
-
-                Sql += "" '見積備考
-
                 If dsCompany.Tables(RS).Rows.Count > 0 Then
                     Sql += IIf(dsCompany.Tables(RS).Rows(0)("受注日") IsNot DBNull.Value, "'" & UtilClass.strFormatDate(dsCompany.Tables(RS).Rows(0)("受注日")) & "'", 0)
                 Else
                     Sql += "null"
                 End If
-
-                'Sql += "null" '受注日
 
                 Sql += ", '"
                 Sql += strFormatDate(DtpPurchaseDate.Value) '発注日
@@ -1160,6 +1194,17 @@ Public Class Ordering
                     Sql += "" '倉庫コード
                 End If
 
+                Sql += "', '"
+                Sql += CmCurrency.SelectedValue.ToString '通貨
+                Sql += "', '"
+                Sql += UtilClass.formatNumberF10(TxtRate.Text) 'レート
+
+                If PurchaseStatus <> CommonConst.STATUS_ADD And dsHattyuHd.Tables(RS).Rows(0)("見積番号") <> "" Then
+                    Sql += "', '"
+                    Sql += UtilClass.formatNumber(dsHattyuHd.Tables(RS).Rows(0)("見積金額_外貨")) '見積金額_外貨
+
+                End If
+
                 Sql += "') "
 
                 _db.executeDB(Sql)
@@ -1171,7 +1216,11 @@ Public Class Ordering
                     Sql += "t21_hattyu("
                     Sql += "会社コード, 発注番号, 発注番号枝番, 行番号, 仕入区分, 仕入先名, メーカー, 品名, 型式, 単位, 仕入値"
                     Sql += ", 発注数量, 仕入数量, 発注残数, 間接費, 仕入金額, リードタイム, リードタイム単位, 入庫数"
-                    Sql += ", 未入庫数, 備考, 更新者, 登録日, 更新日"
+                    Sql += ", 未入庫数, 備考, 更新者, 登録日, 更新日, 仕入単価_外貨, 仕入通貨, 仕入レート"
+                    If PurchaseStatus <> CommonConst.STATUS_ADD And dsHattyuHd.Tables(RS).Rows(0)("見積番号") <> "" Then
+                        Sql += ", 見積単価_外貨, 見積金額_外貨, 通貨, レート"
+                    End If
+
 
                     Sql += IIf(
                     DgvItemList.Rows(i).Cells("貿易条件").Value IsNot Nothing,
@@ -1233,7 +1282,26 @@ Public Class Ordering
                     Sql += dtNow '登録日
                     Sql += "', '"
                     Sql += dtNow '更新日
+                    Sql += "', '"
+                    Sql += formatNumber(DgvItemList.Rows(i).Cells("仕入単価_外貨").Value) '仕入単価_外貨
+                    Sql += "', '"
+                    Sql += CmCurrency.SelectedValue.ToString '仕入通貨
+                    Sql += "', '"
+                    Sql += UtilClass.formatNumberF10(TxtRate.Text) '仕入レート
+
+                    If PurchaseStatus <> CommonConst.STATUS_ADD And dsHattyuHd.Tables(RS).Rows(0)("見積番号") <> "" Then
+                        Sql += "', '"
+                        Sql += formatNumber(dsHattyuDt.Tables(RS).Rows(i)("見積単価_外貨")).ToString '見積単価_外貨
+                        Sql += "', '"
+                        Sql += formatNumber(dsHattyuDt.Tables(RS).Rows(i)("見積金額_外貨")).ToString '見積金額_外貨
+                        Sql += "', '"
+                        Sql += dsHattyuDt.Tables(RS).Rows(i)("通貨").ToString '通貨
+                        Sql += "', '"
+                        Sql += UtilClass.formatNumberF10(dsHattyuDt.Tables(RS).Rows(i)("レート")) 'レート
+                    End If
+
                     Sql += "'"
+
                     Sql += IIf(
                                 DgvItemList.Rows(i).Cells("貿易条件").Value IsNot Nothing,
                                 ", '" & DgvItemList.Rows(i).Cells("貿易条件").Value & "'",
@@ -1260,7 +1328,7 @@ Public Class Ordering
 
                 End If
 
-                '複写か編集の時以外
+                '複写か編集か新規の時以外
             Else
 
                 Sql = "UPDATE "
@@ -1706,4 +1774,120 @@ Public Class Ordering
         Return True
     End Function
 
+    '通貨のコンボボックスを作成
+    '編集モードの時は値を渡してセットさせる
+    Private Sub createCurrencyCombobox(Optional ByRef prmVal As String = "")
+        CmCurrency.DisplayMember = "Text"
+        CmCurrency.ValueMember = "Value"
+
+        Dim Sql As String = " AND 取消区分 = '" & CommonConst.FLAG_ENABLED & "'"
+
+        Dim ds As DataSet = getDsData("m25_currency", Sql)
+
+        Dim tb As New DataTable
+        tb.Columns.Add("Text", GetType(String))
+        tb.Columns.Add("Value", GetType(String))
+
+        For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+            tb.Rows.Add(ds.Tables(RS).Rows(i)("通貨コード"), ds.Tables(RS).Rows(i)("採番キー"))
+
+        Next
+
+        CmCurrency.DataSource = tb
+
+        If prmVal IsNot "" Then
+            CmCurrency.SelectedValue = prmVal
+        Else
+            CmCurrency.SelectedIndex = 0
+        End If
+
+    End Sub
+
+    '通貨の採番キーからレートを取得・設定
+    '基準日が見積日以前の最新のもの
+    Private Sub setRate()
+        Dim Sql As String
+
+        Sql = " AND 採番キー = " & CmCurrency.SelectedValue.ToString & ""
+        Sql += " AND 基準日 <= '" & UtilClass.strFormatDate(DtpPurchaseDate.Text) & "'"
+        Sql += " ORDER BY 基準日 DESC "
+
+        Dim ds As DataSet = getDsData("t71_exchangerate", Sql)
+
+        If ds.Tables(RS).Rows.Count > 0 Then
+            TxtRate.Text = ds.Tables(RS).Rows(0)("レート")
+        Else
+            If CultureInfo.CurrentCulture.Name.ToString = CommonConst.CI_ID Then
+                TxtRate.Text = CommonConst.BASE_RATE_IDR
+            Else
+                TxtRate.Text = CommonConst.BASE_RATE_JPY
+            End If
+        End If
+
+    End Sub
+
+    Private Sub setBaseCurrency()
+        Dim Sql As String
+        '通貨表示：ベースの設定
+        Sql = " AND 採番キー = " & CommonConst.CURRENCY_CD_IDR.ToString
+        Sql += " AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
+
+        Dim ds As DataSet = getDsData("m25_currency", Sql)
+        TxtIDRCurrency.Text = ds.Tables(RS).Rows(0)("通貨コード")
+
+    End Sub
+
+    '通貨表示：通貨変更の設定
+    Private Sub setChangeCurrency()
+        Dim Sql As String
+        Sql = " AND 採番キー = " & CmCurrency.SelectedValue.ToString
+        Sql += " AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
+
+        Dim ds As DataSet = getDsData("m25_currency", Sql)
+        TxtChangeCurrency.Text = ds.Tables(RS).Rows(0)("通貨コード")
+    End Sub
+
+    'Currencyに応じて変換
+    Private Sub setCurrency()
+
+        Dim currencyVal As Decimal = IIf(TxtRate.Text <> "", TxtRate.Text, 0)
+        Dim PurchaseCurrencyTotal As Decimal = 0       '仕入金額_外貨
+
+        For c As Integer = 0 To DgvItemList.Rows.Count - 1
+            PurchaseCurrencyTotal += DgvItemList.Rows(c).Cells("仕入金額_外貨").Value
+        Next
+        TxtPurchaseCurrencyAmount.Text = PurchaseCurrencyTotal.ToString("F0")
+
+    End Sub
+
+    Private Sub setCellValueChanged()
+
+        AddHandler DgvItemList.CellValueChanged, AddressOf CellValueChanged
+    End Sub
+    Private Sub delCellValueChanged()
+
+        RemoveHandler DgvItemList.CellValueChanged, AddressOf CellValueChanged
+    End Sub
+
+    Private Sub resetListCurrency()
+        If DgvItemList.Rows.Count > 0 Then
+            For i As Integer = 0 To DgvItemList.Rows.Count - 1
+                delCellValueChanged()
+                If TxtRate.Text <> "" And DgvItemList.Rows(i).Cells("仕入単価").Value IsNot Nothing Then
+                    DgvItemList.Rows(i).Cells("仕入単価_外貨").Value = DgvItemList.Rows(i).Cells("仕入単価").Value * TxtRate.Text
+                End If
+                If DgvItemList.Rows(i).Cells("仕入単価_外貨").Value IsNot Nothing And DgvItemList.Rows(i).Cells("数量").Value IsNot Nothing Then
+                    DgvItemList.Rows(i).Cells("仕入金額_外貨").Value = DgvItemList.Rows(i).Cells("仕入単価_外貨").Value * DgvItemList.Rows(i).Cells("数量").Value
+                End If
+                setCellValueChanged()
+            Next
+        End If
+    End Sub
+
+    Private Sub CmCurrency_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmCurrency.SelectedIndexChanged
+        setRate()
+        setChangeCurrency()
+        resetListCurrency()
+        setCurrency()
+    End Sub
 End Class
