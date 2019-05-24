@@ -277,7 +277,7 @@ Public Class Ordering
             LblCurrency.Text = "Currency" '通貨
             LblRate.Text = "Rate" 'レート
 
-            LblPurchaseCurrencyAmount.Text = "PurchaseCurrencyAmount" '発注金額
+            LblPurchaseCurrencyAmount.Text = "PurchaseOrderAmount" '発注金額
             LblIDRCurrency.Text = "Currency" '通貨
             LblChangeCurrency.Text = "Currency" '通貨
 
