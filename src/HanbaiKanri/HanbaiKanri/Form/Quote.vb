@@ -94,6 +94,8 @@ Public Class Quote
         Dim dtNow As DateTime = DateTime.Now
         Dim reccnt As Integer = 0
 
+        delCellValueChanged()   'セル変更イベントを無効化
+
         '仕入原価の制御
         DgvItemList.Columns("仕入原価").ReadOnly = True
         DgvItemList.Columns("仕入原価").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
@@ -236,6 +238,8 @@ Public Class Quote
             DgvItemList.Columns("仕入先コード").HeaderText = "SupplierCode"
             DgvItemList.Columns("仕入先").HeaderText = "SupplierName"
             DgvItemList.Columns("仕入単価").HeaderText = "PurchaseUnitPrice:b"
+            DgvItemList.Columns("仕入通貨").HeaderText = "PurchaseCurrency"
+            DgvItemList.Columns("仕入単価_外貨").HeaderText = "PurchaseUnitPriceForeignCurrency"
             DgvItemList.Columns("仕入原価").HeaderText = "PurchasingCost:c=a*b"
             DgvItemList.Columns("関税率").HeaderText = "CustomsDutyRate:d"
             DgvItemList.Columns("関税額").HeaderText = "CustomsDuty:e=b*d"
@@ -623,6 +627,9 @@ Public Class Quote
 
         '入力タイプのイベントハンドラーをセット
         setAddHandler()
+
+        setCellValueChanged()   'セル変更イベントを無効化
+
     End Sub
 
     Private Sub SaibanSave()
@@ -1552,7 +1559,7 @@ Public Class Quote
                         Sql2 += ",仕入単価_外貨 = 0"
                     End If
                     If DgvItemList.Rows(index).Cells("仕入レート").Value IsNot Nothing Then
-                        Sql2 += ",仕入レート = " & formatStringToNumber(DgvItemList.Rows(index).Cells("仕入単価_外貨").Tag.ToString)
+                        Sql2 += ",仕入レート = " & UtilClass.formatNumberF10(DgvItemList.Rows(index).Cells("仕入単価_外貨").Tag.ToString)
                     Else
                         Sql2 += ",仕入レート = 0"
                     End If
