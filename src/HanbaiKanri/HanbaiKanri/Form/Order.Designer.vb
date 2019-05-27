@@ -872,11 +872,11 @@ Partial Class Order
         Me.TxtRate.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.TxtRate.Enabled = False
         Me.TxtRate.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtRate.Location = New System.Drawing.Point(765, 216)
+        Me.TxtRate.Location = New System.Drawing.Point(1127, 157)
         Me.TxtRate.MaxLength = 20
         Me.TxtRate.Name = "TxtRate"
         Me.TxtRate.ReadOnly = True
-        Me.TxtRate.Size = New System.Drawing.Size(200, 23)
+        Me.TxtRate.Size = New System.Drawing.Size(211, 23)
         Me.TxtRate.TabIndex = 326
         Me.TxtRate.TabStop = False
         '
@@ -885,7 +885,7 @@ Partial Class Order
         Me.LblRate.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblRate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblRate.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblRate.Location = New System.Drawing.Point(609, 216)
+        Me.LblRate.Location = New System.Drawing.Point(971, 157)
         Me.LblRate.Name = "LblRate"
         Me.LblRate.Size = New System.Drawing.Size(150, 23)
         Me.LblRate.TabIndex = 325
@@ -897,7 +897,7 @@ Partial Class Order
         Me.LblCurrency.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblCurrency.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblCurrency.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblCurrency.Location = New System.Drawing.Point(609, 188)
+        Me.LblCurrency.Location = New System.Drawing.Point(971, 129)
         Me.LblCurrency.Name = "LblCurrency"
         Me.LblCurrency.Size = New System.Drawing.Size(150, 23)
         Me.LblCurrency.TabIndex = 324
@@ -909,9 +909,9 @@ Partial Class Order
         Me.CmCurrency.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.CmCurrency.FormattingEnabled = True
         Me.CmCurrency.Items.AddRange(New Object() {"RegularShip", "DHL", "Air", "Ship"})
-        Me.CmCurrency.Location = New System.Drawing.Point(765, 188)
+        Me.CmCurrency.Location = New System.Drawing.Point(1127, 129)
         Me.CmCurrency.Name = "CmCurrency"
-        Me.CmCurrency.Size = New System.Drawing.Size(200, 23)
+        Me.CmCurrency.Size = New System.Drawing.Size(211, 23)
         Me.CmCurrency.TabIndex = 323
         '
         'TxtChangeCurrency
@@ -1110,6 +1110,7 @@ Partial Class Order
         Me.仕入レート.MaxInputLength = 15
         Me.仕入レート.Name = "仕入レート"
         Me.仕入レート.ReadOnly = True
+        Me.仕入レート.Visible = False
         '
         '仕入単価_外貨
         '
