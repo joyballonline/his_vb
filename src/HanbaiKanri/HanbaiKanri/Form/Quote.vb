@@ -2885,6 +2885,7 @@ Public Class Quote
             QuoteCurrencyTotal += DgvItemList.Rows(c).Cells("見積金額_外貨").Value
         Next
         TxtCurrencyQuoteTotal.Text = QuoteCurrencyTotal.ToString("F0")
+        TxtCurrencyVatAmount.Text = ((QuoteCurrencyTotal.ToString("F0") * TxtVat.Text) / 100).ToString("F0")
 
     End Sub
 
