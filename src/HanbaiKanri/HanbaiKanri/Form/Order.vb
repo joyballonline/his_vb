@@ -7,7 +7,7 @@ Imports UtilMDL.DB
 Imports UtilMDL.DataGridView
 Imports UtilMDL.FileDirectory
 Imports UtilMDL.xls
-
+Imports System.Globalization
 
 Public Class Order
     Inherits System.Windows.Forms.Form
@@ -79,6 +79,10 @@ Public Class Order
     End Sub
 
     Private Sub Quote_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim reccnt As Integer = 0
+
+        delCellValueChanged() 'イベントハンドラー削除
+
         'DateTimePickerのフォーマットを指定
         DtpOrderRegistration.Text = DateAdd("m", 0, Now).ToString("yyyy/MM/dd")
         DtpOrderDate.Text = DateAdd("m", 0, Now).ToString("yyyy/MM/dd")
@@ -104,35 +108,46 @@ Public Class Order
         'DataGridView1に追加する
         DgvItemList.Columns.Insert(1, column)
 
-        Dim reccnt As Integer = 0
-        Dim Sql12 As String = ""
-
-        Sql12 += "SELECT * FROM public.m90_hanyo"
-        Sql12 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        Sql12 += " AND 固定キー = '" & CommonConst.FIXED_KEY_READTIME & "'"
-
-        Dim ds12 As DataSet = _db.selectDB(Sql12, RS, reccnt)
-
-        Dim table2 As New DataTable("Table")
-        table2.Columns.Add("Display", GetType(String))
-        table2.Columns.Add("Value", GetType(Integer))
-
-        For index As Integer = 0 To ds12.Tables(RS).Rows.Count - 1
-            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-                table2.Rows.Add(ds12.Tables(RS).Rows(index)("文字２"), ds12.Tables(RS).Rows(index)("可変キー"))
-            Else
-                table2.Rows.Add(ds12.Tables(RS).Rows(index)("文字１"), ds12.Tables(RS).Rows(index)("可変キー"))
-            End If
-        Next
-
+        'リードタイム単位コンボボックス作成
         Dim column2 As New DataGridViewComboBoxColumn()
-        column2.DataSource = table2
+        column2.DataSource = getReadTime()
         column2.ValueMember = "Value"
         column2.DisplayMember = "Display"
         column2.HeaderText = "リードタイム単位"
         column2.Name = "リードタイム単位"
 
-        DgvItemList.Columns.Insert(25, column2)
+        DgvItemList.Columns.Insert(29, column2)
+
+        '仕入通貨コンボボックス作成
+        Dim column3 As New DataGridViewComboBoxColumn()
+        column3.DataSource = getSireCurrency()
+        column3.ValueMember = "Value"
+        column3.DisplayMember = "Display"
+        column3.HeaderText = "仕入通貨"
+        column3.Name = "仕入通貨"
+
+        DgvItemList.Columns.Insert(10, column3)
+
+        'Dim Sql12 As String = ""
+
+        'Sql12 += "SELECT * FROM public.m90_hanyo"
+        'Sql12 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        'Sql12 += " AND 固定キー = '" & CommonConst.FIXED_KEY_READTIME & "'"
+
+        'Dim ds12 As DataSet = _db.selectDB(Sql12, RS, reccnt)
+
+        'Dim table2 As New DataTable("Table")
+        'table2.Columns.Add("Display", GetType(String))
+        'table2.Columns.Add("Value", GetType(Integer))
+
+        'For index As Integer = 0 To ds12.Tables(RS).Rows.Count - 1
+        '    If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+        '        table2.Rows.Add(ds12.Tables(RS).Rows(index)("文字２"), ds12.Tables(RS).Rows(index)("可変キー"))
+        '    Else
+        '        table2.Rows.Add(ds12.Tables(RS).Rows(index)("文字１"), ds12.Tables(RS).Rows(index)("可変キー"))
+        '    End If
+        'Next
+
 
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
             If OrderStatus = CommonConst.STATUS_ADD Then
@@ -263,7 +278,7 @@ Public Class Order
                 TxtGrossProfit.Text = ds1.Tables(RS).Rows(0)("粗利額")
             End If
             If ds1.Tables(RS).Rows(0)("ＶＡＴ") IsNot DBNull.Value Then
-                TxtVat.Text = ds1.Tables(RS).Rows(0)("ＶＡＴ")
+                TxtVatAmount.Text = ds1.Tables(RS).Rows(0)("ＶＡＴ")
             End If
 
             '見積明細情報
@@ -284,6 +299,7 @@ Public Class Order
                 DgvItemList.Rows(index).Cells("単位").Value = ds3.Tables(RS).Rows(index)("単位")
                 DgvItemList.Rows(index).Cells("仕入先").Value = ds3.Tables(RS).Rows(index)("仕入先名称")
                 DgvItemList.Rows(index).Cells("仕入値").Value = ds3.Tables(RS).Rows(index)("仕入単価")
+                DgvItemList.Rows(index).Cells("仕入レート").Value = setSireCurrency(ds3.Tables(RS).Rows(index)("仕入通貨"))
                 DgvItemList.Rows(index).Cells("間接費").Value = ds3.Tables(RS).Rows(index)("間接費")
                 DgvItemList.Rows(index).Cells("売単価").Value = ds3.Tables(RS).Rows(index)("売単価")
                 DgvItemList.Rows(index).Cells("売上金額").Value = ds3.Tables(RS).Rows(index)("売上金額")
@@ -526,6 +542,13 @@ Public Class Order
                 DgvItemList.Rows(index).Cells("単位").Value = ds3.Tables(RS).Rows(index)("単位")
                 DgvItemList.Rows(index).Cells("仕入先").Value = ds3.Tables(RS).Rows(index)("仕入先名")
                 DgvItemList.Rows(index).Cells("仕入値").Value = ds3.Tables(RS).Rows(index)("仕入値")
+                DgvItemList.Rows(index).Cells("仕入レート").Value = setSireCurrency(ds3.Tables(RS).Rows(index)("仕入通貨"))
+                If ds3.Tables(RS).Rows(index)("仕入通貨") Is DBNull.Value Then
+                Else
+                    Dim tmp2 As Integer = ds3.Tables(RS).Rows(index)("仕入通貨")
+                    DgvItemList.Rows(index).Cells("仕入通貨").Value = tmp2
+                End If
+                DgvItemList.Rows(index).Cells("仕入単価_外貨").Value = ds3.Tables(RS).Rows(index)("仕入単価_外貨")
                 DgvItemList.Rows(index).Cells("間接費").Value = ds3.Tables(RS).Rows(index)("間接費")
                 DgvItemList.Rows(index).Cells("売単価").Value = ds3.Tables(RS).Rows(index)("売単価")
                 DgvItemList.Rows(index).Cells("売上金額").Value = ds3.Tables(RS).Rows(index)("売上金額")
@@ -539,7 +562,9 @@ Public Class Order
                 End If
                 DgvItemList.Rows(index).Cells("備考").Value = ds3.Tables(RS).Rows(index)("備考")
                 DgvItemList.Rows(index).Cells("見積単価").Value = ds3.Tables(RS).Rows(index)("見積単価")
+                DgvItemList.Rows(index).Cells("見積単価_外貨").Value = ds3.Tables(RS).Rows(index)("見積単価_外貨")
                 DgvItemList.Rows(index).Cells("見積金額").Value = ds3.Tables(RS).Rows(index)("見積金額")
+                DgvItemList.Rows(index).Cells("見積金額_外貨").Value = ds3.Tables(RS).Rows(index)("見積金額_外貨")
                 DgvItemList.Rows(index).Cells("関税率").Value = ds3.Tables(RS).Rows(index)("関税率")
                 DgvItemList.Rows(index).Cells("関税額").Value = ds3.Tables(RS).Rows(index)("関税額")
                 DgvItemList.Rows(index).Cells("前払法人税率").Value = ds3.Tables(RS).Rows(index)("前払法人税率")
@@ -566,7 +591,16 @@ Public Class Order
                 DgvItemList.ReadOnly = True
                 BtnRegistration.Visible = False
                 TxtCustomerPO.Enabled = False
+                CmCurrency.Enabled = False
             End If
+
+            '通貨・レート情報設定
+            createCurrencyCombobox(ds1.Tables(RS).Rows(0)("通貨").ToString)
+            setRate()
+
+            '通貨表示：ベースの設定
+            setBaseCurrency()
+            setChangeCurrency()
         End If
 
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
@@ -620,8 +654,8 @@ Public Class Order
             LblOrderRemarks.Size = New Size(161, 23)
             LblOrderRemarks.Location = New Point(11, 422)
             TxtOrderRemark.Location = New Point(178, 422)
-            LblVat.Text = "VAT"
-            TxtVat.Size = New Size(151, 23)
+            LblVatAmount.Text = "VAT"
+            TxtVatAmount.Size = New Size(151, 23)
             LblOrderAmount.Text = "JobOrderAmount"
             LblOrderAmount.Size = New Size(180, 23)
             LblOrderAmount.Location = New Point(923, 422)
@@ -664,7 +698,9 @@ Public Class Order
 
         calcTotal() '合計値の計算
 
-        AddHandler DgvItemList.CellValueChanged, AddressOf DgvItemList_CellValueChanged 'イベントハンドラーをセット
+        setCellValueChanged()
+
+        'AddHandler DgvItemList.CellValueChanged, AddressOf DgvItemList_CellValueChanged 'イベントハンドラーをセット
     End Sub
 
     Private Sub SaibanSave()
@@ -760,7 +796,7 @@ Public Class Order
                 Sql1 += "', '"
                 Sql1 += TxtQuoteRemarks.Text '見積備考
                 Sql1 += "', '"
-                Sql1 += UtilClass.formatNumber(TxtVat.Text) 'ＶＡＴ
+                Sql1 += UtilClass.formatNumber(TxtVatAmount.Text) 'ＶＡＴ
                 Sql1 += "', '"
                 Sql1 += UtilClass.strFormatDate(DtpOrderDate.Value) '受注日
                 Sql1 += "', '"
@@ -1004,15 +1040,31 @@ Public Class Order
     End Function
 
     '一覧内テキスト変更イベント
-    Private Sub DgvItemList_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs)
+    Private Sub DgvItemList_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles DgvItemList.CellValueChanged
+
         Dim reccnt As Integer = 0 'DB用（デフォルト）
         Dim Sql As String = ""
 
-        '合計値リセット
-        TxtPurchaseAmount.Clear()
-        TxtOrderAmount.Clear()
-        TxtGrossProfit.Clear()
+        '操作したカラム名を取得
+        Dim currentColumn As String = DgvItemList.Columns(e.ColumnIndex).Name
 
+        '1回だとイベントハンドラーを削除しきれなかったので、2回実行している
+        delCellValueChanged()
+        delCellValueChanged()
+
+        '合計値リセット
+        TxtPurchaseAmount.Clear()       '発注金額
+        TxtOrderAmount.Clear()          '受注金額
+        TxtGrossProfit.Clear()          '粗利額
+        TxtVatAmount.Clear()            'VAT額
+        TxtCurrencyVatAmount.Clear()    'VAT額_外貨
+        TxtOrderCurrencyAmount.Clear()  '受注金額_外貨
+
+        Dim Total As Decimal = 0 '売上金額
+        Dim PurchaseTotal As Decimal = 0 '仕入金額
+        Dim QuoteTotal As Decimal = 0 '見積金額
+        Dim GrossProfit As Decimal = 0 '粗利額
+        Dim tmpPurchase As Integer = 0
         Dim tmp As Decimal = 0
         Dim tmp1 As Decimal = 0
         Dim tmp2 As Decimal = 0
@@ -1021,6 +1073,38 @@ Public Class Order
 
         If DgvItemList.Rows.Count = 0 Then
             Exit Sub
+        End If
+
+        '仕入通貨が変更されたら仕入レートを更新する
+        If currentColumn = "仕入通貨" Then
+            Dim sireCurrencyCd As String = DgvItemList("仕入通貨", e.RowIndex).Value
+
+            Dim tmpCurrencyVal As Decimal = setSireCurrency(DgvItemList.Rows(e.RowIndex).Cells("仕入通貨").Value)
+            DgvItemList("仕入レート", e.RowIndex).Value = tmpCurrencyVal
+
+        End If
+
+        '仕入通貨 / 仕入値 / 仕入単価_外貨 が変更されたらそれぞれを更新する
+        If currentColumn = "仕入通貨" Or currentColumn = "仕入値" Or currentColumn = "仕入単価_外貨" Then
+
+            If DgvItemList.Rows.Count > 0 Then
+                Select Case currentColumn
+                    Case "仕入通貨"
+                        If DgvItemList("仕入値", e.RowIndex).Value IsNot Nothing And DgvItemList("仕入レート", e.RowIndex).Value IsNot Nothing Then
+                            DgvItemList("仕入単価_外貨", e.RowIndex).Value = DgvItemList("仕入値", e.RowIndex).Value * DgvItemList("仕入レート", e.RowIndex).Value
+                        End If
+                    Case "仕入値"
+                        If DgvItemList("仕入レート", e.RowIndex).Value IsNot Nothing Then
+                            DgvItemList("仕入単価_外貨", e.RowIndex).Value = DgvItemList("仕入値", e.RowIndex).Value * DgvItemList("仕入レート", e.RowIndex).Value
+                        End If
+                    Case "仕入単価_外貨"
+                        If DgvItemList("仕入単価_外貨", e.RowIndex).Value IsNot Nothing And DgvItemList("仕入レート", e.RowIndex).Value IsNot Nothing Then
+                            DgvItemList("仕入値", e.RowIndex).Value = DgvItemList("仕入単価_外貨", e.RowIndex).Value / DgvItemList("仕入レート", e.RowIndex).Value
+                        End If
+                End Select
+
+            End If
+
         End If
 
         '各項目の属性チェック
@@ -1032,6 +1116,11 @@ Public Class Order
         If Not IsNumeric(DgvItemList.Rows(e.RowIndex).Cells("仕入値").Value) And (DgvItemList.Rows(e.RowIndex).Cells("仕入値").Value IsNot Nothing) Then
             MessageBox.Show("Please enter with numeric value.", "PurchaseUnitPrice Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             DgvItemList.Rows(e.RowIndex).Cells("仕入値").Value = Nothing
+            Exit Sub
+        End If
+        If Not IsNumeric(DgvItemList.Rows(e.RowIndex).Cells("仕入単価_外貨").Value) And (DgvItemList.Rows(e.RowIndex).Cells("仕入単価_外貨").Value IsNot Nothing) Then
+            MessageBox.Show("Please enter with numeric value.", "PurchaseUnitPrice Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            DgvItemList.Rows(e.RowIndex).Cells("仕入単価_外貨").Value = Nothing
             Exit Sub
         End If
         If Not IsNumeric(DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value) And (DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value IsNot Nothing) Then
@@ -1089,9 +1178,19 @@ Public Class Order
             DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value = Nothing
             Exit Sub
         End If
+        If Not IsNumeric(DgvItemList.Rows(e.RowIndex).Cells("見積単価_外貨").Value) And (DgvItemList.Rows(e.RowIndex).Cells("見積単価_外貨").Value IsNot Nothing) Then
+            MessageBox.Show("Please enter with numeric value.", "QuotetionPrice Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            DgvItemList.Rows(e.RowIndex).Cells("見積単価_外貨").Value = Nothing
+            Exit Sub
+        End If
         If Not IsNumeric(DgvItemList.Rows(e.RowIndex).Cells("見積金額").Value) And (DgvItemList.Rows(e.RowIndex).Cells("見積金額").Value IsNot Nothing) Then
             MessageBox.Show("Please enter with numeric value.", "QuotetionAmount Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             DgvItemList.Rows(e.RowIndex).Cells("見積金額").Value = Nothing
+            Exit Sub
+        End If
+        If Not IsNumeric(DgvItemList.Rows(e.RowIndex).Cells("見積金額_外貨").Value) And (DgvItemList.Rows(e.RowIndex).Cells("見積金額_外貨").Value IsNot Nothing) Then
+            MessageBox.Show("Please enter with numeric value.", "QuotetionAmount Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            DgvItemList.Rows(e.RowIndex).Cells("見積金額_外貨").Value = Nothing
             Exit Sub
         End If
         If Not IsNumeric(DgvItemList.Rows(e.RowIndex).Cells("粗利額").Value) And (DgvItemList.Rows(e.RowIndex).Cells("粗利額").Value IsNot Nothing) Then
@@ -1113,12 +1212,10 @@ Public Class Order
                 '単価入力 or 粗利入力
                 '--------------------------
 
-                '操作したカラム名を取得
-                Dim currentColumn As String = DgvItemList.Columns(e.ColumnIndex).Name
-
                 '仕入値 <> Nothing
                 '--------------------------
                 If currentColumn = "仕入値" And DgvItemList.Rows(e.RowIndex).Cells("仕入値").Value IsNot Nothing Then
+                    'If DgvItemList.Rows(e.RowIndex).Cells("仕入値").Value IsNot Nothing Then
 
                     '数量 <> Nothing
                     If DgvItemList.Rows(e.RowIndex).Cells("数量").Value IsNot Nothing Then
@@ -1140,19 +1237,32 @@ Public Class Order
                         DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value = DgvItemList.Rows(e.RowIndex).Cells("仕入値").Value * DgvItemList.Rows(e.RowIndex).Cells("輸送費率").Value
                     End If
 
-                End If
-
-                '関税額, 前払法人税額, 輸送費額 <> Nothing
-                '--------------------------
-                If DgvItemList.Rows(e.RowIndex).Cells("関税額").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value IsNot Nothing Then
-                    '仕入原価 <> Nothing
                     If DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value IsNot Nothing Then
                         DgvItemList.Rows(e.RowIndex).Cells("仕入金額").Value = DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value + (DgvItemList.Rows(e.RowIndex).Cells("関税額").Value + DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value + DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value) * DgvItemList.Rows(e.RowIndex).Cells("数量").Value
                     End If
-                    '売単価 <> Nothing
-                    If DgvItemList.Rows(e.RowIndex).Cells("売単価").Value IsNot Nothing Then
-                        DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value = Math.Ceiling(DgvItemList.Rows(e.RowIndex).Cells("売単価").Value + DgvItemList.Rows(e.RowIndex).Cells("関税額").Value + DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value + DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value)
-                    End If
+
+                    '仕入単価_外貨
+                    DgvItemList("仕入単価_外貨", e.RowIndex).Value = DgvItemList("仕入値", e.RowIndex).Value * DgvItemList("仕入レート", e.RowIndex).Value
+                End If
+
+                ''関税額, 前払法人税額, 輸送費額 <> Nothing
+                ''--------------------------
+                ''If DgvItemList.Rows(e.RowIndex).Cells("関税額").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value IsNot Nothing Then
+                ''仕入原価 <> Nothing
+                'If DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value IsNot Nothing Then
+                '    DgvItemList.Rows(e.RowIndex).Cells("仕入金額").Value = DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value + (DgvItemList.Rows(e.RowIndex).Cells("関税額").Value + DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value + DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value) * DgvItemList.Rows(e.RowIndex).Cells("数量").Value
+                'End If
+                ''売単価 <> Nothing
+                'If DgvItemList.Rows(e.RowIndex).Cells("売単価").Value IsNot Nothing Then
+                '    DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value = Math.Ceiling(DgvItemList.Rows(e.RowIndex).Cells("売単価").Value + DgvItemList.Rows(e.RowIndex).Cells("関税額").Value + DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value + DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value)
+                '    DgvItemList.Rows(e.RowIndex).Cells("見積単価_外貨").Value = Math.Ceiling(DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value * TxtRate.Text)
+                'End If
+                ''End If
+
+                '売単価 <> Nothing
+                If currentColumn = "売単価" And DgvItemList.Rows(e.RowIndex).Cells("売単価").Value IsNot Nothing Then
+                    DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value = Math.Ceiling(DgvItemList.Rows(e.RowIndex).Cells("売単価").Value + DgvItemList.Rows(e.RowIndex).Cells("関税額").Value + DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value + DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value)
+                    DgvItemList.Rows(e.RowIndex).Cells("見積単価_外貨").Value = Math.Ceiling(DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value * TxtRate.Text)
                 End If
 
 
@@ -1198,29 +1308,57 @@ Public Class Order
                         End If
 
                     End If
-                ElseIf currentColumn = "見積単価" Or currentColumn = "数量" Then
+                ElseIf currentColumn = "見積単価" Or currentColumn = "見積単価_外貨" Or currentColumn = "数量" Then
                     '--------------------------
                     '見積入力
                     '--------------------------
 
                     '見積単価, 売単価, 関税額, 前払法人税額, 輸送費額 <> Nothing
                     '--------------------------
-                    If DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("関税額").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value IsNot Nothing Then
-                        'If DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("売単価").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("関税額").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value IsNot Nothing Then
-                        tmp4 = DgvItemList.Rows(e.RowIndex).Cells("関税額").Value + DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value + DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value
-                        DgvItemList.Rows(e.RowIndex).Cells("売単価").Value = DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value - tmp4
-                        DgvItemList.Rows(e.RowIndex).Cells("売上金額").Value = DgvItemList.Rows(e.RowIndex).Cells("売単価").Value * DgvItemList.Rows(e.RowIndex).Cells("数量").Value
-                        DgvItemList.Rows(e.RowIndex).Cells("粗利額").Value = Math.Ceiling(DgvItemList.Rows(e.RowIndex).Cells("売上金額").Value - DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value)
-                        DgvItemList.Rows(e.RowIndex).Cells("粗利率").Value = Format(DgvItemList.Rows(e.RowIndex).Cells("粗利額").Value / DgvItemList.Rows(e.RowIndex).Cells("売上金額").Value * 100, "0.0")
+                    If currentColumn = "見積単価" Then
+                        If DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("関税額").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value IsNot Nothing Then
+                            DgvItemList.Rows(e.RowIndex).Cells("見積単価_外貨").Value = Math.Ceiling(DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value * TxtRate.Text)
+                            tmp4 = DgvItemList.Rows(e.RowIndex).Cells("関税額").Value + DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value + DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value
+                            DgvItemList.Rows(e.RowIndex).Cells("売単価").Value = DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value - tmp4
+                            DgvItemList.Rows(e.RowIndex).Cells("売上金額").Value = DgvItemList.Rows(e.RowIndex).Cells("売単価").Value * DgvItemList.Rows(e.RowIndex).Cells("数量").Value
+                            DgvItemList.Rows(e.RowIndex).Cells("粗利額").Value = Math.Ceiling(DgvItemList.Rows(e.RowIndex).Cells("売上金額").Value - DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value)
+                            DgvItemList.Rows(e.RowIndex).Cells("粗利率").Value = Format(DgvItemList.Rows(e.RowIndex).Cells("粗利額").Value / DgvItemList.Rows(e.RowIndex).Cells("売上金額").Value * 100, "0.0")
+                        End If
+                    ElseIf currentColumn = "見積単価_外貨" Then
+                        If DgvItemList.Rows(e.RowIndex).Cells("見積単価_外貨").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("関税額").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value IsNot Nothing Then
+                            DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value = Math.Ceiling(DgvItemList.Rows(e.RowIndex).Cells("見積単価_外貨").Value / TxtRate.Text)
+                            tmp4 = DgvItemList.Rows(e.RowIndex).Cells("関税額").Value + DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value + DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value
+                            DgvItemList.Rows(e.RowIndex).Cells("売単価").Value = DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value - tmp4
+                            DgvItemList.Rows(e.RowIndex).Cells("売上金額").Value = DgvItemList.Rows(e.RowIndex).Cells("売単価").Value * DgvItemList.Rows(e.RowIndex).Cells("数量").Value
+                            DgvItemList.Rows(e.RowIndex).Cells("粗利額").Value = Math.Ceiling(DgvItemList.Rows(e.RowIndex).Cells("売上金額").Value - DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value)
+                            DgvItemList.Rows(e.RowIndex).Cells("粗利率").Value = Format(DgvItemList.Rows(e.RowIndex).Cells("粗利額").Value / DgvItemList.Rows(e.RowIndex).Cells("売上金額").Value * 100, "0.0")
+                        End If
                     End If
                 End If
 
                 '見積金額算出
                 If DgvItemList.Rows(e.RowIndex).Cells("数量").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value IsNot Nothing Then
                     DgvItemList.Rows(e.RowIndex).Cells("見積金額").Value = DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value * DgvItemList.Rows(e.RowIndex).Cells("数量").Value
+                    DgvItemList.Rows(e.RowIndex).Cells("見積金額_外貨").Value = DgvItemList.Rows(e.RowIndex).Cells("見積単価_外貨").Value * DgvItemList.Rows(e.RowIndex).Cells("数量").Value
                 End If
 
+                setCellValueChanged()
+
             End If
+
+            For index As Integer = 0 To DgvItemList.Rows.Count - 1
+                PurchaseTotal += DgvItemList.Rows(index).Cells("仕入金額").Value
+                'Total += DgvItemList.Rows(index).Cells("売上金額").Value
+                QuoteTotal += DgvItemList.Rows(index).Cells("見積金額").Value
+                GrossProfit += DgvItemList.Rows(index).Cells("粗利額").Value
+            Next
+
+            TxtPurchaseAmount.Text = PurchaseTotal '発注金額
+            'TxtOrderAmount.Text = Total.ToString("F0") '受注金額
+            TxtOrderAmount.Text = QuoteTotal '受注金額
+            TxtGrossProfit.Text = GrossProfit
+            TxtVatAmount.Text = ((QuoteTotal * TxtVat.Text) / 100).ToString("F0")
+            setCurrency() '通貨に設定した内容に変更
 
         Catch ex As OverflowException
 
@@ -1230,6 +1368,157 @@ Public Class Order
 
         calcTotal() '合計値の計算
 
+    End Sub
+
+    'Return: DataTable
+    Private Function getReadTime() As DataTable
+
+        Dim Sql As String = ""
+        Sql += " AND 固定キー = '" & CommonConst.FIXED_KEY_READTIME & "'"
+
+        Dim ds As DataSet = getDsData("m90_hanyo", Sql)
+
+        Dim table As New DataTable("Table")
+        table.Columns.Add("Display", GetType(String))
+        table.Columns.Add("Value", GetType(Integer))
+
+        'リードタイム単位の多言語対応
+        For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+                table.Rows.Add(ds.Tables(RS).Rows(i)("文字２"), ds.Tables(RS).Rows(i)("可変キー"))
+            Else
+                table.Rows.Add(ds.Tables(RS).Rows(i)("文字１"), ds.Tables(RS).Rows(i)("可変キー"))
+            End If
+
+        Next
+        Return table
+    End Function
+
+    Private Function setSireCurrency(Optional ByRef prmCurrencyVal As Integer = CommonConst.CURRENCY_CD_IDR)
+        Dim retVal As Decimal
+        '通貨コードが1（IDR）の場合、
+        If prmCurrencyVal = CommonConst.CURRENCY_CD_IDR Then
+            'currentが日本だったら
+            If CultureInfo.CurrentCulture.Name.ToString = CommonConst.CI_ID Then
+                retVal = Decimal.Parse(CommonConst.BASE_RATE_IDR)
+            Else
+                retVal = Decimal.Parse(CommonConst.BASE_RATE_JPY)
+            End If
+        Else
+            Dim Sql As String = ""
+            Sql = " AND 採番キー =" & prmCurrencyVal
+            Sql += " AND 基準日 <= '" & UtilClass.strFormatDate(DtpOrderDate.Text) & "'"
+            Sql += " ORDER BY 基準日 DESC "
+
+            Dim ds As DataSet = getDsData("t71_exchangerate", Sql)
+            If ds.Tables(RS).Rows.Count > 0 Then
+                retVal = ds.Tables(RS).Rows(0)("レート")
+            End If
+        End If
+        Return retVal
+    End Function
+
+    'Return: DataTable
+    Private Function getSireCurrency() As DataTable
+        Dim Sql As String = " AND 取消区分 = '" & CommonConst.FLAG_ENABLED & "'"
+
+        Dim ds As DataSet = getDsData("m25_currency", Sql)
+
+        Dim table As New DataTable("Table")
+        table.Columns.Add("Display", GetType(String))
+        table.Columns.Add("Value", GetType(Integer))
+
+        'リードタイム単位の多言語対応
+        For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+            table.Rows.Add(ds.Tables(RS).Rows(i)("通貨コード"), ds.Tables(RS).Rows(i)("採番キー"))
+        Next
+        Return table
+    End Function
+
+    '通貨のコンボボックスを作成
+    '編集モードの時は値を渡してセットさせる
+    Private Sub createCurrencyCombobox(Optional ByRef prmVal As String = "")
+        CmCurrency.DisplayMember = "Text"
+        CmCurrency.ValueMember = "Value"
+
+        Dim Sql As String = " AND 取消区分 = '" & CommonConst.FLAG_ENABLED & "'"
+
+        Dim ds As DataSet = getDsData("m25_currency", Sql)
+
+        Dim tb As New DataTable
+        tb.Columns.Add("Text", GetType(String))
+        tb.Columns.Add("Value", GetType(String))
+
+        For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+            tb.Rows.Add(ds.Tables(RS).Rows(i)("通貨コード"), ds.Tables(RS).Rows(i)("採番キー"))
+
+        Next
+
+        CmCurrency.DataSource = tb
+
+        If prmVal IsNot "" Then
+            CmCurrency.SelectedValue = prmVal
+        Else
+            CmCurrency.SelectedIndex = 0
+        End If
+    End Sub
+
+    '通貨の採番キーからレートを取得・設定
+    '基準日が見積日以前の最新のもの
+    Private Sub setRate()
+        Dim Sql As String
+
+        Sql = " AND 採番キー = " & CmCurrency.SelectedValue.ToString & ""
+        Sql += " AND 基準日 <= '" & UtilClass.strFormatDate(DtpQuoteDate.Text) & "'"
+        Sql += " ORDER BY 基準日 DESC "
+
+        Dim ds As DataSet = getDsData("t71_exchangerate", Sql)
+
+        If ds.Tables(RS).Rows.Count > 0 Then
+            TxtRate.Text = ds.Tables(RS).Rows(0)("レート")
+        Else
+            If CultureInfo.CurrentCulture.Name.ToString = CommonConst.CI_ID Then
+                TxtRate.Text = CommonConst.BASE_RATE_IDR
+            Else
+                TxtRate.Text = CommonConst.BASE_RATE_JPY
+            End If
+        End If
+
+    End Sub
+
+    Private Sub setBaseCurrency()
+        Dim Sql As String
+        '通貨表示：ベースの設定
+        Sql = " AND 採番キー = " & CommonConst.CURRENCY_CD_IDR.ToString
+        Sql += " AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
+
+        Dim ds As DataSet = getDsData("m25_currency", Sql)
+        TxtIDRCurrency.Text = ds.Tables(RS).Rows(0)("通貨コード")
+
+    End Sub
+
+    '通貨表示：通貨変更の設定
+    Private Sub setChangeCurrency()
+        Dim Sql As String
+        Sql = " AND 採番キー = " & CmCurrency.SelectedValue.ToString
+        Sql += " AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
+
+        Dim ds As DataSet = getDsData("m25_currency", Sql)
+        TxtChangeCurrency.Text = ds.Tables(RS).Rows(0)("通貨コード")
+    End Sub
+
+    'Currencyに応じて変換
+    Private Sub setCurrency()
+
+        Dim currencyVal As Decimal = IIf(TxtRate.Text <> "", TxtRate.Text, 0)   'レート
+        'Dim vatVal As Decimal = IIf(TxtVatAmount.Text <> "", TxtVatAmount.Text, 0)  'VAT
+        Dim OrderCurrencyTotal As Decimal = 0       '見積金額_外貨
+
+        For c As Integer = 0 To DgvItemList.Rows.Count - 1
+            OrderCurrencyTotal += DgvItemList.Rows(c).Cells("見積金額_外貨").Value
+        Next
+        TxtOrderCurrencyAmount.Text = OrderCurrencyTotal.ToString("F0") '受注金額
+        TxtCurrencyVatAmount.Text = ((OrderCurrencyTotal.ToString("F0") * TxtVat.Text) / 100).ToString("F0")
     End Sub
 
     Private Sub calcTotal()
@@ -1248,6 +1537,41 @@ Public Class Order
         TxtPurchaseAmount.Text = PurchaseTotal
         TxtOrderAmount.Text = QuoteTotal.ToString
         TxtGrossProfit.Text = GrossProfit
+        TxtVatAmount.Text = ((QuoteTotal.ToString("F0") * TxtVat.Text) / 100).ToString("F0")
+        setCurrency() '通貨に設定した内容に変更
 
     End Sub
+
+    Private Sub CmCurrency_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmCurrency.SelectedIndexChanged
+        setRate()
+        setChangeCurrency()
+        resetListCurrency()
+        setCurrency()
+    End Sub
+
+    Private Sub setCellValueChanged()
+
+        AddHandler DgvItemList.CellValueChanged, AddressOf DgvItemList_CellValueChanged
+
+    End Sub
+    Private Sub delCellValueChanged()
+
+        RemoveHandler DgvItemList.CellValueChanged, AddressOf DgvItemList_CellValueChanged
+    End Sub
+
+    Private Sub resetListCurrency()
+        If DgvItemList.Rows.Count > 0 Then
+            For i As Integer = 0 To DgvItemList.Rows.Count - 1
+                delCellValueChanged()
+                If TxtRate.Text <> "" And DgvItemList.Rows(i).Cells("見積単価").Value IsNot Nothing Then
+                    DgvItemList.Rows(i).Cells("見積単価_外貨").Value = Math.Ceiling(DgvItemList.Rows(i).Cells("見積単価").Value * TxtRate.Text)
+                End If
+                If DgvItemList.Rows(i).Cells("見積単価_外貨").Value IsNot Nothing And DgvItemList.Rows(i).Cells("数量").Value IsNot Nothing Then
+                    DgvItemList.Rows(i).Cells("見積金額_外貨").Value = DgvItemList.Rows(i).Cells("見積単価_外貨").Value * DgvItemList.Rows(i).Cells("数量").Value
+                End If
+                setCellValueChanged()
+            Next
+        End If
+    End Sub
+
 End Class
