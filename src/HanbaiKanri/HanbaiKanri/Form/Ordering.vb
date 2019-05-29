@@ -1603,7 +1603,7 @@ Public Class Ordering
                 cell = "R" & currentCnt
                 sheet.Range(cell).Value = dsHattyudt.Tables(RS).Rows(i)("仕入単価_外貨")
                 cell = "W" & currentCnt
-                sheet.Range(cell).Value = dsHattyudt.Tables(RS).Rows(i)("仕入金額")
+                sheet.Range(cell).Value = dsHattyudt.Tables(RS).Rows(i)("仕入単価_外貨") * dsHattyudt.Tables(RS).Rows(i)("発注数量")
 
                 totalPrice = totalPrice + dsHattyudt.Tables(RS).Rows(i)("仕入金額")
 
