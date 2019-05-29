@@ -1540,15 +1540,10 @@ Public Class Ordering
             End If
 
             sheet.Range("T11").Value = dsHattyuhd.Tables(RS).Rows(0)("出荷日")
-            'sheet.Range("T12").Value = dsHattyuhd.Tables(RS).Rows(0)("仕入先名")
-            'sheet.Range("T13").Value = dsHattyuhd.Tables(RS).Rows(0)("客先番号")
             sheet.Range("T13").Value = dsHattyuhd.Tables(RS).Rows(0)("支払条件")
 
-            'sheet.Range("H26").Value = dsHattyuhd.Tables(RS).Rows(0)("仕入金額")
             sheet.Range("H27").Value = dsHattyuhd.Tables(RS).Rows(0)("備考")
 
-            'sheet.Range("A34").Value = dsHattyuhd.Tables(RS).Rows(0)("営業担当者")
-            'sheet.Range("A35").Value = dsHattyuhd.Tables(RS).Rows(0)("入力担当者")
             sheet.Range("R30").Value = dsHattyuhd.Tables(RS).Rows(0)("仕入先名")
             sheet.Range("R18").Value = "(" & getCurrency(dsHattyudt.Tables(RS).Rows(0)("仕入通貨")) & ")"
 
@@ -1560,7 +1555,6 @@ Public Class Ordering
             Dim num As Integer = 1
 
             rowCnt = dsHattyudt.Tables(RS).Rows.Count - 1
-            'rowCnt = 10
 
             Dim cellPos As String = lstRow & ":" & lstRow
 
@@ -1579,37 +1573,56 @@ Public Class Ordering
                 Next
             End If
 
-            Dim totalPrice As Integer = 0
+            Dim totalPrice As Decimal = 0
             'Dim Sql As String = ""
-            For i As Integer = 0 To dsHattyudt.Tables(RS).Rows.Count - 1
-                Dim cell As String
 
-                cell = "A" & currentCnt
-                sheet.Range(cell).Value = num
-                cell = "C" & currentCnt
-                sheet.Range(cell).Value = dsHattyudt.Tables(RS).Rows(i)("メーカー") & vbLf & dsHattyudt.Tables(RS).Rows(i)("品名") & vbLf & dsHattyudt.Tables(RS).Rows(i)("型式")
-                cell = "L" & currentCnt
-                sheet.Range(cell).Value = dsHattyudt.Tables(RS).Rows(i)("発注数量") & " " & dsHattyudt.Tables(RS).Rows(i)("単位")
+            For i As Integer = 0 To DgvItemList.RowCount - 1
+                sheet.Range("A" & currentCnt).Value = num
+                sheet.Range("C" & currentCnt).Value = DgvItemList.Rows(i).Cells("メーカー").Value & vbLf & DgvItemList.Rows(i).Cells("品名").Value & vbLf & DgvItemList.Rows(i).Cells("型式").Value
+                sheet.Range("L" & currentCnt).Value = DgvItemList.Rows(i).Cells("数量").Value & " " & DgvItemList.Rows(i).Cells("単位").Value
 
-                Dim dsHanyo = getDsHanyoData(CommonConst.FIXED_KEY_TRADE_TERMS, dsHattyudt.Tables(RS).Rows(i)("貿易条件").ToString)
+                Dim dsHanyo = getDsHanyoData(CommonConst.FIXED_KEY_TRADE_TERMS, DgvItemList.Rows(i).Cells("貿易条件").Value)
 
-                cell = "O" & currentCnt
-                If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-                    sheet.Range(cell).Value = dsHanyo.Tables(RS).Rows(0)("文字２")
-                Else
-                    sheet.Range(cell).Value = dsHanyo.Tables(RS).Rows(0)("文字１")
-                End If
+                sheet.Range("O" & currentCnt).Value = DgvItemList.Rows(i).Cells("貿易条件").Value
+                sheet.Range("R" & currentCnt).Value = DgvItemList.Rows(i).Cells("仕入単価_外貨").Value.ToString
+                sheet.Range("W" & currentCnt).Value = DgvItemList.Rows(i).Cells("仕入金額_外貨").Value.ToString
 
-                cell = "R" & currentCnt
-                sheet.Range(cell).Value = dsHattyudt.Tables(RS).Rows(i)("仕入単価_外貨")
-                cell = "W" & currentCnt
-                sheet.Range(cell).Value = dsHattyudt.Tables(RS).Rows(i)("仕入単価_外貨") * dsHattyudt.Tables(RS).Rows(i)("発注数量")
-
-                totalPrice = totalPrice + dsHattyudt.Tables(RS).Rows(i)("仕入金額")
+                totalPrice = totalPrice + DgvItemList.Rows(i).Cells("仕入金額_外貨").Value
 
                 currentCnt = currentCnt + 1
                 num = num + 1
             Next
+
+            'For i As Integer = 0 To dsHattyudt.Tables(RS).Rows.Count - 1
+            '    Dim cell As String
+
+            '    cell = "A" & currentCnt
+            '    sheet.Range(cell).Value = num
+            '    cell = "C" & currentCnt
+            '    sheet.Range(cell).Value = dsHattyudt.Tables(RS).Rows(i)("メーカー") & vbLf & dsHattyudt.Tables(RS).Rows(i)("品名") & vbLf & dsHattyudt.Tables(RS).Rows(i)("型式")
+            '    cell = "L" & currentCnt
+            '    sheet.Range(cell).Value = dsHattyudt.Tables(RS).Rows(i)("発注数量") & " " & dsHattyudt.Tables(RS).Rows(i)("単位")
+
+            '    Dim dsHanyo = getDsHanyoData(CommonConst.FIXED_KEY_TRADE_TERMS, dsHattyudt.Tables(RS).Rows(i)("貿易条件").ToString)
+
+            '    cell = "O" & currentCnt
+            '    If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+            '        sheet.Range(cell).Value = dsHanyo.Tables(RS).Rows(0)("文字２")
+            '    Else
+            '        sheet.Range(cell).Value = dsHanyo.Tables(RS).Rows(0)("文字１")
+            '    End If
+
+            '    cell = "R" & currentCnt
+            '    sheet.Range(cell).Value = dsHattyudt.Tables(RS).Rows(i)("仕入単価_外貨")
+            '    cell = "W" & currentCnt
+            '    sheet.Range(cell).Value = dsHattyudt.Tables(RS).Rows(i)("仕入単価_外貨") * dsHattyudt.Tables(RS).Rows(i)("発注数量")
+
+            '    totalPrice = totalPrice + dsHattyudt.Tables(RS).Rows(i)("仕入金額")
+
+            '    currentCnt = currentCnt + 1
+            '    num = num + 1
+
+            'Next
 
             sheet.Range("W" & lstRow + 1).Value = totalPrice 'Subtotal
             sheet.Range("W" & lstRow + 2).Value = IIf(supplierData.Tables(RS).Rows(0)("国内区分") = CommonConst.DD_KBN_OVERSEAS,
