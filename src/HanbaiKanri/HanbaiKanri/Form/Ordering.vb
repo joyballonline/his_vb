@@ -1550,6 +1550,8 @@ Public Class Ordering
             'sheet.Range("A34").Value = dsHattyuhd.Tables(RS).Rows(0)("営業担当者")
             'sheet.Range("A35").Value = dsHattyuhd.Tables(RS).Rows(0)("入力担当者")
             sheet.Range("R30").Value = dsHattyuhd.Tables(RS).Rows(0)("仕入先名")
+            sheet.Range("R18").Value = "(" & getCurrency(dsHattyudt.Tables(RS).Rows(0)("仕入通貨")) & ")"
+
 
             Dim rowCnt As Integer = 0
             Dim lstRow As Integer = 21
@@ -1599,7 +1601,7 @@ Public Class Ordering
                 End If
 
                 cell = "R" & currentCnt
-                sheet.Range(cell).Value = dsHattyudt.Tables(RS).Rows(i)("仕入値")
+                sheet.Range(cell).Value = dsHattyudt.Tables(RS).Rows(i)("仕入単価_外貨")
                 cell = "W" & currentCnt
                 sheet.Range(cell).Value = dsHattyudt.Tables(RS).Rows(i)("仕入金額")
 
@@ -2011,4 +2013,16 @@ Public Class Ordering
         Next
 
     End Sub
+
+    Private Function getCurrency(ByVal prmVal As Integer) As String
+        Dim Sql As String = " AND 取消区分 = '" & CommonConst.FLAG_ENABLED & "'"
+        Sql += " AND 採番キー =" & prmVal.ToString
+
+        Dim ds As DataSet = getDsData("m25_currency", Sql)
+
+        'リードタイム単位の多言語対応
+
+        Return ds.Tables(RS).Rows(0)("通貨コード")
+
+    End Function
 End Class
