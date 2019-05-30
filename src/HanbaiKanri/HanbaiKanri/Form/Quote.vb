@@ -914,13 +914,13 @@ Public Class Quote
                         'If DgvItemList.Rows(e.RowIndex).Cells("関税額").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value IsNot Nothing Then
                         '仕入原価 <> Nothing
                         If DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value IsNot Nothing Then
-                                DgvItemList.Rows(e.RowIndex).Cells("仕入金額").Value = DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value + (DgvItemList.Rows(e.RowIndex).Cells("関税額").Value + DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value + DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value) * DgvItemList.Rows(e.RowIndex).Cells("数量").Value
-                            End If
-                            '売単価 <> Nothing
-                            If DgvItemList.Rows(e.RowIndex).Cells("売単価").Value IsNot Nothing Then
+                            DgvItemList.Rows(e.RowIndex).Cells("仕入金額").Value = DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value + (DgvItemList.Rows(e.RowIndex).Cells("関税額").Value + DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value + DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value) * DgvItemList.Rows(e.RowIndex).Cells("数量").Value
+                        End If
+                        '売単価 <> Nothing
+                        If DgvItemList.Rows(e.RowIndex).Cells("売単価").Value IsNot Nothing Then
                             DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value = Math.Ceiling(Decimal.Parse(DgvItemList.Rows(e.RowIndex).Cells("売単価").Value + DgvItemList.Rows(e.RowIndex).Cells("関税額").Value + DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value + DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value))
                             DgvItemList.Rows(e.RowIndex).Cells("見積単価_外貨").Value = Math.Ceiling(DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value * TxtRate.Text)
-                            End If
+                        End If
                         'End If
 
                     End If
@@ -1348,6 +1348,48 @@ Public Class Quote
 
     End Sub
 
+    Private Sub noReset()
+        Dim index As Integer = DgvItemList.Rows.Count()
+        Dim No As Integer = 1
+        For c As Integer = 0 To index - 1
+            DgvItemList.Rows(c).Cells("No").Value = No
+            No += 1
+        Next c
+
+    End Sub
+
+    '行移動実行
+    Private Sub setRowClone(ByVal rowIndex As Integer, ByVal status As String)
+        'DgvItemList.CurrentCell = DgvItemList(DgvItemList.CurrentCell.ColumnIndex, DgvItemList.CurrentCell.RowIndex)
+        Dim nextRowIndex As Integer
+        Dim delRowIndex As Integer
+        If status = "UP" Then
+            nextRowIndex = rowIndex - 1
+            delRowIndex = rowIndex + 1
+        Else
+            nextRowIndex = rowIndex + 2
+            delRowIndex = rowIndex
+        End If
+
+        Dim rowClone As DataGridViewRow = DgvItemList.Rows(rowIndex).Clone
+
+        'columnの数分valueを複写
+        For i As Integer = 0 To DgvItemList.ColumnCount - 1
+            rowClone.Cells(i).Value = DgvItemList.Rows(rowIndex).Cells(i).Value
+        Next
+
+        '2行上に新規行作成及びclone内容を反映
+        DgvItemList.Rows.Insert(nextRowIndex, rowClone)
+        'カレントだった行を削除
+        DgvItemList.Rows.RemoveAt(delRowIndex)
+
+        '行番号の振り直し
+        noReset()
+
+        DgvItemList.CurrentCell = DgvItemList(DgvItemList.CurrentCell.ColumnIndex, rowIndex)
+    End Sub
+
+    '行移動↑
     Private Sub BtnUp_Click(sender As Object, e As EventArgs) Handles BtnUp.Click
         'グリッドに何もないときは処理しない
         If DgvItemList.CurrentCell Is Nothing Then
@@ -1355,18 +1397,19 @@ Public Class Quote
         End If
 
         If DgvItemList.CurrentCell.RowIndex > 0 Then
-            DgvItemList.CurrentCell = DgvItemList(DgvItemList.CurrentCell.ColumnIndex, DgvItemList.CurrentCell.RowIndex - 1)
+            setRowClone(DgvItemList.CurrentCell.RowIndex, "UP")
         End If
     End Sub
 
+    '行移動↓
     Private Sub BtnDown_Click(sender As Object, e As EventArgs) Handles BtnDown.Click
         'グリッドに何もないときは処理しない
         If DgvItemList.CurrentCell Is Nothing Then
             Exit Sub
         End If
 
-        If DgvItemList.CurrentCell.RowIndex + 1 < DgvItemList.Rows.Count Then
-            DgvItemList.CurrentCell = DgvItemList(DgvItemList.CurrentCell.ColumnIndex, DgvItemList.CurrentCell.RowIndex + 1)
+        If DgvItemList.CurrentCell.RowIndex < DgvItemList.Rows.Count - 1 Then
+            setRowClone(DgvItemList.CurrentCell.RowIndex, "DOWN")
         End If
     End Sub
 
