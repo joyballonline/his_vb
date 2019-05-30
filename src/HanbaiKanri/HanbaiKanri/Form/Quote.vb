@@ -1590,8 +1590,7 @@ Public Class Quote
                         Sql2 += ",仕入単価 = 0"
                     End If
 
-                    Sql2 += ",仕入通貨 = '" & RevoveChars(DgvItemList.Rows(index).Cells("仕入通貨").Value.ToString) & "' "
-                    If DgvItemList.Rows(index).Cells("仕入通貨").Value IsNot Nothing And Not IsNumeric(DgvItemList.Rows(index).Cells("リードタイム単位").Value) Then
+                    If DgvItemList.Rows(index).Cells("仕入通貨").Value IsNot Nothing And Not IsNumeric(DgvItemList.Rows(index).Cells("仕入通貨").Value) Then
                         Sql2 += ",仕入通貨 = " & DgvItemList.Rows(index).Cells("仕入通貨").Value.ToString
                     Else
                         Sql2 += ",仕入通貨 = 1"
@@ -1602,7 +1601,7 @@ Public Class Quote
                         Sql2 += ",仕入単価_外貨 = 0"
                     End If
                     If DgvItemList.Rows(index).Cells("仕入レート").Value IsNot Nothing Then
-                        Sql2 += ",仕入レート = " & UtilClass.formatNumberF10(DgvItemList.Rows(index).Cells("仕入単価_外貨").Tag.ToString)
+                        Sql2 += ",仕入レート = " & UtilClass.formatNumberF10(DgvItemList.Rows(index).Cells("仕入単価_外貨").Value.ToString)
                     Else
                         Sql2 += ",仕入レート = 0"
                     End If
