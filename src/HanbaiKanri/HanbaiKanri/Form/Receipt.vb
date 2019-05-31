@@ -495,8 +495,9 @@ Public Class Receipt
             TxtSupplierName.Text = dsHattyu.Tables(RS).Rows(0)("仕入先名")
             DtpReceiptDate.Value = Date.Now
 
-            '入庫日の選択最小日を発注日にする
-            DtpReceiptDate.MinDate = dsHattyu.Tables(RS).Rows(0)("発注日").ToShortDateString()
+            '#633 のためコメントアウト
+            ''入庫日の選択最小日を発注日にする
+            'DtpReceiptDate.MinDate = dsHattyu.Tables(RS).Rows(0)("発注日").ToShortDateString()
 
         Catch ue As UsrDefException
             ue.dspMsg()

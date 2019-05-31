@@ -430,9 +430,10 @@ Public Class OrderManagement
             TxtCustomerCode.Text = ds1.Tables(RS).Rows(0)("得意先コード")
             TxtCustomerName.Text = ds1.Tables(RS).Rows(0)("得意先名")
 
-            '売上日、入金予定日のMinDateを受注日に設定
-            DtpOrderDate.MinDate = ds1.Tables(RS).Rows(0)("受注日").ToShortDateString()
-            DtpDepositDate.MinDate = ds1.Tables(RS).Rows(0)("受注日").ToShortDateString()
+            '#633 のためコメントアウト
+            ''売上日、入金予定日のMinDateを受注日に設定
+            'DtpOrderDate.MinDate = ds1.Tables(RS).Rows(0)("受注日").ToShortDateString()
+            'DtpDepositDate.MinDate = ds1.Tables(RS).Rows(0)("受注日").ToShortDateString()
 
             If _status = CommonConst.STATUS_VIEW Then
                 DtpOrderDate.Value = ds4.Tables(RS).Rows(0)("売上日")

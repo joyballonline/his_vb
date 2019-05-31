@@ -419,9 +419,10 @@ Public Class PurchasingManagement
             TxtSupplierName.Text = dsHattyuHd.Tables(RS).Rows(0)("仕入先名")
             TxtCustomerPO.Text = dsHattyuHd.Tables(RS).Rows(0)("客先番号").ToString
 
-            '売上日、入金予定日のMinDateを受注日に設定
-            DtpPurchaseDate.MinDate = dsHattyuHd.Tables(RS).Rows(0)("発注日").ToShortDateString()
-            DtpPaymentDate.MinDate = dsHattyuHd.Tables(RS).Rows(0)("発注日").ToShortDateString()
+            '#633 のためコメントアウト
+            ''売上日、入金予定日のMinDateを受注日に設定
+            'DtpPurchaseDate.MinDate = dsHattyuHd.Tables(RS).Rows(0)("発注日").ToShortDateString()
+            'DtpPaymentDate.MinDate = dsHattyuHd.Tables(RS).Rows(0)("発注日").ToShortDateString()
 
         Catch ue As UsrDefException
             ue.dspMsg()

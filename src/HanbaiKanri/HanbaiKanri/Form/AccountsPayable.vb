@@ -280,8 +280,9 @@ Public Class AccountsPayable
         DgvCymn.Rows(0).Cells("買掛金額計").Value = AccountsPayable
         DgvCymn.Rows(0).Cells("買掛残高").Value = dsHattyu.Tables(RS).Rows(0)("仕入金額") - AccountsPayable
 
-        DtpAPDate.MinDate = dsHattyu.Tables(RS).Rows(0)("発注日").ToShortDateString()
-        DtpPaymentDate.MinDate = dsHattyu.Tables(RS).Rows(0)("発注日").ToShortDateString()
+        '#633 のためコメントアウト
+        'DtpAPDate.MinDate = dsHattyu.Tables(RS).Rows(0)("発注日").ToShortDateString()
+        'DtpPaymentDate.MinDate = dsHattyu.Tables(RS).Rows(0)("発注日").ToShortDateString()
 
         checkAdd = DgvCymn.Rows(0).Cells("買掛残高").Value
 

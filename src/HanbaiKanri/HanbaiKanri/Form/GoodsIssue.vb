@@ -405,7 +405,8 @@ Public Class GoodsIssue
                 TxtCustomerCode.Text = dsCymnhd.Tables(RS).Rows(0)("得意先コード")
                 TxtCustomerName.Text = dsCymnhd.Tables(RS).Rows(0)("得意先名")
                 DtpGoodsIssueDate.Value = Date.Now '出庫日
-                DtpGoodsIssueDate.MinDate = dsCymnhd.Tables(RS).Rows(0)("受注日") '出庫日のMinDateに受注日を設定する
+                '#633 のためコメントアウト
+                'DtpGoodsIssueDate.MinDate = dsCymnhd.Tables(RS).Rows(0)("受注日") '出庫日のMinDateに受注日を設定する
             End If
 
         Catch ue As UsrDefException
