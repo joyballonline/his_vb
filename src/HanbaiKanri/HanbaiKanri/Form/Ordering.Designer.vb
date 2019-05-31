@@ -355,8 +355,7 @@ Partial Class Ordering
         'DgvItemList
         '
         Me.DgvItemList.AllowUserToAddRows = False
-        Me.DgvItemList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
-        Me.DgvItemList.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
+        Me.DgvItemList.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells
         Me.DgvItemList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvItemList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.No, Me.仕入区分, Me.メーカー, Me.品名, Me.型式, Me.数量, Me.単位, Me.仕入先, Me.仕入単価, Me.仕入単価_外貨, Me.仕入原価, Me.間接費, Me.関税率, Me.関税額, Me.前払法人税率, Me.前払法人税額, Me.輸送費率, Me.輸送費額, Me.仕入金額, Me.仕入金額_外貨, Me.リードタイム, Me.入庫数, Me.未入庫数, Me.備考})
         Me.DgvItemList.Location = New System.Drawing.Point(11, 274)
@@ -372,7 +371,7 @@ Partial Class Ordering
         '
         Me.No.HeaderText = "No"
         Me.No.Name = "No"
-        Me.No.Width = 44
+        Me.No.Width = 70
         '
         '仕入区分
         '
@@ -389,7 +388,7 @@ Partial Class Ordering
         Me.メーカー.HeaderText = "メーカー"
         Me.メーカー.MaxInputLength = 50
         Me.メーカー.Name = "メーカー"
-        Me.メーカー.Width = 53
+        Me.メーカー.Width = 70
         '
         '品名
         '
@@ -398,7 +397,7 @@ Partial Class Ordering
         Me.品名.HeaderText = "品名"
         Me.品名.MaxInputLength = 50
         Me.品名.Name = "品名"
-        Me.品名.Width = 51
+        Me.品名.Width = 69
         '
         '型式
         '
@@ -407,21 +406,21 @@ Partial Class Ordering
         Me.型式.HeaderText = "型式"
         Me.型式.MaxInputLength = 255
         Me.型式.Name = "型式"
-        Me.型式.Width = 51
+        Me.型式.Width = 70
         '
         '数量
         '
         Me.数量.HeaderText = "数量"
         Me.数量.MaxInputLength = 8
         Me.数量.Name = "数量"
-        Me.数量.Width = 51
+        Me.数量.Width = 70
         '
         '単位
         '
         Me.単位.HeaderText = "単位"
         Me.単位.MaxInputLength = 10
         Me.単位.Name = "単位"
-        Me.単位.Width = 51
+        Me.単位.Width = 70
         '
         '仕入先
         '
@@ -438,14 +437,14 @@ Partial Class Ordering
         Me.仕入単価.HeaderText = "仕入単価"
         Me.仕入単価.MaxInputLength = 15
         Me.仕入単価.Name = "仕入単価"
-        Me.仕入単価.Width = 61
+        Me.仕入単価.Width = 70
         '
         '仕入単価_外貨
         '
         Me.仕入単価_外貨.HeaderText = "仕入単価（外貨）"
         Me.仕入単価_外貨.MaxInputLength = 15
         Me.仕入単価_外貨.Name = "仕入単価_外貨"
-        Me.仕入単価_外貨.Width = 78
+        Me.仕入単価_外貨.Width = 69
         '
         '仕入原価
         '
@@ -455,7 +454,7 @@ Partial Class Ordering
         Me.仕入原価.HeaderText = "仕入原価"
         Me.仕入原価.Name = "仕入原価"
         Me.仕入原価.ReadOnly = True
-        Me.仕入原価.Width = 61
+        Me.仕入原価.Width = 70
         '
         '間接費
         '
@@ -474,7 +473,7 @@ Partial Class Ordering
         Me.関税率.DefaultCellStyle = DataGridViewCellStyle7
         Me.関税率.HeaderText = "関税率"
         Me.関税率.Name = "関税率"
-        Me.関税率.Width = 61
+        Me.関税率.Width = 70
         '
         '関税額
         '
@@ -484,7 +483,7 @@ Partial Class Ordering
         Me.関税額.HeaderText = "関税額"
         Me.関税額.Name = "関税額"
         Me.関税額.ReadOnly = True
-        Me.関税額.Width = 61
+        Me.関税額.Width = 70
         '
         '前払法人税率
         '
@@ -492,7 +491,7 @@ Partial Class Ordering
         Me.前払法人税率.DefaultCellStyle = DataGridViewCellStyle9
         Me.前払法人税率.HeaderText = "前払法人税率"
         Me.前払法人税率.Name = "前払法人税率"
-        Me.前払法人税率.Width = 72
+        Me.前払法人税率.Width = 69
         '
         '前払法人税額
         '
@@ -502,7 +501,7 @@ Partial Class Ordering
         Me.前払法人税額.HeaderText = "前払法人税額"
         Me.前払法人税額.Name = "前払法人税額"
         Me.前払法人税額.ReadOnly = True
-        Me.前払法人税額.Width = 72
+        Me.前払法人税額.Width = 70
         '
         '輸送費率
         '
@@ -510,7 +509,7 @@ Partial Class Ordering
         Me.輸送費率.DefaultCellStyle = DataGridViewCellStyle11
         Me.輸送費率.HeaderText = "輸送費率"
         Me.輸送費率.Name = "輸送費率"
-        Me.輸送費率.Width = 61
+        Me.輸送費率.Width = 70
         '
         '輸送費額
         '
@@ -520,7 +519,7 @@ Partial Class Ordering
         Me.輸送費額.HeaderText = "輸送費額"
         Me.輸送費額.Name = "輸送費額"
         Me.輸送費額.ReadOnly = True
-        Me.輸送費額.Width = 61
+        Me.輸送費額.Width = 70
         '
         '仕入金額
         '
@@ -531,7 +530,7 @@ Partial Class Ordering
         Me.仕入金額.MaxInputLength = 15
         Me.仕入金額.Name = "仕入金額"
         Me.仕入金額.ReadOnly = True
-        Me.仕入金額.Width = 61
+        Me.仕入金額.Width = 70
         '
         '仕入金額_外貨
         '
@@ -542,14 +541,14 @@ Partial Class Ordering
         Me.仕入金額_外貨.MaxInputLength = 15
         Me.仕入金額_外貨.Name = "仕入金額_外貨"
         Me.仕入金額_外貨.ReadOnly = True
-        Me.仕入金額_外貨.Width = 78
+        Me.仕入金額_外貨.Width = 69
         '
         'リードタイム
         '
         Me.リードタイム.HeaderText = "リードタイム"
         Me.リードタイム.MaxInputLength = 20
         Me.リードタイム.Name = "リードタイム"
-        Me.リードタイム.Width = 60
+        Me.リードタイム.Width = 70
         '
         '入庫数
         '
@@ -572,7 +571,7 @@ Partial Class Ordering
         Me.備考.HeaderText = "備考"
         Me.備考.MaxInputLength = 255
         Me.備考.Name = "備考"
-        Me.備考.Width = 51
+        Me.備考.Width = 70
         '
         'LblPurchaseRemarks
         '

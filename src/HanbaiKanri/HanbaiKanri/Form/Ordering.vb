@@ -449,7 +449,9 @@ Public Class Ordering
             TxtSupplierCode.Text = dsHattyu.Tables(RS).Rows(0)("仕入先コード")
         End If
         If dsHattyu.Tables(RS).Rows(0)("仕入先名") IsNot DBNull.Value Then
+            delSupplierNameChanged() '仕入先名変更イベントを無効化
             TxtSupplierName.Text = dsHattyu.Tables(RS).Rows(0)("仕入先名")
+            setSupplierNameChanged() '仕入先名変更イベントを有効化
         End If
         If dsHattyu.Tables(RS).Rows(0)("仕入先担当者名") IsNot DBNull.Value Then
             TxtPerson.Text = dsHattyu.Tables(RS).Rows(0)("仕入先担当者名")
@@ -540,7 +542,6 @@ Public Class Ordering
         setBaseCurrency()
         setChangeCurrency()
 
-
         For i As Integer = 0 To dsHattyudt.Tables(RS).Rows.Count - 1
             DgvItemList.Rows.Add()
             DgvItemList.Rows(i).Cells("仕入区分").Value = Integer.Parse(dsHattyudt.Tables(RS).Rows(i)("仕入区分"))
@@ -551,9 +552,20 @@ Public Class Ordering
             DgvItemList.Rows(i).Cells("単位").Value = dsHattyudt.Tables(RS).Rows(i)("単位")
             DgvItemList.Rows(i).Cells("仕入単価").Value = dsHattyudt.Tables(RS).Rows(i)("仕入値")
             DgvItemList.Rows(i).Cells("仕入単価_外貨").Value = dsHattyudt.Tables(RS).Rows(i)("仕入単価_外貨")
+
+
+
+            DgvItemList.Rows(i).Cells("関税率").Value = dsHattyudt.Tables(RS).Rows(i)("関税率")
+            DgvItemList.Rows(i).Cells("関税額").Value = dsHattyudt.Tables(RS).Rows(i)("関税額")
+            DgvItemList.Rows(i).Cells("前払法人税率").Value = dsHattyudt.Tables(RS).Rows(i)("前払法人税率")
+            DgvItemList.Rows(i).Cells("前払法人税額").Value = dsHattyudt.Tables(RS).Rows(i)("前払法人税額")
+            DgvItemList.Rows(i).Cells("仕入単価_外貨").Value = dsHattyudt.Tables(RS).Rows(i)("仕入単価_外貨")
+            DgvItemList.Rows(i).Cells("仕入単価_外貨").Value = dsHattyudt.Tables(RS).Rows(i)("仕入単価_外貨")
+            DgvItemList.Rows(i).Cells("輸送費率").Value = dsHattyudt.Tables(RS).Rows(i)("輸送費率")
+            DgvItemList.Rows(i).Cells("輸送費額").Value = dsHattyudt.Tables(RS).Rows(i)("輸送費額")
+
+
             DgvItemList.Rows(i).Cells("間接費").Value = dsHattyudt.Tables(RS).Rows(i)("間接費")
-            DgvItemList.Rows(i).Cells("仕入金額").Value = dsHattyudt.Tables(RS).Rows(i)("仕入金額")
-            DgvItemList.Rows(i).Cells("リードタイム").Value = dsHattyudt.Tables(RS).Rows(i)("リードタイム")
 
             If dsHattyudt.Tables(RS).Rows(i)("リードタイム単位") IsNot DBNull.Value Then
                 DgvItemList.Rows(i).Cells("リードタイム単位").Value = Integer.Parse(dsHattyudt.Tables(RS).Rows(i)("リードタイム単位"))
@@ -566,7 +578,7 @@ Public Class Ordering
             DgvItemList.Rows(i).Cells("備考").Value = dsHattyudt.Tables(RS).Rows(i)("備考")
             DgvItemList.Rows(i).Cells("入庫数").Value = dsHattyudt.Tables(RS).Rows(i)("入庫数")
             DgvItemList.Rows(i).Cells("未入庫数").Value = dsHattyudt.Tables(RS).Rows(i)("未入庫数")
-            setSireTax(i)
+
         Next
 
         '行番号の振り直し
@@ -669,6 +681,8 @@ Public Class Ordering
 
         End If
 
+
+
     End Sub
     '前の画面に戻る
     Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
@@ -769,7 +783,7 @@ Public Class Ordering
             '--------------------------
             If DgvItemList.Rows(e.RowIndex).Cells("仕入単価").Value IsNot Nothing Then
 
-                ''数量 <> Nothing
+                '数量 <> Nothing
                 If DgvItemList.Rows(e.RowIndex).Cells("数量").Value IsNot Nothing Then
                     DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value = DgvItemList.Rows(e.RowIndex).Cells("仕入単価").Value * DgvItemList.Rows(e.RowIndex).Cells("数量").Value
                 End If
@@ -1307,7 +1321,8 @@ Public Class Ordering
                     Sql += "t21_hattyu("
                     Sql += "会社コード, 発注番号, 発注番号枝番, 行番号, 仕入区分, 仕入先名, メーカー, 品名, 型式, 単位, 仕入値"
                     Sql += ", 発注数量, 仕入数量, 発注残数, 間接費, 仕入金額, リードタイム, リードタイム単位, 入庫数"
-                    Sql += ", 未入庫数, 備考, 更新者, 登録日, 更新日, 仕入単価_外貨, 仕入通貨, 仕入レート"
+                    Sql += ", 未入庫数, 備考, 更新者, 登録日, 更新日, 仕入単価_外貨, 仕入通貨, 仕入レート, 関税率, 関税額"
+                    Sql += ", 前払法人税率, 前払法人税額, 輸送費率, 輸送費額"
                     If PurchaseStatus <> CommonConst.STATUS_ADD And dsHattyuHd.Tables(RS).Rows.Count > 0 Then
                         If dsHattyuHd.Tables(RS).Rows(0)("見積番号") <> "" Then
 
@@ -1381,6 +1396,18 @@ Public Class Ordering
                     Sql += CmCurrency.SelectedValue.ToString '仕入通貨
                     Sql += "', '"
                     Sql += UtilClass.formatNumberF10(TxtRate.Text) '仕入レート
+                    Sql += "', '"
+                    Sql += UtilClass.formatNumber(DgvItemList.Rows(i).Cells("関税率").Value) '関税率
+                    Sql += "', '"
+                    Sql += UtilClass.formatNumber(DgvItemList.Rows(i).Cells("関税額").Value) '関税額
+                    Sql += "', '"
+                    Sql += UtilClass.formatNumber(DgvItemList.Rows(i).Cells("前払法人税率").Value) '前払法人税率
+                    Sql += "', '"
+                    Sql += UtilClass.formatNumber(DgvItemList.Rows(i).Cells("前払法人税額").Value) '前払法人税額
+                    Sql += "', '"
+                    Sql += UtilClass.formatNumber(DgvItemList.Rows(i).Cells("輸送費率").Value) '輸送費率
+                    Sql += "', '"
+                    Sql += UtilClass.formatNumber(DgvItemList.Rows(i).Cells("輸送費額").Value) '輸送費額
 
                     If PurchaseStatus <> CommonConst.STATUS_ADD And dsHattyuHd.Tables(RS).Rows.Count > 0 Then
                         If dsHattyuHd.Tables(RS).Rows(0)("見積番号") <> "" Then
@@ -2019,6 +2046,16 @@ Public Class Ordering
         End If
 
     End Sub
+
+    Private Sub setSupplierNameChanged()
+
+        AddHandler TxtSupplierName.TextChanged, AddressOf TxtSupplierName_TextChanged
+    End Sub
+    Private Sub delSupplierNameChanged()
+
+        RemoveHandler TxtSupplierName.TextChanged, AddressOf TxtSupplierName_TextChanged
+    End Sub
+
 
     Private Sub TxtSupplierName_TextChanged(sender As Object, e As EventArgs) Handles TxtSupplierName.TextChanged
         Dim Sql As String = ""
