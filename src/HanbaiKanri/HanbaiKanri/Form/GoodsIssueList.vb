@@ -670,6 +670,13 @@ Public Class GoodsIssueList
         Dim Suffix As String = DgvCymnhd.Rows(RowIdx).Cells("受注番号枝番").Value
         Dim Status As String = CommonConst.STATUS_VIEW
 
+        Dim denpyoNo As String = "00000000000000"
+        Dim denpyoEda As String = "00"
+
+        If No = denpyoNo And Suffix = denpyoEda Then
+            No = DgvCymnhd.Rows(RowIdx).Cells("出庫番号").Value
+        End If
+
         Dim openForm As Form = Nothing
         openForm = New GoodsIssue(_msgHd, _db, _langHd, No, Suffix, Status)   '処理選択
         openForm.Show(Me)

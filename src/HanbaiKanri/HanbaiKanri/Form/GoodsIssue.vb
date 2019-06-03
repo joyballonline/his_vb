@@ -180,10 +180,10 @@ Public Class GoodsIssue
             Sql += " order by 会社コード, 受注番号, 受注番号枝番 "
 
             Dim dsCymnhd As DataSet = getDsData("t10_cymnhd", Sql)
-            If dsCymnhd.Tables(RS).Rows.Count = 0 Then
-                '受注が取り消されているものであることをアラートし、以降の処理を中止する
-                _msgHd.dspMSG("giOrderError", frmC01F10_Login.loginValue.Language)
-            End If
+            'If dsCymnhd.Tables(RS).Rows.Count = 0 Then
+            '    '受注が取り消されているものであることをアラートし、以降の処理を中止する
+            '    _msgHd.dspMSG("giOrderError", frmC01F10_Login.loginValue.Language)
+            'End If
 
             Sql = "SELECT t45.*, t44.出庫日, t44.取消区分, t70.入出庫種別, t70.引当区分"
             Sql += " FROM  public.t45_shukodt t45 "
@@ -199,16 +199,28 @@ Public Class GoodsIssue
             Sql += " AND  t70.伝票番号 = t44.出庫番号"
             Sql += " AND  t70.行番号 = t45.行番号"
 
-            Sql += " WHERE t45.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Sql += " AND "
-            Sql += "t45.受注番号 ILIKE '" & No & "'"
-            Sql += " AND "
-            Sql += "t45.受注番号枝番 ILIKE '" & Suffix & "'"
-            Sql += " AND "
-            Sql += "t44.取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'"
-            Sql += " AND "
-            Sql += " t45.出庫区分 <> '" & CommonConst.SHUKO_KBN_TMP & "' " '仮出庫のものは省く
-            Sql += " ORDER BY t45.行番号"
+            If dsCymnhd.Tables(RS).Rows.Count > 0 Then
+                Sql += " WHERE t45.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                Sql += " AND "
+                Sql += "t45.受注番号 ILIKE '" & No & "'"
+                Sql += " AND "
+                Sql += "t45.受注番号枝番 ILIKE '" & Suffix & "'"
+                Sql += " AND "
+                Sql += "t44.取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'"
+                Sql += " AND "
+                Sql += " t45.出庫区分 <> '" & CommonConst.SHUKO_KBN_TMP & "' " '仮出庫のものは省く
+                Sql += " ORDER BY t45.行番号"
+            Else
+                Sql += " WHERE t45.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                Sql += " AND "
+                Sql += "t45.出庫番号 ILIKE '" & No & "'"
+                Sql += " AND "
+                Sql += "t44.取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'"
+                Sql += " AND "
+                Sql += " t45.出庫区分 <> '" & CommonConst.SHUKO_KBN_TMP & "' " '仮出庫のものは省く
+                Sql += " ORDER BY t45.行番号"
+
+            End If
 
             Dim dsShukodt As DataSet = _db.selectDB(Sql, RS, reccnt)
 
@@ -284,6 +296,11 @@ Public Class GoodsIssue
                 DgvHistory.Rows(i).Cells("出庫日").Value = dsShukodt.Tables(RS).Rows(i)("出庫日").ToShortDateString
                 DgvHistory.Rows(i).Cells("備考").Value = dsShukodt.Tables(RS).Rows(i)("備考")
             Next
+
+            Sql = " AND 出庫番号 = '" & No & "'"
+            '出庫基本取得
+            Dim dsShukohd As DataSet = getDsData("t44_shukohd", Sql)
+
 
             '倉庫マスタを取得、コンボボックスを作成
             Sql = " AND "
@@ -363,7 +380,14 @@ Public Class GoodsIssue
                     DgvAdd.Rows(i).Cells("単位").Value = dsCymndt.Tables(RS).Rows(i)("単位")
                     DgvAdd.Rows(i).Cells("売単価").Value = dsCymndt.Tables(RS).Rows(i)("見積単価")
                     DgvAdd.Rows(i).Cells("出庫数量").Value = 0
-                    DgvAdd.Rows(i).Cells("倉庫").Value = dsWarehouse.Tables(RS).Rows(0)("倉庫コード")
+
+                    If dsCymnhd.Tables(RS).Rows.Count > 0 Then
+                        DgvAdd.Rows(i).Cells("倉庫").Value = dsWarehouse.Tables(RS).Rows(0)("倉庫コード")
+                    Else
+                        DgvAdd.Rows(i).Cells("倉庫").Value = dsShukohd.Tables(RS).Rows(0)("倉庫コード")
+                    End If
+
+                    'DgvAdd.Rows(i).Cells("倉庫").Value = dsWarehouse.Tables(RS).Rows(0)("倉庫コード")
                     DgvAdd.Rows(i).Cells("入出庫種別").Value = dsHanyo.Tables(RS).Rows(0)("可変キー")
                     DgvAdd.Rows(i).Cells("引当区分").Value = CommonConst.AC_KBN_NORMAL
                     DgvAdd.Rows(i).Cells("備考").Value = dsCymndt.Tables(RS).Rows(i)("備考")
@@ -396,7 +420,6 @@ Public Class GoodsIssue
             Next i
             TxtCount3.Text = DgvAdd.Rows.Count()
 
-
             If dsCymnhd.Tables(RS).Rows.Count > 0 Then
                 TxtOrderNo.Text = dsCymnhd.Tables(RS).Rows(0)("受注番号")
                 TxtSuffixNo.Text = dsCymnhd.Tables(RS).Rows(0)("受注番号枝番")
@@ -407,6 +430,14 @@ Public Class GoodsIssue
                 DtpGoodsIssueDate.Value = Date.Now '出庫日
                 '#633 のためコメントアウト
                 'DtpGoodsIssueDate.MinDate = dsCymnhd.Tables(RS).Rows(0)("受注日") '出庫日のMinDateに受注日を設定する
+            Else
+                TxtOrderNo.Text = dsShukohd.Tables(RS).Rows(0)("受注番号").ToString
+                TxtSuffixNo.Text = dsShukohd.Tables(RS).Rows(0)("受注番号枝番").ToString
+                TxtCustomerPO.Text = dsShukohd.Tables(RS).Rows(0)("客先番号").ToString
+                TxtOrderDate.Text = ""
+                TxtCustomerCode.Text = dsShukohd.Tables(RS).Rows(0)("得意先コード").ToString
+                TxtCustomerName.Text = dsShukohd.Tables(RS).Rows(0)("得意先名").ToString
+                DtpGoodsIssueDate.Value = dsShukohd.Tables(RS).Rows(0)("出庫日") '出庫日
             End If
 
         Catch ue As UsrDefException
