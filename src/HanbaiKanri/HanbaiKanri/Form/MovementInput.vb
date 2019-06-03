@@ -237,7 +237,7 @@ Public Class MovementInput
                             Sql += "t45_shukodt("
                             Sql += "会社コード, 出庫番号, 受注番号, 受注番号枝番, 行番号"
                             Sql += ",仕入区分 , メーカー, 品名, 型式, 売単価, 出庫数量"
-                            Sql += ", 更新者, 更新日, 倉庫コード)"
+                            Sql += ", 更新者, 更新日, 倉庫コード, 出庫区分)"
                             Sql += " VALUES('"
                             Sql += frmC01F10_Login.loginValue.BumonCD '会社コード
                             Sql += "', '"
@@ -266,6 +266,8 @@ Public Class MovementInput
                             Sql += UtilClass.formatDatetime(dtToday) '更新日
                             Sql += "', '"
                             Sql += CmWarehouseFrom.SelectedValue.ToString '倉庫コード
+                            Sql += "', '"
+                            Sql += CommonConst.SHUKO_KBN_NORMAL '通常出庫
                             Sql += "')"
 
                             _db.executeDB(Sql)
