@@ -295,17 +295,29 @@ Public Class Receipt
             Sql += " AND  t70.伝票番号 = t42.入庫番号"
             Sql += " AND  t70.行番号 = t43.行番号"
 
-            Sql += " where "
-            Sql += " t43.""会社コード"" = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Sql += " AND "
-            Sql += "t43.発注番号"
-            Sql += " ILIKE '" & No & "'"
-            Sql += " AND "
-            Sql += "t43.発注番号枝番"
-            Sql += " ILIKE '" & Suffix & "'"
-            Sql += " AND "
-            Sql += "t42.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
-            Sql += " ORDER BY t43.行番号"
+            If dsHattyu.Tables(RS).Rows.Count > 0 Then
+                Sql += " where "
+                Sql += " t43.""会社コード"" = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                Sql += " AND "
+                Sql += "t43.発注番号"
+                Sql += " ILIKE '" & No & "'"
+                Sql += " AND "
+                Sql += "t43.発注番号枝番"
+                Sql += " ILIKE '" & Suffix & "'"
+                Sql += " AND "
+                Sql += "t42.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+                Sql += " ORDER BY t43.行番号"
+            Else
+                Sql += " where "
+                Sql += " t43.""会社コード"" = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                Sql += " AND "
+                Sql += "t43.入庫番号"
+                Sql += " ILIKE '" & No & "'"
+                Sql += " AND "
+                Sql += "t42.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+                Sql += " ORDER BY t43.行番号"
+            End If
+
 
             '入庫明細取得
             Dim dsNyukodt As DataSet = _db.selectDB(Sql, RS, reccnt)
@@ -402,6 +414,11 @@ Public Class Receipt
             DgvAdd.Columns("仕入先").ReadOnly = True
             DgvAdd.Columns("仕入値").ReadOnly = True
 
+            Sql = " AND 入庫番号 = '" & No & "'"
+            '入庫基本取得
+            Dim dsNyukohd As DataSet = getDsData("t42_nyukohd", Sql)
+
+
             '入出庫種別コンボボックス作成
             Dim cmInOutKbn As New DataGridViewComboBoxColumn()
             cmInOutKbn.DataSource = getInOutKbn()
@@ -435,7 +452,13 @@ Public Class Receipt
             'リードタイムのリストを汎用マスタから取得
             Dim dsHanyo As DataSet = getDsHanyoData(CommonConst.INOUT_CLASS)
 
-            createWarehouseCombobox(dsHattyu.Tables(RS).Rows(0)("倉庫コード").ToString)
+            '通常は発注データから入庫データが作られる
+            If dsHattyu.Tables(RS).Rows.Count > 0 Then
+                createWarehouseCombobox(dsHattyu.Tables(RS).Rows(0)("倉庫コード").ToString)
+            Else
+                createWarehouseCombobox(dsNyukohd.Tables(RS).Rows(0)("倉庫コード").ToString)
+            End If
+
 
             For index As Integer = 0 To dsHattyudt.Tables(RS).Rows.Count - 1
                 If dsHattyudt.Tables(RS).Rows(index)("未入庫数") <> 0 Then
@@ -487,13 +510,24 @@ Public Class Receipt
             Next c
             TxtCount3.Text = DgvAdd.Rows.Count()
 
-            TxtPurchaseNo.Text = dsHattyu.Tables(RS).Rows(0)("発注番号")
-            TxtSuffixNo.Text = dsHattyu.Tables(RS).Rows(0)("発注番号枝番")
-            TxtCustomerPO.Text = dsHattyu.Tables(RS).Rows(0)("客先番号")
-            TxtOrdingDate.Text = dsHattyu.Tables(RS).Rows(0)("発注日").ToShortDateString()
-            TxtSupplierCode.Text = dsHattyu.Tables(RS).Rows(0)("仕入先コード")
-            TxtSupplierName.Text = dsHattyu.Tables(RS).Rows(0)("仕入先名")
-            DtpReceiptDate.Value = Date.Now
+            '通常は発注データから入庫データが作られる
+            If dsHattyu.Tables(RS).Rows.Count > 0 Then
+                TxtPurchaseNo.Text = dsHattyu.Tables(RS).Rows(0)("発注番号").ToString
+                TxtSuffixNo.Text = dsHattyu.Tables(RS).Rows(0)("発注番号枝番").ToString
+                TxtCustomerPO.Text = dsHattyu.Tables(RS).Rows(0)("客先番号").ToString
+                TxtOrdingDate.Text = dsHattyu.Tables(RS).Rows(0)("発注日").ToShortDateString()
+                TxtSupplierCode.Text = dsHattyu.Tables(RS).Rows(0)("仕入先コード").ToString
+                TxtSupplierName.Text = dsHattyu.Tables(RS).Rows(0)("仕入先名").ToString
+                DtpReceiptDate.Value = Date.Now
+            Else
+                TxtPurchaseNo.Text = dsNyukohd.Tables(RS).Rows(0)("発注番号").ToString
+                TxtSuffixNo.Text = dsNyukohd.Tables(RS).Rows(0)("発注番号枝番").ToString
+                TxtCustomerPO.Text = dsNyukohd.Tables(RS).Rows(0)("客先番号").ToString
+                TxtOrdingDate.Text = ""
+                TxtSupplierCode.Text = dsNyukohd.Tables(RS).Rows(0)("仕入先コード").ToString
+                TxtSupplierName.Text = dsNyukohd.Tables(RS).Rows(0)("仕入先名").ToString
+            End If
+
 
             '#633 のためコメントアウト
             ''入庫日の選択最小日を発注日にする

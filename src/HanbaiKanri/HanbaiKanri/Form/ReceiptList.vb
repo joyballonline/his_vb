@@ -583,6 +583,13 @@ Public Class ReceiptList
         Dim Suffix As String = DgvNyuko.Rows(RowIdx).Cells("発注番号枝番").Value
         Dim Status As String = CommonConst.STATUS_VIEW
 
+        Dim denpyoNo As String = "00000000000000"
+        Dim denpyoEda As String = "00"
+
+        If No = denpyoNo And Suffix = denpyoEda Then
+            No = DgvNyuko.Rows(RowIdx).Cells("入庫番号").Value
+        End If
+
         Dim openForm As Form = Nothing
         openForm = New Receipt(_msgHd, _db, _langHd, No, Suffix, Status)   '処理選択
         openForm.Show(Me)
