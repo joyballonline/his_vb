@@ -285,18 +285,47 @@ Public Class Supplier
         '項目チェック
         Dim strMessage As String = ""    'メッセージ本文
         Dim strMessageTitle As String = ""      'メッセージタイトル
-        ''得意先コードは必須
+        '仕入先コードは必須
         If TxtSupplierCode.Text = "" Then
-            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-                strMessage = "Please enter Supplier Code. "
-                strMessageTitle = "SupplierCode Error"
-            Else
-                strMessage = "仕入先コードを入力してください。"
-                strMessageTitle = "仕入先コード入力エラー"
-            End If
-            Dim result As DialogResult = MessageBox.Show(strMessage, strMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            _msgHd.dspMSG("chkInputSupplierCodeError", frmC01F10_Login.loginValue.Language)
             Exit Sub
         End If
+        '仕入先名は必須
+        If TxtSupplierName.Text = "" Then
+            _msgHd.dspMSG("chkInputSupplierNameError", frmC01F10_Login.loginValue.Language)
+            Exit Sub
+        End If
+        '仕入先名略称は必須
+        If TxtSupplierShortName.Text = "" Then
+            _msgHd.dspMSG("chkInputSupplierShortNameError", frmC01F10_Login.loginValue.Language)
+            Exit Sub
+        End If
+        '関税率
+        If TxtTariffRate.Text = "" Then
+            _msgHd.dspMSG("chkInputTariffRateError", frmC01F10_Login.loginValue.Language)
+            Exit Sub
+        ElseIf Decimal.Parse(TxtTariffRate.Text.ToString) = 0 Then
+            _msgHd.dspMSG("chkInputTariffRateError", frmC01F10_Login.loginValue.Language)
+            Exit Sub
+        End If
+        '前払法人税率
+        If TxtPph.Text = "" Then
+            _msgHd.dspMSG("chkInputPPHError", frmC01F10_Login.loginValue.Language)
+            Exit Sub
+        ElseIf Decimal.Parse(TxtPph.Text.ToString) = 0 Then
+            _msgHd.dspMSG("chkInputPPHError", frmC01F10_Login.loginValue.Language)
+            Exit Sub
+        End If
+        '輸送費率
+        If TxtTransportationCost.Text = "" Then
+            _msgHd.dspMSG("chkInputTransportationCostError", frmC01F10_Login.loginValue.Language)
+            Exit Sub
+        ElseIf Decimal.Parse(TxtTransportationCost.Text.ToString) = 0 Then
+            _msgHd.dspMSG("chkInputTransportationCostError", frmC01F10_Login.loginValue.Language)
+            Exit Sub
+        End If
+
+
 
         '登録処理はここから
         Dim dtToday As String = UtilClass.formatDatetime(DateTime.Now)
