@@ -723,7 +723,7 @@ Public Class Ordering
                                 DgvItemList.Rows(e.RowIndex).Cells("仕入単価_外貨").Value = DgvItemList.Rows(e.RowIndex).Cells("仕入単価").Value * TxtRate.Text
                             End If
                         Case "仕入単価_外貨"
-                            If DgvItemList("仕入単価_外貨", e.RowIndex).Value IsNot Nothing And TxtRate.Text <> "" Then
+                            If DgvItemList("仕入単価_外貨", e.RowIndex).Value.ToString IsNot "" And TxtRate.Text <> "" Then
                                 DgvItemList.Rows(e.RowIndex).Cells("仕入単価").Value = DgvItemList.Rows(e.RowIndex).Cells("仕入単価_外貨").Value / Decimal.Parse(TxtRate.Text)
                             End If
                     End Select
@@ -937,54 +937,39 @@ Public Class Ordering
         Try
             'メニュー選択処理
             Dim RowIdx As Integer
-            Dim Item(15) As String
-
-            '一覧選択行インデックスの取得
-            'グリッドに何もないときは処理しない
-            If DgvItemList.CurrentCell Is Nothing Then
-                Exit Sub
-            End If
-
             RowIdx = DgvItemList.CurrentCell.RowIndex
 
-            Console.WriteLine("列数カウント：" & DgvItemList.Rows(RowIdx).Cells.Count)
+            Dim rowClone As DataGridViewRow = DgvItemList.Rows(RowIdx).Clone
 
-            '選択行の値を格納
-            For c As Integer = 0 To 15
-                Item(c) = DgvItemList.Rows(RowIdx).Cells(c).Value
-            Next c
+            'columnの数分valueを複写
+            For i As Integer = 0 To DgvItemList.ColumnCount - 1
+                rowClone.Cells(i).Value = DgvItemList.Rows(RowIdx).Cells(i).Value
+            Next
 
-            '行を挿入
-            DgvItemList.Rows.Insert(RowIdx + 1)
+            '1行下に新規行作成及びclone内容を反映
+            DgvItemList.Rows.Insert(RowIdx + 1, rowClone)
 
-            '追加した行に複製元の値を格納
-            For c As Integer = 0 To 15
-                If c = 12 Or c = 14 Then
-                    If Item(c) IsNot Nothing Then
-                        Dim tmp As Integer = Item(c)
-                        DgvItemList(c, RowIdx + 1).Value = tmp
-                    End If
-                Else
-                    DgvItemList.Rows(RowIdx + 1).Cells(c).Value = Item(c)
-                End If
-
-            Next c
-
-            '最終行のインデックスを取得
-            Dim index As Integer = DgvItemList.Rows.Count()
             '行番号の振り直し
-            Dim No As Integer = 1
-            For c As Integer = 0 To index - 1
-                DgvItemList.Rows(c).Cells(0).Value = No
-                No += 1
-            Next c
+            noReset()
+
             TxtItemCount.Text = DgvItemList.Rows.Count()
+
         Catch ue As UsrDefException
             ue.dspMsg()
         Catch ex As Exception
             'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
             Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
         End Try
+    End Sub
+
+    Private Sub noReset()
+        Dim index As Integer = DgvItemList.Rows.Count()
+        Dim No As Integer = 1
+        For c As Integer = 0 To index - 1
+            DgvItemList.Rows(c).Cells("No").Value = No
+            No += 1
+        Next c
+
     End Sub
 
     Private Sub TxtCustomerCode_DoubleClick(sender As Object, e As EventArgs) Handles TxtSupplierCode.DoubleClick
