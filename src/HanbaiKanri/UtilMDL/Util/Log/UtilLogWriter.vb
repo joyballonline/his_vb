@@ -93,7 +93,7 @@ Namespace Log
             Dim outStr As String
             Try
                 'ログファイルオープン
-                log = New StreamWriter(_fileNm, True, Encoding.Default)
+                log = New StreamWriter(_fileNm, True, Encoding.UTF8)
 
                 Try
                     '文字列編集
