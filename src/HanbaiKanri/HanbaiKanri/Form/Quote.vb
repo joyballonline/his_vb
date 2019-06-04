@@ -454,7 +454,7 @@ Public Class Quote
             Dim GrossProfit As Decimal = 0      '粗利
 
             For index As Integer = 0 To DgvItemList.Rows.Count - 1
-                PurchaseTotal += Math.Truncate(DgvItemList.Rows(index).Cells("仕入金額").Value)
+                PurchaseTotal += Math.Ceiling(DgvItemList.Rows(index).Cells("仕入金額").Value)
                 Total += DgvItemList.Rows(index).Cells("売上金額").Value
                 QuoteTotal += DgvItemList.Rows(index).Cells("見積金額").Value
                 GrossProfit += DgvItemList.Rows(index).Cells("粗利額").Value
@@ -914,7 +914,7 @@ Public Class Quote
                         'If DgvItemList.Rows(e.RowIndex).Cells("関税額").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value IsNot Nothing Then
                         '仕入原価 <> Nothing
                         If DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value IsNot Nothing Then
-                            DgvItemList.Rows(e.RowIndex).Cells("仕入金額").Value = Math.Truncate(DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value + (DgvItemList.Rows(e.RowIndex).Cells("関税額").Value + DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value + DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value) * DgvItemList.Rows(e.RowIndex).Cells("数量").Value)
+                            DgvItemList.Rows(e.RowIndex).Cells("仕入金額").Value = Math.Ceiling(DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value + (DgvItemList.Rows(e.RowIndex).Cells("関税額").Value + DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value + DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value) * DgvItemList.Rows(e.RowIndex).Cells("数量").Value)
                         End If
                         '売単価 <> Nothing
                         If DgvItemList.Rows(e.RowIndex).Cells("売単価").Value IsNot Nothing Then
@@ -1041,14 +1041,14 @@ Public Class Quote
                 End If
 
                 For index As Integer = 0 To DgvItemList.Rows.Count - 1
-                    PurchaseTotal += Math.Truncate(DgvItemList.Rows(index).Cells("仕入金額").Value)
+                    PurchaseTotal += Math.Ceiling(DgvItemList.Rows(index).Cells("仕入金額").Value)
                     Total += DgvItemList.Rows(index).Cells("売上金額").Value
                     QuoteTotal += DgvItemList.Rows(index).Cells("見積金額").Value
                     GrossProfit += DgvItemList.Rows(index).Cells("粗利額").Value
                 Next
 
                 TxtPurchaseTotal.Text = PurchaseTotal
-                TxtTotal.Text = Total.ToString("F0")    
+                TxtTotal.Text = Total.ToString("F0")
                 TxtQuoteTotal.Text = QuoteTotal
                 TxtGrossProfit.Text = GrossProfit
                 TxtVatAmount.Text = ((QuoteTotal * TxtVat.Text) / 100).ToString("F0")
@@ -1191,7 +1191,7 @@ Public Class Quote
         Dim GrossProfit As Decimal = 0
 
         For c As Integer = 0 To DgvItemList.Rows.Count - 1
-            PurchaseTotal += Math.Truncate(DgvItemList.Rows(c).Cells("仕入金額").Value)
+            PurchaseTotal += Math.Ceiling(DgvItemList.Rows(c).Cells("仕入金額").Value)
             Total += DgvItemList.Rows(c).Cells("売上金額").Value
             QuoteTotal += DgvItemList.Rows(c).Cells("見積金額").Value
             GrossProfit += DgvItemList.Rows(c).Cells("粗利額").Value
