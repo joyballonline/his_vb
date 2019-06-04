@@ -1604,9 +1604,9 @@ Public Class Ordering
 
                 sheet.Range("O" & currentCnt).Value = DgvItemList.Rows(i).Cells("貿易条件").Value
                 sheet.Range("R" & currentCnt).Value = DgvItemList.Rows(i).Cells("仕入単価_外貨").Value.ToString
-                sheet.Range("W" & currentCnt).Value = DgvItemList.Rows(i).Cells("仕入金額_外貨").Value.ToString
+                sheet.Range("W" & currentCnt).Value = DgvItemList.Rows(i).Cells("仕入単価_外貨").Value * DgvItemList.Rows(i).Cells("数量").Value
 
-                totalPrice = totalPrice + DgvItemList.Rows(i).Cells("仕入金額_外貨").Value
+                totalPrice = totalPrice + DgvItemList.Rows(i).Cells("仕入単価_外貨").Value * DgvItemList.Rows(i).Cells("数量").Value
 
                 currentCnt = currentCnt + 1
                 num = num + 1
