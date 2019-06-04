@@ -1601,7 +1601,7 @@ Public Class Quote
                         Sql2 += ",仕入単価_外貨 = 0"
                     End If
                     If DgvItemList.Rows(index).Cells("仕入レート").Value IsNot Nothing Then
-                        Sql2 += ",仕入レート = " & UtilClass.formatNumberF10(DgvItemList.Rows(index).Cells("仕入単価_外貨").Value.ToString)
+                        Sql2 += ",仕入レート = " & UtilClass.formatNumberF10(DgvItemList.Rows(index).Cells("仕入レート").Value.ToString)
                     Else
                         Sql2 += ",仕入レート = 0"
                     End If

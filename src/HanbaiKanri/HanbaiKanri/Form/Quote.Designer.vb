@@ -1241,7 +1241,7 @@ Partial Class Quote
         '見積単価
         '
         DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle18.BackColor = System.Drawing.Color.Gray
+        DataGridViewCellStyle18.BackColor = System.Drawing.Color.LightGray
         Me.見積単価.DefaultCellStyle = DataGridViewCellStyle18
         Me.見積単価.HeaderText = "見積単価"
         Me.見積単価.Name = "見積単価"
@@ -1291,7 +1291,7 @@ Partial Class Quote
         '粗利率
         '
         DataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle23.BackColor = System.Drawing.Color.Gray
+        DataGridViewCellStyle23.BackColor = System.Drawing.Color.LightGray
         DataGridViewCellStyle23.Format = "N1"
         DataGridViewCellStyle23.NullValue = Nothing
         Me.粗利率.DefaultCellStyle = DataGridViewCellStyle23
