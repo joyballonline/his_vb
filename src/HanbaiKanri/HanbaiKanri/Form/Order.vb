@@ -509,7 +509,7 @@ Public Class Order
                 TxtOrderRemark.Text = ds1.Tables(RS).Rows(0)("備考")
             End If
             If ds1.Tables(RS).Rows(0)("ＶＡＴ") IsNot DBNull.Value Then
-                TxtVat.Text = dsMithd.Tables(RS).Rows(0)("ＶＡＴ")
+                TxtVat.Text = ds1.Tables(RS).Rows(0)("ＶＡＴ")
             End If
             If ds1.Tables(RS).Rows(0)("粗利額") IsNot DBNull.Value Then
                 TxtGrossProfit.Text = ds1.Tables(RS).Rows(0)("粗利額")
@@ -819,7 +819,7 @@ Public Class Order
                 Sql1 += "', '"
                 Sql1 += TxtQuoteRemarks.Text '見積備考
                 Sql1 += "', '"
-                Sql1 += UtilClass.formatNumber(TxtVatAmount.Text) 'ＶＡＴ
+                Sql1 += UtilClass.formatNumber(TxtVat.Text) 'ＶＡＴ
                 Sql1 += "', '"
                 Sql1 += UtilClass.strFormatDate(DtpOrderDate.Value) '受注日
                 Sql1 += "', '"
@@ -1576,7 +1576,14 @@ Public Class Order
             OrderCurrencyTotal += DgvItemList.Rows(c).Cells("見積金額_外貨").Value
         Next
         TxtOrderCurrencyAmount.Text = OrderCurrencyTotal.ToString("F0") '受注金額
-        TxtCurrencyVatAmount.Text = ((OrderCurrencyTotal.ToString("F0") * TxtVat.Text) / 100).ToString("F0")
+
+        If IsNumeric(TxtVat.Text) Then
+            If TxtVat.Text <> 0 Then
+                TxtCurrencyVatAmount.Text = ((OrderCurrencyTotal.ToString("F0") * TxtVat.Text) / 100).ToString("F0")
+            End If
+        End If
+
+
     End Sub
 
     Private Sub calcTotal()
