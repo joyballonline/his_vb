@@ -265,7 +265,7 @@ Public Class BillingManagement
 
         '受注額にVAT額を加算
         Dim total As Decimal = 0    '見積金額+VAT=受注金額
-        total = dsCymnhd.Tables(RS).Rows(0)("見積金額") + dsCymnhd.Tables(RS).Rows(0)("見積金額") * dsCymnhd.Tables(RS).Rows(0)("ＶＡＴ") / 100
+        total = dsCymnhd.Tables(RS).Rows(0)("見積金額") + (dsCymnhd.Tables(RS).Rows(0)("見積金額") * dsCymnhd.Tables(RS).Rows(0)("ＶＡＴ") / 100)
 
         '受注データ、見積データから対象の請求金額・請求残高を表示
         DgvCymn.Rows.Add()
