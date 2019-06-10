@@ -943,7 +943,8 @@ Public Class Cymn
                     Sql += "会社コード, 発注番号, 発注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式"
                     Sql += ", 単位, 仕入先名, 仕入値, 発注数量, 仕入数量, 発注残数, 仕入金額"
                     Sql += ", 間接費, リードタイム, リードタイム単位, 入庫数, 未入庫数, 備考, 更新者"
-                    Sql += ", 登録日, 更新日, 見積単価_外貨, 見積金額_外貨, 通貨, レート, 仕入単価_外貨, 仕入通貨, 仕入レート)"
+                    Sql += ", 登録日, 更新日, 見積単価_外貨, 見積金額_外貨, 通貨, レート, 仕入単価_外貨"
+                    Sql += ", 仕入通貨, 仕入レート, 関税率, 関税額, 前払法人税率, 前払法人税額, 輸送費率, 輸送費額)"
                     Sql += " VALUES('"
                     Sql += CompanyCode '会社コード
                     Sql += "', '"
@@ -1008,7 +1009,13 @@ Public Class Cymn
                     Sql += formatStringToNumber(tbl.Rows(i)("仕入通貨")) '仕入通貨
                     Sql += "', '"
                     Sql += UtilClass.formatNumberF10(tbl.Rows(i)("仕入レート")) '仕入レート
-                    Sql += "')"
+                    Sql += "', " & formatStringToNumber(tbl.Rows(i)("関税率"))             '関税率
+                    Sql += ", " & formatStringToNumber(tbl.Rows(i)("関税額"))             '関税額
+                    Sql += ", " & formatStringToNumber(tbl.Rows(i)("前払法人税率"))       '前払法人税率
+                    Sql += ", " & formatStringToNumber(tbl.Rows(i)("前払法人税額"))       '前払法人税額
+                    Sql += ", " & formatStringToNumber(tbl.Rows(i)("輸送費率"))         '輸送費率
+                    Sql += ", " & formatStringToNumber(tbl.Rows(i)("輸送費額"))         '輸送費額
+                    Sql += ")"
                     _db.executeDB(Sql)
 
                     cost += tbl.Rows(i)("仕入原価")
