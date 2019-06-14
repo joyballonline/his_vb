@@ -1137,9 +1137,13 @@ Public Class Ordering
                 Sql += "', '"
                 Sql += UtilClass.escapeSql(TxtCustomerPO.Text) '客先番号
                 Sql += "', '"
-                Sql += "" '受注番号
+                If dsHattyuHd.Tables(RS).Rows.Count > 0 Then
+                    Sql += IIf(dsHattyuHd.Tables(RS).Rows(0)("受注番号") IsNot DBNull.Value, dsHattyuHd.Tables(RS).Rows(0)("受注番号"), "") '受注番号
+                End If
                 Sql += "', '"
-                Sql += "" '受注番号枝番
+                If dsHattyuHd.Tables(RS).Rows.Count > 0 Then
+                    Sql += IIf(dsHattyuHd.Tables(RS).Rows(0)("受注番号枝番") IsNot DBNull.Value, dsHattyuHd.Tables(RS).Rows(0)("受注番号枝番"), "") '受注番号枝番
+                End If
                 Sql += "', '"
                 Sql += IIf(TxtQuoteNo.Text <> "", TxtQuoteNo.Text, "") '見積番号
                 Sql += "', '"
