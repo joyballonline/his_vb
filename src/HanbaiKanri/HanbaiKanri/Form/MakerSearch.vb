@@ -220,14 +220,29 @@ Public Class MakerSearch
         Dim Sql As String = ""
         Dim reccnt As Integer = 0
 
+        '「t02_mitdt」と「t21_hattyu」のメーカーを結合 tateiwa
         Sql = "SELECT "
         Sql += "メーカー "
-        Sql += "FROM t02_mitdt"
+        Sql += "FROM ("
 
+        Sql += "SELECT "
+        Sql += "メーカー "
+        Sql += "FROM t02_mitdt"
         Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql += IIf(prmManufacturer <> "", " AND メーカー ILIKE '%" & prmManufacturer & "%'", "")
+
+        Sql += " UNION "
+
+        Sql += " SELECT "
+        Sql += "メーカー "
+        Sql += "FROM t21_hattyu"
+        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += IIf(prmManufacturer <> "", " AND メーカー ILIKE '%" & prmManufacturer & "%'", "")
+
+        Sql += ") as tmp"
         Sql += " GROUP BY メーカー "
         Sql += " ORDER BY メーカー"
+
 
         Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
 
@@ -243,16 +258,33 @@ Public Class MakerSearch
         Dim Sql As String = ""
         Dim reccnt As Integer = 0
 
+        '「t02_mitdt」と「t21_hattyu」の品名を結合 tateiwa
         Sql = "SELECT "
+        Sql += "品名 "
+        Sql += "FROM ("
+
+        Sql += "SELECT "
         Sql += " 品名 "
         Sql += "FROM t02_mitdt"
-
         Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql += " AND "
         Sql += "メーカー = '" & prmManufacturer & "'"
         Sql += IIf(prmItemName <> "", " AND 品名 ILIKE '%" & prmItemName & "%'", "")
-        Sql += " GROUP BY メーカー, 品名"
-        Sql += " ORDER BY メーカー, 品名"
+
+        Sql += " UNION "
+
+        Sql += " SELECT "
+        Sql += " 品名 "
+        Sql += "FROM t21_hattyu"
+        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " AND "
+        Sql += " メーカー = '" & prmManufacturer & "'"
+        Sql += IIf(prmItemName <> "", " AND 品名 ILIKE '%" & prmItemName & "%'", "")
+
+        Sql += " ) as tmp"
+        Sql += " GROUP BY 品名"
+        Sql += " ORDER BY 品名"
+
 
         Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
 
@@ -267,6 +299,11 @@ Public Class MakerSearch
         Dim Sql As String = ""
         Dim reccnt As Integer = 0
 
+        '「t02_mitdt」と「t21_hattyu」の型式を結合 tateiwa
+        Sql = "SELECT "
+        Sql += "型式 "
+        Sql += "FROM ("
+
         Sql += "SELECT "
         Sql += " 型式 "
         Sql += "FROM t02_mitdt"
@@ -277,8 +314,23 @@ Public Class MakerSearch
         Sql += " AND "
         Sql += "品名 = '" & prmItemName & "'"
         Sql += IIf(prmSpec <> "", " AND 型式 ILIKE '%" & prmSpec & "%'", "")
-        Sql += " GROUP BY メーカー, 品名, 型式"
-        Sql += " ORDER BY メーカー, 品名, 型式"
+
+        Sql += " UNION "
+        Sql += " SELECT "
+        Sql += " 型式 "
+        Sql += "FROM t21_hattyu"
+
+        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " AND "
+        Sql += "メーカー = '" & prmManufacturer & "'"
+        Sql += " AND "
+        Sql += "品名 = '" & prmItemName & "'"
+        Sql += IIf(prmSpec <> "", " AND 型式 ILIKE '%" & prmSpec & "%'", "")
+
+        Sql += ") as tmp"
+        Sql += " GROUP BY 型式"
+        Sql += " ORDER BY 型式"
+
 
         Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
 
