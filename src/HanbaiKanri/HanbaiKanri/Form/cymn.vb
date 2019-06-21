@@ -512,47 +512,8 @@ Public Class Cymn
                 If DgvItemList.Rows(i).Cells("仕入区分").Value = CommonConst.Sire_KBN_Zaiko Then
 
                     chkShukko = True
-                    itemCount = 0
 
-                    '入庫データから該当商品を検索し、入庫数量を算出
-                    Sql = "Select t43.*, t42.取消区分 FROM Public.t43_nyukodt t43 "
-                    Sql += " LEFT JOIN t42_nyukohd t42 "
-                    Sql += " ON t43.会社コード = t42.会社コード "
-                    Sql += " AND t43.入庫番号 = t42.入庫番号 "
-                    Sql += " WHERE t43.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-                    Sql += " AND t43.メーカー = '" & DgvItemList.Rows(i).Cells("メーカー").Value & "'"
-                    Sql += " AND t43.品名 = '" & DgvItemList.Rows(i).Cells("品名").Value & "'"
-                    Sql += " AND t43.型式 = '" & DgvItemList.Rows(i).Cells("型式").Value & "'"
-                    Sql += " AND t42.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '取消区分=0
-                    Dim ds1 = _db.selectDB(Sql, RS, reccnt)
-
-                    '入庫数量を集計
-                    itemCount = IIf(ds1.Tables(RS).Compute("SUM(入庫数量)", Nothing) IsNot DBNull.Value,
-                                        ds1.Tables(RS).Compute("SUM(入庫数量)", Nothing),
-                                        0)
-
-                    '出庫データから該当商品を検索し、出庫数量を算出
-                    Sql = "SELECT t45.*, t44.取消区分 FROM public.t45_shukodt t45"
-                    Sql += " LEFT JOIN t44_shukohd t44 "
-                    Sql += " ON t45.会社コード = t44.会社コード "
-                    Sql += " AND t45.出庫番号 = t44.出庫番号 "
-                    Sql += " WHERE t45.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-                    Sql += " AND t45.メーカー = '" & DgvItemList.Rows(i).Cells("メーカー").Value & "'"
-                    Sql += " AND t45.品名 = '" & DgvItemList.Rows(i).Cells("品名").Value & "'"
-                    Sql += " AND t45.型式 = '" & DgvItemList.Rows(i).Cells("型式").Value & "'"
-                    Sql += " AND t44.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '取消区分=0
-                    Dim ds2 = _db.selectDB(Sql, RS, reccnt)
-
-                    '出庫数量を集計
-                    itemCount -= IIf(ds2.Tables(RS).Compute("SUM(出庫数量)", Nothing) IsNot DBNull.Value,
-                                        ds2.Tables(RS).Compute("SUM(出庫数量)", Nothing),
-                                        0)
-
-                    '在庫から受注数を引く
-                    itemCount -= DgvItemList.Rows(i).Cells("数量").Value
-
-                    '各行数で在庫で足りない商品があったら FALSE を入れる
-                    If itemCount < 0 Then
+                    If setZaikoQuantity(i) <= 0 Then
                         errFlg = False
                         errList(i) = Math.Abs(itemCount)
                     End If
@@ -560,7 +521,7 @@ Public Class Cymn
             Next
 #End Region
 
-            '発注数 - 入庫（在庫）の数が0以上であるとき
+            '在庫数が0以上であるとき
             If errFlg Then
 
 #Region "t10_cymnhd 受注基本登録"
@@ -763,7 +724,7 @@ Public Class Cymn
                             Sql = "INSERT INTO "
                             Sql += "Public."
                             Sql += "t70_inout("
-                            Sql += "会社コード, 入出庫区分, 倉庫コード, 伝票番号, 行番号"
+                            Sql += "会社コード, 入出庫区分, 倉庫コード, 伝票番号, 行番号, 入出庫種別"
                             Sql += ", 引当区分, メーカー, 品名, 型式, 数量, 単位, 備考, 入出庫日"
                             Sql += ", 取消区分, 更新者, 更新日)"
                             Sql += " VALUES('"
@@ -776,6 +737,8 @@ Public Class Cymn
                             Sql += LS '伝票番号
                             Sql += "', '"
                             Sql += DgvItemList.Rows(i).Cells("No").Value.ToString '行番号
+                            Sql += "', '"
+                            Sql += CommonConst.INOUT_KBN_NORMAL '入出庫種別
                             Sql += "', '"
                             Sql += CommonConst.AC_KBN_ASSIGN.ToString '引当区分
                             Sql += "', '"
@@ -1738,5 +1701,35 @@ Public Class Cymn
         Next
         TxtCurrencyOrderTotal.Text = QuoteCurrencyTotal.ToString("F0")
     End Sub
+
+    '在庫マスタから現在庫数を取得
+    Private Function setZaikoQuantity(ByVal rowIndex As Integer) As Long
+        Dim Sql As String = ""
+        Dim reccnt As Integer = 0 'DB用（デフォルト）
+
+        Sql = "SELECT sum(現在庫数) as 在庫数量 from m21_zaiko"
+
+        Sql += " WHERE 会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
+
+        Sql += " AND メーカー ILIKE '" & DgvItemList.Rows(rowIndex).Cells("メーカー").Value.ToString & "'"
+        Sql += " AND 品名 ILIKE '" & DgvItemList.Rows(rowIndex).Cells("品名").Value.ToString & "'"
+        Sql += " AND 型式 ILIKE '" & DgvItemList.Rows(rowIndex).Cells("型式").Value.ToString & "'"
+        Sql += " AND 倉庫コード ILIKE '" & CmWarehouse.SelectedValue & "'"
+        Sql += " AND 入出庫種別 <= '" & CommonConst.INOUT_KBN_SAMPLE & "'"
+        Sql += " AND 現在庫数 <> 0"
+
+        'Sql += " GROUP BY 倉庫コード, 入出庫種別, 最終入庫日 "
+        'Sql += " ORDER BY 最終入庫日 "
+
+        '在庫マスタから現在庫数を取得
+        Dim dsZaiko As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+        If dsZaiko.Tables(RS).Rows.Count > 0 And dsZaiko.Tables(RS).Rows(0)("在庫数量") IsNot DBNull.Value Then
+            Return dsZaiko.Tables(RS).Rows(0)("在庫数量")
+        Else
+            Return 0
+        End If
+
+    End Function
 
 End Class

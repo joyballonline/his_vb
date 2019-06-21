@@ -1010,6 +1010,17 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <MEMO></MEMO>
   </MSG_DATA>
   <MSG_DATA>
+    <ID>chkShukoOverError</ID>
+    <MSG1>出庫数量が在庫数量を超えています。</MSG1>
+    <MSG1_EN>The issue quantity exceeds the stock quantity.</MSG1_EN>
+    <MSG2>再度確認してから実行してください。</MSG2>
+    <MSG2_EN>Please check again and try again.</MSG2_EN>
+    <BUTTON_TYPE>OK</BUTTON_TYPE>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+    <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
+    <MEMO></MEMO>
+  </MSG_DATA>
+  <MSG_DATA>
     <ID>addAPData</ID>
     <MSG1>買掛データを作成しますか？</MSG1>
     <MSG1_EN>Create accounts payable data?</MSG1_EN>
@@ -1384,5 +1395,15 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
     <MEMO></MEMO>
   </MSG_DATA>
-
+  <MSG_DATA>
+    <ID>chkMovingQuantityError</ID>
+    <MSG1>移動先数量が移動元数量を超えています。</MSG1>
+    <MSG1_EN>The move destination quantity exceeds the move source quantity.</MSG1_EN>
+    <MSG2>移動先数量を確認してください。</MSG2>
+    <MSG2_EN>Please check the destination quantity.</MSG2_EN>
+    <BUTTON_TYPE>OK</BUTTON_TYPE>
+    <ICONT_TYPE>Error</ICONT_TYPE>
+    <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
+    <MEMO></MEMO>
+  </MSG_DATA>
 </MSG_DEF>

@@ -202,6 +202,8 @@ Public Class ReceiptList
                 Sql += " t42.入庫番号 = t43.入庫番号"
                 Sql += " WHERE "
                 Sql += " t42.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                Sql += " AND "
+                Sql += " t43.仕入区分 <> '" & CommonConst.Sire_KBN_Move.ToString & "'"
 
                 Sql += viewSearchConditions() '抽出条件取得
 
@@ -294,6 +296,8 @@ Public Class ReceiptList
                 Sql += " t43.入庫番号 = t42.入庫番号"
                 Sql += " WHERE "
                 Sql += " t43.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                Sql += " AND "
+                Sql += " t43.仕入区分 <> '" & CommonConst.Sire_KBN_Move.ToString & "'"
 
                 Sql += viewSearchConditions() '抽出条件取得
 

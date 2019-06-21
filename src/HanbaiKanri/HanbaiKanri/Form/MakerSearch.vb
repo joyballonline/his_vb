@@ -197,11 +197,10 @@ Public Class MakerSearch
         Else
             '移動入力画面
             Dim frm As MovementInput = CType(Me.Owner, MovementInput)
-            frm.DgvList("メーカー", RowIdx).Value = IIf(LbManufacturer.SelectedIndex > -1, LbManufacturer.SelectedItem, "")
-            frm.DgvList("品名", RowIdx).Value = IIf(LbItemName.SelectedIndex > -1, LbItemName.SelectedItem, "")
-            frm.DgvList("型式", RowIdx).Value = IIf(LbSpec.SelectedIndex > -1, LbSpec.SelectedItem, "")
+            frm.TxtManufacturer.Text = IIf(LbManufacturer.SelectedIndex > -1, LbManufacturer.SelectedItem, "")
+            frm.TxtItemName.Text = IIf(LbItemName.SelectedIndex > -1, LbItemName.SelectedItem, "")
+            frm.TxtSpec.Text = IIf(LbSpec.SelectedIndex > -1, LbSpec.SelectedItem, "")
         End If
-
 
         _parentForm.Enabled = True
         _parentForm.Show()

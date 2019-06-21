@@ -106,17 +106,24 @@ Public Class InventoryList
             DgvList.Columns.Add("品名", "ItemName")
             DgvList.Columns.Add("型式", "Spec")
             DgvList.Columns.Add("在庫数", "StockQuantity")
-            'DgvList.Columns.Add("単位", "Unit")
+            DgvList.Columns.Add("入出庫種別", "StorageType")
+            DgvList.Columns.Add("単価（入庫単価）", "UnitPrice (ReceiptUnitPrice)")
+            DgvList.Columns.Add("最終入庫日", "LastReceiptDate")
+            DgvList.Columns.Add("最終出庫日", "LastDeliveryDate")
         Else
             DgvList.Columns.Add("メーカー", "メーカー")
             DgvList.Columns.Add("品名", "品名")
             DgvList.Columns.Add("型式", "型式")
             DgvList.Columns.Add("在庫数", "在庫数")
-            'DgvList.Columns.Add("単位", "単位")
+            DgvList.Columns.Add("入出庫種別", "入出庫種別")
+            DgvList.Columns.Add("単価（入庫単価）", "単価（入庫単価）")
+            DgvList.Columns.Add("最終入庫日", "最終入庫日")
+            DgvList.Columns.Add("最終出庫日", "最終出庫日")
 
-            DgvList.Columns("在庫数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
         End If
+
+        DgvList.Columns("在庫数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
     End Sub
 
@@ -130,18 +137,24 @@ Public Class InventoryList
             DgvList.Columns.Add("品名", "ItemName")
             DgvList.Columns.Add("型式", "Spec")
             DgvList.Columns.Add("在庫数", "StockQuantity")
-            'DgvList.Columns.Add("単位", "Unit")
+            DgvList.Columns.Add("入出庫種別", "StorageType")
+            DgvList.Columns.Add("単価（入庫単価）", "UnitPrice (ReceiptUnitPrice)")
+            DgvList.Columns.Add("最終入庫日", "LastReceiptDate")
+            DgvList.Columns.Add("最終出庫日", "LastDeliveryDate")
         Else
             DgvList.Columns.Add("倉庫", "倉庫")
             DgvList.Columns.Add("メーカー", "メーカー")
             DgvList.Columns.Add("品名", "品名")
             DgvList.Columns.Add("型式", "型式")
             DgvList.Columns.Add("在庫数", "在庫数")
-            'DgvList.Columns.Add("単位", "単位")
-
-            DgvList.Columns("在庫数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            DgvList.Columns.Add("入出庫種別", "入出庫種別")
+            DgvList.Columns.Add("単価（入庫単価）", "単価（入庫単価）")
+            DgvList.Columns.Add("最終入庫日", "最終入庫日")
+            DgvList.Columns.Add("最終出庫日", "最終出庫日")
 
         End If
+
+        DgvList.Columns("在庫数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
     End Sub
 
@@ -159,88 +172,46 @@ Public Class InventoryList
 
             Try
 
-                '入庫データの取得
-                '
-                Sql = " select "
-                Sql += " t43.メーカー, t43.品名, t43.型式, sum(t43.入庫数量) as 入庫数量 "
-                Sql += " from "
-                Sql += " t43_nyukodt t43 "
+                Sql = "SELECT "
+                Sql += " m21.メーカー, m21.品名, m21.型式, m21.入出庫種別, m21.現在庫数, m21.現在庫数 "
+                Sql += " ,m21.入庫単価, m21.最終入庫日, m21.最終出庫日, m90.文字１, m90.文字２ "
+                Sql += " FROM m21_zaiko m21"
 
                 Sql += " LEFT JOIN "
-                Sql += " t42_nyukohd t42 "
-                Sql += " ON  t43.会社コード = t42.会社コード "
-                Sql += " AND  t43.入庫番号 = t42.入庫番号 "
-
-                Sql += " where "
-                Sql += " t43.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                Sql += " m90_hanyo m90 "
+                Sql += " ON "
+                Sql += " m90.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
                 Sql += " AND "
-                Sql += " t42.取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'"
-                Sql += " GROUP BY "
-                Sql += " t43.メーカー, t43.品名, t43.型式 "
-                Sql += " order by "
-                Sql += " t43.メーカー, t43.品名, t43.型式 "
-
-                Dim dsNyuko As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-                '出庫データの取得
-                '
-                Sql = " select "
-                Sql += " t45.メーカー, t45.品名, t45.型式, sum(t45.出庫数量) as 出庫数量 "
-                Sql += " from "
-                Sql += " t45_shukodt t45 "
-
-                Sql += " LEFT JOIN "
-                Sql += " t44_shukohd t44 "
-                Sql += " ON  t45.会社コード = t44.会社コード "
-                Sql += " AND  t45.出庫番号 = t44.出庫番号 "
-
-                Sql += " where "
-                Sql += " t45.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                Sql += " m90.固定キー ILIKE '" & CommonConst.INOUT_CLASS & "'"
                 Sql += " AND "
-                Sql += " t44.取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'"
+                Sql += " m90.可変キー ILIKE m21.入出庫種別 "
+
+                Sql += " WHERE "
+                Sql += " m21.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                Sql += " AND "
+                Sql += " m21.無効フラグ = " & CommonConst.CANCEL_KBN_ENABLED.ToString
                 Sql += " GROUP BY "
-                Sql += " t45.メーカー, t45.品名, t45.型式 "
-                Sql += " order by "
-                Sql += " t45.メーカー, t45.品名, t45.型式 "
+                Sql += " m21.メーカー, m21.品名, m21.型式, m21.入出庫種別, m21.現在庫数, m21.現在庫数 "
+                Sql += " ,m21.入庫単価, m21.最終入庫日, m21.最終出庫日, m90.文字１, m90.文字２, m21.伝票番号 "
+                Sql += " ORDER BY "
+                'Sql += " m21.メーカー, m21.品名, m21.型式, m21.最終入庫日, m21.入出庫種別 "
+                Sql += " m21.メーカー, m21.品名, m21.型式, m21.伝票番号, m21.入出庫種別 "
 
-                Dim dsShukko As DataSet = _db.selectDB(Sql, RS, reccnt)
-                Dim chkFlg As Boolean = False
+                Dim dsList As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-                For i As Integer = 0 To dsNyuko.Tables(RS).Rows.Count - 1 '入庫データ
-                    For x As Integer = 0 To dsShukko.Tables(RS).Rows.Count - 1 '出庫データ
+                For i As Integer = 0 To dsList.Tables(RS).Rows.Count - 1
 
-                        '一致したら 入庫数 - 出庫数
-                        '入庫あり、出庫なしの場合はフラグを見て入庫データのみで作成する
-                        If dsNyuko.Tables(RS).Rows(i)("メーカー").ToString() = dsShukko.Tables(RS).Rows(x)("メーカー").ToString() And
-                             dsNyuko.Tables(RS).Rows(i)("品名").ToString() = dsShukko.Tables(RS).Rows(x)("品名").ToString() And
-                              dsNyuko.Tables(RS).Rows(i)("型式").ToString() = dsShukko.Tables(RS).Rows(x)("型式").ToString() Then
-
-                            DgvList.Rows.Add()
-                            DgvList.Rows(i).Cells("メーカー").Value = dsNyuko.Tables(RS).Rows(i)("メーカー")
-                            DgvList.Rows(i).Cells("品名").Value = dsNyuko.Tables(RS).Rows(i)("品名")
-                            DgvList.Rows(i).Cells("型式").Value = dsNyuko.Tables(RS).Rows(i)("型式")
-                            DgvList.Rows(i).Cells("在庫数").Value = dsNyuko.Tables(RS).Rows(i)("入庫数量") - dsShukko.Tables(RS).Rows(x)("出庫数量")
-                            'DgvList.Rows(i).Cells("単位").Value = dsNyuko.Tables(RS).Rows(i)("単位")
-
-                            chkFlg = True '入庫データと出庫データがある場合は true
-
-                        End If
-
-                    Next
-
-                    '出庫データがなかった場合
-                    If chkFlg = False Then
-
-                        DgvList.Rows.Add()
-                        DgvList.Rows(i).Cells("メーカー").Value = dsNyuko.Tables(RS).Rows(i)("メーカー")
-                        DgvList.Rows(i).Cells("品名").Value = dsNyuko.Tables(RS).Rows(i)("品名")
-                        DgvList.Rows(i).Cells("型式").Value = dsNyuko.Tables(RS).Rows(i)("型式")
-                        DgvList.Rows(i).Cells("在庫数").Value = dsNyuko.Tables(RS).Rows(i)("入庫数量")
-                        'DgvList.Rows(i).Cells("単位").Value = dsNyuko.Tables(RS).Rows(i)("単位")
-
-                    Else
-                        chkFlg = False '初期化
-                    End If
+                    DgvList.Rows.Add()
+                    DgvList.Rows(i).Cells("メーカー").Value = dsList.Tables(RS).Rows(i)("メーカー")
+                    DgvList.Rows(i).Cells("品名").Value = dsList.Tables(RS).Rows(i)("品名")
+                    DgvList.Rows(i).Cells("型式").Value = dsList.Tables(RS).Rows(i)("型式")
+                    DgvList.Rows(i).Cells("在庫数").Value = dsList.Tables(RS).Rows(i)("現在庫数")
+                    DgvList.Rows(i).Cells("入出庫種別").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
+                                                                    dsList.Tables(RS).Rows(i)("文字２"),
+                                                                    dsList.Tables(RS).Rows(i)("文字１"))
+                    DgvList.Rows(i).Cells("単価（入庫単価）").Value = dsList.Tables(RS).Rows(i)("入庫単価")
+                    DgvList.Rows(i).Cells("最終入庫日").Value = dsList.Tables(RS).Rows(i)("最終入庫日")
+                    DgvList.Rows(i).Cells("最終出庫日").Value = dsList.Tables(RS).Rows(i)("最終出庫日")
 
                 Next
 
@@ -259,114 +230,54 @@ Public Class InventoryList
 
             Try
 
-                '入庫データの取得
-                '
-                Sql = " select "
-                Sql += " t43.メーカー, t43.品名, t43.型式, sum(t43.入庫数量) as 入庫数量, t42.倉庫コード, m20.名称 "
-                Sql += " from "
-                Sql += " t43_nyukodt t43 "
+                Sql = "SELECT "
+                Sql += " m21.メーカー, m21.品名, m21.型式, m21.入出庫種別, m21.現在庫数, m21.現在庫数 "
+                Sql += " ,m21.入庫単価, m21.最終入庫日, m21.最終出庫日, m90.文字１, m90.文字２, m20.名称 "
+                Sql += " FROM m21_zaiko m21"
 
                 Sql += " LEFT JOIN "
-                Sql += " t42_nyukohd t42 "
-                Sql += " ON  t43.会社コード = t42.会社コード "
-                Sql += " AND  t43.入庫番号 = t42.入庫番号 "
+                Sql += " m90_hanyo m90 "
+                Sql += " ON "
+                Sql += " m90.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                Sql += " AND "
+                Sql += " m90.固定キー ILIKE '" & CommonConst.INOUT_CLASS & "'"
+                Sql += " AND "
+                Sql += " m90.可変キー ILIKE m21.入出庫種別 "
 
                 Sql += " LEFT JOIN "
                 Sql += " m20_warehouse m20 "
-                Sql += " ON  t43.会社コード = m20.会社コード "
-                Sql += " AND  t42.倉庫コード = m20.倉庫コード "
-
-                Sql += " where "
-                Sql += " t43.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                Sql += " ON "
+                Sql += " m20.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
                 Sql += " AND "
-                Sql += " t42.取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'"
+                Sql += " m20.倉庫コード ILIKE m21.倉庫コード"
 
-                Sql += " GROUP BY "
-                Sql += " t43.メーカー, t43.品名, t43.型式, t42.倉庫コード, m20.名称 "
-
-                Sql += " order by "
-                Sql += " t42.倉庫コード, t43.メーカー, t43.品名, t43.型式 "
-
-                Dim dsNyuko As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-                '出庫データの取得
-                '
-                Sql = " select "
-                Sql += " t45.メーカー, t45.品名, t45.型式, sum(t45.出庫数量) as 出庫数量, t45.倉庫コード, m20.名称 "
-                Sql += " from "
-                Sql += " t45_shukodt t45 "
-
-                Sql += " LEFT JOIN "
-                Sql += " t44_shukohd t44 "
-                Sql += " ON  t45.会社コード = t44.会社コード "
-                Sql += " AND  t45.出庫番号 = t44.出庫番号 "
-
-                Sql += " LEFT JOIN "
-                Sql += " m20_warehouse m20 "
-                Sql += " ON  t45.会社コード = m20.会社コード "
-                Sql += " AND  t45.倉庫コード = m20.倉庫コード "
-
-                Sql += " where "
-                Sql += " t45.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                Sql += " WHERE "
+                Sql += " m21.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
                 Sql += " AND "
-                Sql += " t44.取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'"
+                Sql += " m21.無効フラグ = " & CommonConst.CANCEL_KBN_ENABLED.ToString
                 Sql += " GROUP BY "
-                Sql += " t45.メーカー, t45.品名, t45.型式, t45.倉庫コード, m20.名称 "
-                Sql += " order by "
-                Sql += " t45.倉庫コード, t45.メーカー, t45.品名, t45.型式 "
+                Sql += " m21.メーカー, m21.品名, m21.型式, m21.入出庫種別, m21.現在庫数, m21.現在庫数 "
+                Sql += " ,m21.入庫単価, m21.最終入庫日, m21.最終出庫日, m90.文字１, m90.文字２, m20.名称, m21.伝票番号 "
+                Sql += " ORDER BY "
+                'Sql += " m21.メーカー, m21.品名, m21.型式, m21.最終入庫日, m21.入出庫種別 "
+                Sql += " m21.メーカー, m21.品名, m21.型式, m21.伝票番号, m21.入出庫種別 "
 
-                Dim dsShukko As DataSet = _db.selectDB(Sql, RS, reccnt)
+                Dim dsList As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-                Dim tmpWarehouseCd As String = ""
-                Dim tmpWarehouseName As String = ""
-                Dim chkFlg As Boolean = False
+                For i As Integer = 0 To dsList.Tables(RS).Rows.Count - 1
 
-
-                For i As Integer = 0 To dsNyuko.Tables(RS).Rows.Count - 1 '入庫データ
-
-                    '得意先コードが変わったら取得
-                    If (tmpWarehouseCd <> dsNyuko.Tables(RS).Rows(i)("倉庫コード").ToString) Then
-                        tmpWarehouseName = dsNyuko.Tables(RS).Rows(i)("名称").ToString
-                        tmpWarehouseCd = dsNyuko.Tables(RS).Rows(i)("倉庫コード").ToString
-                    Else
-                        tmpWarehouseName = ""
-                    End If
-
-                    For x As Integer = 0 To dsShukko.Tables(RS).Rows.Count - 1 '出庫データ
-
-                        '一致したら 入庫数 - 出庫数
-                        If dsNyuko.Tables(RS).Rows(i)("倉庫コード") = dsShukko.Tables(RS).Rows(x)("倉庫コード") And
-                                dsNyuko.Tables(RS).Rows(i)("メーカー") = dsShukko.Tables(RS).Rows(x)("メーカー") And
-                                 dsNyuko.Tables(RS).Rows(i)("品名") = dsShukko.Tables(RS).Rows(x)("品名") And
-                                  dsNyuko.Tables(RS).Rows(i)("型式") = dsShukko.Tables(RS).Rows(x)("型式") Then
-
-                            DgvList.Rows.Add()
-                            DgvList.Rows(i).Cells("倉庫").Value = tmpWarehouseName
-                            DgvList.Rows(i).Cells("メーカー").Value = dsNyuko.Tables(RS).Rows(i)("メーカー")
-                            DgvList.Rows(i).Cells("品名").Value = dsNyuko.Tables(RS).Rows(i)("品名")
-                            DgvList.Rows(i).Cells("型式").Value = dsNyuko.Tables(RS).Rows(i)("型式")
-                            DgvList.Rows(i).Cells("在庫数").Value = dsNyuko.Tables(RS).Rows(i)("入庫数量") - dsShukko.Tables(RS).Rows(x)("出庫数量")
-                            'DgvList.Rows(i).Cells("単位").Value = dsNyuko.Tables(RS).Rows(i)("単位")
-
-                            chkFlg = True '入庫データと出庫データがある場合は true
-                        End If
-
-                    Next
-
-                    '出庫データがなかった場合
-                    If chkFlg = False Then
-
-                        DgvList.Rows.Add()
-                        DgvList.Rows(i).Cells("倉庫").Value = tmpWarehouseName
-                        DgvList.Rows(i).Cells("メーカー").Value = dsNyuko.Tables(RS).Rows(i)("メーカー")
-                        DgvList.Rows(i).Cells("品名").Value = dsNyuko.Tables(RS).Rows(i)("品名")
-                        DgvList.Rows(i).Cells("型式").Value = dsNyuko.Tables(RS).Rows(i)("型式")
-                        DgvList.Rows(i).Cells("在庫数").Value = dsNyuko.Tables(RS).Rows(i)("入庫数量")
-                        'DgvList.Rows(i).Cells("単位").Value = dsNyuko.Tables(RS).Rows(i)("単位")
-
-                    Else
-                        chkFlg = False '初期化
-                    End If
+                    DgvList.Rows.Add()
+                    DgvList.Rows(i).Cells("倉庫").Value = dsList.Tables(RS).Rows(i)("名称")
+                    DgvList.Rows(i).Cells("メーカー").Value = dsList.Tables(RS).Rows(i)("メーカー")
+                    DgvList.Rows(i).Cells("品名").Value = dsList.Tables(RS).Rows(i)("品名")
+                    DgvList.Rows(i).Cells("型式").Value = dsList.Tables(RS).Rows(i)("型式")
+                    DgvList.Rows(i).Cells("在庫数").Value = dsList.Tables(RS).Rows(i)("現在庫数")
+                    DgvList.Rows(i).Cells("入出庫種別").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
+                                                                    dsList.Tables(RS).Rows(i)("文字２"),
+                                                                    dsList.Tables(RS).Rows(i)("文字１"))
+                    DgvList.Rows(i).Cells("単価（入庫単価）").Value = dsList.Tables(RS).Rows(i)("入庫単価")
+                    DgvList.Rows(i).Cells("最終入庫日").Value = dsList.Tables(RS).Rows(i)("最終入庫日")
+                    DgvList.Rows(i).Cells("最終出庫日").Value = dsList.Tables(RS).Rows(i)("最終出庫日")
 
                 Next
 
@@ -452,7 +363,11 @@ Public Class InventoryList
                     sheet.Range("B1").Value = "ItemName"
                     sheet.Range("C1").Value = "Spec"
                     sheet.Range("D1").Value = "StockQuantity"
-                    'sheet.Range("E1").Value = "Unit"
+                    sheet.Range("E1").Value = "StorageType"
+                    sheet.Range("F1").Value = "UnitPrice (ReceiptUnitPrice)"
+                    sheet.Range("G1").Value = "LastReceiptDate"
+                    sheet.Range("H1").Value = "LastDeliveryDate"
+
                 End If
 
                 For i As Integer = 0 To DgvList.RowCount - 1
@@ -463,7 +378,10 @@ Public Class InventoryList
                     sheet.Range("B" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("品名").Value
                     sheet.Range("C" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("型式").Value
                     sheet.Range("D" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("在庫数").Value
-                    'sheet.Range("E" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("単位").Value
+                    sheet.Range("E" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("入出庫種別").Value
+                    sheet.Range("F" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("単価（入庫単価）").Value
+                    sheet.Range("G" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("最終入庫日").Value
+                    sheet.Range("H" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("最終出庫日").Value
 
                 Next
 
@@ -478,7 +396,10 @@ Public Class InventoryList
                     sheet.Range("C1").Value = "ItemName"
                     sheet.Range("D1").Value = "Spec"
                     sheet.Range("E1").Value = "StockQuantity"
-                    'sheet.Range("F1").Value = "Unit"
+                    sheet.Range("F1").Value = "StorageType"
+                    sheet.Range("G1").Value = "UnitPrice (ReceiptUnitPrice)"
+                    sheet.Range("H1").Value = "LastReceiptDate"
+                    sheet.Range("I1").Value = "LastDeliveryDate"
                 End If
 
                 For i As Integer = 0 To DgvList.RowCount - 1
@@ -490,7 +411,10 @@ Public Class InventoryList
                     sheet.Range("C" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("品名").Value
                     sheet.Range("D" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("型式").Value
                     sheet.Range("E" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("在庫数").Value
-                    'sheet.Range("F" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("単位").Value
+                    sheet.Range("F" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("入出庫種別").Value
+                    sheet.Range("G" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("単価（入庫単価）").Value
+                    sheet.Range("H" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("最終入庫日").Value
+                    sheet.Range("I" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("最終出庫日").Value
 
                 Next
             End If

@@ -2647,7 +2647,7 @@ Public Class Quote
                 spec = IIf(spec <> Nothing, spec, "")
 
                 Dim openForm As Form = Nothing
-                openForm = New StockSearch(_msgHd, _db, _langHd, Me, manufactuer, itemName, spec)
+                openForm = New StockSearch(_msgHd, _db, _langHd, Me, manufactuer, itemName, spec, "Normal")
                 openForm.Show()
                 Me.Enabled = False
 

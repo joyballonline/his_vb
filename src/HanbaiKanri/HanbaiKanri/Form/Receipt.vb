@@ -199,7 +199,7 @@ Public Class Receipt
             DgvHistory.Columns.Add("入庫数量", "GoodsReceiptQuantity")
             DgvHistory.Columns.Add("倉庫", "Warehouse")
             DgvHistory.Columns.Add("入出庫種別", "StorageType")
-            DgvHistory.Columns.Add("引当区分", "AssignClassification")
+            'DgvHistory.Columns.Add("引当区分", "AssignClassification")
             DgvHistory.Columns.Add("入庫日", "GoodsReceiptDate")
             DgvHistory.Columns.Add("備考", "Remarks")
 
@@ -217,7 +217,7 @@ Public Class Receipt
             DgvHistory.Columns.Add("入庫数量", "入庫数量")
             DgvHistory.Columns.Add("倉庫", "倉庫")
             DgvHistory.Columns.Add("入出庫種別", "入出庫種別")
-            DgvHistory.Columns.Add("引当区分", "引当区分")
+            'DgvHistory.Columns.Add("引当区分", "引当区分")
             DgvHistory.Columns.Add("入庫日", "入庫日")
             DgvHistory.Columns.Add("備考", "備考")
         End If
@@ -280,7 +280,8 @@ Public Class Receipt
             '発注基本取得
             Dim dsHattyu As DataSet = getDsData("t20_hattyu", Sql)
 
-            Sql = " SELECT t43.*, t42.取消区分, t42.入庫日, t70.倉庫コード, t70.入出庫種別, t70.引当区分 "
+            'Sql = " SELECT t43.*, t42.取消区分, t42.入庫日, t70.倉庫コード, t70.入出庫種別, t70.引当区分 "
+            Sql = " SELECT t43.*, t42.取消区分, t42.入庫日, t70.倉庫コード, t70.入出庫種別 "
             Sql += " FROM t43_nyukodt t43"
 
             Sql += " INNER JOIN t42_nyukohd t42 ON "
@@ -306,6 +307,8 @@ Public Class Receipt
                 Sql += " ILIKE '" & Suffix & "'"
                 Sql += " AND "
                 Sql += "t42.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+                Sql += " AND "
+                Sql += "t43.仕入区分 <> '" & CommonConst.Sire_KBN_Move.ToString & "'"
                 Sql += " ORDER BY t43.行番号"
             Else
                 Sql += " where "
@@ -315,9 +318,10 @@ Public Class Receipt
                 Sql += " ILIKE '" & No & "'"
                 Sql += " AND "
                 Sql += "t42.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+                Sql += " AND "
+                Sql += "t43.仕入区分 <> '" & CommonConst.Sire_KBN_Move.ToString & "'"
                 Sql += " ORDER BY t43.行番号"
             End If
-
 
             '入庫明細取得
             Dim dsNyukodt As DataSet = _db.selectDB(Sql, RS, reccnt)
@@ -388,9 +392,9 @@ Public Class Receipt
                 If dsNyukodt.Tables(RS).Rows(i).IsNull(("入出庫種別")) = False Then
                     DgvHistory.Rows(i).Cells("入出庫種別").Value = getInOutName(dsNyukodt.Tables(RS).Rows(i)("入出庫種別"))
                 End If
-                If dsNyukodt.Tables(RS).Rows(i).IsNull(("引当区分")) = False Then
-                    DgvHistory.Rows(i).Cells("引当区分").Value = getAssignName(dsNyukodt.Tables(RS).Rows(i)("引当区分"))
-                End If
+                'If dsNyukodt.Tables(RS).Rows(i).IsNull(("引当区分")) = False Then
+                '    DgvHistory.Rows(i).Cells("引当区分").Value = getAssignName(dsNyukodt.Tables(RS).Rows(i)("引当区分"))
+                'End If
 
                 DgvHistory.Rows(i).Cells("入庫日").Value = dsNyukodt.Tables(RS).Rows(i)("入庫日").ToShortDateString
                 DgvHistory.Rows(i).Cells("備考").Value = dsNyukodt.Tables(RS).Rows(i)("備考")
@@ -421,7 +425,7 @@ Public Class Receipt
 
             '入出庫種別コンボボックス作成
             Dim cmInOutKbn As New DataGridViewComboBoxColumn()
-            cmInOutKbn.DataSource = getInOutKbn()
+            cmInOutKbn.DataSource = getInOutKbn("0,1")
             '実際の値が"Value"列、表示するテキストが"Display"列とする
             cmInOutKbn.ValueMember = "Value"
             cmInOutKbn.DisplayMember = "Display"
@@ -435,22 +439,22 @@ Public Class Receipt
 
             DgvAdd.Columns.Insert(10, cmInOutKbn)
 
-            '引当区分コンボボックス作成
-            Dim cmAllocationKbn As New DataGridViewComboBoxColumn()
-            cmAllocationKbn.DataSource = getAssignKbn()
-            '実際の値が"Value"列、表示するテキストが"Display"列とする
-            cmAllocationKbn.ValueMember = "Value"
-            cmAllocationKbn.DisplayMember = "Display"
-            cmAllocationKbn.HeaderText = "引当区分"
-            cmAllocationKbn.Name = "引当区分"
-            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-                cmAllocationKbn.HeaderText = "AssignClassification"
-            End If
+            ''引当区分コンボボックス作成
+            'Dim cmAllocationKbn As New DataGridViewComboBoxColumn()
+            'cmAllocationKbn.DataSource = getAssignKbn()
+            ''実際の値が"Value"列、表示するテキストが"Display"列とする
+            'cmAllocationKbn.ValueMember = "Value"
+            'cmAllocationKbn.DisplayMember = "Display"
+            'cmAllocationKbn.HeaderText = "引当区分"
+            'cmAllocationKbn.Name = "引当区分"
+            'If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+            '    cmAllocationKbn.HeaderText = "AssignClassification"
+            'End If
 
-            DgvAdd.Columns.Insert(11, cmAllocationKbn)
+            'DgvAdd.Columns.Insert(11, cmAllocationKbn)
 
             'リードタイムのリストを汎用マスタから取得
-            Dim dsHanyo As DataSet = getDsHanyoData(CommonConst.INOUT_CLASS)
+            Dim dsHanyo As DataSet = getDsHanyoData(CommonConst.INOUT_CLASS, "0,1")
 
             '通常は発注データから入庫データが作られる
             If dsHattyu.Tables(RS).Rows.Count > 0 Then
@@ -480,7 +484,7 @@ Public Class Receipt
                     DgvAdd.Rows(index).Cells("仕入値").Value = dsHattyudt.Tables(RS).Rows(index)("仕入値")
                     DgvAdd.Rows(index).Cells("入庫数量").Value = 0
                     DgvAdd.Rows(index).Cells("入出庫種別").Value = dsHanyo.Tables(RS).Rows(0)("可変キー")
-                    DgvAdd.Rows(index).Cells("引当区分").Value = CommonConst.AC_KBN_NORMAL
+                    'DgvAdd.Rows(index).Cells("引当区分").Value = CommonConst.AC_KBN_NORMAL
                     'DgvAdd.Rows(index).Cells("備考").Value = dsHattyudt.Tables(RS).Rows(index)("備考")
                 End If
             Next
@@ -831,15 +835,13 @@ Public Class Receipt
 
                     Next
 
-
-
                     't70_inout にデータ登録
                     Sql = "INSERT INTO "
                     Sql += "Public."
                     Sql += "t70_inout("
                     Sql += "会社コード, 入出庫区分, 倉庫コード, 伝票番号, 行番号, 入出庫種別"
                     Sql += ", 引当区分, メーカー, 品名, 型式, 数量, 単位, 備考, 入出庫日"
-                    Sql += ", 取消区分, 更新者, 更新日)"
+                    Sql += ", 取消区分, 更新者, 更新日, 仕入区分)"
                     Sql += " VALUES('"
                     Sql += frmC01F10_Login.loginValue.BumonCD '会社コード
                     Sql += "', '"
@@ -853,7 +855,7 @@ Public Class Receipt
                     Sql += "', '"
                     Sql += DgvAdd.Rows(i).Cells("入出庫種別").Value.ToString '入出庫種別
                     Sql += "', '"
-                    Sql += DgvAdd.Rows(i).Cells("引当区分").Value.ToString '引当区分
+                    Sql += CommonConst.AC_KBN_NORMAL.ToString '引当区分(0：通常）
                     Sql += "', '"
                     Sql += DgvAdd.Rows(i).Cells("メーカー").Value.ToString 'メーカー
                     Sql += "', '"
@@ -865,7 +867,7 @@ Public Class Receipt
                     Sql += "', '"
                     Sql += DgvAdd.Rows(i).Cells("単位").Value.ToString '単位
                     Sql += "', '"
-                    Sql += DgvAdd.Rows(i).Cells("備考").Value '単位
+                    Sql += DgvAdd.Rows(i).Cells("備考").Value '備考
                     Sql += "', '"
                     Sql += UtilClass.formatDatetime(DtpReceiptDate.Text) '入出庫日
                     Sql += "', '"
@@ -874,6 +876,8 @@ Public Class Receipt
                     Sql += Input '更新者
                     Sql += "', '"
                     Sql += UtilClass.formatDatetime(dtToday) '更新日
+                    Sql += "', '"
+                    Sql += DgvAdd.Rows(i).Cells("仕入区分値").Value.ToString '仕入区分
                     Sql += "')"
 
                     _db.executeDB(Sql)
@@ -1016,13 +1020,19 @@ Public Class Receipt
     'Return: DataSet
     Private Function getDsHanyoData(ByVal prmFixed As String, Optional ByVal prmVariable As String = "") As DataSet
         Dim Sql As String = ""
+        Dim strViewText As String = ""
+        Dim strArrayData As String() = prmVariable.Split(","c)
 
         Sql = " AND "
         Sql += "固定キー ILIKE '" & prmFixed & "'"
 
-        If prmVariable IsNot "" Then
-            Sql += " AND "
-            Sql += "可変キー ILIKE '" & prmVariable & "'"
+        If strArrayData.Length <> 0 Then
+            Sql += " AND ( "
+            For i As Integer = 0 To strArrayData.Length - 1
+                Sql += IIf(i > 0, " OR ", "")
+                Sql += "可変キー ILIKE '" & strArrayData(i) & "'"
+            Next
+            Sql += " ) "
         End If
 
         'リードタイムのリストを汎用マスタから取得
@@ -1046,12 +1056,23 @@ Public Class Receipt
     End Function
 
     'Return: DataTable
-    Private Function getInOutKbn() As DataTable
+    Private Function getInOutKbn(Optional ByVal removeVal As String = "") As DataTable
         Dim Sql As String = ""
         Dim strViewText As String = ""
+        Dim strArrayData As String() = removeVal.Split(","c)
 
         Sql = " AND "
         Sql += "固定キー ILIKE '" & CommonConst.INOUT_CLASS & "'"
+
+        If strArrayData.Length <> 0 Then
+            Sql += " AND ( "
+            For i As Integer = 0 To strArrayData.Length - 1
+                Sql += IIf(i > 0, " OR ", "")
+                Sql += "可変キー ILIKE '" & strArrayData(i) & "'"
+            Next
+            Sql += " ) "
+        End If
+
         Sql += " ORDER BY 表示順"
 
         'リードタイムのリストを汎用マスタから取得

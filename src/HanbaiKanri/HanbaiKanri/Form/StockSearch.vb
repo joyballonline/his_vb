@@ -40,6 +40,8 @@ Public Class StockSearch
     Private itemName As String
     Private spec As String
 
+    Private _mode As String
+
     '-------------------------------------------------------------------------------
     'デフォルトコンストラクタ（隠蔽）
     '-------------------------------------------------------------------------------
@@ -57,7 +59,8 @@ Public Class StockSearch
                    ByRef prmRefForm As Form,
                    ByRef prmManufacturer As String,
                    ByRef prmItemName As String,
-                   ByRef prmSpec As String)
+                   ByRef prmSpec As String,
+                   ByRef prmMode As String)
         Call Me.New()
 
         _init = False
@@ -77,6 +80,8 @@ Public Class StockSearch
         itemName = prmItemName
         spec = prmSpec
 
+        _mode = prmMode
+
     End Sub
 
     '画面表示時
@@ -85,132 +90,120 @@ Public Class StockSearch
         Dim Sql As String = ""
 
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+            DgvList.Columns("引当").HeaderText = "Reservation"
             DgvList.Columns("倉庫").HeaderText = "Warehouse"
-            DgvList.Columns("数量").HeaderText = "Quantity"
+            DgvList.Columns("最終入庫日").HeaderText = "LastReceiptDate"
+            DgvList.Columns("入出庫種別").HeaderText = "StorageType"
+            DgvList.Columns("現在庫数").HeaderText = "CurrentQuontity"
+            DgvList.Columns("入庫単価").HeaderText = "GoodsReceiptPrice"
+            DgvList.Columns("最終出庫日").HeaderText = "LastGoodsDeliveryDate"
 
+            BtnSelect.Text = "Select"
             BtnBack.Text = "Back"
+
+            'LblDescription.Text = "：Allocation not possible"
         End If
 
         Try
-
-            '入庫データの取得
+            '在庫マスタから対象データを取得
             '
-            Sql = " select "
-            'Sql += " t43.メーカー, t43.品名, t43.型式, sum(t43.入庫数量) as 入庫数量, t43.単位, t42.倉庫コード, m20.名称 "
-            Sql += " t43.メーカー, t43.品名, t43.型式, sum(t43.入庫数量) as 入庫数量, t42.倉庫コード, m20.名称 "
-            Sql += " from "
+            '会社コード = ログイン情報
+            '無効フラグ = 0
+            '入出庫種別 <= 1
+            Sql = " SELECT "
+            Sql += " m21.会社コード, m21.倉庫コード, m21.最終入庫日, m21.入出庫種別, SUM(m21.現在庫数) as 現在庫数"
+            Sql += " , SUM(m21.入庫単価) as 入庫単価, m21.最終出庫日, m20.名称, m90.文字１, m90.文字２, t43.仕入区分 "
+            Sql += " , m21.伝票番号, m21.行番号 "
+            'Sql += " , m21.伝票番号, t43.仕入先名, t43.単位 "
+            'Sql += " , m21.ロケ番号, concat(t43.入庫番号, t43.行番号) as ロケ入庫番号 "
+            Sql += " , m21.ロケ番号, t43.入庫番号, t43.行番号 as 入庫行番号 "
+            Sql += " FROM m21_zaiko m21 "
+
+            Sql += " LEFT JOIN "
+            Sql += " m20_warehouse m20 "
+            Sql += " ON m21.会社コード = m20.会社コード "
+            Sql += " AND m21.倉庫コード = m20.倉庫コード "
+
+            Sql += " LEFT JOIN "
+            Sql += " m90_hanyo m90 "
+            Sql += " On m21.会社コード = m20.会社コード "
+            Sql += " AND m90.固定キー = '" & CommonConst.INOUT_CLASS & "' "
+            Sql += " AND m21.入出庫種別 = m90.可変キー "
+
+            Sql += " LEFT JOIN "
             Sql += " t43_nyukodt t43 "
+            Sql += " On m21.会社コード = t43.会社コード "
+            'Sql += " AND m21.伝票番号 = t43.入庫番号 "
+            'Sql += " AND m21.行番号 = t43.行番号 "
 
-            Sql += " LEFT JOIN "
-            Sql += " t42_nyukohd t42 "
-            Sql += " ON  t43.会社コード = t42.会社コード "
-            Sql += " AND  t43.入庫番号 = t42.入庫番号 "
+            Sql += " AND ( "
+            Sql += " ( m21.伝票番号 = t43.入庫番号 "
+            Sql += " AND m21.行番号 = t43.行番号 ) "
+            Sql += " OR "
+            Sql += " ( m21.ロケ番号 = concat(t43.入庫番号, t43.行番号) ) "
+            Sql += "  ) "
 
-            Sql += " LEFT JOIN "
-            Sql += " m20_warehouse m20 "
-            Sql += " ON  t43.会社コード = m20.会社コード "
-            Sql += " AND  t42.倉庫コード = m20.倉庫コード "
+            Sql += " WHERE "
 
-            Sql += " where "
-            Sql += " t43.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Sql += " AND "
-            Sql += " t42.取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'"
-            Sql += " AND "
-            Sql += " t43.メーカー ILIKE '" & manufactuer & "'"
-            Sql += " AND "
-            Sql += " t43.品名 ILIKE '" & itemName & "'"
-            Sql += " AND "
-            Sql += " t43.型式 ILIKE '" & spec & "'"
-            Sql += " GROUP BY "
-            'Sql += " t43.メーカー, t43.品名, t43.型式, t43.単位, t42.倉庫コード, m20.名称 "
-            Sql += " t43.メーカー, t43.品名, t43.型式, t42.倉庫コード, m20.名称 "
-            Sql += " order by "
-            Sql += " t42.倉庫コード, t43.メーカー, t43.品名, t43.型式 "
+            Sql += " m21.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += " AND m21.無効フラグ = " & CommonConst.CANCEL_KBN_ENABLED
+            Sql += " AND m21.入出庫種別 <= '" & CommonConst.INOUT_KBN_SAMPLE & "'"
 
-            Dim dsNyuko As DataSet = _db.selectDB(Sql, RS, reccnt)
+            Sql += " AND m21.メーカー ILIKE '" & manufactuer & "'"
+            Sql += " AND m21.品名 ILIKE '" & itemName & "'"
+            Sql += " AND m21.型式 ILIKE '" & spec & "'"
 
-            '出庫データの取得
-            '
-            Sql = " select "
-            'Sql += " t45.メーカー, t45.品名, t45.型式, sum(t45.出庫数量) as 出庫数量, t45.単位, t45.倉庫コード, m20.名称 "
-            Sql += " t45.メーカー, t45.品名, t45.型式, sum(t45.出庫数量) as 出庫数量, t45.倉庫コード, m20.名称 "
-            Sql += " from "
-            Sql += " t45_shukodt t45 "
+            If _mode <> "Normal" Then
+                Sql += " AND ( t43.仕入区分 = '" & CommonConst.Sire_KBN_Zaiko & "'"
+                Sql += " OR t43.仕入区分 = '" & CommonConst.Sire_KBN_Move & "' ) "
+            End If
 
-            Sql += " LEFT JOIN "
-            Sql += " t44_shukohd t44 "
-            Sql += " ON  t45.会社コード = t44.会社コード "
-            Sql += " AND  t45.出庫番号 = t44.出庫番号 "
+            Sql += " GROUP BY m21.会社コード, m21.倉庫コード, m21.最終入庫日, m21.最終出庫日 "
+            Sql += " , m21.入出庫種別, m20.名称,m90.文字１, m90.文字２, t43.仕入区分 "
+            Sql += " , m21.伝票番号, m21.行番号, t43.入庫番号 "
+            Sql += " , 入庫行番号, m21.ロケ番号 "
 
-            Sql += " LEFT JOIN "
-            Sql += " m20_warehouse m20 "
-            Sql += " ON  t45.会社コード = m20.会社コード "
-            Sql += " AND  t45.倉庫コード = m20.倉庫コード "
+            Dim dsZaiko As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-            Sql += " where "
-            Sql += " t45.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Sql += " AND "
-            Sql += " t44.取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'"
-            Sql += " AND "
-            Sql += " t45.メーカー ILIKE '" & manufactuer & "'"
-            Sql += " AND "
-            Sql += " t45.品名 ILIKE '" & itemName & "'"
-            Sql += " AND "
-            Sql += " t45.型式 ILIKE '" & spec & "'"
-            Sql += " GROUP BY "
-            'Sql += " t45.メーカー, t45.品名, t45.型式, t45.単位, t45.倉庫コード, m20.名称 "
-            Sql += " t45.メーカー, t45.品名, t45.型式, t45.倉庫コード, m20.名称 "
-            Sql += " order by "
-            Sql += " t45.倉庫コード, t45.メーカー, t45.品名, t45.型式 "
+            For i As Integer = 0 To dsZaiko.Tables(RS).Rows.Count - 1 '在庫データ
+                DgvList.Rows.Add()
 
-            Dim dsShukko As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-            Dim tmpWarehouseCd As String = ""
-            Dim tmpWarehouseName As String = ""
-            Dim chkFlg As Boolean = False
-
-
-            For i As Integer = 0 To dsNyuko.Tables(RS).Rows.Count - 1 '入庫データ
-
-                '得意先コードが変わったら取得
-                If (tmpWarehouseCd <> dsNyuko.Tables(RS).Rows(i)("倉庫コード").ToString) Then
-                    tmpWarehouseName = dsNyuko.Tables(RS).Rows(i)("名称").ToString
-                    tmpWarehouseCd = dsNyuko.Tables(RS).Rows(i)("倉庫コード").ToString
-                Else
-                    tmpWarehouseName = ""
-                End If
-
-                For x As Integer = 0 To dsShukko.Tables(RS).Rows.Count - 1 '出庫データ
-
-                    '一致したら 入庫数 - 出庫数
-                    If dsNyuko.Tables(RS).Rows(i)("倉庫コード") = dsShukko.Tables(RS).Rows(x)("倉庫コード") And
-                                dsNyuko.Tables(RS).Rows(i)("メーカー") = dsShukko.Tables(RS).Rows(x)("メーカー") And
-                                 dsNyuko.Tables(RS).Rows(i)("品名") = dsShukko.Tables(RS).Rows(x)("品名") And
-                                  dsNyuko.Tables(RS).Rows(i)("型式") = dsShukko.Tables(RS).Rows(x)("型式") Then
-
-                        DgvList.Rows.Add()
-                        DgvList.Rows(i).Cells("倉庫").Value = tmpWarehouseName
-                        DgvList.Rows(i).Cells("数量").Value = dsNyuko.Tables(RS).Rows(i)("入庫数量") - dsShukko.Tables(RS).Rows(x)("出庫数量")
-
-                        chkFlg = True '入庫データと出庫データがある場合は true
+                '入庫データの仕入区分が2以外、または入庫データに紐づいていない在庫は引当不可として背景をLightGrayに変更
+                If dsZaiko.Tables(RS).Rows(i)("仕入区分") IsNot DBNull.Value Then
+                    If dsZaiko.Tables(RS).Rows(i)("仕入区分") <> CommonConst.Sire_KBN_Zaiko And
+                        dsZaiko.Tables(RS).Rows(i)("仕入区分") <> CommonConst.Sire_KBN_Move Then
+                        'DgvList.Rows(i).DefaultCellStyle.BackColor = Color.LightGray
+                        DgvList.Rows(i).Cells("引当").Value = "×"
                     End If
-
-                Next
-
-                '出庫データがなかった場合
-                If chkFlg = False Then
-
-                    DgvList.Rows.Add()
-                    DgvList.Rows(i).Cells("倉庫").Value = dsNyuko.Tables(RS).Rows(i)("名称")
-                    DgvList.Rows(i).Cells("数量").Value = dsNyuko.Tables(RS).Rows(i)("入庫数量")
-
                 Else
-                    chkFlg = False '初期化
+                    DgvList.Rows(i).Cells("引当").Value = "×"
                 End If
 
-
+                DgvList.Rows(i).Cells("倉庫コード").Value = dsZaiko.Tables(RS).Rows(i)("倉庫コード")
+                DgvList.Rows(i).Cells("倉庫").Value = dsZaiko.Tables(RS).Rows(i)("名称")
+                DgvList.Rows(i).Cells("最終入庫日").Value = dsZaiko.Tables(RS).Rows(i)("最終入庫日")
+                DgvList.Rows(i).Cells("入出庫種別区分").Value = dsZaiko.Tables(RS).Rows(i)("入出庫種別")
+                DgvList.Rows(i).Cells("入出庫種別").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
+                                                           dsZaiko.Tables(RS).Rows(i)("文字２"),
+                                                           dsZaiko.Tables(RS).Rows(i)("文字１"))
+                DgvList.Rows(i).Cells("現在庫数").Value = dsZaiko.Tables(RS).Rows(i)("現在庫数")
+                DgvList.Rows(i).Cells("入庫単価").Value = dsZaiko.Tables(RS).Rows(i)("入庫単価")
+                DgvList.Rows(i).Cells("最終出庫日").Value = dsZaiko.Tables(RS).Rows(i)("最終出庫日")
+                DgvList.Rows(i).Cells("伝票番号").Value = dsZaiko.Tables(RS).Rows(i)("伝票番号")
+                DgvList.Rows(i).Cells("行番号").Value = dsZaiko.Tables(RS).Rows(i)("行番号")
+                DgvList.Rows(i).Cells("ロケ番号").Value = dsZaiko.Tables(RS).Rows(i)("ロケ番号")
+                DgvList.Rows(i).Cells("入庫番号").Value = dsZaiko.Tables(RS).Rows(i)("入庫番号")
+                DgvList.Rows(i).Cells("入庫行番号").Value = dsZaiko.Tables(RS).Rows(i)("入庫行番号")
 
             Next
+
+            '移動入力時のみ「選択」ボタンを表示
+            If _mode = "Normal" Then
+                BtnSelect.Visible = False
+            Else
+                '移動入力時のみ「引当」列非表示
+                DgvList.Columns("引当").Visible = False
+            End If
 
         Catch ue As UsrDefException
             ue.dspMsg()
@@ -234,4 +227,41 @@ Public Class StockSearch
 
     End Sub
 
+    '選択ボタン押下時
+    Private Sub BtnSelect_Click(sender As Object, e As EventArgs) Handles BtnSelect.Click
+
+        If DgvList.RowCount = 0 Then
+            '対象データがないアラートを表示
+            _msgHd.dspMSG("NonData", frmC01F10_Login.loginValue.Language)
+            Exit Sub
+        End If
+
+        '移動入力画面
+        Dim frm As MovementInput = CType(Me.Owner, MovementInput)
+
+        Dim rowIndex As Integer = DgvList.CurrentCell.RowIndex
+
+        frm.TxtWarehouseSince.Tag = DgvList.Rows(rowIndex).Cells("倉庫コード").Value.ToString
+        frm.TxtWarehouseSince.Text = DgvList.Rows(rowIndex).Cells("倉庫").Value.ToString
+        frm.TxtStorageTypeSince.Tag = DgvList.Rows(rowIndex).Cells("入出庫種別区分").Value.ToString
+        frm.TxtStorageTypeSince.Text = DgvList.Rows(rowIndex).Cells("入出庫種別").Value.ToString
+        frm.TxtQuantityFrom.Text = DgvList.Rows(rowIndex).Cells("現在庫数").Value.ToString
+        frm.TxtUnitPrice.Text = DgvList.Rows(rowIndex).Cells("入庫単価").Value.ToString
+        frm.TxtGoodsReceiptDate.Text = DgvList.Rows(rowIndex).Cells("最終入庫日").Value.ToString
+        frm.TxtDenpyoNo.Text = DgvList.Rows(rowIndex).Cells("伝票番号").Value.ToString
+        frm.TxtLineNumber.Text = DgvList.Rows(rowIndex).Cells("行番号").Value.ToString
+        frm.TxtDenpyoNo.Tag = DgvList.Rows(rowIndex).Cells("入庫番号").Value.ToString
+        frm.TxtLineNumber.Tag = DgvList.Rows(rowIndex).Cells("入庫行番号").Value.ToString
+        frm.TxtLocationNo.Text = DgvList.Rows(rowIndex).Cells("ロケ番号").Value.ToString
+        'frm.TxtUnit.Text = DgvList.Rows(rowIndex).Cells("単位").Value
+
+        frm.TxtQuantityTo.Text = 0
+
+        frm.setMovingDestination() 'セット内容に応じて移動先のデフォルト値を書き換え
+
+        _parentForm.Enabled = True
+        _parentForm.Show()
+        Me.Dispose()
+
+    End Sub
 End Class

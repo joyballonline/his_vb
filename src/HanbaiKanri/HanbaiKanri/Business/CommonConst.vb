@@ -408,4 +408,15 @@ Public Class CommonConst
     Public Const BASE_RATE_IDR As String = "1,0000000000"
     Public Const BASE_RATE_JPY As String = "1.0000000000"
 
+    '入出庫種別 
+    Public Const INOUT_KBN_NORMAL As String = "0"               '通常
+    Public Const INOUT_KBN_SAMPLE As String = "1"               'サンプル
+    Public Const INOUT_KBN_HAIKI As String = "2"                '廃棄
+    Public Const INOUT_KBN_DECREASE As String = "3"             '棚卸減（旧：棚卸ロス）
+    Public Const INOUT_KBN_INCREASE As String = "4"             '棚卸増
+
+    '処理区分
+    Public Const PC_KBN_MOVE As String = "1"              '移動
+    Public Const PC_KBN_ADJUSTMENT As String = "9"        '調整
+
 End Class

@@ -220,188 +220,8 @@ Public Class OrderList
 
         Try
 
-            '出庫登録時は入庫されているデータのみ出力
-            If OrderStatus = CommonConst.STATUS_GOODS_ISSUE Then
-
-                '伝票単位の場合
-                If RbtnSlip.Checked Then
-
-                    Sql = " SELECT t10.*, t42.発注番号, t42.発注番号枝番 "
-                    Sql += " FROM t10_cymnhd t10 "
-
-                    Sql += " LEFT JOIN t20_hattyu t20 "
-                    Sql += " ON t10.会社コード = t20.会社コード "
-                    Sql += " AND t10.受注番号 = t20.受注番号 "
-                    Sql += " AND t10.受注番号枝番 = t20.受注番号枝番 "
-                    Sql += " AND t20.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
-
-                    Sql += " LEFT JOIN t42_nyukohd t42 "
-                    Sql += " ON t20.会社コード = t42.会社コード "
-                    Sql += " AND t20.発注番号 = t42.発注番号 "
-                    Sql += " AND t20.発注番号枝番 = t42.発注番号枝番 "
-                    Sql += " AND t42.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
-
-                    Sql += " LEFT JOIN t44_shukohd t44 "
-                    Sql += " ON t10.会社コード = t44.会社コード "
-                    Sql += " AND t10.受注番号 = t44.受注番号 "
-                    Sql += " AND t10.受注番号枝番 = t44.受注番号枝番 "
-                    Sql += " AND t44.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
-
-                    Sql += " WHERE t10.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "' "
-
-                    If customerName <> Nothing Then
-                        Sql += " AND "
-                        Sql += " t10.得意先名 ILIKE '%" & customerName & "%' "
-                    End If
-
-                    If customerAddress <> Nothing Then
-                        Sql += " AND "
-                        Sql += " t10.得意先住所 ILIKE '%" & customerAddress & "%' "
-                    End If
-
-                    If customerTel <> Nothing Then
-                        Sql += " AND "
-                        Sql += " t10.得意先電話番号 ILIKE '%" & customerTel & "%' "
-                    End If
-
-                    If customerCode <> Nothing Then
-                        Sql += " AND "
-                        Sql += " t10.得意先コード ILIKE '%" & customerCode & "%' "
-                    End If
-
-                    If sinceDate <> Nothing Then
-                        Sql += " AND "
-                        Sql += " t10.受注日 >= '" & sinceDate & "'"
-                    End If
-                    If untilDate <> Nothing Then
-                        Sql += " AND "
-                        Sql += " t10.受注日 <= '" & untilDate & "'"
-                    End If
-
-                    If sinceNum <> Nothing Then
-                        Sql += " AND "
-                        Sql += " t10.受注番号 ILIKE '%" & sinceNum & "%' "
-                    End If
-
-                    If salesName <> Nothing Then
-                        Sql += " AND "
-                        Sql += " t10.営業担当者 ILIKE '%" & salesName & "%' "
-                    End If
-
-                    If customerPO <> Nothing Then
-                        Sql += " AND "
-                        Sql += " t10.客先番号 ILIKE '%" & customerPO & "%' "
-                    End If
-
-                    '取消データを含めない場合
-                    If ChkCancelData.Checked = False Then
-                        Sql += " AND "
-                        Sql += " t10.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
-                    End If
-
-                    Sql += " AND "
-                    Sql += "(t42.入庫番号 <> ''"
-                    Sql += " OR "
-                    Sql += "t44.出庫番号 <> '' )"
-                    Sql += " GROUP BY "
-                    Sql += " t10.会社コード, t10.受注番号, t10.受注番号枝番, t42.発注番号, t42.発注番号枝番"
-                    Sql += " ORDER BY "
-                    Sql += " t10.登録日 DESC"
-
-                    ds = _db.selectDB(Sql, RS, reccnt)
-
-                    setRows(ds) '行をセット
-
-                Else
-                    '明細単位
-
-                    Sql = "SELECT t11.*, t10.取消区分, t42.入庫番号, t42.発注番号, t42.発注番号枝番 "
-                    Sql += " FROM t11_cymndt t11 "
-
-                    Sql += " LEFT JOIN  t10_cymnhd t10 "
-                    Sql += " ON t11.会社コード = t10.会社コード "
-                    Sql += " AND t11.受注番号 = t10.受注番号 "
-                    Sql += " AND t11.受注番号枝番 = t10.受注番号枝番 "
-
-                    Sql += " LEFT JOIN t20_hattyu t20 "
-                    Sql += " ON t10.会社コード = t20.会社コード "
-                    Sql += " AND t10.受注番号 = t20.受注番号 "
-                    Sql += " AND t10.受注番号枝番 = t20.受注番号枝番 "
-
-                    Sql += " LEFT JOIN t42_nyukohd t42 "
-                    Sql += " ON t20.会社コード = t42.会社コード "
-                    Sql += " AND t20.発注番号 = t42.発注番号 "
-                    Sql += " AND t20.発注番号枝番 = t42.発注番号枝番 "
-
-                    Sql += " WHERE t11.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-                    Sql += " AND t20.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
-                    Sql += " AND t42.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
-
-                    If customerName <> Nothing Then
-                        Sql += " AND "
-                        Sql += " t10.得意先名 ILIKE '%" & customerName & "%' "
-                    End If
-
-                    If customerAddress <> Nothing Then
-                        Sql += " AND "
-                        Sql += " t10.得意先住所 ILIKE '%" & customerAddress & "%' "
-                    End If
-
-                    If customerTel <> Nothing Then
-                        Sql += " AND "
-                        Sql += " t10.得意先電話番号 ILIKE '%" & customerTel & "%' "
-                    End If
-
-                    If customerCode <> Nothing Then
-                        Sql += " AND "
-                        Sql += " t10.得意先コード ILIKE '%" & customerCode & "%' "
-                    End If
-
-                    If sinceDate <> Nothing Then
-                        Sql += " AND "
-                        Sql += " t10.受注日 >= '" & sinceDate & "'"
-                    End If
-                    If untilDate <> Nothing Then
-                        Sql += " AND "
-                        Sql += " t10.受注日 <= '" & untilDate & "'"
-                    End If
-
-                    If sinceNum <> Nothing Then
-                        Sql += " AND "
-                        Sql += " t11.受注番号 ILIKE '%" & sinceNum & "%' "
-                    End If
-
-                    If salesName <> Nothing Then
-                        Sql += " AND "
-                        Sql += " t10.営業担当者 ILIKE '%" & salesName & "%' "
-                    End If
-
-                    If customerPO <> Nothing Then
-                        Sql += " AND "
-                        Sql += " t10.客先番号 ILIKE '%" & customerPO & "%' "
-                    End If
-
-                    '取消データを含めない場合
-                    If ChkCancelData.Checked = False Then
-                        Sql += " AND "
-                        Sql += " t10.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
-                    End If
-
-                    Sql += " ORDER BY "
-                    Sql += " t11.登録日 DESC"
-
-                    ds = _db.selectDB(Sql, RS, reccnt)
-
-                    setRows(ds) '行をセット
-
-                End If
-
-                Exit Sub
-
-            End If
-
             '受注参照時、品名と型式も検索
-            If OrderStatus = CommonConst.STATUS_VIEW Then
+            If OrderStatus = CommonConst.STATUS_VIEW Or OrderStatus = CommonConst.STATUS_GOODS_ISSUE Then
 
                 '伝票単位の場合
                 If RbtnSlip.Checked Then
@@ -417,6 +237,10 @@ Public Class OrderList
                     Sql += " WHERE t10.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "' "
 
                     Sql += viewSearchConditions() '検索条件
+
+                    If OrderStatus = CommonConst.STATUS_GOODS_ISSUE Then
+                        Sql += " AND 未出庫数 <> 0"
+                    End If
 
                     Sql += " GROUP BY "
                     Sql += " t10.会社コード, t10.受注番号, t10.受注番号枝番"
@@ -441,6 +265,10 @@ Public Class OrderList
                     Sql += " WHERE t10.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "' "
 
                     Sql += viewSearchConditions() '検索条件
+
+                    If OrderStatus = CommonConst.STATUS_GOODS_ISSUE Then
+                        Sql += " AND 未出庫数 <> 0"
+                    End If
 
                     Sql += " ORDER BY "
                     Sql += " t11.登録日 DESC"
@@ -566,11 +394,11 @@ Public Class OrderList
                 DgvCymnhd.Rows(i).Cells("受注番号").Value = ds.Tables(RS).Rows(i)("受注番号")
                 DgvCymnhd.Rows(i).Cells("受注番号枝番").Value = ds.Tables(RS).Rows(i)("受注番号枝番")
 
-                '出庫登録時のみ出力
-                If OrderStatus = CommonConst.STATUS_GOODS_ISSUE Then
-                    DgvCymnhd.Rows(i).Cells("発注番号").Value = ds.Tables(RS).Rows(i)("発注番号")
-                    DgvCymnhd.Rows(i).Cells("発注番号枝番").Value = ds.Tables(RS).Rows(i)("発注番号枝番")
-                End If
+                ''出庫登録時のみ出力
+                'If OrderStatus = CommonConst.STATUS_GOODS_ISSUE Then
+                '    DgvCymnhd.Rows(i).Cells("発注番号").Value = ds.Tables(RS).Rows(i)("発注番号")
+                '    DgvCymnhd.Rows(i).Cells("発注番号枝番").Value = ds.Tables(RS).Rows(i)("発注番号枝番")
+                'End If
 
                 DgvCymnhd.Rows(i).Cells("客先番号").Value = ds.Tables(RS).Rows(i)("客先番号")
                 DgvCymnhd.Rows(i).Cells("受注日").Value = ds.Tables(RS).Rows(i)("受注日").ToShortDateString()
