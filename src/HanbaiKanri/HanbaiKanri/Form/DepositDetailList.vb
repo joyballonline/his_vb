@@ -142,6 +142,9 @@ Public Class DepositDetailList
         Dim reccnt As Integer = 0 'DB用（デフォルト）
         Dim Sql As String = ""
 
+        Dim curds As DataSet  'm25_currency
+        Dim cur As String
+
         Try
 
             '伝票単位
@@ -201,6 +204,9 @@ Public Class DepositDetailList
                     DgvBilling.Columns.Add("入金日", "MoneyReceiptDate")
                     DgvBilling.Columns.Add("請求先名", "BillingAddress")
                     DgvBilling.Columns.Add("振込先", "PaymentDestination")
+                    DgvBilling.Columns.Add("通貨_外貨", "Currency")
+                    DgvBilling.Columns.Add("入金額_外貨", "MoneyReceiptAmountForeignCurrency")
+                    DgvBilling.Columns.Add("通貨", "Currency")
                     DgvBilling.Columns.Add("入金額", "MoneyReceiptAmount")
                     DgvBilling.Columns.Add("更新日", "UpdateDate")
                     DgvBilling.Columns.Add("備考", "Remarks")
@@ -210,15 +216,28 @@ Public Class DepositDetailList
                     DgvBilling.Columns.Add("入金日", "入金日")
                     DgvBilling.Columns.Add("請求先名", "請求先名")
                     DgvBilling.Columns.Add("振込先", "振込先")
+                    DgvBilling.Columns.Add("通貨_外貨", "通貨")
+                    DgvBilling.Columns.Add("入金額_外貨", "入金額(外貨)")
+                    DgvBilling.Columns.Add("通貨", "通貨")
                     DgvBilling.Columns.Add("入金額", "入金額")
                     DgvBilling.Columns.Add("更新日", "更新日")
                     DgvBilling.Columns.Add("備考", "備考")
                 End If
 
                 '伝票単位時のセル書式
+                DgvBilling.Columns("入金額_外貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 DgvBilling.Columns("入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
                 For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+
+                    If IsDBNull(ds.Tables(RS).Rows(0)("通貨")) Then
+                        cur = vbNullString
+                    Else
+                        Sql = " and 採番キー = " & ds.Tables(RS).Rows(0)("通貨")
+                        curds = getDsData("m25_currency", Sql)
+
+                        cur = curds.Tables(RS).Rows(0)("通貨コード")
+                    End If
 
                     Dim dsHanyo As DataSet = getDsHanyoData(CommonConst.DC_CODE, ds.Tables(RS).Rows(i)("預金種目"))
                     Dim dcName As String = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
@@ -236,6 +255,10 @@ Public Class DepositDetailList
                                                                     dcName & " " &
                                                                     ds.Tables(RS).Rows(0)("口座番号") & " " &
                                                                     ds.Tables(RS).Rows(0)("口座名義")
+
+                    DgvBilling.Rows(i).Cells("通貨_外貨").Value = cur
+                    DgvBilling.Rows(i).Cells("入金額_外貨").Value = ds.Tables(RS).Rows(i)("入金額計_外貨")
+                    DgvBilling.Rows(i).Cells("通貨").Value = "IDR"
                     DgvBilling.Rows(i).Cells("入金額").Value = ds.Tables(RS).Rows(i)("入金額")
                     DgvBilling.Rows(i).Cells("更新日").Value = ds.Tables(RS).Rows(i)("更新日")
                     DgvBilling.Rows(i).Cells("備考").Value = ds.Tables(RS).Rows(i)("備考")

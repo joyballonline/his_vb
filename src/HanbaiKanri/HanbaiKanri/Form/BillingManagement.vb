@@ -105,6 +105,7 @@ Public Class BillingManagement
         '一覧系取得
         BillLoad()
 
+
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
             LblBillingDate.Text = "BillingDate"
             LblDepositDate.Text = "DepositDate"
@@ -122,6 +123,7 @@ Public Class BillingManagement
             LblCymndt.Text = "JobOrderDetails"
             LblHistory.Text = "BillingHistoryData"
             LblAdd.Text = "InvoicingThisTime"
+            LblIDRCurrency.Text = "Currency"  '通貨ラベル
 
             TxtDgvCymndtCount.Location = New Point(1228, 118)
             TxtDgvHistoryCount.Location = New Point(1228, 253)
@@ -204,6 +206,8 @@ Public Class BillingManagement
     Private Sub BillLoad()
         Dim reccnt As Integer = 0 'DB用（デフォルト）
         Dim Sql As String = ""
+        Dim curds As DataSet  'm25_currency
+        Dim cur As String
 
         Sql = " AND "
         Sql += "受注番号 ILIKE '" & CymnNo & "'"
@@ -218,7 +222,7 @@ Public Class BillingManagement
         'joinするのでとりあえず直書き
         Sql = "SELECT"
         Sql += " t11.行番号, t11.メーカー, t11.品名, t11.型式, t11.受注数量, t11.単位"
-        Sql += " , t11.売上数量, t11.売単価, t11.売上金額, t11.見積単価, t11.見積金額 ,t10.ＶＡＴ"
+        Sql += " , t11.売上数量, t11.売単価, t11.売上金額, t11.見積単価_外貨, t11.見積金額_外貨 ,t10.ＶＡＴ ,t11.通貨"
         Sql += " FROM "
         Sql += " public.t11_cymndt t11 "
 
@@ -244,6 +248,16 @@ Public Class BillingManagement
         '受注明細取得
         Dim dsCymndt As DataSet = _db.selectDB(Sql, RS, reccnt)
 
+        If IsDBNull(dsCymndt.Tables(RS).Rows(0)("通貨")) Then
+            cur = vbNullString
+        Else
+            Sql = " and 採番キー = " & dsCymndt.Tables(RS).Rows(0)("通貨")
+            curds = getDsData("m25_currency", Sql)
+
+            cur = curds.Tables(RS).Rows(0)("通貨コード")
+        End If
+        TxtIDRCurrency.Text = cur
+
         Sql = " AND "
         Sql += "受注番号 = '" & CymnNo & "'"
         Sql += " AND "
@@ -258,14 +272,14 @@ Public Class BillingManagement
 
         '請求金額計を集計
         BillingAmount = IIf(
-            dsSkyuhd.Tables(RS).Compute("SUM(請求金額計)", Nothing) IsNot DBNull.Value,
-            dsSkyuhd.Tables(RS).Compute("SUM(請求金額計)", Nothing),
+            dsSkyuhd.Tables(RS).Compute("SUM(請求金額計_外貨)", Nothing) IsNot DBNull.Value,
+            dsSkyuhd.Tables(RS).Compute("SUM(請求金額計_外貨)", Nothing),
             0
         )
 
         '受注額にVAT額を加算
         Dim total As Decimal = 0    '見積金額+VAT=受注金額
-        total = dsCymnhd.Tables(RS).Rows(0)("見積金額") + (dsCymnhd.Tables(RS).Rows(0)("見積金額") * dsCymnhd.Tables(RS).Rows(0)("ＶＡＴ") / 100)
+        total = dsCymnhd.Tables(RS).Rows(0)("見積金額_外貨") + (dsCymnhd.Tables(RS).Rows(0)("見積金額_外貨") * dsCymnhd.Tables(RS).Rows(0)("ＶＡＴ") / 100)
 
         '受注データ、見積データから対象の請求金額・請求残高を表示
         DgvCymn.Rows.Add()
@@ -291,8 +305,8 @@ Public Class BillingManagement
             DgvCymndt.Rows(i).Cells("受注個数").Value = dsCymndt.Tables(RS).Rows(i)("受注数量")
             DgvCymndt.Rows(i).Cells("単位").Value = dsCymndt.Tables(RS).Rows(i)("単位")
             DgvCymndt.Rows(i).Cells("売上数量").Value = dsCymndt.Tables(RS).Rows(i)("売上数量")
-            DgvCymndt.Rows(i).Cells("売上単価").Value = dsCymndt.Tables(RS).Rows(i)("見積単価")
-            DgvCymndt.Rows(i).Cells("売上金額").Value = dsCymndt.Tables(RS).Rows(i)("見積金額")
+            DgvCymndt.Rows(i).Cells("売上単価").Value = dsCymndt.Tables(RS).Rows(i)("見積単価_外貨")
+            DgvCymndt.Rows(i).Cells("売上金額").Value = dsCymndt.Tables(RS).Rows(i)("見積金額_外貨")
         Next
 
         '受注明細の件数カウント
@@ -320,7 +334,7 @@ Public Class BillingManagement
 
 
             DgvHistory.Rows(i).Cells("請求先").Value = dsSkyuhd.Tables(RS).Rows(i)("得意先名")
-            DgvHistory.Rows(i).Cells("請求金額").Value = dsSkyuhd.Tables(RS).Rows(i)("請求金額計")
+            DgvHistory.Rows(i).Cells("請求金額").Value = dsSkyuhd.Tables(RS).Rows(i)("請求金額計_外貨")
             DgvHistory.Rows(i).Cells("備考1").Value = dsSkyuhd.Tables(RS).Rows(i)("備考1")
             DgvHistory.Rows(i).Cells("備考2").Value = dsSkyuhd.Tables(RS).Rows(i)("備考2")
             DgvHistory.Rows(i).Cells("請求済み受注番号").Value = dsSkyuhd.Tables(RS).Rows(i)("受注番号")
@@ -416,6 +430,8 @@ Public Class BillingManagement
         Dim strToday As String = formatDatetime(dtToday)
         Dim reccnt As Integer = 0
         Dim BillingAmount As Decimal = 0
+        Dim Amount As Decimal = 0      '今回請求金額計
+        Dim Amount_cur As Decimal = 0  '今回請求金額計_外貨
 
         Dim Sql As String = ""
 
@@ -478,6 +494,12 @@ Public Class BillingManagement
             Return
         End If
 
+        'レートの取得
+        Dim strRate As Decimal = setRate(dsCymnhd.Tables(RS).Rows(0)("通貨").ToString())
+
+        Amount_cur = DgvAdd.Rows(0).Cells("今回請求金額計").Value
+        Amount = Math.Ceiling(Amount_cur / strRate)  '画面の金額をIDRに変換　切り上げ
+
         '採番データを取得・更新
         Dim DM As String = getSaiban("80", dtToday)
 
@@ -485,7 +507,8 @@ Public Class BillingManagement
         Sql += "Public."
         Sql += "t23_skyuhd("
         Sql += "会社コード, 請求番号, 請求区分, 請求日, 受注番号, 受注番号枝番, 客先番号, 得意先コード, 得意先名"
-        Sql += ", 請求金額計, 入金額計, 売掛残高, 備考1, 備考2, 取消区分, 入金予定日, 登録日, 更新者, 更新日)"
+        Sql += ", 請求金額計, 入金額計, 売掛残高, 備考1, 備考2, 取消区分, 入金予定日, 登録日, 更新者, 更新日"
+        Sql += ", 請求金額計_外貨, 入金額計_外貨, 売掛残高_外貨, 通貨, レート)"
         Sql += " VALUES('"
         Sql += dsCymnhd.Tables(RS).Rows(0)("会社コード").ToString
         Sql += "', '"
@@ -505,10 +528,10 @@ Public Class BillingManagement
         Sql += "', '"
         Sql += dsCymnhd.Tables(RS).Rows(0)("得意先名").ToString
         Sql += "', '"
-        Sql += DgvAdd.Rows(0).Cells("今回請求金額計").Value
-        Sql += "', 0" '入金額計を0で設定
+        Sql += formatNumber(Amount)  '入金額計  
+        Sql += "', 0"  '入金額計を0で設定
         Sql += ", '"
-        Sql += DgvAdd.Rows(0).Cells("今回請求金額計").Value
+        Sql += formatNumber(Amount)  '売掛残高
         Sql += "', '"
         Sql += DgvAdd.Rows(0).Cells("今回備考1").Value
         Sql += "', '"
@@ -523,6 +546,19 @@ Public Class BillingManagement
         Sql += frmC01F10_Login.loginValue.TantoNM
         Sql += "', '"
         Sql += strToday
+
+        Sql += "', '"
+        Sql += formatNumber(Amount_cur) '入金額計_外貨
+        Sql += "', '"
+        Sql += "0" '入金額計を0で設定
+        Sql += "', '"
+        Sql += formatNumber(Amount_cur)  '売掛残高_外貨
+        Sql += "', '"
+        Sql += dsCymnhd.Tables(RS).Rows(0)("通貨").ToString()
+        Sql += "', '"
+        Sql += UtilClass.formatNumberF10(strRate)
+
+
         Sql += "')"
 
         _db.executeDB(Sql)
@@ -532,6 +568,28 @@ Public Class BillingManagement
         Me.Dispose()
     End Sub
 
+    '通貨の採番キーからレートを取得・設定
+    '基準日が請求日以前の最新のもの
+    Private Function setRate(ByVal strKey As Integer) As Decimal
+        Dim Sql As String
+
+        Sql = " AND 採番キー = " & strKey & ""
+        Sql += " AND 基準日 <= '" & UtilClass.strFormatDate(DtpBillingDate.Text) & "'"  '請求日
+        Sql += " ORDER BY 基準日 DESC "
+
+        Dim ds As DataSet = getDsData("t71_exchangerate", Sql)
+
+        If ds.Tables(RS).Rows.Count > 0 Then
+            setRate = ds.Tables(RS).Rows(0)("レート")
+        Else
+            If CultureInfo.CurrentCulture.Name.ToString = CommonConst.CI_ID Then
+                setRate = CommonConst.BASE_RATE_IDR
+            Else
+                setRate = CommonConst.BASE_RATE_JPY
+            End If
+        End If
+
+    End Function
 
     'param1：String テーブル名
     'param2：String 詳細条件

@@ -134,6 +134,10 @@ Public Class BillingList
         Dim Sql As String = ""
         Dim reccnt As Integer = 0 'DB用（デフォルト）
 
+        Dim curds As DataSet  'm25_currency
+        Dim cur As String
+
+
         Try
 
             Sql = "SELECT"
@@ -184,6 +188,10 @@ Public Class BillingList
                 DgvBilling.Columns.Add("受注番号枝番", "JobOrderSubNumber")
                 DgvBilling.Columns.Add("得意先コード", "CustomerCode")
                 DgvBilling.Columns.Add("得意先名", "CustomerName")
+                DgvBilling.Columns.Add("通貨_外貨", "Currency")
+                DgvBilling.Columns.Add("請求金額計_外貨", "TotalBillingAmountForeignCurrency")
+                DgvBilling.Columns.Add("売掛残高_外貨", "AccountsReceivableBalanceForeignCurrency")
+                DgvBilling.Columns.Add("通貨", "Currency")
                 DgvBilling.Columns.Add("請求金額計", "TotalBillingAmount")
                 DgvBilling.Columns.Add("売掛残高", "AccountsReceivableBalance")
                 DgvBilling.Columns.Add("備考1", "Remarks1")
@@ -200,6 +208,10 @@ Public Class BillingList
                 DgvBilling.Columns.Add("受注番号枝番", "受注番号枝番")
                 DgvBilling.Columns.Add("得意先コード", "得意先コード")
                 DgvBilling.Columns.Add("得意先名", "得意先名")
+                DgvBilling.Columns.Add("通貨_外貨", "通貨")
+                DgvBilling.Columns.Add("請求金額計_外貨", "請求金額計(外貨)")
+                DgvBilling.Columns.Add("売掛残高_外貨", "売掛残高(外貨)")
+                DgvBilling.Columns.Add("通貨", "通貨")
                 DgvBilling.Columns.Add("請求金額計", "請求金額計")
                 DgvBilling.Columns.Add("売掛残高", "売掛残高")
                 DgvBilling.Columns.Add("備考1", "備考1")
@@ -212,6 +224,16 @@ Public Class BillingList
             DgvBilling.Columns("売掛残高").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
             For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+
+                If IsDBNull(ds.Tables(RS).Rows(i)("通貨")) Then
+                    cur = vbNullString
+                Else
+                    Sql = " and 採番キー = " & ds.Tables(RS).Rows(i)("通貨")
+                    curds = getDsData("m25_currency", Sql)
+
+                    cur = curds.Tables(RS).Rows(0)("通貨コード")
+                End If
+
                 DgvBilling.Rows.Add()
                 DgvBilling.Rows(i).Cells("請求番号").Value = ds.Tables(RS).Rows(i)("請求番号")
 
@@ -236,6 +258,10 @@ Public Class BillingList
                 DgvBilling.Rows(i).Cells("受注番号枝番").Value = ds.Tables(RS).Rows(i)("受注番号枝番")
                 DgvBilling.Rows(i).Cells("得意先コード").Value = ds.Tables(RS).Rows(i)("得意先コード")
                 DgvBilling.Rows(i).Cells("得意先名").Value = ds.Tables(RS).Rows(i)("得意先名")
+                DgvBilling.Rows(i).Cells("通貨_外貨").Value = cur
+                DgvBilling.Rows(i).Cells("請求金額計_外貨").Value = ds.Tables(RS).Rows(i)("請求金額計_外貨")
+                DgvBilling.Rows(i).Cells("売掛残高_外貨").Value = ds.Tables(RS).Rows(i)("売掛残高_外貨")
+                DgvBilling.Rows(i).Cells("通貨").Value = "IDR"
                 DgvBilling.Rows(i).Cells("請求金額計").Value = ds.Tables(RS).Rows(i)("請求金額計")
                 DgvBilling.Rows(i).Cells("売掛残高").Value = ds.Tables(RS).Rows(i)("売掛残高")
                 DgvBilling.Rows(i).Cells("備考1").Value = ds.Tables(RS).Rows(i)("備考1")

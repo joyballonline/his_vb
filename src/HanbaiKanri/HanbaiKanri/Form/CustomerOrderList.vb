@@ -41,6 +41,7 @@ Public Class CustomerOrderList
     Private CompanyCode As String = ""
     Private OrderingNo As String()
     Private CustomerCode As String = ""
+    Private CurCode As String = ""  '通貨
     Private _parentForm As Form
 
     '-------------------------------------------------------------------------------
@@ -59,7 +60,8 @@ Public Class CustomerOrderList
                    ByRef prmRefLang As UtilLangHandler,
                    ByRef prmRefForm As Form,
                    ByRef prmRefCompany As String,
-                   ByRef prmRefCustomer As String)
+                   ByRef prmRefCustomer As String,
+                   ByRef prmCurCode As Integer)
         Call Me.New()
 
         _init = False
@@ -70,6 +72,7 @@ Public Class CustomerOrderList
         _langHd = prmRefLang
         CompanyCode = prmRefCompany
         CustomerCode = prmRefCustomer
+        CurCode = prmCurCode
         _parentForm = prmRefForm
         '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
         StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
@@ -96,6 +99,10 @@ Public Class CustomerOrderList
             DgvBilling.Columns.Add("受注番号枝番", "JobOrderSubNumber")
             DgvBilling.Columns.Add("得意先コード", "CustomerCode")
             DgvBilling.Columns.Add("得意先名", "CustomerName")
+            DgvBilling.Columns.Add("通貨_外貨", "Currency")
+            DgvBilling.Columns.Add("請求金額計_外貨", "TotalBillingAmountForeignCurrency")
+            DgvBilling.Columns.Add("売掛残高_外貨", "AccountsReceivableBalanceForeignCurrency")
+            DgvBilling.Columns.Add("通貨", "Currency")
             DgvBilling.Columns.Add("請求金額計", "TotalBillingAmount")
             DgvBilling.Columns.Add("売掛残高", "AccountsReceivableBalance")
             DgvBilling.Columns.Add("備考1", "Remarks1")
@@ -110,6 +117,10 @@ Public Class CustomerOrderList
             DgvBilling.Columns.Add("受注番号枝番", "受注番号枝番")
             DgvBilling.Columns.Add("得意先コード", "得意先コード")
             DgvBilling.Columns.Add("得意先名", "得意先名")
+            DgvBilling.Columns.Add("通貨_外貨", "通貨")
+            DgvBilling.Columns.Add("請求金額計_外貨", "請求金額計(外貨)")
+            DgvBilling.Columns.Add("売掛残高_外貨", "売掛残高(外貨)")
+            DgvBilling.Columns.Add("通貨", "通貨")
             DgvBilling.Columns.Add("請求金額計", "請求金額計")
             DgvBilling.Columns.Add("売掛残高", "売掛残高")
             DgvBilling.Columns.Add("備考1", "備考1")
@@ -129,6 +140,10 @@ Public Class CustomerOrderList
     '一覧表示処理
     Private Sub PurchaseListLoad()
 
+        Dim curds As DataSet  'm25_currency
+        Dim cur As String
+
+
         'データクリア
         DgvBilling.Rows.Clear()
 
@@ -138,6 +153,9 @@ Public Class CustomerOrderList
             Sql += "得意先コード ILIKE '%" & CustomerCode & "%'"
             Sql += " AND "
             Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+            If CurCode <> 0 Then
+                Sql += "AND 通貨 = " & CurCode
+            End If
             Sql += " ORDER BY 更新日 DESC "
 
             '請求基本取得
@@ -148,6 +166,17 @@ Public Class CustomerOrderList
             'ds = _db.selectDB(Sql, RS, reccnt)
 
             For i As Integer = 0 To dsSkyuhd.Tables(RS).Rows.Count - 1
+
+                If IsDBNull(dsSkyuhd.Tables(RS).Rows(0)("通貨")) Then
+                    cur = vbNullString
+                Else
+                    Sql = " and 採番キー = " & dsSkyuhd.Tables(RS).Rows(0)("通貨")
+                    curds = getDsData("m25_currency", Sql)
+
+                    cur = curds.Tables(RS).Rows(0)("通貨コード")
+                End If
+
+
                 DgvBilling.Rows.Add()
                 DgvBilling.Rows(i).Cells("請求番号").Value = dsSkyuhd.Tables(RS).Rows(i)("請求番号")
                 If frmC01F10_Login.loginValue.Language = "ENG" Then
@@ -167,6 +196,10 @@ Public Class CustomerOrderList
                 DgvBilling.Rows(i).Cells("受注番号枝番").Value = dsSkyuhd.Tables(RS).Rows(i)("受注番号枝番")
                 DgvBilling.Rows(i).Cells("得意先コード").Value = dsSkyuhd.Tables(RS).Rows(i)("得意先コード")
                 DgvBilling.Rows(i).Cells("得意先名").Value = dsSkyuhd.Tables(RS).Rows(i)("得意先名")
+                DgvBilling.Rows(i).Cells("通貨_外貨").Value = cur
+                DgvBilling.Rows(i).Cells("請求金額計_外貨").Value = dsSkyuhd.Tables(RS).Rows(i)("請求金額計_外貨")
+                DgvBilling.Rows(i).Cells("売掛残高_外貨").Value = dsSkyuhd.Tables(RS).Rows(i)("売掛残高_外貨")
+                DgvBilling.Rows(i).Cells("通貨").Value = "IDR"
                 DgvBilling.Rows(i).Cells("請求金額計").Value = dsSkyuhd.Tables(RS).Rows(i)("請求金額計")
                 DgvBilling.Rows(i).Cells("売掛残高").Value = dsSkyuhd.Tables(RS).Rows(i)("売掛残高")
                 DgvBilling.Rows(i).Cells("備考1").Value = dsSkyuhd.Tables(RS).Rows(i)("備考1")
@@ -263,7 +296,7 @@ Public Class CustomerOrderList
                 BillingNo = DgvBilling.Rows(r.Index).Cells("請求番号").Value
                 OrderNo = DgvBilling.Rows(r.Index).Cells("受注番号").Value
                 OrderSuffix = DgvBilling.Rows(r.Index).Cells("受注番号枝番").Value
-                BillingSubTotal += DgvBilling.Rows(r.Index).Cells("請求金額計").Value
+                BillingSubTotal += DgvBilling.Rows(r.Index).Cells("請求金額計_外貨").Value
 
                 Sql = " AND "
                 Sql += "受注番号 = '" & OrderNo & "'"
@@ -271,6 +304,9 @@ Public Class CustomerOrderList
                 Sql += "受注番号枝番 = '" & OrderSuffix & "'"
                 Sql += " AND "
                 Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+                If CurCode <> 0 Then
+                    Sql += "AND 通貨 = " & CurCode
+                End If
 
                 '受注基本（請求債情報）
                 Dim dsCymnhd As DataSet = getDsData("t10_cymnhd", Sql)
@@ -319,7 +355,7 @@ Public Class CustomerOrderList
 
                 'joinするのでとりあえず直書き
                 Sql = "SELECT"
-                Sql += " t11.メーカー, t11.品名, t11.型式, t11.受注数量, t11.見積単価, t11.見積金額,t11.単位"
+                Sql += " t11.メーカー, t11.品名, t11.型式, t11.受注数量, t11.見積単価_外貨, t11.見積金額_外貨,t11.単位"
                 Sql += " FROM "
                 Sql += " public.t11_cymndt t11 "
 
@@ -341,6 +377,9 @@ Public Class CustomerOrderList
                 Sql += "t11.受注番号枝番 ILIKE '%" & OrderSuffix & "%'"
                 Sql += " AND "
                 Sql += "t10.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+                If CurCode <> 0 Then
+                    Sql += "AND t11.通貨 = " & CurCode
+                End If
 
                 '受注明細（商品情報）
                 Dim dsCymndt As DataSet = _db.selectDB(Sql, RS, reccnt)
@@ -361,8 +400,9 @@ Public Class CustomerOrderList
                     sheet.Range("B" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("メーカー") & Environment.NewLine & dsCymndt.Tables(RS).Rows(i)("品名") & Environment.NewLine & dsCymndt.Tables(RS).Rows(i)("型式")
                     sheet.Range("C" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("受注数量")
                     sheet.Range("D" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("単位")
-                    sheet.Range("E" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("見積単価")
-                    sheet.Range("F" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("見積金額")
+                    sheet.Range("E" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("見積単価_外貨")
+                    sheet.Range("F" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("見積金額_外貨")
+
                     currentNum += 1
                     currentRow += 1
                 Next i
