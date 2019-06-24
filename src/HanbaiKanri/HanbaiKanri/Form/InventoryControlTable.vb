@@ -9,8 +9,8 @@ Imports UtilMDL.FileDirectory
 Imports UtilMDL.xls
 Imports System.Globalization
 Imports System.Text.RegularExpressions
-Imports Microsoft.Office.Interop
-Imports Microsoft.Office.Interop.Excel
+'Imports Microsoft.Office.Interop
+'Imports Microsoft.Office.Interop.Excel
 Imports System.IO
 
 Public Class InventoryControlTable
@@ -101,8 +101,21 @@ Public Class InventoryControlTable
 
         End If
 
-        getList() 'データ取得・表示
+        createWarehouseCombobox(CmWarehouseFrom)
+        DtpMovingDayFrom.Text = New DateTime(Today.Year, Today.Month, 1)
+        DtpMovingDayTo.Text = New DateTime(Today.Year, Today.Month, DateTime.DaysInMonth(Today.Year, Today.Month))
+        createStorageType(CmStorageTypeFrom)
+        createStorageType(CmStorageTypeTo)
+        CmStorageTypeTo.SelectedIndex = CmStorageTypeTo.Items.Count() - 1
 
+        AddHandler CmWarehouseFrom.SelectedIndexChanged, AddressOf CmWarehouseFrom_SelectedIndexChanged
+        AddHandler DtpMovingDayFrom.ValueChanged, AddressOf DtpMovingDayFrom_ValueChanged
+        AddHandler DtpMovingDayTo.ValueChanged, AddressOf DtpMovingDayTo_ValueChanged
+        AddHandler CmStorageTypeFrom.SelectedIndexChanged, AddressOf CmStorageTypeFrom_SelectedIndexChanged
+        AddHandler CmStorageTypeTo.SelectedIndexChanged, AddressOf CmStorageTypeTo_SelectedIndexChanged
+
+        'getList() 'データ取得・表示
+        setList() 'データ取得・表示
     End Sub
 
     '戻るボタン押下時
@@ -132,32 +145,71 @@ Public Class InventoryControlTable
     '商品別の見出しセット
     Private Sub setListHd()
 
-        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+        'If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
 
+        '    DgvList.Columns.Add("メーカー", "Manufacturer")
+        '    DgvList.Columns.Add("品名", "ItemName")
+        '    DgvList.Columns.Add("型式", "Spec")
+        '    DgvList.Columns.Add("年月日", "Date")
+        '    DgvList.Columns.Add("取引先", "Suppliers")
+        '    DgvList.Columns.Add("入庫数量", "ReceiptQuantiy")
+        '    DgvList.Columns.Add("入庫単価", "ReceiptUnitPrice")
+        '    DgvList.Columns.Add("出庫数量", "DeliveryQuantiy")
+        '    DgvList.Columns.Add("出庫単価", "DeliveryUnitPrice")
+        '    DgvList.Columns.Add("在庫数", "StockQuantity")
+        '    DgvList.Columns.Add("入出庫種別", "StorageType")
+        '    DgvList.Columns.Add("備考", "Remarks")
+        'Else
+        '    DgvList.Columns.Add("メーカー", "メーカー")
+        '    DgvList.Columns.Add("品名", "品名")
+        '    DgvList.Columns.Add("型式", "型式")
+        '    DgvList.Columns.Add("年月日", "年月日")
+        '    DgvList.Columns.Add("取引先", "取引先")
+        '    DgvList.Columns.Add("入庫数量", "入庫数量")
+        '    DgvList.Columns.Add("入庫単価", "入庫単価")
+        '    DgvList.Columns.Add("出庫数量", "出庫数量")
+        '    DgvList.Columns.Add("出庫単価", "出庫単価")
+        '    DgvList.Columns.Add("在庫数", "在庫数")
+        '    DgvList.Columns.Add("入出庫種別", "入出庫種別")
+        '    DgvList.Columns.Add("備考", "備考")
+
+        '    DgvList.Columns("入庫数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        '    DgvList.Columns("入庫単価").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        '    DgvList.Columns("出庫数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        '    DgvList.Columns("出庫単価").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        '    DgvList.Columns("在庫数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+        'End If
+
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+            DgvList.Columns.Add("倉庫", "Manufacturer")
             DgvList.Columns.Add("メーカー", "Manufacturer")
             DgvList.Columns.Add("品名", "ItemName")
             DgvList.Columns.Add("型式", "Spec")
-            DgvList.Columns.Add("年月日", "Date")
+            DgvList.Columns.Add("伝票番号", "SlipNumber")
+            DgvList.Columns.Add("入出庫種別", "StorageType")
+            DgvList.Columns.Add("入出庫日", "InOutDate")
             DgvList.Columns.Add("取引先", "Suppliers")
-            DgvList.Columns.Add("入庫数量", "ReceiptQuantiy")
+            DgvList.Columns.Add("入庫数量", "GoodsReceiptQuantity")
             DgvList.Columns.Add("入庫単価", "ReceiptUnitPrice")
-            DgvList.Columns.Add("出庫数量", "DeliveryQuantiy")
+            DgvList.Columns.Add("出庫数量", "GoodsIssueQuantity")
             DgvList.Columns.Add("出庫単価", "DeliveryUnitPrice")
-            DgvList.Columns.Add("在庫数", "StockQuantity")
-            DgvList.Columns.Add("入出庫種別", "InOutClassification")
+            DgvList.Columns.Add("在庫数", "StocksQuantity")
             DgvList.Columns.Add("備考", "Remarks")
         Else
+            DgvList.Columns.Add("倉庫", "倉庫")
             DgvList.Columns.Add("メーカー", "メーカー")
             DgvList.Columns.Add("品名", "品名")
             DgvList.Columns.Add("型式", "型式")
-            DgvList.Columns.Add("年月日", "年月日")
+            DgvList.Columns.Add("伝票番号", "伝票番号")
+            DgvList.Columns.Add("入出庫種別", "入出庫種別")
+            DgvList.Columns.Add("入出庫日", "入出庫日")
             DgvList.Columns.Add("取引先", "取引先")
             DgvList.Columns.Add("入庫数量", "入庫数量")
             DgvList.Columns.Add("入庫単価", "入庫単価")
             DgvList.Columns.Add("出庫数量", "出庫数量")
             DgvList.Columns.Add("出庫単価", "出庫単価")
             DgvList.Columns.Add("在庫数", "在庫数")
-            DgvList.Columns.Add("入出庫種別", "入出庫種別")
             DgvList.Columns.Add("備考", "備考")
 
             DgvList.Columns("入庫数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -165,7 +217,6 @@ Public Class InventoryControlTable
             DgvList.Columns("出庫数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             DgvList.Columns("出庫単価").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             DgvList.Columns("在庫数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-
         End If
 
     End Sub
@@ -220,8 +271,6 @@ Public Class InventoryControlTable
             Dim tmpItemName As String = ""
             Dim tmpSpec As String = ""
             Dim tmpQuantity As Integer = 0
-
-
 
             Dim dsHanyoInOut As DataSet = getDsHanyoData(CommonConst.INOUT_CLASS)
 
@@ -300,9 +349,9 @@ Public Class InventoryControlTable
     Private Sub outputExcel()
 
         '定義
-        Dim app As Excel.Application = Nothing
-        Dim book As Excel.Workbook = Nothing
-        Dim sheet As Excel.Worksheet = Nothing
+        Dim app As Microsoft.Office.Interop.Excel.Application = Nothing
+        Dim book As Microsoft.Office.Interop.Excel.Workbook = Nothing
+        Dim sheet As Microsoft.Office.Interop.Excel.Worksheet = Nothing
 
         'カーソルをビジー状態にする
         Cursor.Current = Cursors.WaitCursor
@@ -317,9 +366,9 @@ Public Class InventoryControlTable
             '出力ファイル名
             Dim sOutFile As String = sOutPath & "\InventoryControlTable_" & DateTime.Now.ToString("yyyyMMddHHmm") & ".xlsx"
 
-            app = New Excel.Application()
+            app = New Microsoft.Office.Interop.Excel.Application()
             book = app.Workbooks.Add(sHinaFile)  'テンプレート
-            sheet = CType(book.Worksheets(1), Excel.Worksheet)
+            sheet = CType(book.Worksheets(1), Microsoft.Office.Interop.Excel.Worksheet)
 
             sheet.PageSetup.RightHeader = "出力日：" & DateTime.Now.ToShortDateString
 
@@ -342,7 +391,7 @@ Public Class InventoryControlTable
 
                 If DgvList.Rows(i).Cells("メーカー").Value <> "" Then
 
-                    sheet.Range("A" & cellRowIndex.ToString, "I" & cellRowIndex.ToString).Borders(XlBordersIndex.xlEdgeTop).LineStyle = XlLineStyle.xlDouble
+                    sheet.Range("A" & cellRowIndex.ToString, "I" & cellRowIndex.ToString).Borders(Microsoft.Office.Interop.Excel.XlBordersIndex.xlEdgeTop).LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlDouble
 
                     'メーカー、品名、型式 の列結合
                     sheet.Range("A" & cellRowIndex.ToString, "B" & cellRowIndex.ToString).Merge() 'メーカー
@@ -353,11 +402,11 @@ Public Class InventoryControlTable
                     sheet.Range("C" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("品名").Value
                     sheet.Range("F" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("型式").Value
 
-                    sheet.Range("A" & cellRowIndex.ToString).HorizontalAlignment = Constants.xlLeft
-                    sheet.Range("C" & cellRowIndex.ToString).HorizontalAlignment = Constants.xlLeft
-                    sheet.Range("F" & cellRowIndex.ToString).HorizontalAlignment = Constants.xlLeft
+                    sheet.Range("A" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.Constants.xlLeft
+                    sheet.Range("C" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.Constants.xlLeft
+                    sheet.Range("F" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.Constants.xlLeft
 
-                    sheet.Range("A" & cellRowIndex.ToString, "I" & cellRowIndex.ToString).Borders(XlBordersIndex.xlEdgeBottom).LineStyle = XlLineStyle.xlDouble
+                    sheet.Range("A" & cellRowIndex.ToString, "I" & cellRowIndex.ToString).Borders(Microsoft.Office.Interop.Excel.XlBordersIndex.xlEdgeBottom).LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlDouble
 
                     cellRowIndex += 1 '次の行
 
@@ -365,20 +414,20 @@ Public Class InventoryControlTable
                     sheet.Range("E" & cellRowIndex.ToString, "F" & cellRowIndex.ToString).Merge() '出庫見出し
                     sheet.Range("C" & cellRowIndex.ToString).Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG, "GoodsReceipt", "入庫")
                     sheet.Range("E" & cellRowIndex.ToString).Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG, "GoodsDelivery", "出庫")
-                    sheet.Range("C" & cellRowIndex.ToString).HorizontalAlignment = Constants.xlCenter
-                    sheet.Range("E" & cellRowIndex.ToString).HorizontalAlignment = Constants.xlCenter
+                    sheet.Range("C" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.Constants.xlCenter
+                    sheet.Range("E" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.Constants.xlCenter
 
                     cellRowIndex += 1 '次の行
 
-                    sheet.Range("C" & cellRowIndex.ToString).HorizontalAlignment = Constants.xlLeft
-                    sheet.Range("D" & cellRowIndex.ToString).HorizontalAlignment = Constants.xlLeft
-                    sheet.Range("E" & cellRowIndex.ToString).HorizontalAlignment = Constants.xlLeft
-                    sheet.Range("F" & cellRowIndex.ToString).HorizontalAlignment = Constants.xlLeft
-                    sheet.Range("G" & cellRowIndex.ToString).HorizontalAlignment = Constants.xlLeft
+                    sheet.Range("C" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.Constants.xlLeft
+                    sheet.Range("D" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.Constants.xlLeft
+                    sheet.Range("E" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.Constants.xlLeft
+                    sheet.Range("F" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.Constants.xlLeft
+                    sheet.Range("G" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.Constants.xlLeft
 
                     '年月日、取引先、入庫（数量、単価）、出庫（数量、単価）、在庫数、備考
 
-                    sheet.Range("A" & cellRowIndex.ToString).Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG, "Date", "年月日")
+                    sheet.Range("A" & cellRowIndex.ToString).Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG, "Date", "入出庫日")
                     sheet.Range("B" & cellRowIndex.ToString).Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG, "Suppliers", "取引先")
                     sheet.Range("C" & cellRowIndex.ToString).Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG, "Quantity", "数量")
                     sheet.Range("D" & cellRowIndex.ToString).Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG, "UnitPrice", "単価")
@@ -388,14 +437,14 @@ Public Class InventoryControlTable
                     sheet.Range("H" & cellRowIndex.ToString).Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG, "InOutClassification", "入出庫種別")
                     sheet.Range("I" & cellRowIndex.ToString).Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG, "Remarks", "備考")
 
-                    sheet.Range("A" & cellRowIndex.ToString, "I" & cellRowIndex.ToString).Borders(XlBordersIndex.xlEdgeBottom).LineStyle = XlLineStyle.xlContinuous　　　　　'底の罫線
+                    sheet.Range("A" & cellRowIndex.ToString, "I" & cellRowIndex.ToString).Borders(Microsoft.Office.Interop.Excel.XlBordersIndex.xlEdgeBottom).LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous　　　　　'底の罫線
 
                     cellRowIndex += 1 '次の行
 
                 End If
 
                 '年月日、取引先、入庫（数量、単価）、出庫（数量、単価）、在庫数、備考
-                sheet.Range("A" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("年月日").Value
+                sheet.Range("A" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("入出庫日").Value
                 sheet.Range("B" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("取引先").Value
                 sheet.Range("C" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("入庫数量").Value
                 sheet.Range("D" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("入庫単価").Value
@@ -405,7 +454,7 @@ Public Class InventoryControlTable
                 sheet.Range("H" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("入出庫種別").Value
                 sheet.Range("I" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("備考").Value
 
-                sheet.Range("A" & cellRowIndex.ToString, "I" & cellRowIndex.ToString).Borders(XlBordersIndex.xlEdgeBottom).LineStyle = XlLineStyle.xlContinuous　　　　　'底の罫線
+                sheet.Range("A" & cellRowIndex.ToString, "I" & cellRowIndex.ToString).Borders(Microsoft.Office.Interop.Excel.XlBordersIndex.xlEdgeBottom).LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous　　　　　'底の罫線
             Next
 
             app.DisplayAlerts = True 'アラート無効化を解除
@@ -528,4 +577,645 @@ Public Class InventoryControlTable
         Return getDsData("m90_hanyo", Sql)
     End Function
 
+    Private Sub createWarehouseCombobox(ByRef prmComboboxName As ComboBox, Optional ByRef prmVal As String = "")
+        prmComboboxName.DisplayMember = "Text"
+        prmComboboxName.ValueMember = "Value"
+
+        Dim Sql As String = " AND 無効フラグ = '" & CommonConst.FLAG_ENABLED & "'"
+
+        Dim ds As DataSet = getDsData("m20_warehouse", Sql)
+
+        Dim tb As New DataTable("Table")
+        tb.Columns.Add("Text", GetType(String))
+        tb.Columns.Add("Value", GetType(String))
+
+        'コンボボックスが倉庫だったら
+        If prmComboboxName.Name = "CmWarehouseFrom" Then
+            tb.Rows.Add(IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG, "All", "すべて"), "all")
+        End If
+        'For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+        '    tb.Rows.Add(ds.Tables(RS).Rows(i)("名称"), ds.Tables(RS).Rows(i)("倉庫コード"))
+        'Next
+        For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+            tb.Rows.Add(ds.Tables(RS).Rows(i)("名称"), ds.Tables(RS).Rows(i)("倉庫コード"))
+        Next
+
+
+        prmComboboxName.DataSource = tb
+
+        '倉庫データがあったら
+        If ds.Tables(RS).Rows.Count > 0 Then
+            If prmVal IsNot "" Then
+                prmComboboxName.SelectedValue = prmVal
+            Else
+                prmComboboxName.SelectedIndex = 0
+            End If
+        End If
+
+    End Sub
+
+    '処理区分のコンボボックスを作成
+    Private Sub createStorageType(ByRef prmComboboxName As ComboBox, Optional ByRef prmVal As String = "")
+        Dim Sql As String = ""
+        Dim strViewText As String = ""
+        Dim strArrayData As String() = prmVal.Split(","c)
+
+        prmComboboxName.DisplayMember = "Text"
+        prmComboboxName.ValueMember = "Value"
+
+        Sql = " AND "
+        Sql += "固定キー ILIKE '" & CommonConst.INOUT_CLASS & "'"
+
+        Sql += " ORDER BY 表示順"
+
+        'リードタイムのリストを汎用マスタから取得
+        Dim dsHanyo As DataSet = getDsData("m90_hanyo", Sql)
+
+        Dim tb As New DataTable("Table")
+        tb.Columns.Add("Text", GetType(String))
+        tb.Columns.Add("Value", GetType(String))
+
+        strViewText = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG, "文字２", "文字１")
+
+        For x As Integer = 0 To dsHanyo.Tables(RS).Rows.Count - 1
+            tb.Rows.Add(dsHanyo.Tables(RS).Rows(x)(strViewText), dsHanyo.Tables(RS).Rows(x)("可変キー"))
+        Next
+
+        prmComboboxName.DataSource = tb
+        prmComboboxName.SelectedIndex = 0
+
+    End Sub
+
+    Private Sub CmWarehouseFrom_SelectedIndexChanged(sender As Object, e As EventArgs)
+        setList()
+    End Sub
+
+    Private Sub DtpMovingDayFrom_ValueChanged(sender As Object, e As EventArgs)
+        setList()
+    End Sub
+
+    Private Sub DtpMovingDayTo_ValueChanged(sender As Object, e As EventArgs)
+        setList()
+    End Sub
+
+    Private Sub CmStorageTypeFrom_SelectedIndexChanged(sender As Object, e As EventArgs)
+        setList()
+    End Sub
+
+    Private Sub CmStorageTypeTo_SelectedIndexChanged(sender As Object, e As EventArgs)
+        setList()
+    End Sub
+
+    '変更されたら一覧を再取得する
+    Private Sub setList()
+        Dim reccnt As Integer = 0 'DB用（デフォルト）
+        Dim Sql As String = ""
+
+        DgvList.Columns.Clear() '見出しクリア
+        DgvList.Rows.Clear() '一覧クリア
+
+        setListHd() '見出し行セット
+
+        'Sql = "SELECT "
+
+        'Sql += " m21.会社コード, m21.メーカー, m21.品名, m21.型式, m21.倉庫コード, m21.伝票番号 "
+        'Sql += " , m21.行番号, m21.ロケ番号, m21.前月末数量, m20.名称, m90.文字１, m90.文字２, m21.現在庫数 "
+        'Sql += " , n70.入出庫区分 as 入庫, n70.数量 as 入庫数量, n70.備考 as 入庫備考, t42.仕入先名, t43.仕入値 "
+        'Sql += " , s70.入出庫区分 as 出庫, s70.入出庫日 as 出庫日, s70.数量 as 出庫数量 "
+        'Sql += " , s70.備考 as 出庫備考, t44.得意先名, t45.売単価 "
+
+        'Sql += " FROM "
+        'Sql += " m21_zaiko m21 "
+
+        'Sql += " LEFT JOIN " '入庫データ
+        'Sql += " t70_inout n70 "
+        'Sql += " ON "
+        'Sql += " m21.倉庫コード ILIKE n70.倉庫コード "
+        'Sql += " AND "
+        'Sql += " n70.入出庫区分 ILIKE '1' " '入庫
+        'Sql += " AND ( m21.伝票番号 ILIKE n70.伝票番号 AND m21.行番号 = n70.行番号) "
+
+        'Sql += " LEFT JOIN " '入庫データの場合の仕入先情報取得
+        'Sql += " t42_nyukohd t42 "
+        'Sql += " ON "
+        'Sql += " n70.会社コード ILIKE  t42.会社コード "
+        'Sql += " AND "
+        'Sql += " n70.伝票番号 ILIKE  t42.入庫番号 "
+
+        'Sql += " LEFT JOIN " '入庫データの場合の仕入値取得
+        'Sql += " t43_nyukodt t43 "
+        'Sql += " ON "
+        'Sql += " t42.会社コード ILIKE  t43.会社コード "
+        'Sql += " AND "
+        'Sql += " t42.入庫番号 ILIKE  t43.入庫番号 "
+        'Sql += " AND "
+        'Sql += " m21.行番号 = t43.行番号 "
+
+
+        'Sql += " LEFT JOIN " '出庫データ
+        'Sql += " t70_inout s70 "
+        'Sql += " ON "
+        'Sql += " m21.倉庫コード ILIKE s70.倉庫コード "
+        'Sql += " AND "
+        'Sql += " s70.入出庫区分 ILIKE '2' "
+        'Sql += " AND "
+        'Sql += " m21.ロケ番号 = s70.ロケ番号 "
+
+        'Sql += " LEFT JOIN " '出庫データの場合の得意先情報取得
+        'Sql += " t44_shukohd t44 "
+        'Sql += " ON "
+        'Sql += " s70.会社コード ILIKE  t44.会社コード "
+        'Sql += " AND "
+        'Sql += " s70.伝票番号 ILIKE  t44.出庫番号 "
+
+        'Sql += " LEFT JOIN " '出庫データの場合の売単価取得
+        'Sql += " t45_shukodt t45 "
+        'Sql += " ON "
+        'Sql += " t44.会社コード ILIKE  t45.会社コード "
+        'Sql += " AND "
+        'Sql += " t44.出庫番号 ILIKE  t45.出庫番号 "
+        'Sql += " AND "
+        'Sql += " m21.行番号 = t45.行番号 "
+
+        'Sql += " LEFT JOIN " '倉庫名
+        'Sql += " m20_warehouse m20 "
+        'Sql += " ON "
+        'Sql += " m21.会社コード ILIKE m20.会社コード "
+        'Sql += " AND "
+        'Sql += " m21.倉庫コード ILIKE m20.倉庫コード "
+
+        'Sql += " LEFT JOIN " '汎用マスタ（入出庫種別）
+        'Sql += " m90_hanyo m90 "
+        'Sql += " ON "
+        'Sql += " m21.会社コード ILIKE m90.会社コード "
+        'Sql += " AND "
+        'Sql += " m90.固定キー ILIKE '" & CommonConst.INOUT_CLASS & "'"
+        'Sql += " AND "
+        'Sql += " m21.入出庫種別 ILIKE m90.可変キー "
+
+        'Sql += " WHERE "
+        'Sql += " m21.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "' "
+        'Sql += " AND "
+        'Sql += " m21.無効フラグ = " & CommonConst.CANCEL_KBN_ENABLED.ToString
+
+        'Sql += IIf(CmWarehouseFrom.SelectedIndex = -1, " AND m21.倉庫コード = '" & CmWarehouseFrom.SelectedValue.ToString & "'", "")
+        ''Sql += " AND "
+        ''Sql += " m21.最終入庫日 >= '" & UtilClass.formatDatetime(DtpMovingDayFrom.Text) & "'"
+        ''Sql += " AND "
+        ''Sql += " m21.最終入庫日 <= '" & UtilClass.formatDatetime(DtpMovingDayTo.Text) & "'"
+        'Sql += " AND "
+        'Sql += " m21.入出庫種別 >= '" & CmStorageTypeFrom.SelectedValue.ToString & "'"
+        'Sql += " AND "
+        'Sql += " m21.入出庫種別 <= '" & CmStorageTypeTo.SelectedValue.ToString & "'"
+
+        'Sql += " GROUP BY "
+        'Sql += " m21.会社コード, m21.メーカー, m21.品名, m21.型式, m21.倉庫コード, m21.伝票番号 "
+        'Sql += " , m21.行番号, m21.ロケ番号, m21.前月末数量, m20.名称, m90.文字１, m90.文字２, m21.現在庫数 "
+        'Sql += " , n70.入出庫区分, n70.数量, n70.備考, t42.仕入先名, t43.仕入値 "
+        'Sql += " , s70.入出庫区分, s70.入出庫日, s70.数量 "
+        'Sql += " , s70.備考, t44.得意先名, t45.売単価 "
+
+
+        '================================================================
+
+
+        '在庫マスタから検索条件に一致するデータを取得
+        Sql = "SELECT "
+        Sql += " m21.会社コード, m21.倉庫コード, m21.ロケ番号, m21.メーカー, m21.品名, m21.型式  "
+        Sql += " ,m21.伝票番号, m21.行番号, m21.入出庫種別, m21.前月末数量 "
+        Sql += " FROM "
+        Sql += " m21_zaiko m21 "
+
+        Sql += " WHERE "
+        Sql += " m21.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "' "
+
+        If CmWarehouseFrom.SelectedValue.ToString <> "all" Then
+            Sql += " AND "
+            Sql += " m21.倉庫コード = '" & CmWarehouseFrom.SelectedValue.ToString & "'"
+        End If
+
+        Sql += " AND "
+        Sql += " m21.無効フラグ = " & CommonConst.CANCEL_KBN_ENABLED.ToString
+        'Sql += " AND "
+        'Sql += " m21.最終入庫日 >= '" & UtilClass.formatDatetime(DtpMovingDayFrom.Text) & "'"
+        'Sql += " AND "
+        'Sql += " m21.最終入庫日 <= '" & UtilClass.formatDatetime(DtpMovingDayTo.Text) & "'"
+        Sql += " AND "
+        Sql += " m21.入出庫種別 >= '" & CmStorageTypeFrom.SelectedValue.ToString & "'"
+        Sql += " AND "
+        Sql += " m21.入出庫種別 <= '" & CmStorageTypeTo.SelectedValue.ToString & "'"
+
+        Sql += " GROUP BY "
+        Sql += " m21.会社コード, m21.倉庫コード, m21.ロケ番号, m21.メーカー, m21.品名, m21.型式  "
+        Sql += " ,m21.伝票番号, m21.行番号, m21.入出庫種別, m21.前月末数量 "
+        'Sql += " ,m20.名称, m90.文字１, m90.文字２ "
+
+        Dim dsBaseList = _db.selectDB(Sql, RS, reccnt)
+
+        Dim currentCul1 As Long = 0
+        Dim currentManufacturer As String = ""
+        Dim currentItemName As String = ""
+        Dim currentSpec As String = ""
+        Dim productFlg As Boolean = False
+
+        Dim test As Date = DtpMovingDayFrom.Text
+
+        't70_inoutから入庫、出庫データを取得
+        For i As Integer = 0 To dsBaseList.Tables(RS).Rows.Count - 1
+            'Sql = "SELECT "
+            'Sql += " t70.会社コード, t70.倉庫コード, t70.ロケ番号, t70.メーカー, t70.品名, t70.型式  "
+            'Sql += " ,t70.数量 ,t70.伝票番号, t70.行番号, t70.入出庫種別, t70.入出庫日, t70.備考, t70.入出庫区分, m20.名称 "
+            'Sql += " ,m90.文字１, m90.文字２, t43.仕入先名, t43.仕入値, t43.入庫数量 "
+            'Sql += " ,t44.得意先名, t45.売単価, t45.出庫数量 "
+            'Sql += " FROM "
+            'Sql += " t70_inout t70 "
+
+            'Sql += " LEFT JOIN " '倉庫マスタ
+            'Sql += " m20_warehouse m20 "
+            'Sql += " ON "
+            'Sql += " t70.会社コード = m20.会社コード "
+            'Sql += " AND "
+            'Sql += " t70.倉庫コード ILIKE m20.倉庫コード"
+
+            'Sql += " LEFT JOIN " '汎用マスタ
+            'Sql += " m90_hanyo m90 "
+            'Sql += " ON "
+            'Sql += " t70.会社コード = m90.会社コード "
+            'Sql += " AND "
+            'Sql += " m90.固定キー ILIKE '" & CommonConst.INOUT_CLASS & "'"
+            'Sql += " AND "
+            'Sql += " m90.可変キー ILIKE t70.入出庫種別 "
+
+            'Sql += " LEFT JOIN " '入庫マスタ
+            'Sql += " t43_nyukodt t43 "
+            'Sql += " ON "
+            'Sql += " t70.会社コード = t43.会社コード "
+            'Sql += " AND "
+            'Sql += " t70.伝票番号 ILIKE t43.入庫番号 "
+            'Sql += " AND "
+            'Sql += " t70.行番号 = t43.行番号 "
+
+            'Sql += " LEFT JOIN " '入庫マスタ
+            'Sql += " t44_shukohd t44 "
+            'Sql += " ON "
+            'Sql += " t70.会社コード = t44.会社コード "
+            'Sql += " AND "
+            'Sql += " t70.伝票番号 ILIKE t44.出庫番号 "
+
+            'Sql += " LEFT JOIN " '入庫マスタ
+            'Sql += " t45_shukodt t45 "
+            'Sql += " ON "
+            'Sql += " t70.会社コード = t45.会社コード "
+            'Sql += " AND "
+            'Sql += " t70.伝票番号 ILIKE t45.出庫番号 "
+            'Sql += " AND "
+            'Sql += " t70.行番号 = t45.行番号 "
+
+            'Sql += " WHERE "
+            'Sql += " t70.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "' "
+            ''Sql += " AND "
+            ''Sql += " t70.倉庫コード ILIKE '" & dsBaseList.Tables(RS).Rows(i)("倉庫コード") & "'"
+            'Sql += " AND "
+            'Sql += " t70.メーカー ILIKE '" & dsBaseList.Tables(RS).Rows(i)("メーカー") & "'"
+            'Sql += " AND "
+            'Sql += " t70.品名 ILIKE '" & dsBaseList.Tables(RS).Rows(i)("品名") & "'"
+            'Sql += " AND "
+            'Sql += " t70.型式 ILIKE '" & dsBaseList.Tables(RS).Rows(i)("型式") & "'"
+            'Sql += " AND "
+
+            'Sql += " ( ("
+            'Sql += " t70.入出庫区分 ILIKE '1'"
+            'Sql += " AND "
+            'Sql += " t70.伝票番号 ILIKE '" & dsBaseList.Tables(RS).Rows(i)("伝票番号") & "'"
+            'Sql += " AND "
+            'Sql += " t70.行番号 = " & dsBaseList.Tables(RS).Rows(i)("行番号")
+            'Sql += " ) OR ( "
+            'Sql += " t70.入出庫区分 ILIKE '2'"
+            'Sql += " AND "
+            'Sql += " t70.ロケ番号 ILIKE concat('" & dsBaseList.Tables(RS).Rows(i)("伝票番号") & "','" & dsBaseList.Tables(RS).Rows(i)("行番号") & "')"
+            'Sql += " ) )"
+
+            ''Sql += " AND "
+            ''Sql += " t70.入出庫種別 ILIKE '" & dsBaseList.Tables(RS).Rows(i)("入出庫種別") & "'"
+            'Sql += " AND "
+            'Sql += " t70.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
+
+            'Sql += " ORDER BY "
+            'Sql += " t70.更新日 "
+
+
+            'Sql = "SELECT"
+            'Sql += "m21.会社コード, m21.倉庫コード, m21.ロケ番号, m21.メーカー, m21.品名, m21.型式, m21.伝票番号, m21.行番号"
+            'Sql += ", m21.入出庫種別, m21.前月末数量, n70.入出庫区分, n70.数量, n70.入出庫日, n70.仕入区分, n70.伝票番号, n70.行番号"
+            'Sql += " FROM "
+            'Sql += "  m21_zaiko m21 "
+            'Sql += " LEFT JOIN "
+            'Sql += " t70_inout n70 "
+            'Sql += " ON "
+            'Sql += " m21.会社コード ILIKE n70.会社コード "
+            'Sql += " AND "
+            'Sql += " m21.倉庫コード ILIKE n70.倉庫コード "
+            'Sql += " AND "
+            'Sql += " n70.入出庫区分 = '1' "
+            'Sql += " AND "
+            'Sql += " ((
+            '        m21.伝票番号 ILIKE n70.伝票番号
+            '        AND
+            '        m21.行番号 = n70.行番号
+            '        ) "
+            'Sql += " ) "
+            'Sql += " WHERE "
+            'Sql += " m21.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "' "
+            'Sql += " AND m21.無効フラグ = " & CommonConst.CANCEL_KBN_ENABLED.ToString
+            'Sql += " AND "
+            'Sql += " m21.入出庫種別 >= '" & CmStorageTypeFrom.SelectedValue.ToString & "'"
+            'Sql += " AND "
+            'Sql += " m21.入出庫種別 <= '" & CmStorageTypeTo.SelectedValue.ToString & "'"
+
+            'Sql += " ORDER BY "
+            'Sql += "m21.会社コード, m21.倉庫コード, m21.ロケ番号, m21.メーカー, m21.品名, m21.型式, m21.伝票番号, m21.行番号"
+            'Sql += ", m21.入出庫種別, m21.前月末数量, n70.入出庫区分, n70.数量, n70.入出庫日, n70.仕入区分, n70.伝票番号, n70.行番号"
+            'Sql += " GROUP BY "
+            'Sql += "m21.メーカー, m21.品名, m21.型式, m21.入出庫種別, n70.入出庫日"
+
+            '入庫データ取得
+            '----------------------------
+            Sql = "SELECT "
+            Sql += " n70.会社コード, n70.倉庫コード, n70.ロケ番号, n70.伝票番号, n70.行番号, n70.入出庫種別 "
+            Sql += ", n70.入出庫区分, n70.数量, n70.入出庫日, n70.仕入区分, n70.メーカー, n70.品名, n70.型式, n70.備考 "
+            Sql += ", t43.仕入先名, t43.仕入値 "
+            Sql += " ,m20.名称, m90.文字１, m90.文字２ "
+
+            Sql += " FROM "
+            Sql += "  t70_inout n70 "
+
+            Sql += " LEFT JOIN " '入庫明細
+            Sql += " t43_nyukodt t43 "
+            Sql += " ON "
+            Sql += " n70.会社コード = t43.会社コード "
+            Sql += " AND "
+            Sql += " n70.伝票番号 ILIKE t43.入庫番号 "
+            Sql += " AND "
+            Sql += " n70.行番号 = t43.行番号 "
+
+            Sql += " LEFT JOIN " '倉庫マスタ名称取得
+            Sql += " m20_warehouse m20 "
+            Sql += " ON "
+            Sql += " n70.会社コード = m20.会社コード "
+            Sql += " AND "
+            Sql += " n70.倉庫コード ILIKE m20.倉庫コード"
+
+            Sql += " LEFT JOIN " '汎用マスタ（入出庫種別）
+            Sql += " m90_hanyo m90 "
+            Sql += " ON "
+            Sql += " m90.会社コード = n70.会社コード "
+            Sql += " AND "
+            Sql += " m90.固定キー ILIKE '" & CommonConst.INOUT_CLASS & "'"
+            Sql += " AND "
+            Sql += " m90.可変キー ILIKE n70.入出庫種別 "
+
+            Sql += " WHERE "
+            Sql += " n70.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "' "
+            Sql += " AND n70.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
+            Sql += " AND "
+            Sql += " n70.入出庫日 >= '" & UtilClass.formatDatetime(DtpMovingDayFrom.Text) & "'"
+            Sql += " AND "
+            Sql += " n70.入出庫日 <= '" & UtilClass.formatDatetime(DtpMovingDayTo.Text) & "'"
+            Sql += " AND "
+            Sql += " n70.入出庫種別 >= '" & CmStorageTypeFrom.SelectedValue.ToString & "' "
+            Sql += " AND "
+            Sql += " n70.入出庫種別 <= '" & CmStorageTypeTo.SelectedValue.ToString & "' "
+            Sql += " AND "
+            Sql += " n70.倉庫コード ILIKE '" & dsBaseList.Tables(RS).Rows(i)("倉庫コード").ToString & "' "
+            Sql += " AND "
+            Sql += " n70.入出庫区分 ILIKE '1' " '入庫
+            Sql += " AND "
+            Sql += " (( "
+            Sql += " n70.伝票番号 ILIKE '" & dsBaseList.Tables(RS).Rows(i)("伝票番号").ToString & "' "
+            Sql += " AND "
+            Sql += " n70.行番号 = '" & dsBaseList.Tables(RS).Rows(i)("行番号").ToString & "' "
+            Sql += " ) OR ( "
+            Sql += " concat(n70.伝票番号,n70.行番号) ILIKE '" & dsBaseList.Tables(RS).Rows(i)("ロケ番号").ToString & "'"
+            Sql += " )) "
+
+            Sql += " ORDER BY "
+            Sql += " n70.倉庫コード, n70.入出庫日 "
+            'Sql += " n70.会社コード, n70.倉庫コード, n70.ロケ番号, n70.伝票番号, n70.行番号, n70.入出庫種別 "
+            'Sql += ", n70.入出庫区分, n70.数量, n70.入出庫日, n70.仕入区分, n70.伝票番号, n70.行番号 "
+            'Sql += " GROUP BY "
+            'Sql += "m21.メーカー, m21.品名, m21.型式, m21.入出庫種別, n70.入出庫日"
+
+            'Console.WriteLine("入庫SQL：" & Sql)
+
+            Dim dsNyukoList = _db.selectDB(Sql, RS, reccnt)
+
+            '商品が一致するかチェック
+            If currentManufacturer <> dsBaseList.Tables(RS).Rows(i)("メーカー").ToString And
+                currentItemName <> dsBaseList.Tables(RS).Rows(i)("品名").ToString And
+                currentSpec <> dsBaseList.Tables(RS).Rows(i)("型式").ToString Then
+
+                currentManufacturer = dsBaseList.Tables(RS).Rows(i)("メーカー").ToString
+                currentItemName = dsBaseList.Tables(RS).Rows(i)("品名").ToString
+                currentSpec = dsBaseList.Tables(RS).Rows(i)("型式").ToString
+
+                productFlg = False
+            Else
+                productFlg = True
+            End If
+
+            If test.ToString("dd") = "01" And productFlg = False Then
+
+                currentCul1 = Integer.Parse(dsBaseList.Tables(RS).Rows(i)("前月末数量"))
+
+            End If
+
+            Dim rowIndex As Integer
+
+            '入庫データ書き出し
+            If dsNyukoList.Tables(RS).Rows.Count > 0 Then
+                For x As Integer = 0 To dsNyukoList.Tables(RS).Rows.Count - 1
+                    DgvList.Rows.Add()
+
+                    rowIndex = DgvList.Rows.Count - 1 '現在の行数を取得
+
+                    DgvList.Rows(rowIndex).Cells("倉庫").Value = dsNyukoList.Tables(RS).Rows(x)("名称").ToString
+
+                    'DgvList.Rows(rowIndex).Cells("メーカー").Value = dsNyukoList.Tables(RS).Rows(x)("メーカー").ToString
+                    'DgvList.Rows(rowIndex).Cells("品名").Value = dsNyukoList.Tables(RS).Rows(x)("品名").ToString
+                    'DgvList.Rows(rowIndex).Cells("型式").Value = dsNyukoList.Tables(RS).Rows(x)("型式").ToString
+                    DgvList.Rows(rowIndex).Cells("メーカー").Value = IIf(productFlg, "", currentManufacturer)
+                    DgvList.Rows(rowIndex).Cells("品名").Value = IIf(productFlg, "", currentItemName)
+                    DgvList.Rows(rowIndex).Cells("型式").Value = IIf(productFlg, "", currentSpec)
+
+                    DgvList.Rows(rowIndex).Cells("伝票番号").Value = dsBaseList.Tables(RS).Rows(i)("伝票番号").ToString
+                    DgvList.Rows(rowIndex).Cells("入出庫種別").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
+                                                                    dsNyukoList.Tables(RS).Rows(x)("文字２"),
+                                                                    dsNyukoList.Tables(RS).Rows(x)("文字１"))
+
+                    DgvList.Rows(rowIndex).Cells("入出庫日").Value = dsNyukoList.Tables(RS).Rows(x)("入出庫日").ToString 't70 入出庫日
+                    DgvList.Rows(rowIndex).Cells("取引先").Value = dsNyukoList.Tables(RS).Rows(x)("仕入先名").ToString
+
+                    DgvList.Rows(rowIndex).Cells("入庫数量").Value = dsNyukoList.Tables(RS).Rows(x)("数量").ToString
+                    DgvList.Rows(rowIndex).Cells("入庫単価").Value = dsNyukoList.Tables(RS).Rows(x)("仕入値").ToString
+
+                    If test.ToString("dd") = "01" Then
+                        currentCul1 = currentCul1 + IIf(IsNumeric(dsNyukoList.Tables(RS).Rows(x)("数量").ToString),
+                                                                                   Integer.Parse(dsNyukoList.Tables(RS).Rows(x)("数量").ToString), 0)
+                        DgvList.Rows(rowIndex).Cells("在庫数").Value = currentCul1
+                    End If
+
+                    DgvList.Rows(i).Cells("備考").Value = dsNyukoList.Tables(RS).Rows(x)("備考").ToString
+
+                Next
+            End If
+
+            '出庫データ取得
+            '----------------------------
+            Sql = "SELECT "
+            Sql += " n70.会社コード, n70.倉庫コード, n70.ロケ番号, n70.伝票番号, n70.行番号, n70.入出庫種別 "
+            Sql += ", n70.入出庫区分, n70.数量, n70.入出庫日, n70.仕入区分, n70.メーカー, n70.品名, n70.型式, n70.備考 "
+            Sql += ", t44.得意先名, t45.売単価 "
+            Sql += " ,m20.名称, m90.文字１, m90.文字２ "
+
+            Sql += " FROM "
+            Sql += "  t70_inout n70 "
+
+            Sql += " LEFT JOIN " '出庫基本
+            Sql += " t44_shukohd t44 "
+            Sql += " ON "
+            Sql += " n70.会社コード = t44.会社コード "
+            Sql += " AND "
+            Sql += " n70.伝票番号 ILIKE t44.出庫番号 "
+
+            Sql += " LEFT JOIN " '入庫明細
+            Sql += " t45_shukodt t45 "
+            Sql += " ON "
+            Sql += " n70.会社コード = t45.会社コード "
+            Sql += " AND "
+            Sql += " n70.伝票番号 ILIKE t45.出庫番号 "
+            Sql += " AND "
+            Sql += " n70.行番号 = t45.行番号 "
+
+            Sql += " LEFT JOIN " '倉庫マスタ名称取得
+            Sql += " m20_warehouse m20 "
+            Sql += " ON "
+            Sql += " n70.会社コード = m20.会社コード "
+            Sql += " AND "
+            Sql += " n70.倉庫コード ILIKE m20.倉庫コード"
+
+            Sql += " LEFT JOIN " '汎用マスタ（入出庫種別）
+            Sql += " m90_hanyo m90 "
+            Sql += " ON "
+            Sql += " m90.会社コード = n70.会社コード "
+            Sql += " AND "
+            Sql += " m90.固定キー ILIKE '" & CommonConst.INOUT_CLASS & "'"
+            Sql += " AND "
+            Sql += " m90.可変キー ILIKE n70.入出庫種別 "
+
+            Sql += " WHERE "
+            Sql += " n70.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "' "
+            Sql += " AND n70.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
+            Sql += " AND "
+            Sql += " n70.入出庫日 >= '" & UtilClass.formatDatetime(DtpMovingDayFrom.Text) & "'"
+            Sql += " AND "
+            Sql += " n70.入出庫日 <= '" & UtilClass.formatDatetime(DtpMovingDayTo.Text) & "'"
+            Sql += " AND "
+            Sql += " n70.入出庫種別 >= '" & CmStorageTypeFrom.SelectedValue.ToString & "' "
+            Sql += " AND "
+            Sql += " n70.入出庫種別 <= '" & CmStorageTypeTo.SelectedValue.ToString & "' "
+            Sql += " AND "
+            Sql += " n70.倉庫コード ILIKE '" & dsBaseList.Tables(RS).Rows(i)("倉庫コード").ToString & "' "
+            Sql += " AND "
+            Sql += " n70.入出庫区分 ILIKE '2' " '出庫
+            Sql += " AND "
+            Sql += " n70.伝票番号 ILIKE '" & dsBaseList.Tables(RS).Rows(i)("伝票番号").ToString & "' "
+            Sql += " AND "
+            Sql += " n70.行番号 = '" & dsBaseList.Tables(RS).Rows(i)("行番号").ToString & "' "
+            'Sql += " ) OR ( "
+            'Sql += " n70.ロケ番号 ILIKE concat('" & dsBaseList.Tables(RS).Rows(i)("伝票番号").ToString & "', '" & dsBaseList.Tables(RS).Rows(i)("行番号").ToString & "')"
+
+            'Sql += " ORDER BY "
+            'Sql += " n70.会社コード, n70.倉庫コード, n70.ロケ番号, n70.伝票番号, n70.行番号, n70.入出庫種別 "
+            'Sql += ", n70.入出庫区分, n70.数量, n70.入出庫日, n70.仕入区分, n70.伝票番号, n70.行番号 "
+            'Sql += " GROUP BY "
+            'Sql += "m21.メーカー, m21.品名, m21.型式, m21.入出庫種別, n70.入出庫日"
+
+            '出庫データ
+            Dim dsShukkoList = _db.selectDB(Sql, RS, reccnt)
+
+            Console.WriteLine("出庫SQL：" & Sql)
+
+            'If test.ToString("dd") = "01" Then
+            '    currentCul1 = Integer.Parse(dsBaseList.Tables(RS).Rows(i)("前月末数量"))
+            'End If
+
+            '出庫データ書き出し
+            If dsShukkoList.Tables(RS).Rows.Count > 0 Then
+                For x As Integer = 0 To dsShukkoList.Tables(RS).Rows.Count - 1
+                    DgvList.Rows.Add()
+
+                    rowIndex = DgvList.Rows.Count - 1 '現在の行数を取得
+
+                    DgvList.Rows(rowIndex).Cells("倉庫").Value = dsShukkoList.Tables(RS).Rows(x)("名称").ToString
+                    'DgvList.Rows(rowIndex).Cells("メーカー").Value = dsShukkoList.Tables(RS).Rows(x)("メーカー").ToString
+                    'DgvList.Rows(rowIndex).Cells("品名").Value = dsShukkoList.Tables(RS).Rows(x)("品名").ToString
+                    'DgvList.Rows(rowIndex).Cells("型式").Value = dsShukkoList.Tables(RS).Rows(x)("型式").ToString
+
+                    DgvList.Rows(rowIndex).Cells("メーカー").Value = IIf(productFlg, "", currentManufacturer)
+                    DgvList.Rows(rowIndex).Cells("品名").Value = IIf(productFlg, "", currentItemName)
+                    DgvList.Rows(rowIndex).Cells("型式").Value = IIf(productFlg, "", currentSpec)
+
+                    DgvList.Rows(rowIndex).Cells("伝票番号").Value = dsBaseList.Tables(RS).Rows(i)("伝票番号").ToString
+                    DgvList.Rows(rowIndex).Cells("入出庫種別").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
+                                                                    dsShukkoList.Tables(RS).Rows(x)("文字２"),
+                                                                    dsShukkoList.Tables(RS).Rows(x)("文字１"))
+
+                    DgvList.Rows(rowIndex).Cells("入出庫日").Value = dsShukkoList.Tables(RS).Rows(x)("入出庫日").ToString 't70 入出庫日
+                    DgvList.Rows(rowIndex).Cells("取引先").Value = dsShukkoList.Tables(RS).Rows(x)("得意先名").ToString
+
+                    DgvList.Rows(rowIndex).Cells("出庫数量").Value = dsShukkoList.Tables(RS).Rows(x)("数量").ToString
+                    DgvList.Rows(rowIndex).Cells("出庫単価").Value = dsShukkoList.Tables(RS).Rows(x)("売単価").ToString
+
+                    If test.ToString("dd") = "01" Then
+                        'DgvList.Rows(rowIndex).Cells("在庫数").Value = currentCul1 + IIf(IsNumeric(dsShukkoList.Tables(RS).Rows(x)("数量").ToString),
+                        '                                                           Integer.Parse(dsShukkoList.Tables(RS).Rows(x)("数量").ToString), 0)
+
+                        currentCul1 = currentCul1 - IIf(IsNumeric(dsShukkoList.Tables(RS).Rows(x)("数量").ToString),
+                                                                                   Integer.Parse(dsShukkoList.Tables(RS).Rows(x)("数量").ToString), 0)
+                        DgvList.Rows(rowIndex).Cells("在庫数").Value = currentCul1
+                    End If
+
+                    DgvList.Rows(i).Cells("備考").Value = dsShukkoList.Tables(RS).Rows(x)("備考").ToString
+
+                Next
+            End If
+
+
+        Next
+
+
+        'Dim dsList = _db.selectDB(Sql, RS, reccnt)
+
+        'For i As Integer = 0 To dsList.Tables(RS).Rows.Count - 1
+
+        '    DgvList.Rows.Add()
+        '    DgvList.Rows(i).Cells("倉庫").Value = dsList.Tables(RS).Rows(i)("名称")
+        '    DgvList.Rows(i).Cells("メーカー").Value = dsList.Tables(RS).Rows(i)("メーカー")
+        '    DgvList.Rows(i).Cells("品名").Value = dsList.Tables(RS).Rows(i)("品名")
+        '    DgvList.Rows(i).Cells("型式").Value = dsList.Tables(RS).Rows(i)("型式")
+        '    DgvList.Rows(i).Cells("伝票番号").Value = dsList.Tables(RS).Rows(i)("伝票番号")
+        '    DgvList.Rows(i).Cells("入出庫種別").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
+        '                                                            dsList.Tables(RS).Rows(i)("文字２"),
+        '                                                            dsList.Tables(RS).Rows(i)("文字１"))
+        '    'DgvList.Rows(i).Cells("入出庫日").Value = dsList.Tables(RS).Rows(i)("入出庫日")
+        '    'DgvList.Rows(i).Cells("取引先").Value = dsList.Tables(RS).Rows(i)("現在庫数")
+        '    'DgvList.Rows(i).Cells("入庫数量").Value = dsList.Tables(RS).Rows(i)("入庫単価")
+        '    'DgvList.Rows(i).Cells("入庫単価").Value = dsList.Tables(RS).Rows(i)("最終入庫日")
+        '    'DgvList.Rows(i).Cells("出庫数量").Value = dsList.Tables(RS).Rows(i)("最終出庫日")
+        '    'DgvList.Rows(i).Cells("出庫単価").Value = dsList.Tables(RS).Rows(i)("最終出庫日")
+        '    'DgvList.Rows(i).Cells("在庫数").Value = dsList.Tables(RS).Rows(i)("最終出庫日")
+        '    'DgvList.Rows(i).Cells("備考").Value = dsList.Tables(RS).Rows(i)("備考")
+
+        'Next
+    End Sub
 End Class
