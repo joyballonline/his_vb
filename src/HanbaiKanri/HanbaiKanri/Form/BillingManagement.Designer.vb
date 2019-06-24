@@ -96,6 +96,8 @@ Partial Class BillingManagement
         Me.LblMode = New System.Windows.Forms.Label()
         Me.DtpDepositDate = New System.Windows.Forms.DateTimePicker()
         Me.LblDepositDate = New System.Windows.Forms.Label()
+        Me.TxtIDRCurrency = New System.Windows.Forms.TextBox()
+        Me.LblIDRCurrency = New System.Windows.Forms.Label()
         CType(Me.DgvAdd, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvHistory, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvCymndt, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -676,10 +678,38 @@ Partial Class BillingManagement
         Me.LblDepositDate.Text = "入金予定日"
         Me.LblDepositDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'TxtIDRCurrency
+        '
+        Me.TxtIDRCurrency.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TxtIDRCurrency.Enabled = False
+        Me.TxtIDRCurrency.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtIDRCurrency.Location = New System.Drawing.Point(1222, 44)
+        Me.TxtIDRCurrency.MaxLength = 20
+        Me.TxtIDRCurrency.Name = "TxtIDRCurrency"
+        Me.TxtIDRCurrency.ReadOnly = True
+        Me.TxtIDRCurrency.Size = New System.Drawing.Size(70, 23)
+        Me.TxtIDRCurrency.TabIndex = 322
+        Me.TxtIDRCurrency.TabStop = False
+        Me.TxtIDRCurrency.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'LblIDRCurrency
+        '
+        Me.LblIDRCurrency.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblIDRCurrency.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblIDRCurrency.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblIDRCurrency.Location = New System.Drawing.Point(1116, 44)
+        Me.LblIDRCurrency.Name = "LblIDRCurrency"
+        Me.LblIDRCurrency.Size = New System.Drawing.Size(100, 23)
+        Me.LblIDRCurrency.TabIndex = 321
+        Me.LblIDRCurrency.Text = "通貨"
+        Me.LblIDRCurrency.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'BillingManagement
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.TxtIDRCurrency)
+        Me.Controls.Add(Me.LblIDRCurrency)
         Me.Controls.Add(Me.DtpDepositDate)
         Me.Controls.Add(Me.LblDepositDate)
         Me.Controls.Add(Me.LblMode)
@@ -775,4 +805,6 @@ Partial Class BillingManagement
     Friend WithEvents 今回備考2 As DataGridViewTextBoxColumn
     Friend WithEvents DtpDepositDate As DateTimePicker
     Friend WithEvents LblDepositDate As Label
+    Friend WithEvents TxtIDRCurrency As TextBox
+    Friend WithEvents LblIDRCurrency As Label
 End Class
