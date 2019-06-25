@@ -35,6 +35,8 @@ Partial Class InventoryControlTable
         Me.DtpMovingDayTo = New System.Windows.Forms.DateTimePicker()
         Me.CmStorageTypeFrom = New System.Windows.Forms.ComboBox()
         Me.CmStorageTypeTo = New System.Windows.Forms.ComboBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
         CType(Me.DgvList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel2.SuspendLayout()
         Me.SuspendLayout()
@@ -144,6 +146,7 @@ Partial Class InventoryControlTable
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.85075!))
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.85075!))
+        Me.TableLayoutPanel2.Controls.Add(Me.Label1, 2, 2)
         Me.TableLayoutPanel2.Controls.Add(Me.LblStorageType, 0, 2)
         Me.TableLayoutPanel2.Controls.Add(Me.LblWarehouse, 0, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.LblMovingDay, 0, 1)
@@ -152,6 +155,7 @@ Partial Class InventoryControlTable
         Me.TableLayoutPanel2.Controls.Add(Me.DtpMovingDayTo, 3, 1)
         Me.TableLayoutPanel2.Controls.Add(Me.CmStorageTypeFrom, 1, 2)
         Me.TableLayoutPanel2.Controls.Add(Me.CmStorageTypeTo, 3, 2)
+        Me.TableLayoutPanel2.Controls.Add(Me.Label5, 2, 1)
         Me.TableLayoutPanel2.Location = New System.Drawing.Point(13, 12)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
         Me.TableLayoutPanel2.RowCount = 3
@@ -211,6 +215,26 @@ Partial Class InventoryControlTable
         Me.CmStorageTypeTo.Size = New System.Drawing.Size(200, 23)
         Me.CmStorageTypeTo.TabIndex = 324
         '
+        'Label5
+        '
+        Me.Label5.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(484, 37)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(14, 12)
+        Me.Label5.TabIndex = 325
+        Me.Label5.Text = "～"
+        '
+        'Label1
+        '
+        Me.Label1.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(484, 66)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(14, 12)
+        Me.Label1.TabIndex = 118
+        Me.Label1.Text = "～"
+        '
         'InventoryControlTable
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
@@ -225,6 +249,7 @@ Partial Class InventoryControlTable
         Me.Text = "InventoryControlTable"
         CType(Me.DgvList, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TableLayoutPanel2.ResumeLayout(False)
+        Me.TableLayoutPanel2.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -242,4 +267,6 @@ Partial Class InventoryControlTable
     Friend WithEvents DtpMovingDayTo As DateTimePicker
     Friend WithEvents CmStorageTypeFrom As ComboBox
     Friend WithEvents CmStorageTypeTo As ComboBox
+    Friend WithEvents Label1 As Label
+    Friend WithEvents Label5 As Label
 End Class
