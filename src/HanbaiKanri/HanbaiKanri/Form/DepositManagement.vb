@@ -37,6 +37,7 @@ Public Class DepositManagement
     Private CompanyCode As String = ""
     Private CustomerCode As String = ""
     Private CustomerName As String = ""
+    Private CurCode As Integer = 0
     Private Suffix As String = ""
     Private _parentForm As Form
     Private _status As String = ""
@@ -61,6 +62,7 @@ Public Class DepositManagement
                    ByRef prmRefCompany As String,
                    ByRef prmRefCustomer As String,
                    ByRef prmRefName As String,
+                   ByRef prmRefCurCode As Integer,
                    Optional ByRef prmRefStatus As String = "")
         Call Me.New()
 
@@ -74,6 +76,7 @@ Public Class DepositManagement
         CompanyCode = prmRefCompany
         CustomerCode = prmRefCustomer
         CustomerName = prmRefName
+        CurCode = prmRefCurCode
         _status = prmRefStatus
         '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
         StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
@@ -144,6 +147,8 @@ Public Class DepositManagement
             LblNo3.Location = New Point(1272, 335)
             LblNo3.Size = New Size(66, 22)
 
+            LblIDRCurrency.Text = "Currency"  '通貨ラベル
+
             TxtHistoryCount.Location = New Point(1228, 65)
             TxtDepositCount.Location = New Point(1228, 198)
             TxtBillingCount.Location = New Point(1228, 335)
@@ -200,6 +205,9 @@ Public Class DepositManagement
     Private Sub setDgvCustomer()
         Dim Sql As String = ""
         Dim AccountsReceivable As Long
+        Dim curds As DataSet  'm25_currency
+        Dim cur As String
+
 
         Sql = " AND "
         Sql += "得意先コード"
@@ -210,13 +218,18 @@ Public Class DepositManagement
         Sql += " AND "
         Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
 
+        If CurCode <> 0 Then
+            Sql += " AND 通貨 = " & CurCode
+        End If
+
+
         '得意先と一致する請求基本を取得
         Dim dsSkyuhd As DataSet = getDsData("t23_skyuhd", Sql)
 
         '売掛残高を集計
         AccountsReceivable = IIf(
-            dsSkyuhd.Tables(RS).Compute("SUM(売掛残高)", Nothing) IsNot DBNull.Value,
-            dsSkyuhd.Tables(RS).Compute("SUM(売掛残高)", Nothing),
+            dsSkyuhd.Tables(RS).Compute("SUM(売掛残高_外貨)", Nothing) IsNot DBNull.Value,
+            dsSkyuhd.Tables(RS).Compute("SUM(売掛残高_外貨)", Nothing),
             0
         )
 
@@ -224,6 +237,18 @@ Public Class DepositManagement
         DgvCustomer.Rows.Add()
         DgvCustomer.Rows(0).Cells("請求先").Value = CustomerName
         DgvCustomer.Rows(0).Cells("請求残高").Value = AccountsReceivable
+
+        '通貨の表示
+        If IsDBNull(dsSkyuhd.Tables(RS).Rows(0)("通貨")) Then
+            cur = vbNullString
+        Else
+            Sql = " and 採番キー = " & dsSkyuhd.Tables(RS).Rows(0)("通貨")
+            curds = getDsData("m25_currency", Sql)
+
+            cur = curds.Tables(RS).Rows(0)("通貨コード")
+        End If
+        TxtIDRCurrency.Text = cur
+
     End Sub
 
     '入金済みデータ
@@ -233,7 +258,7 @@ Public Class DepositManagement
 
         'joinするのでとりあえず直書き
         Sql = "SELECT"
-        Sql += " t26.請求先名, t26.入金番号, t26.更新日, t26.入金種別名, t26.入金額, t26.備考"
+        Sql += " t26.請求先名, t26.入金番号, t26.更新日, t26.入金種別名, t26.入金額_外貨, t26.備考"
         Sql += " FROM "
         Sql += " public.t26_nkindt t26 "
 
@@ -256,6 +281,11 @@ Public Class DepositManagement
         Sql += " AND "
         Sql += "t25.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
 
+        If CurCode <> 0 Then
+            Sql += " AND t26.通貨 = " & CurCode
+        End If
+
+
         '得意先と一致する入金明細を取得
         Dim dsNkindt As DataSet = _db.selectDB(Sql, RS, reccnt)
 
@@ -276,7 +306,7 @@ Public Class DepositManagement
             DgvHistory.Rows(index).Cells("入金種目").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
                                                                 nyukinKbn.Tables(RS).Rows(0)("文字２"),
                                                                 nyukinKbn.Tables(RS).Rows(0)("文字１"))
-            DgvHistory.Rows(index).Cells("入金済入金額計").Value = dsNkindt.Tables(RS).Rows(index)("入金額")
+            DgvHistory.Rows(index).Cells("入金済入金額計").Value = dsNkindt.Tables(RS).Rows(index)("入金額_外貨")
             DgvHistory.Rows(index).Cells("備考").Value = dsNkindt.Tables(RS).Rows(index)("備考")
         Next
 
@@ -301,6 +331,10 @@ Public Class DepositManagement
         Sql += "%'"
         Sql += " AND "
         Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+        If CurCode <> 0 Then
+            Sql += " AND 通貨 = " & CurCode
+        End If
+
         Sql += " ORDER BY 会社コード, 請求番号"
 
         '得意先と一致する請求基本を取得
@@ -312,8 +346,8 @@ Public Class DepositManagement
 
         't25_nkinhd 請求金額に登録する
         BillingAmount = IIf(
-            dsSkyuhd.Tables(RS).Compute("SUM(請求金額計)", Nothing) IsNot DBNull.Value,
-            dsSkyuhd.Tables(RS).Compute("SUM(請求金額計)", Nothing),
+            dsSkyuhd.Tables(RS).Compute("SUM(請求金額計_外貨)", Nothing) IsNot DBNull.Value,
+            dsSkyuhd.Tables(RS).Compute("SUM(請求金額計_外貨)", Nothing),
             0
         )
 
@@ -323,21 +357,21 @@ Public Class DepositManagement
             DgvBillingInfo.Rows(i).Cells("InfoNo").Value = i + 1
             DgvBillingInfo.Rows(i).Cells("請求情報請求番号").Value = dsSkyuhd.Tables(RS).Rows(i)("請求番号")
             DgvBillingInfo.Rows(i).Cells("請求日").Value = dsSkyuhd.Tables(RS).Rows(i)("請求日").ToShortDateString()
-            DgvBillingInfo.Rows(i).Cells("請求金額").Value = dsSkyuhd.Tables(RS).Rows(i)("請求金額計")
-            If dsSkyuhd.Tables(RS).Rows(i)("入金額計") Is DBNull.Value Then
+            DgvBillingInfo.Rows(i).Cells("請求金額").Value = dsSkyuhd.Tables(RS).Rows(i)("請求金額計_外貨")
+            If dsSkyuhd.Tables(RS).Rows(i)("入金額計_外貨") Is DBNull.Value Then
                 DgvBillingInfo.Rows(i).Cells("請求情報入金額計").Value = 0
                 DgvBillingInfo.Rows(i).Cells("請求情報入金額計固定").Value = 0
             Else
-                DgvBillingInfo.Rows(i).Cells("請求情報入金額計").Value = dsSkyuhd.Tables(RS).Rows(i)("入金額計")
-                DgvBillingInfo.Rows(i).Cells("請求情報入金額計固定").Value = dsSkyuhd.Tables(RS).Rows(i)("入金額計")
+                DgvBillingInfo.Rows(i).Cells("請求情報入金額計").Value = dsSkyuhd.Tables(RS).Rows(i)("入金額計_外貨")
+                DgvBillingInfo.Rows(i).Cells("請求情報入金額計固定").Value = dsSkyuhd.Tables(RS).Rows(i)("入金額計_外貨")
             End If
 
-            If dsSkyuhd.Tables(RS).Rows(i)("入金額計") Is DBNull.Value Then
-                DgvBillingInfo.Rows(i).Cells("請求情報請求残高").Value = dsSkyuhd.Tables(RS).Rows(i)("請求金額計")
-                DgvBillingInfo.Rows(i).Cells("請求情報請求残高固定").Value = dsSkyuhd.Tables(RS).Rows(i)("請求金額計")
+            If dsSkyuhd.Tables(RS).Rows(i)("入金額計_外貨") Is DBNull.Value Then
+                DgvBillingInfo.Rows(i).Cells("請求情報請求残高").Value = dsSkyuhd.Tables(RS).Rows(i)("請求金額計_外貨")
+                DgvBillingInfo.Rows(i).Cells("請求情報請求残高固定").Value = dsSkyuhd.Tables(RS).Rows(i)("請求金額計_外貨")
             Else
-                DgvBillingInfo.Rows(i).Cells("請求情報請求残高").Value = dsSkyuhd.Tables(RS).Rows(i)("請求金額計") - dsSkyuhd.Tables(RS).Rows(i)("入金額計")
-                DgvBillingInfo.Rows(i).Cells("請求情報請求残高固定").Value = dsSkyuhd.Tables(RS).Rows(i)("請求金額計") - dsSkyuhd.Tables(RS).Rows(i)("入金額計")
+                DgvBillingInfo.Rows(i).Cells("請求情報請求残高").Value = dsSkyuhd.Tables(RS).Rows(i)("請求金額計_外貨") - dsSkyuhd.Tables(RS).Rows(i)("入金額計_外貨")
+                DgvBillingInfo.Rows(i).Cells("請求情報請求残高固定").Value = dsSkyuhd.Tables(RS).Rows(i)("請求金額計_外貨") - dsSkyuhd.Tables(RS).Rows(i)("入金額計_外貨")
             End If
             DgvBillingInfo.Rows(i).Cells("入金額").Value = 0
         Next
@@ -504,8 +538,16 @@ Public Class DepositManagement
         Dim dtToday As String = formatDatetime(DateTime.Now)
         Dim dtNyukinday As String = formatDatetime(DtpDepositDate.Value)
         Dim reccnt As Integer = 0
-        Dim DepositAmount As Decimal = 0
+        Dim DepositAmount As Decimal = 0      '入金額計
+        Dim DepositAmount_cur As Decimal = 0  '入金額計_外貨
         Dim BillingAmount As Decimal = 0
+
+        Dim AmountEntered As Decimal = 0      '入力入金額
+        Dim AmountEntered_cur As Decimal = 0  '入力入金額_外貨
+
+        Dim DepositClearing As Decimal = 0      '入金消込
+        Dim DepositClearing_cur As Decimal = 0  '入金消込_外貨
+
 
         Dim Sql As String = ""
 
@@ -565,6 +607,9 @@ Public Class DepositManagement
         Sql += "%'"
         Sql += " AND "
         Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+        If CurCode <> 0 Then
+            Sql += " AND 通貨 = " & CurCode
+        End If
 
         '請求基本データ取得
         Dim dsSkyuhd As DataSet = getDsData("t23_skyuhd", Sql)
@@ -572,11 +617,18 @@ Public Class DepositManagement
         '会社情報の取得
         Dim dsCompany As DataSet = getDsData("m01_company")
 
+        'レートの取得
+        Dim strRate As Decimal = setRate(dsSkyuhd.Tables(RS).Rows(0)("通貨").ToString())
+
+        DepositAmount_cur = DepositAmount
+        DepositAmount = Math.Ceiling(DepositAmount_cur / strRate) '画面の金額をIDRに変換　切り上げ
+
         't25_nkinhd 入金基本テーブルに新規追加
         Sql = "INSERT INTO "
         Sql += "Public."
         Sql += "t25_nkinhd("
         Sql += "会社コード, 入金番号, 入金日, 請求先コード, 請求先名, 振込先, 入金額,  備考, 取消区分, 登録日, 更新者, 更新日"
+        Sql += ",入金額計_外貨, 通貨, レート"
         Sql += ") VALUES ('"
         Sql += CompanyCode      '会社コード
         Sql += "', '"
@@ -598,7 +650,7 @@ Public Class DepositManagement
         Sql += " "
         Sql += dsCompany.Tables(RS).Rows(0)("口座名義")
         Sql += "', '"
-        Sql += formatNumber(DepositAmount)
+        Sql += formatNumber(DepositAmount)  '入金額計
         Sql += "', '"
         Sql += TxtRemarks.Text
         Sql += "', '"
@@ -609,6 +661,14 @@ Public Class DepositManagement
         Sql += frmC01F10_Login.loginValue.TantoNM
         Sql += "', '"
         Sql += dtToday
+
+        Sql += "', '"
+        Sql += formatNumber(DepositAmount_cur)  '入金額計_外貨
+        Sql += "', '"
+        Sql += dsSkyuhd.Tables(RS).Rows(0)("通貨").ToString()
+        Sql += "', '"
+        Sql += UtilClass.formatNumberF10(strRate)
+
         Sql += "')"
 
         _db.executeDB(Sql)
@@ -618,11 +678,16 @@ Public Class DepositManagement
             '入金入力額が0のものは省く
             If DgvDeposit.Rows(i).Cells("入力入金額").Value <> 0 Then
 
+                AmountEntered_cur = DgvDeposit.Rows(i).Cells("入力入金額").Value.ToString
+                AmountEntered = Math.Ceiling(AmountEntered_cur / strRate)  '画面の金額をIDRに変換　切り上げ
+
                 Sql = "INSERT INTO "
                 Sql += "Public."
                 Sql += "t26_nkindt("
-                Sql += "会社コード, 入金番号, 行番号, 入金種別, 入金種別名, 振込先, 入金額, 更新者, 更新日, 請求先コード, 請求先名, 入金日, 備考)"
-                Sql += " VALUES('"
+                Sql += "会社コード, 入金番号, 行番号, 入金種別, 入金種別名, 振込先, 入金額, 更新者, 更新日, 請求先コード, 請求先名, 入金日, 備考"
+                Sql += ",入金額_外貨, 通貨, レート"
+
+                Sql += ") VALUES('"
                 Sql += CompanyCode
                 Sql += "', '"
                 Sql += PMSaiban
@@ -643,7 +708,7 @@ Public Class DepositManagement
                 Sql += " "
                 Sql += dsCompany.Tables(RS).Rows(0)("口座名義").ToString
                 Sql += "', '"
-                Sql += DgvDeposit.Rows(i).Cells("入力入金額").Value.ToString
+                Sql += formatNumber(AmountEntered)  '入力入金額
                 Sql += "', '"
                 Sql += frmC01F10_Login.loginValue.TantoNM
                 Sql += "', '"
@@ -656,6 +721,14 @@ Public Class DepositManagement
                 Sql += dtToday
                 Sql += "', '"
                 Sql += TxtRemarks.Text
+
+                Sql += "', '"
+                Sql += formatNumber(AmountEntered_cur)  '入力入金額  入金額_外貨
+                Sql += "', '"
+                Sql += dsSkyuhd.Tables(RS).Rows(0)("通貨").ToString()
+                Sql += "', '"
+                Sql += UtilClass.formatNumberF10(strRate)
+
                 Sql += "')"
 
                 _db.executeDB(Sql)
@@ -670,11 +743,15 @@ Public Class DepositManagement
             '複数の買掛情報がある場合、支払金額が0のものは登録しない
             If DgvBillingInfo.Rows(i).Cells("入金額").Value <> 0 Then
 
+                DepositClearing_cur = DgvBillingInfo.Rows(i).Cells("入金額").Value
+                DepositClearing = Math.Ceiling(DepositClearing_cur / strRate)  '画面の金額をIDRに変換　切り上げ
+
                 Sql = "INSERT INTO "
                 Sql += "Public."
                 Sql += "t27_nkinkshihd("
-                Sql += "会社コード, 入金番号, 入金日, 請求番号, 請求先コード, 請求先名, 入金消込額計, 備考, 取消区分, 更新者, 更新日)"
-                Sql += " VALUES('"
+                Sql += "会社コード, 入金番号, 入金日, 請求番号, 請求先コード, 請求先名, 入金消込額計, 備考, 取消区分, 更新者, 更新日"
+                Sql += ",入金消込額計_外貨, 通貨, レート"
+                Sql += ") VALUES('"
                 Sql += CompanyCode
                 Sql += "', '"
                 Sql += PMSaiban
@@ -687,7 +764,7 @@ Public Class DepositManagement
                 Sql += "', '"
                 Sql += CustomerName
                 Sql += "', '"
-                Sql += formatNumber(DgvBillingInfo.Rows(i).Cells("入金額").Value)
+                Sql += formatNumber(DepositClearing)  '入金消込額計
                 Sql += "', '"
                 Sql += TxtRemarks.Text
                 Sql += "', '"
@@ -696,6 +773,13 @@ Public Class DepositManagement
                 Sql += frmC01F10_Login.loginValue.TantoNM
                 Sql += "', '"
                 Sql += dtToday
+
+                Sql += "', '"
+                Sql += formatNumber(DepositClearing_cur)  '入金消込額計_外貨
+                Sql += "', '"
+                Sql += dsSkyuhd.Tables(RS).Rows(0)("通貨").ToString()
+                Sql += "', '"
+                Sql += UtilClass.formatNumberF10(strRate)
                 Sql += "')"
 
                 _db.executeDB(Sql)
@@ -703,8 +787,12 @@ Public Class DepositManagement
             End If
         Next
 
-        Dim DsDeposit As Decimal = 0
-        Dim SellingBalance As Decimal = 0
+        Dim DsDeposit As Decimal = 0      '入金額
+        Dim DsDeposit_cur As Decimal = 0  '入金額_外貨
+
+        Dim SellingBalance As Decimal = 0      '売掛残高
+        Dim SellingBalance_cur As Decimal = 0  '売掛残高_外貨
+
 
         't23_skyuhd 請求基本テーブルを更新
         For i As Integer = 0 To dsSkyuhd.Tables(RS).Rows.Count - 1
@@ -713,14 +801,17 @@ Public Class DepositManagement
 
                 If dsSkyuhd.Tables(RS).Rows(i)("入金額計") Is DBNull.Value Then
                     '請求基本の入金額計がなかったら入金額をそのまま登録
-                    DsDeposit = DgvBillingInfo.Rows(i).Cells("入金額").Value
+                    DsDeposit_cur = DgvBillingInfo.Rows(i).Cells("入金額").Value
                 Else
                     '入金額計があったら入金額を加算する
-                    DsDeposit = DgvBillingInfo.Rows(i).Cells("入金額").Value + dsSkyuhd.Tables(RS).Rows(i)("入金額計")
+                    DsDeposit_cur = DgvBillingInfo.Rows(i).Cells("入金額").Value + dsSkyuhd.Tables(RS).Rows(i)("入金額計_外貨")
                 End If
 
+                DsDeposit = Math.Ceiling(DsDeposit_cur / strRate)  '画面の金額をIDRに変換　切り上げ
+
                 '残高を更新
-                SellingBalance = dsSkyuhd.Tables(RS).Rows(i)("売掛残高") - DgvBillingInfo.Rows(i).Cells("入金額").Value
+                SellingBalance_cur = dsSkyuhd.Tables(RS).Rows(i)("売掛残高_外貨") - DgvBillingInfo.Rows(i).Cells("入金額").Value
+                SellingBalance = Math.Ceiling(SellingBalance_cur / strRate)  '画面の金額をIDRに変換　切り上げ
 
                 Sql = "UPDATE "
                 Sql += "Public."
@@ -733,6 +824,15 @@ Public Class DepositManagement
                 Sql += "売掛残高"
                 Sql += " = '"
                 Sql += formatNumber(SellingBalance)
+                Sql += "', "
+
+                Sql += " 入金額計_外貨"
+                Sql += " = '"
+                Sql += formatNumber(DsDeposit_cur)
+                Sql += "', "
+                Sql += "売掛残高_外貨"
+                Sql += " = '"
+                Sql += formatNumber(SellingBalance_cur)
                 Sql += "', "
 
                 '請求額請求金額と入金額が一致したら入金完了日を設定する
@@ -760,6 +860,10 @@ Public Class DepositManagement
                 Sql += dsSkyuhd.Tables(RS).Rows(i)("請求番号")
                 Sql += "' "
 
+                If CurCode <> 0 Then
+                    Sql += " AND 通貨 = " & CurCode
+                End If
+
                 _db.executeDB(Sql)
 
                 DsDeposit = 0
@@ -775,6 +879,30 @@ Public Class DepositManagement
         Me.Dispose()
 
     End Sub
+
+    '通貨の採番キーからレートを取得・設定
+    '基準日が請求日以前の最新のもの
+    Private Function setRate(ByVal strKey As Integer) As Decimal
+        Dim Sql As String
+
+        Sql = " AND 採番キー = " & strKey & ""
+        Sql += " AND 基準日 <= '" & UtilClass.strFormatDate(DtpDepositDate.Text) & "'"  '入金日
+        Sql += " ORDER BY 基準日 DESC "
+
+        Dim ds As DataSet = getDsData("t71_exchangerate", Sql)
+
+        If ds.Tables(RS).Rows.Count > 0 Then
+            setRate = ds.Tables(RS).Rows(0)("レート")
+        Else
+            If CultureInfo.CurrentCulture.Name.ToString = CommonConst.CI_ID Then
+                setRate = CommonConst.BASE_RATE_IDR
+            Else
+                setRate = CommonConst.BASE_RATE_JPY
+            End If
+        End If
+
+    End Function
+
 
     '入金入力セルの値が変更されたら
     Private Sub DgvDepositCellValueChanged(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles DgvDeposit.CellValueChanged
