@@ -139,13 +139,6 @@ Public Class MovementInput
         Dim Sql As String = ""
         Dim reccnt As Integer = 0 'DB用（デフォルト）
 
-
-        '対象データがないメッセージを表示
-        'If DgvList.Rows.Count = 0 Then
-        '    _msgHd.dspMSG("NonData", frmC01F10_Login.loginValue.Language)
-        '    Exit Sub
-        'End If
-
         '在庫があるかチェック
 
         Dim denpyoNo As String = "00000000000000"
@@ -204,9 +197,9 @@ Public Class MovementInput
                 Sql = "INSERT INTO "
                 Sql += "Public."
                 Sql += "t44_shukohd("
-                Sql += "会社コード, 出庫番号, 見積番号, 見積番号枝番, 受注番号, 受注番号枝番"
-                Sql += ", 入力担当者, 出庫日, 登録日, 取消区分, 更新日, 更新者, 入力担当者コード)"
-                Sql += " VALUES('"
+                Sql += " 会社コード, 出庫番号, 見積番号, 見積番号枝番, 受注番号, 受注番号枝番 "
+                Sql += ", 入力担当者, 出庫日, 登録日, 取消区分, 更新日, 更新者, 入力担当者コード "
+                Sql += " )VALUES( '"
                 Sql += frmC01F10_Login.loginValue.BumonCD '会社コード
                 Sql += "', '"
                 Sql += LS '出庫番号
@@ -712,11 +705,17 @@ Public Class MovementInput
     'End Sub
 
     '対象倉庫のコンボボックスを作成
-    Private Sub createWarehouseToCombobox()
+    Private Sub createWarehouseToCombobox(Optional ByRef prmVal As String = "")
+
         CmWarehouseTo.DisplayMember = "Text"
         CmWarehouseTo.ValueMember = "Value"
 
         Dim Sql As String = " AND 無効フラグ = '" & CommonConst.FLAG_ENABLED & "'"
+
+        If prmVal <> "" And CmProcessingClassification.SelectedValue = CommonConst.PC_KBN_MOVE Then
+            Sql += " AND "
+            Sql += "倉庫コード <> '" & prmVal & "'"
+        End If
 
         Dim ds As DataSet = getDsData("m20_warehouse", Sql)
 
@@ -804,6 +803,11 @@ Public Class MovementInput
             If TxtStorageTypeSince.Tag <> "" Then
                 CmStorageTypeTo.SelectedValue = TxtStorageTypeSince.Tag
             End If
+
+            If TxtWarehouseSince.Tag <> Nothing Then
+                createWarehouseToCombobox(TxtWarehouseSince.Tag.ToString) '対象外にする項目を引き渡す
+            End If
+
         Else
             '処理区分：調整 のとき「入出庫種別」は無効化
             CmWarehouseTo.Enabled = False
@@ -815,6 +819,7 @@ Public Class MovementInput
 
             '倉庫を移動元 = 移動先にする
             If TxtWarehouseSince.Tag <> "" Then
+                createWarehouseToCombobox()
                 CmWarehouseTo.SelectedValue = TxtWarehouseSince.Tag
             End If
         End If
@@ -925,6 +930,11 @@ Public Class MovementInput
                 CmWarehouseTo.SelectedValue = TxtWarehouseSince.Tag
             End If
         End If
+
+        If TxtWarehouseSince.Tag <> Nothing Then
+            createWarehouseToCombobox(TxtWarehouseSince.Tag.ToString) '対象外にする項目を引き渡す
+        End If
+
     End Sub
 
     Private Sub TxtQuantityTo_Leave(sender As Object, e As EventArgs) Handles TxtQuantityTo.Leave
