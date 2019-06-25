@@ -391,7 +391,8 @@ Public Class InventoryControlTable
 
                 If DgvList.Rows(i).Cells("メーカー").Value <> "" Then
 
-                    sheet.Range("A" & cellRowIndex.ToString, "I" & cellRowIndex.ToString).Borders(Microsoft.Office.Interop.Excel.XlBordersIndex.xlEdgeTop).LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlDouble
+                    'sheet.Range("A" & cellRowIndex.ToString, "I" & cellRowIndex.ToString).Borders(Microsoft.Office.Interop.Excel.XlBordersIndex.xlEdgeTop).LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlDouble
+                    sheet.Range("A" & cellRowIndex.ToString, "J" & cellRowIndex.ToString).Borders(Microsoft.Office.Interop.Excel.XlBordersIndex.xlEdgeTop).LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlDouble
 
                     'メーカー、品名、型式 の列結合
                     sheet.Range("A" & cellRowIndex.ToString, "B" & cellRowIndex.ToString).Merge() 'メーカー
@@ -406,7 +407,8 @@ Public Class InventoryControlTable
                     sheet.Range("C" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.Constants.xlLeft
                     sheet.Range("F" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.Constants.xlLeft
 
-                    sheet.Range("A" & cellRowIndex.ToString, "I" & cellRowIndex.ToString).Borders(Microsoft.Office.Interop.Excel.XlBordersIndex.xlEdgeBottom).LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlDouble
+                    'sheet.Range("A" & cellRowIndex.ToString, "I" & cellRowIndex.ToString).Borders(Microsoft.Office.Interop.Excel.XlBordersIndex.xlEdgeBottom).LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlDouble
+                    sheet.Range("A" & cellRowIndex.ToString, "J" & cellRowIndex.ToString).Borders(Microsoft.Office.Interop.Excel.XlBordersIndex.xlEdgeBottom).LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlDouble
 
                     cellRowIndex += 1 '次の行
 
@@ -435,9 +437,12 @@ Public Class InventoryControlTable
                     sheet.Range("F" & cellRowIndex.ToString).Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG, "UnitPrice", "単価")
                     sheet.Range("G" & cellRowIndex.ToString).Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG, "StockQuantity", "在庫数")
                     sheet.Range("H" & cellRowIndex.ToString).Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG, "InOutClassification", "入出庫種別")
-                    sheet.Range("I" & cellRowIndex.ToString).Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG, "Remarks", "備考")
+                    'sheet.Range("I" & cellRowIndex.ToString).Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG, "Remarks", "備考")
+                    sheet.Range("I" & cellRowIndex.ToString).Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG, "Warehouse", "倉庫")
+                    sheet.Range("J" & cellRowIndex.ToString).Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG, "SlipNumber", "伝票番号")
 
-                    sheet.Range("A" & cellRowIndex.ToString, "I" & cellRowIndex.ToString).Borders(Microsoft.Office.Interop.Excel.XlBordersIndex.xlEdgeBottom).LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous　　　　　'底の罫線
+                    'sheet.Range("A" & cellRowIndex.ToString, "I" & cellRowIndex.ToString).Borders(Microsoft.Office.Interop.Excel.XlBordersIndex.xlEdgeBottom).LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous　　　　　'底の罫線
+                    sheet.Range("A" & cellRowIndex.ToString, "J" & cellRowIndex.ToString).Borders(Microsoft.Office.Interop.Excel.XlBordersIndex.xlEdgeBottom).LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous　　　　　'底の罫線
 
                     cellRowIndex += 1 '次の行
 
@@ -452,9 +457,12 @@ Public Class InventoryControlTable
                 sheet.Range("F" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("出庫単価").Value
                 sheet.Range("G" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("在庫数").Value
                 sheet.Range("H" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("入出庫種別").Value
-                sheet.Range("I" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("備考").Value
+                'sheet.Range("I" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("備考").Value
+                sheet.Range("I" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("倉庫").Value
+                sheet.Range("J" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("伝票番号").Value
 
-                sheet.Range("A" & cellRowIndex.ToString, "I" & cellRowIndex.ToString).Borders(Microsoft.Office.Interop.Excel.XlBordersIndex.xlEdgeBottom).LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous　　　　　'底の罫線
+                'sheet.Range("A" & cellRowIndex.ToString, "I" & cellRowIndex.ToString).Borders(Microsoft.Office.Interop.Excel.XlBordersIndex.xlEdgeBottom).LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous     '底の罫線
+                sheet.Range("A" & cellRowIndex.ToString, "J" & cellRowIndex.ToString).Borders(Microsoft.Office.Interop.Excel.XlBordersIndex.xlEdgeBottom).LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous     '底の罫線
             Next
 
             app.DisplayAlerts = True 'アラート無効化を解除
