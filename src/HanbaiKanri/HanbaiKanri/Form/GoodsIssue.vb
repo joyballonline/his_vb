@@ -944,7 +944,6 @@ Public Class GoodsIssue
                             Sql += "会社コード, 入出庫区分, 倉庫コード, 伝票番号, 行番号, 入出庫種別"
                             Sql += ", 引当区分, メーカー, 品名, 型式, 数量, 単位, 備考, 入出庫日"
                             Sql += ", 取消区分, 更新者, 更新日, ロケ番号, 仕入区分"
-
                             Sql += " )VALUES('"
                             Sql += frmC01F10_Login.loginValue.BumonCD '会社コード
                             Sql += "', '"
@@ -952,9 +951,11 @@ Public Class GoodsIssue
                             Sql += "', '"
                             Sql += DgvAdd.Rows(i).Cells("倉庫").Value.ToString '倉庫コード
                             Sql += "', '"
-                            Sql += currentLS '伝票番号
+                            'Sql += currentLS '伝票番号
+                            Sql += dsCurrentList.Tables(RS).Rows(x)("伝票番号").ToString '伝票番号
                             Sql += "', '"
-                            Sql += DgvAdd.Rows(i).Cells("行番号").Value.ToString '行番号
+                            'Sql += DgvAdd.Rows(i).Cells("行番号").Value.ToString '行番号
+                            Sql += dsCurrentList.Tables(RS).Rows(x)("行番号").ToString '行番号
                             Sql += "', '"
                             Sql += DgvAdd.Rows(i).Cells("入出庫種別").Value.ToString '入出庫種別
                             Sql += "', '"
