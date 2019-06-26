@@ -638,6 +638,9 @@ Public Class GoodsIssue
 
         Dim dtToday As DateTime = DateTime.Now
 
+        Dim shukkoTime As TimeSpan = dtToday.TimeOfDay
+        Dim shukkoDate As String = UtilClass.formatDatetime(DtpGoodsIssueDate.Text & " " & shukkoTime.ToString)
+
         Dim reccnt As Integer = 0 'DB用（デフォルト）
         Dim Sql As String = ""
 
@@ -686,7 +689,7 @@ Public Class GoodsIssue
 
         Dim chkGIAmount As Integer = 0 '出庫データがあるか合算する用
         Dim chkShukkoFlg As Boolean = True '在庫チェック用フラグ
-        '最初に今回入庫に入力がなかったらエラーで返す
+        '最初に今回出庫に入力がなかったらエラーで返す
         For i As Integer = 0 To DgvAdd.RowCount - 1
             chkGIAmount += DgvAdd.Rows(i).Cells("出庫数量").Value
             If DgvAdd.Rows(i).Cells("出庫数量").Value > DgvAdd.Rows(i).Cells("在庫数量").Value Then
@@ -936,7 +939,6 @@ Public Class GoodsIssue
 
                             'Next
 
-
                             't70_inout にデータ登録
                             Sql = "INSERT INTO "
                             Sql += "Public."
@@ -973,7 +975,8 @@ Public Class GoodsIssue
                             Sql += "', '"
                             Sql += DgvAdd.Rows(i).Cells("備考").Value.ToString '備考
                             Sql += "', '"
-                            Sql += UtilClass.formatDatetime(DtpGoodsIssueDate.Text) '入出庫日
+                            'Sql += UtilClass.formatDatetime(DtpGoodsIssueDate.Text) '入出庫日
+                            Sql += shukkoDate
                             Sql += "', '"
                             Sql += CommonConst.CANCEL_KBN_ENABLED.ToString '取消区分
                             Sql += "', '"
@@ -981,7 +984,8 @@ Public Class GoodsIssue
                             Sql += "', '"
                             Sql += UtilClass.formatDatetime(dtToday) '更新日
                             Sql += "', '"
-                            Sql += dsCurrentList.Tables(RS).Rows(x)("伝票番号") & DgvAdd.Rows(i).Cells("行番号").Value.ToString
+                            'Sql += dsCurrentList.Tables(RS).Rows(x)("伝票番号") & DgvAdd.Rows(i).Cells("行番号").Value.ToString
+                            Sql += currentLS & "1"
                             Sql += "', '"
                             Sql += DgvAdd.Rows(i).Cells("仕入区分値").Value.ToString '仕入区分
 
@@ -1942,8 +1946,9 @@ Public Class GoodsIssue
             Sql += " ) "
         End If
 
-        Sql += " GROUP BY 倉庫コード, 入出庫種別, 最終入庫日 "
-        Sql += " ORDER BY 最終入庫日 "
+        'Sql += " GROUP BY 倉庫コード, 入出庫種別, 最終入庫日 "
+        Sql += " GROUP BY 倉庫コード, 入出庫種別 "
+        'Sql += " ORDER BY 最終入庫日 "
 
         '在庫マスタから現在庫数を取得
         Dim dsZaiko As DataSet = _db.selectDB(Sql, RS, reccnt)
