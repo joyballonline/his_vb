@@ -576,9 +576,12 @@ Public Class Receipt
     '登録ボタン押下時
     Private Sub BtnRegist_Click(sender As Object, e As EventArgs) Handles BtnRegist.Click
 
-        Dim dtToday As String = DateTime.Now
+        Dim dtToday As DateTime = DateTime.Now
         Dim strToday As String = UtilClass.formatDatetime(dtToday)
         Dim reccnt As Integer = 0
+
+        Dim nyukoTime As TimeSpan = dtToday.TimeOfDay
+        Dim nyukoDate As String = UtilClass.formatDatetime(DtpReceiptDate.Text & " " & nyukoTime.ToString)
 
         Dim Sql As String = ""
 
@@ -869,7 +872,8 @@ Public Class Receipt
                     Sql += "', '"
                     Sql += DgvAdd.Rows(i).Cells("備考").Value '備考
                     Sql += "', '"
-                    Sql += UtilClass.formatDatetime(DtpReceiptDate.Text) '入出庫日
+                    'Sql += UtilClass.formatDatetime(DtpReceiptDate.Text) '入出庫日
+                    Sql += nyukoDate
                     Sql += "', '"
                     Sql += CommonConst.CANCEL_KBN_ENABLED.ToString '取消区分
                     Sql += "', '"
