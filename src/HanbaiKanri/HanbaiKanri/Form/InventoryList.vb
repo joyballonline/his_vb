@@ -199,12 +199,30 @@ Public Class InventoryList
 
                 Dim dsList As DataSet = _db.selectDB(Sql, RS, reccnt)
 
+                Dim currentManufacturer As String = ""
+                Dim currentItemName As String = ""
+                Dim currentSpec As String = ""
+                Dim productFlg As Boolean = False
+
                 For i As Integer = 0 To dsList.Tables(RS).Rows.Count - 1
 
+                    If currentManufacturer <> dsList.Tables(RS).Rows(i)("メーカー").ToString And
+                        currentItemName <> dsList.Tables(RS).Rows(i)("品名").ToString And
+                        currentSpec <> dsList.Tables(RS).Rows(i)("型式").ToString Then
+
+                        currentManufacturer = dsList.Tables(RS).Rows(i)("メーカー").ToString
+                        currentItemName = dsList.Tables(RS).Rows(i)("品名").ToString
+                        currentSpec = dsList.Tables(RS).Rows(i)("型式").ToString
+
+                        productFlg = False
+                    Else
+                        productFlg = True
+                    End If
+
                     DgvList.Rows.Add()
-                    DgvList.Rows(i).Cells("メーカー").Value = dsList.Tables(RS).Rows(i)("メーカー")
-                    DgvList.Rows(i).Cells("品名").Value = dsList.Tables(RS).Rows(i)("品名")
-                    DgvList.Rows(i).Cells("型式").Value = dsList.Tables(RS).Rows(i)("型式")
+                    DgvList.Rows(i).Cells("メーカー").Value = IIf(productFlg, "", currentManufacturer)
+                    DgvList.Rows(i).Cells("品名").Value = IIf(productFlg, "", currentItemName)
+                    DgvList.Rows(i).Cells("型式").Value = IIf(productFlg, "", currentSpec)
                     DgvList.Rows(i).Cells("在庫数").Value = dsList.Tables(RS).Rows(i)("現在庫数")
                     DgvList.Rows(i).Cells("入出庫種別").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
                                                                     dsList.Tables(RS).Rows(i)("文字２"),
@@ -256,18 +274,29 @@ Public Class InventoryList
                 Sql += " AND "
                 Sql += " m21.無効フラグ = " & CommonConst.CANCEL_KBN_ENABLED.ToString
                 Sql += " GROUP BY "
-                Sql += " m21.メーカー, m21.品名, m21.型式, m21.入出庫種別, m21.現在庫数, m21.現在庫数 "
+                Sql += " m21.倉庫コード, m21.メーカー, m21.品名, m21.型式, m21.入出庫種別, m21.現在庫数, m21.現在庫数 "
                 Sql += " ,m21.入庫単価, m21.最終入庫日, m21.最終出庫日, m90.文字１, m90.文字２, m20.名称, m21.伝票番号 "
                 Sql += " ORDER BY "
                 'Sql += " m21.メーカー, m21.品名, m21.型式, m21.最終入庫日, m21.入出庫種別 "
-                Sql += " m21.メーカー, m21.品名, m21.型式, m21.伝票番号, m21.入出庫種別 "
+                Sql += " m21.倉庫コード, m21.メーカー, m21.品名, m21.型式, m21.伝票番号, m21.入出庫種別 "
 
                 Dim dsList As DataSet = _db.selectDB(Sql, RS, reccnt)
 
+                Dim currentWarehouse As String = ""
+                Dim warehouseFlg As Boolean = False
+
                 For i As Integer = 0 To dsList.Tables(RS).Rows.Count - 1
 
+                    If currentWarehouse <> dsList.Tables(RS).Rows(i)("名称").ToString Then
+                        currentWarehouse = dsList.Tables(RS).Rows(i)("名称").ToString
+
+                        warehouseFlg = False
+                    Else
+                        warehouseFlg = True
+                    End If
+
                     DgvList.Rows.Add()
-                    DgvList.Rows(i).Cells("倉庫").Value = dsList.Tables(RS).Rows(i)("名称")
+                    DgvList.Rows(i).Cells("倉庫").Value = IIf(warehouseFlg, "", currentWarehouse)
                     DgvList.Rows(i).Cells("メーカー").Value = dsList.Tables(RS).Rows(i)("メーカー")
                     DgvList.Rows(i).Cells("品名").Value = dsList.Tables(RS).Rows(i)("品名")
                     DgvList.Rows(i).Cells("型式").Value = dsList.Tables(RS).Rows(i)("型式")
