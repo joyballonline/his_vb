@@ -133,8 +133,8 @@ Public Class StockSearch
             Sql += " LEFT JOIN "
             Sql += " t43_nyukodt t43 "
             Sql += " On m21.会社コード = t43.会社コード "
-            'Sql += " AND m21.伝票番号 = t43.入庫番号 "
-            'Sql += " AND m21.行番号 = t43.行番号 "
+            Sql += " AND m21.伝票番号 = t43.入庫番号 "
+            Sql += " AND m21.行番号 = t43.行番号 "
 
             Sql += " AND ( "
             Sql += " ( m21.伝票番号 = t43.入庫番号 "
