@@ -198,8 +198,9 @@ Public Class GoodsIssue
             Sql += " ON t70.会社コード = t44.会社コード"
             Sql += " AND  t70.入出庫区分 = '2'"
             'Sql += " AND  t70.倉庫コード = t45.倉庫コード"
-            Sql += " AND  t70.伝票番号 = t44.出庫番号"
-            Sql += " AND  t70.行番号 = t45.行番号"
+            'Sql += " AND  t70.伝票番号 = t44.出庫番号"
+            'Sql += " AND  t70.行番号 = t45.行番号"
+            Sql += " AND  t70.ロケ番号 = concat(t44.出庫番号, t45.行番号)"
 
             If dsCymnhd.Tables(RS).Rows.Count > 0 Then
                 Sql += " WHERE t45.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
@@ -944,7 +945,8 @@ Public Class GoodsIssue
                             Sql += "Public."
                             Sql += "t70_inout("
                             Sql += "会社コード, 入出庫区分, 倉庫コード, 伝票番号, 行番号, 入出庫種別"
-                            Sql += ", 引当区分, メーカー, 品名, 型式, 数量, 単位, 備考, 入出庫日"
+                            Sql += ", メーカー, 品名, 型式, 数量, 単位, 備考, 入出庫日"
+                            'Sql += ", 引当区分, メーカー, 品名, 型式, 数量, 単位, 備考, 入出庫日"
                             Sql += ", 取消区分, 更新者, 更新日, ロケ番号, 仕入区分"
                             Sql += " )VALUES('"
                             Sql += frmC01F10_Login.loginValue.BumonCD '会社コード
@@ -960,8 +962,8 @@ Public Class GoodsIssue
                             Sql += dsCurrentList.Tables(RS).Rows(x)("行番号").ToString '行番号
                             Sql += "', '"
                             Sql += DgvAdd.Rows(i).Cells("入出庫種別").Value.ToString '入出庫種別
-                            Sql += "', '"
-                            Sql += CommonConst.AC_KBN_NORMAL.ToString '引当区分(0：通常）
+                            'Sql += "', '"
+                            'Sql += CommonConst.AC_KBN_NORMAL.ToString '引当区分(0：通常）
                             Sql += "', '"
                             Sql += DgvAdd.Rows(i).Cells("メーカー").Value.ToString 'メーカー
                             Sql += "', '"
@@ -1819,27 +1821,70 @@ Public Class GoodsIssue
         Dim Sql As String = ""
         Dim reccnt As Integer = 0 'DB用（デフォルト）
 
-        Sql = "SELECT sum(現在庫数) as 在庫数量 from m21_zaiko"
+        If DgvAdd.Rows(rowIndex).Cells("仕入区分値").Value.ToString <> CommonConst.Sire_KBN_Zaiko.ToString Then
+            Sql = "SELECT sum(現在庫数) as 在庫数量 from m21_zaiko"
 
-        Sql += " WHERE 会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += " WHERE 会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
 
-        Sql += " AND  メーカー ILIKE '" & DgvAdd.Rows(rowIndex).Cells("メーカー").Value.ToString & "'"
-        Sql += " AND  品名 ILIKE '" & DgvAdd.Rows(rowIndex).Cells("品名").Value.ToString & "'"
-        Sql += " AND  型式 ILIKE '" & DgvAdd.Rows(rowIndex).Cells("型式").Value.ToString & "'"
-        Sql += " AND  倉庫コード ILIKE '" & DgvAdd.Rows(rowIndex).Cells("倉庫").Value.ToString & "'"
-        Sql += " AND  入出庫種別 ILIKE '" & DgvAdd.Rows(rowIndex).Cells("入出庫種別").Value.ToString & "'"
-        Sql += " AND  現在庫数 <> 0"
+            Sql += " AND  メーカー ILIKE '" & DgvAdd.Rows(rowIndex).Cells("メーカー").Value.ToString & "'"
+            Sql += " AND  品名 ILIKE '" & DgvAdd.Rows(rowIndex).Cells("品名").Value.ToString & "'"
+            Sql += " AND  型式 ILIKE '" & DgvAdd.Rows(rowIndex).Cells("型式").Value.ToString & "'"
+            Sql += " AND  倉庫コード ILIKE '" & DgvAdd.Rows(rowIndex).Cells("倉庫").Value.ToString & "'"
+            Sql += " AND  入出庫種別 ILIKE '" & DgvAdd.Rows(rowIndex).Cells("入出庫種別").Value.ToString & "'"
+            Sql += " AND  現在庫数 <> 0"
 
-        'Sql += " GROUP BY 倉庫コード, 入出庫種別, 最終入庫日 "
-        'Sql += " ORDER BY 最終入庫日 "
+            'Sql += " GROUP BY 倉庫コード, 入出庫種別, 最終入庫日 "
+            'Sql += " ORDER BY 最終入庫日 "
+        Else
+
+            '在庫引当の場合、受注番号 + 枝番から出庫データを検索し、出庫番号から該当する「t70_inout」データを検索する
+            '割り当てられている総数が一致していればOK
+            Sql = "SELECT t70.伝票番号, t70.行番号, t70.数量 as 在庫数量 from t44_shukohd t44 "
+
+            Sql += " LEFT JOIN "
+            Sql += " t45_shukodt t45 "
+            Sql += " ON "
+            Sql += " t44.会社コード = t45.会社コード "
+            Sql += " AND "
+            Sql += " t44.受注番号 = t45.受注番号 "
+            Sql += " AND "
+            Sql += " t44.受注番号枝番 = t45.受注番号枝番 "
+
+            Sql += " LEFT JOIN "
+            Sql += " t70_inout t70 "
+            Sql += " ON "
+            Sql += " t45.会社コード = t70.会社コード "
+            Sql += " AND "
+            Sql += " concat(t44.出庫番号, t45.行番号) = t70.ロケ番号 "
+            Sql += " AND "
+            Sql += " t70.入出庫区分 = '2'" '出庫
+            Sql += " AND "
+            Sql += " t45.メーカー = t70.メーカー "
+            Sql += " AND "
+            Sql += " t45.品名 = t70.品名 "
+            Sql += " AND "
+            Sql += " t45.型式 = t70.型式 "
+
+            Sql += " WHERE t45.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
+
+            Sql += " AND  t45.メーカー ILIKE '" & DgvAdd.Rows(rowIndex).Cells("メーカー").Value.ToString & "'"
+            Sql += " AND  t45.品名 ILIKE '" & DgvAdd.Rows(rowIndex).Cells("品名").Value.ToString & "'"
+            Sql += " AND  t45.型式 ILIKE '" & DgvAdd.Rows(rowIndex).Cells("型式").Value.ToString & "'"
+            Sql += " AND  t45.倉庫コード ILIKE '" & DgvAdd.Rows(rowIndex).Cells("倉庫").Value.ToString & "'"
+            'Sql += " AND  入出庫種別 ILIKE '" & DgvAdd.Rows(rowIndex).Cells("入出庫種別").Value.ToString & "'"
+            'Sql += " AND  現在庫数 <> 0"
+
+        End If
 
         '在庫マスタから現在庫数を取得
         Dim dsZaiko As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-        If dsZaiko.Tables(RS).Rows.Count > 0 And dsZaiko.Tables(RS).Rows(0)("在庫数量") IsNot DBNull.Value Then
-            Return dsZaiko.Tables(RS).Rows(0)("在庫数量")
-        Else
-            Return 0
+        If dsZaiko.Tables(RS).Rows.Count > 0 Then
+            If dsZaiko.Tables(RS).Rows(0)("在庫数量") IsNot DBNull.Value Then
+                Return dsZaiko.Tables(RS).Rows(0)("在庫数量")
+            Else
+                Return 0
+            End If
         End If
 
     End Function
