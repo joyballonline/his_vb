@@ -147,11 +147,21 @@ Public Class MovementInput
         Dim denpyoNo As String = "00000000000000"
         Dim denpyoEda As String = "00"
 
+        If TxtQuantityTo.Text = "" Then
+            _msgHd.dspMSG("noMovingQuantityError", frmC01F10_Login.loginValue.Language)
+            Exit Sub
+        Else
+            If TxtQuantityTo.Text = "0" Then
+                _msgHd.dspMSG("noMovingQuantityError", frmC01F10_Login.loginValue.Language)
+                Exit Sub
+            End If
+        End If
+
         Try
 
             '在庫マスタデータを元に、入庫データ取得
             '-----------------------------
-            Sql = " SELECT t43.*,t42.* FROM t43_nyukodt t43 "
+            Sql = " SELECT t43.* ,t42.* FROM t43_nyukodt t43 "
             Sql += " LEFT JOIN "
             Sql += " t42_nyukohd t42 "
             Sql += " ON "
