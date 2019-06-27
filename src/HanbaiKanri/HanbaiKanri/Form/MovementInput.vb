@@ -136,6 +136,9 @@ Public Class MovementInput
         Dim dtToday As DateTime = DateTime.Now
         Dim strToday As String = UtilClass.strFormatDate(dtToday)
 
+        Dim inoutTime As TimeSpan = dtToday.TimeOfDay
+        Dim inoutDate As String = UtilClass.formatDatetime(DtpProcessingDate.Text & " " & inoutTime.ToString)
+
         Dim Sql As String = ""
         Dim reccnt As Integer = 0 'DB用（デフォルト）
 
@@ -317,7 +320,8 @@ Public Class MovementInput
                                "'" & dsNyuko.Tables(RS).Rows(0)("単位").ToString & "'",
                                "NULL") '単位
                 Sql += ", '"
-                Sql += UtilClass.formatDatetime(DtpProcessingDate.Text) '入出庫日
+                'Sql += UtilClass.formatDatetime(DtpProcessingDate.Text) '入出庫日
+                Sql += inoutDate '入出庫日
                 Sql += "', '"
                 Sql += CommonConst.CANCEL_KBN_ENABLED.ToString '取消区分
                 Sql += "', '"
@@ -543,7 +547,8 @@ Public Class MovementInput
                                "'" & dsNyuko.Tables(RS).Rows(0)("単位").ToString & "'",
                                "NULL") '単位
                 Sql += ", '"
-                Sql += UtilClass.formatDatetime(DtpProcessingDate.Text) '入出庫日
+                'Sql += UtilClass.formatDatetime(DtpProcessingDate.Text) '入出庫日
+                Sql += inoutDate '入出庫日
                 Sql += "', '"
                 Sql += CommonConst.CANCEL_KBN_ENABLED.ToString '取消区分
                 Sql += "', '"
