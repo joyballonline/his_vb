@@ -211,6 +211,9 @@ Public Class OrderManagement
             Sql3 += " AND "
             Sql3 += " t11.受注番号枝番 = '" & Suffix & "'"
 
+            Sql3 += " ORDER BY "
+            Sql3 += " t11.受注番号, t11.受注番号枝番, t11.行番号"
+
             Sql4 += "SELECT * FROM public.t30_urighd"
             Sql4 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
             Sql4 += " AND 受注番号 = '" & No & "'"
@@ -375,8 +378,7 @@ Public Class OrderManagement
             DgvAdd.Columns("仕入区分値").Visible = False
 
             For index As Integer = 0 To ds3.Tables(RS).Rows.Count - 1
-                If ds3.Tables(RS).Rows(index)("受注残数") = 0 Then
-                Else
+                If ds3.Tables(RS).Rows(index)("受注残数") <> 0 Then
                     DgvAdd.Rows.Add()
                     DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("行番号").Value = ds3.Tables(RS).Rows(index)("行番号")
                     DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("仕入区分値").Value = ds3.Tables(RS).Rows(index)("仕入区分")
