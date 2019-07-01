@@ -724,9 +724,14 @@ Public Class Cymn
                                 Sql += "', '"
                                 Sql += CmWarehouse.SelectedValue '倉庫コード
                                 Sql += "', '"
-                                Sql += dsCurrentList.Tables(RS).Rows(x)("伝票番号").ToString '伝票番号（入庫番号）
+                                'Sql += dsCurrentList.Tables(RS).Rows(x)("伝票番号").ToString '伝票番号（入庫番号）
+                                'Sql += "', '"
+                                'Sql += dsCurrentList.Tables(RS).Rows(x)("行番号").ToString '行番号（入庫番号）
+
+                                Sql += currentLS '伝票番号（出庫番号）
                                 Sql += "', '"
-                                Sql += dsCurrentList.Tables(RS).Rows(x)("行番号").ToString '行番号（入庫番号）
+                                Sql += DgvItemList.Rows(i).Cells("No").Value.ToString '行番号（出庫番号）
+
                                 Sql += "', '"
                                 Sql += CommonConst.INOUT_KBN_NORMAL '入出庫種別
                                 Sql += "', '"
@@ -753,7 +758,10 @@ Public Class Cymn
                                 Sql += "', '"
                                 Sql += UtilClass.formatDatetime(dtNow) '更新日
                                 Sql += "', '"
-                                Sql += currentLS & "1"
+                                'Sql += currentLS & DgvItemList.Rows(i).Cells("No").Value.ToString
+
+                                Sql += dsCurrentList.Tables(RS).Rows(x)("伝票番号").ToString & dsCurrentList.Tables(RS).Rows(x)("行番号").ToString
+
                                 Sql += "')"
 
                                 _db.executeDB(Sql)

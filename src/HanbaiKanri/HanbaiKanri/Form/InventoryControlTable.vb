@@ -666,10 +666,20 @@ Public Class InventoryControlTable
             Sql += " m21.会社コード = t70.会社コード "
             Sql += " AND "
             Sql += " m21.倉庫コード = t70.倉庫コード "
+
+            'Sql += " AND "
+            'Sql += " m21.伝票番号 = t70.伝票番号 "
+            'Sql += " AND "
+            'Sql += " m21.行番号 = t70.行番号 "
+
+            Sql += " AND ( "
+            Sql += " ( m21.伝票番号 = t70.伝票番号 "
             Sql += " AND "
-            Sql += " m21.伝票番号 = t70.伝票番号 "
-            Sql += " AND "
-            Sql += " m21.行番号 = t70.行番号 "
+            Sql += " m21.行番号 = t70.行番号) "
+            Sql += " OR "
+            Sql += " concat(m21.伝票番号, m21.行番号) = t70.ロケ番号 "
+            Sql += " ) "
+
             Sql += " AND "
             Sql += " t70.入出庫日 >= '" & UtilClass.formatDatetime(DtpMovingDayFrom.Text) & "'"
             Sql += " AND "

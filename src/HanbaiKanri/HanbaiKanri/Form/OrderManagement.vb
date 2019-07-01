@@ -513,12 +513,16 @@ Public Class OrderManagement
 
 
         For i As Integer = 0 To DgvAdd.Rows.Count() - 1
-            If dsCymndt.Tables(RS).Rows(i)("受注数量") < dsCymndt.Tables(RS).Rows(i)("売上数量") + DgvAdd.Rows(i).Cells("売上数量").Value Then
-                '売上数量が受注数量を超えているアラートを表示
-                _msgHd.dspMSG("chkUriageBalanceError", frmC01F10_Login.loginValue.Language)
+            For x As Integer = 0 To dsCymndt.Tables(RS).Rows.Count - 1
+                If dsCymndt.Tables(RS).Rows(x)("行番号") = DgvAdd.Rows(i).Cells("行番号").Value Then
+                    If dsCymndt.Tables(RS).Rows(x)("受注数量") < dsCymndt.Tables(RS).Rows(x)("売上数量") + DgvAdd.Rows(i).Cells("売上数量").Value Then
+                        '売上数量が受注数量を超えているアラートを表示
+                        _msgHd.dspMSG("chkUriageBalanceError", frmC01F10_Login.loginValue.Language)
 
-                Return
-            End If
+                        Return
+                    End If
+                End If
+            Next
         Next
 
         Dim nullCount As Integer = 0
@@ -548,118 +552,126 @@ Public Class OrderManagement
 
             't31_urigdt 売上明細更新
             For i As Integer = 0 To DgvAdd.Rows.Count() - 1
+                For x As Integer = 0 To dsCymndt.Tables(RS).Rows.Count - 1
+                    If dsCymndt.Tables(RS).Rows(x)("行番号") = DgvAdd.Rows(i).Cells("行番号").Value Then
+                        Sql4 = "INSERT INTO "
+                        Sql4 += "Public."
+                        Sql4 += "t31_urigdt("
+                        Sql4 += "会社コード, 売上番号, 売上番号枝番, 受注番号, 受注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式"
+                        Sql4 += ", 仕入先名, 仕入値, 受注数量, 売上数量, 受注残数, 単位, 売単価, 売上金額, 粗利額, 粗利率, 間接費"
+                        Sql4 += ", リードタイム, 備考, 更新者, 更新日, 仕入原価, 関税率, 関税額, 前払法人税率, 前払法人税額"
+                        Sql4 += ", 輸送費率, 輸送費額, 仕入金額, 見積単価, 見積金額)"
+                        Sql4 += " VALUES('"
+                        Sql4 += dsCymndt.Tables(RS).Rows(x)("会社コード").ToString
+                        Sql4 += "', '"
+                        Sql4 += ER '売上番号
+                        Sql4 += "', '"
+                        Sql4 += "1" '売上番号枝番
+                        Sql4 += "', '"
+                        Sql4 += dsCymndt.Tables(RS).Rows(x)("受注番号").ToString '受注番号
+                        Sql4 += "', '"
+                        Sql4 += dsCymndt.Tables(RS).Rows(x)("受注番号枝番").ToString '受注番号枝番
+                        Sql4 += "', '"
+                        Sql4 += DgvAdd.Rows(i).Cells("行番号").Value.ToString '行番号
+                        Sql4 += "', '"
+                        Sql4 += DgvAdd.Rows(i).Cells("仕入区分値").Value.ToString '仕入区分値
+                        Sql4 += "', '"
+                        Sql4 += DgvAdd.Rows(i).Cells("メーカー").Value.ToString 'メーカー
+                        Sql4 += "', '"
+                        Sql4 += DgvAdd.Rows(i).Cells("品名").Value.ToString '品名
+                        Sql4 += "', '"
+                        Sql4 += DgvAdd.Rows(i).Cells("型式").Value.ToString '型式
+                        Sql4 += "', '"
+                        Sql4 += DgvAdd.Rows(i).Cells("仕入先").Value.ToString '仕入先名
+                        Sql4 += "', '"
+                        Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(x)("仕入値").ToString) '仕入値
+                        Sql4 += "', '"
+                        Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(x)("受注数量").ToString) '受注数量
+                        Sql4 += "', '"
+                        Sql4 += UtilClass.formatNumber(DgvAdd.Rows(i).Cells("売上数量").Value.ToString) '売上数量
+                        Sql4 += "', '"
 
-                Sql4 = "INSERT INTO "
-                Sql4 += "Public."
-                Sql4 += "t31_urigdt("
-                Sql4 += "会社コード, 売上番号, 売上番号枝番, 受注番号, 受注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式"
-                Sql4 += ", 仕入先名, 仕入値, 受注数量, 売上数量, 受注残数, 単位, 売単価, 売上金額, 粗利額, 粗利率, 間接費"
-                Sql4 += ", リードタイム, 備考, 更新者, 更新日, 仕入原価, 関税率, 関税額, 前払法人税率, 前払法人税額"
-                Sql4 += ", 輸送費率, 輸送費額, 仕入金額, 見積単価, 見積金額)"
-                Sql4 += " VALUES('"
-                Sql4 += dsCymndt.Tables(RS).Rows(i)("会社コード").ToString
-                Sql4 += "', '"
-                Sql4 += ER '売上番号
-                Sql4 += "', '"
-                Sql4 += "1" '売上番号枝番
-                Sql4 += "', '"
-                Sql4 += dsCymndt.Tables(RS).Rows(i)("受注番号").ToString '受注番号
-                Sql4 += "', '"
-                Sql4 += dsCymndt.Tables(RS).Rows(i)("受注番号枝番").ToString '受注番号枝番
-                Sql4 += "', '"
-                Sql4 += DgvAdd.Rows(i).Cells("行番号").Value.ToString '行番号
-                Sql4 += "', '"
-                Sql4 += DgvAdd.Rows(i).Cells("仕入区分値").Value.ToString '仕入区分値
-                Sql4 += "', '"
-                Sql4 += DgvAdd.Rows(i).Cells("メーカー").Value.ToString 'メーカー
-                Sql4 += "', '"
-                Sql4 += DgvAdd.Rows(i).Cells("品名").Value.ToString '品名
-                Sql4 += "', '"
-                Sql4 += DgvAdd.Rows(i).Cells("型式").Value.ToString '型式
-                Sql4 += "', '"
-                Sql4 += DgvAdd.Rows(i).Cells("仕入先").Value.ToString '仕入先名
-                Sql4 += "', '"
-                Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(i)("仕入値").ToString) '仕入値
-                Sql4 += "', '"
-                Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(i)("受注数量").ToString) '受注数量
-                Sql4 += "', '"
-                Sql4 += UtilClass.formatNumber(DgvAdd.Rows(i).Cells("売上数量").Value.ToString) '売上数量
-                Sql4 += "', '"
+                        Dim OrderNo As Integer = dsCymndt.Tables(RS).Rows(x)("受注数量")
+                        Dim PurchaseNo As Integer = DgvAdd.Rows(i).Cells("売上数量").Value
+                        Dim RemainingNo As Integer = OrderNo - PurchaseNo
 
-                Dim OrderNo As Integer = dsCymndt.Tables(RS).Rows(i)("受注数量")
-                Dim PurchaseNo As Integer = DgvAdd.Rows(i).Cells("売上数量").Value
-                Dim RemainingNo As Integer = OrderNo - PurchaseNo
+                        Sql4 += RemainingNo.ToString '受注残数
+                        Sql4 += "', '"
+                        Sql4 += DgvAdd.Rows(i).Cells("単位").Value '単位
+                        Sql4 += "', '"
+                        Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(x)("売単価").ToString) '売単価
+                        Sql4 += "', '"
 
-                Sql4 += RemainingNo.ToString '受注残数
-                Sql4 += "', '"
-                Sql4 += DgvAdd.Rows(i).Cells("単位").Value '単位
-                Sql4 += "', '"
-                Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(i)("売単価").ToString) '売単価
-                Sql4 += "', '"
+                        Dim uriAmount As Decimal = IIf(dsCymndt.Tables(RS).Rows(x)("売単価").ToString <> 0,
+                                                      Decimal.Parse(dsCymndt.Tables(RS).Rows(x)("売単価").ToString * DgvAdd.Rows(i).Cells("売上数量").Value.ToString),
+                                                      0)
 
-                Dim uriAmount As Decimal = IIf(dsCymndt.Tables(RS).Rows(i)("売単価").ToString <> 0,
-                                              Decimal.Parse(dsCymndt.Tables(RS).Rows(i)("売単価").ToString * DgvAdd.Rows(i).Cells("売上数量").Value.ToString),
-                                              0)
+                        Sql4 += UtilClass.formatNumber(Format(uriAmount, "0.000")) '売上金額
+                        Sql4 += "', '"
 
-                Sql4 += UtilClass.formatNumber(Format(uriAmount, "0.000")) '売上金額
-                Sql4 += "', '"
+                        Dim arariAmount As Decimal = IIf(dsCymndt.Tables(RS).Rows(x)("売単価").ToString <> 0,
+                                                      Decimal.Parse((dsCymndt.Tables(RS).Rows(x)("売単価").ToString - dsCymndt.Tables(RS).Rows(x)("仕入値").ToString) * DgvAdd.Rows(x).Cells("売上数量").Value),
+                                                      0)
 
-                Dim arariAmount As Decimal = IIf(dsCymndt.Tables(RS).Rows(i)("売単価").ToString <> 0,
-                                              Decimal.Parse((dsCymndt.Tables(RS).Rows(i)("売単価").ToString - dsCymndt.Tables(RS).Rows(i)("仕入値").ToString) * DgvAdd.Rows(i).Cells("売上数量").Value),
-                                              0)
+                        Sql4 += UtilClass.formatNumber(Format(arariAmount, "0.000")) '粗利額
+                        Sql4 += "', '"
 
-                Sql4 += UtilClass.formatNumber(Format(arariAmount, "0.000")) '粗利額
-                Sql4 += "', '"
+                        If dsCymndt.Tables(RS).Rows(x)("売単価").ToString > 0 Then
+                            Sql4 += UtilClass.formatNumber(Format(dsCymndt.Tables(RS).Rows(x)("仕入値").ToString / (dsCymndt.Tables(RS).Rows(x)("売単価").ToString) * 100, "0.0")) '粗利率
+                        Else
+                            Sql4 += "0" '粗利率
+                        End If
+                        Sql4 += "', '"
 
-                If dsCymndt.Tables(RS).Rows(i)("売単価").ToString > 0 Then
-                    Sql4 += UtilClass.formatNumber(Format(dsCymndt.Tables(RS).Rows(i)("仕入値").ToString / (dsCymndt.Tables(RS).Rows(i)("売単価").ToString) * 100, "0.0")) '粗利率
-                Else
-                    Sql4 += "0" '粗利率
-                End If
-                Sql4 += "', '"
+                        Dim kansetsuhi As Decimal = (dsCymndt.Tables(RS).Rows(x)("関税額") + dsCymndt.Tables(RS).Rows(x)("前払法人税額") + dsCymndt.Tables(RS).Rows(x)("輸送費額")) * DgvAdd.Rows(i).Cells("売上数量").Value.ToString
 
-                Dim kansetsuhi As Decimal = (dsCymndt.Tables(RS).Rows(i)("関税額") + dsCymndt.Tables(RS).Rows(i)("前払法人税額") + dsCymndt.Tables(RS).Rows(i)("輸送費額")) * DgvAdd.Rows(i).Cells("売上数量").Value.ToString
+                        Sql4 += UtilClass.formatNumber(kansetsuhi) '間接費
+                        Sql4 += "', '"
+                        Sql4 += dsCymndt.Tables(RS).Rows(x)("リードタイム").ToString
+                        Sql4 += "', '"
+                        Sql4 += DgvAdd.Rows(i).Cells("備考").Value
+                        Sql4 += "', '"
+                        Sql4 += Input '更新者
+                        Sql4 += "', '"
+                        Sql4 += strToday '更新日
+                        Sql4 += "', '"
+                        Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(x)("仕入値").ToString * DgvAdd.Rows(i).Cells("売上数量").Value.ToString)
+                        Sql4 += "', '"
+                        Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(x)("関税率").ToString)
+                        Sql4 += "', '"
+                        Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(x)("関税額").ToString)
+                        Sql4 += "', '"
+                        Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(x)("前払法人税率").ToString)
+                        Sql4 += "', '"
+                        Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(x)("前払法人税額").ToString)
+                        Sql4 += "', '"
+                        Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(x)("輸送費率").ToString)
+                        Sql4 += "', '"
+                        Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(x)("輸送費額").ToString)
+                        Sql4 += "', '"
+                        Sql4 += UtilClass.formatNumber((dsCymndt.Tables(RS).Rows(x)("仕入値").ToString + kansetsuhi) * DgvAdd.Rows(i).Cells("売上数量").Value.ToString)
+                        Sql4 += "', '"
+                        Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(x)("見積単価").ToString)
+                        Sql4 += "', '"
 
-                Sql4 += UtilClass.formatNumber(kansetsuhi) '間接費
-                Sql4 += "', '"
-                Sql4 += dsCymndt.Tables(RS).Rows(i)("リードタイム").ToString
-                Sql4 += "', '"
-                Sql4 += DgvAdd.Rows(i).Cells("備考").Value
-                Sql4 += "', '"
-                Sql4 += Input '更新者
-                Sql4 += "', '"
-                Sql4 += strToday '更新日
-                Sql4 += "', '"
-                Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(i)("仕入値").ToString * DgvAdd.Rows(i).Cells("売上数量").Value.ToString)
-                Sql4 += "', '"
-                Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(i)("関税率").ToString)
-                Sql4 += "', '"
-                Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(i)("関税額").ToString)
-                Sql4 += "', '"
-                Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(i)("前払法人税率").ToString)
-                Sql4 += "', '"
-                Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(i)("前払法人税額").ToString)
-                Sql4 += "', '"
-                Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(i)("輸送費率").ToString)
-                Sql4 += "', '"
-                Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(i)("輸送費額").ToString)
-                Sql4 += "', '"
-                Sql4 += UtilClass.formatNumber((dsCymndt.Tables(RS).Rows(i)("仕入値").ToString + kansetsuhi) * DgvAdd.Rows(i).Cells("売上数量").Value.ToString)
-                Sql4 += "', '"
-                Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(i)("見積単価").ToString)
-                Sql4 += "', '"
+                        Dim mitsuAmount As Decimal = dsCymndt.Tables(RS).Rows(x)("見積単価").ToString * DgvAdd.Rows(i).Cells("売上数量").Value.ToString
 
-                Dim mitsuAmount As Decimal = dsCymndt.Tables(RS).Rows(i)("見積単価").ToString * DgvAdd.Rows(i).Cells("売上数量").Value.ToString
+                        Sql4 += UtilClass.formatNumber(mitsuAmount) '見積金額
+                        Sql4 += "')"
+                        If DgvAdd.Rows(i).Cells("売上数量").Value <> 0 Then
+                            _db.executeDB(Sql4)
+                        End If
 
-                Sql4 += UtilClass.formatNumber(mitsuAmount) '見積金額
-                Sql4 += "')"
-                If DgvAdd.Rows(i).Cells("売上数量").Value <> 0 Then
-                    _db.executeDB(Sql4)
-                End If
+                        totalUriAmount += uriAmount
+                        totalArariAmount += arariAmount
+                        totalmitsuAmount += mitsuAmount
 
-                totalUriAmount += uriAmount
-                totalArariAmount += arariAmount
-                totalmitsuAmount += mitsuAmount
+                    End If
+
+                Next
+
+
+
 
             Next
 
@@ -764,48 +776,55 @@ Public Class OrderManagement
             't11_cymndt 受注明細 数量更新
             For index As Integer = 0 To DgvAdd.Rows.Count() - 1
 
-                Sql6 = "UPDATE "
-                Sql6 += "Public."
-                Sql6 += "t11_cymndt "
-                Sql6 += "SET "
-                Sql6 += "売上数量"
-                Sql6 += " = '"
-                PurchaseNum = dsCymndt.Tables(RS).Rows(index)("売上数量") + DgvAdd.Rows(index).Cells("売上数量").Value
-                Sql6 += UtilClass.formatNumber(PurchaseNum.ToString)
-                Sql6 += "', "
-                Sql6 += " 受注残数"
-                Sql6 += " = '"
-                OrdingNum = dsCymndt.Tables(RS).Rows(index)("受注残数") - DgvAdd.Rows(index).Cells("売上数量").Value
-                Sql6 += UtilClass.formatNumber(OrdingNum.ToString)
-                Sql6 += "', "
-                Sql6 += "更新者"
-                Sql6 += " = '"
-                Sql6 += Input
-                Sql6 += "' "
-                Sql6 += "WHERE"
-                Sql6 += " 会社コード"
-                Sql6 += "='"
-                Sql6 += dsCymnHd.Tables(RS).Rows(0)("会社コード").ToString
-                Sql6 += "'"
-                Sql6 += " AND"
-                Sql6 += " 受注番号"
-                Sql6 += "='"
-                Sql6 += dsCymndt.Tables(RS).Rows(index)("受注番号").ToString
-                Sql6 += "'"
-                Sql6 += " AND"
-                Sql6 += " 受注番号枝番"
-                Sql6 += "='"
-                Sql6 += dsCymndt.Tables(RS).Rows(index)("受注番号枝番").ToString
-                Sql6 += "'"
-                Sql6 += " AND"
-                Sql6 += " 行番号"
-                Sql6 += "='"
-                Sql6 += dsCymndt.Tables(RS).Rows(index)("行番号").ToString
-                Sql6 += "' "
-                If DgvAdd.Rows(index).Cells("売上数量").Value = 0 Then
-                Else
-                    _db.executeDB(Sql6)
-                End If
+                For x As Integer = 0 To dsCymndt.Tables(RS).Rows.Count - 1
+
+                    If dsCymndt.Tables(RS).Rows(x)("行番号") = DgvAdd.Rows(index).Cells("行番号").Value Then
+                        Sql6 = "UPDATE "
+                        Sql6 += "Public."
+                        Sql6 += "t11_cymndt "
+                        Sql6 += "SET "
+                        Sql6 += "売上数量"
+                        Sql6 += " = '"
+                        PurchaseNum = dsCymndt.Tables(RS).Rows(x)("売上数量") + DgvAdd.Rows(index).Cells("売上数量").Value
+                        Sql6 += UtilClass.formatNumber(PurchaseNum.ToString)
+                        Sql6 += "', "
+                        Sql6 += " 受注残数"
+                        Sql6 += " = '"
+                        OrdingNum = dsCymndt.Tables(RS).Rows(x)("受注残数") - DgvAdd.Rows(index).Cells("売上数量").Value
+                        Sql6 += UtilClass.formatNumber(OrdingNum.ToString)
+                        Sql6 += "', "
+                        Sql6 += "更新者"
+                        Sql6 += " = '"
+                        Sql6 += Input
+                        Sql6 += "' "
+                        Sql6 += "WHERE"
+                        Sql6 += " 会社コード"
+                        Sql6 += "='"
+                        Sql6 += dsCymnHd.Tables(RS).Rows(0)("会社コード").ToString
+                        Sql6 += "'"
+                        Sql6 += " AND"
+                        Sql6 += " 受注番号"
+                        Sql6 += "='"
+                        Sql6 += dsCymndt.Tables(RS).Rows(x)("受注番号").ToString
+                        Sql6 += "'"
+                        Sql6 += " AND"
+                        Sql6 += " 受注番号枝番"
+                        Sql6 += "='"
+                        Sql6 += dsCymndt.Tables(RS).Rows(x)("受注番号枝番").ToString
+                        Sql6 += "'"
+                        Sql6 += " AND"
+                        Sql6 += " 行番号"
+                        Sql6 += "='"
+                        Sql6 += dsCymndt.Tables(RS).Rows(x)("行番号").ToString
+                        Sql6 += "' "
+                        If DgvAdd.Rows(index).Cells("売上数量").Value = 0 Then
+                        Else
+                            _db.executeDB(Sql6)
+                        End If
+
+                    End If
+
+                Next
             Next
 
             ''請求データ作成の確認
