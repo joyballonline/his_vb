@@ -193,6 +193,10 @@ Public Class OrderingList
         Dim Sql As String = ""
         Dim reccnt As Integer = 0 'DB用（デフォルト）
 
+        Dim curds As DataSet  'm25_currency
+        Dim cur As String
+
+
         Try
 
             '伝票単位
@@ -240,6 +244,9 @@ Public Class OrderingList
                     DgvHtyhd.Columns.Add("仕入先ＦＡＸ", "FAX")
                     DgvHtyhd.Columns.Add("仕入先担当者名", "NameOfPIC")
                     DgvHtyhd.Columns.Add("仕入先担当者役職", "PositionPICSupplier")
+                    DgvHtyhd.Columns.Add("通貨_外貨", "Currency")
+                    DgvHtyhd.Columns.Add("仕入金額_外貨", "PurchaseAmountForeignCurrency")
+                    DgvHtyhd.Columns.Add("通貨", "Currency")
                     DgvHtyhd.Columns.Add("仕入金額", "PurchaseAmount")
                     DgvHtyhd.Columns.Add("支払条件", "PaymentTerms")
                     DgvHtyhd.Columns.Add("営業担当者", "SalesPersonInCharge")
@@ -262,6 +269,9 @@ Public Class OrderingList
                     DgvHtyhd.Columns.Add("仕入先ＦＡＸ", "仕入先ＦＡＸ")
                     DgvHtyhd.Columns.Add("仕入先担当者名", "仕入先担当者名")
                     DgvHtyhd.Columns.Add("仕入先担当者役職", "仕入先担当者役職")
+                    DgvHtyhd.Columns.Add("通貨_外貨", "通貨")
+                    DgvHtyhd.Columns.Add("仕入金額_外貨", "仕入金額(外貨)")
+                    DgvHtyhd.Columns.Add("通貨", "通貨")
                     DgvHtyhd.Columns.Add("仕入金額", "仕入金額")
                     DgvHtyhd.Columns.Add("支払条件", "支払条件")
                     DgvHtyhd.Columns.Add("営業担当者", "営業担当者")
@@ -275,6 +285,16 @@ Public Class OrderingList
                 DgvHtyhd.Columns("仕入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
                 For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+
+                    If IsDBNull(ds.Tables(RS).Rows(i)("通貨")) Then
+                        cur = vbNullString
+                    Else
+                        Sql = " and 採番キー = " & ds.Tables(RS).Rows(i)("通貨")
+                        curds = getDsData("m25_currency", Sql)
+
+                        cur = curds.Tables(RS).Rows(0)("通貨コード")
+                    End If
+
                     DgvHtyhd.Rows.Add()
                     DgvHtyhd.Rows(i).Cells("取消").Value = getDelKbnTxt(ds.Tables(RS).Rows(i)("取消区分"))
                     DgvHtyhd.Rows(i).Cells("発注番号").Value = ds.Tables(RS).Rows(i)("発注番号")
@@ -290,6 +310,9 @@ Public Class OrderingList
                     DgvHtyhd.Rows(i).Cells("仕入先ＦＡＸ").Value = ds.Tables(RS).Rows(i)("仕入先ＦＡＸ")
                     DgvHtyhd.Rows(i).Cells("仕入先担当者名").Value = ds.Tables(RS).Rows(i)("仕入先担当者名")
                     DgvHtyhd.Rows(i).Cells("仕入先担当者役職").Value = ds.Tables(RS).Rows(i)("仕入先担当者役職")
+                    DgvHtyhd.Rows(i).Cells("通貨_外貨").Value = cur
+                    DgvHtyhd.Rows(i).Cells("仕入金額_外貨").Value = ds.Tables(RS).Rows(i)("仕入金額_外貨")
+                    DgvHtyhd.Rows(i).Cells("通貨").Value = "IDR"
                     DgvHtyhd.Rows(i).Cells("仕入金額").Value = ds.Tables(RS).Rows(i)("仕入金額")
                     DgvHtyhd.Rows(i).Cells("支払条件").Value = ds.Tables(RS).Rows(i)("支払条件")
                     DgvHtyhd.Rows(i).Cells("営業担当者").Value = ds.Tables(RS).Rows(i)("営業担当者")
