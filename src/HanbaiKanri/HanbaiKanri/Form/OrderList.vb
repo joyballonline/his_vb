@@ -455,11 +455,11 @@ Public Class OrderList
                 DgvCymnhd.Rows(i).Cells("受注番号枝番").Value = ds.Tables(RS).Rows(i)("受注番号枝番")
                 DgvCymnhd.Rows(i).Cells("行番号").Value = ds.Tables(RS).Rows(i)("行番号")
 
-                '出庫登録時のみ出力
-                If OrderStatus = CommonConst.STATUS_GOODS_ISSUE Then
-                    DgvCymnhd.Rows(i).Cells("発注番号").Value = ds.Tables(RS).Rows(i)("発注番号")
-                    DgvCymnhd.Rows(i).Cells("発注番号枝番").Value = ds.Tables(RS).Rows(i)("発注番号枝番")
-                End If
+                ''出庫登録時のみ出力
+                'If OrderStatus = CommonConst.STATUS_GOODS_ISSUE Then
+                '    DgvCymnhd.Rows(i).Cells("発注番号").Value = ds.Tables(RS).Rows(i)("発注番号")
+                '    DgvCymnhd.Rows(i).Cells("発注番号枝番").Value = ds.Tables(RS).Rows(i)("発注番号枝番")
+                'End If
 
                 '汎用マスタから仕入区分を取得
                 Dim dsSireKbn As DataSet = getDsHanyoData(CommonConst.FIXED_KEY_PURCHASING_CLASS, ds.Tables(RS).Rows(i)("仕入区分").ToString)
