@@ -1108,6 +1108,9 @@ Public Class Ordering
                 'Else
                 'End If
 
+                'レートの取得
+                Dim strRate As Decimal = setRate(CmCurrency.SelectedValue.ToString)
+
 
                 Sql = "INSERT INTO "
                 Sql += "Public."
@@ -1118,7 +1121,7 @@ Public Class Ordering
                 Sql += ", 仕入先電話番号, 仕入先ＦＡＸ, 仕入先担当者役職, 仕入先担当者名, 見積日, 見積有効期限"
                 Sql += ", 支払条件, 見積金額,仕入金額, 粗利額, 営業担当者,入力担当者, 備考, 見積備考, ＶＡＴ, ＰＰＨ"
                 Sql += ", 受注日, 発注日, 登録日, 更新日, 更新者, 取消区分, 出荷方法, 出荷日, 営業担当者コード"
-                Sql += ", 入力担当者コード, 倉庫コード, 通貨, レート"
+                Sql += ", 入力担当者コード, 倉庫コード, 通貨, レート,仕入金額_外貨"
 
                 If PurchaseStatus <> CommonConst.STATUS_ADD And dsHattyuHd.Tables(RS).Rows.Count > 0 Then
                     If dsHattyuHd.Tables(RS).Rows(0)("見積番号") <> "" Then
@@ -1291,6 +1294,8 @@ Public Class Ordering
                 Sql += CmCurrency.SelectedValue.ToString '通貨
                 Sql += "', '"
                 Sql += UtilClass.formatNumberF10(TxtRate.Text) 'レート
+                Sql += "', '"
+                Sql += formatNumber(Math.Ceiling(TxtPurchaseAmount.Text * strRate))  '仕入金額_外貨
 
                 If PurchaseStatus <> CommonConst.STATUS_ADD And dsHattyuHd.Tables(RS).Rows.Count > 0 Then
                     If dsHattyuHd.Tables(RS).Rows(0)("見積番号") <> "" Then
@@ -1305,13 +1310,17 @@ Public Class Ordering
 
                 For i As Integer = 0 To DgvItemList.Rows.Count - 1
 
+                    'レートの取得
+                    strRate = setRate(CmCurrency.SelectedValue.ToString)
+
+
                     Sql = "INSERT INTO "
                     Sql += "Public."
                     Sql += "t21_hattyu("
                     Sql += "会社コード, 発注番号, 発注番号枝番, 行番号, 仕入区分, 仕入先名, メーカー, 品名, 型式, 単位, 仕入値"
                     Sql += ", 発注数量, 仕入数量, 発注残数, 間接費, 仕入金額, リードタイム, リードタイム単位, 入庫数"
                     Sql += ", 未入庫数, 備考, 更新者, 登録日, 更新日, 仕入単価_外貨, 仕入通貨, 仕入レート, 関税率, 関税額"
-                    Sql += ", 前払法人税率, 前払法人税額, 輸送費率, 輸送費額"
+                    Sql += ", 前払法人税率, 前払法人税額, 輸送費率, 輸送費額, 仕入値_外貨, 仕入金額_外貨"
                     If PurchaseStatus <> CommonConst.STATUS_ADD And dsHattyuHd.Tables(RS).Rows.Count > 0 Then
                         If dsHattyuHd.Tables(RS).Rows(0)("見積番号") <> "" Then
 
@@ -1384,7 +1393,7 @@ Public Class Ordering
                     Sql += "', '"
                     Sql += CmCurrency.SelectedValue.ToString '仕入通貨
                     Sql += "', '"
-                    Sql += UtilClass.formatNumberF10(TxtRate.Text) '仕入レート
+                    Sql += UtilClass.formatNumberF10(strRate) '仕入レート  発注日で計算し直したデータを入れる
                     Sql += "', '"
                     Sql += UtilClass.formatNumber(DgvItemList.Rows(i).Cells("関税率").Value) '関税率
                     Sql += "', '"
@@ -1412,6 +1421,12 @@ Public Class Ordering
                     End If
 
                     Sql += "'"
+
+                    Sql += ", "
+                    Sql += formatNumber(Math.Ceiling(DgvItemList.Rows(i).Cells("仕入単価").Value.ToString * strRate))  '仕入値_外貨  切り上げ
+                    Sql += ", "
+                    Sql += formatNumber(Math.Ceiling(DgvItemList.Rows(i).Cells("仕入金額").Value.ToString * strRate))  '仕入金額_外貨　切り上げ
+
 
                     Sql += IIf(
                                 DgvItemList.Rows(i).Cells("貿易条件").Value IsNot Nothing,
@@ -1495,6 +1510,30 @@ Public Class Ordering
         End Try
 
     End Sub
+
+    '通貨の採番キーからレートを取得・設定
+    '基準日が請求日以前の最新のもの
+    Private Function setRate(ByVal strKey As Integer) As Decimal
+        Dim Sql As String
+
+        Sql = " AND 採番キー = " & strKey & ""
+        Sql += " AND 基準日 <= '" & UtilClass.strFormatDate(DtpPurchaseDate.Text) & "'"  '発注日
+        Sql += " ORDER BY 基準日 DESC "
+
+        Dim ds As DataSet = getDsData("t71_exchangerate", Sql)
+
+        If ds.Tables(RS).Rows.Count > 0 Then
+            setRate = ds.Tables(RS).Rows(0)("レート")
+        Else
+            If CultureInfo.CurrentCulture.Name.ToString = CommonConst.CI_ID Then
+                setRate = CommonConst.BASE_RATE_IDR
+            Else
+                setRate = CommonConst.BASE_RATE_JPY
+            End If
+        End If
+
+    End Function
+
 
     '発注書発行のボタン押下時
     Private Sub BtnPurchase_Click(sender As Object, e As EventArgs) Handles BtnPurchase.Click
