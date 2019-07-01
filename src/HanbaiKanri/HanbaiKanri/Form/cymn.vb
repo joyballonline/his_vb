@@ -943,6 +943,10 @@ Public Class Cymn
                     Sql = " AND 仕入先コード ILIKE '" & tbl.Rows(i)("仕入先コード") & "'"
                     Dim dsSipper As DataSet = getDsData("m11_supplier", Sql)
 
+
+                    'レートの取得
+                    Dim strRate As Decimal = setRate(tbl.Rows(i)("仕入通貨"))
+
                     '明細データ更新
                     Sql = ""
                     Sql += "INSERT INTO "
@@ -952,7 +956,8 @@ Public Class Cymn
                     Sql += ", 単位, 仕入先名, 仕入値, 発注数量, 仕入数量, 発注残数, 仕入金額"
                     Sql += ", 間接費, リードタイム, リードタイム単位, 入庫数, 未入庫数, 備考, 更新者"
                     Sql += ", 登録日, 更新日, 見積単価_外貨, 見積金額_外貨, 通貨, レート, 仕入単価_外貨"
-                    Sql += ", 仕入通貨, 仕入レート, 関税率, 関税額, 前払法人税率, 前払法人税額, 輸送費率, 輸送費額)"
+                    Sql += ", 仕入通貨, 仕入レート, 関税率, 関税額, 前払法人税率, 前払法人税額, 輸送費率, 輸送費額"
+                    Sql += ",仕入値_外貨,仕入金額_外貨)"
                     Sql += " VALUES('"
                     Sql += CompanyCode '会社コード
                     Sql += "', '"
@@ -1016,13 +1021,22 @@ Public Class Cymn
                     Sql += "', '"
                     Sql += formatStringToNumber(tbl.Rows(i)("仕入通貨")) '仕入通貨
                     Sql += "', '"
-                    Sql += UtilClass.formatNumberF10(tbl.Rows(i)("仕入レート")) '仕入レート
+                    Sql += UtilClass.formatNumberF10(strRate)  '仕入レート 受注日で計算し直したデータを入れる
                     Sql += "', " & formatStringToNumber(tbl.Rows(i)("関税率"))             '関税率
                     Sql += ", " & formatStringToNumber(tbl.Rows(i)("関税額"))             '関税額
                     Sql += ", " & formatStringToNumber(tbl.Rows(i)("前払法人税率"))       '前払法人税率
                     Sql += ", " & formatStringToNumber(tbl.Rows(i)("前払法人税額"))       '前払法人税額
                     Sql += ", " & formatStringToNumber(tbl.Rows(i)("輸送費率"))         '輸送費率
                     Sql += ", " & formatStringToNumber(tbl.Rows(i)("輸送費額"))         '輸送費額
+
+
+                    Sql += ", "
+                    Sql += formatNumber(Math.Ceiling(tbl.Rows(i)("仕入単価") * strRate)) '仕入値_外貨
+
+
+                    Sql += ", "
+                    Sql += formatNumber(Math.Ceiling(tbl.Rows(i)("仕入金額") * strRate)) '仕入金額_外貨
+
                     Sql += ")"
                     _db.executeDB(Sql)
 
@@ -1033,7 +1047,9 @@ Public Class Cymn
                     If (sireCd <> tbl.Rows(i)("仕入先コード") Or currencyCd <> tbl.Rows(i)("仕入通貨")) Then
 
                         If tbl.Rows.Count - 1 = i Then
-                            hattyuHdInsert(PurchaseNo, dsSipper, cost, tmpCuote, dtNow) '発注明細更新
+                            strRate = setRate(tbl.Rows(i)("仕入通貨"))
+
+                            hattyuHdInsert(PurchaseNo, dsSipper, cost, tmpCuote, dtNow, strRate) '発注明細更新
 
                             '採番データ更新
                             PurchaseCount += 1
@@ -1055,7 +1071,10 @@ Public Class Cymn
                             sireCd = tbl.Rows(i)("仕入先コード")
                             currencyCd = tbl.Rows(i)("仕入通貨")
 
-                            hattyuHdInsert(PurchaseNo, dsSipper, cost, tmpCuote, dtNow) '発注基本更新
+                            'レートの取得
+                            strRate = setRate(currencyCd)
+
+                            hattyuHdInsert(PurchaseNo, dsSipper, cost, tmpCuote, dtNow, strRate) '発注基本更新
 
                             '採番データ更新
                             PurchaseCount += 1
@@ -1344,7 +1363,7 @@ Public Class Cymn
 
     End Sub
 
-    Private Sub hattyuHdInsert(ByVal PurchaseNo As String, ByVal dsSipper As DataSet, ByVal cost As Long, ByVal tmpCuote As Long, ByVal dtNow As DateTime)
+    Private Sub hattyuHdInsert(ByVal PurchaseNo As String, ByVal dsSipper As DataSet, ByVal cost As Long, ByVal tmpCuote As Long, ByVal dtNow As DateTime, ByVal strRate As Decimal)
 
         Dim Sql As String = ""
 
@@ -1356,7 +1375,9 @@ Public Class Cymn
         Sql += ", 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 仕入先コード, 仕入先名"
         Sql += ", 仕入先郵便番号, 仕入先住所, 仕入先電話番号, 仕入先ＦＡＸ, 仕入先担当者役職, 仕入先担当者名, 見積日, 見積有効期限"
         Sql += ", 支払条件, 見積金額,仕入金額, 粗利額, 営業担当者, 営業担当者コード, 入力担当者, 入力担当者コード, 備考, 見積備考"
-        Sql += ", ＶＡＴ, ＰＰＨ, 受注日, 発注日, 登録日, 更新日, 更新者, 取消区分, 倉庫コード, 見積金額_外貨, 通貨, レート)"
+        Sql += ", ＶＡＴ, ＰＰＨ, 受注日, 発注日, 登録日, 更新日, 更新者, 取消区分, 倉庫コード, 見積金額_外貨, 通貨, レート"
+        Sql += ", 仕入金額_外貨)"
+
         Sql += " VALUES('"
         Sql += CompanyCode '会社コード
         Sql += "', '"
@@ -1461,7 +1482,10 @@ Public Class Cymn
         Sql += CmCurrency.SelectedValue.ToString '通貨
         Sql += ", '"
         Sql += UtilClass.formatNumberF10(TxtRate.Text) 'レート
+        Sql += "', '"
+        Sql += formatNumber(Math.Ceiling(cost.ToString * strRate)) '仕入金額_外貨
         Sql += "')"
+
 
         _db.executeDB(Sql)
 
@@ -1957,4 +1981,26 @@ Public Class Cymn
 
     End Function
 
+    '通貨の採番キーからレートを取得・設定
+    '基準日が請求日以前の最新のもの
+    Private Function setRate(ByVal strKey As Integer) As Decimal
+        Dim Sql As String
+
+        Sql = " AND 採番キー = " & strKey & ""
+        Sql += " AND 基準日 <= '" & UtilClass.strFormatDate(DtpOrderDate.Text) & "'"  '受注日
+        Sql += " ORDER BY 基準日 DESC "
+
+        Dim ds As DataSet = getDsData("t71_exchangerate", Sql)
+
+        If ds.Tables(RS).Rows.Count > 0 Then
+            setRate = ds.Tables(RS).Rows(0)("レート")
+        Else
+            If CultureInfo.CurrentCulture.Name.ToString = CommonConst.CI_ID Then
+                setRate = CommonConst.BASE_RATE_IDR
+            Else
+                setRate = CommonConst.BASE_RATE_JPY
+            End If
+        End If
+
+    End Function
 End Class
