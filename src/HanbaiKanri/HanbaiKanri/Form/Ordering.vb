@@ -551,7 +551,7 @@ Public Class Ordering
             DgvItemList.Rows(i).Cells("数量").Value = dsHattyudt.Tables(RS).Rows(i)("発注数量")
             DgvItemList.Rows(i).Cells("単位").Value = dsHattyudt.Tables(RS).Rows(i)("単位")
             DgvItemList.Rows(i).Cells("仕入単価").Value = dsHattyudt.Tables(RS).Rows(i)("仕入値")
-            DgvItemList.Rows(i).Cells("仕入単価_外貨").Value = dsHattyudt.Tables(RS).Rows(i)("仕入単価_外貨")
+            DgvItemList.Rows(i).Cells("仕入単価_外貨").Value = dsHattyudt.Tables(RS).Rows(i)("仕入値_外貨")
 
 
 
@@ -559,8 +559,8 @@ Public Class Ordering
             DgvItemList.Rows(i).Cells("関税額").Value = dsHattyudt.Tables(RS).Rows(i)("関税額")
             DgvItemList.Rows(i).Cells("前払法人税率").Value = dsHattyudt.Tables(RS).Rows(i)("前払法人税率")
             DgvItemList.Rows(i).Cells("前払法人税額").Value = dsHattyudt.Tables(RS).Rows(i)("前払法人税額")
-            DgvItemList.Rows(i).Cells("仕入単価_外貨").Value = dsHattyudt.Tables(RS).Rows(i)("仕入単価_外貨")
-            DgvItemList.Rows(i).Cells("仕入単価_外貨").Value = dsHattyudt.Tables(RS).Rows(i)("仕入単価_外貨")
+            DgvItemList.Rows(i).Cells("仕入単価_外貨").Value = dsHattyudt.Tables(RS).Rows(i)("仕入値_外貨")
+            DgvItemList.Rows(i).Cells("仕入単価_外貨").Value = dsHattyudt.Tables(RS).Rows(i)("仕入値_外貨")
             DgvItemList.Rows(i).Cells("輸送費率").Value = dsHattyudt.Tables(RS).Rows(i)("輸送費率")
             DgvItemList.Rows(i).Cells("輸送費額").Value = dsHattyudt.Tables(RS).Rows(i)("輸送費額")
 
