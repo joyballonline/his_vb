@@ -866,7 +866,8 @@ Public Class Receipt
                             Sql += "', '"
                             Sql += WH '伝票番号
                             Sql += "', '"
-                            Sql += DgvAdd.Rows(x).Cells("行番号").Value.ToString '行番号
+                            'Sql += DgvAdd.Rows(x).Cells("行番号").Value.ToString '行番号
+                            Sql += DgvAdd.Rows(x).Cells("No").Value.ToString() '行番号
                             Sql += "', '"
                             Sql += DgvAdd.Rows(x).Cells("入出庫種別").Value.ToString '入出庫種別
                             'Sql += "', '"
