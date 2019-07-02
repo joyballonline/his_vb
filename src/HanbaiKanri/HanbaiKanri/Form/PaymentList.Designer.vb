@@ -51,6 +51,7 @@ Partial Class PaymentList
         Me.買掛金額計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.支払残高 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.会社コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.通貨_外貨コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DgvSupplier, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -164,7 +165,7 @@ Partial Class PaymentList
         Me.DgvSupplier.AllowUserToResizeColumns = False
         Me.DgvSupplier.AllowUserToResizeRows = False
         Me.DgvSupplier.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvSupplier.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.仕入先名, Me.仕入先コード, Me.通貨_外貨, Me.仕入金額計_外貨, Me.買掛金額計_外貨, Me.支払残高_外貨, Me.通貨, Me.仕入金額計, Me.買掛金額計, Me.支払残高, Me.会社コード})
+        Me.DgvSupplier.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.仕入先名, Me.仕入先コード, Me.通貨_外貨, Me.仕入金額計_外貨, Me.買掛金額計_外貨, Me.支払残高_外貨, Me.通貨, Me.仕入金額計, Me.買掛金額計, Me.支払残高, Me.会社コード, Me.通貨_外貨コード})
         Me.DgvSupplier.Location = New System.Drawing.Point(14, 161)
         Me.DgvSupplier.MultiSelect = False
         Me.DgvSupplier.Name = "DgvSupplier"
@@ -292,6 +293,13 @@ Partial Class PaymentList
         Me.会社コード.ReadOnly = True
         Me.会社コード.Visible = False
         '
+        '通貨_外貨コード
+        '
+        Me.通貨_外貨コード.HeaderText = "通貨_外貨コード"
+        Me.通貨_外貨コード.Name = "通貨_外貨コード"
+        Me.通貨_外貨コード.ReadOnly = True
+        Me.通貨_外貨コード.Visible = False
+        '
         'PaymentList
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
@@ -344,4 +352,5 @@ Partial Class PaymentList
     Friend WithEvents 買掛金額計 As DataGridViewTextBoxColumn
     Friend WithEvents 支払残高 As DataGridViewTextBoxColumn
     Friend WithEvents 会社コード As DataGridViewTextBoxColumn
+    Friend WithEvents 通貨_外貨コード As DataGridViewTextBoxColumn
 End Class

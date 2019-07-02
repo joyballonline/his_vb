@@ -246,6 +246,8 @@ Public Class PaymentList
                 DgvSupplier.Rows(idx).Cells("仕入先コード").Value = dsSupplier.Tables(RS).Rows(i)("仕入先コード")
                 DgvSupplier.Rows(idx).Cells("会社コード").Value = dsSupplier.Tables(RS).Rows(i)("会社コード")
 
+                DgvSupplier.Rows(idx).Cells("通貨_外貨コード").Value = dsHattyu.Tables(RS).Rows(j)("通貨")
+
             Next
         Next
 
@@ -273,8 +275,13 @@ Public Class PaymentList
         Dim Company As String = DgvSupplier.Rows(RowIdx).Cells("会社コード").Value
         Dim Supplier As String = DgvSupplier.Rows(RowIdx).Cells("仕入先コード").Value
         Dim Name As String = DgvSupplier.Rows(RowIdx).Cells("仕入先名").Value
+        Dim CurCode As Integer = 0
+        If IsDBNull(DgvSupplier.Rows(RowIdx).Cells("通貨_外貨コード").Value) Then
+        Else
+            CurCode = DgvSupplier.Rows(RowIdx).Cells("通貨_外貨コード").Value
+        End If
         Dim openForm As Form = Nothing
-        openForm = New Payment(_msgHd, _db, _langHd, Me, Company, Supplier, Name)   '処理選択
+        openForm = New Payment(_msgHd, _db, _langHd, Me, Company, Supplier, Name, CurCode)   '処理選択
         openForm.Show(Me)
     End Sub
 
