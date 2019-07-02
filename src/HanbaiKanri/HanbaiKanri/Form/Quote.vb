@@ -156,7 +156,7 @@ Public Class Quote
             LblRegistration.Text = "RegistrationDate" '登録日
             LblQuote.Text = "QuotationDate" '見積日
             LblExpiration.Text = "ExpirationDate" '見積有効期限
-            LblCustomerName.Text = "CustomerName" '得意先名称
+            LblCustomerName.Text = "Customer" '得意先名称
             LblAddress.Text = "Address" '住所
             LblTel.Text = "PhoneNumber" '電話番号
             LblFax.Text = "FAX" 'FAX
@@ -282,6 +282,22 @@ Public Class Quote
 
         Dim Sql As String = ""
         Dim ds As DataSet
+
+        '=======================
+        '   新規登録モード
+        '=======================
+        If Status Is CommonConst.STATUS_ADD Then
+            '明細を１行デフォルト表示
+            DgvItemList.Rows.Add()
+            DgvItemList.Rows(DgvItemList.Rows.Count() - 1).Cells("仕入区分").Value = 1
+            DgvItemList.Rows(DgvItemList.Rows.Count() - 1).Cells("リードタイム単位").Value = 1
+            DgvItemList.Rows(DgvItemList.Rows.Count() - 1).Cells("仕入通貨").Value = 1
+
+            Dim tmpCurrencyVal As Decimal = setSireCurrency(DgvItemList.Rows(0).Cells("仕入通貨").Value)
+            DgvItemList.Rows(DgvItemList.Rows.Count() - 1).Cells("仕入レート").Value = tmpCurrencyVal
+            DgvItemList.Rows(DgvItemList.Rows.Count() - 1).Cells("ステータス").Value = "ADD"
+            DgvItemList.Rows(DgvItemList.Rows.Count() - 1).Cells("No").Value = "1"
+        End If
 
         '
         '新規登録モード以外

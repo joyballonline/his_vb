@@ -564,7 +564,7 @@ Partial Class Quote
         Me.LblCustomerName.Name = "LblCustomerName"
         Me.LblCustomerName.Size = New System.Drawing.Size(110, 23)
         Me.LblCustomerName.TabIndex = 1
-        Me.LblCustomerName.Text = "得意先名称"
+        Me.LblCustomerName.Text = "得意先"
         Me.LblCustomerName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'LblAddress
