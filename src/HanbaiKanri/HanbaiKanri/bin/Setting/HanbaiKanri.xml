@@ -911,6 +911,17 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <MEMO></MEMO>
   </MSG_DATA>
   <MSG_DATA>
+    <ID>chkAccountsPayableError</ID>
+    <MSG1>買掛金額が買掛残高を超えています。</MSG1>
+    <MSG1_EN>Accounts payable exceeds Accounts payable.</MSG1_EN>
+    <MSG2>再度確認してから実行してください。</MSG2>
+    <MSG2_EN>Please check again and try again.</MSG2_EN>
+    <BUTTON_TYPE>OK</BUTTON_TYPE>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+    <CREATE_DATE>2019/07/01 17:00</CREATE_DATE>
+    <MEMO></MEMO>
+  </MSG_DATA>
+  <MSG_DATA>
     <ID>chkPaymentBalanceError</ID>
     <MSG1>支払金額が買掛残高を超えています。</MSG1>
     <MSG1_EN>Payment amount exceeds accounts payable balance.</MSG1_EN>
