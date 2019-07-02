@@ -476,11 +476,11 @@ Public Class Quote
                 GrossProfit += DgvItemList.Rows(index).Cells("粗利額").Value
             Next
 
-            TxtPurchaseTotal.Text = PurchaseTotal
-            TxtTotal.Text = Total.ToString("F0")
-            TxtQuoteTotal.Text = QuoteTotal.ToString("F0")
-            TxtGrossProfit.Text = GrossProfit.ToString("F0")
-            TxtVatAmount.Text = ((QuoteTotal.ToString("F0") * TxtVat.Text) / 100).ToString("F0")
+            TxtPurchaseTotal.Text = PurchaseTotal.ToString("N0")
+            TxtTotal.Text = Total.ToString("N0")
+            TxtQuoteTotal.Text = QuoteTotal.ToString("N0")
+            TxtGrossProfit.Text = GrossProfit.ToString("N0")
+            TxtVatAmount.Text = ((QuoteTotal.ToString("N0") * TxtVat.Text) / 100).ToString("N0")
             setCurrency() '通貨に設定した内容に変更
 
             '行番号の振り直し
@@ -1026,50 +1026,48 @@ Public Class Quote
                         DgvItemList.Rows(e.RowIndex).Cells("見積金額").Value = DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value * DgvItemList.Rows(e.RowIndex).Cells("数量").Value
                         DgvItemList.Rows(e.RowIndex).Cells("見積金額_外貨").Value = DgvItemList.Rows(e.RowIndex).Cells("見積単価_外貨").Value * DgvItemList.Rows(e.RowIndex).Cells("数量").Value
                     End If
-
-
                     '仕入先コード入力時、仕入先マスタより各項目を抽出
                     If DgvItemList.Rows(e.RowIndex).Cells("仕入先コード").Value IsNot Nothing Then
-                        Sql = ""
-                        Sql += "SELECT * FROM public.m11_supplier"
-                        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-                        Sql += " and 仕入先コード = '" & DgvItemList.Rows(e.RowIndex).Cells("仕入先コード").Value.ToString & "'"
+                            Sql = ""
+                            Sql += "SELECT * FROM public.m11_supplier"
+                            Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                            Sql += " and 仕入先コード = '" & DgvItemList.Rows(e.RowIndex).Cells("仕入先コード").Value.ToString & "'"
 
-                        Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
-                        '仕入先コードにカーソルがあるときだけ各率を再表示
-                        If DgvItemList.Columns(e.ColumnIndex).Name = "仕入先コード" Then
-                            If reccnt > 0 Then
-                                DgvItemList.Rows(e.RowIndex).Cells("仕入先").Value = ds.Tables(RS).Rows(0)("仕入先名").ToString
-                                DgvItemList.Rows(e.RowIndex).Cells("間接費率").Value = ds.Tables(RS).Rows(0)("既定間接費率").ToString
-                                DgvItemList.Rows(e.RowIndex).Cells("関税率").Value = ds.Tables(RS).Rows(0)("関税率").ToString
-                                DgvItemList.Rows(e.RowIndex).Cells("前払法人税率").Value = ds.Tables(RS).Rows(0)("前払法人税率").ToString
-                                DgvItemList.Rows(e.RowIndex).Cells("輸送費率").Value = ds.Tables(RS).Rows(0)("輸送費率").ToString
-                            Else
-                                DgvItemList.Rows(e.RowIndex).Cells("仕入先").Value = ""
-                                DgvItemList.Rows(e.RowIndex).Cells("間接費率").Value = 0
-                                DgvItemList.Rows(e.RowIndex).Cells("関税率").Value = 0
-                                DgvItemList.Rows(e.RowIndex).Cells("前払法人税率").Value = 0
-                                DgvItemList.Rows(e.RowIndex).Cells("輸送費率").Value = 0
+                            Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
+                            '仕入先コードにカーソルがあるときだけ各率を再表示
+                            If DgvItemList.Columns(e.ColumnIndex).Name = "仕入先コード" Then
+                                If reccnt > 0 Then
+                                    DgvItemList.Rows(e.RowIndex).Cells("仕入先").Value = ds.Tables(RS).Rows(0)("仕入先名").ToString
+                                    DgvItemList.Rows(e.RowIndex).Cells("間接費率").Value = ds.Tables(RS).Rows(0)("既定間接費率").ToString
+                                    DgvItemList.Rows(e.RowIndex).Cells("関税率").Value = ds.Tables(RS).Rows(0)("関税率").ToString
+                                    DgvItemList.Rows(e.RowIndex).Cells("前払法人税率").Value = ds.Tables(RS).Rows(0)("前払法人税率").ToString
+                                    DgvItemList.Rows(e.RowIndex).Cells("輸送費率").Value = ds.Tables(RS).Rows(0)("輸送費率").ToString
+                                Else
+                                    DgvItemList.Rows(e.RowIndex).Cells("仕入先").Value = ""
+                                    DgvItemList.Rows(e.RowIndex).Cells("間接費率").Value = 0
+                                    DgvItemList.Rows(e.RowIndex).Cells("関税率").Value = 0
+                                    DgvItemList.Rows(e.RowIndex).Cells("前払法人税率").Value = 0
+                                    DgvItemList.Rows(e.RowIndex).Cells("輸送費率").Value = 0
 
+                                End If
                             End If
+
                         End If
 
                     End If
 
-                End If
-
-                For index As Integer = 0 To DgvItemList.Rows.Count - 1
+                    For index As Integer = 0 To DgvItemList.Rows.Count - 1
                     PurchaseTotal += Math.Ceiling(DgvItemList.Rows(index).Cells("仕入金額").Value)
                     Total += DgvItemList.Rows(index).Cells("売上金額").Value
                     QuoteTotal += DgvItemList.Rows(index).Cells("見積金額").Value
                     GrossProfit += DgvItemList.Rows(index).Cells("粗利額").Value
                 Next
 
-                TxtPurchaseTotal.Text = PurchaseTotal
-                TxtTotal.Text = Total.ToString("F0")
-                TxtQuoteTotal.Text = QuoteTotal
-                TxtGrossProfit.Text = GrossProfit
-                TxtVatAmount.Text = ((QuoteTotal * TxtVat.Text) / 100).ToString("F0")
+                TxtPurchaseTotal.Text = PurchaseTotal.ToString("N0")
+                TxtTotal.Text = Total.ToString("N0")
+                TxtQuoteTotal.Text = QuoteTotal.ToString("N0")
+                TxtGrossProfit.Text = GrossProfit.ToString("N0")
+                TxtVatAmount.Text = ((QuoteTotal * TxtVat.Text) / 100).ToString("N0")
                 setCurrency() '通貨に設定した内容に変更
 
             Catch ex As OverflowException
@@ -1214,11 +1212,11 @@ Public Class Quote
             QuoteTotal += DgvItemList.Rows(c).Cells("見積金額").Value
             GrossProfit += DgvItemList.Rows(c).Cells("粗利額").Value
         Next
-        TxtPurchaseTotal.Text = PurchaseTotal
-        TxtTotal.Text = Total
-        TxtQuoteTotal.Text = QuoteTotal
-        TxtGrossProfit.Text = GrossProfit
-        TxtVatAmount.Text = ((QuoteTotal * TxtVat.Text) / 100).ToString("F0")
+        TxtPurchaseTotal.Text = PurchaseTotal.ToString("N0")
+        TxtTotal.Text = Total.ToString("N0")
+        TxtQuoteTotal.Text = QuoteTotal.ToString("N0")
+        TxtGrossProfit.Text = GrossProfit.ToString("N0")
+        TxtVatAmount.Text = ((QuoteTotal * TxtVat.Text) / 100).ToString("N0")
         setCurrency() '通貨に設定した内容に変更
 
 
@@ -2945,14 +2943,15 @@ Public Class Quote
         Dim sumVal As Decimal = IIf(TxtQuoteTotal.Text <> "", TxtQuoteTotal.Text, 0)
         Dim QuoteCurrencyTotal As Decimal = 0       '見積金額_外貨
 
-        TxtCurrencyVatAmount.Text = (vatVal * currencyVal).ToString("F0")
-        'TxtCurrencyQuoteTotal.Text = (sumVal * currencyVal).ToString("F0")
+        TxtCurrencyVatAmount.Text = (vatVal * currencyVal).ToString("N0")
 
         For c As Integer = 0 To DgvItemList.Rows.Count - 1
-            QuoteCurrencyTotal += DgvItemList.Rows(c).Cells("見積金額_外貨").Value
+            If Not DgvItemList.Rows(c).Cells("見積金額_外貨").Value Is DBNull.Value Then
+                QuoteCurrencyTotal += CDec(DgvItemList.Rows(c).Cells("見積金額_外貨").Value)
+            End If
         Next
-        TxtCurrencyQuoteTotal.Text = QuoteCurrencyTotal.ToString("F0")
-        TxtCurrencyVatAmount.Text = ((QuoteCurrencyTotal.ToString("F0") * TxtVat.Text) / 100).ToString("F0")
+        TxtCurrencyQuoteTotal.Text = QuoteCurrencyTotal.ToString("N0")
+        TxtCurrencyVatAmount.Text = ((QuoteCurrencyTotal.ToString("N0") * TxtVat.Text) / 100).ToString("N0")
 
     End Sub
 
