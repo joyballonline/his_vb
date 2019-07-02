@@ -108,6 +108,10 @@ Public Class AccountsPayableList
             DgvKike.Columns("発注番号枝番").HeaderText = "PurchaseOrderSubNumber"
             DgvKike.Columns("仕入先コード").HeaderText = "SupplierCode"
             DgvKike.Columns("仕入先名").HeaderText = "SupplierName"
+            DgvKike.Columns("通貨_外貨").HeaderText = "Currency"
+            DgvKike.Columns("買掛金額計_外貨").HeaderText = "TotalAccountsPayableForeignCurrency"
+            DgvKike.Columns("買掛残高_外貨").HeaderText = "AccountsPayableBalanceForeignCurrency"
+            DgvKike.Columns("通貨").HeaderText = "Currency"
             DgvKike.Columns("買掛金額計").HeaderText = "TotalAccountsPayable"
             DgvKike.Columns("買掛残高").HeaderText = "AccountsPayableBalance"
             DgvKike.Columns("備考1").HeaderText = "Remarks1"
@@ -144,6 +148,8 @@ Public Class AccountsPayableList
         '変数等
         Dim Sql As String = ""
         Dim reccnt As Integer = 0 'DB用（デフォルト）
+        Dim curds As DataSet  'm25_currency
+        Dim cur As String = ""
 
         '一覧クリア
         DgvKike.Rows.Clear()
@@ -187,6 +193,18 @@ Public Class AccountsPayableList
             ds = _db.selectDB(Sql, RS, reccnt)
 
             For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+
+                '通貨の表示
+                If IsDBNull(ds.Tables(RS).Rows(0)("通貨")) Then
+                    cur = vbNullString
+                Else
+                    Sql = " and 採番キー = " & ds.Tables(RS).Rows(0)("通貨")
+                    curds = getDsData("m25_currency", Sql)
+
+                    cur = curds.Tables(RS).Rows(0)("通貨コード")
+                End If
+
+
                 DgvKike.Rows.Add()
                 DgvKike.Rows(i).Cells("取消").Value = getDelKbnTxt(ds.Tables(RS).Rows(i)("取消区分"))
                 DgvKike.Rows(i).Cells("買掛番号").Value = ds.Tables(RS).Rows(i)("買掛番号")
@@ -200,11 +218,15 @@ Public Class AccountsPayableList
                                                                                                     CommonConst.APC_KBN_NORMAL_TXT)
                 End If
                 DgvKike.Rows(i).Cells("買掛日").Value = ds.Tables(RS).Rows(i)("買掛日").ToShortDateString()
-                    DgvKike.Rows(i).Cells("客先番号").Value = ds.Tables(RS).Rows(i)("客先番号")
+                DgvKike.Rows(i).Cells("客先番号").Value = ds.Tables(RS).Rows(i)("客先番号")
                 DgvKike.Rows(i).Cells("発注番号").Value = ds.Tables(RS).Rows(i)("発注番号")
                 DgvKike.Rows(i).Cells("発注番号枝番").Value = ds.Tables(RS).Rows(i)("発注番号枝番")
                 DgvKike.Rows(i).Cells("仕入先コード").Value = ds.Tables(RS).Rows(i)("仕入先コード")
                 DgvKike.Rows(i).Cells("仕入先名").Value = ds.Tables(RS).Rows(i)("仕入先名")
+                DgvKike.Rows(i).Cells("通貨_外貨").Value = cur
+                DgvKike.Rows(i).Cells("買掛金額計_外貨").Value = ds.Tables(RS).Rows(i)("買掛金額計_外貨")
+                DgvKike.Rows(i).Cells("買掛残高_外貨").Value = ds.Tables(RS).Rows(i)("買掛残高_外貨")
+                DgvKike.Rows(i).Cells("通貨").Value = "IDR"
                 DgvKike.Rows(i).Cells("買掛金額計").Value = ds.Tables(RS).Rows(i)("買掛金額計")
                 DgvKike.Rows(i).Cells("買掛残高").Value = ds.Tables(RS).Rows(i)("買掛残高")
                 DgvKike.Rows(i).Cells("備考1").Value = ds.Tables(RS).Rows(i)("備考1")
