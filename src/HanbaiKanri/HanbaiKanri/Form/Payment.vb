@@ -581,8 +581,14 @@ Public Class Payment
 
         '入力した支払金額を合算
         For i As Integer = 0 To DgvPayment.Rows.Count - 1
-            PaymentAmount += DgvKikeInfo.Rows(i).Cells("買掛情報支払金額計").Value
+            PaymentAmount += DgvPayment.Rows(i).Cells("入力支払金額").Value
         Next
+
+        '買掛残高
+        For i As Integer = 0 To DgvPayment.Rows.Count - 1
+            Balance += DgvKikeInfo.Rows(i).Cells("買掛情報買掛残高").Value
+        Next
+
 
         '支払入力がなかったら、或いは合計が0だったら
         If DgvPayment.Rows.Count = 0 Or PaymentAmount = 0 Then
@@ -634,7 +640,7 @@ Public Class Payment
         PaymentAmount = Math.Ceiling(PaymentAmountFC / strRate) '画面の金額をIDRに変換　切り上げ
 
         '買掛残高
-        BalanceFC = KikeAmountFC - PaymentAmountFC
+        BalanceFC = Balance
         Balance = Math.Ceiling(BalanceFC / strRate) '画面の金額をIDRに変換　切り上げ
 
 
