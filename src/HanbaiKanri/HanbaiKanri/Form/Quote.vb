@@ -297,6 +297,8 @@ Public Class Quote
             DgvItemList.Rows(DgvItemList.Rows.Count() - 1).Cells("仕入レート").Value = tmpCurrencyVal
             DgvItemList.Rows(DgvItemList.Rows.Count() - 1).Cells("ステータス").Value = "ADD"
             DgvItemList.Rows(DgvItemList.Rows.Count() - 1).Cells("No").Value = "1"
+            '行数表示
+            TxtItemCount.Text = DgvItemList.Rows.Count()
         End If
 
         '
