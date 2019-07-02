@@ -1500,6 +1500,9 @@ Public Class Ordering
 
             End If
 
+            '登録完了メッセージ
+            _msgHd.dspMSG("completeInsert", frmC01F10_Login.loginValue.Language)
+
             'Me.Close()
             _parentForm.Enabled = True
             _parentForm.Show()
