@@ -734,6 +734,8 @@ Public Class PurchasingManagement
 
                 _db.executeDB(Sql6)
             Next
+            '登録完了メッセージ
+            _msgHd.dspMSG("completeInsert", frmC01F10_Login.loginValue.Language)
 
         Catch ue As UsrDefException
             ue.dspMsg()

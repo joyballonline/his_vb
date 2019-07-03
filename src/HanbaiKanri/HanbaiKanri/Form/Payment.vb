@@ -37,11 +37,12 @@ Public Class Payment
     Private CompanyCode As String = ""
     Private SupplierCode As String = ""
     Private SupplierName As String = ""
+    Private CurCode As Integer = 0
     Private Suffix As String = ""
     Private _parentForm As Form
     Private _status As String = ""
-    Private KikeAmount As Integer = 0
-    Private Balance As Integer = 0
+    Private KikeAmount As Decimal = 0
+    Private Balance As Decimal = 0
 
     '-------------------------------------------------------------------------------
     'デフォルトコンストラクタ（隠蔽）
@@ -61,6 +62,7 @@ Public Class Payment
                    ByRef prmRefCompany As String,
                    ByRef prmRefSupplier As String,
                    ByRef prmRefName As String,
+                   ByRef prmRefCurCode As Integer,
                    Optional ByRef prmRefStatus As String = "")
         Call Me.New()
 
@@ -74,6 +76,7 @@ Public Class Payment
         CompanyCode = prmRefCompany
         SupplierCode = prmRefSupplier
         SupplierName = prmRefName
+        CurCode = prmRefCurCode
         _status = prmRefStatus
         '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
         StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
@@ -84,7 +87,7 @@ Public Class Payment
 
     End Sub
 
-    Private Sub Payment_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub Payment_Load5(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim Sql As String = ""
 
         Sql = " AND "
@@ -193,6 +196,8 @@ Public Class Payment
     Private Sub setDgvSupplier()
         Dim Sql As String = ""
         Dim AccountsReceivable As Integer
+        Dim curds As DataSet  'm25_currency
+        Dim cur As String
 
         Sql = " AND "
         Sql += "仕入先コード"
@@ -203,13 +208,17 @@ Public Class Payment
         Sql += " AND "
         Sql += "取消区分 = 0"
 
+        If CurCode <> 0 Then
+            Sql += " AND 通貨 = " & CurCode
+        End If
+
         '仕入先と一致する発注基本を取得
         Dim dsSkyuhd As DataSet = getDsData("t46_kikehd", Sql)
 
         '買掛残高を集計
         AccountsReceivable = IIf(
-            dsSkyuhd.Tables(RS).Compute("SUM(買掛残高)", Nothing) IsNot DBNull.Value,
-            dsSkyuhd.Tables(RS).Compute("SUM(買掛残高)", Nothing),
+            dsSkyuhd.Tables(RS).Compute("SUM(買掛残高_外貨)", Nothing) IsNot DBNull.Value,
+            dsSkyuhd.Tables(RS).Compute("SUM(買掛残高_外貨)", Nothing),
             0
         )
 
@@ -217,6 +226,19 @@ Public Class Payment
         DgvSupplier.Rows.Add()
         DgvSupplier.Rows(0).Cells("支払先").Value = SupplierName
         DgvSupplier.Rows(0).Cells("買掛残高").Value = AccountsReceivable
+
+
+        '通貨の表示
+        If IsDBNull(dsSkyuhd.Tables(RS).Rows(0)("通貨")) Then
+            cur = vbNullString
+        Else
+            Sql = " and 採番キー = " & dsSkyuhd.Tables(RS).Rows(0)("通貨")
+            curds = getDsData("m25_currency", Sql)
+
+            cur = curds.Tables(RS).Rows(0)("通貨コード")
+        End If
+        TxtIDRCurrency.Text = cur
+
     End Sub
 
 
@@ -227,7 +249,7 @@ Public Class Payment
 
         'joinするのでとりあえず直書き
         Sql = "SELECT"
-        Sql += " t48.支払先名, t48.支払番号, t48.支払日, t48.支払種別名, t48.支払金額, t47.備考"
+        Sql += " t48.支払先名, t48.支払番号, t48.支払日, t48.支払種別名, t48.支払金額_外貨, t47.備考"
         Sql += " FROM "
         Sql += " public.t48_shridt t48 "
 
@@ -250,6 +272,11 @@ Public Class Payment
         Sql += " AND "
         Sql += "t47.取消区分 = 0"
 
+        If CurCode <> 0 Then
+            Sql += " AND t48.通貨 = " & CurCode
+        End If
+
+
         '支払先と一致する支払明細を取得
         Dim dsShridt As DataSet = _db.selectDB(Sql, RS, reccnt)
 
@@ -270,7 +297,7 @@ Public Class Payment
             DgvHistory.Rows(index).Cells("支払種目").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
                                                                getHanyo.Tables(RS).Rows(0)("文字２"),
                                                                getHanyo.Tables(RS).Rows(0)("文字１"))
-            DgvHistory.Rows(index).Cells("支払済支払金額計").Value = dsShridt.Tables(RS).Rows(index)("支払金額")
+            DgvHistory.Rows(index).Cells("支払済支払金額計").Value = dsShridt.Tables(RS).Rows(index)("支払金額_外貨")
             DgvHistory.Rows(index).Cells("備考").Value = dsShridt.Tables(RS).Rows(index)("備考")
         Next
 
@@ -294,6 +321,9 @@ Public Class Payment
         Sql += "%'"
         Sql += " AND "
         Sql += "取消区分 = 0"
+        If CurCode <> 0 Then
+            Sql += " AND 通貨 = " & CurCode
+        End If
 
         '仕入先と一致する請求基本を取得
         Dim dsKikehd As DataSet = getDsData("t46_kikehd", Sql)
@@ -304,8 +334,8 @@ Public Class Payment
 
         't46_kikehd 支払金額に登録する
         KikeAmount = IIf(
-            dsKikehd.Tables(RS).Compute("SUM(買掛金額計)", Nothing) IsNot DBNull.Value,
-            dsKikehd.Tables(RS).Compute("SUM(買掛金額計)", Nothing),
+            dsKikehd.Tables(RS).Compute("SUM(買掛金額計_外貨)", Nothing) IsNot DBNull.Value,
+            dsKikehd.Tables(RS).Compute("SUM(買掛金額計_外貨)", Nothing),
             0
         )
 
@@ -315,21 +345,21 @@ Public Class Payment
             DgvKikeInfo.Rows(i).Cells("InfoNo").Value = i + 1
             DgvKikeInfo.Rows(i).Cells("買掛情報買掛番号").Value = dsKikehd.Tables(RS).Rows(i)("買掛番号")
             DgvKikeInfo.Rows(i).Cells("買掛日").Value = dsKikehd.Tables(RS).Rows(i)("買掛日").ToShortDateString()
-            DgvKikeInfo.Rows(i).Cells("買掛金額").Value = dsKikehd.Tables(RS).Rows(i)("買掛金額計")
-            If dsKikehd.Tables(RS).Rows(i)("支払金額計") Is DBNull.Value Then
+            DgvKikeInfo.Rows(i).Cells("買掛金額").Value = dsKikehd.Tables(RS).Rows(i)("買掛金額計_外貨")
+            If dsKikehd.Tables(RS).Rows(i)("支払金額計_外貨") Is DBNull.Value Then
                 DgvKikeInfo.Rows(i).Cells("買掛情報支払金額計").Value = 0
                 DgvKikeInfo.Rows(i).Cells("支払金額計固定").Value = 0
             Else
-                DgvKikeInfo.Rows(i).Cells("買掛情報支払金額計").Value = dsKikehd.Tables(RS).Rows(i)("支払金額計")
-                DgvKikeInfo.Rows(i).Cells("支払金額計固定").Value = dsKikehd.Tables(RS).Rows(i)("支払金額計")
+                DgvKikeInfo.Rows(i).Cells("買掛情報支払金額計").Value = dsKikehd.Tables(RS).Rows(i)("支払金額計_外貨")
+                DgvKikeInfo.Rows(i).Cells("支払金額計固定").Value = dsKikehd.Tables(RS).Rows(i)("支払金額計_外貨")
             End If
 
-            If dsKikehd.Tables(RS).Rows(i)("支払金額計") Is DBNull.Value Then
-                DgvKikeInfo.Rows(i).Cells("買掛情報買掛残高").Value = dsKikehd.Tables(RS).Rows(i)("買掛金額計")
-                DgvKikeInfo.Rows(i).Cells("買掛情報買掛残高固定").Value = dsKikehd.Tables(RS).Rows(i)("買掛金額計")
+            If dsKikehd.Tables(RS).Rows(i)("支払金額計_外貨") Is DBNull.Value Then
+                DgvKikeInfo.Rows(i).Cells("買掛情報買掛残高").Value = dsKikehd.Tables(RS).Rows(i)("買掛金額計_外貨")
+                DgvKikeInfo.Rows(i).Cells("買掛情報買掛残高固定").Value = dsKikehd.Tables(RS).Rows(i)("買掛金額計_外貨")
             Else
-                DgvKikeInfo.Rows(i).Cells("買掛情報買掛残高").Value = dsKikehd.Tables(RS).Rows(i)("買掛金額計") - dsKikehd.Tables(RS).Rows(i)("支払金額計")
-                DgvKikeInfo.Rows(i).Cells("買掛情報買掛残高固定").Value = dsKikehd.Tables(RS).Rows(i)("買掛金額計") - dsKikehd.Tables(RS).Rows(i)("支払金額計")
+                DgvKikeInfo.Rows(i).Cells("買掛情報買掛残高").Value = dsKikehd.Tables(RS).Rows(i)("買掛金額計_外貨") - dsKikehd.Tables(RS).Rows(i)("支払金額計_外貨")
+                DgvKikeInfo.Rows(i).Cells("買掛情報買掛残高固定").Value = dsKikehd.Tables(RS).Rows(i)("買掛金額計_外貨") - dsKikehd.Tables(RS).Rows(i)("支払金額計_外貨")
             End If
             DgvKikeInfo.Rows(i).Cells("支払金額").Value = 0
         Next
@@ -531,7 +561,11 @@ Public Class Payment
         Dim errflg As Boolean = True
         Dim dtToday As String = formatDatetime(DateTime.Now)
         Dim reccnt As Integer = 0
-        Dim PaymentAmount As Integer = 0
+
+        Dim PaymentAmount As Decimal = 0
+        Dim PaymentAmountFC As Decimal = 0
+        Dim KikeAmountFC As Decimal = 0
+        Dim BalanceFC As Decimal = 0
 
         Dim Sql As String = ""
 
@@ -549,6 +583,12 @@ Public Class Payment
         For i As Integer = 0 To DgvPayment.Rows.Count - 1
             PaymentAmount += DgvPayment.Rows(i).Cells("入力支払金額").Value
         Next
+
+        '買掛残高
+        For i As Integer = 0 To DgvPayment.Rows.Count - 1
+            Balance += DgvKikeInfo.Rows(i).Cells("買掛情報買掛残高").Value
+        Next
+
 
         '支払入力がなかったら、或いは合計が0だったら
         If DgvPayment.Rows.Count = 0 Or PaymentAmount = 0 Then
@@ -569,9 +609,13 @@ Public Class Payment
         Sql += "%'"
         Sql += " AND "
         Sql += "取消区分 = 0"
+        If CurCode <> 0 Then
+            Sql += " AND 通貨 = " & CurCode
+        End If
 
         '買掛基本データ取得
         Dim dsKikehd As DataSet = getDsData("t46_kikehd", Sql)
+
 
         Sql = " AND "
         Sql += "仕入先コード"
@@ -583,12 +627,31 @@ Public Class Payment
         '仕入先情報の取得
         Dim dsSupplier As DataSet = getDsData("m11_supplier", Sql)
 
+
+        'レートの取得
+        Dim strRate As Decimal = setRate(dsKikehd.Tables(RS).Rows(0)("通貨").ToString())
+
+        '買掛金額
+        KikeAmountFC = KikeAmount
+        KikeAmount = Math.Ceiling(KikeAmountFC / strRate) '画面の金額をIDRに変換　切り上げ
+
+        '支払金額計
+        PaymentAmountFC = PaymentAmount
+        PaymentAmount = Math.Ceiling(PaymentAmountFC / strRate) '画面の金額をIDRに変換　切り上げ
+
+        '買掛残高
+        BalanceFC = Balance
+        Balance = Math.Ceiling(BalanceFC / strRate) '画面の金額をIDRに変換　切り上げ
+
+
         't47_shrihd 仕入基本テーブルに新規追加
         Sql = "INSERT INTO "
         Sql += "Public."
         Sql += "t47_shrihd("
-        Sql += "会社コード, 支払番号, 支払日, 支払先コード, 支払先名, 支払先, 買掛金額, 支払金額計, 買掛残高, 備考, 取消区分, 登録日, 更新者, 更新日)"
-        Sql += " VALUES('"
+        Sql += "会社コード, 支払番号, 支払日, 支払先コード, 支払先名, 支払先, 買掛金額, 支払金額計, 買掛残高, 備考, 取消区分, 登録日, 更新者, 更新日"
+        Sql += ",買掛金額_外貨,支払金額計_外貨,買掛残高_外貨,通貨,レート"
+
+        Sql += ") VALUES('"
         Sql += CompanyCode
         Sql += "', '"
         Sql += APSaiban
@@ -609,11 +672,11 @@ Public Class Payment
         Sql += " "
         Sql += dsSupplier.Tables(RS).Rows(0)("口座名義")
         Sql += "', '"
-        Sql += formatNumber(KikeAmount)
+        Sql += formatNumber(KikeAmount)     '買掛金額
         Sql += "', '"
-        Sql += formatNumber(PaymentAmount)
+        Sql += formatNumber(PaymentAmount)  '支払金額計
         Sql += "', '"
-        Sql += formatNumber(Balance)
+        Sql += formatNumber(Balance)        '買掛残高
         Sql += "', '"
         Sql += TxtRemarks.Text
         Sql += "', '"
@@ -624,17 +687,40 @@ Public Class Payment
         Sql += frmC01F10_Login.loginValue.TantoNM
         Sql += "', '"
         Sql += dtToday
+        Sql += "', '"
+        Sql += formatNumber(KikeAmountFC)     '買掛金額_外貨
+        Sql += "', '"
+        Sql += formatNumber(PaymentAmountFC)  '支払金額計_外貨
+        Sql += "', '"
+        Sql += formatNumber(BalanceFC)        '買掛残高_外貨
+        Sql += "', '"
+        Sql += dsKikehd.Tables(RS).Rows(0)("通貨").ToString()
+        Sql += "', '"
+        Sql += UtilClass.formatNumberF10(strRate)
+
         Sql += "')"
 
         _db.executeDB(Sql)
 
+
+        Dim AmountInputPayment As Decimal = 0
+        Dim AmountInputPaymentFC As Decimal = 0
+
         't48_shridt 支払明細テーブルに入金入力テーブルの明細を追加
         For i As Integer = 0 To DgvPayment.Rows.Count - 1
+
+
+            AmountInputPaymentFC = DgvPayment.Rows(i).Cells("入力支払金額").Value
+            AmountInputPayment = Math.Ceiling(AmountInputPaymentFC / strRate) '画面の金額をIDRに変換　切り上げ
+
+
             Sql = "INSERT INTO "
             Sql += "Public."
             Sql += "t48_shridt("
-            Sql += "会社コード, 支払番号, 行番号, 支払種別, 支払種別名, 支払先, 支払金額, 更新者, 更新日, 支払先コード, 支払先名, 支払日, 備考)"
-            Sql += " VALUES('"
+            Sql += "会社コード, 支払番号, 行番号, 支払種別, 支払種別名, 支払先, 支払金額, 更新者, 更新日, 支払先コード, 支払先名, 支払日, 備考"
+            Sql += ",支払金額_外貨,通貨,レート"
+
+            Sql += ") VALUES('"
             Sql += CompanyCode
             Sql += "', '"
             Sql += APSaiban
@@ -655,7 +741,7 @@ Public Class Payment
             Sql += " "
             Sql += dsSupplier.Tables(RS).Rows(0)("口座名義").ToString
             Sql += "', '"
-            Sql += formatNumber(DgvPayment.Rows(i).Cells("入力支払金額").Value)
+            Sql += formatNumber(AmountInputPayment)  '支払金額
             Sql += "', '"
             Sql += frmC01F10_Login.loginValue.TantoNM
             Sql += "', '"
@@ -668,6 +754,14 @@ Public Class Payment
             Sql += dtToday
             Sql += "', '"
             Sql += TxtRemarks.Text
+
+            Sql += "', '"
+            Sql += formatNumber(AmountInputPaymentFC)        '支払金額_外貨
+            Sql += "', '"
+            Sql += dsKikehd.Tables(RS).Rows(0)("通貨").ToString()
+            Sql += "', '"
+            Sql += UtilClass.formatNumberF10(strRate)
+
             Sql += "')"
 
             _db.executeDB(Sql)
@@ -675,17 +769,26 @@ Public Class Payment
             Sql = ""
         Next
 
+
+        Dim TotalPaymentClearingAmount As Decimal = 0
+        Dim TotalPaymentClearingAmountFC As Decimal = 0
+
         't49_shrikshihd 支払消込テーブルに新規追加
         For i As Integer = 0 To DgvKikeInfo.Rows.Count - 1
 
             '複数の買掛情報がある場合、支払金額が0のものは登録しない
             If DgvKikeInfo.Rows(i).Cells("支払金額").Value <> 0 Then
 
+                TotalPaymentClearingAmountFC = DgvKikeInfo.Rows(i).Cells("支払金額").Value
+                TotalPaymentClearingAmount = Math.Ceiling(TotalPaymentClearingAmountFC / strRate) '画面の金額をIDRに変換　切り上げ
+
                 Sql = "INSERT INTO "
                 Sql += "Public."
                 Sql += "t49_shrikshihd("
-                Sql += "会社コード, 支払番号, 支払日, 買掛番号, 支払先コード, 支払先名, 支払消込額計, 備考, 取消区分, 更新者, 更新日)"
-                Sql += " VALUES('"
+                Sql += "会社コード, 支払番号, 支払日, 買掛番号, 支払先コード, 支払先名, 支払消込額計, 備考, 取消区分, 更新者, 更新日"
+                Sql += ",支払消込額計_外貨,通貨,レート"
+
+                Sql += ") VALUES('"
                 Sql += CompanyCode
                 Sql += "', '"
                 Sql += APSaiban
@@ -698,7 +801,7 @@ Public Class Payment
                 Sql += "', '"
                 Sql += SupplierName
                 Sql += "', '"
-                Sql += formatNumber(DgvKikeInfo.Rows(i).Cells("支払金額").Value)
+                Sql += formatNumber(TotalPaymentClearingAmount)  '支払消込額計
                 Sql += "', '"
                 Sql += TxtRemarks.Text
                 Sql += "', '"
@@ -707,6 +810,14 @@ Public Class Payment
                 Sql += frmC01F10_Login.loginValue.TantoNM
                 Sql += "', '"
                 Sql += dtToday
+
+                Sql += "', '"
+                Sql += formatNumber(TotalPaymentClearingAmountFC)        '支払消込額計_外貨
+                Sql += "', '"
+                Sql += dsKikehd.Tables(RS).Rows(0)("通貨").ToString()
+                Sql += "', '"
+                Sql += UtilClass.formatNumberF10(strRate)
+
                 Sql += "')"
 
                 _db.executeDB(Sql)
@@ -714,8 +825,10 @@ Public Class Payment
             End If
         Next
 
-        Dim DsPayment As Integer = 0
-        Dim APBalance As Integer = 0
+        Dim DsPayment As Decimal = 0    '支払金額
+        Dim DsPaymentFC As Decimal = 0
+        Dim APBalance As Decimal = 0    '支払金額計
+        Dim APBalanceFC As Decimal = 0
 
         't46_kikehd 買掛基本テーブルを更新
         For i As Integer = 0 To dsKikehd.Tables(RS).Rows.Count - 1
@@ -724,14 +837,19 @@ Public Class Payment
 
                 If dsKikehd.Tables(RS).Rows(i)("支払金額計") Is DBNull.Value Then
                     '買掛基本の支払金額がなかったら支払金額をそのまま登録
-                    DsPayment = DgvKikeInfo.Rows(i).Cells("支払金額").Value
+                    DsPaymentFC = DgvKikeInfo.Rows(i).Cells("支払金額").Value
                 Else
                     '支払金額計があったら支払金額を加算する
-                    DsPayment = DgvKikeInfo.Rows(i).Cells("支払金額").Value + dsKikehd.Tables(RS).Rows(i)("支払金額計")
+                    DsPaymentFC = DgvKikeInfo.Rows(i).Cells("支払金額").Value + dsKikehd.Tables(RS).Rows(i)("支払金額計_外貨")
                 End If
 
+                DsPayment = Math.Ceiling(DsPaymentFC / strRate)  '画面の金額をIDRに変換　切り上げ
+
+
                 '残高を更新
-                APBalance = dsKikehd.Tables(RS).Rows(i)("買掛残高") - DgvKikeInfo.Rows(i).Cells("支払金額").Value
+                APBalanceFC = dsKikehd.Tables(RS).Rows(i)("買掛残高_外貨") - DgvKikeInfo.Rows(i).Cells("支払金額").Value
+                APBalance = Math.Ceiling(APBalanceFC / strRate)  '画面の金額をIDRに変換　切り上げ
+
 
                 Sql = "UPDATE "
                 Sql += "Public."
@@ -744,6 +862,15 @@ Public Class Payment
                 Sql += "買掛残高"
                 Sql += " = '"
                 Sql += formatNumber(APBalance)
+                Sql += "', "
+
+                Sql += " 支払金額計_外貨"
+                Sql += " = '"
+                Sql += formatNumber(DsPaymentFC)
+                Sql += "', "
+                Sql += "買掛残高_外貨"
+                Sql += " = '"
+                Sql += formatNumber(APBalanceFC)
                 Sql += "', "
 
                 '買掛金額計と支払金額計が一致したら支払完了日を設定する
@@ -771,6 +898,10 @@ Public Class Payment
                 Sql += dsKikehd.Tables(RS).Rows(i)("買掛番号")
                 Sql += "' "
 
+                If CurCode <> 0 Then
+                    Sql += " AND 通貨 = " & CurCode
+                End If
+
                 _db.executeDB(Sql)
 
             End If
@@ -782,6 +913,29 @@ Public Class Payment
         Me.Dispose()
 
     End Sub
+
+    '通貨の採番キーからレートを取得・設定
+    '基準日が請求日以前の最新のもの
+    Private Function setRate(ByVal strKey As Integer) As Decimal
+        Dim Sql As String
+
+        Sql = " AND 採番キー = " & strKey & ""
+        Sql += " AND 基準日 <= '" & UtilClass.strFormatDate(DtpDepositDate.Text) & "'"  '支払日
+        Sql += " ORDER BY 基準日 DESC "
+
+        Dim ds As DataSet = getDsData("t71_exchangerate", Sql)
+
+        If ds.Tables(RS).Rows.Count > 0 Then
+            setRate = ds.Tables(RS).Rows(0)("レート")
+        Else
+            If CultureInfo.CurrentCulture.Name.ToString = CommonConst.CI_ID Then
+                setRate = CommonConst.BASE_RATE_IDR
+            Else
+                setRate = CommonConst.BASE_RATE_JPY
+            End If
+        End If
+
+    End Function
 
     'param1：String テーブル名
     'param2：String 詳細条件

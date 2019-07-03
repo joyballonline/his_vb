@@ -80,24 +80,23 @@ Public Class PaymentList
     Private Sub getSiharaiList()
 
         Dim Sql As String = ""
+        Dim reccnt As Integer = 0
+        Dim curds As DataSet  'm25_currency
+        Dim cur As String
+
+
+        Dim SupplierOrderAmount As Integer    '仕入金額
+        Dim SupplierOrderAmountFC As Integer  '仕入金額_外貨
+
+        Dim AccountsReceivable As Integer     '買掛残高
+        Dim AccountsReceivableFC As Integer   '買掛残高_外貨
+
 
         '一覧をクリア
         DgvSupplier.Rows.Clear()
 
         '検索条件を取得
         Sql = searchConditions()
-
-        '仕入先リストの取得
-        Dim dsSupplier As DataSet = getDsData("m11_supplier", Sql)
-
-        Dim Count As Integer = 0
-        Dim SupplierCount As Integer = dsSupplier.Tables(RS).Rows.Count
-
-        Dim SupplierOrderCount As Integer
-        Dim SupplierBillingCount As Integer
-        Dim SupplierBillingAmount As Integer
-        Dim SupplierOrderAmount As Integer
-        Dim AccountsReceivable As Integer
 
         'Language=ENGの時
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
@@ -114,80 +113,144 @@ Public Class PaymentList
             btnBack.Text = "Back"
 
             DgvSupplier.Columns("仕入先名").HeaderText = "SupplierName"
+
+            DgvSupplier.Columns("通貨_外貨").HeaderText = "Currency"
+            DgvSupplier.Columns("仕入金額計_外貨").HeaderText = "TotalPurchaseAmountForeignCurrency"
+            DgvSupplier.Columns("支払残高_外貨").HeaderText = "PaymentAmountForeignCurrency"
+
+            DgvSupplier.Columns("通貨").HeaderText = "Currency"
             DgvSupplier.Columns("仕入金額計").HeaderText = "TotalPurchaseAmount"
             DgvSupplier.Columns("支払残高").HeaderText = "PaymentAmount"
 
         End If
 
+
+        '仕入先リストの取得
+        Dim dsSupplier As DataSet = getDsData("m11_supplier", Sql)
+
+
         '仕入先の一覧から、支払一覧を作成
-        For i As Integer = 0 To dsSupplier.Tables(RS).Rows.Count - 1
-
-            Sql = " AND "
-            Sql += "仕入先コード"
-            Sql += " ILIKE "
-            Sql += "'%"
-            Sql += dsSupplier.Tables(RS).Rows(i)("仕入先コード")
-            Sql += "%'"
-            Sql += " AND "
-            Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
-
-
-            '仕入先と一致する買掛基本を取得
-            Dim dsKikehd As DataSet = getDsData("t46_kikehd", Sql)
-
-            '仕入先の買掛データ数を取得
-            SupplierBillingCount = dsKikehd.Tables(RS).Rows.Count.ToString
-
-            Sql = " AND "
-            Sql += "仕入先コード"
-            Sql += " ILIKE "
-            Sql += "'%"
-            Sql += dsSupplier.Tables(RS).Rows(i)("仕入先コード")
-            Sql += "%'"
-            Sql += " AND "
-            Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+        For i As Integer = 0 To dsSupplier.Tables(RS).Rows.Count - 1    'm11_supplier
 
 
             '仕入先と一致する発注基本を取得
-            Dim dsHattyu As DataSet = getDsData("t20_hattyu", Sql)
+            Sql = "SELECT "
+            Sql += " SUM(仕入金額_外貨) as 仕入金額_外貨合計,SUM(仕入金額) as 仕入金額_合計,通貨"
+            Sql += " FROM "
 
-            '発注データ数
-            SupplierOrderCount = dsHattyu.Tables(RS).Rows.Count.ToString
+            Sql += "public.t20_hattyu"
+            Sql += " WHERE "
+            Sql += "会社コード"
+            Sql += " ILIKE  "
+            Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'"
 
-            '買掛金額を集計
-            SupplierBillingAmount = IIf(
-                dsKikehd.Tables(RS).Compute("SUM(買掛金額計)", Nothing) IsNot DBNull.Value,
-                dsKikehd.Tables(RS).Compute("SUM(買掛金額計)", Nothing),
-                0
-            )
+            Sql += " AND "
+            Sql += "仕入先コード"
+            Sql += " ILIKE "
+            Sql += "'%"
+            Sql += dsSupplier.Tables(RS).Rows(i)("仕入先コード")
+            Sql += "%'"
+            Sql += " AND "
+            Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
 
-            '仕入金額を集計
-            SupplierOrderAmount = IIf(
-                dsHattyu.Tables(RS).Compute("SUM(仕入金額)", Nothing) IsNot DBNull.Value,
-                dsHattyu.Tables(RS).Compute("SUM(仕入金額)", Nothing),
-                0
-            )
+            Sql += " group by 通貨"
 
-            '買掛残高を集計
-            AccountsReceivable = IIf(
-                dsKikehd.Tables(RS).Compute("SUM(買掛残高)", Nothing) IsNot DBNull.Value,
-                dsKikehd.Tables(RS).Compute("SUM(買掛残高)", Nothing),
-                0
-            )
+            Dim dsHattyu As DataSet = _db.selectDB(Sql, RS, reccnt)
 
 
-            '表示エリアにデータを追加
-            If SupplierOrderCount > 0 Then
+            '仕入先の一覧から、支払一覧を作成
+            For j As Integer = 0 To dsHattyu.Tables(RS).Rows.Count - 1    't20_hattyu
+
+
+                If IsDBNull(dsHattyu.Tables(RS).Rows(j)("仕入金額_外貨合計")) Then
+                    SupplierOrderAmountFC = 0
+                Else
+                    SupplierOrderAmountFC = dsHattyu.Tables(RS).Rows(j)("仕入金額_外貨合計")
+                End If
+
+                If IsDBNull(dsHattyu.Tables(RS).Rows(j)("仕入金額_合計")) Then
+                    SupplierOrderAmount = 0
+                Else
+                    SupplierOrderAmount = dsHattyu.Tables(RS).Rows(j)("仕入金額_合計")
+                End If
+
+
+                '仕入先と一致する買掛基本を取得
+                Sql = "SELECT"
+                Sql += " sum(買掛残高_外貨) as 買掛残高_外貨合計, sum(買掛残高) as 買掛残高_合計"
+
+                Sql += " FROM "
+
+                Sql += "public.t46_kikehd"
+                Sql += " WHERE "
+                Sql += "会社コード"
+                Sql += " ILIKE  "
+                Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'"
+                Sql += " AND "
+                Sql += "仕入先コード"
+                Sql += " ILIKE "
+                Sql += "'%"
+                Sql += dsSupplier.Tables(RS).Rows(i)("仕入先コード")
+                Sql += "%'"
+                Sql += " AND "
+                Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+
+                If IsDBNull(dsHattyu.Tables(RS).Rows(j)("通貨")) Then
+                    Sql += " AND 通貨 is null "
+                Else
+                    Sql += " AND 通貨 = " & dsHattyu.Tables(RS).Rows(j)("通貨")
+                End If
+
+                Dim dsKikehd As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+
+                '買掛残高を集計
+                If IsDBNull(dsKikehd.Tables(RS).Rows(0)("買掛残高_外貨合計")) Then
+                    AccountsReceivableFC = 0
+                Else
+                    AccountsReceivableFC = dsKikehd.Tables(RS).Rows(0)("買掛残高_外貨合計")
+                End If
+
+                If IsDBNull(dsKikehd.Tables(RS).Rows(0)("買掛残高_合計")) Then
+                    AccountsReceivable = 0
+                Else
+                    AccountsReceivable = dsKikehd.Tables(RS).Rows(0)("買掛残高_合計")
+                End If
+
+
+                Dim idx = DgvSupplier.Rows.Count()  '一覧の列数を取得
+
+
+                If IsDBNull(dsHattyu.Tables(RS).Rows(j)("通貨")) Then
+                    cur = vbNullString
+                Else
+                    Sql = " and 採番キー = " & dsHattyu.Tables(RS).Rows(j)("通貨")
+                    curds = getDsData("m25_currency", Sql)
+
+                    cur = curds.Tables(RS).Rows(0)("通貨コード")
+                End If
+
+
+                '表示エリアにデータを追加
                 DgvSupplier.Rows.Add()
-                DgvSupplier.Rows(Count).Cells("仕入先名").Value = dsSupplier.Tables(RS).Rows(i)("仕入先名")
-                DgvSupplier.Rows(Count).Cells("仕入金額計").Value = SupplierOrderAmount
-                DgvSupplier.Rows(Count).Cells("支払残高").Value = AccountsReceivable
-                DgvSupplier.Rows(Count).Cells("仕入先コード").Value = dsSupplier.Tables(RS).Rows(i)("仕入先コード")
-                DgvSupplier.Rows(Count).Cells("会社コード").Value = dsSupplier.Tables(RS).Rows(i)("会社コード")
+                DgvSupplier.Rows(idx).Cells("仕入先名").Value = dsSupplier.Tables(RS).Rows(i)("仕入先名")
 
-                Count += 1 'カウントアップ
-            End If
+                DgvSupplier.Rows(idx).Cells("通貨_外貨").Value = cur
+                DgvSupplier.Rows(idx).Cells("仕入金額計_外貨").Value = SupplierOrderAmountFC
+                DgvSupplier.Rows(idx).Cells("支払残高_外貨").Value = AccountsReceivableFC
+
+                DgvSupplier.Rows(idx).Cells("通貨").Value = "IDR"
+                DgvSupplier.Rows(idx).Cells("仕入金額計").Value = SupplierOrderAmount
+                DgvSupplier.Rows(idx).Cells("支払残高").Value = AccountsReceivable
+
+                DgvSupplier.Rows(idx).Cells("仕入先コード").Value = dsSupplier.Tables(RS).Rows(i)("仕入先コード")
+                DgvSupplier.Rows(idx).Cells("会社コード").Value = dsSupplier.Tables(RS).Rows(i)("会社コード")
+
+                DgvSupplier.Rows(idx).Cells("通貨_外貨コード").Value = dsHattyu.Tables(RS).Rows(j)("通貨")
+
+            Next
         Next
+
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
@@ -212,8 +275,13 @@ Public Class PaymentList
         Dim Company As String = DgvSupplier.Rows(RowIdx).Cells("会社コード").Value
         Dim Supplier As String = DgvSupplier.Rows(RowIdx).Cells("仕入先コード").Value
         Dim Name As String = DgvSupplier.Rows(RowIdx).Cells("仕入先名").Value
+        Dim CurCode As Integer = 0
+        If IsDBNull(DgvSupplier.Rows(RowIdx).Cells("通貨_外貨コード").Value) Then
+        Else
+            CurCode = DgvSupplier.Rows(RowIdx).Cells("通貨_外貨コード").Value
+        End If
         Dim openForm As Form = Nothing
-        openForm = New Payment(_msgHd, _db, _langHd, Me, Company, Supplier, Name)   '処理選択
+        openForm = New Payment(_msgHd, _db, _langHd, Me, Company, Supplier, Name, CurCode)   '処理選択
         openForm.Show(Me)
     End Sub
 

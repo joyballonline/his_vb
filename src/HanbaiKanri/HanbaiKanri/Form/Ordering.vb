@@ -347,6 +347,16 @@ Public Class Ordering
 
             setBaseCurrency() '通貨表示：ベースの設定
             setChangeCurrency() '通貨表示：変更後の設定
+
+            '明細を１行デフォルト表示
+            DgvItemList.Rows.Add()
+            DgvItemList.Rows(DgvItemList.Rows.Count() - 1).Cells("リードタイム単位").Value = 1
+            setSireTax(DgvItemList.Rows.Count() - 1)  '間接費率をセット
+            DgvItemList.Rows(DgvItemList.Rows.Count() - 1).Cells("No").Value = "1"
+            'リストの行数をセット
+            TxtItemCount.Text = DgvItemList.Rows.Count()
+
+
             Exit Sub
 
         ElseIf PurchaseStatus Is CommonConst.STATUS_VIEW Then
@@ -379,11 +389,6 @@ Public Class Ordering
             BtnClone.Visible = False
             DgvItemList.ReadOnly = True
 
-            ''通貨・レート情報設定
-            'createCurrencyCombobox()
-
-            'setBaseCurrency() '通貨表示：ベースの設定
-            'setChangeCurrency() '通貨表示：変更後の設定
         End If
 
         '発注基本情報
@@ -510,31 +515,15 @@ Public Class Ordering
             CmWarehouse.SelectedValue = dsHattyu.Tables(RS).Rows(0)("倉庫コード")
         End If
         If dsHattyu.Tables(RS).Rows(0)("通貨") IsNot DBNull.Value Then
-            ''通貨・レート情報設定
-            'If PurchaseStatus <> CommonConst.STATUS_VIEW Then
-            '    If dsHattyu.Tables(RS).Rows(0)("見積番号") <> "" Then
-            '        '通貨・レート情報設定
-            '        createCurrencyCombobox(dsHattyudt.Tables(RS).Rows(0)("仕入通貨").ToString)
-            '    Else
-            '        createCurrencyCombobox(dsHattyu.Tables(RS).Rows(0)("通貨").ToString)
-            '    End If
-            'Else
-            '    createCurrencyCombobox(dsHattyu.Tables(RS).Rows(0)("通貨").ToString)
-            'End If
 
             createCurrencyCombobox(dsHattyu.Tables(RS).Rows(0)("通貨").ToString)
 
         End If
-        'If dsHattyudt.Tables(RS).Rows(0)("仕入レート") IsNot DBNull.Value Then
-        '    TxtRate.Text = dsHattyudt.Tables(RS).Rows(0)("仕入レート").ToString
-        'End If
 
         '通貨・レート情報設定
         If PurchaseStatus <> CommonConst.STATUS_ADD Then
-            'If dsHattyu.Tables(RS).Rows(0)("見積番号") <> "" Then
             '通貨・レート情報設定
             createCurrencyCombobox(dsHattyudt.Tables(RS).Rows(0)("仕入通貨").ToString)
-            'End If
         End If
 
         setRate()
@@ -680,7 +669,6 @@ Public Class Ordering
             TxtOrderingSuffix.Text = ds2.Tables(RS).Rows(0)("発注番号枝番") + 1
 
         End If
-
 
 
     End Sub

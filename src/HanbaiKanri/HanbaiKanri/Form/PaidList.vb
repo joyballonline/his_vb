@@ -137,6 +137,9 @@ Public Class PaidList
         clearDGV() 'テーブルクリア
         Dim reccnt As Integer = 0 'DB用（デフォルト）
         Dim Sql As String = ""
+        Dim curds As DataSet  'm25_currency
+        Dim cur As String
+
 
         Try
             '伝票単位
@@ -197,6 +200,9 @@ Public Class PaidList
                     DgvHtyhd.Columns.Add("支払日", "PaymentDate")
                     DgvHtyhd.Columns.Add("支払先名", "SupplierName")
                     DgvHtyhd.Columns.Add("支払先", "PaymentDestination")
+                    DgvHtyhd.Columns.Add("通貨_外貨", "Currency")
+                    DgvHtyhd.Columns.Add("支払金額計_外貨", "TotalPaymentAmountForeignCurrency")
+                    DgvHtyhd.Columns.Add("通貨", "Currency")
                     DgvHtyhd.Columns.Add("支払金額計", "TotalPaymentAmount")
                     DgvHtyhd.Columns.Add("更新日", "UpdateDate")
                     DgvHtyhd.Columns.Add("備考", "Remarks")
@@ -206,6 +212,9 @@ Public Class PaidList
                     DgvHtyhd.Columns.Add("支払日", "支払日")
                     DgvHtyhd.Columns.Add("支払先名", "支払先名")
                     DgvHtyhd.Columns.Add("支払先", "支払先")
+                    DgvHtyhd.Columns.Add("通貨_外貨", "通貨(外貨)")
+                    DgvHtyhd.Columns.Add("支払金額計_外貨", "支払金額計(外貨)")
+                    DgvHtyhd.Columns.Add("通貨", "通貨")
                     DgvHtyhd.Columns.Add("支払金額計", "支払金額計")
                     DgvHtyhd.Columns.Add("更新日", "更新日")
                     DgvHtyhd.Columns.Add("備考", "備考")
@@ -216,10 +225,25 @@ Public Class PaidList
 
                 For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
 
-                    Dim dsHanyo As DataSet = getDsHanyoData(CommonConst.DC_CODE, ds.Tables(RS).Rows(index)("預金種目"))
-                    Dim dcName As String = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
-                                                                dsHanyo.Tables(RS).Rows(0)("文字２"),
-                                                                dsHanyo.Tables(RS).Rows(0)("文字１"))
+                    If IsDBNull(ds.Tables(RS).Rows(0)("通貨")) Then
+                        cur = vbNullString
+                    Else
+                        Sql = " and 採番キー = " & ds.Tables(RS).Rows(0)("通貨")
+                        curds = getDsData("m25_currency", Sql)
+
+                        cur = curds.Tables(RS).Rows(0)("通貨コード")
+                    End If
+
+                    Dim dcName As String
+
+                    If IsDBNull(ds.Tables(RS).Rows(index)("預金種目")) Then
+                        dcName = vbNullString
+                    Else
+                        Dim dsHanyo As DataSet = getDsHanyoData(CommonConst.DC_CODE, ds.Tables(RS).Rows(index)("預金種目"))
+                        dcName = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
+                                                                    dsHanyo.Tables(RS).Rows(0)("文字２"),
+                                                                    dsHanyo.Tables(RS).Rows(0)("文字１"))
+                    End If
 
                     DgvHtyhd.Rows.Add()
                     DgvHtyhd.Rows(index).Cells("取消").Value = getDelKbnTxt(ds.Tables(RS).Rows(index)("取消区分"))
@@ -231,6 +255,10 @@ Public Class PaidList
                                                                     dcName & " " &
                                                                     ds.Tables(RS).Rows(0)("口座番号") & " " &
                                                                     ds.Tables(RS).Rows(0)("口座名義")
+
+                    DgvHtyhd.Rows(index).Cells("通貨_外貨").Value = cur
+                    DgvHtyhd.Rows(index).Cells("支払金額計_外貨").Value = ds.Tables(RS).Rows(index)("支払金額計_外貨")
+                    DgvHtyhd.Rows(index).Cells("通貨").Value = "IDR"
                     DgvHtyhd.Rows(index).Cells("支払金額計").Value = ds.Tables(RS).Rows(index)("支払金額計")
                     DgvHtyhd.Rows(index).Cells("更新日").Value = ds.Tables(RS).Rows(index)("更新日")
                     DgvHtyhd.Rows(index).Cells("備考").Value = ds.Tables(RS).Rows(index)("備考")
