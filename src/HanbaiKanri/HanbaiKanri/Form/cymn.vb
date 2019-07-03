@@ -730,7 +730,8 @@ Public Class Cymn
 
                                 Sql += currentLS '伝票番号（出庫番号）
                                 Sql += "', '"
-                                Sql += DgvItemList.Rows(i).Cells("No").Value.ToString '行番号（出庫番号）
+                                Sql += DgvItemList.Rows(i).Cells("No").Value.ToString    '行番号
+                                'Sql += dsCurrentList.Tables(RS).Rows(x)("行番号").ToString '行番号（入庫番号）
 
                                 Sql += "', '"
                                 Sql += CommonConst.INOUT_KBN_NORMAL '入出庫種別
@@ -760,7 +761,7 @@ Public Class Cymn
                                 Sql += "', '"
                                 'Sql += currentLS & DgvItemList.Rows(i).Cells("No").Value.ToString
 
-                                Sql += dsCurrentList.Tables(RS).Rows(x)("伝票番号").ToString & dsCurrentList.Tables(RS).Rows(x)("行番号").ToString
+                                Sql += dsCurrentList.Tables(RS).Rows(x)("伝票番号").ToString & dsCurrentList.Tables(RS).Rows(x)("行番号").ToString '入庫番号+行番号
 
                                 Sql += "')"
 
@@ -1109,7 +1110,7 @@ Public Class Cymn
 
             'Console.Write(tbl)
 
-            ''#Region "t20_hattyu 発注基本登録"
+#Region "t20_hattyu 発注基本登録"
 
 
             ''            Dim SqlSaiban As String = ""
@@ -1336,7 +1337,7 @@ Public Class Cymn
             ''                Next
             ''                PurchaseCount += 1
             '            Next
-            '#End Region
+#End Region
 
             'PurchaseCount += 1
             'Dim Saiban4 As String = ""
