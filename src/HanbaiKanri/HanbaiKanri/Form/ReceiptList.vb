@@ -408,7 +408,7 @@ Public Class ReceiptList
             Sql += " AND "
             Sql += "発注番号枝番 ILIKE '" & DgvNyuko.Rows(DgvNyuko.CurrentCell.RowIndex).Cells("発注番号枝番").Value & "'"
 
-            Dim dsCymndt As DataSet = getDsData("t21_hattyu", Sql)
+            Dim dsHattyudt As DataSet = getDsData("t21_hattyu", Sql)
 
             '入庫データ
             Sql = " AND"
@@ -480,13 +480,13 @@ Public Class ReceiptList
             _db.executeDB(Sql)
 
             '発注データを更新する
-            For i As Integer = 0 To dsCymndt.Tables(RS).Rows.Count - 1
+            For i As Integer = 0 To dsHattyudt.Tables(RS).Rows.Count - 1
                 For x As Integer = 0 To dsNyukodt.Tables(RS).Rows.Count - 1
 
                     '行番号が一致したら
-                    If dsCymndt.Tables(RS).Rows(i)("行番号") = dsNyukodt.Tables(RS).Rows(x)("行番号") Then
-                        Dim calShukko As Integer = dsCymndt.Tables(RS).Rows(i)("入庫数") - dsNyukodt.Tables(RS).Rows(x)("入庫数量")
-                        Dim calUnShukko As Integer = dsCymndt.Tables(RS).Rows(i)("未入庫数") + dsNyukodt.Tables(RS).Rows(x)("入庫数量")
+                    If dsHattyudt.Tables(RS).Rows(i)("行番号") = dsNyukodt.Tables(RS).Rows(x)("行番号") Then
+                        Dim calShukko As Integer = dsHattyudt.Tables(RS).Rows(i)("入庫数") - dsNyukodt.Tables(RS).Rows(x)("入庫数量")
+                        Dim calUnShukko As Integer = dsHattyudt.Tables(RS).Rows(i)("未入庫数") + dsNyukodt.Tables(RS).Rows(x)("入庫数量")
 
                         Sql = "update t21_hattyu set "
                         Sql += "入庫数 = '" & calShukko & "'"
@@ -498,7 +498,7 @@ Public Class ReceiptList
                         Sql += " AND "
                         Sql += "発注番号枝番 ILIKE '" & DgvNyuko.Rows(DgvNyuko.CurrentCell.RowIndex).Cells("発注番号枝番").Value & "'"
                         Sql += " AND "
-                        Sql += "行番号 = '" & dsCymndt.Tables(RS).Rows(i)("行番号") & "'"
+                        Sql += "行番号 = '" & dsHattyudt.Tables(RS).Rows(i)("行番号") & "'"
 
                         _db.executeDB(Sql)
 
