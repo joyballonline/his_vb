@@ -185,130 +185,6 @@ Public Class InventoryControlTable
 
     End Sub
 
-    Private Sub getList()
-
-        Dim reccnt As Integer = 0 'DB用（デフォルト）
-        Dim Sql As String = ""
-
-        DgvList.Columns.Clear() '見出しクリア
-        DgvList.Rows.Clear() '一覧クリア
-
-        setListHd() '見出し行セット
-
-        Try
-
-            '入庫データの取得
-            '
-            Sql = " SELECT "
-            Sql += " t70.メーカー, t70.品名, t70.型式, t70.数量, t70.入出庫日, t70.入出庫区分, t43.仕入先名 AS 入庫仕入先 "
-            Sql += " ,t45.仕入先名 AS 出庫仕入先, t43.仕入値, t45.売単価, t70.備考, t70.入出庫種別 "
-            Sql += " FROM "
-            Sql += " t70_inout t70 "
-
-            Sql += " LEFT JOIN "
-            Sql += " t43_nyukodt t43 "
-            Sql += " ON  t70.会社コード = t43.会社コード "
-            Sql += " AND  t70.伝票番号 = t43.入庫番号 "
-            Sql += " AND  t70.メーカー = t43.メーカー "
-            Sql += " AND  t70.品名 = t43.品名 "
-            Sql += " AND  t70.型式 = t43.型式 "
-
-            Sql += " LEFT JOIN "
-            Sql += " t45_shukodt t45 "
-            Sql += " ON  t70.会社コード = t45.会社コード "
-            Sql += " AND  t70.伝票番号 = t45.出庫番号 "
-            Sql += " AND  t70.メーカー = t45.メーカー "
-            Sql += " AND  t70.品名 = t45.品名 "
-            Sql += " AND  t70.型式 = t45.型式 "
-
-            Sql += " WHERE "
-            Sql += " t70.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Sql += " AND "
-            Sql += " t70.取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'"
-
-            Sql += " ORDER BY "
-            Sql += " t70.メーカー, t70.品名, t70.型式, t70.入出庫日, t70. 入出庫区分"
-
-            Dim dsZaiko As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-            Dim tmpMaker As String = ""
-            Dim tmpItemName As String = ""
-            Dim tmpSpec As String = ""
-            Dim tmpQuantity As Integer = 0
-
-            Dim dsHanyoInOut As DataSet = getDsHanyoData(CommonConst.INOUT_CLASS)
-
-            For i As Integer = 0 To dsZaiko.Tables(RS).Rows.Count - 1 '在庫データ
-
-                DgvList.Rows.Add()
-
-                '商品が変わったら取得
-                If (tmpMaker <> dsZaiko.Tables(RS).Rows(i)("メーカー").ToString Or
-                    tmpItemName <> dsZaiko.Tables(RS).Rows(i)("品名").ToString Or
-                    tmpSpec <> dsZaiko.Tables(RS).Rows(i)("型式").ToString) Then
-
-                    '一致していなければ変数に格納
-                    tmpMaker = dsZaiko.Tables(RS).Rows(i)("メーカー").ToString
-                    tmpItemName = dsZaiko.Tables(RS).Rows(i)("品名").ToString
-                    tmpSpec = dsZaiko.Tables(RS).Rows(i)("型式").ToString
-
-                    tmpQuantity = 0 '在庫計算用の変数も初期化
-
-                    DgvList.Rows(i).Cells("メーカー").Value = tmpMaker
-                    DgvList.Rows(i).Cells("品名").Value = tmpItemName
-                    DgvList.Rows(i).Cells("型式").Value = tmpSpec
-
-                End If
-
-                If dsZaiko.Tables(RS).Rows(i)("入出庫区分") = 1 Then
-                    tmpQuantity += dsZaiko.Tables(RS).Rows(i)("数量")
-                Else
-                    tmpQuantity -= dsZaiko.Tables(RS).Rows(i)("数量")
-                End If
-
-
-                DgvList.Rows(i).Cells("年月日").Value = dsZaiko.Tables(RS).Rows(i)("入出庫日").ToShortDateString
-                DgvList.Rows(i).Cells("取引先").Value = IIf(dsZaiko.Tables(RS).Rows(i)("入出庫区分") = 1,
-                                                         dsZaiko.Tables(RS).Rows(i)("入庫仕入先"),
-                                                         dsZaiko.Tables(RS).Rows(i)("出庫仕入先"))
-                If dsZaiko.Tables(RS).Rows(i)("入出庫区分") = 1 Then
-                    DgvList.Rows(i).Cells("取引先").Value = dsZaiko.Tables(RS).Rows(i)("入庫仕入先")
-                    DgvList.Rows(i).Cells("入庫数量").Value = dsZaiko.Tables(RS).Rows(i)("数量")
-                    DgvList.Rows(i).Cells("入庫単価").Value = dsZaiko.Tables(RS).Rows(i)("仕入値")
-
-                Else
-                    DgvList.Rows(i).Cells("取引先").Value = dsZaiko.Tables(RS).Rows(i)("出庫仕入先")
-                    DgvList.Rows(i).Cells("出庫数量").Value = dsZaiko.Tables(RS).Rows(i)("数量")
-                    DgvList.Rows(i).Cells("出庫単価").Value = dsZaiko.Tables(RS).Rows(i)("売単価")
-
-                End If
-
-                DgvList.Rows(i).Cells("在庫数").Value = tmpQuantity
-
-                For x As Integer = 0 To dsHanyoInOut.Tables(RS).Rows.Count - 1
-                    If dsZaiko.Tables(RS).Rows(i)("入出庫種別") IsNot DBNull.Value Then
-                        If dsZaiko.Tables(RS).Rows(i)("入出庫種別") = dsHanyoInOut.Tables(RS).Rows(x)("可変キー") Then
-                            DgvList.Rows(i).Cells("入出庫種別").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
-                                                                   dsHanyoInOut.Tables(RS).Rows(x)("文字２"),
-                                                                   dsHanyoInOut.Tables(RS).Rows(x)("文字１"))
-                        End If
-                    End If
-                Next
-
-                DgvList.Rows(i).Cells("備考").Value = dsZaiko.Tables(RS).Rows(i)("備考")
-
-            Next
-
-        Catch ue As UsrDefException
-            ue.dspMsg()
-            Throw ue
-        Catch ex As Exception
-            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
-        End Try
-
-    End Sub
-
     'excel出力処理
     Private Sub outputExcel()
 
@@ -769,8 +645,8 @@ Public Class InventoryControlTable
             For i As Integer = 0 To dsList.Tables(RS).Rows.Count - 1
 
                 '商品が一致するかチェック
-                If currentManufacturer <> dsList.Tables(RS).Rows(i)("メーカー").ToString And
-                currentItemName <> dsList.Tables(RS).Rows(i)("品名").ToString And
+                If currentManufacturer <> dsList.Tables(RS).Rows(i)("メーカー").ToString Or
+                currentItemName <> dsList.Tables(RS).Rows(i)("品名").ToString Or
                 currentSpec <> dsList.Tables(RS).Rows(i)("型式").ToString Then
 
                     currentManufacturer = dsList.Tables(RS).Rows(i)("メーカー").ToString
