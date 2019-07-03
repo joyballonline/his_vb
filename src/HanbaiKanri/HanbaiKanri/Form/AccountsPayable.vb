@@ -701,4 +701,10 @@ Public Class AccountsPayable
             '    SendKeys.Send("{F2}")
         End If
     End Sub
+
+    Private Sub AccountsPayable_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+        '初期表示に選択状態じゃなくする
+        DgvCymn.CurrentCell = Nothing
+        DgvCymndt.CurrentCell = Nothing
+    End Sub
 End Class
