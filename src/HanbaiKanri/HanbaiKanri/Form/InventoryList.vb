@@ -206,8 +206,8 @@ Public Class InventoryList
 
                 For i As Integer = 0 To dsList.Tables(RS).Rows.Count - 1
 
-                    If currentManufacturer <> dsList.Tables(RS).Rows(i)("メーカー").ToString And
-                        currentItemName <> dsList.Tables(RS).Rows(i)("品名").ToString And
+                    If currentManufacturer <> dsList.Tables(RS).Rows(i)("メーカー").ToString Or
+                        currentItemName <> dsList.Tables(RS).Rows(i)("品名").ToString Or
                         currentSpec <> dsList.Tables(RS).Rows(i)("型式").ToString Then
 
                         currentManufacturer = dsList.Tables(RS).Rows(i)("メーカー").ToString
