@@ -431,7 +431,9 @@ Public Class BillingManagement
         Dim reccnt As Integer = 0
         Dim BillingAmount As Decimal = 0
         Dim Amount As Decimal = 0      '今回請求金額計
-        Dim Amount_cur As Decimal = 0  '今回請求金額計_外貨
+        Dim AmountFC As Decimal = 0  '今回請求金額計_外貨
+        Dim AccountsReceivable As Decimal    '売掛残高
+        Dim AccountsReceivableFC As Decimal  '売掛残高_外貨
 
         Dim Sql As String = ""
 
@@ -469,8 +471,8 @@ Public Class BillingManagement
         Dim dsSkyuhd As DataSet = getDsData("t23_skyuhd", Sql)
 
         BillingAmount = IIf(
-            dsSkyuhd.Tables(RS).Compute("SUM(請求金額計)", Nothing) IsNot DBNull.Value,
-            dsSkyuhd.Tables(RS).Compute("SUM(請求金額計)", Nothing),
+            dsSkyuhd.Tables(RS).Compute("SUM(請求金額計_外貨)", Nothing) IsNot DBNull.Value,
+            dsSkyuhd.Tables(RS).Compute("SUM(請求金額計_外貨)", Nothing),
             0
         )
         '受注額にVAT額を加算
@@ -497,8 +499,14 @@ Public Class BillingManagement
         'レートの取得
         Dim strRate As Decimal = setRate(dsCymnhd.Tables(RS).Rows(0)("通貨").ToString())
 
-        Amount_cur = DgvAdd.Rows(0).Cells("今回請求金額計").Value
-        Amount = Math.Ceiling(Amount_cur / strRate)  '画面の金額をIDRに変換　切り上げ
+        '入金額計
+        AmountFC = DgvAdd.Rows(0).Cells("今回請求金額計").Value
+        Amount = Math.Ceiling(AmountFC / strRate)  '画面の金額をIDRに変換　切り上げ
+
+        '売掛残高
+        AccountsReceivableFC = DgvCymn.Rows(0).Cells("請求残高").Value - DgvAdd.Rows(0).Cells("今回請求金額計").Value
+        AccountsReceivable = Math.Ceiling(AccountsReceivableFC / strRate)  '画面の金額をIDRに変換　切り上げ
+
 
         '採番データを取得・更新
         Dim DM As String = getSaiban("80", dtToday)
@@ -531,7 +539,7 @@ Public Class BillingManagement
         Sql += formatNumber(Amount)  '入金額計  
         Sql += "', 0"  '入金額計を0で設定
         Sql += ", '"
-        Sql += formatNumber(Amount)  '売掛残高
+        Sql += formatNumber(AccountsReceivable)  '売掛残高
         Sql += "', '"
         Sql += DgvAdd.Rows(0).Cells("今回備考1").Value
         Sql += "', '"
@@ -548,11 +556,11 @@ Public Class BillingManagement
         Sql += strToday
 
         Sql += "', '"
-        Sql += formatNumber(Amount_cur) '入金額計_外貨
+        Sql += formatNumber(AmountFC) '入金額計_外貨
         Sql += "', '"
         Sql += "0" '入金額計を0で設定
         Sql += "', '"
-        Sql += formatNumber(Amount_cur)  '売掛残高_外貨
+        Sql += formatNumber(AccountsReceivableFC)  '売掛残高_外貨
         Sql += "', '"
         Sql += dsCymnhd.Tables(RS).Rows(0)("通貨").ToString()
         Sql += "', '"
