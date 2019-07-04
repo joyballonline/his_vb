@@ -784,31 +784,36 @@ Public Class GoodsIssue
 
                         _db.executeDB(Sql)
 
-                        Sql = "UPDATE "
-                        Sql += "Public."
-                        Sql += "t70_inout "
-                        Sql += "SET "
+                        'inoutは該当数分取消す
+                        For x As Integer = 0 To shukkoTmpData.Tables(RS).Rows.Count - 1
 
-                        Sql += "取消日"
-                        Sql += " = '"
-                        Sql += UtilClass.formatDatetime(dtToday)
-                        Sql += "', "
-                        Sql += "取消区分 = '" & CommonConst.CANCEL_KBN_DISABLED.ToString & "'"
-                        Sql += ", 更新日 = '" & UtilClass.formatDatetime(dtToday) & "'"
-                        Sql += " ,更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+                            Sql = "UPDATE "
+                            Sql += "Public."
+                            Sql += "t70_inout "
+                            Sql += "SET "
 
-                        Sql += "WHERE"
-                        Sql += " 会社コード"
-                        Sql += "='"
-                        Sql += frmC01F10_Login.loginValue.BumonCD
-                        Sql += "'"
-                        Sql += " AND"
-                        Sql += " 伝票番号"
-                        Sql += "='"
-                        Sql += shukkoTmpData.Tables(RS).Rows(0)("出庫番号")
-                        Sql += "' "
+                            Sql += "取消日"
+                            Sql += " = '"
+                            Sql += UtilClass.formatDatetime(dtToday)
+                            Sql += "', "
+                            Sql += "取消区分 = '" & CommonConst.CANCEL_KBN_DISABLED.ToString & "'"
+                            Sql += ", 更新日 = '" & UtilClass.formatDatetime(dtToday) & "'"
+                            Sql += " ,更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
 
-                        _db.executeDB(Sql)
+                            Sql += "WHERE"
+                            Sql += " 会社コード"
+                            Sql += "='"
+                            Sql += frmC01F10_Login.loginValue.BumonCD
+                            Sql += "'"
+                            Sql += " AND"
+                            Sql += " 伝票番号"
+                            Sql += "='"
+                            Sql += shukkoTmpData.Tables(RS).Rows(x)("出庫番号")
+                            Sql += "' "
+
+                            _db.executeDB(Sql)
+
+                        Next
 
                     End If
 
@@ -827,21 +832,35 @@ Public Class GoodsIssue
 
                     '該当する在庫データを取得・ループ
                     '対象の在庫がなくなるまでデータを作成する
-                    Dim dsCurrentList As DataSet = IIf(DgvAdd.Rows(i).Cells("仕入区分値").Value.ToString = CommonConst.Sire_KBN_Sire,
-                                                    getZaikoList(i), getNukoList(i))
+                    Dim dsCurrentList As DataSet
+
+                    '仕入区分 = 受発注
+                    If DgvAdd.Rows(i).Cells("仕入区分値").Value.ToString = CommonConst.Sire_KBN_Sire.ToString Then
+                        dsCurrentList = getNukoList(i)
+                    Else
+                        dsCurrentList = getZaikoList(i)
+                    End If
 
                     Dim totalShukkoVal As Long = Long.Parse(DgvAdd.Rows(i).Cells("出庫数量").Value)
                     Dim currentVal As Long = 0
                     Dim currentLS As String = ""
+
                     'データがあれば
                     If dsCurrentList.Tables(RS).Rows.Count > 0 Then
                         For x As Integer = 0 To dsCurrentList.Tables(RS).Rows.Count - 1
+
+                            If totalShukkoVal = 0 Then
+                                Exit For
+                            End If
+
                             currentVal = Long.Parse(dsCurrentList.Tables(RS).Rows(x)("現在庫数"))
+
                             '現在庫数より出庫数量の方が大きかった場合、現在庫数をそのまま出庫データとして作成
                             If currentVal < totalShukkoVal Then
                                 totalShukkoVal -= currentVal 'currentValをそのまま登録し、全体数からcurrentValを減算する
                             Else
                                 currentVal = totalShukkoVal '登録するのは残数分のみ
+                                totalShukkoVal -= currentVal
                             End If
 
                             '作成データが複数以上の場合、出庫番号を新規取得
@@ -901,6 +920,7 @@ Public Class GoodsIssue
                             '受注明細更新　受注と出庫の行番号は一致する
                             '---------------------------------------
                             If DgvAdd.Rows(i).Cells("行番号").Value = dsCymndt.Tables(RS).Rows(i)("行番号") Then
+
                                 Dim calShukko As Integer = dsCymndt.Tables(RS).Rows(i)("出庫数") + DgvAdd.Rows(i).Cells("出庫数量").Value
                                 Dim calUnShukko As Integer = dsCymndt.Tables(RS).Rows(i)("未出庫数") - DgvAdd.Rows(i).Cells("出庫数量").Value
 
@@ -981,7 +1001,8 @@ Public Class GoodsIssue
                             Sql += "', '"
                             Sql += UtilClass.formatDatetime(dtToday) '更新日
                             Sql += "', '"
-                            Sql += dsCurrentList.Tables(RS).Rows(x)("伝票番号") & DgvAdd.Rows(i).Cells("行番号").Value.ToString
+                            'Sql += dsCurrentList.Tables(RS).Rows(x)("伝票番号") & DgvAdd.Rows(i).Cells("行番号").Value.ToString
+                            Sql += dsCurrentList.Tables(RS).Rows(x)("伝票番号") & dsCurrentList.Tables(RS).Rows(x)("行番号")
                             'Sql += currentLS & "1"
                             Sql += "', '"
                             Sql += DgvAdd.Rows(i).Cells("仕入区分値").Value.ToString '仕入区分
@@ -1818,7 +1839,7 @@ Public Class GoodsIssue
         Dim reccnt As Integer = 0 'DB用（デフォルト）
 
         Sql = "select"
-        Sql += " t45.出庫数量 as 在庫数量 "
+        Sql += " sum(t45.出庫数量) as 在庫数量 "
         Sql += " from "
         Sql += " t44_shukohd t44 "
         Sql += " ,t45_shukodt t45 "
@@ -2038,32 +2059,37 @@ Public Class GoodsIssue
         Dim dsNyukoList As DataSet = _db.selectDB(Sql, RS, reccnt)
 
         '取得した入庫番号一覧から現在庫数を取得
-        Sql = "SELECT sum(現在庫数) as 現在庫数, 入出庫種別, 伝票番号, 行番号 from m21_zaiko"
 
-        Sql += " WHERE 会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
-
-        Sql += " AND メーカー ILIKE '" & DgvAdd.Rows(rowIndex).Cells("メーカー").Value.ToString & "'"
-        Sql += " AND 品名 ILIKE '" & DgvAdd.Rows(rowIndex).Cells("品名").Value.ToString & "'"
-        Sql += " AND 型式 ILIKE '" & DgvAdd.Rows(rowIndex).Cells("型式").Value.ToString & "'"
-        Sql += " AND 倉庫コード ILIKE '" & DgvAdd.Rows(rowIndex).Cells("倉庫").Value.ToString & "'"
-        Sql += " AND 入出庫種別 ILIKE '" & DgvAdd.Rows(rowIndex).Cells("入出庫種別").Value.ToString & "'"
-        Sql += " AND 無効フラグ = " & CommonConst.CANCEL_KBN_ENABLED
-        Sql += " AND 現在庫数 <> 0"
+        Dim dsZaiko As DataSet
 
         If dsNyukoList.Tables(RS).Rows.Count > 0 Then
+
+            Sql = "SELECT sum(現在庫数) as 現在庫数, 入出庫種別, 伝票番号, 行番号 from m21_zaiko"
+
+            Sql += " WHERE 会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
+
+            Sql += " AND メーカー ILIKE '" & DgvAdd.Rows(rowIndex).Cells("メーカー").Value.ToString & "'"
+            Sql += " AND 品名 ILIKE '" & DgvAdd.Rows(rowIndex).Cells("品名").Value.ToString & "'"
+            Sql += " AND 型式 ILIKE '" & DgvAdd.Rows(rowIndex).Cells("型式").Value.ToString & "'"
+            Sql += " AND 倉庫コード ILIKE '" & DgvAdd.Rows(rowIndex).Cells("倉庫").Value.ToString & "'"
+            Sql += " AND 入出庫種別 ILIKE '" & DgvAdd.Rows(rowIndex).Cells("入出庫種別").Value.ToString & "'"
+            Sql += " AND 無効フラグ = " & CommonConst.CANCEL_KBN_ENABLED
+            Sql += " AND 現在庫数 <> 0"
+
             Sql += " AND ( "
             For i As Integer = 0 To dsNyukoList.Tables(RS).Rows.Count - 1
                 Sql += IIf(i > 0, " OR ", "")
                 Sql += " 伝票番号 ILIKE '" & dsNyukoList.Tables(RS).Rows(i)("入庫番号") & "'"
             Next
             Sql += " ) "
+
+            Sql += " GROUP BY 倉庫コード, 入出庫種別, 最終入庫日, 伝票番号, 行番号 "
+            Sql += " ORDER BY 最終入庫日 "
+
+            '在庫マスタから現在庫数を取得
+            dsZaiko = _db.selectDB(Sql, RS, reccnt)
+
         End If
-
-        Sql += " GROUP BY 倉庫コード, 入出庫種別, 最終入庫日, 伝票番号, 行番号 "
-        Sql += " ORDER BY 最終入庫日 "
-
-        '在庫マスタから現在庫数を取得
-        Dim dsZaiko As DataSet = _db.selectDB(Sql, RS, reccnt)
 
         Return dsZaiko
 
