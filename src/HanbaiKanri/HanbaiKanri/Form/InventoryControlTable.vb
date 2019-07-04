@@ -473,6 +473,8 @@ Public Class InventoryControlTable
 
         Sql = " AND "
         Sql += "固定キー ILIKE '" & CommonConst.INOUT_CLASS & "'"
+        Sql += " AND "
+        Sql += "可変キー <> '" & CommonConst.INOUT_KBN_INCREASE & "'"
 
         Sql += " ORDER BY 表示順"
 
