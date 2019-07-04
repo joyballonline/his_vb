@@ -49,7 +49,6 @@ Partial Class Quote
         Dim DataGridViewCellStyle25 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle26 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle27 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle28 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LblQuoteNo = New System.Windows.Forms.Label()
         Me.LblQuote = New System.Windows.Forms.Label()
         Me.TxtQuoteNo = New System.Windows.Forms.TextBox()
@@ -158,7 +157,6 @@ Partial Class Quote
         Me.間接費無仕入金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.間接費率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.間接費 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Test = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DgvItemList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -227,7 +225,7 @@ Partial Class Quote
         Me.DgvItemList.AllowUserToAddRows = False
         Me.DgvItemList.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.DgvItemList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvItemList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.No, Me.メーカー, Me.品名, Me.型式, Me.数量, Me.単位, Me.仕入先コード, Me.仕入先, Me.仕入単価, Me.仕入レート, Me.仕入単価_外貨, Me.仕入原価, Me.関税率, Me.関税額, Me.前払法人税率, Me.前払法人税額, Me.輸送費率, Me.輸送費額, Me.仕入金額, Me.売単価, Me.売上金額, Me.見積単価, Me.見積単価_外貨, Me.見積金額, Me.見積金額_外貨, Me.粗利額, Me.粗利率, Me.リードタイム, Me.備考, Me.ステータス, Me.間接費無仕入金額, Me.間接費率, Me.間接費, Me.Test})
+        Me.DgvItemList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.No, Me.メーカー, Me.品名, Me.型式, Me.数量, Me.単位, Me.仕入先コード, Me.仕入先, Me.仕入単価, Me.仕入レート, Me.仕入単価_外貨, Me.仕入原価, Me.関税率, Me.関税額, Me.前払法人税率, Me.前払法人税額, Me.輸送費率, Me.輸送費額, Me.仕入金額, Me.売単価, Me.売上金額, Me.見積単価, Me.見積単価_外貨, Me.見積金額, Me.見積金額_外貨, Me.粗利額, Me.粗利率, Me.リードタイム, Me.備考, Me.ステータス, Me.間接費無仕入金額, Me.間接費率, Me.間接費})
         Me.DgvItemList.Location = New System.Drawing.Point(12, 220)
         Me.DgvItemList.Name = "DgvItemList"
         Me.DgvItemList.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
@@ -1363,17 +1361,6 @@ Partial Class Quote
         Me.間接費.Visible = False
         Me.間接費.Width = 61
         '
-        'Test
-        '
-        DataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle28.Format = "N0"
-        DataGridViewCellStyle28.NullValue = "0"
-        Me.Test.DefaultCellStyle = DataGridViewCellStyle28
-        Me.Test.HeaderText = "Test"
-        Me.Test.MaxInputLength = 15
-        Me.Test.Name = "Test"
-        Me.Test.Width = 200
-        '
         'Quote
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
@@ -1569,5 +1556,4 @@ Partial Class Quote
     Friend WithEvents 間接費無仕入金額 As DataGridViewTextBoxColumn
     Friend WithEvents 間接費率 As DataGridViewTextBoxColumn
     Friend WithEvents 間接費 As DataGridViewTextBoxColumn
-    Friend WithEvents Test As DataGridViewTextBoxColumn
 End Class
