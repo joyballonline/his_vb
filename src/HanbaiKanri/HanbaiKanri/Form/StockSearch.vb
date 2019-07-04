@@ -153,6 +153,8 @@ Public Class StockSearch
             Sql += " AND m21.品名 ILIKE '" & itemName & "'"
             Sql += " AND m21.型式 ILIKE '" & spec & "'"
 
+            Sql += " AND m21.現在庫数 <> 0 "
+
             If _mode <> "Normal" Then
                 Sql += " AND ( t43.仕入区分 = '" & CommonConst.Sire_KBN_Zaiko & "'"
                 Sql += " OR t43.仕入区分 = '" & CommonConst.Sire_KBN_Move & "' ) "
