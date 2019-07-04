@@ -672,12 +672,17 @@ Public Class Cymn
                             '------------------------
                             For x As Integer = 0 To dsCurrentList.Tables(RS).Rows.Count - 1
 
+                                If totalShukkoVal = 0 Then
+                                    Exit For
+                                End If
+
                                 currentVal = Long.Parse(dsCurrentList.Tables(RS).Rows(x)("現在庫数"))
                                 '現在庫数より出庫数量の方が大きかった場合、現在庫数をそのまま出庫データとして作成
                                 If currentVal < totalShukkoVal Then
                                     totalShukkoVal -= currentVal 'currentValをそのまま登録し、全体数からcurrentValを減算する
                                 Else
                                     currentVal = totalShukkoVal '登録するのは残数分のみ
+                                    totalShukkoVal -= currentVal
                                 End If
 
                                 '作成データが複数以上の場合、出庫番号を新規取得
