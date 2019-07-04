@@ -173,7 +173,7 @@ Public Class InventoryList
             Try
 
                 Sql = "SELECT "
-                Sql += " m21.メーカー, m21.品名, m21.型式, m21.入出庫種別, m21.現在庫数, m21.現在庫数 "
+                Sql += " m21.メーカー, m21.品名, m21.型式, m21.入出庫種別, sum(m21.現在庫数) as 現在庫数 "
                 Sql += " ,m21.入庫単価, m21.最終入庫日, m21.最終出庫日, m90.文字１, m90.文字２ "
                 Sql += " FROM m21_zaiko m21"
 
@@ -190,8 +190,10 @@ Public Class InventoryList
                 Sql += " m21.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
                 Sql += " AND "
                 Sql += " m21.無効フラグ = " & CommonConst.CANCEL_KBN_ENABLED.ToString
+                Sql += " AND "
+                Sql += " m21.現在庫数 <> 0 "
                 Sql += " GROUP BY "
-                Sql += " m21.メーカー, m21.品名, m21.型式, m21.入出庫種別, m21.現在庫数, m21.現在庫数 "
+                Sql += " m21.メーカー, m21.品名, m21.型式, m21.入出庫種別 "
                 Sql += " ,m21.入庫単価, m21.最終入庫日, m21.最終出庫日, m90.文字１, m90.文字２, m21.伝票番号 "
                 Sql += " ORDER BY "
                 'Sql += " m21.メーカー, m21.品名, m21.型式, m21.最終入庫日, m21.入出庫種別 "
@@ -249,7 +251,7 @@ Public Class InventoryList
             Try
 
                 Sql = "SELECT "
-                Sql += " m21.メーカー, m21.品名, m21.型式, m21.入出庫種別, m21.現在庫数, m21.現在庫数 "
+                Sql += " m21.メーカー, m21.品名, m21.型式, m21.入出庫種別, sum(m21.現在庫数) as 現在庫数 "
                 Sql += " ,m21.入庫単価, m21.最終入庫日, m21.最終出庫日, m90.文字１, m90.文字２, m20.名称 "
                 Sql += " FROM m21_zaiko m21"
 
@@ -273,8 +275,10 @@ Public Class InventoryList
                 Sql += " m21.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
                 Sql += " AND "
                 Sql += " m21.無効フラグ = " & CommonConst.CANCEL_KBN_ENABLED.ToString
+                Sql += " AND "
+                Sql += " m21.現在庫数 <> 0 "
                 Sql += " GROUP BY "
-                Sql += " m21.倉庫コード, m21.メーカー, m21.品名, m21.型式, m21.入出庫種別, m21.現在庫数, m21.現在庫数 "
+                Sql += " m21.倉庫コード, m21.メーカー, m21.品名, m21.型式, m21.入出庫種別, m21.現在庫数 "
                 Sql += " ,m21.入庫単価, m21.最終入庫日, m21.最終出庫日, m90.文字１, m90.文字２, m20.名称, m21.伝票番号 "
                 Sql += " ORDER BY "
                 'Sql += " m21.メーカー, m21.品名, m21.型式, m21.最終入庫日, m21.入出庫種別 "
