@@ -131,6 +131,8 @@ Public Class GoodsIssueList
 
             Try
 
+                '伝票単位選択時
+                '----------------------------
                 Sql = " SELECT t44.* "
                 Sql += " FROM "
                 Sql += " t44_shukohd t44"
@@ -146,6 +148,8 @@ Public Class GoodsIssueList
 
                 Sql += viewSearchConditions() '検索条件
 
+                Sql += " AND "
+                Sql += " t45.出庫区分 <> '" & CommonConst.SHUKO_KBN_TMP.ToString & "'" '仮出庫以外のデータ
                 Sql += " GROUP BY "
                 Sql += " t44.会社コード, t44.出庫番号"
                 Sql += " ORDER BY "
@@ -185,7 +189,7 @@ Public Class GoodsIssueList
         Else
 
             '明細単位選択時
-
+            '----------------------------
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 DgvCymnhd.Columns.Add("取消", "Cancel")
                 DgvCymnhd.Columns.Add("出庫番号", "GoodsDeliveryNumber")
@@ -241,6 +245,8 @@ Public Class GoodsIssueList
 
             Sql += viewSearchConditions() '検索条件
 
+            Sql += " AND "
+            Sql += " t45.出庫区分 <> '" & CommonConst.SHUKO_KBN_TMP.ToString & "'" '仮出庫以外のデータ
             Sql += " GROUP BY "
             Sql += " t45.会社コード, t45.出庫番号, t44.取消区分, t44.出庫日, t45.受注番号, t45.受注番号枝番, t45.行番号,  t45.更新日"
             Sql += " ORDER BY "

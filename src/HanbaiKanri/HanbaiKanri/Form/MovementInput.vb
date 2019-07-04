@@ -544,7 +544,14 @@ Public Class MovementInput
                 Sql += "', '"
                 Sql += "1" '行番号
                 Sql += "', '"
-                Sql += CmStorageTypeTo.SelectedValue '入出庫種別
+
+                '棚卸増選択時は、入出庫種別を引き継ぐ
+                If CmStorageTypeTo.SelectedValue = CommonConst.INOUT_KBN_INCREASE Then
+                    Sql += TxtStorageTypeSince.Tag '入出庫種別
+                Else
+                    Sql += CmStorageTypeTo.SelectedValue '入出庫種別
+                End If
+
                 Sql += "', '"
                 Sql += TxtManufacturer.Text 'メーカー
                 Sql += "', '"
@@ -555,8 +562,8 @@ Public Class MovementInput
                 Sql += UtilClass.formatNumber(TxtQuantityTo.Text) '数量
                 Sql += "', "
                 Sql += IIf(dsNyuko.Tables(RS).Rows(0)("単位").ToString <> "",
-                               "'" & dsNyuko.Tables(RS).Rows(0)("単位").ToString & "'",
-                               "NULL") '単位
+                                "'" & dsNyuko.Tables(RS).Rows(0)("単位").ToString & "'",
+                                "NULL") '単位
                 Sql += ", '"
                 'Sql += UtilClass.formatDatetime(DtpProcessingDate.Text) '入出庫日
                 Sql += inoutDate '入出庫日
