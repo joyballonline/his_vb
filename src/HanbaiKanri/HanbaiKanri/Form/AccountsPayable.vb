@@ -388,7 +388,8 @@ Public Class AccountsPayable
         Dim dtToday As DateTime = DateTime.Now
         Dim strToday As String = formatDatetime(dtToday)
         Dim reccnt As Integer = 0
-        Dim AccountsPayable As Decimal = 0
+        Dim AccountsPayable As Decimal = 0    '買掛残高
+        Dim AccountsPayableFC As Decimal = 0  '買掛残高_外貨
 
         Dim BuyToHangAmount As Decimal = 0    '今回買掛金額計
         Dim BuyToHangAmountFC As Decimal = 0  '今回買掛金額計_外貨
@@ -427,8 +428,8 @@ Public Class AccountsPayable
 
             '買掛残高を集計
             AccountsPayable = IIf(
-            dsKikehd.Tables(RS).Compute("SUM(買掛金額計)", Nothing) IsNot DBNull.Value,
-            dsKikehd.Tables(RS).Compute("SUM(買掛金額計)", Nothing),
+            dsKikehd.Tables(RS).Compute("SUM(買掛金額計_外貨)", Nothing) IsNot DBNull.Value,
+            dsKikehd.Tables(RS).Compute("SUM(買掛金額計_外貨)", Nothing),
             0)
 
             Dim APTotal As Decimal = DgvAdd.Rows(0).Cells("今回買掛金額計").Value + AccountsPayable
@@ -451,8 +452,14 @@ Public Class AccountsPayable
             'レートの取得
             Dim strRate As Decimal = setRate(dsHattyu.Tables(RS).Rows(0)("通貨").ToString())
 
+
+            '今回買掛金額計
             BuyToHangAmountFC = DgvAdd.Rows(0).Cells("今回買掛金額計").Value
             BuyToHangAmount = Math.Ceiling(BuyToHangAmountFC / strRate)  '画面の金額をIDRに変換　切り上げ
+
+            '買掛残高
+            AccountsPayableFC = DgvCymn.Rows(0).Cells("買掛残高").Value - DgvAdd.Rows(0).Cells("今回買掛金額計").Value
+            AccountsPayable = Math.Ceiling(AccountsPayableFC / strRate)  '画面の金額をIDRに変換　切り上げ
 
 
             Sql = "INSERT INTO "
@@ -483,7 +490,7 @@ Public Class AccountsPayable
             Sql += "', "
             Sql += formatStringToNumber(BuyToHangAmount) '買掛金額計
             Sql += ", "
-            Sql += formatStringToNumber(BuyToHangAmount) '買掛残高
+            Sql += formatStringToNumber(AccountsPayable) '買掛残高
             Sql += ", '"
             Sql += DgvAdd.Rows(0).Cells("今回備考1").Value '備考1
             Sql += "', '"
@@ -502,7 +509,7 @@ Public Class AccountsPayable
             Sql += "',"
             Sql += formatStringToNumber(BuyToHangAmountFC) '買掛金額計_外貨
             Sql += ","
-            Sql += formatStringToNumber(BuyToHangAmountFC) '買掛残高_外貨
+            Sql += formatStringToNumber(AccountsPayableFC) '買掛残高_外貨
 
             Sql += ","
             Sql += dsHattyu.Tables(RS).Rows(0)("通貨").ToString() '通貨
