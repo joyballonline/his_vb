@@ -1993,20 +1993,27 @@ Public Class GoodsIssue
         Dim Sql As String = ""
         Dim reccnt As Integer = 0 'DB用（デフォルト）
 
-        Sql = "SELECT sum(現在庫数) as 現在庫数, 入出庫種別, 伝票番号, 行番号 from m21_zaiko"
+        Sql = "SELECT sum(m21.現在庫数) as 現在庫数, m21.入出庫種別, m21.伝票番号, m21.行番号 "
+        Sql += " from m21_zaiko m21, t70_inout t70 "
 
-        Sql += " WHERE 会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " WHERE m21.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
 
-        Sql += " AND  メーカー ILIKE '" & DgvAdd.Rows(rowIndex).Cells("メーカー").Value.ToString & "'"
-        Sql += " AND  品名 ILIKE '" & DgvAdd.Rows(rowIndex).Cells("品名").Value.ToString & "'"
-        Sql += " AND  型式 ILIKE '" & DgvAdd.Rows(rowIndex).Cells("型式").Value.ToString & "'"
-        Sql += " AND  倉庫コード ILIKE '" & DgvAdd.Rows(rowIndex).Cells("倉庫").Value.ToString & "'"
-        Sql += " AND  入出庫種別 ILIKE '" & DgvAdd.Rows(rowIndex).Cells("入出庫種別").Value.ToString & "'"
-        Sql += " AND  無効フラグ = " & CommonConst.CANCEL_KBN_ENABLED
-        Sql += " AND  現在庫数 <> 0"
+        Sql += " AND  m21.メーカー ILIKE '" & DgvAdd.Rows(rowIndex).Cells("メーカー").Value.ToString & "'"
+        Sql += " AND  m21.品名 ILIKE '" & DgvAdd.Rows(rowIndex).Cells("品名").Value.ToString & "'"
+        Sql += " AND  m21.型式 ILIKE '" & DgvAdd.Rows(rowIndex).Cells("型式").Value.ToString & "'"
+        Sql += " AND  m21.倉庫コード ILIKE '" & DgvAdd.Rows(rowIndex).Cells("倉庫").Value.ToString & "'"
+        Sql += " AND  m21.入出庫種別 ILIKE '" & DgvAdd.Rows(rowIndex).Cells("入出庫種別").Value.ToString & "'"
+        Sql += " AND  m21.無効フラグ = " & CommonConst.CANCEL_KBN_ENABLED
+        Sql += " AND  m21.現在庫数 <> 0"
 
-        Sql += " GROUP BY 倉庫コード, 入出庫種別, 最終入庫日, 伝票番号, 行番号 "
-        Sql += " ORDER BY 最終入庫日 "
+        Sql += " AND m21.会社コード ILIKE t70.会社コード "
+        Sql += " AND m21.倉庫コード ILIKE t70.倉庫コード "
+        Sql += " AND m21.伝票番号 ILIKE t70.伝票番号 "
+        Sql += " AND m21.行番号 = t70.行番号 "
+        Sql += " AND t70.仕入区分 <> '" & CommonConst.Sire_KBN_Sire.ToString & "'"
+
+        Sql += " GROUP BY m21.倉庫コード, m21.入出庫種別, m21.最終入庫日, m21.伝票番号, m21.行番号 "
+        Sql += " ORDER BY m21.最終入庫日 "
 
         '在庫マスタから現在庫数を取得
         Dim dsZaiko As DataSet = _db.selectDB(Sql, RS, reccnt)
