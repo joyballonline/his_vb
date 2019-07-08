@@ -929,7 +929,7 @@ Public Class Cymn
             Dim cost As Long = 0 '仕入先 & 仕入通貨 毎に仕入原価を合算する
             Dim tmpCuote As Long = 0 '仕入先 & 仕入通貨 毎に見積金額を合算
             Dim PurchaseNo As String
-            Dim CurrentPurchaseNo As String
+            Dim CurrentPurchaseNo As String = ""
 
             Dim dsSipper As DataSet '仕入先
             Dim strRate As Decimal 'レートの取得
@@ -944,7 +944,7 @@ Public Class Cymn
                 If tbl.Rows(i)("仕入区分") = CommonConst.Sire_KBN_Sire Then
 
                     '最初はそのまま
-                    If i = 0 Then
+                    If CurrentPurchaseNo = "" Then
                         CurrentPurchaseNo = PurchaseNo
                         '新しい値をセットし、発注基本を登録する
                         sireCd = tbl.Rows(i)("仕入先コード")
