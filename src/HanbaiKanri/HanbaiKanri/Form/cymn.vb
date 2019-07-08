@@ -1555,7 +1555,7 @@ Public Class Cymn
         Sql += " AND 品名 ILIKE '" & DgvItemList.Rows(rowIndex).Cells("品名").Value.ToString & "'"
         Sql += " AND 型式 ILIKE '" & DgvItemList.Rows(rowIndex).Cells("型式").Value.ToString & "'"
         Sql += " AND 倉庫コード ILIKE '" & CmWarehouse.SelectedValue & "'"
-        Sql += " AND 入出庫種別 <= '" & CommonConst.INOUT_KBN_SAMPLE & "'"
+        Sql += " AND 入出庫種別 <= '" & CommonConst.INOUT_KBN_NORMAL & "'"
         Sql += " AND 現在庫数 <> 0"
 
         'Sql += " GROUP BY 倉庫コード, 入出庫種別, 最終入庫日 "
