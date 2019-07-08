@@ -2174,7 +2174,7 @@ Public Class GoodsIssue
 
         '取得した入庫番号一覧から現在庫数を取得
 
-        Dim dsZaiko As DataSet
+        Dim dsZaiko As DataSet = Nothing
 
         If dsNyukoList.Tables(RS).Rows.Count > 0 Then
 
