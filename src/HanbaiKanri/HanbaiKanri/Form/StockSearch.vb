@@ -111,11 +111,11 @@ Public Class StockSearch
             '無効フラグ = 0
             '入出庫種別 <= 1
             Sql = " SELECT "
-            Sql += " m21.会社コード, m21.倉庫コード, m21.最終入庫日, m21.入出庫種別, SUM(m21.現在庫数) as 現在庫数"
-            Sql += " , SUM(m21.入庫単価) as 入庫単価, m21.最終出庫日, m20.名称, m90.文字１, m90.文字２, t43.仕入区分 "
+            'Sql += " m21.会社コード, m21.倉庫コード, m21.最終入庫日, m21.入出庫種別, SUM(m21.現在庫数) as 現在庫数"
+            'Sql += " , SUM(m21.入庫単価) as 入庫単価, m21.最終出庫日, m20.名称, m90.文字１, m90.文字２, t43.仕入区分 "
+            Sql += " m21.会社コード, m21.倉庫コード, m21.最終入庫日, m21.入出庫種別, m21.現在庫数"
+            Sql += " , m21.入庫単価, m21.最終出庫日, m20.名称, m90.文字１, m90.文字２, t43.仕入区分 "
             Sql += " , m21.伝票番号, m21.行番号 "
-            'Sql += " , m21.伝票番号, t43.仕入先名, t43.単位 "
-            'Sql += " , m21.ロケ番号, concat(t43.入庫番号, t43.行番号) as ロケ入庫番号 "
             Sql += " , m21.ロケ番号, t43.入庫番号, t43.行番号 as 入庫行番号 "
             Sql += " FROM m21_zaiko m21 "
 
@@ -126,15 +126,15 @@ Public Class StockSearch
 
             Sql += " LEFT JOIN "
             Sql += " m90_hanyo m90 "
-            Sql += " On m21.会社コード = m20.会社コード "
+            Sql += " On m21.会社コード = m90.会社コード "
             Sql += " AND m90.固定キー = '" & CommonConst.INOUT_CLASS & "' "
             Sql += " AND m21.入出庫種別 = m90.可変キー "
 
             Sql += " LEFT JOIN "
             Sql += " t43_nyukodt t43 "
             Sql += " On m21.会社コード = t43.会社コード "
-            Sql += " AND m21.伝票番号 = t43.入庫番号 "
-            Sql += " AND m21.行番号 = t43.行番号 "
+            'Sql += " AND m21.伝票番号 = t43.入庫番号 "
+            'Sql += " AND m21.行番号 = t43.行番号 "
 
             Sql += " AND ( "
             Sql += " ( m21.伝票番号 = t43.入庫番号 "
@@ -160,8 +160,10 @@ Public Class StockSearch
                 Sql += " OR t43.仕入区分 = '" & CommonConst.Sire_KBN_Move & "' ) "
             End If
 
-            Sql += " GROUP BY m21.会社コード, m21.倉庫コード, m21.最終入庫日, m21.最終出庫日 "
-            Sql += " , m21.入出庫種別, m20.名称,m90.文字１, m90.文字２, t43.仕入区分 "
+            'Sql += " GROUP BY m21.会社コード, m21.倉庫コード, m21.最終入庫日, m21.最終出庫日 "
+            'Sql += " , m21.入出庫種別, m20.名称,m90.文字１, m90.文字２, t43.仕入区分 "
+            Sql += " GROUP BY m21.会社コード, m21.倉庫コード, m21.最終入庫日, m21.入出庫種別, m21.現在庫数"
+            Sql += " , m21.入庫単価, m21.最終出庫日, m20.名称, m90.文字１, m90.文字２, t43.仕入区分 "
             Sql += " , m21.伝票番号, m21.行番号, t43.入庫番号 "
             Sql += " , 入庫行番号, m21.ロケ番号 "
 
@@ -181,21 +183,21 @@ Public Class StockSearch
                     DgvList.Rows(i).Cells("引当").Value = "×"
                 End If
 
-                DgvList.Rows(i).Cells("倉庫コード").Value = dsZaiko.Tables(RS).Rows(i)("倉庫コード")
-                DgvList.Rows(i).Cells("倉庫").Value = dsZaiko.Tables(RS).Rows(i)("名称")
+                DgvList.Rows(i).Cells("倉庫コード").Value = dsZaiko.Tables(RS).Rows(i)("倉庫コード") '移動入力でも使用
+                DgvList.Rows(i).Cells("倉庫").Value = dsZaiko.Tables(RS).Rows(i)("名称") '移動入力でも使用
                 DgvList.Rows(i).Cells("最終入庫日").Value = dsZaiko.Tables(RS).Rows(i)("最終入庫日")
-                DgvList.Rows(i).Cells("入出庫種別区分").Value = dsZaiko.Tables(RS).Rows(i)("入出庫種別")
+                DgvList.Rows(i).Cells("入出庫種別区分").Value = dsZaiko.Tables(RS).Rows(i)("入出庫種別") '移動入力でも使用
                 DgvList.Rows(i).Cells("入出庫種別").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
                                                            dsZaiko.Tables(RS).Rows(i)("文字２"),
-                                                           dsZaiko.Tables(RS).Rows(i)("文字１"))
-                DgvList.Rows(i).Cells("現在庫数").Value = dsZaiko.Tables(RS).Rows(i)("現在庫数")
-                DgvList.Rows(i).Cells("入庫単価").Value = dsZaiko.Tables(RS).Rows(i)("入庫単価")
+                                                           dsZaiko.Tables(RS).Rows(i)("文字１")) '移動入力でも使用
+                DgvList.Rows(i).Cells("現在庫数").Value = dsZaiko.Tables(RS).Rows(i)("現在庫数") '移動入力でも使用
+                DgvList.Rows(i).Cells("入庫単価").Value = dsZaiko.Tables(RS).Rows(i)("入庫単価") '移動入力でも使用
                 DgvList.Rows(i).Cells("最終出庫日").Value = dsZaiko.Tables(RS).Rows(i)("最終出庫日")
-                DgvList.Rows(i).Cells("伝票番号").Value = dsZaiko.Tables(RS).Rows(i)("伝票番号")
-                DgvList.Rows(i).Cells("行番号").Value = dsZaiko.Tables(RS).Rows(i)("行番号")
-                DgvList.Rows(i).Cells("ロケ番号").Value = dsZaiko.Tables(RS).Rows(i)("ロケ番号")
-                DgvList.Rows(i).Cells("入庫番号").Value = dsZaiko.Tables(RS).Rows(i)("入庫番号")
-                DgvList.Rows(i).Cells("入庫行番号").Value = dsZaiko.Tables(RS).Rows(i)("入庫行番号")
+                DgvList.Rows(i).Cells("伝票番号").Value = dsZaiko.Tables(RS).Rows(i)("伝票番号") '移動入力でも使用
+                DgvList.Rows(i).Cells("行番号").Value = dsZaiko.Tables(RS).Rows(i)("行番号") '移動入力でも使用
+                DgvList.Rows(i).Cells("ロケ番号").Value = dsZaiko.Tables(RS).Rows(i)("ロケ番号") '移動入力でも使用
+                DgvList.Rows(i).Cells("入庫番号").Value = dsZaiko.Tables(RS).Rows(i)("入庫番号") '移動入力でも使用
+                DgvList.Rows(i).Cells("入庫行番号").Value = dsZaiko.Tables(RS).Rows(i)("入庫行番号") '移動入力でも使用
 
             Next
 
