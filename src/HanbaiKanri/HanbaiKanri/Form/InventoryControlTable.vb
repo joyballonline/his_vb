@@ -593,6 +593,13 @@ Public Class InventoryControlTable
             Sql += " t70.入出庫区分 = '1'"
 
             Sql += " left outer join "
+            Sql += " t42_nyukohd t42 "
+            Sql += " on "
+            Sql += " t43.会社コード ILIKE t42.会社コード "
+            Sql += " and "
+            Sql += " t43.入庫番号 ILIKE t42.入庫番号 "
+
+            Sql += " left outer join "
             Sql += " t45_shukodt t45 "
             Sql += " on "
             Sql += " t70.会社コード ILIKE t45.会社コード "
@@ -609,6 +616,8 @@ Public Class InventoryControlTable
             Sql += " t45.出庫番号 ILIKE t44.出庫番号 "
             Sql += " and "
             Sql += " t70.入出庫区分 = '2'"
+            Sql += " AND "
+            Sql += " t44.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
 
             Sql += " WHERE "
             Sql += " m21.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "' "
@@ -624,6 +633,8 @@ Public Class InventoryControlTable
             Sql += " m21.入出庫種別 >= '" & CmStorageTypeFrom.SelectedValue.ToString & "'"
             Sql += " AND "
             Sql += " m21.入出庫種別 <= '" & CmStorageTypeTo.SelectedValue.ToString & "'"
+            Sql += " AND "
+            Sql += " t42.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
 
             Sql += " ORDER BY "
             Sql += " m21.倉庫コード, m21.メーカー, m21.品名, m21.型式, m21.伝票番号 "
