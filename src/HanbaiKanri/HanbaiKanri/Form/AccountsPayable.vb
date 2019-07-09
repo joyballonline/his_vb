@@ -136,7 +136,7 @@ Public Class AccountsPayable
             LblHistory.Text = "AccountsPayableHistoryData"
             LblAdd.Text = "AcceptAccountPayableThisTime"
 
-            lblVendorInvoiceNumber.Text = "InvoiceNumber"
+            lblVendorInvoiceNumber.Text = "SupplierInvoice"
 
             TxtHattyudtCount.Location = New Point(1228, 111)
             TxtKikehdCount.Location = New Point(1228, 245)
