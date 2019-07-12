@@ -794,8 +794,8 @@ Public Class Ordering
                                 DgvItemList.Rows(e.RowIndex).Cells("仕入単価_外貨").Value = Math.Ceiling(DgvItemList.Rows(e.RowIndex).Cells("仕入単価").Value * TxtRate.Text)
                             End If
                         Case "仕入単価_外貨"
-                            If DgvItemList("仕入単価_外貨", e.RowIndex).Value IsNot Nothing And DgvItemList("仕入レート", e.RowIndex).Value IsNot Nothing Then
-                                DgvItemList("仕入単価", e.RowIndex).Value = Math.Ceiling(DgvItemList("仕入単価_外貨", e.RowIndex).Value / DgvItemList("仕入レート", e.RowIndex).Value)
+                            If DgvItemList("仕入単価_外貨", e.RowIndex).Value IsNot Nothing Then
+                                DgvItemList("仕入単価", e.RowIndex).Value = Math.Ceiling(DgvItemList("仕入単価_外貨", e.RowIndex).Value / TxtRate.Text)
                             End If
                     End Select
 
@@ -837,8 +837,11 @@ Public Class Ordering
                                                                               + (DgvItemList.Rows(e.RowIndex).Cells("関税額").Value + DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value + DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value))
                 End If
 
-                '仕入単価_外貨
-                DgvItemList("仕入単価_外貨", e.RowIndex).Value = Math.Ceiling(DgvItemList("仕入単価", e.RowIndex).Value * TxtRate.Text)
+                If currentColumn = "仕入単価" Then
+                    '仕入単価_外貨
+                    DgvItemList("仕入単価_外貨", e.RowIndex).Value = Math.Ceiling(DgvItemList("仕入単価", e.RowIndex).Value * TxtRate.Text)
+                End If
+
             End If
 
             ''数量と仕入単価が入力されていたら
@@ -1453,7 +1456,7 @@ Public Class Ordering
                     Sql += ", "
                     Sql += formatNumber(DgvItemList.Rows(i).Cells("仕入単価_外貨").Value)  '仕入値_外貨
                     Sql += ", "
-                    Sql += formatNumber(DgvItemList.Rows(i).Cells("仕入金額_外貨").Value)  '仕入金額_外貨　切り上げ
+                    Sql += formatNumber(DgvItemList.Rows(i).Cells("仕入金額_外貨").Value)  '仕入金額_外貨
 
 
                     Sql += IIf(
