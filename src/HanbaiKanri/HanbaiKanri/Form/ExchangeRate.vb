@@ -134,7 +134,7 @@ Public Class ExchangeRate
         ds = getDsData("m25_currency", Sql)
 
         If ds.Tables(RS).Rows.Count > 0 Then
-            LblJPY.Text = ds.Tables(RS).Rows(0)("通貨コード")
+            LblJPY.Text = ds.Tables(RS).Rows(0)("通貨コード") & "     = "
             TxtRate1.Tag = ds.Tables(RS).Rows(0)("採番キー")
         Else
             '操作できないアラートを出す
@@ -150,7 +150,7 @@ Public Class ExchangeRate
         ds = getDsData("m25_currency", Sql)
 
         If ds.Tables(RS).Rows.Count > 0 Then
-            LblUSD.Text = ds.Tables(RS).Rows(0)("通貨コード")
+            LblUSD.Text = ds.Tables(RS).Rows(0)("通貨コード") & "     = "
             TxtRate2.Tag = ds.Tables(RS).Rows(0)("採番キー")
         Else
             '操作できないアラートを出す

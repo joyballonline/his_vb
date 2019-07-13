@@ -78,8 +78,8 @@ Partial Class ExchangeRate
         'TableLayoutPanel1
         '
         Me.TableLayoutPanel1.ColumnCount = 5
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.25253!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.12121!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 19.37322!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.80627!))
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.25253!))
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.12121!))
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.25253!))
@@ -89,20 +89,20 @@ Partial Class ExchangeRate
         Me.TableLayoutPanel1.Controls.Add(Me.TxtBaseCurrency1, 0, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.TxtRate1, 4, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.TxtRate2, 4, 2)
-        Me.TableLayoutPanel1.Controls.Add(Me.LblIDR1, 1, 1)
-        Me.TableLayoutPanel1.Controls.Add(Me.LblJPY, 3, 1)
-        Me.TableLayoutPanel1.Controls.Add(Me.LblUSD, 3, 2)
-        Me.TableLayoutPanel1.Controls.Add(Me.LblIDR2, 1, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.TxtBaseCurrency2, 0, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.NudForeignCurrency1, 2, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.NudForeignCurrency2, 2, 2)
-        Me.TableLayoutPanel1.Location = New System.Drawing.Point(12, 118)
+        Me.TableLayoutPanel1.Controls.Add(Me.LblIDR1, 3, 1)
+        Me.TableLayoutPanel1.Controls.Add(Me.LblJPY, 1, 1)
+        Me.TableLayoutPanel1.Controls.Add(Me.LblIDR2, 3, 2)
+        Me.TableLayoutPanel1.Controls.Add(Me.LblUSD, 1, 2)
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(15, 118)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 3
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(705, 107)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(702, 107)
         Me.TableLayoutPanel1.TabIndex = 2
         '
         'LblBaseCurrency
@@ -110,7 +110,7 @@ Partial Class ExchangeRate
         Me.LblBaseCurrency.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.LblBaseCurrency.AutoSize = True
         Me.LblBaseCurrency.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblBaseCurrency.Location = New System.Drawing.Point(55, 10)
+        Me.LblBaseCurrency.Location = New System.Drawing.Point(34, 10)
         Me.LblBaseCurrency.Name = "LblBaseCurrency"
         Me.LblBaseCurrency.Size = New System.Drawing.Size(67, 15)
         Me.LblBaseCurrency.TabIndex = 327
@@ -121,7 +121,7 @@ Partial Class ExchangeRate
         Me.LblForeignCurrency.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.LblForeignCurrency.AutoSize = True
         Me.LblForeignCurrency.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblForeignCurrency.Location = New System.Drawing.Point(333, 10)
+        Me.LblForeignCurrency.Location = New System.Drawing.Point(331, 10)
         Me.LblForeignCurrency.Name = "LblForeignCurrency"
         Me.LblForeignCurrency.Size = New System.Drawing.Size(37, 15)
         Me.LblForeignCurrency.TabIndex = 328
@@ -132,7 +132,7 @@ Partial Class ExchangeRate
         Me.LblRate.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.LblRate.AutoSize = True
         Me.LblRate.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblRate.Location = New System.Drawing.Point(595, 10)
+        Me.LblRate.Location = New System.Drawing.Point(592, 10)
         Me.LblRate.Name = "LblRate"
         Me.LblRate.Size = New System.Drawing.Size(41, 15)
         Me.LblRate.TabIndex = 329
@@ -144,7 +144,7 @@ Partial Class ExchangeRate
         Me.TxtBaseCurrency1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtBaseCurrency1.Location = New System.Drawing.Point(3, 41)
         Me.TxtBaseCurrency1.Name = "TxtBaseCurrency1"
-        Me.TxtBaseCurrency1.Size = New System.Drawing.Size(172, 22)
+        Me.TxtBaseCurrency1.Size = New System.Drawing.Size(130, 22)
         Me.TxtBaseCurrency1.TabIndex = 1
         '
         'TxtRate1
@@ -152,7 +152,7 @@ Partial Class ExchangeRate
         Me.TxtRate1.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtRate1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.TxtRate1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtRate1.Location = New System.Drawing.Point(529, 41)
+        Me.TxtRate1.Location = New System.Drawing.Point(526, 41)
         Me.TxtRate1.Name = "TxtRate1"
         Me.TxtRate1.ReadOnly = True
         Me.TxtRate1.Size = New System.Drawing.Size(173, 22)
@@ -163,7 +163,7 @@ Partial Class ExchangeRate
         Me.TxtRate2.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtRate2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.TxtRate2.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtRate2.Location = New System.Drawing.Point(529, 77)
+        Me.TxtRate2.Location = New System.Drawing.Point(526, 77)
         Me.TxtRate2.Name = "TxtRate2"
         Me.TxtRate2.ReadOnly = True
         Me.TxtRate2.Size = New System.Drawing.Size(173, 22)
@@ -174,7 +174,7 @@ Partial Class ExchangeRate
         Me.LblIDR1.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.LblIDR1.AutoSize = True
         Me.LblIDR1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblIDR1.Location = New System.Drawing.Point(205, 45)
+        Me.LblIDR1.Location = New System.Drawing.Point(465, 45)
         Me.LblIDR1.Name = "LblIDR1"
         Me.LblIDR1.Size = New System.Drawing.Size(31, 15)
         Me.LblIDR1.TabIndex = 336
@@ -185,7 +185,7 @@ Partial Class ExchangeRate
         Me.LblJPY.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.LblJPY.AutoSize = True
         Me.LblJPY.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblJPY.Location = New System.Drawing.Point(468, 45)
+        Me.LblJPY.Location = New System.Drawing.Point(183, 45)
         Me.LblJPY.Name = "LblJPY"
         Me.LblJPY.Size = New System.Drawing.Size(31, 15)
         Me.LblJPY.TabIndex = 338
@@ -196,7 +196,7 @@ Partial Class ExchangeRate
         Me.LblUSD.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.LblUSD.AutoSize = True
         Me.LblUSD.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblUSD.Location = New System.Drawing.Point(468, 81)
+        Me.LblUSD.Location = New System.Drawing.Point(183, 81)
         Me.LblUSD.Name = "LblUSD"
         Me.LblUSD.Size = New System.Drawing.Size(31, 15)
         Me.LblUSD.TabIndex = 337
@@ -207,7 +207,7 @@ Partial Class ExchangeRate
         Me.LblIDR2.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.LblIDR2.AutoSize = True
         Me.LblIDR2.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblIDR2.Location = New System.Drawing.Point(205, 81)
+        Me.LblIDR2.Location = New System.Drawing.Point(465, 81)
         Me.LblIDR2.Name = "LblIDR2"
         Me.LblIDR2.Size = New System.Drawing.Size(31, 15)
         Me.LblIDR2.TabIndex = 339
@@ -219,7 +219,7 @@ Partial Class ExchangeRate
         Me.TxtBaseCurrency2.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtBaseCurrency2.Location = New System.Drawing.Point(3, 77)
         Me.TxtBaseCurrency2.Name = "TxtBaseCurrency2"
-        Me.TxtBaseCurrency2.Size = New System.Drawing.Size(172, 22)
+        Me.TxtBaseCurrency2.Size = New System.Drawing.Size(130, 22)
         Me.TxtBaseCurrency2.TabIndex = 3
         '
         'NudForeignCurrency1
@@ -227,9 +227,9 @@ Partial Class ExchangeRate
         Me.NudForeignCurrency1.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.NudForeignCurrency1.AutoSize = True
         Me.NudForeignCurrency1.DecimalPlaces = 10
-        Me.NudForeignCurrency1.Location = New System.Drawing.Point(266, 43)
+        Me.NudForeignCurrency1.Location = New System.Drawing.Point(264, 43)
         Me.NudForeignCurrency1.Name = "NudForeignCurrency1"
-        Me.NudForeignCurrency1.Size = New System.Drawing.Size(172, 19)
+        Me.NudForeignCurrency1.Size = New System.Drawing.Size(171, 19)
         Me.NudForeignCurrency1.TabIndex = 2
         '
         'NudForeignCurrency2
@@ -237,9 +237,9 @@ Partial Class ExchangeRate
         Me.NudForeignCurrency2.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.NudForeignCurrency2.AutoSize = True
         Me.NudForeignCurrency2.DecimalPlaces = 10
-        Me.NudForeignCurrency2.Location = New System.Drawing.Point(266, 79)
+        Me.NudForeignCurrency2.Location = New System.Drawing.Point(264, 79)
         Me.NudForeignCurrency2.Name = "NudForeignCurrency2"
-        Me.NudForeignCurrency2.Size = New System.Drawing.Size(172, 19)
+        Me.NudForeignCurrency2.Size = New System.Drawing.Size(171, 19)
         Me.NudForeignCurrency2.TabIndex = 4
         '
         'TxtForeignCurrency1
