@@ -216,6 +216,8 @@ Public Class Ordering
 
         createWarehouseCombobox() '倉庫コンボボックス
 
+        Call setBaseCurrency()
+
         '翻訳
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
             LblPurchaseNo.Text = "PurchaseOrderNo"
@@ -294,7 +296,7 @@ Public Class Ordering
             DgvItemList.Columns("数量").HeaderText = "Quantity"
             DgvItemList.Columns("単位").HeaderText = "Unit"
             DgvItemList.Columns("仕入単価").HeaderText = "PurchaseUnitPrice"
-            DgvItemList.Columns("仕入単価_外貨").HeaderText = "PurchaseUnitPriceForeignCurrency"
+            DgvItemList.Columns("仕入単価_外貨").HeaderText = "PurchaseUnitPrice" & vbCrLf & "(" & TxtIDRCurrency.Text & ")"
             DgvItemList.Columns("仕入金額").HeaderText = "PurchaseAmount"
             DgvItemList.Columns("仕入金額_外貨").HeaderText = "PurchaseAmountForeignCurrency"
             DgvItemList.Columns("仕入原価").HeaderText = "PurchasingCost"
@@ -308,6 +310,8 @@ Public Class Ordering
             DgvItemList.Columns("リードタイム単位").HeaderText = "LeadTimeUnit"
             DgvItemList.Columns("貿易条件").HeaderText = "TradeTerms"
             DgvItemList.Columns("備考").HeaderText = "Remarks"
+        Else
+            DgvItemList.Columns("仕入単価_外貨").HeaderText = "仕入単価" & vbCrLf & "(" & TxtIDRCurrency.Text & ")"
         End If
 
         '検索（Date）の初期値
@@ -791,11 +795,11 @@ Public Class Ordering
                             If TxtRate.Text <> "" Then
                                 Dim tmpCur As Decimal = DgvItemList.Rows(e.RowIndex).Cells("仕入単価").Value
                                 DgvItemList("仕入単価", e.RowIndex).Value = tmpCur
-                                DgvItemList.Rows(e.RowIndex).Cells("仕入単価_外貨").Value = Math.Ceiling(DgvItemList.Rows(e.RowIndex).Cells("仕入単価").Value * TxtRate.Text)
+                                DgvItemList.Rows(e.RowIndex).Cells("仕入単価_外貨").Value = Math.Ceiling(DgvItemList.Rows(e.RowIndex).Cells("仕入単価").Value / TxtRate.Text)
                             End If
                         Case "仕入単価_外貨"
                             If DgvItemList("仕入単価_外貨", e.RowIndex).Value IsNot Nothing Then
-                                DgvItemList("仕入単価", e.RowIndex).Value = Math.Ceiling(DgvItemList("仕入単価_外貨", e.RowIndex).Value / TxtRate.Text)
+                                DgvItemList("仕入単価", e.RowIndex).Value = Math.Ceiling(DgvItemList("仕入単価_外貨", e.RowIndex).Value * TxtRate.Text)
                             End If
                     End Select
 
@@ -839,7 +843,7 @@ Public Class Ordering
 
                 If currentColumn = "仕入単価" Then
                     '仕入単価_外貨
-                    DgvItemList("仕入単価_外貨", e.RowIndex).Value = Math.Ceiling(DgvItemList("仕入単価", e.RowIndex).Value * TxtRate.Text)
+                    DgvItemList("仕入単価_外貨", e.RowIndex).Value = Math.Ceiling(DgvItemList("仕入単価", e.RowIndex).Value / TxtRate.Text)
                 End If
 
             End If
@@ -2073,7 +2077,7 @@ Public Class Ordering
             For i As Integer = 0 To DgvItemList.Rows.Count - 1
                 delCellValueChanged()
                 If TxtRate.Text <> "" And DgvItemList.Rows(i).Cells("仕入単価").Value IsNot Nothing Then
-                    DgvItemList.Rows(i).Cells("仕入単価_外貨").Value = Math.Ceiling(DgvItemList.Rows(i).Cells("仕入単価").Value * TxtRate.Text)
+                    DgvItemList.Rows(i).Cells("仕入単価_外貨").Value = Math.Ceiling(DgvItemList.Rows(i).Cells("仕入単価").Value / TxtRate.Text)
                 End If
                 If DgvItemList.Rows(i).Cells("仕入単価_外貨").Value IsNot Nothing And DgvItemList.Rows(i).Cells("数量").Value IsNot Nothing Then
                     DgvItemList.Rows(i).Cells("仕入金額_外貨").Value = (DgvItemList.Rows(i).Cells("仕入単価_外貨").Value + (DgvItemList.Rows(i).Cells("関税額").Value + DgvItemList.Rows(i).Cells("前払法人税額").Value + DgvItemList.Rows(i).Cells("輸送費額").Value)) * DgvItemList.Rows(i).Cells("数量").Value

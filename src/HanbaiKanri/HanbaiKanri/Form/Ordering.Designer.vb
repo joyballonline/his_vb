@@ -1040,13 +1040,14 @@ Partial Class Ordering
         '
         '仕入単価_外貨
         '
+        Me.仕入単価_外貨.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
         DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         DataGridViewCellStyle7.Format = "N0"
         Me.仕入単価_外貨.DefaultCellStyle = DataGridViewCellStyle7
         Me.仕入単価_外貨.HeaderText = "仕入単価（外貨）"
         Me.仕入単価_外貨.MaxInputLength = 15
         Me.仕入単価_外貨.Name = "仕入単価_外貨"
-        Me.仕入単価_外貨.Width = 80
+        Me.仕入単価_外貨.Width = 107
         '
         '仕入原価
         '
