@@ -99,7 +99,6 @@ Partial Class CustomerSearch
         '
         Me.Dgv_Customer.AllowUserToAddRows = False
         Me.Dgv_Customer.AllowUserToDeleteRows = False
-        Me.Dgv_Customer.AllowUserToResizeColumns = False
         Me.Dgv_Customer.AllowUserToResizeRows = False
         Me.Dgv_Customer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.Dgv_Customer.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.得意先コード, Me.得意先名, Me.得意先名略称, Me.郵便番号, Me.住所１, Me.住所２, Me.住所３, Me.電話番号, Me.電話番号検索用, Me.FAX番号, Me.担当者名, Me.担当者役職, Me.既定支払条件, Me.メモ, Me.更新者, Me.更新日})
