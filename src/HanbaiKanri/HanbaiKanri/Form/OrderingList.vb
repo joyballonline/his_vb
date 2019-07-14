@@ -232,7 +232,7 @@ Public Class OrderingList
                 If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                     DgvHtyhd.Columns.Add("取消", "Cancel")
                     DgvHtyhd.Columns.Add("発注番号", "PurchaseNumber")
-                    DgvHtyhd.Columns.Add("発注番号枝番", "PurchaseOrderSubNumber")
+                    DgvHtyhd.Columns.Add("発注番号枝番", "PurchaseOrderVer.")
                     DgvHtyhd.Columns.Add("客先番号", "CustomerNumber")
                     DgvHtyhd.Columns.Add("発注日", "PurchaseDate")
                     DgvHtyhd.Columns.Add("得意先名", "CustomerName")
@@ -257,7 +257,7 @@ Public Class OrderingList
                 Else
                     DgvHtyhd.Columns.Add("取消", "取消")
                     DgvHtyhd.Columns.Add("発注番号", "発注番号")
-                    DgvHtyhd.Columns.Add("発注番号枝番", "発注番号枝番")
+                    DgvHtyhd.Columns.Add("発注番号枝番", "発注Ver.")
                     DgvHtyhd.Columns.Add("客先番号", "客先番号")
                     DgvHtyhd.Columns.Add("発注日", "発注日")
                     DgvHtyhd.Columns.Add("得意先名", "得意先名")
