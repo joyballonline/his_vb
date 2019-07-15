@@ -306,8 +306,6 @@ Public Class PaidList
 
                 Sql += viewSearchConditions() '抽出条件取得
 
-                Sql += " GROUP BY "
-                Sql += " t49.会社コード, t49.支払番号, t49.買掛番号, t49.支払日"
                 Sql += " ORDER BY "
                 Sql += "t49.更新日 DESC, t49.支払番号"
 
