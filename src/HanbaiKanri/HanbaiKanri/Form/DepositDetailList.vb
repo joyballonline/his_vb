@@ -316,8 +316,6 @@ Public Class DepositDetailList
 
                 Sql += viewSearchConditions() '抽出条件取得
 
-                Sql += " GROUP BY "
-                Sql += " t27.会社コード, t27.入金番号, t27.請求番号, t27.入金日, t27.更新日"
                 Sql += " ORDER BY "
                 Sql += "t27.更新日 DESC"
 
