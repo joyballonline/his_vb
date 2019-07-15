@@ -139,8 +139,6 @@ Public Class PurchaseList
 
                 Sql += viewSearchConditions() '検索条件
 
-                Sql += " GROUP BY "
-                Sql += " t41.会社コード, t41.仕入番号, t41.行番号"
                 Sql += " ORDER BY "
                 Sql += "t41.更新日 DESC"
 
