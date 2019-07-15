@@ -101,7 +101,6 @@ Public Class ExchangeRate
 
             LblStandardDate.Text = "StandardDate"
             LblBaseCurrency.Text = "BaseCurrency"
-            LblForeignCurrency.Text = "ForeignCurrency"
             LblRate.Text = "Rate"
 
             BtnRegistration.Text = "Registration"
@@ -135,7 +134,7 @@ Public Class ExchangeRate
 
         If ds.Tables(RS).Rows.Count > 0 Then
             LblJPY.Text = ds.Tables(RS).Rows(0)("通貨コード") & "     = "
-            TxtRate1.Tag = ds.Tables(RS).Rows(0)("採番キー")
+            NudForeignCurrency1.Tag = ds.Tables(RS).Rows(0)("採番キー")
         Else
             '操作できないアラートを出す
             _msgHd.dspMSG("chkCurrencyError", frmC01F10_Login.loginValue.Language)
@@ -151,7 +150,7 @@ Public Class ExchangeRate
 
         If ds.Tables(RS).Rows.Count > 0 Then
             LblUSD.Text = ds.Tables(RS).Rows(0)("通貨コード") & "     = "
-            TxtRate2.Tag = ds.Tables(RS).Rows(0)("採番キー")
+            NudForeignCurrency2.Tag = ds.Tables(RS).Rows(0)("採番キー")
         Else
             '操作できないアラートを出す
             _msgHd.dspMSG("chkCurrencyError", frmC01F10_Login.loginValue.Language)
@@ -169,7 +168,7 @@ Public Class ExchangeRate
     '登録ボタン押下時
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles BtnRegistration.Click
 
-        If TxtBaseCurrency1.Text = "" Or NudForeignCurrency1.Text = "" Or TxtBaseCurrency2.Text = "" Or NudForeignCurrency2.Text = "" Then
+        If lblBaseCurrency1.Text = "" Or NudForeignCurrency1.Text = "" Or lblBaseCurrency2.Text = "" Or NudForeignCurrency2.Text = "" Then
             '登録できないアラートを出す
             _msgHd.dspMSG("chkInputError", frmC01F10_Login.loginValue.Language)
             Exit Sub
@@ -191,9 +190,9 @@ Public Class ExchangeRate
             Sql += "', '"
             Sql += UtilClass.strFormatDate(DtpStandardDate.Text) '基準日
             Sql += "', "
-            Sql += TxtRate1.Tag.ToString '採番キー
+            Sql += NudForeignCurrency1.Tag.ToString '採番キー
             Sql += ", '"
-            Sql += UtilClass.formatNumberF10(TxtRate1.Text) 'レート
+            Sql += UtilClass.formatNumberF10(NudForeignCurrency1.Text) 'レート
             Sql += "', '"
             Sql += frmC01F10_Login.loginValue.TantoNM
             Sql += "', '"
@@ -211,9 +210,9 @@ Public Class ExchangeRate
             Sql += "', '"
             Sql += UtilClass.strFormatDate(DtpStandardDate.Text) '基準日
             Sql += "', "
-            Sql += TxtRate2.Tag.ToString '採番キー
+            Sql += NudForeignCurrency2.Tag.ToString '採番キー
             Sql += ", '"
-            Sql += UtilClass.formatNumberF10(TxtRate2.Text) 'レート
+            Sql += UtilClass.formatNumberF10(NudForeignCurrency2.Text) 'レート
             Sql += "', '"
             Sql += frmC01F10_Login.loginValue.TantoNM
             Sql += "', '"
@@ -257,49 +256,49 @@ Public Class ExchangeRate
     End Function
 
     'IDR → JPY
-    Private Sub TxtBaseCurrency1_Validated(sender As Object, e As EventArgs) Handles TxtBaseCurrency1.Validated
+    Private Sub lblBaseCurrency1_Validated(sender As Object, e As EventArgs)
         If TxtForeignCurrency1.Text <> "" And NudForeignCurrency1.Value > 0 Then
-            'Dim rateVal As Decimal = TxtBaseCurrency1.Text / NudForeignCurrency1.Value
-            Dim rateVal As Decimal = Decimal.Parse(NudForeignCurrency1.Value) / Decimal.Parse(TxtBaseCurrency1.Text)
-            TxtRate1.Text = rateVal.ToString("F10")
+            'Dim rateVal As Decimal = lblBaseCurrency1.Text / NudForeignCurrency1.Value
+            Dim rateVal As Decimal = Decimal.Parse(NudForeignCurrency1.Value) / Decimal.Parse(lblBaseCurrency1.Text)
+            NudForeignCurrency1.Text = rateVal.ToString("F10")
         End If
 
     End Sub
 
     Private Sub TxtForeignCurrency1_Validated(sender As Object, e As EventArgs) Handles TxtForeignCurrency1.Validated
-        'If TxtBaseCurrency1.Text <> "" And TxtForeignCurrency1.Text <> "" Then
-        '    Dim rateVal As Decimal = TxtBaseCurrency1.Text / TxtForeignCurrency1.Text
+        'If lblBaseCurrency1.Text <> "" And TxtForeignCurrency1.Text <> "" Then
+        '    Dim rateVal As Decimal = lblBaseCurrency1.Text / TxtForeignCurrency1.Text
         '    TxtRate1.Text = rateVal.ToString("F10")
         'End If
     End Sub
 
     Private Sub NudForeignCurrency1_Validated(sender As Object, e As EventArgs) Handles NudForeignCurrency1.Validated
-        If TxtBaseCurrency1.Text <> "" And NudForeignCurrency1.Value > 0 Then
-            Dim rateVal As Decimal = Decimal.Parse(NudForeignCurrency1.Value) / Decimal.Parse(TxtBaseCurrency1.Text)
-            TxtRate1.Text = rateVal.ToString("F10")
+        If lblBaseCurrency1.Text <> "" And NudForeignCurrency1.Value > 0 Then
+            Dim rateVal As Decimal = Decimal.Parse(NudForeignCurrency1.Value) / Decimal.Parse(lblBaseCurrency1.Text)
+            NudForeignCurrency1.Text = rateVal.ToString("F10")
         End If
     End Sub
 
     'IDR → USD
-    Private Sub TxtBaseCurrency2_Validated(sender As Object, e As EventArgs) Handles TxtBaseCurrency2.Validated
-        If TxtBaseCurrency2.Text <> "" And NudForeignCurrency2.Value > 0 Then
-            'Dim rateVal As Decimal = Decimal.Parse(TxtBaseCurrency2.Text) / Decimal.Parse(UtilClass.formatNumberF10(NudForeignCurrency2.Value))
-            Dim rateVal As Decimal = Decimal.Parse(NudForeignCurrency2.Value) / Decimal.Parse(TxtBaseCurrency2.Text)
-            TxtRate2.Text = rateVal.ToString("F10")
+    Private Sub lblBaseCurrency2_Validated(sender As Object, e As EventArgs)
+        If lblBaseCurrency2.Text <> "" And NudForeignCurrency2.Value > 0 Then
+            'Dim rateVal As Decimal = Decimal.Parse(lblBaseCurrency2.Text) / Decimal.Parse(UtilClass.formatNumberF10(NudForeignCurrency2.Value))
+            Dim rateVal As Decimal = Decimal.Parse(NudForeignCurrency2.Value) / Decimal.Parse(lblBaseCurrency2.Text)
+            NudForeignCurrency2.Text = rateVal.ToString("F10")
         End If
     End Sub
 
     Private Sub TxtForeignCurrency2_Validated(sender As Object, e As EventArgs) Handles TxtForeignCurrency2.Validated
-        'If TxtBaseCurrency2.Text <> "" And NudForeignCurrency2.Value <> 0 Then
-        '    Dim rateVal As Decimal = TxtBaseCurrency2.Text / TxtForeignCurrency2.Text
+        'If lblBaseCurrency2.Text <> "" And NudForeignCurrency2.Value <> 0 Then
+        '    Dim rateVal As Decimal = lblBaseCurrency2.Text / TxtForeignCurrency2.Text
         '    TxtRate2.Text = rateVal.ToString("F10")
         'End If
     End Sub
 
     Private Sub NudForeignCurrency2_Validated(sender As Object, e As EventArgs) Handles NudForeignCurrency2.Validated
-        If TxtBaseCurrency2.Text <> "" And NudForeignCurrency2.Value > 0 Then
-            Dim rateVal As Decimal = Decimal.Parse(NudForeignCurrency2.Value) / Decimal.Parse(TxtBaseCurrency2.Text)
-            TxtRate2.Text = rateVal.ToString("F10")
+        If lblBaseCurrency2.Text <> "" And NudForeignCurrency2.Value > 0 Then
+            Dim rateVal As Decimal = Decimal.Parse(NudForeignCurrency2.Value) / Decimal.Parse(lblBaseCurrency2.Text)
+            NudForeignCurrency2.Text = rateVal.ToString("F10")
         End If
     End Sub
 
