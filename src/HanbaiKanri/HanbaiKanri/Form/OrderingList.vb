@@ -201,6 +201,11 @@ Public Class OrderingList
 
             '伝票単位
             If RbtnSlip.Checked Then
+                '発注基本に１レコードも存在しない時
+                'Sql += " t20.*"
+                'Sql += " GROUP BY "
+                'Sql += " t20.会社コード, t20.発注番号, t20.発注番号枝番"
+                'この辺りの記述が引っかかる。
 
                 '発注基本を取得
                 Sql = "SELECT"
