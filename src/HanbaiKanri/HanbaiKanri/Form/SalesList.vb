@@ -100,22 +100,11 @@ Public Class SalesList
                 Sql += " FROM "
                 Sql += " public.t30_urighd t30 "
 
-                Sql += " INNER JOIN "
-                Sql += " t31_urigdt t31"
-                Sql += " ON "
-                Sql += " t30.会社コード = t31.会社コード"
-                Sql += " AND "
-                Sql += " t30.売上番号 = t31.売上番号"
-                Sql += " AND "
-                Sql += " t30.売上番号枝番 = t31.売上番号枝番"
-
                 Sql += " WHERE "
                 Sql += " t30.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
 
                 Sql += viewSearchConditions() '検索条件
 
-                Sql += " GROUP BY "
-                Sql += " t30.会社コード, t30.売上番号, t30.売上番号枝番"
                 Sql += " ORDER BY "
                 Sql += "t30.更新日 DESC"
 
