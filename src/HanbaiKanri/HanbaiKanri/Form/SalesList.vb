@@ -173,8 +173,6 @@ Public Class SalesList
 
                 Sql += viewSearchConditions() '検索条件
 
-                Sql += " GROUP BY "
-                Sql += " t31.会社コード, t31.売上番号, t31.売上番号枝番, t31.行番号, t30.受注番号, t30.受注番号枝番, t30.取消区分, t30.更新日"
                 Sql += " ORDER BY "
                 Sql += "t30.更新日 DESC"
 
