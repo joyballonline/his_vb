@@ -196,43 +196,12 @@ Public Class OrderingList
         Dim curds As DataSet  'm25_currency
         Dim cur As String
 
+        Dim strBaseCur = setBaseCurrency()
 
         Try
 
             '伝票単位
             If RbtnSlip.Checked Then
-                '発注基本に１レコードも存在しない時
-                'Sql += " t20.*"
-                'Sql += " GROUP BY "
-                'Sql += " t20.会社コード, t20.発注番号, t20.発注番号枝番"
-                'この辺りの記述が引っかかる。
-
-                '発注基本を取得
-                Sql = "SELECT"
-                Sql += " t20.*"
-                Sql += " FROM "
-                Sql += " public.t20_hattyu t20 "
-
-                Sql += " INNER JOIN "
-                Sql += " t21_hattyu t21"
-                Sql += " ON "
-                Sql += " t20.会社コード = t21.会社コード "
-                Sql += " AND "
-                Sql += " t20.発注番号 = t21.発注番号"
-                Sql += " AND "
-                Sql += " t20.発注番号枝番 = t21.発注番号枝番"
-
-                Sql += " WHERE "
-                Sql += " t20.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
-
-                Sql += viewSearchConditions() '抽出条件取得
-
-                Sql += " GROUP BY "
-                Sql += " t20.会社コード, t20.発注番号, t20.発注番号枝番"
-                Sql += " ORDER BY "
-                Sql += "t20.更新日 DESC, t20.発注番号, t20.発注番号枝番"
-
-                ds = _db.selectDB(Sql, RS, reccnt)
 
                 If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                     DgvHtyhd.Columns.Add("取消", "Cancel")
@@ -286,6 +255,39 @@ Public Class OrderingList
                     DgvHtyhd.Columns.Add("更新日", "更新日")
                 End If
 
+                '発注基本を取得
+                Sql = "SELECT count(*) as 件数"
+                Sql += " FROM "
+                Sql += " public.t20_hattyu t20 "
+
+                Sql += " WHERE "
+                Sql += " t20.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
+
+                Sql += viewSearchConditions() '抽出条件取得
+
+                ds = _db.selectDB(Sql, RS, reccnt)
+
+                If ds.Tables(RS).Rows(0)("件数") = 0 Then
+                    Exit Sub
+                End If
+
+                '発注基本を取得
+                Sql = "SELECT"
+                Sql += " t20.*"
+                Sql += " FROM "
+                Sql += " public.t20_hattyu t20 "
+
+                Sql += " WHERE "
+                Sql += " t20.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
+
+                Sql += viewSearchConditions() '抽出条件取得
+
+                Sql += " ORDER BY "
+                Sql += "t20.更新日 DESC, t20.発注番号, t20.発注番号枝番"
+
+                ds = _db.selectDB(Sql, RS, reccnt)
+
+
                 '伝票単位時のセル書式
                 DgvHtyhd.Columns("仕入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
@@ -317,7 +319,7 @@ Public Class OrderingList
                     DgvHtyhd.Rows(i).Cells("仕入先担当者役職").Value = ds.Tables(RS).Rows(i)("仕入先担当者役職")
                     DgvHtyhd.Rows(i).Cells("通貨_外貨").Value = cur
                     DgvHtyhd.Rows(i).Cells("仕入金額_外貨").Value = ds.Tables(RS).Rows(i)("仕入金額_外貨")
-                    DgvHtyhd.Rows(i).Cells("通貨").Value = "IDR"
+                    DgvHtyhd.Rows(i).Cells("通貨").Value = strBaseCur  '基準通貨
                     DgvHtyhd.Rows(i).Cells("仕入金額").Value = ds.Tables(RS).Rows(i)("仕入金額")
                     DgvHtyhd.Rows(i).Cells("支払条件").Value = ds.Tables(RS).Rows(i)("支払条件")
                     DgvHtyhd.Rows(i).Cells("営業担当者").Value = ds.Tables(RS).Rows(i)("営業担当者")
@@ -959,4 +961,17 @@ Public Class OrderingList
         '一覧再表示
         getList()
     End Sub
+
+    '基準通貨の取得
+    Private Function setBaseCurrency() As String
+        Dim Sql As String
+        '通貨表示：ベースの設定
+        Sql = " AND 採番キー = " & CommonConst.CURRENCY_CD_IDR.ToString
+        Sql += " AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
+
+        Dim ds As DataSet = getDsData("m25_currency", Sql)
+        setBaseCurrency = ds.Tables(RS).Rows(0)("通貨コード")
+
+    End Function
+
 End Class
