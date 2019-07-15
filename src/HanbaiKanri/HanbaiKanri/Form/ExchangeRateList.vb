@@ -119,7 +119,7 @@ Public Class ExchangeRateList
         Try
 
             Sql = "SELECT"
-            Sql += " t71.*, m25.通貨コード"
+            Sql += " t71.会社コード, t71.基準日, t71.採番キー, m25.通貨コード , m25.通貨コード"
             Sql += " FROM "
             Sql += " public.t71_exchangerate t71 "
 
