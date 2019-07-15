@@ -151,8 +151,13 @@ Public Class DepositDetailList
             If RbtnSlip.Checked Then
 
                 Sql = " SELECT "
-                Sql += " m01.銀行コード , m01.銀行名 , m01.支店名, m01.預金種目 , m01.口座番号, m01.口座名義 "
-                Sql += " , t25.* "
+                Sql += " t25.通貨,t25.入金番号,t25.入金日,t25.請求先名,t25.振込先"
+                Sql += ",t25.入金額計_外貨,t25.入金額,t25.更新日,t25.備考"
+                Sql += ",t25.更新日,t25.備考"
+                Sql += ",t10.取消区分"
+                Sql += ",m01.銀行コード , m01.銀行名 , m01.支店名, m01.預金種目 , m01.口座番号, m01.口座名義 "
+
+
                 Sql += " FROM t25_nkinhd t25 "
 
                 Sql += " INNER JOIN m01_company m01 "
@@ -191,7 +196,12 @@ Public Class DepositDetailList
                 Sql += viewSearchConditions() '抽出条件取得
 
                 Sql += " GROUP BY "
-                Sql += " t25.会社コード, t25.入金番号, m01.銀行コード , m01.銀行名 , m01.支店名, m01.預金種目 , m01.口座番号, m01.口座名義, t25.更新日"
+                Sql += " t25.通貨,t25.入金番号,t25.入金日,t25.請求先名,t25.振込先"
+                Sql += ",t25.入金額計_外貨,t25.入金額,t25.更新日,t25.備考"
+                Sql += ",t25.更新日,t25.備考"
+                Sql += ",t10.取消区分"
+                Sql += ",m01.銀行コード , m01.銀行名 , m01.支店名, m01.預金種目 , m01.口座番号, m01.口座名義 "
+
                 Sql += " ORDER BY "
                 Sql += "t25.更新日 DESC"
 
