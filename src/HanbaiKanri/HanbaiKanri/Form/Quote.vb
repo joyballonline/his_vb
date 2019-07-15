@@ -96,6 +96,9 @@ Public Class Quote
 
         delCellValueChanged()   'セル変更イベントを無効化
 
+        '仕入単価(基準通貨)の制御
+        DgvItemList.Columns("仕入単価").ReadOnly = True
+        DgvItemList.Columns("仕入単価").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
         '仕入原価の制御
         DgvItemList.Columns("仕入原価").ReadOnly = True
         DgvItemList.Columns("仕入原価").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
@@ -108,6 +111,9 @@ Public Class Quote
         '輸送費額の制御
         DgvItemList.Columns("輸送費額").ReadOnly = True
         DgvItemList.Columns("輸送費額").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
+
+        'ヘッダ項目を中央寄せ
+        DgvItemList.Columns("仕入単価").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
         'セルの内容に合わせて、行の高さが自動的に調節されるようにする
         DgvItemList.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
@@ -239,9 +245,11 @@ Public Class Quote
             DgvItemList.Columns("単位").HeaderText = "Unit"
             DgvItemList.Columns("仕入先コード").HeaderText = "SupplierCode"
             DgvItemList.Columns("仕入先").HeaderText = "SupplierName"
-            DgvItemList.Columns("仕入単価").HeaderText = "PurchaseUnitPrice:b"
             DgvItemList.Columns("仕入通貨").HeaderText = "PurchaseCurrency"
-            DgvItemList.Columns("仕入単価_外貨").HeaderText = "PurchaseUnitPrice" & vbCrLf & "(" & TxtIDRCurrency.Text & ")"
+
+            DgvItemList.Columns("仕入単価_外貨").HeaderText = "PurchaseUnitPrice:b"
+            DgvItemList.Columns("仕入単価").HeaderText = "PurchaseUnitPrice" & vbCrLf & "(" & TxtIDRCurrency.Text & ")"
+
             DgvItemList.Columns("仕入原価").HeaderText = "PurchasingCost:c=a*b"
             DgvItemList.Columns("関税率").HeaderText = "CustomsDutyRate:d"
             DgvItemList.Columns("関税額").HeaderText = "CustomsDuty:e=b*d"
@@ -264,8 +272,10 @@ Public Class Quote
         Else
             '日本語用見出し
             DgvItemList.Columns("数量").HeaderText = "数量:a"
-            DgvItemList.Columns("仕入単価").HeaderText = "仕入単価:b"
-            DgvItemList.Columns("仕入単価_外貨").HeaderText = "仕入単価" & vbCrLf & "(" & TxtIDRCurrency.Text & ")"
+
+            DgvItemList.Columns("仕入単価_外貨").HeaderText = "仕入単価:b"
+            DgvItemList.Columns("仕入単価").HeaderText = "仕入単価" & vbCrLf & "(" & TxtIDRCurrency.Text & ")"
+
             DgvItemList.Columns("仕入原価").HeaderText = "仕入原価:c=a*b"
             DgvItemList.Columns("関税率").HeaderText = "関税率:d"
             DgvItemList.Columns("関税額").HeaderText = "関税額:e=b*d"
@@ -280,6 +290,10 @@ Public Class Quote
             DgvItemList.Columns("見積金額").HeaderText = "見積金額:n=m*a"
             DgvItemList.Columns("粗利額").HeaderText = "粗利額:o=(k-b)*a"
             DgvItemList.Columns("粗利率").HeaderText = "粗利率(%):p=(1-(b/k))*100"
+
+
+            DgvItemList.Columns("見積単価_外貨").HeaderText = "見積単価" & vbCrLf & "（外貨）"
+            DgvItemList.Columns("見積金額_外貨").HeaderText = "見積金額" & vbCrLf & "（外貨）"
 
         End If
 
@@ -914,7 +928,7 @@ Public Class Quote
                     Select Case currentColumn
                         Case "仕入通貨"
                             If DgvItemList("仕入単価", e.RowIndex).Value IsNot Nothing And DgvItemList("仕入レート", e.RowIndex).Value IsNot Nothing Then
-                                DgvItemList("仕入単価_外貨", e.RowIndex).Value = Math.Ceiling(DgvItemList("仕入単価", e.RowIndex).Value / DgvItemList("仕入レート", e.RowIndex).Value)
+                                DgvItemList("仕入単価", e.RowIndex).Value = Math.Ceiling(DgvItemList("仕入単価_外貨", e.RowIndex).Value / DgvItemList("仕入レート", e.RowIndex).Value)
                             End If
                         Case "仕入単価"
                             If DgvItemList("仕入レート", e.RowIndex).Value IsNot Nothing Then
@@ -924,7 +938,7 @@ Public Class Quote
                             End If
                         Case "仕入単価_外貨"
                             If DgvItemList("仕入単価_外貨", e.RowIndex).Value IsNot Nothing And DgvItemList("仕入レート", e.RowIndex).Value IsNot Nothing Then
-                                DgvItemList("仕入単価", e.RowIndex).Value = Math.Ceiling(DgvItemList("仕入単価_外貨", e.RowIndex).Value * DgvItemList("仕入レート", e.RowIndex).Value)
+                                DgvItemList("仕入単価", e.RowIndex).Value = Math.Ceiling(DgvItemList("仕入単価_外貨", e.RowIndex).Value / DgvItemList("仕入レート", e.RowIndex).Value)
                             End If
                     End Select
 
@@ -1036,8 +1050,13 @@ Public Class Quote
                                 DgvItemList.Rows(e.RowIndex).Cells("売単価").Value = Math.Ceiling(DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value / tmp3)
                                 DgvItemList.Rows(e.RowIndex).Cells("売上金額").Value = DgvItemList.Rows(e.RowIndex).Cells("売単価").Value * DgvItemList.Rows(e.RowIndex).Cells("数量").Value
                                 DgvItemList.Rows(e.RowIndex).Cells("粗利額").Value = DgvItemList.Rows(e.RowIndex).Cells("売上金額").Value - DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value
-                            End If
 
+                                DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value = Math.Ceiling(
+                                                                                       Decimal.Parse(
+                                                                                       DgvItemList.Rows(e.RowIndex).Cells("売単価").Value + DgvItemList.Rows(e.RowIndex).Cells("関税額").Value + DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value + DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value))
+                                DgvItemList.Rows(e.RowIndex).Cells("見積単価_外貨").Value = Math.Ceiling(DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value * TxtRate.Text)
+
+                            End If
                         End If
 
                     Else
