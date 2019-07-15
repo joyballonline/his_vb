@@ -230,17 +230,10 @@ Public Class OrderList
                     Sql = " SELECT t10.* "
                     Sql += " FROM t10_cymnhd t10 "
 
-                    Sql += " LEFT JOIN t11_cymndt t11 "
-                    Sql += " ON t10.会社コード = t11.会社コード "
-                    Sql += " AND t10.受注番号 = t11.受注番号 "
-                    Sql += " AND t10.受注番号枝番 = t11.受注番号枝番 "
-
                     Sql += " WHERE t10.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "' "
 
                     Sql += viewSearchConditions() '検索条件
 
-                    Sql += " GROUP BY "
-                    Sql += " t10.会社コード, t10.受注番号, t10.受注番号枝番"
                     Sql += " ORDER BY "
                     Sql += " t10.登録日 DESC"
 
