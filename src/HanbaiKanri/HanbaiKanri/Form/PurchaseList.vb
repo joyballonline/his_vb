@@ -91,15 +91,11 @@ Public Class PurchaseList
             If RbtnSlip.Checked Then
 
                 Sql = "SELECT t40.* FROM  public.t40_sirehd t40 "
-                Sql += " INNER JOIN  t41_siredt t41 "
-                Sql += " ON t40.会社コード = t41.会社コード"
-                Sql += " AND  t40.仕入番号 = t41.仕入番号"
+
                 Sql += " WHERE t40.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
 
                 Sql += viewSearchConditions() '検索条件
 
-                Sql += " GROUP BY "
-                Sql += " t40.会社コード, t40.仕入番号"
                 Sql += " ORDER BY "
                 Sql += " t40.更新日 DESC"
 
