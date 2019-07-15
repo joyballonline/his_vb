@@ -156,22 +156,11 @@ Public Class BillingList
             Sql += " AND "
             Sql += " t10.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '受注取消されていないデータ
 
-            Sql += " INNER JOIN "
-            Sql += " t11_cymndt t11"
-            Sql += " ON "
-            Sql += " t10.会社コード = t11.会社コード"
-            Sql += " AND "
-            Sql += " t10.受注番号 = t11.受注番号"
-            Sql += " AND "
-            Sql += " t10.受注番号枝番 = t11.受注番号枝番"
-
             Sql += " WHERE "
             Sql += " t23.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
 
             Sql += viewSearchConditions() '抽出条件取得
 
-            Sql += " GROUP BY "
-            Sql += " t23.会社コード, t23.請求番号, t23.受注番号, t23.受注番号枝番"
             Sql += " ORDER BY "
             Sql += " t23.更新日 DESC"
 
