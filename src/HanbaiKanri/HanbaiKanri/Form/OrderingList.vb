@@ -365,8 +365,6 @@ Public Class OrderingList
 
                 Sql += viewSearchConditions() '抽出条件取得
 
-                Sql += " GROUP BY "
-                Sql += " t21.会社コード, t21.発注番号, t21.発注番号枝番, t21.行番号, t20.取消区分"
                 Sql += " ORDER BY "
                 Sql += "t21.更新日 DESC, t21.発注番号, t21.発注番号枝番, t21.行番号"
 
