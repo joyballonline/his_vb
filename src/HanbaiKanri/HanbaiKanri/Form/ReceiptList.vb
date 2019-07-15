@@ -310,8 +310,6 @@ Public Class ReceiptList
 
                 Sql += viewSearchConditions() '抽出条件取得
 
-                Sql += " GROUP BY "
-                Sql += " t43.会社コード, t43.入庫番号, t43.行番号, t42.取消区分"
                 Sql += " ORDER BY "
                 Sql += "t43.更新日 DESC, t43.入庫番号, t43.行番号"
 
