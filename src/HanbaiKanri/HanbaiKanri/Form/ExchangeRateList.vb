@@ -119,7 +119,8 @@ Public Class ExchangeRateList
         Try
 
             Sql = "SELECT"
-            Sql += " t71.会社コード, t71.基準日, t71.採番キー, m25.通貨コード , m25.通貨コード"
+            Sql += " t71.会社コード, t71.基準日, t71.採番キー,t71.レート,t71.更新者,t71.更新日 "
+            Sql += ",m25.通貨コード"
             Sql += " FROM "
             Sql += " public.t71_exchangerate t71 "
 
@@ -135,7 +136,8 @@ Public Class ExchangeRateList
             Sql += viewSearchConditions() '抽出条件取得
 
             Sql += " GROUP BY "
-            Sql += " t71.会社コード, t71.基準日, t71.採番キー, m25.通貨コード"
+            Sql += " t71.会社コード, t71.基準日, t71.採番キー,t71.レート,t71.更新者,t71.更新日 "
+            Sql += ",m25.通貨コード"
             Sql += " ORDER BY "
             Sql += "t71.基準日 DESC, t71.採番キー"
 
