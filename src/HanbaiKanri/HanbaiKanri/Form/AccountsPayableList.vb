@@ -171,22 +171,11 @@ Public Class AccountsPayableList
             Sql += " AND "
             Sql += " t20.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '発注取消されていないデータ
 
-            Sql += " INNER JOIN "
-            Sql += " t21_hattyu t21"
-            Sql += " ON "
-            Sql += " t20.会社コード = t21.会社コード "
-            Sql += " AND "
-            Sql += " t20.発注番号 = t21.発注番号"
-            Sql += " AND "
-            Sql += " t20.発注番号枝番 = t21.発注番号枝番"
-
             Sql += " WHERE "
             Sql += " t46.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
 
             Sql += viewSearchConditions() '抽出条件取得
 
-            Sql += " GROUP BY "
-            Sql += " t46.会社コード, t46.買掛番号"
             Sql += " ORDER BY "
             Sql += "t46.更新日 DESC, t46.買掛番号"
 
