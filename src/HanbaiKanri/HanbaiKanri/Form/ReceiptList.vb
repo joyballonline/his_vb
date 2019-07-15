@@ -190,7 +190,11 @@ Public Class ReceiptList
             Try
 
                 Sql = "SELECT"
-                Sql += " t42.*"
+                Sql += " t42.取消区分,t42.入庫番号,t42.入庫日,t42.発注番号,t42.発注番号枝番,t42.客先番号"
+                Sql += ",t42.仕入先コード,t42.仕入先名,t42.仕入先郵便番号,t42.仕入先住所,t42.仕入先電話番号"
+                Sql += ",t42.仕入先ＦＡＸ,t42.仕入先担当者名,t42.仕入先担当者役職"
+                Sql += ",t42.営業担当者,t42.入力担当者,t42.備考,t42.登録日"
+
                 Sql += " FROM "
                 Sql += " public.t42_nyukohd t42 "
 
@@ -200,6 +204,7 @@ Public Class ReceiptList
                 Sql += " t42.会社コード = t43.会社コード "
                 Sql += " AND "
                 Sql += " t42.入庫番号 = t43.入庫番号"
+
                 Sql += " WHERE "
                 Sql += " t42.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
                 Sql += " AND "
@@ -208,7 +213,11 @@ Public Class ReceiptList
                 Sql += viewSearchConditions() '抽出条件取得
 
                 Sql += " GROUP BY "
-                Sql += " t42.会社コード, t42.入庫番号"
+                Sql += " t42.取消区分,t42.入庫番号,t42.入庫日,t42.発注番号,t42.発注番号枝番,t42.客先番号"
+                Sql += ",t42.仕入先コード,t42.仕入先名,t42.仕入先郵便番号,t42.仕入先住所,t42.仕入先電話番号"
+                Sql += ",t42.仕入先ＦＡＸ,t42.仕入先担当者名,t42.仕入先担当者役職"
+                Sql += ",t42.営業担当者,t42.入力担当者,t42.備考,t42.登録日,t42.更新日"
+
                 Sql += " ORDER BY "
                 Sql += "t42.更新日 DESC, t42.入庫番号"
 
