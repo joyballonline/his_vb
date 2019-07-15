@@ -299,8 +299,8 @@ Public Class Ordering
             DgvItemList.Columns("数量").HeaderText = "Quantity:a"
             DgvItemList.Columns("単位").HeaderText = "Unit"
 
-            DgvItemList.Columns("仕入単価_外貨").HeaderText = "PurchaseUnitPrice:b"
-            DgvItemList.Columns("仕入単価").HeaderText = "PurchaseUnitPrice" & vbCrLf & "(" & TxtIDRCurrency.Text & ")"
+            DgvItemList.Columns("仕入単価_外貨").HeaderText = "PurchaseUnitPrice"
+            DgvItemList.Columns("仕入単価").HeaderText = "PurchaseUnitPrice" & vbCrLf & "(" & TxtIDRCurrency.Text & "):b"
 
             DgvItemList.Columns("仕入金額").HeaderText = "PurchaseAmount:j=(b+e+g+i)*a"
             DgvItemList.Columns("仕入金額_外貨").HeaderText = "PurchaseAmountForeignCurrency"
@@ -318,8 +318,8 @@ Public Class Ordering
         Else
             '日本語用見出し
             DgvItemList.Columns("数量").HeaderText = "数量:a"
-            DgvItemList.Columns("仕入単価_外貨").HeaderText = "仕入単価:b"
-            DgvItemList.Columns("仕入単価").HeaderText = "仕入単価" & vbCrLf & "(" & TxtIDRCurrency.Text & ")"
+            DgvItemList.Columns("仕入単価_外貨").HeaderText = "仕入単価"
+            DgvItemList.Columns("仕入単価").HeaderText = "仕入単価" & vbCrLf & "(" & TxtIDRCurrency.Text & "):b"
             DgvItemList.Columns("仕入原価").HeaderText = "仕入原価:c=a*b"
             DgvItemList.Columns("関税率").HeaderText = "関税率:d"
             DgvItemList.Columns("関税額").HeaderText = "関税額:e=b*d"
