@@ -145,9 +145,13 @@ Public Class PaidList
             '伝票単位
             If RbtnSlip.Checked Then
 
-                Sql = " SELECT m11.銀行コード , m11.銀行名 , m11.支店名, m11.預金種目 , m11.口座番号, m11.口座名義, t47.* "
-                Sql += " FROM t47_shrihd t47 "
+                Sql = " SELECT"
+                Sql += " t47.通貨,t47.支払番号,t47.支払日,t47.支払先名,t47.支払金額計_外貨,t47.支払金額計"
+                Sql += ",t47.更新日,t47.備考"
+                Sql += ",t20.取消区分"
+                Sql += ",m11.銀行コード , m11.銀行名 , m11.支店名, m11.預金種目 , m11.口座番号, m11.口座名義"
 
+                Sql += " FROM t47_shrihd t47 "
                 Sql += " INNER JOIN m11_supplier m11 "
                 Sql += " ON t47.会社コード = m11.会社コード "
                 Sql += " AND t47.支払先コード = m11.仕入先コード "
@@ -173,21 +177,16 @@ Public Class PaidList
                 Sql += " AND "
                 Sql += " t20.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '発注取消されていないデータ
 
-                Sql += " INNER JOIN "
-                Sql += " t21_hattyu t21"
-                Sql += " ON "
-                Sql += " t20.会社コード = t21.会社コード "
-                Sql += " AND "
-                Sql += " t20.発注番号 = t21.発注番号"
-                Sql += " AND "
-                Sql += " t20.発注番号枝番 = t21.発注番号枝番"
-
                 Sql += " WHERE t47.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
 
                 Sql += viewSearchConditions() '抽出条件取得
 
                 Sql += " GROUP BY "
-                Sql += " t47.会社コード, t47.支払番号, m11.銀行コード , m11.銀行名 , m11.支店名, m11.預金種目 , m11.口座番号, m11.口座名義, t47.更新日"
+                Sql += " t47.通貨,t47.支払番号,t47.支払日,t47.支払先名,t47.支払金額計_外貨,t47.支払金額計"
+                Sql += ",t47.更新日,t47.備考"
+                Sql += ",t20.取消区分"
+                Sql += ",m11.銀行コード , m11.銀行名 , m11.支店名, m11.預金種目 , m11.口座番号, m11.口座名義"
+
                 Sql += " ORDER BY "
                 Sql += "t47.更新日 DESC"
 
