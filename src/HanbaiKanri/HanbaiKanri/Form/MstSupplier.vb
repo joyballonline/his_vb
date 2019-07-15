@@ -176,7 +176,13 @@ Public Class MstSupplier
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
 
             For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-                Dim getHanyo As DataSet = getDsHanyoData(CommonConst.DC_CODE, Trim(ds.Tables(RS).Rows(i)("預金種目")))
+                Console.WriteLine(ds.Tables(RS).Rows(i)("仕入先コード"))
+
+                Dim getHanyo As DataSet
+                If Not IsDBNull(ds.Tables(RS).Rows(i)("預金種目")) Then
+                    getHanyo = getDsHanyoData(CommonConst.DC_CODE, Trim(ds.Tables(RS).Rows(i)("預金種目")))
+                End If
+
 
                 Dgv_Supplier.Rows.Add()
                 Dgv_Supplier.Rows(i).Cells("会社コード").Value = ds.Tables(RS).Rows(i)("会社コード")
@@ -196,9 +202,15 @@ Public Class MstSupplier
                 Dgv_Supplier.Rows(i).Cells("銀行コード").Value = ds.Tables(RS).Rows(i)("銀行コード")
                 Dgv_Supplier.Rows(i).Cells("支店名").Value = ds.Tables(RS).Rows(i)("支店名")
                 Dgv_Supplier.Rows(i).Cells("支店コード").Value = ds.Tables(RS).Rows(i)("支店コード")
-                Dgv_Supplier.Rows(i).Cells("預金種目").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
+
+                If IsDBNull(ds.Tables(RS).Rows(i)("預金種目")) Then
+                    Dgv_Supplier.Rows(i).Cells("預金種目").Value = vbNullString
+                Else
+                    Dgv_Supplier.Rows(i).Cells("預金種目").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
                                                                getHanyo.Tables(RS).Rows(0)("文字２"),
                                                                getHanyo.Tables(RS).Rows(0)("文字１"))
+                End If
+
                 Dgv_Supplier.Rows(i).Cells("口座番号").Value = ds.Tables(RS).Rows(i)("口座番号")
                 Dgv_Supplier.Rows(i).Cells("口座名義").Value = ds.Tables(RS).Rows(i)("口座名義")
                 Dgv_Supplier.Rows(i).Cells("担当者役職").Value = ds.Tables(RS).Rows(i)("担当者役職")

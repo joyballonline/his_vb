@@ -304,7 +304,8 @@ Public Class Supplier
         If TxtTariffRate.Text = "" Then
             _msgHd.dspMSG("chkInputTariffRateError", frmC01F10_Login.loginValue.Language)
             Exit Sub
-        ElseIf Decimal.Parse(TxtTariffRate.Text.ToString) = 0 Then
+        ElseIf Decimal.Parse(TxtTariffRate.Text.ToString) = 0 And cmDomesticKbn.SelectedIndex = 1 Then
+            '0 and 国外の場合
             _msgHd.dspMSG("chkInputTariffRateError", frmC01F10_Login.loginValue.Language)
             Exit Sub
         End If
