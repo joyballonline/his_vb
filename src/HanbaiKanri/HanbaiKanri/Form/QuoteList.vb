@@ -234,11 +234,6 @@ Public Class QuoteList
 
                 Sql += " FROM t01_mithd t01 "
 
-                Sql += " LEFT JOIN t02_mitdt t02 "
-                Sql += " ON t01.会社コード = t02.会社コード "
-                Sql += " AND t01.見積番号 = t02.見積番号 "
-                Sql += " AND t01.見積番号枝番 = t02.見積番号枝番 "
-
                 Sql += " WHERE "
                 Sql += "  t01.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
 
@@ -364,12 +359,6 @@ Public Class QuoteList
                     Sql += " AND "
                     Sql += "t01.見積有効期限 >= '" & UtilClass.strFormatDate(strToday) & "'"
                 End If
-
-                Sql += " GROUP BY "
-                Sql += " t01.会社コード"
-                Sql += ",t01.取消区分"
-                Sql += ",t01.見積番号"
-                Sql += ",t01.見積番号枝番"
 
                 Sql += " ORDER BY t01.見積番号 DESC,t01.見積番号枝番 DESC"
 
