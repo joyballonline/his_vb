@@ -1703,10 +1703,10 @@ Public Class Ordering
                 sheet.Range("C" & currentCnt).Value = DgvItemList.Rows(i).Cells("メーカー").Value & vbLf & DgvItemList.Rows(i).Cells("品名").Value & vbLf & DgvItemList.Rows(i).Cells("型式").Value
                 sheet.Range("L" & currentCnt).Value = DgvItemList.Rows(i).Cells("数量").Value & " " & DgvItemList.Rows(i).Cells("単位").Value
 
-                'このロジックいらないよね？20190716コメントアウト
-                'Dim dsHanyo = getDsHanyoData(CommonConst.FIXED_KEY_TRADE_TERMS, DgvItemList.Rows(i).Cells("貿易条件").Value)
+                Dim strValue As String = DgvItemList.Rows(i).Cells("貿易条件").Value
+                Dim dsHanyoA = getDsHanyoData(CommonConst.FIXED_KEY_TRADE_TERMS, strValue)
 
-                sheet.Range("O" & currentCnt).Value = DgvItemList.Rows(i).Cells("貿易条件").Value
+                sheet.Range("O" & currentCnt).Value = dsHanyoA.Tables(RS).Rows(0)("文字１")
                 sheet.Range("R" & currentCnt).Value = DgvItemList.Rows(i).Cells("仕入単価_外貨").Value.ToString
                 sheet.Range("W" & currentCnt).Value = DgvItemList.Rows(i).Cells("仕入単価_外貨").Value * DgvItemList.Rows(i).Cells("数量").Value
 
