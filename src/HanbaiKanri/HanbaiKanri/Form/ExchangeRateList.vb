@@ -351,4 +351,60 @@ Public Class ExchangeRateList
         getList()
     End Sub
 
+    '削除ボタン
+    Private Sub BtnDel_Click(sender As Object, e As EventArgs) Handles BtnDel.Click
+
+        'グリッドに何もないときはなにもしない
+        '対象データがない場合は取消操作不可能
+        If DgvList.Rows.Count = 0 Then
+            Exit Sub
+        End If
+
+
+        '対象データがないメッセージを表示
+        If _msgHd.dspMSG("confirmDelete", frmC01F10_Login.loginValue.Language) = vbNo Then
+            Exit Sub
+        End If
+
+        Try
+            Dim Sql As String = vbNullString
+            Dim RowIdx As Integer
+            RowIdx = Me.DgvList.CurrentCell.RowIndex
+            Dim Kijyun As String = DgvList.Rows(RowIdx).Cells("基準日").Value
+            Dim Key As String = DgvList.Rows(RowIdx).Cells("採番キー").Value
+            Dim UpdatedOn As Date = DgvList.Rows(RowIdx).Cells("更新日").Value
+
+            '1レコード目削除
+            Sql = "delete from Public.t71_exchangerate"
+            Sql += " where 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += "   and 基準日 = '" & Kijyun & "'"
+            Sql += "   and 採番キー = " & Key
+            Sql += "   and 更新日 = '" & UpdatedOn & "'"
+
+            _db.executeDB(Sql)
+
+            If Key = 2 Then
+                Key = Key + 1
+            Else
+                Key = Key - 1
+            End If
+
+            '2レコード目削除
+            Sql = "delete from Public.t71_exchangerate"
+            Sql += " where 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += "   and 基準日 = '" & Kijyun & "'"
+            Sql += "   and 採番キー = " & Key
+            Sql += "   and 更新日 = '" & UpdatedOn & "'"
+
+            _db.executeDB(Sql)
+
+        Catch ex As Exception
+
+            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
+            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
+
+        End Try
+
+
+    End Sub
 End Class

@@ -38,13 +38,14 @@ Partial Class ExchangeRateList
         Me.Label5 = New System.Windows.Forms.Label()
         Me.LblStandardDate = New System.Windows.Forms.Label()
         Me.LblConditions = New System.Windows.Forms.Label()
+        Me.BtnDel = New System.Windows.Forms.Button()
         CType(Me.DgvList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'BtnEdit
         '
         Me.BtnEdit.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.BtnEdit.Location = New System.Drawing.Point(832, 509)
+        Me.BtnEdit.Location = New System.Drawing.Point(500, 509)
         Me.BtnEdit.Name = "BtnEdit"
         Me.BtnEdit.Size = New System.Drawing.Size(165, 40)
         Me.BtnEdit.TabIndex = 17
@@ -195,10 +196,21 @@ Partial Class ExchangeRateList
         Me.LblConditions.TabIndex = 337
         Me.LblConditions.Text = "■抽出条件"
         '
+        'BtnDel
+        '
+        Me.BtnDel.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.BtnDel.Location = New System.Drawing.Point(12, 509)
+        Me.BtnDel.Name = "BtnDel"
+        Me.BtnDel.Size = New System.Drawing.Size(165, 40)
+        Me.BtnDel.TabIndex = 338
+        Me.BtnDel.Text = "削除"
+        Me.BtnDel.UseVisualStyleBackColor = True
+        '
         'ExchangeRateList
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.BtnDel)
         Me.Controls.Add(Me.LblConditions)
         Me.Controls.Add(Me.dtDateUntil)
         Me.Controls.Add(Me.dtDateSince)
@@ -234,4 +246,5 @@ Partial Class ExchangeRateList
     Friend WithEvents Label5 As Label
     Friend WithEvents LblStandardDate As Label
     Friend WithEvents LblConditions As Label
+    Friend WithEvents BtnDel As Button
 End Class
