@@ -192,7 +192,7 @@ Public Class ExchangeRate
             Sql += "', "
             Sql += NudForeignCurrency1.Tag.ToString '採番キー
             Sql += ", '"
-            Sql += UtilClass.formatNumberF10(NudForeignCurrency1.Text) 'レート
+            Sql += UtilClass.formatNumberF10(lblBaseCurrency1.Text / NudForeignCurrency1.Text) 'レート
             Sql += "', '"
             Sql += frmC01F10_Login.loginValue.TantoNM
             Sql += "', '"
@@ -212,7 +212,7 @@ Public Class ExchangeRate
             Sql += "', "
             Sql += NudForeignCurrency2.Tag.ToString '採番キー
             Sql += ", '"
-            Sql += UtilClass.formatNumberF10(NudForeignCurrency2.Text) 'レート
+            Sql += UtilClass.formatNumberF10(lblBaseCurrency2.Text / NudForeignCurrency2.Text) 'レート
             Sql += "', '"
             Sql += frmC01F10_Login.loginValue.TantoNM
             Sql += "', '"
