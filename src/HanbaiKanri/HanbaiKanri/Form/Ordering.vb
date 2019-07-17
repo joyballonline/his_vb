@@ -1117,6 +1117,20 @@ Public Class Ordering
             Exit Sub
         End If
 
+        '仕入区分が「在庫引当」以外かつ仕入先と数量がなかったらエラーで戻す
+        For i As Integer = 0 To DgvItemList.RowCount - 1
+            If DgvItemList.Rows(i).Cells("仕入区分").Value <> CommonConst.Sire_KBN_Zaiko And
+                DgvItemList.Rows(i).Cells("メーカー").Value Is Nothing Or
+                DgvItemList.Rows(i).Cells("品名").Value Is Nothing Or
+                DgvItemList.Rows(i).Cells("型式").Value Is Nothing Then
+
+                '対象データがないメッセージを表示
+                _msgHd.dspMSG("chkQuoteInputError", frmC01F10_Login.loginValue.Language)
+
+                Exit Sub
+            End If
+        Next
+
         '数量と仕入単価がなかったらエラーで戻す
         For i As Integer = 0 To DgvItemList.RowCount - 1
             If DgvItemList.Rows(i).Cells("仕入単価").Value Is Nothing Or DgvItemList.Rows(i).Cells("数量").Value Is Nothing Then
