@@ -360,6 +360,7 @@ Public Class ExchangeRateList
             Exit Sub
         End If
 
+        Dim RowIdx As Integer = Me.DgvList.CurrentCell.RowIndex
 
         '対象データがないメッセージを表示
         If _msgHd.dspMSG("confirmDelete", frmC01F10_Login.loginValue.Language) = vbNo Then
@@ -368,8 +369,7 @@ Public Class ExchangeRateList
 
         Try
             Dim Sql As String = vbNullString
-            Dim RowIdx As Integer
-            RowIdx = Me.DgvList.CurrentCell.RowIndex
+
             Dim Kijyun As String = DgvList.Rows(RowIdx).Cells("基準日").Value
             Dim Key As String = DgvList.Rows(RowIdx).Cells("採番キー").Value
             Dim UpdatedOn As Date = DgvList.Rows(RowIdx).Cells("更新日").Value
@@ -397,6 +397,8 @@ Public Class ExchangeRateList
             Sql += "   and 更新日 = '" & UpdatedOn & "'"
 
             _db.executeDB(Sql)
+
+            Call getList()
 
         Catch ex As Exception
 
