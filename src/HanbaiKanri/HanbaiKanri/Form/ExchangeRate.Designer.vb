@@ -257,7 +257,7 @@ Partial Class ExchangeRate
         Me.LblRate.Name = "LblRate"
         Me.LblRate.Size = New System.Drawing.Size(52, 15)
         Me.LblRate.TabIndex = 342
-        Me.LblRate.Text = "元通貨"
+        Me.LblRate.Text = "原通貨"
         '
         'LblIDR1
         '
