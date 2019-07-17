@@ -97,6 +97,14 @@ Public Class ExchangeRate
 
         DtpStandardDate.Text = DateTime.Today
 
+        txtRate1.ReadOnly = True
+        txtRate1.BackColor = Color.FromArgb(255, 255, 192)
+        txtRate1.TabStop = False
+
+        txtRate2.ReadOnly = True
+        txtRate2.BackColor = Color.FromArgb(255, 255, 192)
+        txtRate2.TabStop = False
+
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
 
             LblStandardDate.Text = "StandardDate"
@@ -168,19 +176,50 @@ Public Class ExchangeRate
     '登録ボタン押下時
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles BtnRegistration.Click
 
+        Dim reccnt As Integer = 0
+        Dim Sql As String = ""
+        Dim ds As DataSet
+
+
+
         If lblBaseCurrency1.Text = "" Or NudForeignCurrency1.Text = "" Or lblBaseCurrency2.Text = "" Or NudForeignCurrency2.Text = "" Then
             '登録できないアラートを出す
             _msgHd.dspMSG("chkInputError", frmC01F10_Login.loginValue.Language)
             Exit Sub
         End If
 
+
+        If NudForeignCurrency1.Text = 0 Or NudForeignCurrency2.Text = 0 Then
+            '登録できないアラートを出す
+            _msgHd.dspMSG("chkInputError", frmC01F10_Login.loginValue.Language)
+            Exit Sub
+        End If
+
+
+
+        '重複データのチェック
+        Sql = " SELECT count(*) as 件数"
+        Sql += " FROM public.t71_exchangerate"
+
+        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += "   and 基準日 = '" & UtilClass.strFormatDate(DtpStandardDate.Text) & "'"
+        Sql += "   and 採番キー = " & NudForeignCurrency1.Tag.ToString
+
+        ds = _db.selectDB(Sql, RS, reccnt)
+
+        '件数があればエラー
+        If ds.Tables(RS).Rows(0)("件数") > 0 Then
+            _msgHd.dspMSG("RegDupKeyData", frmC01F10_Login.loginValue.Language)
+            Exit Sub
+        End If
+
+
+        '登録処理
         Dim dtToday As String = UtilClass.formatDatetime(DateTime.Now)
         If _status = CommonConst.STATUS_ADD Then
         End If
 
         Try
-            Dim Sql As String = ""
-
             Sql = "INSERT INTO "
             Sql += "Public."
             Sql += "t71_exchangerate("
@@ -276,6 +315,8 @@ Public Class ExchangeRate
         If lblBaseCurrency1.Text <> "" And NudForeignCurrency1.Value > 0 Then
             Dim rateVal As Decimal = Decimal.Parse(NudForeignCurrency1.Value) / Decimal.Parse(lblBaseCurrency1.Text)
             NudForeignCurrency1.Text = rateVal.ToString("F10")
+            rateVal = Decimal.Parse(lblBaseCurrency1.Text) / Decimal.Parse(NudForeignCurrency1.Text)
+            txtRate1.Text = rateVal.ToString("F10")
         End If
     End Sub
 
@@ -299,6 +340,8 @@ Public Class ExchangeRate
         If lblBaseCurrency2.Text <> "" And NudForeignCurrency2.Value > 0 Then
             Dim rateVal As Decimal = Decimal.Parse(NudForeignCurrency2.Value) / Decimal.Parse(lblBaseCurrency2.Text)
             NudForeignCurrency2.Text = rateVal.ToString("F10")
+            rateVal = Decimal.Parse(lblBaseCurrency2.Text) / Decimal.Parse(NudForeignCurrency2.Text)
+            txtRate2.Text = rateVal.ToString("F10")
         End If
     End Sub
 
@@ -311,14 +354,11 @@ Public Class ExchangeRate
     End Sub
 
     Private Sub NudForeignCurrency1_Click(sender As Object, e As EventArgs) Handles NudForeignCurrency1.Click
-        sender.Select(0, sender.Text.Length)
+
     End Sub
 
     Private Sub NudForeignCurrency2_Click(sender As Object, e As EventArgs) Handles NudForeignCurrency2.Click
         sender.Select(0, sender.Text.Length)
     End Sub
 
-    Private Sub checkDecimalPoint()
-
-    End Sub
 End Class
