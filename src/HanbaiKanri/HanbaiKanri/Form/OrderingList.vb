@@ -160,6 +160,7 @@ Public Class OrderingList
             Label7.Text = "PurchaseNumber"
             Label6.Text = "SalesPersonInCharge"
             Label11.Text = "CustomerNumber"
+            lblMaker.Text = "Maker"
             LblItemName.Text = "ItemName"
             LblSpec.Text = "Spec"
             Label10.Text = "DisplayFormat"
@@ -257,8 +258,9 @@ Public Class OrderingList
 
                 '発注基本を取得
                 Sql = "SELECT count(*) as 件数"
-                Sql += " FROM "
-                Sql += " public.t20_hattyu t20 "
+                Sql += " from public.t20_hattyu t20 "
+                Sql += " left join public.t21_hattyu t21"
+                Sql += "  on (t20.発注番号 = t21.発注番号 and t20.発注番号枝番 = t21.発注番号枝番)"
 
                 Sql += " WHERE "
                 Sql += " t20.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
@@ -273,14 +275,30 @@ Public Class OrderingList
 
                 '発注基本を取得
                 Sql = "SELECT"
-                Sql += " t20.*"
+                Sql += " t20.発注番号,t20.発注番号枝番,t20.発注日,t20.取消区分"
+                Sql += ",t20.得意先名,t20.客先番号,t20.仕入先コード,t20.仕入先名,t20.仕入先郵便番号,t20.仕入先住所"
+                Sql += ",t20.仕入先電話番号,t20.仕入先ＦＡＸ,t20.仕入先担当者名,t20.仕入先担当者役職"
+                Sql += ",t20.仕入金額_外貨,t20.仕入金額,t20.支払条件,t20.営業担当者,t20.入力担当者,t20.備考"
+                Sql += ",t20.登録日,t20.更新日,t20.通貨"
+
                 Sql += " FROM "
                 Sql += " public.t20_hattyu t20 "
+                Sql += " left join public.t21_hattyu t21"
+                Sql += "  on (t20.発注番号 = t21.発注番号 and t20.発注番号枝番 = t21.発注番号枝番)"
 
                 Sql += " WHERE "
                 Sql += " t20.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
 
                 Sql += viewSearchConditions() '抽出条件取得
+
+
+                Sql += " GROUP BY "
+                Sql += " t20.発注番号,t20.発注番号枝番,t20.発注日,t20.取消区分"
+                Sql += ",t20.得意先名,t20.客先番号,t20.仕入先コード,t20.仕入先名,t20.仕入先郵便番号,t20.仕入先住所"
+                Sql += ",t20.仕入先電話番号,t20.仕入先ＦＡＸ,t20.仕入先担当者名,t20.仕入先担当者役職"
+                Sql += ",t20.仕入金額_外貨,t20.仕入金額,t20.支払条件,t20.営業担当者,t20.入力担当者,t20.備考"
+                Sql += ",t20.登録日,t20.更新日,t20.通貨"
+
 
                 Sql += " ORDER BY "
                 Sql += "t20.更新日 DESC, t20.発注番号, t20.発注番号枝番"
@@ -791,6 +809,7 @@ Public Class OrderingList
         Dim poCode As String = escapeSql(TxtCustomerPO.Text)
         Dim itemName As String = UtilClass.escapeSql(TxtItemName.Text)
         Dim spec As String = UtilClass.escapeSql(TxtSpec.Text)
+        Dim Maker As String = UtilClass.escapeSql(txtMaker.Text)
 
         If supplierName <> Nothing Then
             Sql += " AND "
@@ -834,6 +853,11 @@ Public Class OrderingList
         If poCode <> Nothing Then
             Sql += " AND "
             Sql += " t20.客先番号 ILIKE '%" & poCode & "%' "
+        End If
+
+        If Maker <> Nothing Then
+            Sql += " AND "
+            Sql += " t21.メーカー ILIKE '%" & Maker & "%' "
         End If
 
         If itemName <> Nothing Then

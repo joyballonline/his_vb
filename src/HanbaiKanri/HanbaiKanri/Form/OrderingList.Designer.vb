@@ -61,6 +61,8 @@ Partial Class OrderingList
         Me.LblSpec = New System.Windows.Forms.Label()
         Me.TxtItemName = New System.Windows.Forms.TextBox()
         Me.LblItemName = New System.Windows.Forms.Label()
+        Me.txtMaker = New System.Windows.Forms.TextBox()
+        Me.lblMaker = New System.Windows.Forms.Label()
         CType(Me.DgvHtyhd, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
@@ -113,7 +115,7 @@ Partial Class OrderingList
         Me.TxtSales.Location = New System.Drawing.Point(190, 149)
         Me.TxtSales.Name = "TxtSales"
         Me.TxtSales.Size = New System.Drawing.Size(350, 22)
-        Me.TxtSales.TabIndex = 9
+        Me.TxtSales.TabIndex = 5
         '
         'Label7
         '
@@ -133,7 +135,7 @@ Partial Class OrderingList
         Me.TxtPurchaseSince.Location = New System.Drawing.Point(760, 65)
         Me.TxtPurchaseSince.Name = "TxtPurchaseSince"
         Me.TxtPurchaseSince.Size = New System.Drawing.Size(369, 22)
-        Me.TxtPurchaseSince.TabIndex = 7
+        Me.TxtPurchaseSince.TabIndex = 6
         '
         'Label8
         '
@@ -366,7 +368,7 @@ Partial Class OrderingList
         Me.TxtCustomerPO.Location = New System.Drawing.Point(760, 92)
         Me.TxtCustomerPO.Name = "TxtCustomerPO"
         Me.TxtCustomerPO.Size = New System.Drawing.Size(369, 22)
-        Me.TxtCustomerPO.TabIndex = 10
+        Me.TxtCustomerPO.TabIndex = 7
         '
         'dtPurchaseDateSince
         '
@@ -455,17 +457,17 @@ Partial Class OrderingList
         'TxtSpec
         '
         Me.TxtSpec.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtSpec.Location = New System.Drawing.Point(760, 149)
+        Me.TxtSpec.Location = New System.Drawing.Point(760, 178)
         Me.TxtSpec.Name = "TxtSpec"
         Me.TxtSpec.Size = New System.Drawing.Size(369, 22)
-        Me.TxtSpec.TabIndex = 345
+        Me.TxtSpec.TabIndex = 10
         '
         'LblSpec
         '
         Me.LblSpec.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblSpec.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblSpec.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblSpec.Location = New System.Drawing.Point(584, 149)
+        Me.LblSpec.Location = New System.Drawing.Point(584, 178)
         Me.LblSpec.Name = "LblSpec"
         Me.LblSpec.Size = New System.Drawing.Size(170, 22)
         Me.LblSpec.TabIndex = 344
@@ -475,27 +477,49 @@ Partial Class OrderingList
         'TxtItemName
         '
         Me.TxtItemName.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtItemName.Location = New System.Drawing.Point(760, 121)
+        Me.TxtItemName.Location = New System.Drawing.Point(760, 150)
         Me.TxtItemName.Name = "TxtItemName"
         Me.TxtItemName.Size = New System.Drawing.Size(369, 22)
-        Me.TxtItemName.TabIndex = 343
+        Me.TxtItemName.TabIndex = 9
         '
         'LblItemName
         '
         Me.LblItemName.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblItemName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblItemName.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblItemName.Location = New System.Drawing.Point(584, 121)
+        Me.LblItemName.Location = New System.Drawing.Point(584, 150)
         Me.LblItemName.Name = "LblItemName"
         Me.LblItemName.Size = New System.Drawing.Size(170, 22)
         Me.LblItemName.TabIndex = 342
         Me.LblItemName.Text = "品名"
         Me.LblItemName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'txtMaker
+        '
+        Me.txtMaker.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.txtMaker.Location = New System.Drawing.Point(760, 121)
+        Me.txtMaker.Name = "txtMaker"
+        Me.txtMaker.Size = New System.Drawing.Size(369, 22)
+        Me.txtMaker.TabIndex = 8
+        '
+        'lblMaker
+        '
+        Me.lblMaker.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.lblMaker.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblMaker.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.lblMaker.Location = New System.Drawing.Point(584, 121)
+        Me.lblMaker.Name = "lblMaker"
+        Me.lblMaker.Size = New System.Drawing.Size(170, 22)
+        Me.lblMaker.TabIndex = 346
+        Me.lblMaker.Text = "メーカー"
+        Me.lblMaker.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'OrderingList
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.txtMaker)
+        Me.Controls.Add(Me.lblMaker)
         Me.Controls.Add(Me.TxtSpec)
         Me.Controls.Add(Me.LblSpec)
         Me.Controls.Add(Me.TxtItemName)
@@ -583,4 +607,6 @@ Partial Class OrderingList
     Friend WithEvents LblSpec As Label
     Friend WithEvents TxtItemName As TextBox
     Friend WithEvents LblItemName As Label
+    Friend WithEvents txtMaker As TextBox
+    Friend WithEvents lblMaker As Label
 End Class
