@@ -113,7 +113,27 @@ Public Class Quote
         DgvItemList.Columns("輸送費額").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
 
         'ヘッダ項目を中央寄せ
+        DgvItemList.Columns("No").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns(1).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("メーカー").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("品名").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("型式").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("数量").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("単位").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("仕入先コード").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("仕入先").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("仕入単価_外貨").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
         DgvItemList.Columns("仕入単価").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("仕入原価").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("関税率").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("関税額").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("前払法人税率").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("前払法人税額").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("輸送費率").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("輸送費額").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("仕入金額").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("売単価").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("売上金額").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
         'セルの内容に合わせて、行の高さが自動的に調節されるようにする
         DgvItemList.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
@@ -135,6 +155,7 @@ Public Class Quote
         'column.ValueMember = 1
         'DataGridView1に追加する
         DgvItemList.Columns.Insert(1, column)
+        DgvItemList.Columns("仕入区分").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
         'リードタイム単位コンボボックス作成
         Dim column2 As New DataGridViewComboBoxColumn()
@@ -155,8 +176,9 @@ Public Class Quote
         column3.Name = "仕入通貨"
 
         DgvItemList.Columns.Insert(10, column3)
+        DgvItemList.Columns("仕入通貨").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
-        Call setBaseCurrency()
+        TxtIDRCurrency.Text = setBaseCurrency()
 
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
             LblMode.Text = "Mode"
@@ -172,7 +194,7 @@ Public Class Quote
             LblPosition.Text = "PositionPICCustomer" '得意先担当者役職
             LblSales.Text = "SalesPersonInCharge" '営業担当者
             LblInput.Text = "PICForInputting" '入力担当者
-            LblCurrency.Text = "Currency" '通貨
+            LblCurrency.Text = "SalesCurrency" '販売通貨
             LblRate.Text = "Rate" 'レート
             LblPaymentTerms.Text = "PaymentTerms" '支払条件
             LblRemarks.Text = "Remarks" '備考
@@ -241,25 +263,25 @@ Public Class Quote
             DgvItemList.Columns("メーカー").HeaderText = "Manufacturer"
             DgvItemList.Columns("品名").HeaderText = "ItemName"
             DgvItemList.Columns("型式").HeaderText = "Spec"
-            DgvItemList.Columns("数量").HeaderText = "Quantity:a"
+            DgvItemList.Columns("数量").HeaderText = "Quantity" & vbCrLf & "a"
             DgvItemList.Columns("単位").HeaderText = "Unit"
             DgvItemList.Columns("仕入先コード").HeaderText = "SupplierCode"
             DgvItemList.Columns("仕入先").HeaderText = "SupplierName"
             DgvItemList.Columns("仕入通貨").HeaderText = "PurchaseCurrency"
 
-            DgvItemList.Columns("仕入単価_外貨").HeaderText = "PurchaseUnitPrice"
-            DgvItemList.Columns("仕入単価").HeaderText = "PurchaseUnitPrice" & vbCrLf & "(" & TxtIDRCurrency.Text & "):b"
+            DgvItemList.Columns("仕入単価_外貨").HeaderText = "PurchaseUnitPrice" & vbCrLf & "(OriginalCurrency)"
+            DgvItemList.Columns("仕入単価").HeaderText = "PurchaseUnitPrice(" & setBaseCurrency() & ")" & vbCrLf & "b"
 
-            DgvItemList.Columns("仕入原価").HeaderText = "PurchasingCost:c=a*b"
-            DgvItemList.Columns("関税率").HeaderText = "CustomsDutyRate:d"
-            DgvItemList.Columns("関税額").HeaderText = "CustomsDuty:e=b*d"
-            DgvItemList.Columns("前払法人税率").HeaderText = "PrepaidCorporateTaxRate:f"
-            DgvItemList.Columns("前払法人税額").HeaderText = "PrepaidCorporateTaxAmount:g=(b+e)*f"
-            DgvItemList.Columns("輸送費率").HeaderText = "TransportationCostRate:h"
-            DgvItemList.Columns("輸送費額").HeaderText = "TransportationCost:i=b*h"
-            DgvItemList.Columns("仕入金額").HeaderText = "PurchaseAmount:j=(b+e+g+i)*a"
-            DgvItemList.Columns("売単価").HeaderText = "SellingPrice:k"
-            DgvItemList.Columns("売上金額").HeaderText = "SalesAmount:l=a*k"
+            DgvItemList.Columns("仕入原価").HeaderText = "PurchasingCost" & vbCrLf & "c=a*b"
+            DgvItemList.Columns("関税率").HeaderText = "CustomsDutyRate" & vbCrLf & "d"
+            DgvItemList.Columns("関税額").HeaderText = "CustomsDutyParUnit" & vbCrLf & "e=b*d"
+            DgvItemList.Columns("前払法人税率").HeaderText = "PrepaidCorporateTaxRate" & vbCrLf & "f"
+            DgvItemList.Columns("前払法人税額").HeaderText = "PrepaidCorporateTaxAmountParUnit" & vbCrLf & "g=(b+e)*f"
+            DgvItemList.Columns("輸送費率").HeaderText = "TransportationCostRate" & vbCrLf & "h"
+            DgvItemList.Columns("輸送費額").HeaderText = "TransportationCostParUnit" & vbCrLf & "i=b*h"
+            DgvItemList.Columns("仕入金額").HeaderText = "PurchaseAmount" & vbCrLf & "j=a*(b+e+g+i)"
+            DgvItemList.Columns("売単価").HeaderText = "SellingPrice" & vbCrLf & "k"
+            DgvItemList.Columns("売上金額").HeaderText = "SalesAmount" & vbCrLf & "l=a*k"
             DgvItemList.Columns("見積単価").HeaderText = "QuotetionPrice:m=k+e+g+i"
             DgvItemList.Columns("見積単価_外貨").HeaderText = "QuotetionPriceForeignCurrency"
             DgvItemList.Columns("見積金額").HeaderText = "QuotetionAmount:n=m*a"
@@ -271,21 +293,21 @@ Public Class Quote
             DgvItemList.Columns("備考").HeaderText = "Remarks"
         Else
             '日本語用見出し
-            DgvItemList.Columns("数量").HeaderText = "数量:a"
+            DgvItemList.Columns("数量").HeaderText = "数量" & vbCrLf & "a"
 
-            DgvItemList.Columns("仕入単価_外貨").HeaderText = "仕入単価"
-            DgvItemList.Columns("仕入単価").HeaderText = "仕入単価" & vbCrLf & "(" & TxtIDRCurrency.Text & "):b"
+            DgvItemList.Columns("仕入単価_外貨").HeaderText = "仕入単価(原通貨)"
+            DgvItemList.Columns("仕入単価").HeaderText = "仕入単価(" & setBaseCurrency() & ")" & vbCrLf & "b"
 
-            DgvItemList.Columns("仕入原価").HeaderText = "仕入原価:c=a*b"
-            DgvItemList.Columns("関税率").HeaderText = "関税率:d"
-            DgvItemList.Columns("関税額").HeaderText = "関税額:e=b*d"
-            DgvItemList.Columns("前払法人税率").HeaderText = "前払法人税率:f"
-            DgvItemList.Columns("前払法人税額").HeaderText = "前払法人税額:g=(b+e)*f"
-            DgvItemList.Columns("輸送費率").HeaderText = "輸送費率:h"
-            DgvItemList.Columns("輸送費額").HeaderText = "輸送費額:i=b*h"
-            DgvItemList.Columns("仕入金額").HeaderText = "仕入金額:j=(b+e+g+i)*a"
-            DgvItemList.Columns("売単価").HeaderText = "売単価:k"
-            DgvItemList.Columns("売上金額").HeaderText = "売上金額:l=a*k"
+            DgvItemList.Columns("仕入原価").HeaderText = "仕入原価" & vbCrLf & "c=a*b"
+            DgvItemList.Columns("関税率").HeaderText = "関税率" & vbCrLf & "d"
+            DgvItemList.Columns("関税額").HeaderText = "単価当り関税額" & vbCrLf & "e=b*d"
+            DgvItemList.Columns("前払法人税率").HeaderText = "前払法人税率" & vbCrLf & "f"
+            DgvItemList.Columns("前払法人税額").HeaderText = "単価当り前払法人税額" & vbCrLf & "g=(b+e)*f"
+            DgvItemList.Columns("輸送費率").HeaderText = "輸送費率" & vbCrLf & "h"
+            DgvItemList.Columns("輸送費額").HeaderText = "単価当り輸送費額" & vbCrLf & "i=b*h"
+            DgvItemList.Columns("仕入金額").HeaderText = "仕入金額" & vbCrLf & "j=a*(b+e+g+i)"
+            DgvItemList.Columns("売単価").HeaderText = "売単価" & vbCrLf & "k"
+            DgvItemList.Columns("売上金額").HeaderText = "売上金額" & vbCrLf & "l=a*k"
             DgvItemList.Columns("見積単価").HeaderText = "見積単価:m=k+e+g+i"
             DgvItemList.Columns("見積金額").HeaderText = "見積金額:n=m*a"
             DgvItemList.Columns("粗利額").HeaderText = "粗利額:o=(k-b)*a"
@@ -516,7 +538,8 @@ Public Class Quote
             setRate()
 
             '通貨表示：ベースの設定
-            setBaseCurrency()
+            TxtIDRCurrency.Text = setBaseCurrency()
+
         Else
 
             '=======================
@@ -566,7 +589,8 @@ Public Class Quote
             setRate()
 
             '通貨表示：ベースの設定
-            setBaseCurrency()
+            TxtIDRCurrency.Text = setBaseCurrency()
+
 
             '通貨表示：変更後の設定
             setChangeCurrency()
@@ -2980,16 +3004,18 @@ Public Class Quote
 
     End Sub
 
-    Private Sub setBaseCurrency()
+    '基準通貨の通貨コードを取得する
+    Private Function setBaseCurrency() As String
         Dim Sql As String
         '通貨表示：ベースの設定
         Sql = " AND 採番キー = " & CommonConst.CURRENCY_CD_IDR.ToString
         Sql += " AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
 
         Dim ds As DataSet = getDsData("m25_currency", Sql)
-        TxtIDRCurrency.Text = ds.Tables(RS).Rows(0)("通貨コード")
+        'TxtIDRCurrency.Text = ds.Tables(RS).Rows(0)("通貨コード")
+        setBaseCurrency = ds.Tables(RS).Rows(0)("通貨コード")
 
-    End Sub
+    End Function
 
     '通貨表示：通貨変更の設定
     Private Sub setChangeCurrency()
