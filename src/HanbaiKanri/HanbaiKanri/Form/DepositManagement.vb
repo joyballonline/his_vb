@@ -181,9 +181,9 @@ Public Class DepositManagement
             DgvBillingInfo.Columns("請求情報請求番号").HeaderText = "InvoiceNumber"
             DgvBillingInfo.Columns("請求日").HeaderText = "BillingDate"
             DgvBillingInfo.Columns("請求金額").HeaderText = "BillingAmount"
-            DgvBillingInfo.Columns("請求情報入金額計").HeaderText = "TotalMoneyReceiptAmount"
-            DgvBillingInfo.Columns("請求情報請求残高").HeaderText = "BillingBalance"
-            DgvBillingInfo.Columns("入金額").HeaderText = "MoneyReceiptAmount"
+            DgvBillingInfo.Columns("請求情報入金額計").HeaderText = "TotalAmountOfMoneyReceived"
+            DgvBillingInfo.Columns("請求情報請求残高").HeaderText = "UnreceivedAmount"
+            DgvBillingInfo.Columns("入金額").HeaderText = "AmountToRegisterForReceiving"
 
         End If
     End Sub
