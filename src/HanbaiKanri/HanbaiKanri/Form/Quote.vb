@@ -134,6 +134,15 @@ Public Class Quote
         DgvItemList.Columns("仕入金額").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
         DgvItemList.Columns("売単価").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
         DgvItemList.Columns("売上金額").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("見積単価").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("見積単価_外貨").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("見積金額_外貨").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("見積金額").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("粗利額").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("粗利率").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("リードタイム").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("リードタイム単位").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("備考").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
         'セルの内容に合わせて、行の高さが自動的に調節されるようにする
         DgvItemList.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
@@ -282,12 +291,12 @@ Public Class Quote
             DgvItemList.Columns("仕入金額").HeaderText = "PurchaseAmount" & vbCrLf & "j=a*(b+e+g+i)"
             DgvItemList.Columns("売単価").HeaderText = "SellingPrice" & vbCrLf & "k"
             DgvItemList.Columns("売上金額").HeaderText = "SalesAmount" & vbCrLf & "l=a*k"
-            DgvItemList.Columns("見積単価").HeaderText = "QuotetionPrice:m=k+e+g+i"
-            DgvItemList.Columns("見積単価_外貨").HeaderText = "QuotetionPriceForeignCurrency"
-            DgvItemList.Columns("見積金額").HeaderText = "QuotetionAmount:n=m*a"
-            DgvItemList.Columns("見積金額_外貨").HeaderText = "QuotetionAmountForeignCurrency"
-            DgvItemList.Columns("粗利額").HeaderText = "GrossMargin:o=(k-b)*a"
-            DgvItemList.Columns("粗利率").HeaderText = "GrossMarginRate(%):p=(1-(b/k))*100"
+            DgvItemList.Columns("見積単価").HeaderText = "QuotetionPrice" & vbCrLf & "m=k+e+g+i"
+            DgvItemList.Columns("見積単価_外貨").HeaderText = "QuotetionPriceForeignCurrency" & vbCrLf & "(OriginalCurrency)"
+            DgvItemList.Columns("見積金額").HeaderText = "QuotetionAmount" & vbCrLf & "n=a*m"
+            DgvItemList.Columns("見積金額_外貨").HeaderText = "QuotetionAmountForeignCurrency" & vbCrLf & "(OriginalCurrency)"
+            DgvItemList.Columns("粗利額").HeaderText = "GrossMargin" & vbCrLf & "o=a*(k-b)"
+            DgvItemList.Columns("粗利率").HeaderText = "GrossMarginRate(%)" & vbCrLf & "p=(1-(b/k))*100"
             DgvItemList.Columns("リードタイム").HeaderText = "LeadTime"
             DgvItemList.Columns("リードタイム単位").HeaderText = "LeadTimeUnit"
             DgvItemList.Columns("備考").HeaderText = "Remarks"
@@ -308,14 +317,14 @@ Public Class Quote
             DgvItemList.Columns("仕入金額").HeaderText = "仕入金額" & vbCrLf & "j=a*(b+e+g+i)"
             DgvItemList.Columns("売単価").HeaderText = "売単価" & vbCrLf & "k"
             DgvItemList.Columns("売上金額").HeaderText = "売上金額" & vbCrLf & "l=a*k"
-            DgvItemList.Columns("見積単価").HeaderText = "見積単価:m=k+e+g+i"
-            DgvItemList.Columns("見積金額").HeaderText = "見積金額:n=m*a"
-            DgvItemList.Columns("粗利額").HeaderText = "粗利額:o=(k-b)*a"
-            DgvItemList.Columns("粗利率").HeaderText = "粗利率(%):p=(1-(b/k))*100"
+            DgvItemList.Columns("見積単価").HeaderText = "見積単価" & vbCrLf & "m=k+e+g+i"
+            DgvItemList.Columns("見積金額").HeaderText = "見積金額" & vbCrLf & "n=a*m"
+            DgvItemList.Columns("粗利額").HeaderText = "粗利額" & vbCrLf & "o=a*(k-b)"
+            DgvItemList.Columns("粗利率").HeaderText = "粗利率(%)" & vbCrLf & "p=(1-(b/k))*100"
 
 
-            DgvItemList.Columns("見積単価_外貨").HeaderText = "見積単価" & vbCrLf & "（外貨）"
-            DgvItemList.Columns("見積金額_外貨").HeaderText = "見積金額" & vbCrLf & "（外貨）"
+            DgvItemList.Columns("見積単価_外貨").HeaderText = "見積単価" & vbCrLf & "（原通貨）"
+            DgvItemList.Columns("見積金額_外貨").HeaderText = "見積金額" & vbCrLf & "（原通貨）"
 
         End If
 
