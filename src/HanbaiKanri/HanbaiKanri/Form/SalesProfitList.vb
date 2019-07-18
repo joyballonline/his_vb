@@ -139,8 +139,9 @@ Public Class SalesProfitList
 
         DgvList.Rows.Clear() '一覧クリア
 
-        Sql = " SELECT t30.*, SUM(t31.見積金額) as 見積金額, SUM(t31.間接費) as 間接費 "
-        Sql += " , SUM(t31.売上金額) as 売上金額, SUM(t31.粗利額) as 粗利額 "
+        Sql = " SELECT t30.会社コード, t30.売上番号, t30.売上番号枝番, SUM(t31.見積金額) as 見積金額, SUM(t31.間接費) as 間接費 "
+        Sql += " , SUM(t31.売上金額) as 売上金額, SUM(t31.粗利額) as 粗利額 ,t30.更新日,max(t30.売上日) as 売上日"
+        Sql += " , MAX(t30.得意先名) as 得意先名, MAX(t30.客先番号) as 客先番号 ,MAX(t30.営業担当者) as 営業担当者 ,MAX(t30.ＶＡＴ) as ＶＡＴ"
         Sql += " FROM t30_urighd t30 "
         Sql += " INNER JOIN t31_urigdt t31 "
         Sql += " ON t30.会社コード = t31.会社コード "
@@ -154,7 +155,7 @@ Public Class SalesProfitList
 
         Sql += " WHERE t30.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '取消区分=0
         Sql += " AND t30.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        Sql += " GROUP BY t30.会社コード, t30.売上番号, t30.売上番号枝番 "
+        Sql += " GROUP BY t30.会社コード, t30.売上番号, t30.売上番号枝番, t30.更新日 "
         Sql += " ORDER BY t30.更新日 DESC "
 
         Try
