@@ -291,7 +291,11 @@ Public Class Ordering
             LblShipDate.Text = "ShipDate"
             LblWarehouse.Text = "Warehouse"
 
-            LblPurchaseAmount.Text = "PurchaseOrderAmount"
+            lblPurchasecost.Text = "PurchaseCost（c）"      '仕入原価
+            LblPurchaseAmount.Text = "PurchaseAmount（j）"  '仕入金額
+
+            LblPurchaseAmount2.Text = "PurchaseAmount"  '仕入金額_外貨(原通貨)
+
             'LblPurchaseAmount.Size = New Size(180, 23)
             'LblPurchaseAmount.Location = New Point(923, 465)
 
@@ -307,7 +311,6 @@ Public Class Ordering
             LblCurrency.Text = "PurchaseCurrency" '仕入通貨
             LblRate.Text = "Rate" 'レート
 
-            LblPurchaseCurrencyAmount.Text = "PurchaseOrderAmount" '発注金額
             LblIDRCurrency.Text = "Currency" '通貨
             LblChangeCurrency.Text = "Currency" '通貨
 
@@ -337,6 +340,7 @@ Public Class Ordering
             DgvItemList.Columns("リードタイム単位").HeaderText = "LeadTimeUnit"
             DgvItemList.Columns("貿易条件").HeaderText = "TradeTerms"
             DgvItemList.Columns("備考").HeaderText = "Remarks"
+
         Else
             '日本語用見出し
             DgvItemList.Columns("数量").HeaderText = "数量" & vbCrLf & "a"
@@ -587,7 +591,7 @@ Public Class Ordering
 
         If dsHattyu.Tables(RS).Rows(0)("仕入金額_外貨") IsNot DBNull.Value Then
             Dim tmp_cur As Decimal = dsHattyu.Tables(RS).Rows(0)("仕入金額_外貨")
-            TxtPurchaseCurrencyAmount.Text = Decimal.Parse(tmp_cur).ToString("N0")
+            TxtPurchaseAmount2.Text = Decimal.Parse(tmp_cur).ToString("N0")
         End If
 
         For i As Integer = 0 To dsHattyudt.Tables(RS).Rows.Count - 1
@@ -754,9 +758,6 @@ Public Class Ordering
     'セルの値が変更されたら
     Private Sub CellValueChanged(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles DgvItemList.CellValueChanged
 
-        Dim PurchaseTotal As Long = 0
-        Dim CurrencyTotal As Long = 0
-
         Dim tmp As Decimal = 0
         Dim tmp1 As Decimal = 0
         Dim tmp2 As Decimal = 0
@@ -780,7 +781,7 @@ Public Class Ordering
 
             '発注金額をクリア
             TxtPurchaseAmount.Text = 0
-            TxtPurchaseCurrencyAmount.Text = 0
+            TxtPurchaseAmount2.Text = 0
 
 
             '各項目の属性チェック
@@ -895,7 +896,15 @@ Public Class Ordering
                     DgvItemList.Rows(e.RowIndex).Cells("仕入金額").Value = DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value _
                                                                          + (DgvItemList.Rows(e.RowIndex).Cells("関税額").Value + DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value + DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value) _
                                                                          * DgvItemList.Rows(e.RowIndex).Cells("数量").Value
-                    DgvItemList.Rows(e.RowIndex).Cells("仕入金額_外貨").Value = Math.Ceiling(DgvItemList.Rows(e.RowIndex).Cells("仕入金額").Value * TxtRate.Text)
+
+                    If (DgvItemList.Rows(e.RowIndex).Cells("関税額").Value Is Nothing Or DgvItemList.Rows(e.RowIndex).Cells("関税額").Value = 0) _
+                       And (DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value Is Nothing Or DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value = 0) _
+                       And (DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value Is Nothing Or DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value = 0) Then
+                        DgvItemList.Rows(e.RowIndex).Cells("仕入金額_外貨").Value = DgvItemList.Rows(e.RowIndex).Cells("仕入単価_外貨").Value * DgvItemList.Rows(e.RowIndex).Cells("数量").Value
+                    Else
+                        DgvItemList.Rows(e.RowIndex).Cells("仕入金額_外貨").Value = Math.Ceiling(DgvItemList.Rows(e.RowIndex).Cells("仕入金額").Value * TxtRate.Text)
+                    End If
+
                 End If
 
                 If currentColumn = "仕入単価" Then
@@ -915,13 +924,10 @@ Public Class Ordering
             setCellValueChanged()
         End If
 
-        '明細をループし、仕入金額を合算する
-        For i As Integer = 0 To DgvItemList.Rows.Count - 1
-            PurchaseTotal += DgvItemList.Rows(i).Cells("仕入金額").Value
-            CurrencyTotal += DgvItemList.Rows(i).Cells("仕入金額_外貨").Value
-        Next
-        TxtPurchaseAmount.Text = PurchaseTotal.ToString("N0")
-        TxtPurchaseCurrencyAmount.Text = CurrencyTotal.ToString("N0")
+
+        'ヘッダー
+        Call setCurrency()
+
 
     End Sub
 
@@ -1003,16 +1009,11 @@ Public Class Ordering
             DgvItemList.Rows.RemoveAt(r.RowIndex)
         Next r
 
+        txtPurchasecost.Clear()
         TxtPurchaseAmount.Clear()
+        TxtPurchaseAmount2.Clear()
 
-        Dim Total As Integer = 0
-        Dim PurchaseTotal As Integer = 0
-        Dim GrossProfit As Decimal = 0
-
-        For c As Integer = 0 To DgvItemList.Rows.Count - 1
-            PurchaseTotal += DgvItemList.Rows(c).Cells("仕入金額").Value
-        Next
-        TxtPurchaseAmount.Text = PurchaseTotal
+        Call resetListCurrency()
 
         '行番号の振り直し
         Dim index As Integer = DgvItemList.Rows.Count()
@@ -1401,7 +1402,7 @@ Public Class Ordering
                 Sql += "', '"
                 Sql += UtilClass.formatNumberF10(TxtRate.Text) 'レート
                 Sql += "', '"
-                Sql += formatNumber(TxtPurchaseCurrencyAmount.Text)  '仕入金額_外貨
+                Sql += formatNumber(TxtPurchaseAmount2.Text)  '仕入金額_外貨
 
                 If PurchaseStatus <> CommonConst.STATUS_ADD And dsHattyuHd.Tables(RS).Rows.Count > 0 Then
                     If dsHattyuHd.Tables(RS).Rows(0)("見積番号") <> "" Then
@@ -2121,13 +2122,18 @@ Public Class Ordering
         Dim currencyVal As Decimal = IIf(TxtRate.Text <> "", TxtRate.Text, 0)
         Dim PurchaseTotal As Decimal = 0
         Dim CurrencyTotal As Decimal = 0
+        Dim Purchasecost As Decimal = 0
 
         For c As Integer = 0 To DgvItemList.Rows.Count - 1
+            Purchasecost += DgvItemList.Rows(c).Cells("仕入原価").Value
             PurchaseTotal += DgvItemList.Rows(c).Cells("仕入金額").Value
             CurrencyTotal += DgvItemList.Rows(c).Cells("仕入金額_外貨").Value
         Next
+
+        txtPurchasecost.Text = Purchasecost.ToString("N0")     '仕入原価
         TxtPurchaseAmount.Text = PurchaseTotal.ToString("N0")
-        TxtPurchaseCurrencyAmount.Text = CurrencyTotal.ToString("N0")
+
+        TxtPurchaseAmount2.Text = CurrencyTotal.ToString("N0")
 
     End Sub
 
@@ -2174,7 +2180,16 @@ Public Class Ordering
                                                                      + (DgvItemList.Rows(i).Cells("関税額").Value + DgvItemList.Rows(i).Cells("前払法人税額").Value + DgvItemList.Rows(i).Cells("輸送費額").Value) _
                                                                      * DgvItemList.Rows(i).Cells("数量").Value
 
-                    DgvItemList.Rows(i).Cells("仕入金額_外貨").Value = Math.Ceiling(DgvItemList.Rows(i).Cells("仕入金額").Value * TxtRate.Text)
+                    '仕入金額_外貨
+                    If (DgvItemList.Rows(i).Cells("関税額").Value Is Nothing Or DgvItemList.Rows(i).Cells("関税額").Value = 0) _
+                       And (DgvItemList.Rows(i).Cells("前払法人税額").Value Is Nothing Or DgvItemList.Rows(i).Cells("前払法人税額").Value = 0) _
+                       And (DgvItemList.Rows(i).Cells("輸送費額").Value Is Nothing Or DgvItemList.Rows(i).Cells("輸送費額").Value = 0) Then
+
+                        DgvItemList.Rows(i).Cells("仕入金額_外貨").Value = DgvItemList.Rows(i).Cells("仕入単価_外貨").Value * DgvItemList.Rows(i).Cells("数量").Value
+                    Else
+                        DgvItemList.Rows(i).Cells("仕入金額_外貨").Value = Math.Ceiling(DgvItemList.Rows(i).Cells("仕入金額").Value * TxtRate.Text)
+                    End If
+
                 End If
 
                 setCellValueChanged()
@@ -2185,8 +2200,8 @@ Public Class Ordering
     Private Sub CmCurrency_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmCurrency.SelectedIndexChanged
         setRate()
         setChangeCurrency()
-        resetListCurrency()
-        setCurrency()
+        resetListCurrency()  '明細
+        setCurrency()        'ヘッダー
     End Sub
 
     Private Sub setSireTax(ByVal prmRowIndex As Integer)
