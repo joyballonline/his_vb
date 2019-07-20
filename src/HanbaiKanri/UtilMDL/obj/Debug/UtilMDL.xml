@@ -1752,6 +1752,13 @@ Dim RtnDir As String = UtilDirectorySelector.choiceFolder("C:\WINDOWS", "○○�
  <returns>True=空白では無い, False=空白</returns>
  <remarks></remarks>
 </member>
+<member name="M:UtilMDL.UtilClass.jaDatetimeFormat(System.DateTime)">
+ <summary>
+ 空白判定
+ </summary>
+ <returns>True=空白では無い, False=空白</returns>
+ <remarks></remarks>
+</member>
 <member name="T:UtilMDL.xls.UtilExcelHandler.HorizontalAlignment">
  <summary>
  横位置を表す列挙体

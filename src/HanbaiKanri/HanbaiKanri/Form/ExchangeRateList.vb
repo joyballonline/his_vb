@@ -110,11 +110,12 @@ Public Class ExchangeRateList
         '使用言語によって表示切替
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
             DgvList.Columns("基準日").HeaderText = "StandardDate"
-            DgvList.Columns("採番キー").HeaderText = "NumberingKey"
+            DgvList.Columns("採番キー").HeaderText = "Currency"
             DgvList.Columns("レート").HeaderText = "Rate"
             DgvList.Columns("更新者").HeaderText = "ModifiedBy"
             DgvList.Columns("更新日").HeaderText = "UpdateDate"
-
+        Else
+            DgvList.Columns("採番キー").HeaderText = "通貨"
         End If
         Try
 
@@ -146,7 +147,7 @@ Public Class ExchangeRateList
             For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
                 DgvList.Rows.Add()
                 DgvList.Rows(i).Cells("基準日").Value = ds.Tables(RS).Rows(i)("基準日").ToShortDateString()
-                DgvList.Rows(i).Cells("採番キー").Value = ds.Tables(RS).Rows(i)("採番キー")
+                DgvList.Rows(i).Cells("採番キー").Value = ds.Tables(RS).Rows(i)("通貨コード")
                 DgvList.Rows(i).Cells("レート").Value = ds.Tables(RS).Rows(i)("レート")
                 DgvList.Rows(i).Cells("更新者").Value = ds.Tables(RS).Rows(i)("更新者")
                 DgvList.Rows(i).Cells("更新日").Value = ds.Tables(RS).Rows(i)("更新日")
