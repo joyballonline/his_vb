@@ -141,7 +141,11 @@ Public Class OrderRemainingList
             Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
         End Try
 
-
+        '数字形式
+        DgvCymndt.Columns("数量").DefaultCellStyle.Format = "N0"
+        DgvCymndt.Columns("単価").DefaultCellStyle.Format = "N0"
+        DgvCymndt.Columns("計").DefaultCellStyle.Format = "N0"
+        DgvCymndt.Columns("受注残数").DefaultCellStyle.Format = "N0"
 
     End Sub
 
