@@ -458,7 +458,11 @@ Public Class AccountsPayable
             BuyToHangAmount = Math.Ceiling(BuyToHangAmountFC / strRate)  '画面の金額をIDRに変換　切り上げ
 
             '買掛残高
-            AccountsPayableFC = DgvCymn.Rows(0).Cells("買掛残高").Value - DgvAdd.Rows(0).Cells("今回買掛金額計").Value
+            '買掛残高の意味：今回登録した買掛金額から後工程の入金額を減額したもの
+            'なので初期登録時は今回買掛金額計と同一のものが入る
+            'AccountsPayableFC = DgvCymn.Rows(0).Cells("買掛残高").Value - DgvAdd.Rows(0).Cells("今回買掛金額計").Value
+            'AccountsPayable = Math.Ceiling(AccountsPayableFC / strRate)  '画面の金額をIDRに変換　切り上げ
+            AccountsPayableFC = DgvAdd.Rows(0).Cells("今回買掛金額計").Value
             AccountsPayable = Math.Ceiling(AccountsPayableFC / strRate)  '画面の金額をIDRに変換　切り上げ
 
 
