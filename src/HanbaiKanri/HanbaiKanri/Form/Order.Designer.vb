@@ -164,7 +164,7 @@ Partial Class Order
         Me.TxtVatAmount.MaxLength = 10
         Me.TxtVatAmount.Name = "TxtVatAmount"
         Me.TxtVatAmount.ReadOnly = True
-        Me.TxtVatAmount.Size = New System.Drawing.Size(231, 23)
+        Me.TxtVatAmount.Size = New System.Drawing.Size(231, 39)
         Me.TxtVatAmount.TabIndex = 184
         Me.TxtVatAmount.TabStop = False
         Me.TxtVatAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -199,7 +199,7 @@ Partial Class Order
         Me.TxtOrderRemark.Location = New System.Drawing.Point(126, 393)
         Me.TxtOrderRemark.MaxLength = 50
         Me.TxtOrderRemark.Name = "TxtOrderRemark"
-        Me.TxtOrderRemark.Size = New System.Drawing.Size(332, 23)
+        Me.TxtOrderRemark.Size = New System.Drawing.Size(332, 39)
         Me.TxtOrderRemark.TabIndex = 4
         '
         'DtpExpiration
@@ -211,7 +211,7 @@ Partial Class Order
         Me.DtpExpiration.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.DtpExpiration.Location = New System.Drawing.Point(933, 43)
         Me.DtpExpiration.Name = "DtpExpiration"
-        Me.DtpExpiration.Size = New System.Drawing.Size(140, 22)
+        Me.DtpExpiration.Size = New System.Drawing.Size(140, 37)
         Me.DtpExpiration.TabIndex = 175
         Me.DtpExpiration.TabStop = False
         Me.DtpExpiration.Value = New Date(2018, 6, 5, 23, 23, 58, 0)
@@ -225,7 +225,7 @@ Partial Class Order
         Me.DtpQuoteDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.DtpQuoteDate.Location = New System.Drawing.Point(661, 43)
         Me.DtpQuoteDate.Name = "DtpQuoteDate"
-        Me.DtpQuoteDate.Size = New System.Drawing.Size(150, 22)
+        Me.DtpQuoteDate.Size = New System.Drawing.Size(150, 37)
         Me.DtpQuoteDate.TabIndex = 174
         Me.DtpQuoteDate.TabStop = False
         Me.DtpQuoteDate.Value = New Date(2018, 6, 5, 23, 23, 58, 0)
@@ -235,7 +235,7 @@ Partial Class Order
         Me.LblHyphen.AutoSize = True
         Me.LblHyphen.Location = New System.Drawing.Point(221, 49)
         Me.LblHyphen.Name = "LblHyphen"
-        Me.LblHyphen.Size = New System.Drawing.Size(11, 12)
+        Me.LblHyphen.Size = New System.Drawing.Size(22, 24)
         Me.LblHyphen.TabIndex = 173
         Me.LblHyphen.Text = "-"
         '
@@ -248,7 +248,7 @@ Partial Class Order
         Me.DtpQuoteRegistration.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.DtpQuoteRegistration.Location = New System.Drawing.Point(391, 42)
         Me.DtpQuoteRegistration.Name = "DtpQuoteRegistration"
-        Me.DtpQuoteRegistration.Size = New System.Drawing.Size(148, 22)
+        Me.DtpQuoteRegistration.Size = New System.Drawing.Size(148, 37)
         Me.DtpQuoteRegistration.TabIndex = 3
         Me.DtpQuoteRegistration.TabStop = False
         Me.DtpQuoteRegistration.Value = New Date(2018, 6, 5, 23, 23, 58, 0)
@@ -286,7 +286,7 @@ Partial Class Order
         Me.TxtQuoteSuffix.MaxLength = 1
         Me.TxtQuoteSuffix.Name = "TxtQuoteSuffix"
         Me.TxtQuoteSuffix.ReadOnly = True
-        Me.TxtQuoteSuffix.Size = New System.Drawing.Size(29, 23)
+        Me.TxtQuoteSuffix.Size = New System.Drawing.Size(29, 39)
         Me.TxtQuoteSuffix.TabIndex = 169
         Me.TxtQuoteSuffix.TabStop = False
         '
@@ -299,7 +299,7 @@ Partial Class Order
         Me.TxtQuoteNo.MaxLength = 8
         Me.TxtQuoteNo.Name = "TxtQuoteNo"
         Me.TxtQuoteNo.ReadOnly = True
-        Me.TxtQuoteNo.Size = New System.Drawing.Size(88, 23)
+        Me.TxtQuoteNo.Size = New System.Drawing.Size(88, 39)
         Me.TxtQuoteNo.TabIndex = 168
         Me.TxtQuoteNo.TabStop = False
         '
@@ -335,7 +335,7 @@ Partial Class Order
         Me.DtpOrderDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.DtpOrderDate.Location = New System.Drawing.Point(727, 12)
         Me.DtpOrderDate.Name = "DtpOrderDate"
-        Me.DtpOrderDate.Size = New System.Drawing.Size(130, 22)
+        Me.DtpOrderDate.Size = New System.Drawing.Size(130, 37)
         Me.DtpOrderDate.TabIndex = 2
         Me.DtpOrderDate.Value = New Date(2018, 6, 5, 23, 23, 58, 0)
         '
@@ -348,7 +348,7 @@ Partial Class Order
         Me.TxtOrderAmount.MaxLength = 10
         Me.TxtOrderAmount.Name = "TxtOrderAmount"
         Me.TxtOrderAmount.ReadOnly = True
-        Me.TxtOrderAmount.Size = New System.Drawing.Size(231, 23)
+        Me.TxtOrderAmount.Size = New System.Drawing.Size(231, 39)
         Me.TxtOrderAmount.TabIndex = 162
         Me.TxtOrderAmount.TabStop = False
         Me.TxtOrderAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -374,7 +374,7 @@ Partial Class Order
         Me.TxtGrossProfit.MaxLength = 10
         Me.TxtGrossProfit.Name = "TxtGrossProfit"
         Me.TxtGrossProfit.ReadOnly = True
-        Me.TxtGrossProfit.Size = New System.Drawing.Size(231, 23)
+        Me.TxtGrossProfit.Size = New System.Drawing.Size(231, 39)
         Me.TxtGrossProfit.TabIndex = 160
         Me.TxtGrossProfit.TabStop = False
         Me.TxtGrossProfit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -400,7 +400,7 @@ Partial Class Order
         Me.TxtItemCount.MaxLength = 20
         Me.TxtItemCount.Name = "TxtItemCount"
         Me.TxtItemCount.ReadOnly = True
-        Me.TxtItemCount.Size = New System.Drawing.Size(85, 23)
+        Me.TxtItemCount.Size = New System.Drawing.Size(85, 39)
         Me.TxtItemCount.TabIndex = 158
         Me.TxtItemCount.TabStop = False
         Me.TxtItemCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -422,7 +422,7 @@ Partial Class Order
         Me.Label2.AutoSize = True
         Me.Label2.Location = New System.Drawing.Point(221, 20)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(11, 12)
+        Me.Label2.Size = New System.Drawing.Size(22, 24)
         Me.Label2.TabIndex = 157
         Me.Label2.Text = "-"
         '
@@ -434,7 +434,7 @@ Partial Class Order
         Me.TxtCustomerCode.Location = New System.Drawing.Point(127, 71)
         Me.TxtCustomerCode.MaxLength = 50
         Me.TxtCustomerCode.Name = "TxtCustomerCode"
-        Me.TxtCustomerCode.Size = New System.Drawing.Size(140, 23)
+        Me.TxtCustomerCode.Size = New System.Drawing.Size(140, 39)
         Me.TxtCustomerCode.TabIndex = 126
         Me.TxtCustomerCode.TabStop = False
         '
@@ -457,7 +457,7 @@ Partial Class Order
         Me.DtpOrderRegistration.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.DtpOrderRegistration.Location = New System.Drawing.Point(979, 11)
         Me.DtpOrderRegistration.Name = "DtpOrderRegistration"
-        Me.DtpOrderRegistration.Size = New System.Drawing.Size(130, 22)
+        Me.DtpOrderRegistration.Size = New System.Drawing.Size(130, 37)
         Me.DtpOrderRegistration.TabIndex = 119
         Me.DtpOrderRegistration.TabStop = False
         Me.DtpOrderRegistration.Value = New Date(2018, 6, 5, 23, 23, 58, 0)
@@ -492,7 +492,7 @@ Partial Class Order
         Me.TxtSales.Location = New System.Drawing.Point(1127, 71)
         Me.TxtSales.MaxLength = 20
         Me.TxtSales.Name = "TxtSales"
-        Me.TxtSales.Size = New System.Drawing.Size(211, 23)
+        Me.TxtSales.Size = New System.Drawing.Size(211, 39)
         Me.TxtSales.TabIndex = 146
         Me.TxtSales.TabStop = False
         '
@@ -517,7 +517,7 @@ Partial Class Order
         Me.TxtOrderSuffix.MaxLength = 1
         Me.TxtOrderSuffix.Name = "TxtOrderSuffix"
         Me.TxtOrderSuffix.ReadOnly = True
-        Me.TxtOrderSuffix.Size = New System.Drawing.Size(29, 23)
+        Me.TxtOrderSuffix.Size = New System.Drawing.Size(29, 39)
         Me.TxtOrderSuffix.TabIndex = 129
         Me.TxtOrderSuffix.TabStop = False
         '
@@ -567,7 +567,7 @@ Partial Class Order
         Me.TxtPosition.Location = New System.Drawing.Point(765, 158)
         Me.TxtPosition.MaxLength = 50
         Me.TxtPosition.Name = "TxtPosition"
-        Me.TxtPosition.Size = New System.Drawing.Size(200, 23)
+        Me.TxtPosition.Size = New System.Drawing.Size(200, 39)
         Me.TxtPosition.TabIndex = 145
         Me.TxtPosition.TabStop = False
         '
@@ -603,7 +603,7 @@ Partial Class Order
         Me.TxtTel.Location = New System.Drawing.Point(765, 71)
         Me.TxtTel.MaxLength = 15
         Me.TxtTel.Name = "TxtTel"
-        Me.TxtTel.Size = New System.Drawing.Size(200, 23)
+        Me.TxtTel.Size = New System.Drawing.Size(200, 39)
         Me.TxtTel.TabIndex = 142
         Me.TxtTel.TabStop = False
         '
@@ -640,7 +640,7 @@ Partial Class Order
         Me.TxtPerson.Location = New System.Drawing.Point(765, 129)
         Me.TxtPerson.MaxLength = 50
         Me.TxtPerson.Name = "TxtPerson"
-        Me.TxtPerson.Size = New System.Drawing.Size(200, 23)
+        Me.TxtPerson.Size = New System.Drawing.Size(200, 39)
         Me.TxtPerson.TabIndex = 144
         Me.TxtPerson.TabStop = False
         '
@@ -664,7 +664,7 @@ Partial Class Order
         Me.TxtFax.Location = New System.Drawing.Point(765, 100)
         Me.TxtFax.MaxLength = 15
         Me.TxtFax.Name = "TxtFax"
-        Me.TxtFax.Size = New System.Drawing.Size(200, 23)
+        Me.TxtFax.Size = New System.Drawing.Size(200, 39)
         Me.TxtFax.TabIndex = 143
         Me.TxtFax.TabStop = False
         '
@@ -676,7 +676,7 @@ Partial Class Order
         Me.TxtPostalCode.Location = New System.Drawing.Point(127, 100)
         Me.TxtPostalCode.MaxLength = 7
         Me.TxtPostalCode.Name = "TxtPostalCode"
-        Me.TxtPostalCode.Size = New System.Drawing.Size(140, 23)
+        Me.TxtPostalCode.Size = New System.Drawing.Size(140, 39)
         Me.TxtPostalCode.TabIndex = 131
         Me.TxtPostalCode.TabStop = False
         Me.TxtPostalCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -713,7 +713,7 @@ Partial Class Order
         Me.TxtCustomerName.Location = New System.Drawing.Point(273, 71)
         Me.TxtCustomerName.MaxLength = 50
         Me.TxtCustomerName.Name = "TxtCustomerName"
-        Me.TxtCustomerName.Size = New System.Drawing.Size(330, 23)
+        Me.TxtCustomerName.Size = New System.Drawing.Size(330, 39)
         Me.TxtCustomerName.TabIndex = 128
         Me.TxtCustomerName.TabStop = False
         '
@@ -726,7 +726,7 @@ Partial Class Order
         Me.TxtInput.MaxLength = 20
         Me.TxtInput.Name = "TxtInput"
         Me.TxtInput.ReadOnly = True
-        Me.TxtInput.Size = New System.Drawing.Size(211, 23)
+        Me.TxtInput.Size = New System.Drawing.Size(211, 39)
         Me.TxtInput.TabIndex = 132
         Me.TxtInput.TabStop = False
         '
@@ -751,7 +751,7 @@ Partial Class Order
         Me.TxtOrderNo.MaxLength = 8
         Me.TxtOrderNo.Name = "TxtOrderNo"
         Me.TxtOrderNo.ReadOnly = True
-        Me.TxtOrderNo.Size = New System.Drawing.Size(88, 23)
+        Me.TxtOrderNo.Size = New System.Drawing.Size(88, 39)
         Me.TxtOrderNo.TabIndex = 127
         Me.TxtOrderNo.TabStop = False
         '
@@ -815,7 +815,7 @@ Partial Class Order
         Me.TxtPurchaseAmount.MaxLength = 10
         Me.TxtPurchaseAmount.Name = "TxtPurchaseAmount"
         Me.TxtPurchaseAmount.ReadOnly = True
-        Me.TxtPurchaseAmount.Size = New System.Drawing.Size(231, 23)
+        Me.TxtPurchaseAmount.Size = New System.Drawing.Size(231, 39)
         Me.TxtPurchaseAmount.TabIndex = 186
         Me.TxtPurchaseAmount.TabStop = False
         Me.TxtPurchaseAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -851,7 +851,7 @@ Partial Class Order
         Me.TxtCustomerPO.Location = New System.Drawing.Point(391, 13)
         Me.TxtCustomerPO.MaxLength = 20
         Me.TxtCustomerPO.Name = "TxtCustomerPO"
-        Me.TxtCustomerPO.Size = New System.Drawing.Size(176, 23)
+        Me.TxtCustomerPO.Size = New System.Drawing.Size(176, 39)
         Me.TxtCustomerPO.TabIndex = 1
         '
         'LblCustomerPO
@@ -876,7 +876,7 @@ Partial Class Order
         Me.TxtRate.MaxLength = 20
         Me.TxtRate.Name = "TxtRate"
         Me.TxtRate.ReadOnly = True
-        Me.TxtRate.Size = New System.Drawing.Size(211, 23)
+        Me.TxtRate.Size = New System.Drawing.Size(211, 39)
         Me.TxtRate.TabIndex = 326
         Me.TxtRate.TabStop = False
         '
@@ -911,7 +911,7 @@ Partial Class Order
         Me.CmCurrency.Items.AddRange(New Object() {"RegularShip", "DHL", "Air", "Ship"})
         Me.CmCurrency.Location = New System.Drawing.Point(1127, 129)
         Me.CmCurrency.Name = "CmCurrency"
-        Me.CmCurrency.Size = New System.Drawing.Size(211, 23)
+        Me.CmCurrency.Size = New System.Drawing.Size(211, 38)
         Me.CmCurrency.TabIndex = 323
         '
         'TxtChangeCurrency
@@ -923,7 +923,7 @@ Partial Class Order
         Me.TxtChangeCurrency.MaxLength = 20
         Me.TxtChangeCurrency.Name = "TxtChangeCurrency"
         Me.TxtChangeCurrency.ReadOnly = True
-        Me.TxtChangeCurrency.Size = New System.Drawing.Size(70, 23)
+        Me.TxtChangeCurrency.Size = New System.Drawing.Size(70, 39)
         Me.TxtChangeCurrency.TabIndex = 330
         Me.TxtChangeCurrency.TabStop = False
         Me.TxtChangeCurrency.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -949,7 +949,7 @@ Partial Class Order
         Me.TxtIDRCurrency.MaxLength = 20
         Me.TxtIDRCurrency.Name = "TxtIDRCurrency"
         Me.TxtIDRCurrency.ReadOnly = True
-        Me.TxtIDRCurrency.Size = New System.Drawing.Size(70, 23)
+        Me.TxtIDRCurrency.Size = New System.Drawing.Size(70, 39)
         Me.TxtIDRCurrency.TabIndex = 328
         Me.TxtIDRCurrency.TabStop = False
         Me.TxtIDRCurrency.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -975,7 +975,7 @@ Partial Class Order
         Me.TxtVat.MaxLength = 10
         Me.TxtVat.Name = "TxtVat"
         Me.TxtVat.ReadOnly = True
-        Me.TxtVat.Size = New System.Drawing.Size(231, 23)
+        Me.TxtVat.Size = New System.Drawing.Size(231, 39)
         Me.TxtVat.TabIndex = 331
         Me.TxtVat.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -1000,7 +1000,7 @@ Partial Class Order
         Me.TxtCurrencyVatAmount.MaxLength = 10
         Me.TxtCurrencyVatAmount.Name = "TxtCurrencyVatAmount"
         Me.TxtCurrencyVatAmount.ReadOnly = True
-        Me.TxtCurrencyVatAmount.Size = New System.Drawing.Size(231, 23)
+        Me.TxtCurrencyVatAmount.Size = New System.Drawing.Size(231, 39)
         Me.TxtCurrencyVatAmount.TabIndex = 333
         Me.TxtCurrencyVatAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -1025,7 +1025,7 @@ Partial Class Order
         Me.TxtOrderCurrencyAmount.MaxLength = 10
         Me.TxtOrderCurrencyAmount.Name = "TxtOrderCurrencyAmount"
         Me.TxtOrderCurrencyAmount.ReadOnly = True
-        Me.TxtOrderCurrencyAmount.Size = New System.Drawing.Size(231, 23)
+        Me.TxtOrderCurrencyAmount.Size = New System.Drawing.Size(231, 39)
         Me.TxtOrderCurrencyAmount.TabIndex = 335
         Me.TxtOrderCurrencyAmount.TabStop = False
         Me.TxtOrderCurrencyAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -1098,6 +1098,8 @@ Partial Class Order
         '仕入値
         '
         DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle6.Format = "N2"
+        DataGridViewCellStyle6.NullValue = "0.00"
         Me.仕入値.DefaultCellStyle = DataGridViewCellStyle6
         Me.仕入値.HeaderText = "仕入値"
         Me.仕入値.MaxInputLength = 15
@@ -1115,6 +1117,8 @@ Partial Class Order
         '仕入単価_外貨
         '
         DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle7.Format = "N2"
+        DataGridViewCellStyle7.NullValue = "0.00"
         Me.仕入単価_外貨.DefaultCellStyle = DataGridViewCellStyle7
         Me.仕入単価_外貨.HeaderText = "仕入単価（外貨）"
         Me.仕入単価_外貨.MaxInputLength = 15
@@ -1123,6 +1127,7 @@ Partial Class Order
         '仕入原価
         '
         DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle8.Format = "N0"
         Me.仕入原価.DefaultCellStyle = DataGridViewCellStyle8
         Me.仕入原価.HeaderText = "仕入原価"
         Me.仕入原価.MaxInputLength = 15
@@ -1131,6 +1136,8 @@ Partial Class Order
         '関税率
         '
         DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle9.Format = "N3"
+        DataGridViewCellStyle9.NullValue = "0.000"
         Me.関税率.DefaultCellStyle = DataGridViewCellStyle9
         Me.関税率.HeaderText = "関税率"
         Me.関税率.Name = "関税率"
@@ -1138,6 +1145,7 @@ Partial Class Order
         '関税額
         '
         DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle10.Format = "N0"
         Me.関税額.DefaultCellStyle = DataGridViewCellStyle10
         Me.関税額.HeaderText = "関税額"
         Me.関税額.Name = "関税額"
@@ -1145,6 +1153,8 @@ Partial Class Order
         '前払法人税率
         '
         DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle11.Format = "N3"
+        DataGridViewCellStyle11.NullValue = "0.000"
         Me.前払法人税率.DefaultCellStyle = DataGridViewCellStyle11
         Me.前払法人税率.HeaderText = "前払法人税率"
         Me.前払法人税率.Name = "前払法人税率"
@@ -1152,6 +1162,7 @@ Partial Class Order
         '前払法人税額
         '
         DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle12.Format = "N0"
         Me.前払法人税額.DefaultCellStyle = DataGridViewCellStyle12
         Me.前払法人税額.HeaderText = "前払法人税額"
         Me.前払法人税額.Name = "前払法人税額"
@@ -1159,6 +1170,8 @@ Partial Class Order
         '輸送費率
         '
         DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle13.Format = "N3"
+        DataGridViewCellStyle13.NullValue = "0.000"
         Me.輸送費率.DefaultCellStyle = DataGridViewCellStyle13
         Me.輸送費率.HeaderText = "輸送費率"
         Me.輸送費率.Name = "輸送費率"
@@ -1166,6 +1179,7 @@ Partial Class Order
         '輸送費額
         '
         DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle14.Format = "N0"
         Me.輸送費額.DefaultCellStyle = DataGridViewCellStyle14
         Me.輸送費額.HeaderText = "輸送費額"
         Me.輸送費額.Name = "輸送費額"
@@ -1174,6 +1188,7 @@ Partial Class Order
         '
         DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         DataGridViewCellStyle15.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle15.Format = "N0"
         Me.間接費.DefaultCellStyle = DataGridViewCellStyle15
         Me.間接費.HeaderText = "間接費"
         Me.間接費.MaxInputLength = 15
@@ -1184,6 +1199,7 @@ Partial Class Order
         '仕入金額
         '
         DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle16.Format = "N0"
         Me.仕入金額.DefaultCellStyle = DataGridViewCellStyle16
         Me.仕入金額.HeaderText = "仕入金額"
         Me.仕入金額.MaxInputLength = 15
@@ -1192,6 +1208,8 @@ Partial Class Order
         '売単価
         '
         DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle17.Format = "N2"
+        DataGridViewCellStyle17.NullValue = "0.00"
         Me.売単価.DefaultCellStyle = DataGridViewCellStyle17
         Me.売単価.HeaderText = "売単価"
         Me.売単価.Name = "売単価"
@@ -1201,6 +1219,7 @@ Partial Class Order
         '
         DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         DataGridViewCellStyle18.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle18.Format = "N0"
         Me.売上金額.DefaultCellStyle = DataGridViewCellStyle18
         Me.売上金額.HeaderText = "売上金額"
         Me.売上金額.MaxInputLength = 15
@@ -1210,6 +1229,8 @@ Partial Class Order
         '見積単価
         '
         DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle19.Format = "N2"
+        DataGridViewCellStyle19.NullValue = "0.00"
         Me.見積単価.DefaultCellStyle = DataGridViewCellStyle19
         Me.見積単価.HeaderText = "見積単価"
         Me.見積単価.MaxInputLength = 15
@@ -1218,6 +1239,8 @@ Partial Class Order
         '見積単価_外貨
         '
         DataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle20.Format = "N2"
+        DataGridViewCellStyle20.NullValue = "0.00"
         Me.見積単価_外貨.DefaultCellStyle = DataGridViewCellStyle20
         Me.見積単価_外貨.HeaderText = "見積単価（外貨）"
         Me.見積単価_外貨.MaxInputLength = 15
@@ -1226,6 +1249,7 @@ Partial Class Order
         '見積金額
         '
         DataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle21.Format = "N0"
         Me.見積金額.DefaultCellStyle = DataGridViewCellStyle21
         Me.見積金額.HeaderText = "見積金額"
         Me.見積金額.MaxInputLength = 15
@@ -1234,6 +1258,7 @@ Partial Class Order
         '見積金額_外貨
         '
         DataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle22.Format = "N0"
         Me.見積金額_外貨.DefaultCellStyle = DataGridViewCellStyle22
         Me.見積金額_外貨.HeaderText = "見積金額（外貨）"
         Me.見積金額_外貨.MaxInputLength = 15
@@ -1244,6 +1269,7 @@ Partial Class Order
         '
         DataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         DataGridViewCellStyle23.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle23.Format = "N0"
         Me.粗利額.DefaultCellStyle = DataGridViewCellStyle23
         Me.粗利額.HeaderText = "粗利額"
         Me.粗利額.Name = "粗利額"
