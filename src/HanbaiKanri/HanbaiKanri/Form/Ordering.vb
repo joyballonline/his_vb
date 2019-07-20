@@ -1994,7 +1994,7 @@ Public Class Ordering
     Private Sub DtpPurchaseDate_ValueChanged(sender As Object, e As EventArgs) Handles DtpPurchaseDate.ValueChanged
         '出荷日が発注日より小さかったら
         If DtpPurchaseDate.Value.ToString("yyyyMMdd") > DtpShippedDate.Value.ToString("yyyyMMdd") Then
-            DtpShippedDate.MinDate = DtpPurchaseDate.Value
+            'DtpShippedDate.MinDate = DtpPurchaseDate.Value  '過去日を入力できるようにするためコメントアウト
             DtpShippedDate.Value = DtpPurchaseDate.Value
         End If
 
