@@ -2200,7 +2200,11 @@ Public Class frmC01F30_Menu
 
     'タブを変更したら
     Private Sub TabProcessingMenu_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TabProcessingMenu.SelectedIndexChanged, TabProcessingMenu.SelectedIndexChanged, TabProcessingMenu.SelectedIndexChanged
-
+        If TabProcessingMenu.SelectedIndex = 2 Then
+            btnSelect.Visible = False
+        Else
+            btnSelect.Visible = True
+        End If
     End Sub
 
     'ログアウトボタンをクリックしたら
