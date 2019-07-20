@@ -1215,8 +1215,8 @@ Partial Class Quote
         '数量
         '
         DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle5.Format = "N0"
-        DataGridViewCellStyle5.NullValue = Nothing
+        DataGridViewCellStyle5.Format = "N2"
+        DataGridViewCellStyle5.NullValue = "0.00"
         Me.数量.DefaultCellStyle = DataGridViewCellStyle5
         Me.数量.HeaderText = "数量"
         Me.数量.MaxInputLength = 8
@@ -1253,7 +1253,8 @@ Partial Class Quote
         '仕入単価_外貨
         '
         DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle7.Format = "N0"
+        DataGridViewCellStyle7.Format = "N2"
+        DataGridViewCellStyle7.NullValue = "0.00"
         Me.仕入単価_外貨.DefaultCellStyle = DataGridViewCellStyle7
         Me.仕入単価_外貨.HeaderText = "仕入単価（外貨）"
         Me.仕入単価_外貨.MaxInputLength = 15
@@ -1263,8 +1264,8 @@ Partial Class Quote
         '仕入単価
         '
         DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle8.Format = "N0"
-        DataGridViewCellStyle8.NullValue = Nothing
+        DataGridViewCellStyle8.Format = "N2"
+        DataGridViewCellStyle8.NullValue = "0.00"
         Me.仕入単価.DefaultCellStyle = DataGridViewCellStyle8
         Me.仕入単価.HeaderText = "仕入単価"
         Me.仕入単価.MaxInputLength = 15
@@ -1356,7 +1357,8 @@ Partial Class Quote
         '売単価_外貨
         '
         DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle17.Format = "N0"
+        DataGridViewCellStyle17.Format = "N2"
+        DataGridViewCellStyle17.NullValue = "0.00"
         Me.売単価_外貨.DefaultCellStyle = DataGridViewCellStyle17
         Me.売単価_外貨.HeaderText = "売単価（外貨）"
         Me.売単価_外貨.MaxInputLength = 15
@@ -1366,8 +1368,8 @@ Partial Class Quote
         '売単価
         '
         DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle18.Format = "N0"
-        DataGridViewCellStyle18.NullValue = Nothing
+        DataGridViewCellStyle18.Format = "N2"
+        DataGridViewCellStyle18.NullValue = "0.00"
         Me.売単価.DefaultCellStyle = DataGridViewCellStyle18
         Me.売単価.HeaderText = "売単価"
         Me.売単価.MaxInputLength = 15
@@ -1390,7 +1392,8 @@ Partial Class Quote
         '
         DataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         DataGridViewCellStyle20.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle20.Format = "N0"
+        DataGridViewCellStyle20.Format = "N2"
+        DataGridViewCellStyle20.NullValue = "0.00"
         Me.見積単価_外貨.DefaultCellStyle = DataGridViewCellStyle20
         Me.見積単価_外貨.HeaderText = "見積単価（外貨）"
         Me.見積単価_外貨.Name = "見積単価_外貨"
@@ -1401,7 +1404,8 @@ Partial Class Quote
         '
         DataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         DataGridViewCellStyle21.BackColor = System.Drawing.Color.LightGray
-        DataGridViewCellStyle21.Format = "N0"
+        DataGridViewCellStyle21.Format = "N2"
+        DataGridViewCellStyle21.NullValue = "0.00"
         Me.見積単価.DefaultCellStyle = DataGridViewCellStyle21
         Me.見積単価.HeaderText = "見積単価"
         Me.見積単価.Name = "見積単価"
