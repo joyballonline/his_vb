@@ -577,12 +577,12 @@ Public Class BillingManagement
     End Sub
 
     '通貨の採番キーからレートを取得・設定
-    '基準日が請求日以前の最新のもの
+    '基準日が請求日「以前」の最新のもの
     Private Function setRate(ByVal strKey As Integer) As Decimal
         Dim Sql As String
 
         Sql = " AND 採番キー = " & strKey & ""
-        Sql += " AND 基準日 <= '" & UtilClass.strFormatDate(DtpBillingDate.Text) & "'"  '請求日
+        Sql += " AND 基準日 < '" & UtilClass.strFormatDate(DtpBillingDate.Text) & "'"  '請求日
         Sql += " ORDER BY 基準日 DESC "
 
         Dim ds As DataSet = getDsData("t71_exchangerate", Sql)
