@@ -1463,9 +1463,10 @@ Public Class Order
                 retVal = Decimal.Parse(CommonConst.BASE_RATE_JPY)
             End If
         Else
+            '基準日よりも古い最新のレートを取得
             Dim Sql As String = ""
             Sql = " AND 採番キー =" & prmCurrencyVal
-            Sql += " AND 基準日 <= '" & UtilClass.strFormatDate(DtpOrderDate.Text) & "'"
+            Sql += " AND 基準日 < '" & UtilClass.strFormatDate(DtpOrderDate.Text) & "'"
             Sql += " ORDER BY 基準日 DESC "
 
             Dim ds As DataSet = getDsData("t71_exchangerate", Sql)
@@ -1522,12 +1523,12 @@ Public Class Order
     End Sub
 
     '通貨の採番キーからレートを取得・設定
-    '基準日が見積日以前の最新のもの
+    '基準日が見積日「以前」の最新のもの
     Private Sub setRate()
         Dim Sql As String
 
         Sql = " AND 採番キー = " & CmCurrency.SelectedValue.ToString & ""
-        Sql += " AND 基準日 <= '" & UtilClass.strFormatDate(DtpQuoteDate.Text) & "'"
+        Sql += " AND 基準日 < '" & UtilClass.strFormatDate(DtpQuoteDate.Text) & "'"
         Sql += " ORDER BY 基準日 DESC "
 
         Dim ds As DataSet = getDsData("t71_exchangerate", Sql)
