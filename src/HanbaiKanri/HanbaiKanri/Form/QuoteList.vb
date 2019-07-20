@@ -620,6 +620,11 @@ Public Class QuoteList
         DgvMithd.Columns("ＶＡＴ").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvMithd.Columns("粗利額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
+        '数字形式
+        DgvMithd.Columns("見積金額").DefaultCellStyle.Format = "N0"
+        DgvMithd.Columns("仕入金額").DefaultCellStyle.Format = "N0"
+        DgvMithd.Columns("粗利額").DefaultCellStyle.Format = "N0"
+
     End Sub
 
     '明細表示形式選択時の見出しセット
@@ -677,6 +682,16 @@ Public Class QuoteList
         DgvMithd.Columns("粗利額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvMithd.Columns("粗利率").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvMithd.Columns("リードタイム").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+
+        '数字形式
+        DgvMithd.Columns("数量").DefaultCellStyle.Format = "N0"
+        DgvMithd.Columns("仕入単価").DefaultCellStyle.Format = "N0"
+        DgvMithd.Columns("間接費").DefaultCellStyle.Format = "N0"
+        DgvMithd.Columns("仕入金額").DefaultCellStyle.Format = "N0"
+        DgvMithd.Columns("売単価").DefaultCellStyle.Format = "N0"
+        DgvMithd.Columns("売上金額").DefaultCellStyle.Format = "N0"
+        DgvMithd.Columns("粗利額").DefaultCellStyle.Format = "N0"
 
     End Sub
 
