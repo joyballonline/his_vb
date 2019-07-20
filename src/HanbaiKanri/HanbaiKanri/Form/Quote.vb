@@ -969,6 +969,17 @@ Public Class Quote
                 DgvItemList("数量", e.RowIndex).Value = tmpCur
             End If
 
+            If currentColumn = "仕入単価_外貨" Then  '仕入単価_外貨の場合、カンマ処理
+                Dim tmpCur As Decimal = DgvItemList.Rows(e.RowIndex).Cells("仕入単価_外貨").Value
+                DgvItemList("仕入単価_外貨", e.RowIndex).Value = tmpCur
+            End If
+
+            If currentColumn = "売単価_外貨" Then  '売単価_外貨の場合、カンマ処理
+                Dim tmpCur As Decimal = DgvItemList.Rows(e.RowIndex).Cells("売単価_外貨").Value
+                DgvItemList("売単価_外貨", e.RowIndex).Value = tmpCur
+            End If
+
+
             '仕入通貨が変更されたら仕入レートを更新する
             If currentColumn = "仕入通貨" Then
                 Dim sireCurrencyCd As String = DgvItemList("仕入通貨", e.RowIndex).Value
