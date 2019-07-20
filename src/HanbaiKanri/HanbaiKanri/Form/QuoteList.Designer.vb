@@ -84,7 +84,7 @@ Partial Class QuoteList
         'BtnQuoteAdd
         '
         Me.BtnQuoteAdd.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.BtnQuoteAdd.Location = New System.Drawing.Point(308, 509)
+        Me.BtnQuoteAdd.Location = New System.Drawing.Point(318, 509)
         Me.BtnQuoteAdd.Name = "BtnQuoteAdd"
         Me.BtnQuoteAdd.Size = New System.Drawing.Size(165, 40)
         Me.BtnQuoteAdd.TabIndex = 17
@@ -95,7 +95,7 @@ Partial Class QuoteList
         'BtnQuoteEdit
         '
         Me.BtnQuoteEdit.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.BtnQuoteEdit.Location = New System.Drawing.Point(650, 509)
+        Me.BtnQuoteEdit.Location = New System.Drawing.Point(660, 509)
         Me.BtnQuoteEdit.Name = "BtnQuoteEdit"
         Me.BtnQuoteEdit.Size = New System.Drawing.Size(165, 40)
         Me.BtnQuoteEdit.TabIndex = 19
@@ -106,7 +106,7 @@ Partial Class QuoteList
         'BtnQuoteClone
         '
         Me.BtnQuoteClone.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.BtnQuoteClone.Location = New System.Drawing.Point(821, 509)
+        Me.BtnQuoteClone.Location = New System.Drawing.Point(831, 509)
         Me.BtnQuoteClone.Name = "BtnQuoteClone"
         Me.BtnQuoteClone.Size = New System.Drawing.Size(165, 40)
         Me.BtnQuoteClone.TabIndex = 20
@@ -298,7 +298,7 @@ Partial Class QuoteList
         'BtnQuoteView
         '
         Me.BtnQuoteView.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.BtnQuoteView.Location = New System.Drawing.Point(997, 509)
+        Me.BtnQuoteView.Location = New System.Drawing.Point(1002, 509)
         Me.BtnQuoteView.Name = "BtnQuoteView"
         Me.BtnQuoteView.Size = New System.Drawing.Size(165, 40)
         Me.BtnQuoteView.TabIndex = 21
@@ -309,7 +309,7 @@ Partial Class QuoteList
         'BtnUnitPrice
         '
         Me.BtnUnitPrice.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.BtnUnitPrice.Location = New System.Drawing.Point(479, 509)
+        Me.BtnUnitPrice.Location = New System.Drawing.Point(489, 509)
         Me.BtnUnitPrice.Name = "BtnUnitPrice"
         Me.BtnUnitPrice.Size = New System.Drawing.Size(165, 40)
         Me.BtnUnitPrice.TabIndex = 18
@@ -320,7 +320,7 @@ Partial Class QuoteList
         'BtnOrderPurchase
         '
         Me.BtnOrderPurchase.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.BtnOrderPurchase.Location = New System.Drawing.Point(137, 509)
+        Me.BtnOrderPurchase.Location = New System.Drawing.Point(147, 509)
         Me.BtnOrderPurchase.Name = "BtnOrderPurchase"
         Me.BtnOrderPurchase.Size = New System.Drawing.Size(165, 40)
         Me.BtnOrderPurchase.TabIndex = 16

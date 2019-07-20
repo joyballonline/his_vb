@@ -892,13 +892,14 @@ Public Class QuoteList
 
     '見積取消
     Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles BtnCancel.Click
-        Dim RowIdx As Integer
-        RowIdx = Me.DgvMithd.CurrentCell.RowIndex
-
         'グリッドに何もないときは次画面へ移動しない
         If actionChk() = False Then
             Return
         End If
+
+        Dim RowIdx As Integer
+        RowIdx = Me.DgvMithd.CurrentCell.RowIndex
+
 
         '明細表示時は取消操作不可能
         If RbtnDetails.Checked Then
@@ -1050,7 +1051,7 @@ Public Class QuoteList
         Sql += "public." & tableName
         Sql += " WHERE "
         Sql += "会社コード"
-        Sql += " ILIKE  "
+        Sql += " =  "
         Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql += txtParam
         Return _db.selectDB(Sql, RS, reccnt)
