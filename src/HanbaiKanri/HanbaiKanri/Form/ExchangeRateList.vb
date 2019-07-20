@@ -132,7 +132,7 @@ Public Class ExchangeRateList
             Sql += " AND "
             Sql += " t71.採番キー = m25.採番キー"
             Sql += " WHERE "
-            Sql += " t71.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += " t71.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
 
             Sql += viewSearchConditions() '抽出条件取得
 
@@ -258,9 +258,9 @@ Public Class ExchangeRateList
         Dim Sql As String = ""
 
         Sql = " AND "
-        Sql += "固定キー ILIKE '" & prmFixed & "'"
+        Sql += "固定キー = '" & prmFixed & "'"
         Sql += " AND "
-        Sql += "可変キー ILIKE '" & prmVariable & "'"
+        Sql += "可変キー = '" & prmVariable & "'"
 
         'リードタイムのリストを汎用マスタから取得
         Return getDsData("m90_hanyo", Sql)
@@ -281,7 +281,7 @@ Public Class ExchangeRateList
         Sql += "public." & tableName
         Sql += " WHERE "
         Sql += "会社コード"
-        Sql += " ILIKE  "
+        Sql += " =  "
         Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql += txtParam
 
