@@ -417,7 +417,7 @@ Public Class OrderList
                 DgvCymnhd.Rows(i).Cells("ＶＡＴ").Value = ds.Tables(RS).Rows(i)("ＶＡＴ")
                 DgvCymnhd.Rows(i).Cells("通貨_外貨").Value = cur
                 DgvCymnhd.Rows(i).Cells("受注金額_外貨").Value = ds.Tables(RS).Rows(i)("見積金額_外貨")
-                DgvCymnhd.Rows(i).Cells("通貨").Value = "IDR"
+                DgvCymnhd.Rows(i).Cells("通貨").Value = setBaseCurrency()
                 DgvCymnhd.Rows(i).Cells("受注金額").Value = ds.Tables(RS).Rows(i)("見積金額")
                 DgvCymnhd.Rows(i).Cells("仕入金額").Value = ds.Tables(RS).Rows(i)("仕入金額")
                 DgvCymnhd.Rows(i).Cells("粗利額").Value = ds.Tables(RS).Rows(i)("粗利額")
@@ -783,6 +783,7 @@ Public Class OrderList
     '使用言語に合わせて受注基本見出しを切替
     Private Sub setHdColumns()
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+
             DgvCymnhd.Columns.Add("取消", "Cancel")
             DgvCymnhd.Columns.Add("受注番号", "OrderNumber")
             DgvCymnhd.Columns.Add("受注番号枝番", "JobOrderSubNumber")
@@ -821,7 +822,10 @@ Public Class OrderList
             DgvCymnhd.Columns.Add("登録日", "RegistrationDate")
             DgvCymnhd.Columns.Add("更新日", "UpdateDate")
             DgvCymnhd.Columns.Add("更新者", "ModifiedBy")
+
         Else
+
+
             DgvCymnhd.Columns.Add("取消", "取消")
             DgvCymnhd.Columns.Add("受注番号", "受注番号")
             DgvCymnhd.Columns.Add("受注番号枝番", "受注番号枝番")
@@ -868,10 +872,17 @@ Public Class OrderList
         DgvCymnhd.Columns("仕入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvCymnhd.Columns("粗利額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
+        '数字形式
+        DgvCymnhd.Columns("受注金額_外貨").DefaultCellStyle.Format = "N0"
+        DgvCymnhd.Columns("受注金額").DefaultCellStyle.Format = "N0"
+        DgvCymnhd.Columns("仕入金額").DefaultCellStyle.Format = "N0"
+        DgvCymnhd.Columns("粗利額").DefaultCellStyle.Format = "N0"
+
     End Sub
 
     '使用言語に合わせて受注明細見出しを切替
     Private Sub setDtColumns()
+
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
             DgvCymnhd.Columns.Add("取消", "Cancel")
             DgvCymnhd.Columns.Add("受注番号", "OrderNumber")
@@ -954,6 +965,16 @@ Public Class OrderList
 
         DgvCymnhd.Columns("出庫数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvCymnhd.Columns("未出庫数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+        '数字形式
+        DgvCymnhd.Columns("仕入値").DefaultCellStyle.Format = "N0"
+        DgvCymnhd.Columns("受注数量").DefaultCellStyle.Format = "N0"
+        DgvCymnhd.Columns("売上数量").DefaultCellStyle.Format = "N0"
+        DgvCymnhd.Columns("受注残数").DefaultCellStyle.Format = "N0"
+        DgvCymnhd.Columns("間接費").DefaultCellStyle.Format = "N0"
+        DgvCymnhd.Columns("売単価").DefaultCellStyle.Format = "N0"
+        DgvCymnhd.Columns("売上金額").DefaultCellStyle.Format = "N0"
+        DgvCymnhd.Columns("粗利額").DefaultCellStyle.Format = "N0"
 
     End Sub
 
@@ -1190,4 +1211,17 @@ Public Class OrderList
     Private Sub OrderList_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
         OrderListLoad() '一覧を再表示
     End Sub
+
+    '基準通貨の通貨コードを取得する
+    Private Function setBaseCurrency() As String
+        Dim Sql As String
+        '通貨表示：ベースの設定
+        Sql = " AND 採番キー = " & CommonConst.CURRENCY_CD_IDR.ToString
+        Sql += " AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
+
+        Dim ds As DataSet = getDsData("m25_currency", Sql)
+        'TxtIDRCurrency.Text = ds.Tables(RS).Rows(0)("通貨コード")
+        setBaseCurrency = ds.Tables(RS).Rows(0)("通貨コード")
+
+    End Function
 End Class
