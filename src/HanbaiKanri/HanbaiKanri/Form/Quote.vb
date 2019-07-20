@@ -1416,39 +1416,54 @@ Public Class Quote
                 Exit Sub
             End If
 
+            '現在位置の列を取得
             RowIdx = DgvItemList.CurrentCell.RowIndex
 
+            '対象列のクローンを作成
+            Dim rowClone As DataGridViewRow = DgvItemList.Rows(RowIdx).Clone
 
-            '選択行の値を格納
-            For c As Integer = 0 To 30
-                Item(c) = DgvItemList.Rows(RowIdx).Cells(c).Value
-            Next c
+            'columnの数分valueを複写
+            For i As Integer = 0 To DgvItemList.ColumnCount - 1
+                rowClone.Cells(i).Value = DgvItemList.Rows(RowIdx).Cells(i).Value
+            Next
+
+            '1行下に新規行作成及びclone内容を反映
+            DgvItemList.Rows.Insert(RowIdx + 1, rowClone)
+            DgvItemList.Rows(RowIdx + 1).Cells("ステータス").Value = "ADD"
+
+
+            '選択行の値を格納		Item(c)	"1"	String
+
+            'For c As Integer = 0 To 30
+            '    Item(c) = DgvItemList.Rows(RowIdx).Cells(c).Value
+            'Next c
 
             '行を挿入
-            DgvItemList.Rows.Insert(RowIdx + 1)
-            DgvItemList.Rows(RowIdx + 1).Cells("ステータス").Value = "ADD"
-            '追加した行に複製元の値を格納
-            For c As Integer = 0 To 30
-                If c = 1 Then
-                    If Item(c) IsNot Nothing Then
-                        Dim tmp As Integer = Item(c)
-                        DgvItemList(1, RowIdx + 1).Value = tmp
-                    End If
-                ElseIf c = 10 Then '通貨
-                    If Item(c) IsNot Nothing Then
-                        Dim tmp As Integer = Item(c)
-                        DgvItemList(10, RowIdx + 1).Value = tmp
-                    End If
-                ElseIf c = 30 Then 'リードタイム単価
-                    If Item(c) IsNot Nothing Then
-                        Dim tmp As Integer = Item(c)
-                        DgvItemList(30, RowIdx + 1).Value = tmp
-                    End If
-                Else
-                    DgvItemList.Rows(RowIdx + 1).Cells(c).Value = Item(c)
-                End If
+            'DgvItemList.Rows.Insert(RowIdx + 1)
+            'DgvItemList.Rows(RowIdx + 1).Cells("ステータス").Value = "ADD"
 
-            Next c
+            ''追加した行に複製元の値を格納
+            'For c As Integer = 0 To 30
+            '    If c = 1 Then
+            '        If Item(c) IsNot Nothing Then
+            '            Dim tmp As Integer = Item(c)
+            '            DgvItemList(1, RowIdx + 1).Value = tmp
+            '        End If
+            '    ElseIf c = 10 Then '通貨
+            '        If Item(c) IsNot Nothing Then
+            '            Dim tmp As Integer = Item(c)
+            '            DgvItemList(10, RowIdx + 1).Value = tmp
+            '        End If
+            '    ElseIf c = 30 Then 'リードタイム単価
+            '        If Item(c) IsNot Nothing Then
+            '            Dim tmp As Integer = Item(c)
+            '            DgvItemList(30, RowIdx + 1).Value = tmp
+            '        End If
+            '    Else
+            '        DgvItemList.Rows(RowIdx + 1).Cells(c).Value = Item(c)
+            '    End If
+
+            'Next c
 
             '最終行のインデックスを取得
             Dim index As Integer = DgvItemList.Rows.Count()
