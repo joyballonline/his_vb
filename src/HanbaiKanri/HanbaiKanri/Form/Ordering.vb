@@ -846,6 +846,11 @@ Public Class Ordering
                 DgvItemList("数量", e.RowIndex).Value = tmpCur
             End If
 
+            If currentColumn = "仕入単価_外貨" Then  '仕入単価_外貨の場合、カンマ処理
+                Dim tmpCur As Decimal = DgvItemList.Rows(e.RowIndex).Cells("仕入単価_外貨").Value
+                DgvItemList("仕入単価_外貨", e.RowIndex).Value = tmpCur
+            End If
+
 
             '仕入単価_外貨 / 仕入金額_外貨 が変更されたらそれぞれを更新する
             If currentColumn = "仕入単価" Or currentColumn = "仕入単価_外貨" Then
@@ -859,7 +864,9 @@ Public Class Ordering
                             End If
                         Case "仕入単価_外貨"
                             If DgvItemList("仕入単価_外貨", e.RowIndex).Value IsNot Nothing Then
-                                DgvItemList("仕入単価", e.RowIndex).Value = Math.Ceiling(DgvItemList("仕入単価_外貨", e.RowIndex).Value / TxtRate.Text)
+                                '小数点表示にするため切り上げをコメントアウト
+                                'DgvItemList("仕入単価", e.RowIndex).Value = Math.Ceiling(DgvItemList("仕入単価_外貨", e.RowIndex).Value / TxtRate.Text)
+                                DgvItemList("仕入単価", e.RowIndex).Value = DgvItemList("仕入単価_外貨", e.RowIndex).Value / TxtRate.Text
                             End If
                     End Select
 
@@ -873,7 +880,7 @@ Public Class Ordering
 
                 '数量 <> Nothing
                 If DgvItemList.Rows(e.RowIndex).Cells("数量").Value IsNot Nothing Then
-                    DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value = DgvItemList.Rows(e.RowIndex).Cells("仕入単価").Value * DgvItemList.Rows(e.RowIndex).Cells("数量").Value
+                    DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value = Math.Ceiling(DgvItemList.Rows(e.RowIndex).Cells("仕入単価").Value * DgvItemList.Rows(e.RowIndex).Cells("数量").Value)
                 End If
                 '関税率 <> Nothing
                 If DgvItemList.Rows(e.RowIndex).Cells("関税率").Value IsNot Nothing Then
@@ -900,7 +907,7 @@ Public Class Ordering
                     If (DgvItemList.Rows(e.RowIndex).Cells("関税額").Value Is Nothing Or DgvItemList.Rows(e.RowIndex).Cells("関税額").Value = 0) _
                        And (DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value Is Nothing Or DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value = 0) _
                        And (DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value Is Nothing Or DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value = 0) Then
-                        DgvItemList.Rows(e.RowIndex).Cells("仕入金額_外貨").Value = DgvItemList.Rows(e.RowIndex).Cells("仕入単価_外貨").Value * DgvItemList.Rows(e.RowIndex).Cells("数量").Value
+                        DgvItemList.Rows(e.RowIndex).Cells("仕入金額_外貨").Value = Math.Ceiling(DgvItemList.Rows(e.RowIndex).Cells("仕入単価_外貨").Value * DgvItemList.Rows(e.RowIndex).Cells("数量").Value)
                     Else
                         DgvItemList.Rows(e.RowIndex).Cells("仕入金額_外貨").Value = Math.Ceiling(DgvItemList.Rows(e.RowIndex).Cells("仕入金額").Value * TxtRate.Text)
                     End If
@@ -2153,8 +2160,10 @@ Public Class Ordering
 
                 If DgvItemList.Rows(i).Cells("仕入単価_外貨").Value IsNot Nothing And DgvItemList.Rows(i).Cells("数量").Value IsNot Nothing Then
 
-                    DgvItemList.Rows(i).Cells("仕入単価").Value = Math.Ceiling(DgvItemList.Rows(i).Cells("仕入単価_外貨").Value / TxtRate.Text)
-                    DgvItemList.Rows(i).Cells("仕入原価").Value = DgvItemList.Rows(i).Cells("仕入単価").Value * DgvItemList.Rows(i).Cells("数量").Value
+                    '小数点表示にするため切り上げをコメントアウト
+                    'DgvItemList.Rows(i).Cells("仕入単価").Value = Math.Ceiling(DgvItemList.Rows(i).Cells("仕入単価_外貨").Value / TxtRate.Text)
+                    DgvItemList.Rows(i).Cells("仕入単価").Value = DgvItemList.Rows(i).Cells("仕入単価_外貨").Value / TxtRate.Text
+                    DgvItemList.Rows(i).Cells("仕入原価").Value = Math.Ceiling(DgvItemList.Rows(i).Cells("仕入単価").Value * DgvItemList.Rows(i).Cells("数量").Value)
 
 
                     '関税率
@@ -2185,7 +2194,7 @@ Public Class Ordering
                        And (DgvItemList.Rows(i).Cells("前払法人税額").Value Is Nothing Or DgvItemList.Rows(i).Cells("前払法人税額").Value = 0) _
                        And (DgvItemList.Rows(i).Cells("輸送費額").Value Is Nothing Or DgvItemList.Rows(i).Cells("輸送費額").Value = 0) Then
 
-                        DgvItemList.Rows(i).Cells("仕入金額_外貨").Value = DgvItemList.Rows(i).Cells("仕入単価_外貨").Value * DgvItemList.Rows(i).Cells("数量").Value
+                        DgvItemList.Rows(i).Cells("仕入金額_外貨").Value = Math.Ceiling(DgvItemList.Rows(i).Cells("仕入単価_外貨").Value * DgvItemList.Rows(i).Cells("数量").Value)
                     Else
                         DgvItemList.Rows(i).Cells("仕入金額_外貨").Value = Math.Ceiling(DgvItemList.Rows(i).Cells("仕入金額").Value * TxtRate.Text)
                     End If

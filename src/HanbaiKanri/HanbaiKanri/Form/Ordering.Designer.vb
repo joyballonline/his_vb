@@ -22,24 +22,24 @@ Partial Class Ordering
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle163 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle164 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle165 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle166 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle167 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle168 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle169 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle170 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle171 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle172 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle173 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle174 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle175 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle176 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle177 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle178 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle179 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle180 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LblPaymentTerms = New System.Windows.Forms.Label()
         Me.LblPosition = New System.Windows.Forms.Label()
         Me.TxtTel = New System.Windows.Forms.TextBox()
@@ -59,30 +59,6 @@ Partial Class Ordering
         Me.LblPurchaseDate = New System.Windows.Forms.Label()
         Me.LblPurchaseNo = New System.Windows.Forms.Label()
         Me.DgvItemList = New System.Windows.Forms.DataGridView()
-        Me.No = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.仕入区分 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.メーカー = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.品名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.型式 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.数量 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.単位 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.仕入先 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.仕入単価_外貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.仕入単価 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.仕入原価 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.間接費 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.関税率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.関税額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.前払法人税率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.前払法人税額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.輸送費率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.輸送費額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.仕入金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.仕入金額_外貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.リードタイム = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.入庫数 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.未入庫数 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.備考 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LblPurchaseRemarks = New System.Windows.Forms.Label()
         Me.TxtPurchaseRemark = New System.Windows.Forms.TextBox()
         Me.DtpPurchaseDate = New System.Windows.Forms.DateTimePicker()
@@ -136,6 +112,30 @@ Partial Class Ordering
         Me.LblPurchaseAmount2 = New System.Windows.Forms.Label()
         Me.txtPurchasecost = New System.Windows.Forms.TextBox()
         Me.lblPurchasecost = New System.Windows.Forms.Label()
+        Me.No = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入区分 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.メーカー = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.品名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.型式 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.数量 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.単位 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入先 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入単価_外貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入単価 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入原価 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.間接費 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.関税率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.関税額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.前払法人税率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.前払法人税額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.輸送費率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.輸送費額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入金額_外貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.リードタイム = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.入庫数 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.未入庫数 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.備考 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DgvItemList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -172,7 +172,7 @@ Partial Class Ordering
         Me.TxtTel.MaxLength = 15
         Me.TxtTel.Name = "TxtTel"
         Me.TxtTel.ReadOnly = True
-        Me.TxtTel.Size = New System.Drawing.Size(200, 23)
+        Me.TxtTel.Size = New System.Drawing.Size(200, 39)
         Me.TxtTel.TabIndex = 13
         '
         'LblPerson
@@ -208,7 +208,7 @@ Partial Class Ordering
         Me.TxtPerson.Location = New System.Drawing.Point(765, 126)
         Me.TxtPerson.MaxLength = 50
         Me.TxtPerson.Name = "TxtPerson"
-        Me.TxtPerson.Size = New System.Drawing.Size(200, 23)
+        Me.TxtPerson.Size = New System.Drawing.Size(200, 39)
         Me.TxtPerson.TabIndex = 15
         '
         'LblFax
@@ -232,7 +232,7 @@ Partial Class Ordering
         Me.TxtFax.MaxLength = 15
         Me.TxtFax.Name = "TxtFax"
         Me.TxtFax.ReadOnly = True
-        Me.TxtFax.Size = New System.Drawing.Size(200, 23)
+        Me.TxtFax.Size = New System.Drawing.Size(200, 39)
         Me.TxtFax.TabIndex = 14
         '
         'TxtPostalCode
@@ -244,7 +244,7 @@ Partial Class Ordering
         Me.TxtPostalCode.MaxLength = 3
         Me.TxtPostalCode.Name = "TxtPostalCode"
         Me.TxtPostalCode.ReadOnly = True
-        Me.TxtPostalCode.Size = New System.Drawing.Size(140, 23)
+        Me.TxtPostalCode.Size = New System.Drawing.Size(140, 39)
         Me.TxtPostalCode.TabIndex = 6
         Me.TxtPostalCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -281,7 +281,7 @@ Partial Class Ordering
         Me.TxtSupplierName.MaxLength = 50
         Me.TxtSupplierName.Name = "TxtSupplierName"
         Me.TxtSupplierName.ReadOnly = True
-        Me.TxtSupplierName.Size = New System.Drawing.Size(330, 23)
+        Me.TxtSupplierName.Size = New System.Drawing.Size(330, 39)
         Me.TxtSupplierName.TabIndex = 5
         '
         'TxtInput
@@ -293,7 +293,7 @@ Partial Class Ordering
         Me.TxtInput.MaxLength = 20
         Me.TxtInput.Name = "TxtInput"
         Me.TxtInput.ReadOnly = True
-        Me.TxtInput.Size = New System.Drawing.Size(213, 23)
+        Me.TxtInput.Size = New System.Drawing.Size(213, 39)
         Me.TxtInput.TabIndex = 199
         Me.TxtInput.TabStop = False
         '
@@ -318,7 +318,7 @@ Partial Class Ordering
         Me.TxtOrderingNo.MaxLength = 8
         Me.TxtOrderingNo.Name = "TxtOrderingNo"
         Me.TxtOrderingNo.ReadOnly = True
-        Me.TxtOrderingNo.Size = New System.Drawing.Size(88, 23)
+        Me.TxtOrderingNo.Size = New System.Drawing.Size(88, 39)
         Me.TxtOrderingNo.TabIndex = 194
         Me.TxtOrderingNo.TabStop = False
         '
@@ -373,230 +373,6 @@ Partial Class Ordering
         Me.DgvItemList.Size = New System.Drawing.Size(1329, 172)
         Me.DgvItemList.TabIndex = 18
         '
-        'No
-        '
-        Me.No.HeaderText = "No"
-        Me.No.Name = "No"
-        Me.No.Width = 43
-        '
-        '仕入区分
-        '
-        Me.仕入区分.HeaderText = "仕入区分"
-        Me.仕入区分.Name = "仕入区分"
-        Me.仕入区分.ReadOnly = True
-        Me.仕入区分.Visible = False
-        Me.仕入区分.Width = 61
-        '
-        'メーカー
-        '
-        DataGridViewCellStyle163.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.メーカー.DefaultCellStyle = DataGridViewCellStyle163
-        Me.メーカー.HeaderText = "メーカー"
-        Me.メーカー.MaxInputLength = 50
-        Me.メーカー.Name = "メーカー"
-        Me.メーカー.Width = 220
-        '
-        '品名
-        '
-        DataGridViewCellStyle164.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.品名.DefaultCellStyle = DataGridViewCellStyle164
-        Me.品名.HeaderText = "品名"
-        Me.品名.MaxInputLength = 50
-        Me.品名.Name = "品名"
-        Me.品名.Width = 220
-        '
-        '型式
-        '
-        DataGridViewCellStyle165.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.型式.DefaultCellStyle = DataGridViewCellStyle165
-        Me.型式.HeaderText = "型式"
-        Me.型式.MaxInputLength = 255
-        Me.型式.Name = "型式"
-        Me.型式.Width = 230
-        '
-        '数量
-        '
-        DataGridViewCellStyle166.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle166.Format = "N0"
-        Me.数量.DefaultCellStyle = DataGridViewCellStyle166
-        Me.数量.HeaderText = "数量"
-        Me.数量.MaxInputLength = 8
-        Me.数量.Name = "数量"
-        Me.数量.Width = 80
-        '
-        '単位
-        '
-        Me.単位.HeaderText = "単位"
-        Me.単位.MaxInputLength = 10
-        Me.単位.Name = "単位"
-        Me.単位.Width = 80
-        '
-        '仕入先
-        '
-        DataGridViewCellStyle167.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.仕入先.DefaultCellStyle = DataGridViewCellStyle167
-        Me.仕入先.HeaderText = "仕入先"
-        Me.仕入先.MaxInputLength = 100
-        Me.仕入先.Name = "仕入先"
-        Me.仕入先.Visible = False
-        Me.仕入先.Width = 80
-        '
-        '仕入単価_外貨
-        '
-        DataGridViewCellStyle168.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle168.Format = "N0"
-        Me.仕入単価_外貨.DefaultCellStyle = DataGridViewCellStyle168
-        Me.仕入単価_外貨.HeaderText = "仕入単価（外貨）"
-        Me.仕入単価_外貨.MaxInputLength = 15
-        Me.仕入単価_外貨.Name = "仕入単価_外貨"
-        '
-        '仕入単価
-        '
-        DataGridViewCellStyle169.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle169.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle169.Format = "N0"
-        Me.仕入単価.DefaultCellStyle = DataGridViewCellStyle169
-        Me.仕入単価.HeaderText = "仕入単価"
-        Me.仕入単価.MaxInputLength = 15
-        Me.仕入単価.Name = "仕入単価"
-        Me.仕入単価.ReadOnly = True
-        '
-        '仕入原価
-        '
-        DataGridViewCellStyle170.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle170.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle170.Format = "N0"
-        Me.仕入原価.DefaultCellStyle = DataGridViewCellStyle170
-        Me.仕入原価.HeaderText = "仕入原価"
-        Me.仕入原価.Name = "仕入原価"
-        Me.仕入原価.ReadOnly = True
-        Me.仕入原価.Width = 120
-        '
-        '間接費
-        '
-        DataGridViewCellStyle171.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle171.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle171.Format = "N0"
-        Me.間接費.DefaultCellStyle = DataGridViewCellStyle171
-        Me.間接費.HeaderText = "間接費"
-        Me.間接費.MaxInputLength = 15
-        Me.間接費.Name = "間接費"
-        Me.間接費.ReadOnly = True
-        Me.間接費.Visible = False
-        '
-        '関税率
-        '
-        DataGridViewCellStyle172.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle172.Format = "N2"
-        DataGridViewCellStyle172.NullValue = "0.00"
-        Me.関税率.DefaultCellStyle = DataGridViewCellStyle172
-        Me.関税率.HeaderText = "関税率"
-        Me.関税率.Name = "関税率"
-        '
-        '関税額
-        '
-        DataGridViewCellStyle173.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle173.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle173.Format = "N0"
-        Me.関税額.DefaultCellStyle = DataGridViewCellStyle173
-        Me.関税額.HeaderText = "関税額"
-        Me.関税額.Name = "関税額"
-        Me.関税額.ReadOnly = True
-        '
-        '前払法人税率
-        '
-        DataGridViewCellStyle174.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle174.Format = "N2"
-        DataGridViewCellStyle174.NullValue = "0.00"
-        Me.前払法人税率.DefaultCellStyle = DataGridViewCellStyle174
-        Me.前払法人税率.HeaderText = "前払法人税率"
-        Me.前払法人税率.Name = "前払法人税率"
-        Me.前払法人税率.Width = 110
-        '
-        '前払法人税額
-        '
-        DataGridViewCellStyle175.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle175.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle175.Format = "N0"
-        Me.前払法人税額.DefaultCellStyle = DataGridViewCellStyle175
-        Me.前払法人税額.HeaderText = "前払法人税額"
-        Me.前払法人税額.Name = "前払法人税額"
-        Me.前払法人税額.ReadOnly = True
-        Me.前払法人税額.Width = 110
-        '
-        '輸送費率
-        '
-        DataGridViewCellStyle176.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle176.Format = "N2"
-        DataGridViewCellStyle176.NullValue = "0.00"
-        Me.輸送費率.DefaultCellStyle = DataGridViewCellStyle176
-        Me.輸送費率.HeaderText = "輸送費率"
-        Me.輸送費率.Name = "輸送費率"
-        '
-        '輸送費額
-        '
-        DataGridViewCellStyle177.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle177.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle177.Format = "N0"
-        Me.輸送費額.DefaultCellStyle = DataGridViewCellStyle177
-        Me.輸送費額.HeaderText = "輸送費額"
-        Me.輸送費額.Name = "輸送費額"
-        Me.輸送費額.ReadOnly = True
-        Me.輸送費額.Width = 110
-        '
-        '仕入金額
-        '
-        DataGridViewCellStyle178.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle178.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle178.Format = "N0"
-        Me.仕入金額.DefaultCellStyle = DataGridViewCellStyle178
-        Me.仕入金額.HeaderText = "仕入金額"
-        Me.仕入金額.Name = "仕入金額"
-        Me.仕入金額.ReadOnly = True
-        Me.仕入金額.Width = 150
-        '
-        '仕入金額_外貨
-        '
-        DataGridViewCellStyle179.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle179.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle179.Format = "N0"
-        Me.仕入金額_外貨.DefaultCellStyle = DataGridViewCellStyle179
-        Me.仕入金額_外貨.HeaderText = "仕入金額（外貨）"
-        Me.仕入金額_外貨.Name = "仕入金額_外貨"
-        Me.仕入金額_外貨.ReadOnly = True
-        '
-        'リードタイム
-        '
-        Me.リードタイム.HeaderText = "リードタイム"
-        Me.リードタイム.MaxInputLength = 20
-        Me.リードタイム.Name = "リードタイム"
-        '
-        '入庫数
-        '
-        DataGridViewCellStyle180.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle180.Format = "N0"
-        Me.入庫数.DefaultCellStyle = DataGridViewCellStyle180
-        Me.入庫数.HeaderText = "入庫数"
-        Me.入庫数.MaxInputLength = 8
-        Me.入庫数.Name = "入庫数"
-        Me.入庫数.Visible = False
-        Me.入庫数.Width = 80
-        '
-        '未入庫数
-        '
-        Me.未入庫数.HeaderText = "未入庫数"
-        Me.未入庫数.MaxInputLength = 8
-        Me.未入庫数.Name = "未入庫数"
-        Me.未入庫数.Visible = False
-        Me.未入庫数.Width = 80
-        '
-        '備考
-        '
-        Me.備考.HeaderText = "備考"
-        Me.備考.MaxInputLength = 255
-        Me.備考.Name = "備考"
-        Me.備考.Width = 80
-        '
         'LblPurchaseRemarks
         '
         Me.LblPurchaseRemarks.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
@@ -615,7 +391,7 @@ Partial Class Ordering
         Me.TxtPurchaseRemark.Location = New System.Drawing.Point(127, 213)
         Me.TxtPurchaseRemark.MaxLength = 50
         Me.TxtPurchaseRemark.Name = "TxtPurchaseRemark"
-        Me.TxtPurchaseRemark.Size = New System.Drawing.Size(476, 23)
+        Me.TxtPurchaseRemark.Size = New System.Drawing.Size(476, 39)
         Me.TxtPurchaseRemark.TabIndex = 11
         '
         'DtpPurchaseDate
@@ -627,7 +403,7 @@ Partial Class Ordering
         Me.DtpPurchaseDate.Location = New System.Drawing.Point(660, 14)
         Me.DtpPurchaseDate.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.DtpPurchaseDate.Name = "DtpPurchaseDate"
-        Me.DtpPurchaseDate.Size = New System.Drawing.Size(148, 22)
+        Me.DtpPurchaseDate.Size = New System.Drawing.Size(148, 37)
         Me.DtpPurchaseDate.TabIndex = 2
         Me.DtpPurchaseDate.Value = New Date(2018, 6, 5, 23, 23, 58, 0)
         '
@@ -640,7 +416,7 @@ Partial Class Ordering
         Me.TxtPurchaseAmount.MaxLength = 10
         Me.TxtPurchaseAmount.Name = "TxtPurchaseAmount"
         Me.TxtPurchaseAmount.ReadOnly = True
-        Me.TxtPurchaseAmount.Size = New System.Drawing.Size(145, 23)
+        Me.TxtPurchaseAmount.Size = New System.Drawing.Size(145, 39)
         Me.TxtPurchaseAmount.TabIndex = 226
         Me.TxtPurchaseAmount.TabStop = False
         Me.TxtPurchaseAmount.Text = "999,999,999,999"
@@ -667,7 +443,7 @@ Partial Class Ordering
         Me.TxtItemCount.MaxLength = 20
         Me.TxtItemCount.Name = "TxtItemCount"
         Me.TxtItemCount.ReadOnly = True
-        Me.TxtItemCount.Size = New System.Drawing.Size(85, 23)
+        Me.TxtItemCount.Size = New System.Drawing.Size(85, 39)
         Me.TxtItemCount.TabIndex = 222
         Me.TxtItemCount.TabStop = False
         Me.TxtItemCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -689,7 +465,7 @@ Partial Class Ordering
         Me.Label2.AutoSize = True
         Me.Label2.Location = New System.Drawing.Point(280, 20)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(11, 12)
+        Me.Label2.Size = New System.Drawing.Size(22, 24)
         Me.Label2.TabIndex = 221
         Me.Label2.Text = "-"
         '
@@ -701,7 +477,7 @@ Partial Class Ordering
         Me.TxtSupplierCode.Location = New System.Drawing.Point(127, 68)
         Me.TxtSupplierCode.MaxLength = 50
         Me.TxtSupplierCode.Name = "TxtSupplierCode"
-        Me.TxtSupplierCode.Size = New System.Drawing.Size(62, 23)
+        Me.TxtSupplierCode.Size = New System.Drawing.Size(62, 39)
         Me.TxtSupplierCode.TabIndex = 3
         '
         'BtnBack
@@ -723,7 +499,7 @@ Partial Class Ordering
         Me.DtpRegistrationDate.Location = New System.Drawing.Point(958, 13)
         Me.DtpRegistrationDate.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.DtpRegistrationDate.Name = "DtpRegistrationDate"
-        Me.DtpRegistrationDate.Size = New System.Drawing.Size(150, 22)
+        Me.DtpRegistrationDate.Size = New System.Drawing.Size(150, 37)
         Me.DtpRegistrationDate.TabIndex = 186
         Me.DtpRegistrationDate.TabStop = False
         Me.DtpRegistrationDate.Value = New Date(2018, 6, 5, 23, 23, 58, 0)
@@ -757,7 +533,7 @@ Partial Class Ordering
         Me.TxtSales.Location = New System.Drawing.Point(1127, 68)
         Me.TxtSales.MaxLength = 20
         Me.TxtSales.Name = "TxtSales"
-        Me.TxtSales.Size = New System.Drawing.Size(213, 23)
+        Me.TxtSales.Size = New System.Drawing.Size(213, 39)
         Me.TxtSales.TabIndex = 17
         '
         'LblSales
@@ -781,7 +557,7 @@ Partial Class Ordering
         Me.TxtOrderingSuffix.MaxLength = 1
         Me.TxtOrderingSuffix.Name = "TxtOrderingSuffix"
         Me.TxtOrderingSuffix.ReadOnly = True
-        Me.TxtOrderingSuffix.Size = New System.Drawing.Size(29, 23)
+        Me.TxtOrderingSuffix.Size = New System.Drawing.Size(29, 39)
         Me.TxtOrderingSuffix.TabIndex = 196
         Me.TxtOrderingSuffix.TabStop = False
         '
@@ -829,7 +605,7 @@ Partial Class Ordering
         Me.TxtPosition.Location = New System.Drawing.Point(1127, 126)
         Me.TxtPosition.MaxLength = 50
         Me.TxtPosition.Name = "TxtPosition"
-        Me.TxtPosition.Size = New System.Drawing.Size(213, 23)
+        Me.TxtPosition.Size = New System.Drawing.Size(213, 39)
         Me.TxtPosition.TabIndex = 16
         '
         'BtnPurchase
@@ -921,7 +697,7 @@ Partial Class Ordering
         Me.TxtCustomerPO.Location = New System.Drawing.Point(448, 13)
         Me.TxtCustomerPO.MaxLength = 20
         Me.TxtCustomerPO.Name = "TxtCustomerPO"
-        Me.TxtCustomerPO.Size = New System.Drawing.Size(88, 23)
+        Me.TxtCustomerPO.Size = New System.Drawing.Size(88, 39)
         Me.TxtCustomerPO.TabIndex = 1
         '
         'LblCustomerPO
@@ -953,7 +729,7 @@ Partial Class Ordering
         Me.CbShippedBy.Items.AddRange(New Object() {"RegularShip", "DHL", "Air", "Ship"})
         Me.CbShippedBy.Location = New System.Drawing.Point(765, 156)
         Me.CbShippedBy.Name = "CbShippedBy"
-        Me.CbShippedBy.Size = New System.Drawing.Size(200, 23)
+        Me.CbShippedBy.Size = New System.Drawing.Size(200, 38)
         Me.CbShippedBy.TabIndex = 305
         '
         'LblMethod
@@ -977,7 +753,7 @@ Partial Class Ordering
         Me.DtpShippedDate.Location = New System.Drawing.Point(766, 185)
         Me.DtpShippedDate.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.DtpShippedDate.Name = "DtpShippedDate"
-        Me.DtpShippedDate.Size = New System.Drawing.Size(199, 22)
+        Me.DtpShippedDate.Size = New System.Drawing.Size(199, 37)
         Me.DtpShippedDate.TabIndex = 307
         Me.DtpShippedDate.Value = New Date(2018, 6, 5, 23, 23, 58, 0)
         '
@@ -1012,7 +788,7 @@ Partial Class Ordering
         Me.CmWarehouse.Items.AddRange(New Object() {"RegularShip", "DHL", "Air", "Ship"})
         Me.CmWarehouse.Location = New System.Drawing.Point(765, 215)
         Me.CmWarehouse.Name = "CmWarehouse"
-        Me.CmWarehouse.Size = New System.Drawing.Size(200, 23)
+        Me.CmWarehouse.Size = New System.Drawing.Size(200, 38)
         Me.CmWarehouse.TabIndex = 310
         '
         'LblHyphen
@@ -1020,7 +796,7 @@ Partial Class Ordering
         Me.LblHyphen.AutoSize = True
         Me.LblHyphen.Location = New System.Drawing.Point(280, 48)
         Me.LblHyphen.Name = "LblHyphen"
-        Me.LblHyphen.Size = New System.Drawing.Size(11, 12)
+        Me.LblHyphen.Size = New System.Drawing.Size(22, 24)
         Me.LblHyphen.TabIndex = 315
         Me.LblHyphen.Text = "-"
         '
@@ -1033,7 +809,7 @@ Partial Class Ordering
         Me.TxtQuoteSuffix.MaxLength = 1
         Me.TxtQuoteSuffix.Name = "TxtQuoteSuffix"
         Me.TxtQuoteSuffix.ReadOnly = True
-        Me.TxtQuoteSuffix.Size = New System.Drawing.Size(29, 23)
+        Me.TxtQuoteSuffix.Size = New System.Drawing.Size(29, 39)
         Me.TxtQuoteSuffix.TabIndex = 314
         Me.TxtQuoteSuffix.TabStop = False
         '
@@ -1046,7 +822,7 @@ Partial Class Ordering
         Me.TxtQuoteNo.MaxLength = 8
         Me.TxtQuoteNo.Name = "TxtQuoteNo"
         Me.TxtQuoteNo.ReadOnly = True
-        Me.TxtQuoteNo.Size = New System.Drawing.Size(88, 23)
+        Me.TxtQuoteNo.Size = New System.Drawing.Size(88, 39)
         Me.TxtQuoteNo.TabIndex = 313
         Me.TxtQuoteNo.TabStop = False
         '
@@ -1071,7 +847,7 @@ Partial Class Ordering
         Me.TxtRate.MaxLength = 20
         Me.TxtRate.Name = "TxtRate"
         Me.TxtRate.ReadOnly = True
-        Me.TxtRate.Size = New System.Drawing.Size(213, 23)
+        Me.TxtRate.Size = New System.Drawing.Size(213, 39)
         Me.TxtRate.TabIndex = 322
         Me.TxtRate.TabStop = False
         '
@@ -1106,7 +882,7 @@ Partial Class Ordering
         Me.CmCurrency.Items.AddRange(New Object() {"RegularShip", "DHL", "Air", "Ship"})
         Me.CmCurrency.Location = New System.Drawing.Point(1127, 155)
         Me.CmCurrency.Name = "CmCurrency"
-        Me.CmCurrency.Size = New System.Drawing.Size(213, 23)
+        Me.CmCurrency.Size = New System.Drawing.Size(213, 38)
         Me.CmCurrency.TabIndex = 319
         '
         'TxtChangeCurrency
@@ -1118,7 +894,7 @@ Partial Class Ordering
         Me.TxtChangeCurrency.MaxLength = 20
         Me.TxtChangeCurrency.Name = "TxtChangeCurrency"
         Me.TxtChangeCurrency.ReadOnly = True
-        Me.TxtChangeCurrency.Size = New System.Drawing.Size(70, 23)
+        Me.TxtChangeCurrency.Size = New System.Drawing.Size(70, 39)
         Me.TxtChangeCurrency.TabIndex = 326
         Me.TxtChangeCurrency.TabStop = False
         Me.TxtChangeCurrency.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -1144,7 +920,7 @@ Partial Class Ordering
         Me.TxtIDRCurrency.MaxLength = 20
         Me.TxtIDRCurrency.Name = "TxtIDRCurrency"
         Me.TxtIDRCurrency.ReadOnly = True
-        Me.TxtIDRCurrency.Size = New System.Drawing.Size(70, 23)
+        Me.TxtIDRCurrency.Size = New System.Drawing.Size(70, 39)
         Me.TxtIDRCurrency.TabIndex = 324
         Me.TxtIDRCurrency.TabStop = False
         Me.TxtIDRCurrency.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -1170,7 +946,7 @@ Partial Class Ordering
         Me.TxtPurchaseAmount2.MaxLength = 10
         Me.TxtPurchaseAmount2.Name = "TxtPurchaseAmount2"
         Me.TxtPurchaseAmount2.ReadOnly = True
-        Me.TxtPurchaseAmount2.Size = New System.Drawing.Size(145, 23)
+        Me.TxtPurchaseAmount2.Size = New System.Drawing.Size(145, 39)
         Me.TxtPurchaseAmount2.TabIndex = 327
         Me.TxtPurchaseAmount2.TabStop = False
         Me.TxtPurchaseAmount2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -1196,7 +972,7 @@ Partial Class Ordering
         Me.txtPurchasecost.MaxLength = 10
         Me.txtPurchasecost.Name = "txtPurchasecost"
         Me.txtPurchasecost.ReadOnly = True
-        Me.txtPurchasecost.Size = New System.Drawing.Size(145, 23)
+        Me.txtPurchasecost.Size = New System.Drawing.Size(145, 39)
         Me.txtPurchasecost.TabIndex = 329
         Me.txtPurchasecost.TabStop = False
         Me.txtPurchasecost.Text = "999,999,999,999"
@@ -1214,7 +990,234 @@ Partial Class Ordering
         Me.lblPurchasecost.Text = "仕入原価（c）"
         Me.lblPurchasecost.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'txt
+        'No
+        '
+        Me.No.HeaderText = "No"
+        Me.No.Name = "No"
+        Me.No.Width = 43
+        '
+        '仕入区分
+        '
+        Me.仕入区分.HeaderText = "仕入区分"
+        Me.仕入区分.Name = "仕入区分"
+        Me.仕入区分.ReadOnly = True
+        Me.仕入区分.Visible = False
+        Me.仕入区分.Width = 61
+        '
+        'メーカー
+        '
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.メーカー.DefaultCellStyle = DataGridViewCellStyle1
+        Me.メーカー.HeaderText = "メーカー"
+        Me.メーカー.MaxInputLength = 50
+        Me.メーカー.Name = "メーカー"
+        Me.メーカー.Width = 220
+        '
+        '品名
+        '
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.品名.DefaultCellStyle = DataGridViewCellStyle2
+        Me.品名.HeaderText = "品名"
+        Me.品名.MaxInputLength = 50
+        Me.品名.Name = "品名"
+        Me.品名.Width = 220
+        '
+        '型式
+        '
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.型式.DefaultCellStyle = DataGridViewCellStyle3
+        Me.型式.HeaderText = "型式"
+        Me.型式.MaxInputLength = 255
+        Me.型式.Name = "型式"
+        Me.型式.Width = 230
+        '
+        '数量
+        '
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle4.Format = "N2"
+        DataGridViewCellStyle4.NullValue = "0.00"
+        Me.数量.DefaultCellStyle = DataGridViewCellStyle4
+        Me.数量.HeaderText = "数量"
+        Me.数量.MaxInputLength = 8
+        Me.数量.Name = "数量"
+        Me.数量.Width = 80
+        '
+        '単位
+        '
+        Me.単位.HeaderText = "単位"
+        Me.単位.MaxInputLength = 10
+        Me.単位.Name = "単位"
+        Me.単位.Width = 80
+        '
+        '仕入先
+        '
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.仕入先.DefaultCellStyle = DataGridViewCellStyle5
+        Me.仕入先.HeaderText = "仕入先"
+        Me.仕入先.MaxInputLength = 100
+        Me.仕入先.Name = "仕入先"
+        Me.仕入先.Visible = False
+        Me.仕入先.Width = 80
+        '
+        '仕入単価_外貨
+        '
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle6.Format = "N2"
+        DataGridViewCellStyle6.NullValue = "0.00"
+        Me.仕入単価_外貨.DefaultCellStyle = DataGridViewCellStyle6
+        Me.仕入単価_外貨.HeaderText = "仕入単価（外貨）"
+        Me.仕入単価_外貨.MaxInputLength = 15
+        Me.仕入単価_外貨.Name = "仕入単価_外貨"
+        '
+        '仕入単価
+        '
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle7.Format = "N2"
+        DataGridViewCellStyle7.NullValue = "0.00"
+        Me.仕入単価.DefaultCellStyle = DataGridViewCellStyle7
+        Me.仕入単価.HeaderText = "仕入単価"
+        Me.仕入単価.MaxInputLength = 15
+        Me.仕入単価.Name = "仕入単価"
+        Me.仕入単価.ReadOnly = True
+        '
+        '仕入原価
+        '
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle8.Format = "N0"
+        Me.仕入原価.DefaultCellStyle = DataGridViewCellStyle8
+        Me.仕入原価.HeaderText = "仕入原価"
+        Me.仕入原価.Name = "仕入原価"
+        Me.仕入原価.ReadOnly = True
+        Me.仕入原価.Width = 120
+        '
+        '間接費
+        '
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle9.Format = "N0"
+        Me.間接費.DefaultCellStyle = DataGridViewCellStyle9
+        Me.間接費.HeaderText = "間接費"
+        Me.間接費.MaxInputLength = 15
+        Me.間接費.Name = "間接費"
+        Me.間接費.ReadOnly = True
+        Me.間接費.Visible = False
+        '
+        '関税率
+        '
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle10.Format = "N3"
+        DataGridViewCellStyle10.NullValue = "0.000"
+        Me.関税率.DefaultCellStyle = DataGridViewCellStyle10
+        Me.関税率.HeaderText = "関税率"
+        Me.関税率.Name = "関税率"
+        '
+        '関税額
+        '
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle11.Format = "N0"
+        Me.関税額.DefaultCellStyle = DataGridViewCellStyle11
+        Me.関税額.HeaderText = "関税額"
+        Me.関税額.Name = "関税額"
+        Me.関税額.ReadOnly = True
+        '
+        '前払法人税率
+        '
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle12.Format = "N3"
+        DataGridViewCellStyle12.NullValue = "0.000"
+        Me.前払法人税率.DefaultCellStyle = DataGridViewCellStyle12
+        Me.前払法人税率.HeaderText = "前払法人税率"
+        Me.前払法人税率.Name = "前払法人税率"
+        Me.前払法人税率.Width = 110
+        '
+        '前払法人税額
+        '
+        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle13.Format = "N0"
+        Me.前払法人税額.DefaultCellStyle = DataGridViewCellStyle13
+        Me.前払法人税額.HeaderText = "前払法人税額"
+        Me.前払法人税額.Name = "前払法人税額"
+        Me.前払法人税額.ReadOnly = True
+        Me.前払法人税額.Width = 110
+        '
+        '輸送費率
+        '
+        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle14.Format = "N3"
+        DataGridViewCellStyle14.NullValue = "0.000"
+        Me.輸送費率.DefaultCellStyle = DataGridViewCellStyle14
+        Me.輸送費率.HeaderText = "輸送費率"
+        Me.輸送費率.Name = "輸送費率"
+        '
+        '輸送費額
+        '
+        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle15.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle15.Format = "N0"
+        Me.輸送費額.DefaultCellStyle = DataGridViewCellStyle15
+        Me.輸送費額.HeaderText = "輸送費額"
+        Me.輸送費額.Name = "輸送費額"
+        Me.輸送費額.ReadOnly = True
+        Me.輸送費額.Width = 110
+        '
+        '仕入金額
+        '
+        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle16.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle16.Format = "N0"
+        Me.仕入金額.DefaultCellStyle = DataGridViewCellStyle16
+        Me.仕入金額.HeaderText = "仕入金額"
+        Me.仕入金額.Name = "仕入金額"
+        Me.仕入金額.ReadOnly = True
+        Me.仕入金額.Width = 150
+        '
+        '仕入金額_外貨
+        '
+        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle17.Format = "N0"
+        Me.仕入金額_外貨.DefaultCellStyle = DataGridViewCellStyle17
+        Me.仕入金額_外貨.HeaderText = "仕入金額（外貨）"
+        Me.仕入金額_外貨.Name = "仕入金額_外貨"
+        Me.仕入金額_外貨.ReadOnly = True
+        '
+        'リードタイム
+        '
+        Me.リードタイム.HeaderText = "リードタイム"
+        Me.リードタイム.MaxInputLength = 20
+        Me.リードタイム.Name = "リードタイム"
+        '
+        '入庫数
+        '
+        DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle18.Format = "N0"
+        Me.入庫数.DefaultCellStyle = DataGridViewCellStyle18
+        Me.入庫数.HeaderText = "入庫数"
+        Me.入庫数.MaxInputLength = 8
+        Me.入庫数.Name = "入庫数"
+        Me.入庫数.Visible = False
+        Me.入庫数.Width = 80
+        '
+        '未入庫数
+        '
+        Me.未入庫数.HeaderText = "未入庫数"
+        Me.未入庫数.MaxInputLength = 8
+        Me.未入庫数.Name = "未入庫数"
+        Me.未入庫数.Visible = False
+        Me.未入庫数.Width = 80
+        '
+        '備考
+        '
+        Me.備考.HeaderText = "備考"
+        Me.備考.MaxInputLength = 255
+        Me.備考.Name = "備考"
+        Me.備考.Width = 80
+        '
+        'Ordering
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
@@ -1291,7 +1294,7 @@ Partial Class Ordering
         Me.Controls.Add(Me.LblRemarks)
         Me.Controls.Add(Me.TxtPosition)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
-        Me.Name = "txt"
+        Me.Name = "Ordering"
         Me.Text = "Ordering"
         CType(Me.DgvItemList, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
@@ -1368,6 +1371,8 @@ Partial Class Ordering
     Friend WithEvents LblIDRCurrency As Label
     Friend WithEvents TxtPurchaseAmount2 As TextBox
     Friend WithEvents LblPurchaseAmount2 As Label
+    Friend WithEvents txtPurchasecost As TextBox
+    Friend WithEvents lblPurchasecost As Label
     Friend WithEvents No As DataGridViewTextBoxColumn
     Friend WithEvents 仕入区分 As DataGridViewTextBoxColumn
     Friend WithEvents メーカー As DataGridViewTextBoxColumn
@@ -1392,6 +1397,4 @@ Partial Class Ordering
     Friend WithEvents 入庫数 As DataGridViewTextBoxColumn
     Friend WithEvents 未入庫数 As DataGridViewTextBoxColumn
     Friend WithEvents 備考 As DataGridViewTextBoxColumn
-    Friend WithEvents txtPurchasecost As TextBox
-    Friend WithEvents lblPurchasecost As Label
 End Class
