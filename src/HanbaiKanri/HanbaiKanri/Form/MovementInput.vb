@@ -975,6 +975,10 @@ Public Class MovementInput
             Exit Sub
         End If
 
+        If TxtQuantityFrom.Text = "" Then
+            TxtQuantityFrom.Text = "0"
+        End If
+
         If Long.Parse(TxtQuantityFrom.Text) < Long.Parse(TxtQuantityTo.Text) Then
             '入力可能数量を超えているメッセージを表示
             _msgHd.dspMSG("chkMovingQuantityError", frmC01F10_Login.loginValue.Language)
