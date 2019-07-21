@@ -954,6 +954,15 @@ Public Class Cymn
                         '前回の明細データの仕入コード、仕入通貨と一致するかチェック
                         If (sireCd <> tbl.Rows(i)("仕入先コード") Or currencyCd <> tbl.Rows(i)("仕入通貨")) Then
                             CurrentPurchaseNo = getSaiban("30", dtNow)
+
+                            hattyuHdInsert(PurchaseNo, dsSipper, cost, tmpCuote, dtNow, strRate)
+                            'reset
+                            PurchaseNo = CurrentPurchaseNo
+                            sireCd = tbl.Rows(i)("仕入先コード")
+                            currencyCd = tbl.Rows(i)("仕入通貨")
+                            cost = 0
+                            tmpCuote = 0
+
                         End If
                     End If
 
@@ -1047,11 +1056,11 @@ Public Class Cymn
 
 
                     Sql += ", "
-                    Sql += formatNumber(Math.Ceiling(tbl.Rows(i)("仕入単価") * strRate)) '仕入値_外貨
+                    Sql += formatNumber((tbl.Rows(i)("仕入単価") * strRate)) '仕入値_外貨
 
 
                     Sql += ", "
-                    Sql += formatNumber(Math.Ceiling(tbl.Rows(i)("仕入金額") * strRate)) '仕入金額_外貨
+                    Sql += formatNumber((tbl.Rows(i)("仕入金額") * strRate)) '仕入金額_外貨
 
                     Sql += ")"
                     _db.executeDB(Sql)
@@ -1061,37 +1070,39 @@ Public Class Cymn
 
                     '前回の明細データの仕入コード、仕入通貨と一致するかチェック
                     'If (sireCd <> tbl.Rows(i)("仕入先コード") Or currencyCd <> tbl.Rows(i)("仕入通貨")) Then
-                    If PurchaseNo <> CurrentPurchaseNo Then
+                    'If PurchaseNo <> CurrentPurchaseNo Then
 
-                        If i < tbl.Rows.Count - 1 Then
-                            If (tbl.Rows(i)("仕入先コード") <> tbl.Rows(i + 1)("仕入先コード") Or tbl.Rows(i)("仕入通貨") <> tbl.Rows(i + 1)("仕入通貨")) Then
-
-                                '新しい値をセットし、発注基本を登録する
-                                sireCd = tbl.Rows(i)("仕入先コード")
-                                currencyCd = tbl.Rows(i)("仕入通貨")
-
-                                'レートの取得
-                                strRate = setRate(currencyCd)
-
-                                hattyuHdInsert(CurrentPurchaseNo, dsSipper, cost, tmpCuote, dtNow, strRate) '発注基本更新
-
-                                cost = 0 '伝票単位でリセット
-                                tmpCuote = 0
-                            Else
-                                sireCd = tbl.Rows(i)("仕入先コード")
-                                currencyCd = tbl.Rows(i)("仕入通貨")
-                            End If
-                        Else
-                            hattyuHdInsert(CurrentPurchaseNo, dsSipper, cost, tmpCuote, dtNow, strRate) '発注基本更新
-                        End If
-
-                    Else
+                    If i = tbl.Rows.Count - 1 Then
+                        'If (tbl.Rows(i)("仕入先コード") <> tbl.Rows(i + 1)("仕入先コード") Or tbl.Rows(i)("仕入通貨") <> tbl.Rows(i + 1)("仕入通貨")) Then
 
                         '新しい値をセットし、発注基本を登録する
-                        costMain += tbl.Rows(i)("仕入原価")
-                        tmpCuoteMain += tbl.Rows(i)("見積金額_外貨")
+                        'sireCd = tbl.Rows(i)("仕入先コード")
+                        'currencyCd = tbl.Rows(i)("仕入通貨")
 
+                        'レートの取得
+                        'strRate = setRate(currencyCd)
+
+                        hattyuHdInsert(CurrentPurchaseNo, dsSipper, cost, tmpCuote, dtNow, strRate) '発注基本更新
+
+                        'cost = 0 '伝票単位でリセット
+                        'tmpCuote = 0
+                        'Else
+                        'sireCd = tbl.Rows(i)("仕入先コード")
+                        'currencyCd = tbl.Rows(i)("仕入通貨")
                     End If
+                    'Else
+                    'hattyuHdInsert(CurrentPurchaseNo, dsSipper, cost, tmpCuote, dtNow, strRate) '発注基本更新
+                    'End If
+
+                Else
+
+                    '新しい値をセットし、発注基本を登録する
+                    'costMain += tbl.Rows(i)("仕入原価")
+                    'tmpCuoteMain += tbl.Rows(i)("見積金額_外貨")
+
+                    'hattyuHdInsert(PurchaseNo, dsSipper, cost, tmpCuote, dtNow, strRate)
+
+                    'End If
                 End If
 
 
@@ -1103,12 +1114,13 @@ Public Class Cymn
 
             '最初に発行した発注番号の基本を作成
             '---------------------------------------------
-            Sql = " AND 仕入先コード ILIKE '" & tbl.Rows(0)("仕入先コード") & "'"
-            dsSipper = getDsData("m11_supplier", Sql) '仕入先情報の取得
+            'Sql = " AND 仕入先コード ILIKE '" & tbl.Rows(0)("仕入先コード") & "'"
+            'dsSipper = getDsData("m11_supplier", Sql) '仕入先情報の取得
 
-            strRate = setRate(tbl.Rows(0)("仕入通貨")) 'レートの取得
+            'strRate = setRate(tbl.Rows(0)("仕入通貨")) 'レートの取得
 
-            hattyuHdInsert(PurchaseNo, dsSipper, cost, tmpCuote, dtNow, strRate) '発注明細更新
+            'hattyuHdInsert(PurchaseNo, dsSipper, cost, tmpCuote, dtNow, strRate) '発注明細更新
+
 #End Region
 
 #Region "t01_mithd 見積基本 -受注日登録"
@@ -1254,7 +1266,7 @@ Public Class Cymn
         Sql += ", '"
         Sql += UtilClass.formatNumberF10(TxtRate.Text) 'レート
         Sql += "', '"
-        Sql += formatNumber(Math.Ceiling(cost.ToString * strRate)) '仕入金額_外貨
+        Sql += formatNumber((cost.ToString * strRate)) '仕入金額_外貨
         Sql += "')"
 
 
