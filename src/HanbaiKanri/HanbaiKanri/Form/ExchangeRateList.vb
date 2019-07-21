@@ -369,6 +369,7 @@ Public Class ExchangeRateList
         End If
 
         Try
+
             Dim Sql As String = vbNullString
 
             Dim Kijyun As String = DgvList.Rows(RowIdx).Cells("基準日").Value
@@ -379,25 +380,25 @@ Public Class ExchangeRateList
             Sql = "delete from Public.t71_exchangerate"
             Sql += " where 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
             Sql += "   and 基準日 = '" & Kijyun & "'"
-            Sql += "   and 採番キー = " & Key
+            Sql += "   and 採番キー = (select 採番キー from public.m25_currency where 通貨コード='" & Key & "')"
             Sql += "   and 更新日 = '" & UpdatedOn & "'"
 
             _db.executeDB(Sql)
 
-            If Key = 2 Then
-                Key = Key + 1
-            Else
-                Key = Key - 1
-            End If
+            'If Key = 2 Then
+            'Key = Key + 1
+            'Else
+            'Key = Key - 1
+            'End If
 
             '2レコード目削除
-            Sql = "delete from Public.t71_exchangerate"
-            Sql += " where 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Sql += "   and 基準日 = '" & Kijyun & "'"
-            Sql += "   and 採番キー = " & Key
-            Sql += "   and 更新日 = '" & UpdatedOn & "'"
+            'Sql = "delete from Public.t71_exchangerate"
+            'Sql += " where 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            'Sql += "   and 基準日 = '" & Kijyun & "'"
+            'Sql += "   and 採番キー = " & Key
+            'Sql += "   and 更新日 = '" & UpdatedOn & "'"
 
-            _db.executeDB(Sql)
+            '_db.executeDB(Sql)
 
             Call getList()
 
