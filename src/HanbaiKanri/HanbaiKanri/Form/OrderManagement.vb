@@ -256,6 +256,13 @@ Public Class OrderManagement
             DgvOrder.Columns("売上金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             DgvOrder.Columns("受注残数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
+            '数字形式
+            DgvOrder.Columns("受注数量").DefaultCellStyle.Format = "N2"
+            DgvOrder.Columns("売上数量").DefaultCellStyle.Format = "N2"
+            DgvOrder.Columns("売単価").DefaultCellStyle.Format = "N2"
+            DgvOrder.Columns("売上金額").DefaultCellStyle.Format = "N0"
+            DgvOrder.Columns("受注残数").DefaultCellStyle.Format = "N2"
+
             For i As Integer = 0 To ds3.Tables(RS).Rows.Count - 1
                 DgvOrder.Rows.Add()
                 DgvOrder.Rows(i).Cells("メーカー").Value = ds3.Tables(RS).Rows(i)("メーカー")
@@ -304,6 +311,10 @@ Public Class OrderManagement
 
             DgvHistory.Columns("売単価").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             DgvHistory.Columns("売上数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+            '数字形式
+            DgvHistory.Columns("売単価").DefaultCellStyle.Format = "N2"
+            DgvHistory.Columns("売上数量").DefaultCellStyle.Format = "N2"
 
             For i As Integer = 0 To ds2.Tables(RS).Rows.Count - 1
                 DgvHistory.Rows.Add()
@@ -356,6 +367,11 @@ Public Class OrderManagement
 
             DgvAdd.Columns("売単価").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             DgvAdd.Columns("売上数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+            '数字形式
+            DgvAdd.Columns("売単価").DefaultCellStyle.Format = "N2"
+            DgvAdd.Columns("売上数量").DefaultCellStyle.Format = "N2"
+
 
             DgvAdd.Columns("No").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
             DgvAdd.Columns("No").ReadOnly = True
