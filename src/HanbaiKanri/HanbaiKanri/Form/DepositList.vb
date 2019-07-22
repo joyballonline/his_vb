@@ -121,6 +121,18 @@ Public Class DepositList
 
         End If
 
+        '右寄せ
+        DgvCustomer.Columns("請求金額残_外貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvCustomer.Columns("売掛残高_外貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvCustomer.Columns("請求金額残").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvCustomer.Columns("売掛残高").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+        '数字形式
+        DgvCustomer.Columns("請求金額残_外貨").DefaultCellStyle.Format = "N0"
+        DgvCustomer.Columns("売掛残高_外貨").DefaultCellStyle.Format = "N0"
+        DgvCustomer.Columns("請求金額残").DefaultCellStyle.Format = "N0"
+        DgvCustomer.Columns("売掛残高").DefaultCellStyle.Format = "N0"
+
         '得意先の一覧を取得
         For i As Integer = 0 To dsCustomer.Tables(RS).Rows.Count - 1
 
@@ -245,7 +257,7 @@ Public Class DepositList
                 DgvCustomer.Rows(idx).Cells("請求金額残_外貨").Value = CustomerOrderAmountFC - CustomerBillingAmountFC
                 DgvCustomer.Rows(idx).Cells("売掛残高_外貨").Value = AccountsReceivableFC
 
-                DgvCustomer.Rows(idx).Cells("通貨").Value = "IDR"
+                DgvCustomer.Rows(idx).Cells("通貨").Value = setBaseCurrency()
                 DgvCustomer.Rows(idx).Cells("請求金額残").Value = CustomerOrderAmount - CustomerBillingAmount
                 DgvCustomer.Rows(idx).Cells("売掛残高").Value = AccountsReceivable
                 DgvCustomer.Rows(idx).Cells("得意先コード").Value = dsCustomer.Tables(RS).Rows(i)("得意先コード")
@@ -377,4 +389,18 @@ Public Class DepositList
         '一覧取得
         getNukinList()
     End Sub
+
+    '基準通貨の通貨コードを取得する
+    Private Function setBaseCurrency() As String
+        Dim Sql As String
+        '通貨表示：ベースの設定
+        Sql = " AND 採番キー = " & CommonConst.CURRENCY_CD_IDR.ToString
+        Sql += " AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
+
+        Dim ds As DataSet = getDsData("m25_currency", Sql)
+        'TxtIDRCurrency.Text = ds.Tables(RS).Rows(0)("通貨コード")
+        setBaseCurrency = ds.Tables(RS).Rows(0)("通貨コード")
+
+    End Function
+
 End Class
