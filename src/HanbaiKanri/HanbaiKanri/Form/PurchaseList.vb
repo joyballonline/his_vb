@@ -127,6 +127,8 @@ Public Class PurchaseList
                     DgvHtyhd.Rows(i).Cells("登録日").Value = ds.Tables(RS).Rows(i)("登録日")
                 Next
 
+                '数字形式
+                DgvHtyhd.Columns("仕入金額").DefaultCellStyle.Format = "N0"
             Else
 
                 '明細単位の場合
@@ -177,6 +179,14 @@ Public Class PurchaseList
                     DgvHtyhd.Rows(i).Cells("備考").Value = ds.Tables(RS).Rows(i)("備考")
                     DgvHtyhd.Rows(i).Cells("更新者").Value = ds.Tables(RS).Rows(i)("更新者")
                 Next
+
+                '数字形式
+                DgvHtyhd.Columns("仕入値").DefaultCellStyle.Format = "N2"
+                DgvHtyhd.Columns("発注数量").DefaultCellStyle.Format = "N2"
+                DgvHtyhd.Columns("仕入数量").DefaultCellStyle.Format = "N2"
+                DgvHtyhd.Columns("発注残数").DefaultCellStyle.Format = "N2"
+                DgvHtyhd.Columns("間接費").DefaultCellStyle.Format = "N0"
+                DgvHtyhd.Columns("仕入金額").DefaultCellStyle.Format = "N0"
 
             End If
 
