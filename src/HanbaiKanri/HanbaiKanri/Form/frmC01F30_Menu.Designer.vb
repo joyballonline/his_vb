@@ -60,23 +60,24 @@ Partial Class frmC01F30_Menu
     Friend WithEvents gbH08 As GroupBox
     Friend WithEvents gbH05 As GroupBox
     Friend WithEvents TableLayoutPanel24 As TableLayoutPanel
-    Friend WithEvents gbH06 As GroupBox
-    Friend WithEvents gbH07 As GroupBox
-    Friend WithEvents gbH03 As GroupBox
-    Friend WithEvents gbH04 As GroupBox
     Friend WithEvents TableLayoutPanel25 As TableLayoutPanel
-    Friend WithEvents gbH11 As GroupBox
-    Friend WithEvents gbH12 As GroupBox
-    Friend WithEvents gbH09 As GroupBox
-    Friend WithEvents gbH10 As GroupBox
     Friend WithEvents TableLayoutPanel26 As TableLayoutPanel
-    Friend WithEvents gbH13 As GroupBox
-    Friend WithEvents gbH14 As GroupBox
-    Friend WithEvents gbH15 As GroupBox
-    Friend WithEvents GroupBox3 As GroupBox
     Friend WithEvents TableLayoutPanel27 As TableLayoutPanel
     Friend WithEvents gbM01 As FlowLayoutPanel
     Friend WithEvents BtnInformation As Button
+    Friend WithEvents TabPage6 As TabPage
+    Friend WithEvents TableLayoutPanel28 As TableLayoutPanel
+    Friend WithEvents gbH13 As GroupBox
+    Friend WithEvents gbH15 As GroupBox
+    Friend WithEvents gbH04 As GroupBox
+    Friend WithEvents gbH07 As GroupBox
+    Friend WithEvents gbH14 As GroupBox
+    Friend WithEvents gbH10 As GroupBox
+    Friend WithEvents gbH09 As GroupBox
+    Friend WithEvents gbH03 As GroupBox
+    Friend WithEvents gbH12 As GroupBox
+    Friend WithEvents gbH11 As GroupBox
+    Friend WithEvents gbH06 As GroupBox
 
     'メモ: 以下のプロシージャは Windows フォーム デザイナーで必要です。
     'Windows フォーム デザイナーを使用して変更できます。  
