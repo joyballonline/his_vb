@@ -112,6 +112,13 @@ Public Class SalesVATList
 
         End If
 
+        '数字形式
+        DgvList.Columns("数量").DefaultCellStyle.Format = "N2"
+        DgvList.Columns("売単価").DefaultCellStyle.Format = "N2"
+        'DgvList.Columns("ＶＡＴ").DefaultCellStyle.Format = "N0"
+        DgvList.Columns("売上計").DefaultCellStyle.Format = "N0"
+
+
         setComboBox(cmbYear) 'コンボボックスに年を設定
         setComboBox(cmbMonth) 'コンボボックスに月を設定
         cmbYear.SelectedValue = Integer.Parse(Format(System.DateTime.Now, "yyyy"))
@@ -183,7 +190,7 @@ Public Class SalesVATList
                 totalSalesAmount += (ds.Tables(RS).Rows(i)("見積単価") + ds.Tables(RS).Rows(i)("ＶＡＴ")) * ds.Tables(RS).Rows(i)("売上数量")
             Next
 
-            TxtSalesAmount.Text = totalSalesAmount.ToString()
+            TxtSalesAmount.Text = totalSalesAmount.ToString("N0")
 
         Catch ue As UsrDefException
             ue.dspMsg()
