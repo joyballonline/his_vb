@@ -114,7 +114,7 @@ Public Class JobOrderList
         '数字形式
         DgvList.Columns("数量").DefaultCellStyle.Format = "N0"
         DgvList.Columns("単価").DefaultCellStyle.Format = "N0"
-        DgvList.Columns("ＶＡＴ").DefaultCellStyle.Format = "N0"
+        'DgvList.Columns("ＶＡＴ").DefaultCellStyle.Format = "N2"
         DgvList.Columns("計").DefaultCellStyle.Format = "N0"
 
     End Sub
