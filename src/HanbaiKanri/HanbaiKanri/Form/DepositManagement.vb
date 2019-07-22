@@ -186,6 +186,22 @@ Public Class DepositManagement
             DgvBillingInfo.Columns("入金額").HeaderText = "AmountToRegisterForReceiving"
 
         End If
+
+
+        '数字形式
+        DgvCustomer.Columns("請求残高").DefaultCellStyle.Format = "N0"
+
+        DgvHistory.Columns("入金済入金額計").DefaultCellStyle.Format = "N0"
+
+        DgvDeposit.Columns("入力入金額").DefaultCellStyle.Format = "N0"
+
+        DgvBillingInfo.Columns("請求金額").DefaultCellStyle.Format = "N0"
+        DgvBillingInfo.Columns("請求情報入金額計").DefaultCellStyle.Format = "N0"
+        DgvBillingInfo.Columns("請求情報入金額計固定").DefaultCellStyle.Format = "N0"
+        DgvBillingInfo.Columns("請求情報請求残高").DefaultCellStyle.Format = "N0"
+        DgvBillingInfo.Columns("請求情報請求残高固定").DefaultCellStyle.Format = "N0"
+        DgvBillingInfo.Columns("入金額").DefaultCellStyle.Format = "N0"
+
     End Sub
 
     '各Table内の作成
@@ -918,6 +934,9 @@ Public Class DepositManagement
                 DgvDeposit.Rows(e.RowIndex).Cells("入力入金額").Value = 0
                 Exit Sub
             End If
+
+            Dim decTmp As Decimal = DgvDeposit.Rows(e.RowIndex).Cells("入力入金額").Value
+            DgvDeposit.Rows(e.RowIndex).Cells("入力入金額").Value = decTmp
         End If
 
     End Sub
@@ -1030,5 +1049,4 @@ Public Class DepositManagement
         'リードタイムのリストを汎用マスタから取得
         Return getDsData("m90_hanyo", Sql)
     End Function
-
 End Class
