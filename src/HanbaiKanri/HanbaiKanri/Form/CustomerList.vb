@@ -90,6 +90,22 @@ Public Class CustomerList
             DgvCustomer.Columns("請求残高").HeaderText = "BillingBalance"
         End If
 
+        '数字形式
+        DgvCustomer.Columns("受注金額計_外貨").DefaultCellStyle.Format = "N0"
+        DgvCustomer.Columns("請求金額計_外貨").DefaultCellStyle.Format = "N0"
+        DgvCustomer.Columns("請求残高_外貨").DefaultCellStyle.Format = "N0"
+        DgvCustomer.Columns("受注金額計").DefaultCellStyle.Format = "N0"
+        DgvCustomer.Columns("請求金額計").DefaultCellStyle.Format = "N0"
+        DgvCustomer.Columns("請求残高").DefaultCellStyle.Format = "N0"
+
+        '右寄せ
+        DgvCustomer.Columns("受注金額計_外貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvCustomer.Columns("請求金額計_外貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvCustomer.Columns("請求残高_外貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvCustomer.Columns("受注金額計").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvCustomer.Columns("請求金額計").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvCustomer.Columns("請求残高").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
     End Sub
 
     '一覧表示処理
@@ -221,7 +237,7 @@ Public Class CustomerList
                 DgvCustomer.Rows(idx).Cells("受注金額計_外貨").Value = CustomerOrderAmountFC
                 DgvCustomer.Rows(idx).Cells("請求金額計_外貨").Value = CustomerBillingAmountFC
                 DgvCustomer.Rows(idx).Cells("請求残高_外貨").Value = CustomerOrderAmountFC - CustomerBillingAmountFC
-                DgvCustomer.Rows(idx).Cells("通貨").Value = "IDR"
+                DgvCustomer.Rows(idx).Cells("通貨").Value = setBaseCurrency()
                 DgvCustomer.Rows(idx).Cells("受注金額計").Value = CustomerOrderAmount
                 DgvCustomer.Rows(idx).Cells("請求金額計").Value = CustomerBillingAmount
                 DgvCustomer.Rows(idx).Cells("請求残高").Value = CustomerOrderAmount - CustomerBillingAmount
@@ -320,6 +336,19 @@ Public Class CustomerList
         Sql += txtParam
 
         Return _db.selectDB(Sql, RS, reccnt)
+    End Function
+
+    '基準通貨の通貨コードを取得する
+    Private Function setBaseCurrency() As String
+        Dim Sql As String
+        '通貨表示：ベースの設定
+        Sql = " AND 採番キー = " & CommonConst.CURRENCY_CD_IDR.ToString
+        Sql += " AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
+
+        Dim ds As DataSet = getDsData("m25_currency", Sql)
+        'TxtIDRCurrency.Text = ds.Tables(RS).Rows(0)("通貨コード")
+        setBaseCurrency = ds.Tables(RS).Rows(0)("通貨コード")
+
     End Function
 
 End Class
