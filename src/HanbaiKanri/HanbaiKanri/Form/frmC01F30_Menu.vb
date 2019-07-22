@@ -90,22 +90,22 @@ Public Class frmC01F30_Menu
 
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle193 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle194 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle195 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle196 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle197 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle198 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle199 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle200 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle201 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle202 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle203 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle204 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle205 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle206 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle207 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle208 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle25 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle26 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle27 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle28 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle29 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle30 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle31 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle32 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmC01F30_Menu))
         Me.btnSelect = New System.Windows.Forms.Button()
         Me.cmdExit = New System.Windows.Forms.Button()
@@ -146,29 +146,29 @@ Public Class frmC01F30_Menu
         Me.gbH01 = New System.Windows.Forms.GroupBox()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.TableLayoutPanel24 = New System.Windows.Forms.TableLayoutPanel()
+        Me.gbH10 = New System.Windows.Forms.GroupBox()
+        Me.gbH09 = New System.Windows.Forms.GroupBox()
+        Me.gbH03 = New System.Windows.Forms.GroupBox()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.TableLayoutPanel25 = New System.Windows.Forms.TableLayoutPanel()
+        Me.gbH12 = New System.Windows.Forms.GroupBox()
+        Me.gbH11 = New System.Windows.Forms.GroupBox()
+        Me.gbH06 = New System.Windows.Forms.GroupBox()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
         Me.TableLayoutPanel26 = New System.Windows.Forms.TableLayoutPanel()
+        Me.gbH14 = New System.Windows.Forms.GroupBox()
+        Me.gbH04 = New System.Windows.Forms.GroupBox()
+        Me.gbH07 = New System.Windows.Forms.GroupBox()
         Me.TabPage6 = New System.Windows.Forms.TabPage()
+        Me.TableLayoutPanel28 = New System.Windows.Forms.TableLayoutPanel()
+        Me.gbH15 = New System.Windows.Forms.GroupBox()
+        Me.gbH13 = New System.Windows.Forms.GroupBox()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
         Me.TableLayoutPanel27 = New System.Windows.Forms.TableLayoutPanel()
         Me.gbM01 = New System.Windows.Forms.FlowLayoutPanel()
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.BtnLogout = New System.Windows.Forms.Button()
         Me.BtnInformation = New System.Windows.Forms.Button()
-        Me.TableLayoutPanel28 = New System.Windows.Forms.TableLayoutPanel()
-        Me.gbH13 = New System.Windows.Forms.GroupBox()
-        Me.gbH15 = New System.Windows.Forms.GroupBox()
-        Me.gbH07 = New System.Windows.Forms.GroupBox()
-        Me.gbH04 = New System.Windows.Forms.GroupBox()
-        Me.gbH14 = New System.Windows.Forms.GroupBox()
-        Me.gbH03 = New System.Windows.Forms.GroupBox()
-        Me.gbH09 = New System.Windows.Forms.GroupBox()
-        Me.gbH10 = New System.Windows.Forms.GroupBox()
-        Me.gbH06 = New System.Windows.Forms.GroupBox()
-        Me.gbH11 = New System.Windows.Forms.GroupBox()
-        Me.gbH12 = New System.Windows.Forms.GroupBox()
         CType(Me.dgvLIST, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabProcessingMenu.SuspendLayout()
         Me.TabGeneral.SuspendLayout()
@@ -185,9 +185,9 @@ Public Class frmC01F30_Menu
         Me.TabPage4.SuspendLayout()
         Me.TableLayoutPanel26.SuspendLayout()
         Me.TabPage6.SuspendLayout()
+        Me.TableLayoutPanel28.SuspendLayout()
         Me.TabPage5.SuspendLayout()
         Me.TableLayoutPanel27.SuspendLayout()
-        Me.TableLayoutPanel28.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnSelect
@@ -305,14 +305,14 @@ Public Class frmC01F30_Menu
         '
         Me.dgvLIST.AllowUserToAddRows = False
         Me.dgvLIST.AllowUserToDeleteRows = False
-        DataGridViewCellStyle193.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle193.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle193.Font = New System.Drawing.Font("MS UI Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        DataGridViewCellStyle193.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle193.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle193.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle193.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvLIST.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle193
+        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle17.Font = New System.Drawing.Font("MS UI Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvLIST.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle17
         Me.dgvLIST.ColumnHeadersHeight = 25
         Me.dgvLIST.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.処理ID, Me.業務, Me.処理名, Me.説明, Me.My前回操作日時, Me.操作者, Me.前回操作日時})
         Me.dgvLIST.Dock = System.Windows.Forms.DockStyle.Fill
@@ -329,8 +329,8 @@ Public Class frmC01F30_Menu
         '
         '処理ID
         '
-        DataGridViewCellStyle194.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.処理ID.DefaultCellStyle = DataGridViewCellStyle194
+        DataGridViewCellStyle18.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.処理ID.DefaultCellStyle = DataGridViewCellStyle18
         Me.処理ID.HeaderText = "処理ID"
         Me.処理ID.Name = "処理ID"
         Me.処理ID.ReadOnly = True
@@ -340,8 +340,8 @@ Public Class frmC01F30_Menu
         '
         '業務
         '
-        DataGridViewCellStyle195.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
-        Me.業務.DefaultCellStyle = DataGridViewCellStyle195
+        DataGridViewCellStyle19.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        Me.業務.DefaultCellStyle = DataGridViewCellStyle19
         Me.業務.HeaderText = "業務"
         Me.業務.Name = "業務"
         Me.業務.ReadOnly = True
@@ -350,8 +350,8 @@ Public Class frmC01F30_Menu
         '
         '処理名
         '
-        DataGridViewCellStyle196.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
-        Me.処理名.DefaultCellStyle = DataGridViewCellStyle196
+        DataGridViewCellStyle20.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        Me.処理名.DefaultCellStyle = DataGridViewCellStyle20
         Me.処理名.HeaderText = "処理名"
         Me.処理名.Name = "処理名"
         Me.処理名.ReadOnly = True
@@ -360,8 +360,8 @@ Public Class frmC01F30_Menu
         '
         '説明
         '
-        DataGridViewCellStyle197.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
-        Me.説明.DefaultCellStyle = DataGridViewCellStyle197
+        DataGridViewCellStyle21.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        Me.説明.DefaultCellStyle = DataGridViewCellStyle21
         Me.説明.HeaderText = "説明"
         Me.説明.Name = "説明"
         Me.説明.ReadOnly = True
@@ -370,9 +370,9 @@ Public Class frmC01F30_Menu
         '
         'My前回操作日時
         '
-        DataGridViewCellStyle198.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle198.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
-        Me.My前回操作日時.DefaultCellStyle = DataGridViewCellStyle198
+        DataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle22.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        Me.My前回操作日時.DefaultCellStyle = DataGridViewCellStyle22
         Me.My前回操作日時.HeaderText = " My前回操作日時"
         Me.My前回操作日時.Name = "My前回操作日時"
         Me.My前回操作日時.ReadOnly = True
@@ -382,8 +382,8 @@ Public Class frmC01F30_Menu
         '
         '操作者
         '
-        DataGridViewCellStyle199.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
-        Me.操作者.DefaultCellStyle = DataGridViewCellStyle199
+        DataGridViewCellStyle23.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        Me.操作者.DefaultCellStyle = DataGridViewCellStyle23
         Me.操作者.HeaderText = "　操作者"
         Me.操作者.Name = "操作者"
         Me.操作者.ReadOnly = True
@@ -393,9 +393,9 @@ Public Class frmC01F30_Menu
         '
         '前回操作日時
         '
-        DataGridViewCellStyle200.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle200.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
-        Me.前回操作日時.DefaultCellStyle = DataGridViewCellStyle200
+        DataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle24.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        Me.前回操作日時.DefaultCellStyle = DataGridViewCellStyle24
         Me.前回操作日時.HeaderText = "前回操作日時"
         Me.前回操作日時.Name = "前回操作日時"
         Me.前回操作日時.ReadOnly = True
@@ -475,14 +475,14 @@ Public Class frmC01F30_Menu
         '
         Me.dgvMasterList.AllowUserToAddRows = False
         Me.dgvMasterList.AllowUserToDeleteRows = False
-        DataGridViewCellStyle201.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle201.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle201.Font = New System.Drawing.Font("MS UI Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        DataGridViewCellStyle201.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle201.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle201.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle201.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvMasterList.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle201
+        DataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle25.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle25.Font = New System.Drawing.Font("MS UI Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle25.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle25.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle25.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvMasterList.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle25
         Me.dgvMasterList.ColumnHeadersHeight = 25
         Me.dgvMasterList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5, Me.DataGridViewTextBoxColumn6, Me.DataGridViewTextBoxColumn7})
         Me.dgvMasterList.Dock = System.Windows.Forms.DockStyle.Fill
@@ -499,8 +499,8 @@ Public Class frmC01F30_Menu
         '
         'DataGridViewTextBoxColumn1
         '
-        DataGridViewCellStyle202.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle202
+        DataGridViewCellStyle26.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle26
         Me.DataGridViewTextBoxColumn1.HeaderText = "処理ID"
         Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
         Me.DataGridViewTextBoxColumn1.ReadOnly = True
@@ -510,8 +510,8 @@ Public Class frmC01F30_Menu
         '
         'DataGridViewTextBoxColumn2
         '
-        DataGridViewCellStyle203.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
-        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle203
+        DataGridViewCellStyle27.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle27
         Me.DataGridViewTextBoxColumn2.HeaderText = "業務"
         Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
         Me.DataGridViewTextBoxColumn2.ReadOnly = True
@@ -520,8 +520,8 @@ Public Class frmC01F30_Menu
         '
         'DataGridViewTextBoxColumn3
         '
-        DataGridViewCellStyle204.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
-        Me.DataGridViewTextBoxColumn3.DefaultCellStyle = DataGridViewCellStyle204
+        DataGridViewCellStyle28.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        Me.DataGridViewTextBoxColumn3.DefaultCellStyle = DataGridViewCellStyle28
         Me.DataGridViewTextBoxColumn3.HeaderText = "処理名"
         Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
         Me.DataGridViewTextBoxColumn3.ReadOnly = True
@@ -530,8 +530,8 @@ Public Class frmC01F30_Menu
         '
         'DataGridViewTextBoxColumn4
         '
-        DataGridViewCellStyle205.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
-        Me.DataGridViewTextBoxColumn4.DefaultCellStyle = DataGridViewCellStyle205
+        DataGridViewCellStyle29.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        Me.DataGridViewTextBoxColumn4.DefaultCellStyle = DataGridViewCellStyle29
         Me.DataGridViewTextBoxColumn4.HeaderText = "説明"
         Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
         Me.DataGridViewTextBoxColumn4.ReadOnly = True
@@ -540,9 +540,9 @@ Public Class frmC01F30_Menu
         '
         'DataGridViewTextBoxColumn5
         '
-        DataGridViewCellStyle206.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle206.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
-        Me.DataGridViewTextBoxColumn5.DefaultCellStyle = DataGridViewCellStyle206
+        DataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle30.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        Me.DataGridViewTextBoxColumn5.DefaultCellStyle = DataGridViewCellStyle30
         Me.DataGridViewTextBoxColumn5.HeaderText = " My前回操作日時"
         Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
         Me.DataGridViewTextBoxColumn5.ReadOnly = True
@@ -552,8 +552,8 @@ Public Class frmC01F30_Menu
         '
         'DataGridViewTextBoxColumn6
         '
-        DataGridViewCellStyle207.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
-        Me.DataGridViewTextBoxColumn6.DefaultCellStyle = DataGridViewCellStyle207
+        DataGridViewCellStyle31.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        Me.DataGridViewTextBoxColumn6.DefaultCellStyle = DataGridViewCellStyle31
         Me.DataGridViewTextBoxColumn6.HeaderText = "　操作者"
         Me.DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
         Me.DataGridViewTextBoxColumn6.ReadOnly = True
@@ -563,9 +563,9 @@ Public Class frmC01F30_Menu
         '
         'DataGridViewTextBoxColumn7
         '
-        DataGridViewCellStyle208.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle208.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
-        Me.DataGridViewTextBoxColumn7.DefaultCellStyle = DataGridViewCellStyle208
+        DataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle32.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        Me.DataGridViewTextBoxColumn7.DefaultCellStyle = DataGridViewCellStyle32
         Me.DataGridViewTextBoxColumn7.HeaderText = "前回操作日時"
         Me.DataGridViewTextBoxColumn7.Name = "DataGridViewTextBoxColumn7"
         Me.DataGridViewTextBoxColumn7.ReadOnly = True
@@ -639,6 +639,7 @@ Public Class frmC01F30_Menu
         Me.gbH08.Size = New System.Drawing.Size(306, 416)
         Me.gbH08.TabIndex = 29
         Me.gbH08.TabStop = False
+        Me.gbH08.Visible = False
         '
         'gbH05
         '
@@ -694,6 +695,32 @@ Public Class frmC01F30_Menu
         Me.TableLayoutPanel24.Size = New System.Drawing.Size(1250, 422)
         Me.TableLayoutPanel24.TabIndex = 0
         '
+        'gbH10
+        '
+        Me.gbH10.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.gbH10.Location = New System.Drawing.Point(627, 3)
+        Me.gbH10.Name = "gbH10"
+        Me.gbH10.Size = New System.Drawing.Size(306, 416)
+        Me.gbH10.TabIndex = 44
+        Me.gbH10.TabStop = False
+        '
+        'gbH09
+        '
+        Me.gbH09.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.gbH09.Location = New System.Drawing.Point(315, 3)
+        Me.gbH09.Name = "gbH09"
+        Me.gbH09.Size = New System.Drawing.Size(306, 416)
+        Me.gbH09.TabIndex = 43
+        Me.gbH09.TabStop = False
+        '
+        'gbH03
+        '
+        Me.gbH03.Location = New System.Drawing.Point(3, 3)
+        Me.gbH03.Name = "gbH03"
+        Me.gbH03.Size = New System.Drawing.Size(306, 416)
+        Me.gbH03.TabIndex = 42
+        Me.gbH03.TabStop = False
+        '
         'TabPage3
         '
         Me.TabPage3.Controls.Add(Me.TableLayoutPanel25)
@@ -722,6 +749,32 @@ Public Class frmC01F30_Menu
         Me.TableLayoutPanel25.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.TableLayoutPanel25.Size = New System.Drawing.Size(1256, 428)
         Me.TableLayoutPanel25.TabIndex = 0
+        '
+        'gbH12
+        '
+        Me.gbH12.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.gbH12.Location = New System.Drawing.Point(631, 3)
+        Me.gbH12.Name = "gbH12"
+        Me.gbH12.Size = New System.Drawing.Size(308, 422)
+        Me.gbH12.TabIndex = 38
+        Me.gbH12.TabStop = False
+        '
+        'gbH11
+        '
+        Me.gbH11.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.gbH11.Location = New System.Drawing.Point(317, 3)
+        Me.gbH11.Name = "gbH11"
+        Me.gbH11.Size = New System.Drawing.Size(308, 422)
+        Me.gbH11.TabIndex = 37
+        Me.gbH11.TabStop = False
+        '
+        'gbH06
+        '
+        Me.gbH06.Location = New System.Drawing.Point(3, 3)
+        Me.gbH06.Name = "gbH06"
+        Me.gbH06.Size = New System.Drawing.Size(308, 422)
+        Me.gbH06.TabIndex = 36
+        Me.gbH06.TabStop = False
         '
         'TabPage4
         '
@@ -752,6 +805,31 @@ Public Class frmC01F30_Menu
         Me.TableLayoutPanel26.Size = New System.Drawing.Size(1256, 428)
         Me.TableLayoutPanel26.TabIndex = 0
         '
+        'gbH14
+        '
+        Me.gbH14.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.gbH14.Location = New System.Drawing.Point(631, 3)
+        Me.gbH14.Name = "gbH14"
+        Me.gbH14.Size = New System.Drawing.Size(308, 422)
+        Me.gbH14.TabIndex = 50
+        Me.gbH14.TabStop = False
+        '
+        'gbH04
+        '
+        Me.gbH04.Location = New System.Drawing.Point(317, 3)
+        Me.gbH04.Name = "gbH04"
+        Me.gbH04.Size = New System.Drawing.Size(308, 422)
+        Me.gbH04.TabIndex = 49
+        Me.gbH04.TabStop = False
+        '
+        'gbH07
+        '
+        Me.gbH07.Location = New System.Drawing.Point(3, 3)
+        Me.gbH07.Name = "gbH07"
+        Me.gbH07.Size = New System.Drawing.Size(308, 422)
+        Me.gbH07.TabIndex = 47
+        Me.gbH07.TabStop = False
+        '
         'TabPage6
         '
         Me.TabPage6.Controls.Add(Me.TableLayoutPanel28)
@@ -760,6 +838,42 @@ Public Class frmC01F30_Menu
         Me.TabPage6.Size = New System.Drawing.Size(1256, 428)
         Me.TabPage6.TabIndex = 4
         Me.TabPage6.UseVisualStyleBackColor = True
+        '
+        'TableLayoutPanel28
+        '
+        Me.TableLayoutPanel28.ColumnCount = 4
+        Me.TableLayoutPanel28.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+        Me.TableLayoutPanel28.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+        Me.TableLayoutPanel28.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+        Me.TableLayoutPanel28.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+        Me.TableLayoutPanel28.Controls.Add(Me.gbH15, 0, 0)
+        Me.TableLayoutPanel28.Controls.Add(Me.gbH13, 0, 0)
+        Me.TableLayoutPanel28.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel28.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel28.Name = "TableLayoutPanel28"
+        Me.TableLayoutPanel28.RowCount = 1
+        Me.TableLayoutPanel28.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel28.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.TableLayoutPanel28.Size = New System.Drawing.Size(1256, 428)
+        Me.TableLayoutPanel28.TabIndex = 1
+        '
+        'gbH15
+        '
+        Me.gbH15.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.gbH15.Location = New System.Drawing.Point(317, 3)
+        Me.gbH15.Name = "gbH15"
+        Me.gbH15.Size = New System.Drawing.Size(308, 422)
+        Me.gbH15.TabIndex = 33
+        Me.gbH15.TabStop = False
+        '
+        'gbH13
+        '
+        Me.gbH13.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.gbH13.Location = New System.Drawing.Point(3, 3)
+        Me.gbH13.Name = "gbH13"
+        Me.gbH13.Size = New System.Drawing.Size(308, 422)
+        Me.gbH13.TabIndex = 31
+        Me.gbH13.TabStop = False
         '
         'TabPage5
         '
@@ -832,119 +946,6 @@ Public Class frmC01F30_Menu
         Me.BtnInformation.TabIndex = 25
         Me.BtnInformation.UseVisualStyleBackColor = True
         '
-        'TableLayoutPanel28
-        '
-        Me.TableLayoutPanel28.ColumnCount = 4
-        Me.TableLayoutPanel28.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-        Me.TableLayoutPanel28.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-        Me.TableLayoutPanel28.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-        Me.TableLayoutPanel28.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-        Me.TableLayoutPanel28.Controls.Add(Me.gbH15, 0, 0)
-        Me.TableLayoutPanel28.Controls.Add(Me.gbH13, 0, 0)
-        Me.TableLayoutPanel28.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel28.Location = New System.Drawing.Point(0, 0)
-        Me.TableLayoutPanel28.Name = "TableLayoutPanel28"
-        Me.TableLayoutPanel28.RowCount = 1
-        Me.TableLayoutPanel28.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel28.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel28.Size = New System.Drawing.Size(1256, 428)
-        Me.TableLayoutPanel28.TabIndex = 1
-        '
-        'gbH13
-        '
-        Me.gbH13.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.gbH13.Location = New System.Drawing.Point(3, 3)
-        Me.gbH13.Name = "gbH13"
-        Me.gbH13.Size = New System.Drawing.Size(308, 422)
-        Me.gbH13.TabIndex = 31
-        Me.gbH13.TabStop = False
-        '
-        'gbH15
-        '
-        Me.gbH15.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.gbH15.Location = New System.Drawing.Point(317, 3)
-        Me.gbH15.Name = "gbH15"
-        Me.gbH15.Size = New System.Drawing.Size(308, 422)
-        Me.gbH15.TabIndex = 33
-        Me.gbH15.TabStop = False
-        '
-        'gbH07
-        '
-        Me.gbH07.Location = New System.Drawing.Point(3, 3)
-        Me.gbH07.Name = "gbH07"
-        Me.gbH07.Size = New System.Drawing.Size(308, 422)
-        Me.gbH07.TabIndex = 47
-        Me.gbH07.TabStop = False
-        '
-        'gbH04
-        '
-        Me.gbH04.Location = New System.Drawing.Point(317, 3)
-        Me.gbH04.Name = "gbH04"
-        Me.gbH04.Size = New System.Drawing.Size(306, 416)
-        Me.gbH04.TabIndex = 49
-        Me.gbH04.TabStop = False
-        '
-        'gbH14
-        '
-        Me.gbH14.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.gbH14.Location = New System.Drawing.Point(631, 3)
-        Me.gbH14.Name = "gbH14"
-        Me.gbH14.Size = New System.Drawing.Size(308, 422)
-        Me.gbH14.TabIndex = 50
-        Me.gbH14.TabStop = False
-        '
-        'gbH03
-        '
-        Me.gbH03.Location = New System.Drawing.Point(3, 3)
-        Me.gbH03.Name = "gbH03"
-        Me.gbH03.Size = New System.Drawing.Size(306, 416)
-        Me.gbH03.TabIndex = 42
-        Me.gbH03.TabStop = False
-        '
-        'gbH09
-        '
-        Me.gbH09.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.gbH09.Location = New System.Drawing.Point(315, 3)
-        Me.gbH09.Name = "gbH09"
-        Me.gbH09.Size = New System.Drawing.Size(306, 416)
-        Me.gbH09.TabIndex = 43
-        Me.gbH09.TabStop = False
-        '
-        'gbH10
-        '
-        Me.gbH10.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.gbH10.Location = New System.Drawing.Point(627, 3)
-        Me.gbH10.Name = "gbH10"
-        Me.gbH10.Size = New System.Drawing.Size(306, 416)
-        Me.gbH10.TabIndex = 44
-        Me.gbH10.TabStop = False
-        '
-        'gbH06
-        '
-        Me.gbH06.Location = New System.Drawing.Point(3, 3)
-        Me.gbH06.Name = "gbH06"
-        Me.gbH06.Size = New System.Drawing.Size(306, 416)
-        Me.gbH06.TabIndex = 36
-        Me.gbH06.TabStop = False
-        '
-        'gbH11
-        '
-        Me.gbH11.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.gbH11.Location = New System.Drawing.Point(317, 3)
-        Me.gbH11.Name = "gbH11"
-        Me.gbH11.Size = New System.Drawing.Size(308, 422)
-        Me.gbH11.TabIndex = 37
-        Me.gbH11.TabStop = False
-        '
-        'gbH12
-        '
-        Me.gbH12.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.gbH12.Location = New System.Drawing.Point(631, 3)
-        Me.gbH12.Name = "gbH12"
-        Me.gbH12.Size = New System.Drawing.Size(308, 422)
-        Me.gbH12.TabIndex = 38
-        Me.gbH12.TabStop = False
-        '
         'frmC01F30_Menu
         '
         Me.ClientSize = New System.Drawing.Size(1350, 561)
@@ -980,9 +981,9 @@ Public Class frmC01F30_Menu
         Me.TabPage4.ResumeLayout(False)
         Me.TableLayoutPanel26.ResumeLayout(False)
         Me.TabPage6.ResumeLayout(False)
+        Me.TableLayoutPanel28.ResumeLayout(False)
         Me.TabPage5.ResumeLayout(False)
         Me.TableLayoutPanel27.ResumeLayout(False)
-        Me.TableLayoutPanel28.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
