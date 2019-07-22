@@ -212,6 +212,12 @@ Public Class BillingList
             DgvBilling.Columns("請求金額計").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             DgvBilling.Columns("売掛残高").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
+            '数字形式
+            DgvBilling.Columns("請求金額計_外貨").DefaultCellStyle.Format = "N0"
+            DgvBilling.Columns("売掛残高_外貨").DefaultCellStyle.Format = "N0"
+            DgvBilling.Columns("請求金額計").DefaultCellStyle.Format = "N0"
+            DgvBilling.Columns("売掛残高").DefaultCellStyle.Format = "N0"
+
             For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
 
                 If IsDBNull(ds.Tables(RS).Rows(i)("通貨")) Then
@@ -250,7 +256,7 @@ Public Class BillingList
                 DgvBilling.Rows(i).Cells("通貨_外貨").Value = cur
                 DgvBilling.Rows(i).Cells("請求金額計_外貨").Value = ds.Tables(RS).Rows(i)("請求金額計_外貨")
                 DgvBilling.Rows(i).Cells("売掛残高_外貨").Value = ds.Tables(RS).Rows(i)("売掛残高_外貨")
-                DgvBilling.Rows(i).Cells("通貨").Value = "IDR"
+                DgvBilling.Rows(i).Cells("通貨").Value = setBaseCurrency()
                 DgvBilling.Rows(i).Cells("請求金額計").Value = ds.Tables(RS).Rows(i)("請求金額計")
                 DgvBilling.Rows(i).Cells("売掛残高").Value = ds.Tables(RS).Rows(i)("売掛残高")
                 DgvBilling.Rows(i).Cells("備考1").Value = ds.Tables(RS).Rows(i)("備考1")
@@ -559,6 +565,19 @@ Public Class BillingList
 
         '日本の形式に書き換える
         Return prmVal.ToString("F3", nfi) '売掛残高を増やす
+    End Function
+
+    '基準通貨の通貨コードを取得する
+    Private Function setBaseCurrency() As String
+        Dim Sql As String
+        '通貨表示：ベースの設定
+        Sql = " AND 採番キー = " & CommonConst.CURRENCY_CD_IDR.ToString
+        Sql += " AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
+
+        Dim ds As DataSet = getDsData("m25_currency", Sql)
+        'TxtIDRCurrency.Text = ds.Tables(RS).Rows(0)("通貨コード")
+        setBaseCurrency = ds.Tables(RS).Rows(0)("通貨コード")
+
     End Function
 
 End Class
