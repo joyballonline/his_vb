@@ -365,6 +365,11 @@ Public Class SalesList
         DgvCymnhd.Columns("売上金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvCymnhd.Columns("粗利額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
+        '数字形式
+        'DgvCymnhd.Columns("ＶＡＴ").DefaultCellStyle.Format = "N0"
+        DgvCymnhd.Columns("売上金額").DefaultCellStyle.Format = "N0"
+        DgvCymnhd.Columns("粗利額").DefaultCellStyle.Format = "N0"
+
     End Sub
 
     '明細の見出しをセット
@@ -432,6 +437,17 @@ Public Class SalesList
         DgvCymnhd.Columns("売上金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvCymnhd.Columns("粗利額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvCymnhd.Columns("粗利率").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+        '数字形式
+        DgvCymnhd.Columns("仕入値").DefaultCellStyle.Format = "N0"
+        DgvCymnhd.Columns("受注数量").DefaultCellStyle.Format = "N2"
+        DgvCymnhd.Columns("売上数量").DefaultCellStyle.Format = "N2"
+        DgvCymnhd.Columns("受注残数").DefaultCellStyle.Format = "N2"
+        DgvCymnhd.Columns("間接費").DefaultCellStyle.Format = "N0"
+        DgvCymnhd.Columns("売単価").DefaultCellStyle.Format = "N2"
+        DgvCymnhd.Columns("売上金額").DefaultCellStyle.Format = "N0"
+        DgvCymnhd.Columns("粗利額").DefaultCellStyle.Format = "N0"
+        DgvCymnhd.Columns("粗利率").DefaultCellStyle.Format = "N1"
 
         DgvCymnhd.Columns("受注番号").Visible = False
         DgvCymnhd.Columns("受注番号枝番").Visible = False
