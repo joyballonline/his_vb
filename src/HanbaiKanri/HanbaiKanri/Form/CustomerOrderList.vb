@@ -129,9 +129,18 @@ Public Class CustomerOrderList
             DgvBilling.Columns.Add("更新者", "更新者")
         End If
 
-
+        '右寄せ
+        DgvBilling.Columns("請求金額計_外貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvBilling.Columns("売掛残高_外貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvBilling.Columns("請求金額計").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvBilling.Columns("売掛残高").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+        '数字形式
+        DgvBilling.Columns("請求金額計_外貨").DefaultCellStyle.Format = "N0"
+        DgvBilling.Columns("売掛残高_外貨").DefaultCellStyle.Format = "N0"
+        DgvBilling.Columns("請求金額計").DefaultCellStyle.Format = "N0"
+        DgvBilling.Columns("売掛残高").DefaultCellStyle.Format = "N0"
+
 
         '一覧取得
         PurchaseListLoad()
