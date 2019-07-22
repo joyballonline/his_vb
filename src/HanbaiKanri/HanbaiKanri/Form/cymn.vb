@@ -442,8 +442,9 @@ Public Class Cymn
             DgvItemList.Columns("仕入先コード").HeaderText = "SupplierCode"
             DgvItemList.Columns("仕入先").HeaderText = "SupplierName"
             DgvItemList.Columns("仕入通貨").HeaderText = "PurchaseCurrency"
-            DgvItemList.Columns("仕入単価_外貨").HeaderText = "PurchaseUnitPriceForeignCurrency"
-            DgvItemList.Columns("仕入単価").HeaderText = "PurchaseUnitPrice"
+            DgvItemList.Columns("仕入単価_外貨").HeaderText = "PurchaseUnitPrice" & vbCrLf & "(OriginalCurrency)"
+            DgvItemList.Columns("仕入単価").HeaderText = "PurchaseUnitPrice" & vbCrLf & "(" & TxtIDRCurrency.Text & ")"
+
             DgvItemList.Columns("仕入原価").HeaderText = "PurchsingCost"
             DgvItemList.Columns("関税率").HeaderText = "CustomsDutyRate"
             DgvItemList.Columns("関税額").HeaderText = "CustomsDuty"
@@ -454,10 +455,12 @@ Public Class Cymn
             DgvItemList.Columns("仕入金額").HeaderText = "PurchaseAmount"
             DgvItemList.Columns("売単価").HeaderText = "SellingPrice"
             DgvItemList.Columns("売上金額").HeaderText = "SalesAmount"
-            DgvItemList.Columns("見積単価").HeaderText = "QuotetionPrice"
-            DgvItemList.Columns("見積単価_外貨").HeaderText = "QuotetionPriceForeignCurrency"
-            DgvItemList.Columns("見積金額").HeaderText = "QuotetionAmount"
-            DgvItemList.Columns("見積金額_外貨").HeaderText = "QuotetionAmountForeignCurrency"
+
+            DgvItemList.Columns("見積単価_外貨").HeaderText = "QuotetionPriceForeignCurrency" & vbCrLf & "(OriginalCurrency)"
+            DgvItemList.Columns("見積単価").HeaderText = "QuotetionPrice" & vbCrLf & "(" & TxtIDRCurrency.Text & ")"
+
+            DgvItemList.Columns("見積金額_外貨").HeaderText = "QuotetionAmountForeignCurrency" & vbCrLf & "(OriginalCurrency)"
+            DgvItemList.Columns("見積金額").HeaderText = "QuotetionAmount" & vbCrLf & "(" & TxtIDRCurrency.Text & ")"
             DgvItemList.Columns("粗利額").HeaderText = "GrossProfit"
             DgvItemList.Columns("粗利率").HeaderText = "GrossMarginRate(%)"
             DgvItemList.Columns("リードタイム").HeaderText = "LeadTime"
