@@ -115,6 +115,16 @@ Public Class SalesProfitList
 
         End If
 
+        '数字形式
+        DgvList.Columns("売上計").DefaultCellStyle.Format = "N0"
+        'DgvList.Columns("ＶＡＴ").DefaultCellStyle.Format = "N0"
+        DgvList.Columns("売上金額計").DefaultCellStyle.Format = "N0"
+        DgvList.Columns("間接費").DefaultCellStyle.Format = "N0"
+        DgvList.Columns("売上原価計").DefaultCellStyle.Format = "N0"
+        DgvList.Columns("粗利").DefaultCellStyle.Format = "N0"
+        DgvList.Columns("粗利率").DefaultCellStyle.Format = "N1"
+
+
         setComboBox(cmbYear) 'コンボボックスに年を設定
         setComboBox(cmbMonth) 'コンボボックスに月を設定
         cmbYear.SelectedValue = Integer.Parse(Format(System.DateTime.Now, "yyyy"))
@@ -202,26 +212,31 @@ Public Class SalesProfitList
                 totalArariRate = 0
             End If
 
+            '売上計
             TxtSalesAmount.Text = IIf(
                 totalSales <> 0,
-                totalSales,
+                Format(totalSales, "#,##0"),
                 0
             )
+            '売上 + VAT
             TxtTotalSalesAmount.Text = IIf(
                 totalSalesAmount <> 0,
-                Format(totalSalesAmount, "0.000"),
+                Format(totalSalesAmount, "#,##0"),
                 0
             )
+            '売上原価
             TxtSalesCostAmount.Text = IIf(
                 salesUnitPrice <> 0,
-                Format(salesUnitPrice, "0.000"),
+                Format(salesUnitPrice, "#,##0"),
                 0
             )
+            '粗利額
             TxtGrossMargin.Text = IIf(
                 totalArari <> 0,
-                totalArari,
+                Format(totalArari, "#,##0"),
                 0
             )
+            '粗利率
             TxtGrossMarginRate.Text = IIf(
                 totalArariRate <> 0,
                 Format(totalArariRate, "0.0"),
