@@ -256,6 +256,11 @@ Public Class OrderingList
                     DgvHtyhd.Columns.Add("更新日", "更新日")
                 End If
 
+                '数字形式
+                DgvHtyhd.Columns("仕入金額_外貨").DefaultCellStyle.Format = "N0"
+                DgvHtyhd.Columns("仕入金額").DefaultCellStyle.Format = "N0"
+
+
                 '発注基本を取得
                 Sql = "SELECT count(*) as 件数"
                 Sql += " from public.t20_hattyu t20 "
@@ -307,6 +312,7 @@ Public Class OrderingList
 
 
                 '伝票単位時のセル書式
+                DgvHtyhd.Columns("仕入金額_外貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 DgvHtyhd.Columns("仕入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
                 For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
@@ -451,6 +457,18 @@ Public Class OrderingList
                 DgvHtyhd.Columns("仕入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 DgvHtyhd.Columns("入庫数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 DgvHtyhd.Columns("未入庫数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+
+                '数字形式
+                DgvHtyhd.Columns("仕入値").DefaultCellStyle.Format = "N0"
+                DgvHtyhd.Columns("発注数量").DefaultCellStyle.Format = "N0"
+                DgvHtyhd.Columns("仕入数量").DefaultCellStyle.Format = "N0"
+                DgvHtyhd.Columns("発注残数").DefaultCellStyle.Format = "N0"
+                DgvHtyhd.Columns("間接費").DefaultCellStyle.Format = "N0"
+                DgvHtyhd.Columns("仕入金額").DefaultCellStyle.Format = "N0"
+                DgvHtyhd.Columns("入庫数").DefaultCellStyle.Format = "N0"
+                DgvHtyhd.Columns("未入庫数").DefaultCellStyle.Format = "N0"
+
 
                 Dim dsHanyou As DataSet
 
