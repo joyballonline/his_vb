@@ -109,11 +109,19 @@ Public Class PurchasingManagement
             DgvPurchase.Columns.Add("発注残数", "発注残数")
         End If
 
+        '右寄せ
         DgvPurchase.Columns("発注数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvPurchase.Columns("仕入数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvPurchase.Columns("仕入単価").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvPurchase.Columns("仕入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvPurchase.Columns("発注残数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+        '数字形式
+        DgvPurchase.Columns("発注数量").DefaultCellStyle.Format = "N2"
+        DgvPurchase.Columns("仕入数量").DefaultCellStyle.Format = "N2"
+        DgvPurchase.Columns("仕入単価").DefaultCellStyle.Format = "N2"
+        DgvPurchase.Columns("仕入金額").DefaultCellStyle.Format = "N0"
+        DgvPurchase.Columns("発注残数").DefaultCellStyle.Format = "N2"
 
         '
         '仕入済みエリア
@@ -152,6 +160,12 @@ Public Class PurchasingManagement
         DgvHistory.Columns("仕入値").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvHistory.Columns("仕入数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
+
+        '数字形式
+        DgvHistory.Columns("仕入値").DefaultCellStyle.Format = "N2"
+        DgvHistory.Columns("仕入数量").DefaultCellStyle.Format = "N2"
+
+
         '
         '今回仕入エリア
         '
@@ -186,6 +200,11 @@ Public Class PurchasingManagement
 
         DgvAdd.Columns("仕入値").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvAdd.Columns("仕入数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+        '数字形式
+        DgvAdd.Columns("仕入値").DefaultCellStyle.Format = "N2"
+        DgvAdd.Columns("仕入数量").DefaultCellStyle.Format = "N2"
+
 
         DgvAdd.Columns("No").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
         DgvAdd.Columns("行番号").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
