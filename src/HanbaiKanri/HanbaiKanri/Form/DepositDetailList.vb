@@ -238,6 +238,11 @@ Public Class DepositDetailList
                 DgvBilling.Columns("入金額_外貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 DgvBilling.Columns("入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
+                '数字形式
+                DgvBilling.Columns("入金額_外貨").DefaultCellStyle.Format = "N0"
+                DgvBilling.Columns("入金額").DefaultCellStyle.Format = "N0"
+
+
                 For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
 
                     If IsDBNull(ds.Tables(RS).Rows(0)("通貨")) Then
@@ -268,7 +273,7 @@ Public Class DepositDetailList
 
                     DgvBilling.Rows(i).Cells("通貨_外貨").Value = cur
                     DgvBilling.Rows(i).Cells("入金額_外貨").Value = ds.Tables(RS).Rows(i)("入金額計_外貨")
-                    DgvBilling.Rows(i).Cells("通貨").Value = "IDR"
+                    DgvBilling.Rows(i).Cells("通貨").Value = setBaseCurrency()
                     DgvBilling.Rows(i).Cells("入金額").Value = ds.Tables(RS).Rows(i)("入金額")
                     DgvBilling.Rows(i).Cells("更新日").Value = ds.Tables(RS).Rows(i)("更新日")
                     DgvBilling.Rows(i).Cells("備考").Value = ds.Tables(RS).Rows(i)("備考")
@@ -352,6 +357,10 @@ Public Class DepositDetailList
                     DgvBilling.Rows(i).Cells("入金額").Value = ds.Tables(RS).Rows(i)("入金消込額計")
                     DgvBilling.Rows(i).Cells("備考").Value = ds.Tables(RS).Rows(i)("備考")
                 Next
+
+                '数字形式
+                DgvBilling.Columns("入金額").DefaultCellStyle.Format = "N0"
+
             End If
 
         Catch ue As UsrDefException
@@ -758,6 +767,19 @@ Public Class DepositDetailList
 
         'リードタイムのリストを汎用マスタから取得
         Return getDsData("m90_hanyo", Sql)
+    End Function
+
+    '基準通貨の通貨コードを取得する
+    Private Function setBaseCurrency() As String
+        Dim Sql As String
+        '通貨表示：ベースの設定
+        Sql = " AND 採番キー = " & CommonConst.CURRENCY_CD_IDR.ToString
+        Sql += " AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
+
+        Dim ds As DataSet = getDsData("m25_currency", Sql)
+        'TxtIDRCurrency.Text = ds.Tables(RS).Rows(0)("通貨コード")
+        setBaseCurrency = ds.Tables(RS).Rows(0)("通貨コード")
+
     End Function
 
 End Class
