@@ -217,6 +217,20 @@ Public Class AccountsPayable
                             "買掛入力モード")
         End If
 
+        '数字形式
+        DgvCymn.Columns("発注金額").DefaultCellStyle.Format = "N0"
+        DgvCymn.Columns("買掛金額計").DefaultCellStyle.Format = "N0"
+        DgvCymn.Columns("買掛残高").DefaultCellStyle.Format = "N0"
+
+        DgvCymndt.Columns("発注個数").DefaultCellStyle.Format = "N2"
+        DgvCymndt.Columns("仕入数量").DefaultCellStyle.Format = "N2"
+        DgvCymndt.Columns("仕入単価").DefaultCellStyle.Format = "N2"
+        DgvCymndt.Columns("仕入金額").DefaultCellStyle.Format = "N0"
+
+        DgvHistory.Columns("買掛金額").DefaultCellStyle.Format = "N0"
+
+        DgvAdd.Columns("今回買掛金額計").DefaultCellStyle.Format = "N0"
+
     End Sub
 
     '発注基本
@@ -657,6 +671,10 @@ Public Class AccountsPayable
                 DgvAdd.Rows(e.RowIndex).Cells("今回買掛金額計").Value = 0
                 Exit Sub
             End If
+
+            Dim decTmp As Decimal = DgvAdd.Rows(e.RowIndex).Cells("今回買掛金額計").Value
+            DgvAdd.Rows(e.RowIndex).Cells("今回買掛金額計").Value = decTmp
+
         End If
 
     End Sub
