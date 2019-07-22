@@ -291,6 +291,11 @@ Public Class BillingManagement
         DgvCymn.Rows(0).Cells("請求金額計").Value = BillingAmount
         DgvCymn.Rows(0).Cells("請求残高").Value = (total - BillingAmount).ToString("F0")
 
+        '数字形式
+        DgvCymn.Columns("受注金額").DefaultCellStyle.Format = "N0"
+        DgvCymn.Columns("請求金額計").DefaultCellStyle.Format = "N0"
+        DgvCymn.Columns("請求残高").DefaultCellStyle.Format = "N0"
+
         '#633 のためコメントアウト
         'DtpBillingDate.MinDate = dsCymnhd.Tables(RS).Rows(0)("受注日").ToShortDateString()
         'DtpDepositDate.MinDate = dsCymnhd.Tables(RS).Rows(0)("受注日").ToShortDateString()
@@ -308,6 +313,13 @@ Public Class BillingManagement
             DgvCymndt.Rows(i).Cells("売上単価").Value = dsCymndt.Tables(RS).Rows(i)("見積単価_外貨")
             DgvCymndt.Rows(i).Cells("売上金額").Value = dsCymndt.Tables(RS).Rows(i)("見積金額_外貨")
         Next
+
+        '数字形式
+        DgvCymndt.Columns("受注個数").DefaultCellStyle.Format = "N2"
+        DgvCymndt.Columns("売上数量").DefaultCellStyle.Format = "N2"
+        DgvCymndt.Columns("売上単価").DefaultCellStyle.Format = "N2"
+        DgvCymndt.Columns("売上金額").DefaultCellStyle.Format = "N0"
+
 
         '受注明細の件数カウント
         TxtDgvCymndtCount.Text = dsCymndt.Tables(RS).Rows.Count
@@ -341,6 +353,10 @@ Public Class BillingManagement
             DgvHistory.Rows(i).Cells("請求済み受注番号枝番").Value = dsSkyuhd.Tables(RS).Rows(i)("受注番号枝番")
         Next
 
+        '数字形式
+        DgvHistory.Columns("請求金額").DefaultCellStyle.Format = "N0"
+
+
         '請求済みデータ件数カウント
         TxtDgvHistoryCount.Text = dsSkyuhd.Tables(RS).Rows.Count
 
@@ -355,6 +371,10 @@ Public Class BillingManagement
             '請求データ作成件数カウント
             TxtDgvAddCount.Text = 1
         End If
+
+        '数字形式
+        DgvAdd.Columns("今回請求金額計").DefaultCellStyle.Format = "N0"
+
     End Sub
 
     '前の画面に戻る
