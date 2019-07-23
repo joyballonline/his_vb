@@ -123,6 +123,12 @@ Public Class SupplierAPList
             DgvCymndt.Rows(i).Cells("備考").Value = dsKikehd.Tables(RS).Rows(i)("備考1")
         Next
 
+        '数字形式
+        DgvCymndt.Columns("買掛金額計").DefaultCellStyle.Format = "N0"
+        DgvCymndt.Columns("支払金額計").DefaultCellStyle.Format = "N0"
+        DgvCymndt.Columns("買掛金残高").DefaultCellStyle.Format = "N0"
+
+
     End Sub
 
     '戻るボタン押下時
