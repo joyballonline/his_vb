@@ -220,7 +220,13 @@ Public Class PaidList
                 End If
 
                 '伝票単位時のセル書式
+                DgvHtyhd.Columns("支払金額計_外貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 DgvHtyhd.Columns("支払金額計").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+                '数字形式
+                DgvHtyhd.Columns("支払金額計_外貨").DefaultCellStyle.Format = "N0"
+                DgvHtyhd.Columns("支払金額計").DefaultCellStyle.Format = "N0"
+
 
                 For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
 
@@ -257,7 +263,7 @@ Public Class PaidList
 
                     DgvHtyhd.Rows(index).Cells("通貨_外貨").Value = cur
                     DgvHtyhd.Rows(index).Cells("支払金額計_外貨").Value = ds.Tables(RS).Rows(index)("支払金額計_外貨")
-                    DgvHtyhd.Rows(index).Cells("通貨").Value = "IDR"
+                    DgvHtyhd.Rows(index).Cells("通貨").Value = setBaseCurrency
                     DgvHtyhd.Rows(index).Cells("支払金額計").Value = ds.Tables(RS).Rows(index)("支払金額計")
                     DgvHtyhd.Rows(index).Cells("更新日").Value = ds.Tables(RS).Rows(index)("更新日")
                     DgvHtyhd.Rows(index).Cells("備考").Value = ds.Tables(RS).Rows(index)("備考")
@@ -741,6 +747,19 @@ Public Class PaidList
 
         'リードタイムのリストを汎用マスタから取得
         Return getDsData("m90_hanyo", Sql)
+    End Function
+
+    '基準通貨の通貨コードを取得する
+    Private Function setBaseCurrency() As String
+        Dim Sql As String
+        '通貨表示：ベースの設定
+        Sql = " AND 採番キー = " & CommonConst.CURRENCY_CD_IDR.ToString
+        Sql += " AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
+
+        Dim ds As DataSet = getDsData("m25_currency", Sql)
+        'TxtIDRCurrency.Text = ds.Tables(RS).Rows(0)("通貨コード")
+        setBaseCurrency = ds.Tables(RS).Rows(0)("通貨コード")
+
     End Function
 
 End Class
