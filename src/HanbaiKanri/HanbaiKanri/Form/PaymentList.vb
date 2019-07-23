@@ -124,6 +124,12 @@ Public Class PaymentList
 
         End If
 
+        '数字形式
+        DgvSupplier.Columns("仕入金額計_外貨").DefaultCellStyle.Format = "N0"
+        DgvSupplier.Columns("支払残高_外貨").DefaultCellStyle.Format = "N0"
+        DgvSupplier.Columns("仕入金額計").DefaultCellStyle.Format = "N0"
+        DgvSupplier.Columns("支払残高").DefaultCellStyle.Format = "N0"
+
 
         '仕入先リストの取得
         Dim dsSupplier As DataSet = getDsData("m11_supplier", Sql)
@@ -239,7 +245,7 @@ Public Class PaymentList
                 DgvSupplier.Rows(idx).Cells("仕入金額計_外貨").Value = SupplierOrderAmountFC
                 DgvSupplier.Rows(idx).Cells("支払残高_外貨").Value = AccountsReceivableFC
 
-                DgvSupplier.Rows(idx).Cells("通貨").Value = "IDR"
+                DgvSupplier.Rows(idx).Cells("通貨").Value = setBaseCurrency
                 DgvSupplier.Rows(idx).Cells("仕入金額計").Value = SupplierOrderAmount
                 DgvSupplier.Rows(idx).Cells("支払残高").Value = AccountsReceivable
 
@@ -364,4 +370,18 @@ Public Class PaymentList
         '一覧取得
         getSiharaiList()
     End Sub
+
+    '基準通貨の通貨コードを取得する
+    Private Function setBaseCurrency() As String
+        Dim Sql As String
+        '通貨表示：ベースの設定
+        Sql = " AND 採番キー = " & CommonConst.CURRENCY_CD_IDR.ToString
+        Sql += " AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
+
+        Dim ds As DataSet = getDsData("m25_currency", Sql)
+        'TxtIDRCurrency.Text = ds.Tables(RS).Rows(0)("通貨コード")
+        setBaseCurrency = ds.Tables(RS).Rows(0)("通貨コード")
+
+    End Function
+
 End Class
