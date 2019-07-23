@@ -121,6 +121,19 @@ Public Class AccountsPayableList
 
         End If
 
+        '数字形式
+        DgvKike.Columns("買掛金額計_外貨").DefaultCellStyle.Format = "N0"
+        DgvKike.Columns("買掛残高_外貨").DefaultCellStyle.Format = "N0"
+        DgvKike.Columns("買掛金額計").DefaultCellStyle.Format = "N0"
+        DgvKike.Columns("買掛残高").DefaultCellStyle.Format = "N0"
+
+        '中央寄せ
+        DgvKike.Columns("買掛金額計_外貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvKike.Columns("買掛残高_外貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvKike.Columns("買掛金額計").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvKike.Columns("買掛残高").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+
         PurchaseListLoad() '一覧表示
 
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
@@ -215,7 +228,7 @@ Public Class AccountsPayableList
                 DgvKike.Rows(i).Cells("通貨_外貨").Value = cur
                 DgvKike.Rows(i).Cells("買掛金額計_外貨").Value = ds.Tables(RS).Rows(i)("買掛金額計_外貨")
                 DgvKike.Rows(i).Cells("買掛残高_外貨").Value = ds.Tables(RS).Rows(i)("買掛残高_外貨")
-                DgvKike.Rows(i).Cells("通貨").Value = "IDR"
+                DgvKike.Rows(i).Cells("通貨").Value =   setBaseCurrency()
                 DgvKike.Rows(i).Cells("買掛金額計").Value = ds.Tables(RS).Rows(i)("買掛金額計")
                 DgvKike.Rows(i).Cells("買掛残高").Value = ds.Tables(RS).Rows(i)("買掛残高")
                 DgvKike.Rows(i).Cells("備考1").Value = ds.Tables(RS).Rows(i)("備考1")
@@ -491,6 +504,19 @@ Public Class AccountsPayableList
 
         '日本の形式に書き換える
         Return prmVal.ToString("F3", nfi) '売掛残高を増やす
+    End Function
+
+    '基準通貨の通貨コードを取得する
+    Private Function setBaseCurrency() As String
+        Dim Sql As String
+        '通貨表示：ベースの設定
+        Sql = " AND 採番キー = " & CommonConst.CURRENCY_CD_IDR.ToString
+        Sql += " AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
+
+        Dim ds As DataSet = getDsData("m25_currency", Sql)
+        'TxtIDRCurrency.Text = ds.Tables(RS).Rows(0)("通貨コード")
+        setBaseCurrency = ds.Tables(RS).Rows(0)("通貨コード")
+
     End Function
 
 End Class
