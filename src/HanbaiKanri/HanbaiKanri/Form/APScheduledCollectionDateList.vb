@@ -101,6 +101,12 @@ Public Class APScheduledCollectionDateList
 
         End If
 
+        '数字形式
+        DgvCymndt.Columns("買掛金額計").DefaultCellStyle.Format = "N0"
+        DgvCymndt.Columns("支払金額計").DefaultCellStyle.Format = "N0"
+        DgvCymndt.Columns("買掛金残高").DefaultCellStyle.Format = "N0"
+
+
         Sql = " AND "
         Sql += "買掛残高 > 0 "
         Sql += " AND "
