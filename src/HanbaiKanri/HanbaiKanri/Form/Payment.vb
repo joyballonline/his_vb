@@ -177,6 +177,20 @@ Public Class Payment
             DgvKikeInfo.Columns("支払金額").HeaderText = "PaymentAmount"
 
         End If
+
+
+        '数字形式
+        DgvSupplier.Columns("買掛残高").DefaultCellStyle.Format = "N0"
+
+        DgvHistory.Columns("支払済支払金額計").DefaultCellStyle.Format = "N0"
+
+        DgvPayment.Columns("入力支払金額").DefaultCellStyle.Format = "N0"
+
+        DgvKikeInfo.Columns("買掛金額").DefaultCellStyle.Format = "N0"
+        DgvKikeInfo.Columns("買掛情報支払金額計").DefaultCellStyle.Format = "N0"
+        DgvKikeInfo.Columns("買掛情報買掛残高").DefaultCellStyle.Format = "N0"
+        DgvKikeInfo.Columns("支払金額").DefaultCellStyle.Format = "N0"
+
     End Sub
 
     '各Table内の作成
@@ -466,6 +480,10 @@ Public Class Payment
                 DgvPayment.Rows(e.RowIndex).Cells("入力支払金額").Value = 0
                 Exit Sub
             End If
+
+            Dim decTmp As Decimal = DgvPayment.Rows(e.RowIndex).Cells("入力支払金額").Value
+            DgvPayment.Rows(e.RowIndex).Cells("入力支払金額").Value = decTmp
+
         End If
 
     End Sub
