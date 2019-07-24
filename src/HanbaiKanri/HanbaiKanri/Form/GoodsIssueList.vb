@@ -243,6 +243,10 @@ Public Class GoodsIssueList
             DgvCymnhd.Columns("出庫数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             DgvCymnhd.Columns("売単価").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
+            '数字形式
+            DgvCymnhd.Columns("出庫数量").DefaultCellStyle.Format = "N2"
+            DgvCymnhd.Columns("売単価").DefaultCellStyle.Format = "N2"
+
             Sql = " SELECT t45.*, t44.取消区分, t44.出庫日 "
             Sql += " FROM "
             Sql += " t45_shukodt t45"
