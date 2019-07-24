@@ -290,6 +290,11 @@ Public Class ReceiptList
             DgvNyuko.Columns("入庫数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             DgvNyuko.Columns("仕入値").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
+            '数字形式
+            DgvNyuko.Columns("入庫数量").DefaultCellStyle.Format = "N2"
+            DgvNyuko.Columns("仕入値").DefaultCellStyle.Format = "N2"
+
+
             Try
 
                 Sql = "SELECT"
