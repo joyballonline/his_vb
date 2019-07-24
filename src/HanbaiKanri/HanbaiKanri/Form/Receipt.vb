@@ -187,6 +187,15 @@ Public Class Receipt
         DgvPurchase.Columns("更新日").Visible = False
         DgvPurchase.Columns("行番号").Visible = False
 
+        '数字形式
+        DgvPurchase.Columns("発注数量").DefaultCellStyle.Format = "N2"
+        DgvPurchase.Columns("仕入数量").DefaultCellStyle.Format = "N2"
+        DgvPurchase.Columns("仕入単価").DefaultCellStyle.Format = "N2"
+        DgvPurchase.Columns("仕入金額").DefaultCellStyle.Format = "N0"
+        DgvPurchase.Columns("発注残数").DefaultCellStyle.Format = "N2"
+        DgvPurchase.Columns("未入庫数").DefaultCellStyle.Format = "N2"
+
+
         '入庫済みエリア
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
             DgvHistory.Columns.Add("No", "No")
@@ -228,6 +237,11 @@ Public Class Receipt
         DgvHistory.Columns("仕入値").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvHistory.Columns("入庫数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
+        '数字形式
+        DgvHistory.Columns("仕入値").DefaultCellStyle.Format = "N2"
+        DgvHistory.Columns("入庫数量").DefaultCellStyle.Format = "N2"
+
+
         '今回入庫エリア
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
             DgvAdd.Columns.Add("No", "No")
@@ -262,6 +276,12 @@ Public Class Receipt
         DgvAdd.Columns("入庫数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
         DgvAdd.Columns("仕入区分値").Visible = False
+
+
+        '数字形式
+        DgvAdd.Columns("仕入値").DefaultCellStyle.Format = "N2"
+        DgvAdd.Columns("入庫数量").DefaultCellStyle.Format = "N2"
+
 
         createWarehouseCombobox() '倉庫コンボボックス
 
@@ -568,6 +588,10 @@ Public Class Receipt
                 DgvAdd.Rows(e.RowIndex).Cells("入庫数量").Value = 0
                 Exit Sub
             End If
+
+            Dim decTmp As Decimal = DgvAdd.Rows(e.RowIndex).Cells("入庫数量").Value
+            DgvAdd.Rows(e.RowIndex).Cells("入庫数量").Value = decTmp
+
         End If
 
     End Sub
