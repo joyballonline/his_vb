@@ -184,8 +184,8 @@ Public Class CommonConst
     Public Const MENU_H0740 As String = "H0740"           '入庫取消
     Public Const MENU_H0750 As String = "H0750"           '当月購入在庫金額・VAT一覧
 
-    'Public Const MENU_H0810 As String = "H0810"           '受発注登録
     Public Const MENU_H0200 As String = "H0200"           '受発注登録
+    Public Const MENU_H0810 As String = "H0810"           '受発注登録
 
     Public Const MENU_H0910 As String = "H0910"           '請求登録
     Public Const MENU_H0920 As String = "H0920"           '請求編集
