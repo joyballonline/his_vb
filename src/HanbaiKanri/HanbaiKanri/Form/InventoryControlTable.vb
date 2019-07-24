@@ -116,6 +116,14 @@ Public Class InventoryControlTable
 
         'getList() 'データ取得・表示
         setList() 'データ取得・表示
+
+        '数字形式
+        DgvList.Columns("入庫数量").DefaultCellStyle.Format = "N2"
+        DgvList.Columns("入庫単価").DefaultCellStyle.Format = "N2"
+        DgvList.Columns("出庫数量").DefaultCellStyle.Format = "N2"
+        DgvList.Columns("出庫単価").DefaultCellStyle.Format = "N2"
+        DgvList.Columns("在庫数").DefaultCellStyle.Format = "N2"
+
     End Sub
 
     '戻るボタン押下時
@@ -176,12 +184,13 @@ Public Class InventoryControlTable
             DgvList.Columns.Add("在庫数", "在庫数")
             DgvList.Columns.Add("備考", "備考")
 
-            DgvList.Columns("入庫数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvList.Columns("入庫単価").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvList.Columns("出庫数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvList.Columns("出庫単価").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvList.Columns("在庫数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         End If
+
+        DgvList.Columns("入庫数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("入庫単価").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("出庫数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("出庫単価").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("在庫数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
     End Sub
 
@@ -704,20 +713,20 @@ Public Class InventoryControlTable
                                                             dsList.Tables(RS).Rows(i)("得意先名").ToString)
 
                 DgvList.Rows(i).Cells("入庫数量").Value = IIf(dsList.Tables(RS).Rows(i)("入出庫区分").ToString = "1",
-                                                            dsList.Tables(RS).Rows(i)("数量").ToString,
+                                                            dsList.Tables(RS).Rows(i)("数量"),
                                                             "")
-                DgvList.Rows(i).Cells("入庫単価").Value = dsList.Tables(RS).Rows(i)("仕入値").ToString
+                DgvList.Rows(i).Cells("入庫単価").Value = dsList.Tables(RS).Rows(i)("仕入値")
                 DgvList.Rows(i).Cells("出庫数量").Value = IIf(dsList.Tables(RS).Rows(i)("入出庫区分").ToString = "2",
-                                                            dsList.Tables(RS).Rows(i)("数量").ToString,
+                                                            dsList.Tables(RS).Rows(i)("数量"),
                                                             "")
-                DgvList.Rows(i).Cells("出庫単価").Value = dsList.Tables(RS).Rows(i)("売単価").ToString
+                DgvList.Rows(i).Cells("出庫単価").Value = dsList.Tables(RS).Rows(i)("売単価")
 
                 If selectSearch.ToString("dd") = "01" Then
                     If IsNumeric(dsList.Tables(RS).Rows(i)("数量").ToString) Then
                         If dsList.Tables(RS).Rows(i)("入出庫区分").ToString = "1" Then
-                            currentCul1 += Integer.Parse(dsList.Tables(RS).Rows(i)("数量").ToString)
+                            currentCul1 += Integer.Parse(dsList.Tables(RS).Rows(i)("数量"))
                         Else
-                            currentCul1 -= Integer.Parse(dsList.Tables(RS).Rows(i)("数量").ToString)
+                            currentCul1 -= Integer.Parse(dsList.Tables(RS).Rows(i)("数量"))
                         End If
                     End If
                     DgvList.Rows(i).Cells("在庫数").Value = currentCul1
