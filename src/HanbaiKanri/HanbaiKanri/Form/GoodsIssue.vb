@@ -508,6 +508,16 @@ Public Class GoodsIssue
         DgvOrder.Columns("未出庫数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvOrder.Columns("更新日").Visible = False
 
+
+        '数字形式
+        DgvOrder.Columns("受注数量").DefaultCellStyle.Format = "N2"
+        DgvOrder.Columns("売上数量").DefaultCellStyle.Format = "N2"
+        DgvOrder.Columns("売単価").DefaultCellStyle.Format = "N2"
+        DgvOrder.Columns("売上金額").DefaultCellStyle.Format = "N0"
+        DgvOrder.Columns("受注残数").DefaultCellStyle.Format = "N2"
+        DgvOrder.Columns("未出庫数").DefaultCellStyle.Format = "N2"
+
+
         '出庫済みエリア見出しセット
         '
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
@@ -550,6 +560,10 @@ Public Class GoodsIssue
         DgvHistory.Columns("出庫数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
 
+        '数字形式
+        DgvHistory.Columns("売単価").DefaultCellStyle.Format = "N2"
+        DgvHistory.Columns("出庫数量").DefaultCellStyle.Format = "N2"
+
         '今回出庫エリア見出しセット
         '
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
@@ -586,6 +600,13 @@ Public Class GoodsIssue
         DgvAdd.Columns("売単価").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvAdd.Columns("出庫数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvAdd.Columns("在庫数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+        '数字形式
+        DgvAdd.Columns("売単価").DefaultCellStyle.Format = "N2"
+        DgvAdd.Columns("出庫数量").DefaultCellStyle.Format = "N2"
+        DgvAdd.Columns("在庫数量").DefaultCellStyle.Format = "N2"
+
+
         'DgvAdd.Columns("No").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
         'DgvAdd.Columns("No").ReadOnly = True
         DgvAdd.Columns("行番号").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
@@ -2228,4 +2249,25 @@ Public Class GoodsIssue
         Return retZaikoQuantity
 
     End Function
+
+    Private Sub DgvAdd_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles DgvAdd.CellValueChanged
+
+        Dim PurchaseTotal As Integer = 0
+
+        'ヘッダー以外だったら
+        If e.RowIndex > -1 Then
+
+            '各項目の属性チェック
+            If Not IsNumeric(DgvAdd.Rows(e.RowIndex).Cells("出庫数量").Value) And (DgvAdd.Rows(e.RowIndex).Cells("出庫数量").Value IsNot Nothing) Then
+                _msgHd.dspMSG("IsNotNumeric", frmC01F10_Login.loginValue.Language)
+                DgvAdd.Rows(e.RowIndex).Cells("出庫数量").Value = 0
+                Exit Sub
+            End If
+
+            Dim decTmp As Decimal = DgvAdd.Rows(e.RowIndex).Cells("出庫数量").Value
+            DgvAdd.Rows(e.RowIndex).Cells("出庫数量").Value = decTmp
+
+        End If
+    End Sub
+
 End Class
