@@ -124,6 +124,11 @@ Public Class InventoryList
         End If
 
         DgvList.Columns("在庫数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("単価（入庫単価）").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+        '数字形式
+        DgvList.Columns("在庫数").DefaultCellStyle.Format = "N2"
+        DgvList.Columns("単価（入庫単価）").DefaultCellStyle.Format = "N2"
 
     End Sub
 
@@ -155,6 +160,12 @@ Public Class InventoryList
         End If
 
         DgvList.Columns("在庫数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("単価（入庫単価）").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+
+        '数字形式
+        DgvList.Columns("在庫数").DefaultCellStyle.Format = "N2"
+        DgvList.Columns("単価（入庫単価）").DefaultCellStyle.Format = "N2"
 
     End Sub
 
