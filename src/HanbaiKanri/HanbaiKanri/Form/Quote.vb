@@ -1374,6 +1374,11 @@ Public Class Quote
             No += 1
         Next c
         TxtItemCount.Text = DgvItemList.Rows.Count()
+
+        'フォーカス
+        DgvItemList.Focus()
+        DgvItemList.CurrentCell = DgvItemList(1, index - 1)
+
     End Sub
 
     '選択行の削除（削除時に金額の再計算、Noの再採番）
