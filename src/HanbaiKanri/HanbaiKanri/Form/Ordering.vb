@@ -946,7 +946,7 @@ Public Class Ordering
         End If
 
         If DgvItemList.CurrentCell.RowIndex > 0 Then
-            DgvItemList.CurrentCell = DgvItemList(DgvItemList.CurrentCell.ColumnIndex, DgvItemList.CurrentCell.RowIndex - 1)
+            setRowClone(DgvItemList.CurrentCell.RowIndex, "UP")
         End If
     End Sub
 
@@ -957,16 +957,18 @@ Public Class Ordering
             Exit Sub
         End If
 
-        If DgvItemList.CurrentCell.RowIndex + 1 < DgvItemList.Rows.Count Then
-            DgvItemList.CurrentCell = DgvItemList(DgvItemList.CurrentCell.ColumnIndex, DgvItemList.CurrentCell.RowIndex + 1)
+        If DgvItemList.CurrentCell.RowIndex < DgvItemList.Rows.Count - 1 Then
+            setRowClone(DgvItemList.CurrentCell.RowIndex, "DOWN")
         End If
     End Sub
 
     '任意の場所に行を挿入
     Private Sub BtnInsert_Click(sender As Object, e As EventArgs) Handles BtnInsert.Click
 
+        Dim RowIdx As Integer
+
         If DgvItemList.Rows.Count > 0 Then
-            Dim RowIdx As Integer = DgvItemList.CurrentCell.RowIndex
+            RowIdx = DgvItemList.CurrentCell.RowIndex
             '行を挿入
             DgvItemList.Rows.Insert(RowIdx + 1)
             DgvItemList.Rows(RowIdx + 1).Cells("リードタイム単位").Value = 1
@@ -989,6 +991,14 @@ Public Class Ordering
 
         'リストの行数をセット
         TxtItemCount.Text = DgvItemList.Rows.Count()
+
+        'フォーカス
+        DgvItemList.Focus()
+        If DgvItemList.Rows.Count = 1 Then
+            DgvItemList.CurrentCell = DgvItemList(2, 0)
+        Else
+            DgvItemList.CurrentCell = DgvItemList(2, RowIdx + 1)
+        End If
     End Sub
 
     '行追加（DGVの最終行に追加）
@@ -1057,6 +1067,10 @@ Public Class Ordering
             noReset()
 
             TxtItemCount.Text = DgvItemList.Rows.Count()
+
+            'フォーカス
+            DgvItemList.Focus()
+            DgvItemList.CurrentCell = DgvItemList(2, RowIdx + 1)
 
         Catch ue As UsrDefException
             ue.dspMsg()
@@ -2271,4 +2285,41 @@ Public Class Ordering
         Return ds.Tables(RS).Rows(0)("通貨コード")
 
     End Function
+
+    '行移動実行
+    Private Sub setRowClone(ByVal rowIndex As Integer, ByVal status As String)
+        'DgvItemList.CurrentCell = DgvItemList(DgvItemList.CurrentCell.ColumnIndex, DgvItemList.CurrentCell.RowIndex)
+        Dim nextRowIndex As Integer
+        Dim delRowIndex As Integer
+        If status = "UP" Then
+            nextRowIndex = rowIndex - 1
+            delRowIndex = rowIndex + 1
+        Else
+            nextRowIndex = rowIndex + 2
+            delRowIndex = rowIndex
+        End If
+
+        Dim rowClone As DataGridViewRow = DgvItemList.Rows(rowIndex).Clone
+
+        'columnの数分valueを複写
+        For i As Integer = 0 To DgvItemList.ColumnCount - 1
+            rowClone.Cells(i).Value = DgvItemList.Rows(rowIndex).Cells(i).Value
+        Next
+
+        '2行上に新規行作成及びclone内容を反映
+        DgvItemList.Rows.Insert(nextRowIndex, rowClone)
+        'カレントだった行を削除
+        DgvItemList.Rows.RemoveAt(delRowIndex)
+
+        '行番号の振り直し
+        noReset()
+
+        If status = "UP" Then
+            DgvItemList.CurrentCell = DgvItemList(DgvItemList.CurrentCell.ColumnIndex, nextRowIndex)
+        Else
+            DgvItemList.CurrentCell = DgvItemList(DgvItemList.CurrentCell.ColumnIndex, nextRowIndex - 1)
+        End If
+
+    End Sub
+
 End Class
