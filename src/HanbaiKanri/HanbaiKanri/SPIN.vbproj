@@ -21,7 +21,7 @@
     </SccProvider>
     <ApplicationIcon>
     </ApplicationIcon>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <UpgradeBackupLocation>
@@ -592,6 +592,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\ExchangeRateList.resx">
       <DependentUpon>ExchangeRateList.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\StockSearch.resx">
       <DependentUpon>StockSearch.vb</DependentUpon>
@@ -677,6 +678,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmC01F30_Menu.resx">
       <DependentUpon>frmC01F30_Menu.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\GoodsIssue.resx">
       <DependentUpon>GoodsIssue.vb</DependentUpon>
