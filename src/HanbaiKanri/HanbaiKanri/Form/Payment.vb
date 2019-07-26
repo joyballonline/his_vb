@@ -400,6 +400,10 @@ Public Class Payment
             No += 1
         Next c
         TxtPaymentCount.Text = DgvPayment.Rows.Count()
+
+        'フォーカス
+        DgvPayment.Focus()
+        DgvPayment.CurrentCell = DgvPayment(2, index - 1)
     End Sub
 
     '支払入力行の削除
