@@ -806,6 +806,10 @@ Public Class SalesList
     '参照ボタン押下時
     Private Sub BtnSalesView_Click(sender As Object, e As EventArgs) Handles BtnSalesView.Click
 
+        If DgvCymnhd.Rows.Count = 0 Then
+            Exit Sub
+        End If
+
         Dim RowIdx As Integer
         RowIdx = Me.DgvCymnhd.CurrentCell.RowIndex
         Dim No As String = DgvCymnhd.Rows(RowIdx).Cells("受注番号").Value
