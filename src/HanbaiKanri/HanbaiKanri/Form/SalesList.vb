@@ -212,6 +212,10 @@ Public Class SalesList
                     DgvCymnhd.Rows(i).Cells("リードタイム").Value = ds.Tables(RS).Rows(i)("リードタイム")
                     DgvCymnhd.Rows(i).Cells("備考").Value = ds.Tables(RS).Rows(i)("備考")
                     DgvCymnhd.Rows(i).Cells("更新者").Value = ds.Tables(RS).Rows(i)("更新者")
+
+                    Dim dt2 As DateTime = DateTime.Parse(ds.Tables(RS).Rows(i)("更新日").ToShortDateString)
+                    DgvCymnhd.Rows(i).Cells("更新日").Value = dt2
+
                 Next
 
             End If
@@ -399,6 +403,7 @@ Public Class SalesList
             DgvCymnhd.Columns.Add("リードタイム", "LeadTime")
             DgvCymnhd.Columns.Add("備考", "Remarks")
             DgvCymnhd.Columns.Add("更新者", "ModifiedBy")
+            DgvCymnhd.Columns.Add("更新日", "UpdateDate")
 
         Else
 
@@ -426,6 +431,8 @@ Public Class SalesList
             DgvCymnhd.Columns.Add("リードタイム", "リードタイム")
             DgvCymnhd.Columns.Add("備考", "備考")
             DgvCymnhd.Columns.Add("更新者", "更新者")
+            DgvCymnhd.Columns.Add("更新日", "更新日")
+
         End If
 
         DgvCymnhd.Columns("仕入値").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
