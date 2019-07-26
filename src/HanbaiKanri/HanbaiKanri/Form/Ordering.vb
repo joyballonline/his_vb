@@ -1005,6 +1005,10 @@ Public Class Ordering
             No += 1
         Next c
 
+        'フォーカス
+        DgvItemList.Focus()
+        DgvItemList.CurrentCell = DgvItemList(2, index - 1)
+
         'リストの行数をセット
         TxtItemCount.Text = DgvItemList.Rows.Count()
     End Sub
