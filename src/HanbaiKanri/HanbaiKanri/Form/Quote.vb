@@ -1328,6 +1328,14 @@ Public Class Quote
                 No += 1
             Next c
             TxtItemCount.Text = DgvItemList.Rows.Count()
+
+            'フォーカス
+            DgvItemList.Focus()
+            If RowIdx = 0 Then
+                DgvItemList.CurrentCell = DgvItemList(2, 1)
+            Else
+                DgvItemList.CurrentCell = DgvItemList(2, RowIdx + 1)
+            End If
         Else
             DgvItemList.Rows.Add()
             DgvItemList.Rows(0).Cells("仕入区分").Value = 1
@@ -1349,6 +1357,10 @@ Public Class Quote
                 No += 1
             Next c
             TxtItemCount.Text = DgvItemList.Rows.Count()
+
+            'フォーカス
+            DgvItemList.Focus()
+            DgvItemList.CurrentCell = DgvItemList(2, 0)
         End If
     End Sub
 
@@ -1377,7 +1389,7 @@ Public Class Quote
 
         'フォーカス
         DgvItemList.Focus()
-        DgvItemList.CurrentCell = DgvItemList(1, index - 1)
+        DgvItemList.CurrentCell = DgvItemList(2, index - 1)
 
     End Sub
 
@@ -1499,6 +1511,12 @@ Public Class Quote
                 No += 1
             Next c
             TxtItemCount.Text = DgvItemList.Rows.Count()
+
+            'フォーカス
+            DgvItemList.Focus()
+            DgvItemList.CurrentCell = DgvItemList(2, RowIdx+1)
+
+
         Catch ue As UsrDefException
             ue.dspMsg()
         Catch ex As Exception
@@ -1612,7 +1630,12 @@ Public Class Quote
         '行番号の振り直し
         noReset()
 
-        DgvItemList.CurrentCell = DgvItemList(DgvItemList.CurrentCell.ColumnIndex, rowIndex)
+        If status = "UP" Then
+            DgvItemList.CurrentCell = DgvItemList(DgvItemList.CurrentCell.ColumnIndex, nextRowIndex)
+        Else
+            DgvItemList.CurrentCell = DgvItemList(DgvItemList.CurrentCell.ColumnIndex, nextRowIndex - 1)
+        End If
+
     End Sub
 
     '行移動↑
@@ -1629,6 +1652,7 @@ Public Class Quote
 
     '行移動↓
     Private Sub BtnDown_Click(sender As Object, e As EventArgs) Handles BtnDown.Click
+
         'グリッドに何もないときは処理しない
         If DgvItemList.CurrentCell Is Nothing Then
             Exit Sub
@@ -1637,6 +1661,7 @@ Public Class Quote
         If DgvItemList.CurrentCell.RowIndex < DgvItemList.Rows.Count - 1 Then
             setRowClone(DgvItemList.CurrentCell.RowIndex, "DOWN")
         End If
+
     End Sub
 
     '前の画面に戻る
