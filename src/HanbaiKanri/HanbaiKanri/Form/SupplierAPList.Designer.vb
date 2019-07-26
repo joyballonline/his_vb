@@ -25,17 +25,25 @@ Partial Class SupplierAPList
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.BtnBack = New System.Windows.Forms.Button()
         Me.DgvCymndt = New System.Windows.Forms.DataGridView()
+        Me.LblMode = New System.Windows.Forms.Label()
+        Me.BtnExcelOutput = New System.Windows.Forms.Button()
         Me.仕入先名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.発注番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.買掛日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.通貨_外貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.買掛金額計_外貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.支払金額計_外貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.買掛金残高_外貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.通貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.買掛金額計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.支払金額計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.買掛金残高 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.備考 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.LblMode = New System.Windows.Forms.Label()
-        Me.BtnExcelOutput = New System.Windows.Forms.Button()
         CType(Me.DgvCymndt, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -54,7 +62,7 @@ Partial Class SupplierAPList
         Me.DgvCymndt.AllowUserToAddRows = False
         Me.DgvCymndt.AllowUserToDeleteRows = False
         Me.DgvCymndt.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvCymndt.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.仕入先名, Me.発注番号, Me.買掛日, Me.買掛金額計, Me.支払金額計, Me.買掛金残高, Me.備考})
+        Me.DgvCymndt.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.仕入先名, Me.発注番号, Me.買掛日, Me.通貨_外貨, Me.買掛金額計_外貨, Me.支払金額計_外貨, Me.買掛金残高_外貨, Me.通貨, Me.買掛金額計, Me.支払金額計, Me.買掛金残高, Me.備考})
         Me.DgvCymndt.Location = New System.Drawing.Point(13, 51)
         Me.DgvCymndt.Name = "DgvCymndt"
         Me.DgvCymndt.ReadOnly = True
@@ -63,54 +71,6 @@ Partial Class SupplierAPList
         Me.DgvCymndt.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvCymndt.Size = New System.Drawing.Size(1326, 444)
         Me.DgvCymndt.TabIndex = 15
-        '
-        '仕入先名
-        '
-        Me.仕入先名.HeaderText = "仕入先名"
-        Me.仕入先名.Name = "仕入先名"
-        Me.仕入先名.ReadOnly = True
-        '
-        '発注番号
-        '
-        Me.発注番号.HeaderText = "発注番号"
-        Me.発注番号.Name = "発注番号"
-        Me.発注番号.ReadOnly = True
-        '
-        '買掛日
-        '
-        Me.買掛日.HeaderText = "買掛日"
-        Me.買掛日.Name = "買掛日"
-        Me.買掛日.ReadOnly = True
-        '
-        '買掛金額計
-        '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.買掛金額計.DefaultCellStyle = DataGridViewCellStyle1
-        Me.買掛金額計.HeaderText = "買掛金額計"
-        Me.買掛金額計.Name = "買掛金額計"
-        Me.買掛金額計.ReadOnly = True
-        '
-        '支払金額計
-        '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.支払金額計.DefaultCellStyle = DataGridViewCellStyle2
-        Me.支払金額計.HeaderText = "支払金額計"
-        Me.支払金額計.Name = "支払金額計"
-        Me.支払金額計.ReadOnly = True
-        '
-        '買掛金残高
-        '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.買掛金残高.DefaultCellStyle = DataGridViewCellStyle3
-        Me.買掛金残高.HeaderText = "買掛金残高"
-        Me.買掛金残高.Name = "買掛金残高"
-        Me.買掛金残高.ReadOnly = True
-        '
-        '備考
-        '
-        Me.備考.HeaderText = "備考"
-        Me.備考.Name = "備考"
-        Me.備考.ReadOnly = True
         '
         'LblMode
         '
@@ -133,6 +93,98 @@ Partial Class SupplierAPList
         Me.BtnExcelOutput.TabIndex = 22
         Me.BtnExcelOutput.Text = "Excel出力"
         Me.BtnExcelOutput.UseVisualStyleBackColor = True
+        '
+        '仕入先名
+        '
+        Me.仕入先名.HeaderText = "仕入先名"
+        Me.仕入先名.Name = "仕入先名"
+        Me.仕入先名.ReadOnly = True
+        '
+        '発注番号
+        '
+        Me.発注番号.HeaderText = "発注番号"
+        Me.発注番号.Name = "発注番号"
+        Me.発注番号.ReadOnly = True
+        '
+        '買掛日
+        '
+        Me.買掛日.HeaderText = "買掛日"
+        Me.買掛日.Name = "買掛日"
+        Me.買掛日.ReadOnly = True
+        '
+        '通貨_外貨
+        '
+        Me.通貨_外貨.HeaderText = "通貨(原通貨)"
+        Me.通貨_外貨.MaxInputLength = 6
+        Me.通貨_外貨.Name = "通貨_外貨"
+        Me.通貨_外貨.ReadOnly = True
+        '
+        '買掛金額計_外貨
+        '
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.買掛金額計_外貨.DefaultCellStyle = DataGridViewCellStyle1
+        Me.買掛金額計_外貨.HeaderText = "買掛金額計_外貨"
+        Me.買掛金額計_外貨.MaxInputLength = 15
+        Me.買掛金額計_外貨.Name = "買掛金額計_外貨"
+        Me.買掛金額計_外貨.ReadOnly = True
+        '
+        '支払金額計_外貨
+        '
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.支払金額計_外貨.DefaultCellStyle = DataGridViewCellStyle2
+        Me.支払金額計_外貨.HeaderText = "支払金額計_外貨"
+        Me.支払金額計_外貨.MaxInputLength = 15
+        Me.支払金額計_外貨.Name = "支払金額計_外貨"
+        Me.支払金額計_外貨.ReadOnly = True
+        '
+        '買掛金残高_外貨
+        '
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.買掛金残高_外貨.DefaultCellStyle = DataGridViewCellStyle3
+        Me.買掛金残高_外貨.HeaderText = "買掛金残高_外貨"
+        Me.買掛金残高_外貨.MaxInputLength = 15
+        Me.買掛金残高_外貨.Name = "買掛金残高_外貨"
+        Me.買掛金残高_外貨.ReadOnly = True
+        '
+        '通貨
+        '
+        Me.通貨.HeaderText = "通貨"
+        Me.通貨.MaxInputLength = 6
+        Me.通貨.Name = "通貨"
+        Me.通貨.ReadOnly = True
+        '
+        '買掛金額計
+        '
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.買掛金額計.DefaultCellStyle = DataGridViewCellStyle4
+        Me.買掛金額計.HeaderText = "買掛金額計"
+        Me.買掛金額計.MaxInputLength = 15
+        Me.買掛金額計.Name = "買掛金額計"
+        Me.買掛金額計.ReadOnly = True
+        '
+        '支払金額計
+        '
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.支払金額計.DefaultCellStyle = DataGridViewCellStyle5
+        Me.支払金額計.HeaderText = "支払金額計"
+        Me.支払金額計.MaxInputLength = 15
+        Me.支払金額計.Name = "支払金額計"
+        Me.支払金額計.ReadOnly = True
+        '
+        '買掛金残高
+        '
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.買掛金残高.DefaultCellStyle = DataGridViewCellStyle6
+        Me.買掛金残高.HeaderText = "買掛金残高"
+        Me.買掛金残高.MaxInputLength = 15
+        Me.買掛金残高.Name = "買掛金残高"
+        Me.買掛金残高.ReadOnly = True
+        '
+        '備考
+        '
+        Me.備考.HeaderText = "備考"
+        Me.備考.Name = "備考"
+        Me.備考.ReadOnly = True
         '
         'SupplierAPList
         '
@@ -157,6 +209,11 @@ Partial Class SupplierAPList
     Friend WithEvents 仕入先名 As DataGridViewTextBoxColumn
     Friend WithEvents 発注番号 As DataGridViewTextBoxColumn
     Friend WithEvents 買掛日 As DataGridViewTextBoxColumn
+    Friend WithEvents 通貨_外貨 As DataGridViewTextBoxColumn
+    Friend WithEvents 買掛金額計_外貨 As DataGridViewTextBoxColumn
+    Friend WithEvents 支払金額計_外貨 As DataGridViewTextBoxColumn
+    Friend WithEvents 買掛金残高_外貨 As DataGridViewTextBoxColumn
+    Friend WithEvents 通貨 As DataGridViewTextBoxColumn
     Friend WithEvents 買掛金額計 As DataGridViewTextBoxColumn
     Friend WithEvents 支払金額計 As DataGridViewTextBoxColumn
     Friend WithEvents 買掛金残高 As DataGridViewTextBoxColumn
