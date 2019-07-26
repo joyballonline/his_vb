@@ -417,6 +417,11 @@ Public Class DepositManagement
             No += 1
         Next c
         TxtDepositCount.Text = DgvDeposit.Rows.Count()
+
+        'フォーカス
+        DgvDeposit.Focus()
+        DgvDeposit.CurrentCell = DgvDeposit(2, index - 1)
+
     End Sub
 
     '入金入力行の削除
