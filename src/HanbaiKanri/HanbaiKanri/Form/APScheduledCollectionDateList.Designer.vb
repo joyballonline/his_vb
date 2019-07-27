@@ -25,18 +25,26 @@ Partial Class APScheduledCollectionDateList
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.BtnBack = New System.Windows.Forms.Button()
         Me.DgvCymndt = New System.Windows.Forms.DataGridView()
+        Me.LblMode = New System.Windows.Forms.Label()
+        Me.BtnExcelOutput = New System.Windows.Forms.Button()
         Me.支払期日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.仕入先名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.発注番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.買掛日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.通貨_外貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.買掛金額計_外貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.支払金額計_外貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.買掛金残高_外貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.通貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.買掛金額計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.支払金額計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.買掛金残高 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.備考 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.LblMode = New System.Windows.Forms.Label()
-        Me.BtnExcelOutput = New System.Windows.Forms.Button()
         CType(Me.DgvCymndt, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -55,7 +63,7 @@ Partial Class APScheduledCollectionDateList
         Me.DgvCymndt.AllowUserToAddRows = False
         Me.DgvCymndt.AllowUserToDeleteRows = False
         Me.DgvCymndt.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvCymndt.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.支払期日, Me.仕入先名, Me.発注番号, Me.買掛日, Me.買掛金額計, Me.支払金額計, Me.買掛金残高, Me.備考})
+        Me.DgvCymndt.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.支払期日, Me.仕入先名, Me.発注番号, Me.買掛日, Me.通貨_外貨, Me.買掛金額計_外貨, Me.支払金額計_外貨, Me.買掛金残高_外貨, Me.通貨, Me.買掛金額計, Me.支払金額計, Me.買掛金残高, Me.備考})
         Me.DgvCymndt.Location = New System.Drawing.Point(13, 51)
         Me.DgvCymndt.Name = "DgvCymndt"
         Me.DgvCymndt.ReadOnly = True
@@ -64,6 +72,28 @@ Partial Class APScheduledCollectionDateList
         Me.DgvCymndt.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvCymndt.Size = New System.Drawing.Size(1326, 444)
         Me.DgvCymndt.TabIndex = 15
+        '
+        'LblMode
+        '
+        Me.LblMode.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblMode.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblMode.Location = New System.Drawing.Point(1106, 9)
+        Me.LblMode.Name = "LblMode"
+        Me.LblMode.Size = New System.Drawing.Size(233, 22)
+        Me.LblMode.TabIndex = 67
+        Me.LblMode.Text = "モード"
+        Me.LblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'BtnExcelOutput
+        '
+        Me.BtnExcelOutput.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.BtnExcelOutput.Location = New System.Drawing.Point(1003, 509)
+        Me.BtnExcelOutput.Name = "BtnExcelOutput"
+        Me.BtnExcelOutput.Size = New System.Drawing.Size(165, 40)
+        Me.BtnExcelOutput.TabIndex = 22
+        Me.BtnExcelOutput.Text = "Excel出力"
+        Me.BtnExcelOutput.UseVisualStyleBackColor = True
         '
         '支払期日
         '
@@ -89,27 +119,71 @@ Partial Class APScheduledCollectionDateList
         Me.買掛日.Name = "買掛日"
         Me.買掛日.ReadOnly = True
         '
-        '買掛金額計
+        '通貨_外貨
+        '
+        Me.通貨_外貨.HeaderText = "通貨_外貨"
+        Me.通貨_外貨.MaxInputLength = 6
+        Me.通貨_外貨.Name = "通貨_外貨"
+        Me.通貨_外貨.ReadOnly = True
+        '
+        '買掛金額計_外貨
         '
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.買掛金額計.DefaultCellStyle = DataGridViewCellStyle1
+        Me.買掛金額計_外貨.DefaultCellStyle = DataGridViewCellStyle1
+        Me.買掛金額計_外貨.HeaderText = "買掛金額計_外貨"
+        Me.買掛金額計_外貨.MaxInputLength = 15
+        Me.買掛金額計_外貨.Name = "買掛金額計_外貨"
+        Me.買掛金額計_外貨.ReadOnly = True
+        '
+        '支払金額計_外貨
+        '
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.支払金額計_外貨.DefaultCellStyle = DataGridViewCellStyle2
+        Me.支払金額計_外貨.HeaderText = "支払金額計_外貨"
+        Me.支払金額計_外貨.MaxInputLength = 15
+        Me.支払金額計_外貨.Name = "支払金額計_外貨"
+        Me.支払金額計_外貨.ReadOnly = True
+        '
+        '買掛金残高_外貨
+        '
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.買掛金残高_外貨.DefaultCellStyle = DataGridViewCellStyle3
+        Me.買掛金残高_外貨.HeaderText = "買掛金残高_外貨"
+        Me.買掛金残高_外貨.MaxInputLength = 15
+        Me.買掛金残高_外貨.Name = "買掛金残高_外貨"
+        Me.買掛金残高_外貨.ReadOnly = True
+        '
+        '通貨
+        '
+        Me.通貨.HeaderText = "通貨"
+        Me.通貨.MaxInputLength = 6
+        Me.通貨.Name = "通貨"
+        Me.通貨.ReadOnly = True
+        '
+        '買掛金額計
+        '
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.買掛金額計.DefaultCellStyle = DataGridViewCellStyle4
         Me.買掛金額計.HeaderText = "買掛金額計"
+        Me.買掛金額計.MaxInputLength = 15
         Me.買掛金額計.Name = "買掛金額計"
         Me.買掛金額計.ReadOnly = True
         '
         '支払金額計
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.支払金額計.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.支払金額計.DefaultCellStyle = DataGridViewCellStyle5
         Me.支払金額計.HeaderText = "支払金額計"
+        Me.支払金額計.MaxInputLength = 15
         Me.支払金額計.Name = "支払金額計"
         Me.支払金額計.ReadOnly = True
         '
         '買掛金残高
         '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.買掛金残高.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.買掛金残高.DefaultCellStyle = DataGridViewCellStyle6
         Me.買掛金残高.HeaderText = "買掛金残高"
+        Me.買掛金残高.MaxInputLength = 15
         Me.買掛金残高.Name = "買掛金残高"
         Me.買掛金残高.ReadOnly = True
         '
@@ -118,28 +192,6 @@ Partial Class APScheduledCollectionDateList
         Me.備考.HeaderText = "備考"
         Me.備考.Name = "備考"
         Me.備考.ReadOnly = True
-        '
-        'LblMode
-        '
-        Me.LblMode.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.LblMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblMode.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblMode.Location = New System.Drawing.Point(1106, 9)
-        Me.LblMode.Name = "LblMode"
-        Me.LblMode.Size = New System.Drawing.Size(233, 22)
-        Me.LblMode.TabIndex = 67
-        Me.LblMode.Text = "モード"
-        Me.LblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'BtnExcelOutput
-        '
-        Me.BtnExcelOutput.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.BtnExcelOutput.Location = New System.Drawing.Point(1003, 509)
-        Me.BtnExcelOutput.Name = "BtnExcelOutput"
-        Me.BtnExcelOutput.Size = New System.Drawing.Size(165, 40)
-        Me.BtnExcelOutput.TabIndex = 22
-        Me.BtnExcelOutput.Text = "Excel出力"
-        Me.BtnExcelOutput.UseVisualStyleBackColor = True
         '
         'APScheduledCollectionDateList
         '
@@ -165,6 +217,11 @@ Partial Class APScheduledCollectionDateList
     Friend WithEvents 仕入先名 As DataGridViewTextBoxColumn
     Friend WithEvents 発注番号 As DataGridViewTextBoxColumn
     Friend WithEvents 買掛日 As DataGridViewTextBoxColumn
+    Friend WithEvents 通貨_外貨 As DataGridViewTextBoxColumn
+    Friend WithEvents 買掛金額計_外貨 As DataGridViewTextBoxColumn
+    Friend WithEvents 支払金額計_外貨 As DataGridViewTextBoxColumn
+    Friend WithEvents 買掛金残高_外貨 As DataGridViewTextBoxColumn
+    Friend WithEvents 通貨 As DataGridViewTextBoxColumn
     Friend WithEvents 買掛金額計 As DataGridViewTextBoxColumn
     Friend WithEvents 支払金額計 As DataGridViewTextBoxColumn
     Friend WithEvents 買掛金残高 As DataGridViewTextBoxColumn

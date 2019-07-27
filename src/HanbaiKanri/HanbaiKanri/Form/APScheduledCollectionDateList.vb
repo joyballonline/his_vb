@@ -82,9 +82,13 @@ Public Class APScheduledCollectionDateList
         Dim reccnt As Integer = 0 'DB用（デフォルト）
         Dim Sql As String = ""
 
+        Dim curds As DataSet  'm25_currency
+        Dim cur As String
+
         LblMode.Text = "参照モード"
 
-        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+        '言語判定
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then  '英語
             LblMode.Text = "ViewMode"
 
             BtnExcelOutput.Text = "ExcelOutput"
@@ -94,14 +98,32 @@ Public Class APScheduledCollectionDateList
             DgvCymndt.Columns("仕入先名").HeaderText = "SupplierName"
             DgvCymndt.Columns("発注番号").HeaderText = "PurchaseOrderNumber"
             DgvCymndt.Columns("買掛日").HeaderText = "AccountsPayableDate"
+
+            DgvCymndt.Columns("通貨_外貨").HeaderText = "Currency" & vbCrLf & "(OriginalCurrency)"
+            DgvCymndt.Columns("買掛金額計_外貨").HeaderText = "TotalAccountsPayable" & vbCrLf & "(OriginalCurrency)"
+            DgvCymndt.Columns("支払金額計_外貨").HeaderText = "TotalPaymentAmount" & vbCrLf & "(OriginalCurrency)"
+            DgvCymndt.Columns("買掛金残高_外貨").HeaderText = "APBalance" & vbCrLf & "(OriginalCurrency)"
+
+            DgvCymndt.Columns("通貨").HeaderText = "Currency"
             DgvCymndt.Columns("買掛金額計").HeaderText = "TotalAccountsPayable"
             DgvCymndt.Columns("支払金額計").HeaderText = "TotalPaymentAmount"
             DgvCymndt.Columns("買掛金残高").HeaderText = "APBalance"
             DgvCymndt.Columns("備考").HeaderText = "Remarks"
 
+        Else  '日本語
+
+            DgvCymndt.Columns("通貨_外貨").HeaderText = "通貨" & vbCrLf & "(原通貨)"
+            DgvCymndt.Columns("買掛金額計_外貨").HeaderText = "買掛金額計" & vbCrLf & "(原通貨)"
+            DgvCymndt.Columns("支払金額計_外貨").HeaderText = "支払金額計" & vbCrLf & "(原通貨)"
+            DgvCymndt.Columns("買掛金残高_外貨").HeaderText = "買掛金残高" & vbCrLf & "(原通貨)"
+
         End If
 
         '数字形式
+        DgvCymndt.Columns("買掛金額計_外貨").DefaultCellStyle.Format = "N0"
+        DgvCymndt.Columns("支払金額計_外貨").DefaultCellStyle.Format = "N0"
+        DgvCymndt.Columns("買掛金残高_外貨").DefaultCellStyle.Format = "N0"
+
         DgvCymndt.Columns("買掛金額計").DefaultCellStyle.Format = "N0"
         DgvCymndt.Columns("支払金額計").DefaultCellStyle.Format = "N0"
         DgvCymndt.Columns("買掛金残高").DefaultCellStyle.Format = "N0"
@@ -119,6 +141,14 @@ Public Class APScheduledCollectionDateList
 
             For i As Integer = 0 To dsKikehd.Tables(RS).Rows.Count - 1
 
+                If IsDBNull(dsKikehd.Tables(RS).Rows(i)("通貨")) Then
+                    cur = vbNullString
+                Else
+                    Sql = " and 採番キー = " & dsKikehd.Tables(RS).Rows(i)("通貨")
+                    curds = getDsData("m25_currency", Sql)
+
+                    cur = curds.Tables(RS).Rows(0)("通貨コード")
+                End If
                 '支払予定日が変わったら取得
                 If dsKikehd.Tables(RS).Rows(i)("支払予定日") IsNot DBNull.Value Then
 
@@ -138,6 +168,13 @@ Public Class APScheduledCollectionDateList
                 DgvCymndt.Rows(i).Cells("仕入先名").Value = dsKikehd.Tables(RS).Rows(i)("仕入先名")
                 DgvCymndt.Rows(i).Cells("発注番号").Value = dsKikehd.Tables(RS).Rows(i)("発注番号")
                 DgvCymndt.Rows(i).Cells("買掛日").Value = dsKikehd.Tables(RS).Rows(i)("買掛日").ToShortDateString()
+
+                DgvCymndt.Rows(i).Cells("通貨_外貨").Value = cur
+                DgvCymndt.Rows(i).Cells("買掛金額計_外貨").Value = dsKikehd.Tables(RS).Rows(i)("買掛金額計_外貨")
+                DgvCymndt.Rows(i).Cells("支払金額計_外貨").Value = dsKikehd.Tables(RS).Rows(i)("支払金額計_外貨")
+                DgvCymndt.Rows(i).Cells("買掛金残高_外貨").Value = dsKikehd.Tables(RS).Rows(i)("買掛残高_外貨")
+
+                DgvCymndt.Rows(i).Cells("通貨").Value = setBaseCurrency()
                 DgvCymndt.Rows(i).Cells("買掛金額計").Value = dsKikehd.Tables(RS).Rows(i)("買掛金額計")
                 DgvCymndt.Rows(i).Cells("支払金額計").Value = dsKikehd.Tables(RS).Rows(i)("支払金額計")
                 DgvCymndt.Rows(i).Cells("買掛金残高").Value = dsKikehd.Tables(RS).Rows(i)("買掛残高")
@@ -334,6 +371,19 @@ Public Class APScheduledCollectionDateList
             Return True
         End If
         Return True
+    End Function
+
+    '基準通貨の通貨コードを取得する
+    Private Function setBaseCurrency() As String
+        Dim Sql As String
+        '通貨表示：ベースの設定
+        Sql = " AND 採番キー = " & CommonConst.CURRENCY_CD_IDR.ToString
+        Sql += " AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
+
+        Dim ds As DataSet = getDsData("m25_currency", Sql)
+        'TxtIDRCurrency.Text = ds.Tables(RS).Rows(0)("通貨コード")
+        setBaseCurrency = ds.Tables(RS).Rows(0)("通貨コード")
+
     End Function
 
 End Class
