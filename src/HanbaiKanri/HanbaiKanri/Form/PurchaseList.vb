@@ -398,10 +398,32 @@ Public Class PurchaseList
 
     '仕入取消
     Private Sub BtnPurchaseCancel_Click(sender As Object, e As EventArgs) Handles BtnPurchaseCancel.Click
-        'グリッドに何もないときは次画面へ移動しない
-        If DgvHtyhd.RowCount = 0 Then
-            Exit Sub
+
+        '明細表示時、または対象データがない場合は取消操作不可能
+        If RbtnDetails.Checked Or DgvHtyhd.Rows.Count = 0 Then
+
+            '操作できないアラートを出す
+            _msgHd.dspMSG("NonAction", frmC01F10_Login.loginValue.Language)
+            Return
+
         End If
+
+        '明細表示時は取消操作不可能
+        If RbtnDetails.Checked Then
+
+            '操作できないアラートを出す
+            _msgHd.dspMSG("NonAction", frmC01F10_Login.loginValue.Language)
+            Return
+        End If
+
+
+        '取消済みデータは取消操作不可能
+        If DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("取消").Value = CommonConst.CANCEL_KBN_DISABLED_TXT Then
+            '取消データは選択できないアラートを出す
+            _msgHd.dspMSG("cannotSelectTorikeshiData", frmC01F10_Login.loginValue.Language)
+            Return
+        End If
+
 
         Dim dtNow As String = UtilClass.formatDatetime(DateTime.Now)
         Dim reccnt As Integer = 0
