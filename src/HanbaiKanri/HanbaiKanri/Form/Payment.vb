@@ -87,7 +87,7 @@ Public Class Payment
 
     End Sub
 
-    Private Sub Payment_Load5(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub Payment_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim Sql As String = ""
 
         Sql = " AND "
@@ -357,6 +357,8 @@ Public Class Payment
         For i As Integer = 0 To dsKikehd.Tables(RS).Rows.Count - 1
             DgvKikeInfo.Rows.Add()
             DgvKikeInfo.Rows(i).Cells("InfoNo").Value = i + 1
+            DgvKikeInfo.Rows(i).Cells("発注番号").Value = dsKikehd.Tables(RS).Rows(i)("発注番号")
+            DgvKikeInfo.Rows(i).Cells("仕入先請求番号").Value = dsKikehd.Tables(RS).Rows(i)("仕入先請求番号")
             DgvKikeInfo.Rows(i).Cells("買掛情報買掛番号").Value = dsKikehd.Tables(RS).Rows(i)("買掛番号")
             DgvKikeInfo.Rows(i).Cells("買掛日").Value = dsKikehd.Tables(RS).Rows(i)("買掛日").ToShortDateString()
             DgvKikeInfo.Rows(i).Cells("買掛金額").Value = dsKikehd.Tables(RS).Rows(i)("買掛金額計_外貨")
