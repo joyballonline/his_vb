@@ -217,6 +217,8 @@ Public Class OrderList
         Dim customerPO As String = escapeSql(TxtCustomerPO.Text)
         Dim itemName As String = escapeSql(TxtItemName.Text)
         Dim spec As String = escapeSql(TxtSpec.Text)
+        Dim Maker As String = UtilClass.escapeSql(txtMaker.Text)
+
 
         Try
 
@@ -227,12 +229,33 @@ Public Class OrderList
                 '伝票単位の場合
                 If RbtnSlip.Checked Then
 
-                    Sql = " SELECT t10.* "
+                    Sql = " SELECT "
+                    Sql += " t10.受注番号,t10.受注番号枝番,t10.受注日,t10.取消区分,t10.客先番号"
+                    Sql += ",t10.見積番号,t10.見積番号枝番,t10.見積日,t10.見積有効期限"
+                    Sql += ",t10.得意先コード,t10.得意先名,t10.得意先郵便番号,t10.得意先住所,t10.得意先電話番号"
+                    Sql += ",t10.得意先ＦＡＸ,t10.得意先担当者名,t10.得意先担当者役職"
+                    Sql += ",t10.ＶＡＴ,t10.通貨,t10.見積金額_外貨"
+                    Sql += ",t10.見積金額,t10.仕入金額,t10.粗利額,t10.支払条件"
+                    Sql += ",t10.営業担当者,t10.入力担当者,t10.備考,t10.登録日,t10.更新者,t10.更新日"
+
+
                     Sql += " FROM t10_cymnhd t10 "
+                    Sql += " left join t11_cymndt t11 "
+                    Sql += " on (t10.受注番号 = t11.受注番号 and t10.受注番号枝番 = t11.受注番号枝番)"
 
                     Sql += " WHERE t10.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "' "
 
                     Sql += viewSearchConditions() '検索条件
+
+                    Sql += " group by "
+                    Sql += " t10.受注番号,t10.受注番号枝番,t10.受注日,t10.取消区分,t10.客先番号"
+                    Sql += ",t10.見積番号,t10.見積番号枝番,t10.見積日,t10.見積有効期限"
+                    Sql += ",t10.得意先コード,t10.得意先名,t10.得意先郵便番号,t10.得意先住所,t10.得意先電話番号"
+                    Sql += ",t10.得意先ＦＡＸ,t10.得意先担当者名,t10.得意先担当者役職"
+                    Sql += ",t10.ＶＡＴ,t10.通貨,t10.見積金額_外貨"
+                    Sql += ",t10.見積金額,t10.仕入金額,t10.粗利額,t10.支払条件"
+                    Sql += ",t10.営業担当者,t10.入力担当者,t10.備考,t10.登録日,t10.更新者,t10.更新日"
+
 
                     Sql += " ORDER BY "
                     Sql += " t10.登録日 DESC"
@@ -336,6 +359,21 @@ Public Class OrderList
                 If customerPO <> Nothing Then
                     Sql += " AND "
                     Sql += " t10.客先番号 ILIKE '%" & customerPO & "%' "
+                End If
+
+                If Maker <> Nothing Then
+                    Sql += " AND "
+                    Sql += " t11.メーカー ILIKE '%" & Maker & "%' "
+                End If
+
+                If itemName <> Nothing Then
+                    Sql += " AND "
+                    Sql += " t11.品名 ILIKE '%" & itemName & "%' "
+                End If
+
+                If spec <> Nothing Then
+                    Sql += " AND "
+                    Sql += " t11.型式 ILIKE '%" & spec & "%' "
                 End If
 
                 '取消データを含めない場合
@@ -1057,6 +1095,8 @@ Public Class OrderList
         Dim customerPO As String = UtilClass.escapeSql(TxtCustomerPO.Text)
         Dim itemName As String = UtilClass.escapeSql(TxtItemName.Text)
         Dim spec As String = UtilClass.escapeSql(TxtSpec.Text)
+        Dim Maker As String = UtilClass.escapeSql(txtMaker.Text)
+
 
         If customerName <> Nothing Then
             Sql += " AND "
@@ -1081,7 +1121,7 @@ Public Class OrderList
         If sinceDate <> Nothing Then
             Sql += " AND "
             Sql += " t10.受注日 >= '" & sinceDate & "'"
-        End If
+         End If
         If untilDate <> Nothing Then
             Sql += " AND "
             Sql += " t10.受注日 <= '" & untilDate & "'"
@@ -1100,6 +1140,11 @@ Public Class OrderList
         If customerPO <> Nothing Then
             Sql += " AND "
             Sql += " t10.客先番号 ILIKE '%" & customerPO & "%' "
+        End If
+
+        If Maker <> Nothing Then
+            Sql += " AND "
+            Sql += " t11.メーカー ILIKE '%" & Maker & "%' "
         End If
 
         If itemName <> Nothing Then
