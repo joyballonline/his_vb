@@ -382,6 +382,12 @@ Public Class PurchaseList
     End Sub
 
     Private Sub BtnPurchaseView_Click(sender As Object, e As EventArgs) Handles BtnPurchaseView.Click
+
+        'データがない場合はなにもしない
+        If DgvHtyhd.Rows.Count = 0 Then
+            Exit Sub
+        End If
+
         Dim RowIdx As Integer
         RowIdx = Me.DgvHtyhd.CurrentCell.RowIndex
         Dim No As String = DgvHtyhd.Rows(RowIdx).Cells("発注番号").Value

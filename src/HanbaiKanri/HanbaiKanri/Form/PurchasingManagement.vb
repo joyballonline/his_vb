@@ -290,8 +290,11 @@ Public Class PurchasingManagement
             'ヘッダエリア
             Sql = " AND 発注番号 = '" & No & "'"
             Sql += " AND 発注番号枝番 = '" & Suffix & "'"
-            Sql += " AND "
-            Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '取消区分=0
+
+            '取消のデータを参照できるようにする
+            '仕入登録と仕入取消の処理はボタンを押下した時に弾く
+            'Sql += " AND "
+            'Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '取消区分=0  
 
             Dim dsHattyuHd As DataSet = getDsData("t20_hattyu", Sql)
 
@@ -315,7 +318,7 @@ Public Class PurchasingManagement
             Sql += " t41.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
             Sql += " AND t41.発注番号 = '" & No & "'"
             Sql += " AND t41.発注番号枝番 = '" & Suffix & "'"
-            Sql += " AND t40.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '取消区分=0
+            'Sql += " AND t40.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '取消区分=0
 
             Dim dsSireDt As DataSet = _db.selectDB(Sql, RS, reccnt)
 
@@ -339,7 +342,7 @@ Public Class PurchasingManagement
             Sql += " t21.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
             Sql += " AND t21.発注番号 = '" & No & "'"
             Sql += " AND t21.発注番号枝番 = '" & Suffix & "'"
-            Sql += " AND t20.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '取消区分=0
+            'Sql += " AND t20.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '取消区分=0
 
             Dim dsHattyuDt As DataSet = _db.selectDB(Sql, RS, reccnt)
 
