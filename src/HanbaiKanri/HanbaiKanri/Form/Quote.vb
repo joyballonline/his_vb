@@ -744,7 +744,22 @@ Public Class Quote
 
         _db.executeDB(Sql)
     End Sub
+    '
+    'NothingをDecimalに置換
+    Private Function rmNullDecimal(ByVal prmField As Object) As Decimal
+        If prmField Is Nothing Then
+            rmNullDecimal = 0
+            Exit Function
+        End If
 
+        If Not IsNumeric(prmField) Then
+            rmNullDecimal = 0
+            Exit Function
+        End If
+
+        rmNullDecimal = prmField
+
+    End Function
     '金額自動計算
     Private Sub CellValueChanged(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles DgvItemList.CellValueChanged
 
@@ -1089,7 +1104,7 @@ Public Class Quote
                             '小数点表示にするため切り上げをコメントアウト
                             'DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value = Math.Ceiling(
                             DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value = Decimal.Parse(
-                                                                                   DgvItemList.Rows(e.RowIndex).Cells("売単価").Value + DgvItemList.Rows(e.RowIndex).Cells("関税額").Value + DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value + DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value)
+                                                                                   rmNullDecimal(DgvItemList.Rows(e.RowIndex).Cells("売単価").Value) + rmNullDecimal(DgvItemList.Rows(e.RowIndex).Cells("関税額").Value) + rmNullDecimal(DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value) + rmNullDecimal(DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value))
 
                             If (DgvItemList.Rows(e.RowIndex).Cells("関税額").Value Is Nothing Or DgvItemList.Rows(e.RowIndex).Cells("関税額").Value = 0) _
                                 And (DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value Is Nothing Or DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value = 0) _
@@ -1113,7 +1128,7 @@ Public Class Quote
                             '小数点表示にするため切り上げをコメントアウト
                             'DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value = Math.Ceiling(
                             DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value = Decimal.Parse(
-                                                                                   DgvItemList.Rows(e.RowIndex).Cells("売単価").Value + DgvItemList.Rows(e.RowIndex).Cells("関税額").Value + DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value + DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value)
+                                                                                   rmNullDecimal(DgvItemList.Rows(e.RowIndex).Cells("売単価").Value) + rmNullDecimal(DgvItemList.Rows(e.RowIndex).Cells("関税額").Value) + rmNullDecimal(DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value) + rmNullDecimal(DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value))
 
                             If (DgvItemList.Rows(e.RowIndex).Cells("関税額").Value Is Nothing Or DgvItemList.Rows(e.RowIndex).Cells("関税額").Value = 0) _
                                 And (DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value Is Nothing Or DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value = 0) _
@@ -1175,7 +1190,7 @@ Public Class Quote
 
                                 DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value = Math.Ceiling(
                                                                                        Decimal.Parse(
-                                                                                       DgvItemList.Rows(e.RowIndex).Cells("売単価").Value + DgvItemList.Rows(e.RowIndex).Cells("関税額").Value + DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value + DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value))
+                                                                                       rmNullDecimal(DgvItemList.Rows(e.RowIndex).Cells("売単価").Value) + rmNullDecimal(DgvItemList.Rows(e.RowIndex).Cells("関税額").Value) + rmNullDecimal(DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value) + rmNullDecimal(DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value)))
 
                                 If (DgvItemList.Rows(e.RowIndex).Cells("関税額").Value Is Nothing Or DgvItemList.Rows(e.RowIndex).Cells("関税額").Value = 0) _
                                     And (DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value Is Nothing Or DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value = 0) _
@@ -3300,7 +3315,7 @@ Public Class Quote
                     '小数点表示にするため切り上げをコメントアウト
                     'DgvItemList.Rows(i).Cells("見積単価").Value = Math.Ceiling(
                     DgvItemList.Rows(i).Cells("見積単価").Value = Decimal.Parse(
-                                                                  DgvItemList.Rows(i).Cells("売単価").Value + DgvItemList.Rows(i).Cells("関税額").Value + DgvItemList.Rows(i).Cells("前払法人税額").Value + DgvItemList.Rows(i).Cells("輸送費額").Value)
+                                                                  rmNullDecimal(DgvItemList.Rows(i).Cells("売単価").Value) + rmNullDecimal(DgvItemList.Rows(i).Cells("関税額").Value) + rmNullDecimal(DgvItemList.Rows(i).Cells("前払法人税額").Value) + rmNullDecimal(DgvItemList.Rows(i).Cells("輸送費額").Value))
 
                     If (DgvItemList.Rows(i).Cells("関税額").Value Is Nothing Or DgvItemList.Rows(i).Cells("関税額").Value = 0) _
                                 And (DgvItemList.Rows(i).Cells("前払法人税額").Value Is Nothing Or DgvItemList.Rows(i).Cells("前払法人税額").Value = 0) _
