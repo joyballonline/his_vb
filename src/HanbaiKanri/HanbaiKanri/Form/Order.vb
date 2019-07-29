@@ -125,7 +125,7 @@ Public Class Order
         column3.HeaderText = "仕入通貨"
         column3.Name = "仕入通貨"
 
-        DgvItemList.Columns.Insert(10, column3)
+        DgvItemList.Columns.Insert(9, column3)
 
         'Dim Sql12 As String = ""
 
@@ -268,13 +268,13 @@ Public Class Order
                 TxtQuoteRemarks.Text = ds1.Tables(RS).Rows(0)("備考")
             End If
             If ds1.Tables(RS).Rows(0)("見積金額") IsNot DBNull.Value Then
-                TxtOrderAmount.Text = ds1.Tables(RS).Rows(0)("見積金額")
+                TxtQuoteTotal.Text = ds1.Tables(RS).Rows(0)("見積金額")
             End If
             If ds1.Tables(RS).Rows(0)("仕入金額") IsNot DBNull.Value Then
-                TxtPurchaseAmount.Text = ds1.Tables(RS).Rows(0)("仕入金額")
+                TxtPurchaseTotal.Text = ds1.Tables(RS).Rows(0)("仕入金額")
             End If
             If ds1.Tables(RS).Rows(0)("粗利額") IsNot DBNull.Value Then
-                TxtGrossProfit.Text = ds1.Tables(RS).Rows(0)("粗利額")
+                txtProfitmargin.Text = ds1.Tables(RS).Rows(0)("粗利額")
             End If
             If ds1.Tables(RS).Rows(0)("ＶＡＴ") IsNot DBNull.Value Then
                 TxtVatAmount.Text = ds1.Tables(RS).Rows(0)("ＶＡＴ")
@@ -512,13 +512,13 @@ Public Class Order
                 TxtVat.Text = ds1.Tables(RS).Rows(0)("ＶＡＴ")
             End If
             If ds1.Tables(RS).Rows(0)("粗利額") IsNot DBNull.Value Then
-                TxtGrossProfit.Text = ds1.Tables(RS).Rows(0)("粗利額")
+                txtProfitmargin.Text = ds1.Tables(RS).Rows(0)("粗利額")
             End If
             If ds1.Tables(RS).Rows(0)("見積金額") IsNot DBNull.Value Then
-                TxtOrderAmount.Text = ds1.Tables(RS).Rows(0)("見積金額")
+                TxtQuoteTotal.Text = ds1.Tables(RS).Rows(0)("見積金額")
             End If
             If ds1.Tables(RS).Rows(0)("仕入金額") IsNot DBNull.Value Then
-                TxtPurchaseAmount.Text = ds1.Tables(RS).Rows(0)("仕入金額")
+                TxtPurchaseTotal.Text = ds1.Tables(RS).Rows(0)("仕入金額")
             End If
             If ds1.Tables(RS).Rows(0)("見積備考") IsNot DBNull.Value Then
                 TxtQuoteRemarks.Text = ds1.Tables(RS).Rows(0)("見積備考")
@@ -607,6 +607,7 @@ Public Class Order
             setChangeCurrency()
         End If
 
+        '言語判定　ヘッダーの設定
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
             LblOrderNo.Text = "OrderNumber"
             LblCustomerPO.Text = "CustomerNumber"
@@ -655,29 +656,29 @@ Public Class Order
             LblRemarks.Size = New Size(162, 23)
             LblItemCount.Text = "ItemCount"
             LblOrderRemarks.Text = "OrderRemarks"
-            LblOrderRemarks.Size = New Size(161, 23)
-            LblOrderRemarks.Location = New Point(11, 393)
-            TxtOrderRemark.Location = New Point(178, 393)
-            TxtOrderRemark.Size = New Size(270, 23)
+            'LblOrderRemarks.Size = New Size(161, 23)
+            'LblOrderRemarks.Location = New Point(11, 393)
+            'TxtOrderRemark.Location = New Point(178, 393)
+            'TxtOrderRemark.Size = New Size(270, 23)
 
             LblCurrency.Text = "Currency" '通貨
             LblRate.Text = "Rate" 'レート
 
             LblIDRCurrency.Text = "Currency" '通貨
             LblChangeCurrency.Text = "Currency" '通貨
-            LblVatAmount.Text = "VAT"
-            TxtVatAmount.Size = New Size(151, 23)
-            LblPurchaseAmount.Text = "PurchaseOrderAmount"
-            LblPurchaseAmount.Size = New Size(180, 23)
-            LblPurchaseAmount.Location = New Point(923, 393)
+            'LblVatAmount.Text = "VAT"
+            'TxtVatAmount.Size = New Size(151, 23)
+            'LblPurchaseAmount.Text = "PurchaseOrderAmount"
+            'LblPurchaseAmount.Size = New Size(180, 23)
+            'LblPurchaseAmount.Location = New Point(923, 393)
             TxtVat.Size = New Size(151, 23)
             TxtCurrencyVatAmount.Size = New Size(151, 23)
-            LblOrderAmount.Text = "JobOrderAmount"
-            LblOrderAmount.Size = New Size(180, 23)
-            LblOrderAmount.Location = New Point(923, 422)
-            LblGrossProfit.Text = "GrossMargin"
-            LblGrossProfit.Size = New Size(180, 23)
-            LblGrossProfit.Location = New Point(923, 451)
+            'LblQuoteAmount.Text = "JobOrderAmount"
+            'LblQuoteAmount.Size = New Size(180, 23)
+            'LblQuoteAmount.Location = New Point(923, 422)
+            'lblProfitmargin.Text = "GrossMargin"
+            'lblProfitmargin.Size = New Size(180, 23)
+            'lblProfitmargin.Location = New Point(923, 451)
             LblOrderCurrencyAmount.Text = "JobOrderAmount"
             LblOrderCurrencyAmount.Size = New Size(180, 23)
             LblOrderCurrencyAmount.Location = New Point(923, 480)
@@ -685,36 +686,113 @@ Public Class Order
             BtnRegistration.Text = "Registrartion"
             BtnBack.Text = "Back"
 
+
+            LblOrderAmount.Text = "SalesAmount（l）"      '売上金額
+            lblPurchasecost.Text = "PurchaseCost（c）"    '仕入原価
+            LblGrossProfit.Text = "GrossMargin（o）"      '粗利額
+            lblGrossmargin.Text = "GrossMarginRate（p）"  '粗利率
+
+            LblQuoteAmount.Text = "QuotationAmount（n）"    '見積金額
+            LblPurchaseAmount.Text = "PurchaseAmount（j）"  '仕入金額
+            lblProfitmargin.Text = "Profitmargin"           '利益
+            lblProfitmarginRate.Text = "ProfitmarginRate"   '利益率
+
+
+            '英語用見出し
             DgvItemList.Columns("仕入区分").HeaderText = "PurchasingClassification"
             DgvItemList.Columns("メーカー").HeaderText = "Manufacturer"
             DgvItemList.Columns("品名").HeaderText = "ItemName"
             DgvItemList.Columns("型式").HeaderText = "Spec"
-            DgvItemList.Columns("数量").HeaderText = "Quantity"
+            DgvItemList.Columns("数量").HeaderText = "Quantity" & vbCrLf & "a"
             DgvItemList.Columns("単位").HeaderText = "Unit"
             DgvItemList.Columns("仕入先").HeaderText = "SupplierName"
-            DgvItemList.Columns("仕入値").HeaderText = "PurchaseAmount"
             DgvItemList.Columns("仕入通貨").HeaderText = "PurchaseCurrency"
-            DgvItemList.Columns("仕入単価_外貨").HeaderText = "PurchaseUnitPriceForeignCurrency"
-            DgvItemList.Columns("仕入原価").HeaderText = "PurchsingCost"
-            DgvItemList.Columns("関税率").HeaderText = "CustomsDutyRate"
-            DgvItemList.Columns("関税額").HeaderText = "CustomsDuty"
-            DgvItemList.Columns("前払法人税率").HeaderText = "PrepaidCorporateTaxRate"
-            DgvItemList.Columns("前払法人税額").HeaderText = "PrepaidCorporateTaxAmount"
-            DgvItemList.Columns("輸送費率").HeaderText = "TransportationCostRate"
-            DgvItemList.Columns("輸送費額").HeaderText = "TransportationCost"
-            DgvItemList.Columns("仕入金額").HeaderText = "PurchaseAmount"
-            DgvItemList.Columns("売単価").HeaderText = "SellingPrice"
-            DgvItemList.Columns("売上金額").HeaderText = "SalesAmount"
-            DgvItemList.Columns("見積単価").HeaderText = "QuotetionPrice"
-            DgvItemList.Columns("見積単価_外貨").HeaderText = "QuotetionPriceForeignCurrency"
-            DgvItemList.Columns("見積金額").HeaderText = "QuotetionAmount"
-            DgvItemList.Columns("見積金額_外貨").HeaderText = "QuotetionAmountForeignCurrency"
-            DgvItemList.Columns("粗利額").HeaderText = "GrossMargin"
-            DgvItemList.Columns("粗利率").HeaderText = "GrossMarginRate(%)"
+
+            DgvItemList.Columns("仕入単価_外貨").HeaderText = "PurchaseUnitPrice" & vbCrLf & "(OriginalCurrency)"
+            DgvItemList.Columns("仕入値").HeaderText = "PurchaseUnitPrice(" & TxtIDRCurrency.Text & ")" & vbCrLf & "b"
+
+            DgvItemList.Columns("仕入原価").HeaderText = "PurchasingCost" & vbCrLf & "c=a*b"
+            DgvItemList.Columns("関税率").HeaderText = "CustomsDutyRate" & vbCrLf & "d"
+            DgvItemList.Columns("関税額").HeaderText = "CustomsDutyParUnit" & vbCrLf & "e=b*d"
+            DgvItemList.Columns("前払法人税率").HeaderText = "PrepaidCorporateTaxRate" & vbCrLf & "f"
+            DgvItemList.Columns("前払法人税額").HeaderText = "PrepaidCorporateTaxAmountParUnit" & vbCrLf & "g=(b+e)*f"
+            DgvItemList.Columns("輸送費率").HeaderText = "TransportationCostRate" & vbCrLf & "h"
+            DgvItemList.Columns("輸送費額").HeaderText = "TransportationCostParUnit" & vbCrLf & "i=b*h"
+            DgvItemList.Columns("仕入金額").HeaderText = "PurchaseAmount" & vbCrLf & "j=a*(b+e+g+i)"
+            DgvItemList.Columns("売単価_外貨").HeaderText = "SellingPrice" & vbCrLf & "(OriginalCurrency)"
+            DgvItemList.Columns("売単価").HeaderText = "SellingPrice" & vbCrLf & "k"
+            DgvItemList.Columns("売上金額").HeaderText = "SalesAmount" & vbCrLf & "l=a*k"
+            DgvItemList.Columns("見積単価").HeaderText = "QuotetionPrice(" & TxtIDRCurrency.Text & ")" & vbCrLf & "m=k+e+g+i"
+            DgvItemList.Columns("見積単価_外貨").HeaderText = "QuotetionPriceForeignCurrency" & vbCrLf & "(OriginalCurrency)"
+            DgvItemList.Columns("見積金額").HeaderText = "QuotetionAmount(" & TxtIDRCurrency.Text & ")" & vbCrLf & "n=a*m"
+            DgvItemList.Columns("見積金額_外貨").HeaderText = "QuotetionAmountForeignCurrency" & vbCrLf & "(OriginalCurrency)"
+            DgvItemList.Columns("粗利額").HeaderText = "GrossMargin" & vbCrLf & "o=a*(k-b)"
+            DgvItemList.Columns("粗利率").HeaderText = "GrossMarginRate(%)" & vbCrLf & "p=(1-(b/k))*100"
             DgvItemList.Columns("リードタイム").HeaderText = "LeadTime"
             DgvItemList.Columns("リードタイム単位").HeaderText = "LeadTimeUnit"
             DgvItemList.Columns("備考").HeaderText = "Remarks"
+
+        Else  '日本語
+
+            '日本語用見出し
+            DgvItemList.Columns("数量").HeaderText = "数量" & vbCrLf & "a"
+            DgvItemList.Columns("仕入単価_外貨").HeaderText = "仕入単価(原通貨)"
+            DgvItemList.Columns("仕入値").HeaderText = "仕入単価(" & TxtIDRCurrency.Text & ")" & vbCrLf & "b"
+            DgvItemList.Columns("仕入原価").HeaderText = "仕入原価" & vbCrLf & "c=a*b"
+            DgvItemList.Columns("関税率").HeaderText = "関税率" & vbCrLf & "d"
+            DgvItemList.Columns("関税額").HeaderText = "単価当り関税額" & vbCrLf & "e=b*d"
+            DgvItemList.Columns("前払法人税率").HeaderText = "前払法人税率" & vbCrLf & "f"
+            DgvItemList.Columns("前払法人税額").HeaderText = "単価当り前払法人税額" & vbCrLf & "g=(b+e)*f"
+            DgvItemList.Columns("輸送費率").HeaderText = "輸送費率" & vbCrLf & "h"
+            DgvItemList.Columns("輸送費額").HeaderText = "単価当り輸送費額" & vbCrLf & "i=b*h"
+            DgvItemList.Columns("仕入金額").HeaderText = "仕入金額" & vbCrLf & "j=a*(b+e+g+i)"
+            DgvItemList.Columns("売単価_外貨").HeaderText = "売単価(原通貨)"
+            DgvItemList.Columns("売単価").HeaderText = "売単価(" & TxtIDRCurrency.Text & ")" & vbCrLf & "k"
+            DgvItemList.Columns("売上金額").HeaderText = "売上金額" & vbCrLf & "l=a*k"
+            DgvItemList.Columns("見積単価").HeaderText = "見積単価(" & TxtIDRCurrency.Text & ")" & vbCrLf & "m=k+e+g+i"
+            DgvItemList.Columns("見積金額").HeaderText = "見積金額(" & TxtIDRCurrency.Text & ")" & vbCrLf & "n=a*m"
+            DgvItemList.Columns("粗利額").HeaderText = "粗利額" & vbCrLf & "o=a*(k-b)"
+            DgvItemList.Columns("粗利率").HeaderText = "粗利率(%)" & vbCrLf & "p=(1-(b/k))*100"
+
+
+            DgvItemList.Columns("見積単価_外貨").HeaderText = "見積単価" & vbCrLf & "（原通貨）"
+            DgvItemList.Columns("見積金額_外貨").HeaderText = "見積金額" & vbCrLf & "（原通貨）"
+
         End If
+
+
+        'ヘッダ項目を中央寄せ
+        DgvItemList.Columns("No").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("仕入区分").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("メーカー").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("品名").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("型式").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("数量").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("単位").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("仕入先").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("仕入通貨").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("仕入単価_外貨").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("仕入値").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("仕入原価").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("関税率").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("関税額").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("前払法人税率").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("前払法人税額").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("輸送費率").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("輸送費額").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("仕入金額").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("売単価_外貨").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("売単価").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("売上金額").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("見積単価").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("見積単価_外貨").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("見積金額_外貨").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("見積金額").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("粗利額").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("粗利率").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("リードタイム").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("備考").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
 
         LoadFlg = True
 
@@ -801,11 +879,11 @@ Public Class Order
                 Sql1 += "', '"
                 Sql1 += TxtPaymentTerms.Text '支払条件
                 Sql1 += "', '"
-                Sql1 += UtilClass.formatNumber(TxtOrderAmount.Text) '見積金額
+                Sql1 += UtilClass.formatNumber(TxtQuoteTotal.Text) '見積金額
                 Sql1 += "', '"
-                Sql1 += UtilClass.formatNumber(TxtPurchaseAmount.Text) '仕入金額
+                Sql1 += UtilClass.formatNumber(TxtPurchaseTotal.Text) '仕入金額
                 Sql1 += "', '"
-                Sql1 += UtilClass.formatNumber(TxtGrossProfit.Text) '粗利額
+                Sql1 += UtilClass.formatNumber(txtProfitmargin.Text) '粗利額
                 Sql1 += "', '"
                 Sql1 += TxtSales.Text '営業担当者
                 Sql1 += "', '"
@@ -1108,9 +1186,9 @@ Public Class Order
 
         If LoadFlg Then
             '合計値リセット
-            TxtPurchaseAmount.Clear()       '発注金額
-            TxtOrderAmount.Clear()          '受注金額
-            TxtGrossProfit.Clear()          '粗利額
+            TxtPurchaseTotal.Clear()       '発注金額
+            TxtQuoteTotal.Clear()          '受注金額
+            txtProfitmargin.Clear()          '粗利額
             TxtVatAmount.Clear()            'VAT額
             TxtCurrencyVatAmount.Clear()    'VAT額_外貨
             TxtOrderCurrencyAmount.Clear()  '受注金額_外貨
@@ -1408,10 +1486,10 @@ Public Class Order
                     GrossProfit += DgvItemList.Rows(index).Cells("粗利額").Value
                 Next
 
-                TxtPurchaseAmount.Text = PurchaseTotal '発注金額
+                TxtPurchaseTotal.Text = PurchaseTotal '発注金額
                 'TxtOrderAmount.Text = Total.ToString("F0") '受注金額
-                TxtOrderAmount.Text = QuoteTotal '受注金額
-                TxtGrossProfit.Text = GrossProfit
+                TxtQuoteTotal.Text = QuoteTotal '受注金額
+                txtProfitmargin.Text = GrossProfit
                 TxtVatAmount.Text = ((QuoteTotal * TxtVat.Text) / 100).ToString("F0")
                 setCurrency() '通貨に設定した内容に変更
 
@@ -1588,22 +1666,59 @@ Public Class Order
     End Sub
 
     Private Sub calcTotal()
-        'Dim Total As Decimal = 0 '売上金額
-        Dim PurchaseTotal As Decimal = 0 '仕入金額
-        Dim QuoteTotal As Decimal = 0 '見積金額
-        Dim GrossProfit As Decimal = 0 '粗利額
+
+        Dim Total As Decimal = 0          '売上金額
+        Dim PurchaseCost As Decimal = 0   '仕入原価
+        Dim GrossProfit As Decimal = 0    '粗利額
+        Dim QuoteTotal As Decimal = 0     '見積金額
+        Dim PurchaseTotal As Decimal = 0  '仕入金額
+        Dim ProfitMargin As Decimal = 0　 '利益額
+
 
         For index As Integer = 0 To DgvItemList.Rows.Count - 1
-            'Total += DgvItemList.Rows(index).Cells("売上金額").Value
-            PurchaseTotal += DgvItemList.Rows(index).Cells("仕入原価").Value
-            QuoteTotal += DgvItemList.Rows(index).Cells("見積金額").Value
+
+            Total += DgvItemList.Rows(index).Cells("売上金額").Value
+            PurchaseCost += DgvItemList.Rows(index).Cells("仕入原価").Value
             GrossProfit += DgvItemList.Rows(index).Cells("粗利額").Value
+
+            QuoteTotal += DgvItemList.Rows(index).Cells("見積金額").Value
+            PurchaseTotal += DgvItemList.Rows(index).Cells("仕入金額").Value
         Next
 
-        TxtPurchaseAmount.Text = PurchaseTotal
-        TxtOrderAmount.Text = QuoteTotal.ToString
-        TxtGrossProfit.Text = GrossProfit
-        TxtVatAmount.Text = ((QuoteTotal.ToString("F0") * TxtVat.Text) / 100).ToString("F0")
+
+        TxtTotal.Text = Total.ToString("N2")                '売上金額
+        txtPurchasecost.Text = PurchaseCost.ToString("N2")  '仕入原価
+        TxtGrossProfit.Text = GrossProfit.ToString("N2")    '粗利額
+
+        '粗利率
+        If TxtTotal.Text = 0 Or txtPurchasecost.Text = 0 Then
+            txtGrossmarginRate.Text = 0
+        Else
+            txtGrossmarginRate.Text = ((GrossProfit / Total) * 100).ToString("N1")
+        End If
+
+
+        TxtQuoteTotal.Text = QuoteTotal.ToString("N2")        '見積金額
+        TxtPurchaseTotal.Text = PurchaseTotal.ToString("N2")  '仕入金額
+
+        '利益額
+        If TxtQuoteTotal.Text = 0 Or TxtPurchaseTotal.Text = 0 Then
+            txtProfitmargin.Text = 0
+        Else
+            ProfitMargin = QuoteTotal - PurchaseTotal
+            txtProfitmargin.Text = ProfitMargin.ToString("N2")
+        End If
+
+        '利益率
+        If TxtQuoteTotal.Text = 0 Or TxtPurchaseTotal.Text = 0 Then
+            txtProfitmarginRate.Text = 0
+        Else
+            txtProfitmarginRate.Text = ((ProfitMargin / QuoteTotal) * 100).ToString("N1")
+        End If
+
+        TxtVatAmount.Text = ((QuoteTotal * TxtVat.Text) / 100).ToString("N2") 'VAT-OUT
+
+
         setCurrency() '通貨に設定した内容に変更
 
     End Sub
