@@ -87,9 +87,6 @@ Public Class DepositList
         Dim Count As Integer = 0
         Dim CustomerCount As Integer = dsCustomer.Tables(RS).Rows.Count
 
-        Dim CustomerOrderCount As Integer
-        Dim CustomerBillingCount As Integer
-
         Dim CustomerBillingAmountFC As Long  '請求金額_外貨
         Dim CustomerOrderAmountFC As Long    '見積金額_外貨
         Dim AccountsReceivableFC As Integer  '売掛残高_外貨
@@ -161,9 +158,6 @@ Public Class DepositList
             '得意先ごとの受注基本を取得
             Dim dsCymnhd As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-            '受注データ数
-            CustomerOrderCount = dsCymnhd.Tables(RS).Rows.Count.ToString
-
 
             For j As Integer = 0 To dsCymnhd.Tables(RS).Rows.Count - 1
 
@@ -178,6 +172,36 @@ Public Class DepositList
                     CustomerOrderAmount = 0
                 Else
                     CustomerOrderAmount = dsCymnhd.Tables(RS).Rows(j)("見積金額_合計")
+                End If
+
+
+                Sql = "SELECT count(*) as 件数"
+                Sql += " FROM "
+                Sql += "public.t23_skyuhd"
+                Sql += " WHERE "
+                Sql += "会社コード"
+                Sql += " ILIKE  "
+                Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'"
+                Sql += " AND "
+                Sql += "得意先コード"
+                Sql += " ILIKE "
+                Sql += "'%"
+                Sql += dsCustomer.Tables(RS).Rows(i)("得意先コード")
+                Sql += "%'"
+                Sql += " AND "
+                Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+
+                If IsDBNull(dsCymnhd.Tables(RS).Rows(j)("通貨")) Then
+                    Sql += " AND 通貨 is null "
+                Else
+                    Sql += " AND 通貨 = " & dsCymnhd.Tables(RS).Rows(j)("通貨")
+                End If
+
+                '得意先ごとの請求基本を取得
+                Dim dsSkyuhd As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+                If dsSkyuhd.Tables(RS).Rows(0)("件数") = 0 Then
+                    Exit For
                 End If
 
 
@@ -207,10 +231,7 @@ Public Class DepositList
                 End If
 
                 '得意先ごとの請求基本を取得
-                Dim dsSkyuhd As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-                '得意先の請求データ数を取得
-                CustomerBillingCount = dsSkyuhd.Tables(RS).Rows.Count.ToString
+                dsSkyuhd = _db.selectDB(Sql, RS, reccnt)
 
 
                 '請求金額を集計
@@ -265,7 +286,6 @@ Public Class DepositList
 
                 DgvCustomer.Rows(idx).Cells("通貨_外貨コード").Value = dsCymnhd.Tables(RS).Rows(j)("通貨")
 
-                'Count += 1 'カウントアップ
             Next
         Next
     End Sub
