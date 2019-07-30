@@ -214,9 +214,9 @@ Public Class MstSupplier
                 Dgv_Supplier.Rows(i).Cells("口座番号").Value = ds.Tables(RS).Rows(i)("口座番号")
                 Dgv_Supplier.Rows(i).Cells("口座名義").Value = ds.Tables(RS).Rows(i)("口座名義")
                 Dgv_Supplier.Rows(i).Cells("担当者役職").Value = ds.Tables(RS).Rows(i)("担当者役職")
-                Dgv_Supplier.Rows(i).Cells("関税率").Value = ds.Tables(RS).Rows(i)("関税率")
-                Dgv_Supplier.Rows(i).Cells("前払法人税率").Value = ds.Tables(RS).Rows(i)("前払法人税率")
-                Dgv_Supplier.Rows(i).Cells("輸送費率").Value = ds.Tables(RS).Rows(i)("輸送費率")
+                Dgv_Supplier.Rows(i).Cells("関税率").Value = ds.Tables(RS).Rows(i)("関税率") * 100
+                Dgv_Supplier.Rows(i).Cells("前払法人税率").Value = ds.Tables(RS).Rows(i)("前払法人税率") * 100
+                Dgv_Supplier.Rows(i).Cells("輸送費率").Value = ds.Tables(RS).Rows(i)("輸送費率") * 100
                 Dgv_Supplier.Rows(i).Cells("会計用仕入先コード").Value = ds.Tables(RS).Rows(i)("会計用仕入先コード")
                 Dgv_Supplier.Rows(i).Cells("国内区分").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
                                                                ds.Tables(RS).Rows(i)("文字２"),
