@@ -392,6 +392,12 @@ Public Class QuoteList
                     DgvMithd.Rows(i).Cells("更新日").Value = ds.Tables(RS).Rows(i)("更新日")
                 Next
 
+                '数字形式
+                DgvMithd.Columns("見積金額").DefaultCellStyle.Format = "N2"
+                DgvMithd.Columns("仕入金額").DefaultCellStyle.Format = "N2"
+                DgvMithd.Columns("ＶＡＴ").DefaultCellStyle.Format = "N2"
+                DgvMithd.Columns("粗利額").DefaultCellStyle.Format = "N2"
+
             Else
                 '明細形式表示時
 
@@ -551,6 +557,16 @@ Public Class QuoteList
                     DgvMithd.Rows(i).Cells("備考").Value = ds.Tables(RS).Rows(i)("備考")
                     DgvMithd.Rows(i).Cells("登録日").Value = ds.Tables(RS).Rows(i)("登録日")
                 Next
+
+                '数字形式
+                DgvMithd.Columns("数量").DefaultCellStyle.Format = "N2"
+                DgvMithd.Columns("仕入単価").DefaultCellStyle.Format = "N2"
+                DgvMithd.Columns("間接費").DefaultCellStyle.Format = "N2"
+                DgvMithd.Columns("仕入金額").DefaultCellStyle.Format = "N2"
+                DgvMithd.Columns("売単価").DefaultCellStyle.Format = "N2"
+                DgvMithd.Columns("売上金額").DefaultCellStyle.Format = "N2"
+                DgvMithd.Columns("粗利額").DefaultCellStyle.Format = "N2"
+                DgvMithd.Columns("粗利率").DefaultCellStyle.Format = "N1"
 
             End If
 

@@ -728,6 +728,7 @@ Public Class OrderList
                     End If
                 Next
 
+                'todo
                 Sql1 = "UPDATE "
                 Sql1 += " Public.t10_cymnhd "
                 Sql1 += " SET "
