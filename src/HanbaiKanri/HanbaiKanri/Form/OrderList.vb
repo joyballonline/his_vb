@@ -728,7 +728,6 @@ Public Class OrderList
                     End If
                 Next
 
-                'todo
                 Sql1 = "UPDATE "
                 Sql1 += " Public.t10_cymnhd "
                 Sql1 += " SET "
@@ -912,10 +911,11 @@ Public Class OrderList
         DgvCymnhd.Columns("粗利額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
         '数字形式
-        DgvCymnhd.Columns("受注金額_外貨").DefaultCellStyle.Format = "N0"
-        DgvCymnhd.Columns("受注金額").DefaultCellStyle.Format = "N0"
-        DgvCymnhd.Columns("仕入金額").DefaultCellStyle.Format = "N0"
-        DgvCymnhd.Columns("粗利額").DefaultCellStyle.Format = "N0"
+        DgvCymnhd.Columns("ＶＡＴ").DefaultCellStyle.Format = "N2"
+        DgvCymnhd.Columns("受注金額_外貨").DefaultCellStyle.Format = "N2"
+        DgvCymnhd.Columns("受注金額").DefaultCellStyle.Format = "N2"
+        DgvCymnhd.Columns("仕入金額").DefaultCellStyle.Format = "N2"
+        DgvCymnhd.Columns("粗利額").DefaultCellStyle.Format = "N2"
 
     End Sub
 
@@ -1006,14 +1006,18 @@ Public Class OrderList
         DgvCymnhd.Columns("未出庫数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
         '数字形式
-        DgvCymnhd.Columns("仕入値").DefaultCellStyle.Format = "N0"
-        DgvCymnhd.Columns("受注数量").DefaultCellStyle.Format = "N0"
-        DgvCymnhd.Columns("売上数量").DefaultCellStyle.Format = "N0"
-        DgvCymnhd.Columns("受注残数").DefaultCellStyle.Format = "N0"
-        DgvCymnhd.Columns("間接費").DefaultCellStyle.Format = "N0"
-        DgvCymnhd.Columns("売単価").DefaultCellStyle.Format = "N0"
-        DgvCymnhd.Columns("売上金額").DefaultCellStyle.Format = "N0"
-        DgvCymnhd.Columns("粗利額").DefaultCellStyle.Format = "N0"
+        DgvCymnhd.Columns("仕入値").DefaultCellStyle.Format = "N2"
+        DgvCymnhd.Columns("受注数量").DefaultCellStyle.Format = "N2"
+        DgvCymnhd.Columns("売上数量").DefaultCellStyle.Format = "N2"
+        DgvCymnhd.Columns("受注残数").DefaultCellStyle.Format = "N2"
+        DgvCymnhd.Columns("間接費").DefaultCellStyle.Format = "N2"
+        DgvCymnhd.Columns("売単価").DefaultCellStyle.Format = "N2"
+        DgvCymnhd.Columns("売上金額").DefaultCellStyle.Format = "N2"
+        DgvCymnhd.Columns("粗利額").DefaultCellStyle.Format = "N2"
+        DgvCymnhd.Columns("粗利率").DefaultCellStyle.Format = "N1"
+
+        DgvCymnhd.Columns("出庫数").DefaultCellStyle.Format = "N2"
+        DgvCymnhd.Columns("未出庫数").DefaultCellStyle.Format = "N2"
 
     End Sub
 
