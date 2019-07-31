@@ -1085,7 +1085,8 @@ Partial Class Ordering
         '
         DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle8.Format = "N0"
+        DataGridViewCellStyle8.Format = "N2"
+        DataGridViewCellStyle8.NullValue = "0.00"
         Me.仕入原価.DefaultCellStyle = DataGridViewCellStyle8
         Me.仕入原価.HeaderText = "仕入原価"
         Me.仕入原価.Name = "仕入原価"
@@ -1096,7 +1097,8 @@ Partial Class Ordering
         '
         DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         DataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle9.Format = "N0"
+        DataGridViewCellStyle9.Format = "N2"
+        DataGridViewCellStyle9.NullValue = "0.00"
         Me.間接費.DefaultCellStyle = DataGridViewCellStyle9
         Me.間接費.HeaderText = "間接費"
         Me.間接費.MaxInputLength = 15
@@ -1107,8 +1109,8 @@ Partial Class Ordering
         '関税率
         '
         DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle10.Format = "N3"
-        DataGridViewCellStyle10.NullValue = "0.000"
+        DataGridViewCellStyle10.Format = "N1"
+        DataGridViewCellStyle10.NullValue = "0.0"
         Me.関税率.DefaultCellStyle = DataGridViewCellStyle10
         Me.関税率.HeaderText = "関税率"
         Me.関税率.Name = "関税率"
@@ -1117,7 +1119,8 @@ Partial Class Ordering
         '
         DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         DataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle11.Format = "N0"
+        DataGridViewCellStyle11.Format = "N2"
+        DataGridViewCellStyle11.NullValue = "0.00"
         Me.関税額.DefaultCellStyle = DataGridViewCellStyle11
         Me.関税額.HeaderText = "関税額"
         Me.関税額.Name = "関税額"
@@ -1126,8 +1129,8 @@ Partial Class Ordering
         '前払法人税率
         '
         DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle12.Format = "N3"
-        DataGridViewCellStyle12.NullValue = "0.000"
+        DataGridViewCellStyle12.Format = "N1"
+        DataGridViewCellStyle12.NullValue = "0.0"
         Me.前払法人税率.DefaultCellStyle = DataGridViewCellStyle12
         Me.前払法人税率.HeaderText = "前払法人税率"
         Me.前払法人税率.Name = "前払法人税率"
@@ -1137,7 +1140,8 @@ Partial Class Ordering
         '
         DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         DataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle13.Format = "N0"
+        DataGridViewCellStyle13.Format = "N2"
+        DataGridViewCellStyle13.NullValue = "0.00"
         Me.前払法人税額.DefaultCellStyle = DataGridViewCellStyle13
         Me.前払法人税額.HeaderText = "前払法人税額"
         Me.前払法人税額.Name = "前払法人税額"
@@ -1147,8 +1151,8 @@ Partial Class Ordering
         '輸送費率
         '
         DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle14.Format = "N3"
-        DataGridViewCellStyle14.NullValue = "0.000"
+        DataGridViewCellStyle14.Format = "N1"
+        DataGridViewCellStyle14.NullValue = "0.0"
         Me.輸送費率.DefaultCellStyle = DataGridViewCellStyle14
         Me.輸送費率.HeaderText = "輸送費率"
         Me.輸送費率.Name = "輸送費率"
@@ -1157,7 +1161,8 @@ Partial Class Ordering
         '
         DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         DataGridViewCellStyle15.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle15.Format = "N0"
+        DataGridViewCellStyle15.Format = "N2"
+        DataGridViewCellStyle15.NullValue = "0.00"
         Me.輸送費額.DefaultCellStyle = DataGridViewCellStyle15
         Me.輸送費額.HeaderText = "輸送費額"
         Me.輸送費額.Name = "輸送費額"
@@ -1168,7 +1173,8 @@ Partial Class Ordering
         '
         DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         DataGridViewCellStyle16.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle16.Format = "N0"
+        DataGridViewCellStyle16.Format = "N2"
+        DataGridViewCellStyle16.NullValue = "0.00"
         Me.仕入金額.DefaultCellStyle = DataGridViewCellStyle16
         Me.仕入金額.HeaderText = "仕入金額"
         Me.仕入金額.Name = "仕入金額"
@@ -1179,7 +1185,8 @@ Partial Class Ordering
         '
         DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         DataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle17.Format = "N0"
+        DataGridViewCellStyle17.Format = "N2"
+        DataGridViewCellStyle17.NullValue = "0.00"
         Me.仕入金額_外貨.DefaultCellStyle = DataGridViewCellStyle17
         Me.仕入金額_外貨.HeaderText = "仕入金額（外貨）"
         Me.仕入金額_外貨.Name = "仕入金額_外貨"
