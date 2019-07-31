@@ -313,11 +313,11 @@ Public Class Order
                 DgvItemList.Rows(index).Cells("備考").Value = ds3.Tables(RS).Rows(index)("備考")
                 DgvItemList.Rows(index).Cells("見積単価").Value = ds3.Tables(RS).Rows(index)("見積単価")
                 DgvItemList.Rows(index).Cells("見積金額").Value = ds3.Tables(RS).Rows(index)("見積金額")
-                DgvItemList.Rows(index).Cells("関税率").Value = ds3.Tables(RS).Rows(index)("関税率")
+                DgvItemList.Rows(index).Cells("関税率").Value = ds3.Tables(RS).Rows(index)("関税率") * 100
                 DgvItemList.Rows(index).Cells("関税額").Value = ds3.Tables(RS).Rows(index)("関税額")
-                DgvItemList.Rows(index).Cells("前払法人税率").Value = ds3.Tables(RS).Rows(index)("前払法人税率")
+                DgvItemList.Rows(index).Cells("前払法人税率").Value = ds3.Tables(RS).Rows(index)("前払法人税率") * 100
                 DgvItemList.Rows(index).Cells("前払法人税額").Value = ds3.Tables(RS).Rows(index)("前払法人税額")
-                DgvItemList.Rows(index).Cells("輸送費率").Value = ds3.Tables(RS).Rows(index)("輸送費率")
+                DgvItemList.Rows(index).Cells("輸送費率").Value = ds3.Tables(RS).Rows(index)("輸送費率") * 100
                 DgvItemList.Rows(index).Cells("輸送費額").Value = ds3.Tables(RS).Rows(index)("輸送費額")
                 DgvItemList.Rows(index).Cells("仕入原価").Value = ds3.Tables(RS).Rows(index)("仕入原価")
                 DgvItemList.Rows(index).Cells("仕入金額").Value = ds3.Tables(RS).Rows(index)("仕入金額")
@@ -569,11 +569,11 @@ Public Class Order
                 DgvItemList.Rows(index).Cells("見積単価_外貨").Value = ds3.Tables(RS).Rows(index)("見積単価_外貨")
                 DgvItemList.Rows(index).Cells("見積金額").Value = ds3.Tables(RS).Rows(index)("見積金額")
                 DgvItemList.Rows(index).Cells("見積金額_外貨").Value = ds3.Tables(RS).Rows(index)("見積金額_外貨")
-                DgvItemList.Rows(index).Cells("関税率").Value = ds3.Tables(RS).Rows(index)("関税率")
+                DgvItemList.Rows(index).Cells("関税率").Value = ds3.Tables(RS).Rows(index)("関税率") * 100
                 DgvItemList.Rows(index).Cells("関税額").Value = ds3.Tables(RS).Rows(index)("関税額")
-                DgvItemList.Rows(index).Cells("前払法人税率").Value = ds3.Tables(RS).Rows(index)("前払法人税率")
+                DgvItemList.Rows(index).Cells("前払法人税率").Value = ds3.Tables(RS).Rows(index)("前払法人税率") * 100
                 DgvItemList.Rows(index).Cells("前払法人税額").Value = ds3.Tables(RS).Rows(index)("前払法人税額")
-                DgvItemList.Rows(index).Cells("輸送費率").Value = ds3.Tables(RS).Rows(index)("輸送費率")
+                DgvItemList.Rows(index).Cells("輸送費率").Value = ds3.Tables(RS).Rows(index)("輸送費率") * 100
                 DgvItemList.Rows(index).Cells("輸送費額").Value = ds3.Tables(RS).Rows(index)("輸送費額")
                 DgvItemList.Rows(index).Cells("仕入原価").Value = ds3.Tables(RS).Rows(index)("仕入原価")
                 DgvItemList.Rows(index).Cells("仕入金額").Value = ds3.Tables(RS).Rows(index)("仕入金額")
@@ -992,15 +992,15 @@ Public Class Order
                     Sql2 += "', '"
                     Sql2 += UtilClass.formatNumber(DgvItemList.Rows(i).Cells("見積金額").Value.ToString) '見積金額
                     Sql2 += "', '"
-                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(i).Cells("関税率").Value.ToString) '関税率
+                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(i).Cells("関税率").Value.ToString / 100) '関税率
                     Sql2 += "', '"
                     Sql2 += UtilClass.formatNumber(DgvItemList.Rows(i).Cells("関税額").Value.ToString) '関税額
                     Sql2 += "', '"
-                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(i).Cells("前払法人税率").Value.ToString) '前払法人税率
+                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(i).Cells("前払法人税率").Value.ToString / 100) '前払法人税率
                     Sql2 += "', '"
                     Sql2 += UtilClass.formatNumber(DgvItemList.Rows(i).Cells("前払法人税額").Value.ToString) '前払法人税額
                     Sql2 += "', '"
-                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(i).Cells("輸送費率").Value.ToString) '輸送費率
+                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(i).Cells("輸送費率").Value.ToString / 100) '輸送費率
                     Sql2 += "', '"
                     Sql2 += UtilClass.formatNumber(DgvItemList.Rows(i).Cells("輸送費額").Value.ToString) '輸送費額
                     Sql2 += "', '"
@@ -1356,18 +1356,18 @@ Public Class Order
                         End If
                         '関税率 <> Nothing
                         If DgvItemList.Rows(e.RowIndex).Cells("関税率").Value IsNot Nothing Then
-                            DgvItemList.Rows(e.RowIndex).Cells("関税額").Value = DgvItemList.Rows(e.RowIndex).Cells("仕入値").Value * DgvItemList.Rows(e.RowIndex).Cells("関税率").Value
+                            DgvItemList.Rows(e.RowIndex).Cells("関税額").Value = Math.Ceiling(DgvItemList.Rows(e.RowIndex).Cells("仕入値").Value * DgvItemList.Rows(e.RowIndex).Cells("関税率").Value / 100)
                         End If
                         '前払法人税率, 関税額 <> Nothing
                         If DgvItemList.Rows(e.RowIndex).Cells("前払法人税率").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("関税額").Value IsNot Nothing Then
                             tmp = DgvItemList.Rows(e.RowIndex).Cells("仕入値").Value + DgvItemList.Rows(e.RowIndex).Cells("関税額").Value
-                            tmp1 = tmp * DgvItemList.Rows(e.RowIndex).Cells("前払法人税率").Value
+                            tmp1 = tmp * DgvItemList.Rows(e.RowIndex).Cells("前払法人税率").Value / 100
                             tmp1 = Math.Ceiling(tmp1)
                             DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value = tmp1
                         End If
                         '輸送費率 <> Nothing
                         If DgvItemList.Rows(e.RowIndex).Cells("輸送費率").Value IsNot Nothing Then
-                            DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value = DgvItemList.Rows(e.RowIndex).Cells("仕入値").Value * DgvItemList.Rows(e.RowIndex).Cells("輸送費率").Value
+                            DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value = Math.Ceiling(DgvItemList.Rows(e.RowIndex).Cells("仕入値").Value * DgvItemList.Rows(e.RowIndex).Cells("輸送費率").Value / 100)
                         End If
 
                         If DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value IsNot Nothing Then

@@ -103,6 +103,35 @@ Partial Class Order
         Me.LblOrderDate = New System.Windows.Forms.Label()
         Me.LblOrderNo = New System.Windows.Forms.Label()
         Me.DgvItemList = New System.Windows.Forms.DataGridView()
+        Me.TxtPurchaseTotal = New System.Windows.Forms.TextBox()
+        Me.LblPurchaseAmount = New System.Windows.Forms.Label()
+        Me.LblMode = New System.Windows.Forms.Label()
+        Me.TxtCustomerPO = New System.Windows.Forms.TextBox()
+        Me.LblCustomerPO = New System.Windows.Forms.Label()
+        Me.TxtRate = New System.Windows.Forms.TextBox()
+        Me.LblRate = New System.Windows.Forms.Label()
+        Me.LblCurrency = New System.Windows.Forms.Label()
+        Me.CmCurrency = New System.Windows.Forms.ComboBox()
+        Me.TxtChangeCurrency = New System.Windows.Forms.TextBox()
+        Me.LblChangeCurrency = New System.Windows.Forms.Label()
+        Me.TxtIDRCurrency = New System.Windows.Forms.TextBox()
+        Me.LblIDRCurrency = New System.Windows.Forms.Label()
+        Me.TxtVat = New System.Windows.Forms.TextBox()
+        Me.LblVat = New System.Windows.Forms.Label()
+        Me.TxtCurrencyVatAmount = New System.Windows.Forms.TextBox()
+        Me.LblCurrencyVatAmount = New System.Windows.Forms.Label()
+        Me.TxtOrderCurrencyAmount = New System.Windows.Forms.TextBox()
+        Me.LblOrderCurrencyAmount = New System.Windows.Forms.Label()
+        Me.txtProfitmarginRate = New System.Windows.Forms.TextBox()
+        Me.lblProfitmarginRate = New System.Windows.Forms.Label()
+        Me.txtPurchasecost = New System.Windows.Forms.TextBox()
+        Me.lblPurchasecost = New System.Windows.Forms.Label()
+        Me.TxtTotal = New System.Windows.Forms.TextBox()
+        Me.LblOrderAmount = New System.Windows.Forms.Label()
+        Me.TxtGrossProfit = New System.Windows.Forms.TextBox()
+        Me.LblGrossProfit = New System.Windows.Forms.Label()
+        Me.txtGrossmarginRate = New System.Windows.Forms.TextBox()
+        Me.lblGrossmargin = New System.Windows.Forms.Label()
         Me.No = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.メーカー = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.品名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -135,35 +164,6 @@ Partial Class Order
         Me.備考 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.出庫数 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.未出庫数 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TxtPurchaseTotal = New System.Windows.Forms.TextBox()
-        Me.LblPurchaseAmount = New System.Windows.Forms.Label()
-        Me.LblMode = New System.Windows.Forms.Label()
-        Me.TxtCustomerPO = New System.Windows.Forms.TextBox()
-        Me.LblCustomerPO = New System.Windows.Forms.Label()
-        Me.TxtRate = New System.Windows.Forms.TextBox()
-        Me.LblRate = New System.Windows.Forms.Label()
-        Me.LblCurrency = New System.Windows.Forms.Label()
-        Me.CmCurrency = New System.Windows.Forms.ComboBox()
-        Me.TxtChangeCurrency = New System.Windows.Forms.TextBox()
-        Me.LblChangeCurrency = New System.Windows.Forms.Label()
-        Me.TxtIDRCurrency = New System.Windows.Forms.TextBox()
-        Me.LblIDRCurrency = New System.Windows.Forms.Label()
-        Me.TxtVat = New System.Windows.Forms.TextBox()
-        Me.LblVat = New System.Windows.Forms.Label()
-        Me.TxtCurrencyVatAmount = New System.Windows.Forms.TextBox()
-        Me.LblCurrencyVatAmount = New System.Windows.Forms.Label()
-        Me.TxtOrderCurrencyAmount = New System.Windows.Forms.TextBox()
-        Me.LblOrderCurrencyAmount = New System.Windows.Forms.Label()
-        Me.txtProfitmarginRate = New System.Windows.Forms.TextBox()
-        Me.lblProfitmarginRate = New System.Windows.Forms.Label()
-        Me.txtPurchasecost = New System.Windows.Forms.TextBox()
-        Me.lblPurchasecost = New System.Windows.Forms.Label()
-        Me.TxtTotal = New System.Windows.Forms.TextBox()
-        Me.LblOrderAmount = New System.Windows.Forms.Label()
-        Me.TxtGrossProfit = New System.Windows.Forms.TextBox()
-        Me.LblGrossProfit = New System.Windows.Forms.Label()
-        Me.txtGrossmarginRate = New System.Windows.Forms.TextBox()
-        Me.lblGrossmargin = New System.Windows.Forms.Label()
         CType(Me.DgvItemList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -176,7 +176,7 @@ Partial Class Order
         Me.TxtVatAmount.MaxLength = 10
         Me.TxtVatAmount.Name = "TxtVatAmount"
         Me.TxtVatAmount.ReadOnly = True
-        Me.TxtVatAmount.Size = New System.Drawing.Size(116, 23)
+        Me.TxtVatAmount.Size = New System.Drawing.Size(116, 39)
         Me.TxtVatAmount.TabIndex = 184
         Me.TxtVatAmount.TabStop = False
         Me.TxtVatAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -211,7 +211,7 @@ Partial Class Order
         Me.TxtOrderRemark.Location = New System.Drawing.Point(126, 397)
         Me.TxtOrderRemark.MaxLength = 50
         Me.TxtOrderRemark.Name = "TxtOrderRemark"
-        Me.TxtOrderRemark.Size = New System.Drawing.Size(274, 23)
+        Me.TxtOrderRemark.Size = New System.Drawing.Size(274, 39)
         Me.TxtOrderRemark.TabIndex = 4
         '
         'DtpExpiration
@@ -223,7 +223,7 @@ Partial Class Order
         Me.DtpExpiration.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.DtpExpiration.Location = New System.Drawing.Point(933, 43)
         Me.DtpExpiration.Name = "DtpExpiration"
-        Me.DtpExpiration.Size = New System.Drawing.Size(140, 22)
+        Me.DtpExpiration.Size = New System.Drawing.Size(140, 37)
         Me.DtpExpiration.TabIndex = 175
         Me.DtpExpiration.TabStop = False
         Me.DtpExpiration.Value = New Date(2018, 6, 5, 23, 23, 58, 0)
@@ -237,7 +237,7 @@ Partial Class Order
         Me.DtpQuoteDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.DtpQuoteDate.Location = New System.Drawing.Point(661, 43)
         Me.DtpQuoteDate.Name = "DtpQuoteDate"
-        Me.DtpQuoteDate.Size = New System.Drawing.Size(150, 22)
+        Me.DtpQuoteDate.Size = New System.Drawing.Size(150, 37)
         Me.DtpQuoteDate.TabIndex = 174
         Me.DtpQuoteDate.TabStop = False
         Me.DtpQuoteDate.Value = New Date(2018, 6, 5, 23, 23, 58, 0)
@@ -247,7 +247,7 @@ Partial Class Order
         Me.LblHyphen.AutoSize = True
         Me.LblHyphen.Location = New System.Drawing.Point(221, 49)
         Me.LblHyphen.Name = "LblHyphen"
-        Me.LblHyphen.Size = New System.Drawing.Size(11, 12)
+        Me.LblHyphen.Size = New System.Drawing.Size(22, 24)
         Me.LblHyphen.TabIndex = 173
         Me.LblHyphen.Text = "-"
         '
@@ -260,7 +260,7 @@ Partial Class Order
         Me.DtpQuoteRegistration.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.DtpQuoteRegistration.Location = New System.Drawing.Point(391, 42)
         Me.DtpQuoteRegistration.Name = "DtpQuoteRegistration"
-        Me.DtpQuoteRegistration.Size = New System.Drawing.Size(148, 22)
+        Me.DtpQuoteRegistration.Size = New System.Drawing.Size(148, 37)
         Me.DtpQuoteRegistration.TabIndex = 3
         Me.DtpQuoteRegistration.TabStop = False
         Me.DtpQuoteRegistration.Value = New Date(2018, 6, 5, 23, 23, 58, 0)
@@ -298,7 +298,7 @@ Partial Class Order
         Me.TxtQuoteSuffix.MaxLength = 1
         Me.TxtQuoteSuffix.Name = "TxtQuoteSuffix"
         Me.TxtQuoteSuffix.ReadOnly = True
-        Me.TxtQuoteSuffix.Size = New System.Drawing.Size(29, 23)
+        Me.TxtQuoteSuffix.Size = New System.Drawing.Size(29, 39)
         Me.TxtQuoteSuffix.TabIndex = 169
         Me.TxtQuoteSuffix.TabStop = False
         '
@@ -311,7 +311,7 @@ Partial Class Order
         Me.TxtQuoteNo.MaxLength = 8
         Me.TxtQuoteNo.Name = "TxtQuoteNo"
         Me.TxtQuoteNo.ReadOnly = True
-        Me.TxtQuoteNo.Size = New System.Drawing.Size(88, 23)
+        Me.TxtQuoteNo.Size = New System.Drawing.Size(88, 39)
         Me.TxtQuoteNo.TabIndex = 168
         Me.TxtQuoteNo.TabStop = False
         '
@@ -347,7 +347,7 @@ Partial Class Order
         Me.DtpOrderDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.DtpOrderDate.Location = New System.Drawing.Point(727, 12)
         Me.DtpOrderDate.Name = "DtpOrderDate"
-        Me.DtpOrderDate.Size = New System.Drawing.Size(130, 22)
+        Me.DtpOrderDate.Size = New System.Drawing.Size(130, 37)
         Me.DtpOrderDate.TabIndex = 2
         Me.DtpOrderDate.Value = New Date(2018, 6, 5, 23, 23, 58, 0)
         '
@@ -360,7 +360,7 @@ Partial Class Order
         Me.TxtQuoteTotal.MaxLength = 10
         Me.TxtQuoteTotal.Name = "TxtQuoteTotal"
         Me.TxtQuoteTotal.ReadOnly = True
-        Me.TxtQuoteTotal.Size = New System.Drawing.Size(187, 23)
+        Me.TxtQuoteTotal.Size = New System.Drawing.Size(187, 39)
         Me.TxtQuoteTotal.TabIndex = 162
         Me.TxtQuoteTotal.TabStop = False
         Me.TxtQuoteTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -386,7 +386,7 @@ Partial Class Order
         Me.txtProfitmargin.MaxLength = 10
         Me.txtProfitmargin.Name = "txtProfitmargin"
         Me.txtProfitmargin.ReadOnly = True
-        Me.txtProfitmargin.Size = New System.Drawing.Size(187, 23)
+        Me.txtProfitmargin.Size = New System.Drawing.Size(187, 39)
         Me.txtProfitmargin.TabIndex = 160
         Me.txtProfitmargin.TabStop = False
         Me.txtProfitmargin.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -412,7 +412,7 @@ Partial Class Order
         Me.TxtItemCount.MaxLength = 20
         Me.TxtItemCount.Name = "TxtItemCount"
         Me.TxtItemCount.ReadOnly = True
-        Me.TxtItemCount.Size = New System.Drawing.Size(85, 23)
+        Me.TxtItemCount.Size = New System.Drawing.Size(85, 39)
         Me.TxtItemCount.TabIndex = 158
         Me.TxtItemCount.TabStop = False
         Me.TxtItemCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -434,7 +434,7 @@ Partial Class Order
         Me.Label2.AutoSize = True
         Me.Label2.Location = New System.Drawing.Point(221, 20)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(11, 12)
+        Me.Label2.Size = New System.Drawing.Size(22, 24)
         Me.Label2.TabIndex = 157
         Me.Label2.Text = "-"
         '
@@ -446,7 +446,7 @@ Partial Class Order
         Me.TxtCustomerCode.Location = New System.Drawing.Point(127, 71)
         Me.TxtCustomerCode.MaxLength = 50
         Me.TxtCustomerCode.Name = "TxtCustomerCode"
-        Me.TxtCustomerCode.Size = New System.Drawing.Size(140, 23)
+        Me.TxtCustomerCode.Size = New System.Drawing.Size(140, 39)
         Me.TxtCustomerCode.TabIndex = 126
         Me.TxtCustomerCode.TabStop = False
         '
@@ -469,7 +469,7 @@ Partial Class Order
         Me.DtpOrderRegistration.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.DtpOrderRegistration.Location = New System.Drawing.Point(979, 11)
         Me.DtpOrderRegistration.Name = "DtpOrderRegistration"
-        Me.DtpOrderRegistration.Size = New System.Drawing.Size(130, 22)
+        Me.DtpOrderRegistration.Size = New System.Drawing.Size(130, 37)
         Me.DtpOrderRegistration.TabIndex = 119
         Me.DtpOrderRegistration.TabStop = False
         Me.DtpOrderRegistration.Value = New Date(2018, 6, 5, 23, 23, 58, 0)
@@ -504,7 +504,7 @@ Partial Class Order
         Me.TxtSales.Location = New System.Drawing.Point(1127, 71)
         Me.TxtSales.MaxLength = 20
         Me.TxtSales.Name = "TxtSales"
-        Me.TxtSales.Size = New System.Drawing.Size(211, 23)
+        Me.TxtSales.Size = New System.Drawing.Size(211, 39)
         Me.TxtSales.TabIndex = 146
         Me.TxtSales.TabStop = False
         '
@@ -529,7 +529,7 @@ Partial Class Order
         Me.TxtOrderSuffix.MaxLength = 1
         Me.TxtOrderSuffix.Name = "TxtOrderSuffix"
         Me.TxtOrderSuffix.ReadOnly = True
-        Me.TxtOrderSuffix.Size = New System.Drawing.Size(29, 23)
+        Me.TxtOrderSuffix.Size = New System.Drawing.Size(29, 39)
         Me.TxtOrderSuffix.TabIndex = 129
         Me.TxtOrderSuffix.TabStop = False
         '
@@ -579,7 +579,7 @@ Partial Class Order
         Me.TxtPosition.Location = New System.Drawing.Point(765, 158)
         Me.TxtPosition.MaxLength = 50
         Me.TxtPosition.Name = "TxtPosition"
-        Me.TxtPosition.Size = New System.Drawing.Size(200, 23)
+        Me.TxtPosition.Size = New System.Drawing.Size(200, 39)
         Me.TxtPosition.TabIndex = 145
         Me.TxtPosition.TabStop = False
         '
@@ -615,7 +615,7 @@ Partial Class Order
         Me.TxtTel.Location = New System.Drawing.Point(765, 71)
         Me.TxtTel.MaxLength = 15
         Me.TxtTel.Name = "TxtTel"
-        Me.TxtTel.Size = New System.Drawing.Size(200, 23)
+        Me.TxtTel.Size = New System.Drawing.Size(200, 39)
         Me.TxtTel.TabIndex = 142
         Me.TxtTel.TabStop = False
         '
@@ -652,7 +652,7 @@ Partial Class Order
         Me.TxtPerson.Location = New System.Drawing.Point(765, 129)
         Me.TxtPerson.MaxLength = 50
         Me.TxtPerson.Name = "TxtPerson"
-        Me.TxtPerson.Size = New System.Drawing.Size(200, 23)
+        Me.TxtPerson.Size = New System.Drawing.Size(200, 39)
         Me.TxtPerson.TabIndex = 144
         Me.TxtPerson.TabStop = False
         '
@@ -676,7 +676,7 @@ Partial Class Order
         Me.TxtFax.Location = New System.Drawing.Point(765, 100)
         Me.TxtFax.MaxLength = 15
         Me.TxtFax.Name = "TxtFax"
-        Me.TxtFax.Size = New System.Drawing.Size(200, 23)
+        Me.TxtFax.Size = New System.Drawing.Size(200, 39)
         Me.TxtFax.TabIndex = 143
         Me.TxtFax.TabStop = False
         '
@@ -688,7 +688,7 @@ Partial Class Order
         Me.TxtPostalCode.Location = New System.Drawing.Point(127, 100)
         Me.TxtPostalCode.MaxLength = 7
         Me.TxtPostalCode.Name = "TxtPostalCode"
-        Me.TxtPostalCode.Size = New System.Drawing.Size(140, 23)
+        Me.TxtPostalCode.Size = New System.Drawing.Size(140, 39)
         Me.TxtPostalCode.TabIndex = 131
         Me.TxtPostalCode.TabStop = False
         Me.TxtPostalCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -725,7 +725,7 @@ Partial Class Order
         Me.TxtCustomerName.Location = New System.Drawing.Point(273, 71)
         Me.TxtCustomerName.MaxLength = 50
         Me.TxtCustomerName.Name = "TxtCustomerName"
-        Me.TxtCustomerName.Size = New System.Drawing.Size(330, 23)
+        Me.TxtCustomerName.Size = New System.Drawing.Size(330, 39)
         Me.TxtCustomerName.TabIndex = 128
         Me.TxtCustomerName.TabStop = False
         '
@@ -738,7 +738,7 @@ Partial Class Order
         Me.TxtInput.MaxLength = 20
         Me.TxtInput.Name = "TxtInput"
         Me.TxtInput.ReadOnly = True
-        Me.TxtInput.Size = New System.Drawing.Size(211, 23)
+        Me.TxtInput.Size = New System.Drawing.Size(211, 39)
         Me.TxtInput.TabIndex = 132
         Me.TxtInput.TabStop = False
         '
@@ -763,7 +763,7 @@ Partial Class Order
         Me.TxtOrderNo.MaxLength = 8
         Me.TxtOrderNo.Name = "TxtOrderNo"
         Me.TxtOrderNo.ReadOnly = True
-        Me.TxtOrderNo.Size = New System.Drawing.Size(88, 23)
+        Me.TxtOrderNo.Size = New System.Drawing.Size(88, 39)
         Me.TxtOrderNo.TabIndex = 127
         Me.TxtOrderNo.TabStop = False
         '
@@ -817,6 +817,382 @@ Partial Class Order
         Me.DgvItemList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
         Me.DgvItemList.Size = New System.Drawing.Size(1329, 142)
         Me.DgvItemList.TabIndex = 3
+        '
+        'TxtPurchaseTotal
+        '
+        Me.TxtPurchaseTotal.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TxtPurchaseTotal.Enabled = False
+        Me.TxtPurchaseTotal.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtPurchaseTotal.Location = New System.Drawing.Point(937, 426)
+        Me.TxtPurchaseTotal.MaxLength = 10
+        Me.TxtPurchaseTotal.Name = "TxtPurchaseTotal"
+        Me.TxtPurchaseTotal.ReadOnly = True
+        Me.TxtPurchaseTotal.Size = New System.Drawing.Size(187, 39)
+        Me.TxtPurchaseTotal.TabIndex = 186
+        Me.TxtPurchaseTotal.TabStop = False
+        Me.TxtPurchaseTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'LblPurchaseAmount
+        '
+        Me.LblPurchaseAmount.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblPurchaseAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblPurchaseAmount.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblPurchaseAmount.Location = New System.Drawing.Point(780, 426)
+        Me.LblPurchaseAmount.Name = "LblPurchaseAmount"
+        Me.LblPurchaseAmount.Size = New System.Drawing.Size(152, 23)
+        Me.LblPurchaseAmount.TabIndex = 187
+        Me.LblPurchaseAmount.Text = "発注金額（j）"
+        Me.LblPurchaseAmount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LblMode
+        '
+        Me.LblMode.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblMode.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblMode.Location = New System.Drawing.Point(1127, 9)
+        Me.LblMode.Name = "LblMode"
+        Me.LblMode.Size = New System.Drawing.Size(211, 23)
+        Me.LblMode.TabIndex = 188
+        Me.LblMode.Text = "モード"
+        Me.LblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'TxtCustomerPO
+        '
+        Me.TxtCustomerPO.BackColor = System.Drawing.Color.White
+        Me.TxtCustomerPO.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtCustomerPO.Location = New System.Drawing.Point(391, 13)
+        Me.TxtCustomerPO.MaxLength = 20
+        Me.TxtCustomerPO.Name = "TxtCustomerPO"
+        Me.TxtCustomerPO.Size = New System.Drawing.Size(176, 39)
+        Me.TxtCustomerPO.TabIndex = 1
+        '
+        'LblCustomerPO
+        '
+        Me.LblCustomerPO.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblCustomerPO.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblCustomerPO.Cursor = System.Windows.Forms.Cursors.Default
+        Me.LblCustomerPO.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblCustomerPO.Location = New System.Drawing.Point(273, 13)
+        Me.LblCustomerPO.Name = "LblCustomerPO"
+        Me.LblCustomerPO.Size = New System.Drawing.Size(110, 23)
+        Me.LblCustomerPO.TabIndex = 189
+        Me.LblCustomerPO.Text = "客先番号"
+        Me.LblCustomerPO.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'TxtRate
+        '
+        Me.TxtRate.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TxtRate.Enabled = False
+        Me.TxtRate.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtRate.Location = New System.Drawing.Point(1127, 157)
+        Me.TxtRate.MaxLength = 20
+        Me.TxtRate.Name = "TxtRate"
+        Me.TxtRate.ReadOnly = True
+        Me.TxtRate.Size = New System.Drawing.Size(211, 39)
+        Me.TxtRate.TabIndex = 326
+        Me.TxtRate.TabStop = False
+        '
+        'LblRate
+        '
+        Me.LblRate.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblRate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblRate.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblRate.Location = New System.Drawing.Point(971, 157)
+        Me.LblRate.Name = "LblRate"
+        Me.LblRate.Size = New System.Drawing.Size(150, 23)
+        Me.LblRate.TabIndex = 325
+        Me.LblRate.Text = "レート"
+        Me.LblRate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LblCurrency
+        '
+        Me.LblCurrency.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblCurrency.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblCurrency.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblCurrency.Location = New System.Drawing.Point(971, 129)
+        Me.LblCurrency.Name = "LblCurrency"
+        Me.LblCurrency.Size = New System.Drawing.Size(150, 23)
+        Me.LblCurrency.TabIndex = 324
+        Me.LblCurrency.Text = "通貨"
+        Me.LblCurrency.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'CmCurrency
+        '
+        Me.CmCurrency.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.CmCurrency.FormattingEnabled = True
+        Me.CmCurrency.Items.AddRange(New Object() {"RegularShip", "DHL", "Air", "Ship"})
+        Me.CmCurrency.Location = New System.Drawing.Point(1127, 129)
+        Me.CmCurrency.Name = "CmCurrency"
+        Me.CmCurrency.Size = New System.Drawing.Size(211, 38)
+        Me.CmCurrency.TabIndex = 323
+        '
+        'TxtChangeCurrency
+        '
+        Me.TxtChangeCurrency.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TxtChangeCurrency.Enabled = False
+        Me.TxtChangeCurrency.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtChangeCurrency.Location = New System.Drawing.Point(116, 509)
+        Me.TxtChangeCurrency.MaxLength = 20
+        Me.TxtChangeCurrency.Name = "TxtChangeCurrency"
+        Me.TxtChangeCurrency.ReadOnly = True
+        Me.TxtChangeCurrency.Size = New System.Drawing.Size(70, 39)
+        Me.TxtChangeCurrency.TabIndex = 330
+        Me.TxtChangeCurrency.TabStop = False
+        Me.TxtChangeCurrency.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.TxtChangeCurrency.Visible = False
+        '
+        'LblChangeCurrency
+        '
+        Me.LblChangeCurrency.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblChangeCurrency.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblChangeCurrency.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblChangeCurrency.Location = New System.Drawing.Point(10, 509)
+        Me.LblChangeCurrency.Name = "LblChangeCurrency"
+        Me.LblChangeCurrency.Size = New System.Drawing.Size(100, 23)
+        Me.LblChangeCurrency.TabIndex = 329
+        Me.LblChangeCurrency.Text = "通貨"
+        Me.LblChangeCurrency.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LblChangeCurrency.Visible = False
+        '
+        'TxtIDRCurrency
+        '
+        Me.TxtIDRCurrency.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TxtIDRCurrency.Enabled = False
+        Me.TxtIDRCurrency.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtIDRCurrency.Location = New System.Drawing.Point(117, 479)
+        Me.TxtIDRCurrency.MaxLength = 20
+        Me.TxtIDRCurrency.Name = "TxtIDRCurrency"
+        Me.TxtIDRCurrency.ReadOnly = True
+        Me.TxtIDRCurrency.Size = New System.Drawing.Size(70, 39)
+        Me.TxtIDRCurrency.TabIndex = 328
+        Me.TxtIDRCurrency.TabStop = False
+        Me.TxtIDRCurrency.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.TxtIDRCurrency.Visible = False
+        '
+        'LblIDRCurrency
+        '
+        Me.LblIDRCurrency.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblIDRCurrency.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblIDRCurrency.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblIDRCurrency.Location = New System.Drawing.Point(11, 479)
+        Me.LblIDRCurrency.Name = "LblIDRCurrency"
+        Me.LblIDRCurrency.Size = New System.Drawing.Size(100, 23)
+        Me.LblIDRCurrency.TabIndex = 327
+        Me.LblIDRCurrency.Text = "通貨"
+        Me.LblIDRCurrency.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LblIDRCurrency.Visible = False
+        '
+        'TxtVat
+        '
+        Me.TxtVat.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TxtVat.Enabled = False
+        Me.TxtVat.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtVat.Location = New System.Drawing.Point(116, 437)
+        Me.TxtVat.MaxLength = 10
+        Me.TxtVat.Name = "TxtVat"
+        Me.TxtVat.ReadOnly = True
+        Me.TxtVat.Size = New System.Drawing.Size(71, 39)
+        Me.TxtVat.TabIndex = 331
+        Me.TxtVat.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.TxtVat.Visible = False
+        '
+        'LblVat
+        '
+        Me.LblVat.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblVat.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblVat.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblVat.Location = New System.Drawing.Point(10, 437)
+        Me.LblVat.Name = "LblVat"
+        Me.LblVat.Size = New System.Drawing.Size(100, 23)
+        Me.LblVat.TabIndex = 332
+        Me.LblVat.Text = "VAT(%)"
+        Me.LblVat.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LblVat.Visible = False
+        '
+        'TxtCurrencyVatAmount
+        '
+        Me.TxtCurrencyVatAmount.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TxtCurrencyVatAmount.Enabled = False
+        Me.TxtCurrencyVatAmount.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtCurrencyVatAmount.Location = New System.Drawing.Point(298, 509)
+        Me.TxtCurrencyVatAmount.MaxLength = 10
+        Me.TxtCurrencyVatAmount.Name = "TxtCurrencyVatAmount"
+        Me.TxtCurrencyVatAmount.ReadOnly = True
+        Me.TxtCurrencyVatAmount.Size = New System.Drawing.Size(49, 39)
+        Me.TxtCurrencyVatAmount.TabIndex = 333
+        Me.TxtCurrencyVatAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.TxtCurrencyVatAmount.Visible = False
+        '
+        'LblCurrencyVatAmount
+        '
+        Me.LblCurrencyVatAmount.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblCurrencyVatAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblCurrencyVatAmount.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblCurrencyVatAmount.Location = New System.Drawing.Point(192, 509)
+        Me.LblCurrencyVatAmount.Name = "LblCurrencyVatAmount"
+        Me.LblCurrencyVatAmount.Size = New System.Drawing.Size(100, 23)
+        Me.LblCurrencyVatAmount.TabIndex = 334
+        Me.LblCurrencyVatAmount.Text = "VAT"
+        Me.LblCurrencyVatAmount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LblCurrencyVatAmount.Visible = False
+        '
+        'TxtOrderCurrencyAmount
+        '
+        Me.TxtOrderCurrencyAmount.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TxtOrderCurrencyAmount.Enabled = False
+        Me.TxtOrderCurrencyAmount.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtOrderCurrencyAmount.Location = New System.Drawing.Point(459, 509)
+        Me.TxtOrderCurrencyAmount.MaxLength = 10
+        Me.TxtOrderCurrencyAmount.Name = "TxtOrderCurrencyAmount"
+        Me.TxtOrderCurrencyAmount.ReadOnly = True
+        Me.TxtOrderCurrencyAmount.Size = New System.Drawing.Size(115, 39)
+        Me.TxtOrderCurrencyAmount.TabIndex = 335
+        Me.TxtOrderCurrencyAmount.TabStop = False
+        Me.TxtOrderCurrencyAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.TxtOrderCurrencyAmount.Visible = False
+        '
+        'LblOrderCurrencyAmount
+        '
+        Me.LblOrderCurrencyAmount.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblOrderCurrencyAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblOrderCurrencyAmount.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblOrderCurrencyAmount.Location = New System.Drawing.Point(353, 509)
+        Me.LblOrderCurrencyAmount.Name = "LblOrderCurrencyAmount"
+        Me.LblOrderCurrencyAmount.Size = New System.Drawing.Size(100, 23)
+        Me.LblOrderCurrencyAmount.TabIndex = 336
+        Me.LblOrderCurrencyAmount.Text = "受注金額"
+        Me.LblOrderCurrencyAmount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LblOrderCurrencyAmount.Visible = False
+        '
+        'txtProfitmarginRate
+        '
+        Me.txtProfitmarginRate.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.txtProfitmarginRate.Enabled = False
+        Me.txtProfitmarginRate.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.txtProfitmarginRate.Location = New System.Drawing.Point(937, 481)
+        Me.txtProfitmarginRate.MaxLength = 10
+        Me.txtProfitmarginRate.Name = "txtProfitmarginRate"
+        Me.txtProfitmarginRate.ReadOnly = True
+        Me.txtProfitmarginRate.Size = New System.Drawing.Size(187, 39)
+        Me.txtProfitmarginRate.TabIndex = 337
+        Me.txtProfitmarginRate.TabStop = False
+        Me.txtProfitmarginRate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'lblProfitmarginRate
+        '
+        Me.lblProfitmarginRate.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.lblProfitmarginRate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblProfitmarginRate.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.lblProfitmarginRate.Location = New System.Drawing.Point(780, 481)
+        Me.lblProfitmarginRate.Name = "lblProfitmarginRate"
+        Me.lblProfitmarginRate.Size = New System.Drawing.Size(152, 23)
+        Me.lblProfitmarginRate.TabIndex = 338
+        Me.lblProfitmarginRate.Text = "利益率"
+        Me.lblProfitmarginRate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'txtPurchasecost
+        '
+        Me.txtPurchasecost.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.txtPurchasecost.Enabled = False
+        Me.txtPurchasecost.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.txtPurchasecost.Location = New System.Drawing.Point(574, 426)
+        Me.txtPurchasecost.MaxLength = 10
+        Me.txtPurchasecost.Name = "txtPurchasecost"
+        Me.txtPurchasecost.ReadOnly = True
+        Me.txtPurchasecost.Size = New System.Drawing.Size(187, 39)
+        Me.txtPurchasecost.TabIndex = 341
+        Me.txtPurchasecost.TabStop = False
+        Me.txtPurchasecost.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'lblPurchasecost
+        '
+        Me.lblPurchasecost.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.lblPurchasecost.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblPurchasecost.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.lblPurchasecost.Location = New System.Drawing.Point(418, 426)
+        Me.lblPurchasecost.Name = "lblPurchasecost"
+        Me.lblPurchasecost.Size = New System.Drawing.Size(152, 23)
+        Me.lblPurchasecost.TabIndex = 342
+        Me.lblPurchasecost.Text = "仕入原価（c）"
+        Me.lblPurchasecost.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'TxtTotal
+        '
+        Me.TxtTotal.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TxtTotal.Enabled = False
+        Me.TxtTotal.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtTotal.Location = New System.Drawing.Point(574, 397)
+        Me.TxtTotal.MaxLength = 10
+        Me.TxtTotal.Name = "TxtTotal"
+        Me.TxtTotal.ReadOnly = True
+        Me.TxtTotal.Size = New System.Drawing.Size(187, 39)
+        Me.TxtTotal.TabIndex = 339
+        Me.TxtTotal.TabStop = False
+        Me.TxtTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'LblOrderAmount
+        '
+        Me.LblOrderAmount.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblOrderAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblOrderAmount.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblOrderAmount.Location = New System.Drawing.Point(418, 397)
+        Me.LblOrderAmount.Name = "LblOrderAmount"
+        Me.LblOrderAmount.Size = New System.Drawing.Size(152, 23)
+        Me.LblOrderAmount.TabIndex = 340
+        Me.LblOrderAmount.Text = "売上金額（l）"
+        Me.LblOrderAmount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'TxtGrossProfit
+        '
+        Me.TxtGrossProfit.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TxtGrossProfit.Enabled = False
+        Me.TxtGrossProfit.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtGrossProfit.Location = New System.Drawing.Point(574, 453)
+        Me.TxtGrossProfit.MaxLength = 10
+        Me.TxtGrossProfit.Name = "TxtGrossProfit"
+        Me.TxtGrossProfit.ReadOnly = True
+        Me.TxtGrossProfit.Size = New System.Drawing.Size(187, 39)
+        Me.TxtGrossProfit.TabIndex = 343
+        Me.TxtGrossProfit.TabStop = False
+        Me.TxtGrossProfit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'LblGrossProfit
+        '
+        Me.LblGrossProfit.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblGrossProfit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblGrossProfit.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblGrossProfit.Location = New System.Drawing.Point(418, 454)
+        Me.LblGrossProfit.Name = "LblGrossProfit"
+        Me.LblGrossProfit.Size = New System.Drawing.Size(152, 23)
+        Me.LblGrossProfit.TabIndex = 344
+        Me.LblGrossProfit.Text = "粗利額（o）"
+        Me.LblGrossProfit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'txtGrossmarginRate
+        '
+        Me.txtGrossmarginRate.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.txtGrossmarginRate.Enabled = False
+        Me.txtGrossmarginRate.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.txtGrossmarginRate.Location = New System.Drawing.Point(574, 481)
+        Me.txtGrossmarginRate.MaxLength = 10
+        Me.txtGrossmarginRate.Name = "txtGrossmarginRate"
+        Me.txtGrossmarginRate.ReadOnly = True
+        Me.txtGrossmarginRate.Size = New System.Drawing.Size(187, 39)
+        Me.txtGrossmarginRate.TabIndex = 345
+        Me.txtGrossmarginRate.TabStop = False
+        Me.txtGrossmarginRate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'lblGrossmargin
+        '
+        Me.lblGrossmargin.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.lblGrossmargin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblGrossmargin.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.lblGrossmargin.Location = New System.Drawing.Point(418, 481)
+        Me.lblGrossmargin.Name = "lblGrossmargin"
+        Me.lblGrossmargin.Size = New System.Drawing.Size(152, 23)
+        Me.lblGrossmargin.TabIndex = 346
+        Me.lblGrossmargin.Text = "粗利率（p）"
+        Me.lblGrossmargin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'No
         '
@@ -917,8 +1293,8 @@ Partial Class Order
         '関税率
         '
         DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle9.Format = "N3"
-        DataGridViewCellStyle9.NullValue = "0.000"
+        DataGridViewCellStyle9.Format = "N1"
+        DataGridViewCellStyle9.NullValue = "0.0"
         Me.関税率.DefaultCellStyle = DataGridViewCellStyle9
         Me.関税率.HeaderText = "関税率"
         Me.関税率.Name = "関税率"
@@ -936,8 +1312,8 @@ Partial Class Order
         '前払法人税率
         '
         DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle11.Format = "N3"
-        DataGridViewCellStyle11.NullValue = "0.000"
+        DataGridViewCellStyle11.Format = "N1"
+        DataGridViewCellStyle11.NullValue = "0.0"
         Me.前払法人税率.DefaultCellStyle = DataGridViewCellStyle11
         Me.前払法人税率.HeaderText = "前払法人税率"
         Me.前払法人税率.Name = "前払法人税率"
@@ -956,8 +1332,8 @@ Partial Class Order
         '輸送費率
         '
         DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle13.Format = "N3"
-        DataGridViewCellStyle13.NullValue = "0.000"
+        DataGridViewCellStyle13.Format = "N1"
+        DataGridViewCellStyle13.NullValue = "0.0"
         Me.輸送費率.DefaultCellStyle = DataGridViewCellStyle13
         Me.輸送費率.HeaderText = "輸送費率"
         Me.輸送費率.Name = "輸送費率"
@@ -1092,6 +1468,8 @@ Partial Class Order
         '
         DataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         DataGridViewCellStyle25.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle25.Format = "N1"
+        DataGridViewCellStyle25.NullValue = "0.0"
         Me.粗利率.DefaultCellStyle = DataGridViewCellStyle25
         Me.粗利率.HeaderText = "粗利率"
         Me.粗利率.Name = "粗利率"
@@ -1125,382 +1503,6 @@ Partial Class Order
         Me.未出庫数.HeaderText = "未出庫数"
         Me.未出庫数.Name = "未出庫数"
         Me.未出庫数.Visible = False
-        '
-        'TxtPurchaseTotal
-        '
-        Me.TxtPurchaseTotal.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.TxtPurchaseTotal.Enabled = False
-        Me.TxtPurchaseTotal.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtPurchaseTotal.Location = New System.Drawing.Point(937, 426)
-        Me.TxtPurchaseTotal.MaxLength = 10
-        Me.TxtPurchaseTotal.Name = "TxtPurchaseTotal"
-        Me.TxtPurchaseTotal.ReadOnly = True
-        Me.TxtPurchaseTotal.Size = New System.Drawing.Size(187, 23)
-        Me.TxtPurchaseTotal.TabIndex = 186
-        Me.TxtPurchaseTotal.TabStop = False
-        Me.TxtPurchaseTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'LblPurchaseAmount
-        '
-        Me.LblPurchaseAmount.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.LblPurchaseAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblPurchaseAmount.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblPurchaseAmount.Location = New System.Drawing.Point(780, 426)
-        Me.LblPurchaseAmount.Name = "LblPurchaseAmount"
-        Me.LblPurchaseAmount.Size = New System.Drawing.Size(152, 23)
-        Me.LblPurchaseAmount.TabIndex = 187
-        Me.LblPurchaseAmount.Text = "発注金額（j）"
-        Me.LblPurchaseAmount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'LblMode
-        '
-        Me.LblMode.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.LblMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblMode.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblMode.Location = New System.Drawing.Point(1127, 9)
-        Me.LblMode.Name = "LblMode"
-        Me.LblMode.Size = New System.Drawing.Size(211, 23)
-        Me.LblMode.TabIndex = 188
-        Me.LblMode.Text = "モード"
-        Me.LblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'TxtCustomerPO
-        '
-        Me.TxtCustomerPO.BackColor = System.Drawing.Color.White
-        Me.TxtCustomerPO.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtCustomerPO.Location = New System.Drawing.Point(391, 13)
-        Me.TxtCustomerPO.MaxLength = 20
-        Me.TxtCustomerPO.Name = "TxtCustomerPO"
-        Me.TxtCustomerPO.Size = New System.Drawing.Size(176, 23)
-        Me.TxtCustomerPO.TabIndex = 1
-        '
-        'LblCustomerPO
-        '
-        Me.LblCustomerPO.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.LblCustomerPO.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblCustomerPO.Cursor = System.Windows.Forms.Cursors.Default
-        Me.LblCustomerPO.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblCustomerPO.Location = New System.Drawing.Point(273, 13)
-        Me.LblCustomerPO.Name = "LblCustomerPO"
-        Me.LblCustomerPO.Size = New System.Drawing.Size(110, 23)
-        Me.LblCustomerPO.TabIndex = 189
-        Me.LblCustomerPO.Text = "客先番号"
-        Me.LblCustomerPO.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'TxtRate
-        '
-        Me.TxtRate.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.TxtRate.Enabled = False
-        Me.TxtRate.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtRate.Location = New System.Drawing.Point(1127, 157)
-        Me.TxtRate.MaxLength = 20
-        Me.TxtRate.Name = "TxtRate"
-        Me.TxtRate.ReadOnly = True
-        Me.TxtRate.Size = New System.Drawing.Size(211, 23)
-        Me.TxtRate.TabIndex = 326
-        Me.TxtRate.TabStop = False
-        '
-        'LblRate
-        '
-        Me.LblRate.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.LblRate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblRate.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblRate.Location = New System.Drawing.Point(971, 157)
-        Me.LblRate.Name = "LblRate"
-        Me.LblRate.Size = New System.Drawing.Size(150, 23)
-        Me.LblRate.TabIndex = 325
-        Me.LblRate.Text = "レート"
-        Me.LblRate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'LblCurrency
-        '
-        Me.LblCurrency.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.LblCurrency.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblCurrency.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblCurrency.Location = New System.Drawing.Point(971, 129)
-        Me.LblCurrency.Name = "LblCurrency"
-        Me.LblCurrency.Size = New System.Drawing.Size(150, 23)
-        Me.LblCurrency.TabIndex = 324
-        Me.LblCurrency.Text = "通貨"
-        Me.LblCurrency.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'CmCurrency
-        '
-        Me.CmCurrency.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.CmCurrency.FormattingEnabled = True
-        Me.CmCurrency.Items.AddRange(New Object() {"RegularShip", "DHL", "Air", "Ship"})
-        Me.CmCurrency.Location = New System.Drawing.Point(1127, 129)
-        Me.CmCurrency.Name = "CmCurrency"
-        Me.CmCurrency.Size = New System.Drawing.Size(211, 23)
-        Me.CmCurrency.TabIndex = 323
-        '
-        'TxtChangeCurrency
-        '
-        Me.TxtChangeCurrency.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.TxtChangeCurrency.Enabled = False
-        Me.TxtChangeCurrency.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtChangeCurrency.Location = New System.Drawing.Point(116, 509)
-        Me.TxtChangeCurrency.MaxLength = 20
-        Me.TxtChangeCurrency.Name = "TxtChangeCurrency"
-        Me.TxtChangeCurrency.ReadOnly = True
-        Me.TxtChangeCurrency.Size = New System.Drawing.Size(70, 23)
-        Me.TxtChangeCurrency.TabIndex = 330
-        Me.TxtChangeCurrency.TabStop = False
-        Me.TxtChangeCurrency.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.TxtChangeCurrency.Visible = False
-        '
-        'LblChangeCurrency
-        '
-        Me.LblChangeCurrency.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.LblChangeCurrency.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblChangeCurrency.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblChangeCurrency.Location = New System.Drawing.Point(10, 509)
-        Me.LblChangeCurrency.Name = "LblChangeCurrency"
-        Me.LblChangeCurrency.Size = New System.Drawing.Size(100, 23)
-        Me.LblChangeCurrency.TabIndex = 329
-        Me.LblChangeCurrency.Text = "通貨"
-        Me.LblChangeCurrency.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.LblChangeCurrency.Visible = False
-        '
-        'TxtIDRCurrency
-        '
-        Me.TxtIDRCurrency.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.TxtIDRCurrency.Enabled = False
-        Me.TxtIDRCurrency.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtIDRCurrency.Location = New System.Drawing.Point(117, 479)
-        Me.TxtIDRCurrency.MaxLength = 20
-        Me.TxtIDRCurrency.Name = "TxtIDRCurrency"
-        Me.TxtIDRCurrency.ReadOnly = True
-        Me.TxtIDRCurrency.Size = New System.Drawing.Size(70, 23)
-        Me.TxtIDRCurrency.TabIndex = 328
-        Me.TxtIDRCurrency.TabStop = False
-        Me.TxtIDRCurrency.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.TxtIDRCurrency.Visible = False
-        '
-        'LblIDRCurrency
-        '
-        Me.LblIDRCurrency.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.LblIDRCurrency.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblIDRCurrency.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblIDRCurrency.Location = New System.Drawing.Point(11, 479)
-        Me.LblIDRCurrency.Name = "LblIDRCurrency"
-        Me.LblIDRCurrency.Size = New System.Drawing.Size(100, 23)
-        Me.LblIDRCurrency.TabIndex = 327
-        Me.LblIDRCurrency.Text = "通貨"
-        Me.LblIDRCurrency.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.LblIDRCurrency.Visible = False
-        '
-        'TxtVat
-        '
-        Me.TxtVat.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.TxtVat.Enabled = False
-        Me.TxtVat.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtVat.Location = New System.Drawing.Point(116, 437)
-        Me.TxtVat.MaxLength = 10
-        Me.TxtVat.Name = "TxtVat"
-        Me.TxtVat.ReadOnly = True
-        Me.TxtVat.Size = New System.Drawing.Size(71, 23)
-        Me.TxtVat.TabIndex = 331
-        Me.TxtVat.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.TxtVat.Visible = False
-        '
-        'LblVat
-        '
-        Me.LblVat.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.LblVat.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblVat.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblVat.Location = New System.Drawing.Point(10, 437)
-        Me.LblVat.Name = "LblVat"
-        Me.LblVat.Size = New System.Drawing.Size(100, 23)
-        Me.LblVat.TabIndex = 332
-        Me.LblVat.Text = "VAT(%)"
-        Me.LblVat.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.LblVat.Visible = False
-        '
-        'TxtCurrencyVatAmount
-        '
-        Me.TxtCurrencyVatAmount.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.TxtCurrencyVatAmount.Enabled = False
-        Me.TxtCurrencyVatAmount.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtCurrencyVatAmount.Location = New System.Drawing.Point(298, 509)
-        Me.TxtCurrencyVatAmount.MaxLength = 10
-        Me.TxtCurrencyVatAmount.Name = "TxtCurrencyVatAmount"
-        Me.TxtCurrencyVatAmount.ReadOnly = True
-        Me.TxtCurrencyVatAmount.Size = New System.Drawing.Size(49, 23)
-        Me.TxtCurrencyVatAmount.TabIndex = 333
-        Me.TxtCurrencyVatAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.TxtCurrencyVatAmount.Visible = False
-        '
-        'LblCurrencyVatAmount
-        '
-        Me.LblCurrencyVatAmount.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.LblCurrencyVatAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblCurrencyVatAmount.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblCurrencyVatAmount.Location = New System.Drawing.Point(192, 509)
-        Me.LblCurrencyVatAmount.Name = "LblCurrencyVatAmount"
-        Me.LblCurrencyVatAmount.Size = New System.Drawing.Size(100, 23)
-        Me.LblCurrencyVatAmount.TabIndex = 334
-        Me.LblCurrencyVatAmount.Text = "VAT"
-        Me.LblCurrencyVatAmount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.LblCurrencyVatAmount.Visible = False
-        '
-        'TxtOrderCurrencyAmount
-        '
-        Me.TxtOrderCurrencyAmount.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.TxtOrderCurrencyAmount.Enabled = False
-        Me.TxtOrderCurrencyAmount.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtOrderCurrencyAmount.Location = New System.Drawing.Point(459, 509)
-        Me.TxtOrderCurrencyAmount.MaxLength = 10
-        Me.TxtOrderCurrencyAmount.Name = "TxtOrderCurrencyAmount"
-        Me.TxtOrderCurrencyAmount.ReadOnly = True
-        Me.TxtOrderCurrencyAmount.Size = New System.Drawing.Size(115, 23)
-        Me.TxtOrderCurrencyAmount.TabIndex = 335
-        Me.TxtOrderCurrencyAmount.TabStop = False
-        Me.TxtOrderCurrencyAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.TxtOrderCurrencyAmount.Visible = False
-        '
-        'LblOrderCurrencyAmount
-        '
-        Me.LblOrderCurrencyAmount.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.LblOrderCurrencyAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblOrderCurrencyAmount.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblOrderCurrencyAmount.Location = New System.Drawing.Point(353, 509)
-        Me.LblOrderCurrencyAmount.Name = "LblOrderCurrencyAmount"
-        Me.LblOrderCurrencyAmount.Size = New System.Drawing.Size(100, 23)
-        Me.LblOrderCurrencyAmount.TabIndex = 336
-        Me.LblOrderCurrencyAmount.Text = "受注金額"
-        Me.LblOrderCurrencyAmount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.LblOrderCurrencyAmount.Visible = False
-        '
-        'txtProfitmarginRate
-        '
-        Me.txtProfitmarginRate.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.txtProfitmarginRate.Enabled = False
-        Me.txtProfitmarginRate.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.txtProfitmarginRate.Location = New System.Drawing.Point(937, 481)
-        Me.txtProfitmarginRate.MaxLength = 10
-        Me.txtProfitmarginRate.Name = "txtProfitmarginRate"
-        Me.txtProfitmarginRate.ReadOnly = True
-        Me.txtProfitmarginRate.Size = New System.Drawing.Size(187, 23)
-        Me.txtProfitmarginRate.TabIndex = 337
-        Me.txtProfitmarginRate.TabStop = False
-        Me.txtProfitmarginRate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'lblProfitmarginRate
-        '
-        Me.lblProfitmarginRate.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.lblProfitmarginRate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lblProfitmarginRate.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.lblProfitmarginRate.Location = New System.Drawing.Point(780, 481)
-        Me.lblProfitmarginRate.Name = "lblProfitmarginRate"
-        Me.lblProfitmarginRate.Size = New System.Drawing.Size(152, 23)
-        Me.lblProfitmarginRate.TabIndex = 338
-        Me.lblProfitmarginRate.Text = "利益率"
-        Me.lblProfitmarginRate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'txtPurchasecost
-        '
-        Me.txtPurchasecost.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.txtPurchasecost.Enabled = False
-        Me.txtPurchasecost.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.txtPurchasecost.Location = New System.Drawing.Point(574, 426)
-        Me.txtPurchasecost.MaxLength = 10
-        Me.txtPurchasecost.Name = "txtPurchasecost"
-        Me.txtPurchasecost.ReadOnly = True
-        Me.txtPurchasecost.Size = New System.Drawing.Size(187, 23)
-        Me.txtPurchasecost.TabIndex = 341
-        Me.txtPurchasecost.TabStop = False
-        Me.txtPurchasecost.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'lblPurchasecost
-        '
-        Me.lblPurchasecost.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.lblPurchasecost.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lblPurchasecost.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.lblPurchasecost.Location = New System.Drawing.Point(418, 426)
-        Me.lblPurchasecost.Name = "lblPurchasecost"
-        Me.lblPurchasecost.Size = New System.Drawing.Size(152, 23)
-        Me.lblPurchasecost.TabIndex = 342
-        Me.lblPurchasecost.Text = "仕入原価（c）"
-        Me.lblPurchasecost.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'TxtTotal
-        '
-        Me.TxtTotal.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.TxtTotal.Enabled = False
-        Me.TxtTotal.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtTotal.Location = New System.Drawing.Point(574, 397)
-        Me.TxtTotal.MaxLength = 10
-        Me.TxtTotal.Name = "TxtTotal"
-        Me.TxtTotal.ReadOnly = True
-        Me.TxtTotal.Size = New System.Drawing.Size(187, 23)
-        Me.TxtTotal.TabIndex = 339
-        Me.TxtTotal.TabStop = False
-        Me.TxtTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'LblOrderAmount
-        '
-        Me.LblOrderAmount.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.LblOrderAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblOrderAmount.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblOrderAmount.Location = New System.Drawing.Point(418, 397)
-        Me.LblOrderAmount.Name = "LblOrderAmount"
-        Me.LblOrderAmount.Size = New System.Drawing.Size(152, 23)
-        Me.LblOrderAmount.TabIndex = 340
-        Me.LblOrderAmount.Text = "売上金額（l）"
-        Me.LblOrderAmount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'TxtGrossProfit
-        '
-        Me.TxtGrossProfit.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.TxtGrossProfit.Enabled = False
-        Me.TxtGrossProfit.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtGrossProfit.Location = New System.Drawing.Point(574, 453)
-        Me.TxtGrossProfit.MaxLength = 10
-        Me.TxtGrossProfit.Name = "TxtGrossProfit"
-        Me.TxtGrossProfit.ReadOnly = True
-        Me.TxtGrossProfit.Size = New System.Drawing.Size(187, 23)
-        Me.TxtGrossProfit.TabIndex = 343
-        Me.TxtGrossProfit.TabStop = False
-        Me.TxtGrossProfit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'LblGrossProfit
-        '
-        Me.LblGrossProfit.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.LblGrossProfit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblGrossProfit.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblGrossProfit.Location = New System.Drawing.Point(418, 454)
-        Me.LblGrossProfit.Name = "LblGrossProfit"
-        Me.LblGrossProfit.Size = New System.Drawing.Size(152, 23)
-        Me.LblGrossProfit.TabIndex = 344
-        Me.LblGrossProfit.Text = "粗利額（o）"
-        Me.LblGrossProfit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'txtGrossmarginRate
-        '
-        Me.txtGrossmarginRate.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.txtGrossmarginRate.Enabled = False
-        Me.txtGrossmarginRate.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.txtGrossmarginRate.Location = New System.Drawing.Point(574, 481)
-        Me.txtGrossmarginRate.MaxLength = 10
-        Me.txtGrossmarginRate.Name = "txtGrossmarginRate"
-        Me.txtGrossmarginRate.ReadOnly = True
-        Me.txtGrossmarginRate.Size = New System.Drawing.Size(187, 23)
-        Me.txtGrossmarginRate.TabIndex = 345
-        Me.txtGrossmarginRate.TabStop = False
-        Me.txtGrossmarginRate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'lblGrossmargin
-        '
-        Me.lblGrossmargin.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.lblGrossmargin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lblGrossmargin.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.lblGrossmargin.Location = New System.Drawing.Point(418, 481)
-        Me.lblGrossmargin.Name = "lblGrossmargin"
-        Me.lblGrossmargin.Size = New System.Drawing.Size(152, 23)
-        Me.lblGrossmargin.TabIndex = 346
-        Me.lblGrossmargin.Text = "粗利率（p）"
-        Me.lblGrossmargin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Order
         '
