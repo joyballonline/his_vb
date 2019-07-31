@@ -901,11 +901,11 @@ Public Class UtilClass
         Dim ciCurrent As New System.Globalization.CultureInfo(CultureInfo.CurrentCulture.Name.ToString)
         Dim dateFormat As DateTime = DateTime.Parse(prmDatetime.ToString, ciCurrent, System.Globalization.DateTimeStyles.AssumeLocal)
 
-        Dim changeFormat As String = dateFormat.ToString("yyyy/MM/dd HH:mm:ss")
 
         Dim ciJP As New System.Globalization.CultureInfo("ja-JP")
-        Dim rtnDatetime As DateTime = DateTime.Parse(changeFormat, ciJP, System.Globalization.DateTimeStyles.AssumeLocal)
+        Dim changeFormat As String = dateFormat.ToString("yyyy/MM/dd HH:mm:ss", System.Globalization.DateTimeFormatInfo.InvariantInfo)
 
+        'Dim rtnDatetime As DateTime = DateTime.Parse(changeFormat, ciJP, System.Globalization.DateTimeStyles.AssumeLocal)
 
         'ì˙ñ{ÇÃå`éÆÇ…èëÇ´ä∑Ç¶ÇÈ
         Return changeFormat
