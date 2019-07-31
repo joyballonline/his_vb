@@ -22,6 +22,9 @@ Partial Class SupplierSearch
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.BtnSearch = New System.Windows.Forms.Button()
         Me.Search = New System.Windows.Forms.TextBox()
         Me.BtnBack = New System.Windows.Forms.Button()
@@ -70,7 +73,7 @@ Partial Class SupplierSearch
         Me.Search.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.Search.Location = New System.Drawing.Point(111, 6)
         Me.Search.Name = "Search"
-        Me.Search.Size = New System.Drawing.Size(100, 22)
+        Me.Search.Size = New System.Drawing.Size(100, 37)
         Me.Search.TabIndex = 1
         '
         'BtnBack
@@ -99,7 +102,7 @@ Partial Class SupplierSearch
         Me.LblString.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblString.Location = New System.Drawing.Point(12, 9)
         Me.LblString.Name = "LblString"
-        Me.LblString.Size = New System.Drawing.Size(37, 15)
+        Me.LblString.Size = New System.Drawing.Size(73, 30)
         Me.LblString.TabIndex = 24
         Me.LblString.Text = "文字"
         '
@@ -138,18 +141,30 @@ Partial Class SupplierSearch
         '
         '関税率
         '
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle1.Format = "N1"
+        DataGridViewCellStyle1.NullValue = "0.0"
+        Me.関税率.DefaultCellStyle = DataGridViewCellStyle1
         Me.関税率.HeaderText = "関税率"
         Me.関税率.Name = "関税率"
         Me.関税率.ReadOnly = True
         '
         '前払法人税率
         '
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle2.Format = "N1"
+        DataGridViewCellStyle2.NullValue = "0.0"
+        Me.前払法人税率.DefaultCellStyle = DataGridViewCellStyle2
         Me.前払法人税率.HeaderText = "前払法人税率"
         Me.前払法人税率.Name = "前払法人税率"
         Me.前払法人税率.ReadOnly = True
         '
         '輸送費率
         '
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle3.Format = "N1"
+        DataGridViewCellStyle3.NullValue = "0.0"
+        Me.輸送費率.DefaultCellStyle = DataGridViewCellStyle3
         Me.輸送費率.HeaderText = "輸送費率"
         Me.輸送費率.Name = "輸送費率"
         Me.輸送費率.ReadOnly = True

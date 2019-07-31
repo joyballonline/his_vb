@@ -222,9 +222,9 @@ Public Class SupplierSearch
                 Dgv_Supplier.Rows(i).Cells("更新者").Value = ds.Tables(RS).Rows(i)("更新者")
                 Dgv_Supplier.Rows(i).Cells("更新日").Value = ds.Tables(RS).Rows(i)("更新日")
                 Dgv_Supplier.Rows(i).Cells("担当者役職").Value = ds.Tables(RS).Rows(i)("担当者役職")
-                Dgv_Supplier.Rows(i).Cells("関税率").Value = ds.Tables(RS).Rows(i)("関税率")
-                Dgv_Supplier.Rows(i).Cells("前払法人税率").Value = ds.Tables(RS).Rows(i)("前払法人税率")
-                Dgv_Supplier.Rows(i).Cells("輸送費率").Value = ds.Tables(RS).Rows(i)("輸送費率")
+                Dgv_Supplier.Rows(i).Cells("関税率").Value = ds.Tables(RS).Rows(i)("関税率") * 100
+                Dgv_Supplier.Rows(i).Cells("前払法人税率").Value = ds.Tables(RS).Rows(i)("前払法人税率") * 100
+                Dgv_Supplier.Rows(i).Cells("輸送費率").Value = ds.Tables(RS).Rows(i)("輸送費率") * 100
             Next
 
         Catch ue As UsrDefException
