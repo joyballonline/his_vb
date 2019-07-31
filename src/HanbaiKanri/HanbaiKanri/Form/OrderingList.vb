@@ -257,8 +257,8 @@ Public Class OrderingList
                 End If
 
                 '数字形式
-                DgvHtyhd.Columns("仕入金額_外貨").DefaultCellStyle.Format = "N0"
-                DgvHtyhd.Columns("仕入金額").DefaultCellStyle.Format = "N0"
+                DgvHtyhd.Columns("仕入金額_外貨").DefaultCellStyle.Format = "N2"
+                DgvHtyhd.Columns("仕入金額").DefaultCellStyle.Format = "N2"
 
 
                 '発注基本を取得
@@ -460,14 +460,14 @@ Public Class OrderingList
 
 
                 '数字形式
-                DgvHtyhd.Columns("仕入値").DefaultCellStyle.Format = "N0"
-                DgvHtyhd.Columns("発注数量").DefaultCellStyle.Format = "N0"
-                DgvHtyhd.Columns("仕入数量").DefaultCellStyle.Format = "N0"
-                DgvHtyhd.Columns("発注残数").DefaultCellStyle.Format = "N0"
-                DgvHtyhd.Columns("間接費").DefaultCellStyle.Format = "N0"
-                DgvHtyhd.Columns("仕入金額").DefaultCellStyle.Format = "N0"
-                DgvHtyhd.Columns("入庫数").DefaultCellStyle.Format = "N0"
-                DgvHtyhd.Columns("未入庫数").DefaultCellStyle.Format = "N0"
+                DgvHtyhd.Columns("仕入値").DefaultCellStyle.Format = "N2"
+                DgvHtyhd.Columns("発注数量").DefaultCellStyle.Format = "N2"
+                DgvHtyhd.Columns("仕入数量").DefaultCellStyle.Format = "N2"
+                DgvHtyhd.Columns("発注残数").DefaultCellStyle.Format = "N2"
+                DgvHtyhd.Columns("間接費").DefaultCellStyle.Format = "N2"
+                DgvHtyhd.Columns("仕入金額").DefaultCellStyle.Format = "N2"
+                DgvHtyhd.Columns("入庫数").DefaultCellStyle.Format = "N2"
+                DgvHtyhd.Columns("未入庫数").DefaultCellStyle.Format = "N2"
 
 
                 Dim dsHanyou As DataSet
