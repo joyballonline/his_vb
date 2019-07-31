@@ -142,10 +142,11 @@ Public Class OrderRemainingList
         End Try
 
         '数字形式
-        DgvCymndt.Columns("数量").DefaultCellStyle.Format = "N0"
-        DgvCymndt.Columns("単価").DefaultCellStyle.Format = "N0"
-        DgvCymndt.Columns("計").DefaultCellStyle.Format = "N0"
-        DgvCymndt.Columns("受注残数").DefaultCellStyle.Format = "N0"
+        DgvCymndt.Columns("数量").DefaultCellStyle.Format = "N2"
+        DgvCymndt.Columns("単価").DefaultCellStyle.Format = "N2"
+        DgvCymndt.Columns("ＶＡＴ").DefaultCellStyle.Format = "N2"
+        DgvCymndt.Columns("計").DefaultCellStyle.Format = "N2"
+        DgvCymndt.Columns("受注残数").DefaultCellStyle.Format = "N2"
 
     End Sub
 
