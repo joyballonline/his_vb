@@ -543,10 +543,6 @@ Public Class Ordering
         If dsHattyu.Tables(RS).Rows(0)("備考") IsNot DBNull.Value Then
             TxtPurchaseRemark.Text = dsHattyu.Tables(RS).Rows(0)("備考")
         End If
-        If dsHattyu.Tables(RS).Rows(0)("仕入金額") IsNot DBNull.Value Then
-            Dim tmp_cur As Decimal = dsHattyu.Tables(RS).Rows(0)("仕入金額")
-            TxtPurchaseAmount.Text = Decimal.Parse(tmp_cur).ToString("N0")
-        End If
         If dsHattyu.Tables(RS).Rows(0)("見積備考") IsNot DBNull.Value Then
             TxtQuoteRemarks.Text = dsHattyu.Tables(RS).Rows(0)("見積備考")
         End If
@@ -584,16 +580,19 @@ Public Class Ordering
         TxtIDRCurrency.Text = setBaseCurrency()
         setChangeCurrency()
 
+        Dim tmp_cur As Decimal = 0
+
         If dsHattyu.Tables(RS).Rows(0)("仕入金額") IsNot DBNull.Value Then
-            Dim tmp_cur As Decimal = dsHattyu.Tables(RS).Rows(0)("仕入金額")
-            TxtPurchaseAmount.Text = Decimal.Parse(tmp_cur).ToString("N0")
+            tmp_cur = dsHattyu.Tables(RS).Rows(0)("仕入金額")
+            TxtPurchaseAmount.Text = Decimal.Parse(tmp_cur).ToString("N2")
         End If
 
         If dsHattyu.Tables(RS).Rows(0)("仕入金額_外貨") IsNot DBNull.Value Then
-            Dim tmp_cur As Decimal = dsHattyu.Tables(RS).Rows(0)("仕入金額_外貨")
-            TxtPurchaseAmount2.Text = Decimal.Parse(tmp_cur).ToString("N0")
+            tmp_cur = dsHattyu.Tables(RS).Rows(0)("仕入金額_外貨")
+            TxtPurchaseAmount2.Text = Decimal.Parse(tmp_cur).ToString("N2")
         End If
 
+        tmp_cur = 0
         For i As Integer = 0 To dsHattyudt.Tables(RS).Rows.Count - 1
             DgvItemList.Rows.Add()
             DgvItemList.Rows(i).Cells("仕入区分").Value = Integer.Parse(dsHattyudt.Tables(RS).Rows(i)("仕入区分"))
@@ -629,7 +628,11 @@ Public Class Ordering
             DgvItemList.Rows(i).Cells("入庫数").Value = dsHattyudt.Tables(RS).Rows(i)("入庫数")
             DgvItemList.Rows(i).Cells("未入庫数").Value = dsHattyudt.Tables(RS).Rows(i)("未入庫数")
 
+            tmp_cur = tmp_cur + (dsHattyudt.Tables(RS).Rows(i)("発注数量") * dsHattyudt.Tables(RS).Rows(i)("仕入値"))
         Next
+
+        txtPurchasecost.Text = Decimal.Parse(tmp_cur).ToString("N2")
+
 
         '行番号の振り直し
         Dim rowNo As Integer = DgvItemList.Rows.Count()
@@ -780,8 +783,9 @@ Public Class Ordering
         If e.RowIndex > -1 Then
 
             '発注金額をクリア
-            TxtPurchaseAmount.Text = 0
-            TxtPurchaseAmount2.Text = 0
+            txtPurchasecost.Text = 0.ToString("N0")
+            TxtPurchaseAmount.Text = 0.ToString("N0")
+            TxtPurchaseAmount2.Text = 0.ToString("N0")
 
 
             '各項目の属性チェック
@@ -2128,10 +2132,9 @@ Public Class Ordering
             CurrencyTotal += DgvItemList.Rows(c).Cells("仕入金額_外貨").Value
         Next
 
-        txtPurchasecost.Text = Purchasecost.ToString("N0")     '仕入原価
-        TxtPurchaseAmount.Text = PurchaseTotal.ToString("N0")
-
-        TxtPurchaseAmount2.Text = CurrencyTotal.ToString("N0")
+        txtPurchasecost.Text = Purchasecost.ToString("N2")     '仕入原価
+        TxtPurchaseAmount.Text = PurchaseTotal.ToString("N2")
+        TxtPurchaseAmount2.Text = CurrencyTotal.ToString("N2")
 
     End Sub
 
