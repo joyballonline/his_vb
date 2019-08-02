@@ -228,11 +228,20 @@ Public Class Cymn
         TxtInput.Text = frmC01F10_Login.loginValue.TantoNM
         TxtPaymentTerms.Text = ds1.Tables(RS).Rows(0)("支払条件").ToString
         TxtQuoteRemarks.Text = ds1.Tables(RS).Rows(0)("備考").ToString
-        TxtVat.Text = ds1.Tables(RS).Rows(0)("ＶＡＴ").ToString
-        TxtOrderAmount.Text = ds1.Tables(RS).Rows(0)("見積金額").ToString
-        TxtPurchaseAmount.Text = ds1.Tables(RS).Rows(0)("仕入金額").ToString
-        TxtGrossProfit.Text = ds1.Tables(RS).Rows(0)("粗利額").ToString
-        TxtVatAmount.Text = ((TxtOrderAmount.Text * TxtVat.Text) / 100).ToString("F0")
+
+        Dim decTmp As Decimal = ds1.Tables(RS).Rows(0)("ＶＡＴ").ToString
+        TxtVat.Text = decTmp.ToString("N1")
+
+        decTmp = ds1.Tables(RS).Rows(0)("見積金額").ToString
+        TxtOrderAmount.Text = decTmp.ToString("N2")
+
+        decTmp = ds1.Tables(RS).Rows(0)("仕入金額").ToString
+        TxtPurchaseAmount.Text = decTmp.ToString("N2")
+
+        decTmp = ds1.Tables(RS).Rows(0)("粗利額").ToString
+        TxtGrossProfit.Text = decTmp.ToString("N2")
+
+        TxtVatAmount.Text = ((TxtOrderAmount.Text * TxtVat.Text) / 100).ToString("N2")
 
         '通貨・レート情報設定
         createCurrencyCombobox(ds1.Tables(RS).Rows(0)("通貨").ToString)
@@ -283,11 +292,11 @@ Public Class Cymn
             DgvItemList.Rows(index).Cells("仕入レート").Value = ds3.Tables(RS).Rows(index)("仕入レート")
             DgvItemList.Rows(index).Cells("仕入単価_外貨").Value = ds3.Tables(RS).Rows(index)("仕入単価_外貨")
             DgvItemList.Rows(index).Cells("仕入原価").Value = ds3.Tables(RS).Rows(index)("仕入原価")
-            DgvItemList.Rows(index).Cells("関税率").Value = ds3.Tables(RS).Rows(index)("関税率")
+            DgvItemList.Rows(index).Cells("関税率").Value = ds3.Tables(RS).Rows(index)("関税率") * 100
             DgvItemList.Rows(index).Cells("関税額").Value = ds3.Tables(RS).Rows(index)("関税額")
-            DgvItemList.Rows(index).Cells("前払法人税率").Value = ds3.Tables(RS).Rows(index)("前払法人税率")
+            DgvItemList.Rows(index).Cells("前払法人税率").Value = ds3.Tables(RS).Rows(index)("前払法人税率") * 100
             DgvItemList.Rows(index).Cells("前払法人税額").Value = ds3.Tables(RS).Rows(index)("前払法人税額")
-            DgvItemList.Rows(index).Cells("輸送費率").Value = ds3.Tables(RS).Rows(index)("輸送費率")
+            DgvItemList.Rows(index).Cells("輸送費率").Value = ds3.Tables(RS).Rows(index)("輸送費率") * 100
             DgvItemList.Rows(index).Cells("輸送費額").Value = ds3.Tables(RS).Rows(index)("輸送費額")
             DgvItemList.Rows(index).Cells("仕入金額").Value = ds3.Tables(RS).Rows(index)("仕入金額")
             DgvItemList.Rows(index).Cells("売単価").Value = ds3.Tables(RS).Rows(index)("売単価")
@@ -313,7 +322,7 @@ Public Class Cymn
             Total += tmp4 * PPH
         Next
 
-        TxtPph.Text = Total
+        TxtPph.Text = Total.ToString("N2")
 
         '日付のMinDate設定
         DtpOrderDate.MinDate = DtpQuoteDate.Value
@@ -662,11 +671,11 @@ Public Class Cymn
                     Sql2 += ", '" & RevoveChars(DgvItemList.Rows(i).Cells("備考").Value.ToString) & "'"   '備考
                     Sql2 += ", '" & frmC01F10_Login.loginValue.TantoNM & "'"       '更新者
                     Sql2 += ", '" & UtilClass.formatDatetime(dtNow) & "'"      '登録日
-                    Sql2 += ", " & formatStringToNumber(DgvItemList.Rows(i).Cells("関税率").Value.ToString)             '関税率
+                    Sql2 += ", " & formatStringToNumber(DgvItemList.Rows(i).Cells("関税率").Value.ToString / 100)             '関税率
                     Sql2 += ", " & formatStringToNumber(DgvItemList.Rows(i).Cells("関税額").Value.ToString)             '関税額
-                    Sql2 += ", " & formatStringToNumber(DgvItemList.Rows(i).Cells("前払法人税率").Value.ToString)       '前払法人税率
+                    Sql2 += ", " & formatStringToNumber(DgvItemList.Rows(i).Cells("前払法人税率").Value.ToString / 100)       '前払法人税率
                     Sql2 += ", " & formatStringToNumber(DgvItemList.Rows(i).Cells("前払法人税額").Value.ToString)       '前払法人税額
-                    Sql2 += ", " & formatStringToNumber(DgvItemList.Rows(i).Cells("輸送費率").Value.ToString)         '輸送費率
+                    Sql2 += ", " & formatStringToNumber(DgvItemList.Rows(i).Cells("輸送費率").Value.ToString / 100)         '輸送費率
                     Sql2 += ", " & formatStringToNumber(DgvItemList.Rows(i).Cells("輸送費額").Value.ToString)         '輸送費額
                     Sql2 += ", " & formatStringToNumber(DgvItemList.Rows(i).Cells("仕入原価").Value.ToString)         '仕入原価
                     Sql2 += ", " & formatStringToNumber(DgvItemList.Rows(i).Cells("仕入金額").Value.ToString)         '仕入金額
@@ -1091,11 +1100,11 @@ Public Class Cymn
                     Sql += formatStringToNumber(tbl.Rows(i)("仕入通貨")) '仕入通貨
                     Sql += "', '"
                     Sql += UtilClass.formatNumberF10(strRate)  '仕入レート 受注日で計算し直したデータを入れる
-                    Sql += "', " & formatStringToNumber(tbl.Rows(i)("関税率"))             '関税率
+                    Sql += "', " & formatStringToNumber(tbl.Rows(i)("関税率") / 100)             '関税率
                     Sql += ", " & formatStringToNumber(tbl.Rows(i)("関税額"))             '関税額
-                    Sql += ", " & formatStringToNumber(tbl.Rows(i)("前払法人税率"))       '前払法人税率
+                    Sql += ", " & formatStringToNumber(tbl.Rows(i)("前払法人税率") / 100)       '前払法人税率
                     Sql += ", " & formatStringToNumber(tbl.Rows(i)("前払法人税額"))       '前払法人税額
-                    Sql += ", " & formatStringToNumber(tbl.Rows(i)("輸送費率"))         '輸送費率
+                    Sql += ", " & formatStringToNumber(tbl.Rows(i)("輸送費率") / 100)         '輸送費率
                     Sql += ", " & formatStringToNumber(tbl.Rows(i)("輸送費額"))         '輸送費額
 
 
@@ -1589,13 +1598,13 @@ Public Class Cymn
         Dim sumVal As Decimal = IIf(TxtOrderAmount.Text <> "", TxtOrderAmount.Text, 0)
         Dim QuoteCurrencyTotal As Decimal = 0       '見積金額_外貨
 
-        TxtCurrencyVatAmount.Text = (vatVal * currencyVal).ToString("F0")
+        TxtCurrencyVatAmount.Text = (vatVal * currencyVal).ToString("N2")
         'TxtCurrencyOrderTotal.Text = (sumVal * currencyVal).ToString("F0")
 
         For c As Integer = 0 To DgvItemList.Rows.Count - 1
             QuoteCurrencyTotal += DgvItemList.Rows(c).Cells("見積金額_外貨").Value
         Next
-        TxtCurrencyOrderTotal.Text = QuoteCurrencyTotal.ToString("F0")
+        TxtCurrencyOrderTotal.Text = QuoteCurrencyTotal.ToString("N2")
     End Sub
 
     '在庫マスタから現在庫数を取得
