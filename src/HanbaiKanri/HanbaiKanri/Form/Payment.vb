@@ -180,16 +180,16 @@ Public Class Payment
 
 
         '数字形式
-        DgvSupplier.Columns("買掛残高").DefaultCellStyle.Format = "N0"
+        DgvSupplier.Columns("買掛残高").DefaultCellStyle.Format = "N2"
 
-        DgvHistory.Columns("支払済支払金額計").DefaultCellStyle.Format = "N0"
+        DgvHistory.Columns("支払済支払金額計").DefaultCellStyle.Format = "N2"
 
-        DgvPayment.Columns("入力支払金額").DefaultCellStyle.Format = "N0"
+        DgvPayment.Columns("入力支払金額").DefaultCellStyle.Format = "N2"
 
-        DgvKikeInfo.Columns("買掛金額").DefaultCellStyle.Format = "N0"
-        DgvKikeInfo.Columns("買掛情報支払金額計").DefaultCellStyle.Format = "N0"
-        DgvKikeInfo.Columns("買掛情報買掛残高").DefaultCellStyle.Format = "N0"
-        DgvKikeInfo.Columns("支払金額").DefaultCellStyle.Format = "N0"
+        DgvKikeInfo.Columns("買掛金額").DefaultCellStyle.Format = "N2"
+        DgvKikeInfo.Columns("買掛情報支払金額計").DefaultCellStyle.Format = "N2"
+        DgvKikeInfo.Columns("買掛情報買掛残高").DefaultCellStyle.Format = "N2"
+        DgvKikeInfo.Columns("支払金額").DefaultCellStyle.Format = "N2"
 
     End Sub
 
