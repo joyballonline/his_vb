@@ -125,10 +125,10 @@ Public Class DepositList
         DgvCustomer.Columns("売掛残高").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
         '数字形式
-        DgvCustomer.Columns("請求金額残_外貨").DefaultCellStyle.Format = "N0"
-        DgvCustomer.Columns("売掛残高_外貨").DefaultCellStyle.Format = "N0"
-        DgvCustomer.Columns("請求金額残").DefaultCellStyle.Format = "N0"
-        DgvCustomer.Columns("売掛残高").DefaultCellStyle.Format = "N0"
+        DgvCustomer.Columns("請求金額残_外貨").DefaultCellStyle.Format = "N2"
+        DgvCustomer.Columns("売掛残高_外貨").DefaultCellStyle.Format = "N2"
+        DgvCustomer.Columns("請求金額残").DefaultCellStyle.Format = "N2"
+        DgvCustomer.Columns("売掛残高").DefaultCellStyle.Format = "N2"
 
         '得意先の一覧を取得
         For i As Integer = 0 To dsCustomer.Tables(RS).Rows.Count - 1
