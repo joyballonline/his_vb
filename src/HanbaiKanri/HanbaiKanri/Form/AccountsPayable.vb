@@ -494,7 +494,7 @@ Public Class AccountsPayable
             Sql += "', '"
             Sql += DgvAdd.Rows(0).Cells("買掛区分").Value.ToString '買掛区分
             Sql += "', '"
-            Sql += strFormatDate(DtpAPDate.Value) '買掛日
+            Sql += UtilClass.strFormatDate(DtpAPDate.Value) '買掛日
             Sql += "', '"
             Sql += dsHattyu.Tables(RS).Rows(0)("発注番号").ToString '発注番号
             Sql += "', '"
@@ -522,7 +522,7 @@ Public Class AccountsPayable
             Sql += "', '"
             Sql += strToday '更新日
             Sql += "', '"
-            Sql += strFormatDate(DtpPaymentDate.Value) '支払予定日
+            Sql += UtilClass.strFormatDate(DtpPaymentDate.Value) '支払予定日
 
             Sql += "',"
             Sql += formatStringToNumber(BuyToHangAmountFC) '買掛金額計_外貨
@@ -691,34 +691,6 @@ Public Class AccountsPayable
         Sql += "会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql += txtParam
         Return _db.selectDB(Sql, RS, reccnt)
-    End Function
-
-    'どんなカルチャーであっても、日本の形式に変換する
-    Private Function strFormatDate(ByVal prmDate As String, Optional ByRef prmFormat As String = "yyyy/MM/dd") As String
-
-        'PCのカルチャーを取得し、それに応じてStringからDatetimeを作成
-        Dim ci As New System.Globalization.CultureInfo(CultureInfo.CurrentCulture.Name.ToString)
-        Dim dateFormat As DateTime = DateTime.Parse(prmDate, ci, System.Globalization.DateTimeStyles.AssumeLocal)
-
-        '日本の形式に書き換える
-        Return dateFormat.ToString(prmFormat)
-    End Function
-
-    'どんなカルチャーであっても、日本の形式に変換する
-    Private Function formatDatetime(ByVal prmDatetime As DateTime) As String
-
-        'PCのカルチャーを取得し、それに応じてStringからDatetimeを作成
-        Dim ciCurrent As New System.Globalization.CultureInfo(CultureInfo.CurrentCulture.Name.ToString)
-        Dim dateFormat As DateTime = DateTime.Parse(prmDatetime.ToString, ciCurrent, System.Globalization.DateTimeStyles.AssumeLocal)
-
-        Dim changeFormat As String = dateFormat.ToString("yyyy/MM/dd HH:mm:ss")
-
-        Dim ciJP As New System.Globalization.CultureInfo(CommonConst.CI_JP)
-        Dim rtnDatetime As DateTime = DateTime.Parse(changeFormat, ciJP, System.Globalization.DateTimeStyles.AssumeLocal)
-
-
-        '日本の形式に書き換える
-        Return changeFormat
     End Function
 
     'DGV内で指定列名(プルダウン)は一度のクリックで開く

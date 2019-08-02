@@ -1397,7 +1397,7 @@ Public Class Ordering
                 End If
 
                 Sql += ", '"
-                Sql += strFormatDate(DtpPurchaseDate.Value) '発注日
+                Sql += UtilClass.strFormatDate(DtpPurchaseDate.Value) '発注日
                 Sql += "', '"
                 Sql += dtNow '登録日
                 Sql += "', '"
@@ -1409,7 +1409,7 @@ Public Class Ordering
                 Sql += ", "
                 Sql += CbShippedBy.SelectedIndex.ToString '出荷方法
                 Sql += ", '"
-                Sql += strFormatDate(DtpShippedDate.Value) '出荷日
+                Sql += UtilClass.strFormatDate(DtpShippedDate.Value) '出荷日
                 Sql += "', '"
                 Sql += TxtSales.Tag '営業担当者コード
                 Sql += "', '"
@@ -1987,33 +1987,6 @@ Public Class Ordering
 
     End Function
 
-    'どんなカルチャーであっても、日本の形式に変換する
-    Private Function strFormatDate(ByVal prmDate As String, Optional ByRef prmFormat As String = "yyyy/MM/dd") As String
-
-        'PCのカルチャーを取得し、それに応じてStringからDatetimeを作成
-        Dim ci As New System.Globalization.CultureInfo(CultureInfo.CurrentCulture.Name.ToString)
-        Dim dateFormat As DateTime = DateTime.Parse(prmDate, ci, System.Globalization.DateTimeStyles.AssumeLocal)
-
-        '日本の形式に書き換える
-        Return dateFormat.ToString(prmFormat)
-    End Function
-
-    'どんなカルチャーであっても、日本の形式に変換する
-    Private Function formatDatetime(ByVal prmDatetime As DateTime) As String
-
-        'PCのカルチャーを取得し、それに応じてStringからDatetimeを作成
-        Dim ciCurrent As New System.Globalization.CultureInfo(CultureInfo.CurrentCulture.Name.ToString)
-        Dim dateFormat As DateTime = DateTime.Parse(prmDatetime.ToString, ciCurrent, System.Globalization.DateTimeStyles.AssumeLocal)
-
-        Dim changeFormat As String = dateFormat.ToString("yyyy/MM/dd HH:mm:ss")
-
-        Dim ciJP As New System.Globalization.CultureInfo(CommonConst.CI_JP)
-        Dim rtnDatetime As DateTime = DateTime.Parse(changeFormat, ciJP, System.Globalization.DateTimeStyles.AssumeLocal)
-
-
-        '日本の形式に書き換える
-        Return changeFormat
-    End Function
 
     '発注日変更時、出荷日のMinDate及びValueを変更
     Private Sub DtpPurchaseDate_ValueChanged(sender As Object, e As EventArgs) Handles DtpPurchaseDate.ValueChanged
