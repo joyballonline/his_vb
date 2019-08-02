@@ -24,7 +24,6 @@ Partial Class BillingManagement
     Private Sub InitializeComponent()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -39,15 +38,11 @@ Partial Class BillingManagement
         Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LblAdd = New System.Windows.Forms.Label()
         Me.LblHistory = New System.Windows.Forms.Label()
         Me.LblCymndt = New System.Windows.Forms.Label()
         Me.DgvAdd = New System.Windows.Forms.DataGridView()
-        Me.AddNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.今回請求先 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.今回請求金額計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.今回備考1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.今回備考2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DgvHistory = New System.Windows.Forms.DataGridView()
         Me.No = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.請求番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -98,6 +93,11 @@ Partial Class BillingManagement
         Me.LblDepositDate = New System.Windows.Forms.Label()
         Me.TxtIDRCurrency = New System.Windows.Forms.TextBox()
         Me.LblIDRCurrency = New System.Windows.Forms.Label()
+        Me.AddNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.今回請求先 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.今回請求金額計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.今回備考1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.今回備考2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DgvAdd, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvHistory, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvCymndt, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -110,7 +110,7 @@ Partial Class BillingManagement
         Me.LblAdd.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblAdd.Location = New System.Drawing.Point(11, 387)
         Me.LblAdd.Name = "LblAdd"
-        Me.LblAdd.Size = New System.Drawing.Size(82, 15)
+        Me.LblAdd.Size = New System.Drawing.Size(163, 30)
         Me.LblAdd.TabIndex = 14
         Me.LblAdd.Text = "■今回請求"
         '
@@ -120,7 +120,7 @@ Partial Class BillingManagement
         Me.LblHistory.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblHistory.Location = New System.Drawing.Point(12, 253)
         Me.LblHistory.Name = "LblHistory"
-        Me.LblHistory.Size = New System.Drawing.Size(80, 15)
+        Me.LblHistory.Size = New System.Drawing.Size(160, 30)
         Me.LblHistory.TabIndex = 13
         Me.LblHistory.Text = "■請求済み"
         '
@@ -130,7 +130,7 @@ Partial Class BillingManagement
         Me.LblCymndt.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblCymndt.Location = New System.Drawing.Point(12, 118)
         Me.LblCymndt.Name = "LblCymndt"
-        Me.LblCymndt.Size = New System.Drawing.Size(82, 15)
+        Me.LblCymndt.Size = New System.Drawing.Size(163, 30)
         Me.LblCymndt.TabIndex = 12
         Me.LblCymndt.Text = "■受注明細"
         '
@@ -162,38 +162,6 @@ Partial Class BillingManagement
         Me.DgvAdd.RowTemplate.Height = 21
         Me.DgvAdd.Size = New System.Drawing.Size(1327, 40)
         Me.DgvAdd.TabIndex = 5
-        '
-        'AddNo
-        '
-        Me.AddNo.HeaderText = "No"
-        Me.AddNo.Name = "AddNo"
-        Me.AddNo.Width = 44
-        '
-        '今回請求先
-        '
-        Me.今回請求先.HeaderText = "請求先"
-        Me.今回請求先.Name = "今回請求先"
-        Me.今回請求先.Width = 66
-        '
-        '今回請求金額計
-        '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.今回請求金額計.DefaultCellStyle = DataGridViewCellStyle2
-        Me.今回請求金額計.HeaderText = "請求金額計"
-        Me.今回請求金額計.Name = "今回請求金額計"
-        Me.今回請求金額計.Width = 90
-        '
-        '今回備考1
-        '
-        Me.今回備考1.HeaderText = "備考1"
-        Me.今回備考1.Name = "今回備考1"
-        Me.今回備考1.Width = 60
-        '
-        '今回備考2
-        '
-        Me.今回備考2.HeaderText = "備考2"
-        Me.今回備考2.Name = "今回備考2"
-        Me.今回備考2.Width = 60
         '
         'DgvHistory
         '
@@ -229,31 +197,31 @@ Partial Class BillingManagement
         '
         Me.No.HeaderText = "No"
         Me.No.Name = "No"
-        Me.No.Width = 44
+        Me.No.Width = 82
         '
         '請求番号
         '
         Me.請求番号.HeaderText = "請求番号"
         Me.請求番号.Name = "請求番号"
-        Me.請求番号.Width = 78
+        Me.請求番号.Width = 151
         '
         '請求日
         '
         Me.請求日.HeaderText = "請求日"
         Me.請求日.Name = "請求日"
-        Me.請求日.Width = 66
+        Me.請求日.Width = 127
         '
         '請求区分
         '
         Me.請求区分.HeaderText = "請求区分"
         Me.請求区分.Name = "請求区分"
-        Me.請求区分.Width = 78
+        Me.請求区分.Width = 151
         '
         '請求先
         '
         Me.請求先.HeaderText = "請求先"
         Me.請求先.Name = "請求先"
-        Me.請求先.Width = 66
+        Me.請求先.Width = 127
         '
         '請求金額
         '
@@ -261,19 +229,19 @@ Partial Class BillingManagement
         Me.請求金額.DefaultCellStyle = DataGridViewCellStyle5
         Me.請求金額.HeaderText = "請求金額計"
         Me.請求金額.Name = "請求金額"
-        Me.請求金額.Width = 90
+        Me.請求金額.Width = 175
         '
         '備考1
         '
         Me.備考1.HeaderText = "備考1"
         Me.備考1.Name = "備考1"
-        Me.備考1.Width = 60
+        Me.備考1.Width = 115
         '
         '備考2
         '
         Me.備考2.HeaderText = "備考2"
         Me.備考2.Name = "備考2"
-        Me.備考2.Width = 60
+        Me.備考2.Width = 115
         '
         '請求済み受注番号
         '
@@ -323,25 +291,25 @@ Partial Class BillingManagement
         '
         Me.明細.HeaderText = "明細"
         Me.明細.Name = "明細"
-        Me.明細.Width = 54
+        Me.明細.Width = 103
         '
         'メーカー
         '
         Me.メーカー.HeaderText = "メーカー"
         Me.メーカー.Name = "メーカー"
-        Me.メーカー.Width = 67
+        Me.メーカー.Width = 129
         '
         '品名
         '
         Me.品名.HeaderText = "品名"
         Me.品名.Name = "品名"
-        Me.品名.Width = 54
+        Me.品名.Width = 103
         '
         '型式
         '
         Me.型式.HeaderText = "型式"
         Me.型式.Name = "型式"
-        Me.型式.Width = 54
+        Me.型式.Width = 103
         '
         '受注個数
         '
@@ -349,13 +317,13 @@ Partial Class BillingManagement
         Me.受注個数.DefaultCellStyle = DataGridViewCellStyle8
         Me.受注個数.HeaderText = "受注個数"
         Me.受注個数.Name = "受注個数"
-        Me.受注個数.Width = 78
+        Me.受注個数.Width = 151
         '
         '単位
         '
         Me.単位.HeaderText = "単位"
         Me.単位.Name = "単位"
-        Me.単位.Width = 54
+        Me.単位.Width = 103
         '
         '売上数量
         '
@@ -363,7 +331,7 @@ Partial Class BillingManagement
         Me.売上数量.DefaultCellStyle = DataGridViewCellStyle9
         Me.売上数量.HeaderText = "売上数量"
         Me.売上数量.Name = "売上数量"
-        Me.売上数量.Width = 78
+        Me.売上数量.Width = 151
         '
         '売上単価
         '
@@ -371,7 +339,7 @@ Partial Class BillingManagement
         Me.売上単価.DefaultCellStyle = DataGridViewCellStyle10
         Me.売上単価.HeaderText = "売上単価"
         Me.売上単価.Name = "売上単価"
-        Me.売上単価.Width = 78
+        Me.売上単価.Width = 151
         '
         '売上金額
         '
@@ -379,7 +347,7 @@ Partial Class BillingManagement
         Me.売上金額.DefaultCellStyle = DataGridViewCellStyle11
         Me.売上金額.HeaderText = "売上金額"
         Me.売上金額.Name = "売上金額"
-        Me.売上金額.Width = 78
+        Me.売上金額.Width = 151
         '
         'DgvCymn
         '
@@ -415,25 +383,25 @@ Partial Class BillingManagement
         '
         Me.受注番号.HeaderText = "受注番号"
         Me.受注番号.Name = "受注番号"
-        Me.受注番号.Width = 78
+        Me.受注番号.Width = 151
         '
         '受注日
         '
         Me.受注日.HeaderText = "受注日"
         Me.受注日.Name = "受注日"
-        Me.受注日.Width = 66
+        Me.受注日.Width = 127
         '
         '得意先
         '
         Me.得意先.HeaderText = "得意先"
         Me.得意先.Name = "得意先"
-        Me.得意先.Width = 66
+        Me.得意先.Width = 127
         '
         '客先番号
         '
         Me.客先番号.HeaderText = "客先番号"
         Me.客先番号.Name = "客先番号"
-        Me.客先番号.Width = 78
+        Me.客先番号.Width = 151
         '
         '受注金額
         '
@@ -441,7 +409,7 @@ Partial Class BillingManagement
         Me.受注金額.DefaultCellStyle = DataGridViewCellStyle14
         Me.受注金額.HeaderText = "受注金額"
         Me.受注金額.Name = "受注金額"
-        Me.受注金額.Width = 78
+        Me.受注金額.Width = 151
         '
         '請求金額計
         '
@@ -449,7 +417,7 @@ Partial Class BillingManagement
         Me.請求金額計.DefaultCellStyle = DataGridViewCellStyle15
         Me.請求金額計.HeaderText = "請求金額計"
         Me.請求金額計.Name = "請求金額計"
-        Me.請求金額計.Width = 90
+        Me.請求金額計.Width = 175
         '
         '請求残高
         '
@@ -457,7 +425,7 @@ Partial Class BillingManagement
         Me.請求残高.DefaultCellStyle = DataGridViewCellStyle16
         Me.請求残高.HeaderText = "請求残高"
         Me.請求残高.Name = "請求残高"
-        Me.請求残高.Width = 78
+        Me.請求残高.Width = 151
         '
         'DtpBillingDate
         '
@@ -468,7 +436,7 @@ Partial Class BillingManagement
         Me.DtpBillingDate.Location = New System.Drawing.Point(289, 383)
         Me.DtpBillingDate.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.DtpBillingDate.Name = "DtpBillingDate"
-        Me.DtpBillingDate.Size = New System.Drawing.Size(148, 22)
+        Me.DtpBillingDate.Size = New System.Drawing.Size(148, 37)
         Me.DtpBillingDate.TabIndex = 4
         Me.DtpBillingDate.TabStop = False
         Me.DtpBillingDate.Value = New Date(2019, 1, 1, 0, 0, 0, 0)
@@ -491,7 +459,7 @@ Partial Class BillingManagement
         Me.TxtRemarks1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtRemarks1.Location = New System.Drawing.Point(692, 457)
         Me.TxtRemarks1.Name = "TxtRemarks1"
-        Me.TxtRemarks1.Size = New System.Drawing.Size(644, 22)
+        Me.TxtRemarks1.Size = New System.Drawing.Size(644, 37)
         Me.TxtRemarks1.TabIndex = 260
         Me.TxtRemarks1.Visible = False
         '
@@ -525,7 +493,7 @@ Partial Class BillingManagement
         Me.TxtDgvHistoryCount.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtDgvHistoryCount.Location = New System.Drawing.Point(1270, 249)
         Me.TxtDgvHistoryCount.Name = "TxtDgvHistoryCount"
-        Me.TxtDgvHistoryCount.Size = New System.Drawing.Size(38, 22)
+        Me.TxtDgvHistoryCount.Size = New System.Drawing.Size(38, 37)
         Me.TxtDgvHistoryCount.TabIndex = 257
         Me.TxtDgvHistoryCount.TabStop = False
         Me.TxtDgvHistoryCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -548,7 +516,7 @@ Partial Class BillingManagement
         Me.TxtRemarks2.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtRemarks2.Location = New System.Drawing.Point(692, 482)
         Me.TxtRemarks2.Name = "TxtRemarks2"
-        Me.TxtRemarks2.Size = New System.Drawing.Size(644, 22)
+        Me.TxtRemarks2.Size = New System.Drawing.Size(644, 37)
         Me.TxtRemarks2.TabIndex = 264
         Me.TxtRemarks2.Visible = False
         '
@@ -559,7 +527,7 @@ Partial Class BillingManagement
         Me.TxtDgvAddCount.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtDgvAddCount.Location = New System.Drawing.Point(1270, 383)
         Me.TxtDgvAddCount.Name = "TxtDgvAddCount"
-        Me.TxtDgvAddCount.Size = New System.Drawing.Size(38, 22)
+        Me.TxtDgvAddCount.Size = New System.Drawing.Size(38, 37)
         Me.TxtDgvAddCount.TabIndex = 263
         Me.TxtDgvAddCount.TabStop = False
         Me.TxtDgvAddCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -595,7 +563,7 @@ Partial Class BillingManagement
         Me.TxtDgvCymndtCount.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtDgvCymndtCount.Location = New System.Drawing.Point(1270, 115)
         Me.TxtDgvCymndtCount.Name = "TxtDgvCymndtCount"
-        Me.TxtDgvCymndtCount.Size = New System.Drawing.Size(38, 22)
+        Me.TxtDgvCymndtCount.Size = New System.Drawing.Size(38, 37)
         Me.TxtDgvCymndtCount.TabIndex = 267
         Me.TxtDgvCymndtCount.TabStop = False
         Me.TxtDgvCymndtCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -661,7 +629,7 @@ Partial Class BillingManagement
         Me.DtpDepositDate.Location = New System.Drawing.Point(565, 383)
         Me.DtpDepositDate.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.DtpDepositDate.Name = "DtpDepositDate"
-        Me.DtpDepositDate.Size = New System.Drawing.Size(148, 22)
+        Me.DtpDepositDate.Size = New System.Drawing.Size(148, 37)
         Me.DtpDepositDate.TabIndex = 307
         Me.DtpDepositDate.TabStop = False
         Me.DtpDepositDate.Value = New Date(2019, 1, 1, 0, 0, 0, 0)
@@ -687,7 +655,7 @@ Partial Class BillingManagement
         Me.TxtIDRCurrency.MaxLength = 20
         Me.TxtIDRCurrency.Name = "TxtIDRCurrency"
         Me.TxtIDRCurrency.ReadOnly = True
-        Me.TxtIDRCurrency.Size = New System.Drawing.Size(70, 23)
+        Me.TxtIDRCurrency.Size = New System.Drawing.Size(70, 39)
         Me.TxtIDRCurrency.TabIndex = 322
         Me.TxtIDRCurrency.TabStop = False
         Me.TxtIDRCurrency.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -703,6 +671,40 @@ Partial Class BillingManagement
         Me.LblIDRCurrency.TabIndex = 321
         Me.LblIDRCurrency.Text = "通貨"
         Me.LblIDRCurrency.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'AddNo
+        '
+        Me.AddNo.HeaderText = "No"
+        Me.AddNo.Name = "AddNo"
+        Me.AddNo.Width = 82
+        '
+        '今回請求先
+        '
+        Me.今回請求先.HeaderText = "請求先"
+        Me.今回請求先.Name = "今回請求先"
+        Me.今回請求先.Width = 127
+        '
+        '今回請求金額計
+        '
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle2.Format = "N2"
+        DataGridViewCellStyle2.NullValue = "0.00"
+        Me.今回請求金額計.DefaultCellStyle = DataGridViewCellStyle2
+        Me.今回請求金額計.HeaderText = "請求金額計"
+        Me.今回請求金額計.Name = "今回請求金額計"
+        Me.今回請求金額計.Width = 175
+        '
+        '今回備考1
+        '
+        Me.今回備考1.HeaderText = "備考1"
+        Me.今回備考1.Name = "今回備考1"
+        Me.今回備考1.Width = 115
+        '
+        '今回備考2
+        '
+        Me.今回備考2.HeaderText = "備考2"
+        Me.今回備考2.Name = "今回備考2"
+        Me.今回備考2.Width = 115
         '
         'BillingManagement
         '
@@ -798,13 +800,13 @@ Partial Class BillingManagement
     Friend WithEvents 受注金額 As DataGridViewTextBoxColumn
     Friend WithEvents 請求金額計 As DataGridViewTextBoxColumn
     Friend WithEvents 請求残高 As DataGridViewTextBoxColumn
+    Friend WithEvents DtpDepositDate As DateTimePicker
+    Friend WithEvents LblDepositDate As Label
+    Friend WithEvents TxtIDRCurrency As TextBox
+    Friend WithEvents LblIDRCurrency As Label
     Friend WithEvents AddNo As DataGridViewTextBoxColumn
     Friend WithEvents 今回請求先 As DataGridViewTextBoxColumn
     Friend WithEvents 今回請求金額計 As DataGridViewTextBoxColumn
     Friend WithEvents 今回備考1 As DataGridViewTextBoxColumn
     Friend WithEvents 今回備考2 As DataGridViewTextBoxColumn
-    Friend WithEvents DtpDepositDate As DateTimePicker
-    Friend WithEvents LblDepositDate As Label
-    Friend WithEvents TxtIDRCurrency As TextBox
-    Friend WithEvents LblIDRCurrency As Label
 End Class

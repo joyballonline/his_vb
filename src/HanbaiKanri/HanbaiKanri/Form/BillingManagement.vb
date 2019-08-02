@@ -556,10 +556,10 @@ Public Class BillingManagement
         Sql += "', '"
         Sql += dsCymnhd.Tables(RS).Rows(0)("得意先名").ToString
         Sql += "', '"
-        Sql += formatNumber(Amount)  '入金額計  
-        Sql += "', 0"  '入金額計を0で設定
+        Sql += FormatNumber(Amount, ,,, 0) '入金額計  
+        Sql += "', '0'"  '入金額計を0で設定
         Sql += ", '"
-        Sql += formatNumber(AccountsReceivable)  '売掛残高
+        Sql += FormatNumber(AccountsReceivable, ,,, 0)  '売掛残高
         Sql += "', '"
         Sql += DgvAdd.Rows(0).Cells("今回備考1").Value
         Sql += "', '"
@@ -576,11 +576,11 @@ Public Class BillingManagement
         Sql += strToday
 
         Sql += "', '"
-        Sql += formatNumber(AmountFC) '入金額計_外貨
+        Sql += FormatNumber(AmountFC, ,,, 0)  '入金額計_外貨
         Sql += "', '"
         Sql += "0" '入金額計を0で設定
         Sql += "', '"
-        Sql += formatNumber(AccountsReceivableFC)  '売掛残高_外貨
+        Sql += FormatNumber(AccountsReceivableFC, ,,, 0)  '売掛残高_外貨
         Sql += "', '"
         Sql += dsCymnhd.Tables(RS).Rows(0)("通貨").ToString()
         Sql += "', '"
