@@ -125,10 +125,10 @@ Public Class PaymentList
         End If
 
         '数字形式
-        DgvSupplier.Columns("仕入金額計_外貨").DefaultCellStyle.Format = "N0"
-        DgvSupplier.Columns("支払残高_外貨").DefaultCellStyle.Format = "N0"
-        DgvSupplier.Columns("仕入金額計").DefaultCellStyle.Format = "N0"
-        DgvSupplier.Columns("支払残高").DefaultCellStyle.Format = "N0"
+        DgvSupplier.Columns("仕入金額計_外貨").DefaultCellStyle.Format = "N2"
+        DgvSupplier.Columns("支払残高_外貨").DefaultCellStyle.Format = "N2"
+        DgvSupplier.Columns("仕入金額計").DefaultCellStyle.Format = "N2"
+        DgvSupplier.Columns("支払残高").DefaultCellStyle.Format = "N2"
 
 
         '仕入先リストの取得
