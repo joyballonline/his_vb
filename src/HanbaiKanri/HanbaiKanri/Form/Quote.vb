@@ -549,11 +549,11 @@ Public Class Quote
                 GrossProfit += DgvItemList.Rows(index).Cells("粗利額").Value
             Next
 
-            TxtPurchaseTotal.Text = PurchaseTotal.ToString("N0")
-            TxtTotal.Text = Total.ToString("N0")
-            TxtQuoteTotal.Text = QuoteTotal.ToString("N0")
-            TxtGrossProfit.Text = GrossProfit.ToString("N0")
-            TxtVatAmount.Text = ((QuoteTotal.ToString("N0") * TxtVat.Text) / 100).ToString("N0")
+            TxtPurchaseTotal.Text = PurchaseTotal.ToString("N2")
+            TxtTotal.Text = Total.ToString("N2")
+            TxtQuoteTotal.Text = QuoteTotal.ToString("N2")
+            TxtGrossProfit.Text = GrossProfit.ToString("N2")
+            TxtVatAmount.Text = ((QuoteTotal.ToString("N0") * TxtVat.Text) / 100).ToString("N2")
             setCurrency() '通貨に設定した内容に変更
 
             '行番号の振り直し
@@ -1434,11 +1434,11 @@ Public Class Quote
             QuoteTotal += DgvItemList.Rows(c).Cells("見積金額").Value
             GrossProfit += DgvItemList.Rows(c).Cells("粗利額").Value
         Next
-        TxtPurchaseTotal.Text = PurchaseTotal.ToString("N0")
-        TxtTotal.Text = Total.ToString("N0")
-        TxtQuoteTotal.Text = QuoteTotal.ToString("N0")
-        TxtGrossProfit.Text = GrossProfit.ToString("N0")
-        TxtVatAmount.Text = ((QuoteTotal * TxtVat.Text) / 100).ToString("N0")
+        TxtPurchaseTotal.Text = PurchaseTotal.ToString("N2")
+        TxtTotal.Text = Total.ToString("N2")
+        TxtQuoteTotal.Text = QuoteTotal.ToString("N2")
+        TxtGrossProfit.Text = GrossProfit.ToString("N2")
+        TxtVatAmount.Text = ((QuoteTotal * TxtVat.Text) / 100).ToString("N2")
         setCurrency() '通貨に設定した内容に変更
 
 
@@ -3224,7 +3224,7 @@ Public Class Quote
         Dim ProfitMargin As Decimal = 0　 '利益額
 
 
-        TxtCurrencyVatAmount.Text = (vatVal * currencyVal).ToString("N0")
+        TxtCurrencyVatAmount.Text = (vatVal * currencyVal).ToString("N2")
 
         For c As Integer = 0 To DgvItemList.Rows.Count - 1
             If Not DgvItemList.Rows(c).Cells("見積金額_外貨").Value Is DBNull.Value Then
@@ -3239,41 +3239,41 @@ Public Class Quote
             PurchaseTotal += DgvItemList.Rows(c).Cells("仕入金額").Value
         Next
 
-        TxtCurrencyQuoteTotal.Text = QuoteCurrencyTotal.ToString("N0")
-        TxtCurrencyVatAmount.Text = ((QuoteCurrencyTotal.ToString("N0") * TxtVat.Text) / 100).ToString("N0")
+        TxtCurrencyQuoteTotal.Text = QuoteCurrencyTotal.ToString("N2")
+        TxtCurrencyVatAmount.Text = ((QuoteCurrencyTotal.ToString("N0") * TxtVat.Text) / 100).ToString("N2")
 
 
-        TxtTotal.Text = Total.ToString("N0")                '売上金額
-        txtPurchasecost.Text = PurchaseCost.ToString("N0")  '仕入原価
-        TxtGrossProfit.Text = GrossProfit.ToString("N0")    '粗利額
+        TxtTotal.Text = Total.ToString("N2")                '売上金額
+        txtPurchasecost.Text = PurchaseCost.ToString("N2")  '仕入原価
+        TxtGrossProfit.Text = GrossProfit.ToString("N2")    '粗利額
 
         '粗利率
         If TxtTotal.Text = 0 Or txtPurchasecost.Text = 0 Then
-            txtGrossmarginRate.Text = 0
+            txtGrossmarginRate.Text = 0.ToString("N1")
         Else
             txtGrossmarginRate.Text = ((GrossProfit / Total) * 100).ToString("N1")
         End If
 
 
-        TxtQuoteTotal.Text = QuoteTotal.ToString("N0")        '見積金額
-        TxtPurchaseTotal.Text = PurchaseTotal.ToString("N0")  '仕入金額
+        TxtQuoteTotal.Text = QuoteTotal.ToString("N2")        '見積金額
+        TxtPurchaseTotal.Text = PurchaseTotal.ToString("N2")  '仕入金額
 
         '利益額
         If TxtQuoteTotal.Text = 0 Or TxtPurchaseTotal.Text = 0 Then
-            txtProfitmargin.Text = 0
+            txtProfitmargin.Text = 0.ToString("N2")
         Else
             ProfitMargin = QuoteTotal - PurchaseTotal
-            txtProfitmargin.Text = ProfitMargin.ToString("N0")
+            txtProfitmargin.Text = ProfitMargin.ToString("N2")
         End If
 
         '利益率
         If TxtQuoteTotal.Text = 0 Or TxtPurchaseTotal.Text = 0 Then
-            txtProfitmarginRate.Text = 0
+            txtProfitmarginRate.Text = 0.ToString("N1")
         Else
             txtProfitmarginRate.Text = ((ProfitMargin / QuoteTotal) * 100).ToString("N1")
         End If
 
-        TxtVatAmount.Text = ((QuoteTotal * TxtVat.Text) / 100).ToString("N0") 'VAT-OUT
+        TxtVatAmount.Text = ((QuoteTotal * TxtVat.Text) / 100).ToString("N2") 'VAT-OUT
 
     End Sub
 
