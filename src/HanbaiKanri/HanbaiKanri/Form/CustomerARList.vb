@@ -99,9 +99,9 @@ Public Class CustomerARList
         End If
 
         '数字形式
-        DgvCymndt.Columns("請求金額").DefaultCellStyle.Format = "N0"
-        DgvCymndt.Columns("入金額").DefaultCellStyle.Format = "N0"
-        DgvCymndt.Columns("売掛金残高").DefaultCellStyle.Format = "N0"
+        DgvCymndt.Columns("請求金額").DefaultCellStyle.Format = "N2"
+        DgvCymndt.Columns("入金額").DefaultCellStyle.Format = "N2"
+        DgvCymndt.Columns("売掛金残高").DefaultCellStyle.Format = "N2"
 
 
         Dim dsSkyuhd As DataSet = getARList()
