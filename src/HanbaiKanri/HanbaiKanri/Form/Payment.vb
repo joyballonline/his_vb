@@ -696,11 +696,11 @@ Public Class Payment
         Sql += " "
         Sql += dsSupplier.Tables(RS).Rows(0)("口座名義")
         Sql += "', '"
-        Sql += formatNumber(KikeAmount)     '買掛金額
+        Sql += formatStringToNumber(KikeAmount)     '買掛金額
         Sql += "', '"
-        Sql += formatNumber(PaymentAmount)  '支払金額計
+        Sql += formatStringToNumber(PaymentAmount)  '支払金額計
         Sql += "', '"
-        Sql += formatNumber(Balance)        '買掛残高
+        Sql += formatStringToNumber(Balance)        '買掛残高
         Sql += "', '"
         Sql += TxtRemarks.Text
         Sql += "', '"
@@ -712,11 +712,11 @@ Public Class Payment
         Sql += "', '"
         Sql += dtToday
         Sql += "', '"
-        Sql += formatNumber(KikeAmountFC)     '買掛金額_外貨
+        Sql += formatStringToNumber(KikeAmountFC)     '買掛金額_外貨
         Sql += "', '"
-        Sql += formatNumber(PaymentAmountFC)  '支払金額計_外貨
+        Sql += formatStringToNumber(PaymentAmountFC)  '支払金額計_外貨
         Sql += "', '"
-        Sql += formatNumber(BalanceFC)        '買掛残高_外貨
+        Sql += formatStringToNumber(BalanceFC)        '買掛残高_外貨
         Sql += "', '"
         Sql += dsKikehd.Tables(RS).Rows(0)("通貨").ToString()
         Sql += "', '"
@@ -765,7 +765,7 @@ Public Class Payment
             Sql += " "
             Sql += dsSupplier.Tables(RS).Rows(0)("口座名義").ToString
             Sql += "', '"
-            Sql += formatNumber(AmountInputPayment)  '支払金額
+            Sql += formatStringToNumber(AmountInputPayment)  '支払金額
             Sql += "', '"
             Sql += frmC01F10_Login.loginValue.TantoNM
             Sql += "', '"
@@ -780,7 +780,7 @@ Public Class Payment
             Sql += TxtRemarks.Text
 
             Sql += "', '"
-            Sql += formatNumber(AmountInputPaymentFC)        '支払金額_外貨
+            Sql += formatStringToNumber(AmountInputPaymentFC)        '支払金額_外貨
             Sql += "', '"
             Sql += dsKikehd.Tables(RS).Rows(0)("通貨").ToString()
             Sql += "', '"
@@ -825,7 +825,7 @@ Public Class Payment
                 Sql += "', '"
                 Sql += SupplierName
                 Sql += "', '"
-                Sql += formatNumber(TotalPaymentClearingAmount)  '支払消込額計
+                Sql += formatStringToNumber(TotalPaymentClearingAmount)  '支払消込額計
                 Sql += "', '"
                 Sql += TxtRemarks.Text
                 Sql += "', '"
@@ -836,7 +836,7 @@ Public Class Payment
                 Sql += dtToday
 
                 Sql += "', '"
-                Sql += formatNumber(TotalPaymentClearingAmountFC)        '支払消込額計_外貨
+                Sql += formatStringToNumber(TotalPaymentClearingAmountFC)        '支払消込額計_外貨
                 Sql += "', '"
                 Sql += dsKikehd.Tables(RS).Rows(0)("通貨").ToString()
                 Sql += "', '"
@@ -859,7 +859,7 @@ Public Class Payment
 
             If DgvKikeInfo.Rows(i).Cells("支払金額").Value <> 0 Then
 
-                If dsKikehd.Tables(RS).Rows(i)("支払金額計") Is DBNull.Value Then
+                If dsKikehd.Tables(RS).Rows(i)("支払金額計_外貨") Is DBNull.Value Then
                     '買掛基本の支払金額がなかったら支払金額をそのまま登録
                     DsPaymentFC = DgvKikeInfo.Rows(i).Cells("支払金額").Value
                 Else
@@ -881,20 +881,20 @@ Public Class Payment
                 Sql += "SET "
                 Sql += " 支払金額計"
                 Sql += " = '"
-                Sql += formatNumber(DsPayment)
+                Sql += formatStringToNumber(DsPayment)
                 Sql += "', "
                 Sql += "買掛残高"
                 Sql += " = '"
-                Sql += formatNumber(APBalance)
+                Sql += formatStringToNumber(APBalance)
                 Sql += "', "
 
                 Sql += " 支払金額計_外貨"
                 Sql += " = '"
-                Sql += formatNumber(DsPaymentFC)
+                Sql += formatStringToNumber(DsPaymentFC)
                 Sql += "', "
                 Sql += "買掛残高_外貨"
                 Sql += " = '"
-                Sql += formatNumber(APBalanceFC)
+                Sql += formatStringToNumber(APBalanceFC)
                 Sql += "', "
 
                 '買掛金額計と支払金額計が一致したら支払完了日を設定する
@@ -1011,6 +1011,18 @@ Public Class Payment
 
         'リードタイムのリストを汎用マスタから取得
         Return getDsData("m90_hanyo", Sql)
+    End Function
+
+    '金額フォーマット（登録の際の小数点指定子）を日本の形式に合わせる
+    '桁区切り記号は外す
+    Private Function formatStringToNumber(ByVal prmVal As String) As String
+
+        Dim decVal As Decimal = Decimal.Parse(prmVal)
+
+        Dim nfi As NumberFormatInfo = New CultureInfo(CommonConst.CI_JP, False).NumberFormat
+
+        '日本の形式に書き換える
+        Return decVal.ToString("F3", nfi)
     End Function
 
 End Class
