@@ -160,13 +160,13 @@ Public Class SupplierAPList
         Next
 
         '数字形式
-        DgvCymndt.Columns("買掛金額計_外貨").DefaultCellStyle.Format = "N0"
-        DgvCymndt.Columns("支払金額計_外貨").DefaultCellStyle.Format = "N0"
-        DgvCymndt.Columns("買掛金残高_外貨").DefaultCellStyle.Format = "N0"
+        DgvCymndt.Columns("買掛金額計_外貨").DefaultCellStyle.Format = "N2"
+        DgvCymndt.Columns("支払金額計_外貨").DefaultCellStyle.Format = "N2"
+        DgvCymndt.Columns("買掛金残高_外貨").DefaultCellStyle.Format = "N2"
 
-        DgvCymndt.Columns("買掛金額計").DefaultCellStyle.Format = "N0"
-        DgvCymndt.Columns("支払金額計").DefaultCellStyle.Format = "N0"
-        DgvCymndt.Columns("買掛金残高").DefaultCellStyle.Format = "N0"
+        DgvCymndt.Columns("買掛金額計").DefaultCellStyle.Format = "N2"
+        DgvCymndt.Columns("支払金額計").DefaultCellStyle.Format = "N2"
+        DgvCymndt.Columns("買掛金残高").DefaultCellStyle.Format = "N2"
 
 
     End Sub
