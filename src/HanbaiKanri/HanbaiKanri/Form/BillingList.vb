@@ -213,10 +213,10 @@ Public Class BillingList
             DgvBilling.Columns("売掛残高").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
             '数字形式
-            DgvBilling.Columns("請求金額計_外貨").DefaultCellStyle.Format = "N0"
-            DgvBilling.Columns("売掛残高_外貨").DefaultCellStyle.Format = "N0"
-            DgvBilling.Columns("請求金額計").DefaultCellStyle.Format = "N0"
-            DgvBilling.Columns("売掛残高").DefaultCellStyle.Format = "N0"
+            DgvBilling.Columns("請求金額計_外貨").DefaultCellStyle.Format = "N2"
+            DgvBilling.Columns("売掛残高_外貨").DefaultCellStyle.Format = "N2"
+            DgvBilling.Columns("請求金額計").DefaultCellStyle.Format = "N2"
+            DgvBilling.Columns("売掛残高").DefaultCellStyle.Format = "N2"
 
             For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
 
