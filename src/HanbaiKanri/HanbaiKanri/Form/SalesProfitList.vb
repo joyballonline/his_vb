@@ -116,12 +116,12 @@ Public Class SalesProfitList
         End If
 
         '数字形式
-        DgvList.Columns("売上計").DefaultCellStyle.Format = "N0"
-        'DgvList.Columns("ＶＡＴ").DefaultCellStyle.Format = "N0"
-        DgvList.Columns("売上金額計").DefaultCellStyle.Format = "N0"
-        DgvList.Columns("間接費").DefaultCellStyle.Format = "N0"
-        DgvList.Columns("売上原価計").DefaultCellStyle.Format = "N0"
-        DgvList.Columns("粗利").DefaultCellStyle.Format = "N0"
+        DgvList.Columns("売上計").DefaultCellStyle.Format = "N2"
+        DgvList.Columns("ＶＡＴ").DefaultCellStyle.Format = "N2"
+        DgvList.Columns("売上金額計").DefaultCellStyle.Format = "N2"
+        DgvList.Columns("間接費").DefaultCellStyle.Format = "N2"
+        DgvList.Columns("売上原価計").DefaultCellStyle.Format = "N2"
+        DgvList.Columns("粗利").DefaultCellStyle.Format = "N2"
         DgvList.Columns("粗利率").DefaultCellStyle.Format = "N1"
 
 
