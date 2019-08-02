@@ -671,7 +671,7 @@ Public Class DepositManagement
         Sql += " "
         Sql += dsCompany.Tables(RS).Rows(0)("口座名義")
         Sql += "', '"
-        Sql += formatNumber(DepositAmount)  '入金額計
+        Sql += FormatNumber(DepositAmount, ,,, 0)  '入金額計
         Sql += "', '"
         Sql += TxtRemarks.Text
         Sql += "', '"
@@ -684,7 +684,7 @@ Public Class DepositManagement
         Sql += dtToday
 
         Sql += "', '"
-        Sql += formatNumber(DepositAmount_cur)  '入金額計_外貨
+        Sql += FormatNumber(DepositAmount_cur, ,,, 0)  '入金額計_外貨
         Sql += "', '"
         Sql += dsSkyuhd.Tables(RS).Rows(0)("通貨").ToString()
         Sql += "', '"
@@ -729,7 +729,7 @@ Public Class DepositManagement
                 Sql += " "
                 Sql += dsCompany.Tables(RS).Rows(0)("口座名義").ToString
                 Sql += "', '"
-                Sql += formatNumber(AmountEntered)  '入力入金額
+                Sql += FormatNumber(AmountEntered, ,,, 0)  '入力入金額
                 Sql += "', '"
                 Sql += frmC01F10_Login.loginValue.TantoNM
                 Sql += "', '"
@@ -744,7 +744,7 @@ Public Class DepositManagement
                 Sql += TxtRemarks.Text
 
                 Sql += "', '"
-                Sql += formatNumber(AmountEntered_cur)  '入力入金額  入金額_外貨
+                Sql += FormatNumber(AmountEntered_cur, ,,, 0)  '入力入金額  入金額_外貨
                 Sql += "', '"
                 Sql += dsSkyuhd.Tables(RS).Rows(0)("通貨").ToString()
                 Sql += "', '"
@@ -785,7 +785,7 @@ Public Class DepositManagement
                 Sql += "', '"
                 Sql += CustomerName
                 Sql += "', '"
-                Sql += formatNumber(DepositClearing)  '入金消込額計
+                Sql += FormatNumber(DepositClearing, ,,, 0)  '入金消込額計
                 Sql += "', '"
                 Sql += TxtRemarks.Text
                 Sql += "', '"
@@ -796,7 +796,7 @@ Public Class DepositManagement
                 Sql += dtToday
 
                 Sql += "', '"
-                Sql += formatNumber(DepositClearing_cur)  '入金消込額計_外貨
+                Sql += FormatNumber(DepositClearing_cur, ,,, 0)  '入金消込額計_外貨
                 Sql += "', '"
                 Sql += dsSkyuhd.Tables(RS).Rows(0)("通貨").ToString()
                 Sql += "', '"
@@ -840,20 +840,20 @@ Public Class DepositManagement
                 Sql += "SET "
                 Sql += " 入金額計"
                 Sql += " = '"
-                Sql += formatNumber(DsDeposit)
+                Sql += FormatNumber(DsDeposit, ,,, 0)
                 Sql += "', "
                 Sql += "売掛残高"
                 Sql += " = '"
-                Sql += formatNumber(SellingBalance)
+                Sql += FormatNumber(SellingBalance, ,,, 0)
                 Sql += "', "
 
                 Sql += " 入金額計_外貨"
                 Sql += " = '"
-                Sql += formatNumber(DsDeposit_cur)
+                Sql += FormatNumber(DsDeposit_cur, ,,, 0)
                 Sql += "', "
                 Sql += "売掛残高_外貨"
                 Sql += " = '"
-                Sql += formatNumber(SellingBalance_cur)
+                Sql += FormatNumber(SellingBalance_cur, ,,, 0)
                 Sql += "', "
 
                 '請求額請求金額と入金額が一致したら入金完了日を設定する
