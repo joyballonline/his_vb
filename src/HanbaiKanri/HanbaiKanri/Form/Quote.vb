@@ -1529,7 +1529,7 @@ Public Class Quote
 
             'フォーカス
             DgvItemList.Focus()
-            DgvItemList.CurrentCell = DgvItemList(2, RowIdx+1)
+            DgvItemList.CurrentCell = DgvItemList(2, RowIdx + 1)
 
 
         Catch ue As UsrDefException
