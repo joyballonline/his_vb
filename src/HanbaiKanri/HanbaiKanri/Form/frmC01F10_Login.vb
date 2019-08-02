@@ -250,6 +250,7 @@ Public Class frmC01F10_Login
                 Exit Sub
             End Try
 
+
             'パスワード変更チェックONの場合、パスワード変更画面を起動
             If chkPasswd.Checked = True Then
                 'パスワード変更チェックあり
@@ -273,6 +274,24 @@ Public Class frmC01F10_Login
                 'StartUp.loginForm = Me
                 'openForm13.Show()                                                   '画面表示
                 'Me.Hide()                                                           '自分は隠れる
+
+
+                '前月末にレートの登録があるかチェック
+                Dim Month As Integer = Now.Month
+                Dim BaseDate As Date = DateSerial(Year(Now), Month, 1)
+                BaseDate = DateAdd("d", -1, BaseDate)  '前月末
+
+                sql = ""
+                sql = sql & "SELECT count(*) as 件数"
+                sql = sql & " FROM t71_exchangerate "
+                sql = sql & " where 基準日 ='" & BaseDate & "'"
+                sql = sql & "   and 会社コード = '" & _db.rmSQ(cmbCampany.SelectedValue) & "'"
+
+                Dim dsRate = _db.selectDB(sql, RS, 0)
+
+                If dsRate.Tables(RS).Rows(0)("件数") = 0 Then
+                    _msgHd.dspMSG("LoginRate", frmC01F10_Login.loginValue.Language)
+                End If
 
 
                 'インフォメーション表示
