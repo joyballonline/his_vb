@@ -189,18 +189,18 @@ Public Class DepositManagement
 
 
         '数字形式
-        DgvCustomer.Columns("請求残高").DefaultCellStyle.Format = "N0"
+        DgvCustomer.Columns("請求残高").DefaultCellStyle.Format = "N2"
 
-        DgvHistory.Columns("入金済入金額計").DefaultCellStyle.Format = "N0"
+        DgvHistory.Columns("入金済入金額計").DefaultCellStyle.Format = "N2"
 
-        DgvDeposit.Columns("入力入金額").DefaultCellStyle.Format = "N0"
+        DgvDeposit.Columns("入力入金額").DefaultCellStyle.Format = "N2"
 
-        DgvBillingInfo.Columns("請求金額").DefaultCellStyle.Format = "N0"
-        DgvBillingInfo.Columns("請求情報入金額計").DefaultCellStyle.Format = "N0"
-        DgvBillingInfo.Columns("請求情報入金額計固定").DefaultCellStyle.Format = "N0"
-        DgvBillingInfo.Columns("請求情報請求残高").DefaultCellStyle.Format = "N0"
-        DgvBillingInfo.Columns("請求情報請求残高固定").DefaultCellStyle.Format = "N0"
-        DgvBillingInfo.Columns("入金額").DefaultCellStyle.Format = "N0"
+        DgvBillingInfo.Columns("請求金額").DefaultCellStyle.Format = "N2"
+        DgvBillingInfo.Columns("請求情報入金額計").DefaultCellStyle.Format = "N2"
+        DgvBillingInfo.Columns("請求情報入金額計固定").DefaultCellStyle.Format = "N2"
+        DgvBillingInfo.Columns("請求情報請求残高").DefaultCellStyle.Format = "N2"
+        DgvBillingInfo.Columns("請求情報請求残高固定").DefaultCellStyle.Format = "N2"
+        DgvBillingInfo.Columns("入金額").DefaultCellStyle.Format = "N2"
 
     End Sub
 
