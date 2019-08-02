@@ -508,7 +508,7 @@ Public Class DepositManagement
             Dim dsSaiban As DataSet = _db.selectDB(Sql, RS, reccnt)
 
             saibanID = dsSaiban.Tables(RS).Rows(0)("接頭文字")
-            saibanID += strFormatDate(today.ToString, "MMdd")
+            saibanID += UtilClass.strFormatDate(today.ToString, "MMdd")
             saibanID += dsSaiban.Tables(RS).Rows(0)("最新値").ToString.PadLeft(dsSaiban.Tables(RS).Rows(0)("連番桁数"), "0")
 
             Dim keyNo As Integer
