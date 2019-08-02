@@ -671,7 +671,7 @@ Public Class DepositManagement
         Sql += " "
         Sql += dsCompany.Tables(RS).Rows(0)("口座名義")
         Sql += "', '"
-        Sql += FormatNumber(DepositAmount, ,,, 0)  '入金額計
+        Sql += formatStringToNumber(DepositAmount)  '入金額計
         Sql += "', '"
         Sql += TxtRemarks.Text
         Sql += "', '"
@@ -684,7 +684,7 @@ Public Class DepositManagement
         Sql += dtToday
 
         Sql += "', '"
-        Sql += FormatNumber(DepositAmount_cur, ,,, 0)  '入金額計_外貨
+        Sql += formatStringToNumber(DepositAmount_cur)  '入金額計_外貨
         Sql += "', '"
         Sql += dsSkyuhd.Tables(RS).Rows(0)("通貨").ToString()
         Sql += "', '"
@@ -729,7 +729,7 @@ Public Class DepositManagement
                 Sql += " "
                 Sql += dsCompany.Tables(RS).Rows(0)("口座名義").ToString
                 Sql += "', '"
-                Sql += FormatNumber(AmountEntered, ,,, 0)  '入力入金額
+                Sql += formatStringToNumber(AmountEntered)  '入力入金額
                 Sql += "', '"
                 Sql += frmC01F10_Login.loginValue.TantoNM
                 Sql += "', '"
@@ -744,7 +744,7 @@ Public Class DepositManagement
                 Sql += TxtRemarks.Text
 
                 Sql += "', '"
-                Sql += FormatNumber(AmountEntered_cur, ,,, 0)  '入力入金額  入金額_外貨
+                Sql += formatStringToNumber(AmountEntered_cur)  '入力入金額  入金額_外貨
                 Sql += "', '"
                 Sql += dsSkyuhd.Tables(RS).Rows(0)("通貨").ToString()
                 Sql += "', '"
@@ -785,7 +785,7 @@ Public Class DepositManagement
                 Sql += "', '"
                 Sql += CustomerName
                 Sql += "', '"
-                Sql += FormatNumber(DepositClearing, ,,, 0)  '入金消込額計
+                Sql += formatStringToNumber(DepositClearing)  '入金消込額計
                 Sql += "', '"
                 Sql += TxtRemarks.Text
                 Sql += "', '"
@@ -796,7 +796,7 @@ Public Class DepositManagement
                 Sql += dtToday
 
                 Sql += "', '"
-                Sql += FormatNumber(DepositClearing_cur, ,,, 0)  '入金消込額計_外貨
+                Sql += formatStringToNumber(DepositClearing_cur)  '入金消込額計_外貨
                 Sql += "', '"
                 Sql += dsSkyuhd.Tables(RS).Rows(0)("通貨").ToString()
                 Sql += "', '"
@@ -840,20 +840,20 @@ Public Class DepositManagement
                 Sql += "SET "
                 Sql += " 入金額計"
                 Sql += " = '"
-                Sql += FormatNumber(DsDeposit, ,,, 0)
+                Sql += formatStringToNumber(DsDeposit)
                 Sql += "', "
                 Sql += "売掛残高"
                 Sql += " = '"
-                Sql += FormatNumber(SellingBalance, ,,, 0)
+                Sql += formatStringToNumber(SellingBalance)
                 Sql += "', "
 
                 Sql += " 入金額計_外貨"
                 Sql += " = '"
-                Sql += FormatNumber(DsDeposit_cur, ,,, 0)
+                Sql += formatStringToNumber(DsDeposit_cur)
                 Sql += "', "
                 Sql += "売掛残高_外貨"
                 Sql += " = '"
-                Sql += FormatNumber(SellingBalance_cur, ,,, 0)
+                Sql += formatStringToNumber(SellingBalance_cur)
                 Sql += "', "
 
                 '請求額請求金額と入金額が一致したら入金完了日を設定する
@@ -1016,4 +1016,17 @@ Public Class DepositManagement
         'リードタイムのリストを汎用マスタから取得
         Return getDsData("m90_hanyo", Sql)
     End Function
+
+    '金額フォーマット（登録の際の小数点指定子）を日本の形式に合わせる
+    '桁区切り記号は外す
+    Private Function formatStringToNumber(ByVal prmVal As String) As String
+
+        Dim decVal As Decimal = Decimal.Parse(prmVal)
+
+        Dim nfi As NumberFormatInfo = New CultureInfo(CommonConst.CI_JP, False).NumberFormat
+
+        '日本の形式に書き換える
+        Return decVal.ToString("F3", nfi)
+    End Function
+
 End Class
