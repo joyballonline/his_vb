@@ -142,9 +142,9 @@ Public Class JobOrderList
 
         Sql += " WHERE t11.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql += " AND "
-        Sql += " t10.受注日 >= '" & strFormatDate(uriDateSince) & "'"
+        Sql += " t10.受注日 >= '" & UtilClass.strFormatDate(uriDateSince) & "'"
         Sql += " AND "
-        Sql += " t10.受注日 <= '" & strFormatDate(uriDateUntil) & "'"
+        Sql += " t10.受注日 <= '" & UtilClass.strFormatDate(uriDateUntil) & "'"
         Sql += " AND "
         Sql += " t10.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '取消区分=0
         Sql += " ORDER BY t10.受注日 DESC"
@@ -406,41 +406,6 @@ Public Class JobOrderList
         End If
     End Sub
 
-    'どんなカルチャーであっても、日本の形式に変換する
-    Private Function strFormatDate(ByVal prmDate As String, Optional ByRef prmFormat As String = "yyyy/MM/dd") As String
-
-        'PCのカルチャーを取得し、それに応じてStringからDatetimeを作成
-        Dim ci As New System.Globalization.CultureInfo(CultureInfo.CurrentCulture.Name.ToString)
-        Dim dateFormat As DateTime = DateTime.Parse(prmDate, ci, System.Globalization.DateTimeStyles.AssumeLocal)
-
-        '日本の形式に書き換える
-        Return dateFormat.ToString(prmFormat)
-    End Function
-
-    'どんなカルチャーであっても、日本の形式に変換する
-    Private Function formatDatetime(ByVal prmDatetime As DateTime) As String
-
-        'PCのカルチャーを取得し、それに応じてStringからDatetimeを作成
-        Dim ciCurrent As New System.Globalization.CultureInfo(CultureInfo.CurrentCulture.Name.ToString)
-        Dim dateFormat As DateTime = DateTime.Parse(prmDatetime.ToString, ciCurrent, System.Globalization.DateTimeStyles.AssumeLocal)
-
-        Dim changeFormat As String = dateFormat.ToString("yyyy/MM/dd HH:mm:ss")
-
-        Dim ciJP As New System.Globalization.CultureInfo(CommonConst.CI_JP)
-        Dim rtnDatetime As DateTime = DateTime.Parse(changeFormat, ciJP, System.Globalization.DateTimeStyles.AssumeLocal)
-
-
-        '日本の形式に書き換える
-        Return changeFormat
-    End Function
-
-    '金額フォーマット（登録の際の小数点指定子）を日本の形式に合わせる
-    '桁区切り記号は外す
-    Private Function useFormatNumber(ByVal prmVal As Decimal) As String
-
-        '使用形式に書き換える
-        Return prmVal.ToString("N3", CultureInfo.InvariantCulture)
-    End Function
 
     'Excel出力する際のチェック
     Private Function excelOutput(ByVal prmFilePath As String)

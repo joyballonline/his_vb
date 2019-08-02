@@ -636,8 +636,8 @@ Public Class DepositDetailList
         '抽出条件
         Dim customerName As String = escapeSql(TxtCustomerName.Text)
         Dim customerCode As String = escapeSql(TxtCustomerCode.Text)
-        Dim sinceDate As String = strFormatDate(dtBillingDateSince.Text) '日付の書式を日本の形式に合わせる
-        Dim untilDate As String = strFormatDate(dtBillingDateUntil.Text) '日付の書式を日本の形式に合わせる
+        Dim sinceDate As String = UtilClass.strFormatDate(dtBillingDateSince.Text) '日付の書式を日本の形式に合わせる
+        Dim untilDate As String = UtilClass.strFormatDate(dtBillingDateUntil.Text) '日付の書式を日本の形式に合わせる
         Dim sinceNum As String = escapeSql(TxtBillingNo1.Text)
         Dim itemName As String = UtilClass.escapeSql(TxtItemName.Text)
         Dim spec As String = UtilClass.escapeSql(TxtSpec.Text)
@@ -719,43 +719,6 @@ Public Class DepositDetailList
         Return reDelKbn
     End Function
 
-    'どんなカルチャーであっても、日本の形式に変換する
-    Private Function strFormatDate(ByVal prmDate As String) As String
-
-        'PCのカルチャーを取得し、それに応じてStringからDatetimeを作成
-        Dim ci As New System.Globalization.CultureInfo(CultureInfo.CurrentCulture.Name.ToString)
-        Dim dateFormat As DateTime = DateTime.Parse(prmDate, ci, System.Globalization.DateTimeStyles.AssumeLocal)
-
-        '日本の形式に書き換える
-        Return dateFormat.ToString("yyyy/MM/dd")
-    End Function
-
-    'どんなカルチャーであっても、日本の形式に変換する
-    Private Function formatDatetime(ByVal prmDatetime As DateTime) As String
-
-        'PCのカルチャーを取得し、それに応じてStringからDatetimeを作成
-        Dim ciCurrent As New System.Globalization.CultureInfo(CultureInfo.CurrentCulture.Name.ToString)
-        Dim dateFormat As DateTime = DateTime.Parse(prmDatetime.ToString, ciCurrent, System.Globalization.DateTimeStyles.AssumeLocal)
-
-        Dim changeFormat As String = dateFormat.ToString("yyyy/MM/dd HH:mm:ss")
-
-        Dim ciJP As New System.Globalization.CultureInfo(CommonConst.CI_JP)
-        Dim rtnDatetime As DateTime = DateTime.Parse(changeFormat, ciJP, System.Globalization.DateTimeStyles.AssumeLocal)
-
-
-        '日本の形式に書き換える
-        Return changeFormat
-    End Function
-
-    '金額フォーマット（登録の際の小数点指定子）を日本の形式に合わせる
-    '桁区切り記号は外す
-    Private Function formatNumber(ByVal prmVal As Decimal) As String
-
-        Dim nfi As NumberFormatInfo = New CultureInfo(CommonConst.CI_JP, False).NumberFormat
-
-        '日本の形式に書き換える
-        Return prmVal.ToString("F3", nfi) '売掛残高を増やす
-    End Function
 
     '汎用マスタから固定キー、可変キーに応じた結果を返す
     'param1：String 固定キー
