@@ -120,7 +120,7 @@ Public Class PurchasingManagement
         DgvPurchase.Columns("発注数量").DefaultCellStyle.Format = "N2"
         DgvPurchase.Columns("仕入数量").DefaultCellStyle.Format = "N2"
         DgvPurchase.Columns("仕入単価").DefaultCellStyle.Format = "N2"
-        DgvPurchase.Columns("仕入金額").DefaultCellStyle.Format = "N0"
+        DgvPurchase.Columns("仕入金額").DefaultCellStyle.Format = "N2"
         DgvPurchase.Columns("発注残数").DefaultCellStyle.Format = "N2"
 
         '
