@@ -122,9 +122,9 @@ Public Class PurchaseStockAmountList
         '数字形式
         DgvList.Columns("数量").DefaultCellStyle.Format = "N2"
         DgvList.Columns("仕入単価").DefaultCellStyle.Format = "N2"
-        'DgvList.Columns("ＶＡＴ").DefaultCellStyle.Format = "N0"
-        DgvList.Columns("間接費").DefaultCellStyle.Format = "N0"
-        DgvList.Columns("仕入計").DefaultCellStyle.Format = "N0"
+        DgvList.Columns("ＶＡＴ").DefaultCellStyle.Format = "N2"
+        DgvList.Columns("間接費").DefaultCellStyle.Format = "N2"
+        DgvList.Columns("仕入計").DefaultCellStyle.Format = "N2"
 
     End Sub
 
@@ -179,15 +179,15 @@ Public Class PurchaseStockAmountList
                 DgvList.Rows(i).Cells("型式").Value = ds.Tables(RS).Rows(i)("型式")
                 DgvList.Rows(i).Cells("数量").Value = ds.Tables(RS).Rows(i)("仕入数量")
                 DgvList.Rows(i).Cells("単位").Value = ds.Tables(RS).Rows(i)("単位")
-                DgvList.Rows(i).Cells("仕入単価").Value = Format(ds.Tables(RS).Rows(i)("仕入値"), "0.00")
-                DgvList.Rows(i).Cells("ＶＡＴ").Value = Format(calVAT, "0.000")
-                DgvList.Rows(i).Cells("間接費").Value = Format(ds.Tables(RS).Rows(i)("間接費"), "0")
+                DgvList.Rows(i).Cells("仕入単価").Value = Format(ds.Tables(RS).Rows(i)("仕入値"), "#,##0.00")
+                DgvList.Rows(i).Cells("ＶＡＴ").Value = Format(calVAT, "#,##0.00")
+                DgvList.Rows(i).Cells("間接費").Value = Format(ds.Tables(RS).Rows(i)("間接費"), "#,##0.00")
                 DgvList.Rows(i).Cells("仕入計").Value = (ds.Tables(RS).Rows(i)("仕入値") + calVAT + ds.Tables(RS).Rows(i)("間接費")) * ds.Tables(RS).Rows(i)("仕入数量")
-                totalAmount += Format((ds.Tables(RS).Rows(i)("仕入値") + calVAT + ds.Tables(RS).Rows(i)("間接費")) * ds.Tables(RS).Rows(i)("仕入数量"), "#,##0")
+                totalAmount += Format((ds.Tables(RS).Rows(i)("仕入値") + calVAT + ds.Tables(RS).Rows(i)("間接費")) * ds.Tables(RS).Rows(i)("仕入数量"), "#,##0.00")
 
             Next
 
-            TxtTotal.Text = totalAmount.ToString("N0")
+            TxtTotal.Text = totalAmount.ToString("N2")
 
         Catch ue As UsrDefException
             ue.dspMsg()
