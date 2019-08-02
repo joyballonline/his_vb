@@ -122,10 +122,10 @@ Public Class AccountsPayableList
         End If
 
         '数字形式
-        DgvKike.Columns("買掛金額計_外貨").DefaultCellStyle.Format = "N0"
-        DgvKike.Columns("買掛残高_外貨").DefaultCellStyle.Format = "N0"
-        DgvKike.Columns("買掛金額計").DefaultCellStyle.Format = "N0"
-        DgvKike.Columns("買掛残高").DefaultCellStyle.Format = "N0"
+        DgvKike.Columns("買掛金額計_外貨").DefaultCellStyle.Format = "N2"
+        DgvKike.Columns("買掛残高_外貨").DefaultCellStyle.Format = "N2"
+        DgvKike.Columns("買掛金額計").DefaultCellStyle.Format = "N2"
+        DgvKike.Columns("買掛残高").DefaultCellStyle.Format = "N2"
 
         '中央寄せ
         DgvKike.Columns("買掛金額計_外貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
