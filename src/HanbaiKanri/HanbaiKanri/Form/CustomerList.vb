@@ -91,12 +91,12 @@ Public Class CustomerList
         End If
 
         '数字形式
-        DgvCustomer.Columns("受注金額計_外貨").DefaultCellStyle.Format = "N0"
-        DgvCustomer.Columns("請求金額計_外貨").DefaultCellStyle.Format = "N0"
-        DgvCustomer.Columns("請求残高_外貨").DefaultCellStyle.Format = "N0"
-        DgvCustomer.Columns("受注金額計").DefaultCellStyle.Format = "N0"
-        DgvCustomer.Columns("請求金額計").DefaultCellStyle.Format = "N0"
-        DgvCustomer.Columns("請求残高").DefaultCellStyle.Format = "N0"
+        DgvCustomer.Columns("受注金額計_外貨").DefaultCellStyle.Format = "N2"
+        DgvCustomer.Columns("請求金額計_外貨").DefaultCellStyle.Format = "N2"
+        DgvCustomer.Columns("請求残高_外貨").DefaultCellStyle.Format = "N2"
+        DgvCustomer.Columns("受注金額計").DefaultCellStyle.Format = "N2"
+        DgvCustomer.Columns("請求金額計").DefaultCellStyle.Format = "N2"
+        DgvCustomer.Columns("請求残高").DefaultCellStyle.Format = "N2"
 
         '右寄せ
         DgvCustomer.Columns("受注金額計_外貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
