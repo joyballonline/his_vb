@@ -224,8 +224,8 @@ Public Class PaidList
                 DgvHtyhd.Columns("支払金額計").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
                 '数字形式
-                DgvHtyhd.Columns("支払金額計_外貨").DefaultCellStyle.Format = "N0"
-                DgvHtyhd.Columns("支払金額計").DefaultCellStyle.Format = "N0"
+                DgvHtyhd.Columns("支払金額計_外貨").DefaultCellStyle.Format = "N2"
+                DgvHtyhd.Columns("支払金額計").DefaultCellStyle.Format = "N2"
 
 
                 For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1

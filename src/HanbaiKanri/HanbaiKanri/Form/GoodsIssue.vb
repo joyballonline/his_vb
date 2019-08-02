@@ -513,7 +513,7 @@ Public Class GoodsIssue
         DgvOrder.Columns("受注数量").DefaultCellStyle.Format = "N2"
         DgvOrder.Columns("売上数量").DefaultCellStyle.Format = "N2"
         DgvOrder.Columns("売単価").DefaultCellStyle.Format = "N2"
-        DgvOrder.Columns("売上金額").DefaultCellStyle.Format = "N0"
+        DgvOrder.Columns("売上金額").DefaultCellStyle.Format = "N2"
         DgvOrder.Columns("受注残数").DefaultCellStyle.Format = "N2"
         DgvOrder.Columns("未出庫数").DefaultCellStyle.Format = "N2"
 
