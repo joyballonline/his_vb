@@ -218,18 +218,18 @@ Public Class AccountsPayable
         End If
 
         '数字形式
-        DgvCymn.Columns("発注金額").DefaultCellStyle.Format = "N0"
-        DgvCymn.Columns("買掛金額計").DefaultCellStyle.Format = "N0"
-        DgvCymn.Columns("買掛残高").DefaultCellStyle.Format = "N0"
+        DgvCymn.Columns("発注金額").DefaultCellStyle.Format = "N2"
+        DgvCymn.Columns("買掛金額計").DefaultCellStyle.Format = "N2"
+        DgvCymn.Columns("買掛残高").DefaultCellStyle.Format = "N2"
 
         DgvCymndt.Columns("発注個数").DefaultCellStyle.Format = "N2"
         DgvCymndt.Columns("仕入数量").DefaultCellStyle.Format = "N2"
         DgvCymndt.Columns("仕入単価").DefaultCellStyle.Format = "N2"
-        DgvCymndt.Columns("仕入金額").DefaultCellStyle.Format = "N0"
+        DgvCymndt.Columns("仕入金額").DefaultCellStyle.Format = "N2"
 
-        DgvHistory.Columns("買掛金額").DefaultCellStyle.Format = "N0"
+        DgvHistory.Columns("買掛金額").DefaultCellStyle.Format = "N2"
 
-        DgvAdd.Columns("今回買掛金額計").DefaultCellStyle.Format = "N0"
+        DgvAdd.Columns("今回買掛金額計").DefaultCellStyle.Format = "N2"
 
     End Sub
 
