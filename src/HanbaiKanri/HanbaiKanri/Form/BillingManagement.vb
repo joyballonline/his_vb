@@ -556,10 +556,10 @@ Public Class BillingManagement
         Sql += "', '"
         Sql += dsCymnhd.Tables(RS).Rows(0)("得意先名").ToString
         Sql += "', '"
-        Sql += FormatNumber(Amount, ,,, 0) '入金額計  
+        Sql += formatStringToNumber(Amount) '入金額計  
         Sql += "', '0'"  '入金額計を0で設定
         Sql += ", '"
-        Sql += FormatNumber(AccountsReceivable, ,,, 0)  '売掛残高
+        Sql += formatStringToNumber(AccountsReceivable)  '売掛残高
         Sql += "', '"
         Sql += DgvAdd.Rows(0).Cells("今回備考1").Value
         Sql += "', '"
@@ -576,11 +576,11 @@ Public Class BillingManagement
         Sql += strToday
 
         Sql += "', '"
-        Sql += FormatNumber(AmountFC, ,,, 0)  '入金額計_外貨
+        Sql += formatStringToNumber(AmountFC)  '入金額計_外貨
         Sql += "', '"
         Sql += "0" '入金額計を0で設定
         Sql += "', '"
-        Sql += FormatNumber(AccountsReceivableFC, ,,, 0)  '売掛残高_外貨
+        Sql += formatStringToNumber(AccountsReceivableFC)  '売掛残高_外貨
         Sql += "', '"
         Sql += dsCymnhd.Tables(RS).Rows(0)("通貨").ToString()
         Sql += "', '"
@@ -734,4 +734,17 @@ Public Class BillingManagement
 
         End If
     End Sub
+
+    '金額フォーマット（登録の際の小数点指定子）を日本の形式に合わせる
+    '桁区切り記号は外す
+    Private Function formatStringToNumber(ByVal prmVal As String) As String
+
+        Dim decVal As Decimal = Decimal.Parse(prmVal)
+
+        Dim nfi As NumberFormatInfo = New CultureInfo(CommonConst.CI_JP, False).NumberFormat
+
+        '日本の形式に書き換える
+        Return decVal.ToString("F3", nfi)
+    End Function
+
 End Class
