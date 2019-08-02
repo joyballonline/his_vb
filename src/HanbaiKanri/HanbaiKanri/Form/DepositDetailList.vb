@@ -239,8 +239,8 @@ Public Class DepositDetailList
                 DgvBilling.Columns("入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
                 '数字形式
-                DgvBilling.Columns("入金額_外貨").DefaultCellStyle.Format = "N0"
-                DgvBilling.Columns("入金額").DefaultCellStyle.Format = "N0"
+                DgvBilling.Columns("入金額_外貨").DefaultCellStyle.Format = "N2"
+                DgvBilling.Columns("入金額").DefaultCellStyle.Format = "N2"
 
 
                 For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
@@ -359,7 +359,7 @@ Public Class DepositDetailList
                 Next
 
                 '数字形式
-                DgvBilling.Columns("入金額").DefaultCellStyle.Format = "N0"
+                DgvBilling.Columns("入金額").DefaultCellStyle.Format = "N2"
 
             End If
 
