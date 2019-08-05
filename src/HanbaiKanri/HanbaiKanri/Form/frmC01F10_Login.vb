@@ -284,7 +284,7 @@ Public Class frmC01F10_Login
                 sql = ""
                 sql = sql & "SELECT count(*) as Œ”"
                 sql = sql & " FROM t71_exchangerate "
-                sql = sql & " where Šî€“ú ='" & BaseDate & "'"
+                sql = sql & " where Šî€“ú ='" & UtilClass.strFormatDate(BaseDate) & "'"
                 sql = sql & "   and ‰ïĞƒR[ƒh = '" & _db.rmSQ(cmbCampany.SelectedValue) & "'"
 
                 Dim dsRate = _db.selectDB(sql, RS, 0)
