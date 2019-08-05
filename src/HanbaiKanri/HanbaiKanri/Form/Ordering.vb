@@ -1402,11 +1402,9 @@ Public Class Ordering
 
                 Sql += ", '"
                 Sql += UtilClass.strFormatDate(DtpPurchaseDate.Value) '発注日
-                Sql += "', '"
-                Sql += dtNow '登録日
-                Sql += "', '"
-                Sql += dtNow '更新日
-                Sql += "', '"
+                Sql += "', current_timestamp" '登録日
+                Sql += ", current_timestamp" '更新日
+                Sql += ", '"
                 Sql += frmC01F10_Login.loginValue.TantoNM '更新者
                 Sql += "', "
                 Sql += "0" '取消区分
@@ -1520,11 +1518,9 @@ Public Class Ordering
                     Sql += UtilClass.escapeSql(DgvItemList.Rows(i).Cells("備考").Value) '備考
                     Sql += "', '"
                     Sql += frmC01F10_Login.loginValue.TantoNM '更新者
-                    Sql += "', '"
-                    Sql += dtNow '登録日
-                    Sql += "', '"
-                    Sql += dtNow '更新日
-                    Sql += "', '"
+                    Sql += "', current_timestamp" '登録日
+                    Sql += ", current_timestamp" '更新日
+                    Sql += ", '"
                     Sql += formatNumber(DgvItemList.Rows(i).Cells("仕入単価_外貨").Value) '仕入単価_外貨
                     Sql += "', '"
                     Sql += CmCurrency.SelectedValue.ToString '仕入通貨
@@ -1577,7 +1573,7 @@ Public Class Ordering
                 If PurchaseStatus = CommonConst.STATUS_EDIT Then
 
                     Sql = "UPDATE t20_hattyu SET "
-                    Sql += " 取消日 = '" & dtNow & "'"
+                    Sql += " 取消日 = current_date"
                     Sql += " ,取消区分 = " & CommonConst.CANCEL_KBN_DISABLED.ToString
                     Sql += " WHERE "
                     Sql += " 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
@@ -1604,16 +1600,10 @@ Public Class Ordering
                 Sql += "', "
                 Sql += "受注日"
                 Sql += " = '"
-                Sql += DtpPurchaseDate.Value
+                Sql += UtilClass.strFormatDate(DtpPurchaseDate.Value)
                 Sql += "', "
-                Sql += "更新日"
-                Sql += " = '"
-                Sql += dtNow
-                Sql += "', "
-                Sql += "更新者"
-                Sql += " = '"
-                Sql += frmC01F10_Login.loginValue.TantoNM
-                Sql += " ' "
+                Sql += "更新日 = current_timestamp "
+                Sql += ",更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "' "
 
                 Sql += "WHERE"
                 Sql += " 会社コード"

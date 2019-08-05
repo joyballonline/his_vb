@@ -664,19 +664,9 @@ Public Class OrderingList
             Sql += "SET "
 
             Sql += "取消区分 = " & CommonConst.CANCEL_KBN_DISABLED
-            Sql += ", "
-            Sql += "取消日"
-            Sql += " = '"
-            Sql += dtNow
-            Sql += "', "
-            Sql += "更新日"
-            Sql += " = '"
-            Sql += dtNow
-            Sql += "', "
-            Sql += "更新者"
-            Sql += " = '"
-            Sql += frmC01F10_Login.loginValue.TantoNM
-            Sql += " ' "
+            Sql += ", 取消日 = current_date"
+            Sql += ", 更新日 = current_timestamp"
+            Sql += ", 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "' "
 
             Sql += "WHERE"
             Sql += " 会社コード"
