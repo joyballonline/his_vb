@@ -140,29 +140,19 @@ Public Class BillingList
 
         Try
 
-            Sql = "SELECT"
-            Sql += " t23.*"
-            Sql += " FROM "
-            Sql += " public.t23_skyuhd t23 "
+            Sql = "SELECT t23.* FROM  public.t23_skyuhd t23 "
 
-            Sql += " INNER JOIN "
-            Sql += " t10_cymnhd t10"
-            Sql += " ON "
-            Sql += " t23.会社コード = t10.会社コード "
-            Sql += " AND "
-            Sql += " t23.受注番号 = t10.受注番号"
-            Sql += " AND "
-            Sql += " t23.受注番号枝番 = t10.受注番号枝番"
-            Sql += " AND "
-            Sql += " t10.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '受注取消されていないデータ
+            Sql += " INNER JOIN t10_cymnhd t10"
+            Sql += " ON t23.会社コード = t10.会社コード "
+            Sql += "  AND t23.受注番号 = t10.受注番号"
+            Sql += "  AND t23.受注番号枝番 = t10.受注番号枝番"
+            Sql += "  AND t10.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '受注取消されていないデータ
 
-            Sql += " WHERE "
-            Sql += " t23.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += " WHERE t23.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
 
             Sql += viewSearchConditions() '抽出条件取得
 
-            Sql += " ORDER BY "
-            Sql += " t23.更新日 DESC"
+            Sql += " ORDER BY t23.更新日 DESC"
 
             ds = _db.selectDB(Sql, RS, reccnt)
 
@@ -408,47 +398,23 @@ Public Class BillingList
         Dim Sql As String = ""
         Dim ds As DataSet
 
-        Sql = " AND"
-        Sql += " 請求番号"
-        Sql += "='"
-        Sql += DgvBilling.Rows(DgvBilling.CurrentCell.RowIndex).Cells("請求番号").Value
-        Sql += "' "
+        Sql = " AND 請求番号 ='" & DgvBilling.Rows(DgvBilling.CurrentCell.RowIndex).Cells("請求番号").Value & "'"
 
         '画面を開いた時から対象データに対して更新がされていないかどうか確認
         ds = getDsData("t23_skyuhd", Sql)
 
         If ds.Tables(RS).Rows(0)("更新日") = DgvBilling.Rows(DgvBilling.CurrentCell.RowIndex).Cells("更新日").Value Then
 
-            Sql = "UPDATE "
-            Sql += "Public."
-            Sql += "t23_skyuhd "
+            Sql = "UPDATE Public.t23_skyuhd "
             Sql += "SET "
 
             Sql += "取消区分 = '" & CommonConst.CANCEL_KBN_DISABLED & "'"
-            Sql += ", "
-            Sql += "取消日"
-            Sql += " = '"
-            Sql += dtNow
-            Sql += "', "
-            Sql += "更新者"
-            Sql += " = '"
-            Sql += frmC01F10_Login.loginValue.TantoNM
-            Sql += "', "
-            Sql += "更新日"
-            Sql += " = '"
-            Sql += dtNow
-            Sql += "' "
+            Sql += ", 取消日 = current_date"
+            Sql += ", 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+            Sql += ", 更新日 = current_timestamp"
 
-            Sql += "WHERE"
-            Sql += " 会社コード"
-            Sql += "='"
-            Sql += frmC01F10_Login.loginValue.BumonCD
-            Sql += "'"
-            Sql += " AND"
-            Sql += " 請求番号"
-            Sql += " ILIKE '"
-            Sql += DgvBilling.Rows(DgvBilling.CurrentCell.RowIndex).Cells("請求番号").Value
-            Sql += "' "
+            Sql += " WHERE 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += " AND 請求番号 = '" & DgvBilling.Rows(DgvBilling.CurrentCell.RowIndex).Cells("請求番号").Value & "'"
 
             '請求基本を更新
             _db.executeDB(Sql)
@@ -503,15 +469,8 @@ Public Class BillingList
         Dim reccnt As Integer = 0 'DB用（デフォルト）
         Dim Sql As String = ""
 
-        Sql += "SELECT"
-        Sql += " *"
-        Sql += " FROM "
-
-        Sql += "public." & tableName
-        Sql += " WHERE "
-        Sql += "会社コード"
-        Sql += " ILIKE  "
-        Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += "SELECT * FROM public." & tableName
+        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql += txtParam
         Return _db.selectDB(Sql, RS, reccnt)
     End Function

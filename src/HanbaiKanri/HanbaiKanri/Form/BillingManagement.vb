@@ -447,7 +447,7 @@ Public Class BillingManagement
     Private Sub BtnRegist_Click(sender As Object, e As EventArgs) Handles BtnRegist.Click
         'Dim errflg As Boolean = True
         Dim dtToday As DateTime = DateTime.Now
-        Dim strToday As String = formatDatetime(dtToday)
+        Dim strToday As String = UtilClass.strFormatDate(dtToday)
         Dim reccnt As Integer = 0
         Dim BillingAmount As Decimal = 0
         Dim Amount As Decimal = 0      '今回請求金額計
@@ -472,21 +472,15 @@ Public Class BillingManagement
         End If
 
 
-        Sql = " AND "
-        Sql += "受注番号 ILIKE '" & CymnNo & "'"
-        Sql += " AND "
-        Sql += "受注番号枝番 ILIKE '" & Suffix & "'"
-        Sql += " AND "
-        Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+        Sql = " AND 受注番号 = '" & CymnNo & "'"
+        Sql += " AND 受注番号枝番 = '" & Suffix & "'"
+        Sql += " AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
 
         Dim dsCymnhd As DataSet = getDsData("t10_cymnhd", Sql)
 
-        Sql = " AND "
-        Sql += "受注番号 ILIKE '" & CymnNo & "'"
-        Sql += " AND "
-        Sql += "受注番号枝番 ILIKE '" & Suffix & "'"
-        Sql += " AND "
-        Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+        Sql = " AND 受注番号 = '" & CymnNo & "'"
+        Sql += " AND 受注番号枝番 = '" & Suffix & "'"
+        Sql += " AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
 
         Dim dsSkyuhd As DataSet = getDsData("t23_skyuhd", Sql)
 
@@ -537,57 +531,34 @@ Public Class BillingManagement
         Sql += "会社コード, 請求番号, 請求区分, 請求日, 受注番号, 受注番号枝番, 客先番号, 得意先コード, 得意先名"
         Sql += ", 請求金額計, 入金額計, 売掛残高, 備考1, 備考2, 取消区分, 入金予定日, 登録日, 更新者, 更新日"
         Sql += ", 請求金額計_外貨, 入金額計_外貨, 売掛残高_外貨, 通貨, レート)"
-        Sql += " VALUES('"
-        Sql += dsCymnhd.Tables(RS).Rows(0)("会社コード").ToString
-        Sql += "', '"
-        Sql += DM
-        Sql += "', '"
-        Sql += DgvAdd.Rows(0).Cells("請求区分").Value.ToString
-        Sql += "', '"
-        Sql += UtilClass.strFormatDate(DtpBillingDate.Value)
-        Sql += "', '"
-        Sql += dsCymnhd.Tables(RS).Rows(0)("受注番号").ToString
-        Sql += "', '"
-        Sql += dsCymnhd.Tables(RS).Rows(0)("受注番号枝番").ToString
-        Sql += "', '"
-        Sql += dsCymnhd.Tables(RS).Rows(0)("客先番号").ToString
-        Sql += "', '"
-        Sql += dsCymnhd.Tables(RS).Rows(0)("得意先コード").ToString
-        Sql += "', '"
-        Sql += dsCymnhd.Tables(RS).Rows(0)("得意先名").ToString
-        Sql += "', '"
-        Sql += formatStringToNumber(Amount) '入金額計  
-        Sql += "', '0'"  '入金額計を0で設定
-        Sql += ", '"
-        Sql += formatStringToNumber(AccountsReceivable)  '売掛残高
-        Sql += "', '"
-        Sql += DgvAdd.Rows(0).Cells("今回備考1").Value
-        Sql += "', '"
-        Sql += DgvAdd.Rows(0).Cells("今回備考2").Value
-        Sql += "', '"
-        Sql += "0"
-        Sql += "', '"
-        Sql += UtilClass.strFormatDate(DtpDepositDate.Value)
-        Sql += "', '"
-        Sql += strToday
-        Sql += "', '"
-        Sql += frmC01F10_Login.loginValue.TantoNM
-        Sql += "', '"
-        Sql += strToday
+        Sql += " VALUES("
+        Sql += "'" & dsCymnhd.Tables(RS).Rows(0)("会社コード").ToString & "'"   '会社コード
+        Sql += ", '" & DM & "'"     '請求番号
+        Sql += ", '" & DgvAdd.Rows(0).Cells("請求区分").Value.ToString & "'"    '請求区分
+        Sql += ", '" & UtilClass.strFormatDate(DtpBillingDate.Value) & "'"      '請求日
+        Sql += ", '" & dsCymnhd.Tables(RS).Rows(0)("受注番号").ToString & "'"   '受注番号
+        Sql += ", '" & dsCymnhd.Tables(RS).Rows(0)("受注番号枝番").ToString & "'"     '受注番号枝番
+        Sql += ", '" & dsCymnhd.Tables(RS).Rows(0)("客先番号").ToString & "'"   '客先番号
+        Sql += ", '" & dsCymnhd.Tables(RS).Rows(0)("得意先コード").ToString & "'"     '得意先コード
+        Sql += ", '" & dsCymnhd.Tables(RS).Rows(0)("得意先名").ToString & "'"   '得意先名
+        Sql += ", " & UtilClass.formatNumber(Amount)                              '請求金額計  
+        Sql += ", 0"                                                            '入金額計を0で設定
+        Sql += ", " & UtilClass.formatNumber(AccountsReceivable)                  '売掛残高
+        Sql += ", '" & DgvAdd.Rows(0).Cells("今回備考1").Value & "'"            '備考1
+        Sql += ", '" & DgvAdd.Rows(0).Cells("今回備考2").Value & "'"            '備考2
+        Sql += ", 0"                                                            '取消区分
+        Sql += ", '" & UtilClass.strFormatDate(DtpDepositDate.Value) & "'"      '入金予定日
+        Sql += ", current_timestamp"                                            '登録日
+        Sql += ", '" & frmC01F10_Login.loginValue.TantoNM & "'"                 '更新者
+        Sql += ", current_timestamp"                                            '更新日
 
-        Sql += "', '"
-        Sql += formatStringToNumber(AmountFC)  '入金額計_外貨
-        Sql += "', '"
-        Sql += "0" '入金額計を0で設定
-        Sql += "', '"
-        Sql += formatStringToNumber(AccountsReceivableFC)  '売掛残高_外貨
-        Sql += "', '"
-        Sql += dsCymnhd.Tables(RS).Rows(0)("通貨").ToString()
-        Sql += "', '"
-        Sql += UtilClass.formatNumberF10(strRate)
+        Sql += ", " & UtilClass.formatNumber(AmountFC)    '請求金額計_外貨
+        Sql += ", 0"                                    '入金額計_外貨を0で設定
+        Sql += ", " & UtilClass.formatNumber(AccountsReceivableFC)  '売掛残高_外貨
+        Sql += ", '" & dsCymnhd.Tables(RS).Rows(0)("通貨").ToString() & "'"       '通貨
+        Sql += ", " & UtilClass.formatNumberF10(strRate)        'レート
 
-
-        Sql += "')"
+        Sql += ")"
 
         _db.executeDB(Sql)
 
@@ -626,15 +597,9 @@ Public Class BillingManagement
         Dim reccnt As Integer = 0 'DB用（デフォルト）
         Dim Sql As String = ""
 
-        Sql += "SELECT"
-        Sql += " *"
-        Sql += " FROM "
-
-        Sql += "public." & tableName
+        Sql += "SELECT * FROM public." & tableName
         Sql += " WHERE "
-        Sql += "会社コード"
-        Sql += " ILIKE  "
-        Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += "会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql += txtParam
         Return _db.selectDB(Sql, RS, reccnt)
     End Function
@@ -649,14 +614,10 @@ Public Class BillingManagement
         Dim reccnt As Integer = 0 'DB用（デフォルト）
 
         Try
-            Sql = "SELECT "
-            Sql += "* "
-            Sql += "FROM "
-            Sql += "public.m80_saiban"
+            Sql = "SELECT * FROM public.m80_saiban"
             Sql += " WHERE "
             Sql += "会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Sql += " AND "
-            Sql += "採番キー = '" & key & "'"
+            Sql += " AND 採番キー = '" & key & "'"
 
             Dim dsSaiban As DataSet = _db.selectDB(Sql, RS, reccnt)
 
@@ -674,28 +635,14 @@ Public Class BillingManagement
                 keyNo = dsSaiban.Tables(RS).Rows(0)("最新値") + 1
             End If
 
-            Sql = "UPDATE "
-            Sql += "Public.m80_saiban "
+            Sql = "UPDATE Public.m80_saiban "
             Sql += "SET "
-            Sql += " 最新値 "
-            Sql += " = '"
-            Sql += keyNo.ToString
-            Sql += "', "
-            Sql += "更新者"
-            Sql += " = '"
-            Sql += frmC01F10_Login.loginValue.TantoNM
-            Sql += "', "
-            Sql += "更新日"
-            Sql += " = '"
-            Sql += formatDatetime(today)
-            Sql += "' "
-            Sql += "WHERE"
-            Sql += " 会社コード"
-            Sql += "='"
-            Sql += frmC01F10_Login.loginValue.BumonCD
-            Sql += "'"
-            Sql += " AND"
-            Sql += " 採番キー = '" & key & "'"
+            Sql += " 最新値  = '" & keyNo.ToString & "'"
+            Sql += ", 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+            Sql += ", 更新日 = current_timestamp"
+            Sql += " WHERE"
+            Sql += " 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += " AND 採番キー = '" & key & "'"
 
             _db.executeDB(Sql)
 
@@ -734,17 +681,5 @@ Public Class BillingManagement
 
         End If
     End Sub
-
-    '金額フォーマット（登録の際の小数点指定子）を日本の形式に合わせる
-    '桁区切り記号は外す
-    Private Function formatStringToNumber(ByVal prmVal As String) As String
-
-        Dim decVal As Decimal = Decimal.Parse(prmVal)
-
-        Dim nfi As NumberFormatInfo = New CultureInfo(CommonConst.CI_JP, False).NumberFormat
-
-        '日本の形式に書き換える
-        Return decVal.ToString("F3", nfi)
-    End Function
 
 End Class
