@@ -202,6 +202,12 @@ Public Class DepositManagement
         DgvBillingInfo.Columns("請求情報請求残高固定").DefaultCellStyle.Format = "N2"
         DgvBillingInfo.Columns("入金額").DefaultCellStyle.Format = "N2"
 
+        'DgvCustomer.SelectionForeColor = .ForeColor
+        'DgvCustomer.SelectionBackColor = .BackColor
+
+        '入金入力の行を追加
+        BtnAdd.PerformClick()
+
     End Sub
 
     '各Table内の作成
