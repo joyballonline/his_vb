@@ -342,8 +342,6 @@ Public Class SalesProfitList
                 sheet.Range("A" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("売上番号").Value '売上番号
                 sheet.Range("B" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("売上日").Value '売上日
                 sheet.Range("C" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("得意先名").Value '得意先
-                'sheet.Range("D" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("客先番号").Value '客先番号
-                'sheet.Range("E" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("営業担当者").Value '営業担当者
                 sheet.Range("D" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("売上計").Value) '売上計
                 sheet.Range("E" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("ＶＡＴ").Value) 'VAT
                 sheet.Range("F" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("売上金額計").Value) '売上 + VAT
