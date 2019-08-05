@@ -1441,10 +1441,8 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
   </MSG_DATA>
   <MSG_DATA>
     <ID>LoginRate</ID>
-    <MSG1>前月末のレートが登録されていません。</MSG1>
-    <MSG1_EN>The rate at the end of the previous month is not registered.</MSG1_EN>
-    <MSG2>為替レート画面より登録してください。</MSG2>
-    <MSG2_EN>Please register from the exchange rate screen.</MSG2_EN>
+    <MSG1>前月の為替レートが１件も登録されていません。確認が必要です。</MSG1>
+    <MSG1_EN>There is no exchange rate registered for the previous month. Confirmation is required.</MSG1_EN>
     <BUTTON_TYPE>OK</BUTTON_TYPE>
     <ICONT_TYPE>
       <ICONT_TYPE>Information</ICONT_TYPE>
