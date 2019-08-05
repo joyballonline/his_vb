@@ -191,6 +191,9 @@ Public Class Payment
         DgvKikeInfo.Columns("買掛情報買掛残高").DefaultCellStyle.Format = "N2"
         DgvKikeInfo.Columns("支払金額").DefaultCellStyle.Format = "N2"
 
+        '支払入力の行を追加
+        BtnAdd.PerformClick()
+
     End Sub
 
     '各Table内の作成
