@@ -1304,33 +1304,13 @@ Public Class GoodsIssue
         Dim createFlg = False
 
         Dim Sql1 As String = ""
-        Sql1 += "SELECT "
-        Sql1 += "* "
-        Sql1 += "FROM "
-        Sql1 += "public"
-        Sql1 += "."
-        Sql1 += "t44_shukohd"
-        Sql1 += " WHERE "
-        Sql1 += "出庫番号"
-        Sql1 += " ILIKE "
-        Sql1 += "'"
-        Sql1 += DgvHistory.Rows(SelectedRow).Cells("出庫番号").Value
-        Sql1 += "'"
+        Sql1 += "SELECT * FROM public.t44_shukohd"
+        Sql1 += " WHERE 出庫番号 = '" & DgvHistory.Rows(SelectedRow).Cells("出庫番号").Value & "'"
 
 
         Dim Sql2 As String = ""
-        Sql2 += "SELECT "
-        Sql2 += "* "
-        Sql2 += "FROM "
-        Sql2 += "public"
-        Sql2 += "."
-        Sql2 += "t45_shukodt"
-        Sql2 += " WHERE "
-        Sql2 += "出庫番号"
-        Sql2 += " ILIKE "
-        Sql2 += "'"
-        Sql2 += DgvHistory.Rows(SelectedRow).Cells("出庫番号").Value
-        Sql2 += "'"
+        Sql2 += "SELECT * FROM public.t45_shukodt"
+        Sql2 += " WHERE 出庫番号 = '" & DgvHistory.Rows(SelectedRow).Cells("出庫番号").Value & "'"
 
         Dim reccnt As Integer = 0
         Dim ds1 As DataSet = _db.selectDB(Sql1, RS, reccnt)
