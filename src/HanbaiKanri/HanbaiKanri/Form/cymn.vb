@@ -1191,6 +1191,9 @@ Public Class Cymn
             _db.executeDB(Sql)
 #End Region
 
+            '登録完了メッセージ
+            _msgHd.dspMSG("completeInsert", frmC01F10_Login.loginValue.Language)
+
             '画面クローズ
             _parentForm.Enabled = True
             _parentForm.Show()
