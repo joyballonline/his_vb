@@ -231,6 +231,12 @@ Public Class AccountsPayable
 
         DgvAdd.Columns("今回買掛金額計").DefaultCellStyle.Format = "N2"
 
+
+        '今回買掛の初期カーソル位置
+        If DgvAdd.Rows.Count > 0 Then
+            DgvAdd.CurrentCell = DgvAdd(3, 0)
+        End If
+
     End Sub
 
     '発注基本
