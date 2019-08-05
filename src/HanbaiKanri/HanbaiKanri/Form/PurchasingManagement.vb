@@ -214,6 +214,7 @@ Public Class PurchasingManagement
         DgvAdd.Columns("型式").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
         DgvAdd.Columns("単位").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
         DgvAdd.Columns("仕入先").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
+        DgvAdd.Columns("仕入値").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
 
         DgvAdd.Columns("No").ReadOnly = True
         DgvAdd.Columns("行番号").ReadOnly = True
@@ -445,6 +446,11 @@ Public Class PurchasingManagement
             ''売上日、入金予定日のMinDateを受注日に設定
             'DtpPurchaseDate.MinDate = dsHattyuHd.Tables(RS).Rows(0)("発注日").ToShortDateString()
             'DtpPaymentDate.MinDate = dsHattyuHd.Tables(RS).Rows(0)("発注日").ToShortDateString()
+
+            '今回仕入の初期カーソル位置
+            If DgvAdd.Rows.Count > 0 Then
+                DgvAdd.CurrentCell = DgvAdd(10, 0)
+            End If
 
         Catch ue As UsrDefException
             ue.dspMsg()
