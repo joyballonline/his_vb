@@ -581,18 +581,23 @@ Public Class Ordering
         setChangeCurrency()
 
         Dim tmp_cur As Decimal = 0
+        Dim tmp_cur2 As Decimal = 0
 
-        If dsHattyu.Tables(RS).Rows(0)("仕入金額") IsNot DBNull.Value Then
-            tmp_cur = dsHattyu.Tables(RS).Rows(0)("仕入金額")
-            TxtPurchaseAmount.Text = Decimal.Parse(tmp_cur).ToString("N2")
-        End If
+        'If dsHattyu.Tables(RS).Rows(0)("仕入金額") IsNot DBNull.Value Then
+        '    tmp_cur = dsHattyu.Tables(RS).Rows(0)("仕入金額")
+        '    TxtPurchaseAmount.Text = Decimal.Parse(tmp_cur).ToString("N2")
+        'End If
 
-        If dsHattyu.Tables(RS).Rows(0)("仕入金額_外貨") IsNot DBNull.Value Then
-            tmp_cur = dsHattyu.Tables(RS).Rows(0)("仕入金額_外貨")
-            TxtPurchaseAmount2.Text = Decimal.Parse(tmp_cur).ToString("N2")
-        End If
+        'If dsHattyu.Tables(RS).Rows(0)("仕入金額_外貨") IsNot DBNull.Value Then
+        '    tmp_cur = dsHattyu.Tables(RS).Rows(0)("仕入金額_外貨")
+        '    TxtPurchaseAmount2.Text = Decimal.Parse(tmp_cur).ToString("N2")
+        'End If
+
+
+        Dim decOverhead As Decimal = 0
 
         tmp_cur = 0
+        tmp_cur2 = 0
         For i As Integer = 0 To dsHattyudt.Tables(RS).Rows.Count - 1
             DgvItemList.Rows.Add()
             DgvItemList.Rows(i).Cells("仕入区分").Value = Integer.Parse(dsHattyudt.Tables(RS).Rows(i)("仕入区分"))
@@ -609,12 +614,15 @@ Public Class Ordering
             DgvItemList.Rows(i).Cells("関税額").Value = dsHattyudt.Tables(RS).Rows(i)("関税額")
             DgvItemList.Rows(i).Cells("前払法人税率").Value = dsHattyudt.Tables(RS).Rows(i)("前払法人税率") * 100
             DgvItemList.Rows(i).Cells("前払法人税額").Value = dsHattyudt.Tables(RS).Rows(i)("前払法人税額")
-            DgvItemList.Rows(i).Cells("仕入金額").Value = Decimal.Parse(dsHattyudt.Tables(RS).Rows(i)("仕入金額"))
+            DgvItemList.Rows(i).Cells("仕入金額").Value = Decimal.Parse(dsHattyudt.Tables(RS).Rows(i)("仕入金額")) + dsHattyudt.Tables(RS).Rows(i)("間接費")
+            decOverhead += DgvItemList.Rows(i).Cells("仕入金額").Value
+
             DgvItemList.Rows(i).Cells("仕入金額_外貨").Value = Decimal.Parse(dsHattyudt.Tables(RS).Rows(i)("仕入金額_外貨"))
+            tmp_cur2 += DgvItemList.Rows(i).Cells("仕入金額_外貨").Value
+
             DgvItemList.Rows(i).Cells("輸送費率").Value = dsHattyudt.Tables(RS).Rows(i)("輸送費率") * 100
             DgvItemList.Rows(i).Cells("輸送費額").Value = dsHattyudt.Tables(RS).Rows(i)("輸送費額")
 
-            DgvItemList.Rows(i).Cells("間接費").Value = dsHattyudt.Tables(RS).Rows(i)("間接費")
 
             If dsHattyudt.Tables(RS).Rows(i)("リードタイム単位") IsNot DBNull.Value Then
                 DgvItemList.Rows(i).Cells("リードタイム単位").Value = Integer.Parse(dsHattyudt.Tables(RS).Rows(i)("リードタイム単位"))
@@ -631,8 +639,9 @@ Public Class Ordering
             tmp_cur = tmp_cur + (dsHattyudt.Tables(RS).Rows(i)("発注数量") * dsHattyudt.Tables(RS).Rows(i)("仕入値"))
         Next
 
-        txtPurchasecost.Text = Decimal.Parse(tmp_cur).ToString("N2")
-
+        txtPurchasecost.Text = Decimal.Parse(tmp_cur).ToString("N2")        '仕入原価
+        TxtPurchaseAmount.Text = Decimal.Parse(decOverhead).ToString("N2")  '仕入金額
+        TxtPurchaseAmount2.Text = Decimal.Parse(tmp_cur2)  '仕入金額_外貨
 
         '行番号の振り直し
         Dim rowNo As Integer = DgvItemList.Rows.Count()
@@ -870,7 +879,13 @@ Public Class Ordering
                             If DgvItemList("仕入単価_外貨", e.RowIndex).Value IsNot Nothing Then
                                 '小数点表示にするため切り上げをコメントアウト
                                 'DgvItemList("仕入単価", e.RowIndex).Value = Math.Ceiling(DgvItemList("仕入単価_外貨", e.RowIndex).Value / TxtRate.Text)
-                                DgvItemList("仕入単価", e.RowIndex).Value = DgvItemList("仕入単価_外貨", e.RowIndex).Value / TxtRate.Text
+
+                                Dim dotAlign As Decimal = DgvItemList("仕入単価_外貨", e.RowIndex).Value / TxtRate.Text
+                                dotAlign *= 100
+                                dotAlign = Math.Ceiling(dotAlign)
+                                dotAlign /= 100
+
+                                DgvItemList("仕入単価", e.RowIndex).Value = dotAlign
                             End If
                     End Select
 
@@ -2146,7 +2161,12 @@ Public Class Ordering
 
                     '小数点表示にするため切り上げをコメントアウト
                     'DgvItemList.Rows(i).Cells("仕入単価").Value = Math.Ceiling(DgvItemList.Rows(i).Cells("仕入単価_外貨").Value / TxtRate.Text)
-                    DgvItemList.Rows(i).Cells("仕入単価").Value = DgvItemList.Rows(i).Cells("仕入単価_外貨").Value / TxtRate.Text
+                    Dim dotAlign As Decimal = DgvItemList.Rows(i).Cells("仕入単価_外貨").Value / TxtRate.Text
+                    dotAlign *= 100
+                    dotAlign = Math.Ceiling(dotAlign)
+                    dotAlign /= 100
+
+                    DgvItemList.Rows(i).Cells("仕入単価").Value = dotAlign
                     DgvItemList.Rows(i).Cells("仕入原価").Value = Math.Ceiling(DgvItemList.Rows(i).Cells("仕入単価").Value * DgvItemList.Rows(i).Cells("数量").Value)
 
 

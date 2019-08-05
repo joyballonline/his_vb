@@ -1023,7 +1023,13 @@ Public Class Quote
                             If DgvItemList("仕入単価", e.RowIndex).Value IsNot Nothing And DgvItemList("仕入レート", e.RowIndex).Value IsNot Nothing Then
                                 '小数点表示にするため切り上げをコメントアウト
                                 'DgvItemList("仕入単価", e.RowIndex).Value = Math.Ceiling(DgvItemList("仕入単価_外貨", e.RowIndex).Value / DgvItemList("仕入レート", e.RowIndex).Value)
-                                DgvItemList("仕入単価", e.RowIndex).Value = DgvItemList("仕入単価_外貨", e.RowIndex).Value / DgvItemList("仕入レート", e.RowIndex).Value
+
+                                Dim dotAlign As Decimal = DgvItemList("仕入単価_外貨", e.RowIndex).Value / DgvItemList("仕入レート", e.RowIndex).Value
+                                dotAlign *= 100
+                                dotAlign = Math.Ceiling(dotAlign)
+                                dotAlign /= 100
+
+                                DgvItemList("仕入単価", e.RowIndex).Value = dotAlign
                             End If
                         Case "仕入単価"
                             If DgvItemList("仕入レート", e.RowIndex).Value IsNot Nothing Then
@@ -1035,7 +1041,11 @@ Public Class Quote
                             If DgvItemList("仕入単価_外貨", e.RowIndex).Value IsNot Nothing And DgvItemList("仕入レート", e.RowIndex).Value IsNot Nothing Then
                                 '小数点表示にするため切り上げをコメントアウト
                                 'DgvItemList("仕入単価", e.RowIndex).Value = Math.Ceiling(DgvItemList("仕入単価_外貨", e.RowIndex).Value / DgvItemList("仕入レート", e.RowIndex).Value)
-                                DgvItemList("仕入単価", e.RowIndex).Value = DgvItemList("仕入単価_外貨", e.RowIndex).Value / DgvItemList("仕入レート", e.RowIndex).Value
+                                Dim dotAlign As Decimal = DgvItemList("仕入単価_外貨", e.RowIndex).Value / DgvItemList("仕入レート", e.RowIndex).Value
+                                dotAlign *= 100
+                                dotAlign = Math.Ceiling(dotAlign)
+                                dotAlign /= 100
+                                DgvItemList("仕入単価", e.RowIndex).Value = dotAlign
                             End If
                     End Select
 

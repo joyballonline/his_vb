@@ -1065,7 +1065,7 @@ Public Class Cymn
                     Sql += "', '"
                     Sql += tbl.Rows(i)("数量") '発注残数
                     Sql += "', '"
-                    Sql += formatStringToNumber(tbl.Rows(i)("仕入原価")) '仕入金額
+                    Sql += formatStringToNumber(tbl.Rows(i)("仕入原価")) '仕入金額  ここでは原価を入れる
                     Sql += "', '"
                     Dim overhead As Double = 0
                     overhead = tbl.Rows(i)("仕入金額") - tbl.Rows(i)("仕入原価")
@@ -1109,11 +1109,10 @@ Public Class Cymn
 
 
                     Sql += ", "
-                    Sql += formatNumber((tbl.Rows(i)("仕入単価") * strRate)) '仕入値_外貨
-
+                    Sql += formatNumber(tbl.Rows(i)("仕入単価_外貨")) '仕入値_外貨
 
                     Sql += ", "
-                    Sql += formatNumber((tbl.Rows(i)("仕入金額") * strRate)) '仕入金額_外貨
+                    Sql += formatNumber(Math.Ceiling(tbl.Rows(i)("仕入金額") * strRate)) '仕入金額_外貨
 
                     Sql += ")"
                     _db.executeDB(Sql)
@@ -1278,7 +1277,7 @@ Public Class Cymn
         Sql += "', '"
         Sql += formatStringToNumber(TxtOrderAmount.Text) '見積金額
         Sql += "', '"
-        Sql += formatStringToNumber(cost.ToString) '仕入金額
+        Sql += formatStringToNumber(cost.ToString) '仕入金額　ここでは原価を入れる
         Sql += "', '"
         Sql += formatStringToNumber(TxtGrossProfit.Text) '粗利額
         Sql += "', '"
@@ -1322,7 +1321,7 @@ Public Class Cymn
         Sql += ", '"
         Sql += UtilClass.formatNumberF10(TxtRate.Text) 'レート
         Sql += "', '"
-        Sql += formatNumber((cost.ToString * strRate)) '仕入金額_外貨
+        Sql += formatNumber(Math.Ceiling(cost.ToString * strRate)) '仕入金額_外貨
         Sql += "')"
 
 
