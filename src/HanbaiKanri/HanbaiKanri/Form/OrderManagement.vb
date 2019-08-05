@@ -460,7 +460,9 @@ Public Class OrderManagement
             End If
 
             '今回売上の初期カーソル位置
-            DgvAdd.CurrentCell = DgvAdd(10, 0)
+            If DgvAdd.Rows.Count > 0 Then
+                DgvAdd.CurrentCell = DgvAdd(10, 0)
+            End If
 
         Catch ue As UsrDefException
             ue.dspMsg()

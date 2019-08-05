@@ -201,6 +201,11 @@ Public Class BillingManagement
 
         End If
 
+        '今回請求の初期カーソル位置
+        If DgvAdd.Rows.Count > 0 Then
+            DgvAdd.CurrentCell = DgvAdd(3, 0)
+        End If
+
     End Sub
 
     Private Sub BillLoad()
