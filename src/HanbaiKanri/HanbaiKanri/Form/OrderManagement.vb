@@ -389,6 +389,7 @@ Public Class OrderManagement
             DgvAdd.Columns("単位").ReadOnly = True
             DgvAdd.Columns("仕入先").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
             DgvAdd.Columns("仕入先").ReadOnly = True
+            DgvAdd.Columns("売単価").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
             DgvAdd.Columns("売単価").ReadOnly = True
 
             DgvAdd.Columns("仕入区分値").Visible = False
@@ -457,6 +458,9 @@ Public Class OrderManagement
                 DtpOrderDate.Value = ds4.Tables(RS).Rows(0)("売上日")
                 TxtRemarks.Text = ds4.Tables(RS).Rows(0)("備考")
             End If
+
+            '今回売上の初期カーソル位置
+            DgvAdd.CurrentCell = DgvAdd(10, 0)
 
         Catch ue As UsrDefException
             ue.dspMsg()
