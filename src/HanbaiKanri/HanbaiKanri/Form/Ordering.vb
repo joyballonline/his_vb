@@ -583,15 +583,6 @@ Public Class Ordering
         Dim tmp_cur As Decimal = 0
         Dim tmp_cur2 As Decimal = 0
 
-        'If dsHattyu.Tables(RS).Rows(0)("仕入金額") IsNot DBNull.Value Then
-        '    tmp_cur = dsHattyu.Tables(RS).Rows(0)("仕入金額")
-        '    TxtPurchaseAmount.Text = Decimal.Parse(tmp_cur).ToString("N2")
-        'End If
-
-        'If dsHattyu.Tables(RS).Rows(0)("仕入金額_外貨") IsNot DBNull.Value Then
-        '    tmp_cur = dsHattyu.Tables(RS).Rows(0)("仕入金額_外貨")
-        '    TxtPurchaseAmount2.Text = Decimal.Parse(tmp_cur).ToString("N2")
-        'End If
 
 
         Dim decOverhead As Decimal = 0
@@ -641,7 +632,7 @@ Public Class Ordering
 
         txtPurchasecost.Text = Decimal.Parse(tmp_cur).ToString("N2")        '仕入原価
         TxtPurchaseAmount.Text = Decimal.Parse(decOverhead).ToString("N2")  '仕入金額
-        TxtPurchaseAmount2.Text = Decimal.Parse(tmp_cur2)  '仕入金額_外貨
+        TxtPurchaseAmount2.Text = Decimal.Parse(tmp_cur2).ToString("N2")  '仕入金額_外貨
 
         '行番号の振り直し
         Dim rowNo As Integer = DgvItemList.Rows.Count()
