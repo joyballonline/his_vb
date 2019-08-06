@@ -2637,12 +2637,12 @@ Public Class Quote
                 book = app.Workbooks.Add(sHinaFile)  'テンプレート
                 sheet = CType(book.Worksheets(1), Excel.Worksheet)
 
-                sheet.Range("E2").Value = CmnData("見積番号") & "-" & CmnData("見積番号枝番")
-                sheet.Range("E3").Value = System.DateTime.Now.ToShortDateString()
+                sheet.Range("F2").Value = CmnData("見積番号") & "-" & CmnData("見積番号枝番")
+                sheet.Range("F3").Value = System.DateTime.Now.ToShortDateString()
                 sheet.Range("A12").Value = supplierlist(i)
                 sheet.Range("A14").Value = sheet.Range("A14").Value & DateAdd("d", 5, System.DateTime.Today).ToShortDateString() & "."
-                sheet.Range("E19").Value = CmnData("営業担当者")
-                sheet.Range("E20").Value = CmnData("入力担当者")
+                sheet.Range("F19").Value = CmnData("営業担当者")
+                sheet.Range("F20").Value = CmnData("入力担当者")
 
                 Dim rowCnt As Integer = 0
                 Dim lstRow As Integer = 23
@@ -2651,8 +2651,9 @@ Public Class Quote
 
                     If supplierlist(i) = ds3.tables(RS).rows(j)("仕入先名称").ToString() And ds3.tables(RS).rows(j)("仕入単価") <= 0 Then
                         If lstRow = 23 Then
-                            sheet.Range("A" & lstRow).Value = ds3.tables(RS).rows(j)("メーカー") & vbLf & ds3.tables(RS).rows(j)("品名") & vbLf & ds3.tables(RS).rows(j)("型式")
-                            sheet.Range("B" & lstRow).Value = ds3.tables(RS).rows(j)("数量") & " " & ds3.tables(RS).rows(j)("単位")
+                            sheet.Range("A" & lstRow).Value = (j + 1).ToString
+                            sheet.Range("B" & lstRow).Value = ds3.tables(RS).rows(j)("メーカー") & vbLf & ds3.tables(RS).rows(j)("品名") & vbLf & ds3.tables(RS).rows(j)("型式")
+                            sheet.Range("C" & lstRow).Value = ds3.tables(RS).rows(j)("数量") & " " & ds3.tables(RS).rows(j)("単位")
                             'sheet.Rows(lstRow & ":" & lstRow).AutoFit
                         Else
                             Dim cellPos As String = lstRow & ":" & lstRow
@@ -2668,20 +2669,22 @@ Public Class Quote
 
                             sheet.Range("A" & lstRow & ":F" & lstRow).Style = sheet.Range("A23:F23").Style
 
-                            sheet.Range("A" & lstRow & ":E" & lstRow).Borders(Excel.XlBordersIndex.xlEdgeBottom).LineStyle = Excel.XlLineStyle.xlContinuous
-                            sheet.Range("A" & lstRow & ":E" & lstRow).Borders(Excel.XlBordersIndex.xlEdgeTop).LineStyle = Excel.XlLineStyle.xlContinuous
-                            sheet.Range("A" & lstRow & ":E" & lstRow).Borders(Excel.XlBordersIndex.xlEdgeLeft).LineStyle = Excel.XlLineStyle.xlContinuous
-                            sheet.Range("A" & lstRow & ":E" & lstRow).Borders(Excel.XlBordersIndex.xlEdgeRight).LineStyle = Excel.XlLineStyle.xlContinuous
-                            sheet.Range("A" & lstRow & ":E" & lstRow).Font.Size = 9
+                            sheet.Range("A" & lstRow & ":F" & lstRow).Borders(Excel.XlBordersIndex.xlEdgeBottom).LineStyle = Excel.XlLineStyle.xlContinuous
+                            sheet.Range("A" & lstRow & ":F" & lstRow).Borders(Excel.XlBordersIndex.xlEdgeTop).LineStyle = Excel.XlLineStyle.xlContinuous
+                            sheet.Range("A" & lstRow & ":F" & lstRow).Borders(Excel.XlBordersIndex.xlEdgeLeft).LineStyle = Excel.XlLineStyle.xlContinuous
+                            sheet.Range("A" & lstRow & ":F" & lstRow).Borders(Excel.XlBordersIndex.xlEdgeRight).LineStyle = Excel.XlLineStyle.xlContinuous
+                            sheet.Range("A" & lstRow & ":F" & lstRow).Font.Size = 9
                             sheet.Range("A" & lstRow).Borders(Excel.XlBordersIndex.xlEdgeRight).LineStyle = Excel.XlLineStyle.xlContinuous
                             sheet.Range("B" & lstRow).Borders(Excel.XlBordersIndex.xlEdgeRight).LineStyle = Excel.XlLineStyle.xlContinuous
                             sheet.Range("C" & lstRow).Borders(Excel.XlBordersIndex.xlEdgeRight).LineStyle = Excel.XlLineStyle.xlContinuous
                             sheet.Range("D" & lstRow).Borders(Excel.XlBordersIndex.xlEdgeRight).LineStyle = Excel.XlLineStyle.xlContinuous
                             sheet.Range("E" & lstRow).Borders(Excel.XlBordersIndex.xlEdgeRight).LineStyle = Excel.XlLineStyle.xlContinuous
+                            sheet.Range("F" & lstRow).Borders(Excel.XlBordersIndex.xlEdgeRight).LineStyle = Excel.XlLineStyle.xlContinuous
 
-                            sheet.Range("A" & lstRow).Value = ds3.tables(RS).rows(j)("メーカー") & vbLf & ds3.tables(RS).rows(j)("品名") & vbLf & ds3.tables(RS).rows(j)("型式")
-                            sheet.Range("B" & lstRow).Value = ds3.tables(RS).rows(j)("数量") & " " & ds3.tables(RS).rows(j)("単位")
-                            sheet.Range("B" & lstRow).HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter
+                            sheet.Range("A" & lstRow).Value = (j + 1).ToString
+                            sheet.Range("B" & lstRow).Value = ds3.tables(RS).rows(j)("メーカー") & vbLf & ds3.tables(RS).rows(j)("品名") & vbLf & ds3.tables(RS).rows(j)("型式")
+                            sheet.Range("C" & lstRow).Value = ds3.tables(RS).rows(j)("数量") & " " & ds3.tables(RS).rows(j)("単位")
+                            sheet.Range("C" & lstRow).HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter
 
                             'sheet.Rows(lstRow & ":" & lstRow).AutoFit
 
