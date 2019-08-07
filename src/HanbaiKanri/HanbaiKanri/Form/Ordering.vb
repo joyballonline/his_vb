@@ -1821,12 +1821,7 @@ Public Class Ordering
     Private Sub BtnCodeSearch_Click(sender As Object, e As EventArgs) Handles BtnCodeSearch.Click
         Dim Sql As String = ""
 
-        Sql = " AND "
-        Sql += "仕入先コード"
-        Sql += " ILIKE "
-        Sql += "'"
-        Sql += TxtSupplierCode.Text
-        Sql += "'"
+        Sql = " AND 仕入先コード = '" & TxtSupplierCode.Text & "'"
 
         Dim dsSupplier As DataSet = getDsData("m11_supplier", Sql)
 
@@ -1841,16 +1836,6 @@ Public Class Ordering
 
         End If
     End Sub
-
-    '金額フォーマット（登録の際の小数点指定子）を日本の形式に合わせる
-    '桁区切り記号は外す
-    Private Function formatNumber(ByVal prmVal As Decimal) As String
-
-        Dim nfi As NumberFormatInfo = New CultureInfo(CommonConst.CI_JP, False).NumberFormat
-
-        '日本の形式に書き換える
-        Return prmVal.ToString("F3", nfi) '売掛残高を増やす
-    End Function
 
     'sqlで実行する文字列からシングルクォーテーションを文字コードにする
     Private Function escapeSql(ByVal prmSql As String) As String
