@@ -1785,37 +1785,6 @@ Public Class Ordering
                 num = num + 1
             Next
 
-            'For i As Integer = 0 To dsHattyudt.Tables(RS).Rows.Count - 1
-            '    Dim cell As String
-
-            '    cell = "A" & currentCnt
-            '    sheet.Range(cell).Value = num
-            '    cell = "C" & currentCnt
-            '    sheet.Range(cell).Value = dsHattyudt.Tables(RS).Rows(i)("メーカー") & vbLf & dsHattyudt.Tables(RS).Rows(i)("品名") & vbLf & dsHattyudt.Tables(RS).Rows(i)("型式")
-            '    cell = "L" & currentCnt
-            '    sheet.Range(cell).Value = dsHattyudt.Tables(RS).Rows(i)("発注数量") & " " & dsHattyudt.Tables(RS).Rows(i)("単位")
-
-            '    Dim dsHanyo = getDsHanyoData(CommonConst.FIXED_KEY_TRADE_TERMS, dsHattyudt.Tables(RS).Rows(i)("貿易条件").ToString)
-
-            '    cell = "O" & currentCnt
-            '    If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-            '        sheet.Range(cell).Value = dsHanyo.Tables(RS).Rows(0)("文字２")
-            '    Else
-            '        sheet.Range(cell).Value = dsHanyo.Tables(RS).Rows(0)("文字１")
-            '    End If
-
-            '    cell = "R" & currentCnt
-            '    sheet.Range(cell).Value = dsHattyudt.Tables(RS).Rows(i)("仕入単価_外貨")
-            '    cell = "W" & currentCnt
-            '    sheet.Range(cell).Value = dsHattyudt.Tables(RS).Rows(i)("仕入単価_外貨") * dsHattyudt.Tables(RS).Rows(i)("発注数量")
-
-            '    totalPrice = totalPrice + dsHattyudt.Tables(RS).Rows(i)("仕入金額")
-
-            '    currentCnt = currentCnt + 1
-            '    num = num + 1
-
-            'Next
-
             sheet.Range("W" & lstRow + 1).Value = totalPrice 'Subtotal
             sheet.Range("W" & lstRow + 2).Value = IIf(supplierData.Tables(RS).Rows(0)("国内区分") = CommonConst.DD_KBN_OVERSEAS,
                                                       "",
@@ -1844,10 +1813,6 @@ Public Class Ordering
             Throw ex
 
         Finally
-            'app.Quit()
-            'Marshal.ReleaseComObject(sheet)
-            'Marshal.ReleaseComObject(book)
-            'Marshal.ReleaseComObject(app)
 
         End Try
     End Sub
