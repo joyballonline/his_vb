@@ -71,6 +71,10 @@ Public Class PaymentList
     '画面表示時
     Private Sub MstSuppliere_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        'InvoiceDateの範囲指定を初期設定
+        TxtInvoiceDateSince.Value = DateAdd("d", CommonConst.SINCE_DEFAULT_DAY, DateTime.Today)
+        TxtInvoiceDateUntil.Value = DateTime.Today
+
         '一覧取得
         getSiharaiList()
 
@@ -167,23 +171,9 @@ Public Class PaymentList
             '仕入先の一覧から、支払一覧を作成
             For j As Integer = 0 To dsHattyu.Tables(RS).Rows.Count - 1    't20_hattyu
 
-
-                If IsDBNull(dsHattyu.Tables(RS).Rows(j)("仕入金額_外貨合計")) Then
-                    SupplierOrderAmountFC = 0
-                Else
-                    SupplierOrderAmountFC = dsHattyu.Tables(RS).Rows(j)("仕入金額_外貨合計")
-                End If
-
-                If IsDBNull(dsHattyu.Tables(RS).Rows(j)("仕入金額_合計")) Then
-                    SupplierOrderAmount = 0
-                Else
-                    SupplierOrderAmount = dsHattyu.Tables(RS).Rows(j)("仕入金額_合計")
-                End If
-
-
                 '仕入先と一致する買掛基本を取得
                 Sql = "SELECT"
-                Sql += " sum(買掛残高_外貨) as 買掛残高_外貨合計, sum(買掛残高) as 買掛残高_合計"
+                Sql += " count(*) as 件数,sum(買掛残高_外貨) as 買掛残高_外貨合計, sum(買掛残高) as 買掛残高_合計"
 
                 Sql += " FROM "
 
@@ -207,52 +197,96 @@ Public Class PaymentList
                     Sql += " AND 通貨 = " & dsHattyu.Tables(RS).Rows(j)("通貨")
                 End If
 
+
+                'InvoiceDate
+                If TxtInvoiceDateSince.Text <> "" Then
+                    Sql += " And "
+                    Sql += " 買掛日"
+                    Sql += " >=  "
+                    Sql += "'"
+                    Sql += UtilClass.strFormatDate(RevoveChars(TxtInvoiceDateSince.Text))
+                    Sql += "'"
+                End If
+                If TxtInvoiceDateUntil.Text <> "" Then
+                    Sql += " and "
+                    Sql += " 買掛日"
+                    Sql += " <=  "
+                    Sql += "'"
+                    Sql += UtilClass.strFormatDate(RevoveChars(TxtInvoiceDateUntil.Text))
+                    Sql += "'"
+                End If
+
+
+                '支払残０を含める場合　チェック = true
+                If ChkZeroData.Checked = True Then
+                Else
+                    Sql += " having  sum(買掛残高)<> 0"
+                End If
+
                 Dim dsKikehd As DataSet = _db.selectDB(Sql, RS, reccnt)
 
+                '件数を判定
+                If dsKikehd.Tables(RS).Rows.Count > 0 Then  '件数あり
 
-                '買掛残高を集計
-                If IsDBNull(dsKikehd.Tables(RS).Rows(0)("買掛残高_外貨合計")) Then
-                    AccountsReceivableFC = 0
-                Else
-                    AccountsReceivableFC = dsKikehd.Tables(RS).Rows(0)("買掛残高_外貨合計")
+
+                    If IsDBNull(dsHattyu.Tables(RS).Rows(j)("仕入金額_外貨合計")) Then
+                        SupplierOrderAmountFC = 0
+                    Else
+                        SupplierOrderAmountFC = dsHattyu.Tables(RS).Rows(j)("仕入金額_外貨合計")
+                    End If
+
+                    If IsDBNull(dsHattyu.Tables(RS).Rows(j)("仕入金額_合計")) Then
+                        SupplierOrderAmount = 0
+                    Else
+                        SupplierOrderAmount = dsHattyu.Tables(RS).Rows(j)("仕入金額_合計")
+                    End If
+
+
+                    '買掛残高を集計
+                    If IsDBNull(dsKikehd.Tables(RS).Rows(0)("買掛残高_外貨合計")) Then
+                        AccountsReceivableFC = 0
+                    Else
+                        AccountsReceivableFC = dsKikehd.Tables(RS).Rows(0)("買掛残高_外貨合計")
+                    End If
+
+                    If IsDBNull(dsKikehd.Tables(RS).Rows(0)("買掛残高_合計")) Then
+                        AccountsReceivable = 0
+                    Else
+                        AccountsReceivable = dsKikehd.Tables(RS).Rows(0)("買掛残高_合計")
+                    End If
+
+
+                    Dim idx = DgvSupplier.Rows.Count()  '一覧の列数を取得
+
+
+                    If IsDBNull(dsHattyu.Tables(RS).Rows(j)("通貨")) Then
+                        cur = vbNullString
+                    Else
+                        Sql = " and 採番キー = " & dsHattyu.Tables(RS).Rows(j)("通貨")
+                        curds = getDsData("m25_currency", Sql)
+
+                        cur = curds.Tables(RS).Rows(0)("通貨コード")
+                    End If
+
+
+                    '表示エリアにデータを追加
+                    DgvSupplier.Rows.Add()
+                    DgvSupplier.Rows(idx).Cells("仕入先名").Value = dsSupplier.Tables(RS).Rows(i)("仕入先名")
+
+                    DgvSupplier.Rows(idx).Cells("通貨_外貨").Value = cur
+                    DgvSupplier.Rows(idx).Cells("仕入金額計_外貨").Value = SupplierOrderAmountFC
+                    DgvSupplier.Rows(idx).Cells("支払残高_外貨").Value = AccountsReceivableFC
+
+                    DgvSupplier.Rows(idx).Cells("通貨").Value = setBaseCurrency()
+                    DgvSupplier.Rows(idx).Cells("仕入金額計").Value = SupplierOrderAmount
+                    DgvSupplier.Rows(idx).Cells("支払残高").Value = AccountsReceivable
+
+                    DgvSupplier.Rows(idx).Cells("仕入先コード").Value = dsSupplier.Tables(RS).Rows(i)("仕入先コード")
+                    DgvSupplier.Rows(idx).Cells("会社コード").Value = dsSupplier.Tables(RS).Rows(i)("会社コード")
+
+                    DgvSupplier.Rows(idx).Cells("通貨_外貨コード").Value = dsHattyu.Tables(RS).Rows(j)("通貨")
+
                 End If
-
-                If IsDBNull(dsKikehd.Tables(RS).Rows(0)("買掛残高_合計")) Then
-                    AccountsReceivable = 0
-                Else
-                    AccountsReceivable = dsKikehd.Tables(RS).Rows(0)("買掛残高_合計")
-                End If
-
-
-                Dim idx = DgvSupplier.Rows.Count()  '一覧の列数を取得
-
-
-                If IsDBNull(dsHattyu.Tables(RS).Rows(j)("通貨")) Then
-                    cur = vbNullString
-                Else
-                    Sql = " and 採番キー = " & dsHattyu.Tables(RS).Rows(j)("通貨")
-                    curds = getDsData("m25_currency", Sql)
-
-                    cur = curds.Tables(RS).Rows(0)("通貨コード")
-                End If
-
-
-                '表示エリアにデータを追加
-                DgvSupplier.Rows.Add()
-                DgvSupplier.Rows(idx).Cells("仕入先名").Value = dsSupplier.Tables(RS).Rows(i)("仕入先名")
-
-                DgvSupplier.Rows(idx).Cells("通貨_外貨").Value = cur
-                DgvSupplier.Rows(idx).Cells("仕入金額計_外貨").Value = SupplierOrderAmountFC
-                DgvSupplier.Rows(idx).Cells("支払残高_外貨").Value = AccountsReceivableFC
-
-                DgvSupplier.Rows(idx).Cells("通貨").Value = setBaseCurrency
-                DgvSupplier.Rows(idx).Cells("仕入金額計").Value = SupplierOrderAmount
-                DgvSupplier.Rows(idx).Cells("支払残高").Value = AccountsReceivable
-
-                DgvSupplier.Rows(idx).Cells("仕入先コード").Value = dsSupplier.Tables(RS).Rows(i)("仕入先コード")
-                DgvSupplier.Rows(idx).Cells("会社コード").Value = dsSupplier.Tables(RS).Rows(i)("会社コード")
-
-                DgvSupplier.Rows(idx).Cells("通貨_外貨コード").Value = dsHattyu.Tables(RS).Rows(j)("通貨")
 
             Next
         Next
@@ -382,6 +416,22 @@ Public Class PaymentList
         'TxtIDRCurrency.Text = ds.Tables(RS).Rows(0)("通貨コード")
         setBaseCurrency = ds.Tables(RS).Rows(0)("通貨コード")
 
+    End Function
+
+    ''' <summary>
+    ''' 指定した文字列から指定した文字を全て削除する
+    ''' </summary>
+    ''' <param name="s">対象となる文字列。</param>
+    ''' <returns>sに含まれている全てのcharacters文字が削除された文字列。</returns>
+    Public Shared Function RevoveChars(s As String) As String
+        Dim buf As New System.Text.StringBuilder(s)
+        '削除する文字の配列
+        Dim removeChars As Char() = New Char() {vbCr, vbLf, Chr(39)}
+
+        For Each c As Char In removeChars
+            buf.Replace(c.ToString(), "")
+        Next
+        Return buf.ToString()
     End Function
 
 End Class
