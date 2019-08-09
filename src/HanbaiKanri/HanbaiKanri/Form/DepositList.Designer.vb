@@ -54,6 +54,11 @@ Partial Class DepositList
         Me.TxtCustomerName = New System.Windows.Forms.TextBox()
         Me.BtnSerach = New System.Windows.Forms.Button()
         Me.LblMode = New System.Windows.Forms.Label()
+        Me.ChkZeroData = New System.Windows.Forms.CheckBox()
+        Me.TxtBillingDateUntil = New System.Windows.Forms.DateTimePicker()
+        Me.TxtBillingDateSince = New System.Windows.Forms.DateTimePicker()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.LblBillingDate = New System.Windows.Forms.Label()
         CType(Me.DgvCustomer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -236,7 +241,7 @@ Partial Class DepositList
         Me.TxtCustomerCode.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtCustomerCode.Location = New System.Drawing.Point(188, 120)
         Me.TxtCustomerCode.Name = "TxtCustomerCode"
-        Me.TxtCustomerCode.Size = New System.Drawing.Size(350, 37)
+        Me.TxtCustomerCode.Size = New System.Drawing.Size(350, 22)
         Me.TxtCustomerCode.TabIndex = 4
         '
         'Label3
@@ -256,7 +261,7 @@ Partial Class DepositList
         Me.TxtTel.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtTel.Location = New System.Drawing.Point(188, 92)
         Me.TxtTel.Name = "TxtTel"
-        Me.TxtTel.Size = New System.Drawing.Size(350, 37)
+        Me.TxtTel.Size = New System.Drawing.Size(350, 22)
         Me.TxtTel.TabIndex = 3
         '
         'Label2
@@ -276,7 +281,7 @@ Partial Class DepositList
         Me.TxtAddress.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtAddress.Location = New System.Drawing.Point(188, 64)
         Me.TxtAddress.Name = "TxtAddress"
-        Me.TxtAddress.Size = New System.Drawing.Size(350, 37)
+        Me.TxtAddress.Size = New System.Drawing.Size(350, 22)
         Me.TxtAddress.TabIndex = 2
         '
         'Label1
@@ -297,7 +302,7 @@ Partial Class DepositList
         Me.LblConditions.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblConditions.Location = New System.Drawing.Point(9, 9)
         Me.LblConditions.Name = "LblConditions"
-        Me.LblConditions.Size = New System.Drawing.Size(163, 30)
+        Me.LblConditions.Size = New System.Drawing.Size(87, 15)
         Me.LblConditions.TabIndex = 49
         Me.LblConditions.Text = "■抽出条件"
         '
@@ -306,7 +311,7 @@ Partial Class DepositList
         Me.TxtCustomerName.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtCustomerName.Location = New System.Drawing.Point(188, 36)
         Me.TxtCustomerName.Name = "TxtCustomerName"
-        Me.TxtCustomerName.Size = New System.Drawing.Size(350, 37)
+        Me.TxtCustomerName.Size = New System.Drawing.Size(350, 22)
         Me.TxtCustomerName.TabIndex = 1
         '
         'BtnSerach
@@ -331,10 +336,73 @@ Partial Class DepositList
         Me.LblMode.Text = "入金入力モード"
         Me.LblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'ChkZeroData
+        '
+        Me.ChkZeroData.AutoSize = True
+        Me.ChkZeroData.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.ChkZeroData.Location = New System.Drawing.Point(577, 121)
+        Me.ChkZeroData.Name = "ChkZeroData"
+        Me.ChkZeroData.Size = New System.Drawing.Size(130, 19)
+        Me.ChkZeroData.TabIndex = 325
+        Me.ChkZeroData.Text = "売掛残０を含める"
+        Me.ChkZeroData.UseVisualStyleBackColor = True
+        '
+        'TxtBillingDateUntil
+        '
+        Me.TxtBillingDateUntil.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtBillingDateUntil.CustomFormat = ""
+        Me.TxtBillingDateUntil.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtBillingDateUntil.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.TxtBillingDateUntil.Location = New System.Drawing.Point(949, 36)
+        Me.TxtBillingDateUntil.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
+        Me.TxtBillingDateUntil.Name = "TxtBillingDateUntil"
+        Me.TxtBillingDateUntil.Size = New System.Drawing.Size(170, 22)
+        Me.TxtBillingDateUntil.TabIndex = 327
+        Me.TxtBillingDateUntil.Value = New Date(2018, 6, 5, 23, 23, 58, 0)
+        '
+        'TxtBillingDateSince
+        '
+        Me.TxtBillingDateSince.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtBillingDateSince.CustomFormat = ""
+        Me.TxtBillingDateSince.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtBillingDateSince.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.TxtBillingDateSince.Location = New System.Drawing.Point(750, 36)
+        Me.TxtBillingDateSince.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
+        Me.TxtBillingDateSince.Name = "TxtBillingDateSince"
+        Me.TxtBillingDateSince.Size = New System.Drawing.Size(170, 22)
+        Me.TxtBillingDateSince.TabIndex = 326
+        Me.TxtBillingDateSince.Value = New Date(2018, 6, 5, 23, 23, 58, 0)
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(926, 41)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(17, 12)
+        Me.Label5.TabIndex = 329
+        Me.Label5.Text = "～"
+        '
+        'LblBillingDate
+        '
+        Me.LblBillingDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblBillingDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblBillingDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblBillingDate.Location = New System.Drawing.Point(574, 36)
+        Me.LblBillingDate.Name = "LblBillingDate"
+        Me.LblBillingDate.Size = New System.Drawing.Size(170, 22)
+        Me.LblBillingDate.TabIndex = 328
+        Me.LblBillingDate.Text = "請求日"
+        Me.LblBillingDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'DepositList
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.TxtBillingDateUntil)
+        Me.Controls.Add(Me.TxtBillingDateSince)
+        Me.Controls.Add(Me.Label5)
+        Me.Controls.Add(Me.LblBillingDate)
+        Me.Controls.Add(Me.ChkZeroData)
         Me.Controls.Add(Me.LblMode)
         Me.Controls.Add(Me.BtnSerach)
         Me.Controls.Add(Me.Label4)
@@ -387,4 +455,9 @@ Partial Class DepositList
     Friend WithEvents 請求件数 As DataGridViewTextBoxColumn
     Friend WithEvents 会社コード As DataGridViewTextBoxColumn
     Friend WithEvents 通貨_外貨コード As DataGridViewTextBoxColumn
+    Friend WithEvents ChkZeroData As CheckBox
+    Friend WithEvents TxtBillingDateUntil As DateTimePicker
+    Friend WithEvents TxtBillingDateSince As DateTimePicker
+    Friend WithEvents Label5 As Label
+    Friend WithEvents LblBillingDate As Label
 End Class
