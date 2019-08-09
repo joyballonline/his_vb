@@ -24,8 +24,17 @@ Partial Class BillingManagement
     Private Sub InitializeComponent()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -37,20 +46,26 @@ Partial Class BillingManagement
         Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LblAdd = New System.Windows.Forms.Label()
         Me.LblHistory = New System.Windows.Forms.Label()
         Me.LblCymndt = New System.Windows.Forms.Label()
         Me.DgvAdd = New System.Windows.Forms.DataGridView()
+        Me.AddNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.今回請求先 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.今回請求金額計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.今回備考1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.今回備考2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DgvHistory = New System.Windows.Forms.DataGridView()
+        Me.No = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.請求番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.請求日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.請求区分 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.請求先 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.請求金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.備考1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.備考2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.請求済み受注番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.請求済み受注番号枝番 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DgvCymndt = New System.Windows.Forms.DataGridView()
         Me.明細 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.メーカー = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -62,13 +77,6 @@ Partial Class BillingManagement
         Me.売上単価 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.売上金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DgvCymn = New System.Windows.Forms.DataGridView()
-        Me.受注番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.受注日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.得意先 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.客先番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.受注金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.請求金額計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.請求残高 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DtpBillingDate = New System.Windows.Forms.DateTimePicker()
         Me.LblRemarks1 = New System.Windows.Forms.Label()
         Me.TxtRemarks1 = New System.Windows.Forms.TextBox()
@@ -90,21 +98,13 @@ Partial Class BillingManagement
         Me.LblDepositDate = New System.Windows.Forms.Label()
         Me.TxtIDRCurrency = New System.Windows.Forms.TextBox()
         Me.LblIDRCurrency = New System.Windows.Forms.Label()
-        Me.No = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.請求番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.請求日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.請求区分 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.請求先 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.請求金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.備考1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.備考2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.請求済み受注番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.請求済み受注番号枝番 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.AddNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.今回請求先 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.今回請求金額計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.今回備考1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.今回備考2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.受注番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.受注日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.得意先 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.客先番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.受注金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.請求金額計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.請求残高 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DgvAdd, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvHistory, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvCymndt, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -170,6 +170,44 @@ Partial Class BillingManagement
         Me.DgvAdd.Size = New System.Drawing.Size(1327, 40)
         Me.DgvAdd.TabIndex = 5
         '
+        'AddNo
+        '
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.AddNo.DefaultCellStyle = DataGridViewCellStyle2
+        Me.AddNo.HeaderText = "No"
+        Me.AddNo.Name = "AddNo"
+        Me.AddNo.Width = 82
+        '
+        '今回請求先
+        '
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.今回請求先.DefaultCellStyle = DataGridViewCellStyle3
+        Me.今回請求先.HeaderText = "請求先"
+        Me.今回請求先.Name = "今回請求先"
+        Me.今回請求先.Width = 127
+        '
+        '今回請求金額計
+        '
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle4.Format = "N2"
+        DataGridViewCellStyle4.NullValue = "0.00"
+        Me.今回請求金額計.DefaultCellStyle = DataGridViewCellStyle4
+        Me.今回請求金額計.HeaderText = "請求金額計"
+        Me.今回請求金額計.Name = "今回請求金額計"
+        Me.今回請求金額計.Width = 175
+        '
+        '今回備考1
+        '
+        Me.今回備考1.HeaderText = "備考1"
+        Me.今回備考1.Name = "今回備考1"
+        Me.今回備考1.Width = 115
+        '
+        '今回備考2
+        '
+        Me.今回備考2.HeaderText = "備考2"
+        Me.今回備考2.Name = "今回備考2"
+        Me.今回備考2.Width = 115
+        '
         'DgvHistory
         '
         Me.DgvHistory.AllowUserToAddRows = False
@@ -199,6 +237,80 @@ Partial Class BillingManagement
         Me.DgvHistory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvHistory.Size = New System.Drawing.Size(1326, 100)
         Me.DgvHistory.TabIndex = 3
+        '
+        'No
+        '
+        DataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.No.DefaultCellStyle = DataGridViewCellStyle7
+        Me.No.HeaderText = "No"
+        Me.No.Name = "No"
+        Me.No.Width = 82
+        '
+        '請求番号
+        '
+        DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.請求番号.DefaultCellStyle = DataGridViewCellStyle8
+        Me.請求番号.HeaderText = "請求番号"
+        Me.請求番号.Name = "請求番号"
+        Me.請求番号.Width = 151
+        '
+        '請求日
+        '
+        DataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.請求日.DefaultCellStyle = DataGridViewCellStyle9
+        Me.請求日.HeaderText = "請求日"
+        Me.請求日.Name = "請求日"
+        Me.請求日.Width = 127
+        '
+        '請求区分
+        '
+        DataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.請求区分.DefaultCellStyle = DataGridViewCellStyle10
+        Me.請求区分.HeaderText = "請求区分"
+        Me.請求区分.Name = "請求区分"
+        Me.請求区分.Width = 151
+        '
+        '請求先
+        '
+        DataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.請求先.DefaultCellStyle = DataGridViewCellStyle11
+        Me.請求先.HeaderText = "請求先"
+        Me.請求先.Name = "請求先"
+        Me.請求先.Width = 127
+        '
+        '請求金額
+        '
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.請求金額.DefaultCellStyle = DataGridViewCellStyle12
+        Me.請求金額.HeaderText = "請求金額計"
+        Me.請求金額.Name = "請求金額"
+        Me.請求金額.Width = 175
+        '
+        '備考1
+        '
+        Me.備考1.HeaderText = "備考1"
+        Me.備考1.Name = "備考1"
+        Me.備考1.Width = 115
+        '
+        '備考2
+        '
+        Me.備考2.HeaderText = "備考2"
+        Me.備考2.Name = "備考2"
+        Me.備考2.Width = 115
+        '
+        '請求済み受注番号
+        '
+        Me.請求済み受注番号.HeaderText = "請求済み受注番号"
+        Me.請求済み受注番号.Name = "請求済み受注番号"
+        Me.請求済み受注番号.Visible = False
+        Me.請求済み受注番号.Width = 244
+        '
+        '請求済み受注番号枝番
+        '
+        Me.請求済み受注番号枝番.HeaderText = "請求済み受注番号枝番"
+        Me.請求済み受注番号枝番.Name = "請求済み受注番号枝番"
+        Me.請求済み受注番号枝番.Visible = False
+        Me.請求済み受注番号枝番.Width = 292
         '
         'DgvCymndt
         '
@@ -321,54 +433,6 @@ Partial Class BillingManagement
         Me.DgvCymn.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvCymn.Size = New System.Drawing.Size(1053, 100)
         Me.DgvCymn.TabIndex = 1
-        '
-        '受注番号
-        '
-        Me.受注番号.HeaderText = "受注番号"
-        Me.受注番号.Name = "受注番号"
-        Me.受注番号.Width = 151
-        '
-        '受注日
-        '
-        Me.受注日.HeaderText = "受注日"
-        Me.受注日.Name = "受注日"
-        Me.受注日.Width = 127
-        '
-        '得意先
-        '
-        Me.得意先.HeaderText = "得意先"
-        Me.得意先.Name = "得意先"
-        Me.得意先.Width = 127
-        '
-        '客先番号
-        '
-        Me.客先番号.HeaderText = "客先番号"
-        Me.客先番号.Name = "客先番号"
-        Me.客先番号.Width = 151
-        '
-        '受注金額
-        '
-        DataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.受注金額.DefaultCellStyle = DataGridViewCellStyle21
-        Me.受注金額.HeaderText = "受注金額"
-        Me.受注金額.Name = "受注金額"
-        Me.受注金額.Width = 151
-        '
-        '請求金額計
-        '
-        DataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.請求金額計.DefaultCellStyle = DataGridViewCellStyle22
-        Me.請求金額計.HeaderText = "請求金額計"
-        Me.請求金額計.Name = "請求金額計"
-        Me.請求金額計.Width = 175
-        '
-        '請求残高
-        '
-        DataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.請求残高.DefaultCellStyle = DataGridViewCellStyle23
-        Me.請求残高.HeaderText = "請求残高"
-        Me.請求残高.Name = "請求残高"
-        Me.請求残高.Width = 151
         '
         'DtpBillingDate
         '
@@ -615,117 +679,59 @@ Partial Class BillingManagement
         Me.LblIDRCurrency.Text = "通貨"
         Me.LblIDRCurrency.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'No
+        '受注番号
         '
-        DataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.No.DefaultCellStyle = DataGridViewCellStyle7
-        Me.No.HeaderText = "No"
-        Me.No.Name = "No"
-        Me.No.Width = 82
+        Me.受注番号.HeaderText = "受注番号"
+        Me.受注番号.Name = "受注番号"
+        Me.受注番号.Width = 151
         '
-        '請求番号
+        '受注日
         '
-        DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.請求番号.DefaultCellStyle = DataGridViewCellStyle8
-        Me.請求番号.HeaderText = "請求番号"
-        Me.請求番号.Name = "請求番号"
-        Me.請求番号.Width = 151
+        Me.受注日.HeaderText = "受注日"
+        Me.受注日.Name = "受注日"
+        Me.受注日.Width = 127
         '
-        '請求日
+        '得意先
         '
-        DataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.請求日.DefaultCellStyle = DataGridViewCellStyle9
-        Me.請求日.HeaderText = "請求日"
-        Me.請求日.Name = "請求日"
-        Me.請求日.Width = 127
+        Me.得意先.HeaderText = "得意先"
+        Me.得意先.Name = "得意先"
+        Me.得意先.Width = 127
         '
-        '請求区分
+        '客先番号
         '
-        DataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.請求区分.DefaultCellStyle = DataGridViewCellStyle10
-        Me.請求区分.HeaderText = "請求区分"
-        Me.請求区分.Name = "請求区分"
-        Me.請求区分.Width = 151
+        Me.客先番号.HeaderText = "客先番号"
+        Me.客先番号.Name = "客先番号"
+        Me.客先番号.Width = 151
         '
-        '請求先
+        '受注金額
         '
-        DataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.請求先.DefaultCellStyle = DataGridViewCellStyle11
-        Me.請求先.HeaderText = "請求先"
-        Me.請求先.Name = "請求先"
-        Me.請求先.Width = 127
+        DataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle21.Format = "N2"
+        DataGridViewCellStyle21.NullValue = "0.00"
+        Me.受注金額.DefaultCellStyle = DataGridViewCellStyle21
+        Me.受注金額.HeaderText = "受注金額"
+        Me.受注金額.Name = "受注金額"
+        Me.受注金額.Width = 151
         '
-        '請求金額
+        '請求金額計
         '
-        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.請求金額.DefaultCellStyle = DataGridViewCellStyle12
-        Me.請求金額.HeaderText = "請求金額計"
-        Me.請求金額.Name = "請求金額"
-        Me.請求金額.Width = 175
+        DataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle22.Format = "N2"
+        DataGridViewCellStyle22.NullValue = "0.00"
+        Me.請求金額計.DefaultCellStyle = DataGridViewCellStyle22
+        Me.請求金額計.HeaderText = "請求金額計"
+        Me.請求金額計.Name = "請求金額計"
+        Me.請求金額計.Width = 175
         '
-        '備考1
+        '請求残高
         '
-        Me.備考1.HeaderText = "備考1"
-        Me.備考1.Name = "備考1"
-        Me.備考1.Width = 115
-        '
-        '備考2
-        '
-        Me.備考2.HeaderText = "備考2"
-        Me.備考2.Name = "備考2"
-        Me.備考2.Width = 115
-        '
-        '請求済み受注番号
-        '
-        Me.請求済み受注番号.HeaderText = "請求済み受注番号"
-        Me.請求済み受注番号.Name = "請求済み受注番号"
-        Me.請求済み受注番号.Visible = False
-        Me.請求済み受注番号.Width = 244
-        '
-        '請求済み受注番号枝番
-        '
-        Me.請求済み受注番号枝番.HeaderText = "請求済み受注番号枝番"
-        Me.請求済み受注番号枝番.Name = "請求済み受注番号枝番"
-        Me.請求済み受注番号枝番.Visible = False
-        Me.請求済み受注番号枝番.Width = 292
-        '
-        'AddNo
-        '
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.AddNo.DefaultCellStyle = DataGridViewCellStyle2
-        Me.AddNo.HeaderText = "No"
-        Me.AddNo.Name = "AddNo"
-        Me.AddNo.Width = 82
-        '
-        '今回請求先
-        '
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.今回請求先.DefaultCellStyle = DataGridViewCellStyle3
-        Me.今回請求先.HeaderText = "請求先"
-        Me.今回請求先.Name = "今回請求先"
-        Me.今回請求先.Width = 127
-        '
-        '今回請求金額計
-        '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle4.Format = "N2"
-        DataGridViewCellStyle4.NullValue = "0.00"
-        Me.今回請求金額計.DefaultCellStyle = DataGridViewCellStyle4
-        Me.今回請求金額計.HeaderText = "請求金額計"
-        Me.今回請求金額計.Name = "今回請求金額計"
-        Me.今回請求金額計.Width = 175
-        '
-        '今回備考1
-        '
-        Me.今回備考1.HeaderText = "備考1"
-        Me.今回備考1.Name = "今回備考1"
-        Me.今回備考1.Width = 115
-        '
-        '今回備考2
-        '
-        Me.今回備考2.HeaderText = "備考2"
-        Me.今回備考2.Name = "今回備考2"
-        Me.今回備考2.Width = 115
+        DataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle23.Format = "N2"
+        DataGridViewCellStyle23.NullValue = "0.00"
+        Me.請求残高.DefaultCellStyle = DataGridViewCellStyle23
+        Me.請求残高.HeaderText = "請求残高"
+        Me.請求残高.Name = "請求残高"
+        Me.請求残高.Width = 151
         '
         'BillingManagement
         '
@@ -804,13 +810,6 @@ Partial Class BillingManagement
     Friend WithEvents 売上数量 As DataGridViewTextBoxColumn
     Friend WithEvents 売上単価 As DataGridViewTextBoxColumn
     Friend WithEvents 売上金額 As DataGridViewTextBoxColumn
-    Friend WithEvents 受注番号 As DataGridViewTextBoxColumn
-    Friend WithEvents 受注日 As DataGridViewTextBoxColumn
-    Friend WithEvents 得意先 As DataGridViewTextBoxColumn
-    Friend WithEvents 客先番号 As DataGridViewTextBoxColumn
-    Friend WithEvents 受注金額 As DataGridViewTextBoxColumn
-    Friend WithEvents 請求金額計 As DataGridViewTextBoxColumn
-    Friend WithEvents 請求残高 As DataGridViewTextBoxColumn
     Friend WithEvents DtpDepositDate As DateTimePicker
     Friend WithEvents LblDepositDate As Label
     Friend WithEvents TxtIDRCurrency As TextBox
@@ -830,4 +829,11 @@ Partial Class BillingManagement
     Friend WithEvents 備考2 As DataGridViewTextBoxColumn
     Friend WithEvents 請求済み受注番号 As DataGridViewTextBoxColumn
     Friend WithEvents 請求済み受注番号枝番 As DataGridViewTextBoxColumn
+    Friend WithEvents 受注番号 As DataGridViewTextBoxColumn
+    Friend WithEvents 受注日 As DataGridViewTextBoxColumn
+    Friend WithEvents 得意先 As DataGridViewTextBoxColumn
+    Friend WithEvents 客先番号 As DataGridViewTextBoxColumn
+    Friend WithEvents 受注金額 As DataGridViewTextBoxColumn
+    Friend WithEvents 請求金額計 As DataGridViewTextBoxColumn
+    Friend WithEvents 請求残高 As DataGridViewTextBoxColumn
 End Class

@@ -273,7 +273,7 @@ Public Class BillingManagement
         '請求基本取得
         Dim dsSkyuhd As DataSet = getDsData("t23_skyuhd", Sql)
 
-        Dim BillingAmount As Long = 0
+        Dim BillingAmount As Decimal = 0
 
         '請求金額計を集計
         BillingAmount = IIf(
@@ -292,14 +292,14 @@ Public Class BillingManagement
         DgvCymn.Rows(0).Cells("受注日").Value = dsCymnhd.Tables(RS).Rows(0)("受注日").ToShortDateString()
         DgvCymn.Rows(0).Cells("得意先").Value = dsCymnhd.Tables(RS).Rows(0)("得意先名")
         DgvCymn.Rows(0).Cells("客先番号").Value = dsCymnhd.Tables(RS).Rows(0)("客先番号").ToString
-        DgvCymn.Rows(0).Cells("受注金額").Value = total.ToString("F0")
+        DgvCymn.Rows(0).Cells("受注金額").Value = total.ToString("N2")
         DgvCymn.Rows(0).Cells("請求金額計").Value = BillingAmount
-        DgvCymn.Rows(0).Cells("請求残高").Value = (total - BillingAmount).ToString("F0")
+        DgvCymn.Rows(0).Cells("請求残高").Value = (total - BillingAmount).ToString("N2")
 
         '数字形式
-        DgvCymn.Columns("受注金額").DefaultCellStyle.Format = "N0"
-        DgvCymn.Columns("請求金額計").DefaultCellStyle.Format = "N0"
-        DgvCymn.Columns("請求残高").DefaultCellStyle.Format = "N0"
+        DgvCymn.Columns("受注金額").DefaultCellStyle.Format = "N2"
+        DgvCymn.Columns("請求金額計").DefaultCellStyle.Format = "N2"
+        DgvCymn.Columns("請求残高").DefaultCellStyle.Format = "N2"
 
         '#633 のためコメントアウト
         'DtpBillingDate.MinDate = dsCymnhd.Tables(RS).Rows(0)("受注日").ToShortDateString()
@@ -316,14 +316,17 @@ Public Class BillingManagement
             DgvCymndt.Rows(i).Cells("単位").Value = dsCymndt.Tables(RS).Rows(i)("単位")
             DgvCymndt.Rows(i).Cells("売上数量").Value = dsCymndt.Tables(RS).Rows(i)("売上数量")
             DgvCymndt.Rows(i).Cells("売上単価").Value = dsCymndt.Tables(RS).Rows(i)("見積単価_外貨")
-            DgvCymndt.Rows(i).Cells("売上金額").Value = dsCymndt.Tables(RS).Rows(i)("見積金額_外貨")
+
+            'VATを加算
+            DgvCymndt.Rows(i).Cells("売上金額").Value = dsCymndt.Tables(RS).Rows(i)("見積金額_外貨") _
+                                                      + (dsCymndt.Tables(RS).Rows(i)("見積金額_外貨") * dsCymnhd.Tables(RS).Rows(0)("ＶＡＴ") / 100)
         Next
 
         '数字形式
         DgvCymndt.Columns("受注個数").DefaultCellStyle.Format = "N2"
         DgvCymndt.Columns("売上数量").DefaultCellStyle.Format = "N2"
         DgvCymndt.Columns("売上単価").DefaultCellStyle.Format = "N2"
-        DgvCymndt.Columns("売上金額").DefaultCellStyle.Format = "N0"
+        DgvCymndt.Columns("売上金額").DefaultCellStyle.Format = "N2"
 
 
         '受注明細の件数カウント
