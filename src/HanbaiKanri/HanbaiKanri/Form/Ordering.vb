@@ -1369,7 +1369,7 @@ Public Class Ordering
                 Sql += "', '"
                 Sql += "0" '見積金額
                 Sql += "', '"
-                Sql += formatNumber(TxtPurchaseAmount.Text) '仕入金額
+                Sql += UtilClass.formatNumber(TxtPurchaseAmount.Text) '仕入金額
                 Sql += "', '"
                 Sql += "0" '粗利額
                 Sql += "', '"
@@ -1425,7 +1425,7 @@ Public Class Ordering
                 Sql += "', '"
                 Sql += UtilClass.formatNumberF10(TxtRate.Text) 'レート
                 Sql += "', '"
-                Sql += formatNumber(TxtPurchaseAmount2.Text)  '仕入金額_外貨
+                Sql += UtilClass.formatNumber(TxtPurchaseAmount2.Text)  '仕入金額_外貨
 
                 If PurchaseStatus <> CommonConst.STATUS_ADD And dsHattyuHd.Tables(RS).Rows.Count > 0 Then
                     If dsHattyuHd.Tables(RS).Rows(0)("見積番号") <> "" Then
@@ -1489,16 +1489,16 @@ Public Class Ordering
                     Sql += "', '"
                     Sql += UtilClass.escapeSql(DgvItemList.Rows(i).Cells("単位").Value) '単位
                     Sql += "', '"
-                    Sql += formatNumber(DgvItemList.Rows(i).Cells("仕入単価").Value.ToString) '仕入値
+                    Sql += UtilClass.formatNumber(DgvItemList.Rows(i).Cells("仕入単価").Value.ToString) '仕入値
                     Sql += "', '"
-                    Sql += formatNumber(DgvItemList.Rows(i).Cells("数量").Value.ToString) '発注数量
+                    Sql += UtilClass.formatNumber(DgvItemList.Rows(i).Cells("数量").Value.ToString) '発注数量
                     Sql += "', '"
                     Sql += "0" '仕入数量
                     Sql += "', '"
-                    Sql += formatNumber(DgvItemList.Rows(i).Cells("数量").Value.ToString) '発注残数
+                    Sql += UtilClass.formatNumber(DgvItemList.Rows(i).Cells("数量").Value.ToString) '発注残数
                     Sql += "', 0" '間接費
                     Sql += ", '"
-                    Sql += formatNumber(DgvItemList.Rows(i).Cells("仕入金額").Value.ToString) '仕入金額
+                    Sql += UtilClass.formatNumber(DgvItemList.Rows(i).Cells("仕入金額").Value.ToString) '仕入金額
                     Sql += "', '"
                     Sql += IIf(
                                 DgvItemList.Rows(i).Cells("リードタイム").Value IsNot Nothing,
@@ -1517,7 +1517,7 @@ Public Class Ordering
                     Sql += "', current_timestamp" '登録日
                     Sql += ", current_timestamp" '更新日
                     Sql += ", '"
-                    Sql += formatNumber(DgvItemList.Rows(i).Cells("仕入単価_外貨").Value) '仕入単価_外貨
+                    Sql += UtilClass.formatNumber(DgvItemList.Rows(i).Cells("仕入単価_外貨").Value) '仕入単価_外貨
                     Sql += "', '"
                     Sql += CmCurrency.SelectedValue.ToString '仕入通貨
                     Sql += "', '"
@@ -1535,25 +1535,24 @@ Public Class Ordering
                     Sql += "', '"
                     Sql += UtilClass.formatNumber(DgvItemList.Rows(i).Cells("輸送費額").Value) '輸送費額
 
+                    Sql += "', "
+                    Sql += UtilClass.formatNumber(DgvItemList.Rows(i).Cells("仕入単価_外貨").Value)  '仕入値_外貨
+                    Sql += ", "
+                    Sql += UtilClass.formatNumber(DgvItemList.Rows(i).Cells("仕入金額_外貨").Value)  '仕入金額_外貨
+
                     If PurchaseStatus <> CommonConst.STATUS_ADD And dsHattyuHd.Tables(RS).Rows.Count > 0 Then
                         If dsHattyuHd.Tables(RS).Rows(0)("見積番号") <> "" Then
+                            Sql += ", '"
+                            Sql += UtilClass.formatNumber(dsHattyuDt.Tables(RS).Rows(i)("見積単価_外貨")).ToString '見積単価_外貨
                             Sql += "', '"
-                            Sql += formatNumber(dsHattyuDt.Tables(RS).Rows(i)("見積単価_外貨")).ToString '見積単価_外貨
-                            Sql += "', '"
-                            Sql += formatNumber(dsHattyuDt.Tables(RS).Rows(i)("見積金額_外貨")).ToString '見積金額_外貨
+                            Sql += UtilClass.formatNumber(dsHattyuDt.Tables(RS).Rows(i)("見積金額_外貨")).ToString '見積金額_外貨
                             Sql += "', '"
                             Sql += dsHattyuDt.Tables(RS).Rows(i)("通貨").ToString '通貨
                             Sql += "', '"
                             Sql += UtilClass.formatNumberF10(dsHattyuDt.Tables(RS).Rows(i)("レート")) 'レート
+                            Sql += "' "
                         End If
                     End If
-
-                    Sql += "'"
-
-                    Sql += ", "
-                    Sql += formatNumber(DgvItemList.Rows(i).Cells("仕入単価_外貨").Value)  '仕入値_外貨
-                    Sql += ", "
-                    Sql += formatNumber(DgvItemList.Rows(i).Cells("仕入金額_外貨").Value)  '仕入金額_外貨
 
 
                     Sql += IIf(
