@@ -685,7 +685,7 @@ Public Class BillingManagement
             End If
 
             Dim decTmp As Decimal = DgvAdd.Rows(e.RowIndex).Cells("今回請求金額計").Value
-            DgvAdd.Rows(e.RowIndex).Cells("今回請求金額計").Value = decTmp
+            DgvAdd.Rows(e.RowIndex).Cells("今回請求金額計").Value = decTmp.ToString("N2")
 
         End If
     End Sub

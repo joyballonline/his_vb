@@ -511,6 +511,9 @@ Public Class Payment
                 DgvKikeInfo.Rows(e.RowIndex).Cells("支払金額").Value = 0
                 Exit Sub
             End If
+
+            Dim decTmp As Decimal = DgvKikeInfo.Rows(e.RowIndex).Cells("支払金額").Value
+            DgvKikeInfo.Rows(e.RowIndex).Cells("支払金額").Value = decTmp.ToString("N2")
         End If
 
     End Sub
@@ -593,6 +596,7 @@ Public Class Payment
         Dim PaymentAmountFC As Decimal = 0
         Dim KikeAmountFC As Decimal = 0
         Dim BalanceFC As Decimal = 0
+        Dim Payment As Decimal = 0
 
         Dim Sql As String = ""
 
@@ -616,14 +620,37 @@ Public Class Payment
             Balance += DgvKikeInfo.Rows(i).Cells("買掛情報買掛残高").Value
         Next
 
+        '今回支払金額
+        For i As Integer = 0 To DgvKikeInfo.Rows.Count - 1
+            Payment += DgvKikeInfo.Rows(i).Cells("支払金額").Value
+        Next
 
         '支払入力がなかったら、或いは合計が0だったら
-        If DgvPayment.Rows.Count = 0 Or PaymentAmount = 0 Then
+        If DgvPayment.Rows.Count = 0 Or Payment = 0 Then
             '対象データがないメッセージを表示
             _msgHd.dspMSG("chkPayAddError", frmC01F10_Login.loginValue.Language)
 
             Return
         End If
+
+
+        '支払入力はあるが、買掛情報に反映されていない場合
+        If PaymentAmount > 0 And Payment = 0 Then
+            '支払入力が買掛情報に反映されていないメッセージを表示
+            _msgHd.dspMSG("chkPtoAPaymentError", frmC01F10_Login.loginValue.Language)
+
+            Return
+        End If
+
+
+        '支払入力と買掛情報の金額が不一致だったら
+        If PaymentAmount <> Payment Then
+            '金額があっていないアラートを表示
+            _msgHd.dspMSG("chkPEqualABalanceError", frmC01F10_Login.loginValue.Language)
+
+            Return
+        End If
+
 
         '採番テーブルから支払番号取得
         Dim APSaiban As String = getSaiban("110", dtToday)
