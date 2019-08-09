@@ -2001,8 +2001,8 @@ Public Class GoodsIssue
         Sql += " t10.受注番号 = t20.受注番号 "
         Sql += " AND "
         Sql += " t10.受注番号枝番 = t20.受注番号枝番 "
-        Sql += " AND "
-        Sql += " t20.発注番号枝番 = (SELECT MAX(発注番号枝番) AS 発注番号枝番 FROM t20_hattyu) "
+        'Sql += " AND "
+        'Sql += " t20.発注番号枝番 = (SELECT MAX(発注番号枝番) AS 発注番号枝番 FROM t20_hattyu) "
 
         Sql += " LEFT JOIN t42_nyukohd t42 "
         Sql += " ON "
@@ -2034,6 +2034,9 @@ Public Class GoodsIssue
         Sql += " AND t43.仕入区分 = '" & DgvAdd.Rows(rowIndex).Cells("仕入区分値").Value.ToString & "'"
         Sql += " AND t42.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
         Sql += " AND t43.行番号 = " & DgvAdd.Rows(rowIndex).Cells("行番号").Value.ToString
+
+        Sql += " order by t20.発注番号枝番 desc"
+
 
         Dim dsNyukoList As DataSet = _db.selectDB(Sql, RS, reccnt)
 
