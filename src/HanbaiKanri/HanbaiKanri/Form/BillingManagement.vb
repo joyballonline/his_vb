@@ -526,7 +526,11 @@ Public Class BillingManagement
         Amount = Math.Ceiling(AmountFC / strRate)  '画面の金額をIDRに変換　切り上げ
 
         '売掛残高
-        AccountsReceivableFC = DgvCymn.Rows(0).Cells("請求残高").Value - DgvAdd.Rows(0).Cells("今回請求金額計").Value
+        '売掛残高の意味：今回登録した売掛金額から後工程の入金額を減額したもの
+        'なので初期登録時は今回請求金額計と同一のものが入る
+        'AccountsReceivableFC = DgvCymn.Rows(0).Cells("請求残高").Value - DgvAdd.Rows(0).Cells("今回請求金額計").Value
+
+        AccountsReceivableFC = DgvAdd.Rows(0).Cells("今回請求金額計").Value
         AccountsReceivable = Math.Ceiling(AccountsReceivableFC / strRate)  '画面の金額をIDRに変換　切り上げ
 
 
