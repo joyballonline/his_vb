@@ -2912,6 +2912,10 @@ Public Class Quote
     'キーイベント取得
     Private Sub DgvItemList_KeyDown(sender As Object, e As KeyEventArgs) Handles DgvItemList.KeyDown
         'F4キー押下
+        If e.KeyData <> Keys.F4 Then
+            Exit Sub
+        End If
+
         Dim currentColumn As String = DgvItemList.Columns(DgvItemList.CurrentCell.ColumnIndex).Name
         Dim sireKbn As Integer = DgvItemList("仕入区分", DgvItemList.CurrentCell.RowIndex).Value
 
@@ -2919,22 +2923,40 @@ Public Class Quote
         Dim itemName As String = DgvItemList("品名", DgvItemList.CurrentCell.RowIndex).Value
         Dim spec As String = DgvItemList("型式", DgvItemList.CurrentCell.RowIndex).Value
 
-        '仕入区分[ 在庫引当 ] + 数量にいた場合
-        If e.KeyData = Keys.F4 Then
+        'メーカー、品名、型式にいた場合
+        If currentColumn = "メーカー" Or currentColumn = "品名" Or currentColumn = "型式" Then
+            '各項目チェック
+            If currentColumn = "型式" And (manufactuer Is Nothing And itemName Is Nothing) Then
+                'メーカー、品名を入力してください。
+                _msgHd.dspMSG("chkManufacturerItemNameError", frmC01F10_Login.loginValue.Language)
+                Return
 
-            If sireKbn = CommonConst.Sire_KBN_Zaiko And currentColumn = "数量" Then
-                manufactuer = IIf(manufactuer <> Nothing, manufactuer, "")
-                itemName = IIf(itemName <> Nothing, itemName, "")
-                spec = IIf(spec <> Nothing, spec, "")
-
-                Dim openForm As Form = Nothing
-                openForm = New StockSearch(_msgHd, _db, _langHd, Me, manufactuer, itemName, spec, "Normal")
-                openForm.Show()
-                Me.Enabled = False
-
+            ElseIf currentColumn = "品名" And (manufactuer Is Nothing) Then
+                'メーカーを入力してください。
+                _msgHd.dspMSG("chkManufacturerError", frmC01F10_Login.loginValue.Language)
+                Return
             End If
 
+            Dim openForm As Form = Nothing
+            openForm = New MakerSearch(_msgHd, _db, Me, DgvItemList.CurrentCell.RowIndex, DgvItemList.CurrentCell.ColumnIndex, manufactuer, itemName, spec, currentColumn, CommonConst.STATUS_ADD)   '処理選択
+            openForm.Show(Me)
+            Me.Enabled = False
         End If
+
+
+        '仕入区分[ 在庫引当 ] + 数量にいた場合
+        If sireKbn = CommonConst.Sire_KBN_Zaiko And currentColumn = "数量" Then
+            manufactuer = IIf(manufactuer <> Nothing, manufactuer, "")
+            itemName = IIf(itemName <> Nothing, itemName, "")
+            spec = IIf(spec <> Nothing, spec, "")
+
+            Dim openForm As Form = Nothing
+            openForm = New StockSearch(_msgHd, _db, _langHd, Me, manufactuer, itemName, spec, "Normal")
+            openForm.Show()
+            Me.Enabled = False
+
+        End If
+
     End Sub
 
 
@@ -3368,4 +3390,41 @@ Public Class Quote
 
     End Function
 
+    Private Sub TxtCustomerCode_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtCustomerCode.KeyDown
+
+        '得意先コード欄でＦ４キーを押下した時は検索画面を表示
+        If e.KeyCode <> Keys.F4 Then
+            Exit Sub
+        End If
+
+
+        Dim openForm As Form = Nothing
+        openForm = New CustomerSearch(_msgHd, _db, _langHd, Me) '処理選択
+        openForm.ShowDialog(Me)
+        openForm.Dispose()
+
+        Read_Customer() '得意先マスタ読み込み
+
+    End Sub
+
+    Private Sub TxtSales_TextChanged(sender As Object, e As EventArgs) Handles TxtSales.TextChanged
+
+    End Sub
+
+    Private Sub TxtSales_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtSales.KeyDown
+        '営業担当者欄でＦ４キーを押下した時は検索画面を表示
+        If e.KeyCode <> Keys.F4 Then
+            Exit Sub
+        End If
+
+        Dim openForm As Form = Nothing
+        openForm = New SalesSearch(_msgHd, _db, _langHd, Me) '処理選択
+        openForm.Show(Me)
+        Me.Enabled = False
+
+    End Sub
+
+    Private Sub DgvItemList_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DgvItemList.CellContentClick
+
+    End Sub
 End Class

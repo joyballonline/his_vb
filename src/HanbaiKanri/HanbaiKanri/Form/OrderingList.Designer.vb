@@ -273,6 +273,7 @@ Partial Class OrderingList
         'DgvHtyhd
         '
         Me.DgvHtyhd.AllowUserToAddRows = False
+        Me.DgvHtyhd.AllowUserToDeleteRows = False
         Me.DgvHtyhd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvHtyhd.Location = New System.Drawing.Point(13, 236)
         Me.DgvHtyhd.Name = "DgvHtyhd"
