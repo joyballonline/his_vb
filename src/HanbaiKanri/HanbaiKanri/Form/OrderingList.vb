@@ -213,16 +213,24 @@ Public Class OrderingList
                     DgvHtyhd.Columns.Add("得意先名", "CustomerName")
                     DgvHtyhd.Columns.Add("仕入先コード", "SupplierCode")
                     DgvHtyhd.Columns.Add("仕入先名", "SupplierName")
+
+                    DgvHtyhd.Columns.Add("通貨_外貨", "Currency")
+                    'DgvHtyhd.Columns.Add("通貨", "Currency")
+
+                    DgvHtyhd.Columns.Add("仕入原価_外貨", "PurchasingCost" & vbCrLf & "(ForeignCurrency)")
+                    DgvHtyhd.Columns.Add("仕入原価", "PurchasingCost" & vbCrLf & "(" & setBaseCurrency() & ")")
+
+
+                    DgvHtyhd.Columns.Add("仕入金額_外貨", "PurchaseAmount" & vbCrLf & "(ForeignCurrency)")
+                    DgvHtyhd.Columns.Add("仕入金額", "PurchaseAmount" & vbCrLf & "(" & setBaseCurrency() & ")")
+
+
                     DgvHtyhd.Columns.Add("仕入先郵便番号", "PostalCode")
                     DgvHtyhd.Columns.Add("仕入先住所", "Address")
                     DgvHtyhd.Columns.Add("仕入先電話番号", "PhoneNumber")
                     DgvHtyhd.Columns.Add("仕入先ＦＡＸ", "FAX")
                     DgvHtyhd.Columns.Add("仕入先担当者名", "NameOfPIC")
                     DgvHtyhd.Columns.Add("仕入先担当者役職", "PositionPICSupplier")
-                    DgvHtyhd.Columns.Add("通貨_外貨", "Currency")
-                    DgvHtyhd.Columns.Add("仕入金額_外貨", "PurchaseAmountForeignCurrency")
-                    DgvHtyhd.Columns.Add("通貨", "Currency")
-                    DgvHtyhd.Columns.Add("仕入金額", "PurchaseAmount")
                     DgvHtyhd.Columns.Add("支払条件", "PaymentTerms")
                     DgvHtyhd.Columns.Add("営業担当者", "SalesPersonInCharge")
                     DgvHtyhd.Columns.Add("入力担当者", "PICForInputting")
@@ -238,16 +246,21 @@ Public Class OrderingList
                     DgvHtyhd.Columns.Add("得意先名", "得意先名")
                     DgvHtyhd.Columns.Add("仕入先コード", "仕入先コード")
                     DgvHtyhd.Columns.Add("仕入先名", "仕入先名")
+
+                    DgvHtyhd.Columns.Add("通貨_外貨", "通貨")
+                    'DgvHtyhd.Columns.Add("通貨", "通貨")
+                    DgvHtyhd.Columns.Add("仕入原価_外貨", "仕入原価" & vbCrLf & "(原通貨)")
+                    DgvHtyhd.Columns.Add("仕入原価", "仕入原価" & vbCrLf & "(" & setBaseCurrency() & ")")
+                    DgvHtyhd.Columns.Add("仕入金額_外貨", "仕入金額" & vbCrLf & "(原通貨)")
+                    DgvHtyhd.Columns.Add("仕入金額", "仕入金額" & vbCrLf & "(" & setBaseCurrency() & ")")
+
                     DgvHtyhd.Columns.Add("仕入先郵便番号", "仕入先郵便番号")
                     DgvHtyhd.Columns.Add("仕入先住所", "仕入先先住所")
                     DgvHtyhd.Columns.Add("仕入先電話番号", "仕入先電話番号")
                     DgvHtyhd.Columns.Add("仕入先ＦＡＸ", "仕入先ＦＡＸ")
                     DgvHtyhd.Columns.Add("仕入先担当者名", "仕入先担当者名")
                     DgvHtyhd.Columns.Add("仕入先担当者役職", "仕入先担当者役職")
-                    DgvHtyhd.Columns.Add("通貨_外貨", "通貨")
-                    DgvHtyhd.Columns.Add("仕入金額_外貨", "仕入金額(外貨)")
-                    DgvHtyhd.Columns.Add("通貨", "通貨")
-                    DgvHtyhd.Columns.Add("仕入金額", "仕入金額")
+
                     DgvHtyhd.Columns.Add("支払条件", "支払条件")
                     DgvHtyhd.Columns.Add("営業担当者", "営業担当者")
                     DgvHtyhd.Columns.Add("入力担当者", "入力担当者")
@@ -257,15 +270,18 @@ Public Class OrderingList
                 End If
 
                 '数字形式
+                DgvHtyhd.Columns("仕入原価_外貨").DefaultCellStyle.Format = "N2"
+                DgvHtyhd.Columns("仕入原価").DefaultCellStyle.Format = "N2"
+
                 DgvHtyhd.Columns("仕入金額_外貨").DefaultCellStyle.Format = "N2"
                 DgvHtyhd.Columns("仕入金額").DefaultCellStyle.Format = "N2"
 
 
                 '発注基本を取得
-                Sql = "SELECT count(*) as 件数"
-                Sql += " from public.t20_hattyu t20 "
-                Sql += " left join public.t21_hattyu t21"
-                Sql += "  on (t20.発注番号 = t21.発注番号 and t20.発注番号枝番 = t21.発注番号枝番)"
+                Sql = "Select count(*) As 件数"
+                Sql += " from Public.t20_hattyu t20 "
+                Sql += " left join Public.t21_hattyu t21"
+                Sql += "  On (t20.発注番号 = t21.発注番号 And t20.発注番号枝番 = t21.発注番号枝番)"
 
                 Sql += " WHERE "
                 Sql += " t20.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
@@ -286,6 +302,8 @@ Public Class OrderingList
                 Sql += ",t20.仕入金額_外貨,t20.仕入金額,t20.支払条件,t20.営業担当者,t20.入力担当者,t20.備考"
                 Sql += ",t20.登録日,t20.更新日,t20.通貨"
 
+                Sql += ",sum(t21.仕入値) as 仕入値合計, sum(t21.仕入値_外貨) as 仕入値合計_外貨, t21.発注数量 "
+
                 Sql += " FROM "
                 Sql += " public.t20_hattyu t20 "
                 Sql += " left join public.t21_hattyu t21"
@@ -302,7 +320,7 @@ Public Class OrderingList
                 Sql += ",t20.得意先名,t20.客先番号,t20.仕入先コード,t20.仕入先名,t20.仕入先郵便番号,t20.仕入先住所"
                 Sql += ",t20.仕入先電話番号,t20.仕入先ＦＡＸ,t20.仕入先担当者名,t20.仕入先担当者役職"
                 Sql += ",t20.仕入金額_外貨,t20.仕入金額,t20.支払条件,t20.営業担当者,t20.入力担当者,t20.備考"
-                Sql += ",t20.登録日,t20.更新日,t20.通貨"
+                Sql += ",t20.登録日,t20.更新日,t20.通貨,t21.発注数量 "
 
 
                 Sql += " ORDER BY "
@@ -312,6 +330,8 @@ Public Class OrderingList
 
 
                 '伝票単位時のセル書式
+                DgvHtyhd.Columns("仕入原価_外貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                DgvHtyhd.Columns("仕入原価").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 DgvHtyhd.Columns("仕入金額_外貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 DgvHtyhd.Columns("仕入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
@@ -335,16 +355,21 @@ Public Class OrderingList
                     DgvHtyhd.Rows(i).Cells("得意先名").Value = ds.Tables(RS).Rows(i)("得意先名")
                     DgvHtyhd.Rows(i).Cells("仕入先コード").Value = ds.Tables(RS).Rows(i)("仕入先コード")
                     DgvHtyhd.Rows(i).Cells("仕入先名").Value = ds.Tables(RS).Rows(i)("仕入先名")
+
+                    DgvHtyhd.Rows(i).Cells("通貨_外貨").Value = cur
+                    'DgvHtyhd.Rows(i).Cells("通貨").Value = strBaseCur  '基準通貨
+                    DgvHtyhd.Rows(i).Cells("仕入原価_外貨").Value = ds.Tables(RS).Rows(i)("仕入値合計_外貨") * ds.Tables(RS).Rows(i)("発注数量")
+                    DgvHtyhd.Rows(i).Cells("仕入原価").Value = ds.Tables(RS).Rows(i)("仕入値合計") * ds.Tables(RS).Rows(i)("発注数量")
+                    DgvHtyhd.Rows(i).Cells("仕入金額_外貨").Value = ds.Tables(RS).Rows(i)("仕入金額_外貨")
+                    DgvHtyhd.Rows(i).Cells("仕入金額").Value = ds.Tables(RS).Rows(i)("仕入金額")
+
                     DgvHtyhd.Rows(i).Cells("仕入先郵便番号").Value = ds.Tables(RS).Rows(i)("仕入先郵便番号")
                     DgvHtyhd.Rows(i).Cells("仕入先住所").Value = ds.Tables(RS).Rows(i)("仕入先住所")
                     DgvHtyhd.Rows(i).Cells("仕入先電話番号").Value = ds.Tables(RS).Rows(i)("仕入先電話番号")
                     DgvHtyhd.Rows(i).Cells("仕入先ＦＡＸ").Value = ds.Tables(RS).Rows(i)("仕入先ＦＡＸ")
                     DgvHtyhd.Rows(i).Cells("仕入先担当者名").Value = ds.Tables(RS).Rows(i)("仕入先担当者名")
                     DgvHtyhd.Rows(i).Cells("仕入先担当者役職").Value = ds.Tables(RS).Rows(i)("仕入先担当者役職")
-                    DgvHtyhd.Rows(i).Cells("通貨_外貨").Value = cur
-                    DgvHtyhd.Rows(i).Cells("仕入金額_外貨").Value = ds.Tables(RS).Rows(i)("仕入金額_外貨")
-                    DgvHtyhd.Rows(i).Cells("通貨").Value = strBaseCur  '基準通貨
-                    DgvHtyhd.Rows(i).Cells("仕入金額").Value = ds.Tables(RS).Rows(i)("仕入金額")
+
                     DgvHtyhd.Rows(i).Cells("支払条件").Value = ds.Tables(RS).Rows(i)("支払条件")
                     DgvHtyhd.Rows(i).Cells("営業担当者").Value = ds.Tables(RS).Rows(i)("営業担当者")
                     DgvHtyhd.Rows(i).Cells("入力担当者").Value = ds.Tables(RS).Rows(i)("入力担当者")
