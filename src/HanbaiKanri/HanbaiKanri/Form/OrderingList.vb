@@ -228,7 +228,7 @@ Public Class OrderingList
                     DgvHtyhd.Columns.Add("入力担当者", "PICForInputting")
                     DgvHtyhd.Columns.Add("備考", "Remarks")
                     DgvHtyhd.Columns.Add("登録日", "RegistrationDate")
-                    DgvHtyhd.Columns.Add("更新日", "UpdateDate")
+                    DgvHtyhd.Columns.Add("更新日", "LastUpdateDate")
                 Else
                     DgvHtyhd.Columns.Add("取消", "取消")
                     DgvHtyhd.Columns.Add("発注番号", "発注番号")
@@ -253,7 +253,7 @@ Public Class OrderingList
                     DgvHtyhd.Columns.Add("入力担当者", "入力担当者")
                     DgvHtyhd.Columns.Add("備考", "備考")
                     DgvHtyhd.Columns.Add("登録日", "登録日")
-                    DgvHtyhd.Columns.Add("更新日", "更新日")
+                    DgvHtyhd.Columns.Add("更新日", "最終更新日")
                 End If
 
                 '数字形式
@@ -399,7 +399,7 @@ Public Class OrderingList
                 If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                     DgvHtyhd.Columns.Add("取消", "Cancel")
                     DgvHtyhd.Columns.Add("発注番号", "PurchaseNumber")
-                    DgvHtyhd.Columns.Add("発注番号枝番", "PurchaseOrderSubNumber")
+                    DgvHtyhd.Columns.Add("発注番号枝番", "PurchaseOrderVer.")
                     DgvHtyhd.Columns.Add("行番号", "LineNumber")
                     DgvHtyhd.Columns.Add("仕入区分", "PurchaseClassification")
                     DgvHtyhd.Columns.Add("メーカー", "Manufacturer")
@@ -420,12 +420,12 @@ Public Class OrderingList
                     DgvHtyhd.Columns.Add("備考", "Remarks")
                     DgvHtyhd.Columns.Add("更新者", "ModifiedBy")
                     DgvHtyhd.Columns.Add("登録日", "RegistrationDate")
-                    DgvHtyhd.Columns.Add("更新日", "UpdateDate")
+                    DgvHtyhd.Columns.Add("更新日", "LastUpdateDate")
                 Else
                     DgvHtyhd.Columns.Add("取消", "取消")
                     DgvHtyhd.Columns.Add("発注番号", "発注番号")
-                    DgvHtyhd.Columns.Add("発注番号枝番", "発注番号枝番")
-                    DgvHtyhd.Columns.Add("行番号", "行番号")
+                    DgvHtyhd.Columns.Add("発注番号枝番", "発注Ver.")
+                    DgvHtyhd.Columns.Add("行番号", "行No")
                     DgvHtyhd.Columns.Add("仕入区分", "仕入区分")
                     DgvHtyhd.Columns.Add("メーカー", "メーカー")
                     DgvHtyhd.Columns.Add("品名", "品名")
@@ -445,7 +445,7 @@ Public Class OrderingList
                     DgvHtyhd.Columns.Add("備考", "備考")
                     DgvHtyhd.Columns.Add("更新者", "更新者")
                     DgvHtyhd.Columns.Add("登録日", "登録日")
-                    DgvHtyhd.Columns.Add("更新日", "更新日")
+                    DgvHtyhd.Columns.Add("更新日", "最終更新日")
                 End If
 
                 '伝票単位時のセル書式
@@ -525,6 +525,9 @@ Public Class OrderingList
                 Next
 
             End If
+
+            'カラム幅をユーザーが変更可能にする。
+            DgvHtyhd.AllowUserToResizeColumns = True
 
         Catch ue As UsrDefException
             ue.dspMsg()
