@@ -87,13 +87,13 @@ Public Class DepositList
         Dim Count As Integer = 0
         Dim CustomerCount As Integer = dsCustomer.Tables(RS).Rows.Count
 
-        Dim CustomerBillingAmountFC As Long  '請求金額_外貨
-        Dim CustomerOrderAmountFC As Long    '見積金額_外貨
-        Dim AccountsReceivableFC As Integer  '売掛残高_外貨
+        Dim CustomerBillingAmountFC As Decimal  '請求金額_外貨
+        Dim CustomerOrderAmountFC As Decimal    '見積金額_外貨
+        Dim AccountsReceivableFC As Decimal  '売掛残高_外貨
 
-        Dim CustomerBillingAmount As Long  '請求金額
-        Dim CustomerOrderAmount As Long    '見積金額
-        Dim AccountsReceivable As Integer  '売掛残高
+        Dim CustomerBillingAmount As Decimal  '請求金額
+        Dim CustomerOrderAmount As Decimal    '見積金額
+        Dim AccountsReceivable As Decimal  '売掛残高
 
         'Language=ENGの時
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
@@ -141,24 +141,14 @@ Public Class DepositList
 
             Sql += "public.t10_cymnhd"
             Sql += " WHERE "
-            Sql += "会社コード"
-            Sql += " ILIKE  "
-            Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += "会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
 
-            Sql += " AND "
-            Sql += "得意先コード"
-            Sql += " ILIKE "
-            Sql += "'%"
-            Sql += dsCustomer.Tables(RS).Rows(i)("得意先コード")
-            Sql += "%'"
-            Sql += " AND "
-            Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
-
+            Sql += " AND 得意先コード ILIKE '%" & dsCustomer.Tables(RS).Rows(i)("得意先コード") & "%'"
+            Sql += " AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
             Sql += " group by 通貨"
 
             '得意先ごとの受注基本を取得
             Dim dsCymnhd As DataSet = _db.selectDB(Sql, RS, reccnt)
-
 
             For j As Integer = 0 To dsCymnhd.Tables(RS).Rows.Count - 1
 
@@ -182,18 +172,9 @@ Public Class DepositList
                 Sql += " FROM "
 
                 Sql += "public.t23_skyuhd"
-                Sql += " WHERE "
-                Sql += "会社コード"
-                Sql += " ILIKE  "
-                Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'"
-                Sql += " AND "
-                Sql += "得意先コード"
-                Sql += " ILIKE "
-                Sql += "'%"
-                Sql += dsCustomer.Tables(RS).Rows(i)("得意先コード")
-                Sql += "%'"
-                Sql += " AND "
-                Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+                Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                Sql += " AND 得意先コード ILIKE '%" & dsCustomer.Tables(RS).Rows(i)("得意先コード") & "%'"
+                Sql += " AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
 
                 If IsDBNull(dsCymnhd.Tables(RS).Rows(j)("通貨")) Then
                     Sql += " AND 通貨 is null "
@@ -204,20 +185,10 @@ Public Class DepositList
 
                 'InvoiceDate
                 If TxtBillingDateSince.Text <> "" Then
-                    Sql += " And "
-                    Sql += " 請求日"
-                    Sql += " >=  "
-                    Sql += "'"
-                    Sql += UtilClass.strFormatDate(RevoveChars(TxtBillingDateSince.Text))
-                    Sql += "'"
+                    Sql += " And 請求日 >= '" & UtilClass.strFormatDate(RevoveChars(TxtBillingDateSince.Text)) & "'"
                 End If
                 If TxtBillingDateUntil.Text <> "" Then
-                    Sql += " and "
-                    Sql += " 請求日"
-                    Sql += " <=  "
-                    Sql += "'"
-                    Sql += UtilClass.strFormatDate(RevoveChars(TxtBillingDateUntil.Text))
-                    Sql += "'"
+                    Sql += " and 請求日 <= '" & UtilClass.strFormatDate(RevoveChars(TxtBillingDateUntil.Text)) & "'"
                 End If
 
                 '売掛残０を含める場合　チェック = true
@@ -384,15 +355,10 @@ Public Class DepositList
         Dim reccnt As Integer = 0 'DB用（デフォルト）
         Dim Sql As String = ""
 
-        Sql += "SELECT"
-        Sql += " *"
-        Sql += " FROM "
+        Sql += "SELECT * FROM "
 
         Sql += "public." & tableName
-        Sql += " WHERE "
-        Sql += "会社コード"
-        Sql += " ILIKE  "
-        Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql += txtParam
         Return _db.selectDB(Sql, RS, reccnt)
     End Function
@@ -426,7 +392,6 @@ Public Class DepositList
         Sql += " AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
 
         Dim ds As DataSet = getDsData("m25_currency", Sql)
-        'TxtIDRCurrency.Text = ds.Tables(RS).Rows(0)("通貨コード")
         setBaseCurrency = ds.Tables(RS).Rows(0)("通貨コード")
 
     End Function
