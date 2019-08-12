@@ -358,8 +358,8 @@ Public Class OrderingList
 
                     DgvHtyhd.Rows(i).Cells("通貨_外貨").Value = cur
                     'DgvHtyhd.Rows(i).Cells("通貨").Value = strBaseCur  '基準通貨
-                    DgvHtyhd.Rows(i).Cells("仕入原価_外貨").Value = ds.Tables(RS).Rows(i)("仕入値合計_外貨") * ds.Tables(RS).Rows(i)("発注数量")
-                    DgvHtyhd.Rows(i).Cells("仕入原価").Value = ds.Tables(RS).Rows(i)("仕入値合計") * ds.Tables(RS).Rows(i)("発注数量")
+                    DgvHtyhd.Rows(i).Cells("仕入原価_外貨").Value = rmNullDecimal(ds.Tables(RS).Rows(i)("仕入値合計_外貨")) * rmNullDecimal(ds.Tables(RS).Rows(i)("発注数量"))
+                    DgvHtyhd.Rows(i).Cells("仕入原価").Value = rmNullDecimal(ds.Tables(RS).Rows(i)("仕入値合計")) * rmNullDecimal(ds.Tables(RS).Rows(i)("発注数量"))
                     DgvHtyhd.Rows(i).Cells("仕入金額_外貨").Value = ds.Tables(RS).Rows(i)("仕入金額_外貨")
                     DgvHtyhd.Rows(i).Cells("仕入金額").Value = ds.Tables(RS).Rows(i)("仕入金額")
 
@@ -564,6 +564,26 @@ Public Class OrderingList
 
     End Sub
 
+    '
+    'NothingをDecimalに置換
+    Private Function rmNullDecimal(ByVal prmField As Object) As Decimal
+        If prmField Is Nothing Then
+            rmNullDecimal = 0
+            Exit Function
+        End If
+        If prmField Is DBNull.Value Then
+            rmNullDecimal = 0
+            Exit Function
+        End If
+
+        If Not IsNumeric(prmField) Then
+            rmNullDecimal = 0
+            Exit Function
+        End If
+
+        rmNullDecimal = prmField
+
+    End Function
     '検索ボタン押下時
     Private Sub BtnPurchaseSearch_Click(sender As Object, e As EventArgs) Handles BtnPurchaseSearch.Click
         '一覧再表示
