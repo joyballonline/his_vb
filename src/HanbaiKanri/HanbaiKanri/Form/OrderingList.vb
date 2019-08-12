@@ -303,6 +303,7 @@ Public Class OrderingList
                 Sql += ",t20.登録日,t20.更新日,t20.通貨"
 
                 Sql += ",sum(t21.仕入値) as 仕入値合計, sum(t21.仕入値_外貨) as 仕入値合計_外貨, t21.発注数量 "
+                Sql += ",sum(t21.仕入金額 + t21.間接費) as 仕入金額合計, sum(t21.仕入金額_外貨) as 仕入金額合計_外貨 "
 
                 Sql += " FROM "
                 Sql += " public.t20_hattyu t20 "
@@ -360,8 +361,8 @@ Public Class OrderingList
                     'DgvHtyhd.Rows(i).Cells("通貨").Value = strBaseCur  '基準通貨
                     DgvHtyhd.Rows(i).Cells("仕入原価_外貨").Value = rmNullDecimal(ds.Tables(RS).Rows(i)("仕入値合計_外貨")) * rmNullDecimal(ds.Tables(RS).Rows(i)("発注数量"))
                     DgvHtyhd.Rows(i).Cells("仕入原価").Value = rmNullDecimal(ds.Tables(RS).Rows(i)("仕入値合計")) * rmNullDecimal(ds.Tables(RS).Rows(i)("発注数量"))
-                    DgvHtyhd.Rows(i).Cells("仕入金額_外貨").Value = ds.Tables(RS).Rows(i)("仕入金額_外貨")
-                    DgvHtyhd.Rows(i).Cells("仕入金額").Value = ds.Tables(RS).Rows(i)("仕入金額")
+                    DgvHtyhd.Rows(i).Cells("仕入金額_外貨").Value = ds.Tables(RS).Rows(i)("仕入金額合計_外貨")
+                    DgvHtyhd.Rows(i).Cells("仕入金額").Value = ds.Tables(RS).Rows(i)("仕入金額合計")
 
                     DgvHtyhd.Rows(i).Cells("仕入先郵便番号").Value = ds.Tables(RS).Rows(i)("仕入先郵便番号")
                     DgvHtyhd.Rows(i).Cells("仕入先住所").Value = ds.Tables(RS).Rows(i)("仕入先住所")
