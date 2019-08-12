@@ -900,6 +900,8 @@ Public Class DepositManagement
 
         Next
 
+        '登録完了メッセージ
+        _msgHd.dspMSG("completeInsert", frmC01F10_Login.loginValue.Language)
 
         _parentForm.Enabled = True
         _parentForm.Show()

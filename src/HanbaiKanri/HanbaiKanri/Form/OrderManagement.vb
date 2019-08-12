@@ -801,44 +801,22 @@ Public Class OrderManagement
                 For x As Integer = 0 To dsCymndt.Tables(RS).Rows.Count - 1
 
                     If dsCymndt.Tables(RS).Rows(x)("行番号") = DgvAdd.Rows(index).Cells("行番号").Value Then
-                        Sql6 = "UPDATE "
-                        Sql6 += "Public."
-                        Sql6 += "t11_cymndt "
+                        Sql6 = "UPDATE Public.t11_cymndt "
                         Sql6 += "SET "
                         Sql6 += "売上数量"
                         Sql6 += " = '"
                         PurchaseNum = dsCymndt.Tables(RS).Rows(x)("売上数量") + DgvAdd.Rows(index).Cells("売上数量").Value
                         Sql6 += UtilClass.formatNumber(PurchaseNum.ToString)
-                        Sql6 += "', "
-                        Sql6 += " 受注残数"
-                        Sql6 += " = '"
+                        Sql6 += "'"
+                        Sql6 += " ,受注残数 = '"
                         OrdingNum = dsCymndt.Tables(RS).Rows(x)("受注残数") - DgvAdd.Rows(index).Cells("売上数量").Value
                         Sql6 += UtilClass.formatNumber(OrdingNum.ToString)
-                        Sql6 += "', "
-                        Sql6 += "更新者"
-                        Sql6 += " = '"
-                        Sql6 += Input
                         Sql6 += "' "
-                        Sql6 += "WHERE"
-                        Sql6 += " 会社コード"
-                        Sql6 += "='"
-                        Sql6 += dsCymnHd.Tables(RS).Rows(0)("会社コード").ToString
-                        Sql6 += "'"
-                        Sql6 += " AND"
-                        Sql6 += " 受注番号"
-                        Sql6 += "='"
-                        Sql6 += dsCymndt.Tables(RS).Rows(x)("受注番号").ToString
-                        Sql6 += "'"
-                        Sql6 += " AND"
-                        Sql6 += " 受注番号枝番"
-                        Sql6 += "='"
-                        Sql6 += dsCymndt.Tables(RS).Rows(x)("受注番号枝番").ToString
-                        Sql6 += "'"
-                        Sql6 += " AND"
-                        Sql6 += " 行番号"
-                        Sql6 += "='"
-                        Sql6 += dsCymndt.Tables(RS).Rows(x)("行番号").ToString
-                        Sql6 += "' "
+                        Sql6 += " ,更新者 = '" & Input & "' "
+                        Sql6 += "WHERE 会社コード='" & dsCymnHd.Tables(RS).Rows(0)("会社コード").ToString & "'"
+                        Sql6 += " AND 受注番号='" & dsCymndt.Tables(RS).Rows(x)("受注番号").ToString & "'"
+                        Sql6 += " AND 受注番号枝番='" & dsCymndt.Tables(RS).Rows(x)("受注番号枝番").ToString & "'"
+                        Sql6 += " AND 行番号='" & dsCymndt.Tables(RS).Rows(x)("行番号").ToString & "' "
                         If DgvAdd.Rows(index).Cells("売上数量").Value = 0 Then
                         Else
                             _db.executeDB(Sql6)
@@ -849,12 +827,8 @@ Public Class OrderManagement
                 Next
             Next
 
-            ''請求データ作成の確認
-            'Dim result As DialogResult = _msgHd.dspMSG("addBillingData", frmC01F10_Login.loginValue.Language)
-
-            'If result = DialogResult.Yes Then
-            '    Biilng() 'データ更新
-            'End If
+            '登録完了メッセージ
+            _msgHd.dspMSG("completeInsert", frmC01F10_Login.loginValue.Language)
 
             '登録後は親画面（一覧）に戻る
             _parentForm.Enabled = True
