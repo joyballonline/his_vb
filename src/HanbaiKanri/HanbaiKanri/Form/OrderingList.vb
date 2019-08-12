@@ -440,8 +440,8 @@ Public Class OrderingList
                     DgvHtyhd.Columns.Add("仕入金額", "PurchaseAmount")
                     DgvHtyhd.Columns.Add("リードタイム", "LeadTime")
                     DgvHtyhd.Columns.Add("貿易条件", "TradeTerms")
-                    DgvHtyhd.Columns.Add("入庫数", "GoodsReceiptQuantity")
-                    DgvHtyhd.Columns.Add("未入庫数", "NoGoodsReceiptQuantity")
+                    'DgvHtyhd.Columns.Add("入庫数", "GoodsReceiptQuantity")
+                    'DgvHtyhd.Columns.Add("未入庫数", "NoGoodsReceiptQuantity")
                     DgvHtyhd.Columns.Add("備考", "Remarks")
                     DgvHtyhd.Columns.Add("更新者", "ModifiedBy")
                     DgvHtyhd.Columns.Add("登録日", "RegistrationDate")
@@ -465,8 +465,8 @@ Public Class OrderingList
                     DgvHtyhd.Columns.Add("仕入金額", "仕入金額")
                     DgvHtyhd.Columns.Add("リードタイム", "リードタイム")
                     DgvHtyhd.Columns.Add("貿易条件", "貿易条件")
-                    DgvHtyhd.Columns.Add("入庫数", "入庫数")
-                    DgvHtyhd.Columns.Add("未入庫数", "未入庫数")
+                    'DgvHtyhd.Columns.Add("入庫数", "入庫数")
+                    'DgvHtyhd.Columns.Add("未入庫数", "未入庫数")
                     DgvHtyhd.Columns.Add("備考", "備考")
                     DgvHtyhd.Columns.Add("更新者", "更新者")
                     DgvHtyhd.Columns.Add("登録日", "登録日")
@@ -480,8 +480,8 @@ Public Class OrderingList
                 DgvHtyhd.Columns("発注残数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 DgvHtyhd.Columns("間接費").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 DgvHtyhd.Columns("仕入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                DgvHtyhd.Columns("入庫数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                DgvHtyhd.Columns("未入庫数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                'DgvHtyhd.Columns("入庫数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                'DgvHtyhd.Columns("未入庫数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
 
                 '数字形式
@@ -491,8 +491,8 @@ Public Class OrderingList
                 DgvHtyhd.Columns("発注残数").DefaultCellStyle.Format = "N2"
                 DgvHtyhd.Columns("間接費").DefaultCellStyle.Format = "N2"
                 DgvHtyhd.Columns("仕入金額").DefaultCellStyle.Format = "N2"
-                DgvHtyhd.Columns("入庫数").DefaultCellStyle.Format = "N2"
-                DgvHtyhd.Columns("未入庫数").DefaultCellStyle.Format = "N2"
+                'DgvHtyhd.Columns("入庫数").DefaultCellStyle.Format = "N2"
+                'DgvHtyhd.Columns("未入庫数").DefaultCellStyle.Format = "N2"
 
 
                 Dim dsHanyou As DataSet
@@ -541,8 +541,8 @@ Public Class OrderingList
                         dsHanyou = getDsHanyoData(CommonConst.FIXED_KEY_TRADE_TERMS, ds.Tables(RS).Rows(i)("貿易条件").ToString)
                         DgvHtyhd.Rows(i).Cells("貿易条件").Value = dsHanyou.Tables(RS).Rows(0)("文字１").ToString
                     End If
-                    DgvHtyhd.Rows(i).Cells("入庫数").Value = ds.Tables(RS).Rows(i)("入庫数")
-                    DgvHtyhd.Rows(i).Cells("未入庫数").Value = ds.Tables(RS).Rows(i)("未入庫数")
+                    'DgvHtyhd.Rows(i).Cells("入庫数").Value = ds.Tables(RS).Rows(i)("入庫数")
+                    'DgvHtyhd.Rows(i).Cells("未入庫数").Value = ds.Tables(RS).Rows(i)("未入庫数")
                     DgvHtyhd.Rows(i).Cells("備考").Value = ds.Tables(RS).Rows(i)("備考")
                     DgvHtyhd.Rows(i).Cells("更新者").Value = ds.Tables(RS).Rows(i)("更新者")
                     DgvHtyhd.Rows(i).Cells("登録日").Value = ds.Tables(RS).Rows(i)("登録日")
