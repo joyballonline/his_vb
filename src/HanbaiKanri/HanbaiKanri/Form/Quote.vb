@@ -2796,6 +2796,56 @@ Public Class Quote
             Dim currentRow As Integer = 11
             Dim lastRow As Integer = 13
 
+            '言語の判定
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then  '英語
+
+                sheet.Range("A1").Value = "QuotationNo"　 '見積番号
+                sheet.Range("A2").Value = "Customer"　    '得意先名称
+                sheet.Range("A3").Value = "Address"       '住所
+                sheet.Range("A6").Value = "PaymentTerms"　'支払条件
+                sheet.Range("A7").Value = "Remarks"　     '備考
+
+                sheet.Range("H1").Value = "Customer"　           '見積日
+                sheet.Range("H2").Value = "PhoneNumber"        　'電話番号
+                sheet.Range("H3").Value = "FAX"                　'FAX番号
+                sheet.Range("H4").Value = "NameOfPIC"　          '得意先担当者名
+                sheet.Range("H5").Value = "PositionPICCustomer"　'得意先担当者役職
+                sheet.Range("H6").Value = "CustomsDutyRate"    　'関税率
+                sheet.Range("H7").Value = "PrepaidCorporateTaxRate"　'前払法人税率
+                sheet.Range("H8").Value = "TransportationCostRate"　 '輸送費率
+
+                sheet.Range("M1").Value = "ExpirationDate"     　'見積有効期限
+                sheet.Range("M2").Value = "SalesPersonInCharge"　'営業担当者
+                sheet.Range("M3").Value = "PICForInputting"      '入力担当者
+
+                sheet.Range("A10").Value = "No"　                                'No
+                sheet.Range("B10").Value = "Manufacturer"                    　'メーカー
+                sheet.Range("C10").Value = "ItemName"　                        '品名
+                sheet.Range("D10").Value = "Spec"                            　'型式
+                sheet.Range("E10").Value = "Quantity"　                        '数量
+                sheet.Range("F10").Value = "Unit"　                            '単位
+                sheet.Range("G10").Value = "SupplierName"　                    '仕入先
+                sheet.Range("H10").Value = "PurchaseUnitPrice"               　'仕入単価
+                sheet.Range("I10").Value = "PurchaseCost"　                    '仕入原価
+                sheet.Range("J10").Value = "CustomsDutyParUnit"              　'関税額
+                sheet.Range("K10").Value = "PrepaidCorporateTaxAmountParUnit"　'前払法人税額
+                sheet.Range("L10").Value = "TransportationCostParUnit"　       '輸送費額
+                sheet.Range("M10").Value = "PurchaseAmount"　                 '仕入金額
+                sheet.Range("N10").Value = "SellingPrice"　                   '売単価
+                sheet.Range("O10").Value = "SalesAmount"　                    '売上金額
+                sheet.Range("P10").Value = "QuotationPrice"　                 '見積単価
+                sheet.Range("Q10").Value = "QuotationAmount"　                '見積金額
+                sheet.Range("R10").Value = "GrossMargin"                      '粗利額
+                sheet.Range("S10").Value = "GrossMargin"                    　'粗利率
+                sheet.Range("T10").Value = "LeadTime"　                       'リードタイム
+
+                'sheet.Range("S3").Value = "Customer"　'仕入金額
+                'sheet.Range("S3").Value = "Customer"　'売上金額
+                'sheet.Range("S3").Value = "Customer"　'見積金額
+                'sheet.Range("S3").Value = "Customer"　'粗利額
+
+            End If
+
             sheet.Range("B1").Value = QuoteNo & "-" & QuoteSuffix
             sheet.Range("I1").Value = QuoteDate & "(" & RegistrationDate & ")"
             sheet.Range("N1").Value = Expiration
