@@ -325,8 +325,9 @@ Public Class Cymn
         TxtPph.Text = Total.ToString("N2")
 
         '日付のMinDate設定
-        DtpOrderDate.MinDate = DtpQuoteDate.Value
-        DtpPurchaseDate.MinDate = DtpQuoteDate.Value
+        '過去日付を許可する
+        'DtpOrderDate.MinDate = DtpQuoteDate.Value
+        'DtpPurchaseDate.MinDate = DtpQuoteDate.Value
 
 
         '行番号の振り直し

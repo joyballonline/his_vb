@@ -66,7 +66,7 @@ Partial Class PurchasingManagement
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(12, 9)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(0, 24)
+        Me.Label1.Size = New System.Drawing.Size(0, 12)
         Me.Label1.TabIndex = 0
         '
         'LblPurchaseNo
@@ -88,7 +88,7 @@ Partial Class PurchasingManagement
         Me.TxtPurchaseNo.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtPurchaseNo.Location = New System.Drawing.Point(188, 9)
         Me.TxtPurchaseNo.Name = "TxtPurchaseNo"
-        Me.TxtPurchaseNo.Size = New System.Drawing.Size(157, 37)
+        Me.TxtPurchaseNo.Size = New System.Drawing.Size(157, 22)
         Me.TxtPurchaseNo.TabIndex = 68
         Me.TxtPurchaseNo.TabStop = False
         '
@@ -121,7 +121,7 @@ Partial Class PurchasingManagement
         Me.TxtSupplierCode.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtSupplierCode.Location = New System.Drawing.Point(188, 37)
         Me.TxtSupplierCode.Name = "TxtSupplierCode"
-        Me.TxtSupplierCode.Size = New System.Drawing.Size(157, 37)
+        Me.TxtSupplierCode.Size = New System.Drawing.Size(157, 22)
         Me.TxtSupplierCode.TabIndex = 71
         Me.TxtSupplierCode.TabStop = False
         '
@@ -132,7 +132,7 @@ Partial Class PurchasingManagement
         Me.TxtSupplierName.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtSupplierName.Location = New System.Drawing.Point(351, 37)
         Me.TxtSupplierName.Name = "TxtSupplierName"
-        Me.TxtSupplierName.Size = New System.Drawing.Size(333, 37)
+        Me.TxtSupplierName.Size = New System.Drawing.Size(333, 22)
         Me.TxtSupplierName.TabIndex = 73
         Me.TxtSupplierName.TabStop = False
         '
@@ -155,7 +155,7 @@ Partial Class PurchasingManagement
         Me.TxtOrdingDate.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtOrdingDate.Location = New System.Drawing.Point(908, 9)
         Me.TxtOrdingDate.Name = "TxtOrdingDate"
-        Me.TxtOrdingDate.Size = New System.Drawing.Size(157, 37)
+        Me.TxtOrdingDate.Size = New System.Drawing.Size(157, 22)
         Me.TxtOrdingDate.TabIndex = 74
         Me.TxtOrdingDate.TabStop = False
         '
@@ -197,7 +197,7 @@ Partial Class PurchasingManagement
         Me.TxtCount1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtCount1.Location = New System.Drawing.Point(1272, 81)
         Me.TxtCount1.Name = "TxtCount1"
-        Me.TxtCount1.Size = New System.Drawing.Size(38, 37)
+        Me.TxtCount1.Size = New System.Drawing.Size(38, 22)
         Me.TxtCount1.TabIndex = 77
         Me.TxtCount1.TabStop = False
         Me.TxtCount1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -220,7 +220,7 @@ Partial Class PurchasingManagement
         Me.TxtCount2.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtCount2.Location = New System.Drawing.Point(1272, 211)
         Me.TxtCount2.Name = "TxtCount2"
-        Me.TxtCount2.Size = New System.Drawing.Size(38, 37)
+        Me.TxtCount2.Size = New System.Drawing.Size(38, 22)
         Me.TxtCount2.TabIndex = 80
         Me.TxtCount2.TabStop = False
         Me.TxtCount2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -296,7 +296,7 @@ Partial Class PurchasingManagement
         Me.TxtCount3.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtCount3.Location = New System.Drawing.Point(1272, 342)
         Me.TxtCount3.Name = "TxtCount3"
-        Me.TxtCount3.Size = New System.Drawing.Size(38, 37)
+        Me.TxtCount3.Size = New System.Drawing.Size(38, 22)
         Me.TxtCount3.TabIndex = 89
         Me.TxtCount3.TabStop = False
         Me.TxtCount3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -321,7 +321,7 @@ Partial Class PurchasingManagement
         Me.LblPurchasedDate.Name = "LblPurchasedDate"
         Me.LblPurchasedDate.Size = New System.Drawing.Size(114, 22)
         Me.LblPurchasedDate.TabIndex = 93
-        Me.LblPurchasedDate.Text = "仕入日"
+        Me.LblPurchasedDate.Text = "仕入登録日"
         Me.LblPurchasedDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'LblRemarks
@@ -341,7 +341,7 @@ Partial Class PurchasingManagement
         Me.TxtRemarks.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtRemarks.Location = New System.Drawing.Point(844, 342)
         Me.TxtRemarks.Name = "TxtRemarks"
-        Me.TxtRemarks.Size = New System.Drawing.Size(375, 37)
+        Me.TxtRemarks.Size = New System.Drawing.Size(375, 22)
         Me.TxtRemarks.TabIndex = 4
         '
         'DtpPurchaseDate
@@ -353,7 +353,7 @@ Partial Class PurchasingManagement
         Me.DtpPurchaseDate.Location = New System.Drawing.Point(292, 341)
         Me.DtpPurchaseDate.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.DtpPurchaseDate.Name = "DtpPurchaseDate"
-        Me.DtpPurchaseDate.Size = New System.Drawing.Size(148, 37)
+        Me.DtpPurchaseDate.Size = New System.Drawing.Size(148, 22)
         Me.DtpPurchaseDate.TabIndex = 3
         Me.DtpPurchaseDate.TabStop = False
         Me.DtpPurchaseDate.Value = New Date(2018, 7, 16, 0, 0, 0, 0)
@@ -375,7 +375,7 @@ Partial Class PurchasingManagement
         Me.TxtSuffixNo.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtSuffixNo.Location = New System.Drawing.Point(351, 9)
         Me.TxtSuffixNo.Name = "TxtSuffixNo"
-        Me.TxtSuffixNo.Size = New System.Drawing.Size(36, 37)
+        Me.TxtSuffixNo.Size = New System.Drawing.Size(36, 22)
         Me.TxtSuffixNo.TabIndex = 231
         Me.TxtSuffixNo.TabStop = False
         '
@@ -410,7 +410,7 @@ Partial Class PurchasingManagement
         Me.TxtCustomerPO.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtCustomerPO.Location = New System.Drawing.Point(569, 9)
         Me.TxtCustomerPO.Name = "TxtCustomerPO"
-        Me.TxtCustomerPO.Size = New System.Drawing.Size(157, 37)
+        Me.TxtCustomerPO.Size = New System.Drawing.Size(157, 22)
         Me.TxtCustomerPO.TabIndex = 304
         Me.TxtCustomerPO.TabStop = False
         '
@@ -423,7 +423,7 @@ Partial Class PurchasingManagement
         Me.DtpPaymentDate.Location = New System.Drawing.Point(567, 341)
         Me.DtpPaymentDate.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.DtpPaymentDate.Name = "DtpPaymentDate"
-        Me.DtpPaymentDate.Size = New System.Drawing.Size(148, 37)
+        Me.DtpPaymentDate.Size = New System.Drawing.Size(148, 22)
         Me.DtpPaymentDate.TabIndex = 306
         Me.DtpPaymentDate.TabStop = False
         Me.DtpPaymentDate.Value = New Date(2018, 7, 25, 13, 29, 25, 0)

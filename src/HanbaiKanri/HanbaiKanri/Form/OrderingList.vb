@@ -302,7 +302,7 @@ Public Class OrderingList
                 Sql += ",t20.仕入金額_外貨,t20.仕入金額,t20.支払条件,t20.営業担当者,t20.入力担当者,t20.備考"
                 Sql += ",t20.登録日,t20.更新日,t20.通貨"
 
-                Sql += ",sum(t21.仕入値) as 仕入値合計, sum(t21.仕入値_外貨) as 仕入値合計_外貨"
+                Sql += ",sum(t21.仕入値) as 仕入値合計, sum(t21.仕入値_外貨) as 仕入値合計_外貨, t21.発注数量 "
 
                 Sql += " FROM "
                 Sql += " public.t20_hattyu t20 "
@@ -358,25 +358,10 @@ Public Class OrderingList
 
                     DgvHtyhd.Rows(i).Cells("通貨_外貨").Value = cur
                     'DgvHtyhd.Rows(i).Cells("通貨").Value = strBaseCur  '基準通貨
-
-                    'DgvHtyhd.Rows(i).Cells("仕入原価_外貨").Value = rmNullDecimal(ds.Tables(RS).Rows(i)("仕入値合計_外貨")) * rmNullDecimal(ds.Tables(RS).Rows(i)("発注数量"))
-                    'DgvHtyhd.Rows(i).Cells("仕入原価").Value = rmNullDecimal(ds.Tables(RS).Rows(i)("仕入値合計")) * rmNullDecimal(ds.Tables(RS).Rows(i)("発注数量"))
-                    'DgvHtyhd.Rows(i).Cells("仕入金額_外貨").Value = ds.Tables(RS).Rows(i)("仕入金額_外貨")
-                    'DgvHtyhd.Rows(i).Cells("仕入金額").Value = ds.Tables(RS).Rows(i)("仕入金額")
-
-                    Dim decPurchase1 As Decimal = 0
-                    Dim decPurchase2 As Decimal = 0
-                    Dim decPurchaseAmount1 As Decimal = 0
-                    Dim decPurchaseAmount2 As Decimal = 0
-
-                    Call mPurchaseCost(ds.Tables(RS).Rows(i)("発注番号"), ds.Tables(RS).Rows(i)("発注番号枝番") _
-                                       , decPurchase1, decPurchase2 _
-                                       , decPurchaseAmount1, decPurchaseAmount2)
-
-                    DgvHtyhd.Rows(i).Cells("仕入原価_外貨").Value = decPurchase1
-                    DgvHtyhd.Rows(i).Cells("仕入原価").Value = decPurchase2
-                    DgvHtyhd.Rows(i).Cells("仕入金額_外貨").Value = decPurchaseAmount1
-                    DgvHtyhd.Rows(i).Cells("仕入金額").Value = decPurchaseAmount2
+                    DgvHtyhd.Rows(i).Cells("仕入原価_外貨").Value = rmNullDecimal(ds.Tables(RS).Rows(i)("仕入値合計_外貨")) * rmNullDecimal(ds.Tables(RS).Rows(i)("発注数量"))
+                    DgvHtyhd.Rows(i).Cells("仕入原価").Value = rmNullDecimal(ds.Tables(RS).Rows(i)("仕入値合計")) * rmNullDecimal(ds.Tables(RS).Rows(i)("発注数量"))
+                    DgvHtyhd.Rows(i).Cells("仕入金額_外貨").Value = ds.Tables(RS).Rows(i)("仕入金額_外貨")
+                    DgvHtyhd.Rows(i).Cells("仕入金額").Value = ds.Tables(RS).Rows(i)("仕入金額")
 
                     DgvHtyhd.Rows(i).Cells("仕入先郵便番号").Value = ds.Tables(RS).Rows(i)("仕入先郵便番号")
                     DgvHtyhd.Rows(i).Cells("仕入先住所").Value = ds.Tables(RS).Rows(i)("仕入先住所")
