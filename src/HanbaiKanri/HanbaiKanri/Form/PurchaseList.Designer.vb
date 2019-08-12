@@ -150,7 +150,7 @@ Partial Class PurchaseList
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(170, 22)
         Me.Label8.TabIndex = 106
-        Me.Label8.Text = "仕入日"
+        Me.Label8.Text = "仕入登録日"
         Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label4
