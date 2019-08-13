@@ -540,7 +540,7 @@ Public Class DepositManagement
             Sql += "', "
             Sql += "更新日"
             Sql += " = '"
-            Sql += formatDatetime(today)
+            Sql += UtilClass.formatDatetime(today)
             Sql += "' "
             Sql += "WHERE"
             Sql += " 会社コード"
@@ -562,8 +562,8 @@ Public Class DepositManagement
 
     '登録処理
     Private Sub BtnRegist_Click(sender As Object, e As EventArgs) Handles BtnRegist.Click
-        Dim dtToday As String = formatDatetime(DateTime.Now)
-        Dim dtNyukinday As String = formatDatetime(DtpDepositDate.Value)
+        Dim dtToday As String = UtilClass.formatDatetime(DateTime.Now)
+        Dim dtNyukinday As String = UtilClass.formatDatetime(DtpDepositDate.Value)
         Dim reccnt As Integer = 0
         Dim DepositAmount As Decimal = 0      '入金額計
         Dim DepositAmount_cur As Decimal = 0  '入金額計_外貨
@@ -626,14 +626,8 @@ Public Class DepositManagement
         '採番テーブルから入金番号取得
         Dim PMSaiban As String = getSaiban("90", dtToday)
 
-        Sql = " AND "
-        Sql += "得意先コード"
-        Sql += " ILIKE "
-        Sql += "'%"
-        Sql += CustomerCode
-        Sql += "%'"
-        Sql += " AND "
-        Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+        Sql = " AND 得意先コード ILIKE '%" & CustomerCode & "%'"
+        Sql += " AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
         If CurCode <> 0 Then
             Sql += " AND 通貨 = " & CurCode
         End If
