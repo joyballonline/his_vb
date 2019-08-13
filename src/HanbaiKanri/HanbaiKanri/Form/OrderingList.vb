@@ -302,7 +302,7 @@ Public Class OrderingList
                 Sql += ",t20.仕入金額_外貨,t20.仕入金額,t20.支払条件,t20.営業担当者,t20.入力担当者,t20.備考"
                 Sql += ",t20.登録日,t20.更新日,t20.通貨"
 
-                Sql += ",sum(t21.仕入値) as 仕入値合計, sum(t21.仕入値_外貨) as 仕入値合計_外貨, t21.発注数量 "
+                Sql += ",sum(t21.仕入値) as 仕入値合計, sum(t21.仕入値_外貨) as 仕入値合計_外貨, sum(t21.発注数量) as 発注数量 "
 
                 Sql += " FROM "
                 Sql += " public.t20_hattyu t20 "
