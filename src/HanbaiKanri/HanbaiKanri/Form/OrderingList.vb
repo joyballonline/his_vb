@@ -440,19 +440,26 @@ Public Class OrderingList
                     DgvHtyhd.Columns.Add("取消", "Cancel")
                     DgvHtyhd.Columns.Add("発注番号", "PurchaseNumber")
                     DgvHtyhd.Columns.Add("発注番号枝番", "PurchaseOrderVer.")
-                    DgvHtyhd.Columns.Add("行番号", "LineNumber")
+                    DgvHtyhd.Columns.Add("行番号", "LineNo")
                     DgvHtyhd.Columns.Add("仕入区分", "PurchaseClassification")
                     DgvHtyhd.Columns.Add("メーカー", "Manufacturer")
                     DgvHtyhd.Columns.Add("品名", "ItemName")
                     DgvHtyhd.Columns.Add("型式", "Spec")
                     DgvHtyhd.Columns.Add("仕入先名", "SupplierName")
-                    DgvHtyhd.Columns.Add("仕入値", "PurchaseAmount")
+
+                    DgvHtyhd.Columns.Add("通貨_外貨", "Currency")
+                    DgvHtyhd.Columns.Add("仕入値_外貨", "PurchasePrice" & vbCrLf & "(ForeignCurrency)")
+                    DgvHtyhd.Columns.Add("仕入値", "PurchasePrice" & vbCrLf & "(" & setBaseCurrency() & ")")
+
                     DgvHtyhd.Columns.Add("発注数量", "OrderQuantity")
                     DgvHtyhd.Columns.Add("仕入数量", "PurchasedQuantity")
                     DgvHtyhd.Columns.Add("発注残数", "NumberOfOrderRemaining ")
                     DgvHtyhd.Columns.Add("単位", "Unit")
+
+                    DgvHtyhd.Columns.Add("仕入金額_外貨", "PurchaseCost" & vbCrLf & "(ForeignCurrency)")
+                    DgvHtyhd.Columns.Add("仕入金額", "PurchaseCost" & vbCrLf & "(" & setBaseCurrency() & ")")
                     DgvHtyhd.Columns.Add("間接費", "OverHead")
-                    DgvHtyhd.Columns.Add("仕入金額", "PurchaseAmount")
+
                     DgvHtyhd.Columns.Add("リードタイム", "LeadTime")
                     DgvHtyhd.Columns.Add("貿易条件", "TradeTerms")
                     'DgvHtyhd.Columns.Add("入庫数", "GoodsReceiptQuantity")
@@ -471,13 +478,21 @@ Public Class OrderingList
                     DgvHtyhd.Columns.Add("品名", "品名")
                     DgvHtyhd.Columns.Add("型式", "型式")
                     DgvHtyhd.Columns.Add("仕入先名", "仕入先名")
-                    DgvHtyhd.Columns.Add("仕入値", "仕入値")
+
+                    DgvHtyhd.Columns.Add("通貨_外貨", "仕入通貨")
+                    DgvHtyhd.Columns.Add("仕入値_外貨", "仕入単価" & vbCrLf & "(原通貨)")
+                    DgvHtyhd.Columns.Add("仕入値", "仕入単価" & vbCrLf & "(" & setBaseCurrency() & ")")
+
+
                     DgvHtyhd.Columns.Add("発注数量", "発注数量")
-                    DgvHtyhd.Columns.Add("仕入数量", "仕入数量")
-                    DgvHtyhd.Columns.Add("発注残数", "発注残数")
+                    DgvHtyhd.Columns.Add("仕入数量", "入庫済数量")
+                    DgvHtyhd.Columns.Add("発注残数", "発注残数量")
                     DgvHtyhd.Columns.Add("単位", "単位")
+
+                    DgvHtyhd.Columns.Add("仕入金額_外貨", "仕入原価" & vbCrLf & "(原通貨)")
+                    DgvHtyhd.Columns.Add("仕入金額", "仕入原価" & vbCrLf & "(" & setBaseCurrency() & ")")
                     DgvHtyhd.Columns.Add("間接費", "間接費")
-                    DgvHtyhd.Columns.Add("仕入金額", "仕入金額")
+
                     DgvHtyhd.Columns.Add("リードタイム", "リードタイム")
                     DgvHtyhd.Columns.Add("貿易条件", "貿易条件")
                     'DgvHtyhd.Columns.Add("入庫数", "入庫数")
@@ -489,22 +504,26 @@ Public Class OrderingList
                 End If
 
                 '伝票単位時のセル書式
+                DgvHtyhd.Columns("仕入値_外貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 DgvHtyhd.Columns("仕入値").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 DgvHtyhd.Columns("発注数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 DgvHtyhd.Columns("仕入数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 DgvHtyhd.Columns("発注残数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 DgvHtyhd.Columns("間接費").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                DgvHtyhd.Columns("仕入金額_外貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 DgvHtyhd.Columns("仕入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 'DgvHtyhd.Columns("入庫数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 'DgvHtyhd.Columns("未入庫数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
 
                 '数字形式
+                DgvHtyhd.Columns("仕入値_外貨").DefaultCellStyle.Format = "N2"
                 DgvHtyhd.Columns("仕入値").DefaultCellStyle.Format = "N2"
                 DgvHtyhd.Columns("発注数量").DefaultCellStyle.Format = "N2"
                 DgvHtyhd.Columns("仕入数量").DefaultCellStyle.Format = "N2"
                 DgvHtyhd.Columns("発注残数").DefaultCellStyle.Format = "N2"
                 DgvHtyhd.Columns("間接費").DefaultCellStyle.Format = "N2"
+                DgvHtyhd.Columns("仕入金額_外貨").DefaultCellStyle.Format = "N2"
                 DgvHtyhd.Columns("仕入金額").DefaultCellStyle.Format = "N2"
                 'DgvHtyhd.Columns("入庫数").DefaultCellStyle.Format = "N2"
                 'DgvHtyhd.Columns("未入庫数").DefaultCellStyle.Format = "N2"
@@ -514,6 +533,16 @@ Public Class OrderingList
 
                 '発注明細ぶん回し
                 For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+
+                    If IsDBNull(ds.Tables(RS).Rows(i)("通貨")) Then
+                        cur = vbNullString
+                    Else
+                        Sql = " and 採番キー = " & ds.Tables(RS).Rows(i)("通貨")
+                        curds = getDsData("m25_currency", Sql)
+
+                        cur = curds.Tables(RS).Rows(0)("通貨コード")
+                    End If
+
 
                     DgvHtyhd.Rows.Add()
                     DgvHtyhd.Rows(i).Cells("取消").Value = getDelKbnTxt(ds.Tables(RS).Rows(i)("取消区分"))
@@ -533,13 +562,20 @@ Public Class OrderingList
                     DgvHtyhd.Rows(i).Cells("品名").Value = ds.Tables(RS).Rows(i)("品名")
                     DgvHtyhd.Rows(i).Cells("型式").Value = ds.Tables(RS).Rows(i)("型式")
                     DgvHtyhd.Rows(i).Cells("仕入先名").Value = ds.Tables(RS).Rows(i)("仕入先名")
+
+                    DgvHtyhd.Rows(i).Cells("通貨_外貨").Value = cur
+                    DgvHtyhd.Rows(i).Cells("仕入値_外貨").Value = ds.Tables(RS).Rows(i)("仕入値_外貨")
                     DgvHtyhd.Rows(i).Cells("仕入値").Value = ds.Tables(RS).Rows(i)("仕入値")
                     DgvHtyhd.Rows(i).Cells("発注数量").Value = ds.Tables(RS).Rows(i)("発注数量")
                     DgvHtyhd.Rows(i).Cells("仕入数量").Value = ds.Tables(RS).Rows(i)("仕入数量")
                     DgvHtyhd.Rows(i).Cells("発注残数").Value = ds.Tables(RS).Rows(i)("発注残数")
                     DgvHtyhd.Rows(i).Cells("単位").Value = ds.Tables(RS).Rows(i)("単位")
+
+                    DgvHtyhd.Rows(i).Cells("仕入金額_外貨").Value = ds.Tables(RS).Rows(i)("仕入値_外貨") * ds.Tables(RS).Rows(i)("発注数量")
+                    DgvHtyhd.Rows(i).Cells("仕入金額").Value = ds.Tables(RS).Rows(i)("仕入値") * ds.Tables(RS).Rows(i)("発注数量")
+
                     DgvHtyhd.Rows(i).Cells("間接費").Value = ds.Tables(RS).Rows(i)("間接費")
-                    DgvHtyhd.Rows(i).Cells("仕入金額").Value = ds.Tables(RS).Rows(i)("仕入金額")
+
                     If ds.Tables(RS).Rows(i)("リードタイム") Is "" Then
                         DgvHtyhd.Rows(i).Cells("リードタイム").Value = ""
                     Else
