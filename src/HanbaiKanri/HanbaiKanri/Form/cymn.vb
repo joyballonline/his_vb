@@ -1175,21 +1175,16 @@ Public Class Cymn
 
             Next
 
+            '最終レコードの処理
+            '新しい値をセットし、発注基本を登録する
+            sireCd = tbl.Rows(lngCnt)("仕入先コード")
+            currencyCd = tbl.Rows(lngCnt)("仕入通貨")
 
-            '在庫引当のみの場合、tblにデータがない
-            If tbl.Rows.Count > 0 Then
+            'レートの取得
+            strRate = setRate(currencyCd)
 
-                '最終レコードの処理
-                '新しい値をセットし、発注基本を登録する
+            hattyuHdInsert(CurrentPurchaseNo, dsSipper, cost, tmpCuote, dtNow, strRate) '発注基本更新
 
-                sireCd = tbl.Rows(lngCnt)("仕入先コード")
-                currencyCd = tbl.Rows(lngCnt)("仕入通貨")
-
-                'レートの取得
-                strRate = setRate(currencyCd)
-
-                hattyuHdInsert(CurrentPurchaseNo, dsSipper, cost, tmpCuote, dtNow, strRate) '発注基本更新
-            End If
 
 #Region "t20_hattyu 発注基本登録"
 
@@ -1208,25 +1203,25 @@ Public Class Cymn
 
             '呼び出した見積に受注日を入れる
             Sql = ""
-                Sql += "UPDATE Public.t01_mithd "
-                Sql += "SET  受注日 = '" & UtilClass.strFormatDate(DtpOrderDate.Value) & "'"
-                Sql += ", 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
-                Sql += ", 更新日 = '" & UtilClass.formatDatetime(dtNow) & "'"
-                Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-                Sql += " AND 見積番号 = '" & QuoteNo.ToString & "'"
-                Sql += " AND 見積番号枝番 = '" & QuoteSuffix.ToString & "'"
+            Sql += "UPDATE Public.t01_mithd "
+            Sql += "SET  受注日 = '" & UtilClass.strFormatDate(DtpOrderDate.Value) & "'"
+            Sql += ", 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+            Sql += ", 更新日 = '" & UtilClass.formatDatetime(dtNow) & "'"
+            Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += " AND 見積番号 = '" & QuoteNo.ToString & "'"
+            Sql += " AND 見積番号枝番 = '" & QuoteSuffix.ToString & "'"
 
-                _db.executeDB(Sql)
+            _db.executeDB(Sql)
 #End Region
 
-                '登録完了メッセージ
-                _msgHd.dspMSG("completeInsert", frmC01F10_Login.loginValue.Language)
+            '登録完了メッセージ
+            _msgHd.dspMSG("completeInsert", frmC01F10_Login.loginValue.Language)
 
-                '画面クローズ
-                _parentForm.Enabled = True
-                _parentForm.Show()
-                Me.Dispose()
-            End If
+            '画面クローズ
+            _parentForm.Enabled = True
+            _parentForm.Show()
+            Me.Dispose()
+        End If
 
     End Sub
 
