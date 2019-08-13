@@ -85,12 +85,18 @@ Public Class PurchaseList
         Dim reccnt As Integer = 0 'DB用（デフォルト）
         Dim Sql As String = ""
 
+        Dim curds As DataSet  'm25_currency
+        Dim cur As String
 
         Try
             '伝票単位の場合
             If RbtnSlip.Checked Then
 
-                Sql = "SELECT t40.* FROM  public.t40_sirehd t40 "
+                Sql = "SELECT t40.*,t20.通貨"
+
+                Sql += " FROM public.t40_sirehd t40 "
+                Sql += " left join t20_hattyu t20"
+                Sql += " on t40.発注番号 = t20.発注番号 and t40.発注番号枝番 = t20.発注番号枝番"
 
                 Sql += " WHERE t40.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
 
@@ -104,6 +110,16 @@ Public Class PurchaseList
                 setHdColumns() '表示カラムの設定
 
                 For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+
+                    If IsDBNull(ds.Tables(RS).Rows(i)("通貨")) Then
+                        cur = vbNullString
+                    Else
+                        Sql = " and 採番キー = " & ds.Tables(RS).Rows(i)("通貨")
+                        curds = getDsData("m25_currency", Sql)
+
+                        cur = curds.Tables(RS).Rows(0)("通貨コード")
+                    End If
+
                     DgvHtyhd.Rows.Add()
                     DgvHtyhd.Rows(i).Cells("取消").Value = getDelKbnTxt(ds.Tables(RS).Rows(i)("取消区分"))
                     DgvHtyhd.Rows(i).Cells("仕入番号").Value = ds.Tables(RS).Rows(i)("仕入番号")
@@ -119,24 +135,50 @@ Public Class PurchaseList
                     DgvHtyhd.Rows(i).Cells("仕入先ＦＡＸ").Value = ds.Tables(RS).Rows(i)("仕入先ＦＡＸ")
                     DgvHtyhd.Rows(i).Cells("仕入先担当者名").Value = ds.Tables(RS).Rows(i)("仕入先担当者名")
                     DgvHtyhd.Rows(i).Cells("仕入先担当者役職").Value = ds.Tables(RS).Rows(i)("仕入先担当者役職")
-                    DgvHtyhd.Rows(i).Cells("仕入金額").Value = ds.Tables(RS).Rows(i)("仕入金額")
+
+                    DgvHtyhd.Rows(i).Cells("通貨_外貨").Value = cur
+
+                    Dim decPurchase1 As Decimal = 0
+                    Dim decPurchase2 As Decimal = 0
+                    Dim decPurchaseAmount1 As Decimal = 0
+                    Dim decPurchaseAmount2 As Decimal = 0
+
+                    Call mPurchaseCost(ds.Tables(RS).Rows(i)("発注番号"), ds.Tables(RS).Rows(i)("発注番号枝番") _
+                                       , decPurchase1, decPurchase2 _
+                                       , decPurchaseAmount1, decPurchaseAmount2)
+
+                    DgvHtyhd.Rows(i).Cells("仕入原価_外貨").Value = decPurchase1
+                    DgvHtyhd.Rows(i).Cells("仕入原価").Value = decPurchase2
+
+                    DgvHtyhd.Rows(i).Cells("仕入金額_外貨").Value = decPurchaseAmount1
+                    DgvHtyhd.Rows(i).Cells("仕入金額").Value = decPurchaseAmount2
+
                     DgvHtyhd.Rows(i).Cells("支払条件").Value = ds.Tables(RS).Rows(i)("支払条件")
                     DgvHtyhd.Rows(i).Cells("営業担当者").Value = ds.Tables(RS).Rows(i)("営業担当者")
                     DgvHtyhd.Rows(i).Cells("入力担当者").Value = ds.Tables(RS).Rows(i)("入力担当者")
                     DgvHtyhd.Rows(i).Cells("備考").Value = ds.Tables(RS).Rows(i)("備考")
                     DgvHtyhd.Rows(i).Cells("登録日").Value = ds.Tables(RS).Rows(i)("登録日")
+                    DgvHtyhd.Rows(i).Cells("最終更新日").Value = ds.Tables(RS).Rows(i)("更新日")
+
                 Next
 
                 '数字形式
+                DgvHtyhd.Columns("仕入原価_外貨").DefaultCellStyle.Format = "N2"
+                DgvHtyhd.Columns("仕入原価").DefaultCellStyle.Format = "N2"
+                DgvHtyhd.Columns("仕入金額_外貨").DefaultCellStyle.Format = "N2"
                 DgvHtyhd.Columns("仕入金額").DefaultCellStyle.Format = "N2"
             Else
 
                 '明細単位の場合
 
-                Sql = "SELECT t41.* FROM  public.t41_siredt t41 "
+                Sql = "SELECT t41.*,t20.通貨,t40.登録日,t40.更新日 FROM  public.t41_siredt t41 "
                 Sql += " INNER JOIN  t40_sirehd t40 "
                 Sql += " ON t41.会社コード = t40.会社コード"
                 Sql += " AND  t41.仕入番号 = t40.仕入番号"
+
+                Sql += " left join t20_hattyu t20"
+                Sql += " on t40.発注番号 = t20.発注番号 and t40.発注番号枝番 = t20.発注番号枝番"
+
                 Sql += " WHERE t41.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
 
                 Sql += viewSearchConditions() '検索条件
@@ -149,6 +191,16 @@ Public Class PurchaseList
                 setDtColumns() '表示カラムの設定
 
                 For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+
+                    If IsDBNull(ds.Tables(RS).Rows(i)("通貨")) Then
+                        cur = vbNullString
+                    Else
+                        Sql = " and 採番キー = " & ds.Tables(RS).Rows(i)("通貨")
+                        curds = getDsData("m25_currency", Sql)
+
+                        cur = curds.Tables(RS).Rows(0)("通貨コード")
+                    End If
+
                     DgvHtyhd.Rows.Add()
                     DgvHtyhd.Rows(i).Cells("仕入番号").Value = ds.Tables(RS).Rows(i)("仕入番号")
                     DgvHtyhd.Rows(i).Cells("行番号").Value = ds.Tables(RS).Rows(i)("行番号")
@@ -168,16 +220,38 @@ Public Class PurchaseList
                     DgvHtyhd.Rows(i).Cells("品名").Value = ds.Tables(RS).Rows(i)("品名")
                     DgvHtyhd.Rows(i).Cells("型式").Value = ds.Tables(RS).Rows(i)("型式")
                     DgvHtyhd.Rows(i).Cells("仕入先名").Value = ds.Tables(RS).Rows(i)("仕入先名")
-                    DgvHtyhd.Rows(i).Cells("仕入値").Value = ds.Tables(RS).Rows(i)("仕入値")
+
+                    DgvHtyhd.Rows(i).Cells("通貨_外貨").Value = cur
+
+                    Dim decPurchase1 As Decimal = 0
+                    Dim decPurchase2 As Decimal = 0
+                    Dim decPurchaseAmount1 As Decimal = 0
+                    Dim decPurchaseAmount2 As Decimal = 0
+
+                    Call mPurchaseCost2(ds.Tables(RS).Rows(i)("発注番号"), ds.Tables(RS).Rows(i)("発注番号枝番"), ds.Tables(RS).Rows(i)("行番号") _
+                                       , decPurchase1, decPurchase2 _
+                                       , decPurchaseAmount1, decPurchaseAmount2)
+
+
+                    DgvHtyhd.Rows(i).Cells("仕入値_外貨").Value = decPurchase1
+                    DgvHtyhd.Rows(i).Cells("仕入値").Value = decPurchase1
+
                     DgvHtyhd.Rows(i).Cells("発注数量").Value = ds.Tables(RS).Rows(i)("発注数量")
                     DgvHtyhd.Rows(i).Cells("仕入数量").Value = ds.Tables(RS).Rows(i)("仕入数量")
                     DgvHtyhd.Rows(i).Cells("発注残数").Value = ds.Tables(RS).Rows(i)("発注残数")
                     DgvHtyhd.Rows(i).Cells("単位").Value = ds.Tables(RS).Rows(i)("単位")
+
+                    DgvHtyhd.Rows(i).Cells("仕入金額_外貨").Value = decPurchaseAmount1
+                    DgvHtyhd.Rows(i).Cells("仕入金額").Value = decPurchaseAmount2
                     DgvHtyhd.Rows(i).Cells("間接費").Value = ds.Tables(RS).Rows(i)("間接費")
-                    DgvHtyhd.Rows(i).Cells("仕入金額").Value = ds.Tables(RS).Rows(i)("仕入金額")
+
                     DgvHtyhd.Rows(i).Cells("リードタイム").Value = ds.Tables(RS).Rows(i)("リードタイム")
                     DgvHtyhd.Rows(i).Cells("備考").Value = ds.Tables(RS).Rows(i)("備考")
                     DgvHtyhd.Rows(i).Cells("更新者").Value = ds.Tables(RS).Rows(i)("更新者")
+
+                    DgvHtyhd.Rows(i).Cells("登録日").Value = ds.Tables(RS).Rows(i)("登録日")
+                    DgvHtyhd.Rows(i).Cells("最終更新日").Value = ds.Tables(RS).Rows(i)("更新日")
+
                 Next
 
                 '数字形式
@@ -199,6 +273,107 @@ Public Class PurchaseList
         End Try
 
     End Sub
+
+    Private Sub mPurchaseCost(ByVal OrderNo As String, ByVal BranchNo As String _
+                                   , ByRef decPurchase1 As Decimal, ByRef decPurchase2 As Decimal _
+                                   , ByRef decPurchaseAmount1 As Decimal, ByRef decPurchaseAmount2 As Decimal)
+
+
+        Dim reccnt As Integer = 0 'DB用（デフォルト
+        Dim Sql As String
+        Dim ds_t21 As DataSet
+
+        Sql = "SELECT"
+        Sql += " 仕入値,仕入値_外貨,発注数量,仕入金額,間接費,仕入金額_外貨"
+
+        Sql += " FROM "
+        Sql += " public.t21_hattyu"
+
+        Sql += " WHERE "
+        Sql += " 会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
+
+        Sql += " and 発注番号 = '" & OrderNo & "'"
+        Sql += " and 発注番号枝番 = '" & BranchNo & "'"
+
+        ds_t21 = _db.selectDB(Sql, RS, reccnt)
+
+        decPurchase1 = 0  '外貨
+        decPurchase2 = 0
+        decPurchaseAmount1 = 0
+        decPurchaseAmount2 = 0
+
+        For i As Integer = 0 To ds_t21.Tables(RS).Rows.Count - 1
+
+            decPurchase1 += rmNullDecimal(ds_t21.Tables(RS).Rows(i)("仕入値_外貨") * ds_t21.Tables(RS).Rows(i)("発注数量"))
+            decPurchase2 += rmNullDecimal(ds_t21.Tables(RS).Rows(i)("仕入値") * ds_t21.Tables(RS).Rows(i)("発注数量"))
+
+            decPurchaseAmount1 += rmNullDecimal(ds_t21.Tables(RS).Rows(i)("仕入金額_外貨"))
+            decPurchaseAmount2 += rmNullDecimal(ds_t21.Tables(RS).Rows(i)("仕入金額") + ds_t21.Tables(RS).Rows(i)("間接費"))
+
+        Next
+
+    End Sub
+
+    Private Sub mPurchaseCost2(ByVal OrderNo As String, ByVal BranchNo As String, ByVal No As String _
+                                   , ByRef decPurchase1 As Decimal, ByRef decPurchase2 As Decimal _
+                                   , ByRef decPurchaseAmount1 As Decimal, ByRef decPurchaseAmount2 As Decimal)
+
+
+        Dim reccnt As Integer = 0 'DB用（デフォルト
+        Dim Sql As String
+        Dim ds_t21 As DataSet
+
+        Sql = "SELECT"
+        Sql += " 仕入値,仕入値_外貨,発注数量,仕入金額,間接費,仕入金額_外貨"
+
+        Sql += " FROM "
+        Sql += " public.t21_hattyu"
+
+        Sql += " WHERE "
+        Sql += " 会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
+
+        Sql += " and 発注番号 = '" & OrderNo & "'"
+        Sql += " and 発注番号枝番 = '" & BranchNo & "'"
+        Sql += " and 行番号 = '" & No & "'"
+
+        ds_t21 = _db.selectDB(Sql, RS, reccnt)
+
+        decPurchase1 = 0  '外貨
+        decPurchase2 = 0
+        decPurchaseAmount1 = 0
+        decPurchaseAmount2 = 0
+
+        For i As Integer = 0 To ds_t21.Tables(RS).Rows.Count - 1
+
+            decPurchase1 += rmNullDecimal(ds_t21.Tables(RS).Rows(i)("仕入値_外貨") * ds_t21.Tables(RS).Rows(i)("発注数量"))
+            decPurchase2 += rmNullDecimal(ds_t21.Tables(RS).Rows(i)("仕入値") * ds_t21.Tables(RS).Rows(i)("発注数量"))
+
+            decPurchaseAmount1 += rmNullDecimal(ds_t21.Tables(RS).Rows(i)("仕入金額_外貨"))
+            decPurchaseAmount2 += rmNullDecimal(ds_t21.Tables(RS).Rows(i)("仕入金額") + ds_t21.Tables(RS).Rows(i)("間接費"))
+
+        Next
+
+    End Sub
+
+    'NothingをDecimalに置換
+    Private Function rmNullDecimal(ByVal prmField As Object) As Decimal
+        If prmField Is Nothing Then
+            rmNullDecimal = 0
+            Exit Function
+        End If
+        If prmField Is DBNull.Value Then
+            rmNullDecimal = 0
+            Exit Function
+        End If
+
+        If Not IsNumeric(prmField) Then
+            rmNullDecimal = 0
+            Exit Function
+        End If
+
+        rmNullDecimal = prmField
+
+    End Function
 
     '使用言語に合わせて仕入基本見出しを切替
     Private Sub setHdColumns()
@@ -234,23 +409,33 @@ Public Class PurchaseList
             DgvHtyhd.Columns.Add("仕入日", "仕入登録日")
             DgvHtyhd.Columns.Add("仕入先コード", "仕入先コード")
             DgvHtyhd.Columns.Add("仕入先名", "仕入先名")
+
+            DgvHtyhd.Columns.Add("通貨_外貨", "仕入通貨")
+            DgvHtyhd.Columns.Add("仕入原価_外貨", "仕入原価" & vbCrLf & "(原価)")
+            DgvHtyhd.Columns.Add("仕入原価", "仕入原価" & vbCrLf & "(" & setBaseCurrency() & ")")
+            DgvHtyhd.Columns.Add("仕入金額_外貨", "仕入金額" & vbCrLf & "(原価)")
+            DgvHtyhd.Columns.Add("仕入金額", "仕入金額" & vbCrLf & "(" & setBaseCurrency() & ")")
+
             DgvHtyhd.Columns.Add("仕入先郵便番号", "仕入先郵便番号")
             DgvHtyhd.Columns.Add("仕入先住所", "仕入先住所")
             DgvHtyhd.Columns.Add("仕入先電話番号", "仕入先電話番号")
             DgvHtyhd.Columns.Add("仕入先ＦＡＸ", "仕入先ＦＡＸ")
             DgvHtyhd.Columns.Add("仕入先担当者名", "仕入先担当者名")
             DgvHtyhd.Columns.Add("仕入先担当者役職", "仕入先担当者役職")
-            DgvHtyhd.Columns.Add("仕入金額", "仕入金額")
             DgvHtyhd.Columns.Add("支払条件", "支払条件")
             DgvHtyhd.Columns.Add("営業担当者", "営業担当者")
             DgvHtyhd.Columns.Add("入力担当者", "入力担当者")
             DgvHtyhd.Columns.Add("備考", "備考")
             DgvHtyhd.Columns.Add("登録日", "登録日")
 
+            DgvHtyhd.Columns.Add("最終更新日", "最終更新日")
+
         End If
 
+        DgvHtyhd.Columns("仕入原価_外貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvHtyhd.Columns("仕入原価").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvHtyhd.Columns("仕入金額_外貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvHtyhd.Columns("仕入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-
     End Sub
 
     '使用言語に合わせて仕入明細見出しを切替
@@ -282,22 +467,33 @@ Public Class PurchaseList
             DgvHtyhd.Columns.Add("発注番号", "発注番号")
             DgvHtyhd.Columns.Add("発注番号枝番", "発注Ver.")
             DgvHtyhd.Columns.Add("仕入番号", "仕入番号")
-            DgvHtyhd.Columns.Add("行番号", "行番号")
+            DgvHtyhd.Columns.Add("行番号", "行No")
             DgvHtyhd.Columns.Add("仕入区分", "仕入区分")
             DgvHtyhd.Columns.Add("メーカー", "メーカー")
             DgvHtyhd.Columns.Add("品名", "品名")
             DgvHtyhd.Columns.Add("型式", "型式")
             DgvHtyhd.Columns.Add("仕入先名", "仕入先名")
-            DgvHtyhd.Columns.Add("仕入値", "仕入値")
+
+            DgvHtyhd.Columns.Add("通貨_外貨", "仕入通貨")
+            DgvHtyhd.Columns.Add("仕入値_外貨", "仕入単価" & vbCrLf & "(原通貨)")
+            DgvHtyhd.Columns.Add("仕入値", "仕入単価" & vbCrLf & "(" & setBaseCurrency() & ")")
+
             DgvHtyhd.Columns.Add("発注数量", "発注数量")
-            DgvHtyhd.Columns.Add("仕入数量", "仕入数量")
-            DgvHtyhd.Columns.Add("発注残数", "発注残数")
+            DgvHtyhd.Columns.Add("仕入数量", "入庫済数量")
+            DgvHtyhd.Columns.Add("発注残数", "発注残数量")
             DgvHtyhd.Columns.Add("単位", "単位")
+
+            DgvHtyhd.Columns.Add("仕入金額_外貨", "仕入金額" & vbCrLf & "(原通貨)")
+            DgvHtyhd.Columns.Add("仕入金額", "仕入金額" & vbCrLf & "(" & setBaseCurrency() & ")")
             DgvHtyhd.Columns.Add("間接費", "間接費")
-            DgvHtyhd.Columns.Add("仕入金額", "仕入金額")
+
+
             DgvHtyhd.Columns.Add("リードタイム", "リードタイム")
             DgvHtyhd.Columns.Add("備考", "備考")
             DgvHtyhd.Columns.Add("更新者", "更新者")
+
+            DgvHtyhd.Columns.Add("登録日", "登録日")
+            DgvHtyhd.Columns.Add("最終更新日", "最終更新日")
         End If
 
         DgvHtyhd.Columns("仕入値").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -701,6 +897,19 @@ Public Class PurchaseList
 
         'リードタイムのリストを汎用マスタから取得
         Return getDsData("m90_hanyo", Sql)
+
+    End Function
+
+
+    '基準通貨の取得
+    Private Function setBaseCurrency() As String
+        Dim Sql As String
+        '通貨表示：ベースの設定
+        Sql = " AND 採番キー = " & CommonConst.CURRENCY_CD_IDR.ToString
+        Sql += " AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
+
+        Dim ds As DataSet = getDsData("m25_currency", Sql)
+        setBaseCurrency = ds.Tables(RS).Rows(0)("通貨コード")
 
     End Function
 

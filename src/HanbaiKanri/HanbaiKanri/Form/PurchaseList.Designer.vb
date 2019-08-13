@@ -22,6 +22,7 @@ Partial Class PurchaseList
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.BtnPurchaseCancel = New System.Windows.Forms.Button()
         Me.BtnPurchaseView = New System.Windows.Forms.Button()
         Me.Label10 = New System.Windows.Forms.Label()
@@ -88,7 +89,7 @@ Partial Class PurchaseList
         Me.Label10.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.Label10.Location = New System.Drawing.Point(9, 179)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(87, 15)
+        Me.Label10.Size = New System.Drawing.Size(163, 30)
         Me.Label10.TabIndex = 115
         Me.Label10.Text = "■表示形式"
         '
@@ -97,7 +98,7 @@ Partial Class PurchaseList
         Me.Label5.AutoSize = True
         Me.Label5.Location = New System.Drawing.Point(936, 42)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(17, 12)
+        Me.Label5.Size = New System.Drawing.Size(34, 24)
         Me.Label5.TabIndex = 113
         Me.Label5.Text = "～"
         '
@@ -118,7 +119,7 @@ Partial Class PurchaseList
         Me.TxtSales.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtSales.Location = New System.Drawing.Point(190, 149)
         Me.TxtSales.Name = "TxtSales"
-        Me.TxtSales.Size = New System.Drawing.Size(350, 22)
+        Me.TxtSales.Size = New System.Drawing.Size(350, 37)
         Me.TxtSales.TabIndex = 9
         '
         'Label7
@@ -138,7 +139,7 @@ Partial Class PurchaseList
         Me.TxtPurchaseSince.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtPurchaseSince.Location = New System.Drawing.Point(760, 63)
         Me.TxtPurchaseSince.Name = "TxtPurchaseSince"
-        Me.TxtPurchaseSince.Size = New System.Drawing.Size(369, 22)
+        Me.TxtPurchaseSince.Size = New System.Drawing.Size(369, 37)
         Me.TxtPurchaseSince.TabIndex = 7
         '
         'Label8
@@ -170,7 +171,7 @@ Partial Class PurchaseList
         Me.TxtSupplierCode.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtSupplierCode.Location = New System.Drawing.Point(190, 120)
         Me.TxtSupplierCode.Name = "TxtSupplierCode"
-        Me.TxtSupplierCode.Size = New System.Drawing.Size(350, 22)
+        Me.TxtSupplierCode.Size = New System.Drawing.Size(350, 37)
         Me.TxtSupplierCode.TabIndex = 4
         '
         'Label3
@@ -190,7 +191,7 @@ Partial Class PurchaseList
         Me.TxtTel.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtTel.Location = New System.Drawing.Point(190, 92)
         Me.TxtTel.Name = "TxtTel"
-        Me.TxtTel.Size = New System.Drawing.Size(350, 22)
+        Me.TxtTel.Size = New System.Drawing.Size(350, 37)
         Me.TxtTel.TabIndex = 3
         '
         'Label2
@@ -210,7 +211,7 @@ Partial Class PurchaseList
         Me.TxtAddress.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtAddress.Location = New System.Drawing.Point(190, 64)
         Me.TxtAddress.Name = "TxtAddress"
-        Me.TxtAddress.Size = New System.Drawing.Size(350, 22)
+        Me.TxtAddress.Size = New System.Drawing.Size(350, 37)
         Me.TxtAddress.TabIndex = 2
         '
         'Label1
@@ -231,7 +232,7 @@ Partial Class PurchaseList
         Me.LblConditions.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblConditions.Location = New System.Drawing.Point(11, 13)
         Me.LblConditions.Name = "LblConditions"
-        Me.LblConditions.Size = New System.Drawing.Size(87, 15)
+        Me.LblConditions.Size = New System.Drawing.Size(163, 30)
         Me.LblConditions.TabIndex = 97
         Me.LblConditions.Text = "■抽出条件"
         '
@@ -240,7 +241,7 @@ Partial Class PurchaseList
         Me.TxtSupplierName.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtSupplierName.Location = New System.Drawing.Point(190, 36)
         Me.TxtSupplierName.Name = "TxtSupplierName"
-        Me.TxtSupplierName.Size = New System.Drawing.Size(350, 22)
+        Me.TxtSupplierName.Size = New System.Drawing.Size(350, 37)
         Me.TxtSupplierName.TabIndex = 1
         '
         'BtnPurchaseSearch
@@ -267,6 +268,14 @@ Partial Class PurchaseList
         '
         Me.DgvHtyhd.AllowUserToAddRows = False
         Me.DgvHtyhd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DgvHtyhd.DefaultCellStyle = DataGridViewCellStyle1
         Me.DgvHtyhd.Location = New System.Drawing.Point(13, 236)
         Me.DgvHtyhd.Name = "DgvHtyhd"
         Me.DgvHtyhd.ReadOnly = True
@@ -305,7 +314,7 @@ Partial Class PurchaseList
         Me.TxtCustomerPO.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtCustomerPO.Location = New System.Drawing.Point(760, 91)
         Me.TxtCustomerPO.Name = "TxtCustomerPO"
-        Me.TxtCustomerPO.Size = New System.Drawing.Size(369, 22)
+        Me.TxtCustomerPO.Size = New System.Drawing.Size(369, 37)
         Me.TxtCustomerPO.TabIndex = 10
         '
         'dtPurchaseDateSince
@@ -317,7 +326,7 @@ Partial Class PurchaseList
         Me.dtPurchaseDateSince.Location = New System.Drawing.Point(760, 35)
         Me.dtPurchaseDateSince.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.dtPurchaseDateSince.Name = "dtPurchaseDateSince"
-        Me.dtPurchaseDateSince.Size = New System.Drawing.Size(170, 22)
+        Me.dtPurchaseDateSince.Size = New System.Drawing.Size(170, 37)
         Me.dtPurchaseDateSince.TabIndex = 332
         Me.dtPurchaseDateSince.Value = New Date(2019, 1, 1, 0, 0, 0, 0)
         '
@@ -330,7 +339,7 @@ Partial Class PurchaseList
         Me.dtPurchaseDateUntil.Location = New System.Drawing.Point(959, 35)
         Me.dtPurchaseDateUntil.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.dtPurchaseDateUntil.Name = "dtPurchaseDateUntil"
-        Me.dtPurchaseDateUntil.Size = New System.Drawing.Size(170, 22)
+        Me.dtPurchaseDateUntil.Size = New System.Drawing.Size(170, 37)
         Me.dtPurchaseDateUntil.TabIndex = 333
         Me.dtPurchaseDateUntil.Value = New Date(2019, 1, 1, 0, 0, 0, 0)
         '
@@ -360,9 +369,9 @@ Partial Class PurchaseList
         Me.RbtnSlip.AutoSize = True
         Me.RbtnSlip.Checked = True
         Me.RbtnSlip.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.RbtnSlip.Location = New System.Drawing.Point(3, 5)
+        Me.RbtnSlip.Location = New System.Drawing.Point(3, 3)
         Me.RbtnSlip.Name = "RbtnSlip"
-        Me.RbtnSlip.Size = New System.Drawing.Size(89, 19)
+        Me.RbtnSlip.Size = New System.Drawing.Size(164, 23)
         Me.RbtnSlip.TabIndex = 11
         Me.RbtnSlip.TabStop = True
         Me.RbtnSlip.Text = "伝票単位"
@@ -373,9 +382,9 @@ Partial Class PurchaseList
         Me.RbtnDetails.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.RbtnDetails.AutoSize = True
         Me.RbtnDetails.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.RbtnDetails.Location = New System.Drawing.Point(98, 5)
+        Me.RbtnDetails.Location = New System.Drawing.Point(173, 3)
         Me.RbtnDetails.Name = "RbtnDetails"
-        Me.RbtnDetails.Size = New System.Drawing.Size(89, 19)
+        Me.RbtnDetails.Size = New System.Drawing.Size(164, 23)
         Me.RbtnDetails.TabIndex = 12
         Me.RbtnDetails.Text = "明細単位"
         Me.RbtnDetails.UseVisualStyleBackColor = True
@@ -385,9 +394,9 @@ Partial Class PurchaseList
         Me.ChkCancelData.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.ChkCancelData.AutoSize = True
         Me.ChkCancelData.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.ChkCancelData.Location = New System.Drawing.Point(215, 5)
+        Me.ChkCancelData.Location = New System.Drawing.Point(365, 3)
         Me.ChkCancelData.Name = "ChkCancelData"
-        Me.ChkCancelData.Size = New System.Drawing.Size(139, 19)
+        Me.ChkCancelData.Size = New System.Drawing.Size(274, 23)
         Me.ChkCancelData.TabIndex = 14
         Me.ChkCancelData.Text = "取消データを含める"
         Me.ChkCancelData.UseVisualStyleBackColor = True
@@ -397,7 +406,7 @@ Partial Class PurchaseList
         Me.TxtSpec.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtSpec.Location = New System.Drawing.Point(760, 148)
         Me.TxtSpec.Name = "TxtSpec"
-        Me.TxtSpec.Size = New System.Drawing.Size(369, 22)
+        Me.TxtSpec.Size = New System.Drawing.Size(369, 37)
         Me.TxtSpec.TabIndex = 345
         '
         'LblSpec
@@ -417,7 +426,7 @@ Partial Class PurchaseList
         Me.TxtItemName.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtItemName.Location = New System.Drawing.Point(760, 120)
         Me.TxtItemName.Name = "TxtItemName"
-        Me.TxtItemName.Size = New System.Drawing.Size(369, 22)
+        Me.TxtItemName.Size = New System.Drawing.Size(369, 37)
         Me.TxtItemName.TabIndex = 343
         '
         'LblItemName
