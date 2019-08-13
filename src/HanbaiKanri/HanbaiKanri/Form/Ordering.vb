@@ -1233,6 +1233,11 @@ Public Class Ordering
         Dim dtNow As String = formatDatetime(DateTime.Now)
         Dim Sql As String = ""
 
+        Sql = " AND "
+        Sql += " 仕入先コード =  '" & TxtSupplierCode.Text & "'"
+
+        Dim supplierData = getDsData("m11_supplier", Sql)
+
         Try
             '複写か編集の時
             If PurchaseStatus = CommonConst.STATUS_CLONE Or PurchaseStatus = CommonConst.STATUS_EDIT Or PurchaseStatus = CommonConst.STATUS_ADD Then
@@ -1399,10 +1404,13 @@ Public Class Ordering
                 Sql += "', '"
                 Sql += TxtQuoteRemarks.Text '見積備考
                 Sql += "', "
-                If dsCompany.Tables(RS).Rows.Count > 0 Then
-                    Sql += IIf(dsCompany.Tables(RS).Rows(0)("ＶＡＴ") IsNot DBNull.Value, "'" & UtilClass.formatNumber(dsCompany.Tables(RS).Rows(0)("ＶＡＴ")) & "'", 0)
-                Else
+                '保税対応
+                If supplierData.Tables(RS).Rows(0)("国内区分") = CommonConst.DD_KBN_OVERSEAS Then
+                    '発注先が国外の場合はＶＡＴがかからない
                     Sql += "0" 'ＶＡＴ
+                Else
+                    Sql += UtilClass.formatNumber(TxtPurchaseAmount.Text) * 0.1
+
                 End If
                 Sql += ", '"
                 Sql += "0" 'ＰＰＨ
@@ -1687,7 +1695,7 @@ Public Class Ordering
 
         Sql = " AND 発注番号 = '" & PurchaseNo.ToString & "'"
         Sql += " AND 発注番号枝番 = '" & PurchaseSuffix.ToString & "'"
-        'Sql += " AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+        Sql += " AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
 
         Dim dsHattyuhd = getDsData("t20_hattyu", Sql)
 
@@ -1702,7 +1710,7 @@ Public Class Ordering
 
         Dim supplierData = getDsData("m11_supplier", Sql)
 
-
+        'この辺りにデータ取得できない時のエラートラップを入れないといけない
 
         '====================================
         ' Excel作成
