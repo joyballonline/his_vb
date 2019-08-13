@@ -2836,13 +2836,8 @@ Public Class Quote
                 sheet.Range("P10").Value = "QuotationPrice"　                 '見積単価
                 sheet.Range("Q10").Value = "QuotationAmount"　                '見積金額
                 sheet.Range("R10").Value = "GrossMargin"                      '粗利額
-                sheet.Range("S10").Value = "GrossMargin"                    　'粗利率
+                sheet.Range("S10").Value = "GrossMarginRate"                    　'粗利率
                 sheet.Range("T10").Value = "LeadTime"　                       'リードタイム
-
-                'sheet.Range("S3").Value = "Customer"　'仕入金額
-                'sheet.Range("S3").Value = "Customer"　'売上金額
-                'sheet.Range("S3").Value = "Customer"　'見積金額
-                'sheet.Range("S3").Value = "Customer"　'粗利額
 
             End If
 
@@ -2921,6 +2916,18 @@ Public Class Quote
                 currentRow += 1
 
             Next
+
+            currentRow += 2
+
+            '言語の判定
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then  '英語
+
+                sheet.Range("S" & currentRow).Value = "PurchaseAmount"     '仕入金額
+                sheet.Range("S" & currentRow + 1).Value = "SalesAmount"    '売上金額
+                sheet.Range("S" & currentRow + 2).Value = "QuotationAmount" '見積金額
+                sheet.Range("S" & currentRow + 3).Value = "GrossMargin"     '粗利額
+            End If
+
 
             app.DisplayAlerts = False 'Microsoft Excelのアラート一旦無効化
 
