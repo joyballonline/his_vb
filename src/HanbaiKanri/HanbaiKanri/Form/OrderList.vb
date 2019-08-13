@@ -697,9 +697,35 @@ Public Class OrderList
 
             If result = DialogResult.Yes Then
 
+
+                '対象の受注に対して発注データがあるか
+                Sql1 = "AND "
+                Sql1 += "受注番号 = '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号").Value & "'"
+                Sql1 += "AND "
+                Sql1 += "受注番号枝番 = '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号枝番").Value & "'"
+
+                Dim dshattyu As DataSet = getDsData("t20_hattyu", Sql1)
+
+                If dshattyu.Tables(RS).Rows.Count > 0 Then
+
+                    '取消確認のアラート
+                    result = _msgHd.dspMSG("confirmOrderCancel", frmC01F10_Login.loginValue.Language)
+                    If result = DialogResult.Yes Then
+
+                        '発注データの取消
+                        If mOrderCancel() = False Then
+                            Exit Sub
+                        End If
+                    End If
+
+                End If
+
+                '引当データを元に戻す
+                '受注データの取消
                 If mOutCancel() = False Then
                     Exit Sub
                 End If
+
 
                 OrderListLoad() 'データ更新
             End If
@@ -890,6 +916,58 @@ Public Class OrderList
 #End Region
 
             mOutCancel = True
+
+        Catch ue As UsrDefException
+            ue.dspMsg()
+            Throw ue
+        Catch ex As Exception
+            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
+            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
+        End Try
+
+    End Function
+
+
+    '受注データに対応する発注データを取り消す
+    Private Function mOrderCancel() As Boolean
+
+        Dim dtNow As String = UtilClass.formatDatetime(DateTime.Now)
+        Dim Sql1 As String = ""
+
+        mOrderCancel = False
+
+        Try
+
+            Sql1 = "UPDATE "
+            Sql1 += "Public."
+            Sql1 += "t20_hattyu "
+            Sql1 += "SET "
+
+            Sql1 += "取消区分 = " & CommonConst.CANCEL_KBN_DISABLED
+            Sql1 += ", 取消日 = '" & UtilClass.formatDatetime(dtNow) & "'"
+            Sql1 += ", 更新日 = '" & UtilClass.formatDatetime(dtNow) & "'"
+            Sql1 += ", 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "' "
+
+            Sql1 += "WHERE"
+            Sql1 += " 会社コード"
+            Sql1 += "='"
+            Sql1 += frmC01F10_Login.loginValue.BumonCD
+            Sql1 += "'"
+            Sql1 += " AND"
+            Sql1 += " 受注番号"
+            Sql1 += "='"
+            Sql1 += DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号").Value
+            Sql1 += "' "
+            Sql1 += " AND"
+            Sql1 += " 受注番号枝番"
+            Sql1 += "='"
+            Sql1 += DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号枝番").Value
+            Sql1 += "' "
+
+            _db.executeDB(Sql1)
+
+
+            mOrderCancel = True
 
         Catch ue As UsrDefException
             ue.dspMsg()

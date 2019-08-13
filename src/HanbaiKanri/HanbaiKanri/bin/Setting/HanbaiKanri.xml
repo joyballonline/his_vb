@@ -1308,6 +1308,16 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <MEMO></MEMO>
   </MSG_DATA>
   <MSG_DATA>
+    <ID>confirmOrderCancel</ID>
+    <MSG1>発注データも取り消しますか？</MSG1>
+    <MSG1_EN>Are you sure you want to cancel the order data?</MSG1_EN>
+    <BUTTON_TYPE>YesNo</BUTTON_TYPE>
+    <ICONT_TYPE>Question</ICONT_TYPE>
+    <DEFAULT_BUTTON>Button2</DEFAULT_BUTTON>
+    <CREATE_DATE>2006/04/27 15:00</CREATE_DATE>
+    <MEMO></MEMO>
+  </MSG_DATA>
+  <MSG_DATA>
     <ID>chkAppUseError</ID>
     <MSG1>使用可能アクセス数を超えています。</MSG1>
     <MSG1_EN>The number of available accesses has been exceeded.</MSG1_EN>
