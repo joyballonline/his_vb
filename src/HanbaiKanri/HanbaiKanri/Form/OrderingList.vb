@@ -247,7 +247,7 @@ Public Class OrderingList
                     DgvHtyhd.Columns.Add("仕入先コード", "仕入先コード")
                     DgvHtyhd.Columns.Add("仕入先名", "仕入先名")
 
-                    DgvHtyhd.Columns.Add("通貨_外貨", "通貨")
+                    DgvHtyhd.Columns.Add("通貨_外貨", "仕入通貨")
                     'DgvHtyhd.Columns.Add("通貨", "通貨")
                     DgvHtyhd.Columns.Add("仕入原価_外貨", "仕入原価" & vbCrLf & "(原通貨)")
                     DgvHtyhd.Columns.Add("仕入原価", "仕入原価" & vbCrLf & "(" & setBaseCurrency() & ")")
