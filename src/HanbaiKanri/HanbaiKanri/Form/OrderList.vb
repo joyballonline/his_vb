@@ -697,51 +697,10 @@ Public Class OrderList
 
             If result = DialogResult.Yes Then
 
-                '出庫データ登録前に、「在庫引当」の商品があるかどうかチェック
-                Sql1 = "AND "
-                Sql1 += "受注番号 = '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号").Value & "'"
-                Sql1 += "AND "
-                Sql1 += "受注番号枝番 = '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号枝番").Value & "'"
+                If mOutCancel() = False Then
+                    Exit Sub
+                End If
 
-                ds = getDsData("t11_cymndt", Sql1)
-
-                For i As Integer = 0 To ds.Tables(RS).Rows.Count() - 1
-
-                    '仕入区分が2（在庫引当）の場合、作成済みの仮出庫データを「取消区分=0, 取消日=Datetime.Date」でUPDATEする
-                    If ds.Tables(RS).Rows(i)("仕入区分").ToString = CommonConst.Sire_KBN_Zaiko Then
-
-                        Sql1 = "UPDATE "
-                        Sql1 += " t44_shukohd "
-                        Sql1 += " SET "
-                        Sql1 += " 取消区分 = " & CommonConst.CANCEL_KBN_DISABLED.ToString
-                        Sql1 += " ,取消日 = '" & UtilClass.formatDatetime(dtNow) & "'"
-
-                        Sql1 += " WHERE "
-                        Sql1 += " 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-                        Sql1 += " AND "
-                        Sql1 += " 受注番号 = '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号").Value & "'"
-                        Sql1 += " AND "
-                        Sql1 += " 受注番号枝番 = '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号枝番").Value & "'"
-
-                        _db.executeDB(Sql1)
-
-                    End If
-                Next
-
-                Sql1 = "UPDATE "
-                Sql1 += " Public.t10_cymnhd "
-                Sql1 += " SET "
-
-                Sql1 += " 取消区分 = 1"
-                Sql1 += ", 取消日 = '" & dtNow & "'"
-                Sql1 += ", 更新日 = '" & dtNow & "'"
-                Sql1 += ", 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
-
-                Sql1 += " WHERE 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
-                Sql1 += " AND 受注番号 ='" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号").Value & "'"
-                Sql1 += " AND 受注番号枝番 ='" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号枝番").Value & "'"
-
-                _db.executeDB(Sql1)
                 OrderListLoad() 'データ更新
             End If
 
@@ -751,6 +710,197 @@ Public Class OrderList
         End Try
 
     End Sub
+
+    '引当データを元に戻す
+    't44_shukohd
+    't45_shukodt
+    't70_inout
+    't44_shukohd
+    't45_shukodt
+    't01_mithd
+    Private Function mOutCancel() As Boolean
+
+        Dim dtNow As String = UtilClass.formatDatetime(DateTime.Now)
+        Dim Sql1 As String = ""
+
+        mOutCancel = False
+
+        Try
+
+
+            '出庫データ登録前に、「在庫引当」の商品があるかどうかチェック
+            Sql1 = "AND "
+            Sql1 += "受注番号 = '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号").Value & "'"
+            Sql1 += "AND "
+            Sql1 += "受注番号枝番 = '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号枝番").Value & "'"
+
+            Dim dsCymndt As DataSet = getDsData("t11_cymndt", Sql1)
+
+
+            For i As Integer = 0 To dsCymndt.Tables(RS).Rows.Count() - 1
+
+                '仕入区分が2（在庫引当）の場合、作成済みの仮出庫データを「取消区分=0, 取消日=Datetime.Date」でUPDATEする
+                If dsCymndt.Tables(RS).Rows(i)("仕入区分").ToString = CommonConst.Sire_KBN_Zaiko Then
+
+#Region "shuko"
+                    't44_shukohd
+                    Sql1 = "UPDATE "
+                    Sql1 += " t44_shukohd "
+                    Sql1 += " SET "
+                    Sql1 += " 取消区分 = " & CommonConst.CANCEL_KBN_DISABLED.ToString
+                    Sql1 += ",取消日 = '" & UtilClass.formatDatetime(dtNow) & "'"
+                    Sql1 += ",更新日 = '" & UtilClass.formatDatetime(dtNow) & "'"
+                    Sql1 += ",更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+
+                    Sql1 += " WHERE "
+                    Sql1 += " 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                    Sql1 += " AND "
+                    Sql1 += " 受注番号 = '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号").Value & "'"
+                    Sql1 += " AND "
+                    Sql1 += " 受注番号枝番 = '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号枝番").Value & "'"
+
+                    _db.executeDB(Sql1)
+
+
+                    't45_shukodt
+                    Sql1 = "UPDATE "
+                    Sql1 += " t45_shukodt "
+                    Sql1 += " SET "
+                    Sql1 += " 更新日 = '" & UtilClass.formatDatetime(dtNow) & "'"
+                    Sql1 += ",更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+
+                    Sql1 += " WHERE "
+                    Sql1 += " 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                    Sql1 += " AND "
+                    Sql1 += " 受注番号 = '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号").Value & "'"
+                    Sql1 += " AND "
+                    Sql1 += " 受注番号枝番 = '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号枝番").Value & "'"
+                    Sql1 += " AND "
+                    Sql1 += " 行番号 = '" & dsCymndt.Tables(RS).Rows(i)("行番号").ToString & "'"
+
+                    _db.executeDB(Sql1)
+#End Region
+
+                    '出庫データ select
+                    Sql1 = " AND "
+                    Sql1 += " 受注番号 = '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号").Value & "'"
+                    Sql1 += " AND "
+                    Sql1 += " 受注番号枝番 = '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号枝番").Value & "'"
+                    Sql1 += " AND "
+                    Sql1 += " 行番号 = '" & dsCymndt.Tables(RS).Rows(i)("行番号").ToString & "'"
+
+                    Dim dsShukodt As DataSet = getDsData("t45_shukodt", Sql1)
+
+
+#Region "inout"
+                    't70_inout
+                    Sql1 = "UPDATE t70_inout "
+                    Sql1 += " SET "
+                    Sql1 += " 取消区分 = " & CommonConst.CANCEL_KBN_DISABLED.ToString
+                    Sql1 += ",取消日 = '" & UtilClass.formatDatetime(dtNow) & "'"
+                    Sql1 += ",更新日 = '" & UtilClass.formatDatetime(dtNow) & "'"
+                    Sql1 += ",更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+
+                    Sql1 += " WHERE "
+                    Sql1 += " 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                    Sql1 += " AND"
+                    Sql1 += " 伝票番号 ='" & dsShukodt.Tables(RS).Rows(0)("出庫番号").ToString & "'"
+                    Sql1 += " AND"
+                    Sql1 += "   行番号 ='" & dsShukodt.Tables(RS).Rows(0)("行番号").ToString & "'"
+
+                    _db.executeDB(Sql1)
+
+#End Region
+
+#Region "t11_cymndt"
+                    't11_cymndtの出庫数は修正しない
+                    'Dim calShukko As Integer = dsCymndt.Tables(RS).Rows(i)("出庫数") - dsShukodt.Tables(RS).Rows(x)("出庫数量")
+                    ''Dim calUnShukko As Integer = dsCymndt.Tables(RS).Rows(i)("未出庫数") + dsShukodt.Tables(RS).Rows(x)("出庫数量")
+                    'Dim calUnShukko As Integer = dsCymndt.Tables(RS).Rows(i)("未出庫数") - dsShukodt.Tables(RS).Rows(x)("出庫数量")
+
+                    'Sql1 = "update t11_cymndt set "
+                    ''Sql1 += "出庫数 = '" & calShukko & "'"
+                    'Sql1 += "未出庫数 = '" & calUnShukko & "'"
+                    'Sql1 += ",更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+                    'Sql1 += " where 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                    'Sql1 += " AND "
+                    'Sql1 += "受注番号 ILIKE '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号").Value & "'"
+                    'Sql1 += " AND "
+                    'Sql1 += "受注番号枝番 ILIKE '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号枝番").Value & "'"
+                    'Sql1 += " AND "
+                    'Sql1 += "行番号 = '" & dsShukodt.Tables(RS).Rows(x)("行番号") & "'"
+
+                    '_db.executeDB(Sql1)
+#End Region
+
+                End If
+            Next
+
+
+#Region "cymn"
+
+            '受発注、在庫引当全てのデータを取消にする
+            Sql1 = "UPDATE "
+            Sql1 += " Public.t10_cymnhd "
+            Sql1 += " SET "
+            Sql1 += " 取消区分 = " & CommonConst.CANCEL_KBN_DISABLED.ToString
+            Sql1 += ", 取消日 = '" & UtilClass.formatDatetime(dtNow) & "'"
+            Sql1 += ", 更新日 = '" & UtilClass.formatDatetime(dtNow) & "'"
+            Sql1 += ", 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+
+            Sql1 += " WHERE 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql1 += " AND 受注番号 ='" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号").Value & "'"
+            Sql1 += " AND 受注番号枝番 ='" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号枝番").Value & "'"
+
+            _db.executeDB(Sql1)
+
+
+            Sql1 = "UPDATE "
+            Sql1 += " Public.t11_cymndt "
+            Sql1 += " SET "
+            'Sql1 += "  更新日 = '" & UtilClass.formatDatetime(dtNow) & "'"
+            Sql1 += " 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+
+            Sql1 += " WHERE 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql1 += " AND 受注番号 ='" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号").Value & "'"
+            Sql1 += " AND 受注番号枝番 ='" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号枝番").Value & "'"
+
+            _db.executeDB(Sql1)
+
+#End Region
+
+
+
+#Region "t01_mithd"
+
+            't01_mithd　受注日をクリア
+            Sql1 = "UPDATE "
+            Sql1 += " Public.t01_mithd "
+            Sql1 += " SET "
+            Sql1 += " 受注日 = null "
+            Sql1 += ",更新日 = '" & UtilClass.formatDatetime(dtNow) & "'"
+            Sql1 += ",更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+
+            Sql1 += " WHERE 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql1 += " AND 見積番号 ='" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("見積番号").Value & "'"
+            Sql1 += " AND 見積番号枝番 ='" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("見積番号枝番").Value & "'"
+
+            _db.executeDB(Sql1)
+
+#End Region
+
+            mOutCancel = True
+
+        Catch ue As UsrDefException
+            ue.dspMsg()
+            Throw ue
+        Catch ex As Exception
+            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
+            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
+        End Try
+
+    End Function
+
 
     '取消データを含めるイベントの取得
     Private Sub ChkCancelData_CheckedChanged(sender As Object, e As EventArgs) Handles ChkCancelData.CheckedChanged
