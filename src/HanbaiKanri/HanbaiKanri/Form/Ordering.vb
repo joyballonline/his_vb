@@ -1687,7 +1687,7 @@ Public Class Ordering
 
         Sql = " AND 発注番号 = '" & PurchaseNo.ToString & "'"
         Sql += " AND 発注番号枝番 = '" & PurchaseSuffix.ToString & "'"
-        Sql += " AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+        'Sql += " AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
 
         Dim dsHattyuhd = getDsData("t20_hattyu", Sql)
 
@@ -1701,6 +1701,8 @@ Public Class Ordering
         Sql += " 仕入先コード =  '" & dsHattyuhd.Tables(RS).Rows(0)("仕入先コード") & "'"
 
         Dim supplierData = getDsData("m11_supplier", Sql)
+
+
 
         '====================================
         ' Excel作成
@@ -1803,11 +1805,17 @@ Public Class Ordering
             Next
 
             sheet.Range("W" & lstRow + 1).Value = totalPrice 'Subtotal
-            sheet.Range("W" & lstRow + 2).Value = IIf(supplierData.Tables(RS).Rows(0)("国内区分") = CommonConst.DD_KBN_OVERSEAS,
-                                                      "",
-                                                      totalPrice * 10 * 0.01) 'VAT
-            sheet.Range("W" & lstRow + 3).Value = totalPrice * 10 * 0.01 + totalPrice 'TOTAL
-            sheet.Range("H" & lstRow + 5).Value = totalPrice * 10 * 0.01 + totalPrice 'REMARKS ?
+            '保税対応
+            If supplierData.Tables(RS).Rows(0)("国内区分") = CommonConst.DD_KBN_OVERSEAS Then
+                '発注先が国外の場合はＶＡＴがかからない
+                sheet.Range("W" & lstRow + 2).Value = "" 'VAT
+                sheet.Range("W" & lstRow + 3).Value = totalPrice 'TOTAL
+                sheet.Range("H" & lstRow + 5).Value = totalPrice 'REMARKS ?
+            Else
+                sheet.Range("W" & lstRow + 2).Value = totalPrice * 10 * 0.01 'VAT
+                sheet.Range("W" & lstRow + 3).Value = totalPrice * 10 * 0.01 + totalPrice 'TOTAL
+                sheet.Range("H" & lstRow + 5).Value = totalPrice * 10 * 0.01 + totalPrice 'REMARKS ?
+            End If
 
             app.DisplayAlerts = False 'Microsoft Excelのアラート一旦無効化
 
