@@ -234,7 +234,7 @@ Public Class PurchaseList
 
 
                     DgvHtyhd.Rows(i).Cells("仕入値_外貨").Value = decPurchase1
-                    DgvHtyhd.Rows(i).Cells("仕入値").Value = decPurchase1
+                    DgvHtyhd.Rows(i).Cells("仕入値").Value = decPurchase2
 
                     DgvHtyhd.Rows(i).Cells("発注数量").Value = ds.Tables(RS).Rows(i)("発注数量")
                     DgvHtyhd.Rows(i).Cells("仕入数量").Value = ds.Tables(RS).Rows(i)("仕入数量")
@@ -255,12 +255,14 @@ Public Class PurchaseList
                 Next
 
                 '数字形式
+                DgvHtyhd.Columns("仕入値_外貨").DefaultCellStyle.Format = "N2"
                 DgvHtyhd.Columns("仕入値").DefaultCellStyle.Format = "N2"
                 DgvHtyhd.Columns("発注数量").DefaultCellStyle.Format = "N2"
                 DgvHtyhd.Columns("仕入数量").DefaultCellStyle.Format = "N2"
                 DgvHtyhd.Columns("発注残数").DefaultCellStyle.Format = "N2"
-                DgvHtyhd.Columns("間接費").DefaultCellStyle.Format = "N2"
+                DgvHtyhd.Columns("仕入金額_外貨").DefaultCellStyle.Format = "N2"
                 DgvHtyhd.Columns("仕入金額").DefaultCellStyle.Format = "N2"
+                DgvHtyhd.Columns("間接費").DefaultCellStyle.Format = "N2"
 
             End If
 
@@ -345,11 +347,11 @@ Public Class PurchaseList
 
         For i As Integer = 0 To ds_t21.Tables(RS).Rows.Count - 1
 
-            decPurchase1 += rmNullDecimal(ds_t21.Tables(RS).Rows(i)("仕入値_外貨") * ds_t21.Tables(RS).Rows(i)("発注数量"))
-            decPurchase2 += rmNullDecimal(ds_t21.Tables(RS).Rows(i)("仕入値") * ds_t21.Tables(RS).Rows(i)("発注数量"))
+            decPurchase1 += rmNullDecimal(ds_t21.Tables(RS).Rows(i)("仕入値_外貨"))
+            decPurchase2 += rmNullDecimal(ds_t21.Tables(RS).Rows(i)("仕入値"))
 
-            decPurchaseAmount1 += rmNullDecimal(ds_t21.Tables(RS).Rows(i)("仕入金額_外貨"))
-            decPurchaseAmount2 += rmNullDecimal(ds_t21.Tables(RS).Rows(i)("仕入金額") + ds_t21.Tables(RS).Rows(i)("間接費"))
+            decPurchaseAmount1 += rmNullDecimal(ds_t21.Tables(RS).Rows(i)("仕入値_外貨") * ds_t21.Tables(RS).Rows(i)("発注数量"))
+            decPurchaseAmount2 += rmNullDecimal(ds_t21.Tables(RS).Rows(i)("仕入値") * ds_t21.Tables(RS).Rows(i)("発注数量"))
 
         Next
 
@@ -394,12 +396,20 @@ Public Class PurchaseList
             DgvHtyhd.Columns.Add("仕入先ＦＡＸ", "FAX")
             DgvHtyhd.Columns.Add("仕入先担当者名", "NameOfPIC")
             DgvHtyhd.Columns.Add("仕入先担当者役職", "PositionPICSupplier")
-            DgvHtyhd.Columns.Add("仕入金額", "PurchaseAmount")
+
+            DgvHtyhd.Columns.Add("通貨_外貨", "Currency")
+            DgvHtyhd.Columns.Add("仕入原価_外貨", "PurchaseCost" & vbCrLf & "(ForeignCurrency)")
+            DgvHtyhd.Columns.Add("仕入原価", "PurchaseCost" & vbCrLf & "(" & setBaseCurrency() & ")")
+            DgvHtyhd.Columns.Add("仕入金額_外貨", "PurchaseAmount" & vbCrLf & "(ForeignCurrency)")
+            DgvHtyhd.Columns.Add("仕入金額", "PurchaseAmount" & vbCrLf & "(" & setBaseCurrency() & ")")
+
             DgvHtyhd.Columns.Add("支払条件", "PaymentTerms")
             DgvHtyhd.Columns.Add("営業担当者", "SalesPersonInCharge")
             DgvHtyhd.Columns.Add("入力担当者", "PICForInputting")
             DgvHtyhd.Columns.Add("備考", "Remarks")
             DgvHtyhd.Columns.Add("登録日", "RegistrationDate")
+            DgvHtyhd.Columns.Add("最終更新日", "LastUpdateDate")
+
         Else
             DgvHtyhd.Columns.Add("取消", "取消")
             DgvHtyhd.Columns.Add("発注番号", "発注番号")
@@ -411,9 +421,9 @@ Public Class PurchaseList
             DgvHtyhd.Columns.Add("仕入先名", "仕入先名")
 
             DgvHtyhd.Columns.Add("通貨_外貨", "仕入通貨")
-            DgvHtyhd.Columns.Add("仕入原価_外貨", "仕入原価" & vbCrLf & "(原価)")
-            DgvHtyhd.Columns.Add("仕入原価", "仕入原価" & vbCrLf & "(" & setBaseCurrency() & ")")
-            DgvHtyhd.Columns.Add("仕入金額_外貨", "仕入金額" & vbCrLf & "(原価)")
+            DgvHtyhd.Columns.Add("仕入原価_外貨", "仕入原価" & vbCrLf & "(原通貨)")
+            DgvHtyhd.Columns.Add("仕入原通貨", "仕入原価" & vbCrLf & "(" & setBaseCurrency() & ")")
+            DgvHtyhd.Columns.Add("仕入金額_外貨", "仕入金額" & vbCrLf & "(原通貨)")
             DgvHtyhd.Columns.Add("仕入金額", "仕入金額" & vbCrLf & "(" & setBaseCurrency() & ")")
 
             DgvHtyhd.Columns.Add("仕入先郵便番号", "仕入先郵便番号")
@@ -452,16 +462,27 @@ Public Class PurchaseList
             DgvHtyhd.Columns.Add("品名", "ItemName")
             DgvHtyhd.Columns.Add("型式", "Spec")
             DgvHtyhd.Columns.Add("仕入先名", "SupplierName")
-            DgvHtyhd.Columns.Add("仕入値", "PurchaseAmount")
+
+            DgvHtyhd.Columns.Add("通貨_外貨", "Currency")
+            DgvHtyhd.Columns.Add("仕入値_外貨", "PurchasePrice" & vbCrLf & "(ForeignCurrency)")
+            DgvHtyhd.Columns.Add("仕入値", "PurchasePrice" & vbCrLf & "(" & setBaseCurrency() & ")")
+
             DgvHtyhd.Columns.Add("発注数量", "OrderQuantity")
             DgvHtyhd.Columns.Add("仕入数量", "PurchaseQuantity")
             DgvHtyhd.Columns.Add("発注残数", "PurchasedQuantity")
             DgvHtyhd.Columns.Add("単位", "Unit")
+
+            DgvHtyhd.Columns.Add("仕入金額_外貨", "PurchaseCost" & vbCrLf & "(ForeignCurrency)")
+            DgvHtyhd.Columns.Add("仕入金額", "PurchaseCost" & vbCrLf & "(" & setBaseCurrency() & ")")
             DgvHtyhd.Columns.Add("間接費", "OverHead")
-            DgvHtyhd.Columns.Add("仕入金額", "PurchaseAmount")
+
             DgvHtyhd.Columns.Add("リードタイム", "LeadTime")
             DgvHtyhd.Columns.Add("備考", "Remarks")
             DgvHtyhd.Columns.Add("更新者", "ModifiedBy")
+
+            DgvHtyhd.Columns.Add("登録日", "RegistrationDate")
+            DgvHtyhd.Columns.Add("最終更新日", "LastUpdateDate")
+
         Else
             DgvHtyhd.Columns.Add("取消", "取消")
             DgvHtyhd.Columns.Add("発注番号", "発注番号")
@@ -483,8 +504,8 @@ Public Class PurchaseList
             DgvHtyhd.Columns.Add("発注残数", "発注残数量")
             DgvHtyhd.Columns.Add("単位", "単位")
 
-            DgvHtyhd.Columns.Add("仕入金額_外貨", "仕入金額" & vbCrLf & "(原通貨)")
-            DgvHtyhd.Columns.Add("仕入金額", "仕入金額" & vbCrLf & "(" & setBaseCurrency() & ")")
+            DgvHtyhd.Columns.Add("仕入金額_外貨", "仕入原価" & vbCrLf & "(原通貨)")
+            DgvHtyhd.Columns.Add("仕入金額", "仕入原価" & vbCrLf & "(" & setBaseCurrency() & ")")
             DgvHtyhd.Columns.Add("間接費", "間接費")
 
 
@@ -496,12 +517,14 @@ Public Class PurchaseList
             DgvHtyhd.Columns.Add("最終更新日", "最終更新日")
         End If
 
+        DgvHtyhd.Columns("仕入値_外貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvHtyhd.Columns("仕入値").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvHtyhd.Columns("発注数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvHtyhd.Columns("仕入数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvHtyhd.Columns("発注残数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        DgvHtyhd.Columns("間接費").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvHtyhd.Columns("仕入金額_外貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvHtyhd.Columns("仕入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvHtyhd.Columns("間接費").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvHtyhd.Columns("リードタイム").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
     End Sub
