@@ -422,7 +422,7 @@ Public Class PurchaseList
 
             DgvHtyhd.Columns.Add("通貨_外貨", "仕入通貨")
             DgvHtyhd.Columns.Add("仕入原価_外貨", "仕入原価" & vbCrLf & "(原通貨)")
-            DgvHtyhd.Columns.Add("仕入原通貨", "仕入原価" & vbCrLf & "(" & setBaseCurrency() & ")")
+            DgvHtyhd.Columns.Add("仕入原価", "仕入原価" & vbCrLf & "(" & setBaseCurrency() & ")")
             DgvHtyhd.Columns.Add("仕入金額_外貨", "仕入金額" & vbCrLf & "(原通貨)")
             DgvHtyhd.Columns.Add("仕入金額", "仕入金額" & vbCrLf & "(" & setBaseCurrency() & ")")
 
