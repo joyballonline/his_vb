@@ -116,7 +116,8 @@ Public Class AccountsPayable
 
         BillLoad()
 
-        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+        '言語の判定
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then  '英語 
 
             LblAccountsPayableDate.Text = "AccountsPayableDate"
             LblAccountsPayableDate.Location = New Point(237, 379)
@@ -149,23 +150,29 @@ Public Class AccountsPayable
 
 
             DgvCymn.Columns("発注番号").HeaderText = "PurchaseOrderNumber"
-            DgvCymn.Columns("発注番号枝番").HeaderText = "PurchaseOrderSubNumber"
+            DgvCymn.Columns("発注番号枝番").HeaderText = "PurchaseOrderVer."
             DgvCymn.Columns("発注日").HeaderText = "OrderDate"
+
+            DgvCymn.Columns("仕入先コード").HeaderText = "SupplierCode"
             DgvCymn.Columns("仕入先").HeaderText = "SupplierName"
             DgvCymn.Columns("客先番号").HeaderText = "CustomerNumber"
-            DgvCymn.Columns("発注金額").HeaderText = "PurchaseOrderAmount"
-            DgvCymn.Columns("買掛金額計").HeaderText = "TotalAccountsPayable"
-            DgvCymn.Columns("買掛残高").HeaderText = "AccountsPayableBalance"
+
+            DgvCymn.Columns("仕入原価").HeaderText = "PurchaseCost" & vbCrLf & "a"
+            DgvCymn.Columns("VAT_IN").HeaderText = "VAT-IN" & vbCrLf & "b"
+
+            DgvCymn.Columns("発注金額").HeaderText = "PurchaseOrderAmount" & vbCrLf & "c=a+b"
+            DgvCymn.Columns("買掛金額計").HeaderText = "TotalAccountsPayable" & vbCrLf & "d"
+            DgvCymn.Columns("買掛残高").HeaderText = "AccountsPayableBalance" & vbCrLf & "e=c-d"
 
             DgvCymndt.Columns("明細").HeaderText = "Purchase order details"
             DgvCymndt.Columns("メーカー").HeaderText = "Manufacturer"
             DgvCymndt.Columns("品名").HeaderText = "ItemName"
             DgvCymndt.Columns("型式").HeaderText = "Spec"
-            DgvCymndt.Columns("発注個数").HeaderText = "OrderQuantity"
+            'DgvCymndt.Columns("発注個数").HeaderText = "OrderQuantity"
             DgvCymndt.Columns("単位").HeaderText = "Unit"
-            DgvCymndt.Columns("仕入数量").HeaderText = "PurchaseQuantity"
-            DgvCymndt.Columns("仕入単価").HeaderText = "PurchaseUnitPrice"
-            DgvCymndt.Columns("仕入金額").HeaderText = "PurchaseAmount"
+            DgvCymndt.Columns("仕入数量").HeaderText = "PurchaseQuantity" & vbCrLf & "f"
+            DgvCymndt.Columns("仕入単価").HeaderText = "PurchaseUnitPrice" & vbCrLf & "g"
+            DgvCymndt.Columns("仕入金額").HeaderText = "PurchaseCost" & vbCrLf & "h=f*g"
 
             DgvHistory.Columns("買掛番号").HeaderText = "AccountsPayableNumber"
             DgvHistory.Columns("買掛日").HeaderText = "AccountsPayableDate"
@@ -180,6 +187,19 @@ Public Class AccountsPayable
             DgvAdd.Columns("今回買掛金額計").HeaderText = "TotalAccountsPayable"
             DgvAdd.Columns("今回備考1").HeaderText = "Remarks1"
             DgvAdd.Columns("今回備考2").HeaderText = "Remarks2"
+
+        Else  '日本語
+
+            DgvCymn.Columns("仕入原価").HeaderText = "仕入原価" & vbCrLf & "a"
+            DgvCymn.Columns("VAT_IN").HeaderText = "VAT-IN" & vbCrLf & "b"
+            DgvCymn.Columns("発注金額").HeaderText = "買掛金額" & vbCrLf & "c=a+b"
+            DgvCymn.Columns("買掛金額計").HeaderText = "既登録額" & vbCrLf & "d"
+            DgvCymn.Columns("買掛残高").HeaderText = "未登録額" & vbCrLf & "e=c-d"
+
+
+            DgvCymndt.Columns("仕入数量").HeaderText = "数量" & vbCrLf & "f"
+            DgvCymndt.Columns("仕入単価").HeaderText = "仕入単価" & vbCrLf & "g"
+            DgvCymndt.Columns("仕入金額").HeaderText = "仕入原価" & vbCrLf & "h=f*g"
 
         End If
 
@@ -217,12 +237,54 @@ Public Class AccountsPayable
                             "買掛入力モード")
         End If
 
+        '中央寄せ
+        DgvCymn.Columns("発注番号").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvCymn.Columns("発注番号枝番").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvCymn.Columns("発注日").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvCymn.Columns("仕入先コード").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvCymn.Columns("仕入先").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvCymn.Columns("客先番号").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+        DgvCymn.Columns("仕入原価").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvCymn.Columns("VAT_IN").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+        DgvCymn.Columns("発注金額").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvCymn.Columns("買掛金額計").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvCymn.Columns("買掛残高").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+        DgvCymndt.Columns("明細").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvCymndt.Columns("メーカー").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvCymndt.Columns("品名").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvCymndt.Columns("型式").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvCymndt.Columns("発注個数").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvCymndt.Columns("単位").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvCymndt.Columns("仕入数量").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvCymndt.Columns("仕入単価").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvCymndt.Columns("仕入金額").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+        DgvHistory.Columns("買掛番号").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvHistory.Columns("買掛日").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvHistory.Columns("買掛区分").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvHistory.Columns("支払先").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvHistory.Columns("備考1").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvHistory.Columns("備考2").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+        DgvAdd.Columns("買掛区分").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvAdd.Columns("今回支払先").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvAdd.Columns("今回買掛金額計").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvAdd.Columns("今回備考1").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvAdd.Columns("今回備考2").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+
         '数字形式
+        DgvCymn.Columns("仕入原価").DefaultCellStyle.Format = "N2"
+        DgvCymn.Columns("VAT_IN").DefaultCellStyle.Format = "N2"
+
         DgvCymn.Columns("発注金額").DefaultCellStyle.Format = "N2"
         DgvCymn.Columns("買掛金額計").DefaultCellStyle.Format = "N2"
         DgvCymn.Columns("買掛残高").DefaultCellStyle.Format = "N2"
 
-        DgvCymndt.Columns("発注個数").DefaultCellStyle.Format = "N2"
+        'DgvCymndt.Columns("発注個数").DefaultCellStyle.Format = "N2"
         DgvCymndt.Columns("仕入数量").DefaultCellStyle.Format = "N2"
         DgvCymndt.Columns("仕入単価").DefaultCellStyle.Format = "N2"
         DgvCymndt.Columns("仕入金額").DefaultCellStyle.Format = "N2"
@@ -230,6 +292,11 @@ Public Class AccountsPayable
         DgvHistory.Columns("買掛金額").DefaultCellStyle.Format = "N2"
 
         DgvAdd.Columns("今回買掛金額計").DefaultCellStyle.Format = "N2"
+
+
+        '右寄せ
+        DgvCymn.Columns("仕入原価").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvCymn.Columns("VAT_IN").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
 
         '今回買掛の初期カーソル位置
@@ -259,7 +326,7 @@ Public Class AccountsPayable
 
         Dim dsHattyu As DataSet = getDsData("t20_hattyu", Sql)
 
-        Sql = " SELECT t21.* "
+        Sql = " SELECT t21.* ,t20.仕入先コード ,t20.ＶＡＴ"
         Sql += " FROM "
         Sql += " t20_hattyu t20"
         Sql += " INNER JOIN t21_hattyu t21 ON "
@@ -324,8 +391,15 @@ Public Class AccountsPayable
         DgvCymn.Rows(0).Cells("発注番号").Value = dsHattyu.Tables(RS).Rows(0)("発注番号")
         DgvCymn.Rows(0).Cells("発注番号枝番").Value = dsHattyu.Tables(RS).Rows(0)("発注番号枝番")
         DgvCymn.Rows(0).Cells("発注日").Value = dsHattyu.Tables(RS).Rows(0)("発注日").ToShortDateString()
+        DgvCymn.Rows(0).Cells("仕入先コード").Value = dsHattyu.Tables(RS).Rows(0)("仕入先コード")
         DgvCymn.Rows(0).Cells("仕入先").Value = dsHattyu.Tables(RS).Rows(0)("仕入先名")
         DgvCymn.Rows(0).Cells("客先番号").Value = dsHattyu.Tables(RS).Rows(0)("客先番号").ToString
+
+        DgvCymn.Rows(0).Cells("仕入原価").Value = PurchaseAmountFC
+        Dim decTmp As Decimal = dsHattyu.Tables(RS).Rows(0)("ＶＡＴ")
+        DgvCymn.Rows(0).Cells("VAT_IN").Value = decTmp.ToString("N2")
+
+        PurchaseAmountFC += dsHattyu.Tables(RS).Rows(0)("ＶＡＴ").ToString
         DgvCymn.Rows(0).Cells("発注金額").Value = PurchaseAmountFC
         DgvCymn.Rows(0).Cells("買掛金額計").Value = AccountsPayable
         DgvCymn.Rows(0).Cells("買掛残高").Value = PurchaseAmountFC - AccountsPayable
