@@ -121,6 +121,9 @@ Public Class ClosingLog
             DgvClosingLog.Columns("今回締日").HeaderText = "ThisClosingDate"
             DgvClosingLog.Columns("次回締日").HeaderText = "NextClosingDate"
             DgvClosingLog.Columns("担当者").HeaderText = "Name of PIC"
+
+            BtnOutput.Text = "JournalOutput"
+            LblConditions.Text = "■ExtractionCondition"
         End If
     End Sub
 
