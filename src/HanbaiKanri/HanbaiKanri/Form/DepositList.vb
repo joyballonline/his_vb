@@ -108,8 +108,9 @@ Public Class DepositList
             BtnDeposit.Text = "MoneyReceiptInput"
             btnBack.Text = "Back"
             LblBillingDate.Text = "BillingDate"
-            DgvCustomer.Columns("得意先名").HeaderText = "CustomerName"
+            ChkZeroData.Text = "Include AccountsReceivable 0"
 
+            DgvCustomer.Columns("得意先名").HeaderText = "CustomerName"
             DgvCustomer.Columns("通貨_外貨").HeaderText = "Currency"
             DgvCustomer.Columns("請求金額残_外貨").HeaderText = "BillingBalanceForeignCurrency"
             DgvCustomer.Columns("売掛残高_外貨").HeaderText = "AccountsReceivableBalanceForeignCurrency"
