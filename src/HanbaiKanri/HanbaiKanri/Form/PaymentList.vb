@@ -122,9 +122,9 @@ Public Class PaymentList
             DgvSupplier.Columns("仕入先名").HeaderText = "SupplierName"
 
             DgvSupplier.Columns("通貨_外貨").HeaderText = "Currency"
-            DgvSupplier.Columns("仕入金額計_外貨").HeaderText = "AccountsPayableAmount"  '買掛金額
-            DgvSupplier.Columns("買掛金額計_外貨").HeaderText = "AlreadyPaid"            '既支払額
-            DgvSupplier.Columns("支払残高_外貨").HeaderText = "AccountsPayable" 　　　　 '買掛残高
+            DgvSupplier.Columns("仕入金額計_外貨").HeaderText = "AccountsPayableAmount" & vbCrLf & "a"  '買掛金額
+            DgvSupplier.Columns("買掛金額計_外貨").HeaderText = "AlreadyPaid" & vbCrLf & "b"            '既支払額
+            DgvSupplier.Columns("支払残高_外貨").HeaderText = "AccountsPayable" & vbCrLf & "c=a-b"　 　 '買掛残高
 
             DgvSupplier.Columns("通貨").HeaderText = "Currency"
             DgvSupplier.Columns("仕入金額計").HeaderText = "TotalPurchaseAmount"
