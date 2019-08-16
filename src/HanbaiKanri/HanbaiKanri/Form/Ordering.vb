@@ -1705,12 +1705,26 @@ Public Class Ordering
 
         Dim dsHattyudt = getDsData("t21_hattyu", Sql)
 
+        'この辺りにデータ取得できない時のエラートラップを入れないといけない
+        If dsHattyuhd.Tables(RS).rows.count = 0 Then
+            _msgHd.dspMSG("NonData", frmC01F10_Login.loginValue.Language)
+            Exit Sub
+        End If
+        If dsHattyudt.Tables(RS).rows.count = 0 Then
+            _msgHd.dspMSG("NonData", frmC01F10_Login.loginValue.Language)
+            Exit Sub
+        End If
+
+
         Sql = " AND "
         Sql += " 仕入先コード =  '" & dsHattyuhd.Tables(RS).Rows(0)("仕入先コード") & "'"
 
         Dim supplierData = getDsData("m11_supplier", Sql)
 
-        'この辺りにデータ取得できない時のエラートラップを入れないといけない
+        If supplierData.Tables(RS).rows.count = 0 Then
+            _msgHd.dspMSG("NonData", frmC01F10_Login.loginValue.Language)
+            Exit Sub
+        End If
 
         '====================================
         ' Excel作成
