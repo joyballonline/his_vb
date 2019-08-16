@@ -163,6 +163,9 @@ Public Class DepositManagement
             BtnRegist.Text = "Registration"
             BtnBack.Text = "Back"
 
+            LblMode.Text = "MoneyReceiptInputMode"
+
+
             DgvCustomer.Columns("請求先").HeaderText = "BillingAddress"
             DgvCustomer.Columns("請求残高").HeaderText = "BillingBalance"
 
@@ -184,6 +187,10 @@ Public Class DepositManagement
             DgvBillingInfo.Columns("請求情報入金額計").HeaderText = "TotalAmountOfMoneyReceived"
             DgvBillingInfo.Columns("請求情報請求残高").HeaderText = "UnreceivedAmount"
             DgvBillingInfo.Columns("入金額").HeaderText = "AmountToRegisterForReceiving"
+
+        Else
+
+            LblMode.Text = "入金入力モード"
 
         End If
 
