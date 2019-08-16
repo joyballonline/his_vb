@@ -86,7 +86,7 @@ Public Class ExchangeRateList
         getList()
 
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-            LblConditions.Text = "TermsOfSelection"
+            LblConditions.Text = "ExtractionCondition"
             LblStandardDate.Text = "StandardDate"
 
             BtnSearch.Text = "Search"

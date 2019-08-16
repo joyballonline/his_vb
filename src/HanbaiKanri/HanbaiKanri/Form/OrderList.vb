@@ -162,7 +162,7 @@ Public Class OrderList
         OrderListLoad() '一覧表示
 
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-            LblConditions.Text = "TermsOfSelection"
+            LblConditions.Text = "ExtractionCondition"
             Label1.Text = "CustomerName"
             Label2.Text = "Address"
             Label3.Text = "PhoneNumber"

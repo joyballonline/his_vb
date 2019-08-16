@@ -486,7 +486,7 @@ Public Class SalesList
 
 
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-            LblConditions.Text = "TermsOfSelection"
+            LblConditions.Text = "ExtractionCondition"
             Label1.Text = "CustomerName"
             Label2.Text = "Address"
             Label3.Text = "PhoneNumber"
@@ -501,7 +501,7 @@ Public Class SalesList
 
             Label10.Text = "DisplayFormat"
             RbtnSlip.Text = "UnitOfVoucher"
-            LblConditions.Text = "TermsOfSelection"
+            LblConditions.Text = "ExtractionCondition"
             RbtnDetails.Text = "UnitOfDetailData"
             RbtnDetails.Location = New Point(166, 202)
 
