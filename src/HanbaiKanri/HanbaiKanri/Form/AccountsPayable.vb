@@ -480,7 +480,7 @@ Public Class AccountsPayable
     Private Sub BtnRegist_Click(sender As Object, e As EventArgs) Handles BtnRegist.Click
 
         Dim dtToday As DateTime = DateTime.Now
-        Dim strToday As String = formatDatetime(dtToday)
+        Dim strToday As String = UtilClass.formatDatetime(dtToday)
         Dim reccnt As Integer = 0
         Dim AccountsPayable As Decimal = 0    '買掛残高
         Dim AccountsPayableFC As Decimal = 0  '買掛残高_外貨
@@ -501,22 +501,16 @@ Public Class AccountsPayable
 
             Dim AP As String = getSaiban("100", dtToday)
 
-            Sql = " AND "
-            Sql += "発注番号 ILIKE '" & HattyuNo & "'"
-            Sql += " AND "
-            Sql += "発注番号枝番 ILIKE '" & Suffix & "'"
-            Sql += " AND "
-            Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+            Sql = " AND 発注番号 = '" & HattyuNo & "'"
+            Sql += " AND 発注番号枝番 = '" & Suffix & "'"
+            Sql += " AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
 
             Dim dsHattyu As DataSet = getDsData("t20_hattyu", Sql)
 
 
-            Sql = " AND "
-            Sql += "発注番号 ILIKE '" & HattyuNo & "'"
-            Sql += " AND "
-            Sql += "発注番号枝番 ILIKE '" & Suffix & "'"
-            Sql += " AND "
-            Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+            Sql = " AND 発注番号 = '" & HattyuNo & "'"
+            Sql += " AND 発注番号枝番 = '" & Suffix & "'"
+            Sql += " AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
 
             Dim dsKikehd As DataSet = getDsData("t46_kikehd", Sql)
 
@@ -621,6 +615,9 @@ Public Class AccountsPayable
 
             _db.executeDB(Sql)
 
+            '登録完了メッセージ
+            _msgHd.dspMSG("completeInsert", frmC01F10_Login.loginValue.Language)
+
             _parentForm.Enabled = True
             _parentForm.Show()
             Me.Dispose()
@@ -717,7 +714,7 @@ Public Class AccountsPayable
             Sql += "', "
             Sql += "更新日"
             Sql += " = '"
-            Sql += formatDatetime(today)
+            Sql += UtilClass.formatDatetime(today)
             Sql += "' "
             Sql += "WHERE"
             Sql += " 会社コード"
