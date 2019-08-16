@@ -123,6 +123,11 @@ Public Class AccountsPayable
             LblAccountsPayableDate.Location = New Point(237, 379)
             LblAccountsPayableDate.Size = New Size(205, 22)
             DtpAPDate.Location = New Point(458, 379)
+
+            lblVendorInvoiceNumber.Location = New Point(236, 424)
+            lblVendorInvoiceNumber.Size = New Size(235, 22)
+            VendorInvoiceNumber.Location = New Point(478, 424)
+
             LblNo1.Text = "Record"
             LblNo1.Location = New Point(1272, 111)
             LblNo1.Size = New Size(66, 22)
@@ -146,6 +151,11 @@ Public Class AccountsPayable
 
             BtnRegist.Text = "Registration"
             BtnBack.Text = "Back"
+
+
+            DgvCymn.Height = 67
+            Label1.Text = "Order vouchers"
+            LblIDRCurrency.Text = "Currency"
 
 
 
