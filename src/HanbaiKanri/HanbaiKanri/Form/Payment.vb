@@ -590,7 +590,7 @@ Public Class Payment
             Sql += "', "
             Sql += "更新日"
             Sql += " = '"
-            Sql += formatDatetime(today)
+            Sql += UtilClass.formatDatetime(today)
             Sql += "' "
             Sql += "WHERE"
             Sql += " 会社コード"
@@ -613,7 +613,7 @@ Public Class Payment
     '登録処理
     Private Sub BtnRegist_Click(sender As Object, e As EventArgs) Handles BtnRegist.Click
         Dim errflg As Boolean = True
-        Dim dtToday As String = formatDatetime(DateTime.Now)
+        Dim dtToday As String = UtilClass.formatDatetime(DateTime.Now)
         Dim reccnt As Integer = 0
 
         Dim PaymentAmount As Decimal = 0
