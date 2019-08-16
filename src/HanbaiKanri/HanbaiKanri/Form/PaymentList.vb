@@ -118,6 +118,8 @@ Public Class PaymentList
             BtnSerach.Text = "Search"
             btnBack.Text = "Back"
 
+            ChkZeroData.Text = "Include Payback 0"
+
             DgvSupplier.Columns("仕入先コード").HeaderText = "SupplierCode"
             DgvSupplier.Columns("仕入先名").HeaderText = "SupplierName"
 
