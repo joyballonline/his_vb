@@ -128,6 +128,7 @@ Public Class Payment
             LblPayment.Text = "PaymentInput"
             LblAPInfo.Text = "AccountsPayableInfo"
             LblDepositDate.Text = "AccountsPayableDate"
+            LblIDRCurrency.Text = "Currency"
             LblDepositDate.Size = New Size(157, 22)
             DtpDepositDate.Location = New Point(351, 335)
             LblRemarks.Text = "Remarks"
@@ -169,14 +170,37 @@ Public Class Payment
             DgvPayment.Columns("支払種目").HeaderText = "PaymentType"
             DgvPayment.Columns("入力支払金額").HeaderText = "PaymentAmount"
 
+
+
+            DgvKikeInfo.Columns("発注番号").HeaderText = "PurchaseNumber"
+
             DgvKikeInfo.Columns("買掛情報買掛番号").HeaderText = "AccountsPayableNumber"
             DgvKikeInfo.Columns("買掛日").HeaderText = "AccountsPayableDate"
-            DgvKikeInfo.Columns("買掛金額").HeaderText = "AccountsPayableAmount"
-            DgvKikeInfo.Columns("買掛情報支払金額計").HeaderText = "TotalPaymentAmount"
-            DgvKikeInfo.Columns("買掛情報買掛残高").HeaderText = "AccountsPayableBalance"
+            DgvKikeInfo.Columns("買掛金額").HeaderText = "AccountsPayableAmount" & vbCrLf & "a"        '買掛金額
+            DgvKikeInfo.Columns("買掛情報支払金額計").HeaderText = "AlreadyPaid" & vbCrLf & "b"        '既支払額
+            DgvKikeInfo.Columns("買掛情報買掛残高").HeaderText = "AccountsPayable" & vbCrLf & "c=a-b"  '買掛残高(残債務)
             DgvKikeInfo.Columns("支払金額").HeaderText = "PaymentAmount"
 
+        Else  '日本語
+
+            DgvKikeInfo.Columns("買掛金額").HeaderText = "買掛金額" & vbCrLf & "a"
+            DgvKikeInfo.Columns("買掛情報支払金額計").HeaderText = "既支払額" & vbCrLf & "b"
+            DgvKikeInfo.Columns("買掛情報買掛残高").HeaderText = "買掛残高(残債務)" & vbCrLf & "c=a-b"
+
         End If
+
+        '中央寄せ
+        DgvKikeInfo.Columns("InfoNo").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvKikeInfo.Columns("発注番号").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvKikeInfo.Columns("仕入先請求番号").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvKikeInfo.Columns("買掛情報買掛番号").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvKikeInfo.Columns("買掛日").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+        DgvKikeInfo.Columns("買掛金額").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvKikeInfo.Columns("買掛情報支払金額計").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvKikeInfo.Columns("買掛情報買掛残高").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+        DgvKikeInfo.Columns("支払金額").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
 
         '数字形式

@@ -24,10 +24,10 @@ Partial Class Payment
     Private Sub InitializeComponent()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -50,6 +50,8 @@ Partial Class Payment
         Me.支払済支払金額計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.備考 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DgvPayment = New System.Windows.Forms.DataGridView()
+        Me.行番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.入力支払金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LblNo3 = New System.Windows.Forms.Label()
         Me.TxtKikeCount = New System.Windows.Forms.TextBox()
         Me.BtnAdd = New System.Windows.Forms.Button()
@@ -74,8 +76,6 @@ Partial Class Payment
         Me.LblMode = New System.Windows.Forms.Label()
         Me.TxtIDRCurrency = New System.Windows.Forms.TextBox()
         Me.LblIDRCurrency = New System.Windows.Forms.Label()
-        Me.行番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.入力支払金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.InfoNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.発注番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.仕入先請求番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -195,6 +195,24 @@ Partial Class Payment
         Me.DgvPayment.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
         Me.DgvPayment.Size = New System.Drawing.Size(1327, 100)
         Me.DgvPayment.TabIndex = 5
+        '
+        '行番号
+        '
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.行番号.DefaultCellStyle = DataGridViewCellStyle3
+        Me.行番号.HeaderText = "行番号"
+        Me.行番号.Name = "行番号"
+        Me.行番号.ReadOnly = True
+        Me.行番号.Width = 70
+        '
+        '入力支払金額
+        '
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.入力支払金額.DefaultCellStyle = DataGridViewCellStyle4
+        Me.入力支払金額.HeaderText = "今回支払金額"
+        Me.入力支払金額.MaxInputLength = 14
+        Me.入力支払金額.Name = "入力支払金額"
+        Me.入力支払金額.Width = 130
         '
         'LblNo3
         '
@@ -468,24 +486,6 @@ Partial Class Payment
         Me.LblIDRCurrency.Text = "通貨"
         Me.LblIDRCurrency.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        '行番号
-        '
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.行番号.DefaultCellStyle = DataGridViewCellStyle3
-        Me.行番号.HeaderText = "行番号"
-        Me.行番号.Name = "行番号"
-        Me.行番号.ReadOnly = True
-        Me.行番号.Width = 70
-        '
-        '入力支払金額
-        '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.入力支払金額.DefaultCellStyle = DataGridViewCellStyle4
-        Me.入力支払金額.HeaderText = "今回支払金額"
-        Me.入力支払金額.MaxInputLength = 14
-        Me.入力支払金額.Name = "入力支払金額"
-        Me.入力支払金額.Width = 130
-        '
         'InfoNo
         '
         DataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
@@ -507,7 +507,7 @@ Partial Class Payment
         '
         DataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.仕入先請求番号.DefaultCellStyle = DataGridViewCellStyle9
-        Me.仕入先請求番号.HeaderText = "Supplier Invoice"
+        Me.仕入先請求番号.HeaderText = "Supplier Invoice No."
         Me.仕入先請求番号.MaxInputLength = 100
         Me.仕入先請求番号.Name = "仕入先請求番号"
         Me.仕入先請求番号.Width = 150
@@ -534,7 +534,7 @@ Partial Class Payment
         DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         DataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.買掛金額.DefaultCellStyle = DataGridViewCellStyle12
-        Me.買掛金額.HeaderText = "買掛金計上額"
+        Me.買掛金額.HeaderText = "買掛金額"
         Me.買掛金額.Name = "買掛金額"
         Me.買掛金額.ReadOnly = True
         Me.買掛金額.Width = 150
