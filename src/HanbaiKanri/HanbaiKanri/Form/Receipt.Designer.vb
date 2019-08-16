@@ -22,6 +22,8 @@ Partial Class Receipt
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.TxtSuffixNo = New System.Windows.Forms.TextBox()
         Me.BtnRegist = New System.Windows.Forms.Button()
         Me.DtpReceiptDate = New System.Windows.Forms.DateTimePicker()
@@ -66,7 +68,7 @@ Partial Class Receipt
         Me.TxtSuffixNo.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtSuffixNo.Location = New System.Drawing.Point(351, 10)
         Me.TxtSuffixNo.Name = "TxtSuffixNo"
-        Me.TxtSuffixNo.Size = New System.Drawing.Size(36, 22)
+        Me.TxtSuffixNo.Size = New System.Drawing.Size(36, 37)
         Me.TxtSuffixNo.TabIndex = 258
         Me.TxtSuffixNo.TabStop = False
         '
@@ -89,7 +91,7 @@ Partial Class Receipt
         Me.DtpReceiptDate.Location = New System.Drawing.Point(344, 343)
         Me.DtpReceiptDate.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.DtpReceiptDate.Name = "DtpReceiptDate"
-        Me.DtpReceiptDate.Size = New System.Drawing.Size(148, 22)
+        Me.DtpReceiptDate.Size = New System.Drawing.Size(148, 37)
         Me.DtpReceiptDate.TabIndex = 3
         Me.DtpReceiptDate.TabStop = False
         Me.DtpReceiptDate.Value = New Date(2019, 1, 1, 0, 0, 0, 0)
@@ -111,7 +113,7 @@ Partial Class Receipt
         Me.TxtRemarks.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtRemarks.Location = New System.Drawing.Point(188, 474)
         Me.TxtRemarks.Name = "TxtRemarks"
-        Me.TxtRemarks.Size = New System.Drawing.Size(644, 22)
+        Me.TxtRemarks.Size = New System.Drawing.Size(644, 37)
         Me.TxtRemarks.TabIndex = 4
         '
         'LblReceiptDate
@@ -155,7 +157,7 @@ Partial Class Receipt
         Me.TxtCount3.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtCount3.Location = New System.Drawing.Point(1272, 343)
         Me.TxtCount3.Name = "TxtCount3"
-        Me.TxtCount3.Size = New System.Drawing.Size(38, 22)
+        Me.TxtCount3.Size = New System.Drawing.Size(38, 37)
         Me.TxtCount3.TabIndex = 250
         Me.TxtCount3.TabStop = False
         Me.TxtCount3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -211,7 +213,7 @@ Partial Class Receipt
         Me.TxtCount2.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtCount2.Location = New System.Drawing.Point(1272, 212)
         Me.TxtCount2.Name = "TxtCount2"
-        Me.TxtCount2.Size = New System.Drawing.Size(38, 22)
+        Me.TxtCount2.Size = New System.Drawing.Size(38, 37)
         Me.TxtCount2.TabIndex = 245
         Me.TxtCount2.TabStop = False
         Me.TxtCount2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -221,6 +223,14 @@ Partial Class Receipt
         Me.DgvHistory.AllowUserToAddRows = False
         Me.DgvHistory.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.DgvHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DgvHistory.DefaultCellStyle = DataGridViewCellStyle1
         Me.DgvHistory.Location = New System.Drawing.Point(12, 237)
         Me.DgvHistory.Name = "DgvHistory"
         Me.DgvHistory.ReadOnly = True
@@ -247,7 +257,7 @@ Partial Class Receipt
         Me.TxtCount1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtCount1.Location = New System.Drawing.Point(1272, 82)
         Me.TxtCount1.Name = "TxtCount1"
-        Me.TxtCount1.Size = New System.Drawing.Size(38, 22)
+        Me.TxtCount1.Size = New System.Drawing.Size(38, 37)
         Me.TxtCount1.TabIndex = 242
         Me.TxtCount1.TabStop = False
         Me.TxtCount1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -257,6 +267,14 @@ Partial Class Receipt
         Me.DgvPurchase.AllowUserToAddRows = False
         Me.DgvPurchase.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.DgvPurchase.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DgvPurchase.DefaultCellStyle = DataGridViewCellStyle2
         Me.DgvPurchase.Location = New System.Drawing.Point(12, 106)
         Me.DgvPurchase.Name = "DgvPurchase"
         Me.DgvPurchase.ReadOnly = True
@@ -284,7 +302,7 @@ Partial Class Receipt
         Me.TxtOrdingDate.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtOrdingDate.Location = New System.Drawing.Point(908, 10)
         Me.TxtOrdingDate.Name = "TxtOrdingDate"
-        Me.TxtOrdingDate.Size = New System.Drawing.Size(157, 22)
+        Me.TxtOrdingDate.Size = New System.Drawing.Size(157, 37)
         Me.TxtOrdingDate.TabIndex = 239
         Me.TxtOrdingDate.TabStop = False
         '
@@ -295,7 +313,7 @@ Partial Class Receipt
         Me.TxtSupplierName.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtSupplierName.Location = New System.Drawing.Point(351, 38)
         Me.TxtSupplierName.Name = "TxtSupplierName"
-        Me.TxtSupplierName.Size = New System.Drawing.Size(333, 22)
+        Me.TxtSupplierName.Size = New System.Drawing.Size(333, 37)
         Me.TxtSupplierName.TabIndex = 238
         Me.TxtSupplierName.TabStop = False
         '
@@ -318,7 +336,7 @@ Partial Class Receipt
         Me.TxtSupplierCode.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtSupplierCode.Location = New System.Drawing.Point(188, 38)
         Me.TxtSupplierCode.Name = "TxtSupplierCode"
-        Me.TxtSupplierCode.Size = New System.Drawing.Size(157, 22)
+        Me.TxtSupplierCode.Size = New System.Drawing.Size(157, 37)
         Me.TxtSupplierCode.TabIndex = 236
         Me.TxtSupplierCode.TabStop = False
         '
@@ -351,7 +369,7 @@ Partial Class Receipt
         Me.TxtPurchaseNo.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtPurchaseNo.Location = New System.Drawing.Point(188, 10)
         Me.TxtPurchaseNo.Name = "TxtPurchaseNo"
-        Me.TxtPurchaseNo.Size = New System.Drawing.Size(157, 22)
+        Me.TxtPurchaseNo.Size = New System.Drawing.Size(157, 37)
         Me.TxtPurchaseNo.TabIndex = 233
         Me.TxtPurchaseNo.TabStop = False
         '
@@ -360,7 +378,7 @@ Partial Class Receipt
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(12, 10)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(0, 12)
+        Me.Label1.Size = New System.Drawing.Size(0, 24)
         Me.Label1.TabIndex = 232
         '
         'LblMode
@@ -394,7 +412,7 @@ Partial Class Receipt
         Me.TxtCustomerPO.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtCustomerPO.Location = New System.Drawing.Point(569, 10)
         Me.TxtCustomerPO.Name = "TxtCustomerPO"
-        Me.TxtCustomerPO.Size = New System.Drawing.Size(157, 22)
+        Me.TxtCustomerPO.Size = New System.Drawing.Size(157, 37)
         Me.TxtCustomerPO.TabIndex = 306
         Me.TxtCustomerPO.TabStop = False
         '
@@ -417,7 +435,7 @@ Partial Class Receipt
         Me.CmWarehouse.Items.AddRange(New Object() {"RegularShip", "DHL", "Air", "Ship"})
         Me.CmWarehouse.Location = New System.Drawing.Point(644, 342)
         Me.CmWarehouse.Name = "CmWarehouse"
-        Me.CmWarehouse.Size = New System.Drawing.Size(200, 23)
+        Me.CmWarehouse.Size = New System.Drawing.Size(200, 38)
         Me.CmWarehouse.TabIndex = 315
         '
         'Receipt
