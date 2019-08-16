@@ -79,7 +79,7 @@ Public Class Warehouse
     End Sub
 
     Private Sub btnAddAccount_Click(sender As Object, e As EventArgs) Handles btnAddAccount.Click
-        Dim dtToday As String = formatDatetime(DateTime.Now)
+        Dim dtToday As String = UtilClass.formatDatetime(DateTime.Now)
         Try
             Dim Sql As String = ""
 
@@ -362,15 +362,8 @@ Public Class Warehouse
         Dim reccnt As Integer = 0 'DB用（デフォルト）
         Dim Sql As String = ""
 
-        Sql += "SELECT"
-        Sql += " *"
-        Sql += " FROM "
-
-        Sql += "public." & tableName
-        Sql += " WHERE "
-        Sql += "会社コード"
-        Sql += " ILIKE  "
-        Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += "SELECT * FROM public." & tableName
+        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql += txtParam
         Return _db.selectDB(Sql, RS, reccnt)
     End Function
