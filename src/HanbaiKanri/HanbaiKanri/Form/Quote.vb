@@ -481,6 +481,12 @@ Public Class Quote
             TxtRemarks.Text = ds1.Tables(RS).Rows(0)("備考").ToString
             TxtVat.Text = ds1.Tables(RS).Rows(0)("ＶＡＴ").ToString
 
+            If TxtVat.Text = 0 Then  '国外
+                txtDomesticArea.Text = 1
+            Else   '国内
+                txtDomesticArea.Text = 0
+            End If
+
             '見積明細情報
             Dim Sql3 As String = ""
             Sql3 += "SELECT * FROM public.t02_mitdt"
@@ -553,7 +559,9 @@ Public Class Quote
             TxtTotal.Text = Total.ToString("N2")
             TxtQuoteTotal.Text = QuoteTotal.ToString("N2")
             TxtGrossProfit.Text = GrossProfit.ToString("N2")
-            TxtVatAmount.Text = ((QuoteTotal.ToString("N0") * TxtVat.Text) / 100).ToString("N2")
+
+            'TxtVatAmount.Text = ((QuoteTotal.ToString("N0") * TxtVat.Text) / 100).ToString("N2")
+            Call mCalVat_Out(QuoteTotal)
             setCurrency() '通貨に設定した内容に変更
 
             '行番号の振り直し
@@ -1430,7 +1438,10 @@ Public Class Quote
         TxtTotal.Text = Total.ToString("N2")
         TxtQuoteTotal.Text = QuoteTotal.ToString("N2")
         TxtGrossProfit.Text = GrossProfit.ToString("N2")
-        TxtVatAmount.Text = ((QuoteTotal * TxtVat.Text) / 100).ToString("N2")
+
+        'TxtVatAmount.Text = ((QuoteTotal * TxtVat.Text) / 100).ToString("N2")
+        Call mCalVat_Out(QuoteTotal)
+
         setCurrency() '通貨に設定した内容に変更
 
 
@@ -1830,7 +1841,13 @@ Public Class Quote
                 Sql1 += ",入力担当者コード = '" & frmC01F10_Login.loginValue.TantoCD & "' "
                 Sql1 += ",入力担当者 = '" & TxtInput.Text & "' "
                 Sql1 += ",備考 = '" & RevoveChars(TxtRemarks.Text) & "' "
-                Sql1 += ",ＶＡＴ = " & formatStringToNumber(TxtVat.Text)
+                '国内の判定
+                If txtDomesticArea.Text = "0" Then  '国内
+                    Sql1 += ",ＶＡＴ = " & formatStringToNumber(TxtVat.Text)
+                Else  '国外
+                    Sql1 += ",ＶＡＴ = " & formatStringToNumber(0)
+                End If
+
                 Sql1 += ",登録日 = '" & UtilClass.strFormatDate(DtpRegistration.Text) & "' "
                 Sql1 += ",更新日 = '" & strToday & "' "
                 Sql1 += ",更新者 = '" & Input & "' "
@@ -2030,8 +2047,14 @@ Public Class Quote
                 If TxtVat.Text = Nothing Then
                     Sql1 += "0"
                 Else
-                    Sql1 += UtilClass.formatNumber(TxtVat.Text)
+                    '国内の判定
+                    If txtDomesticArea.Text = "0" Then  '国内
+                        Sql1 += UtilClass.formatNumber(TxtVat.Text)
+                    Else  '国外
+                        Sql1 += UtilClass.formatNumber(0)
+                    End If
                 End If
+
                 Sql1 += "',0"                                                    '取消区分
                 Sql1 += ", '" & UtilClass.strFormatDate(DtpRegistration.Text) & "'"       '登録日
                 Sql1 += ", '" & strToday & "'"                                   '更新日
@@ -3036,8 +3059,11 @@ Public Class Quote
             TxtPerson.Text = dsCode.Tables(RS).Rows(0)("担当者名").ToString
             TxtPosition.Text = dsCode.Tables(RS).Rows(0)("担当者役職").ToString
             TxtPaymentTerms.Text = dsCode.Tables(RS).Rows(0)("既定支払条件").ToString
-
+            txtDomesticArea.Text = dsCode.Tables(RS).Rows(0)("国内区分").ToString      '非表示
         End If
+
+        'VAT再計算
+        Call mCalVat_Out(TxtQuoteTotal.Text)
 
     End Sub
     ''' <summary>
@@ -3347,7 +3373,20 @@ Public Class Quote
             txtProfitmarginRate.Text = ((ProfitMargin / QuoteTotal) * 100).ToString("N1")
         End If
 
-        TxtVatAmount.Text = ((QuoteTotal * TxtVat.Text) / 100).ToString("N2") 'VAT-OUT
+        'VAT
+        Call mCalVat_Out(QuoteTotal)
+
+    End Sub
+
+    Private Sub mCalVat_Out(ByVal QuoteTotal As Decimal)
+
+        '国内区分を判定
+        '国内のみVATを計算
+        If txtDomesticArea.Text = 0 Then  '国内
+            TxtVatAmount.Text = ((QuoteTotal * TxtVat.Text) / 100).ToString("N2") 'VAT-OUT
+        Else  '国外
+            TxtVatAmount.Text = "0.00"
+        End If
 
     End Sub
 
