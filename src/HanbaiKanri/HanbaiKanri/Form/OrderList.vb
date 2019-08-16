@@ -173,6 +173,7 @@ Public Class OrderList
             Label11.Text = "CustomerNumber"
             Label10.Text = "DisplayFormat"
             RbtnSlip.Text = "UnitOfVoucher"
+            lblMaker.Text = "Maker"
 
             RbtnDetails.Text = "LineItemUnit"
             RbtnDetails.Location = New Point(166, 202)
@@ -189,6 +190,7 @@ Public Class OrderList
             BtnOrderView.Text = "OrderView"
             BtnOrderEdit.Text = "OrderEdit"
             BtnBack.Text = "Back"
+
 
             '受注参照時のみ表示される
             LblItemName.Text = "ItemName"
