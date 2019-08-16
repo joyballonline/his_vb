@@ -26,6 +26,7 @@ Partial Class PaymentList
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.BtnSerach = New System.Windows.Forms.Button()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.TxtCustomerCode = New System.Windows.Forms.TextBox()
@@ -37,8 +38,16 @@ Partial Class PaymentList
         Me.LblConditions = New System.Windows.Forms.Label()
         Me.TxtCustomerName = New System.Windows.Forms.TextBox()
         Me.DgvSupplier = New System.Windows.Forms.DataGridView()
-        Me.仕入先名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.BtnPayment = New System.Windows.Forms.Button()
+        Me.btnBack = New System.Windows.Forms.Button()
+        Me.LblMode = New System.Windows.Forms.Label()
+        Me.ChkZeroData = New System.Windows.Forms.CheckBox()
+        Me.TxtInvoiceDateUntil = New System.Windows.Forms.DateTimePicker()
+        Me.TxtInvoiceDateSince = New System.Windows.Forms.DateTimePicker()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.LblQuoteDate = New System.Windows.Forms.Label()
         Me.仕入先コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入先名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.通貨_外貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.仕入金額計_外貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.買掛金額計_外貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -49,14 +58,6 @@ Partial Class PaymentList
         Me.支払残高 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.会社コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.通貨_外貨コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.BtnPayment = New System.Windows.Forms.Button()
-        Me.btnBack = New System.Windows.Forms.Button()
-        Me.LblMode = New System.Windows.Forms.Label()
-        Me.ChkZeroData = New System.Windows.Forms.CheckBox()
-        Me.TxtInvoiceDateUntil = New System.Windows.Forms.DateTimePicker()
-        Me.TxtInvoiceDateSince = New System.Windows.Forms.DateTimePicker()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.LblQuoteDate = New System.Windows.Forms.Label()
         CType(Me.DgvSupplier, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -87,7 +88,7 @@ Partial Class PaymentList
         Me.TxtCustomerCode.Location = New System.Drawing.Point(190, 119)
         Me.TxtCustomerCode.MaxLength = 8
         Me.TxtCustomerCode.Name = "TxtCustomerCode"
-        Me.TxtCustomerCode.Size = New System.Drawing.Size(350, 22)
+        Me.TxtCustomerCode.Size = New System.Drawing.Size(350, 37)
         Me.TxtCustomerCode.TabIndex = 4
         '
         'Label3
@@ -108,7 +109,7 @@ Partial Class PaymentList
         Me.TxtTel.Location = New System.Drawing.Point(190, 91)
         Me.TxtTel.MaxLength = 20
         Me.TxtTel.Name = "TxtTel"
-        Me.TxtTel.Size = New System.Drawing.Size(350, 22)
+        Me.TxtTel.Size = New System.Drawing.Size(350, 37)
         Me.TxtTel.TabIndex = 3
         '
         'Label2
@@ -129,7 +130,7 @@ Partial Class PaymentList
         Me.TxtAddress.Location = New System.Drawing.Point(190, 63)
         Me.TxtAddress.MaxLength = 100
         Me.TxtAddress.Name = "TxtAddress"
-        Me.TxtAddress.Size = New System.Drawing.Size(350, 22)
+        Me.TxtAddress.Size = New System.Drawing.Size(350, 37)
         Me.TxtAddress.TabIndex = 2
         '
         'Label1
@@ -150,7 +151,7 @@ Partial Class PaymentList
         Me.LblConditions.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblConditions.Location = New System.Drawing.Point(11, 8)
         Me.LblConditions.Name = "LblConditions"
-        Me.LblConditions.Size = New System.Drawing.Size(87, 15)
+        Me.LblConditions.Size = New System.Drawing.Size(163, 30)
         Me.LblConditions.TabIndex = 62
         Me.LblConditions.Text = "■抽出条件"
         '
@@ -160,7 +161,7 @@ Partial Class PaymentList
         Me.TxtCustomerName.Location = New System.Drawing.Point(190, 35)
         Me.TxtCustomerName.MaxLength = 100
         Me.TxtCustomerName.Name = "TxtCustomerName"
-        Me.TxtCustomerName.Size = New System.Drawing.Size(350, 22)
+        Me.TxtCustomerName.Size = New System.Drawing.Size(350, 37)
         Me.TxtCustomerName.TabIndex = 1
         '
         'DgvSupplier
@@ -170,7 +171,7 @@ Partial Class PaymentList
         Me.DgvSupplier.AllowUserToResizeColumns = False
         Me.DgvSupplier.AllowUserToResizeRows = False
         Me.DgvSupplier.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvSupplier.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.仕入先名, Me.仕入先コード, Me.通貨_外貨, Me.仕入金額計_外貨, Me.買掛金額計_外貨, Me.支払残高_外貨, Me.通貨, Me.仕入金額計, Me.買掛金額計, Me.支払残高, Me.会社コード, Me.通貨_外貨コード})
+        Me.DgvSupplier.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.仕入先コード, Me.仕入先名, Me.通貨_外貨, Me.仕入金額計_外貨, Me.買掛金額計_外貨, Me.支払残高_外貨, Me.通貨, Me.仕入金額計, Me.買掛金額計, Me.支払残高, Me.会社コード, Me.通貨_外貨コード})
         Me.DgvSupplier.Location = New System.Drawing.Point(14, 161)
         Me.DgvSupplier.MultiSelect = False
         Me.DgvSupplier.Name = "DgvSupplier"
@@ -180,98 +181,6 @@ Partial Class PaymentList
         Me.DgvSupplier.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvSupplier.Size = New System.Drawing.Size(1326, 342)
         Me.DgvSupplier.TabIndex = 6
-        '
-        '仕入先名
-        '
-        Me.仕入先名.HeaderText = "仕入先名"
-        Me.仕入先名.Name = "仕入先名"
-        Me.仕入先名.ReadOnly = True
-        Me.仕入先名.Width = 200
-        '
-        '仕入先コード
-        '
-        Me.仕入先コード.HeaderText = "仕入先コード"
-        Me.仕入先コード.Name = "仕入先コード"
-        Me.仕入先コード.ReadOnly = True
-        Me.仕入先コード.Visible = False
-        '
-        '通貨_外貨
-        '
-        Me.通貨_外貨.HeaderText = "通貨"
-        Me.通貨_外貨.Name = "通貨_外貨"
-        Me.通貨_外貨.ReadOnly = True
-        '
-        '仕入金額計_外貨
-        '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.仕入金額計_外貨.DefaultCellStyle = DataGridViewCellStyle1
-        Me.仕入金額計_外貨.HeaderText = "仕入金額計(外貨)"
-        Me.仕入金額計_外貨.Name = "仕入金額計_外貨"
-        Me.仕入金額計_外貨.ReadOnly = True
-        Me.仕入金額計_外貨.Width = 200
-        '
-        '買掛金額計_外貨
-        '
-        Me.買掛金額計_外貨.HeaderText = "買掛金額計(外貨)"
-        Me.買掛金額計_外貨.Name = "買掛金額計_外貨"
-        Me.買掛金額計_外貨.ReadOnly = True
-        Me.買掛金額計_外貨.Visible = False
-        Me.買掛金額計_外貨.Width = 200
-        '
-        '支払残高_外貨
-        '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.支払残高_外貨.DefaultCellStyle = DataGridViewCellStyle2
-        Me.支払残高_外貨.HeaderText = "支払残高(外貨)"
-        Me.支払残高_外貨.Name = "支払残高_外貨"
-        Me.支払残高_外貨.ReadOnly = True
-        Me.支払残高_外貨.Width = 200
-        '
-        '通貨
-        '
-        Me.通貨.HeaderText = "通貨"
-        Me.通貨.Name = "通貨"
-        Me.通貨.ReadOnly = True
-        '
-        '仕入金額計
-        '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.仕入金額計.DefaultCellStyle = DataGridViewCellStyle3
-        Me.仕入金額計.HeaderText = "仕入金額計"
-        Me.仕入金額計.Name = "仕入金額計"
-        Me.仕入金額計.ReadOnly = True
-        Me.仕入金額計.Width = 200
-        '
-        '買掛金額計
-        '
-        Me.買掛金額計.HeaderText = "買掛金額計"
-        Me.買掛金額計.Name = "買掛金額計"
-        Me.買掛金額計.ReadOnly = True
-        Me.買掛金額計.Visible = False
-        Me.買掛金額計.Width = 200
-        '
-        '支払残高
-        '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.支払残高.DefaultCellStyle = DataGridViewCellStyle4
-        Me.支払残高.HeaderText = "支払残高"
-        Me.支払残高.Name = "支払残高"
-        Me.支払残高.ReadOnly = True
-        Me.支払残高.Width = 200
-        '
-        '会社コード
-        '
-        Me.会社コード.HeaderText = "会社コード"
-        Me.会社コード.Name = "会社コード"
-        Me.会社コード.ReadOnly = True
-        Me.会社コード.Visible = False
-        '
-        '通貨_外貨コード
-        '
-        Me.通貨_外貨コード.HeaderText = "通貨_外貨コード"
-        Me.通貨_外貨コード.Name = "通貨_外貨コード"
-        Me.通貨_外貨コード.ReadOnly = True
-        Me.通貨_外貨コード.Visible = False
         '
         'BtnPayment
         '
@@ -311,7 +220,7 @@ Partial Class PaymentList
         Me.ChkZeroData.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.ChkZeroData.Location = New System.Drawing.Point(577, 121)
         Me.ChkZeroData.Name = "ChkZeroData"
-        Me.ChkZeroData.Size = New System.Drawing.Size(130, 19)
+        Me.ChkZeroData.Size = New System.Drawing.Size(256, 34)
         Me.ChkZeroData.TabIndex = 307
         Me.ChkZeroData.Text = "支払残０を含める"
         Me.ChkZeroData.UseVisualStyleBackColor = True
@@ -325,7 +234,7 @@ Partial Class PaymentList
         Me.TxtInvoiceDateUntil.Location = New System.Drawing.Point(952, 37)
         Me.TxtInvoiceDateUntil.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.TxtInvoiceDateUntil.Name = "TxtInvoiceDateUntil"
-        Me.TxtInvoiceDateUntil.Size = New System.Drawing.Size(170, 22)
+        Me.TxtInvoiceDateUntil.Size = New System.Drawing.Size(170, 37)
         Me.TxtInvoiceDateUntil.TabIndex = 309
         Me.TxtInvoiceDateUntil.Value = New Date(2018, 6, 5, 23, 23, 58, 0)
         '
@@ -338,7 +247,7 @@ Partial Class PaymentList
         Me.TxtInvoiceDateSince.Location = New System.Drawing.Point(753, 37)
         Me.TxtInvoiceDateSince.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.TxtInvoiceDateSince.Name = "TxtInvoiceDateSince"
-        Me.TxtInvoiceDateSince.Size = New System.Drawing.Size(170, 22)
+        Me.TxtInvoiceDateSince.Size = New System.Drawing.Size(170, 37)
         Me.TxtInvoiceDateSince.TabIndex = 308
         Me.TxtInvoiceDateSince.Value = New Date(2018, 6, 5, 23, 23, 58, 0)
         '
@@ -347,7 +256,7 @@ Partial Class PaymentList
         Me.Label5.AutoSize = True
         Me.Label5.Location = New System.Drawing.Point(929, 42)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(17, 12)
+        Me.Label5.Size = New System.Drawing.Size(34, 24)
         Me.Label5.TabIndex = 311
         Me.Label5.Text = "～"
         '
@@ -362,6 +271,101 @@ Partial Class PaymentList
         Me.LblQuoteDate.TabIndex = 310
         Me.LblQuoteDate.Text = "Supplier InvoiceDate"
         Me.LblQuoteDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        '仕入先コード
+        '
+        Me.仕入先コード.HeaderText = "仕入先コード"
+        Me.仕入先コード.Name = "仕入先コード"
+        Me.仕入先コード.ReadOnly = True
+        '
+        '仕入先名
+        '
+        Me.仕入先名.HeaderText = "仕入先名"
+        Me.仕入先名.Name = "仕入先名"
+        Me.仕入先名.ReadOnly = True
+        Me.仕入先名.Width = 200
+        '
+        '通貨_外貨
+        '
+        Me.通貨_外貨.HeaderText = "仕入通貨"
+        Me.通貨_外貨.Name = "通貨_外貨"
+        Me.通貨_外貨.ReadOnly = True
+        '
+        '仕入金額計_外貨
+        '
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.仕入金額計_外貨.DefaultCellStyle = DataGridViewCellStyle1
+        Me.仕入金額計_外貨.HeaderText = "仕入金額計(外貨)"
+        Me.仕入金額計_外貨.Name = "仕入金額計_外貨"
+        Me.仕入金額計_外貨.ReadOnly = True
+        Me.仕入金額計_外貨.Width = 200
+        '
+        '買掛金額計_外貨
+        '
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.買掛金額計_外貨.DefaultCellStyle = DataGridViewCellStyle2
+        Me.買掛金額計_外貨.HeaderText = "買掛金額計(外貨)"
+        Me.買掛金額計_外貨.Name = "買掛金額計_外貨"
+        Me.買掛金額計_外貨.ReadOnly = True
+        Me.買掛金額計_外貨.Width = 200
+        '
+        '支払残高_外貨
+        '
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.支払残高_外貨.DefaultCellStyle = DataGridViewCellStyle3
+        Me.支払残高_外貨.HeaderText = "支払残高(外貨)"
+        Me.支払残高_外貨.Name = "支払残高_外貨"
+        Me.支払残高_外貨.ReadOnly = True
+        Me.支払残高_外貨.Width = 200
+        '
+        '通貨
+        '
+        Me.通貨.HeaderText = "通貨"
+        Me.通貨.Name = "通貨"
+        Me.通貨.ReadOnly = True
+        Me.通貨.Visible = False
+        '
+        '仕入金額計
+        '
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.仕入金額計.DefaultCellStyle = DataGridViewCellStyle4
+        Me.仕入金額計.HeaderText = "仕入金額計"
+        Me.仕入金額計.Name = "仕入金額計"
+        Me.仕入金額計.ReadOnly = True
+        Me.仕入金額計.Visible = False
+        Me.仕入金額計.Width = 200
+        '
+        '買掛金額計
+        '
+        Me.買掛金額計.HeaderText = "買掛金額計"
+        Me.買掛金額計.Name = "買掛金額計"
+        Me.買掛金額計.ReadOnly = True
+        Me.買掛金額計.Visible = False
+        Me.買掛金額計.Width = 200
+        '
+        '支払残高
+        '
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.支払残高.DefaultCellStyle = DataGridViewCellStyle5
+        Me.支払残高.HeaderText = "支払残高"
+        Me.支払残高.Name = "支払残高"
+        Me.支払残高.ReadOnly = True
+        Me.支払残高.Visible = False
+        Me.支払残高.Width = 200
+        '
+        '会社コード
+        '
+        Me.会社コード.HeaderText = "会社コード"
+        Me.会社コード.Name = "会社コード"
+        Me.会社コード.ReadOnly = True
+        Me.会社コード.Visible = False
+        '
+        '通貨_外貨コード
+        '
+        Me.通貨_外貨コード.HeaderText = "通貨_外貨コード"
+        Me.通貨_外貨コード.Name = "通貨_外貨コード"
+        Me.通貨_外貨コード.ReadOnly = True
+        Me.通貨_外貨コード.Visible = False
         '
         'PaymentList
         '
@@ -409,8 +413,13 @@ Partial Class PaymentList
     Friend WithEvents BtnPayment As Button
     Friend WithEvents btnBack As Button
     Friend WithEvents LblMode As Label
-    Friend WithEvents 仕入先名 As DataGridViewTextBoxColumn
+    Friend WithEvents ChkZeroData As CheckBox
+    Friend WithEvents TxtInvoiceDateUntil As DateTimePicker
+    Friend WithEvents TxtInvoiceDateSince As DateTimePicker
+    Friend WithEvents Label5 As Label
+    Friend WithEvents LblQuoteDate As Label
     Friend WithEvents 仕入先コード As DataGridViewTextBoxColumn
+    Friend WithEvents 仕入先名 As DataGridViewTextBoxColumn
     Friend WithEvents 通貨_外貨 As DataGridViewTextBoxColumn
     Friend WithEvents 仕入金額計_外貨 As DataGridViewTextBoxColumn
     Friend WithEvents 買掛金額計_外貨 As DataGridViewTextBoxColumn
@@ -421,9 +430,4 @@ Partial Class PaymentList
     Friend WithEvents 支払残高 As DataGridViewTextBoxColumn
     Friend WithEvents 会社コード As DataGridViewTextBoxColumn
     Friend WithEvents 通貨_外貨コード As DataGridViewTextBoxColumn
-    Friend WithEvents ChkZeroData As CheckBox
-    Friend WithEvents TxtInvoiceDateUntil As DateTimePicker
-    Friend WithEvents TxtInvoiceDateSince As DateTimePicker
-    Friend WithEvents Label5 As Label
-    Friend WithEvents LblQuoteDate As Label
 End Class

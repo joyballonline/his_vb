@@ -92,6 +92,8 @@ Public Class PaymentList
         Dim SupplierOrderAmount As Integer    '仕入金額
         Dim SupplierOrderAmountFC As Integer  '仕入金額_外貨
 
+        Dim PaymentAmountFC As Integer  '支払金額_外貨
+
         Dim AccountsReceivable As Integer     '買掛残高
         Dim AccountsReceivableFC As Integer   '買掛残高_外貨
 
@@ -116,20 +118,37 @@ Public Class PaymentList
             BtnSerach.Text = "Search"
             btnBack.Text = "Back"
 
+            DgvSupplier.Columns("仕入先コード").HeaderText = "SupplierCode"
             DgvSupplier.Columns("仕入先名").HeaderText = "SupplierName"
 
             DgvSupplier.Columns("通貨_外貨").HeaderText = "Currency"
-            DgvSupplier.Columns("仕入金額計_外貨").HeaderText = "TotalPurchaseAmountForeignCurrency"
-            DgvSupplier.Columns("支払残高_外貨").HeaderText = "PaymentAmountForeignCurrency"
+            DgvSupplier.Columns("仕入金額計_外貨").HeaderText = "AccountsPayableAmount"  '買掛金額
+            DgvSupplier.Columns("買掛金額計_外貨").HeaderText = "AlreadyPaid"            '既支払額
+            DgvSupplier.Columns("支払残高_外貨").HeaderText = "AccountsPayable" 　　　　 '買掛残高
 
             DgvSupplier.Columns("通貨").HeaderText = "Currency"
             DgvSupplier.Columns("仕入金額計").HeaderText = "TotalPurchaseAmount"
             DgvSupplier.Columns("支払残高").HeaderText = "PaymentAmount"
 
+        Else  '日本語
+
+            DgvSupplier.Columns("仕入金額計_外貨").HeaderText = "買掛金額" & vbCrLf & "a"
+            DgvSupplier.Columns("買掛金額計_外貨").HeaderText = "既支払額" & vbCrLf & "b"
+            DgvSupplier.Columns("支払残高_外貨").HeaderText = "買掛残高" & vbCrLf & "c=a-b"
+
         End If
+
+        '中央寄せ
+        DgvSupplier.Columns("仕入先コード").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvSupplier.Columns("仕入先名").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvSupplier.Columns("通貨_外貨").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvSupplier.Columns("仕入金額計_外貨").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvSupplier.Columns("買掛金額計_外貨").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvSupplier.Columns("支払残高_外貨").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
         '数字形式
         DgvSupplier.Columns("仕入金額計_外貨").DefaultCellStyle.Format = "N2"
+        DgvSupplier.Columns("買掛金額計_外貨").DefaultCellStyle.Format = "N2"
         DgvSupplier.Columns("支払残高_外貨").DefaultCellStyle.Format = "N2"
         DgvSupplier.Columns("仕入金額計").DefaultCellStyle.Format = "N2"
         DgvSupplier.Columns("支払残高").DefaultCellStyle.Format = "N2"
@@ -173,7 +192,9 @@ Public Class PaymentList
 
                 '仕入先と一致する買掛基本を取得
                 Sql = "SELECT"
-                Sql += " count(*) as 件数,sum(買掛残高_外貨) as 買掛残高_外貨合計, sum(買掛残高) as 買掛残高_合計"
+                Sql += " count(*) as 件数"
+                Sql += ",sum(買掛金額計_外貨) as 買掛金額計_外貨合計,sum(買掛残高_外貨) as 買掛残高_外貨合計,sum(支払金額計_外貨) as 支払金額計_外貨合計"
+                Sql += ",sum(買掛残高) as 買掛残高_合計"
 
                 Sql += " FROM "
 
@@ -229,10 +250,15 @@ Public Class PaymentList
                 If dsKikehd.Tables(RS).Rows.Count > 0 Then  '件数あり
 
 
-                    If IsDBNull(dsHattyu.Tables(RS).Rows(j)("仕入金額_外貨合計")) Then
+                    'If IsDBNull(dsHattyu.Tables(RS).Rows(j)("仕入金額_外貨合計")) Then
+                    '    SupplierOrderAmountFC = 0
+                    'Else
+                    '    SupplierOrderAmountFC = dsHattyu.Tables(RS).Rows(j)("仕入金額_外貨合計")
+                    'End If
+                    If IsDBNull(dsKikehd.Tables(RS).Rows(0)("買掛金額計_外貨合計")) Then
                         SupplierOrderAmountFC = 0
                     Else
-                        SupplierOrderAmountFC = dsHattyu.Tables(RS).Rows(j)("仕入金額_外貨合計")
+                        SupplierOrderAmountFC = dsKikehd.Tables(RS).Rows(0)("買掛金額計_外貨合計")
                     End If
 
                     If IsDBNull(dsHattyu.Tables(RS).Rows(j)("仕入金額_合計")) Then
@@ -240,6 +266,15 @@ Public Class PaymentList
                     Else
                         SupplierOrderAmount = dsHattyu.Tables(RS).Rows(j)("仕入金額_合計")
                     End If
+
+
+                    '支払金額を集計
+                    If IsDBNull(dsKikehd.Tables(RS).Rows(0)("支払金額計_外貨合計")) Then
+                        PaymentAmountFC = 0
+                    Else
+                        PaymentAmountFC = dsKikehd.Tables(RS).Rows(0)("支払金額計_外貨合計")
+                    End If
+
 
 
                     '買掛残高を集計
@@ -271,19 +306,21 @@ Public Class PaymentList
 
                     '表示エリアにデータを追加
                     DgvSupplier.Rows.Add()
+
+                    DgvSupplier.Rows(idx).Cells("仕入先コード").Value = dsSupplier.Tables(RS).Rows(i)("仕入先コード")
                     DgvSupplier.Rows(idx).Cells("仕入先名").Value = dsSupplier.Tables(RS).Rows(i)("仕入先名")
 
                     DgvSupplier.Rows(idx).Cells("通貨_外貨").Value = cur
-                    DgvSupplier.Rows(idx).Cells("仕入金額計_外貨").Value = SupplierOrderAmountFC
-                    DgvSupplier.Rows(idx).Cells("支払残高_外貨").Value = AccountsReceivableFC
+                    DgvSupplier.Rows(idx).Cells("仕入金額計_外貨").Value = SupplierOrderAmountFC  '買掛金額
+                    DgvSupplier.Rows(idx).Cells("買掛金額計_外貨").Value = PaymentAmountFC        '既支払額
+                    DgvSupplier.Rows(idx).Cells("支払残高_外貨").Value = AccountsReceivableFC     '買掛残高
+
 
                     DgvSupplier.Rows(idx).Cells("通貨").Value = setBaseCurrency()
                     DgvSupplier.Rows(idx).Cells("仕入金額計").Value = SupplierOrderAmount
                     DgvSupplier.Rows(idx).Cells("支払残高").Value = AccountsReceivable
 
-                    DgvSupplier.Rows(idx).Cells("仕入先コード").Value = dsSupplier.Tables(RS).Rows(i)("仕入先コード")
                     DgvSupplier.Rows(idx).Cells("会社コード").Value = dsSupplier.Tables(RS).Rows(i)("会社コード")
-
                     DgvSupplier.Rows(idx).Cells("通貨_外貨コード").Value = dsHattyu.Tables(RS).Rows(j)("通貨")
 
                 End If
