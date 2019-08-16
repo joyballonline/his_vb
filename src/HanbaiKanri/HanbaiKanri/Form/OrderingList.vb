@@ -151,7 +151,7 @@ Public Class OrderingList
         getList()
 
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-            LblConditions.Text = "TermsOfSelection" '抽出条件
+            LblConditions.Text = "ExtractionCondition" '抽出条件
             Label1.Text = "SupplierName"
             Label2.Text = "Address"
             Label3.Text = "PhoneNumber"

@@ -89,13 +89,13 @@ Public Class PaymentList
         Dim cur As String
 
 
-        Dim SupplierOrderAmount As Integer    '仕入金額
-        Dim SupplierOrderAmountFC As Integer  '仕入金額_外貨
+        Dim SupplierOrderAmount As Decimal    '仕入金額
+        Dim SupplierOrderAmountFC As Decimal  '仕入金額_外貨
 
-        Dim PaymentAmountFC As Integer  '支払金額_外貨
+        Dim PaymentAmountFC As Decimal  '支払金額_外貨
 
-        Dim AccountsReceivable As Integer     '買掛残高
-        Dim AccountsReceivableFC As Integer   '買掛残高_外貨
+        Dim AccountsReceivable As Decimal     '買掛残高
+        Dim AccountsReceivableFC As Decimal   '買掛残高_外貨
 
 
         '一覧をクリア

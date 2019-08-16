@@ -151,7 +151,7 @@ Public Class QuoteList
         End If
 
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-            LblConditions.Text = "TermsOfSelection"
+            LblConditions.Text = "ExtractionCondition"
             LblCustomerName.Text = "CustomerName"
             LblAddress.Text = "Address"
             LblTel.Text = "PhoneNumber"
