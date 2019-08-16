@@ -114,6 +114,7 @@ Public Class ExchangeRate
             BtnRegistration.Text = "Registration"
             BtnBack.Text = "Back"
 
+            Label1.Text = "Rate"
         End If
 
         'IDRテキスト取得
