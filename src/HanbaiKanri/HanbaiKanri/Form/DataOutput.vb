@@ -806,7 +806,7 @@ Public Class DataOutput
 
             '基本
             For y As Integer = 0 To DgvList.Columns.Count - 1
-                Dim fieldName As String = DgvList.Columns(y).HeaderText
+                Dim fieldName As String = DgvList.Columns(y).Name
 
                 Dim field As String = DgvList.Rows(i).Cells(fieldName).Value.ToString()
                 field = EncloseDoubleQuotesIfNeed(field)
