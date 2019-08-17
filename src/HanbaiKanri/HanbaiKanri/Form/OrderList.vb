@@ -448,19 +448,40 @@ Public Class OrderList
                 DgvCymnhd.Rows(i).Cells("見積有効期限").Value = ds.Tables(RS).Rows(i)("見積有効期限").ToShortDateString()
                 DgvCymnhd.Rows(i).Cells("得意先コード").Value = ds.Tables(RS).Rows(i)("得意先コード")
                 DgvCymnhd.Rows(i).Cells("得意先名").Value = ds.Tables(RS).Rows(i)("得意先名")
+
+
+                DgvCymnhd.Rows(i).Cells("通貨_外貨").Value = cur
+                DgvCymnhd.Rows(i).Cells("受注金額_外貨").Value = ds.Tables(RS).Rows(i)("見積金額_外貨")
+
+                DgvCymnhd.Rows(i).Cells("受注金額").Value = ds.Tables(RS).Rows(i)("見積金額")
+                DgvCymnhd.Rows(i).Cells("ＶＡＴ").Value = ds.Tables(RS).Rows(i)("見積金額") * ds.Tables(RS).Rows(i)("ＶＡＴ") / 100
+
+                'Dim decPurchase1 As Decimal = 0
+                'Dim decPurchase2 As Decimal = 0
+                'Dim decPurchaseAmount1 As Decimal = 0
+                'Dim decPurchaseAmount2 As Decimal = 0
+
+                'Call mPurchaseCost(ds.Tables(RS).Rows(i)("発注番号"), ds.Tables(RS).Rows(i)("発注番号枝番") _
+                '                       , decPurchase1, decPurchase2 _
+                '                       , decPurchaseAmount1, decPurchaseAmount2)
+
+                DgvCymnhd.Rows(i).Cells("仕入金額").Value = ds.Tables(RS).Rows(i)("仕入金額")
+                DgvCymnhd.Rows(i).Cells("粗利額").Value = ds.Tables(RS).Rows(i)("見積金額") - ds.Tables(RS).Rows(i)("仕入金額")
+
+                If ds.Tables(RS).Rows(i)("見積金額") = 0 Or DgvCymnhd.Rows(i).Cells("粗利額").Value = 0 Then
+                    DgvCymnhd.Rows(i).Cells("粗利率").Value = 0
+                Else
+                    DgvCymnhd.Rows(i).Cells("粗利率").Value = DgvCymnhd.Rows(i).Cells("粗利額").Value / ds.Tables(RS).Rows(i)("見積金額") * 100
+                End If
+
+
                 DgvCymnhd.Rows(i).Cells("得意先郵便番号").Value = ds.Tables(RS).Rows(i)("得意先郵便番号")
                 DgvCymnhd.Rows(i).Cells("得意先住所").Value = ds.Tables(RS).Rows(i)("得意先住所")
                 DgvCymnhd.Rows(i).Cells("得意先電話番号").Value = ds.Tables(RS).Rows(i)("得意先電話番号")
                 DgvCymnhd.Rows(i).Cells("得意先ＦＡＸ").Value = ds.Tables(RS).Rows(i)("得意先ＦＡＸ")
                 DgvCymnhd.Rows(i).Cells("得意先担当者名").Value = ds.Tables(RS).Rows(i)("得意先担当者名")
                 DgvCymnhd.Rows(i).Cells("得意先担当者役職").Value = ds.Tables(RS).Rows(i)("得意先担当者役職")
-                DgvCymnhd.Rows(i).Cells("ＶＡＴ").Value = ds.Tables(RS).Rows(i)("ＶＡＴ")
-                DgvCymnhd.Rows(i).Cells("通貨_外貨").Value = cur
-                DgvCymnhd.Rows(i).Cells("受注金額_外貨").Value = ds.Tables(RS).Rows(i)("見積金額_外貨")
-                DgvCymnhd.Rows(i).Cells("通貨").Value = setBaseCurrency()
-                DgvCymnhd.Rows(i).Cells("受注金額").Value = ds.Tables(RS).Rows(i)("見積金額")
-                DgvCymnhd.Rows(i).Cells("仕入金額").Value = ds.Tables(RS).Rows(i)("仕入金額")
-                DgvCymnhd.Rows(i).Cells("粗利額").Value = ds.Tables(RS).Rows(i)("粗利額")
+
                 DgvCymnhd.Rows(i).Cells("支払条件").Value = ds.Tables(RS).Rows(i)("支払条件")
                 DgvCymnhd.Rows(i).Cells("営業担当者").Value = ds.Tables(RS).Rows(i)("営業担当者")
                 DgvCymnhd.Rows(i).Cells("入力担当者").Value = ds.Tables(RS).Rows(i)("入力担当者")
@@ -542,6 +563,46 @@ Public Class OrderList
             Next
 
         End If
+
+    End Sub
+
+    Private Sub mPurchaseCost(ByVal OrderNo As String, ByVal BranchNo As String _
+                                   , ByRef decPurchase1 As Decimal, ByRef decPurchase2 As Decimal _
+                                   , ByRef decPurchaseAmount1 As Decimal, ByRef decPurchaseAmount2 As Decimal)
+
+
+        Dim reccnt As Integer = 0 'DB用（デフォルト
+        Dim Sql As String
+        Dim ds_t21 As DataSet
+
+        Sql = "SELECT"
+        Sql += " 仕入値,仕入値_外貨,発注数量,仕入金額,間接費,仕入金額_外貨"
+
+        Sql += " FROM "
+        Sql += " public.t21_hattyu"
+
+        Sql += " WHERE "
+        Sql += " 会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
+
+        Sql += " and 発注番号 = '" & OrderNo & "'"
+        Sql += " and 発注番号枝番 = '" & BranchNo & "'"
+
+        ds_t21 = _db.selectDB(Sql, RS, reccnt)
+
+        decPurchase1 = 0  '外貨
+        decPurchase2 = 0
+        decPurchaseAmount1 = 0
+        decPurchaseAmount2 = 0
+
+        'For i As Integer = 0 To ds_t21.Tables(RS).Rows.Count - 1
+
+        '    decPurchase1 += rmNullDecimal(ds_t21.Tables(RS).Rows(i)("仕入値_外貨") * ds_t21.Tables(RS).Rows(i)("発注数量"))
+        '    decPurchase2 += rmNullDecimal(ds_t21.Tables(RS).Rows(i)("仕入値") * ds_t21.Tables(RS).Rows(i)("発注数量"))
+
+        '    decPurchaseAmount1 += rmNullDecimal(ds_t21.Tables(RS).Rows(i)("仕入金額_外貨"))
+        '    decPurchaseAmount2 += rmNullDecimal(ds_t21.Tables(RS).Rows(i)("仕入金額") + ds_t21.Tables(RS).Rows(i)("間接費"))
+
+        'Next
 
     End Sub
 
@@ -1059,7 +1120,7 @@ Public Class OrderList
             '出庫登録時
             If OrderStatus = CommonConst.STATUS_GOODS_ISSUE Then
                 DgvCymnhd.Columns.Add("発注番号", "PurchaseNumber")
-                DgvCymnhd.Columns.Add("発注番号枝番", "PurchaseOrderSubNumber")
+                DgvCymnhd.Columns.Add("発注番号枝番", "PurchaseOrderVer")
             End If
 
             DgvCymnhd.Columns.Add("客先番号", "CustomerNumber")
@@ -1070,19 +1131,25 @@ Public Class OrderList
             DgvCymnhd.Columns.Add("見積有効期限", "QuotationExpriedDate")
             DgvCymnhd.Columns.Add("得意先コード", "CustomerCode")
             DgvCymnhd.Columns.Add("得意先名", "CustomerName")
+
+            DgvCymnhd.Columns.Add("通貨_外貨", "Currency")
+            DgvCymnhd.Columns.Add("受注金額_外貨", "OrderAmount" & vbCrLf & "(ForeignCurrency)")
+
+            DgvCymnhd.Columns.Add("受注金額", "OrderAmount" & vbCrLf & "(" & setBaseCurrency() & ")")
+            DgvCymnhd.Columns.Add("ＶＡＴ", "VAT-OUT")
+
+            DgvCymnhd.Columns.Add("仕入金額", "PurchaseAmount" & vbCrLf & "(" & setBaseCurrency() & ")")
+            DgvCymnhd.Columns.Add("粗利額", "Profitmargin" & vbCrLf & "(" & setBaseCurrency() & ")")
+            DgvCymnhd.Columns.Add("粗利率", "ProfitmarginRate(%)")
+
+
             DgvCymnhd.Columns.Add("得意先郵便番号", "PostalCode")
             DgvCymnhd.Columns.Add("得意先住所", "Address")
             DgvCymnhd.Columns.Add("得意先電話番号", "PhoneNumber")
             DgvCymnhd.Columns.Add("得意先ＦＡＸ", "FAX")
             DgvCymnhd.Columns.Add("得意先担当者名", "NameOfPIC")
             DgvCymnhd.Columns.Add("得意先担当者役職", "PositionPICCustomer")
-            DgvCymnhd.Columns.Add("ＶＡＴ", "VAT")
-            DgvCymnhd.Columns.Add("通貨_外貨", "Currency")
-            DgvCymnhd.Columns.Add("受注金額_外貨", "OrderAmountForeignCurrency")
-            DgvCymnhd.Columns.Add("通貨", "Currency")
-            DgvCymnhd.Columns.Add("受注金額", "OrderAmount")
-            DgvCymnhd.Columns.Add("仕入金額", "PurchaseAmount")
-            DgvCymnhd.Columns.Add("粗利額", "GrossMargin")
+
             DgvCymnhd.Columns.Add("支払条件", "PeymentTerms")
             DgvCymnhd.Columns.Add("営業担当者", "SalesPersonInCharge")
             DgvCymnhd.Columns.Add("入力担当者", "PICForInputting")
@@ -1093,10 +1160,9 @@ Public Class OrderList
 
         Else
 
-
             DgvCymnhd.Columns.Add("取消", "取消")
             DgvCymnhd.Columns.Add("受注番号", "受注番号")
-            DgvCymnhd.Columns.Add("受注番号枝番", "受注番号枝番")
+            DgvCymnhd.Columns.Add("受注番号枝番", "受注Ver")
 
             '出庫登録時
             If OrderStatus = CommonConst.STATUS_GOODS_ISSUE Then
@@ -1112,40 +1178,55 @@ Public Class OrderList
             DgvCymnhd.Columns.Add("見積有効期限", "見積有効期限")
             DgvCymnhd.Columns.Add("得意先コード", "得意先コード")
             DgvCymnhd.Columns.Add("得意先名", "得意先名")
+
+            DgvCymnhd.Columns.Add("通貨_外貨", "販売通貨")
+            DgvCymnhd.Columns.Add("受注金額_外貨", "受注金額" & vbCrLf & "(原通貨)")
+
+            DgvCymnhd.Columns.Add("受注金額", "受注金額" & vbCrLf & "(" & setBaseCurrency() & ")")
+            DgvCymnhd.Columns.Add("ＶＡＴ", "VAT-OUT")
+
+            DgvCymnhd.Columns.Add("仕入金額", "仕入金額" & vbCrLf & "(" & setBaseCurrency() & ")")
+            DgvCymnhd.Columns.Add("粗利額", "利益" & vbCrLf & "(" & setBaseCurrency() & ")")
+            DgvCymnhd.Columns.Add("粗利率", "利益率(%)")
+
+
             DgvCymnhd.Columns.Add("得意先郵便番号", "得意先郵便番号")
             DgvCymnhd.Columns.Add("得意先住所", "得意先住所")
             DgvCymnhd.Columns.Add("得意先電話番号", "得意先電話番号")
             DgvCymnhd.Columns.Add("得意先ＦＡＸ", "得意先ＦＡＸ")
             DgvCymnhd.Columns.Add("得意先担当者名", "得意先担当者名")
             DgvCymnhd.Columns.Add("得意先担当者役職", "得意先担当者役職")
-            DgvCymnhd.Columns.Add("ＶＡＴ", "ＶＡＴ")
-            DgvCymnhd.Columns.Add("通貨_外貨", "通貨")
-            DgvCymnhd.Columns.Add("受注金額_外貨", "受注金額(外貨)")
-            DgvCymnhd.Columns.Add("通貨", "通貨")
-            DgvCymnhd.Columns.Add("受注金額", "受注金額")
-            DgvCymnhd.Columns.Add("仕入金額", "仕入金額")
-            DgvCymnhd.Columns.Add("粗利額", "粗利額")
+
             DgvCymnhd.Columns.Add("支払条件", "支払条件")
             DgvCymnhd.Columns.Add("営業担当者", "営業担当者")
             DgvCymnhd.Columns.Add("入力担当者", "入力担当者")
             DgvCymnhd.Columns.Add("備考", "備考")
             DgvCymnhd.Columns.Add("登録日", "登録日")
-            DgvCymnhd.Columns.Add("更新日", "更新日")
+            DgvCymnhd.Columns.Add("更新日", "最終更新日")
             DgvCymnhd.Columns.Add("更新者", "更新者")
         End If
 
-        DgvCymnhd.Columns("ＶＡＴ").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvCymnhd.Columns("受注金額_外貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvCymnhd.Columns("受注金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvCymnhd.Columns("仕入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvCymnhd.Columns("粗利額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvCymnhd.Columns("粗利率").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+        DgvCymnhd.Columns("ＶＡＴ").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
 
         '数字形式
-        DgvCymnhd.Columns("ＶＡＴ").DefaultCellStyle.Format = "N2"
         DgvCymnhd.Columns("受注金額_外貨").DefaultCellStyle.Format = "N2"
         DgvCymnhd.Columns("受注金額").DefaultCellStyle.Format = "N2"
         DgvCymnhd.Columns("仕入金額").DefaultCellStyle.Format = "N2"
         DgvCymnhd.Columns("粗利額").DefaultCellStyle.Format = "N2"
+        DgvCymnhd.Columns("粗利率").DefaultCellStyle.Format = "N1"
+
+        DgvCymnhd.Columns("ＶＡＴ").DefaultCellStyle.Format = "N2"
+
+
+        DgvCymnhd.Columns("見積有効期限").Visible = False
+        DgvCymnhd.Columns("更新者").Visible = False
 
     End Sub
 
@@ -1268,7 +1349,7 @@ Public Class OrderList
         Dim customerPO As String = escapeSql(TxtCustomerPO.Text)
 
         If customerName <> Nothing Then
-            Sql += " AND "
+            Sql += " And "
             Sql += " 得意先名 ILIKE '%" & customerName & "%' "
         End If
 
