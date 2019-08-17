@@ -311,11 +311,11 @@ Public Class CustomerOrderList
                 Sql += "受注番号 = '" & OrderNo & "'"
                 Sql += " AND "
                 Sql += "受注番号枝番 = '" & OrderSuffix & "'"
-                Sql += " AND "
-                Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
-                If CurCode <> 0 Then
-                    Sql += "AND 通貨 = " & CurCode
-                End If
+                'Sql += " AND "
+                'Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+                'If CurCode <> 0 Then
+                '    Sql += " AND 通貨 = " & CurCode
+                'End If
 
                 '受注基本（請求債情報）
                 Dim dsCymnhd As DataSet = getDsData("t10_cymnhd", Sql)
@@ -489,15 +489,10 @@ Public Class CustomerOrderList
         Dim reccnt As Integer = 0 'DB用（デフォルト）
         Dim Sql As String = ""
 
-        Sql += "SELECT"
-        Sql += " *"
-        Sql += " FROM "
+        Sql += "SELECT * FROM "
 
         Sql += "public." & tableName
-        Sql += " WHERE "
-        Sql += "会社コード"
-        Sql += " ILIKE  "
-        Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql += txtParam
         Return _db.selectDB(Sql, RS, reccnt)
     End Function
