@@ -22,40 +22,38 @@ Partial Class Cymn
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle25 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle26 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle52 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle27 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle28 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle29 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle30 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle31 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle32 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle33 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle34 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle35 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle36 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle37 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle38 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle39 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle40 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle41 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle42 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle43 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle44 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle45 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle46 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle47 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle48 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle49 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle50 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle51 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.DtpPurchaseDate = New System.Windows.Forms.DateTimePicker()
         Me.DtpOrderDate = New System.Windows.Forms.DateTimePicker()
-        Me.TxtOrderAmount = New System.Windows.Forms.TextBox()
-        Me.LblOrderAmount = New System.Windows.Forms.Label()
-        Me.TxtGrossProfit = New System.Windows.Forms.TextBox()
-        Me.LblGrossProfit = New System.Windows.Forms.Label()
+        Me.TxtQuoteTotal = New System.Windows.Forms.TextBox()
+        Me.LblQuoteAmount = New System.Windows.Forms.Label()
+        Me.txtProfitmargin = New System.Windows.Forms.TextBox()
+        Me.lblProfitmargin = New System.Windows.Forms.Label()
         Me.TxtItemCount = New System.Windows.Forms.TextBox()
         Me.LblItemCount = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -63,7 +61,7 @@ Partial Class Cymn
         Me.BtnBack = New System.Windows.Forms.Button()
         Me.DtpOrderRegistration = New System.Windows.Forms.DateTimePicker()
         Me.BtnRegistration = New System.Windows.Forms.Button()
-        Me.TxtPurchaseAmount = New System.Windows.Forms.TextBox()
+        Me.TxtPurchaseTotal = New System.Windows.Forms.TextBox()
         Me.LblPurchaseAmount = New System.Windows.Forms.Label()
         Me.LblPurchaseDate = New System.Windows.Forms.Label()
         Me.LblRegistration = New System.Windows.Forms.Label()
@@ -93,6 +91,39 @@ Partial Class Cymn
         Me.LblOrderDate = New System.Windows.Forms.Label()
         Me.LblOrderNo = New System.Windows.Forms.Label()
         Me.DgvItemList = New System.Windows.Forms.DataGridView()
+        Me.No = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.メーカー = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.品名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.型式 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.数量 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.単位 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入先コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入先 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入レート = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入単価_外貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入単価 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入原価 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.関税率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.関税額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.前払法人税率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.前払法人税額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.輸送費率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.輸送費額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.売単価_外貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.売単価 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.売上金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.見積単価_外貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.見積単価 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.見積金額_外貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.見積金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.粗利額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.粗利率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.リードタイム = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.備考 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ステータス = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.間接費率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.間接費 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DtpExpiration = New System.Windows.Forms.DateTimePicker()
         Me.DtpQuoteDate = New System.Windows.Forms.DateTimePicker()
         Me.DtpQuoteRegistration = New System.Windows.Forms.DateTimePicker()
@@ -125,42 +156,20 @@ Partial Class Cymn
         Me.LblIDRCurrency = New System.Windows.Forms.Label()
         Me.TxtCurrencyVatAmount = New System.Windows.Forms.TextBox()
         Me.LblCurrencyVatAmount = New System.Windows.Forms.Label()
-        Me.TxtCurrencyOrderTotal = New System.Windows.Forms.TextBox()
-        Me.LblCurrencyOrderAmount = New System.Windows.Forms.Label()
+        Me.txtProfitmarginRate = New System.Windows.Forms.TextBox()
+        Me.lblProfitmarginRate = New System.Windows.Forms.Label()
+        Me.txtGrossmarginRate = New System.Windows.Forms.TextBox()
+        Me.lblGrossmargin = New System.Windows.Forms.Label()
+        Me.TxtTotal = New System.Windows.Forms.TextBox()
+        Me.LblOrderAmount = New System.Windows.Forms.Label()
+        Me.TxtGrossProfit = New System.Windows.Forms.TextBox()
+        Me.LblGrossProfit = New System.Windows.Forms.Label()
+        Me.txtPurchasecost = New System.Windows.Forms.TextBox()
+        Me.lblPurchasecost = New System.Windows.Forms.Label()
         Me.TxtVatAmount = New System.Windows.Forms.TextBox()
         Me.LblVatAmount = New System.Windows.Forms.Label()
-        Me.No = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.メーカー = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.品名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.型式 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.数量 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.単位 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.仕入先コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.仕入先 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.仕入レート = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.仕入単価_外貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.仕入単価 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.仕入原価 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.関税率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.関税額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.前払法人税率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.前払法人税額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.輸送費率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.輸送費額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.仕入金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.売単価 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.売上金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.見積単価_外貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.見積単価 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.見積金額_外貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.見積金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.粗利額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.粗利率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.リードタイム = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.備考 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ステータス = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.間接費率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.間接費 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.TxtQuoteTotal2 = New System.Windows.Forms.TextBox()
         CType(Me.DgvItemList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -173,7 +182,7 @@ Partial Class Cymn
         Me.DtpPurchaseDate.Location = New System.Drawing.Point(863, 12)
         Me.DtpPurchaseDate.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.DtpPurchaseDate.Name = "DtpPurchaseDate"
-        Me.DtpPurchaseDate.Size = New System.Drawing.Size(140, 37)
+        Me.DtpPurchaseDate.Size = New System.Drawing.Size(140, 22)
         Me.DtpPurchaseDate.TabIndex = 3
         Me.DtpPurchaseDate.Value = New Date(2018, 7, 19, 0, 0, 0, 0)
         '
@@ -186,61 +195,61 @@ Partial Class Cymn
         Me.DtpOrderDate.Location = New System.Drawing.Point(601, 12)
         Me.DtpOrderDate.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.DtpOrderDate.Name = "DtpOrderDate"
-        Me.DtpOrderDate.Size = New System.Drawing.Size(140, 37)
+        Me.DtpOrderDate.Size = New System.Drawing.Size(140, 22)
         Me.DtpOrderDate.TabIndex = 2
         Me.DtpOrderDate.Value = New Date(2018, 7, 19, 0, 0, 0, 0)
         '
-        'TxtOrderAmount
+        'TxtQuoteTotal
         '
-        Me.TxtOrderAmount.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.TxtOrderAmount.Enabled = False
-        Me.TxtOrderAmount.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtOrderAmount.Location = New System.Drawing.Point(1108, 393)
-        Me.TxtOrderAmount.MaxLength = 10
-        Me.TxtOrderAmount.Name = "TxtOrderAmount"
-        Me.TxtOrderAmount.ReadOnly = True
-        Me.TxtOrderAmount.Size = New System.Drawing.Size(231, 39)
-        Me.TxtOrderAmount.TabIndex = 95
-        Me.TxtOrderAmount.TabStop = False
-        Me.TxtOrderAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.TxtQuoteTotal.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TxtQuoteTotal.Enabled = False
+        Me.TxtQuoteTotal.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtQuoteTotal.Location = New System.Drawing.Point(938, 397)
+        Me.TxtQuoteTotal.MaxLength = 10
+        Me.TxtQuoteTotal.Name = "TxtQuoteTotal"
+        Me.TxtQuoteTotal.ReadOnly = True
+        Me.TxtQuoteTotal.Size = New System.Drawing.Size(187, 23)
+        Me.TxtQuoteTotal.TabIndex = 95
+        Me.TxtQuoteTotal.TabStop = False
+        Me.TxtQuoteTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'LblOrderAmount
+        'LblQuoteAmount
         '
-        Me.LblOrderAmount.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.LblOrderAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblOrderAmount.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblOrderAmount.Location = New System.Drawing.Point(1002, 393)
-        Me.LblOrderAmount.Name = "LblOrderAmount"
-        Me.LblOrderAmount.Size = New System.Drawing.Size(100, 23)
-        Me.LblOrderAmount.TabIndex = 96
-        Me.LblOrderAmount.Text = "受注金額"
-        Me.LblOrderAmount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LblQuoteAmount.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblQuoteAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblQuoteAmount.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblQuoteAmount.Location = New System.Drawing.Point(780, 397)
+        Me.LblQuoteAmount.Name = "LblQuoteAmount"
+        Me.LblQuoteAmount.Size = New System.Drawing.Size(152, 23)
+        Me.LblQuoteAmount.TabIndex = 96
+        Me.LblQuoteAmount.Text = "見積金額（n）"
+        Me.LblQuoteAmount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'TxtGrossProfit
+        'txtProfitmargin
         '
-        Me.TxtGrossProfit.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.TxtGrossProfit.Enabled = False
-        Me.TxtGrossProfit.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtGrossProfit.Location = New System.Drawing.Point(1108, 451)
-        Me.TxtGrossProfit.MaxLength = 10
-        Me.TxtGrossProfit.Name = "TxtGrossProfit"
-        Me.TxtGrossProfit.ReadOnly = True
-        Me.TxtGrossProfit.Size = New System.Drawing.Size(231, 39)
-        Me.TxtGrossProfit.TabIndex = 93
-        Me.TxtGrossProfit.TabStop = False
-        Me.TxtGrossProfit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtProfitmargin.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.txtProfitmargin.Enabled = False
+        Me.txtProfitmargin.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.txtProfitmargin.Location = New System.Drawing.Point(938, 454)
+        Me.txtProfitmargin.MaxLength = 10
+        Me.txtProfitmargin.Name = "txtProfitmargin"
+        Me.txtProfitmargin.ReadOnly = True
+        Me.txtProfitmargin.Size = New System.Drawing.Size(187, 23)
+        Me.txtProfitmargin.TabIndex = 93
+        Me.txtProfitmargin.TabStop = False
+        Me.txtProfitmargin.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'LblGrossProfit
+        'lblProfitmargin
         '
-        Me.LblGrossProfit.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.LblGrossProfit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblGrossProfit.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblGrossProfit.Location = New System.Drawing.Point(1002, 451)
-        Me.LblGrossProfit.Name = "LblGrossProfit"
-        Me.LblGrossProfit.Size = New System.Drawing.Size(100, 23)
-        Me.LblGrossProfit.TabIndex = 94
-        Me.LblGrossProfit.Text = "粗利額"
-        Me.LblGrossProfit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lblProfitmargin.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.lblProfitmargin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblProfitmargin.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.lblProfitmargin.Location = New System.Drawing.Point(780, 454)
+        Me.lblProfitmargin.Name = "lblProfitmargin"
+        Me.lblProfitmargin.Size = New System.Drawing.Size(152, 23)
+        Me.lblProfitmargin.TabIndex = 94
+        Me.lblProfitmargin.Text = "利益"
+        Me.lblProfitmargin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'TxtItemCount
         '
@@ -251,7 +260,7 @@ Partial Class Cymn
         Me.TxtItemCount.MaxLength = 20
         Me.TxtItemCount.Name = "TxtItemCount"
         Me.TxtItemCount.ReadOnly = True
-        Me.TxtItemCount.Size = New System.Drawing.Size(85, 39)
+        Me.TxtItemCount.Size = New System.Drawing.Size(85, 23)
         Me.TxtItemCount.TabIndex = 91
         Me.TxtItemCount.TabStop = False
         Me.TxtItemCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -273,7 +282,7 @@ Partial Class Cymn
         Me.Label2.AutoSize = True
         Me.Label2.Location = New System.Drawing.Point(221, 19)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(22, 24)
+        Me.Label2.Size = New System.Drawing.Size(11, 12)
         Me.Label2.TabIndex = 90
         Me.Label2.Text = "-"
         '
@@ -285,7 +294,7 @@ Partial Class Cymn
         Me.TxtCustomerCode.Location = New System.Drawing.Point(127, 71)
         Me.TxtCustomerCode.MaxLength = 50
         Me.TxtCustomerCode.Name = "TxtCustomerCode"
-        Me.TxtCustomerCode.Size = New System.Drawing.Size(140, 39)
+        Me.TxtCustomerCode.Size = New System.Drawing.Size(140, 23)
         Me.TxtCustomerCode.TabIndex = 59
         Me.TxtCustomerCode.TabStop = False
         '
@@ -309,7 +318,7 @@ Partial Class Cymn
         Me.DtpOrderRegistration.Location = New System.Drawing.Point(1127, 11)
         Me.DtpOrderRegistration.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.DtpOrderRegistration.Name = "DtpOrderRegistration"
-        Me.DtpOrderRegistration.Size = New System.Drawing.Size(152, 37)
+        Me.DtpOrderRegistration.Size = New System.Drawing.Size(152, 22)
         Me.DtpOrderRegistration.TabIndex = 4
         Me.DtpOrderRegistration.TabStop = False
         Me.DtpOrderRegistration.Value = New Date(2018, 7, 19, 20, 27, 58, 0)
@@ -324,30 +333,30 @@ Partial Class Cymn
         Me.BtnRegistration.Text = "登録"
         Me.BtnRegistration.UseVisualStyleBackColor = True
         '
-        'TxtPurchaseAmount
+        'TxtPurchaseTotal
         '
-        Me.TxtPurchaseAmount.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.TxtPurchaseAmount.Enabled = False
-        Me.TxtPurchaseAmount.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtPurchaseAmount.Location = New System.Drawing.Point(1108, 422)
-        Me.TxtPurchaseAmount.MaxLength = 10
-        Me.TxtPurchaseAmount.Name = "TxtPurchaseAmount"
-        Me.TxtPurchaseAmount.ReadOnly = True
-        Me.TxtPurchaseAmount.Size = New System.Drawing.Size(231, 39)
-        Me.TxtPurchaseAmount.TabIndex = 85
-        Me.TxtPurchaseAmount.TabStop = False
-        Me.TxtPurchaseAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.TxtPurchaseTotal.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TxtPurchaseTotal.Enabled = False
+        Me.TxtPurchaseTotal.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtPurchaseTotal.Location = New System.Drawing.Point(938, 426)
+        Me.TxtPurchaseTotal.MaxLength = 10
+        Me.TxtPurchaseTotal.Name = "TxtPurchaseTotal"
+        Me.TxtPurchaseTotal.ReadOnly = True
+        Me.TxtPurchaseTotal.Size = New System.Drawing.Size(187, 23)
+        Me.TxtPurchaseTotal.TabIndex = 85
+        Me.TxtPurchaseTotal.TabStop = False
+        Me.TxtPurchaseTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'LblPurchaseAmount
         '
         Me.LblPurchaseAmount.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblPurchaseAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblPurchaseAmount.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblPurchaseAmount.Location = New System.Drawing.Point(1002, 422)
+        Me.LblPurchaseAmount.Location = New System.Drawing.Point(780, 426)
         Me.LblPurchaseAmount.Name = "LblPurchaseAmount"
-        Me.LblPurchaseAmount.Size = New System.Drawing.Size(100, 23)
+        Me.LblPurchaseAmount.Size = New System.Drawing.Size(152, 23)
         Me.LblPurchaseAmount.TabIndex = 89
-        Me.LblPurchaseAmount.Text = "発注金額"
+        Me.LblPurchaseAmount.Text = "仕入金額（j）"
         Me.LblPurchaseAmount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'LblPurchaseDate
@@ -382,7 +391,7 @@ Partial Class Cymn
         Me.TxtSales.Location = New System.Drawing.Point(1127, 71)
         Me.TxtSales.MaxLength = 20
         Me.TxtSales.Name = "TxtSales"
-        Me.TxtSales.Size = New System.Drawing.Size(200, 39)
+        Me.TxtSales.Size = New System.Drawing.Size(200, 23)
         Me.TxtSales.TabIndex = 79
         Me.TxtSales.TabStop = False
         '
@@ -407,7 +416,7 @@ Partial Class Cymn
         Me.TxtOrderSuffix.MaxLength = 1
         Me.TxtOrderSuffix.Name = "TxtOrderSuffix"
         Me.TxtOrderSuffix.ReadOnly = True
-        Me.TxtOrderSuffix.Size = New System.Drawing.Size(29, 39)
+        Me.TxtOrderSuffix.Size = New System.Drawing.Size(29, 23)
         Me.TxtOrderSuffix.TabIndex = 62
         Me.TxtOrderSuffix.TabStop = False
         '
@@ -469,7 +478,7 @@ Partial Class Cymn
         Me.TxtPosition.Location = New System.Drawing.Point(765, 158)
         Me.TxtPosition.MaxLength = 50
         Me.TxtPosition.Name = "TxtPosition"
-        Me.TxtPosition.Size = New System.Drawing.Size(200, 39)
+        Me.TxtPosition.Size = New System.Drawing.Size(200, 23)
         Me.TxtPosition.TabIndex = 78
         Me.TxtPosition.TabStop = False
         '
@@ -493,7 +502,7 @@ Partial Class Cymn
         Me.TxtTel.Location = New System.Drawing.Point(765, 71)
         Me.TxtTel.MaxLength = 15
         Me.TxtTel.Name = "TxtTel"
-        Me.TxtTel.Size = New System.Drawing.Size(200, 39)
+        Me.TxtTel.Size = New System.Drawing.Size(200, 23)
         Me.TxtTel.TabIndex = 75
         Me.TxtTel.TabStop = False
         '
@@ -530,7 +539,7 @@ Partial Class Cymn
         Me.TxtPerson.Location = New System.Drawing.Point(765, 129)
         Me.TxtPerson.MaxLength = 50
         Me.TxtPerson.Name = "TxtPerson"
-        Me.TxtPerson.Size = New System.Drawing.Size(200, 39)
+        Me.TxtPerson.Size = New System.Drawing.Size(200, 23)
         Me.TxtPerson.TabIndex = 77
         Me.TxtPerson.TabStop = False
         '
@@ -554,7 +563,7 @@ Partial Class Cymn
         Me.TxtFax.Location = New System.Drawing.Point(765, 100)
         Me.TxtFax.MaxLength = 15
         Me.TxtFax.Name = "TxtFax"
-        Me.TxtFax.Size = New System.Drawing.Size(200, 39)
+        Me.TxtFax.Size = New System.Drawing.Size(200, 23)
         Me.TxtFax.TabIndex = 76
         Me.TxtFax.TabStop = False
         '
@@ -566,7 +575,7 @@ Partial Class Cymn
         Me.TxtPostalCode.Location = New System.Drawing.Point(127, 100)
         Me.TxtPostalCode.MaxLength = 7
         Me.TxtPostalCode.Name = "TxtPostalCode"
-        Me.TxtPostalCode.Size = New System.Drawing.Size(140, 39)
+        Me.TxtPostalCode.Size = New System.Drawing.Size(140, 23)
         Me.TxtPostalCode.TabIndex = 64
         Me.TxtPostalCode.TabStop = False
         Me.TxtPostalCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -603,7 +612,7 @@ Partial Class Cymn
         Me.TxtCustomerName.Location = New System.Drawing.Point(273, 71)
         Me.TxtCustomerName.MaxLength = 50
         Me.TxtCustomerName.Name = "TxtCustomerName"
-        Me.TxtCustomerName.Size = New System.Drawing.Size(330, 39)
+        Me.TxtCustomerName.Size = New System.Drawing.Size(330, 23)
         Me.TxtCustomerName.TabIndex = 61
         Me.TxtCustomerName.TabStop = False
         '
@@ -616,7 +625,7 @@ Partial Class Cymn
         Me.TxtInput.MaxLength = 20
         Me.TxtInput.Name = "TxtInput"
         Me.TxtInput.ReadOnly = True
-        Me.TxtInput.Size = New System.Drawing.Size(200, 39)
+        Me.TxtInput.Size = New System.Drawing.Size(200, 23)
         Me.TxtInput.TabIndex = 65
         Me.TxtInput.TabStop = False
         '
@@ -641,7 +650,7 @@ Partial Class Cymn
         Me.TxtOrderNo.MaxLength = 8
         Me.TxtOrderNo.Name = "TxtOrderNo"
         Me.TxtOrderNo.ReadOnly = True
-        Me.TxtOrderNo.Size = New System.Drawing.Size(88, 39)
+        Me.TxtOrderNo.Size = New System.Drawing.Size(88, 23)
         Me.TxtOrderNo.TabIndex = 60
         Me.TxtOrderNo.TabStop = False
         '
@@ -686,16 +695,388 @@ Partial Class Cymn
         Me.DgvItemList.AllowUserToAddRows = False
         Me.DgvItemList.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.DgvItemList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvItemList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.No, Me.メーカー, Me.品名, Me.型式, Me.数量, Me.単位, Me.仕入先コード, Me.仕入先, Me.仕入レート, Me.仕入単価_外貨, Me.仕入単価, Me.仕入原価, Me.関税率, Me.関税額, Me.前払法人税率, Me.前払法人税額, Me.輸送費率, Me.輸送費額, Me.仕入金額, Me.売単価, Me.売上金額, Me.見積単価_外貨, Me.見積単価, Me.見積金額_外貨, Me.見積金額, Me.粗利額, Me.粗利率, Me.リードタイム, Me.備考, Me.ステータス, Me.間接費率, Me.間接費})
+        Me.DgvItemList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.No, Me.メーカー, Me.品名, Me.型式, Me.数量, Me.単位, Me.仕入先コード, Me.仕入先, Me.仕入レート, Me.仕入単価_外貨, Me.仕入単価, Me.仕入原価, Me.関税率, Me.関税額, Me.前払法人税率, Me.前払法人税額, Me.輸送費率, Me.輸送費額, Me.仕入金額, Me.売単価_外貨, Me.売単価, Me.売上金額, Me.見積単価_外貨, Me.見積単価, Me.見積金額_外貨, Me.見積金額, Me.粗利額, Me.粗利率, Me.リードタイム, Me.備考, Me.ステータス, Me.間接費率, Me.間接費})
+        DataGridViewCellStyle52.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle52.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle52.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle52.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle52.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle52.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle52.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DgvItemList.DefaultCellStyle = DataGridViewCellStyle52
         Me.DgvItemList.Location = New System.Drawing.Point(11, 245)
         Me.DgvItemList.Name = "DgvItemList"
         Me.DgvItemList.ReadOnly = True
         Me.DgvItemList.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
         Me.DgvItemList.RowHeadersVisible = False
+        Me.DgvItemList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
         Me.DgvItemList.RowTemplate.Height = 21
         Me.DgvItemList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
         Me.DgvItemList.Size = New System.Drawing.Size(1329, 142)
         Me.DgvItemList.TabIndex = 4
+        '
+        'No
+        '
+        DataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.No.DefaultCellStyle = DataGridViewCellStyle27
+        Me.No.FillWeight = 94.04219!
+        Me.No.HeaderText = "No"
+        Me.No.Name = "No"
+        Me.No.ReadOnly = True
+        Me.No.Width = 43
+        '
+        'メーカー
+        '
+        Me.メーカー.FillWeight = 466.6826!
+        Me.メーカー.HeaderText = "メーカー"
+        Me.メーカー.Name = "メーカー"
+        Me.メーカー.ReadOnly = True
+        Me.メーカー.Width = 220
+        '
+        '品名
+        '
+        Me.品名.FillWeight = 390.9521!
+        Me.品名.HeaderText = "品名"
+        Me.品名.Name = "品名"
+        Me.品名.ReadOnly = True
+        Me.品名.Width = 220
+        '
+        '型式
+        '
+        Me.型式.FillWeight = 342.2861!
+        Me.型式.HeaderText = "型式"
+        Me.型式.Name = "型式"
+        Me.型式.ReadOnly = True
+        Me.型式.Width = 230
+        '
+        '数量
+        '
+        DataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle28.Format = "N2"
+        DataGridViewCellStyle28.NullValue = "0.00"
+        Me.数量.DefaultCellStyle = DataGridViewCellStyle28
+        Me.数量.FillWeight = 135.9467!
+        Me.数量.HeaderText = "数量"
+        Me.数量.Name = "数量"
+        Me.数量.ReadOnly = True
+        Me.数量.Width = 110
+        '
+        '単位
+        '
+        DataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.単位.DefaultCellStyle = DataGridViewCellStyle29
+        Me.単位.FillWeight = 91.12064!
+        Me.単位.HeaderText = "単位"
+        Me.単位.Name = "単位"
+        Me.単位.ReadOnly = True
+        Me.単位.Width = 80
+        '
+        '仕入先コード
+        '
+        Me.仕入先コード.FillWeight = 161.368!
+        Me.仕入先コード.HeaderText = "仕入先コード"
+        Me.仕入先コード.Name = "仕入先コード"
+        Me.仕入先コード.ReadOnly = True
+        Me.仕入先コード.Width = 150
+        '
+        '仕入先
+        '
+        Me.仕入先.FillWeight = 144.4956!
+        Me.仕入先.HeaderText = "仕入先"
+        Me.仕入先.Name = "仕入先"
+        Me.仕入先.ReadOnly = True
+        Me.仕入先.Width = 150
+        '
+        '仕入レート
+        '
+        DataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.仕入レート.DefaultCellStyle = DataGridViewCellStyle30
+        Me.仕入レート.HeaderText = "仕入レート"
+        Me.仕入レート.Name = "仕入レート"
+        Me.仕入レート.ReadOnly = True
+        Me.仕入レート.Visible = False
+        Me.仕入レート.Width = 59
+        '
+        '仕入単価_外貨
+        '
+        DataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle31.Format = "N2"
+        DataGridViewCellStyle31.NullValue = "0.00"
+        Me.仕入単価_外貨.DefaultCellStyle = DataGridViewCellStyle31
+        Me.仕入単価_外貨.FillWeight = 107.5631!
+        Me.仕入単価_外貨.HeaderText = "仕入単価_外貨"
+        Me.仕入単価_外貨.Name = "仕入単価_外貨"
+        Me.仕入単価_外貨.ReadOnly = True
+        Me.仕入単価_外貨.Width = 125
+        '
+        '仕入単価
+        '
+        DataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle32.Format = "N2"
+        DataGridViewCellStyle32.NullValue = "0.00"
+        Me.仕入単価.DefaultCellStyle = DataGridViewCellStyle32
+        Me.仕入単価.FillWeight = 98.61907!
+        Me.仕入単価.HeaderText = "仕入単価"
+        Me.仕入単価.Name = "仕入単価"
+        Me.仕入単価.ReadOnly = True
+        Me.仕入単価.Width = 125
+        '
+        '仕入原価
+        '
+        DataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle33.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle33.Format = "N2"
+        DataGridViewCellStyle33.NullValue = "0.00"
+        Me.仕入原価.DefaultCellStyle = DataGridViewCellStyle33
+        Me.仕入原価.FillWeight = 90.14568!
+        Me.仕入原価.HeaderText = "仕入原価"
+        Me.仕入原価.Name = "仕入原価"
+        Me.仕入原価.ReadOnly = True
+        Me.仕入原価.Width = 125
+        '
+        '関税率
+        '
+        DataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle34.Format = "N1"
+        DataGridViewCellStyle34.NullValue = "0.0"
+        Me.関税率.DefaultCellStyle = DataGridViewCellStyle34
+        Me.関税率.FillWeight = 82.43626!
+        Me.関税率.HeaderText = "関税率"
+        Me.関税率.Name = "関税率"
+        Me.関税率.ReadOnly = True
+        Me.関税率.Width = 125
+        '
+        '関税額
+        '
+        DataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle35.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle35.Format = "N2"
+        DataGridViewCellStyle35.NullValue = "0.00"
+        Me.関税額.DefaultCellStyle = DataGridViewCellStyle35
+        Me.関税額.FillWeight = 75.30459!
+        Me.関税額.HeaderText = "関税額"
+        Me.関税額.Name = "関税額"
+        Me.関税額.ReadOnly = True
+        Me.関税額.Width = 125
+        '
+        '前払法人税率
+        '
+        DataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle36.Format = "N1"
+        DataGridViewCellStyle36.NullValue = "0.0"
+        Me.前払法人税率.DefaultCellStyle = DataGridViewCellStyle36
+        Me.前払法人税率.FillWeight = 71.5779!
+        Me.前払法人税率.HeaderText = "前払法人税率"
+        Me.前払法人税率.Name = "前払法人税率"
+        Me.前払法人税率.ReadOnly = True
+        Me.前払法人税率.Width = 130
+        '
+        '前払法人税額
+        '
+        DataGridViewCellStyle37.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle37.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle37.Format = "N2"
+        DataGridViewCellStyle37.NullValue = "0.00"
+        Me.前払法人税額.DefaultCellStyle = DataGridViewCellStyle37
+        Me.前払法人税額.FillWeight = 65.52465!
+        Me.前払法人税額.HeaderText = "前払法人税額"
+        Me.前払法人税額.Name = "前払法人税額"
+        Me.前払法人税額.ReadOnly = True
+        Me.前払法人税額.Width = 130
+        '
+        '輸送費率
+        '
+        DataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle38.Format = "N1"
+        DataGridViewCellStyle38.NullValue = "0.0"
+        Me.輸送費率.DefaultCellStyle = DataGridViewCellStyle38
+        Me.輸送費率.FillWeight = 57.70118!
+        Me.輸送費率.HeaderText = "輸送費率"
+        Me.輸送費率.Name = "輸送費率"
+        Me.輸送費率.ReadOnly = True
+        Me.輸送費率.Width = 125
+        '
+        '輸送費額
+        '
+        DataGridViewCellStyle39.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle39.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle39.Format = "N2"
+        DataGridViewCellStyle39.NullValue = "0.00"
+        Me.輸送費額.DefaultCellStyle = DataGridViewCellStyle39
+        Me.輸送費額.FillWeight = 52.8921!
+        Me.輸送費額.HeaderText = "輸送費額"
+        Me.輸送費額.Name = "輸送費額"
+        Me.輸送費額.ReadOnly = True
+        Me.輸送費額.Width = 125
+        '
+        '仕入金額
+        '
+        DataGridViewCellStyle40.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle40.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle40.Format = "N2"
+        DataGridViewCellStyle40.NullValue = "0.00"
+        Me.仕入金額.DefaultCellStyle = DataGridViewCellStyle40
+        Me.仕入金額.FillWeight = 48.51291!
+        Me.仕入金額.HeaderText = "仕入金額"
+        Me.仕入金額.Name = "仕入金額"
+        Me.仕入金額.ReadOnly = True
+        Me.仕入金額.Width = 125
+        '
+        '売単価_外貨
+        '
+        DataGridViewCellStyle41.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle41.Format = "N2"
+        DataGridViewCellStyle41.NullValue = "0.00"
+        Me.売単価_外貨.DefaultCellStyle = DataGridViewCellStyle41
+        Me.売単価_外貨.FillWeight = 44.52448!
+        Me.売単価_外貨.HeaderText = "売単価_外貨"
+        Me.売単価_外貨.Name = "売単価_外貨"
+        Me.売単価_外貨.ReadOnly = True
+        Me.売単価_外貨.Width = 125
+        '
+        '売単価
+        '
+        DataGridViewCellStyle42.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle42.Format = "N2"
+        DataGridViewCellStyle42.NullValue = "0.00"
+        Me.売単価.DefaultCellStyle = DataGridViewCellStyle42
+        Me.売単価.FillWeight = 41.00697!
+        Me.売単価.HeaderText = "売単価"
+        Me.売単価.Name = "売単価"
+        Me.売単価.ReadOnly = True
+        Me.売単価.Width = 125
+        '
+        '売上金額
+        '
+        DataGridViewCellStyle43.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle43.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle43.Format = "N2"
+        DataGridViewCellStyle43.NullValue = "0.00"
+        Me.売上金額.DefaultCellStyle = DataGridViewCellStyle43
+        Me.売上金額.FillWeight = 37.59629!
+        Me.売上金額.HeaderText = "売上金額"
+        Me.売上金額.Name = "売上金額"
+        Me.売上金額.ReadOnly = True
+        Me.売上金額.Width = 125
+        '
+        '見積単価_外貨
+        '
+        DataGridViewCellStyle44.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle44.Format = "N2"
+        DataGridViewCellStyle44.NullValue = "0.00"
+        Me.見積単価_外貨.DefaultCellStyle = DataGridViewCellStyle44
+        Me.見積単価_外貨.FillWeight = 34.5767!
+        Me.見積単価_外貨.HeaderText = "見積単価（外貨）"
+        Me.見積単価_外貨.Name = "見積単価_外貨"
+        Me.見積単価_外貨.ReadOnly = True
+        Me.見積単価_外貨.Width = 125
+        '
+        '見積単価
+        '
+        DataGridViewCellStyle45.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle45.Format = "N2"
+        DataGridViewCellStyle45.NullValue = "0.00"
+        Me.見積単価.DefaultCellStyle = DataGridViewCellStyle45
+        Me.見積単価.FillWeight = 32.05873!
+        Me.見積単価.HeaderText = "見積単価"
+        Me.見積単価.Name = "見積単価"
+        Me.見積単価.ReadOnly = True
+        Me.見積単価.Width = 125
+        '
+        '見積金額_外貨
+        '
+        DataGridViewCellStyle46.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle46.Format = "N2"
+        DataGridViewCellStyle46.NullValue = "0.00"
+        Me.見積金額_外貨.DefaultCellStyle = DataGridViewCellStyle46
+        Me.見積金額_外貨.FillWeight = 29.51398!
+        Me.見積金額_外貨.HeaderText = "見積金額（外貨）"
+        Me.見積金額_外貨.Name = "見積金額_外貨"
+        Me.見積金額_外貨.ReadOnly = True
+        Me.見積金額_外貨.Width = 125
+        '
+        '見積金額
+        '
+        DataGridViewCellStyle47.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle47.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle47.Format = "N2"
+        DataGridViewCellStyle47.NullValue = "0.00"
+        Me.見積金額.DefaultCellStyle = DataGridViewCellStyle47
+        Me.見積金額.FillWeight = 27.40833!
+        Me.見積金額.HeaderText = "見積金額"
+        Me.見積金額.Name = "見積金額"
+        Me.見積金額.ReadOnly = True
+        Me.見積金額.Width = 125
+        '
+        '粗利額
+        '
+        DataGridViewCellStyle48.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle48.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle48.Format = "N2"
+        DataGridViewCellStyle48.NullValue = "0.00"
+        Me.粗利額.DefaultCellStyle = DataGridViewCellStyle48
+        Me.粗利額.FillWeight = 25.26135!
+        Me.粗利額.HeaderText = "粗利額"
+        Me.粗利額.Name = "粗利額"
+        Me.粗利額.ReadOnly = True
+        Me.粗利額.Width = 125
+        '
+        '粗利率
+        '
+        DataGridViewCellStyle49.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle49.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle49.Format = "N1"
+        DataGridViewCellStyle49.NullValue = "0.0"
+        Me.粗利率.DefaultCellStyle = DataGridViewCellStyle49
+        Me.粗利率.FillWeight = 20.45065!
+        Me.粗利率.HeaderText = "粗利率"
+        Me.粗利率.Name = "粗利率"
+        Me.粗利率.ReadOnly = True
+        Me.粗利率.Width = 110
+        '
+        'リードタイム
+        '
+        Me.リードタイム.FillWeight = 17.33163!
+        Me.リードタイム.HeaderText = "リードタイム"
+        Me.リードタイム.Name = "リードタイム"
+        Me.リードタイム.ReadOnly = True
+        '
+        '備考
+        '
+        Me.備考.FillWeight = 13.09893!
+        Me.備考.HeaderText = "備考"
+        Me.備考.Name = "備考"
+        Me.備考.ReadOnly = True
+        Me.備考.Width = 80
+        '
+        'ステータス
+        '
+        Me.ステータス.HeaderText = "ステータス"
+        Me.ステータス.Name = "ステータス"
+        Me.ステータス.ReadOnly = True
+        Me.ステータス.Visible = False
+        Me.ステータス.Width = 61
+        '
+        '間接費率
+        '
+        DataGridViewCellStyle50.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.間接費率.DefaultCellStyle = DataGridViewCellStyle50
+        Me.間接費率.HeaderText = "間接費率"
+        Me.間接費率.Name = "間接費率"
+        Me.間接費率.ReadOnly = True
+        Me.間接費率.Visible = False
+        Me.間接費率.Width = 61
+        '
+        '間接費
+        '
+        DataGridViewCellStyle51.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle51.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.間接費.DefaultCellStyle = DataGridViewCellStyle51
+        Me.間接費.HeaderText = "間接費"
+        Me.間接費.Name = "間接費"
+        Me.間接費.ReadOnly = True
+        Me.間接費.Visible = False
+        Me.間接費.Width = 61
         '
         'DtpExpiration
         '
@@ -707,7 +1088,7 @@ Partial Class Cymn
         Me.DtpExpiration.Location = New System.Drawing.Point(935, 43)
         Me.DtpExpiration.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.DtpExpiration.Name = "DtpExpiration"
-        Me.DtpExpiration.Size = New System.Drawing.Size(140, 37)
+        Me.DtpExpiration.Size = New System.Drawing.Size(140, 22)
         Me.DtpExpiration.TabIndex = 108
         Me.DtpExpiration.TabStop = False
         Me.DtpExpiration.Value = New Date(2018, 6, 5, 23, 23, 58, 0)
@@ -722,7 +1103,7 @@ Partial Class Cymn
         Me.DtpQuoteDate.Location = New System.Drawing.Point(663, 43)
         Me.DtpQuoteDate.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.DtpQuoteDate.Name = "DtpQuoteDate"
-        Me.DtpQuoteDate.Size = New System.Drawing.Size(150, 37)
+        Me.DtpQuoteDate.Size = New System.Drawing.Size(150, 22)
         Me.DtpQuoteDate.TabIndex = 107
         Me.DtpQuoteDate.TabStop = False
         Me.DtpQuoteDate.Value = New Date(2018, 6, 5, 23, 23, 58, 0)
@@ -737,7 +1118,7 @@ Partial Class Cymn
         Me.DtpQuoteRegistration.Location = New System.Drawing.Point(389, 42)
         Me.DtpQuoteRegistration.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.DtpQuoteRegistration.Name = "DtpQuoteRegistration"
-        Me.DtpQuoteRegistration.Size = New System.Drawing.Size(150, 37)
+        Me.DtpQuoteRegistration.Size = New System.Drawing.Size(150, 22)
         Me.DtpQuoteRegistration.TabIndex = 99
         Me.DtpQuoteRegistration.TabStop = False
         Me.DtpQuoteRegistration.Value = New Date(2018, 6, 5, 23, 23, 58, 0)
@@ -775,7 +1156,7 @@ Partial Class Cymn
         Me.TxtQuoteSuffix.MaxLength = 1
         Me.TxtQuoteSuffix.Name = "TxtQuoteSuffix"
         Me.TxtQuoteSuffix.ReadOnly = True
-        Me.TxtQuoteSuffix.Size = New System.Drawing.Size(29, 39)
+        Me.TxtQuoteSuffix.Size = New System.Drawing.Size(29, 23)
         Me.TxtQuoteSuffix.TabIndex = 102
         Me.TxtQuoteSuffix.TabStop = False
         '
@@ -788,7 +1169,7 @@ Partial Class Cymn
         Me.TxtQuoteNo.MaxLength = 8
         Me.TxtQuoteNo.Name = "TxtQuoteNo"
         Me.TxtQuoteNo.ReadOnly = True
-        Me.TxtQuoteNo.Size = New System.Drawing.Size(88, 39)
+        Me.TxtQuoteNo.Size = New System.Drawing.Size(88, 23)
         Me.TxtQuoteNo.TabIndex = 101
         Me.TxtQuoteNo.TabStop = False
         '
@@ -819,99 +1200,107 @@ Partial Class Cymn
         'TxtPurchaseRemark
         '
         Me.TxtPurchaseRemark.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtPurchaseRemark.Location = New System.Drawing.Point(127, 422)
+        Me.TxtPurchaseRemark.Location = New System.Drawing.Point(128, 426)
         Me.TxtPurchaseRemark.MaxLength = 50
         Me.TxtPurchaseRemark.Name = "TxtPurchaseRemark"
-        Me.TxtPurchaseRemark.Size = New System.Drawing.Size(339, 39)
+        Me.TxtPurchaseRemark.Size = New System.Drawing.Size(277, 23)
         Me.TxtPurchaseRemark.TabIndex = 6
+        Me.TxtPurchaseRemark.Visible = False
         '
         'LblPurchaseRemarks
         '
         Me.LblPurchaseRemarks.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblPurchaseRemarks.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblPurchaseRemarks.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblPurchaseRemarks.Location = New System.Drawing.Point(11, 422)
+        Me.LblPurchaseRemarks.Location = New System.Drawing.Point(12, 426)
         Me.LblPurchaseRemarks.Name = "LblPurchaseRemarks"
         Me.LblPurchaseRemarks.Size = New System.Drawing.Size(110, 23)
         Me.LblPurchaseRemarks.TabIndex = 110
         Me.LblPurchaseRemarks.Text = "発注備考"
         Me.LblPurchaseRemarks.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LblPurchaseRemarks.Visible = False
         '
         'LblOrderRemarks
         '
         Me.LblOrderRemarks.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblOrderRemarks.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblOrderRemarks.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblOrderRemarks.Location = New System.Drawing.Point(11, 393)
+        Me.LblOrderRemarks.Location = New System.Drawing.Point(12, 397)
         Me.LblOrderRemarks.Name = "LblOrderRemarks"
         Me.LblOrderRemarks.Size = New System.Drawing.Size(110, 23)
         Me.LblOrderRemarks.TabIndex = 109
         Me.LblOrderRemarks.Text = "受注備考"
         Me.LblOrderRemarks.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LblOrderRemarks.Visible = False
         '
         'TxtOrderRemark
         '
         Me.TxtOrderRemark.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtOrderRemark.Location = New System.Drawing.Point(127, 393)
+        Me.TxtOrderRemark.Location = New System.Drawing.Point(128, 397)
         Me.TxtOrderRemark.MaxLength = 50
         Me.TxtOrderRemark.Name = "TxtOrderRemark"
-        Me.TxtOrderRemark.Size = New System.Drawing.Size(339, 39)
+        Me.TxtOrderRemark.Size = New System.Drawing.Size(277, 23)
         Me.TxtOrderRemark.TabIndex = 5
+        Me.TxtOrderRemark.Visible = False
         '
         'TxtVat
         '
         Me.TxtVat.BackColor = System.Drawing.Color.White
         Me.TxtVat.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtVat.Location = New System.Drawing.Point(765, 422)
+        Me.TxtVat.Location = New System.Drawing.Point(290, 464)
         Me.TxtVat.MaxLength = 10
         Me.TxtVat.Name = "TxtVat"
         Me.TxtVat.ReadOnly = True
-        Me.TxtVat.Size = New System.Drawing.Size(231, 39)
+        Me.TxtVat.Size = New System.Drawing.Size(52, 23)
         Me.TxtVat.TabIndex = 8
         Me.TxtVat.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.TxtVat.Visible = False
         '
         'LblVAT
         '
         Me.LblVAT.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblVAT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblVAT.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblVAT.Location = New System.Drawing.Point(659, 422)
+        Me.LblVAT.Location = New System.Drawing.Point(238, 464)
         Me.LblVAT.Name = "LblVAT"
-        Me.LblVAT.Size = New System.Drawing.Size(100, 23)
+        Me.LblVAT.Size = New System.Drawing.Size(46, 23)
         Me.LblVAT.TabIndex = 118
         Me.LblVAT.Text = "VAT(%)"
         Me.LblVAT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LblVAT.Visible = False
         '
         'TxtPph
         '
         Me.TxtPph.BackColor = System.Drawing.Color.White
         Me.TxtPph.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtPph.Location = New System.Drawing.Point(765, 393)
+        Me.TxtPph.Location = New System.Drawing.Point(180, 464)
         Me.TxtPph.MaxLength = 10
         Me.TxtPph.Name = "TxtPph"
         Me.TxtPph.ReadOnly = True
-        Me.TxtPph.Size = New System.Drawing.Size(231, 39)
+        Me.TxtPph.Size = New System.Drawing.Size(52, 23)
         Me.TxtPph.TabIndex = 7
         Me.TxtPph.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.TxtPph.Visible = False
         '
         'LblPph
         '
         Me.LblPph.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblPph.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblPph.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblPph.Location = New System.Drawing.Point(659, 393)
+        Me.LblPph.Location = New System.Drawing.Point(127, 464)
         Me.LblPph.Name = "LblPph"
-        Me.LblPph.Size = New System.Drawing.Size(100, 23)
+        Me.LblPph.Size = New System.Drawing.Size(47, 23)
         Me.LblPph.TabIndex = 120
         Me.LblPph.Text = "PPH"
         Me.LblPph.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LblPph.Visible = False
         '
         'LblHyphen
         '
         Me.LblHyphen.AutoSize = True
         Me.LblHyphen.Location = New System.Drawing.Point(221, 49)
         Me.LblHyphen.Name = "LblHyphen"
-        Me.LblHyphen.Size = New System.Drawing.Size(22, 24)
+        Me.LblHyphen.Size = New System.Drawing.Size(11, 12)
         Me.LblHyphen.TabIndex = 106
         Me.LblHyphen.Text = "-"
         '
@@ -922,7 +1311,7 @@ Partial Class Cymn
         Me.TxtCustomerPO.Location = New System.Drawing.Point(389, 12)
         Me.TxtCustomerPO.MaxLength = 20
         Me.TxtCustomerPO.Name = "TxtCustomerPO"
-        Me.TxtCustomerPO.Size = New System.Drawing.Size(88, 39)
+        Me.TxtCustomerPO.Size = New System.Drawing.Size(88, 23)
         Me.TxtCustomerPO.TabIndex = 1
         '
         'LblCustmerPO
@@ -956,7 +1345,7 @@ Partial Class Cymn
         Me.CmWarehouse.Items.AddRange(New Object() {"RegularShip", "DHL", "Air", "Ship"})
         Me.CmWarehouse.Location = New System.Drawing.Point(1127, 129)
         Me.CmWarehouse.Name = "CmWarehouse"
-        Me.CmWarehouse.Size = New System.Drawing.Size(200, 38)
+        Me.CmWarehouse.Size = New System.Drawing.Size(200, 23)
         Me.CmWarehouse.TabIndex = 314
         '
         'TxtRate
@@ -968,7 +1357,7 @@ Partial Class Cymn
         Me.TxtRate.MaxLength = 20
         Me.TxtRate.Name = "TxtRate"
         Me.TxtRate.ReadOnly = True
-        Me.TxtRate.Size = New System.Drawing.Size(200, 39)
+        Me.TxtRate.Size = New System.Drawing.Size(200, 23)
         Me.TxtRate.TabIndex = 322
         Me.TxtRate.TabStop = False
         '
@@ -1004,7 +1393,7 @@ Partial Class Cymn
         Me.CmCurrency.Items.AddRange(New Object() {"RegularShip", "DHL", "Air", "Ship"})
         Me.CmCurrency.Location = New System.Drawing.Point(765, 187)
         Me.CmCurrency.Name = "CmCurrency"
-        Me.CmCurrency.Size = New System.Drawing.Size(200, 38)
+        Me.CmCurrency.Size = New System.Drawing.Size(200, 23)
         Me.CmCurrency.TabIndex = 319
         '
         'TxtChangeCurrency
@@ -1012,115 +1401,225 @@ Partial Class Cymn
         Me.TxtChangeCurrency.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.TxtChangeCurrency.Enabled = False
         Me.TxtChangeCurrency.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtChangeCurrency.Location = New System.Drawing.Point(577, 480)
+        Me.TxtChangeCurrency.Location = New System.Drawing.Point(61, 490)
         Me.TxtChangeCurrency.MaxLength = 20
         Me.TxtChangeCurrency.Name = "TxtChangeCurrency"
         Me.TxtChangeCurrency.ReadOnly = True
-        Me.TxtChangeCurrency.Size = New System.Drawing.Size(70, 39)
+        Me.TxtChangeCurrency.Size = New System.Drawing.Size(60, 23)
         Me.TxtChangeCurrency.TabIndex = 326
         Me.TxtChangeCurrency.TabStop = False
         Me.TxtChangeCurrency.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.TxtChangeCurrency.Visible = False
         '
         'LblChangeCurrency
         '
         Me.LblChangeCurrency.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblChangeCurrency.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblChangeCurrency.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblChangeCurrency.Location = New System.Drawing.Point(471, 480)
+        Me.LblChangeCurrency.Location = New System.Drawing.Point(11, 490)
         Me.LblChangeCurrency.Name = "LblChangeCurrency"
-        Me.LblChangeCurrency.Size = New System.Drawing.Size(100, 23)
+        Me.LblChangeCurrency.Size = New System.Drawing.Size(44, 23)
         Me.LblChangeCurrency.TabIndex = 325
         Me.LblChangeCurrency.Text = "通貨"
         Me.LblChangeCurrency.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LblChangeCurrency.Visible = False
         '
         'TxtIDRCurrency
         '
         Me.TxtIDRCurrency.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.TxtIDRCurrency.Enabled = False
         Me.TxtIDRCurrency.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtIDRCurrency.Location = New System.Drawing.Point(577, 394)
+        Me.TxtIDRCurrency.Location = New System.Drawing.Point(61, 464)
         Me.TxtIDRCurrency.MaxLength = 20
         Me.TxtIDRCurrency.Name = "TxtIDRCurrency"
         Me.TxtIDRCurrency.ReadOnly = True
-        Me.TxtIDRCurrency.Size = New System.Drawing.Size(70, 39)
+        Me.TxtIDRCurrency.Size = New System.Drawing.Size(60, 23)
         Me.TxtIDRCurrency.TabIndex = 324
         Me.TxtIDRCurrency.TabStop = False
         Me.TxtIDRCurrency.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.TxtIDRCurrency.Visible = False
         '
         'LblIDRCurrency
         '
         Me.LblIDRCurrency.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblIDRCurrency.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblIDRCurrency.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblIDRCurrency.Location = New System.Drawing.Point(471, 394)
+        Me.LblIDRCurrency.Location = New System.Drawing.Point(11, 464)
         Me.LblIDRCurrency.Name = "LblIDRCurrency"
-        Me.LblIDRCurrency.Size = New System.Drawing.Size(100, 23)
+        Me.LblIDRCurrency.Size = New System.Drawing.Size(44, 23)
         Me.LblIDRCurrency.TabIndex = 323
         Me.LblIDRCurrency.Text = "通貨"
         Me.LblIDRCurrency.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LblIDRCurrency.Visible = False
         '
         'TxtCurrencyVatAmount
         '
         Me.TxtCurrencyVatAmount.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.TxtCurrencyVatAmount.Enabled = False
         Me.TxtCurrencyVatAmount.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtCurrencyVatAmount.Location = New System.Drawing.Point(764, 480)
+        Me.TxtCurrencyVatAmount.Location = New System.Drawing.Point(65, 526)
         Me.TxtCurrencyVatAmount.MaxLength = 10
         Me.TxtCurrencyVatAmount.Name = "TxtCurrencyVatAmount"
         Me.TxtCurrencyVatAmount.ReadOnly = True
-        Me.TxtCurrencyVatAmount.Size = New System.Drawing.Size(231, 39)
+        Me.TxtCurrencyVatAmount.Size = New System.Drawing.Size(52, 23)
         Me.TxtCurrencyVatAmount.TabIndex = 327
         Me.TxtCurrencyVatAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.TxtCurrencyVatAmount.Visible = False
         '
         'LblCurrencyVatAmount
         '
         Me.LblCurrencyVatAmount.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblCurrencyVatAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblCurrencyVatAmount.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblCurrencyVatAmount.Location = New System.Drawing.Point(658, 480)
+        Me.LblCurrencyVatAmount.Location = New System.Drawing.Point(12, 526)
         Me.LblCurrencyVatAmount.Name = "LblCurrencyVatAmount"
-        Me.LblCurrencyVatAmount.Size = New System.Drawing.Size(100, 23)
+        Me.LblCurrencyVatAmount.Size = New System.Drawing.Size(47, 23)
         Me.LblCurrencyVatAmount.TabIndex = 328
         Me.LblCurrencyVatAmount.Text = "VAT"
         Me.LblCurrencyVatAmount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LblCurrencyVatAmount.Visible = False
         '
-        'TxtCurrencyOrderTotal
+        'txtProfitmarginRate
         '
-        Me.TxtCurrencyOrderTotal.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.TxtCurrencyOrderTotal.Enabled = False
-        Me.TxtCurrencyOrderTotal.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtCurrencyOrderTotal.Location = New System.Drawing.Point(1108, 480)
-        Me.TxtCurrencyOrderTotal.MaxLength = 10
-        Me.TxtCurrencyOrderTotal.Name = "TxtCurrencyOrderTotal"
-        Me.TxtCurrencyOrderTotal.ReadOnly = True
-        Me.TxtCurrencyOrderTotal.Size = New System.Drawing.Size(231, 39)
-        Me.TxtCurrencyOrderTotal.TabIndex = 329
-        Me.TxtCurrencyOrderTotal.TabStop = False
-        Me.TxtCurrencyOrderTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtProfitmarginRate.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.txtProfitmarginRate.Enabled = False
+        Me.txtProfitmarginRate.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.txtProfitmarginRate.Location = New System.Drawing.Point(938, 481)
+        Me.txtProfitmarginRate.MaxLength = 10
+        Me.txtProfitmarginRate.Name = "txtProfitmarginRate"
+        Me.txtProfitmarginRate.ReadOnly = True
+        Me.txtProfitmarginRate.Size = New System.Drawing.Size(187, 23)
+        Me.txtProfitmarginRate.TabIndex = 329
+        Me.txtProfitmarginRate.TabStop = False
+        Me.txtProfitmarginRate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'LblCurrencyOrderAmount
+        'lblProfitmarginRate
         '
-        Me.LblCurrencyOrderAmount.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.LblCurrencyOrderAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblCurrencyOrderAmount.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblCurrencyOrderAmount.Location = New System.Drawing.Point(1002, 480)
-        Me.LblCurrencyOrderAmount.Name = "LblCurrencyOrderAmount"
-        Me.LblCurrencyOrderAmount.Size = New System.Drawing.Size(100, 23)
-        Me.LblCurrencyOrderAmount.TabIndex = 330
-        Me.LblCurrencyOrderAmount.Text = "受注金額"
-        Me.LblCurrencyOrderAmount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lblProfitmarginRate.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.lblProfitmarginRate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblProfitmarginRate.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.lblProfitmarginRate.Location = New System.Drawing.Point(780, 481)
+        Me.lblProfitmarginRate.Name = "lblProfitmarginRate"
+        Me.lblProfitmarginRate.Size = New System.Drawing.Size(152, 23)
+        Me.lblProfitmarginRate.TabIndex = 330
+        Me.lblProfitmarginRate.Text = "利益率"
+        Me.lblProfitmarginRate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'txtGrossmarginRate
+        '
+        Me.txtGrossmarginRate.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.txtGrossmarginRate.Enabled = False
+        Me.txtGrossmarginRate.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.txtGrossmarginRate.Location = New System.Drawing.Point(576, 484)
+        Me.txtGrossmarginRate.MaxLength = 10
+        Me.txtGrossmarginRate.Name = "txtGrossmarginRate"
+        Me.txtGrossmarginRate.ReadOnly = True
+        Me.txtGrossmarginRate.Size = New System.Drawing.Size(187, 23)
+        Me.txtGrossmarginRate.TabIndex = 339
+        Me.txtGrossmarginRate.TabStop = False
+        Me.txtGrossmarginRate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'lblGrossmargin
+        '
+        Me.lblGrossmargin.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.lblGrossmargin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblGrossmargin.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.lblGrossmargin.Location = New System.Drawing.Point(418, 484)
+        Me.lblGrossmargin.Name = "lblGrossmargin"
+        Me.lblGrossmargin.Size = New System.Drawing.Size(152, 23)
+        Me.lblGrossmargin.TabIndex = 340
+        Me.lblGrossmargin.Text = "粗利率（p）"
+        Me.lblGrossmargin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'TxtTotal
+        '
+        Me.TxtTotal.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TxtTotal.Enabled = False
+        Me.TxtTotal.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtTotal.Location = New System.Drawing.Point(576, 397)
+        Me.TxtTotal.MaxLength = 10
+        Me.TxtTotal.Name = "TxtTotal"
+        Me.TxtTotal.ReadOnly = True
+        Me.TxtTotal.Size = New System.Drawing.Size(187, 23)
+        Me.TxtTotal.TabIndex = 337
+        Me.TxtTotal.TabStop = False
+        Me.TxtTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'LblOrderAmount
+        '
+        Me.LblOrderAmount.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblOrderAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblOrderAmount.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblOrderAmount.Location = New System.Drawing.Point(418, 397)
+        Me.LblOrderAmount.Name = "LblOrderAmount"
+        Me.LblOrderAmount.Size = New System.Drawing.Size(152, 23)
+        Me.LblOrderAmount.TabIndex = 338
+        Me.LblOrderAmount.Text = "売上金額（l）"
+        Me.LblOrderAmount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'TxtGrossProfit
+        '
+        Me.TxtGrossProfit.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TxtGrossProfit.Enabled = False
+        Me.TxtGrossProfit.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtGrossProfit.Location = New System.Drawing.Point(576, 455)
+        Me.TxtGrossProfit.MaxLength = 10
+        Me.TxtGrossProfit.Name = "TxtGrossProfit"
+        Me.TxtGrossProfit.ReadOnly = True
+        Me.TxtGrossProfit.Size = New System.Drawing.Size(187, 23)
+        Me.TxtGrossProfit.TabIndex = 335
+        Me.TxtGrossProfit.TabStop = False
+        Me.TxtGrossProfit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'LblGrossProfit
+        '
+        Me.LblGrossProfit.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblGrossProfit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblGrossProfit.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblGrossProfit.Location = New System.Drawing.Point(418, 455)
+        Me.LblGrossProfit.Name = "LblGrossProfit"
+        Me.LblGrossProfit.Size = New System.Drawing.Size(152, 23)
+        Me.LblGrossProfit.TabIndex = 336
+        Me.LblGrossProfit.Text = "粗利額（o）"
+        Me.LblGrossProfit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'txtPurchasecost
+        '
+        Me.txtPurchasecost.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.txtPurchasecost.Enabled = False
+        Me.txtPurchasecost.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.txtPurchasecost.Location = New System.Drawing.Point(576, 426)
+        Me.txtPurchasecost.MaxLength = 10
+        Me.txtPurchasecost.Name = "txtPurchasecost"
+        Me.txtPurchasecost.ReadOnly = True
+        Me.txtPurchasecost.Size = New System.Drawing.Size(187, 23)
+        Me.txtPurchasecost.TabIndex = 333
+        Me.txtPurchasecost.TabStop = False
+        Me.txtPurchasecost.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'lblPurchasecost
+        '
+        Me.lblPurchasecost.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.lblPurchasecost.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblPurchasecost.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.lblPurchasecost.Location = New System.Drawing.Point(418, 426)
+        Me.lblPurchasecost.Name = "lblPurchasecost"
+        Me.lblPurchasecost.Size = New System.Drawing.Size(152, 23)
+        Me.lblPurchasecost.TabIndex = 334
+        Me.lblPurchasecost.Text = "仕入原価（c）"
+        Me.lblPurchasecost.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'TxtVatAmount
         '
         Me.TxtVatAmount.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.TxtVatAmount.Enabled = False
         Me.TxtVatAmount.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtVatAmount.Location = New System.Drawing.Point(765, 451)
+        Me.TxtVatAmount.Location = New System.Drawing.Point(1225, 397)
         Me.TxtVatAmount.MaxLength = 10
         Me.TxtVatAmount.Name = "TxtVatAmount"
         Me.TxtVatAmount.ReadOnly = True
-        Me.TxtVatAmount.Size = New System.Drawing.Size(231, 39)
-        Me.TxtVatAmount.TabIndex = 331
+        Me.TxtVatAmount.Size = New System.Drawing.Size(116, 23)
+        Me.TxtVatAmount.TabIndex = 341
         Me.TxtVatAmount.TabStop = False
         Me.TxtVatAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -1129,333 +1628,59 @@ Partial Class Cymn
         Me.LblVatAmount.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblVatAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblVatAmount.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblVatAmount.Location = New System.Drawing.Point(658, 451)
+        Me.LblVatAmount.Location = New System.Drawing.Point(1142, 397)
         Me.LblVatAmount.Name = "LblVatAmount"
-        Me.LblVatAmount.Size = New System.Drawing.Size(101, 23)
-        Me.LblVatAmount.TabIndex = 332
-        Me.LblVatAmount.Text = "VAT"
+        Me.LblVatAmount.Size = New System.Drawing.Size(77, 23)
+        Me.LblVatAmount.TabIndex = 342
+        Me.LblVatAmount.Text = "VAT-OUT"
         Me.LblVatAmount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'No
+        'Label1
         '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.No.DefaultCellStyle = DataGridViewCellStyle1
-        Me.No.HeaderText = "No"
-        Me.No.Name = "No"
-        Me.No.ReadOnly = True
-        Me.No.Width = 43
+        Me.Label1.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.Label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Label1.Location = New System.Drawing.Point(132, 526)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(42, 23)
+        Me.Label1.TabIndex = 343
+        Me.Label1.Text = "見積_外貨"
+        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.Label1.Visible = False
         '
-        'メーカー
+        'TxtQuoteTotal2
         '
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.メーカー.DefaultCellStyle = DataGridViewCellStyle2
-        Me.メーカー.HeaderText = "メーカー"
-        Me.メーカー.Name = "メーカー"
-        Me.メーカー.ReadOnly = True
-        Me.メーカー.Width = 220
-        '
-        '品名
-        '
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.品名.DefaultCellStyle = DataGridViewCellStyle3
-        Me.品名.HeaderText = "品名"
-        Me.品名.Name = "品名"
-        Me.品名.ReadOnly = True
-        Me.品名.Width = 220
-        '
-        '型式
-        '
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.型式.DefaultCellStyle = DataGridViewCellStyle4
-        Me.型式.HeaderText = "型式"
-        Me.型式.Name = "型式"
-        Me.型式.ReadOnly = True
-        Me.型式.Width = 230
-        '
-        '数量
-        '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle5.Format = "N2"
-        DataGridViewCellStyle5.NullValue = "0.00"
-        Me.数量.DefaultCellStyle = DataGridViewCellStyle5
-        Me.数量.HeaderText = "数量"
-        Me.数量.Name = "数量"
-        Me.数量.ReadOnly = True
-        Me.数量.Width = 80
-        '
-        '単位
-        '
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.単位.DefaultCellStyle = DataGridViewCellStyle6
-        Me.単位.HeaderText = "単位"
-        Me.単位.Name = "単位"
-        Me.単位.ReadOnly = True
-        Me.単位.Width = 80
-        '
-        '仕入先コード
-        '
-        Me.仕入先コード.HeaderText = "仕入先コード"
-        Me.仕入先コード.Name = "仕入先コード"
-        Me.仕入先コード.ReadOnly = True
-        '
-        '仕入先
-        '
-        DataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.仕入先.DefaultCellStyle = DataGridViewCellStyle7
-        Me.仕入先.HeaderText = "仕入先"
-        Me.仕入先.Name = "仕入先"
-        Me.仕入先.ReadOnly = True
-        Me.仕入先.Width = 85
-        '
-        '仕入レート
-        '
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.仕入レート.DefaultCellStyle = DataGridViewCellStyle8
-        Me.仕入レート.HeaderText = "仕入レート"
-        Me.仕入レート.Name = "仕入レート"
-        Me.仕入レート.ReadOnly = True
-        Me.仕入レート.Visible = False
-        '
-        '仕入単価_外貨
-        '
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle9.Format = "N2"
-        DataGridViewCellStyle9.NullValue = "0.00"
-        Me.仕入単価_外貨.DefaultCellStyle = DataGridViewCellStyle9
-        Me.仕入単価_外貨.HeaderText = "仕入単価_外貨"
-        Me.仕入単価_外貨.Name = "仕入単価_外貨"
-        Me.仕入単価_外貨.ReadOnly = True
-        '
-        '仕入単価
-        '
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle10.Format = "N2"
-        DataGridViewCellStyle10.NullValue = "0.00"
-        Me.仕入単価.DefaultCellStyle = DataGridViewCellStyle10
-        Me.仕入単価.HeaderText = "仕入単価"
-        Me.仕入単価.Name = "仕入単価"
-        Me.仕入単価.ReadOnly = True
-        '
-        '仕入原価
-        '
-        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle11.Format = "N2"
-        DataGridViewCellStyle11.NullValue = "0.00"
-        Me.仕入原価.DefaultCellStyle = DataGridViewCellStyle11
-        Me.仕入原価.HeaderText = "仕入原価"
-        Me.仕入原価.Name = "仕入原価"
-        Me.仕入原価.ReadOnly = True
-        '
-        '関税率
-        '
-        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle12.Format = "N1"
-        DataGridViewCellStyle12.NullValue = "0.0"
-        Me.関税率.DefaultCellStyle = DataGridViewCellStyle12
-        Me.関税率.HeaderText = "関税率"
-        Me.関税率.Name = "関税率"
-        Me.関税率.ReadOnly = True
-        '
-        '関税額
-        '
-        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle13.Format = "N2"
-        DataGridViewCellStyle13.NullValue = "0.00"
-        Me.関税額.DefaultCellStyle = DataGridViewCellStyle13
-        Me.関税額.HeaderText = "関税額"
-        Me.関税額.Name = "関税額"
-        Me.関税額.ReadOnly = True
-        '
-        '前払法人税率
-        '
-        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle14.Format = "N1"
-        DataGridViewCellStyle14.NullValue = "0.0"
-        Me.前払法人税率.DefaultCellStyle = DataGridViewCellStyle14
-        Me.前払法人税率.HeaderText = "前払法人税率"
-        Me.前払法人税率.Name = "前払法人税率"
-        Me.前払法人税率.ReadOnly = True
-        Me.前払法人税率.Width = 130
-        '
-        '前払法人税額
-        '
-        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle15.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle15.Format = "N2"
-        DataGridViewCellStyle15.NullValue = "0.00"
-        Me.前払法人税額.DefaultCellStyle = DataGridViewCellStyle15
-        Me.前払法人税額.HeaderText = "前払法人税額"
-        Me.前払法人税額.Name = "前払法人税額"
-        Me.前払法人税額.ReadOnly = True
-        Me.前払法人税額.Width = 130
-        '
-        '輸送費率
-        '
-        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle16.Format = "N1"
-        DataGridViewCellStyle16.NullValue = "0.0"
-        Me.輸送費率.DefaultCellStyle = DataGridViewCellStyle16
-        Me.輸送費率.HeaderText = "輸送費率"
-        Me.輸送費率.Name = "輸送費率"
-        Me.輸送費率.ReadOnly = True
-        '
-        '輸送費額
-        '
-        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle17.Format = "N2"
-        DataGridViewCellStyle17.NullValue = "0.00"
-        Me.輸送費額.DefaultCellStyle = DataGridViewCellStyle17
-        Me.輸送費額.HeaderText = "輸送費額"
-        Me.輸送費額.Name = "輸送費額"
-        Me.輸送費額.ReadOnly = True
-        '
-        '仕入金額
-        '
-        DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle18.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle18.Format = "N2"
-        DataGridViewCellStyle18.NullValue = "0.00"
-        Me.仕入金額.DefaultCellStyle = DataGridViewCellStyle18
-        Me.仕入金額.HeaderText = "仕入金額"
-        Me.仕入金額.Name = "仕入金額"
-        Me.仕入金額.ReadOnly = True
-        '
-        '売単価
-        '
-        DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle19.Format = "N2"
-        DataGridViewCellStyle19.NullValue = "0.00"
-        Me.売単価.DefaultCellStyle = DataGridViewCellStyle19
-        Me.売単価.HeaderText = "売単価"
-        Me.売単価.Name = "売単価"
-        Me.売単価.ReadOnly = True
-        Me.売単価.Width = 80
-        '
-        '売上金額
-        '
-        DataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle20.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle20.Format = "N2"
-        DataGridViewCellStyle20.NullValue = "0.00"
-        Me.売上金額.DefaultCellStyle = DataGridViewCellStyle20
-        Me.売上金額.HeaderText = "売上金額"
-        Me.売上金額.Name = "売上金額"
-        Me.売上金額.ReadOnly = True
-        '
-        '見積単価_外貨
-        '
-        DataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle21.Format = "N2"
-        DataGridViewCellStyle21.NullValue = "0.00"
-        Me.見積単価_外貨.DefaultCellStyle = DataGridViewCellStyle21
-        Me.見積単価_外貨.HeaderText = "見積単価（外貨）"
-        Me.見積単価_外貨.Name = "見積単価_外貨"
-        Me.見積単価_外貨.ReadOnly = True
-        '
-        '見積単価
-        '
-        DataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle22.Format = "N2"
-        DataGridViewCellStyle22.NullValue = "0.00"
-        Me.見積単価.DefaultCellStyle = DataGridViewCellStyle22
-        Me.見積単価.HeaderText = "見積単価"
-        Me.見積単価.Name = "見積単価"
-        Me.見積単価.ReadOnly = True
-        '
-        '見積金額_外貨
-        '
-        DataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle23.Format = "N2"
-        DataGridViewCellStyle23.NullValue = "0.00"
-        Me.見積金額_外貨.DefaultCellStyle = DataGridViewCellStyle23
-        Me.見積金額_外貨.HeaderText = "見積金額（外貨）"
-        Me.見積金額_外貨.Name = "見積金額_外貨"
-        Me.見積金額_外貨.ReadOnly = True
-        '
-        '見積金額
-        '
-        DataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle24.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle24.Format = "N2"
-        DataGridViewCellStyle24.NullValue = "0.00"
-        Me.見積金額.DefaultCellStyle = DataGridViewCellStyle24
-        Me.見積金額.HeaderText = "見積金額"
-        Me.見積金額.Name = "見積金額"
-        Me.見積金額.ReadOnly = True
-        '
-        '粗利額
-        '
-        DataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle25.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle25.Format = "N2"
-        DataGridViewCellStyle25.NullValue = "0.00"
-        Me.粗利額.DefaultCellStyle = DataGridViewCellStyle25
-        Me.粗利額.HeaderText = "粗利額"
-        Me.粗利額.Name = "粗利額"
-        Me.粗利額.ReadOnly = True
-        '
-        '粗利率
-        '
-        DataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle26.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle26.Format = "N1"
-        DataGridViewCellStyle26.NullValue = "0.0"
-        Me.粗利率.DefaultCellStyle = DataGridViewCellStyle26
-        Me.粗利率.HeaderText = "粗利率"
-        Me.粗利率.Name = "粗利率"
-        Me.粗利率.ReadOnly = True
-        '
-        'リードタイム
-        '
-        Me.リードタイム.HeaderText = "リードタイム"
-        Me.リードタイム.Name = "リードタイム"
-        Me.リードタイム.ReadOnly = True
-        '
-        '備考
-        '
-        Me.備考.HeaderText = "備考"
-        Me.備考.Name = "備考"
-        Me.備考.ReadOnly = True
-        Me.備考.Width = 80
-        '
-        'ステータス
-        '
-        Me.ステータス.HeaderText = "ステータス"
-        Me.ステータス.Name = "ステータス"
-        Me.ステータス.ReadOnly = True
-        Me.ステータス.Visible = False
-        '
-        '間接費率
-        '
-        DataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.間接費率.DefaultCellStyle = DataGridViewCellStyle27
-        Me.間接費率.HeaderText = "間接費率"
-        Me.間接費率.Name = "間接費率"
-        Me.間接費率.ReadOnly = True
-        Me.間接費率.Visible = False
-        Me.間接費率.Width = 85
-        '
-        '間接費
-        '
-        DataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle28.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.間接費.DefaultCellStyle = DataGridViewCellStyle28
-        Me.間接費.HeaderText = "間接費"
-        Me.間接費.Name = "間接費"
-        Me.間接費.ReadOnly = True
-        Me.間接費.Visible = False
+        Me.TxtQuoteTotal2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TxtQuoteTotal2.Enabled = False
+        Me.TxtQuoteTotal2.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtQuoteTotal2.Location = New System.Drawing.Point(180, 526)
+        Me.TxtQuoteTotal2.MaxLength = 10
+        Me.TxtQuoteTotal2.Name = "TxtQuoteTotal2"
+        Me.TxtQuoteTotal2.ReadOnly = True
+        Me.TxtQuoteTotal2.Size = New System.Drawing.Size(52, 23)
+        Me.TxtQuoteTotal2.TabIndex = 344
+        Me.TxtQuoteTotal2.TabStop = False
+        Me.TxtQuoteTotal2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.TxtQuoteTotal2.Visible = False
         '
         'Cymn
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.TxtQuoteTotal2)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.TxtVatAmount)
         Me.Controls.Add(Me.LblVatAmount)
-        Me.Controls.Add(Me.TxtCurrencyOrderTotal)
-        Me.Controls.Add(Me.LblCurrencyOrderAmount)
+        Me.Controls.Add(Me.txtGrossmarginRate)
+        Me.Controls.Add(Me.lblGrossmargin)
+        Me.Controls.Add(Me.TxtTotal)
+        Me.Controls.Add(Me.LblOrderAmount)
+        Me.Controls.Add(Me.TxtGrossProfit)
+        Me.Controls.Add(Me.LblGrossProfit)
+        Me.Controls.Add(Me.txtPurchasecost)
+        Me.Controls.Add(Me.lblPurchasecost)
+        Me.Controls.Add(Me.txtProfitmarginRate)
+        Me.Controls.Add(Me.lblProfitmarginRate)
         Me.Controls.Add(Me.TxtCurrencyVatAmount)
         Me.Controls.Add(Me.LblCurrencyVatAmount)
         Me.Controls.Add(Me.TxtChangeCurrency)
@@ -1490,10 +1715,10 @@ Partial Class Cymn
         Me.Controls.Add(Me.LblQuoteNo)
         Me.Controls.Add(Me.DtpPurchaseDate)
         Me.Controls.Add(Me.DtpOrderDate)
-        Me.Controls.Add(Me.TxtOrderAmount)
-        Me.Controls.Add(Me.LblOrderAmount)
-        Me.Controls.Add(Me.TxtGrossProfit)
-        Me.Controls.Add(Me.LblGrossProfit)
+        Me.Controls.Add(Me.TxtQuoteTotal)
+        Me.Controls.Add(Me.LblQuoteAmount)
+        Me.Controls.Add(Me.txtProfitmargin)
+        Me.Controls.Add(Me.lblProfitmargin)
         Me.Controls.Add(Me.TxtItemCount)
         Me.Controls.Add(Me.LblItemCount)
         Me.Controls.Add(Me.Label2)
@@ -1501,9 +1726,8 @@ Partial Class Cymn
         Me.Controls.Add(Me.BtnBack)
         Me.Controls.Add(Me.DtpOrderRegistration)
         Me.Controls.Add(Me.BtnRegistration)
-        Me.Controls.Add(Me.TxtPurchaseAmount)
+        Me.Controls.Add(Me.TxtPurchaseTotal)
         Me.Controls.Add(Me.LblPurchaseAmount)
-        Me.Controls.Add(Me.LblPurchaseDate)
         Me.Controls.Add(Me.LblRegistration)
         Me.Controls.Add(Me.TxtSales)
         Me.Controls.Add(Me.LblSales)
@@ -1531,6 +1755,7 @@ Partial Class Cymn
         Me.Controls.Add(Me.LblOrderDate)
         Me.Controls.Add(Me.LblOrderNo)
         Me.Controls.Add(Me.DgvItemList)
+        Me.Controls.Add(Me.LblPurchaseDate)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "Cymn"
         Me.Text = "cymn"
@@ -1541,10 +1766,10 @@ Partial Class Cymn
     End Sub
     Friend WithEvents DtpPurchaseDate As DateTimePicker
     Friend WithEvents DtpOrderDate As DateTimePicker
-    Friend WithEvents TxtOrderAmount As TextBox
-    Friend WithEvents LblOrderAmount As Label
-    Friend WithEvents TxtGrossProfit As TextBox
-    Friend WithEvents LblGrossProfit As Label
+    Friend WithEvents TxtQuoteTotal As TextBox
+    Friend WithEvents LblQuoteAmount As Label
+    Friend WithEvents txtProfitmargin As TextBox
+    Friend WithEvents lblProfitmargin As Label
     Friend WithEvents TxtItemCount As TextBox
     Friend WithEvents LblItemCount As Label
     Friend WithEvents Label2 As Label
@@ -1552,7 +1777,7 @@ Partial Class Cymn
     Friend WithEvents BtnBack As Button
     Friend WithEvents DtpOrderRegistration As DateTimePicker
     Friend WithEvents BtnRegistration As Button
-    Friend WithEvents TxtPurchaseAmount As TextBox
+    Friend WithEvents TxtPurchaseTotal As TextBox
     Friend WithEvents LblPurchaseAmount As Label
     Friend WithEvents LblPurchaseDate As Label
     Friend WithEvents LblRegistration As Label
@@ -1614,8 +1839,16 @@ Partial Class Cymn
     Friend WithEvents LblIDRCurrency As Label
     Friend WithEvents TxtCurrencyVatAmount As TextBox
     Friend WithEvents LblCurrencyVatAmount As Label
-    Friend WithEvents TxtCurrencyOrderTotal As TextBox
-    Friend WithEvents LblCurrencyOrderAmount As Label
+    Friend WithEvents txtProfitmarginRate As TextBox
+    Friend WithEvents lblProfitmarginRate As Label
+    Friend WithEvents txtGrossmarginRate As TextBox
+    Friend WithEvents lblGrossmargin As Label
+    Friend WithEvents TxtTotal As TextBox
+    Friend WithEvents LblOrderAmount As Label
+    Friend WithEvents TxtGrossProfit As TextBox
+    Friend WithEvents LblGrossProfit As Label
+    Friend WithEvents txtPurchasecost As TextBox
+    Friend WithEvents lblPurchasecost As Label
     Friend WithEvents TxtVatAmount As TextBox
     Friend WithEvents LblVatAmount As Label
     Friend WithEvents No As DataGridViewTextBoxColumn
@@ -1637,6 +1870,7 @@ Partial Class Cymn
     Friend WithEvents 輸送費率 As DataGridViewTextBoxColumn
     Friend WithEvents 輸送費額 As DataGridViewTextBoxColumn
     Friend WithEvents 仕入金額 As DataGridViewTextBoxColumn
+    Friend WithEvents 売単価_外貨 As DataGridViewTextBoxColumn
     Friend WithEvents 売単価 As DataGridViewTextBoxColumn
     Friend WithEvents 売上金額 As DataGridViewTextBoxColumn
     Friend WithEvents 見積単価_外貨 As DataGridViewTextBoxColumn
@@ -1650,4 +1884,6 @@ Partial Class Cymn
     Friend WithEvents ステータス As DataGridViewTextBoxColumn
     Friend WithEvents 間接費率 As DataGridViewTextBoxColumn
     Friend WithEvents 間接費 As DataGridViewTextBoxColumn
+    Friend WithEvents Label1 As Label
+    Friend WithEvents TxtQuoteTotal2 As TextBox
 End Class
