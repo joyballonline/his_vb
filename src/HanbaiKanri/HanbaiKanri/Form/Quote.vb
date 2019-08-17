@@ -2828,7 +2828,7 @@ Public Class Quote
                 sheet.Range("A6").Value = "PaymentTerms"　'支払条件
                 sheet.Range("A7").Value = "Remarks"　     '備考
 
-                sheet.Range("H1").Value = "Customer"　           '見積日
+                sheet.Range("H1").Value = "QuotationDate(RegistrationDate)"　           '見積日
                 sheet.Range("H2").Value = "PhoneNumber"        　'電話番号
                 sheet.Range("H3").Value = "FAX"                　'FAX番号
                 sheet.Range("H4").Value = "NameOfPIC"　          '得意先担当者名
