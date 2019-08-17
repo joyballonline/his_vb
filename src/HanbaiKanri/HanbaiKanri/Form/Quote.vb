@@ -514,6 +514,8 @@ Public Class Quote
                     Dim tmp2 As Integer = ds3.Tables(RS).Rows(index)("仕入通貨")
                     DgvItemList.Rows(index).Cells("仕入通貨").Value = tmp2
                 End If
+                DgvItemList.Rows(index).Cells("仕入レート").Value = ds3.Tables(RS).Rows(index)("仕入レート")
+
                 DgvItemList.Rows(index).Cells("仕入単価_外貨").Value = ds3.Tables(RS).Rows(index)("仕入単価_外貨")
                 DgvItemList.Rows(index).Cells("仕入原価").Value = ds3.Tables(RS).Rows(index)("仕入原価")
                 DgvItemList.Rows(index).Cells("関税率").Value = ds3.Tables(RS).Rows(index)("関税率") * 100
