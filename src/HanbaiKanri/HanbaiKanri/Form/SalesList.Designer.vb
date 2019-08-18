@@ -22,6 +22,7 @@ Partial Class SalesList
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.BtnSalesView = New System.Windows.Forms.Button()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -77,7 +78,7 @@ Partial Class SalesList
         Me.Label10.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.Label10.Location = New System.Drawing.Point(10, 178)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(87, 15)
+        Me.Label10.Size = New System.Drawing.Size(163, 30)
         Me.Label10.TabIndex = 89
         Me.Label10.Text = "■表示形式"
         '
@@ -86,7 +87,7 @@ Partial Class SalesList
         Me.Label5.AutoSize = True
         Me.Label5.Location = New System.Drawing.Point(936, 43)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(17, 12)
+        Me.Label5.Size = New System.Drawing.Size(34, 24)
         Me.Label5.TabIndex = 87
         Me.Label5.Text = "～"
         '
@@ -107,7 +108,7 @@ Partial Class SalesList
         Me.TxtSales.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtSales.Location = New System.Drawing.Point(190, 148)
         Me.TxtSales.Name = "TxtSales"
-        Me.TxtSales.Size = New System.Drawing.Size(350, 22)
+        Me.TxtSales.Size = New System.Drawing.Size(350, 37)
         Me.TxtSales.TabIndex = 9
         '
         'Label7
@@ -127,7 +128,7 @@ Partial Class SalesList
         Me.TxtSalesSince.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtSalesSince.Location = New System.Drawing.Point(760, 64)
         Me.TxtSalesSince.Name = "TxtSalesSince"
-        Me.TxtSalesSince.Size = New System.Drawing.Size(369, 22)
+        Me.TxtSalesSince.Size = New System.Drawing.Size(369, 37)
         Me.TxtSalesSince.TabIndex = 7
         '
         'Label8
@@ -159,7 +160,7 @@ Partial Class SalesList
         Me.TxtCustomerCode.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtCustomerCode.Location = New System.Drawing.Point(190, 121)
         Me.TxtCustomerCode.Name = "TxtCustomerCode"
-        Me.TxtCustomerCode.Size = New System.Drawing.Size(350, 22)
+        Me.TxtCustomerCode.Size = New System.Drawing.Size(350, 37)
         Me.TxtCustomerCode.TabIndex = 4
         '
         'Label3
@@ -179,7 +180,7 @@ Partial Class SalesList
         Me.TxtTel.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtTel.Location = New System.Drawing.Point(190, 93)
         Me.TxtTel.Name = "TxtTel"
-        Me.TxtTel.Size = New System.Drawing.Size(350, 22)
+        Me.TxtTel.Size = New System.Drawing.Size(350, 37)
         Me.TxtTel.TabIndex = 3
         '
         'Label2
@@ -199,7 +200,7 @@ Partial Class SalesList
         Me.TxtAddress.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtAddress.Location = New System.Drawing.Point(190, 65)
         Me.TxtAddress.Name = "TxtAddress"
-        Me.TxtAddress.Size = New System.Drawing.Size(350, 22)
+        Me.TxtAddress.Size = New System.Drawing.Size(350, 37)
         Me.TxtAddress.TabIndex = 2
         '
         'Label1
@@ -220,7 +221,7 @@ Partial Class SalesList
         Me.LblConditions.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblConditions.Location = New System.Drawing.Point(11, 13)
         Me.LblConditions.Name = "LblConditions"
-        Me.LblConditions.Size = New System.Drawing.Size(87, 15)
+        Me.LblConditions.Size = New System.Drawing.Size(163, 30)
         Me.LblConditions.TabIndex = 71
         Me.LblConditions.Text = "■抽出条件"
         '
@@ -229,7 +230,7 @@ Partial Class SalesList
         Me.TxtCustomerName.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtCustomerName.Location = New System.Drawing.Point(190, 37)
         Me.TxtCustomerName.Name = "TxtCustomerName"
-        Me.TxtCustomerName.Size = New System.Drawing.Size(350, 22)
+        Me.TxtCustomerName.Size = New System.Drawing.Size(350, 37)
         Me.TxtCustomerName.TabIndex = 1
         '
         'BtnSearch
@@ -256,6 +257,14 @@ Partial Class SalesList
         '
         Me.DgvCymnhd.AllowUserToAddRows = False
         Me.DgvCymnhd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DgvCymnhd.DefaultCellStyle = DataGridViewCellStyle1
         Me.DgvCymnhd.Location = New System.Drawing.Point(13, 236)
         Me.DgvCymnhd.Name = "DgvCymnhd"
         Me.DgvCymnhd.ReadOnly = True
@@ -305,7 +314,7 @@ Partial Class SalesList
         Me.TxtCustomerPO.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtCustomerPO.Location = New System.Drawing.Point(760, 92)
         Me.TxtCustomerPO.Name = "TxtCustomerPO"
-        Me.TxtCustomerPO.Size = New System.Drawing.Size(369, 22)
+        Me.TxtCustomerPO.Size = New System.Drawing.Size(369, 37)
         Me.TxtCustomerPO.TabIndex = 10
         '
         'dtDateSince
@@ -317,7 +326,7 @@ Partial Class SalesList
         Me.dtDateSince.Location = New System.Drawing.Point(760, 37)
         Me.dtDateSince.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.dtDateSince.Name = "dtDateSince"
-        Me.dtDateSince.Size = New System.Drawing.Size(170, 22)
+        Me.dtDateSince.Size = New System.Drawing.Size(170, 37)
         Me.dtDateSince.TabIndex = 333
         Me.dtDateSince.Value = New Date(2019, 1, 1, 0, 0, 0, 0)
         '
@@ -330,7 +339,7 @@ Partial Class SalesList
         Me.dtDateUntil.Location = New System.Drawing.Point(959, 36)
         Me.dtDateUntil.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.dtDateUntil.Name = "dtDateUntil"
-        Me.dtDateUntil.Size = New System.Drawing.Size(170, 22)
+        Me.dtDateUntil.Size = New System.Drawing.Size(170, 37)
         Me.dtDateUntil.TabIndex = 334
         Me.dtDateUntil.Value = New Date(2019, 1, 1, 0, 0, 0, 0)
         '
@@ -360,9 +369,9 @@ Partial Class SalesList
         Me.RbtnSlip.AutoSize = True
         Me.RbtnSlip.Checked = True
         Me.RbtnSlip.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.RbtnSlip.Location = New System.Drawing.Point(3, 5)
+        Me.RbtnSlip.Location = New System.Drawing.Point(3, 3)
         Me.RbtnSlip.Name = "RbtnSlip"
-        Me.RbtnSlip.Size = New System.Drawing.Size(89, 19)
+        Me.RbtnSlip.Size = New System.Drawing.Size(164, 23)
         Me.RbtnSlip.TabIndex = 11
         Me.RbtnSlip.TabStop = True
         Me.RbtnSlip.Text = "伝票単位"
@@ -373,9 +382,9 @@ Partial Class SalesList
         Me.RbtnDetails.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.RbtnDetails.AutoSize = True
         Me.RbtnDetails.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.RbtnDetails.Location = New System.Drawing.Point(98, 5)
+        Me.RbtnDetails.Location = New System.Drawing.Point(173, 3)
         Me.RbtnDetails.Name = "RbtnDetails"
-        Me.RbtnDetails.Size = New System.Drawing.Size(89, 19)
+        Me.RbtnDetails.Size = New System.Drawing.Size(164, 23)
         Me.RbtnDetails.TabIndex = 12
         Me.RbtnDetails.Text = "明細単位"
         Me.RbtnDetails.UseVisualStyleBackColor = True
@@ -385,9 +394,9 @@ Partial Class SalesList
         Me.ChkCancelData.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.ChkCancelData.AutoSize = True
         Me.ChkCancelData.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.ChkCancelData.Location = New System.Drawing.Point(215, 5)
+        Me.ChkCancelData.Location = New System.Drawing.Point(365, 3)
         Me.ChkCancelData.Name = "ChkCancelData"
-        Me.ChkCancelData.Size = New System.Drawing.Size(139, 19)
+        Me.ChkCancelData.Size = New System.Drawing.Size(274, 23)
         Me.ChkCancelData.TabIndex = 14
         Me.ChkCancelData.Text = "取消データを含める"
         Me.ChkCancelData.UseVisualStyleBackColor = True
@@ -397,7 +406,7 @@ Partial Class SalesList
         Me.TxtSpec.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtSpec.Location = New System.Drawing.Point(760, 149)
         Me.TxtSpec.Name = "TxtSpec"
-        Me.TxtSpec.Size = New System.Drawing.Size(369, 22)
+        Me.TxtSpec.Size = New System.Drawing.Size(369, 37)
         Me.TxtSpec.TabIndex = 341
         '
         'LblSpec
@@ -417,7 +426,7 @@ Partial Class SalesList
         Me.TxtItemName.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtItemName.Location = New System.Drawing.Point(760, 121)
         Me.TxtItemName.Name = "TxtItemName"
-        Me.TxtItemName.Size = New System.Drawing.Size(369, 22)
+        Me.TxtItemName.Size = New System.Drawing.Size(369, 37)
         Me.TxtItemName.TabIndex = 339
         '
         'LblItemName
