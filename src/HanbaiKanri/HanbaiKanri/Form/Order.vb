@@ -719,8 +719,8 @@ Public Class Order
             DgvItemList.Columns("粗利率").HeaderText = "粗利率(%)" & vbCrLf & "p=(1-(b/k))*100"
 
 
-            DgvItemList.Columns("見積単価_外貨").HeaderText = "見積単価" & vbCrLf & "（原通貨）"
-            DgvItemList.Columns("見積金額_外貨").HeaderText = "見積金額" & vbCrLf & "（原通貨）"
+            DgvItemList.Columns("見積単価_外貨").HeaderText = "見積単価(原通貨)"
+            DgvItemList.Columns("見積金額_外貨").HeaderText = "見積金額(原通貨)"
 
         End If
 
@@ -1305,7 +1305,8 @@ Public Class Order
 
                     '仕入値 <> Nothing
                     '--------------------------
-                    If currentColumn = "仕入値" And DgvItemList.Rows(e.RowIndex).Cells("仕入値").Value IsNot Nothing Then
+                    'If currentColumn = "仕入値" And DgvItemList.Rows(e.RowIndex).Cells("仕入値").Value IsNot Nothing Then
+                    If DgvItemList.Rows(e.RowIndex).Cells("仕入値").Value IsNot Nothing Then
 
                         '数量 <> Nothing
                         If DgvItemList.Rows(e.RowIndex).Cells("数量").Value IsNot Nothing Then
@@ -1331,22 +1332,28 @@ Public Class Order
                             DgvItemList.Rows(e.RowIndex).Cells("仕入金額").Value = DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value + (DgvItemList.Rows(e.RowIndex).Cells("関税額").Value + DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value + DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value) * DgvItemList.Rows(e.RowIndex).Cells("数量").Value
                         End If
 
-                        '仕入単価_外貨
-                        DgvItemList("仕入単価_外貨", e.RowIndex).Value = DgvItemList("仕入値", e.RowIndex).Value * DgvItemList("仕入レート", e.RowIndex).Value
+                        '仕入単価_外貨 ここでは計算されない
+                        'DgvItemList("仕入単価_外貨", e.RowIndex).Value = DgvItemList("仕入値", e.RowIndex).Value * DgvItemList("仕入レート", e.RowIndex).Value
                     End If
 
 
-                    '売単価 <> Nothing
-                    If currentColumn = "売単価" And DgvItemList.Rows(e.RowIndex).Cells("売単価").Value IsNot Nothing Then
+                    '売単価 <> Nothing and 見積単価を入力した場合は処理しない
+                    If DgvItemList.Rows(e.RowIndex).Cells("売単価_外貨").Value IsNot Nothing And currentColumn <> "見積単価_外貨" Then
+                        DgvItemList.Rows(e.RowIndex).Cells("売単価").Value = DgvItemList.Rows(e.RowIndex).Cells("売単価_外貨").Value / TxtRate.Text
+
                         DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value = DgvItemList.Rows(e.RowIndex).Cells("売単価").Value + DgvItemList.Rows(e.RowIndex).Cells("関税額").Value + DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value + DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value
+                        DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value = Math.Truncate(DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value * 100) / 100
+
                         DgvItemList.Rows(e.RowIndex).Cells("見積単価_外貨").Value = DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value * TxtRate.Text
+                        DgvItemList.Rows(e.RowIndex).Cells("見積単価_外貨").Value = Math.Truncate(DgvItemList.Rows(e.RowIndex).Cells("見積単価_外貨").Value * 100) / 100
+
                     End If
 
 
                     '--------------------------
                     '単価入力
                     '--------------------------
-                    If currentColumn = "売単価" Or currentColumn = "数量" Then
+                    If currentColumn = "売単価_外貨" Or currentColumn = "数量" Then
                         '数量, 売単価 <> Nothing
                         '--------------------------
                         If DgvItemList.Rows(e.RowIndex).Cells("数量").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("売単価").Value IsNot Nothing Then
@@ -1362,6 +1369,7 @@ Public Class Order
                                     DgvItemList.Rows(e.RowIndex).Cells("粗利率").Value = Format(DgvItemList.Rows(e.RowIndex).Cells("粗利額").Value / DgvItemList.Rows(e.RowIndex).Cells("売上金額").Value * 100, "0.0")
                                 End If
                             End If
+
 
                         End If
 
@@ -1380,36 +1388,44 @@ Public Class Order
                             '--------------------------
                             If DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value IsNot Nothing Then
                                 DgvItemList.Rows(e.RowIndex).Cells("売単価").Value = DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value / tmp3
+                                DgvItemList.Rows(e.RowIndex).Cells("売単価_外貨").Value = DgvItemList.Rows(e.RowIndex).Cells("売単価").Value * TxtRate.Text
                                 DgvItemList.Rows(e.RowIndex).Cells("売上金額").Value = DgvItemList.Rows(e.RowIndex).Cells("売単価").Value * DgvItemList.Rows(e.RowIndex).Cells("数量").Value
                                 DgvItemList.Rows(e.RowIndex).Cells("粗利額").Value = DgvItemList.Rows(e.RowIndex).Cells("売上金額").Value - DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value
                             End If
 
+                            '関税額, 前払法人税額, 輸送費額 <> Nothing
+                            '--------------------------
+                            If DgvItemList.Rows(e.RowIndex).Cells("関税額").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value IsNot Nothing Then
+                                tmp4 = DgvItemList.Rows(e.RowIndex).Cells("関税額").Value + DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value + DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value
+
+                                DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value = DgvItemList.Rows(e.RowIndex).Cells("売単価").Value + tmp4
+                                DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value = Math.Truncate(DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value * 100) / 100
+
+                                DgvItemList.Rows(e.RowIndex).Cells("見積単価_外貨").Value = DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value * TxtRate.Text
+                                DgvItemList.Rows(e.RowIndex).Cells("見積単価_外貨").Value = Math.Truncate(DgvItemList.Rows(e.RowIndex).Cells("見積単価_外貨").Value * 100) / 100
+                            End If
+
                         End If
-                    ElseIf currentColumn = "見積単価" Or currentColumn = "見積単価_外貨" Or currentColumn = "数量" Then
+                    ElseIf currentColumn = "見積単価_外貨" Or currentColumn = "数量" Then
                         '--------------------------
                         '見積入力
                         '--------------------------
 
                         '見積単価, 売単価, 関税額, 前払法人税額, 輸送費額 <> Nothing
                         '--------------------------
-                        If currentColumn = "見積単価" Then
-                            If DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("関税額").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value IsNot Nothing Then
-                                DgvItemList.Rows(e.RowIndex).Cells("見積単価_外貨").Value = DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value * TxtRate.Text
-                                tmp4 = DgvItemList.Rows(e.RowIndex).Cells("関税額").Value + DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value + DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value
-                                DgvItemList.Rows(e.RowIndex).Cells("売単価").Value = DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value - tmp4
-                                DgvItemList.Rows(e.RowIndex).Cells("売上金額").Value = DgvItemList.Rows(e.RowIndex).Cells("売単価").Value * DgvItemList.Rows(e.RowIndex).Cells("数量").Value
-                                DgvItemList.Rows(e.RowIndex).Cells("粗利額").Value = DgvItemList.Rows(e.RowIndex).Cells("売上金額").Value - DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value
-                                DgvItemList.Rows(e.RowIndex).Cells("粗利率").Value = Format(DgvItemList.Rows(e.RowIndex).Cells("粗利額").Value / DgvItemList.Rows(e.RowIndex).Cells("売上金額").Value * 100, "0.0")
-                            End If
-                        ElseIf currentColumn = "見積単価_外貨" Then
-                            If DgvItemList.Rows(e.RowIndex).Cells("見積単価_外貨").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("関税額").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value IsNot Nothing Then
-                                DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value = DgvItemList.Rows(e.RowIndex).Cells("見積単価_外貨").Value / TxtRate.Text
-                                tmp4 = DgvItemList.Rows(e.RowIndex).Cells("関税額").Value + DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value + DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value
-                                DgvItemList.Rows(e.RowIndex).Cells("売単価").Value = DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value - tmp4
-                                DgvItemList.Rows(e.RowIndex).Cells("売上金額").Value = DgvItemList.Rows(e.RowIndex).Cells("売単価").Value * DgvItemList.Rows(e.RowIndex).Cells("数量").Value
-                                DgvItemList.Rows(e.RowIndex).Cells("粗利額").Value = DgvItemList.Rows(e.RowIndex).Cells("売上金額").Value - DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value
-                                DgvItemList.Rows(e.RowIndex).Cells("粗利率").Value = Format(DgvItemList.Rows(e.RowIndex).Cells("粗利額").Value / DgvItemList.Rows(e.RowIndex).Cells("売上金額").Value * 100, "0.0")
-                            End If
+                        If DgvItemList.Rows(e.RowIndex).Cells("見積単価_外貨").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("関税額").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value IsNot Nothing And DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value IsNot Nothing Then
+
+                            DgvItemList.Rows(e.RowIndex).Cells("見積単価_外貨").Value = Math.Truncate(DgvItemList.Rows(e.RowIndex).Cells("見積単価_外貨").Value * 100) / 100
+
+                            DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value = DgvItemList.Rows(e.RowIndex).Cells("見積単価_外貨").Value / TxtRate.Text
+                            DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value = Math.Truncate(DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value * 100) / 100
+
+                            tmp4 = DgvItemList.Rows(e.RowIndex).Cells("関税額").Value + DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value + DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value
+                            DgvItemList.Rows(e.RowIndex).Cells("売単価").Value = DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value - tmp4
+                            DgvItemList.Rows(e.RowIndex).Cells("売単価_外貨").Value = DgvItemList.Rows(e.RowIndex).Cells("売単価").Value * TxtRate.Text
+                            DgvItemList.Rows(e.RowIndex).Cells("売上金額").Value = DgvItemList.Rows(e.RowIndex).Cells("売単価").Value * DgvItemList.Rows(e.RowIndex).Cells("数量").Value
+                            DgvItemList.Rows(e.RowIndex).Cells("粗利額").Value = DgvItemList.Rows(e.RowIndex).Cells("売上金額").Value - DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value
+                            DgvItemList.Rows(e.RowIndex).Cells("粗利率").Value = Format(DgvItemList.Rows(e.RowIndex).Cells("粗利額").Value / DgvItemList.Rows(e.RowIndex).Cells("売上金額").Value * 100, "0.0")
                         End If
                     End If
 
@@ -1689,10 +1705,15 @@ Public Class Order
             For i As Integer = 0 To DgvItemList.Rows.Count - 1
                 delCellValueChanged()
                 delCellValueChanged()
-                If TxtRate.Text <> "" And DgvItemList.Rows(i).Cells("見積単価").Value IsNot Nothing Then
-                    DgvItemList.Rows(i).Cells("見積単価_外貨").Value = DgvItemList.Rows(i).Cells("見積単価").Value * TxtRate.Text
+                If DgvItemList.Rows(i).Cells("売単価").Value IsNot Nothing And DgvItemList.Rows(i).Cells("数量").Value IsNot Nothing Then
+                    DgvItemList.Rows(i).Cells("売単価_外貨").Value = DgvItemList.Rows(i).Cells("売単価").Value * TxtRate.Text
                 End If
-                If DgvItemList.Rows(i).Cells("見積単価_外貨").Value IsNot Nothing And DgvItemList.Rows(i).Cells("数量").Value IsNot Nothing Then
+                If TxtRate.Text <> "" And DgvItemList.Rows(i).Cells("見積単価").Value IsNot Nothing Then
+                    DgvItemList.Rows(i).Cells("見積単価").Value = DgvItemList.Rows(i).Cells("見積単価").Value * TxtRate.Text
+
+                    DgvItemList.Rows(i).Cells("見積単価_外貨").Value = DgvItemList.Rows(i).Cells("見積単価").Value * TxtRate.Text
+                    DgvItemList.Rows(i).Cells("見積単価_外貨").Value = Math.Truncate(DgvItemList.Rows(i).Cells("見積単価_外貨").Value * 100) / 100
+
                     DgvItemList.Rows(i).Cells("見積金額_外貨").Value = DgvItemList.Rows(i).Cells("見積単価_外貨").Value * DgvItemList.Rows(i).Cells("数量").Value
                 End If
                 setCellValueChanged()

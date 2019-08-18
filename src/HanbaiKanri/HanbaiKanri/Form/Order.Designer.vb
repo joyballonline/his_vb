@@ -374,7 +374,7 @@ Partial Class Order
         Me.LblQuoteAmount.Name = "LblQuoteAmount"
         Me.LblQuoteAmount.Size = New System.Drawing.Size(152, 23)
         Me.LblQuoteAmount.TabIndex = 163
-        Me.LblQuoteAmount.Text = "受注金額（n）"
+        Me.LblQuoteAmount.Text = "見積金額（n）"
         Me.LblQuoteAmount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'txtProfitmargin
@@ -841,7 +841,7 @@ Partial Class Order
         Me.LblPurchaseAmount.Name = "LblPurchaseAmount"
         Me.LblPurchaseAmount.Size = New System.Drawing.Size(152, 23)
         Me.LblPurchaseAmount.TabIndex = 187
-        Me.LblPurchaseAmount.Text = "発注金額（j）"
+        Me.LblPurchaseAmount.Text = "仕入金額（j）"
         Me.LblPurchaseAmount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'LblMode
@@ -1247,6 +1247,7 @@ Partial Class Order
         Me.仕入先.DefaultCellStyle = DataGridViewCellStyle5
         Me.仕入先.HeaderText = "仕入先"
         Me.仕入先.Name = "仕入先"
+        Me.仕入先.ReadOnly = True
         Me.仕入先.Width = 85
         '
         '仕入レート
@@ -1266,29 +1267,33 @@ Partial Class Order
         Me.仕入単価_外貨.HeaderText = "仕入単価（外貨）"
         Me.仕入単価_外貨.MaxInputLength = 15
         Me.仕入単価_外貨.Name = "仕入単価_外貨"
-        Me.仕入単価_外貨.Width = 140
+        Me.仕入単価_外貨.Width = 125
         '
         '仕入値
         '
         DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         DataGridViewCellStyle7.Format = "N2"
         DataGridViewCellStyle7.NullValue = "0.00"
         Me.仕入値.DefaultCellStyle = DataGridViewCellStyle7
         Me.仕入値.HeaderText = "仕入値"
         Me.仕入値.MaxInputLength = 15
         Me.仕入値.Name = "仕入値"
-        Me.仕入値.Width = 130
+        Me.仕入値.ReadOnly = True
+        Me.仕入値.Width = 125
         '
         '仕入原価
         '
         DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         DataGridViewCellStyle8.Format = "N2"
         DataGridViewCellStyle8.NullValue = "0.00"
         Me.仕入原価.DefaultCellStyle = DataGridViewCellStyle8
         Me.仕入原価.HeaderText = "仕入原価"
         Me.仕入原価.MaxInputLength = 15
         Me.仕入原価.Name = "仕入原価"
-        Me.仕入原価.Width = 140
+        Me.仕入原価.ReadOnly = True
+        Me.仕入原価.Width = 125
         '
         '関税率
         '
@@ -1302,12 +1307,14 @@ Partial Class Order
         '関税額
         '
         DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         DataGridViewCellStyle10.Format = "N2"
         DataGridViewCellStyle10.NullValue = "0.00"
         Me.関税額.DefaultCellStyle = DataGridViewCellStyle10
         Me.関税額.HeaderText = "関税額"
         Me.関税額.Name = "関税額"
-        Me.関税額.Width = 140
+        Me.関税額.ReadOnly = True
+        Me.関税額.Width = 125
         '
         '前払法人税率
         '
@@ -1322,11 +1329,13 @@ Partial Class Order
         '前払法人税額
         '
         DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         DataGridViewCellStyle12.Format = "N2"
         DataGridViewCellStyle12.NullValue = "0.00"
         Me.前払法人税額.DefaultCellStyle = DataGridViewCellStyle12
         Me.前払法人税額.HeaderText = "前払法人税額"
         Me.前払法人税額.Name = "前払法人税額"
+        Me.前払法人税額.ReadOnly = True
         Me.前払法人税額.Width = 150
         '
         '輸送費率
@@ -1341,12 +1350,14 @@ Partial Class Order
         '輸送費額
         '
         DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle14.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         DataGridViewCellStyle14.Format = "N2"
         DataGridViewCellStyle14.NullValue = "0.00"
         Me.輸送費額.DefaultCellStyle = DataGridViewCellStyle14
         Me.輸送費額.HeaderText = "輸送費額"
         Me.輸送費額.Name = "輸送費額"
-        Me.輸送費額.Width = 140
+        Me.輸送費額.ReadOnly = True
+        Me.輸送費額.Width = 125
         '
         '間接費
         '
@@ -1360,18 +1371,20 @@ Partial Class Order
         Me.間接費.Name = "間接費"
         Me.間接費.ReadOnly = True
         Me.間接費.Visible = False
-        Me.間接費.Width = 140
+        Me.間接費.Width = 125
         '
         '仕入金額
         '
         DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle16.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         DataGridViewCellStyle16.Format = "N2"
         DataGridViewCellStyle16.NullValue = "0.00"
         Me.仕入金額.DefaultCellStyle = DataGridViewCellStyle16
         Me.仕入金額.HeaderText = "仕入金額"
         Me.仕入金額.MaxInputLength = 15
         Me.仕入金額.Name = "仕入金額"
-        Me.仕入金額.Width = 140
+        Me.仕入金額.ReadOnly = True
+        Me.仕入金額.Width = 125
         '
         '売単価_外貨
         '
@@ -1382,17 +1395,19 @@ Partial Class Order
         Me.売単価_外貨.HeaderText = "売単価(外貨)"
         Me.売単価_外貨.MaxInputLength = 15
         Me.売単価_外貨.Name = "売単価_外貨"
-        Me.売単価_外貨.Width = 140
+        Me.売単価_外貨.Width = 125
         '
         '売単価
         '
         DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle18.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         DataGridViewCellStyle18.Format = "N2"
         DataGridViewCellStyle18.NullValue = "0.00"
         Me.売単価.DefaultCellStyle = DataGridViewCellStyle18
         Me.売単価.HeaderText = "売単価"
         Me.売単価.Name = "売単価"
-        Me.売単価.Width = 140
+        Me.売単価.ReadOnly = True
+        Me.売単価.Width = 125
         '
         '売上金額
         '
@@ -1405,7 +1420,7 @@ Partial Class Order
         Me.売上金額.MaxInputLength = 15
         Me.売上金額.Name = "売上金額"
         Me.売上金額.ReadOnly = True
-        Me.売上金額.Width = 140
+        Me.売上金額.Width = 125
         '
         '見積単価_外貨
         '
@@ -1416,22 +1431,25 @@ Partial Class Order
         Me.見積単価_外貨.HeaderText = "見積単価（外貨）"
         Me.見積単価_外貨.MaxInputLength = 15
         Me.見積単価_外貨.Name = "見積単価_外貨"
-        Me.見積単価_外貨.Width = 140
+        Me.見積単価_外貨.Width = 125
         '
         '見積単価
         '
         DataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle21.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         DataGridViewCellStyle21.Format = "N2"
         DataGridViewCellStyle21.NullValue = "0.00"
         Me.見積単価.DefaultCellStyle = DataGridViewCellStyle21
         Me.見積単価.HeaderText = "見積単価"
         Me.見積単価.MaxInputLength = 15
         Me.見積単価.Name = "見積単価"
-        Me.見積単価.Width = 140
+        Me.見積単価.ReadOnly = True
+        Me.見積単価.Width = 125
         '
         '見積金額_外貨
         '
         DataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle22.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         DataGridViewCellStyle22.Format = "N2"
         DataGridViewCellStyle22.NullValue = "0.00"
         Me.見積金額_外貨.DefaultCellStyle = DataGridViewCellStyle22
@@ -1439,18 +1457,20 @@ Partial Class Order
         Me.見積金額_外貨.MaxInputLength = 15
         Me.見積金額_外貨.Name = "見積金額_外貨"
         Me.見積金額_外貨.ReadOnly = True
-        Me.見積金額_外貨.Width = 140
+        Me.見積金額_外貨.Width = 125
         '
         '見積金額
         '
         DataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle23.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         DataGridViewCellStyle23.Format = "N2"
         DataGridViewCellStyle23.NullValue = "0.00"
         Me.見積金額.DefaultCellStyle = DataGridViewCellStyle23
         Me.見積金額.HeaderText = "見積金額"
         Me.見積金額.MaxInputLength = 15
         Me.見積金額.Name = "見積金額"
-        Me.見積金額.Width = 140
+        Me.見積金額.ReadOnly = True
+        Me.見積金額.Width = 125
         '
         '粗利額
         '
@@ -1462,18 +1482,16 @@ Partial Class Order
         Me.粗利額.HeaderText = "粗利額"
         Me.粗利額.Name = "粗利額"
         Me.粗利額.ReadOnly = True
-        Me.粗利額.Width = 140
+        Me.粗利額.Width = 125
         '
         '粗利率
         '
         DataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle25.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         DataGridViewCellStyle25.Format = "N1"
         DataGridViewCellStyle25.NullValue = "0.0"
         Me.粗利率.DefaultCellStyle = DataGridViewCellStyle25
         Me.粗利率.HeaderText = "粗利率"
         Me.粗利率.Name = "粗利率"
-        Me.粗利率.ReadOnly = True
         '
         'リードタイム
         '
