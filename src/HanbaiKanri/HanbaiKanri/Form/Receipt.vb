@@ -90,6 +90,7 @@ Public Class Receipt
             LblAdd.Text = "GoodsReceiptThisTime"
             LblReceiptDate.Text = "GoodsReceiptDate"
             LblWarehouse.Text = "Warehouse"
+            LblIDRCurrency.Text = "Currency"
 
             LblRemarks.Text = "Remarks"
             LblCount1.Text = "Record"
@@ -398,6 +399,21 @@ Public Class Receipt
 
             '発注基本取得
             Dim dsHattyu As DataSet = getDsData("t20_hattyu", Sql)
+
+            '通貨の表示
+            Dim curds As DataSet  'm25_currency
+            Dim cur As String
+            Dim sql_cur As String
+            If IsDBNull(dsHattyu.Tables(RS).Rows(0)("通貨")) Then
+                cur = vbNullString
+            Else
+                sql_cur = " and 採番キー = " & dsHattyu.Tables(RS).Rows(0)("通貨")
+                curds = getDsData("m25_currency", sql_cur)
+
+                cur = curds.Tables(RS).Rows(0)("通貨コード")
+            End If
+            TxtIDRCurrency.Text = cur
+
 
             'Sql = " SELECT t43.*, t42.取消区分, t42.入庫日, t70.倉庫コード, t70.入出庫種別, t70.引当区分 "
             Sql = " SELECT t43.*, t42.取消区分, t42.入庫日, t70.倉庫コード, t70.入出庫種別 "
