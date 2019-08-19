@@ -247,8 +247,12 @@ Public Class Cymn
         txtProfitmargin.Text = decTmp.ToString("N2")
 
         '利益率
-        decTmp = decTmp / ds1.Tables(RS).Rows(0)("見積金額").ToString * 100
-        txtProfitmarginRate.Text = decTmp.ToString("N1")
+        If rmNullDecimal(ds1.Tables(RS).Rows(0)("見積金額")) = 0 Then
+            txtProfitmarginRate.Text = "0.0"
+        Else
+            decTmp = decTmp / rmNullDecimal(ds1.Tables(RS).Rows(0)("見積金額")) * 100
+            txtProfitmarginRate.Text = decTmp.ToString("N1")
+        End If
 
         'VAT-OUT
         TxtVatAmount.Text = ((TxtQuoteTotal.Text * TxtVat.Text) / 100).ToString("N2")
@@ -363,8 +367,12 @@ Public Class Cymn
         TxtGrossProfit.Text = decTmp.ToString("N2")
 
         '粗利率
-        decTmp = decTmp / decSales * 100
-        txtGrossmarginRate.Text = decTmp.ToString("N1")
+        If rmNullDecimal(decSales) = 0 Then
+            txtGrossmarginRate.Text = "0.0"
+        Else
+            decTmp = decTmp / decSales * 100
+            txtGrossmarginRate.Text = decTmp.ToString("N1")
+        End If
 
         '日付のMinDate設定
         '過去日付を許可する
@@ -1942,4 +1950,25 @@ Public Class Cymn
         End If
 
     End Function
+
+    'NothingをDecimalに置換
+    Private Function rmNullDecimal(ByVal prmField As Object) As Decimal
+        If prmField Is Nothing Then
+            rmNullDecimal = 0
+            Exit Function
+        End If
+        If prmField Is DBNull.Value Then
+            rmNullDecimal = 0
+            Exit Function
+        End If
+
+        If Not IsNumeric(prmField) Then
+            rmNullDecimal = 0
+            Exit Function
+        End If
+
+        rmNullDecimal = prmField
+
+    End Function
+
 End Class
