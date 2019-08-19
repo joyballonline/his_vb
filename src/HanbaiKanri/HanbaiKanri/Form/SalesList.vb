@@ -99,8 +99,11 @@ Public Class SalesList
 
                 Sql = "SELECT"
                 Sql += " t30.*"
+                Sql += ",t10.通貨,t10.見積金額 as t10見積金額,t10.見積金額_外貨"
                 Sql += " FROM "
                 Sql += " public.t30_urighd t30 "
+                Sql += " left join t10_cymnhd t10"
+                Sql += " on t30.受注番号 = t10.受注番号 and t30.受注番号枝番 = t10.受注番号枝番"
 
                 Sql += " WHERE "
                 Sql += " t30.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
@@ -116,14 +119,14 @@ Public Class SalesList
 
                 For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
 
-                    'If IsDBNull(ds.Tables(RS).Rows(i)("通貨")) Then
-                    '    cur = vbNullString
-                    'Else
-                    '    Sql = " and 採番キー = " & ds.Tables(RS).Rows(i)("通貨")
-                    '    curds = getDsData("m25_currency", Sql)
+                    If IsDBNull(ds.Tables(RS).Rows(i)("通貨")) Then
+                        cur = vbNullString
+                    Else
+                        Sql = " and 採番キー = " & ds.Tables(RS).Rows(i)("通貨")
+                        curds = getDsData("m25_currency", Sql)
 
-                    '    cur = curds.Tables(RS).Rows(0)("通貨コード")
-                    'End If
+                        cur = curds.Tables(RS).Rows(0)("通貨コード")
+                    End If
 
 
                     DgvCymnhd.Rows.Add()
@@ -141,9 +144,10 @@ Public Class SalesList
                     DgvCymnhd.Rows(i).Cells("得意先名").Value = ds.Tables(RS).Rows(i)("得意先名")
 
                     DgvCymnhd.Rows(i).Cells("通貨_外貨").Value = cur
-                    'DgvCymnhd.Rows(i).Cells("受注金額_外貨").Value = ds.Tables(RS).Rows(i)("見積金額_外貨")
+                    DgvCymnhd.Rows(i).Cells("受注金額_外貨").Value = ds.Tables(RS).Rows(i)("見積金額_外貨")
 
-                    DgvCymnhd.Rows(i).Cells("受注金額").Value = ds.Tables(RS).Rows(i)("見積金額")
+                    'DgvCymnhd.Rows(i).Cells("受注金額").Value = ds.Tables(RS).Rows(i)("見積金額")
+                    DgvCymnhd.Rows(i).Cells("受注金額").Value = ds.Tables(RS).Rows(i)("t10見積金額")
                     DgvCymnhd.Rows(i).Cells("ＶＡＴ").Value = ds.Tables(RS).Rows(i)("ＶＡＴ")
 
                     DgvCymnhd.Rows(i).Cells("仕入金額").Value = ds.Tables(RS).Rows(i)("仕入金額")
@@ -387,7 +391,7 @@ Public Class SalesList
             DgvCymnhd.Columns.Add("得意先名", "得意先名")
 
             DgvCymnhd.Columns.Add("通貨_外貨", "販売通貨")
-            'DgvCymnhd.Columns.Add("受注金額_外貨", "受注金額" & vbCrLf & "(原通貨)")
+            DgvCymnhd.Columns.Add("受注金額_外貨", "受注金額" & vbCrLf & "(原通貨)")
 
             DgvCymnhd.Columns.Add("受注金額", "受注金額" & vbCrLf & "(" & setBaseCurrency() & ")")
             DgvCymnhd.Columns.Add("ＶＡＴ", "VAT-OUT")
@@ -411,7 +415,7 @@ Public Class SalesList
             DgvCymnhd.Columns.Add("更新日", "最終更新日")
         End If
 
-        'DgvCymnhd.Columns("受注金額_外貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvCymnhd.Columns("受注金額_外貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvCymnhd.Columns("受注金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvCymnhd.Columns("仕入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvCymnhd.Columns("粗利額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -421,7 +425,7 @@ Public Class SalesList
 
 
         '数字形式
-        'DgvCymnhd.Columns("受注金額_外貨").DefaultCellStyle.Format = "N2"
+        DgvCymnhd.Columns("受注金額_外貨").DefaultCellStyle.Format = "N2"
         DgvCymnhd.Columns("受注金額").DefaultCellStyle.Format = "N2"
         DgvCymnhd.Columns("仕入金額").DefaultCellStyle.Format = "N2"
         DgvCymnhd.Columns("粗利額").DefaultCellStyle.Format = "N2"
