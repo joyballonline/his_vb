@@ -94,9 +94,10 @@ Public Class OrderManagement
             LblOrder.Text = "JobOrder"
             LblHistory.Text = "SalesHistoryData"
             LblAdd.Text = "SalesThisTime"
-            LblSalesDate.Text = "SalesDate"
+            LblSalesDate.Text = "SalesInvoiceDate"
             LblDepositDate.Text = "DepositDate"
             LblRemarks.Text = "Remarks"
+            LblIDRCurrency.Text = "Currency"
             LblNo1.Text = "Record"
             LblNo1.Location = New Point(1272, 82)
             LblNo1.Size = New Size(66, 22)
@@ -115,6 +116,7 @@ Public Class OrderManagement
             BtnRegist.Text = "Registration"
             BtnBack.Text = "Back"
         End If
+
         If _status = CommonConst.STATUS_VIEW Then
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "ViewMode"
@@ -225,56 +227,118 @@ Public Class OrderManagement
             Dim ds3 As DataSet = _db.selectDB(Sql3, RS, reccnt)
             Dim ds4 As DataSet = _db.selectDB(Sql4, RS, reccnt)
 
+#Region "受注"
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-                DgvOrder.Columns.Add("明細", "DetailData")
+                DgvOrder.Columns.Add("明細", "LineNo")
+                DgvOrder.Columns.Add("仕入区分", "PurchasingClassification")
                 DgvOrder.Columns.Add("メーカー", "Manufacturer")
                 DgvOrder.Columns.Add("品名", "ItemName")
                 DgvOrder.Columns.Add("型式", "Spec")
-                DgvOrder.Columns.Add("受注数量", "JobOrderQuantity")
+
+                DgvOrder.Columns.Add("売単価", "OrderUnitPrice" & vbCrLf & "a")
+                DgvOrder.Columns.Add("受注数量", "JobOrderQuantity" & vbCrLf & "b")
                 DgvOrder.Columns.Add("単位", "Unit")
-                DgvOrder.Columns.Add("売上数量", "SalesQUantity")
-                DgvOrder.Columns.Add("売単価", "SellingPrice")
-                DgvOrder.Columns.Add("売上金額", "SalesAmount")
-                DgvOrder.Columns.Add("受注残数", "OrderRemainingAmount")
+                DgvOrder.Columns.Add("受注金額", "OrderAmount" & vbCrLf & "c=a*b")
+
+                DgvOrder.Columns.Add("売上数量", "SalesRegisteredQuantity" & vbCrLf & "d")
+                DgvOrder.Columns.Add("受注残数", "OrdersBacked" & vbCrLf & "e=b-d")
+                DgvOrder.Columns.Add("未登録額", "UnregisteredAmount" & vbCrLf & "f=a*e")
+
             Else
-                DgvOrder.Columns.Add("明細", "明細")
+                DgvOrder.Columns.Add("明細", "行No")
+                DgvOrder.Columns.Add("仕入区分", "仕入区分")
                 DgvOrder.Columns.Add("メーカー", "メーカー")
                 DgvOrder.Columns.Add("品名", "品名")
                 DgvOrder.Columns.Add("型式", "型式")
-                DgvOrder.Columns.Add("受注数量", "受注数量")
+
+                DgvOrder.Columns.Add("売単価", "受注単価" & vbCrLf & "a")
+                DgvOrder.Columns.Add("受注数量", "受注数量" & vbCrLf & "b")
                 DgvOrder.Columns.Add("単位", "単位")
-                DgvOrder.Columns.Add("売上数量", "売上数量")
-                DgvOrder.Columns.Add("売単価", "売単価")
-                DgvOrder.Columns.Add("売上金額", "売上金額")
-                DgvOrder.Columns.Add("受注残数", "受注残数")
+                DgvOrder.Columns.Add("受注金額", "受注金額" & vbCrLf & "c=a*b")
+
+                DgvOrder.Columns.Add("売上数量", "売上登録済数量" & vbCrLf & "d")
+                DgvOrder.Columns.Add("受注残数", "未登録数量" & vbCrLf & "e=b-d")
+                DgvOrder.Columns.Add("未登録額", "未登録額" & vbCrLf & "f=a*e")
+
+                'DgvOrder.Columns.Add("売上金額", "売上金額")
             End If
 
+            '中央寄せ
+            DgvOrder.Columns("明細").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+            DgvOrder.Columns("仕入区分").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+            DgvOrder.Columns("メーカー").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+            DgvOrder.Columns("品名").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+            DgvOrder.Columns("型式").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
+            DgvOrder.Columns("売単価").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+            DgvOrder.Columns("受注数量").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+            DgvOrder.Columns("単位").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+            DgvOrder.Columns("受注金額").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+            DgvOrder.Columns("売上数量").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+            DgvOrder.Columns("受注残数").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+            DgvOrder.Columns("未登録額").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+
+            '右寄せ
             DgvOrder.Columns("受注数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             DgvOrder.Columns("売上数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             DgvOrder.Columns("売単価").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            DgvOrder.Columns("売上金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             DgvOrder.Columns("受注残数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            DgvOrder.Columns("受注金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            DgvOrder.Columns("未登録額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
             '数字形式
             DgvOrder.Columns("受注数量").DefaultCellStyle.Format = "N2"
             DgvOrder.Columns("売上数量").DefaultCellStyle.Format = "N2"
             DgvOrder.Columns("売単価").DefaultCellStyle.Format = "N2"
-            DgvOrder.Columns("売上金額").DefaultCellStyle.Format = "N2"
             DgvOrder.Columns("受注残数").DefaultCellStyle.Format = "N2"
+            DgvOrder.Columns("受注金額").DefaultCellStyle.Format = "N2"
+            DgvOrder.Columns("未登録額").DefaultCellStyle.Format = "N2"
+
+            Dim curds As DataSet  'm25_currency
+            Dim cur As String
+            Dim Sql As String
+
+            '通貨の表示
+            If IsDBNull(ds1.Tables(RS).Rows(0)("通貨")) Then
+                cur = vbNullString
+            Else
+                Sql = " and 採番キー = " & ds1.Tables(RS).Rows(0)("通貨")
+                curds = getDsData("m25_currency", Sql)
+
+                cur = curds.Tables(RS).Rows(0)("通貨コード")
+            End If
+            TxtIDRCurrency.Text = cur
+
 
             For i As Integer = 0 To ds3.Tables(RS).Rows.Count - 1
                 DgvOrder.Rows.Add()
+
+                Dim dsSireKbn As DataSet = getDsHanyoData(CommonConst.FIXED_KEY_PURCHASING_CLASS, ds3.Tables(RS).Rows(i)("仕入区分").ToString)
+                DgvOrder.Rows(i).Cells("仕入区分").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
+                                                                dsSireKbn.Tables(RS).Rows(0)("文字２"),
+                                                                dsSireKbn.Tables(RS).Rows(0)("文字１"))
+
                 DgvOrder.Rows(i).Cells("メーカー").Value = ds3.Tables(RS).Rows(i)("メーカー")
                 DgvOrder.Rows(i).Cells("品名").Value = ds3.Tables(RS).Rows(i)("品名")
                 DgvOrder.Rows(i).Cells("型式").Value = ds3.Tables(RS).Rows(i)("型式")
+
+                DgvOrder.Rows(i).Cells("売単価").Value = ds3.Tables(RS).Rows(i)("見積単価") '売単価 = 見積単価
                 DgvOrder.Rows(i).Cells("受注数量").Value = ds3.Tables(RS).Rows(i)("受注数量")
                 DgvOrder.Rows(i).Cells("単位").Value = ds3.Tables(RS).Rows(i)("単位")
+                DgvOrder.Rows(i).Cells("受注金額").Value = DgvOrder.Rows(i).Cells("売単価").Value * DgvOrder.Rows(i).Cells("受注数量").Value
+
                 DgvOrder.Rows(i).Cells("売上数量").Value = ds3.Tables(RS).Rows(i)("売上数量")
-                DgvOrder.Rows(i).Cells("売単価").Value = ds3.Tables(RS).Rows(i)("見積単価") '売単価 = 見積単価
-                DgvOrder.Rows(i).Cells("売上金額").Value = ds3.Tables(RS).Rows(i)("見積金額")
                 DgvOrder.Rows(i).Cells("受注残数").Value = ds3.Tables(RS).Rows(i)("受注残数")
+                DgvOrder.Rows(i).Cells("未登録額").Value = ds3.Tables(RS).Rows(i)("見積単価") * ds3.Tables(RS).Rows(i)("受注残数")
+
+                'DgvOrder.Rows(i).Cells("売上金額").Value = ds3.Tables(RS).Rows(i)("見積金額")
+
             Next
+
+#End Region
+
+#Region "売上済"
 
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 DgvHistory.Columns.Add("No", "No")
@@ -288,7 +352,7 @@ Public Class OrderManagement
                 DgvHistory.Columns.Add("仕入先", "SupplierName")
                 DgvHistory.Columns.Add("売単価", "SellingPrice")
                 DgvHistory.Columns.Add("売上数量", "SalesQuantity")
-                DgvHistory.Columns.Add("売上日", "SalesDate")
+                DgvHistory.Columns.Add("売上日", "SalesInvoiceDate")
                 DgvHistory.Columns.Add("入金予定日", "PlannedDepositDate")
                 DgvHistory.Columns.Add("備考", "Remarks")
             Else
@@ -303,7 +367,7 @@ Public Class OrderManagement
                 DgvHistory.Columns.Add("仕入先", "仕入先")
                 DgvHistory.Columns.Add("売単価", "売単価")
                 DgvHistory.Columns.Add("売上数量", "売上数量")
-                DgvHistory.Columns.Add("売上日", "売上日")
+                DgvHistory.Columns.Add("売上日", "SalesInvoiceDate")
                 DgvHistory.Columns.Add("入金予定日", "入金予定日")
                 DgvHistory.Columns.Add("備考", "備考")
             End If
@@ -315,6 +379,9 @@ Public Class OrderManagement
             '数字形式
             DgvHistory.Columns("売単価").DefaultCellStyle.Format = "N2"
             DgvHistory.Columns("売上数量").DefaultCellStyle.Format = "N2"
+
+            DgvHistory.Columns("仕入先").Visible = False
+
 
             For i As Integer = 0 To ds2.Tables(RS).Rows.Count - 1
                 DgvHistory.Rows.Add()
@@ -337,9 +404,14 @@ Public Class OrderManagement
                 DgvHistory.Rows(i).Cells("備考").Value = ds2.Tables(RS).Rows(i)("備考")
             Next
 
+#End Region
+
+
+#Region "今回売上"
+
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 DgvAdd.Columns.Add("No", "No")
-                DgvAdd.Columns.Add("行番号", "LineNumber")
+                DgvAdd.Columns.Add("行番号", "LineNo")
                 DgvAdd.Columns.Add("仕入区分値", "仕入区分値")
                 DgvAdd.Columns.Add("仕入区分", "PurchasingClassification")
                 DgvAdd.Columns.Add("メーカー", "Manufacturer")
@@ -352,7 +424,7 @@ Public Class OrderManagement
                 DgvAdd.Columns.Add("備考", "Remarks")
             Else
                 DgvAdd.Columns.Add("No", "No")
-                DgvAdd.Columns.Add("行番号", "行番号")
+                DgvAdd.Columns.Add("行番号", "行No")
                 DgvAdd.Columns.Add("仕入区分値", "仕入区分値")
                 DgvAdd.Columns.Add("仕入区分", "仕入区分")
                 DgvAdd.Columns.Add("メーカー", "メーカー")
@@ -393,6 +465,7 @@ Public Class OrderManagement
             DgvAdd.Columns("売単価").ReadOnly = True
 
             DgvAdd.Columns("仕入区分値").Visible = False
+            DgvAdd.Columns("仕入先").Visible = False
 
             For index As Integer = 0 To ds3.Tables(RS).Rows.Count - 1
                 If ds3.Tables(RS).Rows(index)("受注残数") <> 0 Then
@@ -416,6 +489,9 @@ Public Class OrderManagement
                     DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("備考").Value = ds3.Tables(RS).Rows(index)("備考")
                 End If
             Next
+
+#End Region
+
 
             '行番号の振り直し
             Dim i1 As Integer = DgvOrder.Rows.Count()

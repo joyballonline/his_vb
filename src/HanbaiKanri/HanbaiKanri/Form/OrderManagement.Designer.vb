@@ -56,6 +56,8 @@ Partial Class OrderManagement
         Me.TxtCustomerPO = New System.Windows.Forms.TextBox()
         Me.DtpDepositDate = New System.Windows.Forms.DateTimePicker()
         Me.LblDepositDate = New System.Windows.Forms.Label()
+        Me.TxtIDRCurrency = New System.Windows.Forms.TextBox()
+        Me.LblIDRCurrency = New System.Windows.Forms.Label()
         CType(Me.DgvAdd, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvHistory, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvOrder, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -68,7 +70,7 @@ Partial Class OrderManagement
         Me.TxtSuffixNo.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtSuffixNo.Location = New System.Drawing.Point(351, 10)
         Me.TxtSuffixNo.Name = "TxtSuffixNo"
-        Me.TxtSuffixNo.Size = New System.Drawing.Size(36, 37)
+        Me.TxtSuffixNo.Size = New System.Drawing.Size(36, 22)
         Me.TxtSuffixNo.TabIndex = 258
         Me.TxtSuffixNo.TabStop = False
         '
@@ -91,7 +93,7 @@ Partial Class OrderManagement
         Me.DtpOrderDate.Location = New System.Drawing.Point(292, 343)
         Me.DtpOrderDate.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.DtpOrderDate.Name = "DtpOrderDate"
-        Me.DtpOrderDate.Size = New System.Drawing.Size(148, 37)
+        Me.DtpOrderDate.Size = New System.Drawing.Size(148, 22)
         Me.DtpOrderDate.TabIndex = 3
         Me.DtpOrderDate.TabStop = False
         Me.DtpOrderDate.Value = New Date(2018, 7, 25, 13, 29, 25, 0)
@@ -113,7 +115,7 @@ Partial Class OrderManagement
         Me.TxtRemarks.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtRemarks.Location = New System.Drawing.Point(844, 343)
         Me.TxtRemarks.Name = "TxtRemarks"
-        Me.TxtRemarks.Size = New System.Drawing.Size(375, 37)
+        Me.TxtRemarks.Size = New System.Drawing.Size(375, 22)
         Me.TxtRemarks.TabIndex = 4
         '
         'LblSalesDate
@@ -121,11 +123,11 @@ Partial Class OrderManagement
         Me.LblSalesDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblSalesDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblSalesDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblSalesDate.Location = New System.Drawing.Point(172, 343)
+        Me.LblSalesDate.Location = New System.Drawing.Point(132, 343)
         Me.LblSalesDate.Name = "LblSalesDate"
-        Me.LblSalesDate.Size = New System.Drawing.Size(114, 22)
+        Me.LblSalesDate.Size = New System.Drawing.Size(154, 22)
         Me.LblSalesDate.TabIndex = 253
-        Me.LblSalesDate.Text = "売上日"
+        Me.LblSalesDate.Text = "SalesInvoiceDate"
         Me.LblSalesDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'LblAdd
@@ -157,7 +159,7 @@ Partial Class OrderManagement
         Me.TxtCount3.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtCount3.Location = New System.Drawing.Point(1272, 343)
         Me.TxtCount3.Name = "TxtCount3"
-        Me.TxtCount3.Size = New System.Drawing.Size(38, 37)
+        Me.TxtCount3.Size = New System.Drawing.Size(38, 22)
         Me.TxtCount3.TabIndex = 250
         Me.TxtCount3.TabStop = False
         Me.TxtCount3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -213,7 +215,7 @@ Partial Class OrderManagement
         Me.TxtCount2.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtCount2.Location = New System.Drawing.Point(1272, 212)
         Me.TxtCount2.Name = "TxtCount2"
-        Me.TxtCount2.Size = New System.Drawing.Size(38, 37)
+        Me.TxtCount2.Size = New System.Drawing.Size(38, 22)
         Me.TxtCount2.TabIndex = 245
         Me.TxtCount2.TabStop = False
         Me.TxtCount2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -256,7 +258,7 @@ Partial Class OrderManagement
         Me.TxtCount1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtCount1.Location = New System.Drawing.Point(1272, 82)
         Me.TxtCount1.Name = "TxtCount1"
-        Me.TxtCount1.Size = New System.Drawing.Size(38, 37)
+        Me.TxtCount1.Size = New System.Drawing.Size(38, 22)
         Me.TxtCount1.TabIndex = 242
         Me.TxtCount1.TabStop = False
         Me.TxtCount1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -300,7 +302,7 @@ Partial Class OrderManagement
         Me.TxtOrderDate.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtOrderDate.Location = New System.Drawing.Point(908, 10)
         Me.TxtOrderDate.Name = "TxtOrderDate"
-        Me.TxtOrderDate.Size = New System.Drawing.Size(157, 37)
+        Me.TxtOrderDate.Size = New System.Drawing.Size(157, 22)
         Me.TxtOrderDate.TabIndex = 239
         Me.TxtOrderDate.TabStop = False
         '
@@ -311,7 +313,7 @@ Partial Class OrderManagement
         Me.TxtCustomerName.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtCustomerName.Location = New System.Drawing.Point(351, 38)
         Me.TxtCustomerName.Name = "TxtCustomerName"
-        Me.TxtCustomerName.Size = New System.Drawing.Size(333, 37)
+        Me.TxtCustomerName.Size = New System.Drawing.Size(375, 22)
         Me.TxtCustomerName.TabIndex = 238
         Me.TxtCustomerName.TabStop = False
         '
@@ -334,7 +336,7 @@ Partial Class OrderManagement
         Me.TxtCustomerCode.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtCustomerCode.Location = New System.Drawing.Point(188, 38)
         Me.TxtCustomerCode.Name = "TxtCustomerCode"
-        Me.TxtCustomerCode.Size = New System.Drawing.Size(157, 37)
+        Me.TxtCustomerCode.Size = New System.Drawing.Size(157, 22)
         Me.TxtCustomerCode.TabIndex = 236
         Me.TxtCustomerCode.TabStop = False
         '
@@ -367,7 +369,7 @@ Partial Class OrderManagement
         Me.TxtOrderNo.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtOrderNo.Location = New System.Drawing.Point(188, 10)
         Me.TxtOrderNo.Name = "TxtOrderNo"
-        Me.TxtOrderNo.Size = New System.Drawing.Size(157, 37)
+        Me.TxtOrderNo.Size = New System.Drawing.Size(157, 22)
         Me.TxtOrderNo.TabIndex = 233
         Me.TxtOrderNo.TabStop = False
         '
@@ -376,7 +378,7 @@ Partial Class OrderManagement
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(12, 10)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(0, 24)
+        Me.Label1.Size = New System.Drawing.Size(0, 12)
         Me.Label1.TabIndex = 232
         '
         'LblMode
@@ -410,7 +412,7 @@ Partial Class OrderManagement
         Me.TxtCustomerPO.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtCustomerPO.Location = New System.Drawing.Point(569, 10)
         Me.TxtCustomerPO.Name = "TxtCustomerPO"
-        Me.TxtCustomerPO.Size = New System.Drawing.Size(157, 37)
+        Me.TxtCustomerPO.Size = New System.Drawing.Size(157, 22)
         Me.TxtCustomerPO.TabIndex = 260
         Me.TxtCustomerPO.TabStop = False
         '
@@ -423,7 +425,7 @@ Partial Class OrderManagement
         Me.DtpDepositDate.Location = New System.Drawing.Point(567, 343)
         Me.DtpDepositDate.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.DtpDepositDate.Name = "DtpDepositDate"
-        Me.DtpDepositDate.Size = New System.Drawing.Size(148, 37)
+        Me.DtpDepositDate.Size = New System.Drawing.Size(148, 22)
         Me.DtpDepositDate.TabIndex = 262
         Me.DtpDepositDate.TabStop = False
         Me.DtpDepositDate.Value = New Date(2018, 7, 25, 13, 29, 25, 0)
@@ -440,10 +442,38 @@ Partial Class OrderManagement
         Me.LblDepositDate.Text = "入金予定日"
         Me.LblDepositDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'TxtIDRCurrency
+        '
+        Me.TxtIDRCurrency.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TxtIDRCurrency.Enabled = False
+        Me.TxtIDRCurrency.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtIDRCurrency.Location = New System.Drawing.Point(908, 38)
+        Me.TxtIDRCurrency.MaxLength = 20
+        Me.TxtIDRCurrency.Name = "TxtIDRCurrency"
+        Me.TxtIDRCurrency.ReadOnly = True
+        Me.TxtIDRCurrency.Size = New System.Drawing.Size(70, 23)
+        Me.TxtIDRCurrency.TabIndex = 328
+        Me.TxtIDRCurrency.TabStop = False
+        Me.TxtIDRCurrency.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'LblIDRCurrency
+        '
+        Me.LblIDRCurrency.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblIDRCurrency.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblIDRCurrency.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblIDRCurrency.Location = New System.Drawing.Point(732, 37)
+        Me.LblIDRCurrency.Name = "LblIDRCurrency"
+        Me.LblIDRCurrency.Size = New System.Drawing.Size(170, 23)
+        Me.LblIDRCurrency.TabIndex = 327
+        Me.LblIDRCurrency.Text = "通貨"
+        Me.LblIDRCurrency.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'OrderManagement
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.TxtIDRCurrency)
+        Me.Controls.Add(Me.LblIDRCurrency)
         Me.Controls.Add(Me.DtpDepositDate)
         Me.Controls.Add(Me.LblDepositDate)
         Me.Controls.Add(Me.LblCutomerNo)
@@ -519,4 +549,6 @@ Partial Class OrderManagement
     Friend WithEvents TxtCustomerPO As TextBox
     Friend WithEvents DtpDepositDate As DateTimePicker
     Friend WithEvents LblDepositDate As Label
+    Friend WithEvents TxtIDRCurrency As TextBox
+    Friend WithEvents LblIDRCurrency As Label
 End Class
