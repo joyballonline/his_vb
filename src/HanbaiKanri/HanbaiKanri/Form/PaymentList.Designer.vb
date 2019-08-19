@@ -324,9 +324,9 @@ Partial Class PaymentList
         Me.ChkZeroData.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.ChkZeroData.Location = New System.Drawing.Point(577, 121)
         Me.ChkZeroData.Name = "ChkZeroData"
-        Me.ChkZeroData.Size = New System.Drawing.Size(256, 34)
+        Me.ChkZeroData.Size = New System.Drawing.Size(286, 34)
         Me.ChkZeroData.TabIndex = 307
-        Me.ChkZeroData.Text = "支払残０を含める"
+        Me.ChkZeroData.Text = "買掛残高０を含める"
         Me.ChkZeroData.UseVisualStyleBackColor = True
         '
         'TxtInvoiceDateUntil
