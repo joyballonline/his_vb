@@ -351,24 +351,36 @@ Public Class SalesList
     Private Sub setListHd()
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
             DgvCymnhd.Columns.Add("取消", "Cancel")
+
+            DgvCymnhd.Columns.Add("受注番号", "OrderNumber")
+            DgvCymnhd.Columns.Add("受注番号枝番", "OrderVer")
+
             DgvCymnhd.Columns.Add("売上番号", "SalesNumber")
-            DgvCymnhd.Columns.Add("売上番号枝番", "SalesSubNumber")
+            DgvCymnhd.Columns.Add("売上番号枝番", "SalesVer")
             DgvCymnhd.Columns.Add("客先番号", "CustomerNumber")
             DgvCymnhd.Columns.Add("売上日", "SalesDate")
-            DgvCymnhd.Columns.Add("受注番号", "OrderNumber")
-            DgvCymnhd.Columns.Add("受注番号枝番", "JobOrderSubNumber")
+
             DgvCymnhd.Columns.Add("受注日", "JobOrderDate")
             DgvCymnhd.Columns.Add("得意先コード", "CustomerCode")
             DgvCymnhd.Columns.Add("得意先名", "CustomerName")
+
+            DgvCymnhd.Columns.Add("通貨_外貨", "Currency")
+            DgvCymnhd.Columns.Add("受注金額_外貨", "OrderAmount" & vbCrLf & "(ForeignCurrency)")
+
+            DgvCymnhd.Columns.Add("受注金額", "OrderAmount" & vbCrLf & "(" & setBaseCurrency() & ")")
+            DgvCymnhd.Columns.Add("ＶＡＴ", "VAT-OUT")
+
+            DgvCymnhd.Columns.Add("仕入金額", "PurchaseAmount" & vbCrLf & "(" & setBaseCurrency() & ")")
+            DgvCymnhd.Columns.Add("粗利額", "Profitmargin" & vbCrLf & "(" & setBaseCurrency() & ")")
+            DgvCymnhd.Columns.Add("粗利率", "ProfitmarginRate(%)")
+
             DgvCymnhd.Columns.Add("得意先郵便番号", "PostalCode")
             DgvCymnhd.Columns.Add("得意先住所", "Address")
             DgvCymnhd.Columns.Add("得意先電話番号", "PhoneNumber")
             DgvCymnhd.Columns.Add("得意先ＦＡＸ", "FAX")
             DgvCymnhd.Columns.Add("得意先担当者名", "NameOfPIC")
             DgvCymnhd.Columns.Add("得意先担当者役職", "PositionPICCustomer")
-            DgvCymnhd.Columns.Add("ＶＡＴ", "ＶＡＴ")
-            DgvCymnhd.Columns.Add("売上金額", "SalesAmount")
-            DgvCymnhd.Columns.Add("粗利額", "GrossMargin")
+
             DgvCymnhd.Columns.Add("支払条件", "PeymentTerms")
             DgvCymnhd.Columns.Add("営業担当者", "SalesPersonInCharge")
             DgvCymnhd.Columns.Add("入力担当者", "PICForInputting")
@@ -381,7 +393,7 @@ Public Class SalesList
             DgvCymnhd.Columns.Add("受注番号", "受注Ver")
 
             DgvCymnhd.Columns.Add("売上番号", "売上番号")
-            DgvCymnhd.Columns.Add("売上番号枝番", "売上番号枝番")
+            DgvCymnhd.Columns.Add("売上番号枝番", "売上Ver")
             DgvCymnhd.Columns.Add("客先番号", "客先番号")
             DgvCymnhd.Columns.Add("売上日", "売上日")
             DgvCymnhd.Columns.Add("受注番号", "受注番号")
