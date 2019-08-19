@@ -332,8 +332,8 @@ Public Class Ordering
             DgvItemList.Columns("仕入原価_外貨").HeaderText = "PurchasingCost" & vbCrLf & "(OriginalCurrency)"
             DgvItemList.Columns("仕入原価").HeaderText = "PurchasingCost(" & setBaseCurrency() & ")" & vbCrLf & "c=a*b"
 
-            DgvItemList.Columns("仕入金額_外貨").HeaderText = "PurchaseAmountForeignCurrency" & vbCrLf & "(OriginalCurrency)"
-            DgvItemList.Columns("仕入金額").HeaderText = "PurchaseAmount" & vbCrLf & "j=a*(b+e+g+i)"
+            DgvItemList.Columns("仕入金額_外貨").HeaderText = "PurchaseAmount" & vbCrLf & "(OriginalCurrency)"
+            DgvItemList.Columns("仕入金額").HeaderText = "PurchaseAmount(" & setBaseCurrency() & ")" & vbCrLf & "j=a*(b+e+g+i)"
 
             DgvItemList.Columns("関税率").HeaderText = "CustomsDutyRate" & vbCrLf & "d"
             DgvItemList.Columns("関税額").HeaderText = "CustomsDutyParUnit" & vbCrLf & "e=b*d"
@@ -595,7 +595,7 @@ Public Class Ordering
         Dim decOverhead As Decimal = 0
 
         tmp_cur = 0
-        tmp_cur = 2
+        tmp_cur2 = 0
         decOverhead2 = 0
         For i As Integer = 0 To dsHattyudt.Tables(RS).Rows.Count - 1
             DgvItemList.Rows.Add()
