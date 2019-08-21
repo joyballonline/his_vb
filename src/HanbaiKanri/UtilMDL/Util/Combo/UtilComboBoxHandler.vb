@@ -1,52 +1,52 @@
-Imports System.Windows.Forms
+﻿Imports System.Windows.Forms
 Namespace Combo
     '===============================================================================
     '
-    '  ���[�e�B���e�B�N���X
-    '    �i�N���X���j    UtilComboBoxHandler
-    '    �i�����@�\���j      �R���{�{�b�N�X�̐���@�\���
-    '    �i�{MDL�g�p�O��j   ���ɂȂ�
-    '    �i���l�j            
+    '  ユーティリティクラス
+    '    （クラス名）    UtilComboBoxHandler
+    '    （処理機能名）      コンボボックスの制御機能を提供
+    '    （本MDL使用前提）   特になし
+    '    （備考）            
     '
     '===============================================================================
-    '  ����  ���O          ��  �t      �}�[�N      ���e
+    '  履歴  名前          日  付      マーク      内容
     '-------------------------------------------------------------------------------
-    '  (1)   Laevigata, Inc.    2006/04/22             �V�K
-    '  (2)   Laevigata, Inc.    2006/06/15             getRelationObj��ǉ�
+    '  (1)   Laevigata, Inc.    2006/04/22             新規
+    '  (2)   Laevigata, Inc.    2006/06/15             getRelationObjを追加
     '-------------------------------------------------------------------------------
     Public Class UtilComboBoxHandler
 
         '===============================================================================
-        '�����o�[�ϐ���`
+        'メンバー変数定義
         '===============================================================================
-        Private _target As ComboBox     '�ΏۃR���{�{�b�N�X
+        Private _target As ComboBox     '対象コンボボックス
 
         '===============================================================================
-        ' �R���X�g���N�^
-        '   �����̓p�����^   �FprmTarget    �ΏۃR���{�{�b�N�X
+        ' コンストラクタ
+        '   ●入力パラメタ   ：prmTarget    対象コンボボックス
         '===============================================================================
         ''' <summary>
-        ''' �R���{�{�b�N�X�n���h���̃C���X�^���X�𐶐�����
+        ''' コンボボックスハンドラのインスタンスを生成する
         ''' </summary>
-        ''' <param name="prmTarget">����ΏۂƂȂ�R���{�{�b�N�X</param>
+        ''' <param name="prmTarget">操作対象となるコンボボックス</param>
         ''' <remarks></remarks>
         Public Sub New(ByRef prmTarget As ComboBox)
             If prmTarget Is Nothing Then
-                Throw (New UsrDefException("�R���{�{�b�N�X�̃C���X�^���X���ݒ肳��Ă��܂���"))
+                Throw (New UsrDefException("コンボボックスのインスタンスが設定されていません"))
             End If
-            _target = prmTarget '�����o�[�փR���{�{�b�N�X��ݒ�
+            _target = prmTarget 'メンバーへコンボボックスを設定
         End Sub
 
         '-------------------------------------------------------------------------------
-        '   �`���~
-        '   �i�����T�v�j�R���{�{�b�N�X���ڒǉ����̏�����������ړI�Ƃ��A���ڒǉ��O�ɌĂяo��
-        '   �����̓p�����^   �F�Ȃ�
-        '   �����\�b�h�߂�l �F�Ȃ�
-        '   ��������O       �F�Ȃ�
+        '   描画停止
+        '   （処理概要）コンボボックス項目追加時の処理高速化を目的とし、項目追加前に呼び出す
+        '   ●入力パラメタ   ：なし
+        '   ●メソッド戻り値 ：なし
+        '   ●発生例外       ：なし
         '                                               2006.04.22 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' �`���~ �R���{�{�b�N�X���ڒǉ����̏�����������ړI�Ƃ��A���ڒǉ��O�ɌĂяo��
+        ''' 描画停止 コンボボックス項目追加時の処理高速化を目的とし、項目追加前に呼び出す
         ''' </summary>
         ''' <remarks></remarks>
         Public Sub beginUpdate()
@@ -54,15 +54,15 @@ Namespace Combo
         End Sub
 
         '-------------------------------------------------------------------------------
-        '   �`��J�n
-        '   �i�����T�v�j�R���{�{�b�N�X���ڒǉ����̏�����������ړI�Ƃ��A���ڒǉ���ɌĂяo��
-        '   �����̓p�����^   �F�Ȃ�
-        '   �����\�b�h�߂�l �F�Ȃ�
-        '   ��������O       �F�Ȃ�
+        '   描画開始
+        '   （処理概要）コンボボックス項目追加時の処理高速化を目的とし、項目追加後に呼び出す
+        '   ●入力パラメタ   ：なし
+        '   ●メソッド戻り値 ：なし
+        '   ●発生例外       ：なし
         '                                               2006.04.22 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' �`��J�n �R���{�{�b�N�X���ڒǉ����̏�����������ړI�Ƃ��A���ڒǉ���ɌĂяo��
+        ''' 描画開始 コンボボックス項目追加時の処理高速化を目的とし、項目追加後に呼び出す
         ''' </summary>
         ''' <remarks></remarks>
         Public Sub endUpdate()
@@ -70,39 +70,39 @@ Namespace Combo
         End Sub
 
         '-------------------------------------------------------------------------------
-        '   ���ڒǉ�
-        '   �i�����T�v�j�R���{�{�b�N�X���ڒǉ�
-        '   �����̓p�����^   �FprmData   UtilCboVO�̃C���X�^���X
-        '   �����\�b�h�߂�l �F�Ȃ�
-        '   ��������O       �FUsrDefException
+        '   項目追加
+        '   （処理概要）コンボボックス項目追加
+        '   ●入力パラメタ   ：prmData   UtilCboVOのインスタンス
+        '   ●メソッド戻り値 ：なし
+        '   ●発生例外       ：UsrDefException
         '                                               2006.04.22 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ���ڒǉ� �R���{�{�b�N�X���ڒǉ�
+        ''' 項目追加 コンボボックス項目追加
         ''' </summary>
-        ''' <param name="prmData">UtilCboVO�̃C���X�^���X</param>
+        ''' <param name="prmData">UtilCboVOのインスタンス</param>
         ''' <remarks></remarks>
         Public Sub addItem(ByRef prmData As UtilCboVO)
             If prmData Is Nothing Then
-                Throw (New UsrDefException("UtilCboVO�̃C���X�^���X���ݒ肳��Ă��܂���"))
+                Throw (New UsrDefException("UtilCboVOのインスタンスが設定されていません"))
             End If
             Call _target.Items.Add(prmData)
         End Sub
 
         '-------------------------------------------------------------------------------
-        '   ���ڑI��
-        '   �i�����T�v�j�R���{�{�b�N�X�̍��ڂ�I��������
-        '   �����̓p�����^   �FprmCode   �R���{�{�b�N�X�Ɋi�[����Ă���f�[�^�̓��A�I�������������ڂ̃R�[�h
-        '   �����\�b�h�߂�l �F�Ȃ�
-        '   ��������O       �F�Ȃ�
-        '   �����l           �F�n���ꂽ�R�[�h��������Ȃ��ꍇ�A���I���Ƃ���
+        '   項目選択
+        '   （処理概要）コンボボックスの項目を選択させる
+        '   ●入力パラメタ   ：prmCode   コンボボックスに格納されているデータの内、選択させたい項目のコード
+        '   ●メソッド戻り値 ：なし
+        '   ●発生例外       ：なし
+        '   ●備考           ：渡されたコードが見つからない場合、未選択とする
         '                                               2006.04.22 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ���ڑI�� �R���{�{�b�N�X�̍��ڂ�I��������
+        ''' 項目選択 コンボボックスの項目を選択させる
         ''' </summary>
-        ''' <param name="prmCode">�R���{�{�b�N�X�Ɋi�[����Ă���f�[�^�̓��A�I�������������ڂ̃R�[�h</param>
-        ''' <remarks>�n���ꂽ�R�[�h��������Ȃ��ꍇ�A���I���Ƃ���</remarks>
+        ''' <param name="prmCode">コンボボックスに格納されているデータの内、選択させたい項目のコード</param>
+        ''' <remarks>渡されたコードが見つからない場合、未選択とする</remarks>
         Public Sub selectItem(ByVal prmCode As String)
 
             Dim i As Short
@@ -121,19 +121,19 @@ Namespace Combo
         End Sub
 
         '-------------------------------------------------------------------------------
-        '   �\�����擾
-        '   �i�����T�v�j���ݑI������Ă��鍀�ڂ̕\�����̂��擾����
-        '   �����̓p�����^   �F�Ȃ�
-        '   �����\�b�h�߂�l �F�I��l(�\������)
-        '   ��������O       �F�Ȃ�
-        '   �����l           �F���I���̂΂����A""��ԋp
+        '   表示名取得
+        '   （処理概要）現在選択されている項目の表示名称を取得する
+        '   ●入力パラメタ   ：なし
+        '   ●メソッド戻り値 ：選択値(表示名称)
+        '   ●発生例外       ：なし
+        '   ●備考           ：未選択のばあい、""を返却
         '                                               2006.04.22 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' �\�����擾 ���ݑI������Ă��鍀�ڂ̕\�����̂��擾����
+        ''' 表示名取得 現在選択されている項目の表示名称を取得する
         ''' </summary>
-        ''' <returns>�I��l(�\������)</returns>
-        ''' <remarks>���I���̂΂����A""��ԋp</remarks>
+        ''' <returns>選択値(表示名称)</returns>
+        ''' <remarks>未選択のばあい、""を返却</remarks>
         Public Function getName() As String
             getName = ""
             Try
@@ -144,19 +144,19 @@ Namespace Combo
         End Function
 
         '-------------------------------------------------------------------------------
-        '   �R�[�h�擾
-        '   �i�����T�v�j���ݑI������Ă��鍀�ڂ̍���(�R�[�h)���擾����
-        '   �����̓p�����^   �F�Ȃ�
-        '   �����\�b�h�߂�l �F�I��l(�R�[�h)
-        '   ��������O       �F�Ȃ�
-        '   �����l           �F���I���̂΂����A""��ԋp
+        '   コード取得
+        '   （処理概要）現在選択されている項目の項目(コード)を取得する
+        '   ●入力パラメタ   ：なし
+        '   ●メソッド戻り値 ：選択値(コード)
+        '   ●発生例外       ：なし
+        '   ●備考           ：未選択のばあい、""を返却
         '                                               2006.04.22 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' �R�[�h�擾 ���ݑI������Ă��鍀�ڂ̍���(�R�[�h)���擾����
+        ''' コード取得 現在選択されている項目の項目(コード)を取得する
         ''' </summary>
-        ''' <returns>�I��l(�R�[�h)</returns>
-        ''' <remarks>���I���̂΂����A""��ԋp</remarks>
+        ''' <returns>選択値(コード)</returns>
+        ''' <remarks>未選択のばあい、""を返却</remarks>
         Public Function getCode() As String
             getCode = ""
             Try
@@ -167,18 +167,18 @@ Namespace Combo
         End Function
 
         '-------------------------------------------------------------------------------
-        '   �֘A�t���I�u�W�F�N�g�擾
-        '   �i�����T�v�j���ݑI������Ă��鍀�ڂ̊֘A�t���I�u�W�F�N�g���擾����
-        '   �����̓p�����^   �F�Ȃ�
-        '   �����\�b�h�߂�l �F�I��l(�֘A�t���I�u�W�F�N�g)
-        '   �����l           �F���I���̂΂����ANothing��ԋp
+        '   関連付けオブジェクト取得
+        '   （処理概要）現在選択されている項目の関連付けオブジェクトを取得する
+        '   ●入力パラメタ   ：なし
+        '   ●メソッド戻り値 ：選択値(関連付けオブジェクト)
+        '   ●備考           ：未選択のばあい、Nothingを返却
         '                                               2006.06.15 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' �R�[�h�擾 ���ݑI������Ă��鍀�ڂ̍���(�R�[�h)���擾����
+        ''' コード取得 現在選択されている項目の項目(コード)を取得する
         ''' </summary>
-        ''' <returns>�I��l(�R�[�h)</returns>
-        ''' <remarks>���I���̂΂����A""��ԋp</remarks>
+        ''' <returns>選択値(コード)</returns>
+        ''' <remarks>未選択のばあい、""を返却</remarks>
         Public Function getRelationObj() As Object
             getRelationObj = Nothing
             Try
@@ -192,38 +192,38 @@ Namespace Combo
 
     '===============================================================================
     '
-    '  ���[�e�B���e�B�N���X
-    '    �i�N���X���j    UtilCboVO
-    '    �i�����@�\���j      UtilComboBoxHandler�ɓn���R���{�{�b�N�X�f�[�^�̘g���(Beans)
-    '    �i�{MDL�g�p�O��j   UtilComboBoxHandler�Ƒ΂Ŏg�p����
-    '    �i���l�j            ��L�g�p�O����UtilComboBoxHandler�Ɠ���SRC��ɒ�`
+    '  ユーティリティクラス
+    '    （クラス名）    UtilCboVO
+    '    （処理機能名）      UtilComboBoxHandlerに渡すコンボボックスデータの枠を提供(Beans)
+    '    （本MDL使用前提）   UtilComboBoxHandlerと対で使用する
+    '    （備考）            上記使用前提よりUtilComboBoxHandlerと同一SRC上に定義
     '
     '===============================================================================
-    '  ����  ���O          ��  �t      �}�[�N      ���e
+    '  履歴  名前          日  付      マーク      内容
     '-------------------------------------------------------------------------------
-    '  (1)   Laevigata, Inc.    2006/04/22             �V�K
-    '  (2)   Laevigata, Inc.    2006/06/15             getRelationObj�p�Ƀ����o�[��ǉ�
+    '  (1)   Laevigata, Inc.    2006/04/22             新規
+    '  (2)   Laevigata, Inc.    2006/06/15             getRelationObj用にメンバーを追加
     '-------------------------------------------------------------------------------
     ''' <summary>
-    ''' UtilComboBoxHandler�ɓn���R���{�{�b�N�X�f�[�^�̘g���(Beans)
+    ''' UtilComboBoxHandlerに渡すコンボボックスデータの枠を提供(Beans)
     ''' </summary>
     ''' <remarks></remarks>
     Public Class UtilCboVO
         '===============================================================================
-        '�����o�[�ϐ���`
+        'メンバー変数定義
         '===============================================================================
         Private _code As String
         Private _name As String
         Private _obj As Object  '2006.06.15 add by Laevigata, Inc.
 
         '===============================================================================
-        '�v���p�e�B(�A�N�Z�T)
+        'プロパティ(アクセサ)
         '===============================================================================
         ''' <summary>
-        ''' �R���{�{�b�N�X�̊e�s�ɐݒ肳���R�[�h
+        ''' コンボボックスの各行に設定されるコード
         ''' </summary>
-        ''' <value>�R�[�h</value>
-        ''' <returns>�R�[�h</returns>
+        ''' <value>コード</value>
+        ''' <returns>コード</returns>
         ''' <remarks></remarks>
         Public ReadOnly Property code() As String
             'Geter--------
@@ -232,10 +232,10 @@ Namespace Combo
             End Get
         End Property
         ''' <summary>
-        ''' �R���{�{�b�N�X�̊e�s�ɐݒ肳���\������
+        ''' コンボボックスの各行に設定される表示名称
         ''' </summary>
-        ''' <value>�\������</value>
-        ''' <returns>�\������</returns>
+        ''' <value>表示名称</value>
+        ''' <returns>表示名称</returns>
         ''' <remarks></remarks>
         Public ReadOnly Property name() As String
             'Geter--------
@@ -246,10 +246,10 @@ Namespace Combo
 
         '-->2006.06.15 add start by Laevigata, Inc.
         ''' <summary>
-        ''' �R���{�{�b�N�X�̊e�s�ɐݒ肳���֘A�t���I�u�W�F�N�g
+        ''' コンボボックスの各行に設定される関連付けオブジェクト
         ''' </summary>
-        ''' <value>�֘A�t���I�u�W�F�N�g</value>
-        ''' <returns>�֘A�t���I�u�W�F�N�g</returns>
+        ''' <value>関連付けオブジェクト</value>
+        ''' <returns>関連付けオブジェクト</returns>
         ''' <remarks></remarks>
         Public ReadOnly Property obj() As Object
             'Geter--------
@@ -259,17 +259,17 @@ Namespace Combo
         End Property
 
         '===============================================================================
-        ' �R���X�g���N�^
-        '   �����̓p�����^  �FprmCode           ���̃C���X�^���X���\�����ڂ̃R�[�h
-        '                   �FprmName           ���̃C���X�^���X���\�����ڂ̕\������
-        '                   �FprmRelationObj    ���̃C���X�^���X���\�����ڂ̊֘A�t���I�u�W�F�N�g
+        ' コンストラクタ
+        '   ●入力パラメタ  ：prmCode           このインスタンスが表す項目のコード
+        '                   ：prmName           このインスタンスが表す項目の表示名称
+        '                   ：prmRelationObj    このインスタンスが表す項目の関連付けオブジェクト
         '===============================================================================
         ''' <summary>
-        ''' �R���{�{�b�N�X�n���h���ւ̎󂯓n���f�[�^���C���X�^���X������
+        ''' コンボボックスハンドラへの受け渡しデータをインスタンス化する
         ''' </summary>
-        ''' <param name="prmCode">�R�[�h</param>
-        ''' <param name="prmName">����</param>
-        ''' <param name="prmRelationObj">�֘A�t���I�u�W�F�N�g</param>
+        ''' <param name="prmCode">コード</param>
+        ''' <param name="prmName">名称</param>
+        ''' <param name="prmRelationObj">関連付けオブジェクト</param>
         ''' <remarks></remarks>
         Public Sub New(ByVal prmCode As String, ByVal prmName As String, ByVal prmRelationObj As Object)
             Me.New(prmCode, prmName)
@@ -278,15 +278,15 @@ Namespace Combo
         '<--2006.06.15 add end by Laevigata, Inc.
 
         '===============================================================================
-        ' �R���X�g���N�^
-        '   �����̓p�����^   �FprmCode    ���̃C���X�^���X���\�����ڂ̃R�[�h
-        '                   �FprmName    ���̃C���X�^���X���\�����ڂ̕\������
+        ' コンストラクタ
+        '   ●入力パラメタ   ：prmCode    このインスタンスが表す項目のコード
+        '                   ：prmName    このインスタンスが表す項目の表示名称
         '===============================================================================
         ''' <summary>
-        ''' �R���{�{�b�N�X�n���h���ւ̎󂯓n���f�[�^���C���X�^���X������
+        ''' コンボボックスハンドラへの受け渡しデータをインスタンス化する
         ''' </summary>
-        ''' <param name="prmCode">�R�[�h</param>
-        ''' <param name="prmName">����</param>
+        ''' <param name="prmCode">コード</param>
+        ''' <param name="prmName">名称</param>
         ''' <remarks></remarks>
         Public Sub New(ByVal prmCode As String, ByVal prmName As String)
             _code = prmCode
@@ -294,16 +294,16 @@ Namespace Combo
         End Sub
 
         '===============================================================================
-        ' �I�[�o�[���C�h���\�b�h
-        '   �i�����T�v�j�R���{�{�b�N�X�ɕ\������J�������w��
+        ' オーバーライドメソッド
+        '   （処理概要）コンボボックスに表示するカラムを指定
         '===============================================================================
         ''' <summary>
-        ''' �R���{�{�b�N�X�ɕ\�����镶���������킷
+        ''' コンボボックスに表示する文字列をあらわす
         ''' </summary>
         ''' <returns></returns>
         ''' <remarks></remarks>
         Public Overrides Function ToString() As String
-            ToString = _name '�\�����̂�ԋp
+            ToString = _name '表示名称を返却
         End Function
 
     End Class
