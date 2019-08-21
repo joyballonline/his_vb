@@ -1,17 +1,17 @@
-'===============================================================================
-'@ iƒVƒXƒeƒ€–¼j      w”ƒ˜AŒgƒVƒXƒeƒ€
+ï»¿'===============================================================================
+'ã€€ ï¼ˆã‚·ã‚¹ãƒ†ãƒ åï¼‰      è³¼è²·é€£æºã‚·ã‚¹ãƒ†ãƒ 
 '
-'   i‹@”\–¼j          ƒƒOƒCƒ“
-'   iƒNƒ‰ƒX–¼j        frmKR11_Login
-'   iˆ—‹@”\–¼j      
-'   i–{MDLg—p‘O’ñj   UtilMDLƒvƒƒWƒFƒNƒg‚ªƒ\ƒŠƒ…[ƒVƒ‡ƒ“‚Éæ‚è‚Ü‚ê‚Ä‚¢‚é‚±‚Æ
-'   i”õlj            
+'   ï¼ˆæ©Ÿèƒ½åï¼‰          ãƒ­ã‚°ã‚¤ãƒ³
+'   ï¼ˆã‚¯ãƒ©ã‚¹åï¼‰        frmKR11_Login
+'   ï¼ˆå‡¦ç†æ©Ÿèƒ½åï¼‰      
+'   ï¼ˆæœ¬MDLä½¿ç”¨å‰æï¼‰   UtilMDLãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆãŒã‚½ãƒªãƒ¥ãƒ¼ã‚·ãƒ§ãƒ³ã«å–ã‚Šè¾¼ã¾ã‚Œã¦ã„ã‚‹ã“ã¨
+'   ï¼ˆå‚™è€ƒï¼‰            
 '
 '===============================================================================
-' —š—ğ  –¼‘O               “ú•t       ƒ}[ƒN    “à—e
+' å±¥æ­´  åå‰               æ—¥ä»˜       ãƒãƒ¼ã‚¯    å†…å®¹
 '-------------------------------------------------------------------------------
-'  (1)  Shigihara          2010/03/01           V‹K
-'  (2)  Shigihara          2013/03/11 V1.2.0.1  ’S“–ÒƒR[ƒh‘¶İƒ`ƒFƒbƒN‚ÌˆÊ’u‚ğ•ÏX
+'  (1)  Shigihara          2010/03/01           æ–°è¦
+'  (2)  Shigihara          2013/03/11 V1.2.0.1  æ‹…å½“è€…ã‚³ãƒ¼ãƒ‰å­˜åœ¨ãƒã‚§ãƒƒã‚¯ã®ä½ç½®ã‚’å¤‰æ›´
 '-------------------------------------------------------------------------------
 Imports UtilMDL
 Imports UtilMDL.MSG
@@ -25,85 +25,85 @@ Imports System.Globalization
 Imports System.Net
 
 '===================================================================================
-'ƒtƒH[ƒ€
+'ãƒ•ã‚©ãƒ¼ãƒ 
 '===================================================================================
 Public Class frmC01F10_Login
 
     Inherits System.Windows.Forms.Form
 
     '------------------------------------------------------------------------------------------------------
-    'ƒƒ“ƒo[’è”éŒ¾
+    'ãƒ¡ãƒ³ãƒãƒ¼å®šæ•°å®£è¨€
     '------------------------------------------------------------------------------------------------------
-    'PG§Œä•¶š 
-    Private Const N As String = ControlChars.NewLine                    '‰üs•¶š
-    Private Const RS As String = "RecSet"                               'ƒŒƒR[ƒhƒZƒbƒgƒe[ƒuƒ‹
+    'PGåˆ¶å¾¡æ–‡å­— 
+    Private Const N As String = ControlChars.NewLine                    'æ”¹è¡Œæ–‡å­—
+    Private Const RS As String = "RecSet"                               'ãƒ¬ã‚³ãƒ¼ãƒ‰ã‚»ãƒƒãƒˆãƒ†ãƒ¼ãƒ–ãƒ«
 
-    Private Const COMPANY_FILE As String = "company.txt"                                'txtƒtƒ@ƒCƒ‹–¼
+    Private Const COMPANY_FILE As String = "company.txt"                                'txtãƒ•ã‚¡ã‚¤ãƒ«å
 
     '-------------------------------------------------------------------------------
-    'ƒƒ“ƒo[•Ï”éŒ¾
+    'ãƒ¡ãƒ³ãƒãƒ¼å¤‰æ•°å®£è¨€
     '-------------------------------------------------------------------------------
-    Private Shared _assembly As System.Reflection.Assembly          'ƒAƒZƒ“ƒuƒŠ(ƒAƒvƒŠƒP[ƒVƒ‡ƒ“î•ñ)
+    Private Shared _assembly As System.Reflection.Assembly          'ã‚¢ã‚»ãƒ³ãƒ–ãƒª(ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³æƒ…å ±)
     Private _parentForm As Form
     Private _msgHd As UtilMsgHandler
     Private _langHd As UtilLangHandler
     Private _db As UtilDBIf
     Private _btnSybt As String
 
-    'ƒƒOƒCƒ“î•ñŠi”[•Ï”
+    'ãƒ­ã‚°ã‚¤ãƒ³æƒ…å ±æ ¼ç´å¤‰æ•°
     Private Shared _loginVal As StartUp.loginType
 
     '-------------------------------------------------------------------------------
-    'ƒvƒƒpƒeƒBéŒ¾
+    'ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£å®£è¨€
     '-------------------------------------------------------------------------------
-    Public Shared ReadOnly Property loginValue() As StartUp.loginType                     'ƒƒOƒCƒ“î•ñ\‘¢‘Ì‚ğ•Ô‹p
+    Public Shared ReadOnly Property loginValue() As StartUp.loginType                     'ãƒ­ã‚°ã‚¤ãƒ³æƒ…å ±æ§‹é€ ä½“ã‚’è¿”å´
         Get
             Return _loginVal
         End Get
     End Property
 
-    Public Shared ReadOnly Property assembly() As System.Reflection.Assembly    'ƒAƒZƒ“ƒuƒŠ
+    Public Shared ReadOnly Property assembly() As System.Reflection.Assembly    'ã‚¢ã‚»ãƒ³ãƒ–ãƒª
         Get
             Return _Assembly
         End Get
     End Property
 
     '-------------------------------------------------------------------------------
-    'ƒRƒ“ƒXƒgƒ‰ƒNƒ^iPrivate‚É‚µ‚ÄAŠO‚©‚ç‚ÍŒÄ‚×‚È‚¢‚æ‚¤‚É‚·‚éj
+    'ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ï¼ˆPrivateã«ã—ã¦ã€å¤–ã‹ã‚‰ã¯å‘¼ã¹ãªã„ã‚ˆã†ã«ã™ã‚‹ï¼‰
     '-------------------------------------------------------------------------------
     Private Sub New()
-        ' ‚±‚ÌŒÄ‚Ño‚µ‚ÍAWindows ƒtƒH[ƒ€ ƒfƒUƒCƒi‚Å•K—v‚Å‚·B
+        ' ã“ã®å‘¼ã³å‡ºã—ã¯ã€Windows ãƒ•ã‚©ãƒ¼ãƒ  ãƒ‡ã‚¶ã‚¤ãƒŠã§å¿…è¦ã§ã™ã€‚
         InitializeComponent()
         'cmbCampany.SelectedIndex = 0
     End Sub
 
     '-------------------------------------------------------------------------------
-    'ƒRƒ“ƒXƒgƒ‰ƒNƒ^@StartUp‚©‚çŒÄ‚Î‚ê‚éB
-    '   œ“ü—Íƒpƒ‰ƒƒ^   FprmRefMsgHd      MSGƒnƒ“ƒhƒ‰
-    '                      prmRefDbHd       DBƒnƒ“ƒhƒ‰
-    '   œƒƒ\ƒbƒh–ß‚è’l FƒCƒ“ƒXƒ^ƒ“ƒX
+    'ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã€€StartUpã‹ã‚‰å‘¼ã°ã‚Œã‚‹ã€‚
+    '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šprmRefMsgHd      MSGãƒãƒ³ãƒ‰ãƒ©
+    '                      prmRefDbHd       DBãƒãƒ³ãƒ‰ãƒ©
+    '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
     '-------------------------------------------------------------------------------
     Public Sub New(ByRef prmRefMsgHd As UtilMsgHandler, ByRef prmRefLangHd As UtilLangHandler, ByRef prmRefDbHd As UtilDBIf)
         Call Me.New()
 
-        '‰Šúˆ—
-        _msgHd = prmRefMsgHd                                                    'MSGƒnƒ“ƒhƒ‰‚Ìİ’è
-        _langHd = prmRefLangHd                                                  'LANGƒnƒ“ƒhƒ‰‚Ìİ’è
-        _db = prmRefDbHd                                                        'DBƒnƒ“ƒhƒ‰‚Ìİ’è
-        StartPosition = FormStartPosition.CenterScreen                          '‰æ–Ê’†‰›•\¦
-        lblVer.Text = "Ver : " & UtilClass.getAppVersion(StartUp.assembly)      'ƒ‰ƒxƒ‹‚ÖAƒo[ƒWƒ‡ƒ“î•ñ‚Ì•\¦
+        'åˆæœŸå‡¦ç†
+        _msgHd = prmRefMsgHd                                                    'MSGãƒãƒ³ãƒ‰ãƒ©ã®è¨­å®š
+        _langHd = prmRefLangHd                                                  'LANGãƒãƒ³ãƒ‰ãƒ©ã®è¨­å®š
+        _db = prmRefDbHd                                                        'DBãƒãƒ³ãƒ‰ãƒ©ã®è¨­å®š
+        StartPosition = FormStartPosition.CenterScreen                          'ç”»é¢ä¸­å¤®è¡¨ç¤º
+        lblVer.Text = "Ver : " & UtilClass.getAppVersion(StartUp.assembly)      'ãƒ©ãƒ™ãƒ«ã¸ã€ãƒãƒ¼ã‚¸ãƒ§ãƒ³æƒ…å ±ã®è¡¨ç¤º
         If StartUp.BackUpServer Then
-            'ƒoƒbƒNƒAƒbƒvƒT[ƒoÚ‘±’†
+            'ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ã‚µãƒ¼ãƒæ¥ç¶šä¸­
             lblBackup.Visible = True
         End If
 
-        _assembly = System.Reflection.Assembly.GetExecutingAssembly() 'ƒAƒZƒ“ƒuƒŠ‚ğƒƒ“ƒo[‚ÉŠi”[
+        _assembly = System.Reflection.Assembly.GetExecutingAssembly() 'ã‚¢ã‚»ãƒ³ãƒ–ãƒªã‚’ãƒ¡ãƒ³ãƒãƒ¼ã«æ ¼ç´
 
     End Sub
 
     '-------------------------------------------------------------------------------
-    '   I—¹ƒ{ƒ^ƒ“
-    '   iˆ—ŠT—vjƒtƒH[ƒ€‚ğ•Â‚¶‚é
+    '   çµ‚äº†ãƒœã‚¿ãƒ³
+    '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰ãƒ•ã‚©ãƒ¼ãƒ ã‚’é–‰ã˜ã‚‹
     '-------------------------------------------------------------------------------
     Private Sub btnEnd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEnd.Click
 
@@ -113,30 +113,30 @@ Public Class frmC01F10_Login
             Application.Exit()
         End If
 
-        'ƒƒbƒZ[ƒW‚Í‚±‚Ì‚ ‚½‚è‚ÌƒNƒ‰ƒX‚ğƒR[ƒ‹‚µ‚È‚­‚Ä‚æ‚¢‚Ì‚¾‚ë‚¤‚©H
-        'ŠY“–ƒƒbƒZ[ƒW‚ª‚w‚l‚k‚ÉŒ©“–‚½‚ç‚È‚¢‚Ì‚ÅA‚Æ‚è‚ ‚¦‚¸‚±‚Ì‚Ü‚ÜB
-        'Throw New UsrDefException("•K{“ü—Í€–Ú‚Å‚·B", _msgHd.getMSG("requiredImput", ""), txtTanto)
+        'ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã¯ã“ã®ã‚ãŸã‚Šã®ã‚¯ãƒ©ã‚¹ã‚’ã‚³ãƒ¼ãƒ«ã—ãªãã¦ã‚ˆã„ã®ã ã‚ã†ã‹ï¼Ÿ
+        'è©²å½“ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãŒï¼¸ï¼­ï¼¬ã«è¦‹å½“ãŸã‚‰ãªã„ã®ã§ã€ã¨ã‚Šã‚ãˆãšã“ã®ã¾ã¾ã€‚
+        'Throw New UsrDefException("å¿…é ˆå…¥åŠ›é …ç›®ã§ã™ã€‚", _msgHd.getMSG("requiredImput", ""), txtTanto)
 
     End Sub
 
 
 
     '------------------------------------------------------------------------------------------------------
-    'ƒtƒH[ƒ€ƒ[ƒhƒCƒxƒ“ƒg
+    'ãƒ•ã‚©ãƒ¼ãƒ ãƒ­ãƒ¼ãƒ‰ã‚¤ãƒ™ãƒ³ãƒˆ
     '------------------------------------------------------------------------------------------------------
     Private Sub frm_E11_Login_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
 
-        '•`‰æŠÖŒW‚Ìİ’è
-        Me.SetStyle(ControlStyles.ResizeRedraw, True)           'ƒTƒCƒY‚ª•ÏX‚³‚ê‚½‚Æ‚«‚ÉAƒRƒ“ƒgƒ[ƒ‹‚ªƒRƒ“ƒgƒ[ƒ‹©‘Ì‚ğÄ•`‰æ‚·‚é‚©‚Ç‚¤‚©‚ğ¦‚·’l‚ğİ’è
-        Me.SetStyle(ControlStyles.DoubleBuffer, True)           '•`‰æ‚Íƒoƒbƒtƒ@‚ÅÀs‚³‚êAŠ®—¹Œã‚ÉAŒ‹‰Ê‚ª‰æ–Ê‚Éo—Í‚³‚ê‚é‚æ‚¤İ’è
-        Me.SetStyle(ControlStyles.OptimizedDoubleBuffer, True)  'ƒRƒ“ƒgƒ[ƒ‹‚ÍA‰æ–Ê‚É’¼Ú‚Å‚Í‚È‚­A‚Ü‚¸ƒoƒbƒtƒ@‚É•`‰æ‚³‚ê‚Ü‚·B‚±‚ê‚É‚æ‚èA‚¿‚ç‚Â‚«‚ğ—}‚¦‚é‚±‚Æ‚ª‚Å‚«‚Ü‚·B
-        Me.SetStyle(ControlStyles.UserPaint, True)              'ƒRƒ“ƒgƒ[ƒ‹‚ÍAƒIƒyƒŒ[ƒeƒBƒ“ƒO ƒVƒXƒeƒ€‚É‚æ‚Á‚Ä‚Å‚Í‚È‚­A“Æ©‚É•`‰æ‚³‚ê‚é‚æ‚¤İ’è
-        Me.SetStyle(ControlStyles.AllPaintingInWmPaint, True)   'ƒRƒ“ƒgƒ[ƒ‹‚ÍƒEƒBƒ“ƒhƒE ƒƒbƒZ[ƒW WM_ERASEBKGND ‚ğ–³‹‚·‚é‚æ‚¤‚Éİ’è
+        'æç”»é–¢ä¿‚ã®è¨­å®š
+        Me.SetStyle(ControlStyles.ResizeRedraw, True)           'ã‚µã‚¤ã‚ºãŒå¤‰æ›´ã•ã‚ŒãŸã¨ãã«ã€ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ãŒã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«è‡ªä½“ã‚’å†æç”»ã™ã‚‹ã‹ã©ã†ã‹ã‚’ç¤ºã™å€¤ã‚’è¨­å®š
+        Me.SetStyle(ControlStyles.DoubleBuffer, True)           'æç”»ã¯ãƒãƒƒãƒ•ã‚¡ã§å®Ÿè¡Œã•ã‚Œã€å®Œäº†å¾Œã«ã€çµæœãŒç”»é¢ã«å‡ºåŠ›ã•ã‚Œã‚‹ã‚ˆã†è¨­å®š
+        Me.SetStyle(ControlStyles.OptimizedDoubleBuffer, True)  'ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã¯ã€ç”»é¢ã«ç›´æ¥ã§ã¯ãªãã€ã¾ãšãƒãƒƒãƒ•ã‚¡ã«æç”»ã•ã‚Œã¾ã™ã€‚ã“ã‚Œã«ã‚ˆã‚Šã€ã¡ã‚‰ã¤ãã‚’æŠ‘ãˆã‚‹ã“ã¨ãŒã§ãã¾ã™ã€‚
+        Me.SetStyle(ControlStyles.UserPaint, True)              'ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã¯ã€ã‚ªãƒšãƒ¬ãƒ¼ãƒ†ã‚£ãƒ³ã‚° ã‚·ã‚¹ãƒ†ãƒ ã«ã‚ˆã£ã¦ã§ã¯ãªãã€ç‹¬è‡ªã«æç”»ã•ã‚Œã‚‹ã‚ˆã†è¨­å®š
+        Me.SetStyle(ControlStyles.AllPaintingInWmPaint, True)   'ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã¯ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ WM_ERASEBKGND ã‚’ç„¡è¦–ã™ã‚‹ã‚ˆã†ã«è¨­å®š
 
         Dim netChk As Boolean = networkCheck()
         If netChk Then
-            '20190502@‚¢‚Á‚½‚ñƒRƒƒ“ƒgƒAƒEƒg
+            '20190502ã€€ã„ã£ãŸã‚“ã‚³ãƒ¡ãƒ³ãƒˆã‚¢ã‚¦ãƒˆ
             'accountCheck()
             'useLimitCheck()
         Else
@@ -144,20 +144,20 @@ Public Class frmC01F10_Login
             Application.Exit()
         End If
 
-        '‰Šú‰»
+        'åˆæœŸåŒ–
         Call initForm()
 
     End Sub
 
     '-------------------------------------------------------------------------------
-    '   ƒƒOƒCƒ“ƒ{ƒ^ƒ“
+    '   ãƒ­ã‚°ã‚¤ãƒ³ãƒœã‚¿ãƒ³
     '-------------------------------------------------------------------------------
     Private Sub btnLogin_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLogin.Click
 
 
         Try
 
-            '“ü—Íƒ`ƒFƒbƒN---------------------------------------------------------------
+            'å…¥åŠ›ãƒã‚§ãƒƒã‚¯---------------------------------------------------------------
             Try
                 Call checkInput()
             Catch lex As UsrDefException
@@ -166,83 +166,83 @@ Public Class frmC01F10_Login
             End Try
 
             Dim sql As String = ""
-            '2)	ƒpƒXƒ[ƒhƒ`ƒFƒbƒN			
-            '‰æ–Ê“ü—Í’l‚ğ‚à‚Æ‚ÉAƒpƒXƒ[ƒhƒ}ƒXƒ^‚Æ‚Ì®‡«ƒ`ƒFƒbƒN‚ğs‚¤B			
-            'EŒŸõƒL[F@IF)‰ïĞƒR[ƒhAIF)ƒ†[ƒUIDA‰æ–Ê)ƒpƒXƒ[ƒh			
-            '	   IF)¢‘ã”Ô† - 10 ‚æ‚è‚à‘åi‰ß‹10¢‘ã‚Æd•¡‚µ‚È‚¢j
+            '2)	ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ãƒã‚§ãƒƒã‚¯			
+            'ç”»é¢å…¥åŠ›å€¤ã‚’ã‚‚ã¨ã«ã€ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ãƒã‚¹ã‚¿ã¨ã®æ•´åˆæ€§ãƒã‚§ãƒƒã‚¯ã‚’è¡Œã†ã€‚			
+            'ãƒ»æ¤œç´¢ã‚­ãƒ¼ï¼šã€€IF)ä¼šç¤¾ã‚³ãƒ¼ãƒ‰ã€IF)ãƒ¦ãƒ¼ã‚¶IDã€ç”»é¢)ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰			
+            '	   IF)ä¸–ä»£ç•ªå· - 10 ã‚ˆã‚Šã‚‚å¤§ï¼ˆéå»10ä¸–ä»£ã¨é‡è¤‡ã—ãªã„ï¼‰
             Try
                 sql = "SELECT * FROM m02_user "
                 sql += " WHERE "
-                sql += "    ‰ïĞƒR[ƒh = '" & _db.rmSQ(cmbCampany.SelectedValue) & "'"
-                sql += "    and ƒ†[ƒU‚h‚c = '" & _db.rmSQ(txtTanto.Text) & "'"
-                sql += "    and –³Œøƒtƒ‰ƒO = 0 "
+                sql += "    ä¼šç¤¾ã‚³ãƒ¼ãƒ‰ = '" & _db.rmSQ(cmbCampany.SelectedValue) & "'"
+                sql += "    and ãƒ¦ãƒ¼ã‚¶ï¼©ï¼¤ = '" & _db.rmSQ(txtTanto.Text) & "'"
+                sql += "    and ç„¡åŠ¹ãƒ•ãƒ©ã‚° = 0 "
                 Dim reccnt As Integer = 0
                 Dim ds As DataSet = _db.selectDB(sql, RS, reccnt)
 
                 If reccnt <= 0 Then
                     _msgHd.dspMSG("NonImputUserID", CommonConst.LANG_KBN_JPN)
-                    'MsgBox("“ü—Í‚³‚ê‚½uƒ†[ƒUIDv‚Í‘¶İ‚µ‚È‚¢‚©A–³Œø‚É‚È‚Á‚Ä‚¢‚Ü‚·B", vbOK)
-                    'Throw New UsrDefException("“ü—Í‚³‚ê‚½uƒ†[ƒUIDv‚Í‘¶İ‚µ‚È‚¢‚©A–³Œø‚É‚È‚Á‚Ä‚¢‚Ü‚·B", _msgHd.getMSG("NoTantoCD", ""), txtTanto)
+                    'MsgBox("å…¥åŠ›ã•ã‚ŒãŸã€Œãƒ¦ãƒ¼ã‚¶IDã€ã¯å­˜åœ¨ã—ãªã„ã‹ã€ç„¡åŠ¹ã«ãªã£ã¦ã„ã¾ã™ã€‚", vbOK)
+                    'Throw New UsrDefException("å…¥åŠ›ã•ã‚ŒãŸã€Œãƒ¦ãƒ¼ã‚¶IDã€ã¯å­˜åœ¨ã—ãªã„ã‹ã€ç„¡åŠ¹ã«ãªã£ã¦ã„ã¾ã™ã€‚", _msgHd.getMSG("NoTantoCD", ""), txtTanto)
                     Exit Sub
                 End If
 
-                '2)	ƒpƒXƒ[ƒhƒ`ƒFƒbƒN
-                '	‰æ–Ê“ü—Í’l‚ğ‚à‚Æ‚ÉAƒpƒXƒ[ƒhƒ}ƒXƒ^‚Æ‚Ì®‡«ƒ`ƒFƒbƒN‚ğs‚¤B
-                '	EŒŸõƒL[
-                '	@@@‰æ–Ê)‰ïĞƒR[ƒhA‰æ–Ê)ƒ†[ƒUIDA“K—pŠJn“ú…ƒVƒXƒeƒ€“ú•t…“K—pI—¹“ú
-                '	Eæ“¾€–ÚF@ƒpƒXƒ[ƒhA¢‘ã”Ô†
+                '2)	ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ãƒã‚§ãƒƒã‚¯
+                '	ç”»é¢å…¥åŠ›å€¤ã‚’ã‚‚ã¨ã«ã€ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ãƒã‚¹ã‚¿ã¨ã®æ•´åˆæ€§ãƒã‚§ãƒƒã‚¯ã‚’è¡Œã†ã€‚
+                '	ãƒ»æ¤œç´¢ã‚­ãƒ¼
+                '	ã€€ã€€ã€€ç”»é¢)ä¼šç¤¾ã‚³ãƒ¼ãƒ‰ã€ç”»é¢)ãƒ¦ãƒ¼ã‚¶IDã€é©ç”¨é–‹å§‹æ—¥â‰¦ã‚·ã‚¹ãƒ†ãƒ æ—¥ä»˜â‰¦é©ç”¨çµ‚äº†æ—¥
+                '	ãƒ»å–å¾—é …ç›®ï¼šã€€ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã€ä¸–ä»£ç•ªå·
 
                 sql = ""
                 sql = sql & "SELECT "
-                sql = sql & "   ƒpƒXƒ[ƒh "        'ƒpƒXƒ[ƒh
-                sql = sql & "  , ¢‘ã”Ô† "         '¢‘ã”Ô†
+                sql = sql & "   ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ "        'ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰
+                sql = sql & "  , ä¸–ä»£ç•ªå· "         'ä¸–ä»£ç•ªå·
                 sql = sql & " FROM m03_pswd "
-                sql = sql & " where “K—pŠJn“ú <= current_date "
-                sql = sql & "   and “K—pI—¹“ú >= current_date "
-                sql = sql & "   and ‰ïĞƒR[ƒh = '" & _db.rmSQ(cmbCampany.SelectedValue) & "'"
-                sql = sql & "   and ƒ†[ƒU‚h‚c = '" & _db.rmSQ(txtTanto.Text) & "'"
+                sql = sql & " where é©ç”¨é–‹å§‹æ—¥ <= current_date "
+                sql = sql & "   and é©ç”¨çµ‚äº†æ—¥ >= current_date "
+                sql = sql & "   and ä¼šç¤¾ã‚³ãƒ¼ãƒ‰ = '" & _db.rmSQ(cmbCampany.SelectedValue) & "'"
+                sql = sql & "   and ãƒ¦ãƒ¼ã‚¶ï¼©ï¼¤ = '" & _db.rmSQ(txtTanto.Text) & "'"
 
                 Dim reccnt2 As Integer = 0
                 Dim ds2 = _db.selectDB(sql, RS, reccnt2)
 
-                '‡@@ŠY“–‚·‚éƒŒƒR[ƒh‚ª‘¶İ‚µ‚È‚¢ê‡	
-                '“ü—Í‚³‚ê‚½uƒ†[ƒUIDv‚ÌƒpƒXƒ[ƒhî•ñ‚ª‘¶İ‚µ‚Ü‚¹‚ñB
-                '¨@“ü—Íó‘Ô‚É–ß‚·i’Êí‚Í‚ ‚è‚¦‚È‚¢j
+                'â‘ ã€€è©²å½“ã™ã‚‹ãƒ¬ã‚³ãƒ¼ãƒ‰ãŒå­˜åœ¨ã—ãªã„å ´åˆ	
+                'å…¥åŠ›ã•ã‚ŒãŸã€Œãƒ¦ãƒ¼ã‚¶IDã€ã®ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰æƒ…å ±ãŒå­˜åœ¨ã—ã¾ã›ã‚“ã€‚
+                'â†’ã€€å…¥åŠ›çŠ¶æ…‹ã«æˆ»ã™ï¼ˆé€šå¸¸ã¯ã‚ã‚Šãˆãªã„ï¼‰
                 If reccnt2 <= 0 Then
                     _msgHd.dspMSG("NonImputNoDataUserID", CommonConst.LANG_KBN_JPN)
-                    'MsgBox("“ü—Í‚³‚ê‚½uƒ†[ƒUIDv‚ÌƒpƒXƒ[ƒhî•ñ‚ª‘¶İ‚µ‚Ü‚¹‚ñB", vbOK)
-                    'Throw New UsrDefException("“ü—Í‚³‚ê‚½uƒ†[ƒUIDv‚Í‘¶İ‚µ‚È‚¢‚©A–³Œø‚É‚È‚Á‚Ä‚¢‚Ü‚·B", _msgHd.getMSG("NoTantoCD", ""), txtTanto)
+                    'MsgBox("å…¥åŠ›ã•ã‚ŒãŸã€Œãƒ¦ãƒ¼ã‚¶IDã€ã®ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰æƒ…å ±ãŒå­˜åœ¨ã—ã¾ã›ã‚“ã€‚", vbOK)
+                    'Throw New UsrDefException("å…¥åŠ›ã•ã‚ŒãŸã€Œãƒ¦ãƒ¼ã‚¶IDã€ã¯å­˜åœ¨ã—ãªã„ã‹ã€ç„¡åŠ¹ã«ãªã£ã¦ã„ã¾ã™ã€‚", _msgHd.getMSG("NoTantoCD", ""), txtTanto)
                     Exit Sub
                 End If
 
-                '‡A@ŠY“–‚·‚éƒŒƒR[ƒh‚ª‘¶İ‚·‚éê‡		
-                '‡A-1@DBæ“¾ƒpƒXƒ[ƒh‚Ì•œ†‰»	
-                'š“––Ê•Û—¯šiˆÃ†‰»‚È‚µ‚Ì‚½‚ßA‚»‚Ì‚Ü‚Ü”äŠrj
+                'â‘¡ã€€è©²å½“ã™ã‚‹ãƒ¬ã‚³ãƒ¼ãƒ‰ãŒå­˜åœ¨ã™ã‚‹å ´åˆ		
+                'â‘¡-1ã€€DBå–å¾—ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã®å¾©å·åŒ–	
+                'â˜…å½“é¢ä¿ç•™â˜…ï¼ˆæš—å·åŒ–ãªã—ã®ãŸã‚ã€ãã®ã¾ã¾æ¯”è¼ƒï¼‰
 
-                '‡A-2@ƒpƒXƒ[ƒh“¯ˆêƒ`ƒFƒbƒN	
-                '‰æ–Ê)ƒpƒXƒ[ƒh‚ÆDB)ƒpƒXƒ[ƒh‚ğ”äŠr
-                If Not _db.rmNullStr(ds2.Tables(RS).Rows(0)("ƒpƒXƒ[ƒh")).Equals(txtPasswd.Text) Then
-                    'Throw New UsrDefException("ƒpƒXƒ[ƒh‚ªˆá‚¢‚Ü‚·B", _msgHd.getMSG("Unmatch", ""), txtPasswd)
+                'â‘¡-2ã€€ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰åŒä¸€ãƒã‚§ãƒƒã‚¯	
+                'ç”»é¢)ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã¨DB)ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã‚’æ¯”è¼ƒ
+                If Not _db.rmNullStr(ds2.Tables(RS).Rows(0)("ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰")).Equals(txtPasswd.Text) Then
+                    'Throw New UsrDefException("ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ãŒé•ã„ã¾ã™ã€‚", _msgHd.getMSG("Unmatch", ""), txtPasswd)
                     _msgHd.dspMSG("NonImputPassword", CommonConst.LANG_KBN_JPN)
-                    'MsgBox("ƒpƒXƒ[ƒh‚ªˆá‚¢‚Ü‚·B", vbOK)
+                    'MsgBox("ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ãŒé•ã„ã¾ã™ã€‚", vbOK)
                     Exit Sub
                 End If
 
-                '¡ƒOƒ[ƒoƒ‹•Ï”‚ÉƒZƒbƒg
-                '3)	Ÿˆ—‹N“®	
-                '‰º‹L—v—Ì‚É‚µ‚½‚ª‚Á‚ÄAŸˆ—‚É‘JˆÚ‚ğˆÚ“®‚·‚éB	
-                'ƒƒOƒCƒ“‰æ–Ê‚©‚çAŸ‚Ì€–Ú‚ğŸˆ—‚Éó‚¯“n‚·B	
-                'Eó‚¯“n‚µ€–ÚF‰ïĞƒR[ƒhA‰ïĞ—ªÌAƒ†[ƒUIDAĞˆõ—ª–¼ABKUPƒT[ƒoÚ‘±—L–³iƒoƒbƒNƒAƒbƒvƒT[ƒoÚ‘±:"Y"AˆÈŠO:"N"jA¢‘ã”Ô†iƒpƒXƒ[ƒhj
+                'â– ã‚°ãƒ­ãƒ¼ãƒãƒ«å¤‰æ•°ã«ã‚»ãƒƒãƒˆ
+                '3)	æ¬¡å‡¦ç†èµ·å‹•	
+                'ä¸‹è¨˜è¦é ˜ã«ã—ãŸãŒã£ã¦ã€æ¬¡å‡¦ç†ã«é·ç§»ã‚’ç§»å‹•ã™ã‚‹ã€‚	
+                'ãƒ­ã‚°ã‚¤ãƒ³ç”»é¢ã‹ã‚‰ã€æ¬¡ã®é …ç›®ã‚’æ¬¡å‡¦ç†ã«å—ã‘æ¸¡ã™ã€‚	
+                'ãƒ»å—ã‘æ¸¡ã—é …ç›®ï¼šä¼šç¤¾ã‚³ãƒ¼ãƒ‰ã€ä¼šç¤¾ç•¥ç§°ã€ãƒ¦ãƒ¼ã‚¶IDã€ç¤¾å“¡ç•¥åã€BKUPã‚µãƒ¼ãƒæ¥ç¶šæœ‰ç„¡ï¼ˆãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ã‚µãƒ¼ãƒæ¥ç¶šæ™‚:"Y"ã€ä»¥å¤–:"N"ï¼‰ã€ä¸–ä»£ç•ªå·ï¼ˆãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ï¼‰
 
-                _loginVal.BumonCD = _db.rmNullStr(cmbCampany.SelectedValue)     '‰ïĞƒR[ƒh
-                _loginVal.BumonNM = _db.rmNullStr(cmbCampany.Text)              '‰ïĞ—ªÌ
-                _loginVal.TantoCD = _db.rmNullStr(txtTanto.Text)                'ƒ†[ƒU‚h‚c
-                _loginVal.TantoNM = _db.rmNullStr(ds.Tables(RS).Rows(0)("—ª–¼"))                'Ğˆõ—ª–¼
-                _loginVal.Passwd = _db.rmNullStr(txtPasswd.Text)                'ƒpƒXƒ[ƒh
-                _loginVal.Generation = _db.rmNullStr(ds2.Tables(RS).Rows(0)("¢‘ã”Ô†"))                '¢‘ã”Ô†
-                _loginVal.Language = _db.rmNullStr(ds.Tables(RS).Rows(0)("Œ¾Œê"))                'Œ¾Œê
-                _loginVal.Auth = _db.rmNullStr(ds.Tables(RS).Rows(0)("Œ ŒÀ"))               'Œ ŒÀ
-                '–¢À‘•@BKUPƒT[ƒoÚ‘±—L–³iƒoƒbƒNƒAƒbƒvƒT[ƒoÚ‘±:"Y"AˆÈŠO:"N"j
+                _loginVal.BumonCD = _db.rmNullStr(cmbCampany.SelectedValue)     'ä¼šç¤¾ã‚³ãƒ¼ãƒ‰
+                _loginVal.BumonNM = _db.rmNullStr(cmbCampany.Text)              'ä¼šç¤¾ç•¥ç§°
+                _loginVal.TantoCD = _db.rmNullStr(txtTanto.Text)                'ãƒ¦ãƒ¼ã‚¶ï¼©ï¼¤
+                _loginVal.TantoNM = _db.rmNullStr(ds.Tables(RS).Rows(0)("ç•¥å"))                'ç¤¾å“¡ç•¥å
+                _loginVal.Passwd = _db.rmNullStr(txtPasswd.Text)                'ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰
+                _loginVal.Generation = _db.rmNullStr(ds2.Tables(RS).Rows(0)("ä¸–ä»£ç•ªå·"))                'ä¸–ä»£ç•ªå·
+                _loginVal.Language = _db.rmNullStr(ds.Tables(RS).Rows(0)("è¨€èª"))                'è¨€èª
+                _loginVal.Auth = _db.rmNullStr(ds.Tables(RS).Rows(0)("æ¨©é™"))               'æ¨©é™
+                'æœªå®Ÿè£…ã€€BKUPã‚µãƒ¼ãƒæ¥ç¶šæœ‰ç„¡ï¼ˆãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ã‚µãƒ¼ãƒæ¥ç¶šæ™‚:"Y"ã€ä»¥å¤–:"N"ï¼‰
 
 
             Catch lex As UsrDefException
@@ -251,50 +251,50 @@ Public Class frmC01F10_Login
             End Try
 
 
-            'ƒpƒXƒ[ƒh•ÏXƒ`ƒFƒbƒNON‚Ìê‡AƒpƒXƒ[ƒh•ÏX‰æ–Ê‚ğ‹N“®
+            'ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰å¤‰æ›´ãƒã‚§ãƒƒã‚¯ONã®å ´åˆã€ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰å¤‰æ›´ç”»é¢ã‚’èµ·å‹•
             If chkPasswd.Checked = True Then
-                'ƒpƒXƒ[ƒh•ÏXƒ`ƒFƒbƒN‚ ‚è
+                'ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰å¤‰æ›´ãƒã‚§ãƒƒã‚¯ã‚ã‚Š
                 Dim openForm As Form = Nothing
                 openForm = New frmC01F20_ChangePasswd(_msgHd, _db, Me)
                 openForm.ShowDialog()
                 openForm.Dispose()
 
-                'uƒpƒXƒ[ƒh•ÏXv‰æ–Ê‹N“®
-                'Dim openForm12 As frmKR12_ChangePasswd = New frmKR12_ChangePasswd(_msgHd, _db, Me, txtTanto.Text)   'ƒpƒ‰ƒƒ^‚ğ‹N“®‰æ–Ê‚Ö“n‚·
+                'ã€Œãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰å¤‰æ›´ã€ç”»é¢èµ·å‹•
+                'Dim openForm12 As frmKR12_ChangePasswd = New frmKR12_ChangePasswd(_msgHd, _db, Me, txtTanto.Text)   'ãƒ‘ãƒ©ãƒ¡ã‚¿ã‚’èµ·å‹•ç”»é¢ã¸æ¸¡ã™
                 'StartUp.loginForm = Me
-                'openForm12.ShowDialog()                                                 '‰æ–Ê•\¦
+                'openForm12.ShowDialog()                                                 'ç”»é¢è¡¨ç¤º
                 'openForm12.Dispose()
                 Exit Sub
 
             Else
-                'ƒpƒXƒ[ƒh•ÏXƒ`ƒFƒbƒN‚È‚µ
+                'ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰å¤‰æ›´ãƒã‚§ãƒƒã‚¯ãªã—
 
-                ''u˜AŒgˆ—ˆê——v‰æ–Ê‹N“®
-                'Dim openForm13 As frmKR13_ProcList = New frmKR13_ProcList(_msgHd, _db, Me, _loginVal.TantoCD, _loginVal.TantoNM)      'ƒpƒ‰ƒƒ^‚ğ‹N“®‰æ–Ê‚Ö“n‚·
+                ''ã€Œé€£æºå‡¦ç†ä¸€è¦§ã€ç”»é¢èµ·å‹•
+                'Dim openForm13 As frmKR13_ProcList = New frmKR13_ProcList(_msgHd, _db, Me, _loginVal.TantoCD, _loginVal.TantoNM)      'ãƒ‘ãƒ©ãƒ¡ã‚¿ã‚’èµ·å‹•ç”»é¢ã¸æ¸¡ã™
                 'StartUp.loginForm = Me
-                'openForm13.Show()                                                   '‰æ–Ê•\¦
-                'Me.Hide()                                                           '©•ª‚Í‰B‚ê‚é
+                'openForm13.Show()                                                   'ç”»é¢è¡¨ç¤º
+                'Me.Hide()                                                           'è‡ªåˆ†ã¯éš ã‚Œã‚‹
 
 
-                '‘OŒ––‚ÉƒŒ[ƒg‚Ì“o˜^‚ª‚ ‚é‚©ƒ`ƒFƒbƒN
+                'å‰æœˆæœ«ã«ãƒ¬ãƒ¼ãƒˆã®ç™»éŒ²ãŒã‚ã‚‹ã‹ãƒã‚§ãƒƒã‚¯
                 Dim Month As Integer = Now.Month
                 Dim BaseDate As Date = DateSerial(Year(Now), Month, 1)
-                BaseDate = DateAdd("d", -1, BaseDate)  '‘OŒ––
+                BaseDate = DateAdd("d", -1, BaseDate)  'å‰æœˆæœ«
 
                 sql = ""
-                sql = sql & "SELECT count(*) as Œ”"
+                sql = sql & "SELECT count(*) as ä»¶æ•°"
                 sql = sql & " FROM t71_exchangerate "
-                sql = sql & " where Šî€“ú ='" & UtilClass.strFormatDate(BaseDate) & "'"
-                sql = sql & "   and ‰ïĞƒR[ƒh = '" & _db.rmSQ(cmbCampany.SelectedValue) & "'"
+                sql = sql & " where åŸºæº–æ—¥ ='" & UtilClass.strFormatDate(BaseDate) & "'"
+                sql = sql & "   and ä¼šç¤¾ã‚³ãƒ¼ãƒ‰ = '" & _db.rmSQ(cmbCampany.SelectedValue) & "'"
 
                 Dim dsRate = _db.selectDB(sql, RS, 0)
 
-                If dsRate.Tables(RS).Rows(0)("Œ”") = 0 Then
+                If dsRate.Tables(RS).Rows(0)("ä»¶æ•°") = 0 Then
                     _msgHd.dspMSG("LoginRate", frmC01F10_Login.loginValue.Language)
                 End If
 
 
-                'ƒCƒ“ƒtƒHƒ[ƒVƒ‡ƒ“•\¦
+                'ã‚¤ãƒ³ãƒ•ã‚©ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³è¡¨ç¤º
                 Dim openForm As Form = Nothing
                 openForm = New Information(_msgHd, _db, _langHd, Me)
                 openForm.Show()
@@ -306,60 +306,60 @@ Public Class frmC01F10_Login
             ue.dspMsg()
             Throw ue
         Catch ex As Exception
-            'ƒLƒƒƒbƒ`‚µ‚½—áŠO‚ğƒ†[ƒU[’è‹`—áŠO‚ÉˆÚ‚µ•Ï‚¦ƒVƒXƒeƒ€ƒGƒ‰[MSGo—ÍŒãƒXƒ[
+            'ã‚­ãƒ£ãƒƒãƒã—ãŸä¾‹å¤–ã‚’ãƒ¦ãƒ¼ã‚¶ãƒ¼å®šç¾©ä¾‹å¤–ã«ç§»ã—å¤‰ãˆã‚·ã‚¹ãƒ†ãƒ ã‚¨ãƒ©ãƒ¼MSGå‡ºåŠ›å¾Œã‚¹ãƒ­ãƒ¼
             Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
         End Try
 
     End Sub
 
     '-------------------------------------------------------------------------------
-    '@ƒL[ƒvƒŒƒXƒCƒxƒ“ƒg
+    'ã€€ã‚­ãƒ¼ãƒ—ãƒ¬ã‚¹ã‚¤ãƒ™ãƒ³ãƒˆ
     '-------------------------------------------------------------------------------
     Private Sub ctl_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles _
                                 txtTanto.KeyPress, txtPasswd.KeyPress
 
-        '‰Ÿ‰ºƒL[‚ªEnter‚Ìê‡AŸ‚ÌƒRƒ“ƒgƒ[ƒ‹‚ÖƒtƒH[ƒJƒXˆÚ“®
+        'æŠ¼ä¸‹ã‚­ãƒ¼ãŒEnterã®å ´åˆã€æ¬¡ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã¸ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ç§»å‹•
         Call UtilClass.moveNextFocus(Me, e)
 
     End Sub
 
     '-------------------------------------------------------------------------------
-    '@ƒtƒH[ƒJƒXæ“¾ƒCƒxƒ“ƒg
+    'ã€€ãƒ•ã‚©ãƒ¼ã‚«ã‚¹å–å¾—ã‚¤ãƒ™ãƒ³ãƒˆ
     '-------------------------------------------------------------------------------
     Private Sub ctl_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles _
                             txtTanto.GotFocus, txtPasswd.GotFocus
 
-        'ƒtƒH[ƒJƒXæ“¾A“ü—Íƒpƒ‰ƒƒ^‚ÌƒRƒ“ƒgƒ[ƒ‹‚ğ‘S‘I‘ğó‘Ô‚Æ‚·‚é
+        'ãƒ•ã‚©ãƒ¼ã‚«ã‚¹å–å¾—æ™‚ã€å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã‚’å…¨é¸æŠçŠ¶æ…‹ã¨ã™ã‚‹
         Call UtilClass.selAll(sender)
 
     End Sub
 
     '------------------------------------------------------------------------------------------------------
-    '   ƒtƒH[ƒ€‰Šú‰»
+    '   ãƒ•ã‚©ãƒ¼ãƒ åˆæœŸåŒ–
     '------------------------------------------------------------------------------------------------------
     Private Sub initForm()
         Try
 
-            'ƒRƒ“ƒgƒ[ƒ‹‰Šú‰»
+            'ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«åˆæœŸåŒ–
             Call clearControl()
 
         Catch ue As UsrDefException
             ue.dspMsg()
             Throw ue
         Catch ex As Exception
-            'ƒLƒƒƒbƒ`‚µ‚½—áŠO‚ğƒ†[ƒU[’è‹`—áŠO‚ÉˆÚ‚µ•Ï‚¦ƒVƒXƒeƒ€ƒGƒ‰[MSGo—ÍŒãƒXƒ[
+            'ã‚­ãƒ£ãƒƒãƒã—ãŸä¾‹å¤–ã‚’ãƒ¦ãƒ¼ã‚¶ãƒ¼å®šç¾©ä¾‹å¤–ã«ç§»ã—å¤‰ãˆã‚·ã‚¹ãƒ†ãƒ ã‚¨ãƒ©ãƒ¼MSGå‡ºåŠ›å¾Œã‚¹ãƒ­ãƒ¼
             Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
         End Try
 
     End Sub
 
     '-------------------------------------------------------------------------------
-    '   ƒRƒ“ƒgƒ[ƒ‹‚ÌƒNƒŠƒA
-    '   iˆ—ŠT—vj@‘SƒRƒ“ƒgƒ[ƒ‹‚Ì“à—e‚ğƒNƒŠƒA‚·‚é
+    '   ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã®ã‚¯ãƒªã‚¢
+    '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰ã€€å…¨ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã®å†…å®¹ã‚’ã‚¯ãƒªã‚¢ã™ã‚‹
     '-------------------------------------------------------------------------------
     Private Sub clearControl()
 
-        'ƒVƒXƒeƒ€–¼Ì•\¦
+        'ã‚·ã‚¹ãƒ†ãƒ åç§°è¡¨ç¤º
         'lblTitle.Text = StartUp.iniValue.SystemCaption
 
         Label1.Text = "User ID"
@@ -370,66 +370,66 @@ Public Class frmC01F10_Login
         btnLogin.Text = "Login"
         btnEnd.Text = "Exit"
 
-        '’S“–ÒƒR[ƒh
+        'æ‹…å½“è€…ã‚³ãƒ¼ãƒ‰
         txtTanto.Text = ""
-        'ƒpƒXƒ[ƒh
+        'ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰
         txtPasswd.Text = ""
-        'ƒpƒXƒ[ƒh•ÏXƒ`ƒFƒbƒNƒ{ƒbƒNƒX
+        'ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰å¤‰æ›´ãƒã‚§ãƒƒã‚¯ãƒœãƒƒã‚¯ã‚¹
         chkPasswd.Checked = False
 
-        '‰ïĞ–¼ƒRƒ“ƒ{ƒ{ƒbƒNƒXƒZƒbƒg
+        'ä¼šç¤¾åã‚³ãƒ³ãƒœãƒœãƒƒã‚¯ã‚¹ã‚»ãƒƒãƒˆ
         clearCmbCampany()
 
     End Sub
 
     '-------------------------------------------------------------------------------
-    '   ‰ïĞ–¼ƒRƒ“ƒ{ƒ{ƒbƒNƒX‚ğ‰Šú‰»
-    '   iˆ—ŠT—vj@‰ïĞƒ}ƒXƒ^‚æ‚èƒf[ƒ^‚ğæ“¾‚µAƒRƒ“ƒ{ƒ{ƒbƒNƒX‚ÉƒZƒbƒg‚·‚é
+    '   ä¼šç¤¾åã‚³ãƒ³ãƒœãƒœãƒƒã‚¯ã‚¹ã‚’åˆæœŸåŒ–
+    '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰ã€€ä¼šç¤¾ãƒã‚¹ã‚¿ã‚ˆã‚Šãƒ‡ãƒ¼ã‚¿ã‚’å–å¾—ã—ã€ã‚³ãƒ³ãƒœãƒœãƒƒã‚¯ã‚¹ã«ã‚»ãƒƒãƒˆã™ã‚‹
     '-------------------------------------------------------------------------------
     Private Sub clearCmbCampany()
 
         Dim strSql As String = ""
-        '‰ïĞƒ}ƒXƒ^‚ğƒRƒ“ƒ{ƒ{ƒbƒNƒX‚ÉƒZƒbƒg
+        'ä¼šç¤¾ãƒã‚¹ã‚¿ã‚’ã‚³ãƒ³ãƒœãƒœãƒƒã‚¯ã‚¹ã«ã‚»ãƒƒãƒˆ
         Try
             strSql = "SELECT "
-            strSql = strSql & "    ‰ïĞƒR[ƒh, ‰ïĞ—ªÌ "
+            strSql = strSql & "    ä¼šç¤¾ã‚³ãƒ¼ãƒ‰, ä¼šç¤¾ç•¥ç§° "
             strSql = strSql & " FROM m01_company "
-            strSql = strSql & " order by •\¦‡ "
+            strSql = strSql & " order by è¡¨ç¤ºé † "
             Dim reccnt As Integer = 0
             Dim ds As DataSet = _db.selectDB(strSql, RS, reccnt)
 
             cmbCampany.DataSource = ds.Tables(RS)
-            cmbCampany.DisplayMember = "‰ïĞ—ªÌ"
-            cmbCampany.ValueMember = "‰ïĞƒR[ƒh"
+            cmbCampany.DisplayMember = "ä¼šç¤¾ç•¥ç§°"
+            cmbCampany.ValueMember = "ä¼šç¤¾ã‚³ãƒ¼ãƒ‰"
         Catch ue As UsrDefException
             ue.dspMsg()
             Throw ue
         Catch ex As Exception
-            'ƒLƒƒƒbƒ`‚µ‚½—áŠO‚ğƒ†[ƒU[’è‹`—áŠO‚ÉˆÚ‚µ•Ï‚¦ƒVƒXƒeƒ€ƒGƒ‰[MSGo—ÍŒãƒXƒ[
+            'ã‚­ãƒ£ãƒƒãƒã—ãŸä¾‹å¤–ã‚’ãƒ¦ãƒ¼ã‚¶ãƒ¼å®šç¾©ä¾‹å¤–ã«ç§»ã—å¤‰ãˆã‚·ã‚¹ãƒ†ãƒ ã‚¨ãƒ©ãƒ¼MSGå‡ºåŠ›å¾Œã‚¹ãƒ­ãƒ¼
             Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
         End Try
 
     End Sub
 
     '------------------------------------------------------------------------------------------------------
-    '   “ü—Íƒ`ƒFƒbƒN
+    '   å…¥åŠ›ãƒã‚§ãƒƒã‚¯
     '------------------------------------------------------------------------------------------------------
     Private Sub checkInput()
 
-        '’S“–ÒƒR[ƒh
+        'æ‹…å½“è€…ã‚³ãƒ¼ãƒ‰
         If "".Equals(txtTanto.Text) Then
-            Throw New UsrDefException("•K{“ü—Í€–Ú‚Å‚·B", _msgHd.getMSG("requiredImput", frmC01F10_Login.loginValue.Language), txtTanto)
+            Throw New UsrDefException("å¿…é ˆå…¥åŠ›é …ç›®ã§ã™ã€‚", _msgHd.getMSG("requiredImput", frmC01F10_Login.loginValue.Language), txtTanto)
         End If
 
-        'ƒpƒXƒ[ƒh
+        'ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰
         If "".Equals(txtPasswd.Text) Then
-            Throw New UsrDefException("•K{“ü—Í€–Ú‚Å‚·B", _msgHd.getMSG("requiredImput", frmC01F10_Login.loginValue.Language), txtPasswd)
+            Throw New UsrDefException("å¿…é ˆå…¥åŠ›é …ç›®ã§ã™ã€‚", _msgHd.getMSG("requiredImput", frmC01F10_Login.loginValue.Language), txtPasswd)
         End If
 
     End Sub
 
     Private Function networkCheck()
-        'ƒlƒbƒgƒ[ƒN‚ÉÚ‘±‚³‚ê‚Ä‚¢‚é‚©’²‚×‚é
+        'ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ã«æ¥ç¶šã•ã‚Œã¦ã„ã‚‹ã‹èª¿ã¹ã‚‹
         If System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable() Then
             Return True
         Else
@@ -439,24 +439,24 @@ Public Class frmC01F10_Login
 
     Private Function fileCheck()
 
-        'ƒƒbƒZ[ƒW—pXml‘¶İƒ`ƒFƒbƒN
+        'ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ç”¨Xmlå­˜åœ¨ãƒã‚§ãƒƒã‚¯
         Dim companyFileName As String
-        companyFileName = UtilClass.getAppPath(_assembly)               'ƒAƒvƒŠƒP[ƒVƒ‡ƒ“ÀsƒpƒX‚ğæ“¾
-        If Not companyFileName.EndsWith("\") Then                       '"\"‚ÅI‚í‚Á‚Ä‚¢‚È‚¢‚È‚ç
+        companyFileName = UtilClass.getAppPath(_assembly)               'ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³å®Ÿè¡Œãƒ‘ã‚¹ã‚’å–å¾—
+        If Not companyFileName.EndsWith("\") Then                       '"\"ã§çµ‚ã‚ã£ã¦ã„ãªã„ãªã‚‰
             companyFileName = companyFileName & "\"
         End If
         Dim companyFile As String = UtilClass.getAppPath(_assembly) & "\..\Setting\" & COMPANY_FILE
 
-        If UtilClass.isFileExists(companyFile) Then                 'ƒtƒ@ƒCƒ‹‚ª‘¶İ‚·‚é‚È‚ç
+        If UtilClass.isFileExists(companyFile) Then                 'ãƒ•ã‚¡ã‚¤ãƒ«ãŒå­˜åœ¨ã™ã‚‹ãªã‚‰
 
 
             Dim name As String = ""
             name = System.IO.File.ReadAllText(companyFile, System.Text.Encoding.Default)
 
             'Dim rs As New System.IO.StringReader(companyFile)
-            ''ƒXƒgƒŠ[ƒ€‚Ì––’[‚Ü‚ÅŒJ‚è•Ô‚·
+            ''ã‚¹ãƒˆãƒªãƒ¼ãƒ ã®æœ«ç«¯ã¾ã§ç¹°ã‚Šè¿”ã™
             'While rs.Peek() > -1
-            '    'ˆês“Ç‚İ‚ñ‚Å•\¦‚·‚é
+            '    'ä¸€è¡Œèª­ã¿è¾¼ã‚“ã§è¡¨ç¤ºã™ã‚‹
             '    Console.WriteLine(rs.ReadLine())
 
             '    name = rs.ReadLine()
@@ -465,7 +465,7 @@ Public Class frmC01F10_Login
             'rs.Close()
 
             If name = "" Then
-                'î•ñ‚ª‘¶İ‚µ‚È‚¢‚Ì‚ÅƒGƒ‰[
+                'æƒ…å ±ãŒå­˜åœ¨ã—ãªã„ã®ã§ã‚¨ãƒ©ãƒ¼
                 _msgHd.dspMSG("chkAppUseSettingError", CommonConst.LANG_KBN_JPN, "No Setting")
                 Application.Exit()
 
@@ -474,7 +474,7 @@ Public Class frmC01F10_Login
             Return name
         Else
 
-            'ƒtƒ@ƒCƒ‹‚ª‘¶İ‚µ‚È‚¢‚Ì‚ÅƒGƒ‰[
+            'ãƒ•ã‚¡ã‚¤ãƒ«ãŒå­˜åœ¨ã—ãªã„ã®ã§ã‚¨ãƒ©ãƒ¼
             _msgHd.dspMSG("chkAppUseSettingError", CommonConst.LANG_KBN_JPN, "No File")
             Application.Exit()
 
@@ -489,37 +489,37 @@ Public Class frmC01F10_Login
             Dim Sql = ""
 
             Sql = " SELECT "
-            Sql += " ƒeƒLƒXƒg "
+            Sql += " ãƒ†ã‚­ã‚¹ãƒˆ "
             Sql += " FROM "
             Sql += " s01_config "
             Sql += " WHERE "
-            Sql += " €–Ú = '‰ïĞ–¼'"
+            Sql += " é …ç›® = 'ä¼šç¤¾å'"
             Sql += " AND "
-            Sql += " ƒeƒLƒXƒg = '" & fileCheck() & "'"
+            Sql += " ãƒ†ã‚­ã‚¹ãƒˆ = '" & fileCheck() & "'"
 
             Dim companyName As DataSet = _db.selectDB(Sql, RS, reccnt)
 
             If companyName.Tables(RS).Rows.Count > 0 Then
 
-                If companyName.Tables(RS).Rows(0)("ƒeƒLƒXƒg").ToString IsNot Nothing Then
+                If companyName.Tables(RS).Rows(0)("ãƒ†ã‚­ã‚¹ãƒˆ").ToString IsNot Nothing Then
 
                     Dim url As String = CommonConst.CHECK_URL
 
                     Dim wc As New System.Net.WebClient
-                    'NameValueCollection‚Ìì¬
+                    'NameValueCollectionã®ä½œæˆ
                     Dim ps As New System.Collections.Specialized.NameValueCollection
-                    '‘—M‚·‚éƒf[ƒ^iƒtƒB[ƒ‹ƒh–¼‚Æ’l‚Ì‘g‚İ‡‚í‚¹j‚ğ’Ç‰Á
-                    ps.Add("name", companyName.Tables(RS).Rows(0)("ƒeƒLƒXƒg").ToString)
-                    'ƒf[ƒ^‚ğ‘—M‚µA‚Ü‚½óM‚·‚é
+                    'é€ä¿¡ã™ã‚‹ãƒ‡ãƒ¼ã‚¿ï¼ˆãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰åã¨å€¤ã®çµ„ã¿åˆã‚ã›ï¼‰ã‚’è¿½åŠ 
+                    ps.Add("name", companyName.Tables(RS).Rows(0)("ãƒ†ã‚­ã‚¹ãƒˆ").ToString)
+                    'ãƒ‡ãƒ¼ã‚¿ã‚’é€ä¿¡ã—ã€ã¾ãŸå—ä¿¡ã™ã‚‹
                     Dim resData As Byte() = wc.UploadValues(url, ps)
                     wc.Dispose()
 
-                    'óM‚µ‚½ƒf[ƒ^‚ğ•\¦‚·‚é
+                    'å—ä¿¡ã—ãŸãƒ‡ãƒ¼ã‚¿ã‚’è¡¨ç¤ºã™ã‚‹
                     Dim resText As String = System.Text.Encoding.UTF8.GetString(resData)
                     'Console.WriteLine(resText)
 
                     If resText <> "success" Then
-                        '—LŒø‚Èƒ†[ƒU‚Å‚È‚¢ê‡AI—¹‚·‚é
+                        'æœ‰åŠ¹ãªãƒ¦ãƒ¼ã‚¶ã§ãªã„å ´åˆã€çµ‚äº†ã™ã‚‹
                         _msgHd.dspMSG("chkAppActiveUserError", CommonConst.LANG_KBN_JPN)
                         Application.Exit()
 
@@ -529,7 +529,7 @@ Public Class frmC01F10_Login
 
             Else
 
-                'İ’è‚ª‚È‚©‚Á‚½‚çI—¹‚·‚é
+                'è¨­å®šãŒãªã‹ã£ãŸã‚‰çµ‚äº†ã™ã‚‹
                 _msgHd.dspMSG("chkAppUseSettingError", CommonConst.LANG_KBN_JPN)
                 Application.Exit()
 
@@ -537,23 +537,23 @@ Public Class frmC01F10_Login
 
             'Catch ex As WebException
 
-            '    'HTTPƒvƒƒgƒRƒ‹ƒGƒ‰[‚©‚Ç‚¤‚©’²‚×‚é
+            '    'HTTPãƒ—ãƒ­ãƒˆã‚³ãƒ«ã‚¨ãƒ©ãƒ¼ã‹ã©ã†ã‹èª¿ã¹ã‚‹
             '    If ex.Status = System.Net.WebExceptionStatus.ProtocolError Then
-            '        'HttpWebResponse‚ğæ“¾
+            '        'HttpWebResponseã‚’å–å¾—
             '        Dim errors As System.Net.HttpWebResponse = CType(ex.Response, System.Net.HttpWebResponse)
-            '        '‰“š‚µ‚½URI‚ğ•\¦‚·‚é
+            '        'å¿œç­”ã—ãŸURIã‚’è¡¨ç¤ºã™ã‚‹
             '        Console.WriteLine(errors.ResponseUri)
-            '        '‰“šƒXƒe[ƒ^ƒXƒR[ƒh‚ğ•\¦‚·‚é
+            '        'å¿œç­”ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ã‚’è¡¨ç¤ºã™ã‚‹
             '        Console.WriteLine("{0}:{1}", errors.StatusCode, errors.StatusDescription)
             '    Else
             '        Console.WriteLine(ex.Message)
             '    End If
 
         Catch ue As UsrDefException
-            ue.dspMsg()                                                                                                     'ˆ¬‚è‚Â‚Ô‚·
+            ue.dspMsg()                                                                                                     'æ¡ã‚Šã¤ã¶ã™
         Catch ex As Exception
-            'ƒLƒƒƒbƒ`‚µ‚½—áŠO‚ğƒ†[ƒU[’è‹`—áŠO‚ÉˆÚ‚µ•Ï‚¦ƒVƒXƒeƒ€ƒGƒ‰[MSGo—Í
-            Dim te As UsrDefException = New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))     'ˆ¬‚è‚Â‚Ô‚·
+            'ã‚­ãƒ£ãƒƒãƒã—ãŸä¾‹å¤–ã‚’ãƒ¦ãƒ¼ã‚¶ãƒ¼å®šç¾©ä¾‹å¤–ã«ç§»ã—å¤‰ãˆã‚·ã‚¹ãƒ†ãƒ ã‚¨ãƒ©ãƒ¼MSGå‡ºåŠ›
+            Dim te As UsrDefException = New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))     'æ¡ã‚Šã¤ã¶ã™
         End Try
 
     End Sub
@@ -561,68 +561,68 @@ Public Class frmC01F10_Login
     Private Sub useLimitCheck()
 
         Try
-            'Å‰‚Ég—p‰Â”\ƒ†[ƒU[‚©‚Ç‚¤‚©ƒ`ƒFƒbƒN
+            'æœ€åˆã«ä½¿ç”¨å¯èƒ½ãƒ¦ãƒ¼ã‚¶ãƒ¼ã‹ã©ã†ã‹ãƒã‚§ãƒƒã‚¯
             Dim reccnt As Integer = 0
 
             Dim Sql = ""
 
             Sql = "SELECT "
-            Sql += " ƒ}ƒVƒ“–¼, ‰‰ñƒAƒNƒZƒX“ú "
+            Sql += " ãƒã‚·ãƒ³å, åˆå›ã‚¢ã‚¯ã‚»ã‚¹æ—¥æ™‚ "
             Sql += " FROM l11_aclog "
             Sql += " WHERE "
-            Sql += " ƒ}ƒVƒ“–¼ = '" & System.Environment.MachineName & "'"
+            Sql += " ãƒã‚·ãƒ³å = '" & System.Environment.MachineName & "'"
 
             Dim dsACLog As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-            'ŠY“–ƒ}ƒVƒ“‚ª‚ ‚Á‚½‚ç
+            'è©²å½“ãƒã‚·ãƒ³ãŒã‚ã£ãŸã‚‰
             If dsACLog.Tables(RS).Rows.Count > 0 Then
 
-                '‰Šú‰»
+                'åˆæœŸåŒ–
                 Call initForm()
 
             Else
-                'g—p”‚ªãŒÀ‚É’B‚µ‚Ä‚¢‚é‚©‚Ç‚¤‚©
+                'ä½¿ç”¨æ•°ãŒä¸Šé™ã«é”ã—ã¦ã„ã‚‹ã‹ã©ã†ã‹
 
                 Sql = "SELECT"
-                Sql += " ”’l "
+                Sql += " æ•°å€¤ "
                 Sql += " FROM s01_config "
                 Sql += " WHERE "
-                Sql += " €–Ú = '" & "g—pãŒÀ”" & "'" 'g—pãŒÀ”
+                Sql += " é …ç›® = '" & "ä½¿ç”¨ä¸Šé™æ•°" & "'" 'ä½¿ç”¨ä¸Šé™æ•°
 
                 Dim dsConfig As DataSet = _db.selectDB(Sql, RS, reccnt)
 
                 Sql = "SELECT "
-                Sql += " ƒ}ƒVƒ“–¼, ‰‰ñƒAƒNƒZƒX“ú "
+                Sql += " ãƒã‚·ãƒ³å, åˆå›ã‚¢ã‚¯ã‚»ã‚¹æ—¥æ™‚ "
                 Sql += " FROM l11_aclog "
 
                 dsACLog = _db.selectDB(Sql, RS, reccnt)
 
                 If dsConfig.Tables(RS).Rows.Count > 0 Then
-                    'g—pãŒÀ”–¢–‚¾‚Á‚½‚çl11_aclog‚ÉV‹K’Ç‰Á
-                    If dsACLog.Tables(RS).Rows.Count < dsConfig.Tables(RS).Rows(0)("”’l") Then
+                    'ä½¿ç”¨ä¸Šé™æ•°æœªæº€ã ã£ãŸã‚‰l11_aclogã«æ–°è¦è¿½åŠ 
+                    If dsACLog.Tables(RS).Rows.Count < dsConfig.Tables(RS).Rows(0)("æ•°å€¤") Then
 
                         Sql = "INSERT INTO l11_aclog ( "
-                        Sql += " ƒ}ƒVƒ“–¼, ‰‰ñƒAƒNƒZƒX“ú "
+                        Sql += " ãƒã‚·ãƒ³å, åˆå›ã‚¢ã‚¯ã‚»ã‚¹æ—¥æ™‚ "
                         Sql += " ) VALUES ( "
                         Sql += " '" & System.Environment.MachineName & "'"
                         Sql += " , '" & UtilClass.formatDatetime(DateTime.Now)
                         Sql += "' ) "
 
-                        _db.executeDB(Sql) 'l11_aclogƒe[ƒuƒ‹XV
+                        _db.executeDB(Sql) 'l11_aclogãƒ†ãƒ¼ãƒ–ãƒ«æ›´æ–°
 
-                        '‰Šú‰»
+                        'åˆæœŸåŒ–
                         Call initForm()
 
                     Else
 
-                        'ãŒÀ‚ğ’´‚¦‚Ä‚¢‚½‚çƒAƒ‰[ƒg‚ğ•\¦Œã‚ÉI—¹
+                        'ä¸Šé™ã‚’è¶…ãˆã¦ã„ãŸã‚‰ã‚¢ãƒ©ãƒ¼ãƒˆã‚’è¡¨ç¤ºå¾Œã«çµ‚äº†
                         _msgHd.dspMSG("chkAppUseError", CommonConst.LANG_KBN_JPN)
                         Application.Exit()
 
                     End If
                 Else
 
-                    'İ’è‚ª‚È‚©‚Á‚½‚çI—¹‚·‚é
+                    'è¨­å®šãŒãªã‹ã£ãŸã‚‰çµ‚äº†ã™ã‚‹
                     _msgHd.dspMSG("chkAppUseSettingError", CommonConst.LANG_KBN_JPN)
                     Application.Exit()
 
@@ -631,17 +631,17 @@ Public Class frmC01F10_Login
             End If
 
         Catch ue As UsrDefException
-            ue.dspMsg()                                                                                                     'ˆ¬‚è‚Â‚Ô‚·
+            ue.dspMsg()                                                                                                     'æ¡ã‚Šã¤ã¶ã™
         Catch ex As Exception
-            'ƒLƒƒƒbƒ`‚µ‚½—áŠO‚ğƒ†[ƒU[’è‹`—áŠO‚ÉˆÚ‚µ•Ï‚¦ƒVƒXƒeƒ€ƒGƒ‰[MSGo—Í
-            Dim te As UsrDefException = New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))     'ˆ¬‚è‚Â‚Ô‚·
+            'ã‚­ãƒ£ãƒƒãƒã—ãŸä¾‹å¤–ã‚’ãƒ¦ãƒ¼ã‚¶ãƒ¼å®šç¾©ä¾‹å¤–ã«ç§»ã—å¤‰ãˆã‚·ã‚¹ãƒ†ãƒ ã‚¨ãƒ©ãƒ¼MSGå‡ºåŠ›
+            Dim te As UsrDefException = New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))     'æ¡ã‚Šã¤ã¶ã™
         End Try
 
     End Sub
 
-    'ŠJ”­Ò—p
+    'é–‹ç™ºè€…ç”¨
     Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
-        ' ƒzƒXƒg–¼‚ğæ“¾‚·‚é
+        ' ãƒ›ã‚¹ãƒˆåã‚’å–å¾—ã™ã‚‹
         Dim hostname As String = Dns.GetHostName()
 
         Dim comName As String = "ZENBI"
@@ -649,89 +649,89 @@ Public Class frmC01F10_Login
         'Dim comName As String = "demo"
         'Dim userPass As String = "demo"
 
-        ' ƒzƒXƒg–¼‚©‚çIPƒAƒhƒŒƒX‚ğæ“¾‚·‚é
+        ' ãƒ›ã‚¹ãƒˆåã‹ã‚‰IPã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’å–å¾—ã™ã‚‹
         Dim adrList As IPAddress() = Dns.GetHostAddresses(hostname)
         For Each address As IPAddress In adrList
             Console.WriteLine(address.ToString())
 
             If address.ToString() = "172.21.12.72" Then
                 Dim sql As String = ""
-                '2)	ƒpƒXƒ[ƒhƒ`ƒFƒbƒN			
-                '‰æ–Ê“ü—Í’l‚ğ‚à‚Æ‚ÉAƒpƒXƒ[ƒhƒ}ƒXƒ^‚Æ‚Ì®‡«ƒ`ƒFƒbƒN‚ğs‚¤B			
-                'EŒŸõƒL[F@IF)‰ïĞƒR[ƒhAIF)ƒ†[ƒUIDA‰æ–Ê)ƒpƒXƒ[ƒh			
-                '	   IF)¢‘ã”Ô† - 10 ‚æ‚è‚à‘åi‰ß‹10¢‘ã‚Æd•¡‚µ‚È‚¢j
+                '2)	ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ãƒã‚§ãƒƒã‚¯			
+                'ç”»é¢å…¥åŠ›å€¤ã‚’ã‚‚ã¨ã«ã€ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ãƒã‚¹ã‚¿ã¨ã®æ•´åˆæ€§ãƒã‚§ãƒƒã‚¯ã‚’è¡Œã†ã€‚			
+                'ãƒ»æ¤œç´¢ã‚­ãƒ¼ï¼šã€€IF)ä¼šç¤¾ã‚³ãƒ¼ãƒ‰ã€IF)ãƒ¦ãƒ¼ã‚¶IDã€ç”»é¢)ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰			
+                '	   IF)ä¸–ä»£ç•ªå· - 10 ã‚ˆã‚Šã‚‚å¤§ï¼ˆéå»10ä¸–ä»£ã¨é‡è¤‡ã—ãªã„ï¼‰
                 Try
                     sql = "SELECT * FROM m02_user "
                     sql += " WHERE "
-                    sql += "    ‰ïĞƒR[ƒh = '" & comName & "'"
-                    sql += "    and ƒ†[ƒU‚h‚c = '" & userPass & "'"
-                    sql += "    and –³Œøƒtƒ‰ƒO = 0 "
+                    sql += "    ä¼šç¤¾ã‚³ãƒ¼ãƒ‰ = '" & comName & "'"
+                    sql += "    and ãƒ¦ãƒ¼ã‚¶ï¼©ï¼¤ = '" & userPass & "'"
+                    sql += "    and ç„¡åŠ¹ãƒ•ãƒ©ã‚° = 0 "
                     Dim reccnt As Integer = 0
                     Dim ds As DataSet = _db.selectDB(sql, RS, reccnt)
 
                     If reccnt <= 0 Then
                         _msgHd.dspMSG("NonImputUserID", CommonConst.LANG_KBN_JPN)
-                        'MsgBox("“ü—Í‚³‚ê‚½uƒ†[ƒUIDv‚Í‘¶İ‚µ‚È‚¢‚©A–³Œø‚É‚È‚Á‚Ä‚¢‚Ü‚·B", vbOK)
-                        'Throw New UsrDefException("“ü—Í‚³‚ê‚½uƒ†[ƒUIDv‚Í‘¶İ‚µ‚È‚¢‚©A–³Œø‚É‚È‚Á‚Ä‚¢‚Ü‚·B", _msgHd.getMSG("NoTantoCD", ""), txtTanto)
+                        'MsgBox("å…¥åŠ›ã•ã‚ŒãŸã€Œãƒ¦ãƒ¼ã‚¶IDã€ã¯å­˜åœ¨ã—ãªã„ã‹ã€ç„¡åŠ¹ã«ãªã£ã¦ã„ã¾ã™ã€‚", vbOK)
+                        'Throw New UsrDefException("å…¥åŠ›ã•ã‚ŒãŸã€Œãƒ¦ãƒ¼ã‚¶IDã€ã¯å­˜åœ¨ã—ãªã„ã‹ã€ç„¡åŠ¹ã«ãªã£ã¦ã„ã¾ã™ã€‚", _msgHd.getMSG("NoTantoCD", ""), txtTanto)
                         Exit Sub
                     End If
 
-                    '2)	ƒpƒXƒ[ƒhƒ`ƒFƒbƒN
-                    '	‰æ–Ê“ü—Í’l‚ğ‚à‚Æ‚ÉAƒpƒXƒ[ƒhƒ}ƒXƒ^‚Æ‚Ì®‡«ƒ`ƒFƒbƒN‚ğs‚¤B
-                    '	EŒŸõƒL[
-                    '	@@@‰æ–Ê)‰ïĞƒR[ƒhA‰æ–Ê)ƒ†[ƒUIDA“K—pŠJn“ú…ƒVƒXƒeƒ€“ú•t…“K—pI—¹“ú
-                    '	Eæ“¾€–ÚF@ƒpƒXƒ[ƒhA¢‘ã”Ô†
+                    '2)	ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ãƒã‚§ãƒƒã‚¯
+                    '	ç”»é¢å…¥åŠ›å€¤ã‚’ã‚‚ã¨ã«ã€ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ãƒã‚¹ã‚¿ã¨ã®æ•´åˆæ€§ãƒã‚§ãƒƒã‚¯ã‚’è¡Œã†ã€‚
+                    '	ãƒ»æ¤œç´¢ã‚­ãƒ¼
+                    '	ã€€ã€€ã€€ç”»é¢)ä¼šç¤¾ã‚³ãƒ¼ãƒ‰ã€ç”»é¢)ãƒ¦ãƒ¼ã‚¶IDã€é©ç”¨é–‹å§‹æ—¥â‰¦ã‚·ã‚¹ãƒ†ãƒ æ—¥ä»˜â‰¦é©ç”¨çµ‚äº†æ—¥
+                    '	ãƒ»å–å¾—é …ç›®ï¼šã€€ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã€ä¸–ä»£ç•ªå·
 
                     sql = ""
                     sql = sql & "SELECT "
-                    sql = sql & "   ƒpƒXƒ[ƒh "        'ƒpƒXƒ[ƒh
-                    sql = sql & "  , ¢‘ã”Ô† "         '¢‘ã”Ô†
+                    sql = sql & "   ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ "        'ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰
+                    sql = sql & "  , ä¸–ä»£ç•ªå· "         'ä¸–ä»£ç•ªå·
                     sql = sql & " FROM m03_pswd "
-                    sql = sql & " where “K—pŠJn“ú <= current_date "
-                    sql = sql & "   and “K—pI—¹“ú >= current_date "
-                    sql = sql & "   and ‰ïĞƒR[ƒh = '" & comName & "'"
-                    sql = sql & "   and ƒ†[ƒU‚h‚c = '" & userPass & "'"
+                    sql = sql & " where é©ç”¨é–‹å§‹æ—¥ <= current_date "
+                    sql = sql & "   and é©ç”¨çµ‚äº†æ—¥ >= current_date "
+                    sql = sql & "   and ä¼šç¤¾ã‚³ãƒ¼ãƒ‰ = '" & comName & "'"
+                    sql = sql & "   and ãƒ¦ãƒ¼ã‚¶ï¼©ï¼¤ = '" & userPass & "'"
                     Dim reccnt2 As Integer = 0
                     Dim ds2 = _db.selectDB(sql, RS, reccnt2)
 
-                    '‡@@ŠY“–‚·‚éƒŒƒR[ƒh‚ª‘¶İ‚µ‚È‚¢ê‡	
-                    '“ü—Í‚³‚ê‚½uƒ†[ƒUIDv‚ÌƒpƒXƒ[ƒhî•ñ‚ª‘¶İ‚µ‚Ü‚¹‚ñB
-                    '¨@“ü—Íó‘Ô‚É–ß‚·i’Êí‚Í‚ ‚è‚¦‚È‚¢j
+                    'â‘ ã€€è©²å½“ã™ã‚‹ãƒ¬ã‚³ãƒ¼ãƒ‰ãŒå­˜åœ¨ã—ãªã„å ´åˆ	
+                    'å…¥åŠ›ã•ã‚ŒãŸã€Œãƒ¦ãƒ¼ã‚¶IDã€ã®ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰æƒ…å ±ãŒå­˜åœ¨ã—ã¾ã›ã‚“ã€‚
+                    'â†’ã€€å…¥åŠ›çŠ¶æ…‹ã«æˆ»ã™ï¼ˆé€šå¸¸ã¯ã‚ã‚Šãˆãªã„ï¼‰
                     If reccnt2 <= 0 Then
                         _msgHd.dspMSG("NonImputNoDataUserID", CommonConst.LANG_KBN_JPN)
-                        'MsgBox("“ü—Í‚³‚ê‚½uƒ†[ƒUIDv‚ÌƒpƒXƒ[ƒhî•ñ‚ª‘¶İ‚µ‚Ü‚¹‚ñB", vbOK)
-                        'Throw New UsrDefException("“ü—Í‚³‚ê‚½uƒ†[ƒUIDv‚Í‘¶İ‚µ‚È‚¢‚©A–³Œø‚É‚È‚Á‚Ä‚¢‚Ü‚·B", _msgHd.getMSG("NoTantoCD", ""), txtTanto)
+                        'MsgBox("å…¥åŠ›ã•ã‚ŒãŸã€Œãƒ¦ãƒ¼ã‚¶IDã€ã®ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰æƒ…å ±ãŒå­˜åœ¨ã—ã¾ã›ã‚“ã€‚", vbOK)
+                        'Throw New UsrDefException("å…¥åŠ›ã•ã‚ŒãŸã€Œãƒ¦ãƒ¼ã‚¶IDã€ã¯å­˜åœ¨ã—ãªã„ã‹ã€ç„¡åŠ¹ã«ãªã£ã¦ã„ã¾ã™ã€‚", _msgHd.getMSG("NoTantoCD", ""), txtTanto)
                         Exit Sub
                     End If
 
-                    '‡A@ŠY“–‚·‚éƒŒƒR[ƒh‚ª‘¶İ‚·‚éê‡		
-                    '‡A-1@DBæ“¾ƒpƒXƒ[ƒh‚Ì•œ†‰»	
-                    'š“––Ê•Û—¯šiˆÃ†‰»‚È‚µ‚Ì‚½‚ßA‚»‚Ì‚Ü‚Ü”äŠrj
+                    'â‘¡ã€€è©²å½“ã™ã‚‹ãƒ¬ã‚³ãƒ¼ãƒ‰ãŒå­˜åœ¨ã™ã‚‹å ´åˆ		
+                    'â‘¡-1ã€€DBå–å¾—ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã®å¾©å·åŒ–	
+                    'â˜…å½“é¢ä¿ç•™â˜…ï¼ˆæš—å·åŒ–ãªã—ã®ãŸã‚ã€ãã®ã¾ã¾æ¯”è¼ƒï¼‰
 
-                    '‡A-2@ƒpƒXƒ[ƒh“¯ˆêƒ`ƒFƒbƒN	
-                    '‰æ–Ê)ƒpƒXƒ[ƒh‚ÆDB)ƒpƒXƒ[ƒh‚ğ”äŠr
-                    If Not _db.rmNullStr(ds2.Tables(RS).Rows(0)("ƒpƒXƒ[ƒh")).Equals(userPass) Then
-                        'Throw New UsrDefException("ƒpƒXƒ[ƒh‚ªˆá‚¢‚Ü‚·B", _msgHd.getMSG("Unmatch", ""), txtPasswd)
+                    'â‘¡-2ã€€ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰åŒä¸€ãƒã‚§ãƒƒã‚¯	
+                    'ç”»é¢)ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã¨DB)ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã‚’æ¯”è¼ƒ
+                    If Not _db.rmNullStr(ds2.Tables(RS).Rows(0)("ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰")).Equals(userPass) Then
+                        'Throw New UsrDefException("ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ãŒé•ã„ã¾ã™ã€‚", _msgHd.getMSG("Unmatch", ""), txtPasswd)
                         _msgHd.dspMSG("NonImputPassword", CommonConst.LANG_KBN_JPN)
-                        'MsgBox("ƒpƒXƒ[ƒh‚ªˆá‚¢‚Ü‚·B", vbOK)
+                        'MsgBox("ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ãŒé•ã„ã¾ã™ã€‚", vbOK)
                         Exit Sub
                     End If
 
-                    '¡ƒOƒ[ƒoƒ‹•Ï”‚ÉƒZƒbƒg
-                    '3)	Ÿˆ—‹N“®	
-                    '‰º‹L—v—Ì‚É‚µ‚½‚ª‚Á‚ÄAŸˆ—‚É‘JˆÚ‚ğˆÚ“®‚·‚éB	
-                    'ƒƒOƒCƒ“‰æ–Ê‚©‚çAŸ‚Ì€–Ú‚ğŸˆ—‚Éó‚¯“n‚·B	
-                    'Eó‚¯“n‚µ€–ÚF‰ïĞƒR[ƒhA‰ïĞ—ªÌAƒ†[ƒUIDAĞˆõ—ª–¼ABKUPƒT[ƒoÚ‘±—L–³iƒoƒbƒNƒAƒbƒvƒT[ƒoÚ‘±:"Y"AˆÈŠO:"N"jA¢‘ã”Ô†iƒpƒXƒ[ƒhj
+                    'â– ã‚°ãƒ­ãƒ¼ãƒãƒ«å¤‰æ•°ã«ã‚»ãƒƒãƒˆ
+                    '3)	æ¬¡å‡¦ç†èµ·å‹•	
+                    'ä¸‹è¨˜è¦é ˜ã«ã—ãŸãŒã£ã¦ã€æ¬¡å‡¦ç†ã«é·ç§»ã‚’ç§»å‹•ã™ã‚‹ã€‚	
+                    'ãƒ­ã‚°ã‚¤ãƒ³ç”»é¢ã‹ã‚‰ã€æ¬¡ã®é …ç›®ã‚’æ¬¡å‡¦ç†ã«å—ã‘æ¸¡ã™ã€‚	
+                    'ãƒ»å—ã‘æ¸¡ã—é …ç›®ï¼šä¼šç¤¾ã‚³ãƒ¼ãƒ‰ã€ä¼šç¤¾ç•¥ç§°ã€ãƒ¦ãƒ¼ã‚¶IDã€ç¤¾å“¡ç•¥åã€BKUPã‚µãƒ¼ãƒæ¥ç¶šæœ‰ç„¡ï¼ˆãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ã‚µãƒ¼ãƒæ¥ç¶šæ™‚:"Y"ã€ä»¥å¤–:"N"ï¼‰ã€ä¸–ä»£ç•ªå·ï¼ˆãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ï¼‰
 
-                    _loginVal.BumonCD = _db.rmNullStr(comName)                                  '‰ïĞƒR[ƒh
-                    _loginVal.BumonNM = _db.rmNullStr(comName)                                  '‰ïĞ—ªÌ
-                    _loginVal.TantoCD = _db.rmNullStr(userPass)                            'ƒ†[ƒU‚h‚c
-                    _loginVal.TantoNM = _db.rmNullStr(ds.Tables(RS).Rows(0)("—ª–¼"))            'Ğˆõ—ª–¼
-                    _loginVal.Passwd = _db.rmNullStr(userPass)                            'ƒpƒXƒ[ƒh
-                    _loginVal.Generation = _db.rmNullStr(ds2.Tables(RS).Rows(0)("¢‘ã”Ô†"))    '¢‘ã”Ô†
-                    _loginVal.Language = _db.rmNullStr(ds.Tables(RS).Rows(0)("Œ¾Œê"))           'Œ¾Œê
-                    _loginVal.Auth = _db.rmNullStr(ds.Tables(RS).Rows(0)("Œ ŒÀ"))               'Œ ŒÀ
-                    '–¢À‘•@BKUPƒT[ƒoÚ‘±—L–³iƒoƒbƒNƒAƒbƒvƒT[ƒoÚ‘±:"Y"AˆÈŠO:"N"j
+                    _loginVal.BumonCD = _db.rmNullStr(comName)                                  'ä¼šç¤¾ã‚³ãƒ¼ãƒ‰
+                    _loginVal.BumonNM = _db.rmNullStr(comName)                                  'ä¼šç¤¾ç•¥ç§°
+                    _loginVal.TantoCD = _db.rmNullStr(userPass)                            'ãƒ¦ãƒ¼ã‚¶ï¼©ï¼¤
+                    _loginVal.TantoNM = _db.rmNullStr(ds.Tables(RS).Rows(0)("ç•¥å"))            'ç¤¾å“¡ç•¥å
+                    _loginVal.Passwd = _db.rmNullStr(userPass)                            'ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰
+                    _loginVal.Generation = _db.rmNullStr(ds2.Tables(RS).Rows(0)("ä¸–ä»£ç•ªå·"))    'ä¸–ä»£ç•ªå·
+                    _loginVal.Language = _db.rmNullStr(ds.Tables(RS).Rows(0)("è¨€èª"))           'è¨€èª
+                    _loginVal.Auth = _db.rmNullStr(ds.Tables(RS).Rows(0)("æ¨©é™"))               'æ¨©é™
+                    'æœªå®Ÿè£…ã€€BKUPã‚µãƒ¼ãƒæ¥ç¶šæœ‰ç„¡ï¼ˆãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ã‚µãƒ¼ãƒæ¥ç¶šæ™‚:"Y"ã€ä»¥å¤–:"N"ï¼‰
 
 
                 Catch lex As UsrDefException
@@ -739,9 +739,9 @@ Public Class frmC01F10_Login
                     Exit Sub
                 End Try
 
-                'ƒpƒXƒ[ƒh•ÏXƒ`ƒFƒbƒNON‚Ìê‡AƒpƒXƒ[ƒh•ÏX‰æ–Ê‚ğ‹N“®
+                'ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰å¤‰æ›´ãƒã‚§ãƒƒã‚¯ONã®å ´åˆã€ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰å¤‰æ›´ç”»é¢ã‚’èµ·å‹•
                 If chkPasswd.Checked = True Then
-                    'ƒpƒXƒ[ƒh•ÏXƒ`ƒFƒbƒN‚ ‚è
+                    'ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰å¤‰æ›´ãƒã‚§ãƒƒã‚¯ã‚ã‚Š
                     Dim openForm As Form = Nothing
                     openForm = New frmC01F20_ChangePasswd(_msgHd, _db, Me)
                     openForm.ShowDialog()
@@ -749,8 +749,8 @@ Public Class frmC01F10_Login
                     Exit Sub
 
                 Else
-                    'ƒpƒXƒ[ƒh•ÏXƒ`ƒFƒbƒN‚È‚µ
-                    'ƒCƒ“ƒtƒHƒ[ƒVƒ‡ƒ“•\¦
+                    'ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰å¤‰æ›´ãƒã‚§ãƒƒã‚¯ãªã—
+                    'ã‚¤ãƒ³ãƒ•ã‚©ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³è¡¨ç¤º
 
 
                     Dim openForm As Form = Nothing
