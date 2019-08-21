@@ -1,22 +1,22 @@
-Imports System.Windows.Forms
+ï»¿Imports System.Windows.Forms
 '===============================================================================
 '
-'  ƒ†[ƒeƒBƒŠƒeƒBƒNƒ‰ƒX
-'    iƒNƒ‰ƒX–¼j    UsrDefException
-'    iˆ—‹@”\–¼j      ƒ†[ƒU[’è‹`—áŠO
-'    i–{MDLŽg—p‘O’ñj   UtilMsgVO‚ªŽæ‚èž‚Ü‚ê‚Ä‚¢‚é‚±‚Æ
-'    i”õlj            ƒvƒƒOƒ‰ƒ}‚ªˆÓ}“I‚ÉƒGƒ‰[‚ð”­¶‚³‚¹‚é‚Æ‚«‚ÉThrow‚·‚é—áŠO
+'  ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£ã‚¯ãƒ©ã‚¹
+'    ï¼ˆã‚¯ãƒ©ã‚¹åï¼‰    UsrDefException
+'    ï¼ˆå‡¦ç†æ©Ÿèƒ½åï¼‰      ãƒ¦ãƒ¼ã‚¶ãƒ¼å®šç¾©ä¾‹å¤–
+'    ï¼ˆæœ¬MDLä½¿ç”¨å‰æï¼‰   UtilMsgVOãŒå–ã‚Šè¾¼ã¾ã‚Œã¦ã„ã‚‹ã“ã¨
+'    ï¼ˆå‚™è€ƒï¼‰            ãƒ—ãƒ­ã‚°ãƒ©ãƒžãŒæ„å›³çš„ã«ã‚¨ãƒ©ãƒ¼ã‚’ç™ºç”Ÿã•ã›ã‚‹ã¨ãã«Throwã™ã‚‹ä¾‹å¤–
 '
 '===============================================================================
-'  —š—ð  –¼‘O          “ú  •t      ƒ}[ƒN      “à—e
+'  å±¥æ­´  åå‰          æ—¥  ä»˜      ãƒžãƒ¼ã‚¯      å†…å®¹
 '-------------------------------------------------------------------------------
-'  (1)   Laevigata, Inc.    2006/04/18             V‹K
+'  (1)   Laevigata, Inc.    2006/04/18             æ–°è¦
 '-------------------------------------------------------------------------------
 Public Class UsrDefException
     Inherits Exception
 
     '===============================================================================
-    'ƒƒ“ƒo[•Ï”’è‹`
+    'ãƒ¡ãƒ³ãƒãƒ¼å¤‰æ•°å®šç¾©
     '===============================================================================
     Private _msgVO As UtilMDL.MSG.UtilMsgVO
     Private _DisplaiedMsgFlg As Boolean
@@ -26,7 +26,7 @@ Public Class UsrDefException
     Private _row As Integer = -1
 
     '===============================================================================
-    'ƒvƒƒpƒeƒB(ƒAƒNƒZƒT)
+    'ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£(ã‚¢ã‚¯ã‚»ã‚µ)
     '===============================================================================
     Public ReadOnly Property msgVO() As UtilMDL.MSG.UtilMsgVO
         Get
@@ -40,125 +40,125 @@ Public Class UsrDefException
     End Property
 
     '===============================================================================
-    ' ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-    '   œ“ü—Íƒpƒ‰ƒƒ^   F  prmExceptionMsg    Exception‚ÌƒƒbƒZ[ƒW
-    '                       <prmDspMessageVO>   •\Ž¦—pƒƒbƒZ[ƒWƒr[ƒ“
-    '                       <prmException>      ƒVƒXƒeƒ€—áŠO‚©‚çƒ†[ƒU[’è‹`—áŠO‚ÉŽÊ‚µŽæ‚éÛ‚ÌƒVƒXƒeƒ€—áŠO
-    '                       <prmErrCtl>         “ü—ÍƒGƒ‰[ƒRƒ“ƒgƒ[ƒ‹
+    ' ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+    '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼š  prmExceptionMsg    Exceptionã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
+    '                       <prmDspMessageVO>   è¡¨ç¤ºç”¨ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒ“ãƒ¼ãƒ³
+    '                       <prmException>      ã‚·ã‚¹ãƒ†ãƒ ä¾‹å¤–ã‹ã‚‰ãƒ¦ãƒ¼ã‚¶ãƒ¼å®šç¾©ä¾‹å¤–ã«å†™ã—å–ã‚‹éš›ã®ã‚·ã‚¹ãƒ†ãƒ ä¾‹å¤–
+    '                       <prmErrCtl>         å…¥åŠ›ã‚¨ãƒ©ãƒ¼ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«
     '===============================================================================
-    '‡@(ƒ†[ƒU[’è‹`—áŠO¶¬—pƒRƒ“ƒXƒgƒ‰ƒNƒ^)
+    'â‘ (ãƒ¦ãƒ¼ã‚¶ãƒ¼å®šç¾©ä¾‹å¤–ç”Ÿæˆç”¨ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿)
     ''' <summary>
-    ''' ‡@(ƒ†[ƒU[’è‹`—áŠO¶¬—pƒRƒ“ƒXƒgƒ‰ƒNƒ^)
+    ''' â‘ (ãƒ¦ãƒ¼ã‚¶ãƒ¼å®šç¾©ä¾‹å¤–ç”Ÿæˆç”¨ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿)
     ''' </summary>
-    ''' <param name="prmExceptionMsg">Exception‚ÉŠi”[‚·‚éƒGƒ‰[ƒƒbƒZ[ƒW</param>
+    ''' <param name="prmExceptionMsg">Exceptionã«æ ¼ç´ã™ã‚‹ã‚¨ãƒ©ãƒ¼ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸</param>
     ''' <remarks></remarks>
     Public Sub New(ByVal prmExceptionMsg As String)
         MyBase.New(prmExceptionMsg)
         _DisplaiedMsgFlg = False
-        Debug.WriteLine("==========—áŠOƒƒbƒZ[ƒW==========")
+        Debug.WriteLine("==========ä¾‹å¤–ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸==========")
         Debug.WriteLine(prmExceptionMsg)
         Debug.WriteLine("==================================")
     End Sub
-    '‡A(ƒ†[ƒU[’è‹`—áŠO¶¬—pƒRƒ“ƒXƒgƒ‰ƒNƒ^)
+    'â‘¡(ãƒ¦ãƒ¼ã‚¶ãƒ¼å®šç¾©ä¾‹å¤–ç”Ÿæˆç”¨ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿)
     ''' <summary>
-    ''' ‡A(ƒ†[ƒU[’è‹`—áŠO¶¬—pƒRƒ“ƒXƒgƒ‰ƒNƒ^)
+    ''' â‘¡(ãƒ¦ãƒ¼ã‚¶ãƒ¼å®šç¾©ä¾‹å¤–ç”Ÿæˆç”¨ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿)
     ''' </summary>
-    ''' <param name="prmExceptionMsg">Exception‚ÉŠi”[‚·‚éƒGƒ‰[ƒƒbƒZ[ƒW</param>
-    ''' <param name="prmDspMessageVO">ƒ†[ƒU[’Ê’m—pƒƒbƒZ[ƒW‚ÌMsgVO</param>
+    ''' <param name="prmExceptionMsg">Exceptionã«æ ¼ç´ã™ã‚‹ã‚¨ãƒ©ãƒ¼ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸</param>
+    ''' <param name="prmDspMessageVO">ãƒ¦ãƒ¼ã‚¶ãƒ¼é€šçŸ¥ç”¨ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®MsgVO</param>
     ''' <remarks></remarks>
     Public Sub New(ByVal prmExceptionMsg As String, ByVal prmDspMessageVO As UtilMDL.MSG.UtilMsgVO)
-        Call Me.New(prmExceptionMsg)                        '‡@‚Éˆ—ˆÏ‘õ
+        Call Me.New(prmExceptionMsg)                        'â‘ ã«å‡¦ç†å§”è¨—
         _msgVO = prmDspMessageVO
     End Sub
-    '‡B(ƒVƒXƒeƒ€—áŠO‚©‚ç‚ÌƒNƒ[ƒ“¶¬—pƒRƒ“ƒXƒgƒ‰ƒNƒ^)
+    'â‘¢(ã‚·ã‚¹ãƒ†ãƒ ä¾‹å¤–ã‹ã‚‰ã®ã‚¯ãƒ­ãƒ¼ãƒ³ç”Ÿæˆç”¨ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿)
     ''' <summary>
-    ''' ‡B(ƒVƒXƒeƒ€—áŠO‚©‚ç‚ÌƒNƒ[ƒ“¶¬—pƒRƒ“ƒXƒgƒ‰ƒNƒ^)@Catch‚³‚ê‚½ƒVƒXƒeƒ€—áŠO‚©‚çUsrDefException‚Ö‚Ì‹l‚ß‘Ö‚¦‚ð‘z’è
+    ''' â‘¢(ã‚·ã‚¹ãƒ†ãƒ ä¾‹å¤–ã‹ã‚‰ã®ã‚¯ãƒ­ãƒ¼ãƒ³ç”Ÿæˆç”¨ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿)ã€€Catchã•ã‚ŒãŸã‚·ã‚¹ãƒ†ãƒ ä¾‹å¤–ã‹ã‚‰UsrDefExceptionã¸ã®è©°ã‚æ›¿ãˆã‚’æƒ³å®š
     ''' </summary>
-    ''' <param name="prmException">”­¶‚µ‚½ƒVƒXƒeƒ€—áŠO</param>
-    ''' <param name="prmDspMessageVO">ƒ†[ƒU[’Ê’m—pƒƒbƒZ[ƒW‚ÌMsgVO</param>
-    ''' <param name="prmSilentMode">ƒƒbƒZ[ƒW‚ðo‚·‚©o‚³‚È‚¢‚©‚ðŽw’è</param>
-    ''' <param name="prmOutLogFile">MSG‚ðo‚³‚È‚¢ê‡‚É‘ã‚í‚è‚Éo—Í‚³‚ê‚éƒƒOƒtƒ@ƒCƒ‹–¼‚ðŽw’è</param>
-    ''' <remarks>ƒVƒXƒeƒ€—áŠO‚ªCath‚³‚ê‚é‚±‚Æ‚ð‘z’è‚µ‚Ä‚¢‚éˆ×AƒCƒ“ƒXƒ^ƒ“ƒX‰»‚µ‚½Žž“_‚ÅƒGƒ‰[Msg‚ðo—Í‚·‚é</remarks>
+    ''' <param name="prmException">ç™ºç”Ÿã—ãŸã‚·ã‚¹ãƒ†ãƒ ä¾‹å¤–</param>
+    ''' <param name="prmDspMessageVO">ãƒ¦ãƒ¼ã‚¶ãƒ¼é€šçŸ¥ç”¨ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®MsgVO</param>
+    ''' <param name="prmSilentMode">ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å‡ºã™ã‹å‡ºã•ãªã„ã‹ã‚’æŒ‡å®š</param>
+    ''' <param name="prmOutLogFile">MSGã‚’å‡ºã•ãªã„å ´åˆã«ä»£ã‚ã‚Šã«å‡ºåŠ›ã•ã‚Œã‚‹ãƒ­ã‚°ãƒ•ã‚¡ã‚¤ãƒ«åã‚’æŒ‡å®š</param>
+    ''' <remarks>ã‚·ã‚¹ãƒ†ãƒ ä¾‹å¤–ãŒCathã•ã‚Œã‚‹ã“ã¨ã‚’æƒ³å®šã—ã¦ã„ã‚‹ç‚ºã€ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹åŒ–ã—ãŸæ™‚ç‚¹ã§ã‚¨ãƒ©ãƒ¼Msgã‚’å‡ºåŠ›ã™ã‚‹</remarks>
     Public Sub New(ByVal prmException As Exception,
                    ByVal prmDspMessageVO As UtilMDL.MSG.UtilMsgVO,
                    Optional ByVal prmSilentMode As Boolean = False,
                    Optional ByVal prmOutLogFile As String = "")
-        Call Me.New(prmException.Message, prmDspMessageVO)  '‡A‚Éˆ—ˆÏ‘õ
+        Call Me.New(prmException.Message, prmDspMessageVO)  'â‘¡ã«å‡¦ç†å§”è¨—
         Debug.WriteLine(prmException.StackTrace)
         _defaultIcon = MessageBoxIcon.Error
-        Call Me.dspMsg(prmSilentMode, prmOutLogFile)                                    'ƒVƒXƒeƒ€—áŠO‚Í’¼‚¿‚ÉƒGƒ‰[MSG‚Ì•\Ž¦‚ðs‚¤
+        Call Me.dspMsg(prmSilentMode, prmOutLogFile)                                    'ã‚·ã‚¹ãƒ†ãƒ ä¾‹å¤–ã¯ç›´ã¡ã«ã‚¨ãƒ©ãƒ¼MSGã®è¡¨ç¤ºã‚’è¡Œã†
     End Sub
-    '‡C(ƒ†[ƒU[’è‹`—áŠO¶¬—pƒRƒ“ƒXƒgƒ‰ƒNƒ^)
+    'â‘£(ãƒ¦ãƒ¼ã‚¶ãƒ¼å®šç¾©ä¾‹å¤–ç”Ÿæˆç”¨ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿)
     ''' <summary>
-    ''' ‡C(ƒ†[ƒU[’è‹`—áŠO¶¬—pƒRƒ“ƒXƒgƒ‰ƒNƒ^)@“ü—Íƒ`ƒFƒbƒNŽž‚È‚Ç‚ÌThrow‚ð‘z’è
+    ''' â‘£(ãƒ¦ãƒ¼ã‚¶ãƒ¼å®šç¾©ä¾‹å¤–ç”Ÿæˆç”¨ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿)ã€€å…¥åŠ›ãƒã‚§ãƒƒã‚¯æ™‚ãªã©ã®Throwã‚’æƒ³å®š
     ''' </summary>
-    ''' <param name="prmExceptionMsg">Exception‚ÉŠi”[‚·‚éƒGƒ‰[ƒƒbƒZ[ƒW</param>
-    ''' <param name="prmDspMessageVO">ƒ†[ƒU[’Ê’m—pƒƒbƒZ[ƒW‚ÌMsgVO</param>
-    ''' <param name="prmErrCtl">ƒtƒH[ƒJƒX‚ðÝ’è‚·‚éƒRƒ“ƒgƒ[ƒ‹</param>
+    ''' <param name="prmExceptionMsg">Exceptionã«æ ¼ç´ã™ã‚‹ã‚¨ãƒ©ãƒ¼ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸</param>
+    ''' <param name="prmDspMessageVO">ãƒ¦ãƒ¼ã‚¶ãƒ¼é€šçŸ¥ç”¨ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®MsgVO</param>
+    ''' <param name="prmErrCtl">ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚’è¨­å®šã™ã‚‹ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«</param>
     ''' <remarks>2006.11.06 Updated By Laevigata, Inc.</remarks>
     Public Sub New(ByVal prmExceptionMsg As String, ByVal prmDspMessageVO As UtilMDL.MSG.UtilMsgVO, ByVal prmErrCtl As Control)
-        Call Me.New(prmExceptionMsg, prmDspMessageVO)       '‡A‚Éˆ—ˆÏ‘õ
+        Call Me.New(prmExceptionMsg, prmDspMessageVO)       'â‘¡ã«å‡¦ç†å§”è¨—
         _targetCtl = prmErrCtl
         _colNm = ""
         _row = -1
     End Sub
-    '‡D(ƒ†[ƒU[’è‹`—áŠO¶¬—pƒRƒ“ƒXƒgƒ‰ƒNƒ^)
+    'â‘¤(ãƒ¦ãƒ¼ã‚¶ãƒ¼å®šç¾©ä¾‹å¤–ç”Ÿæˆç”¨ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿)
     ''' <summary>
-    ''' ‡D(ƒ†[ƒU[’è‹`—áŠO¶¬—pƒRƒ“ƒXƒgƒ‰ƒNƒ^)@DataGridView“ü—Íƒ`ƒFƒbƒNŽž‚È‚Ç‚ÌThrow‚ð‘z’è
+    ''' â‘¤(ãƒ¦ãƒ¼ã‚¶ãƒ¼å®šç¾©ä¾‹å¤–ç”Ÿæˆç”¨ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿)ã€€DataGridViewå…¥åŠ›ãƒã‚§ãƒƒã‚¯æ™‚ãªã©ã®Throwã‚’æƒ³å®š
     ''' </summary>
-    ''' <param name="prmExceptionMsg">Exception‚ÉŠi”[‚·‚éƒGƒ‰[ƒƒbƒZ[ƒW</param>
-    ''' <param name="prmDspMessageVO">ƒ†[ƒU[’Ê’m—pƒƒbƒZ[ƒW‚ÌMsgVO</param>
-    ''' <param name="prmErrDgv">ƒtƒH[ƒJƒX‚ðÝ’è‚·‚éDataGridView</param>
-    ''' <param name="prmColName">‘I‘ð‚³‚¹‚½‚¢ƒZƒ‹‚ÌƒOƒŠƒbƒhã‚Ì—ñ–¼</param>
-    ''' <param name="prmRow">‘I‘ð‚³‚¹‚½‚¢ƒZƒ‹‚Ìs”Ô†</param>
+    ''' <param name="prmExceptionMsg">Exceptionã«æ ¼ç´ã™ã‚‹ã‚¨ãƒ©ãƒ¼ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸</param>
+    ''' <param name="prmDspMessageVO">ãƒ¦ãƒ¼ã‚¶ãƒ¼é€šçŸ¥ç”¨ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®MsgVO</param>
+    ''' <param name="prmErrDgv">ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚’è¨­å®šã™ã‚‹DataGridView</param>
+    ''' <param name="prmColName">é¸æŠžã•ã›ãŸã„ã‚»ãƒ«ã®ã‚°ãƒªãƒƒãƒ‰ä¸Šã®åˆ—å</param>
+    ''' <param name="prmRow">é¸æŠžã•ã›ãŸã„ã‚»ãƒ«ã®è¡Œç•ªå·</param>
     ''' <remarks>2006.11.06 Created By Laevigata, Inc.</remarks>
     Public Sub New(ByVal prmExceptionMsg As String,
                        ByVal prmDspMessageVO As UtilMDL.MSG.UtilMsgVO,
                        ByVal prmErrDgv As Windows.Forms.DataGridView,
                        ByVal prmColName As String,
                        ByVal prmRow As Integer)
-        Call Me.New(prmExceptionMsg, prmDspMessageVO)       '‡A‚Éˆ—ˆÏ‘õ
+        Call Me.New(prmExceptionMsg, prmDspMessageVO)       'â‘¡ã«å‡¦ç†å§”è¨—
         _targetCtl = CType(prmErrDgv, Control)
         _colNm = prmColName
         _row = prmRow
     End Sub
     '-------------------------------------------------------------------------------
-    '   ƒƒbƒZ[ƒW•\Ž¦
-    '   iˆ—ŠT—vjŠi”[Ï‚Ý‚ÌMSG‚ð•\Ž¦(“¯ˆê‚ÌException‚É‘Î‚µ‚Ä‚Íˆê“x‚µ‚©MSG‚ð•\Ž¦‚µ‚È‚¢)‚µA
-    '               ƒGƒ‰[‘ÎÛƒRƒ“ƒgƒ[ƒ‹‚ª‘¶Ý‚µ‚½ê‡‚ÍƒtƒH[ƒJƒX‚ÌˆÊ’u‚Ã‚¯‚às‚¤
-    '   œ“ü—Íƒpƒ‰ƒƒ^   FprmSilentMode    ƒƒbƒZ[ƒW‚ðo‚·‚©o‚³‚È‚¢‚©‚ðŽw’è
-    '                    FprmOutLogFile    MSG‚ðo‚³‚È‚¢ê‡‚É‘ã‚í‚è‚Éo—Í‚³‚ê‚éƒƒOƒtƒ@ƒCƒ‹–¼‚ðŽw’è
-    '   œƒƒ\ƒbƒh–ß‚è’l F‰Ÿ‰ºƒ{ƒ^ƒ“(DialogResult)
-    '   œ”­¶—áŠO       F‚È‚µ
+    '   ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸è¡¨ç¤º
+    '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰æ ¼ç´æ¸ˆã¿ã®MSGã‚’è¡¨ç¤º(åŒä¸€ã®Exceptionã«å¯¾ã—ã¦ã¯ä¸€åº¦ã—ã‹MSGã‚’è¡¨ç¤ºã—ãªã„)ã—ã€
+    '               ã‚¨ãƒ©ãƒ¼å¯¾è±¡ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ãŒå­˜åœ¨ã—ãŸå ´åˆã¯ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã®ä½ç½®ã¥ã‘ã‚‚è¡Œã†
+    '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šprmSilentMode    ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å‡ºã™ã‹å‡ºã•ãªã„ã‹ã‚’æŒ‡å®š
+    '                    ï¼šprmOutLogFile    MSGã‚’å‡ºã•ãªã„å ´åˆã«ä»£ã‚ã‚Šã«å‡ºåŠ›ã•ã‚Œã‚‹ãƒ­ã‚°ãƒ•ã‚¡ã‚¤ãƒ«åã‚’æŒ‡å®š
+    '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šæŠ¼ä¸‹ãƒœã‚¿ãƒ³(DialogResult)
+    '   â—ç™ºç”Ÿä¾‹å¤–       ï¼šãªã—
     '                                               2006.11.06 Updated By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
-    ''' ƒƒbƒZ[ƒW•\Ž¦ Ši”[Ï‚Ý‚ÌMSG‚ð•\Ž¦(“¯ˆê‚ÌException‚É‘Î‚µ‚Ä‚Íˆê“x‚µ‚©MSG‚ð•\Ž¦‚µ‚È‚¢)‚µAƒGƒ‰[‘ÎÛƒRƒ“ƒgƒ[ƒ‹‚ª‘¶Ý‚µ‚½ê‡‚ÍƒtƒH[ƒJƒX‚ÌˆÊ’u‚Ã‚¯‚às‚¤
+    ''' ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸è¡¨ç¤º æ ¼ç´æ¸ˆã¿ã®MSGã‚’è¡¨ç¤º(åŒä¸€ã®Exceptionã«å¯¾ã—ã¦ã¯ä¸€åº¦ã—ã‹MSGã‚’è¡¨ç¤ºã—ãªã„)ã—ã€ã‚¨ãƒ©ãƒ¼å¯¾è±¡ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ãŒå­˜åœ¨ã—ãŸå ´åˆã¯ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã®ä½ç½®ã¥ã‘ã‚‚è¡Œã†
     ''' </summary>
-    ''' <param name="prmSilentMode">ƒƒbƒZ[ƒW‚ðo‚·‚©o‚³‚È‚¢‚©‚ðŽw’è</param>
-    ''' <param name="prmOutLogFile">MSG‚ðo‚³‚È‚¢ê‡‚É‘ã‚í‚è‚Éo—Í‚³‚ê‚éƒƒOƒtƒ@ƒCƒ‹–¼‚ðŽw’è</param>
-    ''' <returns>‰Ÿ‰ºƒ{ƒ^ƒ“(DialogResult)</returns>
+    ''' <param name="prmSilentMode">ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å‡ºã™ã‹å‡ºã•ãªã„ã‹ã‚’æŒ‡å®š</param>
+    ''' <param name="prmOutLogFile">MSGã‚’å‡ºã•ãªã„å ´åˆã«ä»£ã‚ã‚Šã«å‡ºåŠ›ã•ã‚Œã‚‹ãƒ­ã‚°ãƒ•ã‚¡ã‚¤ãƒ«åã‚’æŒ‡å®š</param>
+    ''' <returns>æŠ¼ä¸‹ãƒœã‚¿ãƒ³(DialogResult)</returns>
     ''' <remarks></remarks>
     Public Function dspMsg(Optional ByVal prmSilentMode As Boolean = False, Optional ByVal prmOutLogFile As String = "") As DialogResult
 
-        'ƒƒbƒZ[ƒW•\Ž¦‚ðs‚¤
+        'ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸è¡¨ç¤ºã‚’è¡Œã†
         Dim ret As DialogResult
         If _DisplaiedMsgFlg Then
-            '‚±‚ÌException‚ÌƒGƒ‰[‚Í•\Ž¦Ï‚Ý‚È‚Ì‚Å•\Ž¦‚µ‚È‚¢
+            'ã“ã®Exceptionã®ã‚¨ãƒ©ãƒ¼ã¯è¡¨ç¤ºæ¸ˆã¿ãªã®ã§è¡¨ç¤ºã—ãªã„
             ret = DialogResult.OK
         Else
             If Not Me.hasMsg Then
-                'Message‚ª‘¶Ý‚µ‚È‚¢ê‡‚ÍExceptionMessage‚ð•\Ž¦‚·‚é
+                'MessageãŒå­˜åœ¨ã—ãªã„å ´åˆã¯ExceptionMessageã‚’è¡¨ç¤ºã™ã‚‹
                 If Not prmSilentMode Then
-                    ret = MessageBox.Show(MyBase.Message, "ƒGƒ‰[", MessageBoxButtons.OK, _defaultIcon, MessageBoxDefaultButton.Button1)
+                    ret = MessageBox.Show(MyBase.Message, "ã‚¨ãƒ©ãƒ¼", MessageBoxButtons.OK, _defaultIcon, MessageBoxDefaultButton.Button1)
                 Else
-                    'ƒTƒCƒŒƒ“ƒgƒ‚[ƒh‚ÌÛ‚ÍMSG‚ðo—Í‚¹‚¸‚ÉLOG‚Éo—Í‚·‚é
-                    'LogFileName¶¬
+                    'ã‚µã‚¤ãƒ¬ãƒ³ãƒˆãƒ¢ãƒ¼ãƒ‰ã®éš›ã¯MSGã‚’å‡ºåŠ›ã›ãšã«LOGã«å‡ºåŠ›ã™ã‚‹
+                    'LogFileNameç”Ÿæˆ
                     Dim tmpLogFile As String
                     If Not "".Equals(prmOutLogFile) Then
                         tmpLogFile = prmOutLogFile
                     Else
-                        'o—ÍƒƒOƒtƒ@ƒCƒ‹–¼‚ªŽw’è‚³‚ê‚Ä‚¢‚È‚¢‚Ì‚ÅŽ©—Í‚Å¶¬
+                        'å‡ºåŠ›ãƒ­ã‚°ãƒ•ã‚¡ã‚¤ãƒ«åãŒæŒ‡å®šã•ã‚Œã¦ã„ãªã„ã®ã§è‡ªåŠ›ã§ç”Ÿæˆ
                         tmpLogFile = System.IO.Path.GetDirectoryName( _
                                     System.Reflection.Assembly.GetExecutingAssembly().Location _
                                 ) & "\" & _
@@ -166,24 +166,24 @@ Public Class UsrDefException
                                 Now.ToString("yyyyMMdd") & ".log"
                     End If
 
-                    'ƒƒK[¶¬
+                    'ãƒ­ã‚¬ãƒ¼ç”Ÿæˆ
                     Dim logger As UtilMDL.Log.UtilLogWriter = New UtilMDL.Log.UtilLogWriter(tmpLogFile)
 
-                    'ƒƒOo—Í
+                    'ãƒ­ã‚°å‡ºåŠ›
                     logger.writeLine(MyBase.Message)
                 End If
             Else
-                'Šù‚É¶¬‚³‚ê‚Ä‚¢‚é_msgVO.dspStr‚ð•\Ž¦
+                'æ—¢ã«ç”Ÿæˆã•ã‚Œã¦ã„ã‚‹_msgVO.dspStrã‚’è¡¨ç¤º
                 If Not prmSilentMode Then
                     ret = MessageBox.Show(_msgVO.dspStr, _msgVO.title, _msgVO.button, _msgVO.icon, _msgVO.defaultButton)
                 Else
-                    'ƒTƒCƒŒƒ“ƒgƒ‚[ƒh‚ÌÛ‚ÍMSG‚ðo—Í‚¹‚¸‚ÉLOG‚Éo—Í‚·‚é
-                    'LogFileName¶¬
+                    'ã‚µã‚¤ãƒ¬ãƒ³ãƒˆãƒ¢ãƒ¼ãƒ‰ã®éš›ã¯MSGã‚’å‡ºåŠ›ã›ãšã«LOGã«å‡ºåŠ›ã™ã‚‹
+                    'LogFileNameç”Ÿæˆ
                     Dim tmpLogFile As String
                     If Not "".Equals(prmOutLogFile) Then
                         tmpLogFile = prmOutLogFile
                     Else
-                        'o—ÍƒƒOƒtƒ@ƒCƒ‹–¼‚ªŽw’è‚³‚ê‚Ä‚¢‚È‚¢‚Ì‚ÅŽ©—Í‚Å¶¬
+                        'å‡ºåŠ›ãƒ­ã‚°ãƒ•ã‚¡ã‚¤ãƒ«åãŒæŒ‡å®šã•ã‚Œã¦ã„ãªã„ã®ã§è‡ªåŠ›ã§ç”Ÿæˆ
                         tmpLogFile = System.IO.Path.GetDirectoryName( _
                                     System.Reflection.Assembly.GetExecutingAssembly().Location _
                                 ) & "\" & _
@@ -191,29 +191,29 @@ Public Class UsrDefException
                                 Now.ToString("yyyyMMdd") & ".log"
                     End If
 
-                    'ƒƒK[¶¬
+                    'ãƒ­ã‚¬ãƒ¼ç”Ÿæˆ
                     Dim logger As UtilMDL.Log.UtilLogWriter = New UtilMDL.Log.UtilLogWriter(tmpLogFile)
 
-                    'ƒƒOo—Í
+                    'ãƒ­ã‚°å‡ºåŠ›
                     logger.writeLine(_msgVO.dspStr)
                 End If
 
             End If
         End If
-        _DisplaiedMsgFlg = True 'MSG‚ð•\Ž¦‚µ‚½‚Ì‚Åƒtƒ‰ƒO‚ð“|‚·
+        _DisplaiedMsgFlg = True 'MSGã‚’è¡¨ç¤ºã—ãŸã®ã§ãƒ•ãƒ©ã‚°ã‚’å€’ã™
         _msgVO = Nothing
 
-        'ƒGƒ‰[ƒRƒ“ƒgƒ[ƒ‹‚ª‘¶Ý‚·‚éê‡‚ÍƒtƒH[ƒJƒX‚ðˆÊ’u•t‚¯‚é
+        'ã‚¨ãƒ©ãƒ¼ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ãŒå­˜åœ¨ã™ã‚‹å ´åˆã¯ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚’ä½ç½®ä»˜ã‘ã‚‹
         If _targetCtl IsNot Nothing Then
             Dim flg As Boolean = _targetCtl.Enabled
-            _targetCtl.Enabled = True   'Žg—p•s‰Â‚É”õ‚¦‚Äˆê’UŽg—p‰Â‚É‚·‚é
-            _targetCtl.Focus()          'ƒtƒH[ƒJƒXÝ’è
+            _targetCtl.Enabled = True   'ä½¿ç”¨ä¸å¯ã«å‚™ãˆã¦ä¸€æ—¦ä½¿ç”¨å¯ã«ã™ã‚‹
+            _targetCtl.Focus()          'ãƒ•ã‚©ãƒ¼ã‚«ã‚¹è¨­å®š
             If (Not "".Equals(_colNm) And _row <> -1) Then
-                'ƒf[ƒ^ƒOƒŠƒbƒhƒrƒ…[‚È‚Ì‚Ås—ñ‚àÝ’è‚·‚é
+                'ãƒ‡ãƒ¼ã‚¿ã‚°ãƒªãƒƒãƒ‰ãƒ“ãƒ¥ãƒ¼ãªã®ã§è¡Œåˆ—ã‚‚è¨­å®šã™ã‚‹
                 CType(_targetCtl, Windows.Forms.DataGridView).CurrentCell _
                   = CType(_targetCtl, Windows.Forms.DataGridView).Rows(_row).Cells(_colNm)
             End If
-            _targetCtl.Enabled = flg    'Žg—p•s‰Â‚¾‚Á‚½ê‡‚ÍŽŸ‚ÌƒRƒ“ƒgƒ[ƒ‹‚ÖƒtƒH[ƒJƒX‚ÍˆÚ“®‚·‚é
+            _targetCtl.Enabled = flg    'ä½¿ç”¨ä¸å¯ã ã£ãŸå ´åˆã¯æ¬¡ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã¸ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã¯ç§»å‹•ã™ã‚‹
         End If
         Return ret
 

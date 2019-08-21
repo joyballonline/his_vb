@@ -1,60 +1,60 @@
-Imports System.Windows.Forms
+ï»¿Imports System.Windows.Forms
 '===============================================================================
 '
-'  ƒ†[ƒeƒBƒŠƒeƒBƒNƒ‰ƒX
-'    iƒNƒ‰ƒX–¼j    UtilProgressBar
-'    iˆ—‹@”\–¼j      ƒvƒƒOƒŒƒXƒo[‰æ–Ê‹@”\‚ğ’ñ‹Ÿ‚·‚é
-'    i–{MDLg—p‘O’ñj   “Á‚É‚È‚µ
-'    i”õlj            
-'    ig—p•û–@j       'ƒvƒƒOƒŒƒXƒo[‰æ–Ê‚ğ•\¦
+'  ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£ã‚¯ãƒ©ã‚¹
+'    ï¼ˆã‚¯ãƒ©ã‚¹åï¼‰    UtilProgressBar
+'    ï¼ˆå‡¦ç†æ©Ÿèƒ½åï¼‰      ãƒ—ãƒ­ã‚°ãƒ¬ã‚¹ãƒãƒ¼ç”»é¢æ©Ÿèƒ½ã‚’æä¾›ã™ã‚‹
+'    ï¼ˆæœ¬MDLä½¿ç”¨å‰æï¼‰   ç‰¹ã«ãªã—
+'    ï¼ˆå‚™è€ƒï¼‰            
+'    ï¼ˆä½¿ç”¨æ–¹æ³•ï¼‰       'ãƒ—ãƒ­ã‚°ãƒ¬ã‚¹ãƒãƒ¼ç”»é¢ã‚’è¡¨ç¤º
 '                       Dim pb As UtilProgressBar = New UtilProgressBar(Me)
 '                       pb.Show()
 '
-'                       'ƒvƒƒOƒŒƒXƒo[İ’è
-'                       pb.jobName = "o—Íƒf[ƒ^‚ğ¶¬‚µ‚Ä‚¢‚Ü‚·B"
-'                       pb.status = "‰Šú‰»’†DDD"
+'                       'ãƒ—ãƒ­ã‚°ãƒ¬ã‚¹ãƒãƒ¼è¨­å®š
+'                       pb.jobName = "å‡ºåŠ›ãƒ‡ãƒ¼ã‚¿ã‚’ç”Ÿæˆã—ã¦ã„ã¾ã™ã€‚"
+'                       pb.status = "åˆæœŸåŒ–ä¸­ï¼ï¼ï¼"
 '
-'                       '¡Àˆ—
+'                       'â– å®Ÿå‡¦ç†
 '
-'                       'ƒvƒƒOƒŒƒXƒo[’lİ’è
-'                       pb.status = "o—Í’†DDD"
+'                       'ãƒ—ãƒ­ã‚°ãƒ¬ã‚¹ãƒãƒ¼å€¤è¨­å®š
+'                       pb.status = "å‡ºåŠ›ä¸­ï¼ï¼ï¼"
 '                       pb.oneStep = 10
 '                       pb.maxVal = rtnCnt
 '                       For i As Integer = 0 To rtnCnt - 1
-'                           pb.value = i 'ƒvƒƒOƒŒƒXƒo[’lİ’è
+'                           pb.value = i 'ãƒ—ãƒ­ã‚°ãƒ¬ã‚¹ãƒãƒ¼å€¤è¨­å®š
 '
-'                           '¡Àˆ—
+'                           'â– å®Ÿå‡¦ç†
 '                       
 '                       Next
 '                       
-'                       '‰æ–ÊÁ‹
+'                       'ç”»é¢æ¶ˆå»
 '                       pb.Close()
 '
 '===============================================================================
-'  —š—ğ  –¼‘O          “ú  •t      ƒ}[ƒN      “à—e
+'  å±¥æ­´  åå‰          æ—¥  ä»˜      ãƒãƒ¼ã‚¯      å†…å®¹
 '-------------------------------------------------------------------------------
-'  (1)   Laevigata, Inc.    2006/06/02              V‹K
+'  (1)   Laevigata, Inc.    2006/06/02              æ–°è¦
 '-------------------------------------------------------------------------------
 Public Class UtilProgressBar
     Inherits System.Windows.Forms.Form
 
     '===============================================================================
-    'ƒƒ“ƒo[•Ï”’è‹`
+    'ãƒ¡ãƒ³ãƒãƒ¼å¤‰æ•°å®šç¾©
     '===============================================================================
     Private _parentForm As Form
     Private _cur As Cursor = Cursors.Default
     Private _windowTitle As String = ""                 'WindowTitle
-    Private _jobName As String = ""                     'ˆ—–¼Ì
-    Private _status As String = ""                      'ˆ—ó‘Ô
-    Private _maxVal As Integer = 100                    'Å‘åˆ—ƒXƒeƒbƒv
-    Private _minVal As Integer = 0                      'Å¬ˆ—ƒXƒeƒbƒv
-    Private _oneStep As Integer = 2                     '‚Ç‚Ì’PˆÊ‚ÅƒXƒeƒbƒvƒAƒbƒv‚·‚é‚©
-    Private _value As Integer = 0                       'Œ»İ‚Ìˆ—ƒXƒeƒbƒv
+    Private _jobName As String = ""                     'å‡¦ç†åç§°
+    Private _status As String = ""                      'å‡¦ç†çŠ¶æ…‹
+    Private _maxVal As Integer = 100                    'æœ€å¤§å‡¦ç†ã‚¹ãƒ†ãƒƒãƒ—
+    Private _minVal As Integer = 0                      'æœ€å°å‡¦ç†ã‚¹ãƒ†ãƒƒãƒ—
+    Private _oneStep As Integer = 2                     'ã©ã®å˜ä½ã§ã‚¹ãƒ†ãƒƒãƒ—ã‚¢ãƒƒãƒ—ã™ã‚‹ã‹
+    Private _value As Integer = 0                       'ç¾åœ¨ã®å‡¦ç†ã‚¹ãƒ†ãƒƒãƒ—
 
     '===============================================================================
-    'ƒvƒƒpƒeƒB(ƒAƒNƒZƒT)
+    'ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£(ã‚¢ã‚¯ã‚»ã‚µ)
     '===============================================================================
-    'Windowƒ^ƒCƒgƒ‹
+    'Windowã‚¿ã‚¤ãƒˆãƒ«
     Public Property windowTitle() As String
         Get
             Return _windowTitle
@@ -66,7 +66,7 @@ Public Class UtilProgressBar
             Me.Refresh()
         End Set
     End Property
-    'ˆ—–¼
+    'å‡¦ç†å
     Public Property jobName() As String
         Get
             Return _jobName
@@ -79,7 +79,7 @@ Public Class UtilProgressBar
             Me.Refresh()
         End Set
     End Property
-    'ˆ—ó‘Ô
+    'å‡¦ç†çŠ¶æ…‹
     Public Property status() As String
         Get
             Return _status
@@ -91,7 +91,7 @@ Public Class UtilProgressBar
             Me.Refresh()
         End Set
     End Property
-    'Å‘å’l
+    'æœ€å¤§å€¤
     Public Property maxVal() As Integer
         Get
             Return _maxVal
@@ -103,7 +103,7 @@ Public Class UtilProgressBar
             Me.Refresh()
         End Set
     End Property
-    'Å¬’l
+    'æœ€å°å€¤
     Public Property minVal() As Integer
         Get
             Return _minVal
@@ -115,7 +115,7 @@ Public Class UtilProgressBar
             Me.Refresh()
         End Set
     End Property
-    'ƒXƒeƒbƒv—Ê
+    'ã‚¹ãƒ†ãƒƒãƒ—é‡
     Public Property oneStep() As Integer
         Get
             Return _oneStep
@@ -127,7 +127,7 @@ Public Class UtilProgressBar
             Me.Refresh()
         End Set
     End Property
-    'i’»ó‘Ô
+    'é€²æ—çŠ¶æ…‹
     Public Property value() As Integer
         Get
             Return _value
@@ -142,7 +142,7 @@ Public Class UtilProgressBar
 
 
     '-------------------------------------------------------------------------------
-    'ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    'ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     '-------------------------------------------------------------------------------
     Private Sub New()
         InitializeComponent()
@@ -160,20 +160,20 @@ Public Class UtilProgressBar
         _parentForm.Enabled = False
 
         Application.DoEvents()
-        StartPosition = FormStartPosition.CenterScreen                      '‰æ–Ê’†‰›•\¦
+        StartPosition = FormStartPosition.CenterScreen                      'ç”»é¢ä¸­å¤®è¡¨ç¤º
     End Sub
 
     '-------------------------------------------------------------------------------
-    'ƒtƒH[ƒ€ƒ[ƒh
+    'ãƒ•ã‚©ãƒ¼ãƒ ãƒ­ãƒ¼ãƒ‰
     '-------------------------------------------------------------------------------
     Private Sub UtilProgressBar_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-        '•`‰æŠÖŒW‚Ìİ’è
-        Me.SetStyle(ControlStyles.ResizeRedraw, True)           'ƒTƒCƒY‚ª•ÏX‚³‚ê‚½‚Æ‚«‚ÉAƒRƒ“ƒgƒ[ƒ‹‚ªƒRƒ“ƒgƒ[ƒ‹©‘Ì‚ğÄ•`‰æ‚·‚é‚©‚Ç‚¤‚©‚ğ¦‚·’l‚ğİ’è
-        Me.SetStyle(ControlStyles.DoubleBuffer, True)           '•`‰æ‚Íƒoƒbƒtƒ@‚ÅÀs‚³‚êAŠ®—¹Œã‚ÉAŒ‹‰Ê‚ª‰æ–Ê‚Éo—Í‚³‚ê‚é‚æ‚¤İ’è
-        Me.SetStyle(ControlStyles.OptimizedDoubleBuffer, True)  'ƒRƒ“ƒgƒ[ƒ‹‚ÍA‰æ–Ê‚É’¼Ú‚Å‚Í‚È‚­A‚Ü‚¸ƒoƒbƒtƒ@‚É•`‰æ‚³‚ê‚Ü‚·B‚±‚ê‚É‚æ‚èA‚¿‚ç‚Â‚«‚ğ—}‚¦‚é‚±‚Æ‚ª‚Å‚«‚Ü‚·B
-        Me.SetStyle(ControlStyles.UserPaint, True)              'ƒRƒ“ƒgƒ[ƒ‹‚ÍAƒIƒyƒŒ[ƒeƒBƒ“ƒO ƒVƒXƒeƒ€‚É‚æ‚Á‚Ä‚Å‚Í‚È‚­A“Æ©‚É•`‰æ‚³‚ê‚é‚æ‚¤İ’è
-        Me.SetStyle(ControlStyles.AllPaintingInWmPaint, True)   'ƒRƒ“ƒgƒ[ƒ‹‚ÍƒEƒBƒ“ƒhƒE ƒƒbƒZ[ƒW WM_ERASEBKGND ‚ğ–³‹‚·‚é‚æ‚¤‚Éİ’è
+        'æç”»é–¢ä¿‚ã®è¨­å®š
+        Me.SetStyle(ControlStyles.ResizeRedraw, True)           'ã‚µã‚¤ã‚ºãŒå¤‰æ›´ã•ã‚ŒãŸã¨ãã«ã€ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ãŒã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«è‡ªä½“ã‚’å†æç”»ã™ã‚‹ã‹ã©ã†ã‹ã‚’ç¤ºã™å€¤ã‚’è¨­å®š
+        Me.SetStyle(ControlStyles.DoubleBuffer, True)           'æç”»ã¯ãƒãƒƒãƒ•ã‚¡ã§å®Ÿè¡Œã•ã‚Œã€å®Œäº†å¾Œã«ã€çµæœãŒç”»é¢ã«å‡ºåŠ›ã•ã‚Œã‚‹ã‚ˆã†è¨­å®š
+        Me.SetStyle(ControlStyles.OptimizedDoubleBuffer, True)  'ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã¯ã€ç”»é¢ã«ç›´æ¥ã§ã¯ãªãã€ã¾ãšãƒãƒƒãƒ•ã‚¡ã«æç”»ã•ã‚Œã¾ã™ã€‚ã“ã‚Œã«ã‚ˆã‚Šã€ã¡ã‚‰ã¤ãã‚’æŠ‘ãˆã‚‹ã“ã¨ãŒã§ãã¾ã™ã€‚
+        Me.SetStyle(ControlStyles.UserPaint, True)              'ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã¯ã€ã‚ªãƒšãƒ¬ãƒ¼ãƒ†ã‚£ãƒ³ã‚° ã‚·ã‚¹ãƒ†ãƒ ã«ã‚ˆã£ã¦ã§ã¯ãªãã€ç‹¬è‡ªã«æç”»ã•ã‚Œã‚‹ã‚ˆã†è¨­å®š
+        Me.SetStyle(ControlStyles.AllPaintingInWmPaint, True)   'ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã¯ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ WM_ERASEBKGND ã‚’ç„¡è¦–ã™ã‚‹ã‚ˆã†ã«è¨­å®š
 
         _cur = Me.Cursor
         Application.DoEvents()
@@ -186,7 +186,7 @@ Public Class UtilProgressBar
     End Sub
 
     '-------------------------------------------------------------------------------
-    'ƒtƒH[ƒ€ƒNƒ[ƒY
+    'ãƒ•ã‚©ãƒ¼ãƒ ã‚¯ãƒ­ãƒ¼ã‚º
     '-------------------------------------------------------------------------------
     Private Sub UtilProgressBar_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
         Me.Cursor = _cur
