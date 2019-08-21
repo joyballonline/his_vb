@@ -1,91 +1,91 @@
-Namespace CommonDialog
+ï»¿Namespace CommonDialog
     '===============================================================================
     '
-    ' ƒ†[ƒeƒBƒŠƒeƒBƒ‚ƒWƒ…[ƒ‹
-    '   iƒ‚ƒWƒ…[ƒ‹–¼j   UtilCmnDlgHandler
-    '   iˆ—‹@”\–¼j     ƒRƒ‚ƒ“ƒ_ƒCƒAƒƒO‘€ì‹@”\‚ð’ñ‹Ÿ‚·‚é
-    '   i–{MDLŽg—p‘O’ñj  “Á‚É–³‚µ
-    '   i”õlj           
+    ' ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«
+    '   ï¼ˆãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«åï¼‰   UtilCmnDlgHandler
+    '   ï¼ˆå‡¦ç†æ©Ÿèƒ½åï¼‰     ã‚³ãƒ¢ãƒ³ãƒ€ã‚¤ã‚¢ãƒ­ã‚°æ“ä½œæ©Ÿèƒ½ã‚’æä¾›ã™ã‚‹
+    '   ï¼ˆæœ¬MDLä½¿ç”¨å‰æï¼‰  ç‰¹ã«ç„¡ã—
+    '   ï¼ˆå‚™è€ƒï¼‰           
     '
     '===============================================================================
-    ' —š—ð  –¼‘O          “ú  •t      ƒ}[ƒN      “à—e
+    ' å±¥æ­´  åå‰          æ—¥  ä»˜      ãƒžãƒ¼ã‚¯      å†…å®¹
     '-------------------------------------------------------------------------------
-    ' (1)   ‚–Ø   @     2006/05/11              V‹K
+    ' (1)   é«˜æœ¨   ã€€     2006/05/11              æ–°è¦
     '-------------------------------------------------------------------------------
     Public Class UtilCmnDlgHandler
 
         '===============================================================================
-        '•Ï”’è‹`
+        'å¤‰æ•°å®šç¾©
         '===============================================================================
 
         '===============================================================================
-        '’è”’è‹`
+        'å®šæ•°å®šç¾©
         '===============================================================================
-        'ƒRƒ‚ƒ“ƒ_ƒCƒAƒƒOƒtƒBƒ‹ƒ^[’è”
-        Public Const TXT As String = "ƒeƒLƒXƒgƒtƒ@ƒCƒ‹(*.txt)" & "|" & "*.txt"  'ƒeƒLƒXƒgƒtƒ@ƒCƒ‹
-        Public Const CSV As String = "CSVƒtƒ@ƒCƒ‹(*.csv)" & "|" & "*.csv"       '‚b‚r‚uƒtƒ@ƒCƒ‹
-        Public Const DAT As String = "ƒf[ƒ^ƒtƒ@ƒCƒ‹(*.dat)" & "|" & "*.dat"    'ƒf[ƒ^ƒtƒ@ƒCƒ‹
-        Public Const ALL As String = "‘S‚Ä‚Ìƒtƒ@ƒCƒ‹(*.*)" & "|" & "*.*"        '‘S‚Ä‚Ìƒtƒ@ƒCƒ‹
+        'ã‚³ãƒ¢ãƒ³ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ãƒ•ã‚£ãƒ«ã‚¿ãƒ¼å®šæ•°
+        Public Const TXT As String = "ãƒ†ã‚­ã‚¹ãƒˆãƒ•ã‚¡ã‚¤ãƒ«(*.txt)" & "|" & "*.txt"  'ãƒ†ã‚­ã‚¹ãƒˆãƒ•ã‚¡ã‚¤ãƒ«
+        Public Const CSV As String = "CSVãƒ•ã‚¡ã‚¤ãƒ«(*.csv)" & "|" & "*.csv"       'ï¼£ï¼³ï¼¶ãƒ•ã‚¡ã‚¤ãƒ«
+        Public Const DAT As String = "ãƒ‡ãƒ¼ã‚¿ãƒ•ã‚¡ã‚¤ãƒ«(*.dat)" & "|" & "*.dat"    'ãƒ‡ãƒ¼ã‚¿ãƒ•ã‚¡ã‚¤ãƒ«
+        Public Const ALL As String = "å…¨ã¦ã®ãƒ•ã‚¡ã‚¤ãƒ«(*.*)" & "|" & "*.*"        'å…¨ã¦ã®ãƒ•ã‚¡ã‚¤ãƒ«
 
-        'ƒRƒ‚ƒ“ƒ_ƒCƒAƒƒO‰Šú•\Ž¦ƒfƒBƒŒƒNƒgƒŠ
+        'ã‚³ãƒ¢ãƒ³ãƒ€ã‚¤ã‚¢ãƒ­ã‚°åˆæœŸè¡¨ç¤ºãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
         Private Const sDEFALT_DIR As String = "C:\"
 
         '-------------------------------------------------------------------------------
-        '@ uƒtƒ@ƒCƒ‹‚ð‘I‘ðvƒRƒ‚ƒ“ƒ_ƒCƒAƒƒO•\Ž¦
-        '  iˆ—ŠT—vjuƒtƒ@ƒCƒ‹‚ð‘I‘ðvƒRƒ‚ƒ“ƒ_ƒCƒAƒƒO‚ð•\Ž¦‚µA‘I‘ð‚³‚ê‚½ƒtƒ@ƒCƒ‹‚Ìƒtƒ‹ƒpƒX‚ð•Ô‚·
-        '  œ“ü—Íƒpƒ‰ƒƒ^Fi <prmDir>       ƒ_ƒCƒAƒƒO‰Šú•\Ž¦ƒfƒBƒŒƒNƒgƒŠ
-        '                Fi <prmFileNm>    ƒ_ƒCƒAƒƒO‰Šú•\Ž¦ƒtƒ@ƒCƒ‹–¼
-        '                Fi <prmFillter>   ƒ_ƒCƒAƒƒO•\Ž¦ƒtƒBƒ‹ƒ^[
+        'ã€€ ã€Œãƒ•ã‚¡ã‚¤ãƒ«ã‚’é¸æŠžã€ã‚³ãƒ¢ãƒ³ãƒ€ã‚¤ã‚¢ãƒ­ã‚°è¡¨ç¤º
+        '  ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰ã€Œãƒ•ã‚¡ã‚¤ãƒ«ã‚’é¸æŠžã€ã‚³ãƒ¢ãƒ³ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚’è¡¨ç¤ºã—ã€é¸æŠžã•ã‚ŒãŸãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ•ãƒ«ãƒ‘ã‚¹ã‚’è¿”ã™
+        '  â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ï¼ši <prmDir>       ãƒ€ã‚¤ã‚¢ãƒ­ã‚°åˆæœŸè¡¨ç¤ºãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
+        '                ï¼ši <prmFileNm>    ãƒ€ã‚¤ã‚¢ãƒ­ã‚°åˆæœŸè¡¨ç¤ºãƒ•ã‚¡ã‚¤ãƒ«å
+        '                ï¼ši <prmFillter>   ãƒ€ã‚¤ã‚¢ãƒ­ã‚°è¡¨ç¤ºãƒ•ã‚£ãƒ«ã‚¿ãƒ¼
         '                                      TXT/CSV/DAT/ALL                       
-        '                Fi <prmTitle>     ƒ^ƒCƒgƒ‹
-        '                Fi <prmMultiSel>  •¡”‘I‘ð‰Â”Û
-        '  œŠÖ”–ß‚è’l@F‘I‘ð‚³‚ê‚½ƒtƒ@ƒCƒ‹‚Ìƒtƒ‹ƒpƒX(•¡”‘I‘ð‚ ‚è‚Ìê‡‚Íu,v‚Å˜AŒ‹‚µ‚Ä•Ô‹p/ƒLƒƒƒ“ƒZƒ‹Žž‚Í""‚ð•Ô‹p)
-        '  œ‚»‚Ì‘¼FŒÄo—á Call UtilCmnDlgHandler.openFileDialog("d:\work", "tmp.txt", UtilCmnDlgHandler.TXT & "|" & UtilCmnDlgHandler.ALL)
-        '            prmDir—Dæ“x
-        '                      prmDir > ƒJƒŒƒ“ƒgDir > "C:\"
+        '                ï¼ši <prmTitle>     ã‚¿ã‚¤ãƒˆãƒ«
+        '                ï¼ši <prmMultiSel>  è¤‡æ•°é¸æŠžå¯å¦
+        '  â—é–¢æ•°æˆ»ã‚Šå€¤ã€€ï¼šé¸æŠžã•ã‚ŒãŸãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ•ãƒ«ãƒ‘ã‚¹(è¤‡æ•°é¸æŠžã‚ã‚Šã®å ´åˆã¯ã€Œ,ã€ã§é€£çµã—ã¦è¿”å´/ã‚­ãƒ£ãƒ³ã‚»ãƒ«æ™‚ã¯""ã‚’è¿”å´)
+        '  â—ãã®ä»–ï¼šå‘¼å‡ºä¾‹ Call UtilCmnDlgHandler.openFileDialog("d:\work", "tmp.txt", UtilCmnDlgHandler.TXT & "|" & UtilCmnDlgHandler.ALL)
+        '            prmDirå„ªå…ˆåº¦
+        '                      prmDir > ã‚«ãƒ¬ãƒ³ãƒˆDir > "C:\"
         '                                              2006.05.11 Createed By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' uƒtƒ@ƒCƒ‹‚ð‘I‘ðvƒRƒ‚ƒ“ƒ_ƒCƒAƒƒO•\Ž¦
+        ''' ã€Œãƒ•ã‚¡ã‚¤ãƒ«ã‚’é¸æŠžã€ã‚³ãƒ¢ãƒ³ãƒ€ã‚¤ã‚¢ãƒ­ã‚°è¡¨ç¤º
         ''' </summary>
-        ''' <param name="prmDir">ƒ_ƒCƒAƒƒO‰Šú•\Ž¦ƒfƒBƒŒƒNƒgƒŠ</param>
-        ''' <param name="prmFileNm">ƒ_ƒCƒAƒƒO‰Šú•\Ž¦ƒtƒ@ƒCƒ‹–¼</param>
-        ''' <param name="prmFillter">ƒ_ƒCƒAƒƒO•\Ž¦ƒtƒBƒ‹ƒ^[ TXT/CSV/DAT/ALL </param>
-        ''' <param name="prmTitle">ƒ^ƒCƒgƒ‹</param>
-        ''' <param name="prmMultiSel">•¡”‘I‘ð‰Â”Û</param>
-        ''' <returns>‘I‘ð‚³‚ê‚½ƒtƒ@ƒCƒ‹‚Ìƒtƒ‹ƒpƒX(•¡”‘I‘ð‚ ‚è‚Ìê‡‚Íu,v‚Å˜AŒ‹‚µ‚Ä•Ô‹p/ƒLƒƒƒ“ƒZƒ‹Žž‚Í""‚ð•Ô‹p)</returns>
+        ''' <param name="prmDir">ãƒ€ã‚¤ã‚¢ãƒ­ã‚°åˆæœŸè¡¨ç¤ºãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª</param>
+        ''' <param name="prmFileNm">ãƒ€ã‚¤ã‚¢ãƒ­ã‚°åˆæœŸè¡¨ç¤ºãƒ•ã‚¡ã‚¤ãƒ«å</param>
+        ''' <param name="prmFillter">ãƒ€ã‚¤ã‚¢ãƒ­ã‚°è¡¨ç¤ºãƒ•ã‚£ãƒ«ã‚¿ãƒ¼ TXT/CSV/DAT/ALL </param>
+        ''' <param name="prmTitle">ã‚¿ã‚¤ãƒˆãƒ«</param>
+        ''' <param name="prmMultiSel">è¤‡æ•°é¸æŠžå¯å¦</param>
+        ''' <returns>é¸æŠžã•ã‚ŒãŸãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ•ãƒ«ãƒ‘ã‚¹(è¤‡æ•°é¸æŠžã‚ã‚Šã®å ´åˆã¯ã€Œ,ã€ã§é€£çµã—ã¦è¿”å´/ã‚­ãƒ£ãƒ³ã‚»ãƒ«æ™‚ã¯""ã‚’è¿”å´)</returns>
         ''' <remarks></remarks>
         Public Shared Function openFileDialog(Optional ByVal prmDir As String = "",
                                           Optional ByVal prmFileNm As String = "",
                                           Optional ByVal prmFillter As String = ALL,
-                                          Optional ByVal prmTitle As String = "ƒtƒ@ƒCƒ‹‚ð‘I‘ð",
+                                          Optional ByVal prmTitle As String = "ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é¸æŠž",
                                           Optional ByVal prmMultiSel As Boolean = False) As String
 
             Try
-                '‰Šú•\Ž¦‚ÌƒpƒXŽæ“¾
-                Dim initialDir As String       '‰Šú•\Ž¦‚·‚éƒfƒBƒŒƒNƒgƒŠ
+                'åˆæœŸè¡¨ç¤ºã®ãƒ‘ã‚¹å–å¾—
+                Dim initialDir As String       'åˆæœŸè¡¨ç¤ºã™ã‚‹ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
                 If prmDir.Equals("") Then
-                    initialDir = sDEFALT_DIR       '‰Šú’l
+                    initialDir = sDEFALT_DIR       'åˆæœŸå€¤
                 Else
-                    initialDir = prmDir                'ˆø”’l
+                    initialDir = prmDir                'å¼•æ•°å€¤
                 End If
 
-                'OpenFileDialog ‚ÌV‚µ‚¢ƒCƒ“ƒXƒ^ƒ“ƒX‚ð¶¬‚·‚é 
+                'OpenFileDialog ã®æ–°ã—ã„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆã™ã‚‹ 
                 Dim fd As OpenFileDialog = New OpenFileDialog()
                 Try
                     With fd
-                        .Title = prmTitle               'ƒ_ƒCƒAƒƒO‚Ìƒ^ƒCƒgƒ‹‚ðÝ’è‚·‚é
-                        .InitialDirectory = initialDir  '‰Šú•\Ž¦‚·‚éƒfƒBƒŒƒNƒgƒŠ‚ðÝ’è‚·‚é
-                        .FileName = prmFileNm           '‰Šú•\Ž¦‚·‚éƒtƒ@ƒCƒ‹–¼‚ðÝ’è‚·‚é
-                        .Filter = prmFillter            'ƒtƒ@ƒCƒ‹‚ÌƒtƒBƒ‹ƒ^‚ðÝ’è‚·‚é
-                        .RestoreDirectory = True        'ƒ_ƒCƒAƒƒOƒ{ƒbƒNƒX‚ð•Â‚¶‚é‘O‚ÉƒJƒŒƒ“ƒgƒfƒBƒŒƒNƒgƒŠ‚ð•œŒ³
-                        .Multiselect = prmMultiSel      '•¡”‚Ìƒtƒ@ƒCƒ‹‚ð‘I‘ð‰Â”\‚É‚·‚é
-                        .CheckFileExists = True         'ƒtƒ@ƒCƒ‹‚Ì‘¶Ýƒ`ƒFƒbƒN‚ðs‚¤
+                        .Title = prmTitle               'ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã®ã‚¿ã‚¤ãƒˆãƒ«ã‚’è¨­å®šã™ã‚‹
+                        .InitialDirectory = initialDir  'åˆæœŸè¡¨ç¤ºã™ã‚‹ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’è¨­å®šã™ã‚‹
+                        .FileName = prmFileNm           'åˆæœŸè¡¨ç¤ºã™ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«åã‚’è¨­å®šã™ã‚‹
+                        .Filter = prmFillter            'ãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ•ã‚£ãƒ«ã‚¿ã‚’è¨­å®šã™ã‚‹
+                        .RestoreDirectory = True        'ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ãƒœãƒƒã‚¯ã‚¹ã‚’é–‰ã˜ã‚‹å‰ã«ã‚«ãƒ¬ãƒ³ãƒˆãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’å¾©å…ƒ
+                        .Multiselect = prmMultiSel      'è¤‡æ•°ã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é¸æŠžå¯èƒ½ã«ã™ã‚‹
+                        .CheckFileExists = True         'ãƒ•ã‚¡ã‚¤ãƒ«ã®å­˜åœ¨ãƒã‚§ãƒƒã‚¯ã‚’è¡Œã†
                         If .ShowDialog() = DialogResult.OK Then
-                            If Not prmMultiSel Then     '[OK]‰Ÿ‰ºŽž‚Íƒtƒ@ƒCƒ‹–¼‚ðÝ’è
+                            If Not prmMultiSel Then     '[OK]æŠ¼ä¸‹æ™‚ã¯ãƒ•ã‚¡ã‚¤ãƒ«åã‚’è¨­å®š
                                 Return .FileName
                             Else
-                                '•¡”‘I‘ð‚ ‚è‚Ìê‡‚Íu,v•ÒW
+                                'è¤‡æ•°é¸æŠžã‚ã‚Šã®å ´åˆã¯ã€Œ,ã€ç·¨é›†
                                 Dim ret As String = ""
                                 For Each name As String In fd.FileNames
                                     If ret.Equals("") Then
@@ -97,13 +97,13 @@ Namespace CommonDialog
                                 Return ret
                             End If
                         Else
-                            Return ""                   '[ƒLƒƒƒ“ƒZƒ‹]‰Ÿ‰ºŽž‚Í‹ó•¶Žš‚ðÝ’è
+                            Return ""                   '[ã‚­ãƒ£ãƒ³ã‚»ãƒ«]æŠ¼ä¸‹æ™‚ã¯ç©ºæ–‡å­—ã‚’è¨­å®š
                         End If
                     End With
                 Catch le As Exception
                     Throw le
                 Finally
-                    fd.Dispose()                        'ƒ_ƒCƒAƒƒO‚Ì”jŠü
+                    fd.Dispose()                        'ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã®ç ´æ£„
                 End Try
             Catch ex As Exception
                 Throw ex
@@ -111,62 +111,62 @@ Namespace CommonDialog
         End Function
 
         '-------------------------------------------------------------------------------
-        '@ u–¼‘O‚ð‚Â‚¯‚Ä•Û‘¶vƒRƒ‚ƒ“ƒ_ƒCƒAƒƒO•\Ž¦
-        '  iˆ—ŠT—vju–¼‘O‚ð‚Â‚¯‚Ä•Û‘¶vƒRƒ‚ƒ“ƒ_ƒCƒAƒƒO‚ð•\Ž¦‚µA‘I‘ð‚³‚ê‚½ƒtƒ@ƒCƒ‹‚Ìƒtƒ‹ƒpƒX‚ð•Ô‚·
-        '  œ“ü—Íƒpƒ‰ƒƒ^Fi <prmDir>       ƒ_ƒCƒAƒƒO‰Šú•\Ž¦ƒfƒBƒŒƒNƒgƒŠ
-        '                Fi <prmFileNm>    ƒ_ƒCƒAƒƒO‰Šú•\Ž¦ƒtƒ@ƒCƒ‹–¼
-        '                Fi <prmFillter>   ƒ_ƒCƒAƒƒO•\Ž¦ƒtƒBƒ‹ƒ^[
+        'ã€€ ã€Œåå‰ã‚’ã¤ã‘ã¦ä¿å­˜ã€ã‚³ãƒ¢ãƒ³ãƒ€ã‚¤ã‚¢ãƒ­ã‚°è¡¨ç¤º
+        '  ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰ã€Œåå‰ã‚’ã¤ã‘ã¦ä¿å­˜ã€ã‚³ãƒ¢ãƒ³ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚’è¡¨ç¤ºã—ã€é¸æŠžã•ã‚ŒãŸãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ•ãƒ«ãƒ‘ã‚¹ã‚’è¿”ã™
+        '  â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ï¼ši <prmDir>       ãƒ€ã‚¤ã‚¢ãƒ­ã‚°åˆæœŸè¡¨ç¤ºãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
+        '                ï¼ši <prmFileNm>    ãƒ€ã‚¤ã‚¢ãƒ­ã‚°åˆæœŸè¡¨ç¤ºãƒ•ã‚¡ã‚¤ãƒ«å
+        '                ï¼ši <prmFillter>   ãƒ€ã‚¤ã‚¢ãƒ­ã‚°è¡¨ç¤ºãƒ•ã‚£ãƒ«ã‚¿ãƒ¼
         '                                      TXT/CSV/DAT/ALL                       
-        '                Fi <prmTitle>     ƒ^ƒCƒgƒ‹
-        '  œŠÖ”–ß‚è’l@F‘I‘ð‚³‚ê‚½ƒtƒ@ƒCƒ‹‚Ìƒtƒ‹ƒpƒX(ƒLƒƒƒ“ƒZƒ‹Žž‚Í""‚ð•Ô‹p)
-        '  œ‚»‚Ì‘¼FŒÄo—á Call UtilCmnDlgHandler.saveFileDialog("d:\work", "tmp.txt", UtilCmnDlgHandler.TXT & "|" & UtilCmnDlgHandler.ALL)
-        '            prmDir—Dæ“x
-        '                      prmDir > ƒJƒŒƒ“ƒgDir > "C:\"
+        '                ï¼ši <prmTitle>     ã‚¿ã‚¤ãƒˆãƒ«
+        '  â—é–¢æ•°æˆ»ã‚Šå€¤ã€€ï¼šé¸æŠžã•ã‚ŒãŸãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ•ãƒ«ãƒ‘ã‚¹(ã‚­ãƒ£ãƒ³ã‚»ãƒ«æ™‚ã¯""ã‚’è¿”å´)
+        '  â—ãã®ä»–ï¼šå‘¼å‡ºä¾‹ Call UtilCmnDlgHandler.saveFileDialog("d:\work", "tmp.txt", UtilCmnDlgHandler.TXT & "|" & UtilCmnDlgHandler.ALL)
+        '            prmDirå„ªå…ˆåº¦
+        '                      prmDir > ã‚«ãƒ¬ãƒ³ãƒˆDir > "C:\"
         '                                              2006.05.11 Createed By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' u–¼‘O‚ð‚Â‚¯‚Ä•Û‘¶vƒRƒ‚ƒ“ƒ_ƒCƒAƒƒO•\Ž¦
+        ''' ã€Œåå‰ã‚’ã¤ã‘ã¦ä¿å­˜ã€ã‚³ãƒ¢ãƒ³ãƒ€ã‚¤ã‚¢ãƒ­ã‚°è¡¨ç¤º
         ''' </summary>
-        ''' <param name="prmDir">ƒ_ƒCƒAƒƒO‰Šú•\Ž¦ƒfƒBƒŒƒNƒgƒŠ</param>
-        ''' <param name="prmFileNm">ƒ_ƒCƒAƒƒO‰Šú•\Ž¦ƒtƒ@ƒCƒ‹–¼</param>
-        ''' <param name="prmFillter">ƒ_ƒCƒAƒƒO•\Ž¦ƒtƒBƒ‹ƒ^[ TXT/CSV/DAT/ALL</param>
-        ''' <param name="prmTitle">ƒ^ƒCƒgƒ‹</param>
-        ''' <returns>‘I‘ð‚³‚ê‚½ƒtƒ@ƒCƒ‹‚Ìƒtƒ‹ƒpƒX(ƒLƒƒƒ“ƒZƒ‹Žž‚Í""‚ð•Ô‹p)</returns>
+        ''' <param name="prmDir">ãƒ€ã‚¤ã‚¢ãƒ­ã‚°åˆæœŸè¡¨ç¤ºãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª</param>
+        ''' <param name="prmFileNm">ãƒ€ã‚¤ã‚¢ãƒ­ã‚°åˆæœŸè¡¨ç¤ºãƒ•ã‚¡ã‚¤ãƒ«å</param>
+        ''' <param name="prmFillter">ãƒ€ã‚¤ã‚¢ãƒ­ã‚°è¡¨ç¤ºãƒ•ã‚£ãƒ«ã‚¿ãƒ¼ TXT/CSV/DAT/ALL</param>
+        ''' <param name="prmTitle">ã‚¿ã‚¤ãƒˆãƒ«</param>
+        ''' <returns>é¸æŠžã•ã‚ŒãŸãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ•ãƒ«ãƒ‘ã‚¹(ã‚­ãƒ£ãƒ³ã‚»ãƒ«æ™‚ã¯""ã‚’è¿”å´)</returns>
         ''' <remarks></remarks>
         Public Shared Function saveFileDialog(Optional ByVal prmDir As String = "", _
                                           Optional ByVal prmFileNm As String = "", _
                                           Optional ByVal prmFillter As String = ALL, _
-                                          Optional ByVal prmTitle As String = "–¼‘O‚ð‚Â‚¯‚Ä•Û‘¶") As String
+                                          Optional ByVal prmTitle As String = "åå‰ã‚’ã¤ã‘ã¦ä¿å­˜") As String
 
             Try
-                '‰Šú•\Ž¦‚ÌƒpƒXŽæ“¾
-                Dim initialDir As String       '‰Šú•\Ž¦‚·‚éƒfƒBƒŒƒNƒgƒŠ
+                'åˆæœŸè¡¨ç¤ºã®ãƒ‘ã‚¹å–å¾—
+                Dim initialDir As String       'åˆæœŸè¡¨ç¤ºã™ã‚‹ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
                 If prmDir.Equals("") Then
-                    initialDir = sDEFALT_DIR       '‰Šú’l
+                    initialDir = sDEFALT_DIR       'åˆæœŸå€¤
                 Else
-                    initialDir = prmDir                'ˆø”’l
+                    initialDir = prmDir                'å¼•æ•°å€¤
                 End If
 
-                'SaveFileDialog‚ÌV‚µ‚¢ƒCƒ“ƒXƒ^ƒ“ƒX‚ð¶¬‚·‚é 
+                'SaveFileDialogã®æ–°ã—ã„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆã™ã‚‹ 
                 Dim fd As SaveFileDialog = New SaveFileDialog()
                 Try
                     With fd
-                        .Title = prmTitle               'ƒ_ƒCƒAƒƒO‚Ìƒ^ƒCƒgƒ‹‚ðÝ’è‚·‚é
-                        .InitialDirectory = initialDir  '‰Šú•\Ž¦‚·‚éƒfƒBƒŒƒNƒgƒŠ‚ðÝ’è‚·‚é
-                        .FileName = prmFileNm           '‰Šú•\Ž¦‚·‚éƒtƒ@ƒCƒ‹–¼‚ðÝ’è‚·‚é
-                        .Filter = prmFillter            'ƒtƒ@ƒCƒ‹‚ÌƒtƒBƒ‹ƒ^‚ðÝ’è‚·‚é
-                        .RestoreDirectory = True        'ƒ_ƒCƒAƒƒOƒ{ƒbƒNƒX‚ð•Â‚¶‚é‘O‚ÉƒJƒŒƒ“ƒgƒfƒBƒŒƒNƒgƒŠ‚ð•œŒ³
-                        .CheckFileExists = False        'ƒtƒ@ƒCƒ‹‚Ì‘¶Ýƒ`ƒFƒbƒN‚ðs‚í‚È‚¢
+                        .Title = prmTitle               'ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã®ã‚¿ã‚¤ãƒˆãƒ«ã‚’è¨­å®šã™ã‚‹
+                        .InitialDirectory = initialDir  'åˆæœŸè¡¨ç¤ºã™ã‚‹ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’è¨­å®šã™ã‚‹
+                        .FileName = prmFileNm           'åˆæœŸè¡¨ç¤ºã™ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«åã‚’è¨­å®šã™ã‚‹
+                        .Filter = prmFillter            'ãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ•ã‚£ãƒ«ã‚¿ã‚’è¨­å®šã™ã‚‹
+                        .RestoreDirectory = True        'ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ãƒœãƒƒã‚¯ã‚¹ã‚’é–‰ã˜ã‚‹å‰ã«ã‚«ãƒ¬ãƒ³ãƒˆãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’å¾©å…ƒ
+                        .CheckFileExists = False        'ãƒ•ã‚¡ã‚¤ãƒ«ã®å­˜åœ¨ãƒã‚§ãƒƒã‚¯ã‚’è¡Œã‚ãªã„
                         If .ShowDialog() = DialogResult.OK Then
-                            Return .FileName            '[OK]‰Ÿ‰ºŽž‚Íƒtƒ@ƒCƒ‹–¼‚ðÝ’è
+                            Return .FileName            '[OK]æŠ¼ä¸‹æ™‚ã¯ãƒ•ã‚¡ã‚¤ãƒ«åã‚’è¨­å®š
                         Else
-                            Return ""                   '[ƒLƒƒƒ“ƒZƒ‹]‰Ÿ‰ºŽž‚Í‹ó•¶Žš‚ðÝ’è
+                            Return ""                   '[ã‚­ãƒ£ãƒ³ã‚»ãƒ«]æŠ¼ä¸‹æ™‚ã¯ç©ºæ–‡å­—ã‚’è¨­å®š
                         End If
                     End With
                 Catch le As Exception
                     Throw le
                 Finally
-                    fd.Dispose()                        'ƒ_ƒCƒAƒƒO‚Ì”jŠü
+                    fd.Dispose()                        'ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã®ç ´æ£„
                 End Try
             Catch ex As Exception
                 Throw ex

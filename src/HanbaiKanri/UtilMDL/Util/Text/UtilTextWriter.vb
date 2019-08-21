@@ -1,33 +1,33 @@
-Imports System.IO
+ï»¿Imports System.IO
 Imports System.Text
 
 
 Namespace Text
     '===============================================================================
     '
-    '  ƒ†[ƒeƒBƒŠƒeƒBƒNƒ‰ƒX
-    '    iƒNƒ‰ƒX–¼j    UtilTextWriter
-    '    iˆ—‹@”\–¼j      ƒeƒLƒXƒgƒtƒ@ƒCƒ‹‚ð‘‚«ž‚Þ‹@”\‚ð’ñ‹Ÿ
-    '    i–{MDLŽg—p‘O’ñj   “Á‚É–³‚µ
-    '    i”õlj            
+    '  ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£ã‚¯ãƒ©ã‚¹
+    '    ï¼ˆã‚¯ãƒ©ã‚¹åï¼‰    UtilTextWriter
+    '    ï¼ˆå‡¦ç†æ©Ÿèƒ½åï¼‰      ãƒ†ã‚­ã‚¹ãƒˆãƒ•ã‚¡ã‚¤ãƒ«ã‚’æ›¸ãè¾¼ã‚€æ©Ÿèƒ½ã‚’æä¾›
+    '    ï¼ˆæœ¬MDLä½¿ç”¨å‰æï¼‰   ç‰¹ã«ç„¡ã—
+    '    ï¼ˆå‚™è€ƒï¼‰            
     '
     '===============================================================================
-    '  —š—ð  –¼‘O          “ú  •t      ƒ}[ƒN      “à—e
+    '  å±¥æ­´  åå‰          æ—¥  ä»˜      ãƒžãƒ¼ã‚¯      å†…å®¹
     '-------------------------------------------------------------------------------
-    '  (1)   Laevigata, Inc.    2006/05/14              V‹K
+    '  (1)   Laevigata, Inc.    2006/05/14              æ–°è¦
     '-------------------------------------------------------------------------------
     Public Class UtilTextWriter
 
         '===============================================================================
-        'ƒƒ“ƒo[•Ï”’è‹`
+        'ãƒ¡ãƒ³ãƒãƒ¼å¤‰æ•°å®šç¾©
         '===============================================================================
-        Private _fileName As String         'ƒtƒ@ƒCƒ‹–¼
-        Private _sWriter As StreamWriter    'ƒXƒgƒŠ[ƒ€ƒ‰ƒCƒ^[
+        Private _fileName As String         'ãƒ•ã‚¡ã‚¤ãƒ«å
+        Private _sWriter As StreamWriter    'ã‚¹ãƒˆãƒªãƒ¼ãƒ ãƒ©ã‚¤ã‚¿ãƒ¼
         Private _openFlg As Boolean = False
 
 
         '===============================================================================
-        'ƒvƒƒpƒeƒB(ƒAƒNƒZƒT)
+        'ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£(ã‚¢ã‚¯ã‚»ã‚µ)
         '===============================================================================
         Public ReadOnly Property isFileOpen() As Boolean
             Get
@@ -36,12 +36,12 @@ Namespace Text
         End Property
 
         '===============================================================================
-        ' ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-        '   œ“ü—Íƒpƒ‰ƒƒ^   FprmFileName    ‘€ì‘ÎÛƒtƒ@ƒCƒ‹–¼
-        '   œ”õl           Fƒtƒ@ƒCƒ‹‚ª‘¶Ý‚µ‚È‚¢ê‡‚ÍƒI[ƒvƒ“‚µ‚½ƒ^ƒCƒ~ƒ“ƒO‚Åƒtƒ@ƒCƒ‹‚ðì¬‚·‚éB
+        ' ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šprmFileName    æ“ä½œå¯¾è±¡ãƒ•ã‚¡ã‚¤ãƒ«å
+        '   â—å‚™è€ƒ           ï¼šãƒ•ã‚¡ã‚¤ãƒ«ãŒå­˜åœ¨ã—ãªã„å ´åˆã¯ã‚ªãƒ¼ãƒ—ãƒ³ã—ãŸã‚¿ã‚¤ãƒŸãƒ³ã‚°ã§ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä½œæˆã™ã‚‹ã€‚
         '===============================================================================
         ''' <summary>
-        ''' ƒRƒ“ƒXƒgƒ‰ƒNƒ^ ƒtƒ@ƒCƒ‹‚ª‘¶Ý‚µ‚È‚¢ê‡‚ÍƒI[ƒvƒ“‚µ‚½ƒ^ƒCƒ~ƒ“ƒO‚Åƒtƒ@ƒCƒ‹‚ðì¬‚·‚éB
+        ''' ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ ãƒ•ã‚¡ã‚¤ãƒ«ãŒå­˜åœ¨ã—ãªã„å ´åˆã¯ã‚ªãƒ¼ãƒ—ãƒ³ã—ãŸã‚¿ã‚¤ãƒŸãƒ³ã‚°ã§ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä½œæˆã™ã‚‹ã€‚
         ''' </summary>
         ''' <param name="prmFileName"></param>
         ''' <remarks></remarks>
@@ -50,11 +50,11 @@ Namespace Text
         End Sub
 
         '===============================================================================
-        ' ƒfƒXƒgƒ‰ƒNƒ^
-        '   œ“ü—Íƒpƒ‰ƒƒ^   F‚È‚µ
+        ' ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šãªã—
         '===============================================================================
         ''' <summary>
-        ''' ƒfƒXƒgƒ‰ƒNƒ^
+        ''' ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         ''' </summary>
         ''' <remarks></remarks>
         Protected Overrides Sub Finalize()
@@ -73,105 +73,105 @@ Namespace Text
         End Sub
 
         '-------------------------------------------------------------------------------
-        '   ƒtƒ@ƒCƒ‹ƒI[ƒvƒ“
-        '   iˆ—ŠT—vj‘ÎÛƒtƒ@ƒCƒ‹‚ðŠJ‚­
-        '   œ“ü—Íƒpƒ‰ƒƒ^   FprmAppendFlg   ’Ç‰Á‘‚«ž‚Ý‚·‚é‚©‚Ç‚¤‚©‚Ìƒtƒ‰ƒO(False‚Ìê‡Aã‘‚«‚·‚é)
-        '   œƒƒ\ƒbƒh–ß‚è’l F‚È‚µ
-        '   œ”õl           Fopenƒƒ\ƒbƒh‚ÌŒÄo‚µŒã‚Í•K‚¸closeƒƒ\ƒbƒh‚ÌŒÄ‚Ño‚µ‚ð•Ûá‚·‚é‚±‚Æ
+        '   ãƒ•ã‚¡ã‚¤ãƒ«ã‚ªãƒ¼ãƒ—ãƒ³
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰å¯¾è±¡ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šprmAppendFlg   è¿½åŠ æ›¸ãè¾¼ã¿ã™ã‚‹ã‹ã©ã†ã‹ã®ãƒ•ãƒ©ã‚°(Falseã®å ´åˆã€ä¸Šæ›¸ãã™ã‚‹)
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šãªã—
+        '   â—å‚™è€ƒ           ï¼šopenãƒ¡ã‚½ãƒƒãƒ‰ã®å‘¼å‡ºã—å¾Œã¯å¿…ãšcloseãƒ¡ã‚½ãƒƒãƒ‰ã®å‘¼ã³å‡ºã—ã‚’ä¿éšœã™ã‚‹ã“ã¨
         '                                               2006.05.14 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ƒI[ƒvƒ“ ƒI[ƒvƒ“‚µ‚½‚ç•K‚¸closeƒƒ\ƒbƒh‚ÌŒÄo‚ð•Ûá‚·‚é‚±‚Æ
+        ''' ã‚ªãƒ¼ãƒ—ãƒ³ ã‚ªãƒ¼ãƒ—ãƒ³ã—ãŸã‚‰å¿…ãšcloseãƒ¡ã‚½ãƒƒãƒ‰ã®å‘¼å‡ºã‚’ä¿éšœã™ã‚‹ã“ã¨
         ''' </summary>
-        ''' <param name="prmAppendFlg">’Ç‰Á‘‚«ž‚Ý‚·‚é‚©‚Ç‚¤‚©‚Ìƒtƒ‰ƒO(False‚Ìê‡Aã‘‚«‚·‚é)</param>
+        ''' <param name="prmAppendFlg">è¿½åŠ æ›¸ãè¾¼ã¿ã™ã‚‹ã‹ã©ã†ã‹ã®ãƒ•ãƒ©ã‚°(Falseã®å ´åˆã€ä¸Šæ›¸ãã™ã‚‹)</param>
         ''' <remarks></remarks>
         Public Sub open(Optional ByVal prmAppendFlg As Boolean = True)
             If _openFlg Then
-                Throw New UsrDefException("ƒtƒ@ƒCƒ‹‚ÍŠù‚ÉŠJ‚¢‚Ä‚¢‚Ü‚·B")
+                Throw New UsrDefException("ãƒ•ã‚¡ã‚¤ãƒ«ã¯æ—¢ã«é–‹ã„ã¦ã„ã¾ã™ã€‚")
             End If
             _sWriter = New StreamWriter(_fileName, prmAppendFlg, Encoding.Default)
             _openFlg = True
         End Sub
 
         '-------------------------------------------------------------------------------
-        '   ƒtƒ@ƒCƒ‹ƒNƒ[ƒY
-        '   iˆ—ŠT—vj‘ÎÛƒtƒ@ƒCƒ‹‚ð•Â‚¶‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^   F‚È‚µ
-        '   œƒƒ\ƒbƒh–ß‚è’l F‚È‚µ
-        '   œ”õl           Fopenƒƒ\ƒbƒh‚ÌŒÄo‚µŒã‚Í•K‚¸closeƒƒ\ƒbƒh‚ÌŒÄ‚Ño‚µ‚ð•Ûá‚·‚é‚±‚Æ
+        '   ãƒ•ã‚¡ã‚¤ãƒ«ã‚¯ãƒ­ãƒ¼ã‚º
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰å¯¾è±¡ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‰ã˜ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šãªã—
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šãªã—
+        '   â—å‚™è€ƒ           ï¼šopenãƒ¡ã‚½ãƒƒãƒ‰ã®å‘¼å‡ºã—å¾Œã¯å¿…ãšcloseãƒ¡ã‚½ãƒƒãƒ‰ã®å‘¼ã³å‡ºã—ã‚’ä¿éšœã™ã‚‹ã“ã¨
         '                                               2006.05.14 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ƒNƒ[ƒY
+        ''' ã‚¯ãƒ­ãƒ¼ã‚º
         ''' </summary>
         ''' <remarks></remarks>
         Public Sub close()
             If Not _openFlg Then
-                Throw New UsrDefException("ƒtƒ@ƒCƒ‹‚ª•Â‚¶‚Ä‚¢‚Ü‚·B")
+                Throw New UsrDefException("ãƒ•ã‚¡ã‚¤ãƒ«ãŒé–‰ã˜ã¦ã„ã¾ã™ã€‚")
             End If
             _sWriter.Close()
             _openFlg = False
         End Sub
 
         '-------------------------------------------------------------------------------
-        '   ‘‚«ž‚Ý
-        '   iˆ—ŠT—vjŽw’è‚³‚ê‚½•¶Žš—ñ‚ð‘‚«ž‚Þ
-        '   œ“ü—Íƒpƒ‰ƒƒ^   FprmStr   ‘‚«ž‚Ý•¶Žš—ñ
-        '   œƒƒ\ƒbƒh–ß‚è’l F‚È‚µ
+        '   æ›¸ãè¾¼ã¿
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰æŒ‡å®šã•ã‚ŒãŸæ–‡å­—åˆ—ã‚’æ›¸ãè¾¼ã‚€
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šprmStr   æ›¸ãè¾¼ã¿æ–‡å­—åˆ—
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šãªã—
         '                                               2006.05.14 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' Žw’è‚³‚ê‚½•¶Žš—ñ‚ð‘‚«ž‚Þ
+        ''' æŒ‡å®šã•ã‚ŒãŸæ–‡å­—åˆ—ã‚’æ›¸ãè¾¼ã‚€
         ''' </summary>
-        ''' <param name="prmStr">‘‚«ž‚Ý•¶Žš—ñ</param>
+        ''' <param name="prmStr">æ›¸ãè¾¼ã¿æ–‡å­—åˆ—</param>
         ''' <remarks></remarks>
         Public Sub write(ByVal prmStr As String)
             If Not _openFlg Then
-                Throw New UsrDefException("ƒtƒ@ƒCƒ‹‚ª•Â‚¶‚Ä‚¢‚Ü‚·B")
+                Throw New UsrDefException("ãƒ•ã‚¡ã‚¤ãƒ«ãŒé–‰ã˜ã¦ã„ã¾ã™ã€‚")
             End If
             _sWriter.Write(prmStr)
         End Sub
-        'ObjectŒ^‚ðƒI[ƒo[ƒ[ƒh 2010.11.14 Laevigata, Inc.
+        'Objectåž‹ã‚’ã‚ªãƒ¼ãƒãƒ¼ãƒ­ãƒ¼ãƒ‰ 2010.11.14 Laevigata, Inc.
         Public Sub write(ByVal prmStr As Object)
             If Not _openFlg Then
-                Throw New UsrDefException("ƒtƒ@ƒCƒ‹‚ª•Â‚¶‚Ä‚¢‚Ü‚·B")
+                Throw New UsrDefException("ãƒ•ã‚¡ã‚¤ãƒ«ãŒé–‰ã˜ã¦ã„ã¾ã™ã€‚")
             End If
             _sWriter.Write(prmStr)
         End Sub
 
         '-------------------------------------------------------------------------------
-        '   ‘‚«ž‚Ý
-        '   iˆ—ŠT—vjŽw’è‚³‚ê‚½•¶Žš—ñ‚ð‘‚«ž‚ÝAÅŒã‚É‰üs‚ðo—Í‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^   FprmStr   ‘‚«ž‚Ý•¶Žš—ñ
-        '   œƒƒ\ƒbƒh–ß‚è’l F‚È‚µ
+        '   æ›¸ãè¾¼ã¿
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰æŒ‡å®šã•ã‚ŒãŸæ–‡å­—åˆ—ã‚’æ›¸ãè¾¼ã¿ã€æœ€å¾Œã«æ”¹è¡Œã‚’å‡ºåŠ›ã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šprmStr   æ›¸ãè¾¼ã¿æ–‡å­—åˆ—
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šãªã—
         '                                               2006.05.14 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' Žw’è‚³‚ê‚½•¶Žš—ñ‚ð‘‚«ž‚ÝAÅŒã‚É‰üs‚ðo—Í‚·‚é
+        ''' æŒ‡å®šã•ã‚ŒãŸæ–‡å­—åˆ—ã‚’æ›¸ãè¾¼ã¿ã€æœ€å¾Œã«æ”¹è¡Œã‚’å‡ºåŠ›ã™ã‚‹
         ''' </summary>
-        ''' <param name="prmStr">‘‚«ž‚Ý•¶Žš—ñ</param>
+        ''' <param name="prmStr">æ›¸ãè¾¼ã¿æ–‡å­—åˆ—</param>
         ''' <remarks></remarks>
         Public Sub writeLine(ByVal prmStr As String)
             If Not _openFlg Then
-                Throw New UsrDefException("ƒtƒ@ƒCƒ‹‚ª•Â‚¶‚Ä‚¢‚Ü‚·B")
+                Throw New UsrDefException("ãƒ•ã‚¡ã‚¤ãƒ«ãŒé–‰ã˜ã¦ã„ã¾ã™ã€‚")
             End If
             _sWriter.WriteLine(prmStr)
         End Sub
 
         '-------------------------------------------------------------------------------
-        '   ‰üs
-        '   iˆ—ŠT—vj‰üs‚ðo—Í‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^   F‚È‚µ
-        '   œƒƒ\ƒbƒh–ß‚è’l F‚È‚µ
+        '   æ”¹è¡Œ
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰æ”¹è¡Œã‚’å‡ºåŠ›ã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šãªã—
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šãªã—
         '                                               2006.05.14 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ‰üs
+        ''' æ”¹è¡Œ
         ''' </summary>
         ''' <remarks></remarks>
         Public Sub newLine()
             If Not _openFlg Then
-                Throw New UsrDefException("ƒtƒ@ƒCƒ‹‚ª•Â‚¶‚Ä‚¢‚Ü‚·B")
+                Throw New UsrDefException("ãƒ•ã‚¡ã‚¤ãƒ«ãŒé–‰ã˜ã¦ã„ã¾ã™ã€‚")
             End If
             _sWriter.WriteLine()
         End Sub

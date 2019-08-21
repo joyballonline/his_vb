@@ -1,34 +1,34 @@
-Imports System.Xml
+ï»¿Imports System.Xml
 Imports System.ComponentModel
 Imports System.Windows.Forms
 
 Namespace MSG
     '===============================================================================
     '
-    '  ƒ†[ƒeƒBƒŠƒeƒBƒNƒ‰ƒX
-    '    iƒNƒ‰ƒX–¼j    UtilMsgHandler
-    '    iˆ—‹@”\–¼j      xml’è‹`‚ÌƒƒbƒZ[ƒWƒ{ƒbƒNƒX‚ğ•\¦‚·‚é
-    '    i–{MDLg—p‘O’ñj   UtilMsgVO‚ªæ‚è‚Ü‚ê‚Ä‚¢‚é‚±‚Æ
-    '    i”õlj            Message.xmlŒ`®’è‹`ƒtƒ@ƒCƒ‹‚ğ‘z’è
+    '  ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£ã‚¯ãƒ©ã‚¹
+    '    ï¼ˆã‚¯ãƒ©ã‚¹åï¼‰    UtilMsgHandler
+    '    ï¼ˆå‡¦ç†æ©Ÿèƒ½åï¼‰      xmlå®šç¾©ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒœãƒƒã‚¯ã‚¹ã‚’è¡¨ç¤ºã™ã‚‹
+    '    ï¼ˆæœ¬MDLä½¿ç”¨å‰æï¼‰   UtilMsgVOãŒå–ã‚Šè¾¼ã¾ã‚Œã¦ã„ã‚‹ã“ã¨
+    '    ï¼ˆå‚™è€ƒï¼‰            Message.xmlå½¢å¼å®šç¾©ãƒ•ã‚¡ã‚¤ãƒ«ã‚’æƒ³å®š
     '
     '===============================================================================
-    '  —š—ğ  –¼‘O          “ú  •t      ƒ}[ƒN      “à—e
+    '  å±¥æ­´  åå‰          æ—¥  ä»˜      ãƒãƒ¼ã‚¯      å†…å®¹
     '-------------------------------------------------------------------------------
-    '  (1)   Laevigata, Inc.    2006/04/17             V‹K
+    '  (1)   Laevigata, Inc.    2006/04/17             æ–°è¦
     '-------------------------------------------------------------------------------
     Public Class UtilMsgHandler
 
         '===============================================================================
-        'ƒƒ“ƒo[•Ï”’è‹`
+        'ãƒ¡ãƒ³ãƒãƒ¼å¤‰æ•°å®šç¾©
         '===============================================================================
         Private _xmlDoc As XmlDocument
-        Private _defTitle As String = ""                      'MSGBOX‚Ö‚ÌƒfƒtƒHƒ‹ƒgƒpƒ‰ƒƒ^
-        Private _defButton As MessageBoxButtons               'MSGBOX‚Ö‚ÌƒfƒtƒHƒ‹ƒgƒpƒ‰ƒƒ^
-        Private _defIcon As MessageBoxIcon                    'MSGBOX‚Ö‚ÌƒfƒtƒHƒ‹ƒgƒpƒ‰ƒƒ^
-        Private _defDefaultButton As MessageBoxDefaultButton  'MSGBOX‚Ö‚ÌƒfƒtƒHƒ‹ƒgƒpƒ‰ƒƒ^
+        Private _defTitle As String = ""                      'MSGBOXã¸ã®ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆãƒ‘ãƒ©ãƒ¡ã‚¿
+        Private _defButton As MessageBoxButtons               'MSGBOXã¸ã®ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆãƒ‘ãƒ©ãƒ¡ã‚¿
+        Private _defIcon As MessageBoxIcon                    'MSGBOXã¸ã®ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆãƒ‘ãƒ©ãƒ¡ã‚¿
+        Private _defDefaultButton As MessageBoxDefaultButton  'MSGBOXã¸ã®ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆãƒ‘ãƒ©ãƒ¡ã‚¿
 
         '===============================================================================
-        'ƒvƒƒpƒeƒB(ƒAƒNƒZƒT)
+        'ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£(ã‚¢ã‚¯ã‚»ã‚µ)
         '===============================================================================
         Public ReadOnly Property xmlDoc() As XmlDocument
             'Geter--------
@@ -36,7 +36,7 @@ Namespace MSG
                 xmlDoc = _xmlDoc
             End Get
             'Setter-------
-            '‚È‚µ
+            'ãªã—
         End Property
         Public ReadOnly Property defTitle() As String
             'Geter--------
@@ -44,7 +44,7 @@ Namespace MSG
                 defTitle = _defTitle
             End Get
             'Setter-------
-            '‚È‚µ
+            'ãªã—
         End Property
         Public ReadOnly Property defButton() As String
             'Geter--------
@@ -52,7 +52,7 @@ Namespace MSG
                 defButton = _defButton
             End Get
             'Setter-------
-            '‚È‚µ
+            'ãªã—
         End Property
         Public ReadOnly Property defIcon() As String
             'Geter--------
@@ -60,7 +60,7 @@ Namespace MSG
                 defIcon = _defIcon
             End Get
             'Setter-------
-            '‚È‚µ
+            'ãªã—
         End Property
         Public ReadOnly Property defDefaultButton() As String
             'Geter--------
@@ -68,50 +68,50 @@ Namespace MSG
                 defDefaultButton = _defDefaultButton
             End Get
             'Setter-------
-            '‚È‚µ
+            'ãªã—
         End Property
 
         '===============================================================================
-        ' ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-        '   œ“ü—Íƒpƒ‰ƒƒ^   FprmFileName    ƒtƒ‹ƒpƒXƒƒbƒZ[ƒWƒtƒ@ƒCƒ‹–¼
+        ' ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šprmFileName    ãƒ•ãƒ«ãƒ‘ã‚¹ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒ•ã‚¡ã‚¤ãƒ«å
         '===============================================================================
         ''' <summary>
-        ''' ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        ''' ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         ''' </summary>
-        ''' <param name="prmFileName">ƒtƒ‹ƒpƒXƒƒbƒZ[ƒWƒtƒ@ƒCƒ‹–¼</param>
+        ''' <param name="prmFileName">ãƒ•ãƒ«ãƒ‘ã‚¹ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒ•ã‚¡ã‚¤ãƒ«å</param>
         ''' <remarks></remarks>
         Public Sub New(ByVal prmFileName As String)
             Try
-                _xmlDoc = New XmlDocument()  '_xmlDocumentƒIƒuƒWƒFƒNƒg‚ğì¬    
+                _xmlDoc = New XmlDocument()  '_xmlDocumentã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ä½œæˆ    
                 _xmlDoc.Load(prmFileName)
             Catch ex As XmlException
-                Dim lex As UsrDefException = New UsrDefException("ƒƒbƒZ[ƒW’è‹`ƒtƒ@ƒCƒ‹“ÇƒGƒ‰[" & ControlChars.NewLine &
-                                                     "ƒƒbƒZ[ƒW’è‹`ƒtƒ@ƒCƒ‹‚Ì‘¶İEƒpƒX‚ğŠm”F‚µ‚Ä‚­‚¾‚³‚¢B")
+                Dim lex As UsrDefException = New UsrDefException("ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸å®šç¾©ãƒ•ã‚¡ã‚¤ãƒ«èª­è¾¼ã‚¨ãƒ©ãƒ¼" & ControlChars.NewLine &
+                                                     "ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸å®šç¾©ãƒ•ã‚¡ã‚¤ãƒ«ã®å­˜åœ¨ãƒ»ãƒ‘ã‚¹ã‚’ç¢ºèªã—ã¦ãã ã•ã„ã€‚")
                 Debug.WriteLine(lex.Message)
                 Throw lex
             End Try
             Try
-                'ƒfƒtƒHƒ‹ƒg’è‹`‚Ì“Ç
+                'ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆå®šç¾©ã®èª­è¾¼
                 Dim msgDefault As XmlElement = _xmlDoc.DocumentElement
                 Dim elemList As XmlNodeList = msgDefault.GetElementsByTagName("DEFAULT_MSG")
                 If elemList.Count <> 1 Then
-                    Dim lex As UsrDefException = New UsrDefException("DEFAULT_MSG‚Ì’è‹`‚ª‘¶İ‚µ‚È‚¢‚©A•¡”’è‹`‚³‚ê‚Ä‚¢‚Ü‚·B")
+                    Dim lex As UsrDefException = New UsrDefException("DEFAULT_MSGã®å®šç¾©ãŒå­˜åœ¨ã—ãªã„ã‹ã€è¤‡æ•°å®šç¾©ã•ã‚Œã¦ã„ã¾ã™ã€‚")
                     Debug.WriteLine(lex.Message)
                     Throw lex
                 End If
-                'ƒ^ƒCƒgƒ‹•ÒW
+                'ã‚¿ã‚¤ãƒˆãƒ«ç·¨é›†
                 Try
                     _defTitle = elemList.ItemOf(0).Item("TITLE").InnerText()
                 Catch ex As Exception
-                    Dim lex As UsrDefException = New UsrDefException("DEFAULT_MSG‚ÌTITLE’è‹`‚ª‘¶İ‚µ‚Ü‚¹‚ñB")
+                    Dim lex As UsrDefException = New UsrDefException("DEFAULT_MSGã®TITLEå®šç¾©ãŒå­˜åœ¨ã—ã¾ã›ã‚“ã€‚")
                     Debug.WriteLine(lex.Message)
                     Throw lex
                 End Try
-                'ƒ{ƒ^ƒ“•ÒW
+                'ãƒœã‚¿ãƒ³ç·¨é›†
                 Dim button As String
                 Try
                     button = elemList.ItemOf(0).Item("BUTTON_TYPE").InnerText
-                Catch ex As Exception : button = "" : End Try '•\‹LÈ—ª
+                Catch ex As Exception : button = "" : End Try 'è¡¨è¨˜çœç•¥æ™‚
                 Select Case button.ToLower
                     Case "abortretryignore"
                         _defButton = MessageBoxButtons.AbortRetryIgnore
@@ -126,19 +126,19 @@ Namespace MSG
                     Case "yesnocancel"
                         _defButton = MessageBoxButtons.YesNoCancel
                     Case ""
-                        Dim lex As UsrDefException = New UsrDefException("DEFAULT_MSG‚ÌBUTTON_TYPE’è‹`‚ª‘¶İ‚µ‚Ü‚¹‚ñB")
+                        Dim lex As UsrDefException = New UsrDefException("DEFAULT_MSGã®BUTTON_TYPEå®šç¾©ãŒå­˜åœ¨ã—ã¾ã›ã‚“ã€‚")
                         Debug.WriteLine(lex.Message)
                         Throw lex
                     Case Else
-                        Dim lex As UsrDefException = New UsrDefException("DEFAULT_MSG‚ÌBUTTON_TYPE’è‹`‚ªŒë‚Á‚Ä‚¢‚Ü‚·B")
+                        Dim lex As UsrDefException = New UsrDefException("DEFAULT_MSGã®BUTTON_TYPEå®šç¾©ãŒèª¤ã£ã¦ã„ã¾ã™ã€‚")
                         Debug.WriteLine(lex.Message)
                         Throw lex
                 End Select
-                'ƒAƒCƒRƒ“•ÒW
+                'ã‚¢ã‚¤ã‚³ãƒ³ç·¨é›†
                 Dim icon As String
                 Try
                     icon = elemList.ItemOf(0).Item("ICONT_TYPE").InnerText
-                Catch ex As Exception : icon = "" : End Try '•\‹LÈ—ª
+                Catch ex As Exception : icon = "" : End Try 'è¡¨è¨˜çœç•¥æ™‚
                 Select Case icon.ToLower
                     Case "asterisk"
                         _defIcon = MessageBoxIcon.Asterisk
@@ -159,19 +159,19 @@ Namespace MSG
                     Case "warning"
                         _defIcon = MessageBoxIcon.Warning
                     Case ""
-                        Dim lex As UsrDefException = New UsrDefException("DEFAULT_MSG‚ÌICONT_TYPE’è‹`‚ª‘¶İ‚µ‚Ü‚¹‚ñB")
+                        Dim lex As UsrDefException = New UsrDefException("DEFAULT_MSGã®ICONT_TYPEå®šç¾©ãŒå­˜åœ¨ã—ã¾ã›ã‚“ã€‚")
                         Debug.WriteLine(lex.Message)
                         Throw lex
                     Case Else
-                        Dim lex As UsrDefException = New UsrDefException("ICONT_TYPE‚Ì’è‹`‚ªŒë‚Á‚Ä‚¢‚Ü‚·B")
+                        Dim lex As UsrDefException = New UsrDefException("ICONT_TYPEã®å®šç¾©ãŒèª¤ã£ã¦ã„ã¾ã™ã€‚")
                         Debug.WriteLine(lex.Message)
                         Throw lex
                 End Select
-                'ƒfƒtƒHƒ‹ƒgƒ{ƒ^ƒ“•ÒW
+                'ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆãƒœã‚¿ãƒ³ç·¨é›†
                 Dim defaultButton As String
                 Try
                     defaultButton = elemList.ItemOf(0).Item("DEFAULT_BUTTON").InnerText
-                Catch ex As Exception : defaultButton = "" : End Try '•\‹LÈ—ª
+                Catch ex As Exception : defaultButton = "" : End Try 'è¡¨è¨˜çœç•¥æ™‚
                 Select Case defaultButton.ToLower
                     Case "button1"
                         _defDefaultButton = MessageBoxDefaultButton.Button1
@@ -180,11 +180,11 @@ Namespace MSG
                     Case "button3"
                         _defDefaultButton = MessageBoxDefaultButton.Button3
                     Case ""
-                        Dim lex As UsrDefException = New UsrDefException("DEFAULT_MSG‚ÌDEFAULT_BUTTON’è‹`‚ª‘¶İ‚µ‚Ü‚¹‚ñB")
+                        Dim lex As UsrDefException = New UsrDefException("DEFAULT_MSGã®DEFAULT_BUTTONå®šç¾©ãŒå­˜åœ¨ã—ã¾ã›ã‚“ã€‚")
                         Debug.WriteLine(lex.Message)
                         Throw lex
                     Case Else
-                        Dim lex As UsrDefException = New UsrDefException("DEFAULT_BUTTON‚Ì’è‹`‚ªŒë‚Á‚Ä‚¢‚Ü‚·B")
+                        Dim lex As UsrDefException = New UsrDefException("DEFAULT_BUTTONã®å®šç¾©ãŒèª¤ã£ã¦ã„ã¾ã™ã€‚")
                         Debug.WriteLine(lex.Message)
                         Throw lex
                 End Select
@@ -197,19 +197,19 @@ Namespace MSG
         End Sub
 
         '-------------------------------------------------------------------------------
-        '   ƒƒbƒZ[ƒW•\¦
-        '   iˆ—ŠT—vj’Ê’m‚³‚ê‚½ƒƒbƒZ[ƒWID‚É‘Î‰‚·‚éMSG‚ğ•ÒW‚µ‚Ä•\¦‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^   FprmMsgId         ƒƒbƒZ[ƒWID
-        '                   FprmOptionalMsg   ’Ç‰ÁƒƒbƒZ[ƒW
-        '   œƒƒ\ƒbƒh–ß‚è’l F‰Ÿ‰ºƒ{ƒ^ƒ“(DialogResult)
-        '   œ”­¶—áŠO       FException,UsrDefException
+        '   ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸è¡¨ç¤º
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰é€šçŸ¥ã•ã‚ŒãŸãƒ¡ãƒƒã‚»ãƒ¼ã‚¸IDã«å¯¾å¿œã™ã‚‹MSGã‚’ç·¨é›†ã—ã¦è¡¨ç¤ºã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šprmMsgId         ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ID
+        '                   ï¼šprmOptionalMsg   è¿½åŠ ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šæŠ¼ä¸‹ãƒœã‚¿ãƒ³(DialogResult)
+        '   â—ç™ºç”Ÿä¾‹å¤–       ï¼šException,UsrDefException
         '                                               2006.05.07 Updated By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ƒƒbƒZ[ƒW•\¦ ’Ê’m‚³‚ê‚½ƒƒbƒZ[ƒWID‚É‘Î‰‚·‚éMSG‚ğ•ÒW‚µ‚Ä•\¦‚·‚é
+        ''' ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸è¡¨ç¤º é€šçŸ¥ã•ã‚ŒãŸãƒ¡ãƒƒã‚»ãƒ¼ã‚¸IDã«å¯¾å¿œã™ã‚‹MSGã‚’ç·¨é›†ã—ã¦è¡¨ç¤ºã™ã‚‹
         ''' </summary>
-        ''' <param name="prmMsgId">ƒƒbƒZ[ƒWID</param>
-        ''' <param name="prmOptionalMsg">’Ç‰ÁƒƒbƒZ[ƒW</param>
+        ''' <param name="prmMsgId">ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ID</param>
+        ''' <param name="prmOptionalMsg">è¿½åŠ ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸</param>
         ''' <returns></returns>
         ''' <remarks></remarks>
         Public Function dspMSG(ByVal prmMsgId As String, ByVal prmLang As String, Optional ByVal prmOptionalMsg As String = "") As DialogResult
@@ -220,21 +220,21 @@ Namespace MSG
         End Function
 
         '-------------------------------------------------------------------------------
-        '   ƒƒbƒZ[ƒWæ“¾
-        '   iˆ—ŠT—vj’Ê’m‚³‚ê‚½ƒƒbƒZ[ƒWID‚É‘Î‰‚·‚éMSG‚ğ•ÒW‚µ‚Ä•Ô‹p‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^   FprmMsgId         ƒƒbƒZ[ƒWID
-        '                   FprmOptionalMsg   ’Ç‰ÁƒƒbƒZ[ƒW
-        '   œƒƒ\ƒbƒh–ß‚è’l FŒŸõ‚³‚ê‚½ƒƒbƒZ[ƒWƒr[ƒ“(ValueObject)
-        '   œ”­¶—áŠO       FException,UsrDefException
+        '   ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸å–å¾—
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰é€šçŸ¥ã•ã‚ŒãŸãƒ¡ãƒƒã‚»ãƒ¼ã‚¸IDã«å¯¾å¿œã™ã‚‹MSGã‚’ç·¨é›†ã—ã¦è¿”å´ã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šprmMsgId         ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ID
+        '                   ï¼šprmOptionalMsg   è¿½åŠ ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šæ¤œç´¢ã•ã‚ŒãŸãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒ“ãƒ¼ãƒ³(ValueObject)
+        '   â—ç™ºç”Ÿä¾‹å¤–       ï¼šException,UsrDefException
         '                                               2006.05.07 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ƒƒbƒZ[ƒWæ“¾ ’Ê’m‚³‚ê‚½ƒƒbƒZ[ƒWID‚É‘Î‰‚·‚éMSG‚ğ•ÒW‚µ‚Ä•Ô‹p‚·‚é
+        ''' ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸å–å¾— é€šçŸ¥ã•ã‚ŒãŸãƒ¡ãƒƒã‚»ãƒ¼ã‚¸IDã«å¯¾å¿œã™ã‚‹MSGã‚’ç·¨é›†ã—ã¦è¿”å´ã™ã‚‹
         ''' </summary>
-        ''' <param name="prmMsgId">ƒƒbƒZ[ƒWID</param>
-        ''' <param name="prmOptionalMsg">’Ç‰ÁƒƒbƒZ[ƒW</param>
-        ''' <returns>ŒŸõ‚³‚ê‚½ƒƒbƒZ[ƒWƒr[ƒ“(ValueObject)</returns>
-        ''' <remarks>”­¶—áŠO       FException,UsrDefException</remarks>
+        ''' <param name="prmMsgId">ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ID</param>
+        ''' <param name="prmOptionalMsg">è¿½åŠ ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸</param>
+        ''' <returns>æ¤œç´¢ã•ã‚ŒãŸãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒ“ãƒ¼ãƒ³(ValueObject)</returns>
+        ''' <remarks>ç™ºç”Ÿä¾‹å¤–       ï¼šException,UsrDefException</remarks>
         Public Function getMSG(ByVal prmMsgId As String, ByVal prmLang As String, Optional ByVal prmOptionalMsg As String = "") As UtilMsgVO
             Try
                 Dim msgDef As XmlElement = _xmlDoc.DocumentElement
@@ -245,15 +245,15 @@ Namespace MSG
                 Dim defaultButtonWk As MessageBoxDefaultButton
                 For i = 0 To elemList.Count - 1
                     If elemList.ItemOf(i).Item("ID").InnerText = prmMsgId Then
-                        'ƒƒbƒZ[ƒWID‚ªˆê’v‚·‚é‚È‚ç
-                        'ƒ^ƒCƒgƒ‹•ÒW
+                        'ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸IDãŒä¸€è‡´ã™ã‚‹ãªã‚‰
+                        'ã‚¿ã‚¤ãƒˆãƒ«ç·¨é›†
                         Dim titleWk As String
                         Try
                             titleWk = elemList.ItemOf(i).Item("TITLE").InnerText
                         Catch ex As Exception
                             titleWk = _defTitle
                         End Try
-                        'ƒƒbƒZ[ƒW•ÒW
+                        'ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ç·¨é›†
                         Dim msg1 As String = ""
                         Dim msg2 As String = ""
 
@@ -278,11 +278,11 @@ Namespace MSG
                         If prmOptionalMsg <> "" Then
                             dspStrWk = dspStrWk & ControlChars.NewLine & ControlChars.NewLine & prmOptionalMsg
                         End If
-                        'ƒ{ƒ^ƒ“•ÒW
+                        'ãƒœã‚¿ãƒ³ç·¨é›†
                         Dim button As String
                         Try
                             button = elemList.ItemOf(i).Item("BUTTON_TYPE").InnerText
-                        Catch ex As Exception : button = "" : End Try '•\‹LÈ—ª
+                        Catch ex As Exception : button = "" : End Try 'è¡¨è¨˜çœç•¥æ™‚
                         Select Case button.ToLower
                             Case "abortretryignore"
                                 buttonWk = MessageBoxButtons.AbortRetryIgnore
@@ -299,15 +299,15 @@ Namespace MSG
                             Case ""
                                 buttonWk = _defButton
                             Case Else
-                                Dim lex As UsrDefException = New UsrDefException("BUTTON_TYPE‚Ì’è‹`‚ªŒë‚Á‚Ä‚¢‚Ü‚·B")
+                                Dim lex As UsrDefException = New UsrDefException("BUTTON_TYPEã®å®šç¾©ãŒèª¤ã£ã¦ã„ã¾ã™ã€‚")
                                 Debug.WriteLine(lex.Message)
                                 Throw lex
                         End Select
-                        'ƒAƒCƒRƒ“•ÒW
+                        'ã‚¢ã‚¤ã‚³ãƒ³ç·¨é›†
                         Dim icon As String
                         Try
                             icon = elemList.ItemOf(i).Item("ICONT_TYPE").InnerText
-                        Catch ex As Exception : icon = "" : End Try '•\‹LÈ—ª
+                        Catch ex As Exception : icon = "" : End Try 'è¡¨è¨˜çœç•¥æ™‚
                         Select Case icon.ToLower
                             Case "asterisk"
                                 iconWk = MessageBoxIcon.Asterisk
@@ -330,15 +330,15 @@ Namespace MSG
                             Case ""
                                 iconWk = _defIcon
                             Case Else
-                                Dim lex As UsrDefException = New UsrDefException("ICONT_TYPE‚Ì’è‹`‚ªŒë‚Á‚Ä‚¢‚Ü‚·B")
+                                Dim lex As UsrDefException = New UsrDefException("ICONT_TYPEã®å®šç¾©ãŒèª¤ã£ã¦ã„ã¾ã™ã€‚")
                                 Debug.WriteLine(lex.Message)
                                 Throw lex
                         End Select
-                        'ƒfƒtƒHƒ‹ƒgƒ{ƒ^ƒ“•ÒW
+                        'ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆãƒœã‚¿ãƒ³ç·¨é›†
                         Dim defaultButton As String
                         Try
                             defaultButton = elemList.ItemOf(i).Item("DEFAULT_BUTTON").InnerText
-                        Catch ex As Exception : defaultButton = "" : End Try '•\‹LÈ—ª
+                        Catch ex As Exception : defaultButton = "" : End Try 'è¡¨è¨˜çœç•¥æ™‚
                         Select Case defaultButton.ToLower
                             Case "button1"
                                 defaultButtonWk = MessageBoxDefaultButton.Button1
@@ -349,16 +349,16 @@ Namespace MSG
                             Case ""
                                 defaultButtonWk = _defDefaultButton
                             Case Else
-                                Dim lex As UsrDefException = New UsrDefException("DEFAULT_BUTTON‚Ì’è‹`‚ªŒë‚Á‚Ä‚¢‚Ü‚·B")
+                                Dim lex As UsrDefException = New UsrDefException("DEFAULT_BUTTONã®å®šç¾©ãŒèª¤ã£ã¦ã„ã¾ã™ã€‚")
                                 Debug.WriteLine(lex.Message)
                                 Throw lex
                         End Select
 
-                        'MSG•\¦
+                        'MSGè¡¨ç¤º
                         Return New UtilMsgVO(dspStrWk, titleWk, buttonWk, iconWk, defaultButtonWk)
                     End If
                 Next
-                Return New UtilMsgVO("ƒƒbƒZ[ƒWID‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB(" & prmMsgId & ")", "ƒVƒXƒeƒ€ƒGƒ‰[", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+                Return New UtilMsgVO("ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸IDãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚(" & prmMsgId & ")", "ã‚·ã‚¹ãƒ†ãƒ ã‚¨ãƒ©ãƒ¼", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
             Catch ex As Exception
                 Debug.WriteLine(ex.Message)
                 Debug.WriteLine(ex.StackTrace)
@@ -370,21 +370,21 @@ Namespace MSG
 
     '===============================================================================
     '
-    '  ƒ†[ƒeƒBƒŠƒeƒBƒNƒ‰ƒX
-    '    iƒNƒ‰ƒX–¼j    UtilMsgVO
-    '    iˆ—‹@”\–¼j      xml’è‹`‚ÌƒƒbƒZ[ƒWƒ{ƒbƒNƒXƒr[ƒ“
-    '    i–{MDLg—p‘O’ñj   UtilMsgHandler‚ªæ‚è‚Ü‚ê‚Ä‚¢‚é‚±‚Æ
-    '    i”õlj            
+    '  ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£ã‚¯ãƒ©ã‚¹
+    '    ï¼ˆã‚¯ãƒ©ã‚¹åï¼‰    UtilMsgVO
+    '    ï¼ˆå‡¦ç†æ©Ÿèƒ½åï¼‰      xmlå®šç¾©ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒœãƒƒã‚¯ã‚¹ãƒ“ãƒ¼ãƒ³
+    '    ï¼ˆæœ¬MDLä½¿ç”¨å‰æï¼‰   UtilMsgHandlerãŒå–ã‚Šè¾¼ã¾ã‚Œã¦ã„ã‚‹ã“ã¨
+    '    ï¼ˆå‚™è€ƒï¼‰            
     '
     '===============================================================================
-    '  —š—ğ  –¼‘O          “ú  •t      ƒ}[ƒN      “à—e
+    '  å±¥æ­´  åå‰          æ—¥  ä»˜      ãƒãƒ¼ã‚¯      å†…å®¹
     '-------------------------------------------------------------------------------
-    '  (1)   Laevigata, Inc.    2006/05/07              V‹K
+    '  (1)   Laevigata, Inc.    2006/05/07              æ–°è¦
     '-------------------------------------------------------------------------------
     Public Class UtilMsgVO
 
         '===============================================================================
-        'ƒƒ“ƒo[•Ï”’è‹`
+        'ãƒ¡ãƒ³ãƒãƒ¼å¤‰æ•°å®šç¾©
         '===============================================================================
         Private _dspStr As String
         Private _title As String
@@ -393,7 +393,7 @@ Namespace MSG
         Private _defaultButton As MessageBoxDefaultButton
 
         '===============================================================================
-        'ƒvƒƒpƒeƒB(ƒAƒNƒZƒT)
+        'ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£(ã‚¢ã‚¯ã‚»ã‚µ)
         '===============================================================================
         Public ReadOnly Property dspStr() As String
             Get
@@ -422,17 +422,17 @@ Namespace MSG
         End Property
 
         '===============================================================================
-        ' ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-        '   œ“ü—Íƒpƒ‰ƒƒ^   FŠeíMessageBoxƒpƒ‰ƒƒ^
+        ' ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šå„ç¨®MessageBoxãƒ‘ãƒ©ãƒ¡ã‚¿
         '===============================================================================
         ''' <summary>
-        ''' ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        ''' ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         ''' </summary>
-        ''' <param name="prmDspStr">o—Í‚·‚éƒeƒLƒXƒg</param>
-        ''' <param name="prmTitle">ƒ^ƒCƒgƒ‹</param>
-        ''' <param name="prmButton">ƒ{ƒ^ƒ“‚Ìí—Ş</param>
-        ''' <param name="prmIcon">ƒAƒCƒRƒ“</param>
-        ''' <param name="prmDefaultButton">Šù’è‚Ìƒ{ƒ^ƒ“</param>
+        ''' <param name="prmDspStr">å‡ºåŠ›ã™ã‚‹ãƒ†ã‚­ã‚¹ãƒˆ</param>
+        ''' <param name="prmTitle">ã‚¿ã‚¤ãƒˆãƒ«</param>
+        ''' <param name="prmButton">ãƒœã‚¿ãƒ³ã®ç¨®é¡</param>
+        ''' <param name="prmIcon">ã‚¢ã‚¤ã‚³ãƒ³</param>
+        ''' <param name="prmDefaultButton">æ—¢å®šã®ãƒœã‚¿ãƒ³</param>
         ''' <remarks></remarks>
         Friend Sub New(ByVal prmDspStr As String, ByVal prmTitle As String, ByVal prmButton As MessageBoxButtons, ByVal prmIcon As MessageBoxIcon, ByVal prmDefaultButton As MessageBoxDefaultButton)
             _dspStr = prmDspStr

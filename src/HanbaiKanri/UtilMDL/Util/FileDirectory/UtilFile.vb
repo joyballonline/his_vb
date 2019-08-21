@@ -1,26 +1,26 @@
-Imports System.IO
+ï»¿Imports System.IO
 
 Namespace FileDirectory
     '===============================================================================
     '
-    '  ƒ†[ƒeƒBƒŠƒeƒBƒNƒ‰ƒX
-    '    iƒNƒ‰ƒX–¼j    UtilFile
-    '    iˆ—‹@”\–¼j      ƒtƒ@ƒCƒ‹‘€ì‹@”\‚ð’ñ‹Ÿ‚·‚é
-    '    i–{MDLŽg—p‘O’ñj   “Á‚É–³‚µ
-    '    i”õlj            
+    '  ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£ã‚¯ãƒ©ã‚¹
+    '    ï¼ˆã‚¯ãƒ©ã‚¹åï¼‰    UtilFile
+    '    ï¼ˆå‡¦ç†æ©Ÿèƒ½åï¼‰      ãƒ•ã‚¡ã‚¤ãƒ«æ“ä½œæ©Ÿèƒ½ã‚’æä¾›ã™ã‚‹
+    '    ï¼ˆæœ¬MDLä½¿ç”¨å‰æï¼‰   ç‰¹ã«ç„¡ã—
+    '    ï¼ˆå‚™è€ƒï¼‰            
     '
     '===============================================================================
-    '  —š—ð  –¼‘O          “ú  •t      ƒ}[ƒN      “à—e
+    '  å±¥æ­´  åå‰          æ—¥  ä»˜      ãƒžãƒ¼ã‚¯      å†…å®¹
     '-------------------------------------------------------------------------------
-    '  (1)   Laevigata, Inc.    2006/05/15              V‹K
-    '  (2)   Laevigata, Inc. 2010/03/31              ’Ç‰Á@getWriteTimeStamp
+    '  (1)   Laevigata, Inc.    2006/05/15              æ–°è¦
+    '  (2)   Laevigata, Inc. 2010/03/31              è¿½åŠ ã€€getWriteTimeStamp
     '-------------------------------------------------------------------------------
     Public Class UtilFile
 
         '===============================================================================
-        'ƒƒ“ƒo[’è”’è‹`
+        'ãƒ¡ãƒ³ãƒãƒ¼å®šæ•°å®šç¾©
         '===============================================================================
-        'ƒtƒ@ƒCƒ‹ƒTƒCƒY—ñ‹“Œ^
+        'ãƒ•ã‚¡ã‚¤ãƒ«ã‚µã‚¤ã‚ºåˆ—æŒ™åž‹
         Public Enum sizeTypeEnum
             B = 1
             KB = 2
@@ -30,12 +30,12 @@ Namespace FileDirectory
         End Enum
 
         '===============================================================================
-        'ƒƒ“ƒo[•Ï”’è‹`
+        'ãƒ¡ãƒ³ãƒãƒ¼å¤‰æ•°å®šç¾©
         '===============================================================================
         Private _sizeType As sizeTypeEnum
 
         '===============================================================================
-        'ƒvƒƒpƒeƒB(ƒAƒNƒZƒT)
+        'ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£(ã‚¢ã‚¯ã‚»ã‚µ)
         '===============================================================================
         Public Property sizeType() As sizeTypeEnum
             Get
@@ -47,117 +47,117 @@ Namespace FileDirectory
         End Property
 
         '===============================================================================
-        ' ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        ' ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         '===============================================================================
         ''' <summary>
-        ''' ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        ''' ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         ''' </summary>
         ''' <remarks></remarks>
         Public Sub New()
-            _sizeType = UtilFile.sizeTypeEnum.KB    'ƒfƒtƒHƒ‹ƒgÝ’è
+            _sizeType = UtilFile.sizeTypeEnum.KB    'ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆè¨­å®š
         End Sub
 
         '-------------------------------------------------------------------------------
-        '   ƒtƒ@ƒCƒ‹‚Ì‘¶Ýƒ`ƒFƒbƒN
-        '   iˆ—ŠT—vjƒtƒ@ƒCƒ‹‚ª‘¶Ý‚·‚é‚©‚Ç‚¤‚©‚Ìƒ`ƒFƒbƒN‚ðs‚¤
-        '   œ“ü—Íƒpƒ‰ƒƒ^   FprmFile  ƒtƒ@ƒCƒ‹–¼
-        '   œƒƒ\ƒbƒh–ß‚è’l F‘¶Ý/”ñ‘¶Ý
+        '   ãƒ•ã‚¡ã‚¤ãƒ«ã®å­˜åœ¨ãƒã‚§ãƒƒã‚¯
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰ãƒ•ã‚¡ã‚¤ãƒ«ãŒå­˜åœ¨ã™ã‚‹ã‹ã©ã†ã‹ã®ãƒã‚§ãƒƒã‚¯ã‚’è¡Œã†
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šprmFile  ãƒ•ã‚¡ã‚¤ãƒ«å
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šå­˜åœ¨/éžå­˜åœ¨
         '                                               2006.05.15 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ƒtƒ@ƒCƒ‹‚ª‘¶Ý‚·‚é‚©‚Ç‚¤‚©‚Ìƒ`ƒFƒbƒN‚ðs‚¤
+        ''' ãƒ•ã‚¡ã‚¤ãƒ«ãŒå­˜åœ¨ã™ã‚‹ã‹ã©ã†ã‹ã®ãƒã‚§ãƒƒã‚¯ã‚’è¡Œã†
         ''' </summary>
-        ''' <param name="prmFile">ƒtƒ@ƒCƒ‹–¼</param>
-        ''' <returns>‘¶Ý/”ñ‘¶Ý</returns>
+        ''' <param name="prmFile">ãƒ•ã‚¡ã‚¤ãƒ«å</param>
+        ''' <returns>å­˜åœ¨/éžå­˜åœ¨</returns>
         ''' <remarks></remarks>
         Public Function isFileExists(ByVal prmFile As String) As Boolean
             Return File.Exists(prmFile)
         End Function
 
         '-------------------------------------------------------------------------------
-        '   ƒtƒ@ƒCƒ‹íœ
-        '   iˆ—ŠT—vjŽw’è‚µ‚½ƒtƒ@ƒCƒ‹‚ðíœ‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^   FprmFile  ƒtƒ@ƒCƒ‹–¼
-        '   œƒƒ\ƒbƒh–ß‚è’l F‚È‚µ
+        '   ãƒ•ã‚¡ã‚¤ãƒ«å‰Šé™¤
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰æŒ‡å®šã—ãŸãƒ•ã‚¡ã‚¤ãƒ«ã‚’å‰Šé™¤ã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šprmFile  ãƒ•ã‚¡ã‚¤ãƒ«å
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šãªã—
         '                                               2006.05.15 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' Žw’è‚µ‚½ƒtƒ@ƒCƒ‹‚ðíœ‚·‚é
+        ''' æŒ‡å®šã—ãŸãƒ•ã‚¡ã‚¤ãƒ«ã‚’å‰Šé™¤ã™ã‚‹
         ''' </summary>
-        ''' <param name="prmFile">ƒtƒ@ƒCƒ‹–¼</param>
+        ''' <param name="prmFile">ãƒ•ã‚¡ã‚¤ãƒ«å</param>
         ''' <remarks></remarks>
         Public Sub delete(ByVal prmFile As String)
             File.Delete(prmFile)
         End Sub
 
         '-------------------------------------------------------------------------------
-        '   ƒtƒ@ƒCƒ‹ƒRƒs[
-        '   iˆ—ŠT—vjŽw’è‚µ‚½ƒtƒ@ƒCƒ‹‚ðƒRƒs[‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^   FprmSourceFile    ƒRƒs[Œ³ƒtƒ@ƒCƒ‹–¼
-        '                    FprmDestFile      ƒRƒs[æƒtƒ@ƒCƒ‹–¼
-        '                    FprmOverWrite     ã‘‚«Šm”F
-        '   œƒƒ\ƒbƒh–ß‚è’l F‚È‚µ
+        '   ãƒ•ã‚¡ã‚¤ãƒ«ã‚³ãƒ”ãƒ¼
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰æŒ‡å®šã—ãŸãƒ•ã‚¡ã‚¤ãƒ«ã‚’ã‚³ãƒ”ãƒ¼ã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šprmSourceFile    ã‚³ãƒ”ãƒ¼å…ƒãƒ•ã‚¡ã‚¤ãƒ«å
+        '                    ï¼šprmDestFile      ã‚³ãƒ”ãƒ¼å…ˆãƒ•ã‚¡ã‚¤ãƒ«å
+        '                    ï¼šprmOverWrite     ä¸Šæ›¸ãç¢ºèª
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šãªã—
         '                                               2006.05.15 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' Žw’è‚µ‚½ƒtƒ@ƒCƒ‹‚ðƒRƒs[‚·‚é
+        ''' æŒ‡å®šã—ãŸãƒ•ã‚¡ã‚¤ãƒ«ã‚’ã‚³ãƒ”ãƒ¼ã™ã‚‹
         ''' </summary>
-        ''' <param name="prmSourceFile">ƒRƒs[Œ³ƒtƒ@ƒCƒ‹–¼</param>
-        ''' <param name="prmDestFile">ƒRƒs[æƒtƒ@ƒCƒ‹–¼</param>
-        ''' <param name="prmOverWrite">ã‘‚«Šm”F</param>
+        ''' <param name="prmSourceFile">ã‚³ãƒ”ãƒ¼å…ƒãƒ•ã‚¡ã‚¤ãƒ«å</param>
+        ''' <param name="prmDestFile">ã‚³ãƒ”ãƒ¼å…ˆãƒ•ã‚¡ã‚¤ãƒ«å</param>
+        ''' <param name="prmOverWrite">ä¸Šæ›¸ãç¢ºèª</param>
         ''' <remarks></remarks>
         Public Sub copy(ByVal prmSourceFile As String, ByVal prmDestFile As String, Optional ByVal prmOverWrite As Boolean = False)
             File.Copy(prmSourceFile, prmDestFile, prmOverWrite)
         End Sub
 
         '-------------------------------------------------------------------------------
-        '   ƒtƒ@ƒCƒ‹ˆÚ“®
-        '   iˆ—ŠT—vjŽw’è‚µ‚½ƒtƒ@ƒCƒ‹‚ðˆÚ“®‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^   FprmSourceFile    ˆÚ“®Œ³ƒtƒ@ƒCƒ‹–¼
-        '                    FprmDestFile      ˆÚ“®æƒtƒ@ƒCƒ‹–¼
-        '   œƒƒ\ƒbƒh–ß‚è’l F‚È‚µ
-        '   œ”õl           F“¯‚¶ƒfƒBƒŒƒNƒgƒŠ‚ðŽw’è‚µ‚½ê‡‚ÍReName‚Æ‚È‚é
+        '   ãƒ•ã‚¡ã‚¤ãƒ«ç§»å‹•
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰æŒ‡å®šã—ãŸãƒ•ã‚¡ã‚¤ãƒ«ã‚’ç§»å‹•ã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šprmSourceFile    ç§»å‹•å…ƒãƒ•ã‚¡ã‚¤ãƒ«å
+        '                    ï¼šprmDestFile      ç§»å‹•å…ˆãƒ•ã‚¡ã‚¤ãƒ«å
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šãªã—
+        '   â—å‚™è€ƒ           ï¼šåŒã˜ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’æŒ‡å®šã—ãŸå ´åˆã¯ReNameã¨ãªã‚‹
         '                                               2006.05.15 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' Žw’è‚µ‚½ƒtƒ@ƒCƒ‹‚ðˆÚ“®‚·‚é ¦“¯‚¶ƒfƒBƒŒƒNƒgƒŠ‚ðŽw’è‚µ‚½ê‡AReName‚Æ‚È‚é
+        ''' æŒ‡å®šã—ãŸãƒ•ã‚¡ã‚¤ãƒ«ã‚’ç§»å‹•ã™ã‚‹ â€»åŒã˜ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’æŒ‡å®šã—ãŸå ´åˆã€ReNameã¨ãªã‚‹
         ''' </summary>
-        ''' <param name="prmSourceFile">ˆÚ“®Œ³ƒtƒ@ƒCƒ‹–¼</param>
-        ''' <param name="prmDestFile">ˆÚ“®æƒtƒ@ƒCƒ‹–¼</param>
+        ''' <param name="prmSourceFile">ç§»å‹•å…ƒãƒ•ã‚¡ã‚¤ãƒ«å</param>
+        ''' <param name="prmDestFile">ç§»å‹•å…ˆãƒ•ã‚¡ã‚¤ãƒ«å</param>
         ''' <remarks></remarks>
         Public Sub move(ByVal prmSourceFile As String, ByVal prmDestFile As String)
             File.Move(prmSourceFile, prmDestFile)
         End Sub
 
         '-------------------------------------------------------------------------------
-        '   ƒ^ƒCƒ€ƒXƒ^ƒ“ƒvŽæ“¾
-        '   iˆ—ŠT—vjŽw’è‚µ‚½ƒtƒ@ƒCƒ‹‚Ìƒ^ƒCƒ€ƒXƒ^ƒ“ƒv‚ðŽæ“¾‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^   FprmFile    ƒtƒ@ƒCƒ‹–¼
-        '   œƒƒ\ƒbƒh–ß‚è’l Fƒ^ƒCƒ€ƒXƒ^ƒ“ƒv
+        '   ã‚¿ã‚¤ãƒ ã‚¹ã‚¿ãƒ³ãƒ—å–å¾—
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰æŒ‡å®šã—ãŸãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚¿ã‚¤ãƒ ã‚¹ã‚¿ãƒ³ãƒ—ã‚’å–å¾—ã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šprmFile    ãƒ•ã‚¡ã‚¤ãƒ«å
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šã‚¿ã‚¤ãƒ ã‚¹ã‚¿ãƒ³ãƒ—
         '                                               2006.05.15 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' Žw’è‚µ‚½ƒtƒ@ƒCƒ‹‚Ìƒ^ƒCƒ€ƒXƒ^ƒ“ƒv‚ðŽæ“¾‚·‚é
+        ''' æŒ‡å®šã—ãŸãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚¿ã‚¤ãƒ ã‚¹ã‚¿ãƒ³ãƒ—ã‚’å–å¾—ã™ã‚‹
         ''' </summary>
-        ''' <param name="prmFile">ƒtƒ@ƒCƒ‹–¼</param>
-        ''' <returns>ƒ^ƒCƒ€ƒXƒ^ƒ“ƒv</returns>
+        ''' <param name="prmFile">ãƒ•ã‚¡ã‚¤ãƒ«å</param>
+        ''' <returns>ã‚¿ã‚¤ãƒ ã‚¹ã‚¿ãƒ³ãƒ—</returns>
         ''' <remarks></remarks>
         Public Function getTimeStamp(ByVal prmFile As String) As Date
             Return File.GetCreationTime(prmFile)
         End Function
 
         '-------------------------------------------------------------------------------
-        '   ƒtƒ@ƒCƒ‹ƒTƒCƒY‚ðŽæ“¾
-        '   iˆ—ŠT—vjŽw’è‚µ‚½ƒtƒ@ƒCƒ‹‚Ìƒtƒ@ƒCƒ‹ƒTƒCƒY‚ðŽæ“¾‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^   FprmFile    ƒtƒ@ƒCƒ‹–¼
-        '   œƒƒ\ƒbƒh–ß‚è’l Fƒtƒ@ƒCƒ‹ƒTƒCƒY
+        '   ãƒ•ã‚¡ã‚¤ãƒ«ã‚µã‚¤ã‚ºã‚’å–å¾—
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰æŒ‡å®šã—ãŸãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚µã‚¤ã‚ºã‚’å–å¾—ã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šprmFile    ãƒ•ã‚¡ã‚¤ãƒ«å
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šãƒ•ã‚¡ã‚¤ãƒ«ã‚µã‚¤ã‚º
         '                                               2006.05.15 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' Žw’è‚µ‚½ƒtƒ@ƒCƒ‹‚Ìƒtƒ@ƒCƒ‹ƒTƒCƒY‚ðŽæ“¾‚·‚é
+        ''' æŒ‡å®šã—ãŸãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚µã‚¤ã‚ºã‚’å–å¾—ã™ã‚‹
         ''' </summary>
-        ''' <param name="prmFile">ƒtƒ@ƒCƒ‹–¼</param>
-        ''' <returns>ƒtƒ@ƒCƒ‹íœ</returns>
+        ''' <param name="prmFile">ãƒ•ã‚¡ã‚¤ãƒ«å</param>
+        ''' <returns>ãƒ•ã‚¡ã‚¤ãƒ«å‰Šé™¤</returns>
         ''' <remarks></remarks>
         Public Function getSize(ByVal prmFile As String) As Integer
             Dim f As FileInfo = New FileInfo(prmFile)
@@ -178,20 +178,20 @@ Namespace FileDirectory
         End Function
 
         '-------------------------------------------------------------------------------
-        '   ƒfƒBƒŒƒNƒgƒŠ/ƒtƒ@ƒCƒ‹–¼•ªŠ„
-        '   iˆ—ŠT—vjŽw’è‚³‚ê‚½ƒtƒ‹ƒpƒX‚ðƒfƒBƒŒƒNƒgƒŠ‚Æƒtƒ@ƒCƒ‹–¼‚É•ªŠ„‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^   FprmFullPath  ‘ÎÛƒtƒ‹ƒpƒX
-        '                    FprmRefPath   Žæ“¾ƒpƒX
-        '                    FprmRefFile   Žæ“¾ƒtƒ@ƒCƒ‹–¼
-        '   œƒƒ\ƒbƒh–ß‚è’l Fƒtƒ@ƒCƒ‹ƒTƒCƒY
+        '   ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª/ãƒ•ã‚¡ã‚¤ãƒ«ååˆ†å‰²
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰æŒ‡å®šã•ã‚ŒãŸãƒ•ãƒ«ãƒ‘ã‚¹ã‚’ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã¨ãƒ•ã‚¡ã‚¤ãƒ«åã«åˆ†å‰²ã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šprmFullPath  å¯¾è±¡ãƒ•ãƒ«ãƒ‘ã‚¹
+        '                    ï¼šprmRefPath   å–å¾—ãƒ‘ã‚¹
+        '                    ï¼šprmRefFile   å–å¾—ãƒ•ã‚¡ã‚¤ãƒ«å
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šãƒ•ã‚¡ã‚¤ãƒ«ã‚µã‚¤ã‚º
         '                                               2006.05.15 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' Žw’è‚³‚ê‚½ƒtƒ‹ƒpƒX‚ðƒfƒBƒŒƒNƒgƒŠ‚Æƒtƒ@ƒCƒ‹–¼‚É•ªŠ„‚·‚é
+        ''' æŒ‡å®šã•ã‚ŒãŸãƒ•ãƒ«ãƒ‘ã‚¹ã‚’ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã¨ãƒ•ã‚¡ã‚¤ãƒ«åã«åˆ†å‰²ã™ã‚‹
         ''' </summary>
-        ''' <param name="prmFullPath">‘ÎÛƒtƒ‹ƒpƒX</param>
-        ''' <param name="prmRefPath">Žæ“¾ƒpƒX</param>
-        ''' <param name="prmRefFile">Žæ“¾ƒtƒ@ƒCƒ‹–¼</param>
+        ''' <param name="prmFullPath">å¯¾è±¡ãƒ•ãƒ«ãƒ‘ã‚¹</param>
+        ''' <param name="prmRefPath">å–å¾—ãƒ‘ã‚¹</param>
+        ''' <param name="prmRefFile">å–å¾—ãƒ•ã‚¡ã‚¤ãƒ«å</param>
         ''' <remarks></remarks>
         Public Sub dividePathAndFile(ByVal prmFullPath As String, ByRef prmRefPath As String, ByRef prmRefFile As String)
             Dim devPos As Integer
@@ -206,17 +206,17 @@ Namespace FileDirectory
         End Sub
 
         '-------------------------------------------------------------------------------
-        '   ƒtƒ@ƒCƒ‹XV“úŽæ“¾
-        '   iˆ—ŠT—vjŽw’è‚µ‚½ƒtƒ@ƒCƒ‹‚ÌXV“ú‚ðŽæ“¾‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^   FprmFile    ƒtƒ@ƒCƒ‹–¼
-        '   œƒƒ\ƒbƒh–ß‚è’l FXV“ú
+        '   ãƒ•ã‚¡ã‚¤ãƒ«æ›´æ–°æ—¥å–å¾—
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰æŒ‡å®šã—ãŸãƒ•ã‚¡ã‚¤ãƒ«ã®æ›´æ–°æ—¥ã‚’å–å¾—ã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šprmFile    ãƒ•ã‚¡ã‚¤ãƒ«å
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šæ›´æ–°æ—¥
         '                                               2010.03.31 Created By sugano
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' Žw’è‚µ‚½ƒtƒ@ƒCƒ‹‚ÌXV“ú‚ðŽæ“¾‚·‚é
+        ''' æŒ‡å®šã—ãŸãƒ•ã‚¡ã‚¤ãƒ«ã®æ›´æ–°æ—¥ã‚’å–å¾—ã™ã‚‹
         ''' </summary>
-        ''' <param name="prmFile">ƒtƒ@ƒCƒ‹–¼</param>
-        ''' <returns>XV“ú</returns>
+        ''' <param name="prmFile">ãƒ•ã‚¡ã‚¤ãƒ«å</param>
+        ''' <returns>æ›´æ–°æ—¥</returns>
         ''' <remarks></remarks>
         Public Function getWriteTimeStamp(ByVal prmFile As String) As Date
             Return File.GetLastWriteTime(prmFile)

@@ -1,28 +1,28 @@
-Imports System.Xml
+ï»¿Imports System.Xml
 
 Namespace LANG
     '===============================================================================
     '
-    '  ƒ†[ƒeƒBƒŠƒeƒBƒNƒ‰ƒX
-    '    iƒNƒ‰ƒX–¼j    UtilMsgHandler
-    '    iˆ—‹@”\–¼j      xml’è‹`‚ÌƒƒbƒZ[ƒWƒ{ƒbƒNƒX‚ð•\Ž¦‚·‚é
-    '    i–{MDLŽg—p‘O’ñj   UtilMsgVO‚ªŽæ‚èž‚Ü‚ê‚Ä‚¢‚é‚±‚Æ
-    '    i”õlj            Message.xmlŒ`Ž®’è‹`ƒtƒ@ƒCƒ‹‚ð‘z’è
+    '  ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£ã‚¯ãƒ©ã‚¹
+    '    ï¼ˆã‚¯ãƒ©ã‚¹åï¼‰    UtilMsgHandler
+    '    ï¼ˆå‡¦ç†æ©Ÿèƒ½åï¼‰      xmlå®šç¾©ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒœãƒƒã‚¯ã‚¹ã‚’è¡¨ç¤ºã™ã‚‹
+    '    ï¼ˆæœ¬MDLä½¿ç”¨å‰æï¼‰   UtilMsgVOãŒå–ã‚Šè¾¼ã¾ã‚Œã¦ã„ã‚‹ã“ã¨
+    '    ï¼ˆå‚™è€ƒï¼‰            Message.xmlå½¢å¼å®šç¾©ãƒ•ã‚¡ã‚¤ãƒ«ã‚’æƒ³å®š
     '
     '===============================================================================
-    '  —š—ð  –¼‘O          “ú  •t      ƒ}[ƒN      “à—e
+    '  å±¥æ­´  åå‰          æ—¥  ä»˜      ãƒžãƒ¼ã‚¯      å†…å®¹
     '-------------------------------------------------------------------------------
-    '  (1)   Laevigata, Inc.    2006/04/17             V‹K
+    '  (1)   Laevigata, Inc.    2006/04/17             æ–°è¦
     '-------------------------------------------------------------------------------
     Public Class UtilLangHandler
 
         '===============================================================================
-        'ƒƒ“ƒo[•Ï”’è‹`
+        'ãƒ¡ãƒ³ãƒãƒ¼å¤‰æ•°å®šç¾©
         '===============================================================================
         Private _xmlDoc As XmlDocument
 
         '===============================================================================
-        'ƒvƒƒpƒeƒB(ƒAƒNƒZƒT)
+        'ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£(ã‚¢ã‚¯ã‚»ã‚µ)
         '===============================================================================
         Public ReadOnly Property xmlDoc() As XmlDocument
             'Geter--------
@@ -30,45 +30,45 @@ Namespace LANG
                 xmlDoc = _xmlDoc
             End Get
             'Setter-------
-            '‚È‚µ
+            'ãªã—
         End Property
 
         '===============================================================================
-        ' ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-        '   œ“ü—Íƒpƒ‰ƒƒ^   FprmFileName    ƒtƒ‹ƒpƒXƒƒbƒZ[ƒWƒtƒ@ƒCƒ‹–¼
+        ' ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šprmFileName    ãƒ•ãƒ«ãƒ‘ã‚¹ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒ•ã‚¡ã‚¤ãƒ«å
         '===============================================================================
         ''' <summary>
-        ''' ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        ''' ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         ''' </summary>
-        ''' <param name="prmFileName">ƒtƒ‹ƒpƒXƒƒbƒZ[ƒWƒtƒ@ƒCƒ‹–¼</param>
+        ''' <param name="prmFileName">ãƒ•ãƒ«ãƒ‘ã‚¹ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒ•ã‚¡ã‚¤ãƒ«å</param>
         ''' <remarks></remarks>
         Public Sub New(ByVal prmFileName As String)
             Try
-                _xmlDoc = New XmlDocument()  '_xmlDocumentƒIƒuƒWƒFƒNƒg‚ðì¬    
+                _xmlDoc = New XmlDocument()  '_xmlDocumentã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ä½œæˆ    
                 _xmlDoc.Load(prmFileName)
             Catch ex As XmlException
-                Dim lex As UsrDefException = New UsrDefException("Œ¾Œê’è‹`ƒtƒ@ƒCƒ‹“ÇžƒGƒ‰[" & ControlChars.NewLine &
-                                                     "Œ¾Œê’è‹`ƒtƒ@ƒCƒ‹‚Ì‘¶ÝEƒpƒX‚ðŠm”F‚µ‚Ä‚­‚¾‚³‚¢B")
+                Dim lex As UsrDefException = New UsrDefException("è¨€èªžå®šç¾©ãƒ•ã‚¡ã‚¤ãƒ«èª­è¾¼ã‚¨ãƒ©ãƒ¼" & ControlChars.NewLine &
+                                                     "è¨€èªžå®šç¾©ãƒ•ã‚¡ã‚¤ãƒ«ã®å­˜åœ¨ãƒ»ãƒ‘ã‚¹ã‚’ç¢ºèªã—ã¦ãã ã•ã„ã€‚")
                 Debug.WriteLine(lex.Message)
                 Throw lex
             End Try
         End Sub
 
         '-------------------------------------------------------------------------------
-        '   ƒƒbƒZ[ƒWŽæ“¾
-        '   iˆ—ŠT—vj’Ê’m‚³‚ê‚½ƒƒbƒZ[ƒWID‚É‘Î‰ž‚·‚éMSG‚ð•ÒW‚µ‚Ä•Ô‹p‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^   FprmMsgId         ƒƒbƒZ[ƒWID
-        '                   FprmOptionalMsg   ’Ç‰ÁƒƒbƒZ[ƒW
-        '   œƒƒ\ƒbƒh–ß‚è’l FŒŸõ‚³‚ê‚½ƒƒbƒZ[ƒWƒr[ƒ“(ValueObject)
-        '   œ”­¶—áŠO       FException,UsrDefException
+        '   ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸å–å¾—
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰é€šçŸ¥ã•ã‚ŒãŸãƒ¡ãƒƒã‚»ãƒ¼ã‚¸IDã«å¯¾å¿œã™ã‚‹MSGã‚’ç·¨é›†ã—ã¦è¿”å´ã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šprmMsgId         ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ID
+        '                   ï¼šprmOptionalMsg   è¿½åŠ ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šæ¤œç´¢ã•ã‚ŒãŸãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒ“ãƒ¼ãƒ³(ValueObject)
+        '   â—ç™ºç”Ÿä¾‹å¤–       ï¼šException,UsrDefException
         '                                               2006.05.07 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ƒƒbƒZ[ƒWŽæ“¾ ’Ê’m‚³‚ê‚½ƒƒbƒZ[ƒWID‚É‘Î‰ž‚·‚éMSG‚ð•ÒW‚µ‚Ä•Ô‹p‚·‚é
+        ''' ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸å–å¾— é€šçŸ¥ã•ã‚ŒãŸãƒ¡ãƒƒã‚»ãƒ¼ã‚¸IDã«å¯¾å¿œã™ã‚‹MSGã‚’ç·¨é›†ã—ã¦è¿”å´ã™ã‚‹
         ''' </summary>
-        ''' <param name="prmLangId">ƒƒbƒZ[ƒWID</param>
-        ''' <returns>ŒŸõ‚³‚ê‚½ƒƒbƒZ[ƒWƒr[ƒ“(ValueObject)</returns>
-        ''' <remarks>”­¶—áŠO       FException,UsrDefException</remarks>
+        ''' <param name="prmLangId">ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ID</param>
+        ''' <returns>æ¤œç´¢ã•ã‚ŒãŸãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒ“ãƒ¼ãƒ³(ValueObject)</returns>
+        ''' <remarks>ç™ºç”Ÿä¾‹å¤–       ï¼šException,UsrDefException</remarks>
         Public Function getLANG(ByVal prmLangText As String, ByVal prmLangId As String) As String
             Try
                 Dim langDef As XmlElement = _xmlDoc.DocumentElement
@@ -76,11 +76,11 @@ Namespace LANG
                 Dim i As Integer
                 For i = 0 To elemList.Count - 1
                     If elemList.ItemOf(i).Item("ID").InnerText = prmLangText Then
-                        'ƒƒbƒZ[ƒWID‚ªˆê’v‚·‚é‚È‚ç
+                        'ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸IDãŒä¸€è‡´ã™ã‚‹ãªã‚‰
                         Dim textWk As String = "err"
                         textWk = elemList.ItemOf(i).Item(prmLangId).InnerText
 
-                        'MSG•\Ž¦
+                        'MSGè¡¨ç¤º
                         Return textWk
                     End If
                 Next

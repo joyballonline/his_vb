@@ -1,38 +1,38 @@
-Imports System.IO
+ï»¿Imports System.IO
 Imports System.Text
 
 
 Namespace Log
     '===============================================================================
     '
-    '  ƒ†[ƒeƒBƒŠƒeƒBƒNƒ‰ƒX
-    '    iƒNƒ‰ƒX–¼j    UtilLogDebugger
-    '    iˆ—‹@”\–¼j      ƒƒOo—ÍŠg’£‹@”\‚ð’ñ‹Ÿ‚·‚é
-    '    i–{MDLŽg—p‘O’ñj   UtilLogWriter‚ªƒvƒƒWƒFƒNƒg‚ÉŽæ‚èž‚Ü‚ê‚Ä‚¢‚é‚±‚Æ
-    '    i”õlj            UtilLogWriter‚ðŒp³
+    '  ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£ã‚¯ãƒ©ã‚¹
+    '    ï¼ˆã‚¯ãƒ©ã‚¹åï¼‰    UtilLogDebugger
+    '    ï¼ˆå‡¦ç†æ©Ÿèƒ½åï¼‰      ãƒ­ã‚°å‡ºåŠ›æ‹¡å¼µæ©Ÿèƒ½ã‚’æä¾›ã™ã‚‹
+    '    ï¼ˆæœ¬MDLä½¿ç”¨å‰æï¼‰   UtilLogWriterãŒãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã«å–ã‚Šè¾¼ã¾ã‚Œã¦ã„ã‚‹ã“ã¨
+    '    ï¼ˆå‚™è€ƒï¼‰            UtilLogWriterã‚’ç¶™æ‰¿
     '
     '===============================================================================
-    '  —š—ð  –¼‘O          “ú  •t      ƒ}[ƒN      “à—e
+    '  å±¥æ­´  åå‰          æ—¥  ä»˜      ãƒžãƒ¼ã‚¯      å†…å®¹
     '-------------------------------------------------------------------------------
-    '  (1)   Laevigata, Inc.    2006/04/18             V‹K
+    '  (1)   Laevigata, Inc.    2006/04/18             æ–°è¦
     '-------------------------------------------------------------------------------
     Public Class UtilLogDebugger
         Inherits UtilLogWriter
 
         '===============================================================================
-        'ƒƒ“ƒo[’è”’è‹`
+        'ãƒ¡ãƒ³ãƒãƒ¼å®šæ•°å®šç¾©
         '===============================================================================
-        Public Const LOG_DEBUG As Short = 1   'ƒƒOo—Íƒ^ƒCƒvƒfƒoƒbƒO
-        Public Const LOG_INFO As Short = 2    'ƒƒOo—Íƒ^ƒCƒvƒCƒ“ƒtƒHƒ[ƒVƒ‡ƒ“
-        Public Const LOG_ERR As Short = 3     'ƒƒOo—Íƒ^ƒCƒvƒGƒ‰[
+        Public Const LOG_DEBUG As Short = 1   'ãƒ­ã‚°å‡ºåŠ›ã‚¿ã‚¤ãƒ—ï¼ãƒ‡ãƒãƒƒã‚°
+        Public Const LOG_INFO As Short = 2    'ãƒ­ã‚°å‡ºåŠ›ã‚¿ã‚¤ãƒ—ï¼ã‚¤ãƒ³ãƒ•ã‚©ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
+        Public Const LOG_ERR As Short = 3     'ãƒ­ã‚°å‡ºåŠ›ã‚¿ã‚¤ãƒ—ï¼ã‚¨ãƒ©ãƒ¼
 
         '===============================================================================
-        'ƒƒ“ƒo[•Ï”’è‹`
+        'ãƒ¡ãƒ³ãƒãƒ¼å¤‰æ•°å®šç¾©
         '===============================================================================
-        Private _debugFlg As Boolean                'ƒfƒoƒbƒOƒ‚[ƒh
+        Private _debugFlg As Boolean                'ãƒ‡ãƒãƒƒã‚°ãƒ¢ãƒ¼ãƒ‰
 
         '===============================================================================
-        'ƒvƒƒpƒeƒB(ƒAƒNƒZƒT)
+        'ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£(ã‚¢ã‚¯ã‚»ã‚µ)
         '===============================================================================
         Public Property debugFlg() As Boolean
             'Geter--------
@@ -42,22 +42,22 @@ Namespace Log
             'Setter-------
             Set(ByVal Value As Boolean)
                 _debugFlg = Value
-                Call MyBase.writeLine("ƒfƒoƒbƒOƒ‚[ƒh‚ð[" & _debugFlg.ToString & "]‚É•ÏX‚µ‚Ü‚·B")
+                Call MyBase.writeLine("ãƒ‡ãƒãƒƒã‚°ãƒ¢ãƒ¼ãƒ‰ã‚’[" & _debugFlg.ToString & "]ã«å¤‰æ›´ã—ã¾ã™ã€‚")
             End Set
         End Property
 
         '===============================================================================
-        ' ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-        '   œ“ü—Íƒpƒ‰ƒƒ^   F  prmFileNm           Logƒtƒ@ƒCƒ‹–¼(ƒtƒ‹ƒpƒX)
-        '                       prmDebugFlg         ƒfƒoƒbƒOƒ‚[ƒh
-        '                       <prmConsoleWrite>   ƒRƒ“ƒ\[ƒ‹o—Í‚·‚é‚©‚Ç‚¤‚©
+        ' ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼š  prmFileNm           Logãƒ•ã‚¡ã‚¤ãƒ«å(ãƒ•ãƒ«ãƒ‘ã‚¹)
+        '                       prmDebugFlg         ãƒ‡ãƒãƒƒã‚°ãƒ¢ãƒ¼ãƒ‰
+        '                       <prmConsoleWrite>   ã‚³ãƒ³ã‚½ãƒ¼ãƒ«å‡ºåŠ›ã™ã‚‹ã‹ã©ã†ã‹
         '===============================================================================
         ''' <summary>
-        ''' ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        ''' ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         ''' </summary>
-        ''' <param name="prmFileNm">Logƒtƒ@ƒCƒ‹–¼(ƒtƒ‹ƒpƒX)</param>
-        ''' <param name="prmDebugFlg">ƒfƒoƒbƒOƒ‚[ƒh</param>
-        ''' <param name="prmConsoleWrite">ƒRƒ“ƒ\[ƒ‹o—Í‚·‚é‚©‚Ç‚¤‚©</param>
+        ''' <param name="prmFileNm">Logãƒ•ã‚¡ã‚¤ãƒ«å(ãƒ•ãƒ«ãƒ‘ã‚¹)</param>
+        ''' <param name="prmDebugFlg">ãƒ‡ãƒãƒƒã‚°ãƒ¢ãƒ¼ãƒ‰</param>
+        ''' <param name="prmConsoleWrite">ã‚³ãƒ³ã‚½ãƒ¼ãƒ«å‡ºåŠ›ã™ã‚‹ã‹ã©ã†ã‹</param>
         ''' <remarks></remarks>
         Public Sub New(ByVal prmFileNm As String, _
                        ByVal prmDebugFlg As Boolean, _
@@ -67,20 +67,20 @@ Namespace Log
         End Sub
 
         '-------------------------------------------------------------------------------
-        '   Šg’£ƒƒOo—Í
-        '   iˆ—ŠT—vjƒƒOo—Íƒ^ƒCƒv‚ªƒfƒoƒbƒO‚Ì‚à‚Ì‚ÍƒfƒoƒbƒOƒ‚[ƒh=trne‚Ìê‡‚Ì‚Ýo—Í‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^FiLogType ƒƒOo—Íƒ^ƒCƒv(LOG_DEBUG/LOG_INFO/LOG_ERR)
-        '                 F‘¼ mybase.writelineŽQÆ
-        '   œƒƒ\ƒbƒh–ß‚è’l F‚È‚µ
-        '   œ”­¶—áŠO       FException
+        '   æ‹¡å¼µãƒ­ã‚°å‡ºåŠ›
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰ãƒ­ã‚°å‡ºåŠ›ã‚¿ã‚¤ãƒ—ãŒãƒ‡ãƒãƒƒã‚°ã®ã‚‚ã®ã¯ãƒ‡ãƒãƒƒã‚°ãƒ¢ãƒ¼ãƒ‰=trneã®å ´åˆã®ã¿å‡ºåŠ›ã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ï¼šiLogType ãƒ­ã‚°å‡ºåŠ›ã‚¿ã‚¤ãƒ—(LOG_DEBUG/LOG_INFO/LOG_ERR)
+        '                 ï¼šä»– mybase.writelineå‚ç…§
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šãªã—
+        '   â—ç™ºç”Ÿä¾‹å¤–       ï¼šException
         '                                               2006.04.18 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' Šg’£ƒƒOo—Í ƒƒOo—Íƒ^ƒCƒv‚ªƒfƒoƒbƒO‚Ì‚à‚Ì‚ÍƒfƒoƒbƒOƒ‚[ƒh=trne‚Ìê‡‚Ì‚Ýo—Í‚·‚é
+        ''' æ‹¡å¼µãƒ­ã‚°å‡ºåŠ› ãƒ­ã‚°å‡ºåŠ›ã‚¿ã‚¤ãƒ—ãŒãƒ‡ãƒãƒƒã‚°ã®ã‚‚ã®ã¯ãƒ‡ãƒãƒƒã‚°ãƒ¢ãƒ¼ãƒ‰=trneã®å ´åˆã®ã¿å‡ºåŠ›ã™ã‚‹
         ''' </summary>
-        ''' <param name="prmLogType">ƒƒOo—Íƒ^ƒCƒv(LOG_DEBUG/LOG_INFO/LOG_ERR)</param>
-        ''' <param name="prmOutPut">YYYY/MM/DD HH:MM:DD   ƒGƒ‰[ƒR[ƒh•ƒGƒ‰[ƒƒbƒZ[ƒW</param>
-        ''' <param name="prmOutPut2">SQL•¶‚È‚Ç’Ç‰ÁƒƒbƒZ[ƒW(Žw’èŽž‚Ì‚Ýo—Í)</param>
+        ''' <param name="prmLogType">ãƒ­ã‚°å‡ºåŠ›ã‚¿ã‚¤ãƒ—(LOG_DEBUG/LOG_INFO/LOG_ERR)</param>
+        ''' <param name="prmOutPut">YYYY/MM/DD HH:MM:DD   ã‚¨ãƒ©ãƒ¼ã‚³ãƒ¼ãƒ‰ï¼†ã‚¨ãƒ©ãƒ¼ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸</param>
+        ''' <param name="prmOutPut2">SQLæ–‡ãªã©è¿½åŠ ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸(æŒ‡å®šæ™‚ã®ã¿å‡ºåŠ›)</param>
         ''' <remarks></remarks>
         Public Shadows Sub writeLine(ByVal prmLogType As Short, _
                                      ByVal prmOutPut As String, _

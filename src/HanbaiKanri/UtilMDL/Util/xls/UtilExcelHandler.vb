@@ -1,103 +1,103 @@
-'Imports System.Runtime.InteropServices
+ï»¿'Imports System.Runtime.InteropServices
 Imports Microsoft.Office.Interop
 
 Namespace xls
     '===============================================================================
     '
-    '  ƒ†[ƒeƒBƒŠƒeƒBƒNƒ‰ƒX
-    '    iƒNƒ‰ƒX–¼j    UtilExcelHandler
-    '    iˆ—‹@”\–¼j     Excel‘€ì‹@”\‚ğ’ñ‹Ÿ
-    '    i–{MDLg—p‘O’ñj  Microsoft Excel **.* Object Library ‚ğQÆİ’è‚Ì‚±‚Æ
-    '    i”õlj           ¦•¡”‚ÌBook‚ğˆµ‚¤‚±‚Æ‚É‚Í”ñ‘Î‰
-    '                       ¦•K‚¸Excel‚Ìg—p‚ªŠ®—¹‚µ‚½‚ç•K‚¸endUseƒƒ\ƒbƒh‚ğŒÄ‚Ño‚·‚±‚Æ
-    '                           FinallyƒuƒƒbƒN‚ğ—p‚¢‚é‚È‚Ç‚µ‚ÄAendUse‚ÌŒÄ‚Ño‚µ‚ğ•Ûá‚µ‚Ä‚­‚¾‚³‚¢B
-    '                           ¨uƒvƒƒZƒX‚ª³‚µ‚­I—¹‚µ‚È‚¢vuƒƒ‚ƒŠƒŠ[ƒNv‚È‚Ç‚Ì•s‹ï‡‚ğ”­¶‚³‚¹‚Ü‚·B
-    '                           ‚Ü‚½ACOMƒRƒ“ƒ|[ƒlƒ“ƒg‚Ìˆµ‚¢‚É‘Î‚·‚é—‰ğ‚ª[‚¢ê‡‚ğœ‚¢‚ÄA
-    '                           ƒ[ƒJƒ‹ƒ‚ƒWƒ…[ƒ‹“à‚ÅExcelƒIƒuƒWƒFƒNƒg‚Ì‘€ì(Excel.››‚Ì‹Lq)‚à„§‚µ‚Ü‚¹‚ñB
+    '  ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£ã‚¯ãƒ©ã‚¹
+    '    ï¼ˆã‚¯ãƒ©ã‚¹åï¼‰    UtilExcelHandler
+    '    ï¼ˆå‡¦ç†æ©Ÿèƒ½åï¼‰     Excelæ“ä½œæ©Ÿèƒ½ã‚’æä¾›
+    '    ï¼ˆæœ¬MDLä½¿ç”¨å‰æï¼‰  Microsoft Excel **.* Object Library ã‚’å‚ç…§è¨­å®šã®ã“ã¨
+    '    ï¼ˆå‚™è€ƒï¼‰           â€»è¤‡æ•°ã®Bookã‚’æ‰±ã†ã“ã¨ã«ã¯éå¯¾å¿œ
+    '                       â€»å¿…ãšExcelã®ä½¿ç”¨ãŒå®Œäº†ã—ãŸã‚‰å¿…ãšendUseãƒ¡ã‚½ãƒƒãƒ‰ã‚’å‘¼ã³å‡ºã™ã“ã¨
+    '                           Finallyãƒ–ãƒ­ãƒƒã‚¯ã‚’ç”¨ã„ã‚‹ãªã©ã—ã¦ã€endUseã®å‘¼ã³å‡ºã—ã‚’ä¿éšœã—ã¦ãã ã•ã„ã€‚
+    '                           â†’ã€Œãƒ—ãƒ­ã‚»ã‚¹ãŒæ­£ã—ãçµ‚äº†ã—ãªã„ã€ã€Œãƒ¡ãƒ¢ãƒªãƒªãƒ¼ã‚¯ã€ãªã©ã®ä¸å…·åˆã‚’ç™ºç”Ÿã•ã›ã¾ã™ã€‚
+    '                           ã¾ãŸã€COMã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®æ‰±ã„ã«å¯¾ã™ã‚‹ç†è§£ãŒæ·±ã„å ´åˆã‚’é™¤ã„ã¦ã€
+    '                           ãƒ­ãƒ¼ã‚«ãƒ«ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«å†…ã§Excelã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®æ“ä½œ(Excel.â—‹â—‹ã®è¨˜è¿°)ã‚‚æ¨å¥¨ã—ã¾ã›ã‚“ã€‚
     '
     '===============================================================================
-    '  —š—ğ  –¼‘O          “ú  •t      ƒ}[ƒN      “à—e
+    '  å±¥æ­´  åå‰          æ—¥  ä»˜      ãƒãƒ¼ã‚¯      å†…å®¹
     '-------------------------------------------------------------------------------
-    '  (1)   Laevigata, Inc.    2006/05/17              V‹K
-    '  (2)   Laevigata, Inc.    2006/07/03              ‰üƒy[ƒWƒƒ\ƒbƒh‚ğ’Ç‰Á
-    '  (3)   Laevigata, Inc.    2007/08/10              –¢À‘•‚¾‚Á‚½ˆÈ‰ºƒƒ\ƒbƒh‚ğ’Ç‰Á
+    '  (1)   Laevigata, Inc.    2006/05/17              æ–°è¦
+    '  (2)   Laevigata, Inc.    2006/07/03              æ”¹ãƒšãƒ¼ã‚¸ãƒ¡ã‚½ãƒƒãƒ‰ã‚’è¿½åŠ 
+    '  (3)   Laevigata, Inc.    2007/08/10              æœªå®Ÿè£…ã ã£ãŸä»¥ä¸‹ãƒ¡ã‚½ãƒƒãƒ‰ã‚’è¿½åŠ 
     '                                                   setColor
     '                                                   setFont
     '                                                   setNumberFormat
     '                                                   setUpPageDefine
-    '  (4)   Laevigata, Inc.    2010/03/05              endUse‚ğŒÄ‚Ño‚µ‚Ä‚àƒvƒƒZƒX‚ªc‚éê‡‚ª‚ ‚é•s‹ï‡‚ğC³
-    '  (5)   Karino        2010/03/08              setShapeTextBox,paintShape,printOut‚ğ’Ç‰Á
-    '  (6)   Sugano        2010/03/16              printPreview‚ğ’Ç‰Á
+    '  (4)   Laevigata, Inc.    2010/03/05              endUseã‚’å‘¼ã³å‡ºã—ã¦ã‚‚ãƒ—ãƒ­ã‚»ã‚¹ãŒæ®‹ã‚‹å ´åˆãŒã‚ã‚‹ä¸å…·åˆã‚’ä¿®æ­£
+    '  (5)   Karino        2010/03/08              setShapeTextBox,paintShape,printOutã‚’è¿½åŠ 
+    '  (6)   Sugano        2010/03/16              printPreviewã‚’è¿½åŠ 
     '-------------------------------------------------------------------------------
     Public Class UtilExcelHandler
         Inherits ExcelFunc
         '===============================================================================
-        '\‘¢‘Ì’è‹`
+        'æ§‹é€ ä½“å®šç¾©
         '===============================================================================
-        '‰¡ˆÊ’u--------------
+        'æ¨ªä½ç½®--------------
         ''' <summary>
-        ''' ‰¡ˆÊ’u‚ğ•\‚·—ñ‹“‘Ì
+        ''' æ¨ªä½ç½®ã‚’è¡¨ã™åˆ—æŒ™ä½“
         ''' </summary>
         ''' <remarks></remarks>
         Public Enum HorizontalAlignment As Short
             ''' <summary>
-            ''' ¶Šñ‚¹
+            ''' å·¦å¯„ã›
             ''' </summary>
             ''' <remarks></remarks>
             Left = 0
             ''' <summary>
-            ''' ’†‰›Šñ‚¹
+            ''' ä¸­å¤®å¯„ã›
             ''' </summary>
             ''' <remarks></remarks>
             Center = 1
             ''' <summary>
-            ''' ‰EŠñ‚¹
+            ''' å³å¯„ã›
             ''' </summary>
             ''' <remarks></remarks>
             Right = 2
             ''' <summary>
-            ''' ‘I‘ğ”ÍˆÍ‚Å’†‰›Šñ‚¹
+            ''' é¸æŠç¯„å›²ã§ä¸­å¤®å¯„ã›
             ''' </summary>
             ''' <remarks></remarks>
             CenterAcrossSelection = 3
         End Enum
 
-        'cˆÊ’u--------------
+        'ç¸¦ä½ç½®--------------
         ''' <summary>
-        ''' cˆÊ’u‚ğ•\‚·—ñ‹“‘Ì
+        ''' ç¸¦ä½ç½®ã‚’è¡¨ã™åˆ—æŒ™ä½“
         ''' </summary>
         ''' <remarks></remarks>
         Public Enum VerticalAlignment As Short
             ''' <summary>
-            ''' ãŠñ‚¹
+            ''' ä¸Šå¯„ã›
             ''' </summary>
             ''' <remarks></remarks>
             Top = 0
             ''' <summary>
-            ''' ’†‰›Šñ‚¹
+            ''' ä¸­å¤®å¯„ã›
             ''' </summary>
             ''' <remarks></remarks>
             Center = 1
             ''' <summary>
-            ''' ‰ºŠñ‚¹
+            ''' ä¸‹å¯„ã›
             ''' </summary>
             ''' <remarks></remarks>
             Bottom = 2
         End Enum
 
         '===============================================================================
-        'ƒƒ“ƒo[•Ï”’è‹`
+        'ãƒ¡ãƒ³ãƒãƒ¼å¤‰æ•°å®šç¾©
         '===============================================================================
-        Private _fileName As String         'ƒtƒ@ƒCƒ‹–¼
-        Private _fileCreate As Boolean      'ƒtƒ@ƒCƒ‹¶¬ƒ‚[ƒh
-        Private _app As Excel.Application   'ExcelƒAƒvƒŠ
-        Private _book As Excel.Workbook     '‘ÎÛƒuƒbƒN
-        Private _books As Excel.Workbooks   'ƒ[ƒNƒuƒbƒN
-        Private _sheet As Excel.Worksheet   '‘ÎÛƒV[ƒg
-        Private _sheets As Excel.Sheets     'ƒ[ƒNƒV[ƒg
+        Private _fileName As String         'ãƒ•ã‚¡ã‚¤ãƒ«å
+        Private _fileCreate As Boolean      'ãƒ•ã‚¡ã‚¤ãƒ«ç”Ÿæˆãƒ¢ãƒ¼ãƒ‰
+        Private _app As Excel.Application   'Excelã‚¢ãƒ—ãƒª
+        Private _book As Excel.Workbook     'å¯¾è±¡ãƒ–ãƒƒã‚¯
+        Private _books As Excel.Workbooks   'ãƒ¯ãƒ¼ã‚¯ãƒ–ãƒƒã‚¯
+        Private _sheet As Excel.Worksheet   'å¯¾è±¡ã‚·ãƒ¼ãƒˆ
+        Private _sheets As Excel.Sheets     'ãƒ¯ãƒ¼ã‚¯ã‚·ãƒ¼ãƒˆ
 
         '===============================================================================
-        'ƒƒ“ƒo[’è”’è‹`
+        'ãƒ¡ãƒ³ãƒãƒ¼å®šæ•°å®šç¾©
         '===============================================================================
         Public Const xlPasteFormats As Short = -4122
         Public Const xlNone As Short = -4142
@@ -126,13 +126,13 @@ Namespace xls
         Public Const xlThick As Short = 4
 
         '===============================================================================
-        'ƒvƒƒpƒeƒB(ƒAƒNƒZƒT)
+        'ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£(ã‚¢ã‚¯ã‚»ã‚µ)
         '===============================================================================
         ''' <summary>
-        ''' ‘ÎÛƒV[ƒg
+        ''' å¯¾è±¡ã‚·ãƒ¼ãƒˆ
         ''' </summary>
-        ''' <value>ƒV[ƒg–¼</value>
-        ''' <returns>ƒV[ƒg–¼</returns>
+        ''' <value>ã‚·ãƒ¼ãƒˆå</value>
+        ''' <returns>ã‚·ãƒ¼ãƒˆå</returns>
         ''' <remarks></remarks>
         Public Property targetSheet() As String
             Get
@@ -143,10 +143,10 @@ Namespace xls
             End Set
         End Property
         ''' <summary>
-        ''' ‘ÎÛƒV[ƒg(ƒCƒ“ƒfƒbƒNƒXw’è—p)
+        ''' å¯¾è±¡ã‚·ãƒ¼ãƒˆ(ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹æŒ‡å®šç”¨)
         ''' </summary>
-        ''' <value>ƒCƒ“ƒfƒbƒNƒX(1`)</value>
-        ''' <returns>ƒCƒ“ƒfƒbƒNƒX(1`)</returns>
+        ''' <value>ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹(1ï½)</value>
+        ''' <returns>ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹(1ï½)</returns>
         ''' <remarks></remarks>
         Public Property targetSheetByIdx() As Short
             Get
@@ -158,36 +158,36 @@ Namespace xls
         End Property
 
         '===============================================================================
-        'ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        'ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         '===============================================================================
         ''' <summary>
-        ''' ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        ''' ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         ''' </summary>
-        ''' <param name="prmFile">‘€ì‘ÎÛƒtƒ@ƒCƒ‹–¼</param>
-        ''' <param name="prmCreate">ƒtƒ@ƒCƒ‹‚ğì¬‚·‚é‚©‚Ç‚¤‚©‚Ìƒtƒ‰ƒO</param>
+        ''' <param name="prmFile">æ“ä½œå¯¾è±¡ãƒ•ã‚¡ã‚¤ãƒ«å</param>
+        ''' <param name="prmCreate">ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä½œæˆã™ã‚‹ã‹ã©ã†ã‹ã®ãƒ•ãƒ©ã‚°</param>
         ''' <remarks></remarks>
         Public Sub New(ByVal prmFile As String, Optional ByVal prmCreate As Boolean = False)
-            'Šg’£qƒ`ƒFƒbƒN
+            'æ‹¡å¼µå­ãƒã‚§ãƒƒã‚¯
             If Not (System.IO.Path.GetExtension(prmFile).ToLower.Equals(".xls") Or
                     System.IO.Path.GetExtension(prmFile).ToLower.Equals(".xlsx")) Then
-                Throw New UsrDefException("Šg’£q‚ªŒë‚Á‚Ä‚¢‚Ü‚·B")
+                Throw New UsrDefException("æ‹¡å¼µå­ãŒèª¤ã£ã¦ã„ã¾ã™ã€‚")
             End If
-            'ƒtƒ@ƒCƒ‹‚ğ¶¬‚·‚é‚Ì‚©‚Ç‚¤‚©”»’è
+            'ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ç”Ÿæˆã™ã‚‹ã®ã‹ã©ã†ã‹åˆ¤å®š
             If prmCreate = False Then
-                'Šù‘¶‚Ìƒtƒ@ƒCƒ‹‚ğŠJ‚­
+                'æ—¢å­˜ã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã
                 If System.IO.File.Exists(prmFile) = False Then
-                    'ƒtƒ@ƒCƒ‹‚ª‘¶İ‚µ‚È‚¢ê‡‚ÍƒGƒ‰[
-                    Throw New UsrDefException("‘ÎÛxlsƒtƒ@ƒCƒ‹‚ª‘¶İ‚µ‚Ü‚¹‚ñB")
+                    'ãƒ•ã‚¡ã‚¤ãƒ«ãŒå­˜åœ¨ã—ãªã„å ´åˆã¯ã‚¨ãƒ©ãƒ¼
+                    Throw New UsrDefException("å¯¾è±¡xlsãƒ•ã‚¡ã‚¤ãƒ«ãŒå­˜åœ¨ã—ã¾ã›ã‚“ã€‚")
                 End If
                 _fileCreate = False
             Else
-                'V‚µ‚­ƒtƒ@ƒCƒ‹‚ğ¶¬‚·‚é
+                'æ–°ã—ããƒ•ã‚¡ã‚¤ãƒ«ã‚’ç”Ÿæˆã™ã‚‹
 
-                'ƒpƒX‚Æƒtƒ@ƒCƒ‹–¼‚É•ªŠ„‚µ‚Ä
+                'ãƒ‘ã‚¹ã¨ãƒ•ã‚¡ã‚¤ãƒ«åã«åˆ†å‰²ã—ã¦
                 Dim devPos As Integer
-                Dim prmFullPath As String = prmFile 'ƒtƒ‹ƒpƒX
-                Dim prmRefPath As String = ""       'ƒpƒX‚Ì‚İ
-                Dim prmRefFile As String = ""       'ƒtƒ@ƒCƒ‹–¼‚Ì‚İ
+                Dim prmFullPath As String = prmFile 'ãƒ•ãƒ«ãƒ‘ã‚¹
+                Dim prmRefPath As String = ""       'ãƒ‘ã‚¹ã®ã¿
+                Dim prmRefFile As String = ""       'ãƒ•ã‚¡ã‚¤ãƒ«åã®ã¿
                 devPos = InStrRev(prmFullPath.Replace("/", "\"), "\")
                 If devPos <= 0 Then
                     prmRefFile = prmFullPath
@@ -196,9 +196,9 @@ Namespace xls
                     prmRefPath = prmFullPath.Substring(0, devPos - 1)
                 End If
 
-                '¶¬dir‚Ì‚İ‚Å‘¶İƒ`ƒFƒbƒN‚ğÀ{‚·‚é
+                'ç”Ÿæˆdirã®ã¿ã§å­˜åœ¨ãƒã‚§ãƒƒã‚¯ã‚’å®Ÿæ–½ã™ã‚‹
                 If System.IO.Directory.Exists(prmRefPath) = False Then
-                    Throw New UsrDefException("¶¬êŠ‚Ìw’è‚ÉŒë‚è‚ª‚ ‚è‚Ü‚·B")
+                    Throw New UsrDefException("ç”Ÿæˆå ´æ‰€ã®æŒ‡å®šã«èª¤ã‚ŠãŒã‚ã‚Šã¾ã™ã€‚")
                 End If
 
                 _fileCreate = True
@@ -207,10 +207,10 @@ Namespace xls
         End Sub
 
         '===============================================================================
-        'ƒfƒXƒgƒ‰ƒNƒ^
+        'ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         '===============================================================================
         ''' <summary>
-        ''' ƒfƒXƒgƒ‰ƒNƒ^
+        ''' ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         ''' </summary>
         ''' <remarks></remarks>
         Protected Overrides Sub Finalize()
@@ -219,30 +219,30 @@ Namespace xls
         End Sub
 
         '===============================================================================
-        'ExcelŠJ•úˆ—
+        'Excelé–‹æ”¾å‡¦ç†
         '===============================================================================
         ''' <summary>
-        ''' ExcelObject(COM)‚ÌŠJ•úˆ—@¦ƒƒ‚ƒŠƒŠ[ƒN‘Îô
+        ''' ExcelObject(COM)ã®é–‹æ”¾å‡¦ç†ã€€â€»ãƒ¡ãƒ¢ãƒªãƒªãƒ¼ã‚¯å¯¾ç­–
         ''' </summary>
         ''' <remarks></remarks>
         Public Sub endUse()
             Try
 
-                'COMŠJ•ú
+                'COMé–‹æ”¾
                 Me.releaseCom(_sheet)
                 Me.releaseCom(_sheets)
                 Me.releaseCom(_book)
                 Me.releaseCom(_books) '2010.03.04 add by Laevigata, Inc.
                 Me.releaseCom(_app)
 
-                'ƒK[ƒxƒWƒRƒŒƒNƒg‹­§Às
+                'ã‚¬ãƒ¼ãƒ™ã‚¸ã‚³ãƒ¬ã‚¯ãƒˆå¼·åˆ¶å®Ÿè¡Œ
                 GC.Collect()
 
             Catch ex As Exception
             End Try
         End Sub
 
-        '“à•”ƒƒ\ƒbƒhFCOMObject‚ÌŠJ•ú
+        'å†…éƒ¨ãƒ¡ã‚½ãƒƒãƒ‰ï¼šCOMObjectã®é–‹æ”¾
         Private Sub releaseCom(ByRef prmCom As Object)
             Try
                 If Not prmCom Is Nothing AndAlso System.Runtime.InteropServices.
@@ -259,68 +259,68 @@ Namespace xls
         End Sub
 
         '===============================================================================
-        'ƒtƒ@ƒCƒ‹ì¬
-        '¦¦¦ˆê’UŒÄo‚µ‚½Œã‚ÍÄ“xŒÄ‚Ño‚·‚±‚Æ‚ğ‹Ö~
-        '¦¦¦createƒƒ\ƒbƒh‚ÌŒÄo‚µŒãA•ÒW‚ªI‚í‚Á‚½‚çcloseƒƒ\ƒbƒh‚ğŒÄ‚Ño‚·‚±‚Æ
+        'ãƒ•ã‚¡ã‚¤ãƒ«ä½œæˆ
+        'â€»â€»â€»ä¸€æ—¦å‘¼å‡ºã—ãŸå¾Œã¯å†åº¦å‘¼ã³å‡ºã™ã“ã¨ã‚’ç¦æ­¢
+        'â€»â€»â€»createãƒ¡ã‚½ãƒƒãƒ‰ã®å‘¼å‡ºã—å¾Œã€ç·¨é›†ãŒçµ‚ã‚ã£ãŸã‚‰closeãƒ¡ã‚½ãƒƒãƒ‰ã‚’å‘¼ã³å‡ºã™ã“ã¨
         '===============================================================================
         ''' <summary>
-        ''' ƒtƒ@ƒCƒ‹ì¬@createƒƒ\ƒbƒh‚ÌŒÄo‚µŒãA•ÒW‚ªI‚í‚Á‚½‚çcloseƒƒ\ƒbƒh‚ğŒÄ‚Ño‚·‚±‚Æ
+        ''' ãƒ•ã‚¡ã‚¤ãƒ«ä½œæˆã€€createãƒ¡ã‚½ãƒƒãƒ‰ã®å‘¼å‡ºã—å¾Œã€ç·¨é›†ãŒçµ‚ã‚ã£ãŸã‚‰closeãƒ¡ã‚½ãƒƒãƒ‰ã‚’å‘¼ã³å‡ºã™ã“ã¨
         ''' </summary>
-        ''' <remarks>ˆê’UŒÄo‚µ‚½Œã‚ÍÄ“xŒÄ‚Ño‚·‚±‚Æ‚ğ‹Ö~</remarks>
+        ''' <remarks>ä¸€æ—¦å‘¼å‡ºã—ãŸå¾Œã¯å†åº¦å‘¼ã³å‡ºã™ã“ã¨ã‚’ç¦æ­¢</remarks>
         Public Sub create()
             If _fileCreate = False Then
                 Me.endUse()
-                Throw New UsrDefException("ƒtƒ@ƒCƒ‹¶¬ƒ‚[ƒh‚Å‚È‚¢‚½‚ßcreateƒƒ\ƒbƒh‚ÌŒÄo‚µ‚Í•s³‚Å‚·B")
+                Throw New UsrDefException("ãƒ•ã‚¡ã‚¤ãƒ«ç”Ÿæˆãƒ¢ãƒ¼ãƒ‰ã§ãªã„ãŸã‚createãƒ¡ã‚½ãƒƒãƒ‰ã®å‘¼å‡ºã—ã¯ä¸æ­£ã§ã™ã€‚")
             End If
-            _app = New Excel.Application    'ExcelƒAƒvƒŠ‚Ì¶¬
-            _app.Visible = False            '”ñ•\¦
-            _app.DisplayAlerts = False      'ƒAƒ‰[ƒg”ñ•\¦
+            _app = New Excel.Application    'Excelã‚¢ãƒ—ãƒªã®ç”Ÿæˆ
+            _app.Visible = False            'éè¡¨ç¤º
+            _app.DisplayAlerts = False      'ã‚¢ãƒ©ãƒ¼ãƒˆéè¡¨ç¤º
 
-            _books = _app.Workbooks         'ƒuƒbƒNƒI[ƒvƒ“
-            _book = _books.Add              '‘ÎÛƒuƒbƒN‚ğ’Ç‰Á‚µ‚Äæ“¾
+            _books = _app.Workbooks         'ãƒ–ãƒƒã‚¯ã‚ªãƒ¼ãƒ—ãƒ³
+            _book = _books.Add              'å¯¾è±¡ãƒ–ãƒƒã‚¯ã‚’è¿½åŠ ã—ã¦å–å¾—
             _sheets = _book.Worksheets
-            _sheet = _sheets.Item(1)        '‘ÎÛƒuƒbƒN‚Ì1–‡–Ú‚ÌƒV[ƒg‚ğ‘ÎÛƒV[ƒg‚Æ‚µ‚Äæ“¾
-            _sheet.SaveAs(_fileName)        '‰‚ß‚É•Û‘¶
+            _sheet = _sheets.Item(1)        'å¯¾è±¡ãƒ–ãƒƒã‚¯ã®1æšç›®ã®ã‚·ãƒ¼ãƒˆã‚’å¯¾è±¡ã‚·ãƒ¼ãƒˆã¨ã—ã¦å–å¾—
+            _sheet.SaveAs(_fileName)        'åˆã‚ã«ä¿å­˜
 
-            _fileCreate = False             '¶¬‚ªI‚í‚Á‚½‚Ì‚Åƒtƒ‰ƒO‚ğ“|‚·
+            _fileCreate = False             'ç”ŸæˆãŒçµ‚ã‚ã£ãŸã®ã§ãƒ•ãƒ©ã‚°ã‚’å€’ã™
 
         End Sub
 
         '===============================================================================
-        'ƒtƒ@ƒCƒ‹ƒI[ƒvƒ“
-        '¦¦¦openƒƒ\ƒbƒh‚ÌŒÄo‚µŒãA•ÒW‚ªI‚í‚Á‚½‚çcloseƒƒ\ƒbƒh‚ğŒÄ‚Ño‚·‚±‚Æ
+        'ãƒ•ã‚¡ã‚¤ãƒ«ã‚ªãƒ¼ãƒ—ãƒ³
+        'â€»â€»â€»openãƒ¡ã‚½ãƒƒãƒ‰ã®å‘¼å‡ºã—å¾Œã€ç·¨é›†ãŒçµ‚ã‚ã£ãŸã‚‰closeãƒ¡ã‚½ãƒƒãƒ‰ã‚’å‘¼ã³å‡ºã™ã“ã¨
         '===============================================================================
         ''' <summary>
-        ''' ƒtƒ@ƒCƒ‹ƒI[ƒvƒ“@openƒƒ\ƒbƒh‚ÌŒÄo‚µŒãA•ÒW‚ªI‚í‚Á‚½‚çcloseƒƒ\ƒbƒh‚ğŒÄ‚Ño‚·‚±‚Æ
+        ''' ãƒ•ã‚¡ã‚¤ãƒ«ã‚ªãƒ¼ãƒ—ãƒ³ã€€openãƒ¡ã‚½ãƒƒãƒ‰ã®å‘¼å‡ºã—å¾Œã€ç·¨é›†ãŒçµ‚ã‚ã£ãŸã‚‰closeãƒ¡ã‚½ãƒƒãƒ‰ã‚’å‘¼ã³å‡ºã™ã“ã¨
         ''' </summary>
         ''' <remarks></remarks>
         Public Sub open()
             If _fileCreate Then
                 Me.endUse()
-                Throw New UsrDefException("ƒtƒ@ƒCƒ‹¶¬ƒ‚[ƒh‚Ìê‡‚ÍAcreateƒƒ\ƒbƒh‚ÌŒÄo‚µ‚ğæ‚És‚Á‚Ä‰º‚³‚¢B")
+                Throw New UsrDefException("ãƒ•ã‚¡ã‚¤ãƒ«ç”Ÿæˆãƒ¢ãƒ¼ãƒ‰ã®å ´åˆã¯ã€createãƒ¡ã‚½ãƒƒãƒ‰ã®å‘¼å‡ºã—ã‚’å…ˆã«è¡Œã£ã¦ä¸‹ã•ã„ã€‚")
             End If
             If _app IsNot Nothing Then
                 Me.endUse()
-                Throw New UsrDefException("ƒtƒ@ƒCƒ‹‚ğŠJ‚¢‚Ä‚¢‚é‚Ü‚ÜAopenƒƒ\ƒbƒh‚ÌŒÄo‚µ‚Ís‚¦‚Ü‚¹‚ñB")
+                Throw New UsrDefException("ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã„ã¦ã„ã‚‹ã¾ã¾ã€openãƒ¡ã‚½ãƒƒãƒ‰ã®å‘¼å‡ºã—ã¯è¡Œãˆã¾ã›ã‚“ã€‚")
             End If
-            _app = New Excel.Application    'ExcelƒAƒvƒŠ‚Ì¶¬
-            _app.Visible = False             '”ñ•\¦
-            _app.DisplayAlerts = False      'ƒAƒ‰[ƒg”ñ•\¦
+            _app = New Excel.Application    'Excelã‚¢ãƒ—ãƒªã®ç”Ÿæˆ
+            _app.Visible = False             'éè¡¨ç¤º
+            _app.DisplayAlerts = False      'ã‚¢ãƒ©ãƒ¼ãƒˆéè¡¨ç¤º
 
-            _books = _app.Workbooks         'ƒuƒbƒNƒI[ƒvƒ“
-            _book = _books.Open(_fileName)  '‘ÎÛƒuƒbƒN‚ğŠJ‚¢‚Äæ“¾
+            _books = _app.Workbooks         'ãƒ–ãƒƒã‚¯ã‚ªãƒ¼ãƒ—ãƒ³
+            _book = _books.Open(_fileName)  'å¯¾è±¡ãƒ–ãƒƒã‚¯ã‚’é–‹ã„ã¦å–å¾—
             _sheets = _book.Worksheets
-            _sheet = _sheets.Item(1)        '‚Æ‚è‚ ‚¦‚¸‘ÎÛƒuƒbƒN‚Ì1–‡–Ú‚ÌƒV[ƒg‚ğ‘ÎÛƒV[ƒg‚Æ‚µ‚Äæ“¾
+            _sheet = _sheets.Item(1)        'ã¨ã‚Šã‚ãˆãšå¯¾è±¡ãƒ–ãƒƒã‚¯ã®1æšç›®ã®ã‚·ãƒ¼ãƒˆã‚’å¯¾è±¡ã‚·ãƒ¼ãƒˆã¨ã—ã¦å–å¾—
 
         End Sub
 
         '===============================================================================
-        'ƒtƒ@ƒCƒ‹ƒNƒ[ƒY
+        'ãƒ•ã‚¡ã‚¤ãƒ«ã‚¯ãƒ­ãƒ¼ã‚º
         '===============================================================================
         ''' <summary>
-        ''' ƒtƒ@ƒCƒ‹ƒNƒ[ƒY
+        ''' ãƒ•ã‚¡ã‚¤ãƒ«ã‚¯ãƒ­ãƒ¼ã‚º
         ''' </summary>
-        ''' <param name="prmSaveFlg">•Û‘¶‚·‚é‚©‚Ç‚¤‚©‚Ìƒtƒ‰ƒO</param>
+        ''' <param name="prmSaveFlg">ä¿å­˜ã™ã‚‹ã‹ã©ã†ã‹ã®ãƒ•ãƒ©ã‚°</param>
         ''' <remarks></remarks>
         Public Sub close(Optional ByVal prmSaveFlg As Boolean = True)
             Try
@@ -333,93 +333,93 @@ Namespace xls
         End Sub
 
         '===============================================================================
-        'Excel•\¦
+        'Excelè¡¨ç¤º
         '===============================================================================
         ''' <summary>
-        ''' xlsƒtƒ@ƒCƒ‹‚ğExcelƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚Å•\¦‚·‚é
+        ''' xlsãƒ•ã‚¡ã‚¤ãƒ«ã‚’Excelã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã§è¡¨ç¤ºã™ã‚‹
         ''' </summary>
         ''' <remarks></remarks>
         Public Sub display()
             If _app IsNot Nothing Then
                 Me.close()
-                Debug.WriteLine(" ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ")
-                Debug.WriteLine("closeƒƒ\ƒbƒh‚ÌŒÄo‚µŒã‚Å‚È‚¯‚ê‚ÎAdisplayƒƒ\ƒbƒh‚ÌŒÄo‚µ‚Ís‚¦‚Ü‚¹‚ñB")
-                Debug.WriteLine("    ‹­§“I‚Écloseƒƒ\ƒbƒh‚ğŒÄ‚Ño‚µ‚Ü‚µ‚½B")
-                Debug.WriteLine("    ƒƒWƒbƒN‚ÌŒ©’¼‚µ‚ğ}‚Á‚Ä‚­‚¾‚³‚¢B")
-                Debug.WriteLine(" ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ")
+                Debug.WriteLine("â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡")
+                Debug.WriteLine("closeãƒ¡ã‚½ãƒƒãƒ‰ã®å‘¼å‡ºã—å¾Œã§ãªã‘ã‚Œã°ã€displayãƒ¡ã‚½ãƒƒãƒ‰ã®å‘¼å‡ºã—ã¯è¡Œãˆã¾ã›ã‚“ã€‚")
+                Debug.WriteLine("    å¼·åˆ¶çš„ã«closeãƒ¡ã‚½ãƒƒãƒ‰ã‚’å‘¼ã³å‡ºã—ã¾ã—ãŸã€‚")
+                Debug.WriteLine("    ãƒ­ã‚¸ãƒƒã‚¯ã®è¦‹ç›´ã—ã‚’å›³ã£ã¦ãã ã•ã„ã€‚")
+                Debug.WriteLine("â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡")
             End If
-            _app = New Excel.Application    'ExcelƒAƒvƒŠ‚Ì¶¬
-            _app.Visible = True             '”ñ•\¦
-            _app.DisplayAlerts = False      'ƒAƒ‰[ƒg”ñ•\¦
-            _app.WindowState = Excel.XlWindowState.xlMaximized 'Å‘å‰»
-            _books = _app.Workbooks         'ƒ[ƒNƒuƒbƒNæ“¾
-            Call _books.Open(_fileName)     '‘ÎÛƒuƒbƒN‚ğŠJ‚­
-            Me.endUse()                     'I—¹ˆ—
+            _app = New Excel.Application    'Excelã‚¢ãƒ—ãƒªã®ç”Ÿæˆ
+            _app.Visible = True             'éè¡¨ç¤º
+            _app.DisplayAlerts = False      'ã‚¢ãƒ©ãƒ¼ãƒˆéè¡¨ç¤º
+            _app.WindowState = Excel.XlWindowState.xlMaximized 'æœ€å¤§åŒ–
+            _books = _app.Workbooks         'ãƒ¯ãƒ¼ã‚¯ãƒ–ãƒƒã‚¯å–å¾—
+            Call _books.Open(_fileName)     'å¯¾è±¡ãƒ–ãƒƒã‚¯ã‚’é–‹ã
+            Me.endUse()                     'çµ‚äº†å‡¦ç†
         End Sub
 
         '===============================================================================
-        'Excelˆóü
+        'Excelå°åˆ·
         '===============================================================================
         ''' <summary>
-        ''' w’è‚µ‚½ƒ[ƒNƒV[ƒg‚ğˆóü‚·‚é
+        ''' æŒ‡å®šã—ãŸãƒ¯ãƒ¼ã‚¯ã‚·ãƒ¼ãƒˆã‚’å°åˆ·ã™ã‚‹
         ''' </summary>
         ''' <remarks></remarks>
         Public Sub printOut()
             If _app IsNot Nothing Then
                 Me.close()
-                Debug.WriteLine(" ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ")
-                Debug.WriteLine("closeƒƒ\ƒbƒh‚ÌŒÄo‚µŒã‚Å‚È‚¯‚ê‚ÎAdisplayƒƒ\ƒbƒh‚ÌŒÄo‚µ‚Ís‚¦‚Ü‚¹‚ñB")
-                Debug.WriteLine("    ‹­§“I‚Écloseƒƒ\ƒbƒh‚ğŒÄ‚Ño‚µ‚Ü‚µ‚½B")
-                Debug.WriteLine("    ƒƒWƒbƒN‚ÌŒ©’¼‚µ‚ğ}‚Á‚Ä‚­‚¾‚³‚¢B")
-                Debug.WriteLine(" ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ")
+                Debug.WriteLine("â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡")
+                Debug.WriteLine("closeãƒ¡ã‚½ãƒƒãƒ‰ã®å‘¼å‡ºã—å¾Œã§ãªã‘ã‚Œã°ã€displayãƒ¡ã‚½ãƒƒãƒ‰ã®å‘¼å‡ºã—ã¯è¡Œãˆã¾ã›ã‚“ã€‚")
+                Debug.WriteLine("    å¼·åˆ¶çš„ã«closeãƒ¡ã‚½ãƒƒãƒ‰ã‚’å‘¼ã³å‡ºã—ã¾ã—ãŸã€‚")
+                Debug.WriteLine("    ãƒ­ã‚¸ãƒƒã‚¯ã®è¦‹ç›´ã—ã‚’å›³ã£ã¦ãã ã•ã„ã€‚")
+                Debug.WriteLine("â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡")
             End If
-            _app = New Excel.Application    'ExcelƒAƒvƒŠ‚Ì¶¬
-            _app.Visible = False            '”ñ•\¦
-            _app.DisplayAlerts = False      'ƒAƒ‰[ƒg”ñ•\¦
-            _books = _app.Workbooks         'ƒ[ƒNƒuƒbƒNæ“¾
-            _book = _books.Open(_fileName)  '‘ÎÛƒuƒbƒN‚ğŠJ‚¢‚Äæ“¾
-            _sheets = _book.Worksheets      'ƒV[ƒgæ“¾
-            _sheet = _sheets.Item(1)        '‚Æ‚è‚ ‚¦‚¸‘ÎÛƒuƒbƒN‚Ì1–‡–Ú‚ÌƒV[ƒg‚ğ‘ÎÛƒV[ƒg‚Æ‚µ‚Äæ“¾
-            _sheet.PrintOut()               '‘ÎÛƒV[ƒg‚Ìˆóü
+            _app = New Excel.Application    'Excelã‚¢ãƒ—ãƒªã®ç”Ÿæˆ
+            _app.Visible = False            'éè¡¨ç¤º
+            _app.DisplayAlerts = False      'ã‚¢ãƒ©ãƒ¼ãƒˆéè¡¨ç¤º
+            _books = _app.Workbooks         'ãƒ¯ãƒ¼ã‚¯ãƒ–ãƒƒã‚¯å–å¾—
+            _book = _books.Open(_fileName)  'å¯¾è±¡ãƒ–ãƒƒã‚¯ã‚’é–‹ã„ã¦å–å¾—
+            _sheets = _book.Worksheets      'ã‚·ãƒ¼ãƒˆå–å¾—
+            _sheet = _sheets.Item(1)        'ã¨ã‚Šã‚ãˆãšå¯¾è±¡ãƒ–ãƒƒã‚¯ã®1æšç›®ã®ã‚·ãƒ¼ãƒˆã‚’å¯¾è±¡ã‚·ãƒ¼ãƒˆã¨ã—ã¦å–å¾—
+            _sheet.PrintOut()               'å¯¾è±¡ã‚·ãƒ¼ãƒˆã®å°åˆ·
             Call _books.Close()
             Me.close()
-            Me.endUse()                     'I—¹ˆ—
+            Me.endUse()                     'çµ‚äº†å‡¦ç†
 
         End Sub
         '===============================================================================
-        'ExcelˆóüƒvƒŒƒrƒ…[•\¦
+        'Excelå°åˆ·ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼è¡¨ç¤º
         '===============================================================================
         ''' <summary>
-        ''' w’è‚µ‚½ƒ[ƒNƒV[ƒg‚ğˆóüƒvƒŒƒrƒ…[ƒ‚[ƒh‚Å•\¦‚·‚é
+        ''' æŒ‡å®šã—ãŸãƒ¯ãƒ¼ã‚¯ã‚·ãƒ¼ãƒˆã‚’å°åˆ·ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼ãƒ¢ãƒ¼ãƒ‰ã§è¡¨ç¤ºã™ã‚‹
         ''' </summary>
         ''' <remarks></remarks>
         Public Sub printPreview()
             If _app IsNot Nothing Then
                 Me.close()
-                Debug.WriteLine(" ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ")
-                Debug.WriteLine("closeƒƒ\ƒbƒh‚ÌŒÄo‚µŒã‚Å‚È‚¯‚ê‚ÎAdisplayƒƒ\ƒbƒh‚ÌŒÄo‚µ‚Ís‚¦‚Ü‚¹‚ñB")
-                Debug.WriteLine("    ‹­§“I‚Écloseƒƒ\ƒbƒh‚ğŒÄ‚Ño‚µ‚Ü‚µ‚½B")
-                Debug.WriteLine("    ƒƒWƒbƒN‚ÌŒ©’¼‚µ‚ğ}‚Á‚Ä‚­‚¾‚³‚¢B")
-                Debug.WriteLine(" ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ¡ ")
+                Debug.WriteLine("â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡")
+                Debug.WriteLine("closeãƒ¡ã‚½ãƒƒãƒ‰ã®å‘¼å‡ºã—å¾Œã§ãªã‘ã‚Œã°ã€displayãƒ¡ã‚½ãƒƒãƒ‰ã®å‘¼å‡ºã—ã¯è¡Œãˆã¾ã›ã‚“ã€‚")
+                Debug.WriteLine("    å¼·åˆ¶çš„ã«closeãƒ¡ã‚½ãƒƒãƒ‰ã‚’å‘¼ã³å‡ºã—ã¾ã—ãŸã€‚")
+                Debug.WriteLine("    ãƒ­ã‚¸ãƒƒã‚¯ã®è¦‹ç›´ã—ã‚’å›³ã£ã¦ãã ã•ã„ã€‚")
+                Debug.WriteLine("â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡â– â–¡")
             End If
-            _app = New Excel.Application    'ExcelƒAƒvƒŠ‚Ì¶¬
-            _app.Visible = True            '”ñ•\¦
-            _app.DisplayAlerts = False      'ƒAƒ‰[ƒg”ñ•\¦
-            _books = _app.Workbooks         'ƒ[ƒNƒuƒbƒNæ“¾
-            _book = _books.Open(_fileName)  '‘ÎÛƒuƒbƒN‚ğŠJ‚¢‚Äæ“¾
-            _sheets = _book.Worksheets      'ƒV[ƒgæ“¾
-            _sheet = _sheets.Item(1)        '‚Æ‚è‚ ‚¦‚¸‘ÎÛƒuƒbƒN‚Ì1–‡–Ú‚ÌƒV[ƒg‚ğ‘ÎÛƒV[ƒg‚Æ‚µ‚Äæ“¾
-            _sheet.PrintPreview()           '‘ÎÛƒV[ƒg‚Ìˆóü
+            _app = New Excel.Application    'Excelã‚¢ãƒ—ãƒªã®ç”Ÿæˆ
+            _app.Visible = True            'éè¡¨ç¤º
+            _app.DisplayAlerts = False      'ã‚¢ãƒ©ãƒ¼ãƒˆéè¡¨ç¤º
+            _books = _app.Workbooks         'ãƒ¯ãƒ¼ã‚¯ãƒ–ãƒƒã‚¯å–å¾—
+            _book = _books.Open(_fileName)  'å¯¾è±¡ãƒ–ãƒƒã‚¯ã‚’é–‹ã„ã¦å–å¾—
+            _sheets = _book.Worksheets      'ã‚·ãƒ¼ãƒˆå–å¾—
+            _sheet = _sheets.Item(1)        'ã¨ã‚Šã‚ãˆãšå¯¾è±¡ãƒ–ãƒƒã‚¯ã®1æšç›®ã®ã‚·ãƒ¼ãƒˆã‚’å¯¾è±¡ã‚·ãƒ¼ãƒˆã¨ã—ã¦å–å¾—
+            _sheet.PrintPreview()           'å¯¾è±¡ã‚·ãƒ¼ãƒˆã®å°åˆ·
             Call _books.Close()
             Me.close()
-            Me.endUse()                     'I—¹ˆ—
+            Me.endUse()                     'çµ‚äº†å‡¦ç†
 
         End Sub
         '===============================================================================
-        'w’è‚µ‚½ƒ[ƒNƒV[ƒg‚ğ‘I‘ğ‚·‚é
+        'æŒ‡å®šã—ãŸãƒ¯ãƒ¼ã‚¯ã‚·ãƒ¼ãƒˆã‚’é¸æŠã™ã‚‹
         '===============================================================================
         ''' <summary>
-        ''' w’è‚µ‚½ƒ[ƒNƒV[ƒg‚ğ‘I‘ğ‚·‚é
+        ''' æŒ‡å®šã—ãŸãƒ¯ãƒ¼ã‚¯ã‚·ãƒ¼ãƒˆã‚’é¸æŠã™ã‚‹
         ''' </summary>
         ''' <param name="prmName"></param>
         ''' <remarks></remarks>
@@ -429,16 +429,16 @@ Namespace xls
         End Sub
 
         '===============================================================================
-        'w’è‚µ‚½ƒŒƒ“ƒW‚ğ‘I‘ğ‚·‚é
-        'prmRow2/prmCol2‚ğÈ—ª‚µ‚½ê‡‚ÍA‚»‚ê‚¼‚êprmRow/prmCol‚Æ“¯’l‚ğÌ—p‚·‚é
+        'æŒ‡å®šã—ãŸãƒ¬ãƒ³ã‚¸ã‚’é¸æŠã™ã‚‹
+        'prmRow2/prmCol2ã‚’çœç•¥ã—ãŸå ´åˆã¯ã€ãã‚Œãã‚ŒprmRow/prmColã¨åŒå€¤ã‚’æ¡ç”¨ã™ã‚‹
         '===============================================================================
         ''' <summary>
-        ''' w’è‚µ‚½ƒŒƒ“ƒW‚ğ‘I‘ğ‚·‚é@prmRow2/prmCol2‚ğÈ—ª‚µ‚½ê‡‚ÍA‚»‚ê‚¼‚êprmRow/prmCol‚Æ“¯’l‚ğÌ—p‚·‚é
+        ''' æŒ‡å®šã—ãŸãƒ¬ãƒ³ã‚¸ã‚’é¸æŠã™ã‚‹ã€€prmRow2/prmCol2ã‚’çœç•¥ã—ãŸå ´åˆã¯ã€ãã‚Œãã‚ŒprmRow/prmColã¨åŒå€¤ã‚’æ¡ç”¨ã™ã‚‹
         ''' </summary>
-        ''' <param name="prmRow">ŠJns</param>
-        ''' <param name="prmCol">ŠJn—ñ</param>
-        ''' <param name="prmRow2">I—¹s</param>
-        ''' <param name="prmCol2">I—¹—ñ</param>
+        ''' <param name="prmRow">é–‹å§‹è¡Œ</param>
+        ''' <param name="prmCol">é–‹å§‹åˆ—</param>
+        ''' <param name="prmRow2">çµ‚äº†è¡Œ</param>
+        ''' <param name="prmCol2">çµ‚äº†åˆ—</param>
         ''' <remarks></remarks>
         Public Sub selectRange(ByVal prmRow As Short, ByVal prmCol As Short,
                                        Optional ByVal prmRow2 As Short = -9, Optional ByVal prmCol2 As Short = -9)
@@ -453,13 +453,13 @@ Namespace xls
         End Sub
 
         '===============================================================================
-        'w’è‚µ‚½ƒZƒ‹‚ğ‘I‘ğ‚·‚é
+        'æŒ‡å®šã—ãŸã‚»ãƒ«ã‚’é¸æŠã™ã‚‹
         '===============================================================================
         ''' <summary>
-        ''' w’è‚µ‚½ƒZƒ‹‚ğ‘I‘ğ‚·‚é
+        ''' æŒ‡å®šã—ãŸã‚»ãƒ«ã‚’é¸æŠã™ã‚‹
         ''' </summary>
-        ''' <param name="prmRow">s</param>
-        ''' <param name="prmCol">—ñ</param>
+        ''' <param name="prmRow">è¡Œ</param>
+        ''' <param name="prmCol">åˆ—</param>
         ''' <remarks></remarks>
         Public Sub selectCell(ByVal prmRow As Short, ByVal prmCol As Short)
             Dim cell1 As String = convFromR1C1(prmRow, prmCol)
@@ -468,13 +468,13 @@ Namespace xls
         End Sub
 
         '===============================================================================
-        'w’è‚µ‚½s‚ğ‘I‘ğ‚·‚é
+        'æŒ‡å®šã—ãŸè¡Œã‚’é¸æŠã™ã‚‹
         '===============================================================================
         ''' <summary>
-        ''' w’è‚µ‚½s‚ğ‘I‘ğ‚·‚é
+        ''' æŒ‡å®šã—ãŸè¡Œã‚’é¸æŠã™ã‚‹
         ''' </summary>
-        ''' <param name="prmRow">s</param>
-        ''' <param name="prmRow2">—ñ</param>
+        ''' <param name="prmRow">è¡Œ</param>
+        ''' <param name="prmRow2">åˆ—</param>
         ''' <remarks></remarks>
         Public Sub selectRow(ByVal prmRow As Short, Optional ByVal prmRow2 As Short = -9)
             Dim wkRow2 As Short = prmRow2
@@ -484,14 +484,14 @@ Namespace xls
         End Sub
 
         '===============================================================================
-        'sƒRƒs[
-        'prmRow2‚ğÈ—ª‚µ‚½ê‡‚ÍAprmRow‚Æ“¯’l‚ğÌ—p‚·‚é
+        'è¡Œã‚³ãƒ”ãƒ¼
+        'prmRow2ã‚’çœç•¥ã—ãŸå ´åˆã¯ã€prmRowã¨åŒå€¤ã‚’æ¡ç”¨ã™ã‚‹
         '===============================================================================
         ''' <summary>
-        ''' sƒRƒs[@prmRow2‚ğÈ—ª‚µ‚½ê‡‚ÍAprmRow‚Æ“¯’l‚ğÌ—p‚·‚é
+        ''' è¡Œã‚³ãƒ”ãƒ¼ã€€prmRow2ã‚’çœç•¥ã—ãŸå ´åˆã¯ã€prmRowã¨åŒå€¤ã‚’æ¡ç”¨ã™ã‚‹
         ''' </summary>
-        ''' <param name="prmRow">ŠJns</param>
-        ''' <param name="prmRow2">I—¹s</param>
+        ''' <param name="prmRow">é–‹å§‹è¡Œ</param>
+        ''' <param name="prmRow2">çµ‚äº†è¡Œ</param>
         ''' <remarks></remarks>
         Public Sub copyRow(ByVal prmRow As Short, Optional ByVal prmRow2 As Short = -9)
             Dim wkRow2 As Short = prmRow2
@@ -501,14 +501,14 @@ Namespace xls
         End Sub
 
         '===============================================================================
-        '—ñƒRƒs[
-        'prmCol2‚ğÈ—ª‚µ‚½ê‡‚ÍAprmCol‚Æ“¯’l‚ğÌ—p‚·‚é
+        'åˆ—ã‚³ãƒ”ãƒ¼
+        'prmCol2ã‚’çœç•¥ã—ãŸå ´åˆã¯ã€prmColã¨åŒå€¤ã‚’æ¡ç”¨ã™ã‚‹
         '===============================================================================
         ''' <summary>
-        ''' —ñƒRƒs[@prmCol2‚ğÈ—ª‚µ‚½ê‡‚ÍAprmCol‚Æ“¯’l‚ğÌ—p‚·‚é
+        ''' åˆ—ã‚³ãƒ”ãƒ¼ã€€prmCol2ã‚’çœç•¥ã—ãŸå ´åˆã¯ã€prmColã¨åŒå€¤ã‚’æ¡ç”¨ã™ã‚‹
         ''' </summary>
-        ''' <param name="prmCol">ŠJn—ñ</param>
-        ''' <param name="prmCol2">I—¹—ñ</param>
+        ''' <param name="prmCol">é–‹å§‹åˆ—</param>
+        ''' <param name="prmCol2">çµ‚äº†åˆ—</param>
         ''' <remarks></remarks>
         Public Sub copyCol(ByVal prmCol As Short, Optional ByVal prmCol2 As Short = -9)
             Dim wkCol2 As Short = prmCol2
@@ -518,16 +518,16 @@ Namespace xls
         End Sub
 
         '===============================================================================
-        'ƒŒƒ“ƒWƒRƒs[
-        'prmRow2/prmCol2‚ğÈ—ª‚µ‚½ê‡‚ÍA‚»‚ê‚¼‚êprmRow/prmCol‚Æ“¯’l‚ğÌ—p‚·‚é
+        'ãƒ¬ãƒ³ã‚¸ã‚³ãƒ”ãƒ¼
+        'prmRow2/prmCol2ã‚’çœç•¥ã—ãŸå ´åˆã¯ã€ãã‚Œãã‚ŒprmRow/prmColã¨åŒå€¤ã‚’æ¡ç”¨ã™ã‚‹
         '===============================================================================
         ''' <summary>
-        ''' ƒŒƒ“ƒWƒRƒs[@prmRow2/prmCol2‚ğÈ—ª‚µ‚½ê‡‚ÍA‚»‚ê‚¼‚êprmRow/prmCol‚Æ“¯’l‚ğÌ—p‚·‚é
+        ''' ãƒ¬ãƒ³ã‚¸ã‚³ãƒ”ãƒ¼ã€€prmRow2/prmCol2ã‚’çœç•¥ã—ãŸå ´åˆã¯ã€ãã‚Œãã‚ŒprmRow/prmColã¨åŒå€¤ã‚’æ¡ç”¨ã™ã‚‹
         ''' </summary>
-        ''' <param name="prmRow">ŠJns</param>
-        ''' <param name="prmCol">ŠJn—ñ</param>
-        ''' <param name="prmRow2">I—¹s</param>
-        ''' <param name="prmCol2">I—¹—ñ</param>
+        ''' <param name="prmRow">é–‹å§‹è¡Œ</param>
+        ''' <param name="prmCol">é–‹å§‹åˆ—</param>
+        ''' <param name="prmRow2">çµ‚äº†è¡Œ</param>
+        ''' <param name="prmCol2">çµ‚äº†åˆ—</param>
         ''' <remarks></remarks>
         Public Sub copyRange(ByVal prmRow As Short, ByVal prmCol As Short,
                                        Optional ByVal prmRow2 As Short = -9, Optional ByVal prmCol2 As Short = -9)
@@ -542,13 +542,13 @@ Namespace xls
         End Sub
 
         '===============================================================================
-        'ƒZƒ‹ƒRƒs[
+        'ã‚»ãƒ«ã‚³ãƒ”ãƒ¼
         '===============================================================================
         ''' <summary>
-        ''' ƒZƒ‹ƒRƒs[
+        ''' ã‚»ãƒ«ã‚³ãƒ”ãƒ¼
         ''' </summary>
-        ''' <param name="prmRow">s</param>
-        ''' <param name="prmCol">—ñ</param>
+        ''' <param name="prmRow">è¡Œ</param>
+        ''' <param name="prmCol">åˆ—</param>
         ''' <remarks></remarks>
         Public Sub copyCell(ByVal prmRow As Short, ByVal prmCol As Short)
             Dim cell1 As String = convFromR1C1(prmRow, prmCol)
@@ -557,13 +557,13 @@ Namespace xls
         End Sub
 
         '===============================================================================
-        '“\‚è•t‚¯
+        'è²¼ã‚Šä»˜ã‘
         '===============================================================================
         ''' <summary>
-        ''' “\‚è•t‚¯
+        ''' è²¼ã‚Šä»˜ã‘
         ''' </summary>
-        ''' <param name="prmRow">s</param>
-        ''' <param name="prmCol">—ñ</param>
+        ''' <param name="prmRow">è¡Œ</param>
+        ''' <param name="prmCol">åˆ—</param>
         ''' <remarks></remarks>
         Public Sub paste(ByVal prmRow As Short, ByVal prmCol As Short)
             Dim svRow As Short = _app.ActiveCell.Row
@@ -574,13 +574,13 @@ Namespace xls
         End Sub
 
         '===============================================================================
-        '‘®“\‚è•t‚¯
+        'æ›¸å¼è²¼ã‚Šä»˜ã‘
         '===============================================================================
         ''' <summary>
-        ''' ‘®“\‚è•t‚¯
+        ''' æ›¸å¼è²¼ã‚Šä»˜ã‘
         ''' </summary>
-        ''' <param name="prmRow">s</param>
-        ''' <param name="prmCol">—ñ</param>
+        ''' <param name="prmRow">è¡Œ</param>
+        ''' <param name="prmCol">åˆ—</param>
         ''' <remarks></remarks>
         Public Sub pasteFormat(ByVal prmRow As Short, ByVal prmCol As Short)
             Dim cell1 As String = convFromR1C1(prmRow, prmCol)
@@ -593,13 +593,13 @@ Namespace xls
         End Sub
 
         '===============================================================================
-        '’l“\‚è•t‚¯
+        'å€¤è²¼ã‚Šä»˜ã‘
         '===============================================================================
         ''' <summary>
-        ''' ’l“\‚è•t‚¯
+        ''' å€¤è²¼ã‚Šä»˜ã‘
         ''' </summary>
-        ''' <param name="prmRow">s</param>
-        ''' <param name="prmCol">—ñ</param>
+        ''' <param name="prmRow">è¡Œ</param>
+        ''' <param name="prmCol">åˆ—</param>
         ''' <remarks></remarks>
         Public Sub pasteValue(ByVal prmRow As Short, ByVal prmCol As Short)
             Dim cell1 As String = convFromR1C1(prmRow, prmCol)
@@ -612,14 +612,14 @@ Namespace xls
         End Sub
 
         '===============================================================================
-        's‘}“ü“\‚è•t‚¯
-        'prmRow2‚ğÈ—ª‚µ‚½ê‡‚ÍAprmRow‚Æ“¯’l‚ğÌ—p‚·‚é
+        'è¡ŒæŒ¿å…¥è²¼ã‚Šä»˜ã‘
+        'prmRow2ã‚’çœç•¥ã—ãŸå ´åˆã¯ã€prmRowã¨åŒå€¤ã‚’æ¡ç”¨ã™ã‚‹
         '===============================================================================
         ''' <summary>
-        ''' s‘}“ü“\‚è•t‚¯@prmRow2‚ğÈ—ª‚µ‚½ê‡‚ÍAprmRow‚Æ“¯’l‚ğÌ—p‚·‚é
+        ''' è¡ŒæŒ¿å…¥è²¼ã‚Šä»˜ã‘ã€€prmRow2ã‚’çœç•¥ã—ãŸå ´åˆã¯ã€prmRowã¨åŒå€¤ã‚’æ¡ç”¨ã™ã‚‹
         ''' </summary>
-        ''' <param name="prmRow">ŠJns</param>
-        ''' <param name="prmRow2">I—¹s</param>
+        ''' <param name="prmRow">é–‹å§‹è¡Œ</param>
+        ''' <param name="prmRow2">çµ‚äº†è¡Œ</param>
         ''' <remarks></remarks>
         Public Sub insertPasteRow(ByVal prmRow As Short, Optional ByVal prmRow2 As Short = -9)
             Dim wkRow2 As Short = prmRow2
@@ -629,14 +629,14 @@ Namespace xls
         End Sub
 
         '===============================================================================
-        '—ñ‘}“ü“\‚è•t‚¯
-        'prmCol2‚ğÈ—ª‚µ‚½ê‡‚ÍAprmCol‚Æ“¯’l‚ğÌ—p‚·‚é
+        'åˆ—æŒ¿å…¥è²¼ã‚Šä»˜ã‘
+        'prmCol2ã‚’çœç•¥ã—ãŸå ´åˆã¯ã€prmColã¨åŒå€¤ã‚’æ¡ç”¨ã™ã‚‹
         '===============================================================================
         ''' <summary>
-        ''' —ñ‘}“ü“\‚è•t‚¯@prmCol2‚ğÈ—ª‚µ‚½ê‡‚ÍAprmCol‚Æ“¯’l‚ğÌ—p‚·‚é
+        ''' åˆ—æŒ¿å…¥è²¼ã‚Šä»˜ã‘ã€€prmCol2ã‚’çœç•¥ã—ãŸå ´åˆã¯ã€prmColã¨åŒå€¤ã‚’æ¡ç”¨ã™ã‚‹
         ''' </summary>
-        ''' <param name="prmCol">ŠJn—ñ</param>
-        ''' <param name="prmCol2">I—¹—ñ</param>
+        ''' <param name="prmCol">é–‹å§‹åˆ—</param>
+        ''' <param name="prmCol2">çµ‚äº†åˆ—</param>
         ''' <remarks></remarks>
         Public Sub insertPasteCol(ByVal prmCol As Short, Optional ByVal prmCol2 As Short = -9)
             Dim wkCol2 As Short = prmCol2
@@ -648,14 +648,14 @@ Namespace xls
         End Sub
 
         '===============================================================================
-        'síœ
-        'prmRow2‚ğÈ—ª‚µ‚½ê‡‚ÍAprmRow‚Æ“¯’l‚ğÌ—p‚·‚é
+        'è¡Œå‰Šé™¤
+        'prmRow2ã‚’çœç•¥ã—ãŸå ´åˆã¯ã€prmRowã¨åŒå€¤ã‚’æ¡ç”¨ã™ã‚‹
         '===============================================================================
         ''' <summary>
-        ''' síœ@prmRow2‚ğÈ—ª‚µ‚½ê‡‚ÍAprmRow‚Æ“¯’l‚ğÌ—p‚·‚é
+        ''' è¡Œå‰Šé™¤ã€€prmRow2ã‚’çœç•¥ã—ãŸå ´åˆã¯ã€prmRowã¨åŒå€¤ã‚’æ¡ç”¨ã™ã‚‹
         ''' </summary>
-        ''' <param name="prmRow">ŠJns</param>
-        ''' <param name="prmRow2">I—¹s</param>
+        ''' <param name="prmRow">é–‹å§‹è¡Œ</param>
+        ''' <param name="prmRow2">çµ‚äº†è¡Œ</param>
         ''' <remarks></remarks>
         Public Sub deleteRow(ByVal prmRow As Short, Optional ByVal prmRow2 As Short = -9)
             Dim wkRow2 As Short = prmRow2
@@ -666,14 +666,14 @@ Namespace xls
         End Sub
 
         '===============================================================================
-        's’Ç‰Á
-        'prmRow2‚ğÈ—ª‚µ‚½ê‡‚ÍAprmRow‚Æ“¯’l‚ğÌ—p‚·‚é
+        'è¡Œè¿½åŠ 
+        'prmRow2ã‚’çœç•¥ã—ãŸå ´åˆã¯ã€prmRowã¨åŒå€¤ã‚’æ¡ç”¨ã™ã‚‹
         '===============================================================================
         ''' <summary>
-        ''' s’Ç‰Á@prmRow2‚ğÈ—ª‚µ‚½ê‡‚ÍAprmRow‚Æ“¯’l‚ğÌ—p‚·‚é
+        ''' è¡Œè¿½åŠ ã€€prmRow2ã‚’çœç•¥ã—ãŸå ´åˆã¯ã€prmRowã¨åŒå€¤ã‚’æ¡ç”¨ã™ã‚‹
         ''' </summary>
-        ''' <param name="prmRow">ŠJns</param>
-        ''' <param name="prmRow2">I—¹s</param>
+        ''' <param name="prmRow">é–‹å§‹è¡Œ</param>
+        ''' <param name="prmRow2">çµ‚äº†è¡Œ</param>
         ''' <remarks></remarks>
         Public Sub insertRow(ByVal prmRow As Short, Optional ByVal prmRow2 As Short = -9)
             Dim wkRow2 As Short = prmRow2
@@ -684,14 +684,14 @@ Namespace xls
         End Sub
 
         '===============================================================================
-        '—ñíœ
-        'prmCol2‚ğÈ—ª‚µ‚½ê‡‚ÍAprmCol‚Æ“¯’l‚ğÌ—p‚·‚é
+        'åˆ—å‰Šé™¤
+        'prmCol2ã‚’çœç•¥ã—ãŸå ´åˆã¯ã€prmColã¨åŒå€¤ã‚’æ¡ç”¨ã™ã‚‹
         '===============================================================================
         ''' <summary>
-        ''' —ñíœ@prmCol2‚ğÈ—ª‚µ‚½ê‡‚ÍAprmCol‚Æ“¯’l‚ğÌ—p‚·‚é
+        ''' åˆ—å‰Šé™¤ã€€prmCol2ã‚’çœç•¥ã—ãŸå ´åˆã¯ã€prmColã¨åŒå€¤ã‚’æ¡ç”¨ã™ã‚‹
         ''' </summary>
-        ''' <param name="prmCol">ŠJn—ñ</param>
-        ''' <param name="prmCol2">I—¹—ñ</param>
+        ''' <param name="prmCol">é–‹å§‹åˆ—</param>
+        ''' <param name="prmCol2">çµ‚äº†åˆ—</param>
         ''' <remarks></remarks>
         Public Sub deleteCol(ByVal prmCol As Short, Optional ByVal prmCol2 As Short = -9)
             Dim wkCol2 As Short = prmCol2
@@ -703,14 +703,14 @@ Namespace xls
         End Sub
 
         '===============================================================================
-        '—ñ’Ç‰Á
-        'prmCol2‚ğÈ—ª‚µ‚½ê‡‚ÍAprmCol‚Æ“¯’l‚ğÌ—p‚·‚é
+        'åˆ—è¿½åŠ 
+        'prmCol2ã‚’çœç•¥ã—ãŸå ´åˆã¯ã€prmColã¨åŒå€¤ã‚’æ¡ç”¨ã™ã‚‹
         '===============================================================================
         ''' <summary>
-        ''' —ñ’Ç‰Á@prmCol2‚ğÈ—ª‚µ‚½ê‡‚ÍAprmCol‚Æ“¯’l‚ğÌ—p‚·‚é
+        ''' åˆ—è¿½åŠ ã€€prmCol2ã‚’çœç•¥ã—ãŸå ´åˆã¯ã€prmColã¨åŒå€¤ã‚’æ¡ç”¨ã™ã‚‹
         ''' </summary>
-        ''' <param name="prmCol">ŠJn—ñ</param>
-        ''' <param name="prmCol2">I—¹—ñ</param>
+        ''' <param name="prmCol">é–‹å§‹åˆ—</param>
+        ''' <param name="prmCol2">çµ‚äº†åˆ—</param>
         ''' <remarks></remarks>
         Public Sub insertCol(ByVal prmCol As Short, Optional ByVal prmCol2 As Short = -9)
             Dim wkCol2 As Short = prmCol2
@@ -722,14 +722,14 @@ Namespace xls
         End Sub
 
         '===============================================================================
-        'ƒZƒ‹’læ“¾(ƒZƒ‹ã‚É•\¦‚³‚ê‚Ä‚¢‚é‚à‚ÌFƒJƒ“ƒ}•ÒWÏ‚İ•¶š—ñ‚âA•ÒWÏ‚İ•¶š—ñ‚È‚Ç)
+        'ã‚»ãƒ«å€¤å–å¾—(ã‚»ãƒ«ä¸Šã«è¡¨ç¤ºã•ã‚Œã¦ã„ã‚‹ã‚‚ã®ï¼šã‚«ãƒ³ãƒç·¨é›†æ¸ˆã¿æ–‡å­—åˆ—ã‚„ã€ï¿¥ç·¨é›†æ¸ˆã¿æ–‡å­—åˆ—ãªã©)
         '===============================================================================
         ''' <summary>
-        ''' ƒZƒ‹’læ“¾(ƒZƒ‹ã‚É•\¦‚³‚ê‚Ä‚¢‚é‚à‚ÌFƒJƒ“ƒ}•ÒWÏ‚İ•¶š—ñ‚âA•ÒWÏ‚İ•¶š—ñ‚È‚Ç)
+        ''' ã‚»ãƒ«å€¤å–å¾—(ã‚»ãƒ«ä¸Šã«è¡¨ç¤ºã•ã‚Œã¦ã„ã‚‹ã‚‚ã®ï¼šã‚«ãƒ³ãƒç·¨é›†æ¸ˆã¿æ–‡å­—åˆ—ã‚„ã€ï¿¥ç·¨é›†æ¸ˆã¿æ–‡å­—åˆ—ãªã©)
         ''' </summary>
-        ''' <param name="prmRow">s</param>
-        ''' <param name="prmCol">—ñ</param>
-        ''' <returns>æ“¾•¶š—ñ</returns>
+        ''' <param name="prmRow">è¡Œ</param>
+        ''' <param name="prmCol">åˆ—</param>
+        ''' <returns>å–å¾—æ–‡å­—åˆ—</returns>
         ''' <remarks></remarks>
         Public Function getText(ByVal prmRow As Short, ByVal prmCol As Short) As String
             Dim cell1 As String = convFromR1C1(prmRow, prmCol)
@@ -737,14 +737,14 @@ Namespace xls
         End Function
 
         '===============================================================================
-        'ƒZƒ‹’læ“¾(ƒZƒ‹‚ÉÀÛ‚ÉŠi”[‚³‚ê‚Ä‚¢‚é’l¨®‚Ìê‡‚Í®‚ÌŒ‹‰Ê)
+        'ã‚»ãƒ«å€¤å–å¾—(ã‚»ãƒ«ã«å®Ÿéš›ã«æ ¼ç´ã•ã‚Œã¦ã„ã‚‹å€¤â†’å¼ã®å ´åˆã¯å¼ã®çµæœ)
         '===============================================================================
         ''' <summary>
-        ''' ƒZƒ‹’læ“¾(ƒZƒ‹‚ÉÀÛ‚ÉŠi”[‚³‚ê‚Ä‚¢‚é’l¨®‚Ìê‡‚Í®‚ÌŒ‹‰Ê)
+        ''' ã‚»ãƒ«å€¤å–å¾—(ã‚»ãƒ«ã«å®Ÿéš›ã«æ ¼ç´ã•ã‚Œã¦ã„ã‚‹å€¤â†’å¼ã®å ´åˆã¯å¼ã®çµæœ)
         ''' </summary>
-        ''' <param name="prmRow">s</param>
-        ''' <param name="prmCol">—ñ</param>
-        ''' <returns>æ“¾•¶š—ñ</returns>
+        ''' <param name="prmRow">è¡Œ</param>
+        ''' <param name="prmCol">åˆ—</param>
+        ''' <returns>å–å¾—æ–‡å­—åˆ—</returns>
         ''' <remarks></remarks>
         Public Function getValue(ByVal prmRow As Short, ByVal prmCol As Short) As String
             Dim cell1 As String = convFromR1C1(prmRow, prmCol)
@@ -752,14 +752,14 @@ Namespace xls
         End Function
 
         '===============================================================================
-        'ƒZƒ‹’læ“¾(ƒZƒ‹‚ÉŠi”[‚³‚ê‚Ä‚¢‚é®©‘Ì)
+        'ã‚»ãƒ«å€¤å–å¾—(ã‚»ãƒ«ã«æ ¼ç´ã•ã‚Œã¦ã„ã‚‹å¼è‡ªä½“)
         '===============================================================================
         ''' <summary>
-        ''' ƒZƒ‹’læ“¾(ƒZƒ‹‚ÉŠi”[‚³‚ê‚Ä‚¢‚é®©‘Ì)
+        ''' ã‚»ãƒ«å€¤å–å¾—(ã‚»ãƒ«ã«æ ¼ç´ã•ã‚Œã¦ã„ã‚‹å¼è‡ªä½“)
         ''' </summary>
-        ''' <param name="prmRow">s</param>
-        ''' <param name="prmCol">—ñ</param>
-        ''' <returns>æ“¾•¶š—ñ</returns>
+        ''' <param name="prmRow">è¡Œ</param>
+        ''' <param name="prmCol">åˆ—</param>
+        ''' <returns>å–å¾—æ–‡å­—åˆ—</returns>
         ''' <remarks></remarks>
         Public Function getFormula(ByVal prmRow As Short, ByVal prmCol As Short) As String
             Dim cell1 As String = convFromR1C1(prmRow, prmCol)
@@ -767,37 +767,37 @@ Namespace xls
         End Function
 
         '===============================================================================
-        'ƒZƒ‹’lİ’è(ƒZƒ‹‚ÉŠi”[‚·‚é’l¨®‚ğŠi”[‚·‚éê‡‚ÍsetFormula‚ğ—˜—p‚Ì‚±‚Æ)
+        'ã‚»ãƒ«å€¤è¨­å®š(ã‚»ãƒ«ã«æ ¼ç´ã™ã‚‹å€¤â†’å¼ã‚’æ ¼ç´ã™ã‚‹å ´åˆã¯setFormulaã‚’åˆ©ç”¨ã®ã“ã¨)
         '===============================================================================
         ''' <summary>
-        ''' ƒZƒ‹’lİ’è(ƒZƒ‹‚ÉŠi”[‚·‚é’l¨®‚ğŠi”[‚·‚éê‡‚ÍsetFormula‚ğ—˜—p‚Ì‚±‚Æ)
+        ''' ã‚»ãƒ«å€¤è¨­å®š(ã‚»ãƒ«ã«æ ¼ç´ã™ã‚‹å€¤â†’å¼ã‚’æ ¼ç´ã™ã‚‹å ´åˆã¯setFormulaã‚’åˆ©ç”¨ã®ã“ã¨)
         ''' </summary>
-        ''' <param name="prmText">İ’è•¶š—ñ</param>
-        ''' <param name="prmRow">s</param>
-        ''' <param name="prmCol">—ñ</param>
+        ''' <param name="prmText">è¨­å®šæ–‡å­—åˆ—</param>
+        ''' <param name="prmRow">è¡Œ</param>
+        ''' <param name="prmCol">åˆ—</param>
         ''' <remarks></remarks>
         Public Sub setValue(ByVal prmText As String, ByVal prmRow As Short, ByVal prmCol As Short)
             Dim cell1 As String = convFromR1C1(prmRow, prmCol)
             _app.Range(cell1).Value = prmText
         End Sub
         ''' <summary>
-        ''' ƒZƒ‹’lİ’è(‚`‚PŒ`®)
+        ''' ã‚»ãƒ«å€¤è¨­å®š(ï¼¡ï¼‘å½¢å¼)
         ''' </summary>
-        ''' <param name="prmText">İ’è•¶š—ñ</param>
-        ''' <param name="prmCell">o—ÍƒZƒ‹i‚`‚PŒ`®j</param>
+        ''' <param name="prmText">è¨­å®šæ–‡å­—åˆ—</param>
+        ''' <param name="prmCell">å‡ºåŠ›ã‚»ãƒ«ï¼ˆï¼¡ï¼‘å½¢å¼ï¼‰</param>
         Public Sub setValueA1(ByVal prmText As String, ByVal prmCell As String)
             _app.Range(prmCell).Value = prmText
         End Sub
 
         '===============================================================================
-        'ƒZƒ‹’lİ’è(ƒZƒ‹‚ÉŠi”[‚·‚é®¨’l‚ğŠi”[‚·‚éê‡‚ÍsetValue‚ğ—˜—p‚Ì‚±‚Æ)
+        'ã‚»ãƒ«å€¤è¨­å®š(ã‚»ãƒ«ã«æ ¼ç´ã™ã‚‹å¼â†’å€¤ã‚’æ ¼ç´ã™ã‚‹å ´åˆã¯setValueã‚’åˆ©ç”¨ã®ã“ã¨)
         '===============================================================================
         ''' <summary>
-        ''' ƒZƒ‹’lİ’è(ƒZƒ‹‚ÉŠi”[‚·‚é®¨’l‚ğŠi”[‚·‚éê‡‚ÍsetValue‚ğ—˜—p‚Ì‚±‚Æ)
+        ''' ã‚»ãƒ«å€¤è¨­å®š(ã‚»ãƒ«ã«æ ¼ç´ã™ã‚‹å¼â†’å€¤ã‚’æ ¼ç´ã™ã‚‹å ´åˆã¯setValueã‚’åˆ©ç”¨ã®ã“ã¨)
         ''' </summary>
-        ''' <param name="prmFormula">İ’è®</param>
-        ''' <param name="prmRow">s</param>
-        ''' <param name="prmCol">—ñ</param>
+        ''' <param name="prmFormula">è¨­å®šå¼</param>
+        ''' <param name="prmRow">è¡Œ</param>
+        ''' <param name="prmCol">åˆ—</param>
         ''' <remarks></remarks>
         Public Sub setFormula(ByVal prmFormula As String, ByVal prmRow As Short, ByVal prmCol As Short)
             Dim cell1 As String = convFromR1C1(prmRow, prmCol)
@@ -805,17 +805,17 @@ Namespace xls
         End Sub
 
         '===============================================================================
-        'Œrüİ’è
-        'prmRow2/prmCol2‚ğÈ—ª‚µ‚½ê‡‚ÍA‚»‚ê‚¼‚êprmRow/prmCol‚Æ“¯’l‚ğÌ—p‚·‚é
+        'ç½«ç·šè¨­å®š
+        'prmRow2/prmCol2ã‚’çœç•¥ã—ãŸå ´åˆã¯ã€ãã‚Œãã‚ŒprmRow/prmColã¨åŒå€¤ã‚’æ¡ç”¨ã™ã‚‹
         '===============================================================================
         ''' <summary>
-        ''' Œrüİ’è@prmRow2/prmCol2‚ğÈ—ª‚µ‚½ê‡‚ÍA‚»‚ê‚¼‚êprmRow/prmCol‚Æ“¯’l‚ğÌ—p‚·‚é
+        ''' ç½«ç·šè¨­å®šã€€prmRow2/prmCol2ã‚’çœç•¥ã—ãŸå ´åˆã¯ã€ãã‚Œãã‚ŒprmRow/prmColã¨åŒå€¤ã‚’æ¡ç”¨ã™ã‚‹
         ''' </summary>
-        ''' <param name="prmLineVO">Œrü‘®‚ğŠi”[‚µ‚½VO</param>
-        ''' <param name="prmRow">ŠJns</param>
-        ''' <param name="prmCol">ŠJn—ñ</param>
-        ''' <param name="prmRow2">I—¹s</param>
-        ''' <param name="prmCol2">I—¹—ñ</param>
+        ''' <param name="prmLineVO">ç½«ç·šæ›¸å¼ã‚’æ ¼ç´ã—ãŸVO</param>
+        ''' <param name="prmRow">é–‹å§‹è¡Œ</param>
+        ''' <param name="prmCol">é–‹å§‹åˆ—</param>
+        ''' <param name="prmRow2">çµ‚äº†è¡Œ</param>
+        ''' <param name="prmCol2">çµ‚äº†åˆ—</param>
         ''' <remarks></remarks>
         Public Sub drawRuledLine(ByVal prmLineVO As LineVO, ByVal prmRow As Short, ByVal prmCol As Short,
                                        Optional ByVal prmRow2 As Short = -9, Optional ByVal prmCol2 As Short = -9)
@@ -838,13 +838,13 @@ Namespace xls
                     If prmLineVO.HorizontalMiddle <> LineVO.LineType.Null Then setLine(r, xlInsideHorizontal, prmLineVO.HorizontalMiddle)
                 Catch lex As Exception
                 Finally
-                    Me.releaseCom(r) 'COMŠJ•ú
+                    Me.releaseCom(r) 'COMé–‹æ”¾
                 End Try
             Catch ex As Exception
             End Try
 
         End Sub
-        'Œrüİ’èƒTƒuƒ‹[ƒ`ƒ“
+        'ç½«ç·šè¨­å®šã‚µãƒ–ãƒ«ãƒ¼ãƒãƒ³
         Private Sub setLine(ByRef prmRefRange As Excel.Range, ByVal prmLineEdge As Short, ByVal prmLinePos As LineVO.LineType)
             With prmRefRange.Borders(prmLineEdge)
                 Select Case prmLinePos
@@ -867,18 +867,18 @@ Namespace xls
         End Sub
 
         '===============================================================================
-        '”wŒiFİ’è
-        'prmRow2/prmCol2‚ğÈ—ª‚µ‚½ê‡‚ÍA‚»‚ê‚¼‚êprmRow/prmCol‚Æ“¯’l‚ğÌ—p‚·‚é
+        'èƒŒæ™¯è‰²è¨­å®š
+        'prmRow2/prmCol2ã‚’çœç•¥ã—ãŸå ´åˆã¯ã€ãã‚Œãã‚ŒprmRow/prmColã¨åŒå€¤ã‚’æ¡ç”¨ã™ã‚‹
         '                                                     2007.08.10 add by Laevigata, Inc.
         '===============================================================================
         ''' <summary>
-        ''' ”wŒiFİ’è@prmRow2/prmCol2‚ğÈ—ª‚µ‚½ê‡‚ÍA‚»‚ê‚¼‚êprmRow/prmCol‚Æ“¯’l‚ğÌ—p‚·‚é
+        ''' èƒŒæ™¯è‰²è¨­å®šã€€prmRow2/prmCol2ã‚’çœç•¥ã—ãŸå ´åˆã¯ã€ãã‚Œãã‚ŒprmRow/prmColã¨åŒå€¤ã‚’æ¡ç”¨ã™ã‚‹
         ''' </summary>
-        ''' <param name="prmColor">İ’è‚·‚é”wŒiF</param>
-        ''' <param name="prmRow">ŠJns</param>
-        ''' <param name="prmCol">ŠJn—ñ</param>
-        ''' <param name="prmRow2">I—¹s</param>
-        ''' <param name="prmCol2">I—¹—ñ</param>
+        ''' <param name="prmColor">è¨­å®šã™ã‚‹èƒŒæ™¯è‰²</param>
+        ''' <param name="prmRow">é–‹å§‹è¡Œ</param>
+        ''' <param name="prmCol">é–‹å§‹åˆ—</param>
+        ''' <param name="prmRow2">çµ‚äº†è¡Œ</param>
+        ''' <param name="prmCol2">çµ‚äº†åˆ—</param>
         ''' <remarks>2007.08.10 add by Laevigata, Inc.</remarks>
         Public Sub setColor(ByVal prmColor As System.Drawing.Color, ByVal prmRow As Short, ByVal prmCol As Short,
                                        Optional ByVal prmRow2 As Short = -9, Optional ByVal prmCol2 As Short = -9)
@@ -894,19 +894,19 @@ Namespace xls
         End Sub
 
         '===============================================================================
-        'ƒtƒHƒ“ƒgİ’è
-        'prmRow2/prmCol2‚ğÈ—ª‚µ‚½ê‡‚ÍA‚»‚ê‚¼‚êprmRow/prmCol‚Æ“¯’l‚ğÌ—p‚·‚é
+        'ãƒ•ã‚©ãƒ³ãƒˆè¨­å®š
+        'prmRow2/prmCol2ã‚’çœç•¥ã—ãŸå ´åˆã¯ã€ãã‚Œãã‚ŒprmRow/prmColã¨åŒå€¤ã‚’æ¡ç”¨ã™ã‚‹
         '                                                     2007.08.10 add by Laevigata, Inc.
         '===============================================================================
         ''' <summary>
-        ''' ƒtƒHƒ“ƒgİ’è@prmRow2/prmCol2‚ğÈ—ª‚µ‚½ê‡‚ÍA‚»‚ê‚¼‚êprmRow/prmCol‚Æ“¯’l‚ğÌ—p‚·‚é
+        ''' ãƒ•ã‚©ãƒ³ãƒˆè¨­å®šã€€prmRow2/prmCol2ã‚’çœç•¥ã—ãŸå ´åˆã¯ã€ãã‚Œãã‚ŒprmRow/prmColã¨åŒå€¤ã‚’æ¡ç”¨ã™ã‚‹
         ''' </summary>
-        ''' <param name="prmFont">İ’è‚·‚éƒtƒHƒ“ƒg</param>
-        ''' <param name="prmColor">İ’è‚·‚éƒtƒHƒ“ƒgF</param>
-        ''' <param name="prmRow">ŠJns</param>
-        ''' <param name="prmCol">ŠJn—ñ</param>
-        ''' <param name="prmRow2">I—¹s</param>
-        ''' <param name="prmCol2">I—¹—ñ</param>
+        ''' <param name="prmFont">è¨­å®šã™ã‚‹ãƒ•ã‚©ãƒ³ãƒˆ</param>
+        ''' <param name="prmColor">è¨­å®šã™ã‚‹ãƒ•ã‚©ãƒ³ãƒˆè‰²</param>
+        ''' <param name="prmRow">é–‹å§‹è¡Œ</param>
+        ''' <param name="prmCol">é–‹å§‹åˆ—</param>
+        ''' <param name="prmRow2">çµ‚äº†è¡Œ</param>
+        ''' <param name="prmCol2">çµ‚äº†åˆ—</param>
         ''' <remarks>2007.08.10 add by Laevigata, Inc.</remarks>
         Public Sub setFont(ByVal prmFont As System.Drawing.Font, ByVal prmColor As System.Drawing.Color,
                            ByVal prmRow As Short, ByVal prmCol As Short,
@@ -919,45 +919,45 @@ Namespace xls
             Dim cell1 As String = Me.convFromR1C1(prmRow, prmCol)
             Dim cell2 As String = Me.convFromR1C1(wkRow2, wkCol2)
             With _app.Range(cbnCellStr(cell1, cell2)).Font
-                .Name = prmFont.Name                                'ƒtƒHƒ“ƒg–¼
-                .Size = prmFont.SizeInPoints                        'ƒTƒCƒY
-                .Strikethrough = prmFont.Strikeout                  '‘ÅÁ‚µü
-                .Underline = prmFont.Underline                      '‰ºü
-                .Color = RGB(prmColor.R, prmColor.G, prmColor.B)    '‘OŒiF
+                .Name = prmFont.Name                                'ãƒ•ã‚©ãƒ³ãƒˆå
+                .Size = prmFont.SizeInPoints                        'ã‚µã‚¤ã‚º
+                .Strikethrough = prmFont.Strikeout                  'æ‰“æ¶ˆã—ç·š
+                .Underline = prmFont.Underline                      'ä¸‹ç·š
+                .Color = RGB(prmColor.R, prmColor.G, prmColor.B)    'å‰æ™¯è‰²
             End With
 
         End Sub
 
         '===============================================================================
-        '•\¦Œ`®İ’è
-        'prmRow2/prmCol2‚ğÈ—ª‚µ‚½ê‡‚ÍA‚»‚ê‚¼‚êprmRow/prmCol‚Æ“¯’l‚ğÌ—p‚·‚é
-        'prmNumberFormatLocal   Excelƒ}ƒNƒ“¯ˆê‹Lq‚Ì‚±‚Æ
-        '---—á---
-        '•W€                    "G/•W€"                                          
-        '”’l                    "0_ "                                             
-        '’Ê‰İ                    "\#,##0;\-#,##0"                                  
-        '‰ïŒv                    "_ \* #,##0_ ;_ \* -#,##0_ ;_ \* ""-""_ ;_ @_ "   
-        '‰ïŒvu\v‚È‚µ           "_ * #,##0_ ;_ * -#,##0_ ;_ * ""-""_ ;_ @_ "      
-        '“ú•t‚P                  "yyyy/m/d"                                        
-        '“ú•t‚Q                  "yyyy/mm/dd"                                      
-        '“ú•t‚R                  "yy/mm/dd"                                        
-        '(13:30)             "h:mm;@"                                          
-        '(1:30 PM)           "[$-409]h:mm AM/PM;@"                             
-        '(13:30:50)          "h:mm:ss;@"                                       
-        '(1:30:55 PM)        "[$-409]h:mm:ss AM/PM;@"                          
-        'ƒp[ƒZƒ“ƒe[ƒW          "0%"                                              
-        'ƒp[ƒZƒ“ƒe[ƒW(­”2Œ…) "0.00%"                                           
-        '•¶š—ñ                  "@"                                               
+        'è¡¨ç¤ºå½¢å¼è¨­å®š
+        'prmRow2/prmCol2ã‚’çœç•¥ã—ãŸå ´åˆã¯ã€ãã‚Œãã‚ŒprmRow/prmColã¨åŒå€¤ã‚’æ¡ç”¨ã™ã‚‹
+        'prmNumberFormatLocal   Excelãƒã‚¯ãƒ­åŒä¸€è¨˜è¿°ã®ã“ã¨
+        '---ä¾‹---
+        'æ¨™æº–                    "G/æ¨™æº–"                                          
+        'æ•°å€¤                    "0_ "                                             
+        'é€šè²¨                    "\#,##0;\-#,##0"                                  
+        'ä¼šè¨ˆ                    "_ \* #,##0_ ;_ \* -#,##0_ ;_ \* ""-""_ ;_ @_ "   
+        'ä¼šè¨ˆã€Œ\ã€ãªã—           "_ * #,##0_ ;_ * -#,##0_ ;_ * ""-""_ ;_ @_ "      
+        'æ—¥ä»˜ï¼‘                  "yyyy/m/d"                                        
+        'æ—¥ä»˜ï¼’                  "yyyy/mm/dd"                                      
+        'æ—¥ä»˜ï¼“                  "yy/mm/dd"                                        
+        'æ™‚åˆ»(13:30)             "h:mm;@"                                          
+        'æ™‚åˆ»(1:30 PM)           "[$-409]h:mm AM/PM;@"                             
+        'æ™‚åˆ»(13:30:50)          "h:mm:ss;@"                                       
+        'æ™‚åˆ»(1:30:55 PM)        "[$-409]h:mm:ss AM/PM;@"                          
+        'ãƒ‘ãƒ¼ã‚»ãƒ³ãƒ†ãƒ¼ã‚¸          "0%"                                              
+        'ãƒ‘ãƒ¼ã‚»ãƒ³ãƒ†ãƒ¼ã‚¸(å°‘æ•°2æ¡) "0.00%"                                           
+        'æ–‡å­—åˆ—                  "@"                                               
         '                                                     2007.08.10 add by Laevigata, Inc.
         '===============================================================================
         ''' <summary>
-        ''' •\¦Œ`®İ’è@prmRow2/prmCol2‚ğÈ—ª‚µ‚½ê‡‚ÍA‚»‚ê‚¼‚êprmRow/prmCol‚Æ“¯’l‚ğÌ—p‚·‚é
+        ''' è¡¨ç¤ºå½¢å¼è¨­å®šã€€prmRow2/prmCol2ã‚’çœç•¥ã—ãŸå ´åˆã¯ã€ãã‚Œãã‚ŒprmRow/prmColã¨åŒå€¤ã‚’æ¡ç”¨ã™ã‚‹
         ''' </summary>
-        ''' <param name="prmNumberFormatLocal">•\¦‘®@—áF"G/•W€" (Excelƒ}ƒNƒ“¯ˆê‹Lq‚Ì‚±‚Æ)</param>
-        ''' <param name="prmRow">ŠJns</param>
-        ''' <param name="prmCol">ŠJn—ñ</param>
-        ''' <param name="prmRow2">I—¹s</param>
-        ''' <param name="prmCol2">I—¹—ñ</param>
+        ''' <param name="prmNumberFormatLocal">è¡¨ç¤ºæ›¸å¼ã€€ä¾‹ï¼š"G/æ¨™æº–" (Excelãƒã‚¯ãƒ­åŒä¸€è¨˜è¿°ã®ã“ã¨)</param>
+        ''' <param name="prmRow">é–‹å§‹è¡Œ</param>
+        ''' <param name="prmCol">é–‹å§‹åˆ—</param>
+        ''' <param name="prmRow2">çµ‚äº†è¡Œ</param>
+        ''' <param name="prmCol2">çµ‚äº†åˆ—</param>
         ''' <remarks>2007.08.10 add by Laevigata, Inc.</remarks>
         Public Sub setNumberFormat(ByVal prmNumberFormatLocal As String, ByVal prmRow As Short, ByVal prmCol As Short,
                                        Optional ByVal prmRow2 As Short = -9, Optional ByVal prmCol2 As Short = -9)
@@ -973,17 +973,17 @@ Namespace xls
         End Sub
 
         '===============================================================================
-        '‰¡ˆÊ’uİ’è(¶Šñ‚¹/’†‰›Šñ‚¹/‰EŠñ‚¹/‘I‘ğ”ÍˆÍ‚Å’†‰›Šñ‚¹)
-        'prmRow2/prmCol2‚ğÈ—ª‚µ‚½ê‡‚ÍA‚»‚ê‚¼‚êprmRow/prmCol‚Æ“¯’l‚ğÌ—p‚·‚é
+        'æ¨ªä½ç½®è¨­å®š(å·¦å¯„ã›/ä¸­å¤®å¯„ã›/å³å¯„ã›/é¸æŠç¯„å›²ã§ä¸­å¤®å¯„ã›)
+        'prmRow2/prmCol2ã‚’çœç•¥ã—ãŸå ´åˆã¯ã€ãã‚Œãã‚ŒprmRow/prmColã¨åŒå€¤ã‚’æ¡ç”¨ã™ã‚‹
         '===============================================================================
         ''' <summary>
-        ''' ‰¡ˆÊ’uİ’è(¶Šñ‚¹/’†‰›Šñ‚¹/‰EŠñ‚¹/‘I‘ğ”ÍˆÍ‚Å’†‰›Šñ‚¹)@prmRow2/prmCol2‚ğÈ—ª‚µ‚½ê‡‚ÍA‚»‚ê‚¼‚êprmRow/prmCol‚Æ“¯’l‚ğÌ—p‚·‚é
+        ''' æ¨ªä½ç½®è¨­å®š(å·¦å¯„ã›/ä¸­å¤®å¯„ã›/å³å¯„ã›/é¸æŠç¯„å›²ã§ä¸­å¤®å¯„ã›)ã€€prmRow2/prmCol2ã‚’çœç•¥ã—ãŸå ´åˆã¯ã€ãã‚Œãã‚ŒprmRow/prmColã¨åŒå€¤ã‚’æ¡ç”¨ã™ã‚‹
         ''' </summary>
-        ''' <param name="prmPos">‰¡ˆÊ’u‚ğ•\‚·—ñ‹“‘Ì</param>
-        ''' <param name="prmRow">ŠJns</param>
-        ''' <param name="prmCol">ŠJn—ñ</param>
-        ''' <param name="prmRow2">I—¹s</param>
-        ''' <param name="prmCol2">I—¹—ñ</param>
+        ''' <param name="prmPos">æ¨ªä½ç½®ã‚’è¡¨ã™åˆ—æŒ™ä½“</param>
+        ''' <param name="prmRow">é–‹å§‹è¡Œ</param>
+        ''' <param name="prmCol">é–‹å§‹åˆ—</param>
+        ''' <param name="prmRow2">çµ‚äº†è¡Œ</param>
+        ''' <param name="prmCol2">çµ‚äº†åˆ—</param>
         ''' <remarks></remarks>
         Public Sub setHorizontalPos(ByVal prmPos As UtilExcelHandler.HorizontalAlignment, ByVal prmRow As Short, ByVal prmCol As Short,
                           Optional ByVal prmRow2 As Short = -9, Optional ByVal prmCol2 As Short = -9)
@@ -1011,17 +1011,17 @@ Namespace xls
         End Sub
 
         '===============================================================================
-        'cˆÊ’uİ’è(ãŠñ‚¹/’†‰›Šñ‚¹/‰ºŠñ‚¹)
-        'prmRow2/prmCol2‚ğÈ—ª‚µ‚½ê‡‚ÍA‚»‚ê‚¼‚êprmRow/prmCol‚Æ“¯’l‚ğÌ—p‚·‚é
+        'ç¸¦ä½ç½®è¨­å®š(ä¸Šå¯„ã›/ä¸­å¤®å¯„ã›/ä¸‹å¯„ã›)
+        'prmRow2/prmCol2ã‚’çœç•¥ã—ãŸå ´åˆã¯ã€ãã‚Œãã‚ŒprmRow/prmColã¨åŒå€¤ã‚’æ¡ç”¨ã™ã‚‹
         '===============================================================================
         ''' <summary>
-        ''' cˆÊ’uİ’è(ãŠñ‚¹/’†‰›Šñ‚¹/‰ºŠñ‚¹)@prmRow2/prmCol2‚ğÈ—ª‚µ‚½ê‡‚ÍA‚»‚ê‚¼‚êprmRow/prmCol‚Æ“¯’l‚ğÌ—p‚·‚é
+        ''' ç¸¦ä½ç½®è¨­å®š(ä¸Šå¯„ã›/ä¸­å¤®å¯„ã›/ä¸‹å¯„ã›)ã€€prmRow2/prmCol2ã‚’çœç•¥ã—ãŸå ´åˆã¯ã€ãã‚Œãã‚ŒprmRow/prmColã¨åŒå€¤ã‚’æ¡ç”¨ã™ã‚‹
         ''' </summary>
-        ''' <param name="prmPos">cˆÊ’u‚ğ•\‚·—ñ‹“‘Ì</param>
-        ''' <param name="prmRow">ŠJns</param>
-        ''' <param name="prmCol">ŠJn—ñ</param>
-        ''' <param name="prmRow2">I—¹s</param>
-        ''' <param name="prmCol2">I—¹—ñ</param>
+        ''' <param name="prmPos">ç¸¦ä½ç½®ã‚’è¡¨ã™åˆ—æŒ™ä½“</param>
+        ''' <param name="prmRow">é–‹å§‹è¡Œ</param>
+        ''' <param name="prmCol">é–‹å§‹åˆ—</param>
+        ''' <param name="prmRow2">çµ‚äº†è¡Œ</param>
+        ''' <param name="prmCol2">çµ‚äº†åˆ—</param>
         ''' <remarks></remarks>
         Public Sub setVerticalPos(ByVal prmPos As UtilExcelHandler.VerticalAlignment, ByVal prmRow As Short, ByVal prmCol As Short,
                                   Optional ByVal prmRow2 As Short = -9, Optional ByVal prmCol2 As Short = -9)
@@ -1048,16 +1048,16 @@ Namespace xls
         End Sub
 
         '===============================================================================
-        'ƒZƒ‹Œ‹‡
-        'prmRow2/prmCol2‚ğÈ—ª‚µ‚½ê‡‚ÍA‚»‚ê‚¼‚êprmRow/prmCol‚Æ“¯’l‚ğÌ—p‚·‚é
+        'ã‚»ãƒ«çµåˆ
+        'prmRow2/prmCol2ã‚’çœç•¥ã—ãŸå ´åˆã¯ã€ãã‚Œãã‚ŒprmRow/prmColã¨åŒå€¤ã‚’æ¡ç”¨ã™ã‚‹
         '===============================================================================
         ''' <summary>
-        ''' ƒZƒ‹Œ‹‡@prmRow2/prmCol2‚ğÈ—ª‚µ‚½ê‡‚ÍA‚»‚ê‚¼‚êprmRow/prmCol‚Æ“¯’l‚ğÌ—p‚·‚é
+        ''' ã‚»ãƒ«çµåˆã€€prmRow2/prmCol2ã‚’çœç•¥ã—ãŸå ´åˆã¯ã€ãã‚Œãã‚ŒprmRow/prmColã¨åŒå€¤ã‚’æ¡ç”¨ã™ã‚‹
         ''' </summary>
-        ''' <param name="prmRow">ŠJns</param>
-        ''' <param name="prmCol">ŠJn—ñ</param>
-        ''' <param name="prmRow2">I—¹s</param>
-        ''' <param name="prmCol2">I—¹—ñ</param>
+        ''' <param name="prmRow">é–‹å§‹è¡Œ</param>
+        ''' <param name="prmCol">é–‹å§‹åˆ—</param>
+        ''' <param name="prmRow2">çµ‚äº†è¡Œ</param>
+        ''' <param name="prmCol2">çµ‚äº†åˆ—</param>
         ''' <remarks></remarks>
         Public Sub combineCell(ByVal prmRow As Short, ByVal prmCol As Short,
                                        Optional ByVal prmRow2 As Short = -9, Optional ByVal prmCol2 As Short = -9)
@@ -1073,32 +1073,32 @@ Namespace xls
         End Sub
 
         '===============================================================================
-        'ƒEƒBƒ“ƒhƒEŒÅ’è
+        'ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦å›ºå®š
         '===============================================================================
         ''' <summary>
-        ''' ƒEƒBƒ“ƒhƒEŒÅ’è
+        ''' ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦å›ºå®š
         ''' </summary>
-        ''' <param name="prmRow">s</param>
-        ''' <param name="prmCol">—ñ</param>
+        ''' <param name="prmRow">è¡Œ</param>
+        ''' <param name="prmCol">åˆ—</param>
         ''' <remarks></remarks>
         Public Sub freezeWindow(ByVal prmRow As Short, ByVal prmCol As Short)
             _app.ActiveWindow.FreezePanes = True
         End Sub
 
         '===============================================================================
-        'ƒwƒbƒ_[İ’è
-        'prmLeftStr/prmMidStr/prmRightStr   Excelƒ}ƒNƒ“¯ˆê‹Lq‚Ì‚±‚Æ
-        '---—á---
-        'ƒtƒ@ƒCƒ‹–¼(ƒV[ƒg–¼) "&F(&A)"
-        'ƒy[ƒW”/‘ƒy[ƒW”  "&P/&N"
-        '“ú•t  ˆóü       "&D@&T@ˆóü"
+        'ãƒ˜ãƒƒãƒ€ãƒ¼è¨­å®š
+        'prmLeftStr/prmMidStr/prmRightStr   Excelãƒã‚¯ãƒ­åŒä¸€è¨˜è¿°ã®ã“ã¨
+        '---ä¾‹---
+        'ãƒ•ã‚¡ã‚¤ãƒ«å(ã‚·ãƒ¼ãƒˆå) "&F(&A)"
+        'ãƒšãƒ¼ã‚¸æ•°/ç·ãƒšãƒ¼ã‚¸æ•°  "&P/&N"
+        'æ—¥ä»˜ æ™‚åˆ» å°åˆ·       "&Dã€€&Tã€€å°åˆ·"
         '===============================================================================
         ''' <summary>
-        ''' ƒwƒbƒ_[İ’è@Excelƒ}ƒNƒ“¯ˆê‹Lq‚Ì‚±‚Æ
+        ''' ãƒ˜ãƒƒãƒ€ãƒ¼è¨­å®šã€€Excelãƒã‚¯ãƒ­åŒä¸€è¨˜è¿°ã®ã“ã¨
         ''' </summary>
-        ''' <param name="prmLeftStr">¶ƒwƒbƒ_</param>
-        ''' <param name="prmMidStr">’†‰›ƒwƒbƒ_</param>
-        ''' <param name="prmRightStr">‰Eƒwƒbƒ_</param>
+        ''' <param name="prmLeftStr">å·¦ãƒ˜ãƒƒãƒ€</param>
+        ''' <param name="prmMidStr">ä¸­å¤®ãƒ˜ãƒƒãƒ€</param>
+        ''' <param name="prmRightStr">å³ãƒ˜ãƒƒãƒ€</param>
         ''' <remarks></remarks>
         Public Sub setHeader(ByVal prmLeftStr As String, ByVal prmMidStr As String, ByVal prmRightStr As String)
             With _sheet.PageSetup
@@ -1109,19 +1109,19 @@ Namespace xls
         End Sub
 
         '===============================================================================
-        'ƒtƒbƒ^[İ’è
-        'prmLeftStr/prmMidStr/prmRightStr   Excelƒ}ƒNƒ“¯ˆê‹Lq‚Ì‚±‚Æ
-        '---—á---
-        'ƒtƒ@ƒCƒ‹–¼(ƒV[ƒg–¼) "&F(&A)"
-        'ƒy[ƒW”/‘ƒy[ƒW”  "&P/&N"
-        '“ú•t  ˆóü       "&D@&T@ˆóü"
+        'ãƒ•ãƒƒã‚¿ãƒ¼è¨­å®š
+        'prmLeftStr/prmMidStr/prmRightStr   Excelãƒã‚¯ãƒ­åŒä¸€è¨˜è¿°ã®ã“ã¨
+        '---ä¾‹---
+        'ãƒ•ã‚¡ã‚¤ãƒ«å(ã‚·ãƒ¼ãƒˆå) "&F(&A)"
+        'ãƒšãƒ¼ã‚¸æ•°/ç·ãƒšãƒ¼ã‚¸æ•°  "&P/&N"
+        'æ—¥ä»˜ æ™‚åˆ» å°åˆ·       "&Dã€€&Tã€€å°åˆ·"
         '===============================================================================
         ''' <summary>
-        ''' ƒtƒbƒ^[İ’è@Excelƒ}ƒNƒ“¯ˆê‹Lq‚Ì‚±‚Æ
+        ''' ãƒ•ãƒƒã‚¿ãƒ¼è¨­å®šã€€Excelãƒã‚¯ãƒ­åŒä¸€è¨˜è¿°ã®ã“ã¨
         ''' </summary>
-        ''' <param name="prmLeftStr">¶ƒtƒbƒ^</param>
-        ''' <param name="prmMidStr">’†‰›ƒtƒbƒ^</param>
-        ''' <param name="prmRightStr">‰Eƒtƒbƒ^</param>
+        ''' <param name="prmLeftStr">å·¦ãƒ•ãƒƒã‚¿</param>
+        ''' <param name="prmMidStr">ä¸­å¤®ãƒ•ãƒƒã‚¿</param>
+        ''' <param name="prmRightStr">å³ãƒ•ãƒƒã‚¿</param>
         ''' <remarks></remarks>
         Public Sub setFooter(ByVal prmLeftStr As String, ByVal prmMidStr As String, ByVal prmRightStr As String)
             With _sheet.PageSetup
@@ -1132,38 +1132,38 @@ Namespace xls
         End Sub
 
         '===============================================================================
-        'ƒy[ƒWİ’è
-        ' prmPageVO ƒy[ƒWƒZƒbƒgƒAƒbƒvVO
+        'ãƒšãƒ¼ã‚¸è¨­å®š
+        ' prmPageVO ãƒšãƒ¼ã‚¸ã‚»ãƒƒãƒˆã‚¢ãƒƒãƒ—VO
         '                                                     2007.08.10 add by Laevigata, Inc.
         '===============================================================================
         ''' <summary>
-        ''' ƒy[ƒWİ’è
+        ''' ãƒšãƒ¼ã‚¸è¨­å®š
         ''' </summary>
-        ''' <param name="prmPageVO">ƒy[ƒWƒZƒbƒgƒAƒbƒvVO</param>
+        ''' <param name="prmPageVO">ãƒšãƒ¼ã‚¸ã‚»ãƒƒãƒˆã‚¢ãƒƒãƒ—VO</param>
         ''' <remarks>2007.08.10 add by Laevigata, Inc.</remarks>
         Public Sub setUpPageDefine(ByVal prmPageVO As PageSetUpVO)
             With _sheet.PageSetup
-                .PrintTitleRows = prmPageVO.PrintTitleRows                          'ˆóüsƒ^ƒCƒgƒ‹
-                .PrintTitleColumns = prmPageVO.PrintTitleColumns                    'ˆóü—ñƒ^ƒCƒgƒ‹
-                .PrintArea = prmPageVO.PrintArea                                    'ˆóü”ÍˆÍ
-                .LeftMargin = _app.CentimetersToPoints(prmPageVO.LeftMargin)        '¶—]”’(ƒZƒ“ƒ`FExcel“¯—lw’è)
-                .RightMargin = _app.CentimetersToPoints(prmPageVO.RightMargin)      '‰E—]”’(ƒZƒ“ƒ`FExcel“¯—lw’è)
-                .TopMargin = _app.CentimetersToPoints(prmPageVO.TopMargin)          'ã—]”’(ƒZƒ“ƒ`FExcel“¯—lw’è)
-                .BottomMargin = _app.CentimetersToPoints(prmPageVO.BottomMargin)    '‰º—]”’(ƒZƒ“ƒ`FExcel“¯—lw’è)
-                .HeaderMargin = _app.CentimetersToPoints(prmPageVO.HeaderMargin)    'ƒwƒbƒ_—]”’(ƒZƒ“ƒ`FExcel“¯—lw’è)
-                .FooterMargin = _app.CentimetersToPoints(prmPageVO.FooterMargin)    'ƒtƒbƒ_—]”’(ƒZƒ“ƒ`FExcel“¯—lw’è)
-                .Orientation = prmPageVO.Orientation                                'ƒy[ƒWŒü‚«(c‰¡)
-                .PaperSize = prmPageVO.PaperSize                                    '—p†ƒTƒCƒY
-                .Zoom = prmPageVO.Zoom                                              'Šg‘åk¬—¦
+                .PrintTitleRows = prmPageVO.PrintTitleRows                          'å°åˆ·è¡Œã‚¿ã‚¤ãƒˆãƒ«
+                .PrintTitleColumns = prmPageVO.PrintTitleColumns                    'å°åˆ·åˆ—ã‚¿ã‚¤ãƒˆãƒ«
+                .PrintArea = prmPageVO.PrintArea                                    'å°åˆ·ç¯„å›²
+                .LeftMargin = _app.CentimetersToPoints(prmPageVO.LeftMargin)        'å·¦ä½™ç™½(ã‚»ãƒ³ãƒï¼šExcelåŒæ§˜æŒ‡å®š)
+                .RightMargin = _app.CentimetersToPoints(prmPageVO.RightMargin)      'å³ä½™ç™½(ã‚»ãƒ³ãƒï¼šExcelåŒæ§˜æŒ‡å®š)
+                .TopMargin = _app.CentimetersToPoints(prmPageVO.TopMargin)          'ä¸Šä½™ç™½(ã‚»ãƒ³ãƒï¼šExcelåŒæ§˜æŒ‡å®š)
+                .BottomMargin = _app.CentimetersToPoints(prmPageVO.BottomMargin)    'ä¸‹ä½™ç™½(ã‚»ãƒ³ãƒï¼šExcelåŒæ§˜æŒ‡å®š)
+                .HeaderMargin = _app.CentimetersToPoints(prmPageVO.HeaderMargin)    'ãƒ˜ãƒƒãƒ€ä½™ç™½(ã‚»ãƒ³ãƒï¼šExcelåŒæ§˜æŒ‡å®š)
+                .FooterMargin = _app.CentimetersToPoints(prmPageVO.FooterMargin)    'ãƒ•ãƒƒãƒ€ä½™ç™½(ã‚»ãƒ³ãƒï¼šExcelåŒæ§˜æŒ‡å®š)
+                .Orientation = prmPageVO.Orientation                                'ãƒšãƒ¼ã‚¸å‘ã(ç¸¦æ¨ª)
+                .PaperSize = prmPageVO.PaperSize                                    'ç”¨ç´™ã‚µã‚¤ã‚º
+                .Zoom = prmPageVO.Zoom                                              'æ‹¡å¤§ç¸®å°ç‡
             End With
 
         End Sub
 
         '===============================================================================
-        'ƒI[ƒgƒtƒBƒ‹ƒ^
+        'ã‚ªãƒ¼ãƒˆãƒ•ã‚£ãƒ«ã‚¿
         '===============================================================================
         ''' <summary>
-        ''' ƒI[ƒgƒtƒBƒ‹ƒ^
+        ''' ã‚ªãƒ¼ãƒˆãƒ•ã‚£ãƒ«ã‚¿
         ''' </summary>
         ''' <remarks></remarks>
         Public Sub AutoFilter()
@@ -1177,12 +1177,12 @@ Namespace xls
         End Sub
 
         '===============================================================================
-        'ƒV[ƒgƒRƒs[
+        'ã‚·ãƒ¼ãƒˆã‚³ãƒ”ãƒ¼
         '===============================================================================
         ''' <summary>
-        ''' ƒV[ƒgƒRƒs[(Œã‚ë‚É)
+        ''' ã‚·ãƒ¼ãƒˆã‚³ãƒ”ãƒ¼(å¾Œã‚ã«)
         ''' </summary>
-        ''' <param name="prmNewSheetName">V‚µ‚¢ƒV[ƒg–¼</param>
+        ''' <param name="prmNewSheetName">æ–°ã—ã„ã‚·ãƒ¼ãƒˆå</param>
         ''' <remarks></remarks>
         Public Sub copySheet(Optional ByVal prmNewSheetName As String = "org")
             _sheet.Copy(After:=_sheet)
@@ -1190,9 +1190,9 @@ Namespace xls
         End Sub
 
         ''' <summary>
-        ''' ƒV[ƒgƒRƒs[(‘O‚É)
+        ''' ã‚·ãƒ¼ãƒˆã‚³ãƒ”ãƒ¼(å‰ã«)
         ''' </summary>
-        ''' <param name="prmNewSheetName">V‚µ‚¢ƒV[ƒg–¼</param>
+        ''' <param name="prmNewSheetName">æ–°ã—ã„ã‚·ãƒ¼ãƒˆå</param>
         ''' <remarks></remarks>
         Public Sub copySheetBefore(Optional ByVal prmNewSheetName As String = "org")
             _sheet.Copy(Before:=_sheet)
@@ -1200,9 +1200,9 @@ Namespace xls
         End Sub
 
         ''' <summary>
-        ''' ƒV[ƒgƒRƒs[(––”ö‚Ö)
+        ''' ã‚·ãƒ¼ãƒˆã‚³ãƒ”ãƒ¼(æœ«å°¾ã¸)
         ''' </summary>
-        ''' <param name="prmNewSheetName">V‚µ‚¢ƒV[ƒg–¼</param>
+        ''' <param name="prmNewSheetName">æ–°ã—ã„ã‚·ãƒ¼ãƒˆå</param>
         ''' <remarks>2010.02.17 Created by Laevigata, Inc.</remarks>
         Public Sub copySheetOnLast(Optional ByVal prmNewSheetName As String = "newName")
             _sheet.Copy(After:=_sheets(_sheets.Count))
@@ -1210,12 +1210,12 @@ Namespace xls
         End Sub
 
         '===============================================================================
-        'ƒV[ƒgíœ
+        'ã‚·ãƒ¼ãƒˆå‰Šé™¤
         '===============================================================================
         ''' <summary>
-        ''' ƒV[ƒgíœ
+        ''' ã‚·ãƒ¼ãƒˆå‰Šé™¤
         ''' </summary>
-        ''' <param name="prmSheetName">íœ‚·‚éƒV[ƒg–¼</param>
+        ''' <param name="prmSheetName">å‰Šé™¤ã™ã‚‹ã‚·ãƒ¼ãƒˆå</param>
         ''' <remarks></remarks>
         Public Sub deleteSheet(ByVal prmSheetName As String)
             Dim curSht As String = _sheet.Name
@@ -1238,10 +1238,10 @@ Namespace xls
         End Sub
 
         '===============================================================================
-        '‰üƒy[ƒW
+        'æ”¹ãƒšãƒ¼ã‚¸
         '===============================================================================
         ''' <summary>
-        ''' w’ès—ñ‚Ì‰E‰º‚É‰üƒy[ƒW‚ğ‘}“ü‚·‚é
+        ''' æŒ‡å®šè¡Œåˆ—ã®å³ä¸‹ã«æ”¹ãƒšãƒ¼ã‚¸ã‚’æŒ¿å…¥ã™ã‚‹
         ''' </summary>
         ''' <remarks></remarks>
         Public Sub breakPage(ByVal prmRow As Short, ByVal prmCol As Short)
@@ -1251,13 +1251,13 @@ Namespace xls
         End Sub
 
         '===============================================================================
-        'ƒeƒLƒXƒgƒ{ƒbƒN‚É•¶šo—Í
+        'ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã«æ–‡å­—å‡ºåŠ›
         '===============================================================================
         ''' <summary>
-        ''' ƒeƒLƒXƒgƒ{ƒbƒN‚É•¶šo—Í
+        ''' ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã«æ–‡å­—å‡ºåŠ›
         ''' </summary>
-        ''' <param name="prmShapeTextBoxNm">ƒeƒLƒXƒgƒ{ƒbƒN–¼</param>
-        ''' <param name="prmTextVal">o—Í•¶š—ñ</param>
+        ''' <param name="prmShapeTextBoxNm">ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯å</param>
+        ''' <param name="prmTextVal">å‡ºåŠ›æ–‡å­—åˆ—</param>
         ''' <remarks></remarks>
         Public Sub setShapeTextBox(ByVal prmShapeTextBoxNm As String, ByVal prmTextVal As String)
             Dim shps As Excel.Shapes = _sheet.Shapes
@@ -1285,15 +1285,15 @@ Namespace xls
         End Sub
 
         '===============================================================================
-        'ƒ{ƒbƒNƒX”wŒiF‚Ì“h‚è‚Â‚Ô‚µ
+        'ãƒœãƒƒã‚¯ã‚¹èƒŒæ™¯è‰²ã®å¡—ã‚Šã¤ã¶ã—
         '===============================================================================
         ''' <summary>
-        ''' ”wŒiF‚Ì“h‚è‚Â‚Ô‚µ
+        ''' èƒŒæ™¯è‰²ã®å¡—ã‚Šã¤ã¶ã—
         ''' </summary>
-        ''' <param name="prmShapeTextBoxNm">ƒ{ƒbƒNƒX–¼</param>
-        ''' <param name="prmColorRed">RGB‚ÌÔ</param>
-        ''' <param name="prmColorGreen">RGB‚Ì—Î</param>
-        ''' <param name="prmColorBlue">RGB‚ÌÂ</param>
+        ''' <param name="prmShapeTextBoxNm">ãƒœãƒƒã‚¯ã‚¹å</param>
+        ''' <param name="prmColorRed">RGBã®èµ¤</param>
+        ''' <param name="prmColorGreen">RGBã®ç·‘</param>
+        ''' <param name="prmColorBlue">RGBã®é’</param>
         ''' <remarks></remarks>
         Public Sub paintShape(ByVal prmShapeTextBoxNm As String,
                                     Optional ByVal prmColorRed As Short = 0,
@@ -1329,30 +1329,30 @@ Namespace xls
 
     '===============================================================================
     '
-    '  “à•”g—pƒNƒ‰ƒX
-    '    iƒNƒ‰ƒX–¼j    ExcelFunc
-    '    iˆ—‹@”\–¼j      UtilExcelHandler‚É•t‚·‚é•”•iƒNƒ‰ƒXŒQ‚É‚¨‚¢‚Äg—p‚·‚é
-    '                        “à•”ƒƒ\ƒbƒh‚ğ’è‹`‚·‚éB
-    '    i–{MDLg—p‘O’ñj   UtilExcelHandler‚É•t‚·‚é•”•iƒNƒ‰ƒXŒQ‚Æ‘Î‚Åg—p‚·‚é
-    '                        Œp³Œ³‚Æ‚·‚é‚½‚ß‚ÌƒNƒ‰ƒX‚Å‚ ‚é‚½‚ßAƒCƒ“ƒXƒ^ƒ“ƒX‰»‚ğ‹Ö~‚·‚é
-    '    i”õlj            ã‹Lg—p‘O’ñ‚æ‚èUtilExcelHandler‚Æ“¯ˆêSRCã‚É’è‹`
+    '  å†…éƒ¨ä½¿ç”¨ã‚¯ãƒ©ã‚¹
+    '    ï¼ˆã‚¯ãƒ©ã‚¹åï¼‰    ExcelFunc
+    '    ï¼ˆå‡¦ç†æ©Ÿèƒ½åï¼‰      UtilExcelHandlerã«ä»˜éšã™ã‚‹éƒ¨å“ã‚¯ãƒ©ã‚¹ç¾¤ã«ãŠã„ã¦ä½¿ç”¨ã™ã‚‹
+    '                        å†…éƒ¨ãƒ¡ã‚½ãƒƒãƒ‰ã‚’å®šç¾©ã™ã‚‹ã€‚
+    '    ï¼ˆæœ¬MDLä½¿ç”¨å‰æï¼‰   UtilExcelHandlerã«ä»˜éšã™ã‚‹éƒ¨å“ã‚¯ãƒ©ã‚¹ç¾¤ã¨å¯¾ã§ä½¿ç”¨ã™ã‚‹
+    '                        ç¶™æ‰¿å…ƒã¨ã™ã‚‹ãŸã‚ã®ã‚¯ãƒ©ã‚¹ã§ã‚ã‚‹ãŸã‚ã€ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹åŒ–ã‚’ç¦æ­¢ã™ã‚‹
+    '    ï¼ˆå‚™è€ƒï¼‰            ä¸Šè¨˜ä½¿ç”¨å‰æã‚ˆã‚ŠUtilExcelHandlerã¨åŒä¸€SRCä¸Šã«å®šç¾©
     '
     '===============================================================================
-    '  —š—ğ  –¼‘O          “ú  •t      ƒ}[ƒN      “à—e
+    '  å±¥æ­´  åå‰          æ—¥  ä»˜      ãƒãƒ¼ã‚¯      å†…å®¹
     '-------------------------------------------------------------------------------
-    '  (1)   Laevigata, Inc.    2007/08/10              V‹K
+    '  (1)   Laevigata, Inc.    2007/08/10              æ–°è¦
     '-------------------------------------------------------------------------------
     Public MustInherit Class ExcelFunc
 
         '===============================================================================
-        '—Ìˆæ•¶š—ñæ“¾(“à•”ƒƒ\ƒbƒh)
+        'é ˜åŸŸæ–‡å­—åˆ—å–å¾—(å†…éƒ¨ãƒ¡ã‚½ãƒƒãƒ‰)
         '===============================================================================
         Protected Function cbnCellStr(ByVal prmCell1 As String, ByVal prmCell2 As String) As String
             Return prmCell1 & ":" & prmCell2
         End Function
 
         '===============================================================================
-        '—Ìˆæ•¶š—ñ•ªŠ„(“à•”ƒƒ\ƒbƒh)
+        'é ˜åŸŸæ–‡å­—åˆ—åˆ†å‰²(å†…éƒ¨ãƒ¡ã‚½ãƒƒãƒ‰)
         '===============================================================================
         Protected Sub devCellStr(ByVal prmCellStr As String, ByRef prmRefCell1 As String, ByRef prmRefCell2 As String)
             prmRefCell1 = prmCellStr.Substring(0, prmCellStr.IndexOf(":"))
@@ -1360,9 +1360,9 @@ Namespace xls
         End Sub
 
         '===============================================================================
-        's”Ô†—ñ”Ô†‚ğ[A1]Œ`®‚É•ÏŠ·(“à•”ƒƒ\ƒbƒh)
+        'è¡Œç•ªå·åˆ—ç•ªå·ã‚’[A1]å½¢å¼ã«å¤‰æ›(å†…éƒ¨ãƒ¡ã‚½ãƒƒãƒ‰)
         '===============================================================================
-        's—ñ•ÏŠ·
+        'è¡Œåˆ—å¤‰æ›
         Protected Function convFromR1C1(ByVal prmRow As Short, ByVal prmCol As Short, Optional ByVal dollar As Boolean = False) As String
 
             Dim rowStr As String = ""
@@ -1380,7 +1380,7 @@ Namespace xls
                 Return colStr & rowStr
             End If
         End Function
-        '—ñ‚Ì‚İ•ÏŠ·
+        'åˆ—ã®ã¿å¤‰æ›
         Protected Function convColFromR1C1(ByVal prmCol As Short) As String
 
             Dim colStr As String = ""
@@ -1647,9 +1647,9 @@ Namespace xls
         End Function
 
         '===============================================================================
-        '[A1]Œ`®‚ğs”Ô†—ñ”Ô†‚É•ÏŠ·(“à•”ƒƒ\ƒbƒh)
+        '[A1]å½¢å¼ã‚’è¡Œç•ªå·åˆ—ç•ªå·ã«å¤‰æ›(å†…éƒ¨ãƒ¡ã‚½ãƒƒãƒ‰)
         '===============================================================================
-        's—ñ•ÏŠ·
+        'è¡Œåˆ—å¤‰æ›
         Protected Sub convToR1C1(ByVal prmCellStr As String, ByRef prmRefRow As Short, ByRef prmRefCol As Short)
             Dim wkC As Char = ""
             Dim colStr As String = ""
@@ -1667,7 +1667,7 @@ Namespace xls
             prmRefCol = convColToR1C1(colStr)
 
         End Sub
-        '—ñ‚Ì‚İ•ÏŠ·
+        'åˆ—ã®ã¿å¤‰æ›
         Protected Function convColToR1C1(ByVal prmCol As String) As Short
             Dim retVal As Short = 1
             If "A".Equals(prmCol) Then : retVal = 1
@@ -1934,62 +1934,62 @@ Namespace xls
 
     '===============================================================================
     '
-    '  ƒ†[ƒeƒBƒŠƒeƒBƒNƒ‰ƒX
-    '    iƒNƒ‰ƒX–¼j    LineVO
-    '    iˆ—‹@”\–¼j      UtilExcelHandler‚É“n‚·Œrüíƒf[ƒ^‚Ì˜g‚ğ’ñ‹Ÿ(Beans)
-    '    i–{MDLg—p‘O’ñj   UtilExcelHandler‚Æ‘Î‚Åg—p‚·‚é
-    '    i”õlj            ã‹Lg—p‘O’ñ‚æ‚èUtilExcelHandler‚Æ“¯ˆêSRCã‚É’è‹`
+    '  ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£ã‚¯ãƒ©ã‚¹
+    '    ï¼ˆã‚¯ãƒ©ã‚¹åï¼‰    LineVO
+    '    ï¼ˆå‡¦ç†æ©Ÿèƒ½åï¼‰      UtilExcelHandlerã«æ¸¡ã™ç½«ç·šç¨®ãƒ‡ãƒ¼ã‚¿ã®æ ã‚’æä¾›(Beans)
+    '    ï¼ˆæœ¬MDLä½¿ç”¨å‰æï¼‰   UtilExcelHandlerã¨å¯¾ã§ä½¿ç”¨ã™ã‚‹
+    '    ï¼ˆå‚™è€ƒï¼‰            ä¸Šè¨˜ä½¿ç”¨å‰æã‚ˆã‚ŠUtilExcelHandlerã¨åŒä¸€SRCä¸Šã«å®šç¾©
     '
     '===============================================================================
-    '  —š—ğ  –¼‘O          “ú  •t      ƒ}[ƒN      “à—e
+    '  å±¥æ­´  åå‰          æ—¥  ä»˜      ãƒãƒ¼ã‚¯      å†…å®¹
     '-------------------------------------------------------------------------------
-    '  (1)   Laevigata, Inc.    2006/05/17              V‹K
+    '  (1)   Laevigata, Inc.    2006/05/17              æ–°è¦
     '-------------------------------------------------------------------------------
     Public Class LineVO
 
         '===============================================================================
-        '\‘¢‘Ì’è‹`
+        'æ§‹é€ ä½“å®šç¾©
         '===============================================================================
-        'Œrüí
+        'ç½«ç·šç¨®
         ''' <summary>
-        ''' Œrüí—ñ‹“‘Ì
+        ''' ç½«ç·šç¨®åˆ—æŒ™ä½“
         ''' </summary>
         ''' <remarks></remarks>
         Public Enum LineType As Short
             ''' <summary>
-            ''' ’Êí
+            ''' é€šå¸¸
             ''' </summary>
             ''' <remarks></remarks>
             NomalL = 0
             ''' <summary>
-            ''' ”jü
+            ''' ç ´ç·š
             ''' </summary>
             ''' <remarks></remarks>
             BrokenL = 1
             ''' <summary>
-            ''' ‘¾ü
+            ''' å¤ªç·š
             ''' </summary>
             ''' <remarks></remarks>
             BoldL = 2
             ''' <summary>
-            ''' “ñdü
+            ''' äºŒé‡ç·š
             ''' </summary>
             ''' <remarks></remarks>
             DoubleL = 3
             ''' <summary>
-            ''' Œrü‚È‚µ
+            ''' ç½«ç·šãªã—
             ''' </summary>
             ''' <remarks></remarks>
             None = 4
             ''' <summary>
-            ''' –¢’è‹`(‰Šú’l)
+            ''' æœªå®šç¾©(åˆæœŸå€¤)
             ''' </summary>
             ''' <remarks></remarks>
             Null = -9
         End Enum
 
         '===============================================================================
-        'ƒƒ“ƒo[•Ï”’è‹`
+        'ãƒ¡ãƒ³ãƒãƒ¼å¤‰æ•°å®šç¾©
         '===============================================================================
         Private _Left As LineType = LineType.Null
         Private _Top As LineType = LineType.Null
@@ -1999,13 +1999,13 @@ Namespace xls
         Private _HorizontalMiddle As LineType = LineType.Null
 
         '===============================================================================
-        'ƒvƒƒpƒeƒB(ƒAƒNƒZƒT)
+        'ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£(ã‚¢ã‚¯ã‚»ã‚µ)
         '===============================================================================
         ''' <summary>
-        ''' ¶
+        ''' å·¦
         ''' </summary>
-        ''' <value>Œrüí—ñ‹“‘Ì</value>
-        ''' <returns>Œrüí—ñ‹“‘Ì</returns>
+        ''' <value>ç½«ç·šç¨®åˆ—æŒ™ä½“</value>
+        ''' <returns>ç½«ç·šç¨®åˆ—æŒ™ä½“</returns>
         ''' <remarks></remarks>
         Public Property Left() As LineType
             Get
@@ -2017,10 +2017,10 @@ Namespace xls
         End Property
 
         ''' <summary>
-        ''' ã
+        ''' ä¸Š
         ''' </summary>
-        ''' <value>Œrüí—ñ‹“‘Ì</value>
-        ''' <returns>Œrüí—ñ‹“‘Ì</returns>
+        ''' <value>ç½«ç·šç¨®åˆ—æŒ™ä½“</value>
+        ''' <returns>ç½«ç·šç¨®åˆ—æŒ™ä½“</returns>
         ''' <remarks></remarks>
         Public Property Top() As LineType
             Get
@@ -2032,10 +2032,10 @@ Namespace xls
         End Property
 
         ''' <summary>
-        ''' ‰E
+        ''' å³
         ''' </summary>
-        ''' <value>Œrüí—ñ‹“‘Ì</value>
-        ''' <returns>Œrüí—ñ‹“‘Ì</returns>
+        ''' <value>ç½«ç·šç¨®åˆ—æŒ™ä½“</value>
+        ''' <returns>ç½«ç·šç¨®åˆ—æŒ™ä½“</returns>
         ''' <remarks></remarks>
         Public Property Right() As LineType
             Get
@@ -2047,10 +2047,10 @@ Namespace xls
         End Property
 
         ''' <summary>
-        ''' ‰º
+        ''' ä¸‹
         ''' </summary>
-        ''' <value>Œrüí—ñ‹“‘Ì</value>
-        ''' <returns>Œrüí—ñ‹“‘Ì</returns>
+        ''' <value>ç½«ç·šç¨®åˆ—æŒ™ä½“</value>
+        ''' <returns>ç½«ç·šç¨®åˆ—æŒ™ä½“</returns>
         ''' <remarks></remarks>
         Public Property Bottom() As LineType
             Get
@@ -2062,10 +2062,10 @@ Namespace xls
         End Property
 
         ''' <summary>
-        ''' ’†ŠÔc
+        ''' ä¸­é–“ç¸¦
         ''' </summary>
-        ''' <value>Œrüí—ñ‹“‘Ì</value>
-        ''' <returns>Œrüí—ñ‹“‘Ì</returns>
+        ''' <value>ç½«ç·šç¨®åˆ—æŒ™ä½“</value>
+        ''' <returns>ç½«ç·šç¨®åˆ—æŒ™ä½“</returns>
         ''' <remarks></remarks>
         Public Property VerticalMiddle() As LineType
             Get
@@ -2077,10 +2077,10 @@ Namespace xls
         End Property
 
         ''' <summary>
-        ''' ’†ŠÔ‰¡
+        ''' ä¸­é–“æ¨ª
         ''' </summary>
-        ''' <value>Œrüí—ñ‹“‘Ì</value>
-        ''' <returns>Œrüí—ñ‹“‘Ì</returns>
+        ''' <value>ç½«ç·šç¨®åˆ—æŒ™ä½“</value>
+        ''' <returns>ç½«ç·šç¨®åˆ—æŒ™ä½“</returns>
         ''' <remarks></remarks>
         Public Property HorizontalMiddle() As LineType
             Get
@@ -2095,47 +2095,47 @@ Namespace xls
 
     '===============================================================================
     '
-    '  ƒ†[ƒeƒBƒŠƒeƒBƒNƒ‰ƒX
-    '    iƒNƒ‰ƒX–¼j    PageSetUpVO
-    '    iˆ—‹@”\–¼j      UtilExcelHandler‚É“n‚·ƒy[ƒWİ’è’lƒf[ƒ^‚Ì˜g‚ğ’ñ‹Ÿ(Beans)
-    '    i–{MDLg—p‘O’ñj   UtilExcelHandler‚Æ‘Î‚Åg—p‚·‚é
-    '    i”õlj            ã‹Lg—p‘O’ñ‚æ‚èUtilExcelHandler‚Æ“¯ˆêSRCã‚É’è‹`
+    '  ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£ã‚¯ãƒ©ã‚¹
+    '    ï¼ˆã‚¯ãƒ©ã‚¹åï¼‰    PageSetUpVO
+    '    ï¼ˆå‡¦ç†æ©Ÿèƒ½åï¼‰      UtilExcelHandlerã«æ¸¡ã™ãƒšãƒ¼ã‚¸è¨­å®šå€¤ãƒ‡ãƒ¼ã‚¿ã®æ ã‚’æä¾›(Beans)
+    '    ï¼ˆæœ¬MDLä½¿ç”¨å‰æï¼‰   UtilExcelHandlerã¨å¯¾ã§ä½¿ç”¨ã™ã‚‹
+    '    ï¼ˆå‚™è€ƒï¼‰            ä¸Šè¨˜ä½¿ç”¨å‰æã‚ˆã‚ŠUtilExcelHandlerã¨åŒä¸€SRCä¸Šã«å®šç¾©
     '
     '===============================================================================
-    '  —š—ğ  –¼‘O          “ú  •t      ƒ}[ƒN      “à—e
+    '  å±¥æ­´  åå‰          æ—¥  ä»˜      ãƒãƒ¼ã‚¯      å†…å®¹
     '-------------------------------------------------------------------------------
-    '  (1)   Laevigata, Inc.    2007/08/10              V‹K
+    '  (1)   Laevigata, Inc.    2007/08/10              æ–°è¦
     '-------------------------------------------------------------------------------
     Public Class PageSetUpVO
         Inherits ExcelFunc
 
         '===============================================================================
-        '\‘¢‘Ì’è‹`
+        'æ§‹é€ ä½“å®šç¾©
         '===============================================================================
-        'ƒy[ƒWc‰¡(ˆóü‚ÌŒü‚«)—ñ‹“‘Ì
+        'ãƒšãƒ¼ã‚¸ç¸¦æ¨ª(å°åˆ·ã®å‘ã)åˆ—æŒ™ä½“
         ''' <summary>
-        ''' ƒy[ƒWc‰¡(ˆóü‚ÌŒü‚«)
+        ''' ãƒšãƒ¼ã‚¸ç¸¦æ¨ª(å°åˆ·ã®å‘ã)
         ''' </summary>
         ''' <remarks></remarks>
         Public Enum OrientationType As Short
 
             ''' <summary>
-            ''' c
+            ''' ç¸¦
             ''' </summary>
             ''' <remarks></remarks>
             Portrait = 1
 
             ''' <summary>
-            ''' ‰¡
+            ''' æ¨ª
             ''' </summary>
             ''' <remarks></remarks>
             Landscape = 2
 
         End Enum
 
-        '—p†ƒTƒCƒY—ñ‹“‘Ì
+        'ç”¨ç´™ã‚µã‚¤ã‚ºåˆ—æŒ™ä½“
         ''' <summary>
-        ''' —p†ƒTƒCƒY
+        ''' ç”¨ç´™ã‚µã‚¤ã‚º
         ''' </summary>
         ''' <remarks></remarks>
         Public Enum PaperSizeType As Short
@@ -2174,7 +2174,7 @@ Namespace xls
 
 
         '===============================================================================
-        'ƒƒ“ƒo[•Ï”’è‹`
+        'ãƒ¡ãƒ³ãƒãƒ¼å¤‰æ•°å®šç¾©
         '===============================================================================
         Private _orientation As OrientationType = OrientationType.Landscape
         Private _zoom As Short = 100
@@ -2190,13 +2190,13 @@ Namespace xls
         Private _printArea As String = ""
 
         '===============================================================================
-        'ƒvƒƒpƒeƒB(ƒAƒNƒZƒT)
+        'ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£(ã‚¢ã‚¯ã‚»ã‚µ)
         '===============================================================================
         ''' <summary>
-        ''' ƒy[ƒWc‰¡(ˆóü‚ÌŒü‚«)
+        ''' ãƒšãƒ¼ã‚¸ç¸¦æ¨ª(å°åˆ·ã®å‘ã)
         ''' </summary>
-        ''' <value>ƒy[ƒWc‰¡(ˆóü‚ÌŒü‚«)—ñ‹“‘Ì</value>
-        ''' <returns>ƒy[ƒWc‰¡(ˆóü‚ÌŒü‚«)—ñ‹“‘Ì</returns>
+        ''' <value>ãƒšãƒ¼ã‚¸ç¸¦æ¨ª(å°åˆ·ã®å‘ã)åˆ—æŒ™ä½“</value>
+        ''' <returns>ãƒšãƒ¼ã‚¸ç¸¦æ¨ª(å°åˆ·ã®å‘ã)åˆ—æŒ™ä½“</returns>
         ''' <remarks></remarks>
         Public Property Orientation() As OrientationType
             Get
@@ -2208,10 +2208,10 @@ Namespace xls
         End Property
 
         ''' <summary>
-        ''' Šg‘å/k¬—¦
+        ''' æ‹¡å¤§/ç¸®å°ç‡
         ''' </summary>
-        ''' <value>ƒp[ƒZƒ“ƒe[ƒW</value>
-        ''' <returns>ƒp[ƒZƒ“ƒe[ƒW</returns>
+        ''' <value>ãƒ‘ãƒ¼ã‚»ãƒ³ãƒ†ãƒ¼ã‚¸</value>
+        ''' <returns>ãƒ‘ãƒ¼ã‚»ãƒ³ãƒ†ãƒ¼ã‚¸</returns>
         ''' <remarks></remarks>
         Public Property Zoom() As Short
             Get
@@ -2223,10 +2223,10 @@ Namespace xls
         End Property
 
         ''' <summary>
-        ''' —p†ƒTƒCƒY
+        ''' ç”¨ç´™ã‚µã‚¤ã‚º
         ''' </summary>
-        ''' <value>—p†ƒTƒCƒY—ñ‹“‘Ì</value>
-        ''' <returns>—p†ƒTƒCƒY—ñ‹“‘Ì</returns>
+        ''' <value>ç”¨ç´™ã‚µã‚¤ã‚ºåˆ—æŒ™ä½“</value>
+        ''' <returns>ç”¨ç´™ã‚µã‚¤ã‚ºåˆ—æŒ™ä½“</returns>
         ''' <remarks></remarks>
         Public Property PaperSize() As PaperSizeType
             Get
@@ -2238,10 +2238,10 @@ Namespace xls
         End Property
 
         ''' <summary>
-        ''' ¶ƒ}[ƒWƒ“
+        ''' å·¦ãƒãƒ¼ã‚¸ãƒ³
         ''' </summary>
-        ''' <value>ƒ}[ƒWƒ“(ƒCƒ“ƒ`)</value>
-        ''' <returns>ƒ}[ƒWƒ“(ƒCƒ“ƒ`)</returns>
+        ''' <value>ãƒãƒ¼ã‚¸ãƒ³(ã‚¤ãƒ³ãƒ)</value>
+        ''' <returns>ãƒãƒ¼ã‚¸ãƒ³(ã‚¤ãƒ³ãƒ)</returns>
         ''' <remarks></remarks>
         Public Property LeftMargin() As Single
             Get
@@ -2253,10 +2253,10 @@ Namespace xls
         End Property
 
         ''' <summary>
-        ''' ‰Eƒ}[ƒWƒ“
+        ''' å³ãƒãƒ¼ã‚¸ãƒ³
         ''' </summary>
-        ''' <value>ƒ}[ƒWƒ“(ƒCƒ“ƒ`)</value>
-        ''' <returns>ƒ}[ƒWƒ“(ƒCƒ“ƒ`)</returns>
+        ''' <value>ãƒãƒ¼ã‚¸ãƒ³(ã‚¤ãƒ³ãƒ)</value>
+        ''' <returns>ãƒãƒ¼ã‚¸ãƒ³(ã‚¤ãƒ³ãƒ)</returns>
         ''' <remarks></remarks>
         Public Property RightMargin() As Single
             Get
@@ -2268,10 +2268,10 @@ Namespace xls
         End Property
 
         ''' <summary>
-        ''' ãƒ}[ƒWƒ“
+        ''' ä¸Šãƒãƒ¼ã‚¸ãƒ³
         ''' </summary>
-        ''' <value>ƒ}[ƒWƒ“(ƒCƒ“ƒ`)</value>
-        ''' <returns>ƒ}[ƒWƒ“(ƒCƒ“ƒ`)</returns>
+        ''' <value>ãƒãƒ¼ã‚¸ãƒ³(ã‚¤ãƒ³ãƒ)</value>
+        ''' <returns>ãƒãƒ¼ã‚¸ãƒ³(ã‚¤ãƒ³ãƒ)</returns>
         ''' <remarks></remarks>
         Public Property TopMargin() As Single
             Get
@@ -2283,10 +2283,10 @@ Namespace xls
         End Property
 
         ''' <summary>
-        ''' ‰ºƒ}[ƒWƒ“
+        ''' ä¸‹ãƒãƒ¼ã‚¸ãƒ³
         ''' </summary>
-        ''' <value>ƒ}[ƒWƒ“(ƒCƒ“ƒ`)</value>
-        ''' <returns>ƒ}[ƒWƒ“(ƒCƒ“ƒ`)</returns>
+        ''' <value>ãƒãƒ¼ã‚¸ãƒ³(ã‚¤ãƒ³ãƒ)</value>
+        ''' <returns>ãƒãƒ¼ã‚¸ãƒ³(ã‚¤ãƒ³ãƒ)</returns>
         ''' <remarks></remarks>
         Public Property BottomMargin() As Single
             Get
@@ -2298,10 +2298,10 @@ Namespace xls
         End Property
 
         ''' <summary>
-        ''' ƒwƒbƒ_ƒ}[ƒWƒ“
+        ''' ãƒ˜ãƒƒãƒ€ãƒãƒ¼ã‚¸ãƒ³
         ''' </summary>
-        ''' <value>ƒ}[ƒWƒ“(ƒCƒ“ƒ`)</value>
-        ''' <returns>ƒ}[ƒWƒ“(ƒCƒ“ƒ`)</returns>
+        ''' <value>ãƒãƒ¼ã‚¸ãƒ³(ã‚¤ãƒ³ãƒ)</value>
+        ''' <returns>ãƒãƒ¼ã‚¸ãƒ³(ã‚¤ãƒ³ãƒ)</returns>
         ''' <remarks></remarks>
         Public Property HeaderMargin() As Single
             Get
@@ -2313,10 +2313,10 @@ Namespace xls
         End Property
 
         ''' <summary>
-        ''' ƒtƒbƒ^ƒ}[ƒWƒ“
+        ''' ãƒ•ãƒƒã‚¿ãƒãƒ¼ã‚¸ãƒ³
         ''' </summary>
-        ''' <value>ƒ}[ƒWƒ“(ƒCƒ“ƒ`)</value>
-        ''' <returns>ƒ}[ƒWƒ“(ƒCƒ“ƒ`)</returns>
+        ''' <value>ãƒãƒ¼ã‚¸ãƒ³(ã‚¤ãƒ³ãƒ)</value>
+        ''' <returns>ãƒãƒ¼ã‚¸ãƒ³(ã‚¤ãƒ³ãƒ)</returns>
         ''' <remarks></remarks>
         Public Property FooterMargin() As Single
             Get
@@ -2328,9 +2328,9 @@ Namespace xls
         End Property
 
         ''' <summary>
-        ''' ˆóüsƒ^ƒCƒgƒ‹
+        ''' å°åˆ·è¡Œã‚¿ã‚¤ãƒˆãƒ«
         ''' </summary>
-        ''' <returns>sƒ^ƒCƒgƒ‹•¶š—ñ</returns>
+        ''' <returns>è¡Œã‚¿ã‚¤ãƒˆãƒ«æ–‡å­—åˆ—</returns>
         ''' <remarks></remarks>
         Public ReadOnly Property PrintTitleRows() As String
             Get
@@ -2339,9 +2339,9 @@ Namespace xls
         End Property
 
         ''' <summary>
-        ''' ˆóü—ñƒ^ƒCƒgƒ‹
+        ''' å°åˆ·åˆ—ã‚¿ã‚¤ãƒˆãƒ«
         ''' </summary>
-        ''' <returns>—ñƒ^ƒCƒgƒ‹•¶š—ñ</returns>
+        ''' <returns>åˆ—ã‚¿ã‚¤ãƒˆãƒ«æ–‡å­—åˆ—</returns>
         ''' <remarks></remarks>
         Public ReadOnly Property PrintTitleColumns() As String
             Get
@@ -2350,9 +2350,9 @@ Namespace xls
         End Property
 
         ''' <summary>
-        ''' ˆóü”ÍˆÍ
+        ''' å°åˆ·ç¯„å›²
         ''' </summary>
-        ''' <returns>ˆóü”ÍˆÍ•¶š—ñ</returns>
+        ''' <returns>å°åˆ·ç¯„å›²æ–‡å­—åˆ—</returns>
         ''' <remarks></remarks>
         Public ReadOnly Property PrintArea() As String
             Get
@@ -2364,15 +2364,15 @@ Namespace xls
 
 
         '===============================================================================
-        'ˆóü”ÍˆÍİ’è
+        'å°åˆ·ç¯„å›²è¨­å®š
         '===============================================================================
         ''' <summary>
-        ''' ˆóü”ÍˆÍİ’è
+        ''' å°åˆ·ç¯„å›²è¨­å®š
         ''' </summary>
-        ''' <param name="prmRow">ŠJns</param>
-        ''' <param name="prmCol">ŠJn—ñ</param>
-        ''' <param name="prmRow2">I—¹s</param>
-        ''' <param name="prmCol2">I—¹—ñ</param>
+        ''' <param name="prmRow">é–‹å§‹è¡Œ</param>
+        ''' <param name="prmCol">é–‹å§‹åˆ—</param>
+        ''' <param name="prmRow2">çµ‚äº†è¡Œ</param>
+        ''' <param name="prmCol2">çµ‚äº†åˆ—</param>
         ''' <remarks></remarks>
         Public Sub setPrintArea(ByVal prmRow As Short, ByVal prmCol As Short, _
                                      ByVal prmRow2 As Short, ByVal prmCol2 As Short)
@@ -2383,15 +2383,15 @@ Namespace xls
         End Sub
 
         '===============================================================================
-        'ˆóü”ÍˆÍæ“¾
+        'å°åˆ·ç¯„å›²å–å¾—
         '===============================================================================
         ''' <summary>
-        ''' ˆóü”ÍˆÍæ“¾
+        ''' å°åˆ·ç¯„å›²å–å¾—
         ''' </summary>
-        ''' <param name="prmRefRow">ŠJns</param>
-        ''' <param name="prmRefCol">ŠJn—ñ</param>
-        ''' <param name="prmRefRow2">I—¹s</param>
-        ''' <param name="prmRefCol2">I—¹—ñ</param>
+        ''' <param name="prmRefRow">é–‹å§‹è¡Œ</param>
+        ''' <param name="prmRefCol">é–‹å§‹åˆ—</param>
+        ''' <param name="prmRefRow2">çµ‚äº†è¡Œ</param>
+        ''' <param name="prmRefCol2">çµ‚äº†åˆ—</param>
         ''' <remarks></remarks>
         Public Sub getPrintArea(ByRef prmRefRow As Short, ByRef prmRefCol As Short, _
                                      ByRef prmRefRow2 As Short, ByRef prmRefCol2 As Short)
@@ -2404,26 +2404,26 @@ Namespace xls
         End Sub
 
         '===============================================================================
-        'ˆóüsƒ^ƒCƒgƒ‹İ’è
+        'å°åˆ·è¡Œã‚¿ã‚¤ãƒˆãƒ«è¨­å®š
         '===============================================================================
         ''' <summary>
-        ''' ˆóüsƒ^ƒCƒgƒ‹İ’è
+        ''' å°åˆ·è¡Œã‚¿ã‚¤ãƒˆãƒ«è¨­å®š
         ''' </summary>
-        ''' <param name="prmRow">ŠJns</param>
-        ''' <param name="prmRow2">I—¹s</param>
+        ''' <param name="prmRow">é–‹å§‹è¡Œ</param>
+        ''' <param name="prmRow2">çµ‚äº†è¡Œ</param>
         ''' <remarks></remarks>
         Public Sub setPrintTitleRows(ByVal prmRow As Short, ByVal prmRow2 As Short)
             _printTitleRows = Me.cbnCellStr("$" & prmRow, "$" & prmRow2)
         End Sub
 
         '===============================================================================
-        'ˆóüsƒ^ƒCƒgƒ‹æ“¾
+        'å°åˆ·è¡Œã‚¿ã‚¤ãƒˆãƒ«å–å¾—
         '===============================================================================
         ''' <summary>
-        ''' ˆóüsƒ^ƒCƒgƒ‹æ“¾
+        ''' å°åˆ·è¡Œã‚¿ã‚¤ãƒˆãƒ«å–å¾—
         ''' </summary>
-        ''' <param name="prmRefRow">ŠJns</param>
-        ''' <param name="prmRefRow2">I—¹s</param>
+        ''' <param name="prmRefRow">é–‹å§‹è¡Œ</param>
+        ''' <param name="prmRefRow2">çµ‚äº†è¡Œ</param>
         ''' <remarks></remarks>
         Public Sub getPrintTitleRows(ByRef prmRefRow As Short, ByRef prmRefRow2 As Short)
             Dim cell1 As String = ""
@@ -2434,26 +2434,26 @@ Namespace xls
         End Sub
 
         '===============================================================================
-        'ˆóü—ñƒ^ƒCƒgƒ‹İ’è
+        'å°åˆ·åˆ—ã‚¿ã‚¤ãƒˆãƒ«è¨­å®š
         '===============================================================================
         ''' <summary>
-        ''' ˆóü—ñƒ^ƒCƒgƒ‹İ’è
+        ''' å°åˆ·åˆ—ã‚¿ã‚¤ãƒˆãƒ«è¨­å®š
         ''' </summary>
-        ''' <param name="prmCol">ŠJn—ñ</param>
-        ''' <param name="prmCol2">I—¹—ñ</param>
+        ''' <param name="prmCol">é–‹å§‹åˆ—</param>
+        ''' <param name="prmCol2">çµ‚äº†åˆ—</param>
         ''' <remarks></remarks>
         Public Sub setPrintTitleColumns(ByVal prmCol As Short, ByVal prmCol2 As Short)
             _printTitleColumns = Me.cbnCellStr("$" & Me.convColFromR1C1(prmCol), "$" & Me.convColFromR1C1(prmCol2))
         End Sub
 
         '===============================================================================
-        'ˆóü—ñƒ^ƒCƒgƒ‹æ“¾
+        'å°åˆ·åˆ—ã‚¿ã‚¤ãƒˆãƒ«å–å¾—
         '===============================================================================
         ''' <summary>
-        ''' ˆóü—ñƒ^ƒCƒgƒ‹æ“¾
+        ''' å°åˆ·åˆ—ã‚¿ã‚¤ãƒˆãƒ«å–å¾—
         ''' </summary>
-        ''' <param name="prmRefCol">ŠJn—ñ</param>
-        ''' <param name="prmRefCol2">I—¹—ñ</param>
+        ''' <param name="prmRefCol">é–‹å§‹åˆ—</param>
+        ''' <param name="prmRefCol2">çµ‚äº†åˆ—</param>
         ''' <remarks></remarks>
         Public Sub getPrintTitleColumns(ByRef prmRefCol As Short, ByRef prmRefCol2 As Short)
             Dim cell1 As String = ""

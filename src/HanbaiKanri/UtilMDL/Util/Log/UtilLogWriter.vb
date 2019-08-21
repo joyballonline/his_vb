@@ -1,31 +1,31 @@
-Imports System.IO
+ï»¿Imports System.IO
 Imports System.Text
 
 
 Namespace Log
     '===============================================================================
     '
-    '  ƒ†[ƒeƒBƒŠƒeƒBƒNƒ‰ƒX
-    '    iƒNƒ‰ƒX–¼j    UtilLogWrier
-    '    iˆ—‹@”\–¼j      ƒƒOo—Í‹@”\‚ð’ñ‹Ÿ‚·‚é
-    '    i–{MDLŽg—p‘O’ñj   “Á‚É‚È‚µ
-    '    i”õlj            consoleWrite()‚ðFalse‚ÉÝ’è‚·‚é‚ÆƒRƒ“ƒ\[ƒ‹o—Í‚µ‚È‚­‚È‚é
+    '  ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£ã‚¯ãƒ©ã‚¹
+    '    ï¼ˆã‚¯ãƒ©ã‚¹åï¼‰    UtilLogWrier
+    '    ï¼ˆå‡¦ç†æ©Ÿèƒ½åï¼‰      ãƒ­ã‚°å‡ºåŠ›æ©Ÿèƒ½ã‚’æä¾›ã™ã‚‹
+    '    ï¼ˆæœ¬MDLä½¿ç”¨å‰æï¼‰   ç‰¹ã«ãªã—
+    '    ï¼ˆå‚™è€ƒï¼‰            consoleWrite()ã‚’Falseã«è¨­å®šã™ã‚‹ã¨ã‚³ãƒ³ã‚½ãƒ¼ãƒ«å‡ºåŠ›ã—ãªããªã‚‹
     '
     '===============================================================================
-    '  —š—ð  –¼‘O          “ú  •t      ƒ}[ƒN      “à—e
+    '  å±¥æ­´  åå‰          æ—¥  ä»˜      ãƒžãƒ¼ã‚¯      å†…å®¹
     '-------------------------------------------------------------------------------
-    '  (1)   Laevigata, Inc.    2006/04/17             V‹K
+    '  (1)   Laevigata, Inc.    2006/04/17             æ–°è¦
     '-------------------------------------------------------------------------------
     Public Class UtilLogWriter
 
         '===============================================================================
-        'ƒƒ“ƒo[•Ï”’è‹`
+        'ãƒ¡ãƒ³ãƒãƒ¼å¤‰æ•°å®šç¾©
         '===============================================================================
-        Private _fileNm As String           'ƒƒOƒtƒ@ƒCƒ‹–¼
-        Private _consoleWrite As Boolean    'ƒRƒ“ƒ\[ƒ‹o—Í‚·‚é‚©‚Ç‚¤‚©
+        Private _fileNm As String           'ãƒ­ã‚°ãƒ•ã‚¡ã‚¤ãƒ«å
+        Private _consoleWrite As Boolean    'ã‚³ãƒ³ã‚½ãƒ¼ãƒ«å‡ºåŠ›ã™ã‚‹ã‹ã©ã†ã‹
 
         '===============================================================================
-        'ƒvƒƒpƒeƒB(ƒAƒNƒZƒT)
+        'ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£(ã‚¢ã‚¯ã‚»ã‚µ)
         '===============================================================================
         Public ReadOnly Property fileNm() As String
             'Geter--------
@@ -33,7 +33,7 @@ Namespace Log
                 fileNm = _fileNm
             End Get
             'Setter-------
-            '‚È‚µ
+            'ãªã—
         End Property
         Public Property consoleWrite() As Boolean
             'Geter--------
@@ -44,9 +44,9 @@ Namespace Log
             Set(ByVal Value As Boolean)
                 Dim wkVal As String
                 If Value Then
-                    wkVal = "ƒRƒ“ƒ\[ƒ‹o—Í‚ðŠJŽn‚µ‚Ü‚·B"
+                    wkVal = "ã‚³ãƒ³ã‚½ãƒ¼ãƒ«å‡ºåŠ›ã‚’é–‹å§‹ã—ã¾ã™ã€‚"
                 Else
-                    wkVal = "ƒRƒ“ƒ\[ƒ‹o—Í‚ð’âŽ~‚µ‚Ü‚·B"
+                    wkVal = "ã‚³ãƒ³ã‚½ãƒ¼ãƒ«å‡ºåŠ›ã‚’åœæ­¢ã—ã¾ã™ã€‚"
                 End If
                 _consoleWrite = True
                 writeLine(wkVal)
@@ -55,15 +55,15 @@ Namespace Log
         End Property
 
         '===============================================================================
-        ' ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-        '   œ“ü—Íƒpƒ‰ƒƒ^   F  prmFileNm           Logƒtƒ@ƒCƒ‹–¼(ƒtƒ‹ƒpƒX)
-        '                       <prmConsoleWrite>   ƒRƒ“ƒ\[ƒ‹o—Í‚·‚é‚©‚Ç‚¤‚©
+        ' ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼š  prmFileNm           Logãƒ•ã‚¡ã‚¤ãƒ«å(ãƒ•ãƒ«ãƒ‘ã‚¹)
+        '                       <prmConsoleWrite>   ã‚³ãƒ³ã‚½ãƒ¼ãƒ«å‡ºåŠ›ã™ã‚‹ã‹ã©ã†ã‹
         '===============================================================================
         ''' <summary>
-        ''' ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        ''' ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         ''' </summary>
-        ''' <param name="prmFileNm">Logƒtƒ@ƒCƒ‹–¼(ƒtƒ‹ƒpƒX)</param>
-        ''' <param name="prmConsoleWrite">ƒRƒ“ƒ\[ƒ‹o—Í‚·‚é‚©‚Ç‚¤‚©</param>
+        ''' <param name="prmFileNm">Logãƒ•ã‚¡ã‚¤ãƒ«å(ãƒ•ãƒ«ãƒ‘ã‚¹)</param>
+        ''' <param name="prmConsoleWrite">ã‚³ãƒ³ã‚½ãƒ¼ãƒ«å‡ºåŠ›ã™ã‚‹ã‹ã©ã†ã‹</param>
         ''' <remarks></remarks>
         Public Sub New(ByVal prmFileNm As String, Optional ByVal prmConsoleWrite As Boolean = False)
             _fileNm = prmFileNm
@@ -71,55 +71,55 @@ Namespace Log
         End Sub
 
         '-------------------------------------------------------------------------------
-        '   ƒƒOo—Í
-        '   iˆ—ŠT—vjŽw’è‚³‚ê‚½•¶Žš—ñ‚ðƒƒOo—Í‚·‚é
-        '               ‘Ž®F‚Ps–Ú     YYYY/MM/DD HH:MM:DD   ƒGƒ‰[ƒR[ƒh•ƒGƒ‰[ƒƒbƒZ[ƒW
-        '   @@@            ‚Qs–Ú     ¨ SQL•¶‚È‚Ç’Ç‰ÁƒƒbƒZ[ƒW(Žw’èŽž‚Ì‚Ýo—Í)
-        '   œ“ü—Íƒpƒ‰ƒƒ^  FprmOutPut      o—ÍƒƒO
-        '                   F<prmOutPut2>   o—ÍƒƒO‚Q(SQL•¶‚È‚Ç‚ð‘z’è)@‰üsŒã‚Éo—Í
-        '   œƒƒ\ƒbƒh–ß‚è’l F‚È‚µ
-        '   œ”­¶—áŠO       FException
+        '   ãƒ­ã‚°å‡ºåŠ›
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰æŒ‡å®šã•ã‚ŒãŸæ–‡å­—åˆ—ã‚’ãƒ­ã‚°å‡ºåŠ›ã™ã‚‹
+        '               æ›¸å¼ï¼šï¼‘è¡Œç›®     YYYY/MM/DD HH:MM:DD   ã‚¨ãƒ©ãƒ¼ã‚³ãƒ¼ãƒ‰ï¼†ã‚¨ãƒ©ãƒ¼ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
+        '   ã€€ã€€ã€€            ï¼’è¡Œç›®     â†’ SQLæ–‡ãªã©è¿½åŠ ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸(æŒ‡å®šæ™‚ã®ã¿å‡ºåŠ›)
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿  ï¼šprmOutPut      å‡ºåŠ›ãƒ­ã‚°
+        '                   ï¼š<prmOutPut2>   å‡ºåŠ›ãƒ­ã‚°ï¼’(SQLæ–‡ãªã©ã‚’æƒ³å®š)ã€€æ”¹è¡Œå¾Œã«å‡ºåŠ›
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šãªã—
+        '   â—ç™ºç”Ÿä¾‹å¤–       ï¼šException
         '                                               2006.04.17 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ƒƒOo—Í Žw’è‚³‚ê‚½•¶Žš—ñ‚ðƒƒOo—Í‚·‚é
+        ''' ãƒ­ã‚°å‡ºåŠ› æŒ‡å®šã•ã‚ŒãŸæ–‡å­—åˆ—ã‚’ãƒ­ã‚°å‡ºåŠ›ã™ã‚‹
         ''' </summary>
-        ''' <param name="prmOutPut">YYYY/MM/DD HH:MM:DD   ƒGƒ‰[ƒR[ƒh•ƒGƒ‰[ƒƒbƒZ[ƒW</param>
-        ''' <param name="prmOutPut2">SQL•¶‚È‚Ç’Ç‰ÁƒƒbƒZ[ƒW(Žw’èŽž‚Ì‚Ýo—Í)</param>
+        ''' <param name="prmOutPut">YYYY/MM/DD HH:MM:DD   ã‚¨ãƒ©ãƒ¼ã‚³ãƒ¼ãƒ‰ï¼†ã‚¨ãƒ©ãƒ¼ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸</param>
+        ''' <param name="prmOutPut2">SQLæ–‡ãªã©è¿½åŠ ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸(æŒ‡å®šæ™‚ã®ã¿å‡ºåŠ›)</param>
         ''' <remarks></remarks>
         Public Sub writeLine(ByVal prmOutPut As String, _
                              Optional ByVal prmOutPut2 As String = "")
             Dim log As StreamWriter
             Dim outStr As String
             Try
-                'ƒƒOƒtƒ@ƒCƒ‹ƒI[ƒvƒ“
+                'ãƒ­ã‚°ãƒ•ã‚¡ã‚¤ãƒ«ã‚ªãƒ¼ãƒ—ãƒ³
                 log = New StreamWriter(_fileNm, True, Encoding.UTF8)
 
                 Try
-                    '•¶Žš—ñ•ÒW
+                    'æ–‡å­—åˆ—ç·¨é›†
                     outStr = Now.ToString("G") & Space(3) & prmOutPut
 
-                    'o—Í
+                    'å‡ºåŠ›
                     log.WriteLine(outStr)
                     Debug.WriteLine(outStr)
                     If _consoleWrite Then
-                        Console.WriteLine(outStr) 'ƒRƒ“ƒ\[ƒ‹o—Í
+                        Console.WriteLine(outStr) 'ã‚³ãƒ³ã‚½ãƒ¼ãƒ«å‡ºåŠ›
                     End If
 
-                    'ƒIƒvƒVƒ‡ƒ“ƒpƒ‰ƒƒ^‚ªÝ’è‚³‚ê‚Ä‚¢‚éê‡‚Í‚»‚¿‚ç‚ào—Í
+                    'ã‚ªãƒ—ã‚·ãƒ§ãƒ³ãƒ‘ãƒ©ãƒ¡ã‚¿ãŒè¨­å®šã•ã‚Œã¦ã„ã‚‹å ´åˆã¯ãã¡ã‚‰ã‚‚å‡ºåŠ›
                     If (Not prmOutPut2.Equals("")) Then
                         outStr = prmOutPut2
                         log.WriteLine(outStr)
                         Debug.WriteLine(outStr)
                         If _consoleWrite Then
-                            Console.WriteLine(outStr) 'ƒRƒ“ƒ\[ƒ‹o—Í
+                            Console.WriteLine(outStr) 'ã‚³ãƒ³ã‚½ãƒ¼ãƒ«å‡ºåŠ›
                         End If
                     End If
 
                 Catch ex As Exception
                     Throw ex
                 Finally
-                    'ƒtƒ@ƒCƒ‹ƒNƒ[ƒY
+                    'ãƒ•ã‚¡ã‚¤ãƒ«ã‚¯ãƒ­ãƒ¼ã‚º
                     log.Close()
                 End Try
 

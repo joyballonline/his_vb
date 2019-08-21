@@ -1,137 +1,137 @@
-Namespace DB
+ï»¿Namespace DB
 
     '===============================================================================
     '
-    '  ƒ†[ƒeƒBƒŠƒeƒBƒNƒ‰ƒX
-    '    iƒNƒ‰ƒX–¼j    UtilDBIf
-    '    iˆ—‹@”\–¼j     Util.DB‚É‚æ‚éDBƒAƒNƒZƒX‹@”\‚ÌI/F‚ğ’ñ‹Ÿ‚·‚é
-    '    i–{MDLg—p‘O’ñj  UtilDBIfƒCƒ“ƒ^[ƒtƒF[ƒX‚ğÀ‘•‚ğÀ‘•‚µ‚½DBƒAƒNƒZƒXƒNƒ‰ƒX‚ğ
-    '                       ƒvƒƒWƒFƒNƒg‚Éæ‚è‚ñ‚Å‚¢‚é‚±‚Æ
-    '    i”õlj           UtilDBIfƒCƒ“ƒ^[ƒtƒF[ƒX‚ğ’è‹`
+    '  ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£ã‚¯ãƒ©ã‚¹
+    '    ï¼ˆã‚¯ãƒ©ã‚¹åï¼‰    UtilDBIf
+    '    ï¼ˆå‡¦ç†æ©Ÿèƒ½åï¼‰     Util.DBã«ã‚ˆã‚‹DBã‚¢ã‚¯ã‚»ã‚¹æ©Ÿèƒ½ã®I/Fã‚’æä¾›ã™ã‚‹
+    '    ï¼ˆæœ¬MDLä½¿ç”¨å‰æï¼‰  UtilDBIfã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹ã‚’å®Ÿè£…ã‚’å®Ÿè£…ã—ãŸDBã‚¢ã‚¯ã‚»ã‚¹ã‚¯ãƒ©ã‚¹ã‚’
+    '                       ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã«å–ã‚Šè¾¼ã‚“ã§ã„ã‚‹ã“ã¨
+    '    ï¼ˆå‚™è€ƒï¼‰           UtilDBIfã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹ã‚’å®šç¾©
     '
     '===============================================================================
-    '  —š—ğ  –¼‘O          “ú  •t      ƒ}[ƒN      “à—e
+    '  å±¥æ­´  åå‰          æ—¥  ä»˜      ãƒãƒ¼ã‚¯      å†…å®¹
     '-------------------------------------------------------------------------------
-    '  (1)   Laevigata, Inc.    2006/05/10              V‹K
-    '  (2)   Laevigata, Inc.    2006/06/16              ’uŠ·ƒpƒ‰ƒ[ƒ^ƒNƒGƒŠ‘Î‰
-    '  (3)   Laevigata, Inc.    2010/08/26              SystemInfoƒe[ƒuƒ‹‚©‚ç‚Ìæ“¾‚É‘Î‰
+    '  (1)   Laevigata, Inc.    2006/05/10              æ–°è¦
+    '  (2)   Laevigata, Inc.    2006/06/16              ç½®æ›ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚¯ã‚¨ãƒªå¯¾å¿œ
+    '  (3)   Laevigata, Inc.    2010/08/26              SystemInfoãƒ†ãƒ¼ãƒ–ãƒ«ã‹ã‚‰ã®å–å¾—ã«å¯¾å¿œ
     '-------------------------------------------------------------------------------
     ''' <summary>
-    ''' Util.DB‚É‚æ‚éDBƒAƒNƒZƒX‹@”\‚ÌI/F‚ğ’ñ‹Ÿ‚·‚é
+    ''' Util.DBã«ã‚ˆã‚‹DBã‚¢ã‚¯ã‚»ã‚¹æ©Ÿèƒ½ã®I/Fã‚’æä¾›ã™ã‚‹
     ''' </summary>
-    ''' <remarks>–{I/F‚ğÀ‘•‚µ‚Ä‚¢‚éUtil.DB‚ÌDBƒAƒNƒZƒXƒNƒ‰ƒX‚ÌƒCƒ“ƒ^[ƒtƒF[ƒX‚ğ’ñ‹Ÿ‚·‚éB</remarks>
+    ''' <remarks>æœ¬I/Fã‚’å®Ÿè£…ã—ã¦ã„ã‚‹Util.DBã®DBã‚¢ã‚¯ã‚»ã‚¹ã‚¯ãƒ©ã‚¹ã®ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹ã‚’æä¾›ã™ã‚‹ã€‚</remarks>
     Public Interface UtilDBIf
 
-        'SystemInfo\‘¢‘Ì
+        'SystemInfoæ§‹é€ ä½“
         Structure sysinfoRec                    '2010.08.26 add by Laevigata, Inc. #SystemInfo
             Public fixKey As String
             Public variableKey As String
             Public stringValue1 As String
             Public stringValue2 As String
             Public stringValue3 As String
-            Public numericValue1 As String      '–{—ˆ”’lŒ^‚¾‚ªNULL‚Ìæ‚èˆµ‚¢‚ğl—¶‚µ‚ÄˆÓ}“I‚É•¶šŒ^‚Æ‚·‚é
-            Public numericValue2 As String      '–{—ˆ”’lŒ^‚¾‚ªNULL‚Ìæ‚èˆµ‚¢‚ğl—¶‚µ‚ÄˆÓ}“I‚É•¶šŒ^‚Æ‚·‚é
-            Public numericValue3 As String      '–{—ˆ”’lŒ^‚¾‚ªNULL‚Ìæ‚èˆµ‚¢‚ğl—¶‚µ‚ÄˆÓ}“I‚É•¶šŒ^‚Æ‚·‚é
-            Public dateValue1 As String         '–{—ˆ“ú•tŒ^‚¾‚ªNULL‚Ìæ‚èˆµ‚¢‚ğl—¶‚µ‚ÄˆÓ}“I‚É•¶šŒ^‚Æ‚·‚é
-            Public dateValue2 As String         '–{—ˆ“ú•tŒ^‚¾‚ªNULL‚Ìæ‚èˆµ‚¢‚ğl—¶‚µ‚ÄˆÓ}“I‚É•¶šŒ^‚Æ‚·‚é
-            Public dateValue3 As String         '–{—ˆ“ú•tŒ^‚¾‚ªNULL‚Ìæ‚èˆµ‚¢‚ğl—¶‚µ‚ÄˆÓ}“I‚É•¶šŒ^‚Æ‚·‚é
-            Public UpdDate As String            '–{—ˆ“ú•tŒ^‚¾‚ªNULL‚Ìæ‚èˆµ‚¢‚ğl—¶‚µ‚ÄˆÓ}“I‚É•¶šŒ^‚Æ‚·‚é
+            Public numericValue1 As String      'æœ¬æ¥æ•°å€¤å‹ã ãŒNULLã®å–ã‚Šæ‰±ã„ã‚’è€ƒæ…®ã—ã¦æ„å›³çš„ã«æ–‡å­—å‹ã¨ã™ã‚‹
+            Public numericValue2 As String      'æœ¬æ¥æ•°å€¤å‹ã ãŒNULLã®å–ã‚Šæ‰±ã„ã‚’è€ƒæ…®ã—ã¦æ„å›³çš„ã«æ–‡å­—å‹ã¨ã™ã‚‹
+            Public numericValue3 As String      'æœ¬æ¥æ•°å€¤å‹ã ãŒNULLã®å–ã‚Šæ‰±ã„ã‚’è€ƒæ…®ã—ã¦æ„å›³çš„ã«æ–‡å­—å‹ã¨ã™ã‚‹
+            Public dateValue1 As String         'æœ¬æ¥æ—¥ä»˜å‹ã ãŒNULLã®å–ã‚Šæ‰±ã„ã‚’è€ƒæ…®ã—ã¦æ„å›³çš„ã«æ–‡å­—å‹ã¨ã™ã‚‹
+            Public dateValue2 As String         'æœ¬æ¥æ—¥ä»˜å‹ã ãŒNULLã®å–ã‚Šæ‰±ã„ã‚’è€ƒæ…®ã—ã¦æ„å›³çš„ã«æ–‡å­—å‹ã¨ã™ã‚‹
+            Public dateValue3 As String         'æœ¬æ¥æ—¥ä»˜å‹ã ãŒNULLã®å–ã‚Šæ‰±ã„ã‚’è€ƒæ…®ã—ã¦æ„å›³çš„ã«æ–‡å­—å‹ã¨ã™ã‚‹
+            Public UpdDate As String            'æœ¬æ¥æ—¥ä»˜å‹ã ãŒNULLã®å–ã‚Šæ‰±ã„ã‚’è€ƒæ…®ã—ã¦æ„å›³çš„ã«æ–‡å­—å‹ã¨ã™ã‚‹
             Public Memo As String
         End Structure
 
         '===============================================================================
-        'ƒvƒƒpƒeƒB(ƒAƒNƒZƒT)
+        'ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£(ã‚¢ã‚¯ã‚»ã‚µ)
         '===============================================================================
         ''' <summary>
-        ''' ƒgƒ‰ƒ“ƒUƒNƒVƒ‡ƒ“’†‚©‚Ç‚¤‚©‚ğ¦‚·
+        ''' ãƒˆãƒ©ãƒ³ã‚¶ã‚¯ã‚·ãƒ§ãƒ³ä¸­ã‹ã©ã†ã‹ã‚’ç¤ºã™
         ''' </summary>
-        ''' <value>‚È‚µ</value>
+        ''' <value>ãªã—</value>
         ''' <returns>True/False</returns>
-        ''' <remarks>ƒgƒ‰ƒ“ƒUƒNƒVƒ‡ƒ“‚ªŠJn‚³‚ê‚Ä‚¢‚éê‡‚ÉTrue‚ğ–ß‚·B</remarks>
+        ''' <remarks>ãƒˆãƒ©ãƒ³ã‚¶ã‚¯ã‚·ãƒ§ãƒ³ãŒé–‹å§‹ã•ã‚Œã¦ã„ã‚‹å ´åˆã«Trueã‚’æˆ»ã™ã€‚</remarks>
         ReadOnly Property isTransactionOpen() As Boolean
 
         '-------------------------------------------------------------------------------
-        '   DBØ’f
-        '   iˆ—ŠT—vjDBÚ‘±‚ğƒNƒ[ƒY‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^  F‚È‚µ
-        '   œƒƒ\ƒbƒh–ß‚è’lF‚È‚µ
+        '   DBåˆ‡æ–­
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰DBæ¥ç¶šã‚’ã‚¯ãƒ­ãƒ¼ã‚ºã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿  ï¼šãªã—
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ï¼šãªã—
         '                                               2006.05.23 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' DBØ’f
+        ''' DBåˆ‡æ–­
         ''' </summary>
-        ''' <remarks>DBƒRƒlƒNƒVƒ‡ƒ“‚ğ•Â‚¶AƒRƒlƒNƒVƒ‡ƒ“ƒIƒuƒWƒFƒNƒg‚ğ”jŠü‚·‚éB</remarks>
+        ''' <remarks>DBã‚³ãƒã‚¯ã‚·ãƒ§ãƒ³ã‚’é–‰ã˜ã€ã‚³ãƒã‚¯ã‚·ãƒ§ãƒ³ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç ´æ£„ã™ã‚‹ã€‚</remarks>
         Sub close()
 
         '-------------------------------------------------------------------------------
-        '   ƒgƒ‰ƒ“ƒUƒNƒVƒ‡ƒ“ŠJn
-        '   iˆ—ŠT—v)@ƒgƒ‰ƒ“ƒUƒNƒVƒ‡ƒ“‚ğŠJn‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^  F‚È‚µ
-        '   œƒƒ\ƒbƒh–ß‚è’lF‚È‚µ
+        '   ãƒˆãƒ©ãƒ³ã‚¶ã‚¯ã‚·ãƒ§ãƒ³é–‹å§‹
+        '   ï¼ˆå‡¦ç†æ¦‚è¦)ã€€ãƒˆãƒ©ãƒ³ã‚¶ã‚¯ã‚·ãƒ§ãƒ³ã‚’é–‹å§‹ã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿  ï¼šãªã—
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ï¼šãªã—
         '                                               2006.05.23 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ƒgƒ‰ƒ“ƒUƒNƒVƒ‡ƒ“ŠJn
+        ''' ãƒˆãƒ©ãƒ³ã‚¶ã‚¯ã‚·ãƒ§ãƒ³é–‹å§‹
         ''' </summary>
-        ''' <remarks>ƒgƒ‰ƒ“ƒUƒNƒVƒ‡ƒ“‚ğŠJn‚·‚éB</remarks>
+        ''' <remarks>ãƒˆãƒ©ãƒ³ã‚¶ã‚¯ã‚·ãƒ§ãƒ³ã‚’é–‹å§‹ã™ã‚‹ã€‚</remarks>
         Sub beginTran()
 
         '-------------------------------------------------------------------------------
-        '   ƒgƒ‰ƒ“ƒUƒNƒVƒ‡ƒ“I—¹
-        '   iˆ—ŠT—v)@ƒgƒ‰ƒ“ƒUƒNƒVƒ‡ƒ“‚ğCommit‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^  F‚È‚µ
-        '   œƒƒ\ƒbƒh–ß‚è’lF‚È‚µ
+        '   ãƒˆãƒ©ãƒ³ã‚¶ã‚¯ã‚·ãƒ§ãƒ³çµ‚äº†
+        '   ï¼ˆå‡¦ç†æ¦‚è¦)ã€€ãƒˆãƒ©ãƒ³ã‚¶ã‚¯ã‚·ãƒ§ãƒ³ã‚’Commitã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿  ï¼šãªã—
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ï¼šãªã—
         '                                               2006.05.23 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ƒgƒ‰ƒ“ƒUƒNƒVƒ‡ƒ“Šm’è
+        ''' ãƒˆãƒ©ãƒ³ã‚¶ã‚¯ã‚·ãƒ§ãƒ³ç¢ºå®š
         ''' </summary>
-        ''' <remarks>Commit‚ğ”­s‚µAƒgƒ‰ƒ“ƒUƒNƒVƒ‡ƒ“‚ğ•Â‚¶‚éB</remarks>
+        ''' <remarks>Commitã‚’ç™ºè¡Œã—ã€ãƒˆãƒ©ãƒ³ã‚¶ã‚¯ã‚·ãƒ§ãƒ³ã‚’é–‰ã˜ã‚‹ã€‚</remarks>
         Sub commitTran()
 
         '-------------------------------------------------------------------------------
-        '   ƒgƒ‰ƒ“ƒUƒNƒVƒ‡ƒ“”jŠü
-        '   iˆ—ŠT—v)@ƒgƒ‰ƒ“ƒUƒNƒVƒ‡ƒ“‚ğRollback‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^  F‚È‚µ
-        '   œƒƒ\ƒbƒh–ß‚è’lF‚È‚µ
+        '   ãƒˆãƒ©ãƒ³ã‚¶ã‚¯ã‚·ãƒ§ãƒ³ç ´æ£„
+        '   ï¼ˆå‡¦ç†æ¦‚è¦)ã€€ãƒˆãƒ©ãƒ³ã‚¶ã‚¯ã‚·ãƒ§ãƒ³ã‚’Rollbackã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿  ï¼šãªã—
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ï¼šãªã—
         '                                               2006.05.23 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ƒgƒ‰ƒ“ƒUƒNƒVƒ‡ƒ“”jŠü
+        ''' ãƒˆãƒ©ãƒ³ã‚¶ã‚¯ã‚·ãƒ§ãƒ³ç ´æ£„
         ''' </summary>
-        ''' <remarks>RollBack‚ğ”­s‚µAƒgƒ‰ƒ“ƒUƒNƒVƒ‡ƒ“‚ğ•Â‚¶‚éB</remarks>
+        ''' <remarks>RollBackã‚’ç™ºè¡Œã—ã€ãƒˆãƒ©ãƒ³ã‚¶ã‚¯ã‚·ãƒ§ãƒ³ã‚’é–‰ã˜ã‚‹ã€‚</remarks>
         Sub rollbackTran()
 
         '-------------------------------------------------------------------------------
-        '   Select•¶”­s
-        '   iˆ—ŠT—vjSelect•¶‚ğ”­s‚µADataSet‚ğ•Ô‹p‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^  FprmSQL        Select•¶
-        '                  FprmTblName     •Ô‹p‚³‚ê‚éDataSet‚ÌTBL–¼Ì
-        '                  F<prmRefRecCnt> æ“¾Œ”
-        '   œƒƒ\ƒbƒh–ß‚è’lFDataSet
-        '   œ”õl          F•Ô‹p‚·‚éDataSet‚ÍprmTblName‚ÌTBL–¼Ì‚ÅŠi”[
+        '   Selectæ–‡ç™ºè¡Œ
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰Selectæ–‡ã‚’ç™ºè¡Œã—ã€DataSetã‚’è¿”å´ã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿  ï¼šprmSQL        Selectæ–‡
+        '                  ï¼šprmTblName     è¿”å´ã•ã‚Œã‚‹DataSetã®TBLåç§°
+        '                  ï¼š<prmRefRecCnt> å–å¾—ä»¶æ•°
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ï¼šDataSet
+        '   â—å‚™è€ƒ          ï¼šè¿”å´ã™ã‚‹DataSetã¯prmTblNameã®TBLåç§°ã§æ ¼ç´
         '                                               2006.05.23 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' SELECT•¶‚ğ”­s‚·‚é
+        ''' SELECTæ–‡ã‚’ç™ºè¡Œã™ã‚‹
         ''' </summary>
-        ''' <param name="prmSQL">”­s‚·‚éSELECT•¶</param>
-        ''' <param name="prmTblName">•Ô‹p‚³‚ê‚éDataSet‚ÌTABLE–¼Ì</param>
-        ''' <param name="prmRefRecCnt">È—ª‰Â”\FSELECT•¶‚Ìæ“¾ƒŒƒR[ƒhŒ”</param>
-        ''' <returns>æ“¾‚µ‚½ƒŒƒR[ƒhƒZƒbƒg‚ğDataSetƒIƒuƒWƒFƒNƒg‚Æ‚µ‚Ä•Ô‹p</returns>
-        ''' <remarks>SELECT•¶‚ğ”­s‚µAƒŒƒR[ƒhƒZƒbƒg‚ğæ“¾‚·‚éBæ“¾‚µ‚½ƒŒƒR[ƒhƒZƒbƒg‚ÍDataSetƒIƒuƒWƒFƒNƒg‚Æ‚µ‚Ä•Ô‹p‚·‚éB</remarks>
+        ''' <param name="prmSQL">ç™ºè¡Œã™ã‚‹SELECTæ–‡</param>
+        ''' <param name="prmTblName">è¿”å´ã•ã‚Œã‚‹DataSetã®TABLEåç§°</param>
+        ''' <param name="prmRefRecCnt">çœç•¥å¯èƒ½ï¼šSELECTæ–‡ã®å–å¾—ãƒ¬ã‚³ãƒ¼ãƒ‰ä»¶æ•°</param>
+        ''' <returns>å–å¾—ã—ãŸãƒ¬ã‚³ãƒ¼ãƒ‰ã‚»ãƒƒãƒˆã‚’DataSetã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¨ã—ã¦è¿”å´</returns>
+        ''' <remarks>SELECTæ–‡ã‚’ç™ºè¡Œã—ã€ãƒ¬ã‚³ãƒ¼ãƒ‰ã‚»ãƒƒãƒˆã‚’å–å¾—ã™ã‚‹ã€‚å–å¾—ã—ãŸãƒ¬ã‚³ãƒ¼ãƒ‰ã‚»ãƒƒãƒˆã¯DataSetã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¨ã—ã¦è¿”å´ã™ã‚‹ã€‚</remarks>
         Function selectDB(ByVal prmSQL As String, ByVal prmTblName As String, Optional ByRef prmRefRecCnt As Integer = 0) As DataSet
 
         '-------------------------------------------------------------------------------
-        '   Select•¶”­s
-        '   iˆ—ŠT—vj’uŠ·ƒpƒ‰ƒ[ƒ^•t‚«Select•¶‚ğ”­s‚µADataSet‚ğ•Ô‹p‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^  FprmSQL            ƒpƒ‰ƒ[ƒ^•t‚«Select•¶(’uŠ·ƒpƒ‰ƒƒ^‚Íu?v)
-        '                   FprmParameters     ’uŠ·ƒpƒ‰ƒ[ƒ^ƒŠƒXƒg
-        '                   FprmTblName        •Ô‹p‚³‚ê‚éDataSet‚ÌTBL–¼Ì
-        '                   F<prmRefRecCnt>    æ“¾Œ”
-        '   œƒƒ\ƒbƒh–ß‚è’lFDataSet
-        '   œ”õl          F•Ô‹p‚·‚éDataSet‚ÍprmTblName‚ÌTBL–¼Ì‚ÅŠi”[
-        '   œg—p—á
+        '   Selectæ–‡ç™ºè¡Œ
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰ç½®æ›ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ä»˜ãSelectæ–‡ã‚’ç™ºè¡Œã—ã€DataSetã‚’è¿”å´ã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿  ï¼šprmSQL            ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ä»˜ãSelectæ–‡(ç½®æ›ãƒ‘ãƒ©ãƒ¡ã‚¿ã¯ã€Œ?ã€)
+        '                   ï¼šprmParameters     ç½®æ›ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒªã‚¹ãƒˆ
+        '                   ï¼šprmTblName        è¿”å´ã•ã‚Œã‚‹DataSetã®TBLåç§°
+        '                   ï¼š<prmRefRecCnt>    å–å¾—ä»¶æ•°
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ï¼šDataSet
+        '   â—å‚™è€ƒ          ï¼šè¿”å´ã™ã‚‹DataSetã¯prmTblNameã®TBLåç§°ã§æ ¼ç´
+        '   â—ä½¿ç”¨ä¾‹
         '                     Dim rtnCnt As Integer = 0
         '                     Dim listPrm As List(Of UtilDBPrm) = New List(Of UtilDBPrm)
         '                         listPrm.Add(New UtilDBPrm(1, , UtilDBPrm.parameterType.tNumber))
@@ -147,70 +147,70 @@ Namespace DB
         '                                               2006.06.16 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ’uŠ·ƒpƒ‰ƒ[ƒ^•t‚«SELECT•¶‚ğ”­s‚·‚é (Ú×‚Íg—p—áQÆ)
+        ''' ç½®æ›ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ä»˜ãSELECTæ–‡ã‚’ç™ºè¡Œã™ã‚‹ (è©³ç´°ã¯ä½¿ç”¨ä¾‹å‚ç…§)
         ''' </summary>
-        ''' <param name="prmSQL">ƒpƒ‰ƒ[ƒ^•t‚«Select•¶(’uŠ·ƒpƒ‰ƒƒ^‚Íu?v)</param>
-        ''' <param name="prmParameters">’uŠ·ƒpƒ‰ƒ[ƒ^ƒŠƒXƒg</param>
-        ''' <param name="prmTblName">•Ô‹p‚³‚ê‚éDataSet‚ÌTABLE–¼Ì</param>
-        ''' <param name="prmRefRecCnt">È—ª‰Â”\FSELECT•¶‚Ìæ“¾ƒŒƒR[ƒhŒ”</param>
-        ''' <returns>æ“¾‚µ‚½ƒŒƒR[ƒhƒZƒbƒg‚ğDataSetƒIƒuƒWƒFƒNƒg‚Æ‚µ‚Ä•Ô‹p</returns>
-        ''' <remarks>SELECT•¶‚ğ”­s‚µAƒŒƒR[ƒhƒZƒbƒg‚ğæ“¾‚·‚éBæ“¾‚µ‚½ƒŒƒR[ƒhƒZƒbƒg‚ÍDataSetƒIƒuƒWƒFƒNƒg‚Æ‚µ‚Ä•Ô‹p‚·‚éB</remarks>
+        ''' <param name="prmSQL">ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ä»˜ãSelectæ–‡(ç½®æ›ãƒ‘ãƒ©ãƒ¡ã‚¿ã¯ã€Œ?ã€)</param>
+        ''' <param name="prmParameters">ç½®æ›ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒªã‚¹ãƒˆ</param>
+        ''' <param name="prmTblName">è¿”å´ã•ã‚Œã‚‹DataSetã®TABLEåç§°</param>
+        ''' <param name="prmRefRecCnt">çœç•¥å¯èƒ½ï¼šSELECTæ–‡ã®å–å¾—ãƒ¬ã‚³ãƒ¼ãƒ‰ä»¶æ•°</param>
+        ''' <returns>å–å¾—ã—ãŸãƒ¬ã‚³ãƒ¼ãƒ‰ã‚»ãƒƒãƒˆã‚’DataSetã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¨ã—ã¦è¿”å´</returns>
+        ''' <remarks>SELECTæ–‡ã‚’ç™ºè¡Œã—ã€ãƒ¬ã‚³ãƒ¼ãƒ‰ã‚»ãƒƒãƒˆã‚’å–å¾—ã™ã‚‹ã€‚å–å¾—ã—ãŸãƒ¬ã‚³ãƒ¼ãƒ‰ã‚»ãƒƒãƒˆã¯DataSetã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¨ã—ã¦è¿”å´ã™ã‚‹ã€‚</remarks>
         Function selectDB(ByVal prmSQL As String,
                           ByVal prmParameters As List(Of UtilDBPrm),
                           ByVal prmTblName As String,
                           Optional ByRef prmRefRecCnt As Integer = 0) As DataSet
 
         '-------------------------------------------------------------------------------
-        '   XVSQL•¶”­s
-        '   iˆ—ŠT—vjInsert/Update/Delete•¶‚ğ”­s‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^  FprmSQL        SQL•¶
-        '   œƒƒ\ƒbƒh–ß‚è’lF‚È‚µ
+        '   æ›´æ–°SQLæ–‡ç™ºè¡Œ
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰Insert/Update/Deleteæ–‡ã‚’ç™ºè¡Œã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿  ï¼šprmSQL        SQLæ–‡
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ï¼šãªã—
         '                                               2006.05.23 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ÀsŒnSQL‚ğ”­s‚·‚é
+        ''' å®Ÿè¡Œç³»SQLã‚’ç™ºè¡Œã™ã‚‹
         ''' </summary>
-        ''' <param name="prmSQL">”­s‚·‚éSQL•¶</param>
-        ''' <remarks>ƒŒƒR[ƒhƒZƒbƒg‚ğ¶¬‚µ‚È‚¢SQL(INSERT/UPDATE/DELETEcetc)‚ğ”­s‚·‚éB</remarks>
+        ''' <param name="prmSQL">ç™ºè¡Œã™ã‚‹SQLæ–‡</param>
+        ''' <remarks>ãƒ¬ã‚³ãƒ¼ãƒ‰ã‚»ãƒƒãƒˆã‚’ç”Ÿæˆã—ãªã„SQL(INSERT/UPDATE/DELETEâ€¦etc)ã‚’ç™ºè¡Œã™ã‚‹ã€‚</remarks>
         Sub executeDB(ByVal prmSQL As String)
 
         '-------------------------------------------------------------------------------
-        '   XVSQL•¶”­s
-        '   iˆ—ŠT—vjInsert/Update/Delete•¶‚ğ”­s‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^  FprmSQL                SQL•¶
-        '                   FprmRefAffectedRows    ‰e‹¿‚ğó‚¯‚½s”
-        '   œƒƒ\ƒbƒh–ß‚è’lF‚È‚µ
+        '   æ›´æ–°SQLæ–‡ç™ºè¡Œ
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰Insert/Update/Deleteæ–‡ã‚’ç™ºè¡Œã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿  ï¼šprmSQL                SQLæ–‡
+        '                   ï¼šprmRefAffectedRows    å½±éŸ¿ã‚’å—ã‘ãŸè¡Œæ•°
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ï¼šãªã—
         '                                               2006.06.23 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ÀsŒnSQL‚ğ”­s‚·‚éi‰e‹¿Œ”ˆø”•t‚«j
+        ''' å®Ÿè¡Œç³»SQLã‚’ç™ºè¡Œã™ã‚‹ï¼ˆå½±éŸ¿ä»¶æ•°å¼•æ•°ä»˜ãï¼‰
         ''' </summary>
-        ''' <param name="prmSQL">”­s‚·‚éSQL•¶</param>
-        ''' <param name="prmRefAffectedRows">‰e‹¿‚ğó‚¯‚½s”</param>
-        ''' <remarks>ƒŒƒR[ƒhƒZƒbƒg‚ğ¶¬‚µ‚È‚¢SQL(INSERT/UPDATE/DELETEcetc)‚ğ”­s‚·‚éB</remarks>
+        ''' <param name="prmSQL">ç™ºè¡Œã™ã‚‹SQLæ–‡</param>
+        ''' <param name="prmRefAffectedRows">å½±éŸ¿ã‚’å—ã‘ãŸè¡Œæ•°</param>
+        ''' <remarks>ãƒ¬ã‚³ãƒ¼ãƒ‰ã‚»ãƒƒãƒˆã‚’ç”Ÿæˆã—ãªã„SQL(INSERT/UPDATE/DELETEâ€¦etc)ã‚’ç™ºè¡Œã™ã‚‹ã€‚</remarks>
         Sub executeDB(ByVal prmSQL As String, ByRef prmRefAffectedRows As Integer)
 
         '-------------------------------------------------------------------------------
-        '   XVSQL•¶”­s
-        '   iˆ—ŠT—vj’uŠ·ƒpƒ‰ƒ[ƒ^•t‚«ÀsŒnSQL‚ğ”­s‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^  FprmSQL        SQL•¶
-        '                   FprmParameters ’uŠ·ƒpƒ‰ƒ[ƒ^ƒŠƒXƒg
-        '   œƒƒ\ƒbƒh–ß‚è’lF‚È‚µ
-        '   œg—p—á
-        '                     'ƒpƒ‰ƒƒ^İ’è
+        '   æ›´æ–°SQLæ–‡ç™ºè¡Œ
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰ç½®æ›ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ä»˜ãå®Ÿè¡Œç³»SQLã‚’ç™ºè¡Œã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿  ï¼šprmSQL        SQLæ–‡
+        '                   ï¼šprmParameters ç½®æ›ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒªã‚¹ãƒˆ
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ï¼šãªã—
+        '   â—ä½¿ç”¨ä¾‹
+        '                     'ãƒ‘ãƒ©ãƒ¡ã‚¿è¨­å®š
         '                     Dim listPrm As List(Of UtilDBPrm) = New List(Of UtilDBPrm)
-        '                     listPrm.Add(New UtilDBPrm(Nothing, 255, UtilDBPrm.parameterType.tVarchar, UtilDBPrm.parameterDirection.dReturn)) '–ß‚è’l
-        '                     listPrm.Add(New UtilDBPrm(10, , UtilDBPrm.parameterType.tNumber, UtilDBPrm.parameterDirection.dInput))           '‡@
-        '                     listPrm.Add(New UtilDBPrm(Nothing, , UtilDBPrm.parameterType.tNumber, UtilDBPrm.parameterDirection.dOutput))     '‡A
-        '                     listPrm.Add(New UtilDBPrm(30, , UtilDBPrm.parameterType.tNumber, UtilDBPrm.parameterDirection.dInputOutput))     '‡B
-        '                     listPrm.Add(New UtilDBPrm(Nothing, , UtilDBPrm.parameterType.tDate, UtilDBPrm.parameterDirection.dOutput))       '‡C
-        '                     listPrm.Add(New UtilDBPrm("’uŠ·ƒpƒ‰ƒƒ^ƒNƒGƒŠÀsƒeƒXƒg", _
-        '                                                       14, UtilDBPrm.parameterType.tVarchar, UtilDBPrm.parameterDirection.dInput))    '‡D
-        '                     'Às
+        '                     listPrm.Add(New UtilDBPrm(Nothing, 255, UtilDBPrm.parameterType.tVarchar, UtilDBPrm.parameterDirection.dReturn)) 'æˆ»ã‚Šå€¤
+        '                     listPrm.Add(New UtilDBPrm(10, , UtilDBPrm.parameterType.tNumber, UtilDBPrm.parameterDirection.dInput))           'â‘ 
+        '                     listPrm.Add(New UtilDBPrm(Nothing, , UtilDBPrm.parameterType.tNumber, UtilDBPrm.parameterDirection.dOutput))     'â‘¡
+        '                     listPrm.Add(New UtilDBPrm(30, , UtilDBPrm.parameterType.tNumber, UtilDBPrm.parameterDirection.dInputOutput))     'â‘¢
+        '                     listPrm.Add(New UtilDBPrm(Nothing, , UtilDBPrm.parameterType.tDate, UtilDBPrm.parameterDirection.dOutput))       'â‘£
+        '                     listPrm.Add(New UtilDBPrm("ç½®æ›ãƒ‘ãƒ©ãƒ¡ã‚¿ã‚¯ã‚¨ãƒªå®Ÿè¡Œãƒ†ã‚¹ãƒˆ", _
+        '                                                       14, UtilDBPrm.parameterType.tVarchar, UtilDBPrm.parameterDirection.dInput))    'â‘¤
+        '                     'å®Ÿè¡Œ
         '                     _db.executeDB("BEGIN ? := TESTFUNC(?,?,?,?,?); END;", listPrm)
         '
-        '                     'Œ‹‰ÊŠm”F
-        '                     Debug.WriteLine("–ß‚è’l=" & listPrm(0).value)
+        '                     'çµæœç¢ºèª
+        '                     Debug.WriteLine("æˆ»ã‚Šå€¤=" & listPrm(0).value)
         '                     Debug.WriteLine("prm1  =" & listPrm(1).value)
         '                     Debug.WriteLine("prm2  =" & listPrm(2).value)
         '                     Debug.WriteLine("prm3  =" & listPrm(3).value)
@@ -218,7 +218,7 @@ Namespace DB
         '                     Debug.WriteLine("prm5  =" & listPrm(5).value)
         '
         '
-        '                     ===ÀsƒXƒgƒAƒh==========================
+        '                     ===å®Ÿè¡Œã‚¹ãƒˆã‚¢ãƒ‰==========================
         '                     CREATE OR REPLACE FUNCTION TESTFUNC(
         '                     	 INPRM 		IN		NUMBER
         '                     	,OUTPRM		OUT		NUMBER
@@ -230,109 +230,109 @@ Namespace DB
         '                     IS
         '                     	WK	DATE;
         '                     BEGIN
-        '                         INOUTPRM := INOUTPRM * 2;             --INOUTPRM‚ğ‚Q”{
-        '                         OUTPRM := INPRM + 1;                  --INPRM‚É‚P‚ğ‰Á‚¦‚ÄOUTPRM‚Éİ’è
-        '                         SELECT SYSDATE INTO DTPRM FROM DUAL;  --DTPRM‚ÉƒVƒXƒeƒ€“ú•t‚ğİ’è
-        '                         RETURN VCPRM || '‚ğÀs‚µ‚Ü‚µ‚½B';   --–ß‚è’l‚ÉVCPRM{ƒ¿‚ğİ’è
+        '                         INOUTPRM := INOUTPRM * 2;             --INOUTPRMã‚’ï¼’å€
+        '                         OUTPRM := INPRM + 1;                  --INPRMã«ï¼‘ã‚’åŠ ãˆã¦OUTPRMã«è¨­å®š
+        '                         SELECT SYSDATE INTO DTPRM FROM DUAL;  --DTPRMã«ã‚·ã‚¹ãƒ†ãƒ æ—¥ä»˜ã‚’è¨­å®š
+        '                         RETURN VCPRM || 'ã‚’å®Ÿè¡Œã—ã¾ã—ãŸã€‚';   --æˆ»ã‚Šå€¤ã«VCPRMï¼‹Î±ã‚’è¨­å®š
         '                     END;
         '                     /
         '                     =========================================
         '                                               2006.06.16 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ’uŠ·ƒpƒ‰ƒ[ƒ^•t‚«ÀsŒnSQL‚ğ”­s‚·‚é (Ú×‚Íg—p—áQÆ)
+        ''' ç½®æ›ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ä»˜ãå®Ÿè¡Œç³»SQLã‚’ç™ºè¡Œã™ã‚‹ (è©³ç´°ã¯ä½¿ç”¨ä¾‹å‚ç…§)
         ''' </summary>
-        ''' <param name="prmSQL">ƒpƒ‰ƒ[ƒ^•t‚«SQL•¶</param>
-        ''' <param name="prmRefParameters">’uŠ·ƒpƒ‰ƒ[ƒ^ƒŠƒXƒg</param>
-        ''' <remarks>ƒXƒgƒAƒhÀs‚È‚Ç‚ğ‘z’è(‚»‚êˆÈŠO‚àÀs‰Â”\)</remarks>
+        ''' <param name="prmSQL">ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ä»˜ãSQLæ–‡</param>
+        ''' <param name="prmRefParameters">ç½®æ›ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒªã‚¹ãƒˆ</param>
+        ''' <remarks>ã‚¹ãƒˆã‚¢ãƒ‰å®Ÿè¡Œãªã©ã‚’æƒ³å®š(ãã‚Œä»¥å¤–ã‚‚å®Ÿè¡Œå¯èƒ½)</remarks>
         Sub executeDB(ByVal prmSQL As String, ByRef prmRefParameters As List(Of UtilDBPrm))
 
         '-------------------------------------------------------------------------------
-        '   ƒVƒ“ƒOƒ‹ƒNƒH[ƒg•¶š—ñ‰»
-        '   iˆ—ŠT—vjƒVƒ“ƒOƒ‹ƒNƒH[ƒg‚ğu''v‚É’uŠ·‚µ‚Ä•Ô‹p
-        '   œ“ü—Íƒpƒ‰ƒƒ^  FprmSQL     Select•¶
-        '   œƒƒ\ƒbƒh–ß‚è’lF’uŠ·ŒãSQL•¶š—ñ
+        '   ã‚·ãƒ³ã‚°ãƒ«ã‚¯ã‚©ãƒ¼ãƒˆæ–‡å­—åˆ—åŒ–
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰ã‚·ãƒ³ã‚°ãƒ«ã‚¯ã‚©ãƒ¼ãƒˆã‚’ã€Œ''ã€ã«ç½®æ›ã—ã¦è¿”å´
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿  ï¼šprmSQL     Selectæ–‡
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ï¼šç½®æ›å¾ŒSQLæ–‡å­—åˆ—
         '                                               2006.05.23 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ƒVƒ“ƒOƒ‹ƒNƒH[ƒe[ƒVƒ‡ƒ“•¶š—ñ‰»
+        ''' ã‚·ãƒ³ã‚°ãƒ«ã‚¯ã‚©ãƒ¼ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³æ–‡å­—åˆ—åŒ–
         ''' </summary>
-        ''' <param name="prmSQL">’uŠ·‘ÎÛSQL•¶š—ñ</param>
-        ''' <returns>’uŠ·Œã‚ÌSQL•¶š—ñ</returns>
-        ''' <remarks>ƒVƒ“ƒOƒ‹ƒNƒH[ƒe[ƒVƒ‡ƒ“‚ğ•¶š—ñ‰»‚µASQLƒCƒ“ƒWƒFƒNƒVƒ‡ƒ“‘Îô‚¨‚æ‚Ñƒf[ƒ^“o˜^‰Â”\‚Æ‚·‚éB</remarks>
+        ''' <param name="prmSQL">ç½®æ›å¯¾è±¡SQLæ–‡å­—åˆ—</param>
+        ''' <returns>ç½®æ›å¾Œã®SQLæ–‡å­—åˆ—</returns>
+        ''' <remarks>ã‚·ãƒ³ã‚°ãƒ«ã‚¯ã‚©ãƒ¼ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ã‚’æ–‡å­—åˆ—åŒ–ã—ã€SQLã‚¤ãƒ³ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³å¯¾ç­–ãŠã‚ˆã³ãƒ‡ãƒ¼ã‚¿ç™»éŒ²å¯èƒ½ã¨ã™ã‚‹ã€‚</remarks>
         Function rmSQ(ByVal prmSQL As String) As String
 
         '-------------------------------------------------------------------------------
-        '   NullË•¶š—ñ
+        '   Nullâ‡’æ–‡å­—åˆ—
         '                                               2006.05.23 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' Null‚Ì•¶š—ñ’uŠ·
+        ''' Nullã®æ–‡å­—åˆ—ç½®æ›
         ''' </summary>
-        ''' <param name="prmField">ƒtƒB[ƒ‹ƒh’l</param>
-        ''' <returns>’uŠ·Œã•¶š—ñ</returns>
-        ''' <remarks>Null‚ÌƒtƒB[ƒ‹ƒh’l‚ğ""(’·‚³0•¶š—ñ)‚Ö’uŠ·‚·‚éB</remarks>
+        ''' <param name="prmField">ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰å€¤</param>
+        ''' <returns>ç½®æ›å¾Œæ–‡å­—åˆ—</returns>
+        ''' <remarks>Nullã®ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰å€¤ã‚’""(é•·ã•0æ–‡å­—åˆ—)ã¸ç½®æ›ã™ã‚‹ã€‚</remarks>
         Function rmNullStr(ByVal prmField As Object) As String
 
         '-------------------------------------------------------------------------------
-        '   NullËShort
+        '   Nullâ‡’Short
         '                                               2006.05.23 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' Null‚Ì”’l’uŠ·(ShortŒ^)
+        ''' Nullã®æ•°å€¤ç½®æ›(Shortå‹)
         ''' </summary>
-        ''' <param name="prmField">ƒtƒB[ƒ‹ƒh’l</param>
-        ''' <returns>’uŠ·Œã”’l</returns>
-        ''' <remarks>Null‚ÌƒtƒB[ƒ‹ƒh’l‚ğShortŒ^”’l‚Ö’uŠ·‚·‚éB</remarks>
+        ''' <param name="prmField">ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰å€¤</param>
+        ''' <returns>ç½®æ›å¾Œæ•°å€¤</returns>
+        ''' <remarks>Nullã®ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰å€¤ã‚’Shortå‹æ•°å€¤ã¸ç½®æ›ã™ã‚‹ã€‚</remarks>
         Function rmNullShort(ByVal prmField As Object) As Short
 
         '-------------------------------------------------------------------------------
-        '   NullËInteger
+        '   Nullâ‡’Integer
         '                                               2006.05.23 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' Null‚Ì”’l’uŠ·(IntegerŒ^)
+        ''' Nullã®æ•°å€¤ç½®æ›(Integerå‹)
         ''' </summary>
-        ''' <param name="prmField">ƒtƒB[ƒ‹ƒh’l</param>
-        ''' <returns>’uŠ·Œã”’l</returns>
-        ''' <remarks>Null‚ÌƒtƒB[ƒ‹ƒh’l‚ğIntegerŒ^”’l‚Ö’uŠ·‚·‚éB</remarks>
+        ''' <param name="prmField">ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰å€¤</param>
+        ''' <returns>ç½®æ›å¾Œæ•°å€¤</returns>
+        ''' <remarks>Nullã®ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰å€¤ã‚’Integerå‹æ•°å€¤ã¸ç½®æ›ã™ã‚‹ã€‚</remarks>
         Function rmNullInt(ByVal prmField As Object) As Integer
 
         '-------------------------------------------------------------------------------
-        '   NullËLong
+        '   Nullâ‡’Long
         '                                               2006.05.23 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' Null‚Ì”’l’uŠ·(LongŒ^)
+        ''' Nullã®æ•°å€¤ç½®æ›(Longå‹)
         ''' </summary>
-        ''' <param name="prmField">ƒtƒB[ƒ‹ƒh’l</param>
-        ''' <returns>’uŠ·Œã”’l</returns>
-        ''' <remarks>Null‚ÌƒtƒB[ƒ‹ƒh’l‚ğLongŒ^”’l‚Ö’uŠ·‚·‚éB</remarks>
+        ''' <param name="prmField">ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰å€¤</param>
+        ''' <returns>ç½®æ›å¾Œæ•°å€¤</returns>
+        ''' <remarks>Nullã®ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰å€¤ã‚’Longå‹æ•°å€¤ã¸ç½®æ›ã™ã‚‹ã€‚</remarks>
         Function rmNullLong(ByVal prmField As Object) As Long
 
         '-------------------------------------------------------------------------------
-        '   NullËDouble
+        '   Nullâ‡’Double
         '                                               2006.05.23 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' Null‚Ì”’l’uŠ·(DoubleŒ^)
+        ''' Nullã®æ•°å€¤ç½®æ›(Doubleå‹)
         ''' </summary>
-        ''' <param name="prmField">ƒtƒB[ƒ‹ƒh’l</param>
-        ''' <returns>’uŠ·Œã”’l</returns>
-        ''' <remarks>Null‚ÌƒtƒB[ƒ‹ƒh’l‚ğDoubleŒ^”’l‚Ö’uŠ·‚·‚éB</remarks>
+        ''' <param name="prmField">ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰å€¤</param>
+        ''' <returns>ç½®æ›å¾Œæ•°å€¤</returns>
+        ''' <remarks>Nullã®ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰å€¤ã‚’Doubleå‹æ•°å€¤ã¸ç½®æ›ã™ã‚‹ã€‚</remarks>
         Function rmNullDouble(ByVal prmField As Object) As Double
 
         '-------------------------------------------------------------------------------
-        '   NullË“ú•t•¶š—ñ’l
+        '   Nullâ‡’æ—¥ä»˜æ–‡å­—åˆ—å€¤
         '                                               2006.05.23 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' Null‚Ì“ú•t•¶š—ñ’uŠ·
+        ''' Nullã®æ—¥ä»˜æ–‡å­—åˆ—ç½®æ›
         ''' </summary>
-        ''' <param name="prmField">ƒtƒB[ƒ‹ƒh’l</param>
-        ''' <param name="prmFormatStr">“ú•t‘®</param>
-        ''' <returns>’uŠ·Œã“ú•t•¶š—ñ</returns>
-        ''' <remarks>Null‚ÌƒtƒB[ƒ‹ƒh’l‚ğ“ú•tƒtƒH[ƒ}ƒbƒg‚Ì•¶š—ñ‚Ö’uŠ·‚·‚éB</remarks>
+        ''' <param name="prmField">ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰å€¤</param>
+        ''' <param name="prmFormatStr">æ—¥ä»˜æ›¸å¼</param>
+        ''' <returns>ç½®æ›å¾Œæ—¥ä»˜æ–‡å­—åˆ—</returns>
+        ''' <remarks>Nullã®ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰å€¤ã‚’æ—¥ä»˜ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã®æ–‡å­—åˆ—ã¸ç½®æ›ã™ã‚‹ã€‚</remarks>
         Function rmNullDate(ByVal prmField As Object,
                             Optional ByVal prmFormatStr As String = "yyyy/MM/dd HH:mm:ss"
                             ) As String
@@ -343,102 +343,102 @@ Namespace DB
 
     '===============================================================================
     '
-    '  ƒ†[ƒeƒBƒŠƒeƒBƒNƒ‰ƒX
-    '    iƒNƒ‰ƒX–¼j    UtilDBPrm
-    '    iˆ—‹@”\–¼j     Util.DB‚É‚æ‚éDBƒAƒNƒZƒX‚É‚¨‚¢‚ÄA’uŠ·ƒpƒ‰ƒƒ^ƒNƒGƒŠ‚Ìƒf[ƒ^˜g‚ğ’ñ‹Ÿ
-    '    i–{MDLg—p‘O’ñj  UtilDBIfƒCƒ“ƒ^[ƒtƒF[ƒX‚ğÀ‘•‚ğÀ‘•‚µ‚½DBƒAƒNƒZƒXƒNƒ‰ƒX‚ğ
-    '                       ƒvƒƒWƒFƒNƒg‚Éæ‚è‚ñ‚Å‚¢‚é‚±‚Æ
-    '    i”õlj           
+    '  ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£ã‚¯ãƒ©ã‚¹
+    '    ï¼ˆã‚¯ãƒ©ã‚¹åï¼‰    UtilDBPrm
+    '    ï¼ˆå‡¦ç†æ©Ÿèƒ½åï¼‰     Util.DBã«ã‚ˆã‚‹DBã‚¢ã‚¯ã‚»ã‚¹ã«ãŠã„ã¦ã€ç½®æ›ãƒ‘ãƒ©ãƒ¡ã‚¿ã‚¯ã‚¨ãƒªã®ãƒ‡ãƒ¼ã‚¿æ ã‚’æä¾›
+    '    ï¼ˆæœ¬MDLä½¿ç”¨å‰æï¼‰  UtilDBIfã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹ã‚’å®Ÿè£…ã‚’å®Ÿè£…ã—ãŸDBã‚¢ã‚¯ã‚»ã‚¹ã‚¯ãƒ©ã‚¹ã‚’
+    '                       ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã«å–ã‚Šè¾¼ã‚“ã§ã„ã‚‹ã“ã¨
+    '    ï¼ˆå‚™è€ƒï¼‰           
     '
     '===============================================================================
-    '  —š—ğ  –¼‘O          “ú  •t      ƒ}[ƒN      “à—e
+    '  å±¥æ­´  åå‰          æ—¥  ä»˜      ãƒãƒ¼ã‚¯      å†…å®¹
     '-------------------------------------------------------------------------------
-    '  (1)   Laevigata, Inc.    2006/06/16              V‹K
+    '  (1)   Laevigata, Inc.    2006/06/16              æ–°è¦
     '-------------------------------------------------------------------------------
     ''' <summary>
-    ''' Util.DB‚É‚æ‚éDBƒAƒNƒZƒX‚É‚¨‚¢‚ÄA’uŠ·ƒpƒ‰ƒƒ^ƒNƒGƒŠ‚Ìƒf[ƒ^˜g‚ğ’ñ‹Ÿ
+    ''' Util.DBã«ã‚ˆã‚‹DBã‚¢ã‚¯ã‚»ã‚¹ã«ãŠã„ã¦ã€ç½®æ›ãƒ‘ãƒ©ãƒ¡ã‚¿ã‚¯ã‚¨ãƒªã®ãƒ‡ãƒ¼ã‚¿æ ã‚’æä¾›
     ''' </summary>
     ''' <remarks></remarks>
     Public Class UtilDBPrm
 
         '===============================================================================
-        '—ñ‹“‘Ì’è‹`
+        'åˆ—æŒ™ä½“å®šç¾©
         '===============================================================================
         ''' <summary>
-        ''' ƒpƒ‰ƒ[ƒ^ƒ^ƒCƒv(Œ^)
+        ''' ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚¿ã‚¤ãƒ—(å‹)
         ''' </summary>
         ''' <remarks></remarks>
         Public Enum parameterType As Short
             ''' <summary>
-            ''' ˜_—’l
+            ''' è«–ç†å€¤
             ''' </summary>
             ''' <remarks></remarks>
             tBoolean = 0
             ''' <summary>
-            ''' ‰Â•Ï’·•¶š—ñ’l
+            ''' å¯å¤‰é•·æ–‡å­—åˆ—å€¤
             ''' </summary>
             ''' <remarks></remarks>
             tVarchar = 1
             ''' <summary>
-            ''' “ú•t’l
+            ''' æ—¥ä»˜å€¤
             ''' </summary>
             ''' <remarks></remarks>
             tDate = 2
             ''' <summary>
-            ''' ”’l
+            ''' æ•°å€¤
             ''' </summary>
             ''' <remarks></remarks>
             tNumber = 3
         End Enum
 
         ''' <summary>
-        ''' ƒpƒ‰ƒ[ƒ^ƒfƒBƒŒƒNƒVƒ‡ƒ“(I/O)
+        ''' ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³(I/O)
         ''' </summary>
         ''' <remarks></remarks>
         Public Enum parameterDirection As Short
             ''' <summary>
-            ''' INƒpƒ‰ƒ[ƒ^
+            ''' INãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
             ''' </summary>
             ''' <remarks></remarks>
             dInput = 0
             ''' <summary>
-            ''' OUTƒpƒ‰ƒ[ƒ^
+            ''' OUTãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
             ''' </summary>
             ''' <remarks></remarks>
             dOutput = 1
             ''' <summary>
-            ''' IN/OUTƒpƒ‰ƒ[ƒ^
+            ''' IN/OUTãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
             ''' </summary>
             ''' <remarks></remarks>
             dInputOutput = 2
             ''' <summary>
-            ''' –ß‚è’l
+            ''' æˆ»ã‚Šå€¤
             ''' </summary>
             ''' <remarks></remarks>
             dReturn = 3
         End Enum
 
         '===============================================================================
-        'ƒƒ“ƒo[•Ï”’è‹`
+        'ãƒ¡ãƒ³ãƒãƒ¼å¤‰æ•°å®šç¾©
         '===============================================================================
-        Private _value As Object                                            '’l
-        Private _type As parameterType                                      'Œ^
-        Private _direction As parameterDirection                            '•ûŒü
-        Private _size As Short                                              'ƒTƒCƒY
-        Private _refParameter As System.Data.Common.DbParameter = Nothing   'İ’èŒã‚Ìƒpƒ‰ƒƒ^ƒ|ƒCƒ“ƒ^(ÀsŒã‚ÌŒ‹‰Ê[ƒpƒ‰ƒƒ^’l]æ“¾‚Ég—p)
+        Private _value As Object                                            'å€¤
+        Private _type As parameterType                                      'å‹
+        Private _direction As parameterDirection                            'æ–¹å‘
+        Private _size As Short                                              'ã‚µã‚¤ã‚º
+        Private _refParameter As System.Data.Common.DbParameter = Nothing   'è¨­å®šå¾Œã®ãƒ‘ãƒ©ãƒ¡ã‚¿ãƒã‚¤ãƒ³ã‚¿(å®Ÿè¡Œå¾Œã®çµæœ[ãƒ‘ãƒ©ãƒ¡ã‚¿å€¤]å–å¾—ã«ä½¿ç”¨)
 
         '===============================================================================
-        'ƒvƒƒpƒeƒB(ƒAƒNƒZƒT)
+        'ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£(ã‚¢ã‚¯ã‚»ã‚µ)
         '===============================================================================
         ''' <summary>
-        ''' ’l
+        ''' å€¤
         ''' </summary>
-        ''' <returns>ƒpƒ‰ƒ[ƒ^’l</returns>
+        ''' <returns>ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿å€¤</returns>
         ''' <remarks></remarks>
         Public ReadOnly Property value() As Object
             Get
                 If _refParameter Is Nothing Then
-                    'ƒpƒ‰ƒ[ƒ^İ’è‘O
+                    'ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿è¨­å®šå‰
                     Select Case _type
                         Case parameterType.tBoolean
                             Return CBool(_value)
@@ -452,7 +452,7 @@ Namespace DB
                             Return Nothing
                     End Select
                 Else
-                    'ƒpƒ‰ƒ[ƒ^İ’èŒã
+                    'ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿è¨­å®šå¾Œ
                     Select Case _type
                         Case parameterType.tBoolean
                             Return CBool(_refParameter.Value)
@@ -469,9 +469,9 @@ Namespace DB
             End Get
         End Property
         ''' <summary>
-        ''' ƒ^ƒCƒv(Œ^)
+        ''' ã‚¿ã‚¤ãƒ—(å‹)
         ''' </summary>
-        ''' <returns>ƒpƒ‰ƒ[ƒ^ƒ^ƒCƒv</returns>
+        ''' <returns>ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚¿ã‚¤ãƒ—</returns>
         ''' <remarks></remarks>
         Public ReadOnly Property type() As parameterType
             Get
@@ -479,9 +479,9 @@ Namespace DB
             End Get
         End Property
         ''' <summary>
-        ''' ƒfƒBƒŒƒNƒVƒ‡ƒ“(I/O)[UtilMDL.DB.UtilDBPrm.parameterDirection‚Æ‚µ‚Ä•Ô‹p]
+        ''' ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³(I/O)[UtilMDL.DB.UtilDBPrm.parameterDirectionã¨ã—ã¦è¿”å´]
         ''' </summary>
-        ''' <returns>ƒpƒ‰ƒ[ƒ^ƒfƒBƒŒƒNƒVƒ‡ƒ“(•ûŒü)</returns>
+        ''' <returns>ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³(æ–¹å‘)</returns>
         ''' <remarks></remarks>
         Public ReadOnly Property direction() As parameterDirection
             Get
@@ -489,9 +489,9 @@ Namespace DB
             End Get
         End Property
         ''' <summary>
-        ''' ƒfƒBƒŒƒNƒVƒ‡ƒ“(I/O)[System.Data.ParameterDirection‚Æ‚µ‚Ä•Ô‹p]
+        ''' ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³(I/O)[System.Data.ParameterDirectionã¨ã—ã¦è¿”å´]
         ''' </summary>
-        ''' <returns>ƒpƒ‰ƒ[ƒ^ƒfƒBƒŒƒNƒVƒ‡ƒ“(•ûŒü)</returns>
+        ''' <returns>ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³(æ–¹å‘)</returns>
         ''' <remarks></remarks>
         Public ReadOnly Property systemDirection() As System.Data.ParameterDirection
             Get
@@ -512,9 +512,9 @@ Namespace DB
             End Get
         End Property
         ''' <summary>
-        ''' ƒTƒCƒY
+        ''' ã‚µã‚¤ã‚º
         ''' </summary>
-        ''' <returns>ƒpƒ‰ƒ[ƒ^ƒTƒCƒY</returns>
+        ''' <returns>ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚µã‚¤ã‚º</returns>
         ''' <remarks></remarks>
         Public ReadOnly Property size() As Short
             Get
@@ -522,9 +522,9 @@ Namespace DB
             End Get
         End Property
         ''' <summary>
-        ''' İ’èŒã‚Ìƒpƒ‰ƒƒ^ƒ|ƒCƒ“ƒ^(ÀsŒã‚ÌŒ‹‰Ê[ƒpƒ‰ƒƒ^’l]æ“¾‚Ég—p)
+        ''' è¨­å®šå¾Œã®ãƒ‘ãƒ©ãƒ¡ã‚¿ãƒã‚¤ãƒ³ã‚¿(å®Ÿè¡Œå¾Œã®çµæœ[ãƒ‘ãƒ©ãƒ¡ã‚¿å€¤]å–å¾—ã«ä½¿ç”¨)
         ''' </summary>
-        ''' <value>ƒ|ƒCƒ“ƒ^</value>
+        ''' <value>ãƒã‚¤ãƒ³ã‚¿</value>
         ''' <remarks></remarks>
         Public WriteOnly Property refParameter() As System.Data.Common.DbParameter
             Set(ByVal value As System.Data.Common.DbParameter)
@@ -533,46 +533,46 @@ Namespace DB
         End Property
 
         '===============================================================================
-        ' ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-        '   œ“ü—Íƒpƒ‰ƒƒ^   F prmValue        ƒpƒ‰ƒ[ƒ^’l
-        '                       prmSize         ƒTƒCƒY
-        '                       prmType         ƒpƒ‰ƒ[ƒ^ƒ^ƒCƒv(Œ^)
-        '                       prmDirection    ƒpƒ‰ƒ[ƒ^ƒfƒBƒŒƒNƒVƒ‡ƒ“(I/O)
+        ' ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼š prmValue        ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿å€¤
+        '                       prmSize         ã‚µã‚¤ã‚º
+        '                       prmType         ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚¿ã‚¤ãƒ—(å‹)
+        '                       prmDirection    ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³(I/O)
         '                                               2006.06.19 Created By Laevigata, Inc.
         '===============================================================================
         ''' <summary>
-        ''' ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        ''' ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         ''' </summary>
-        ''' <param name="prmValue">ƒpƒ‰ƒ[ƒ^’l</param>
-        ''' <param name="prmSize">ƒTƒCƒY</param>
-        ''' <param name="prmType">ƒpƒ‰ƒ[ƒ^ƒ^ƒCƒv(Œ^)</param>
-        ''' <param name="prmDirection">ƒpƒ‰ƒ[ƒ^ƒfƒBƒŒƒNƒVƒ‡ƒ“(I/O)</param>
+        ''' <param name="prmValue">ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿å€¤</param>
+        ''' <param name="prmSize">ã‚µã‚¤ã‚º</param>
+        ''' <param name="prmType">ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚¿ã‚¤ãƒ—(å‹)</param>
+        ''' <param name="prmDirection">ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³(I/O)</param>
         ''' <remarks></remarks>
         Public Sub New(ByVal prmValue As Object, _
                                Optional ByVal prmSize As Short = 0, _
                                Optional ByVal prmType As parameterType = parameterType.tVarchar, _
                                Optional ByVal prmDirection As parameterDirection = parameterDirection.dInput)
 
-            'ƒpƒ‰ƒƒ^ƒ`ƒFƒbƒN
+            'ãƒ‘ãƒ©ãƒ¡ã‚¿ãƒã‚§ãƒƒã‚¯
             If (prmType <> parameterType.tBoolean And _
                 prmType <> parameterType.tVarchar And _
                 prmType <> parameterType.tDate And _
                 prmType <> parameterType.tNumber) Then
-                Throw New UsrDefException("’uŠ·ƒpƒ‰ƒ[ƒ^‚Ìİ’è‚ªŒë‚Á‚Ä‚¢‚Ü‚·B" & ControlChars.NewLine & _
-                                          "prmType‚É‚ÍparameterType’è”‚ğg—p‚µ‚Ä‰º‚³‚¢B")
+                Throw New UsrDefException("ç½®æ›ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã®è¨­å®šãŒèª¤ã£ã¦ã„ã¾ã™ã€‚" & ControlChars.NewLine & _
+                                          "prmTypeã«ã¯parameterTypeå®šæ•°ã‚’ä½¿ç”¨ã—ã¦ä¸‹ã•ã„ã€‚")
             End If
             If (prmDirection <> parameterDirection.dInput And _
                 prmDirection <> parameterDirection.dOutput And _
                 prmDirection <> parameterDirection.dInputOutput And _
                 prmDirection <> parameterDirection.dReturn) Then
-                Throw New UsrDefException("’uŠ·ƒpƒ‰ƒ[ƒ^‚Ìİ’è‚ªŒë‚Á‚Ä‚¢‚Ü‚·B" & ControlChars.NewLine & _
-                                          "prmDirection‚É‚ÍparameterDirection’è”‚ğg—p‚µ‚Ä‰º‚³‚¢B")
+                Throw New UsrDefException("ç½®æ›ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã®è¨­å®šãŒèª¤ã£ã¦ã„ã¾ã™ã€‚" & ControlChars.NewLine & _
+                                          "prmDirectionã«ã¯parameterDirectionå®šæ•°ã‚’ä½¿ç”¨ã—ã¦ä¸‹ã•ã„ã€‚")
             End If
             If prmType = parameterType.tVarchar And _
                prmSize = 0 Then
-                Throw New UsrDefException("’uŠ·ƒpƒ‰ƒ[ƒ^‚Ìİ’è‚ªŒë‚Á‚Ä‚¢‚Ü‚·B" & ControlChars.NewLine & _
-                                          "prmType‚ÉparameterType.tVarchar’è”‚ğg—p‚µ‚Ä‚¢‚éê‡A" & ControlChars.NewLine & _
-                                          "³‚µ‚­prmSize‚ğw’è‚µ‚Ä‰º‚³‚¢B")
+                Throw New UsrDefException("ç½®æ›ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã®è¨­å®šãŒèª¤ã£ã¦ã„ã¾ã™ã€‚" & ControlChars.NewLine & _
+                                          "prmTypeã«parameterType.tVarcharå®šæ•°ã‚’ä½¿ç”¨ã—ã¦ã„ã‚‹å ´åˆã€" & ControlChars.NewLine & _
+                                          "æ­£ã—ãprmSizeã‚’æŒ‡å®šã—ã¦ä¸‹ã•ã„ã€‚")
             End If
             _value = prmValue
             _type = prmType

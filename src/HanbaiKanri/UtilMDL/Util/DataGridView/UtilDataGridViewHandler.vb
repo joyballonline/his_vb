@@ -1,58 +1,58 @@
-Imports System.Windows.Forms.DataGridView
+ï»¿Imports System.Windows.Forms.DataGridView
 
 Namespace DataGridView
 
     '===============================================================================
     '
-    '  ƒ†[ƒeƒBƒŠƒeƒBƒNƒ‰ƒX
-    '    iƒNƒ‰ƒX–¼j    UtilDataGridViewHandler
-    '    iˆ—‹@”\–¼j      DataGridViewƒRƒ“ƒgƒ[ƒ‹‚Ì§Œä‹@”\‚ğ’ñ‹Ÿ‚·‚é
-    '    i–{MDLg—p‘O’ñj   “Á‚É‚È‚µ
-    '    i”õlj            
+    '  ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£ã‚¯ãƒ©ã‚¹
+    '    ï¼ˆã‚¯ãƒ©ã‚¹åï¼‰    UtilDataGridViewHandler
+    '    ï¼ˆå‡¦ç†æ©Ÿèƒ½åï¼‰      DataGridViewã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã®åˆ¶å¾¡æ©Ÿèƒ½ã‚’æä¾›ã™ã‚‹
+    '    ï¼ˆæœ¬MDLä½¿ç”¨å‰æï¼‰   ç‰¹ã«ãªã—
+    '    ï¼ˆå‚™è€ƒï¼‰            
     '
     '===============================================================================
-    '  —š—ğ  –¼‘O          “ú  •t      ƒ}[ƒN      “à—e
+    '  å±¥æ­´  åå‰          æ—¥  ä»˜      ãƒãƒ¼ã‚¯      å†…å®¹
     '-------------------------------------------------------------------------------
-    '  (1)   Laevigata, Inc.    2006/05/01              V‹K
+    '  (1)   Laevigata, Inc.    2006/05/01              æ–°è¦
     '-------------------------------------------------------------------------------
     Public Class UtilDataGridViewHandler
 
         '===============================================================================
-        'ƒƒ“ƒo[•Ï”’è‹`
+        'ãƒ¡ãƒ³ãƒãƒ¼å¤‰æ•°å®šç¾©
         '===============================================================================
         Private _grid As Windows.Forms.DataGridView
         '>--2006/11/10 ADD -STR- A.Yamazaki
         '===============================================================================
-        '—ñ‹“Œ^’è‹`
+        'åˆ—æŒ™å‹å®šç¾©
         '===============================================================================
-        Public Enum chkType 'ƒZƒ‹“ü—Íƒ`ƒFƒbƒNƒ^ƒCƒv
+        Public Enum chkType 'ã‚»ãƒ«å…¥åŠ›ãƒã‚§ãƒƒã‚¯ã‚¿ã‚¤ãƒ—
             ''' <summary>
-            ''' “ú•tŒ^‚P¨yy/MM/dd
+            ''' æ—¥ä»˜å‹ï¼‘â†’yy/MM/dd
             ''' </summary>
             ''' <remarks></remarks>
             Date1 = 1
             ''' <summary>
-            ''' “ú•tŒ^‚Q¨yyyy/MM/dd
+            ''' æ—¥ä»˜å‹ï¼’â†’yyyy/MM/dd
             ''' </summary>
             ''' <remarks></remarks>
             Date2 = 2
             ''' <summary>
-            ''' ”’l¨123456789
+            ''' æ•°å€¤â†’123456789
             ''' </summary>
             ''' <remarks></remarks>
             Num = 3
             ''' <summary>
-            ''' ”’liƒ}ƒCƒiƒX‹–‰Âj¨-123 123
+            ''' æ•°å€¤ï¼ˆãƒã‚¤ãƒŠã‚¹è¨±å¯ï¼‰â†’-123 123
             ''' </summary>
             ''' <remarks></remarks>
             Num_M = 4
             ''' <summary>
-            ''' ‹àŠziƒJƒ“ƒ}•ÒWj¨123,456,789
+            ''' é‡‘é¡ï¼ˆã‚«ãƒ³ãƒç·¨é›†ï¼‰â†’123,456,789
             ''' </summary>
             ''' <remarks></remarks>
             Cur = 5
             ''' <summary>
-            ''' ”¼Šp‰p”¨ABCDabcd1234
+            ''' åŠè§’è‹±æ•°â†’ABCDabcd1234
             ''' </summary>
             ''' <remarks></remarks>
             Hankaku = 6
@@ -60,7 +60,7 @@ Namespace DataGridView
         End Enum
 
         '===============================================================================
-        '“ü—Íƒ`ƒFƒbƒN—p’è”
+        'å…¥åŠ›ãƒã‚§ãƒƒã‚¯ç”¨å®šæ•°
         '===============================================================================
         Private Shared NUM_CHARS As Char() = New Char(10) {"0"c, "1"c, "2"c, "3"c, "4"c, "5"c, "6"c, "7"c, "8"c, "9"c, "."c}
         Private Shared NUM_MINS_CHARS As Char() = New Char(11) {"0"c, "1"c, "2"c, "3"c, "4"c, "5"c, "6"c, "7"c, "8"c, "9"c, "-"c, "."c}
@@ -69,17 +69,17 @@ Namespace DataGridView
                                                       "A"c, "B"c, "C"c, "D"c, "E"c, "F"c, "G"c, "H"c, "I"c, "J"c, "K"c, "L"c, "M"c, "N"c, "O"c, "P"c, "Q"c, "R"c, "S"c, "T"c, "U"c, "V"c, "W"c, "X"c, "Y"c, "Z"c}
         '<--2006/11/10 ADD -END- A.Yamazaki
         '===============================================================================
-        'ƒvƒƒpƒeƒB(ƒAƒNƒZƒT)
+        'ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£(ã‚¢ã‚¯ã‚»ã‚µ)
         '===============================================================================
 
         '===============================================================================
-        ' ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-        '   œ“ü—Íƒpƒ‰ƒƒ^   FprmTargetGrid    §Œä‘ÎÛDataGridView
+        ' ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šprmTargetGrid    åˆ¶å¾¡å¯¾è±¡DataGridView
         '===============================================================================
         ''' <summary>
-        ''' DataGridViewƒnƒ“ƒhƒ‰‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬‚·‚é
+        ''' DataGridViewãƒãƒ³ãƒ‰ãƒ©ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆã™ã‚‹
         ''' </summary>
-        ''' <param name="prmTargetGrid">‘€ì‘ÎÛ‚Æ‚È‚éDataGridView</param>
+        ''' <param name="prmTargetGrid">æ“ä½œå¯¾è±¡ã¨ãªã‚‹DataGridView</param>
         ''' <remarks></remarks>
         Public Sub New(ByVal prmTargetGrid As Windows.Forms.DataGridView)
 
@@ -88,16 +88,16 @@ Namespace DataGridView
         End Sub
 
         '-------------------------------------------------------------------------------
-        '   ƒf[ƒ^ƒNƒŠƒA
-        '   iˆ—ŠT—vjƒf[ƒ^s‚ğ‰Šú‰»‚·‚é(ˆê——‚ğ0s‚Æ‚·‚é)
-        '   œ“ü—Íƒpƒ‰ƒƒ^   FprmDataColName   ƒf[ƒ^ƒZƒbƒgã‚Ì—ñ–¼
-        '   @@@@@@@@ FprmRow           ‘ÎÛs‚ÌƒCƒ“ƒfƒbƒNƒX(0`)
-        '   œƒƒ\ƒbƒh–ß‚è’l F‚È‚µ
-        '   œ”õl@@       FDataGridView‚ÆƒoƒCƒ“ƒh‚³‚ê‚Ä‚¢‚éADataSetã‚Ìƒf[ƒ^‚ÉON‚ğİ’è‚·‚é
+        '   ãƒ‡ãƒ¼ã‚¿ã‚¯ãƒªã‚¢
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰ãƒ‡ãƒ¼ã‚¿è¡Œã‚’åˆæœŸåŒ–ã™ã‚‹(ä¸€è¦§ã‚’0è¡Œã¨ã™ã‚‹)
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šprmDataColName   ãƒ‡ãƒ¼ã‚¿ã‚»ãƒƒãƒˆä¸Šã®åˆ—å
+        '   ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ ï¼šprmRow           å¯¾è±¡è¡Œã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹(0ï½)
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šãªã—
+        '   â—å‚™è€ƒã€€ã€€       ï¼šDataGridViewã¨ãƒã‚¤ãƒ³ãƒ‰ã•ã‚Œã¦ã„ã‚‹ã€DataSetä¸Šã®ãƒ‡ãƒ¼ã‚¿ã«ONã‚’è¨­å®šã™ã‚‹
         '                                               2006.05.01 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ƒf[ƒ^s‚ğ‰Šú‰»‚·‚é(ˆê——‚ğ0s‚Æ‚·‚é)
+        ''' ãƒ‡ãƒ¼ã‚¿è¡Œã‚’åˆæœŸåŒ–ã™ã‚‹(ä¸€è¦§ã‚’0è¡Œã¨ã™ã‚‹)
         ''' </summary>
         ''' <remarks></remarks>
         Public Sub clearRow()
@@ -109,19 +109,19 @@ Namespace DataGridView
         End Sub
 
         '-------------------------------------------------------------------------------
-        '   ƒ`ƒFƒbƒNƒ{ƒbƒNƒXON
-        '   iˆ—ŠT—vjƒ`ƒFƒbƒNƒ{ƒbƒNƒXŒ^‚Ì—ñƒf[ƒ^‚ğƒ`ƒFƒbƒNƒ{ƒbƒNƒXON‚Æ‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^   FprmDataColName   ƒf[ƒ^ƒZƒbƒgã‚Ì—ñ–¼
-        '   @@@@@@@@ FprmRow           ‘ÎÛs‚ÌƒCƒ“ƒfƒbƒNƒX(0`)
-        '   œƒƒ\ƒbƒh–ß‚è’l F‚È‚µ
-        '   œ”õl@@       FDataGridView‚ÆƒoƒCƒ“ƒh‚³‚ê‚Ä‚¢‚éADataSetã‚Ìƒf[ƒ^‚ÉON‚ğİ’è‚·‚é
+        '   ãƒã‚§ãƒƒã‚¯ãƒœãƒƒã‚¯ã‚¹ON
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰ãƒã‚§ãƒƒã‚¯ãƒœãƒƒã‚¯ã‚¹å‹ã®åˆ—ãƒ‡ãƒ¼ã‚¿ã‚’ãƒã‚§ãƒƒã‚¯ãƒœãƒƒã‚¯ã‚¹ONã¨ã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šprmDataColName   ãƒ‡ãƒ¼ã‚¿ã‚»ãƒƒãƒˆä¸Šã®åˆ—å
+        '   ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ ï¼šprmRow           å¯¾è±¡è¡Œã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹(0ï½)
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šãªã—
+        '   â—å‚™è€ƒã€€ã€€       ï¼šDataGridViewã¨ãƒã‚¤ãƒ³ãƒ‰ã•ã‚Œã¦ã„ã‚‹ã€DataSetä¸Šã®ãƒ‡ãƒ¼ã‚¿ã«ONã‚’è¨­å®šã™ã‚‹
         '                                               2006.05.01 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ƒ`ƒFƒbƒNƒ{ƒbƒNƒXŒ^‚Ì—ñƒf[ƒ^‚ğƒ`ƒFƒbƒNƒ{ƒbƒNƒXON‚Æ‚·‚é
+        ''' ãƒã‚§ãƒƒã‚¯ãƒœãƒƒã‚¯ã‚¹å‹ã®åˆ—ãƒ‡ãƒ¼ã‚¿ã‚’ãƒã‚§ãƒƒã‚¯ãƒœãƒƒã‚¯ã‚¹ONã¨ã™ã‚‹
         ''' </summary>
-        ''' <param name="prmDataColName">ƒf[ƒ^ƒZƒbƒgã‚Ì—ñ–¼</param>
-        ''' <param name="prmRow">‘ÎÛs‚ÌƒCƒ“ƒfƒbƒNƒX(0`)</param>
+        ''' <param name="prmDataColName">ãƒ‡ãƒ¼ã‚¿ã‚»ãƒƒãƒˆä¸Šã®åˆ—å</param>
+        ''' <param name="prmRow">å¯¾è±¡è¡Œã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹(0ï½)</param>
         ''' <remarks></remarks>
         Public Sub checkBoxOn(ByVal prmDataColName As String, ByVal prmRow As Integer)
             Dim cell As Object = CType(_grid.DataSource, System.Data.DataSet).Tables(0).Rows(prmRow)(prmDataColName)
@@ -137,19 +137,19 @@ Namespace DataGridView
         End Sub
 
         '-------------------------------------------------------------------------------
-        '   ƒ`ƒFƒbƒNƒ{ƒbƒNƒXOFF
-        '   iˆ—ŠT—vjƒ`ƒFƒbƒNƒ{ƒbƒNƒXŒ^‚Ì—ñƒf[ƒ^‚ğƒ`ƒFƒbƒNƒ{ƒbƒNƒXOFF‚Æ‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^   FprmDataColName   ƒf[ƒ^ƒZƒbƒgã‚Ì—ñ–¼
-        '   @@@@@@@@ FprmRow           ‘ÎÛs‚ÌƒCƒ“ƒfƒbƒNƒX(0`)
-        '   œƒƒ\ƒbƒh–ß‚è’l F‚È‚µ
-        '   œ”õl@@       FDataGridView‚ÆƒoƒCƒ“ƒh‚³‚ê‚Ä‚¢‚éADataSetã‚Ìƒf[ƒ^‚ÉON‚ğİ’è‚·‚é
+        '   ãƒã‚§ãƒƒã‚¯ãƒœãƒƒã‚¯ã‚¹OFF
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰ãƒã‚§ãƒƒã‚¯ãƒœãƒƒã‚¯ã‚¹å‹ã®åˆ—ãƒ‡ãƒ¼ã‚¿ã‚’ãƒã‚§ãƒƒã‚¯ãƒœãƒƒã‚¯ã‚¹OFFã¨ã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šprmDataColName   ãƒ‡ãƒ¼ã‚¿ã‚»ãƒƒãƒˆä¸Šã®åˆ—å
+        '   ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ ï¼šprmRow           å¯¾è±¡è¡Œã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹(0ï½)
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šãªã—
+        '   â—å‚™è€ƒã€€ã€€       ï¼šDataGridViewã¨ãƒã‚¤ãƒ³ãƒ‰ã•ã‚Œã¦ã„ã‚‹ã€DataSetä¸Šã®ãƒ‡ãƒ¼ã‚¿ã«ONã‚’è¨­å®šã™ã‚‹
         '                                               2006.05.01 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ƒ`ƒFƒbƒNƒ{ƒbƒNƒXŒ^‚Ì—ñƒf[ƒ^‚ğƒ`ƒFƒbƒNƒ{ƒbƒNƒXOFF‚Æ‚·‚é
+        ''' ãƒã‚§ãƒƒã‚¯ãƒœãƒƒã‚¯ã‚¹å‹ã®åˆ—ãƒ‡ãƒ¼ã‚¿ã‚’ãƒã‚§ãƒƒã‚¯ãƒœãƒƒã‚¯ã‚¹OFFã¨ã™ã‚‹
         ''' </summary>
-        ''' <param name="prmDataColName">ƒf[ƒ^ƒZƒbƒgã‚Ì—ñ–¼</param>
-        ''' <param name="prmRow">‘ÎÛs‚ÌƒCƒ“ƒfƒbƒNƒX(0`)</param>
+        ''' <param name="prmDataColName">ãƒ‡ãƒ¼ã‚¿ã‚»ãƒƒãƒˆä¸Šã®åˆ—å</param>
+        ''' <param name="prmRow">å¯¾è±¡è¡Œã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹(0ï½)</param>
         ''' <remarks></remarks>
         Public Sub checkBoxOff(ByVal prmDataColName As String, ByVal prmRow As Integer)
             Dim cell As Object = CType(_grid.DataSource, System.Data.DataSet).Tables(0).Rows(prmRow)(prmDataColName)
@@ -165,40 +165,40 @@ Namespace DataGridView
         End Sub
 
         '-------------------------------------------------------------------------------
-        '   ƒZƒ‹æ“¾
-        '   iˆ—ŠT—vjƒZƒ‹ƒIƒuƒWƒFƒNƒg‚ğæ“¾‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^   FprmColName   ƒOƒŠƒbƒhã‚Ì—ñ–¼
-        '   @@@@@@@@ FprmRow       ‘ÎÛs‚ÌƒCƒ“ƒfƒbƒNƒX(0`)
-        '   œƒƒ\ƒbƒh–ß‚è’l F‚È‚µ
-        '   œ”õl@@       FDataGridViewã‚ÌCell‚»‚Ì‚à‚Ì‚ğæ“¾
+        '   ã‚»ãƒ«å–å¾—
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰ã‚»ãƒ«ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å–å¾—ã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šprmColName   ã‚°ãƒªãƒƒãƒ‰ä¸Šã®åˆ—å
+        '   ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ ï¼šprmRow       å¯¾è±¡è¡Œã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹(0ï½)
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šãªã—
+        '   â—å‚™è€ƒã€€ã€€       ï¼šDataGridViewä¸Šã®Cellãã®ã‚‚ã®ã‚’å–å¾—
         '                                               2006.05.01 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ƒZƒ‹ƒIƒuƒWƒFƒNƒg‚ğæ“¾‚·‚é(DataGridViewã‚ÌCell‚»‚Ì‚à‚Ì‚ğæ“¾)
+        ''' ã‚»ãƒ«ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å–å¾—ã™ã‚‹(DataGridViewä¸Šã®Cellãã®ã‚‚ã®ã‚’å–å¾—)
         ''' </summary>
-        ''' <param name="prmColName">ƒOƒŠƒbƒhã‚Ì—ñ–¼</param>
-        ''' <param name="prmRow">‘ÎÛs‚ÌƒCƒ“ƒfƒbƒNƒX(0`)</param>
-        ''' <returns>ƒZƒ‹ƒIƒuƒWƒFƒNƒg</returns>
+        ''' <param name="prmColName">ã‚°ãƒªãƒƒãƒ‰ä¸Šã®åˆ—å</param>
+        ''' <param name="prmRow">å¯¾è±¡è¡Œã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹(0ï½)</param>
+        ''' <returns>ã‚»ãƒ«ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</returns>
         ''' <remarks></remarks>
         Public Function getCell(ByVal prmColName As String, ByVal prmRow As Integer) As Windows.Forms.DataGridViewCell
             Return _grid.Rows(prmRow).Cells(prmColName)
         End Function
 
         '-------------------------------------------------------------------------------
-        '   ƒZƒ‹ƒf[ƒ^æ“¾
-        '   iˆ—ŠT—vjƒZƒ‹‚ÉŠi”[‚³‚ê‚Ä‚¢‚éƒf[ƒ^‚ğæ“¾‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^   FprmDataColName   ƒf[ƒ^ƒZƒbƒgã‚Ì—ñ–¼
-        '   @@@@@@@@ FprmRow           ‘ÎÛs‚ÌƒCƒ“ƒfƒbƒNƒX(0`)
-        '   œƒƒ\ƒbƒh–ß‚è’l FŠi”[ƒf[ƒ^(StringŒ^‚Å•Ô‹p)
-        '   œ”õl@@       FDataGridView‚ÆƒoƒCƒ“ƒh‚³‚ê‚Ä‚¢‚éADataSetã‚Ìƒf[ƒ^‚©‚çæ“¾‚·‚é
+        '   ã‚»ãƒ«ãƒ‡ãƒ¼ã‚¿å–å¾—
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰ã‚»ãƒ«ã«æ ¼ç´ã•ã‚Œã¦ã„ã‚‹ãƒ‡ãƒ¼ã‚¿ã‚’å–å¾—ã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šprmDataColName   ãƒ‡ãƒ¼ã‚¿ã‚»ãƒƒãƒˆä¸Šã®åˆ—å
+        '   ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ ï¼šprmRow           å¯¾è±¡è¡Œã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹(0ï½)
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šæ ¼ç´ãƒ‡ãƒ¼ã‚¿(Stringå‹ã§è¿”å´)
+        '   â—å‚™è€ƒã€€ã€€       ï¼šDataGridViewã¨ãƒã‚¤ãƒ³ãƒ‰ã•ã‚Œã¦ã„ã‚‹ã€DataSetä¸Šã®ãƒ‡ãƒ¼ã‚¿ã‹ã‚‰å–å¾—ã™ã‚‹
         '                                               2006.06.05 Updated By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ƒZƒ‹‚ÉŠi”[‚³‚ê‚Ä‚¢‚éƒf[ƒ^‚ğæ“¾‚·‚é
+        ''' ã‚»ãƒ«ã«æ ¼ç´ã•ã‚Œã¦ã„ã‚‹ãƒ‡ãƒ¼ã‚¿ã‚’å–å¾—ã™ã‚‹
         ''' </summary>
-        ''' <param name="prmDataColName">ƒf[ƒ^ƒZƒbƒgã‚Ì—ñ–¼</param>
-        ''' <param name="prmRow">‘ÎÛs‚ÌƒCƒ“ƒfƒbƒNƒX(0`)</param>
-        ''' <returns>DataSetã‚Ì—ñƒf[ƒ^</returns>
+        ''' <param name="prmDataColName">ãƒ‡ãƒ¼ã‚¿ã‚»ãƒƒãƒˆä¸Šã®åˆ—å</param>
+        ''' <param name="prmRow">å¯¾è±¡è¡Œã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹(0ï½)</param>
+        ''' <returns>DataSetä¸Šã®åˆ—ãƒ‡ãƒ¼ã‚¿</returns>
         ''' <remarks></remarks>
         Public Function getCellData(ByVal prmDataColName As String, ByVal prmRow As Integer) As String
             Dim cell As Object = CType(_grid.DataSource, System.Data.DataSet).Tables(0).Rows(prmRow)(prmDataColName)
@@ -210,20 +210,20 @@ Namespace DataGridView
         End Function
 
         '-------------------------------------------------------------------------------
-        '   ƒZƒ‹ƒf[ƒ^æ“¾
-        '   iˆ—ŠT—vjƒZƒ‹‚ÉŠi”[‚³‚ê‚Ä‚¢‚éƒf[ƒ^‚ğæ“¾‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^   FprmDataColIdx    ƒf[ƒ^ƒZƒbƒgã‚Ì—ñƒCƒ“ƒfƒbƒNƒX(0`)
-        '   @@@@@@@@ FprmRow           ‘ÎÛs‚ÌƒCƒ“ƒfƒbƒNƒX(0`)
-        '   œƒƒ\ƒbƒh–ß‚è’l FŠi”[ƒf[ƒ^(StringŒ^‚Å•Ô‹p)
-        '   œ”õl@@       FDataGridView‚ÆƒoƒCƒ“ƒh‚³‚ê‚Ä‚¢‚éADataSetã‚Ìƒf[ƒ^‚©‚çæ“¾‚·‚é
+        '   ã‚»ãƒ«ãƒ‡ãƒ¼ã‚¿å–å¾—
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰ã‚»ãƒ«ã«æ ¼ç´ã•ã‚Œã¦ã„ã‚‹ãƒ‡ãƒ¼ã‚¿ã‚’å–å¾—ã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šprmDataColIdx    ãƒ‡ãƒ¼ã‚¿ã‚»ãƒƒãƒˆä¸Šã®åˆ—ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹(0ï½)
+        '   ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ ï¼šprmRow           å¯¾è±¡è¡Œã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹(0ï½)
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šæ ¼ç´ãƒ‡ãƒ¼ã‚¿(Stringå‹ã§è¿”å´)
+        '   â—å‚™è€ƒã€€ã€€       ï¼šDataGridViewã¨ãƒã‚¤ãƒ³ãƒ‰ã•ã‚Œã¦ã„ã‚‹ã€DataSetä¸Šã®ãƒ‡ãƒ¼ã‚¿ã‹ã‚‰å–å¾—ã™ã‚‹
         '                                               2006.06.08 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ƒZƒ‹‚ÉŠi”[‚³‚ê‚Ä‚¢‚éƒf[ƒ^‚ğæ“¾‚·‚é
+        ''' ã‚»ãƒ«ã«æ ¼ç´ã•ã‚Œã¦ã„ã‚‹ãƒ‡ãƒ¼ã‚¿ã‚’å–å¾—ã™ã‚‹
         ''' </summary>
-        ''' <param name="prmDataColIdx">ƒf[ƒ^ƒZƒbƒgã‚Ì—ñƒCƒ“ƒfƒbƒNƒX(0`)</param>
-        ''' <param name="prmRow">‘ÎÛs‚ÌƒCƒ“ƒfƒbƒNƒX(0`)</param>
-        ''' <returns>DataSetã‚Ì—ñƒf[ƒ^</returns>
+        ''' <param name="prmDataColIdx">ãƒ‡ãƒ¼ã‚¿ã‚»ãƒƒãƒˆä¸Šã®åˆ—ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹(0ï½)</param>
+        ''' <param name="prmRow">å¯¾è±¡è¡Œã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹(0ï½)</param>
+        ''' <returns>DataSetä¸Šã®åˆ—ãƒ‡ãƒ¼ã‚¿</returns>
         ''' <remarks></remarks>
         Public Function getCellData(ByVal prmDataColIdx As Integer, ByVal prmRow As Integer) As String
             Dim cell As Object = CType(_grid.DataSource, System.Data.DataSet).Tables(0).Rows(prmRow)(prmDataColIdx)
@@ -235,39 +235,39 @@ Namespace DataGridView
         End Function
 
         '-------------------------------------------------------------------------------
-        '   ƒZƒ‹ƒf[ƒ^İ’è
-        '   iˆ—ŠT—vjƒZƒ‹‚ÉŠi”[‚³‚ê‚Ä‚¢‚éƒf[ƒ^‚ğİ’è‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^   FprmDataColName   ƒf[ƒ^ƒZƒbƒgã‚Ì—ñ–¼
-        '   @@@@@@@@ FprmRow           ‘ÎÛs‚ÌƒCƒ“ƒfƒbƒNƒX(0`)
-        '   @@@@@@@@ FprmVal           Ši”[‚·‚éƒf[ƒ^
-        '   œƒƒ\ƒbƒh–ß‚è’l F‚È‚µ
-        '   œ”õl@@       FDataGridView‚ÆƒoƒCƒ“ƒh‚³‚ê‚Ä‚¢‚éADataSetã‚Ìƒf[ƒ^‚Öİ’è‚·‚é
+        '   ã‚»ãƒ«ãƒ‡ãƒ¼ã‚¿è¨­å®š
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰ã‚»ãƒ«ã«æ ¼ç´ã•ã‚Œã¦ã„ã‚‹ãƒ‡ãƒ¼ã‚¿ã‚’è¨­å®šã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šprmDataColName   ãƒ‡ãƒ¼ã‚¿ã‚»ãƒƒãƒˆä¸Šã®åˆ—å
+        '   ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ ï¼šprmRow           å¯¾è±¡è¡Œã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹(0ï½)
+        '   ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ ï¼šprmVal           æ ¼ç´ã™ã‚‹ãƒ‡ãƒ¼ã‚¿
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šãªã—
+        '   â—å‚™è€ƒã€€ã€€       ï¼šDataGridViewã¨ãƒã‚¤ãƒ³ãƒ‰ã•ã‚Œã¦ã„ã‚‹ã€DataSetä¸Šã®ãƒ‡ãƒ¼ã‚¿ã¸è¨­å®šã™ã‚‹
         '                                               2006.05.01 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ƒZƒ‹‚ÉŠi”[‚³‚ê‚Ä‚¢‚éƒf[ƒ^‚ğİ’è‚·‚é
+        ''' ã‚»ãƒ«ã«æ ¼ç´ã•ã‚Œã¦ã„ã‚‹ãƒ‡ãƒ¼ã‚¿ã‚’è¨­å®šã™ã‚‹
         ''' </summary>
-        ''' <param name="prmDataColName">ƒf[ƒ^ƒZƒbƒgã‚Ì—ñ–¼</param>
-        ''' <param name="prmRow">‘ÎÛs‚ÌƒCƒ“ƒfƒbƒNƒX(0`)</param>
-        ''' <param name="prmVal">Ši”[‚·‚éƒf[ƒ^</param>
+        ''' <param name="prmDataColName">ãƒ‡ãƒ¼ã‚¿ã‚»ãƒƒãƒˆä¸Šã®åˆ—å</param>
+        ''' <param name="prmRow">å¯¾è±¡è¡Œã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹(0ï½)</param>
+        ''' <param name="prmVal">æ ¼ç´ã™ã‚‹ãƒ‡ãƒ¼ã‚¿</param>
         ''' <remarks></remarks>
         Public Sub setCellData(ByVal prmDataColName As String, ByVal prmRow As Integer, ByVal prmVal As Object)
             CType(_grid.DataSource, System.Data.DataSet).Tables(0).Rows(prmRow)(prmDataColName) = prmVal
         End Sub
 
         '-------------------------------------------------------------------------------
-        '   ƒJƒŒƒ“ƒgƒZƒ‹İ’è
-        '   iˆ—ŠT—vjƒJƒŒƒ“ƒgƒZƒ‹‚ğİ’è‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^   FprmColName       ƒOƒŠƒbƒhã‚Ì—ñ–¼
-        '   @@@@@@@@ FprmRow           ‘ÎÛs‚ÌƒCƒ“ƒfƒbƒNƒX(0`)
-        '   œƒƒ\ƒbƒh–ß‚è’l F‚È‚µ
+        '   ã‚«ãƒ¬ãƒ³ãƒˆã‚»ãƒ«è¨­å®š
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰ã‚«ãƒ¬ãƒ³ãƒˆã‚»ãƒ«ã‚’è¨­å®šã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šprmColName       ã‚°ãƒªãƒƒãƒ‰ä¸Šã®åˆ—å
+        '   ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ ï¼šprmRow           å¯¾è±¡è¡Œã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹(0ï½)
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šãªã—
         '                                               2006.05.11 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ƒJƒŒƒ“ƒgƒZƒ‹‚ğİ’è‚·‚é
+        ''' ã‚«ãƒ¬ãƒ³ãƒˆã‚»ãƒ«ã‚’è¨­å®šã™ã‚‹
         ''' </summary>
-        ''' <param name="prmColName">ƒOƒŠƒbƒhã‚Ì—ñ–¼</param>
-        ''' <param name="prmRow">‘ÎÛs‚ÌƒCƒ“ƒfƒbƒNƒX(0`)</param>
+        ''' <param name="prmColName">ã‚°ãƒªãƒƒãƒ‰ä¸Šã®åˆ—å</param>
+        ''' <param name="prmRow">å¯¾è±¡è¡Œã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹(0ï½)</param>
         ''' <remarks></remarks>
         Public Sub setCurrentCell(ByVal prmColName As String, ByVal prmRow As Integer)
             _grid.CurrentCell = Me.getCell(prmColName, prmRow)
@@ -294,16 +294,16 @@ Namespace DataGridView
         '2010.08.18 add by Laevigata, Inc.
 
         '-------------------------------------------------------------------------------
-        '   Å‘ås”æ“¾
-        '   iˆ—ŠT—vjƒOƒŠƒbƒh‚É•\¦‚³‚ê‚Ä‚¢‚éƒf[ƒ^‚ÌÅ‘ås”æ“¾
-        '   œ“ü—Íƒpƒ‰ƒƒ^   F‚È‚µ
-        '   œƒƒ\ƒbƒh–ß‚è’l Fs”
+        '   æœ€å¤§è¡Œæ•°å–å¾—
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰ã‚°ãƒªãƒƒãƒ‰ã«è¡¨ç¤ºã•ã‚Œã¦ã„ã‚‹ãƒ‡ãƒ¼ã‚¿ã®æœ€å¤§è¡Œæ•°å–å¾—
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šãªã—
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šè¡Œæ•°
         '                                               2006.05.29 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ƒOƒŠƒbƒh‚É•\¦‚³‚ê‚Ä‚¢‚éƒf[ƒ^‚ÌÅ‘ås”æ“¾
+        ''' ã‚°ãƒªãƒƒãƒ‰ã«è¡¨ç¤ºã•ã‚Œã¦ã„ã‚‹ãƒ‡ãƒ¼ã‚¿ã®æœ€å¤§è¡Œæ•°å–å¾—
         ''' </summary>
-        ''' <returns>Å‘ås</returns>
+        ''' <returns>æœ€å¤§è¡Œ</returns>
         ''' <remarks></remarks>
         Public Function getMaxRow() As Integer
             '-->2010.11.15 chg by Laevigata, Inc.
@@ -314,53 +314,53 @@ Namespace DataGridView
         End Function
 
         '-------------------------------------------------------------------------------
-        '   —ñƒƒbƒN
-        '   iˆ—ŠT—vj—ñ‚ğ“Ç‚İæ‚èê—p‚É‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^   FprmColName       ƒOƒŠƒbƒhã‚Ì—ñ–¼
-        '   œƒƒ\ƒbƒh–ß‚è’l F‚È‚µ
+        '   åˆ—ãƒ­ãƒƒã‚¯
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰åˆ—ã‚’èª­ã¿å–ã‚Šå°‚ç”¨ã«ã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šprmColName       ã‚°ãƒªãƒƒãƒ‰ä¸Šã®åˆ—å
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šãªã—
         '                                               2006.05.01 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' —ñ‚ğƒƒbƒN‚·‚é(“Çæê—p)
+        ''' åˆ—ã‚’ãƒ­ãƒƒã‚¯ã™ã‚‹(èª­å–å°‚ç”¨)
         ''' </summary>
-        ''' <param name="prmColName">ƒOƒŠƒbƒhã‚Ì—ñ–¼</param>
+        ''' <param name="prmColName">ã‚°ãƒªãƒƒãƒ‰ä¸Šã®åˆ—å</param>
         ''' <remarks></remarks>
         Public Sub colRock(ByVal prmColName As String)
             _grid.Columns(prmColName).ReadOnly = True
         End Sub
 
         '-------------------------------------------------------------------------------
-        '   —ñƒAƒ“ƒƒbƒN
-        '   iˆ—ŠT—vj—ñ‚Ì“Ç‚İæ‚èê—p‚ğ‰ğœ‚µA•ÒW‰Â”\‚É‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^   FprmColName       ƒOƒŠƒbƒhã‚Ì—ñ–¼
-        '   œƒƒ\ƒbƒh–ß‚è’l F‚È‚µ
+        '   åˆ—ã‚¢ãƒ³ãƒ­ãƒƒã‚¯
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰åˆ—ã®èª­ã¿å–ã‚Šå°‚ç”¨ã‚’è§£é™¤ã—ã€ç·¨é›†å¯èƒ½ã«ã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šprmColName       ã‚°ãƒªãƒƒãƒ‰ä¸Šã®åˆ—å
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šãªã—
         '                                               2006.05.01 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' —ñ‚ÌƒƒbƒN‚ğ‰ğœ‚·‚é(•ÒW‰Â”\)
+        ''' åˆ—ã®ãƒ­ãƒƒã‚¯ã‚’è§£é™¤ã™ã‚‹(ç·¨é›†å¯èƒ½)
         ''' </summary>
-        ''' <param name="prmColName">ƒOƒŠƒbƒhã‚Ì—ñ–¼</param>
+        ''' <param name="prmColName">ã‚°ãƒªãƒƒãƒ‰ä¸Šã®åˆ—å</param>
         ''' <remarks></remarks>
         Public Sub colUnRock(ByVal prmColName As String)
             _grid.Columns(prmColName).ReadOnly = False
         End Sub
 
         '-------------------------------------------------------------------------------
-        '   —ñ”wŒiF•ÏX
-        '   iˆ—ŠT—vj—ñ‚Ì”wŒiF‚ğ•ÏX‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^   FprmColName       ƒOƒŠƒbƒhã‚Ì—ñ–¼
-        '                    FprmBackColor     ”wŒiF
-        '                    FprmForeColor     ‘OŒiF
-        '                    FprmSelBackColor  ‘I‘ğ‚Ì”wŒiF
-        '                    FprmSelForeColor  ‘I‘ğ‚Ì‘OŒiF
-        '   œƒƒ\ƒbƒh–ß‚è’l F‚È‚µ
+        '   åˆ—èƒŒæ™¯è‰²å¤‰æ›´
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰åˆ—ã®èƒŒæ™¯è‰²ã‚’å¤‰æ›´ã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šprmColName       ã‚°ãƒªãƒƒãƒ‰ä¸Šã®åˆ—å
+        '                    ï¼šprmBackColor     èƒŒæ™¯è‰²
+        '                    ï¼šprmForeColor     å‰æ™¯è‰²
+        '                    ï¼šprmSelBackColor  é¸æŠæ™‚ã®èƒŒæ™¯è‰²
+        '                    ï¼šprmSelForeColor  é¸æŠæ™‚ã®å‰æ™¯è‰²
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šãªã—
         '                                               2006.05.01 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' —ñ‚Ì”wŒiF‚ğ•ÏX‚·‚é
+        ''' åˆ—ã®èƒŒæ™¯è‰²ã‚’å¤‰æ›´ã™ã‚‹
         ''' </summary>
-        ''' <param name="prmColName">ƒOƒŠƒbƒhã‚Ì—ñ–¼</param>
-        ''' <param name="prmBackColor">”wŒiF</param>
+        ''' <param name="prmColName">ã‚°ãƒªãƒƒãƒ‰ä¸Šã®åˆ—å</param>
+        ''' <param name="prmBackColor">èƒŒæ™¯è‰²</param>
         ''' <remarks></remarks>
         Public Sub colChengeColor(ByVal prmColName As String,
                                   ByVal prmBackColor As Drawing.Color)
@@ -370,11 +370,11 @@ Namespace DataGridView
             End Try
         End Sub
         ''' <summary>
-        ''' —ñ‚Ì”wŒiF‚ğ•ÏX‚·‚é
+        ''' åˆ—ã®èƒŒæ™¯è‰²ã‚’å¤‰æ›´ã™ã‚‹
         ''' </summary>
-        ''' <param name="prmColName">ƒOƒŠƒbƒhã‚Ì—ñ–¼</param>
-        ''' <param name="prmBackColor">”wŒiF</param>
-        ''' <param name="prmForeColor">‘OŒiF</param>
+        ''' <param name="prmColName">ã‚°ãƒªãƒƒãƒ‰ä¸Šã®åˆ—å</param>
+        ''' <param name="prmBackColor">èƒŒæ™¯è‰²</param>
+        ''' <param name="prmForeColor">å‰æ™¯è‰²</param>
         ''' <remarks></remarks>
         Public Sub colChengeColor(ByVal prmColName As String,
                                   ByVal prmBackColor As Drawing.Color,
@@ -386,13 +386,13 @@ Namespace DataGridView
             End Try
         End Sub
         ''' <summary>
-        ''' —ñ‚Ì”wŒiF‚ğ•ÏX‚·‚é
+        ''' åˆ—ã®èƒŒæ™¯è‰²ã‚’å¤‰æ›´ã™ã‚‹
         ''' </summary>
-        ''' <param name="prmColName">ƒOƒŠƒbƒhã‚Ì—ñ–¼</param>
-        ''' <param name="prmBackColor">”wŒiF</param>
-        ''' <param name="prmForeColor">‘OŒiF</param>
-        ''' <param name="prmSelBackColor">‘I‘ğ‚Ì”wŒiF</param>
-        ''' <param name="prmSelForeColor">‘I‘ğ‚Ì‘OŒiF</param>
+        ''' <param name="prmColName">ã‚°ãƒªãƒƒãƒ‰ä¸Šã®åˆ—å</param>
+        ''' <param name="prmBackColor">èƒŒæ™¯è‰²</param>
+        ''' <param name="prmForeColor">å‰æ™¯è‰²</param>
+        ''' <param name="prmSelBackColor">é¸æŠæ™‚ã®èƒŒæ™¯è‰²</param>
+        ''' <param name="prmSelForeColor">é¸æŠæ™‚ã®å‰æ™¯è‰²</param>
         ''' <remarks></remarks>
         Public Sub colChengeColor(ByVal prmColName As String,
                                   ByVal prmBackColor As Drawing.Color,
@@ -409,24 +409,24 @@ Namespace DataGridView
         End Sub
 
         '-------------------------------------------------------------------------------
-        '   —ñ”wŒiFæ“¾
-        '   iˆ—ŠT—vj—ñ‚Ì”wŒiF‚ğæ“¾‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^   FprmColName          ƒOƒŠƒbƒhã‚Ì—ñ–¼
-        '                    FprmRefBackColor     ”wŒiF
-        '                    FprmRefForeColor     ‘OŒiF
-        '                    FprmRefSelBackColor  ‘I‘ğ‚Ì”wŒiF
-        '                    FprmRefSelForeColor  ‘I‘ğ‚Ì‘OŒiF
-        '   œƒƒ\ƒbƒh–ß‚è’l F‚È‚µ
+        '   åˆ—èƒŒæ™¯è‰²å–å¾—
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰åˆ—ã®èƒŒæ™¯è‰²ã‚’å–å¾—ã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šprmColName          ã‚°ãƒªãƒƒãƒ‰ä¸Šã®åˆ—å
+        '                    ï¼šprmRefBackColor     èƒŒæ™¯è‰²
+        '                    ï¼šprmRefForeColor     å‰æ™¯è‰²
+        '                    ï¼šprmRefSelBackColor  é¸æŠæ™‚ã®èƒŒæ™¯è‰²
+        '                    ï¼šprmRefSelForeColor  é¸æŠæ™‚ã®å‰æ™¯è‰²
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šãªã—
         '                                               2006.05.19 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' —ñ‚Ì”wŒiF‚ğæ“¾‚·‚é
+        ''' åˆ—ã®èƒŒæ™¯è‰²ã‚’å–å¾—ã™ã‚‹
         ''' </summary>
-        ''' <param name="prmColName">ƒOƒŠƒbƒhã‚Ì—ñ–¼</param>
-        ''' <param name="prmRefBackColor">”wŒiF</param>
-        ''' <param name="prmRefForeColor">‘OŒiF</param>
-        ''' <param name="prmRefSelBackColor">‘I‘ğ‚Ì”wŒiF</param>
-        ''' <param name="prmRefSelForeColor">‘I‘ğ‚Ì‘OŒiF</param>
+        ''' <param name="prmColName">ã‚°ãƒªãƒƒãƒ‰ä¸Šã®åˆ—å</param>
+        ''' <param name="prmRefBackColor">èƒŒæ™¯è‰²</param>
+        ''' <param name="prmRefForeColor">å‰æ™¯è‰²</param>
+        ''' <param name="prmRefSelBackColor">é¸æŠæ™‚ã®èƒŒæ™¯è‰²</param>
+        ''' <param name="prmRefSelForeColor">é¸æŠæ™‚ã®å‰æ™¯è‰²</param>
         ''' <remarks></remarks>
         Public Sub colGetColor(ByVal prmColName As String,
                                ByRef prmRefBackColor As Drawing.Color,
@@ -443,21 +443,21 @@ Namespace DataGridView
         End Sub
 
         '-------------------------------------------------------------------------------
-        '   s”wŒiF•ÏX
-        '   iˆ—ŠT—vjs‚Ì”wŒiF‚ğ•ÏX‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^   FprmRowIdx        ‘ÎÛs‚ÌƒCƒ“ƒfƒbƒNƒX(0`)
-        '                    FprmBackColor     ”wŒiF
-        '                    FprmForeColor     ‘OŒiF
-        '                    FprmSelBackColor  ‘I‘ğ‚Ì”wŒiF
-        '                    FprmSelForeColor  ‘I‘ğ‚Ì‘OŒiF
-        '   œƒƒ\ƒbƒh–ß‚è’l F‚È‚µ
+        '   è¡ŒèƒŒæ™¯è‰²å¤‰æ›´
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰è¡Œã®èƒŒæ™¯è‰²ã‚’å¤‰æ›´ã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šprmRowIdx        å¯¾è±¡è¡Œã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹(0ï½)
+        '                    ï¼šprmBackColor     èƒŒæ™¯è‰²
+        '                    ï¼šprmForeColor     å‰æ™¯è‰²
+        '                    ï¼šprmSelBackColor  é¸æŠæ™‚ã®èƒŒæ™¯è‰²
+        '                    ï¼šprmSelForeColor  é¸æŠæ™‚ã®å‰æ™¯è‰²
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šãªã—
         '                                               2006.05.11 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' s‚Ì”wŒiF‚ğ•ÏX‚·‚é
+        ''' è¡Œã®èƒŒæ™¯è‰²ã‚’å¤‰æ›´ã™ã‚‹
         ''' </summary>
-        ''' <param name="prmRowIdx">‘ÎÛs‚ÌƒCƒ“ƒfƒbƒNƒX</param>
-        ''' <param name="prmBackColor">”wŒiF</param>
+        ''' <param name="prmRowIdx">å¯¾è±¡è¡Œã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹</param>
+        ''' <param name="prmBackColor">èƒŒæ™¯è‰²</param>
         ''' <remarks></remarks>
         Public Sub rowChengeColor(ByVal prmRowIdx As Integer,
                                   ByVal prmBackColor As Drawing.Color)
@@ -467,11 +467,11 @@ Namespace DataGridView
             End Try
         End Sub
         ''' <summary>
-        ''' s‚Ì”wŒiF‚ğ•ÏX‚·‚é
+        ''' è¡Œã®èƒŒæ™¯è‰²ã‚’å¤‰æ›´ã™ã‚‹
         ''' </summary>
-        ''' <param name="prmRowIdx">‘ÎÛs‚ÌƒCƒ“ƒfƒbƒNƒX</param>
-        ''' <param name="prmBackColor">”wŒiF</param>
-        ''' <param name="prmForeColor">‘OŒiF</param>
+        ''' <param name="prmRowIdx">å¯¾è±¡è¡Œã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹</param>
+        ''' <param name="prmBackColor">èƒŒæ™¯è‰²</param>
+        ''' <param name="prmForeColor">å‰æ™¯è‰²</param>
         ''' <remarks></remarks>
         Public Sub rowChengeColor(ByVal prmRowIdx As Integer,
                                   ByVal prmBackColor As Drawing.Color,
@@ -483,13 +483,13 @@ Namespace DataGridView
             End Try
         End Sub
         ''' <summary>
-        ''' s‚Ì”wŒiF‚ğ•ÏX‚·‚é
+        ''' è¡Œã®èƒŒæ™¯è‰²ã‚’å¤‰æ›´ã™ã‚‹
         ''' </summary>
-        ''' <param name="prmRowIdx">‘ÎÛs‚ÌƒCƒ“ƒfƒbƒNƒX</param>
-        ''' <param name="prmBackColor">”wŒiF</param>
-        ''' <param name="prmForeColor">‘OŒiF</param>
-        ''' <param name="prmSelBackColor">‘I‘ğ‚Ì”wŒiF</param>
-        ''' <param name="prmSelForeColor">‘I‘ğ‚Ì‘OŒiF</param>
+        ''' <param name="prmRowIdx">å¯¾è±¡è¡Œã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹</param>
+        ''' <param name="prmBackColor">èƒŒæ™¯è‰²</param>
+        ''' <param name="prmForeColor">å‰æ™¯è‰²</param>
+        ''' <param name="prmSelBackColor">é¸æŠæ™‚ã®èƒŒæ™¯è‰²</param>
+        ''' <param name="prmSelForeColor">é¸æŠæ™‚ã®å‰æ™¯è‰²</param>
         ''' <remarks></remarks>
         Public Sub rowChengeColor(ByVal prmRowIdx As Integer,
                                   ByVal prmBackColor As Drawing.Color,
@@ -506,24 +506,24 @@ Namespace DataGridView
         End Sub
 
         '-------------------------------------------------------------------------------
-        '   s”wŒiFæ“¾
-        '   iˆ—ŠT—vjs‚Ì”wŒiF‚ğæ“¾‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^   FprmRowIdx        ‘ÎÛs‚ÌƒCƒ“ƒfƒbƒNƒX(0`)
-        '                    FprmRefBackColor     ”wŒiF
-        '                    FprmRefForeColor     ‘OŒiF
-        '                    FprmRefSelBackColor  ‘I‘ğ‚Ì”wŒiF
-        '                    FprmRefSelForeColor  ‘I‘ğ‚Ì‘OŒiF
-        '   œƒƒ\ƒbƒh–ß‚è’l F‚È‚µ
+        '   è¡ŒèƒŒæ™¯è‰²å–å¾—
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰è¡Œã®èƒŒæ™¯è‰²ã‚’å–å¾—ã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šprmRowIdx        å¯¾è±¡è¡Œã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹(0ï½)
+        '                    ï¼šprmRefBackColor     èƒŒæ™¯è‰²
+        '                    ï¼šprmRefForeColor     å‰æ™¯è‰²
+        '                    ï¼šprmRefSelBackColor  é¸æŠæ™‚ã®èƒŒæ™¯è‰²
+        '                    ï¼šprmRefSelForeColor  é¸æŠæ™‚ã®å‰æ™¯è‰²
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šãªã—
         '                                               2006.05.19 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' s‚Ì”wŒiF‚ğæ“¾‚·‚é
+        ''' è¡Œã®èƒŒæ™¯è‰²ã‚’å–å¾—ã™ã‚‹
         ''' </summary>
-        ''' <param name="prmRowIdx">‘ÎÛs‚ÌƒCƒ“ƒfƒbƒNƒX</param>
-        ''' <param name="prmRefBackColor">”wŒiF</param>
-        ''' <param name="prmRefForeColor">‘OŒiF</param>
-        ''' <param name="prmRefSelBackColor">‘I‘ğ‚Ì”wŒiF</param>
-        ''' <param name="prmRefSelForeColor">‘I‘ğ‚Ì‘OŒiF</param>
+        ''' <param name="prmRowIdx">å¯¾è±¡è¡Œã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹</param>
+        ''' <param name="prmRefBackColor">èƒŒæ™¯è‰²</param>
+        ''' <param name="prmRefForeColor">å‰æ™¯è‰²</param>
+        ''' <param name="prmRefSelBackColor">é¸æŠæ™‚ã®èƒŒæ™¯è‰²</param>
+        ''' <param name="prmRefSelForeColor">é¸æŠæ™‚ã®å‰æ™¯è‰²</param>
         ''' <remarks></remarks>
         Public Sub rowGetColor(ByVal prmRowIdx As Integer,
                                   ByRef prmRefBackColor As Drawing.Color,
@@ -540,15 +540,15 @@ Namespace DataGridView
         End Sub
 
         '-------------------------------------------------------------------------------
-        '   ‘I‘ğs”wŒiFİ’è
-        '   iˆ—ŠT—vj‘I‘ğs‚ğw’è‚ÌF‚Ö•ÏX‚µA‘I‘ğ‰ğœ‚Æ‚È‚és‚ÌF‚ğƒfƒtƒHƒ‹ƒg‚Ö–ß‚·
-        '   œ“ü—Íƒpƒ‰ƒƒ^   FprmNewRowIdx        ‘I‘ğs‚ÌƒCƒ“ƒfƒbƒNƒX(0`)
-        '                    FprmOldRowIdx        ‘I‘ğ‰ğœs‚ÌƒCƒ“ƒfƒbƒNƒX(0`)
-        '                    FprmRefBackColor     ”wŒiF
-        '                    FprmRefForeColor     ‘OŒiF
-        '                    FprmRefSelBackColor  ‘I‘ğ‚Ì”wŒiF
-        '                    FprmRefSelForeColor  ‘I‘ğ‚Ì‘OŒiF
-        '   œƒƒ\ƒbƒh–ß‚è’l F‚È‚µ
+        '   é¸æŠè¡ŒèƒŒæ™¯è‰²è¨­å®š
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰é¸æŠè¡Œã‚’æŒ‡å®šã®è‰²ã¸å¤‰æ›´ã—ã€é¸æŠè§£é™¤ã¨ãªã‚‹è¡Œã®è‰²ã‚’ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã¸æˆ»ã™
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šprmNewRowIdx        é¸æŠè¡Œã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹(0ï½)
+        '                    ï¼šprmOldRowIdx        é¸æŠè§£é™¤è¡Œã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹(0ï½)
+        '                    ï¼šprmRefBackColor     èƒŒæ™¯è‰²
+        '                    ï¼šprmRefForeColor     å‰æ™¯è‰²
+        '                    ï¼šprmRefSelBackColor  é¸æŠæ™‚ã®èƒŒæ™¯è‰²
+        '                    ï¼šprmRefSelForeColor  é¸æŠæ™‚ã®å‰æ™¯è‰²
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šãªã—
         '                                               2006.05.24 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         Public Sub setSelectionRowColor(ByVal prmNewRowIdx As Integer,
@@ -587,10 +587,10 @@ Namespace DataGridView
             Catch ex As ArgumentOutOfRangeException
             End Try
         End Sub
-        '“à•”ƒƒ\ƒbƒh
-        Private Const DEFCLR_B As Short = 0     '”wŒiF‚Ì‚İ
-        Private Const DEFCLR_BF As Short = 1    '”wŒiF•‘OŒiF‚Ì‚İ
-        Private Const DEFCLR_BFS As Short = 2   '”wŒiF‚Æ‘OŒiF‚Æ‘I‘ğ”wŒiF‚Æ‘I‘ğ‘OŒiF
+        'å†…éƒ¨ãƒ¡ã‚½ãƒƒãƒ‰
+        Private Const DEFCLR_B As Short = 0     'èƒŒæ™¯è‰²ã®ã¿
+        Private Const DEFCLR_BF As Short = 1    'èƒŒæ™¯è‰²ï¼†å‰æ™¯è‰²ã®ã¿
+        Private Const DEFCLR_BFS As Short = 2   'èƒŒæ™¯è‰²ã¨å‰æ™¯è‰²ã¨é¸æŠæ™‚èƒŒæ™¯è‰²ã¨é¸æŠæ™‚å‰æ™¯è‰²
         Private Sub setDefaultCellColor(ByVal prmKbn As Short,
                                         ByVal prmNewRowIdx As Integer,
                                         ByVal prmOldRowIdx As Integer)
@@ -607,28 +607,28 @@ Namespace DataGridView
         End Sub
 
         '-------------------------------------------------------------------------------
-        '   ƒ{ƒ^ƒ“ƒNƒŠƒbƒNsæ“¾
-        '   iˆ—ŠT—vjƒ{ƒ^ƒ“Œ^‚Ì—ñ‚É‚¨‚¢‚ÄAƒNƒŠƒbƒN‚³‚ê‚½s‚ÌƒCƒ“ƒfƒbƒNƒX‚ğ•Ô‹p‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^   Fe(DataGridViewCellEventArgs) CellContentClickƒCƒxƒ“ƒg‚ÌƒCƒxƒ“ƒgƒIƒuƒWƒFƒNƒg
-        '   @@@@@@@@ FprmRefRowIdx                 ‰Ÿ‰ºƒ{ƒ^ƒ“sIdx(0`)
-        '   œƒƒ\ƒbƒh–ß‚è’l FTrue/False       ƒ{ƒ^ƒ“ƒNƒŠƒbƒN‚³‚ê‚Ä‚¢‚é‚©”Û‚©
-        '   œ”õl@@       FCellContentClickƒCƒxƒ“ƒg‚ÅŒÄ‚Ño‚·‚±‚ÆB
-        '                    Fƒ{ƒ^ƒ“ƒNƒŠƒbƒN‚Å–³‚¢ê‡‚àÀs‚³‚ê‚éˆ×A
-        '                    Fƒ{ƒ^ƒ“ƒNƒŠƒbƒN‚Ìê‡‚Ì‚İƒƒ\ƒbƒh–ß‚è’l‚ÉTrue‚ğ•Ô‹p‚·‚éB
+        '   ãƒœã‚¿ãƒ³ã‚¯ãƒªãƒƒã‚¯è¡Œå–å¾—
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰ãƒœã‚¿ãƒ³å‹ã®åˆ—ã«ãŠã„ã¦ã€ã‚¯ãƒªãƒƒã‚¯ã•ã‚ŒãŸè¡Œã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‚’è¿”å´ã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼še(DataGridViewCellEventArgs) CellContentClickã‚¤ãƒ™ãƒ³ãƒˆã®ã‚¤ãƒ™ãƒ³ãƒˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+        '   ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ ï¼šprmRefRowIdx                 æŠ¼ä¸‹ãƒœã‚¿ãƒ³è¡ŒIdx(0ï½)
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šTrue/False       ãƒœã‚¿ãƒ³ã‚¯ãƒªãƒƒã‚¯ã•ã‚Œã¦ã„ã‚‹ã‹å¦ã‹
+        '   â—å‚™è€ƒã€€ã€€       ï¼šCellContentClickã‚¤ãƒ™ãƒ³ãƒˆã§å‘¼ã³å‡ºã™ã“ã¨ã€‚
+        '                    ï¼šãƒœã‚¿ãƒ³ã‚¯ãƒªãƒƒã‚¯ã§ç„¡ã„å ´åˆã‚‚å®Ÿè¡Œã•ã‚Œã‚‹ç‚ºã€
+        '                    ï¼šãƒœã‚¿ãƒ³ã‚¯ãƒªãƒƒã‚¯ã®å ´åˆã®ã¿ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ã«Trueã‚’è¿”å´ã™ã‚‹ã€‚
         '                                               2006.05.11 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ƒ{ƒ^ƒ“Œ^‚Ì—ñ‚É‚¨‚¢‚ÄAƒNƒŠƒbƒN‚³‚ê‚½s‚ÌƒCƒ“ƒfƒbƒNƒX‚ğæ“¾
+        ''' ãƒœã‚¿ãƒ³å‹ã®åˆ—ã«ãŠã„ã¦ã€ã‚¯ãƒªãƒƒã‚¯ã•ã‚ŒãŸè¡Œã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‚’å–å¾—
         ''' </summary>
-        ''' <param name="e">CellContentClickƒCƒxƒ“ƒg‚ÌƒCƒxƒ“ƒgƒIƒuƒWƒFƒNƒg</param>
-        ''' <param name="prmRefRowIdx">‰Ÿ‰ºƒ{ƒ^ƒ“sIdx(0`)</param>
-        ''' <returns>True/FalseFƒ{ƒ^ƒ“ƒNƒŠƒbƒN‚³‚ê‚Ä‚¢‚é‚©”Û‚©</returns>
+        ''' <param name="e">CellContentClickã‚¤ãƒ™ãƒ³ãƒˆã®ã‚¤ãƒ™ãƒ³ãƒˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
+        ''' <param name="prmRefRowIdx">æŠ¼ä¸‹ãƒœã‚¿ãƒ³è¡ŒIdx(0ï½)</param>
+        ''' <returns>True/Falseï¼šãƒœã‚¿ãƒ³ã‚¯ãƒªãƒƒã‚¯ã•ã‚Œã¦ã„ã‚‹ã‹å¦ã‹</returns>
         ''' <remarks></remarks>
         Public Function getClickBtn(ByVal e As System.Windows.Forms.DataGridViewCellEventArgs,
                                ByRef prmRefRowIdx As Integer) As Boolean
             If Not (TypeOf _grid.Columns(e.ColumnIndex) Is Windows.Forms.DataGridViewButtonColumn _
                AndAlso e.RowIndex <> -1) Then
-                'ƒ{ƒ^ƒ“ƒNƒŠƒbƒNƒCƒxƒ“ƒg‚Å‚Í‚È‚¢
+                'ãƒœã‚¿ãƒ³ã‚¯ãƒªãƒƒã‚¯ã‚¤ãƒ™ãƒ³ãƒˆã§ã¯ãªã„
                 Return False
             End If
 
@@ -638,49 +638,49 @@ Namespace DataGridView
         End Function
 
         '-------------------------------------------------------------------------------
-        '   ƒRƒ“ƒ{ƒ{ƒbƒNƒXs’Ç‰Á
-        '   iˆ—ŠT—vjƒRƒ“ƒ{ƒ{ƒbƒNƒXŒ^‚Ì—ñ‚Öƒf[ƒ^‚ğ1Œ’Ç‰Á‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^   FprmColName   ƒOƒŠƒbƒhã‚Ì—ñ–¼
-        '   @@@@@@@@ FprmData      ƒRƒ“ƒ{ƒ{ƒbƒNƒXƒf[ƒ^‚ÌVO(UtilDgvCboVO)
-        '   œƒƒ\ƒbƒh–ß‚è’l F‚È‚µ
+        '   ã‚³ãƒ³ãƒœãƒœãƒƒã‚¯ã‚¹è¡Œè¿½åŠ 
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰ã‚³ãƒ³ãƒœãƒœãƒƒã‚¯ã‚¹å‹ã®åˆ—ã¸ãƒ‡ãƒ¼ã‚¿ã‚’1ä»¶è¿½åŠ ã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šprmColName   ã‚°ãƒªãƒƒãƒ‰ä¸Šã®åˆ—å
+        '   ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ ï¼šprmData      ã‚³ãƒ³ãƒœãƒœãƒƒã‚¯ã‚¹ãƒ‡ãƒ¼ã‚¿ã®VO(UtilDgvCboVO)
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šãªã—
         '                                               2006.05.12 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ƒRƒ“ƒ{ƒ{ƒbƒNƒX—ñ‚Öƒf[ƒ^‚ğ1Œ’Ç‰Á‚·‚é
+        ''' ã‚³ãƒ³ãƒœãƒœãƒƒã‚¯ã‚¹åˆ—ã¸ãƒ‡ãƒ¼ã‚¿ã‚’1ä»¶è¿½åŠ ã™ã‚‹
         ''' </summary>
-        ''' <param name="prmColName">ƒOƒŠƒbƒhã‚Ì—ñ–¼</param>
-        ''' <param name="prmData">ƒRƒ“ƒ{ƒ{ƒbƒNƒXƒf[ƒ^‚ÌVO(UtilDgvCboVO)</param>
+        ''' <param name="prmColName">ã‚°ãƒªãƒƒãƒ‰ä¸Šã®åˆ—å</param>
+        ''' <param name="prmData">ã‚³ãƒ³ãƒœãƒœãƒƒã‚¯ã‚¹ãƒ‡ãƒ¼ã‚¿ã®VO(UtilDgvCboVO)</param>
         ''' <remarks></remarks>
         Public Sub addItem(ByVal prmColName As String, ByVal prmData As UtilDgvCboVO)
             Try
                 If prmData Is Nothing Then
-                    Throw (New UsrDefException("UtilDgvCboVO‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ªİ’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ"))
+                    Throw (New UsrDefException("UtilDgvCboVOã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ãŒè¨­å®šã•ã‚Œã¦ã„ã¾ã›ã‚“"))
                 End If
-                'Œ»İ‚ÌƒRƒ“ƒ{‚©‚çDataTable‚ğæ“¾
+                'ç¾åœ¨ã®ã‚³ãƒ³ãƒœã‹ã‚‰DataTableã‚’å–å¾—
                 Dim dt As DataTable = CType(CType(_grid.Columns(prmColName), Windows.Forms.DataGridViewComboBoxColumn).DataSource, DataTable)
                 Dim dsp As String = ""
                 Dim val As String = ""
                 If dt Is Nothing Then
-                    'Œ»İ‚ÌƒRƒ“ƒ{‚Íƒf[ƒ^–³‚µ‚È‚Ì‚Å
-                    dt = New DataTable()    'ƒf[ƒ^ƒe[ƒuƒ‹‚ğ¶¬
-                    dsp = prmData.name      'DisplayMenber‚ğİ’è
-                    val = prmData.code      'ValueMenber‚ğİ’è
+                    'ç¾åœ¨ã®ã‚³ãƒ³ãƒœã¯ãƒ‡ãƒ¼ã‚¿ç„¡ã—ãªã®ã§
+                    dt = New DataTable()    'ãƒ‡ãƒ¼ã‚¿ãƒ†ãƒ¼ãƒ–ãƒ«ã‚’ç”Ÿæˆ
+                    dsp = prmData.name      'DisplayMenberã‚’è¨­å®š
+                    val = prmData.code      'ValueMenberã‚’è¨­å®š
                 Else
-                    'Œ»İ‚ÌDisplayMember/ValueMember‚ğæ“¾
+                    'ç¾åœ¨ã®DisplayMember/ValueMemberã‚’å–å¾—
                     dsp = CType(_grid.Columns(prmColName), Windows.Forms.DataGridViewComboBoxColumn).DisplayMember
                     val = CType(_grid.Columns(prmColName), Windows.Forms.DataGridViewComboBoxColumn).ValueMember
                 End If
 
-                'DataTable‚ÉVO‚ğ’Ç‰Á
+                'DataTableã«VOã‚’è¿½åŠ 
                 Call addRow(dt, dsp, val, prmData)
 
-                'DataTable‚ğƒRƒ“ƒ{‚É–ß‚·
+                'DataTableã‚’ã‚³ãƒ³ãƒœã«æˆ»ã™
                 CType(_grid.Columns(prmColName), Windows.Forms.DataGridViewComboBoxColumn).DataSource = dt
             Catch ex As Exception
                 Throw ex
             End Try
         End Sub
-        '“à•”ƒƒ\ƒbƒhFDataTable‚ÌÅIs‚ÉVO‚Ìs‚ğ‘}“ü‚·‚é
+        'å†…éƒ¨ãƒ¡ã‚½ãƒƒãƒ‰ï¼šDataTableã®æœ€çµ‚è¡Œã«VOã®è¡Œã‚’æŒ¿å…¥ã™ã‚‹
         Private Sub addRow(ByRef dt As DataTable,
                                        ByVal DisplayMember As String,
                                        ByVal ValueMember As String _
@@ -690,7 +690,7 @@ Namespace DataGridView
                 newRow(DisplayMember) = prmData.name
                 newRow(ValueMember) = prmData.code
 
-                'Šù‘¶DataTable‚ÌÅIs‚ÉVO‚ğ‘}“ü
+                'æ—¢å­˜DataTableã®æœ€çµ‚è¡Œã«VOã‚’æŒ¿å…¥
                 dt.Rows.InsertAt(newRow, dt.Rows.Count)
 
             Catch ex As Exception
@@ -699,47 +699,47 @@ Namespace DataGridView
         End Sub
 
         '-------------------------------------------------------------------------------
-        '   ƒRƒ“ƒ{ƒ{ƒbƒNƒXsƒf[ƒ^ƒoƒCƒ“ƒh
-        '   iˆ—ŠT—vjƒRƒ“ƒ{ƒ{ƒbƒNƒXŒ^‚Ì—ñ‚Öƒf[ƒ^‚ğ•¡”Œ’Ç‰Á‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^   FprmColName       ƒOƒŠƒbƒhã‚Ì—ñ–¼
-        '   @@@@@@@@ FprmDataSet       İ’è‚·‚éDataSet(prmTblNameÈ—ª‚ÍIndex=0‚Ìƒf[ƒ^ƒe[ƒuƒ‹‚ğg—p)
-        '   @@@@@@@@ FprmNonSelRowFlg  æ“ª‚É‹ós(–¢‘I‘ğs)‚ğİ‚¯‚é‚©‚Ç‚¤‚©‚Ìƒtƒ‰ƒO(İ‚¯‚éê‡F“–ŠYs‚ğ‘I‘ğ‚ÍƒR[ƒh‚ğ""‚Æ‚·‚é)
-        '   @@@@@@@@ FprmDisplayMember DataSetã‚Ì•\¦–¼Ì‚ğŠi”[‚µ‚Ä‚¢‚é—ñ‚Ì—ñ–¼Ì
-        '   @@@@@@@@ FprmValueMember   DataSetã‚ÌƒR[ƒh‚ğŠi”[‚µ‚Ä‚¢‚é—ñ‚Ì—ñ–¼Ì
-        '   @@@@@@@@ FprmTblName       DataSetã‚Ìg—p‚·‚éTBL–¼‚ğw’è
-        '   œƒƒ\ƒbƒh–ß‚è’l F‚È‚µ
-        '   œ”õl@@       FForm_LoadƒCƒxƒ“ƒg‚È‚ÇƒRƒ“ƒ{İ’è‚ÉŒÄ‚Ño‚·‚±‚ÆB
+        '   ã‚³ãƒ³ãƒœãƒœãƒƒã‚¯ã‚¹è¡Œãƒ‡ãƒ¼ã‚¿ãƒã‚¤ãƒ³ãƒ‰
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰ã‚³ãƒ³ãƒœãƒœãƒƒã‚¯ã‚¹å‹ã®åˆ—ã¸ãƒ‡ãƒ¼ã‚¿ã‚’è¤‡æ•°ä»¶è¿½åŠ ã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šprmColName       ã‚°ãƒªãƒƒãƒ‰ä¸Šã®åˆ—å
+        '   ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ ï¼šprmDataSet       è¨­å®šã™ã‚‹DataSet(prmTblNameçœç•¥æ™‚ã¯Index=0ã®ãƒ‡ãƒ¼ã‚¿ãƒ†ãƒ¼ãƒ–ãƒ«ã‚’ä½¿ç”¨)
+        '   ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ ï¼šprmNonSelRowFlg  å…ˆé ­ã«ç©ºè¡Œ(æœªé¸æŠè¡Œ)ã‚’è¨­ã‘ã‚‹ã‹ã©ã†ã‹ã®ãƒ•ãƒ©ã‚°(è¨­ã‘ã‚‹å ´åˆï¼šå½“è©²è¡Œã‚’é¸æŠæ™‚ã¯ã‚³ãƒ¼ãƒ‰ã‚’""ã¨ã™ã‚‹)
+        '   ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ ï¼šprmDisplayMember DataSetä¸Šã®è¡¨ç¤ºåç§°ã‚’æ ¼ç´ã—ã¦ã„ã‚‹åˆ—ã®åˆ—åç§°
+        '   ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ ï¼šprmValueMember   DataSetä¸Šã®ã‚³ãƒ¼ãƒ‰ã‚’æ ¼ç´ã—ã¦ã„ã‚‹åˆ—ã®åˆ—åç§°
+        '   ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ ï¼šprmTblName       DataSetä¸Šã®ä½¿ç”¨ã™ã‚‹TBLåã‚’æŒ‡å®š
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šãªã—
+        '   â—å‚™è€ƒã€€ã€€       ï¼šForm_Loadã‚¤ãƒ™ãƒ³ãƒˆãªã©ã‚³ãƒ³ãƒœè¨­å®šæ™‚ã«å‘¼ã³å‡ºã™ã“ã¨ã€‚
         '                                               2006.05.12 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ƒRƒ“ƒ{ƒ{ƒbƒNƒXŒ^‚Ì—ñ‚Öƒf[ƒ^‚ğ•¡”Œ’Ç‰Á‚·‚é
+        ''' ã‚³ãƒ³ãƒœãƒœãƒƒã‚¯ã‚¹å‹ã®åˆ—ã¸ãƒ‡ãƒ¼ã‚¿ã‚’è¤‡æ•°ä»¶è¿½åŠ ã™ã‚‹
         ''' </summary>
-        ''' <param name="prmColName">ƒOƒŠƒbƒhã‚Ì—ñ–¼</param>
-        ''' <param name="prmDataSet">İ’è‚·‚éDataSet(prmTblNameÈ—ª‚ÍIndex=0‚Ìƒf[ƒ^ƒe[ƒuƒ‹‚ğg—p)</param>
-        ''' <param name="prmNonSelRowFlg">æ“ª‚É‹ós(–¢‘I‘ğs)‚ğİ‚¯‚é‚©‚Ç‚¤‚©‚Ìƒtƒ‰ƒO(İ‚¯‚éê‡F“–ŠYs‚ğ‘I‘ğ‚ÍƒR[ƒh‚ğ""‚Æ‚·‚é)</param>
-        ''' <param name="prmDisplayMember">DataSetã‚Ì•\¦–¼Ì‚ğŠi”[‚µ‚Ä‚¢‚é—ñ‚Ì—ñ–¼Ì</param>
-        ''' <param name="prmValueMember">DataSetã‚ÌƒR[ƒh‚ğŠi”[‚µ‚Ä‚¢‚é—ñ‚Ì—ñ–¼Ì</param>
-        ''' <param name="prmTblName">DataSetã‚Ìg—p‚·‚éTBL–¼‚ğw’è</param>
+        ''' <param name="prmColName">ã‚°ãƒªãƒƒãƒ‰ä¸Šã®åˆ—å</param>
+        ''' <param name="prmDataSet">è¨­å®šã™ã‚‹DataSet(prmTblNameçœç•¥æ™‚ã¯Index=0ã®ãƒ‡ãƒ¼ã‚¿ãƒ†ãƒ¼ãƒ–ãƒ«ã‚’ä½¿ç”¨)</param>
+        ''' <param name="prmNonSelRowFlg">å…ˆé ­ã«ç©ºè¡Œ(æœªé¸æŠè¡Œ)ã‚’è¨­ã‘ã‚‹ã‹ã©ã†ã‹ã®ãƒ•ãƒ©ã‚°(è¨­ã‘ã‚‹å ´åˆï¼šå½“è©²è¡Œã‚’é¸æŠæ™‚ã¯ã‚³ãƒ¼ãƒ‰ã‚’""ã¨ã™ã‚‹)</param>
+        ''' <param name="prmDisplayMember">DataSetä¸Šã®è¡¨ç¤ºåç§°ã‚’æ ¼ç´ã—ã¦ã„ã‚‹åˆ—ã®åˆ—åç§°</param>
+        ''' <param name="prmValueMember">DataSetä¸Šã®ã‚³ãƒ¼ãƒ‰ã‚’æ ¼ç´ã—ã¦ã„ã‚‹åˆ—ã®åˆ—åç§°</param>
+        ''' <param name="prmTblName">DataSetä¸Šã®ä½¿ç”¨ã™ã‚‹TBLåã‚’æŒ‡å®š</param>
         ''' <remarks></remarks>
         Public Sub setCboData(ByVal prmColName As String, ByVal prmDataSet As DataSet,
                               Optional ByVal prmNonSelRowFlg As Boolean = False,
-                              Optional ByVal prmDisplayMember As String = "–¼Ì",
-                              Optional ByVal prmValueMember As String = "ƒR[ƒh",
+                              Optional ByVal prmDisplayMember As String = "åç§°",
+                              Optional ByVal prmValueMember As String = "ã‚³ãƒ¼ãƒ‰",
                               Optional ByVal prmTblName As String = "")
             Try
 
                 Dim dt As DataTable = New DataTable()
 
                 If prmTblName.Equals("") Then
-                    '0”Ô–Ú‚ÌTBL‚ğg—p
+                    '0ç•ªç›®ã®TBLã‚’ä½¿ç”¨
                     dt = prmDataSet.Tables(0)
-                    If prmNonSelRowFlg Then             '‹ós‚ğİ’è‚·‚é‚©
+                    If prmNonSelRowFlg Then             'ç©ºè¡Œã‚’è¨­å®šã™ã‚‹ã‹
                         Call addNonSelectRow(dt, prmDisplayMember, prmValueMember)
                     End If
                 Else
-                    'w’è‚ÌTBL–¼Ì‚ÌTBL‚ğg—p
+                    'æŒ‡å®šã®TBLåç§°ã®TBLã‚’ä½¿ç”¨
                     dt = prmDataSet.Tables(prmTblName)
-                    If prmNonSelRowFlg Then             '‹ós‚ğİ’è‚·‚é‚©
+                    If prmNonSelRowFlg Then             'ç©ºè¡Œã‚’è¨­å®šã™ã‚‹ã‹
                         Call addNonSelectRow(dt, prmDisplayMember, prmValueMember)
                     End If
                 End If
@@ -752,7 +752,7 @@ Namespace DataGridView
                 Throw ex
             End Try
         End Sub
-        '“à•”ƒƒ\ƒbƒhFDataTable‚Ìæ“ªs‚É‹ós‚ğİ‚¯‚é
+        'å†…éƒ¨ãƒ¡ã‚½ãƒƒãƒ‰ï¼šDataTableã®å…ˆé ­è¡Œã«ç©ºè¡Œã‚’è¨­ã‘ã‚‹
         Private Sub addNonSelectRow(ByRef dt As DataTable,
                                        ByVal DisplayMember As String,
                                        ByVal ValueMember As String)
@@ -761,7 +761,7 @@ Namespace DataGridView
                 newRow(DisplayMember) = ""
                 newRow(ValueMember) = ""
 
-                'Šù‘¶DataTable‚Ìæ“ª‚É‹ós‚ğ‘}“ü
+                'æ—¢å­˜DataTableã®å…ˆé ­ã«ç©ºè¡Œã‚’æŒ¿å…¥
                 dt.Rows.InsertAt(newRow, 0)
 
             Catch ex As Exception
@@ -770,48 +770,48 @@ Namespace DataGridView
         End Sub
 
         '-------------------------------------------------------------------------------
-        '   ƒRƒ“ƒ{ƒ{ƒbƒNƒXs‘I‘ğ
-        '   iˆ—ŠT—vjƒRƒ“ƒ{ƒ{ƒbƒNƒXŒ^‚Ì—ñã‚ÌƒRƒ“ƒ{‚ğ‘I‘ğ‚³‚¹‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^   FprmRowIdx        ‘ÎÛs‚ÌƒCƒ“ƒfƒbƒNƒX(0`)
-        '   @@@@@@@@ FprmColName       ƒOƒŠƒbƒhã‚Ì—ñ–¼
-        '   @@@@@@@@ FprmCode          ƒR[ƒh
-        '   œƒƒ\ƒbƒh–ß‚è’l F‚È‚µ
-        '   œ”õl@@       FƒR[ƒh‚ªŒ©‚Â‚©‚ç‚È‚¢ê‡‚Í–¢‘I‘ğ‚Æ‚·‚éB
+        '   ã‚³ãƒ³ãƒœãƒœãƒƒã‚¯ã‚¹è¡Œé¸æŠ
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰ã‚³ãƒ³ãƒœãƒœãƒƒã‚¯ã‚¹å‹ã®åˆ—ä¸Šã®ã‚³ãƒ³ãƒœã‚’é¸æŠã•ã›ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šprmRowIdx        å¯¾è±¡è¡Œã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹(0ï½)
+        '   ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ ï¼šprmColName       ã‚°ãƒªãƒƒãƒ‰ä¸Šã®åˆ—å
+        '   ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ ï¼šprmCode          ã‚³ãƒ¼ãƒ‰
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šãªã—
+        '   â—å‚™è€ƒã€€ã€€       ï¼šã‚³ãƒ¼ãƒ‰ãŒè¦‹ã¤ã‹ã‚‰ãªã„å ´åˆã¯æœªé¸æŠã¨ã™ã‚‹ã€‚
         '                                               2006.05.12 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ƒRƒ“ƒ{ƒ{ƒbƒNƒXŒ^‚Ì—ñã‚ÌƒRƒ“ƒ{‚ğ‘I‘ğ‚³‚¹‚é@ƒR[ƒh‚ªŒ©‚Â‚©‚ç‚È‚¢ê‡‚Í–¢‘I‘ğ‚Æ‚·‚é
+        ''' ã‚³ãƒ³ãƒœãƒœãƒƒã‚¯ã‚¹å‹ã®åˆ—ä¸Šã®ã‚³ãƒ³ãƒœã‚’é¸æŠã•ã›ã‚‹ã€€ã‚³ãƒ¼ãƒ‰ãŒè¦‹ã¤ã‹ã‚‰ãªã„å ´åˆã¯æœªé¸æŠã¨ã™ã‚‹
         ''' </summary>
-        ''' <param name="prmRowIdx">‘ÎÛs‚ÌƒCƒ“ƒfƒbƒNƒX(0`)</param>
-        ''' <param name="prmColName">ƒOƒŠƒbƒhã‚Ì—ñ–¼</param>
-        ''' <param name="prmCode">ƒR[ƒh</param>
+        ''' <param name="prmRowIdx">å¯¾è±¡è¡Œã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹(0ï½)</param>
+        ''' <param name="prmColName">ã‚°ãƒªãƒƒãƒ‰ä¸Šã®åˆ—å</param>
+        ''' <param name="prmCode">ã‚³ãƒ¼ãƒ‰</param>
         ''' <remarks></remarks>
         Public Sub selectItem(ByVal prmRowIdx As Integer, ByVal prmColName As String, ByVal prmCode As String)
             Try
-                'Œ»İ‚ÌƒRƒ“ƒ{‚©‚çDataTable‚ğæ“¾
+                'ç¾åœ¨ã®ã‚³ãƒ³ãƒœã‹ã‚‰DataTableã‚’å–å¾—
                 Dim dt As DataTable = CType(CType(_grid.Columns(prmColName), Windows.Forms.DataGridViewComboBoxColumn).DataSource, DataTable)
                 Dim dsp As String = ""
                 Dim val As String = ""
                 If dt Is Nothing Then
-                    'Œ»İ‚ÌƒRƒ“ƒ{‚Íƒf[ƒ^–³‚µ‚È‚Ì‚Åˆ—–³‚µ
+                    'ç¾åœ¨ã®ã‚³ãƒ³ãƒœã¯ãƒ‡ãƒ¼ã‚¿ç„¡ã—ãªã®ã§å‡¦ç†ç„¡ã—
                     Return
                 Else
-                    'Œ»İ‚ÌDisplayMember/ValueMember‚ğæ“¾
+                    'ç¾åœ¨ã®DisplayMember/ValueMemberã‚’å–å¾—
                     dsp = CType(_grid.Columns(prmColName), Windows.Forms.DataGridViewComboBoxColumn).DisplayMember
                     val = CType(_grid.Columns(prmColName), Windows.Forms.DataGridViewComboBoxColumn).ValueMember
                 End If
 
                 Dim hitFlg As Boolean = False
-                For i As Integer = 0 To dt.Rows.Count - 1 'i‚ÍƒRƒ“ƒ{‚Ì’†‚Ìindex‚ğ¦‚·
+                For i As Integer = 0 To dt.Rows.Count - 1 'iã¯ã‚³ãƒ³ãƒœã®ä¸­ã®indexã‚’ç¤ºã™
                     If dt.Rows(i)(val).ToString.Equals(prmCode) Then
-                        'ˆê’v
+                        'ä¸€è‡´
                         CType(Me.getCell(prmColName, prmRowIdx), Windows.Forms.DataGridViewComboBoxCell).Value = prmCode
                         hitFlg = True
                         Continue For
                     End If
                 Next
                 If Not hitFlg Then
-                    'Œ©‚Â‚©‚ç‚È‚¢‚Ì‚Å–¢‘I‘ğ
+                    'è¦‹ã¤ã‹ã‚‰ãªã„ã®ã§æœªé¸æŠ
                     CType(Me.getCell(prmColName, prmRowIdx), Windows.Forms.DataGridViewComboBoxCell).Value = Nothing
                 End If
             Catch ex As Exception
@@ -820,20 +820,20 @@ Namespace DataGridView
         End Sub
 
         '-------------------------------------------------------------------------------
-        '   ƒRƒ“ƒ{ƒ{ƒbƒNƒX—ñ‚Ì‘I‘ğ’lƒR[ƒhæ“¾
-        '   iˆ—ŠT—vjŒ»İ‘I‘ğ‚³‚ê‚Ä‚¢‚é€–Ú‚ÌƒR[ƒh‚ğæ“¾‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^   FprmRowIdx    s”Ô†
-        '                    FprmColName   —ñ–¼
-        '   œƒƒ\ƒbƒh–ß‚è’l F‘I‘ğ’l(ƒR[ƒh)
-        '   œ”õl           F–¢‘I‘ğ‚Ì‚Î‚ ‚¢A""‚ğ•Ô‹p
+        '   ã‚³ãƒ³ãƒœãƒœãƒƒã‚¯ã‚¹åˆ—ã®é¸æŠå€¤ã‚³ãƒ¼ãƒ‰å–å¾—
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰ç¾åœ¨é¸æŠã•ã‚Œã¦ã„ã‚‹é …ç›®ã®ã‚³ãƒ¼ãƒ‰ã‚’å–å¾—ã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šprmRowIdx    è¡Œç•ªå·
+        '                    ï¼šprmColName   åˆ—å
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šé¸æŠå€¤(ã‚³ãƒ¼ãƒ‰)
+        '   â—å‚™è€ƒ           ï¼šæœªé¸æŠã®ã°ã‚ã„ã€""ã‚’è¿”å´
         '                                               2006.05.12 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ƒRƒ“ƒ{ƒ{ƒbƒNƒX—ñ‚Ì‘I‘ğ’lƒR[ƒhæ“¾
+        ''' ã‚³ãƒ³ãƒœãƒœãƒƒã‚¯ã‚¹åˆ—ã®é¸æŠå€¤ã‚³ãƒ¼ãƒ‰å–å¾—
         ''' </summary>
-        ''' <param name="prmRowIdx">s”Ô†</param>
-        ''' <param name="prmColName">—ñ–¼</param>
-        ''' <returns>‘I‘ğ’l(ƒR[ƒh)@–¢‘I‘ğ‚Ì‚Î‚ ‚¢A""‚ğ•Ô‹p</returns>
+        ''' <param name="prmRowIdx">è¡Œç•ªå·</param>
+        ''' <param name="prmColName">åˆ—å</param>
+        ''' <returns>é¸æŠå€¤(ã‚³ãƒ¼ãƒ‰)ã€€æœªé¸æŠã®ã°ã‚ã„ã€""ã‚’è¿”å´</returns>
         ''' <remarks></remarks>
         Public Function getCode(ByVal prmRowIdx As Integer, ByVal prmColName As String) As String
 
@@ -846,167 +846,167 @@ Namespace DataGridView
         End Function
 
         '-------------------------------------------------------------------------------
-        '   •\¦–¼æ“¾
-        '   iˆ—ŠT—vjŒ»İ‘I‘ğ‚³‚ê‚Ä‚¢‚é€–Ú‚Ì•\¦–¼Ì‚ğæ“¾‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^   F‚È‚µ
-        '   œƒƒ\ƒbƒh–ß‚è’l F‘I‘ğ’l(•\¦–¼Ì)
-        '   œ”­¶—áŠO       F‚È‚µ
-        '   œ”õl           F–¢‘I‘ğ‚Ì‚Î‚ ‚¢A""‚ğ•Ô‹p
+        '   è¡¨ç¤ºåå–å¾—
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰ç¾åœ¨é¸æŠã•ã‚Œã¦ã„ã‚‹é …ç›®ã®è¡¨ç¤ºåç§°ã‚’å–å¾—ã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šãªã—
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šé¸æŠå€¤(è¡¨ç¤ºåç§°)
+        '   â—ç™ºç”Ÿä¾‹å¤–       ï¼šãªã—
+        '   â—å‚™è€ƒ           ï¼šæœªé¸æŠã®ã°ã‚ã„ã€""ã‚’è¿”å´
         '                                               2006.05.12 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' •\¦–¼æ“¾@Œ»İ‘I‘ğ‚³‚ê‚Ä‚¢‚é€–Ú‚Ì•\¦–¼Ì‚ğæ“¾‚·‚é@–¢‘I‘ğ‚Ì‚Î‚ ‚¢A""‚ğ•Ô‹p
+        ''' è¡¨ç¤ºåå–å¾—ã€€ç¾åœ¨é¸æŠã•ã‚Œã¦ã„ã‚‹é …ç›®ã®è¡¨ç¤ºåç§°ã‚’å–å¾—ã™ã‚‹ã€€æœªé¸æŠã®ã°ã‚ã„ã€""ã‚’è¿”å´
         ''' </summary>
-        ''' <param name="prmRowIdx">s”Ô†</param>
-        ''' <param name="prmColName">—ñ‚Ì–¼Ì</param>
-        ''' <returns>‘I‘ğ’l(•\¦–¼Ì)</returns>
+        ''' <param name="prmRowIdx">è¡Œç•ªå·</param>
+        ''' <param name="prmColName">åˆ—ã®åç§°</param>
+        ''' <returns>é¸æŠå€¤(è¡¨ç¤ºåç§°)</returns>
         ''' <remarks></remarks>
         Public Function getName(ByVal prmRowIdx As Integer, ByVal prmColName As String) As String
             Try
-                'Œ»İ‚ÌƒRƒ“ƒ{‚©‚çDataTable‚ğæ“¾
+                'ç¾åœ¨ã®ã‚³ãƒ³ãƒœã‹ã‚‰DataTableã‚’å–å¾—
                 Dim dt As DataTable = CType(CType(_grid.Columns(prmColName), Windows.Forms.DataGridViewComboBoxColumn).DataSource, DataTable)
                 Dim dsp As String = ""
                 Dim val As String = ""
                 If dt Is Nothing Then
-                    'Œ»İ‚ÌƒRƒ“ƒ{‚Íƒf[ƒ^–³‚µ‚È‚Ì‚Åˆ—–³‚µ
+                    'ç¾åœ¨ã®ã‚³ãƒ³ãƒœã¯ãƒ‡ãƒ¼ã‚¿ç„¡ã—ãªã®ã§å‡¦ç†ç„¡ã—
                     Return ""
                 Else
-                    'Œ»İ‚ÌDisplayMember/ValueMember‚ğæ“¾
+                    'ç¾åœ¨ã®DisplayMember/ValueMemberã‚’å–å¾—
                     dsp = CType(_grid.Columns(prmColName), Windows.Forms.DataGridViewComboBoxColumn).DisplayMember
                     val = CType(_grid.Columns(prmColName), Windows.Forms.DataGridViewComboBoxColumn).ValueMember
                 End If
 
-                For i As Integer = 0 To dt.Rows.Count - 1 'i‚ÍƒRƒ“ƒ{‚Ì’†‚Ìindex‚ğ¦‚·
+                For i As Integer = 0 To dt.Rows.Count - 1 'iã¯ã‚³ãƒ³ãƒœã®ä¸­ã®indexã‚’ç¤ºã™
                     If dt.Rows(i)(val).ToString.Equals(CType(Me.getCell(prmColName, prmRowIdx), Windows.Forms.DataGridViewComboBoxCell).Value) Then
-                        'ˆê’v
+                        'ä¸€è‡´
                         Return dt.Rows(i)(dsp)
                     End If
                 Next
-                Return "" 'Œ©‚Â‚©‚ç‚È‚¢‚±‚Æ‚Í–³‚¢‚Í‚¸
+                Return "" 'è¦‹ã¤ã‹ã‚‰ãªã„ã“ã¨ã¯ç„¡ã„ã¯ãš
             Catch ex As Exception
                 Throw ex
             End Try
         End Function
         '>--2006/11/10 ADD -STR- A.Yamazaki
         '-------------------------------------------------------------------------------
-        '   ƒf[ƒ^ƒOƒŠƒbƒhƒrƒ…[‚ÌƒZƒ‹“ü—Í‚ğ§ŒÀ‚·‚é
-        '   iˆ—ŠT—vjƒf[ƒ^ƒOƒŠƒbƒhƒrƒ…[ƒZƒ‹‚Ì“ü—Í§ŒÀ‚ğs‚¤
-        '   œ“ü—Íƒpƒ‰ƒƒ^   Fprmsender    ŒÄ‚Ño‚µŒ³iEditingControlShowingjƒCƒxƒ“ƒg‚Ìusendervƒpƒ‰ƒ[ƒ^
-        '                    Fprme         ŒÄ‚Ño‚µŒ³iEditingControlShowingjƒCƒxƒ“ƒg‚Ìuevƒpƒ‰ƒ[ƒ^
-        '                    FprmchkType@ ƒ`ƒFƒbƒN•û–@
-        '                    Fprmchkchr@  “ü—Í‰Â”\•¶š—ñi”Ä—pƒ`ƒFƒbƒN‚Ìê‡‚Ég—pj
-        '   œƒƒ\ƒbƒh–ß‚è’l Fƒ`ƒFƒbƒN•K—vî•ñiVOj
-        '   œ”­¶—áŠO       F‚È‚µ
-        '   œ”õl           F
+        '   ãƒ‡ãƒ¼ã‚¿ã‚°ãƒªãƒƒãƒ‰ãƒ“ãƒ¥ãƒ¼ã®ã‚»ãƒ«å…¥åŠ›ã‚’åˆ¶é™ã™ã‚‹
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰ãƒ‡ãƒ¼ã‚¿ã‚°ãƒªãƒƒãƒ‰ãƒ“ãƒ¥ãƒ¼ã‚»ãƒ«ã®å…¥åŠ›åˆ¶é™ã‚’è¡Œã†
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šprmsender    å‘¼ã³å‡ºã—å…ƒï¼ˆEditingControlShowingï¼‰ã‚¤ãƒ™ãƒ³ãƒˆã®ã€Œsenderã€ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
+        '                    ï¼šprme         å‘¼ã³å‡ºã—å…ƒï¼ˆEditingControlShowingï¼‰ã‚¤ãƒ™ãƒ³ãƒˆã®ã€Œeã€ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
+        '                    ï¼šprmchkTypeã€€ ãƒã‚§ãƒƒã‚¯æ–¹æ³•
+        '                    ï¼šprmchkchrã€€  å…¥åŠ›å¯èƒ½æ–‡å­—åˆ—ï¼ˆæ±ç”¨ãƒã‚§ãƒƒã‚¯ã®å ´åˆã«ä½¿ç”¨ï¼‰
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šãƒã‚§ãƒƒã‚¯å¿…è¦æƒ…å ±ï¼ˆVOï¼‰
+        '   â—ç™ºç”Ÿä¾‹å¤–       ï¼šãªã—
+        '   â—å‚™è€ƒ           ï¼š
         '                                               2006.11.09 Created By Akiyoshi.Yamazaki
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ƒf[ƒ^ƒOƒŠƒbƒhƒrƒ…[‚ÌƒZƒ‹“ü—Í‚ğ§ŒÀ‚·‚é
+        ''' ãƒ‡ãƒ¼ã‚¿ã‚°ãƒªãƒƒãƒ‰ãƒ“ãƒ¥ãƒ¼ã®ã‚»ãƒ«å…¥åŠ›ã‚’åˆ¶é™ã™ã‚‹
         ''' </summary>
-        ''' <param name="prmsender">ŒÄ‚Ño‚µŒ³iEditingControlShowingjƒCƒxƒ“ƒg‚Ìusendervƒpƒ‰ƒ[ƒ^</param>
-        ''' <param name="prme">ŒÄ‚Ño‚µŒ³iEditingControlShowingjƒCƒxƒ“ƒg‚Ìuevƒpƒ‰ƒ[ƒ^</param>
-        ''' <param name="prmchkType">ƒ`ƒFƒbƒN•û–@</param>
-        ''' <returns>ƒ`ƒFƒbƒN•K—vî•ñiVOj</returns>
+        ''' <param name="prmsender">å‘¼ã³å‡ºã—å…ƒï¼ˆEditingControlShowingï¼‰ã‚¤ãƒ™ãƒ³ãƒˆã®ã€Œsenderã€ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿</param>
+        ''' <param name="prme">å‘¼ã³å‡ºã—å…ƒï¼ˆEditingControlShowingï¼‰ã‚¤ãƒ™ãƒ³ãƒˆã®ã€Œeã€ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿</param>
+        ''' <param name="prmchkType">ãƒã‚§ãƒƒã‚¯æ–¹æ³•</param>
+        ''' <returns>ãƒã‚§ãƒƒã‚¯å¿…è¦æƒ…å ±ï¼ˆVOï¼‰</returns>
         ''' <remarks></remarks>
         Public Function chkCell(ByVal prmsender As Object _
                                 , ByVal prme As System.Windows.Forms.DataGridViewEditingControlShowingEventArgs _
                                 , ByVal prmchkType As chkType) As UtilDgvChkCellVO
 
 
-            'DataGridViewTextBoxEditingControl‚ÌƒCƒxƒ“ƒg‚ğˆ—‚·‚éˆ×‚Ì•Ï”
+            'DataGridViewTextBoxEditingControlã®ã‚¤ãƒ™ãƒ³ãƒˆã‚’å‡¦ç†ã™ã‚‹ç‚ºã®å¤‰æ•°
             Dim editingControl As DataGridViewTextBoxEditingControl
-            Dim befData As String   'ƒZƒ‹•ÒW‘Oƒf[ƒ^
+            Dim befData As String   'ã‚»ãƒ«ç·¨é›†å‰ãƒ‡ãƒ¼ã‚¿
 
-            '•ÒW‘O‚Ìƒf[ƒ^‚ğæ“¾
+            'ç·¨é›†å‰ã®ãƒ‡ãƒ¼ã‚¿ã‚’å–å¾—
             If _grid.CurrentCell.Value IsNot Nothing Then
                 befData = _grid.CurrentCell.Value.ToString
             Else
                 befData = ""
             End If
 
-            '—]•ª‚È•¶š‚ğæ‚èœ‚­
+            'ä½™åˆ†ãªæ–‡å­—ã‚’å–ã‚Šé™¤ã
             prme.Control.Text = Replace(prme.Control.Text, "/", "")
             prme.Control.Text = Replace(prme.Control.Text, ",", "")
 
-            'DGV‚ÌƒeƒLƒXƒgƒ{ƒbƒNƒXƒRƒ“ƒgƒ[ƒ‹æ“¾
+            'DGVã®ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«å–å¾—
             editingControl = TryCast(prme.Control, DataGridViewTextBoxEditingControl)
 
             If editingControl IsNot Nothing Then
-                'DGVƒZƒ‹‚ÌƒL[ƒvƒŒƒXƒnƒ“ƒhƒ‰‚É“ü—Íƒ`ƒFƒbƒN‚ÌƒCƒxƒ“ƒg‚ğ’Ç‰Á
+                'DGVã‚»ãƒ«ã®ã‚­ãƒ¼ãƒ—ãƒ¬ã‚¹ãƒãƒ³ãƒ‰ãƒ©ã«å…¥åŠ›ãƒã‚§ãƒƒã‚¯ã®ã‚¤ãƒ™ãƒ³ãƒˆã‚’è¿½åŠ 
                 If prmchkType = chkType.Date1 Then
-                    '“ú•tƒ`ƒFƒbƒN‚P
+                    'æ—¥ä»˜ãƒã‚§ãƒƒã‚¯ï¼‘
                     AddHandler editingControl.KeyPress, AddressOf ChkDgv_Date_KeyPress
 
                 ElseIf prmchkType = chkType.Date2 Then
-                    '“ú•tƒ`ƒFƒbƒN‚Q
+                    'æ—¥ä»˜ãƒã‚§ãƒƒã‚¯ï¼’
                     AddHandler editingControl.KeyPress, AddressOf ChkDgv_Date2_KeyPress
 
                 ElseIf prmchkType = chkType.Num Then
-                    '”’lƒ`ƒFƒbƒN
+                    'æ•°å€¤ãƒã‚§ãƒƒã‚¯
                     AddHandler editingControl.KeyPress, AddressOf ChkDgv_Num_KeyPress
 
                 ElseIf prmchkType = chkType.Num_M Then
-                    '”’liƒ}ƒCƒiƒXjƒ`ƒFƒbƒN
+                    'æ•°å€¤ï¼ˆãƒã‚¤ãƒŠã‚¹ï¼‰ãƒã‚§ãƒƒã‚¯
                     AddHandler editingControl.KeyPress, AddressOf ChkDgv_NumM_KeyPress
 
                 ElseIf prmchkType = chkType.Cur Then
-                    '‹àŠzƒ`ƒFƒbƒN
+                    'é‡‘é¡ãƒã‚§ãƒƒã‚¯
                     AddHandler editingControl.KeyPress, AddressOf ChkDgv_Num_KeyPress
 
                 ElseIf prmchkType = chkType.Hankaku Then
-                    '”¼Špƒ`ƒFƒbƒN
+                    'åŠè§’ãƒã‚§ãƒƒã‚¯
                     AddHandler editingControl.KeyPress, AddressOf ChkDgv_Hankaku_KeyPress
 
                 End If
             End If
 
-            'ƒ`ƒFƒbƒN‚É•K—v‚Èî•ñ‚ğVO‚ÉŠi”[‚·‚é
+            'ãƒã‚§ãƒƒã‚¯ã«å¿…è¦ãªæƒ…å ±ã‚’VOã«æ ¼ç´ã™ã‚‹
             Dim chkVO As New UtilDgvChkCellVO(befData, editingControl, prmchkType)
 
-            'ƒ`ƒFƒbƒN‚É•K—v‚Èî•ñ‚ğŠi”[‚µ‚½VO‚ğ•Ô‹p
+            'ãƒã‚§ãƒƒã‚¯ã«å¿…è¦ãªæƒ…å ±ã‚’æ ¼ç´ã—ãŸVOã‚’è¿”å´
             Return chkVO
 
         End Function
         '-------------------------------------------------------------------------------
-        '   ƒf[ƒ^ƒOƒŠƒbƒhƒrƒ…[ƒZƒ‹‚Ì“ü—Í§ŒÀŒã‚ÌŒãˆ—
-        '   iˆ—ŠT—vjƒf[ƒ^ƒOƒŠƒbƒhƒrƒ…[ƒZƒ‹‚Ì“ü—Í§ŒÀ‚ÅŠÖ˜A‚Ã‚¯‚½ƒCƒxƒ“ƒg‚ğ‰ğ•ú‚µA’l‚ÌÅIƒ`ƒFƒbƒN‚ğs‚¤
-        '   œ“ü—Íƒpƒ‰ƒƒ^   FprmchkVO    ƒ`ƒFƒbƒNî•ñŠi”[VO(uEditingControlShowingvƒCƒxƒ“ƒg‚Åæ“¾)
-        '   œƒƒ\ƒbƒh–ß‚è’l F‚È‚µ
-        '   œ”­¶—áŠO       F‚È‚µ
-        '   œ”õl           F–{ƒƒ\ƒbƒh‚ÍDGVƒCƒxƒ“ƒg‚ÌuCellEndEditv‚©‚çŒÄ‚Ño‚·
+        '   ãƒ‡ãƒ¼ã‚¿ã‚°ãƒªãƒƒãƒ‰ãƒ“ãƒ¥ãƒ¼ã‚»ãƒ«ã®å…¥åŠ›åˆ¶é™å¾Œã®å¾Œå‡¦ç†
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰ãƒ‡ãƒ¼ã‚¿ã‚°ãƒªãƒƒãƒ‰ãƒ“ãƒ¥ãƒ¼ã‚»ãƒ«ã®å…¥åŠ›åˆ¶é™ã§é–¢é€£ã¥ã‘ãŸã‚¤ãƒ™ãƒ³ãƒˆã‚’è§£æ”¾ã—ã€å€¤ã®æœ€çµ‚ãƒã‚§ãƒƒã‚¯ã‚’è¡Œã†
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šprmchkVO    ãƒã‚§ãƒƒã‚¯æƒ…å ±æ ¼ç´VO(ã€ŒEditingControlShowingã€ã‚¤ãƒ™ãƒ³ãƒˆã§å–å¾—)
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šãªã—
+        '   â—ç™ºç”Ÿä¾‹å¤–       ï¼šãªã—
+        '   â—å‚™è€ƒ           ï¼šæœ¬ãƒ¡ã‚½ãƒƒãƒ‰ã¯DGVã‚¤ãƒ™ãƒ³ãƒˆã®ã€ŒCellEndEditã€ã‹ã‚‰å‘¼ã³å‡ºã™
         '                                               2006.11.09 Created By Akiyoshi.Yamazaki
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ƒf[ƒ^ƒOƒŠƒbƒhƒrƒ…[ƒZƒ‹‚Ì“ü—Í§ŒÀŒã‚ÌŒãˆ
+        ''' ãƒ‡ãƒ¼ã‚¿ã‚°ãƒªãƒƒãƒ‰ãƒ“ãƒ¥ãƒ¼ã‚»ãƒ«ã®å…¥åŠ›åˆ¶é™å¾Œã®å¾Œå‡¦
         ''' </summary>
-        ''' <param name="prmchkVO">ƒ`ƒFƒbƒNî•ñŠi”[VO</param>
+        ''' <param name="prmchkVO">ãƒã‚§ãƒƒã‚¯æƒ…å ±æ ¼ç´VO</param>
         ''' <remarks></remarks>
         Public Sub AfterchkCell(ByVal prmchkVO As UtilDgvChkCellVO)
 
             If prmchkVO.EditingControl IsNot Nothing Then
-                '“ü—Íƒ`ƒFƒbƒN‚ğ‰ğœ
+                'å…¥åŠ›ãƒã‚§ãƒƒã‚¯ã‚’è§£é™¤
                 If prmchkVO.chkType = chkType.Date1 Then
-                    '“ú•tƒ`ƒFƒbƒN‚P
+                    'æ—¥ä»˜ãƒã‚§ãƒƒã‚¯ï¼‘
                     RemoveHandler prmchkVO.EditingControl.KeyPress, AddressOf ChkDgv_Date_KeyPress
 
                 ElseIf prmchkVO.chkType = chkType.Date2 Then
-                    '“ú•tƒ`ƒFƒbƒN‚Q
+                    'æ—¥ä»˜ãƒã‚§ãƒƒã‚¯ï¼’
                     RemoveHandler prmchkVO.EditingControl.KeyPress, AddressOf ChkDgv_Date2_KeyPress
 
                 ElseIf prmchkVO.chkType = chkType.Num Then
-                    '”’lƒ`ƒFƒbƒN
+                    'æ•°å€¤ãƒã‚§ãƒƒã‚¯
                     RemoveHandler prmchkVO.EditingControl.KeyPress, AddressOf ChkDgv_Num_KeyPress
 
                 ElseIf prmchkVO.chkType = chkType.Num_M Then
-                    '”’liƒ}ƒCƒiƒXjƒ`ƒFƒbƒN
+                    'æ•°å€¤ï¼ˆãƒã‚¤ãƒŠã‚¹ï¼‰ãƒã‚§ãƒƒã‚¯
                     RemoveHandler prmchkVO.EditingControl.KeyPress, AddressOf ChkDgv_NumM_KeyPress
 
                 ElseIf prmchkVO.chkType = chkType.Cur Then
-                    '‹àŠzƒ`ƒFƒbƒN
+                    'é‡‘é¡ãƒã‚§ãƒƒã‚¯
                     RemoveHandler prmchkVO.EditingControl.KeyPress, AddressOf ChkDgv_Num_KeyPress
 
                 ElseIf prmchkVO.chkType = chkType.Hankaku Then
-                    '”¼Špƒ`ƒFƒbƒN
+                    'åŠè§’ãƒã‚§ãƒƒã‚¯
                     RemoveHandler prmchkVO.EditingControl.KeyPress, AddressOf ChkDgv_Hankaku_KeyPress
 
                 End If
@@ -1014,13 +1014,13 @@ Namespace DataGridView
                 prmchkVO.EditingControl = Nothing
             End If
 
-            'ƒZƒ‹‚É“ü—Í‚ª‚ ‚éê‡‚ÍÅIƒ`ƒFƒbƒN(ƒ`ƒFƒbƒN~‚Ìê‡‚ÍŒ³‚Ì’l‚É–ß‚·)
+            'ã‚»ãƒ«ã«å…¥åŠ›ãŒã‚ã‚‹å ´åˆã¯æœ€çµ‚ãƒã‚§ãƒƒã‚¯(ãƒã‚§ãƒƒã‚¯Ã—ã®å ´åˆã¯å…ƒã®å€¤ã«æˆ»ã™)
             If IsExistString(_grid.CurrentCell.Value.ToString) = True Then
 
                 If prmchkVO.chkType = chkType.Date1 Then
-                    '“ú•tƒ`ƒFƒbƒN‚P
+                    'æ—¥ä»˜ãƒã‚§ãƒƒã‚¯ï¼‘
                     Dim datewk As String
-                    '“ú•tƒXƒ‰ƒbƒVƒ…•ÏŠ·•“ú•t‘Ã“–«ƒ`ƒFƒbƒN
+                    'æ—¥ä»˜ã‚¹ãƒ©ãƒƒã‚·ãƒ¥å¤‰æ›ï¼†æ—¥ä»˜å¦¥å½“æ€§ãƒã‚§ãƒƒã‚¯
                     datewk = convertDateSlash(Replace(_grid.CurrentCell.Value.ToString, "/", ""))
                     If IsExistString(datewk) = True Then
                         _grid.CurrentCell.Value = datewk
@@ -1029,9 +1029,9 @@ Namespace DataGridView
                     End If
 
                 ElseIf prmchkVO.chkType = chkType.Date2 Then
-                    '“ú•tƒ`ƒFƒbƒN‚Q
+                    'æ—¥ä»˜ãƒã‚§ãƒƒã‚¯ï¼’
                     Dim datewk As String
-                    '“ú•tƒXƒ‰ƒbƒVƒ…•ÏŠ·•“ú•t‘Ã“–«ƒ`ƒFƒbƒN
+                    'æ—¥ä»˜ã‚¹ãƒ©ãƒƒã‚·ãƒ¥å¤‰æ›ï¼†æ—¥ä»˜å¦¥å½“æ€§ãƒã‚§ãƒƒã‚¯
                     If Len(Replace(_grid.CurrentCell.Value.ToString, "/", "")) = 8 Then
                         datewk = convertDateSlash(Replace(_grid.CurrentCell.Value.ToString, "/", ""))
                         If IsExistString(datewk) = True Then
@@ -1044,31 +1044,31 @@ Namespace DataGridView
                     End If
 
                 ElseIf prmchkVO.chkType = chkType.Num Then
-                    '”’lƒ`ƒFƒbƒN
+                    'æ•°å€¤ãƒã‚§ãƒƒã‚¯
                     Dim permitChars As Char() = NUM_CHARS
                     Dim lidx As Integer = 0
                     For lidx = 1 To Len(_grid.CurrentCell.Value.ToString)
                         If Not hasPermitChars(Mid(_grid.CurrentCell.Value.ToString, lidx, 1), permitChars) Then
-                            '2010/11.08 İŒÉŒv‰æ—p•ÏX start nakazawa
+                            '2010/11.08 åœ¨åº«è¨ˆç”»ç”¨å¤‰æ›´ start nakazawa
                             '_grid.CurrentCell.Value = prmchkVO.befData
-                            '2010/11.08 İŒÉŒv‰æ—p•ÏX end nakazawa
+                            '2010/11.08 åœ¨åº«è¨ˆç”»ç”¨å¤‰æ›´ end nakazawa
                         End If
                     Next lidx
 
                 ElseIf prmchkVO.chkType = chkType.Num_M Then
-                    '”’liƒ}ƒCƒiƒXjƒ`ƒFƒbƒN
+                    'æ•°å€¤ï¼ˆãƒã‚¤ãƒŠã‚¹ï¼‰ãƒã‚§ãƒƒã‚¯
                     Dim permitChars As Char() = NUM_MINS_CHARS
                     Dim minsPos As Integer
-                    'ƒ}ƒCƒiƒX‚ÌˆÊ’uæ“¾
+                    'ãƒã‚¤ãƒŠã‚¹ã®ä½ç½®å–å¾—
                     minsPos = InStr(_grid.CurrentCell.Value.ToString, "-")
-                    'ƒ}ƒCƒiƒX‚Ìê‡‚P•¶š–Ú‚É‚È‚¢ê‡‚ÍƒGƒ‰[
+                    'ãƒã‚¤ãƒŠã‚¹ã®å ´åˆï¼‘æ–‡å­—ç›®ã«ãªã„å ´åˆã¯ã‚¨ãƒ©ãƒ¼
                     If minsPos > 0 Then
                         If minsPos <> 1 Then
                             _grid.CurrentCell.Value = prmchkVO.befData
                         End If
                     End If
 
-                    '”’lƒ`ƒFƒbƒN
+                    'æ•°å€¤ãƒã‚§ãƒƒã‚¯
                     Dim lidx As Integer = 0
                     For lidx = 1 To Len(_grid.CurrentCell.Value.ToString)
                         If Not hasPermitChars(Mid(_grid.CurrentCell.Value.ToString, lidx, 1), permitChars) Then
@@ -1077,7 +1077,7 @@ Namespace DataGridView
                     Next lidx
 
                 ElseIf prmchkVO.chkType = chkType.Cur Then
-                    '‹àŠzƒ`ƒFƒbƒN
+                    'é‡‘é¡ãƒã‚§ãƒƒã‚¯
                     Dim permitChars As Char() = NUM_CHARS
 
                     Dim lidx As Integer = 0
@@ -1087,11 +1087,11 @@ Namespace DataGridView
                             Exit Sub
                         End If
                     Next lidx
-                    'ƒJƒ“ƒ}•ÒW
+                    'ã‚«ãƒ³ãƒç·¨é›†
                     _grid.CurrentCell.Value = Format(CDec(_grid.CurrentCell.Value.ToString), "###,#")
 
                 ElseIf prmchkVO.chkType = chkType.Hankaku Then
-                    '”¼Špƒ`ƒFƒbƒN
+                    'åŠè§’ãƒã‚§ãƒƒã‚¯
                     Dim permitChars As Char() = HANKAKU_CHARS
 
                     Dim lidx As Integer = 0
@@ -1107,64 +1107,64 @@ Namespace DataGridView
             End If
         End Sub
         '-------------------------------------------------------------------------------
-        '  ƒf[ƒ^ƒOƒŠƒbƒhƒZƒ‹“ú•tŒ^iYYMMDDj‚Ì“ü—Íƒ`ƒFƒbƒN—p@ƒL[ƒvƒŒƒXƒCƒxƒ“ƒg
-        '   iˆ—ŠT—vj“ú•tˆÈŠO‚Ì•¶š—ñ‚ğ“ü—Í•s‰Â‚É‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^F‚È‚µ
-        '   œƒƒ\ƒbƒh–ß‚è’l@F‚È‚µ
+        '  ãƒ‡ãƒ¼ã‚¿ã‚°ãƒªãƒƒãƒ‰ã‚»ãƒ«æ—¥ä»˜å‹ï¼ˆYYMMDDï¼‰ã®å…¥åŠ›ãƒã‚§ãƒƒã‚¯ç”¨ã€€ã‚­ãƒ¼ãƒ—ãƒ¬ã‚¹ã‚¤ãƒ™ãƒ³ãƒˆ
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰æ—¥ä»˜ä»¥å¤–ã®æ–‡å­—åˆ—ã‚’å…¥åŠ›ä¸å¯ã«ã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ï¼šãªã—
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ã€€ï¼šãªã—
         '                                               2006.11.09 Created By Akiyoshi.Yamazaki
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' “ú•tŒ^‚Ì“ü—Íƒ`ƒFƒbƒN
+        ''' æ—¥ä»˜å‹ã®å…¥åŠ›ãƒã‚§ãƒƒã‚¯
         ''' </summary>
         ''' <remarks></remarks>
         Public Shared Sub ChkDgv_Date_KeyPress(ByVal sender As Object,
                                                        ByVal e As System.Windows.Forms.KeyPressEventArgs)
 
-            Const MaxLen As Short = 6   '“ü—Í‰Â”\•¶š”
+            Const MaxLen As Short = 6   'å…¥åŠ›å¯èƒ½æ–‡å­—æ•°
 
             Dim myBox As TextBox = CType(sender, TextBox)
             Dim permitChars As Char() = NUM_CHARS
 
-            'CTRL+C“™‚Í—LŒø
+            'CTRL+Cç­‰ã¯æœ‰åŠ¹
             If Char.IsControl(e.KeyChar) Then
                 Return
             End If
 
             If Not hasPermitChars(e.KeyChar, permitChars) Then
-                e.Handled = True    '‹–‰Â‚µ‚Ä‚¢‚È‚¢•¶š‚Í“ü—Í‹Ö~
+                e.Handled = True    'è¨±å¯ã—ã¦ã„ãªã„æ–‡å­—ã¯å…¥åŠ›ç¦æ­¢
             Else
-                '‹–‰Â‚µ‚Ä‚¢‚é•¶š‚Å‚àA“ü—Í‚Å‚«‚é‚©”»’è‚·‚é
-                'YY/MM/DDŒ`®—p‚Ìƒ`ƒFƒbƒN
-                Dim KeyAscii As Integer = Asc(e.KeyChar) '‚±‚ÌƒuƒƒbƒN‚Åg‚¤‰ÂE•s‰Âƒtƒ‰ƒOi‚O‚É‚·‚ê‚Î“ü—Í–³Œøj
+                'è¨±å¯ã—ã¦ã„ã‚‹æ–‡å­—ã§ã‚‚ã€å…¥åŠ›ã§ãã‚‹ã‹åˆ¤å®šã™ã‚‹
+                'YY/MM/DDå½¢å¼ç”¨ã®ãƒã‚§ãƒƒã‚¯
+                Dim KeyAscii As Integer = Asc(e.KeyChar) 'ã“ã®ãƒ–ãƒ­ãƒƒã‚¯ã§ä½¿ã†å¯ãƒ»ä¸å¯ãƒ•ãƒ©ã‚°ï¼ˆï¼ã«ã™ã‚Œã°å…¥åŠ›ç„¡åŠ¹ï¼‰
 
-                '‘I‘ğ”½“]–³‚µ‚ÅÅ‘å•¶š‚È‚çA‚»‚êˆÈã‚Ì“ü—Í‚Í•s‹–‰Â‚Æ‚·‚éB
+                'é¸æŠåè»¢ç„¡ã—ã§æœ€å¤§æ–‡å­—ãªã‚‰ã€ãã‚Œä»¥ä¸Šã®å…¥åŠ›ã¯ä¸è¨±å¯ã¨ã™ã‚‹ã€‚
                 If CType(sender, TextBox).SelectionLength = 0 Then
                     If CType(sender, TextBox).Text.Length >= MaxLen Then
                         KeyAscii = 0
                     End If
                 End If
 
-                '12 3 456  ƒJ[ƒ\ƒ‹ˆÊ’uF‚PŒÂ–Ú‚Ì‚l‚Ì‘O‚Í‚QB
-                'YY[M]MDD@‚É“ü—Í‚·‚éê‡‚Ìƒ`ƒFƒbƒN 
+                '12 3 456  ã‚«ãƒ¼ã‚½ãƒ«ä½ç½®ï¼šï¼‘å€‹ç›®ã®ï¼­ã®å‰ã¯ï¼’ã€‚
+                'YY[M]MDDã€€ã«å…¥åŠ›ã™ã‚‹å ´åˆã®ãƒã‚§ãƒƒã‚¯ 
                 If myBox.SelectionStart = 2 Then
                     If KeyAscii <> Asc("0") And KeyAscii <> Asc("1") Then
-                        '‚O‚Æ‚PˆÈŠO‚Í–³Œø
+                        'ï¼ã¨ï¼‘ä»¥å¤–ã¯ç„¡åŠ¹
                         KeyAscii = 0
                     End If
 
-                    '123 4 56 @ƒJ[ƒ\ƒ‹ˆÊ’uF‚QŒÂ–Ú‚Ì‚l‚Ì‘O‚Í‚R
-                    'YYM[M]DD@‚É“ü—Í‚·‚éê‡‚Ìƒ`ƒFƒbƒN 
+                    '123 4 56 ã€€ã‚«ãƒ¼ã‚½ãƒ«ä½ç½®ï¼šï¼’å€‹ç›®ã®ï¼­ã®å‰ã¯ï¼“
+                    'YYM[M]DDã€€ã«å…¥åŠ›ã™ã‚‹å ´åˆã®ãƒã‚§ãƒƒã‚¯ 
                 ElseIf myBox.SelectionStart = 3 Then
 
-                    '‘O‚Ì•¶š‚ª‚P‚È‚çA‚OC‚PC‚Q‚Ì‚İ‹–‰Â
+                    'å‰ã®æ–‡å­—ãŒï¼‘ãªã‚‰ã€ï¼ï¼Œï¼‘ï¼Œï¼’ã®ã¿è¨±å¯
                     If myBox.Text.ToString.Substring(2, 1).Equals("1") Then
                         If KeyAscii <> Asc("0") And KeyAscii <> Asc("1") And KeyAscii <> Asc("2") Then
-                            '‚OC‚PC‚QˆÈŠO‚Í–³Œø
+                            'ï¼ï¼Œï¼‘ï¼Œï¼’ä»¥å¤–ã¯ç„¡åŠ¹
                             KeyAscii = 0
                         End If
                     End If
 
-                    '‘O‚Ì•¶š‚ª‚O‚È‚çA‚P`‚X‚Ì‚İ‹–‰Â
+                    'å‰ã®æ–‡å­—ãŒï¼ãªã‚‰ã€ï¼‘ï½ï¼™ã®ã¿è¨±å¯
                     If myBox.Text.ToString.Substring(2, 1).Equals("0") Then
                         If KeyAscii <> Asc("1") And KeyAscii <> Asc("2") And KeyAscii <> Asc("3") And
                            KeyAscii <> Asc("4") And KeyAscii <> Asc("5") And KeyAscii <> Asc("6") And
@@ -1173,24 +1173,24 @@ Namespace DataGridView
                         End If
                     End If
 
-                    '1234 5 6@@ƒJ[ƒ\ƒ‹ˆÊ’uF‚PŒÂ–Ú‚Ì‚c‚Ì‘O‚Í‚S
-                    'YYMM[D]D@‚É“ü—Í‚·‚éê‡‚Ìƒ`ƒFƒbƒN 
+                    '1234 5 6ã€€ã€€ã‚«ãƒ¼ã‚½ãƒ«ä½ç½®ï¼šï¼‘å€‹ç›®ã®ï¼¤ã®å‰ã¯ï¼”
+                    'YYMM[D]Dã€€ã«å…¥åŠ›ã™ã‚‹å ´åˆã®ãƒã‚§ãƒƒã‚¯ 
                 ElseIf myBox.SelectionStart = 4 Then
                     If KeyAscii <> Asc("0") And KeyAscii <> Asc("1") And KeyAscii <> Asc("2") And KeyAscii <> Asc("3") Then
                         KeyAscii = 0
                     End If
 
-                    '12345 6@ ƒJ[ƒ\ƒ‹ˆÊ’uF‚QŒÂ–Ú‚Ì‚c‚Ì‘O‚Í‚T
-                    'YYMMD[D]@‚É“ü—Í‚·‚éê‡‚Ìƒ`ƒFƒbƒN 
+                    '12345 6ã€€ ã‚«ãƒ¼ã‚½ãƒ«ä½ç½®ï¼šï¼’å€‹ç›®ã®ï¼¤ã®å‰ã¯ï¼•
+                    'YYMMD[D]ã€€ã«å…¥åŠ›ã™ã‚‹å ´åˆã®ãƒã‚§ãƒƒã‚¯ 
                 ElseIf myBox.SelectionStart = 5 Then
-                    '‘O‚Ì•¶š‚ª‚R‚È‚çA‚OC‚P‚Ì‚İ‹–‰Â
+                    'å‰ã®æ–‡å­—ãŒï¼“ãªã‚‰ã€ï¼ï¼Œï¼‘ã®ã¿è¨±å¯
                     If myBox.Text.ToString.Substring(4, 1).Equals("3") Then
                         If KeyAscii <> Asc("0") And KeyAscii <> Asc("1") Then
                             KeyAscii = 0
                         End If
                     End If
 
-                    '‘O‚Ì•¶š‚ª‚O‚È‚çA‚P`‚X‚Æ‚O‚Ì‚İ‹–‰Â
+                    'å‰ã®æ–‡å­—ãŒï¼ãªã‚‰ã€ï¼‘ï½ï¼™ã¨ï¼ã®ã¿è¨±å¯
                     If myBox.Text.ToString.Substring(4, 1).Equals("0") Then
                         If KeyAscii <> Asc("1") And KeyAscii <> Asc("2") And KeyAscii <> Asc("3") And
                            KeyAscii <> Asc("4") And KeyAscii <> Asc("5") And KeyAscii <> Asc("6") And
@@ -1200,81 +1200,81 @@ Namespace DataGridView
                     End If
                 End If
 
-                'ˆ—‚ğŒˆ’è
+                'å‡¦ç†ã‚’æ±ºå®š
                 If KeyAscii = 0 Then
-                    e.Handled = True    'ˆ—‚ªÏ‚ñ‚¾‚±‚Æ‚É‚·‚éi•¶š‚Í–³‹‚³‚ê‚é‚Ì‚Å“ü—Í‚ª–³Œø‚Æ‚È‚éj
+                    e.Handled = True    'å‡¦ç†ãŒæ¸ˆã‚“ã ã“ã¨ã«ã™ã‚‹ï¼ˆæ–‡å­—ã¯ç„¡è¦–ã•ã‚Œã‚‹ã®ã§å…¥åŠ›ãŒç„¡åŠ¹ã¨ãªã‚‹ï¼‰
                 Else
-                    e.Handled = False   '•¶š‚Íˆ—‚³‚ê‚é‚Ì‚Å—LŒø‚Æ‚È‚è“ü—Í‚³‚ê‚éB
+                    e.Handled = False   'æ–‡å­—ã¯å‡¦ç†ã•ã‚Œã‚‹ã®ã§æœ‰åŠ¹ã¨ãªã‚Šå…¥åŠ›ã•ã‚Œã‚‹ã€‚
                 End If
             End If
         End Sub
         '-------------------------------------------------------------------------------
-        '  ƒf[ƒ^ƒOƒŠƒbƒhƒZƒ‹“ú•tŒ^iYYYYMMDDj‚Ì“ü—Íƒ`ƒFƒbƒN—p@ƒL[ƒvƒŒƒXƒCƒxƒ“ƒg
-        '   iˆ—ŠT—vj“ú•tˆÈŠO‚Ì•¶š—ñ‚ğ“ü—Í•s‰Â‚É‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^F‚È‚µ
-        '   œƒƒ\ƒbƒh–ß‚è’l@F‚È‚µ
+        '  ãƒ‡ãƒ¼ã‚¿ã‚°ãƒªãƒƒãƒ‰ã‚»ãƒ«æ—¥ä»˜å‹ï¼ˆYYYYMMDDï¼‰ã®å…¥åŠ›ãƒã‚§ãƒƒã‚¯ç”¨ã€€ã‚­ãƒ¼ãƒ—ãƒ¬ã‚¹ã‚¤ãƒ™ãƒ³ãƒˆ
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰æ—¥ä»˜ä»¥å¤–ã®æ–‡å­—åˆ—ã‚’å…¥åŠ›ä¸å¯ã«ã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ï¼šãªã—
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ã€€ï¼šãªã—
         '                                               2006.11.09 Created By Akiyoshi.Yamazaki
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' “ú•tŒ^‚Ì“ü—Íƒ`ƒFƒbƒN
+        ''' æ—¥ä»˜å‹ã®å…¥åŠ›ãƒã‚§ãƒƒã‚¯
         ''' </summary>
         ''' <remarks></remarks>
         Public Shared Sub ChkDgv_Date2_KeyPress(ByVal sender As Object,
                                                        ByVal e As System.Windows.Forms.KeyPressEventArgs)
 
-            Const MaxLen As Short = 8   '“ü—Í‰Â”\•¶š”
+            Const MaxLen As Short = 8   'å…¥åŠ›å¯èƒ½æ–‡å­—æ•°
 
             Dim myBox As TextBox = CType(sender, TextBox)
             Dim permitChars As Char() = NUM_CHARS
 
-            'CTRL+C“™‚Í—LŒø
+            'CTRL+Cç­‰ã¯æœ‰åŠ¹
             If Char.IsControl(e.KeyChar) Then
                 Return
             End If
 
             If Not hasPermitChars(e.KeyChar, permitChars) Then
-                e.Handled = True    '‹–‰Â‚µ‚Ä‚¢‚È‚¢•¶š‚Í“ü—Í‹Ö~
+                e.Handled = True    'è¨±å¯ã—ã¦ã„ãªã„æ–‡å­—ã¯å…¥åŠ›ç¦æ­¢
             Else
-                '‹–‰Â‚µ‚Ä‚¢‚é•¶š‚Å‚àA“ü—Í‚Å‚«‚é‚©”»’è‚·‚é
-                'YYYYMMDDŒ`®—p‚Ìƒ`ƒFƒbƒN
-                Dim KeyAscii As Integer = Asc(e.KeyChar) '‚±‚ÌƒuƒƒbƒN‚Åg‚¤‰ÂE•s‰Âƒtƒ‰ƒOi‚O‚É‚·‚ê‚Î“ü—Í–³Œøj
+                'è¨±å¯ã—ã¦ã„ã‚‹æ–‡å­—ã§ã‚‚ã€å…¥åŠ›ã§ãã‚‹ã‹åˆ¤å®šã™ã‚‹
+                'YYYYMMDDå½¢å¼ç”¨ã®ãƒã‚§ãƒƒã‚¯
+                Dim KeyAscii As Integer = Asc(e.KeyChar) 'ã“ã®ãƒ–ãƒ­ãƒƒã‚¯ã§ä½¿ã†å¯ãƒ»ä¸å¯ãƒ•ãƒ©ã‚°ï¼ˆï¼ã«ã™ã‚Œã°å…¥åŠ›ç„¡åŠ¹ï¼‰
 
-                '‘I‘ğ”½“]–³‚µ‚ÅÅ‘å•¶š‚È‚çA‚»‚êˆÈã‚Ì“ü—Í‚Í•s‹–‰Â‚Æ‚·‚éB
+                'é¸æŠåè»¢ç„¡ã—ã§æœ€å¤§æ–‡å­—ãªã‚‰ã€ãã‚Œä»¥ä¸Šã®å…¥åŠ›ã¯ä¸è¨±å¯ã¨ã™ã‚‹ã€‚
                 If CType(sender, TextBox).SelectionLength = 0 Then
                     If CType(sender, TextBox).Text.Length >= MaxLen Then
                         KeyAscii = 0
                     End If
                 End If
 
-                ' 1 2345678 ƒJ[ƒ\ƒ‹ˆÊ’uF‚PŒÂ–Ú‚Ì‚x‚Ì‘O‚Í‚OB
-                '[Y]YYYMMDD@‚É“ü—Í‚·‚éê‡‚Ìƒ`ƒFƒbƒN 
+                ' 1 2345678 ã‚«ãƒ¼ã‚½ãƒ«ä½ç½®ï¼šï¼‘å€‹ç›®ã®ï¼¹ã®å‰ã¯ï¼ã€‚
+                '[Y]YYYMMDDã€€ã«å…¥åŠ›ã™ã‚‹å ´åˆã®ãƒã‚§ãƒƒã‚¯ 
                 If myBox.SelectionStart = 0 Then
                     If KeyAscii <> Asc("1") And KeyAscii <> Asc("2") Then
-                        '‚P‚Æ‚QˆÈŠO‚Í–³Œø
+                        'ï¼‘ã¨ï¼’ä»¥å¤–ã¯ç„¡åŠ¹
                         KeyAscii = 0
                     End If
 
-                    '1234 5 678 ƒJ[ƒ\ƒ‹ˆÊ’uF‚PŒÂ–Ú‚Ì‚l‚Ì‘O‚Í‚SB
-                    'YYYY[M]MDD@‚É“ü—Í‚·‚éê‡‚Ìƒ`ƒFƒbƒN 
+                    '1234 5 678 ã‚«ãƒ¼ã‚½ãƒ«ä½ç½®ï¼šï¼‘å€‹ç›®ã®ï¼­ã®å‰ã¯ï¼”ã€‚
+                    'YYYY[M]MDDã€€ã«å…¥åŠ›ã™ã‚‹å ´åˆã®ãƒã‚§ãƒƒã‚¯ 
                 ElseIf myBox.SelectionStart = 4 Then
                     If KeyAscii <> Asc("0") And KeyAscii <> Asc("1") Then
-                        '‚O‚Æ‚PˆÈŠO‚Í–³Œø
+                        'ï¼ã¨ï¼‘ä»¥å¤–ã¯ç„¡åŠ¹
                         KeyAscii = 0
                     End If
 
-                    '12345 6 78@ƒJ[ƒ\ƒ‹ˆÊ’uF‚QŒÂ–Ú‚Ì‚l‚Ì‘O‚Í‚T
-                    'YYYYM[M]DD@‚É“ü—Í‚·‚éê‡‚Ìƒ`ƒFƒbƒN  
+                    '12345 6 78ã€€ã‚«ãƒ¼ã‚½ãƒ«ä½ç½®ï¼šï¼’å€‹ç›®ã®ï¼­ã®å‰ã¯ï¼•
+                    'YYYYM[M]DDã€€ã«å…¥åŠ›ã™ã‚‹å ´åˆã®ãƒã‚§ãƒƒã‚¯  
                 ElseIf myBox.SelectionStart = 5 Then
 
-                    '‘O‚Ì•¶š‚ª‚P‚È‚çA‚OC‚PC‚Q‚Ì‚İ‹–‰Â
+                    'å‰ã®æ–‡å­—ãŒï¼‘ãªã‚‰ã€ï¼ï¼Œï¼‘ï¼Œï¼’ã®ã¿è¨±å¯
                     If myBox.Text.ToString.Substring(4, 1).Equals("1") Then
                         If KeyAscii <> Asc("0") And KeyAscii <> Asc("1") And KeyAscii <> Asc("2") Then
-                            '‚OC‚PC‚QˆÈŠO‚Í–³Œø
+                            'ï¼ï¼Œï¼‘ï¼Œï¼’ä»¥å¤–ã¯ç„¡åŠ¹
                             KeyAscii = 0
                         End If
                     End If
 
-                    '‘O‚Ì•¶š‚ª‚O‚È‚çA‚P`‚X‚Ì‚İ‹–‰Â
+                    'å‰ã®æ–‡å­—ãŒï¼ãªã‚‰ã€ï¼‘ï½ï¼™ã®ã¿è¨±å¯
                     If myBox.Text.ToString.Substring(4, 1).Equals("0") Then
                         If KeyAscii <> Asc("1") And KeyAscii <> Asc("2") And KeyAscii <> Asc("3") And
                            KeyAscii <> Asc("4") And KeyAscii <> Asc("5") And KeyAscii <> Asc("6") And
@@ -1283,24 +1283,24 @@ Namespace DataGridView
                         End If
                     End If
 
-                    '123456 7 8@@ƒJ[ƒ\ƒ‹ˆÊ’uF‚PŒÂ–Ú‚Ì‚c‚Ì‘O‚Í‚U
-                    'YYYYMM[D]D@‚É“ü—Í‚·‚éê‡‚Ìƒ`ƒFƒbƒN 
+                    '123456 7 8ã€€ã€€ã‚«ãƒ¼ã‚½ãƒ«ä½ç½®ï¼šï¼‘å€‹ç›®ã®ï¼¤ã®å‰ã¯ï¼–
+                    'YYYYMM[D]Dã€€ã«å…¥åŠ›ã™ã‚‹å ´åˆã®ãƒã‚§ãƒƒã‚¯ 
                 ElseIf myBox.SelectionStart = 6 Then
                     If KeyAscii <> Asc("0") And KeyAscii <> Asc("1") And KeyAscii <> Asc("2") And KeyAscii <> Asc("3") Then
                         KeyAscii = 0
                     End If
 
-                    '1234567 8 ƒJ[ƒ\ƒ‹ˆÊ’uF‚QŒÂ–Ú‚Ì‚c‚Ì‘O‚Í‚V
-                    'YYYYMMD[D]@‚É“ü—Í‚·‚éê‡‚Ìƒ`ƒFƒbƒN 
+                    '1234567 8 ã‚«ãƒ¼ã‚½ãƒ«ä½ç½®ï¼šï¼’å€‹ç›®ã®ï¼¤ã®å‰ã¯ï¼—
+                    'YYYYMMD[D]ã€€ã«å…¥åŠ›ã™ã‚‹å ´åˆã®ãƒã‚§ãƒƒã‚¯ 
                 ElseIf myBox.SelectionStart = 7 Then
-                    '‘O‚Ì•¶š‚ª‚R‚È‚çA‚OC‚P‚Ì‚İ‹–‰Â
+                    'å‰ã®æ–‡å­—ãŒï¼“ãªã‚‰ã€ï¼ï¼Œï¼‘ã®ã¿è¨±å¯
                     If myBox.Text.ToString.Substring(6, 1).Equals("3") Then
                         If KeyAscii <> Asc("0") And KeyAscii <> Asc("1") Then
                             KeyAscii = 0
                         End If
                     End If
 
-                    '‘O‚Ì•¶š‚ª‚O‚È‚çA‚P`‚X‚Æ‚O‚Ì‚İ‹–‰Â
+                    'å‰ã®æ–‡å­—ãŒï¼ãªã‚‰ã€ï¼‘ï½ï¼™ã¨ï¼ã®ã¿è¨±å¯
                     If myBox.Text.ToString.Substring(6, 1).Equals("0") Then
                         If KeyAscii <> Asc("1") And KeyAscii <> Asc("2") And KeyAscii <> Asc("3") And
                            KeyAscii <> Asc("4") And KeyAscii <> Asc("5") And KeyAscii <> Asc("6") And
@@ -1310,19 +1310,19 @@ Namespace DataGridView
                     End If
                 End If
 
-                'ˆ—‚ğŒˆ’è
+                'å‡¦ç†ã‚’æ±ºå®š
                 If KeyAscii = 0 Then
-                    e.Handled = True    'ˆ—‚ªÏ‚ñ‚¾‚±‚Æ‚É‚·‚éi•¶š‚Í–³‹‚³‚ê‚é‚Ì‚Å“ü—Í‚ª–³Œø‚Æ‚È‚éj
+                    e.Handled = True    'å‡¦ç†ãŒæ¸ˆã‚“ã ã“ã¨ã«ã™ã‚‹ï¼ˆæ–‡å­—ã¯ç„¡è¦–ã•ã‚Œã‚‹ã®ã§å…¥åŠ›ãŒç„¡åŠ¹ã¨ãªã‚‹ï¼‰
                 Else
-                    e.Handled = False   '•¶š‚Íˆ—‚³‚ê‚é‚Ì‚Å—LŒø‚Æ‚È‚è“ü—Í‚³‚ê‚éB
+                    e.Handled = False   'æ–‡å­—ã¯å‡¦ç†ã•ã‚Œã‚‹ã®ã§æœ‰åŠ¹ã¨ãªã‚Šå…¥åŠ›ã•ã‚Œã‚‹ã€‚
                 End If
             End If
         End Sub
         '-------------------------------------------------------------------------------
-        '  ƒf[ƒ^ƒOƒŠƒbƒhƒZƒ‹”’lŒ^@ƒL[ƒvƒŒƒXƒCƒxƒ“ƒg
-        '   iˆ—ŠT—vj”’lˆÈŠO‚Ì•¶š—ñ‚ğ“ü—Í•s‰Â‚É‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^F‚È‚µ
-        '   œƒƒ\ƒbƒh–ß‚è’l@F‚È‚µ
+        '  ãƒ‡ãƒ¼ã‚¿ã‚°ãƒªãƒƒãƒ‰ã‚»ãƒ«æ•°å€¤å‹ã€€ã‚­ãƒ¼ãƒ—ãƒ¬ã‚¹ã‚¤ãƒ™ãƒ³ãƒˆ
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰æ•°å€¤ä»¥å¤–ã®æ–‡å­—åˆ—ã‚’å…¥åŠ›ä¸å¯ã«ã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ï¼šãªã—
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ã€€ï¼šãªã—
         '                                               2006.11.09 Created By Akiyoshi.Yamazaki
         '-------------------------------------------------------------------------------
         Public Shared Sub ChkDgv_Num_KeyPress(ByVal sender As Object _
@@ -1331,27 +1331,27 @@ Namespace DataGridView
             Dim permitChars As Char() = NUM_CHARS
 
             If Char.IsControl(e.KeyChar) Then
-                Return                      'Ctrl+C‚È‚Ç‚Íˆ—‚µ‚È‚¢
+                Return                      'Ctrl+Cãªã©ã¯å‡¦ç†ã—ãªã„
             End If
 
             If Not hasPermitChars(e.KeyChar, permitChars) Then
-                e.Handled = True                            '‹–‰Â‚µ‚Ä‚¢‚È‚¢•¶š‚Í“ü—Í‹Ö~ 
+                e.Handled = True                            'è¨±å¯ã—ã¦ã„ãªã„æ–‡å­—ã¯å…¥åŠ›ç¦æ­¢ 
             Else
-                Dim KeyAscii As Integer = Asc(e.KeyChar)    '“ü—Í‚ğ‹–‰Â‚µ‚Ä‚¢‚é•¶š‚Å‚àƒ`ƒFƒbƒN‚ğo—ˆ‚é
+                Dim KeyAscii As Integer = Asc(e.KeyChar)    'å…¥åŠ›ã‚’è¨±å¯ã—ã¦ã„ã‚‹æ–‡å­—ã§ã‚‚ãƒã‚§ãƒƒã‚¯ã‚’å‡ºæ¥ã‚‹
 
-                'ˆ—‚ğŒˆ’è
+                'å‡¦ç†ã‚’æ±ºå®š
                 If KeyAscii = 0 Then
-                    e.Handled = True    'ˆ—‚ªÏ‚ñ‚¾‚±‚Æ‚É‚·‚éi•¶š‚Í–³‹‚³‚ê‚é‚Ì‚Å“ü—Í‚ª–³Œø‚Æ‚È‚éj
+                    e.Handled = True    'å‡¦ç†ãŒæ¸ˆã‚“ã ã“ã¨ã«ã™ã‚‹ï¼ˆæ–‡å­—ã¯ç„¡è¦–ã•ã‚Œã‚‹ã®ã§å…¥åŠ›ãŒç„¡åŠ¹ã¨ãªã‚‹ï¼‰
                 Else
-                    e.Handled = False   '•¶š‚Íˆ—‚³‚ê‚é‚Ì‚Å—LŒø‚Æ‚È‚è“ü—Í‚³‚ê‚éB
+                    e.Handled = False   'æ–‡å­—ã¯å‡¦ç†ã•ã‚Œã‚‹ã®ã§æœ‰åŠ¹ã¨ãªã‚Šå…¥åŠ›ã•ã‚Œã‚‹ã€‚
                 End If
             End If
         End Sub
         '-------------------------------------------------------------------------------
-        '  ƒf[ƒ^ƒOƒŠƒbƒhƒZƒ‹”’lŒ^(ƒ}ƒCƒiƒX‚ğ‹–—e)@ƒL[ƒvƒŒƒXƒCƒxƒ“ƒg
-        '   iˆ—ŠT—vj”’lˆÈŠO‚Ì•¶š—ñ‚ğ“ü—Í•s‰Â‚É‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^F‚È‚µ
-        '   œƒƒ\ƒbƒh–ß‚è’l@F‚È‚µ
+        '  ãƒ‡ãƒ¼ã‚¿ã‚°ãƒªãƒƒãƒ‰ã‚»ãƒ«æ•°å€¤å‹(ãƒã‚¤ãƒŠã‚¹ã‚’è¨±å®¹)ã€€ã‚­ãƒ¼ãƒ—ãƒ¬ã‚¹ã‚¤ãƒ™ãƒ³ãƒˆ
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰æ•°å€¤ä»¥å¤–ã®æ–‡å­—åˆ—ã‚’å…¥åŠ›ä¸å¯ã«ã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ï¼šãªã—
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ã€€ï¼šãªã—
         '                                               2006.11.09 Created By Akiyoshi.Yamazaki
         '-------------------------------------------------------------------------------
         Public Shared Sub ChkDgv_NumM_KeyPress(ByVal sender As Object _
@@ -1361,34 +1361,34 @@ Namespace DataGridView
             Dim myBox As TextBox = CType(sender, TextBox)
 
             If Char.IsControl(e.KeyChar) Then
-                Return                      'Ctrl+C‚È‚Ç‚Íˆ—‚µ‚È‚¢
+                Return                      'Ctrl+Cãªã©ã¯å‡¦ç†ã—ãªã„
             End If
 
             If Not hasPermitChars(e.KeyChar, permitChars) Then
-                e.Handled = True                            '‹–‰Â‚µ‚Ä‚¢‚È‚¢•¶š‚Í“ü—Í‹Ö~ 
+                e.Handled = True                            'è¨±å¯ã—ã¦ã„ãªã„æ–‡å­—ã¯å…¥åŠ›ç¦æ­¢ 
             Else
-                Dim KeyAscii As Integer = Asc(e.KeyChar)    '“ü—Í‚ğ‹–‰Â‚µ‚Ä‚¢‚é•¶š‚Å‚àƒ`ƒFƒbƒN‚ğo—ˆ‚é
+                Dim KeyAscii As Integer = Asc(e.KeyChar)    'å…¥åŠ›ã‚’è¨±å¯ã—ã¦ã„ã‚‹æ–‡å­—ã§ã‚‚ãƒã‚§ãƒƒã‚¯ã‚’å‡ºæ¥ã‚‹
 
                 If myBox.SelectionStart <> 0 Then
                     If KeyAscii = Asc("-") Then
-                        'æ“ª•¶šˆÈŠO‚ªƒ}ƒCƒiƒX‚Í•s‰Â
+                        'å…ˆé ­æ–‡å­—ä»¥å¤–ãŒãƒã‚¤ãƒŠã‚¹ã¯ä¸å¯
                         KeyAscii = 0
                     End If
                 End If
 
-                'ˆ—‚ğŒˆ’è
+                'å‡¦ç†ã‚’æ±ºå®š
                 If KeyAscii = 0 Then
-                    e.Handled = True    'ˆ—‚ªÏ‚ñ‚¾‚±‚Æ‚É‚·‚éi•¶š‚Í–³‹‚³‚ê‚é‚Ì‚Å“ü—Í‚ª–³Œø‚Æ‚È‚éj
+                    e.Handled = True    'å‡¦ç†ãŒæ¸ˆã‚“ã ã“ã¨ã«ã™ã‚‹ï¼ˆæ–‡å­—ã¯ç„¡è¦–ã•ã‚Œã‚‹ã®ã§å…¥åŠ›ãŒç„¡åŠ¹ã¨ãªã‚‹ï¼‰
                 Else
-                    e.Handled = False   '•¶š‚Íˆ—‚³‚ê‚é‚Ì‚Å—LŒø‚Æ‚È‚è“ü—Í‚³‚ê‚éB
+                    e.Handled = False   'æ–‡å­—ã¯å‡¦ç†ã•ã‚Œã‚‹ã®ã§æœ‰åŠ¹ã¨ãªã‚Šå…¥åŠ›ã•ã‚Œã‚‹ã€‚
                 End If
             End If
         End Sub
         '-------------------------------------------------------------------------------
-        '  ƒf[ƒ^ƒOƒŠƒbƒhƒZƒ‹”¼Šp‰p”Œ^@ƒL[ƒvƒŒƒXƒCƒxƒ“ƒg
-        '   iˆ—ŠT—vj”¼Šp‰p”šˆÈŠO‚Ì•¶š—ñ‚ğ“ü—Í•s‰Â‚É‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^F‚È‚µ
-        '   œƒƒ\ƒbƒh–ß‚è’l@F‚È‚µ
+        '  ãƒ‡ãƒ¼ã‚¿ã‚°ãƒªãƒƒãƒ‰ã‚»ãƒ«åŠè§’è‹±æ•°å‹ã€€ã‚­ãƒ¼ãƒ—ãƒ¬ã‚¹ã‚¤ãƒ™ãƒ³ãƒˆ
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰åŠè§’è‹±æ•°å­—ä»¥å¤–ã®æ–‡å­—åˆ—ã‚’å…¥åŠ›ä¸å¯ã«ã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ï¼šãªã—
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ã€€ï¼šãªã—
         '                                               2006.11.09 Created By Akiyoshi.Yamazaki
         '-------------------------------------------------------------------------------
         Public Shared Sub ChkDgv_Hankaku_KeyPress(ByVal sender As Object _
@@ -1397,24 +1397,24 @@ Namespace DataGridView
             Dim permitChars As Char() = HANKAKU_CHARS
 
             If Char.IsControl(e.KeyChar) Then
-                Return                      'Ctrl+C‚È‚Ç‚Íˆ—‚µ‚È‚¢
+                Return                      'Ctrl+Cãªã©ã¯å‡¦ç†ã—ãªã„
             End If
 
             If Not hasPermitChars(e.KeyChar, permitChars) Then
-                e.Handled = True                            '‹–‰Â‚µ‚Ä‚¢‚È‚¢•¶š‚Í“ü—Í‹Ö~ 
+                e.Handled = True                            'è¨±å¯ã—ã¦ã„ãªã„æ–‡å­—ã¯å…¥åŠ›ç¦æ­¢ 
             Else
-                Dim KeyAscii As Integer = Asc(e.KeyChar)    '“ü—Í‚ğ‹–‰Â‚µ‚Ä‚¢‚é•¶š‚Å‚àƒ`ƒFƒbƒN‚ğo—ˆ‚é
+                Dim KeyAscii As Integer = Asc(e.KeyChar)    'å…¥åŠ›ã‚’è¨±å¯ã—ã¦ã„ã‚‹æ–‡å­—ã§ã‚‚ãƒã‚§ãƒƒã‚¯ã‚’å‡ºæ¥ã‚‹
 
-                'ˆ—‚ğŒˆ’è
+                'å‡¦ç†ã‚’æ±ºå®š
                 If KeyAscii = 0 Then
-                    e.Handled = True    'ˆ—‚ªÏ‚ñ‚¾‚±‚Æ‚É‚·‚éi•¶š‚Í–³‹‚³‚ê‚é‚Ì‚Å“ü—Í‚ª–³Œø‚Æ‚È‚éj
+                    e.Handled = True    'å‡¦ç†ãŒæ¸ˆã‚“ã ã“ã¨ã«ã™ã‚‹ï¼ˆæ–‡å­—ã¯ç„¡è¦–ã•ã‚Œã‚‹ã®ã§å…¥åŠ›ãŒç„¡åŠ¹ã¨ãªã‚‹ï¼‰
                 Else
-                    e.Handled = False   '•¶š‚Íˆ—‚³‚ê‚é‚Ì‚Å—LŒø‚Æ‚È‚è“ü—Í‚³‚ê‚éB
+                    e.Handled = False   'æ–‡å­—ã¯å‡¦ç†ã•ã‚Œã‚‹ã®ã§æœ‰åŠ¹ã¨ãªã‚Šå…¥åŠ›ã•ã‚Œã‚‹ã€‚
                 End If
             End If
         End Sub
         '-------------------------------------------------------------------------------
-        'hasPermitChars@“ü—Í‰Â”\•¶š‚Ìƒ`ƒFƒbƒN—p
+        'hasPermitCharsã€€å…¥åŠ›å¯èƒ½æ–‡å­—ã®ãƒã‚§ãƒƒã‚¯ç”¨
         '-------------------------------------------------------------------------------
         Private Shared Function hasPermitChars(ByVal chTarget As Char, ByVal chPermits As Char()) As Boolean
             For Each ch As Char In chPermits
@@ -1424,11 +1424,11 @@ Namespace DataGridView
             Next ch
         End Function
         '-------------------------------------------------------------------------------
-        '  “ú•tƒXƒ‰ƒbƒVƒ…•ÏŠ·ŠÖ”
-        '   iˆ—ŠT—vjyyyyMMdd ¨ yyyy/MM/dd or yyyy/MM/dd ¨ yyyyMMdd
-        '               yyMMdd   ¨ yy/MM/dd   or yy/MM/dd   ¨ yyMMdd
-        '   œ“ü—Íƒpƒ‰ƒƒ^@@F‚È‚µ
-        '   œƒƒ\ƒbƒh–ß‚è’l@F•ÏŠ·Œã•¶š—ñi“ú•t‚Æ‚µ‚Ä‚¨‚©‚µ‚¢ê‡‚Í‹ó”’("")‚ğ•Ô‚µ‚Ü‚·Bj
+        '  æ—¥ä»˜ã‚¹ãƒ©ãƒƒã‚·ãƒ¥å¤‰æ›é–¢æ•°
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰yyyyMMdd â†’ yyyy/MM/dd or yyyy/MM/dd â†’ yyyyMMdd
+        '               yyMMdd   â†’ yy/MM/dd   or yy/MM/dd   â†’ yyMMdd
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ã€€ã€€ï¼šãªã—
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ã€€ï¼šå¤‰æ›å¾Œæ–‡å­—åˆ—ï¼ˆæ—¥ä»˜ã¨ã—ã¦ãŠã‹ã—ã„å ´åˆã¯ç©ºç™½("")ã‚’è¿”ã—ã¾ã™ã€‚ï¼‰
         '                                               2006.11.10 Created By Akiyoshi.Yamazaki
         '-------------------------------------------------------------------------------
         Private Shared Function convertDateSlash(ByVal prmstrDate As String) As String
@@ -1440,7 +1440,7 @@ Namespace DataGridView
             End If
 
             If w_Str.IndexOf("/", 0) = -1 Then
-                '"/"‚ª–³‚¢ê‡
+                '"/"ãŒç„¡ã„å ´åˆ
                 Try
                     If Len(prmstrDate) > 6 Then
                         w_Date = DateTime.ParseExact(prmstrDate, "yyyyMMdd", New System.Globalization.CultureInfo("ja-JP"))
@@ -1467,27 +1467,27 @@ Namespace DataGridView
             End If
         End Function
         '-------------------------------------------------------------------------------
-        '  ‹ó”’”»’è
-        '   iˆ—ŠT—vj•¶š—ñ‚ª‹ó”’‚©‚ğ”»’è‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^@@F‚È‚µ
-        '   œƒƒ\ƒbƒh–ß‚è’l@FTrue=‹ó”’‚Å‚Í–³‚¢, False=‹ó”’
+        '  ç©ºç™½åˆ¤å®š
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰æ–‡å­—åˆ—ãŒç©ºç™½ã‹ã‚’åˆ¤å®šã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ã€€ã€€ï¼šãªã—
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ã€€ï¼šTrue=ç©ºç™½ã§ã¯ç„¡ã„, False=ç©ºç™½
         '                                               2006.11.10 Created By Akiyoshi.Yamazaki
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ‹ó”’”»’è
+        ''' ç©ºç™½åˆ¤å®š
         ''' </summary>
-        ''' <returns>True=‹ó”’‚Å‚Í–³‚¢, False=‹ó”’</returns>
+        ''' <returns>True=ç©ºç™½ã§ã¯ç„¡ã„, False=ç©ºç™½</returns>
         ''' <remarks></remarks>
         Private Shared Function IsExistString(ByVal prmstrDate As String) As Boolean
-            'Nothing”»’è
+            'Nothingåˆ¤å®š
             If IsNothing(prmstrDate) = True Then
                 Return False
             End If
-            '‹ó•¶š”»’è
+            'ç©ºæ–‡å­—åˆ¤å®š
             If prmstrDate Is String.Empty Then
                 Return False
             End If
-            '""•¶š”»’è
+            '""æ–‡å­—åˆ¤å®š
             If "".Equals(prmstrDate.Trim) Then
                 Return False
             End If
@@ -1496,65 +1496,65 @@ Namespace DataGridView
         '<--2006/11/10 ADD -END- A.Yamazaki
 
         '-------------------------------------------------------------------------------
-        '  ƒ^ƒuƒL[‰Ÿ‰º§Œä
-        '   iˆ—ŠT—vjƒ^ƒuƒL[‰Ÿ‰ºAsˆÚ“®iUPƒL[ADOWNƒL[“®ìj‚·‚é
-        '               æ“ª‹y‚ÑÅIs‚Å‚Í‘OŒã‚ÌƒRƒ“ƒgƒ[ƒ‹‚ÉˆÚ“®‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^@@FprmForm    ƒtƒH[ƒJƒX§Œä‚ğs‚¤ƒtƒH[ƒ€
-        '                     FprmEvent   KeyPressƒCƒxƒ“ƒg
-        '   œƒƒ\ƒbƒh–ß‚è’l@F‚È‚µ
+        '  ã‚¿ãƒ–ã‚­ãƒ¼æŠ¼ä¸‹æ™‚åˆ¶å¾¡
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰ã‚¿ãƒ–ã‚­ãƒ¼æŠ¼ä¸‹æ™‚ã€è¡Œç§»å‹•ï¼ˆUPã‚­ãƒ¼ã€DOWNã‚­ãƒ¼å‹•ä½œï¼‰ã™ã‚‹
+        '               å…ˆé ­åŠã³æœ€çµ‚è¡Œã§ã¯å‰å¾Œã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã«ç§»å‹•ã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ã€€ã€€ï¼šprmForm    ãƒ•ã‚©ãƒ¼ã‚«ã‚¹åˆ¶å¾¡ã‚’è¡Œã†ãƒ•ã‚©ãƒ¼ãƒ 
+        '                     ï¼šprmEvent   KeyPressã‚¤ãƒ™ãƒ³ãƒˆ
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ã€€ï¼šãªã—
         '                                               2018.03.07 Created By Yuichi.Kanno
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ƒ^ƒuƒL[‰Ÿ‰º§Œä ƒ^ƒuƒL[‰Ÿ‰ºAsˆÚ“®iUPƒL[ADOWNƒL[“®ìj‚·‚é
+        ''' ã‚¿ãƒ–ã‚­ãƒ¼æŠ¼ä¸‹æ™‚åˆ¶å¾¡ ã‚¿ãƒ–ã‚­ãƒ¼æŠ¼ä¸‹æ™‚ã€è¡Œç§»å‹•ï¼ˆUPã‚­ãƒ¼ã€DOWNã‚­ãƒ¼å‹•ä½œï¼‰ã™ã‚‹
         ''' </summary>
-        ''' <param name="prmForm">ƒtƒH[ƒJƒX§Œä‚ğs‚¤ƒtƒH[ƒ€</param>
-        ''' <param name="prmEvent">KeyPressƒCƒxƒ“ƒg</param>
+        ''' <param name="prmForm">ãƒ•ã‚©ãƒ¼ã‚«ã‚¹åˆ¶å¾¡ã‚’è¡Œã†ãƒ•ã‚©ãƒ¼ãƒ </param>
+        ''' <param name="prmEvent">KeyPressã‚¤ãƒ™ãƒ³ãƒˆ</param>
         ''' <remarks></remarks>
         Public Sub gridTabKeyDown(ByVal prmForm As Form, ByVal prmEvent As System.Windows.Forms.KeyEventArgs)
 
             If prmEvent.KeyData = Keys.Tab Then
-                '‰Ÿ‰ºƒL[‚ªTab‚Ìê‡
+                'æŠ¼ä¸‹ã‚­ãƒ¼ãŒTabã®å ´åˆ
 
                 Dim idx As Integer
-                'ˆê——‘I‘ğsƒCƒ“ƒfƒbƒNƒX‚Ìæ“¾
+                'ä¸€è¦§é¸æŠè¡Œã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã®å–å¾—
                 For Each c As DataGridViewRow In _grid.SelectedRows
                     idx = c.Index
                     Exit For
                 Next c
 
-                'ˆê——‚ÌÅIs‚Ìê‡
+                'ä¸€è¦§ã®æœ€çµ‚è¡Œã®å ´åˆ
                 If idx = _grid.RowCount - 1 Then
-                    'Ÿ‚ÌƒRƒ“ƒgƒ[ƒ‹‚ÖƒtƒH[ƒJƒXˆÚ“®
+                    'æ¬¡ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã¸ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ç§»å‹•
                     prmForm.SelectNextControl(prmForm.ActiveControl, True, True, True, True)
                 Else
-                    'DOWNƒL[‰Ÿ‰ºˆ—
+                    'DOWNã‚­ãƒ¼æŠ¼ä¸‹æ™‚å‡¦ç†
                     SendKeys.Send("{DOWN}")
                 End If
 
-                'TabƒL[ˆ—–³Œø‰»
+                'Tabã‚­ãƒ¼å‡¦ç†ç„¡åŠ¹åŒ–
                 prmEvent.Handled = True
 
             ElseIf (prmEvent.Modifiers And Keys.Shift) = Keys.Shift Then
                 If prmEvent.KeyCode = Keys.Tab Then
-                    '‰Ÿ‰ºƒL[‚ªShift + Tab‚Ìê‡
+                    'æŠ¼ä¸‹ã‚­ãƒ¼ãŒShift + Tabã®å ´åˆ
 
                     Dim idx As Integer
-                    'ˆê——‘I‘ğsƒCƒ“ƒfƒbƒNƒX‚Ìæ“¾
+                    'ä¸€è¦§é¸æŠè¡Œã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã®å–å¾—
                     For Each c As DataGridViewRow In _grid.SelectedRows
                         idx = c.Index
                         Exit For
                     Next c
 
-                    'ˆê——‚Ìæ“ªs‚Ìê‡
+                    'ä¸€è¦§ã®å…ˆé ­è¡Œã®å ´åˆ
                     If idx = 0 Then
-                        '‘O‚ÌƒRƒ“ƒgƒ[ƒ‹‚ÖƒtƒH[ƒJƒXˆÚ“®
+                        'å‰ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã¸ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ç§»å‹•
                         prmForm.SelectNextControl(prmForm.ActiveControl, False, True, True, True)
                     Else
-                        'UPƒL[‰Ÿ‰ºˆ—
+                        'UPã‚­ãƒ¼æŠ¼ä¸‹æ™‚å‡¦ç†
                         SendKeys.Send("{UP}")
                     End If
 
-                    'Shift + TabƒL[ˆ—–³Œø‰»
+                    'Shift + Tabã‚­ãƒ¼å‡¦ç†ç„¡åŠ¹åŒ–
                     prmEvent.Handled = True
                 End If
             End If
@@ -1565,26 +1565,26 @@ Namespace DataGridView
 
     '===============================================================================
     '
-    '  ƒ†[ƒeƒBƒŠƒeƒBƒNƒ‰ƒX
-    '    iƒNƒ‰ƒX–¼j    UtilDgvCboVO
-    '    iˆ—‹@”\–¼j      UtilDataGridViewHandler‚É“n‚·ƒRƒ“ƒ{ƒ{ƒbƒNƒXƒf[ƒ^‚Ì˜g‚ğ’ñ‹Ÿ(Beans)
-    '    i–{MDLg—p‘O’ñj   UtilDataGridViewHandler‚Æ‘Î‚Åg—p‚·‚é
-    '    i”õlj            ã‹Lg—p‘O’ñ‚æ‚èUtilDataGridViewHandler‚Æ“¯ˆêSRCã‚É’è‹`
+    '  ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£ã‚¯ãƒ©ã‚¹
+    '    ï¼ˆã‚¯ãƒ©ã‚¹åï¼‰    UtilDgvCboVO
+    '    ï¼ˆå‡¦ç†æ©Ÿèƒ½åï¼‰      UtilDataGridViewHandlerã«æ¸¡ã™ã‚³ãƒ³ãƒœãƒœãƒƒã‚¯ã‚¹ãƒ‡ãƒ¼ã‚¿ã®æ ã‚’æä¾›(Beans)
+    '    ï¼ˆæœ¬MDLä½¿ç”¨å‰æï¼‰   UtilDataGridViewHandlerã¨å¯¾ã§ä½¿ç”¨ã™ã‚‹
+    '    ï¼ˆå‚™è€ƒï¼‰            ä¸Šè¨˜ä½¿ç”¨å‰æã‚ˆã‚ŠUtilDataGridViewHandlerã¨åŒä¸€SRCä¸Šã«å®šç¾©
     '
     '===============================================================================
-    '  —š—ğ  –¼‘O          “ú  •t      ƒ}[ƒN      “à—e
+    '  å±¥æ­´  åå‰          æ—¥  ä»˜      ãƒãƒ¼ã‚¯      å†…å®¹
     '-------------------------------------------------------------------------------
-    '  (1)   Laevigata, Inc.    2006/05/12              V‹K
+    '  (1)   Laevigata, Inc.    2006/05/12              æ–°è¦
     '-------------------------------------------------------------------------------
     Public Class UtilDgvCboVO
         '===============================================================================
-        'ƒƒ“ƒo[•Ï”’è‹`
+        'ãƒ¡ãƒ³ãƒãƒ¼å¤‰æ•°å®šç¾©
         '===============================================================================
         Private _code As String
         Private _name As String
 
         '===============================================================================
-        'ƒvƒƒpƒeƒB(ƒAƒNƒZƒT)
+        'ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£(ã‚¢ã‚¯ã‚»ã‚µ)
         '===============================================================================
         Public ReadOnly Property code()
             'Geter--------
@@ -1600,15 +1600,15 @@ Namespace DataGridView
         End Property
 
         '===============================================================================
-        ' ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-        '   œ“ü—Íƒpƒ‰ƒƒ^   FprmCode    ‚±‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ª•\‚·€–Ú‚ÌƒR[ƒh
-        '                   FprmName    ‚±‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ª•\‚·€–Ú‚Ì•\¦–¼Ì
+        ' ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šprmCode    ã“ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ãŒè¡¨ã™é …ç›®ã®ã‚³ãƒ¼ãƒ‰
+        '                   ï¼šprmName    ã“ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ãŒè¡¨ã™é …ç›®ã®è¡¨ç¤ºåç§°
         '===============================================================================
         ''' <summary>
-        ''' ƒOƒŠƒbƒhƒnƒ“ƒhƒ‰‚Ö‚Ìó‚¯“n‚µƒf[ƒ^‚ğƒCƒ“ƒXƒ^ƒ“ƒX‰»‚·‚é
+        ''' ã‚°ãƒªãƒƒãƒ‰ãƒãƒ³ãƒ‰ãƒ©ã¸ã®å—ã‘æ¸¡ã—ãƒ‡ãƒ¼ã‚¿ã‚’ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹åŒ–ã™ã‚‹
         ''' </summary>
-        ''' <param name="prmCode">ƒR[ƒh</param>
-        ''' <param name="prmName">–¼Ì</param>
+        ''' <param name="prmCode">ã‚³ãƒ¼ãƒ‰</param>
+        ''' <param name="prmName">åç§°</param>
         ''' <remarks></remarks>
         Public Sub New(ByVal prmCode As String, ByVal prmName As String)
             _code = prmCode
@@ -1616,42 +1616,42 @@ Namespace DataGridView
         End Sub
 
         '===============================================================================
-        ' ƒI[ƒo[ƒ‰ƒCƒhƒƒ\ƒbƒh
-        '   iˆ—ŠT—vjƒRƒ“ƒ{ƒ{ƒbƒNƒX‚É•\¦‚·‚éƒJƒ‰ƒ€‚ğw’è
+        ' ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰ãƒ¡ã‚½ãƒƒãƒ‰
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰ã‚³ãƒ³ãƒœãƒœãƒƒã‚¯ã‚¹ã«è¡¨ç¤ºã™ã‚‹ã‚«ãƒ©ãƒ ã‚’æŒ‡å®š
         '===============================================================================
         ''' <summary>
-        ''' ƒRƒ“ƒ{ƒ{ƒbƒNƒX‚É•\¦‚·‚é•¶š—ñ‚ğ‚ ‚ç‚í‚·
+        ''' ã‚³ãƒ³ãƒœãƒœãƒƒã‚¯ã‚¹ã«è¡¨ç¤ºã™ã‚‹æ–‡å­—åˆ—ã‚’ã‚ã‚‰ã‚ã™
         ''' </summary>
         ''' <returns></returns>
         ''' <remarks></remarks>
         Public Overrides Function ToString() As String
-            ToString = _name '•\¦–¼Ì‚ğ•Ô‹p
+            ToString = _name 'è¡¨ç¤ºåç§°ã‚’è¿”å´
         End Function
 
     End Class
     '>--2006/11/10 ADD -STR- A.Yamazaki
     '===============================================================================
     '
-    '  ƒ†[ƒeƒBƒŠƒeƒBƒNƒ‰ƒX
-    '    iƒNƒ‰ƒX–¼j    UtilDgvchkCellVO
-    '    iˆ—‹@”\–¼j      UtilDataGridViewHandler‚É“n‚·ƒZƒ‹‚Ìƒ`ƒFƒbƒNî•ñ‚Ì˜g‚ğ’ñ‹Ÿ(Beans)
-    '    i–{MDLg—p‘O’ñj   UtilDataGridViewHandler‚Æ‘Î‚Åg—p‚·‚é
-    '    i”õlj            ã‹Lg—p‘O’ñ‚æ‚èUtilDataGridViewHandler‚Æ“¯ˆêSRCã‚É’è‹`
+    '  ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£ã‚¯ãƒ©ã‚¹
+    '    ï¼ˆã‚¯ãƒ©ã‚¹åï¼‰    UtilDgvchkCellVO
+    '    ï¼ˆå‡¦ç†æ©Ÿèƒ½åï¼‰      UtilDataGridViewHandlerã«æ¸¡ã™ã‚»ãƒ«ã®ãƒã‚§ãƒƒã‚¯æƒ…å ±ã®æ ã‚’æä¾›(Beans)
+    '    ï¼ˆæœ¬MDLä½¿ç”¨å‰æï¼‰   UtilDataGridViewHandlerã¨å¯¾ã§ä½¿ç”¨ã™ã‚‹
+    '    ï¼ˆå‚™è€ƒï¼‰            ä¸Šè¨˜ä½¿ç”¨å‰æã‚ˆã‚ŠUtilDataGridViewHandlerã¨åŒä¸€SRCä¸Šã«å®šç¾©
     '
     '===============================================================================
-    '  —š—ğ  –¼‘O          “ú  •t      ƒ}[ƒN      “à—e
+    '  å±¥æ­´  åå‰          æ—¥  ä»˜      ãƒãƒ¼ã‚¯      å†…å®¹
     '-------------------------------------------------------------------------------
-    '  (1)   A.Yamazaki    2006/11/10              V‹K
+    '  (1)   A.Yamazaki    2006/11/10              æ–°è¦
     '-------------------------------------------------------------------------------
     Public Class UtilDgvChkCellVO
         '===============================================================================
-        'ƒƒ“ƒo[•Ï”’è‹`
+        'ãƒ¡ãƒ³ãƒãƒ¼å¤‰æ•°å®šç¾©
         '===============================================================================
-        Private _befData As String  '•ÒW‘Oƒf[ƒ^
-        Private _EditingControl As DataGridViewTextBoxEditingControl    'DataGridViewTextBoxEditingControl‚ÌƒCƒxƒ“ƒg‚ğˆ—‚·‚éˆ×‚Ì•Ï”
-        Private _chkType As Integer 'ƒZƒ‹ƒ`ƒFƒbƒN•û–@
+        Private _befData As String  'ç·¨é›†å‰ãƒ‡ãƒ¼ã‚¿
+        Private _EditingControl As DataGridViewTextBoxEditingControl    'DataGridViewTextBoxEditingControlã®ã‚¤ãƒ™ãƒ³ãƒˆã‚’å‡¦ç†ã™ã‚‹ç‚ºã®å¤‰æ•°
+        Private _chkType As Integer 'ã‚»ãƒ«ãƒã‚§ãƒƒã‚¯æ–¹æ³•
         '===============================================================================
-        'ƒvƒƒpƒeƒB(ƒAƒNƒZƒT)
+        'ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£(ã‚¢ã‚¯ã‚»ã‚µ)
         '===============================================================================
         Public Property befData() As String
             'Geter--------
@@ -1684,17 +1684,17 @@ Namespace DataGridView
             End Set
         End Property
         '===============================================================================
-        ' ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-        '   œ“ü—Íƒpƒ‰ƒƒ^   FprmbefData    •ÒW‘Oƒf[ƒ^
-        '                    FprmEditingControl    •ÒWƒZƒ‹‚ÌƒRƒ“ƒgƒ[ƒ‹
-        '                  @FprmchkType    ƒ`ƒFƒbƒN•û–@
+        ' ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šprmbefData    ç·¨é›†å‰ãƒ‡ãƒ¼ã‚¿
+        '                    ï¼šprmEditingControl    ç·¨é›†ã‚»ãƒ«ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«
+        '                  ã€€ï¼šprmchkType    ãƒã‚§ãƒƒã‚¯æ–¹æ³•
         '===============================================================================
         ''' <summary>
-        ''' ƒOƒŠƒbƒhƒnƒ“ƒhƒ‰‚Ö‚Ìó‚¯“n‚µƒf[ƒ^‚ğƒCƒ“ƒXƒ^ƒ“ƒX‰»‚·‚é
+        ''' ã‚°ãƒªãƒƒãƒ‰ãƒãƒ³ãƒ‰ãƒ©ã¸ã®å—ã‘æ¸¡ã—ãƒ‡ãƒ¼ã‚¿ã‚’ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹åŒ–ã™ã‚‹
         ''' </summary>
-        ''' <param name="prmbefData">•ÒW‘Oƒf[ƒ^</param>
-        ''' <param name="prmEditingControl">•ÒWƒZƒ‹‚ÌƒRƒ“ƒgƒ[ƒ‹</param>
-        ''' <param name="prmchkType">ƒ`ƒFƒbƒN•û–@</param>
+        ''' <param name="prmbefData">ç·¨é›†å‰ãƒ‡ãƒ¼ã‚¿</param>
+        ''' <param name="prmEditingControl">ç·¨é›†ã‚»ãƒ«ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«</param>
+        ''' <param name="prmchkType">ãƒã‚§ãƒƒã‚¯æ–¹æ³•</param>
         ''' <remarks></remarks>
         Public Sub New(ByVal prmbefData As String, ByVal prmEditingControl As DataGridViewTextBoxEditingControl, ByVal prmchkType As Integer)
             _befData = prmbefData
@@ -1703,16 +1703,16 @@ Namespace DataGridView
         End Sub
 
         '===============================================================================
-        ' ƒI[ƒo[ƒ‰ƒCƒhƒƒ\ƒbƒh
-        '   iˆ—ŠT—vjVO‚ÌŠi”[ƒf[ƒ^‚ğ•\¦‚·‚é
+        ' ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰ãƒ¡ã‚½ãƒƒãƒ‰
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰VOã®æ ¼ç´ãƒ‡ãƒ¼ã‚¿ã‚’è¡¨ç¤ºã™ã‚‹
         '===============================================================================
         ''' <summary>
-        ''' VO‘S‘Ì‚ğ•\¦‚·‚é•¶š—ñ‚ğ‚ ‚ç‚í‚·
+        ''' VOå…¨ä½“ã‚’è¡¨ç¤ºã™ã‚‹æ–‡å­—åˆ—ã‚’ã‚ã‚‰ã‚ã™
         ''' </summary>
         ''' <returns></returns>
         ''' <remarks></remarks>
         Public Overrides Function ToString() As String
-            ToString = _EditingControl.Text '•\¦–¼Ì‚ğ•Ô‹p
+            ToString = _EditingControl.Text 'è¡¨ç¤ºåç§°ã‚’è¿”å´
         End Function
 
     End Class

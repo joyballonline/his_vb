@@ -1,39 +1,39 @@
-Imports UtilMDL.Log
+ï»¿Imports UtilMDL.Log
 
 Namespace DB
     '===============================================================================
     '
-    '  ƒ†[ƒeƒBƒŠƒeƒBƒNƒ‰ƒX
-    '    iƒNƒ‰ƒX–¼j    UtilPostgresDebugger
-    '    iˆ—‹@”\–¼j     ƒƒOo—ÍŠg’£‹@”\‚ğ‚Á‚½DBƒAƒNƒZƒX(Npgsql)’ñ‹Ÿ‚·‚é
-    '    i–{MDLg—p‘O’ñj  UtilLogDebugger/UtilPostgresHandler‚ªƒvƒƒWƒFƒNƒg‚Éæ‚è‚Ü‚ê‚Ä‚¢‚é‚±‚Æ
-    '                       UtilDBInheritBase/UtilDBIf‚ªƒvƒƒWƒFƒNƒg‚Éæ‚è‚Ü‚ê‚Ä‚¢‚é‚±‚Æ
-    '    i”õlj           UtilDBInheritBase‚ğŒp³
-    '                       UtilDBIfƒCƒ“ƒ^[ƒtƒF[ƒX‚ğ(UtilDBInheritBase‚É‚Ä)À‘•
+    '  ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£ã‚¯ãƒ©ã‚¹
+    '    ï¼ˆã‚¯ãƒ©ã‚¹åï¼‰    UtilPostgresDebugger
+    '    ï¼ˆå‡¦ç†æ©Ÿèƒ½åï¼‰     ãƒ­ã‚°å‡ºåŠ›æ‹¡å¼µæ©Ÿèƒ½ã‚’æŒã£ãŸDBã‚¢ã‚¯ã‚»ã‚¹(Npgsql)æä¾›ã™ã‚‹
+    '    ï¼ˆæœ¬MDLä½¿ç”¨å‰æï¼‰  UtilLogDebugger/UtilPostgresHandlerãŒãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã«å–ã‚Šè¾¼ã¾ã‚Œã¦ã„ã‚‹ã“ã¨
+    '                       UtilDBInheritBase/UtilDBIfãŒãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã«å–ã‚Šè¾¼ã¾ã‚Œã¦ã„ã‚‹ã“ã¨
+    '    ï¼ˆå‚™è€ƒï¼‰           UtilDBInheritBaseã‚’ç¶™æ‰¿
+    '                       UtilDBIfã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹ã‚’(UtilDBInheritBaseã«ã¦)å®Ÿè£…
     '
     '===============================================================================
-    '  —š—ğ  –¼‘O          “ú  •t      ƒ}[ƒN      “à—e
+    '  å±¥æ­´  åå‰          æ—¥  ä»˜      ãƒãƒ¼ã‚¯      å†…å®¹
     '-------------------------------------------------------------------------------
-    '  (1)   Laevigata, Inc.    2014/02/20              V‹K
+    '  (1)   Laevigata, Inc.    2014/02/20              æ–°è¦
     '-------------------------------------------------------------------------------
     Public Class UtilPostgresDebugger
         Inherits UtilDBInheritBase
 
         '===============================================================================
-        'ƒƒ“ƒo[’è”’è‹`
+        'ãƒ¡ãƒ³ãƒãƒ¼å®šæ•°å®šç¾©
         '===============================================================================
-        Private _logger As UtilLogDebugger      'ƒƒOƒfƒoƒbƒK
-        Private _hd As UtilPostgresHandler      'DBƒnƒ“ƒhƒ‰
+        Private _logger As UtilLogDebugger      'ãƒ­ã‚°ãƒ‡ãƒãƒƒã‚¬
+        Private _hd As UtilPostgresHandler      'DBãƒãƒ³ãƒ‰ãƒ©
 
         '===============================================================================
-        'ƒƒ“ƒo[•Ï”’è‹`
+        'ãƒ¡ãƒ³ãƒãƒ¼å¤‰æ•°å®šç¾©
         '===============================================================================
-        '‚È‚µ
+        'ãªã—
 
         '===============================================================================
-        'ƒvƒƒpƒeƒB(ƒAƒNƒZƒT)
+        'ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£(ã‚¢ã‚¯ã‚»ã‚µ)
         '===============================================================================
-        Public Property debugFlg() As Boolean 'ƒfƒoƒbƒOƒ‚[ƒh
+        Public Property debugFlg() As Boolean 'ãƒ‡ãƒãƒƒã‚°ãƒ¢ãƒ¼ãƒ‰
             'Geter--------
             Get
                 Return _logger.debugFlg
@@ -43,7 +43,7 @@ Namespace DB
                 _logger.debugFlg = Value
             End Set
         End Property
-        Public Property consoleWrite() As Boolean 'ƒRƒ“ƒ\[ƒ‹o—Í‚·‚é‚©‚Ç‚¤‚©
+        Public Property consoleWrite() As Boolean 'ã‚³ãƒ³ã‚½ãƒ¼ãƒ«å‡ºåŠ›ã™ã‚‹ã‹ã©ã†ã‹
             'Geter--------
             Get
                 Return _logger.consoleWrite
@@ -53,33 +53,33 @@ Namespace DB
                 _logger.consoleWrite = Value
             End Set
         End Property
-        Public Overrides ReadOnly Property isTransactionOpen() As Boolean 'ƒgƒ‰ƒ“ƒUƒNƒVƒ‡ƒ“‚ªŠJ‚¢‚Ä‚¢‚é‚©‚Ç‚¤‚©
+        Public Overrides ReadOnly Property isTransactionOpen() As Boolean 'ãƒˆãƒ©ãƒ³ã‚¶ã‚¯ã‚·ãƒ§ãƒ³ãŒé–‹ã„ã¦ã„ã‚‹ã‹ã©ã†ã‹
             Get
                 Return _hd.isTransactionOpen
             End Get
         End Property
 
         '===============================================================================
-        ' ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-        '   œ“ü—Íƒpƒ‰ƒƒ^   F  prmUDLFileNm        UDLƒtƒ@ƒCƒ‹–¼(ƒtƒ‹ƒpƒX)
-        '                       prmFileNm           Logƒtƒ@ƒCƒ‹–¼(ƒtƒ‹ƒpƒX)
-        '                       prmDebugFlg         ƒfƒoƒbƒOƒ‚[ƒh
-        '                       <prmConsoleWrite>   ƒRƒ“ƒ\[ƒ‹o—Í‚·‚é‚©‚Ç‚¤‚©
-        '                       <prmTimeout>        ”­sSQL‚Ìƒ^ƒCƒ€ƒAƒEƒgİ’è(È—ª‚Í‹K’è’l‚Ì30•b/0İ’è‚Í‰i‹v‘Ò‹@)
+        ' ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼š  prmUDLFileNm        UDLãƒ•ã‚¡ã‚¤ãƒ«å(ãƒ•ãƒ«ãƒ‘ã‚¹)
+        '                       prmFileNm           Logãƒ•ã‚¡ã‚¤ãƒ«å(ãƒ•ãƒ«ãƒ‘ã‚¹)
+        '                       prmDebugFlg         ãƒ‡ãƒãƒƒã‚°ãƒ¢ãƒ¼ãƒ‰
+        '                       <prmConsoleWrite>   ã‚³ãƒ³ã‚½ãƒ¼ãƒ«å‡ºåŠ›ã™ã‚‹ã‹ã©ã†ã‹
+        '                       <prmTimeout>        ç™ºè¡ŒSQLã®ã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆè¨­å®š(çœç•¥æ™‚ã¯è¦å®šå€¤ã®30ç§’/0è¨­å®šæ™‚ã¯æ°¸ä¹…å¾…æ©Ÿ)
         '                                               2014.02.20 Created By Laevigata, Inc.
         '===============================================================================
         ''' <summary>
-        ''' ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        ''' ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         ''' </summary>
-        ''' <param name="prmSvAdr">ƒT[ƒo[ƒAƒhƒŒƒX</param>
-        ''' <param name="prmPortNo">ƒ|[ƒg”Ô†</param>
-        ''' <param name="prmDbNm">ƒf[ƒ^ƒx[ƒX–¼</param>
-        ''' <param name="prmUserId">ƒ†[ƒU[ID</param>
-        ''' <param name="prmPswd">ƒpƒXƒ[ƒh</param>
-        ''' <param name="prmFileNm">Logƒtƒ@ƒCƒ‹–¼(ƒtƒ‹ƒpƒX)</param>
-        ''' <param name="prmDebugFlg">ƒfƒoƒbƒOƒ‚[ƒh</param>
-        ''' <param name="prmConsoleWrite">ƒRƒ“ƒ\[ƒ‹o—Í‚·‚é‚©‚Ç‚¤‚©</param>
-        ''' <param name="prmTimeout">”­sSQL‚Ìƒ^ƒCƒ€ƒAƒEƒgİ’è(È—ª‚Í‹K’è’l‚Ì30•b/0İ’è‚Í‰i‹v‘Ò‹@)</param>
+        ''' <param name="prmSvAdr">ã‚µãƒ¼ãƒãƒ¼ã‚¢ãƒ‰ãƒ¬ã‚¹</param>
+        ''' <param name="prmPortNo">ãƒãƒ¼ãƒˆç•ªå·</param>
+        ''' <param name="prmDbNm">ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹å</param>
+        ''' <param name="prmUserId">ãƒ¦ãƒ¼ã‚¶ãƒ¼ID</param>
+        ''' <param name="prmPswd">ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰</param>
+        ''' <param name="prmFileNm">Logãƒ•ã‚¡ã‚¤ãƒ«å(ãƒ•ãƒ«ãƒ‘ã‚¹)</param>
+        ''' <param name="prmDebugFlg">ãƒ‡ãƒãƒƒã‚°ãƒ¢ãƒ¼ãƒ‰</param>
+        ''' <param name="prmConsoleWrite">ã‚³ãƒ³ã‚½ãƒ¼ãƒ«å‡ºåŠ›ã™ã‚‹ã‹ã©ã†ã‹</param>
+        ''' <param name="prmTimeout">ç™ºè¡ŒSQLã®ã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆè¨­å®š(çœç•¥æ™‚ã¯è¦å®šå€¤ã®30ç§’/0è¨­å®šæ™‚ã¯æ°¸ä¹…å¾…æ©Ÿ)</param>
         ''' <remarks></remarks>
         Public Sub New(ByVal prmSvAdr As String, ByVal prmPortNo As String, ByVal prmDbNm As String, ByVal prmUserId As String, ByVal prmPswd As String,
                        ByVal prmFileNm As String,
@@ -89,45 +89,45 @@ Namespace DB
             _logger = New UtilLogDebugger(prmFileNm, prmDebugFlg, prmConsoleWrite)
             Try
                 _hd = New UtilPostgresHandler(prmSvAdr, prmPortNo, prmDbNm, prmUserId, prmPswd, prmTimeout)
-                _logger.writeLine(UtilLogDebugger.LOG_DEBUG, "ƒf[ƒ^ƒx[ƒXÚ‘±¬Œ÷")
+                _logger.writeLine(UtilLogDebugger.LOG_DEBUG, "ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹æ¥ç¶šæˆåŠŸ")
             Catch ex As Exception
-                _logger.writeLine(UtilLogDebugger.LOG_ERR, "ƒf[ƒ^ƒx[ƒXÚ‘±¸”s", ex.Message & ControlChars.NewLine & ex.StackTrace)
+                _logger.writeLine(UtilLogDebugger.LOG_ERR, "ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹æ¥ç¶šå¤±æ•—", ex.Message & ControlChars.NewLine & ex.StackTrace)
                 Throw ex
             End Try
 
         End Sub
 
         '-------------------------------------------------------------------------------
-        '   DBØ’f
-        '   iˆ—ŠT—vjDBÚ‘±‚ğƒNƒ[ƒY‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^  F‚È‚µ
-        '   œƒƒ\ƒbƒh–ß‚è’lF‚È‚µ
+        '   DBåˆ‡æ–­
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰DBæ¥ç¶šã‚’ã‚¯ãƒ­ãƒ¼ã‚ºã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿  ï¼šãªã—
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ï¼šãªã—
         '                                               2014.02.20 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' DBØ’f
+        ''' DBåˆ‡æ–­
         ''' </summary>
         ''' <remarks></remarks>
         Public Overrides Sub close()
             Try
                 _hd.close()
-                _logger.writeLine(UtilLogDebugger.LOG_DEBUG, "ƒf[ƒ^ƒx[ƒXØ’f")
+                _logger.writeLine(UtilLogDebugger.LOG_DEBUG, "ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹åˆ‡æ–­")
             Catch ex As Exception
-                _logger.writeLine(UtilLogDebugger.LOG_ERR, "ƒf[ƒ^ƒx[ƒXØ’f¸”s", ex.Message & ControlChars.NewLine & ex.StackTrace)
+                _logger.writeLine(UtilLogDebugger.LOG_ERR, "ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹åˆ‡æ–­å¤±æ•—", ex.Message & ControlChars.NewLine & ex.StackTrace)
                 Throw ex
             End Try
 
         End Sub
 
         '-------------------------------------------------------------------------------
-        '   ƒgƒ‰ƒ“ƒUƒNƒVƒ‡ƒ“ŠJn
-        '   iˆ—ŠT—v) ƒgƒ‰ƒ“ƒUƒNƒVƒ‡ƒ“‚ğŠJn‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^  F‚È‚µ
-        '   œƒƒ\ƒbƒh–ß‚è’lF‚È‚µ
+        '   ãƒˆãƒ©ãƒ³ã‚¶ã‚¯ã‚·ãƒ§ãƒ³é–‹å§‹
+        '   ï¼ˆå‡¦ç†æ¦‚è¦) ãƒˆãƒ©ãƒ³ã‚¶ã‚¯ã‚·ãƒ§ãƒ³ã‚’é–‹å§‹ã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿  ï¼šãªã—
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ï¼šãªã—
         '                                               2014.02.20 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ƒgƒ‰ƒ“ƒUƒNƒVƒ‡ƒ“ŠJn
+        ''' ãƒˆãƒ©ãƒ³ã‚¶ã‚¯ã‚·ãƒ§ãƒ³é–‹å§‹
         ''' </summary>
         ''' <remarks></remarks>
         Public Overrides Sub beginTran()
@@ -135,20 +135,20 @@ Namespace DB
                 _hd.beginTran()
                 _logger.writeLine(UtilLogDebugger.LOG_DEBUG, "beginTran")
             Catch ex As Exception
-                _logger.writeLine(UtilLogDebugger.LOG_ERR, "beginTran¸”s", ex.Message & ControlChars.NewLine & ex.StackTrace)
+                _logger.writeLine(UtilLogDebugger.LOG_ERR, "beginTranå¤±æ•—", ex.Message & ControlChars.NewLine & ex.StackTrace)
                 Throw ex
             End Try
         End Sub
 
         '-------------------------------------------------------------------------------
-        '   ƒgƒ‰ƒ“ƒUƒNƒVƒ‡ƒ“I—¹
-        '   iˆ—ŠT—v) ƒgƒ‰ƒ“ƒUƒNƒVƒ‡ƒ“‚ğCommit‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^  F‚È‚µ
-        '   œƒƒ\ƒbƒh–ß‚è’lF‚È‚µ
+        '   ãƒˆãƒ©ãƒ³ã‚¶ã‚¯ã‚·ãƒ§ãƒ³çµ‚äº†
+        '   ï¼ˆå‡¦ç†æ¦‚è¦) ãƒˆãƒ©ãƒ³ã‚¶ã‚¯ã‚·ãƒ§ãƒ³ã‚’Commitã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿  ï¼šãªã—
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ï¼šãªã—
         '                                               2014.02.20 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ƒgƒ‰ƒ“ƒUƒNƒVƒ‡ƒ“I—¹
+        ''' ãƒˆãƒ©ãƒ³ã‚¶ã‚¯ã‚·ãƒ§ãƒ³çµ‚äº†
         ''' </summary>
         ''' <remarks></remarks>
         Public Overrides Sub commitTran()
@@ -156,20 +156,20 @@ Namespace DB
                 _hd.commitTran()
                 _logger.writeLine(UtilLogDebugger.LOG_DEBUG, "commitTran")
             Catch ex As Exception
-                _logger.writeLine(UtilLogDebugger.LOG_ERR, "commitTran¸”s", ex.Message & ControlChars.NewLine & ex.StackTrace)
+                _logger.writeLine(UtilLogDebugger.LOG_ERR, "commitTranå¤±æ•—", ex.Message & ControlChars.NewLine & ex.StackTrace)
                 Throw ex
             End Try
         End Sub
 
         '-------------------------------------------------------------------------------
-        '   ƒgƒ‰ƒ“ƒUƒNƒVƒ‡ƒ“”jŠü
-        '   iˆ—ŠT—v) ƒgƒ‰ƒ“ƒUƒNƒVƒ‡ƒ“‚ğRollback‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^  F‚È‚µ
-        '   œƒƒ\ƒbƒh–ß‚è’lF‚È‚µ
+        '   ãƒˆãƒ©ãƒ³ã‚¶ã‚¯ã‚·ãƒ§ãƒ³ç ´æ£„
+        '   ï¼ˆå‡¦ç†æ¦‚è¦) ãƒˆãƒ©ãƒ³ã‚¶ã‚¯ã‚·ãƒ§ãƒ³ã‚’Rollbackã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿  ï¼šãªã—
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ï¼šãªã—
         '                                               2014.02.20 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ƒgƒ‰ƒ“ƒUƒNƒVƒ‡ƒ“”jŠü
+        ''' ãƒˆãƒ©ãƒ³ã‚¶ã‚¯ã‚·ãƒ§ãƒ³ç ´æ£„
         ''' </summary>
         ''' <remarks></remarks>
         Public Overrides Sub rollbackTran()
@@ -177,27 +177,27 @@ Namespace DB
                 _hd.rollbackTran()
                 _logger.writeLine(UtilLogDebugger.LOG_DEBUG, "rollbackTran")
             Catch ex As Exception
-                _logger.writeLine(UtilLogDebugger.LOG_ERR, "rollbackTran¸”s", ex.Message & ControlChars.NewLine & ex.StackTrace)
+                _logger.writeLine(UtilLogDebugger.LOG_ERR, "rollbackTranå¤±æ•—", ex.Message & ControlChars.NewLine & ex.StackTrace)
                 Throw ex
             End Try
         End Sub
 
         '-------------------------------------------------------------------------------
-        '   Select•¶”­s
-        '   iˆ—ŠT—vjSelect•¶‚ğ”­s‚µADataSet‚ğ•Ô‹p‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^  FprmSQL        Select•¶
-        '                  FprmTblName     •Ô‹p‚³‚ê‚éDataSet‚ÌTBL–¼Ì
-        '                  F<prmRefRecCnt> æ“¾Œ”
-        '   œƒƒ\ƒbƒh–ß‚è’lFDataSet
-        '   œ”õl          F•Ô‹p‚·‚éDataSet‚ÍprmTblName‚ÌTBL–¼Ì‚ÅŠi”[
+        '   Selectæ–‡ç™ºè¡Œ
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰Selectæ–‡ã‚’ç™ºè¡Œã—ã€DataSetã‚’è¿”å´ã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿  ï¼šprmSQL        Selectæ–‡
+        '                  ï¼šprmTblName     è¿”å´ã•ã‚Œã‚‹DataSetã®TBLåç§°
+        '                  ï¼š<prmRefRecCnt> å–å¾—ä»¶æ•°
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ï¼šDataSet
+        '   â—å‚™è€ƒ          ï¼šè¿”å´ã™ã‚‹DataSetã¯prmTblNameã®TBLåç§°ã§æ ¼ç´
         '                                               2014.02.20 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' Select•¶”­s Select•¶‚ğ”­s‚µADataSet‚ğ•Ô‹p‚·‚é •Ô‹p‚·‚éDataSet‚ÍprmTblName‚ÌTBL–¼Ì‚ÅŠi”[
+        ''' Selectæ–‡ç™ºè¡Œ Selectæ–‡ã‚’ç™ºè¡Œã—ã€DataSetã‚’è¿”å´ã™ã‚‹ è¿”å´ã™ã‚‹DataSetã¯prmTblNameã®TBLåç§°ã§æ ¼ç´
         ''' </summary>
-        ''' <param name="prmSQL">Select•¶</param>
-        ''' <param name="prmTblName">•Ô‹p‚³‚ê‚éDataSet‚ÌTBL–¼Ì</param>
-        ''' <param name="prmRefRecCnt">æ“¾Œ”</param>
+        ''' <param name="prmSQL">Selectæ–‡</param>
+        ''' <param name="prmTblName">è¿”å´ã•ã‚Œã‚‹DataSetã®TBLåç§°</param>
+        ''' <param name="prmRefRecCnt">å–å¾—ä»¶æ•°</param>
         ''' <returns></returns>
         ''' <remarks></remarks>
         Public Overrides Function selectDB(ByVal prmSQL As String, _
@@ -206,24 +206,24 @@ Namespace DB
             Dim ds As DataSet
             Try
                 ds = _hd.selectDB(prmSQL, prmTblName, prmRefRecCnt)
-                _logger.writeLine(UtilLogDebugger.LOG_DEBUG, "ƒf[ƒ^æ“¾Œ”F" & prmRefRecCnt & "Œ", prmSQL)
+                _logger.writeLine(UtilLogDebugger.LOG_DEBUG, "ãƒ‡ãƒ¼ã‚¿å–å¾—ä»¶æ•°ï¼š" & prmRefRecCnt & "ä»¶", prmSQL)
             Catch ex As Exception
-                _logger.writeLine(UtilLogDebugger.LOG_ERR, "ƒf[ƒ^æ“¾¸”sF" & ex.Message & ControlChars.NewLine & ex.StackTrace, prmSQL)
+                _logger.writeLine(UtilLogDebugger.LOG_ERR, "ãƒ‡ãƒ¼ã‚¿å–å¾—å¤±æ•—ï¼š" & ex.Message & ControlChars.NewLine & ex.StackTrace, prmSQL)
                 Throw ex
             End Try
             Return ds
         End Function
 
         '-------------------------------------------------------------------------------
-        '   Select•¶”­s
-        '   iˆ—ŠT—vj’uŠ·ƒpƒ‰ƒ[ƒ^•t‚«Select•¶‚ğ”­s‚µADataSet‚ğ•Ô‹p‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^  FprmSQL            ƒpƒ‰ƒ[ƒ^•t‚«Select•¶(’uŠ·ƒpƒ‰ƒƒ^‚Íu?v)
-        '                   FprmParameters     ’uŠ·ƒpƒ‰ƒ[ƒ^ƒŠƒXƒg
-        '                   FprmTblName        •Ô‹p‚³‚ê‚éDataSet‚ÌTBL–¼Ì
-        '                   F<prmRefRecCnt>    æ“¾Œ”
-        '   œƒƒ\ƒbƒh–ß‚è’lFDataSet
-        '   œ”õl          F•Ô‹p‚·‚éDataSet‚ÍprmTblName‚ÌTBL–¼Ì‚ÅŠi”[
-        '   œg—p—á
+        '   Selectæ–‡ç™ºè¡Œ
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰ç½®æ›ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ä»˜ãSelectæ–‡ã‚’ç™ºè¡Œã—ã€DataSetã‚’è¿”å´ã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿  ï¼šprmSQL            ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ä»˜ãSelectæ–‡(ç½®æ›ãƒ‘ãƒ©ãƒ¡ã‚¿ã¯ã€Œ?ã€)
+        '                   ï¼šprmParameters     ç½®æ›ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒªã‚¹ãƒˆ
+        '                   ï¼šprmTblName        è¿”å´ã•ã‚Œã‚‹DataSetã®TBLåç§°
+        '                   ï¼š<prmRefRecCnt>    å–å¾—ä»¶æ•°
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ï¼šDataSet
+        '   â—å‚™è€ƒ          ï¼šè¿”å´ã™ã‚‹DataSetã¯prmTblNameã®TBLåç§°ã§æ ¼ç´
+        '   â—ä½¿ç”¨ä¾‹
         '                     Dim rtnCnt As Integer = 0
         '                     Dim listPrm As List(Of UtilDBPrm) = New List(Of UtilDBPrm)
         '                         listPrm.Add(New UtilDBPrm(1, , UtilDBPrm.parameterType.tNumber))
@@ -239,14 +239,14 @@ Namespace DB
         '                                               2014.02.20 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ’uŠ·ƒpƒ‰ƒ[ƒ^•t‚«SELECT•¶‚ğ”­s‚·‚é (Ú×‚Íg—p—áQÆ)
+        ''' ç½®æ›ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ä»˜ãSELECTæ–‡ã‚’ç™ºè¡Œã™ã‚‹ (è©³ç´°ã¯ä½¿ç”¨ä¾‹å‚ç…§)
         ''' </summary>
-        ''' <param name="prmSQL">ƒpƒ‰ƒ[ƒ^•t‚«Select•¶(’uŠ·ƒpƒ‰ƒƒ^‚Íu?v)</param>
-        ''' <param name="prmParameters">’uŠ·ƒpƒ‰ƒ[ƒ^ƒŠƒXƒg</param>
-        ''' <param name="prmTblName">•Ô‹p‚³‚ê‚éDataSet‚ÌTABLE–¼Ì</param>
-        ''' <param name="prmRefRecCnt">È—ª‰Â”\FSELECT•¶‚Ìæ“¾ƒŒƒR[ƒhŒ”</param>
-        ''' <returns>æ“¾‚µ‚½ƒŒƒR[ƒhƒZƒbƒg‚ğDataSetƒIƒuƒWƒFƒNƒg‚Æ‚µ‚Ä•Ô‹p</returns>
-        ''' <remarks>SELECT•¶‚ğ”­s‚µAƒŒƒR[ƒhƒZƒbƒg‚ğæ“¾‚·‚éBæ“¾‚µ‚½ƒŒƒR[ƒhƒZƒbƒg‚ÍDataSetƒIƒuƒWƒFƒNƒg‚Æ‚µ‚Ä•Ô‹p‚·‚éB</remarks>
+        ''' <param name="prmSQL">ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ä»˜ãSelectæ–‡(ç½®æ›ãƒ‘ãƒ©ãƒ¡ã‚¿ã¯ã€Œ?ã€)</param>
+        ''' <param name="prmParameters">ç½®æ›ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒªã‚¹ãƒˆ</param>
+        ''' <param name="prmTblName">è¿”å´ã•ã‚Œã‚‹DataSetã®TABLEåç§°</param>
+        ''' <param name="prmRefRecCnt">çœç•¥å¯èƒ½ï¼šSELECTæ–‡ã®å–å¾—ãƒ¬ã‚³ãƒ¼ãƒ‰ä»¶æ•°</param>
+        ''' <returns>å–å¾—ã—ãŸãƒ¬ã‚³ãƒ¼ãƒ‰ã‚»ãƒƒãƒˆã‚’DataSetã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¨ã—ã¦è¿”å´</returns>
+        ''' <remarks>SELECTæ–‡ã‚’ç™ºè¡Œã—ã€ãƒ¬ã‚³ãƒ¼ãƒ‰ã‚»ãƒƒãƒˆã‚’å–å¾—ã™ã‚‹ã€‚å–å¾—ã—ãŸãƒ¬ã‚³ãƒ¼ãƒ‰ã‚»ãƒƒãƒˆã¯DataSetã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¨ã—ã¦è¿”å´ã™ã‚‹ã€‚</remarks>
         Public Overrides Function selectDB(ByVal prmSQL As String, _
                                                ByVal prmParameters As List(Of UtilDBPrm), _
                                                ByVal prmTblName As String, _
@@ -269,9 +269,9 @@ Namespace DB
                 Next
                 Try
                     ds = _hd.selectDB(prmSQL, prmParameters, prmTblName, prmRefRecCnt)
-                    _logger.writeLine(UtilLogDebugger.LOG_DEBUG, "ƒf[ƒ^æ“¾Œ”F" & prmRefRecCnt & "Œ", prmSQL & " {ƒpƒ‰ƒ[ƒ^F" & outWk & "}")
+                    _logger.writeLine(UtilLogDebugger.LOG_DEBUG, "ãƒ‡ãƒ¼ã‚¿å–å¾—ä»¶æ•°ï¼š" & prmRefRecCnt & "ä»¶", prmSQL & " {ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ï¼š" & outWk & "}")
                 Catch ex As Exception
-                    _logger.writeLine(UtilLogDebugger.LOG_ERR, "ƒf[ƒ^æ“¾¸”sF" & ex.Message & ControlChars.NewLine & ex.StackTrace, prmSQL & " {ƒpƒ‰ƒ[ƒ^F" & outWk & "}")
+                    _logger.writeLine(UtilLogDebugger.LOG_ERR, "ãƒ‡ãƒ¼ã‚¿å–å¾—å¤±æ•—ï¼š" & ex.Message & ControlChars.NewLine & ex.StackTrace, prmSQL & " {ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ï¼š" & outWk & "}")
                     Throw ex
                 End Try
             Catch ex As Exception
@@ -281,72 +281,72 @@ Namespace DB
         End Function
 
         '-------------------------------------------------------------------------------
-        '   XVSQL•¶”­s
-        '   iˆ—ŠT—vjInsert/Update/Delete•¶‚ğ”­s‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^  FprmSQL        SQL•¶
-        '   œƒƒ\ƒbƒh–ß‚è’lF‚È‚µ
+        '   æ›´æ–°SQLæ–‡ç™ºè¡Œ
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰Insert/Update/Deleteæ–‡ã‚’ç™ºè¡Œã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿  ï¼šprmSQL        SQLæ–‡
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ï¼šãªã—
         '                                               2014.02.20 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' XVSQL•¶”­s Insert/Update/Delete•¶‚ğ”­s‚·‚é
+        ''' æ›´æ–°SQLæ–‡ç™ºè¡Œ Insert/Update/Deleteæ–‡ã‚’ç™ºè¡Œã™ã‚‹
         ''' </summary>
         ''' <param name="prmSQL">SQL</param>
         ''' <remarks></remarks>
         Public Overrides Sub executeDB(ByVal prmSQL As String)
             Try
                 _hd.executeDB(prmSQL)
-                _logger.writeLine(UtilLogDebugger.LOG_DEBUG, "ƒf[ƒ^XV¬Œ÷", prmSQL)
+                _logger.writeLine(UtilLogDebugger.LOG_DEBUG, "ãƒ‡ãƒ¼ã‚¿æ›´æ–°æˆåŠŸ", prmSQL)
             Catch ex As Exception
-                _logger.writeLine(UtilLogDebugger.LOG_ERR, "ƒf[ƒ^XV¸”sF" & ex.Message & ControlChars.NewLine & ex.StackTrace, prmSQL)
+                _logger.writeLine(UtilLogDebugger.LOG_ERR, "ãƒ‡ãƒ¼ã‚¿æ›´æ–°å¤±æ•—ï¼š" & ex.Message & ControlChars.NewLine & ex.StackTrace, prmSQL)
                 Throw ex
             End Try
         End Sub
 
         '-------------------------------------------------------------------------------
-        '   XVSQL•¶”­s
-        '   iˆ—ŠT—vjInsert/Update/Delete•¶‚ğ”­s‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^  FprmSQL                SQL•¶
-        '                   FprmRefAffectedRows    ‰e‹¿‚ğó‚¯‚½s”
-        '   œƒƒ\ƒbƒh–ß‚è’lF‚È‚µ
+        '   æ›´æ–°SQLæ–‡ç™ºè¡Œ
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰Insert/Update/Deleteæ–‡ã‚’ç™ºè¡Œã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿  ï¼šprmSQL                SQLæ–‡
+        '                   ï¼šprmRefAffectedRows    å½±éŸ¿ã‚’å—ã‘ãŸè¡Œæ•°
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ï¼šãªã—
         '                                               2014.02.20 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ÀsŒnSQL‚ğ”­s‚·‚éi‰e‹¿Œ”ˆø”•t‚«j
+        ''' å®Ÿè¡Œç³»SQLã‚’ç™ºè¡Œã™ã‚‹ï¼ˆå½±éŸ¿ä»¶æ•°å¼•æ•°ä»˜ãï¼‰
         ''' </summary>
-        ''' <param name="prmSQL">”­s‚·‚éSQL•¶</param>
-        ''' <param name="prmRefAffectedRows">‰e‹¿‚ğó‚¯‚½s”</param>
-        ''' <remarks>ƒŒƒR[ƒhƒZƒbƒg‚ğ¶¬‚µ‚È‚¢SQL(INSERT/UPDATE/DELETEcetc)‚ğ”­s‚·‚éB</remarks>
+        ''' <param name="prmSQL">ç™ºè¡Œã™ã‚‹SQLæ–‡</param>
+        ''' <param name="prmRefAffectedRows">å½±éŸ¿ã‚’å—ã‘ãŸè¡Œæ•°</param>
+        ''' <remarks>ãƒ¬ã‚³ãƒ¼ãƒ‰ã‚»ãƒƒãƒˆã‚’ç”Ÿæˆã—ãªã„SQL(INSERT/UPDATE/DELETEâ€¦etc)ã‚’ç™ºè¡Œã™ã‚‹ã€‚</remarks>
         Public Overrides Sub executeDB(ByVal prmSQL As String, ByRef prmRefAffectedRows As Integer)
             Try
                 _hd.executeDB(prmSQL, prmRefAffectedRows)
-                _logger.writeLine(UtilLogDebugger.LOG_DEBUG, "ƒf[ƒ^XV¬Œ÷(XVŒ”F" & prmRefAffectedRows.ToString & "Œ)", prmSQL)
+                _logger.writeLine(UtilLogDebugger.LOG_DEBUG, "ãƒ‡ãƒ¼ã‚¿æ›´æ–°æˆåŠŸ(æ›´æ–°ä»¶æ•°ï¼š" & prmRefAffectedRows.ToString & "ä»¶)", prmSQL)
             Catch ex As Exception
-                _logger.writeLine(UtilLogDebugger.LOG_ERR, "ƒf[ƒ^XV¸”sF" & ex.Message & ControlChars.NewLine & ex.StackTrace, prmSQL)
+                _logger.writeLine(UtilLogDebugger.LOG_ERR, "ãƒ‡ãƒ¼ã‚¿æ›´æ–°å¤±æ•—ï¼š" & ex.Message & ControlChars.NewLine & ex.StackTrace, prmSQL)
                 Throw ex
             End Try
         End Sub
 
         '-------------------------------------------------------------------------------
-        '   XVSQL•¶”­s
-        '   iˆ—ŠT—vj’uŠ·ƒpƒ‰ƒ[ƒ^•t‚«ÀsŒnSQL‚ğ”­s‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^  FprmSQL        SQL•¶
-        '                   FprmParameters ’uŠ·ƒpƒ‰ƒ[ƒ^ƒŠƒXƒg
-        '   œƒƒ\ƒbƒh–ß‚è’lF‚È‚µ
-        '   œg—p—á
-        '                     'ƒpƒ‰ƒƒ^İ’è
+        '   æ›´æ–°SQLæ–‡ç™ºè¡Œ
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰ç½®æ›ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ä»˜ãå®Ÿè¡Œç³»SQLã‚’ç™ºè¡Œã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿  ï¼šprmSQL        SQLæ–‡
+        '                   ï¼šprmParameters ç½®æ›ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒªã‚¹ãƒˆ
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ï¼šãªã—
+        '   â—ä½¿ç”¨ä¾‹
+        '                     'ãƒ‘ãƒ©ãƒ¡ã‚¿è¨­å®š
         '                     Dim listPrm As List(Of UtilDBPrm) = New List(Of UtilDBPrm)
-        '                     listPrm.Add(New UtilDBPrm(Nothing, 255, UtilDBPrm.parameterType.tVarchar, UtilDBPrm.parameterDirection.dReturn)) '–ß‚è’l
-        '                     listPrm.Add(New UtilDBPrm(10, , UtilDBPrm.parameterType.tNumber, UtilDBPrm.parameterDirection.dInput))           '‡@
-        '                     listPrm.Add(New UtilDBPrm(Nothing, , UtilDBPrm.parameterType.tNumber, UtilDBPrm.parameterDirection.dOutput))     '‡A
-        '                     listPrm.Add(New UtilDBPrm(30, , UtilDBPrm.parameterType.tNumber, UtilDBPrm.parameterDirection.dInputOutput))     '‡B
-        '                     listPrm.Add(New UtilDBPrm(Nothing, , UtilDBPrm.parameterType.tDate, UtilDBPrm.parameterDirection.dOutput))       '‡C
-        '                     listPrm.Add(New UtilDBPrm("’uŠ·ƒpƒ‰ƒƒ^ƒNƒGƒŠÀsƒeƒXƒg", _
-        '                                                       14, UtilDBPrm.parameterType.tVarchar, UtilDBPrm.parameterDirection.dInput))    '‡D
-        '                     'Às
+        '                     listPrm.Add(New UtilDBPrm(Nothing, 255, UtilDBPrm.parameterType.tVarchar, UtilDBPrm.parameterDirection.dReturn)) 'æˆ»ã‚Šå€¤
+        '                     listPrm.Add(New UtilDBPrm(10, , UtilDBPrm.parameterType.tNumber, UtilDBPrm.parameterDirection.dInput))           'â‘ 
+        '                     listPrm.Add(New UtilDBPrm(Nothing, , UtilDBPrm.parameterType.tNumber, UtilDBPrm.parameterDirection.dOutput))     'â‘¡
+        '                     listPrm.Add(New UtilDBPrm(30, , UtilDBPrm.parameterType.tNumber, UtilDBPrm.parameterDirection.dInputOutput))     'â‘¢
+        '                     listPrm.Add(New UtilDBPrm(Nothing, , UtilDBPrm.parameterType.tDate, UtilDBPrm.parameterDirection.dOutput))       'â‘£
+        '                     listPrm.Add(New UtilDBPrm("ç½®æ›ãƒ‘ãƒ©ãƒ¡ã‚¿ã‚¯ã‚¨ãƒªå®Ÿè¡Œãƒ†ã‚¹ãƒˆ", _
+        '                                                       14, UtilDBPrm.parameterType.tVarchar, UtilDBPrm.parameterDirection.dInput))    'â‘¤
+        '                     'å®Ÿè¡Œ
         '                     _db.executeDB("BEGIN ? := TESTFUNC(?,?,?,?,?); END;", listPrm)
         '
-        '                     'Œ‹‰ÊŠm”F
-        '                     Debug.WriteLine("–ß‚è’l=" & listPrm(0).value)
+        '                     'çµæœç¢ºèª
+        '                     Debug.WriteLine("æˆ»ã‚Šå€¤=" & listPrm(0).value)
         '                     Debug.WriteLine("prm1  =" & listPrm(1).value)
         '                     Debug.WriteLine("prm2  =" & listPrm(2).value)
         '                     Debug.WriteLine("prm3  =" & listPrm(3).value)
@@ -354,7 +354,7 @@ Namespace DB
         '                     Debug.WriteLine("prm5  =" & listPrm(5).value)
         '
         '
-        '                     ===ÀsƒXƒgƒAƒh==========================
+        '                     ===å®Ÿè¡Œã‚¹ãƒˆã‚¢ãƒ‰==========================
         '                     CREATE OR REPLACE FUNCTION TESTFUNC(
         '                     	 INPRM 		IN		NUMBER
         '                     	,OUTPRM		OUT		NUMBER
@@ -366,21 +366,21 @@ Namespace DB
         '                     IS
         '                     	WK	DATE;
         '                     BEGIN
-        '                         INOUTPRM := INOUTPRM * 2;             --INOUTPRM‚ğ‚Q”{
-        '                         OUTPRM := INPRM + 1;                  --INPRM‚É‚P‚ğ‰Á‚¦‚ÄOUTPRM‚Éİ’è
-        '                         SELECT SYSDATE INTO DTPRM FROM DUAL;  --DTPRM‚ÉƒVƒXƒeƒ€“ú•t‚ğİ’è
-        '                         RETURN VCPRM || '‚ğÀs‚µ‚Ü‚µ‚½B';   --–ß‚è’l‚ÉVCPRM{ƒ¿‚ğİ’è
+        '                         INOUTPRM := INOUTPRM * 2;             --INOUTPRMã‚’ï¼’å€
+        '                         OUTPRM := INPRM + 1;                  --INPRMã«ï¼‘ã‚’åŠ ãˆã¦OUTPRMã«è¨­å®š
+        '                         SELECT SYSDATE INTO DTPRM FROM DUAL;  --DTPRMã«ã‚·ã‚¹ãƒ†ãƒ æ—¥ä»˜ã‚’è¨­å®š
+        '                         RETURN VCPRM || 'ã‚’å®Ÿè¡Œã—ã¾ã—ãŸã€‚';   --æˆ»ã‚Šå€¤ã«VCPRMï¼‹Î±ã‚’è¨­å®š
         '                     END;
         '                     /
         '                     =========================================
         '                                               2014.02.20 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ’uŠ·ƒpƒ‰ƒ[ƒ^•t‚«ÀsŒnSQL‚ğ”­s‚·‚é (Ú×‚Íg—p—áQÆ)
+        ''' ç½®æ›ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ä»˜ãå®Ÿè¡Œç³»SQLã‚’ç™ºè¡Œã™ã‚‹ (è©³ç´°ã¯ä½¿ç”¨ä¾‹å‚ç…§)
         ''' </summary>
-        ''' <param name="prmSQL">ƒpƒ‰ƒ[ƒ^•t‚«SQL•¶</param>
-        ''' <param name="prmRefParameters">’uŠ·ƒpƒ‰ƒ[ƒ^ƒŠƒXƒg</param>
-        ''' <remarks>ƒXƒgƒAƒhÀs‚È‚Ç‚ğ‘z’è(‚»‚êˆÈŠO‚àÀs‰Â”\)</remarks>
+        ''' <param name="prmSQL">ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ä»˜ãSQLæ–‡</param>
+        ''' <param name="prmRefParameters">ç½®æ›ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒªã‚¹ãƒˆ</param>
+        ''' <remarks>ã‚¹ãƒˆã‚¢ãƒ‰å®Ÿè¡Œãªã©ã‚’æƒ³å®š(ãã‚Œä»¥å¤–ã‚‚å®Ÿè¡Œå¯èƒ½)</remarks>
         Public Overrides Sub executeDB(ByVal prmSQL As String, _
                                        ByRef prmRefParameters As List(Of UtilDBPrm))
             Try
@@ -400,9 +400,9 @@ Namespace DB
                 Next
                 Try
                     _hd.executeDB(prmSQL, prmRefParameters)
-                    _logger.writeLine(UtilLogDebugger.LOG_DEBUG, "ƒf[ƒ^XV¬Œ÷", prmSQL & " {ƒpƒ‰ƒ[ƒ^F" & outWk & "}")
+                    _logger.writeLine(UtilLogDebugger.LOG_DEBUG, "ãƒ‡ãƒ¼ã‚¿æ›´æ–°æˆåŠŸ", prmSQL & " {ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ï¼š" & outWk & "}")
                 Catch ex As Exception
-                    _logger.writeLine(UtilLogDebugger.LOG_ERR, "ƒf[ƒ^XV¸”sF" & ex.Message & ControlChars.NewLine & ex.StackTrace, prmSQL & " {ƒpƒ‰ƒ[ƒ^F" & outWk & "}")
+                    _logger.writeLine(UtilLogDebugger.LOG_ERR, "ãƒ‡ãƒ¼ã‚¿æ›´æ–°å¤±æ•—ï¼š" & ex.Message & ControlChars.NewLine & ex.StackTrace, prmSQL & " {ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ï¼š" & outWk & "}")
                     Throw ex
                 End Try
             Catch ex As Exception
