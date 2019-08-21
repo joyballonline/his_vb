@@ -234,6 +234,9 @@ Public Class PurchasingManagement
     '画面表示時
     Private Sub PurchaseManagement_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        Dim curds As DataSet  'm25_currency
+        Dim cur As String
+
         If Status = CommonConst.STATUS_VIEW Then
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "ViewMode"
@@ -346,6 +349,17 @@ Public Class PurchasingManagement
             'Sql += " AND t20.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '取消区分=0
 
             Dim dsHattyuDt As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+            '通貨の表示
+            If IsDBNull(dsHattyuDt.Tables(RS).Rows(0)("通貨")) Then
+                cur = vbNullString
+            Else
+                Sql = " and 採番キー = " & dsHattyuDt.Tables(RS).Rows(0)("通貨")
+                curds = getDsData("m25_currency", Sql)
+
+                cur = curds.Tables(RS).Rows(0)("通貨コード")
+            End If
+            TxtIDRCurrency.Text = cur
 
             '発注エリアに明細を表示
             For i As Integer = 0 To dsHattyuDt.Tables(RS).Rows.Count - 1
@@ -471,6 +485,7 @@ Public Class PurchasingManagement
             LblAdd.Text = "PurchaseThisTime"
             LblPurchasedDate.Text = "PurchaseDate"
             LblPaymentDate.Text = "PaymentDate"
+            LblIDRCurrency.Text = "Currency"
             LblRemarks.Text = "Remarks"
             LblNo1.Text = "Record"
             LblNo1.Location = New Point(1272, 82)
