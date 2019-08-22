@@ -1,47 +1,47 @@
-Imports System.Globalization
+ï»¿Imports System.Globalization
 Imports System.Text.RegularExpressions
 Imports System.Windows.Forms
 '===============================================================================
 '
-'  ƒ†[ƒeƒBƒŠƒeƒBƒNƒ‰ƒX
-'    iƒNƒ‰ƒX–¼j    UtilClass
-'    iˆ—‹@”\–¼j      ƒ†[ƒeƒBƒŠƒeƒBƒƒ\ƒbƒhŒQ
-'    i–{MDLŽg—p‘O’ñj   “Á‚É‚È‚µ
-'    i”õlj            ƒƒ\ƒbƒh’PˆÊ‚Å‚ÌˆÚA‚ð‰Â”\‚Æ‚·‚é‚½‚ßAImportséŒ¾‚ð
-'                        s‚í‚¸AŠ®‘SCü–¼‘O‹óŠÔ‚ðŽg—p‚Ì‚±‚Æ
+'  ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£ã‚¯ãƒ©ã‚¹
+'    ï¼ˆã‚¯ãƒ©ã‚¹åï¼‰    UtilClass
+'    ï¼ˆå‡¦ç†æ©Ÿèƒ½åï¼‰      ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£ãƒ¡ã‚½ãƒƒãƒ‰ç¾¤
+'    ï¼ˆæœ¬MDLä½¿ç”¨å‰æï¼‰   ç‰¹ã«ãªã—
+'    ï¼ˆå‚™è€ƒï¼‰            ãƒ¡ã‚½ãƒƒãƒ‰å˜ä½ã§ã®ç§»æ¤ã‚’å¯èƒ½ã¨ã™ã‚‹ãŸã‚ã€Importså®£è¨€ã‚’
+'                        è¡Œã‚ãšã€å®Œå…¨ä¿®é£¾åå‰ç©ºé–“ã‚’ä½¿ç”¨ã®ã“ã¨
 '
 '===============================================================================
-'  —š—ð  –¼‘O          “ú  •t      ƒ}[ƒN      “à—e
+'  å±¥æ­´  åå‰          æ—¥  ä»˜      ãƒžãƒ¼ã‚¯      å†…å®¹
 '-------------------------------------------------------------------------------
-'  (1)   Laevigata, Inc.    2006/05/01              V‹K
-'  (2)   Laevigata, Inc.    2010/08/26              ƒGƒ‰[ƒƒbƒZ[ƒWŽæ“¾(getErrDetail)‚É”­¶Žž’Ç‰Á
+'  (1)   Laevigata, Inc.    2006/05/01              æ–°è¦
+'  (2)   Laevigata, Inc.    2010/08/26              ã‚¨ãƒ©ãƒ¼ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸å–å¾—(getErrDetail)ã«ç™ºç”Ÿæ™‚åˆ»è¿½åŠ 
 '-------------------------------------------------------------------------------
 Public Class UtilClass
     Public Shared Sub main()
     End Sub
 
     '-------------------------------------------------------------------------------
-    'ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    'ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     '-------------------------------------------------------------------------------
     ''' <summary>
-    ''' ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    ''' ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     ''' </summary>
     ''' <remarks></remarks>
-    Private Sub New() 'ƒCƒ“ƒXƒ^ƒ“ƒX‰»‚ð—}§
-        'ˆ—–³‚µ
+    Private Sub New() 'ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹åŒ–ã‚’æŠ‘åˆ¶
+        'å‡¦ç†ç„¡ã—
     End Sub
 
     '-------------------------------------------------------------------------------
-    '   ƒAƒvƒŠƒP[ƒVƒ‡ƒ“ŽÀsƒpƒX‚ðŽæ“¾
-    '   iˆ—ŠT—vjƒAƒvƒŠƒP[ƒVƒ‡ƒ“ŽÀsƒpƒX‚ð•Ô‹p‚·‚é
-    '   œ“ü—Íƒpƒ‰ƒƒ^FprmAssembly  ƒAƒZƒ“ƒuƒŠ
-    '   œƒƒ\ƒbƒh–ß‚è’l@FŽæ“¾ƒAƒvƒŠƒP[ƒVƒ‡ƒ“ŽÀsƒpƒX
+    '   ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³å®Ÿè¡Œãƒ‘ã‚¹ã‚’å–å¾—
+    '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³å®Ÿè¡Œãƒ‘ã‚¹ã‚’è¿”å´ã™ã‚‹
+    '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ï¼šprmAssembly  ã‚¢ã‚»ãƒ³ãƒ–ãƒª
+    '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ã€€ï¼šå–å¾—ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³å®Ÿè¡Œãƒ‘ã‚¹
     '                                               2006.05.01 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
-    ''' ƒAƒvƒŠƒP[ƒVƒ‡ƒ“ŽÀsƒpƒX‚ðŽæ“¾
+    ''' ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³å®Ÿè¡Œãƒ‘ã‚¹ã‚’å–å¾—
     ''' </summary>
-    ''' <param name="prmAssembly">ƒAƒZƒ“ƒuƒŠ</param>
+    ''' <param name="prmAssembly">ã‚¢ã‚»ãƒ³ãƒ–ãƒª</param>
     ''' <returns></returns>
     ''' <remarks></remarks>
     Public Shared Function getAppPath(ByVal prmAssembly As System.Reflection.Assembly) As String
@@ -49,16 +49,16 @@ Public Class UtilClass
     End Function
 
     '-------------------------------------------------------------------------------
-    '   ƒAƒvƒŠƒP[ƒVƒ‡ƒ“–¼Ì‚ðŽæ“¾
-    '   iˆ—ŠT—vjƒAƒvƒŠƒP[ƒVƒ‡ƒ“–¼Ì‚ð•Ô‹p‚·‚é
-    '   œ“ü—Íƒpƒ‰ƒƒ^FprmAssembly  ƒAƒZƒ“ƒuƒŠ
-    '   œƒƒ\ƒbƒh–ß‚è’l@FŽæ“¾ƒAƒvƒŠƒP[ƒVƒ‡ƒ“–¼Ì
+    '   ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³åç§°ã‚’å–å¾—
+    '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³åç§°ã‚’è¿”å´ã™ã‚‹
+    '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ï¼šprmAssembly  ã‚¢ã‚»ãƒ³ãƒ–ãƒª
+    '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ã€€ï¼šå–å¾—ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³åç§°
     '                                               2006.05.01 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
-    ''' ƒAƒvƒŠƒP[ƒVƒ‡ƒ“–¼Ì‚ðŽæ“¾
+    ''' ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³åç§°ã‚’å–å¾—
     ''' </summary>
-    ''' <param name="prmAssembly">ƒAƒZƒ“ƒuƒŠ</param>
+    ''' <param name="prmAssembly">ã‚¢ã‚»ãƒ³ãƒ–ãƒª</param>
     ''' <returns></returns>
     ''' <remarks></remarks>
     Public Shared Function getAppName(ByVal prmAssembly As System.Reflection.Assembly) As String
@@ -66,22 +66,22 @@ Public Class UtilClass
     End Function
 
     '-------------------------------------------------------------------------------
-    '   ƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚ÌVersion‚ðŽæ“¾
-    '   iˆ—ŠT—vjƒvƒƒWƒFƒNƒg‚ÌƒvƒƒpƒeƒB‚ÌƒAƒvƒŠƒP[ƒVƒ‡ƒ“ƒ^ƒu-ƒAƒZƒ“ƒuƒŠî•ñƒ{ƒ^ƒ“‚©‚ç
-    '   @@@@@@‹N“®‚³‚ê‚éƒAƒZƒ“ƒuƒŠ‚Ìƒtƒ@ƒCƒ‹ƒo[ƒWƒ‡ƒ“‚ð•Ô‹p‚·‚é
-    '   œ“ü—Íƒpƒ‰ƒƒ^FprmAssembly  ƒAƒZƒ“ƒuƒŠ
-    '   œƒƒ\ƒbƒh–ß‚è’l@FŽæ“¾Version
+    '   ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã®Versionã‚’å–å¾—
+    '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã®ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã®ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã‚¿ãƒ–-ã‚¢ã‚»ãƒ³ãƒ–ãƒªæƒ…å ±ãƒœã‚¿ãƒ³ã‹ã‚‰
+    '   ã€€ã€€ã€€ã€€ã€€ã€€èµ·å‹•ã•ã‚Œã‚‹ã‚¢ã‚»ãƒ³ãƒ–ãƒªã®ãƒ•ã‚¡ã‚¤ãƒ«ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã‚’è¿”å´ã™ã‚‹
+    '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ï¼šprmAssembly  ã‚¢ã‚»ãƒ³ãƒ–ãƒª
+    '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ã€€ï¼šå–å¾—Version
     '                                               2006.05.22 Updated By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
-    ''' ƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚ÌVersion‚ðŽæ“¾
+    ''' ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã®Versionã‚’å–å¾—
     ''' </summary>
-    ''' <param name="prmAssembly">ƒAƒZƒ“ƒuƒŠ</param>
+    ''' <param name="prmAssembly">ã‚¢ã‚»ãƒ³ãƒ–ãƒª</param>
     ''' <returns></returns>
     ''' <remarks></remarks>
     Public Shared Function getAppVersion(ByVal prmAssembly As System.Reflection.Assembly) As String
 
-        'ƒAƒZƒ“ƒuƒŠ‚Ìƒo[ƒWƒ‡ƒ“î•ñ‚ðŽæ“¾‚·‚é
+        'ã‚¢ã‚»ãƒ³ãƒ–ãƒªã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³æƒ…å ±ã‚’å–å¾—ã™ã‚‹
         Dim v As System.Diagnostics.FileVersionInfo
         v = (System.Diagnostics.FileVersionInfo.GetVersionInfo(prmAssembly.Location))
         '-->2006.05.22 chg start by Laevigata, Inc.
@@ -93,16 +93,16 @@ Public Class UtilClass
     End Function
 
     '-------------------------------------------------------------------------------
-    '@ ƒtƒ@ƒCƒ‹‘¶Ýƒ`ƒFƒbƒN
-    '   iˆ—ŠT—vjˆø”‚Ìƒtƒ@ƒCƒ‹‚ª‘¶Ý‚·‚é‚©‚Ç‚¤‚©‚ð”»’è
-    '   œ“ü—Íƒpƒ‰ƒƒ^FprmDir  ”»’èƒtƒ@ƒCƒ‹ƒtƒ‹ƒpƒX•¶Žš—ñ
-    '   œƒƒ\ƒbƒh–ß‚è’l@FTrue/False
+    'ã€€ ãƒ•ã‚¡ã‚¤ãƒ«å­˜åœ¨ãƒã‚§ãƒƒã‚¯
+    '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰å¼•æ•°ã®ãƒ•ã‚¡ã‚¤ãƒ«ãŒå­˜åœ¨ã™ã‚‹ã‹ã©ã†ã‹ã‚’åˆ¤å®š
+    '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ï¼šprmDir  åˆ¤å®šãƒ•ã‚¡ã‚¤ãƒ«ãƒ•ãƒ«ãƒ‘ã‚¹æ–‡å­—åˆ—
+    '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ã€€ï¼šTrue/False
     '                                               2006.05.01 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
-    ''' ƒtƒ@ƒCƒ‹‘¶Ýƒ`ƒFƒbƒN ˆø”‚Ìƒtƒ@ƒCƒ‹‚ª‘¶Ý‚·‚é‚©‚Ç‚¤‚©‚ð”»’è
+    ''' ãƒ•ã‚¡ã‚¤ãƒ«å­˜åœ¨ãƒã‚§ãƒƒã‚¯ å¼•æ•°ã®ãƒ•ã‚¡ã‚¤ãƒ«ãŒå­˜åœ¨ã™ã‚‹ã‹ã©ã†ã‹ã‚’åˆ¤å®š
     ''' </summary>
-    ''' <param name="prmFile">”»’èƒtƒ@ƒCƒ‹ƒtƒ‹ƒpƒX•¶Žš—ñ</param>
+    ''' <param name="prmFile">åˆ¤å®šãƒ•ã‚¡ã‚¤ãƒ«ãƒ•ãƒ«ãƒ‘ã‚¹æ–‡å­—åˆ—</param>
     ''' <returns>True/False</returns>
     ''' <remarks></remarks>
     Public Shared Function isFileExists(ByVal prmFile As String) As Boolean
@@ -110,16 +110,16 @@ Public Class UtilClass
     End Function
 
     '-------------------------------------------------------------------------------
-    '@ ƒtƒHƒ‹ƒ_‘¶Ýƒ`ƒFƒbƒN
-    '   iˆ—ŠT—vjˆø”‚ÌƒfƒBƒŒƒNƒgƒŠ‚ª‘¶Ý‚·‚é‚©‚Ç‚¤‚©‚ð”»’è
-    '   œ“ü—Íƒpƒ‰ƒƒ^FprmDir  ”»’èƒfƒBƒŒƒNƒgƒŠ•¶Žš—ñ
-    '   œƒƒ\ƒbƒh–ß‚è’l@FTrue/False
+    'ã€€ ãƒ•ã‚©ãƒ«ãƒ€å­˜åœ¨ãƒã‚§ãƒƒã‚¯
+    '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰å¼•æ•°ã®ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªãŒå­˜åœ¨ã™ã‚‹ã‹ã©ã†ã‹ã‚’åˆ¤å®š
+    '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ï¼šprmDir  åˆ¤å®šãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªæ–‡å­—åˆ—
+    '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ã€€ï¼šTrue/False
     '                                               2006.05.01 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
-    ''' ƒtƒHƒ‹ƒ_‘¶Ýƒ`ƒFƒbƒN ˆø”‚ÌƒfƒBƒŒƒNƒgƒŠ‚ª‘¶Ý‚·‚é‚©‚Ç‚¤‚©‚ð”»’è
+    ''' ãƒ•ã‚©ãƒ«ãƒ€å­˜åœ¨ãƒã‚§ãƒƒã‚¯ å¼•æ•°ã®ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªãŒå­˜åœ¨ã™ã‚‹ã‹ã©ã†ã‹ã‚’åˆ¤å®š
     ''' </summary>
-    ''' <param name="prmDir">”»’èƒfƒBƒŒƒNƒgƒŠ•¶Žš—ñ</param>
+    ''' <param name="prmDir">åˆ¤å®šãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªæ–‡å­—åˆ—</param>
     ''' <returns>True/False</returns>
     ''' <remarks></remarks>
     Public Shared Function isDirExists(ByVal prmDir As String) As Boolean
@@ -127,96 +127,96 @@ Public Class UtilClass
     End Function
 
     '-------------------------------------------------------------------------------
-    '@ ƒGƒ‰[ƒƒbƒZ[ƒWŽæ“¾
-    '   iˆ—ŠT—vjException‚ÌÚ×ƒƒbƒZ[ƒW‚ðŽæ“¾‚·‚é
-    '   œ“ü—Íƒpƒ‰ƒƒ^FprmException  ƒƒbƒZ[ƒW‚ðŽæ“¾‚·‚é—áŠO
-    '   œƒƒ\ƒbƒh–ß‚è’l@F•ÒWÏ‚ÝƒGƒ‰[ƒƒbƒZ[ƒW
+    'ã€€ ã‚¨ãƒ©ãƒ¼ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸å–å¾—
+    '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰Exceptionã®è©³ç´°ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å–å¾—ã™ã‚‹
+    '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ï¼šprmException  ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å–å¾—ã™ã‚‹ä¾‹å¤–
+    '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ã€€ï¼šç·¨é›†æ¸ˆã¿ã‚¨ãƒ©ãƒ¼ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
     '                                               20010.08.26 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
-    ''' ƒGƒ‰[ƒƒbƒZ[ƒWŽæ“¾ Exception‚ÌÚ×ƒƒbƒZ[ƒW‚ðŽæ“¾‚·‚é
+    ''' ã‚¨ãƒ©ãƒ¼ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸å–å¾— Exceptionã®è©³ç´°ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å–å¾—ã™ã‚‹
     ''' </summary>
-    ''' <param name="prmException">ƒƒbƒZ[ƒW‚ðŽæ“¾‚·‚é—áŠO</param>
-    ''' <returns>•ÒWÏ‚ÝƒGƒ‰[ƒƒbƒZ[ƒW</returns>
+    ''' <param name="prmException">ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å–å¾—ã™ã‚‹ä¾‹å¤–</param>
+    ''' <returns>ç·¨é›†æ¸ˆã¿ã‚¨ãƒ©ãƒ¼ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸</returns>
     ''' <remarks></remarks>
     Public Shared Function getErrDetail(ByVal prmException As Exception) As String
         Dim wkSorce As String = prmException.TargetSite.DeclaringType.FullName
         wkSorce = wkSorce.Replace(prmException.Source & ".", "")
-        '-->2010.08.26 upd by Laevigata, Inc. #”­¶Žž’Ç‰Á
-        'Return "ƒƒbƒZ[ƒW" & ControlChars.Tab & "F " & prmException.Message & ControlChars.NewLine & _
-        '       "”­¶Œ³" & ControlChars.Tab & "F " & prmException.Source & ControlChars.NewLine & _
-        '       "”­¶‰ÓŠ" & ControlChars.Tab & "F " & wkSorce & " [ " & prmException.TargetSite.ToString & " ]"
-        Return "ƒƒbƒZ[ƒW" & ControlChars.Tab & "F " & prmException.Message & ControlChars.NewLine &
-               "”­¶Œ³" & ControlChars.Tab & "F " & prmException.Source & ControlChars.NewLine &
-               "”­¶‰ÓŠ" & ControlChars.Tab & "F " & wkSorce & " [ " & prmException.TargetSite.ToString & " ]" & ControlChars.NewLine &
-               "”­¶Žž" & ControlChars.Tab & "F " & Now.ToString("G")
-        '<--2010.08.26 upd by Laevigata, Inc. #”­¶Žž’Ç‰Á
+        '-->2010.08.26 upd by Laevigata, Inc. #ç™ºç”Ÿæ™‚åˆ»è¿½åŠ 
+        'Return "ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸" & ControlChars.Tab & "ï¼š " & prmException.Message & ControlChars.NewLine & _
+        '       "ç™ºç”Ÿå…ƒ" & ControlChars.Tab & "ï¼š " & prmException.Source & ControlChars.NewLine & _
+        '       "ç™ºç”Ÿç®‡æ‰€" & ControlChars.Tab & "ï¼š " & wkSorce & " [ " & prmException.TargetSite.ToString & " ]"
+        Return "ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸" & ControlChars.Tab & "ï¼š " & prmException.Message & ControlChars.NewLine &
+               "ç™ºç”Ÿå…ƒ" & ControlChars.Tab & "ï¼š " & prmException.Source & ControlChars.NewLine &
+               "ç™ºç”Ÿç®‡æ‰€" & ControlChars.Tab & "ï¼š " & wkSorce & " [ " & prmException.TargetSite.ToString & " ]" & ControlChars.NewLine &
+               "ç™ºç”Ÿæ™‚åˆ»" & ControlChars.Tab & "ï¼š " & Now.ToString("G")
+        '<--2010.08.26 upd by Laevigata, Inc. #ç™ºç”Ÿæ™‚åˆ»è¿½åŠ 
     End Function
 
     '-------------------------------------------------------------------------------
-    '@ ƒtƒH[ƒJƒX‘JˆÚ
-    '   iˆ—ŠT—vjŽŸ‚ÌƒRƒ“ƒgƒ[ƒ‹‚ÖƒtƒH[ƒJƒXˆÚ“®‚ðs‚¤
-    '   œ“ü—Íƒpƒ‰ƒƒ^FprmForm    ƒtƒH[ƒJƒX§Œä‚ðs‚¤ƒtƒH[ƒ€
-    '                   prmEvent   KeyPressƒCƒxƒ“ƒg
-    '   œƒƒ\ƒbƒh–ß‚è’l@F‚È‚µ
+    'ã€€ ãƒ•ã‚©ãƒ¼ã‚«ã‚¹é·ç§»
+    '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰æ¬¡ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã¸ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ç§»å‹•ã‚’è¡Œã†
+    '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ï¼šprmForm    ãƒ•ã‚©ãƒ¼ã‚«ã‚¹åˆ¶å¾¡ã‚’è¡Œã†ãƒ•ã‚©ãƒ¼ãƒ 
+    '                   prmEvent   KeyPressã‚¤ãƒ™ãƒ³ãƒˆ
+    '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ã€€ï¼šãªã—
     '                                               2006.05.10 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
-    ''' ƒtƒH[ƒJƒX‘JˆÚ ŽŸ‚ÌƒRƒ“ƒgƒ[ƒ‹‚ÖƒtƒH[ƒJƒXˆÚ“®‚ðs‚¤
+    ''' ãƒ•ã‚©ãƒ¼ã‚«ã‚¹é·ç§» æ¬¡ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã¸ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ç§»å‹•ã‚’è¡Œã†
     ''' </summary>
-    ''' <param name="prmForm">ƒtƒH[ƒJƒX§Œä‚ðs‚¤ƒtƒH[ƒ€</param>
-    ''' <param name="prmEvent">KeyPressƒCƒxƒ“ƒg</param>
+    ''' <param name="prmForm">ãƒ•ã‚©ãƒ¼ã‚«ã‚¹åˆ¶å¾¡ã‚’è¡Œã†ãƒ•ã‚©ãƒ¼ãƒ </param>
+    ''' <param name="prmEvent">KeyPressã‚¤ãƒ™ãƒ³ãƒˆ</param>
     ''' <remarks></remarks>
     Public Shared Sub moveNextFocus(ByVal prmForm As Form, ByVal prmEvent As System.Windows.Forms.KeyPressEventArgs)
         Try
-            '‰Ÿ‰ºƒL[‚ªEnter‚Ìê‡AŽŸ‚ÌƒRƒ“ƒgƒ[ƒ‹‚ÖƒtƒH[ƒJƒXˆÚ“®
+            'æŠ¼ä¸‹ã‚­ãƒ¼ãŒEnterã®å ´åˆã€æ¬¡ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã¸ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ç§»å‹•
             If prmEvent.KeyChar = Chr(Keys.Enter) Then
                 prmForm.SelectNextControl(prmForm.ActiveControl, True, True, True, True)
-                prmEvent.Handled = True 'ƒL[‰Ÿ‰º‚ÉŠÖ‚·‚éˆ—‚ªI—¹‚µ‚½‚±‚Æ‚ð.NET Framework‚É’Ê’m(Beep‚³‚¹‚È‚¢)
+                prmEvent.Handled = True 'ã‚­ãƒ¼æŠ¼ä¸‹ã«é–¢ã™ã‚‹å‡¦ç†ãŒçµ‚äº†ã—ãŸã“ã¨ã‚’.NET Frameworkã«é€šçŸ¥(Beepã•ã›ãªã„)
             End If
 
         Catch ex As Exception
-            Debug.WriteLine("moveNextFocus‚ÅƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½BF" & ex.Message)
+            Debug.WriteLine("moveNextFocusã§ã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ã¾ã—ãŸã€‚ï¼š" & ex.Message)
             Debug.WriteLine(ex.StackTrace)
         End Try
     End Sub
 
     '-------------------------------------------------------------------------------
-    '@ •¶Žš—ñƒf[ƒ^’·Žæ“¾(‘SŠpE”¼Šp‘Î‰ž)
-    '   iˆ—ŠT—vj“n‚³‚ê‚½•¶Žš—ñ‚Ì’·‚³‚ð‹‚ß‚é(‘SŠp1•¶Žš=2C”¼Šp1•¶Žš=1‚ÅŒvŽZ)
-    '   œ“ü—Íƒpƒ‰ƒƒ^FsPrmStr ‘ÎÛ•¶Žš—ñ
-    '   œƒƒ\ƒbƒh–ß‚è’l@F•¶Žš—ñƒf[ƒ^’·(ƒoƒCƒg’PˆÊ)
+    'ã€€ æ–‡å­—åˆ—ãƒ‡ãƒ¼ã‚¿é•·å–å¾—(å…¨è§’ãƒ»åŠè§’å¯¾å¿œ)
+    '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰æ¸¡ã•ã‚ŒãŸæ–‡å­—åˆ—ã®é•·ã•ã‚’æ±‚ã‚ã‚‹(å…¨è§’1æ–‡å­—=2ï¼ŒåŠè§’1æ–‡å­—=1ã§è¨ˆç®—)
+    '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ï¼šsPrmStr å¯¾è±¡æ–‡å­—åˆ—
+    '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ã€€ï¼šæ–‡å­—åˆ—ãƒ‡ãƒ¼ã‚¿é•·(ãƒã‚¤ãƒˆå˜ä½)
     '                                               2006.05.10 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
-    ''' •¶Žš—ñƒf[ƒ^’·Žæ“¾(‘SŠpE”¼Šp‘Î‰ž) “n‚³‚ê‚½•¶Žš—ñ‚Ì’·‚³‚ð‹‚ß‚é(‘SŠp1•¶Žš=2C”¼Šp1•¶Žš=1‚ÅŒvŽZ)
+    ''' æ–‡å­—åˆ—ãƒ‡ãƒ¼ã‚¿é•·å–å¾—(å…¨è§’ãƒ»åŠè§’å¯¾å¿œ) æ¸¡ã•ã‚ŒãŸæ–‡å­—åˆ—ã®é•·ã•ã‚’æ±‚ã‚ã‚‹(å…¨è§’1æ–‡å­—=2ï¼ŒåŠè§’1æ–‡å­—=1ã§è¨ˆç®—)
     ''' </summary>
-    ''' <param name="prmStr">‘ÎÛ•¶Žš—ñ</param>
-    ''' <returns>•¶Žš—ñƒf[ƒ^’·(ƒoƒCƒg’PˆÊ)</returns>
+    ''' <param name="prmStr">å¯¾è±¡æ–‡å­—åˆ—</param>
+    ''' <returns>æ–‡å­—åˆ—ãƒ‡ãƒ¼ã‚¿é•·(ãƒã‚¤ãƒˆå˜ä½)</returns>
     ''' <remarks></remarks>
     Public Shared Function getLenB(ByVal prmStr As String) As Short
 
-        'Shift JIS‚É•ÏŠ·‚µ‚½‚Æ‚«‚É•K—v‚ÈƒoƒCƒg”‚ð•Ô‚·
+        'Shift JISã«å¤‰æ›ã—ãŸã¨ãã«å¿…è¦ãªãƒã‚¤ãƒˆæ•°ã‚’è¿”ã™
         Return System.Text.Encoding.GetEncoding("shift_jis").GetByteCount(prmStr)
 
     End Function
 
     '-------------------------------------------------------------------------------
-    '@ ƒf[ƒ^’·Žæ“¾(‘SŠpE”¼Šp‘Î‰ž)
-    '   iˆ—ŠT—vj•¶Žš—ñ‚ðŽw’è‚³‚ê‚½’·‚³‚É•ÒW‚·‚é
-    '               •¶Žš—ñ„ƒf[ƒ^’· F ’´‰ß•ªØ‚èŽÌ‚Ä
-    '               •¶Žš—ñƒƒf[ƒ^’· F •s‘«•ªƒXƒy[ƒX‹l‚ß
-    '   œ“ü—Íƒpƒ‰ƒƒ^FprmStr(‘ÎÛ•¶Žš—ñ)
-    '                 FprmLen(Žw’èƒf[ƒ^’· c ƒoƒCƒg’PˆÊ)
-    '   œƒƒ\ƒbƒh–ß‚è’l@F•ÒW•¶Žš—ñ
+    'ã€€ ãƒ‡ãƒ¼ã‚¿é•·å–å¾—(å…¨è§’ãƒ»åŠè§’å¯¾å¿œ)
+    '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰æ–‡å­—åˆ—ã‚’æŒ‡å®šã•ã‚ŒãŸé•·ã•ã«ç·¨é›†ã™ã‚‹
+    '               æ–‡å­—åˆ—ï¼žãƒ‡ãƒ¼ã‚¿é•· ï¼š è¶…éŽåˆ†åˆ‡ã‚Šæ¨ã¦
+    '               æ–‡å­—åˆ—ï¼œãƒ‡ãƒ¼ã‚¿é•· ï¼š ä¸è¶³åˆ†ã‚¹ãƒšãƒ¼ã‚¹è©°ã‚
+    '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ï¼šprmStr(å¯¾è±¡æ–‡å­—åˆ—)
+    '                 ï¼šprmLen(æŒ‡å®šãƒ‡ãƒ¼ã‚¿é•· â€¦ ãƒã‚¤ãƒˆå˜ä½)
+    '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ã€€ï¼šç·¨é›†æ–‡å­—åˆ—
     '                                               2006.05.10 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
-    ''' ƒf[ƒ^’·Žæ“¾(‘SŠpE”¼Šp‘Î‰ž) •¶Žš—ñ‚ðŽw’è‚³‚ê‚½’·‚³‚É•ÒW‚·‚é. •¶Žš—ñ„ƒf[ƒ^’· F ’´‰ß•ªØ‚èŽÌ‚Ä.  •¶Žš—ñƒƒf[ƒ^’· F •s‘«•ªƒXƒy[ƒX‹l‚ß.
+    ''' ãƒ‡ãƒ¼ã‚¿é•·å–å¾—(å…¨è§’ãƒ»åŠè§’å¯¾å¿œ) æ–‡å­—åˆ—ã‚’æŒ‡å®šã•ã‚ŒãŸé•·ã•ã«ç·¨é›†ã™ã‚‹. æ–‡å­—åˆ—ï¼žãƒ‡ãƒ¼ã‚¿é•· ï¼š è¶…éŽåˆ†åˆ‡ã‚Šæ¨ã¦.  æ–‡å­—åˆ—ï¼œãƒ‡ãƒ¼ã‚¿é•· ï¼š ä¸è¶³åˆ†ã‚¹ãƒšãƒ¼ã‚¹è©°ã‚.
     ''' </summary>
-    ''' <param name="prmStr">‘ÎÛ•¶Žš—ñ</param>
-    ''' <param name="prmLen">Žw’èƒf[ƒ^’· c ƒoƒCƒg’PˆÊ</param>
-    ''' <returns>•ÒW•¶Žš—ñ</returns>
+    ''' <param name="prmStr">å¯¾è±¡æ–‡å­—åˆ—</param>
+    ''' <param name="prmLen">æŒ‡å®šãƒ‡ãƒ¼ã‚¿é•· â€¦ ãƒã‚¤ãƒˆå˜ä½</param>
+    ''' <returns>ç·¨é›†æ–‡å­—åˆ—</returns>
     ''' <remarks></remarks>
     Public Shared Function setDataLen(ByVal prmStr As String, ByVal prmLen As Integer) As String
         Dim ret As String
@@ -237,17 +237,17 @@ Public Class UtilClass
     End Function
 
     '-------------------------------------------------------------------------------
-    '@ ‘SŠpE”¼Šp¬Ýƒ`ƒFƒbƒN
-    '   iˆ—ŠT—vj•¶Žš—ñ’†‚É”¼ŠpE‘SŠp‚ª¬Ý‚µ‚Ä‚¢‚é‚©‚Ç‚¤‚©‚ð”»’è
-    '   œ“ü—Íƒpƒ‰ƒƒ^FprmStr(‘ÎÛ•¶Žš—ñj
-    '   œƒƒ\ƒbƒh–ß‚è’l@FTRUE(‘SŠp”¼Šp¬Ý‚ ‚èj^FALSE(”¼Šp‘SŠp¬Ý‚È‚µ)
+    'ã€€ å…¨è§’ãƒ»åŠè§’æ··åœ¨ãƒã‚§ãƒƒã‚¯
+    '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰æ–‡å­—åˆ—ä¸­ã«åŠè§’ãƒ»å…¨è§’ãŒæ··åœ¨ã—ã¦ã„ã‚‹ã‹ã©ã†ã‹ã‚’åˆ¤å®š
+    '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ï¼šprmStr(å¯¾è±¡æ–‡å­—åˆ—ï¼‰
+    '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ã€€ï¼šTRUE(å…¨è§’åŠè§’æ··åœ¨ã‚ã‚Šï¼‰ï¼FALSE(åŠè§’å…¨è§’æ··åœ¨ãªã—)
     '                                               2006.05.10 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
-    ''' ‘SŠpE”¼Šp¬Ýƒ`ƒFƒbƒN •¶Žš—ñ’†‚É”¼ŠpE‘SŠp‚ª¬Ý‚µ‚Ä‚¢‚é‚©‚Ç‚¤‚©‚ð”»’è
+    ''' å…¨è§’ãƒ»åŠè§’æ··åœ¨ãƒã‚§ãƒƒã‚¯ æ–‡å­—åˆ—ä¸­ã«åŠè§’ãƒ»å…¨è§’ãŒæ··åœ¨ã—ã¦ã„ã‚‹ã‹ã©ã†ã‹ã‚’åˆ¤å®š
     ''' </summary>
-    ''' <param name="prmStr">‘ÎÛ•¶Žš—ñ</param>
-    ''' <returns>TRUE(‘SŠp”¼Šp¬Ý‚ ‚èj^FALSE(”¼Šp‘SŠp¬Ý‚È‚µ)</returns>
+    ''' <param name="prmStr">å¯¾è±¡æ–‡å­—åˆ—</param>
+    ''' <returns>TRUE(å…¨è§’åŠè§’æ··åœ¨ã‚ã‚Šï¼‰ï¼FALSE(åŠè§’å…¨è§’æ··åœ¨ãªã—)</returns>
     ''' <remarks></remarks>
     Public Shared Function isSharedNWStr(ByVal prmStr As String) As Boolean
         Dim wCnt As Short
@@ -269,17 +269,17 @@ Public Class UtilClass
     End Function
 
     '-------------------------------------------------------------------------------
-    '@ ”¼Šp‚Ì‚Ýƒ`ƒFƒbƒN
-    '   iˆ—ŠT—vj•¶Žš—ñ’†‚É‘SŠp‚ª¬Ý‚µ‚Ä‚¢‚é‚©‚Ç‚¤‚©‚ð”»’è
-    '   œ“ü—Íƒpƒ‰ƒƒ^FprmStr(‘ÎÛ•¶Žš—ñj
-    '   œƒƒ\ƒbƒh–ß‚è’l@FTRUE(”¼Šp‚Ì‚Ýj^FALSE(‘SŠp‚ ‚è)
+    'ã€€ åŠè§’ã®ã¿ãƒã‚§ãƒƒã‚¯
+    '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰æ–‡å­—åˆ—ä¸­ã«å…¨è§’ãŒæ··åœ¨ã—ã¦ã„ã‚‹ã‹ã©ã†ã‹ã‚’åˆ¤å®š
+    '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ï¼šprmStr(å¯¾è±¡æ–‡å­—åˆ—ï¼‰
+    '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ã€€ï¼šTRUE(åŠè§’ã®ã¿ï¼‰ï¼FALSE(å…¨è§’ã‚ã‚Š)
     '                                               2006.05.10 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
-    ''' ”¼Šp‚Ì‚Ýƒ`ƒFƒbƒN •¶Žš—ñ’†‚É‘SŠp‚ª¬Ý‚µ‚Ä‚¢‚é‚©‚Ç‚¤‚©‚ð”»’è
+    ''' åŠè§’ã®ã¿ãƒã‚§ãƒƒã‚¯ æ–‡å­—åˆ—ä¸­ã«å…¨è§’ãŒæ··åœ¨ã—ã¦ã„ã‚‹ã‹ã©ã†ã‹ã‚’åˆ¤å®š
     ''' </summary>
-    ''' <param name="prmStr">‘ÎÛ•¶Žš—ñ</param>
-    ''' <returns>TRUE(”¼Šp‚Ì‚Ýj^FALSE(‘SŠp‚ ‚è)</returns>
+    ''' <param name="prmStr">å¯¾è±¡æ–‡å­—åˆ—</param>
+    ''' <returns>TRUE(åŠè§’ã®ã¿ï¼‰ï¼FALSE(å…¨è§’ã‚ã‚Š)</returns>
     ''' <remarks></remarks>
     Public Shared Function isOnlyNStr(ByVal prmStr As String) As Boolean
         Dim wCnt As Short
@@ -301,19 +301,19 @@ Public Class UtilClass
     End Function
 
     '-------------------------------------------------------------------------------
-    '@ƒfƒBƒŒƒNƒgƒŠ/ƒtƒ@ƒCƒ‹–¼•ªŠ„
-    '   iˆ—ŠT—vjƒtƒ‹ƒpƒX‚Ìƒtƒ@ƒCƒ‹–¼‚ðƒfƒBƒŒƒNƒgƒŠ&ƒtƒ@ƒCƒ‹–¼‚É•ªŠ„‚·‚é
-    '   œ“ü—Íƒpƒ‰ƒƒ^Fi prmFullPath ƒtƒ‹ƒpƒX
-    '                 Fo prmPath     ƒfƒBƒŒƒNƒgƒŠ
-    '                 Fo prmFile     ƒtƒ@ƒCƒ‹–¼
+    'ã€€ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª/ãƒ•ã‚¡ã‚¤ãƒ«ååˆ†å‰²
+    '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰ãƒ•ãƒ«ãƒ‘ã‚¹ã®ãƒ•ã‚¡ã‚¤ãƒ«åã‚’ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª&ãƒ•ã‚¡ã‚¤ãƒ«åã«åˆ†å‰²ã™ã‚‹
+    '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ï¼ši prmFullPath ãƒ•ãƒ«ãƒ‘ã‚¹
+    '                 ï¼šo prmPath     ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
+    '                 ï¼šo prmFile     ãƒ•ã‚¡ã‚¤ãƒ«å
     '                                               2006.05.10 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
-    ''' ƒfƒBƒŒƒNƒgƒŠEƒtƒ@ƒCƒ‹–¼•ªŠ„ ƒtƒ‹ƒpƒX‚Ìƒtƒ@ƒCƒ‹–¼‚ðƒfƒBƒŒƒNƒgƒŠEƒtƒ@ƒCƒ‹–¼‚É•ªŠ„‚·‚é
+    ''' ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªãƒ»ãƒ•ã‚¡ã‚¤ãƒ«ååˆ†å‰² ãƒ•ãƒ«ãƒ‘ã‚¹ã®ãƒ•ã‚¡ã‚¤ãƒ«åã‚’ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªãƒ»ãƒ•ã‚¡ã‚¤ãƒ«åã«åˆ†å‰²ã™ã‚‹
     ''' </summary>
-    ''' <param name="prmFullPath">ƒtƒ‹ƒpƒX</param>
-    ''' <param name="prmRefPath">ƒfƒBƒŒƒNƒgƒŠ</param>
-    ''' <param name="prmRefFile">ƒtƒ@ƒCƒ‹–¼</param>
+    ''' <param name="prmFullPath">ãƒ•ãƒ«ãƒ‘ã‚¹</param>
+    ''' <param name="prmRefPath">ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª</param>
+    ''' <param name="prmRefFile">ãƒ•ã‚¡ã‚¤ãƒ«å</param>
     ''' <remarks></remarks>
     Public Shared Sub dividePathAndFile(ByVal prmFullPath As String, ByRef prmRefPath As String, ByRef prmRefFile As String)
         Dim devPos As Integer
@@ -328,50 +328,50 @@ Public Class UtilClass
     End Sub
 
     '-------------------------------------------------------------------------------
-    '@ØŽÌ‚Ä
-    '   iˆ—ŠT—vj“ü—Íƒpƒ‰ƒƒ^‚Ì”’l‚ðØ‚èŽÌ‚Ä‚µ‚Ä•Ô‹p
-    '   œ“ü—Íƒpƒ‰ƒƒ^Fi num ƒpƒ‰ƒƒ^
-    '   œƒƒ\ƒbƒh–ß‚è’l@Fˆ—’l
+    'ã€€åˆ‡æ¨ã¦
+    '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ã®æ•°å€¤ã‚’åˆ‡ã‚Šæ¨ã¦ã—ã¦è¿”å´
+    '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ï¼ši num ãƒ‘ãƒ©ãƒ¡ã‚¿
+    '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ã€€ï¼šå‡¦ç†å€¤
     '                                               2006.05.10 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
-    ''' ØŽÌ‚Ä@“ü—Íƒpƒ‰ƒƒ^‚Ì”’l‚ðØ‚èŽÌ‚Ä‚µ‚Ä•Ô‹p
+    ''' åˆ‡æ¨ã¦ã€€å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ã®æ•°å€¤ã‚’åˆ‡ã‚Šæ¨ã¦ã—ã¦è¿”å´
     ''' </summary>
-    ''' <param name="prmNum">ƒpƒ‰ƒƒ^</param>
-    ''' <returns>ˆ—’l</returns>
+    ''' <param name="prmNum">ãƒ‘ãƒ©ãƒ¡ã‚¿</param>
+    ''' <returns>å‡¦ç†å€¤</returns>
     ''' <remarks></remarks>
     Public Shared Function roundDown(ByVal prmNum As Double) As Integer
         Return Fix(prmNum)
     End Function
 
     '-------------------------------------------------------------------------------
-    '@ØŽÌ‚Ä
-    '   iˆ—ŠT—vj“ü—Íƒpƒ‰ƒƒ^‚Ì”’l‚ðØ‚èŽÌ‚Ä‚µ‚Ä•Ô‹p
-    '   œ“ü—Íƒpƒ‰ƒƒ^Fi prmNum    ƒpƒ‰ƒƒ^
-    '               @Fi prmDigit  ŽÀsŒ…
-    '   œƒƒ\ƒbƒh–ß‚è’l@Fˆ—’l
-    '   œ”õl      @F0.15‚ð­”‘æ‚QˆÊ‚ÅØŽÌ‚Ä‚Ìê‡AprmDigit‚Í 2 ‚ÅŽÀs
-    '  @@@       @F1520‚ð•S‚ÌˆÊ‚ÅØŽÌ‚Ä‚Ìê‡AprmDigit‚Í -3 ‚ÅŽÀs
+    'ã€€åˆ‡æ¨ã¦
+    '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ã®æ•°å€¤ã‚’åˆ‡ã‚Šæ¨ã¦ã—ã¦è¿”å´
+    '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ï¼ši prmNum    ãƒ‘ãƒ©ãƒ¡ã‚¿
+    '               ã€€ï¼ši prmDigit  å®Ÿè¡Œæ¡
+    '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ã€€ï¼šå‡¦ç†å€¤
+    '   â—å‚™è€ƒ      ã€€ï¼š0.15ã‚’å°‘æ•°ç¬¬ï¼’ä½ã§åˆ‡æ¨ã¦ã®å ´åˆã€prmDigitã¯ 2 ã§å®Ÿè¡Œ
+    '  ã€€ã€€ã€€       ã€€ï¼š1520ã‚’ç™¾ã®ä½ã§åˆ‡æ¨ã¦ã®å ´åˆã€prmDigitã¯ -3 ã§å®Ÿè¡Œ
     '                                               2006.07.10 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
-    ''' ØŽÌ‚Ä@“ü—Íƒpƒ‰ƒƒ^‚Ì”’l‚ðØŽÌ‚Ä‚µ‚Ä•Ô‹p
+    ''' åˆ‡æ¨ã¦ã€€å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ã®æ•°å€¤ã‚’åˆ‡æ¨ã¦ã—ã¦è¿”å´
     ''' </summary>
-    ''' <param name="prmNum">ƒpƒ‰ƒƒ^</param>
-    ''' <param name="prmDigit">ŽÀsŒ…(­”‘æ‚PˆÊ‚ÅØŽÌ‚Ä‚Ìê‡[1]Aˆê‚ÌˆÊ‚Ìê‡[-1])</param>
+    ''' <param name="prmNum">ãƒ‘ãƒ©ãƒ¡ã‚¿</param>
+    ''' <param name="prmDigit">å®Ÿè¡Œæ¡(å°‘æ•°ç¬¬ï¼‘ä½ã§åˆ‡æ¨ã¦ã®å ´åˆ[1]ã€ä¸€ã®ä½ã®å ´åˆ[-1])</param>
     ''' <returns></returns>
     ''' <remarks></remarks>
     Public Shared Function roundDown(ByVal prmNum As Double, ByVal prmDigit As Short) As Double
         If prmDigit = 0 Then
-            Throw New UsrDefException("prmDigitƒpƒ‰ƒƒ^‚ª•s³‚Å‚·B0ˆÈŠO‚Ì’l‚ðÝ’è‚µ‚Ä‚­‚¾‚³‚¢B")
+            Throw New UsrDefException("prmDigitãƒ‘ãƒ©ãƒ¡ã‚¿ãŒä¸æ­£ã§ã™ã€‚0ä»¥å¤–ã®å€¤ã‚’è¨­å®šã—ã¦ãã ã•ã„ã€‚")
         End If
 
         Dim wkDigit As Short
         If prmDigit > 0 Then
-            '­”‚ÅŽÀs
+            'å°‘æ•°ã§å®Ÿè¡Œ
             wkDigit = prmDigit
         Else
-            '®”‚ÅŽÀs
+            'æ•´æ•°ã§å®Ÿè¡Œ
             wkDigit = prmDigit * (-1)
             prmNum = Fix(prmNum)
         End If
@@ -382,11 +382,11 @@ Public Class UtilClass
 
         Dim ret As Double = 0
         If prmDigit > 0 Then
-            '­”‚ÅŽÀs
+            'å°‘æ•°ã§å®Ÿè¡Œ
             prmNum = prmNum * multiple
             ret = (Fix(prmNum)) / multiple
         Else
-            '®”‚ÅŽÀs
+            'æ•´æ•°ã§å®Ÿè¡Œ
             prmNum = prmNum / (multiple * 10)
             ret = (Fix(prmNum)) * (multiple * 10)
         End If
@@ -394,50 +394,50 @@ Public Class UtilClass
     End Function
 
     '-------------------------------------------------------------------------------
-    '@Ø‚èã‚°
-    '   iˆ—ŠT—vj“ü—Íƒpƒ‰ƒƒ^‚Ì”’l‚ðØ‚èã‚°‚µ‚Ä•Ô‹p
-    '   œ“ü—Íƒpƒ‰ƒƒ^Fi prmNum ƒpƒ‰ƒƒ^
-    '   œƒƒ\ƒbƒh–ß‚è’l@Fˆ—’l
+    'ã€€åˆ‡ã‚Šä¸Šã’
+    '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ã®æ•°å€¤ã‚’åˆ‡ã‚Šä¸Šã’ã—ã¦è¿”å´
+    '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ï¼ši prmNum ãƒ‘ãƒ©ãƒ¡ã‚¿
+    '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ã€€ï¼šå‡¦ç†å€¤
     '                                               2006.05.10 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
-    ''' Ø‚èã‚°@“ü—Íƒpƒ‰ƒƒ^‚Ì”’l‚ðØ‚èã‚°‚µ‚Ä•Ô‹p
+    ''' åˆ‡ã‚Šä¸Šã’ã€€å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ã®æ•°å€¤ã‚’åˆ‡ã‚Šä¸Šã’ã—ã¦è¿”å´
     ''' </summary>
-    ''' <param name="prmNum">ƒpƒ‰ƒƒ^</param>
-    ''' <returns>ˆ—’l</returns>
+    ''' <param name="prmNum">ãƒ‘ãƒ©ãƒ¡ã‚¿</param>
+    ''' <returns>å‡¦ç†å€¤</returns>
     ''' <remarks></remarks>
     Public Shared Function roundUp(ByVal prmNum As Double) As Integer
         Return Int(System.Math.Abs(prmNum) * -1) * (Math.Sign(prmNum) * -1)
     End Function
 
     '-------------------------------------------------------------------------------
-    '@Ø‚èã‚°
-    '   iˆ—ŠT—vj“ü—Íƒpƒ‰ƒƒ^‚Ì”’l‚ðØ‚èã‚°‚µ‚Ä•Ô‹p
-    '   œ“ü—Íƒpƒ‰ƒƒ^Fi prmNum    ƒpƒ‰ƒƒ^
-    '               @Fi prmDigit  ŽÀsŒ…
-    '   œƒƒ\ƒbƒh–ß‚è’l@Fˆ—’l
-    '   œ”õl      @F0.15‚ð­”‘æ‚QˆÊ‚ÅØ‚èã‚°‚Ìê‡AprmDigit‚Í 2 ‚ÅŽÀs
-    '  @@@       @F1520‚ð•S‚ÌˆÊ‚ÅØ‚èã‚°‚Ìê‡AprmDigit‚Í -3 ‚ÅŽÀs
+    'ã€€åˆ‡ã‚Šä¸Šã’
+    '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ã®æ•°å€¤ã‚’åˆ‡ã‚Šä¸Šã’ã—ã¦è¿”å´
+    '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ï¼ši prmNum    ãƒ‘ãƒ©ãƒ¡ã‚¿
+    '               ã€€ï¼ši prmDigit  å®Ÿè¡Œæ¡
+    '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ã€€ï¼šå‡¦ç†å€¤
+    '   â—å‚™è€ƒ      ã€€ï¼š0.15ã‚’å°‘æ•°ç¬¬ï¼’ä½ã§åˆ‡ã‚Šä¸Šã’ã®å ´åˆã€prmDigitã¯ 2 ã§å®Ÿè¡Œ
+    '  ã€€ã€€ã€€       ã€€ï¼š1520ã‚’ç™¾ã®ä½ã§åˆ‡ã‚Šä¸Šã’ã®å ´åˆã€prmDigitã¯ -3 ã§å®Ÿè¡Œ
     '                                               2006.07.10 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
-    ''' Ø‚èã‚°@“ü—Íƒpƒ‰ƒƒ^‚Ì”’l‚ðØ‚èã‚°‚µ‚Ä•Ô‹p
+    ''' åˆ‡ã‚Šä¸Šã’ã€€å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ã®æ•°å€¤ã‚’åˆ‡ã‚Šä¸Šã’ã—ã¦è¿”å´
     ''' </summary>
-    ''' <param name="prmNum">ƒpƒ‰ƒƒ^</param>
-    ''' <param name="prmDigit">ŽÀsŒ…(­”‘æ‚PˆÊ‚ÅØ‚èã‚°‚Ìê‡[1]Aˆê‚ÌˆÊ‚Ìê‡[-1])</param>
+    ''' <param name="prmNum">ãƒ‘ãƒ©ãƒ¡ã‚¿</param>
+    ''' <param name="prmDigit">å®Ÿè¡Œæ¡(å°‘æ•°ç¬¬ï¼‘ä½ã§åˆ‡ã‚Šä¸Šã’ã®å ´åˆ[1]ã€ä¸€ã®ä½ã®å ´åˆ[-1])</param>
     ''' <returns></returns>
     ''' <remarks></remarks>
     Public Shared Function roundUp(ByVal prmNum As Double, ByVal prmDigit As Short) As Double
         If prmDigit = 0 Then
-            Throw New UsrDefException("prmDigitƒpƒ‰ƒƒ^‚ª•s³‚Å‚·B0ˆÈŠO‚Ì’l‚ðÝ’è‚µ‚Ä‚­‚¾‚³‚¢B")
+            Throw New UsrDefException("prmDigitãƒ‘ãƒ©ãƒ¡ã‚¿ãŒä¸æ­£ã§ã™ã€‚0ä»¥å¤–ã®å€¤ã‚’è¨­å®šã—ã¦ãã ã•ã„ã€‚")
         End If
 
         Dim wkDigit As Short
         If prmDigit > 0 Then
-            '­”‚ÅŽÀs
+            'å°‘æ•°ã§å®Ÿè¡Œ
             wkDigit = prmDigit
         Else
-            '®”‚ÅŽÀs
+            'æ•´æ•°ã§å®Ÿè¡Œ
             wkDigit = prmDigit * (-1)
             prmNum = Fix(prmNum)
         End If
@@ -448,11 +448,11 @@ Public Class UtilClass
 
         Dim ret As Double = 0
         If prmDigit > 0 Then
-            '­”‚ÅŽÀs
+            'å°‘æ•°ã§å®Ÿè¡Œ
             prmNum = prmNum * multiple
             ret = (Int(System.Math.Abs(prmNum) * -1) * (Math.Sign(prmNum) * -1)) / multiple
         Else
-            '®”‚ÅŽÀs
+            'æ•´æ•°ã§å®Ÿè¡Œ
             prmNum = prmNum / (multiple * 10)
             ret = (Int(System.Math.Abs(prmNum) * -1) * (Math.Sign(prmNum) * -1)) * (multiple * 10)
         End If
@@ -460,50 +460,50 @@ Public Class UtilClass
     End Function
 
     '-------------------------------------------------------------------------------
-    '@ŽlŽÌŒÜ“ü
-    '   iˆ—ŠT—vj“ü—Íƒpƒ‰ƒƒ^‚Ì”’l‚ðŽlŽÌŒÜ“ü‚µ‚Ä•Ô‹p
-    '   œ“ü—Íƒpƒ‰ƒƒ^Fi num ƒpƒ‰ƒƒ^
-    '   œƒƒ\ƒbƒh–ß‚è’l@Fˆ—’l
+    'ã€€å››æ¨äº”å…¥
+    '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ã®æ•°å€¤ã‚’å››æ¨äº”å…¥ã—ã¦è¿”å´
+    '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ï¼ši num ãƒ‘ãƒ©ãƒ¡ã‚¿
+    '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ã€€ï¼šå‡¦ç†å€¤
     '                                               2006.05.10 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
-    ''' ŽlŽÌŒÜ“ü@“ü—Íƒpƒ‰ƒƒ^‚Ì”’l‚ðŽlŽÌŒÜ“ü‚µ‚Ä•Ô‹p
+    ''' å››æ¨äº”å…¥ã€€å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ã®æ•°å€¤ã‚’å››æ¨äº”å…¥ã—ã¦è¿”å´
     ''' </summary>
-    ''' <param name="prmNum">ƒpƒ‰ƒƒ^</param>
-    ''' <returns>ˆ—’l</returns>
+    ''' <param name="prmNum">ãƒ‘ãƒ©ãƒ¡ã‚¿</param>
+    ''' <returns>å‡¦ç†å€¤</returns>
     ''' <remarks></remarks>
     Public Shared Function roundOff(ByVal prmNum As Double) As Integer
         Return Fix(prmNum + (0.5 * Math.Sign(prmNum)))
     End Function
 
     '-------------------------------------------------------------------------------
-    '@ŽlŽÌŒÜ“ü
-    '   iˆ—ŠT—vj“ü—Íƒpƒ‰ƒƒ^‚Ì”’l‚ðŽw’èŒ…‚ÅŽlŽÌŒÜ“ü‚µ‚Ä•Ô‹p
-    '   œ“ü—Íƒpƒ‰ƒƒ^Fi prmNum    ƒpƒ‰ƒƒ^
-    '               @Fi prmDigit  ŽÀsŒ…
-    '   œƒƒ\ƒbƒh–ß‚è’l@Fˆ—’l
-    '   œ”õl      @F0.15‚ð­”‘æ‚QˆÊ‚ÅŽlŽÌŒÜ“ü‚Ìê‡AprmDigit‚Í 2 ‚ÅŽÀs
-    '  @@@       @F1520‚ð•S‚ÌˆÊ‚ÅŽlŽÌŒÜ“ü‚Ìê‡AprmDigit‚Í -3 ‚ÅŽÀs
+    'ã€€å››æ¨äº”å…¥
+    '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ã®æ•°å€¤ã‚’æŒ‡å®šæ¡ã§å››æ¨äº”å…¥ã—ã¦è¿”å´
+    '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ï¼ši prmNum    ãƒ‘ãƒ©ãƒ¡ã‚¿
+    '               ã€€ï¼ši prmDigit  å®Ÿè¡Œæ¡
+    '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ã€€ï¼šå‡¦ç†å€¤
+    '   â—å‚™è€ƒ      ã€€ï¼š0.15ã‚’å°‘æ•°ç¬¬ï¼’ä½ã§å››æ¨äº”å…¥ã®å ´åˆã€prmDigitã¯ 2 ã§å®Ÿè¡Œ
+    '  ã€€ã€€ã€€       ã€€ï¼š1520ã‚’ç™¾ã®ä½ã§å››æ¨äº”å…¥ã®å ´åˆã€prmDigitã¯ -3 ã§å®Ÿè¡Œ
     '                                               2006.07.10 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
-    ''' ŽlŽÌŒÜ“ü@“ü—Íƒpƒ‰ƒƒ^‚Ì”’l‚ðŽlŽÌŒÜ“ü‚µ‚Ä•Ô‹p
+    ''' å››æ¨äº”å…¥ã€€å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ã®æ•°å€¤ã‚’å››æ¨äº”å…¥ã—ã¦è¿”å´
     ''' </summary>
-    ''' <param name="prmNum">ƒpƒ‰ƒƒ^</param>
-    ''' <param name="prmDigit">ŽÀsŒ…(­”‘æ‚PˆÊ‚ÅŽlŽÌŒÜ“ü‚Ìê‡[1]Aˆê‚ÌˆÊ‚Ìê‡[-1])</param>
+    ''' <param name="prmNum">ãƒ‘ãƒ©ãƒ¡ã‚¿</param>
+    ''' <param name="prmDigit">å®Ÿè¡Œæ¡(å°‘æ•°ç¬¬ï¼‘ä½ã§å››æ¨äº”å…¥ã®å ´åˆ[1]ã€ä¸€ã®ä½ã®å ´åˆ[-1])</param>
     ''' <returns></returns>
     ''' <remarks></remarks>
     Public Shared Function roundOff(ByVal prmNum As Double, ByVal prmDigit As Short) As Double
         If prmDigit = 0 Then
-            Throw New UsrDefException("prmDigitƒpƒ‰ƒƒ^‚ª•s³‚Å‚·B0ˆÈŠO‚Ì’l‚ðÝ’è‚µ‚Ä‚­‚¾‚³‚¢B")
+            Throw New UsrDefException("prmDigitãƒ‘ãƒ©ãƒ¡ã‚¿ãŒä¸æ­£ã§ã™ã€‚0ä»¥å¤–ã®å€¤ã‚’è¨­å®šã—ã¦ãã ã•ã„ã€‚")
         End If
 
         Dim wkDigit As Short
         If prmDigit > 0 Then
-            '­”‚ÅŽÀs
+            'å°‘æ•°ã§å®Ÿè¡Œ
             wkDigit = prmDigit
         Else
-            '®”‚ÅŽÀs
+            'æ•´æ•°ã§å®Ÿè¡Œ
             wkDigit = prmDigit * (-1)
             prmNum = Fix(prmNum)
         End If
@@ -514,11 +514,11 @@ Public Class UtilClass
 
         Dim ret As Double = 0
         If prmDigit > 0 Then
-            '­”‚ÅŽÀs
+            'å°‘æ•°ã§å®Ÿè¡Œ
             prmNum = prmNum * multiple
             ret = Fix((prmNum + (0.5 * Math.Sign(prmNum)))) / multiple
         Else
-            '®”‚ÅŽÀs
+            'æ•´æ•°ã§å®Ÿè¡Œ
             prmNum = prmNum / (multiple * 10)
             ret = Fix((prmNum + (0.5 * Math.Sign(prmNum)))) * (multiple * 10)
         End If
@@ -526,66 +526,66 @@ Public Class UtilClass
     End Function
 
     '-------------------------------------------------------------------------------
-    '@ƒRƒ“ƒgƒ[ƒ‹‘S‘I‘ðó‘Ô¶¬
-    '   iˆ—ŠT—vj“ü—Íƒpƒ‰ƒƒ^‚ÌƒRƒ“ƒgƒ[ƒ‹‚ð‘S‘I‘ðó‘Ô‚Æ‚·‚é
-    '   œ“ü—Íƒpƒ‰ƒƒ^Fi prmObj ‘ÎÛƒRƒ“ƒgƒ[ƒ‹(TextBox,MskedTextBox‚ð‘z’è)
-    '   œƒƒ\ƒbƒh–ß‚è’l@F‚È‚µ
-    '   œŽg—p—á@@@F     Private Sub Text1_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles Text1.GotFocus
+    'ã€€ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«å…¨é¸æŠžçŠ¶æ…‹ç”Ÿæˆ
+    '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã‚’å…¨é¸æŠžçŠ¶æ…‹ã¨ã™ã‚‹
+    '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ï¼ši prmObj å¯¾è±¡ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«(TextBox,MskedTextBoxã‚’æƒ³å®š)
+    '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ã€€ï¼šãªã—
+    '   â—ä½¿ç”¨ä¾‹ã€€ã€€ã€€ï¼š     Private Sub Text1_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles Text1.GotFocus
     '                            Call UtilClass.selAll(Text1)
     '                        End Sub
     '                                               2006.06.09 Updated By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
-    ''' ƒRƒ“ƒgƒ[ƒ‹‘S‘I‘ðó‘Ô¶¬@“ü—Íƒpƒ‰ƒƒ^‚ÌƒRƒ“ƒgƒ[ƒ‹‚ð‘S‘I‘ðó‘Ô‚Æ‚·‚é
+    ''' ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«å…¨é¸æŠžçŠ¶æ…‹ç”Ÿæˆã€€å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã‚’å…¨é¸æŠžçŠ¶æ…‹ã¨ã™ã‚‹
     ''' </summary>
-    ''' <param name="prmRefObj">‘ÎÛƒRƒ“ƒgƒ[ƒ‹(TextBox,MskedTextBox‚ð‘z’è)</param>
+    ''' <param name="prmRefObj">å¯¾è±¡ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«(TextBox,MskedTextBoxã‚’æƒ³å®š)</param>
     ''' <remarks></remarks>
     Public Shared Sub selAll(ByRef prmRefObj As Object)
         Try
 
-            'ƒeƒLƒXƒgƒ{ƒbƒNƒX‚Ö•ÏŠ·
+            'ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹ã¸å¤‰æ›
             Dim wkText As TextBox = CType(prmRefObj, TextBox)
             'wkText.SelectionStart = 0
             'wkText.SelectionLength = wkText.Text.Length
             wkText.SelectAll()
         Catch ex As Exception
             Try
-                'ƒ}ƒXƒNƒhƒeƒLƒXƒgƒ{ƒbƒNƒX‚Ö’uŠ·
+                'ãƒžã‚¹ã‚¯ãƒ‰ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹ã¸ç½®æ›
                 Dim wkMaskedText As MaskedTextBox = CType(prmRefObj, MaskedTextBox)
                 'wkMaskedText.SelectionStart = 0
                 'wkMaskedText.SelectionLength = wkMaskedText.Text.Length
                 wkMaskedText.SelectAll()
             Catch ex2 As Exception
-                'TextBox‚Å‚àMaskedTextBox‚Å‚à‚È‚¢ê‡‰½‚à‚µ‚È‚¢
+                'TextBoxã§ã‚‚MaskedTextBoxã§ã‚‚ãªã„å ´åˆä½•ã‚‚ã—ãªã„
             End Try
         End Try
     End Sub
 
     '-------------------------------------------------------------------------------
-    '  ’[–––¼Žæ“¾
-    '   iˆ—ŠT—vjŽÀs’[––‚ÌƒRƒ“ƒsƒ…[ƒ^–¼‚ðŽæ“¾‚·‚é
-    '   œ“ü—Íƒpƒ‰ƒƒ^F‚È‚µ
-    '   œƒƒ\ƒbƒh–ß‚è’l@F’[–––¼
+    '  ç«¯æœ«åå–å¾—
+    '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰å®Ÿè¡Œç«¯æœ«ã®ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ã‚¿åã‚’å–å¾—ã™ã‚‹
+    '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ï¼šãªã—
+    '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ã€€ï¼šç«¯æœ«å
     '                                               2006.05.19 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
-    ''' ŽÀs’[––‚ÌƒRƒ“ƒsƒ…[ƒ^–¼‚ðŽæ“¾‚·‚é
+    ''' å®Ÿè¡Œç«¯æœ«ã®ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ã‚¿åã‚’å–å¾—ã™ã‚‹
     ''' </summary>
-    ''' <returns>’[–––¼</returns>
+    ''' <returns>ç«¯æœ«å</returns>
     ''' <remarks></remarks>
     Public Shared Function getComputerName() As String
         Return System.Net.Dns.GetHostName
     End Function
 
     '-------------------------------------------------------------------------------
-    '  IPŽæ“¾
-    '   iˆ—ŠT—vjŽÀs’[––‚ÌIP‚ðŽæ“¾‚·‚é
-    '   œ“ü—Íƒpƒ‰ƒƒ^F‚È‚µ
-    '   œƒƒ\ƒbƒh–ß‚è’l@FIP
+    '  IPå–å¾—
+    '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰å®Ÿè¡Œç«¯æœ«ã®IPã‚’å–å¾—ã™ã‚‹
+    '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ï¼šãªã—
+    '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ã€€ï¼šIP
     '                                               2006.05.19 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
-    ''' ŽÀs’[––‚ÌIP‚ðŽæ“¾‚·‚é
+    ''' å®Ÿè¡Œç«¯æœ«ã®IPã‚’å–å¾—ã™ã‚‹
     ''' </summary>
     ''' <returns>IP</returns>
     ''' <remarks></remarks>
@@ -597,35 +597,35 @@ Public Class UtilClass
     End Function
 
     '-------------------------------------------------------------------------------
-    '  ’[–––¼Žæ“¾(IP‚©‚çŽæ“¾)
-    '   iˆ—ŠT—vjIP‚©‚ç’[–––¼‚ðŽæ“¾‚·‚é
-    '   œ“ü—Íƒpƒ‰ƒƒ^FprmIP   IP
-    '   œƒƒ\ƒbƒh–ß‚è’l@F’[–––¼
-    '   œ”õl@@@@FDNS‚ª‹tˆø‚«‚ðƒTƒ|[ƒg‚µ‚Ä‚¢‚é‚±‚ÆB ¦NSL-LAN‚ÍƒTƒ|[ƒgŠO
+    '  ç«¯æœ«åå–å¾—(IPã‹ã‚‰å–å¾—)
+    '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰IPã‹ã‚‰ç«¯æœ«åã‚’å–å¾—ã™ã‚‹
+    '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ï¼šprmIP   IP
+    '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ã€€ï¼šç«¯æœ«å
+    '   â—å‚™è€ƒã€€ã€€ã€€ã€€ï¼šDNSãŒé€†å¼•ãã‚’ã‚µãƒãƒ¼ãƒˆã—ã¦ã„ã‚‹ã“ã¨ã€‚ â€»NSL-LANã¯ã‚µãƒãƒ¼ãƒˆå¤–
     '                                               2006.05.19 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
-    ''' IP‚©‚ç’[–––¼‚ðŽæ“¾‚·‚é
+    ''' IPã‹ã‚‰ç«¯æœ«åã‚’å–å¾—ã™ã‚‹
     ''' </summary>
     ''' <param name="prmIP">IP</param>
-    ''' <returns>’[–––¼</returns>
-    ''' <remarks>DNS‚ª‹tˆø‚«‚ðƒTƒ|[ƒg‚µ‚Ä‚¢‚é‚±‚ÆB</remarks>
+    ''' <returns>ç«¯æœ«å</returns>
+    ''' <remarks>DNSãŒé€†å¼•ãã‚’ã‚µãƒãƒ¼ãƒˆã—ã¦ã„ã‚‹ã“ã¨ã€‚</remarks>
     Public Shared Function getComputerNameFromIP(ByVal prmIP As String) As String
         Dim hostInfo As System.Net.IPHostEntry = System.Net.Dns.GetHostEntry(prmIP)
         Return hostInfo.HostName
     End Function
 
     '-------------------------------------------------------------------------------
-    '  IPŽæ“¾(’[–––¼‚©‚çŽæ“¾)
-    '   iˆ—ŠT—vj’[–––¼‚©‚çIP‚ðŽæ“¾‚·‚é
-    '   œ“ü—Íƒpƒ‰ƒƒ^FprmComputerName   ’[–––¼
-    '   œƒƒ\ƒbƒh–ß‚è’l@FIP
+    '  IPå–å¾—(ç«¯æœ«åã‹ã‚‰å–å¾—)
+    '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰ç«¯æœ«åã‹ã‚‰IPã‚’å–å¾—ã™ã‚‹
+    '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ï¼šprmComputerName   ç«¯æœ«å
+    '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ã€€ï¼šIP
     '                                               2006.05.19 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
-    ''' ’[–––¼‚©‚çIP‚ðŽæ“¾‚·‚é
+    ''' ç«¯æœ«åã‹ã‚‰IPã‚’å–å¾—ã™ã‚‹
     ''' </summary>
-    ''' <param name="prmComputerName">’[–––¼</param>
+    ''' <param name="prmComputerName">ç«¯æœ«å</param>
     ''' <returns>IP</returns>
     ''' <remarks></remarks>
     Public Shared Function getComputerIPFromName(ByVal prmComputerName As String) As String
@@ -635,14 +635,14 @@ Public Class UtilClass
     End Function
 
     '-------------------------------------------------------------------------------
-    '  BooleanŒ^‚ðŽæ“¾‚·‚é
-    '   iˆ—ŠT—vjBoolean‚ÌType‚ð•Ô‹p‚·‚é
-    '   œ“ü—Íƒpƒ‰ƒƒ^@@F‚È‚µ
-    '   œƒƒ\ƒbƒh–ß‚è’l@FŽæ“¾Type
+    '  Booleanåž‹ã‚’å–å¾—ã™ã‚‹
+    '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰Booleanã®Typeã‚’è¿”å´ã™ã‚‹
+    '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ã€€ã€€ï¼šãªã—
+    '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ã€€ï¼šå–å¾—Type
     '                                               2006.05.30 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
-    ''' Boolean‚ÌType‚ð•Ô‹p‚·‚é
+    ''' Booleanã®Typeã‚’è¿”å´ã™ã‚‹
     ''' </summary>
     ''' <returns></returns>
     ''' <remarks></remarks>
@@ -651,14 +651,14 @@ Public Class UtilClass
     End Function
 
     '-------------------------------------------------------------------------------
-    '  StringŒ^‚ðŽæ“¾‚·‚é
-    '   iˆ—ŠT—vjString‚ÌType‚ð•Ô‹p‚·‚é
-    '   œ“ü—Íƒpƒ‰ƒƒ^@@F‚È‚µ
-    '   œƒƒ\ƒbƒh–ß‚è’l@FŽæ“¾Type
+    '  Stringåž‹ã‚’å–å¾—ã™ã‚‹
+    '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰Stringã®Typeã‚’è¿”å´ã™ã‚‹
+    '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ã€€ã€€ï¼šãªã—
+    '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ã€€ï¼šå–å¾—Type
     '                                               2006.05.30 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
-    ''' String‚ÌType‚ð•Ô‹p‚·‚é
+    ''' Stringã®Typeã‚’è¿”å´ã™ã‚‹
     ''' </summary>
     ''' <returns></returns>
     ''' <remarks></remarks>
@@ -667,14 +667,14 @@ Public Class UtilClass
     End Function
 
     '-------------------------------------------------------------------------------
-    '  ShortŒ^‚ðŽæ“¾‚·‚é
-    '   iˆ—ŠT—vjShort‚ÌType‚ð•Ô‹p‚·‚é
-    '   œ“ü—Íƒpƒ‰ƒƒ^@@F‚È‚µ
-    '   œƒƒ\ƒbƒh–ß‚è’l@FŽæ“¾Type
+    '  Shortåž‹ã‚’å–å¾—ã™ã‚‹
+    '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰Shortã®Typeã‚’è¿”å´ã™ã‚‹
+    '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ã€€ã€€ï¼šãªã—
+    '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ã€€ï¼šå–å¾—Type
     '                                               2006.05.30 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
-    ''' Short‚ÌType‚ð•Ô‹p‚·‚é
+    ''' Shortã®Typeã‚’è¿”å´ã™ã‚‹
     ''' </summary>
     ''' <returns></returns>
     ''' <remarks></remarks>
@@ -683,14 +683,14 @@ Public Class UtilClass
     End Function
 
     '-------------------------------------------------------------------------------
-    '  IntegerŒ^‚ðŽæ“¾‚·‚é
-    '   iˆ—ŠT—vjInteger‚ÌType‚ð•Ô‹p‚·‚é
-    '   œ“ü—Íƒpƒ‰ƒƒ^@@F‚È‚µ
-    '   œƒƒ\ƒbƒh–ß‚è’l@FŽæ“¾Type
+    '  Integeråž‹ã‚’å–å¾—ã™ã‚‹
+    '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰Integerã®Typeã‚’è¿”å´ã™ã‚‹
+    '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ã€€ã€€ï¼šãªã—
+    '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ã€€ï¼šå–å¾—Type
     '                                               2006.05.30 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
-    ''' Integer‚ÌType‚ð•Ô‹p‚·‚é
+    ''' Integerã®Typeã‚’è¿”å´ã™ã‚‹
     ''' </summary>
     ''' <returns></returns>
     ''' <remarks></remarks>
@@ -699,14 +699,14 @@ Public Class UtilClass
     End Function
 
     '-------------------------------------------------------------------------------
-    '  LongŒ^‚ðŽæ“¾‚·‚é
-    '   iˆ—ŠT—vjLong‚ÌType‚ð•Ô‹p‚·‚é
-    '   œ“ü—Íƒpƒ‰ƒƒ^@@F‚È‚µ
-    '   œƒƒ\ƒbƒh–ß‚è’l@FŽæ“¾Type
+    '  Longåž‹ã‚’å–å¾—ã™ã‚‹
+    '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰Longã®Typeã‚’è¿”å´ã™ã‚‹
+    '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ã€€ã€€ï¼šãªã—
+    '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ã€€ï¼šå–å¾—Type
     '                                               2006.05.30 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
-    ''' Long‚ÌType‚ð•Ô‹p‚·‚é
+    ''' Longã®Typeã‚’è¿”å´ã™ã‚‹
     ''' </summary>
     ''' <returns></returns>
     ''' <remarks></remarks>
@@ -715,14 +715,14 @@ Public Class UtilClass
     End Function
 
     '-------------------------------------------------------------------------------
-    '  SingleŒ^‚ðŽæ“¾‚·‚é
-    '   iˆ—ŠT—vjSingle‚ÌType‚ð•Ô‹p‚·‚é
-    '   œ“ü—Íƒpƒ‰ƒƒ^@@F‚È‚µ
-    '   œƒƒ\ƒbƒh–ß‚è’l@FŽæ“¾Type
+    '  Singleåž‹ã‚’å–å¾—ã™ã‚‹
+    '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰Singleã®Typeã‚’è¿”å´ã™ã‚‹
+    '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ã€€ã€€ï¼šãªã—
+    '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ã€€ï¼šå–å¾—Type
     '                                               2006.05.30 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
-    ''' Single‚ÌType‚ð•Ô‹p‚·‚é
+    ''' Singleã®Typeã‚’è¿”å´ã™ã‚‹
     ''' </summary>
     ''' <returns></returns>
     ''' <remarks></remarks>
@@ -731,14 +731,14 @@ Public Class UtilClass
     End Function
 
     '-------------------------------------------------------------------------------
-    '  DoubleŒ^‚ðŽæ“¾‚·‚é
-    '   iˆ—ŠT—vjDouble‚ÌType‚ð•Ô‹p‚·‚é
-    '   œ“ü—Íƒpƒ‰ƒƒ^@@F‚È‚µ
-    '   œƒƒ\ƒbƒh–ß‚è’l@FŽæ“¾Type
+    '  Doubleåž‹ã‚’å–å¾—ã™ã‚‹
+    '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰Doubleã®Typeã‚’è¿”å´ã™ã‚‹
+    '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ã€€ã€€ï¼šãªã—
+    '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ã€€ï¼šå–å¾—Type
     '                                               2006.05.30 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
-    ''' Double‚ÌType‚ð•Ô‹p‚·‚é
+    ''' Doubleã®Typeã‚’è¿”å´ã™ã‚‹
     ''' </summary>
     ''' <returns></returns>
     ''' <remarks></remarks>
@@ -747,14 +747,14 @@ Public Class UtilClass
     End Function
 
     '-------------------------------------------------------------------------------
-    '  DateTimeŒ^‚ðŽæ“¾‚·‚é
-    '   iˆ—ŠT—vjDateTime‚ÌType‚ð•Ô‹p‚·‚é
-    '   œ“ü—Íƒpƒ‰ƒƒ^@@F‚È‚µ
-    '   œƒƒ\ƒbƒh–ß‚è’l@FŽæ“¾Type
+    '  DateTimeåž‹ã‚’å–å¾—ã™ã‚‹
+    '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰DateTimeã®Typeã‚’è¿”å´ã™ã‚‹
+    '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ã€€ã€€ï¼šãªã—
+    '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ã€€ï¼šå–å¾—Type
     '                                               2006.05.30 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
-    ''' DateTime‚ÌType‚ð•Ô‹p‚·‚é
+    ''' DateTimeã®Typeã‚’è¿”å´ã™ã‚‹
     ''' </summary>
     ''' <returns></returns>
     ''' <remarks></remarks>
@@ -763,14 +763,14 @@ Public Class UtilClass
     End Function
 
     '-------------------------------------------------------------------------------
-    '  ObjectŒ^‚ðŽæ“¾‚·‚é
-    '   iˆ—ŠT—vjObject‚ÌType‚ð•Ô‹p‚·‚é
-    '   œ“ü—Íƒpƒ‰ƒƒ^@@F‚È‚µ
-    '   œƒƒ\ƒbƒh–ß‚è’l@FŽæ“¾Type
+    '  Objectåž‹ã‚’å–å¾—ã™ã‚‹
+    '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰Objectã®Typeã‚’è¿”å´ã™ã‚‹
+    '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ã€€ã€€ï¼šãªã—
+    '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ã€€ï¼šå–å¾—Type
     '                                               2006.05.30 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
-    ''' Object‚ÌType‚ð•Ô‹p‚·‚é
+    ''' Objectã®Typeã‚’è¿”å´ã™ã‚‹
     ''' </summary>
     ''' <returns></returns>
     ''' <remarks></remarks>
@@ -779,14 +779,14 @@ Public Class UtilClass
     End Function
 
     '-------------------------------------------------------------------------------
-    '  ByteŒ^‚ðŽæ“¾‚·‚é
-    '   iˆ—ŠT—vjByte‚ÌType‚ð•Ô‹p‚·‚é
-    '   œ“ü—Íƒpƒ‰ƒƒ^@@F‚È‚µ
-    '   œƒƒ\ƒbƒh–ß‚è’l@FŽæ“¾Type
+    '  Byteåž‹ã‚’å–å¾—ã™ã‚‹
+    '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰Byteã®Typeã‚’è¿”å´ã™ã‚‹
+    '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ã€€ã€€ï¼šãªã—
+    '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ã€€ï¼šå–å¾—Type
     '                                               2006.05.30 Created By Laevigata, Inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
-    ''' Byte‚ÌType‚ð•Ô‹p‚·‚é
+    ''' Byteã®Typeã‚’è¿”å´ã™ã‚‹
     ''' </summary>
     ''' <returns></returns>
     ''' <remarks></remarks>
@@ -794,11 +794,11 @@ Public Class UtilClass
         Return Type.GetType("System.Byte")
     End Function
     '-------------------------------------------------------------------------------
-    '  “ú•tƒXƒ‰ƒbƒVƒ…•ÏŠ·ŠÖ”
-    '   iˆ—ŠT—vjyyyyMMdd ¨ yyyy/MM/dd or yyyy/MM/dd ¨ yyyyMMdd
-    '               yyMMdd   ¨ yy/MM/dd   or yy/MM/dd   ¨ yyMMdd
-    '   œ“ü—Íƒpƒ‰ƒƒ^@@F‚È‚µ
-    '   œƒƒ\ƒbƒh–ß‚è’l@F•ÏŠ·Œã•¶Žš—ñi“ú•t‚Æ‚µ‚Ä‚¨‚©‚µ‚¢ê‡‚Í‹ó”’("")‚ð•Ô‚µ‚Ü‚·Bj
+    '  æ—¥ä»˜ã‚¹ãƒ©ãƒƒã‚·ãƒ¥å¤‰æ›é–¢æ•°
+    '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰yyyyMMdd â†’ yyyy/MM/dd or yyyy/MM/dd â†’ yyyyMMdd
+    '               yyMMdd   â†’ yy/MM/dd   or yy/MM/dd   â†’ yyMMdd
+    '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ã€€ã€€ï¼šãªã—
+    '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ã€€ï¼šå¤‰æ›å¾Œæ–‡å­—åˆ—ï¼ˆæ—¥ä»˜ã¨ã—ã¦ãŠã‹ã—ã„å ´åˆã¯ç©ºç™½("")ã‚’è¿”ã—ã¾ã™ã€‚ï¼‰
     '                                               2006.11.10 Created By Laevigata inc.
     '-------------------------------------------------------------------------------
     Public Shared Function convertDateSlash(ByVal prmstrDate As String) As String
@@ -810,7 +810,7 @@ Public Class UtilClass
         End If
 
         If w_Str.IndexOf("/", 0) = -1 Then
-            '"/"‚ª–³‚¢ê‡
+            '"/"ãŒç„¡ã„å ´åˆ
             Try
                 If Len(prmstrDate) > 6 Then
                     w_Date = DateTime.ParseExact(prmstrDate, "yyyyMMdd", New System.Globalization.CultureInfo("ja-JP"))
@@ -837,27 +837,27 @@ Public Class UtilClass
         End If
     End Function
     '-------------------------------------------------------------------------------
-    '  ‹ó”’”»’è
-    '   iˆ—ŠT—vj•¶Žš—ñ‚ª‹ó”’‚©‚ð”»’è‚·‚é
-    '   œ“ü—Íƒpƒ‰ƒƒ^@@F‚È‚µ
-    '   œƒƒ\ƒbƒh–ß‚è’l@FTrue=‹ó”’‚Å‚Í–³‚¢, False=‹ó”’
+    '  ç©ºç™½åˆ¤å®š
+    '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰æ–‡å­—åˆ—ãŒç©ºç™½ã‹ã‚’åˆ¤å®šã™ã‚‹
+    '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ã€€ã€€ï¼šãªã—
+    '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ã€€ï¼šTrue=ç©ºç™½ã§ã¯ç„¡ã„, False=ç©ºç™½
     '                                               2006.11.10 Created By Laevigata inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
-    ''' ‹ó”’”»’è
+    ''' ç©ºç™½åˆ¤å®š
     ''' </summary>
-    ''' <returns>True=‹ó”’‚Å‚Í–³‚¢, False=‹ó”’</returns>
+    ''' <returns>True=ç©ºç™½ã§ã¯ç„¡ã„, False=ç©ºç™½</returns>
     ''' <remarks></remarks>
     Public Shared Function IsExistString(ByVal prmstrDate As String) As Boolean
-        'Nothing”»’è
+        'Nothingåˆ¤å®š
         If IsNothing(prmstrDate) = True Then
             Return False
         End If
-        '‹ó•¶Žš”»’è
+        'ç©ºæ–‡å­—åˆ¤å®š
         If prmstrDate Is String.Empty Then
             Return False
         End If
-        '""•¶Žš”»’è
+        '""æ–‡å­—åˆ¤å®š
         If "".Equals(prmstrDate.Trim) Then
             Return False
         End If
@@ -865,39 +865,39 @@ Public Class UtilClass
     End Function
 
     '-------------------------------------------------------------------------------
-    '  ƒf[ƒ^XVŽž‚Ì“úŽžƒtƒH[ƒ}ƒbƒg
-    '   iˆ—ŠT—vj“ú•t•\Ž¦‚ÍŠÂ‹«‚É‡‚í‚¹‚é‚½‚ßA“o˜^Žž‚Í“ú–{Œ`Ž®‚É‚·‚é
-    '   œ“ü—Íƒpƒ‰ƒƒ^@@FDatetime
-    '   œƒƒ\ƒbƒh–ß‚è’l@FDatetime
+    '  ãƒ‡ãƒ¼ã‚¿æ›´æ–°æ™‚ã®æ—¥æ™‚ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆ
+    '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰æ—¥ä»˜è¡¨ç¤ºã¯ç’°å¢ƒã«åˆã‚ã›ã‚‹ãŸã‚ã€ç™»éŒ²æ™‚ã¯æ—¥æœ¬å½¢å¼ã«ã™ã‚‹
+    '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ã€€ã€€ï¼šDatetime
+    '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ã€€ï¼šDatetime
     '                                               2019.02.07 Created By Laevigata inc.
     '-------------------------------------------------------------------------------
     ''' <summary>
-    ''' ‹ó”’”»’è
+    ''' ç©ºç™½åˆ¤å®š
     ''' </summary>
-    ''' <returns>True=‹ó”’‚Å‚Í–³‚¢, False=‹ó”’</returns>
+    ''' <returns>True=ç©ºç™½ã§ã¯ç„¡ã„, False=ç©ºç™½</returns>
     ''' <remarks></remarks>
     Public Shared Function jaDatetimeFormat(ByVal prmDate As DateTime) As String
 
-        '“ú–{‚Ì“ú•tŒ`Ž®‚É‚·‚é
+        'æ—¥æœ¬ã®æ—¥ä»˜å½¢å¼ã«ã™ã‚‹
         Return Format(prmDate, "yyyy/MM/dd HH:mm:ss").ToString
 
     End Function
 
-    'StringŒ^‚ÌDate‚ð“ú–{‚ÌŒ`Ž®‚É’¼‚·
+    'Stringåž‹ã®Dateã‚’æ—¥æœ¬ã®å½¢å¼ã«ç›´ã™
     Public Shared Function strFormatDate(ByVal prmDate As String, Optional ByRef prmFormat As String = "yyyy/MM/dd") As String
 
-        'PC‚ÌƒJƒ‹ƒ`ƒƒ[‚ðŽæ“¾‚µA‚»‚ê‚É‰ž‚¶‚ÄString‚©‚çDatetime‚ðì¬
+        'PCã®ã‚«ãƒ«ãƒãƒ£ãƒ¼ã‚’å–å¾—ã—ã€ãã‚Œã«å¿œã˜ã¦Stringã‹ã‚‰Datetimeã‚’ä½œæˆ
         Dim ci As New System.Globalization.CultureInfo(CultureInfo.CurrentCulture.Name.ToString)
         Dim dateFormat As DateTime = DateTime.Parse(prmDate, ci, System.Globalization.DateTimeStyles.AssumeLocal)
 
-        '“ú–{‚ÌŒ`Ž®‚É‘‚«Š·‚¦‚é
+        'æ—¥æœ¬ã®å½¢å¼ã«æ›¸ãæ›ãˆã‚‹
         Return dateFormat.ToString(prmFormat)
     End Function
 
-    'DatetimeŒ^‚ð“ú–{‚ÌŒ`Ž®‚É’¼‚·
+    'Datetimeåž‹ã‚’æ—¥æœ¬ã®å½¢å¼ã«ç›´ã™
     Public Shared Function formatDatetime(ByVal prmDatetime As DateTime) As String
 
-        'PC‚ÌƒJƒ‹ƒ`ƒƒ[‚ðŽæ“¾‚µA‚»‚ê‚É‰ž‚¶‚ÄString‚©‚çDatetime‚ðì¬
+        'PCã®ã‚«ãƒ«ãƒãƒ£ãƒ¼ã‚’å–å¾—ã—ã€ãã‚Œã«å¿œã˜ã¦Stringã‹ã‚‰Datetimeã‚’ä½œæˆ
         Dim ciCurrent As New System.Globalization.CultureInfo(CultureInfo.CurrentCulture.Name.ToString)
         Dim dateFormat As DateTime = DateTime.Parse(prmDatetime.ToString, ciCurrent, System.Globalization.DateTimeStyles.AssumeLocal)
 
@@ -907,36 +907,36 @@ Public Class UtilClass
 
         'Dim rtnDatetime As DateTime = DateTime.Parse(changeFormat, ciJP, System.Globalization.DateTimeStyles.AssumeLocal)
 
-        '“ú–{‚ÌŒ`Ž®‚É‘‚«Š·‚¦‚é
+        'æ—¥æœ¬ã®å½¢å¼ã«æ›¸ãæ›ãˆã‚‹
         Return changeFormat
     End Function
 
-    '‹àŠzƒtƒH[ƒ}ƒbƒgi“o˜^‚ÌÛ‚Ì¬”“_Žw’èŽqj‚ð“ú–{‚ÌŒ`Ž®‚É‡‚í‚¹‚é
-    'Œ…‹æØ‚è‹L†‚ÍŠO‚·i¬”“_‚Ì‚Ý‚ÌƒtƒH[ƒ}ƒbƒg‚É•ÏŠ·‚µ‚Ä‚¢‚éj
+    'é‡‘é¡ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆï¼ˆç™»éŒ²ã®éš›ã®å°æ•°ç‚¹æŒ‡å®šå­ï¼‰ã‚’æ—¥æœ¬ã®å½¢å¼ã«åˆã‚ã›ã‚‹
+    'æ¡åŒºåˆ‡ã‚Šè¨˜å·ã¯å¤–ã™ï¼ˆå°æ•°ç‚¹ã®ã¿ã®ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆã«å¤‰æ›ã—ã¦ã„ã‚‹ï¼‰
     Public Shared Function formatNumber(ByVal prmVal As Decimal) As String
 
         Dim nfi As NumberFormatInfo = New CultureInfo("ja-JP", False).NumberFormat
 
-        '“ú–{‚ÌŒ`Ž®‚É‘‚«Š·‚¦‚é
+        'æ—¥æœ¬ã®å½¢å¼ã«æ›¸ãæ›ãˆã‚‹
         Return prmVal.ToString("F3", nfi)
     End Function
 
-    '‹àŠzƒtƒH[ƒ}ƒbƒgi“o˜^‚ÌÛ‚Ì¬”“_Žw’èŽqj‚ð“ú–{‚ÌŒ`Ž®‚É‡‚í‚¹‚é
-    'Œ…‹æØ‚è‹L†‚ÍŠO‚·i¬”“_‚Ì‚Ý‚ÌƒtƒH[ƒ}ƒbƒg‚É•ÏŠ·‚µ‚Ä‚¢‚éj
+    'é‡‘é¡ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆï¼ˆç™»éŒ²ã®éš›ã®å°æ•°ç‚¹æŒ‡å®šå­ï¼‰ã‚’æ—¥æœ¬ã®å½¢å¼ã«åˆã‚ã›ã‚‹
+    'æ¡åŒºåˆ‡ã‚Šè¨˜å·ã¯å¤–ã™ï¼ˆå°æ•°ç‚¹ã®ã¿ã®ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆã«å¤‰æ›ã—ã¦ã„ã‚‹ï¼‰
     Public Shared Function formatNumberF10(ByVal prmVal As Decimal) As String
 
         Dim nfi As NumberFormatInfo = New CultureInfo("ja-JP", False).NumberFormat
 
-        '“ú–{‚ÌŒ`Ž®‚É‘‚«Š·‚¦‚é
+        'æ—¥æœ¬ã®å½¢å¼ã«æ›¸ãæ›ãˆã‚‹
         Return prmVal.ToString("F10", nfi)
     End Function
 
-    'sql‚ÅŽÀs‚·‚é•¶Žš—ñ‚©‚çƒVƒ“ƒOƒ‹ƒNƒH[ƒe[ƒVƒ‡ƒ“‚ð•¶ŽšƒR[ƒh‚É‚·‚é
+    'sqlã§å®Ÿè¡Œã™ã‚‹æ–‡å­—åˆ—ã‹ã‚‰ã‚·ãƒ³ã‚°ãƒ«ã‚¯ã‚©ãƒ¼ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ã‚’æ–‡å­—ã‚³ãƒ¼ãƒ‰ã«ã™ã‚‹
     Public Shared Function escapeSql(ByVal prmSql As String) As String
         Dim sql As String = prmSql
 
         If prmSql IsNot Nothing Then
-            sql = sql.Replace("'"c, "''") 'ƒVƒ“ƒOƒ‹ƒNƒH[ƒe[ƒVƒ‡ƒ“‚ð’uŠ·
+            sql = sql.Replace("'"c, "''") 'ã‚·ãƒ³ã‚°ãƒ«ã‚¯ã‚©ãƒ¼ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ã‚’ç½®æ›
 
             'Return Regex.Escape(sql)
             Return sql

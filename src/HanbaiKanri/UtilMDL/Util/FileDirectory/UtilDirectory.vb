@@ -1,104 +1,104 @@
-Imports System.IO
+ï»¿Imports System.IO
 
 Namespace FileDirectory
 
     '===============================================================================
     '
-    '  ƒ†[ƒeƒBƒŠƒeƒBƒNƒ‰ƒX
-    '    iƒNƒ‰ƒX–¼j    UtilDirectory
-    '    iˆ—‹@”\–¼j      ƒfƒBƒŒƒNƒgƒŠ‘€ì‹@”\‚ð’ñ‹Ÿ‚·‚é
-    '    i–{MDLŽg—p‘O’ñj   “Á‚É–³‚µ
-    '    i”õlj            
+    '  ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£ã‚¯ãƒ©ã‚¹
+    '    ï¼ˆã‚¯ãƒ©ã‚¹åï¼‰    UtilDirectory
+    '    ï¼ˆå‡¦ç†æ©Ÿèƒ½åï¼‰      ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªæ“ä½œæ©Ÿèƒ½ã‚’æä¾›ã™ã‚‹
+    '    ï¼ˆæœ¬MDLä½¿ç”¨å‰æï¼‰   ç‰¹ã«ç„¡ã—
+    '    ï¼ˆå‚™è€ƒï¼‰            
     '
     '===============================================================================
-    '  —š—ð  –¼‘O          “ú  •t      ƒ}[ƒN      “à—e
+    '  å±¥æ­´  åå‰          æ—¥  ä»˜      ãƒžãƒ¼ã‚¯      å†…å®¹
     '-------------------------------------------------------------------------------
-    '  (1)   Laevigata, Inc.    2006/05/15              V‹K
+    '  (1)   Laevigata, Inc.    2006/05/15              æ–°è¦
     '-------------------------------------------------------------------------------
     Public Class UtilDirectory
 
         '===============================================================================
-        'ƒƒ“ƒo[’è”’è‹`
+        'ãƒ¡ãƒ³ãƒãƒ¼å®šæ•°å®šç¾©
         '===============================================================================
-        '‚È‚µ
+        'ãªã—
 
         '===============================================================================
-        'ƒƒ“ƒo[•Ï”’è‹`
+        'ãƒ¡ãƒ³ãƒãƒ¼å¤‰æ•°å®šç¾©
         '===============================================================================
-        '‚È‚µ
+        'ãªã—
 
         '===============================================================================
-        'ƒvƒƒpƒeƒB(ƒAƒNƒZƒT)
+        'ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£(ã‚¢ã‚¯ã‚»ã‚µ)
         '===============================================================================
-        '‚È‚µ
+        'ãªã—
 
         '===============================================================================
-        ' ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        ' ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         '===============================================================================
-        '‚È‚µ
+        'ãªã—
 
 
         '-------------------------------------------------------------------------------
-        '   ƒfƒBƒŒƒNƒgƒŠ‚Ì‘¶Ýƒ`ƒFƒbƒN
-        '   iˆ—ŠT—vjƒfƒBƒŒƒNƒgƒŠ‚ª‘¶Ý‚·‚é‚©‚Ç‚¤‚©‚Ìƒ`ƒFƒbƒN‚ðs‚¤
-        '   œ“ü—Íƒpƒ‰ƒƒ^   FprmDir  ƒfƒBƒŒƒNƒgƒŠ–¼
-        '   œƒƒ\ƒbƒh–ß‚è’l F‘¶Ý/”ñ‘¶Ý
+        '   ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã®å­˜åœ¨ãƒã‚§ãƒƒã‚¯
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªãŒå­˜åœ¨ã™ã‚‹ã‹ã©ã†ã‹ã®ãƒã‚§ãƒƒã‚¯ã‚’è¡Œã†
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šprmDir  ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªå
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šå­˜åœ¨/éžå­˜åœ¨
         '                                               2006.05.15 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ƒfƒBƒŒƒNƒgƒŠ‚Ì‘¶Ýƒ`ƒFƒbƒN
+        ''' ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã®å­˜åœ¨ãƒã‚§ãƒƒã‚¯
         ''' </summary>
-        ''' <param name="prmDir">ƒfƒBƒŒƒNƒgƒŠ–¼</param>
-        ''' <returns>‘¶Ý/”ñ‘¶Ý</returns>
+        ''' <param name="prmDir">ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªå</param>
+        ''' <returns>å­˜åœ¨/éžå­˜åœ¨</returns>
         ''' <remarks></remarks>
         Public Function isDirExists(ByVal prmDir As String) As Boolean
             Return Directory.Exists(prmDir)
         End Function
 
         '-------------------------------------------------------------------------------
-        '   ƒfƒBƒŒƒNƒgƒŠíœ
-        '   iˆ—ŠT—vjŽw’è‚µ‚½ƒfƒBƒŒƒNƒgƒŠ‚ðíœ‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^   FprmDir  ƒfƒBƒŒƒNƒgƒŠ–¼
-        '   œƒƒ\ƒbƒh–ß‚è’l F‚È‚µ
+        '   ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªå‰Šé™¤
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰æŒ‡å®šã—ãŸãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’å‰Šé™¤ã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šprmDir  ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªå
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šãªã—
         '                                               2006.05.15 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' Žw’è‚µ‚½ƒfƒBƒŒƒNƒgƒŠ‚ðíœ‚·‚é
+        ''' æŒ‡å®šã—ãŸãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’å‰Šé™¤ã™ã‚‹
         ''' </summary>
-        ''' <param name="prmDir">ƒfƒBƒŒƒNƒgƒŠ–¼</param>
+        ''' <param name="prmDir">ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªå</param>
         ''' <remarks></remarks>
         Public Sub delete(ByVal prmDir As String)
             Directory.Delete(prmDir, True)
         End Sub
 
         '-------------------------------------------------------------------------------
-        '   ƒfƒBƒŒƒNƒgƒŠì¬
-        '   iˆ—ŠT—vjŽw’è‚µ‚½ƒfƒBƒŒƒNƒgƒŠ‚ðì¬‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^   FprmDir  ƒfƒBƒŒƒNƒgƒŠ–¼
-        '   œƒƒ\ƒbƒh–ß‚è’l F‚È‚µ
+        '   ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªä½œæˆ
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰æŒ‡å®šã—ãŸãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’ä½œæˆã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šprmDir  ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªå
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šãªã—
         '                                               2006.05.15 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' Žw’è‚µ‚½ƒfƒBƒŒƒNƒgƒŠ‚ðì¬‚·‚é
+        ''' æŒ‡å®šã—ãŸãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’ä½œæˆã™ã‚‹
         ''' </summary>
-        ''' <param name="prmDir">ƒfƒBƒŒƒNƒgƒŠ–¼</param>
+        ''' <param name="prmDir">ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªå</param>
         ''' <remarks></remarks>
         Public Sub create(ByVal prmDir As String)
             Directory.CreateDirectory(prmDir)
         End Sub
 
         '-------------------------------------------------------------------------------
-        '   ƒtƒ@ƒCƒ‹–¼Žæ“¾
-        '   iˆ—ŠT—vjŽw’è‚µ‚½ƒfƒBƒŒƒNƒgƒŠ”z‰º‚Ìƒtƒ@ƒCƒ‹–¼(•¡”)‚ðŽæ“¾
-        '   œ“ü—Íƒpƒ‰ƒƒ^   FprmDir  ƒfƒBƒŒƒNƒgƒŠ–¼
-        '   œƒƒ\ƒbƒh–ß‚è’l FŽæ“¾ƒtƒ@ƒCƒ‹–¼(”z—ñ)
+        '   ãƒ•ã‚¡ã‚¤ãƒ«åå–å¾—
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰æŒ‡å®šã—ãŸãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªé…ä¸‹ã®ãƒ•ã‚¡ã‚¤ãƒ«å(è¤‡æ•°)ã‚’å–å¾—
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šprmDir  ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªå
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šå–å¾—ãƒ•ã‚¡ã‚¤ãƒ«å(é…åˆ—)
         '                                               2006.05.15 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' Žw’è‚µ‚½ƒfƒBƒŒƒNƒgƒŠ‚Ìƒtƒ@ƒCƒ‹–¼(•¡”)‚ðŽæ“¾
+        ''' æŒ‡å®šã—ãŸãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã®ãƒ•ã‚¡ã‚¤ãƒ«å(è¤‡æ•°)ã‚’å–å¾—
         ''' </summary>
-        ''' <param name="prmDir">ƒfƒBƒŒƒNƒgƒŠ–¼</param>
-        ''' <returns>Žæ“¾ƒtƒ@ƒCƒ‹–¼(”z—ñ)</returns>
+        ''' <param name="prmDir">ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªå</param>
+        ''' <returns>å–å¾—ãƒ•ã‚¡ã‚¤ãƒ«å(é…åˆ—)</returns>
         ''' <remarks></remarks>
         Public Function getFiles(ByVal prmDir As String) As String()
             Dim strFiles() As String = Directory.GetFiles(prmDir)
@@ -106,17 +106,17 @@ Namespace FileDirectory
         End Function
 
         '-------------------------------------------------------------------------------
-        '   ƒtƒHƒ‹ƒ_–¼Žæ“¾
-        '   iˆ—ŠT—vjŽw’è‚µ‚½ƒfƒBƒŒƒNƒgƒŠ”z‰º‚ÌƒtƒHƒ‹ƒ_–¼(•¡”)‚ðŽæ“¾
-        '   œ“ü—Íƒpƒ‰ƒƒ^   FprmDir  ƒfƒBƒŒƒNƒgƒŠ–¼
-        '   œƒƒ\ƒbƒh–ß‚è’l FŽæ“¾ƒtƒHƒ‹ƒ_–¼(”z—ñ)
+        '   ãƒ•ã‚©ãƒ«ãƒ€åå–å¾—
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰æŒ‡å®šã—ãŸãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªé…ä¸‹ã®ãƒ•ã‚©ãƒ«ãƒ€å(è¤‡æ•°)ã‚’å–å¾—
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šprmDir  ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªå
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šå–å¾—ãƒ•ã‚©ãƒ«ãƒ€å(é…åˆ—)
         '                                               2006.05.15 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' Žw’è‚µ‚½ƒfƒBƒŒƒNƒgƒŠ‚ÌƒtƒHƒ‹ƒ_–¼(•¡”)‚ðŽæ“¾
+        ''' æŒ‡å®šã—ãŸãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã®ãƒ•ã‚©ãƒ«ãƒ€å(è¤‡æ•°)ã‚’å–å¾—
         ''' </summary>
-        ''' <param name="prmDir">ƒfƒBƒŒƒNƒgƒŠ–¼</param>
-        ''' <returns>Žæ“¾ƒtƒHƒ‹ƒ_–¼(”z—ñ)</returns>
+        ''' <param name="prmDir">ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªå</param>
+        ''' <returns>å–å¾—ãƒ•ã‚©ãƒ«ãƒ€å(é…åˆ—)</returns>
         ''' <remarks></remarks>
         Public Function getDirectories(ByVal prmDir As String) As String()
             Dim strDirectories() As String = Directory.GetDirectories(prmDir)
@@ -124,17 +124,17 @@ Namespace FileDirectory
         End Function
 
         '-------------------------------------------------------------------------------
-        '   ƒTƒuƒfƒBƒŒƒNƒgƒŠŽæ“¾
-        '   iˆ—ŠT—vjŽw’è‚µ‚½ƒfƒBƒŒƒNƒgƒŠ”z‰º‚É‘¶Ý‚·‚éƒTƒuƒfƒBƒŒƒNƒgƒŠ‚ð‘S‚ÄŽæ“¾‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^   FprmDir  ƒfƒBƒŒƒNƒgƒŠ–¼
-        '   œƒƒ\ƒbƒh–ß‚è’l FŽæ“¾ƒfƒBƒŒƒNƒgƒŠ–¼(”z—ñ)
+        '   ã‚µãƒ–ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªå–å¾—
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰æŒ‡å®šã—ãŸãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªé…ä¸‹ã«å­˜åœ¨ã™ã‚‹ã‚µãƒ–ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’å…¨ã¦å–å¾—ã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šprmDir  ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªå
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šå–å¾—ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªå(é…åˆ—)
         '                                               2006.05.15 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' Žw’è‚µ‚½ƒfƒBƒŒƒNƒgƒŠ”z‰º‚É‘¶Ý‚·‚éƒTƒuƒfƒBƒŒƒNƒgƒŠ‚ð‘S‚ÄŽæ“¾‚·‚é
+        ''' æŒ‡å®šã—ãŸãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªé…ä¸‹ã«å­˜åœ¨ã™ã‚‹ã‚µãƒ–ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’å…¨ã¦å–å¾—ã™ã‚‹
         ''' </summary>
-        ''' <param name="prmDir">ƒfƒBƒŒƒNƒgƒŠ–¼</param>
-        ''' <returns>Žæ“¾ƒfƒBƒŒƒNƒgƒŠ–¼(”z—ñ)</returns>
+        ''' <param name="prmDir">ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªå</param>
+        ''' <returns>å–å¾—ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªå(é…åˆ—)</returns>
         ''' <remarks></remarks>
         Public Function getSugDirectories(ByVal prmDir As String) As String()
             Dim ret() As String
@@ -152,13 +152,13 @@ Namespace FileDirectory
             Return ret
 
         End Function
-        '¦“à•”ƒƒ\ƒbƒh
+        'â€»å†…éƒ¨ãƒ¡ã‚½ãƒƒãƒ‰
         Private Sub getSubDirectories(ByVal prmSearchDir As String, ByRef prmFindDirs As ArrayList)
-            'ƒTƒuƒtƒHƒ‹ƒ_‚ðŽæ“¾
+            'ã‚µãƒ–ãƒ•ã‚©ãƒ«ãƒ€ã‚’å–å¾—
             Dim dir As String
             For Each dir In Directory.GetDirectories(prmSearchDir)
-                prmFindDirs.Add(dir)                    'ArrayList‚ÉƒtƒHƒ‹ƒ_’Ç‰Á
-                Me.getSubDirectories(dir, prmFindDirs)  'Ä‹AŒÄ‚Ño‚µ
+                prmFindDirs.Add(dir)                    'ArrayListã«ãƒ•ã‚©ãƒ«ãƒ€è¿½åŠ 
+                Me.getSubDirectories(dir, prmFindDirs)  'å†å¸°å‘¼ã³å‡ºã—
             Next
         End Sub
 

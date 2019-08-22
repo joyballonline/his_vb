@@ -1,50 +1,50 @@
-'===============================================================================
+ï»¿'===============================================================================
 '
-'  ƒ†[ƒeƒBƒŠƒeƒBƒNƒ‰ƒX
-'    iƒNƒ‰ƒX–¼j    UtilProgresBarCancelable
-'    iˆ—‹@”\–¼j      “r’†ƒLƒƒƒ“ƒZƒ‹‰Â”\‚ÈƒvƒƒOƒŒƒXƒo[‰æ–Ê‹@”\‚ğ’ñ‹Ÿ‚·‚é
-'    i–{MDLg—p‘O’ñj   ƒvƒƒWƒFƒNƒg‚ÉUtilProgressBar‚ªæ‚Ü‚ê‚Ä‚¢‚é‚±‚Æ
-'    i”õlj            
-'    ig—p•û–@j       'ƒvƒƒOƒŒƒXƒo[‰æ–Ê‚ğ•\¦
+'  ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£ã‚¯ãƒ©ã‚¹
+'    ï¼ˆã‚¯ãƒ©ã‚¹åï¼‰    UtilProgresBarCancelable
+'    ï¼ˆå‡¦ç†æ©Ÿèƒ½åï¼‰      é€”ä¸­ã‚­ãƒ£ãƒ³ã‚»ãƒ«å¯èƒ½ãªãƒ—ãƒ­ã‚°ãƒ¬ã‚¹ãƒãƒ¼ç”»é¢æ©Ÿèƒ½ã‚’æä¾›ã™ã‚‹
+'    ï¼ˆæœ¬MDLä½¿ç”¨å‰æï¼‰   ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã«UtilProgressBarãŒå–è¾¼ã¾ã‚Œã¦ã„ã‚‹ã“ã¨
+'    ï¼ˆå‚™è€ƒï¼‰            
+'    ï¼ˆä½¿ç”¨æ–¹æ³•ï¼‰       'ãƒ—ãƒ­ã‚°ãƒ¬ã‚¹ãƒãƒ¼ç”»é¢ã‚’è¡¨ç¤º
 '                       Dim pb As UtilProgressBar = New UtilProgressBar(Me)
 '                       pb.Show()
 '
-'                       'ƒvƒƒOƒŒƒXƒo[İ’è
-'                       pb.jobName = "o—Íƒf[ƒ^‚ğ¶¬‚µ‚Ä‚¢‚Ü‚·B"
-'                       pb.status = "‰Šú‰»’†DDD"
+'                       'ãƒ—ãƒ­ã‚°ãƒ¬ã‚¹ãƒãƒ¼è¨­å®š
+'                       pb.jobName = "å‡ºåŠ›ãƒ‡ãƒ¼ã‚¿ã‚’ç”Ÿæˆã—ã¦ã„ã¾ã™ã€‚"
+'                       pb.status = "åˆæœŸåŒ–ä¸­ï¼ï¼ï¼"
 '
-'                       '¡Àˆ—
+'                       'â– å®Ÿå‡¦ç†
 '
-'                       'ƒvƒƒOƒŒƒXƒo[’lİ’è
-'                       pb.status = "o—Í’†DDD"
+'                       'ãƒ—ãƒ­ã‚°ãƒ¬ã‚¹ãƒãƒ¼å€¤è¨­å®š
+'                       pb.status = "å‡ºåŠ›ä¸­ï¼ï¼ï¼"
 '                       pb.oneStep = 10
 '                       pb.maxVal = rtnCnt
 '                       For i As Integer = 0 To rtnCnt - 1
-'                           pb.value = i 'ƒvƒƒOƒŒƒXƒo[’lİ’è
+'                           pb.value = i 'ãƒ—ãƒ­ã‚°ãƒ¬ã‚¹ãƒãƒ¼å€¤è¨­å®š
 '
-'                           '¡Àˆ—
+'                           'â– å®Ÿå‡¦ç†
 '                       
 '                       Next
 '                       
-'                       '‰æ–ÊÁ‹
+'                       'ç”»é¢æ¶ˆå»
 '                       pb.Close()
 '
 '===============================================================================
-'  —š—ğ  –¼‘O          “ú  •t      ƒ}[ƒN      “à—e
+'  å±¥æ­´  åå‰          æ—¥  ä»˜      ãƒãƒ¼ã‚¯      å†…å®¹
 '-------------------------------------------------------------------------------
-'  (1)   Laevigata, Inc.    2010/12/07              V‹K
+'  (1)   Laevigata, Inc.    2010/12/07              æ–°è¦
 '-------------------------------------------------------------------------------
 'Public Class UtilProgresBarCancelable
 
 '    '===============================================================================
-'    'ƒƒ“ƒo[•Ï”’è‹`
+'    'ãƒ¡ãƒ³ãƒãƒ¼å¤‰æ•°å®šç¾©
 '    '===============================================================================
 '    Private _pb As myProgressBar = Nothing
 
 '    '===============================================================================
-'    'ƒvƒƒpƒeƒB(ƒAƒNƒZƒT)
+'    'ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£(ã‚¢ã‚¯ã‚»ã‚µ)
 '    '===============================================================================
-'    'Windowƒ^ƒCƒgƒ‹
+'    'Windowã‚¿ã‚¤ãƒˆãƒ«
 '    Public Property windowTitle() As String
 '        Get
 '            Return _pb.windowTitle
@@ -53,7 +53,7 @@
 '            _pb.windowTitle = value
 '        End Set
 '    End Property
-'    'ˆ—–¼
+'    'å‡¦ç†å
 '    Public Property jobName() As String
 '        Get
 '            Return _pb.jobName
@@ -62,7 +62,7 @@
 '            _pb.jobName = value
 '        End Set
 '    End Property
-'    'ˆ—ó‘Ô
+'    'å‡¦ç†çŠ¶æ…‹
 '    Public Property status() As String
 '        Get
 '            Return _pb.status
@@ -71,7 +71,7 @@
 '            _pb.status = value
 '        End Set
 '    End Property
-'    'Å‘å’l
+'    'æœ€å¤§å€¤
 '    Public Property maxVal() As Integer
 '        Get
 '            Return _pb.maxVal
@@ -80,7 +80,7 @@
 '            _pb.maxVal = value
 '        End Set
 '    End Property
-'    'Å¬’l
+'    'æœ€å°å€¤
 '    Public Property minVal() As Integer
 '        Get
 '            Return _pb.minVal
@@ -89,7 +89,7 @@
 '            _pb.minVal = value
 '        End Set
 '    End Property
-'    'ƒXƒeƒbƒv—Ê
+'    'ã‚¹ãƒ†ãƒƒãƒ—é‡
 '    Public Property oneStep() As Integer
 '        Get
 '            Return _pb.oneStep
@@ -98,7 +98,7 @@
 '            _pb.oneStep = value
 '        End Set
 '    End Property
-'    'i’»ó‘Ô
+'    'é€²æ—çŠ¶æ…‹
 '    Public Property value() As Integer
 '        Get
 '            Return _pb.value
@@ -106,7 +106,7 @@
 '        Set(ByVal value As Integer)
 
 '            'If _flgCancel Then
-'            '    Throw New UsrDefException("ƒLƒƒƒ“ƒZƒ‹‚³‚ê‚Ü‚µ‚½B")
+'            '    Throw New UsrDefException("ã‚­ãƒ£ãƒ³ã‚»ãƒ«ã•ã‚Œã¾ã—ãŸã€‚")
 '            'End If
 
 '            _pb.value = value
@@ -125,21 +125,21 @@
 '    'End Property
 
 '    '-------------------------------------------------------------------------------
-'    'ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+'    'ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 '    '-------------------------------------------------------------------------------
 '    Public Sub New(ByRef prmRefParentForm As Form)
 '        _pb = New myProgressBar(prmRefParentForm, Me)
 '    End Sub
 
 '    '-------------------------------------------------------------------------------
-'    '‰æ–Ê•\¦
+'    'ç”»é¢è¡¨ç¤º
 '    '-------------------------------------------------------------------------------
 '    Public Sub Show()
 '        _pb.Show()
 '    End Sub
 
 '    '-------------------------------------------------------------------------------
-'    '‰æ–ÊÁ‹
+'    'ç”»é¢æ¶ˆå»
 '    '-------------------------------------------------------------------------------
 '    Public Sub Close()
 '        _pb.Close()
@@ -151,15 +151,15 @@
 
 '===============================================================================
 '
-'  ƒ†[ƒeƒBƒŠƒeƒBƒNƒ‰ƒX
-'    iƒNƒ‰ƒX–¼j    myProgressBar
-'    iˆ—‹@”\–¼j      ƒLƒƒƒ“ƒZƒ‹ƒ{ƒ^ƒ“‚ğ•Û‚µ‚½ƒvƒƒOƒŒƒXƒo[‰æ–Ê
-'    i–{MDLg—p‘O’ñj   UtilProgresBarCancelable‚ÆƒZƒbƒg‚Åg—p‚·‚é
-'    i”õlj            
+'  ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£ã‚¯ãƒ©ã‚¹
+'    ï¼ˆã‚¯ãƒ©ã‚¹åï¼‰    myProgressBar
+'    ï¼ˆå‡¦ç†æ©Ÿèƒ½åï¼‰      ã‚­ãƒ£ãƒ³ã‚»ãƒ«ãƒœã‚¿ãƒ³ã‚’ä¿æŒã—ãŸãƒ—ãƒ­ã‚°ãƒ¬ã‚¹ãƒãƒ¼ç”»é¢
+'    ï¼ˆæœ¬MDLä½¿ç”¨å‰æï¼‰   UtilProgresBarCancelableã¨ã‚»ãƒƒãƒˆã§ä½¿ç”¨ã™ã‚‹
+'    ï¼ˆå‚™è€ƒï¼‰            
 '===============================================================================
-'  —š—ğ  –¼‘O          “ú  •t      ƒ}[ƒN      “à—e
+'  å±¥æ­´  åå‰          æ—¥  ä»˜      ãƒãƒ¼ã‚¯      å†…å®¹
 '-------------------------------------------------------------------------------
-'  (1)   Laevigata, Inc.    2010/12/07              V‹K
+'  (1)   Laevigata, Inc.    2010/12/07              æ–°è¦
 '-------------------------------------------------------------------------------
 'Public Class myProgressBar
 Public Class UtilProgresBarCancelable
@@ -178,13 +178,13 @@ Public Class UtilProgresBarCancelable
 
         '        _hd = parentHandler
 
-        'ƒLƒƒƒ“ƒZƒ‹ƒ{ƒ^ƒ“‚Ì’Ç‰Á
+        'ã‚­ãƒ£ãƒ³ã‚»ãƒ«ãƒœã‚¿ãƒ³ã®è¿½åŠ 
         btnCancel = New System.Windows.Forms.Button
         btnCancel.Location = New System.Drawing.Point(367, 117)
         btnCancel.Name = "btnCancel"
         btnCancel.Size = New System.Drawing.Size(101, 23)
         btnCancel.TabIndex = 1
-        btnCancel.Text = "ƒLƒƒƒ“ƒZƒ‹(&C)"
+        btnCancel.Text = "ã‚­ãƒ£ãƒ³ã‚»ãƒ«(&C)"
         btnCancel.UseVisualStyleBackColor = True
         btnCancel.Cursor = Cursors.Default
         Me.Controls.Add(btnCancel)
@@ -196,7 +196,7 @@ Public Class UtilProgresBarCancelable
 
     Public Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
         '_hd.noticeCancel = True
-        Throw New UtilProgressBarCancelEx("ƒLƒƒƒ“ƒZƒ‹Às")
+        Throw New UtilProgressBarCancelEx("ã‚­ãƒ£ãƒ³ã‚»ãƒ«å®Ÿè¡Œ")
     End Sub
 
     'Private Sub btnCancel_MouseHover(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnCancel.MouseHover

@@ -1,17 +1,17 @@
-Imports System.Text
+ï»¿Imports System.Text
 Namespace API
     ''' <summary>
-    ''' ƒ†[ƒeƒBƒŠƒeƒBƒ‚ƒWƒ…[ƒ‹
+    ''' ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«
     ''' </summary>
     ''' <remarks></remarks>
     Public Class UtilDirectorySelector
         '===============================================================================
         '
-        '  ƒ†[ƒeƒBƒŠƒeƒBƒ‚ƒWƒ…[ƒ‹
-        '    iƒ‚ƒWƒ…[ƒ‹–¼j   UtilDirectorySelector
-        '    iˆ—‹@”\–¼j     ƒtƒHƒ‹ƒ_‘I‘ðƒ_ƒCƒAƒƒO‚ÉŠÖ‚·‚é‹@”\‚ð’ñ‹Ÿ‚·‚é
-        '    i–{MDLŽg—p‘O’ñj  “Á‚É–³‚µ
-        '    i”õlj           ˆÈ‰ºAPIŽg—p
+        '  ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«
+        '    ï¼ˆãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«åï¼‰   UtilDirectorySelector
+        '    ï¼ˆå‡¦ç†æ©Ÿèƒ½åï¼‰     ãƒ•ã‚©ãƒ«ãƒ€é¸æŠžãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã«é–¢ã™ã‚‹æ©Ÿèƒ½ã‚’æä¾›ã™ã‚‹
+        '    ï¼ˆæœ¬MDLä½¿ç”¨å‰æï¼‰  ç‰¹ã«ç„¡ã—
+        '    ï¼ˆå‚™è€ƒï¼‰           ä»¥ä¸‹APIä½¿ç”¨
         '                           shell32.SHBrowseForFolder
         '                           shell32.SHGetPathFromIDList
         '                           shell32.#195
@@ -20,13 +20,13 @@ Namespace API
         '
         '
         '===============================================================================
-        '  —š—ð  –¼‘O          “ú  •t      ƒ}[ƒN      “à—e
+        '  å±¥æ­´  åå‰          æ—¥  ä»˜      ãƒžãƒ¼ã‚¯      å†…å®¹
         '-------------------------------------------------------------------------------
-        '  (1)   Laevigata, Inc.    2006/05/11              V‹K
+        '  (1)   Laevigata, Inc.    2006/05/11              æ–°è¦
         '-------------------------------------------------------------------------------
 
         '===============================================================================
-        'API’è‹`
+        'APIå®šç¾©
         '===============================================================================
         Private Declare Function SHBrowseForFolder Lib "shell32" (ByRef lpbi As BROWSEINFO) As Integer
         Private Declare Function SHGetPathFromIDList Lib "shell32" _
@@ -36,62 +36,62 @@ Namespace API
                  ByVal wParam As Integer, ByVal lParam As String) As Integer
         Private Declare Function SHFree Lib "shell32" Alias "#195" (ByVal pidl As Integer) As Integer
         Private Declare Function GetDesktopWindow Lib "user32" () As Integer
-        'SHBrowseForFolder API ‚ÌƒR[ƒ‹ƒoƒbƒNŠÖ”—p‚ÌDelegate
+        'SHBrowseForFolder API ã®ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯é–¢æ•°ç”¨ã®Delegate
         Private Delegate Function CallbackDelegate(ByVal lngHWnd As Integer, ByVal lngUMsg As Integer,
                                     ByVal lngLParam As Integer, ByVal lngLpData As String) As Integer
 
         '===============================================================================
-        '’è”’è‹`
+        'å®šæ•°å®šç¾©
         '===============================================================================
         Private Const MAX_PATH As Integer = 260
-        Private Const BFFM_SETSTATUSTEXTA As Integer = &H464&   ' ƒXƒe[ƒ^ƒXƒeƒLƒXƒg
-        Private Const BFFM_ENABLEOK As Integer = &H465&         ' OK ƒ{ƒ^ƒ“‚ÌŽg—p‰Â”Û
-        Private Const BFFM_SETSELECTIONA As Integer = &H466&    ' ƒAƒCƒeƒ€‚ð‘I‘ð
+        Private Const BFFM_SETSTATUSTEXTA As Integer = &H464&   ' ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ãƒ†ã‚­ã‚¹ãƒˆ
+        Private Const BFFM_ENABLEOK As Integer = &H465&         ' OK ãƒœã‚¿ãƒ³ã®ä½¿ç”¨å¯å¦
+        Private Const BFFM_SETSELECTIONA As Integer = &H466&    ' ã‚¢ã‚¤ãƒ†ãƒ ã‚’é¸æŠž
         Private Const BFFM_INITIALIZED As Integer = &H1&
         Private Const BFFM_SELCHANGED As Integer = &H2&
 
         '===============================================================================
-        'ƒ†[ƒU[’è‹`Œ^’è‹`
+        'ãƒ¦ãƒ¼ã‚¶ãƒ¼å®šç¾©åž‹å®šç¾©
         '===============================================================================
         Private Structure RECT
-            Public left As Integer    'Window‚ÌXÀ•W
-            Public top As Integer     'Window‚ÌYÀ•W
-            Public right As Integer   'Window‚Ì‰E’[‚ÌÀ•W
-            Public bottom As Integer  'Window‚Ì’ê‚É‚ ‚½‚é•”•ª‚ÌÀ•W
+            Public left As Integer    'Windowã®Xåº§æ¨™
+            Public top As Integer     'Windowã®Yåº§æ¨™
+            Public right As Integer   'Windowã®å³ç«¯ã®åº§æ¨™
+            Public bottom As Integer  'Windowã®åº•ã«ã‚ãŸã‚‹éƒ¨åˆ†ã®åº§æ¨™
         End Structure
         Private Structure BROWSEINFO
-            Public hWndOwner As Integer         'ƒ_ƒCƒAƒƒO‚ÌeƒEƒBƒ“ƒhƒE‚Ìƒnƒ“ƒhƒ‹
-            Public pidlRoot As Integer          'ƒfƒBƒŒƒNƒgƒŠƒcƒŠ[‚Ìƒ‹[ƒg
+            Public hWndOwner As Integer         'ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã®è¦ªã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ãƒãƒ³ãƒ‰ãƒ«
+            Public pidlRoot As Integer          'ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªãƒ„ãƒªãƒ¼ã®ãƒ«ãƒ¼ãƒˆ
             Public pszDisplayName As String     'MAX_PATH
-            Public lpszTitle As String          'ƒ_ƒCƒAƒƒO‚Ìà–¾•¶
+            Public lpszTitle As String          'ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã®èª¬æ˜Žæ–‡
             Public ulFlags As Integer           'FLG_FOLDER
-            Public lpfn As CallbackDelegate              'ƒR[ƒ‹ƒoƒbƒNŠÖ”‚Ö‚Ìƒ|ƒCƒ“ƒ^
-            Public lParam As String             'ƒR[ƒ‹ƒoƒbƒNŠÖ”‚Ö‚Ìƒpƒ‰ƒ[ƒ^
-            Public iImage As Integer            'ƒtƒHƒ‹ƒ_[ƒAƒCƒRƒ“‚ÌƒVƒXƒeƒ€ƒCƒ[ƒWƒŠƒXƒg
+            Public lpfn As CallbackDelegate              'ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯é–¢æ•°ã¸ã®ãƒã‚¤ãƒ³ã‚¿
+            Public lParam As String             'ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯é–¢æ•°ã¸ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
+            Public iImage As Integer            'ãƒ•ã‚©ãƒ«ãƒ€ãƒ¼ã‚¢ã‚¤ã‚³ãƒ³ã®ã‚·ã‚¹ãƒ†ãƒ ã‚¤ãƒ¡ãƒ¼ã‚¸ãƒªã‚¹ãƒˆ
         End Structure
 
         '===============================================================================
-        '—ñ‹“Œ^’è‹`
+        'åˆ—æŒ™åž‹å®šç¾©
         '===============================================================================
         Public Enum ROOT
-            DESKTOP = &H0&                        ' ƒfƒXƒNƒgƒbƒv
-            INTERNET = &H1&                       ' ƒCƒ“ƒ^[ƒlƒbƒg
+            DESKTOP = &H0&                        ' ãƒ‡ã‚¹ã‚¯ãƒˆãƒƒãƒ—
+            INTERNET = &H1&                       ' ã‚¤ãƒ³ã‚¿ãƒ¼ãƒãƒƒãƒˆ
             PROGRAMS = &H2&                       ' Program Files
-            CONTROLS = &H3&                       ' ƒRƒ“ƒgƒ[ƒ‹ƒpƒlƒ‹
-            PRINTERS = &H4&                       ' ƒvƒŠƒ“ƒ^
-            PERSONAL = &H5&                       ' ƒhƒLƒ…ƒƒ“ƒgƒtƒHƒ‹ƒ_[
-            FAVORITES = &H6&                      ' ‚¨‹C‚É“ü‚è
-            STARTUP = &H7&                        ' ƒXƒ^[ƒgƒAƒbƒv
-            RECENT = &H8&                         ' Å‹ßŽg‚Á‚½ƒtƒ@ƒCƒ‹
-            SENDTO = &H9&                         ' ‘—‚é
-            BITBUCKET = &HA&                      ' ‚²‚Ý” 
-            STARTMENU = &HB&                      ' ƒXƒ^[ƒgƒƒjƒ…[
-            DESKTOPDIRECTORY = &H10&              ' ƒfƒXƒNƒgƒbƒvƒtƒHƒ‹ƒ_[
-            DRIVES = &H11&                        ' ƒ}ƒCƒRƒ“ƒsƒ…[ƒ^
-            NETWORK = &H12&                       ' ƒlƒbƒgƒ[ƒN(ƒlƒbƒgƒ[ƒN‘S‘Ì‚ ‚è)
-            NETHOOD = &H13&                       ' NETHOOD ƒtƒHƒ‹ƒ_[
-            FONTS = &H14&                         ' ƒtƒHƒ“ƒg
-            TEMPLATES = &H15&                     ' ƒeƒ“ƒvƒŒ[ƒg
+            CONTROLS = &H3&                       ' ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ãƒ‘ãƒãƒ«
+            PRINTERS = &H4&                       ' ãƒ—ãƒªãƒ³ã‚¿
+            PERSONAL = &H5&                       ' ãƒ‰ã‚­ãƒ¥ãƒ¡ãƒ³ãƒˆãƒ•ã‚©ãƒ«ãƒ€ãƒ¼
+            FAVORITES = &H6&                      ' ãŠæ°—ã«å…¥ã‚Š
+            STARTUP = &H7&                        ' ã‚¹ã‚¿ãƒ¼ãƒˆã‚¢ãƒƒãƒ—
+            RECENT = &H8&                         ' æœ€è¿‘ä½¿ã£ãŸãƒ•ã‚¡ã‚¤ãƒ«
+            SENDTO = &H9&                         ' é€ã‚‹
+            BITBUCKET = &HA&                      ' ã”ã¿ç®±
+            STARTMENU = &HB&                      ' ã‚¹ã‚¿ãƒ¼ãƒˆãƒ¡ãƒ‹ãƒ¥ãƒ¼
+            DESKTOPDIRECTORY = &H10&              ' ãƒ‡ã‚¹ã‚¯ãƒˆãƒƒãƒ—ãƒ•ã‚©ãƒ«ãƒ€ãƒ¼
+            DRIVES = &H11&                        ' ãƒžã‚¤ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ã‚¿
+            NETWORK = &H12&                       ' ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯(ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯å…¨ä½“ã‚ã‚Š)
+            NETHOOD = &H13&                       ' NETHOOD ãƒ•ã‚©ãƒ«ãƒ€ãƒ¼
+            FONTS = &H14&                         ' ãƒ•ã‚©ãƒ³ãƒˆ
+            TEMPLATES = &H15&                     ' ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆ
             COMMON_STARTMENU = &H16&              '
             COMMON_PROGRAMS = &H17&               '
             COMMON_STARTUP = &H18&                '
@@ -106,43 +106,43 @@ Namespace API
             HISTORY = &H22&                       '
         End Enum
         Public Enum FLG_FOLDER
-            RETURNONLYFSDIRS = &H1&          ' ƒtƒHƒ‹ƒ_‚Ì‚Ý
-            DONTGOBELOWDOMAIN = &H2&         ' ƒlƒbƒgƒ[ƒNƒRƒ“ƒsƒ…[ƒ^[‚ð”ñ•\Ž¦
-            STATUSTEXT = &H4&                ' ƒXƒe[ƒ^ƒX•\Ž¦
+            RETURNONLYFSDIRS = &H1&          ' ãƒ•ã‚©ãƒ«ãƒ€ã®ã¿
+            DONTGOBELOWDOMAIN = &H2&         ' ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ã‚¿ãƒ¼ã‚’éžè¡¨ç¤º
+            STATUSTEXT = &H4&                ' ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹è¡¨ç¤º
             RETURNFSANCESTORS = &H8&
-            BROWSEFORCOMPUTER = &H1000&      ' ƒlƒbƒgƒ[ƒNƒRƒ“ƒsƒ…[ƒ^[‚Ì‚Ý
-            BROWSEFORPRINTER = &H2000&       ' ƒvƒŠƒ“ƒ^[‚Ì‚Ý
-            BROWSEINCLUDEFILES = &H4000&     ' ‘S‚Ä‘I‘ð‰Â”\
+            BROWSEFORCOMPUTER = &H1000&      ' ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ã‚¿ãƒ¼ã®ã¿
+            BROWSEFORPRINTER = &H2000&       ' ãƒ—ãƒªãƒ³ã‚¿ãƒ¼ã®ã¿
+            BROWSEINCLUDEFILES = &H4000&     ' å…¨ã¦é¸æŠžå¯èƒ½
         End Enum
 
         '-------------------------------------------------------------------------------
-        '@ ƒtƒHƒ‹ƒ_‘I‘ðƒ_ƒCƒAƒƒO•\Ž¦
-        '   iˆ—ŠT—vjƒtƒHƒ‹ƒ_‘I‘ðƒ_ƒCƒAƒƒO‚ð•\Ž¦‚µAƒ†[ƒU[“ü—Í’l‚ð•Ô‹p‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^F<prmDefaultDir> ƒfƒtƒHƒ‹ƒgƒtƒHƒ‹ƒ_
-        '                 F<prmTitle>      ƒ_ƒCƒAƒƒO‚É•\Ž¦‚·‚éà–¾•¶
-        '                 F<prmRoot>       ƒ‹[ƒgˆÊ’u(ROOT‚Ì’è”/‰Šú’l=DESKTOP)
-        '                 F<prmFlg>        •\Ž¦ƒtƒHƒ‹ƒ_ƒIƒvƒVƒ‡ƒ“(FLG_FOLDER‚Ì’è”/‰Šú’l=RETURNONLYFSDIRS)
-        '                 F<prmWHwnd>      ƒ_ƒCƒAƒƒO‚ÌƒI[ƒi[ƒEƒBƒ“ƒhƒEƒnƒ“ƒhƒ‹
-        '   œŠÖ”–ß‚è’l@F³íI—¹ŽžF‘I‘ðƒtƒHƒ‹ƒ_ƒtƒ‹ƒpƒX / ƒLƒƒƒ“ƒZƒ‹ŽžF""
-        '   œ‚»‚Ì‘¼@@@FˆÈ‰ºAForm‚É‚¨‚¯‚éŽg—p—á
-        '                        Dim RtnDir As String = UtilDirectorySelector.choiceFolder("C:\WINDOWS", "››‚ÌƒtƒHƒ‹ƒ_‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢B")
+        'ã€€ ãƒ•ã‚©ãƒ«ãƒ€é¸æŠžãƒ€ã‚¤ã‚¢ãƒ­ã‚°è¡¨ç¤º
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰ãƒ•ã‚©ãƒ«ãƒ€é¸æŠžãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚’è¡¨ç¤ºã—ã€ãƒ¦ãƒ¼ã‚¶ãƒ¼å…¥åŠ›å€¤ã‚’è¿”å´ã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿ï¼š<prmDefaultDir> ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆãƒ•ã‚©ãƒ«ãƒ€
+        '                 ï¼š<prmTitle>      ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã«è¡¨ç¤ºã™ã‚‹èª¬æ˜Žæ–‡
+        '                 ï¼š<prmRoot>       ãƒ«ãƒ¼ãƒˆä½ç½®(ROOTã®å®šæ•°/åˆæœŸå€¤=DESKTOP)
+        '                 ï¼š<prmFlg>        è¡¨ç¤ºãƒ•ã‚©ãƒ«ãƒ€ã‚ªãƒ—ã‚·ãƒ§ãƒ³(FLG_FOLDERã®å®šæ•°/åˆæœŸå€¤=RETURNONLYFSDIRS)
+        '                 ï¼š<prmWHwnd>      ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã®ã‚ªãƒ¼ãƒŠãƒ¼ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«
+        '   â—é–¢æ•°æˆ»ã‚Šå€¤ã€€ï¼šæ­£å¸¸çµ‚äº†æ™‚ï¼šé¸æŠžãƒ•ã‚©ãƒ«ãƒ€ãƒ•ãƒ«ãƒ‘ã‚¹ / ã‚­ãƒ£ãƒ³ã‚»ãƒ«æ™‚ï¼š""
+        '   â—ãã®ä»–ã€€ã€€ã€€ï¼šä»¥ä¸‹ã€Formã«ãŠã‘ã‚‹ä½¿ç”¨ä¾‹
+        '                        Dim RtnDir As String = UtilDirectorySelector.choiceFolder("C:\WINDOWS", "â—‹â—‹ã®ãƒ•ã‚©ãƒ«ãƒ€ã‚’é¸æŠžã—ã¦ãã ã•ã„ã€‚")
         '                        MsgBox RtnDir
         '                                               2006.05.11 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------'
         ''' <summary>
-        ''' ƒtƒHƒ‹ƒ_‘I‘ðƒ_ƒCƒAƒƒO•\Ž¦
+        ''' ãƒ•ã‚©ãƒ«ãƒ€é¸æŠžãƒ€ã‚¤ã‚¢ãƒ­ã‚°è¡¨ç¤º
         ''' </summary>
-        ''' <param name="prmDefaultDir">ƒfƒtƒHƒ‹ƒgƒtƒHƒ‹ƒ_</param>
-        ''' <param name="prmTitle">ƒ_ƒCƒAƒƒO‚É•\Ž¦‚·‚éà–¾•¶</param>
-        ''' <param name="prmRoot">ƒ‹[ƒgˆÊ’u(ROOT‚Ì’è”/‰Šú’l=DESKTOP)</param>
-        ''' <param name="prmFlg">•\Ž¦ƒtƒHƒ‹ƒ_ƒIƒvƒVƒ‡ƒ“(FLG_FOLDER‚Ì’è”/‰Šú’l=RETURNONLYFSDIRS)</param>
-        ''' <param name="prmWHwnd">ƒ_ƒCƒAƒƒO‚ÌƒI[ƒi[ƒEƒBƒ“ƒhƒEƒnƒ“ƒhƒ‹</param>
-        ''' <returns>³íI—¹ŽžF‘I‘ðƒtƒHƒ‹ƒ_ƒtƒ‹ƒpƒX / ƒLƒƒƒ“ƒZƒ‹ŽžF""</returns>
-        ''' <remarks>ˆÈ‰ºAForm‚É‚¨‚¯‚éŽg—p—á
-        '''Dim RtnDir As String = UtilDirectorySelector.choiceFolder("C:\WINDOWS", "››‚ÌƒtƒHƒ‹ƒ_‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢B")
+        ''' <param name="prmDefaultDir">ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆãƒ•ã‚©ãƒ«ãƒ€</param>
+        ''' <param name="prmTitle">ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã«è¡¨ç¤ºã™ã‚‹èª¬æ˜Žæ–‡</param>
+        ''' <param name="prmRoot">ãƒ«ãƒ¼ãƒˆä½ç½®(ROOTã®å®šæ•°/åˆæœŸå€¤=DESKTOP)</param>
+        ''' <param name="prmFlg">è¡¨ç¤ºãƒ•ã‚©ãƒ«ãƒ€ã‚ªãƒ—ã‚·ãƒ§ãƒ³(FLG_FOLDERã®å®šæ•°/åˆæœŸå€¤=RETURNONLYFSDIRS)</param>
+        ''' <param name="prmWHwnd">ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã®ã‚ªãƒ¼ãƒŠãƒ¼ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«</param>
+        ''' <returns>æ­£å¸¸çµ‚äº†æ™‚ï¼šé¸æŠžãƒ•ã‚©ãƒ«ãƒ€ãƒ•ãƒ«ãƒ‘ã‚¹ / ã‚­ãƒ£ãƒ³ã‚»ãƒ«æ™‚ï¼š""</returns>
+        ''' <remarks>ä»¥ä¸‹ã€Formã«ãŠã‘ã‚‹ä½¿ç”¨ä¾‹
+        '''Dim RtnDir As String = UtilDirectorySelector.choiceFolder("C:\WINDOWS", "â—‹â—‹ã®ãƒ•ã‚©ãƒ«ãƒ€ã‚’é¸æŠžã—ã¦ãã ã•ã„ã€‚")
         ''' MsgBox RtnDir</remarks>
         Public Shared Function choiceFolder(Optional ByRef prmDefaultDir As String = vbNullString, _
-                                            Optional ByRef prmTitle As String = "ƒtƒHƒ‹ƒ_‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢", _
+                                            Optional ByRef prmTitle As String = "ãƒ•ã‚©ãƒ«ãƒ€ã‚’é¸æŠžã—ã¦ãã ã•ã„", _
                                             Optional ByVal prmRoot As ROOT = ROOT.DESKTOP, _
                                             Optional ByVal prmFlg As FLG_FOLDER = FLG_FOLDER.RETURNONLYFSDIRS, _
                                             Optional ByVal prmWHwnd As Integer = 0) As String
@@ -200,9 +200,9 @@ Namespace API
 
         End Function
 
-        'SHBrowseForFolder API ‚ÌƒR[ƒ‹ƒoƒbƒNŠÖ”’è‹`
+        'SHBrowseForFolder API ã®ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯é–¢æ•°å®šç¾©
         ''' <summary>
-        ''' SHBrowseForFolder API ‚ÌƒR[ƒ‹ƒoƒbƒNŠÖ”’è‹`
+        ''' SHBrowseForFolder API ã®ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯é–¢æ•°å®šç¾©
         ''' </summary>
         ''' <param name="lngHWnd"></param>
         ''' <param name="lngUMsg"></param>
@@ -215,18 +215,18 @@ Namespace API
             Select Case lngUMsg
                 Case BFFM_INITIALIZED
                     Dim text As String = lngLpData
-                    Dim source() As Byte                        '•ÏŠ·Œ³‚ÌƒoƒCƒg”z—ñ
-                    Dim encoded() As Byte                       '•ÏŠ·Œã‚ÌƒoƒCƒg”z—ñ
-                    source = Encoding.Unicode.GetBytes(text)    '•¶Žš—ñ‚ðƒoƒCƒg”z—ñ‚É•ÏŠ·
+                    Dim source() As Byte                        'å¤‰æ›å…ƒã®ãƒã‚¤ãƒˆé…åˆ—
+                    Dim encoded() As Byte                       'å¤‰æ›å¾Œã®ãƒã‚¤ãƒˆé…åˆ—
+                    source = Encoding.Unicode.GetBytes(text)    'æ–‡å­—åˆ—ã‚’ãƒã‚¤ãƒˆé…åˆ—ã«å¤‰æ›
                     encoded = Encoding.Convert(Encoding.Unicode, _
                                                Encoding.GetEncoding("shift_jis"), _
-                                               source)          'ƒR[ƒhƒy[ƒW‚ðUnicode‚©‚çƒVƒtƒgJIS‚É•ÏŠ·
+                                               source)          'ã‚³ãƒ¼ãƒ‰ãƒšãƒ¼ã‚¸ã‚’Unicodeã‹ã‚‰ã‚·ãƒ•ãƒˆJISã«å¤‰æ›
                     Call SendMessageStr(lngHWnd, _
                                         BFFM_SETSELECTIONA, _
                                         1&, _
                                         Encoding.GetEncoding("shift_jis").GetString(encoded))
                 Case BFFM_SELCHANGED
-                    'ITEM‚ª‘I‘ð‚³‚ê‚½Žž‚Éˆ—‚ðs‚¢‚½‚¢ê‡‚±‚±‚É‹Lq
+                    'ITEMãŒé¸æŠžã•ã‚ŒãŸæ™‚ã«å‡¦ç†ã‚’è¡Œã„ãŸã„å ´åˆã“ã“ã«è¨˜è¿°
             End Select
             BrowseCallbackProc = 0&
         End Function

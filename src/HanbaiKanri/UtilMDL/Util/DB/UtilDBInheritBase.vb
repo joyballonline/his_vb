@@ -1,37 +1,37 @@
-Namespace DB
+ï»¿Namespace DB
     '===============================================================================
     '
-    '  ƒ†[ƒeƒBƒŠƒeƒBƒNƒ‰ƒX
-    '    iƒNƒ‰ƒX–¼j    UtilDBInheritBase
-    '    iˆ—‹@”\–¼j     UtilDBIf‚É‚æ‚éDBƒAƒNƒZƒX‹@”\‚ğ’ñ‹Ÿ‚·‚é
-    '    i–{MDLg—p‘O’ñj  –{ƒNƒ‰ƒX‚ÍŒp³Œ³‚Æ‚·‚é‚±‚Æ‚ğ‘O’ñ‚Æ‚·‚é‚½‚ßA
-    '                       Œp³‚µ‚ÄƒTƒuƒNƒ‰ƒX‚ğ’è‹`‚·‚é‚±‚ÆB
-    '    i”õlj           EUtilDBIfƒCƒ“ƒ^[ƒtƒF[ƒX‚ğÀ‘•
-    '                       E–{ƒNƒ‰ƒX‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‰»‚Ís‚¦‚È‚¢
-    '                           ËƒTƒuƒNƒ‰ƒX‚ğƒCƒ“ƒXƒ^ƒ“ƒX‰»‚·‚é‚±‚Æ
-    '                       EMustOverride‚Èƒƒ“ƒo[‚ğOverrides‚·‚é‚±‚Æ
+    '  ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£ã‚¯ãƒ©ã‚¹
+    '    ï¼ˆã‚¯ãƒ©ã‚¹åï¼‰    UtilDBInheritBase
+    '    ï¼ˆå‡¦ç†æ©Ÿèƒ½åï¼‰     UtilDBIfã«ã‚ˆã‚‹DBã‚¢ã‚¯ã‚»ã‚¹æ©Ÿèƒ½ã‚’æä¾›ã™ã‚‹
+    '    ï¼ˆæœ¬MDLä½¿ç”¨å‰æï¼‰  æœ¬ã‚¯ãƒ©ã‚¹ã¯ç¶™æ‰¿å…ƒã¨ã™ã‚‹ã“ã¨ã‚’å‰æã¨ã™ã‚‹ãŸã‚ã€
+    '                       ç¶™æ‰¿ã—ã¦ã‚µãƒ–ã‚¯ãƒ©ã‚¹ã‚’å®šç¾©ã™ã‚‹ã“ã¨ã€‚
+    '    ï¼ˆå‚™è€ƒï¼‰           ãƒ»UtilDBIfã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹ã‚’å®Ÿè£…
+    '                       ãƒ»æœ¬ã‚¯ãƒ©ã‚¹ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹åŒ–ã¯è¡Œãˆãªã„
+    '                           â‡’ã‚µãƒ–ã‚¯ãƒ©ã‚¹ã‚’ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹åŒ–ã™ã‚‹ã“ã¨
+    '                       ãƒ»MustOverrideãªãƒ¡ãƒ³ãƒãƒ¼ã‚’Overridesã™ã‚‹ã“ã¨
     '
     '===============================================================================
-    '  —š—ğ  –¼‘O          “ú  •t      ƒ}[ƒN      “à—e
+    '  å±¥æ­´  åå‰          æ—¥  ä»˜      ãƒãƒ¼ã‚¯      å†…å®¹
     '-------------------------------------------------------------------------------
-    '  (1)   Laevigata, Inc.    2006/05/23              V‹K
-    '  (2)   Laevigata, Inc.    2010/08/26              SystemInfoƒe[ƒuƒ‹‚©‚ç‚Ìæ“¾‚É‘Î‰
+    '  (1)   Laevigata, Inc.    2006/05/23              æ–°è¦
+    '  (2)   Laevigata, Inc.    2010/08/26              SystemInfoãƒ†ãƒ¼ãƒ–ãƒ«ã‹ã‚‰ã®å–å¾—ã«å¯¾å¿œ
     '-------------------------------------------------------------------------------
     Public MustInherit Class UtilDBInheritBase
         Implements UtilDBIf
         '===============================================================================
-        'ƒƒ“ƒo[•Ï”’è‹`
+        'ãƒ¡ãƒ³ãƒãƒ¼å¤‰æ•°å®šç¾©
         '===============================================================================
-        '‚È‚µ
+        'ãªã—
 
 
         '===============================================================================
-        'ƒvƒƒpƒeƒB(ƒAƒNƒZƒT)
+        'ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£(ã‚¢ã‚¯ã‚»ã‚µ)
         '===============================================================================
 
-        'ƒgƒ‰ƒ“ƒUƒNƒVƒ‡ƒ“‚ªŠJ‚¢‚Ä‚¢‚é‚©‚Ç‚¤‚©‚ÌƒXƒe[ƒ^ƒX‚ğ–ß‚·
+        'ãƒˆãƒ©ãƒ³ã‚¶ã‚¯ã‚·ãƒ§ãƒ³ãŒé–‹ã„ã¦ã„ã‚‹ã‹ã©ã†ã‹ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚’æˆ»ã™
         ''' <summary>
-        ''' ƒgƒ‰ƒ“ƒUƒNƒVƒ‡ƒ“‚ªŠJ‚¢‚Ä‚¢‚é‚©‚Ç‚¤‚©‚ÌƒXƒe[ƒ^ƒX‚ğ–ß‚·
+        ''' ãƒˆãƒ©ãƒ³ã‚¶ã‚¯ã‚·ãƒ§ãƒ³ãŒé–‹ã„ã¦ã„ã‚‹ã‹ã©ã†ã‹ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚’æˆ»ã™
         ''' </summary>
         ''' <value></value>
         ''' <returns></returns>
@@ -39,78 +39,78 @@ Namespace DB
         Public MustOverride ReadOnly Property isTransactionOpen() As Boolean Implements UtilDBIf.isTransactionOpen
 
         '===============================================================================
-        ' ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        ' ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         '===============================================================================
-        '’ŠÛƒNƒ‰ƒX‚Å‚ ‚éˆ×‘¶İ‚µ‚È‚¢
+        'æŠ½è±¡ã‚¯ãƒ©ã‚¹ã§ã‚ã‚‹ç‚ºå­˜åœ¨ã—ãªã„
 
         '-------------------------------------------------------------------------------
-        '   DBØ’f
-        '   iˆ—ŠT—vjDBÚ‘±‚ğƒNƒ[ƒY‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^  F‚È‚µ
-        '   œƒƒ\ƒbƒh–ß‚è’lF‚È‚µ
+        '   DBåˆ‡æ–­
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰DBæ¥ç¶šã‚’ã‚¯ãƒ­ãƒ¼ã‚ºã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿  ï¼šãªã—
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ï¼šãªã—
         '                                               2006.05.23 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' DBÚ‘±‚ğƒNƒ[ƒY‚·‚é
+        ''' DBæ¥ç¶šã‚’ã‚¯ãƒ­ãƒ¼ã‚ºã™ã‚‹
         ''' </summary>
         ''' <remarks></remarks>
         Public MustOverride Sub close() Implements UtilDBIf.close
 
         '-------------------------------------------------------------------------------
-        '   ƒgƒ‰ƒ“ƒUƒNƒVƒ‡ƒ“ŠJn
-        '   iˆ—ŠT—v)@ƒgƒ‰ƒ“ƒUƒNƒVƒ‡ƒ“‚ğŠJn‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^  F‚È‚µ
-        '   œƒƒ\ƒbƒh–ß‚è’lF‚È‚µ
+        '   ãƒˆãƒ©ãƒ³ã‚¶ã‚¯ã‚·ãƒ§ãƒ³é–‹å§‹
+        '   ï¼ˆå‡¦ç†æ¦‚è¦)ã€€ãƒˆãƒ©ãƒ³ã‚¶ã‚¯ã‚·ãƒ§ãƒ³ã‚’é–‹å§‹ã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿  ï¼šãªã—
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ï¼šãªã—
         '                                               2006.05.23 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ƒgƒ‰ƒ“ƒUƒNƒVƒ‡ƒ“‚ğŠJn‚·‚é
+        ''' ãƒˆãƒ©ãƒ³ã‚¶ã‚¯ã‚·ãƒ§ãƒ³ã‚’é–‹å§‹ã™ã‚‹
         ''' </summary>
         ''' <remarks></remarks>
         Public MustOverride Sub beginTran() Implements UtilDBIf.beginTran
 
         '-------------------------------------------------------------------------------
-        '   ƒgƒ‰ƒ“ƒUƒNƒVƒ‡ƒ“I—¹
-        '   iˆ—ŠT—v)@ƒgƒ‰ƒ“ƒUƒNƒVƒ‡ƒ“‚ğCommit‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^  F‚È‚µ
-        '   œƒƒ\ƒbƒh–ß‚è’lF‚È‚µ
+        '   ãƒˆãƒ©ãƒ³ã‚¶ã‚¯ã‚·ãƒ§ãƒ³çµ‚äº†
+        '   ï¼ˆå‡¦ç†æ¦‚è¦)ã€€ãƒˆãƒ©ãƒ³ã‚¶ã‚¯ã‚·ãƒ§ãƒ³ã‚’Commitã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿  ï¼šãªã—
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ï¼šãªã—
         '                                               2006.05.23 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ƒgƒ‰ƒ“ƒUƒNƒVƒ‡ƒ“‚ğCommit‚·‚é
+        ''' ãƒˆãƒ©ãƒ³ã‚¶ã‚¯ã‚·ãƒ§ãƒ³ã‚’Commitã™ã‚‹
         ''' </summary>
         ''' <remarks></remarks>
         Public MustOverride Sub commitTran() Implements UtilDBIf.commitTran
 
         '-------------------------------------------------------------------------------
-        '   ƒgƒ‰ƒ“ƒUƒNƒVƒ‡ƒ“”jŠü
-        '   iˆ—ŠT—v)@ƒgƒ‰ƒ“ƒUƒNƒVƒ‡ƒ“‚ğRollback‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^  F‚È‚µ
-        '   œƒƒ\ƒbƒh–ß‚è’lF‚È‚µ
+        '   ãƒˆãƒ©ãƒ³ã‚¶ã‚¯ã‚·ãƒ§ãƒ³ç ´æ£„
+        '   ï¼ˆå‡¦ç†æ¦‚è¦)ã€€ãƒˆãƒ©ãƒ³ã‚¶ã‚¯ã‚·ãƒ§ãƒ³ã‚’Rollbackã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿  ï¼šãªã—
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ï¼šãªã—
         '                                               2006.05.23 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ƒgƒ‰ƒ“ƒUƒNƒVƒ‡ƒ“‚ğRollback‚·‚é
+        ''' ãƒˆãƒ©ãƒ³ã‚¶ã‚¯ã‚·ãƒ§ãƒ³ã‚’Rollbackã™ã‚‹
         ''' </summary>
         ''' <remarks></remarks>
         Public MustOverride Sub rollbackTran() Implements UtilDBIf.rollbackTran
 
         '-------------------------------------------------------------------------------
-        '   Select•¶”­s
-        '   iˆ—ŠT—vjSelect•¶‚ğ”­s‚µADataSet‚ğ•Ô‹p‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^  FprmSQL        Select•¶
-        '                  FprmTblName     •Ô‹p‚³‚ê‚éDataSet‚ÌTBL–¼Ì
-        '                  F<prmRefRecCnt> æ“¾Œ”
-        '   œƒƒ\ƒbƒh–ß‚è’lFDataSet
-        '   œ”õl          F•Ô‹p‚·‚éDataSet‚ÍprmTblName‚ÌTBL–¼Ì‚ÅŠi”[
+        '   Selectæ–‡ç™ºè¡Œ
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰Selectæ–‡ã‚’ç™ºè¡Œã—ã€DataSetã‚’è¿”å´ã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿  ï¼šprmSQL        Selectæ–‡
+        '                  ï¼šprmTblName     è¿”å´ã•ã‚Œã‚‹DataSetã®TBLåç§°
+        '                  ï¼š<prmRefRecCnt> å–å¾—ä»¶æ•°
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ï¼šDataSet
+        '   â—å‚™è€ƒ          ï¼šè¿”å´ã™ã‚‹DataSetã¯prmTblNameã®TBLåç§°ã§æ ¼ç´
         '                                               2006.05.23 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' Select•¶‚ğ”­s‚µADataSet‚ğ•Ô‹p‚·‚é
+        ''' Selectæ–‡ã‚’ç™ºè¡Œã—ã€DataSetã‚’è¿”å´ã™ã‚‹
         ''' </summary>
-        ''' <param name="prmSQL">Select•¶</param>
-        ''' <param name="prmTblName">•Ô‹p‚³‚ê‚éDataSet‚ÌTBL–¼Ì</param>
-        ''' <param name="prmRefRecCnt">æ“¾Œ”</param>
+        ''' <param name="prmSQL">Selectæ–‡</param>
+        ''' <param name="prmTblName">è¿”å´ã•ã‚Œã‚‹DataSetã®TBLåç§°</param>
+        ''' <param name="prmRefRecCnt">å–å¾—ä»¶æ•°</param>
         ''' <returns>DataSet</returns>
         ''' <remarks></remarks>
         Public MustOverride Function selectDB(ByVal prmSQL As String,
@@ -120,15 +120,15 @@ Namespace DB
                                                                            Implements UtilDBIf.selectDB
 
         '-------------------------------------------------------------------------------
-        '   Select•¶”­s
-        '   iˆ—ŠT—vj’uŠ·ƒpƒ‰ƒ[ƒ^•t‚«Select•¶‚ğ”­s‚µADataSet‚ğ•Ô‹p‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^  FprmSQL            ƒpƒ‰ƒ[ƒ^•t‚«Select•¶(’uŠ·ƒpƒ‰ƒƒ^‚Íu?v)
-        '                   FprmParameters     ’uŠ·ƒpƒ‰ƒ[ƒ^ƒŠƒXƒg
-        '                   FprmTblName        •Ô‹p‚³‚ê‚éDataSet‚ÌTBL–¼Ì
-        '                   F<prmRefRecCnt>    æ“¾Œ”
-        '   œƒƒ\ƒbƒh–ß‚è’lFDataSet
-        '   œ”õl          F•Ô‹p‚·‚éDataSet‚ÍprmTblName‚ÌTBL–¼Ì‚ÅŠi”[
-        '   œg—p—á
+        '   Selectæ–‡ç™ºè¡Œ
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰ç½®æ›ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ä»˜ãSelectæ–‡ã‚’ç™ºè¡Œã—ã€DataSetã‚’è¿”å´ã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿  ï¼šprmSQL            ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ä»˜ãSelectæ–‡(ç½®æ›ãƒ‘ãƒ©ãƒ¡ã‚¿ã¯ã€Œ?ã€)
+        '                   ï¼šprmParameters     ç½®æ›ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒªã‚¹ãƒˆ
+        '                   ï¼šprmTblName        è¿”å´ã•ã‚Œã‚‹DataSetã®TBLåç§°
+        '                   ï¼š<prmRefRecCnt>    å–å¾—ä»¶æ•°
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ï¼šDataSet
+        '   â—å‚™è€ƒ          ï¼šè¿”å´ã™ã‚‹DataSetã¯prmTblNameã®TBLåç§°ã§æ ¼ç´
+        '   â—ä½¿ç”¨ä¾‹
         '                     Dim rtnCnt As Integer = 0
         '                     Dim listPrm As List(Of UtilDBPrm) = New List(Of UtilDBPrm)
         '                         listPrm.Add(New UtilDBPrm(1, , UtilDBPrm.parameterType.tNumber))
@@ -144,14 +144,14 @@ Namespace DB
         '                                               2006.06.16 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ’uŠ·ƒpƒ‰ƒ[ƒ^•t‚«SELECT•¶‚ğ”­s‚·‚é (Ú×‚Íg—p—áQÆ)
+        ''' ç½®æ›ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ä»˜ãSELECTæ–‡ã‚’ç™ºè¡Œã™ã‚‹ (è©³ç´°ã¯ä½¿ç”¨ä¾‹å‚ç…§)
         ''' </summary>
-        ''' <param name="prmSQL">ƒpƒ‰ƒ[ƒ^•t‚«Select•¶(’uŠ·ƒpƒ‰ƒƒ^‚Íu?v)</param>
-        ''' <param name="prmParameters">’uŠ·ƒpƒ‰ƒ[ƒ^ƒŠƒXƒg</param>
-        ''' <param name="prmTblName">•Ô‹p‚³‚ê‚éDataSet‚ÌTABLE–¼Ì</param>
-        ''' <param name="prmRefRecCnt">È—ª‰Â”\FSELECT•¶‚Ìæ“¾ƒŒƒR[ƒhŒ”</param>
-        ''' <returns>æ“¾‚µ‚½ƒŒƒR[ƒhƒZƒbƒg‚ğDataSetƒIƒuƒWƒFƒNƒg‚Æ‚µ‚Ä•Ô‹p</returns>
-        ''' <remarks>SELECT•¶‚ğ”­s‚µAƒŒƒR[ƒhƒZƒbƒg‚ğæ“¾‚·‚éBæ“¾‚µ‚½ƒŒƒR[ƒhƒZƒbƒg‚ÍDataSetƒIƒuƒWƒFƒNƒg‚Æ‚µ‚Ä•Ô‹p‚·‚éB</remarks>
+        ''' <param name="prmSQL">ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ä»˜ãSelectæ–‡(ç½®æ›ãƒ‘ãƒ©ãƒ¡ã‚¿ã¯ã€Œ?ã€)</param>
+        ''' <param name="prmParameters">ç½®æ›ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒªã‚¹ãƒˆ</param>
+        ''' <param name="prmTblName">è¿”å´ã•ã‚Œã‚‹DataSetã®TABLEåç§°</param>
+        ''' <param name="prmRefRecCnt">çœç•¥å¯èƒ½ï¼šSELECTæ–‡ã®å–å¾—ãƒ¬ã‚³ãƒ¼ãƒ‰ä»¶æ•°</param>
+        ''' <returns>å–å¾—ã—ãŸãƒ¬ã‚³ãƒ¼ãƒ‰ã‚»ãƒƒãƒˆã‚’DataSetã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¨ã—ã¦è¿”å´</returns>
+        ''' <remarks>SELECTæ–‡ã‚’ç™ºè¡Œã—ã€ãƒ¬ã‚³ãƒ¼ãƒ‰ã‚»ãƒƒãƒˆã‚’å–å¾—ã™ã‚‹ã€‚å–å¾—ã—ãŸãƒ¬ã‚³ãƒ¼ãƒ‰ã‚»ãƒƒãƒˆã¯DataSetã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¨ã—ã¦è¿”å´ã™ã‚‹ã€‚</remarks>
         Public MustOverride Function selectDB(ByVal prmSQL As String,
                                               ByVal prmParameters As List(Of UtilDBPrm),
                                               ByVal prmTblName As String,
@@ -160,57 +160,57 @@ Namespace DB
                                                                              Implements UtilDBIf.selectDB
 
         '-------------------------------------------------------------------------------
-        '   XVSQL•¶”­s
-        '   iˆ—ŠT—vjInsert/Update/Delete•¶‚ğ”­s‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^  FprmSQL        SQL•¶
-        '   œƒƒ\ƒbƒh–ß‚è’lF‚È‚µ
+        '   æ›´æ–°SQLæ–‡ç™ºè¡Œ
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰Insert/Update/Deleteæ–‡ã‚’ç™ºè¡Œã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿  ï¼šprmSQL        SQLæ–‡
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ï¼šãªã—
         '                                               2006.05.23 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' Insert/Update/Delete•¶‚ğ”­s‚·‚é
+        ''' Insert/Update/Deleteæ–‡ã‚’ç™ºè¡Œã™ã‚‹
         ''' </summary>
-        ''' <param name="prmSQL">SQL•¶</param>
+        ''' <param name="prmSQL">SQLæ–‡</param>
         ''' <remarks></remarks>
         Public MustOverride Sub executeDB(ByVal prmSQL As String) Implements UtilDBIf.executeDB
 
         '-------------------------------------------------------------------------------
-        '   XVSQL•¶”­s
-        '   iˆ—ŠT—vjInsert/Update/Delete•¶‚ğ”­s‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^  FprmSQL                SQL•¶
-        '                   FprmRefAffectedRows    ‰e‹¿‚ğó‚¯‚½s”
-        '   œƒƒ\ƒbƒh–ß‚è’lF‚È‚µ
+        '   æ›´æ–°SQLæ–‡ç™ºè¡Œ
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰Insert/Update/Deleteæ–‡ã‚’ç™ºè¡Œã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿  ï¼šprmSQL                SQLæ–‡
+        '                   ï¼šprmRefAffectedRows    å½±éŸ¿ã‚’å—ã‘ãŸè¡Œæ•°
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ï¼šãªã—
         '                                               2006.06.23 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ÀsŒnSQL‚ğ”­s‚·‚éi‰e‹¿Œ”ˆø”•t‚«j
+        ''' å®Ÿè¡Œç³»SQLã‚’ç™ºè¡Œã™ã‚‹ï¼ˆå½±éŸ¿ä»¶æ•°å¼•æ•°ä»˜ãï¼‰
         ''' </summary>
-        ''' <param name="prmSQL">”­s‚·‚éSQL•¶</param>
-        ''' <param name="prmRefAffectedRows">‰e‹¿‚ğó‚¯‚½s”</param>
-        ''' <remarks>ƒŒƒR[ƒhƒZƒbƒg‚ğ¶¬‚µ‚È‚¢SQL(INSERT/UPDATE/DELETEcetc)‚ğ”­s‚·‚éB</remarks>
+        ''' <param name="prmSQL">ç™ºè¡Œã™ã‚‹SQLæ–‡</param>
+        ''' <param name="prmRefAffectedRows">å½±éŸ¿ã‚’å—ã‘ãŸè¡Œæ•°</param>
+        ''' <remarks>ãƒ¬ã‚³ãƒ¼ãƒ‰ã‚»ãƒƒãƒˆã‚’ç”Ÿæˆã—ãªã„SQL(INSERT/UPDATE/DELETEâ€¦etc)ã‚’ç™ºè¡Œã™ã‚‹ã€‚</remarks>
         Public MustOverride Sub executeDB(ByVal prmSQL As String, ByRef prmRefAffectedRows As Integer) _
                                                                            Implements UtilDBIf.executeDB
 
         '-------------------------------------------------------------------------------
-        '   XVSQL•¶”­s
-        '   iˆ—ŠT—vj’uŠ·ƒpƒ‰ƒ[ƒ^•t‚«ÀsŒnSQL‚ğ”­s‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^  FprmSQL        SQL•¶
-        '                   FprmParameters ’uŠ·ƒpƒ‰ƒ[ƒ^ƒŠƒXƒg
-        '   œƒƒ\ƒbƒh–ß‚è’lF‚È‚µ
-        '   œg—p—á
-        '                     'ƒpƒ‰ƒƒ^İ’è
+        '   æ›´æ–°SQLæ–‡ç™ºè¡Œ
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰ç½®æ›ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ä»˜ãå®Ÿè¡Œç³»SQLã‚’ç™ºè¡Œã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿  ï¼šprmSQL        SQLæ–‡
+        '                   ï¼šprmParameters ç½®æ›ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒªã‚¹ãƒˆ
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ï¼šãªã—
+        '   â—ä½¿ç”¨ä¾‹
+        '                     'ãƒ‘ãƒ©ãƒ¡ã‚¿è¨­å®š
         '                     Dim listPrm As List(Of UtilDBPrm) = New List(Of UtilDBPrm)
-        '                     listPrm.Add(New UtilDBPrm(Nothing, 255, UtilDBPrm.parameterType.tVarchar, UtilDBPrm.parameterDirection.dReturn)) '–ß‚è’l
-        '                     listPrm.Add(New UtilDBPrm(10, , UtilDBPrm.parameterType.tNumber, UtilDBPrm.parameterDirection.dInput))           '‡@
-        '                     listPrm.Add(New UtilDBPrm(Nothing, , UtilDBPrm.parameterType.tNumber, UtilDBPrm.parameterDirection.dOutput))     '‡A
-        '                     listPrm.Add(New UtilDBPrm(30, , UtilDBPrm.parameterType.tNumber, UtilDBPrm.parameterDirection.dInputOutput))     '‡B
-        '                     listPrm.Add(New UtilDBPrm(Nothing, , UtilDBPrm.parameterType.tDate, UtilDBPrm.parameterDirection.dOutput))       '‡C
-        '                     listPrm.Add(New UtilDBPrm("’uŠ·ƒpƒ‰ƒƒ^ƒNƒGƒŠÀsƒeƒXƒg", _
-        '                                                       14, UtilDBPrm.parameterType.tVarchar, UtilDBPrm.parameterDirection.dInput))    '‡D
-        '                     'Às
+        '                     listPrm.Add(New UtilDBPrm(Nothing, 255, UtilDBPrm.parameterType.tVarchar, UtilDBPrm.parameterDirection.dReturn)) 'æˆ»ã‚Šå€¤
+        '                     listPrm.Add(New UtilDBPrm(10, , UtilDBPrm.parameterType.tNumber, UtilDBPrm.parameterDirection.dInput))           'â‘ 
+        '                     listPrm.Add(New UtilDBPrm(Nothing, , UtilDBPrm.parameterType.tNumber, UtilDBPrm.parameterDirection.dOutput))     'â‘¡
+        '                     listPrm.Add(New UtilDBPrm(30, , UtilDBPrm.parameterType.tNumber, UtilDBPrm.parameterDirection.dInputOutput))     'â‘¢
+        '                     listPrm.Add(New UtilDBPrm(Nothing, , UtilDBPrm.parameterType.tDate, UtilDBPrm.parameterDirection.dOutput))       'â‘£
+        '                     listPrm.Add(New UtilDBPrm("ç½®æ›ãƒ‘ãƒ©ãƒ¡ã‚¿ã‚¯ã‚¨ãƒªå®Ÿè¡Œãƒ†ã‚¹ãƒˆ", _
+        '                                                       14, UtilDBPrm.parameterType.tVarchar, UtilDBPrm.parameterDirection.dInput))    'â‘¤
+        '                     'å®Ÿè¡Œ
         '                     _db.executeDB("BEGIN ? := TESTFUNC(?,?,?,?,?); END;", listPrm)
         '
-        '                     'Œ‹‰ÊŠm”F
-        '                     Debug.WriteLine("–ß‚è’l=" & listPrm(0).value)
+        '                     'çµæœç¢ºèª
+        '                     Debug.WriteLine("æˆ»ã‚Šå€¤=" & listPrm(0).value)
         '                     Debug.WriteLine("prm1  =" & listPrm(1).value)
         '                     Debug.WriteLine("prm2  =" & listPrm(2).value)
         '                     Debug.WriteLine("prm3  =" & listPrm(3).value)
@@ -218,7 +218,7 @@ Namespace DB
         '                     Debug.WriteLine("prm5  =" & listPrm(5).value)
         '
         '
-        '                     ===ÀsƒXƒgƒAƒh==========================
+        '                     ===å®Ÿè¡Œã‚¹ãƒˆã‚¢ãƒ‰==========================
         '                     CREATE OR REPLACE FUNCTION TESTFUNC(
         '                     	 INPRM 		IN		NUMBER
         '                     	,OUTPRM		OUT		NUMBER
@@ -230,36 +230,36 @@ Namespace DB
         '                     IS
         '                     	WK	DATE;
         '                     BEGIN
-        '                         INOUTPRM := INOUTPRM * 2;             --INOUTPRM‚ğ‚Q”{
-        '                         OUTPRM := INPRM + 1;                  --INPRM‚É‚P‚ğ‰Á‚¦‚ÄOUTPRM‚Éİ’è
-        '                         SELECT SYSDATE INTO DTPRM FROM DUAL;  --DTPRM‚ÉƒVƒXƒeƒ€“ú•t‚ğİ’è
-        '                         RETURN VCPRM || '‚ğÀs‚µ‚Ü‚µ‚½B';   --–ß‚è’l‚ÉVCPRM{ƒ¿‚ğİ’è
+        '                         INOUTPRM := INOUTPRM * 2;             --INOUTPRMã‚’ï¼’å€
+        '                         OUTPRM := INPRM + 1;                  --INPRMã«ï¼‘ã‚’åŠ ãˆã¦OUTPRMã«è¨­å®š
+        '                         SELECT SYSDATE INTO DTPRM FROM DUAL;  --DTPRMã«ã‚·ã‚¹ãƒ†ãƒ æ—¥ä»˜ã‚’è¨­å®š
+        '                         RETURN VCPRM || 'ã‚’å®Ÿè¡Œã—ã¾ã—ãŸã€‚';   --æˆ»ã‚Šå€¤ã«VCPRMï¼‹Î±ã‚’è¨­å®š
         '                     END;
         '                     /
         '                     =========================================
         '                                               2006.06.16 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ’uŠ·ƒpƒ‰ƒ[ƒ^•t‚«ÀsŒnSQL‚ğ”­s‚·‚é (Ú×‚Íg—p—áQÆ)
+        ''' ç½®æ›ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ä»˜ãå®Ÿè¡Œç³»SQLã‚’ç™ºè¡Œã™ã‚‹ (è©³ç´°ã¯ä½¿ç”¨ä¾‹å‚ç…§)
         ''' </summary>
-        ''' <param name="prmSQL">ƒpƒ‰ƒ[ƒ^•t‚«SQL•¶</param>
-        ''' <param name="prmRefParameters">’uŠ·ƒpƒ‰ƒ[ƒ^ƒŠƒXƒg</param>
-        ''' <remarks>ƒXƒgƒAƒhÀs‚È‚Ç‚ğ‘z’è(‚»‚êˆÈŠO‚àÀs‰Â”\)</remarks>
+        ''' <param name="prmSQL">ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ä»˜ãSQLæ–‡</param>
+        ''' <param name="prmRefParameters">ç½®æ›ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒªã‚¹ãƒˆ</param>
+        ''' <remarks>ã‚¹ãƒˆã‚¢ãƒ‰å®Ÿè¡Œãªã©ã‚’æƒ³å®š(ãã‚Œä»¥å¤–ã‚‚å®Ÿè¡Œå¯èƒ½)</remarks>
         Public MustOverride Sub executeDB(ByVal prmSQL As String,
                                           ByRef prmRefParameters As List(Of UtilDBPrm)) _
                                                                    Implements UtilDBIf.executeDB
 
         '-------------------------------------------------------------------------------
-        '   ƒVƒ“ƒOƒ‹ƒNƒH[ƒg•¶š—ñ‰»
-        '   iˆ—ŠT—vjƒVƒ“ƒOƒ‹ƒNƒH[ƒg‚ğu''v‚É’uŠ·‚µ‚Ä•Ô‹p
-        '   œ“ü—Íƒpƒ‰ƒƒ^  FprmSQL     Select•¶
-        '   œƒƒ\ƒbƒh–ß‚è’lF’uŠ·ŒãSQL•¶š—ñ
+        '   ã‚·ãƒ³ã‚°ãƒ«ã‚¯ã‚©ãƒ¼ãƒˆæ–‡å­—åˆ—åŒ–
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰ã‚·ãƒ³ã‚°ãƒ«ã‚¯ã‚©ãƒ¼ãƒˆã‚’ã€Œ''ã€ã«ç½®æ›ã—ã¦è¿”å´
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿  ï¼šprmSQL     Selectæ–‡
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ï¼šç½®æ›å¾ŒSQLæ–‡å­—åˆ—
         '                                               2006.05.23 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ƒVƒ“ƒOƒ‹ƒNƒH[ƒg•¶š—ñ‰» ƒVƒ“ƒOƒ‹ƒNƒH[ƒg‚ğu''v‚É’uŠ·‚µ‚Ä•Ô‹p
+        ''' ã‚·ãƒ³ã‚°ãƒ«ã‚¯ã‚©ãƒ¼ãƒˆæ–‡å­—åˆ—åŒ– ã‚·ãƒ³ã‚°ãƒ«ã‚¯ã‚©ãƒ¼ãƒˆã‚’ã€Œ''ã€ã«ç½®æ›ã—ã¦è¿”å´
         ''' </summary>
-        ''' <param name="prmSQL">Select•¶</param>
+        ''' <param name="prmSQL">Selectæ–‡</param>
         ''' <returns></returns>
         ''' <remarks></remarks>
         Public Shadows Function rmSQ(ByVal prmSQL As String) As String Implements UtilDBIf.rmSQ
@@ -267,11 +267,11 @@ Namespace DB
         End Function
 
         '-------------------------------------------------------------------------------
-        '   NullË•¶š—ñ
+        '   Nullâ‡’æ–‡å­—åˆ—
         '                                               2006.05.23 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' NullË•¶š—ñ
+        ''' Nullâ‡’æ–‡å­—åˆ—
         ''' </summary>
         ''' <param name="prmField"></param>
         ''' <returns></returns>
@@ -290,11 +290,11 @@ Namespace DB
         End Function
 
         '-------------------------------------------------------------------------------
-        '   NullËShort
+        '   Nullâ‡’Short
         '                                               2006.05.23 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' NullËShort
+        ''' Nullâ‡’Short
         ''' </summary>
         ''' <param name="prmField"></param>
         ''' <returns></returns>
@@ -314,11 +314,11 @@ Namespace DB
         End Function
 
         '-------------------------------------------------------------------------------
-        '   NullËInteger
+        '   Nullâ‡’Integer
         '                                               2006.05.23 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' NullËInteger
+        ''' Nullâ‡’Integer
         ''' </summary>
         ''' <param name="prmField"></param>
         ''' <returns></returns>
@@ -338,11 +338,11 @@ Namespace DB
         End Function
 
         '-------------------------------------------------------------------------------
-        '   NullËLong
+        '   Nullâ‡’Long
         '                                               2006.05.23 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' NullËLong
+        ''' Nullâ‡’Long
         ''' </summary>
         ''' <param name="prmField"></param>
         ''' <returns></returns>
@@ -362,11 +362,11 @@ Namespace DB
         End Function
 
         '-------------------------------------------------------------------------------
-        '   NullËDouble
+        '   Nullâ‡’Double
         '                                               2006.05.23 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' NullËDouble
+        ''' Nullâ‡’Double
         ''' </summary>
         ''' <param name="prmField"></param>
         ''' <returns></returns>
@@ -386,11 +386,11 @@ Namespace DB
         End Function
 
         '-------------------------------------------------------------------------------
-        '   NullË“ú•t•¶š—ñ’l
+        '   Nullâ‡’æ—¥ä»˜æ–‡å­—åˆ—å€¤
         '                                               2006.05.23 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' NullË“ú•t•¶š—ñ’l
+        ''' Nullâ‡’æ—¥ä»˜æ–‡å­—åˆ—å€¤
         ''' </summary>
         ''' <param name="prmField"></param>
         ''' <returns></returns>

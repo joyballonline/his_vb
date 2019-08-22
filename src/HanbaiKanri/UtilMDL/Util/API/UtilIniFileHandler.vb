@@ -1,27 +1,27 @@
-Imports System.Text
+ï»¿Imports System.Text
 
 
 Namespace API
     '===============================================================================
     '
-    '  ƒ†[ƒeƒBƒŠƒeƒBƒNƒ‰ƒX
-    '    iƒNƒ‰ƒX–¼j    UtilIniFileHandler
-    '    iˆ—‹@”\–¼j      Iniƒtƒ@ƒCƒ‹‚Ì€–Ú’l‚ð“Ç‚Ýž‚Þ
-    '    i–{MDLŽg—p‘O’ñj   “Á‚É‚È‚µ
-    '    i”õlj            API(Kernel32.GetPrivateProfileStringA)Žg—p‚Ì‚½‚ß
-    '                       ˆÈ‰º‚ÉŽ¦‚·iniƒtƒ@ƒCƒ‹Œ`Ž®‚É‘¥‚éŽ–
-    '                           [ƒZƒNƒVƒ‡ƒ“–¼]
-    '                           ƒL[–¼ = Ý’è’l
+    '  ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£ã‚¯ãƒ©ã‚¹
+    '    ï¼ˆã‚¯ãƒ©ã‚¹åï¼‰    UtilIniFileHandler
+    '    ï¼ˆå‡¦ç†æ©Ÿèƒ½åï¼‰      Iniãƒ•ã‚¡ã‚¤ãƒ«ã®é …ç›®å€¤ã‚’èª­ã¿è¾¼ã‚€
+    '    ï¼ˆæœ¬MDLä½¿ç”¨å‰æï¼‰   ç‰¹ã«ãªã—
+    '    ï¼ˆå‚™è€ƒï¼‰            API(Kernel32.GetPrivateProfileStringA)ä½¿ç”¨ã®ãŸã‚
+    '                       ä»¥ä¸‹ã«ç¤ºã™iniãƒ•ã‚¡ã‚¤ãƒ«å½¢å¼ã«å‰‡ã‚‹äº‹
+    '                           [ã‚»ã‚¯ã‚·ãƒ§ãƒ³å]
+    '                           ã‚­ãƒ¼å = è¨­å®šå€¤
     '
     '===============================================================================
-    '  —š—ð  –¼‘O          “ú  •t      ƒ}[ƒN      “à—e
+    '  å±¥æ­´  åå‰          æ—¥  ä»˜      ãƒžãƒ¼ã‚¯      å†…å®¹
     '-------------------------------------------------------------------------------
-    '  (1)   Laevigata, Inc.    2006/04/09             V‹K
+    '  (1)   Laevigata, Inc.    2006/04/09             æ–°è¦
     '-------------------------------------------------------------------------------
     Public Class UtilIniFileHandler
 
         '===============================================================================
-        'API’è‹`
+        'APIå®šç¾©
         '===============================================================================
         <System.Security.SuppressUnmanagedCodeSecurity()>
         Private Declare Function GetPrivateProfileString Lib "KERNEL32.DLL" Alias "GetPrivateProfileStringA" (
@@ -31,18 +31,18 @@ Namespace API
             ByVal lpFileName As String) As Integer
 
         '===============================================================================
-        'ƒƒ“ƒo[•Ï”’è‹`
+        'ãƒ¡ãƒ³ãƒãƒ¼å¤‰æ•°å®šç¾©
         '===============================================================================
         Private _iniFilePath As String
 
         '===============================================================================
-        'ƒvƒƒpƒeƒB(ƒAƒNƒZƒT)
+        'ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£(ã‚¢ã‚¯ã‚»ã‚µ)
         '===============================================================================
         ''' <summary>
-        ''' ƒnƒ“ƒhƒ‹‚µ‚Ä‚¢‚éIniƒtƒ@ƒCƒ‹–¼
+        ''' ãƒãƒ³ãƒ‰ãƒ«ã—ã¦ã„ã‚‹Iniãƒ•ã‚¡ã‚¤ãƒ«å
         ''' </summary>
-        ''' <value>Iniƒtƒ@ƒCƒ‹–¼</value>
-        ''' <returns>Iniƒtƒ@ƒCƒ‹–¼</returns>
+        ''' <value>Iniãƒ•ã‚¡ã‚¤ãƒ«å</value>
+        ''' <returns>Iniãƒ•ã‚¡ã‚¤ãƒ«å</returns>
         ''' <remarks></remarks>
         Public Property fileName() As String
             'Geter--------
@@ -56,34 +56,34 @@ Namespace API
         End Property
 
         '===============================================================================
-        ' ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-        '   œ“ü—Íƒpƒ‰ƒƒ^   FprmFileName    ƒtƒ‹ƒpƒXIniƒtƒ@ƒCƒ‹–¼
+        ' ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šprmFileName    ãƒ•ãƒ«ãƒ‘ã‚¹Iniãƒ•ã‚¡ã‚¤ãƒ«å
         '===============================================================================
         ''' <summary>
-        ''' Iniƒtƒ@ƒCƒ‹ƒnƒ“ƒhƒ‰‚ð¶¬‚·‚é
+        ''' Iniãƒ•ã‚¡ã‚¤ãƒ«ãƒãƒ³ãƒ‰ãƒ©ã‚’ç”Ÿæˆã™ã‚‹
         ''' </summary>
-        ''' <param name="prmFileName">‘ÎÛ‚Æ‚·‚éIniƒtƒ@ƒCƒ‹–¼(ƒtƒ‹ƒpƒX)</param>
+        ''' <param name="prmFileName">å¯¾è±¡ã¨ã™ã‚‹Iniãƒ•ã‚¡ã‚¤ãƒ«å(ãƒ•ãƒ«ãƒ‘ã‚¹)</param>
         ''' <remarks></remarks>
         Public Sub New(ByVal prmFileName As String)
-            _iniFilePath = prmFileName 'ƒƒ“ƒo[‚ÖIniƒtƒ@ƒCƒ‹–¼‚ðÝ’è
+            _iniFilePath = prmFileName 'ãƒ¡ãƒ³ãƒãƒ¼ã¸Iniãƒ•ã‚¡ã‚¤ãƒ«åã‚’è¨­å®š
         End Sub
 
         '-------------------------------------------------------------------------------
-        '   €–ÚŽæ“¾
-        '   iˆ—ŠT—vj’Ê’m‚³‚ê‚½ƒZƒNƒVƒ‡ƒ“–¼/€–Ú–¼‚É‘Î‰ž‚µ‚½Ý’è’l‚ðŽæ“¾‚·‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^   FsAppName    ƒZƒNƒVƒ‡ƒ“–¼
-        '                   FsKeyName    €–Ú–¼
-        '   œƒƒ\ƒbƒh–ß‚è’l FŽæ“¾’l
-        '   œ”­¶—áŠO       FException,UsrDefException
+        '   é …ç›®å–å¾—
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰é€šçŸ¥ã•ã‚ŒãŸã‚»ã‚¯ã‚·ãƒ§ãƒ³å/é …ç›®åã«å¯¾å¿œã—ãŸè¨­å®šå€¤ã‚’å–å¾—ã™ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šsAppName    ã‚»ã‚¯ã‚·ãƒ§ãƒ³å
+        '                   ï¼šsKeyName    é …ç›®å
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šå–å¾—å€¤
+        '   â—ç™ºç”Ÿä¾‹å¤–       ï¼šException,UsrDefException
         '                                               2006.04.09 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' €–ÚŽæ“¾
+        ''' é …ç›®å–å¾—
         ''' </summary>
-        ''' <param name="prmAppName">ƒZƒNƒVƒ‡ƒ“–¼</param>
-        ''' <param name="prmKeyName">€–Ú–¼</param>
-        ''' <returns>Žæ“¾’l</returns>
-        ''' <remarks>iˆ—ŠT—vj’Ê’m‚³‚ê‚½ƒZƒNƒVƒ‡ƒ“–¼/€–Ú–¼‚É‘Î‰ž‚µ‚½Ý’è’l‚ðŽæ“¾‚·‚é</remarks>
+        ''' <param name="prmAppName">ã‚»ã‚¯ã‚·ãƒ§ãƒ³å</param>
+        ''' <param name="prmKeyName">é …ç›®å</param>
+        ''' <returns>å–å¾—å€¤</returns>
+        ''' <remarks>ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰é€šçŸ¥ã•ã‚ŒãŸã‚»ã‚¯ã‚·ãƒ§ãƒ³å/é …ç›®åã«å¯¾å¿œã—ãŸè¨­å®šå€¤ã‚’å–å¾—ã™ã‚‹</remarks>
         Public Function getIni(ByVal prmAppName As String, ByVal prmKeyName As String) As String
 
             Dim sb As StringBuilder
@@ -92,17 +92,17 @@ Namespace API
             Dim rtnCode As Integer
             Dim rtnStr As String = ""
             Dim ini As String = _iniFilePath
-            'APIƒR[ƒ‹
+            'APIã‚³ãƒ¼ãƒ«
             rtnCode = GetPrivateProfileString(prmAppName, prmKeyName, DEFAULTVALUE, sb, sb.Capacity, ini)
-            rtnStr = sb.ToString()                                                 '“Çž“à—eŽæ“¾
+            rtnStr = sb.ToString()                                                 'èª­è¾¼å†…å®¹å–å¾—
 
-            If rtnCode < 1 Or rtnStr = DEFAULTVALUE Then                          '“Çž“à—eƒ`ƒFƒbƒN
-                Dim tex As UsrDefException = New UsrDefException("INIƒtƒ@ƒCƒ‹“Ç‚Ýž‚ÝƒGƒ‰[" & ControlChars.NewLine & _
-                                                     "Iniƒtƒ@ƒCƒ‹EƒZƒNƒVƒ‡ƒ“EƒL[‚Ì‘¶Ý‚ðŠm”F‚µ‚Ä‚­‚¾‚³‚¢B")
+            If rtnCode < 1 Or rtnStr = DEFAULTVALUE Then                          'èª­è¾¼å†…å®¹ãƒã‚§ãƒƒã‚¯
+                Dim tex As UsrDefException = New UsrDefException("INIãƒ•ã‚¡ã‚¤ãƒ«èª­ã¿è¾¼ã¿ã‚¨ãƒ©ãƒ¼" & ControlChars.NewLine & _
+                                                     "Iniãƒ•ã‚¡ã‚¤ãƒ«ãƒ»ã‚»ã‚¯ã‚·ãƒ§ãƒ³ãƒ»ã‚­ãƒ¼ã®å­˜åœ¨ã‚’ç¢ºèªã—ã¦ãã ã•ã„ã€‚")
                 Debug.WriteLine(tex.Message)
                 Throw tex
             Else
-                Return rtnStr                                                      '“Çž“à—e•Ô‹p
+                Return rtnStr                                                      'èª­è¾¼å†…å®¹è¿”å´
             End If
 
         End Function

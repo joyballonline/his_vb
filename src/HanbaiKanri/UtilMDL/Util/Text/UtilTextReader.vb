@@ -1,4 +1,4 @@
-Imports System.IO
+ï»¿Imports System.IO
 Imports System.Text
 
 
@@ -6,28 +6,28 @@ Namespace Text
 
     '===============================================================================
     '
-    '  ƒ†[ƒeƒBƒŠƒeƒBƒNƒ‰ƒX
-    '    iƒNƒ‰ƒX–¼j    UtilTextReader
-    '    iˆ—‹@”\–¼j      ƒeƒLƒXƒgƒtƒ@ƒCƒ‹‚ð“Ç‚Ýž‚Þ‹@”\‚ð’ñ‹Ÿ
-    '    i–{MDLŽg—p‘O’ñj   “Á‚É–³‚µ
-    '    i”õlj            
+    '  ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£ã‚¯ãƒ©ã‚¹
+    '    ï¼ˆã‚¯ãƒ©ã‚¹åï¼‰    UtilTextReader
+    '    ï¼ˆå‡¦ç†æ©Ÿèƒ½åï¼‰      ãƒ†ã‚­ã‚¹ãƒˆãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­ã¿è¾¼ã‚€æ©Ÿèƒ½ã‚’æä¾›
+    '    ï¼ˆæœ¬MDLä½¿ç”¨å‰æï¼‰   ç‰¹ã«ç„¡ã—
+    '    ï¼ˆå‚™è€ƒï¼‰            
     '
     '===============================================================================
-    '  —š—ð  –¼‘O          “ú  •t      ƒ}[ƒN      “à—e
+    '  å±¥æ­´  åå‰          æ—¥  ä»˜      ãƒžãƒ¼ã‚¯      å†…å®¹
     '-------------------------------------------------------------------------------
-    '  (1)   Laevigata, Inc.    2006/05/14              V‹K
+    '  (1)   Laevigata, Inc.    2006/05/14              æ–°è¦
     '-------------------------------------------------------------------------------
     Public Class UtilTextReader
 
         '===============================================================================
-        'ƒƒ“ƒo[•Ï”’è‹`
+        'ãƒ¡ãƒ³ãƒãƒ¼å¤‰æ•°å®šç¾©
         '===============================================================================
-        Private _fileName As String         'ƒtƒ@ƒCƒ‹–¼
-        Private _sReader As StreamReader    'ƒXƒgƒŠ[ƒ€ƒŠ[ƒ_[
+        Private _fileName As String         'ãƒ•ã‚¡ã‚¤ãƒ«å
+        Private _sReader As StreamReader    'ã‚¹ãƒˆãƒªãƒ¼ãƒ ãƒªãƒ¼ãƒ€ãƒ¼
         Private _openFlg As Boolean = False
 
         '===============================================================================
-        'ƒvƒƒpƒeƒB(ƒAƒNƒZƒT)
+        'ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£(ã‚¢ã‚¯ã‚»ã‚µ)
         '===============================================================================
         Public ReadOnly Property EOF() As Boolean
             Get
@@ -47,24 +47,24 @@ Namespace Text
         End Property
 
         '===============================================================================
-        ' ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-        '   œ“ü—Íƒpƒ‰ƒƒ^   F  prmFileName    ‘€ì‘ÎÛƒtƒ@ƒCƒ‹–¼
+        ' ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼š  prmFileName    æ“ä½œå¯¾è±¡ãƒ•ã‚¡ã‚¤ãƒ«å
         '===============================================================================
         ''' <summary> 
-        ''' ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        ''' ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         ''' </summary>
-        ''' <param name="prmFileName">ƒtƒ@ƒCƒ‹–¼</param>
+        ''' <param name="prmFileName">ãƒ•ã‚¡ã‚¤ãƒ«å</param>
         ''' <remarks></remarks>
         Public Sub New(ByVal prmFileName As String)
             _fileName = prmFileName
         End Sub
 
         '===============================================================================
-        ' ƒfƒXƒgƒ‰ƒNƒ^
-        '   œ“ü—Íƒpƒ‰ƒƒ^   F  ‚È‚µ
+        ' ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼š  ãªã—
         '===============================================================================
         ''' <summary>
-        ''' ƒfƒXƒgƒ‰ƒNƒ^
+        ''' ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         ''' </summary>
         ''' <remarks></remarks>
         Protected Overrides Sub Finalize()
@@ -85,61 +85,61 @@ Namespace Text
 
 
         '-------------------------------------------------------------------------------
-        '   ƒtƒ@ƒCƒ‹ƒI[ƒvƒ“
-        '   iˆ—ŠT—vj‘ÎÛƒtƒ@ƒCƒ‹‚ðŠJ‚­
-        '   œ“ü—Íƒpƒ‰ƒƒ^   F‚È‚µ
-        '   œƒƒ\ƒbƒh–ß‚è’l F‚È‚µ
-        '   œ”õl           Fopenƒƒ\ƒbƒh‚ÌŒÄo‚µŒã‚Í•K‚¸closeƒƒ\ƒbƒh‚ÌŒÄ‚Ño‚µ‚ð•Ûá‚·‚é‚±‚Æ
+        '   ãƒ•ã‚¡ã‚¤ãƒ«ã‚ªãƒ¼ãƒ—ãƒ³
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰å¯¾è±¡ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šãªã—
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šãªã—
+        '   â—å‚™è€ƒ           ï¼šopenãƒ¡ã‚½ãƒƒãƒ‰ã®å‘¼å‡ºã—å¾Œã¯å¿…ãšcloseãƒ¡ã‚½ãƒƒãƒ‰ã®å‘¼ã³å‡ºã—ã‚’ä¿éšœã™ã‚‹ã“ã¨
         '                                               2006.05.14 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ƒtƒ@ƒCƒ‹ƒI[ƒvƒ“@ƒI[ƒvƒ“‚µ‚½‚ç•K‚¸closeƒƒ\ƒbƒh‚ÌŒÄo‚ð•Ûá‚·‚é‚±‚Æ
+        ''' ãƒ•ã‚¡ã‚¤ãƒ«ã‚ªãƒ¼ãƒ—ãƒ³ã€€ã‚ªãƒ¼ãƒ—ãƒ³ã—ãŸã‚‰å¿…ãšcloseãƒ¡ã‚½ãƒƒãƒ‰ã®å‘¼å‡ºã‚’ä¿éšœã™ã‚‹ã“ã¨
         ''' </summary>
         ''' <remarks></remarks>
         Public Sub open()
             If _openFlg Then
-                Throw New UsrDefException("ƒtƒ@ƒCƒ‹‚ÍŠù‚ÉŠJ‚¢‚Ä‚¢‚Ü‚·B")
+                Throw New UsrDefException("ãƒ•ã‚¡ã‚¤ãƒ«ã¯æ—¢ã«é–‹ã„ã¦ã„ã¾ã™ã€‚")
             End If
             _sReader = New StreamReader(_fileName, Encoding.Default)
             _openFlg = True
         End Sub
 
         '-------------------------------------------------------------------------------
-        '   ƒtƒ@ƒCƒ‹ƒNƒ[ƒY
-        '   iˆ—ŠT—vj‘ÎÛƒtƒ@ƒCƒ‹‚ð•Â‚¶‚é
-        '   œ“ü—Íƒpƒ‰ƒƒ^   F‚È‚µ
-        '   œƒƒ\ƒbƒh–ß‚è’l F‚È‚µ
-        '   œ”õl           Fopenƒƒ\ƒbƒh‚ÌŒÄo‚µŒã‚Í•K‚¸closeƒƒ\ƒbƒh‚ÌŒÄ‚Ño‚µ‚ð•Ûá‚·‚é‚±‚Æ
+        '   ãƒ•ã‚¡ã‚¤ãƒ«ã‚¯ãƒ­ãƒ¼ã‚º
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰å¯¾è±¡ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‰ã˜ã‚‹
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šãªã—
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šãªã—
+        '   â—å‚™è€ƒ           ï¼šopenãƒ¡ã‚½ãƒƒãƒ‰ã®å‘¼å‡ºã—å¾Œã¯å¿…ãšcloseãƒ¡ã‚½ãƒƒãƒ‰ã®å‘¼ã³å‡ºã—ã‚’ä¿éšœã™ã‚‹ã“ã¨
         '                                               2006.05.14 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ƒtƒ@ƒCƒ‹ƒNƒ[ƒY
+        ''' ãƒ•ã‚¡ã‚¤ãƒ«ã‚¯ãƒ­ãƒ¼ã‚º
         ''' </summary>
         ''' <remarks></remarks>
         Public Sub close()
             If Not _openFlg Then
-                Throw New UsrDefException("ƒtƒ@ƒCƒ‹‚ª•Â‚¶‚Ä‚¢‚Ü‚·B")
+                Throw New UsrDefException("ãƒ•ã‚¡ã‚¤ãƒ«ãŒé–‰ã˜ã¦ã„ã¾ã™ã€‚")
             End If
             _sReader.Close()
             _openFlg = False
         End Sub
 
         '-------------------------------------------------------------------------------
-        '   ƒŠ[ƒhƒ‰ƒCƒ“
-        '   iˆ—ŠT—vjƒJƒŒƒ“ƒgs‚Ì•¶Žš—ñ‚ð“Ç‚Ýž‚Þ
-        '   œ“ü—Íƒpƒ‰ƒƒ^   F‚È‚µ
-        '   œƒƒ\ƒbƒh–ß‚è’l F“Ç‚Ýž‚Ý•¶Žš—ñ
+        '   ãƒªãƒ¼ãƒ‰ãƒ©ã‚¤ãƒ³
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰ã‚«ãƒ¬ãƒ³ãƒˆè¡Œã®æ–‡å­—åˆ—ã‚’èª­ã¿è¾¼ã‚€
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šãªã—
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šèª­ã¿è¾¼ã¿æ–‡å­—åˆ—
         '                                               2006.05.14 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
-        'ƒŠ[ƒhƒ‰ƒCƒ“
+        'ãƒªãƒ¼ãƒ‰ãƒ©ã‚¤ãƒ³
         ''' <summary>
-        ''' ƒŠ[ƒhƒ‰ƒCƒ“
+        ''' ãƒªãƒ¼ãƒ‰ãƒ©ã‚¤ãƒ³
         ''' </summary>
-        ''' <returns>“Ç‚Ýž‚Ý•¶Žš—ñ</returns>
+        ''' <returns>èª­ã¿è¾¼ã¿æ–‡å­—åˆ—</returns>
         ''' <remarks></remarks>
         Public Function readLine() As String
             If Not _openFlg Then
-                Throw New UsrDefException("ƒtƒ@ƒCƒ‹‚ª•Â‚¶‚Ä‚¢‚Ü‚·B")
+                Throw New UsrDefException("ãƒ•ã‚¡ã‚¤ãƒ«ãŒé–‰ã˜ã¦ã„ã¾ã™ã€‚")
             End If
             Dim retLine As String = _sReader.ReadLine
             If retLine IsNot Nothing Then
@@ -150,20 +150,20 @@ Namespace Text
         End Function
 
         '-------------------------------------------------------------------------------
-        '   ‘S“Ç‚Ýž‚Ý
-        '   iˆ—ŠT—vjƒJƒŒƒ“ƒgsˆÈ~‚Ì‘S•¶Žš—ñ‚ð“Ç‚Ýž‚Þ
-        '   œ“ü—Íƒpƒ‰ƒƒ^   F‚È‚µ
-        '   œƒƒ\ƒbƒh–ß‚è’l F“Ç‚Ýž‚Ý•¶Žš—ñ
+        '   å…¨èª­ã¿è¾¼ã¿
+        '   ï¼ˆå‡¦ç†æ¦‚è¦ï¼‰ã‚«ãƒ¬ãƒ³ãƒˆè¡Œä»¥é™ã®å…¨æ–‡å­—åˆ—ã‚’èª­ã¿è¾¼ã‚€
+        '   â—å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ã‚¿   ï¼šãªã—
+        '   â—ãƒ¡ã‚½ãƒƒãƒ‰æˆ»ã‚Šå€¤ ï¼šèª­ã¿è¾¼ã¿æ–‡å­—åˆ—
         '                                               2006.05.14 Created By Laevigata, Inc.
         '-------------------------------------------------------------------------------
         ''' <summary>
-        ''' ‘S“Ç‚Ýž‚Ý(ƒJƒŒƒ“ƒgsˆÈ~)
+        ''' å…¨èª­ã¿è¾¼ã¿(ã‚«ãƒ¬ãƒ³ãƒˆè¡Œä»¥é™)
         ''' </summary>
         ''' <returns></returns>
         ''' <remarks></remarks>
         Public Function readToEnd() As String
             If Not _openFlg Then
-                Throw New UsrDefException("ƒtƒ@ƒCƒ‹‚ª•Â‚¶‚Ä‚¢‚Ü‚·B")
+                Throw New UsrDefException("ãƒ•ã‚¡ã‚¤ãƒ«ãŒé–‰ã˜ã¦ã„ã¾ã™ã€‚")
             End If
             Return _sReader.ReadToEnd
         End Function
