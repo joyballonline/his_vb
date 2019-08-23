@@ -1133,7 +1133,7 @@ Public Class OrderList
             DgvCymnhd.Columns.Add("得意先名", "CustomerName")
 
             DgvCymnhd.Columns.Add("通貨_外貨", "Currency")
-            DgvCymnhd.Columns.Add("受注金額_外貨", "OrderAmount" & vbCrLf & "(ForeignCurrency)")
+            DgvCymnhd.Columns.Add("受注金額_外貨", "OrderAmount" & vbCrLf & "(OrignalCurrency)")
 
             DgvCymnhd.Columns.Add("受注金額", "OrderAmount" & vbCrLf & "(" & setBaseCurrency() & ")")
             DgvCymnhd.Columns.Add("ＶＡＴ", "VAT-OUT")
