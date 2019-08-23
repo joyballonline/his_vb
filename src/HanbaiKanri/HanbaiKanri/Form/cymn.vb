@@ -509,7 +509,7 @@ Public Class Cymn
             DgvItemList.Columns("仕入先").HeaderText = "SupplierName"
 
             DgvItemList.Columns("仕入通貨").HeaderText = "PurchaseCurrency"
-            DgvItemList.Columns("仕入単価_外貨").HeaderText = "PurchaseUnitPrice" & vbCrLf & "(ForeignCurrency)"
+            DgvItemList.Columns("仕入単価_外貨").HeaderText = "PurchaseUnitPrice" & vbCrLf & "(OrignalCurrency)"
             DgvItemList.Columns("仕入単価").HeaderText = "PurchaseUnitPrice(" & TxtIDRCurrency.Text & ")" & vbCrLf & "b"
             DgvItemList.Columns("仕入原価").HeaderText = "PurchsingCost" & vbCrLf & "c=a*b"
 
@@ -521,14 +521,14 @@ Public Class Cymn
             DgvItemList.Columns("輸送費額").HeaderText = "TransportationCost" & vbCrLf & "i=b*h"
 
             DgvItemList.Columns("仕入金額").HeaderText = "PurchaseAmount" & vbCrLf & "j=a*(b+e+g+i)"
-            DgvItemList.Columns("売単価_外貨").HeaderText = "SellingPrice" & vbCrLf & "(ForeignCurrency)"
+            DgvItemList.Columns("売単価_外貨").HeaderText = "SellingPrice" & vbCrLf & "(OrignalCurrency)"
             DgvItemList.Columns("売単価").HeaderText = "SellingPrice(" & TxtIDRCurrency.Text & ")" & vbCrLf & "k"
             DgvItemList.Columns("売上金額").HeaderText = "SalesAmount" & vbCrLf & "l=a*k"
 
-            DgvItemList.Columns("見積単価_外貨").HeaderText = "QuotetionPrice" & vbCrLf & "(ForeignCurrency)"
+            DgvItemList.Columns("見積単価_外貨").HeaderText = "QuotetionPrice" & vbCrLf & "(OrignalCurrency)"
             DgvItemList.Columns("見積単価").HeaderText = "QuotetionPrice(" & TxtIDRCurrency.Text & ")" & vbCrLf & "m=k+e+g+i"
 
-            DgvItemList.Columns("見積金額_外貨").HeaderText = "QuotetionAmount" & vbCrLf & "(ForeignCurrency)"
+            DgvItemList.Columns("見積金額_外貨").HeaderText = "QuotetionAmount" & vbCrLf & "(OrignalCurrency)"
             DgvItemList.Columns("見積金額").HeaderText = "QuotetionAmount(" & TxtIDRCurrency.Text & ")" & vbCrLf & "n=a*m"
 
             DgvItemList.Columns("粗利額").HeaderText = "GrossProfit" & vbCrLf & "o=a*(k-b)"
