@@ -215,7 +215,7 @@ Public Class DepositDetailList
                     DgvBilling.Columns.Add("請求先名", "BillingAddress")
                     DgvBilling.Columns.Add("振込先", "PaymentDestination")
                     DgvBilling.Columns.Add("通貨_外貨", "Currency")
-                    DgvBilling.Columns.Add("入金額_外貨", "MoneyReceiptAmountForeignCurrency")
+                    DgvBilling.Columns.Add("入金額_外貨", "MoneyReceiptAmount")
                     DgvBilling.Columns.Add("通貨", "Currency")
                     DgvBilling.Columns.Add("入金額", "MoneyReceiptAmount")
                     DgvBilling.Columns.Add("更新日", "UpdateDate")
