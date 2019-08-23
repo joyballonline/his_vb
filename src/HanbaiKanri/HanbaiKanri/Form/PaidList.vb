@@ -200,7 +200,7 @@ Public Class PaidList
                     DgvHtyhd.Columns.Add("支払先名", "SupplierName")
                     DgvHtyhd.Columns.Add("支払先", "PaymentDestination")
                     DgvHtyhd.Columns.Add("通貨_外貨", "Currency")
-                    DgvHtyhd.Columns.Add("支払金額計_外貨", "TotalPaymentAmountForeignCurrency")
+                    DgvHtyhd.Columns.Add("支払金額計_外貨", "TotalPaymentAmountOrignalCurrency")
                     DgvHtyhd.Columns.Add("通貨", "Currency")
                     DgvHtyhd.Columns.Add("支払金額計", "TotalPaymentAmount")
                     DgvHtyhd.Columns.Add("更新日", "UpdateDate")
