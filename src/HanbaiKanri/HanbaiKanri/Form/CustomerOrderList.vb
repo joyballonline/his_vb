@@ -145,7 +145,7 @@ Public Class CustomerOrderList
 
             DgvBilling.Columns.Add("備考1", "備考1")
             DgvBilling.Columns.Add("備考2", "備考2")
-            DgvBilling.Columns.Add("登録日", "登録日")
+            DgvBilling.Columns.Add("登録日", "売掛請求登録日")
             DgvBilling.Columns.Add("更新者", "更新者")
         End If
 
