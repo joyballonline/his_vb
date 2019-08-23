@@ -1181,7 +1181,7 @@ Public Class ClosingLog
             Sql += "', '"
             Sql += dsUrighd.Tables(RS).Rows(i)("得意先名").ToString
             Sql += "',"
-            If dsUrighd.Tables(RS).Rows(i)("得意先郵便番号").ToString = vbNullString Then
+            If IsDBNull(dsUrighd.Tables(RS).Rows(i)("得意先郵便番号")) OrElse dsUrighd.Tables(RS).Rows(i)("得意先郵便番号").ToString = vbNullString Then
                 Sql += "null"
             Else
                 Sql += UtilClass.formatNumber(dsUrighd.Tables(RS).Rows(i)("得意先郵便番号").ToString）
