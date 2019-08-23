@@ -22,6 +22,7 @@ Partial Class CustomerOrderList
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.ChkCancelData = New System.Windows.Forms.CheckBox()
         Me.BtnInvoice = New System.Windows.Forms.Button()
         Me.BtnBack = New System.Windows.Forms.Button()
@@ -68,6 +69,14 @@ Partial Class CustomerOrderList
         '
         Me.DgvBilling.AllowUserToAddRows = False
         Me.DgvBilling.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DgvBilling.DefaultCellStyle = DataGridViewCellStyle1
         Me.DgvBilling.Location = New System.Drawing.Point(15, 34)
         Me.DgvBilling.Name = "DgvBilling"
         Me.DgvBilling.ReadOnly = True

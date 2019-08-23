@@ -92,37 +92,57 @@ Public Class CustomerOrderList
         End If
 
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-            DgvBilling.Columns.Add("請求番号", "InvoiceNumber")
-            DgvBilling.Columns.Add("請求区分", "BillingClassification")
-            DgvBilling.Columns.Add("請求日", "BillingDate")
-            DgvBilling.Columns.Add("受注番号", "JobOrderNumber")
-            DgvBilling.Columns.Add("受注番号枝番", "JobOrderSubNumber")
+
             DgvBilling.Columns.Add("得意先コード", "CustomerCode")
             DgvBilling.Columns.Add("得意先名", "CustomerName")
+
+            DgvBilling.Columns.Add("受注番号", "JobOrderNumber")
+            DgvBilling.Columns.Add("受注番号枝番", "JobOrderNo")
+
+            DgvBilling.Columns.Add("請求番号", "SalesInvoiceNo")
+            DgvBilling.Columns.Add("請求日", "SalesInvoiceDate")
+
             DgvBilling.Columns.Add("通貨_外貨", "Currency")
-            DgvBilling.Columns.Add("請求金額計_外貨", "TotalBillingAmountForeignCurrency")
-            DgvBilling.Columns.Add("売掛残高_外貨", "AccountsReceivableBalanceForeignCurrency")
-            DgvBilling.Columns.Add("通貨", "Currency")
-            DgvBilling.Columns.Add("請求金額計", "TotalBillingAmount")
-            DgvBilling.Columns.Add("売掛残高", "AccountsReceivableBalance")
+            DgvBilling.Columns.Add("請求金額計_外貨", "OrderAmount")
+            DgvBilling.Columns.Add("VAT", "VAT-OUT")
+
             DgvBilling.Columns.Add("備考1", "Remarks1")
             DgvBilling.Columns.Add("備考2", "Remarks2")
             DgvBilling.Columns.Add("登録日", "RegistrationDate")
             DgvBilling.Columns.Add("更新者", "ModifiedBy")
+
         Else
-            DgvBilling.Columns.Add("請求番号", "請求番号")
-            DgvBilling.Columns.Add("請求区分", "請求区分")
-            DgvBilling.Columns.Add("請求日", "請求日")
-            DgvBilling.Columns.Add("受注番号", "受注番号")
-            DgvBilling.Columns.Add("受注番号枝番", "受注番号枝番")
+            'DgvBilling.Columns.Add("請求番号", "請求番号")
+            'DgvBilling.Columns.Add("請求区分", "請求区分")
+            'DgvBilling.Columns.Add("請求日", "請求日")
+            'DgvBilling.Columns.Add("受注番号", "受注番号")
+            'DgvBilling.Columns.Add("受注番号枝番", "受注番号枝番")
+            'DgvBilling.Columns.Add("得意先コード", "得意先コード")
+            'DgvBilling.Columns.Add("得意先名", "得意先名")
+            'DgvBilling.Columns.Add("通貨_外貨", "通貨")
+            'DgvBilling.Columns.Add("請求金額計_外貨", "請求金額計(外貨)")
+            'DgvBilling.Columns.Add("売掛残高_外貨", "売掛残高(外貨)")
+            'DgvBilling.Columns.Add("通貨", "通貨")
+            'DgvBilling.Columns.Add("請求金額計", "請求金額計")
+            'DgvBilling.Columns.Add("売掛残高", "売掛残高")
+            'DgvBilling.Columns.Add("備考1", "備考1")
+            'DgvBilling.Columns.Add("備考2", "備考2")
+            'DgvBilling.Columns.Add("登録日", "登録日")
+            'DgvBilling.Columns.Add("更新者", "更新者")
+
             DgvBilling.Columns.Add("得意先コード", "得意先コード")
             DgvBilling.Columns.Add("得意先名", "得意先名")
-            DgvBilling.Columns.Add("通貨_外貨", "通貨")
-            DgvBilling.Columns.Add("請求金額計_外貨", "請求金額計(外貨)")
-            DgvBilling.Columns.Add("売掛残高_外貨", "売掛残高(外貨)")
-            DgvBilling.Columns.Add("通貨", "通貨")
-            DgvBilling.Columns.Add("請求金額計", "請求金額計")
-            DgvBilling.Columns.Add("売掛残高", "売掛残高")
+
+            DgvBilling.Columns.Add("受注番号", "受注番号")
+            DgvBilling.Columns.Add("受注番号枝番", "受注Ver")
+
+            DgvBilling.Columns.Add("請求番号", "SalesInvoiceNo")
+            DgvBilling.Columns.Add("請求日", "SalesInvoiceDate")
+
+            DgvBilling.Columns.Add("通貨_外貨", "販売通貨")
+            DgvBilling.Columns.Add("請求金額計_外貨", "受注金額")
+            DgvBilling.Columns.Add("VAT", "VAT-OUT")
+
             DgvBilling.Columns.Add("備考1", "備考1")
             DgvBilling.Columns.Add("備考2", "備考2")
             DgvBilling.Columns.Add("登録日", "登録日")
@@ -131,15 +151,11 @@ Public Class CustomerOrderList
 
         '右寄せ
         DgvBilling.Columns("請求金額計_外貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        DgvBilling.Columns("売掛残高_外貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        DgvBilling.Columns("請求金額計").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        DgvBilling.Columns("売掛残高").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvBilling.Columns("VAT").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
         '数字形式
         DgvBilling.Columns("請求金額計_外貨").DefaultCellStyle.Format = "N2"
-        DgvBilling.Columns("売掛残高_外貨").DefaultCellStyle.Format = "N2"
-        DgvBilling.Columns("請求金額計").DefaultCellStyle.Format = "N2"
-        DgvBilling.Columns("売掛残高").DefaultCellStyle.Format = "N2"
+        DgvBilling.Columns("VAT").DefaultCellStyle.Format = "N2"
 
 
         '一覧取得
@@ -187,30 +203,32 @@ Public Class CustomerOrderList
 
 
                 DgvBilling.Rows.Add()
-                DgvBilling.Rows(i).Cells("請求番号").Value = dsSkyuhd.Tables(RS).Rows(i)("請求番号")
-                If frmC01F10_Login.loginValue.Language = "ENG" Then
-                    DgvBilling.Rows(i).Cells("請求区分").Value = IIf(dsSkyuhd.Tables(RS).Rows(i)("請求区分") = CommonConst.BILLING_KBN_DEPOSIT,
-                                                             CommonConst.BILLING_KBN_DEPOSIT_TXT_E,
-                                                            CommonConst.BILLING_KBN_NORMAL_TXT_E)
 
-                Else
-                    DgvBilling.Rows(i).Cells("請求区分").Value = IIf(dsSkyuhd.Tables(RS).Rows(i)("請求区分") = CommonConst.BILLING_KBN_DEPOSIT,
-                                                             CommonConst.BILLING_KBN_DEPOSIT_TXT,
-                                                            CommonConst.BILLING_KBN_NORMAL_TXT)
+                'If frmC01F10_Login.loginValue.Language = "ENG" Then
+                '    DgvBilling.Rows(i).Cells("請求区分").Value = IIf(dsSkyuhd.Tables(RS).Rows(i)("請求区分") = CommonConst.BILLING_KBN_DEPOSIT,
+                '                                             CommonConst.BILLING_KBN_DEPOSIT_TXT_E,
+                '                                            CommonConst.BILLING_KBN_NORMAL_TXT_E)
 
-                End If
+                'Else
+                '    DgvBilling.Rows(i).Cells("請求区分").Value = IIf(dsSkyuhd.Tables(RS).Rows(i)("請求区分") = CommonConst.BILLING_KBN_DEPOSIT,
+                '                                             CommonConst.BILLING_KBN_DEPOSIT_TXT,
+                '                                            CommonConst.BILLING_KBN_NORMAL_TXT)
 
-                DgvBilling.Rows(i).Cells("請求日").Value = dsSkyuhd.Tables(RS).Rows(i)("請求日").ToShortDateString()
-                DgvBilling.Rows(i).Cells("受注番号").Value = dsSkyuhd.Tables(RS).Rows(i)("受注番号")
-                DgvBilling.Rows(i).Cells("受注番号枝番").Value = dsSkyuhd.Tables(RS).Rows(i)("受注番号枝番")
+                'End If
+
                 DgvBilling.Rows(i).Cells("得意先コード").Value = dsSkyuhd.Tables(RS).Rows(i)("得意先コード")
                 DgvBilling.Rows(i).Cells("得意先名").Value = dsSkyuhd.Tables(RS).Rows(i)("得意先名")
+
+                DgvBilling.Rows(i).Cells("受注番号").Value = dsSkyuhd.Tables(RS).Rows(i)("受注番号")
+                DgvBilling.Rows(i).Cells("受注番号枝番").Value = dsSkyuhd.Tables(RS).Rows(i)("受注番号枝番")
+
+                DgvBilling.Rows(i).Cells("請求番号").Value = dsSkyuhd.Tables(RS).Rows(i)("請求番号")
+                DgvBilling.Rows(i).Cells("請求日").Value = dsSkyuhd.Tables(RS).Rows(i)("請求日").ToShortDateString()
+
                 DgvBilling.Rows(i).Cells("通貨_外貨").Value = cur
                 DgvBilling.Rows(i).Cells("請求金額計_外貨").Value = dsSkyuhd.Tables(RS).Rows(i)("請求金額計_外貨")
-                DgvBilling.Rows(i).Cells("売掛残高_外貨").Value = dsSkyuhd.Tables(RS).Rows(i)("売掛残高_外貨")
-                DgvBilling.Rows(i).Cells("通貨").Value = "IDR"
-                DgvBilling.Rows(i).Cells("請求金額計").Value = dsSkyuhd.Tables(RS).Rows(i)("請求金額計")
-                DgvBilling.Rows(i).Cells("売掛残高").Value = dsSkyuhd.Tables(RS).Rows(i)("売掛残高")
+                DgvBilling.Rows(i).Cells("VAT").Value = dsSkyuhd.Tables(RS).Rows(i)("請求消費税計")
+
                 DgvBilling.Rows(i).Cells("備考1").Value = dsSkyuhd.Tables(RS).Rows(i)("備考1")
                 DgvBilling.Rows(i).Cells("備考2").Value = dsSkyuhd.Tables(RS).Rows(i)("備考2")
                 DgvBilling.Rows(i).Cells("登録日").Value = dsSkyuhd.Tables(RS).Rows(i)("登録日")
