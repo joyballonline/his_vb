@@ -22,6 +22,7 @@ Partial Class CustomerList
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -31,10 +32,11 @@ Partial Class CustomerList
         Me.BtnBillingCalculation = New System.Windows.Forms.Button()
         Me.LblCustomerName = New System.Windows.Forms.Label()
         Me.DgvCustomer = New System.Windows.Forms.DataGridView()
-        Me.得意先名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.得意先コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.得意先名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.通貨_外貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.受注金額計_外貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.VAT_OUT計_外貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.請求金額計_外貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.請求残高_外貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.通貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -63,7 +65,7 @@ Partial Class CustomerList
         Me.TxtSearch.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtSearch.Location = New System.Drawing.Point(133, 10)
         Me.TxtSearch.Name = "TxtSearch"
-        Me.TxtSearch.Size = New System.Drawing.Size(100, 37)
+        Me.TxtSearch.Size = New System.Drawing.Size(100, 22)
         Me.TxtSearch.TabIndex = 1
         '
         'btnBack
@@ -92,7 +94,7 @@ Partial Class CustomerList
         Me.LblCustomerName.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblCustomerName.Location = New System.Drawing.Point(12, 13)
         Me.LblCustomerName.Name = "LblCustomerName"
-        Me.LblCustomerName.Size = New System.Drawing.Size(133, 30)
+        Me.LblCustomerName.Size = New System.Drawing.Size(67, 15)
         Me.LblCustomerName.TabIndex = 18
         Me.LblCustomerName.Text = "得意先名"
         '
@@ -100,10 +102,16 @@ Partial Class CustomerList
         '
         Me.DgvCustomer.AllowUserToAddRows = False
         Me.DgvCustomer.AllowUserToDeleteRows = False
-        Me.DgvCustomer.AllowUserToResizeColumns = False
-        Me.DgvCustomer.AllowUserToResizeRows = False
         Me.DgvCustomer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvCustomer.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.得意先名, Me.得意先コード, Me.通貨_外貨, Me.受注金額計_外貨, Me.請求金額計_外貨, Me.請求残高_外貨, Me.通貨, Me.受注金額計, Me.請求金額計, Me.請求残高, Me.受注件数, Me.請求件数, Me.会社コード, Me.通貨_外貨コード})
+        Me.DgvCustomer.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.得意先コード, Me.得意先名, Me.通貨_外貨, Me.受注金額計_外貨, Me.VAT_OUT計_外貨, Me.請求金額計_外貨, Me.請求残高_外貨, Me.通貨, Me.受注金額計, Me.請求金額計, Me.請求残高, Me.受注件数, Me.請求件数, Me.会社コード, Me.通貨_外貨コード})
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DgvCustomer.DefaultCellStyle = DataGridViewCellStyle4
         Me.DgvCustomer.Location = New System.Drawing.Point(12, 38)
         Me.DgvCustomer.MultiSelect = False
         Me.DgvCustomer.Name = "DgvCustomer"
@@ -114,6 +122,12 @@ Partial Class CustomerList
         Me.DgvCustomer.Size = New System.Drawing.Size(1326, 465)
         Me.DgvCustomer.TabIndex = 3
         '
+        '得意先コード
+        '
+        Me.得意先コード.HeaderText = "得意先コード"
+        Me.得意先コード.Name = "得意先コード"
+        Me.得意先コード.ReadOnly = True
+        '
         '得意先名
         '
         Me.得意先名.HeaderText = "得意先名"
@@ -121,16 +135,9 @@ Partial Class CustomerList
         Me.得意先名.ReadOnly = True
         Me.得意先名.Width = 200
         '
-        '得意先コード
-        '
-        Me.得意先コード.HeaderText = "得意先コード"
-        Me.得意先コード.Name = "得意先コード"
-        Me.得意先コード.ReadOnly = True
-        Me.得意先コード.Visible = False
-        '
         '通貨_外貨
         '
-        Me.通貨_外貨.HeaderText = "通貨"
+        Me.通貨_外貨.HeaderText = "販売通貨"
         Me.通貨_外貨.Name = "通貨_外貨"
         Me.通貨_外貨.ReadOnly = True
         '
@@ -139,6 +146,12 @@ Partial Class CustomerList
         Me.受注金額計_外貨.HeaderText = "受注金額計(外貨)"
         Me.受注金額計_外貨.Name = "受注金額計_外貨"
         Me.受注金額計_外貨.ReadOnly = True
+        '
+        'VAT_OUT計_外貨
+        '
+        Me.VAT_OUT計_外貨.HeaderText = "VAT-OUT_外貨"
+        Me.VAT_OUT計_外貨.Name = "VAT_OUT計_外貨"
+        Me.VAT_OUT計_外貨.ReadOnly = True
         '
         '請求金額計_外貨
         '
@@ -157,6 +170,7 @@ Partial Class CustomerList
         Me.通貨.HeaderText = "通貨"
         Me.通貨.Name = "通貨"
         Me.通貨.ReadOnly = True
+        Me.通貨.Visible = False
         '
         '受注金額計
         '
@@ -165,6 +179,7 @@ Partial Class CustomerList
         Me.受注金額計.HeaderText = "受注金額計"
         Me.受注金額計.Name = "受注金額計"
         Me.受注金額計.ReadOnly = True
+        Me.受注金額計.Visible = False
         Me.受注金額計.Width = 200
         '
         '請求金額計
@@ -174,6 +189,7 @@ Partial Class CustomerList
         Me.請求金額計.HeaderText = "請求金額計"
         Me.請求金額計.Name = "請求金額計"
         Me.請求金額計.ReadOnly = True
+        Me.請求金額計.Visible = False
         Me.請求金額計.Width = 200
         '
         '請求残高
@@ -183,6 +199,7 @@ Partial Class CustomerList
         Me.請求残高.HeaderText = "請求残高"
         Me.請求残高.Name = "請求残高"
         Me.請求残高.ReadOnly = True
+        Me.請求残高.Visible = False
         Me.請求残高.Width = 200
         '
         '受注件数
@@ -240,10 +257,11 @@ Partial Class CustomerList
     Friend WithEvents BtnBillingCalculation As Button
     Friend WithEvents LblCustomerName As Label
     Friend WithEvents DgvCustomer As DataGridView
-    Friend WithEvents 得意先名 As DataGridViewTextBoxColumn
     Friend WithEvents 得意先コード As DataGridViewTextBoxColumn
+    Friend WithEvents 得意先名 As DataGridViewTextBoxColumn
     Friend WithEvents 通貨_外貨 As DataGridViewTextBoxColumn
     Friend WithEvents 受注金額計_外貨 As DataGridViewTextBoxColumn
+    Friend WithEvents VAT_OUT計_外貨 As DataGridViewTextBoxColumn
     Friend WithEvents 請求金額計_外貨 As DataGridViewTextBoxColumn
     Friend WithEvents 請求残高_外貨 As DataGridViewTextBoxColumn
     Friend WithEvents 通貨 As DataGridViewTextBoxColumn

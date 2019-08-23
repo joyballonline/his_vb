@@ -79,32 +79,59 @@ Public Class CustomerList
             BtnBillingCalculation.Text = "SelectInvoice"
             btnBack.Text = "Back"
 
+            DgvCustomer.Columns("得意先コード").HeaderText = "CustomerCode"
             DgvCustomer.Columns("得意先名").HeaderText = "CustomerName"
+
             DgvCustomer.Columns("通貨_外貨").HeaderText = "Currency"
-            DgvCustomer.Columns("受注金額計_外貨").HeaderText = "TotalJobOrderAmountForeignCurrency"
-            DgvCustomer.Columns("請求金額計_外貨").HeaderText = "TotalBillingAmountForeignCurrency"
-            DgvCustomer.Columns("請求残高_外貨").HeaderText = "BillingBalanceForeignCurrency"
+            DgvCustomer.Columns("受注金額計_外貨").HeaderText = "TotalJobOrderAmount" & vbCrLf & "a"
+            DgvCustomer.Columns("VAT_OUT計_外貨").HeaderText = "TotalVAT-OUT" & vbCrLf & "b"
+            DgvCustomer.Columns("請求金額計_外貨").HeaderText = "TotalBillingAmount" & vbCrLf & "c"
+            DgvCustomer.Columns("請求残高_外貨").HeaderText = "BillingBalance" & vbCrLf & "d=a+b-c"
+
             DgvCustomer.Columns("通貨").HeaderText = "Currency"
             DgvCustomer.Columns("受注金額計").HeaderText = "TotalJobOrderAmount"
             DgvCustomer.Columns("請求金額計").HeaderText = "TotalBillingAmount"
             DgvCustomer.Columns("請求残高").HeaderText = "BillingBalance"
+
+        Else  '日本語
+
+            DgvCustomer.Columns("受注金額計_外貨").HeaderText = "受注金額計" & vbCrLf & "a"
+            DgvCustomer.Columns("VAT_OUT計_外貨").HeaderText = "VAT-OUT計" & vbCrLf & "b"
+            DgvCustomer.Columns("請求金額計_外貨").HeaderText = "請求済金額計" & vbCrLf & "c"
+            DgvCustomer.Columns("請求残高_外貨").HeaderText = "未請求金額計" & vbCrLf & "d=a+b-c"
+
         End If
 
         '数字形式
         DgvCustomer.Columns("受注金額計_外貨").DefaultCellStyle.Format = "N2"
+        DgvCustomer.Columns("VAT_OUT計_外貨").DefaultCellStyle.Format = "N2"
         DgvCustomer.Columns("請求金額計_外貨").DefaultCellStyle.Format = "N2"
         DgvCustomer.Columns("請求残高_外貨").DefaultCellStyle.Format = "N2"
         DgvCustomer.Columns("受注金額計").DefaultCellStyle.Format = "N2"
         DgvCustomer.Columns("請求金額計").DefaultCellStyle.Format = "N2"
         DgvCustomer.Columns("請求残高").DefaultCellStyle.Format = "N2"
 
+        '中央寄せ
+        DgvCustomer.Columns("得意先コード").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvCustomer.Columns("得意先名").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvCustomer.Columns("通貨_外貨").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvCustomer.Columns("受注金額計_外貨").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvCustomer.Columns("VAT_OUT計_外貨").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvCustomer.Columns("請求金額計_外貨").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvCustomer.Columns("請求残高_外貨").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
         '右寄せ
         DgvCustomer.Columns("受注金額計_外貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvCustomer.Columns("VAT_OUT計_外貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvCustomer.Columns("請求金額計_外貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvCustomer.Columns("請求残高_外貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvCustomer.Columns("受注金額計").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvCustomer.Columns("請求金額計").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvCustomer.Columns("請求残高").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+        DgvCustomer.Columns("受注金額計").Visible = False
+        DgvCustomer.Columns("請求金額計").Visible = False
+        DgvCustomer.Columns("請求残高").Visible = False
 
     End Sub
 
@@ -130,6 +157,7 @@ Public Class CustomerList
 
         Dim CustomerBillingAmountFC As Decimal
         Dim CustomerOrderAmountFC As Decimal
+        Dim VATFC As Decimal
 
         Dim CustomerBillingAmount As Decimal
         Dim CustomerOrderAmount As Decimal
@@ -138,6 +166,7 @@ Public Class CustomerList
 
             Sql = "SELECT "
             Sql += " SUM(見積金額_外貨) as 見積金額_外貨合計,SUM(見積金額) as 見積金額_合計,通貨"
+            Sql += ",ＶＡＴ"
             Sql += " FROM "
 
             Sql += "public.t10_cymnhd"
@@ -155,7 +184,7 @@ Public Class CustomerList
             Sql += " AND "
             Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
 
-            Sql += " group by 通貨"
+            Sql += " group by 通貨,ＶＡＴ"
 
             '得意先ごとの受注基本を取得
             Dim dsCymnhd As DataSet = _db.selectDB(Sql, RS, reccnt)
@@ -167,8 +196,10 @@ Public Class CustomerList
 
                 If IsDBNull(dsCymnhd.Tables(RS).Rows(j)("見積金額_外貨合計")) Then
                     CustomerOrderAmountFC = 0
+                    VATFC = 0
                 Else
                     CustomerOrderAmountFC = dsCymnhd.Tables(RS).Rows(j)("見積金額_外貨合計")
+                    VATFC = dsCymnhd.Tables(RS).Rows(j)("見積金額_外貨合計") * dsCymnhd.Tables(RS).Rows(j)("ＶＡＴ") / 100
                 End If
 
                 If IsDBNull(dsCymnhd.Tables(RS).Rows(j)("見積金額_合計")) Then
@@ -232,18 +263,21 @@ Public Class CustomerList
                 End If
 
                 DgvCustomer.Rows.Add()
+                DgvCustomer.Rows(idx).Cells("得意先コード").Value = dsCustomer.Tables(RS).Rows(i)("得意先コード")
                 DgvCustomer.Rows(idx).Cells("得意先名").Value = dsCustomer.Tables(RS).Rows(i)("得意先名")
+
                 DgvCustomer.Rows(idx).Cells("通貨_外貨").Value = cur
                 DgvCustomer.Rows(idx).Cells("受注金額計_外貨").Value = CustomerOrderAmountFC
+                DgvCustomer.Rows(idx).Cells("VAT_OUT計_外貨").Value = VATFC
                 DgvCustomer.Rows(idx).Cells("請求金額計_外貨").Value = CustomerBillingAmountFC
-                DgvCustomer.Rows(idx).Cells("請求残高_外貨").Value = CustomerOrderAmountFC - CustomerBillingAmountFC
+                DgvCustomer.Rows(idx).Cells("請求残高_外貨").Value = CustomerOrderAmountFC + VATFC - CustomerBillingAmountFC
+
                 DgvCustomer.Rows(idx).Cells("通貨").Value = setBaseCurrency()
                 DgvCustomer.Rows(idx).Cells("受注金額計").Value = CustomerOrderAmount
                 DgvCustomer.Rows(idx).Cells("請求金額計").Value = CustomerBillingAmount
                 DgvCustomer.Rows(idx).Cells("請求残高").Value = CustomerOrderAmount - CustomerBillingAmount
                 DgvCustomer.Rows(idx).Cells("受注件数").Value = CustomerOrderCount
                 DgvCustomer.Rows(idx).Cells("請求件数").Value = CustomerBillingCount
-                DgvCustomer.Rows(idx).Cells("得意先コード").Value = dsCustomer.Tables(RS).Rows(i)("得意先コード")
                 DgvCustomer.Rows(idx).Cells("会社コード").Value = dsCustomer.Tables(RS).Rows(i)("会社コード")
 
                 DgvCustomer.Rows(idx).Cells("通貨_外貨コード").Value = dsCymnhd.Tables(RS).Rows(j)("通貨")
