@@ -217,11 +217,11 @@ Public Class OrderingList
                     DgvHtyhd.Columns.Add("通貨_外貨", "Currency")
                     'DgvHtyhd.Columns.Add("通貨", "Currency")
 
-                    DgvHtyhd.Columns.Add("仕入原価_外貨", "PurchasingCost" & vbCrLf & "(ForeignCurrency)")
+                    DgvHtyhd.Columns.Add("仕入原価_外貨", "PurchasingCost" & vbCrLf & "(OrignalCurrency)")
                     DgvHtyhd.Columns.Add("仕入原価", "PurchasingCost" & vbCrLf & "(" & setBaseCurrency() & ")")
 
 
-                    DgvHtyhd.Columns.Add("仕入金額_外貨", "PurchaseAmount" & vbCrLf & "(ForeignCurrency)")
+                    DgvHtyhd.Columns.Add("仕入金額_外貨", "PurchaseAmount" & vbCrLf & "(OrignalCurrency)")
                     DgvHtyhd.Columns.Add("仕入金額", "PurchaseAmount" & vbCrLf & "(" & setBaseCurrency() & ")")
 
 
@@ -448,7 +448,7 @@ Public Class OrderingList
                     DgvHtyhd.Columns.Add("仕入先名", "SupplierName")
 
                     DgvHtyhd.Columns.Add("通貨_外貨", "Currency")
-                    DgvHtyhd.Columns.Add("仕入値_外貨", "PurchasePrice" & vbCrLf & "(ForeignCurrency)")
+                    DgvHtyhd.Columns.Add("仕入値_外貨", "PurchasePrice" & vbCrLf & "(OrignalCurrency)")
                     DgvHtyhd.Columns.Add("仕入値", "PurchasePrice" & vbCrLf & "(" & setBaseCurrency() & ")")
 
                     DgvHtyhd.Columns.Add("発注数量", "OrderQuantity")
@@ -456,7 +456,7 @@ Public Class OrderingList
                     DgvHtyhd.Columns.Add("発注残数", "NumberOfOrderRemaining ")
                     DgvHtyhd.Columns.Add("単位", "Unit")
 
-                    DgvHtyhd.Columns.Add("仕入金額_外貨", "PurchaseCost" & vbCrLf & "(ForeignCurrency)")
+                    DgvHtyhd.Columns.Add("仕入金額_外貨", "PurchaseCost" & vbCrLf & "(OrignalCurrency)")
                     DgvHtyhd.Columns.Add("仕入金額", "PurchaseCost" & vbCrLf & "(" & setBaseCurrency() & ")")
                     DgvHtyhd.Columns.Add("間接費", "OverHead")
 
