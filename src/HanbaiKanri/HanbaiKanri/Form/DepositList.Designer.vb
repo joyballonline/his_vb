@@ -27,6 +27,22 @@ Partial Class DepositList
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.DgvCustomer = New System.Windows.Forms.DataGridView()
+        Me.得意先コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.得意先名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.通貨_外貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.売掛金額_外貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.既入金額_外貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.売掛残高_外貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.請求金額残_外貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.通貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.受注金額計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.請求金額計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.請求金額残 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.売掛残高 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.受注件数 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.請求件数 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.会社コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.通貨_外貨コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnBack = New System.Windows.Forms.Button()
         Me.BtnDeposit = New System.Windows.Forms.Button()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -45,22 +61,6 @@ Partial Class DepositList
         Me.TxtBillingDateSince = New System.Windows.Forms.DateTimePicker()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.LblBillingDate = New System.Windows.Forms.Label()
-        Me.得意先コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.得意先名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.通貨_外貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.売掛金額_外貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.既入金額_外貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.売掛残高_外貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.請求金額残_外貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.通貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.受注金額計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.請求金額計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.請求金額残 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.売掛残高 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.受注件数 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.請求件数 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.会社コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.通貨_外貨コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DgvCustomer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -80,7 +80,7 @@ Partial Class DepositList
         Me.DgvCustomer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvCustomer.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.得意先コード, Me.得意先名, Me.通貨_外貨, Me.売掛金額_外貨, Me.既入金額_外貨, Me.売掛残高_外貨, Me.請求金額残_外貨, Me.通貨, Me.受注金額計, Me.請求金額計, Me.請求金額残, Me.売掛残高, Me.受注件数, Me.請求件数, Me.会社コード, Me.通貨_外貨コード})
         DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         DataGridViewCellStyle4.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
         DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
@@ -96,6 +96,130 @@ Partial Class DepositList
         Me.DgvCustomer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvCustomer.Size = New System.Drawing.Size(1326, 341)
         Me.DgvCustomer.TabIndex = 6
+        '
+        '得意先コード
+        '
+        Me.得意先コード.HeaderText = "得意先コード"
+        Me.得意先コード.Name = "得意先コード"
+        Me.得意先コード.ReadOnly = True
+        Me.得意先コード.Width = 181
+        '
+        '得意先名
+        '
+        Me.得意先名.HeaderText = "得意先名"
+        Me.得意先名.Name = "得意先名"
+        Me.得意先名.ReadOnly = True
+        Me.得意先名.Width = 151
+        '
+        '通貨_外貨
+        '
+        Me.通貨_外貨.HeaderText = "販売通貨"
+        Me.通貨_外貨.Name = "通貨_外貨"
+        Me.通貨_外貨.ReadOnly = True
+        Me.通貨_外貨.Width = 103
+        '
+        '売掛金額_外貨
+        '
+        Me.売掛金額_外貨.HeaderText = "売掛金額_外貨"
+        Me.売掛金額_外貨.Name = "売掛金額_外貨"
+        Me.売掛金額_外貨.ReadOnly = True
+        '
+        '既入金額_外貨
+        '
+        Me.既入金額_外貨.HeaderText = "既入金額_外貨"
+        Me.既入金額_外貨.Name = "既入金額_外貨"
+        Me.既入金額_外貨.ReadOnly = True
+        '
+        '売掛残高_外貨
+        '
+        Me.売掛残高_外貨.HeaderText = "売掛残高(外貨)"
+        Me.売掛残高_外貨.Name = "売掛残高_外貨"
+        Me.売掛残高_外貨.ReadOnly = True
+        Me.売掛残高_外貨.Width = 146
+        '
+        '請求金額残_外貨
+        '
+        Me.請求金額残_外貨.HeaderText = "請求金額残(外貨)"
+        Me.請求金額残_外貨.Name = "請求金額残_外貨"
+        Me.請求金額残_外貨.ReadOnly = True
+        Me.請求金額残_外貨.Visible = False
+        Me.請求金額残_外貨.Width = 168
+        '
+        '通貨
+        '
+        Me.通貨.HeaderText = "通貨"
+        Me.通貨.Name = "通貨"
+        Me.通貨.ReadOnly = True
+        Me.通貨.Visible = False
+        Me.通貨.Width = 97
+        '
+        '受注金額計
+        '
+        Me.受注金額計.HeaderText = "受注金額計"
+        Me.受注金額計.Name = "受注金額計"
+        Me.受注金額計.ReadOnly = True
+        Me.受注金額計.Visible = False
+        Me.受注金額計.Width = 140
+        '
+        '請求金額計
+        '
+        Me.請求金額計.HeaderText = "請求金額計"
+        Me.請求金額計.Name = "請求金額計"
+        Me.請求金額計.ReadOnly = True
+        Me.請求金額計.Visible = False
+        Me.請求金額計.Width = 140
+        '
+        '請求金額残
+        '
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.請求金額残.DefaultCellStyle = DataGridViewCellStyle2
+        Me.請求金額残.HeaderText = "請求金額残"
+        Me.請求金額残.Name = "請求金額残"
+        Me.請求金額残.ReadOnly = True
+        Me.請求金額残.Visible = False
+        Me.請求金額残.Width = 140
+        '
+        '売掛残高
+        '
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.売掛残高.DefaultCellStyle = DataGridViewCellStyle3
+        Me.売掛残高.HeaderText = "売掛残高"
+        Me.売掛残高.Name = "売掛残高"
+        Me.売掛残高.ReadOnly = True
+        Me.売掛残高.Visible = False
+        Me.売掛残高.Width = 118
+        '
+        '受注件数
+        '
+        Me.受注件数.HeaderText = "受注件数"
+        Me.受注件数.Name = "受注件数"
+        Me.受注件数.ReadOnly = True
+        Me.受注件数.Visible = False
+        Me.受注件数.Width = 118
+        '
+        '請求件数
+        '
+        Me.請求件数.HeaderText = "請求件数"
+        Me.請求件数.Name = "請求件数"
+        Me.請求件数.ReadOnly = True
+        Me.請求件数.Visible = False
+        Me.請求件数.Width = 118
+        '
+        '会社コード
+        '
+        Me.会社コード.HeaderText = "会社コード"
+        Me.会社コード.Name = "会社コード"
+        Me.会社コード.ReadOnly = True
+        Me.会社コード.Visible = False
+        Me.会社コード.Width = 112
+        '
+        '通貨_外貨コード
+        '
+        Me.通貨_外貨コード.HeaderText = "通貨_外貨コード"
+        Me.通貨_外貨コード.Name = "通貨_外貨コード"
+        Me.通貨_外貨コード.ReadOnly = True
+        Me.通貨_外貨コード.Visible = False
+        Me.通貨_外貨コード.Width = 146
         '
         'btnBack
         '
@@ -286,130 +410,6 @@ Partial Class DepositList
         Me.LblBillingDate.TabIndex = 328
         Me.LblBillingDate.Text = "SalesInvoiceDate"
         Me.LblBillingDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        '得意先コード
-        '
-        Me.得意先コード.HeaderText = "得意先コード"
-        Me.得意先コード.Name = "得意先コード"
-        Me.得意先コード.ReadOnly = True
-        Me.得意先コード.Width = 181
-        '
-        '得意先名
-        '
-        Me.得意先名.HeaderText = "得意先名"
-        Me.得意先名.Name = "得意先名"
-        Me.得意先名.ReadOnly = True
-        Me.得意先名.Width = 151
-        '
-        '通貨_外貨
-        '
-        Me.通貨_外貨.HeaderText = "販売通貨"
-        Me.通貨_外貨.Name = "通貨_外貨"
-        Me.通貨_外貨.ReadOnly = True
-        Me.通貨_外貨.Width = 103
-        '
-        '売掛金額_外貨
-        '
-        Me.売掛金額_外貨.HeaderText = "売掛金額_外貨"
-        Me.売掛金額_外貨.Name = "売掛金額_外貨"
-        Me.売掛金額_外貨.ReadOnly = True
-        '
-        '既入金額_外貨
-        '
-        Me.既入金額_外貨.HeaderText = "既入金額_外貨"
-        Me.既入金額_外貨.Name = "既入金額_外貨"
-        Me.既入金額_外貨.ReadOnly = True
-        '
-        '売掛残高_外貨
-        '
-        Me.売掛残高_外貨.HeaderText = "売掛残高(外貨)"
-        Me.売掛残高_外貨.Name = "売掛残高_外貨"
-        Me.売掛残高_外貨.ReadOnly = True
-        Me.売掛残高_外貨.Width = 146
-        '
-        '請求金額残_外貨
-        '
-        Me.請求金額残_外貨.HeaderText = "請求金額残(外貨)"
-        Me.請求金額残_外貨.Name = "請求金額残_外貨"
-        Me.請求金額残_外貨.ReadOnly = True
-        Me.請求金額残_外貨.Visible = False
-        Me.請求金額残_外貨.Width = 168
-        '
-        '通貨
-        '
-        Me.通貨.HeaderText = "通貨"
-        Me.通貨.Name = "通貨"
-        Me.通貨.ReadOnly = True
-        Me.通貨.Visible = False
-        Me.通貨.Width = 97
-        '
-        '受注金額計
-        '
-        Me.受注金額計.HeaderText = "受注金額計"
-        Me.受注金額計.Name = "受注金額計"
-        Me.受注金額計.ReadOnly = True
-        Me.受注金額計.Visible = False
-        Me.受注金額計.Width = 140
-        '
-        '請求金額計
-        '
-        Me.請求金額計.HeaderText = "請求金額計"
-        Me.請求金額計.Name = "請求金額計"
-        Me.請求金額計.ReadOnly = True
-        Me.請求金額計.Visible = False
-        Me.請求金額計.Width = 140
-        '
-        '請求金額残
-        '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.請求金額残.DefaultCellStyle = DataGridViewCellStyle2
-        Me.請求金額残.HeaderText = "請求金額残"
-        Me.請求金額残.Name = "請求金額残"
-        Me.請求金額残.ReadOnly = True
-        Me.請求金額残.Visible = False
-        Me.請求金額残.Width = 140
-        '
-        '売掛残高
-        '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.売掛残高.DefaultCellStyle = DataGridViewCellStyle3
-        Me.売掛残高.HeaderText = "売掛残高"
-        Me.売掛残高.Name = "売掛残高"
-        Me.売掛残高.ReadOnly = True
-        Me.売掛残高.Visible = False
-        Me.売掛残高.Width = 118
-        '
-        '受注件数
-        '
-        Me.受注件数.HeaderText = "受注件数"
-        Me.受注件数.Name = "受注件数"
-        Me.受注件数.ReadOnly = True
-        Me.受注件数.Visible = False
-        Me.受注件数.Width = 118
-        '
-        '請求件数
-        '
-        Me.請求件数.HeaderText = "請求件数"
-        Me.請求件数.Name = "請求件数"
-        Me.請求件数.ReadOnly = True
-        Me.請求件数.Visible = False
-        Me.請求件数.Width = 118
-        '
-        '会社コード
-        '
-        Me.会社コード.HeaderText = "会社コード"
-        Me.会社コード.Name = "会社コード"
-        Me.会社コード.ReadOnly = True
-        Me.会社コード.Visible = False
-        Me.会社コード.Width = 112
-        '
-        '通貨_外貨コード
-        '
-        Me.通貨_外貨コード.HeaderText = "通貨_外貨コード"
-        Me.通貨_外貨コード.Name = "通貨_外貨コード"
-        Me.通貨_外貨コード.ReadOnly = True
-        Me.通貨_外貨コード.Visible = False
-        Me.通貨_外貨コード.Width = 146
         '
         'DepositList
         '
