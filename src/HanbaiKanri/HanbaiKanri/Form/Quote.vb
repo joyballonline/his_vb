@@ -2610,10 +2610,17 @@ Public Class Quote
         Sql3 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql3 += " AND 見積番号 = '" & EditNo.ToString & "'"
         Sql3 += " AND 見積番号枝番 ='" & EditSuffix.ToString & "'"
+        Sql3 += " AND (仕入単価 is null or 仕入単価 = 0)"
         Sql3 += " ORDER BY 行番号"
 
         Dim ds3 = _db.selectDB(Sql3, RS, reccnt)
 
+        If ds3.tables(RS).rows.count = 0 Then
+            '対象データがないメッセージを表示
+            _msgHd.dspMSG("NonData", frmC01F10_Login.loginValue.Language)
+
+            Exit Sub
+        End If
 
         Dim supplierlist As New List(Of String)(New String() {})
         Dim supplierChkList As New List(Of Boolean)
