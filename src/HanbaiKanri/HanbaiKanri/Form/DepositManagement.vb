@@ -167,7 +167,7 @@ Public Class DepositManagement
 
 
             DgvCustomer.Columns("請求先").HeaderText = "BillingAddress"
-            DgvCustomer.Columns("請求残高").HeaderText = "BillingBalance"
+            DgvCustomer.Columns("請求残高").HeaderText = "AccountsReceivableAmount"
 
             DgvHistory.Columns("請求番号").HeaderText = "InvoiceNumber"
             DgvHistory.Columns("入金済請求先").HeaderText = "CustomerName"
@@ -181,18 +181,32 @@ Public Class DepositManagement
             DgvDeposit.Columns("入金種目").HeaderText = "MoneyReceiptType"
             DgvDeposit.Columns("入力入金額").HeaderText = "TotalMoneyReceiptAmount"
 
+            DgvBillingInfo.Columns("受注番号").HeaderText = "OrderNumber"
             DgvBillingInfo.Columns("請求情報請求番号").HeaderText = "InvoiceNumber"
             DgvBillingInfo.Columns("請求日").HeaderText = "BillingDate"
-            DgvBillingInfo.Columns("請求金額").HeaderText = "BillingAmount"
-            DgvBillingInfo.Columns("請求情報入金額計").HeaderText = "TotalAmountOfMoneyReceived"
-            DgvBillingInfo.Columns("請求情報請求残高").HeaderText = "UnreceivedAmount"
+            DgvBillingInfo.Columns("請求金額").HeaderText = "AccountsReceivableAmount" & vbCrLf & "a"               '売掛残高
+            DgvBillingInfo.Columns("請求情報入金額計").HeaderText = "DepositAmount" & vbCrLf & "b"                  '既入金額
+            DgvBillingInfo.Columns("請求情報請求残高").HeaderText = "AccountsReceivableBalance" & vbCrLf & "c=a-b"  '未入金額
             DgvBillingInfo.Columns("入金額").HeaderText = "AmountToRegisterForReceiving"
 
-        Else
+        Else  '日本語
 
             LblMode.Text = "入金入力モード"
 
+            DgvBillingInfo.Columns("請求金額").HeaderText = "売掛金額" & vbCrLf & "a"
+            DgvBillingInfo.Columns("請求情報入金額計").HeaderText = "既入金額" & vbCrLf & "b"
+            DgvBillingInfo.Columns("請求情報請求残高").HeaderText = "売掛残高" & vbCrLf & "c=a-b"
+
         End If
+
+        '中央寄せ
+        DgvBillingInfo.Columns("受注番号").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvBillingInfo.Columns("請求情報請求番号").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvBillingInfo.Columns("請求日").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvBillingInfo.Columns("請求金額").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvBillingInfo.Columns("請求情報入金額計").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvBillingInfo.Columns("請求情報請求残高").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvBillingInfo.Columns("入金額").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
 
         '数字形式
@@ -384,6 +398,7 @@ Public Class DepositManagement
         For i As Integer = 0 To dsSkyuhd.Tables(RS).Rows.Count - 1
             DgvBillingInfo.Rows.Add()
             DgvBillingInfo.Rows(i).Cells("InfoNo").Value = i + 1
+            DgvBillingInfo.Rows(i).Cells("受注番号").Value = dsSkyuhd.Tables(RS).Rows(i)("受注番号")
             DgvBillingInfo.Rows(i).Cells("請求情報請求番号").Value = dsSkyuhd.Tables(RS).Rows(i)("請求番号")
             DgvBillingInfo.Rows(i).Cells("請求日").Value = dsSkyuhd.Tables(RS).Rows(i)("請求日").ToShortDateString()
             DgvBillingInfo.Rows(i).Cells("請求金額").Value = dsSkyuhd.Tables(RS).Rows(i)("請求金額計_外貨")
