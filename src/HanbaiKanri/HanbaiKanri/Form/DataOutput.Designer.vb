@@ -85,11 +85,11 @@ Partial Class DataOutput
         Me.DtpDateSince.CustomFormat = ""
         Me.DtpDateSince.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpDateSince.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DtpDateSince.Location = New System.Drawing.Point(0, 2)
+        Me.DtpDateSince.Location = New System.Drawing.Point(0, 0)
         Me.DtpDateSince.Margin = New System.Windows.Forms.Padding(0)
         Me.DtpDateSince.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.DtpDateSince.Name = "DtpDateSince"
-        Me.DtpDateSince.Size = New System.Drawing.Size(148, 22)
+        Me.DtpDateSince.Size = New System.Drawing.Size(148, 37)
         Me.DtpDateSince.TabIndex = 97
         Me.DtpDateSince.TabStop = False
         Me.DtpDateSince.Value = New Date(2019, 1, 1, 0, 0, 0, 0)
@@ -98,9 +98,9 @@ Partial Class DataOutput
         '
         Me.Label5.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(151, 7)
+        Me.Label5.Location = New System.Drawing.Point(151, 1)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(17, 12)
+        Me.Label5.Size = New System.Drawing.Size(34, 24)
         Me.Label5.TabIndex = 99
         Me.Label5.Text = "～"
         '
@@ -111,11 +111,11 @@ Partial Class DataOutput
         Me.DtpDateUntil.CustomFormat = ""
         Me.DtpDateUntil.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpDateUntil.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DtpDateUntil.Location = New System.Drawing.Point(171, 2)
+        Me.DtpDateUntil.Location = New System.Drawing.Point(188, 0)
         Me.DtpDateUntil.Margin = New System.Windows.Forms.Padding(0)
         Me.DtpDateUntil.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.DtpDateUntil.Name = "DtpDateUntil"
-        Me.DtpDateUntil.Size = New System.Drawing.Size(148, 22)
+        Me.DtpDateUntil.Size = New System.Drawing.Size(148, 37)
         Me.DtpDateUntil.TabIndex = 100
         Me.DtpDateUntil.TabStop = False
         Me.DtpDateUntil.Value = New Date(2019, 1, 1, 0, 0, 0, 0)
@@ -139,9 +139,9 @@ Partial Class DataOutput
         Me.RbtnQuotation.AutoSize = True
         Me.RbtnQuotation.Checked = True
         Me.RbtnQuotation.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.RbtnQuotation.Location = New System.Drawing.Point(3, 4)
+        Me.RbtnQuotation.Location = New System.Drawing.Point(3, 3)
         Me.RbtnQuotation.Name = "RbtnQuotation"
-        Me.RbtnQuotation.Size = New System.Drawing.Size(57, 19)
+        Me.RbtnQuotation.Size = New System.Drawing.Size(104, 21)
         Me.RbtnQuotation.TabIndex = 102
         Me.RbtnQuotation.TabStop = True
         Me.RbtnQuotation.Text = "見積"
@@ -189,9 +189,9 @@ Partial Class DataOutput
         Me.RbtnSales.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.RbtnSales.AutoSize = True
         Me.RbtnSales.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.RbtnSales.Location = New System.Drawing.Point(129, 4)
+        Me.RbtnSales.Location = New System.Drawing.Point(223, 3)
         Me.RbtnSales.Name = "RbtnSales"
-        Me.RbtnSales.Size = New System.Drawing.Size(57, 19)
+        Me.RbtnSales.Size = New System.Drawing.Size(104, 21)
         Me.RbtnSales.TabIndex = 104
         Me.RbtnSales.Text = "売上"
         Me.RbtnSales.UseVisualStyleBackColor = True
@@ -201,9 +201,9 @@ Partial Class DataOutput
         Me.RbtnJobOrder.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.RbtnJobOrder.AutoSize = True
         Me.RbtnJobOrder.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.RbtnJobOrder.Location = New System.Drawing.Point(66, 4)
+        Me.RbtnJobOrder.Location = New System.Drawing.Point(113, 3)
         Me.RbtnJobOrder.Name = "RbtnJobOrder"
-        Me.RbtnJobOrder.Size = New System.Drawing.Size(57, 19)
+        Me.RbtnJobOrder.Size = New System.Drawing.Size(104, 21)
         Me.RbtnJobOrder.TabIndex = 103
         Me.RbtnJobOrder.Text = "受注"
         Me.RbtnJobOrder.UseVisualStyleBackColor = True

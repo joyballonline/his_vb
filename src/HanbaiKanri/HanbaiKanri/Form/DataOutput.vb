@@ -331,7 +331,7 @@ Public Class DataOutput
             Sql += ",t31.単位"
             Sql += ",t31.間接費"
             Sql += ",t31.売単価"
-            Sql += ",t31.売上金額"
+            Sql += ",t31.売上金額 as 明細売上金額"
             Sql += ",t31.粗利額 as 明細粗利額"
             Sql += ",t31.粗利率"
             Sql += ",t31.リードタイム"
@@ -657,8 +657,10 @@ Public Class DataOutput
             DgvList.Columns("仕入金額").HeaderText = "PurchaseAmount"
             DgvList.Columns("ＶＡＴ").HeaderText = "ＶＡＴ"
             DgvList.Columns("見積金額").HeaderText = "QuotationAmount"
+            DgvList.Columns("売上金額").HeaderText = "SalesAmount"
             DgvList.Columns("粗利額").HeaderText = "GrossMargin"
             DgvList.Columns("仕入区分").HeaderText = "PurchasingClassification"
+            DgvList.Columns("締処理日").HeaderText = "ClosingDate"
             DgvList.Columns("客先番号").HeaderText = "PO"
             DgvList.Columns("仕入先名").HeaderText = "SupplierName"
             DgvList.Columns("メーカー").HeaderText = "Manufacturer"
@@ -673,12 +675,12 @@ Public Class DataOutput
             DgvList.Columns("仕入値").HeaderText = "PurchaseAmount"
             DgvList.Columns("明細仕入金額").HeaderText = "DetailsPurchaseAmount"
             DgvList.Columns("売単価").HeaderText = "SellingPrice"
-            DgvList.Columns("売上金額").HeaderText = "SalesAmount"
             DgvList.Columns("間接費").HeaderText = "Overhead"
             DgvList.Columns("更新者").HeaderText = "ModifiedBy"
             DgvList.Columns("登録日").HeaderText = "RegistrationDate"
             DgvList.Columns("粗利率").HeaderText = "GrossMarginRate"
             DgvList.Columns("粗利額").HeaderText = "GrossMargin"
+            DgvList.Columns("明細売上金額").HeaderText = "DetailsSalesAmount"
             DgvList.Columns("明細粗利額").HeaderText = "DetailsGrossMargin"
             DgvList.Columns("仕入原価").HeaderText = "PurchasingCost"
             DgvList.Columns("関税率").HeaderText = "CustomsDutyRate"
@@ -721,7 +723,6 @@ Public Class DataOutput
         DgvList.Columns("受注残数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
         DgvList.Columns("売単価").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        DgvList.Columns("売上金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvList.Columns("間接費").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvList.Columns("粗利額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvList.Columns("粗利率").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -735,6 +736,7 @@ Public Class DataOutput
         DgvList.Columns("リードタイム").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvList.Columns("見積単価").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvList.Columns("見積金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("明細売上金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvList.Columns("明細粗利額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvList.Columns("明細仕入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvList.Columns("明細見積金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
