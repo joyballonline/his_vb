@@ -246,3 +246,256 @@ INSERT INTO Public.t21_hattyu(会社コード, 発注番号, 発注番号枝番,
    場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\kuji\Source\Repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
    場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\kuji\Source\Repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
 INSERT INTO Public.t21_hattyu(会社コード, 発注番号, 発注番号枝番, 行番号, 仕入区分, 仕入先名, メーカー, 品名, 型式, 単位, 仕入値, 発注数量, 仕入数量, 発注残数, 間接費, 仕入金額, リードタイム, リードタイム単位, 入庫数, 未入庫数, 備考, 更新者, 登録日, 更新日, 仕入単価_外貨, 仕入通貨, 仕入レート, 関税率, 関税額, 前払法人税率, 前払法人税額, 輸送費率, 輸送費額, 仕入値_外貨, 仕入金額_外貨, 見積単価_外貨, 見積金額_外貨, 通貨, レート )VALUES('demo', 'PO08060581', '2', '1', 1, '株式会社八乙女', 'メーカーC', '品名C', '型式C', 'set', '100.000', '1.000', '0', '1.000', 0, '113.930', '', '1', '0', '1', '', 'デモ太郎', current_timestamp, current_timestamp, '100.000', '1', '1.0000000000', '0.012', '1.200', '0.025', '2.530', '0.102', '10.200', 100.000, 114.000, '320.000', '320.000', '1', '1.0000000000,  )
+2019/08/13 12:48:01   ERR***** データ更新失敗：ERROR: 42601: syntax error at or near ","
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+UPDATE  t45_shukodt  SET ,更新日 = '2019/08/13 12:48:01',更新者 = 'zenbi01' WHERE  会社コード = 'ZENBI' AND  受注番号 = 'AO08130452' AND  受注番号枝番 = '1' AND  行番号 = '1'
+2019/08/13 12:52:05   ERR***** データ更新失敗：ERROR: 42601: syntax error at or near ","
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+UPDATE  t45_shukodt  SET ,更新日 = '2019/08/13 12:49:13',更新者 = 'zenbi01' WHERE  会社コード = 'ZENBI' AND  受注番号 = 'AO08130452' AND  受注番号枝番 = '1' AND  行番号 = '1'
+2019/08/13 12:56:51   ERR***** データ取得失敗：ERROR: 42601: syntax error at or near "UPDATE"
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT * FROM public.t45_shukodt WHERE 会社コード = 'ZENBI'UPDATE  t45_shukodt  SET  更新日 = '2019/08/13 12:56:33',更新者 = 'zenbi01' WHERE  会社コード = 'ZENBI' AND  受注番号 = 'AO08130452' AND  受注番号枝番 = '1' AND  行番号 = '1' AND  受注番号 = 'AO08130452' AND  受注番号枝番 = '1' AND  行番号 = '1'
+2019/08/13 12:57:55   ERR***** データ取得失敗：ERROR: 42601: syntax error at or near "UPDATE"
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT * FROM public.t45_shukodt WHERE 会社コード = 'ZENBI'UPDATE  t45_shukodt  SET  更新日 = '2019/08/13 12:57:49',更新者 = 'zenbi01' WHERE  会社コード = 'ZENBI' AND  受注番号 = 'AO08130452' AND  受注番号枝番 = '1' AND  行番号 = '1' AND  受注番号 = 'AO08130452' AND  受注番号枝番 = '1' AND  行番号 = '1'
+2019/08/13 12:59:40   ERR***** データ更新失敗：ERROR: 42601: syntax error at or near "行番号"
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+UPDATE t70_inout  SET  取消区分 = 1,取消日 = '2019/08/13 12:58:49',更新日 = '2019/08/13 12:58:49',更新者 = 'zenbi01' WHERE  会社コード = 'ZENBI' AND 伝票番号 ='LS08130278'   行番号 ='1'
+2019/08/13 13:08:41   ERR***** データ更新失敗：ERROR: 42703: column "更新日" of relation "t11_cymndt" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+UPDATE  Public.t11_cymndt  SET   更新日 = '2019/08/13 13:01:16', 更新者 = 'zenbi01' WHERE 会社コード ='ZENBI' AND 受注番号 ='AO08130452' AND 受注番号枝番 ='1'
+2019/08/13 13:13:07   ERR***** データ更新失敗：ERROR: 42601: syntax error at or near ","
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+UPDATE  Public.t11_cymndt  SET , 更新者 = 'zenbi01' WHERE 会社コード ='ZENBI' AND 受注番号 ='AO08130450' AND 受注番号枝番 ='1'
+16/08/2019 12.51.46   ERR***** データ更新失敗：ERROR: 42601: INSERT has more expressions than target columns
+   at UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:line 415
+   at UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:line 297
+INSERT INTO Public.t67_swkhd("会社コード","処理年月","TRANSACTIONID","KeyID","GLACCOUNT","GLAMOUNT","RATE","VENDORNO","JVNUMBER","TRANSDATE","TRANSDESCRIPTION","JVAMOUNT","CUSTOMERNO","DESCRIPTION")  VALUES('ZENBI','201902',4142,0,'棚卸資産',440000,00,1,'supplier01','WH-PO902061-0','2019-02-06','','484380,00','avc-sup001','') 
+16/08/2019 12.54.16   ERR***** データ更新失敗：ERROR: 42601: INSERT has more expressions than target columns
+   at UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:line 415
+   at UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:line 297
+INSERT INTO Public.t67_swkhd("会社コード","処理年月","TRANSACTIONID","KeyID","GLACCOUNT","GLAMOUNT","RATE","VENDORNO","JVNUMBER","TRANSDATE","TRANSDESCRIPTION","JVAMOUNT","CUSTOMERNO","DESCRIPTION")  VALUES('ZENBI','201902',4143,0,'棚卸資産',440000,00,1,'supplier01','WH-PO902061-0','2019-02-06','','484380,00','avc-sup001','') 
+16/08/2019 12.55.26   ERR***** データ更新失敗：ERROR: 42601: INSERT has more expressions than target columns
+   at UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:line 415
+   at UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:line 297
+INSERT INTO Public.t67_swkhd("会社コード","処理年月","TRANSACTIONID","KeyID","GLACCOUNT","GLAMOUNT","RATE","VENDORNO","JVNUMBER","TRANSDATE","TRANSDESCRIPTION","JVAMOUNT","CUSTOMERNO","DESCRIPTION")  VALUES('ZENBI','201902',4144,0,'棚卸資産',440000,00,1,'supplier01','WH-PO902061-0','2019-02-06','','484380,00','avc-sup001','') 
+16/08/2019 12.57.21   ERR***** データ更新失敗：ERROR: 42601: INSERT has more expressions than target columns
+   at UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:line 415
+   at UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:line 297
+INSERT INTO Public.t67_swkhd("会社コード","処理年月","TRANSACTIONID","KeyID","GLACCOUNT","GLAMOUNT","RATE","VENDORNO","JVNUMBER","TRANSDATE","TRANSDESCRIPTION","JVAMOUNT","CUSTOMERNO","DESCRIPTION")  VALUES('ZENBI','201902',4145,0,'棚卸資産',440000,00,1,'supplier01','WH-PO902061-0','2019-02-06','','484380,00','avc-sup001','') 
+16/08/2019 13.16.43   ERR***** データ更新失敗：ERROR: 42601: INSERT has more expressions than target columns
+   at UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:line 415
+   at UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:line 297
+INSERT INTO Public.t67_swkhd("会社コード","処理年月","TRANSACTIONID","KeyID","GLACCOUNT","GLAMOUNT","RATE","VENDORNO","JVNUMBER","TRANSDATE","TRANSDESCRIPTION","JVAMOUNT","CUSTOMERNO","DESCRIPTION")  VALUES('ZENBI','201902',4159,0,'棚卸資産',440000,00,1,'supplier01','WH-PO902061-0','2019-02-06','','484380,00','avc-sup001','') 
+16/08/2019 13.47.44   ERR***** データ更新失敗：ERROR: 22P02: invalid input syntax for type numeric: "484380,00"
+   at UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:line 415
+   at UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:line 297
+INSERT INTO Public.t67_swkhd("会社コード","処理年月","TRANSACTIONID","KeyID","GLACCOUNT","GLAMOUNT","RATE","VENDORNO","JVNUMBER","TRANSDATE","TRANSDESCRIPTION","JVAMOUNT","CUSTOMERNO","DESCRIPTION")  VALUES('ZENBI','201902',4163,0,'棚卸資産',440000.000,1,'supplier01','WH-PO902061-0','2019-02-06','','484380,00','avc-sup001','') 
+16/08/2019 13.49.58   ERR***** データ更新失敗：ERROR: 42601: INSERT has more expressions than target columns
+   at UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:line 415
+   at UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:line 297
+INSERT INTO Public.t67_swkhd("会社コード","処理年月","TRANSACTIONID","KeyID","GLACCOUNT","GLAMOUNT","RATE","VENDORNO","JVNUMBER","TRANSDATE","TRANSDESCRIPTION","JVAMOUNT","CUSTOMERNO","DESCRIPTION")  VALUES('ZENBI','201902',4164,1,'買掛金',-440000,00,1,'supplier01','WH-PO902061-0','2019-02-06','','484380,00','avc-sup001','') 
+16/08/2019 14.11.57   ERR***** データ更新失敗：ERROR: 22P02: invalid input syntax for type numeric: "484380,00"
+   at UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:line 415
+   at UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:line 297
+INSERT INTO Public.t67_swkhd("会社コード","処理年月","TRANSACTIONID","KeyID","GLACCOUNT","GLAMOUNT","RATE","VENDORNO","JVNUMBER","TRANSDATE","TRANSDESCRIPTION","JVAMOUNT","CUSTOMERNO","DESCRIPTION")  VALUES('ZENBI','201902',4165,0,'棚卸資産',440000.000,1,'supplier01','WH-PO902061-0','2019-02-06','','484380,00','avc-sup001','') 
+2019/08/18 13:57:45   ERR***** データベース接続失敗
+データベースの接続に失敗しました。
+	　 Failed to establish a connection to '13.230.190.253'.
+   場所 UtilMDL.DB.UtilPostgresHandler..ctor(String prmSvAdr, String prmPortNo, String prmDbNm, String prmUserId, String prmPswd, Int16 prmTimeout) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 77
+   場所 UtilMDL.DB.UtilPostgresDebugger..ctor(String prmSvAdr, String prmPortNo, String prmDbNm, String prmUserId, String prmPswd, String prmFileNm, Boolean prmDebugFlg, Boolean prmConsoleWrite, Int16 prmTimeout) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 91
+2019/08/18 14:10:37   ERR***** データ取得失敗：The Connection is broken.
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT * FROM public.t71_exchangerate WHERE 会社コード ILIKE 'ZENBI' AND 採番キー = 2 AND 基準日 < '2019/08/16' ORDER BY 基準日 DESC 
+2019/08/18 14:10:38   ERR***** データ取得失敗：The Connection is broken.
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT * FROM public.t10_cymnhd WHERE 会社コード = 'ZENBI' AND  受注日 >= '2019/08/04' AND  受注日 <= '2019/08/18' AND 取消区分 = 0 ORDER BY 更新日 DESC
+2019/08/19 10:09:14   ERR***** データ取得失敗：ERROR: 42601: syntax error at or near "."
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT t30.* t10.通貨,t10.見積金額_外貨 FROM  public.t30_urighd t30  left join t10_cymnhd t10 on t30.受注番号 = t10.受注番号 and t30.受注番号枝番 = t10.受注番号枝番 WHERE  t30.会社コード ILIKE 'ZENBI' AND  t30.売上日 >= '2019/08/05' AND  t30.売上日 <= '2019/08/19' AND t30.取消区分 = 0 ORDER BY t30.更新日 DESC
+2019/08/19 10:16:22   ERR***** データ取得失敗：ERROR: 42601: syntax error at or near "."
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT t30.* t10.通貨,t10.見積金額_外貨 FROM  public.t30_urighd t30  left join t10_cymnhd t10 on t30.受注番号 = t10.受注番号 and t30.受注番号枝番 = t10.受注番号枝番 WHERE  t30.会社コード ILIKE 'ZENBI' AND  t30.売上日 >= '2019/08/05' AND  t30.売上日 <= '2019/08/19' AND t30.取消区分 = 0 ORDER BY t30.更新日 DESC
+2019/08/19 10:37:04   ERR***** データ取得失敗：ERROR: 42601: syntax error at or near "."
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT t30.*,t10.通貨,t10.見積金額 as t10.見積金額,t10.見積金額_外貨 FROM  public.t30_urighd t30  left join t10_cymnhd t10 on t30.受注番号 = t10.受注番号 and t30.受注番号枝番 = t10.受注番号枝番 WHERE  t30.会社コード ILIKE 'ZENBI' AND  t30.売上日 >= '2019/08/05' AND  t30.売上日 <= '2019/08/19' AND t30.取消区分 = 0 ORDER BY t30.更新日 DESC
+19/08/2019 13.56.50   ERR***** データ更新失敗：ERROR: 22P02: invalid input syntax for type numeric: "5000,000"
+   at UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:line 415
+   at UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:line 297
+INSERT INTO Public.t66_swkhd(会社コード, 見積番号, 受注番号, 客先番号, 取引先名, 仕分日, 借方勘定科目, 借方勘定科目金額, 貸方勘定科目, 貸方勘定科目金額) VALUES('ZENBI', 'QT02060175', 'AO02060109', 'PO902064', '得意先名', '06/02/2019', '現金預金', '5000,000', '売掛金', '5000,000')
+19/08/2019 13.57.53   ERR***** データ更新失敗：ERROR: 22P02: invalid input syntax for type numeric: "5000,000"
+   at UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:line 415
+   at UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:line 297
+INSERT INTO Public.t66_swkhd(会社コード, 見積番号, 受注番号, 客先番号, 取引先名, 仕分日, 借方勘定科目, 借方勘定科目金額, 貸方勘定科目, 貸方勘定科目金額) VALUES('ZENBI', 'QT02060175', 'AO02060109', 'PO902064', '得意先名', '06/02/2019', '現金預金', '5000,000', '売掛金', '5000,000')
+19/08/2019 14.02.45   ERR***** データ更新失敗：ERROR: 22008: date/time field value out of range: "13/02/2019"
+   at UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:line 415
+   at UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:line 297
+INSERT INTO Public.t66_swkhd(会社コード, 見積番号, 受注番号, 客先番号, 取引先名, 仕分日, 借方勘定科目, 借方勘定科目金額, 貸方勘定科目, 貸方勘定科目金額) VALUES('ZENBI', 'QT02120194', 'AO02130112', 'PO902131', '得意先2', '13/02/2019', '現金預金', '10000.000', '前受金', '10000.000')
+19/08/2019 14.06.12   ERR***** データ更新失敗：ERROR: 22008: date/time field value out of range: "13/02/2019"
+   at UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:line 415
+   at UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:line 297
+INSERT INTO Public.t66_swkhd(会社コード, 見積番号, 受注番号, 客先番号, 取引先名, 仕分日, 借方勘定科目, 借方勘定科目金額, 貸方勘定科目, 貸方勘定科目金額) VALUES('ZENBI', 'QT02120194', 'AO02130112', 'PO902131', '得意先2', '13/02/2019', '現金預金', '10000.000', '前受金', '10000.000')
+19/08/2019 14.09.19   ERR***** データ更新失敗：ERROR: 22008: date/time field value out of range: "13/02/2019"
+   at UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:line 415
+   at UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:line 297
+INSERT INTO Public.t66_swkhd(会社コード, 見積番号, 受注番号, 客先番号, 取引先名, 仕分日, 借方勘定科目, 借方勘定科目金額, 貸方勘定科目, 貸方勘定科目金額) VALUES('ZENBI', 'QT02120194', 'AO02130112', 'PO902131', '得意先2', '13/02/2019', '現金預金', '10000.000', '前受金', '10000.000')
+19/08/2019 14.10.07   ERR***** データ更新失敗：ERROR: 22008: date/time field value out of range: "13/02/2019"
+   at UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:line 415
+   at UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:line 297
+INSERT INTO Public.t66_swkhd(会社コード, 見積番号, 受注番号, 客先番号, 取引先名, 仕分日, 借方勘定科目, 借方勘定科目金額, 貸方勘定科目, 貸方勘定科目金額) VALUES('ZENBI', 'QT02120194', 'AO02130112', 'PO902131', '得意先2', '13/02/2019', '現金預金', '10000.000', '前受金', '10000.000')
+19/08/2019 14.51.30   ERR***** データ更新失敗：ERROR: 22003: numeric field overflow
+   at UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:line 415
+   at UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:line 297
+INSERT INTO Public.t52_krurighd(会社コード, 売上番号, 客先番号, 受注番号, 受注番号枝番, 見積番号, 見積番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額, 仕入金額, 売上金額, 粗利額, 営業担当者, 入力担当者, 備考, ＶＡＴ, ＰＰＨ, 受注日, 売上日, 締処理日, 入金予定日, 登録日, 更新日, 更新者, 取消日, 取消区分) VALUES('ZENBI', 'ER02190041', '', 'AO02190183', '1', 'QT02190322', '1', '得コード02', 'くま得意102', '1010022', '宮城県 仙台市 22-202', '0192020222', '0192020221', '営業部', '得くま', '2019/02/19', '2019/02/26', '支払202', '600000.000', '500677.000', '600000.000', '99323.000', 'テスト太郎', 'test', '', '15.000', '0.000', '2019/02/19', '2019/02/19', '2019/08/19', '2019/02/19', '2019/02/19', '2019/08/19', 'zenbi01', null, '0')
+19/08/2019 14.54.14   ERR***** データ更新失敗：ERROR: 22003: numeric field overflow
+   at UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:line 415
+   at UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:line 297
+INSERT INTO Public.t52_krurighd(会社コード, 売上番号, 客先番号, 受注番号, 受注番号枝番, 見積番号, 見積番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額, 仕入金額, 売上金額, 粗利額, 営業担当者, 入力担当者, 備考, ＶＡＴ, ＰＰＨ, 受注日, 売上日, 締処理日, 入金予定日, 登録日, 更新日, 更新者, 取消日, 取消区分) VALUES('ZENBI', 'ER02190041', '', 'AO02190183', '1', 'QT02190322', '1', '得コード02', 'くま得意102', '1010022', '宮城県 仙台市 22-202', '0192020222', '0192020221', '営業部', '得くま', '2019/02/19', '2019/02/26', '支払202', '600000.000', '500677.000', '600000.000', '99323.000', 'テスト太郎', 'test', '', '15.000', '0.000', '2019/02/19', '2019/02/19', '2019/08/19', '2019/02/19', '2019/02/19', '2019/08/19', 'zenbi01', null, '0')
+19/08/2019 14.56.20   ERR***** データ更新失敗：ERROR: 22003: numeric field overflow
+   at UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:line 415
+   at UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:line 297
+INSERT INTO Public.t52_krurighd(会社コード, 売上番号, 客先番号, 受注番号, 受注番号枝番, 見積番号, 見積番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額, 仕入金額, 売上金額, 粗利額, 営業担当者, 入力担当者, 備考, ＶＡＴ, ＰＰＨ, 受注日, 売上日, 締処理日, 入金予定日, 登録日, 更新日, 更新者, 取消日, 取消区分) VALUES('ZENBI', 'ER02190041', '', 'AO02190183', '1', 'QT02190322', '1', '得コード02', 'くま得意102', '1010022', '宮城県 仙台市 22-202', '0192020222', '0192020221', '営業部', '得くま', '2019/02/19', '2019/02/26', '支払202', '600000.000', '500677.000', '600000.000', '99323.000', 'テスト太郎', 'test', '', '15.000', '0.000', '2019/02/19', '2019/02/19', '2019/08/19', '2019/02/19', '2019/02/19', '2019/08/19', 'zenbi01', null, '0')
+19/08/2019 14.58.43   ERR***** データ更新失敗：ERROR: 22003: numeric field overflow
+   at UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:line 415
+   at UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:line 297
+INSERT INTO Public.t52_krurighd(会社コード, 売上番号, 客先番号, 受注番号, 受注番号枝番, 見積番号, 見積番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額, 仕入金額, 売上金額, 粗利額, 営業担当者, 入力担当者, 備考, ＶＡＴ, ＰＰＨ, 受注日, 売上日, 締処理日, 入金予定日, 登録日, 更新日, 更新者, 取消日, 取消区分) VALUES('ZENBI', 'ER02190041', '', 'AO02190183', '1', 'QT02190322', '1', '得コード02', 'くま得意102', '1010022', '宮城県 仙台市 22-202', '0192020222', '0192020221', '営業部', '得くま', '2019/02/19', '2019/02/26', '支払202', '600000.000', '500677.000', '600000.000', '99323.000', 'テスト太郎', 'test', '', '15.000', '0.000', '2019/02/19', '2019/02/19', '2019/08/19', '2019/02/19', '2019/02/19', '2019/08/19', 'zenbi01', null, '0')
+19/08/2019 16.04.18   ERR***** データ更新失敗：ERROR: 22P02: invalid input syntax for type numeric: ""
+   at UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:line 415
+   at UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:line 297
+INSERT INTO Public.t52_krurighd(会社コード, 売上番号, 客先番号, 受注番号, 受注番号枝番, 見積番号, 見積番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額, 仕入金額, 売上金額, 粗利額, 営業担当者, 入力担当者, 備考, ＶＡＴ, ＰＰＨ, 受注日, 売上日, 締処理日, 入金予定日, 登録日, 更新日, 更新者, 取消日, 取消区分) VALUES('ZENBI', 'ER07150061', '', 'AO07080330', '1', 'QT07080666', '3', '0026', 'PT KMK PLASTIC INDONESIA', '', 'Jl.Jababeka XI Block G-10, Cikarang Industrial Estate, Harja Mekar, Cikarang Utara, Bekasi JABABEKA ', '021-8934072', '', '', 'MR ANDI', '2019/07/08', '2019/07/22', '100% T/T Bank Remittance at 30days after delivery', '58120.000', '157284.000', '43000.000', '21400.000', '', 'zenbi01', '', '5812.000', '0.000', '2019/07/15', '2019/07/15', '2019/08/19', '2019/07/15', '2019/07/15', '2019/08/19', 'zenbi01', '2019/07/26', '1')
+19/08/2019 16.05.52   ERR***** データ更新失敗：ERROR: 22P02: invalid input syntax for type numeric: ""
+   at UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:line 415
+   at UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:line 297
+INSERT INTO Public.t52_krurighd(会社コード, 売上番号, 客先番号, 受注番号, 受注番号枝番, 見積番号, 見積番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額, 仕入金額, 売上金額, 粗利額, 営業担当者, 入力担当者, 備考, ＶＡＴ, ＰＰＨ, 受注日, 売上日, 締処理日, 入金予定日, 登録日, 更新日, 更新者, 取消日, 取消区分) VALUES('ZENBI', 'ER07150061', '', 'AO07080330', '1', 'QT07080666', '3', '0026', 'PT KMK PLASTIC INDONESIA', '', 'Jl.Jababeka XI Block G-10, Cikarang Industrial Estate, Harja Mekar, Cikarang Utara, Bekasi JABABEKA ', '021-8934072', '', '', 'MR ANDI', '2019/07/08', '2019/07/22', '100% T/T Bank Remittance at 30days after delivery', '58120.000', '157284.000', '43000.000', '21400.000', '', 'zenbi01', '', '5812.000', '0.000', '2019/07/15', '2019/07/15', '2019/08/19', '2019/07/15', '2019/07/15', '2019/08/19', 'zenbi01', '2019/07/26', '1')
+19/08/2019 16.07.20   ERR***** データ更新失敗：ERROR: 22P02: invalid input syntax for type numeric: ""
+   at UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:line 415
+   at UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:line 297
+INSERT INTO Public.t52_krurighd(会社コード, 売上番号, 客先番号, 受注番号, 受注番号枝番, 見積番号, 見積番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額, 仕入金額, 売上金額, 粗利額, 営業担当者, 入力担当者, 備考, ＶＡＴ, ＰＰＨ, 受注日, 売上日, 締処理日, 入金予定日, 登録日, 更新日, 更新者, 取消日, 取消区分) VALUES('ZENBI', 'ER07150061', '', 'AO07080330', '1', 'QT07080666', '3', '0026', 'PT KMK PLASTIC INDONESIA', '', 'Jl.Jababeka XI Block G-10, Cikarang Industrial Estate, Harja Mekar, Cikarang Utara, Bekasi JABABEKA ', '021-8934072', '', '', 'MR ANDI', '2019/07/08', '2019/07/22', '100% T/T Bank Remittance at 30days after delivery', '58120.000', '157284.000', '43000.000', '21400.000', '', 'zenbi01', '', '5812.000', '0.000', '2019/07/15', '2019/07/15', '2019/08/19', '2019/07/15', '2019/07/15', '2019/08/19', 'zenbi01', '2019/07/26', '1')
+19/08/2019 16.17.38   ERR***** データ更新失敗：ERROR: 23505: duplicate key value violates unique constraint "pk_t52_krurighd"
+   at UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:line 415
+   at UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:line 297
+INSERT INTO Public.t52_krurighd(会社コード, 売上番号, 客先番号, 受注番号, 受注番号枝番, 見積番号, 見積番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額, 仕入金額, 売上金額, 粗利額, 営業担当者, 入力担当者, 備考, ＶＡＴ, ＰＰＨ, 受注日, 売上日, 締処理日, 入金予定日, 登録日, 更新日, 更新者, 取消日, 取消区分) VALUES('ZENBI', 'ER05110059', 'i-0010', 'AO05110277', '1', 'QT05100440', '2', 'Cust1', '得意先1', '0.000', '東京都 豊島区 xxxxxx2-10', '0195000000', '0195000000', '役職', '担当者名', '2019/05/11', '2019/05/25', '支払条件', '8380.000', '3380.000', '8000.000', '5000.000', 'kotaro', 'zenbi01', '', '838.000', '0.000', '2019/05/11', '2019/05/11', '2019/08/19', '2019/05/11', '2019/05/11', '2019/08/19', 'zenbi01', null, '0')
+19/08/2019 16.19.50   ERR***** データ更新失敗：ERROR: 23505: duplicate key value violates unique constraint "pk_t52_krurighd"
+   at UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:line 415
+   at UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:line 297
+INSERT INTO Public.t52_krurighd(会社コード, 売上番号, 客先番号, 受注番号, 受注番号枝番, 見積番号, 見積番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額, 仕入金額, 売上金額, 粗利額, 営業担当者, 入力担当者, 備考, ＶＡＴ, ＰＰＨ, 受注日, 売上日, 締処理日, 入金予定日, 登録日, 更新日, 更新者, 取消日, 取消区分) VALUES('ZENBI', 'ER02210052', '', 'AO02210216', '1', 'QT02190339', '1', 'cus04', 'PT DEF Nusantara', '12210.000', 'Jl Jenderal Sudirman', '08112345678', '', 'Manager', 'Siti', '2019/02/19', '2019/02/26', '60 Days tesuto', '3000000.000', '2500677.000', '3000000.000', '499323.000', 'zenbi02', 'test', '受注備考', '0.250', '0.000', '2019/02/21', '2019/02/21', '2019/08/19', '2019/02/21', '2019/02/21', '2019/08/19', 'zenbi01', null, '0')
+19/08/2019 16.35.31   ERR***** データ更新失敗：ERROR: 22P02: invalid input syntax for type numeric: "0,010"
+   at UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:line 415
+   at UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:line 297
+INSERT INTO Public.t53_krurigdt(会社コード, 売上番号, 受注番号, 受注番号枝番, 行番号, 行番号枝番, 仕入区分, メーカー, 品名, 型式, 仕入先名, 仕入値, 受注数量, 売上数量, 受注残数, 単位, 仕入原価, 関税率, 関税額, 前払法人税率, 前払法人税額, 輸送費率, 輸送費額, 間接費, 仕入金額, 売単価, 売上金額, 見積単価, 見積金額, 粗利額, 粗利率, リードタイム, 備考, 入金有無, 入金番号, 入金日, 更新者, 更新日) VALUES('ZENBI', 'ER02060036', 'AO02060105', '1', '1', '0', '1', 'aaa', 'bbb', 'ccc', 'supplier01', '1200.000', '100.000', '100.000', '0.000', '式', '120000.000', '0,010', '12.000', '0,025', '31.000', '0,100', '120.000', '163.000', '120163.000', '1500.000', '150000.000', '1663.000', '166300.000', '30000.000', '20,00', '', '', 0, '', null, 'zenbi01', '19/08/2019 16.28.37')
+19/08/2019 16.44.31   ERR***** データ更新失敗：ERROR: 22007: invalid input syntax for type date: "06/02/2019 00.00.00"
+   at UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:line 415
+   at UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:line 297
+INSERT INTO Public.t55_krsiredt(会社コード, 仕入番号, 発注番号, 発注番号枝番, 支払番号, 行番号, 仕入区分, メーカー, 品名, 型式, 仕入先名, 仕入値, 発注数量, 仕入数量, 発注残数, 単位, 仕入単価, 仕入金額, 間接費, リードタイム, 備考, 仕入日, 支払日, 支払有無, 更新者, 更新日) VALUES('ZENBI', 'PC02060066', 'PO02060102', '1', '', '1', '1', 'aaa', 'bbb', 'ccc', 'supplier01', '1200.000', '100.000', '100.000', '0.000', '式', '1200.000', '120000.000', '163.000', '', '', '06/02/2019 00.00.00', null, 0, 'zenbi01', '2019/08/19')
+19/08/2019 17.03.04   ERR***** データ更新失敗：ERROR: 22P02: invalid input syntax for type numeric: ""
+   at UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:line 415
+   at UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:line 297
+INSERT INTO Public.t60_krshukohd(会社コード, 出庫番号, 客先番号, 見積番号, 見積番号枝番, 受注番号, 受注番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 営業担当者, 入力担当者, 備考, 出庫日, 登録日, 更新日, 更新者, 取消日, 取消区分, 締処理日) VALUES('ZENBI', 'LS02150048', '', 'QT02150270', '2', 'AO02150120', '1', '', '', '', '  ', '', '', '', '', '', 'test', '', '2019/02/15', '2019/02/15', '2019/08/19', 'zenbi01', null, 0, '2019/08/19')
+19/08/2019 17.06.56   ERR***** データ更新失敗：ERROR: 22P02: invalid input syntax for type numeric: ""
+   at UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:line 415
+   at UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:line 297
+INSERT INTO Public.t60_krshukohd(会社コード, 出庫番号, 客先番号, 見積番号, 見積番号枝番, 受注番号, 受注番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 営業担当者, 入力担当者, 備考, 出庫日, 登録日, 更新日, 更新者, 取消日, 取消区分, 締処理日) VALUES('ZENBI', 'LS02150048', '', 'QT02150270', '2', 'AO02150120', '1', '', '', '', '  ', '', '', '', '', '', 'test', '', '2019/02/15', '2019/02/15', '2019/08/19', 'zenbi01', null, 0, '2019/08/19')
+19/08/2019 17.12.49   ERR***** データ更新失敗：ERROR: 22P02: invalid input syntax for type numeric: ""
+   at UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:line 415
+   at UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:line 297
+INSERT INTO Public.t60_krshukohd(会社コード, 出庫番号, 客先番号, 見積番号, 見積番号枝番, 受注番号, 受注番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 営業担当者, 入力担当者, 備考, 出庫日, 登録日, 更新日, 更新者, 取消日, 取消区分, 締処理日) VALUES('ZENBI', 'LS02150048', '', 'QT02150270', '2', 'AO02150120', '1', '', '', '', '  ', '', '', '', '', '', 'test', '', '2019/02/15', '2019/02/15', '2019/08/19', 'zenbi01', null, 0, '2019/08/19')
+19/08/2019 17.15.46   ERR***** データ更新失敗：ERROR: 22P02: invalid input syntax for type numeric: ""
+   at UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:line 415
+   at UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:line 297
+INSERT INTO Public.t60_krshukohd(会社コード, 出庫番号, 客先番号, 見積番号, 見積番号枝番, 受注番号, 受注番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 営業担当者, 入力担当者, 備考, 出庫日, 登録日, 更新日, 更新者, 取消日, 取消区分, 締処理日) VALUES('ZENBI', 'LS02150048', '', 'QT02150270', '2', 'AO02150120', '1', '', '', '', '  ', '', '', '', '', '', 'test', '', '2019/02/15', '2019/02/15', '2019/08/19', 'zenbi01', null, 0, '2019/08/19')
+19/08/2019 17.17.54   ERR***** データ更新失敗：ERROR: 22P02: invalid input syntax for type numeric: ""
+   at UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:line 415
+   at UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:line 297
+INSERT INTO Public.t60_krshukohd(会社コード, 出庫番号, 客先番号, 見積番号, 見積番号枝番, 受注番号, 受注番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 営業担当者, 入力担当者, 備考, 出庫日, 登録日, 更新日, 更新者, 取消日, 取消区分, 締処理日) VALUES('ZENBI', 'LS02150048', '', 'QT02150270', '2', 'AO02150120', '1', '', '', '', '  ', '', '', '', '', '', 'test', '', '2019/02/15', '2019/02/15', '2019/08/19', 'zenbi01', null, 0, '2019/08/19')
+23/08/2019 01.13.13   ERR***** データ更新失敗：ERROR: 42601: INSERT has more target columns than expressions
+   at UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:line 415
+   at UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:line 297
+INSERT INTO Public.t60_krshukohd(会社コード, 出庫番号, 客先番号, 見積番号, 見積番号枝番, 受注番号, 受注番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 営業担当者, 入力担当者, 備考, 出庫日, 登録日, 更新日, 更新者, 取消日, 取消区分, 締処理日) VALUES('ZENBI', 'LS06240241', '', 'QT06240545', '1', 'AO06240289', '1', '0026', 'PT KMK PLASTIC INDONESIA', null, 0, '2019/08/23')
+23/08/2019 01.16.24   ERR***** データ更新失敗：ERROR: 22P02: invalid input syntax for type numeric: "0,000"
+   at UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:line 415
+   at UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:line 297
+INSERT INTO Public.t62_krnkinhd(会社コード, 入金番号, 客先番号, 請求先コード, 請求先名, 振込先, 請求金額, 入金額計, 請求残高, 備考, 入金日, 登録日, 更新日, 更新者, 取消日, 取消区分, 締処理日) VALUES('ZENBI', 'PM02150032', '', 'Cust2', '得意先2', 'BankName BranchName 1 1234567 test' , 0, '0,000' , 0, '', '2019/02/15', '2019/02/15', '2019/08/23', 'zenbi01', null, '0', '2019/08/23')
+2019/08/23 13:07:02   ERR***** データ更新失敗：A timeout has occured. If you were establishing a connection, increase Timeout value in ConnectionString. If you were executing a command, increase the CommandTimeout value in ConnectionString or in your NpgsqlCommand object.
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+UPDATE Public.m80_saiban SET  最新値  = '76', 更新者 = 'zenbi01', 更新日 = '2019/08/23 13:06:22' WHERE 会社コード='ZENBI' AND 採番キー = '40'
+2019/08/23 13:25:08   ERR***** データ更新失敗：A timeout has occured. If you were establishing a connection, increase Timeout value in ConnectionString. If you were executing a command, increase the CommandTimeout value in ConnectionString or in your NpgsqlCommand object.
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+UPDATE Public.m80_saiban SET  最新値  = '138', 更新者 = 'zenbi01', 更新日 = '2019/08/23 13:24:47' WHERE 会社コード='ZENBI' AND 採番キー = '50'
+2019/08/23 13:25:53   ERR***** データ更新失敗：A timeout has occured. If you were establishing a connection, increase Timeout value in ConnectionString. If you were executing a command, increase the CommandTimeout value in ConnectionString or in your NpgsqlCommand object.
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+UPDATE Public.m80_saiban SET  最新値  = '138', 更新者 = 'zenbi01', 更新日 = '2019/08/23 13:25:32' WHERE 会社コード='ZENBI' AND 採番キー = '50'
+2019/08/23 13:27:24   ERR***** データ更新失敗：A timeout has occured. If you were establishing a connection, increase Timeout value in ConnectionString. If you were executing a command, increase the CommandTimeout value in ConnectionString or in your NpgsqlCommand object.
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+UPDATE Public.m80_saiban SET  最新値  = '76', 更新者 = 'zenbi01', 更新日 = '2019/08/23 13:27:00' WHERE 会社コード='ZENBI' AND 採番キー = '40'
+2019/08/23 13:58:24   ERR***** データベース接続失敗
+データベースの接続に失敗しました。
+	　 Failed to establish a connection to '13.230.190.253'.
+   場所 UtilMDL.DB.UtilPostgresHandler..ctor(String prmSvAdr, String prmPortNo, String prmDbNm, String prmUserId, String prmPswd, Int16 prmTimeout) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 77
+   場所 UtilMDL.DB.UtilPostgresDebugger..ctor(String prmSvAdr, String prmPortNo, String prmDbNm, String prmUserId, String prmPswd, String prmFileNm, Boolean prmDebugFlg, Boolean prmConsoleWrite, Int16 prmTimeout) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 91
+2019/08/23 13:58:44   ERR***** データベース接続失敗
+データベースの接続に失敗しました。
+	　 Failed to establish a connection to '13.230.190.253'.
+   場所 UtilMDL.DB.UtilPostgresHandler..ctor(String prmSvAdr, String prmPortNo, String prmDbNm, String prmUserId, String prmPswd, Int16 prmTimeout) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 77
+   場所 UtilMDL.DB.UtilPostgresDebugger..ctor(String prmSvAdr, String prmPortNo, String prmDbNm, String prmUserId, String prmPswd, String prmFileNm, Boolean prmDebugFlg, Boolean prmConsoleWrite, Int16 prmTimeout) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 91
+2019/08/23 14:00:04   ERR***** データベース接続失敗
+データベースの接続に失敗しました。
+	　 Failed to establish a connection to '13.230.190.253'.
+   場所 UtilMDL.DB.UtilPostgresHandler..ctor(String prmSvAdr, String prmPortNo, String prmDbNm, String prmUserId, String prmPswd, Int16 prmTimeout) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 77
+   場所 UtilMDL.DB.UtilPostgresDebugger..ctor(String prmSvAdr, String prmPortNo, String prmDbNm, String prmUserId, String prmPswd, String prmFileNm, Boolean prmDebugFlg, Boolean prmConsoleWrite, Int16 prmTimeout) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 91
+2019/08/23 14:13:32   ERR***** データベース接続失敗
+データベースの接続に失敗しました。
+	　 Failed to establish a connection to '13.230.190.253'.
+   場所 UtilMDL.DB.UtilPostgresHandler..ctor(String prmSvAdr, String prmPortNo, String prmDbNm, String prmUserId, String prmPswd, Int16 prmTimeout) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 77
+   場所 UtilMDL.DB.UtilPostgresDebugger..ctor(String prmSvAdr, String prmPortNo, String prmDbNm, String prmUserId, String prmPswd, String prmFileNm, Boolean prmDebugFlg, Boolean prmConsoleWrite, Int16 prmTimeout) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 91
+2019/08/23 14:13:45   ERR***** データ取得失敗：ERROR: 42703: column "vat" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT  SUM(見積金額_外貨) as 見積金額_外貨合計,SUM(見積金額) as 見積金額_合計,通貨,VAT FROM public.t10_cymnhd WHERE 会社コード ILIKE  'ZENBI' AND 得意先コード = '得意先コード' AND 取消区分 = 0 group by 通貨
+2019/08/23 14:14:13   ERR***** データ取得失敗：ERROR: 42703: column "vat" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT  SUM(見積金額_外貨) as 見積金額_外貨合計,SUM(見積金額) as 見積金額_合計,通貨,VAT FROM public.t10_cymnhd WHERE 会社コード ILIKE  'ZENBI' AND 得意先コード = '得意先コード' AND 取消区分 = 0 group by 通貨
+2019/08/23 14:15:00   ERR***** データ取得失敗：ERROR: 42703: column "vat" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT  SUM(見積金額_外貨) as 見積金額_外貨合計,SUM(見積金額) as 見積金額_合計,通貨,VAT FROM public.t10_cymnhd WHERE 会社コード ILIKE  'ZENBI' AND 得意先コード = '得意先コード' AND 取消区分 = 0 group by 通貨
+2019/08/23 14:15:45   ERR***** データ取得失敗：ERROR: 42703: column "vat" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT  SUM(見積金額_外貨) as 見積金額_外貨合計,SUM(見積金額) as 見積金額_合計,通貨,VAT FROM public.t10_cymnhd WHERE 会社コード ILIKE  'ZENBI' AND 得意先コード = '得意先コード' AND 取消区分 = 0 group by 通貨,VAT
+2019/08/23 15:06:57   ERR***** データ更新失敗：A timeout has occured. If you were establishing a connection, increase Timeout value in ConnectionString. If you were executing a command, increase the CommandTimeout value in ConnectionString or in your NpgsqlCommand object.
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+UPDATE Public.m80_saiban SET  最新値  = '76', 更新者 = 'zenbi01', 更新日 = '2019/08/23 15:06:37' WHERE 会社コード='ZENBI' AND 採番キー = '40'
+2019/08/23 15:32:45   ERR***** データ更新失敗：A timeout has occured. If you were establishing a connection, increase Timeout value in ConnectionString. If you were executing a command, increase the CommandTimeout value in ConnectionString or in your NpgsqlCommand object.
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+UPDATE Public.m80_saiban SET  最新値  = '76', 更新者 = 'zenbi01', 更新日 = '2019/08/23 15:32:24' WHERE 会社コード='ZENBI' AND 採番キー = '40'
+2019/08/23 15:35:33   ERR***** データ更新失敗：A timeout has occured. If you were establishing a connection, increase Timeout value in ConnectionString. If you were executing a command, increase the CommandTimeout value in ConnectionString or in your NpgsqlCommand object.
+   場所 UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 415
+   場所 UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 297
+UPDATE Public.m80_saiban SET  最新値  = '76', 更新者 = 'zenbi01', 更新日 = '2019/08/23 15:35:13' WHERE 会社コード='ZENBI' AND 採番キー = '40'
+24/08/2019 10.05.41   ERR***** データ更新失敗：ERROR: 22007: invalid input syntax for type date: "24/08/2019 10.05.41"
+   at UtilMDL.DB.UtilPostgresHandler.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:line 415
+   at UtilMDL.DB.UtilPostgresDebugger.executeDB(String prmSQL) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:line 297
+UPDATE Public.t42_nyukohd SET 取消区分 = 1, 取消日 = '24/08/2019 10.05.41', 更新日 = '24/08/2019 10.05.41', 更新者 = 'zenbi01 ' WHERE 会社コード='ZENBI' AND 入庫番号='WH08230153' 
+24/08/2019 13.37.01   ERR***** データ取得失敗：The Connection is broken.
+   at UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:line 294
+   at UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:line 208
+SELECT * FROM public.t10_cymnhd WHERE 会社コード = 'ZENBI' AND 受注番号 = 'AO02060109' AND 受注番号枝番 = '1'

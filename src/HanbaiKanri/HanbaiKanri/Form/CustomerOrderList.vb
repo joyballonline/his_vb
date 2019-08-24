@@ -313,7 +313,7 @@ Public Class CustomerOrderList
 
             BillingNo = ""
 
-            Dim currentRow As Integer = 18
+            Dim currentRow As Integer = 19
             Dim lastRow As Integer = 20
             Dim addRow As Integer = 0
             Dim currentNum As Integer = 1
@@ -371,6 +371,21 @@ Public Class CustomerOrderList
                     End If
 
                     sheet.Range("E13").Value = dsCymnhd.Tables(RS).Rows(0)("支払条件")
+
+
+                    Dim curds As DataSet  'm25_currency
+                    Dim cur As String
+                    If IsDBNull(dsCymnhd.Tables(RS).Rows(0)("通貨")) Then
+                        cur = vbNullString
+                    Else
+                        Sql = " and 採番キー = " & dsCymnhd.Tables(RS).Rows(0)("通貨")
+                        curds = getDsData("m25_currency", Sql)
+
+                        cur = curds.Tables(RS).Rows(0)("通貨コード")
+                    End If
+
+                    sheet.Range("E18").Value = "(" & cur & ")"
+                    sheet.Range("F18").Value = "(" & cur & ")"
 
                     flg2 = True
 
