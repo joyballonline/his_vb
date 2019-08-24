@@ -440,11 +440,11 @@ Public Class ReceiptList
             Sql += ", "
             Sql += "取消日"
             Sql += " = '"
-            Sql += dtNow
+            Sql += UtilClass.strFormatDate(dtNow)
             Sql += "', "
             Sql += "更新日"
             Sql += " = '"
-            Sql += dtNow
+            Sql += UtilClass.strFormatDate(dtNow)
             Sql += "', "
             Sql += "更新者"
             Sql += " = '"
@@ -471,7 +471,7 @@ Public Class ReceiptList
 
             Sql += "更新日"
             Sql += " = '"
-            Sql += dtNow
+            Sql += UtilClass.strFormatDate(dtNow)
             Sql += "', "
             Sql += "更新者"
             Sql += " = '"
@@ -515,7 +515,7 @@ Public Class ReceiptList
                         _db.executeDB(Sql)
 
                         Sql = "update t20_hattyu set "
-                        Sql += "更新日 = '" & dtNow & "'"
+                        Sql += "更新日 = '" & UtilClass.strFormatDate(dtNow) & "'"
                         Sql += ",更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
                         Sql += " where 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
                         Sql += " AND "
@@ -540,7 +540,7 @@ Public Class ReceiptList
 
             Sql += "取消日"
             Sql += " = '"
-            Sql += dtNow
+            Sql += UtilClass.strFormatDate(dtNow)
             Sql += "', "
             Sql += "取消区分"
             Sql += " = '"
@@ -548,7 +548,7 @@ Public Class ReceiptList
             Sql += "', "
             Sql += "更新日"
             Sql += " = '"
-            Sql += dtNow
+            Sql += UtilClass.strFormatDate(dtNow)
             Sql += "', "
             Sql += "更新者"
             Sql += " = '"
