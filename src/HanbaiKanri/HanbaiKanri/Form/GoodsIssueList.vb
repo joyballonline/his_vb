@@ -359,14 +359,14 @@ Public Class GoodsIssueList
             Sql += " t44.出庫番号 ILIKE '%" & sinceNum & "%' "
         End If
 
-        If poNum <> Nothing Then
+        If salesName <> Nothing Then
             Sql += " AND "
-            Sql += " t45.営業担当者 ILIKE '%" & salesName & "%' "
+            Sql += " t44.営業担当者 ILIKE '%" & salesName & "%' "
         End If
 
         If poNum <> Nothing Then
             Sql += " AND "
-            Sql += " t45.客先番号 ILIKE '%" & poNum & "%' "
+            Sql += " t44.客先番号 ILIKE '%" & poNum & "%' "
         End If
 
         If itemName <> Nothing Then
