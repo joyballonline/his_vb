@@ -92,6 +92,7 @@ Public Class GoodsIssue
             LblHistory.Text = "GoodsDeliveryHistory"
             LblAdd.Text = "ShipmentThisTime"
             LblGoodsIssueDate.Text = "GoodsDeliveryDate"
+            LblIDRCurrency.Text = "Currency"
             LblRemarks.Text = "Remarks"
             LblCount1.Text = "Record"
             LblCount1.Location = New Point(1272, 82)
@@ -258,6 +259,21 @@ Public Class GoodsIssue
 
             Dim dsCymndt As DataSet = _db.selectDB(Sql, RS, reccnt)
 
+
+            '通貨の表示
+            Dim curds As DataSet  'm25_currency
+            Dim cur As String
+
+            If IsDBNull(dsCymnhd.Tables(RS).Rows(0)("通貨")) Then
+                cur = vbNullString
+            Else
+                Sql = " and 採番キー = " & dsCymnhd.Tables(RS).Rows(0)("通貨")
+                curds = getDsData("m25_currency", Sql)
+
+                cur = curds.Tables(RS).Rows(0)("通貨コード")
+            End If
+            TxtIDRCurrency.Text = cur
+
             For i As Integer = 0 To dsCymndt.Tables(RS).Rows.Count - 1
                 DgvOrder.Rows.Add()
                 DgvOrder.Rows(i).Cells("メーカー").Value = dsCymndt.Tables(RS).Rows(i)("メーカー")
@@ -265,10 +281,12 @@ Public Class GoodsIssue
                 DgvOrder.Rows(i).Cells("型式").Value = dsCymndt.Tables(RS).Rows(i)("型式")
                 DgvOrder.Rows(i).Cells("受注数量").Value = dsCymndt.Tables(RS).Rows(i)("受注数量")
                 DgvOrder.Rows(i).Cells("単位").Value = dsCymndt.Tables(RS).Rows(i)("単位")
+
                 DgvOrder.Rows(i).Cells("売上数量").Value = dsCymndt.Tables(RS).Rows(i)("売上数量")
-                DgvOrder.Rows(i).Cells("売単価").Value = dsCymndt.Tables(RS).Rows(i)("見積単価")
-                DgvOrder.Rows(i).Cells("売上金額").Value = dsCymndt.Tables(RS).Rows(i)("売上金額")
                 DgvOrder.Rows(i).Cells("受注残数").Value = dsCymndt.Tables(RS).Rows(i)("受注残数")
+                DgvOrder.Rows(i).Cells("売単価").Value = dsCymndt.Tables(RS).Rows(i)("見積単価")
+
+                DgvOrder.Rows(i).Cells("売上金額").Value = dsCymndt.Tables(RS).Rows(i)("売上金額")
                 DgvOrder.Rows(i).Cells("未出庫数").Value = dsCymndt.Tables(RS).Rows(i)("未出庫数")
                 DgvOrder.Rows(i).Cells("更新日").Value = dsCymndt.Tables(RS).Rows(i)("更新日")
             Next
@@ -279,6 +297,7 @@ Public Class GoodsIssue
                 sireKbn = getDsHanyoData(CommonConst.FIXED_KEY_PURCHASING_CLASS, dsShukodt.Tables(RS).Rows(i)("仕入区分").ToString)
 
                 DgvHistory.Rows.Add()
+                DgvHistory.Rows(i).Cells("No").Value = i + 1
                 DgvHistory.Rows(i).Cells("出庫番号").Value = dsShukodt.Tables(RS).Rows(i)("出庫番号")
                 DgvHistory.Rows(i).Cells("行番号").Value = dsShukodt.Tables(RS).Rows(i)("行番号")
                 DgvHistory.Rows(i).Cells("仕入区分").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
@@ -335,7 +354,10 @@ Public Class GoodsIssue
                 cmWarehouse.HeaderText = "Warehouse"
             End If
 
-            DgvAdd.Columns.Insert(11, cmWarehouse)
+            DgvAdd.Columns.Insert(8, cmWarehouse)
+            DgvAdd.Columns("倉庫").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
+            DgvAdd.Columns("倉庫").ReadOnly = True
+
 
             '入出庫種別コンボボックス作成
             Dim cmInOutKbn As New DataGridViewComboBoxColumn()
@@ -349,7 +371,7 @@ Public Class GoodsIssue
                 cmInOutKbn.HeaderText = "StorageType"
             End If
 
-            DgvAdd.Columns.Insert(12, cmInOutKbn)
+            DgvAdd.Columns.Insert(13, cmInOutKbn)
 
             ''引当区分コンボボックス作成
             'Dim cmAllocationKbn As New DataGridViewComboBoxColumn()
@@ -379,6 +401,7 @@ Public Class GoodsIssue
 
                     rowIndex = DgvAdd.RowCount - 1
 
+                    DgvAdd.Rows(rowIndex).Cells("No").Value = i + 1
                     DgvAdd.Rows(rowIndex).Cells("行番号").Value = dsCymndt.Tables(RS).Rows(i)("行番号")
                     DgvAdd.Rows(rowIndex).Cells("仕入区分").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
                                                                 sireKbn.Tables(RS).Rows(0)("文字２"),
@@ -388,9 +411,14 @@ Public Class GoodsIssue
                     DgvAdd.Rows(rowIndex).Cells("品名").Value = dsCymndt.Tables(RS).Rows(i)("品名")
                     DgvAdd.Rows(rowIndex).Cells("型式").Value = dsCymndt.Tables(RS).Rows(i)("型式")
                     DgvAdd.Rows(rowIndex).Cells("仕入先").Value = dsCymndt.Tables(RS).Rows(i)("仕入先名")
+
                     DgvAdd.Rows(rowIndex).Cells("単位").Value = dsCymndt.Tables(RS).Rows(i)("単位")
-                    DgvAdd.Rows(rowIndex).Cells("売単価").Value = dsCymndt.Tables(RS).Rows(i)("見積単価")
-                    DgvAdd.Rows(rowIndex).Cells("出庫数量").Value = 0
+                    DgvAdd.Rows(rowIndex).Cells("未出庫数量").Value = dsCymndt.Tables(RS).Rows(i)("受注残数")
+
+                    'DgvAdd.Rows(rowIndex).Cells("売単価").Value = dsCymndt.Tables(RS).Rows(i)("見積単価")
+                    'DgvAdd.Rows(rowIndex).Cells("出庫数量").Value = 0
+
+
 
                     If dsCymnhd.Tables(RS).Rows.Count > 0 Then
                         DgvAdd.Rows(rowIndex).Cells("倉庫").Value = dsWarehouse.Tables(RS).Rows(0)("倉庫コード")
@@ -398,13 +426,11 @@ Public Class GoodsIssue
                         DgvAdd.Rows(rowIndex).Cells("倉庫").Value = dsShukohd.Tables(RS).Rows(0)("倉庫コード")
                     End If
 
-                    'DgvAdd.Rows(i).Cells("倉庫").Value = dsWarehouse.Tables(RS).Rows(0)("倉庫コード")
                     DgvAdd.Rows(rowIndex).Cells("入出庫種別").Value = dsHanyo.Tables(RS).Rows(0)("可変キー")
-                    'DgvAdd.Rows(i).Cells("引当区分").Value = CommonConst.AC_KBN_NORMAL
                     DgvAdd.Rows(rowIndex).Cells("備考").Value = dsCymndt.Tables(RS).Rows(i)("備考")
+
                     'DgvAdd.Rows(rowIndex).Cells("在庫数量").Value = setZaikoQuantity(rowIndex) 'セットされた内容から現在庫数をセット
                     'DgvAdd.Rows(rowIndex).Cells("在庫数量").Value = getZikoQuantity(rowIndex) 'セットされた内容から現在庫数をセット
-
                     '仕入区分が「サービス時」
                     If dsCymndt.Tables(RS).Rows(i)("仕入区分").ToString = CommonConst.Sire_KBN_SERVICE.ToString Then
                         DgvAdd.Rows(rowIndex).Cells("在庫数量").Style.BackColor = Color.FromArgb(255, 255, 192)
@@ -473,39 +499,57 @@ Public Class GoodsIssue
         '受注エリア見出しセット
         '
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-            DgvOrder.Columns.Add("明細", "DetailData")
+            DgvOrder.Columns.Add("明細", "LineNo")
             DgvOrder.Columns.Add("メーカー", "Manufacturer")
             DgvOrder.Columns.Add("品名", "ItemName")
             DgvOrder.Columns.Add("型式", "Spec")
-            DgvOrder.Columns.Add("受注数量", "JobOrderQuantity")
+            DgvOrder.Columns.Add("受注数量", "JobOrderQuantity" & vbCrLf & "a")
             DgvOrder.Columns.Add("単位", "Unit")
             DgvOrder.Columns.Add("売上数量", "SalesQuantity")
             DgvOrder.Columns.Add("売単価", "SellingPrice")
             DgvOrder.Columns.Add("売上金額", "SalesAmount")
             DgvOrder.Columns.Add("受注残数", "OrderRemainingAmount")
             DgvOrder.Columns.Add("未出庫数", "NoShippedQntity")
-            DgvOrder.Columns.Add("更新日", "更新日")
+            DgvOrder.Columns.Add("更新日", "UpdateDate")
         Else
-            DgvOrder.Columns.Add("明細", "明細")
+            DgvOrder.Columns.Add("明細", "行No")
             DgvOrder.Columns.Add("メーカー", "メーカー")
             DgvOrder.Columns.Add("品名", "品名")
             DgvOrder.Columns.Add("型式", "型式")
-            DgvOrder.Columns.Add("受注数量", "受注数量")
+            DgvOrder.Columns.Add("受注数量", "受注数量" & vbCrLf & "a")
             DgvOrder.Columns.Add("単位", "単位")
-            DgvOrder.Columns.Add("売上数量", "売上数量")
-            DgvOrder.Columns.Add("売単価", "売単価")
+
+            DgvOrder.Columns.Add("売上数量", "出庫済数量" & vbCrLf & "b")
+            DgvOrder.Columns.Add("受注残数", "未出庫数量" & vbCrLf & "c=a-b")
+            DgvOrder.Columns.Add("売単価", "受注単価")
+
             DgvOrder.Columns.Add("売上金額", "売上金額")
-            DgvOrder.Columns.Add("受注残数", "受注残数")
             DgvOrder.Columns.Add("未出庫数", "未出庫数")
+
             DgvOrder.Columns.Add("更新日", "更新日")
         End If
 
+        '中央寄せ
+        DgvOrder.Columns("明細").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvOrder.Columns("メーカー").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvOrder.Columns("品名").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvOrder.Columns("型式").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvOrder.Columns("受注数量").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvOrder.Columns("単位").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvOrder.Columns("売上数量").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvOrder.Columns("受注残数").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvOrder.Columns("売単価").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+        '右寄せ
         DgvOrder.Columns("受注数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvOrder.Columns("売上数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvOrder.Columns("売単価").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvOrder.Columns("売上金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvOrder.Columns("受注残数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvOrder.Columns("未出庫数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+        DgvOrder.Columns("売上金額").Visible = False
+        DgvOrder.Columns("未出庫数").Visible = False
         DgvOrder.Columns("更新日").Visible = False
 
 
@@ -521,9 +565,9 @@ Public Class GoodsIssue
         '出庫済みエリア見出しセット
         '
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-            'DgvHistory.Columns.Add("No", "No")
+            DgvHistory.Columns.Add("No", "No")
             DgvHistory.Columns.Add("出庫番号", "GoodsDeliveryNumber")
-            DgvHistory.Columns.Add("行番号", "LineNumber")
+            DgvHistory.Columns.Add("行番号", "LineNo")
             DgvHistory.Columns.Add("仕入区分", "PurchasingClassification")
             DgvHistory.Columns.Add("メーカー", "Manufacturer")
             DgvHistory.Columns.Add("品名", "ItemName")
@@ -538,9 +582,9 @@ Public Class GoodsIssue
             DgvHistory.Columns.Add("出庫日", "GoodsDeliveryDate")
             DgvHistory.Columns.Add("備考", "Remarks")
         Else
-            'DgvHistory.Columns.Add("No", "No")
+            DgvHistory.Columns.Add("No", "No")
             DgvHistory.Columns.Add("出庫番号", "出庫番号")
-            DgvHistory.Columns.Add("行番号", "行番号")
+            DgvHistory.Columns.Add("行番号", "行No")
             DgvHistory.Columns.Add("仕入区分", "仕入区分")
             DgvHistory.Columns.Add("メーカー", "メーカー")
             DgvHistory.Columns.Add("品名", "品名")
@@ -548,7 +592,7 @@ Public Class GoodsIssue
             DgvHistory.Columns.Add("単位", "単位")
             DgvHistory.Columns.Add("仕入先", "仕入先")
             DgvHistory.Columns.Add("売単価", "売単価")
-            DgvHistory.Columns.Add("出庫数量", "出庫数量")
+            DgvHistory.Columns.Add("出庫数量", "出庫済数量")
             DgvHistory.Columns.Add("倉庫", "倉庫")
             DgvHistory.Columns.Add("入出庫種別", "入出庫種別")
             'DgvHistory.Columns.Add("引当区分", "引当区分")
@@ -564,11 +608,16 @@ Public Class GoodsIssue
         DgvHistory.Columns("売単価").DefaultCellStyle.Format = "N2"
         DgvHistory.Columns("出庫数量").DefaultCellStyle.Format = "N2"
 
+        DgvHistory.Columns("仕入先").Visible = False
+        DgvHistory.Columns("売単価").Visible = False
+
+
+
         '今回出庫エリア見出しセット
         '
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-            'DgvAdd.Columns.Add("No", "No")
-            DgvAdd.Columns.Add("行番号", "LineNumber")
+            DgvAdd.Columns.Add("No", "No")
+            DgvAdd.Columns.Add("行番号", "LineNo")
             DgvAdd.Columns.Add("仕入区分", "PurchasingClassification")
             DgvAdd.Columns.Add("仕入区分値", "仕入区分値")
             DgvAdd.Columns.Add("メーカー", "Manufacturer")
@@ -581,34 +630,40 @@ Public Class GoodsIssue
             DgvAdd.Columns.Add("出庫数量", "GoodsDeliveryQuantity")
             DgvAdd.Columns.Add("備考", "Remarks")
         Else
-            'DgvAdd.Columns.Add("No", "No")
-            DgvAdd.Columns.Add("行番号", "行番号")
+            DgvAdd.Columns.Add("No", "No")
+            DgvAdd.Columns.Add("行番号", "行No")
             DgvAdd.Columns.Add("仕入区分", "仕入区分")
             DgvAdd.Columns.Add("仕入区分値", "仕入区分値")
             DgvAdd.Columns.Add("メーカー", "メーカー")
             DgvAdd.Columns.Add("品名", "品名")
             DgvAdd.Columns.Add("型式", "型式")
-            DgvAdd.Columns.Add("単位", "単位")
             DgvAdd.Columns.Add("仕入先", "仕入先")
-            DgvAdd.Columns.Add("売単価", "売単価")
+
             DgvAdd.Columns.Add("在庫数量", "在庫数量")
-            DgvAdd.Columns.Add("出庫数量", "出庫数量")
+            DgvAdd.Columns.Add("単位", "単位")
+            DgvAdd.Columns.Add("未出庫数量", "未出庫数量")
+            DgvAdd.Columns.Add("出庫数量", "今回出庫数量")
+
             DgvAdd.Columns.Add("備考", "備考")
+
+            DgvAdd.Columns.Add("売単価", "売単価")
+
         End If
 
-
-        DgvAdd.Columns("売単価").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        DgvAdd.Columns("出庫数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvAdd.Columns("在庫数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvAdd.Columns("未出庫数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvAdd.Columns("出庫数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvAdd.Columns("売単価").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
         '数字形式
-        DgvAdd.Columns("売単価").DefaultCellStyle.Format = "N2"
-        DgvAdd.Columns("出庫数量").DefaultCellStyle.Format = "N2"
         DgvAdd.Columns("在庫数量").DefaultCellStyle.Format = "N2"
+        DgvAdd.Columns("未出庫数量").DefaultCellStyle.Format = "N2"
+        DgvAdd.Columns("出庫数量").DefaultCellStyle.Format = "N2"
+        DgvAdd.Columns("売単価").DefaultCellStyle.Format = "N2"
 
 
-        'DgvAdd.Columns("No").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
-        'DgvAdd.Columns("No").ReadOnly = True
+        DgvAdd.Columns("No").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
+        DgvAdd.Columns("No").ReadOnly = True
         DgvAdd.Columns("行番号").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
         DgvAdd.Columns("行番号").ReadOnly = True
         DgvAdd.Columns("仕入区分").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
@@ -620,14 +675,19 @@ Public Class GoodsIssue
         DgvAdd.Columns("品名").ReadOnly = True
         DgvAdd.Columns("型式").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
         DgvAdd.Columns("型式").ReadOnly = True
-        DgvAdd.Columns("単位").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
-        DgvAdd.Columns("単位").ReadOnly = True
         DgvAdd.Columns("仕入先").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
         DgvAdd.Columns("仕入先").ReadOnly = True
-        DgvAdd.Columns("売単価").ReadOnly = True
+
         DgvAdd.Columns("在庫数量").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
         DgvAdd.Columns("在庫数量").ReadOnly = True
+        DgvAdd.Columns("単位").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
+        DgvAdd.Columns("単位").ReadOnly = True
+        DgvAdd.Columns("未出庫数量").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
+        DgvAdd.Columns("未出庫数量").ReadOnly = True
 
+
+        DgvAdd.Columns("売単価").ReadOnly = True
+        DgvAdd.Columns("売単価").Visible = False
     End Sub
 
     'セルの値が変更されたら
@@ -673,7 +733,7 @@ Public Class GoodsIssue
         Dim Sql As String = ""
 
         '受注基本
-        Sql = " AND "
+        Sql = " And "
         Sql += "受注番号 ILIKE '" & No & "'"
         Sql += " AND "
         Sql += "受注番号枝番 ILIKE '" & Suffix & "'"
