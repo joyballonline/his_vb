@@ -305,6 +305,8 @@ Public Class PurchasingManagement
             '発注済みエリア
             Sql = "SELECT"
             Sql += " t41.*, t40.取消区分"
+            Sql += ",t21.仕入値_外貨,t21.仕入金額_外貨"
+
             Sql += " FROM "
             Sql += " public.t41_siredt t41 "
 
@@ -317,6 +319,10 @@ Public Class PurchasingManagement
             Sql += " t41.仕入番号 = t40.仕入番号"
             'Sql += " AND "
             'Sql += " t41.発注番号枝番 = t40.発注番号枝番"
+
+            Sql += " left join t21_hattyu t21"
+            Sql += " on t41.発注番号 = t21.発注番号 and t41.発注番号枝番 = t21.発注番号枝番"
+
 
             Sql += " WHERE "
             Sql += " t41.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
@@ -370,8 +376,8 @@ Public Class PurchasingManagement
                 DgvPurchase.Rows(i).Cells("発注数量").Value = dsHattyuDt.Tables(RS).Rows(i)("発注数量")
                 DgvPurchase.Rows(i).Cells("単位").Value = dsHattyuDt.Tables(RS).Rows(i)("単位")
                 DgvPurchase.Rows(i).Cells("仕入数量").Value = dsHattyuDt.Tables(RS).Rows(i)("仕入数量")
-                DgvPurchase.Rows(i).Cells("仕入単価").Value = dsHattyuDt.Tables(RS).Rows(i)("仕入値")
-                DgvPurchase.Rows(i).Cells("仕入金額").Value = dsHattyuDt.Tables(RS).Rows(i)("仕入金額")
+                DgvPurchase.Rows(i).Cells("仕入単価").Value = dsHattyuDt.Tables(RS).Rows(i)("仕入値_外貨")
+                DgvPurchase.Rows(i).Cells("仕入金額").Value = dsHattyuDt.Tables(RS).Rows(i)("仕入金額_外貨")
                 DgvPurchase.Rows(i).Cells("発注残数").Value = dsHattyuDt.Tables(RS).Rows(i)("発注残数")
             Next
 
@@ -394,7 +400,7 @@ Public Class PurchasingManagement
                 DgvHistory.Rows(i).Cells("型式").Value = dsSireDt.Tables(RS).Rows(i)("型式")
                 DgvHistory.Rows(i).Cells("単位").Value = dsSireDt.Tables(RS).Rows(i)("単位")
                 DgvHistory.Rows(i).Cells("仕入先").Value = dsSireDt.Tables(RS).Rows(i)("仕入先名")
-                DgvHistory.Rows(i).Cells("仕入値").Value = dsSireDt.Tables(RS).Rows(i)("仕入値")
+                DgvHistory.Rows(i).Cells("仕入値").Value = dsSireDt.Tables(RS).Rows(i)("仕入値_外貨")
                 DgvHistory.Rows(i).Cells("仕入数量").Value = dsSireDt.Tables(RS).Rows(i)("仕入数量")
                 DgvHistory.Rows(i).Cells("仕入日").Value = dsSireDt.Tables(RS).Rows(i)("仕入日").ToShortDateString()
                 DgvHistory.Rows(i).Cells("備考").Value = dsSireDt.Tables(RS).Rows(i)("備考")
@@ -418,7 +424,7 @@ Public Class PurchasingManagement
                     DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("型式").Value = dsHattyuDt.Tables(RS).Rows(i)("型式")
                     DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("仕入先").Value = dsHattyuDt.Tables(RS).Rows(i)("仕入先名")
                     DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("単位").Value = dsHattyuDt.Tables(RS).Rows(i)("単位")
-                    DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("仕入値").Value = dsHattyuDt.Tables(RS).Rows(i)("仕入値")
+                    DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("仕入値").Value = dsHattyuDt.Tables(RS).Rows(i)("仕入値_外貨")
                     DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("仕入数量").Value = 0
                     'DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("備考").Value = dsHattyuDt.Tables(RS).Rows(i)("備考")
                 End If
