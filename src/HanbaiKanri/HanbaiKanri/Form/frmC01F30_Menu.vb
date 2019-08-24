@@ -883,7 +883,6 @@ Public Class frmC01F30_Menu
         Me.TabPage5.Size = New System.Drawing.Size(1256, 428)
         Me.TabPage5.TabIndex = 5
         Me.TabPage5.UseVisualStyleBackColor = True
-        Me.TabPage5.UseWaitCursor = True
         '
         'TableLayoutPanel27
         '
@@ -898,7 +897,6 @@ Public Class frmC01F30_Menu
         Me.TableLayoutPanel27.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.TableLayoutPanel27.Size = New System.Drawing.Size(1256, 428)
         Me.TableLayoutPanel27.TabIndex = 0
-        Me.TableLayoutPanel27.UseWaitCursor = True
         '
         'gbM01
         '
@@ -907,7 +905,6 @@ Public Class frmC01F30_Menu
         Me.gbM01.Name = "gbM01"
         Me.gbM01.Size = New System.Drawing.Size(622, 422)
         Me.gbM01.TabIndex = 32
-        Me.gbM01.UseWaitCursor = True
         '
         'ImageList1
         '
