@@ -481,7 +481,7 @@ Public Class Quote
             TxtRemarks.Text = ds1.Tables(RS).Rows(0)("備考").ToString
             TxtVat.Text = ds1.Tables(RS).Rows(0)("ＶＡＴ").ToString
 
-            If TxtVat.Text = 0 Then  '国外
+            If TxtVat.Text = CommonConst.DD_KBN_DOMESTIC Then  '国外
                 txtDomesticArea.Text = 1
             Else   '国内
                 txtDomesticArea.Text = 0
@@ -1875,7 +1875,7 @@ Public Class Quote
                 Sql1 += ",入力担当者 = '" & TxtInput.Text & "' "
                 Sql1 += ",備考 = '" & RevoveChars(TxtRemarks.Text) & "' "
                 '国内の判定
-                If txtDomesticArea.Text = "0" Then  '国内
+                If txtDomesticArea.Text = CommonConst.DD_KBN_DOMESTIC Then  '国内
                     Sql1 += ",ＶＡＴ = " & formatStringToNumber(TxtVat.Text)
                 Else  '国外
                     Sql1 += ",ＶＡＴ = " & formatStringToNumber(0)
@@ -2081,7 +2081,7 @@ Public Class Quote
                     Sql1 += "0"
                 Else
                     '国内の判定
-                    If txtDomesticArea.Text = "0" Then  '国内
+                    If txtDomesticArea.Text = CommonConst.DD_KBN_DOMESTIC Then  '国内
                         Sql1 += UtilClass.formatNumber(TxtVat.Text)
                     Else  '国外
                         Sql1 += UtilClass.formatNumber(0)
@@ -3422,7 +3422,7 @@ Public Class Quote
 
         '国内区分を判定
         '国内のみVATを計算
-        If txtDomesticArea.Text = 0 Then  '国内
+        If txtDomesticArea.Text = CommonConst.DD_KBN_DOMESTIC Then  '国内
             TxtVatAmount.Text = ((QuoteTotal * TxtVat.Text) / 100).ToString("N2") 'VAT-OUT
         Else  '国外
             TxtVatAmount.Text = "0.00"
