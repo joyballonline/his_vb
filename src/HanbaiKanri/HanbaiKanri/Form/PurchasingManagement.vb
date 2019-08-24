@@ -136,7 +136,7 @@ Public Class PurchasingManagement
             DgvHistory.Columns.Add("型式", "Spec")
             DgvHistory.Columns.Add("単位", "Unit")
             DgvHistory.Columns.Add("仕入先", "SupplierName")
-            DgvHistory.Columns.Add("仕入値", "PurchaseAmount")
+            DgvHistory.Columns.Add("仕入値", "PurchaseUnitPrice")
             DgvHistory.Columns.Add("仕入数量", "PurchasedQuantity")
             DgvHistory.Columns.Add("仕入日", "PurchaseDate")
             DgvHistory.Columns.Add("備考", "Remarks")
@@ -179,7 +179,7 @@ Public Class PurchasingManagement
             DgvAdd.Columns.Add("型式", "Spec")
             DgvAdd.Columns.Add("単位", "Unit")
             DgvAdd.Columns.Add("仕入先", "SupplierName")
-            DgvAdd.Columns.Add("仕入値", "PurchaseAmount")
+            DgvAdd.Columns.Add("仕入値", "PurchaseUnitPrice")
             DgvAdd.Columns.Add("仕入数量", "PurchasedQuantity")
             DgvAdd.Columns.Add("備考", "Remarks")
 
