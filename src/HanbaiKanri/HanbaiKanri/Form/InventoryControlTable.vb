@@ -99,6 +99,10 @@ Public Class InventoryControlTable
             'DgvCymndt.Columns("売掛金残高").HeaderText = "ARBalance"
             'DgvCymndt.Columns("備考").HeaderText = "Remarks"
 
+            LblWarehouse.Text = "Warehouse"
+            LblMovingDay.Text = "MovingDay"
+            LblStorageType.Text = "StorageType"
+
         End If
 
         createWarehouseCombobox(CmWarehouseFrom)

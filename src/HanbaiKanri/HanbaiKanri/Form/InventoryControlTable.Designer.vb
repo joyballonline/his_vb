@@ -31,12 +31,12 @@ Partial Class InventoryControlTable
         Me.LblMovingDay = New System.Windows.Forms.Label()
         Me.LblWarehouse = New System.Windows.Forms.Label()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.LblStorageType = New System.Windows.Forms.Label()
         Me.DtpMovingDayTo = New System.Windows.Forms.DateTimePicker()
         Me.CmStorageTypeFrom = New System.Windows.Forms.ComboBox()
         Me.CmStorageTypeTo = New System.Windows.Forms.ComboBox()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
         CType(Me.DgvList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel2.SuspendLayout()
         Me.SuspendLayout()
@@ -97,7 +97,7 @@ Partial Class InventoryControlTable
         Me.DtpMovingDayFrom.Location = New System.Drawing.Point(279, 32)
         Me.DtpMovingDayFrom.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.DtpMovingDayFrom.Name = "DtpMovingDayFrom"
-        Me.DtpMovingDayFrom.Size = New System.Drawing.Size(199, 22)
+        Me.DtpMovingDayFrom.Size = New System.Drawing.Size(199, 37)
         Me.DtpMovingDayFrom.TabIndex = 320
         Me.DtpMovingDayFrom.TabStop = False
         Me.DtpMovingDayFrom.Value = New Date(2019, 1, 1, 0, 0, 0, 0)
@@ -110,7 +110,7 @@ Partial Class InventoryControlTable
         Me.CmWarehouseFrom.Items.AddRange(New Object() {"RegularShip", "DHL", "Air", "Ship"})
         Me.CmWarehouseFrom.Location = New System.Drawing.Point(279, 3)
         Me.CmWarehouseFrom.Name = "CmWarehouseFrom"
-        Me.CmWarehouseFrom.Size = New System.Drawing.Size(199, 23)
+        Me.CmWarehouseFrom.Size = New System.Drawing.Size(199, 38)
         Me.CmWarehouseFrom.TabIndex = 319
         '
         'LblMovingDay
@@ -165,6 +165,16 @@ Partial Class InventoryControlTable
         Me.TableLayoutPanel2.Size = New System.Drawing.Size(707, 87)
         Me.TableLayoutPanel2.TabIndex = 76
         '
+        'Label1
+        '
+        Me.Label1.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(484, 60)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(14, 24)
+        Me.Label1.TabIndex = 118
+        Me.Label1.Text = "～"
+        '
         'LblStorageType
         '
         Me.LblStorageType.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -188,7 +198,7 @@ Partial Class InventoryControlTable
         Me.DtpMovingDayTo.Location = New System.Drawing.Point(504, 32)
         Me.DtpMovingDayTo.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.DtpMovingDayTo.Name = "DtpMovingDayTo"
-        Me.DtpMovingDayTo.Size = New System.Drawing.Size(200, 22)
+        Me.DtpMovingDayTo.Size = New System.Drawing.Size(200, 37)
         Me.DtpMovingDayTo.TabIndex = 321
         Me.DtpMovingDayTo.TabStop = False
         Me.DtpMovingDayTo.Value = New Date(2019, 1, 1, 0, 0, 0, 0)
@@ -201,7 +211,7 @@ Partial Class InventoryControlTable
         Me.CmStorageTypeFrom.Items.AddRange(New Object() {"RegularShip", "DHL", "Air", "Ship"})
         Me.CmStorageTypeFrom.Location = New System.Drawing.Point(279, 61)
         Me.CmStorageTypeFrom.Name = "CmStorageTypeFrom"
-        Me.CmStorageTypeFrom.Size = New System.Drawing.Size(199, 23)
+        Me.CmStorageTypeFrom.Size = New System.Drawing.Size(199, 38)
         Me.CmStorageTypeFrom.TabIndex = 323
         '
         'CmStorageTypeTo
@@ -212,28 +222,18 @@ Partial Class InventoryControlTable
         Me.CmStorageTypeTo.Items.AddRange(New Object() {"RegularShip", "DHL", "Air", "Ship"})
         Me.CmStorageTypeTo.Location = New System.Drawing.Point(504, 61)
         Me.CmStorageTypeTo.Name = "CmStorageTypeTo"
-        Me.CmStorageTypeTo.Size = New System.Drawing.Size(200, 23)
+        Me.CmStorageTypeTo.Size = New System.Drawing.Size(200, 38)
         Me.CmStorageTypeTo.TabIndex = 324
         '
         'Label5
         '
         Me.Label5.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(484, 37)
+        Me.Label5.Location = New System.Drawing.Point(484, 31)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(14, 12)
+        Me.Label5.Size = New System.Drawing.Size(14, 24)
         Me.Label5.TabIndex = 325
         Me.Label5.Text = "～"
-        '
-        'Label1
-        '
-        Me.Label1.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(484, 66)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(14, 12)
-        Me.Label1.TabIndex = 118
-        Me.Label1.Text = "～"
         '
         'InventoryControlTable
         '
