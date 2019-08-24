@@ -694,13 +694,21 @@ Public Class Quote
             CmCurrency.Enabled = False
             'グリッドの入力項目を制限
             DgvItemList.Columns("仕入区分").ReadOnly = True
+            DgvItemList.Columns("仕入区分").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
             DgvItemList.Columns("メーカー").ReadOnly = True
+            DgvItemList.Columns("メーカー").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
             DgvItemList.Columns("品名").ReadOnly = True
+            DgvItemList.Columns("品名").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
             DgvItemList.Columns("型式").ReadOnly = True
+            DgvItemList.Columns("型式").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
             DgvItemList.Columns("数量").ReadOnly = True
+            DgvItemList.Columns("数量").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
             DgvItemList.Columns("単位").ReadOnly = True
+            DgvItemList.Columns("単位").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
             DgvItemList.Columns("仕入先コード").ReadOnly = True
+            DgvItemList.Columns("仕入先コード").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
             DgvItemList.Columns("仕入先").ReadOnly = True
+            DgvItemList.Columns("仕入先").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
 
         ElseIf Status Is CommonConst.STATUS_EDIT Then
             '=======================
