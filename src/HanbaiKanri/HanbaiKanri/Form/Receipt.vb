@@ -606,8 +606,8 @@ Public Class Receipt
                     DgvAdd.Rows(rowIndex).Cells("発注数量").Value = dsHattyudt.Tables(RS).Rows(i)("発注数量")
                     DgvAdd.Rows(rowIndex).Cells("単位").Value = dsHattyudt.Tables(RS).Rows(i)("単位")
 
-                    DgvAdd.Rows(i).Cells("入庫済数量").Value = dsHattyudt.Tables(RS).Rows(i)("入庫数")
-                    DgvAdd.Rows(i).Cells("未入庫数量").Value = dsHattyudt.Tables(RS).Rows(i)("未入庫数")
+                    DgvAdd.Rows(rowIndex).Cells("入庫済数量").Value = dsHattyudt.Tables(RS).Rows(i)("入庫数")
+                    DgvAdd.Rows(rowIndex).Cells("未入庫数量").Value = dsHattyudt.Tables(RS).Rows(i)("未入庫数")
 
                     DgvAdd.Rows(rowIndex).Cells("入出庫種別").Value = dsHanyo.Tables(RS).Rows(0)("可変キー")
                     DgvAdd.Rows(rowIndex).Cells("入庫数量").Value = 0  '今回入庫数量
