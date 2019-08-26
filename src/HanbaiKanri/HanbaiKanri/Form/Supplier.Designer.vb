@@ -100,9 +100,9 @@ Partial Class Supplier
         Me.LblMemo.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.LblMemo.AutoSize = True
         Me.LblMemo.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblMemo.Location = New System.Drawing.Point(3, 487)
+        Me.LblMemo.Location = New System.Drawing.Point(3, 494)
         Me.LblMemo.Name = "LblMemo"
-        Me.LblMemo.Size = New System.Drawing.Size(57, 30)
+        Me.LblMemo.Size = New System.Drawing.Size(28, 15)
         Me.LblMemo.TabIndex = 77
         Me.LblMemo.Text = "メモ"
         '
@@ -111,9 +111,9 @@ Partial Class Supplier
         Me.LblTariffRate.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.LblTariffRate.AutoSize = True
         Me.LblTariffRate.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblTariffRate.Location = New System.Drawing.Point(3, 0)
+        Me.LblTariffRate.Location = New System.Drawing.Point(3, 6)
         Me.LblTariffRate.Name = "LblTariffRate"
-        Me.LblTariffRate.Size = New System.Drawing.Size(103, 27)
+        Me.LblTariffRate.Size = New System.Drawing.Size(52, 15)
         Me.LblTariffRate.TabIndex = 76
         Me.LblTariffRate.Text = "関税率"
         '
@@ -122,9 +122,9 @@ Partial Class Supplier
         Me.LblPerson.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.LblPerson.AutoSize = True
         Me.LblPerson.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblPerson.Location = New System.Drawing.Point(3, 405)
+        Me.LblPerson.Location = New System.Drawing.Point(3, 411)
         Me.LblPerson.Name = "LblPerson"
-        Me.LblPerson.Size = New System.Drawing.Size(133, 27)
+        Me.LblPerson.Size = New System.Drawing.Size(67, 15)
         Me.LblPerson.TabIndex = 75
         Me.LblPerson.Text = "担当者名"
         '
@@ -133,9 +133,9 @@ Partial Class Supplier
         Me.LblFax.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.LblFax.AutoSize = True
         Me.LblFax.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblFax.Location = New System.Drawing.Point(3, 351)
+        Me.LblFax.Location = New System.Drawing.Point(3, 357)
         Me.LblFax.Name = "LblFax"
-        Me.LblFax.Size = New System.Drawing.Size(127, 27)
+        Me.LblFax.Size = New System.Drawing.Size(63, 15)
         Me.LblFax.TabIndex = 74
         Me.LblFax.Text = "FAX番号"
         '
@@ -144,9 +144,9 @@ Partial Class Supplier
         Me.LblTelSearch.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.LblTelSearch.AutoSize = True
         Me.LblTelSearch.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblTelSearch.Location = New System.Drawing.Point(3, 297)
+        Me.LblTelSearch.Location = New System.Drawing.Point(3, 303)
         Me.LblTelSearch.Name = "LblTelSearch"
-        Me.LblTelSearch.Size = New System.Drawing.Size(163, 27)
+        Me.LblTelSearch.Size = New System.Drawing.Size(112, 15)
         Me.LblTelSearch.TabIndex = 73
         Me.LblTelSearch.Text = "電話番号検索用"
         '
@@ -155,9 +155,9 @@ Partial Class Supplier
         Me.LblTel.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.LblTel.AutoSize = True
         Me.LblTel.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblTel.Location = New System.Drawing.Point(3, 243)
+        Me.LblTel.Location = New System.Drawing.Point(3, 249)
         Me.LblTel.Name = "LblTel"
-        Me.LblTel.Size = New System.Drawing.Size(133, 27)
+        Me.LblTel.Size = New System.Drawing.Size(67, 15)
         Me.LblTel.TabIndex = 72
         Me.LblTel.Text = "電話番号"
         '
@@ -165,10 +165,10 @@ Partial Class Supplier
         '
         Me.TxtMemo.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtMemo.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtMemo.Location = New System.Drawing.Point(175, 489)
+        Me.TxtMemo.Location = New System.Drawing.Point(175, 491)
         Me.TxtMemo.MaxLength = 255
         Me.TxtMemo.Name = "TxtMemo"
-        Me.TxtMemo.Size = New System.Drawing.Size(301, 37)
+        Me.TxtMemo.Size = New System.Drawing.Size(301, 22)
         Me.TxtMemo.TabIndex = 15
         '
         'TxtTariffRate
@@ -178,7 +178,7 @@ Partial Class Supplier
         Me.TxtTariffRate.Location = New System.Drawing.Point(197, 3)
         Me.TxtTariffRate.MaxLength = 6
         Me.TxtTariffRate.Name = "TxtTariffRate"
-        Me.TxtTariffRate.Size = New System.Drawing.Size(267, 37)
+        Me.TxtTariffRate.Size = New System.Drawing.Size(267, 22)
         Me.TxtTariffRate.TabIndex = 1
         '
         'TxtPerson
@@ -188,7 +188,7 @@ Partial Class Supplier
         Me.TxtPerson.Location = New System.Drawing.Point(175, 408)
         Me.TxtPerson.MaxLength = 50
         Me.TxtPerson.Name = "TxtPerson"
-        Me.TxtPerson.Size = New System.Drawing.Size(301, 37)
+        Me.TxtPerson.Size = New System.Drawing.Size(301, 22)
         Me.TxtPerson.TabIndex = 11
         '
         'TxtFax
@@ -198,7 +198,7 @@ Partial Class Supplier
         Me.TxtFax.Location = New System.Drawing.Point(175, 354)
         Me.TxtFax.MaxLength = 20
         Me.TxtFax.Name = "TxtFax"
-        Me.TxtFax.Size = New System.Drawing.Size(301, 37)
+        Me.TxtFax.Size = New System.Drawing.Size(301, 22)
         Me.TxtFax.TabIndex = 10
         '
         'TxtTelSearch
@@ -207,7 +207,7 @@ Partial Class Supplier
         Me.TxtTelSearch.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtTelSearch.Location = New System.Drawing.Point(175, 300)
         Me.TxtTelSearch.Name = "TxtTelSearch"
-        Me.TxtTelSearch.Size = New System.Drawing.Size(301, 37)
+        Me.TxtTelSearch.Size = New System.Drawing.Size(301, 22)
         Me.TxtTelSearch.TabIndex = 9
         Me.TxtTelSearch.TabStop = False
         '
@@ -218,7 +218,7 @@ Partial Class Supplier
         Me.TxtTel.Location = New System.Drawing.Point(175, 246)
         Me.TxtTel.MaxLength = 20
         Me.TxtTel.Name = "TxtTel"
-        Me.TxtTel.Size = New System.Drawing.Size(301, 37)
+        Me.TxtTel.Size = New System.Drawing.Size(301, 22)
         Me.TxtTel.TabIndex = 8
         '
         'BtnRegistration
@@ -236,9 +236,9 @@ Partial Class Supplier
         Me.Lbladdress3.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.Lbladdress3.AutoSize = True
         Me.Lbladdress3.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Lbladdress3.Location = New System.Drawing.Point(3, 216)
+        Me.Lbladdress3.Location = New System.Drawing.Point(3, 222)
         Me.Lbladdress3.Name = "Lbladdress3"
-        Me.Lbladdress3.Size = New System.Drawing.Size(94, 27)
+        Me.Lbladdress3.Size = New System.Drawing.Size(47, 15)
         Me.Lbladdress3.TabIndex = 64
         Me.Lbladdress3.Text = "住所３"
         '
@@ -247,9 +247,9 @@ Partial Class Supplier
         Me.LblAddress2.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.LblAddress2.AutoSize = True
         Me.LblAddress2.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblAddress2.Location = New System.Drawing.Point(3, 189)
+        Me.LblAddress2.Location = New System.Drawing.Point(3, 195)
         Me.LblAddress2.Name = "LblAddress2"
-        Me.LblAddress2.Size = New System.Drawing.Size(94, 27)
+        Me.LblAddress2.Size = New System.Drawing.Size(47, 15)
         Me.LblAddress2.TabIndex = 63
         Me.LblAddress2.Text = "住所２"
         '
@@ -258,9 +258,9 @@ Partial Class Supplier
         Me.LblAddress1.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.LblAddress1.AutoSize = True
         Me.LblAddress1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblAddress1.Location = New System.Drawing.Point(3, 162)
+        Me.LblAddress1.Location = New System.Drawing.Point(3, 168)
         Me.LblAddress1.Name = "LblAddress1"
-        Me.LblAddress1.Size = New System.Drawing.Size(94, 27)
+        Me.LblAddress1.Size = New System.Drawing.Size(47, 15)
         Me.LblAddress1.TabIndex = 62
         Me.LblAddress1.Text = "住所１"
         '
@@ -269,9 +269,9 @@ Partial Class Supplier
         Me.LblPostalCode.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.LblPostalCode.AutoSize = True
         Me.LblPostalCode.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblPostalCode.Location = New System.Drawing.Point(3, 108)
+        Me.LblPostalCode.Location = New System.Drawing.Point(3, 114)
         Me.LblPostalCode.Name = "LblPostalCode"
-        Me.LblPostalCode.Size = New System.Drawing.Size(133, 27)
+        Me.LblPostalCode.Size = New System.Drawing.Size(67, 15)
         Me.LblPostalCode.TabIndex = 61
         Me.LblPostalCode.Text = "郵便番号"
         '
@@ -280,9 +280,9 @@ Partial Class Supplier
         Me.LblShortName.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.LblShortName.AutoSize = True
         Me.LblShortName.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblShortName.Location = New System.Drawing.Point(3, 81)
+        Me.LblShortName.Location = New System.Drawing.Point(3, 87)
         Me.LblShortName.Name = "LblShortName"
-        Me.LblShortName.Size = New System.Drawing.Size(163, 27)
+        Me.LblShortName.Size = New System.Drawing.Size(97, 15)
         Me.LblShortName.TabIndex = 60
         Me.LblShortName.Text = "仕入先名略称"
         '
@@ -291,9 +291,9 @@ Partial Class Supplier
         Me.LblSupplierName.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.LblSupplierName.AutoSize = True
         Me.LblSupplierName.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblSupplierName.Location = New System.Drawing.Point(3, 54)
+        Me.LblSupplierName.Location = New System.Drawing.Point(3, 60)
         Me.LblSupplierName.Name = "LblSupplierName"
-        Me.LblSupplierName.Size = New System.Drawing.Size(133, 27)
+        Me.LblSupplierName.Size = New System.Drawing.Size(67, 15)
         Me.LblSupplierName.TabIndex = 59
         Me.LblSupplierName.Text = "仕入先名"
         '
@@ -302,9 +302,9 @@ Partial Class Supplier
         Me.LblSupplierCode.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.LblSupplierCode.AutoSize = True
         Me.LblSupplierCode.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblSupplierCode.Location = New System.Drawing.Point(3, 0)
+        Me.LblSupplierCode.Location = New System.Drawing.Point(3, 6)
         Me.LblSupplierCode.Name = "LblSupplierCode"
-        Me.LblSupplierCode.Size = New System.Drawing.Size(148, 27)
+        Me.LblSupplierCode.Size = New System.Drawing.Size(85, 15)
         Me.LblSupplierCode.TabIndex = 58
         Me.LblSupplierCode.Text = "仕入先コード"
         '
@@ -315,7 +315,7 @@ Partial Class Supplier
         Me.TxtAddress3.Location = New System.Drawing.Point(175, 219)
         Me.TxtAddress3.MaxLength = 100
         Me.TxtAddress3.Name = "TxtAddress3"
-        Me.TxtAddress3.Size = New System.Drawing.Size(301, 37)
+        Me.TxtAddress3.Size = New System.Drawing.Size(301, 22)
         Me.TxtAddress3.TabIndex = 7
         '
         'TxtAddress2
@@ -325,7 +325,7 @@ Partial Class Supplier
         Me.TxtAddress2.Location = New System.Drawing.Point(175, 192)
         Me.TxtAddress2.MaxLength = 100
         Me.TxtAddress2.Name = "TxtAddress2"
-        Me.TxtAddress2.Size = New System.Drawing.Size(301, 37)
+        Me.TxtAddress2.Size = New System.Drawing.Size(301, 22)
         Me.TxtAddress2.TabIndex = 6
         '
         'TxtAddress1
@@ -335,7 +335,7 @@ Partial Class Supplier
         Me.TxtAddress1.Location = New System.Drawing.Point(175, 165)
         Me.TxtAddress1.MaxLength = 100
         Me.TxtAddress1.Name = "TxtAddress1"
-        Me.TxtAddress1.Size = New System.Drawing.Size(301, 37)
+        Me.TxtAddress1.Size = New System.Drawing.Size(301, 22)
         Me.TxtAddress1.TabIndex = 5
         '
         'TxtPostalCode
@@ -345,7 +345,7 @@ Partial Class Supplier
         Me.TxtPostalCode.Location = New System.Drawing.Point(175, 111)
         Me.TxtPostalCode.MaxLength = 7
         Me.TxtPostalCode.Name = "TxtPostalCode"
-        Me.TxtPostalCode.Size = New System.Drawing.Size(301, 37)
+        Me.TxtPostalCode.Size = New System.Drawing.Size(301, 22)
         Me.TxtPostalCode.TabIndex = 4
         '
         'TxtSupplierShortName
@@ -355,7 +355,7 @@ Partial Class Supplier
         Me.TxtSupplierShortName.Location = New System.Drawing.Point(175, 84)
         Me.TxtSupplierShortName.MaxLength = 30
         Me.TxtSupplierShortName.Name = "TxtSupplierShortName"
-        Me.TxtSupplierShortName.Size = New System.Drawing.Size(301, 37)
+        Me.TxtSupplierShortName.Size = New System.Drawing.Size(301, 22)
         Me.TxtSupplierShortName.TabIndex = 3
         '
         'TxtSupplierName
@@ -365,7 +365,7 @@ Partial Class Supplier
         Me.TxtSupplierName.Location = New System.Drawing.Point(175, 57)
         Me.TxtSupplierName.MaxLength = 100
         Me.TxtSupplierName.Name = "TxtSupplierName"
-        Me.TxtSupplierName.Size = New System.Drawing.Size(301, 37)
+        Me.TxtSupplierName.Size = New System.Drawing.Size(301, 22)
         Me.TxtSupplierName.TabIndex = 2
         '
         'TxtSupplierCode
@@ -375,7 +375,7 @@ Partial Class Supplier
         Me.TxtSupplierCode.Location = New System.Drawing.Point(175, 3)
         Me.TxtSupplierCode.MaxLength = 8
         Me.TxtSupplierCode.Name = "TxtSupplierCode"
-        Me.TxtSupplierCode.Size = New System.Drawing.Size(301, 37)
+        Me.TxtSupplierCode.Size = New System.Drawing.Size(301, 22)
         Me.TxtSupplierCode.TabIndex = 1
         '
         'LblAccountNumber
@@ -383,9 +383,9 @@ Partial Class Supplier
         Me.LblAccountNumber.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.LblAccountNumber.AutoSize = True
         Me.LblAccountNumber.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblAccountNumber.Location = New System.Drawing.Point(3, 182)
+        Me.LblAccountNumber.Location = New System.Drawing.Point(3, 187)
         Me.LblAccountNumber.Name = "LblAccountNumber"
-        Me.LblAccountNumber.Size = New System.Drawing.Size(133, 26)
+        Me.LblAccountNumber.Size = New System.Drawing.Size(67, 15)
         Me.LblAccountNumber.TabIndex = 85
         Me.LblAccountNumber.Text = "口座番号"
         '
@@ -394,9 +394,9 @@ Partial Class Supplier
         Me.LblDepositCategory.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.LblDepositCategory.AutoSize = True
         Me.LblDepositCategory.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblDepositCategory.Location = New System.Drawing.Point(3, 156)
+        Me.LblDepositCategory.Location = New System.Drawing.Point(3, 161)
         Me.LblDepositCategory.Name = "LblDepositCategory"
-        Me.LblDepositCategory.Size = New System.Drawing.Size(133, 26)
+        Me.LblDepositCategory.Size = New System.Drawing.Size(67, 15)
         Me.LblDepositCategory.TabIndex = 84
         Me.LblDepositCategory.Text = "預金種目"
         '
@@ -405,9 +405,9 @@ Partial Class Supplier
         Me.LblBranchCode.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.LblBranchCode.AutoSize = True
         Me.LblBranchCode.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblBranchCode.Location = New System.Drawing.Point(3, 104)
+        Me.LblBranchCode.Location = New System.Drawing.Point(3, 109)
         Me.LblBranchCode.Name = "LblBranchCode"
-        Me.LblBranchCode.Size = New System.Drawing.Size(140, 26)
+        Me.LblBranchCode.Size = New System.Drawing.Size(70, 15)
         Me.LblBranchCode.TabIndex = 83
         Me.LblBranchCode.Text = "支店コード"
         '
@@ -416,9 +416,9 @@ Partial Class Supplier
         Me.LblBankCode.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.LblBankCode.AutoSize = True
         Me.LblBankCode.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblBankCode.Location = New System.Drawing.Point(3, 26)
+        Me.LblBankCode.Location = New System.Drawing.Point(3, 31)
         Me.LblBankCode.Name = "LblBankCode"
-        Me.LblBankCode.Size = New System.Drawing.Size(140, 26)
+        Me.LblBankCode.Size = New System.Drawing.Size(70, 15)
         Me.LblBankCode.TabIndex = 82
         Me.LblBankCode.Text = "銀行コード"
         '
@@ -429,7 +429,7 @@ Partial Class Supplier
         Me.TxtAccountNumber.Location = New System.Drawing.Point(197, 185)
         Me.TxtAccountNumber.MaxLength = 20
         Me.TxtAccountNumber.Name = "TxtAccountNumber"
-        Me.TxtAccountNumber.Size = New System.Drawing.Size(267, 37)
+        Me.TxtAccountNumber.Size = New System.Drawing.Size(267, 22)
         Me.TxtAccountNumber.TabIndex = 6
         '
         'TxtBranchOfficeCode
@@ -439,7 +439,7 @@ Partial Class Supplier
         Me.TxtBranchOfficeCode.Location = New System.Drawing.Point(197, 107)
         Me.TxtBranchOfficeCode.MaxLength = 3
         Me.TxtBranchOfficeCode.Name = "TxtBranchOfficeCode"
-        Me.TxtBranchOfficeCode.Size = New System.Drawing.Size(267, 37)
+        Me.TxtBranchOfficeCode.Size = New System.Drawing.Size(267, 22)
         Me.TxtBranchOfficeCode.TabIndex = 4
         '
         'TxtBankCode
@@ -449,7 +449,7 @@ Partial Class Supplier
         Me.TxtBankCode.Location = New System.Drawing.Point(197, 29)
         Me.TxtBankCode.MaxLength = 4
         Me.TxtBankCode.Name = "TxtBankCode"
-        Me.TxtBankCode.Size = New System.Drawing.Size(267, 37)
+        Me.TxtBankCode.Size = New System.Drawing.Size(267, 22)
         Me.TxtBankCode.TabIndex = 2
         '
         'LblAccountHolder
@@ -457,9 +457,9 @@ Partial Class Supplier
         Me.LblAccountHolder.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.LblAccountHolder.AutoSize = True
         Me.LblAccountHolder.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblAccountHolder.Location = New System.Drawing.Point(3, 237)
+        Me.LblAccountHolder.Location = New System.Drawing.Point(3, 244)
         Me.LblAccountHolder.Name = "LblAccountHolder"
-        Me.LblAccountHolder.Size = New System.Drawing.Size(133, 30)
+        Me.LblAccountHolder.Size = New System.Drawing.Size(67, 15)
         Me.LblAccountHolder.TabIndex = 87
         Me.LblAccountHolder.Text = "口座名義"
         '
@@ -467,10 +467,10 @@ Partial Class Supplier
         '
         Me.TxtAccountName.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtAccountName.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtAccountName.Location = New System.Drawing.Point(197, 237)
+        Me.TxtAccountName.Location = New System.Drawing.Point(197, 241)
         Me.TxtAccountName.MaxLength = 50
         Me.TxtAccountName.Name = "TxtAccountName"
-        Me.TxtAccountName.Size = New System.Drawing.Size(267, 37)
+        Me.TxtAccountName.Size = New System.Drawing.Size(267, 22)
         Me.TxtAccountName.TabIndex = 7
         '
         'BtnBack
@@ -488,9 +488,9 @@ Partial Class Supplier
         Me.LblPosition.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.LblPosition.AutoSize = True
         Me.LblPosition.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblPosition.Location = New System.Drawing.Point(3, 432)
+        Me.LblPosition.Location = New System.Drawing.Point(3, 438)
         Me.LblPosition.Name = "LblPosition"
-        Me.LblPosition.Size = New System.Drawing.Size(163, 27)
+        Me.LblPosition.Size = New System.Drawing.Size(82, 15)
         Me.LblPosition.TabIndex = 90
         Me.LblPosition.Text = "担当者役職"
         '
@@ -501,7 +501,7 @@ Partial Class Supplier
         Me.TxtPosition.Location = New System.Drawing.Point(175, 435)
         Me.TxtPosition.MaxLength = 20
         Me.TxtPosition.Name = "TxtPosition"
-        Me.TxtPosition.Size = New System.Drawing.Size(301, 37)
+        Me.TxtPosition.Size = New System.Drawing.Size(301, 22)
         Me.TxtPosition.TabIndex = 12
         '
         'LblPostalCodeText
@@ -509,9 +509,9 @@ Partial Class Supplier
         Me.LblPostalCodeText.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.LblPostalCodeText.AutoSize = True
         Me.LblPostalCodeText.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblPostalCodeText.Location = New System.Drawing.Point(175, 135)
+        Me.LblPostalCodeText.Location = New System.Drawing.Point(175, 141)
         Me.LblPostalCodeText.Name = "LblPostalCodeText"
-        Me.LblPostalCodeText.Size = New System.Drawing.Size(181, 27)
+        Me.LblPostalCodeText.Size = New System.Drawing.Size(96, 15)
         Me.LblPostalCodeText.TabIndex = 217
         Me.LblPostalCodeText.Text = "(例：0123456)"
         '
@@ -520,9 +520,9 @@ Partial Class Supplier
         Me.LblTelText.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.LblTelText.AutoSize = True
         Me.LblTelText.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblTelText.Location = New System.Drawing.Point(175, 270)
+        Me.LblTelText.Location = New System.Drawing.Point(175, 276)
         Me.LblTelText.Name = "LblTelText"
-        Me.LblTelText.Size = New System.Drawing.Size(226, 27)
+        Me.LblTelText.Size = New System.Drawing.Size(120, 15)
         Me.LblTelText.TabIndex = 219
         Me.LblTelText.Text = "(例：0123456789)"
         '
@@ -531,9 +531,9 @@ Partial Class Supplier
         Me.LblFaxText.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.LblFaxText.AutoSize = True
         Me.LblFaxText.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblFaxText.Location = New System.Drawing.Point(175, 378)
+        Me.LblFaxText.Location = New System.Drawing.Point(175, 384)
         Me.LblFaxText.Name = "LblFaxText"
-        Me.LblFaxText.Size = New System.Drawing.Size(226, 27)
+        Me.LblFaxText.Size = New System.Drawing.Size(120, 15)
         Me.LblFaxText.TabIndex = 220
         Me.LblFaxText.Text = "(例：0123456789)"
         '
@@ -542,9 +542,9 @@ Partial Class Supplier
         Me.Label24.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.Label24.AutoSize = True
         Me.Label24.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label24.Location = New System.Drawing.Point(175, 324)
+        Me.Label24.Location = New System.Drawing.Point(175, 330)
         Me.Label24.Name = "Label24"
-        Me.Label24.Size = New System.Drawing.Size(76, 27)
+        Me.Label24.Size = New System.Drawing.Size(40, 15)
         Me.Label24.TabIndex = 221
         Me.Label24.Text = "(例：)"
         '
@@ -553,31 +553,31 @@ Partial Class Supplier
         Me.LblTariffRateText.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.LblTariffRateText.AutoSize = True
         Me.LblTariffRateText.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblTariffRateText.Location = New System.Drawing.Point(197, 27)
+        Me.LblTariffRateText.Location = New System.Drawing.Point(197, 33)
         Me.LblTariffRateText.Name = "LblTariffRateText"
-        Me.LblTariffRateText.Size = New System.Drawing.Size(127, 27)
+        Me.LblTariffRateText.Size = New System.Drawing.Size(67, 15)
         Me.LblTariffRateText.TabIndex = 222
-        Me.LblTariffRateText.Text = "(例：0.01)"
+        Me.LblTariffRateText.Text = "(例：1.0%)"
         '
         'LblPphText
         '
         Me.LblPphText.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.LblPphText.AutoSize = True
         Me.LblPphText.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblPphText.Location = New System.Drawing.Point(197, 81)
+        Me.LblPphText.Location = New System.Drawing.Point(197, 87)
         Me.LblPphText.Name = "LblPphText"
-        Me.LblPphText.Size = New System.Drawing.Size(142, 27)
+        Me.LblPphText.Size = New System.Drawing.Size(67, 15)
         Me.LblPphText.TabIndex = 233
-        Me.LblPphText.Text = "(例：0.025)"
+        Me.LblPphText.Text = "(例：2.5%)"
         '
         'LblPph
         '
         Me.LblPph.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.LblPph.AutoSize = True
         Me.LblPph.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblPph.Location = New System.Drawing.Point(3, 54)
+        Me.LblPph.Location = New System.Drawing.Point(3, 60)
         Me.LblPph.Name = "LblPph"
-        Me.LblPph.Size = New System.Drawing.Size(163, 27)
+        Me.LblPph.Size = New System.Drawing.Size(97, 15)
         Me.LblPph.TabIndex = 232
         Me.LblPph.Text = "前払法人税率"
         '
@@ -588,7 +588,7 @@ Partial Class Supplier
         Me.TxtPph.Location = New System.Drawing.Point(197, 57)
         Me.TxtPph.MaxLength = 6
         Me.TxtPph.Name = "TxtPph"
-        Me.TxtPph.Size = New System.Drawing.Size(267, 37)
+        Me.TxtPph.Size = New System.Drawing.Size(267, 22)
         Me.TxtPph.TabIndex = 2
         '
         'LblTransportationCostText
@@ -596,20 +596,20 @@ Partial Class Supplier
         Me.LblTransportationCostText.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.LblTransportationCostText.AutoSize = True
         Me.LblTransportationCostText.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblTransportationCostText.Location = New System.Drawing.Point(197, 135)
+        Me.LblTransportationCostText.Location = New System.Drawing.Point(197, 141)
         Me.LblTransportationCostText.Name = "LblTransportationCostText"
-        Me.LblTransportationCostText.Size = New System.Drawing.Size(112, 27)
+        Me.LblTransportationCostText.Size = New System.Drawing.Size(75, 15)
         Me.LblTransportationCostText.TabIndex = 236
-        Me.LblTransportationCostText.Text = "(例：0.1)"
+        Me.LblTransportationCostText.Text = "(例：10.0%)"
         '
         'LblTransportationCost
         '
         Me.LblTransportationCost.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.LblTransportationCost.AutoSize = True
         Me.LblTransportationCost.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblTransportationCost.Location = New System.Drawing.Point(3, 108)
+        Me.LblTransportationCost.Location = New System.Drawing.Point(3, 114)
         Me.LblTransportationCost.Name = "LblTransportationCost"
-        Me.LblTransportationCost.Size = New System.Drawing.Size(133, 27)
+        Me.LblTransportationCost.Size = New System.Drawing.Size(67, 15)
         Me.LblTransportationCost.TabIndex = 235
         Me.LblTransportationCost.Text = "輸送費率"
         '
@@ -620,7 +620,7 @@ Partial Class Supplier
         Me.TxtTransportationCost.Location = New System.Drawing.Point(197, 111)
         Me.TxtTransportationCost.MaxLength = 6
         Me.TxtTransportationCost.Name = "TxtTransportationCost"
-        Me.TxtTransportationCost.Size = New System.Drawing.Size(267, 37)
+        Me.TxtTransportationCost.Size = New System.Drawing.Size(267, 22)
         Me.TxtTransportationCost.TabIndex = 3
         '
         'LblBankName
@@ -628,9 +628,9 @@ Partial Class Supplier
         Me.LblBankName.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.LblBankName.AutoSize = True
         Me.LblBankName.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblBankName.Location = New System.Drawing.Point(3, 0)
+        Me.LblBankName.Location = New System.Drawing.Point(3, 5)
         Me.LblBankName.Name = "LblBankName"
-        Me.LblBankName.Size = New System.Drawing.Size(103, 26)
+        Me.LblBankName.Size = New System.Drawing.Size(52, 15)
         Me.LblBankName.TabIndex = 239
         Me.LblBankName.Text = "銀行名"
         '
@@ -641,7 +641,7 @@ Partial Class Supplier
         Me.TxtBankName.Location = New System.Drawing.Point(197, 3)
         Me.TxtBankName.MaxLength = 50
         Me.TxtBankName.Name = "TxtBankName"
-        Me.TxtBankName.Size = New System.Drawing.Size(267, 37)
+        Me.TxtBankName.Size = New System.Drawing.Size(267, 22)
         Me.TxtBankName.TabIndex = 1
         '
         'LblBranchName
@@ -649,9 +649,9 @@ Partial Class Supplier
         Me.LblBranchName.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.LblBranchName.AutoSize = True
         Me.LblBranchName.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblBranchName.Location = New System.Drawing.Point(3, 78)
+        Me.LblBranchName.Location = New System.Drawing.Point(3, 83)
         Me.LblBranchName.Name = "LblBranchName"
-        Me.LblBranchName.Size = New System.Drawing.Size(103, 26)
+        Me.LblBranchName.Size = New System.Drawing.Size(52, 15)
         Me.LblBranchName.TabIndex = 242
         Me.LblBranchName.Text = "支店名"
         '
@@ -662,7 +662,7 @@ Partial Class Supplier
         Me.TxtBranchName.Location = New System.Drawing.Point(197, 81)
         Me.TxtBranchName.MaxLength = 50
         Me.TxtBranchName.Name = "TxtBranchName"
-        Me.TxtBranchName.Size = New System.Drawing.Size(267, 37)
+        Me.TxtBranchName.Size = New System.Drawing.Size(267, 22)
         Me.TxtBranchName.TabIndex = 3
         '
         'LblBankCodeText
@@ -670,9 +670,9 @@ Partial Class Supplier
         Me.LblBankCodeText.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.LblBankCodeText.AutoSize = True
         Me.LblBankCodeText.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblBankCodeText.Location = New System.Drawing.Point(197, 52)
+        Me.LblBankCodeText.Location = New System.Drawing.Point(197, 57)
         Me.LblBankCodeText.Name = "LblBankCodeText"
-        Me.LblBankCodeText.Size = New System.Drawing.Size(136, 26)
+        Me.LblBankCodeText.Size = New System.Drawing.Size(72, 15)
         Me.LblBankCodeText.TabIndex = 243
         Me.LblBankCodeText.Text = "(例：0123)"
         '
@@ -681,9 +681,9 @@ Partial Class Supplier
         Me.LblBranchCodeText.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.LblBranchCodeText.AutoSize = True
         Me.LblBranchCodeText.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblBranchCodeText.Location = New System.Drawing.Point(197, 130)
+        Me.LblBranchCodeText.Location = New System.Drawing.Point(197, 135)
         Me.LblBranchCodeText.Name = "LblBranchCodeText"
-        Me.LblBranchCodeText.Size = New System.Drawing.Size(121, 26)
+        Me.LblBranchCodeText.Size = New System.Drawing.Size(64, 15)
         Me.LblBranchCodeText.TabIndex = 244
         Me.LblBranchCodeText.Text = "(例：012)"
         '
@@ -692,9 +692,9 @@ Partial Class Supplier
         Me.LblAccountNumberText.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.LblAccountNumberText.AutoSize = True
         Me.LblAccountNumberText.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblAccountNumberText.Location = New System.Drawing.Point(197, 208)
+        Me.LblAccountNumberText.Location = New System.Drawing.Point(197, 213)
         Me.LblAccountNumberText.Name = "LblAccountNumberText"
-        Me.LblAccountNumberText.Size = New System.Drawing.Size(181, 26)
+        Me.LblAccountNumberText.Size = New System.Drawing.Size(96, 15)
         Me.LblAccountNumberText.TabIndex = 246
         Me.LblAccountNumberText.Text = "(例：0123456)"
         '
@@ -703,9 +703,9 @@ Partial Class Supplier
         Me.LblSupplierCodeText.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.LblSupplierCodeText.AutoSize = True
         Me.LblSupplierCodeText.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblSupplierCodeText.Location = New System.Drawing.Point(175, 27)
+        Me.LblSupplierCodeText.Location = New System.Drawing.Point(175, 33)
         Me.LblSupplierCodeText.Name = "LblSupplierCodeText"
-        Me.LblSupplierCodeText.Size = New System.Drawing.Size(288, 27)
+        Me.LblSupplierCodeText.Size = New System.Drawing.Size(230, 15)
         Me.LblSupplierCodeText.TabIndex = 247
         Me.LblSupplierCodeText.Text = "(他仕入先コードと重複しない文字列)"
         '
@@ -716,7 +716,7 @@ Partial Class Supplier
         Me.TxtAccountingVendorCode.Location = New System.Drawing.Point(197, 165)
         Me.TxtAccountingVendorCode.MaxLength = 20
         Me.TxtAccountingVendorCode.Name = "TxtAccountingVendorCode"
-        Me.TxtAccountingVendorCode.Size = New System.Drawing.Size(267, 37)
+        Me.TxtAccountingVendorCode.Size = New System.Drawing.Size(267, 22)
         Me.TxtAccountingVendorCode.TabIndex = 13
         '
         'LblAccountingVendorCode
@@ -724,9 +724,9 @@ Partial Class Supplier
         Me.LblAccountingVendorCode.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.LblAccountingVendorCode.AutoSize = True
         Me.LblAccountingVendorCode.Font = New System.Drawing.Font("MS UI Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblAccountingVendorCode.Location = New System.Drawing.Point(3, 162)
+        Me.LblAccountingVendorCode.Location = New System.Drawing.Point(3, 170)
         Me.LblAccountingVendorCode.Name = "LblAccountingVendorCode"
-        Me.LblAccountingVendorCode.Size = New System.Drawing.Size(186, 29)
+        Me.LblAccountingVendorCode.Size = New System.Drawing.Size(114, 13)
         Me.LblAccountingVendorCode.TabIndex = 248
         Me.LblAccountingVendorCode.Text = "会計用仕入先コード"
         '
@@ -736,10 +736,10 @@ Partial Class Supplier
         Me.cmDCKbn.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmDCKbn.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.cmDCKbn.FormattingEnabled = True
-        Me.cmDCKbn.ItemHeight = 30
+        Me.cmDCKbn.ItemHeight = 15
         Me.cmDCKbn.Location = New System.Drawing.Point(197, 159)
         Me.cmDCKbn.Name = "cmDCKbn"
-        Me.cmDCKbn.Size = New System.Drawing.Size(267, 38)
+        Me.cmDCKbn.Size = New System.Drawing.Size(267, 23)
         Me.cmDCKbn.TabIndex = 5
         '
         'TableLayoutPanel1
@@ -811,9 +811,9 @@ Partial Class Supplier
         Me.LblDomesticKbn.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.LblDomesticKbn.AutoSize = True
         Me.LblDomesticKbn.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblDomesticKbn.Location = New System.Drawing.Point(3, 459)
+        Me.LblDomesticKbn.Location = New System.Drawing.Point(3, 465)
         Me.LblDomesticKbn.Name = "LblDomesticKbn"
-        Me.LblDomesticKbn.Size = New System.Drawing.Size(133, 27)
+        Me.LblDomesticKbn.Size = New System.Drawing.Size(67, 15)
         Me.LblDomesticKbn.TabIndex = 253
         Me.LblDomesticKbn.Text = "国内区分"
         '
@@ -823,10 +823,10 @@ Partial Class Supplier
         Me.cmDomesticKbn.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmDomesticKbn.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.cmDomesticKbn.FormattingEnabled = True
-        Me.cmDomesticKbn.ItemHeight = 30
+        Me.cmDomesticKbn.ItemHeight = 15
         Me.cmDomesticKbn.Location = New System.Drawing.Point(175, 462)
         Me.cmDomesticKbn.Name = "cmDomesticKbn"
-        Me.cmDomesticKbn.Size = New System.Drawing.Size(301, 38)
+        Me.cmDomesticKbn.Size = New System.Drawing.Size(301, 23)
         Me.cmDomesticKbn.TabIndex = 14
         '
         'TableLayoutPanel2

@@ -215,17 +215,20 @@ Public Class Supplier
 
             If ds.Tables(RS).Rows(0)("関税率") Is DBNull.Value Then
             Else
-                TxtTariffRate.Text = ds.Tables(RS).Rows(0)("関税率")
+                Dim decTmp As Decimal = ds.Tables(RS).Rows(0)("関税率") * 100
+                TxtTariffRate.Text = decTmp.ToString("N1")
             End If
 
             If ds.Tables(RS).Rows(0)("前払法人税率") Is DBNull.Value Then
             Else
-                TxtPph.Text = ds.Tables(RS).Rows(0)("前払法人税率")
+                Dim decTmp As Decimal = ds.Tables(RS).Rows(0)("前払法人税率") * 100
+                TxtPph.Text = decTmp.ToString("N1")
             End If
 
             If ds.Tables(RS).Rows(0)("輸送費率") Is DBNull.Value Then
             Else
-                TxtTransportationCost.Text = ds.Tables(RS).Rows(0)("輸送費率")
+                Dim decTmp As Decimal = ds.Tables(RS).Rows(0)("輸送費率") * 100
+                TxtTransportationCost.Text = decTmp.ToString("N1")
             End If
 
             If ds.Tables(RS).Rows(0)("メモ") Is DBNull.Value Then
@@ -371,19 +374,19 @@ Public Class Supplier
                 If TxtTariffRate.Text = "" Then
                     Sql += "0"
                 Else
-                    Sql += UtilClass.formatNumber(TxtTariffRate.Text)
+                    Sql += UtilClass.formatNumber(TxtTariffRate.Text / 100)
                 End If
                 Sql += "', '"
                 If TxtPph.Text = "" Then
                     Sql += "0"
                 Else
-                    Sql += UtilClass.formatNumber(TxtPph.Text)
+                    Sql += UtilClass.formatNumber(TxtPph.Text / 100)
                 End If
                 Sql += "', '"
                 If TxtTransportationCost.Text = "" Then
                     Sql += "0"
                 Else
-                    Sql += UtilClass.formatNumber(TxtTransportationCost.Text)
+                    Sql += UtilClass.formatNumber(TxtTransportationCost.Text / 100)
                 End If
                 Sql += "', '"
                 Sql += TxtMemo.Text
@@ -474,15 +477,15 @@ Public Class Supplier
                 Sql += "', "
                 Sql += "関税率"
                 Sql += " = '"
-                Sql += UtilClass.formatNumber(TxtTariffRate.Text)
+                Sql += UtilClass.formatNumber(TxtTariffRate.Text / 100)
                 Sql += "', "
                 Sql += "前払法人税率"
                 Sql += " = '"
-                Sql += UtilClass.formatNumber(TxtPph.Text)
+                Sql += UtilClass.formatNumber(TxtPph.Text / 100)
                 Sql += "', "
                 Sql += "輸送費率"
                 Sql += " = '"
-                Sql += UtilClass.formatNumber(TxtTransportationCost.Text)
+                Sql += UtilClass.formatNumber(TxtTransportationCost.Text / 100)
                 Sql += "', "
                 Sql += "メモ"
                 Sql += " = '"
