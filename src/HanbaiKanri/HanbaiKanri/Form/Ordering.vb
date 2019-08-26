@@ -1822,7 +1822,7 @@ Public Class Ordering
                     sheet.Range("O" & currentCnt).Value = dsHanyoA.Tables(RS).Rows(0)("文字１")
                 End If
 
-                sheet.Range("R" & currentCnt).Value = DgvItemList.Rows(i).Cells("仕入単価_外貨").Value.ToString
+                sheet.Range("R" & currentCnt).Value = DgvItemList.Rows(i).Cells("仕入単価_外貨").Value
                 sheet.Range("W" & currentCnt).Value = DgvItemList.Rows(i).Cells("仕入単価_外貨").Value * DgvItemList.Rows(i).Cells("数量").Value
 
                 totalPrice = totalPrice + DgvItemList.Rows(i).Cells("仕入単価_外貨").Value * DgvItemList.Rows(i).Cells("数量").Value
