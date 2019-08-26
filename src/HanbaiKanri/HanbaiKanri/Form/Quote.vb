@@ -3302,11 +3302,12 @@ Public Class Quote
         If ds.Tables(RS).Rows.Count > 0 Then
             TxtRate.Text = ds.Tables(RS).Rows(0)("レート")
         Else
-            If CultureInfo.CurrentCulture.Name.ToString = CommonConst.CI_ID Then
-                TxtRate.Text = CommonConst.BASE_RATE_IDR
-            Else
-                TxtRate.Text = CommonConst.BASE_RATE_JPY
-            End If
+            'If CultureInfo.CurrentCulture.Name.ToString = CommonConst.CI_ID Then
+            '    TxtRate.Text = CommonConst.BASE_RATE_IDR
+            'Else
+            '    TxtRate.Text = CommonConst.BASE_RATE_JPY
+            'End If
+            TxtRate.Text = 1.ToString("F10")
         End If
 
     End Sub
