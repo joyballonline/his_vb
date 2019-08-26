@@ -505,11 +505,14 @@ Public Class GoodsIssue
             DgvOrder.Columns.Add("型式", "Spec")
             DgvOrder.Columns.Add("受注数量", "JobOrderQuantity" & vbCrLf & "a")
             DgvOrder.Columns.Add("単位", "Unit")
-            DgvOrder.Columns.Add("売上数量", "SalesQuantity")
-            DgvOrder.Columns.Add("売単価", "SellingPrice")
+
+            DgvOrder.Columns.Add("売上数量", "IssuedQuantity" & vbCrLf & "b")
+            DgvOrder.Columns.Add("受注残数", "UnissuedQuantity" & vbCrLf & "c=a-b")
+            DgvOrder.Columns.Add("売単価", "OrderPrice")
+
             DgvOrder.Columns.Add("売上金額", "SalesAmount")
-            DgvOrder.Columns.Add("受注残数", "OrderRemainingAmount")
             DgvOrder.Columns.Add("未出庫数", "NoShippedQntity")
+
             DgvOrder.Columns.Add("更新日", "UpdateDate")
         Else
             DgvOrder.Columns.Add("明細", "行No")
