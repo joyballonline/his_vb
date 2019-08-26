@@ -415,7 +415,7 @@ Public Class GoodsIssue
                     DgvAdd.Rows(rowIndex).Cells("単位").Value = dsCymndt.Tables(RS).Rows(i)("単位")
                     DgvAdd.Rows(rowIndex).Cells("未出庫数量").Value = dsCymndt.Tables(RS).Rows(i)("受注残数")
 
-                    'DgvAdd.Rows(rowIndex).Cells("売単価").Value = dsCymndt.Tables(RS).Rows(i)("見積単価")
+                    DgvAdd.Rows(rowIndex).Cells("売単価").Value = dsCymndt.Tables(RS).Rows(i)("見積単価")
                     'DgvAdd.Rows(rowIndex).Cells("出庫数量").Value = 0
 
 
@@ -623,12 +623,17 @@ Public Class GoodsIssue
             DgvAdd.Columns.Add("メーカー", "Manufacturer")
             DgvAdd.Columns.Add("品名", "ItemName")
             DgvAdd.Columns.Add("型式", "Spec")
-            DgvAdd.Columns.Add("単位", "Unit")
             DgvAdd.Columns.Add("仕入先", "SupplierName")
-            DgvAdd.Columns.Add("売単価", "SellingPrice")
+
             DgvAdd.Columns.Add("在庫数量", "StockQuantity")
+            DgvAdd.Columns.Add("単位", "Unit")
+            DgvAdd.Columns.Add("未出庫数量", "UnissuedQuantity")
             DgvAdd.Columns.Add("出庫数量", "GoodsDeliveryQuantity")
+
             DgvAdd.Columns.Add("備考", "Remarks")
+
+            DgvAdd.Columns.Add("売単価", "SellingPrice")
+
         Else
             DgvAdd.Columns.Add("No", "No")
             DgvAdd.Columns.Add("行番号", "行No")
