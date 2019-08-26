@@ -3495,11 +3495,12 @@ Public Class Quote
         '通貨コードが1（IDR）の場合、
         If prmCurrencyVal = CommonConst.CURRENCY_CD_IDR Then
             'currentが日本だったら
-            If CultureInfo.CurrentCulture.Name.ToString = CommonConst.CI_ID Then
-                retVal = Decimal.Parse(CommonConst.BASE_RATE_IDR)
-            Else
-                retVal = Decimal.Parse(CommonConst.BASE_RATE_JPY)
-            End If
+            'If CultureInfo.CurrentCulture.Name.ToString = CommonConst.CI_ID Then
+            '    retVal = Decimal.Parse(CommonConst.BASE_RATE_IDR)
+            'Else
+            '    retVal = Decimal.Parse(CommonConst.BASE_RATE_JPY)
+            'End If
+            retVal = 1.ToString("F10")
         Else
             '基準日よりも古い最新のレートを取得
             Dim Sql As String = ""
