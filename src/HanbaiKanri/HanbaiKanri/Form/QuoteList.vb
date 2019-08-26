@@ -206,7 +206,7 @@ Public Class QuoteList
             '伝票形式
             If RbtnSlip.Checked Then
 
-                Sql = " SELECT "
+                Sql = " SELECT distinct"
 
                 Sql += " t01.会社コード"
                 Sql += ",t01.取消区分"
@@ -233,6 +233,7 @@ Public Class QuoteList
                 Sql += ",t01.更新日"
 
                 Sql += " FROM t01_mithd t01 "
+                Sql += " inner join t02_mitdt t02 on t02.会社コード = t01.会社コード and t02.見積番号 = t01.見積番号 and t02.見積番号枝番 = t01.見積番号枝番 "
 
                 Sql += " WHERE "
                 Sql += "  t01.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
