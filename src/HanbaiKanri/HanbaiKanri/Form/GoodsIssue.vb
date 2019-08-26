@@ -2160,48 +2160,69 @@ Public Class GoodsIssue
         Dim reccnt As Integer = 0 'DB用（デフォルト）
 
         Sql = " SELECT t42.入庫番号 "
-        Sql += " FROM t10_cymnhd t10  "
+        Sql += " FROM t43_nyukodt t43  "
+        Sql += " LEFT JOIN t42_nyukohd t42 "
+        Sql += " ON t43.入庫番号 = t42.入庫番号"
+        Sql += " and t43.発注番号 = t42.発注番号 and t43.発注番号枝番 = t42.発注番号枝番"
 
         Sql += " LEFT JOIN t20_hattyu t20 "
-        Sql += " ON "
-        Sql += " t10.会社コード = t20.会社コード "
-        Sql += " AND "
-        Sql += " t10.受注番号 = t20.受注番号 "
-        Sql += " AND "
-        Sql += " t10.受注番号枝番 = t20.受注番号枝番 "
-        Sql += " AND "
-        Sql += " t20.発注番号枝番 = (SELECT MAX(発注番号枝番) AS 発注番号枝番 FROM t20_hattyu) "
-
-        Sql += " LEFT JOIN t42_nyukohd t42 "
-        Sql += " ON "
-        Sql += " t20.会社コード = t42.会社コード "
-        Sql += " AND "
-        Sql += " t20.発注番号 = t42.発注番号 "
-        Sql += " AND "
-        Sql += " t20.発注番号枝番 = t42.発注番号枝番 "
-        Sql += " AND "
-        Sql += " t20.仕入先コード = t42.仕入先コード "
-
-        Sql += " LEFT JOIN t43_nyukodt t43 "
-        Sql += " ON "
-        Sql += " t42.会社コード = t43.会社コード "
-        Sql += " AND "
-        Sql += " t42.入庫番号 = t43.入庫番号 "
+        Sql += " on  t20.会社コード = t43.会社コード "
+        Sql += " and t20.発注番号 = t42.発注番号 and t20.発注番号枝番 = t42.発注番号枝番 "
 
         Sql += " WHERE "
-        Sql += " t10.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        Sql += " AND "
-        Sql += " t10.受注番号 = '" & TxtOrderNo.Text & "'"
-        Sql += " AND "
-        Sql += " t10.受注番号枝番 = '" & TxtSuffixNo.Text & "'"
-
+        Sql += "     t42.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " AND t42.倉庫コード ILIKE '" & DgvAdd.Rows(rowIndex).Cells("倉庫").Value.ToString & "'"
         Sql += " AND t43.メーカー ILIKE '" & DgvAdd.Rows(rowIndex).Cells("メーカー").Value.ToString & "'"
         Sql += " AND t43.品名 ILIKE '" & DgvAdd.Rows(rowIndex).Cells("品名").Value.ToString & "'"
         Sql += " AND t43.型式 ILIKE '" & DgvAdd.Rows(rowIndex).Cells("型式").Value.ToString & "'"
-
-        Sql += " AND t42.倉庫コード ILIKE '" & DgvAdd.Rows(rowIndex).Cells("倉庫").Value.ToString & "'"
-
         Sql += " AND t43.仕入区分 = '" & DgvAdd.Rows(rowIndex).Cells("仕入区分値").Value.ToString & "'"
+
+        Sql += " and t20.受注番号 = '" & TxtOrderNo.Text & "'"
+        Sql += " and t20.受注番号枝番 = '" & TxtSuffixNo.Text & "'"
+
+        'Sql = " SELECT t42.入庫番号 "
+        'Sql += " FROM t10_cymnhd t10  "
+
+        'Sql += " LEFT JOIN t20_hattyu t20 "
+        'Sql += " ON "
+        'Sql += " t10.会社コード = t20.会社コード "
+        'Sql += " AND "
+        'Sql += " t10.受注番号 = t20.受注番号 "
+        'Sql += " AND "
+        'Sql += " t10.受注番号枝番 = t20.受注番号枝番 "
+        'Sql += " AND "
+        'Sql += " t20.発注番号枝番 = (SELECT MAX(発注番号枝番) AS 発注番号枝番 FROM t20_hattyu) "
+
+        'Sql += " LEFT JOIN t42_nyukohd t42 "
+        'Sql += " ON "
+        'Sql += " t20.会社コード = t42.会社コード "
+        'Sql += " AND "
+        'Sql += " t20.発注番号 = t42.発注番号 "
+        'Sql += " AND "
+        'Sql += " t20.発注番号枝番 = t42.発注番号枝番 "
+        'Sql += " AND "
+        'Sql += " t20.仕入先コード = t42.仕入先コード "
+
+        'Sql += " LEFT JOIN t43_nyukodt t43 "
+        'Sql += " ON "
+        'Sql += " t42.会社コード = t43.会社コード "
+        'Sql += " AND "
+        'Sql += " t42.入庫番号 = t43.入庫番号 "
+
+        'Sql += " WHERE "
+        'Sql += " t10.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        'Sql += " AND "
+        'Sql += " t10.受注番号 = '" & TxtOrderNo.Text & "'"
+        'Sql += " AND "
+        'Sql += " t10.受注番号枝番 = '" & TxtSuffixNo.Text & "'"
+
+        'Sql += " AND t43.メーカー ILIKE '" & DgvAdd.Rows(rowIndex).Cells("メーカー").Value.ToString & "'"
+        'Sql += " AND t43.品名 ILIKE '" & DgvAdd.Rows(rowIndex).Cells("品名").Value.ToString & "'"
+        'Sql += " AND t43.型式 ILIKE '" & DgvAdd.Rows(rowIndex).Cells("型式").Value.ToString & "'"
+
+        'Sql += " AND t42.倉庫コード ILIKE '" & DgvAdd.Rows(rowIndex).Cells("倉庫").Value.ToString & "'"
+
+        'Sql += " AND t43.仕入区分 = '" & DgvAdd.Rows(rowIndex).Cells("仕入区分値").Value.ToString & "'"
 
         Dim dsNyukoList As DataSet = _db.selectDB(Sql, RS, reccnt)
 
