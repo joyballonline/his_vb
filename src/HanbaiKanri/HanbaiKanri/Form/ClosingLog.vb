@@ -2819,6 +2819,8 @@ Public Class ClosingLog
         '仕訳用テーブルをいったん削除　テスト用
         _db.executeDB("truncate table t67_swkhd")
 
+        Cursor.Current = Cursors.WaitCursor
+
         '仕訳データを作成する
         getShiwakeData()
 
@@ -2993,14 +2995,17 @@ Public Class ClosingLog
 
                 xmlDoc.Save(sOutPath & "\" & nowDatetime & ".xml")
 
+                Cursor.Current = Cursors.Default
                 _msgHd.dspMSG("CreateXML", frmC01F10_Login.loginValue.Language)
             Catch ex As System.Xml.XmlException
                 'XMLによる例外をキャッチ
+                Cursor.Current = Cursors.Default
                 Console.WriteLine(ex.Message)
             End Try
 
             'Catch ex As Exception
         Catch lex As UsrDefException
+            Cursor.Current = Cursors.Default
             lex.dspMsg()
             Exit Sub
         End Try
