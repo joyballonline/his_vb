@@ -139,7 +139,7 @@ Partial Class QuoteList
         Me.TxtCustomerName.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtCustomerName.Location = New System.Drawing.Point(189, 35)
         Me.TxtCustomerName.Name = "TxtCustomerName"
-        Me.TxtCustomerName.Size = New System.Drawing.Size(350, 22)
+        Me.TxtCustomerName.Size = New System.Drawing.Size(350, 37)
         Me.TxtCustomerName.TabIndex = 1
         '
         'LblConditions
@@ -148,7 +148,7 @@ Partial Class QuoteList
         Me.LblConditions.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblConditions.Location = New System.Drawing.Point(12, 13)
         Me.LblConditions.Name = "LblConditions"
-        Me.LblConditions.Size = New System.Drawing.Size(87, 15)
+        Me.LblConditions.Size = New System.Drawing.Size(163, 30)
         Me.LblConditions.TabIndex = 7
         Me.LblConditions.Text = "■抽出条件"
         '
@@ -181,7 +181,7 @@ Partial Class QuoteList
         Me.TxtAddress.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtAddress.Location = New System.Drawing.Point(189, 63)
         Me.TxtAddress.Name = "TxtAddress"
-        Me.TxtAddress.Size = New System.Drawing.Size(350, 22)
+        Me.TxtAddress.Size = New System.Drawing.Size(350, 37)
         Me.TxtAddress.TabIndex = 12
         '
         'LblTel
@@ -201,7 +201,7 @@ Partial Class QuoteList
         Me.TxtTel.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtTel.Location = New System.Drawing.Point(189, 91)
         Me.TxtTel.Name = "TxtTel"
-        Me.TxtTel.Size = New System.Drawing.Size(350, 22)
+        Me.TxtTel.Size = New System.Drawing.Size(350, 37)
         Me.TxtTel.TabIndex = 3
         '
         'LblCustomerCode
@@ -221,7 +221,7 @@ Partial Class QuoteList
         Me.TxtCustomerCode.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtCustomerCode.Location = New System.Drawing.Point(189, 119)
         Me.TxtCustomerCode.Name = "TxtCustomerCode"
-        Me.TxtCustomerCode.Size = New System.Drawing.Size(350, 22)
+        Me.TxtCustomerCode.Size = New System.Drawing.Size(350, 37)
         Me.TxtCustomerCode.TabIndex = 4
         '
         'LblSales
@@ -241,7 +241,7 @@ Partial Class QuoteList
         Me.TxtSales.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtSales.Location = New System.Drawing.Point(189, 147)
         Me.TxtSales.Name = "TxtSales"
-        Me.TxtSales.Size = New System.Drawing.Size(350, 22)
+        Me.TxtSales.Size = New System.Drawing.Size(350, 37)
         Me.TxtSales.TabIndex = 9
         '
         'LblQuoteNo
@@ -261,7 +261,7 @@ Partial Class QuoteList
         Me.TxtQuoteNoSince.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtQuoteNoSince.Location = New System.Drawing.Point(759, 62)
         Me.TxtQuoteNoSince.Name = "TxtQuoteNoSince"
-        Me.TxtQuoteNoSince.Size = New System.Drawing.Size(369, 22)
+        Me.TxtQuoteNoSince.Size = New System.Drawing.Size(369, 37)
         Me.TxtQuoteNoSince.TabIndex = 7
         '
         'LblQuoteDate
@@ -281,7 +281,7 @@ Partial Class QuoteList
         Me.Label5.AutoSize = True
         Me.Label5.Location = New System.Drawing.Point(935, 41)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(17, 12)
+        Me.Label5.Size = New System.Drawing.Size(34, 24)
         Me.Label5.TabIndex = 23
         Me.Label5.Text = "～"
         '
@@ -291,7 +291,7 @@ Partial Class QuoteList
         Me.Label10.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.Label10.Location = New System.Drawing.Point(10, 182)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(87, 15)
+        Me.Label10.Size = New System.Drawing.Size(163, 30)
         Me.Label10.TabIndex = 25
         Me.Label10.Text = "■表示形式"
         '
@@ -324,7 +324,7 @@ Partial Class QuoteList
         Me.BtnOrderPurchase.Name = "BtnOrderPurchase"
         Me.BtnOrderPurchase.Size = New System.Drawing.Size(165, 40)
         Me.BtnOrderPurchase.TabIndex = 16
-        Me.BtnOrderPurchase.Text = "受発注登録"
+        Me.BtnOrderPurchase.Text = "受注登録・受発注登録"
         Me.BtnOrderPurchase.UseVisualStyleBackColor = True
         Me.BtnOrderPurchase.Visible = False
         '
@@ -344,9 +344,9 @@ Partial Class QuoteList
         Me.ChkExpired.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.ChkExpired.AutoSize = True
         Me.ChkExpired.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.ChkExpired.Location = New System.Drawing.Point(215, 5)
+        Me.ChkExpired.Location = New System.Drawing.Point(365, 3)
         Me.ChkExpired.Name = "ChkExpired"
-        Me.ChkExpired.Size = New System.Drawing.Size(221, 19)
+        Me.ChkExpired.Size = New System.Drawing.Size(439, 23)
         Me.ChkExpired.TabIndex = 13
         Me.ChkExpired.Text = "有効期限の切れたデータを含める"
         Me.ChkExpired.UseVisualStyleBackColor = True
@@ -376,9 +376,9 @@ Partial Class QuoteList
         Me.ChkCancel.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.ChkCancel.AutoSize = True
         Me.ChkCancel.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.ChkCancel.Location = New System.Drawing.Point(442, 5)
+        Me.ChkCancel.Location = New System.Drawing.Point(810, 3)
         Me.ChkCancel.Name = "ChkCancel"
-        Me.ChkCancel.Size = New System.Drawing.Size(139, 19)
+        Me.ChkCancel.Size = New System.Drawing.Size(274, 23)
         Me.ChkCancel.TabIndex = 14
         Me.ChkCancel.Text = "取消データを含める"
         Me.ChkCancel.UseVisualStyleBackColor = True
@@ -400,9 +400,9 @@ Partial Class QuoteList
         Me.RbtnDetails.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.RbtnDetails.AutoSize = True
         Me.RbtnDetails.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.RbtnDetails.Location = New System.Drawing.Point(98, 5)
+        Me.RbtnDetails.Location = New System.Drawing.Point(173, 3)
         Me.RbtnDetails.Name = "RbtnDetails"
-        Me.RbtnDetails.Size = New System.Drawing.Size(89, 19)
+        Me.RbtnDetails.Size = New System.Drawing.Size(164, 23)
         Me.RbtnDetails.TabIndex = 12
         Me.RbtnDetails.Text = "明細単位"
         Me.RbtnDetails.UseVisualStyleBackColor = True
@@ -413,9 +413,9 @@ Partial Class QuoteList
         Me.RbtnSlip.AutoSize = True
         Me.RbtnSlip.Checked = True
         Me.RbtnSlip.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.RbtnSlip.Location = New System.Drawing.Point(3, 5)
+        Me.RbtnSlip.Location = New System.Drawing.Point(3, 3)
         Me.RbtnSlip.Name = "RbtnSlip"
-        Me.RbtnSlip.Size = New System.Drawing.Size(89, 19)
+        Me.RbtnSlip.Size = New System.Drawing.Size(164, 23)
         Me.RbtnSlip.TabIndex = 11
         Me.RbtnSlip.TabStop = True
         Me.RbtnSlip.Text = "伝票単位"
@@ -430,7 +430,7 @@ Partial Class QuoteList
         Me.TxtQuoteDateSince.Location = New System.Drawing.Point(759, 36)
         Me.TxtQuoteDateSince.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.TxtQuoteDateSince.Name = "TxtQuoteDateSince"
-        Me.TxtQuoteDateSince.Size = New System.Drawing.Size(170, 22)
+        Me.TxtQuoteDateSince.Size = New System.Drawing.Size(170, 37)
         Me.TxtQuoteDateSince.TabIndex = 5
         Me.TxtQuoteDateSince.Value = New Date(2018, 6, 5, 23, 23, 58, 0)
         '
@@ -443,7 +443,7 @@ Partial Class QuoteList
         Me.TxtQuoteDateUntil.Location = New System.Drawing.Point(958, 36)
         Me.TxtQuoteDateUntil.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.TxtQuoteDateUntil.Name = "TxtQuoteDateUntil"
-        Me.TxtQuoteDateUntil.Size = New System.Drawing.Size(170, 22)
+        Me.TxtQuoteDateUntil.Size = New System.Drawing.Size(170, 37)
         Me.TxtQuoteDateUntil.TabIndex = 6
         Me.TxtQuoteDateUntil.Value = New Date(2018, 6, 5, 23, 23, 58, 0)
         '
@@ -464,7 +464,7 @@ Partial Class QuoteList
         Me.TxtManufacturer.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtManufacturer.Location = New System.Drawing.Point(759, 91)
         Me.TxtManufacturer.Name = "TxtManufacturer"
-        Me.TxtManufacturer.Size = New System.Drawing.Size(369, 22)
+        Me.TxtManufacturer.Size = New System.Drawing.Size(369, 37)
         Me.TxtManufacturer.TabIndex = 39
         '
         'TableLayoutPanel1
@@ -505,7 +505,7 @@ Partial Class QuoteList
         Me.TxtItemName.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtItemName.Location = New System.Drawing.Point(759, 119)
         Me.TxtItemName.Name = "TxtItemName"
-        Me.TxtItemName.Size = New System.Drawing.Size(369, 22)
+        Me.TxtItemName.Size = New System.Drawing.Size(369, 37)
         Me.TxtItemName.TabIndex = 42
         '
         'LblSpec
@@ -525,7 +525,7 @@ Partial Class QuoteList
         Me.TxtSpec.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtSpec.Location = New System.Drawing.Point(759, 147)
         Me.TxtSpec.Name = "TxtSpec"
-        Me.TxtSpec.Size = New System.Drawing.Size(369, 22)
+        Me.TxtSpec.Size = New System.Drawing.Size(369, 37)
         Me.TxtSpec.TabIndex = 44
         '
         'QuoteList
