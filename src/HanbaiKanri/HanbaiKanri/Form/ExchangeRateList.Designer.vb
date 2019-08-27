@@ -138,6 +138,7 @@ Partial Class ExchangeRateList
         Me.LblMode.TabIndex = 305
         Me.LblMode.Text = "モード"
         Me.LblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LblMode.Visible = False
         '
         'dtDateUntil
         '

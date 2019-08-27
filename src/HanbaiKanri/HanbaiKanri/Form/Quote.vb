@@ -3459,7 +3459,7 @@ Public Class Quote
                     '小数点表示にするため切り上げをコメントアウト
                     'DgvItemList.Rows(i).Cells("売単価").Value = Math.Ceiling(DgvItemList.Rows(i).Cells("売単価_外貨").Value / TxtRate.Text)
                     DgvItemList.Rows(i).Cells("売単価").Value = DgvItemList.Rows(i).Cells("売単価_外貨").Value / TxtRate.Text
-                    DgvItemList.Rows(i).Cells("売上金額").Value = Math.Ceiling(DgvItemList.Rows(i).Cells("売単価").Value * DgvItemList.Rows(i).Cells("数量").Value)
+                    DgvItemList.Rows(i).Cells("売上金額").Value = Math.Truncate(DgvItemList.Rows(i).Cells("売単価").Value * DgvItemList.Rows(i).Cells("数量").Value)
                 End If
 
 
@@ -3475,15 +3475,16 @@ Public Class Quote
                                 And (DgvItemList.Rows(i).Cells("前払法人税額").Value Is Nothing Or DgvItemList.Rows(i).Cells("前払法人税額").Value = 0) _
                                 And (DgvItemList.Rows(i).Cells("輸送費額").Value Is Nothing Or DgvItemList.Rows(i).Cells("輸送費額").Value = 0) Then
 
-                        DgvItemList.Rows(i).Cells("見積単価_外貨").Value = DgvItemList.Rows(i).Cells("売単価_外貨").Value
+                        DgvItemList.Rows(i).Cells("見積単価_外貨").Value = Math.Truncate(DgvItemList.Rows(i).Cells("売単価_外貨").Value * 100) / 100
                     Else
                         '小数点表示にするため切り上げをコメントアウト
                         'DgvItemList.Rows(i).Cells("見積単価_外貨").Value = Math.Ceiling(DgvItemList.Rows(i).Cells("見積単価").Value * TxtRate.Text)
-                        DgvItemList.Rows(i).Cells("見積単価_外貨").Value = DgvItemList.Rows(i).Cells("見積単価").Value * TxtRate.Text
+                        DgvItemList.Rows(i).Cells("見積単価_外貨").Value = Math.Truncate(DgvItemList.Rows(i).Cells("見積単価").Value * TxtRate.Text * 100) / 100
+
                     End If
 
-                    DgvItemList.Rows(i).Cells("見積金額").Value = Math.Ceiling(DgvItemList.Rows(i).Cells("見積単価").Value * DgvItemList.Rows(i).Cells("数量").Value）
-                    DgvItemList.Rows(i).Cells("見積金額_外貨").Value = Math.Ceiling(DgvItemList.Rows(i).Cells("見積単価_外貨").Value * DgvItemList.Rows(i).Cells("数量").Value）
+                    DgvItemList.Rows(i).Cells("見積金額").Value = Math.Truncate(DgvItemList.Rows(i).Cells("見積単価").Value * DgvItemList.Rows(i).Cells("数量").Value）
+                    DgvItemList.Rows(i).Cells("見積金額_外貨").Value = Math.Round(DgvItemList.Rows(i).Cells("見積単価_外貨").Value * DgvItemList.Rows(i).Cells("数量").Value * 100） / 100
                 End If
                 setCellValueChanged()
             Next
