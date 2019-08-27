@@ -2961,9 +2961,9 @@ Public Class Quote
                 sheet.Range("G" & currentRow).Value = DgvItemList.Rows(index).Cells("仕入先").Value
                 sheet.Range("H" & currentRow).Value = DgvItemList.Rows(index).Cells("仕入単価").Value
                 sheet.Range("I" & currentRow).Value = DgvItemList.Rows(index).Cells("仕入原価").Value
-                sheet.Range("J" & currentRow).Value = Math.Ceiling(DgvItemList.Rows(index).Cells("関税額").Value)
-                sheet.Range("K" & currentRow).Value = Math.Ceiling(DgvItemList.Rows(index).Cells("前払法人税額").Value)
-                sheet.Range("L" & currentRow).Value = Math.Ceiling(DgvItemList.Rows(index).Cells("輸送費額").Value)
+                sheet.Range("J" & currentRow).Value = DgvItemList.Rows(index).Cells("関税額").Value
+                sheet.Range("K" & currentRow).Value = DgvItemList.Rows(index).Cells("前払法人税額").Value
+                sheet.Range("L" & currentRow).Value = DgvItemList.Rows(index).Cells("輸送費額").Value
                 sheet.Range("M" & currentRow).Value = DgvItemList.Rows(index).Cells("仕入金額").Value
                 sheet.Range("N" & currentRow).Value = DgvItemList.Rows(index).Cells("売単価").Value
                 sheet.Range("O" & currentRow).Value = DgvItemList.Rows(index).Cells("売上金額").Value
