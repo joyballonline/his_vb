@@ -111,9 +111,9 @@ Public Class Supplier
             LblPostalCodeText.Text = "(Example:0123456)"
             LblTelText.Text = "(Example:0123456789)"
             LblFaxText.Text = "(Example:0123456789)"
-            LblTariffRateText.Text = "(Example:0.01)"
-            LblTransportationCostText.Text = "(Example:0.1)"
-            LblPphText.Text = "(Example:0.025)"
+            LblTariffRateText.Text = "(Example:1.0%)"
+            LblTransportationCostText.Text = "(Example:10.0%)"
+            LblPphText.Text = "(Example:2.5%)"
             LblBankCodeText.Text = "(Example:012)"
             LblBranchCodeText.Text = "(Example:012)"
             LblAccountNumberText.Text = "(Example:0123456)"
@@ -307,7 +307,7 @@ Public Class Supplier
         If TxtTariffRate.Text = "" Then
             _msgHd.dspMSG("chkInputTariffRateError", frmC01F10_Login.loginValue.Language)
             Exit Sub
-        ElseIf Decimal.Parse(TxtTariffRate.Text.ToString) = 0 And cmDomesticKbn.SelectedIndex = 1 Then
+        ElseIf Decimal.Parse(TxtTariffRate.Text.ToString) < 0 And cmDomesticKbn.SelectedIndex = 1 Then
             '0 and 国外の場合
             _msgHd.dspMSG("chkInputTariffRateError", frmC01F10_Login.loginValue.Language)
             Exit Sub
@@ -316,7 +316,7 @@ Public Class Supplier
         If TxtPph.Text = "" Then
             _msgHd.dspMSG("chkInputPPHError", frmC01F10_Login.loginValue.Language)
             Exit Sub
-        ElseIf Decimal.Parse(TxtPph.Text.ToString) = 0 Then
+        ElseIf Decimal.Parse(TxtPph.Text.ToString) < 0 Then
             _msgHd.dspMSG("chkInputPPHError", frmC01F10_Login.loginValue.Language)
             Exit Sub
         End If
@@ -324,7 +324,7 @@ Public Class Supplier
         If TxtTransportationCost.Text = "" Then
             _msgHd.dspMSG("chkInputTransportationCostError", frmC01F10_Login.loginValue.Language)
             Exit Sub
-        ElseIf Decimal.Parse(TxtTransportationCost.Text.ToString) = 0 Then
+        ElseIf Decimal.Parse(TxtTransportationCost.Text.ToString) < 0 Then
             _msgHd.dspMSG("chkInputTransportationCostError", frmC01F10_Login.loginValue.Language)
             Exit Sub
         End If
