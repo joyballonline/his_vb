@@ -836,13 +836,17 @@ Public Class Quote
                         If manufactuer <> "" And itemName <> "" And spec <> "" Then
 
                             Sql = " SELECT "
-                            Sql += " t41.* "
+                            Sql += " t41.* ,t20.通貨,t20.レート"
                             Sql += " FROM t41_siredt t41 "
                             Sql += " INNER JOIN t40_sirehd t40 "
                             Sql += " ON "
                             Sql += " t41.会社コード = t40.会社コード "
                             Sql += " AND "
                             Sql += " t41.仕入番号 = t40.仕入番号 "
+
+                            Sql += " INNER JOIN t20_hattyu t20 "
+                            Sql += " on t41.発注番号 = t20.発注番号 and t41.発注番号枝番 = t20.発注番号枝番"
+
                             Sql += " WHERE "
                             Sql += " t41.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
                             Sql += " AND "
@@ -859,8 +863,11 @@ Public Class Quote
 
                             If ds.Tables(RS).Rows.Count > 0 Then
 
-                                DgvItemList("仕入単価", e.RowIndex).Value = ds.Tables(RS).Rows(0)("仕入値").ToString()
-                                DgvItemList("仕入単価_外貨", e.RowIndex).Value = Math.Ceiling(DgvItemList("仕入単価", e.RowIndex).Value * DgvItemList("仕入レート", e.RowIndex).Value)
+                                Dim intCur As Integer = ds.Tables(RS).Rows(0)("通貨")
+                                DgvItemList.Rows(e.RowIndex).Cells("仕入通貨").Value = intCur
+                                DgvItemList("仕入レート", e.RowIndex).Value = ds.Tables(RS).Rows(0)("レート")
+                                DgvItemList("仕入単価_外貨", e.RowIndex).Value = ds.Tables(RS).Rows(0)("仕入値")
+                                DgvItemList("仕入単価", e.RowIndex).Value = ds.Tables(RS).Rows(0)("仕入値").ToString() / ds.Tables(RS).Rows(0)("レート")
 
                             End If
 
