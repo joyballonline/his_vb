@@ -1402,7 +1402,16 @@ Public Class Cymn
         Sql += "', '"
         Sql += TxtQuoteRemarks.Text '見積備考
         Sql += "', '"
-        Sql += formatStringToNumber(TxtVat.Text) 'ＶＡＴ
+        'Sql += formatStringToNumber(TxtVat.Text) 'ＶＡＴ
+
+        '保税対応
+        If dsSipper.Tables(RS).Rows(0)("国内区分") = CommonConst.DD_KBN_OVERSEAS Then
+            '発注先が国外の場合はＶＡＴがかからない
+            Sql += "0" 'ＶＡＴ
+        Else
+            Sql += UtilClass.formatNumber(CommonConst.TAX_VAT * 100）
+        End If
+
         Sql += "', '"
         Sql += formatStringToNumber(TxtPph.Text) 'ＰＰＨ
         Sql += "', '"
