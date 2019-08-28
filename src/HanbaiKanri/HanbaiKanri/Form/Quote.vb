@@ -96,6 +96,8 @@ Public Class Quote
 
         delCellValueChanged()   'セル変更イベントを無効化
 
+        TxtVat.Text = CommonConst.TAX_VAT * 100  'VATの率
+
         '仕入単価(基準通貨)の制御
         DgvItemList.Columns("仕入単価").ReadOnly = True
         DgvItemList.Columns("仕入単価").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
