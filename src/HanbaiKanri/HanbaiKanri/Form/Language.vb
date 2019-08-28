@@ -74,7 +74,7 @@ Public Class Language
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles BtnRegistration.Click
-        Dim dtToday As DateTime = DateTime.Now
+        Dim dtToday As String = UtilClass.formatDatetime(DateTime.Now)
         Try
             If _status = CommonConst.STATUS_ADD Then
                 Dim Sql As String = ""
@@ -105,21 +105,6 @@ Public Class Language
                 Sql += "', '"
                 Sql += dtToday
                 Sql += "')"
-                Sql += "RETURNING 会社コード"
-                Sql += ", "
-                Sql += "言語コード"
-                Sql += ", "
-                Sql += "言語名称"
-                Sql += ", "
-                Sql += "言語略称"
-                Sql += ", "
-                Sql += "備考"
-                Sql += ", "
-                Sql += "無効フラグ"
-                Sql += ", "
-                Sql += "更新者"
-                Sql += ", "
-                Sql += "更新日"
 
                 _db.executeDB(Sql)
             Else
@@ -172,21 +157,6 @@ Public Class Language
                 Sql += "='"
                 Sql += _langCode
                 Sql += "' "
-                Sql += "RETURNING 会社コード"
-                Sql += ", "
-                Sql += "言語コード"
-                Sql += ", "
-                Sql += "言語名称"
-                Sql += ", "
-                Sql += "言語略称"
-                Sql += ", "
-                Sql += "備考"
-                Sql += ", "
-                Sql += "無効フラグ"
-                Sql += ", "
-                Sql += "更新者"
-                Sql += ", "
-                Sql += "更新日"
 
                 _db.executeDB(Sql)
             End If
