@@ -213,8 +213,13 @@ Public Class MstAccount
     End Function
 
     Private Function setEnabledText(ByVal prmVal As String) As String
-        Dim reVal As String = IIf(Integer.Parse(prmVal) = CommonConst.FLAG_ENABLED, CommonConst.FLAG_ENABLED_TXT, CommonConst.FLAG_DISABLED_TXT)
-
+        '有効無効の名称を返す
+        Dim reVal As String
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+            reVal = IIf(Integer.Parse(prmVal) = CommonConst.FLAG_ENABLED, CommonConst.FLAG_ENABLED_TXT_ENG, CommonConst.FLAG_DISABLED_TXT_ENG)
+        Else
+            reVal = IIf(Integer.Parse(prmVal) = CommonConst.FLAG_ENABLED, CommonConst.FLAG_ENABLED_TXT, CommonConst.FLAG_DISABLED_TXT)
+        End If
         Return reVal
     End Function
 

@@ -420,4 +420,7 @@ Public Class CommonConst
     Public Const PC_KBN_MOVE As String = "1"              '移動
     Public Const PC_KBN_ADJUSTMENT As String = "9"        '調整
 
+    'VAT
+    Public Const TAX_VAT As Decimal = 0.1               '税率
+
 End Class

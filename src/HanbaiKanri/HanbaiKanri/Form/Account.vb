@@ -193,8 +193,8 @@ Public Class Account
             LblAccountName1.Text = "CustomerName"
             LblAccountName2.Text = "CustomerCode"
             LblAccountName3.Text = "CustomerName"
-            LblAccountingAccountCode.Text = "ShortName"
-            LblRemarks.Text = "PostalCode"
+            LblAccountingAccountCode.Text = "AccountingAccountCode"
+            LblRemarks.Text = "Remarks"
             LblEffectiveClassification.Text = "EffectiveClassification"
             'ExEffectiveClassification.Text = "(0:True 1:False)"
             btnAddAccount.Text = "Registration"
@@ -259,8 +259,14 @@ Public Class Account
         Dim tb As New DataTable
         tb.Columns.Add("Text", GetType(String))
         tb.Columns.Add("Value", GetType(Integer))
-        tb.Rows.Add(CommonConst.FLAG_ENABLED_TXT, CommonConst.FLAG_ENABLED)
-        tb.Rows.Add(CommonConst.FLAG_DISABLED_TXT, CommonConst.FLAG_DISABLED)
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+            tb.Rows.Add(CommonConst.FLAG_ENABLED_TXT_ENG, CommonConst.FLAG_ENABLED)
+            tb.Rows.Add(CommonConst.FLAG_DISABLED_TXT_ENG, CommonConst.FLAG_DISABLED)
+        Else
+            tb.Rows.Add(CommonConst.FLAG_ENABLED_TXT, CommonConst.FLAG_ENABLED)
+            tb.Rows.Add(CommonConst.FLAG_DISABLED_TXT, CommonConst.FLAG_DISABLED)
+        End If
+
         cmbEffectiveClassification.DataSource = tb
 
         If prmVal IsNot Nothing Then
