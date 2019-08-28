@@ -324,7 +324,10 @@ Public Class AccountsPayable
         Dim AccountsPayable As Integer = 0 '買掛残高を集計
         Dim curds As DataSet  'm25_currency
         Dim cur As String
+
+        Dim PurchaseCostFC As Decimal = 0  '仕入原価_外貨
         Dim PurchaseAmountFC As Decimal = 0  '仕入金額_外貨
+        Dim VAT_FC As Decimal = 0
 
         Sql = " AND "
         Sql += "発注番号 ILIKE '" & HattyuNo & "'"
@@ -393,9 +396,11 @@ Public Class AccountsPayable
 
         '発注明細データより仕入金額を算出
         For i As Integer = 0 To dsHattyudt.Tables(RS).Rows.Count - 1
-            PurchaseAmountFC = PurchaseAmountFC + (dsHattyudt.Tables(RS).Rows(i)("仕入値_外貨") * dsHattyudt.Tables(RS).Rows(i)("仕入数量"))
+            PurchaseCostFC = PurchaseCostFC + (dsHattyudt.Tables(RS).Rows(i)("仕入値_外貨") * dsHattyudt.Tables(RS).Rows(i)("仕入数量"))
         Next
 
+        VAT_FC = PurchaseCostFC * dsHattyu.Tables(RS).Rows(0)("ＶＡＴ").ToString / 100
+        PurchaseAmountFC = PurchaseCostFC + VAT_FC
 
         DgvCymn.Rows.Add()
         DgvCymn.Rows(0).Cells("発注番号").Value = dsHattyu.Tables(RS).Rows(0)("発注番号")
@@ -405,11 +410,11 @@ Public Class AccountsPayable
         DgvCymn.Rows(0).Cells("仕入先").Value = dsHattyu.Tables(RS).Rows(0)("仕入先名")
         DgvCymn.Rows(0).Cells("客先番号").Value = dsHattyu.Tables(RS).Rows(0)("客先番号").ToString
 
-        DgvCymn.Rows(0).Cells("仕入原価").Value = PurchaseAmountFC
-        Dim decTmp As Decimal = dsHattyu.Tables(RS).Rows(0)("ＶＡＴ")
-        DgvCymn.Rows(0).Cells("VAT_IN").Value = decTmp.ToString("N2")
+        DgvCymn.Rows(0).Cells("仕入原価").Value = PurchaseCostFC
+        DgvCymn.Rows(0).Cells("VAT_IN").Value = VAT_FC.ToString("N2")
 
-        PurchaseAmountFC += dsHattyu.Tables(RS).Rows(0)("ＶＡＴ").ToString
+        'PurchaseAmountFC += dsHattyu.Tables(RS).Rows(0)("ＶＡＴ").ToString
+
         DgvCymn.Rows(0).Cells("発注金額").Value = PurchaseAmountFC
         DgvCymn.Rows(0).Cells("買掛金額計").Value = AccountsPayable
         DgvCymn.Rows(0).Cells("買掛残高").Value = PurchaseAmountFC - AccountsPayable
