@@ -483,9 +483,12 @@ Public Class Quote
             TxtRemarks.Text = ds1.Tables(RS).Rows(0)("備考").ToString
             TxtVat.Text = ds1.Tables(RS).Rows(0)("ＶＡＴ").ToString
 
-            If TxtVat.Text = CommonConst.DD_KBN_DOMESTIC Then  '国外
+            '呼び出し時にVATが0ならば国外
+            If TxtVat.Text = 0 Then
+                '国外
                 txtDomesticArea.Text = 1
-            Else   '国内
+            Else
+                '国内
                 txtDomesticArea.Text = 0
             End If
 
