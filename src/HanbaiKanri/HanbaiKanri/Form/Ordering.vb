@@ -1409,14 +1409,14 @@ Public Class Ordering
                     '発注先が国外の場合はＶＡＴがかからない
                     Sql += "0" 'ＶＡＴ
                 Else
-                    If IsNumeric(TxtPurchaseAmount.Text) Then
-                        Sql += UtilClass.formatNumber(Decimal.Parse(TxtPurchaseAmount.Text) * 0.1)
-                    Else
-                        Sql += "0"
-                    End If
-
+                    'If IsNumeric(TxtPurchaseAmount.Text) Then
+                    '    'Sql += UtilClass.formatNumber(Decimal.Parse(TxtPurchaseAmount.Text) * 0.1)
+                    'Else
+                    '    Sql += "0"
+                    'End If
+                    Sql += UtilClass.formatNumber(CommonConst.TAX_VAT * 100）
                 End If
-                    Sql += ", '"
+                Sql += ", '"
                 Sql += "0" 'ＰＰＨ
                 Sql += "', "
 
