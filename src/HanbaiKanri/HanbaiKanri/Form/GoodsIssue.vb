@@ -1344,6 +1344,9 @@ Public Class GoodsIssue
 
             _db.executeDB(Sql)
 
+            '登録完了メッセージ
+            _msgHd.dspMSG("completeInsert", frmC01F10_Login.loginValue.Language)
+
         Catch ue As UsrDefException
             ue.dspMsg()
             Throw ue
@@ -1351,6 +1354,7 @@ Public Class GoodsIssue
             'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
             Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
         End Try
+
 
 
         'Dim openForm As Form = Nothing
