@@ -1038,6 +1038,11 @@ Public Class Receipt
 
                     _db.executeDB(Sql)
 
+
+                    '登録完了メッセージ
+                    _msgHd.dspMSG("completeInsert", frmC01F10_Login.loginValue.Language)
+
+
                 Catch ue As UsrDefException
                     ue.dspMsg()
                     Throw ue
@@ -1051,8 +1056,6 @@ Public Class Receipt
             'End If
         Next
 
-        '登録完了メッセージ
-        _msgHd.dspMSG("completeInsert", frmC01F10_Login.loginValue.Language)
 
         'Next
 
