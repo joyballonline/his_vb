@@ -323,7 +323,7 @@ Public Class CustomerOrderList
                 BillingNo = DgvBilling.Rows(r.Index).Cells("請求番号").Value
                 OrderNo = DgvBilling.Rows(r.Index).Cells("受注番号").Value
                 OrderSuffix = DgvBilling.Rows(r.Index).Cells("受注番号枝番").Value
-                BillingSubTotal += DgvBilling.Rows(r.Index).Cells("請求金額計_外貨").Value
+                'BillingSubTotal += DgvBilling.Rows(r.Index).Cells("請求金額計_外貨").Value
 
                 Sql = " AND "
                 Sql += "受注番号 = '" & OrderNo & "'"
@@ -444,7 +444,7 @@ Public Class CustomerOrderList
                     sheet.Range("D" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("単位")
                     sheet.Range("E" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("見積単価_外貨")
                     sheet.Range("F" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("見積金額_外貨")
-
+                    BillingSubTotal += dsCymndt.Tables(RS).Rows(i)("見積金額_外貨")
                     currentNum += 1
                     currentRow += 1
                 Next i
@@ -457,7 +457,7 @@ Public Class CustomerOrderList
             Dim dsCompany As DataSet = getDsData("m01_company", Sql)
 
             Dim getHanyo As DataSet = getDsHanyoData(CommonConst.DC_CODE, dsCompany.Tables(RS).Rows(0)("預金種目"))
-
+            lastRow += 1
             sheet.Range("F" & lastRow + 1).Value = BillingSubTotal
             sheet.Range("F" & lastRow + 2).Value = BillingSubTotal * 0.1
             sheet.Range("F" & lastRow + 3).Value = BillingSubTotal * 1.1
