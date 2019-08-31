@@ -839,7 +839,8 @@ Public Class OrderManagement
             Sql3 += ", "
             Sql3 += "0" '取消区分
             Sql3 += ", '"
-            Sql3 += UtilClass.formatNumber(totalmitsuAmount * (dsCymnHd.Tables(RS).Rows(0)("ＶＡＴ").ToString / 100)) 'ＶＡＴ
+            'Sql3 += UtilClass.formatNumber(totalmitsuAmount * (dsCymnHd.Tables(RS).Rows(0)("ＶＡＴ").ToString / 100)) 'ＶＡＴ
+            Sql3 += UtilClass.formatNumber(dsCymnHd.Tables(RS).Rows(0)("ＶＡＴ").ToString) 'ＶＡＴ 率
             Sql3 += "', '"
             If dsCymnHd.Tables(RS).Rows(0)("ＰＰＨ") Is DBNull.Value Then
                 Sql3 += "0" 'ＰＰＨ
