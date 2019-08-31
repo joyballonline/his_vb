@@ -2824,7 +2824,7 @@ Public Class ClosingLog
         '仕訳データを作成する
         getShiwakeData()
 
-        'CSVファイル出力　テスト用
+        'CSVファイル出力
         SiwakeConvertDataTableToCsv()
 
         '現在日時を取得
@@ -2849,12 +2849,12 @@ Public Class ClosingLog
             getRow = branchCode.Tables(0).Rows(0)
 
 
-            shiwakeSql += " WHERE "
-            shiwakeSql += """会社コード"" = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            shiwakeSql += " select t67.*,m92.会計用勘定科目コード from t67_swkhd t67,m92_kanjo m92 "
+            shiwakeSql += " WHERE t67.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "' and t67.会社コード = m92.会社コード and t67.""GLACCOUNT"" = m92.勘定科目名称１"
             shiwakeSql += " ORDER BY "
             shiwakeSql += """TRANSACTIONID"",""KeyID"""
 
-            shiwakeData = _db.selectDB(allSelectSql("t67_swkhd", shiwakeSql), RS, reccnt) 'reccnt:(省略可能)SELECT文の取得レコード件数
+            shiwakeData = _db.selectDB(shiwakeSql, RS, reccnt) 'reccnt:(省略可能)SELECT文の取得レコード件数
 
             'Dim cdAR As String = getAccountName("accounts-receivable") '売掛金 アキュレート用勘定科目コード
             'Dim cdAP As String = getAccountName("accounts-payable") '買掛金 アキュレート用勘定科目コード
@@ -2873,20 +2873,21 @@ Public Class ClosingLog
                 Dim valComCd As String = shiwakeData.Tables(RS).Rows(i)(1).ToString()
                 Dim valDate As String = shiwakeData.Tables(RS).Rows(i)(2).ToString()
                 Dim valTransactionid As String = shiwakeData.Tables(RS).Rows(i)(3).ToString()
+                Dim ci As New System.Globalization.CultureInfo("ja-JP")
 
                 Dim nextTransactionid As String = ""
                 If shiwakeData.Tables(RS).Rows.Count - 1 > i Then
                     nextTransactionid = shiwakeData.Tables(RS).Rows(i + 1)(3).ToString() '次のvalTransactionid（判定用）
                 End If
                 Dim valKeyId As String = shiwakeData.Tables(RS).Rows(i)(4).ToString()
-                Dim valGlaccount As String = shiwakeData.Tables(RS).Rows(i)(5).ToString()
-                Dim valGlamount As String = shiwakeData.Tables(RS).Rows(i)(6).ToString()
+                Dim valGlaccount As String = shiwakeData.Tables(RS).Rows(i)(15).ToString()
+                Dim valGlamount As String = Decimal.Parse(shiwakeData.Tables(RS).Rows(i)(6)).ToString("F2", ci)
                 Dim valRate As String = shiwakeData.Tables(RS).Rows(i)(7).ToString()
                 Dim valVendorno As String = shiwakeData.Tables(RS).Rows(i)(8).ToString()
                 Dim valJvnumber As String = shiwakeData.Tables(RS).Rows(i)(9).ToString() 'PO
                 Dim valTransdate As String = shiwakeData.Tables(RS).Rows(i)(10).ToString()
                 Dim valTransdescription As String = shiwakeData.Tables(RS).Rows(i)(11).ToString()
-                Dim valJvamount As String = shiwakeData.Tables(RS).Rows(i)(12).ToString()
+                Dim valJvamount As String = Decimal.Parse(shiwakeData.Tables(RS).Rows(i)(12)).ToString("F2", ci)
                 Dim valCustomerno As String = shiwakeData.Tables(RS).Rows(i)(13).ToString()
                 Dim valDescription As String = shiwakeData.Tables(RS).Rows(i)(14).ToString()
 
