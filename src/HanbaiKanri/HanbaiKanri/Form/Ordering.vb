@@ -1473,7 +1473,6 @@ Public Class Ordering
                     'レートの取得
                     strRate = setRate(CmCurrency.SelectedValue.ToString)
 
-
                     Sql = "INSERT INTO "
                     Sql += "Public."
                     Sql += "t21_hattyu("
@@ -1570,20 +1569,24 @@ Public Class Ordering
                     Sql += ", "
                     Sql += UtilClass.formatNumber(DgvItemList.Rows(i).Cells("仕入金額_外貨").Value)  '仕入金額_外貨
 
-                    If PurchaseStatus <> CommonConst.STATUS_ADD And dsHattyuHd.Tables(RS).Rows.Count > 0 Then
-                        If dsHattyuHd.Tables(RS).Rows(0)("見積番号") <> "" Then
-                            Sql += ", '"
-                            Sql += UtilClass.formatNumber(dsHattyuDt.Tables(RS).Rows(i)("見積単価_外貨")).ToString '見積単価_外貨
-                            Sql += "', '"
-                            Sql += UtilClass.formatNumber(dsHattyuDt.Tables(RS).Rows(i)("見積金額_外貨")).ToString '見積金額_外貨
-                            Sql += "', '"
-                            Sql += dsHattyuDt.Tables(RS).Rows(i)("通貨").ToString '通貨
-                            Sql += "', '"
-                            Sql += UtilClass.formatNumberF10(dsHattyuDt.Tables(RS).Rows(i)("レート")) 'レート
-                            Sql += "' "
-                        End If
-                    End If
-
+                    'If PurchaseStatus <> CommonConst.STATUS_ADD And dsHattyuHd.Tables(RS).Rows.Count > 0 Then
+                    '    If dsHattyuHd.Tables(RS).Rows(0)("見積番号") <> "" Then
+                    '        Sql += ", '"
+                    '        Sql += UtilClass.formatNumber(dsHattyuDt.Tables(RS).Rows(i)("見積単価_外貨")).ToString '見積単価_外貨
+                    '        Sql += "', '"
+                    '        Sql += UtilClass.formatNumber(dsHattyuDt.Tables(RS).Rows(i)("見積金額_外貨")).ToString '見積金額_外貨
+                    '        Sql += "', '"
+                    '        Sql += dsHattyuDt.Tables(RS).Rows(i)("通貨").ToString '通貨
+                    '        Sql += "', '"
+                    '        Sql += UtilClass.formatNumberF10(dsHattyuDt.Tables(RS).Rows(i)("レート")) 'レート
+                    '        Sql += "' "
+                    '    End If
+                    'End If
+                    '見積から作成された発注データを編集すると、明細単位での見積との紐づけはもはや意味をなさないので数値は引き継がない
+                    Sql += ", 0"     '見積単価_外貨
+                    Sql += ", 0"     '見積金額_外貨
+                    Sql += ", " & CmCurrency.SelectedValue.ToString '通貨
+                    Sql += ", " & UtilClass.formatNumberF10(TxtRate.Text) 'レート
 
                     Sql += IIf(
                                 DgvItemList.Rows(i).Cells("貿易条件").Value IsNot Nothing,

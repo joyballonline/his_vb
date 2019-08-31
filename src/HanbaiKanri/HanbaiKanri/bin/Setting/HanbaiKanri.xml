@@ -802,7 +802,7 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <MSG1>出荷数一覧パラメタの対象条件に誤りがあります。</MSG1>
     <MSG1_EN>There is an error in the target condition of the shipment number list parameter.</MSG1_EN>
     <BUTTON_TYPE>OK</BUTTON_TYPE>
-    <ICONT_TYPE>Error</ICONT_TYPE>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
     <CREATE_DATE>2018/03/29 17:00</CREATE_DATE>
   </MSG_DATA>
   <MSG_DATA>
@@ -983,7 +983,7 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <MSG2>再度確認してから実行してください。</MSG2>
     <MSG2_EN>Please check again and try again.</MSG2_EN>
     <BUTTON_TYPE>OK</BUTTON_TYPE>
-    <ICONT_TYPE>Error</ICONT_TYPE>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
     <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
     <MEMO></MEMO>
   </MSG_DATA>
@@ -994,7 +994,7 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <MSG2>再度確認してから実行してください。</MSG2>
     <MSG2_EN>Please check again and try again.</MSG2_EN>
     <BUTTON_TYPE>OK</BUTTON_TYPE>
-    <ICONT_TYPE>Error</ICONT_TYPE>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
     <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
     <MEMO></MEMO>
   </MSG_DATA>
@@ -1005,7 +1005,7 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <MSG2>再度確認してから実行してください。</MSG2>
     <MSG2_EN>Please check again and try again.</MSG2_EN>
     <BUTTON_TYPE>OK</BUTTON_TYPE>
-    <ICONT_TYPE>Error</ICONT_TYPE>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
     <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
     <MEMO></MEMO>
   </MSG_DATA>
@@ -1027,7 +1027,7 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <MSG2>再度確認してから実行してください。</MSG2>
     <MSG2_EN>Please check again and try again.</MSG2_EN>
     <BUTTON_TYPE>OK</BUTTON_TYPE>
-    <ICONT_TYPE>Error</ICONT_TYPE>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
     <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
     <MEMO></MEMO>
   </MSG_DATA>
@@ -1102,7 +1102,7 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <MSG2>再度確認してから実行してください。</MSG2>
     <MSG2_EN>Please check again and try again.</MSG2_EN>
     <BUTTON_TYPE>OK</BUTTON_TYPE>
-    <ICONT_TYPE>Error</ICONT_TYPE>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
     <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
     <MEMO></MEMO>
   </MSG_DATA>
@@ -1113,7 +1113,7 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <MSG2>再度確認してから実行してください。</MSG2>
     <MSG2_EN>Please check again and try again.</MSG2_EN>
     <BUTTON_TYPE>OK</BUTTON_TYPE>
-    <ICONT_TYPE>Error</ICONT_TYPE>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
     <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
     <MEMO></MEMO>
   </MSG_DATA>
@@ -1153,7 +1153,7 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <MSG2>再度確認してから実行してください。</MSG2>
     <MSG2_EN>Please check again and try again.</MSG2_EN>
     <BUTTON_TYPE>OK</BUTTON_TYPE>
-    <ICONT_TYPE>Error</ICONT_TYPE>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
     <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
     <MEMO></MEMO>
   </MSG_DATA>
@@ -1164,7 +1164,7 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <MSG2>再度確認してから実行してください。</MSG2>
     <MSG2_EN>Please check again and try again.</MSG2_EN>
     <BUTTON_TYPE>OK</BUTTON_TYPE>
-    <ICONT_TYPE>Error</ICONT_TYPE>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
     <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
     <MEMO></MEMO>
   </MSG_DATA>
@@ -1173,7 +1173,7 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <MSG1>「新パスワード」を入力してください。</MSG1>
     <MSG1_EN>Please enter "New Password".</MSG1_EN>
     <BUTTON_TYPE>OK</BUTTON_TYPE>
-    <ICONT_TYPE>Error</ICONT_TYPE>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
     <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
     <MEMO></MEMO>
   </MSG_DATA>
@@ -1182,7 +1182,7 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <MSG1>「新確認用パスワード」を入力してください。</MSG1>
     <MSG1_EN>Please enter "Password for confirmation".</MSG1_EN>
     <BUTTON_TYPE>OK</BUTTON_TYPE>
-    <ICONT_TYPE>Error</ICONT_TYPE>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
     <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
     <MEMO></MEMO>
   </MSG_DATA>
@@ -1191,7 +1191,7 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <MSG1>「新パスワード」と「確認用パスワード」が不一致です。</MSG1>
     <MSG1_EN>"New password" and "Password for confirmation" do not match.</MSG1_EN>
     <BUTTON_TYPE>OK</BUTTON_TYPE>
-    <ICONT_TYPE>Error</ICONT_TYPE>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
     <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
     <MEMO></MEMO>
   </MSG_DATA>
@@ -1202,7 +1202,7 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <MSG2>仕入先、数量などが入力されているか確認してください。</MSG2>
     <MSG2_EN>Make sure that the vendor, quantity etc. are entered.</MSG2_EN>
     <BUTTON_TYPE>OK</BUTTON_TYPE>
-    <ICONT_TYPE>Error</ICONT_TYPE>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
     <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
     <MEMO></MEMO>
   </MSG_DATA>
@@ -1213,7 +1213,7 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <MSG2>再度確認してから実行してください。</MSG2>
     <MSG2_EN>Please check again and try again.</MSG2_EN>
     <BUTTON_TYPE>OK</BUTTON_TYPE>
-    <ICONT_TYPE>Error</ICONT_TYPE>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
     <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
     <MEMO></MEMO>
   </MSG_DATA>
@@ -1224,7 +1224,7 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <MSG2>仕入単価、数量などが入力されているか確認してください。</MSG2>
     <MSG2_EN>Make sure that the purchase price, quantity, etc. are entered.</MSG2_EN>
     <BUTTON_TYPE>OK</BUTTON_TYPE>
-    <ICONT_TYPE>Error</ICONT_TYPE>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
     <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
     <MEMO></MEMO>
   </MSG_DATA>
@@ -1235,7 +1235,7 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <MSG2>再度確認してから実行してください。</MSG2>
     <MSG2_EN>Please check again and try again.</MSG2_EN>
     <BUTTON_TYPE>OK</BUTTON_TYPE>
-    <ICONT_TYPE>Error</ICONT_TYPE>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
     <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
     <MEMO></MEMO>
   </MSG_DATA>
@@ -1246,7 +1246,7 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <MSG2>再度確認してから実行してください。</MSG2>
     <MSG2_EN>Please check again and try again.</MSG2_EN>
     <BUTTON_TYPE>OK</BUTTON_TYPE>
-    <ICONT_TYPE>Error</ICONT_TYPE>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
     <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
     <MEMO></MEMO>
   </MSG_DATA>
@@ -1257,7 +1257,7 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <MSG2>再度確認してから実行してください。</MSG2>
     <MSG2_EN>Please check again and try again.</MSG2_EN>
     <BUTTON_TYPE>OK</BUTTON_TYPE>
-    <ICONT_TYPE>Error</ICONT_TYPE>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
     <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
     <MEMO></MEMO>
   </MSG_DATA>
@@ -1292,7 +1292,7 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <MSG2>再度確認してから実行してください。</MSG2>
     <MSG2_EN>Please check again and try again.</MSG2_EN>
     <BUTTON_TYPE>OK</BUTTON_TYPE>
-    <ICONT_TYPE>Error</ICONT_TYPE>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
     <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
     <MEMO></MEMO>
   </MSG_DATA>
@@ -1303,7 +1303,7 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <MSG2></MSG2>
     <MSG2_EN></MSG2_EN>
     <BUTTON_TYPE>OK</BUTTON_TYPE>
-    <ICONT_TYPE>Error</ICONT_TYPE>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
     <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
     <MEMO></MEMO>
   </MSG_DATA>
@@ -1324,7 +1324,7 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <MSG2>アプリケーションを終了します。</MSG2>
     <MSG2_EN>Exit the application.</MSG2_EN>
     <BUTTON_TYPE>OK</BUTTON_TYPE>
-    <ICONT_TYPE>Error</ICONT_TYPE>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
     <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
     <MEMO></MEMO>
   </MSG_DATA>
@@ -1379,7 +1379,7 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <MSG2>入力項目すべてに入力してください。</MSG2>
     <MSG2_EN>Please fill in all the input items.</MSG2_EN>
     <BUTTON_TYPE>OK</BUTTON_TYPE>
-    <ICONT_TYPE>Error</ICONT_TYPE>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
     <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
     <MEMO></MEMO>
   </MSG_DATA>
@@ -1390,7 +1390,7 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <MSG2>仕入先コードを入力してください。</MSG2>
     <MSG2_EN>Please enter Supplier Code.</MSG2_EN>
     <BUTTON_TYPE>OK</BUTTON_TYPE>
-    <ICONT_TYPE>Error</ICONT_TYPE>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
     <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
     <MEMO></MEMO>
   </MSG_DATA>
@@ -1401,7 +1401,7 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <MSG2>仕入先名を入力してください。</MSG2>
     <MSG2_EN>Please enter Supplier Name.</MSG2_EN>
     <BUTTON_TYPE>OK</BUTTON_TYPE>
-    <ICONT_TYPE>Error</ICONT_TYPE>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
     <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
     <MEMO></MEMO>
   </MSG_DATA>
@@ -1412,7 +1412,7 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <MSG2>仕入先名略称を入力してください。</MSG2>
     <MSG2_EN>Please enter Supplier Short Name.</MSG2_EN>
     <BUTTON_TYPE>OK</BUTTON_TYPE>
-    <ICONT_TYPE>Error</ICONT_TYPE>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
     <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
     <MEMO></MEMO>
   </MSG_DATA>
@@ -1423,7 +1423,7 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <MSG2>関税率を入力してください。</MSG2>
     <MSG2_EN>Please enter the tariff rate.</MSG2_EN>
     <BUTTON_TYPE>OK</BUTTON_TYPE>
-    <ICONT_TYPE>Error</ICONT_TYPE>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
     <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
     <MEMO></MEMO>
   </MSG_DATA>
@@ -1434,7 +1434,7 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <MSG2>前払法人税率を入力してください。</MSG2>
     <MSG2_EN>Please fill in all the input items.</MSG2_EN>
     <BUTTON_TYPE>OK</BUTTON_TYPE>
-    <ICONT_TYPE>Error</ICONT_TYPE>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
     <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
     <MEMO></MEMO>
   </MSG_DATA>
@@ -1445,7 +1445,7 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <MSG2>輸送費率を入力してください。</MSG2>
     <MSG2_EN>Please fill in all the input items.</MSG2_EN>
     <BUTTON_TYPE>OK</BUTTON_TYPE>
-    <ICONT_TYPE>Error</ICONT_TYPE>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
     <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
     <MEMO></MEMO>
   </MSG_DATA>
@@ -1456,7 +1456,7 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <MSG2>移動先数量を確認してください。</MSG2>
     <MSG2_EN>Please check the destination quantity.</MSG2_EN>
     <BUTTON_TYPE>OK</BUTTON_TYPE>
-    <ICONT_TYPE>Error</ICONT_TYPE>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
     <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
     <MEMO></MEMO>
   </MSG_DATA>
@@ -1467,7 +1467,7 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <MSG2>再度確認してから実行してください。</MSG2>
     <MSG2_EN>Please check again and try again.</MSG2_EN>
     <BUTTON_TYPE>OK</BUTTON_TYPE>
-    <ICONT_TYPE>Error</ICONT_TYPE>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
     <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
     <MEMO></MEMO>
   </MSG_DATA>
