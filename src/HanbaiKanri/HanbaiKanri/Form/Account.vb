@@ -190,9 +190,9 @@ Public Class Account
 
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
             LblAccountCode.Text = "CustomerCode"
-            LblAccountName1.Text = "CustomerName"
-            LblAccountName2.Text = "CustomerCode"
-            LblAccountName3.Text = "CustomerName"
+            LblAccountName1.Text = "CustomerName1"
+            LblAccountName2.Text = "CustomerName2"
+            LblAccountName3.Text = "CustomerName3"
             LblAccountingAccountCode.Text = "AccountingAccountCode"
             LblRemarks.Text = "Remarks"
             LblEffectiveClassification.Text = "EffectiveClassification"
