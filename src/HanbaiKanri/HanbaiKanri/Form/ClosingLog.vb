@@ -3529,13 +3529,15 @@ Public Class ClosingLog
         't44_shukohd  出庫基本
         't45_shukodt 
         't30_urighd
+        't23_skyuhd
         't02_mitdt
         Sql = "SELECT "
-
         Sql += " t44.客先番号,t44.受注番号"
-        'Sql += ",t45.仕入先名"
         Sql += ",t30.売上番号,t30.ＶＡＴ"
-        Sql += ",t30.得意先コード,t30.得意先名,t30.売上日,t30.ＶＡＴ,t30.取消区分"
+        Sql += ",t30.得意先コード,t30.得意先名,t30.ＶＡＴ,t30.取消区分"
+        Sql += ",t23.請求日"
+
+        'Sql += ",t45.仕入先名"
         'Sql += ",t02.仕入先コード"
 
         Sql += " FROM public.t44_shukohd as t44 "
@@ -3546,6 +3548,9 @@ Public Class ClosingLog
         Sql += " left join public.t30_urighd as t30"
         Sql += " on (t44.受注番号 = t30.受注番号 and t44.受注番号枝番 = t30.受注番号枝番)"
 
+        Sql += " left join public.t23_skyuhd as t23"
+        Sql += " on (t44.受注番号 = t23.受注番号 and t44.受注番号枝番 = t23.受注番号枝番)"
+
         'Sql += " left join public.t02_mitdt as t02"
         'Sql += " on (t44.見積番号 = t02.見積番号 and t44.見積番号枝番 = t02.見積番号枝番)"
 
@@ -3555,27 +3560,30 @@ Public Class ClosingLog
         Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'"
 
         '条件オプション
-        'Sql += " and t30.売上日 <= '" & dsCompany.Tables(RS).Rows(0)("今回締日") & "'"
+        'Sql += " and t30.請求日 <= '" & dsCompany.Tables(RS).Rows(0)("今回締日") & "'"
 
         Sql += " and t45.仕入区分 <> '" & CommonConst.Sire_KBN_Move & "'"  't45_shukodt 「0:移動」以外
         Sql += " and t44.出庫番号 is not null"
-        Sql += " and t30.売上番号 is not null"                             '出庫と売上と買掛処理が終了しているデータ
+        Sql += " and t30.売上番号 is not null"
+        Sql += " and t23.請求番号 is not null"                             '出庫と売上と請求処理が終了しているデータ
         'Sql += " and t46.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED     '買掛が取消の場合は取得しない
 
 
         Sql += " GROUP BY "
         Sql += " t44.客先番号,t44.受注番号"
-        'Sql += ",t45.仕入先名"
         Sql += ",t30.売上番号,t30.ＶＡＴ"
-        Sql += ",t30.得意先コード,t30.得意先名,t30.売上日,t30.ＶＡＴ,t30.取消区分"
+        Sql += ",t30.得意先コード,t30.得意先名,t30.ＶＡＴ,t30.取消区分"
+        Sql += ",t23.請求日"
+
+        'Sql += ",t45.仕入先名"
         'Sql += ",t02.仕入先コード"
 
 
         Sql += " ORDER BY "
-        Sql += " t30.売上番号,t30.売上日,t30.ＶＡＴ"
+        Sql += " t30.売上番号,t30.ＶＡＴ"
         Sql += ",t30.得意先コード"
         'Sql += ",t02.仕入先コード"
-        Sql += ",t30.取消区分"
+        Sql += ",t30.取消区分,t23.請求日"
 
         Dim dsSwkUrighd As DataSet = _db.selectDB(Sql, RS, reccnt)
 
@@ -3633,7 +3641,7 @@ Public Class ClosingLog
 
 #Region "仕入"
                 '借方　仕入
-                Sql = ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("売上日"), "yyyyMM") & "'"
+                Sql = ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("請求日"), "yyyyMM") & "'"
                 Sql += "," & seqID      'todo:プライマリ
                 Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
                 Sql += ",'仕入'"        '借方勘定
@@ -3642,7 +3650,7 @@ Public Class ClosingLog
                 'Sql += ",'" & getSupplierName(dsSwkUrighd.Tables(RS).Rows(i)("仕入先コード").ToString) & "'" '補助科目
                 Sql += ",''" '補助科目
                 Sql += ",'ER-" & dsSwkUrighd.Tables(RS).Rows(i)("客先番号").ToString & "-" & i & "'" 'PO
-                Sql += ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("売上日"), "yyyy-MM-dd") & "'" '売上日
+                Sql += ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("請求日"), "yyyy-MM-dd") & "'" '請求日
                 Sql += ",''" '空でよし
                 Sql += "," & UtilClass.formatNumber(formatDouble(calCost + Indirectfees)) '仕入原価 + 間接費
                 'Sql += ",'" & codeAAC & "'" '会計用仕入先コード
@@ -3656,7 +3664,7 @@ Public Class ClosingLog
                 '貸方  棚卸資産
                 countKeyID = getCount(countKeyID)
 
-                Sql = ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("売上日"), "yyyyMM") & "'"
+                Sql = ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("請求日"), "yyyyMM") & "'"
                 Sql += "," & seqID 　   'プライマリ
                 Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
                 Sql += ",'棚卸資産'"    '借方科目
@@ -3665,7 +3673,7 @@ Public Class ClosingLog
                 'Sql += ",'" & getSupplierName(dsSwkUrighd.Tables(RS).Rows(i)("仕入先コード").ToString) & "'" '補助科目
                 Sql += ",''" '補助科目
                 Sql += ",'ER-" & dsSwkUrighd.Tables(RS).Rows(i)("客先番号").ToString & "-" & i & "'" 'PO
-                Sql += ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("売上日"), "yyyy-MM-dd") & "'" '売上日
+                Sql += ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("請求日"), "yyyy-MM-dd") & "'" '請求日
                 Sql += ",''" '空でよし
                 Sql += "," & UtilClass.formatNumber(formatDouble(calCost + Indirectfees)) '仕入原価 + 間接費
                 'Sql += ",'" & codeAAC & "'" '会計用仕入先コード
@@ -3697,7 +3705,7 @@ Public Class ClosingLog
                             '借方　仕入
                             countKeyID = getCount(countKeyID)
 
-                            Sql = ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("売上日"), "yyyyMM") & "'"
+                            Sql = ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("請求日"), "yyyyMM") & "'"
                             Sql += "," & seqID       'プライマリ
                             Sql += "," & countKeyID  'TRANSACTIONID内でカウントアップ（0から）
                             Sql += ",'仕入'"         '借方勘定  
@@ -3706,7 +3714,7 @@ Public Class ClosingLog
                             'Sql += ",'" & getSupplierName(dsSwkUrighd.Tables(RS).Rows(i)("仕入先コード").ToString) & "'" '補助科目
                             Sql += ",''" '補助科目
                             Sql += ",'WH-" & dsSwkUrighd.Tables(RS).Rows(i)("客先番号").ToString & "-" & i & "'" 'PO
-                            Sql += ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("売上日"), "yyyy-MM-dd") & "'"   '売上日
+                            Sql += ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("請求日"), "yyyy-MM-dd") & "'"   '請求日
                             Sql += ",''" '空でよし
                             Sql += ",'" & UtilClass.formatNumber(formatDouble(calCost + Indirectfees)) & "'"
                             'Sql += ",'" & codeAAC & "'" '会計用仕入先コード
@@ -3720,7 +3728,7 @@ Public Class ClosingLog
                             '貸方　棚卸資産
                             countKeyID = getCount(countKeyID)
 
-                            Sql = ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("売上日"), "yyyyMM") & "'"
+                            Sql = ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("請求日"), "yyyyMM") & "'"
                             Sql += "," & seqID       'プライマリ
                             Sql += "," & countKeyID  'TRANSACTIONID内でカウントアップ（0から）
                             Sql += ",'棚卸資産'"     '貸方勘定　
@@ -3729,7 +3737,7 @@ Public Class ClosingLog
                             'Sql += ",'" & getSupplierName(dsSwkUrighd.Tables(RS).Rows(i)("仕入先コード").ToString) & "'" '補助科目
                             Sql += ",''" '補助科目
                             Sql += ",'WH-" & dsSwkUrighd.Tables(RS).Rows(i)("客先番号").ToString & "-" & i & "'" 'PO
-                            Sql += ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("売上日"), "yyyy-MM-dd") & "'"   '売上日
+                            Sql += ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("請求日"), "yyyy-MM-dd") & "'"   '請求日
                             Sql += ",''" '空でよし
                             Sql += ",'" & UtilClass.formatNumber(formatDouble(calCost + Indirectfees)) & "'"
                             'Sql += ",'" & codeAAC & "'" '会計用仕入先コード
@@ -3756,7 +3764,7 @@ Public Class ClosingLog
                 '借方　売掛金
                 countKeyID = getCount(countKeyID)
 
-                Sql = ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("売上日"), "yyyyMM") & "'"
+                Sql = ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("請求日"), "yyyyMM") & "'"
                 Sql += "," & seqID      'プライマリ
                 Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
                 Sql += ",'売掛金'"      '借方勘定
@@ -3764,7 +3772,7 @@ Public Class ClosingLog
                 Sql += ",1" '固定
                 Sql += ",'" & getCustomerName(dsSwkUrighd.Tables(RS).Rows(i)("得意先コード").ToString) & "'" '補助科目
                 Sql += ",'ER-" & dsSwkUrighd.Tables(RS).Rows(i)("客先番号").ToString & "-" & i & "'" 'PO
-                Sql += ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("売上日"), "yyyy-MM-dd") & "'" '売上日
+                Sql += ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("請求日"), "yyyy-MM-dd") & "'" '請求日
                 Sql += ",''" '空でよし
                 Sql += "," & UtilClass.formatNumber(formatDouble(calSales + calVat + Indirectfees)) '売上金額 + VAT IN + 間接費
                 Sql += ",'" & codeAAB & "'" '会計用得意先コード
@@ -3777,7 +3785,7 @@ Public Class ClosingLog
                 '貸方  売上
                 countKeyID = getCount(countKeyID)
 
-                Sql = ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("売上日"), "yyyyMM") & "'"
+                Sql = ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("請求日"), "yyyyMM") & "'"
                 Sql += "," & seqID 'プライマリ
                 Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
                 Sql += ",'売上'" '貸方科目　
@@ -3785,7 +3793,7 @@ Public Class ClosingLog
                 Sql += ",1" '固定
                 Sql += ",'" & getCustomerName(dsSwkUrighd.Tables(RS).Rows(i)("得意先コード").ToString) & "'" '補助科目
                 Sql += ",'ER-" & dsSwkUrighd.Tables(RS).Rows(i)("客先番号").ToString & "-" & i & "'" 'PO
-                Sql += ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("売上日"), "yyyy-MM-dd") & "'" '売上日
+                Sql += ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("請求日"), "yyyy-MM-dd") & "'" '請求日
                 Sql += ",''" '空でよし
                 Sql += "," & UtilClass.formatNumber(formatDouble(calSales + calVat + Indirectfees))
                 Sql += ",'" & codeAAB & "'" '会計用得意先コード
@@ -3801,7 +3809,7 @@ Public Class ClosingLog
                     '借方  売掛金
                     countKeyID = getCount(countKeyID)
 
-                    Sql = ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("売上日"), "yyyyMM") & "'"
+                    Sql = ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("請求日"), "yyyyMM") & "'"
                     Sql += "," & seqID      'プライマリ
                     Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
                     Sql += ",'売掛金'"      '借方勘定　
@@ -3809,7 +3817,7 @@ Public Class ClosingLog
                     Sql += ",1" '固定
                     Sql += ",'" & getCustomerName(dsSwkUrighd.Tables(RS).Rows(i)("得意先コード").ToString) & "'" '補助科目
                     Sql += ",'ER-" & dsSwkUrighd.Tables(RS).Rows(i)("客先番号").ToString & "-" & i & "'" 'PO
-                    Sql += ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("売上日"), "yyyy-MM-dd") & "'" '売上日
+                    Sql += ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("請求日"), "yyyy-MM-dd") & "'" '請求日
                     Sql += ",''" '空でよし
                     Sql += "," & UtilClass.formatNumber(formatDouble(calSales + calVat + Indirectfees))
                     Sql += ",'" & codeAAB & "'" '会計用得意先コード
@@ -3822,7 +3830,7 @@ Public Class ClosingLog
                     '貸方  VAT
                     countKeyID = getCount(countKeyID)
 
-                    Sql = ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("売上日"), "yyyyMM") & "'"
+                    Sql = ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("請求日"), "yyyyMM") & "'"
                     Sql += "," & seqID      'プライマリ
                     Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
                     Sql += ",'VAT-OUT'"     '借方科目　
@@ -3830,7 +3838,7 @@ Public Class ClosingLog
                     Sql += ",1" '固定
                     Sql += ",'" & getCustomerName(dsSwkUrighd.Tables(RS).Rows(i)("得意先コード").ToString) & "'" '補助科目
                     Sql += ",'ER-" & dsSwkUrighd.Tables(RS).Rows(i)("客先番号").ToString & "-" & i & "'" 'PO
-                    Sql += ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("売上日"), "yyyy-MM-dd") & "'" '売上日
+                    Sql += ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("請求日"), "yyyy-MM-dd") & "'" '請求日
                     Sql += ",''" '空でよし
                     Sql += "," & UtilClass.formatNumber(formatDouble(calSales + calVat + Indirectfees))
                     Sql += ",'" & codeAAB & "'" '会計用得意先コード
@@ -3855,7 +3863,7 @@ Public Class ClosingLog
                 '借方　棚卸資産
                 seqID = getSeq("transactionid_seq")
 
-                Sql = ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("売上日"), "yyyyMM") & "'"
+                Sql = ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("請求日"), "yyyyMM") & "'"
                 Sql += "," & seqID      'プライマリ
                 Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
                 Sql += ",'棚卸資産'"    '借方勘定　
@@ -3864,7 +3872,7 @@ Public Class ClosingLog
                 'Sql += ",'" & getSupplierName(dsSwkUrighd.Tables(RS).Rows(i)("仕入先コード").ToString) & "'" '補助科目
                 Sql += ",''" '補助科目
                 Sql += ",'ER-" & dsSwkUrighd.Tables(RS).Rows(i)("客先番号").ToString & "-" & i & "'" 'PO
-                Sql += ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("売上日"), "yyyy-MM-dd") & "'" '売上日
+                Sql += ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("請求日"), "yyyy-MM-dd") & "'" '請求日
                 Sql += ",''" '空でよし
                 Sql += "," & UtilClass.formatNumber(formatDouble(calCost + Indirectfees)) '仕入金額
                 'Sql += ",'" & codeAAC & "'" '会計用仕入先コード
@@ -3879,7 +3887,7 @@ Public Class ClosingLog
                 '貸方  仕入
                 countKeyID = getCount(countKeyID)
 
-                Sql = ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("売上日"), "yyyyMM") & "'"
+                Sql = ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("請求日"), "yyyyMM") & "'"
                 Sql += "," & seqID      'プライマリ
                 Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
                 Sql += ",'仕入'"        '貸方勘定
@@ -3888,7 +3896,7 @@ Public Class ClosingLog
                 'Sql += ",'" & getSupplierName(dsSwkUrighd.Tables(RS).Rows(i)("仕入先コード").ToString) & "'" '補助科目
                 Sql += ",''" '補助科目
                 Sql += ",'ER-" & dsSwkUrighd.Tables(RS).Rows(i)("客先番号").ToString & "-" & i & "'" 'PO
-                Sql += ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("売上日"), "yyyy-MM-dd") & "'" '売上日
+                Sql += ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("請求日"), "yyyy-MM-dd") & "'" '請求日
                 Sql += ",''" '空でよし
                 Sql += "," & UtilClass.formatNumber(formatDouble(calCost + Indirectfees))
                 'Sql += ",'" & codeAAC & "'" '会計用仕入先コード
@@ -3920,7 +3928,7 @@ Public Class ClosingLog
                             '借方　棚卸資産
                             countKeyID = getCount(countKeyID)
 
-                            Sql = ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("売上日"), "yyyyMM") & "'"
+                            Sql = ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("請求日"), "yyyyMM") & "'"
                             Sql += "," & seqID       'プライマリ
                             Sql += "," & countKeyID  'TRANSACTIONID内でカウントアップ（0から）
                             Sql += ",'棚卸資産'"     '借方勘定  
@@ -3929,7 +3937,7 @@ Public Class ClosingLog
                             'Sql += ",'" & getSupplierName(dsSwkUrighd.Tables(RS).Rows(i)("仕入先コード").ToString) & "'" '補助科目
                             Sql += ",''" '補助科目
                             Sql += ",'WH-" & dsSwkUrighd.Tables(RS).Rows(i)("客先番号").ToString & "-" & i & "'" 'PO
-                            Sql += ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("売上日"), "yyyy-MM-dd") & "'"   '売上日
+                            Sql += ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("請求日"), "yyyy-MM-dd") & "'"   '請求日
                             Sql += ",''" '空でよし
                             Sql += ",'" & UtilClass.formatNumber(formatDouble(calCost + Indirectfees)) & "'"
                             'Sql += ",'" & codeAAC & "'" '会計用仕入先コード
@@ -3943,7 +3951,7 @@ Public Class ClosingLog
                             '貸方　仕入
                             countKeyID = getCount(countKeyID)
 
-                            Sql = ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("売上日"), "yyyyMM") & "'"
+                            Sql = ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("請求日"), "yyyyMM") & "'"
                             Sql += "," & seqID       'プライマリ
                             Sql += "," & countKeyID  'TRANSACTIONID内でカウントアップ（0から）
                             Sql += ",'仕入'"         '貸方勘定　
@@ -3952,7 +3960,7 @@ Public Class ClosingLog
                             'Sql += ",'" & getSupplierName(dsSwkUrighd.Tables(RS).Rows(i)("仕入先コード").ToString) & "'" '補助科目
                             Sql += ",''" '補助科目
                             Sql += ",'WH-" & dsSwkUrighd.Tables(RS).Rows(i)("客先番号").ToString & "-" & i & "'" 'PO
-                            Sql += ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("売上日"), "yyyy-MM-dd") & "'"   '売上日
+                            Sql += ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("請求日"), "yyyy-MM-dd") & "'"   '請求日
                             Sql += ",''" '空でよし
                             Sql += ",'" & UtilClass.formatNumber(formatDouble(calCost + Indirectfees)) & "'"
                             'Sql += ",'" & codeAAC & "'" '会計用仕入先コード
@@ -3981,7 +3989,7 @@ Public Class ClosingLog
                 '借方　売上
                 countKeyID = getCount(countKeyID)
 
-                Sql = ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("売上日"), "yyyyMM") & "'"
+                Sql = ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("請求日"), "yyyyMM") & "'"
                 Sql += "," & seqID      'プライマリ
                 Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
                 Sql += ",'売上戻高'"    '借方勘定  
@@ -3989,7 +3997,7 @@ Public Class ClosingLog
                 Sql += ",1" '固定
                 Sql += ",'" & getCustomerName(dsSwkUrighd.Tables(RS).Rows(i)("得意先コード").ToString) & "'"  '補助科目
                 Sql += ",'WH-" & dsSwkUrighd.Tables(RS).Rows(i)("客先番号").ToString & "-" & i & "'" 'PO
-                Sql += ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("売上日"), "yyyy-MM-dd") & "'"
+                Sql += ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("請求日"), "yyyy-MM-dd") & "'"
                 Sql += ",''" '空でよし
                 Sql += ",'" & UtilClass.formatNumber(formatDouble(calSales + calVat + Indirectfees)) & "'" '売上金額 + VAT IN + 間接費
                 Sql += ",'" & codeAAB & "'" '会計用得意先コード
@@ -4002,7 +4010,7 @@ Public Class ClosingLog
                 '貸方　売掛金
                 countKeyID = getCount(countKeyID)
 
-                Sql = ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("売上日"), "yyyyMM") & "'"
+                Sql = ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("請求日"), "yyyyMM") & "'"
                 Sql += "," & seqID      'プライマリ
                 Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
                 Sql += ",'売掛金'"      '貸方勘定　
@@ -4010,7 +4018,7 @@ Public Class ClosingLog
                 Sql += ",1" '固定
                 Sql += ",'" & getCustomerName(dsSwkUrighd.Tables(RS).Rows(i)("得意先コード").ToString) & "'"  '勘定科目
                 Sql += ",'WH-" & dsSwkUrighd.Tables(RS).Rows(i)("客先番号").ToString & "-" & i & "'" 'PO
-                Sql += ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("売上日"), "yyyy-MM-dd") & "'" '売上日
+                Sql += ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("請求日"), "yyyy-MM-dd") & "'" '請求日
                 Sql += ",''" '空でよし
                 Sql += ",'" & UtilClass.formatNumber(formatDouble(calSales + calVat + Indirectfees)) & "'"
                 Sql += ",'" & codeAAB & "'" '会計用得意先コード
@@ -4026,7 +4034,7 @@ Public Class ClosingLog
                     '借方　VAT-OUT
                     countKeyID = getCount(countKeyID)
 
-                    Sql = ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("売上日"), "yyyyMM") & "'"
+                    Sql = ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("請求日"), "yyyyMM") & "'"
                     Sql += "," & seqID      'プライマリ
                     Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
                     Sql += ",'VAT-OUT'"     '借方勘定
@@ -4034,7 +4042,7 @@ Public Class ClosingLog
                     Sql += ",1" '固定
                     Sql += ",'" & getCustomerName(dsSwkUrighd.Tables(RS).Rows(i)("得意先コード").ToString) & "'"  '補助科目
                     Sql += ",'WH-" & dsSwkUrighd.Tables(RS).Rows(i)("客先番号").ToString & "-" & i & "'" 'PO
-                    Sql += ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("売上日"), "yyyy-MM-dd") & "'" '売上日
+                    Sql += ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("請求日"), "yyyy-MM-dd") & "'" '請求日
                     Sql += ",''" '空でよし
                     Sql += ",'" & UtilClass.formatNumber(formatDouble(calSales + calVat + Indirectfees)) & "'"
                     Sql += ",'" & codeAAB & "'"         '会計用得意先コード
@@ -4047,7 +4055,7 @@ Public Class ClosingLog
                     '貸方　売掛金
                     countKeyID = getCount(countKeyID)
 
-                    Sql = ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("売上日"), "yyyyMM") & "'"
+                    Sql = ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("請求日"), "yyyyMM") & "'"
                     Sql += "," & seqID      'プライマリ
                     Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
                     Sql += ",'売掛金'"      '貸方勘定
@@ -4055,7 +4063,7 @@ Public Class ClosingLog
                     Sql += ",1" '固定
                     Sql += ",'" & getCustomerName(dsSwkUrighd.Tables(RS).Rows(i)("得意先コード").ToString) & "'"  '補助科目
                     Sql += ",'WH-" & dsSwkUrighd.Tables(RS).Rows(i)("客先番号").ToString & "-" & i & "'" 'PO
-                    Sql += ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("売上日"), "yyyy-MM-dd") & "'"
+                    Sql += ",'" & Format(dsSwkUrighd.Tables(RS).Rows(i)("請求日"), "yyyy-MM-dd") & "'"
                     Sql += ",''" '空でよし
                     Sql += ",'" & UtilClass.formatNumber(formatDouble(calSales + calVat + Indirectfees)) & "'"
                     Sql += ",'" & codeAAB & "'"         '会計用得意先コード
@@ -4082,47 +4090,49 @@ Public Class ClosingLog
 
 #Region "仕訳前受金"
 
+        't23_skyuhd      請求
         't27_nkinkshihd  入金消込
-        't23_skyuhd
+
 
         Sql = "SELECT "
-        Sql += " t27.入金番号"
-        Sql += ",t27.入金日,t27.請求先コード"
-        'Sql += ",t26.入金種別"
-        Sql += ",t23.客先番号,t23.請求区分"
+        Sql += " t23.請求番号,t23.請求区分,t23.得意先コード,t23.客先番号"
+        Sql += ",t27.入金番号"
+        Sql += ",t27.入金日"
 
+        'Sql += ",t26.入金種別"
         'Sql += ",sum(t27.入金消込額計) as 入金消込額計"
 
-        Sql += " FROM public.t27_nkinkshihd as t27 "
+        Sql += " FROM public.t23_skyuhd as t23 "
 
         'Sql += " left join public.t26_nkindt as t26 "
         'Sql += " on t27.入金番号 = t26.入金番号"
 
-        Sql += " left join public.t23_skyuhd as t23"
+        Sql += " left join public.t27_nkinkshihd as t27"
         Sql += " on t27.請求番号 = t23.請求番号"
 
         'Sql += " left join public.t11_cymndt as t11"
         'Sql += " on (t23.受注番号 = t11.受注番号 and t23.受注番号枝番 = t11.受注番号枝番)"
 
         Sql += " WHERE "
-        Sql += " t27.会社コード"
+        Sql += " t23.会社コード"
         Sql += " ILIKE  "
         Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'"
 
         '条件オプション
         'Sql += " and t26.入金日 <= '" & dsCompany.Tables(RS).Rows(0)("今回締日") & "'"
-        'Sql += " and not(t41.仕入区分 is null)"
+        Sql += " and not(t23.請求番号 is null)"
+        Sql += " and not(t27.入金番号 is null)"
 
         Sql += " GROUP BY "
-        Sql += " t27.入金番号"
-        Sql += ",t27.入金日,t27.請求先コード"
-        Sql += ",t23.客先番号,t23.請求区分"
+        Sql += " t23.請求番号,t23.請求区分,t23.得意先コード,t23.客先番号"
+        Sql += ",t27.入金番号"
+        Sql += ",t27.入金日"
 
 
         Sql += " ORDER BY "
-        Sql += " t27.入金番号,t27.入金日"
-        Sql += ",t27.請求先コード"
-        Sql += ",t23.客先番号"
+        Sql += " t23.請求番号,t23.請求区分,t23.得意先コード,t23.客先番号"
+        Sql += ",t27.入金番号"
+        Sql += ",t27.入金日"
 
         Dim dsNkinkshihd As DataSet = _db.selectDB(Sql, RS, reccnt)
 
