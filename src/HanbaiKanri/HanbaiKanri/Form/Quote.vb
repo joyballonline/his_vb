@@ -2880,59 +2880,60 @@ Public Class Quote
                 sheet.Range("A6").Value = "PaymentTerms"　'支払条件
                 sheet.Range("A7").Value = "Remarks"　     '備考
 
-                sheet.Range("H1").Value = "QuotationDate(RegistrationDate)"　           '見積日
-                sheet.Range("H2").Value = "PhoneNumber"        　'電話番号
-                sheet.Range("H3").Value = "FAX"                　'FAX番号
-                sheet.Range("H4").Value = "NameOfPIC"　          '得意先担当者名
-                sheet.Range("H5").Value = "PositionPICCustomer"　'得意先担当者役職
-                sheet.Range("H6").Value = "CustomsDutyRate"    　'関税率
-                sheet.Range("H7").Value = "PrepaidCorporateTaxRate"　'前払法人税率
-                sheet.Range("H8").Value = "TransportationCostRate"　 '輸送費率
+                sheet.Range("I1").Value = "QuotationDate(RegistrationDate)"　           '見積日
+                sheet.Range("I2").Value = "PhoneNumber"        　'電話番号
+                sheet.Range("I3").Value = "FAX"                　'FAX番号
+                sheet.Range("I4").Value = "NameOfPIC"　          '得意先担当者名
+                sheet.Range("I5").Value = "PositionPICCustomer"　'得意先担当者役職
+                sheet.Range("I6").Value = "CustomsDutyRate"    　'関税率
+                sheet.Range("I7").Value = "PrepaidCorporateTaxRate"　'前払法人税率
+                sheet.Range("I8").Value = "TransportationCostRate"　 '輸送費率
 
-                sheet.Range("M1").Value = "ExpirationDate"     　'見積有効期限
-                sheet.Range("M2").Value = "SalesPersonInCharge"　'営業担当者
-                sheet.Range("M3").Value = "PICForInputting"      '入力担当者
+                sheet.Range("N1").Value = "ExpirationDate"     　'見積有効期限
+                sheet.Range("N2").Value = "SalesPersonInCharge"　'営業担当者
+                sheet.Range("N3").Value = "PICForInputting"      '入力担当者
 
                 sheet.Range("A10").Value = "No"　                                'No
-                sheet.Range("B10").Value = "Manufacturer"                    　'メーカー
-                sheet.Range("C10").Value = "ItemName"　                        '品名
-                sheet.Range("D10").Value = "Spec"                            　'型式
-                sheet.Range("E10").Value = "Quantity"　                        '数量
-                sheet.Range("F10").Value = "Unit"　                            '単位
-                sheet.Range("G10").Value = "SupplierName"　                    '仕入先
-                sheet.Range("H10").Value = "PurchaseUnitPrice"               　'仕入単価
-                sheet.Range("I10").Value = "PurchaseCost"　                    '仕入原価
-                sheet.Range("J10").Value = "CustomsDutyParUnit"              　'関税額
-                sheet.Range("K10").Value = "PrepaidCorporateTaxAmountParUnit"　'前払法人税額
-                sheet.Range("L10").Value = "TransportationCostParUnit"　       '輸送費額
-                sheet.Range("M10").Value = "PurchaseAmount"　                 '仕入金額
-                sheet.Range("N10").Value = "SellingPrice"　                   '売単価
-                sheet.Range("O10").Value = "SalesAmount"　                    '売上金額
-                sheet.Range("P10").Value = "QuotationPrice"　                 '見積単価
-                sheet.Range("Q10").Value = "QuotationAmount"　                '見積金額
-                sheet.Range("R10").Value = "GrossMargin"                      '粗利額
-                sheet.Range("S10").Value = "GrossMarginRate"                    　'粗利率
-                sheet.Range("T10").Value = "LeadTime"　                       'リードタイム
+                sheet.Range("B10").Value = "PurchasingClassification"        　'仕入区分
+                sheet.Range("C10").Value = "Manufacturer"                    　'メーカー
+                sheet.Range("D10").Value = "ItemName"　                        '品名
+                sheet.Range("E10").Value = "Spec"                            　'型式
+                sheet.Range("F10").Value = "Quantity"　                        '数量
+                sheet.Range("G10").Value = "Unit"　                            '単位
+                sheet.Range("H10").Value = "SupplierName"　                    '仕入先
+                sheet.Range("I10").Value = "PurchaseUnitPrice"               　'仕入単価
+                sheet.Range("J10").Value = "PurchaseCost"　                    '仕入原価
+                sheet.Range("K10").Value = "CustomsDutyParUnit"              　'関税額
+                sheet.Range("L10").Value = "PrepaidCorporateTaxAmountParUnit"　'前払法人税額
+                sheet.Range("M10").Value = "TransportationCostParUnit"　       '輸送費額
+                sheet.Range("N10").Value = "PurchaseAmount"　                 '仕入金額
+                sheet.Range("O10").Value = "SellingPrice"　                   '売単価
+                sheet.Range("P10").Value = "SalesAmount"　                    '売上金額
+                sheet.Range("Q10").Value = "QuotationPrice"　                 '見積単価
+                sheet.Range("R10").Value = "QuotationAmount"　                '見積金額
+                sheet.Range("S10").Value = "GrossMargin"                      '粗利額
+                sheet.Range("T10").Value = "GrossMarginRate"                    　'粗利率
+                sheet.Range("U10").Value = "LeadTime"　                       'リードタイム
 
             End If
 
             sheet.Range("B1").Value = QuoteNo & "-" & QuoteSuffix
-            sheet.Range("I1").Value = QuoteDate & "(" & RegistrationDate & ")"
-            sheet.Range("N1").Value = Expiration
+            sheet.Range("J1").Value = QuoteDate & "(" & RegistrationDate & ")"
+            sheet.Range("O1").Value = Expiration
             sheet.Range("B2").Value = CustomerName
             sheet.Range("B3").Value = PostalCode & " " & Address1
-            sheet.Range("I2").Value = Tel
-            sheet.Range("I3").Value = Fax
-            sheet.Range("I4").Value = Person
-            sheet.Range("I5").Value = Position
-            sheet.Range("N2").Value = Sales
-            sheet.Range("N3").Value = Input
+            sheet.Range("J2").Value = Tel
+            sheet.Range("J3").Value = Fax
+            sheet.Range("J4").Value = Person
+            sheet.Range("J5").Value = Position
+            sheet.Range("O2").Value = Sales
+            sheet.Range("O3").Value = Input
             sheet.Range("B6").Value = PaymentTerms
             sheet.Range("B7").Value = QuoteRemarks
-            sheet.Range("T15").Value = PurchaseTotal        '仕入
-            sheet.Range("T16").Value = Total                '売上
-            sheet.Range("T17").Value = QuoteAmount          '見積
-            sheet.Range("T18").Value = GrossProfitAmount    '粗利
+            sheet.Range("U15").Value = PurchaseTotal        '仕入
+            sheet.Range("U16").Value = Total                '売上
+            sheet.Range("U17").Value = QuoteAmount          '見積
+            sheet.Range("U18").Value = GrossProfitAmount    '粗利
 
 
 
@@ -2953,40 +2954,40 @@ Public Class Quote
             For index As Integer = 0 To DgvItemList.Rows.Count - 1
                 '明細からヘッダへ移動
                 If DgvItemList.Rows(index).Cells("関税率").Value <> 0 Then
-                    sheet.Range("I6").Value = DgvItemList.Rows(index).Cells("関税率").Value
+                    sheet.Range("J6").Value = DgvItemList.Rows(index).Cells("関税率").Value
                 End If
                 If DgvItemList.Rows(index).Cells("前払法人税率").Value <> 0 Then
-                    sheet.Range("I7").Value = DgvItemList.Rows(index).Cells("前払法人税率").Value
+                    sheet.Range("J7").Value = DgvItemList.Rows(index).Cells("前払法人税率").Value
                 End If
                 If DgvItemList.Rows(index).Cells("輸送費率").Value <> 0 Then
-                    sheet.Range("I8").Value = DgvItemList.Rows(index).Cells("輸送費率").Value
+                    sheet.Range("J8").Value = DgvItemList.Rows(index).Cells("輸送費率").Value
                 End If
 
 
                 sheet.Range("A" & currentRow).Value = DgvItemList.Rows(index).Cells("No").Value
-
-                sheet.Range("B" & currentRow).Value = DgvItemList.Rows(index).Cells("メーカー").Value
-                sheet.Range("C" & currentRow).Value = DgvItemList.Rows(index).Cells("品名").Value
-                sheet.Range("D" & currentRow).Value = DgvItemList.Rows(index).Cells("型式").Value
-                sheet.Range("E" & currentRow).Value = DgvItemList.Rows(index).Cells("数量").Value
-                sheet.Range("F" & currentRow).Value = DgvItemList.Rows(index).Cells("単位").Value
-                sheet.Range("G" & currentRow).Value = DgvItemList.Rows(index).Cells("仕入先").Value
-                sheet.Range("H" & currentRow).Value = DgvItemList.Rows(index).Cells("仕入単価").Value
-                sheet.Range("I" & currentRow).Value = DgvItemList.Rows(index).Cells("仕入原価").Value
-                sheet.Range("J" & currentRow).Value = DgvItemList.Rows(index).Cells("関税額").Value
-                sheet.Range("K" & currentRow).Value = DgvItemList.Rows(index).Cells("前払法人税額").Value
-                sheet.Range("L" & currentRow).Value = DgvItemList.Rows(index).Cells("輸送費額").Value
-                sheet.Range("M" & currentRow).Value = DgvItemList.Rows(index).Cells("仕入金額").Value
-                sheet.Range("N" & currentRow).Value = DgvItemList.Rows(index).Cells("売単価").Value
-                sheet.Range("O" & currentRow).Value = DgvItemList.Rows(index).Cells("売上金額").Value
-                sheet.Range("P" & currentRow).Value = DgvItemList.Rows(index).Cells("見積単価").Value
-                sheet.Range("Q" & currentRow).Value = DgvItemList.Rows(index).Cells("見積金額").Value
-                sheet.Range("R" & currentRow).Value = DgvItemList.Rows(index).Cells("粗利額").Value
-                sheet.Range("S" & currentRow).Value = DgvItemList.Rows(index).Cells("粗利率").Value
+                sheet.Range("B" & currentRow).Value = getSireKbnName(DgvItemList.Rows(index).Cells("仕入区分").Value)
+                sheet.Range("C" & currentRow).Value = DgvItemList.Rows(index).Cells("メーカー").Value
+                sheet.Range("D" & currentRow).Value = DgvItemList.Rows(index).Cells("品名").Value
+                sheet.Range("E" & currentRow).Value = DgvItemList.Rows(index).Cells("型式").Value
+                sheet.Range("F" & currentRow).Value = DgvItemList.Rows(index).Cells("数量").Value
+                sheet.Range("G" & currentRow).Value = DgvItemList.Rows(index).Cells("単位").Value
+                sheet.Range("H" & currentRow).Value = DgvItemList.Rows(index).Cells("仕入先").Value
+                sheet.Range("I" & currentRow).Value = DgvItemList.Rows(index).Cells("仕入単価").Value
+                sheet.Range("J" & currentRow).Value = DgvItemList.Rows(index).Cells("仕入原価").Value
+                sheet.Range("K" & currentRow).Value = DgvItemList.Rows(index).Cells("関税額").Value
+                sheet.Range("L" & currentRow).Value = DgvItemList.Rows(index).Cells("前払法人税額").Value
+                sheet.Range("M" & currentRow).Value = DgvItemList.Rows(index).Cells("輸送費額").Value
+                sheet.Range("N" & currentRow).Value = DgvItemList.Rows(index).Cells("仕入金額").Value
+                sheet.Range("O" & currentRow).Value = DgvItemList.Rows(index).Cells("売単価").Value
+                sheet.Range("P" & currentRow).Value = DgvItemList.Rows(index).Cells("売上金額").Value
+                sheet.Range("Q" & currentRow).Value = DgvItemList.Rows(index).Cells("見積単価").Value
+                sheet.Range("R" & currentRow).Value = DgvItemList.Rows(index).Cells("見積金額").Value
+                sheet.Range("S" & currentRow).Value = DgvItemList.Rows(index).Cells("粗利額").Value
+                sheet.Range("T" & currentRow).Value = DgvItemList.Rows(index).Cells("粗利率").Value
                 tmp = ""
                 tmp += DgvItemList.Rows(index).Cells("リードタイム").Value
                 tmp += DgvItemList.Item("リードタイム単位", index).FormattedValue
-                sheet.Range("T" & currentRow).Value = tmp
+                sheet.Range("U" & currentRow).Value = tmp
 
                 currentRow += 1
 
@@ -2997,10 +2998,10 @@ Public Class Quote
             '言語の判定
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then  '英語
 
-                sheet.Range("S" & currentRow).Value = "PurchaseAmount"     '仕入金額
-                sheet.Range("S" & currentRow + 1).Value = "SalesAmount"    '売上金額
-                sheet.Range("S" & currentRow + 2).Value = "QuotationAmount" '見積金額
-                sheet.Range("S" & currentRow + 3).Value = "GrossMargin"     '粗利額
+                sheet.Range("T" & currentRow).Value = "PurchaseAmount"     '仕入金額
+                sheet.Range("T" & currentRow + 1).Value = "SalesAmount"    '売上金額
+                sheet.Range("T" & currentRow + 2).Value = "QuotationAmount" '見積金額
+                sheet.Range("T" & currentRow + 3).Value = "GrossMargin"     '粗利額
             End If
 
 
@@ -3176,6 +3177,27 @@ Public Class Quote
 
         Return _db.selectDB(Sql, RS, reccnt)
     End Function
+
+    'Return: String
+    Private Function getSireKbnName(argSiireKBN) As String
+        Dim Sql As String = ""
+        Dim strViewText As String = ""
+
+        Sql = " AND "
+        Sql += "固定キー ILIKE '" & CommonConst.FIXED_KEY_PURCHASING_CLASS & "'"
+        Sql += " AND "
+        Sql += "可変キー = '" & argSiireKBN & "'"
+
+        '汎用マスタから取得
+        Dim dsHanyo As DataSet = getDsData("m90_hanyo", Sql)
+        Dim retString As String = ""
+
+        strViewText = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG, "文字２", "文字１")
+        retString = dsHanyo.Tables(RS).Rows(0)(strViewText).ToString
+        Return retString
+
+    End Function
+
 
     'Return: DataTable
     Private Function getSireKbn() As DataTable
@@ -3558,9 +3580,6 @@ Public Class Quote
 
     End Sub
 
-    Private Sub TxtSales_TextChanged(sender As Object, e As EventArgs) Handles TxtSales.TextChanged
-
-    End Sub
 
     Private Sub TxtSales_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtSales.KeyDown
         '営業担当者欄でＦ４キーを押下した時は検索画面を表示
