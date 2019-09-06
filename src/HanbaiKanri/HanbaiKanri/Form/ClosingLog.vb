@@ -2866,6 +2866,7 @@ Public Class ClosingLog
 
 
             Dim checkTransactionid As String = ""
+            Dim totalJvamount As Decimal = 0
 
             For i As Integer = 0 To shiwakeData.Tables(RS).Rows.Count - 1
 
@@ -2880,7 +2881,8 @@ Public Class ClosingLog
                     nextTransactionid = shiwakeData.Tables(RS).Rows(i + 1)(3).ToString() '次のvalTransactionid（判定用）
                 End If
                 Dim valKeyId As String = shiwakeData.Tables(RS).Rows(i)(4).ToString()
-                Dim valGlaccount As String = shiwakeData.Tables(RS).Rows(i)(15).ToString()
+                Dim valGlaccountCD As String = shiwakeData.Tables(RS).Rows(i)(15).ToString()
+                Dim valGlaccount As String = shiwakeData.Tables(RS).Rows(i)(5).ToString()
                 Dim valGlamount As String = Decimal.Parse(shiwakeData.Tables(RS).Rows(i)(6)).ToString("F2", ci)
                 Dim valRate As String = shiwakeData.Tables(RS).Rows(i)(7).ToString()
                 Dim valVendorno As String = shiwakeData.Tables(RS).Rows(i)(8).ToString()
@@ -2897,7 +2899,6 @@ Public Class ClosingLog
                     strXml += "<TRANSACTIONS OnError='CONTINUE'>"
                 End If
 
-                Dim totalJvamount As Decimal = 0
 
                 'TRANSACTIONID が同じ場合のみ
                 If valTransactionid = checkTransactionid Then
@@ -2905,7 +2906,7 @@ Public Class ClosingLog
                     'strXml += "<TRANSACTIONID>" & valTransactionid & "</TRANSACTIONID>"
                     strXml += "<ACCOUNTLINE operation='Add'>"
                     strXml += "<KeyID>" & valKeyId & "</KeyID>"
-                    strXml += "<GLACCOUNT>" & valGlaccount & "</GLACCOUNT>"
+                    strXml += "<GLACCOUNT>" & valGlaccountCD & "</GLACCOUNT>"
                     strXml += "<GLAMOUNT>" & valGlamount & "</GLAMOUNT>"
                     strXml += "<DESCRIPTION>" & valDescription & "</DESCRIPTION>"
                     strXml += "<RATE>" & valRate & "</RATE>"
@@ -2923,17 +2924,17 @@ Public Class ClosingLog
 
                     strXml += "</ACCOUNTLINE>"
 
-                    totalJvamount = 0 'リセット
 
                     'TRANSACTIONID が異なっていたら（初回含む）
                 Else
                     checkTransactionid = valTransactionid
+                    totalJvamount = 0 'リセット
 
                     strXml += "<JV operation='Add' REQUESTID='1'>"
                     strXml += "<TRANSACTIONID>" & valTransactionid & "</TRANSACTIONID>"
                     strXml += "<ACCOUNTLINE operation='Add'>"
                     strXml += "<KeyID>" & valKeyId & "</KeyID>"
-                    strXml += "<GLACCOUNT>" & valGlaccount & "</GLACCOUNT>"
+                    strXml += "<GLACCOUNT>" & valGlaccountCD & "</GLACCOUNT>"
                     strXml += "<GLAMOUNT>" & valGlamount & "</GLAMOUNT>"
                     strXml += "<DESCRIPTION>" & valDescription & "</DESCRIPTION>"
                     strXml += "<RATE>" & valRate & "</RATE>"
@@ -2956,10 +2957,13 @@ Public Class ClosingLog
 
                     strXml += "</ACCOUNTLINE>"
                 End If
+                If valJvnumber = "ER-UQ2-0" Then
+                    totalJvamount += 0
+                End If
 
                 '整数だったら加算していく
-                If valJvamount > 0 Then
-                    totalJvamount += valJvamount
+                If valGlamount > 0 Then
+                    totalJvamount += valGlamount
                 End If
 
 
@@ -2969,7 +2973,7 @@ Public Class ClosingLog
                     strXml += "<SOURCE>GL</SOURCE>"
                     strXml += "<TRANSTYPE>journal voucher</TRANSTYPE>"
                     strXml += "<TRANSDESCRIPTION>" & valTransdescription & "</TRANSDESCRIPTION>"
-                    strXml += "<JVAMOUNT>" & valJvamount & "</JVAMOUNT>"
+                    strXml += "<JVAMOUNT>" & totalJvamount & "</JVAMOUNT>"
                     strXml += "</JV>"
                 End If
 
