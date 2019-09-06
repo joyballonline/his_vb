@@ -418,6 +418,11 @@ Public Class DepositManagement
                 DgvBillingInfo.Rows(i).Cells("請求情報請求残高固定").Value = dsSkyuhd.Tables(RS).Rows(i)("請求金額計_外貨") - dsSkyuhd.Tables(RS).Rows(i)("入金額計_外貨")
             End If
             DgvBillingInfo.Rows(i).Cells("入金額").Value = 0
+
+
+            '非可視
+            DgvBillingInfo.Rows(i).Cells("請求区分").Value = dsSkyuhd.Tables(RS).Rows(i)("請求区分")
+
         Next
 
 
@@ -490,6 +495,66 @@ Public Class DepositManagement
             Return
         End If
 
+
+#Region "仕訳データ"  '仕訳用のテーブルを作成  
+
+        '非可視のデータグリッドを削除 全ての列を選択
+        Me.ShiwakeData.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+
+        ' 選択されている行をデータグリッドからすべて削除
+        For Each row As DataGridViewRow In Me.ShiwakeData.SelectedRows
+
+            ' オブジェクト指定で行を削除する
+            Me.ShiwakeData.Rows.Remove(row)
+        Next
+
+
+        '入金データ
+        Dim DataIndex As Integer = 0
+        For i As Integer = 0 To DgvDeposit.Rows.Count - 1
+
+            Dim decNyukin As Decimal = DgvDeposit.Rows(i).Cells("入力入金額").Value
+
+            '請求データ
+            For j As Integer = 0 To DgvBillingInfo.Rows.Count - 1
+
+
+                If DgvBillingInfo.Rows(j).Cells("請求情報請求残高").Value = 0 Then
+                    '何もしない
+                ElseIf DgvBillingInfo.Rows(j).Cells("請求情報請求残高").Value > decNyukin AndAlso decNyukin > 0 Then
+                    '残高が入金額より多い
+
+
+                    '非可視のデータグリッドへ挿入
+                    ShiwakeData.Rows.Add()
+                    ShiwakeData.Rows(DataIndex).Cells("請求番号_仕訳").Value = DgvBillingInfo.Rows(j).Cells("請求情報請求番号").Value
+                    ShiwakeData.Rows(DataIndex).Cells("請求区分_仕訳").Value = DgvBillingInfo.Rows(j).Cells("請求区分").Value
+                    ShiwakeData.Rows(DataIndex).Cells("請求日_仕訳").Value = DgvBillingInfo.Rows(j).Cells("請求日").Value
+                    ShiwakeData.Rows(DataIndex).Cells("受注番号_仕訳").Value = DgvBillingInfo.Rows(j).Cells("受注番号").Value
+                    'ShiwakeData.Rows(DataIndex).Cells("受注番号枝番_仕訳").Value = DgvBillingInfo.Rows(j).Cells("受注番号枝番").Value
+                    'ShiwakeData.Rows(DataIndex).Cells("得意先コード_仕訳").Value = DgvBillingInfo.Rows(j).Cells("得意先コード").Value
+
+                    'ShiwakeData.Rows(DataIndex).Cells("入金番号_仕訳").Value = DgvDeposit.Rows(i).Cells("入金番号").Value
+                    'ShiwakeData.Rows(DataIndex).Cells("識別番号_仕訳").Value = DgvDeposit.Rows(i).Cells("識別番号").Value
+                    'ShiwakeData.Rows(DataIndex).Cells("行番号_仕訳").Value = DgvDeposit.Rows(i).Cells("行番号").Value
+                    'ShiwakeData.Rows(DataIndex).Cells("入金種別_仕訳").Value = DgvDeposit.Rows(i).Cells("入金種別").Value
+                    'ShiwakeData.Rows(DataIndex).Cells("入金種別名_仕訳").Value = DgvDeposit.Rows(i).Cells("入金種別名").Value
+                    'ShiwakeData.Rows(DataIndex).Cells("入金日_仕訳").Value = DgvDeposit.Rows(i).Cells("入金日").Value
+                    'ShiwakeData.Rows(DataIndex).Cells("入金額_仕訳").Value = decNyukin
+
+                    decNyukin = 0
+                    DataIndex += 1
+                Else
+                    '残高が入金額以下
+                    'Total -= DgvBillingInfo.Rows(j).Cells("請求情報請求残高").Value
+                End If
+
+
+            Next
+        Next
+#End Region
+
+
         For i As Integer = 0 To DgvBillingInfo.Rows.Count - 1
             If DgvBillingInfo.Rows(i).Cells("請求情報請求残高").Value > 0 Then
                 If Total - DgvBillingInfo.Rows(i).Cells("請求情報請求残高").Value > 0 Then
@@ -511,6 +576,9 @@ Public Class DepositManagement
                 End If
             End If
         Next
+
+
+
 
     End Sub
 
@@ -879,7 +947,7 @@ Public Class DepositManagement
                 Sql += "', "
 
                 '請求額請求金額と入金額が一致したら入金完了日を設定する
-                If formatNumber(dsSkyuhd.Tables(RS).Rows(i)("請求金額計")) = formatNumber(DsDeposit) Then
+                If FormatNumber(dsSkyuhd.Tables(RS).Rows(i)("請求金額計")) = FormatNumber(DsDeposit) Then
 
                     Sql += "入金完了日"
                     Sql += " = '"
