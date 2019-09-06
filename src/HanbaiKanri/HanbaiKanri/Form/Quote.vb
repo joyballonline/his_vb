@@ -491,6 +491,13 @@ Public Class Quote
                 '国内
                 txtDomesticArea.Text = 0
             End If
+            '通貨・レート情報設定
+            createCurrencyCombobox(ds1.Tables(RS).Rows(0)("通貨").ToString)
+            setRate()
+
+            '通貨表示：ベースの設定
+            TxtIDRCurrency.Text = setBaseCurrency()
+
 
             '見積明細情報
             Dim Sql3 As String = ""
@@ -530,6 +537,7 @@ Public Class Quote
                 DgvItemList.Rows(index).Cells("輸送費率").Value = ds3.Tables(RS).Rows(index)("輸送費率") * 100
                 DgvItemList.Rows(index).Cells("輸送費額").Value = ds3.Tables(RS).Rows(index)("輸送費額")
                 DgvItemList.Rows(index).Cells("仕入金額").Value = ds3.Tables(RS).Rows(index)("仕入金額")
+                DgvItemList.Rows(index).Cells("売単価_外貨").Value = (Decimal.Parse(ds3.Tables(RS).Rows(index)("売単価")) * Decimal.Parse(TxtRate.Text)).ToString("N2")
                 DgvItemList.Rows(index).Cells("売単価").Value = ds3.Tables(RS).Rows(index)("売単価")
                 DgvItemList.Rows(index).Cells("売上金額").Value = ds3.Tables(RS).Rows(index)("売上金額")
                 DgvItemList.Rows(index).Cells("粗利額").Value = ds3.Tables(RS).Rows(index)("粗利額")
@@ -579,13 +587,6 @@ Public Class Quote
                 No += 1
             Next c
             TxtItemCount.Text = DgvItemList.Rows.Count()
-
-            '通貨・レート情報設定
-            createCurrencyCombobox(ds1.Tables(RS).Rows(0)("通貨").ToString)
-            setRate()
-
-            '通貨表示：ベースの設定
-            TxtIDRCurrency.Text = setBaseCurrency()
 
         Else
 

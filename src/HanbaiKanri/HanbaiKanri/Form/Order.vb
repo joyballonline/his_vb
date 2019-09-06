@@ -488,7 +488,7 @@ Public Class Order
                 TxtOrderRemark.Text = ds1.Tables(RS).Rows(0)("備考")
             End If
             If ds1.Tables(RS).Rows(0)("ＶＡＴ") IsNot DBNull.Value Then
-                TxtVat.Text = ds1.Tables(RS).Rows(0)("ＶＡＴ")
+                TxtVat.Text = Decimal.Parse(ds1.Tables(RS).Rows(0)("ＶＡＴ")).ToString("N1")
             End If
             If ds1.Tables(RS).Rows(0)("粗利額") IsNot DBNull.Value Then
                 txtProfitmargin.Text = ds1.Tables(RS).Rows(0)("粗利額")
@@ -792,6 +792,22 @@ Public Class Order
     Private Sub BtnRegistration_Click(sender As Object, e As EventArgs) Handles BtnRegistration.Click
         Dim reccnt As Integer = 0
         Dim dtNow As String = UtilClass.formatDatetime(DateTime.Now)
+
+        'TxtVatの属性チェック
+        Dim strMessage As String
+        Dim strMessageTitle As String
+
+        If Not IsNumeric(TxtVat.Text) Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+                strMessage = "Please enter with 0<= VAT <100. "
+                strMessageTitle = "VAT Error"
+            Else
+                strMessage = "0<= VAT <100 の範囲で入力してください。"
+                strMessageTitle = "ＶＡＴ入力エラー"
+            End If
+            Dim result As DialogResult = MessageBox.Show(strMessage, strMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Exit Sub
+        End If
 
         '登録、編集、複写モードの時
         If OrderStatus = CommonConst.STATUS_ADD Or OrderStatus = CommonConst.STATUS_EDIT Or OrderStatus = CommonConst.STATUS_CLONE Then
@@ -1721,6 +1737,35 @@ Public Class Order
                 setCellValueChanged()
             Next
         End If
+    End Sub
+
+    Private Sub TxtVat_Validated(sender As Object, e As EventArgs) Handles TxtVat.Validated
+        'TxtVatの属性チェック
+        Dim strMessage As String
+        Dim strMessageTitle As String
+
+        If Not IsNumeric(TxtVat.Text) Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+                strMessage = "Please enter with 0<= VAT <100. "
+                strMessageTitle = "VAT Error"
+            Else
+                strMessage = "0<= VAT <100 の範囲で入力してください。"
+                strMessageTitle = "ＶＡＴ入力エラー"
+            End If
+            Dim result As DialogResult = MessageBox.Show(strMessage, strMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Exit Sub
+        End If
+
+        'VAT-OUTの再計算
+        Dim QuoteTotal As Decimal = 0
+        If IsNumeric(TxtQuoteTotal.Text) Then
+            QuoteTotal = Decimal.Parse(TxtQuoteTotal.Text)
+        Else
+            QuoteTotal = 0
+        End If
+
+        TxtVatAmount.Text = ((QuoteTotal * TxtVat.Text) / 100).ToString("N2") 'VAT-OUT
+
     End Sub
 
 End Class
