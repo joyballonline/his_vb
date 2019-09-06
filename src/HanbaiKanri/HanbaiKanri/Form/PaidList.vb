@@ -475,82 +475,43 @@ Public Class PaidList
     '選択データをもとに以下テーブル更新
     't47_shrihd, t49_shrikshihd, t46_kikehd
     Private Sub updateData()
-        Dim dtNow As String = formatDatetime(DateTime.Now)
+        Dim dtNow As String = UtilClass.formatDatetime(DateTime.Now)
         Dim Sql As String = ""
         Dim ds As DataSet
 
-        Sql = " AND"
-        Sql += " 支払番号"
-        Sql += "='"
-        Sql += DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("支払番号").Value
-        Sql += "' "
+        Sql = " AND 支払番号 ='" & DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("支払番号").Value & "'"
 
         '画面を開いた時から対象データに対して更新がされていないかどうか確認
         ds = getDsData("t47_shrihd", Sql)
 
         If ds.Tables(RS).Rows(0)("更新日") = DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("更新日").Value Then
 
-            Sql = "UPDATE "
-            Sql += "Public."
-            Sql += "t47_shrihd "
+            Sql = "UPDATE Public.t47_shrihd "
             Sql += "SET "
 
             Sql += "取消区分 = '" & CommonConst.CANCEL_KBN_DISABLED & "'"
-            Sql += ", "
-            Sql += "取消日"
-            Sql += " = '"
-            Sql += dtNow
-            Sql += "', "
-            Sql += "更新者"
-            Sql += " = '"
-            Sql += frmC01F10_Login.loginValue.TantoNM
-            Sql += "', "
-            Sql += "更新日"
-            Sql += " = '"
-            Sql += dtNow
-            Sql += "' "
+            Sql += ", 取消日 = '" & dtNow & "'"
+            Sql += ", 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+            Sql += ", 更新日 = '" & dtNow & "'"
 
-            Sql += "WHERE"
-            Sql += " 会社コード"
-            Sql += "='"
-            Sql += frmC01F10_Login.loginValue.BumonCD
-            Sql += "'"
-            Sql += " AND"
-            Sql += " 支払番号"
-            Sql += "='"
-            Sql += DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("支払番号").Value
-            Sql += "' "
+            Sql += "WHERE 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += " AND 支払番号 ='" & DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("支払番号").Value & "'"
 
             '支払基本を更新
             _db.executeDB(Sql)
 
-
-            Sql = " AND"
-            Sql += " 支払番号"
-            Sql += "='"
-            Sql += DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("支払番号").Value
-            Sql += "' "
+            Sql = " AND 支払番号 ='" & DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("支払番号").Value & "'"
 
             '支払基本から支払金額計を取得
             Dim dstShrihd As DataSet = getDsData("t47_shrihd", Sql)
             Dim strSiharaiGaku As Decimal = dstShrihd.Tables(RS).Rows(0)("支払金額計")
 
-
-            Sql = " AND"
-            Sql += " 支払番号"
-            Sql += "='"
-            Sql += DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("支払番号").Value
-            Sql += "' "
+            Sql = " AND 支払番号 ='" & DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("支払番号").Value & "'"
 
             '支払消込から買掛番号を取得
             Dim dsShrikshihd As DataSet = getDsData("t49_shrikshihd", Sql)
 
-
-            Sql = " AND"
-            Sql += " 買掛番号"
-            Sql += "='"
-            Sql += dsShrikshihd.Tables(RS).Rows(0)("買掛番号")
-            Sql += "' "
+            Sql = " AND 買掛番号 ='" & dsShrikshihd.Tables(RS).Rows(0)("買掛番号") & "' "
 
             '買掛基本から発注番号を取得
             Dim dsKikehd As DataSet = getDsData("t46_kikehd", Sql)
@@ -559,70 +520,30 @@ Public Class PaidList
             Dim decSiharaiKei As Decimal = dsKikehd.Tables(RS).Rows(0)("支払金額計") - strSiharaiGaku
 
 
-            Sql = "UPDATE "
-            Sql += "Public.t49_shrikshihd "
+            Sql = "UPDATE Public.t49_shrikshihd "
             Sql += "SET "
 
             Sql += "取消区分 = '" & CommonConst.CANCEL_KBN_DISABLED & "'"
-            Sql += ", "
-            Sql += "取消日"
-            Sql += " = '"
-            Sql += dtNow
-            Sql += "', "
-            Sql += "更新者"
-            Sql += " = '"
-            Sql += frmC01F10_Login.loginValue.TantoNM
-            Sql += "', "
-            Sql += "更新日"
-            Sql += " = '"
-            Sql += dtNow
-            Sql += "' "
+            Sql += ", 取消日 = '" & dtNow & "'"
+            Sql += ", 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+            Sql += ", 更新日 = '" & dtNow & "'"
 
-            Sql += "WHERE"
-            Sql += " 会社コード"
-            Sql += "='"
-            Sql += frmC01F10_Login.loginValue.BumonCD
-            Sql += "'"
-            Sql += " AND"
-            Sql += " 支払番号"
-            Sql += "='"
-            Sql += DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("支払番号").Value
-            Sql += "' "
+            Sql += "WHERE 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += " AND 支払番号 ='" & DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("支払番号").Value & "'"
 
             '支払消込基本を更新
             _db.executeDB(Sql)
 
-            Sql = "UPDATE "
-            Sql += "Public.t46_kikehd "
+            Sql = "UPDATE Public.t46_kikehd "
             Sql += "SET "
 
-            Sql += "買掛残高"
-            Sql += " = '"
-            Sql += formatNumber(decKaikakeZan) '買掛残高を増やす
-            Sql += "', "
-            Sql += "支払金額計"
-            Sql += " = '"
-            Sql += formatNumber(decSiharaiKei) '支払金額計を減らす
-            Sql += "', "
-            Sql += "更新者"
-            Sql += " = '"
-            Sql += frmC01F10_Login.loginValue.TantoNM
-            Sql += "', "
-            Sql += "更新日"
-            Sql += " = '"
-            Sql += dtNow
-            Sql += "' "
+            Sql += "買掛残高 = " & UtilClass.formatNumber(decKaikakeZan) '買掛残高を増やす
+            Sql += ", 支払金額計 = " & UtilClass.formatNumber(decSiharaiKei) '支払金額計を減らす
+            Sql += ", 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+            Sql += ", 更新日 = '" & dtNow & "'"
 
-            Sql += "WHERE"
-            Sql += " 会社コード"
-            Sql += "='"
-            Sql += frmC01F10_Login.loginValue.BumonCD
-            Sql += "'"
-            Sql += " AND"
-            Sql += " 買掛番号"
-            Sql += "='"
-            Sql += dsShrikshihd.Tables(RS).Rows(0)("買掛番号")
-            Sql += "' "
+            Sql += "WHERE 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += " AND 買掛番号 ='" & dsShrikshihd.Tables(RS).Rows(0)("買掛番号") & "'"
 
             '買掛基本を更新
             _db.executeDB(Sql)
@@ -655,15 +576,10 @@ Public Class PaidList
         Dim reccnt As Integer = 0 'DB用（デフォルト）
         Dim Sql As String = ""
 
-        Sql += "SELECT"
-        Sql += " *"
-        Sql += " FROM "
+        Sql += "SELECT * FROM "
 
         Sql += "public." & tableName
-        Sql += " WHERE "
-        Sql += "会社コード"
-        Sql += " ILIKE  "
-        Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql += txtParam
 
         Return _db.selectDB(Sql, RS, reccnt)
@@ -700,11 +616,10 @@ Public Class PaidList
         Dim Sql As String = ""
 
         Sql = " AND "
-        Sql += "固定キー ILIKE '" & prmFixed & "'"
+        Sql += "固定キー = '" & prmFixed & "'"
 
         If prmVariable IsNot "" Then
-            Sql += " AND "
-            Sql += "可変キー ILIKE '" & prmVariable & "'"
+            Sql += " AND 可変キー = '" & prmVariable & "'"
         End If
 
         'リードタイムのリストを汎用マスタから取得
