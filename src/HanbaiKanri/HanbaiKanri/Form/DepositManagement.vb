@@ -328,6 +328,8 @@ Public Class DepositManagement
             Sql += " AND t26.通貨 = " & CurCode
         End If
 
+        Sql += " order by t26.入金番号,t26.行番号"
+
 
         '得意先と一致する入金明細を取得
         Dim dsNkindt As DataSet = _db.selectDB(Sql, RS, reccnt)
@@ -422,6 +424,8 @@ Public Class DepositManagement
 
             '非可視
             DgvBillingInfo.Rows(i).Cells("請求区分").Value = dsSkyuhd.Tables(RS).Rows(i)("請求区分")
+            DgvBillingInfo.Rows(i).Cells("受注番号枝番").Value = dsSkyuhd.Tables(RS).Rows(i)("受注番号枝番")
+            DgvBillingInfo.Rows(i).Cells("得意先コード").Value = dsSkyuhd.Tables(RS).Rows(i)("得意先コード")
 
         Next
 
@@ -488,6 +492,12 @@ Public Class DepositManagement
             DgvBillingInfo.Rows(i).Cells("請求情報請求残高").Value = DgvBillingInfo.Rows(i).Cells("請求情報請求残高固定").Value
         Next
 
+        '一旦自動振分をリセット
+        For i As Integer = 0 To DgvDeposit.Rows.Count - 1
+            DgvDeposit.Rows(i).Cells("入力入金額_計算用").Value = DgvDeposit.Rows(i).Cells("入力入金額").Value
+        Next
+
+
         '買掛金額より支払金額が大きい場合はアラート
         If Total > DgvCustomer.Rows(0).Cells("請求残高").Value Then
             _msgHd.dspMSG("chkReceiptBalanceError", frmC01F10_Login.loginValue.Language)
@@ -499,58 +509,82 @@ Public Class DepositManagement
 #Region "仕訳データ"  '仕訳用のテーブルを作成  
 
         '非可視のデータグリッドを削除 全ての列を選択
-        Me.ShiwakeData.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-
-        ' 選択されている行をデータグリッドからすべて削除
-        For Each row As DataGridViewRow In Me.ShiwakeData.SelectedRows
-
-            ' オブジェクト指定で行を削除する
-            Me.ShiwakeData.Rows.Remove(row)
-        Next
+        '行を数えて、全行のデータを削除します。
+        If Me.ShiwakeData.Rows.Count > 0 Then
+            '新規行の追加を許可している場合は、「Count - 1」を
+            '「Count - 2」にしてください。
+            For i As Integer = 0 To Me.ShiwakeData.Rows.Count - 1 Step 1
+                Me.ShiwakeData.Rows.RemoveAt(0)
+            Next
+        End If
 
 
         '入金データ
         Dim DataIndex As Integer = 0
-        For i As Integer = 0 To DgvDeposit.Rows.Count - 1
 
-            Dim decNyukin As Decimal = DgvDeposit.Rows(i).Cells("入力入金額").Value
+        '請求データ
+        For j As Integer = 0 To DgvBillingInfo.Rows.Count - 1
 
-            '請求データ
-            For j As Integer = 0 To DgvBillingInfo.Rows.Count - 1
+            Dim decZandaka As Decimal = DgvBillingInfo.Rows(j).Cells("請求情報請求残高").Value
+
+            If decZandaka = 0 Then
+                '何もしない
+            Else
+
+                '入金データ
+                For i As Integer = 0 To DgvDeposit.Rows.Count - 1
+
+                    Dim decNyukin As Decimal = DgvDeposit.Rows(i).Cells("入力入金額_計算用").Value
+
+                    If decZandaka =0 OrElse decNyukin = 0 Then
+                        '何もしない
+                    Else
+
+                        Dim col = DgvDeposit.Item(1, i)
+                        Console.WriteLine(col.Value)
+                        Console.WriteLine(col.FormattedValue)
+
+                        '非可視のデータグリッドへ挿入
+                        ShiwakeData.Rows.Add()
+                        ShiwakeData.Rows(DataIndex).Cells("請求番号_仕訳").Value = DgvBillingInfo.Rows(j).Cells("請求情報請求番号").Value
+                        ShiwakeData.Rows(DataIndex).Cells("請求区分_仕訳").Value = DgvBillingInfo.Rows(j).Cells("請求区分").Value
+                        ShiwakeData.Rows(DataIndex).Cells("請求日_仕訳").Value = DgvBillingInfo.Rows(j).Cells("請求日").Value
+                        ShiwakeData.Rows(DataIndex).Cells("受注番号_仕訳").Value = DgvBillingInfo.Rows(j).Cells("受注番号").Value
+                        ShiwakeData.Rows(DataIndex).Cells("受注番号枝番_仕訳").Value = DgvBillingInfo.Rows(j).Cells("受注番号枝番").Value
+                        ShiwakeData.Rows(DataIndex).Cells("得意先コード_仕訳").Value = DgvBillingInfo.Rows(j).Cells("得意先コード").Value
+
+                        'ShiwakeData.Rows(DataIndex).Cells("入金番号_仕訳").Value = DgvDeposit.Rows(i).Cells("入金番号").Value
+                        ShiwakeData.Rows(DataIndex).Cells("識別番号_仕訳").Value = DgvDeposit.Rows(i).Cells("行番号").Value
+                        ShiwakeData.Rows(DataIndex).Cells("行番号_仕訳").Value = DataIndex + 1
+                        ShiwakeData.Rows(DataIndex).Cells("入金種目_仕訳").Value = DgvDeposit.Rows(i).Cells("入金種目").Value
+                        ShiwakeData.Rows(DataIndex).Cells("入金種目名_仕訳").Value = col.FormattedValue
 
 
-                If DgvBillingInfo.Rows(j).Cells("請求情報請求残高").Value = 0 Then
-                    '何もしない
-                ElseIf DgvBillingInfo.Rows(j).Cells("請求情報請求残高").Value > decNyukin AndAlso decNyukin > 0 Then
-                    '残高が入金額より多い
+                        If decZandaka > decNyukin Then
+                            '残高が入金額より多い
 
+                            ShiwakeData.Rows(DataIndex).Cells("入金額_仕訳").Value = decNyukin
 
-                    '非可視のデータグリッドへ挿入
-                    ShiwakeData.Rows.Add()
-                    ShiwakeData.Rows(DataIndex).Cells("請求番号_仕訳").Value = DgvBillingInfo.Rows(j).Cells("請求情報請求番号").Value
-                    ShiwakeData.Rows(DataIndex).Cells("請求区分_仕訳").Value = DgvBillingInfo.Rows(j).Cells("請求区分").Value
-                    ShiwakeData.Rows(DataIndex).Cells("請求日_仕訳").Value = DgvBillingInfo.Rows(j).Cells("請求日").Value
-                    ShiwakeData.Rows(DataIndex).Cells("受注番号_仕訳").Value = DgvBillingInfo.Rows(j).Cells("受注番号").Value
-                    'ShiwakeData.Rows(DataIndex).Cells("受注番号枝番_仕訳").Value = DgvBillingInfo.Rows(j).Cells("受注番号枝番").Value
-                    'ShiwakeData.Rows(DataIndex).Cells("得意先コード_仕訳").Value = DgvBillingInfo.Rows(j).Cells("得意先コード").Value
+                            DgvDeposit.Rows(i).Cells("入力入金額_計算用").Value = 0
 
-                    'ShiwakeData.Rows(DataIndex).Cells("入金番号_仕訳").Value = DgvDeposit.Rows(i).Cells("入金番号").Value
-                    'ShiwakeData.Rows(DataIndex).Cells("識別番号_仕訳").Value = DgvDeposit.Rows(i).Cells("識別番号").Value
-                    'ShiwakeData.Rows(DataIndex).Cells("行番号_仕訳").Value = DgvDeposit.Rows(i).Cells("行番号").Value
-                    'ShiwakeData.Rows(DataIndex).Cells("入金種別_仕訳").Value = DgvDeposit.Rows(i).Cells("入金種別").Value
-                    'ShiwakeData.Rows(DataIndex).Cells("入金種別名_仕訳").Value = DgvDeposit.Rows(i).Cells("入金種別名").Value
-                    'ShiwakeData.Rows(DataIndex).Cells("入金日_仕訳").Value = DgvDeposit.Rows(i).Cells("入金日").Value
-                    'ShiwakeData.Rows(DataIndex).Cells("入金額_仕訳").Value = decNyukin
+                            decZandaka -= decNyukin
+                        Else
+                            '残高が入金額以下
 
-                    decNyukin = 0
-                    DataIndex += 1
-                Else
-                    '残高が入金額以下
-                    'Total -= DgvBillingInfo.Rows(j).Cells("請求情報請求残高").Value
-                End If
+                            ShiwakeData.Rows(DataIndex).Cells("入金額_仕訳").Value = decZandaka
 
+                            DgvDeposit.Rows(i).Cells("入力入金額_計算用").Value -= decZandaka
 
-            Next
+                            decZandaka = 0
+
+                        End If
+
+                        DataIndex += 1
+
+                    End If
+
+                Next
+            End If
         Next
 #End Region
 
@@ -981,6 +1015,56 @@ Public Class DepositManagement
                 SellingBalance = 0
 
             End If
+
+        Next
+
+
+        't80_shiwakenyu 仕訳用の入金テーブルを追加
+        For i As Integer = 0 To ShiwakeData.Rows.Count - 1
+
+            Sql = "INSERT INTO "
+            Sql += "Public."
+            Sql += "t80_shiwakenyu("
+            Sql += "会社コード, 請求番号,請求区分,請求日,受注番号,受注番号枝番,得意先コード"
+            Sql += ",入金番号,識別番号,行番号,入金種目,入金種目名,入金日,入金額,登録日,更新者"
+
+            Sql += ") VALUES('"
+            Sql += CompanyCode
+            Sql += "', '"
+            Sql += ShiwakeData.Rows(i).Cells("請求番号_仕訳").Value.ToString
+            Sql += "', '"
+            Sql += ShiwakeData.Rows(i).Cells("請求区分_仕訳").Value.ToString
+            Sql += "', '"
+            Sql += ShiwakeData.Rows(i).Cells("請求日_仕訳").Value.ToString
+            Sql += "', '"
+            Sql += ShiwakeData.Rows(i).Cells("受注番号_仕訳").Value.ToString
+            Sql += "', '"
+            Sql += ShiwakeData.Rows(i).Cells("受注番号枝番_仕訳").Value.ToString
+            Sql += "', '"
+            Sql += ShiwakeData.Rows(i).Cells("得意先コード_仕訳").Value.ToString
+            Sql += "', '"
+            Sql += PMSaiban
+            Sql += "', '"
+            Sql += ShiwakeData.Rows(i).Cells("識別番号_仕訳").Value.ToString
+            Sql += "', '"
+            Sql += ShiwakeData.Rows(i).Cells("行番号_仕訳").Value.ToString
+            Sql += "', '"
+            Sql += ShiwakeData.Rows(i).Cells("入金種目_仕訳").Value.ToString
+            Sql += "', '"
+            Sql += ShiwakeData.Rows(i).Cells("入金種目名_仕訳").Value.ToString
+            Sql += "', '"
+            Sql += dtNyukinday  '入金日
+            Sql += "', '"
+            Sql += UtilClass.formatNumber(ShiwakeData.Rows(i).Cells("入金額_仕訳").Value.ToString)
+            Sql += "', '"
+            Sql += dtToday      '登録日
+            Sql += "', '"
+            Sql += frmC01F10_Login.loginValue.TantoNM
+
+
+            Sql += "')"
+
+            _db.executeDB(Sql)
 
         Next
 
