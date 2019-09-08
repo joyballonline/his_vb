@@ -141,6 +141,7 @@ Public Class DepositList
 
         '右寄せ
         DgvCustomer.Columns("請求金額残_外貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvCustomer.Columns("売掛金額_外貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvCustomer.Columns("既入金額_外貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvCustomer.Columns("売掛残高_外貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvCustomer.Columns("請求金額残").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -148,6 +149,7 @@ Public Class DepositList
 
         '数字形式
         DgvCustomer.Columns("請求金額残_外貨").DefaultCellStyle.Format = "N2"
+        DgvCustomer.Columns("売掛金額_外貨").DefaultCellStyle.Format = "N2"
         DgvCustomer.Columns("既入金額_外貨").DefaultCellStyle.Format = "N2"
         DgvCustomer.Columns("売掛残高_外貨").DefaultCellStyle.Format = "N2"
         DgvCustomer.Columns("請求金額残").DefaultCellStyle.Format = "N2"
