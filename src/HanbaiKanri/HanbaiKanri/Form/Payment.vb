@@ -317,6 +317,8 @@ Public Class Payment
             Sql += " AND t48.通貨 = " & CurCode
         End If
 
+        Sql += " order by t48.行番号"
+
 
         '支払先と一致する支払明細を取得
         Dim dsShridt As DataSet = _db.selectDB(Sql, RS, reccnt)
@@ -405,6 +407,13 @@ Public Class Payment
                 DgvKikeInfo.Rows(i).Cells("買掛情報買掛残高固定").Value = dsKikehd.Tables(RS).Rows(i)("買掛金額計_外貨") - dsKikehd.Tables(RS).Rows(i)("支払金額計_外貨")
             End If
             DgvKikeInfo.Rows(i).Cells("支払金額").Value = 0
+
+            '非可視
+            DgvKikeInfo.Rows(i).Cells("買掛区分").Value = dsKikehd.Tables(RS).Rows(i)("買掛区分")
+            DgvKikeInfo.Rows(i).Cells("発注番号枝番").Value = dsKikehd.Tables(RS).Rows(i)("発注番号枝番")
+            DgvKikeInfo.Rows(i).Cells("仕入先コード").Value = dsKikehd.Tables(RS).Rows(i)("仕入先コード")
+            DgvKikeInfo.Rows(i).Cells("客先番号").Value = dsKikehd.Tables(RS).Rows(i)("客先番号")
+
         Next
 
     End Sub
@@ -466,6 +475,11 @@ Public Class Payment
             DgvKikeInfo.Rows(i).Cells("買掛情報買掛残高").Value = DgvKikeInfo.Rows(i).Cells("買掛情報買掛残高固定").Value
         Next
 
+        '一旦自動振分をリセット
+        For i As Integer = 0 To DgvPayment.Rows.Count - 1
+            DgvPayment.Rows(i).Cells("入力支払額_計算用").Value = DgvPayment.Rows(i).Cells("入力支払金額").Value
+        Next
+
 
         '買掛金額より支払金額が大きい場合はアラート
         If Total > DgvSupplier.Rows(0).Cells("買掛残高").Value Then
@@ -473,6 +487,91 @@ Public Class Payment
 
             Return
         End If
+
+
+#Region "仕訳データ"  '仕訳用のテーブルを作成  
+
+        '非可視のデータグリッドを削除 全ての列を選択
+        '行を数えて、全行のデータを削除します。
+        If Me.ShiwakeData.Rows.Count > 0 Then
+            '新規行の追加を許可している場合は、「Count - 1」を
+            '「Count - 2」にしてください。
+            For i As Integer = 0 To Me.ShiwakeData.Rows.Count - 1 Step 1
+                Me.ShiwakeData.Rows.RemoveAt(0)
+            Next
+        End If
+
+
+        '支払データ
+        Dim DataIndex As Integer = 0
+
+        '買掛データ
+        For j As Integer = 0 To DgvKikeInfo.Rows.Count - 1
+
+            Dim decZandaka As Decimal = DgvKikeInfo.Rows(j).Cells("買掛情報買掛残高").Value
+
+            If decZandaka = 0 Then
+                '何もしない
+            Else
+
+                '支払データ
+                For i As Integer = 0 To DgvPayment.Rows.Count - 1
+
+                    Dim decShiharai As Decimal = DgvPayment.Rows(i).Cells("入力支払額_計算用").Value
+
+                    If decZandaka = 0 OrElse decShiharai = 0 Then
+                        '何もしない
+                    Else
+
+                        Dim col = DgvPayment.Item(1, i)
+                        Console.WriteLine(col.Value)
+                        Console.WriteLine(col.FormattedValue)
+
+                        '非可視のデータグリッドへ挿入
+                        ShiwakeData.Rows.Add()
+                        ShiwakeData.Rows(DataIndex).Cells("買掛番号_仕訳").Value = DgvKikeInfo.Rows(j).Cells("買掛情報買掛番号").Value
+                        ShiwakeData.Rows(DataIndex).Cells("買掛区分_仕訳").Value = DgvKikeInfo.Rows(j).Cells("買掛区分").Value
+                        ShiwakeData.Rows(DataIndex).Cells("買掛日_仕訳").Value = DgvKikeInfo.Rows(j).Cells("買掛日").Value
+                        ShiwakeData.Rows(DataIndex).Cells("発注番号_仕訳").Value = DgvKikeInfo.Rows(j).Cells("発注番号").Value
+                        ShiwakeData.Rows(DataIndex).Cells("発注番号枝番_仕訳").Value = DgvKikeInfo.Rows(j).Cells("発注番号枝番").Value
+                        ShiwakeData.Rows(DataIndex).Cells("仕入先コード_仕訳").Value = DgvKikeInfo.Rows(j).Cells("仕入先コード").Value
+
+                        'ShiwakeData.Rows(DataIndex).Cells("入金番号_仕訳").Value = DgvPayment.Rows(i).Cells("入金番号").Value
+                        ShiwakeData.Rows(DataIndex).Cells("識別番号_仕訳").Value = DgvPayment.Rows(i).Cells("行番号").Value
+                        ShiwakeData.Rows(DataIndex).Cells("行番号_仕訳").Value = DataIndex + 1
+                        ShiwakeData.Rows(DataIndex).Cells("支払種目_仕訳").Value = DgvPayment.Rows(i).Cells("支払種目").Value
+                        ShiwakeData.Rows(DataIndex).Cells("支払種目名_仕訳").Value = col.FormattedValue
+
+                        ShiwakeData.Rows(DataIndex).Cells("客先番号_仕訳").Value = DgvKikeInfo.Rows(j).Cells("客先番号").Value
+
+                        If decZandaka > decShiharai Then
+                            '残高が入金額より多い
+
+                            ShiwakeData.Rows(DataIndex).Cells("支払額_仕訳").Value = decShiharai
+
+                            DgvPayment.Rows(i).Cells("入力支払額_計算用").Value = 0
+
+                            decZandaka -= decShiharai
+                        Else
+                            '残高が入金額以下
+
+                            ShiwakeData.Rows(DataIndex).Cells("支払額_仕訳").Value = decZandaka
+
+                            DgvPayment.Rows(i).Cells("入力支払額_計算用").Value -= decZandaka
+
+                            decZandaka = 0
+
+                        End If
+
+                        DataIndex += 1
+
+                    End If
+
+                Next
+            End If
+        Next
+#End Region
+
 
         For i As Integer = 0 To DgvKikeInfo.Rows.Count - 1
             If DgvKikeInfo.Rows(i).Cells("買掛情報買掛残高").Value > 0 Then
@@ -614,6 +713,8 @@ Public Class Payment
     Private Sub BtnRegist_Click(sender As Object, e As EventArgs) Handles BtnRegist.Click
         Dim errflg As Boolean = True
         Dim dtToday As String = UtilClass.formatDatetime(DateTime.Now)
+        Dim dtShiharaiday As String = UtilClass.formatDatetime(DtpDepositDate.Value)
+
         Dim reccnt As Integer = 0
 
         Dim PaymentAmount As Decimal = 0
@@ -640,7 +741,7 @@ Public Class Payment
         Next
 
         '買掛残高
-        For i As Integer = 0 To DgvPayment.Rows.Count - 1
+        For i As Integer = 0 To DgvKikeInfo.Rows.Count - 1
             Balance += DgvKikeInfo.Rows(i).Cells("買掛情報買掛残高").Value
         Next
 
@@ -983,6 +1084,58 @@ Public Class Payment
                 _db.executeDB(Sql)
 
             End If
+
+        Next
+
+
+        't81_shiwakeshi 仕訳用の支払テーブルを追加
+        For i As Integer = 0 To ShiwakeData.Rows.Count - 1
+
+            Sql = "INSERT INTO "
+            Sql += "Public."
+            Sql += "t81_shiwakeshi("
+            Sql += "会社コード, 買掛番号,買掛区分,買掛日,発注番号,発注番号枝番,仕入先コード"
+            Sql += ",支払番号,識別番号,行番号,支払種目,支払種目名,支払日,支払額,登録日,更新者"
+            Sql += ",客先番号"
+
+            Sql += ") VALUES('"
+            Sql += CompanyCode
+            Sql += "', '"
+            Sql += ShiwakeData.Rows(i).Cells("買掛番号_仕訳").Value.ToString
+            Sql += "', '"
+            Sql += ShiwakeData.Rows(i).Cells("買掛区分_仕訳").Value.ToString
+            Sql += "', '"
+            Sql += UtilClass.strFormatDate(ShiwakeData.Rows(i).Cells("買掛日_仕訳").Value.ToString）
+            Sql += "', '"
+            Sql += ShiwakeData.Rows(i).Cells("発注番号_仕訳").Value.ToString
+            Sql += "', '"
+            Sql += ShiwakeData.Rows(i).Cells("発注番号枝番_仕訳").Value.ToString
+            Sql += "', '"
+            Sql += ShiwakeData.Rows(i).Cells("仕入先コード_仕訳").Value.ToString
+            Sql += "', '"
+            Sql += APSaiban
+            Sql += "', '"
+            Sql += ShiwakeData.Rows(i).Cells("識別番号_仕訳").Value.ToString
+            Sql += "', '"
+            Sql += ShiwakeData.Rows(i).Cells("行番号_仕訳").Value.ToString
+            Sql += "', '"
+            Sql += ShiwakeData.Rows(i).Cells("支払種目_仕訳").Value.ToString
+            Sql += "', '"
+            Sql += ShiwakeData.Rows(i).Cells("支払種目名_仕訳").Value.ToString
+            Sql += "', '"
+            Sql += dtShiharaiday  '支払日
+            Sql += "', '"
+            Sql += UtilClass.formatNumber(ShiwakeData.Rows(i).Cells("支払額_仕訳").Value.ToString)
+            Sql += "', '"
+            Sql += dtToday      '登録日
+            Sql += "', '"
+            Sql += frmC01F10_Login.loginValue.TantoNM
+            Sql += "', '"
+            Sql += ShiwakeData.Rows(i).Cells("客先番号_仕訳").Value.ToString
+
+            Sql += "')"
+
+            _db.executeDB(Sql)
 
         Next
 

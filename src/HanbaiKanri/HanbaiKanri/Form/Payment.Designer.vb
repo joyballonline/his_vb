@@ -24,10 +24,11 @@ Partial Class Payment
     Private Sub InitializeComponent()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -50,8 +51,6 @@ Partial Class Payment
         Me.支払済支払金額計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.備考 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DgvPayment = New System.Windows.Forms.DataGridView()
-        Me.行番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.入力支払金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LblNo3 = New System.Windows.Forms.Label()
         Me.TxtKikeCount = New System.Windows.Forms.TextBox()
         Me.BtnAdd = New System.Windows.Forms.Button()
@@ -76,6 +75,23 @@ Partial Class Payment
         Me.LblMode = New System.Windows.Forms.Label()
         Me.TxtIDRCurrency = New System.Windows.Forms.TextBox()
         Me.LblIDRCurrency = New System.Windows.Forms.Label()
+        Me.ShiwakeData = New System.Windows.Forms.DataGridView()
+        Me.買掛番号_仕訳 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.買掛区分_仕訳 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.買掛日_仕訳 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.発注番号_仕訳 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.発注番号枝番_仕訳 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入先コード_仕訳 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.支払番号_仕訳 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.識別番号_仕訳 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.行番号_仕訳 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.支払種目_仕訳 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.支払種目名_仕訳 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.支払額_仕訳 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.客先番号_仕訳 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.行番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.入力支払金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.入力支払額_計算用 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.InfoNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.発注番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.仕入先請求番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -87,10 +103,15 @@ Partial Class Payment
         Me.買掛情報買掛残高 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.買掛情報買掛残高固定 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.支払金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.買掛区分 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.発注番号枝番 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入先コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.客先番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DgvHistory, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvPayment, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvSupplier, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvKikeInfo, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ShiwakeData, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'BtnDelete
@@ -187,7 +208,7 @@ Partial Class Payment
         '
         Me.DgvPayment.AllowUserToAddRows = False
         Me.DgvPayment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvPayment.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.行番号, Me.入力支払金額})
+        Me.DgvPayment.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.行番号, Me.入力支払金額, Me.入力支払額_計算用})
         Me.DgvPayment.Location = New System.Drawing.Point(12, 229)
         Me.DgvPayment.Name = "DgvPayment"
         Me.DgvPayment.RowHeadersVisible = False
@@ -195,24 +216,6 @@ Partial Class Payment
         Me.DgvPayment.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
         Me.DgvPayment.Size = New System.Drawing.Size(1327, 100)
         Me.DgvPayment.TabIndex = 5
-        '
-        '行番号
-        '
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.行番号.DefaultCellStyle = DataGridViewCellStyle3
-        Me.行番号.HeaderText = "行番号"
-        Me.行番号.Name = "行番号"
-        Me.行番号.ReadOnly = True
-        Me.行番号.Width = 70
-        '
-        '入力支払金額
-        '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.入力支払金額.DefaultCellStyle = DataGridViewCellStyle4
-        Me.入力支払金額.HeaderText = "今回支払金額"
-        Me.入力支払金額.MaxInputLength = 14
-        Me.入力支払金額.Name = "入力支払金額"
-        Me.入力支払金額.Width = 130
         '
         'LblNo3
         '
@@ -430,7 +433,7 @@ Partial Class Payment
         '
         Me.DgvKikeInfo.AllowUserToAddRows = False
         Me.DgvKikeInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvKikeInfo.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.InfoNo, Me.発注番号, Me.仕入先請求番号, Me.買掛情報買掛番号, Me.買掛日, Me.買掛金額, Me.買掛情報支払金額計, Me.支払金額計固定, Me.買掛情報買掛残高, Me.買掛情報買掛残高固定, Me.支払金額})
+        Me.DgvKikeInfo.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.InfoNo, Me.発注番号, Me.仕入先請求番号, Me.買掛情報買掛番号, Me.買掛日, Me.買掛金額, Me.買掛情報支払金額計, Me.支払金額計固定, Me.買掛情報買掛残高, Me.買掛情報買掛残高固定, Me.支払金額, Me.買掛区分, Me.発注番号枝番, Me.仕入先コード, Me.客先番号})
         Me.DgvKikeInfo.Location = New System.Drawing.Point(12, 363)
         Me.DgvKikeInfo.Name = "DgvKikeInfo"
         Me.DgvKikeInfo.RowHeadersVisible = False
@@ -485,6 +488,113 @@ Partial Class Payment
         Me.LblIDRCurrency.TabIndex = 331
         Me.LblIDRCurrency.Text = "通貨"
         Me.LblIDRCurrency.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'ShiwakeData
+        '
+        Me.ShiwakeData.AllowUserToAddRows = False
+        Me.ShiwakeData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.ShiwakeData.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.買掛番号_仕訳, Me.買掛区分_仕訳, Me.買掛日_仕訳, Me.発注番号_仕訳, Me.発注番号枝番_仕訳, Me.仕入先コード_仕訳, Me.支払番号_仕訳, Me.識別番号_仕訳, Me.行番号_仕訳, Me.支払種目_仕訳, Me.支払種目名_仕訳, Me.支払額_仕訳, Me.客先番号_仕訳})
+        Me.ShiwakeData.Location = New System.Drawing.Point(29, 469)
+        Me.ShiwakeData.Name = "ShiwakeData"
+        Me.ShiwakeData.RowHeadersVisible = False
+        Me.ShiwakeData.RowTemplate.Height = 21
+        Me.ShiwakeData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
+        Me.ShiwakeData.Size = New System.Drawing.Size(969, 80)
+        Me.ShiwakeData.TabIndex = 333
+        Me.ShiwakeData.Visible = False
+        '
+        '買掛番号_仕訳
+        '
+        Me.買掛番号_仕訳.HeaderText = "買掛番号"
+        Me.買掛番号_仕訳.Name = "買掛番号_仕訳"
+        '
+        '買掛区分_仕訳
+        '
+        Me.買掛区分_仕訳.HeaderText = "買掛区分"
+        Me.買掛区分_仕訳.Name = "買掛区分_仕訳"
+        '
+        '買掛日_仕訳
+        '
+        Me.買掛日_仕訳.HeaderText = "買掛日"
+        Me.買掛日_仕訳.Name = "買掛日_仕訳"
+        '
+        '発注番号_仕訳
+        '
+        Me.発注番号_仕訳.HeaderText = "発注番号"
+        Me.発注番号_仕訳.Name = "発注番号_仕訳"
+        '
+        '発注番号枝番_仕訳
+        '
+        Me.発注番号枝番_仕訳.HeaderText = "発注番号枝番"
+        Me.発注番号枝番_仕訳.Name = "発注番号枝番_仕訳"
+        '
+        '仕入先コード_仕訳
+        '
+        Me.仕入先コード_仕訳.HeaderText = "仕入先コード"
+        Me.仕入先コード_仕訳.Name = "仕入先コード_仕訳"
+        '
+        '支払番号_仕訳
+        '
+        Me.支払番号_仕訳.HeaderText = "支払番号"
+        Me.支払番号_仕訳.Name = "支払番号_仕訳"
+        '
+        '識別番号_仕訳
+        '
+        Me.識別番号_仕訳.HeaderText = "識別番号"
+        Me.識別番号_仕訳.Name = "識別番号_仕訳"
+        '
+        '行番号_仕訳
+        '
+        DataGridViewCellStyle18.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.行番号_仕訳.DefaultCellStyle = DataGridViewCellStyle18
+        Me.行番号_仕訳.HeaderText = "行番号"
+        Me.行番号_仕訳.Name = "行番号_仕訳"
+        Me.行番号_仕訳.ReadOnly = True
+        Me.行番号_仕訳.Width = 70
+        '
+        '支払種目_仕訳
+        '
+        Me.支払種目_仕訳.HeaderText = "支払種別"
+        Me.支払種目_仕訳.Name = "支払種目_仕訳"
+        '
+        '支払種目名_仕訳
+        '
+        Me.支払種目名_仕訳.HeaderText = "支払種別名"
+        Me.支払種目名_仕訳.Name = "支払種目名_仕訳"
+        '
+        '支払額_仕訳
+        '
+        Me.支払額_仕訳.HeaderText = "支払額"
+        Me.支払額_仕訳.Name = "支払額_仕訳"
+        '
+        '客先番号_仕訳
+        '
+        Me.客先番号_仕訳.HeaderText = "客先番号"
+        Me.客先番号_仕訳.Name = "客先番号_仕訳"
+        '
+        '行番号
+        '
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.行番号.DefaultCellStyle = DataGridViewCellStyle3
+        Me.行番号.HeaderText = "行番号"
+        Me.行番号.Name = "行番号"
+        Me.行番号.ReadOnly = True
+        Me.行番号.Width = 70
+        '
+        '入力支払金額
+        '
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.入力支払金額.DefaultCellStyle = DataGridViewCellStyle4
+        Me.入力支払金額.HeaderText = "今回支払金額"
+        Me.入力支払金額.MaxInputLength = 14
+        Me.入力支払金額.Name = "入力支払金額"
+        Me.入力支払金額.Width = 130
+        '
+        '入力支払額_計算用
+        '
+        Me.入力支払額_計算用.HeaderText = "入力支払額_計算用"
+        Me.入力支払額_計算用.Name = "入力支払額_計算用"
+        Me.入力支払額_計算用.Visible = False
         '
         'InfoNo
         '
@@ -586,10 +696,35 @@ Partial Class Payment
         Me.支払金額.Name = "支払金額"
         Me.支払金額.Width = 150
         '
+        '買掛区分
+        '
+        Me.買掛区分.HeaderText = "買掛区分"
+        Me.買掛区分.Name = "買掛区分"
+        Me.買掛区分.Visible = False
+        '
+        '発注番号枝番
+        '
+        Me.発注番号枝番.HeaderText = "発注番号枝番"
+        Me.発注番号枝番.Name = "発注番号枝番"
+        Me.発注番号枝番.Visible = False
+        '
+        '仕入先コード
+        '
+        Me.仕入先コード.HeaderText = "仕入先コード"
+        Me.仕入先コード.Name = "仕入先コード"
+        Me.仕入先コード.Visible = False
+        '
+        '客先番号
+        '
+        Me.客先番号.HeaderText = "客先番号"
+        Me.客先番号.Name = "客先番号"
+        Me.客先番号.Visible = False
+        '
         'Payment
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.ShiwakeData)
         Me.Controls.Add(Me.TxtIDRCurrency)
         Me.Controls.Add(Me.LblIDRCurrency)
         Me.Controls.Add(Me.LblMode)
@@ -622,6 +757,7 @@ Partial Class Payment
         CType(Me.DgvPayment, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DgvSupplier, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DgvKikeInfo, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ShiwakeData, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -662,8 +798,23 @@ Partial Class Payment
     Friend WithEvents 買掛残高 As DataGridViewTextBoxColumn
     Friend WithEvents TxtIDRCurrency As TextBox
     Friend WithEvents LblIDRCurrency As Label
+    Friend WithEvents ShiwakeData As DataGridView
+    Friend WithEvents 買掛番号_仕訳 As DataGridViewTextBoxColumn
+    Friend WithEvents 買掛区分_仕訳 As DataGridViewTextBoxColumn
+    Friend WithEvents 買掛日_仕訳 As DataGridViewTextBoxColumn
+    Friend WithEvents 発注番号_仕訳 As DataGridViewTextBoxColumn
+    Friend WithEvents 発注番号枝番_仕訳 As DataGridViewTextBoxColumn
+    Friend WithEvents 仕入先コード_仕訳 As DataGridViewTextBoxColumn
+    Friend WithEvents 支払番号_仕訳 As DataGridViewTextBoxColumn
+    Friend WithEvents 識別番号_仕訳 As DataGridViewTextBoxColumn
+    Friend WithEvents 行番号_仕訳 As DataGridViewTextBoxColumn
+    Friend WithEvents 支払種目_仕訳 As DataGridViewTextBoxColumn
+    Friend WithEvents 支払種目名_仕訳 As DataGridViewTextBoxColumn
+    Friend WithEvents 支払額_仕訳 As DataGridViewTextBoxColumn
+    Friend WithEvents 客先番号_仕訳 As DataGridViewTextBoxColumn
     Friend WithEvents 行番号 As DataGridViewTextBoxColumn
     Friend WithEvents 入力支払金額 As DataGridViewTextBoxColumn
+    Friend WithEvents 入力支払額_計算用 As DataGridViewTextBoxColumn
     Friend WithEvents InfoNo As DataGridViewTextBoxColumn
     Friend WithEvents 発注番号 As DataGridViewTextBoxColumn
     Friend WithEvents 仕入先請求番号 As DataGridViewTextBoxColumn
@@ -675,4 +826,8 @@ Partial Class Payment
     Friend WithEvents 買掛情報買掛残高 As DataGridViewTextBoxColumn
     Friend WithEvents 買掛情報買掛残高固定 As DataGridViewTextBoxColumn
     Friend WithEvents 支払金額 As DataGridViewTextBoxColumn
+    Friend WithEvents 買掛区分 As DataGridViewTextBoxColumn
+    Friend WithEvents 発注番号枝番 As DataGridViewTextBoxColumn
+    Friend WithEvents 仕入先コード As DataGridViewTextBoxColumn
+    Friend WithEvents 客先番号 As DataGridViewTextBoxColumn
 End Class
