@@ -426,6 +426,7 @@ Public Class DepositManagement
             DgvBillingInfo.Rows(i).Cells("請求区分").Value = dsSkyuhd.Tables(RS).Rows(i)("請求区分")
             DgvBillingInfo.Rows(i).Cells("受注番号枝番").Value = dsSkyuhd.Tables(RS).Rows(i)("受注番号枝番")
             DgvBillingInfo.Rows(i).Cells("得意先コード").Value = dsSkyuhd.Tables(RS).Rows(i)("得意先コード")
+            DgvBillingInfo.Rows(i).Cells("客先番号").Value = dsSkyuhd.Tables(RS).Rows(i)("客先番号")
 
         Next
 
@@ -536,7 +537,7 @@ Public Class DepositManagement
 
                     Dim decNyukin As Decimal = DgvDeposit.Rows(i).Cells("入力入金額_計算用").Value
 
-                    If decZandaka =0 OrElse decNyukin = 0 Then
+                    If decZandaka = 0 OrElse decNyukin = 0 Then
                         '何もしない
                     Else
 
@@ -559,6 +560,7 @@ Public Class DepositManagement
                         ShiwakeData.Rows(DataIndex).Cells("入金種目_仕訳").Value = DgvDeposit.Rows(i).Cells("入金種目").Value
                         ShiwakeData.Rows(DataIndex).Cells("入金種目名_仕訳").Value = col.FormattedValue
 
+                        ShiwakeData.Rows(DataIndex).Cells("客先番号_仕訳").Value = DgvBillingInfo.Rows(j).Cells("客先番号").Value
 
                         If decZandaka > decNyukin Then
                             '残高が入金額より多い
@@ -1027,6 +1029,7 @@ Public Class DepositManagement
             Sql += "t80_shiwakenyu("
             Sql += "会社コード, 請求番号,請求区分,請求日,受注番号,受注番号枝番,得意先コード"
             Sql += ",入金番号,識別番号,行番号,入金種目,入金種目名,入金日,入金額,登録日,更新者"
+            Sql += ",客先番号"
 
             Sql += ") VALUES('"
             Sql += CompanyCode
@@ -1035,7 +1038,7 @@ Public Class DepositManagement
             Sql += "', '"
             Sql += ShiwakeData.Rows(i).Cells("請求区分_仕訳").Value.ToString
             Sql += "', '"
-            Sql += ShiwakeData.Rows(i).Cells("請求日_仕訳").Value.ToString
+            Sql += UtilClass.strFormatDate(ShiwakeData.Rows(i).Cells("請求日_仕訳").Value.ToString）
             Sql += "', '"
             Sql += ShiwakeData.Rows(i).Cells("受注番号_仕訳").Value.ToString
             Sql += "', '"
@@ -1060,7 +1063,8 @@ Public Class DepositManagement
             Sql += dtToday      '登録日
             Sql += "', '"
             Sql += frmC01F10_Login.loginValue.TantoNM
-
+            Sql += "', '"
+            Sql += ShiwakeData.Rows(i).Cells("客先番号_仕訳").Value.ToString
 
             Sql += "')"
 

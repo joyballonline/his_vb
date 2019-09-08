@@ -28,9 +28,9 @@ Partial Class DepositManagement
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -67,6 +67,9 @@ Partial Class DepositManagement
         Me.入金済入金額計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.備考 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DgvDeposit = New System.Windows.Forms.DataGridView()
+        Me.行番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.入力入金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.入力入金額_計算用 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.BtnAdd = New System.Windows.Forms.Button()
         Me.LblNo3 = New System.Windows.Forms.Label()
         Me.TxtBillingCount = New System.Windows.Forms.TextBox()
@@ -88,9 +91,7 @@ Partial Class DepositManagement
         Me.入金種目_仕訳 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.入金種目名_仕訳 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.入金額_仕訳 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.行番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.入力入金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.入力入金額_計算用 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.客先番号_仕訳 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.InfoNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.受注番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.請求情報請求番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -104,6 +105,7 @@ Partial Class DepositManagement
         Me.請求区分 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.受注番号枝番 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.得意先コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.客先番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DgvCustomer, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvBillingInfo, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvHistory, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -149,7 +151,7 @@ Partial Class DepositManagement
         Me.TxtHistoryCount.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtHistoryCount.Location = New System.Drawing.Point(1272, 65)
         Me.TxtHistoryCount.Name = "TxtHistoryCount"
-        Me.TxtHistoryCount.Size = New System.Drawing.Size(38, 22)
+        Me.TxtHistoryCount.Size = New System.Drawing.Size(38, 37)
         Me.TxtHistoryCount.TabIndex = 290
         Me.TxtHistoryCount.TabStop = False
         Me.TxtHistoryCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -162,7 +164,7 @@ Partial Class DepositManagement
         Me.DtpDepositDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.DtpDepositDate.Location = New System.Drawing.Point(291, 335)
         Me.DtpDepositDate.Name = "DtpDepositDate"
-        Me.DtpDepositDate.Size = New System.Drawing.Size(148, 22)
+        Me.DtpDepositDate.Size = New System.Drawing.Size(148, 37)
         Me.DtpDepositDate.TabIndex = 7
         Me.DtpDepositDate.TabStop = False
         Me.DtpDepositDate.Value = New Date(2018, 7, 25, 13, 29, 25, 0)
@@ -184,7 +186,7 @@ Partial Class DepositManagement
         Me.TxtRemarks.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtRemarks.Location = New System.Drawing.Point(621, 335)
         Me.TxtRemarks.Name = "TxtRemarks"
-        Me.TxtRemarks.Size = New System.Drawing.Size(645, 22)
+        Me.TxtRemarks.Size = New System.Drawing.Size(645, 37)
         Me.TxtRemarks.TabIndex = 8
         '
         'LblDepositDate
@@ -217,7 +219,7 @@ Partial Class DepositManagement
         Me.TxtDepositCount.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtDepositCount.Location = New System.Drawing.Point(1272, 198)
         Me.TxtDepositCount.Name = "TxtDepositCount"
-        Me.TxtDepositCount.Size = New System.Drawing.Size(38, 22)
+        Me.TxtDepositCount.Size = New System.Drawing.Size(38, 37)
         Me.TxtDepositCount.TabIndex = 280
         Me.TxtDepositCount.TabStop = False
         Me.TxtDepositCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -275,7 +277,7 @@ Partial Class DepositManagement
         Me.LblBillingInfo.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblBillingInfo.Location = New System.Drawing.Point(13, 339)
         Me.LblBillingInfo.Name = "LblBillingInfo"
-        Me.LblBillingInfo.Size = New System.Drawing.Size(82, 15)
+        Me.LblBillingInfo.Size = New System.Drawing.Size(163, 30)
         Me.LblBillingInfo.TabIndex = 279
         Me.LblBillingInfo.Text = "■請求情報"
         '
@@ -285,7 +287,7 @@ Partial Class DepositManagement
         Me.LblHistory.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblHistory.Location = New System.Drawing.Point(12, 68)
         Me.LblHistory.Name = "LblHistory"
-        Me.LblHistory.Size = New System.Drawing.Size(80, 15)
+        Me.LblHistory.Size = New System.Drawing.Size(160, 30)
         Me.LblHistory.TabIndex = 278
         Me.LblHistory.Text = "■入金済み"
         '
@@ -295,7 +297,7 @@ Partial Class DepositManagement
         Me.LblDeposit.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblDeposit.Location = New System.Drawing.Point(13, 203)
         Me.LblDeposit.Name = "LblDeposit"
-        Me.LblDeposit.Size = New System.Drawing.Size(82, 15)
+        Me.LblDeposit.Size = New System.Drawing.Size(163, 30)
         Me.LblDeposit.TabIndex = 277
         Me.LblDeposit.Text = "■入金入力"
         '
@@ -303,7 +305,7 @@ Partial Class DepositManagement
         '
         Me.DgvBillingInfo.AllowUserToAddRows = False
         Me.DgvBillingInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvBillingInfo.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.InfoNo, Me.受注番号, Me.請求情報請求番号, Me.請求日, Me.請求金額, Me.請求情報入金額計, Me.請求情報入金額計固定, Me.請求情報請求残高, Me.請求情報請求残高固定, Me.入金額, Me.請求区分, Me.受注番号枝番, Me.得意先コード})
+        Me.DgvBillingInfo.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.InfoNo, Me.受注番号, Me.請求情報請求番号, Me.請求日, Me.請求金額, Me.請求情報入金額計, Me.請求情報入金額計固定, Me.請求情報請求残高, Me.請求情報請求残高固定, Me.入金額, Me.請求区分, Me.受注番号枝番, Me.得意先コード, Me.客先番号})
         Me.DgvBillingInfo.Location = New System.Drawing.Point(12, 363)
         Me.DgvBillingInfo.Name = "DgvBillingInfo"
         Me.DgvBillingInfo.RowHeadersVisible = False
@@ -404,6 +406,30 @@ Partial Class DepositManagement
         Me.DgvDeposit.Size = New System.Drawing.Size(1327, 100)
         Me.DgvDeposit.TabIndex = 6
         '
+        '行番号
+        '
+        DataGridViewCellStyle16.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.行番号.DefaultCellStyle = DataGridViewCellStyle16
+        Me.行番号.HeaderText = "行番号"
+        Me.行番号.Name = "行番号"
+        Me.行番号.ReadOnly = True
+        Me.行番号.Width = 70
+        '
+        '入力入金額
+        '
+        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle17.Format = "N0"
+        Me.入力入金額.DefaultCellStyle = DataGridViewCellStyle17
+        Me.入力入金額.HeaderText = "今回入金額"
+        Me.入力入金額.MaxInputLength = 14
+        Me.入力入金額.Name = "入力入金額"
+        '
+        '入力入金額_計算用
+        '
+        Me.入力入金額_計算用.HeaderText = "入力入金額_計算用"
+        Me.入力入金額_計算用.Name = "入力入金額_計算用"
+        Me.入力入金額_計算用.Visible = False
+        '
         'BtnAdd
         '
         Me.BtnAdd.Location = New System.Drawing.Point(101, 203)
@@ -431,7 +457,7 @@ Partial Class DepositManagement
         Me.TxtBillingCount.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtBillingCount.Location = New System.Drawing.Point(1272, 335)
         Me.TxtBillingCount.Name = "TxtBillingCount"
-        Me.TxtBillingCount.Size = New System.Drawing.Size(38, 22)
+        Me.TxtBillingCount.Size = New System.Drawing.Size(38, 37)
         Me.TxtBillingCount.TabIndex = 295
         Me.TxtBillingCount.TabStop = False
         Me.TxtBillingCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -475,7 +501,7 @@ Partial Class DepositManagement
         Me.TxtIDRCurrency.MaxLength = 20
         Me.TxtIDRCurrency.Name = "TxtIDRCurrency"
         Me.TxtIDRCurrency.ReadOnly = True
-        Me.TxtIDRCurrency.Size = New System.Drawing.Size(70, 23)
+        Me.TxtIDRCurrency.Size = New System.Drawing.Size(70, 39)
         Me.TxtIDRCurrency.TabIndex = 326
         Me.TxtIDRCurrency.TabStop = False
         Me.TxtIDRCurrency.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -496,7 +522,7 @@ Partial Class DepositManagement
         '
         Me.ShiwakeData.AllowUserToAddRows = False
         Me.ShiwakeData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.ShiwakeData.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.請求番号_仕訳, Me.請求区分_仕訳, Me.請求日_仕訳, Me.受注番号_仕訳, Me.受注番号枝番_仕訳, Me.得意先コード_仕訳, Me.入金番号_仕訳, Me.識別番号_仕訳, Me.行番号_仕訳, Me.入金種目_仕訳, Me.入金種目名_仕訳, Me.入金額_仕訳})
+        Me.ShiwakeData.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.請求番号_仕訳, Me.請求区分_仕訳, Me.請求日_仕訳, Me.受注番号_仕訳, Me.受注番号枝番_仕訳, Me.得意先コード_仕訳, Me.入金番号_仕訳, Me.識別番号_仕訳, Me.行番号_仕訳, Me.入金種目_仕訳, Me.入金種目名_仕訳, Me.入金額_仕訳, Me.客先番号_仕訳})
         Me.ShiwakeData.Location = New System.Drawing.Point(12, 469)
         Me.ShiwakeData.Name = "ShiwakeData"
         Me.ShiwakeData.RowHeadersVisible = False
@@ -570,29 +596,10 @@ Partial Class DepositManagement
         Me.入金額_仕訳.HeaderText = "入金額"
         Me.入金額_仕訳.Name = "入金額_仕訳"
         '
-        '行番号
+        '客先番号_仕訳
         '
-        DataGridViewCellStyle16.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.行番号.DefaultCellStyle = DataGridViewCellStyle16
-        Me.行番号.HeaderText = "行番号"
-        Me.行番号.Name = "行番号"
-        Me.行番号.ReadOnly = True
-        Me.行番号.Width = 70
-        '
-        '入力入金額
-        '
-        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle17.Format = "N0"
-        Me.入力入金額.DefaultCellStyle = DataGridViewCellStyle17
-        Me.入力入金額.HeaderText = "今回入金額"
-        Me.入力入金額.MaxInputLength = 14
-        Me.入力入金額.Name = "入力入金額"
-        '
-        '入力入金額_計算用
-        '
-        Me.入力入金額_計算用.HeaderText = "入力入金額_計算用"
-        Me.入力入金額_計算用.Name = "入力入金額_計算用"
-        Me.入力入金額_計算用.Visible = False
+        Me.客先番号_仕訳.HeaderText = "客先番号"
+        Me.客先番号_仕訳.Name = "客先番号_仕訳"
         '
         'InfoNo
         '
@@ -702,6 +709,12 @@ Partial Class DepositManagement
         Me.得意先コード.Name = "得意先コード"
         Me.得意先コード.Visible = False
         '
+        '客先番号
+        '
+        Me.客先番号.HeaderText = "客先番号"
+        Me.客先番号.Name = "客先番号"
+        Me.客先番号.Visible = False
+        '
         'DepositManagement
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
@@ -781,18 +794,9 @@ Partial Class DepositManagement
     Friend WithEvents 請求先 As DataGridViewTextBoxColumn
     Friend WithEvents 請求残高 As DataGridViewTextBoxColumn
     Friend WithEvents ShiwakeData As DataGridView
-    Friend WithEvents 請求番号_仕訳 As DataGridViewTextBoxColumn
-    Friend WithEvents 請求区分_仕訳 As DataGridViewTextBoxColumn
-    Friend WithEvents 請求日_仕訳 As DataGridViewTextBoxColumn
-    Friend WithEvents 受注番号_仕訳 As DataGridViewTextBoxColumn
-    Friend WithEvents 受注番号枝番_仕訳 As DataGridViewTextBoxColumn
-    Friend WithEvents 得意先コード_仕訳 As DataGridViewTextBoxColumn
-    Friend WithEvents 入金番号_仕訳 As DataGridViewTextBoxColumn
-    Friend WithEvents 識別番号_仕訳 As DataGridViewTextBoxColumn
-    Friend WithEvents 行番号_仕訳 As DataGridViewTextBoxColumn
-    Friend WithEvents 入金種目_仕訳 As DataGridViewTextBoxColumn
-    Friend WithEvents 入金種目名_仕訳 As DataGridViewTextBoxColumn
-    Friend WithEvents 入金額_仕訳 As DataGridViewTextBoxColumn
+    Friend WithEvents 行番号 As DataGridViewTextBoxColumn
+    Friend WithEvents 入力入金額 As DataGridViewTextBoxColumn
+    Friend WithEvents 入力入金額_計算用 As DataGridViewTextBoxColumn
     Friend WithEvents InfoNo As DataGridViewTextBoxColumn
     Friend WithEvents 受注番号 As DataGridViewTextBoxColumn
     Friend WithEvents 請求情報請求番号 As DataGridViewTextBoxColumn
@@ -806,7 +810,18 @@ Partial Class DepositManagement
     Friend WithEvents 請求区分 As DataGridViewTextBoxColumn
     Friend WithEvents 受注番号枝番 As DataGridViewTextBoxColumn
     Friend WithEvents 得意先コード As DataGridViewTextBoxColumn
-    Friend WithEvents 行番号 As DataGridViewTextBoxColumn
-    Friend WithEvents 入力入金額 As DataGridViewTextBoxColumn
-    Friend WithEvents 入力入金額_計算用 As DataGridViewTextBoxColumn
+    Friend WithEvents 客先番号 As DataGridViewTextBoxColumn
+    Friend WithEvents 請求番号_仕訳 As DataGridViewTextBoxColumn
+    Friend WithEvents 請求区分_仕訳 As DataGridViewTextBoxColumn
+    Friend WithEvents 請求日_仕訳 As DataGridViewTextBoxColumn
+    Friend WithEvents 受注番号_仕訳 As DataGridViewTextBoxColumn
+    Friend WithEvents 受注番号枝番_仕訳 As DataGridViewTextBoxColumn
+    Friend WithEvents 得意先コード_仕訳 As DataGridViewTextBoxColumn
+    Friend WithEvents 入金番号_仕訳 As DataGridViewTextBoxColumn
+    Friend WithEvents 識別番号_仕訳 As DataGridViewTextBoxColumn
+    Friend WithEvents 行番号_仕訳 As DataGridViewTextBoxColumn
+    Friend WithEvents 入金種目_仕訳 As DataGridViewTextBoxColumn
+    Friend WithEvents 入金種目名_仕訳 As DataGridViewTextBoxColumn
+    Friend WithEvents 入金額_仕訳 As DataGridViewTextBoxColumn
+    Friend WithEvents 客先番号_仕訳 As DataGridViewTextBoxColumn
 End Class
