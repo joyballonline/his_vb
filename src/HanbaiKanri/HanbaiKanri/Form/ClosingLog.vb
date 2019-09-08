@@ -4095,6 +4095,7 @@ Public Class ClosingLog
 #Region "仕訳前受金"
 
         Dim strJyutyuNo As String = vbNullString
+        Dim FormerGold As Decimal = 0  '前受金
 
         't80
         Sql = "SELECT "
@@ -4316,7 +4317,6 @@ Public Class ClosingLog
 
 #Region "通常請求"
 
-                Dim FormerGold As Decimal = 0  '前受金
                 Dim dsNkinSkyu2 As DataSet
 
                 If strJyutyuNo = dsNkinkshihd.Tables(RS).Rows(i)("受注番号") Then
@@ -4355,12 +4355,11 @@ Public Class ClosingLog
                 End If
 
 
-
                 '前受金のデータがあれば
                 Dim FormerGold2 As Decimal = FormerGold
-                If FormerGold > 0 Then
+                If FormerGold2 > 0 Then
 
-                    If calDeposit > FormerGold Then
+                    If calDeposit > FormerGold2 Then
                         '入金額が多い
                     Else
                         '前受金が多い
@@ -4410,7 +4409,7 @@ Public Class ClosingLog
 
 
                 '前受金相殺後に入金額があれば
-                If calDeposit > FormerGold Then
+                If calDeposit > FormerGold2 Then
 
                     If countKeyID = 0 Then
                     Else
@@ -4422,7 +4421,7 @@ Public Class ClosingLog
                     Sql += "," & seqID 'プライマリ
                     Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
                     Sql += ",'" & strKamoku & "'"  '貸方科目
-                    Sql += "," & UtilClass.formatNumber(formatDouble(calDeposit - FormerGold)) '入金金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
+                    Sql += "," & UtilClass.formatNumber(formatDouble(calDeposit - FormerGold2)) '入金金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
                     Sql += ",1" '固定
                     Sql += ",'" & getCustomerName(dsNkinkshihd.Tables(RS).Rows(i)("得意先コード").ToString) & "'" '補助科目
                     Sql += ",'PM-" & dsNkinkshihd.Tables(RS).Rows(i)("客先番号").ToString & "-" & i & "'" 'PO
@@ -4443,7 +4442,7 @@ Public Class ClosingLog
                     Sql += "," & seqID 'プライマリ
                     Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
                     Sql += ",'売掛金'" '借方勘定
-                    Sql += "," & UtilClass.formatNumber(formatDouble(-(calDeposit - FormerGold))) '入金金額
+                    Sql += "," & UtilClass.formatNumber(formatDouble(-(calDeposit - FormerGold2))) '入金金額
                     Sql += ",1" '固定
                     Sql += ",'" & getCustomerName(dsNkinkshihd.Tables(RS).Rows(i)("得意先コード").ToString) & "'" '補助科目
                     Sql += ",'PM-" & dsNkinkshihd.Tables(RS).Rows(i)("客先番号").ToString & "-" & i & "'" 'PO
@@ -4535,6 +4534,7 @@ Public Class ClosingLog
 #Region "仕訳前払金"
 
         Dim strHatyuNo As String = vbNullString
+        Dim DownPayment As Decimal = 0  '前支金
 
         't81
         Sql = "SELECT "
@@ -4744,7 +4744,6 @@ Public Class ClosingLog
 #Region "通常買掛"
 
                 'todo:前払金を減らす
-                Dim DownPayment As Decimal = 0  '前支金
                 Dim dsShriKike2 As DataSet
 
                 'select 支払消込額計 from t46_kikehd join t49_shrikshihd 
@@ -4782,13 +4781,14 @@ Public Class ClosingLog
 
 
                 '前払金のデータがあれば
-                If DownPayment > 0 Then
+                Dim DownPayment2 As Decimal = DownPayment
+                If DownPayment2 > 0 Then
 
-                    If calPay > DownPayment Then
+                    If calPay > DownPayment2 Then
                         '支払額が多い
                     Else
                         '前払金が多い
-                        DownPayment = calPay
+                        DownPayment2 = calPay
                     End If
 
 
@@ -4797,7 +4797,7 @@ Public Class ClosingLog
                     Sql += "," & seqID 'プライマリ
                     Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
                     Sql += ",'買掛金'" '借方勘定　
-                    Sql += "," & UtilClass.formatNumber(formatDouble(DownPayment)) '支払金額
+                    Sql += "," & UtilClass.formatNumber(formatDouble(DownPayment2)) '支払金額
                     Sql += ",1" '固定
                     Sql += ",'" & getSupplierName(dsShrikshihd.Tables(RS).Rows(i)("仕入先コード").ToString) & "'" '補助科目
                     Sql += ",'PO-" & dsShrikshihd.Tables(RS).Rows(i)("客先番号").ToString & "-" & i & "'" 'PO
@@ -4817,7 +4817,7 @@ Public Class ClosingLog
                     Sql += "," & seqID 'プライマリ
                     Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
                     Sql += ",'前払金'"  '貸方勘定
-                    Sql += "," & UtilClass.formatNumber(formatDouble(-DownPayment)) '支払金額
+                    Sql += "," & UtilClass.formatNumber(formatDouble(-DownPayment2)) '支払金額
                     Sql += ",1" '固定
                     Sql += ",'" & getSupplierName(dsShrikshihd.Tables(RS).Rows(i)("仕入先コード").ToString) & "'" '補助科目
                     Sql += ",'PO-" & dsShrikshihd.Tables(RS).Rows(i)("客先番号").ToString & "-" & i & "'" 'PO
@@ -4833,7 +4833,7 @@ Public Class ClosingLog
 
 
                 '前受金相殺後に入金額があれば
-                If calPay > DownPayment Then
+                If calPay > DownPayment2 Then
 
                     '借方 買掛金
                     If countKeyID = 0 Then
@@ -4845,7 +4845,7 @@ Public Class ClosingLog
                     Sql += "," & seqID 'プライマリ
                     Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
                     Sql += ",'買掛金'" '借方勘定　
-                    Sql += "," & UtilClass.formatNumber(formatDouble(calPay - DownPayment)) '支払金額
+                    Sql += "," & UtilClass.formatNumber(formatDouble(calPay - DownPayment2)) '支払金額
                     Sql += ",1" '固定
                     Sql += ",'" & getSupplierName(dsShrikshihd.Tables(RS).Rows(i)("仕入先コード").ToString) & "'" '補助科目
                     Sql += ",'PO-" & dsShrikshihd.Tables(RS).Rows(i)("客先番号").ToString & "-" & i & "'" 'PO
@@ -4865,7 +4865,7 @@ Public Class ClosingLog
                     Sql += "," & seqID 'プライマリ
                     Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
                     Sql += ",'" & strKamoku & "'"  '貸方科目
-                    Sql += "," & UtilClass.formatNumber(formatDouble(-(calPay - DownPayment))) '支払金額
+                    Sql += "," & UtilClass.formatNumber(formatDouble(-(calPay - DownPayment2))) '支払金額
                     Sql += ",1" '固定
                     Sql += ",'" & getSupplierName(dsShrikshihd.Tables(RS).Rows(i)("仕入先コード").ToString) & "'" '補助科目
                     Sql += ",'PO-" & dsShrikshihd.Tables(RS).Rows(i)("客先番号").ToString & "-" & i & "'" 'PO
@@ -4922,15 +4922,16 @@ Public Class ClosingLog
                         updateT67Swkhd(Sql)
                     End If
 
-                    If calPay > DownPayment Then
-                        '支払額が多い
-                        DownPayment = 0
-                    Else
-                        '前払金が多い
-                        DownPayment = DownPayment - calPay
-                    End If
                 End If
 
+                DownPayment -= DownPayment2
+                'If calPay > DownPayment Then
+                '    '支払額が多い
+                '    DownPayment = 0
+                'Else
+                '    '前払金が多い
+                '    DownPayment = DownPayment - calPay
+                'End If
 #End Region
 
             Else
