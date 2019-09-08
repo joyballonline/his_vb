@@ -50,7 +50,6 @@ Partial Class InventoryList
         Me.DgvList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvList.Location = New System.Drawing.Point(13, 51)
         Me.DgvList.Name = "DgvList"
-        Me.DgvList.ReadOnly = True
         Me.DgvList.RowHeadersVisible = False
         Me.DgvList.RowTemplate.Height = 21
         Me.DgvList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
