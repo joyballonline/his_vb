@@ -146,8 +146,8 @@ Public Class PurchasingManagement
             DgvHistory.Columns.Add("品名", "ItemName")
             DgvHistory.Columns.Add("型式", "Spec")
             DgvHistory.Columns.Add("単位", "Unit")
-            'DgvHistory.Columns.Add("仕入先", "SupplierName")
-            'DgvHistory.Columns.Add("仕入値", "PurchaseUnitPrice")
+            DgvHistory.Columns.Add("仕入先", "SupplierName")
+            DgvHistory.Columns.Add("仕入値", "PurchaseUnitPrice")
             DgvHistory.Columns.Add("仕入数量", "PurchasedQuantity")
             DgvHistory.Columns.Add("仕入日", "PurchaseDate")
             DgvHistory.Columns.Add("備考", "Remarks")
@@ -161,8 +161,8 @@ Public Class PurchasingManagement
             DgvHistory.Columns.Add("品名", "品名")
             DgvHistory.Columns.Add("型式", "型式")
             DgvHistory.Columns.Add("単位", "単位")
-            'DgvHistory.Columns.Add("仕入先", "仕入先")
-            'DgvHistory.Columns.Add("仕入値", "仕入値")
+            DgvHistory.Columns.Add("仕入先", "仕入先")
+            DgvHistory.Columns.Add("仕入値", "仕入値")
             DgvHistory.Columns.Add("仕入数量", "仕入(検収)登録済み数量")
             DgvHistory.Columns.Add("仕入日", "仕入(検収)登録日")
             DgvHistory.Columns.Add("備考", "備考")
@@ -175,6 +175,9 @@ Public Class PurchasingManagement
         '数字形式
         'DgvHistory.Columns("仕入値").DefaultCellStyle.Format = "N2"
         DgvHistory.Columns("仕入数量").DefaultCellStyle.Format = "N2"
+
+        DgvHistory.Columns("仕入先").Visible = False
+        DgvHistory.Columns("仕入値").Visible = False
 
 
         '
@@ -191,8 +194,8 @@ Public Class PurchasingManagement
 
             DgvAdd.Columns.Add("発注数量", "QuantityOrdered")
             DgvAdd.Columns.Add("単位", "Unit")
-            'DgvAdd.Columns.Add("仕入先", "SupplierName")
-            'DgvAdd.Columns.Add("仕入値", "PurchaseUnitPrice")
+            DgvAdd.Columns.Add("仕入先", "SupplierName")
+            DgvAdd.Columns.Add("仕入値", "PurchaseUnitPrice")
 
             DgvAdd.Columns.Add("登録済数量", "PurchasedQuantity")
             DgvAdd.Columns.Add("未登録数量", "UnregisteredQuantity")
@@ -210,8 +213,8 @@ Public Class PurchasingManagement
 
             DgvAdd.Columns.Add("発注数量", "発注数量")
             DgvAdd.Columns.Add("単位", "単位")
-            'DgvAdd.Columns.Add("仕入先", "仕入先")
-            'DgvAdd.Columns.Add("仕入値", "仕入値")
+            DgvAdd.Columns.Add("仕入先", "仕入先")
+            DgvAdd.Columns.Add("仕入値", "仕入値")
 
             DgvAdd.Columns.Add("登録済数量", "仕入(検収)登録済み数量")
             DgvAdd.Columns.Add("未登録数量", "未登録数量")
@@ -266,6 +269,8 @@ Public Class PurchasingManagement
 
         DgvAdd.Columns("仕入区分値").Visible = False
 
+        DgvAdd.Columns("仕入先").Visible = False
+        DgvAdd.Columns("仕入値").Visible = False
 
     End Sub
 
@@ -437,8 +442,8 @@ Public Class PurchasingManagement
                 DgvHistory.Rows(i).Cells("品名").Value = dsSireDt.Tables(RS).Rows(i)("品名")
                 DgvHistory.Rows(i).Cells("型式").Value = dsSireDt.Tables(RS).Rows(i)("型式")
                 DgvHistory.Rows(i).Cells("単位").Value = dsSireDt.Tables(RS).Rows(i)("単位")
-                'DgvHistory.Rows(i).Cells("仕入先").Value = dsSireDt.Tables(RS).Rows(i)("仕入先名")
-                'DgvHistory.Rows(i).Cells("仕入値").Value = dsSireDt.Tables(RS).Rows(i)("仕入値_外貨")
+                DgvHistory.Rows(i).Cells("仕入先").Value = dsSireDt.Tables(RS).Rows(i)("仕入先名")
+                DgvHistory.Rows(i).Cells("仕入値").Value = dsSireDt.Tables(RS).Rows(i)("仕入値_外貨")
                 DgvHistory.Rows(i).Cells("仕入数量").Value = dsSireDt.Tables(RS).Rows(i)("仕入数量")
                 DgvHistory.Rows(i).Cells("仕入日").Value = dsSireDt.Tables(RS).Rows(i)("仕入日").ToShortDateString()
                 DgvHistory.Rows(i).Cells("備考").Value = dsSireDt.Tables(RS).Rows(i)("備考")
@@ -460,11 +465,11 @@ Public Class PurchasingManagement
                     DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("メーカー").Value = dsHattyuDt.Tables(RS).Rows(i)("メーカー")
                     DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("品名").Value = dsHattyuDt.Tables(RS).Rows(i)("品名")
                     DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("型式").Value = dsHattyuDt.Tables(RS).Rows(i)("型式")
-                    'DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("仕入先").Value = dsHattyuDt.Tables(RS).Rows(i)("仕入先名")
+                    DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("仕入先").Value = dsHattyuDt.Tables(RS).Rows(i)("仕入先名")
 
                     DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("発注数量").Value = dsHattyuDt.Tables(RS).Rows(i)("発注数量")
                     DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("単位").Value = dsHattyuDt.Tables(RS).Rows(i)("単位")
-                    'DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("仕入値").Value = dsHattyuDt.Tables(RS).Rows(i)("仕入値_外貨")
+                    DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("仕入値").Value = dsHattyuDt.Tables(RS).Rows(i)("仕入値_外貨")
 
                     DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("登録済数量").Value = dsHattyuDt.Tables(RS).Rows(i)("仕入数量")
                     DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("未登録数量").Value = dsHattyuDt.Tables(RS).Rows(i)("発注残数")
