@@ -708,9 +708,11 @@ Public Class PurchasingManagement
             Sql3 += strToday '更新日
             Sql3 += "', '"
             Sql3 += Input '更新者
-            Sql3 += "', '"
-            Sql3 += UtilClass.strFormatDate(DtpPaymentDate.Text) '支払予定日
-            Sql3 += "', '"
+            'Sql3 += "', '"
+            'Sql3 += UtilClass.strFormatDate(DtpPaymentDate.Text) '支払予定日
+            'Sql3 += "', '"
+            Sql3 += "', Null"       '支払予定日
+            Sql3 += ", '"
             Sql3 += ds1.Tables(RS).Rows(0)("営業担当者コード").ToString '営業担当者コード
             Sql3 += "', '"
             Sql3 += frmC01F10_Login.loginValue.TantoCD '入力担当者コード
@@ -744,7 +746,8 @@ Public Class PurchasingManagement
                 Sql4 += "', '"
                 Sql4 += DgvAdd.Rows(index).Cells("型式").Value.ToString '型式
                 Sql4 += "', '"
-                Sql4 += DgvAdd.Rows(index).Cells("仕入先").Value.ToString '仕入先名
+                'Sql4 += DgvAdd.Rows(index).Cells("仕入先").Value.ToString '仕入先名
+                Sql4 += TxtSupplierName.Text    '仕入先名
                 Sql4 += "', '"
                 Sql4 += formatNumber(Decimal.Parse(DgvAdd.Rows(index).Cells("仕入値").Value.ToString)) '仕入値
                 Sql4 += "', '"
