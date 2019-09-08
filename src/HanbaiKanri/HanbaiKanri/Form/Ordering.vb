@@ -634,6 +634,7 @@ Public Class Ordering
                 DgvItemList.Rows(i).Cells("貿易条件").Value = Integer.Parse(dsHattyudt.Tables(RS).Rows(i)("貿易条件"))
             End If
 
+            DgvItemList.Rows(i).Cells("リードタイム").Value = dsHattyudt.Tables(RS).Rows(i)("リードタイム")
             DgvItemList.Rows(i).Cells("備考").Value = dsHattyudt.Tables(RS).Rows(i)("備考")
             DgvItemList.Rows(i).Cells("入庫数").Value = dsHattyudt.Tables(RS).Rows(i)("入庫数")
             DgvItemList.Rows(i).Cells("未入庫数").Value = dsHattyudt.Tables(RS).Rows(i)("未入庫数")
@@ -1480,12 +1481,12 @@ Public Class Ordering
                     Sql += ", 発注数量, 仕入数量, 発注残数, 間接費, 仕入金額, リードタイム, リードタイム単位, 入庫数"
                     Sql += ", 未入庫数, 備考, 更新者, 登録日, 更新日, 仕入単価_外貨, 仕入通貨, 仕入レート, 関税率, 関税額"
                     Sql += ", 前払法人税率, 前払法人税額, 輸送費率, 輸送費額, 仕入値_外貨, 仕入金額_外貨"
-                    If PurchaseStatus <> CommonConst.STATUS_ADD And dsHattyuHd.Tables(RS).Rows.Count > 0 Then
-                        If dsHattyuHd.Tables(RS).Rows(0)("見積番号") <> "" Then
+                    'If PurchaseStatus <> CommonConst.STATUS_ADD And dsHattyuHd.Tables(RS).Rows.Count > 0 Then
+                    '    If dsHattyuHd.Tables(RS).Rows(0)("見積番号") <> "" Then
 
-                            Sql += ", 見積単価_外貨, 見積金額_外貨, 通貨, レート"
-                        End If
-                    End If
+                    Sql += ", 見積単価_外貨, 見積金額_外貨, 通貨, レート"
+                    '    End If
+                    'End If
 
                     Sql += IIf(
                     DgvItemList.Rows(i).Cells("貿易条件").Value IsNot Nothing,

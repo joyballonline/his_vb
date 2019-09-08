@@ -461,7 +461,7 @@ Public Class Receipt
             '入庫明細取得
             Dim dsNyukodt As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-            Sql = " SELECT t21.メーカー, t21.品名, t21.型式, t21.発注数量, t21.単位, t21.仕入数量, t21.仕入値, t21.仕入金額"
+            Sql = " SELECT t21.メーカー, t21.品名, t21.型式, t21.発注数量, t21.単位, t21.仕入数量, t21.仕入単価_外貨, t21.仕入値, t21.仕入金額"
             Sql += ", t21.発注残数, t21.未入庫数, t21.行番号, t21.仕入区分, t21.仕入先名, t21.備考,t21.入庫数, t20.取消区分, t20.更新日"
             Sql += " FROM "
             Sql += " t21_hattyu t21"
@@ -499,7 +499,7 @@ Public Class Receipt
                 DgvPurchase.Rows(i).Cells("発注数量").Value = dsHattyudt.Tables(RS).Rows(i)("発注数量")
                 DgvPurchase.Rows(i).Cells("単位").Value = dsHattyudt.Tables(RS).Rows(i)("単位")
                 DgvPurchase.Rows(i).Cells("仕入数量").Value = dsHattyudt.Tables(RS).Rows(i)("入庫数")
-                DgvPurchase.Rows(i).Cells("仕入単価").Value = dsHattyudt.Tables(RS).Rows(i)("仕入値")
+                DgvPurchase.Rows(i).Cells("仕入単価").Value = dsHattyudt.Tables(RS).Rows(i)("仕入単価_外貨")
                 DgvPurchase.Rows(i).Cells("仕入金額").Value = dsHattyudt.Tables(RS).Rows(i)("仕入金額")
                 DgvPurchase.Rows(i).Cells("発注残数").Value = dsHattyudt.Tables(RS).Rows(i)("発注残数")
                 DgvPurchase.Rows(i).Cells("未入庫数").Value = dsHattyudt.Tables(RS).Rows(i)("未入庫数")
