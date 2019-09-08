@@ -4094,54 +4094,33 @@ Public Class ClosingLog
 
 #Region "仕訳前受金"
 
-        't23_skyuhd      請求
-        't27_nkinkshihd  入金消込
-
-
+        't80
         Sql = "SELECT "
-        Sql += " t23.請求番号,t23.請求区分,t23.得意先コード,t23.客先番号"
-        Sql += ",t27.入金番号"
-        Sql += ",t27.入金日"
+        Sql += " t80.請求番号,t80.請求区分,t80.受注番号,t80.入金番号,t80.行番号,t80.入金日,t80.入金種目,t80.入金種目名"
+        Sql += ",t80.得意先コード,t80.客先番号,t80.入金額"
 
-        'Sql += ",t26.入金種別"
-        'Sql += ",sum(t27.入金消込額計) as 入金消込額計"
-
-        Sql += " FROM public.t23_skyuhd as t23 "
-
-        'Sql += " left join public.t26_nkindt as t26 "
-        'Sql += " on t27.入金番号 = t26.入金番号"
-
-        Sql += " left join public.t27_nkinkshihd as t27"
-        Sql += " on t27.請求番号 = t23.請求番号"
-
-        'Sql += " left join public.t11_cymndt as t11"
-        'Sql += " on (t23.受注番号 = t11.受注番号 and t23.受注番号枝番 = t11.受注番号枝番)"
+        Sql += " FROM public.t80_shiwakenyu as t80 "
 
         Sql += " WHERE "
-        Sql += " t23.会社コード"
+        Sql += " t80.会社コード"
         Sql += " ILIKE  "
         Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'"
 
         '条件オプション
         'Sql += " and t26.入金日 <= '" & dsCompany.Tables(RS).Rows(0)("今回締日") & "'"
-        Sql += " and not(t23.請求番号 is null)"
-        Sql += " and not(t27.入金番号 is null)"
 
-        Sql += " GROUP BY "
-        Sql += " t23.請求番号,t23.請求区分,t23.得意先コード,t23.客先番号"
-        Sql += ",t27.入金番号"
-        Sql += ",t27.入金日"
-
+        'Sql += " GROUP BY "
+        'Sql += " t80.請求番号,t80.請求区分,t80.受注番号,t80.入金番号,t80.入金日,t80.入金種目,t80.入金種目名"
+        'Sql += ",t80.得意先コード,t80.客先番号"
 
         Sql += " ORDER BY "
-        Sql += " t23.請求番号,t23.請求区分,t23.得意先コード,t23.客先番号"
-        Sql += ",t27.入金番号"
-        Sql += ",t27.入金日"
+        Sql += " t80.請求番号,t80.請求区分,t80.受注番号,t80.入金番号,t80.行番号,t80.入金日,t80.入金種目"
+        Sql += ",t80.得意先コード"
 
         Dim dsNkinkshihd As DataSet = _db.selectDB(Sql, RS, reccnt)
 
 
-        't27_nkinkshihd
+        't80
         For i As Integer = 0 To dsNkinkshihd.Tables(RS).Rows.Count - 1
 
 
@@ -4157,26 +4136,70 @@ Public Class ClosingLog
             Dim countKeyID As Integer = 0
 
 
-            Dim calDeposit As Decimal = 0  '入金
+            Dim calDeposit As Decimal = dsNkinkshihd.Tables(RS).Rows(i)("入金額")  '入金
             Dim Paymentfee As Decimal = 0  '支払手数料
+            Dim strDESCRIPTION As String = vbNullString
 
             't26_nkindt　入金金額等の値を取得
-            'Call mGet_money_t26_nkindt(dsNkinkshihd.Tables(RS).Rows(i)("入金番号")i) _
-            '                           , calDeposit, Paymentfee)
+            Call mGet_money_t26_nkindt(dsNkinkshihd.Tables(RS).Rows(i)("入金番号"), dsNkinkshihd.Tables(RS).Rows(i)("行番号") _
+                                       , Paymentfee)
 
 
             ''DESCRIPTIONの生成 受注番号 発注番号格納
-            'strDESCRIPTION = mGet_DESCRIPTION(dsSwkUrighd.Tables(RS).Rows(i)("受注番号") _
-            '                                 , DBNull.Value _
-            '                                 , 0)
+            strDESCRIPTION = mGet_DESCRIPTION(dsNkinkshihd.Tables(RS).Rows(i)("請求番号") _
+                                             , dsNkinkshihd.Tables(RS).Rows(i)("入金番号") _
+                                             , 0)
 
             '入金種別に対応した科目を取得
             'Dim strKamoku As String = mGet_NyukinSyubetu(dsNkinkshihd.Tables(RS).Rows(i)("入金種別"))
-            Dim strKamoku As String
+            Dim strKamoku = dsNkinkshihd.Tables(RS).Rows(i)("入金種目名")
+
+            If dsNkinkshihd.Tables(RS).Rows(i)("入金種目") = "9" Then  '相殺
+
+#Region "相殺"
+
+                '借方　買掛金
+                Sql = ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyyMM") & "'" '入金日
+                Sql += "," & seqID 'プライマリ
+                Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
+                Sql += ",'買掛金'" '借方科目
+                Sql += "," & UtilClass.formatNumber(formatDouble(calDeposit)) '入金金額
+                Sql += ",1" '固定
+                'Sql += ",'" & getSupplierName(dsNkinkshihd.Tables(RS).Rows(i)("仕入先コード").ToString) & "'" '補助科目
+                Sql += ",''" '補助科目
+                Sql += ",'PM-" & dsNkinkshihd.Tables(RS).Rows(i)("客先番号").ToString & "-" & i & "'" 'PO
+                Sql += ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyy-MM-dd") & "'" '入金日
+                Sql += ",''" '空でよし
+                Sql += "," & UtilClass.formatNumber(formatDouble(calDeposit)) '入金金額
+                Sql += ",''" '会計用得意先コード
+                Sql += ",'" & strDESCRIPTION & "'"  'DESCRIPTION
+
+                't67_swkhd データ登録
+                updateT67Swkhd(Sql)
 
 
+                '貸方　売掛金
+                countKeyID = getCount(countKeyID)
 
-            If dsNkinkshihd.Tables(RS).Rows(i)("請求区分") = "1" Then  '前受請求の場合
+                Sql = ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyyMM") & "'" '入金日
+                Sql += "," & seqID 'プライマリ
+                Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
+                Sql += ",'売掛金'" '貸方科目
+                Sql += "," & UtilClass.formatNumber(formatDouble(-calDeposit)) '入金金額
+                Sql += ",1" '固定
+                Sql += ",'" & getCustomerName(dsNkinkshihd.Tables(RS).Rows(i)("得意先コード").ToString) & "'" '補助科目
+                Sql += ",'PM-" & dsNkinkshihd.Tables(RS).Rows(i)("客先番号").ToString & "-" & i & "'" 'PO
+                Sql += ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyy-MM-dd") & "'" '入金日
+                Sql += ",''" '空でよし
+                Sql += "," & UtilClass.formatNumber(formatDouble(calDeposit)) '入金金額
+                Sql += ",'" & codeAAC & "'" '会計用得意先コード
+                Sql += ",'" & strDESCRIPTION & "'"  'DESCRIPTION
+
+                't67_swkhd データ登録
+                updateT67Swkhd(Sql)
+#End Region
+
+            ElseIf dsNkinkshihd.Tables(RS).Rows(i)("請求区分") = "1" Then  '前受請求の場合
 
                 '前受金のみ入金（現金入金）		　　　　　　　  　　現金				前受金	得意先
                 '※入金ヘッダ,明細にレコード登録時、							
@@ -4193,17 +4216,36 @@ Public Class ClosingLog
                 Sql += "," & seqID 'プライマリ
                 Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
                 Sql += ",'" & strKamoku & "'" '貸方科目
-                'Sql += "," & UtilClass.formatNumber(formatDouble(dsNkinkshihd.Tables(RS).Rows(i)("入金消込額計") - Paymentfee)) '入金金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
-                Sql += "," & UtilClass.formatNumber(formatDouble(Paymentfee)) '入金金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
+                Sql += "," & UtilClass.formatNumber(formatDouble(calDeposit)) '入金金額
                 Sql += ",1" '固定
                 Sql += ",'" & getCustomerName(dsNkinkshihd.Tables(RS).Rows(i)("得意先コード").ToString) & "'" '補助科目
                 Sql += ",'PM-" & dsNkinkshihd.Tables(RS).Rows(i)("客先番号").ToString & "-" & i & "'" 'PO
                 Sql += ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyy-MM-dd") & "'" '入金日
                 Sql += ",''" '空でよし
-                'Sql += "," & UtilClass.formatNumber(formatDouble(dsNkinkshihd.Tables(RS).Rows(i)("入金消込額計"))) '入金金額
-                Sql += "," & UtilClass.formatNumber(formatDouble(0)) '入金金額
+                Sql += "," & UtilClass.formatNumber(formatDouble(calDeposit + Paymentfee)) '入金金額
                 Sql += ",'" & codeAAC & "'" '会計用得意先コード
+                Sql += ",'" & strDESCRIPTION & "'"  'DESCRIPTION
+
+                't67_swkhd データ登録
+                updateT67Swkhd(Sql)
+
+
+                '貸方　前受金
+                countKeyID = getCount(countKeyID)
+
+                Sql = ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyyMM") & "'" '入金日
+                Sql += "," & seqID 'プライマリ
+                Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
+                Sql += ",'前受金'" '前受金
+                Sql += "," & UtilClass.formatNumber(formatDouble(-calDeposit)) '入金金額
+                Sql += ",1" '固定
+                Sql += ",'" & getCustomerName(dsNkinkshihd.Tables(RS).Rows(i)("得意先コード").ToString) & "'" '補助科目
+                Sql += ",'PM-" & dsNkinkshihd.Tables(RS).Rows(i)("客先番号").ToString & "-" & i & "'" 'PO
+                Sql += ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyy-MM-dd") & "'" '入金日
                 Sql += ",''" '空でよし
+                Sql += "," & UtilClass.formatNumber(calDeposit + Paymentfee) '入金金額
+                Sql += ",'" & codeAAC & "'" '会計用得意先コード
+                Sql += ",'" & strDESCRIPTION & "'"  'DESCRIPTION
 
                 't67_swkhd データ登録
                 updateT67Swkhd(Sql)
@@ -4225,39 +4267,35 @@ Public Class ClosingLog
                     Sql += ",'PM-" & dsNkinkshihd.Tables(RS).Rows(i)("客先番号").ToString & "-" & i & "'" 'PO
                     Sql += ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyy-MM-dd") & "'" '入金日
                     Sql += ",''" '空でよし
-                    'Sql += "," & UtilClass.formatNumber(formatDouble(dsNkinkshihd.Tables(RS).Rows(i)("入金消込額計"))) '入金金額
-                    Sql += "," & UtilClass.formatNumber(formatDouble(0)) '入金金額
+                    Sql += "," & UtilClass.formatNumber(formatDouble(calDeposit + Paymentfee)) '入金金額
                     Sql += ",'" & codeAAC & "'" '会計用得意先コード
-                    Sql += ",''" '空でよし
-
-                    countKeyID = getCount(countKeyID)
+                    Sql += ",'" & strDESCRIPTION & "'"  'DESCRIPTION
 
                     't67_swkhd データ登録
                     updateT67Swkhd(Sql)
+
+
+                    '貸方　前受金
+                    countKeyID = getCount(countKeyID)
+
+                    Sql = ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyyMM") & "'" '入金日
+                    Sql += "," & seqID 'プライマリ
+                    Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
+                    Sql += ",'前受金'" '前受金
+                    Sql += "," & UtilClass.formatNumber(formatDouble(-Paymentfee)) '入金金額
+                    Sql += ",1" '固定
+                    Sql += ",'" & getCustomerName(dsNkinkshihd.Tables(RS).Rows(i)("得意先コード").ToString) & "'" '補助科目
+                    Sql += ",'PM-" & dsNkinkshihd.Tables(RS).Rows(i)("客先番号").ToString & "-" & i & "'" 'PO
+                    Sql += ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyy-MM-dd") & "'" '入金日
+                    Sql += ",''" '空でよし
+                    Sql += "," & UtilClass.formatNumber(calDeposit + Paymentfee) '入金金額
+                    Sql += ",'" & codeAAC & "'" '会計用得意先コード
+                    Sql += ",'" & strDESCRIPTION & "'"  'DESCRIPTION
+
+                    't67_swkhd データ登録
+                    updateT67Swkhd(Sql)
+
                 End If
-
-
-                '貸方　前受金
-                countKeyID = getCount(countKeyID)
-
-                Sql = ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyyMM") & "'" '入金日
-                Sql += "," & seqID 'プライマリ
-                Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
-                Sql += ",'前受金'" '前受金
-                'Sql += "," & UtilClass.formatNumber(formatDouble(-dsNkinkshihd.Tables(RS).Rows(i)("入金消込額計"))) '入金金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
-                Sql += "," & UtilClass.formatNumber(formatDouble(-0)) '入金金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
-                Sql += ",1" '固定
-                Sql += ",'" & getCustomerName(dsNkinkshihd.Tables(RS).Rows(i)("得意先コード").ToString) & "'" '補助科目
-                Sql += ",'PM-" & dsNkinkshihd.Tables(RS).Rows(i)("客先番号").ToString & "-" & i & "'" 'PO
-                Sql += ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyy-MM-dd") & "'" '入金日
-                Sql += ",''" '空でよし
-                'Sql += "," & UtilClass.formatNumber(formatDouble(dsNkinkshihd.Tables(RS).Rows(i)("入金消込額計"))) '入金金額
-                Sql += "," & UtilClass.formatNumber(0) '入金金額
-                Sql += ",'" & codeAAC & "'" '会計用得意先コード
-                Sql += ",''" '空でよし
-
-                't67_swkhd データ登録
-                updateT67Swkhd(Sql)
 
 #End Region
 
@@ -4282,7 +4320,7 @@ Public Class ClosingLog
                 'where 受注番号 And 請求区分 = 1 And 締日 
 
                 Sql = "SELECT"
-                Sql += " t27.入金消込額計"
+                Sql += " sum(t27.入金消込額計) as 入金合計"
                 Sql += " FROM public.t23_skyuhd as t23 "
                 Sql += " left join public.t27_nkinkshihd as t27"
                 Sql += " on t23.請求番号 = t27.請求番号"
@@ -4296,125 +4334,157 @@ Public Class ClosingLog
                 '条件オプション
                 'Sql = ""
 
-                'Sql += " and t23.受注番号 = '" & dsNkinkshihd.Tables(RS).Rows(i)("受注番号") & "'"
-                'Sql += " and t23.受注番号 = '" & dsNkinkshihd.Tables(RS).Rows(i)("受注番号") & "'"
-                Sql += " and t23.請求区分 = 1"
+                Sql += " and t23.受注番号 = '" & dsNkinkshihd.Tables(RS).Rows(i)("受注番号") & "'"
                 'Sql += " and t23.請求番号 = '" & dsNkinkshihd.Tables(RS).Rows(i)("請求番号") & "'"
-
-                'Sql += " GROUP BY "
-                'Sql += " t27"
-
-                'Sql += " ORDER BY "
-                'Sql += " t27.入金日,t42.入庫日,t40.客先番号"
-
+                Sql += " and t23.請求区分 = 1"
 
                 Dim dsNkinSkyu2 As DataSet = _db.selectDB(Sql, RS, reccnt)  '他の請求データの取得
+
 
                 '前受金のデータがあれば
                 If dsNkinSkyu2.Tables(RS).Rows.Count > 0 Then
 
-                    FormerGold = dsNkinSkyu2.Tables(RS).Rows(0)("入金消込額計")
-                End If
+                    FormerGold = dsNkinSkyu2.Tables(RS).Rows(0)("入金合計")
 
-
-                '借方  入金種別
-                Sql = ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyyMM") & "'" '入金日
-                Sql += "," & seqID 'プライマリ
-                Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
-                Sql += ",'" & strKamoku & "'"  '貸方科目
-                'Sql += "," & UtilClass.formatNumber(formatDouble(dsNkinkshihd.Tables(RS).Rows(i)("入金消込額計") - Paymentfee - FormerGold)) '入金金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
-                Sql += "," & UtilClass.formatNumber(formatDouble(0 - Paymentfee - FormerGold)) '入金金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
-
-                Sql += ",1" '固定
-                Sql += ",'" & getCustomerName(dsNkinkshihd.Tables(RS).Rows(i)("得意先コード").ToString) & "'" '補助科目
-                Sql += ",'PM-" & dsNkinkshihd.Tables(RS).Rows(i)("客先番号").ToString & "-" & i & "'" 'PO
-                Sql += ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyy-MM-dd") & "'" '入金日
-                Sql += ",''" '空でよし
-                'Sql += "," & UtilClass.formatNumber(formatDouble(dsNkinkshihd.Tables(RS).Rows(i)("入金消込額計"))) '入金金額
-                Sql += "," & UtilClass.formatNumber(formatDouble(0)) '入金金額
-                Sql += ",'" & codeAAC & "'" '会計用得意先コード
-                Sql += ",''" '空でよし
-
-                't67_swkhd データ登録
-                updateT67Swkhd(Sql)
-
-
-                '支払手数料があれば
-                If Paymentfee <> 0 Then
-
-                    '借方　支払手数料
-                    countKeyID = getCount(countKeyID)
-
-                    Sql = ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyyMM") & "'" '入金日
-                    Sql += "," & seqID 'プライマリ
-                    Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
-                    Sql += ",'支払手数料'" '支払手数料
-                    Sql += "," & UtilClass.formatNumber(formatDouble(Paymentfee)) '支払手数料（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
-                    Sql += ",1" '固定
-                    Sql += ",'" & getCustomerName(dsNkinkshihd.Tables(RS).Rows(i)("得意先コード").ToString) & "'" '補助科目
-                    Sql += ",'PM-" & dsNkinkshihd.Tables(RS).Rows(i)("客先番号").ToString & "-" & i & "'" 'PO
-                    Sql += ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyy-MM-dd") & "'" '入金日
-                    Sql += ",''" '空でよし
-                    'Sql += "," & UtilClass.formatNumber(formatDouble(dsNkinkshihd.Tables(RS).Rows(i)("入金消込額計"))) '入金金額
-                    Sql += "," & UtilClass.formatNumber(formatDouble(0)) '入金金額
-                    Sql += ",'" & codeAAC & "'" '会計用得意先コード
-                    Sql += ",''" '空でよし
-
-                    countKeyID = getCount(countKeyID)
-
-                    't67_swkhd データ登録
-                    updateT67Swkhd(Sql)
-                End If
-
-
-                '前受金があれば
-                If FormerGold > 0 Then
+                    If calDeposit > FormerGold Then
+                        '入金額が多い
+                    Else
+                        '前受金が多い
+                        FormerGold = calDeposit
+                    End If
 
                     '借方　前受金
-                    countKeyID = getCount(countKeyID)
-
                     Sql = ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyyMM") & "'" '入金日
                     Sql += "," & seqID 'プライマリ
                     Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
                     Sql += ",'前受金'" '借方勘定
-                    Sql += "," & UtilClass.formatNumber(formatDouble(FormerGold)) '入金金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
+                    Sql += "," & UtilClass.formatNumber(formatDouble(FormerGold)) '入金金額
                     Sql += ",1" '固定
                     Sql += ",'" & getCustomerName(dsNkinkshihd.Tables(RS).Rows(i)("得意先コード").ToString) & "'" '補助科目
                     Sql += ",'PM-" & dsNkinkshihd.Tables(RS).Rows(i)("客先番号").ToString & "-" & i & "'" 'PO
                     Sql += ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyy-MM-dd") & "'" '入金日
                     Sql += ",''" '空でよし
-                    'Sql += "," & UtilClass.formatNumber(formatDouble(dsNkinkshihd.Tables(RS).Rows(i)("入金消込額計"))) '入金金額
-                    Sql += "," & UtilClass.formatNumber(formatDouble(0)) '入金金額
+                    Sql += "," & UtilClass.formatNumber(formatDouble(calDeposit + Paymentfee)) '入金金額
                     Sql += ",'" & codeAAC & "'" '会計用得意先コード
-                    Sql += ",''" '空でよし
+                    Sql += ",'" & strDESCRIPTION & "'"  'DESCRIPTION
 
                     't67_swkhd データ登録
                     updateT67Swkhd(Sql)
 
+
+                    '貸方　売掛金
+                    countKeyID = getCount(countKeyID)
+
+                    Sql = ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyyMM") & "'" '入金日
+                    Sql += "," & seqID 'プライマリ
+                    Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
+                    Sql += ",'売掛金'" '借方勘定
+                    Sql += "," & UtilClass.formatNumber(formatDouble(-FormerGold)) '入金金額
+                    Sql += ",1" '固定
+                    Sql += ",'" & getCustomerName(dsNkinkshihd.Tables(RS).Rows(i)("得意先コード").ToString) & "'" '補助科目
+                    Sql += ",'PM-" & dsNkinkshihd.Tables(RS).Rows(i)("客先番号").ToString & "-" & i & "'" 'PO
+                    Sql += ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyy-MM-dd") & "'" '入金日
+                    Sql += ",''" '空でよし
+                    Sql += "," & UtilClass.formatNumber(formatDouble(calDeposit + Paymentfee)) '入金金額
+                    Sql += ",'" & codeAAC & "'" '会計用得意先コード
+                    Sql += ",'" & strDESCRIPTION & "'"  'DESCRIPTION
+
+                    't67_swkhd データ登録
+                    updateT67Swkhd(Sql)
+
+                    countKeyID = getCount(countKeyID)
                 End If
 
 
-                '貸方　売掛金
-                countKeyID = getCount(countKeyID)
+                '前受金相殺後に入金額があれば
+                If calDeposit > FormerGold Then
 
-                Sql = ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyyMM") & "'" '入金日
-                Sql += "," & seqID 'プライマリ
-                Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
-                Sql += ",'売掛金'" '借方勘定
-                'Sql += "," & UtilClass.formatNumber(formatDouble(-dsNkinkshihd.Tables(RS).Rows(i)("入金消込額計"))) '入金金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
-                Sql += "," & UtilClass.formatNumber(formatDouble(-0)) '入金金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
-                Sql += ",1" '固定
-                Sql += ",'" & getCustomerName(dsNkinkshihd.Tables(RS).Rows(i)("得意先コード").ToString) & "'" '補助科目
-                Sql += ",'PM-" & dsNkinkshihd.Tables(RS).Rows(i)("客先番号").ToString & "-" & i & "'" 'PO
-                Sql += ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyy-MM-dd") & "'" '入金日
-                Sql += ",''" '空でよし
-                'Sql += "," & UtilClass.formatNumber(formatDouble(dsNkinkshihd.Tables(RS).Rows(i)("入金消込額計"))) '入金金額
-                Sql += "," & UtilClass.formatNumber(formatDouble(0)) '入金金額
-                Sql += ",'" & codeAAC & "'" '会計用得意先コード
-                Sql += ",''" '空でよし
+                    '借方  入金種別
+                    Sql = ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyyMM") & "'" '入金日
+                    Sql += "," & seqID 'プライマリ
+                    Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
+                    Sql += ",'" & strKamoku & "'"  '貸方科目
+                    Sql += "," & UtilClass.formatNumber(formatDouble(calDeposit - Paymentfee - FormerGold)) '入金金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
+                    Sql += ",1" '固定
+                    Sql += ",'" & getCustomerName(dsNkinkshihd.Tables(RS).Rows(i)("得意先コード").ToString) & "'" '補助科目
+                    Sql += ",'PM-" & dsNkinkshihd.Tables(RS).Rows(i)("客先番号").ToString & "-" & i & "'" 'PO
+                    Sql += ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyy-MM-dd") & "'" '入金日
+                    Sql += ",''" '空でよし
+                    Sql += "," & UtilClass.formatNumber(formatDouble(calDeposit + Paymentfee)) '入金金額
+                    Sql += ",'" & codeAAC & "'" '会計用得意先コード
+                    Sql += ",'" & strDESCRIPTION & "'"  'DESCRIPTION
 
-                't67_swkhd データ登録
-                updateT67Swkhd(Sql)
+                    't67_swkhd データ登録
+                    updateT67Swkhd(Sql)
+
+
+                    '貸方　売掛金
+                    countKeyID = getCount(countKeyID)
+
+                    Sql = ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyyMM") & "'" '入金日
+                    Sql += "," & seqID 'プライマリ
+                    Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
+                    Sql += ",'売掛金'" '借方勘定
+                    Sql += "," & UtilClass.formatNumber(formatDouble(-(calDeposit - Paymentfee - FormerGold))) '入金金額
+                    Sql += ",1" '固定
+                    Sql += ",'" & getCustomerName(dsNkinkshihd.Tables(RS).Rows(i)("得意先コード").ToString) & "'" '補助科目
+                    Sql += ",'PM-" & dsNkinkshihd.Tables(RS).Rows(i)("客先番号").ToString & "-" & i & "'" 'PO
+                    Sql += ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyy-MM-dd") & "'" '入金日
+                    Sql += ",''" '空でよし
+                    Sql += "," & UtilClass.formatNumber(formatDouble(calDeposit + Paymentfee)) '入金金額
+                    Sql += ",'" & codeAAC & "'" '会計用得意先コード
+                    Sql += ",'" & strDESCRIPTION & "'"  'DESCRIPTION
+
+                    't67_swkhd データ登録
+                    updateT67Swkhd(Sql)
+
+
+                    '支払手数料があれば
+                    If Paymentfee <> 0 Then
+
+                        '借方　支払手数料
+                        countKeyID = getCount(countKeyID)
+
+                        Sql = ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyyMM") & "'" '入金日
+                        Sql += "," & seqID 'プライマリ
+                        Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
+                        Sql += ",'支払手数料'" '支払手数料
+                        Sql += "," & UtilClass.formatNumber(formatDouble(Paymentfee)) '支払手数料
+                        Sql += ",1" '固定
+                        Sql += ",'" & getCustomerName(dsNkinkshihd.Tables(RS).Rows(i)("得意先コード").ToString) & "'" '補助科目
+                        Sql += ",'PM-" & dsNkinkshihd.Tables(RS).Rows(i)("客先番号").ToString & "-" & i & "'" 'PO
+                        Sql += ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyy-MM-dd") & "'" '入金日
+                        Sql += ",''" '空でよし
+                        Sql += "," & UtilClass.formatNumber(formatDouble(calDeposit + Paymentfee)) '入金金額
+                        Sql += ",'" & codeAAC & "'" '会計用得意先コード
+                        Sql += ",'" & strDESCRIPTION & "'"  'DESCRIPTION
+
+                        't67_swkhd データ登録
+                        updateT67Swkhd(Sql)
+
+
+                        '貸方　売掛金
+                        countKeyID = getCount(countKeyID)
+
+                        Sql = ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyyMM") & "'" '入金日
+                        Sql += "," & seqID 'プライマリ
+                        Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
+                        Sql += ",'売掛金'" '借方勘定
+                        Sql += "," & UtilClass.formatNumber(formatDouble(-(Paymentfee))) '入金金額
+                        Sql += ",1" '固定
+                        Sql += ",'" & getCustomerName(dsNkinkshihd.Tables(RS).Rows(i)("得意先コード").ToString) & "'" '補助科目
+                        Sql += ",'PM-" & dsNkinkshihd.Tables(RS).Rows(i)("客先番号").ToString & "-" & i & "'" 'PO
+                        Sql += ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyy-MM-dd") & "'" '入金日
+                        Sql += ",''" '空でよし
+                        Sql += "," & UtilClass.formatNumber(formatDouble(calDeposit + Paymentfee)) '入金金額
+                        Sql += ",'" & codeAAC & "'" '会計用得意先コード
+                        Sql += ",'" & strDESCRIPTION & "'"  'DESCRIPTION
+
+                        't67_swkhd データ登録
+                        updateT67Swkhd(Sql)
+                    End If
+
+                End If
 
 #End Region
 
@@ -5092,106 +5162,94 @@ Public Class ClosingLog
     End Sub
 
 
-    Private Sub mGet_money_t26_nkindt(ByVal strNyukin As String _
-                                      , ByRef calDeposit As Decimal, ByRef Paymentfee As Decimal)
+    Private Sub mGet_money_t26_nkindt(ByVal strNyukin As String, ByVal strGyo As String _
+                                      , ByRef Paymentfee As Decimal)
 
         Dim reccnt As Integer = 0 'DB用（デフォルト）
         Dim Sql As String = "" 'SQL文用
 
-        't26_nkindt
+        't80
         Sql = "SELECT "
-        Sql += " *"
-
-        Sql += " FROM public.t26_nkindt as t26"
-
-        'Sql += " left join public.t21_hattyu t21"
-        'Sql += "  on t41.発注番号 = t21.発注番号 and t41.発注番号枝番 = t21.発注番号枝番"
-        'Sql += " and t41.行番号 = t21.行番号"
+        Sql += " 入金種目,入金額"
+        Sql += " FROM public.t80_shiwakenyu as t80"
 
         Sql += " WHERE "
-        Sql += " t31.会社コード"
+        Sql += " t80.会社コード"
         Sql += " ILIKE  "
         Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'"
 
-        Sql += " and t26.入金番号 = '" & strNyukin & "'"
+        Sql += " and t80.入金番号 = '" & strNyukin & "'"
+        Sql += " and t80.行番号 = '" & strGyo + 1 & "'"
 
         Dim dsNkinkshidt As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-        'For j As Integer = 0 To dsSwkUrigdt.Tables(RS).Rows.Count - 1
+        If dsNkinkshidt.Tables(RS).Rows.Count > 0 Then
+            If dsNkinkshidt.Tables(RS).Rows(0)("入金種目") = 2 Then
+                '手数料がある場合
+                Paymentfee = dsNkinkshidt.Tables(RS).Rows(0)("入金額")
+            End If
+        End If
+
+        'For i As Integer = 0 To dsNkinkshidt.Tables(RS).Rows.Count - 1
 
         '    '次のレコードを判定
-        '    If dsNkinkshihd.Tables(RS).Rows.Count > (i + 1) Then
+        '    If dsNkinkshidt.Tables(RS).Rows.Count > (i + 1) Then
         '        '振込の場合
-        '        If dsNkinkshihd.Tables(RS).Rows(i)("入金種別") = 1 Then
-        '            If dsNkinkshihd.Tables(RS).Rows(i + 1)("入金種別") = 2 Then
+        '        If dsNkinkshidt.Tables(RS).Rows(i)("入金種別") = 1 Then
+        '            If dsNkinkshidt.Tables(RS).Rows(i + 1)("入金種別") = 2 Then
         '                '手数料がある場合
-        '                Paymentfee = dsNkinkshihd.Tables(RS).Rows(i + 1)("入金消込額計")
+        '                Paymentfee = dsNkinkshidt.Tables(RS).Rows(i + 1)("入金消込額計")
         '            End If
         '        End If
         '    End If
 
-        '    If dsNkinkshihd.Tables(RS).Rows(i)("入金種別") = "9" Then  '相殺
+        'If dsNkinkshihd.Tables(RS).Rows(i)("入金種別") = "9" Then  '相殺
 
-        '        '借方　買掛金
-        '        Sql = ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyyMM") & "'" '入金日
-        '        Sql += "," & seqID 'プライマリ
-        '        Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
-        '        Sql += ",'買掛金'" '借方科目
-        '        Sql += "," & UtilClass.formatNumber(formatDouble(dsNkinkshihd.Tables(RS).Rows(i)("入金消込額計"))) '入金金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
-        '        Sql += ",1" '固定
-        '        Sql += ",'" & getSupplierName(dsNkinkshihd.Tables(RS).Rows(i)("仕入先コード").ToString) & "'" '補助科目
-        '        Sql += ",'PM-" & dsNkinkshihd.Tables(RS).Rows(i)("客先番号").ToString & "-" & i & "'" 'PO
-        '        Sql += ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyy-MM-dd") & "'" '入金日
-        '        Sql += ",''" '空でよし
-        '        Sql += "," & UtilClass.formatNumber(formatDouble(dsNkinkshihd.Tables(RS).Rows(i)("入金消込額計"))) '入金金額
-        '        Sql += ",'" & codeAAC & "'" '会計用得意先コード
-        '        Sql += ",''" '空でよし
+        '    '借方　買掛金
+        '    Sql = ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyyMM") & "'" '入金日
+        '    Sql += "," & seqID 'プライマリ
+        '    Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
+        '    Sql += ",'買掛金'" '借方科目
+        '    Sql += "," & UtilClass.formatNumber(formatDouble(dsNkinkshihd.Tables(RS).Rows(i)("入金消込額計"))) '入金金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
+        '    Sql += ",1" '固定
+        '    Sql += ",'" & getSupplierName(dsNkinkshihd.Tables(RS).Rows(i)("仕入先コード").ToString) & "'" '補助科目
+        '    Sql += ",'PM-" & dsNkinkshihd.Tables(RS).Rows(i)("客先番号").ToString & "-" & i & "'" 'PO
+        '    Sql += ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyy-MM-dd") & "'" '入金日
+        '    Sql += ",''" '空でよし
+        '    Sql += "," & UtilClass.formatNumber(formatDouble(dsNkinkshihd.Tables(RS).Rows(i)("入金消込額計"))) '入金金額
+        '    Sql += ",'" & codeAAC & "'" '会計用得意先コード
+        '    Sql += ",''" '空でよし
 
-        '        't67_swkhd データ登録
-        '        updateT67Swkhd(Sql)
-
-
-        '        '貸方　売掛金
-        '        countKeyID = getCount(countKeyID)
-
-        '        Sql = ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyyMM") & "'" '入金日
-        '        Sql += "," & seqID 'プライマリ
-        '        Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
-        '        Sql += ",'売掛金'" '貸方科目
-        '        Sql += "," & UtilClass.formatNumber(formatDouble(-dsNkinkshihd.Tables(RS).Rows(i)("入金消込額計"))) '入金金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
-        '        Sql += ",1" '固定
-        '        Sql += ",'" & getCustomerName(dsNkinkshihd.Tables(RS).Rows(i)("請求先コード").ToString) & "'" '補助科目
-        '        Sql += ",'PM-" & dsNkinkshihd.Tables(RS).Rows(i)("客先番号").ToString & "-" & i & "'" 'PO
-        '        Sql += ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyy-MM-dd") & "'" '入金日
-        '        Sql += ",''" '空でよし
-        '        Sql += "," & UtilClass.formatNumber(formatDouble(dsNkinkshihd.Tables(RS).Rows(i)("入金消込額計"))) '入金金額
-        '        Sql += ",'" & codeAAC & "'" '会計用得意先コード
-        '        Sql += ",''" '空でよし
-
-        '        countKeyID = getCount(countKeyID)
-
-        '        't67_swkhd データ登録
-        '        updateT67Swkhd(Sql)
-
-        '    End If
+        '    't67_swkhd データ登録
+        '    updateT67Swkhd(Sql)
 
 
-        '    calSales += dsSwkUrigdt.Tables(RS).Rows(j)("売単価") * dsSwkUrigdt.Tables(RS).Rows(j)("売上数量")
-        '    calCost += dsSwkUrigdt.Tables(RS).Rows(j)("仕入値") * dsSwkUrigdt.Tables(RS).Rows(j)("売上数量")
+        '    '貸方　売掛金
+        '    countKeyID = getCount(countKeyID)
+
+        '    Sql = ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyyMM") & "'" '入金日
+        '    Sql += "," & seqID 'プライマリ
+        '    Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
+        '    Sql += ",'売掛金'" '貸方科目
+        '    Sql += "," & UtilClass.formatNumber(formatDouble(-dsNkinkshihd.Tables(RS).Rows(i)("入金消込額計"))) '入金金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
+        '    Sql += ",1" '固定
+        '    Sql += ",'" & getCustomerName(dsNkinkshihd.Tables(RS).Rows(i)("請求先コード").ToString) & "'" '補助科目
+        '    Sql += ",'PM-" & dsNkinkshihd.Tables(RS).Rows(i)("客先番号").ToString & "-" & i & "'" 'PO
+        '    Sql += ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyy-MM-dd") & "'" '入金日
+        '    Sql += ",''" '空でよし
+        '    Sql += "," & UtilClass.formatNumber(formatDouble(dsNkinkshihd.Tables(RS).Rows(i)("入金消込額計"))) '入金金額
+        '    Sql += ",'" & codeAAC & "'" '会計用得意先コード
+        '    Sql += ",''" '空でよし
+
+        '    countKeyID = getCount(countKeyID)
+
+        '    't67_swkhd データ登録
+        '    updateT67Swkhd(Sql)
+
+        'End If
 
 
-        '    calKanzei += rmNullDecimal(dsSwkUrigdt.Tables(RS).Rows(j)("関税額")) * dsSwkUrigdt.Tables(RS).Rows(j)("売上数量")
-        '    calMaebarai += rmNullDecimal(dsSwkUrigdt.Tables(RS).Rows(j)("前払法人税額")) * dsSwkUrigdt.Tables(RS).Rows(j)("売上数量")
-        '    calYuso += rmNullDecimal(dsSwkUrigdt.Tables(RS).Rows(j)("輸送費額")) * dsSwkUrigdt.Tables(RS).Rows(j)("売上数量")
-        'Next
-
-        ''VAT-IN
-        'calVat = calSales * VAT / 100
-
-        ''間接費
-        'Indirectfees = calKanzei + calMaebarai + calYuso
-
-        'dsSwkUrigdt = Nothing
+        dsNkinkshidt = Nothing
 
     End Sub
 
