@@ -204,7 +204,7 @@ Partial Class Quote
         Me.TxtQuoteNo.MaxLength = 8
         Me.TxtQuoteNo.Name = "TxtQuoteNo"
         Me.TxtQuoteNo.ReadOnly = True
-        Me.TxtQuoteNo.Size = New System.Drawing.Size(88, 39)
+        Me.TxtQuoteNo.Size = New System.Drawing.Size(88, 23)
         Me.TxtQuoteNo.TabIndex = 1
         Me.TxtQuoteNo.TabStop = False
         '
@@ -598,7 +598,7 @@ Partial Class Quote
         Me.TxtCustomerName.Location = New System.Drawing.Point(275, 46)
         Me.TxtCustomerName.MaxLength = 50
         Me.TxtCustomerName.Name = "TxtCustomerName"
-        Me.TxtCustomerName.Size = New System.Drawing.Size(330, 39)
+        Me.TxtCustomerName.Size = New System.Drawing.Size(330, 23)
         Me.TxtCustomerName.TabIndex = 5
         '
         'LblCustomerName
@@ -634,7 +634,7 @@ Partial Class Quote
         Me.TxtPostalCode.Location = New System.Drawing.Point(129, 75)
         Me.TxtPostalCode.MaxLength = 7
         Me.TxtPostalCode.Name = "TxtPostalCode"
-        Me.TxtPostalCode.Size = New System.Drawing.Size(140, 39)
+        Me.TxtPostalCode.Size = New System.Drawing.Size(140, 23)
         Me.TxtPostalCode.TabIndex = 6
         Me.TxtPostalCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -693,7 +693,7 @@ Partial Class Quote
         Me.TxtPosition.Location = New System.Drawing.Point(767, 133)
         Me.TxtPosition.MaxLength = 50
         Me.TxtPosition.Name = "TxtPosition"
-        Me.TxtPosition.Size = New System.Drawing.Size(200, 39)
+        Me.TxtPosition.Size = New System.Drawing.Size(200, 23)
         Me.TxtPosition.TabIndex = 13
         '
         'TxtTel
@@ -704,7 +704,7 @@ Partial Class Quote
         Me.TxtTel.Location = New System.Drawing.Point(767, 46)
         Me.TxtTel.MaxLength = 13
         Me.TxtTel.Name = "TxtTel"
-        Me.TxtTel.Size = New System.Drawing.Size(200, 39)
+        Me.TxtTel.Size = New System.Drawing.Size(200, 23)
         Me.TxtTel.TabIndex = 10
         '
         'TxtPerson
@@ -713,7 +713,7 @@ Partial Class Quote
         Me.TxtPerson.Location = New System.Drawing.Point(767, 104)
         Me.TxtPerson.MaxLength = 50
         Me.TxtPerson.Name = "TxtPerson"
-        Me.TxtPerson.Size = New System.Drawing.Size(200, 39)
+        Me.TxtPerson.Size = New System.Drawing.Size(200, 23)
         Me.TxtPerson.TabIndex = 12
         '
         'TxtFax
@@ -724,7 +724,7 @@ Partial Class Quote
         Me.TxtFax.Location = New System.Drawing.Point(767, 75)
         Me.TxtFax.MaxLength = 13
         Me.TxtFax.Name = "TxtFax"
-        Me.TxtFax.Size = New System.Drawing.Size(200, 39)
+        Me.TxtFax.Size = New System.Drawing.Size(200, 23)
         Me.TxtFax.TabIndex = 11
         '
         'LblPosition
@@ -748,7 +748,7 @@ Partial Class Quote
         Me.TxtInput.MaxLength = 20
         Me.TxtInput.Name = "TxtInput"
         Me.TxtInput.ReadOnly = True
-        Me.TxtInput.Size = New System.Drawing.Size(213, 39)
+        Me.TxtInput.Size = New System.Drawing.Size(213, 23)
         Me.TxtInput.TabIndex = 6
         Me.TxtInput.TabStop = False
         '
@@ -843,7 +843,7 @@ Partial Class Quote
         Me.TxtSuffixNo.MaxLength = 1
         Me.TxtSuffixNo.Name = "TxtSuffixNo"
         Me.TxtSuffixNo.ReadOnly = True
-        Me.TxtSuffixNo.Size = New System.Drawing.Size(29, 39)
+        Me.TxtSuffixNo.Size = New System.Drawing.Size(29, 23)
         Me.TxtSuffixNo.TabIndex = 2
         Me.TxtSuffixNo.TabStop = False
         '
@@ -854,7 +854,7 @@ Partial Class Quote
         Me.TxtSales.Location = New System.Drawing.Point(1129, 46)
         Me.TxtSales.MaxLength = 20
         Me.TxtSales.Name = "TxtSales"
-        Me.TxtSales.Size = New System.Drawing.Size(213, 39)
+        Me.TxtSales.Size = New System.Drawing.Size(213, 23)
         Me.TxtSales.TabIndex = 14
         '
         'LblSales
@@ -902,7 +902,7 @@ Partial Class Quote
         Me.TxtTotal.MaxLength = 10
         Me.TxtTotal.Name = "TxtTotal"
         Me.TxtTotal.ReadOnly = True
-        Me.TxtTotal.Size = New System.Drawing.Size(187, 39)
+        Me.TxtTotal.Size = New System.Drawing.Size(187, 23)
         Me.TxtTotal.TabIndex = 21
         Me.TxtTotal.TabStop = False
         Me.TxtTotal.Text = "999,999,999,999"
@@ -951,7 +951,7 @@ Partial Class Quote
         Me.DtpRegistration.Location = New System.Drawing.Point(391, 9)
         Me.DtpRegistration.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.DtpRegistration.Name = "DtpRegistration"
-        Me.DtpRegistration.Size = New System.Drawing.Size(150, 37)
+        Me.DtpRegistration.Size = New System.Drawing.Size(150, 22)
         Me.DtpRegistration.TabIndex = 3
         Me.DtpRegistration.TabStop = False
         Me.DtpRegistration.Value = New Date(2018, 6, 5, 23, 23, 58, 0)
@@ -973,7 +973,7 @@ Partial Class Quote
         Me.TxtCustomerCode.Location = New System.Drawing.Point(129, 46)
         Me.TxtCustomerCode.MaxLength = 50
         Me.TxtCustomerCode.Name = "TxtCustomerCode"
-        Me.TxtCustomerCode.Size = New System.Drawing.Size(78, 39)
+        Me.TxtCustomerCode.Size = New System.Drawing.Size(78, 23)
         Me.TxtCustomerCode.TabIndex = 3
         '
         'Label2
@@ -981,7 +981,7 @@ Partial Class Quote
         Me.Label2.AutoSize = True
         Me.Label2.Location = New System.Drawing.Point(223, 16)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(22, 24)
+        Me.Label2.Size = New System.Drawing.Size(11, 12)
         Me.Label2.TabIndex = 37
         Me.Label2.Text = "-"
         '
@@ -994,7 +994,7 @@ Partial Class Quote
         Me.TxtItemCount.MaxLength = 20
         Me.TxtItemCount.Name = "TxtItemCount"
         Me.TxtItemCount.ReadOnly = True
-        Me.TxtItemCount.Size = New System.Drawing.Size(70, 39)
+        Me.TxtItemCount.Size = New System.Drawing.Size(70, 23)
         Me.TxtItemCount.TabIndex = 38
         Me.TxtItemCount.TabStop = False
         Me.TxtItemCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -1020,7 +1020,7 @@ Partial Class Quote
         Me.TxtGrossProfit.MaxLength = 10
         Me.TxtGrossProfit.Name = "TxtGrossProfit"
         Me.TxtGrossProfit.ReadOnly = True
-        Me.TxtGrossProfit.Size = New System.Drawing.Size(187, 39)
+        Me.TxtGrossProfit.Size = New System.Drawing.Size(187, 23)
         Me.TxtGrossProfit.TabIndex = 40
         Me.TxtGrossProfit.TabStop = False
         Me.TxtGrossProfit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -1046,7 +1046,7 @@ Partial Class Quote
         Me.DtpQuote.Location = New System.Drawing.Point(665, 10)
         Me.DtpQuote.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.DtpQuote.Name = "DtpQuote"
-        Me.DtpQuote.Size = New System.Drawing.Size(150, 37)
+        Me.DtpQuote.Size = New System.Drawing.Size(150, 22)
         Me.DtpQuote.TabIndex = 1
         Me.DtpQuote.Value = New Date(2018, 6, 5, 23, 23, 58, 0)
         '
@@ -1059,7 +1059,7 @@ Partial Class Quote
         Me.DtpExpiration.Location = New System.Drawing.Point(937, 10)
         Me.DtpExpiration.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.DtpExpiration.Name = "DtpExpiration"
-        Me.DtpExpiration.Size = New System.Drawing.Size(140, 37)
+        Me.DtpExpiration.Size = New System.Drawing.Size(140, 22)
         Me.DtpExpiration.TabIndex = 2
         Me.DtpExpiration.Value = New Date(2018, 6, 5, 23, 23, 58, 0)
         '
@@ -1070,7 +1070,7 @@ Partial Class Quote
         Me.TxtVat.Location = New System.Drawing.Point(213, 489)
         Me.TxtVat.MaxLength = 10
         Me.TxtVat.Name = "TxtVat"
-        Me.TxtVat.Size = New System.Drawing.Size(104, 39)
+        Me.TxtVat.Size = New System.Drawing.Size(104, 23)
         Me.TxtVat.TabIndex = 21
         Me.TxtVat.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.TxtVat.Visible = False
@@ -1128,7 +1128,7 @@ Partial Class Quote
         Me.RbtnQuote.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.RbtnQuote.Location = New System.Drawing.Point(1145, 193)
         Me.RbtnQuote.Name = "RbtnQuote"
-        Me.RbtnQuote.Size = New System.Drawing.Size(224, 34)
+        Me.RbtnQuote.Size = New System.Drawing.Size(121, 19)
         Me.RbtnQuote.TabIndex = 19
         Me.RbtnQuote.Text = "見積単価入力"
         Me.RbtnQuote.UseVisualStyleBackColor = True
@@ -1140,7 +1140,7 @@ Partial Class Quote
         Me.RbtnUP.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.RbtnUP.Location = New System.Drawing.Point(955, 193)
         Me.RbtnUP.Name = "RbtnUP"
-        Me.RbtnUP.Size = New System.Drawing.Size(164, 34)
+        Me.RbtnUP.Size = New System.Drawing.Size(89, 19)
         Me.RbtnUP.TabIndex = 17
         Me.RbtnUP.TabStop = True
         Me.RbtnUP.Text = "単価入力"
@@ -1152,7 +1152,7 @@ Partial Class Quote
         Me.RbtnGP.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.RbtnGP.Location = New System.Drawing.Point(1050, 193)
         Me.RbtnGP.Name = "RbtnGP"
-        Me.RbtnGP.Size = New System.Drawing.Size(164, 34)
+        Me.RbtnGP.Size = New System.Drawing.Size(89, 19)
         Me.RbtnGP.TabIndex = 18
         Me.RbtnGP.Text = "粗利入力"
         Me.RbtnGP.UseVisualStyleBackColor = True
@@ -1176,7 +1176,7 @@ Partial Class Quote
         Me.TxtVatAmount.MaxLength = 10
         Me.TxtVatAmount.Name = "TxtVatAmount"
         Me.TxtVatAmount.ReadOnly = True
-        Me.TxtVatAmount.Size = New System.Drawing.Size(116, 39)
+        Me.TxtVatAmount.Size = New System.Drawing.Size(116, 23)
         Me.TxtVatAmount.TabIndex = 203
         Me.TxtVatAmount.TabStop = False
         Me.TxtVatAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -1200,7 +1200,7 @@ Partial Class Quote
         Me.CmCurrency.Items.AddRange(New Object() {"RegularShip", "DHL", "Air", "Ship"})
         Me.CmCurrency.Location = New System.Drawing.Point(1129, 105)
         Me.CmCurrency.Name = "CmCurrency"
-        Me.CmCurrency.Size = New System.Drawing.Size(213, 38)
+        Me.CmCurrency.Size = New System.Drawing.Size(213, 23)
         Me.CmCurrency.TabIndex = 315
         '
         'LblCurrency
@@ -1236,7 +1236,7 @@ Partial Class Quote
         Me.TxtRate.MaxLength = 20
         Me.TxtRate.Name = "TxtRate"
         Me.TxtRate.ReadOnly = True
-        Me.TxtRate.Size = New System.Drawing.Size(213, 39)
+        Me.TxtRate.Size = New System.Drawing.Size(213, 23)
         Me.TxtRate.TabIndex = 318
         Me.TxtRate.TabStop = False
         '
@@ -1262,7 +1262,7 @@ Partial Class Quote
         Me.TxtIDRCurrency.MaxLength = 20
         Me.TxtIDRCurrency.Name = "TxtIDRCurrency"
         Me.TxtIDRCurrency.ReadOnly = True
-        Me.TxtIDRCurrency.Size = New System.Drawing.Size(31, 39)
+        Me.TxtIDRCurrency.Size = New System.Drawing.Size(31, 23)
         Me.TxtIDRCurrency.TabIndex = 320
         Me.TxtIDRCurrency.TabStop = False
         Me.TxtIDRCurrency.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -1277,7 +1277,7 @@ Partial Class Quote
         Me.TxtChangeCurrency.MaxLength = 20
         Me.TxtChangeCurrency.Name = "TxtChangeCurrency"
         Me.TxtChangeCurrency.ReadOnly = True
-        Me.TxtChangeCurrency.Size = New System.Drawing.Size(31, 39)
+        Me.TxtChangeCurrency.Size = New System.Drawing.Size(31, 23)
         Me.TxtChangeCurrency.TabIndex = 322
         Me.TxtChangeCurrency.TabStop = False
         Me.TxtChangeCurrency.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -1305,7 +1305,7 @@ Partial Class Quote
         Me.TxtCurrencyVatAmount.MaxLength = 10
         Me.TxtCurrencyVatAmount.Name = "TxtCurrencyVatAmount"
         Me.TxtCurrencyVatAmount.ReadOnly = True
-        Me.TxtCurrencyVatAmount.Size = New System.Drawing.Size(25, 39)
+        Me.TxtCurrencyVatAmount.Size = New System.Drawing.Size(25, 23)
         Me.TxtCurrencyVatAmount.TabIndex = 325
         Me.TxtCurrencyVatAmount.TabStop = False
         Me.TxtCurrencyVatAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -1333,7 +1333,7 @@ Partial Class Quote
         Me.TxtCurrencyQuoteTotal.MaxLength = 10
         Me.TxtCurrencyQuoteTotal.Name = "TxtCurrencyQuoteTotal"
         Me.TxtCurrencyQuoteTotal.ReadOnly = True
-        Me.TxtCurrencyQuoteTotal.Size = New System.Drawing.Size(23, 39)
+        Me.TxtCurrencyQuoteTotal.Size = New System.Drawing.Size(23, 23)
         Me.TxtCurrencyQuoteTotal.TabIndex = 323
         Me.TxtCurrencyQuoteTotal.TabStop = False
         Me.TxtCurrencyQuoteTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -1373,7 +1373,7 @@ Partial Class Quote
         Me.txtPurchasecost.MaxLength = 10
         Me.txtPurchasecost.Name = "txtPurchasecost"
         Me.txtPurchasecost.ReadOnly = True
-        Me.txtPurchasecost.Size = New System.Drawing.Size(187, 39)
+        Me.txtPurchasecost.Size = New System.Drawing.Size(187, 23)
         Me.txtPurchasecost.TabIndex = 328
         Me.txtPurchasecost.TabStop = False
         Me.txtPurchasecost.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -1387,7 +1387,7 @@ Partial Class Quote
         Me.txtGrossmarginRate.MaxLength = 10
         Me.txtGrossmarginRate.Name = "txtGrossmarginRate"
         Me.txtGrossmarginRate.ReadOnly = True
-        Me.txtGrossmarginRate.Size = New System.Drawing.Size(187, 39)
+        Me.txtGrossmarginRate.Size = New System.Drawing.Size(187, 23)
         Me.txtGrossmarginRate.TabIndex = 329
         Me.txtGrossmarginRate.TabStop = False
         Me.txtGrossmarginRate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -1425,7 +1425,7 @@ Partial Class Quote
         Me.TxtPurchaseTotal.MaxLength = 10
         Me.TxtPurchaseTotal.Name = "TxtPurchaseTotal"
         Me.TxtPurchaseTotal.ReadOnly = True
-        Me.TxtPurchaseTotal.Size = New System.Drawing.Size(187, 39)
+        Me.TxtPurchaseTotal.Size = New System.Drawing.Size(187, 23)
         Me.TxtPurchaseTotal.TabIndex = 42
         Me.TxtPurchaseTotal.TabStop = False
         Me.TxtPurchaseTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -1451,7 +1451,7 @@ Partial Class Quote
         Me.TxtQuoteTotal.MaxLength = 10
         Me.TxtQuoteTotal.Name = "TxtQuoteTotal"
         Me.TxtQuoteTotal.ReadOnly = True
-        Me.TxtQuoteTotal.Size = New System.Drawing.Size(187, 39)
+        Me.TxtQuoteTotal.Size = New System.Drawing.Size(187, 23)
         Me.TxtQuoteTotal.TabIndex = 201
         Me.TxtQuoteTotal.TabStop = False
         Me.TxtQuoteTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -1465,7 +1465,7 @@ Partial Class Quote
         Me.txtProfitmarginRate.MaxLength = 10
         Me.txtProfitmarginRate.Name = "txtProfitmarginRate"
         Me.txtProfitmarginRate.ReadOnly = True
-        Me.txtProfitmarginRate.Size = New System.Drawing.Size(187, 39)
+        Me.txtProfitmarginRate.Size = New System.Drawing.Size(187, 23)
         Me.txtProfitmarginRate.TabIndex = 333
         Me.txtProfitmarginRate.TabStop = False
         Me.txtProfitmarginRate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -1491,7 +1491,7 @@ Partial Class Quote
         Me.txtProfitmargin.MaxLength = 10
         Me.txtProfitmargin.Name = "txtProfitmargin"
         Me.txtProfitmargin.ReadOnly = True
-        Me.txtProfitmargin.Size = New System.Drawing.Size(187, 39)
+        Me.txtProfitmargin.Size = New System.Drawing.Size(187, 23)
         Me.txtProfitmargin.TabIndex = 331
         Me.txtProfitmargin.TabStop = False
         Me.txtProfitmargin.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -1517,7 +1517,7 @@ Partial Class Quote
         Me.txtDomesticArea.Location = New System.Drawing.Point(642, 162)
         Me.txtDomesticArea.MaxLength = 7
         Me.txtDomesticArea.Name = "txtDomesticArea"
-        Me.txtDomesticArea.Size = New System.Drawing.Size(40, 39)
+        Me.txtDomesticArea.Size = New System.Drawing.Size(40, 23)
         Me.txtDomesticArea.TabIndex = 335
         Me.txtDomesticArea.Text = "0"
         Me.txtDomesticArea.TextAlign = System.Windows.Forms.HorizontalAlignment.Center

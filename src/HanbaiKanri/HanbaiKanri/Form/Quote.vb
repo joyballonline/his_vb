@@ -2028,7 +2028,7 @@ Public Class Quote
                         Sql2 += ",粗利率 = 0"
                     End If
                     Sql2 += ",リードタイム = '" & RevoveChars(DgvItemList.Rows(index).Cells("リードタイム").Value.ToString) & "' "
-                    If DgvItemList.Rows(index).Cells("リードタイム単位").Value IsNot Nothing And Not IsNumeric(DgvItemList.Rows(index).Cells("リードタイム単位").Value) Then
+                    If DgvItemList.Rows(index).Cells("リードタイム単位").Value IsNot Nothing And IsNumeric(DgvItemList.Rows(index).Cells("リードタイム単位").Value) Then
                         Sql2 += ",リードタイム単位 = " & DgvItemList.Rows(index).Cells("リードタイム単位").Value.ToString
                     Else
                         Sql2 += ",リードタイム単位 = 1"
@@ -3595,7 +3595,4 @@ Public Class Quote
 
     End Sub
 
-    Private Sub DgvItemList_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DgvItemList.CellContentClick
-
-    End Sub
 End Class
