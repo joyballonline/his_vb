@@ -149,22 +149,22 @@ Public Class APScheduledCollectionDateList
 
                     cur = curds.Tables(RS).Rows(0)("通貨コード")
                 End If
-                '支払予定日が変わったら取得
-                If dsKikehd.Tables(RS).Rows(i)("支払予定日") IsNot DBNull.Value Then
+                ''支払予定日が変わったら取得
+                'If dsKikehd.Tables(RS).Rows(i)("支払予定日") IsNot DBNull.Value Then
 
-                    If (tmpSupplierDate <> dsKikehd.Tables(RS).Rows(i)("支払予定日").ToShortDateString()) Then
-                        tmpSupplierDate = dsKikehd.Tables(RS).Rows(i)("支払予定日").ToShortDateString()
-                    Else
-                        tmpSupplierDate = ""
-                    End If
+                '    If (tmpSupplierDate <> dsKikehd.Tables(RS).Rows(i)("支払予定日").ToShortDateString()) Then
+                '        tmpSupplierDate = dsKikehd.Tables(RS).Rows(i)("支払予定日").ToShortDateString()
+                '    Else
+                '        tmpSupplierDate = ""
+                '    End If
 
-                Else
-                    tmpSupplierDate = ""
-                End If
+                'Else
+                '    tmpSupplierDate = ""
+                'End If
 
                 DgvCymndt.Rows.Add()
 
-                DgvCymndt.Rows(i).Cells("支払期日").Value = tmpSupplierDate
+                DgvCymndt.Rows(i).Cells("支払期日").Value = dsKikehd.Tables(RS).Rows(i)("支払予定日").ToShortDateString()
                 DgvCymndt.Rows(i).Cells("仕入先名").Value = dsKikehd.Tables(RS).Rows(i)("仕入先名")
                 DgvCymndt.Rows(i).Cells("発注番号").Value = dsKikehd.Tables(RS).Rows(i)("発注番号")
                 DgvCymndt.Rows(i).Cells("買掛日").Value = dsKikehd.Tables(RS).Rows(i)("買掛日").ToShortDateString()
