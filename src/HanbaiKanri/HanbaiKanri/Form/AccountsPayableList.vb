@@ -102,36 +102,89 @@ Public Class AccountsPayableList
             DgvKike.Columns("取消").HeaderText = "Cancel"
             DgvKike.Columns("買掛番号").HeaderText = "AccountsPayableNumber"
             DgvKike.Columns("買掛区分").HeaderText = "AccountsPayableClassification"
-            DgvKike.Columns("買掛日").HeaderText = "AccountsPayableDate"
+            'DgvKike.Columns("買掛日").HeaderText = "AccountsPayableDate"
             DgvKike.Columns("客先番号").HeaderText = "CustomerNumber"
             DgvKike.Columns("発注番号").HeaderText = "PurchaseOrderNumber"
-            DgvKike.Columns("発注番号枝番").HeaderText = "PurchaseOrderSubNumber"
+            DgvKike.Columns("発注番号枝番").HeaderText = "PurchaseOrderVer"
             DgvKike.Columns("仕入先コード").HeaderText = "SupplierCode"
             DgvKike.Columns("仕入先名").HeaderText = "SupplierName"
+
             DgvKike.Columns("通貨_外貨").HeaderText = "Currency"
-            DgvKike.Columns("買掛金額計_外貨").HeaderText = "TotalAccountsPayable"
+            DgvKike.Columns("仕入原価").HeaderText = "PurchaseCost" & vbCrLf & "a"
+            DgvKike.Columns("VAT").HeaderText = "VAT-IN" & vbCrLf & "b"
+            DgvKike.Columns("買掛金額").HeaderText = "AccountsPayableAmount" & vbCrLf & "c=a+b"
+            DgvKike.Columns("買掛金額計_外貨").HeaderText = "RegisteredAmount" & vbCrLf & "d" '既登録額
+            DgvKike.Columns("未登録額").HeaderText = "UnregisteredAmount" & vbCrLf & "e=c-d"
+
             DgvKike.Columns("買掛残高_外貨").HeaderText = "AccountsPayableBalance"
             DgvKike.Columns("通貨").HeaderText = "Currency"
             DgvKike.Columns("買掛金額計").HeaderText = "TotalAccountsPayable"
             DgvKike.Columns("買掛残高").HeaderText = "AccountsPayableBalance"
+
             DgvKike.Columns("備考1").HeaderText = "Remarks1"
             DgvKike.Columns("備考2").HeaderText = "Remarks2"
             DgvKike.Columns("更新日").HeaderText = "UpdateDate"
             DgvKike.Columns("更新者").HeaderText = "ModifiedBy"
 
+        Else  '日本語
+
+            DgvKike.Columns("仕入原価").HeaderText = "仕入原価" & vbCrLf & "a"
+            DgvKike.Columns("VAT").HeaderText = "VAT-IN" & vbCrLf & "b"
+            DgvKike.Columns("買掛金額").HeaderText = "買掛金額" & vbCrLf & "c=a+b"
+            DgvKike.Columns("買掛金額計_外貨").HeaderText = "既登録額" & vbCrLf & "d" '既登録額
+            DgvKike.Columns("未登録額").HeaderText = "未登録額" & vbCrLf & "e=c-d"
+
         End If
 
         '数字形式
+        DgvKike.Columns("仕入原価").DefaultCellStyle.Format = "N2"
+        DgvKike.Columns("VAT").DefaultCellStyle.Format = "N2"
+        DgvKike.Columns("買掛金額").DefaultCellStyle.Format = "N2"
         DgvKike.Columns("買掛金額計_外貨").DefaultCellStyle.Format = "N2"
+        DgvKike.Columns("未登録額").DefaultCellStyle.Format = "N2"
+
         DgvKike.Columns("買掛残高_外貨").DefaultCellStyle.Format = "N2"
         DgvKike.Columns("買掛金額計").DefaultCellStyle.Format = "N2"
         DgvKike.Columns("買掛残高").DefaultCellStyle.Format = "N2"
 
-        '中央寄せ
+
+        '右寄せ
+        DgvKike.Columns("仕入原価").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvKike.Columns("VAT").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvKike.Columns("買掛金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvKike.Columns("買掛金額計_外貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvKike.Columns("未登録額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
         DgvKike.Columns("買掛残高_外貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvKike.Columns("買掛金額計").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvKike.Columns("買掛残高").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+        '中央寄せ
+        DgvKike.Columns("取消").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvKike.Columns("買掛番号").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvKike.Columns("買掛区分").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvKike.Columns("買掛日").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvKike.Columns("客先番号").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvKike.Columns("発注番号枝番").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvKike.Columns("仕入先コード").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvKike.Columns("仕入先名").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvKike.Columns("通貨_外貨").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvKike.Columns("仕入原価").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvKike.Columns("VAT").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+        DgvKike.Columns("買掛金額").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvKike.Columns("買掛金額計_外貨").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvKike.Columns("未登録額").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+        DgvKike.Columns("買掛残高_外貨").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvKike.Columns("通貨").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvKike.Columns("買掛金額計").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvKike.Columns("買掛残高").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+        DgvKike.Columns("備考1").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvKike.Columns("備考2").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvKike.Columns("更新日").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvKike.Columns("更新者").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
 
         PurchaseListLoad() '一覧表示
@@ -140,7 +193,7 @@ Public Class AccountsPayableList
             LblConditions.Text = "ExtractionCondition"
             Label1.Text = "SupplierName"
             Label4.Text = "SupplierCode"
-            Label8.Text = "AccountsPayableDate"
+            'Label8.Text = "AccountsPayableDate"
             Label7.Text = "AccountsPayableNumber"
             Label11.Text = "CustomerNumber"
             LblItemName.Text = "ItemName"
@@ -169,7 +222,7 @@ Public Class AccountsPayableList
 
         Try
             Sql = "SELECT"
-            Sql += " t46.*"
+            Sql += " t46.*, t20.ＶＡＴ"
             Sql += " FROM "
             Sql += " public.t46_kikehd t46 "
 
@@ -220,17 +273,30 @@ Public Class AccountsPayableList
                                                                                                     CommonConst.APC_KBN_NORMAL_TXT)
                 End If
                 DgvKike.Rows(i).Cells("買掛日").Value = ds.Tables(RS).Rows(i)("買掛日").ToShortDateString()
+                DgvKike.Rows(i).Cells("仕入先請求番号").Value = ds.Tables(RS).Rows(i)("仕入先請求番号")
                 DgvKike.Rows(i).Cells("客先番号").Value = ds.Tables(RS).Rows(i)("客先番号")
                 DgvKike.Rows(i).Cells("発注番号").Value = ds.Tables(RS).Rows(i)("発注番号")
                 DgvKike.Rows(i).Cells("発注番号枝番").Value = ds.Tables(RS).Rows(i)("発注番号枝番")
                 DgvKike.Rows(i).Cells("仕入先コード").Value = ds.Tables(RS).Rows(i)("仕入先コード")
                 DgvKike.Rows(i).Cells("仕入先名").Value = ds.Tables(RS).Rows(i)("仕入先名")
+
+                Dim decShiire As Decimal = 0
+                Call mGet_t21(ds.Tables(RS).Rows(i)("発注番号"), ds.Tables(RS).Rows(i)("発注番号枝番") _
+                              , decShiire)
+                Dim decVAT As Decimal = decShiire * ds.Tables(RS).Rows(i)("ＶＡＴ") / 100
+
                 DgvKike.Rows(i).Cells("通貨_外貨").Value = cur
-                DgvKike.Rows(i).Cells("買掛金額計_外貨").Value = ds.Tables(RS).Rows(i)("買掛金額計_外貨")
-                DgvKike.Rows(i).Cells("買掛残高_外貨").Value = ds.Tables(RS).Rows(i)("買掛残高_外貨")
-                DgvKike.Rows(i).Cells("通貨").Value =   setBaseCurrency()
-                DgvKike.Rows(i).Cells("買掛金額計").Value = ds.Tables(RS).Rows(i)("買掛金額計")
-                DgvKike.Rows(i).Cells("買掛残高").Value = ds.Tables(RS).Rows(i)("買掛残高")
+                DgvKike.Rows(i).Cells("仕入原価").Value = decShiire
+                DgvKike.Rows(i).Cells("VAT").Value = decVAT
+                DgvKike.Rows(i).Cells("買掛金額").Value = decShiire + decVAT
+                DgvKike.Rows(i).Cells("買掛金額計_外貨").Value = ds.Tables(RS).Rows(i)("買掛金額計_外貨")  '既登録額
+                DgvKike.Rows(i).Cells("未登録額").Value = （decShiire + decVAT） - ds.Tables(RS).Rows(i)("買掛金額計_外貨")
+
+                'DgvKike.Rows(i).Cells("買掛残高_外貨").Value = ds.Tables(RS).Rows(i)("買掛残高_外貨")
+                'DgvKike.Rows(i).Cells("通貨").Value =   setBaseCurrency()
+                'DgvKike.Rows(i).Cells("買掛金額計").Value = ds.Tables(RS).Rows(i)("買掛金額計")
+                'DgvKike.Rows(i).Cells("買掛残高").Value = ds.Tables(RS).Rows(i)("買掛残高")
+
                 DgvKike.Rows(i).Cells("備考1").Value = ds.Tables(RS).Rows(i)("備考1")
                 DgvKike.Rows(i).Cells("備考2").Value = ds.Tables(RS).Rows(i)("備考2")
                 DgvKike.Rows(i).Cells("更新日").Value = ds.Tables(RS).Rows(i)("更新日")
@@ -248,6 +314,33 @@ Public Class AccountsPayableList
         DgvKike.AutoSizeColumnsMode = DataGridViewAutoSizeColumnMode.DisplayedCells
 
     End Sub
+
+    Private Sub mGet_t21(ByVal strHattyu As String, ByVal strNo As String _
+                         , ByRef decShiire As Decimal)
+
+        Dim reccnt As Integer = 0 'DB用（デフォルト）
+        Dim Sql As String = ""
+        Dim ds_t20 As DataSet
+
+        Sql = "SELECT"
+        Sql += " *"
+        Sql += " FROM "
+        Sql += " t21_hattyu"
+
+        Sql += " WHERE "
+        Sql += " 会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " and 発注番号 = '" & strHattyu & "'"
+        Sql += " and 発注番号枝番 = '" & strNo & "'"
+
+        ds_t20 = _db.selectDB(Sql, RS, reccnt)
+
+
+        For i As Integer = 0 To ds_t20.Tables(RS).Rows.Count - 1
+            decShiire += ds_t20.Tables(RS).Rows(i)("仕入値_外貨") * ds_t20.Tables(RS).Rows(i)("仕入数量")
+        Next
+
+    End Sub
+
 
     '戻るボタン押下時
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
