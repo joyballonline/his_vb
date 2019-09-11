@@ -282,8 +282,9 @@ Public Class GoodsIssue
                 DgvOrder.Rows(i).Cells("受注数量").Value = dsCymndt.Tables(RS).Rows(i)("受注数量")
                 DgvOrder.Rows(i).Cells("単位").Value = dsCymndt.Tables(RS).Rows(i)("単位")
 
-                DgvOrder.Rows(i).Cells("売上数量").Value = dsCymndt.Tables(RS).Rows(i)("売上数量")
-                DgvOrder.Rows(i).Cells("受注残数").Value = dsCymndt.Tables(RS).Rows(i)("受注残数")
+                'DgvOrder.Rows(i).Cells("売上数量").Value = dsCymndt.Tables(RS).Rows(i)("売上数量")
+                DgvOrder.Rows(i).Cells("売上数量").Value = dsCymndt.Tables(RS).Rows(i)("出庫数")
+                DgvOrder.Rows(i).Cells("受注残数").Value = dsCymndt.Tables(RS).Rows(i)("未出庫数")
                 DgvOrder.Rows(i).Cells("売単価").Value = dsCymndt.Tables(RS).Rows(i)("見積単価")
 
                 DgvOrder.Rows(i).Cells("売上金額").Value = dsCymndt.Tables(RS).Rows(i)("売上金額")
