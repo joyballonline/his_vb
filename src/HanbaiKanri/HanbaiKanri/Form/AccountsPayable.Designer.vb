@@ -35,13 +35,13 @@ Partial Class AccountsPayable
         Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.BtnRegist = New System.Windows.Forms.Button()
         Me.BtnBack = New System.Windows.Forms.Button()
         Me.LblNo1 = New System.Windows.Forms.Label()
@@ -74,16 +74,6 @@ Partial Class AccountsPayable
         Me.今回備考1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.今回備考2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DgvHistory = New System.Windows.Forms.DataGridView()
-        Me.No = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.買掛番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.買掛日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.買掛区分 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.支払先 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.買掛金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.備考1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.備考2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.買掛済み発注番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.買掛済み発注番号枝番 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DgvCymndt = New System.Windows.Forms.DataGridView()
         Me.明細 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.メーカー = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -103,6 +93,17 @@ Partial Class AccountsPayable
         Me.VendorInvoiceNumber = New System.Windows.Forms.TextBox()
         Me.lblVendorInvoiceNumber = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.No = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.買掛番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.買掛区分 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.買掛日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入先請求番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.支払先 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.買掛金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.備考1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.備考2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.買掛済み発注番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.買掛済み発注番号枝番 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DgvCymn, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvAdd, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvHistory, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -463,7 +464,7 @@ Partial Class AccountsPayable
         DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DgvHistory.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle12
         Me.DgvHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvHistory.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.No, Me.買掛番号, Me.買掛日, Me.買掛区分, Me.支払先, Me.買掛金額, Me.備考1, Me.備考2, Me.買掛済み発注番号, Me.買掛済み発注番号枝番})
+        Me.DgvHistory.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.No, Me.買掛番号, Me.買掛区分, Me.買掛日, Me.仕入先請求番号, Me.支払先, Me.買掛金額, Me.備考1, Me.備考2, Me.買掛済み発注番号, Me.買掛済み発注番号枝番})
         DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle14.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         DataGridViewCellStyle14.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
@@ -479,80 +480,6 @@ Partial Class AccountsPayable
         Me.DgvHistory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvHistory.Size = New System.Drawing.Size(1326, 100)
         Me.DgvHistory.TabIndex = 3
-        '
-        'No
-        '
-        Me.No.HeaderText = "No"
-        Me.No.Name = "No"
-        Me.No.ReadOnly = True
-        Me.No.Width = 44
-        '
-        '買掛番号
-        '
-        Me.買掛番号.HeaderText = "買掛番号"
-        Me.買掛番号.Name = "買掛番号"
-        Me.買掛番号.ReadOnly = True
-        Me.買掛番号.Width = 78
-        '
-        '買掛日
-        '
-        Me.買掛日.HeaderText = "買掛日"
-        Me.買掛日.Name = "買掛日"
-        Me.買掛日.ReadOnly = True
-        Me.買掛日.Width = 66
-        '
-        '買掛区分
-        '
-        Me.買掛区分.HeaderText = "買掛区分"
-        Me.買掛区分.Name = "買掛区分"
-        Me.買掛区分.ReadOnly = True
-        Me.買掛区分.Width = 78
-        '
-        '支払先
-        '
-        Me.支払先.HeaderText = "支払先"
-        Me.支払先.Name = "支払先"
-        Me.支払先.ReadOnly = True
-        Me.支払先.Width = 66
-        '
-        '買掛金額
-        '
-        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.買掛金額.DefaultCellStyle = DataGridViewCellStyle13
-        Me.買掛金額.HeaderText = "買掛金額計"
-        Me.買掛金額.Name = "買掛金額"
-        Me.買掛金額.ReadOnly = True
-        Me.買掛金額.Width = 90
-        '
-        '備考1
-        '
-        Me.備考1.HeaderText = "備考1"
-        Me.備考1.Name = "備考1"
-        Me.備考1.ReadOnly = True
-        Me.備考1.Width = 60
-        '
-        '備考2
-        '
-        Me.備考2.HeaderText = "備考2"
-        Me.備考2.Name = "備考2"
-        Me.備考2.ReadOnly = True
-        Me.備考2.Width = 60
-        '
-        '買掛済み発注番号
-        '
-        Me.買掛済み発注番号.HeaderText = "買掛済み発注番号"
-        Me.買掛済み発注番号.Name = "買掛済み発注番号"
-        Me.買掛済み発注番号.ReadOnly = True
-        Me.買掛済み発注番号.Visible = False
-        Me.買掛済み発注番号.Width = 125
-        '
-        '買掛済み発注番号枝番
-        '
-        Me.買掛済み発注番号枝番.HeaderText = "請求済み発注番号枝番"
-        Me.買掛済み発注番号枝番.Name = "買掛済み発注番号枝番"
-        Me.買掛済み発注番号枝番.ReadOnly = True
-        Me.買掛済み発注番号枝番.Visible = False
-        Me.買掛済み発注番号枝番.Width = 149
         '
         'DgvCymndt
         '
@@ -744,7 +671,7 @@ Partial Class AccountsPayable
         Me.LblIDRCurrency.Name = "LblIDRCurrency"
         Me.LblIDRCurrency.Size = New System.Drawing.Size(100, 23)
         Me.LblIDRCurrency.TabIndex = 329
-        Me.LblIDRCurrency.Text = "通貨"
+        Me.LblIDRCurrency.Text = "仕入通貨"
         Me.LblIDRCurrency.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'VendorInvoiceNumber
@@ -777,6 +704,86 @@ Partial Class AccountsPayable
         Me.Label1.Size = New System.Drawing.Size(97, 15)
         Me.Label1.TabIndex = 335
         Me.Label1.Text = "＜発注伝票＞"
+        '
+        'No
+        '
+        Me.No.HeaderText = "No"
+        Me.No.Name = "No"
+        Me.No.ReadOnly = True
+        Me.No.Width = 44
+        '
+        '買掛番号
+        '
+        Me.買掛番号.HeaderText = "買掛番号"
+        Me.買掛番号.Name = "買掛番号"
+        Me.買掛番号.ReadOnly = True
+        Me.買掛番号.Width = 78
+        '
+        '買掛区分
+        '
+        Me.買掛区分.HeaderText = "買掛区分"
+        Me.買掛区分.Name = "買掛区分"
+        Me.買掛区分.ReadOnly = True
+        Me.買掛区分.Width = 78
+        '
+        '買掛日
+        '
+        Me.買掛日.HeaderText = "SuplierInvoiceDate"
+        Me.買掛日.Name = "買掛日"
+        Me.買掛日.ReadOnly = True
+        Me.買掛日.Width = 125
+        '
+        '仕入先請求番号
+        '
+        Me.仕入先請求番号.HeaderText = "SupplierInvoiceNo"
+        Me.仕入先請求番号.Name = "仕入先請求番号"
+        Me.仕入先請求番号.Width = 121
+        '
+        '支払先
+        '
+        Me.支払先.HeaderText = "支払先"
+        Me.支払先.Name = "支払先"
+        Me.支払先.ReadOnly = True
+        Me.支払先.Width = 66
+        '
+        '買掛金額
+        '
+        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.買掛金額.DefaultCellStyle = DataGridViewCellStyle13
+        Me.買掛金額.HeaderText = "買掛登録済み額"
+        Me.買掛金額.Name = "買掛金額"
+        Me.買掛金額.ReadOnly = True
+        Me.買掛金額.Width = 83
+        '
+        '備考1
+        '
+        Me.備考1.HeaderText = "備考1"
+        Me.備考1.Name = "備考1"
+        Me.備考1.ReadOnly = True
+        Me.備考1.Width = 51
+        '
+        '備考2
+        '
+        Me.備考2.HeaderText = "備考2"
+        Me.備考2.Name = "備考2"
+        Me.備考2.ReadOnly = True
+        Me.備考2.Width = 51
+        '
+        '買掛済み発注番号
+        '
+        Me.買掛済み発注番号.HeaderText = "買掛済み発注番号"
+        Me.買掛済み発注番号.Name = "買掛済み発注番号"
+        Me.買掛済み発注番号.ReadOnly = True
+        Me.買掛済み発注番号.Visible = False
+        Me.買掛済み発注番号.Width = 82
+        '
+        '買掛済み発注番号枝番
+        '
+        Me.買掛済み発注番号枝番.HeaderText = "請求済み発注番号枝番"
+        Me.買掛済み発注番号枝番.Name = "買掛済み発注番号枝番"
+        Me.買掛済み発注番号枝番.ReadOnly = True
+        Me.買掛済み発注番号枝番.Visible = False
+        Me.買掛済み発注番号枝番.Width = 93
         '
         'AccountsPayable
         '
@@ -835,16 +842,6 @@ Partial Class AccountsPayable
     Friend WithEvents DgvHistory As DataGridView
     Friend WithEvents DgvCymndt As DataGridView
     Friend WithEvents LblMode As Label
-    Friend WithEvents No As DataGridViewTextBoxColumn
-    Friend WithEvents 買掛番号 As DataGridViewTextBoxColumn
-    Friend WithEvents 買掛日 As DataGridViewTextBoxColumn
-    Friend WithEvents 買掛区分 As DataGridViewTextBoxColumn
-    Friend WithEvents 支払先 As DataGridViewTextBoxColumn
-    Friend WithEvents 買掛金額 As DataGridViewTextBoxColumn
-    Friend WithEvents 備考1 As DataGridViewTextBoxColumn
-    Friend WithEvents 備考2 As DataGridViewTextBoxColumn
-    Friend WithEvents 買掛済み発注番号 As DataGridViewTextBoxColumn
-    Friend WithEvents 買掛済み発注番号枝番 As DataGridViewTextBoxColumn
     Friend WithEvents DtpPaymentDate As DateTimePicker
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
     Friend WithEvents TxtIDRCurrency As TextBox
@@ -878,4 +875,15 @@ Partial Class AccountsPayable
     Friend WithEvents 買掛金額計 As DataGridViewTextBoxColumn
     Friend WithEvents 買掛残高 As DataGridViewTextBoxColumn
     Friend WithEvents Label1 As Label
+    Friend WithEvents No As DataGridViewTextBoxColumn
+    Friend WithEvents 買掛番号 As DataGridViewTextBoxColumn
+    Friend WithEvents 買掛区分 As DataGridViewTextBoxColumn
+    Friend WithEvents 買掛日 As DataGridViewTextBoxColumn
+    Friend WithEvents 仕入先請求番号 As DataGridViewTextBoxColumn
+    Friend WithEvents 支払先 As DataGridViewTextBoxColumn
+    Friend WithEvents 買掛金額 As DataGridViewTextBoxColumn
+    Friend WithEvents 備考1 As DataGridViewTextBoxColumn
+    Friend WithEvents 備考2 As DataGridViewTextBoxColumn
+    Friend WithEvents 買掛済み発注番号 As DataGridViewTextBoxColumn
+    Friend WithEvents 買掛済み発注番号枝番 As DataGridViewTextBoxColumn
 End Class

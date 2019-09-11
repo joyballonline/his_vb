@@ -444,10 +444,13 @@ Public Class AccountsPayable
             DgvHistory.Rows.Add()
             DgvHistory.Rows(i).Cells("No").Value = i + 1
             DgvHistory.Rows(i).Cells("買掛番号").Value = dsKikehd.Tables(RS).Rows(i)("買掛番号")
-            DgvHistory.Rows(i).Cells("買掛日").Value = dsKikehd.Tables(RS).Rows(i)("買掛日").ToShortDateString()
             DgvHistory.Rows(i).Cells("買掛区分").Value = IIf(dsKikehd.Tables(RS).Rows(i)("買掛区分") = CommonConst.APC_KBN_DEPOSIT.ToString,
                                                                                                     CommonConst.APC_KBN_DEPOSIT_TXT,
                                                                                                     CommonConst.APC_KBN_NORMAL_TXT)
+            DgvHistory.Rows(i).Cells("買掛日").Value = dsKikehd.Tables(RS).Rows(i)("買掛日").ToShortDateString()
+            DgvHistory.Rows(i).Cells("仕入先請求番号").Value = dsKikehd.Tables(RS).Rows(i)("仕入先請求番号")
+
+
             If frmC01F10_Login.loginValue.Language = "ENG" Then
                 DgvHistory.Rows(i).Cells("買掛区分").Value = IIf(
                 dsKikehd.Tables(RS).Rows(i)("買掛区分") = CommonConst.APC_KBN_DEPOSIT,
