@@ -85,81 +85,36 @@ Public Class Account
 
             If _status = CommonConst.STATUS_ADD Then
 
-                Sql = "INSERT INTO "
-                Sql += "Public."
-                Sql += "m92_kanjo("
+                Sql = "INSERT INTO Public.m92_kanjo("
                 Sql += "会社コード, 勘定科目コード, 勘定科目名称１, 勘定科目名称２, 勘定科目名称３, 会計用勘定科目コード, 備考, 有効区分, 更新者, 更新日)"
-                Sql += " VALUES('"
-                Sql += frmC01F10_Login.loginValue.BumonCD
-                Sql += "', '"
-                Sql += TxtAccountCode.Text
-                Sql += "', '"
-                Sql += TxtAccountName1.Text
-                Sql += "', '"
-                Sql += TxtAccountName2.Text
-                Sql += "', '"
-                Sql += TxtAccountName3.Text
-                Sql += "', '"
-                Sql += TxtAccountingAccountCode.Text
-                Sql += "', '"
-                Sql += TxtRemarks.Text
-                Sql += "', '"
-                Sql += cmbEffectiveClassification.SelectedValue.ToString
-                Sql += "', '"
-                Sql += frmC01F10_Login.loginValue.TantoNM
-                Sql += "', '"
-                Sql += dtToday
-                Sql += "')"
+                Sql += " VALUES("
+                Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'"
+                Sql += ", '" & TxtAccountCode.Text & "'"
+                Sql += ", '" & TxtAccountName1.Text & "'"
+                Sql += ", '" & TxtAccountName2.Text & "'"
+                Sql += ", '" & TxtAccountName3.Text & "'"
+                Sql += ", '" & TxtAccountingAccountCode.Text & "'"
+                Sql += ", '" & TxtRemarks.Text & "'"
+                Sql += ", '" & cmbEffectiveClassification.SelectedValue.ToString & "'"
+                Sql += ", '" & frmC01F10_Login.loginValue.TantoNM & "'"
+                Sql += ", '" & dtToday & "'"
+                Sql += ")"
 
                 _db.executeDB(Sql)
             Else
 
-                Sql = "UPDATE "
-                Sql += "Public."
-                Sql += "m92_kanjo "
+                Sql = "UPDATE Public.m92_kanjo "
                 Sql += "SET "
-                Sql += "勘定科目名称１"
-                Sql += " = '"
-                Sql += TxtAccountName1.Text
-                Sql += "', "
-                Sql += "勘定科目名称２"
-                Sql += " = '"
-                Sql += TxtAccountName2.Text
-                Sql += "', "
-                Sql += "勘定科目名称３"
-                Sql += " = '"
-                Sql += TxtAccountName3.Text
-                Sql += "', "
-                Sql += "会計用勘定科目コード"
-                Sql += " = '"
-                Sql += TxtAccountingAccountCode.Text
-                Sql += "', "
-                Sql += "備考"
-                Sql += " = '"
-                Sql += TxtRemarks.Text
-                Sql += "', "
-                Sql += "有効区分"
-                Sql += " = '"
-                Sql += cmbEffectiveClassification.SelectedValue.ToString
-                Sql += "', "
-                Sql += "更新者"
-                Sql += " = '"
-                Sql += frmC01F10_Login.loginValue.TantoNM
-                Sql += "', "
-                Sql += "更新日"
-                Sql += " = '"
-                Sql += dtToday
-                Sql += "' "
-                Sql += "WHERE"
-                Sql += " 会社コード"
-                Sql += "='"
-                Sql += _companyCode
-                Sql += "'"
-                Sql += " AND"
-                Sql += " 勘定科目コード"
-                Sql += "='"
-                Sql += _AccountCode
-                Sql += "' "
+                Sql += "勘定科目名称１ = '" & TxtAccountName1.Text & "'"
+                Sql += ", 勘定科目名称２ = '" & TxtAccountName2.Text & "'"
+                Sql += ", 勘定科目名称３ = '" & TxtAccountName3.Text & "'"
+                Sql += ", 会計用勘定科目コード = '" & TxtAccountingAccountCode.Text & "'"
+                Sql += ", 備考 = '" & TxtRemarks.Text & "'"
+                Sql += ", 有効区分 = '" & cmbEffectiveClassification.SelectedValue.ToString & "'"
+                Sql += ", 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+                Sql += ", 更新日 = '" & dtToday & "'"
+                Sql += " WHERE 会社コード = '" & _companyCode & "'"
+                Sql += " AND 勘定科目コード = '" & _AccountCode & "'"
 
                 _db.executeDB(Sql)
             End If
@@ -189,10 +144,10 @@ Public Class Account
 
 
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-            LblAccountCode.Text = "CustomerCode"
-            LblAccountName1.Text = "CustomerName1"
-            LblAccountName2.Text = "CustomerName2"
-            LblAccountName3.Text = "CustomerName3"
+            LblAccountCode.Text = "AccountCode"
+            LblAccountName1.Text = "AccountName1"
+            LblAccountName2.Text = "AccountName2"
+            LblAccountName3.Text = "AccountName3"
             LblAccountingAccountCode.Text = "AccountingAccountCode"
             LblRemarks.Text = "Remarks"
             LblEffectiveClassification.Text = "EffectiveClassification"
@@ -205,12 +160,7 @@ Public Class Account
 
             Dim Sql As String = ""
 
-            Sql = " AND "
-            Sql += "勘定科目コード"
-            Sql += " ILIKE "
-            Sql += "'"
-            Sql += _AccountCode
-            Sql += "'"
+            Sql = " AND 勘定科目コード = '" & _AccountCode & "'"
 
             Dim ds As DataSet = getDsData("m92_kanjo", Sql)
 
@@ -282,15 +232,8 @@ Public Class Account
         Dim reccnt As Integer = 0 'DB用（デフォルト）
         Dim Sql As String = ""
 
-        Sql += "SELECT"
-        Sql += " *"
-        Sql += " FROM "
-
-        Sql += "public." & tableName
-        Sql += " WHERE "
-        Sql += "会社コード"
-        Sql += " ILIKE  "
-        Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += "SELECT * FROM public." & tableName
+        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql += txtParam
         Return _db.selectDB(Sql, RS, reccnt)
     End Function
