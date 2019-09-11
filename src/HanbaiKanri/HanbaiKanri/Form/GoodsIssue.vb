@@ -2082,8 +2082,8 @@ Public Class GoodsIssue
         Sql += " t20.会社コード = t42.会社コード "
         Sql += " AND "
         Sql += " t20.発注番号 = t42.発注番号 "
-        Sql += " AND "
-        Sql += " t20.発注番号枝番 = t42.発注番号枝番 "
+        'Sql += " AND "
+        'Sql += " t20.発注番号枝番 = t42.発注番号枝番 "
         Sql += " AND "
         Sql += " t20.仕入先コード = t42.仕入先コード "
 
@@ -2168,11 +2168,13 @@ Public Class GoodsIssue
         Sql += " FROM t43_nyukodt t43  "
         Sql += " LEFT JOIN t42_nyukohd t42 "
         Sql += " ON t43.入庫番号 = t42.入庫番号"
-        Sql += " and t43.発注番号 = t42.発注番号 and t43.発注番号枝番 = t42.発注番号枝番"
+        'Sql += " and t43.発注番号 = t42.発注番号 and t43.発注番号枝番 = t42.発注番号枝番"
+        Sql += " and t43.発注番号 = t42.発注番号"
 
         Sql += " LEFT JOIN t20_hattyu t20 "
         Sql += " on  t20.会社コード = t43.会社コード "
-        Sql += " and t20.発注番号 = t42.発注番号 and t20.発注番号枝番 = t42.発注番号枝番 "
+        'Sql += " and t20.発注番号 = t42.発注番号 and t20.発注番号枝番 = t42.発注番号枝番 "
+        Sql += " and t20.発注番号 = t42.発注番号 "
 
         Sql += " WHERE "
         Sql += "     t42.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
@@ -2279,7 +2281,9 @@ Public Class GoodsIssue
                 '在庫マスタから在庫数を確認
                 retZaikoQuantity = setZaikoQuantity(rowIndex)
 
-            Case Else '受発注・サービス
+            Case CommonConst.Sire_KBN_Sire  '受発注
+                retZaikoQuantity = setNukoList(rowIndex)
+            Case Else 'サービス
                 '入庫数から在庫数を確認
                 retZaikoQuantity = setNukoList(rowIndex)
         End Select
