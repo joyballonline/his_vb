@@ -187,6 +187,8 @@ Public Class AccountsPayableList
         DgvKike.Columns("更新者").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
 
+        DgvKike.Columns("買掛日").DefaultCellStyle.Format = "d"
+
         PurchaseListLoad() '一覧表示
 
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
@@ -272,7 +274,8 @@ Public Class AccountsPayableList
                                                                                                     CommonConst.APC_KBN_DEPOSIT_TXT,
                                                                                                     CommonConst.APC_KBN_NORMAL_TXT)
                 End If
-                DgvKike.Rows(i).Cells("買掛日").Value = ds.Tables(RS).Rows(i)("買掛日").ToShortDateString()
+                'DgvKike.Rows(i).Cells("買掛日").Value = ds.Tables(RS).Rows(i)("買掛日").ToShortDateString()
+                DgvKike.Rows(i).Cells("買掛日").Value = Date.Parse(ds.Tables(RS).Rows(i)("買掛日").ToShortDateString())
                 DgvKike.Rows(i).Cells("仕入先請求番号").Value = ds.Tables(RS).Rows(i)("仕入先請求番号")
                 DgvKike.Rows(i).Cells("客先番号").Value = ds.Tables(RS).Rows(i)("客先番号")
                 DgvKike.Rows(i).Cells("発注番号").Value = ds.Tables(RS).Rows(i)("発注番号")
