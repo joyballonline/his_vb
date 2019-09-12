@@ -2021,6 +2021,38 @@ Public Class GoodsIssue
 
     End Function
 
+    '在庫マスタから現在庫数を取得
+    '検索対象行番を引数にセット
+    Private Function setZaikoCurrency(ByVal rowIndex As Integer) As Long
+        Dim Sql As String = ""
+        Dim reccnt As Integer = 0 'DB用（デフォルト）
+
+        Sql = "SELECT sum(m21.現在庫数) as 在庫数量 "
+        Sql += " from m21_zaiko m21 "
+
+        Sql += " WHERE m21.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+
+        Sql += " AND  m21.メーカー = '" & DgvAdd.Rows(rowIndex).Cells("メーカー").Value.ToString & "'"
+        Sql += " AND  m21.品名 = '" & DgvAdd.Rows(rowIndex).Cells("品名").Value.ToString & "'"
+        Sql += " AND  m21.型式 = '" & DgvAdd.Rows(rowIndex).Cells("型式").Value.ToString & "'"
+        Sql += " AND  m21.倉庫コード = '" & DgvAdd.Rows(rowIndex).Cells("倉庫").Value.ToString & "'"
+        Sql += " AND  m21.入出庫種別 = '" & DgvAdd.Rows(rowIndex).Cells("入出庫種別").Value.ToString & "'"
+        Sql += " AND  m21.無効フラグ = " & CommonConst.CANCEL_KBN_ENABLED
+        Sql += " AND  m21.現在庫数 <> 0"
+
+        '在庫マスタから現在庫数を取得
+        Dim dsZaiko As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+        If dsZaiko.Tables(RS).Rows.Count > 0 Then
+            If dsZaiko.Tables(RS).Rows(0)("在庫数量") IsNot DBNull.Value Then
+                Return dsZaiko.Tables(RS).Rows(0)("在庫数量")
+            Else
+                Return 0
+            End If
+        End If
+
+    End Function
+
     '仕入区分 2 の時の在庫数取得
     '在庫マスタから現在庫数一覧を取得
     Private Function getZaikoList(ByVal rowIndex As Integer) As DataSet
@@ -2279,8 +2311,8 @@ Public Class GoodsIssue
 
             Case CommonConst.Sire_KBN_Zaiko '在庫
                 '在庫マスタから在庫数を確認
-                retZaikoQuantity = setZaikoQuantity(rowIndex)
-
+                'retZaikoQuantity = setZaikoQuantity(rowIndex)
+                retZaikoQuantity = setZaikoCurrency(rowIndex)
             Case CommonConst.Sire_KBN_Sire  '受発注
                 retZaikoQuantity = setNukoList(rowIndex)
             Case Else 'サービス
