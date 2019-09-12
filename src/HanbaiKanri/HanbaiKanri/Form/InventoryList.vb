@@ -244,8 +244,16 @@ Public Class InventoryList
                                                                     dsList.Tables(RS).Rows(i)("文字２"),
                                                                     dsList.Tables(RS).Rows(i)("文字１"))
                     DgvList.Rows(i).Cells("単価（入庫単価）").Value = dsList.Tables(RS).Rows(i)("入庫単価")
-                    DgvList.Rows(i).Cells("最終入庫日").Value = dsList.Tables(RS).Rows(i)("最終入庫日")
-                    DgvList.Rows(i).Cells("最終出庫日").Value = dsList.Tables(RS).Rows(i)("最終出庫日")
+                    If dsList.Tables(RS).Rows(i)("最終入庫日") Is DBNull.Value Then
+                        DgvList.Rows(i).Cells("最終入庫日").Value = ""
+                    Else
+                        DgvList.Rows(i).Cells("最終入庫日").Value = dsList.Tables(RS).Rows(i)("最終入庫日").ToShortDateString()
+                    End If
+                    If dsList.Tables(RS).Rows(i)("最終出庫日") Is DBNull.Value Then
+                        DgvList.Rows(i).Cells("最終出庫日").Value = ""
+                    Else
+                        DgvList.Rows(i).Cells("最終出庫日").Value = dsList.Tables(RS).Rows(i)("最終出庫日").ToShortDateString()
+                    End If
 
                 Next
 
