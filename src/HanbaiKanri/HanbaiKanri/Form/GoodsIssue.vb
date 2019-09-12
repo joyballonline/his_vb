@@ -356,8 +356,8 @@ Public Class GoodsIssue
             End If
 
             DgvAdd.Columns.Insert(8, cmWarehouse)
-            DgvAdd.Columns("倉庫").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
-            DgvAdd.Columns("倉庫").ReadOnly = True
+            'DgvAdd.Columns("倉庫").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
+            'DgvAdd.Columns("倉庫").ReadOnly = True
 
 
             '入出庫種別コンボボックス作成
