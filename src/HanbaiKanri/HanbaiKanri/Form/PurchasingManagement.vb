@@ -204,7 +204,7 @@ Public Class PurchasingManagement
 
         Else
             DgvAdd.Columns.Add("No", "No")
-            DgvAdd.Columns.Add("行番号", "行番号")
+            DgvAdd.Columns.Add("行番号", "行No")
             DgvAdd.Columns.Add("仕入区分値", "仕入区分値")
             DgvAdd.Columns.Add("仕入区分", "仕入区分")
             DgvAdd.Columns.Add("メーカー", "メーカー")

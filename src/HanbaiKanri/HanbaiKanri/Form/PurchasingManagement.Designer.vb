@@ -22,8 +22,8 @@ Partial Class PurchasingManagement
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.LblPurchaseNo = New System.Windows.Forms.Label()
         Me.TxtPurchaseNo = New System.Windows.Forms.TextBox()
@@ -165,14 +165,14 @@ Partial Class PurchasingManagement
         '
         Me.DgvPurchase.AllowUserToAddRows = False
         Me.DgvPurchase.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DgvPurchase.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DgvPurchase.DefaultCellStyle = DataGridViewCellStyle3
         Me.DgvPurchase.Location = New System.Drawing.Point(12, 105)
         Me.DgvPurchase.Name = "DgvPurchase"
         Me.DgvPurchase.ReadOnly = True
@@ -231,14 +231,14 @@ Partial Class PurchasingManagement
         '
         Me.DgvHistory.AllowUserToAddRows = False
         Me.DgvHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DgvHistory.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DgvHistory.DefaultCellStyle = DataGridViewCellStyle4
         Me.DgvHistory.Location = New System.Drawing.Point(12, 236)
         Me.DgvHistory.Name = "DgvHistory"
         Me.DgvHistory.ReadOnly = True
@@ -318,12 +318,12 @@ Partial Class PurchasingManagement
         '
         Me.LblPurchasedDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblPurchasedDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblPurchasedDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblPurchasedDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblPurchasedDate.Location = New System.Drawing.Point(172, 341)
         Me.LblPurchasedDate.Name = "LblPurchasedDate"
-        Me.LblPurchasedDate.Size = New System.Drawing.Size(114, 22)
+        Me.LblPurchasedDate.Size = New System.Drawing.Size(123, 22)
         Me.LblPurchasedDate.TabIndex = 93
-        Me.LblPurchasedDate.Text = "仕入登録日"
+        Me.LblPurchasedDate.Text = "仕入(検収)登録日"
         Me.LblPurchasedDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'LblRemarks
@@ -331,7 +331,7 @@ Partial Class PurchasingManagement
         Me.LblRemarks.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblRemarks.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblRemarks.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblRemarks.Location = New System.Drawing.Point(449, 342)
+        Me.LblRemarks.Location = New System.Drawing.Point(461, 341)
         Me.LblRemarks.Name = "LblRemarks"
         Me.LblRemarks.Size = New System.Drawing.Size(114, 22)
         Me.LblRemarks.TabIndex = 95
@@ -341,7 +341,7 @@ Partial Class PurchasingManagement
         'TxtRemarks
         '
         Me.TxtRemarks.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtRemarks.Location = New System.Drawing.Point(569, 342)
+        Me.TxtRemarks.Location = New System.Drawing.Point(581, 341)
         Me.TxtRemarks.Name = "TxtRemarks"
         Me.TxtRemarks.Size = New System.Drawing.Size(375, 22)
         Me.TxtRemarks.TabIndex = 4
@@ -352,7 +352,7 @@ Partial Class PurchasingManagement
         Me.DtpPurchaseDate.CustomFormat = ""
         Me.DtpPurchaseDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpPurchaseDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DtpPurchaseDate.Location = New System.Drawing.Point(292, 341)
+        Me.DtpPurchaseDate.Location = New System.Drawing.Point(301, 341)
         Me.DtpPurchaseDate.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.DtpPurchaseDate.Name = "DtpPurchaseDate"
         Me.DtpPurchaseDate.Size = New System.Drawing.Size(148, 22)
@@ -467,7 +467,7 @@ Partial Class PurchasingManagement
         Me.LblIDRCurrency.Name = "LblIDRCurrency"
         Me.LblIDRCurrency.Size = New System.Drawing.Size(170, 23)
         Me.LblIDRCurrency.TabIndex = 327
-        Me.LblIDRCurrency.Text = "通貨"
+        Me.LblIDRCurrency.Text = "仕入通貨"
         Me.LblIDRCurrency.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'PurchasingManagement
