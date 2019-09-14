@@ -493,12 +493,6 @@ Public Class DepositManagement
             DgvBillingInfo.Rows(i).Cells("請求情報請求残高").Value = DgvBillingInfo.Rows(i).Cells("請求情報請求残高固定").Value
         Next
 
-        '一旦自動振分をリセット
-        For i As Integer = 0 To DgvDeposit.Rows.Count - 1
-            DgvDeposit.Rows(i).Cells("入力入金額_計算用").Value = DgvDeposit.Rows(i).Cells("入力入金額").Value
-        Next
-
-
         '買掛金額より支払金額が大きい場合はアラート
         If Total > DgvCustomer.Rows(0).Cells("請求残高").Value Then
             _msgHd.dspMSG("chkReceiptBalanceError", frmC01F10_Login.loginValue.Language)
@@ -509,85 +503,19 @@ Public Class DepositManagement
 
 #Region "仕訳データ"  '仕訳用のテーブルを作成  
 
-        '非可視のデータグリッドを削除 全ての列を選択
-        '行を数えて、全行のデータを削除します。
-        If Me.ShiwakeData.Rows.Count > 0 Then
-            '新規行の追加を許可している場合は、「Count - 1」を
-            '「Count - 2」にしてください。
-            For i As Integer = 0 To Me.ShiwakeData.Rows.Count - 1 Step 1
-                Me.ShiwakeData.Rows.RemoveAt(0)
-            Next
-        End If
+        ''非可視のデータグリッドを削除 全ての列を選択
+        ''行を数えて、全行のデータを削除します。
+        'If Me.ShiwakeData.Rows.Count > 0 Then
+        '    '新規行の追加を許可している場合は、「Count - 1」を
+        '    '「Count - 2」にしてください。
+        '    For i As Integer = 0 To Me.ShiwakeData.Rows.Count - 1 Step 1
+        '        Me.ShiwakeData.Rows.RemoveAt(0)
+        '    Next
+        'End If
 
 
-        '入金データ
-        Dim DataIndex As Integer = 0
+        'Call mSet_ShiwakeData()
 
-        '請求データ
-        For j As Integer = 0 To DgvBillingInfo.Rows.Count - 1
-
-            Dim decZandaka As Decimal = DgvBillingInfo.Rows(j).Cells("請求情報請求残高").Value
-
-            If decZandaka = 0 Then
-                '何もしない
-            Else
-
-                '入金データ
-                For i As Integer = 0 To DgvDeposit.Rows.Count - 1
-
-                    Dim decNyukin As Decimal = DgvDeposit.Rows(i).Cells("入力入金額_計算用").Value
-
-                    If decZandaka = 0 OrElse decNyukin = 0 Then
-                        '何もしない
-                    Else
-
-                        Dim col = DgvDeposit.Item(1, i)
-                        Console.WriteLine(col.Value)
-                        Console.WriteLine(col.FormattedValue)
-
-                        '非可視のデータグリッドへ挿入
-                        ShiwakeData.Rows.Add()
-                        ShiwakeData.Rows(DataIndex).Cells("請求番号_仕訳").Value = DgvBillingInfo.Rows(j).Cells("請求情報請求番号").Value
-                        ShiwakeData.Rows(DataIndex).Cells("請求区分_仕訳").Value = DgvBillingInfo.Rows(j).Cells("請求区分").Value
-                        ShiwakeData.Rows(DataIndex).Cells("請求日_仕訳").Value = DgvBillingInfo.Rows(j).Cells("請求日").Value
-                        ShiwakeData.Rows(DataIndex).Cells("受注番号_仕訳").Value = DgvBillingInfo.Rows(j).Cells("受注番号").Value
-                        ShiwakeData.Rows(DataIndex).Cells("受注番号枝番_仕訳").Value = DgvBillingInfo.Rows(j).Cells("受注番号枝番").Value
-                        ShiwakeData.Rows(DataIndex).Cells("得意先コード_仕訳").Value = DgvBillingInfo.Rows(j).Cells("得意先コード").Value
-
-                        'ShiwakeData.Rows(DataIndex).Cells("入金番号_仕訳").Value = DgvDeposit.Rows(i).Cells("入金番号").Value
-                        ShiwakeData.Rows(DataIndex).Cells("識別番号_仕訳").Value = DgvDeposit.Rows(i).Cells("行番号").Value
-                        ShiwakeData.Rows(DataIndex).Cells("行番号_仕訳").Value = DataIndex + 1
-                        ShiwakeData.Rows(DataIndex).Cells("入金種目_仕訳").Value = DgvDeposit.Rows(i).Cells("入金種目").Value
-                        ShiwakeData.Rows(DataIndex).Cells("入金種目名_仕訳").Value = col.FormattedValue
-
-                        ShiwakeData.Rows(DataIndex).Cells("客先番号_仕訳").Value = DgvBillingInfo.Rows(j).Cells("客先番号").Value
-
-                        If decZandaka > decNyukin Then
-                            '残高が入金額より多い
-
-                            ShiwakeData.Rows(DataIndex).Cells("入金額_仕訳").Value = decNyukin
-
-                            DgvDeposit.Rows(i).Cells("入力入金額_計算用").Value = 0
-
-                            decZandaka -= decNyukin
-                        Else
-                            '残高が入金額以下
-
-                            ShiwakeData.Rows(DataIndex).Cells("入金額_仕訳").Value = decZandaka
-
-                            DgvDeposit.Rows(i).Cells("入力入金額_計算用").Value -= decZandaka
-
-                            decZandaka = 0
-
-                        End If
-
-                        DataIndex += 1
-
-                    End If
-
-                Next
-            End If
-        Next
 #End Region
 
 
@@ -748,6 +676,21 @@ Public Class DepositManagement
 
             Return
         End If
+
+
+        't80_shiwakenyu 仕訳用の入金テーブルを追加
+#Region "仕訳データ"  '仕訳用のテーブルを作成  
+
+        ''一旦自動振分をリセット
+        'For i As Integer = 0 To DgvDeposit.Rows.Count - 1
+        '    DgvDeposit.Rows(i).Cells("入力入金額_計算用").Value = DgvDeposit.Rows(i).Cells("入力入金額").Value
+        'Next
+
+        'データを作成する
+        Call mSet_ShiwakeData()
+
+#End Region
+
 
         '採番テーブルから入金番号取得
         Dim PMSaiban As String = getSaiban("90", dtToday)
@@ -934,6 +877,8 @@ Public Class DepositManagement
             End If
         Next
 
+        dsSkyuhd = Nothing
+
         Dim DsDeposit As Decimal = 0      '入金額
         Dim DsDeposit_cur As Decimal = 0  '入金額_外貨
 
@@ -942,22 +887,29 @@ Public Class DepositManagement
 
 
         't23_skyuhd 請求基本テーブルを更新
-        For i As Integer = 0 To dsSkyuhd.Tables(RS).Rows.Count - 1
+        'For i As Integer = 0 To dsSkyuhd.Tables(RS).Rows.Count - 1
+        For i As Integer = 0 To DgvBillingInfo.Rows.Count - 1
 
             If DgvBillingInfo.Rows(i).Cells("入金額").Value <> 0 Then
 
-                If dsSkyuhd.Tables(RS).Rows(i)("入金額計") Is DBNull.Value Then
+                '請求基本データ取得
+                Sql = " AND 請求番号 = '" & DgvBillingInfo.Rows(i).Cells("請求情報請求番号").Value & "'"
+
+                Dim dsSkyuhd2 As DataSet = getDsData("t23_skyuhd", Sql)
+
+
+                If dsSkyuhd2.Tables(RS).Rows(0)("入金額計") Is DBNull.Value Then
                     '請求基本の入金額計がなかったら入金額をそのまま登録
                     DsDeposit_cur = DgvBillingInfo.Rows(i).Cells("入金額").Value
                 Else
                     '入金額計があったら入金額を加算する
-                    DsDeposit_cur = DgvBillingInfo.Rows(i).Cells("入金額").Value + dsSkyuhd.Tables(RS).Rows(i)("入金額計_外貨")
+                    DsDeposit_cur = DgvBillingInfo.Rows(i).Cells("入金額").Value + dsSkyuhd2.Tables(RS).Rows(0)("入金額計_外貨")
                 End If
 
                 DsDeposit = Math.Ceiling(DsDeposit_cur / strRate)  '画面の金額をIDRに変換　切り上げ
 
                 '残高を更新
-                SellingBalance_cur = dsSkyuhd.Tables(RS).Rows(i)("売掛残高_外貨") - DgvBillingInfo.Rows(i).Cells("入金額").Value
+                SellingBalance_cur = dsSkyuhd2.Tables(RS).Rows(0)("売掛残高_外貨") - DgvBillingInfo.Rows(i).Cells("入金額").Value
                 SellingBalance = Math.Ceiling(SellingBalance_cur / strRate)  '画面の金額をIDRに変換　切り上げ
 
                 Sql = "UPDATE "
@@ -983,7 +935,7 @@ Public Class DepositManagement
                 Sql += "', "
 
                 '請求額請求金額と入金額が一致したら入金完了日を設定する
-                If FormatNumber(dsSkyuhd.Tables(RS).Rows(i)("請求金額計")) = FormatNumber(DsDeposit) Then
+                If FormatNumber(dsSkyuhd2.Tables(RS).Rows(0)("請求金額計")) = FormatNumber(DsDeposit) Then
 
                     Sql += "入金完了日"
                     Sql += " = '"
@@ -1004,7 +956,7 @@ Public Class DepositManagement
                 Sql += " AND"
                 Sql += " 請求番号"
                 Sql += "='"
-                Sql += dsSkyuhd.Tables(RS).Rows(i)("請求番号")
+                Sql += dsSkyuhd2.Tables(RS).Rows(0)("請求番号")
                 Sql += "' "
 
                 If CurCode <> 0 Then
@@ -1021,7 +973,7 @@ Public Class DepositManagement
         Next
 
 
-        't80_shiwakenyu 仕訳用の入金テーブルを追加
+        '非可視のデータグリッドをループ
         For i As Integer = 0 To ShiwakeData.Rows.Count - 1
 
             Sql = "INSERT INTO "
@@ -1079,6 +1031,87 @@ Public Class DepositManagement
         _parentForm.Show()
         Me.Dispose()
 
+    End Sub
+
+    Private Sub mSet_ShiwakeData()
+
+
+        '一旦自動振分をリセット
+        For i As Integer = 0 To DgvDeposit.Rows.Count - 1
+            DgvDeposit.Rows(i).Cells("入力入金額_計算用").Value = DgvDeposit.Rows(i).Cells("入力入金額").Value
+        Next
+
+
+        '入金データ
+        Dim DataIndex As Integer = 0
+
+
+        '請求データ
+        For j As Integer = 0 To DgvBillingInfo.Rows.Count - 1
+
+            'Dim decZandaka As Decimal = DgvBillingInfo.Rows(j).Cells("請求情報請求残高").Value
+            Dim decZandaka As Decimal = DgvBillingInfo.Rows(j).Cells("請求情報請求残高固定").Value
+
+            If decZandaka = 0 Then
+                '何もしない
+            Else
+
+                '入金データ
+                For i As Integer = 0 To DgvDeposit.Rows.Count - 1
+
+                    Dim decNyukin As Decimal = DgvDeposit.Rows(i).Cells("入力入金額_計算用").Value
+
+                    If decZandaka = 0 OrElse decNyukin = 0 Then
+                        '何もしない
+                    Else
+
+                        Dim col = DgvDeposit.Item(1, i)
+                        Console.WriteLine(col.Value)
+                        Console.WriteLine(col.FormattedValue)
+
+                        '非可視のデータグリッドへ挿入
+                        ShiwakeData.Rows.Add()
+                        ShiwakeData.Rows(DataIndex).Cells("請求番号_仕訳").Value = DgvBillingInfo.Rows(j).Cells("請求情報請求番号").Value
+                        ShiwakeData.Rows(DataIndex).Cells("請求区分_仕訳").Value = DgvBillingInfo.Rows(j).Cells("請求区分").Value
+                        ShiwakeData.Rows(DataIndex).Cells("請求日_仕訳").Value = DgvBillingInfo.Rows(j).Cells("請求日").Value
+                        ShiwakeData.Rows(DataIndex).Cells("受注番号_仕訳").Value = DgvBillingInfo.Rows(j).Cells("受注番号").Value
+                        ShiwakeData.Rows(DataIndex).Cells("受注番号枝番_仕訳").Value = DgvBillingInfo.Rows(j).Cells("受注番号枝番").Value
+                        ShiwakeData.Rows(DataIndex).Cells("得意先コード_仕訳").Value = DgvBillingInfo.Rows(j).Cells("得意先コード").Value
+
+                        'ShiwakeData.Rows(DataIndex).Cells("入金番号_仕訳").Value = DgvDeposit.Rows(i).Cells("入金番号").Value
+                        ShiwakeData.Rows(DataIndex).Cells("識別番号_仕訳").Value = DgvDeposit.Rows(i).Cells("行番号").Value
+                        ShiwakeData.Rows(DataIndex).Cells("行番号_仕訳").Value = DataIndex + 1
+                        ShiwakeData.Rows(DataIndex).Cells("入金種目_仕訳").Value = DgvDeposit.Rows(i).Cells("入金種目").Value
+                        ShiwakeData.Rows(DataIndex).Cells("入金種目名_仕訳").Value = col.FormattedValue
+
+                        ShiwakeData.Rows(DataIndex).Cells("客先番号_仕訳").Value = DgvBillingInfo.Rows(j).Cells("客先番号").Value
+
+                        If decZandaka > decNyukin Then
+                            '残高が入金額より多い
+
+                            ShiwakeData.Rows(DataIndex).Cells("入金額_仕訳").Value = decNyukin
+
+                            DgvDeposit.Rows(i).Cells("入力入金額_計算用").Value = 0
+
+                            decZandaka -= decNyukin
+                        Else
+                            '残高が入金額以下
+
+                            ShiwakeData.Rows(DataIndex).Cells("入金額_仕訳").Value = decZandaka
+
+                            DgvDeposit.Rows(i).Cells("入力入金額_計算用").Value -= decZandaka
+
+                            decZandaka = 0
+
+                        End If
+
+                        DataIndex += 1
+
+                    End If
+
+                Next
+            End If
+        Next
     End Sub
 
     '通貨の採番キーからレートを取得・設定
