@@ -3077,6 +3077,13 @@ Public Class Quote
             Me.Enabled = False
         End If
 
+        If currentColumn = "仕入先" Then '仕入先検索
+            Dim openForm As Form = Nothing
+            openForm = New SupplierSearch(_msgHd, _db, _langHd, DgvItemList.CurrentCell.RowIndex, Me)
+            openForm.Show(Me)
+            Me.Enabled = False
+        End If
+
 
         '仕入区分[ 在庫引当 ] + 数量にいた場合
         If sireKbn = CommonConst.Sire_KBN_Zaiko And currentColumn = "数量" Then
