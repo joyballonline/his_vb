@@ -22,16 +22,13 @@ Partial Class ExchangeRateList
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.BtnEdit = New System.Windows.Forms.Button()
         Me.BtnSearch = New System.Windows.Forms.Button()
         Me.BtnBack = New System.Windows.Forms.Button()
         Me.BtnAdd = New System.Windows.Forms.Button()
         Me.DgvList = New System.Windows.Forms.DataGridView()
-        Me.基準日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.採番キー = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.レート = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.更新者 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.更新日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LblMode = New System.Windows.Forms.Label()
         Me.dtDateUntil = New System.Windows.Forms.DateTimePicker()
         Me.dtDateSince = New System.Windows.Forms.DateTimePicker()
@@ -39,6 +36,13 @@ Partial Class ExchangeRateList
         Me.LblStandardDate = New System.Windows.Forms.Label()
         Me.LblConditions = New System.Windows.Forms.Label()
         Me.BtnDel = New System.Windows.Forms.Button()
+        Me.採番キー = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.基準日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.通貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.為替レート = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.レート = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.更新者 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.更新日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DgvList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -87,7 +91,7 @@ Partial Class ExchangeRateList
         '
         Me.DgvList.AllowUserToAddRows = False
         Me.DgvList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.基準日, Me.採番キー, Me.レート, Me.更新者, Me.更新日})
+        Me.DgvList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.採番キー, Me.基準日, Me.通貨, Me.為替レート, Me.レート, Me.更新者, Me.更新日})
         Me.DgvList.Location = New System.Drawing.Point(13, 100)
         Me.DgvList.Name = "DgvList"
         Me.DgvList.ReadOnly = True
@@ -96,36 +100,6 @@ Partial Class ExchangeRateList
         Me.DgvList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvList.Size = New System.Drawing.Size(1326, 403)
         Me.DgvList.TabIndex = 15
-        '
-        '基準日
-        '
-        Me.基準日.HeaderText = "基準日"
-        Me.基準日.Name = "基準日"
-        Me.基準日.ReadOnly = True
-        '
-        '採番キー
-        '
-        Me.採番キー.HeaderText = "採番キー"
-        Me.採番キー.Name = "採番キー"
-        Me.採番キー.ReadOnly = True
-        '
-        'レート
-        '
-        Me.レート.HeaderText = "レート"
-        Me.レート.Name = "レート"
-        Me.レート.ReadOnly = True
-        '
-        '更新者
-        '
-        Me.更新者.HeaderText = "更新者"
-        Me.更新者.Name = "更新者"
-        Me.更新者.ReadOnly = True
-        '
-        '更新日
-        '
-        Me.更新日.HeaderText = "更新日"
-        Me.更新日.Name = "更新日"
-        Me.更新日.ReadOnly = True
         '
         'LblMode
         '
@@ -207,6 +181,53 @@ Partial Class ExchangeRateList
         Me.BtnDel.Text = "削除"
         Me.BtnDel.UseVisualStyleBackColor = True
         '
+        '採番キー
+        '
+        Me.採番キー.HeaderText = "採番キー"
+        Me.採番キー.Name = "採番キー"
+        Me.採番キー.ReadOnly = True
+        Me.採番キー.Visible = False
+        '
+        '基準日
+        '
+        Me.基準日.HeaderText = "基準日"
+        Me.基準日.Name = "基準日"
+        Me.基準日.ReadOnly = True
+        '
+        '通貨
+        '
+        Me.通貨.HeaderText = "通貨(通貨単位)"
+        Me.通貨.Name = "通貨"
+        Me.通貨.ReadOnly = True
+        '
+        '為替レート
+        '
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.為替レート.DefaultCellStyle = DataGridViewCellStyle1
+        Me.為替レート.HeaderText = "為替レート(IDR)"
+        Me.為替レート.Name = "為替レート"
+        Me.為替レート.ReadOnly = True
+        '
+        'レート
+        '
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.レート.DefaultCellStyle = DataGridViewCellStyle2
+        Me.レート.HeaderText = "レート"
+        Me.レート.Name = "レート"
+        Me.レート.ReadOnly = True
+        '
+        '更新者
+        '
+        Me.更新者.HeaderText = "更新者"
+        Me.更新者.Name = "更新者"
+        Me.更新者.ReadOnly = True
+        '
+        '更新日
+        '
+        Me.更新日.HeaderText = "更新日"
+        Me.更新日.Name = "更新日"
+        Me.更新日.ReadOnly = True
+        '
         'ExchangeRateList
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
@@ -237,15 +258,17 @@ Partial Class ExchangeRateList
     Friend WithEvents BtnAdd As Button
     Friend WithEvents DgvList As DataGridView
     Friend WithEvents LblMode As Label
-    Friend WithEvents 基準日 As DataGridViewTextBoxColumn
-    Friend WithEvents 採番キー As DataGridViewTextBoxColumn
-    Friend WithEvents レート As DataGridViewTextBoxColumn
-    Friend WithEvents 更新者 As DataGridViewTextBoxColumn
-    Friend WithEvents 更新日 As DataGridViewTextBoxColumn
     Friend WithEvents dtDateUntil As DateTimePicker
     Friend WithEvents dtDateSince As DateTimePicker
     Friend WithEvents Label5 As Label
     Friend WithEvents LblStandardDate As Label
     Friend WithEvents LblConditions As Label
     Friend WithEvents BtnDel As Button
+    Friend WithEvents 採番キー As DataGridViewTextBoxColumn
+    Friend WithEvents 基準日 As DataGridViewTextBoxColumn
+    Friend WithEvents 通貨 As DataGridViewTextBoxColumn
+    Friend WithEvents 為替レート As DataGridViewTextBoxColumn
+    Friend WithEvents レート As DataGridViewTextBoxColumn
+    Friend WithEvents 更新者 As DataGridViewTextBoxColumn
+    Friend WithEvents 更新日 As DataGridViewTextBoxColumn
 End Class

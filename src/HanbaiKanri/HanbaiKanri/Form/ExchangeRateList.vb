@@ -116,7 +116,8 @@ Public Class ExchangeRateList
             DgvList.Columns("更新者").HeaderText = "ModifiedBy"
             DgvList.Columns("更新日").HeaderText = "UpdateDate"
         Else
-            DgvList.Columns("採番キー").HeaderText = "通貨"
+            'DgvList.Columns("採番キー").HeaderText = "通貨"
+            DgvList.Columns("採番キー").HeaderText = "採番キー"  '非表示の項目
         End If
         Try
 
@@ -147,9 +148,15 @@ Public Class ExchangeRateList
 
             For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
                 DgvList.Rows.Add()
-                DgvList.Rows(i).Cells("基準日").Value = ds.Tables(RS).Rows(i)("基準日").ToShortDateString()
                 DgvList.Rows(i).Cells("採番キー").Value = ds.Tables(RS).Rows(i)("通貨コード")
+
+                DgvList.Rows(i).Cells("基準日").Value = ds.Tables(RS).Rows(i)("基準日").ToShortDateString()
+                DgvList.Rows(i).Cells("通貨").Value = "1" & ds.Tables(RS).Rows(i)("通貨コード")
+
+                Dim decTemp As Decimal = 1 / ds.Tables(RS).Rows(i)("レート")
+                DgvList.Rows(i).Cells("為替レート").Value = decTemp.ToString("F10")
                 DgvList.Rows(i).Cells("レート").Value = ds.Tables(RS).Rows(i)("レート")
+
                 DgvList.Rows(i).Cells("更新者").Value = ds.Tables(RS).Rows(i)("更新者")
                 DgvList.Rows(i).Cells("更新日").Value = ds.Tables(RS).Rows(i)("更新日")
             Next
