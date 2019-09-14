@@ -247,13 +247,12 @@ Public Class Quote
             LblOrderAmount.Text = "SalesAmount（l）"      '売上金額
             lblPurchasecost.Text = "PurchaseCost（c）"    '仕入原価
             LblGrossProfit.Text = "GrossMargin（o）"      '粗利額
-            lblGrossmargin.Text = "GrossMargin（o）"      '粗利率
-            lblGrossmargin.Text = "GrossMarginRate（p）"  '粗利率
+            lblGrossmargin.Text = "GrossMarginRate(%)（p）"  '粗利率
 
             LblQuoteAmount.Text = "QuotationAmount（n）"    '見積金額
             LblPurchaseAmount.Text = "PurchaseAmount（j）"  '仕入金額
             lblProfitmargin.Text = "Profitmargin"           '利益
-            lblProfitmarginRate.Text = "ProfitmarginRate"   '利益率
+            lblProfitmarginRate.Text = "ProfitmarginRate(%)"   '利益率
 
 
             LblRegistration.Size = New Size(156, 23)
@@ -303,11 +302,11 @@ Public Class Quote
             DgvItemList.Columns("仕入単価").HeaderText = "PurchaseUnitPrice(" & setBaseCurrency() & ")" & vbCrLf & "b"
 
             DgvItemList.Columns("仕入原価").HeaderText = "PurchasingCost" & vbCrLf & "c=a*b"
-            DgvItemList.Columns("関税率").HeaderText = "CustomsDutyRate" & vbCrLf & "d"
+            DgvItemList.Columns("関税率").HeaderText = "CustomsDutyRate" & vbCrLf & "(%)d"
             DgvItemList.Columns("関税額").HeaderText = "CustomsDutyParUnit" & vbCrLf & "e=b*d"
-            DgvItemList.Columns("前払法人税率").HeaderText = "PrepaidCorporateTaxRate" & vbCrLf & "f"
+            DgvItemList.Columns("前払法人税率").HeaderText = "PrepaidCorporateTaxRate" & vbCrLf & "(%)f"
             DgvItemList.Columns("前払法人税額").HeaderText = "PrepaidCorporateTaxAmountParUnit" & vbCrLf & "g=(b+e)*f"
-            DgvItemList.Columns("輸送費率").HeaderText = "TransportationCostRate" & vbCrLf & "h"
+            DgvItemList.Columns("輸送費率").HeaderText = "TransportationCostRate" & vbCrLf & "(%)h"
             DgvItemList.Columns("輸送費額").HeaderText = "TransportationCostParUnit" & vbCrLf & "i=b*h"
             DgvItemList.Columns("仕入金額").HeaderText = "PurchaseAmount" & vbCrLf & "j=a*(b+e+g+i)"
             DgvItemList.Columns("売単価_外貨").HeaderText = "SellingPrice" & vbCrLf & "(OriginalCurrency)"
@@ -318,7 +317,7 @@ Public Class Quote
             DgvItemList.Columns("見積金額").HeaderText = "QuotetionAmount(" & setBaseCurrency() & ")" & vbCrLf & "n=a*m"
             DgvItemList.Columns("見積金額_外貨").HeaderText = "QuotetionAmount" & vbCrLf & "(OriginalCurrency)"
             DgvItemList.Columns("粗利額").HeaderText = "GrossMargin" & vbCrLf & "o=a*(k-b)"
-            DgvItemList.Columns("粗利率").HeaderText = "GrossMarginRate(%)" & vbCrLf & "p=(1-(b/k))*100"
+            DgvItemList.Columns("粗利率").HeaderText = "GrossMarginRate(%)" & vbCrLf & "(%)p=(1-(b/k))*100"
             DgvItemList.Columns("リードタイム").HeaderText = "LeadTime"
             DgvItemList.Columns("リードタイム単位").HeaderText = "LeadTimeUnit"
             DgvItemList.Columns("備考").HeaderText = "Remarks"
@@ -330,11 +329,11 @@ Public Class Quote
             DgvItemList.Columns("仕入単価").HeaderText = "仕入単価(" & setBaseCurrency() & ")" & vbCrLf & "b"
 
             DgvItemList.Columns("仕入原価").HeaderText = "仕入原価" & vbCrLf & "c=a*b"
-            DgvItemList.Columns("関税率").HeaderText = "関税率" & vbCrLf & "d"
+            DgvItemList.Columns("関税率").HeaderText = "関税率" & vbCrLf & "(%)d"
             DgvItemList.Columns("関税額").HeaderText = "単価当り関税額" & vbCrLf & "e=b*d"
-            DgvItemList.Columns("前払法人税率").HeaderText = "前払法人税率" & vbCrLf & "f"
+            DgvItemList.Columns("前払法人税率").HeaderText = "前払法人税率" & vbCrLf & "(%)f"
             DgvItemList.Columns("前払法人税額").HeaderText = "単価当り前払法人税額" & vbCrLf & "g=(b+e)*f"
-            DgvItemList.Columns("輸送費率").HeaderText = "輸送費率" & vbCrLf & "h"
+            DgvItemList.Columns("輸送費率").HeaderText = "輸送費率" & vbCrLf & "(%)h"
             DgvItemList.Columns("輸送費額").HeaderText = "単価当り輸送費額" & vbCrLf & "i=b*h"
             DgvItemList.Columns("仕入金額").HeaderText = "仕入金額" & vbCrLf & "j=a*(b+e+g+i)"
 
