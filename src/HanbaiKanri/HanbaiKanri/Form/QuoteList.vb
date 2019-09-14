@@ -129,16 +129,6 @@ Public Class QuoteList
 
             BtnOrder.Visible = True
             BtnOrder.Location = New Point(997, 509)
-            '使用していない
-            'ElseIf _status = "PURCHASE_NEW" Then
-            '    If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-            '        LblMode.Text = "NewPurchaseRegistrationMode"
-            '    Else
-            '        LblMode.Text = "仕入新規入力モード"
-            '    End If
-
-            '    BtnPurchase.Visible = True
-            '    BtnPurchase.Location = New Point(997, 509)
         ElseIf _status = CommonConst.STATUS_ORDER_PURCHASE Then
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "JobOrderingAndPurchasingMode"
@@ -372,7 +362,7 @@ Public Class QuoteList
                     DgvMithd.Rows(i).Cells("取消").Value = getDelKbnTxt(ds.Tables(RS).Rows(i)("取消区分"))
                     DgvMithd.Rows(i).Cells("見積番号").Value = ds.Tables(RS).Rows(i)("見積番号")
                     DgvMithd.Rows(i).Cells("見積番号枝番").Value = ds.Tables(RS).Rows(i)("見積番号枝番")
-                    DgvMithd.Rows(i).Cells("見積日").Value = ds.Tables(RS).Rows(i)("見積日").ToShortDateString
+                    DgvMithd.Rows(i).Cells("見積日").Value = ds.Tables(RS).Rows(i)("見積日")
                     DgvMithd.Rows(i).Cells("見積有効期限").Value = ds.Tables(RS).Rows(i)("見積有効期限")
                     DgvMithd.Rows(i).Cells("得意先コード").Value = ds.Tables(RS).Rows(i)("得意先コード")
                     DgvMithd.Rows(i).Cells("得意先名").Value = ds.Tables(RS).Rows(i)("得意先名")
@@ -382,7 +372,7 @@ Public Class QuoteList
                     DgvMithd.Rows(i).Cells("得意先ＦＡＸ").Value = ds.Tables(RS).Rows(i)("得意先ＦＡＸ")
                     DgvMithd.Rows(i).Cells("見積金額").Value = ds.Tables(RS).Rows(i)("見積金額")
                     DgvMithd.Rows(i).Cells("仕入金額").Value = ds.Tables(RS).Rows(i)("仕入金額")
-                    DgvMithd.Rows(i).Cells("ＶＡＴ").Value = ds.Tables(RS).Rows(i)("ＶＡＴ")
+                    DgvMithd.Rows(i).Cells("ＶＡＴ").Value = Decimal.Parse(ds.Tables(RS).Rows(i)("見積金額")) * Decimal.Parse(ds.Tables(RS).Rows(i)("ＶＡＴ")) / 100
                     DgvMithd.Rows(i).Cells("粗利額").Value = ds.Tables(RS).Rows(i)("粗利額")
                     DgvMithd.Rows(i).Cells("支払条件").Value = ds.Tables(RS).Rows(i)("支払条件")
                     DgvMithd.Rows(i).Cells("営業担当者").Value = ds.Tables(RS).Rows(i)("営業担当者")
@@ -391,6 +381,7 @@ Public Class QuoteList
                     DgvMithd.Rows(i).Cells("登録日").Value = ds.Tables(RS).Rows(i)("登録日")
                     DgvMithd.Rows(i).Cells("更新者").Value = ds.Tables(RS).Rows(i)("更新者")
                     DgvMithd.Rows(i).Cells("更新日").Value = ds.Tables(RS).Rows(i)("更新日")
+
                 Next
 
             Else
@@ -627,6 +618,68 @@ Public Class QuoteList
         DgvMithd.Columns("ＶＡＴ").DefaultCellStyle.Format = "N2"
         DgvMithd.Columns("粗利額").DefaultCellStyle.Format = "N2"
 
+        '日付表示
+        DgvMithd.Columns("見積日").DefaultCellStyle.Format = "d"
+        DgvMithd.Columns("見積有効期限").DefaultCellStyle.Format = "d"
+        DgvMithd.Columns("登録日").DefaultCellStyle.Format = "d"
+
+        '見出しの文字位置
+        DgvMithd.ReadOnly = False
+        'DataGridViewの列幅を固定
+        DgvMithd.AllowUserToResizeColumns = True
+        DgvMithd.AutoSizeColumnsMode = DataGridViewAutoSizeColumnMode.AllCells
+        DgvMithd.AllowUserToResizeRows = True
+        '列ヘッダー高さを固定
+        DgvMithd.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing
+        '行ヘッダーの幅を可変
+        DgvMithd.Columns("取消").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvMithd.Columns("取消").ReadOnly = True
+        DgvMithd.Columns("見積番号").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvMithd.Columns("見積番号").ReadOnly = True
+        DgvMithd.Columns("見積番号枝番").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvMithd.Columns("見積番号枝番").ReadOnly = True
+        DgvMithd.Columns("見積日").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvMithd.Columns("見積日").ReadOnly = True
+        DgvMithd.Columns("見積有効期限").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvMithd.Columns("見積有効期限").ReadOnly = True
+        DgvMithd.Columns("得意先コード").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvMithd.Columns("得意先コード").ReadOnly = True
+        DgvMithd.Columns("得意先名").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvMithd.Columns("得意先名").ReadOnly = True
+        DgvMithd.Columns("得意先郵便番号").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvMithd.Columns("得意先郵便番号").ReadOnly = True
+        DgvMithd.Columns("得意先住所").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvMithd.Columns("得意先住所").ReadOnly = True
+        DgvMithd.Columns("得意先電話番号").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvMithd.Columns("得意先電話番号").ReadOnly = True
+        DgvMithd.Columns("得意先ＦＡＸ").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvMithd.Columns("得意先ＦＡＸ").ReadOnly = True
+        DgvMithd.Columns("見積金額").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvMithd.Columns("見積金額").ReadOnly = True
+        DgvMithd.Columns("仕入金額").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvMithd.Columns("仕入金額").ReadOnly = True
+        DgvMithd.Columns("ＶＡＴ").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvMithd.Columns("ＶＡＴ").ReadOnly = True
+        DgvMithd.Columns("粗利額").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvMithd.Columns("粗利額").ReadOnly = True
+        DgvMithd.Columns("支払条件").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvMithd.Columns("支払条件").ReadOnly = True
+        DgvMithd.Columns("営業担当者").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvMithd.Columns("営業担当者").ReadOnly = True
+        DgvMithd.Columns("入力担当者").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvMithd.Columns("入力担当者").ReadOnly = True
+        DgvMithd.Columns("備考").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvMithd.Columns("備考").ReadOnly = True
+        DgvMithd.Columns("登録日").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvMithd.Columns("登録日").ReadOnly = True
+        DgvMithd.Columns("更新者").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvMithd.Columns("更新者").ReadOnly = True
+        DgvMithd.Columns("更新日").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvMithd.Columns("更新日").ReadOnly = True
+
+
+        DgvMithd.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells)
+
     End Sub
 
     '明細表示形式選択時の見出しセット
@@ -648,7 +701,7 @@ Public Class QuoteList
             DgvMithd.Columns.Add("売単価", "SellingPrice")
             DgvMithd.Columns.Add("売上金額", "SalesAmount")
             DgvMithd.Columns.Add("粗利額", "GrossMargin")
-            DgvMithd.Columns.Add("粗利率", "GrossMarginRate")
+            DgvMithd.Columns.Add("粗利率", "GrossMarginRate(%)")
             DgvMithd.Columns.Add("リードタイム", "LeadTime")
             DgvMithd.Columns.Add("備考", "Remarks")
             DgvMithd.Columns.Add("登録日", "RegistrationDate")
@@ -669,7 +722,7 @@ Public Class QuoteList
             DgvMithd.Columns.Add("売単価", "売単価")
             DgvMithd.Columns.Add("売上金額", "売上金額")
             DgvMithd.Columns.Add("粗利額", "粗利額")
-            DgvMithd.Columns.Add("粗利率", "粗利率")
+            DgvMithd.Columns.Add("粗利率", "粗利率(%)")
             DgvMithd.Columns.Add("リードタイム", "リードタイム")
             DgvMithd.Columns.Add("備考", "備考")
             DgvMithd.Columns.Add("登録日", "登録日")
@@ -695,6 +748,61 @@ Public Class QuoteList
         DgvMithd.Columns("売上金額").DefaultCellStyle.Format = "N2"
         DgvMithd.Columns("粗利額").DefaultCellStyle.Format = "N2"
         DgvMithd.Columns("粗利率").DefaultCellStyle.Format = "N1"
+
+        '日付表示
+        DgvMithd.Columns("登録日").DefaultCellStyle.Format = "d"
+
+        '見出しの文字位置
+        DgvMithd.ReadOnly = False
+        'DataGridViewの列幅を固定
+        DgvMithd.AllowUserToResizeColumns = True
+        DgvMithd.AutoSizeColumnsMode = DataGridViewAutoSizeColumnMode.AllCells
+        DgvMithd.AllowUserToResizeRows = True
+        '列ヘッダー高さを固定
+        DgvMithd.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing
+        '行ヘッダーの幅を可変
+        DgvMithd.Columns("取消").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvMithd.Columns("取消").ReadOnly = True
+        DgvMithd.Columns("見積番号").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvMithd.Columns("見積番号").ReadOnly = True
+        DgvMithd.Columns("見積番号枝番").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvMithd.Columns("見積番号枝番").ReadOnly = True
+        DgvMithd.Columns("仕入区分").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvMithd.Columns("仕入区分").ReadOnly = True
+        DgvMithd.Columns("メーカー").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvMithd.Columns("メーカー").ReadOnly = True
+        DgvMithd.Columns("品名").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvMithd.Columns("品名").ReadOnly = True
+        DgvMithd.Columns("型式").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvMithd.Columns("型式").ReadOnly = True
+        DgvMithd.Columns("数量").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvMithd.Columns("数量").ReadOnly = True
+        DgvMithd.Columns("単位").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvMithd.Columns("単位").ReadOnly = True
+        DgvMithd.Columns("仕入先名称").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvMithd.Columns("仕入先名称").ReadOnly = True
+        DgvMithd.Columns("仕入単価").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvMithd.Columns("仕入単価").ReadOnly = True
+        DgvMithd.Columns("間接費").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvMithd.Columns("間接費").ReadOnly = True
+        DgvMithd.Columns("仕入金額").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvMithd.Columns("仕入金額").ReadOnly = True
+        DgvMithd.Columns("売単価").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvMithd.Columns("売単価").ReadOnly = True
+        DgvMithd.Columns("売上金額").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvMithd.Columns("売上金額").ReadOnly = True
+        DgvMithd.Columns("粗利額").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvMithd.Columns("粗利額").ReadOnly = True
+        DgvMithd.Columns("粗利率").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvMithd.Columns("粗利率").ReadOnly = True
+        DgvMithd.Columns("リードタイム").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvMithd.Columns("リードタイム").ReadOnly = True
+        DgvMithd.Columns("備考").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvMithd.Columns("備考").ReadOnly = True
+        DgvMithd.Columns("登録日").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvMithd.Columns("登録日").ReadOnly = True
+
+        DgvMithd.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells)
 
     End Sub
 

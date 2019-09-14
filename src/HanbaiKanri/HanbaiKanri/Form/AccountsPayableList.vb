@@ -275,7 +275,7 @@ Public Class AccountsPayableList
                                                                                                     CommonConst.APC_KBN_NORMAL_TXT)
                 End If
                 'DgvKike.Rows(i).Cells("買掛日").Value = ds.Tables(RS).Rows(i)("買掛日").ToShortDateString()
-                DgvKike.Rows(i).Cells("買掛日").Value = Date.Parse(ds.Tables(RS).Rows(i)("買掛日").ToShortDateString())
+                DgvKike.Rows(i).Cells("買掛日").Value = ds.Tables(RS).Rows(i)("買掛日")
                 DgvKike.Rows(i).Cells("仕入先請求番号").Value = ds.Tables(RS).Rows(i)("仕入先請求番号")
                 DgvKike.Rows(i).Cells("客先番号").Value = ds.Tables(RS).Rows(i)("客先番号")
                 DgvKike.Rows(i).Cells("発注番号").Value = ds.Tables(RS).Rows(i)("発注番号")
