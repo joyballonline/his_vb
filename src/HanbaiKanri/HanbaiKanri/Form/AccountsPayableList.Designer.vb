@@ -473,6 +473,7 @@ Partial Class AccountsPayableList
         Me.買掛金額計_外貨.HeaderText = "既登録額"
         Me.買掛金額計_外貨.Name = "買掛金額計_外貨"
         Me.買掛金額計_外貨.ReadOnly = True
+        Me.買掛金額計_外貨.Visible = False
         Me.買掛金額計_外貨.Width = 78
         '
         '未登録額
@@ -480,6 +481,7 @@ Partial Class AccountsPayableList
         Me.未登録額.HeaderText = "未登録額"
         Me.未登録額.Name = "未登録額"
         Me.未登録額.ReadOnly = True
+        Me.未登録額.Visible = False
         Me.未登録額.Width = 78
         '
         '買掛残高_外貨
