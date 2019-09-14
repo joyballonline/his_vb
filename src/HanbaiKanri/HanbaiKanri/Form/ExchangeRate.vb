@@ -109,7 +109,7 @@ Public Class ExchangeRate
 
             LblStandardDate.Text = "StandardDate"
             LblBaseCurrency.Text = "BaseCurrency"
-            LblRate.Text = "Rate"
+            LblRate.Text = "ExchangeRate(IDR)"
 
             BtnRegistration.Text = "Registration"
             BtnBack.Text = "Back"
