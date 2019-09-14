@@ -110,11 +110,16 @@ Public Class ExchangeRateList
 
         '使用言語によって表示切替
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-            DgvList.Columns("基準日").HeaderText = "StandardDate"
             DgvList.Columns("採番キー").HeaderText = "Currency"
+
+            DgvList.Columns("基準日").HeaderText = "StandardDate"
+            DgvList.Columns("通貨").HeaderText = "BaseCurrency"
+
+            DgvList.Columns("為替レート").HeaderText = "ExchangeRate(IDR)"
             DgvList.Columns("レート").HeaderText = "Rate"
             DgvList.Columns("更新者").HeaderText = "ModifiedBy"
             DgvList.Columns("更新日").HeaderText = "UpdateDate"
+
         Else
             'DgvList.Columns("採番キー").HeaderText = "通貨"
             DgvList.Columns("採番キー").HeaderText = "採番キー"  '非表示の項目
