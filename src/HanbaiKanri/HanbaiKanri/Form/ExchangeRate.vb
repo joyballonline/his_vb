@@ -142,7 +142,7 @@ Public Class ExchangeRate
         ds = getDsData("m25_currency", Sql)
 
         If ds.Tables(RS).Rows.Count > 0 Then
-            LblJPY.Text = ds.Tables(RS).Rows(0)("通貨コード") & "     = "
+            LblJPY.Text = "1" & ds.Tables(RS).Rows(0)("通貨コード") & "     = "
             NudForeignCurrency1.Tag = ds.Tables(RS).Rows(0)("採番キー")
         Else
             '操作できないアラートを出す
@@ -158,12 +158,72 @@ Public Class ExchangeRate
         ds = getDsData("m25_currency", Sql)
 
         If ds.Tables(RS).Rows.Count > 0 Then
-            LblUSD.Text = ds.Tables(RS).Rows(0)("通貨コード") & "     = "
+            LblUSD.Text = "1" & ds.Tables(RS).Rows(0)("通貨コード") & "     = "
             NudForeignCurrency2.Tag = ds.Tables(RS).Rows(0)("採番キー")
         Else
             '操作できないアラートを出す
             _msgHd.dspMSG("chkCurrencyError", frmC01F10_Login.loginValue.Language)
         End If
+
+
+        '拡張_外貨
+        For i As Integer = 4 To 6
+
+            Sql = " AND "
+            Sql += "採番キー"
+            Sql += " = " & i
+
+            ds = getDsData("m25_currency", Sql)
+
+            If ds.Tables(RS).Rows.Count > 0 Then  'データあり
+
+                '可視
+                If i = 4 Then
+                    LblCurrency4.Visible = True
+                    NudForeignCurrency4.Visible = True
+
+                    LblCurrency4.Text = "1" & ds.Tables(RS).Rows(0)("通貨コード") & "     = "
+                    NudForeignCurrency4.Tag = ds.Tables(RS).Rows(0)("採番キー")
+
+                ElseIf i = 5 Then
+                    LblCurrency5.Visible = True
+                    NudForeignCurrency5.Visible = True
+
+                    LblCurrency5.Text = "1" & ds.Tables(RS).Rows(0)("通貨コード") & "     = "
+                    NudForeignCurrency5.Tag = ds.Tables(RS).Rows(0)("採番キー")
+
+                ElseIf i = 6 Then
+                    LblCurrency6.Visible = True
+                    NudForeignCurrency6.Visible = True
+
+                    LblCurrency6.Text = "1" & ds.Tables(RS).Rows(0)("通貨コード") & "     = "
+                    NudForeignCurrency6.Tag = ds.Tables(RS).Rows(0)("採番キー")
+
+                End If
+
+            Else  'データなし
+                'Me.("LblCurrency4").Visible = False
+
+                '非可視
+                If i = 4 Then
+                    LblCurrency4.Visible = False
+                    NudForeignCurrency4.Visible = False
+
+                    NudForeignCurrency4.Tag = 0
+                ElseIf i = 5 Then
+                    LblCurrency5.Visible = False
+                    NudForeignCurrency5.Visible = False
+
+                    NudForeignCurrency5.Tag = 0
+                ElseIf i = 6 Then
+                    LblCurrency6.Visible = False
+                    NudForeignCurrency6.Visible = False
+
+                    NudForeignCurrency6.Tag = 0
+                End If
+
+            End If
+        Next
 
     End Sub
 
@@ -182,20 +242,10 @@ Public Class ExchangeRate
         Dim ds As DataSet
 
 
-
-        If lblBaseCurrency1.Text = "" Or NudForeignCurrency1.Text = "" Or lblBaseCurrency2.Text = "" Or NudForeignCurrency2.Text = "" Then
-            '登録できないアラートを出す
-            _msgHd.dspMSG("chkInputError", frmC01F10_Login.loginValue.Language)
+        'チェック
+        If mCheck = False Then
             Exit Sub
         End If
-
-
-        If NudForeignCurrency1.Text = 0 Or NudForeignCurrency2.Text = 0 Then
-            '登録できないアラートを出す
-            _msgHd.dspMSG("chkInputError", frmC01F10_Login.loginValue.Language)
-            Exit Sub
-        End If
-
 
 
         '重複データのチェック
@@ -261,6 +311,31 @@ Public Class ExchangeRate
 
             _db.executeDB(Sql)
 
+
+            '拡張_外貨
+            For i As Integer = 4 To 6
+
+                Dim tag As String = vbNullString
+                Dim NudForeignCurrency As Decimal
+
+                If i = 4 Then
+                    tag = NudForeignCurrency4.Tag.ToString
+                    NudForeignCurrency = NudForeignCurrency4.Text
+                ElseIf i = 5 Then
+                    tag = NudForeignCurrency5.Tag.ToString
+                    NudForeignCurrency = NudForeignCurrency5.Text
+                ElseIf i = 6 Then
+                    tag = NudForeignCurrency6.Tag.ToString
+                    NudForeignCurrency = NudForeignCurrency6.Text
+                End If
+
+                If tag = 0 Then
+                Else
+                    Call mSet_t71(tag, NudForeignCurrency)
+                End If
+            Next
+
+
             _parentForm.Enabled = True
             _parentForm.Show()
             Me.Dispose()
@@ -272,6 +347,78 @@ Public Class ExchangeRate
             'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
             Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
         End Try
+    End Sub
+
+    Private Function mCheck() As Boolean
+
+
+        If lblBaseCurrency1.Text = "" Or NudForeignCurrency1.Text = "" Or lblBaseCurrency2.Text = "" Or NudForeignCurrency2.Text = "" Then
+            '登録できないアラートを出す
+            _msgHd.dspMSG("chkInputError", frmC01F10_Login.loginValue.Language)
+            Exit Function
+        End If
+
+        If NudForeignCurrency1.Text = 0 Or NudForeignCurrency2.Text = 0 Then
+            '登録できないアラートを出す
+            _msgHd.dspMSG("chkInputError", frmC01F10_Login.loginValue.Language)
+            Exit Function
+        End If
+
+        If NudForeignCurrency4.Visible = True Then
+            If NudForeignCurrency4.Text = "" OrElse NudForeignCurrency4.Text = 0 Then
+                '登録できないアラートを出す
+                _msgHd.dspMSG("chkInputError", frmC01F10_Login.loginValue.Language)
+                Exit Function
+            End If
+        End If
+
+        If NudForeignCurrency5.Visible = True Then
+            If NudForeignCurrency5.Text = "" OrElse NudForeignCurrency5.Text = 0 Then
+                '登録できないアラートを出す
+                _msgHd.dspMSG("chkInputError", frmC01F10_Login.loginValue.Language)
+                Exit Function
+            End If
+        End If
+
+        If NudForeignCurrency6.Visible = True Then
+            If NudForeignCurrency6.Text = "" OrElse NudForeignCurrency6.Text = 0 Then
+                '登録できないアラートを出す
+                _msgHd.dspMSG("chkInputError", frmC01F10_Login.loginValue.Language)
+                Exit Function
+            End If
+        End If
+
+        mCheck = True
+
+    End Function
+
+    Private Sub mSet_t71(ByVal Saiban As String, ByVal NudForeignCurrency As Decimal)
+
+        Dim dtToday As String = UtilClass.formatDatetime(DateTime.Now)
+        Dim sql As String
+
+
+        sql = "INSERT INTO "
+        sql += "Public."
+        sql += "t71_exchangerate("
+        sql += "会社コード, 基準日, 採番キー, レート, 更新者, 更新日)"
+        sql += " VALUES('"
+        sql += frmC01F10_Login.loginValue.BumonCD '会社コード
+        sql += "', '"
+        sql += UtilClass.strFormatDate(DtpStandardDate.Text) '基準日
+        sql += "', "
+        sql += Saiban.ToString '採番キー
+        sql += ", '"
+        sql += UtilClass.formatNumberF10(1 / NudForeignCurrency) 'レート
+        sql += "', '"
+        sql += frmC01F10_Login.loginValue.TantoNM
+        sql += "', '"
+        sql += dtToday
+        sql += "')"
+
+        _db.executeDB(sql)
+
+
     End Sub
 
     'param1：String テーブル名
@@ -362,4 +509,15 @@ Public Class ExchangeRate
         sender.Select(0, sender.Text.Length)
     End Sub
 
+    Private Sub NudForeignCurrency4_Enter(sender As Object, e As EventArgs) Handles NudForeignCurrency4.Enter
+        sender.Select(0, sender.Text.Length)
+    End Sub
+
+    Private Sub NudForeignCurrency5_Enter(sender As Object, e As EventArgs) Handles NudForeignCurrency5.Enter
+        sender.Select(0, sender.Text.Length)
+    End Sub
+
+    Private Sub NudForeignCurrency6_Enter(sender As Object, e As EventArgs) Handles NudForeignCurrency6.Enter
+        sender.Select(0, sender.Text.Length)
+    End Sub
 End Class
