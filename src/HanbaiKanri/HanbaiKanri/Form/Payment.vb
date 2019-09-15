@@ -317,7 +317,7 @@ Public Class Payment
             Sql += " AND t48.通貨 = " & CurCode
         End If
 
-        Sql += " order by t48.行番号"
+        Sql += " order by t47.支払日,t48.支払番号,t48.行番号"
 
 
         '支払先と一致する支払明細を取得
@@ -475,11 +475,6 @@ Public Class Payment
             DgvKikeInfo.Rows(i).Cells("買掛情報買掛残高").Value = DgvKikeInfo.Rows(i).Cells("買掛情報買掛残高固定").Value
         Next
 
-        '一旦自動振分をリセット
-        For i As Integer = 0 To DgvPayment.Rows.Count - 1
-            DgvPayment.Rows(i).Cells("入力支払額_計算用").Value = DgvPayment.Rows(i).Cells("入力支払金額").Value
-        Next
-
 
         '買掛金額より支払金額が大きい場合はアラート
         If Total > DgvSupplier.Rows(0).Cells("買掛残高").Value Then
@@ -491,24 +486,63 @@ Public Class Payment
 
 #Region "仕訳データ"  '仕訳用のテーブルを作成  
 
-        '非可視のデータグリッドを削除 全ての列を選択
-        '行を数えて、全行のデータを削除します。
-        If Me.ShiwakeData.Rows.Count > 0 Then
-            '新規行の追加を許可している場合は、「Count - 1」を
-            '「Count - 2」にしてください。
-            For i As Integer = 0 To Me.ShiwakeData.Rows.Count - 1 Step 1
-                Me.ShiwakeData.Rows.RemoveAt(0)
-            Next
-        End If
+        ''非可視のデータグリッドを削除 全ての列を選択
+        ''行を数えて、全行のデータを削除します。
+        'If Me.ShiwakeData.Rows.Count > 0 Then
+        '    '新規行の追加を許可している場合は、「Count - 1」を
+        '    '「Count - 2」にしてください。
+        '    For i As Integer = 0 To Me.ShiwakeData.Rows.Count - 1 Step 1
+        '        Me.ShiwakeData.Rows.RemoveAt(0)
+        '    Next
+        'End If
+
+        'Call mSet_ShiwakeData()
+
+#End Region
+
+
+        For i As Integer = 0 To DgvKikeInfo.Rows.Count - 1
+            If DgvKikeInfo.Rows(i).Cells("買掛情報買掛残高").Value > 0 Then
+                If Total - DgvKikeInfo.Rows(i).Cells("買掛情報買掛残高").Value > 0 Then
+                    DgvKikeInfo.Rows(i).Cells("支払金額").Value = DgvKikeInfo.Rows(i).Cells("買掛情報買掛残高").Value
+                    DgvKikeInfo.Rows(i).Cells("買掛情報支払金額計").Value = DgvKikeInfo.Rows(i).Cells("買掛情報支払金額計").Value + DgvKikeInfo.Rows(i).Cells("支払金額").Value
+                    DgvKikeInfo.Rows(i).Cells("買掛情報買掛残高").Value = 0
+                    Total -= DgvKikeInfo.Rows(i).Cells("支払金額").Value
+                ElseIf Total > 0 Then
+                    DgvKikeInfo.Rows(i).Cells("支払金額").Value = Total
+                    If DgvKikeInfo.Rows(i).Cells("買掛情報買掛残高").Value - Total > 0 Then
+                        DgvKikeInfo.Rows(i).Cells("買掛情報支払金額計").Value = DgvKikeInfo.Rows(i).Cells("買掛情報支払金額計").Value + DgvKikeInfo.Rows(i).Cells("支払金額").Value
+                    ElseIf DgvKikeInfo.Rows(i).Cells("買掛情報買掛残高").Value - Total = 0 Then
+                        DgvKikeInfo.Rows(i).Cells("買掛情報支払金額計").Value = DgvKikeInfo.Rows(i).Cells("買掛情報支払金額計").Value + DgvKikeInfo.Rows(i).Cells("支払金額").Value
+                    Else
+                        DgvKikeInfo.Rows(i).Cells("買掛情報支払金額計").Value = Total
+                    End If
+
+                    DgvKikeInfo.Rows(i).Cells("買掛情報買掛残高").Value = DgvKikeInfo.Rows(i).Cells("買掛情報買掛残高").Value - Total
+                    Total -= Total
+                End If
+            End If
+        Next
+
+    End Sub
+
+    Private Sub mSet_ShiwakeData()
+
+
+        '一旦自動振分をリセット
+        For i As Integer = 0 To DgvPayment.Rows.Count - 1
+            DgvPayment.Rows(i).Cells("入力支払額_計算用").Value = DgvPayment.Rows(i).Cells("入力支払金額").Value
+        Next
 
 
         '支払データ
         Dim DataIndex As Integer = 0
 
+
         '買掛データ
         For j As Integer = 0 To DgvKikeInfo.Rows.Count - 1
 
-            Dim decZandaka As Decimal = DgvKikeInfo.Rows(j).Cells("買掛情報買掛残高").Value
+            Dim decZandaka As Decimal = DgvKikeInfo.Rows(j).Cells("買掛情報買掛残高固定").Value
 
             If decZandaka = 0 Then
                 '何もしない
@@ -568,31 +602,6 @@ Public Class Payment
                     End If
 
                 Next
-            End If
-        Next
-#End Region
-
-
-        For i As Integer = 0 To DgvKikeInfo.Rows.Count - 1
-            If DgvKikeInfo.Rows(i).Cells("買掛情報買掛残高").Value > 0 Then
-                If Total - DgvKikeInfo.Rows(i).Cells("買掛情報買掛残高").Value > 0 Then
-                    DgvKikeInfo.Rows(i).Cells("支払金額").Value = DgvKikeInfo.Rows(i).Cells("買掛情報買掛残高").Value
-                    DgvKikeInfo.Rows(i).Cells("買掛情報支払金額計").Value = DgvKikeInfo.Rows(i).Cells("買掛情報支払金額計").Value + DgvKikeInfo.Rows(i).Cells("支払金額").Value
-                    DgvKikeInfo.Rows(i).Cells("買掛情報買掛残高").Value = 0
-                    Total -= DgvKikeInfo.Rows(i).Cells("支払金額").Value
-                ElseIf Total > 0 Then
-                    DgvKikeInfo.Rows(i).Cells("支払金額").Value = Total
-                    If DgvKikeInfo.Rows(i).Cells("買掛情報買掛残高").Value - Total > 0 Then
-                        DgvKikeInfo.Rows(i).Cells("買掛情報支払金額計").Value = DgvKikeInfo.Rows(i).Cells("買掛情報支払金額計").Value + DgvKikeInfo.Rows(i).Cells("支払金額").Value
-                    ElseIf DgvKikeInfo.Rows(i).Cells("買掛情報買掛残高").Value - Total = 0 Then
-                        DgvKikeInfo.Rows(i).Cells("買掛情報支払金額計").Value = DgvKikeInfo.Rows(i).Cells("買掛情報支払金額計").Value + DgvKikeInfo.Rows(i).Cells("支払金額").Value
-                    Else
-                        DgvKikeInfo.Rows(i).Cells("買掛情報支払金額計").Value = Total
-                    End If
-
-                    DgvKikeInfo.Rows(i).Cells("買掛情報買掛残高").Value = DgvKikeInfo.Rows(i).Cells("買掛情報買掛残高").Value - Total
-                    Total -= Total
-                End If
             End If
         Next
 
@@ -775,6 +784,15 @@ Public Class Payment
 
             Return
         End If
+
+
+        't81_shiwakenyu 仕訳用の入金テーブルを追加
+#Region "仕訳データ"  '仕訳用のテーブルを作成  
+
+        'データを作成する
+        Call mSet_ShiwakeData()
+
+#End Region
 
 
         '採番テーブルから支払番号取得
@@ -1004,29 +1022,38 @@ Public Class Payment
             End If
         Next
 
+        dsKikehd = Nothing
+
         Dim DsPayment As Decimal = 0    '支払金額
         Dim DsPaymentFC As Decimal = 0
         Dim APBalance As Decimal = 0    '支払金額計
         Dim APBalanceFC As Decimal = 0
 
         't46_kikehd 買掛基本テーブルを更新
-        For i As Integer = 0 To dsKikehd.Tables(RS).Rows.Count - 1
+        'For i As Integer = 0 To dsKikehd.Tables(RS).Rows.Count - 1
+        For i As Integer = 0 To DgvKikeInfo.Rows.Count - 1
 
             If DgvKikeInfo.Rows(i).Cells("支払金額").Value <> 0 Then
 
-                If dsKikehd.Tables(RS).Rows(i)("支払金額計_外貨") Is DBNull.Value Then
+                '買掛基本データ取得
+                Sql = " AND 買掛番号 = '" & DgvKikeInfo.Rows(i).Cells("買掛情報買掛番号").Value & "'"
+
+                Dim dsKikehd2 As DataSet = getDsData("t46_kikehd", Sql)
+
+
+                If dsKikehd2.Tables(RS).Rows(0)("支払金額計_外貨") Is DBNull.Value Then
                     '買掛基本の支払金額がなかったら支払金額をそのまま登録
                     DsPaymentFC = DgvKikeInfo.Rows(i).Cells("支払金額").Value
                 Else
                     '支払金額計があったら支払金額を加算する
-                    DsPaymentFC = DgvKikeInfo.Rows(i).Cells("支払金額").Value + dsKikehd.Tables(RS).Rows(i)("支払金額計_外貨")
+                    DsPaymentFC = DgvKikeInfo.Rows(i).Cells("支払金額").Value + dsKikehd2.Tables(RS).Rows(0)("支払金額計_外貨")
                 End If
 
                 DsPayment = Math.Ceiling(DsPaymentFC / strRate)  '画面の金額をIDRに変換　切り上げ
 
 
                 '残高を更新
-                APBalanceFC = dsKikehd.Tables(RS).Rows(i)("買掛残高_外貨") - DgvKikeInfo.Rows(i).Cells("支払金額").Value
+                APBalanceFC = dsKikehd2.Tables(RS).Rows(0)("買掛残高_外貨") - DgvKikeInfo.Rows(i).Cells("支払金額").Value
                 APBalance = Math.Ceiling(APBalanceFC / strRate)  '画面の金額をIDRに変換　切り上げ
 
 
@@ -1053,7 +1080,7 @@ Public Class Payment
                 Sql += "', "
 
                 '買掛金額計と支払金額計が一致したら支払完了日を設定する
-                If formatNumber(dsKikehd.Tables(RS).Rows(i)("買掛金額計")) = formatNumber(DsPayment) Then
+                If FormatNumber(dsKikehd2.Tables(RS).Rows(0)("買掛金額計")) = FormatNumber(DsPayment) Then
 
                     Sql += "支払完了日"
                     Sql += " = '"
@@ -1074,7 +1101,7 @@ Public Class Payment
                 Sql += " AND"
                 Sql += " 買掛番号"
                 Sql += "='"
-                Sql += dsKikehd.Tables(RS).Rows(i)("買掛番号")
+                Sql += dsKikehd2.Tables(RS).Rows(0)("買掛番号")
                 Sql += "' "
 
                 If CurCode <> 0 Then
