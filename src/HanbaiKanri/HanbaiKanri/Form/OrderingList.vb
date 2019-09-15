@@ -645,8 +645,8 @@ Public Class OrderingList
 
         For i As Integer = 0 To ds_t21.Tables(RS).Rows.Count - 1
 
-            decPurchase1 += rmNullDecimal(ds_t21.Tables(RS).Rows(i)("仕入値_外貨") * ds_t21.Tables(RS).Rows(i)("発注数量"))
-            decPurchase2 += rmNullDecimal(ds_t21.Tables(RS).Rows(i)("仕入値") * ds_t21.Tables(RS).Rows(i)("発注数量"))
+            decPurchase1 += rmNullDecimal(ds_t21.Tables(RS).Rows(i)("仕入値_外貨")) * ds_t21.Tables(RS).Rows(i)("発注数量")
+            decPurchase2 += rmNullDecimal(ds_t21.Tables(RS).Rows(i)("仕入値")) * ds_t21.Tables(RS).Rows(i)("発注数量")
 
             decPurchaseAmount1 += rmNullDecimal(ds_t21.Tables(RS).Rows(i)("仕入金額_外貨"))
             decPurchaseAmount2 += rmNullDecimal(ds_t21.Tables(RS).Rows(i)("仕入金額") + ds_t21.Tables(RS).Rows(i)("間接費"))
