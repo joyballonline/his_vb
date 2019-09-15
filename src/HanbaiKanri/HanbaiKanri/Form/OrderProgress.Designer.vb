@@ -42,13 +42,7 @@ Partial Class OrderProgress
         Me.TxtCustomerName = New System.Windows.Forms.TextBox()
         Me.BtnOrderSearch = New System.Windows.Forms.Button()
         Me.BtnBack = New System.Windows.Forms.Button()
-        Me.BtnOrderEdit = New System.Windows.Forms.Button()
         Me.DgvCymnhd = New System.Windows.Forms.DataGridView()
-        Me.BtnSales = New System.Windows.Forms.Button()
-        Me.BtnGoodsIssue = New System.Windows.Forms.Button()
-        Me.BtnOrderCancel = New System.Windows.Forms.Button()
-        Me.BtnOrderClone = New System.Windows.Forms.Button()
-        Me.BtnBill = New System.Windows.Forms.Button()
         Me.LblMode = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.TxtCustomerPO = New System.Windows.Forms.TextBox()
@@ -64,6 +58,19 @@ Partial Class OrderProgress
         Me.LblItemName = New System.Windows.Forms.Label()
         Me.txtMaker = New System.Windows.Forms.TextBox()
         Me.lblMaker = New System.Windows.Forms.Label()
+        Me.受注日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.受注番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.受注番号枝番 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.行番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.メーカー = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.品名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.型式 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.見積番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.見積日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.売上登録 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.出庫登録 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.売掛請求登録 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.入金登録 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DgvCymnhd, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
@@ -77,7 +84,6 @@ Partial Class OrderProgress
         Me.BtnOrderView.TabIndex = 22
         Me.BtnOrderView.Text = "受注参照"
         Me.BtnOrderView.UseVisualStyleBackColor = True
-        Me.BtnOrderView.Visible = False
         '
         'Label10
         '
@@ -260,21 +266,12 @@ Partial Class OrderProgress
         Me.BtnBack.Text = "戻る"
         Me.BtnBack.UseVisualStyleBackColor = True
         '
-        'BtnOrderEdit
-        '
-        Me.BtnOrderEdit.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.BtnOrderEdit.Location = New System.Drawing.Point(832, 509)
-        Me.BtnOrderEdit.Name = "BtnOrderEdit"
-        Me.BtnOrderEdit.Size = New System.Drawing.Size(165, 40)
-        Me.BtnOrderEdit.TabIndex = 21
-        Me.BtnOrderEdit.Text = "受注修正"
-        Me.BtnOrderEdit.UseVisualStyleBackColor = True
-        Me.BtnOrderEdit.Visible = False
-        '
         'DgvCymnhd
         '
         Me.DgvCymnhd.AllowUserToAddRows = False
+        Me.DgvCymnhd.AllowUserToDeleteRows = False
         Me.DgvCymnhd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DgvCymnhd.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.受注日, Me.受注番号, Me.受注番号枝番, Me.行番号, Me.メーカー, Me.品名, Me.型式, Me.見積番号, Me.見積日, Me.売上登録, Me.出庫登録, Me.売掛請求登録, Me.入金登録})
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         DataGridViewCellStyle1.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
@@ -291,61 +288,6 @@ Partial Class OrderProgress
         Me.DgvCymnhd.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvCymnhd.Size = New System.Drawing.Size(1326, 265)
         Me.DgvCymnhd.TabIndex = 15
-        '
-        'BtnSales
-        '
-        Me.BtnSales.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.BtnSales.Location = New System.Drawing.Point(490, 509)
-        Me.BtnSales.Name = "BtnSales"
-        Me.BtnSales.Size = New System.Drawing.Size(165, 40)
-        Me.BtnSales.TabIndex = 19
-        Me.BtnSales.Text = "売上入力"
-        Me.BtnSales.UseVisualStyleBackColor = True
-        Me.BtnSales.Visible = False
-        '
-        'BtnGoodsIssue
-        '
-        Me.BtnGoodsIssue.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.BtnGoodsIssue.Location = New System.Drawing.Point(661, 509)
-        Me.BtnGoodsIssue.Name = "BtnGoodsIssue"
-        Me.BtnGoodsIssue.Size = New System.Drawing.Size(165, 40)
-        Me.BtnGoodsIssue.TabIndex = 20
-        Me.BtnGoodsIssue.Text = "出庫入力"
-        Me.BtnGoodsIssue.UseVisualStyleBackColor = True
-        Me.BtnGoodsIssue.Visible = False
-        '
-        'BtnOrderCancel
-        '
-        Me.BtnOrderCancel.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.BtnOrderCancel.Location = New System.Drawing.Point(319, 509)
-        Me.BtnOrderCancel.Name = "BtnOrderCancel"
-        Me.BtnOrderCancel.Size = New System.Drawing.Size(165, 40)
-        Me.BtnOrderCancel.TabIndex = 18
-        Me.BtnOrderCancel.Text = "受注取消"
-        Me.BtnOrderCancel.UseVisualStyleBackColor = True
-        Me.BtnOrderCancel.Visible = False
-        '
-        'BtnOrderClone
-        '
-        Me.BtnOrderClone.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.BtnOrderClone.Location = New System.Drawing.Point(148, 509)
-        Me.BtnOrderClone.Name = "BtnOrderClone"
-        Me.BtnOrderClone.Size = New System.Drawing.Size(165, 40)
-        Me.BtnOrderClone.TabIndex = 17
-        Me.BtnOrderClone.Text = "受注複写"
-        Me.BtnOrderClone.UseVisualStyleBackColor = True
-        Me.BtnOrderClone.Visible = False
-        '
-        'BtnBill
-        '
-        Me.BtnBill.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.BtnBill.Location = New System.Drawing.Point(13, 509)
-        Me.BtnBill.Name = "BtnBill"
-        Me.BtnBill.Size = New System.Drawing.Size(165, 40)
-        Me.BtnBill.TabIndex = 16
-        Me.BtnBill.Text = "請求登録"
-        Me.BtnBill.UseVisualStyleBackColor = True
-        Me.BtnBill.Visible = False
         '
         'LblMode
         '
@@ -438,6 +380,7 @@ Partial Class OrderProgress
         Me.RbtnSlip.TabStop = True
         Me.RbtnSlip.Text = "伝票単位"
         Me.RbtnSlip.UseVisualStyleBackColor = True
+        Me.RbtnSlip.Visible = False
         '
         'RbtnDetails
         '
@@ -450,6 +393,7 @@ Partial Class OrderProgress
         Me.RbtnDetails.TabIndex = 12
         Me.RbtnDetails.Text = "明細単位"
         Me.RbtnDetails.UseVisualStyleBackColor = True
+        Me.RbtnDetails.Visible = False
         '
         'ChkCancelData
         '
@@ -523,7 +467,85 @@ Partial Class OrderProgress
         Me.lblMaker.Text = "メーカー"
         Me.lblMaker.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'OrderList
+        '受注日
+        '
+        Me.受注日.HeaderText = "受注日"
+        Me.受注日.Name = "受注日"
+        Me.受注日.ReadOnly = True
+        '
+        '受注番号
+        '
+        Me.受注番号.HeaderText = "受注番号"
+        Me.受注番号.Name = "受注番号"
+        Me.受注番号.ReadOnly = True
+        '
+        '受注番号枝番
+        '
+        Me.受注番号枝番.HeaderText = "受注Ver"
+        Me.受注番号枝番.Name = "受注番号枝番"
+        Me.受注番号枝番.ReadOnly = True
+        '
+        '行番号
+        '
+        Me.行番号.HeaderText = "行No"
+        Me.行番号.Name = "行番号"
+        Me.行番号.ReadOnly = True
+        '
+        'メーカー
+        '
+        Me.メーカー.HeaderText = "メーカー"
+        Me.メーカー.Name = "メーカー"
+        Me.メーカー.ReadOnly = True
+        '
+        '品名
+        '
+        Me.品名.HeaderText = "品名"
+        Me.品名.Name = "品名"
+        Me.品名.ReadOnly = True
+        '
+        '型式
+        '
+        Me.型式.HeaderText = "型式"
+        Me.型式.Name = "型式"
+        Me.型式.ReadOnly = True
+        '
+        '見積番号
+        '
+        Me.見積番号.HeaderText = "見積番号"
+        Me.見積番号.Name = "見積番号"
+        Me.見積番号.ReadOnly = True
+        '
+        '見積日
+        '
+        Me.見積日.HeaderText = "見積日"
+        Me.見積日.Name = "見積日"
+        Me.見積日.ReadOnly = True
+        '
+        '売上登録
+        '
+        Me.売上登録.HeaderText = "売上登録"
+        Me.売上登録.Name = "売上登録"
+        Me.売上登録.ReadOnly = True
+        '
+        '出庫登録
+        '
+        Me.出庫登録.HeaderText = "出庫登録"
+        Me.出庫登録.Name = "出庫登録"
+        Me.出庫登録.ReadOnly = True
+        '
+        '売掛請求登録
+        '
+        Me.売掛請求登録.HeaderText = "売掛請求登録"
+        Me.売掛請求登録.Name = "売掛請求登録"
+        Me.売掛請求登録.ReadOnly = True
+        '
+        '入金登録
+        '
+        Me.入金登録.HeaderText = "入金登録"
+        Me.入金登録.Name = "入金登録"
+        Me.入金登録.ReadOnly = True
+        '
+        'OrderProgress
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
@@ -539,11 +561,6 @@ Partial Class OrderProgress
         Me.Controls.Add(Me.Label11)
         Me.Controls.Add(Me.TxtCustomerPO)
         Me.Controls.Add(Me.LblMode)
-        Me.Controls.Add(Me.BtnBill)
-        Me.Controls.Add(Me.BtnOrderClone)
-        Me.Controls.Add(Me.BtnOrderCancel)
-        Me.Controls.Add(Me.BtnGoodsIssue)
-        Me.Controls.Add(Me.BtnSales)
         Me.Controls.Add(Me.BtnOrderView)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.Label5)
@@ -563,11 +580,10 @@ Partial Class OrderProgress
         Me.Controls.Add(Me.TxtCustomerName)
         Me.Controls.Add(Me.BtnOrderSearch)
         Me.Controls.Add(Me.BtnBack)
-        Me.Controls.Add(Me.BtnOrderEdit)
         Me.Controls.Add(Me.DgvCymnhd)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
-        Me.Name = "OrderList"
-        Me.Text = "OrderList"
+        Me.Name = "OrderProgress"
+        Me.Text = "OrderProgress"
         CType(Me.DgvCymnhd, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.TableLayoutPanel1.PerformLayout()
@@ -595,13 +611,7 @@ Partial Class OrderProgress
     Friend WithEvents TxtCustomerName As TextBox
     Friend WithEvents BtnOrderSearch As Button
     Friend WithEvents BtnBack As Button
-    Friend WithEvents BtnOrderEdit As Button
     Friend WithEvents DgvCymnhd As DataGridView
-    Friend WithEvents BtnSales As Button
-    Friend WithEvents BtnGoodsIssue As Button
-    Friend WithEvents BtnOrderCancel As Button
-    Friend WithEvents BtnOrderClone As Button
-    Friend WithEvents BtnBill As Button
     Friend WithEvents LblMode As Label
     Friend WithEvents Label11 As Label
     Friend WithEvents TxtCustomerPO As TextBox
@@ -617,4 +627,17 @@ Partial Class OrderProgress
     Friend WithEvents LblItemName As Label
     Friend WithEvents txtMaker As TextBox
     Friend WithEvents lblMaker As Label
+    Friend WithEvents 受注日 As DataGridViewTextBoxColumn
+    Friend WithEvents 受注番号 As DataGridViewTextBoxColumn
+    Friend WithEvents 受注番号枝番 As DataGridViewTextBoxColumn
+    Friend WithEvents 行番号 As DataGridViewTextBoxColumn
+    Friend WithEvents メーカー As DataGridViewTextBoxColumn
+    Friend WithEvents 品名 As DataGridViewTextBoxColumn
+    Friend WithEvents 型式 As DataGridViewTextBoxColumn
+    Friend WithEvents 見積番号 As DataGridViewTextBoxColumn
+    Friend WithEvents 見積日 As DataGridViewTextBoxColumn
+    Friend WithEvents 売上登録 As DataGridViewTextBoxColumn
+    Friend WithEvents 出庫登録 As DataGridViewTextBoxColumn
+    Friend WithEvents 売掛請求登録 As DataGridViewTextBoxColumn
+    Friend WithEvents 入金登録 As DataGridViewTextBoxColumn
 End Class

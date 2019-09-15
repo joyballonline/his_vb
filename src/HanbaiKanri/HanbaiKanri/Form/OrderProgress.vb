@@ -84,6 +84,31 @@ Public Class OrderProgress
     End Sub
 
     Private Sub MstHanyoue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        'モード
+        If mSet_Mode = False Then
+            Exit Sub
+        End If
+
+
+        '検索（Date）の初期値
+        dtOrderDateSince.Value = DateAdd("d", CommonConst.SINCE_DEFAULT_DAY, DateTime.Today)
+        dtOrderDateUntil.Value = DateTime.Today
+
+        OrderListLoad() '一覧表示
+
+
+        '英語対応
+        If mSet_Language() = False Then
+            Exit Sub
+        End If
+
+
+    End Sub
+
+    'モード
+    Private Function mSet_Mode() As Boolean
+
         If OrderStatus = CommonConst.STATUS_SALES Then
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "SalesInputMode"
@@ -91,8 +116,7 @@ Public Class OrderProgress
                 LblMode.Text = "売上入力モード"
             End If
 
-            BtnSales.Visible = True
-            BtnSales.Location = New Point(997, 509)
+
         ElseIf OrderStatus = CommonConst.STATUS_GOODS_ISSUE Then
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "GoodsDeliveryInputMode"
@@ -100,8 +124,6 @@ Public Class OrderProgress
                 LblMode.Text = "出庫入力モード"
             End If
 
-            BtnGoodsIssue.Visible = True
-            BtnGoodsIssue.Location = New Point(997, 509)
         ElseIf OrderStatus = CommonConst.STATUS_EDIT Then
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "EditMode"
@@ -109,8 +131,6 @@ Public Class OrderProgress
                 LblMode.Text = "編集モード"
             End If
 
-            BtnOrderEdit.Visible = True
-            BtnOrderEdit.Location = New Point(997, 509)
         ElseIf OrderStatus = CommonConst.STATUS_VIEW Then
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "ViewMode"
@@ -118,8 +138,8 @@ Public Class OrderProgress
                 LblMode.Text = "参照モード"
             End If
 
-            BtnOrderView.Visible = True
-            BtnOrderView.Location = New Point(997, 509)
+            'BtnOrderView.Visible = True
+            'BtnOrderView.Location = New Point(997, 509)
 
             LblItemName.Visible = True
             TxtItemName.Visible = True
@@ -133,8 +153,6 @@ Public Class OrderProgress
                 LblMode.Text = "取消モード"
             End If
 
-            BtnOrderCancel.Visible = True
-            BtnOrderCancel.Location = New Point(997, 509)
         ElseIf OrderStatus = CommonConst.STATUS_CLONE Then
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "NewCopyMode"
@@ -142,8 +160,6 @@ Public Class OrderProgress
                 LblMode.Text = "新規複写モード"
             End If
 
-            BtnOrderClone.Visible = True
-            BtnOrderClone.Location = New Point(997, 509)
         ElseIf OrderStatus = CommonConst.STATUS_BILL Then
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "BillingRegistrationMode"
@@ -151,15 +167,15 @@ Public Class OrderProgress
                 LblMode.Text = "請求登録モード"
             End If
 
-            BtnBill.Visible = True
-            BtnBill.Location = New Point(997, 509)
         End If
 
-        '検索（Date）の初期値
-        dtOrderDateSince.Value = DateAdd("d", CommonConst.SINCE_DEFAULT_DAY, DateTime.Today)
-        dtOrderDateUntil.Value = DateTime.Today
+        mSet_Mode = True
 
-        OrderListLoad() '一覧表示
+    End Function
+
+
+    '英語対応
+    Private Function mSet_Language() As Boolean
 
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
             LblConditions.Text = "ExtractionCondition"
@@ -182,13 +198,7 @@ Public Class OrderProgress
             ChkCancelData.Location = New Point(556, 203)
 
             BtnOrderSearch.Text = "Search"
-            BtnBill.Text = "BillingRegistration"
-            BtnOrderCancel.Text = "CancelOfOrder"
-            BtnSales.Text = "SalesRagistration"
-            BtnGoodsIssue.Text = "GoodsIssueRegistration"
-            BtnOrderClone.Text = "OrderCopy"
             BtnOrderView.Text = "OrderView"
-            BtnOrderEdit.Text = "OrderEdit"
             BtnBack.Text = "Back"
 
 
@@ -196,202 +206,92 @@ Public Class OrderProgress
             LblItemName.Text = "ItemName"
             LblSpec.Text = "Spec"
         End If
-    End Sub
+
+        mSet_Language = True
+
+    End Function
+
 
     '受注一覧を表示
     Private Sub OrderListLoad(Optional ByRef prmRefStatus As String = "")
         '一覧をクリア
         DgvCymnhd.Rows.Clear()
-        DgvCymnhd.Columns.Clear()
+        'DgvCymnhd.Columns.Clear()
 
         Dim reccnt As Integer = 0 'DB用（デフォルト）
         Dim Sql As String = ""
 
-        '抽出条件
-        Dim customerName As String = escapeSql(TxtCustomerName.Text)
-        Dim customerAddress As String = escapeSql(TxtAddress.Text)
-        Dim customerTel As String = escapeSql(TxtTel.Text)
-        Dim customerCode As String = escapeSql(TxtCustomerCode.Text)
-        Dim sinceDate As String = UtilClass.strFormatDate(dtOrderDateSince.Text)
-        Dim untilDate As String = UtilClass.strFormatDate(dtOrderDateUntil.Text)
-        Dim sinceNum As String = escapeSql(TxtOrderSince.Text)
-        Dim salesName As String = escapeSql(TxtSales.Text)
-        Dim customerPO As String = escapeSql(TxtCustomerPO.Text)
-        Dim itemName As String = escapeSql(TxtItemName.Text)
-        Dim spec As String = escapeSql(TxtSpec.Text)
-        Dim Maker As String = UtilClass.escapeSql(txtMaker.Text)
-
-
         Try
 
-            '受注参照時、品名と型式も検索
-            '出庫登録時も一覧では特別な表示制限なし
-            If OrderStatus = CommonConst.STATUS_VIEW Or OrderStatus = CommonConst.STATUS_GOODS_ISSUE Then
+            Sql = " SELECT t10.*"
+            Sql += " ,t11.行番号 ,t11.メーカー ,t11.品名 ,t11.型式"
+            Sql += " ,t11.売上数量 ,t11.受注残数"
 
-                '伝票単位の場合
-                If RbtnSlip.Checked Then
+            Sql += " from t10_cymnhd as t10"
 
-                    Sql = " SELECT "
-                    Sql += " t10.受注番号,t10.受注番号枝番,t10.受注日,t10.取消区分,t10.客先番号"
-                    Sql += ",t10.見積番号,t10.見積番号枝番,t10.見積日,t10.見積有効期限"
-                    Sql += ",t10.得意先コード,t10.得意先名,t10.得意先郵便番号,t10.得意先住所,t10.得意先電話番号"
-                    Sql += ",t10.得意先ＦＡＸ,t10.得意先担当者名,t10.得意先担当者役職"
-                    Sql += ",t10.ＶＡＴ,t10.通貨,t10.見積金額_外貨"
-                    Sql += ",t10.見積金額,t10.仕入金額,t10.粗利額,t10.支払条件"
-                    Sql += ",t10.営業担当者,t10.入力担当者,t10.備考,t10.登録日,t10.更新者,t10.更新日"
+            Sql += " left join t11_cymndt as t11"
+            Sql += " on t10.受注番号 = t11.受注番号 and t10.受注番号枝番 = t11.受注番号枝番"
 
+            'Sql += " left join t31_urigdt as t31"
+            'Sql += "   on t10.受注番号 = t31.受注番号 and t10.受注番号枝番 = t31.受注番号枝番"
+            'Sql += "  and t11.メーカー = t31.メーカー and t11.品名 = t31.品名 and t11.型式 = t31.型式"
 
-                    Sql += " FROM t10_cymnhd t10 "
-                    Sql += " left join t11_cymndt t11 "
-                    Sql += " on (t10.受注番号 = t11.受注番号 and t10.受注番号枝番 = t11.受注番号枝番)"
-
-                    Sql += " WHERE t10.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "' "
-
-                    Sql += viewSearchConditions() '検索条件
-
-                    Sql += " group by "
-                    Sql += " t10.受注番号,t10.受注番号枝番,t10.受注日,t10.取消区分,t10.客先番号"
-                    Sql += ",t10.見積番号,t10.見積番号枝番,t10.見積日,t10.見積有効期限"
-                    Sql += ",t10.得意先コード,t10.得意先名,t10.得意先郵便番号,t10.得意先住所,t10.得意先電話番号"
-                    Sql += ",t10.得意先ＦＡＸ,t10.得意先担当者名,t10.得意先担当者役職"
-                    Sql += ",t10.ＶＡＴ,t10.通貨,t10.見積金額_外貨"
-                    Sql += ",t10.見積金額,t10.仕入金額,t10.粗利額,t10.支払条件"
-                    Sql += ",t10.営業担当者,t10.入力担当者,t10.備考,t10.登録日,t10.更新者,t10.更新日"
+            'Sql += " left join t45_shukodt as t45"
+            'Sql += " on t10.受注番号 = t45.受注番号 and t10.受注番号枝番 = t45.受注番号枝番"
 
 
-                    Sql += " ORDER BY "
-                    Sql += " t10.登録日 DESC"
 
-                    ds = _db.selectDB(Sql, RS, reccnt)
 
-                    setRows(ds) '行をセット
+            Sql += " WHERE t10.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
 
-                Else
-                    '明細単位
+            '履歴最新
+            Sql += "   and t10.受注番号枝番 = (SELECT MAX(t10M.受注番号枝番) FROM t10_cymnhd as t10M where t10.受注番号 = t10M.受注番号) "
 
-                    Sql = "SELECT t11.*, t10.取消区分 "
-                    Sql += " FROM t11_cymndt t11 "
+            'Sql += viewSearchConditions() '検索条件 todo
 
-                    Sql += " LEFT JOIN  t10_cymnhd t10 "
-                    Sql += " ON t11.会社コード = t10.会社コード "
-                    Sql += " AND t11.受注番号 = t10.受注番号 "
-                    Sql += " AND t11.受注番号枝番 = t10.受注番号枝番 "
+            Sql += " ORDER BY "
+            Sql += " t10.受注日, t10.受注番号, t10.受注番号枝番, t11.行番号"
 
-                    Sql += " WHERE t10.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "' "
+            ds = _db.selectDB(Sql, RS, reccnt)
 
-                    Sql += viewSearchConditions() '検索条件
 
-                    Sql += " ORDER BY "
-                    Sql += " t11.登録日 DESC"
+            For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
 
-                    ds = _db.selectDB(Sql, RS, reccnt)
+                DgvCymnhd.Rows.Add()
+                DgvCymnhd.Rows(i).Cells("受注日").Value = ds.Tables(RS).Rows(i)("受注日")
+                DgvCymnhd.Rows(i).Cells("受注番号").Value = ds.Tables(RS).Rows(i)("受注番号")
+                DgvCymnhd.Rows(i).Cells("受注番号枝番").Value = ds.Tables(RS).Rows(i)("受注番号枝番")
 
-                    setRows(ds) '行をセット
+                DgvCymnhd.Rows(i).Cells("行番号").Value = ds.Tables(RS).Rows(i)("行番号")
+                DgvCymnhd.Rows(i).Cells("メーカー").Value = ds.Tables(RS).Rows(i)("メーカー")
+                DgvCymnhd.Rows(i).Cells("品名").Value = ds.Tables(RS).Rows(i)("品名")
+                DgvCymnhd.Rows(i).Cells("型式").Value = ds.Tables(RS).Rows(i)("型式")
 
+                DgvCymnhd.Rows(i).Cells("見積番号").Value = ds.Tables(RS).Rows(i)("見積番号")
+                DgvCymnhd.Rows(i).Cells("見積日").Value = ds.Tables(RS).Rows(i)("見積日")
+
+                If IsDBNull(ds.Tables(RS).Rows(i)("受注残数")) Then
+                    '売上がない
+                    DgvCymnhd.Rows(i).Cells("売上登録").Value = ""
+                ElseIf ds.Tables(RS).Rows(i)("受注残数") = 0 Then
+                    '売上済
+                    DgvCymnhd.Rows(i).Cells("売上登録").Value = "〇"
+                ElseIf ds.Tables(RS).Rows(i)("売上数量") > 0 AndAlso ds.Tables(RS).Rows(i)("受注残数") > 0 Then
+                    '一部売上
+                    DgvCymnhd.Rows(i).Cells("売上登録").Value = "△"
                 End If
 
-                Exit Sub
 
-            End If
+            Next
 
-            '伝票単位の場合
-            If RbtnSlip.Checked Then
+            DgvCymnhd.Columns("受注日").DefaultCellStyle.Format = "d"
+            DgvCymnhd.Columns("見積日").DefaultCellStyle.Format = "d"
 
-                Sql = searchConditions() '抽出条件取得
-                Sql += viewFormat() '表示形式条件
+            DgvCymnhd.Columns("売上登録").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
 
-                Sql += " ORDER BY "
-                Sql += "更新日 DESC"
 
-                ds = getDsData("t10_cymnhd", Sql)
+            ds = Nothing
 
-                setRows(ds) '行をセット
-
-            Else
-
-                '明細単位の場合
-                'joinするのでとりあえず直書き
-                Sql = "SELECT t11.*, t10.取消区分 FROM  public.t11_cymndt t11 "
-                Sql += " INNER JOIN  t10_cymnhd t10"
-                Sql += " ON t11.会社コード = t10.会社コード"
-                Sql += " AND  t11.受注番号 = t10.受注番号"
-                Sql += " AND  t11.受注番号枝番 = t10.受注番号枝番"
-
-                Sql += " WHERE t11.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-
-                If customerName <> Nothing Then
-                    Sql += " AND "
-                    Sql += " t10.得意先名 ILIKE '%" & customerName & "%' "
-                End If
-
-                If customerAddress <> Nothing Then
-                    Sql += " AND "
-                    Sql += " t10.得意先住所 ILIKE '%" & customerAddress & "%' "
-                End If
-
-                If customerTel <> Nothing Then
-                    Sql += " AND "
-                    Sql += " t10.得意先電話番号 ILIKE '%" & customerTel & "%' "
-                End If
-
-                If customerCode <> Nothing Then
-                    Sql += " AND "
-                    Sql += " t10.得意先コード ILIKE '%" & customerCode & "%' "
-                End If
-
-                If sinceDate <> Nothing Then
-                    Sql += " AND "
-                    Sql += " t10.受注日 >= '" & sinceDate & "'"
-                End If
-                If untilDate <> Nothing Then
-                    Sql += " AND "
-                    Sql += " t10.受注日 <= '" & untilDate & "'"
-                End If
-
-                If sinceNum <> Nothing Then
-                    Sql += " AND "
-                    Sql += " t11.受注番号 >= '" & sinceNum & "' "
-                End If
-
-                If salesName <> Nothing Then
-                    Sql += " AND "
-                    Sql += " t10.営業担当者 ILIKE '%" & salesName & "%' "
-                End If
-
-                If customerPO <> Nothing Then
-                    Sql += " AND "
-                    Sql += " t10.客先番号 ILIKE '%" & customerPO & "%' "
-                End If
-
-                If Maker <> Nothing Then
-                    Sql += " AND "
-                    Sql += " t11.メーカー ILIKE '%" & Maker & "%' "
-                End If
-
-                If itemName <> Nothing Then
-                    Sql += " AND "
-                    Sql += " t11.品名 ILIKE '%" & itemName & "%' "
-                End If
-
-                If spec <> Nothing Then
-                    Sql += " AND "
-                    Sql += " t11.型式 ILIKE '%" & spec & "%' "
-                End If
-
-                '取消データを含めない場合
-                If ChkCancelData.Checked = False Then
-                    Sql += " AND "
-                    Sql += " t10.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
-                End If
-
-                Sql += " ORDER BY "
-                Sql += " t11.登録日 DESC"
-
-                ds = _db.selectDB(Sql, RS, reccnt)
-
-                setRows(ds) '行をセット
-
-            End If
 
         Catch ue As UsrDefException
             ue.dspMsg()
@@ -626,34 +526,6 @@ Public Class OrderProgress
 
     End Sub
 
-    '機能としては使用しない
-    '受注修正
-    Private Sub BtnOrderEdit_Click(sender As Object, e As EventArgs) Handles BtnOrderEdit.Click
-        'グリッドに何もないときは次画面へ移動しない
-        If Me.DgvCymnhd.RowCount = 0 Then
-            '操作できないアラートを出す
-            _msgHd.dspMSG("NonAction", frmC01F10_Login.loginValue.Language)
-            Exit Sub
-        End If
-
-        '取消済みデータは取消操作不可能
-        If DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("取消").Value = CommonConst.CANCEL_KBN_DISABLED_TXT Then
-            '取消データは選択できないアラートを出す
-            _msgHd.dspMSG("cannotSelectTorikeshiData", frmC01F10_Login.loginValue.Language)
-            Exit Sub
-        End If
-
-        Dim RowIdx As Integer
-        RowIdx = Me.DgvCymnhd.CurrentCell.RowIndex
-        Dim No As String = DgvCymnhd.Rows(RowIdx).Cells("受注番号").Value
-        Dim Suffix As String = DgvCymnhd.Rows(RowIdx).Cells("受注番号枝番").Value
-        Dim Status As String = CommonConst.STATUS_EDIT
-        Dim openForm As Form = Nothing
-        openForm = New Order(_msgHd, _db, _langHd, Me, No, Suffix, Status)   '処理選択
-        openForm.ShowDialog(Me)
-
-        OrderListLoad() '一覧表示
-    End Sub
 
     '受注参照
     Private Sub BtnOrderView_Click(sender As Object, e As EventArgs) Handles BtnOrderView.Click
@@ -675,373 +547,6 @@ Public Class OrderProgress
         openForm.Show(Me)
     End Sub
 
-    '売上入力
-    Private Sub BtnOrder_Click(sender As Object, e As EventArgs) Handles BtnSales.Click
-        'グリッドに何もないときは次画面へ移動しない
-        If Me.DgvCymnhd.RowCount = 0 Then
-            '操作できないアラートを出す
-            _msgHd.dspMSG("NonAction", frmC01F10_Login.loginValue.Language)
-            Exit Sub
-        End If
-
-        '取消済みデータは取消操作不可能
-        If DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("取消").Value = CommonConst.CANCEL_KBN_DISABLED_TXT Then
-            '取消データは選択できないアラートを出す
-            _msgHd.dspMSG("cannotSelectTorikeshiData", frmC01F10_Login.loginValue.Language)
-            Exit Sub
-        End If
-
-        Dim RowIdx As Integer
-        RowIdx = Me.DgvCymnhd.CurrentCell.RowIndex
-        Dim No As String = DgvCymnhd.Rows(RowIdx).Cells("受注番号").Value
-        Dim Suffix As String = DgvCymnhd.Rows(RowIdx).Cells("受注番号枝番").Value
-        Dim openForm As Form = Nothing
-        openForm = New OrderManagement(_msgHd, _db, _langHd, Me, No, Suffix)   '処理選択
-        openForm.Show(Me)
-    End Sub
-
-    '出庫入力
-    Private Sub BtnReceipt_Click(sender As Object, e As EventArgs) Handles BtnGoodsIssue.Click
-        'グリッドに何もないときは次画面へ移動しない
-        If Me.DgvCymnhd.RowCount = 0 Then
-            '操作できないアラートを出す
-            _msgHd.dspMSG("NonAction", frmC01F10_Login.loginValue.Language)
-            Exit Sub
-        End If
-
-        '取消済みデータは取消操作不可能
-        If DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("取消").Value = CommonConst.CANCEL_KBN_DISABLED_TXT Then
-            '取消データは選択できないアラートを出す
-            _msgHd.dspMSG("cannotSelectTorikeshiData", frmC01F10_Login.loginValue.Language)
-            Exit Sub
-        End If
-
-        Dim RowIdx As Integer
-        RowIdx = Me.DgvCymnhd.CurrentCell.RowIndex
-        Dim No As String = DgvCymnhd.Rows(RowIdx).Cells("受注番号").Value
-        Dim Suffix As String = DgvCymnhd.Rows(RowIdx).Cells("受注番号枝番").Value
-        Dim openForm As Form = Nothing
-        openForm = New GoodsIssue(_msgHd, _db, _langHd, No, Suffix)   '処理選択
-        openForm.Show(Me)
-    End Sub
-
-    '受注取消
-    Private Sub BtnOrderCancel_Click(sender As Object, e As EventArgs) Handles BtnOrderCancel.Click
-        'グリッドに何もないときは次画面へ移動しない
-        If Me.DgvCymnhd.RowCount = 0 Then
-            '操作できないアラートを出す
-            _msgHd.dspMSG("NonAction", frmC01F10_Login.loginValue.Language)
-            Exit Sub
-        End If
-
-        Dim dtNow As String = UtilClass.formatDatetime(DateTime.Now)
-        Dim Sql1 As String = ""
-
-        '明細表示時は取消操作不可能
-        If RbtnDetails.Checked Then
-
-            '操作できないアラートを出す
-            _msgHd.dspMSG("NonAction", frmC01F10_Login.loginValue.Language)
-            Return
-
-        End If
-
-        '取消済みデータは取消操作不可能
-        If DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("取消").Value = CommonConst.CANCEL_KBN_DISABLED_TXT Then
-            '取消データは選択できないアラートを出す
-            _msgHd.dspMSG("cannotSelectTorikeshiData", frmC01F10_Login.loginValue.Language)
-            Return
-        End If
-
-        Try
-
-            '取消確認のアラート
-            Dim result As DialogResult = _msgHd.dspMSG("confirmCancel", frmC01F10_Login.loginValue.Language)
-
-            If result = DialogResult.Yes Then
-
-
-                '対象の受注に対して発注データがあるか
-                Sql1 = "AND "
-                Sql1 += "受注番号 = '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号").Value & "'"
-                Sql1 += "AND "
-                Sql1 += "受注番号枝番 = '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号枝番").Value & "'"
-
-                Dim dshattyu As DataSet = getDsData("t20_hattyu", Sql1)
-
-                If dshattyu.Tables(RS).Rows.Count > 0 Then
-
-                    '取消確認のアラート
-                    result = _msgHd.dspMSG("confirmOrderCancel", frmC01F10_Login.loginValue.Language)
-                    If result = DialogResult.Yes Then
-
-                        '発注データの取消
-                        If mOrderCancel() = False Then
-                            Exit Sub
-                        End If
-                    End If
-
-                End If
-
-                '引当データを元に戻す
-                '受注データの取消
-                If mOutCancel() = False Then
-                    Exit Sub
-                End If
-
-
-                OrderListLoad() 'データ更新
-            End If
-
-        Catch ex As Exception
-            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
-        End Try
-
-    End Sub
-
-    '引当データを元に戻す
-    't44_shukohd
-    't45_shukodt
-    't70_inout
-    't44_shukohd
-    't45_shukodt
-    't01_mithd
-    Private Function mOutCancel() As Boolean
-
-        Dim dtNow As String = UtilClass.formatDatetime(DateTime.Now)
-        Dim Sql1 As String = ""
-
-        mOutCancel = False
-
-        Try
-
-
-            '出庫データ登録前に、「在庫引当」の商品があるかどうかチェック
-            Sql1 = "AND "
-            Sql1 += "受注番号 = '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号").Value & "'"
-            Sql1 += "AND "
-            Sql1 += "受注番号枝番 = '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号枝番").Value & "'"
-
-            Dim dsCymndt As DataSet = getDsData("t11_cymndt", Sql1)
-
-
-            For i As Integer = 0 To dsCymndt.Tables(RS).Rows.Count() - 1
-
-                '仕入区分が2（在庫引当）の場合、作成済みの仮出庫データを「取消区分=0, 取消日=Datetime.Date」でUPDATEする
-                If dsCymndt.Tables(RS).Rows(i)("仕入区分").ToString = CommonConst.Sire_KBN_Zaiko Then
-
-#Region "shuko"
-                    't44_shukohd
-                    Sql1 = "UPDATE "
-                    Sql1 += " t44_shukohd "
-                    Sql1 += " SET "
-                    Sql1 += " 取消区分 = " & CommonConst.CANCEL_KBN_DISABLED.ToString
-                    Sql1 += ",取消日 = '" & UtilClass.formatDatetime(dtNow) & "'"
-                    Sql1 += ",更新日 = '" & UtilClass.formatDatetime(dtNow) & "'"
-                    Sql1 += ",更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
-
-                    Sql1 += " WHERE "
-                    Sql1 += " 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-                    Sql1 += " AND "
-                    Sql1 += " 受注番号 = '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号").Value & "'"
-                    Sql1 += " AND "
-                    Sql1 += " 受注番号枝番 = '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号枝番").Value & "'"
-
-                    _db.executeDB(Sql1)
-
-
-                    't45_shukodt
-                    Sql1 = "UPDATE "
-                    Sql1 += " t45_shukodt "
-                    Sql1 += " SET "
-                    Sql1 += " 更新日 = '" & UtilClass.formatDatetime(dtNow) & "'"
-                    Sql1 += ",更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
-
-                    Sql1 += " WHERE "
-                    Sql1 += " 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-                    Sql1 += " AND "
-                    Sql1 += " 受注番号 = '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号").Value & "'"
-                    Sql1 += " AND "
-                    Sql1 += " 受注番号枝番 = '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号枝番").Value & "'"
-                    Sql1 += " AND "
-                    Sql1 += " 行番号 = '" & dsCymndt.Tables(RS).Rows(i)("行番号").ToString & "'"
-
-                    _db.executeDB(Sql1)
-#End Region
-
-                    '出庫データ select
-                    Sql1 = " AND "
-                    Sql1 += " 受注番号 = '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号").Value & "'"
-                    Sql1 += " AND "
-                    Sql1 += " 受注番号枝番 = '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号枝番").Value & "'"
-                    Sql1 += " AND "
-                    Sql1 += " 行番号 = '" & dsCymndt.Tables(RS).Rows(i)("行番号").ToString & "'"
-
-                    Dim dsShukodt As DataSet = getDsData("t45_shukodt", Sql1)
-
-
-#Region "inout"
-                    't70_inout
-                    Sql1 = "UPDATE t70_inout "
-                    Sql1 += " SET "
-                    Sql1 += " 取消区分 = " & CommonConst.CANCEL_KBN_DISABLED.ToString
-                    Sql1 += ",取消日 = '" & UtilClass.formatDatetime(dtNow) & "'"
-                    Sql1 += ",更新日 = '" & UtilClass.formatDatetime(dtNow) & "'"
-                    Sql1 += ",更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
-
-                    Sql1 += " WHERE "
-                    Sql1 += " 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-                    Sql1 += " AND"
-                    Sql1 += " 伝票番号 ='" & dsShukodt.Tables(RS).Rows(0)("出庫番号").ToString & "'"
-                    Sql1 += " AND"
-                    Sql1 += "   行番号 ='" & dsShukodt.Tables(RS).Rows(0)("行番号").ToString & "'"
-
-                    _db.executeDB(Sql1)
-
-#End Region
-
-#Region "t11_cymndt"
-                    't11_cymndtの出庫数は修正しない
-                    'Dim calShukko As Integer = dsCymndt.Tables(RS).Rows(i)("出庫数") - dsShukodt.Tables(RS).Rows(x)("出庫数量")
-                    ''Dim calUnShukko As Integer = dsCymndt.Tables(RS).Rows(i)("未出庫数") + dsShukodt.Tables(RS).Rows(x)("出庫数量")
-                    'Dim calUnShukko As Integer = dsCymndt.Tables(RS).Rows(i)("未出庫数") - dsShukodt.Tables(RS).Rows(x)("出庫数量")
-
-                    'Sql1 = "update t11_cymndt set "
-                    ''Sql1 += "出庫数 = '" & calShukko & "'"
-                    'Sql1 += "未出庫数 = '" & calUnShukko & "'"
-                    'Sql1 += ",更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
-                    'Sql1 += " where 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-                    'Sql1 += " AND "
-                    'Sql1 += "受注番号 ILIKE '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号").Value & "'"
-                    'Sql1 += " AND "
-                    'Sql1 += "受注番号枝番 ILIKE '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号枝番").Value & "'"
-                    'Sql1 += " AND "
-                    'Sql1 += "行番号 = '" & dsShukodt.Tables(RS).Rows(x)("行番号") & "'"
-
-                    '_db.executeDB(Sql1)
-#End Region
-
-                End If
-            Next
-
-
-#Region "cymn"
-
-            '受発注、在庫引当全てのデータを取消にする
-            Sql1 = "UPDATE "
-            Sql1 += " Public.t10_cymnhd "
-            Sql1 += " SET "
-            Sql1 += " 取消区分 = " & CommonConst.CANCEL_KBN_DISABLED.ToString
-            Sql1 += ", 取消日 = '" & UtilClass.formatDatetime(dtNow) & "'"
-            Sql1 += ", 更新日 = '" & UtilClass.formatDatetime(dtNow) & "'"
-            Sql1 += ", 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
-
-            Sql1 += " WHERE 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Sql1 += " AND 受注番号 ='" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号").Value & "'"
-            Sql1 += " AND 受注番号枝番 ='" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号枝番").Value & "'"
-
-            _db.executeDB(Sql1)
-
-
-            Sql1 = "UPDATE "
-            Sql1 += " Public.t11_cymndt "
-            Sql1 += " SET "
-            'Sql1 += "  更新日 = '" & UtilClass.formatDatetime(dtNow) & "'"
-            Sql1 += " 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
-
-            Sql1 += " WHERE 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Sql1 += " AND 受注番号 ='" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号").Value & "'"
-            Sql1 += " AND 受注番号枝番 ='" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号枝番").Value & "'"
-
-            _db.executeDB(Sql1)
-
-#End Region
-
-
-
-#Region "t01_mithd"
-
-            't01_mithd　受注日をクリア
-            Sql1 = "UPDATE "
-            Sql1 += " Public.t01_mithd "
-            Sql1 += " SET "
-            Sql1 += " 受注日 = null "
-            Sql1 += ",更新日 = '" & UtilClass.formatDatetime(dtNow) & "'"
-            Sql1 += ",更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
-
-            Sql1 += " WHERE 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Sql1 += " AND 見積番号 ='" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("見積番号").Value & "'"
-            Sql1 += " AND 見積番号枝番 ='" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("見積番号枝番").Value & "'"
-
-            _db.executeDB(Sql1)
-
-#End Region
-
-            mOutCancel = True
-
-        Catch ue As UsrDefException
-            ue.dspMsg()
-            Throw ue
-        Catch ex As Exception
-            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
-        End Try
-
-    End Function
-
-
-    '受注データに対応する発注データを取り消す
-    Private Function mOrderCancel() As Boolean
-
-        Dim dtNow As String = UtilClass.formatDatetime(DateTime.Now)
-        Dim Sql1 As String = ""
-
-        mOrderCancel = False
-
-        Try
-
-            Sql1 = "UPDATE "
-            Sql1 += "Public."
-            Sql1 += "t20_hattyu "
-            Sql1 += "SET "
-
-            Sql1 += "取消区分 = " & CommonConst.CANCEL_KBN_DISABLED
-            Sql1 += ", 取消日 = '" & UtilClass.formatDatetime(dtNow) & "'"
-            Sql1 += ", 更新日 = '" & UtilClass.formatDatetime(dtNow) & "'"
-            Sql1 += ", 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "' "
-
-            Sql1 += "WHERE"
-            Sql1 += " 会社コード"
-            Sql1 += "='"
-            Sql1 += frmC01F10_Login.loginValue.BumonCD
-            Sql1 += "'"
-            Sql1 += " AND"
-            Sql1 += " 受注番号"
-            Sql1 += "='"
-            Sql1 += DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号").Value
-            Sql1 += "' "
-            Sql1 += " AND"
-            Sql1 += " 受注番号枝番"
-            Sql1 += "='"
-            Sql1 += DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号枝番").Value
-            Sql1 += "' "
-
-            _db.executeDB(Sql1)
-
-
-            mOrderCancel = True
-
-        Catch ue As UsrDefException
-            ue.dspMsg()
-            Throw ue
-        Catch ex As Exception
-            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
-        End Try
-
-    End Function
-
 
     '取消データを含めるイベントの取得
     Private Sub ChkCancelData_CheckedChanged(sender As Object, e As EventArgs) Handles ChkCancelData.CheckedChanged
@@ -1050,64 +555,6 @@ Public Class OrderProgress
 
     End Sub
 
-    '受注複写
-    Private Sub BtnOrderClone_Click(sender As Object, e As EventArgs) Handles BtnOrderClone.Click
-        'グリッドに何もないときは次画面へ移動しない
-        If Me.DgvCymnhd.RowCount = 0 Then
-            '操作できないアラートを出す
-            _msgHd.dspMSG("NonAction", frmC01F10_Login.loginValue.Language)
-            Exit Sub
-        End If
-
-        '取消済みデータは取消操作不可能
-        If DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("取消").Value = CommonConst.CANCEL_KBN_DISABLED_TXT Then
-            '取消データは選択できないアラートを出す
-            _msgHd.dspMSG("cannotSelectTorikeshiData", frmC01F10_Login.loginValue.Language)
-            Exit Sub
-        End If
-
-        Dim RowIdx As Integer
-        RowIdx = Me.DgvCymnhd.CurrentCell.RowIndex
-        Dim No As String = DgvCymnhd.Rows(RowIdx).Cells("受注番号").Value
-        Dim Suffix As String = DgvCymnhd.Rows(RowIdx).Cells("受注番号枝番").Value
-        Dim Status As String = CommonConst.STATUS_CLONE
-        Dim openForm As Form = Nothing
-        openForm = New Order(_msgHd, _db, _langHd, Me, No, Suffix, Status)   '処理選択
-        Me.Enabled = False
-        Me.Hide()
-        openForm.ShowDialog(Me)
-
-        OrderListLoad() '一覧を再表示
-    End Sub
-
-    '請求登録
-    Private Sub BtnBill_Click(sender As Object, e As EventArgs) Handles BtnBill.Click
-        'グリッドに何もないときは次画面へ移動しない
-        If Me.DgvCymnhd.RowCount = 0 Then
-            '操作できないアラートを出す
-            _msgHd.dspMSG("NonAction", frmC01F10_Login.loginValue.Language)
-            Exit Sub
-        End If
-
-        '取消済みデータは取消操作不可能
-        If DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("取消").Value = CommonConst.CANCEL_KBN_DISABLED_TXT Then
-            '取消データは選択できないアラートを出す
-            _msgHd.dspMSG("cannotSelectTorikeshiData", frmC01F10_Login.loginValue.Language)
-            Exit Sub
-        End If
-
-        Dim RowIdx As Integer
-        RowIdx = Me.DgvCymnhd.CurrentCell.RowIndex
-        Dim No As String = DgvCymnhd.Rows(RowIdx).Cells("受注番号").Value
-        Dim Suffix As String = DgvCymnhd.Rows(RowIdx).Cells("受注番号枝番").Value
-        Dim openForm As Form = Nothing
-        openForm = New BillingManagement(_msgHd, _db, _langHd, Me, No, Suffix)   '処理選択
-        Me.Enabled = False
-        Me.Hide()
-        openForm.ShowDialog(Me)
-
-        OrderListLoad() '一覧表示
-    End Sub
 
     '使用言語に合わせて受注基本見出しを切替
     Private Sub setHdColumns()
@@ -1570,7 +1017,7 @@ Public Class OrderProgress
     End Function
 
     Private Sub OrderList_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
-        OrderListLoad() '一覧を再表示
+        'OrderListLoad() '一覧を再表示
     End Sub
 
     '基準通貨の通貨コードを取得する
