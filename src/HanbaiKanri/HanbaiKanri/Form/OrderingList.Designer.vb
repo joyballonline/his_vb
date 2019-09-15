@@ -287,8 +287,8 @@ Partial Class OrderingList
         Me.DgvHtyhd.DefaultCellStyle = DataGridViewCellStyle1
         Me.DgvHtyhd.Location = New System.Drawing.Point(13, 236)
         Me.DgvHtyhd.Name = "DgvHtyhd"
-        Me.DgvHtyhd.ReadOnly = True
         Me.DgvHtyhd.RowHeadersVisible = False
+        Me.DgvHtyhd.RowHeadersWidth = 80
         Me.DgvHtyhd.RowTemplate.Height = 21
         Me.DgvHtyhd.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvHtyhd.Size = New System.Drawing.Size(1326, 267)

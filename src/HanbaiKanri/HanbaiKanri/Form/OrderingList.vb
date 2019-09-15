@@ -215,7 +215,6 @@ Public Class OrderingList
                     DgvHtyhd.Columns.Add("仕入先名", "SupplierName")
 
                     DgvHtyhd.Columns.Add("通貨_外貨", "Currency")
-                    'DgvHtyhd.Columns.Add("通貨", "Currency")
 
                     DgvHtyhd.Columns.Add("仕入原価_外貨", "PurchasingCost" & vbCrLf & "(OrignalCurrency)")
                     DgvHtyhd.Columns.Add("仕入原価", "PurchasingCost" & vbCrLf & "(" & setBaseCurrency() & ")")
@@ -248,7 +247,6 @@ Public Class OrderingList
                     DgvHtyhd.Columns.Add("仕入先名", "仕入先名")
 
                     DgvHtyhd.Columns.Add("通貨_外貨", "仕入通貨")
-                    'DgvHtyhd.Columns.Add("通貨", "通貨")
                     DgvHtyhd.Columns.Add("仕入原価_外貨", "仕入原価" & vbCrLf & "(原通貨)")
                     DgvHtyhd.Columns.Add("仕入原価", "仕入原価" & vbCrLf & "(" & setBaseCurrency() & ")")
                     DgvHtyhd.Columns.Add("仕入金額_外貨", "仕入金額" & vbCrLf & "(原通貨)")
@@ -275,6 +273,60 @@ Public Class OrderingList
 
                 DgvHtyhd.Columns("仕入金額_外貨").DefaultCellStyle.Format = "N2"
                 DgvHtyhd.Columns("仕入金額").DefaultCellStyle.Format = "N2"
+                '日付表示
+                DgvHtyhd.Columns("発注日").DefaultCellStyle.Format = "d"
+
+
+                DgvHtyhd.Columns("取消").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("取消").ReadOnly = True
+                DgvHtyhd.Columns("発注番号").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("発注番号").ReadOnly = True
+                DgvHtyhd.Columns("発注番号枝番").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("発注番号枝番").ReadOnly = True
+                DgvHtyhd.Columns("客先番号").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("客先番号").ReadOnly = True
+                DgvHtyhd.Columns("発注日").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("発注日").ReadOnly = True
+                DgvHtyhd.Columns("得意先名").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("得意先名").ReadOnly = True
+                DgvHtyhd.Columns("仕入先コード").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("仕入先コード").ReadOnly = True
+                DgvHtyhd.Columns("仕入先名").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("仕入先名").ReadOnly = True
+                DgvHtyhd.Columns("通貨_外貨").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("通貨_外貨").ReadOnly = True
+                DgvHtyhd.Columns("仕入原価_外貨").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("仕入原価_外貨").ReadOnly = True
+                DgvHtyhd.Columns("仕入原価").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("仕入原価").ReadOnly = True
+                DgvHtyhd.Columns("仕入金額_外貨").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("仕入金額_外貨").ReadOnly = True
+                DgvHtyhd.Columns("仕入金額").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("仕入金額").ReadOnly = True
+                DgvHtyhd.Columns("仕入先郵便番号").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("仕入先郵便番号").ReadOnly = True
+                DgvHtyhd.Columns("仕入先住所").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("仕入先住所").ReadOnly = True
+                DgvHtyhd.Columns("仕入先電話番号").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("仕入先電話番号").ReadOnly = True
+                DgvHtyhd.Columns("仕入先ＦＡＸ").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("仕入先ＦＡＸ").ReadOnly = True
+                DgvHtyhd.Columns("仕入先担当者名").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("仕入先担当者名").ReadOnly = True
+                DgvHtyhd.Columns("仕入先担当者役職").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("仕入先担当者役職").ReadOnly = True
+                DgvHtyhd.Columns("支払条件").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("支払条件").ReadOnly = True
+                DgvHtyhd.Columns("営業担当者").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("営業担当者").ReadOnly = True
+                DgvHtyhd.Columns("入力担当者").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("入力担当者").ReadOnly = True
+                DgvHtyhd.Columns("備考").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("備考").ReadOnly = True
+                DgvHtyhd.Columns("登録日").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("登録日").ReadOnly = True
+                DgvHtyhd.Columns("更新日").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("更新日").ReadOnly = True
 
 
                 '発注基本を取得
@@ -283,8 +335,7 @@ Public Class OrderingList
                 Sql += " left join Public.t21_hattyu t21"
                 Sql += "  On (t20.発注番号 = t21.発注番号 And t20.発注番号枝番 = t21.発注番号枝番)"
 
-                Sql += " WHERE "
-                Sql += " t20.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                Sql += " WHERE t20.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
 
                 Sql += viewSearchConditions() '抽出条件取得
 
@@ -304,13 +355,11 @@ Public Class OrderingList
 
                 'Sql += ",sum(t21.仕入金額 + t21.間接費) as 仕入金額合計, sum(t21.仕入金額_外貨) as 仕入金額合計_外貨 "
 
-                Sql += " FROM "
-                Sql += " public.t20_hattyu t20 "
+                Sql += " FROM public.t20_hattyu t20 "
                 Sql += " left join public.t21_hattyu t21"
                 Sql += "  on (t20.発注番号 = t21.発注番号 and t20.発注番号枝番 = t21.発注番号枝番)"
 
-                Sql += " WHERE "
-                Sql += " t20.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                Sql += " WHERE t20.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
 
                 Sql += viewSearchConditions() '抽出条件取得
 
@@ -351,18 +400,12 @@ Public Class OrderingList
                     DgvHtyhd.Rows(i).Cells("発注番号").Value = ds.Tables(RS).Rows(i)("発注番号")
                     DgvHtyhd.Rows(i).Cells("発注番号枝番").Value = ds.Tables(RS).Rows(i)("発注番号枝番")
                     DgvHtyhd.Rows(i).Cells("客先番号").Value = ds.Tables(RS).Rows(i)("客先番号")
-                    DgvHtyhd.Rows(i).Cells("発注日").Value = ds.Tables(RS).Rows(i)("発注日").ToShortDateString
+                    DgvHtyhd.Rows(i).Cells("発注日").Value = ds.Tables(RS).Rows(i)("発注日")
                     DgvHtyhd.Rows(i).Cells("得意先名").Value = ds.Tables(RS).Rows(i)("得意先名")
                     DgvHtyhd.Rows(i).Cells("仕入先コード").Value = ds.Tables(RS).Rows(i)("仕入先コード")
                     DgvHtyhd.Rows(i).Cells("仕入先名").Value = ds.Tables(RS).Rows(i)("仕入先名")
 
                     DgvHtyhd.Rows(i).Cells("通貨_外貨").Value = cur
-                    'DgvHtyhd.Rows(i).Cells("通貨").Value = strBaseCur  '基準通貨
-
-                    'DgvHtyhd.Rows(i).Cells("仕入原価_外貨").Value = rmNullDecimal(ds.Tables(RS).Rows(i)("仕入値合計_外貨")) * rmNullDecimal(ds.Tables(RS).Rows(i)("発注数量"))
-                    'DgvHtyhd.Rows(i).Cells("仕入原価").Value = rmNullDecimal(ds.Tables(RS).Rows(i)("仕入値合計")) * rmNullDecimal(ds.Tables(RS).Rows(i)("発注数量"))
-                    'DgvHtyhd.Rows(i).Cells("仕入金額_外貨").Value = ds.Tables(RS).Rows(i)("仕入金額_外貨")
-                    'DgvHtyhd.Rows(i).Cells("仕入金額").Value = ds.Tables(RS).Rows(i)("仕入金額")
 
                     Dim decPurchase1 As Decimal = 0
                     Dim decPurchase2 As Decimal = 0
@@ -405,32 +448,23 @@ Public Class OrderingList
                 Dim sinceDate As String = UtilClass.strFormatDate(dtPurchaseDateSince.Text) '日付の書式を日本の形式に合わせる
                 Dim untilDate As String = UtilClass.strFormatDate(dtPurchaseDateUntil.Text) '日付の書式を日本の形式に合わせる
                 Dim sinceNum As String = escapeSql(TxtPurchaseSince.Text)
-                'Dim untilNum As String = escapeSql(TxtPurchaseUntil.Text)
                 Dim salesName As String = escapeSql(TxtSales.Text)
                 Dim poCode As String = escapeSql(TxtCustomerPO.Text)
 
 
-                Sql = "SELECT"
-                Sql += " t21.*, t20.取消区分"
-                Sql += " FROM "
-                Sql += " public.t21_hattyu t21 "
+                Sql = "SELECT t21.*, t20.取消区分"
+                Sql += " FROM public.t21_hattyu t21 "
 
-                Sql += " INNER JOIN "
-                Sql += " t20_hattyu t20"
-                Sql += " ON "
-                Sql += " t21.会社コード = t20.会社コード "
-                Sql += " AND "
-                Sql += " t21.発注番号 = t20.発注番号"
-                Sql += " AND "
-                Sql += " t21.発注番号枝番 = t20.発注番号枝番"
+                Sql += " INNER JOIN t20_hattyu t20"
+                Sql += " ON t21.会社コード = t20.会社コード "
+                Sql += " AND t21.発注番号 = t20.発注番号"
+                Sql += " AND t21.発注番号枝番 = t20.発注番号枝番"
 
-                Sql += " WHERE "
-                Sql += " t21.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                Sql += " WHERE t21.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "' "
 
                 Sql += viewSearchConditions() '抽出条件取得
 
-                Sql += " ORDER BY "
-                Sql += "t21.更新日 DESC, t21.発注番号, t21.発注番号枝番, t21.行番号"
+                Sql += " ORDER BY t21.更新日 DESC, t21.発注番号, t21.発注番号枝番, t21.行番号"
 
 
                 '得意先と一致する入金明細を取得
@@ -495,8 +529,6 @@ Public Class OrderingList
 
                     DgvHtyhd.Columns.Add("リードタイム", "リードタイム")
                     DgvHtyhd.Columns.Add("貿易条件", "貿易条件")
-                    'DgvHtyhd.Columns.Add("入庫数", "入庫数")
-                    'DgvHtyhd.Columns.Add("未入庫数", "未入庫数")
                     DgvHtyhd.Columns.Add("備考", "備考")
                     DgvHtyhd.Columns.Add("更新者", "更新者")
                     DgvHtyhd.Columns.Add("登録日", "登録日")
@@ -527,6 +559,57 @@ Public Class OrderingList
                 DgvHtyhd.Columns("仕入金額").DefaultCellStyle.Format = "N2"
                 'DgvHtyhd.Columns("入庫数").DefaultCellStyle.Format = "N2"
                 'DgvHtyhd.Columns("未入庫数").DefaultCellStyle.Format = "N2"
+
+                DgvHtyhd.Columns("取消").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("取消").ReadOnly = True
+                DgvHtyhd.Columns("発注番号").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("発注番号").ReadOnly = True
+                DgvHtyhd.Columns("発注番号枝番").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("発注番号枝番").ReadOnly = True
+                DgvHtyhd.Columns("行番号").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("行番号").ReadOnly = True
+                DgvHtyhd.Columns("仕入区分").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("仕入区分").ReadOnly = True
+                DgvHtyhd.Columns("メーカー").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("メーカー").ReadOnly = True
+                DgvHtyhd.Columns("品名").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("品名").ReadOnly = True
+                DgvHtyhd.Columns("型式").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("型式").ReadOnly = True
+                DgvHtyhd.Columns("仕入先名").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("仕入先名").ReadOnly = True
+                DgvHtyhd.Columns("通貨_外貨").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("通貨_外貨").ReadOnly = True
+                DgvHtyhd.Columns("仕入値_外貨").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("仕入値_外貨").ReadOnly = True
+                DgvHtyhd.Columns("仕入値").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("仕入値").ReadOnly = True
+                DgvHtyhd.Columns("発注数量").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("発注数量").ReadOnly = True
+                DgvHtyhd.Columns("仕入数量").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("仕入数量").ReadOnly = True
+                DgvHtyhd.Columns("発注残数").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("発注残数").ReadOnly = True
+                DgvHtyhd.Columns("単位").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("単位").ReadOnly = True
+                DgvHtyhd.Columns("仕入金額_外貨").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("仕入金額_外貨").ReadOnly = True
+                DgvHtyhd.Columns("仕入金額").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("仕入金額").ReadOnly = True
+                DgvHtyhd.Columns("間接費").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("間接費").ReadOnly = True
+                DgvHtyhd.Columns("リードタイム").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("リードタイム").ReadOnly = True
+                DgvHtyhd.Columns("貿易条件").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("貿易条件").ReadOnly = True
+                DgvHtyhd.Columns("備考").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("備考").ReadOnly = True
+                DgvHtyhd.Columns("更新者").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("更新者").ReadOnly = True
+                DgvHtyhd.Columns("登録日").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("登録日").ReadOnly = True
+                DgvHtyhd.Columns("更新日").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("更新日").ReadOnly = True
 
 
                 Dim dsHanyou As DataSet
@@ -602,8 +685,19 @@ Public Class OrderingList
 
             End If
 
-            'カラム幅をユーザーが変更可能にする。
+            '見出しの文字位置
+            DgvHtyhd.ReadOnly = False
+            'DataGridViewの列幅を固定
             DgvHtyhd.AllowUserToResizeColumns = True
+            DgvHtyhd.AutoSizeColumnsMode = DataGridViewAutoSizeColumnMode.AllCells
+            DgvHtyhd.AllowUserToResizeRows = True
+            '列ヘッダー高さを固定
+            DgvHtyhd.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing
+
+            '行ヘッダーの幅を可変
+            DgvHtyhd.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells)
+            DgvHtyhd.ColumnHeadersHeight = 40
+
 
         Catch ue As UsrDefException
             ue.dspMsg()
@@ -624,15 +718,11 @@ Public Class OrderingList
         Dim Sql As String
         Dim ds_t21 As DataSet
 
-        Sql = "SELECT"
-        Sql += " 仕入値,仕入値_外貨,発注数量,仕入金額,間接費,仕入金額_外貨"
+        Sql = "SELECT 仕入値,仕入値_外貨,発注数量,仕入金額,間接費,仕入金額_外貨"
 
-        Sql += " FROM "
-        Sql += " public.t21_hattyu"
+        Sql += " FROM public.t21_hattyu"
 
-        Sql += " WHERE "
-        Sql += " 会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
-
+        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql += " and 発注番号 = '" & OrderNo & "'"
         Sql += " and 発注番号枝番 = '" & BranchNo & "'"
 
@@ -796,9 +886,7 @@ Public Class OrderingList
         End If
 
         Try
-            Sql = "UPDATE "
-            Sql += "Public."
-            Sql += "t20_hattyu "
+            Sql = "UPDATE Public.t20_hattyu "
             Sql += "SET "
 
             Sql += "取消区分 = " & CommonConst.CANCEL_KBN_DISABLED
@@ -806,22 +894,9 @@ Public Class OrderingList
             Sql += ", 更新日 = current_timestamp"
             Sql += ", 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "' "
 
-            Sql += "WHERE"
-            Sql += " 会社コード"
-            Sql += "='"
-            Sql += frmC01F10_Login.loginValue.BumonCD
-            Sql += "'"
-            Sql += " AND"
-            Sql += " 発注番号"
-            Sql += "='"
-            Sql += DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("発注番号").Value
-            Sql += "' "
-            Sql += " AND"
-            Sql += " 発注番号枝番"
-            Sql += "='"
-            Sql += DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("発注番号枝番").Value
-            Sql += "' "
-
+            Sql += "WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += " AND 発注番号 = '" & DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("発注番号").Value & "'"
+            Sql += " AND 発注番号枝番 = '" & DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("発注番号枝番").Value & "'"
 
             '取消確認のアラート
             Dim result As DialogResult = _msgHd.dspMSG("confirmCancel", frmC01F10_Login.loginValue.Language)
@@ -958,68 +1033,55 @@ Public Class OrderingList
         Dim Maker As String = UtilClass.escapeSql(txtMaker.Text)
 
         If supplierName <> Nothing Then
-            Sql += " AND "
-            Sql += " t20.仕入先名 ILIKE '%" & supplierName & "%' "
+            Sql += " AND t20.仕入先名 ILIKE '%" & supplierName & "%' "
         End If
 
         If supplierAddress <> Nothing Then
-            Sql += " AND "
-            Sql += " t20.仕入先住所 ILIKE '%" & supplierAddress & "%' "
+            Sql += " AND t20.仕入先住所 ILIKE '%" & supplierAddress & "%' "
         End If
 
         If supplierTel <> Nothing Then
-            Sql += " AND "
-            Sql += " t20.仕入先電話番号 ILIKE '%" & supplierTel & "%' "
+            Sql += " AND t20.仕入先電話番号 ILIKE '%" & supplierTel & "%' "
         End If
 
         If supplierCode <> Nothing Then
-            Sql += " AND "
-            Sql += " t20.仕入先コード ILIKE '%" & supplierCode & "%' "
+            Sql += " AND t20.仕入先コード ILIKE '%" & supplierCode & "%' "
         End If
 
         If sinceDate <> Nothing Then
-            Sql += " AND "
-            Sql += " t20.発注日 >= '" & sinceDate & "'"
+            Sql += " AND t20.発注日 >= '" & sinceDate & "'"
         End If
         If untilDate <> Nothing Then
-            Sql += " AND "
-            Sql += " t20.発注日 <= '" & untilDate & "'"
+            Sql += " AND t20.発注日 <= '" & untilDate & "'"
         End If
 
         If sinceNum <> Nothing Then
-            Sql += " AND "
-            Sql += " t20.発注番号 ILIKE '%" & sinceNum & "%' "
+            Sql += " AND t20.発注番号 ILIKE '%" & sinceNum & "%' "
         End If
 
         If salesName <> Nothing Then
-            Sql += " AND "
-            Sql += " t20.営業担当者 ILIKE '%" & salesName & "%' "
+            Sql += " AND t20.営業担当者 ILIKE '%" & salesName & "%' "
         End If
 
         If poCode <> Nothing Then
-            Sql += " AND "
-            Sql += " t20.客先番号 ILIKE '%" & poCode & "%' "
+            Sql += " AND t20.客先番号 ILIKE '%" & poCode & "%' "
         End If
 
         If Maker <> Nothing Then
-            Sql += " AND "
-            Sql += " t21.メーカー ILIKE '%" & Maker & "%' "
+            Sql += " AND t21.メーカー ILIKE '%" & Maker & "%' "
         End If
 
         If itemName <> Nothing Then
-            Sql += " AND "
-            Sql += " t21.品名 ILIKE '%" & itemName & "%' "
+            Sql += " AND t21.品名 ILIKE '%" & itemName & "%' "
         End If
 
         If spec <> Nothing Then
-            Sql += " AND "
-            Sql += " t21.型式 ILIKE '%" & spec & "%' "
+            Sql += " AND t21.型式 ILIKE '%" & spec & "%' "
         End If
 
         '取消データを含めない場合
         If ChkCancelData.Checked = False Then
-            Sql += " AND "
-            Sql += "t20.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+            Sql += " AND t20.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
         End If
 
         Return Sql
@@ -1043,15 +1105,10 @@ Public Class OrderingList
         Dim reccnt As Integer = 0 'DB用（デフォルト）
         Dim Sql As String = ""
 
-        Sql += "SELECT"
-        Sql += " *"
-        Sql += " FROM "
+        Sql += "SELECT * FROM "
 
         Sql += "public." & tableName
-        Sql += " WHERE "
-        Sql += "会社コード"
-        Sql += " ILIKE  "
-        Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "' "
         Sql += txtParam
 
         Return _db.selectDB(Sql, RS, reccnt)
@@ -1064,10 +1121,8 @@ Public Class OrderingList
     Private Function getDsHanyoData(ByVal prmFixed As String, ByVal prmVariable As String) As DataSet
         Dim Sql As String = ""
 
-        Sql = " AND "
-        Sql += "固定キー ILIKE '" & prmFixed & "'"
-        Sql += " AND "
-        Sql += "可変キー ILIKE '" & prmVariable & "'"
+        Sql = " AND 固定キー = '" & prmFixed & "'"
+        Sql += " AND 可変キー = '" & prmVariable & "'"
 
         'リードタイムのリストを汎用マスタから取得
         Return getDsData("m90_hanyo", Sql)
