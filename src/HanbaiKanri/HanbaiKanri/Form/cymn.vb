@@ -84,12 +84,8 @@ Public Class Cymn
         DtpOrderRegistration.Text = DateTime.Today '受発注登録日
         DtpOrderDate.Text = DateTime.Today '受注日
         DtpPurchaseDate.Text = DateTime.Today '発注日
-
-
-        '-----受発注時に今ベースで入れることはないので、コメントアウト
-        'DtpQuoteDate.Text = DateAdd("m", 0, Now).ToString("yyyy/MM/dd") '見積日
-        'DtpExpiration.Text = DateAdd("d", 7, Now).ToString("yyyy/MM/dd") '見積有効期限
-        'DtpQuoteRegistration.Text = DateAdd("d", 7, Now).ToString("yyyy/MM/dd") '見積登録日
+        '仕入区分が在庫引当のレコードが来るまで使用不可
+        DtpPurchaseDate.Enabled = False
 
         'セルの内容に合わせて、行の高さが自動的に調節されるようにする
         DgvItemList.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
@@ -300,6 +296,10 @@ Public Class Cymn
             DgvItemList.Rows.Add()
             tmp = ds3.Tables(RS).Rows(index)("仕入区分")
             DgvItemList("仕入区分", index).Value = tmp
+            If tmp = CommonConst.Sire_KBN_Sire Then
+                '仕入区分が受発注のレコードがあるときは発注日を使用できる
+                DtpPurchaseDate.Enabled = True
+            End If
             DgvItemList.Rows(index).Cells("メーカー").Value = ds3.Tables(RS).Rows(index)("メーカー")
             DgvItemList.Rows(index).Cells("品名").Value = ds3.Tables(RS).Rows(index)("品名")
             DgvItemList.Rows(index).Cells("型式").Value = ds3.Tables(RS).Rows(index)("型式")
