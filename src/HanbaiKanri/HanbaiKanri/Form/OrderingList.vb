@@ -529,8 +529,6 @@ Public Class OrderingList
 
                     DgvHtyhd.Columns.Add("リードタイム", "リードタイム")
                     DgvHtyhd.Columns.Add("貿易条件", "貿易条件")
-                    'DgvHtyhd.Columns.Add("入庫数", "入庫数")
-                    'DgvHtyhd.Columns.Add("未入庫数", "未入庫数")
                     DgvHtyhd.Columns.Add("備考", "備考")
                     DgvHtyhd.Columns.Add("更新者", "更新者")
                     DgvHtyhd.Columns.Add("登録日", "登録日")
@@ -561,6 +559,57 @@ Public Class OrderingList
                 DgvHtyhd.Columns("仕入金額").DefaultCellStyle.Format = "N2"
                 'DgvHtyhd.Columns("入庫数").DefaultCellStyle.Format = "N2"
                 'DgvHtyhd.Columns("未入庫数").DefaultCellStyle.Format = "N2"
+
+                DgvHtyhd.Columns("取消").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("取消").ReadOnly = True
+                DgvHtyhd.Columns("発注番号").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("発注番号").ReadOnly = True
+                DgvHtyhd.Columns("発注番号枝番").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("発注番号枝番").ReadOnly = True
+                DgvHtyhd.Columns("行番号").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("行番号").ReadOnly = True
+                DgvHtyhd.Columns("仕入区分").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("仕入区分").ReadOnly = True
+                DgvHtyhd.Columns("メーカー").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("メーカー").ReadOnly = True
+                DgvHtyhd.Columns("品名").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("品名").ReadOnly = True
+                DgvHtyhd.Columns("型式").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("型式").ReadOnly = True
+                DgvHtyhd.Columns("仕入先名").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("仕入先名").ReadOnly = True
+                DgvHtyhd.Columns("通貨_外貨").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("通貨_外貨").ReadOnly = True
+                DgvHtyhd.Columns("仕入値_外貨").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("仕入値_外貨").ReadOnly = True
+                DgvHtyhd.Columns("仕入値").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("仕入値").ReadOnly = True
+                DgvHtyhd.Columns("発注数量").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("発注数量").ReadOnly = True
+                DgvHtyhd.Columns("仕入数量").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("仕入数量").ReadOnly = True
+                DgvHtyhd.Columns("発注残数").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("発注残数").ReadOnly = True
+                DgvHtyhd.Columns("単位").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("単位").ReadOnly = True
+                DgvHtyhd.Columns("仕入金額_外貨").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("仕入金額_外貨").ReadOnly = True
+                DgvHtyhd.Columns("仕入金額").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("仕入金額").ReadOnly = True
+                DgvHtyhd.Columns("間接費").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("間接費").ReadOnly = True
+                DgvHtyhd.Columns("リードタイム").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("リードタイム").ReadOnly = True
+                DgvHtyhd.Columns("貿易条件").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("貿易条件").ReadOnly = True
+                DgvHtyhd.Columns("備考").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("備考").ReadOnly = True
+                DgvHtyhd.Columns("更新者").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("更新者").ReadOnly = True
+                DgvHtyhd.Columns("登録日").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("登録日").ReadOnly = True
+                DgvHtyhd.Columns("更新日").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("更新日").ReadOnly = True
 
 
                 Dim dsHanyou As DataSet
