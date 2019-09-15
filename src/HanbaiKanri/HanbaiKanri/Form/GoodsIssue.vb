@@ -414,7 +414,7 @@ Public Class GoodsIssue
                     DgvAdd.Rows(rowIndex).Cells("仕入先").Value = dsCymndt.Tables(RS).Rows(i)("仕入先名")
 
                     DgvAdd.Rows(rowIndex).Cells("単位").Value = dsCymndt.Tables(RS).Rows(i)("単位")
-                    DgvAdd.Rows(rowIndex).Cells("未出庫数量").Value = dsCymndt.Tables(RS).Rows(i)("受注残数")
+                    DgvAdd.Rows(rowIndex).Cells("未出庫数量").Value = dsCymndt.Tables(RS).Rows(i)("未出庫数")
 
                     DgvAdd.Rows(rowIndex).Cells("売単価").Value = dsCymndt.Tables(RS).Rows(i)("見積単価")
                     'DgvAdd.Rows(rowIndex).Cells("出庫数量").Value = 0
