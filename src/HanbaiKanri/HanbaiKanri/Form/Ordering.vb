@@ -2301,4 +2301,79 @@ Public Class Ordering
 
     End Sub
 
+    Private Sub TxtSupplierCode_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtSupplierCode.KeyDown
+        '仕入先コード欄でＦ４キーを押下した時は検索画面を表示
+        If e.KeyCode <> Keys.F4 Then
+            Exit Sub
+        End If
+
+
+        Dim openForm As Form = Nothing
+        Dim idx As Integer = 0
+        Dim Status As String = CommonConst.STATUS_CLONE
+        openForm = New SupplierSearch(_msgHd, _db, _langHd, idx, Me, Status)   '処理選択
+        openForm.Show(Me)
+        Me.Enabled = False
+
+    End Sub
+
+    Private Sub TxtSales_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtSales.KeyDown
+        '営業担当者欄でＦ４キーを押下した時は検索画面を表示
+        If e.KeyCode <> Keys.F4 Then
+            Exit Sub
+        End If
+
+        Dim openForm As Form = Nothing
+        Dim Status As String = CommonConst.STATUS_CLONE
+        openForm = New SalesSearch(_msgHd, _db, _langHd, Me, Status)   '処理選択
+        openForm.Show(Me)
+        Me.Enabled = False
+
+    End Sub
+
+    Private Sub DgvItemList_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DgvItemList.CellContentClick
+
+    End Sub
+
+    Private Sub DgvItemList_KeyDown(sender As Object, e As KeyEventArgs) Handles DgvItemList.KeyDown
+        '行ヘッダークリック時は無効
+        'F4キー押下
+        If e.KeyData <> Keys.F4 Then
+            Exit Sub
+        End If
+
+        '参照モード時は処理しない
+        If PurchaseStatus Is CommonConst.STATUS_VIEW Then
+            Exit Sub
+        End If
+
+
+        Dim Status As String = CommonConst.STATUS_CLONE
+
+        Dim selectColumn As String = DgvItemList.Columns(DgvItemList.CurrentCell.ColumnIndex).Name
+
+        Dim Maker As String = DgvItemList("メーカー", DgvItemList.CurrentCell.RowIndex).Value
+        Dim Item As String = DgvItemList("品名", DgvItemList.CurrentCell.RowIndex).Value
+        Dim Model As String = DgvItemList("型式", DgvItemList.CurrentCell.RowIndex).Value
+
+        If selectColumn = "メーカー" Or selectColumn = "品名" Or selectColumn = "型式" Then
+            '各項目チェック
+            If selectColumn = "型式" And (Maker Is Nothing And Item Is Nothing) Then
+                'メーカー、品名を入力してください。
+                _msgHd.dspMSG("chkManufacturerItemNameError", frmC01F10_Login.loginValue.Language)
+                Return
+
+            ElseIf selectColumn = "品名" And (Maker Is Nothing) Then
+                'メーカーを入力してください。
+                _msgHd.dspMSG("chkManufacturerError", frmC01F10_Login.loginValue.Language)
+                Return
+            End If
+
+            Dim openForm As Form = Nothing
+            openForm = New MakerSearch(_msgHd, _db, Me, DgvItemList.CurrentCell.RowIndex, DgvItemList.CurrentCell.ColumnIndex, Maker, Item, Model, selectColumn, Status)   '処理選択
+            openForm.Show(Me)
+            Me.Enabled = False
+        End If
+
+    End Sub
 End Class
