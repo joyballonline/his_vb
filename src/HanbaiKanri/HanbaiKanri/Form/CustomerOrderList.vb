@@ -323,21 +323,28 @@ Public Class CustomerOrderList
                 BillingNo = DgvBilling.Rows(r.Index).Cells("請求番号").Value
                 OrderNo = DgvBilling.Rows(r.Index).Cells("受注番号").Value
                 OrderSuffix = DgvBilling.Rows(r.Index).Cells("受注番号枝番").Value
-                'BillingSubTotal += DgvBilling.Rows(r.Index).Cells("請求金額計_外貨").Value
 
-                Sql = " AND "
-                Sql += "受注番号 = '" & OrderNo & "'"
-                Sql += " AND "
-                Sql += "受注番号枝番 = '" & OrderSuffix & "'"
-                'Sql += " AND "
-                'Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
-                'If CurCode <> 0 Then
-                '    Sql += " AND 通貨 = " & CurCode
-                'End If
+                Sql = " AND 受注番号 = '" & OrderNo & "'"
+                Sql += " AND 受注番号枝番 = '" & OrderSuffix & "'"
 
                 '受注基本（請求債情報）
                 Dim dsCymnhd As DataSet = getDsData("t10_cymnhd", Sql)
 
+                '入金予定日の取得
+                If flg2 = False Then
+                    Sql = "Select 入金予定日 From t23_skyuhd t23 "
+                    Sql += " where t23.会社コード =  '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                    Sql += " and t23.請求番号 =  '" & BillingNo & "'"
+                    Sql += " AND t23.取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'"
+                    '請求データ取得
+                    Dim dsSeikyu As DataSet = _db.selectDB(Sql, RS, reccnt)
+                    If reccnt > 0 Then
+                        sheet.Range("E10").Value = dsSeikyu.Tables(RS).Rows(0)("入金予定日")
+                    Else
+                        sheet.Range("E10").Value = ""
+                    End If
+                End If
+                '出庫情報
                 Sql = " SELECT t44.出庫番号 "
                 Sql += " FROM t44_shukohd t44 "
                 Sql += " LEFT JOIN t10_cymnhd t10 "
@@ -358,9 +365,9 @@ Public Class CustomerOrderList
                     sheet.Range("B13").Value = dsCymnhd.Tables(RS).Rows(0)("得意先郵便番号")
                     sheet.Range("B9").Value = dsCymnhd.Tables(RS).Rows(0)("得意先住所")
                     sheet.Range("B14").Value = dsCymnhd.Tables(RS).Rows(0)("得意先担当者役職") & " " & dsCymnhd.Tables(RS).Rows(0)("得意先担当者名")
-                    sheet.Range("A15").Value = "Telp." & dsCymnhd.Tables(RS).Rows(0)("得意先電話番号") & "　Fax." & dsCymnhd.Tables(RS).Rows(0)("得意先ＦＡＸ")
+                    'sheet.Range("A15").Value = "Telp." & dsCymnhd.Tables(RS).Rows(0)("得意先電話番号") & "　Fax." & dsCymnhd.Tables(RS).Rows(0)("得意先ＦＡＸ")
+                    sheet.Range("A15").Value = "Telp." & dsCymnhd.Tables(RS).Rows(0)("得意先電話番号")
                     sheet.Range("E8").Value = BillingNo
-                    'sheet.Range("E9").Value = System.DateTime.Now
                     sheet.Range("E9").Value = DgvBilling.Rows(r.Index).Cells("請求日").Value
                     sheet.Range("E11").Value = dsCymnhd.Tables(RS).Rows(0)("客先番号")
 
@@ -398,27 +405,17 @@ Public Class CustomerOrderList
                 'joinするのでとりあえず直書き
                 Sql = "SELECT"
                 Sql += " t11.メーカー, t11.品名, t11.型式, t11.受注数量, t11.見積単価_外貨, t11.見積金額_外貨,t11.単位"
-                Sql += " FROM "
-                Sql += " public.t11_cymndt t11 "
+                Sql += " FROM public.t11_cymndt t11 "
 
-                Sql += " INNER JOIN "
-                Sql += " t10_cymnhd t10"
-                Sql += " ON "
+                Sql += " INNER JOIN t10_cymnhd t10"
+                Sql += " ON t11.会社コード = t10.会社コード"
+                Sql += " AND t11.受注番号 = t10.受注番号"
+                Sql += " AND t11.受注番号枝番 = t10.受注番号枝番"
 
-                Sql += " t11.会社コード = t10.会社コード"
-                Sql += " AND "
-                Sql += " t11.受注番号 = t10.受注番号"
-                Sql += " AND "
-                Sql += " t11.受注番号枝番 = t10.受注番号枝番"
-
-                Sql += " WHERE "
-                Sql += " t11.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
-                Sql += " AND "
-                Sql += "t11.受注番号 ILIKE '%" & OrderNo & "%'"
-                Sql += " AND "
-                Sql += "t11.受注番号枝番 ILIKE '%" & OrderSuffix & "%'"
-                Sql += " AND "
-                Sql += "t10.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+                Sql += " WHERE t11.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                Sql += " AND t11.受注番号 ILIKE '%" & OrderNo & "%'"
+                Sql += " AND t11.受注番号枝番 ILIKE '%" & OrderSuffix & "%'"
+                Sql += " AND t10.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
                 If CurCode <> 0 Then
                     Sql += "AND t11.通貨 = " & CurCode
                 End If
@@ -451,8 +448,7 @@ Public Class CustomerOrderList
 
             Next r
 
-            Sql = " AND "
-            Sql += "会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql = " AND 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
 
             Dim dsCompany As DataSet = getDsData("m01_company", Sql)
 
@@ -463,12 +459,12 @@ Public Class CustomerOrderList
             sheet.Range("F" & lastRow + 3).Value = BillingSubTotal * 1.1
 
             sheet.Range("C" & lastRow + 5).Value = sheet.Range("E" & lastRow + 3).Value
-            sheet.Range("C" & lastRow + 8).Value = dsCompany.Tables(RS).Rows(0)("銀行名") & " " & dsCompany.Tables(RS).Rows(0)("支店名") & " " & getHanyo.Tables(RS).Rows(0)("文字2")
-            sheet.Range("C" & lastRow + 9).Value = dsCompany.Tables(RS).Rows(0)("口座名義")
-            sheet.Range("C" & lastRow + 10).Value = dsCompany.Tables(RS).Rows(0)("口座番号")
-            sheet.Range("C" & lastRow + 11).Value = dsCompany.Tables(RS).Rows(0)("住所1") & " " & dsCompany.Tables(RS).Rows(0)("住所2") & " " & dsCompany.Tables(RS).Rows(0)("住所3") & " " & dsCompany.Tables(RS).Rows(0)("郵便番号")
+            'sheet.Range("C" & lastRow + 8).Value = dsCompany.Tables(RS).Rows(0)("銀行名") & " " & dsCompany.Tables(RS).Rows(0)("支店名") & " " & getHanyo.Tables(RS).Rows(0)("文字2")
+            'sheet.Range("C" & lastRow + 9).Value = dsCompany.Tables(RS).Rows(0)("口座名義")
+            'sheet.Range("C" & lastRow + 10).Value = dsCompany.Tables(RS).Rows(0)("口座番号")
+            'sheet.Range("C" & lastRow + 11).Value = dsCompany.Tables(RS).Rows(0)("住所1") & " " & dsCompany.Tables(RS).Rows(0)("住所2") & " " & dsCompany.Tables(RS).Rows(0)("住所3") & " " & dsCompany.Tables(RS).Rows(0)("郵便番号")
 
-            sheet.Range("A" & lastRow + 18).Value = dsCompany.Tables(RS).Rows(0)("会社名")
+            'sheet.Range("A" & lastRow + 18).Value = dsCompany.Tables(RS).Rows(0)("会社名")
 
             app.DisplayAlerts = False 'Microsoft Excelのアラート一旦無効化
 

@@ -611,7 +611,6 @@ Public Class OrderingList
                 DgvHtyhd.Columns("更新日").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
                 DgvHtyhd.Columns("更新日").ReadOnly = True
 
-
                 Dim dsHanyou As DataSet
 
                 '発注明細ぶん回し
