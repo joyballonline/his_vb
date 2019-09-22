@@ -43,6 +43,19 @@ Partial Class OrderProgress
         Me.BtnOrderSearch = New System.Windows.Forms.Button()
         Me.BtnBack = New System.Windows.Forms.Button()
         Me.DgvCymnhd = New System.Windows.Forms.DataGridView()
+        Me.受注日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.受注番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.受注番号枝番 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.行番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.メーカー = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.品名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.型式 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.見積番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.見積日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.売上登録 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.出庫登録 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.売掛請求登録 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.入金登録 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LblMode = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.TxtCustomerPO = New System.Windows.Forms.TextBox()
@@ -58,19 +71,6 @@ Partial Class OrderProgress
         Me.LblItemName = New System.Windows.Forms.Label()
         Me.txtMaker = New System.Windows.Forms.TextBox()
         Me.lblMaker = New System.Windows.Forms.Label()
-        Me.受注日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.受注番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.受注番号枝番 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.行番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.メーカー = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.品名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.型式 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.見積番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.見積日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.売上登録 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.出庫登録 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.売掛請求登録 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.入金登録 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DgvCymnhd, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
@@ -84,6 +84,7 @@ Partial Class OrderProgress
         Me.BtnOrderView.TabIndex = 22
         Me.BtnOrderView.Text = "受注参照"
         Me.BtnOrderView.UseVisualStyleBackColor = True
+        Me.BtnOrderView.Visible = False
         '
         'Label10
         '
@@ -289,6 +290,84 @@ Partial Class OrderProgress
         Me.DgvCymnhd.Size = New System.Drawing.Size(1326, 265)
         Me.DgvCymnhd.TabIndex = 15
         '
+        '受注日
+        '
+        Me.受注日.HeaderText = "受注日"
+        Me.受注日.Name = "受注日"
+        Me.受注日.ReadOnly = True
+        '
+        '受注番号
+        '
+        Me.受注番号.HeaderText = "受注番号"
+        Me.受注番号.Name = "受注番号"
+        Me.受注番号.ReadOnly = True
+        '
+        '受注番号枝番
+        '
+        Me.受注番号枝番.HeaderText = "受注Ver"
+        Me.受注番号枝番.Name = "受注番号枝番"
+        Me.受注番号枝番.ReadOnly = True
+        '
+        '行番号
+        '
+        Me.行番号.HeaderText = "行No"
+        Me.行番号.Name = "行番号"
+        Me.行番号.ReadOnly = True
+        '
+        'メーカー
+        '
+        Me.メーカー.HeaderText = "メーカー"
+        Me.メーカー.Name = "メーカー"
+        Me.メーカー.ReadOnly = True
+        '
+        '品名
+        '
+        Me.品名.HeaderText = "品名"
+        Me.品名.Name = "品名"
+        Me.品名.ReadOnly = True
+        '
+        '型式
+        '
+        Me.型式.HeaderText = "型式"
+        Me.型式.Name = "型式"
+        Me.型式.ReadOnly = True
+        '
+        '見積番号
+        '
+        Me.見積番号.HeaderText = "見積番号"
+        Me.見積番号.Name = "見積番号"
+        Me.見積番号.ReadOnly = True
+        '
+        '見積日
+        '
+        Me.見積日.HeaderText = "見積日"
+        Me.見積日.Name = "見積日"
+        Me.見積日.ReadOnly = True
+        '
+        '売上登録
+        '
+        Me.売上登録.HeaderText = "売上登録"
+        Me.売上登録.Name = "売上登録"
+        Me.売上登録.ReadOnly = True
+        '
+        '出庫登録
+        '
+        Me.出庫登録.HeaderText = "出庫登録"
+        Me.出庫登録.Name = "出庫登録"
+        Me.出庫登録.ReadOnly = True
+        '
+        '売掛請求登録
+        '
+        Me.売掛請求登録.HeaderText = "売掛請求登録"
+        Me.売掛請求登録.Name = "売掛請求登録"
+        Me.売掛請求登録.ReadOnly = True
+        '
+        '入金登録
+        '
+        Me.入金登録.HeaderText = "入金登録"
+        Me.入金登録.Name = "入金登録"
+        Me.入金登録.ReadOnly = True
+        '
         'LblMode
         '
         Me.LblMode.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
@@ -466,84 +545,6 @@ Partial Class OrderProgress
         Me.lblMaker.TabIndex = 348
         Me.lblMaker.Text = "メーカー"
         Me.lblMaker.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        '受注日
-        '
-        Me.受注日.HeaderText = "受注日"
-        Me.受注日.Name = "受注日"
-        Me.受注日.ReadOnly = True
-        '
-        '受注番号
-        '
-        Me.受注番号.HeaderText = "受注番号"
-        Me.受注番号.Name = "受注番号"
-        Me.受注番号.ReadOnly = True
-        '
-        '受注番号枝番
-        '
-        Me.受注番号枝番.HeaderText = "受注Ver"
-        Me.受注番号枝番.Name = "受注番号枝番"
-        Me.受注番号枝番.ReadOnly = True
-        '
-        '行番号
-        '
-        Me.行番号.HeaderText = "行No"
-        Me.行番号.Name = "行番号"
-        Me.行番号.ReadOnly = True
-        '
-        'メーカー
-        '
-        Me.メーカー.HeaderText = "メーカー"
-        Me.メーカー.Name = "メーカー"
-        Me.メーカー.ReadOnly = True
-        '
-        '品名
-        '
-        Me.品名.HeaderText = "品名"
-        Me.品名.Name = "品名"
-        Me.品名.ReadOnly = True
-        '
-        '型式
-        '
-        Me.型式.HeaderText = "型式"
-        Me.型式.Name = "型式"
-        Me.型式.ReadOnly = True
-        '
-        '見積番号
-        '
-        Me.見積番号.HeaderText = "見積番号"
-        Me.見積番号.Name = "見積番号"
-        Me.見積番号.ReadOnly = True
-        '
-        '見積日
-        '
-        Me.見積日.HeaderText = "見積日"
-        Me.見積日.Name = "見積日"
-        Me.見積日.ReadOnly = True
-        '
-        '売上登録
-        '
-        Me.売上登録.HeaderText = "売上登録"
-        Me.売上登録.Name = "売上登録"
-        Me.売上登録.ReadOnly = True
-        '
-        '出庫登録
-        '
-        Me.出庫登録.HeaderText = "出庫登録"
-        Me.出庫登録.Name = "出庫登録"
-        Me.出庫登録.ReadOnly = True
-        '
-        '売掛請求登録
-        '
-        Me.売掛請求登録.HeaderText = "売掛請求登録"
-        Me.売掛請求登録.Name = "売掛請求登録"
-        Me.売掛請求登録.ReadOnly = True
-        '
-        '入金登録
-        '
-        Me.入金登録.HeaderText = "入金登録"
-        Me.入金登録.Name = "入金登録"
-        Me.入金登録.ReadOnly = True
         '
         'OrderProgress
         '
