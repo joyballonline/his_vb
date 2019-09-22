@@ -626,11 +626,11 @@ Public Class QuoteList
         '見出しの文字位置
         DgvMithd.ReadOnly = False
         ''DataGridViewの列幅を固定
-        'DgvMithd.AllowUserToResizeColumns = True
-        DgvMithd.AutoSizeColumnsMode = DataGridViewAutoSizeColumnMode.AllCells
-        'DgvMithd.AllowUserToResizeRows = True
+        DgvMithd.AllowUserToResizeColumns = True
+        'DgvMithd.AutoSizeColumnsMode = DataGridViewAutoSizeColumnMode.AllCells
+        DgvMithd.AllowUserToResizeRows = True
         ''列ヘッダー高さを固定
-        'DgvMithd.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing
+        DgvMithd.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing
         '行ヘッダーの幅を可変
         DgvMithd.Columns("取消").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
         DgvMithd.Columns("取消").ReadOnly = True
@@ -678,7 +678,7 @@ Public Class QuoteList
         DgvMithd.Columns("更新日").ReadOnly = True
 
 
-        'DgvMithd.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells)
+        DgvMithd.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells)
 
     End Sub
 
@@ -756,7 +756,7 @@ Public Class QuoteList
         DgvMithd.ReadOnly = False
         'DataGridViewの列幅を固定
         DgvMithd.AllowUserToResizeColumns = True
-        DgvMithd.AutoSizeColumnsMode = DataGridViewAutoSizeColumnMode.AllCells
+        'DgvMithd.AutoSizeColumnsMode = DataGridViewAutoSizeColumnMode.AllCells
         DgvMithd.AllowUserToResizeRows = True
         '列ヘッダー高さを固定
         DgvMithd.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing
