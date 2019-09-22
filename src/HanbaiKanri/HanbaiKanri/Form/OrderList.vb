@@ -1217,7 +1217,7 @@ Public Class OrderList
         DgvCymnhd.ReadOnly = False
         'DataGridViewの列幅
         DgvCymnhd.AllowUserToResizeColumns = True
-        DgvCymnhd.AutoSizeColumnsMode = DataGridViewAutoSizeColumnMode.AllCells
+        'DgvCymnhd.AutoSizeColumnsMode = DataGridViewAutoSizeColumnMode.AllCells
         DgvCymnhd.AllowUserToResizeRows = True
         '列ヘッダー高さ
         'DgvCymnhd.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing
@@ -1388,7 +1388,7 @@ Public Class OrderList
         DgvCymnhd.ReadOnly = False
         'DataGridViewの列幅
         DgvCymnhd.AllowUserToResizeColumns = True
-        DgvCymnhd.AutoSizeColumnsMode = DataGridViewAutoSizeColumnMode.AllCells
+        'DgvCymnhd.AutoSizeColumnsMode = DataGridViewAutoSizeColumnMode.AllCells
         DgvCymnhd.AllowUserToResizeRows = True
         '列ヘッダー高さ
         'DgvCymnhd.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing

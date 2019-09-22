@@ -688,7 +688,7 @@ Public Class OrderingList
             DgvHtyhd.ReadOnly = False
             'DataGridViewの列幅を固定
             DgvHtyhd.AllowUserToResizeColumns = True
-            DgvHtyhd.AutoSizeColumnsMode = DataGridViewAutoSizeColumnMode.AllCells
+            'DgvHtyhd.AutoSizeColumnsMode = DataGridViewAutoSizeColumnMode.AllCells
             DgvHtyhd.AllowUserToResizeRows = True
             '列ヘッダー高さを固定
             DgvHtyhd.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing
