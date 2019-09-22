@@ -84,6 +84,7 @@ Public Class OrderList
     End Sub
 
     Private Sub MstHanyoue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         If OrderStatus = CommonConst.STATUS_SALES Then
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "SalesInputMode"
@@ -93,6 +94,23 @@ Public Class OrderList
 
             BtnSales.Visible = True
             BtnSales.Location = New Point(997, 509)
+
+            lblPurchaseSince.Visible = True
+            TxtPurchaseSince.Visible = True
+
+            'メーカー
+            lblMaker.Location = New Point(584, 150)
+            txtMaker.Location = New Point(760, 150)
+
+            '客先番号
+            lblCustomerPO.Location = New Point(584, 121)
+            TxtCustomerPO.Location = New Point(760, 121)
+
+            '発注番号
+            lblPurchaseSince.Location = New Point(584, 93)
+            TxtPurchaseSince.Location = New Point(760, 93)
+            TxtPurchaseSince.TabIndex = 10
+
         ElseIf OrderStatus = CommonConst.STATUS_GOODS_ISSUE Then
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "GoodsDeliveryInputMode"
@@ -102,6 +120,23 @@ Public Class OrderList
 
             BtnGoodsIssue.Visible = True
             BtnGoodsIssue.Location = New Point(997, 509)
+
+            lblPurchaseSince.Visible = True
+            TxtPurchaseSince.Visible = True
+
+            'メーカー
+            lblMaker.Location = New Point(584, 150)
+            txtMaker.Location = New Point(760, 150)
+
+            '客先番号
+            lblCustomerPO.Location = New Point(584, 121)
+            TxtCustomerPO.Location = New Point(760, 121)
+
+            '発注番号
+            lblPurchaseSince.Location = New Point(584, 93)
+            TxtPurchaseSince.Location = New Point(760, 93)
+            TxtPurchaseSince.TabIndex = 10
+
         ElseIf OrderStatus = CommonConst.STATUS_EDIT Then
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "EditMode"
@@ -170,7 +205,7 @@ Public Class OrderList
             Label8.Text = "OrderDate"
             Label7.Text = "OrdernNumber"
             Label6.Text = "SalesPersonInCharge"
-            Label11.Text = "CustomerNumber"
+            lblCustomerPO.Text = "CustomerNumber"
             Label10.Text = "DisplayFormat"
             RbtnSlip.Text = "UnitOfVoucher"
             lblMaker.Text = "Maker"
@@ -220,6 +255,7 @@ Public Class OrderList
         Dim itemName As String = escapeSql(TxtItemName.Text)
         Dim spec As String = escapeSql(TxtSpec.Text)
         Dim Maker As String = UtilClass.escapeSql(txtMaker.Text)
+        Dim PurchaseSince As String = escapeSql(TxtPurchaseSince.Text)
 
 
         Try
@@ -244,6 +280,9 @@ Public Class OrderList
                     Sql += " FROM t10_cymnhd t10 "
                     Sql += " left join t11_cymndt t11 "
                     Sql += " on (t10.受注番号 = t11.受注番号 and t10.受注番号枝番 = t11.受注番号枝番)"
+
+                    Sql += " left join t20_hattyu t20 "
+                    Sql += " on (t10.受注番号 = t20.受注番号 and t10.受注番号枝番 = t20.受注番号枝番)"
 
                     Sql += " WHERE t10.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "' "
 
@@ -276,6 +315,10 @@ Public Class OrderList
                     Sql += " AND t11.受注番号 = t10.受注番号 "
                     Sql += " AND t11.受注番号枝番 = t10.受注番号枝番 "
 
+                    Sql += " LEFT JOIN  t20_hattyu t20 "
+                    Sql += " ON  t10.受注番号 = t20.受注番号 "
+                    Sql += " AND t10.受注番号枝番 = t20.受注番号枝番 "
+
                     Sql += " WHERE t10.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "' "
 
                     Sql += viewSearchConditions() '検索条件
@@ -295,12 +338,26 @@ Public Class OrderList
             '伝票単位の場合
             If RbtnSlip.Checked Then
 
-                Sql = searchConditions() '抽出条件取得
-                Sql += viewFormat() '表示形式条件
+                'Sql = searchConditions() '抽出条件取得
+                'Sql += viewFormat() '表示形式条件
 
-                Sql += " ORDER BY 更新日 DESC"
+                'Sql += " ORDER BY 更新日 DESC"
 
-                ds = getDsData("t10_cymnhd", Sql)
+                'ds = getDsData("t10_cymnhd", Sql)
+
+                Sql = " SELECT *"
+
+                Sql += " FROM t10_cymnhd t10 "
+                Sql += " left join t20_hattyu t20 "
+                Sql += " on (t10.受注番号 = t20.受注番号 and t10.受注番号枝番 = t20.受注番号枝番)"
+
+                Sql += " WHERE t10.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "' "
+
+                Sql += viewSearchConditions() '検索条件
+
+                Sql += " ORDER BY t10.更新日 DESC"
+
+                ds = _db.selectDB(Sql, RS, reccnt)
 
                 setRows(ds) '行をセット
 
@@ -313,6 +370,10 @@ Public Class OrderList
                 Sql += " ON t11.会社コード = t10.会社コード"
                 Sql += " AND  t11.受注番号 = t10.受注番号"
                 Sql += " AND  t11.受注番号枝番 = t10.受注番号枝番"
+
+                Sql += " left join t20_hattyu t20 "
+                Sql += " on (t10.受注番号 = t20.受注番号 and t10.受注番号枝番 = t20.受注番号枝番)"
+
 
                 Sql += " WHERE t11.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
 
@@ -361,6 +422,10 @@ Public Class OrderList
 
                 If spec <> Nothing Then
                     Sql += " AND t11.型式 ILIKE '%" & spec & "%' "
+                End If
+
+                If PurchaseSince <> Nothing Then
+                    Sql += " AND t20.発注番号 ILIKE '%" & PurchaseSince & "%' "
                 End If
 
                 '取消データを含めない場合
@@ -1460,6 +1525,7 @@ Public Class OrderList
         Dim itemName As String = UtilClass.escapeSql(TxtItemName.Text)
         Dim spec As String = UtilClass.escapeSql(TxtSpec.Text)
         Dim Maker As String = UtilClass.escapeSql(txtMaker.Text)
+        Dim PurchaseSince As String = UtilClass.escapeSql(txtPurchaseSince.Text)
 
 
         If customerName <> Nothing Then
@@ -1486,7 +1552,7 @@ Public Class OrderList
         End If
 
         If sinceNum <> Nothing Then
-            Sql += " AND t11.受注番号 ILIKE '%" & sinceNum & "%' "
+            Sql += " AND t10.受注番号 ILIKE '%" & sinceNum & "%' "
         End If
 
         If salesName <> Nothing Then
@@ -1507,6 +1573,10 @@ Public Class OrderList
 
         If spec <> Nothing Then
             Sql += " AND t11.型式 ILIKE '%" & spec & "%' "
+        End If
+
+        If PurchaseSince <> Nothing Then
+            Sql += " AND t20.発注番号 ILIKE '%" & PurchaseSince & "%' "
         End If
 
         '取消データを含めない場合

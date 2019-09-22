@@ -50,7 +50,7 @@ Partial Class OrderList
         Me.BtnOrderClone = New System.Windows.Forms.Button()
         Me.BtnBill = New System.Windows.Forms.Button()
         Me.LblMode = New System.Windows.Forms.Label()
-        Me.Label11 = New System.Windows.Forms.Label()
+        Me.lblCustomerPO = New System.Windows.Forms.Label()
         Me.TxtCustomerPO = New System.Windows.Forms.TextBox()
         Me.dtOrderDateSince = New System.Windows.Forms.DateTimePicker()
         Me.dtOrderDateUntil = New System.Windows.Forms.DateTimePicker()
@@ -64,6 +64,8 @@ Partial Class OrderList
         Me.LblItemName = New System.Windows.Forms.Label()
         Me.txtMaker = New System.Windows.Forms.TextBox()
         Me.lblMaker = New System.Windows.Forms.Label()
+        Me.lblPurchaseSince = New System.Windows.Forms.Label()
+        Me.TxtPurchaseSince = New System.Windows.Forms.TextBox()
         CType(Me.DgvCymnhd, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
@@ -359,17 +361,17 @@ Partial Class OrderList
         Me.LblMode.Text = "モード"
         Me.LblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Label11
+        'lblCustomerPO
         '
-        Me.Label11.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.Label11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label11.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label11.Location = New System.Drawing.Point(584, 93)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(170, 22)
-        Me.Label11.TabIndex = 97
-        Me.Label11.Text = "客先番号"
-        Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lblCustomerPO.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.lblCustomerPO.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblCustomerPO.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.lblCustomerPO.Location = New System.Drawing.Point(584, 93)
+        Me.lblCustomerPO.Name = "lblCustomerPO"
+        Me.lblCustomerPO.Size = New System.Drawing.Size(170, 22)
+        Me.lblCustomerPO.TabIndex = 97
+        Me.lblCustomerPO.Text = "客先番号"
+        Me.lblCustomerPO.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'TxtCustomerPO
         '
@@ -422,7 +424,7 @@ Partial Class OrderList
         Me.TableLayoutPanel1.RowCount = 1
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(834, 29)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(386, 29)
         Me.TableLayoutPanel1.TabIndex = 333
         '
         'RbtnSlip
@@ -523,10 +525,34 @@ Partial Class OrderList
         Me.lblMaker.Text = "メーカー"
         Me.lblMaker.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'lblPurchaseSince
+        '
+        Me.lblPurchaseSince.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.lblPurchaseSince.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblPurchaseSince.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.lblPurchaseSince.Location = New System.Drawing.Point(584, 203)
+        Me.lblPurchaseSince.Name = "lblPurchaseSince"
+        Me.lblPurchaseSince.Size = New System.Drawing.Size(170, 22)
+        Me.lblPurchaseSince.TabIndex = 350
+        Me.lblPurchaseSince.Text = "発注番号"
+        Me.lblPurchaseSince.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lblPurchaseSince.Visible = False
+        '
+        'TxtPurchaseSince
+        '
+        Me.TxtPurchaseSince.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtPurchaseSince.Location = New System.Drawing.Point(760, 203)
+        Me.TxtPurchaseSince.Name = "TxtPurchaseSince"
+        Me.TxtPurchaseSince.Size = New System.Drawing.Size(369, 22)
+        Me.TxtPurchaseSince.TabIndex = 349
+        Me.TxtPurchaseSince.Visible = False
+        '
         'OrderList
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.lblPurchaseSince)
+        Me.Controls.Add(Me.TxtPurchaseSince)
         Me.Controls.Add(Me.txtMaker)
         Me.Controls.Add(Me.lblMaker)
         Me.Controls.Add(Me.TxtSpec)
@@ -536,7 +562,7 @@ Partial Class OrderList
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.Controls.Add(Me.dtOrderDateUntil)
         Me.Controls.Add(Me.dtOrderDateSince)
-        Me.Controls.Add(Me.Label11)
+        Me.Controls.Add(Me.lblCustomerPO)
         Me.Controls.Add(Me.TxtCustomerPO)
         Me.Controls.Add(Me.LblMode)
         Me.Controls.Add(Me.BtnBill)
@@ -603,7 +629,7 @@ Partial Class OrderList
     Friend WithEvents BtnOrderClone As Button
     Friend WithEvents BtnBill As Button
     Friend WithEvents LblMode As Label
-    Friend WithEvents Label11 As Label
+    Friend WithEvents lblCustomerPO As Label
     Friend WithEvents TxtCustomerPO As TextBox
     Friend WithEvents dtOrderDateSince As DateTimePicker
     Friend WithEvents dtOrderDateUntil As DateTimePicker
@@ -617,4 +643,6 @@ Partial Class OrderList
     Friend WithEvents LblItemName As Label
     Friend WithEvents txtMaker As TextBox
     Friend WithEvents lblMaker As Label
+    Friend WithEvents lblPurchaseSince As Label
+    Friend WithEvents TxtPurchaseSince As TextBox
 End Class
