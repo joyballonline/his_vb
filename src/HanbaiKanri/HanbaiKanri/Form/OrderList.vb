@@ -281,8 +281,6 @@ Public Class OrderList
                     Sql += " left join t11_cymndt t11 "
                     Sql += " on (t10.受注番号 = t11.受注番号 and t10.受注番号枝番 = t11.受注番号枝番)"
 
-                    Sql += " left join t20_hattyu t20 "
-                    Sql += " on (t10.受注番号 = t20.受注番号 and t10.受注番号枝番 = t20.受注番号枝番)"
 
                     Sql += " WHERE t10.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "' "
 
@@ -314,10 +312,6 @@ Public Class OrderList
                     Sql += " ON t11.会社コード = t10.会社コード "
                     Sql += " AND t11.受注番号 = t10.受注番号 "
                     Sql += " AND t11.受注番号枝番 = t10.受注番号枝番 "
-
-                    Sql += " LEFT JOIN  t20_hattyu t20 "
-                    Sql += " ON  t10.受注番号 = t20.受注番号 "
-                    Sql += " AND t10.受注番号枝番 = t20.受注番号枝番 "
 
                     Sql += " WHERE t10.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "' "
 
@@ -362,9 +356,6 @@ Public Class OrderList
                 Sql += " ON t11.会社コード = t10.会社コード"
                 Sql += " AND  t11.受注番号 = t10.受注番号"
                 Sql += " AND  t11.受注番号枝番 = t10.受注番号枝番"
-
-                Sql += " left join t20_hattyu t20 "
-                Sql += " on (t10.受注番号 = t20.受注番号 and t10.受注番号枝番 = t20.受注番号枝番)"
 
 
                 Sql += " WHERE t11.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
@@ -417,8 +408,9 @@ Public Class OrderList
                 End If
 
                 If PurchaseSince <> Nothing Then
-                    Sql += " AND t20.発注番号 ILIKE '%" & PurchaseSince & "%' "
+                    Sql += "And t10.受注番号 In (Select 受注番号 From t20_hattyu t20 Where 発注番号 In('" & PurchaseSince & "'))"
                 End If
+
 
                 '取消データを含めない場合
                 If ChkCancelData.Checked = False Then
