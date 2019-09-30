@@ -338,21 +338,13 @@ Public Class OrderList
             '伝票単位の場合
             If RbtnSlip.Checked Then
 
-                'Sql = searchConditions() '抽出条件取得
-                'Sql += viewFormat() '表示形式条件
-
-                'Sql += " ORDER BY 更新日 DESC"
-
-                'ds = getDsData("t10_cymnhd", Sql)
-
                 Sql = " SELECT *"
 
                 Sql += " FROM t10_cymnhd t10 "
-                Sql += " left join t20_hattyu t20 "
-                Sql += " on (t10.受注番号 = t20.受注番号 and t10.受注番号枝番 = t20.受注番号枝番)"
+                'Sql += " left join t20_hattyu t20 "
+                'Sql += " on (t10.受注番号 = t20.受注番号 and t10.受注番号枝番 = t20.受注番号枝番)"
 
                 Sql += " WHERE t10.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "' "
-
                 Sql += viewSearchConditions() '検索条件
 
                 Sql += " ORDER BY t10.更新日 DESC"
@@ -1576,7 +1568,8 @@ Public Class OrderList
         End If
 
         If PurchaseSince <> Nothing Then
-            Sql += " AND t20.発注番号 ILIKE '%" & PurchaseSince & "%' "
+            'Sql += " AND t20.発注番号 ILIKE '%" & PurchaseSince & "%' "
+            Sql += "And t10.受注番号 In (Select 受注番号 From t20_hattyu t20 Where 発注番号 In('" & PurchaseSince & "'))"
         End If
 
         '取消データを含めない場合
