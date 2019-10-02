@@ -225,21 +225,12 @@ Public Class OrderProgress
 
             Sql = " SELECT t10.*"
             Sql += " ,t11.行番号 ,t11.メーカー ,t11.品名 ,t11.型式"
-            Sql += " ,t11.売上数量 ,t11.受注残数"
+            Sql += " ,t11.売上数量 ,t11.受注残数 ,t11.未出庫数 ,t11.出庫数"
 
             Sql += " from t10_cymnhd as t10"
 
             Sql += " left join t11_cymndt as t11"
             Sql += " on t10.受注番号 = t11.受注番号 and t10.受注番号枝番 = t11.受注番号枝番"
-
-            'Sql += " left join t31_urigdt as t31"
-            'Sql += "   on t10.受注番号 = t31.受注番号 and t10.受注番号枝番 = t31.受注番号枝番"
-            'Sql += "  and t11.メーカー = t31.メーカー and t11.品名 = t31.品名 and t11.型式 = t31.型式"
-
-            'Sql += " left join t45_shukodt as t45"
-            'Sql += " on t10.受注番号 = t45.受注番号 and t10.受注番号枝番 = t45.受注番号枝番"
-
-
 
 
             Sql += " WHERE t10.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
@@ -247,7 +238,7 @@ Public Class OrderProgress
             '履歴最新
             Sql += "   and t10.受注番号枝番 = (SELECT MAX(t10M.受注番号枝番) FROM t10_cymnhd as t10M where t10.受注番号 = t10M.受注番号) "
 
-            'Sql += viewSearchConditions() '検索条件 todo
+            Sql += viewSearchConditions() '検索条件
 
             Sql += " ORDER BY "
             Sql += " t10.受注日, t10.受注番号, t10.受注番号枝番, t11.行番号"
@@ -270,6 +261,8 @@ Public Class OrderProgress
                 DgvCymnhd.Rows(i).Cells("見積番号").Value = ds.Tables(RS).Rows(i)("見積番号")
                 DgvCymnhd.Rows(i).Cells("見積日").Value = ds.Tables(RS).Rows(i)("見積日")
 
+
+                '売上登録
                 If IsDBNull(ds.Tables(RS).Rows(i)("受注残数")) Then
                     '売上がない
                     DgvCymnhd.Rows(i).Cells("売上登録").Value = ""
@@ -282,12 +275,68 @@ Public Class OrderProgress
                 End If
 
 
+                '出庫登録
+                If IsDBNull(ds.Tables(RS).Rows(i)("未出庫数")) Then
+                    '出庫なし
+                    DgvCymnhd.Rows(i).Cells("出庫登録").Value = ""
+                ElseIf ds.Tables(RS).Rows(i)("未出庫数") = 0 Then
+                    '出庫済
+                    DgvCymnhd.Rows(i).Cells("出庫登録").Value = "〇"
+                ElseIf ds.Tables(RS).Rows(i)("出庫数") > 0 AndAlso ds.Tables(RS).Rows(i)("未出庫数") > 0 Then
+                    '一部出庫
+                    DgvCymnhd.Rows(i).Cells("出庫登録").Value = "△"
+                End If
+
+
+                '売掛請求登録
+                Sql = " SELECT sum(請求金額計) as 請求金額計, sum(売掛残高) as 売掛残高, sum(入金額計) as 入金額計"
+                Sql += " from t23_skyuhd as t23"
+
+                Sql += " WHERE t23.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                Sql += " and 受注番号 = '" & ds.Tables(RS).Rows(i)("受注番号") & "'"
+                Sql += " and 受注番号枝番 = '" & ds.Tables(RS).Rows(i)("受注番号枝番") & "'"
+                Sql += " and 取消日 is null"
+
+                Dim ds_seikyu As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+
+                If IsDBNull(ds_seikyu.Tables(RS).Rows(0)("売掛残高")) Then
+                    '請求なし
+                    DgvCymnhd.Rows(i).Cells("売掛請求登録").Value = ""
+                    DgvCymnhd.Rows(i).Cells("入金登録").Value = ""
+                Else
+                    If ds.Tables(RS).Rows(i)("見積金額") > ds_seikyu.Tables(RS).Rows(0)("請求金額計") Then
+                        DgvCymnhd.Rows(i).Cells("売掛請求登録").Value = "△"
+                    Else
+                        DgvCymnhd.Rows(i).Cells("売掛請求登録").Value = "〇"
+                    End If
+
+
+                    If ds_seikyu.Tables(RS).Rows(0)("売掛残高") = 0 Then
+                        '入金済み
+                        DgvCymnhd.Rows(i).Cells("入金登録").Value = "〇"
+                    ElseIf ds_seikyu.Tables(RS).Rows(0)("入金額計") > 0 AndAlso ds_seikyu.Tables(RS).Rows(0)("売掛残高") > 0 Then
+                        '一部
+                        DgvCymnhd.Rows(i).Cells("入金登録").Value = "△"
+                    Else
+                        '請求だけ
+                        DgvCymnhd.Rows(i).Cells("入金登録").Value = ""
+                    End If
+
+                End If
+
+                ds_seikyu = Nothing
+
             Next
 
             DgvCymnhd.Columns("受注日").DefaultCellStyle.Format = "d"
             DgvCymnhd.Columns("見積日").DefaultCellStyle.Format = "d"
 
+            '中央寄せ
             DgvCymnhd.Columns("売上登録").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            DgvCymnhd.Columns("出庫登録").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            DgvCymnhd.Columns("売掛請求登録").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            DgvCymnhd.Columns("入金登録").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
 
 
             ds = Nothing
