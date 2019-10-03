@@ -1066,7 +1066,7 @@ Public Class OrderProgress
     End Function
 
     Private Sub OrderList_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
-        'OrderListLoad() '一覧を再表示
+        OrderListLoad() '一覧を再表示
     End Sub
 
     '基準通貨の通貨コードを取得する
