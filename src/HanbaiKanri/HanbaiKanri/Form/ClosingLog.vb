@@ -5191,13 +5191,13 @@ Public Class ClosingLog
         If intFlg = 0 Then
         ElseIf intFlg = 1 Then
             '関税額
-            strDESCRIPTION += " 関税額"
+            strDESCRIPTION += " CustomsDutyParUnit"
         ElseIf intFlg = 2 Then
             '前払法人税額
-            strDESCRIPTION += " 前払法人税額"
+            strDESCRIPTION += " PrepaidCorporateTaxAmountParUnit"
         ElseIf intFlg = 3 Then
             '輸送額
-            strDESCRIPTION += " 輸送額"
+            strDESCRIPTION += " TransportationCostParUnit"
         End If
 
         mGet_DESCRIPTION = LTrim(strDESCRIPTION)
