@@ -92,16 +92,17 @@ Partial Class OrderProgress
         Me.Label10.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.Label10.Location = New System.Drawing.Point(10, 179)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(87, 15)
+        Me.Label10.Size = New System.Drawing.Size(163, 30)
         Me.Label10.TabIndex = 58
         Me.Label10.Text = "■表示形式"
+        Me.Label10.Visible = False
         '
         'Label5
         '
         Me.Label5.AutoSize = True
         Me.Label5.Location = New System.Drawing.Point(936, 43)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(17, 12)
+        Me.Label5.Size = New System.Drawing.Size(34, 24)
         Me.Label5.TabIndex = 56
         Me.Label5.Text = "～"
         '
@@ -122,7 +123,7 @@ Partial Class OrderProgress
         Me.TxtSales.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtSales.Location = New System.Drawing.Point(190, 148)
         Me.TxtSales.Name = "TxtSales"
-        Me.TxtSales.Size = New System.Drawing.Size(350, 22)
+        Me.TxtSales.Size = New System.Drawing.Size(350, 37)
         Me.TxtSales.TabIndex = 5
         '
         'Label7
@@ -142,7 +143,7 @@ Partial Class OrderProgress
         Me.TxtOrderSince.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtOrderSince.Location = New System.Drawing.Point(760, 65)
         Me.TxtOrderSince.Name = "TxtOrderSince"
-        Me.TxtOrderSince.Size = New System.Drawing.Size(369, 22)
+        Me.TxtOrderSince.Size = New System.Drawing.Size(369, 37)
         Me.TxtOrderSince.TabIndex = 6
         '
         'Label8
@@ -174,7 +175,7 @@ Partial Class OrderProgress
         Me.TxtCustomerCode.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtCustomerCode.Location = New System.Drawing.Point(190, 120)
         Me.TxtCustomerCode.Name = "TxtCustomerCode"
-        Me.TxtCustomerCode.Size = New System.Drawing.Size(350, 22)
+        Me.TxtCustomerCode.Size = New System.Drawing.Size(350, 37)
         Me.TxtCustomerCode.TabIndex = 4
         '
         'Label3
@@ -194,7 +195,7 @@ Partial Class OrderProgress
         Me.TxtTel.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtTel.Location = New System.Drawing.Point(190, 92)
         Me.TxtTel.Name = "TxtTel"
-        Me.TxtTel.Size = New System.Drawing.Size(350, 22)
+        Me.TxtTel.Size = New System.Drawing.Size(350, 37)
         Me.TxtTel.TabIndex = 3
         '
         'Label2
@@ -214,7 +215,7 @@ Partial Class OrderProgress
         Me.TxtAddress.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtAddress.Location = New System.Drawing.Point(190, 64)
         Me.TxtAddress.Name = "TxtAddress"
-        Me.TxtAddress.Size = New System.Drawing.Size(350, 22)
+        Me.TxtAddress.Size = New System.Drawing.Size(350, 37)
         Me.TxtAddress.TabIndex = 2
         '
         'Label1
@@ -235,7 +236,7 @@ Partial Class OrderProgress
         Me.LblConditions.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblConditions.Location = New System.Drawing.Point(11, 13)
         Me.LblConditions.Name = "LblConditions"
-        Me.LblConditions.Size = New System.Drawing.Size(87, 15)
+        Me.LblConditions.Size = New System.Drawing.Size(163, 30)
         Me.LblConditions.TabIndex = 40
         Me.LblConditions.Text = "■抽出条件"
         '
@@ -244,7 +245,7 @@ Partial Class OrderProgress
         Me.TxtCustomerName.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtCustomerName.Location = New System.Drawing.Point(190, 36)
         Me.TxtCustomerName.Name = "TxtCustomerName"
-        Me.TxtCustomerName.Size = New System.Drawing.Size(350, 22)
+        Me.TxtCustomerName.Size = New System.Drawing.Size(350, 37)
         Me.TxtCustomerName.TabIndex = 1
         '
         'BtnOrderSearch
@@ -397,7 +398,7 @@ Partial Class OrderProgress
         Me.TxtCustomerPO.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtCustomerPO.Location = New System.Drawing.Point(760, 93)
         Me.TxtCustomerPO.Name = "TxtCustomerPO"
-        Me.TxtCustomerPO.Size = New System.Drawing.Size(369, 22)
+        Me.TxtCustomerPO.Size = New System.Drawing.Size(369, 37)
         Me.TxtCustomerPO.TabIndex = 10
         '
         'dtOrderDateSince
@@ -409,7 +410,7 @@ Partial Class OrderProgress
         Me.dtOrderDateSince.Location = New System.Drawing.Point(760, 36)
         Me.dtOrderDateSince.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.dtOrderDateSince.Name = "dtOrderDateSince"
-        Me.dtOrderDateSince.Size = New System.Drawing.Size(170, 22)
+        Me.dtOrderDateSince.Size = New System.Drawing.Size(170, 37)
         Me.dtOrderDateSince.TabIndex = 331
         Me.dtOrderDateSince.Value = New Date(2019, 1, 1, 0, 0, 0, 0)
         '
@@ -422,7 +423,7 @@ Partial Class OrderProgress
         Me.dtOrderDateUntil.Location = New System.Drawing.Point(959, 37)
         Me.dtOrderDateUntil.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.dtOrderDateUntil.Name = "dtOrderDateUntil"
-        Me.dtOrderDateUntil.Size = New System.Drawing.Size(170, 22)
+        Me.dtOrderDateUntil.Size = New System.Drawing.Size(170, 37)
         Me.dtOrderDateUntil.TabIndex = 332
         Me.dtOrderDateUntil.Value = New Date(2019, 1, 1, 0, 0, 0, 0)
         '
@@ -452,9 +453,9 @@ Partial Class OrderProgress
         Me.RbtnSlip.AutoSize = True
         Me.RbtnSlip.Checked = True
         Me.RbtnSlip.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.RbtnSlip.Location = New System.Drawing.Point(3, 5)
+        Me.RbtnSlip.Location = New System.Drawing.Point(3, 3)
         Me.RbtnSlip.Name = "RbtnSlip"
-        Me.RbtnSlip.Size = New System.Drawing.Size(89, 19)
+        Me.RbtnSlip.Size = New System.Drawing.Size(164, 23)
         Me.RbtnSlip.TabIndex = 11
         Me.RbtnSlip.TabStop = True
         Me.RbtnSlip.Text = "伝票単位"
@@ -466,9 +467,9 @@ Partial Class OrderProgress
         Me.RbtnDetails.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.RbtnDetails.AutoSize = True
         Me.RbtnDetails.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.RbtnDetails.Location = New System.Drawing.Point(98, 5)
+        Me.RbtnDetails.Location = New System.Drawing.Point(173, 3)
         Me.RbtnDetails.Name = "RbtnDetails"
-        Me.RbtnDetails.Size = New System.Drawing.Size(89, 19)
+        Me.RbtnDetails.Size = New System.Drawing.Size(164, 23)
         Me.RbtnDetails.TabIndex = 12
         Me.RbtnDetails.Text = "明細単位"
         Me.RbtnDetails.UseVisualStyleBackColor = True
@@ -479,19 +480,20 @@ Partial Class OrderProgress
         Me.ChkCancelData.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.ChkCancelData.AutoSize = True
         Me.ChkCancelData.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.ChkCancelData.Location = New System.Drawing.Point(215, 5)
+        Me.ChkCancelData.Location = New System.Drawing.Point(365, 3)
         Me.ChkCancelData.Name = "ChkCancelData"
-        Me.ChkCancelData.Size = New System.Drawing.Size(139, 19)
+        Me.ChkCancelData.Size = New System.Drawing.Size(274, 23)
         Me.ChkCancelData.TabIndex = 14
         Me.ChkCancelData.Text = "取消データを含める"
         Me.ChkCancelData.UseVisualStyleBackColor = True
+        Me.ChkCancelData.Visible = False
         '
         'TxtSpec
         '
         Me.TxtSpec.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtSpec.Location = New System.Drawing.Point(760, 178)
         Me.TxtSpec.Name = "TxtSpec"
-        Me.TxtSpec.Size = New System.Drawing.Size(369, 22)
+        Me.TxtSpec.Size = New System.Drawing.Size(369, 37)
         Me.TxtSpec.TabIndex = 13
         '
         'LblSpec
@@ -511,7 +513,7 @@ Partial Class OrderProgress
         Me.TxtItemName.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtItemName.Location = New System.Drawing.Point(760, 150)
         Me.TxtItemName.Name = "TxtItemName"
-        Me.TxtItemName.Size = New System.Drawing.Size(369, 22)
+        Me.TxtItemName.Size = New System.Drawing.Size(369, 37)
         Me.TxtItemName.TabIndex = 12
         '
         'LblItemName
@@ -531,7 +533,7 @@ Partial Class OrderProgress
         Me.txtMaker.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.txtMaker.Location = New System.Drawing.Point(760, 121)
         Me.txtMaker.Name = "txtMaker"
-        Me.txtMaker.Size = New System.Drawing.Size(369, 22)
+        Me.txtMaker.Size = New System.Drawing.Size(369, 37)
         Me.txtMaker.TabIndex = 11
         '
         'lblMaker
