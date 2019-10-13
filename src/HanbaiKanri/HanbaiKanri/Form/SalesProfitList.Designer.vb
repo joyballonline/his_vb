@@ -22,17 +22,48 @@ Partial Class SalesProfitList
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.BtnExcelOutput = New System.Windows.Forms.Button()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.BtnBack = New System.Windows.Forms.Button()
         Me.DgvList = New System.Windows.Forms.DataGridView()
+        Me.受注番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.受注番号枝番 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.受注行番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.売上番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.売上番号枝番 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.請求番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.請求日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.得意先コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.得意先名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.メーカー = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.品名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.型式 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.販売通貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.受注単価_原通貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.受注単価_IDR = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.受注数量 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.単位 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.受注金額_原通貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.受注金額_IDR = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.発注番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.発注番号枝番 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.発注行番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入行番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入区分 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入先コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入先名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入通貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入単価_原通貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入単価_IDR = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入原価_原通貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入原価_IDR = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.間接費 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.粗利 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.粗利率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LblMode = New System.Windows.Forms.Label()
         Me.cmbYear = New System.Windows.Forms.ComboBox()
         Me.cmbMonth = New System.Windows.Forms.ComboBox()
@@ -48,18 +79,6 @@ Partial Class SalesProfitList
         Me.TxtGrossMargin = New System.Windows.Forms.TextBox()
         Me.LblMonth = New System.Windows.Forms.Label()
         Me.LblYear = New System.Windows.Forms.Label()
-        Me.売上番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.売上日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.得意先名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.客先番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.営業担当者 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.売上計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ＶＡＴ = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.売上金額計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.間接費 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.売上原価計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.粗利 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.粗利率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DgvList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -99,9 +118,8 @@ Partial Class SalesProfitList
         '
         Me.DgvList.AllowUserToAddRows = False
         Me.DgvList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
-        Me.DgvList.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.DgvList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.売上番号, Me.売上日, Me.得意先名, Me.客先番号, Me.営業担当者, Me.売上計, Me.ＶＡＴ, Me.売上金額計, Me.間接費, Me.売上原価計, Me.粗利, Me.粗利率})
+        Me.DgvList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.受注番号, Me.受注番号枝番, Me.受注行番号, Me.売上番号, Me.売上番号枝番, Me.請求番号, Me.請求日, Me.得意先コード, Me.得意先名, Me.メーカー, Me.品名, Me.型式, Me.販売通貨, Me.受注単価_原通貨, Me.受注単価_IDR, Me.受注数量, Me.単位, Me.受注金額_原通貨, Me.受注金額_IDR, Me.発注番号, Me.発注番号枝番, Me.発注行番号, Me.仕入番号, Me.仕入行番号, Me.仕入区分, Me.仕入先コード, Me.仕入先名, Me.仕入通貨, Me.仕入単価_原通貨, Me.仕入単価_IDR, Me.仕入原価_原通貨, Me.仕入原価_IDR, Me.間接費, Me.粗利, Me.粗利率})
         Me.DgvList.Location = New System.Drawing.Point(13, 102)
         Me.DgvList.Name = "DgvList"
         Me.DgvList.ReadOnly = True
@@ -110,6 +128,261 @@ Partial Class SalesProfitList
         Me.DgvList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvList.Size = New System.Drawing.Size(1326, 345)
         Me.DgvList.TabIndex = 14
+        '
+        '受注番号
+        '
+        Me.受注番号.HeaderText = "受注番号"
+        Me.受注番号.Name = "受注番号"
+        Me.受注番号.ReadOnly = True
+        Me.受注番号.Width = 61
+        '
+        '受注番号枝番
+        '
+        Me.受注番号枝番.HeaderText = "受注Ver"
+        Me.受注番号枝番.Name = "受注番号枝番"
+        Me.受注番号枝番.ReadOnly = True
+        Me.受注番号枝番.Width = 67
+        '
+        '受注行番号
+        '
+        Me.受注行番号.HeaderText = "行No"
+        Me.受注行番号.Name = "受注行番号"
+        Me.受注行番号.ReadOnly = True
+        Me.受注行番号.Width = 52
+        '
+        '売上番号
+        '
+        Me.売上番号.HeaderText = "売上番号"
+        Me.売上番号.Name = "売上番号"
+        Me.売上番号.ReadOnly = True
+        Me.売上番号.Width = 61
+        '
+        '売上番号枝番
+        '
+        Me.売上番号枝番.HeaderText = "売上Ver"
+        Me.売上番号枝番.Name = "売上番号枝番"
+        Me.売上番号枝番.ReadOnly = True
+        Me.売上番号枝番.Width = 67
+        '
+        '請求番号
+        '
+        Me.請求番号.HeaderText = "SaleInvoiceNo"
+        Me.請求番号.Name = "請求番号"
+        Me.請求番号.ReadOnly = True
+        Me.請求番号.Width = 102
+        '
+        '請求日
+        '
+        Me.請求日.HeaderText = "SalesInvoiceDate"
+        Me.請求日.Name = "請求日"
+        Me.請求日.ReadOnly = True
+        Me.請求日.Width = 118
+        '
+        '得意先コード
+        '
+        Me.得意先コード.HeaderText = "得意先コード"
+        Me.得意先コード.Name = "得意先コード"
+        Me.得意先コード.ReadOnly = True
+        Me.得意先コード.Width = 69
+        '
+        '得意先名
+        '
+        Me.得意先名.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.得意先名.HeaderText = "得意先名"
+        Me.得意先名.Name = "得意先名"
+        Me.得意先名.ReadOnly = True
+        Me.得意先名.Width = 61
+        '
+        'メーカー
+        '
+        Me.メーカー.HeaderText = "メーカー"
+        Me.メーカー.Name = "メーカー"
+        Me.メーカー.ReadOnly = True
+        Me.メーカー.Width = 53
+        '
+        '品名
+        '
+        Me.品名.HeaderText = "品名"
+        Me.品名.Name = "品名"
+        Me.品名.ReadOnly = True
+        Me.品名.Width = 51
+        '
+        '型式
+        '
+        Me.型式.HeaderText = "型式"
+        Me.型式.Name = "型式"
+        Me.型式.ReadOnly = True
+        Me.型式.Width = 51
+        '
+        '販売通貨
+        '
+        Me.販売通貨.HeaderText = "販売通貨"
+        Me.販売通貨.Name = "販売通貨"
+        Me.販売通貨.ReadOnly = True
+        Me.販売通貨.Width = 61
+        '
+        '受注単価_原通貨
+        '
+        Me.受注単価_原通貨.HeaderText = "受注単価_原通貨"
+        Me.受注単価_原通貨.Name = "受注単価_原通貨"
+        Me.受注単価_原通貨.ReadOnly = True
+        Me.受注単価_原通貨.Width = 87
+        '
+        '受注単価_IDR
+        '
+        Me.受注単価_IDR.HeaderText = "受注単価_IDR"
+        Me.受注単価_IDR.Name = "受注単価_IDR"
+        Me.受注単価_IDR.ReadOnly = True
+        Me.受注単価_IDR.Width = 72
+        '
+        '受注数量
+        '
+        Me.受注数量.HeaderText = "受注数量"
+        Me.受注数量.Name = "受注数量"
+        Me.受注数量.ReadOnly = True
+        Me.受注数量.Width = 61
+        '
+        '単位
+        '
+        Me.単位.HeaderText = "単位"
+        Me.単位.Name = "単位"
+        Me.単位.ReadOnly = True
+        Me.単位.Width = 51
+        '
+        '受注金額_原通貨
+        '
+        Me.受注金額_原通貨.HeaderText = "受注金額_原通貨"
+        Me.受注金額_原通貨.Name = "受注金額_原通貨"
+        Me.受注金額_原通貨.ReadOnly = True
+        Me.受注金額_原通貨.Width = 87
+        '
+        '受注金額_IDR
+        '
+        Me.受注金額_IDR.HeaderText = "受注金額_IDR"
+        Me.受注金額_IDR.Name = "受注金額_IDR"
+        Me.受注金額_IDR.ReadOnly = True
+        Me.受注金額_IDR.Width = 72
+        '
+        '発注番号
+        '
+        Me.発注番号.HeaderText = "発注番号"
+        Me.発注番号.Name = "発注番号"
+        Me.発注番号.ReadOnly = True
+        Me.発注番号.Width = 61
+        '
+        '発注番号枝番
+        '
+        Me.発注番号枝番.HeaderText = "発注Ver"
+        Me.発注番号枝番.Name = "発注番号枝番"
+        Me.発注番号枝番.ReadOnly = True
+        Me.発注番号枝番.Width = 67
+        '
+        '発注行番号
+        '
+        Me.発注行番号.HeaderText = "行No"
+        Me.発注行番号.Name = "発注行番号"
+        Me.発注行番号.ReadOnly = True
+        Me.発注行番号.Width = 52
+        '
+        '仕入番号
+        '
+        Me.仕入番号.HeaderText = "仕入番号"
+        Me.仕入番号.Name = "仕入番号"
+        Me.仕入番号.ReadOnly = True
+        Me.仕入番号.Width = 61
+        '
+        '仕入行番号
+        '
+        Me.仕入行番号.HeaderText = "行No"
+        Me.仕入行番号.Name = "仕入行番号"
+        Me.仕入行番号.ReadOnly = True
+        Me.仕入行番号.Width = 52
+        '
+        '仕入区分
+        '
+        Me.仕入区分.HeaderText = "仕入区分"
+        Me.仕入区分.Name = "仕入区分"
+        Me.仕入区分.ReadOnly = True
+        Me.仕入区分.Width = 61
+        '
+        '仕入先コード
+        '
+        Me.仕入先コード.HeaderText = "仕入先コード"
+        Me.仕入先コード.Name = "仕入先コード"
+        Me.仕入先コード.ReadOnly = True
+        Me.仕入先コード.Width = 69
+        '
+        '仕入先名
+        '
+        Me.仕入先名.HeaderText = "仕入先名"
+        Me.仕入先名.Name = "仕入先名"
+        Me.仕入先名.ReadOnly = True
+        Me.仕入先名.Width = 61
+        '
+        '仕入通貨
+        '
+        Me.仕入通貨.HeaderText = "仕入通貨"
+        Me.仕入通貨.Name = "仕入通貨"
+        Me.仕入通貨.ReadOnly = True
+        Me.仕入通貨.Width = 61
+        '
+        '仕入単価_原通貨
+        '
+        Me.仕入単価_原通貨.HeaderText = "仕入単価_原通貨"
+        Me.仕入単価_原通貨.Name = "仕入単価_原通貨"
+        Me.仕入単価_原通貨.ReadOnly = True
+        Me.仕入単価_原通貨.Width = 87
+        '
+        '仕入単価_IDR
+        '
+        Me.仕入単価_IDR.HeaderText = "仕入単価_IDR"
+        Me.仕入単価_IDR.Name = "仕入単価_IDR"
+        Me.仕入単価_IDR.ReadOnly = True
+        Me.仕入単価_IDR.Width = 72
+        '
+        '仕入原価_原通貨
+        '
+        Me.仕入原価_原通貨.HeaderText = "仕入原価_原通貨"
+        Me.仕入原価_原通貨.Name = "仕入原価_原通貨"
+        Me.仕入原価_原通貨.ReadOnly = True
+        Me.仕入原価_原通貨.Width = 87
+        '
+        '仕入原価_IDR
+        '
+        Me.仕入原価_IDR.HeaderText = "仕入原価_IDR"
+        Me.仕入原価_IDR.Name = "仕入原価_IDR"
+        Me.仕入原価_IDR.ReadOnly = True
+        Me.仕入原価_IDR.Width = 72
+        '
+        '間接費
+        '
+        Me.間接費.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.間接費.DefaultCellStyle = DataGridViewCellStyle4
+        Me.間接費.HeaderText = "間接費"
+        Me.間接費.Name = "間接費"
+        Me.間接費.ReadOnly = True
+        Me.間接費.Width = 61
+        '
+        '粗利
+        '
+        Me.粗利.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.粗利.DefaultCellStyle = DataGridViewCellStyle5
+        Me.粗利.HeaderText = "粗利"
+        Me.粗利.Name = "粗利"
+        Me.粗利.ReadOnly = True
+        Me.粗利.Width = 51
+        '
+        '粗利率
+        '
+        Me.粗利率.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.粗利率.DefaultCellStyle = DataGridViewCellStyle6
+        Me.粗利率.HeaderText = "粗利率"
+        Me.粗利率.Name = "粗利率"
+        Me.粗利率.ReadOnly = True
+        Me.粗利率.Width = 61
         '
         'LblMode
         '
@@ -166,7 +439,7 @@ Partial Class SalesProfitList
         Me.LblSalesCostAmount.Name = "LblSalesCostAmount"
         Me.LblSalesCostAmount.Size = New System.Drawing.Size(130, 23)
         Me.LblSalesCostAmount.TabIndex = 342
-        Me.LblSalesCostAmount.Text = "売上原価計"
+        Me.LblSalesCostAmount.Text = "仕入原価計"
         Me.LblSalesCostAmount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'TxtSalesAmount
@@ -192,7 +465,7 @@ Partial Class SalesProfitList
         Me.LblSalesAmount.Name = "LblSalesAmount"
         Me.LblSalesAmount.Size = New System.Drawing.Size(130, 23)
         Me.LblSalesAmount.TabIndex = 340
-        Me.LblSalesAmount.Text = "売上計"
+        Me.LblSalesAmount.Text = "受注金額計"
         Me.LblSalesAmount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'TxtTotalSalesAmount
@@ -208,6 +481,7 @@ Partial Class SalesProfitList
         Me.TxtTotalSalesAmount.TabIndex = 337
         Me.TxtTotalSalesAmount.TabStop = False
         Me.TxtTotalSalesAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.TxtTotalSalesAmount.Visible = False
         '
         'LblTotalSalesAmount
         '
@@ -220,6 +494,7 @@ Partial Class SalesProfitList
         Me.LblTotalSalesAmount.TabIndex = 338
         Me.LblTotalSalesAmount.Text = "売上 + VAT"
         Me.LblTotalSalesAmount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LblTotalSalesAmount.Visible = False
         '
         'LblGrossMarginRate
         '
@@ -293,112 +568,6 @@ Partial Class SalesProfitList
         Me.LblYear.TabIndex = 344
         Me.LblYear.Text = "年"
         '
-        '売上番号
-        '
-        Me.売上番号.HeaderText = "売上番号"
-        Me.売上番号.Name = "売上番号"
-        Me.売上番号.ReadOnly = True
-        Me.売上番号.Width = 78
-        '
-        '売上日
-        '
-        Me.売上日.HeaderText = "売上日"
-        Me.売上日.Name = "売上日"
-        Me.売上日.ReadOnly = True
-        Me.売上日.Width = 66
-        '
-        '得意先名
-        '
-        Me.得意先名.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.得意先名.HeaderText = "得意先名"
-        Me.得意先名.Name = "得意先名"
-        Me.得意先名.ReadOnly = True
-        Me.得意先名.Width = 78
-        '
-        '客先番号
-        '
-        Me.客先番号.HeaderText = "客先番号"
-        Me.客先番号.Name = "客先番号"
-        Me.客先番号.ReadOnly = True
-        Me.客先番号.Width = 78
-        '
-        '営業担当者
-        '
-        Me.営業担当者.HeaderText = "営業担当者"
-        Me.営業担当者.Name = "営業担当者"
-        Me.営業担当者.ReadOnly = True
-        Me.営業担当者.Width = 90
-        '
-        '売上計
-        '
-        Me.売上計.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.売上計.DefaultCellStyle = DataGridViewCellStyle1
-        Me.売上計.HeaderText = "売上計"
-        Me.売上計.Name = "売上計"
-        Me.売上計.ReadOnly = True
-        Me.売上計.Width = 66
-        '
-        'ＶＡＴ
-        '
-        Me.ＶＡＴ.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.ＶＡＴ.DefaultCellStyle = DataGridViewCellStyle2
-        Me.ＶＡＴ.HeaderText = "ＶＡＴ"
-        Me.ＶＡＴ.Name = "ＶＡＴ"
-        Me.ＶＡＴ.ReadOnly = True
-        Me.ＶＡＴ.Width = 55
-        '
-        '売上金額計
-        '
-        Me.売上金額計.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.売上金額計.DefaultCellStyle = DataGridViewCellStyle3
-        Me.売上金額計.HeaderText = "売上 + VAT"
-        Me.売上金額計.Name = "売上金額計"
-        Me.売上金額計.ReadOnly = True
-        Me.売上金額計.Width = 91
-        '
-        '間接費
-        '
-        Me.間接費.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.間接費.DefaultCellStyle = DataGridViewCellStyle4
-        Me.間接費.HeaderText = "間接費"
-        Me.間接費.Name = "間接費"
-        Me.間接費.ReadOnly = True
-        Me.間接費.Width = 66
-        '
-        '売上原価計
-        '
-        Me.売上原価計.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.売上原価計.DefaultCellStyle = DataGridViewCellStyle5
-        Me.売上原価計.HeaderText = "売上原価計"
-        Me.売上原価計.Name = "売上原価計"
-        Me.売上原価計.ReadOnly = True
-        Me.売上原価計.Width = 90
-        '
-        '粗利
-        '
-        Me.粗利.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.粗利.DefaultCellStyle = DataGridViewCellStyle6
-        Me.粗利.HeaderText = "粗利"
-        Me.粗利.Name = "粗利"
-        Me.粗利.ReadOnly = True
-        Me.粗利.Width = 54
-        '
-        '粗利率
-        '
-        Me.粗利率.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.粗利率.DefaultCellStyle = DataGridViewCellStyle7
-        Me.粗利率.HeaderText = "粗利率"
-        Me.粗利率.Name = "粗利率"
-        Me.粗利率.ReadOnly = True
-        Me.粗利率.Width = 66
-        '
         'SalesProfitList
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
@@ -449,16 +618,39 @@ Partial Class SalesProfitList
     Friend WithEvents TxtGrossMargin As TextBox
     Friend WithEvents LblMonth As Label
     Friend WithEvents LblYear As Label
+    Friend WithEvents 受注番号 As DataGridViewTextBoxColumn
+    Friend WithEvents 受注番号枝番 As DataGridViewTextBoxColumn
+    Friend WithEvents 受注行番号 As DataGridViewTextBoxColumn
     Friend WithEvents 売上番号 As DataGridViewTextBoxColumn
-    Friend WithEvents 売上日 As DataGridViewTextBoxColumn
+    Friend WithEvents 売上番号枝番 As DataGridViewTextBoxColumn
+    Friend WithEvents 請求番号 As DataGridViewTextBoxColumn
+    Friend WithEvents 請求日 As DataGridViewTextBoxColumn
+    Friend WithEvents 得意先コード As DataGridViewTextBoxColumn
     Friend WithEvents 得意先名 As DataGridViewTextBoxColumn
-    Friend WithEvents 客先番号 As DataGridViewTextBoxColumn
-    Friend WithEvents 営業担当者 As DataGridViewTextBoxColumn
-    Friend WithEvents 売上計 As DataGridViewTextBoxColumn
-    Friend WithEvents ＶＡＴ As DataGridViewTextBoxColumn
-    Friend WithEvents 売上金額計 As DataGridViewTextBoxColumn
+    Friend WithEvents メーカー As DataGridViewTextBoxColumn
+    Friend WithEvents 品名 As DataGridViewTextBoxColumn
+    Friend WithEvents 型式 As DataGridViewTextBoxColumn
+    Friend WithEvents 販売通貨 As DataGridViewTextBoxColumn
+    Friend WithEvents 受注単価_原通貨 As DataGridViewTextBoxColumn
+    Friend WithEvents 受注単価_IDR As DataGridViewTextBoxColumn
+    Friend WithEvents 受注数量 As DataGridViewTextBoxColumn
+    Friend WithEvents 単位 As DataGridViewTextBoxColumn
+    Friend WithEvents 受注金額_原通貨 As DataGridViewTextBoxColumn
+    Friend WithEvents 受注金額_IDR As DataGridViewTextBoxColumn
+    Friend WithEvents 発注番号 As DataGridViewTextBoxColumn
+    Friend WithEvents 発注番号枝番 As DataGridViewTextBoxColumn
+    Friend WithEvents 発注行番号 As DataGridViewTextBoxColumn
+    Friend WithEvents 仕入番号 As DataGridViewTextBoxColumn
+    Friend WithEvents 仕入行番号 As DataGridViewTextBoxColumn
+    Friend WithEvents 仕入区分 As DataGridViewTextBoxColumn
+    Friend WithEvents 仕入先コード As DataGridViewTextBoxColumn
+    Friend WithEvents 仕入先名 As DataGridViewTextBoxColumn
+    Friend WithEvents 仕入通貨 As DataGridViewTextBoxColumn
+    Friend WithEvents 仕入単価_原通貨 As DataGridViewTextBoxColumn
+    Friend WithEvents 仕入単価_IDR As DataGridViewTextBoxColumn
+    Friend WithEvents 仕入原価_原通貨 As DataGridViewTextBoxColumn
+    Friend WithEvents 仕入原価_IDR As DataGridViewTextBoxColumn
     Friend WithEvents 間接費 As DataGridViewTextBoxColumn
-    Friend WithEvents 売上原価計 As DataGridViewTextBoxColumn
     Friend WithEvents 粗利 As DataGridViewTextBoxColumn
     Friend WithEvents 粗利率 As DataGridViewTextBoxColumn
 End Class
