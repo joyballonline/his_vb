@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class OrderProgress
+Partial Class OrderingProgress
     Inherits System.Windows.Forms.Form
 
     'フォームがコンポーネントの一覧をクリーンアップするために dispose をオーバーライドします。
@@ -22,7 +22,7 @@ Partial Class OrderProgress
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.BtnOrderView = New System.Windows.Forms.Button()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -43,19 +43,19 @@ Partial Class OrderProgress
         Me.BtnOrderSearch = New System.Windows.Forms.Button()
         Me.BtnBack = New System.Windows.Forms.Button()
         Me.DgvCymnhd = New System.Windows.Forms.DataGridView()
-        Me.受注日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.受注番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.受注番号枝番 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.発注日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.発注番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.発注番号枝番 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.行番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.メーカー = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.品名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.型式 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.見積番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.見積日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.売上登録 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.出庫登録 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.売掛請求登録 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.入金登録 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.受注番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.受注日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入登録 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.入庫登録 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.買掛登録 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.支払登録 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LblMode = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.TxtCustomerPO = New System.Windows.Forms.TextBox()
@@ -135,7 +135,7 @@ Partial Class OrderProgress
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(170, 22)
         Me.Label7.TabIndex = 51
-        Me.Label7.Text = "受注番号"
+        Me.Label7.Text = "発注番号"
         Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'TxtOrderSince
@@ -155,7 +155,7 @@ Partial Class OrderProgress
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(170, 22)
         Me.Label8.TabIndex = 49
-        Me.Label8.Text = "受注日"
+        Me.Label8.Text = "発注日"
         Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label4
@@ -273,15 +273,15 @@ Partial Class OrderProgress
         Me.DgvCymnhd.AllowUserToAddRows = False
         Me.DgvCymnhd.AllowUserToDeleteRows = False
         Me.DgvCymnhd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvCymnhd.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.受注日, Me.受注番号, Me.受注番号枝番, Me.行番号, Me.メーカー, Me.品名, Me.型式, Me.見積番号, Me.見積日, Me.売上登録, Me.出庫登録, Me.売掛請求登録, Me.入金登録})
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DgvCymnhd.DefaultCellStyle = DataGridViewCellStyle1
+        Me.DgvCymnhd.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.発注日, Me.発注番号, Me.発注番号枝番, Me.行番号, Me.メーカー, Me.品名, Me.型式, Me.受注番号, Me.受注日, Me.仕入登録, Me.入庫登録, Me.買掛登録, Me.支払登録})
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DgvCymnhd.DefaultCellStyle = DataGridViewCellStyle2
         Me.DgvCymnhd.Location = New System.Drawing.Point(13, 238)
         Me.DgvCymnhd.Name = "DgvCymnhd"
         Me.DgvCymnhd.ReadOnly = True
@@ -291,23 +291,23 @@ Partial Class OrderProgress
         Me.DgvCymnhd.Size = New System.Drawing.Size(1326, 265)
         Me.DgvCymnhd.TabIndex = 15
         '
-        '受注日
+        '発注日
         '
-        Me.受注日.HeaderText = "受注日"
-        Me.受注日.Name = "受注日"
-        Me.受注日.ReadOnly = True
+        Me.発注日.HeaderText = "発注日"
+        Me.発注日.Name = "発注日"
+        Me.発注日.ReadOnly = True
         '
-        '受注番号
+        '発注番号
         '
-        Me.受注番号.HeaderText = "受注番号"
-        Me.受注番号.Name = "受注番号"
-        Me.受注番号.ReadOnly = True
+        Me.発注番号.HeaderText = "発注番号"
+        Me.発注番号.Name = "発注番号"
+        Me.発注番号.ReadOnly = True
         '
-        '受注番号枝番
+        '発注番号枝番
         '
-        Me.受注番号枝番.HeaderText = "受注Ver"
-        Me.受注番号枝番.Name = "受注番号枝番"
-        Me.受注番号枝番.ReadOnly = True
+        Me.発注番号枝番.HeaderText = "発注Ver"
+        Me.発注番号枝番.Name = "発注番号枝番"
+        Me.発注番号枝番.ReadOnly = True
         '
         '行番号
         '
@@ -333,41 +333,41 @@ Partial Class OrderProgress
         Me.型式.Name = "型式"
         Me.型式.ReadOnly = True
         '
-        '見積番号
+        '受注番号
         '
-        Me.見積番号.HeaderText = "見積番号"
-        Me.見積番号.Name = "見積番号"
-        Me.見積番号.ReadOnly = True
+        Me.受注番号.HeaderText = "受注番号"
+        Me.受注番号.Name = "受注番号"
+        Me.受注番号.ReadOnly = True
         '
-        '見積日
+        '受注日
         '
-        Me.見積日.HeaderText = "見積日"
-        Me.見積日.Name = "見積日"
-        Me.見積日.ReadOnly = True
+        Me.受注日.HeaderText = "受注日"
+        Me.受注日.Name = "受注日"
+        Me.受注日.ReadOnly = True
         '
-        '売上登録
+        '仕入登録
         '
-        Me.売上登録.HeaderText = "売上登録"
-        Me.売上登録.Name = "売上登録"
-        Me.売上登録.ReadOnly = True
+        Me.仕入登録.HeaderText = "仕入登録"
+        Me.仕入登録.Name = "仕入登録"
+        Me.仕入登録.ReadOnly = True
         '
-        '出庫登録
+        '入庫登録
         '
-        Me.出庫登録.HeaderText = "出庫登録"
-        Me.出庫登録.Name = "出庫登録"
-        Me.出庫登録.ReadOnly = True
+        Me.入庫登録.HeaderText = "入庫登録"
+        Me.入庫登録.Name = "入庫登録"
+        Me.入庫登録.ReadOnly = True
         '
-        '売掛請求登録
+        '買掛登録
         '
-        Me.売掛請求登録.HeaderText = "売掛請求登録"
-        Me.売掛請求登録.Name = "売掛請求登録"
-        Me.売掛請求登録.ReadOnly = True
+        Me.買掛登録.HeaderText = "買掛登録"
+        Me.買掛登録.Name = "買掛登録"
+        Me.買掛登録.ReadOnly = True
         '
-        '入金登録
+        '支払登録
         '
-        Me.入金登録.HeaderText = "入金登録"
-        Me.入金登録.Name = "入金登録"
-        Me.入金登録.ReadOnly = True
+        Me.支払登録.HeaderText = "支払登録"
+        Me.支払登録.Name = "支払登録"
+        Me.支払登録.ReadOnly = True
         '
         'LblMode
         '
@@ -548,7 +548,7 @@ Partial Class OrderProgress
         Me.lblMaker.Text = "メーカー"
         Me.lblMaker.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'OrderProgress
+        'OrderingProgress
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
@@ -585,8 +585,8 @@ Partial Class OrderProgress
         Me.Controls.Add(Me.BtnBack)
         Me.Controls.Add(Me.DgvCymnhd)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
-        Me.Name = "OrderProgress"
-        Me.Text = "OrderProgress"
+        Me.Name = "OrderingProgress"
+        Me.Text = "OrderingProgress"
         CType(Me.DgvCymnhd, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.TableLayoutPanel1.PerformLayout()
@@ -630,17 +630,17 @@ Partial Class OrderProgress
     Friend WithEvents LblItemName As Label
     Friend WithEvents txtMaker As TextBox
     Friend WithEvents lblMaker As Label
-    Friend WithEvents 受注日 As DataGridViewTextBoxColumn
-    Friend WithEvents 受注番号 As DataGridViewTextBoxColumn
-    Friend WithEvents 受注番号枝番 As DataGridViewTextBoxColumn
+    Friend WithEvents 発注日 As DataGridViewTextBoxColumn
+    Friend WithEvents 発注番号 As DataGridViewTextBoxColumn
+    Friend WithEvents 発注番号枝番 As DataGridViewTextBoxColumn
     Friend WithEvents 行番号 As DataGridViewTextBoxColumn
     Friend WithEvents メーカー As DataGridViewTextBoxColumn
     Friend WithEvents 品名 As DataGridViewTextBoxColumn
     Friend WithEvents 型式 As DataGridViewTextBoxColumn
-    Friend WithEvents 見積番号 As DataGridViewTextBoxColumn
-    Friend WithEvents 見積日 As DataGridViewTextBoxColumn
-    Friend WithEvents 売上登録 As DataGridViewTextBoxColumn
-    Friend WithEvents 出庫登録 As DataGridViewTextBoxColumn
-    Friend WithEvents 売掛請求登録 As DataGridViewTextBoxColumn
-    Friend WithEvents 入金登録 As DataGridViewTextBoxColumn
+    Friend WithEvents 受注番号 As DataGridViewTextBoxColumn
+    Friend WithEvents 受注日 As DataGridViewTextBoxColumn
+    Friend WithEvents 仕入登録 As DataGridViewTextBoxColumn
+    Friend WithEvents 入庫登録 As DataGridViewTextBoxColumn
+    Friend WithEvents 買掛登録 As DataGridViewTextBoxColumn
+    Friend WithEvents 支払登録 As DataGridViewTextBoxColumn
 End Class

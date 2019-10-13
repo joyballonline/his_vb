@@ -221,6 +221,7 @@ Public Class CommonConst
     Public Const MENU_H1520 As String = "H1520"           '為替レート
 
     Public Const MENU_H1610 As String = "H1610"           '受注進捗状況
+    Public Const MENU_H1620 As String = "H1620"           '発注進捗状況
 
     Public Const MENU_M0110 As String = "M0110"           '汎用マスタ
     Public Const MENU_M0120 As String = "M0120"           '得意先マスタ

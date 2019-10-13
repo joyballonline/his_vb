@@ -10,7 +10,7 @@ Imports UtilMDL.xls
 Imports System.Globalization
 Imports System.Text.RegularExpressions
 
-Public Class OrderProgress
+Public Class OrderingProgress
     Inherits System.Windows.Forms.Form
 
     '------------------------------------------------------------------------------------------------------
@@ -83,11 +83,10 @@ Public Class OrderProgress
 
     End Sub
 
-
     Private Sub MstHanyoue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         'モード
-        If mSet_Mode = False Then
+        If mSet_Mode() = False Then
             Exit Sub
         End If
 
@@ -106,7 +105,6 @@ Public Class OrderProgress
 
 
     End Sub
-
 
     'モード
     Private Function mSet_Mode() As Boolean
@@ -209,19 +207,22 @@ Public Class OrderProgress
             LblSpec.Text = "Spec"
 
 
-            DgvCymnhd.Columns("受注日").HeaderText = "OrderDate"
-            DgvCymnhd.Columns("受注番号").HeaderText = "OrderNumber"
-            DgvCymnhd.Columns("受注番号枝番").HeaderText = "OrderVer"
+            DgvCymnhd.Columns("発注日").HeaderText = "PurchaseDate"
+            DgvCymnhd.Columns("発注番号").HeaderText = "PurchaseNumber"
+            DgvCymnhd.Columns("発注番号枝番").HeaderText = "PurchaseVer"
             DgvCymnhd.Columns("行番号").HeaderText = "LineNo"
             DgvCymnhd.Columns("メーカー").HeaderText = "Maker"
             DgvCymnhd.Columns("品名").HeaderText = "ProductName"
             DgvCymnhd.Columns("型式").HeaderText = "Model"
-            DgvCymnhd.Columns("見積番号").HeaderText = "QuoteNumber"
-            DgvCymnhd.Columns("見積日").HeaderText = "QuoteDate"
-            DgvCymnhd.Columns("売上登録").HeaderText = "SalesRegistration"
-            DgvCymnhd.Columns("出庫登録").HeaderText = "GoodsIssueTegistration"
-            DgvCymnhd.Columns("売掛請求登録").HeaderText = "AccountsReceivableRegistration"
-            DgvCymnhd.Columns("入金登録").HeaderText = "DepositRegistration"
+
+            DgvCymnhd.Columns("受注番号").HeaderText = "OrderNumber"
+            DgvCymnhd.Columns("受注日").HeaderText = "OrderDate"
+
+            DgvCymnhd.Columns("仕入登録").HeaderText = "PurchaseRegistration"
+            DgvCymnhd.Columns("入庫登録").HeaderText = "GoodsReceiptRegistration"
+
+            DgvCymnhd.Columns("買掛登録").HeaderText = "AccountsPayableRegistration"
+            DgvCymnhd.Columns("支払登録").HeaderText = "PaymentRegistration"
 
         End If
 
@@ -241,25 +242,25 @@ Public Class OrderProgress
 
         Try
 
-            Sql = " SELECT t10.*"
-            Sql += " ,t11.行番号 ,t11.メーカー ,t11.品名 ,t11.型式"
-            Sql += " ,t11.売上数量 ,t11.受注残数 ,t11.未出庫数 ,t11.出庫数"
+            Sql = " SELECT t20.*"
+            Sql += " ,t21.行番号 ,t21.メーカー ,t21.品名 ,t21.型式"
+            Sql += " ,t21.発注残数 ,t21.仕入数量 ,t21.入庫数 ,t21.未入庫数"
 
-            Sql += " from t10_cymnhd as t10"
+            Sql += " from t20_hattyu as t20"
 
-            Sql += " left join t11_cymndt as t11"
-            Sql += " on t10.受注番号 = t11.受注番号 and t10.受注番号枝番 = t11.受注番号枝番"
+            Sql += " left join t21_hattyu as t21"
+            Sql += " on t20.発注番号 = t21.発注番号 and t20.発注番号枝番 = t21.発注番号枝番"
 
 
-            Sql += " WHERE t10.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += " WHERE t20.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
 
             '履歴最新
-            Sql += "   and t10.受注番号枝番 = (SELECT MAX(t10M.受注番号枝番) FROM t10_cymnhd as t10M where t10.受注番号 = t10M.受注番号) "
+            Sql += "   and t20.発注番号枝番 = (SELECT MAX(t20M.発注番号枝番) FROM t20_hattyu as t20M where t20.発注番号 = t20M.発注番号) "
 
             Sql += viewSearchConditions() '検索条件
 
             Sql += " ORDER BY "
-            Sql += " t10.受注日, t10.受注番号, t10.受注番号枝番, t11.行番号"
+            Sql += " t20.発注日, t20.発注番号, t20.発注番号枝番, t21.行番号"
 
             ds = _db.selectDB(Sql, RS, reccnt)
 
@@ -267,94 +268,97 @@ Public Class OrderProgress
             For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
 
                 DgvCymnhd.Rows.Add()
-                DgvCymnhd.Rows(i).Cells("受注日").Value = ds.Tables(RS).Rows(i)("受注日")
-                DgvCymnhd.Rows(i).Cells("受注番号").Value = ds.Tables(RS).Rows(i)("受注番号")
-                DgvCymnhd.Rows(i).Cells("受注番号枝番").Value = ds.Tables(RS).Rows(i)("受注番号枝番")
+                DgvCymnhd.Rows(i).Cells("発注日").Value = ds.Tables(RS).Rows(i)("発注日")
+                DgvCymnhd.Rows(i).Cells("発注番号").Value = ds.Tables(RS).Rows(i)("発注番号")
+                DgvCymnhd.Rows(i).Cells("発注番号枝番").Value = ds.Tables(RS).Rows(i)("発注番号枝番")
 
                 DgvCymnhd.Rows(i).Cells("行番号").Value = ds.Tables(RS).Rows(i)("行番号")
                 DgvCymnhd.Rows(i).Cells("メーカー").Value = ds.Tables(RS).Rows(i)("メーカー")
                 DgvCymnhd.Rows(i).Cells("品名").Value = ds.Tables(RS).Rows(i)("品名")
                 DgvCymnhd.Rows(i).Cells("型式").Value = ds.Tables(RS).Rows(i)("型式")
 
-                DgvCymnhd.Rows(i).Cells("見積番号").Value = ds.Tables(RS).Rows(i)("見積番号")
-                DgvCymnhd.Rows(i).Cells("見積日").Value = ds.Tables(RS).Rows(i)("見積日")
+                DgvCymnhd.Rows(i).Cells("受注番号").Value = ds.Tables(RS).Rows(i)("受注番号")
+                DgvCymnhd.Rows(i).Cells("受注日").Value = ds.Tables(RS).Rows(i)("受注日")
 
 
-                '売上登録
-                If IsDBNull(ds.Tables(RS).Rows(i)("受注残数")) Then
-                    '売上がない
-                    DgvCymnhd.Rows(i).Cells("売上登録").Value = ""
-                ElseIf ds.Tables(RS).Rows(i)("受注残数") = 0 Then
-                    '売上済
-                    DgvCymnhd.Rows(i).Cells("売上登録").Value = "〇"
-                ElseIf ds.Tables(RS).Rows(i)("売上数量") > 0 AndAlso ds.Tables(RS).Rows(i)("受注残数") > 0 Then
+                '仕入登録
+                If IsDBNull(ds.Tables(RS).Rows(i)("発注残数")) Then
+                    '仕入がない
+                    DgvCymnhd.Rows(i).Cells("仕入登録").Value = ""
+                ElseIf ds.Tables(RS).Rows(i)("発注残数") = 0 Then
+                    '仕入済
+                    DgvCymnhd.Rows(i).Cells("仕入登録").Value = "〇"
+                ElseIf ds.Tables(RS).Rows(i)("仕入数量") > 0 AndAlso ds.Tables(RS).Rows(i)("発注残数") > 0 Then
                     '一部売上
-                    DgvCymnhd.Rows(i).Cells("売上登録").Value = "△"
+                    DgvCymnhd.Rows(i).Cells("仕入登録").Value = "△"
                 End If
 
 
-                '出庫登録
-                If IsDBNull(ds.Tables(RS).Rows(i)("未出庫数")) Then
-                    '出庫なし
-                    DgvCymnhd.Rows(i).Cells("出庫登録").Value = ""
-                ElseIf ds.Tables(RS).Rows(i)("未出庫数") = 0 Then
-                    '出庫済
-                    DgvCymnhd.Rows(i).Cells("出庫登録").Value = "〇"
-                ElseIf ds.Tables(RS).Rows(i)("出庫数") > 0 AndAlso ds.Tables(RS).Rows(i)("未出庫数") > 0 Then
-                    '一部出庫
-                    DgvCymnhd.Rows(i).Cells("出庫登録").Value = "△"
+                '入庫登録
+                If IsDBNull(ds.Tables(RS).Rows(i)("未入庫数")) Then
+                    '入庫なし
+                    DgvCymnhd.Rows(i).Cells("入庫登録").Value = ""
+                ElseIf ds.Tables(RS).Rows(i)("未入庫数") = 0 Then
+                    '入庫済
+                    DgvCymnhd.Rows(i).Cells("入庫登録").Value = "〇"
+                ElseIf ds.Tables(RS).Rows(i)("入庫数") > 0 AndAlso ds.Tables(RS).Rows(i)("未入庫数") > 0 Then
+                    '一部入庫
+                    DgvCymnhd.Rows(i).Cells("入庫登録").Value = "△"
                 End If
 
 
-                '売掛請求登録
-                Sql = " SELECT sum(請求金額計) as 請求金額計, sum(売掛残高) as 売掛残高, sum(入金額計) as 入金額計"
-                Sql += " from t23_skyuhd as t23"
+                '買掛登録 - 支払登録
+                Sql = " SELECT sum(買掛金額計) as 買掛金額計, sum(買掛残高) as 買掛残高, sum(支払金額計) as 支払金額計"
+                Sql += " from t46_kikehd as t46"
 
-                Sql += " WHERE t23.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-                Sql += " and 受注番号 = '" & ds.Tables(RS).Rows(i)("受注番号") & "'"
-                Sql += " and 受注番号枝番 = '" & ds.Tables(RS).Rows(i)("受注番号枝番") & "'"
+                Sql += " WHERE t46.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                Sql += " and 発注番号 = '" & ds.Tables(RS).Rows(i)("発注番号") & "'"
+                Sql += " and 発注番号枝番 = '" & ds.Tables(RS).Rows(i)("発注番号枝番") & "'"
                 Sql += " and 取消日 is null"
 
                 Dim ds_seikyu As DataSet = _db.selectDB(Sql, RS, reccnt)
 
 
-                If IsDBNull(ds_seikyu.Tables(RS).Rows(0)("売掛残高")) Then
+                If IsDBNull(ds_seikyu.Tables(RS).Rows(0)("買掛残高")) Then
                     '請求なし
-                    DgvCymnhd.Rows(i).Cells("売掛請求登録").Value = ""
-                    DgvCymnhd.Rows(i).Cells("入金登録").Value = ""
+                    DgvCymnhd.Rows(i).Cells("買掛登録").Value = ""
+                    DgvCymnhd.Rows(i).Cells("支払登録").Value = ""
                 Else
-                    If ds.Tables(RS).Rows(i)("見積金額") > ds_seikyu.Tables(RS).Rows(0)("請求金額計") Then
-                        DgvCymnhd.Rows(i).Cells("売掛請求登録").Value = "△"
+                    If ds.Tables(RS).Rows(i)("仕入金額") > ds_seikyu.Tables(RS).Rows(0)("買掛金額計") Then
+                        DgvCymnhd.Rows(i).Cells("買掛登録").Value = "△"
                     Else
-                        DgvCymnhd.Rows(i).Cells("売掛請求登録").Value = "〇"
+                        DgvCymnhd.Rows(i).Cells("買掛登録").Value = "〇"
                     End If
 
-
-                    If ds_seikyu.Tables(RS).Rows(0)("売掛残高") = 0 Then
-                        '入金済み
-                        DgvCymnhd.Rows(i).Cells("入金登録").Value = "〇"
-                    ElseIf ds_seikyu.Tables(RS).Rows(0)("入金額計") > 0 AndAlso ds_seikyu.Tables(RS).Rows(0)("売掛残高") > 0 Then
-                        '一部
-                        DgvCymnhd.Rows(i).Cells("入金登録").Value = "△"
-                    Else
-                        '請求だけ
-                        DgvCymnhd.Rows(i).Cells("入金登録").Value = ""
+                    If ds_seikyu.Tables(RS).Rows(0)("買掛残高") = 0 Then
+                        '支払済み
+                        If DgvCymnhd.Rows(i).Cells("買掛登録").Value = "△" Then
+                            '買掛登録が途中であれば支払も途中
+                            DgvCymnhd.Rows(i).Cells("支払登録").Value = "△"
+                        Else
+                            DgvCymnhd.Rows(i).Cells("支払登録").Value = "〇"
+                        End If
+                    ElseIf rmNullDecimal(ds_seikyu.Tables(RS).Rows(0)("支払金額計")) > 0 AndAlso ds_seikyu.Tables(RS).Rows(0)("買掛残高") > 0 Then
+                            '一部
+                            DgvCymnhd.Rows(i).Cells("支払登録").Value = "△"
+                        Else
+                            '買掛登録だけ
+                            DgvCymnhd.Rows(i).Cells("支払登録").Value = ""
                     End If
-
                 End If
 
                 ds_seikyu = Nothing
 
             Next
 
+            DgvCymnhd.Columns("発注日").DefaultCellStyle.Format = "d"
             DgvCymnhd.Columns("受注日").DefaultCellStyle.Format = "d"
-            DgvCymnhd.Columns("見積日").DefaultCellStyle.Format = "d"
 
             '中央寄せ
-            DgvCymnhd.Columns("売上登録").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-            DgvCymnhd.Columns("出庫登録").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-            DgvCymnhd.Columns("売掛請求登録").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-            DgvCymnhd.Columns("入金登録").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            DgvCymnhd.Columns("仕入登録").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            DgvCymnhd.Columns("入庫登録").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            DgvCymnhd.Columns("買掛登録").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            DgvCymnhd.Columns("支払登録").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
 
 
             ds = Nothing
@@ -421,6 +425,7 @@ Public Class OrderProgress
     End Sub
 
 
+
     '抽出条件取得
     Private Function viewSearchConditions() As String
         Dim Sql As String = ""
@@ -442,67 +447,67 @@ Public Class OrderProgress
 
         If customerName <> Nothing Then
             Sql += " AND "
-            Sql += " t10.得意先名 ILIKE '%" & customerName & "%' "
+            Sql += " t20.得意先名 ILIKE '%" & customerName & "%' "
         End If
 
         If customerAddress <> Nothing Then
             Sql += " AND "
-            Sql += " t10.得意先住所 ILIKE '%" & customerAddress & "%' "
+            Sql += " t20.得意先住所 ILIKE '%" & customerAddress & "%' "
         End If
 
         If customerTel <> Nothing Then
             Sql += " AND "
-            Sql += " t10.得意先電話番号 ILIKE '%" & customerTel & "%' "
+            Sql += " t20.得意先電話番号 ILIKE '%" & customerTel & "%' "
         End If
 
         If customerCode <> Nothing Then
             Sql += " AND "
-            Sql += " t10.得意先コード ILIKE '%" & customerCode & "%' "
+            Sql += " t20.得意先コード ILIKE '%" & customerCode & "%' "
         End If
 
         If sinceDate <> Nothing Then
             Sql += " AND "
-            Sql += " t10.受注日 >= '" & sinceDate & "'"
+            Sql += " t20.発注日 >= '" & sinceDate & "'"
         End If
         If untilDate <> Nothing Then
             Sql += " AND "
-            Sql += " t10.受注日 <= '" & untilDate & "'"
+            Sql += " t20.発注日 <= '" & untilDate & "'"
         End If
 
         If sinceNum <> Nothing Then
             Sql += " AND "
-            Sql += " t11.受注番号 ILIKE '%" & sinceNum & "%' "
+            Sql += " t20.発注番号 ILIKE '%" & sinceNum & "%' "
         End If
 
         If salesName <> Nothing Then
             Sql += " AND "
-            Sql += " t10.営業担当者 ILIKE '%" & salesName & "%' "
+            Sql += " t20.営業担当者 ILIKE '%" & salesName & "%' "
         End If
 
         If customerPO <> Nothing Then
             Sql += " AND "
-            Sql += " t10.客先番号 ILIKE '%" & customerPO & "%' "
+            Sql += " t20.客先番号 ILIKE '%" & customerPO & "%' "
         End If
 
         If Maker <> Nothing Then
             Sql += " AND "
-            Sql += " t11.メーカー ILIKE '%" & Maker & "%' "
+            Sql += " t21.メーカー ILIKE '%" & Maker & "%' "
         End If
 
         If itemName <> Nothing Then
             Sql += " AND "
-            Sql += " t11.品名 ILIKE '%" & itemName & "%' "
+            Sql += " t21.品名 ILIKE '%" & itemName & "%' "
         End If
 
         If spec <> Nothing Then
             Sql += " AND "
-            Sql += " t11.型式 ILIKE '%" & spec & "%' "
+            Sql += " t21.型式 ILIKE '%" & spec & "%' "
         End If
 
         '取消データを含めない場合
         If ChkCancelData.Checked = False Then
             Sql += " AND "
-            Sql += " t10.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+            Sql += " t20.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
         End If
 
         Return Sql
@@ -611,4 +616,25 @@ Public Class OrderProgress
         setBaseCurrency = ds.Tables(RS).Rows(0)("通貨コード")
 
     End Function
+
+    'NothingをDecimalに置換
+    Private Function rmNullDecimal(ByVal prmField As Object) As Decimal
+        If prmField Is Nothing Then
+            rmNullDecimal = 0
+            Exit Function
+        End If
+        If prmField Is DBNull.Value Then
+            rmNullDecimal = 0
+            Exit Function
+        End If
+
+        If Not IsNumeric(prmField) Then
+            rmNullDecimal = 0
+            Exit Function
+        End If
+
+        rmNullDecimal = prmField
+
+    End Function
+
 End Class
