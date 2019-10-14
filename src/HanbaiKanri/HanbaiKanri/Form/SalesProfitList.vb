@@ -248,7 +248,6 @@ Public Class SalesProfitList
                     cur = curds.Tables(RS).Rows(0)("通貨コード")
                 End If
 
-                'Sql += ",t11.見積単価,t11.見積金額,t11.見積単価_外貨,t11.見積金額_外貨"
 
                 DgvList.Rows(i).Cells("販売通貨").Value = cur
                 DgvList.Rows(i).Cells("受注単価_原通貨").Value = ds.Tables(RS).Rows(i)("見積単価")
@@ -511,7 +510,6 @@ Public Class SalesProfitList
 
 #Region "行タイトル"
 
-
         '言語の判定
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then  '英語 
 
@@ -705,6 +703,8 @@ Public Class SalesProfitList
             sheet.PageSetup.CenterHeader = strSelectYear & "/" & strSelectMonth
             sheet.PageSetup.RightHeader = "OutputDate：" & DateTime.Now.ToShortDateString
 
+
+#Region "タイトル"
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 sheet.PageSetup.LeftHeader = "SalesProfitList（Monthly）"
                 sheet.PageSetup.CenterHeader = strSelectMonth & "/" & strSelectYear
@@ -722,29 +722,67 @@ Public Class SalesProfitList
                 sheet.Range("K1").Value = "GrossMargin"
                 sheet.Range("L1").Value = "GrossMarginRate"
             End If
+#End Region
 
             Dim cellRowIndex As Integer = 1
             For i As Integer = 0 To DgvList.RowCount - 1
                 cellRowIndex += 1
                 sheet.Rows(cellRowIndex).Insert
-                sheet.Range("A" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("売上番号").Value '売上番号
-                sheet.Range("B" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("売上日").Value '売上日
-                sheet.Range("C" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("得意先名").Value '得意先
-                sheet.Range("D" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("売上計").Value) '売上計
-                sheet.Range("E" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("ＶＡＴ").Value) 'VAT
-                sheet.Range("F" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("売上金額計").Value) '売上 + VAT
-                sheet.Range("G" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("間接費").Value) '間接費
-                sheet.Range("H" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("売上原価計").Value) '売上原価計
-                sheet.Range("I" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("粗利").Value) '粗利
-                sheet.Range("J" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("粗利率").Value) '粗利率
 
-                sheet.Range("D" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight
-                sheet.Range("E" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight
-                sheet.Range("F" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight
-                sheet.Range("G" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight
-                sheet.Range("H" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight
-                sheet.Range("I" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight
-                sheet.Range("J" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight
+
+                sheet.Range("A" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("受注番号").Value '受注番号
+                sheet.Range("B" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("受注番号枝番").Value '受注番号枝番
+                sheet.Range("C" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("受注行番号").Value '行番号
+
+                sheet.Range("D" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("売上番号").Value '売上番号
+                sheet.Range("E" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("売上番号枝番").Value '売上番号枝番
+
+                sheet.Range("F" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("得意先コード").Value '得意先コード
+                sheet.Range("G" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("得意先名").Value '得意先名
+
+                sheet.Range("H" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("メーカー").Value 'メーカー
+                sheet.Range("I" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("品名").Value '品名
+                sheet.Range("J" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("型式").Value '型式
+
+                sheet.Range("K" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("販売通貨").Value '販売通貨
+                sheet.Range("L" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("受注単価_原通貨").Value) '受注単価_原通貨
+                sheet.Range("M" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("受注単価_IDR").Value) '受注単価_IDR
+                sheet.Range("N" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("受注数量").Value) '受注数量
+                sheet.Range("O" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("単位").Value '単位
+
+                sheet.Range("P" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("受注金額_原通貨").Value) '受注金額_原通貨
+                sheet.Range("Q" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("受注金額_IDR").Value) '受注金額_IDR
+
+
+                sheet.Range("R" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("発注番号").Value '発注番号
+                sheet.Range("S" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("発注番号枝番").Value '発注番号枝番
+                sheet.Range("T" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("発注行番号").Value '発注行番号
+
+                sheet.Range("U" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("仕入番号").Value '仕入番号
+                sheet.Range("V" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("仕入行番号").Value '仕入行番号
+                sheet.Range("W" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("仕入区分").Value '仕入区分
+
+                sheet.Range("X" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("仕入先コード").Value '仕入先コード
+                sheet.Range("Y" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("仕入先名").Value '仕入先名
+
+
+                sheet.Range("Z" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("仕入通貨").Value '仕入通貨
+                sheet.Range("AA" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("仕入単価_原通貨").Value) '仕入単価_原通貨
+                sheet.Range("AB" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("仕入単価_IDR").Value) '仕入単価_IDR
+                sheet.Range("AC" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("仕入原価_原通貨").Value) '仕入原価_原通貨
+                sheet.Range("AA" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("仕入原価_IDR").Value) '仕入原価_IDR
+
+                sheet.Range("AD" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("間接費").Value) '間接費
+                sheet.Range("AE" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("利益").Value) '利益
+                sheet.Range("AF" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("利益率").Value) '利益率
+
+
+                'sheet.Range("L" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight
+                'sheet.Range("M" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight
+                'sheet.Range("N" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight
+                'sheet.Range("P" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight
+                'sheet.Range("Q" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight
+
             Next
 
             ' 行7全体のオブジェクトを作成
@@ -752,12 +790,12 @@ Public Class SalesProfitList
             xlRng = xlRngTmp(cellRowIndex)
 
             '最後に合計行の追加
-            cellRowIndex += 1
-            sheet.Range("D" & cellRowIndex.ToString).Value = CDec(TxtSalesAmount.Text) '売上計
-            sheet.Range("F" & cellRowIndex.ToString).Value = CDec(TxtTotalSalesAmount.Text) '売上 + VAT
-            sheet.Range("H" & cellRowIndex.ToString).Value = CDec(TxtSalesCostAmount.Text) '売上原価計
-            sheet.Range("I" & cellRowIndex.ToString).Value = CDec(TxtGrossMargin.Text) '粗利
-            sheet.Range("J" & cellRowIndex.ToString).Value = CDec(TxtGrossMarginRate.Text) '粗利率
+            cellRowIndex += 2
+            'sheet.Range("D" & cellRowIndex.ToString).Value = CDec(TxtSalesAmount.Text) '売上計
+            'sheet.Range("F" & cellRowIndex.ToString).Value = CDec(TxtSalesCostAmount.Text) '売上原価計
+            'sheet.Range("H" & cellRowIndex.ToString).Value = CDec(TxtGrossMargin.Text) '粗利
+            'sheet.Range("I" & cellRowIndex.ToString).Value = CDec(TxtGrossMarginRate.Text) '粗利率
+
 
             ' 境界線オブジェクトを作成 →7行目の下部に罫線を描画する
             xlBorders = xlRngTmp.Borders
@@ -797,9 +835,146 @@ Public Class SalesProfitList
 
     End Sub
 
+
+    'BK
+    'Private Sub outputExcel()
+
+    '    '定義
+    '    Dim app As Excel.Application = Nothing
+    '    Dim book As Excel.Workbook = Nothing
+    '    Dim sheet As Excel.Worksheet = Nothing
+
+    '    Dim strSelectYear As String = cmbYear.SelectedValue.ToString()
+    '    Dim strSelectMonth As String = cmbMonth.SelectedValue.ToString()
+
+    '    ' セル
+    '    Dim xlRngTmp As Range = Nothing
+    '    Dim xlRng As Range = Nothing
+
+    '    ' セル境界線（枠）
+    '    Dim xlBorders As Borders = Nothing
+    '    Dim xlBorder As Border = Nothing
+
+    '    'カーソルをビジー状態にする
+    '    Cursor.Current = Cursors.WaitCursor
+
+    '    Try
+    '        '雛形パス
+    '        Dim sHinaPath As String = StartUp._iniVal.BaseXlsPath
+    '        '雛形ファイル名
+    '        Dim sHinaFile As String = sHinaPath & "\" & "SalesProfitList.xlsx"
+    '        '出力先パス
+    '        Dim sOutPath As String = StartUp._iniVal.OutXlsPath
+    '        '出力ファイル名
+    '        Dim sOutFile As String = sOutPath & "\SalesProfitList_" & DateTime.Now.ToString("yyyyMMddHHmm") & ".xlsx"
+
+    '        app = New Excel.Application()
+    '        book = app.Workbooks.Add(sHinaFile)  'テンプレート
+    '        sheet = CType(book.Worksheets(1), Excel.Worksheet)
+
+    '        sheet.PageSetup.LeftHeader = "売上・売上原価・利益・利益率一覧表（月次）"
+    '        sheet.PageSetup.CenterHeader = strSelectYear & "/" & strSelectMonth
+    '        sheet.PageSetup.RightHeader = "OutputDate：" & DateTime.Now.ToShortDateString
+
+    '        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+    '            sheet.PageSetup.LeftHeader = "SalesProfitList（Monthly）"
+    '            sheet.PageSetup.CenterHeader = strSelectMonth & "/" & strSelectYear
+
+    '            sheet.Range("A1").Value = "SalesNumber"
+    '            sheet.Range("B1").Value = "SalesDate"
+    '            sheet.Range("C1").Value = "CustomerName"
+    '            sheet.Range("D1").Value = "SalesAmount"
+    '            sheet.Range("E1").Value = "ＶＡＴ"
+    '            sheet.Range("F1").Value = "CustomerNumber"
+    '            sheet.Range("G1").Value = "SalesPersonInCharge"
+    '            sheet.Range("H1").Value = "TotalSalesAmount"
+    '            sheet.Range("I1").Value = "Overhead"
+    '            sheet.Range("J1").Value = "SalesCost"
+    '            sheet.Range("K1").Value = "GrossMargin"
+    '            sheet.Range("L1").Value = "GrossMarginRate"
+    '        End If
+
+    '        Dim cellRowIndex As Integer = 1
+    '        For i As Integer = 0 To DgvList.RowCount - 1
+    '            cellRowIndex += 1
+    '            sheet.Rows(cellRowIndex).Insert
+    '            sheet.Range("A" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("売上番号").Value '売上番号
+    '            sheet.Range("B" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("売上日").Value '売上日
+    '            sheet.Range("C" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("得意先名").Value '得意先
+    '            sheet.Range("D" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("売上計").Value) '売上計
+    '            sheet.Range("E" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("ＶＡＴ").Value) 'VAT
+    '            sheet.Range("F" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("売上金額計").Value) '売上 + VAT
+    '            sheet.Range("G" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("間接費").Value) '間接費
+    '            sheet.Range("H" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("売上原価計").Value) '売上原価計
+    '            sheet.Range("I" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("粗利").Value) '粗利
+    '            sheet.Range("J" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("粗利率").Value) '粗利率
+
+    '            sheet.Range("D" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight
+    '            sheet.Range("E" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight
+    '            sheet.Range("F" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight
+    '            sheet.Range("G" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight
+    '            sheet.Range("H" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight
+    '            sheet.Range("I" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight
+    '            sheet.Range("J" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight
+    '        Next
+
+    '        ' 行7全体のオブジェクトを作成
+    '        xlRngTmp = sheet.Rows
+    '        xlRng = xlRngTmp(cellRowIndex)
+
+    '        '最後に合計行の追加
+    '        cellRowIndex += 1
+    '        sheet.Range("D" & cellRowIndex.ToString).Value = CDec(TxtSalesAmount.Text) '売上計
+    '        sheet.Range("F" & cellRowIndex.ToString).Value = CDec(TxtTotalSalesAmount.Text) '売上 + VAT
+    '        sheet.Range("H" & cellRowIndex.ToString).Value = CDec(TxtSalesCostAmount.Text) '売上原価計
+    '        sheet.Range("I" & cellRowIndex.ToString).Value = CDec(TxtGrossMargin.Text) '粗利
+    '        sheet.Range("J" & cellRowIndex.ToString).Value = CDec(TxtGrossMarginRate.Text) '粗利率
+
+    '        ' 境界線オブジェクトを作成 →7行目の下部に罫線を描画する
+    '        xlBorders = xlRngTmp.Borders
+    '        xlBorder = xlBorders(XlBordersIndex.xlEdgeBottom)
+    '        xlBorder.LineStyle = XlLineStyle.xlContinuous
+
+    '        app.DisplayAlerts = False 'Microsoft Excelのアラート一旦無効化
+
+    '        Dim excelChk As Boolean = excelOutput(sOutFile)
+    '        If excelChk = False Then
+    '            Exit Sub
+    '        End If
+    '        book.SaveAs(sOutFile) '書き込み実行
+
+    '        app.DisplayAlerts = True 'アラート無効化を解除
+
+    '        'カーソルをビジー状態から元に戻す
+    '        Cursor.Current = Cursors.Default
+
+    '        app.Visible = True
+    '        _msgHd.dspMSG("CreateExcel", frmC01F10_Login.loginValue.Language)
+
+    '    Catch ex As Exception
+    '        Throw ex
+
+    '        'カーソルをビジー状態から元に戻す
+    '        Cursor.Current = Cursors.Default
+
+    '    Finally
+    '        'app.Quit()
+    '        'Marshal.ReleaseComObject(sheet)
+    '        'Marshal.ReleaseComObject(book)
+    '        'Marshal.ReleaseComObject(app)
+
+    '    End Try
+
+
+    'End Sub
+
+
     'param1：String テーブル名
     'param2：String 詳細条件
     'Return: DataSet
+
+
+
     Private Function getDsData(ByVal tableName As String, Optional ByRef txtParam As String = "") As DataSet
         Dim reccnt As Integer = 0 'DB用（デフォルト）
         Dim Sql As String = ""
