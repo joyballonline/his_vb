@@ -88,41 +88,19 @@ Public Class SalesProfitList
 
             LblMode.Text = SalesStatus & " Mode"
 
-            DgvList.Columns("売上番号").HeaderText = "SalesNumber"
-            DgvList.Columns("売上日").HeaderText = "SalesDate"
-            DgvList.Columns("得意先名").HeaderText = "CustomerName"
-            DgvList.Columns("客先番号").HeaderText = "CustomerNumber"
-            DgvList.Columns("営業担当者").HeaderText = "SalesPersonInCharge"
-            DgvList.Columns("売上計").HeaderText = "SalesAmount"
-            DgvList.Columns("ＶＡＴ").HeaderText = "ＶＡＴ"
-            DgvList.Columns("売上金額計").HeaderText = "SalesAmount+ＶＡＴ"
-            DgvList.Columns("間接費").HeaderText = "Overhead"
-            DgvList.Columns("売上原価計").HeaderText = "SalesCost"
-            DgvList.Columns("粗利").HeaderText = "GrossMargin"
-            DgvList.Columns("粗利率").HeaderText = "GrossMarginRate"
-
             Label8.Text = "SalesDate"
             BtnExcelOutput.Text = "ExcelOutput"
             BtnBack.Text = "Back"
             LblMonth.Text = "Month"
             LblYear.Text = "Year"
 
-            LblSalesAmount.Text = "SalesAmount"
+            LblSalesAmount.Text = "OrderAmount"
             LblTotalSalesAmount.Text = "TotalSalesAmount"
-            LblSalesCostAmount.Text = "SalesCost"
-            LblGrossMargin.Text = "GrossMargin"
-            LblGrossMarginRate.Text = "GrossMarginRate"
+            LblSalesCostAmount.Text = "PurchaseAmount"
+            LblGrossMargin.Text = "ProfitMargin"
+            LblGrossMarginRate.Text = "ProfitMarginRate"
 
         End If
-
-        '数字形式
-        'DgvList.Columns("売上計").DefaultCellStyle.Format = "N2"
-        'DgvList.Columns("ＶＡＴ").DefaultCellStyle.Format = "N2"
-        'DgvList.Columns("売上金額計").DefaultCellStyle.Format = "N2"
-        'DgvList.Columns("間接費").DefaultCellStyle.Format = "N2"
-        'DgvList.Columns("売上原価計").DefaultCellStyle.Format = "N2"
-        'DgvList.Columns("粗利").DefaultCellStyle.Format = "N2"
-        'DgvList.Columns("粗利率").DefaultCellStyle.Format = "N1"
 
 
         setComboBox(cmbYear) 'コンボボックスに年を設定
@@ -131,6 +109,9 @@ Public Class SalesProfitList
         cmbMonth.SelectedValue = Integer.Parse(Format(System.DateTime.Now, "MM"))
 
         getList() '一覧表示
+
+
+        msetLine()  '行の設定
 
     End Sub
 
@@ -162,16 +143,16 @@ Public Class SalesProfitList
 
         Sql += ",t10.得意先コード,t10.得意先名"
         Sql += ",t11.メーカー,t11.品名,t11.型式"
-        Sql += ",t11.通貨,t11.売単価,t11.売上金額,t11.受注数量,t11.単位"
-        Sql += ",t11.レート"
+        Sql += ",t11.通貨,t11.受注数量,t11.単位"
+        Sql += ",t11.見積単価,t11.見積金額,t11.見積単価_外貨,t11.見積金額_外貨"
+        Sql += ",t11.レート,t11.仕入レート"
 
         Sql += ",t11.仕入通貨,t11.仕入値,t11.仕入単価_外貨,t11.仕入原価,t11.間接費"
 
-
         Sql += ",t21.発注番号,t21.発注番号枝番,t21.行番号 as 発注行番号"
 
-        Sql += ",t40.仕入先コード,t40.仕入先名"
-        Sql += ",t41.仕入番号,t41.行番号 as 仕入行番号,t41.仕入区分"
+        Sql += ",t40.仕入先コード,t11.仕入先名"
+        Sql += ",t41.仕入番号,t41.行番号 as 仕入行番号,t11.仕入区分"
 
 
         '受注
@@ -226,9 +207,9 @@ Public Class SalesProfitList
 #End Region
 
 
-        'Try
+        Try
 
-        Dim totalSales As Decimal = 0
+            Dim totalSales As Decimal = 0
             Dim totalSalesAmount As Decimal = 0
             Dim salesUnitPrice As Decimal = 0
             Dim totalArari As Decimal = 0
@@ -236,141 +217,126 @@ Public Class SalesProfitList
 
             Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-        For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
+            For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
 
-            DgvList.Rows.Add()
+                DgvList.Rows.Add()
 
 
 #Region "受注"
 
-            DgvList.Rows(i).Cells("受注番号").Value = ds.Tables(RS).Rows(i)("受注番号")
-            DgvList.Rows(i).Cells("受注番号枝番").Value = ds.Tables(RS).Rows(i)("受注番号枝番")
-            DgvList.Rows(i).Cells("受注行番号").Value = ds.Tables(RS).Rows(i)("行番号")
+                DgvList.Rows(i).Cells("受注番号").Value = ds.Tables(RS).Rows(i)("受注番号")
+                DgvList.Rows(i).Cells("受注番号枝番").Value = ds.Tables(RS).Rows(i)("受注番号枝番")
+                DgvList.Rows(i).Cells("受注行番号").Value = ds.Tables(RS).Rows(i)("行番号")
 
-            DgvList.Rows(i).Cells("売上番号").Value = ds.Tables(RS).Rows(i)("売上番号")
-            DgvList.Rows(i).Cells("売上番号枝番").Value = ds.Tables(RS).Rows(i)("売上番号枝番")
+                DgvList.Rows(i).Cells("売上番号").Value = ds.Tables(RS).Rows(i)("売上番号")
+                DgvList.Rows(i).Cells("売上番号枝番").Value = ds.Tables(RS).Rows(i)("売上番号枝番")
 
-            DgvList.Rows(i).Cells("得意先コード").Value = ds.Tables(RS).Rows(i)("得意先コード")
-            DgvList.Rows(i).Cells("得意先名").Value = ds.Tables(RS).Rows(i)("得意先名")
+                DgvList.Rows(i).Cells("得意先コード").Value = ds.Tables(RS).Rows(i)("得意先コード")
+                DgvList.Rows(i).Cells("得意先名").Value = ds.Tables(RS).Rows(i)("得意先名")
 
-            DgvList.Rows(i).Cells("メーカー").Value = ds.Tables(RS).Rows(i)("メーカー")
-            DgvList.Rows(i).Cells("品名").Value = ds.Tables(RS).Rows(i)("品名")
-            DgvList.Rows(i).Cells("型式").Value = ds.Tables(RS).Rows(i)("型式")
-
-
-            If IsDBNull(ds.Tables(RS).Rows(i)("通貨")) Then
-                cur = vbNullString
-            Else
-                Sql = " and 採番キー = " & ds.Tables(RS).Rows(i)("通貨")
-                curds = getDsData("m25_currency", Sql)
-
-                cur = curds.Tables(RS).Rows(0)("通貨コード")
-            End If
-
-            DgvList.Rows(i).Cells("販売通貨").Value = cur
-            DgvList.Rows(i).Cells("受注単価_原通貨").Value = ds.Tables(RS).Rows(i)("売単価")
-            If rmNullDecimal(ds.Tables(RS).Rows(i)("レート")) = 0 Then
-            Else
-                DgvList.Rows(i).Cells("受注単価_IDR").Value = rmNullDecimal(ds.Tables(RS).Rows(i)("売単価")) / rmNullDecimal(ds.Tables(RS).Rows(i)("レート"))
-            End If
-
-            DgvList.Rows(i).Cells("受注数量").Value = ds.Tables(RS).Rows(i)("受注数量")
-            DgvList.Rows(i).Cells("単位").Value = ds.Tables(RS).Rows(i)("単位")
+                DgvList.Rows(i).Cells("メーカー").Value = ds.Tables(RS).Rows(i)("メーカー")
+                DgvList.Rows(i).Cells("品名").Value = ds.Tables(RS).Rows(i)("品名")
+                DgvList.Rows(i).Cells("型式").Value = ds.Tables(RS).Rows(i)("型式")
 
 
-            DgvList.Rows(i).Cells("受注金額_原通貨").Value = ds.Tables(RS).Rows(i)("売上金額")
-            If rmNullDecimal(ds.Tables(RS).Rows(i)("レート")) = 0 Then
-            Else
-                DgvList.Rows(i).Cells("受注金額_IDR").Value = rmNullDecimal(ds.Tables(RS).Rows(i)("売上金額")) / rmNullDecimal(ds.Tables(RS).Rows(i)("レート"))
-            End If
+                If IsDBNull(ds.Tables(RS).Rows(i)("通貨")) Then
+                    cur = vbNullString
+                Else
+                    Sql = " and 採番キー = " & ds.Tables(RS).Rows(i)("通貨")
+                    curds = getDsData("m25_currency", Sql)
+
+                    cur = curds.Tables(RS).Rows(0)("通貨コード")
+                End If
+
+                'Sql += ",t11.見積単価,t11.見積金額,t11.見積単価_外貨,t11.見積金額_外貨"
+
+                DgvList.Rows(i).Cells("販売通貨").Value = cur
+                DgvList.Rows(i).Cells("受注単価_原通貨").Value = ds.Tables(RS).Rows(i)("見積単価")
+                If rmNullDecimal(ds.Tables(RS).Rows(i)("レート")) = 0 Then
+                Else
+                    DgvList.Rows(i).Cells("受注単価_IDR").Value = rmNullDecimal(ds.Tables(RS).Rows(i)("見積単価_外貨"))
+                End If
+
+                DgvList.Rows(i).Cells("受注数量").Value = ds.Tables(RS).Rows(i)("受注数量")
+                DgvList.Rows(i).Cells("単位").Value = ds.Tables(RS).Rows(i)("単位")
+
+
+                DgvList.Rows(i).Cells("受注金額_原通貨").Value = ds.Tables(RS).Rows(i)("見積金額")
+                If rmNullDecimal(ds.Tables(RS).Rows(i)("レート")) = 0 Then
+                Else
+                    DgvList.Rows(i).Cells("受注金額_IDR").Value = rmNullDecimal(ds.Tables(RS).Rows(i)("見積金額_外貨"))
+                End If
+
+                totalSales += DgvList.Rows(i).Cells("受注金額_IDR").Value
 
 #End Region
 
 
 #Region "発注"
 
-            DgvList.Rows(i).Cells("発注番号").Value = ds.Tables(RS).Rows(i)("発注番号")
-            DgvList.Rows(i).Cells("発注番号枝番").Value = ds.Tables(RS).Rows(i)("発注番号枝番")
-            DgvList.Rows(i).Cells("発注行番号").Value = ds.Tables(RS).Rows(i)("発注行番号")
+                DgvList.Rows(i).Cells("発注番号").Value = ds.Tables(RS).Rows(i)("発注番号")
+                DgvList.Rows(i).Cells("発注番号枝番").Value = ds.Tables(RS).Rows(i)("発注番号枝番")
+                DgvList.Rows(i).Cells("発注行番号").Value = ds.Tables(RS).Rows(i)("発注行番号")
 
 
-            DgvList.Rows(i).Cells("仕入番号").Value = ds.Tables(RS).Rows(i)("仕入番号")
-            DgvList.Rows(i).Cells("仕入行番号").Value = ds.Tables(RS).Rows(i)("仕入行番号")
-            DgvList.Rows(i).Cells("仕入区分").Value = ds.Tables(RS).Rows(i)("仕入区分")
-
-            DgvList.Rows(i).Cells("仕入先コード").Value = ds.Tables(RS).Rows(i)("仕入先コード")
-            DgvList.Rows(i).Cells("仕入先名").Value = ds.Tables(RS).Rows(i)("仕入先名")
+                DgvList.Rows(i).Cells("仕入番号").Value = ds.Tables(RS).Rows(i)("仕入番号")
+                DgvList.Rows(i).Cells("仕入行番号").Value = ds.Tables(RS).Rows(i)("仕入行番号")
 
 
-            If IsDBNull(ds.Tables(RS).Rows(i)("仕入通貨")) Then
-                cur = vbNullString
-            Else
-                Sql = " and 採番キー = " & ds.Tables(RS).Rows(i)("仕入通貨")
-                curds = getDsData("m25_currency", Sql)
+                'リードタイムのリストを汎用マスタから取得
+                If rmNullDecimal(ds.Tables(RS).Rows(i)("仕入区分")) = 0 Then
+                Else
+                    Dim dsHanyou As DataSet = getDsHanyoData(CommonConst.FIXED_KEY_PURCHASING_CLASS, ds.Tables(RS).Rows(i)("仕入区分"))
+                    If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+                        DgvList.Rows(i).Cells("仕入区分").Value = dsHanyou.Tables(RS).Rows(0)("文字２")
+                    Else
+                        DgvList.Rows(i).Cells("仕入区分").Value = dsHanyou.Tables(RS).Rows(0)("文字１")
+                    End If
+                End If
 
-                cur = curds.Tables(RS).Rows(0)("通貨コード")
-            End If
 
-            DgvList.Rows(i).Cells("仕入通貨").Value = cur
+                DgvList.Rows(i).Cells("仕入先コード").Value = ds.Tables(RS).Rows(i)("仕入先コード")
+                DgvList.Rows(i).Cells("仕入先名").Value = ds.Tables(RS).Rows(i)("仕入先名")
 
-            DgvList.Rows(i).Cells("仕入単価_原通貨").Value = ds.Tables(RS).Rows(i)("仕入値")
-            DgvList.Rows(i).Cells("仕入単価_IDR").Value = ds.Tables(RS).Rows(i)("仕入単価_外貨")
 
-            DgvList.Rows(i).Cells("仕入原価_原通貨").Value = ds.Tables(RS).Rows(i)("仕入原価")
-            DgvList.Rows(i).Cells("仕入原価_IDR").Value = ds.Tables(RS).Rows(i)("仕入単価_外貨") * ds.Tables(RS).Rows(i)("受注数量")
+                If IsDBNull(ds.Tables(RS).Rows(i)("仕入通貨")) Then
+                    cur = vbNullString
+                Else
+                    Sql = " and 採番キー = " & ds.Tables(RS).Rows(i)("仕入通貨")
+                    curds = getDsData("m25_currency", Sql)
 
-            DgvList.Rows(i).Cells("間接費").Value = ds.Tables(RS).Rows(i)("間接費")
+                    cur = curds.Tables(RS).Rows(0)("通貨コード")
+                End If
 
+                DgvList.Rows(i).Cells("仕入通貨").Value = cur
+
+                DgvList.Rows(i).Cells("仕入単価_原通貨").Value = ds.Tables(RS).Rows(i)("仕入値")
+                DgvList.Rows(i).Cells("仕入単価_IDR").Value = ds.Tables(RS).Rows(i)("仕入単価_外貨")
+
+                DgvList.Rows(i).Cells("仕入原価_原通貨").Value = ds.Tables(RS).Rows(i)("仕入原価")
+                DgvList.Rows(i).Cells("仕入原価_IDR").Value = ds.Tables(RS).Rows(i)("仕入単価_外貨") * ds.Tables(RS).Rows(i)("受注数量")
+
+                DgvList.Rows(i).Cells("間接費").Value = ds.Tables(RS).Rows(i)("間接費") * ds.Tables(RS).Rows(i)("仕入レート")
+
+                DgvList.Rows(i).Cells("利益").Value = DgvList.Rows(i).Cells("受注金額_IDR").Value - DgvList.Rows(i).Cells("仕入原価_IDR").Value - DgvList.Rows(i).Cells("間接費").Value
+
+                If DgvList.Rows(i).Cells("受注金額_IDR").Value = 0 Then
+                Else
+                    DgvList.Rows(i).Cells("利益率").Value = DgvList.Rows(i).Cells("利益").Value / DgvList.Rows(i).Cells("受注金額_IDR").Value * 100
+                End If
+
+                salesUnitPrice += DgvList.Rows(i).Cells("仕入原価_IDR").Value + DgvList.Rows(i).Cells("間接費").Value
 #End Region
 
 
-        Next
-
-
-
-#Region "形式"
-
-
-        DgvList.Columns("販売通貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-        DgvList.Columns("仕入通貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-
-
-        '右寄せ
-        DgvList.Columns("受注単価_原通貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        DgvList.Columns("受注単価_IDR").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        DgvList.Columns("受注数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-
-        DgvList.Columns("受注金額_原通貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        DgvList.Columns("受注金額_IDR").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-
-        DgvList.Columns("仕入単価_原通貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        DgvList.Columns("仕入単価_IDR").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-
-        DgvList.Columns("仕入原価_原通貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        DgvList.Columns("仕入原価_IDR").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-
-        DgvList.Columns("間接費").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-
-
-
-        '数字形式
-        DgvList.Columns("受注単価_原通貨").DefaultCellStyle.Format = "N2"
-        DgvList.Columns("受注単価_IDR").DefaultCellStyle.Format = "N2"
-        DgvList.Columns("受注数量").DefaultCellStyle.Format = "N2"
-        DgvList.Columns("受注金額_原通貨").DefaultCellStyle.Format = "N2"
-        DgvList.Columns("受注金額_IDR").DefaultCellStyle.Format = "N2"
-
-        DgvList.Columns("仕入単価_原通貨").DefaultCellStyle.Format = "N2"
-        DgvList.Columns("仕入単価_IDR").DefaultCellStyle.Format = "N2"
-        DgvList.Columns("仕入原価_原通貨").DefaultCellStyle.Format = "N2"
-        DgvList.Columns("仕入原価_IDR").DefaultCellStyle.Format = "N2"
-        DgvList.Columns("間接費").DefaultCellStyle.Format = "N2"
-
-#End Region
+            Next
 
 
 #Region "フッダー"
-        If totalArari <> 0 And totalSalesAmount <> 0 Then
+
+            totalArari = totalSales - salesUnitPrice
+
+            If totalArari <> 0 And salesUnitPrice <> 0 Then
                 totalArariRate = (totalArari / totalSales) * 100
             Else
                 totalArariRate = 0
@@ -379,25 +345,25 @@ Public Class SalesProfitList
             '売上計
             TxtSalesAmount.Text = IIf(
                 totalSales <> 0,
-                Format(totalSales, "#,##0"),
+                Format(totalSales, "#,##0.00"),
                 0
             )
             '売上 + VAT
             TxtTotalSalesAmount.Text = IIf(
                 totalSalesAmount <> 0,
-                Format(totalSalesAmount, "#,##0"),
+                Format(totalSalesAmount, "#,##0.00"),
                 0
             )
             '売上原価
             TxtSalesCostAmount.Text = IIf(
                 salesUnitPrice <> 0,
-                Format(salesUnitPrice, "#,##0"),
+                Format(salesUnitPrice, "#,##0.00"),
                 0
             )
             '粗利額
             TxtGrossMargin.Text = IIf(
                 totalArari <> 0,
-                Format(totalArari, "#,##0"),
+                Format(totalArari, "#,##0.00"),
                 0
             )
             '粗利率
@@ -409,13 +375,14 @@ Public Class SalesProfitList
 
 #End Region
 
-        'Catch ue As UsrDefException
-        '    ue.dspMsg()
-        '    Throw ue
-        'Catch ex As Exception
-        '    'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-        '    Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
-        'End Try
+
+        Catch ue As UsrDefException
+            ue.dspMsg()
+            Throw ue
+        Catch ex As Exception
+            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
+            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
+        End Try
 
     End Sub
 
@@ -538,9 +505,143 @@ Public Class SalesProfitList
 
     'End Sub
 
+
+    Private Sub msetLine()
+
+
+#Region "行タイトル"
+
+
+        '言語の判定
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then  '英語 
+
+            DgvList.Columns("受注番号").HeaderText = "OrderNumber"
+            DgvList.Columns("受注番号枝番").HeaderText = "OrderVer"
+            DgvList.Columns("受注行番号").HeaderText = "OrderNo"
+
+            DgvList.Columns("売上番号").HeaderText = "SalesNumber"
+            DgvList.Columns("売上番号枝番").HeaderText = "SalesVer"
+
+            DgvList.Columns("得意先コード").HeaderText = "CustomerCode"
+            DgvList.Columns("得意先名").HeaderText = "CustomerName"
+
+            DgvList.Columns("メーカー").HeaderText = "Maker"
+            DgvList.Columns("品名").HeaderText = "ItemName"
+            DgvList.Columns("型式").HeaderText = "Model"
+
+            DgvList.Columns("販売通貨").HeaderText = "Currency"
+            DgvList.Columns("受注単価_原通貨").HeaderText = "OrderUnitPrice" & vbCrLf & "(OrignalCurrency)"
+            DgvList.Columns("受注単価_IDR").HeaderText = "OrderUnitPrice(IDR)" & vbCrLf & "a"
+
+            DgvList.Columns("受注数量").HeaderText = "OrderQuantity" & vbCrLf & "b"
+            DgvList.Columns("単位").HeaderText = "Unit"
+            DgvList.Columns("受注金額_原通貨").HeaderText = "OrderAmount" & vbCrLf & "(OrignalCurrency)"
+            DgvList.Columns("受注金額_IDR").HeaderText = "OrderAmount(IDR)" & vbCrLf & "c=a*b"
+
+            DgvList.Columns("発注番号").HeaderText = "PurchaseOrderNumber"
+            DgvList.Columns("発注番号枝番").HeaderText = "PurchaseOrderVer"
+            DgvList.Columns("発注行番号").HeaderText = "PurchaseNo"
+
+
+            DgvList.Columns("仕入番号").HeaderText = "PurchaseNumber"
+            DgvList.Columns("仕入行番号").HeaderText = "PurchaseNo"
+            DgvList.Columns("仕入区分").HeaderText = "PurchasingClassification"
+            DgvList.Columns("仕入先コード").HeaderText = "SupplierCode"
+            DgvList.Columns("仕入先名").HeaderText = "SupplierName"
+
+            DgvList.Columns("仕入通貨").HeaderText = "Currency"
+            DgvList.Columns("仕入単価_原通貨").HeaderText = "PurchaseUnitPrice" & vbCrLf & "(OrignalCurrency)"
+            DgvList.Columns("仕入単価_IDR").HeaderText = "PurchaseUnitPrice(IDR)" & vbCrLf & "d"
+            DgvList.Columns("仕入原価_原通貨").HeaderText = "PurchaseCost" & vbCrLf & "(OrignalCurrency)"
+            DgvList.Columns("仕入原価_IDR").HeaderText = "PurchaseCost(IDR)" & vbCrLf & "e=b*d"
+            DgvList.Columns("間接費").HeaderText = "Overhead" & vbCrLf & "f"
+            DgvList.Columns("利益").HeaderText = "ProfitMargin" & vbCrLf & "g=c-e-f"
+            DgvList.Columns("利益率").HeaderText = "ProfitMarginRate" & vbCrLf & "h=g/c"
+
+
+        Else  ' 日本語
+
+            DgvList.Columns("受注単価_原通貨").HeaderText = "受注単価" & vbCrLf & "(原通貨)"
+            DgvList.Columns("受注単価_IDR").HeaderText = "受注単価(IDR)" & vbCrLf & "a"
+            DgvList.Columns("受注数量").HeaderText = "受注数量" & vbCrLf & "b"
+            DgvList.Columns("受注金額_原通貨").HeaderText = "受注金額" & vbCrLf & "(原通貨)"
+            DgvList.Columns("受注金額_IDR").HeaderText = "受注金額(IDR)" & vbCrLf & "c=a*b"
+
+            DgvList.Columns("仕入単価_原通貨").HeaderText = "仕入単価" & vbCrLf & "(原通貨)"
+            DgvList.Columns("仕入単価_IDR").HeaderText = "仕入単価(IDR)" & vbCrLf & "d"
+            DgvList.Columns("仕入原価_原通貨").HeaderText = "仕入原価" & vbCrLf & "(原通貨)"
+            DgvList.Columns("仕入原価_IDR").HeaderText = "仕入原価(IDR)" & vbCrLf & "e=b*d"
+            DgvList.Columns("間接費").HeaderText = "間接費" & vbCrLf & "f"
+            DgvList.Columns("利益").HeaderText = "利益" & vbCrLf & "g=c-e-f"
+            DgvList.Columns("利益率").HeaderText = "利益率" & vbCrLf & "h=g/c"
+
+
+        End If
+
+#End Region
+
+
+#Region "形式"
+
+        DgvList.Columns("販売通貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvList.Columns("仕入通貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+
+        '右寄せ
+        DgvList.Columns("受注単価_原通貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("受注単価_IDR").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("受注数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+        DgvList.Columns("受注金額_原通貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("受注金額_IDR").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+        DgvList.Columns("仕入単価_原通貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("仕入単価_IDR").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+        DgvList.Columns("仕入原価_原通貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvList.Columns("仕入原価_IDR").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+        DgvList.Columns("間接費").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+
+
+        '数字形式
+        DgvList.Columns("受注単価_原通貨").DefaultCellStyle.Format = "N2"
+        DgvList.Columns("受注単価_IDR").DefaultCellStyle.Format = "N2"
+        DgvList.Columns("受注数量").DefaultCellStyle.Format = "N2"
+        DgvList.Columns("受注金額_原通貨").DefaultCellStyle.Format = "N2"
+        DgvList.Columns("受注金額_IDR").DefaultCellStyle.Format = "N2"
+
+        DgvList.Columns("仕入単価_原通貨").DefaultCellStyle.Format = "N2"
+        DgvList.Columns("仕入単価_IDR").DefaultCellStyle.Format = "N2"
+        DgvList.Columns("仕入原価_原通貨").DefaultCellStyle.Format = "N2"
+        DgvList.Columns("仕入原価_IDR").DefaultCellStyle.Format = "N2"
+        DgvList.Columns("間接費").DefaultCellStyle.Format = "N2"
+
+        DgvList.Columns("利益").DefaultCellStyle.Format = "N2"
+        DgvList.Columns("利益率").DefaultCellStyle.Format = "N1"
+
+
+        'タイトル 中央寄せ
+        DgvList.Columns("受注単価_IDR").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvList.Columns("受注数量").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+        DgvList.Columns("受注金額_IDR").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+        DgvList.Columns("仕入単価_IDR").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvList.Columns("仕入原価_IDR").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+        DgvList.Columns("間接費").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvList.Columns("利益").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvList.Columns("利益率").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+#End Region
+
+
+    End Sub
+
+
     '戻るボタン押下時
-
-
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
         _parentForm.Enabled = True
         _parentForm.Show()
@@ -827,6 +928,23 @@ Public Class SalesProfitList
         End If
 
         rmNullDecimal = prmField
+
+    End Function
+
+    '汎用マスタから固定キー、可変キーに応じた結果を返す
+    'param1：String 固定キー
+    'param2：String 可変キー
+    'Return: DataSet
+    Private Function getDsHanyoData(ByVal prmFixed As String, ByVal prmVariable As String) As DataSet
+        Dim Sql As String = ""
+
+        Sql = " AND "
+        Sql += "固定キー ILIKE '" & prmFixed & "'"
+        Sql += " AND "
+        Sql += "可変キー ILIKE '" & prmVariable & "'"
+
+        'リードタイムのリストを汎用マスタから取得
+        Return getDsData("m90_hanyo", Sql)
 
     End Function
 
