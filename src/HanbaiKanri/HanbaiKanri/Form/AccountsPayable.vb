@@ -321,7 +321,7 @@ Public Class AccountsPayable
 
         Dim reccnt As Integer = 0
         Dim Sql As String = ""
-        Dim AccountsPayable As Integer = 0 '買掛残高を集計
+        Dim AccountsPayable As Decimal = 0 '買掛残高を集計
         Dim curds As DataSet  'm25_currency
         Dim cur As String
 
@@ -695,14 +695,9 @@ Public Class AccountsPayable
         Dim reccnt As Integer = 0 'DB用（デフォルト）
 
         Try
-            Sql = "SELECT "
-            Sql += "* "
-            Sql += "FROM "
-            Sql += "public.m80_saiban"
-            Sql += " WHERE "
-            Sql += "会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Sql += " AND "
-            Sql += "採番キー = '" & key & "'"
+            Sql = "SELECT * FROM public.m80_saiban"
+            Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += " AND 採番キー = '" & key & "'"
 
             Dim dsSaiban As DataSet = _db.selectDB(Sql, RS, reccnt)
 
@@ -720,28 +715,13 @@ Public Class AccountsPayable
                 keyNo = dsSaiban.Tables(RS).Rows(0)("最新値") + 1
             End If
 
-            Sql = "UPDATE "
-            Sql += "Public.m80_saiban "
+            Sql = "UPDATE Public.m80_saiban "
             Sql += "SET "
-            Sql += " 最新値 "
-            Sql += " = '"
-            Sql += keyNo.ToString
-            Sql += "', "
-            Sql += "更新者"
-            Sql += " = '"
-            Sql += frmC01F10_Login.loginValue.TantoNM
-            Sql += "', "
-            Sql += "更新日"
-            Sql += " = '"
-            Sql += UtilClass.formatDatetime(today)
-            Sql += "' "
-            Sql += "WHERE"
-            Sql += " 会社コード"
-            Sql += "='"
-            Sql += frmC01F10_Login.loginValue.BumonCD
-            Sql += "'"
-            Sql += " AND"
-            Sql += " 採番キー = '" & key & "'"
+            Sql += " 最新値  = '" & keyNo.ToString & "'"
+            Sql += ", 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+            Sql += ", 更新日 = '" & UtilClass.formatDatetime(today) & "'"
+            Sql += " WHERE 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += " AND 採番キー = '" & key & "'"
             Console.WriteLine(Sql)
             _db.executeDB(Sql)
 
@@ -756,7 +736,7 @@ Public Class AccountsPayable
     '支払入力セルの値が変更されたら
     Private Sub DgvAddCellValueChanged(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles DgvAdd.CellValueChanged
 
-        Dim PurchaseTotal As Integer = 0
+        Dim PurchaseTotal As Decimal = 0
 
         'ヘッダー以外だったら
         If e.RowIndex > -1 Then
