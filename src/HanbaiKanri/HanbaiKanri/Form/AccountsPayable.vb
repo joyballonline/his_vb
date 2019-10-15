@@ -384,7 +384,7 @@ Public Class AccountsPayable
 
         If dsKikehd.Tables(RS).Rows.Count > 0 Then
             '買掛データがある場合
-            VendorInvoiceNumber.Text = dsKikehd.Tables(RS).Rows(0)("仕入先請求番号")  '仕入先請求番号 
+            VendorInvoiceNumber.Text = dsKikehd.Tables(RS).Rows(0)("仕入先請求番号").ToString  '仕入先請求番号 
         End If
 
         '買掛残高を集計

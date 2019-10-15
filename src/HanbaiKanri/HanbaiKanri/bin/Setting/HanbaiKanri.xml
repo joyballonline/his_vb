@@ -1482,4 +1482,27 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
     <MEMO></MEMO>
   </MSG_DATA>
+  <MSG_DATA>
+    <ID>importFileError</ID>
+    <MSG1>読み込みファイルに誤りがあります。再度確認してください。</MSG1>
+    <MSG1_EN>There is an error in the read file. Check it again please.</MSG1_EN>
+    <BUTTON_TYPE>OK</BUTTON_TYPE>
+    <ICONT_TYPE>
+      <ICONT_TYPE>Warning</ICONT_TYPE>
+    </ICONT_TYPE>
+    <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
+    <MEMO></MEMO>
+  </MSG_DATA>
+  <MSG_DATA>
+    <ID>registrationConfirmation</ID>
+    <MSG1>以下の内容で登録します。</MSG1>
+    <MSG1_EN>Register with the following contents.</MSG1_EN>
+    <MSG2>よろしいですか？</MSG2>
+    <MSG2_EN>Is it OK?</MSG2_EN>
+    <BUTTON_TYPE>YesNo</BUTTON_TYPE>
+    <ICONT_TYPE>Question</ICONT_TYPE>
+    <DEFAULT_BUTTON>Button2</DEFAULT_BUTTON>
+    <CREATE_DATE>2018/03/22 14:00</CREATE_DATE>
+    <MEMO></MEMO>
+  </MSG_DATA>
 </MSG_DEF>

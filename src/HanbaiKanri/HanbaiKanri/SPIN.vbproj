@@ -102,6 +102,12 @@
     <Import Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Form\AccountsPayableBulk.Designer.vb">
+      <DependentUpon>AccountsPayableBulk.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\AccountsPayableBulk.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\ExchangeRate.Designer.vb">
       <DependentUpon>ExchangeRate.vb</DependentUpon>
     </Compile>
@@ -580,6 +586,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Form\AccountsPayableBulk.resx">
+      <DependentUpon>AccountsPayableBulk.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\ExchangeRate.resx">
       <DependentUpon>ExchangeRate.vb</DependentUpon>
     </EmbeddedResource>

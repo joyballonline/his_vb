@@ -2022,6 +2022,12 @@ Public Class frmC01F30_Menu
                 openForm = New APScheduledCollectionDateList(_msgHd, _db, _langHd, Me, Status)
                 openForm.Show()
                 Me.Hide()
+            Case CommonConst.MENU_H1170  '買掛一括登録
+                Dim Status As String = CommonConst.STATUS_VIEW
+                Dim openForm As Form = Nothing
+                openForm = New AccountsPayableBulk(_msgHd, _db, _langHd, Me, Status)
+                openForm.Show()
+                Me.Hide()
            '-----------------------------------支払管理（H12）
             Case CommonConst.MENU_H1210  '支払登録
                 Dim openForm As Form = Nothing
@@ -2090,11 +2096,11 @@ Public Class frmC01F30_Menu
                 openForm.Show()
                 Me.Hide()
             Case CommonConst.MENU_H1620  '発注進捗状況
-                Dim openForm As Form = Nothing
-                Dim Status As String = CommonConst.STATUS_VIEW
-                openForm = New OrderingProgress(_msgHd, _db, _langHd, Me, Status)
-                openForm.Show()
-                Me.Hide()
+                'Dim openForm As Form = Nothing
+                'Dim Status As String = CommonConst.STATUS_VIEW
+                'openForm = New OrderingProgress(_msgHd, _db, _langHd, Me, Status)
+                'openForm.Show()
+                'Me.Hide()
             Case CommonConst.MENU_H1520  '為替レート
                 Dim openForm As Form = Nothing
                 Dim Status As String = CommonConst.STATUS_VIEW

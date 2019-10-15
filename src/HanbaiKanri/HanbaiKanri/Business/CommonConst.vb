@@ -205,6 +205,7 @@ Public Class CommonConst
     Public Const MENU_H1140 As String = "H1140"           '買掛参照
     Public Const MENU_H1150 As String = "H1150"           '仕入先別買掛金一覧
     Public Const MENU_H1160 As String = "H1160"           '支払予定期日別買掛金一覧
+    Public Const MENU_H1170 As String = "H1170"           '買掛一括登録
 
     Public Const MENU_H1210 As String = "H1210"           '支払登録
     Public Const MENU_H1220 As String = "H1220"           '支払取消
