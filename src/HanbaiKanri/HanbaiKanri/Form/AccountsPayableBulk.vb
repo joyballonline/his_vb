@@ -558,10 +558,11 @@ Public Class AccountsPayableBulk
 
         '今回買掛金額計
         BuyToHangAmountFC = PurchaseAmountFC
-        BuyToHangAmount = Math.Ceiling(PurchaseAmountFC / strRate)  '画面の金額をIDRに変換　切り上げ
+        BuyToHangAmount = Math.Ceiling(BuyToHangAmountFC / strRate)  '画面の金額をIDRに変換　切り上げ
 
         '買掛残高
         AccountsPayableFC = PurchaseAmountFC
+        AccountsPayable = Math.Ceiling(AccountsPayableFC / strRate)  '画面の金額をIDRに変換　切り上げ
 
 
         Sql = "INSERT INTO "
@@ -591,9 +592,10 @@ Public Class AccountsPayableBulk
         Sql += "', '"
         Sql += dsHattyu.Tables(RS).Rows(0)("仕入先名").ToString '仕入先名
         Sql += "', "
-        Sql += UtilClass.formatNumber(PurchaseAmountFC) '買掛金額計
+        Sql += UtilClass.formatNumber(BuyToHangAmount) '買掛金額計
         Sql += ", "
-        Sql += "0" '買掛残高
+        'Sql += "0" '買掛残高
+        Sql += UtilClass.formatNumber(AccountsPayable) '買掛残高
         Sql += ", '"
         Sql += prmRow("備考1").ToString '備考1
         Sql += "', '"
@@ -612,7 +614,8 @@ Public Class AccountsPayableBulk
         Sql += "','"
         Sql += UtilClass.formatNumber(BuyToHangAmountFC) '買掛金額計_外貨
         Sql += "',"
-        Sql += UtilClass.formatNumber("0") '買掛残高_外貨
+        'Sql += UtilClass.formatNumber("0") '買掛残高_外貨
+        Sql += UtilClass.formatNumber(AccountsPayableFC) '買掛残高_外貨
 
         Sql += ","
         Sql += dsHattyu.Tables(RS).Rows(0)("通貨").ToString() '通貨
