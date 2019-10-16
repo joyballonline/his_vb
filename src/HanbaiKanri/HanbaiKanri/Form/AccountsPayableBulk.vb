@@ -468,8 +468,9 @@ Public Class AccountsPayableBulk
                         If result = DialogResult.Yes Then
                             '買掛一括登録実行
                             kikeAddList(addDt) '登録一覧を渡す
-                            'Else
-                            '    Exit Do
+
+                            '登録完了メッセージ
+                            _msgHd.dspMSG("completeInsert", frmC01F10_Login.loginValue.Language)
                         End If
 
                     End If
@@ -628,9 +629,6 @@ Public Class AccountsPayableBulk
         Sql += "')"
 
         _db.executeDB(Sql)
-
-        '登録完了メッセージ
-        _msgHd.dspMSG("completeInsert", frmC01F10_Login.loginValue.Language)
 
     End Sub
 
