@@ -683,6 +683,7 @@ Public Class AccountsPayableBulk
             Throw ex
         Finally
 
+            books.Close()
             app.Quit()
 
             'リソースの解放
