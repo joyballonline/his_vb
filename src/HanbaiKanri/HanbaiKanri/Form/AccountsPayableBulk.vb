@@ -295,6 +295,14 @@ Public Class AccountsPayableBulk
                 Cursor.Current = Cursors.Default
 
                 _msgHd.dspMSG("CreateExcel", frmC01F10_Login.loginValue.Language)
+
+                'app.Quit()
+
+                'リソースの解放
+                Marshal.ReleaseComObject(sheet)
+                Marshal.ReleaseComObject(book)
+                Marshal.ReleaseComObject(books)
+                Marshal.ReleaseComObject(app)
             End If
 
         Catch ex As Exception
@@ -303,13 +311,7 @@ Public Class AccountsPayableBulk
 
             Throw ex
         Finally
-            'app.Quit()
 
-            'リソースの解放
-            Marshal.ReleaseComObject(sheet)
-            Marshal.ReleaseComObject(book)
-            Marshal.ReleaseComObject(books)
-            Marshal.ReleaseComObject(app)
         End Try
 
 
@@ -594,7 +596,6 @@ Public Class AccountsPayableBulk
         Sql += "', "
         Sql += UtilClass.formatNumber(BuyToHangAmount) '買掛金額計
         Sql += ", "
-        'Sql += "0" '買掛残高
         Sql += UtilClass.formatNumber(AccountsPayable) '買掛残高
         Sql += ", '"
         Sql += prmRow("備考1").ToString '備考1
@@ -614,7 +615,6 @@ Public Class AccountsPayableBulk
         Sql += "','"
         Sql += UtilClass.formatNumber(BuyToHangAmountFC) '買掛金額計_外貨
         Sql += "',"
-        'Sql += UtilClass.formatNumber("0") '買掛残高_外貨
         Sql += UtilClass.formatNumber(AccountsPayableFC) '買掛残高_外貨
 
         Sql += ","
@@ -690,8 +690,6 @@ Public Class AccountsPayableBulk
             app.Quit()
 
             'リソースの解放
-
-            'Marshal.ReleaseComObject(range)
             Marshal.ReleaseComObject(sheet)
             Marshal.ReleaseComObject(book)
             Marshal.ReleaseComObject(books)
