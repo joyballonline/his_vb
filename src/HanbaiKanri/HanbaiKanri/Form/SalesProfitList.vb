@@ -10,6 +10,7 @@ Imports UtilMDL.xls
 Imports Microsoft.Office.Interop
 Imports Microsoft.Office.Interop.Excel
 Imports System.Globalization
+Imports System.Runtime.InteropServices
 Imports System.IO
 
 Public Class SalesProfitList
@@ -724,10 +725,36 @@ Public Class SalesProfitList
             End If
 #End Region
 
+            Dim rowCnt As Integer = 0
+            Dim lstRow As Integer = 2
+            Dim addRowCnt As Integer = 0
+            Dim currentCnt As Integer = 19
+            Dim num As Integer = 1
+
+            rowCnt = DgvList.Rows.Count - 1
+
+            Dim cellPos As String = lstRow & ":" & lstRow
+
+            If rowCnt > 1 Then
+                For addRow As Integer = 0 To rowCnt
+                    Dim R As Object
+                    cellPos = lstRow & ":" & lstRow
+                    R = sheet.Range(cellPos)
+                    R.Copy()
+                    R.Insert()
+                    If Marshal.IsComObject(R) Then
+                        Marshal.ReleaseComObject(R)
+                    End If
+
+                    lstRow = lstRow + 1
+                Next
+            End If
+
+
             Dim cellRowIndex As Integer = 1
             For i As Integer = 0 To DgvList.RowCount - 1
                 cellRowIndex += 1
-                sheet.Rows(cellRowIndex).Insert
+                'sheet.Rows(cellRowIndex).Insert
 
 
                 sheet.Range("A" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("受注番号").Value '受注番号
@@ -785,16 +812,23 @@ Public Class SalesProfitList
 
             Next
 
+            sheet.Columns("A:AF").EntireColumn.AutoFit  '幅の自動調整
+
             ' 行7全体のオブジェクトを作成
             xlRngTmp = sheet.Rows
             xlRng = xlRngTmp(cellRowIndex)
 
             '最後に合計行の追加
             cellRowIndex += 2
-            'sheet.Range("D" & cellRowIndex.ToString).Value = CDec(TxtSalesAmount.Text) '売上計
-            'sheet.Range("F" & cellRowIndex.ToString).Value = CDec(TxtSalesCostAmount.Text) '売上原価計
-            'sheet.Range("H" & cellRowIndex.ToString).Value = CDec(TxtGrossMargin.Text) '粗利
-            'sheet.Range("I" & cellRowIndex.ToString).Value = CDec(TxtGrossMarginRate.Text) '粗利率
+            sheet.Range("D" & cellRowIndex.ToString).Value = "受注金額計"
+            sheet.Range("D" & cellRowIndex.ToString + 1).Value = CDec(TxtSalesAmount.Text)
+            sheet.Range("D" & cellRowIndex.ToString + 3).Value = "仕入原価計"
+            sheet.Range("D" & cellRowIndex.ToString + 4).Value = CDec(TxtSalesCostAmount.Text)
+
+            sheet.Range("F" & cellRowIndex.ToString).Value = "利益"
+            sheet.Range("F" & cellRowIndex.ToString + 1).Value = CDec(TxtGrossMargin.Text)
+            sheet.Range("F" & cellRowIndex.ToString + 3).Value = "利益率(%)"
+            sheet.Range("F" & cellRowIndex.ToString + 4).Value = CDec(TxtGrossMarginRate.Text)
 
 
             ' 境界線オブジェクトを作成 →7行目の下部に罫線を描画する
