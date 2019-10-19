@@ -311,12 +311,12 @@ Public Class SalesProfitList
                 DgvList.Rows(i).Cells("仕入通貨").Value = cur
 
                 DgvList.Rows(i).Cells("仕入単価_原通貨").Value = ds.Tables(RS).Rows(i)("仕入値")
-                DgvList.Rows(i).Cells("仕入単価_IDR").Value = ds.Tables(RS).Rows(i)("仕入単価_外貨")
+                DgvList.Rows(i).Cells("仕入単価_IDR").Value = rmNullDecimal(ds.Tables(RS).Rows(i)("仕入単価_外貨"))
 
                 DgvList.Rows(i).Cells("仕入原価_原通貨").Value = ds.Tables(RS).Rows(i)("仕入原価")
-                DgvList.Rows(i).Cells("仕入原価_IDR").Value = ds.Tables(RS).Rows(i)("仕入単価_外貨") * ds.Tables(RS).Rows(i)("受注数量")
+                DgvList.Rows(i).Cells("仕入原価_IDR").Value = rmNullDecimal(ds.Tables(RS).Rows(i)("仕入単価_外貨")) * ds.Tables(RS).Rows(i)("受注数量")
 
-                DgvList.Rows(i).Cells("間接費").Value = ds.Tables(RS).Rows(i)("間接費") * ds.Tables(RS).Rows(i)("仕入レート")
+                DgvList.Rows(i).Cells("間接費").Value = ds.Tables(RS).Rows(i)("間接費") * rmNullDecimal(ds.Tables(RS).Rows(i)("仕入レート"))
 
                 DgvList.Rows(i).Cells("利益").Value = DgvList.Rows(i).Cells("受注金額_IDR").Value - DgvList.Rows(i).Cells("仕入原価_IDR").Value - DgvList.Rows(i).Cells("間接費").Value
 
