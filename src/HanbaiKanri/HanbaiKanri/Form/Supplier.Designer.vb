@@ -555,9 +555,9 @@ Partial Class Supplier
         Me.LblTariffRateText.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblTariffRateText.Location = New System.Drawing.Point(197, 33)
         Me.LblTariffRateText.Name = "LblTariffRateText"
-        Me.LblTariffRateText.Size = New System.Drawing.Size(67, 15)
+        Me.LblTariffRateText.Size = New System.Drawing.Size(59, 15)
         Me.LblTariffRateText.TabIndex = 222
-        Me.LblTariffRateText.Text = "(例：1.0%)"
+        Me.LblTariffRateText.Text = "(例：1.0)"
         '
         'LblPphText
         '
@@ -566,9 +566,9 @@ Partial Class Supplier
         Me.LblPphText.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblPphText.Location = New System.Drawing.Point(197, 87)
         Me.LblPphText.Name = "LblPphText"
-        Me.LblPphText.Size = New System.Drawing.Size(67, 15)
+        Me.LblPphText.Size = New System.Drawing.Size(59, 15)
         Me.LblPphText.TabIndex = 233
-        Me.LblPphText.Text = "(例：2.5%)"
+        Me.LblPphText.Text = "(例：2.5)"
         '
         'LblPph
         '
@@ -598,9 +598,9 @@ Partial Class Supplier
         Me.LblTransportationCostText.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblTransportationCostText.Location = New System.Drawing.Point(197, 141)
         Me.LblTransportationCostText.Name = "LblTransportationCostText"
-        Me.LblTransportationCostText.Size = New System.Drawing.Size(75, 15)
+        Me.LblTransportationCostText.Size = New System.Drawing.Size(67, 15)
         Me.LblTransportationCostText.TabIndex = 236
-        Me.LblTransportationCostText.Text = "(例：10.0%)"
+        Me.LblTransportationCostText.Text = "(例：10.0)"
         '
         'LblTransportationCost
         '
