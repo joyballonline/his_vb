@@ -28,6 +28,7 @@ Public Class SupplierAPList
     Private Const HAIFUN_MYSOUSANICHIJI As String = "---------------"
     Private Const HAIFUN_SOUSA As String = "----------"
     Private Const HAIFUN_ZENKAI As String = "---------------"
+    Private Const V As String = "買掛金残高_外貨"
 
     '-------------------------------------------------------------------------------
     '   変数定義
@@ -102,7 +103,7 @@ Public Class SupplierAPList
             DgvCymndt.Columns("通貨_外貨").HeaderText = "Currency" & vbCrLf & "(OriginalCurrency)"
             DgvCymndt.Columns("買掛金額計_外貨").HeaderText = "TotalAccountsPayable" & vbCrLf & "(OriginalCurrency)"
             DgvCymndt.Columns("支払金額計_外貨").HeaderText = "TotalPaymentAmount" & vbCrLf & "(OriginalCurrency)"
-            DgvCymndt.Columns("買掛金残高_外貨").HeaderText = "APBalance" & vbCrLf & "(OriginalCurrency)"
+            DgvCymndt.Columns(V).HeaderText = "APBalance" & vbCrLf & "(OriginalCurrency)"
 
             DgvCymndt.Columns("通貨").HeaderText = "Currency"
             DgvCymndt.Columns("買掛金額計").HeaderText = "TotalAccountsPayable"
@@ -115,10 +116,10 @@ Public Class SupplierAPList
             DgvCymndt.Columns("通貨_外貨").HeaderText = "通貨" & vbCrLf & "(原通貨)"
             DgvCymndt.Columns("買掛金額計_外貨").HeaderText = "買掛金額計" & vbCrLf & "(原通貨)"
             DgvCymndt.Columns("支払金額計_外貨").HeaderText = "支払金額計" & vbCrLf & "(原通貨)"
-            DgvCymndt.Columns("買掛金残高_外貨").HeaderText = "買掛金残高" & vbCrLf & "(原通貨)"
+            DgvCymndt.Columns(V).HeaderText = "買掛金残高" & vbCrLf & "(原通貨)"
         End If
 
-        Dim dsKikehd As DataSet = getAPList()
+        Dim dsKikehd As DataSet = getAPList(1)
 
         Dim tmpSupplierCd As String = ""
         Dim tmpSupplierName As String = ""
@@ -149,12 +150,12 @@ Public Class SupplierAPList
 
             DgvCymndt.Rows(i).Cells("通貨_外貨").Value = cur
             DgvCymndt.Rows(i).Cells("買掛金額計_外貨").Value = dsKikehd.Tables(RS).Rows(i)("買掛金額計_外貨")
-            DgvCymndt.Rows(i).Cells("支払金額計_外貨").Value = dsKikehd.Tables(RS).Rows(i)("支払金額計_外貨")
-            DgvCymndt.Rows(i).Cells("買掛金残高_外貨").Value = dsKikehd.Tables(RS).Rows(i)("買掛残高_外貨")
+            DgvCymndt.Rows(i).Cells("支払金額計_外貨").Value = dsKikehd.Tables(RS).Rows(i)("買掛金額計_外貨") - dsKikehd.Tables(RS).Rows(i)("買掛残高_外貨")
+            DgvCymndt.Rows(i).Cells(V).Value = dsKikehd.Tables(RS).Rows(i)("買掛残高_外貨")
 
             DgvCymndt.Rows(i).Cells("通貨").Value = setBaseCurrency()
             DgvCymndt.Rows(i).Cells("買掛金額計").Value = dsKikehd.Tables(RS).Rows(i)("買掛金額計")
-            DgvCymndt.Rows(i).Cells("支払金額計").Value = dsKikehd.Tables(RS).Rows(i)("支払金額計")
+            DgvCymndt.Rows(i).Cells("支払金額計").Value = dsKikehd.Tables(RS).Rows(i)("買掛金額計") - dsKikehd.Tables(RS).Rows(i)("買掛残高")
             DgvCymndt.Rows(i).Cells("買掛金残高").Value = dsKikehd.Tables(RS).Rows(i)("買掛残高")
             DgvCymndt.Rows(i).Cells("備考").Value = dsKikehd.Tables(RS).Rows(i)("備考1")
         Next
@@ -162,7 +163,7 @@ Public Class SupplierAPList
         '数字形式
         DgvCymndt.Columns("買掛金額計_外貨").DefaultCellStyle.Format = "N2"
         DgvCymndt.Columns("支払金額計_外貨").DefaultCellStyle.Format = "N2"
-        DgvCymndt.Columns("買掛金残高_外貨").DefaultCellStyle.Format = "N2"
+        DgvCymndt.Columns(V).DefaultCellStyle.Format = "N2"
 
         DgvCymndt.Columns("買掛金額計").DefaultCellStyle.Format = "N2"
         DgvCymndt.Columns("支払金額計").DefaultCellStyle.Format = "N2"
@@ -178,13 +179,18 @@ Public Class SupplierAPList
         Me.Dispose()
     End Sub
 
-    Public Function getAPList()
+    Public Function getAPList(ByVal intFlg As Integer)
         Dim reccnt As Integer = 0 'DB用（デフォルト）
         Dim Sql As String = ""
 
         Sql = " AND "
-        Sql += "買掛残高 > 0 "
-        Sql += " AND "
+
+        If intFlg = 0 Then
+            Sql += "買掛残高 > 0 "  '20191019 残高ゼロも表示したいとのこと
+            Sql += " AND "
+        Else
+        End If
+
         Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '取消区分=0
         Sql += " ORDER BY 仕入先コード, 買掛日 "
 

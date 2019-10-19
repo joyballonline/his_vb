@@ -119,7 +119,7 @@ Public Class Information
 
         '入金残データ取得
         Dim APClass = New SupplierAPList(_msgHd, _db, _langHd, Me)
-        Dim APData As DataSet = APClass.getAPList()
+        Dim APData As DataSet = APClass.getAPList(0)
         Dim APCnt As Integer = APData.Tables(RS).Rows.Count
 
         If APCnt > 0 Then
