@@ -507,6 +507,7 @@ Public Class AccountsPayable
         Dim BuyToHangAmountFC As Decimal = 0  '今回買掛金額計_外貨
 
         If Decimal.Parse(DgvAdd.Rows(0).Cells("今回買掛金額計").Value) > Decimal.Parse(DgvCymn.Rows(0).Cells("買掛残高").Value) Then
+
             '買掛残高より買掛金額が大きい場合はアラート
             _msgHd.dspMSG("chkAccountsPayableError", frmC01F10_Login.loginValue.Language)
 
@@ -541,12 +542,12 @@ Public Class AccountsPayable
             Dim APTotal As Decimal = DgvAdd.Rows(0).Cells("今回買掛金額計").Value + AccountsPayable
             Dim Balance As Decimal = dsHattyu.Tables(RS).Rows(0)("仕入金額") - APTotal
 
-            If Balance < 0 Then
-                '対象データがないメッセージを表示
-                _msgHd.dspMSG("chkAPDataError", frmC01F10_Login.loginValue.Language)
+            'If Balance < 0 Then
+            '    '対象データがないメッセージを表示
+            '    _msgHd.dspMSG("chkAPDataError", frmC01F10_Login.loginValue.Language)
 
-                Return
-            End If
+            '    Return
+            'End If
 
             If DgvAdd.Rows(0).Cells("今回買掛金額計").Value = 0 Then
                 '対象データがないメッセージを表示
