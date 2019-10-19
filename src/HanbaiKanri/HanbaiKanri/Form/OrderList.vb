@@ -209,6 +209,7 @@ Public Class OrderList
             Label10.Text = "DisplayFormat"
             RbtnSlip.Text = "UnitOfVoucher"
             lblMaker.Text = "Maker"
+            lblPurchaseSince.Text = "PurchaseOrderNo"
 
             RbtnDetails.Text = "LineItemUnit"
             RbtnDetails.Location = New Point(166, 202)
