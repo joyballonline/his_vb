@@ -368,7 +368,7 @@ Public Class CustomerOrderList
                     'sheet.Range("A15").Value = "Telp." & dsCymnhd.Tables(RS).Rows(0)("得意先電話番号") & "　Fax." & dsCymnhd.Tables(RS).Rows(0)("得意先ＦＡＸ")
                     sheet.Range("A15").Value = "Telp." & dsCymnhd.Tables(RS).Rows(0)("得意先電話番号")
                     sheet.Range("E8").Value = BillingNo
-                    sheet.Range("E9").Value = DgvBilling.Rows(r.Index).Cells("請求日").Value
+                    sheet.Range("E9").Value = UtilClass.strFormatDate(DgvBilling.Rows(r.Index).Cells("請求日").Value)
                     sheet.Range("E11").Value = dsCymnhd.Tables(RS).Rows(0)("客先番号")
 
                     If dsShukkoHd.Tables(RS).Rows.Count > 0 Then
