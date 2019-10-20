@@ -2026,6 +2026,7 @@ Public Class GoodsIssue
     Private Function setZaikoCurrency(ByVal rowIndex As Integer) As Long
         Dim Sql As String = ""
         Dim reccnt As Integer = 0 'DB用（デフォルト）
+        Dim lngSuryo As Long = 0
 
         Sql = "SELECT sum(m21.現在庫数) as 在庫数量 "
         Sql += " from m21_zaiko m21 "
@@ -2045,11 +2046,47 @@ Public Class GoodsIssue
 
         If dsZaiko.Tables(RS).Rows.Count > 0 Then
             If dsZaiko.Tables(RS).Rows(0)("在庫数量") IsNot DBNull.Value Then
-                Return dsZaiko.Tables(RS).Rows(0)("在庫数量")
-            Else
-                Return 0
+                lngSuryo = dsZaiko.Tables(RS).Rows(0)("在庫数量")
             End If
         End If
+
+
+        '引き当ての場合
+        Sql = "SELECT sum(出庫数量) as 出庫数量 "
+        Sql += " from t45_shukodt t45 "
+
+        Sql += " WHERE t45.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " AND  t45.受注番号 = '" & TxtOrderNo.Text & "'"
+        Sql += " AND  t45.受注番号枝番 = '" & TxtSuffixNo.Text & "'"
+        Sql += " AND  t45.行番号 = " & DgvAdd.Rows(rowIndex).Cells("行番号").Value.ToString
+        Sql += " AND  t45.出庫区分 = '" & CommonConst.SHUKO_KBN_TMP & "'"  '仮出庫
+
+        '在庫マスタから現在庫数を取得
+        Dim dsSyuko As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+        If dsSyuko.Tables(RS).Rows.Count > 0 Then
+            If dsSyuko.Tables(RS).Rows(0)("出庫数量") IsNot DBNull.Value Then
+
+                Sql = "SELECT count(*) as 件数"
+                Sql += " from t45_shukodt t45 "
+
+                Sql += " WHERE t45.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                Sql += " AND  t45.受注番号 = '" & TxtOrderNo.Text & "'"
+                Sql += " AND  t45.受注番号枝番 = '" & TxtSuffixNo.Text & "'"
+                Sql += " AND  t45.行番号 = " & DgvAdd.Rows(rowIndex).Cells("行番号").Value.ToString
+                Sql += " AND  t45.出庫区分 = '" & CommonConst.SHUKO_KBN_NORMAL & "'"  '通常出庫
+
+                '在庫マスタから現在庫数を取得
+                Dim dsSyuko2 As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+                If dsSyuko2.Tables(RS).Rows(0)("件数") = 0 Then
+                    lngSuryo += dsSyuko.Tables(RS).Rows(0)("出庫数量")
+                End If
+
+            End If
+        End If
+
+        Return lngSuryo
 
     End Function
 
