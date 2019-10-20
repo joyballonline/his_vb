@@ -111,13 +111,15 @@ Public Class CustomerARList
 
         For i As Integer = 0 To dsSkyuhd.Tables(RS).Rows.Count - 1
 
-            '得意先コードが変わったら取得
-            If (tmpCustomerCd <> dsSkyuhd.Tables(RS).Rows(i)("得意先コード").ToString) Then
-                tmpCustomerName = dsSkyuhd.Tables(RS).Rows(i)("得意先名")
-                tmpCustomerCd = dsSkyuhd.Tables(RS).Rows(i)("得意先コード").ToString
-            Else
-                tmpCustomerName = ""
-            End If
+            ''得意先コードが変わったら取得
+            'If (tmpCustomerCd <> dsSkyuhd.Tables(RS).Rows(i)("得意先コード").ToString) Then
+            '    tmpCustomerName = dsSkyuhd.Tables(RS).Rows(i)("得意先名")
+            '    tmpCustomerCd = dsSkyuhd.Tables(RS).Rows(i)("得意先コード").ToString
+            'Else
+            '    tmpCustomerName = ""
+            'End If
+            tmpCustomerName = dsSkyuhd.Tables(RS).Rows(i)("得意先名")
+            tmpCustomerCd = dsSkyuhd.Tables(RS).Rows(i)("得意先コード").ToString
 
             DgvCymndt.Rows.Add()
             DgvCymndt.Rows(i).Cells("得意先名").Value = tmpCustomerName
