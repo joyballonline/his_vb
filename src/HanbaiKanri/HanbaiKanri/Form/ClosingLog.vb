@@ -2838,8 +2838,8 @@ Public Class ClosingLog
         Dim shiwakeData As DataSet
         Dim branchCodeSql As String = ""
         Dim branchCode As DataSet
-        Try
 
+        Try
             '会計用コードの取得
             branchCodeSql += " WHERE "
             branchCodeSql += """会社コード"" = '" & frmC01F10_Login.loginValue.BumonCD & "'"
@@ -2849,8 +2849,13 @@ Public Class ClosingLog
             getRow = branchCode.Tables(0).Rows(0)
 
 
-            shiwakeSql += " select t67.*,m92.会計用勘定科目コード from t67_swkhd t67,m92_kanjo m92 "
-            shiwakeSql += " WHERE t67.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "' and t67.会社コード = m92.会社コード and t67.""GLACCOUNT"" = m92.勘定科目名称１"
+            'shiwakeSql += " select t67.*,m92.会計用勘定科目コード from t67_swkhd t67,m92_kanjo m92 "
+            'shiwakeSql += " WHERE t67.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "' and t67.会社コード = m92.会社コード and t67.""GLACCOUNT"" = m92.勘定科目名称１"
+            shiwakeSql = "select t67.*,m92.会計用勘定科目コード"
+            shiwakeSql += " from t67_swkhd t67 left join m92_kanjo m92 "
+            shiwakeSql += " on t67.会社コード = m92.会社コード and t67.""GLACCOUNT"" = m92.勘定科目名称１"
+            shiwakeSql += " WHERE t67.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+
             shiwakeSql += " ORDER BY "
             shiwakeSql += """TRANSACTIONID"",""KeyID"""
 
@@ -2881,7 +2886,6 @@ Public Class ClosingLog
                     nextTransactionid = shiwakeData.Tables(RS).Rows(i + 1)(3).ToString() '次のvalTransactionid（判定用）
                 End If
                 Dim valKeyId As String = shiwakeData.Tables(RS).Rows(i)(4).ToString()
-                Dim valGlaccountCD As String = shiwakeData.Tables(RS).Rows(i)(15).ToString()
                 Dim valGlaccount As String = shiwakeData.Tables(RS).Rows(i)(5).ToString()
                 Dim valGlamount As String = Decimal.Parse(shiwakeData.Tables(RS).Rows(i)(6)).ToString("F2", ci)
                 Dim valRate As String = shiwakeData.Tables(RS).Rows(i)(7).ToString()
@@ -2892,6 +2896,23 @@ Public Class ClosingLog
                 Dim valJvamount As String = Decimal.Parse(shiwakeData.Tables(RS).Rows(i)(12)).ToString("F2", ci)
                 Dim valCustomerno As String = shiwakeData.Tables(RS).Rows(i)(13).ToString()
                 Dim valDescription As String = shiwakeData.Tables(RS).Rows(i)(14).ToString()
+
+
+                Dim valGlaccountCD As String = shiwakeData.Tables(RS).Rows(i)(15).ToString()
+                If valGlaccountCD = String.Empty Then '入金種別、支払種別の場合
+
+                    Dim strTmp As String = shiwakeData.Tables(RS).Rows(i)("GLACCOUNT")
+
+                    shiwakeSql = "select 文字３"
+                    shiwakeSql += " from m90_hanyo "
+                    shiwakeSql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                    shiwakeSql += "   and 固定キー ='" & strTmp.Substring(0, 1) & "'"
+                    shiwakeSql += "   and 文字１ ='" & strTmp.Substring(1) & "'"
+
+                    Dim shiwakeData2 As DataSet = _db.selectDB(shiwakeSql, RS, reccnt) 'reccnt:(省略可能)SELECT文の取得レコード件数
+
+                    valGlaccountCD = shiwakeData2.Tables(RS).Rows(0)("文字３").ToString()
+                End If
 
                 '初回に必ず入れる
                 If i < 1 Then
@@ -3008,7 +3029,7 @@ Public Class ClosingLog
                 Console.WriteLine(ex.Message)
             End Try
 
-            'Catch ex As Exception
+        Catch ex As Exception
         Catch lex As UsrDefException
             Cursor.Current = Cursors.Default
             lex.dspMsg()
@@ -4218,7 +4239,7 @@ Public Class ClosingLog
                 Sql = ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyyMM") & "'" '入金日
                 Sql += "," & seqID 'プライマリ
                 Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
-                Sql += ",'" & strKamoku & "'" '貸方科目
+                Sql += ",'1" & strKamoku & "'" '貸方科目
                 Sql += "," & UtilClass.formatNumber(formatDouble(calDeposit)) '入金金額
                 Sql += ",1" '固定
                 Sql += ",'" & getCustomerName(dsNkinkshihd.Tables(RS).Rows(i)("得意先コード").ToString) & "'" '補助科目
@@ -4263,7 +4284,7 @@ Public Class ClosingLog
                     Sql = ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyyMM") & "'" '入金日
                     Sql += "," & seqID 'プライマリ
                     Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
-                    Sql += ",'支払手数料'" '支払手数料
+                    Sql += ",'1" & strKamoku & "'"  '支払手数料
                     Sql += "," & UtilClass.formatNumber(formatDouble(Paymentfee)) '支払手数料（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
                     Sql += ",1" '固定
                     Sql += ",'" & getCustomerName(dsNkinkshihd.Tables(RS).Rows(i)("得意先コード").ToString) & "'" '補助科目
@@ -4420,7 +4441,7 @@ Public Class ClosingLog
                     Sql = ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyyMM") & "'" '入金日
                     Sql += "," & seqID 'プライマリ
                     Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
-                    Sql += ",'" & strKamoku & "'"  '貸方科目
+                    Sql += ",'1" & strKamoku & "'"  '貸方科目
                     Sql += "," & UtilClass.formatNumber(formatDouble(calDeposit - FormerGold2)) '入金金額（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
                     Sql += ",1" '固定
                     Sql += ",'" & getCustomerName(dsNkinkshihd.Tables(RS).Rows(i)("得意先コード").ToString) & "'" '補助科目
@@ -4465,7 +4486,7 @@ Public Class ClosingLog
                         Sql = ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyyMM") & "'" '入金日
                         Sql += "," & seqID 'プライマリ
                         Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
-                        Sql += ",'支払手数料'" '支払手数料
+                        Sql += ",'1" & strKamoku & "'"  '支払手数料
                         Sql += "," & UtilClass.formatNumber(formatDouble(Paymentfee)) '支払手数料
                         Sql += ",1" '固定
                         Sql += ",'" & getCustomerName(dsNkinkshihd.Tables(RS).Rows(i)("得意先コード").ToString) & "'" '補助科目
@@ -4668,7 +4689,7 @@ Public Class ClosingLog
                 Sql = ",'" & Format(dsShrikshihd.Tables(RS).Rows(i)("支払日"), "yyyyMM") & "'"
                 Sql += "," & seqID 'プライマリ
                 Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
-                Sql += ",'" & strKamoku & "'"  '貸方勘定
+                Sql += ",'2" & strKamoku & "'"  '貸方勘定
                 Sql += "," & UtilClass.formatNumber(formatDouble(-calPay)) '支払金額
                 Sql += ",1" '固定
                 Sql += ",'" & getSupplierName(dsShrikshihd.Tables(RS).Rows(i)("仕入先コード").ToString) & "'"
@@ -4710,7 +4731,7 @@ Public Class ClosingLog
                     Sql = ",'" & Format(dsShrikshihd.Tables(RS).Rows(i)("支払日"), "yyyyMM") & "'"
                     Sql += "," & seqID 'プライマリ
                     Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
-                    Sql += ",'支払手数料'" '支払手数料
+                    Sql += ",'2" & strKamoku & "'" 　'支払手数料
                     Sql += "," & UtilClass.formatNumber(formatDouble(-Paymentfee)) '支払手数料
                     Sql += ",1" '固定
                     Sql += ",'" & getSupplierName(dsShrikshihd.Tables(RS).Rows(i)("仕入先コード").ToString) & "'"
@@ -4864,7 +4885,7 @@ Public Class ClosingLog
                     Sql = ",'" & Format(dsShrikshihd.Tables(RS).Rows(i)("支払日"), "yyyyMM") & "'"
                     Sql += "," & seqID 'プライマリ
                     Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
-                    Sql += ",'" & strKamoku & "'"  '貸方科目
+                    Sql += ",'2" & strKamoku & "'"   '貸方科目
                     Sql += "," & UtilClass.formatNumber(formatDouble(-(calPay - DownPayment2))) '支払金額
                     Sql += ",1" '固定
                     Sql += ",'" & getSupplierName(dsShrikshihd.Tables(RS).Rows(i)("仕入先コード").ToString) & "'" '補助科目
@@ -4907,7 +4928,7 @@ Public Class ClosingLog
                         Sql = ",'" & Format(dsShrikshihd.Tables(RS).Rows(i)("支払日"), "yyyyMM") & "'"
                         Sql += "," & seqID 'プライマリ
                         Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
-                        Sql += ",'支払手数料'" '貸方勘定
+                        Sql += ",'2" & strKamoku & "'"  '貸方勘定
                         Sql += "," & UtilClass.formatNumber(formatDouble(-Paymentfee)) '支払手数料
                         Sql += ",1" '固定
                         Sql += ",'" & getSupplierName(dsShrikshihd.Tables(RS).Rows(i)("仕入先コード").ToString) & "'" '補助科目
