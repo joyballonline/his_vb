@@ -135,13 +135,15 @@ Public Class SupplierAPList
                 cur = curds.Tables(RS).Rows(0)("通貨コード")
             End If
 
-            '得意先コードが変わったら取得
-            If (tmpSupplierCd <> dsKikehd.Tables(RS).Rows(i)("仕入先コード").ToString) Then
-                tmpSupplierName = dsKikehd.Tables(RS).Rows(i)("仕入先名")
-                tmpSupplierCd = dsKikehd.Tables(RS).Rows(i)("仕入先コード").ToString
-            Else
-                tmpSupplierName = ""
-            End If
+            ''得意先コードが変わったら取得
+            'If (tmpSupplierCd <> dsKikehd.Tables(RS).Rows(i)("仕入先コード").ToString) Then
+            '    tmpSupplierName = dsKikehd.Tables(RS).Rows(i)("仕入先名")
+            '    tmpSupplierCd = dsKikehd.Tables(RS).Rows(i)("仕入先コード").ToString
+            'Else
+            '    tmpSupplierName = ""
+            'End If
+            tmpSupplierName = dsKikehd.Tables(RS).Rows(i)("仕入先名")
+            tmpSupplierCd = dsKikehd.Tables(RS).Rows(i)("仕入先コード").ToString
 
             DgvCymndt.Rows.Add()
             DgvCymndt.Rows(i).Cells("仕入先名").Value = tmpSupplierName

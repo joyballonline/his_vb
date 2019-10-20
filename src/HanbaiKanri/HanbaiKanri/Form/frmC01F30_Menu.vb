@@ -2096,11 +2096,11 @@ Public Class frmC01F30_Menu
                 openForm.Show()
                 Me.Hide()
             Case CommonConst.MENU_H1620  '発注進捗状況
-                'Dim openForm As Form = Nothing
-                'Dim Status As String = CommonConst.STATUS_VIEW
-                'openForm = New OrderingProgress(_msgHd, _db, _langHd, Me, Status)
-                'openForm.Show()
-                'Me.Hide()
+                Dim openForm As Form = Nothing
+                Dim Status As String = CommonConst.STATUS_VIEW
+                openForm = New OrderingProgress(_msgHd, _db, _langHd, Me, Status)
+                openForm.Show()
+                Me.Hide()
             Case CommonConst.MENU_H1520  '為替レート
                 Dim openForm As Form = Nothing
                 Dim Status As String = CommonConst.STATUS_VIEW
