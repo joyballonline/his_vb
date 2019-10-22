@@ -76,15 +76,29 @@ Public Class ClosingLog
 
     Private Sub ClosingLogLoad()
         Dim Sql As String = ""
+        Dim reccnt As Integer = 0
+
         Try
-            Sql += "SELECT "
+
+            '締処理日
+            Sql = "SELECT 今回締日"
+            Sql += " FROM m01_company"
+            Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+
+            ds = _db.selectDB(Sql, RS, reccnt)
+
+            dtmSime.Value = ds.Tables(RS).Rows(0)("今回締日")
+
+
+            '明細
+            Sql = "SELECT "
             Sql += "* "
             Sql += "FROM "
             Sql += "public"
             Sql += "."
             Sql += "t51_smlog"
+            Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
 
-            Dim reccnt As Integer = 0
             ds = _db.selectDB(Sql, RS, reccnt)
 
             For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
@@ -109,7 +123,11 @@ Public Class ClosingLog
     End Sub
 
     Private Sub ClosingLog_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        '締処理日と明細
         ClosingLogLoad()
+
+
         If frmC01F10_Login.loginValue.Language = "ENG" Then
             LblPerson.Text = "Name of PIC"
             BtnClosing.Text = "Closing"
@@ -125,6 +143,8 @@ Public Class ClosingLog
             BtnOutput.Text = "JournalOutput"
             LblConditions.Text = "■ExtractionCondition"
         End If
+
+
     End Sub
 
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
@@ -175,9 +195,8 @@ Public Class ClosingLog
 
     Private Sub BtnClosing_Click(sender As Object, e As EventArgs) Handles BtnClosing.Click
 
-
         Dim reccnt As Integer = 0
-        Dim dtToday As DateTime = DateTime.Now
+
 
         Dim Sql1 As String = ""
         Sql1 += "SELECT * FROM public.m01_company"
@@ -185,11 +204,433 @@ Public Class ClosingLog
 
         Dim ds1 As DataSet = _db.selectDB(Sql1, RS, reccnt)
 
+        Dim dtmLastMonth As DateTime = DateAdd("d", 1, ds1.Tables(RS).Rows(0)("前回締日"))  '判定用
+        Dim dtmThisMonth As DateTime = DateAdd("d", 1, ds1.Tables(RS).Rows(0)("今回締日"))
+        Dim dtmShime As DateTime = ds1.Tables(RS).Rows(0)("今回締日")  '締日
+
+
+
+        '締日のクリアと設定
+        If mClear_Shime(dtmLastMonth, dtmThisMonth, dtmShime) = False Then
+            Exit Sub
+        End If
+
+
+        '仕訳テーブルのクリア
+        If mClear_Table(dtmLastMonth, dtmThisMonth) = False Then
+            Exit Sub
+        End If
+
+
         '仕訳データ作成
         'CSVファイルの書き出し処理
-        Accounting()
+        If Accounting(ds1, dtmShime) = False Then
+            Exit Sub
+        End If
 
-        Exit Sub
+
+        '月末在庫の集計  一時的にコメントアウト
+        'If mSet_t50_zikhd() = False Then
+        '    Exit Sub
+        'End If
+
+
+
+        'ログと会社マスタの更新
+        ''If mSetLog(ds1) = False Then
+        ''    Exit Sub
+        ''End If
+
+
+
+
+
+        DgvClosingLog.Rows.Clear()
+        ClosingLogLoad()
+    End Sub
+
+    Private Function mSetLog(ByRef ds1 As DataSet) As Boolean
+
+        Dim dtToday As DateTime = DateTime.Now
+
+
+        't51_smlog
+        Dim Sql14 As String = ""
+
+        Sql14 = ""
+        Sql14 += "INSERT INTO Public.t51_smlog("
+        Sql14 += "会社コード, 処理日時, 前回締日, 今回締日, 次回締日, 担当者)"
+        Sql14 += " VALUES('" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql14 += " , '" & dtToday & "'"
+        Sql14 += " , '" & ds1.Tables(RS).Rows(0)("前回締日") & "'"
+        Sql14 += " , '" & ds1.Tables(RS).Rows(0)("今回締日") & "'"
+        Sql14 += " , '" & ds1.Tables(RS).Rows(0)("次回締日") & "'"
+        Sql14 += " , '" & frmC01F10_Login.loginValue.TantoNM & "'"
+        Sql14 += " )"
+
+        _db.executeDB(Sql14)
+
+
+
+        Dim thisClosingDate As DateTime = DateTime.Parse(ds1.Tables(RS).Rows(0)("次回締日"))
+        Dim dtYear As Integer = thisClosingDate.Year
+        Dim dtMonth As Integer = thisClosingDate.Month
+        If dtMonth < 12 Then
+            dtMonth += 1
+        Else
+            dtYear += 1
+            dtMonth = 1
+        End If
+
+
+        'm01_company
+        Dim dtdays As Integer = DateTime.DaysInMonth(dtYear, dtMonth)
+        Dim nextClosingDate = New DateTime(dtYear, dtMonth, dtdays)
+        Dim Sql15 As String = ""
+        Sql15 = ""
+        Sql15 += "UPDATE Public.m01_company "
+        Sql15 += "SET "
+        Sql15 += "前回締日  = '" & ds1.Tables(RS).Rows(0)("今回締日") & "'"
+        Sql15 += " , 今回締日 = '" & ds1.Tables(RS).Rows(0)("次回締日") & "'"
+        Sql15 += " , 次回締日 = '" & nextClosingDate & "'"
+
+        Sql15 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        _db.executeDB(Sql15)
+
+
+        mSetLog = False
+
+    End Function
+
+
+    Private Function mClear_Shime(ByVal dtmLastMonth As DateTime, ByVal dtmThisMonth As DateTime, ByVal dtmShime As DateTime) As Boolean
+
+        Dim sql As String = vbNullString
+
+
+#Region "請求"
+
+        'クリア
+        sql = "UPDATE Public.t23_skyuhd "
+        sql += " SET 締処理日 = null"
+        sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        sql += " AND 締処理日 = '" & dtmShime & "'"
+
+        _db.executeDB(sql)
+
+
+        '締処理日をセット
+        sql = "UPDATE Public.t23_skyuhd "
+        sql += " SET 締処理日 = '" & dtmShime & "'"
+        sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        sql += " AND (請求日 >= '" & dtmLastMonth & "'"
+        sql += " AND  請求日 < '" & dtmThisMonth & "')"
+
+        _db.executeDB(sql)
+
+#End Region
+
+
+#Region "入金"
+
+        sql = "UPDATE Public.t25_nkinhd "
+        sql += " SET 締処理日 = null"
+        sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        sql += " AND 締処理日 = '" & dtmShime & "'"
+
+        _db.executeDB(sql)
+
+
+        sql = "UPDATE Public.t25_nkinhd "
+        sql += " SET 締処理日 = '" & dtmShime & "'"
+        sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        sql += " AND (入金日 >= '" & dtmLastMonth & "'"
+        sql += " AND  入金日 < '" & dtmThisMonth & "')"
+
+        _db.executeDB(sql)
+
+#End Region
+
+
+#Region "入金消込"
+
+        sql = "UPDATE Public.t27_nkinkshihd "
+        sql += " SET 締処理日 = null"
+        sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        sql += " AND 締処理日 = '" & dtmShime & "'"
+
+        _db.executeDB(sql)
+
+
+        sql = "UPDATE Public.t27_nkinkshihd "
+        sql += " SET 締処理日 = '" & dtmShime & "'"
+        sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        sql += " AND (入金日 >= '" & dtmLastMonth & "'"
+        sql += " AND  入金日 < '" & dtmThisMonth & "')"
+
+        _db.executeDB(sql)
+
+
+#End Region
+
+
+#Region "売上"
+
+        sql = "UPDATE Public.t30_urighd "
+        sql += " SET 締処理日 = null"
+        sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        sql += " AND 締処理日 = '" & dtmShime & "'"
+
+        _db.executeDB(sql)
+
+
+        sql = "UPDATE Public.t30_urighd "
+        sql += " SET 締処理日 = '" & dtmShime & "'"
+        sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        sql += " AND (売上日 >= '" & dtmLastMonth & "'"
+        sql += " AND  売上日 < '" & dtmThisMonth & "')"
+
+        _db.executeDB(sql)
+
+#End Region
+
+
+#Region "仕入"
+
+        't40_sirehd
+        sql = "UPDATE Public.t40_sirehd "
+        sql += " SET 締処理日 = null"
+        sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        sql += " AND 締処理日 = '" & dtmShime & "'"
+
+        _db.executeDB(sql)
+
+
+        sql = "UPDATE Public.t40_sirehd "
+        sql += " SET 締処理日 = '" & dtmShime & "'"
+        sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        sql += " AND (仕入日 >= '" & dtmLastMonth & "'"
+        sql += " AND  仕入日 < '" & dtmThisMonth & "')"
+
+        _db.executeDB(sql)
+
+
+        't41_siredt
+        sql = "UPDATE Public.t41_siredt "
+        sql += " SET 締処理日 = null"
+        sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        sql += " AND 締処理日 = '" & dtmShime & "'"
+
+        _db.executeDB(sql)
+
+
+        sql = "UPDATE Public.t41_siredt "
+        sql += " SET 締処理日 = '" & dtmShime & "'"
+        sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        sql += " AND (仕入日 >= '" & dtmLastMonth & "'"
+        sql += " AND  仕入日 < '" & dtmThisMonth & "')"
+
+        _db.executeDB(sql)
+
+#End Region
+
+
+#Region "入庫"
+
+        sql = "UPDATE Public.t42_nyukohd "
+        sql += " SET 締処理日 = null"
+        sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        sql += " AND 締処理日 = '" & dtmShime & "'"
+
+        _db.executeDB(sql)
+
+
+        sql = "UPDATE Public.t42_nyukohd "
+        sql += " SET 締処理日 = '" & dtmShime & "'"
+        sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        sql += " AND (入庫日 >= '" & dtmLastMonth & "'"
+        sql += " AND  入庫日 < '" & dtmThisMonth & "')"
+
+        _db.executeDB(sql)
+
+#End Region
+
+
+#Region "出庫"
+
+        sql = "UPDATE Public.t44_shukohd "
+        sql += " SET 締処理日 = null"
+        sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        sql += " AND 締処理日 = '" & dtmShime & "'"
+
+        _db.executeDB(sql)
+
+
+        sql = "UPDATE Public.t44_shukohd "
+        sql += " SET 締処理日 = '" & dtmShime & "'"
+        sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        sql += " AND (出庫日 >= '" & dtmLastMonth & "'"
+        sql += " AND  出庫日 < '" & dtmThisMonth & "')"
+
+        _db.executeDB(sql)
+
+#End Region
+
+
+#Region "買掛"
+
+        sql = "UPDATE Public.t46_kikehd "
+        sql += " SET 締処理日 = null"
+        sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        sql += " AND 締処理日 = '" & dtmShime & "'"
+
+        _db.executeDB(sql)
+
+
+        sql = "UPDATE Public.t46_kikehd "
+        sql += " SET 締処理日 = '" & dtmShime & "'"
+        sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        sql += " AND (買掛日 >= '" & dtmLastMonth & "'"
+        sql += " AND  買掛日 < '" & dtmThisMonth & "')"
+
+        _db.executeDB(sql)
+
+#End Region
+
+
+#Region "支払"
+
+        sql = "UPDATE Public.t47_shrihd "
+        sql += " SET 締処理日 = null"
+        sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        sql += " AND 締処理日 = '" & dtmShime & "'"
+
+        _db.executeDB(sql)
+
+
+        sql = "UPDATE Public.t47_shrihd "
+        sql += " SET 締処理日 = '" & dtmShime & "'"
+        sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        sql += " AND (支払日 >= '" & dtmLastMonth & "'"
+        sql += " AND  支払日 < '" & dtmThisMonth & "')"
+
+        _db.executeDB(sql)
+
+#End Region
+
+
+#Region "支払消込"
+
+        sql = "UPDATE Public.t49_shrikshihd "
+        sql += " SET 締処理日 = null"
+        sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        sql += " AND 締処理日 = '" & dtmShime & "'"
+
+        _db.executeDB(sql)
+
+
+        sql = "UPDATE Public.t49_shrikshihd "
+        sql += " SET 締処理日 = '" & dtmShime & "'"
+        sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        sql += " AND (支払日 >= '" & dtmLastMonth & "'"
+        sql += " AND  支払日 < '" & dtmThisMonth & "')"
+
+        _db.executeDB(sql)
+
+#End Region
+
+
+#Region "入金仕訳"
+
+        sql = "UPDATE Public.t80_shiwakenyu "
+        sql += " SET 締処理日 = null"
+        sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        sql += " AND 締処理日 = '" & dtmShime & "'"
+
+        _db.executeDB(sql)
+
+
+        sql = "UPDATE Public.t80_shiwakenyu "
+        sql += " SET 締処理日 = '" & dtmShime & "'"
+        sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        sql += " AND (入金日 >= '" & dtmLastMonth & "'"
+        sql += " AND  入金日 < '" & dtmThisMonth & "')"
+
+        _db.executeDB(sql)
+
+#End Region
+
+
+#Region "支払仕訳"
+
+        sql = "UPDATE Public.t81_shiwakeshi "
+        sql += " SET 締処理日 = null"
+        sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        sql += " AND 締処理日 = '" & dtmShime & "'"
+
+        _db.executeDB(sql)
+
+
+        sql = "UPDATE Public.t81_shiwakeshi "
+        sql += " SET 締処理日 = '" & dtmShime & "'"
+        sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        sql += " AND (支払日 >= '" & dtmLastMonth & "'"
+        sql += " AND  支払日 < '" & dtmThisMonth & "')"
+
+        _db.executeDB(sql)
+
+#End Region
+
+        mClear_Shime = True
+
+    End Function
+
+
+    Private Function mClear_Table(ByVal dtmLastMonth As DateTime, ByVal dtmThisMonth As DateTime) As Boolean
+
+        Dim strWhere As String
+
+        '今回締処理日の仕訳データをクリア
+
+        ''_db.executeDB("delete from t52_krurighd where ")
+        ''_db.executeDB("delete from t53_krurigdt")
+        ''_db.executeDB("delete from t54_krsirehd")
+        ''_db.executeDB("delete from t55_krsiredt")
+        ''_db.executeDB("delete from t56_krskyuhd")
+        ''_db.executeDB("delete from t57_krkikehd")
+        ''_db.executeDB("delete from t58_krnyukohd")
+        ''_db.executeDB("delete from t59_krnyukodt")
+        ''_db.executeDB("delete from t60_krshukohd")
+        ''_db.executeDB("delete from t61_krshukodt")
+        ''_db.executeDB("delete from t62_krnkinhd")
+        ''_db.executeDB("delete from t63_krnkindt")
+        ''_db.executeDB("delete from t64_krshrihd")
+        ''_db.executeDB("delete from t65_krshridt")
+
+
+        strWhere = " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        strWhere += " AND (仕分日 >= '" & dtmLastMonth & "'"
+        strWhere += " AND 仕分日 < '" & dtmThisMonth & "')"
+
+        _db.executeDB("delete from t66_swkhd" & strWhere)
+
+
+        mClear_Table = True
+
+    End Function
+
+
+    Private Function mSet_t50_zikhd() As Boolean
+
+        Dim reccnt As Integer = 0
+        Dim dtToday As DateTime = dtmSime.Value
+
+        Dim Sql1 As String = ""
+        Sql1 += "SELECT * FROM public.m01_company"
+        Sql1 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+
+        Dim ds1 As DataSet = _db.selectDB(Sql1, RS, reccnt)
+
 
         Dim Sql2 As String = ""
         Sql2 += "SELECT * FROM public.t30_urighd"
@@ -259,6 +700,7 @@ Public Class ClosingLog
 
         Dim ds5 As DataSet = _db.selectDB(Sql5, RS, reccnt)
         Dim ds6 As DataSet = _db.selectDB(Sql6, RS, reccnt)
+
 
         Dim zaiko As String = ""
         zaiko += "SELECT * FROM public.t50_zikhd"
@@ -522,178 +964,500 @@ Public Class ClosingLog
 
             _db.executeDB(Sql11)
         Next
-        Dim Sql12 As String = ""
-        For i As Integer = 0 To ds5.Tables(RS).Rows.Count - 1
-            Sql12 = ""
-            Sql12 += "UPDATE Public.t30_urighd "
-            Sql12 += "SET "
-            Sql12 += "締処理日  = '" & dtToday & "'"
-            Sql12 += " , 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
-            Sql12 += " , 更新日 = '" & dtToday & "'"
 
-            Sql12 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Sql12 += " AND 売上番号 = '" & ds5.Tables(RS).Rows(i)("売上番号") & "'"
-            '20190225 テストのため締め日更新をいったんコメントアウト
-            '_db.executeDB(Sql12)
-        Next
+        mSet_t50_zikhd = True
 
-        Dim Sql13 As String = ""
-        For i As Integer = 0 To ds6.Tables(RS).Rows.Count - 1
-            Sql13 = ""
-            Sql13 += "UPDATE Public.t40_sirehd "
-            Sql13 += "SET "
-            Sql13 += "締処理日  = '" & dtToday & "'"
-            Sql13 += " , 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
-            Sql13 += " , 更新日 = '" & dtToday & "'"
-
-            Sql13 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Sql13 += " AND 仕入番号 = '" & ds6.Tables(RS).Rows(i)("仕入番号") & "'"
-            '20190225 テストのため締め日更新をいったんコメントアウト
-            '_db.executeDB(Sql13)
-        Next
-
-        Dim Sql14 As String = ""
-
-        Sql14 = ""
-        Sql14 += "INSERT INTO Public.t51_smlog("
-        Sql14 += "会社コード, 処理日時, 前回締日, 今回締日, 次回締日, 担当者)"
-        Sql14 += " VALUES('" & frmC01F10_Login.loginValue.BumonCD & "'"
-        Sql14 += " , '" & dtToday & "'"
-        Sql14 += " , '" & ds1.Tables(RS).Rows(0)("前回締日") & "'"
-        Sql14 += " , '" & ds1.Tables(RS).Rows(0)("今回締日") & "'"
-        Sql14 += " , '" & ds1.Tables(RS).Rows(0)("次回締日") & "'"
-        Sql14 += " , '" & frmC01F10_Login.loginValue.TantoNM & "'"
-        Sql14 += " )"
-        '20190225 テストのため締め日更新をいったんコメントアウト
-        '_db.executeDB(Sql14)
-
-        Dim thisClosingDate As DateTime = DateTime.Parse(ds1.Tables(RS).Rows(0)("次回締日"))
-        Dim dtYear As Integer = thisClosingDate.Year
-        Dim dtMonth As Integer = thisClosingDate.Month
-        If dtMonth < 12 Then
-            dtMonth += 1
-        Else
-            dtYear += 1
-            dtMonth = 1
-        End If
-
-        Dim dtdays As Integer = DateTime.DaysInMonth(dtYear, dtMonth)
-        Dim nextClosingDate = New DateTime(dtYear, dtMonth, dtdays)
-        Dim Sql15 As String = ""
-        Sql15 = ""
-        Sql15 += "UPDATE Public.m01_company "
-        Sql15 += "SET "
-        Sql15 += "前回締日  = '" & ds1.Tables(RS).Rows(0)("今回締日") & "'"
-        Sql15 += " , 今回締日 = '" & ds1.Tables(RS).Rows(0)("次回締日") & "'"
-        Sql15 += " , 次回締日 = '" & nextClosingDate & "'"
-
-        Sql15 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        '20190225 テストのため締め日更新をいったんコメントアウト
-        '_db.executeDB(Sql15)
-
-        '請求締処理日更新
-        Dim Sql16 As String = ""
-        For i As Integer = 0 To ds4.Tables(RS).Rows.Count - 1
-            Sql16 = ""
-            Sql16 += "UPDATE Public.t23_skyuhd "
-            Sql16 += "SET "
-            Sql16 += "締処理日  = '" & dtToday & "'"
-            Sql16 += " , 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
-
-            Sql16 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Sql16 += " AND 請求番号 = '" & ds4.Tables(RS).Rows(i)("請求番号") & "'"
-            '20190225 テストのため締め日更新をいったんコメントアウト
-            '_db.executeDB(Sql16)
-        Next
+    End Function
 
 
-        '買掛締処理日更新
-        Dim Sql17 As String = ""
-        For i As Integer = 0 To dsKike.Tables(RS).Rows.Count - 1
-            Sql17 = ""
-            Sql17 += "UPDATE Public.t46_kikehd "
-            Sql17 += "SET "
-            Sql17 += "締処理日 = '" & dtToday & "'"
-            Sql17 += " , 更新日 = '" & dtToday & "'"
-            Sql17 += " , 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
-
-            Sql17 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Sql17 += " AND 買掛番号 = '" & dsKike.Tables(RS).Rows(i)("買掛番号") & "'"
-            '20190225 テストのため締め日更新をいったんコメントアウト
-            '_db.executeDB(Sql17)
-        Next
-
-        '仕入明細締処理日更新
-        Dim Sql18 As String = ""
-        For i As Integer = 0 To ds6.Tables(RS).Rows.Count - 1
-            Sql18 = ""
-            Sql18 += "UPDATE Public.t41_siredt "
-            Sql18 += "SET "
-            Sql18 += "締処理日  = '" & dtToday & "'"
-            Sql18 += " , 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
-
-            Sql18 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Sql18 += " AND 仕入番号 = '" & ds6.Tables(RS).Rows(i)("仕入番号") & "'"
-            '20190225 テストのため締め日更新をいったんコメントアウト
-            '_db.executeDB(Sql18)
-        Next
+    'BK
+    'Private Sub BtnClosing_Click(sender As Object, e As EventArgs) Handles BtnClosing.Click
 
 
-        DgvClosingLog.Rows.Clear()
-        ClosingLogLoad()
-    End Sub
+    '    Dim reccnt As Integer = 0
+    '    Dim dtToday As DateTime = DateTime.Now
 
-    '仕訳データ作成処理
-    '
-    Private Sub Accounting()
+    '    Dim Sql1 As String = ""
+    '    Sql1 += "SELECT * FROM public.m01_company"
+    '    Sql1 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+
+    '    Dim ds1 As DataSet = _db.selectDB(Sql1, RS, reccnt)
+
+    '    '仕訳データ作成
+    '    'CSVファイルの書き出し処理
+    '    Accounting()
+
+    '    Exit Sub
+
+    '    Dim Sql2 As String = ""
+    '    Sql2 += "SELECT * FROM public.t30_urighd"
+    '    Sql2 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+    '    '20190225 テストのため条件をいったんコメントアウト
+    '    'Sql2 += " AND 売上日 > '" & ds1.Tables(RS).Rows(0)("前回締日") & "'"
+    '    'Sql2 += " AND 売上日 <= '" & ds1.Tables(RS).Rows(0)("今回締日") & "'"
+    '    'Sql2 += " AND 締処理日 IS NULL "
+    '    Dim dsUrigdt As DataSet = _db.selectDB(Sql2, RS, reccnt)
+
+
+    '    Dim Sql3 As String = ""
+    '    Sql3 += "SELECT * FROM public.t40_sirehd"
+    '    Sql3 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+    '    '20190225 テストのため条件をいったんコメントアウト
+    '    'Sql3 += " AND 仕入日 > '" & ds1.Tables(RS).Rows(0)("前回締日") & "'"
+    '    'Sql3 += " AND 仕入日 <= '" & ds1.Tables(RS).Rows(0)("今回締日") & "'"
+    '    'Sql3 += " AND 締処理日 IS NULL "
+    '    Dim ds3 As DataSet = _db.selectDB(Sql3, RS, reccnt)
+
+
+    '    Dim Sql4 As String = ""
+    '    Sql4 += "SELECT * FROM public.t23_skyuhd"
+    '    Sql4 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+    '    '20190225 テストのため条件をいったんコメントアウト
+    '    'Sql4 += " AND 請求日 > '" & ds1.Tables(RS).Rows(0)("前回締日") & "'"
+    '    'Sql4 += " AND 請求日 <= '" & ds1.Tables(RS).Rows(0)("今回締日") & "'"
+    '    'Sql4 += " AND 締処理日 IS NULL "
+    '    Dim ds4 As DataSet = _db.selectDB(Sql4, RS, reccnt)
+
+
+    '    Sql4 = ""
+    '    Sql4 += "SELECT * FROM public.t46_kikehd"
+    '    Sql4 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+    '    '20190225 テストのため条件をいったんコメントアウト
+    '    'Sql4 += " AND 買掛日 > '" & ds1.Tables(RS).Rows(0)("前回締日") & "'"
+    '    'Sql4 += " AND 買掛日 <= '" & ds1.Tables(RS).Rows(0)("今回締日") & "'"
+    '    'Sql4 += " AND 締処理日 IS NULL "
+    '    Dim dsKike As DataSet = _db.selectDB(Sql4, RS, reccnt)
+
+    '    Dim Sql5 As String = ""
+    '    Sql5 += "SELECT * FROM public.t31_urigdt"
+    '    Sql5 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+    '    '20190225 テストのため条件をいったんコメントアウト
+    '    'Sql5 += " AND 売上番号 IN ("
+    '    'For i As Integer = 0 To dsUrigdt.Tables(RS).Rows.Count - 1
+    '    '    If i = 0 Then
+    '    '    Else
+    '    '        Sql5 += ","
+    '    '    End If
+    '    '    Sql5 += "'" & dsUrigdt.Tables(RS).Rows(i)("売上番号") & "'"
+    '    'Next
+    '    'Sql5 += ")"
+
+    '    Dim Sql6 As String = ""
+    '    Sql6 += "SELECT * FROM public.t41_siredt"
+    '    Sql6 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+    '    '20190225 テストのため条件をいったんコメントアウト
+    '    'Sql6 += " AND 仕入番号 IN ("
+    '    'For i As Integer = 0 To ds3.Tables(RS).Rows.Count - 1
+    '    '    If i = 0 Then
+    '    '    Else
+    '    '        Sql6 += ","
+    '    '    End If
+    '    '    Sql6 += "'" & ds3.Tables(RS).Rows(i)("仕入番号") & "'"
+    '    'Next
+
+    '    Dim ds5 As DataSet = _db.selectDB(Sql5, RS, reccnt)
+    '    Dim ds6 As DataSet = _db.selectDB(Sql6, RS, reccnt)
+
+    '    Dim zaiko As String = ""
+    '    zaiko += "SELECT * FROM public.t50_zikhd"
+    '    zaiko += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+
+    '    Dim dszaiko As DataSet = _db.selectDB(zaiko, RS, reccnt)
+    '    Dim SqlZaiko As String = ""
+
+    '    For i As Integer = 0 To dszaiko.Tables(RS).Rows.Count - 1
+    '        Dim purchase As String = ""
+    '        purchase += "SELECT * FROM public.t41_siredt"
+    '        purchase += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+    '        purchase += " AND メーカー = '" & dszaiko.Tables(RS).Rows(i)("メーカー") & "'"
+    '        purchase += " AND 品名 = '" & dszaiko.Tables(RS).Rows(i)("品名") & "'"
+    '        purchase += " AND 型式 = '" & dszaiko.Tables(RS).Rows(i)("型式") & "'"
+    '        '20190225 テストのため条件をいったんコメントアウト
+    '        'purchase += " AND 締処理日 IS NULL "
+
+    '        Dim dsPurchase As DataSet = _db.selectDB(purchase, RS, reccnt)
+    '        Dim PurchaseSum As Double = 0
+    '        Dim OverheadSum As Double = 0
+    '        Dim PurchaseQuantity As Double = 0
+
+    '        For x As Integer = 0 To dsPurchase.Tables(RS).Rows.Count - 1
+    '            PurchaseSum += dsPurchase.Tables(RS).Rows(x)("仕入金額")
+    '            OverheadSum += dsPurchase.Tables(RS).Rows(x)("間接費")
+    '            PurchaseQuantity += dsPurchase.Tables(RS).Rows(x)("仕入数量")
+
+    '            purchase = ""
+    '            purchase += "UPDATE Public.t41_siredt "
+    '            purchase += "SET 締処理日 = '" & dtToday & "'"
+
+    '            purchase += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+    '            purchase += " AND 仕入番号 = '" & dsPurchase.Tables(RS).Rows(x)("仕入番号") & "'"
+    '            purchase += " AND 行番号 = '" & dsPurchase.Tables(RS).Rows(x)("行番号").ToString & "'"
+
+    '            '20190225 テストのため締め日更新をいったんコメントアウト
+    '            '_db.executeDB(purchase)
+
+    '        Next
+    '        Dim sum1 As Double = 0
+    '        Dim sum2 As Double = 0
+    '        Dim unitPrice As Double = 0
+    '        Dim sum3 As Double = 0
+    '        Dim sum4 As Double = 0
+    '        Dim OverHead As Double = 0
+    '        If ds1.Tables(RS).Rows(0)("在庫単価評価法") = 1 Then
+    '            unitPrice = dsPurchase.Tables(RS).Rows(dsPurchase.Tables(RS).Rows.Count)("仕入値")
+    '            OverHead = dsPurchase.Tables(RS).Rows(dsPurchase.Tables(RS).Rows.Count)("間接費")
+    '        Else
+    '            sum1 = dszaiko.Tables(RS).Rows(i)("今月単価") * dszaiko.Tables(RS).Rows(i)("今月末数量")
+    '            sum1 += PurchaseSum
+    '            sum2 = dszaiko.Tables(RS).Rows(i)("今月末数量") + PurchaseQuantity
+    '            unitPrice = sum1 / sum2
+    '            sum3 = dszaiko.Tables(RS).Rows(i)("今月間接費") * dszaiko.Tables(RS).Rows(i)("今月末数量")
+    '            sum3 += OverheadSum
+    '            sum4 = dszaiko.Tables(RS).Rows(i)("今月末数量") + PurchaseQuantity
+    '            OverHead = sum3 / sum4
+    '        End If
+
+
+
+    '        SqlZaiko = ""
+    '        SqlZaiko += "UPDATE Public.t50_zikhd "
+    '        SqlZaiko += "SET 前月末数量 = '" & dszaiko.Tables(RS).Rows(i)("今月末数量").ToString & "'"
+    '        SqlZaiko += " , 前月末単価 = " & dszaiko.Tables(RS).Rows(i)("今月単価").ToString
+    '        SqlZaiko += " , 前月末間接費 = " & dszaiko.Tables(RS).Rows(i)("今月間接費").ToString
+    '        SqlZaiko += " , 今月末数量 = 0"
+    '        SqlZaiko += " , "
+    '        If unitPrice.ToString = "∞" Or unitPrice.ToString = "-∞" Then
+    '            SqlZaiko += "今月単価 = 0"
+    '        Else
+    '            SqlZaiko += "今月単価 = " & unitPrice.ToString
+    '        End If
+    '        SqlZaiko += " , 今月入庫数 = 0"
+    '        SqlZaiko += " , 今月出庫数 = 0"
+    '        SqlZaiko += " , "
+    '        If OverHead.ToString = "∞" Or OverHead.ToString = "-∞" Then
+    '            SqlZaiko += "今月間接費 = 0"
+    '        Else
+    '            SqlZaiko += "今月間接費 = " & OverHead.ToString
+    '        End If
+
+    '        SqlZaiko += " , 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+    '        SqlZaiko += " , 更新日 = '" & dtToday & "'"
+
+    '        SqlZaiko += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+    '        SqlZaiko += " AND メーカー = '" & dszaiko.Tables(RS).Rows(i)("メーカー") & "'"
+    '        SqlZaiko += " AND 品名 = '" & dszaiko.Tables(RS).Rows(i)("品名") & "'"
+    '        SqlZaiko += " AND 型式 = '" & dszaiko.Tables(RS).Rows(i)("型式") & "'"
+
+    '        '20190225 テストのため締め日更新をいったんコメントアウト
+    '        '_db.executeDB(SqlZaiko)
+    '    Next
+
+
+    '    For i As Integer = 0 To dszaiko.Tables(RS).Rows.Count - 1
+    '        SqlZaiko = ""
+    '        SqlZaiko += "UPDATE Public.t50_zikhd "
+    '        SqlZaiko += "SET 前月末数量 = " & dszaiko.Tables(RS).Rows(i)("今月末数量").ToString
+    '        SqlZaiko += " , 今月末数量 = 0"
+    '        SqlZaiko += " , 今月入庫数 = 0"
+    '        SqlZaiko += " , 今月出庫数 = 0"
+    '        SqlZaiko += " , 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+    '        SqlZaiko += " , 更新日 = '" & dtToday & "'"
+
+    '        SqlZaiko += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+    '        SqlZaiko += " AND メーカー = '" & dszaiko.Tables(RS).Rows(i)("メーカー") & "'"
+    '        SqlZaiko += " AND 品名 = '" & dszaiko.Tables(RS).Rows(i)("品名") & "'"
+    '        SqlZaiko += " AND 型式 = '" & dszaiko.Tables(RS).Rows(i)("型式") & "'"
+
+    '        '20190225 テストのため締め日更新をいったんコメントアウト
+    '        '_db.executeDB(SqlZaiko)
+    '    Next
+
+    '    Dim Sql7 As String = ""
+    '    '20190225 テストのため月次用テーブルのデータを削除  ここから
+    '    _db.executeDB("truncate table t50_zikhd")
+    '    '20190225 テストのため月次用テーブルのデータを削除  ここまで
+
+    '    For i As Integer = 0 To ds6.Tables(RS).Rows.Count - 1
+    '        Sql7 += "SELECT * FROM public.t50_zikhd"
+    '        Sql7 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+    '        Sql7 += " AND メーカー = '" & ds6.Tables(RS).Rows(i)("メーカー") & "'"
+    '        Sql7 += " AND 品名 = '" & ds6.Tables(RS).Rows(i)("品名") & "'"
+    '        Sql7 += " AND 型式 = '" & ds6.Tables(RS).Rows(i)("型式") & "'"
+
+    '        Dim ds7 As DataSet = _db.selectDB(Sql7, RS, reccnt)
+    '        Sql7 = ""
+
+    '        Dim Sql8 As String = ""
+
+    '        If ds7.Tables(RS).Rows.Count = 0 Then
+    '            Sql8 = ""
+    '            Sql8 += "INSERT INTO Public.t50_zikhd("
+    '            Sql8 += "会社コード, 年月, メーカー, 品名, 型式, 前月末数量, 前月末間接費, 今月末数量, 今月入庫数, 今月出庫数, 今月間接費, 更新者, 更新日,前月末単価, 今月単価)"
+    '            Sql8 += " VALUES("
+    '            Sql8 += " '" & frmC01F10_Login.loginValue.BumonCD & "'"
+    '            Sql8 += " , '" & dtToday & "'"
+    '            Sql8 += " , '" & ds6.Tables(RS).Rows(i)("メーカー") & "'"
+    '            Sql8 += " , '" & ds6.Tables(RS).Rows(i)("品名") & "'"
+    '            Sql8 += " , '" & ds6.Tables(RS).Rows(i)("型式") & "'"
+    '            Sql8 += " , 0"          '前月末数量
+    '            Sql8 += " , 0"          '前月末間接費
+    '            Sql8 += " , " & ds6.Tables(RS).Rows(i)("仕入数量").ToString     '今月末数量
+    '            Sql8 += " , " & ds6.Tables(RS).Rows(i)("仕入数量").ToString     '今月入庫数
+    '            Sql8 += " , 0"          '今月出庫数
+    '            Sql8 += " , " & ds6.Tables(RS).Rows(i)("間接費").ToString      '今月間接費
+    '            Sql8 += " , '" & frmC01F10_Login.loginValue.TantoNM & "'"        '更新者
+    '            Sql8 += " , '" & dtToday & "'"      '更新日
+    '            Sql8 += " , 0"          '前月末単価
+    '            Sql8 += " , " & ds6.Tables(RS).Rows(i)("仕入値").ToString     '今月単価
+    '            Sql8 += " )"
+    '            _db.executeDB(Sql8)
+    '        Else
+    '            Dim tmp1 As Double = 0
+    '            Dim tmp2 As Double = 0
+    '            Sql8 = ""
+    '            Sql8 += "UPDATE Public.t50_zikhd "
+    '            Sql8 += "SET "
+    '            Sql8 += " 今月末数量 = "
+    '            tmp1 = ds7.Tables(RS).Rows(0)("今月末数量") + ds6.Tables(RS).Rows(i)("仕入数量")
+    '            Sql8 += tmp1.ToString
+    '            Sql8 += " , 今月入庫数 = "
+    '            tmp2 = ds7.Tables(RS).Rows(0)("今月入庫数") + ds6.Tables(RS).Rows(i)("仕入数量")
+    '            Sql8 += tmp2.ToString
+    '            Sql8 += " , 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+    '            Sql8 += " , 更新日 = '" & dtToday & "'"
+
+    '            Sql8 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+    '            Sql8 += " AND メーカー = '" & ds6.Tables(RS).Rows(i)("メーカー") & "'"
+    '            Sql8 += " AND 品名 = '" & ds6.Tables(RS).Rows(i)("品名") & "'"
+    '            Sql8 += " AND 型式 = '" & ds6.Tables(RS).Rows(i)("型式") & "'"
+
+    '            _db.executeDB(Sql8)
+    '        End If
+    '    Next
+
+    '    Sql7 = ""
+    '    For i As Integer = 0 To ds5.Tables(RS).Rows.Count - 1
+    '        Sql7 += "SELECT * FROM public.t50_zikhd"
+    '        Sql7 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+    '        Sql7 += " AND メーカー = '" & ds5.Tables(RS).Rows(i)("メーカー") & "'"
+    '        Sql7 += " AND 品名 = '" & ds5.Tables(RS).Rows(i)("品名") & "'"
+    '        Sql7 += " AND 型式 = '" & ds5.Tables(RS).Rows(i)("型式") & "'"
+
+    '        Dim ds7 As DataSet = _db.selectDB(Sql7, RS, reccnt)
+    '        Sql7 = ""
+
+    '        Dim Sql9 As String = ""
+
+    '        If ds7.Tables(RS).Rows.Count = 0 Then
+    '            Sql9 = ""
+    '            Sql9 += "INSERT INTO Public.t50_zikhd("
+    '            Sql9 += "会社コード, 年月, メーカー, 品名, 型式, 前月末数量, 前月末間接費, 今月末数量, 今月入庫数, 今月出庫数, 今月間接費, 更新者, 更新日, 前月末単価, 今月単価)"
+    '            Sql9 += " VALUES("
+    '            Sql9 += " '" & frmC01F10_Login.loginValue.BumonCD & "'"
+    '            Sql9 += " , '" & dtToday & "'"          '年月
+    '            Sql9 += " , '" & ds5.Tables(RS).Rows(i)("メーカー") & "'"
+    '            Sql9 += " , '" & ds5.Tables(RS).Rows(i)("品名") & "'"
+    '            Sql9 += " , '" & ds5.Tables(RS).Rows(i)("型式") & "'"
+    '            Sql9 += " , 0"      '前月末数量
+    '            Sql9 += " , 0"      '前月末間接費
+    '            Sql9 += " , " & ds5.Tables(RS).Rows(i)("売上数量").ToString     '今月末数量
+    '            Sql9 += " , 0"      '今月入庫数
+    '            Sql9 += " , " & ds5.Tables(RS).Rows(i)("売上数量").ToString     '今月出庫数
+    '            Sql9 += " , 0"      '今月間接費
+    '            Sql9 += " , '" & frmC01F10_Login.loginValue.TantoNM & "'"       '更新者
+    '            Sql9 += " , '" & dtToday & "'"                                  '更新日
+    '            Sql9 += " , 0"      '前月末単価
+    '            Sql9 += " , 0"      '今月単価
+    '            Sql9 += " )"
+
+    '            _db.executeDB(Sql9)
+
+    '        Else
+    '            Dim tmp3 As Double = 0
+    '            Dim tmp4 As Double = 0
+    '            Sql9 = ""
+    '            Sql9 += "UPDATE Public.t50_zikhd "
+    '            Sql9 += "SET "
+    '            Sql9 += " 今月末数量 = "
+    '            tmp3 = ds7.Tables(RS).Rows(0)("今月末数量") - ds5.Tables(RS).Rows(i)("売上数量")
+    '            Sql9 += tmp3.ToString
+    '            Sql9 += " , 今月出庫数 = "
+    '            tmp4 = ds7.Tables(RS).Rows(0)("今月出庫数") + ds5.Tables(RS).Rows(i)("売上数量")
+    '            Sql9 += tmp4.ToString
+    '            Sql9 += " , 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+    '            Sql9 += " , 更新日 = '" & dtToday & "'"
+
+    '            Sql9 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+    '            Sql9 += " AND メーカー = '" & ds5.Tables(RS).Rows(i)("メーカー") & "'"
+    '            Sql9 += " AND 品名 = '" & ds5.Tables(RS).Rows(i)("品名") & "'"
+    '            Sql9 += " AND 型式 = '" & ds5.Tables(RS).Rows(i)("型式") & "'"
+    '            _db.executeDB(Sql9)
+    '        End If
+    '    Next
+
+    '    Dim Sql10 As String = ""
+    '    Sql10 += "SELECT * FROM public.t50_zikhd"
+    '    Sql10 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+
+    '    Dim ds10 As DataSet = _db.selectDB(Sql10, RS, reccnt)
+
+    '    Dim Sql11 As String = ""
+    '    For i As Integer = 0 To ds10.Tables(RS).Rows.Count - 1
+    '        Dim tmp5 As Double = 0
+    '        Sql11 = ""
+    '        Sql11 += "UPDATE Public.t50_zikhd "
+    '        Sql11 += "SET "
+    '        Sql11 += " 今月末数量 = "
+    '        tmp5 = ds10.Tables(RS).Rows(i)("今月末数量") + ds10.Tables(RS).Rows(i)("前月末数量")
+    '        Sql11 += tmp5.ToString
+    '        Sql11 += " , 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+    '        Sql11 += " , 更新日 = '" & dtToday & "'"
+
+    '        Sql11 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+    '        Sql11 += " AND メーカー = '" & ds10.Tables(RS).Rows(i)("メーカー") & "'"
+    '        Sql11 += " AND 品名 = '" & ds10.Tables(RS).Rows(i)("品名") & "'"
+    '        Sql11 += " AND 型式 = '" & ds10.Tables(RS).Rows(i)("型式") & "'"
+
+    '        _db.executeDB(Sql11)
+    '    Next
+    '    Dim Sql12 As String = ""
+    '    For i As Integer = 0 To ds5.Tables(RS).Rows.Count - 1
+    '        Sql12 = ""
+    '        Sql12 += "UPDATE Public.t30_urighd "
+    '        Sql12 += "SET "
+    '        Sql12 += "締処理日  = '" & dtToday & "'"
+    '        Sql12 += " , 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+    '        Sql12 += " , 更新日 = '" & dtToday & "'"
+
+    '        Sql12 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+    '        Sql12 += " AND 売上番号 = '" & ds5.Tables(RS).Rows(i)("売上番号") & "'"
+    '        '20190225 テストのため締め日更新をいったんコメントアウト
+    '        '_db.executeDB(Sql12)
+    '    Next
+
+    '    Dim Sql13 As String = ""
+    '    For i As Integer = 0 To ds6.Tables(RS).Rows.Count - 1
+    '        Sql13 = ""
+    '        Sql13 += "UPDATE Public.t40_sirehd "
+    '        Sql13 += "SET "
+    '        Sql13 += "締処理日  = '" & dtToday & "'"
+    '        Sql13 += " , 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+    '        Sql13 += " , 更新日 = '" & dtToday & "'"
+
+    '        Sql13 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+    '        Sql13 += " AND 仕入番号 = '" & ds6.Tables(RS).Rows(i)("仕入番号") & "'"
+    '        '20190225 テストのため締め日更新をいったんコメントアウト
+    '        '_db.executeDB(Sql13)
+    '    Next
+
+    '    Dim Sql14 As String = ""
+
+    '    Sql14 = ""
+    '    Sql14 += "INSERT INTO Public.t51_smlog("
+    '    Sql14 += "会社コード, 処理日時, 前回締日, 今回締日, 次回締日, 担当者)"
+    '    Sql14 += " VALUES('" & frmC01F10_Login.loginValue.BumonCD & "'"
+    '    Sql14 += " , '" & dtToday & "'"
+    '    Sql14 += " , '" & ds1.Tables(RS).Rows(0)("前回締日") & "'"
+    '    Sql14 += " , '" & ds1.Tables(RS).Rows(0)("今回締日") & "'"
+    '    Sql14 += " , '" & ds1.Tables(RS).Rows(0)("次回締日") & "'"
+    '    Sql14 += " , '" & frmC01F10_Login.loginValue.TantoNM & "'"
+    '    Sql14 += " )"
+    '    '20190225 テストのため締め日更新をいったんコメントアウト
+    '    '_db.executeDB(Sql14)
+
+    '    Dim thisClosingDate As DateTime = DateTime.Parse(ds1.Tables(RS).Rows(0)("次回締日"))
+    '    Dim dtYear As Integer = thisClosingDate.Year
+    '    Dim dtMonth As Integer = thisClosingDate.Month
+    '    If dtMonth < 12 Then
+    '        dtMonth += 1
+    '    Else
+    '        dtYear += 1
+    '        dtMonth = 1
+    '    End If
+
+    '    Dim dtdays As Integer = DateTime.DaysInMonth(dtYear, dtMonth)
+    '    Dim nextClosingDate = New DateTime(dtYear, dtMonth, dtdays)
+    '    Dim Sql15 As String = ""
+    '    Sql15 = ""
+    '    Sql15 += "UPDATE Public.m01_company "
+    '    Sql15 += "SET "
+    '    Sql15 += "前回締日  = '" & ds1.Tables(RS).Rows(0)("今回締日") & "'"
+    '    Sql15 += " , 今回締日 = '" & ds1.Tables(RS).Rows(0)("次回締日") & "'"
+    '    Sql15 += " , 次回締日 = '" & nextClosingDate & "'"
+
+    '    Sql15 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+    '    '20190225 テストのため締め日更新をいったんコメントアウト
+    '    '_db.executeDB(Sql15)
+
+    '    '請求締処理日更新
+    '    Dim Sql16 As String = ""
+    '    For i As Integer = 0 To ds4.Tables(RS).Rows.Count - 1
+    '        Sql16 = ""
+    '        Sql16 += "UPDATE Public.t23_skyuhd "
+    '        Sql16 += "SET "
+    '        Sql16 += "締処理日  = '" & dtToday & "'"
+    '        Sql16 += " , 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+
+    '        Sql16 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+    '        Sql16 += " AND 請求番号 = '" & ds4.Tables(RS).Rows(i)("請求番号") & "'"
+    '        '20190225 テストのため締め日更新をいったんコメントアウト
+    '        '_db.executeDB(Sql16)
+    '    Next
+
+
+    '    '買掛締処理日更新
+    '    Dim Sql17 As String = ""
+    '    For i As Integer = 0 To dsKike.Tables(RS).Rows.Count - 1
+    '        Sql17 = ""
+    '        Sql17 += "UPDATE Public.t46_kikehd "
+    '        Sql17 += "SET "
+    '        Sql17 += "締処理日 = '" & dtToday & "'"
+    '        Sql17 += " , 更新日 = '" & dtToday & "'"
+    '        Sql17 += " , 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+
+    '        Sql17 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+    '        Sql17 += " AND 買掛番号 = '" & dsKike.Tables(RS).Rows(i)("買掛番号") & "'"
+    '        '20190225 テストのため締め日更新をいったんコメントアウト
+    '        '_db.executeDB(Sql17)
+    '    Next
+
+    '    '仕入明細締処理日更新
+    '    Dim Sql18 As String = ""
+    '    For i As Integer = 0 To ds6.Tables(RS).Rows.Count - 1
+    '        Sql18 = ""
+    '        Sql18 += "UPDATE Public.t41_siredt "
+    '        Sql18 += "SET "
+    '        Sql18 += "締処理日  = '" & dtToday & "'"
+    '        Sql18 += " , 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+
+    '        Sql18 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+    '        Sql18 += " AND 仕入番号 = '" & ds6.Tables(RS).Rows(i)("仕入番号") & "'"
+    '        '20190225 テストのため締め日更新をいったんコメントアウト
+    '        '_db.executeDB(Sql18)
+    '    Next
+
+
+    '    DgvClosingLog.Rows.Clear()
+    '    ClosingLogLoad()
+    'End Sub
+
+
+    Private Function Accounting(ByRef dsCompany As DataSet, ByVal dtmShime As DateTime) As Boolean
+        '仕訳データ作成処理
+
         Dim dtToday As DateTime = DateTime.Now
         Dim reccnt As Integer = 0
         Dim Sql As String = ""
 
-        '20190225 テストのため締処理用テーブルを全件消去してから処理を行う
-        _db.executeDB("truncate table t52_krurighd")
-        _db.executeDB("truncate table t53_krurigdt")
-        _db.executeDB("truncate table t54_krsirehd")
-        _db.executeDB("truncate table t55_krsiredt")
-        _db.executeDB("truncate table t56_krskyuhd")
-        _db.executeDB("truncate table t57_krkikehd")
-        _db.executeDB("truncate table t58_krnyukohd")
-        _db.executeDB("truncate table t59_krnyukodt")
-        _db.executeDB("truncate table t60_krshukohd")
-        _db.executeDB("truncate table t61_krshukodt")
-        _db.executeDB("truncate table t62_krnkinhd")
-        _db.executeDB("truncate table t63_krnkindt")
-        _db.executeDB("truncate table t64_krshrihd")
-        _db.executeDB("truncate table t65_krshridt")
-        _db.executeDB("truncate table t66_swkhd")
-
-
-        Sql = ""
-        Sql += "SELECT * FROM public.m01_company"
-        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        Dim dsCompany As DataSet = _db.selectDB(Sql, RS, reccnt)
 
 #Region "仕訳前受金"
         Sql = ""
         Sql += "SELECT * FROM public.t27_nkinkshihd"
         Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        'Sql += " AND "
-        'Sql += "入金日"
-        'Sql += " >  "
-        'Sql += "'"
-        'Sql += dsCompany.Tables(RS).Rows(0)("前回締日")
-        'Sql += "'"
-        'Sql += " AND "
-        'Sql += "入金日"
-        'Sql += " <=  "
-        'Sql += "'"
-        'Sql += dsCompany.Tables(RS).Rows(0)("今回締日")
-        'Sql += "'"
-        'Sql += " AND "
-        'Sql += "締処理日"
-        'Sql += " IS NULL "
+        Sql += " AND 締処理日 = '" & dtmShime & "'"
 
         Dim dsNkinkshihd As DataSet = _db.selectDB(Sql, RS, reccnt)
+
 
         '入金消込データぶん回して
         For i As Integer = 0 To dsNkinkshihd.Tables(RS).Rows.Count - 1
@@ -2608,7 +3372,10 @@ Public Class ClosingLog
 #End Region
         _msgHd.dspMSG("CreateExcel", frmC01F10_Login.loginValue.Language)
 
-    End Sub
+
+        Accounting = True
+
+    End Function
 
     Public Sub ConvertDataTableToCsv(ds1 As DataSet, tableName As String, ColName As String, Name As String)
 
