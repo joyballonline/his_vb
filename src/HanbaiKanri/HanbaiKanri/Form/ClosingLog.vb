@@ -4284,7 +4284,7 @@ Public Class ClosingLog
                     Sql = ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyyMM") & "'" '入金日
                     Sql += "," & seqID 'プライマリ
                     Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
-                    Sql += ",'1" & strKamoku & "'"  '支払手数料
+                    Sql += ",'1振込手数料'"  '支払手数料
                     Sql += "," & UtilClass.formatNumber(formatDouble(Paymentfee)) '支払手数料（貸方金額は整数、借方金額は負数。小数点は含んでよい -nnnnnnn.nn）
                     Sql += ",1" '固定
                     Sql += ",'" & getCustomerName(dsNkinkshihd.Tables(RS).Rows(i)("得意先コード").ToString) & "'" '補助科目
@@ -4486,7 +4486,7 @@ Public Class ClosingLog
                         Sql = ",'" & Format(dsNkinkshihd.Tables(RS).Rows(i)("入金日"), "yyyyMM") & "'" '入金日
                         Sql += "," & seqID 'プライマリ
                         Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
-                        Sql += ",'1" & strKamoku & "'"  '支払手数料
+                        Sql += ",'1振込手数料'"  '支払手数料
                         Sql += "," & UtilClass.formatNumber(formatDouble(Paymentfee)) '支払手数料
                         Sql += ",1" '固定
                         Sql += ",'" & getCustomerName(dsNkinkshihd.Tables(RS).Rows(i)("得意先コード").ToString) & "'" '補助科目
@@ -4731,7 +4731,7 @@ Public Class ClosingLog
                     Sql = ",'" & Format(dsShrikshihd.Tables(RS).Rows(i)("支払日"), "yyyyMM") & "'"
                     Sql += "," & seqID 'プライマリ
                     Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
-                    Sql += ",'2" & strKamoku & "'" 　'支払手数料
+                    Sql += ",'2振込手数料'" 　'支払手数料
                     Sql += "," & UtilClass.formatNumber(formatDouble(-Paymentfee)) '支払手数料
                     Sql += ",1" '固定
                     Sql += ",'" & getSupplierName(dsShrikshihd.Tables(RS).Rows(i)("仕入先コード").ToString) & "'"
@@ -4928,7 +4928,7 @@ Public Class ClosingLog
                         Sql = ",'" & Format(dsShrikshihd.Tables(RS).Rows(i)("支払日"), "yyyyMM") & "'"
                         Sql += "," & seqID 'プライマリ
                         Sql += "," & countKeyID 'TRANSACTIONID内でカウントアップ（0から）
-                        Sql += ",'2" & strKamoku & "'"  '貸方勘定
+                        Sql += ",'2振込手数料'"  '貸方勘定
                         Sql += "," & UtilClass.formatNumber(formatDouble(-Paymentfee)) '支払手数料
                         Sql += ",1" '固定
                         Sql += ",'" & getSupplierName(dsShrikshihd.Tables(RS).Rows(i)("仕入先コード").ToString) & "'" '補助科目
