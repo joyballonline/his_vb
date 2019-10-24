@@ -133,6 +133,7 @@ Public Class ClosingLog
             BtnClosing.Text = "Closing"
             BtnBack.Text = "Back"
             BtnSearch.Text = "Search"
+            LblShime.Text = "Closing Date"
 
             DgvClosingLog.Columns("締処理日時").HeaderText = "ClosingDate"
             DgvClosingLog.Columns("前回締日").HeaderText = "LastClosingDate"
@@ -229,6 +230,12 @@ Public Class ClosingLog
         End If
 
 
+
+        'krtable テーブルのバックアップ　  一時的にコメントアウト
+        'If mSetkrTable(ds1, dtmShime) = False Then
+        '    Exit Sub
+        'End If
+
         '月末在庫の集計  一時的にコメントアウト
         'If mSet_t50_zikhd() = False Then
         '    Exit Sub
@@ -237,17 +244,1348 @@ Public Class ClosingLog
 
 
         'ログと会社マスタの更新
-        ''If mSetLog(ds1) = False Then
-        ''    Exit Sub
-        ''End If
+        If mSetLog(ds1) = False Then
+            Exit Sub
+        End If
 
 
+        '登録完了メッセージ
+        _msgHd.dspMSG("ClosingLog", frmC01F10_Login.loginValue.Language)
+
+        _parentForm.Enabled = True
+        _parentForm.Show()
+        Me.Dispose()
 
 
-
-        DgvClosingLog.Rows.Clear()
-        ClosingLogLoad()
     End Sub
+
+    Private Function mSetkrTable(ByRef dsCompany As DataSet, ByVal dtmShime As DateTime) As Boolean
+
+        Dim Sql As String
+        Dim reccnt As Integer = 0
+        Dim dtToday As DateTime = dtmSime.Value
+
+
+#Region "売上"
+        Sql = ""
+        Sql += "SELECT * FROM public.t30_urighd"
+        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " AND 締処理日 = '" & dtmShime & "'"
+
+        Dim dsUrighd As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+        For i As Integer = 0 To dsUrighd.Tables(RS).Rows.Count - 1
+            Sql = ""
+            Sql += "INSERT INTO Public.t52_krurighd("
+            Sql += "会社コード, 売上番号, 客先番号, 受注番号, 受注番号枝番, 見積番号, 見積番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額, 仕入金額, 売上金額, 粗利額, 営業担当者, 入力担当者, 備考, ＶＡＴ, ＰＰＨ, 受注日, 売上日, 締処理日, 入金予定日, 登録日, 更新日, 更新者, 取消日, 取消区分)"
+            Sql += " VALUES('"
+            Sql += frmC01F10_Login.loginValue.BumonCD
+            Sql += "', '"
+            Sql += dsUrighd.Tables(RS).Rows(i)("売上番号").ToString
+            Sql += "', '"
+            Sql += dsUrighd.Tables(RS).Rows(i)("客先番号").ToString
+            Sql += "', '"
+            Sql += dsUrighd.Tables(RS).Rows(i)("受注番号").ToString
+            Sql += "', '"
+            Sql += dsUrighd.Tables(RS).Rows(i)("受注番号枝番").ToString
+            Sql += "', '"
+            Sql += dsUrighd.Tables(RS).Rows(i)("見積番号").ToString
+            Sql += "', '"
+            Sql += dsUrighd.Tables(RS).Rows(i)("見積番号枝番").ToString
+            Sql += "', '"
+            Sql += dsUrighd.Tables(RS).Rows(i)("得意先コード").ToString
+            Sql += "', '"
+            Sql += dsUrighd.Tables(RS).Rows(i)("得意先名").ToString
+            Sql += "',"
+            If IsDBNull(dsUrighd.Tables(RS).Rows(i)("得意先郵便番号")) OrElse dsUrighd.Tables(RS).Rows(i)("得意先郵便番号").ToString = vbNullString Then
+                Sql += "null"
+            Else
+                Sql += UtilClass.formatNumber(dsUrighd.Tables(RS).Rows(i)("得意先郵便番号").ToString）
+            End If
+            Sql += ", '"
+            Sql += dsUrighd.Tables(RS).Rows(i)("得意先住所").ToString
+            Sql += "', '"
+            Sql += dsUrighd.Tables(RS).Rows(i)("得意先電話番号").ToString
+            Sql += "', '"
+            Sql += dsUrighd.Tables(RS).Rows(i)("得意先ＦＡＸ").ToString
+            Sql += "', '"
+            Sql += dsUrighd.Tables(RS).Rows(i)("得意先担当者役職").ToString
+            Sql += "', '"
+            Sql += dsUrighd.Tables(RS).Rows(i)("得意先担当者名").ToString
+            Sql += "', '"
+            Sql += UtilClass.strFormatDate(dsUrighd.Tables(RS).Rows(i)("見積日").ToString)
+            Sql += "', '"
+            Sql += UtilClass.strFormatDate(dsUrighd.Tables(RS).Rows(i)("見積有効期限").ToString)
+            Sql += "', '"
+            Sql += dsUrighd.Tables(RS).Rows(i)("支払条件").ToString
+            Sql += "', '"
+            Sql += UtilClass.formatNumber(dsUrighd.Tables(RS).Rows(i)("見積金額").ToString)
+            Sql += "', '"
+            Sql += UtilClass.formatNumber(dsUrighd.Tables(RS).Rows(i)("仕入金額").ToString)
+            Sql += "', '"
+            Sql += UtilClass.formatNumber(dsUrighd.Tables(RS).Rows(i)("売上金額").ToString)
+            Sql += "', '"
+            Sql += UtilClass.formatNumber(dsUrighd.Tables(RS).Rows(i)("粗利額").ToString)
+            Sql += "', '"
+            Sql += dsUrighd.Tables(RS).Rows(i)("営業担当者").ToString
+            Sql += "', '"
+            Sql += dsUrighd.Tables(RS).Rows(i)("入力担当者").ToString
+            Sql += "', '"
+            Sql += dsUrighd.Tables(RS).Rows(i)("備考").ToString
+            Sql += "', '"
+
+            If dsUrighd.Tables(RS).Rows(i)("ＶＡＴ") Is DBNull.Value Then
+                Sql += "0"
+            Else
+                Sql += UtilClass.formatNumber(dsUrighd.Tables(RS).Rows(i)("ＶＡＴ").ToString)
+            End If
+            Sql += "', '"
+            If dsUrighd.Tables(RS).Rows(i)("ＰＰＨ") Is DBNull.Value Then
+                Sql += "0"
+            Else
+                Sql += UtilClass.formatNumber(dsUrighd.Tables(RS).Rows(i)("ＰＰＨ").ToString)
+            End If
+            Sql += "', '"
+            Sql += UtilClass.strFormatDate(dsUrighd.Tables(RS).Rows(i)("受注日").ToString)
+            Sql += "', '"
+            Sql += UtilClass.strFormatDate(dsUrighd.Tables(RS).Rows(i)("売上日").ToString)
+            Sql += "', '"
+            Sql += UtilClass.strFormatDate(dtToday)
+
+            If dsUrighd.Tables(RS).Rows(i)("入金予定日") IsNot DBNull.Value Then
+                Sql += "', '"
+                Sql += UtilClass.strFormatDate(dsUrighd.Tables(RS).Rows(i)("入金予定日").ToString)
+                Sql += "', '"
+            Else
+                Sql += "', "
+                Sql += "null"
+                Sql += ", '"
+            End If
+
+            Sql += UtilClass.strFormatDate(dsUrighd.Tables(RS).Rows(i)("登録日").ToString)
+            Sql += "', '"
+            Sql += UtilClass.strFormatDate(dtToday)
+            Sql += "', '"
+            Sql += frmC01F10_Login.loginValue.TantoNM
+
+            If dsUrighd.Tables(RS).Rows(i)("取消日") IsNot DBNull.Value Then
+                Sql += "', '"
+                Sql += UtilClass.strFormatDate(dsUrighd.Tables(RS).Rows(i)("取消日").ToString)
+                Sql += "', "
+            Else
+                Sql += "', "
+                Sql += "null"
+                Sql += ", "
+            End If
+
+            If dsUrighd.Tables(RS).Rows(i)("取消区分") IsNot DBNull.Value Then
+                Sql += "'"
+                Sql += dsUrighd.Tables(RS).Rows(i)("取消区分").ToString
+            Else
+                Sql += "0"
+            End If
+
+            Sql += "')"
+
+            _db.executeDB(Sql)
+        Next
+
+        For i As Integer = 0 To dsUrighd.Tables(RS).Rows.Count - 1
+            Sql = ""
+            Sql += "SELECT * FROM public.t31_urigdt"
+            Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += " AND 売上番号 = '" & dsUrighd.Tables(RS).Rows(i)("売上番号") & "'"
+
+            Dim dsUrigdt As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+            If dsCompany.Tables(RS).Rows(0)("在庫単価評価法") = 1 Then
+                '先入先出法の場合
+                For x As Integer = 0 To dsUrigdt.Tables(RS).Rows.Count - 1
+                    Sql = ""
+                    Sql += "SELECT * FROM public.t41_siredt"
+                    Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                    Sql += " AND メーカー ='" & dsUrigdt.Tables(RS).Rows(x)("メーカー") & "'"
+                    Sql += " AND 品名 ='" & dsUrigdt.Tables(RS).Rows(x)("品名") & "'"
+                    Sql += " AND 型式 ='" & dsUrigdt.Tables(RS).Rows(x)("型式") & "'"
+                    Sql += " AND 締処理日 = '" & dtmShime & "'"
+                    Sql += "カウント IS NULL"
+
+                    Dim dsSiredt As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+                    Dim Count As Integer = dsUrigdt.Tables(RS).Rows(x)("受注数量")
+                    Dim Qty As Integer = 0
+                    Dim SireQty As Integer = 0
+                    Dim LineSuffix As Integer = 0
+
+                    For y As Integer = 0 To dsSiredt.Tables(RS).Rows.Count - 1
+                        If Count > 0 Then
+                            If Count - dsSiredt.Tables(RS).Rows(y)("発注数量") < 0 Then
+                                Qty = Count
+                                Count = 0
+                                SireQty = dsSiredt.Tables(RS).Rows(y)("発注数量") - dsUrigdt.Tables(RS).Rows(x)("受注数量")
+                            Else
+                                Qty = dsSiredt.Tables(RS).Rows(y)("発注数量")
+                                Count = Count - dsSiredt.Tables(RS).Rows(y)("発注数量")
+                                SireQty = 0
+                            End If
+                            LineSuffix = y + 1
+
+                            Sql = ""
+                            Sql += "INSERT INTO "
+                            Sql += "Public."
+                            Sql += "t53_krurigdt("
+                            Sql += "会社コード, 売上番号, 受注番号, 受注番号枝番, 行番号, 行番号枝番, 仕入区分, メーカー, 品名, 型式, 仕入先名, 仕入値, 受注数量, 売上数量, 受注残数, 単位, 仕入原価, 関税率, 関税額, 前払法人税率, 前払法人税額, 輸送費率, 輸送費額, 間接費, 仕入金額, 売単価, 売上金額, 見積単価, 見積金額, 粗利額, 粗利率, リードタイム, 備考, 入金有無, 入金番号, 入金日, 更新者, 更新日)"
+                            Sql += " VALUES('"
+                            Sql += frmC01F10_Login.loginValue.BumonCD
+                            Sql += "', '"
+                            Sql += dsUrigdt.Tables(RS).Rows(x)("売上番号").ToString
+                            Sql += "', '"
+                            Sql += dsUrigdt.Tables(RS).Rows(x)("受注番号").ToString
+                            Sql += "', '"
+                            Sql += dsUrigdt.Tables(RS).Rows(x)("受注番号枝番").ToString
+                            Sql += "', '"
+                            Sql += dsUrigdt.Tables(RS).Rows(x)("行番号").ToString
+                            Sql += "', '"
+                            Sql += LineSuffix.ToString
+                            Sql += "', '"
+                            Sql += dsUrigdt.Tables(RS).Rows(x)("仕入区分").ToString
+                            Sql += "', '"
+                            Sql += dsUrigdt.Tables(RS).Rows(x)("メーカー").ToString
+                            Sql += "', '"
+                            Sql += dsUrigdt.Tables(RS).Rows(x)("品名").ToString
+                            Sql += "', '"
+                            Sql += dsUrigdt.Tables(RS).Rows(x)("型式").ToString
+                            Sql += "', '"
+                            Sql += dsUrigdt.Tables(RS).Rows(x)("仕入先名").ToString
+                            Sql += "', '"
+                            Sql += UtilClass.formatNumber(dsSiredt.Tables(RS).Rows(y)("仕入値").ToString)
+                            Sql += "', '"
+                            Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("受注数量").ToString)
+                            Sql += "', '"
+                            Sql += UtilClass.formatNumber(Qty.ToString)
+                            Sql += "', '"
+                            Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("受注残数").ToString)
+                            Sql += "', '"
+                            Sql += dsUrigdt.Tables(RS).Rows(x)("単位").ToString
+                            Sql += "', '"
+                            Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("仕入原価").ToString)
+                            Sql += "', '"
+                            Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("関税率").ToString)
+                            Sql += "', '"
+                            Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("関税額").ToString)
+                            Sql += "', '"
+                            Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("前払法人税率").ToString)
+                            Sql += "', '"
+                            Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("前払法人税額").ToString)
+                            Sql += "', '"
+                            Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("輸送費率").ToString)
+                            Sql += "', '"
+                            Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("輸送費額").ToString)
+                            Sql += "', '"
+                            Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("間接費").ToString)
+                            Sql += "', '"
+                            Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("仕入金額").ToString)
+                            Sql += "', '"
+                            Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("売単価").ToString)
+                            Sql += "', '"
+                            Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("売上金額").ToString)
+                            Sql += "', '"
+                            Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("見積単価").ToString)
+                            Sql += "', '"
+                            Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("見積金額").ToString)
+                            Sql += "', '"
+                            Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("粗利額").ToString)
+                            Sql += "', '"
+                            Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("粗利率").ToString)
+                            Sql += "', '"
+                            Sql += dsUrigdt.Tables(RS).Rows(x)("リードタイム").ToString
+                            Sql += "', '"
+                            Sql += dsUrigdt.Tables(RS).Rows(x)("備考").ToString
+
+                            If dsUrigdt.Tables(RS).Rows(x)("入金有無") IsNot DBNull.Value Then
+                                Sql += "', '"
+                                Sql += dsUrigdt.Tables(RS).Rows(x)("入金有無").ToString
+                                Sql += "', '"
+                            Else
+                                Sql += "', "
+                                Sql += "0"
+                                Sql += ", '"
+                            End If
+
+
+                            Sql += dsUrigdt.Tables(RS).Rows(x)("入金番号").Value
+
+                            If dsUrigdt.Tables(RS).Rows(x)("入金日") IsNot DBNull.Value Then
+                                Sql += "', '"
+                                Sql += UtilClass.strFormatDate(dsUrigdt.Tables(RS).Rows(x)("入金日").ToString)
+                                Sql += "', '"
+                            Else
+                                Sql += "', "
+                                Sql += "null"
+                                Sql += ", '"
+                            End If
+
+                            Sql += frmC01F10_Login.loginValue.TantoNM
+                            Sql += "', '"
+                            Sql += UtilClass.strFormatDate(dtToday)
+                            Sql += "')"
+
+                            _db.executeDB(Sql)
+
+                            Sql = ""
+                            Sql += "UPDATE Public.t41_siredt "
+                            Sql += "SET "
+                            Sql += " カウント = '" & SireQty.ToString & "'"
+
+                            Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                            Sql += " AND 仕入番号 = '" & dsSiredt.Tables(RS).Rows(y)("仕入番号") & "'"
+                            Sql += " AND 行番号 = '" & dsSiredt.Tables(RS).Rows(y)("行番号").ToString & "'"
+
+                            _db.executeDB(Sql)
+
+                        End If
+                    Next
+                Next
+            Else
+                '平均法の場合
+                For x As Integer = 0 To dsUrigdt.Tables(RS).Rows.Count - 1
+                    Sql = ""
+                    Sql += "INSERT INTO Public.t53_krurigdt("
+                    Sql += "会社コード, 売上番号, 受注番号, 受注番号枝番, 行番号, 行番号枝番, 仕入区分, メーカー, 品名, 型式, 仕入先名, 仕入値, 受注数量, 売上数量, 受注残数, 単位, 仕入原価, 関税率, 関税額, 前払法人税率, 前払法人税額, 輸送費率, 輸送費額, 間接費, 仕入金額, 売単価, 売上金額, 見積単価, 見積金額, 粗利額, 粗利率, リードタイム, 備考, 入金有無, 入金番号, 入金日, 更新者, 更新日)"
+                    Sql += " VALUES('"
+                    Sql += frmC01F10_Login.loginValue.BumonCD
+                    Sql += "', '"
+                    Sql += dsUrigdt.Tables(RS).Rows(x)("売上番号").ToString
+                    Sql += "', '"
+                    Sql += dsUrigdt.Tables(RS).Rows(x)("受注番号").ToString
+                    Sql += "', '"
+                    Sql += dsUrigdt.Tables(RS).Rows(x)("受注番号枝番").ToString
+                    Sql += "', '"
+                    Sql += dsUrigdt.Tables(RS).Rows(x)("行番号").ToString
+                    Sql += "', '"
+                    Sql += "0"
+                    Sql += "', '"
+                    Sql += dsUrigdt.Tables(RS).Rows(x)("仕入区分").ToString
+                    Sql += "', '"
+                    Sql += dsUrigdt.Tables(RS).Rows(x)("メーカー").ToString
+                    Sql += "', '"
+                    Sql += dsUrigdt.Tables(RS).Rows(x)("品名").ToString
+                    Sql += "', '"
+                    Sql += dsUrigdt.Tables(RS).Rows(x)("型式").ToString
+                    Sql += "', '"
+                    Sql += dsUrigdt.Tables(RS).Rows(x)("仕入先名").ToString
+                    Sql += "', '"
+                    Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("仕入値").ToString)
+                    Sql += "', '"
+                    Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("受注数量").ToString)
+                    Sql += "', '"
+                    Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("売上数量").ToString)
+                    Sql += "', '"
+                    Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("受注残数").ToString)
+                    Sql += "', '"
+                    Sql += dsUrigdt.Tables(RS).Rows(x)("単位").ToString
+                    Sql += "', '"
+                    Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("仕入原価").ToString)
+                    Sql += "', '"
+                    Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("関税率").ToString)
+                    Sql += "', '"
+                    Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("関税額").ToString)
+                    Sql += "', '"
+                    Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("前払法人税率").ToString)
+                    Sql += "', '"
+                    Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("前払法人税額").ToString)
+                    Sql += "', '"
+                    Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("輸送費率").ToString)
+                    Sql += "', '"
+                    Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("輸送費額").ToString)
+                    Sql += "', '"
+                    Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("間接費").ToString)
+                    Sql += "', '"
+                    Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("仕入金額").ToString)
+                    Sql += "', '"
+                    Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("売単価").ToString)
+                    Sql += "', '"
+                    Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("売上金額").ToString)
+                    Sql += "', '"
+                    Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("見積単価").ToString)
+                    Sql += "', '"
+                    Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("見積金額").ToString)
+                    Sql += "', '"
+                    Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("粗利額").ToString)
+                    Sql += "', '"
+                    Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("粗利率").ToString)
+                    Sql += "', '"
+                    Sql += dsUrigdt.Tables(RS).Rows(x)("リードタイム").ToString
+                    Sql += "', '"
+                    Sql += dsUrigdt.Tables(RS).Rows(x)("備考").ToString
+                    If dsUrigdt.Tables(RS).Rows(x)("入金有無") IsNot DBNull.Value Then
+                        Sql += "', '"
+                        Sql += dsUrigdt.Tables(RS).Rows(x)("入金有無").ToString
+                        Sql += "', '"
+                    Else
+                        Sql += "', "
+                        Sql += "0"
+                        Sql += ", '"
+                    End If
+
+
+                    Sql += dsUrigdt.Tables(RS).Rows(x)("入金番号").Value
+
+                    If dsUrigdt.Tables(RS).Rows(x)("入金日") IsNot DBNull.Value Then
+                        Sql += "', '"
+                        Sql += UtilClass.strFormatDate(dsUrigdt.Tables(RS).Rows(x)("入金日").ToString)
+                        Sql += "', '"
+                    Else
+                        Sql += "', "
+                        Sql += "null"
+                        Sql += ", '"
+                    End If
+                    Sql += frmC01F10_Login.loginValue.TantoNM
+                    Sql += "', '"
+                    Sql += UtilClass.strFormatDate(dtToday)
+                    Sql += "')"
+                    _db.executeDB(Sql)
+                Next
+            End If
+        Next
+#End Region
+
+#Region "仕入"
+        Sql = ""
+        Sql += "SELECT * FROM public.t40_sirehd"
+        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " AND 締処理日 = '" & dtmShime & "'"
+
+        Dim dsSirehd As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+
+        For i As Integer = 0 To dsSirehd.Tables(RS).Rows.Count - 1
+            Sql = ""
+            Sql += "INSERT INTO Public.t54_krsirehd("
+            Sql += "会社コード, 仕入番号, 発注番号, 発注番号枝番, 客先番号, 仕入先コード, 仕入先名, 仕入先郵便番号, 仕入先住所, 仕入先電話番号, 仕入先ＦＡＸ, 仕入先担当者役職, 仕入先担当者名, 支払条件, 仕入金額, 粗利額, 営業担当者, 入力担当者, 備考, 取消日, 取消区分, ＶＡＴ, ＰＰＨ, 仕入日, 登録日, 締処理日, 更新日, 更新者)"
+            Sql += " VALUES('"
+            Sql += frmC01F10_Login.loginValue.BumonCD
+            Sql += "', '"
+            Sql += dsSirehd.Tables(RS).Rows(i)("仕入番号").ToString
+            Sql += "', '"
+            Sql += dsSirehd.Tables(RS).Rows(i)("発注番号").ToString
+            Sql += "', '"
+            Sql += dsSirehd.Tables(RS).Rows(i)("発注番号枝番").ToString
+            Sql += "', '"
+            Sql += dsSirehd.Tables(RS).Rows(i)("客先番号").ToString
+            Sql += "', '"
+            Sql += dsSirehd.Tables(RS).Rows(i)("仕入先コード").ToString
+            Sql += "', '"
+            Sql += dsSirehd.Tables(RS).Rows(i)("仕入先名").ToString
+            Sql += "', '"
+            Sql += dsSirehd.Tables(RS).Rows(i)("仕入先郵便番号").ToString
+            Sql += "', '"
+            Sql += dsSirehd.Tables(RS).Rows(i)("仕入先住所").ToString
+            Sql += "', '"
+            Sql += dsSirehd.Tables(RS).Rows(i)("仕入先電話番号").ToString
+            Sql += "', '"
+            Sql += dsSirehd.Tables(RS).Rows(i)("仕入先ＦＡＸ").ToString
+            Sql += "', '"
+            Sql += dsSirehd.Tables(RS).Rows(i)("仕入先担当者役職").ToString
+            Sql += "', '"
+            Sql += dsSirehd.Tables(RS).Rows(i)("仕入先担当者名").ToString
+            Sql += "', '"
+            Sql += dsSirehd.Tables(RS).Rows(i)("支払条件").ToString
+            Sql += "', '"
+            Sql += UtilClass.formatNumber(dsSirehd.Tables(RS).Rows(i)("仕入金額").ToString)
+            Sql += "', '"
+            Sql += UtilClass.formatNumber(dsSirehd.Tables(RS).Rows(i)("粗利額").ToString)
+            Sql += "', '"
+            Sql += dsSirehd.Tables(RS).Rows(i)("営業担当者").ToString
+            Sql += "', '"
+            Sql += dsSirehd.Tables(RS).Rows(i)("入力担当者").ToString
+            Sql += "', '"
+            Sql += dsSirehd.Tables(RS).Rows(i)("備考").ToString
+
+            If dsSirehd.Tables(RS).Rows(i)("取消日") IsNot DBNull.Value Then
+                Sql += "', '"
+                Sql += UtilClass.strFormatDate(dsSirehd.Tables(RS).Rows(i)("取消日").ToString)
+                Sql += "', '"
+            Else
+                Sql += "', "
+                Sql += "null"
+                Sql += ", '"
+            End If
+
+            Sql += dsSirehd.Tables(RS).Rows(i)("取消区分").ToString
+            Sql += "', '"
+            Sql += UtilClass.formatNumber(dsSirehd.Tables(RS).Rows(i)("ＶＡＴ").ToString)
+            Sql += "', '"
+            Sql += UtilClass.formatNumber(dsSirehd.Tables(RS).Rows(i)("ＰＰＨ").ToString)
+            Sql += "', '"
+            Sql += UtilClass.strFormatDate(dsSirehd.Tables(RS).Rows(i)("仕入日").ToString)
+            Sql += "', '"
+            Sql += UtilClass.strFormatDate(dsSirehd.Tables(RS).Rows(i)("登録日").ToString)
+            Sql += "', '"
+            Sql += UtilClass.strFormatDate(dtToday)
+            Sql += "', '"
+            Sql += UtilClass.strFormatDate(dtToday)
+            Sql += "', '"
+            Sql += frmC01F10_Login.loginValue.TantoNM
+            Sql += "')"
+
+            _db.executeDB(Sql)
+        Next
+
+        For i As Integer = 0 To dsSirehd.Tables(RS).Rows.Count - 1
+            Sql = ""
+            Sql += "SELECT * FROM public.t41_siredt"
+            Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += " AND 仕入番号 = '" & dsSirehd.Tables(RS).Rows(i)("仕入番号") & "'"
+
+            Dim dssiredt As DataSet = _db.selectDB(Sql, RS, reccnt)
+            For x As Integer = 0 To dssiredt.Tables(RS).Rows.Count - 1
+                Sql = ""
+                Sql += "INSERT INTO Public.t55_krsiredt("
+                Sql += "会社コード, 仕入番号, 発注番号, 発注番号枝番, 支払番号, 行番号, 仕入区分, メーカー, 品名, 型式, 仕入先名, 仕入値, 発注数量, 仕入数量, 発注残数, 単位, 仕入単価, 仕入金額, 間接費, リードタイム, 備考, 仕入日, 支払日, 支払有無, 更新者, 更新日)"
+                Sql += " VALUES('"
+                Sql += frmC01F10_Login.loginValue.BumonCD
+                Sql += "', '"
+                Sql += dssiredt.Tables(RS).Rows(x)("仕入番号").ToString
+                Sql += "', '"
+                Sql += dssiredt.Tables(RS).Rows(x)("発注番号").ToString
+                Sql += "', '"
+                Sql += dssiredt.Tables(RS).Rows(x)("発注番号枝番").ToString
+                Sql += "', '"
+                Sql += dssiredt.Tables(RS).Rows(x)("支払番号").ToString
+                Sql += "', '"
+                Sql += dssiredt.Tables(RS).Rows(x)("行番号").ToString
+                Sql += "', '"
+                Sql += dssiredt.Tables(RS).Rows(x)("仕入区分").ToString
+                Sql += "', '"
+                Sql += dssiredt.Tables(RS).Rows(x)("メーカー").ToString
+                Sql += "', '"
+                Sql += dssiredt.Tables(RS).Rows(x)("品名").ToString
+                Sql += "', '"
+                Sql += dssiredt.Tables(RS).Rows(x)("型式").ToString
+                Sql += "', '"
+                Sql += dssiredt.Tables(RS).Rows(x)("仕入先名").ToString
+                Sql += "', '"
+                Sql += UtilClass.formatNumber(dssiredt.Tables(RS).Rows(x)("仕入値").ToString)
+                Sql += "', '"
+                Sql += UtilClass.formatNumber(dssiredt.Tables(RS).Rows(x)("発注数量").ToString)
+                Sql += "', '"
+                Sql += UtilClass.formatNumber(dssiredt.Tables(RS).Rows(x)("仕入数量").ToString)
+                Sql += "', '"
+                Sql += UtilClass.formatNumber(dssiredt.Tables(RS).Rows(x)("発注残数").ToString)
+                Sql += "', '"
+                Sql += dssiredt.Tables(RS).Rows(x)("単位").ToString
+                Sql += "', '"
+                Sql += UtilClass.formatNumber(rmNullDecimal(dssiredt.Tables(RS).Rows(x)("仕入単価").ToString))
+                Sql += "', '"
+                Sql += UtilClass.formatNumber(dssiredt.Tables(RS).Rows(x)("仕入金額").ToString)
+                Sql += "', '"
+                Sql += UtilClass.formatNumber(dssiredt.Tables(RS).Rows(x)("間接費").ToString)
+                Sql += "', '"
+                Sql += dssiredt.Tables(RS).Rows(x)("リードタイム").ToString
+                Sql += "', '"
+                Sql += dssiredt.Tables(RS).Rows(x)("備考").ToString
+                Sql += "', '"
+                Sql += UtilClass.strFormatDate(dssiredt.Tables(RS).Rows(x)("仕入日").ToString)
+                If dssiredt.Tables(RS).Rows(x)("支払日") IsNot DBNull.Value Then
+                    Sql += "', '"
+                    Sql += UtilClass.strFormatDate(dssiredt.Tables(RS).Rows(x)("支払日").ToString)
+                    Sql += "', "
+                Else
+                    Sql += "', "
+                    Sql += "null"
+                    Sql += ", "
+                End If
+                If dssiredt.Tables(RS).Rows(x)("支払有無") IsNot DBNull.Value Then
+                    Sql += " '"
+                    Sql += dssiredt.Tables(RS).Rows(x)("支払有無").ToString
+                    Sql += "', '"
+                Else
+                    Sql += "0"
+                    Sql += ", '"
+                End If
+
+                Sql += frmC01F10_Login.loginValue.TantoNM
+                Sql += "', '"
+                Sql += UtilClass.strFormatDate(dtToday)
+                Sql += "')"
+                _db.executeDB(Sql)
+            Next
+        Next
+#End Region
+
+#Region "売掛"
+        Sql = ""
+        Sql += "SELECT * FROM public.t23_skyuhd"
+        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " AND 締処理日 = '" & dtmShime & "'"
+
+        Dim dsSkyuhd As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+
+        For i As Integer = 0 To dsSkyuhd.Tables(RS).Rows.Count - 1
+            Sql = ""
+            Sql += "INSERT INTO Public.t56_krskyuhd("
+            Sql += "会社コード, 請求番号, 請求区分, 請求日, 受注番号, 受注番号枝番, 客先番号, 得意先コード, 得意先名, 請求金額計, 入金額計, 売掛残高, 備考１, 備考２, 入金番号, 入金完了日, 取消日, 取消区分, 登録日, 締処理日, 更新者)"
+            Sql += " VALUES('"
+            Sql += frmC01F10_Login.loginValue.BumonCD
+            Sql += "', '"
+            Sql += dsSkyuhd.Tables(RS).Rows(i)("請求番号").ToString
+            Sql += "', '"
+            Sql += dsSkyuhd.Tables(RS).Rows(i)("請求区分").ToString
+            Sql += "', '"
+            Sql += UtilClass.strFormatDate(dsSkyuhd.Tables(RS).Rows(i)("請求日").ToString)
+            Sql += "', '"
+            Sql += dsSkyuhd.Tables(RS).Rows(i)("受注番号").ToString
+            Sql += "', '"
+            Sql += dsSkyuhd.Tables(RS).Rows(i)("受注番号枝番").ToString
+            Sql += "', '"
+            Sql += dsSkyuhd.Tables(RS).Rows(i)("客先番号").ToString
+            Sql += "', '"
+            Sql += dsSkyuhd.Tables(RS).Rows(i)("得意先コード").ToString
+            Sql += "', '"
+            Sql += dsSkyuhd.Tables(RS).Rows(i)("得意先名").ToString
+            Sql += "', '"
+            Sql += UtilClass.formatNumber(dsSkyuhd.Tables(RS).Rows(i)("請求金額計").ToString)
+
+            If dsSkyuhd.Tables(RS).Rows(i)("入金額計") IsNot DBNull.Value Then
+                Sql += "', '"
+                Sql += UtilClass.formatNumber(dsSkyuhd.Tables(RS).Rows(i)("入金額計").ToString)
+                Sql += "', '"
+            Else
+                Sql += "', "
+                Sql += "0"
+                Sql += ", '"
+            End If
+
+            Sql += UtilClass.formatNumber(dsSkyuhd.Tables(RS).Rows(i)("売掛残高").ToString)
+            Sql += "', '"
+            Sql += dsSkyuhd.Tables(RS).Rows(i)("備考1").ToString
+            Sql += "', '"
+            Sql += dsSkyuhd.Tables(RS).Rows(i)("備考2").ToString
+            Sql += "', '"
+            Sql += dsSkyuhd.Tables(RS).Rows(i)("入金番号").ToString
+
+
+            If dsSkyuhd.Tables(RS).Rows(i)("入金完了日") IsNot DBNull.Value Then
+                Sql += "', '"
+                Sql += UtilClass.strFormatDate(dsSkyuhd.Tables(RS).Rows(i)("入金完了日").ToString)
+                Sql += "', "
+            Else
+                Sql += "', "
+                Sql += "null"
+                Sql += ", "
+            End If
+
+            If dsSkyuhd.Tables(RS).Rows(i)("取消日") IsNot DBNull.Value Then
+                Sql += "'"
+                Sql += UtilClass.strFormatDate(dsSkyuhd.Tables(RS).Rows(i)("取消日").ToString)
+                Sql += "', "
+            Else
+                Sql += "null"
+                Sql += ", "
+            End If
+
+            If dsSkyuhd.Tables(RS).Rows(i)("取消区分") IsNot DBNull.Value Then
+                Sql += "'"
+                Sql += dsSkyuhd.Tables(RS).Rows(i)("取消区分").ToString
+                Sql += "', "
+            Else
+                Sql += "0"
+                Sql += ", "
+            End If
+
+            Sql += "'"
+            Sql += UtilClass.strFormatDate(dsSkyuhd.Tables(RS).Rows(i)("登録日").ToString)
+            Sql += "', '"
+            Sql += UtilClass.strFormatDate(dtToday)
+            Sql += "', '"
+            Sql += frmC01F10_Login.loginValue.TantoNM
+            Sql += "')"
+
+            _db.executeDB(Sql)
+        Next
+#End Region
+
+#Region "買掛"
+        Sql = ""
+        Sql += "SELECT * FROM public.t46_kikehd"
+        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " AND 締処理日 = '" & dtmShime & "'"
+
+        Dim dsKikehd As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+
+        For i As Integer = 0 To dsKikehd.Tables(RS).Rows.Count - 1
+            Sql = ""
+            Sql += "INSERT INTO Public.t57_krkikehd("
+            Sql += "会社コード, 買掛番号, 買掛区分, 買掛日, 発注番号, 発注番号枝番, 客先番号, 仕入先コード, 仕入先名, 買掛金額計, 支払金額計, 買掛残高, 備考１, 備考２, 支払完了日, 取消日, 取消区分, 登録日, 更新者, 締処理日)"
+            Sql += " VALUES('"
+            Sql += frmC01F10_Login.loginValue.BumonCD
+            Sql += "', '"
+            Sql += dsKikehd.Tables(RS).Rows(i)("買掛番号").ToString
+            Sql += "', '"
+            Sql += dsKikehd.Tables(RS).Rows(i)("買掛区分").ToString
+            Sql += "', '"
+            Sql += UtilClass.strFormatDate(dsKikehd.Tables(RS).Rows(i)("買掛日").ToString)
+            Sql += "', '"
+            Sql += dsKikehd.Tables(RS).Rows(i)("発注番号").ToString
+            Sql += "', '"
+            Sql += dsKikehd.Tables(RS).Rows(i)("発注番号枝番").ToString
+            Sql += "', '"
+            Sql += dsKikehd.Tables(RS).Rows(i)("客先番号").ToString
+            Sql += "', '"
+            Sql += dsKikehd.Tables(RS).Rows(i)("仕入先コード").ToString
+            Sql += "', '"
+            Sql += dsKikehd.Tables(RS).Rows(i)("仕入先名").ToString
+            Sql += "', '"
+            Sql += UtilClass.formatNumber(dsKikehd.Tables(RS).Rows(i)("買掛金額計").ToString)
+
+            If dsKikehd.Tables(RS).Rows(i)("支払金額計") IsNot DBNull.Value Then
+                Sql += "', '"
+                Sql += UtilClass.formatNumber(dsKikehd.Tables(RS).Rows(i)("支払金額計").ToString)
+                Sql += "', '"
+            Else
+                Sql += "', '"
+                Sql += "0"
+                Sql += "', '"
+            End If
+
+            Sql += UtilClass.formatNumber(dsKikehd.Tables(RS).Rows(i)("買掛残高").ToString)
+            Sql += "', '"
+            Sql += dsKikehd.Tables(RS).Rows(i)("備考1").ToString
+            Sql += "', '"
+            Sql += dsKikehd.Tables(RS).Rows(i)("備考2").ToString
+
+            If dsKikehd.Tables(RS).Rows(i)("支払完了日") IsNot DBNull.Value Then
+                Sql += "', '"
+                Sql += UtilClass.strFormatDate(dsKikehd.Tables(RS).Rows(i)("支払完了日").ToString)
+                Sql += "', "
+            Else
+                Sql += "', "
+                Sql += "null"
+                Sql += ", "
+            End If
+
+            If dsKikehd.Tables(RS).Rows(i)("取消日") IsNot DBNull.Value Then
+                Sql += "'"
+                Sql += UtilClass.strFormatDate(dsKikehd.Tables(RS).Rows(i)("取消日").ToString)
+                Sql += "', "
+            Else
+                Sql += "null"
+                Sql += ", "
+            End If
+
+            If dsKikehd.Tables(RS).Rows(i)("取消区分") IsNot DBNull.Value Then
+                Sql += "'"
+                Sql += dsKikehd.Tables(RS).Rows(i)("取消区分").ToString
+                Sql += "', "
+            Else
+                Sql += "0"
+                Sql += ", "
+            End If
+
+            Sql += "'"
+            Sql += UtilClass.strFormatDate(dsKikehd.Tables(RS).Rows(i)("登録日").ToString)
+            Sql += "', '"
+            Sql += frmC01F10_Login.loginValue.TantoNM
+            Sql += "', '"
+            Sql += UtilClass.strFormatDate(dtToday)
+            Sql += "')"
+
+            _db.executeDB(Sql)
+        Next
+#End Region
+
+#Region "入庫"
+        Sql = ""
+        Sql += "SELECT * FROM public.t42_nyukohd"
+        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " AND 締処理日 = '" & dtmShime & "'"
+
+        Dim dsNyukohd As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+
+        For i As Integer = 0 To dsNyukohd.Tables(RS).Rows.Count - 1
+            Sql = ""
+            Sql += "INSERT INTO Public.t58_krnyukohd("
+            Sql += "会社コード, 入庫番号, 客先番号, 発注番号, 発注番号枝番, 仕入先コード, 仕入先名, 仕入先郵便番号, 仕入先住所, 仕入先電話番号, 仕入先ＦＡＸ, 仕入先担当者役職, 仕入先担当者名, 支払条件, 仕入金額, 粗利額, ＶＡＴ, ＰＰＨ, 営業担当者, 入力担当者, 備考, 入庫日, 登録日, 更新日, 更新者, 取消日, 取消区分, 締処理日)"
+            Sql += " VALUES('"
+            Sql += frmC01F10_Login.loginValue.BumonCD
+            Sql += "', '"
+            Sql += dsNyukohd.Tables(RS).Rows(i)("入庫番号").ToString
+            Sql += "', '"
+            Sql += dsNyukohd.Tables(RS).Rows(i)("客先番号").ToString
+            Sql += "', '"
+            Sql += dsNyukohd.Tables(RS).Rows(i)("発注番号").ToString
+            Sql += "', '"
+            Sql += dsNyukohd.Tables(RS).Rows(i)("発注番号枝番").ToString
+            Sql += "', '"
+            Sql += dsNyukohd.Tables(RS).Rows(i)("仕入先コード").ToString
+            Sql += "', '"
+            Sql += dsNyukohd.Tables(RS).Rows(i)("仕入先名").ToString
+            Sql += "', '"
+            Sql += dsNyukohd.Tables(RS).Rows(i)("仕入先郵便番号").ToString
+            Sql += "', '"
+            Sql += dsNyukohd.Tables(RS).Rows(i)("仕入先住所").ToString
+            Sql += "', '"
+            Sql += dsNyukohd.Tables(RS).Rows(i)("仕入先電話番号").ToString
+            Sql += "', '"
+            Sql += dsNyukohd.Tables(RS).Rows(i)("仕入先ＦＡＸ").ToString
+            Sql += "', '"
+            Sql += dsNyukohd.Tables(RS).Rows(i)("仕入先担当者役職").ToString
+            Sql += "', '"
+            Sql += dsNyukohd.Tables(RS).Rows(i)("仕入先担当者名").ToString
+            Sql += "', '"
+            Sql += dsNyukohd.Tables(RS).Rows(i)("支払条件").ToString
+            Sql += "', '"
+            Sql += UtilClass.formatNumber(dsNyukohd.Tables(RS).Rows(i)("仕入金額").ToString)
+            Sql += "', '"
+            Sql += UtilClass.formatNumber(dsNyukohd.Tables(RS).Rows(i)("粗利額").ToString)
+            Sql += "', '"
+            If dsNyukohd.Tables(RS).Rows(i)("ＶＡＴ") Is DBNull.Value Then
+                Sql += "0"
+            Else
+                Sql += UtilClass.formatNumber(dsNyukohd.Tables(RS).Rows(i)("ＶＡＴ").ToString)
+            End If
+            Sql += "', '"
+            If dsNyukohd.Tables(RS).Rows(i)("ＰＰＨ") Is DBNull.Value Then
+                Sql += "0"
+            Else
+                Sql += UtilClass.formatNumber(dsNyukohd.Tables(RS).Rows(i)("ＰＰＨ").ToString)
+            End If
+            Sql += "', '"
+            Sql += dsNyukohd.Tables(RS).Rows(i)("営業担当者").ToString
+            Sql += "', '"
+            Sql += dsNyukohd.Tables(RS).Rows(i)("入力担当者").ToString
+            Sql += "', '"
+            Sql += dsNyukohd.Tables(RS).Rows(i)("備考").ToString
+            Sql += "', '"
+            Sql += UtilClass.strFormatDate(dsNyukohd.Tables(RS).Rows(i)("入庫日").ToString)
+            Sql += "', '"
+            Sql += UtilClass.strFormatDate(dsNyukohd.Tables(RS).Rows(i)("登録日").ToString)
+            Sql += "', '"
+            Sql += UtilClass.strFormatDate(dtToday)
+            Sql += "', '"
+            Sql += frmC01F10_Login.loginValue.TantoNM
+            If dsNyukohd.Tables(RS).Rows(i)("取消日") IsNot DBNull.Value Then
+                Sql += "', '"
+                Sql += UtilClass.strFormatDate(dsNyukohd.Tables(RS).Rows(i)("取消日").ToString)
+                Sql += "', "
+            Else
+                Sql += "', "
+                Sql += "null"
+                Sql += ", "
+            End If
+            If dsNyukohd.Tables(RS).Rows(i)("取消区分") IsNot DBNull.Value Then
+                Sql += "'"
+                Sql += dsNyukohd.Tables(RS).Rows(i)("取消区分").ToString
+            Else
+                Sql += "0"
+            End If
+            Sql += "', '"
+            Sql += UtilClass.strFormatDate(dtToday)
+            Sql += "')"
+
+
+            _db.executeDB(Sql)
+        Next
+
+        For i As Integer = 0 To dsNyukohd.Tables(RS).Rows.Count - 1
+            Sql = ""
+            Sql += "SELECT * FROM public.t43_nyukodt"
+            Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += " AND 入庫番号 = '" & dsNyukohd.Tables(RS).Rows(i)("入庫番号") & "'"
+
+            Dim dsNyukodt As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+            For x As Integer = 0 To dsNyukodt.Tables(RS).Rows.Count - 1
+                Sql = ""
+                Sql += "INSERT INTO Public.t59_krnyukodt("
+                Sql += "会社コード, 入庫番号, 発注番号, 発注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 仕入先名, 仕入値, 入庫数量, 単位, 備考, 更新者, 更新日)"
+                Sql += " VALUES('"
+                Sql += frmC01F10_Login.loginValue.BumonCD
+                Sql += "', '"
+                Sql += dsNyukodt.Tables(RS).Rows(x)("入庫番号").ToString
+                Sql += "', '"
+                Sql += dsNyukodt.Tables(RS).Rows(x)("発注番号").ToString
+                Sql += "', '"
+                Sql += dsNyukodt.Tables(RS).Rows(x)("発注番号枝番").ToString
+                Sql += "', '"
+                Sql += dsNyukodt.Tables(RS).Rows(x)("行番号").ToString
+                Sql += "', '"
+                Sql += dsNyukodt.Tables(RS).Rows(x)("仕入区分").ToString
+                Sql += "', '"
+                Sql += dsNyukodt.Tables(RS).Rows(x)("メーカー").ToString
+                Sql += "', '"
+                Sql += dsNyukodt.Tables(RS).Rows(x)("品名").ToString
+                Sql += "', '"
+                Sql += dsNyukodt.Tables(RS).Rows(x)("型式").ToString
+                Sql += "', '"
+                Sql += dsNyukodt.Tables(RS).Rows(x)("仕入先名").ToString
+                Sql += "', '"
+                Sql += UtilClass.formatNumber(dsNyukodt.Tables(RS).Rows(x)("仕入値").ToString)
+                Sql += "', '"
+                Sql += UtilClass.formatNumber(dsNyukodt.Tables(RS).Rows(x)("入庫数量").ToString)
+                Sql += "', '"
+                Sql += dsNyukodt.Tables(RS).Rows(x)("単位").ToString
+                Sql += "', '"
+                Sql += dsNyukodt.Tables(RS).Rows(x)("備考").ToString
+                Sql += "', '"
+                Sql += frmC01F10_Login.loginValue.TantoNM
+                Sql += "', '"
+                Sql += UtilClass.strFormatDate(dtToday)
+                Sql += "')"
+
+                _db.executeDB(Sql)
+            Next
+        Next
+
+#End Region
+
+#Region "出庫"
+        Sql = ""
+        Sql += "SELECT * FROM public.t44_shukohd"
+        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " AND 締処理日 = '" & dtmShime & "'"
+
+        Dim dsShukohd As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+
+        For i As Integer = 0 To dsShukohd.Tables(RS).Rows.Count - 1
+            Sql = ""
+            Sql += "INSERT INTO Public.t60_krshukohd("
+            Sql += "会社コード, 出庫番号, 客先番号, 見積番号, 見積番号枝番, 受注番号, 受注番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 営業担当者, 入力担当者, 備考, 出庫日, 登録日, 更新日, 更新者, 取消日, 取消区分, 締処理日)"
+            Sql += " VALUES('"
+            Sql += frmC01F10_Login.loginValue.BumonCD
+            Sql += "', '"
+            Sql += dsShukohd.Tables(RS).Rows(i)("出庫番号").ToString
+            Sql += "', '"
+            Sql += dsShukohd.Tables(RS).Rows(i)("客先番号").ToString
+            Sql += "', '"
+            Sql += dsShukohd.Tables(RS).Rows(i)("見積番号").ToString
+            Sql += "', '"
+            Sql += dsShukohd.Tables(RS).Rows(i)("見積番号枝番").ToString
+            Sql += "', '"
+            Sql += dsShukohd.Tables(RS).Rows(i)("受注番号").ToString
+            Sql += "', '"
+            Sql += dsShukohd.Tables(RS).Rows(i)("受注番号枝番").ToString
+            Sql += "', '"
+            Sql += dsShukohd.Tables(RS).Rows(i)("得意先コード").ToString
+            Sql += "', '"
+            Sql += dsShukohd.Tables(RS).Rows(i)("得意先名").ToString
+            Sql += "', "
+            If IsDBNull(dsShukohd.Tables(RS).Rows(i)("得意先郵便番号")) OrElse dsShukohd.Tables(RS).Rows(i)("得意先郵便番号") = vbNullString Then
+                Sql += "null"
+            Else
+                Sql += dsShukohd.Tables(RS).Rows(i)("得意先郵便番号").ToString
+            End If
+            Sql += ", '"
+            Sql += dsShukohd.Tables(RS).Rows(i)("得意先住所").ToString
+            Sql += "', '"
+            Sql += dsShukohd.Tables(RS).Rows(i)("得意先電話番号").ToString
+            Sql += "', '"
+            Sql += dsShukohd.Tables(RS).Rows(i)("得意先ＦＡＸ").ToString
+            Sql += "', '"
+            Sql += dsShukohd.Tables(RS).Rows(i)("得意先担当者役職").ToString
+            Sql += "', '"
+            Sql += dsShukohd.Tables(RS).Rows(i)("得意先担当者名").ToString
+            Sql += "', '"
+            Sql += dsShukohd.Tables(RS).Rows(i)("営業担当者").ToString
+            Sql += "', '"
+            Sql += dsShukohd.Tables(RS).Rows(i)("入力担当者").ToString
+            Sql += "', '"
+            Sql += dsShukohd.Tables(RS).Rows(i)("備考").ToString
+            Sql += "', '"
+            Sql += UtilClass.strFormatDate(dsShukohd.Tables(RS).Rows(i)("出庫日").ToString)
+            Sql += "', '"
+            Sql += UtilClass.strFormatDate(dsShukohd.Tables(RS).Rows(i)("登録日").ToString)
+            Sql += "', '"
+            Sql += UtilClass.strFormatDate(dtToday)
+            Sql += "', '"
+            Sql += frmC01F10_Login.loginValue.TantoNM
+            If dsShukohd.Tables(RS).Rows(i)("取消日") IsNot DBNull.Value Then
+                Sql += "', '"
+                Sql += UtilClass.strFormatDate(dsShukohd.Tables(RS).Rows(i)("取消日").ToString)
+                Sql += "', "
+            Else
+                Sql += "', "
+                Sql += "null"
+                Sql += ", "
+            End If
+            If dsShukohd.Tables(RS).Rows(i)("取消区分") IsNot DBNull.Value Then
+                Sql += dsShukohd.Tables(RS).Rows(i)("取消区分").ToString
+            Else
+                Sql += "0"
+            End If
+            Sql += ", '"
+            Sql += UtilClass.strFormatDate(dtToday)
+            Sql += "')"
+
+            _db.executeDB(Sql)
+        Next
+
+        For i As Integer = 0 To dsShukohd.Tables(RS).Rows.Count - 1
+            Sql = ""
+            Sql += "SELECT * FROM public.t45_shukodt"
+            Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += " AND 出庫番号 = '" & dsShukohd.Tables(RS).Rows(i)("出庫番号") & "'"
+
+            Dim dsShukodt As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+            For x As Integer = 0 To dsShukodt.Tables(RS).Rows.Count - 1
+                Sql = ""
+                Sql += "INSERT INTO Public.t61_krshukodt("
+                Sql += "会社コード, 出庫番号, 受注番号, 受注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 仕入先名, 出庫数量, 単位, 売単価, 備考, 更新者, 更新日)"
+                Sql += " VALUES('"
+                Sql += frmC01F10_Login.loginValue.BumonCD
+                Sql += "', '"
+                Sql += dsShukodt.Tables(RS).Rows(x)("出庫番号").ToString
+                Sql += "', '"
+                Sql += dsShukodt.Tables(RS).Rows(x)("受注番号").ToString
+                Sql += "', '"
+                Sql += dsShukodt.Tables(RS).Rows(x)("受注番号枝番").ToString
+                Sql += "', '"
+                Sql += dsShukodt.Tables(RS).Rows(x)("行番号").ToString
+                Sql += "', '"
+                Sql += dsShukodt.Tables(RS).Rows(x)("仕入区分").ToString
+                Sql += "', '"
+                Sql += dsShukodt.Tables(RS).Rows(x)("メーカー").ToString
+                Sql += "', '"
+                Sql += dsShukodt.Tables(RS).Rows(x)("品名").ToString
+                Sql += "', '"
+                Sql += dsShukodt.Tables(RS).Rows(x)("型式").ToString
+                Sql += "', '"
+                Sql += dsShukodt.Tables(RS).Rows(x)("仕入先名").ToString
+                Sql += "', '"
+                Sql += UtilClass.formatNumber(dsShukodt.Tables(RS).Rows(x)("出庫数量").ToString)
+                Sql += "', '"
+                Sql += dsShukodt.Tables(RS).Rows(x)("単位").ToString
+                Sql += "', '"
+                Sql += UtilClass.formatNumber(dsShukodt.Tables(RS).Rows(x)("売単価").ToString)
+                Sql += "', '"
+                Sql += dsShukodt.Tables(RS).Rows(x)("備考").ToString
+                Sql += "', '"
+                Sql += frmC01F10_Login.loginValue.TantoNM
+                Sql += "', '"
+                Sql += UtilClass.strFormatDate(dtToday)
+                Sql += "')"
+
+                _db.executeDB(Sql)
+            Next
+        Next
+#End Region
+
+#Region "支払"
+        Sql = ""
+        Sql += "SELECT * FROM public.t47_shrihd"
+        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " AND 締処理日 = '" & dtmShime & "'"
+
+        Dim dsShrihd As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+
+        For i As Integer = 0 To dsShrihd.Tables(RS).Rows.Count - 1
+            Sql = ""
+            Sql += "INSERT INTO Public.t64_krshrihd("
+            Sql += "会社コード, 支払番号, 客先番号, 支払先コード, 支払先名, 支払先, 買掛金額, 支払金額計, 買掛残高, 備考, 支払日, 登録日, 更新日, 更新者, 取消日, 取消区分, 締処理日)"
+            Sql += " VALUES('"
+            Sql += frmC01F10_Login.loginValue.BumonCD
+            Sql += "', '"
+            Sql += dsShrihd.Tables(RS).Rows(i)("支払番号").ToString
+            Sql += "', '"
+            Sql += dsShrihd.Tables(RS).Rows(i)("客先番号").ToString
+            Sql += "', '"
+            Sql += dsShrihd.Tables(RS).Rows(i)("支払先コード").ToString
+            Sql += "', '"
+            Sql += dsShrihd.Tables(RS).Rows(i)("支払先名").ToString
+            Sql += "', '"
+            Sql += dsShrihd.Tables(RS).Rows(i)("支払先").ToString
+            Sql += "', '"
+            Sql += UtilClass.formatNumber(dsShrihd.Tables(RS).Rows(i)("買掛金額").ToString)
+            Sql += "', '"
+            Sql += UtilClass.formatNumber(dsShrihd.Tables(RS).Rows(i)("支払金額計").ToString)
+            Sql += "', '"
+            Sql += UtilClass.formatNumber(dsShrihd.Tables(RS).Rows(i)("買掛残高").ToString)
+            Sql += "', '"
+            Sql += dsShrihd.Tables(RS).Rows(i)("備考").ToString
+            Sql += "', '"
+            Sql += UtilClass.strFormatDate(dsShrihd.Tables(RS).Rows(i)("支払日").ToString)
+            Sql += "', '"
+            Sql += UtilClass.strFormatDate(dsShrihd.Tables(RS).Rows(i)("登録日").ToString)
+            Sql += "', '"
+            Sql += UtilClass.strFormatDate(dtToday)
+            Sql += "', '"
+            Sql += frmC01F10_Login.loginValue.TantoNM
+            If dsShrihd.Tables(RS).Rows(i)("取消日") IsNot DBNull.Value Then
+                Sql += "', '"
+                Sql += UtilClass.strFormatDate(dsShrihd.Tables(RS).Rows(i)("取消日").ToString)
+                Sql += "', "
+            Else
+                Sql += "', "
+                Sql += "null"
+                Sql += ", "
+            End If
+            If dsShrihd.Tables(RS).Rows(i)("取消区分") IsNot DBNull.Value Then
+                Sql += "'"
+                Sql += dsShrihd.Tables(RS).Rows(i)("取消区分").ToString
+            Else
+                Sql += "0"
+            End If
+            Sql += "', '"
+            Sql += UtilClass.strFormatDate(dtToday)
+            Sql += "')"
+
+            _db.executeDB(Sql)
+        Next
+
+        For i As Integer = 0 To dsShrihd.Tables(RS).Rows.Count - 1
+            Sql = ""
+            Sql += "SELECT * FROM public.t48_shridt"
+            Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += " AND 支払番号 = '" & dsShrihd.Tables(RS).Rows(i)("支払番号") & "'"
+
+            Dim dsShridt As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+            For x As Integer = 0 To dsShridt.Tables(RS).Rows.Count - 1
+                Sql = ""
+                Sql += "INSERT INTO Public.t65_krshridt("
+                Sql += "会社コード, 支払番号, 行番号, 支払種別, 支払種別名, 支払先コード, 支払先名, 支払先, 支払金額, 備考, 支払日, 更新者, 更新日)"
+                Sql += " VALUES('"
+                Sql += frmC01F10_Login.loginValue.BumonCD
+                Sql += "', '"
+                Sql += dsShridt.Tables(RS).Rows(x)("支払番号").ToString
+                Sql += "', '"
+                Sql += dsShridt.Tables(RS).Rows(x)("行番号").ToString
+                Sql += "', '"
+                Sql += dsShridt.Tables(RS).Rows(x)("支払種別").ToString
+                Sql += "', '"
+                Sql += dsShridt.Tables(RS).Rows(x)("支払種別名").ToString
+                Sql += "', '"
+                Sql += dsShridt.Tables(RS).Rows(x)("支払先コード").ToString
+                Sql += "', '"
+                Sql += dsShridt.Tables(RS).Rows(x)("支払先名").ToString
+                Sql += "', '"
+                Sql += dsShridt.Tables(RS).Rows(x)("支払先").ToString
+                Sql += "', '"
+                Sql += UtilClass.formatNumber(dsShridt.Tables(RS).Rows(x)("支払金額").ToString)
+                Sql += "', '"
+                Sql += dsShridt.Tables(RS).Rows(x)("備考").ToString
+                Sql += "', '"
+                Sql += UtilClass.strFormatDate(dsShridt.Tables(RS).Rows(x)("支払日").ToString)
+                Sql += "', '"
+                Sql += frmC01F10_Login.loginValue.TantoNM
+                Sql += "', '"
+                Sql += UtilClass.strFormatDate(dtToday)
+                Sql += "')"
+
+                _db.executeDB(Sql)
+            Next
+        Next
+#End Region
+
+#Region "入金"
+        Sql = ""
+        Sql += "SELECT * FROM public.t25_nkinhd"
+        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " AND 締処理日 = '" & dtmShime & "'"
+
+        Dim dsNkinhd As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+
+        For i As Integer = 0 To dsNkinhd.Tables(RS).Rows.Count - 1
+            Sql = ""
+            Sql += "INSERT INTO Public.t62_krnkinhd("
+            Sql += "会社コード, 入金番号, 客先番号, 請求先コード, 請求先名, 振込先, 請求金額, 入金額計, 請求残高, 備考, 入金日, 登録日, 更新日, 更新者, 取消日, 取消区分, 締処理日)"
+            Sql += " VALUES('"
+            Sql += frmC01F10_Login.loginValue.BumonCD
+            Sql += "', '"
+            Sql += dsNkinhd.Tables(RS).Rows(i)("入金番号").ToString
+            Sql += "', '"
+            Sql += dsNkinhd.Tables(RS).Rows(i)("客先番号").ToString
+            Sql += "', '"
+            Sql += dsNkinhd.Tables(RS).Rows(i)("請求先コード").ToString
+            Sql += "', '"
+            Sql += dsNkinhd.Tables(RS).Rows(i)("請求先名").ToString
+            Sql += "', '"
+            Sql += dsNkinhd.Tables(RS).Rows(i)("振込先").ToString & "'"
+            If dsNkinhd.Tables(RS).Rows(i)("請求金額") IsNot DBNull.Value Then
+                Sql += " , " & UtilClass.formatNumber(dsNkinhd.Tables(RS).Rows(i)("請求金額").ToString)
+            Else
+                Sql += " , 0"
+            End If
+            Sql += ", '"
+            Sql += UtilClass.formatNumber(dsNkinhd.Tables(RS).Rows(i)("入金額").ToString) & "'"
+            If dsNkinhd.Tables(RS).Rows(i)("請求残高") IsNot DBNull.Value Then
+                Sql += " , " & UtilClass.formatNumber(dsNkinhd.Tables(RS).Rows(i)("請求残高").ToString)
+            Else
+                Sql += " , 0"
+            End If
+            Sql += ", '"
+            Sql += dsNkinhd.Tables(RS).Rows(i)("備考").ToString
+            Sql += "', '"
+            Sql += UtilClass.strFormatDate(dsNkinhd.Tables(RS).Rows(i)("入金日").ToString)
+            Sql += "', '"
+            Sql += UtilClass.strFormatDate(dsNkinhd.Tables(RS).Rows(i)("登録日").ToString)
+            Sql += "', '"
+            Sql += UtilClass.strFormatDate(dtToday)
+            Sql += "', '"
+            Sql += frmC01F10_Login.loginValue.TantoNM
+            If dsNkinhd.Tables(RS).Rows(i)("取消日") IsNot DBNull.Value Then
+                Sql += "', '"
+                Sql += UtilClass.strFormatDate(dsNkinhd.Tables(RS).Rows(i)("取消日").ToString)
+                Sql += "', "
+            Else
+                Sql += "', "
+                Sql += "null"
+                Sql += ", "
+            End If
+            If dsNkinhd.Tables(RS).Rows(i)("取消区分") IsNot DBNull.Value Then
+                Sql += "'"
+                Sql += dsNkinhd.Tables(RS).Rows(i)("取消区分").ToString
+            Else
+                Sql += "0"
+            End If
+            Sql += "', '"
+            Sql += UtilClass.strFormatDate(dtToday)
+            Sql += "')"
+
+            _db.executeDB(Sql)
+        Next
+
+        For i As Integer = 0 To dsNkinhd.Tables(RS).Rows.Count - 1
+            Sql = ""
+            Sql += "SELECT * FROM public.t26_nkindt"
+            Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += " AND 入金番号 = '" & dsNkinhd.Tables(RS).Rows(i)("入金番号") & "'"
+
+            Dim dsNkindt As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+            For x As Integer = 0 To dsNkindt.Tables(RS).Rows.Count - 1
+                Sql = ""
+                Sql += "INSERT INTO Public.t63_krnkindt("
+                Sql += "会社コード, 入金番号, 行番号, 入金種別, 入金種別名, 請求先コード, 請求先名, 振込先, 入金額, 備考, 入金日, 更新者, 更新日)"
+                Sql += " VALUES('"
+                Sql += frmC01F10_Login.loginValue.BumonCD
+                Sql += "', '"
+                Sql += dsNkindt.Tables(RS).Rows(x)("入金番号").ToString
+                Sql += "', '"
+                Sql += dsNkindt.Tables(RS).Rows(x)("行番号").ToString
+                Sql += "', '"
+                Sql += dsNkindt.Tables(RS).Rows(x)("入金種別").ToString
+                Sql += "', '"
+                Sql += dsNkindt.Tables(RS).Rows(x)("入金種別名").ToString
+                Sql += "', '"
+                Sql += dsNkindt.Tables(RS).Rows(x)("請求先コード").ToString
+                Sql += "', '"
+                Sql += dsNkindt.Tables(RS).Rows(x)("請求先名").ToString
+                Sql += "', '"
+                Sql += dsNkindt.Tables(RS).Rows(x)("振込先").ToString
+                Sql += "', '"
+                Sql += UtilClass.formatNumber(dsNkindt.Tables(RS).Rows(x)("入金額").ToString)
+                Sql += "', '"
+                Sql += dsNkindt.Tables(RS).Rows(x)("備考").ToString
+                Sql += "', '"
+                Sql += UtilClass.strFormatDate(dsNkindt.Tables(RS).Rows(x)("入金日").ToString)
+                Sql += "', '"
+                Sql += frmC01F10_Login.loginValue.TantoNM
+                Sql += "', '"
+                Sql += UtilClass.strFormatDate(dtToday)
+                Sql += "')"
+
+                _db.executeDB(Sql)
+            Next
+        Next
+#End Region
+
+#Region "CSV"
+        Sql = ""
+        Sql += "SELECT * FROM public.t52_krurighd"
+        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " AND 締処理日 = '" & dtmShime & "'"
+
+        Dim csvUrighd As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+        ConvertDataTableToCsv(csvUrighd, "t53_krurigdt", "売上番号", "Uriage")
+
+        Sql = ""
+        Sql += "SELECT * FROM public.t54_krsirehd"
+        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " AND 締処理日 = '" & dtmShime & "'"
+
+        Dim csvSirehd As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+        ConvertDataTableToCsv(csvSirehd, "t55_krsiredt", "仕入番号", "Siire")
+
+        Sql = ""
+        Sql += "SELECT * FROM public.t56_krskyuhd"
+        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " AND 締処理日 = '" & dtmShime & "'"
+
+        Dim csvSkyuhd As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+        ConvertDataTableToCsvSingle(csvSkyuhd, "Maeuke")
+
+        Sql = ""
+        Sql += "SELECT * FROM public.t57_krkikehd"
+        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " AND 締処理日 = '" & dtmShime & "'"
+
+        Dim csvKikehd As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+        ConvertDataTableToCsvSingle(csvKikehd, "Maebarai")
+
+        Sql = ""
+        Sql += "SELECT * FROM public.t58_krnyukohd"
+        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " AND 締処理日 = '" & dtmShime & "'"
+
+        Dim csvNyukohd As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+        ConvertDataTableToCsv(csvNyukohd, "t59_krnyukodt", "入庫番号", "Nyuko")
+
+        Sql = ""
+        Sql += "SELECT * FROM public.t60_krshukohd"
+        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " AND 締処理日 = '" & dtmShime & "'"
+
+        Dim csvShukohd As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+        ConvertDataTableToCsv(csvShukohd, "t61_krshukodt", "出庫番号", "Shuko")
+
+        Sql = ""
+        Sql += "SELECT * FROM public.t62_krnkinhd"
+        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " AND 締処理日 = '" & dtmShime & "'"
+
+        Dim csvNkinhd As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+        ConvertDataTableToCsv(csvNkinhd, "t63_krnkindt", "入金番号", "Nyukin")
+
+        Sql = ""
+        Sql += "SELECT * FROM public.t64_krshrihd"
+        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " AND 締処理日 = '" & dtmShime & "'"
+
+        Dim csvShrihd As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+        ConvertDataTableToCsv(csvShrihd, "t65_krshridt", "支払番号", "Siharai")
+
+        Sql = ""
+        Sql += "SELECT * FROM public.t66_swkhd"
+        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " AND 締処理日 = '" & dtmShime & "'"
+
+        Dim csvSwkhd As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+        ConvertDataTableToCsvSingle(csvSwkhd, "Shiwake")
+#End Region
+
+        _msgHd.dspMSG("CreateExcel", frmC01F10_Login.loginValue.Language)
+
+        mSetkrTable = False
+
+    End Function
 
     Private Function mSetLog(ByRef ds1 As DataSet) As Boolean
 
@@ -298,7 +1636,7 @@ Public Class ClosingLog
         _db.executeDB(Sql15)
 
 
-        mSetLog = False
+        mSetLog = True
 
     End Function
 
@@ -1570,23 +2908,10 @@ Public Class ClosingLog
         Sql = ""
         Sql += "SELECT * FROM public.t30_urighd"
         Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        'Sql += " AND "
-        'Sql += "売上日"
-        'Sql += " >  "
-        'Sql += "'"
-        'Sql += dsCompany.Tables(RS).Rows(0)("前回締日")
-        'Sql += "'"
-        'Sql += " AND "
-        'Sql += "売上日"
-        'Sql += " <=  "
-        'Sql += "'"
-        'Sql += dsCompany.Tables(RS).Rows(0)("今回締日")
-        'Sql += "'"
-        'Sql += " AND "
-        'Sql += "締処理日"
-        'Sql += " IS NULL "
+        Sql += " AND 締処理日 = '" & dtmShime & "'"
 
         Dim dsSwkUrighd As DataSet = _db.selectDB(Sql, RS, reccnt)
+
 
         For i As Integer = 0 To dsSwkUrighd.Tables(RS).Rows.Count - 1
             Sql = ""
@@ -1651,23 +2976,10 @@ Public Class ClosingLog
         Sql = ""
         Sql += "SELECT * FROM public.t49_shrikshihd"
         Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        'Sql += " AND "
-        'Sql += "支払日"
-        'Sql += " >  "
-        'Sql += "'"
-        'Sql += dsCompany.Tables(RS).Rows(0)("前回締日")
-        'Sql += "'"
-        'Sql += " AND "
-        'Sql += "支払日"
-        'Sql += " <=  "
-        'Sql += "'"
-        'Sql += dsCompany.Tables(RS).Rows(0)("今回締日")
-        'Sql += "'"
-        'Sql += " AND "
-        'Sql += "締処理日"
-        'Sql += " IS NULL "
+        Sql += " AND 締処理日 = '" & dtmShime & "'"
 
         Dim dsShrikshihd As DataSet = _db.selectDB(Sql, RS, reccnt)
+
 
         For i As Integer = 0 To dsShrikshihd.Tables(RS).Rows.Count - 1
             Sql = ""
@@ -1778,23 +3090,10 @@ Public Class ClosingLog
         Sql = ""
         Sql += "SELECT * FROM public.t40_sirehd"
         Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        'Sql += " AND "
-        'Sql += "仕入日"
-        'Sql += " >  "
-        'Sql += "'"
-        'Sql += dsCompany.Tables(RS).Rows(0)("前回締日")
-        'Sql += "'"
-        'Sql += " AND "
-        'Sql += "仕入日"
-        'Sql += " <=  "
-        'Sql += "'"
-        'Sql += dsCompany.Tables(RS).Rows(0)("今回締日")
-        'Sql += "'"
-        'Sql += " AND "
-        'Sql += "締処理日"
-        'Sql += " IS NULL "
+        Sql += " AND 締処理日 = '" & dtmShime & "'"
 
         Dim dsSwkSirehd As DataSet = _db.selectDB(Sql, RS, reccnt)
+
 
         For i As Integer = 0 To dsSwkSirehd.Tables(RS).Rows.Count - 1
             Sql = ""
@@ -1899,1478 +3198,6 @@ Public Class ClosingLog
 
 
 #End Region
-
-#Region "売上"
-        Sql = ""
-        Sql += "SELECT * FROM public.t30_urighd"
-        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        'Sql += " AND "
-        'Sql += "売上日"
-        'Sql += " >  "
-        'Sql += "'"
-        'Sql += dsCompany.Tables(RS).Rows(0)("前回締日")
-        'Sql += "'"
-        'Sql += " AND "
-        'Sql += "売上日"
-        'Sql += " <=  "
-        'Sql += "'"
-        'Sql += dsCompany.Tables(RS).Rows(0)("今回締日")
-        'Sql += "'"
-        'Sql += " AND "
-        'Sql += "締処理日"
-        'Sql += " IS NULL "
-
-        Dim dsUrighd As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-        For i As Integer = 0 To dsUrighd.Tables(RS).Rows.Count - 1
-            Sql = ""
-            Sql += "INSERT INTO Public.t52_krurighd("
-            Sql += "会社コード, 売上番号, 客先番号, 受注番号, 受注番号枝番, 見積番号, 見積番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額, 仕入金額, 売上金額, 粗利額, 営業担当者, 入力担当者, 備考, ＶＡＴ, ＰＰＨ, 受注日, 売上日, 締処理日, 入金予定日, 登録日, 更新日, 更新者, 取消日, 取消区分)"
-            Sql += " VALUES('"
-            Sql += frmC01F10_Login.loginValue.BumonCD
-            Sql += "', '"
-            Sql += dsUrighd.Tables(RS).Rows(i)("売上番号").ToString
-            Sql += "', '"
-            Sql += dsUrighd.Tables(RS).Rows(i)("客先番号").ToString
-            Sql += "', '"
-            Sql += dsUrighd.Tables(RS).Rows(i)("受注番号").ToString
-            Sql += "', '"
-            Sql += dsUrighd.Tables(RS).Rows(i)("受注番号枝番").ToString
-            Sql += "', '"
-            Sql += dsUrighd.Tables(RS).Rows(i)("見積番号").ToString
-            Sql += "', '"
-            Sql += dsUrighd.Tables(RS).Rows(i)("見積番号枝番").ToString
-            Sql += "', '"
-            Sql += dsUrighd.Tables(RS).Rows(i)("得意先コード").ToString
-            Sql += "', '"
-            Sql += dsUrighd.Tables(RS).Rows(i)("得意先名").ToString
-            Sql += "',"
-            If IsDBNull(dsUrighd.Tables(RS).Rows(i)("得意先郵便番号")) OrElse dsUrighd.Tables(RS).Rows(i)("得意先郵便番号").ToString = vbNullString Then
-                Sql += "null"
-            Else
-                Sql += UtilClass.formatNumber(dsUrighd.Tables(RS).Rows(i)("得意先郵便番号").ToString）
-            End If
-            Sql += ", '"
-            Sql += dsUrighd.Tables(RS).Rows(i)("得意先住所").ToString
-            Sql += "', '"
-            Sql += dsUrighd.Tables(RS).Rows(i)("得意先電話番号").ToString
-            Sql += "', '"
-            Sql += dsUrighd.Tables(RS).Rows(i)("得意先ＦＡＸ").ToString
-            Sql += "', '"
-            Sql += dsUrighd.Tables(RS).Rows(i)("得意先担当者役職").ToString
-            Sql += "', '"
-            Sql += dsUrighd.Tables(RS).Rows(i)("得意先担当者名").ToString
-            Sql += "', '"
-            Sql += UtilClass.strFormatDate(dsUrighd.Tables(RS).Rows(i)("見積日").ToString)
-            Sql += "', '"
-            Sql += UtilClass.strFormatDate(dsUrighd.Tables(RS).Rows(i)("見積有効期限").ToString)
-            Sql += "', '"
-            Sql += dsUrighd.Tables(RS).Rows(i)("支払条件").ToString
-            Sql += "', '"
-            Sql += UtilClass.formatNumber(dsUrighd.Tables(RS).Rows(i)("見積金額").ToString)
-            Sql += "', '"
-            Sql += UtilClass.formatNumber(dsUrighd.Tables(RS).Rows(i)("仕入金額").ToString)
-            Sql += "', '"
-            Sql += UtilClass.formatNumber(dsUrighd.Tables(RS).Rows(i)("売上金額").ToString)
-            Sql += "', '"
-            Sql += UtilClass.formatNumber(dsUrighd.Tables(RS).Rows(i)("粗利額").ToString)
-            Sql += "', '"
-            Sql += dsUrighd.Tables(RS).Rows(i)("営業担当者").ToString
-            Sql += "', '"
-            Sql += dsUrighd.Tables(RS).Rows(i)("入力担当者").ToString
-            Sql += "', '"
-            Sql += dsUrighd.Tables(RS).Rows(i)("備考").ToString
-            Sql += "', '"
-
-            If dsUrighd.Tables(RS).Rows(i)("ＶＡＴ") Is DBNull.Value Then
-                Sql += "0"
-            Else
-                Sql += UtilClass.formatNumber(dsUrighd.Tables(RS).Rows(i)("ＶＡＴ").ToString)
-            End If
-            Sql += "', '"
-            If dsUrighd.Tables(RS).Rows(i)("ＰＰＨ") Is DBNull.Value Then
-                Sql += "0"
-            Else
-                Sql += UtilClass.formatNumber(dsUrighd.Tables(RS).Rows(i)("ＰＰＨ").ToString)
-            End If
-            Sql += "', '"
-            Sql += UtilClass.strFormatDate(dsUrighd.Tables(RS).Rows(i)("受注日").ToString)
-            Sql += "', '"
-            Sql += UtilClass.strFormatDate(dsUrighd.Tables(RS).Rows(i)("売上日").ToString)
-            Sql += "', '"
-            Sql += UtilClass.strFormatDate(dtToday)
-
-            If dsUrighd.Tables(RS).Rows(i)("入金予定日") IsNot DBNull.Value Then
-                Sql += "', '"
-                Sql += UtilClass.strFormatDate(dsUrighd.Tables(RS).Rows(i)("入金予定日").ToString)
-                Sql += "', '"
-            Else
-                Sql += "', "
-                Sql += "null"
-                Sql += ", '"
-            End If
-
-            Sql += UtilClass.strFormatDate(dsUrighd.Tables(RS).Rows(i)("登録日").ToString)
-            Sql += "', '"
-            Sql += UtilClass.strFormatDate(dtToday)
-            Sql += "', '"
-            Sql += frmC01F10_Login.loginValue.TantoNM
-
-            If dsUrighd.Tables(RS).Rows(i)("取消日") IsNot DBNull.Value Then
-                Sql += "', '"
-                Sql += UtilClass.strFormatDate(dsUrighd.Tables(RS).Rows(i)("取消日").ToString)
-                Sql += "', "
-            Else
-                Sql += "', "
-                Sql += "null"
-                Sql += ", "
-            End If
-
-            If dsUrighd.Tables(RS).Rows(i)("取消区分") IsNot DBNull.Value Then
-                Sql += "'"
-                Sql += dsUrighd.Tables(RS).Rows(i)("取消区分").ToString
-            Else
-                Sql += "0"
-            End If
-
-            Sql += "')"
-
-            _db.executeDB(Sql)
-        Next
-
-        For i As Integer = 0 To dsUrighd.Tables(RS).Rows.Count - 1
-            Sql = ""
-            Sql += "SELECT * FROM public.t31_urigdt"
-            Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Sql += " AND 売上番号 = '" & dsUrighd.Tables(RS).Rows(i)("売上番号") & "'"
-
-            Dim dsUrigdt As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-            If dsCompany.Tables(RS).Rows(0)("在庫単価評価法") = 1 Then
-                '先入先出法の場合
-                For x As Integer = 0 To dsUrigdt.Tables(RS).Rows.Count - 1
-                    Sql = ""
-                    Sql += "SELECT * FROM public.t41_siredt"
-                    Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-                    Sql += " AND メーカー ='" & dsUrigdt.Tables(RS).Rows(x)("メーカー") & "'"
-                    Sql += " AND 品名 ='" & dsUrigdt.Tables(RS).Rows(x)("品名") & "'"
-                    Sql += " AND 型式 ='" & dsUrigdt.Tables(RS).Rows(x)("型式") & "'"
-                    'Sql += " AND "
-                    'Sql += "仕入日"
-                    'Sql += " >  "
-                    'Sql += "'"
-                    'Sql += dsCompany.Tables(RS).Rows(0)("前回締日")
-                    'Sql += "'"
-                    'Sql += " AND "
-                    'Sql += "仕入日"
-                    'Sql += " <=  "
-                    'Sql += "'"
-                    'Sql += dsCompany.Tables(RS).Rows(0)("今回締日")
-                    'Sql += "'"
-                    'Sql += " AND "
-                    'Sql += "締処理日"
-                    'Sql += " IS NULL "
-                    'Sql += " AND "
-                    'Sql += "カウント IS NULL"
-
-                    Dim dsSiredt As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-                    Dim Count As Integer = dsUrigdt.Tables(RS).Rows(x)("受注数量")
-                    Dim Qty As Integer = 0
-                    Dim SireQty As Integer = 0
-                    Dim LineSuffix As Integer = 0
-
-                    For y As Integer = 0 To dsSiredt.Tables(RS).Rows.Count - 1
-                        If Count > 0 Then
-                            If Count - dsSiredt.Tables(RS).Rows(y)("発注数量") < 0 Then
-                                Qty = Count
-                                Count = 0
-                                SireQty = dsSiredt.Tables(RS).Rows(y)("発注数量") - dsUrigdt.Tables(RS).Rows(x)("受注数量")
-                            Else
-                                Qty = dsSiredt.Tables(RS).Rows(y)("発注数量")
-                                Count = Count - dsSiredt.Tables(RS).Rows(y)("発注数量")
-                                SireQty = 0
-                            End If
-                            LineSuffix = y + 1
-
-                            Sql = ""
-                            Sql += "INSERT INTO "
-                            Sql += "Public."
-                            Sql += "t53_krurigdt("
-                            Sql += "会社コード, 売上番号, 受注番号, 受注番号枝番, 行番号, 行番号枝番, 仕入区分, メーカー, 品名, 型式, 仕入先名, 仕入値, 受注数量, 売上数量, 受注残数, 単位, 仕入原価, 関税率, 関税額, 前払法人税率, 前払法人税額, 輸送費率, 輸送費額, 間接費, 仕入金額, 売単価, 売上金額, 見積単価, 見積金額, 粗利額, 粗利率, リードタイム, 備考, 入金有無, 入金番号, 入金日, 更新者, 更新日)"
-                            Sql += " VALUES('"
-                            Sql += frmC01F10_Login.loginValue.BumonCD
-                            Sql += "', '"
-                            Sql += dsUrigdt.Tables(RS).Rows(x)("売上番号").ToString
-                            Sql += "', '"
-                            Sql += dsUrigdt.Tables(RS).Rows(x)("受注番号").ToString
-                            Sql += "', '"
-                            Sql += dsUrigdt.Tables(RS).Rows(x)("受注番号枝番").ToString
-                            Sql += "', '"
-                            Sql += dsUrigdt.Tables(RS).Rows(x)("行番号").ToString
-                            Sql += "', '"
-                            Sql += LineSuffix.ToString
-                            Sql += "', '"
-                            Sql += dsUrigdt.Tables(RS).Rows(x)("仕入区分").ToString
-                            Sql += "', '"
-                            Sql += dsUrigdt.Tables(RS).Rows(x)("メーカー").ToString
-                            Sql += "', '"
-                            Sql += dsUrigdt.Tables(RS).Rows(x)("品名").ToString
-                            Sql += "', '"
-                            Sql += dsUrigdt.Tables(RS).Rows(x)("型式").ToString
-                            Sql += "', '"
-                            Sql += dsUrigdt.Tables(RS).Rows(x)("仕入先名").ToString
-                            Sql += "', '"
-                            Sql += UtilClass.formatNumber(dsSiredt.Tables(RS).Rows(y)("仕入値").ToString)
-                            Sql += "', '"
-                            Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("受注数量").ToString)
-                            Sql += "', '"
-                            Sql += UtilClass.formatNumber(Qty.ToString)
-                            Sql += "', '"
-                            Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("受注残数").ToString)
-                            Sql += "', '"
-                            Sql += dsUrigdt.Tables(RS).Rows(x)("単位").ToString
-                            Sql += "', '"
-                            Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("仕入原価").ToString)
-                            Sql += "', '"
-                            Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("関税率").ToString)
-                            Sql += "', '"
-                            Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("関税額").ToString)
-                            Sql += "', '"
-                            Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("前払法人税率").ToString)
-                            Sql += "', '"
-                            Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("前払法人税額").ToString)
-                            Sql += "', '"
-                            Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("輸送費率").ToString)
-                            Sql += "', '"
-                            Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("輸送費額").ToString)
-                            Sql += "', '"
-                            Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("間接費").ToString)
-                            Sql += "', '"
-                            Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("仕入金額").ToString)
-                            Sql += "', '"
-                            Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("売単価").ToString)
-                            Sql += "', '"
-                            Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("売上金額").ToString)
-                            Sql += "', '"
-                            Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("見積単価").ToString)
-                            Sql += "', '"
-                            Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("見積金額").ToString)
-                            Sql += "', '"
-                            Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("粗利額").ToString)
-                            Sql += "', '"
-                            Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("粗利率").ToString)
-                            Sql += "', '"
-                            Sql += dsUrigdt.Tables(RS).Rows(x)("リードタイム").ToString
-                            Sql += "', '"
-                            Sql += dsUrigdt.Tables(RS).Rows(x)("備考").ToString
-
-                            If dsUrigdt.Tables(RS).Rows(x)("入金有無") IsNot DBNull.Value Then
-                                Sql += "', '"
-                                Sql += dsUrigdt.Tables(RS).Rows(x)("入金有無").ToString
-                                Sql += "', '"
-                            Else
-                                Sql += "', "
-                                Sql += "0"
-                                Sql += ", '"
-                            End If
-
-
-                            Sql += dsUrigdt.Tables(RS).Rows(x)("入金番号").Value
-
-                            If dsUrigdt.Tables(RS).Rows(x)("入金日") IsNot DBNull.Value Then
-                                Sql += "', '"
-                                Sql += UtilClass.strFormatDate(dsUrigdt.Tables(RS).Rows(x)("入金日").ToString)
-                                Sql += "', '"
-                            Else
-                                Sql += "', "
-                                Sql += "null"
-                                Sql += ", '"
-                            End If
-
-                            Sql += frmC01F10_Login.loginValue.TantoNM
-                            Sql += "', '"
-                            Sql += UtilClass.strFormatDate(dtToday)
-                            Sql += "')"
-
-                            _db.executeDB(Sql)
-
-                            Sql = ""
-                            Sql += "UPDATE Public.t41_siredt "
-                            Sql += "SET "
-                            Sql += " カウント = '" & SireQty.ToString & "'"
-
-                            Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-                            Sql += " AND 仕入番号 = '" & dsSiredt.Tables(RS).Rows(y)("仕入番号") & "'"
-                            Sql += " AND 行番号 = '" & dsSiredt.Tables(RS).Rows(y)("行番号").ToString & "'"
-
-                            _db.executeDB(Sql)
-
-                        End If
-                    Next
-                Next
-            Else
-                '平均法の場合
-                For x As Integer = 0 To dsUrigdt.Tables(RS).Rows.Count - 1
-                    Sql = ""
-                    Sql += "INSERT INTO Public.t53_krurigdt("
-                    Sql += "会社コード, 売上番号, 受注番号, 受注番号枝番, 行番号, 行番号枝番, 仕入区分, メーカー, 品名, 型式, 仕入先名, 仕入値, 受注数量, 売上数量, 受注残数, 単位, 仕入原価, 関税率, 関税額, 前払法人税率, 前払法人税額, 輸送費率, 輸送費額, 間接費, 仕入金額, 売単価, 売上金額, 見積単価, 見積金額, 粗利額, 粗利率, リードタイム, 備考, 入金有無, 入金番号, 入金日, 更新者, 更新日)"
-                    Sql += " VALUES('"
-                    Sql += frmC01F10_Login.loginValue.BumonCD
-                    Sql += "', '"
-                    Sql += dsUrigdt.Tables(RS).Rows(x)("売上番号").ToString
-                    Sql += "', '"
-                    Sql += dsUrigdt.Tables(RS).Rows(x)("受注番号").ToString
-                    Sql += "', '"
-                    Sql += dsUrigdt.Tables(RS).Rows(x)("受注番号枝番").ToString
-                    Sql += "', '"
-                    Sql += dsUrigdt.Tables(RS).Rows(x)("行番号").ToString
-                    Sql += "', '"
-                    Sql += "0"
-                    Sql += "', '"
-                    Sql += dsUrigdt.Tables(RS).Rows(x)("仕入区分").ToString
-                    Sql += "', '"
-                    Sql += dsUrigdt.Tables(RS).Rows(x)("メーカー").ToString
-                    Sql += "', '"
-                    Sql += dsUrigdt.Tables(RS).Rows(x)("品名").ToString
-                    Sql += "', '"
-                    Sql += dsUrigdt.Tables(RS).Rows(x)("型式").ToString
-                    Sql += "', '"
-                    Sql += dsUrigdt.Tables(RS).Rows(x)("仕入先名").ToString
-                    Sql += "', '"
-                    Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("仕入値").ToString)
-                    Sql += "', '"
-                    Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("受注数量").ToString)
-                    Sql += "', '"
-                    Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("売上数量").ToString)
-                    Sql += "', '"
-                    Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("受注残数").ToString)
-                    Sql += "', '"
-                    Sql += dsUrigdt.Tables(RS).Rows(x)("単位").ToString
-                    Sql += "', '"
-                    Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("仕入原価").ToString)
-                    Sql += "', '"
-                    Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("関税率").ToString)
-                    Sql += "', '"
-                    Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("関税額").ToString)
-                    Sql += "', '"
-                    Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("前払法人税率").ToString)
-                    Sql += "', '"
-                    Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("前払法人税額").ToString)
-                    Sql += "', '"
-                    Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("輸送費率").ToString)
-                    Sql += "', '"
-                    Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("輸送費額").ToString)
-                    Sql += "', '"
-                    Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("間接費").ToString)
-                    Sql += "', '"
-                    Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("仕入金額").ToString)
-                    Sql += "', '"
-                    Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("売単価").ToString)
-                    Sql += "', '"
-                    Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("売上金額").ToString)
-                    Sql += "', '"
-                    Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("見積単価").ToString)
-                    Sql += "', '"
-                    Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("見積金額").ToString)
-                    Sql += "', '"
-                    Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("粗利額").ToString)
-                    Sql += "', '"
-                    Sql += UtilClass.formatNumber(dsUrigdt.Tables(RS).Rows(x)("粗利率").ToString)
-                    Sql += "', '"
-                    Sql += dsUrigdt.Tables(RS).Rows(x)("リードタイム").ToString
-                    Sql += "', '"
-                    Sql += dsUrigdt.Tables(RS).Rows(x)("備考").ToString
-                    If dsUrigdt.Tables(RS).Rows(x)("入金有無") IsNot DBNull.Value Then
-                        Sql += "', '"
-                        Sql += dsUrigdt.Tables(RS).Rows(x)("入金有無").ToString
-                        Sql += "', '"
-                    Else
-                        Sql += "', "
-                        Sql += "0"
-                        Sql += ", '"
-                    End If
-
-
-                    Sql += dsUrigdt.Tables(RS).Rows(x)("入金番号").Value
-
-                    If dsUrigdt.Tables(RS).Rows(x)("入金日") IsNot DBNull.Value Then
-                        Sql += "', '"
-                        Sql += UtilClass.strFormatDate(dsUrigdt.Tables(RS).Rows(x)("入金日").ToString)
-                        Sql += "', '"
-                    Else
-                        Sql += "', "
-                        Sql += "null"
-                        Sql += ", '"
-                    End If
-                    Sql += frmC01F10_Login.loginValue.TantoNM
-                    Sql += "', '"
-                    Sql += UtilClass.strFormatDate(dtToday)
-                    Sql += "')"
-                    _db.executeDB(Sql)
-                Next
-            End If
-        Next
-#End Region
-
-#Region "仕入"
-        Sql = ""
-        Sql += "SELECT * FROM public.t40_sirehd"
-        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        'Sql += " AND "
-        'Sql += "仕入日"
-        'Sql += " >  "
-        'Sql += "'"
-        'Sql += dsCompany.Tables(RS).Rows(0)("前回締日")
-        'Sql += "'"
-        'Sql += " AND "
-        'Sql += "仕入日"
-        'Sql += " <=  "
-        'Sql += "'"
-        'Sql += dsCompany.Tables(RS).Rows(0)("今回締日")
-        'Sql += "'"
-        'Sql += " AND "
-        'Sql += "締処理日"
-        'Sql += " IS NULL "
-
-        Dim dsSirehd As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-        For i As Integer = 0 To dsSirehd.Tables(RS).Rows.Count - 1
-            Sql = ""
-            Sql += "INSERT INTO Public.t54_krsirehd("
-            Sql += "会社コード, 仕入番号, 発注番号, 発注番号枝番, 客先番号, 仕入先コード, 仕入先名, 仕入先郵便番号, 仕入先住所, 仕入先電話番号, 仕入先ＦＡＸ, 仕入先担当者役職, 仕入先担当者名, 支払条件, 仕入金額, 粗利額, 営業担当者, 入力担当者, 備考, 取消日, 取消区分, ＶＡＴ, ＰＰＨ, 仕入日, 登録日, 締処理日, 更新日, 更新者)"
-            Sql += " VALUES('"
-            Sql += frmC01F10_Login.loginValue.BumonCD
-            Sql += "', '"
-            Sql += dsSirehd.Tables(RS).Rows(i)("仕入番号").ToString
-            Sql += "', '"
-            Sql += dsSirehd.Tables(RS).Rows(i)("発注番号").ToString
-            Sql += "', '"
-            Sql += dsSirehd.Tables(RS).Rows(i)("発注番号枝番").ToString
-            Sql += "', '"
-            Sql += dsSirehd.Tables(RS).Rows(i)("客先番号").ToString
-            Sql += "', '"
-            Sql += dsSirehd.Tables(RS).Rows(i)("仕入先コード").ToString
-            Sql += "', '"
-            Sql += dsSirehd.Tables(RS).Rows(i)("仕入先名").ToString
-            Sql += "', '"
-            Sql += dsSirehd.Tables(RS).Rows(i)("仕入先郵便番号").ToString
-            Sql += "', '"
-            Sql += dsSirehd.Tables(RS).Rows(i)("仕入先住所").ToString
-            Sql += "', '"
-            Sql += dsSirehd.Tables(RS).Rows(i)("仕入先電話番号").ToString
-            Sql += "', '"
-            Sql += dsSirehd.Tables(RS).Rows(i)("仕入先ＦＡＸ").ToString
-            Sql += "', '"
-            Sql += dsSirehd.Tables(RS).Rows(i)("仕入先担当者役職").ToString
-            Sql += "', '"
-            Sql += dsSirehd.Tables(RS).Rows(i)("仕入先担当者名").ToString
-            Sql += "', '"
-            Sql += dsSirehd.Tables(RS).Rows(i)("支払条件").ToString
-            Sql += "', '"
-            Sql += UtilClass.formatNumber(dsSirehd.Tables(RS).Rows(i)("仕入金額").ToString)
-            Sql += "', '"
-            Sql += UtilClass.formatNumber(dsSirehd.Tables(RS).Rows(i)("粗利額").ToString)
-            Sql += "', '"
-            Sql += dsSirehd.Tables(RS).Rows(i)("営業担当者").ToString
-            Sql += "', '"
-            Sql += dsSirehd.Tables(RS).Rows(i)("入力担当者").ToString
-            Sql += "', '"
-            Sql += dsSirehd.Tables(RS).Rows(i)("備考").ToString
-
-            If dsSirehd.Tables(RS).Rows(i)("取消日") IsNot DBNull.Value Then
-                Sql += "', '"
-                Sql += UtilClass.strFormatDate(dsSirehd.Tables(RS).Rows(i)("取消日").ToString)
-                Sql += "', '"
-            Else
-                Sql += "', "
-                Sql += "null"
-                Sql += ", '"
-            End If
-
-            Sql += dsSirehd.Tables(RS).Rows(i)("取消区分").ToString
-            Sql += "', '"
-            Sql += UtilClass.formatNumber(dsSirehd.Tables(RS).Rows(i)("ＶＡＴ").ToString)
-            Sql += "', '"
-            Sql += UtilClass.formatNumber(dsSirehd.Tables(RS).Rows(i)("ＰＰＨ").ToString)
-            Sql += "', '"
-            Sql += UtilClass.strFormatDate(dsSirehd.Tables(RS).Rows(i)("仕入日").ToString)
-            Sql += "', '"
-            Sql += UtilClass.strFormatDate(dsSirehd.Tables(RS).Rows(i)("登録日").ToString)
-            Sql += "', '"
-            Sql += UtilClass.strFormatDate(dtToday)
-            Sql += "', '"
-            Sql += UtilClass.strFormatDate(dtToday)
-            Sql += "', '"
-            Sql += frmC01F10_Login.loginValue.TantoNM
-            Sql += "')"
-
-            _db.executeDB(Sql)
-        Next
-
-        For i As Integer = 0 To dsSirehd.Tables(RS).Rows.Count - 1
-            Sql = ""
-            Sql += "SELECT * FROM public.t41_siredt"
-            Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Sql += " AND 仕入番号 = '" & dsSirehd.Tables(RS).Rows(i)("仕入番号") & "'"
-
-            Dim dssiredt As DataSet = _db.selectDB(Sql, RS, reccnt)
-            For x As Integer = 0 To dssiredt.Tables(RS).Rows.Count - 1
-                Sql = ""
-                Sql += "INSERT INTO Public.t55_krsiredt("
-                Sql += "会社コード, 仕入番号, 発注番号, 発注番号枝番, 支払番号, 行番号, 仕入区分, メーカー, 品名, 型式, 仕入先名, 仕入値, 発注数量, 仕入数量, 発注残数, 単位, 仕入単価, 仕入金額, 間接費, リードタイム, 備考, 仕入日, 支払日, 支払有無, 更新者, 更新日)"
-                Sql += " VALUES('"
-                Sql += frmC01F10_Login.loginValue.BumonCD
-                Sql += "', '"
-                Sql += dssiredt.Tables(RS).Rows(x)("仕入番号").ToString
-                Sql += "', '"
-                Sql += dssiredt.Tables(RS).Rows(x)("発注番号").ToString
-                Sql += "', '"
-                Sql += dssiredt.Tables(RS).Rows(x)("発注番号枝番").ToString
-                Sql += "', '"
-                Sql += dssiredt.Tables(RS).Rows(x)("支払番号").ToString
-                Sql += "', '"
-                Sql += dssiredt.Tables(RS).Rows(x)("行番号").ToString
-                Sql += "', '"
-                Sql += dssiredt.Tables(RS).Rows(x)("仕入区分").ToString
-                Sql += "', '"
-                Sql += dssiredt.Tables(RS).Rows(x)("メーカー").ToString
-                Sql += "', '"
-                Sql += dssiredt.Tables(RS).Rows(x)("品名").ToString
-                Sql += "', '"
-                Sql += dssiredt.Tables(RS).Rows(x)("型式").ToString
-                Sql += "', '"
-                Sql += dssiredt.Tables(RS).Rows(x)("仕入先名").ToString
-                Sql += "', '"
-                Sql += UtilClass.formatNumber(dssiredt.Tables(RS).Rows(x)("仕入値").ToString)
-                Sql += "', '"
-                Sql += UtilClass.formatNumber(dssiredt.Tables(RS).Rows(x)("発注数量").ToString)
-                Sql += "', '"
-                Sql += UtilClass.formatNumber(dssiredt.Tables(RS).Rows(x)("仕入数量").ToString)
-                Sql += "', '"
-                Sql += UtilClass.formatNumber(dssiredt.Tables(RS).Rows(x)("発注残数").ToString)
-                Sql += "', '"
-                Sql += dssiredt.Tables(RS).Rows(x)("単位").ToString
-                Sql += "', '"
-                Sql += UtilClass.formatNumber(rmNullDecimal(dssiredt.Tables(RS).Rows(x)("仕入単価").ToString))
-                Sql += "', '"
-                Sql += UtilClass.formatNumber(dssiredt.Tables(RS).Rows(x)("仕入金額").ToString)
-                Sql += "', '"
-                Sql += UtilClass.formatNumber(dssiredt.Tables(RS).Rows(x)("間接費").ToString)
-                Sql += "', '"
-                Sql += dssiredt.Tables(RS).Rows(x)("リードタイム").ToString
-                Sql += "', '"
-                Sql += dssiredt.Tables(RS).Rows(x)("備考").ToString
-                Sql += "', '"
-                Sql += UtilClass.strFormatDate(dssiredt.Tables(RS).Rows(x)("仕入日").ToString)
-                If dssiredt.Tables(RS).Rows(x)("支払日") IsNot DBNull.Value Then
-                    Sql += "', '"
-                    Sql += UtilClass.strFormatDate(dssiredt.Tables(RS).Rows(x)("支払日").ToString)
-                    Sql += "', "
-                Else
-                    Sql += "', "
-                    Sql += "null"
-                    Sql += ", "
-                End If
-                If dssiredt.Tables(RS).Rows(x)("支払有無") IsNot DBNull.Value Then
-                    Sql += " '"
-                    Sql += dssiredt.Tables(RS).Rows(x)("支払有無").ToString
-                    Sql += "', '"
-                Else
-                    Sql += "0"
-                    Sql += ", '"
-                End If
-
-                Sql += frmC01F10_Login.loginValue.TantoNM
-                Sql += "', '"
-                Sql += UtilClass.strFormatDate(dtToday)
-                Sql += "')"
-                _db.executeDB(Sql)
-            Next
-        Next
-#End Region
-
-#Region "売掛"
-        Sql = ""
-        Sql += "SELECT * FROM public.t23_skyuhd"
-        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        'Sql += " AND "
-        'Sql += "請求日"
-        'Sql += " >  "
-        'Sql += "'"
-        'Sql += dsCompany.Tables(RS).Rows(0)("前回締日")
-        'Sql += "'"
-        'Sql += " AND "
-        'Sql += "請求日"
-        'Sql += " <=  "
-        'Sql += "'"
-        'Sql += dsCompany.Tables(RS).Rows(0)("今回締日")
-        'Sql += "'"
-        'Sql += " AND "
-        'Sql += "締処理日"
-        'Sql += " IS NULL "
-
-        Dim dsSkyuhd As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-        For i As Integer = 0 To dsSkyuhd.Tables(RS).Rows.Count - 1
-            Sql = ""
-            Sql += "INSERT INTO Public.t56_krskyuhd("
-            Sql += "会社コード, 請求番号, 請求区分, 請求日, 受注番号, 受注番号枝番, 客先番号, 得意先コード, 得意先名, 請求金額計, 入金額計, 売掛残高, 備考１, 備考２, 入金番号, 入金完了日, 取消日, 取消区分, 登録日, 締処理日, 更新者)"
-            Sql += " VALUES('"
-            Sql += frmC01F10_Login.loginValue.BumonCD
-            Sql += "', '"
-            Sql += dsSkyuhd.Tables(RS).Rows(i)("請求番号").ToString
-            Sql += "', '"
-            Sql += dsSkyuhd.Tables(RS).Rows(i)("請求区分").ToString
-            Sql += "', '"
-            Sql += UtilClass.strFormatDate(dsSkyuhd.Tables(RS).Rows(i)("請求日").ToString)
-            Sql += "', '"
-            Sql += dsSkyuhd.Tables(RS).Rows(i)("受注番号").ToString
-            Sql += "', '"
-            Sql += dsSkyuhd.Tables(RS).Rows(i)("受注番号枝番").ToString
-            Sql += "', '"
-            Sql += dsSkyuhd.Tables(RS).Rows(i)("客先番号").ToString
-            Sql += "', '"
-            Sql += dsSkyuhd.Tables(RS).Rows(i)("得意先コード").ToString
-            Sql += "', '"
-            Sql += dsSkyuhd.Tables(RS).Rows(i)("得意先名").ToString
-            Sql += "', '"
-            Sql += UtilClass.formatNumber(dsSkyuhd.Tables(RS).Rows(i)("請求金額計").ToString)
-
-            If dsSkyuhd.Tables(RS).Rows(i)("入金額計") IsNot DBNull.Value Then
-                Sql += "', '"
-                Sql += UtilClass.formatNumber(dsSkyuhd.Tables(RS).Rows(i)("入金額計").ToString)
-                Sql += "', '"
-            Else
-                Sql += "', "
-                Sql += "0"
-                Sql += ", '"
-            End If
-
-            Sql += UtilClass.formatNumber(dsSkyuhd.Tables(RS).Rows(i)("売掛残高").ToString)
-            Sql += "', '"
-            Sql += dsSkyuhd.Tables(RS).Rows(i)("備考1").ToString
-            Sql += "', '"
-            Sql += dsSkyuhd.Tables(RS).Rows(i)("備考2").ToString
-            Sql += "', '"
-            Sql += dsSkyuhd.Tables(RS).Rows(i)("入金番号").ToString
-
-
-            If dsSkyuhd.Tables(RS).Rows(i)("入金完了日") IsNot DBNull.Value Then
-                Sql += "', '"
-                Sql += UtilClass.strFormatDate(dsSkyuhd.Tables(RS).Rows(i)("入金完了日").ToString)
-                Sql += "', "
-            Else
-                Sql += "', "
-                Sql += "null"
-                Sql += ", "
-            End If
-
-            If dsSkyuhd.Tables(RS).Rows(i)("取消日") IsNot DBNull.Value Then
-                Sql += "'"
-                Sql += UtilClass.strFormatDate(dsSkyuhd.Tables(RS).Rows(i)("取消日").ToString)
-                Sql += "', "
-            Else
-                Sql += "null"
-                Sql += ", "
-            End If
-
-            If dsSkyuhd.Tables(RS).Rows(i)("取消区分") IsNot DBNull.Value Then
-                Sql += "'"
-                Sql += dsSkyuhd.Tables(RS).Rows(i)("取消区分").ToString
-                Sql += "', "
-            Else
-                Sql += "0"
-                Sql += ", "
-            End If
-
-            Sql += "'"
-            Sql += UtilClass.strFormatDate(dsSkyuhd.Tables(RS).Rows(i)("登録日").ToString)
-            Sql += "', '"
-            Sql += UtilClass.strFormatDate(dtToday)
-            Sql += "', '"
-            Sql += frmC01F10_Login.loginValue.TantoNM
-            Sql += "')"
-
-            _db.executeDB(Sql)
-        Next
-#End Region
-
-#Region "買掛"
-        Sql = ""
-        Sql += "SELECT * FROM public.t46_kikehd"
-        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        'Sql += " AND "
-        'Sql += "買掛日"
-        'Sql += " >  "
-        'Sql += "'"
-        'Sql += dsCompany.Tables(RS).Rows(0)("前回締日")
-        'Sql += "'"
-        'Sql += " AND "
-        'Sql += "買掛日"
-        'Sql += " <=  "
-        'Sql += "'"
-        'Sql += dsCompany.Tables(RS).Rows(0)("今回締日")
-        'Sql += "'"
-        'Sql += " AND "
-        'Sql += "締処理日"
-        'Sql += " IS NULL "
-
-        Dim dsKikehd As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-        For i As Integer = 0 To dsKikehd.Tables(RS).Rows.Count - 1
-            Sql = ""
-            Sql += "INSERT INTO Public.t57_krkikehd("
-            Sql += "会社コード, 買掛番号, 買掛区分, 買掛日, 発注番号, 発注番号枝番, 客先番号, 仕入先コード, 仕入先名, 買掛金額計, 支払金額計, 買掛残高, 備考１, 備考２, 支払完了日, 取消日, 取消区分, 登録日, 更新者, 締処理日)"
-            Sql += " VALUES('"
-            Sql += frmC01F10_Login.loginValue.BumonCD
-            Sql += "', '"
-            Sql += dsKikehd.Tables(RS).Rows(i)("買掛番号").ToString
-            Sql += "', '"
-            Sql += dsKikehd.Tables(RS).Rows(i)("買掛区分").ToString
-            Sql += "', '"
-            Sql += UtilClass.strFormatDate(dsKikehd.Tables(RS).Rows(i)("買掛日").ToString)
-            Sql += "', '"
-            Sql += dsKikehd.Tables(RS).Rows(i)("発注番号").ToString
-            Sql += "', '"
-            Sql += dsKikehd.Tables(RS).Rows(i)("発注番号枝番").ToString
-            Sql += "', '"
-            Sql += dsKikehd.Tables(RS).Rows(i)("客先番号").ToString
-            Sql += "', '"
-            Sql += dsKikehd.Tables(RS).Rows(i)("仕入先コード").ToString
-            Sql += "', '"
-            Sql += dsKikehd.Tables(RS).Rows(i)("仕入先名").ToString
-            Sql += "', '"
-            Sql += UtilClass.formatNumber(dsKikehd.Tables(RS).Rows(i)("買掛金額計").ToString)
-
-            If dsKikehd.Tables(RS).Rows(i)("支払金額計") IsNot DBNull.Value Then
-                Sql += "', '"
-                Sql += UtilClass.formatNumber(dsKikehd.Tables(RS).Rows(i)("支払金額計").ToString)
-                Sql += "', '"
-            Else
-                Sql += "', '"
-                Sql += "0"
-                Sql += "', '"
-            End If
-
-            Sql += UtilClass.formatNumber(dsKikehd.Tables(RS).Rows(i)("買掛残高").ToString)
-            Sql += "', '"
-            Sql += dsKikehd.Tables(RS).Rows(i)("備考1").ToString
-            Sql += "', '"
-            Sql += dsKikehd.Tables(RS).Rows(i)("備考2").ToString
-
-            If dsKikehd.Tables(RS).Rows(i)("支払完了日") IsNot DBNull.Value Then
-                Sql += "', '"
-                Sql += UtilClass.strFormatDate(dsKikehd.Tables(RS).Rows(i)("支払完了日").ToString)
-                Sql += "', "
-            Else
-                Sql += "', "
-                Sql += "null"
-                Sql += ", "
-            End If
-
-            If dsKikehd.Tables(RS).Rows(i)("取消日") IsNot DBNull.Value Then
-                Sql += "'"
-                Sql += UtilClass.strFormatDate(dsKikehd.Tables(RS).Rows(i)("取消日").ToString)
-                Sql += "', "
-            Else
-                Sql += "null"
-                Sql += ", "
-            End If
-
-            If dsKikehd.Tables(RS).Rows(i)("取消区分") IsNot DBNull.Value Then
-                Sql += "'"
-                Sql += dsKikehd.Tables(RS).Rows(i)("取消区分").ToString
-                Sql += "', "
-            Else
-                Sql += "0"
-                Sql += ", "
-            End If
-
-            Sql += "'"
-            Sql += UtilClass.strFormatDate(dsKikehd.Tables(RS).Rows(i)("登録日").ToString)
-            Sql += "', '"
-            Sql += frmC01F10_Login.loginValue.TantoNM
-            Sql += "', '"
-            Sql += UtilClass.strFormatDate(dtToday)
-            Sql += "')"
-
-            _db.executeDB(Sql)
-        Next
-#End Region
-
-#Region "入庫"
-        Sql = ""
-        Sql += "SELECT * FROM public.t42_nyukohd"
-        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        'Sql += " AND "
-        'Sql += "入庫日"
-        'Sql += " >  "
-        'Sql += "'"
-        'Sql += dsCompany.Tables(RS).Rows(0)("前回締日")
-        'Sql += "'"
-        'Sql += " AND "
-        'Sql += "入庫日"
-        'Sql += " <=  "
-        'Sql += "'"
-        'Sql += dsCompany.Tables(RS).Rows(0)("今回締日")
-        'Sql += "'"
-        'Sql += " AND "
-        'Sql += "締処理日"
-        'Sql += " IS NULL "
-
-        Dim dsNyukohd As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-        For i As Integer = 0 To dsNyukohd.Tables(RS).Rows.Count - 1
-            Sql = ""
-            Sql += "INSERT INTO Public.t58_krnyukohd("
-            Sql += "会社コード, 入庫番号, 客先番号, 発注番号, 発注番号枝番, 仕入先コード, 仕入先名, 仕入先郵便番号, 仕入先住所, 仕入先電話番号, 仕入先ＦＡＸ, 仕入先担当者役職, 仕入先担当者名, 支払条件, 仕入金額, 粗利額, ＶＡＴ, ＰＰＨ, 営業担当者, 入力担当者, 備考, 入庫日, 登録日, 更新日, 更新者, 取消日, 取消区分, 締処理日)"
-            Sql += " VALUES('"
-            Sql += frmC01F10_Login.loginValue.BumonCD
-            Sql += "', '"
-            Sql += dsNyukohd.Tables(RS).Rows(i)("入庫番号").ToString
-            Sql += "', '"
-            Sql += dsNyukohd.Tables(RS).Rows(i)("客先番号").ToString
-            Sql += "', '"
-            Sql += dsNyukohd.Tables(RS).Rows(i)("発注番号").ToString
-            Sql += "', '"
-            Sql += dsNyukohd.Tables(RS).Rows(i)("発注番号枝番").ToString
-            Sql += "', '"
-            Sql += dsNyukohd.Tables(RS).Rows(i)("仕入先コード").ToString
-            Sql += "', '"
-            Sql += dsNyukohd.Tables(RS).Rows(i)("仕入先名").ToString
-            Sql += "', '"
-            Sql += dsNyukohd.Tables(RS).Rows(i)("仕入先郵便番号").ToString
-            Sql += "', '"
-            Sql += dsNyukohd.Tables(RS).Rows(i)("仕入先住所").ToString
-            Sql += "', '"
-            Sql += dsNyukohd.Tables(RS).Rows(i)("仕入先電話番号").ToString
-            Sql += "', '"
-            Sql += dsNyukohd.Tables(RS).Rows(i)("仕入先ＦＡＸ").ToString
-            Sql += "', '"
-            Sql += dsNyukohd.Tables(RS).Rows(i)("仕入先担当者役職").ToString
-            Sql += "', '"
-            Sql += dsNyukohd.Tables(RS).Rows(i)("仕入先担当者名").ToString
-            Sql += "', '"
-            Sql += dsNyukohd.Tables(RS).Rows(i)("支払条件").ToString
-            Sql += "', '"
-            Sql += UtilClass.formatNumber(dsNyukohd.Tables(RS).Rows(i)("仕入金額").ToString)
-            Sql += "', '"
-            Sql += UtilClass.formatNumber(dsNyukohd.Tables(RS).Rows(i)("粗利額").ToString)
-            Sql += "', '"
-            If dsNyukohd.Tables(RS).Rows(i)("ＶＡＴ") Is DBNull.Value Then
-                Sql += "0"
-            Else
-                Sql += UtilClass.formatNumber(dsNyukohd.Tables(RS).Rows(i)("ＶＡＴ").ToString)
-            End If
-            Sql += "', '"
-            If dsNyukohd.Tables(RS).Rows(i)("ＰＰＨ") Is DBNull.Value Then
-                Sql += "0"
-            Else
-                Sql += UtilClass.formatNumber(dsNyukohd.Tables(RS).Rows(i)("ＰＰＨ").ToString)
-            End If
-            Sql += "', '"
-            Sql += dsNyukohd.Tables(RS).Rows(i)("営業担当者").ToString
-            Sql += "', '"
-            Sql += dsNyukohd.Tables(RS).Rows(i)("入力担当者").ToString
-            Sql += "', '"
-            Sql += dsNyukohd.Tables(RS).Rows(i)("備考").ToString
-            Sql += "', '"
-            Sql += UtilClass.strFormatDate(dsNyukohd.Tables(RS).Rows(i)("入庫日").ToString)
-            Sql += "', '"
-            Sql += UtilClass.strFormatDate(dsNyukohd.Tables(RS).Rows(i)("登録日").ToString)
-            Sql += "', '"
-            Sql += UtilClass.strFormatDate(dtToday)
-            Sql += "', '"
-            Sql += frmC01F10_Login.loginValue.TantoNM
-            If dsNyukohd.Tables(RS).Rows(i)("取消日") IsNot DBNull.Value Then
-                Sql += "', '"
-                Sql += UtilClass.strFormatDate(dsNyukohd.Tables(RS).Rows(i)("取消日").ToString)
-                Sql += "', "
-            Else
-                Sql += "', "
-                Sql += "null"
-                Sql += ", "
-            End If
-            If dsNyukohd.Tables(RS).Rows(i)("取消区分") IsNot DBNull.Value Then
-                Sql += "'"
-                Sql += dsNyukohd.Tables(RS).Rows(i)("取消区分").ToString
-            Else
-                Sql += "0"
-            End If
-            Sql += "', '"
-            Sql += UtilClass.strFormatDate(dtToday)
-            Sql += "')"
-
-
-            _db.executeDB(Sql)
-        Next
-
-        For i As Integer = 0 To dsNyukohd.Tables(RS).Rows.Count - 1
-            Sql = ""
-            Sql += "SELECT * FROM public.t43_nyukodt"
-            Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Sql += " AND 入庫番号 = '" & dsNyukohd.Tables(RS).Rows(i)("入庫番号") & "'"
-
-            Dim dsNyukodt As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-            For x As Integer = 0 To dsNyukodt.Tables(RS).Rows.Count - 1
-                Sql = ""
-                Sql += "INSERT INTO Public.t59_krnyukodt("
-                Sql += "会社コード, 入庫番号, 発注番号, 発注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 仕入先名, 仕入値, 入庫数量, 単位, 備考, 更新者, 更新日)"
-                Sql += " VALUES('"
-                Sql += frmC01F10_Login.loginValue.BumonCD
-                Sql += "', '"
-                Sql += dsNyukodt.Tables(RS).Rows(x)("入庫番号").ToString
-                Sql += "', '"
-                Sql += dsNyukodt.Tables(RS).Rows(x)("発注番号").ToString
-                Sql += "', '"
-                Sql += dsNyukodt.Tables(RS).Rows(x)("発注番号枝番").ToString
-                Sql += "', '"
-                Sql += dsNyukodt.Tables(RS).Rows(x)("行番号").ToString
-                Sql += "', '"
-                Sql += dsNyukodt.Tables(RS).Rows(x)("仕入区分").ToString
-                Sql += "', '"
-                Sql += dsNyukodt.Tables(RS).Rows(x)("メーカー").ToString
-                Sql += "', '"
-                Sql += dsNyukodt.Tables(RS).Rows(x)("品名").ToString
-                Sql += "', '"
-                Sql += dsNyukodt.Tables(RS).Rows(x)("型式").ToString
-                Sql += "', '"
-                Sql += dsNyukodt.Tables(RS).Rows(x)("仕入先名").ToString
-                Sql += "', '"
-                Sql += UtilClass.formatNumber(dsNyukodt.Tables(RS).Rows(x)("仕入値").ToString)
-                Sql += "', '"
-                Sql += UtilClass.formatNumber(dsNyukodt.Tables(RS).Rows(x)("入庫数量").ToString)
-                Sql += "', '"
-                Sql += dsNyukodt.Tables(RS).Rows(x)("単位").ToString
-                Sql += "', '"
-                Sql += dsNyukodt.Tables(RS).Rows(x)("備考").ToString
-                Sql += "', '"
-                Sql += frmC01F10_Login.loginValue.TantoNM
-                Sql += "', '"
-                Sql += UtilClass.strFormatDate(dtToday)
-                Sql += "')"
-
-                _db.executeDB(Sql)
-            Next
-        Next
-
-#End Region
-
-#Region "出庫"
-        Sql = ""
-        Sql += "SELECT * FROM public.t44_shukohd"
-        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        'Sql += " AND "
-        'Sql += "出庫日"
-        'Sql += " >  "
-        'Sql += "'"
-        'Sql += dsCompany.Tables(RS).Rows(0)("前回締日")
-        'Sql += "'"
-        'Sql += " AND "
-        'Sql += "出庫日"
-        'Sql += " <=  "
-        'Sql += "'"
-        'Sql += dsCompany.Tables(RS).Rows(0)("今回締日")
-        'Sql += "'"
-        'Sql += " AND "
-        'Sql += "締処理日"
-        'Sql += " IS NULL "
-
-        Dim dsShukohd As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-        For i As Integer = 0 To dsShukohd.Tables(RS).Rows.Count - 1
-            Sql = ""
-            Sql += "INSERT INTO Public.t60_krshukohd("
-            Sql += "会社コード, 出庫番号, 客先番号, 見積番号, 見積番号枝番, 受注番号, 受注番号枝番, 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職, 得意先担当者名, 営業担当者, 入力担当者, 備考, 出庫日, 登録日, 更新日, 更新者, 取消日, 取消区分, 締処理日)"
-            Sql += " VALUES('"
-            Sql += frmC01F10_Login.loginValue.BumonCD
-            Sql += "', '"
-            Sql += dsShukohd.Tables(RS).Rows(i)("出庫番号").ToString
-            Sql += "', '"
-            Sql += dsShukohd.Tables(RS).Rows(i)("客先番号").ToString
-            Sql += "', '"
-            Sql += dsShukohd.Tables(RS).Rows(i)("見積番号").ToString
-            Sql += "', '"
-            Sql += dsShukohd.Tables(RS).Rows(i)("見積番号枝番").ToString
-            Sql += "', '"
-            Sql += dsShukohd.Tables(RS).Rows(i)("受注番号").ToString
-            Sql += "', '"
-            Sql += dsShukohd.Tables(RS).Rows(i)("受注番号枝番").ToString
-            Sql += "', '"
-            Sql += dsShukohd.Tables(RS).Rows(i)("得意先コード").ToString
-            Sql += "', '"
-            Sql += dsShukohd.Tables(RS).Rows(i)("得意先名").ToString
-            Sql += "', "
-            If IsDBNull(dsShukohd.Tables(RS).Rows(i)("得意先郵便番号")) OrElse dsShukohd.Tables(RS).Rows(i)("得意先郵便番号") = vbNullString Then
-                Sql += "null"
-            Else
-                Sql += dsShukohd.Tables(RS).Rows(i)("得意先郵便番号").ToString
-            End If
-            Sql += ", '"
-            Sql += dsShukohd.Tables(RS).Rows(i)("得意先住所").ToString
-            Sql += "', '"
-            Sql += dsShukohd.Tables(RS).Rows(i)("得意先電話番号").ToString
-            Sql += "', '"
-            Sql += dsShukohd.Tables(RS).Rows(i)("得意先ＦＡＸ").ToString
-            Sql += "', '"
-            Sql += dsShukohd.Tables(RS).Rows(i)("得意先担当者役職").ToString
-            Sql += "', '"
-            Sql += dsShukohd.Tables(RS).Rows(i)("得意先担当者名").ToString
-            Sql += "', '"
-            Sql += dsShukohd.Tables(RS).Rows(i)("営業担当者").ToString
-            Sql += "', '"
-            Sql += dsShukohd.Tables(RS).Rows(i)("入力担当者").ToString
-            Sql += "', '"
-            Sql += dsShukohd.Tables(RS).Rows(i)("備考").ToString
-            Sql += "', '"
-            Sql += UtilClass.strFormatDate(dsShukohd.Tables(RS).Rows(i)("出庫日").ToString)
-            Sql += "', '"
-            Sql += UtilClass.strFormatDate(dsShukohd.Tables(RS).Rows(i)("登録日").ToString)
-            Sql += "', '"
-            Sql += UtilClass.strFormatDate(dtToday)
-            Sql += "', '"
-            Sql += frmC01F10_Login.loginValue.TantoNM
-            If dsShukohd.Tables(RS).Rows(i)("取消日") IsNot DBNull.Value Then
-                Sql += "', '"
-                Sql += UtilClass.strFormatDate(dsShukohd.Tables(RS).Rows(i)("取消日").ToString)
-                Sql += "', "
-            Else
-                Sql += "', "
-                Sql += "null"
-                Sql += ", "
-            End If
-            If dsShukohd.Tables(RS).Rows(i)("取消区分") IsNot DBNull.Value Then
-                Sql += dsShukohd.Tables(RS).Rows(i)("取消区分").ToString
-            Else
-                Sql += "0"
-            End If
-            Sql += ", '"
-            Sql += UtilClass.strFormatDate(dtToday)
-            Sql += "')"
-
-            _db.executeDB(Sql)
-        Next
-
-        For i As Integer = 0 To dsShukohd.Tables(RS).Rows.Count - 1
-            Sql = ""
-            Sql += "SELECT * FROM public.t45_shukodt"
-            Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Sql += " AND 出庫番号 = '" & dsShukohd.Tables(RS).Rows(i)("出庫番号") & "'"
-
-            Dim dsShukodt As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-            For x As Integer = 0 To dsShukodt.Tables(RS).Rows.Count - 1
-                Sql = ""
-                Sql += "INSERT INTO Public.t61_krshukodt("
-                Sql += "会社コード, 出庫番号, 受注番号, 受注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 仕入先名, 出庫数量, 単位, 売単価, 備考, 更新者, 更新日)"
-                Sql += " VALUES('"
-                Sql += frmC01F10_Login.loginValue.BumonCD
-                Sql += "', '"
-                Sql += dsShukodt.Tables(RS).Rows(x)("出庫番号").ToString
-                Sql += "', '"
-                Sql += dsShukodt.Tables(RS).Rows(x)("受注番号").ToString
-                Sql += "', '"
-                Sql += dsShukodt.Tables(RS).Rows(x)("受注番号枝番").ToString
-                Sql += "', '"
-                Sql += dsShukodt.Tables(RS).Rows(x)("行番号").ToString
-                Sql += "', '"
-                Sql += dsShukodt.Tables(RS).Rows(x)("仕入区分").ToString
-                Sql += "', '"
-                Sql += dsShukodt.Tables(RS).Rows(x)("メーカー").ToString
-                Sql += "', '"
-                Sql += dsShukodt.Tables(RS).Rows(x)("品名").ToString
-                Sql += "', '"
-                Sql += dsShukodt.Tables(RS).Rows(x)("型式").ToString
-                Sql += "', '"
-                Sql += dsShukodt.Tables(RS).Rows(x)("仕入先名").ToString
-                Sql += "', '"
-                Sql += UtilClass.formatNumber(dsShukodt.Tables(RS).Rows(x)("出庫数量").ToString)
-                Sql += "', '"
-                Sql += dsShukodt.Tables(RS).Rows(x)("単位").ToString
-                Sql += "', '"
-                Sql += UtilClass.formatNumber(dsShukodt.Tables(RS).Rows(x)("売単価").ToString)
-                Sql += "', '"
-                Sql += dsShukodt.Tables(RS).Rows(x)("備考").ToString
-                Sql += "', '"
-                Sql += frmC01F10_Login.loginValue.TantoNM
-                Sql += "', '"
-                Sql += UtilClass.strFormatDate(dtToday)
-                Sql += "')"
-
-                _db.executeDB(Sql)
-            Next
-        Next
-#End Region
-
-#Region "支払"
-        Sql = ""
-        Sql += "SELECT * FROM public.t47_shrihd"
-        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        'Sql += " AND "
-        'Sql += "支払日"
-        'Sql += " >  "
-        'Sql += "'"
-        'Sql += dsCompany.Tables(RS).Rows(0)("前回締日")
-        'Sql += "'"
-        'Sql += " AND "
-        'Sql += "支払日"
-        'Sql += " <=  "
-        'Sql += "'"
-        'Sql += dsCompany.Tables(RS).Rows(0)("今回締日")
-        'Sql += "'"
-        'Sql += " AND "
-        'Sql += "締処理日"
-        'Sql += " IS NULL "
-
-        Dim dsShrihd As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-        For i As Integer = 0 To dsShrihd.Tables(RS).Rows.Count - 1
-            Sql = ""
-            Sql += "INSERT INTO Public.t64_krshrihd("
-            Sql += "会社コード, 支払番号, 客先番号, 支払先コード, 支払先名, 支払先, 買掛金額, 支払金額計, 買掛残高, 備考, 支払日, 登録日, 更新日, 更新者, 取消日, 取消区分, 締処理日)"
-            Sql += " VALUES('"
-            Sql += frmC01F10_Login.loginValue.BumonCD
-            Sql += "', '"
-            Sql += dsShrihd.Tables(RS).Rows(i)("支払番号").ToString
-            Sql += "', '"
-            Sql += dsShrihd.Tables(RS).Rows(i)("客先番号").ToString
-            Sql += "', '"
-            Sql += dsShrihd.Tables(RS).Rows(i)("支払先コード").ToString
-            Sql += "', '"
-            Sql += dsShrihd.Tables(RS).Rows(i)("支払先名").ToString
-            Sql += "', '"
-            Sql += dsShrihd.Tables(RS).Rows(i)("支払先").ToString
-            Sql += "', '"
-            Sql += UtilClass.formatNumber(dsShrihd.Tables(RS).Rows(i)("買掛金額").ToString)
-            Sql += "', '"
-            Sql += UtilClass.formatNumber(dsShrihd.Tables(RS).Rows(i)("支払金額計").ToString)
-            Sql += "', '"
-            Sql += UtilClass.formatNumber(dsShrihd.Tables(RS).Rows(i)("買掛残高").ToString)
-            Sql += "', '"
-            Sql += dsShrihd.Tables(RS).Rows(i)("備考").ToString
-            Sql += "', '"
-            Sql += UtilClass.strFormatDate(dsShrihd.Tables(RS).Rows(i)("支払日").ToString)
-            Sql += "', '"
-            Sql += UtilClass.strFormatDate(dsShrihd.Tables(RS).Rows(i)("登録日").ToString)
-            Sql += "', '"
-            Sql += UtilClass.strFormatDate(dtToday)
-            Sql += "', '"
-            Sql += frmC01F10_Login.loginValue.TantoNM
-            If dsShrihd.Tables(RS).Rows(i)("取消日") IsNot DBNull.Value Then
-                Sql += "', '"
-                Sql += UtilClass.strFormatDate(dsShrihd.Tables(RS).Rows(i)("取消日").ToString)
-                Sql += "', "
-            Else
-                Sql += "', "
-                Sql += "null"
-                Sql += ", "
-            End If
-            If dsShrihd.Tables(RS).Rows(i)("取消区分") IsNot DBNull.Value Then
-                Sql += "'"
-                Sql += dsShrihd.Tables(RS).Rows(i)("取消区分").ToString
-            Else
-                Sql += "0"
-            End If
-            Sql += "', '"
-            Sql += UtilClass.strFormatDate(dtToday)
-            Sql += "')"
-
-            _db.executeDB(Sql)
-        Next
-
-        For i As Integer = 0 To dsShrihd.Tables(RS).Rows.Count - 1
-            Sql = ""
-            Sql += "SELECT * FROM public.t48_shridt"
-            Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Sql += " AND 支払番号 = '" & dsShrihd.Tables(RS).Rows(i)("支払番号") & "'"
-
-            Dim dsShridt As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-            For x As Integer = 0 To dsShridt.Tables(RS).Rows.Count - 1
-                Sql = ""
-                Sql += "INSERT INTO Public.t65_krshridt("
-                Sql += "会社コード, 支払番号, 行番号, 支払種別, 支払種別名, 支払先コード, 支払先名, 支払先, 支払金額, 備考, 支払日, 更新者, 更新日)"
-                Sql += " VALUES('"
-                Sql += frmC01F10_Login.loginValue.BumonCD
-                Sql += "', '"
-                Sql += dsShridt.Tables(RS).Rows(x)("支払番号").ToString
-                Sql += "', '"
-                Sql += dsShridt.Tables(RS).Rows(x)("行番号").ToString
-                Sql += "', '"
-                Sql += dsShridt.Tables(RS).Rows(x)("支払種別").ToString
-                Sql += "', '"
-                Sql += dsShridt.Tables(RS).Rows(x)("支払種別名").ToString
-                Sql += "', '"
-                Sql += dsShridt.Tables(RS).Rows(x)("支払先コード").ToString
-                Sql += "', '"
-                Sql += dsShridt.Tables(RS).Rows(x)("支払先名").ToString
-                Sql += "', '"
-                Sql += dsShridt.Tables(RS).Rows(x)("支払先").ToString
-                Sql += "', '"
-                Sql += UtilClass.formatNumber(dsShridt.Tables(RS).Rows(x)("支払金額").ToString)
-                Sql += "', '"
-                Sql += dsShridt.Tables(RS).Rows(x)("備考").ToString
-                Sql += "', '"
-                Sql += UtilClass.strFormatDate(dsShridt.Tables(RS).Rows(x)("支払日").ToString)
-                Sql += "', '"
-                Sql += frmC01F10_Login.loginValue.TantoNM
-                Sql += "', '"
-                Sql += UtilClass.strFormatDate(dtToday)
-                Sql += "')"
-
-                _db.executeDB(Sql)
-            Next
-        Next
-#End Region
-
-#Region "入金"
-        Sql = ""
-        Sql += "SELECT * FROM public.t25_nkinhd"
-        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        'Sql += " AND "
-        'Sql += "入金日"
-        'Sql += " >  "
-        'Sql += "'"
-        'Sql += dsCompany.Tables(RS).Rows(0)("前回締日")
-        'Sql += "'"
-        'Sql += " AND "
-        'Sql += "入金日"
-        'Sql += " <=  "
-        'Sql += "'"
-        'Sql += dsCompany.Tables(RS).Rows(0)("今回締日")
-        'Sql += "'"
-        'Sql += " AND "
-        'Sql += "締処理日"
-        'Sql += " IS NULL "
-
-        Dim dsNkinhd As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-        For i As Integer = 0 To dsNkinhd.Tables(RS).Rows.Count - 1
-            Sql = ""
-            Sql += "INSERT INTO Public.t62_krnkinhd("
-            Sql += "会社コード, 入金番号, 客先番号, 請求先コード, 請求先名, 振込先, 請求金額, 入金額計, 請求残高, 備考, 入金日, 登録日, 更新日, 更新者, 取消日, 取消区分, 締処理日)"
-            Sql += " VALUES('"
-            Sql += frmC01F10_Login.loginValue.BumonCD
-            Sql += "', '"
-            Sql += dsNkinhd.Tables(RS).Rows(i)("入金番号").ToString
-            Sql += "', '"
-            Sql += dsNkinhd.Tables(RS).Rows(i)("客先番号").ToString
-            Sql += "', '"
-            Sql += dsNkinhd.Tables(RS).Rows(i)("請求先コード").ToString
-            Sql += "', '"
-            Sql += dsNkinhd.Tables(RS).Rows(i)("請求先名").ToString
-            Sql += "', '"
-            Sql += dsNkinhd.Tables(RS).Rows(i)("振込先").ToString & "'"
-            If dsNkinhd.Tables(RS).Rows(i)("請求金額") IsNot DBNull.Value Then
-                Sql += " , " & UtilClass.formatNumber(dsNkinhd.Tables(RS).Rows(i)("請求金額").ToString)
-            Else
-                Sql += " , 0"
-            End If
-            Sql += ", '"
-            Sql += UtilClass.formatNumber(dsNkinhd.Tables(RS).Rows(i)("入金額").ToString) & "'"
-            If dsNkinhd.Tables(RS).Rows(i)("請求残高") IsNot DBNull.Value Then
-                Sql += " , " & UtilClass.formatNumber(dsNkinhd.Tables(RS).Rows(i)("請求残高").ToString)
-            Else
-                Sql += " , 0"
-            End If
-            Sql += ", '"
-            Sql += dsNkinhd.Tables(RS).Rows(i)("備考").ToString
-            Sql += "', '"
-            Sql += UtilClass.strFormatDate(dsNkinhd.Tables(RS).Rows(i)("入金日").ToString)
-            Sql += "', '"
-            Sql += UtilClass.strFormatDate(dsNkinhd.Tables(RS).Rows(i)("登録日").ToString)
-            Sql += "', '"
-            Sql += UtilClass.strFormatDate(dtToday)
-            Sql += "', '"
-            Sql += frmC01F10_Login.loginValue.TantoNM
-            If dsNkinhd.Tables(RS).Rows(i)("取消日") IsNot DBNull.Value Then
-                Sql += "', '"
-                Sql += UtilClass.strFormatDate(dsNkinhd.Tables(RS).Rows(i)("取消日").ToString)
-                Sql += "', "
-            Else
-                Sql += "', "
-                Sql += "null"
-                Sql += ", "
-            End If
-            If dsNkinhd.Tables(RS).Rows(i)("取消区分") IsNot DBNull.Value Then
-                Sql += "'"
-                Sql += dsNkinhd.Tables(RS).Rows(i)("取消区分").ToString
-            Else
-                Sql += "0"
-            End If
-            Sql += "', '"
-            Sql += UtilClass.strFormatDate(dtToday)
-            Sql += "')"
-
-            _db.executeDB(Sql)
-        Next
-
-        For i As Integer = 0 To dsNkinhd.Tables(RS).Rows.Count - 1
-            Sql = ""
-            Sql += "SELECT * FROM public.t26_nkindt"
-            Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Sql += " AND 入金番号 = '" & dsNkinhd.Tables(RS).Rows(i)("入金番号") & "'"
-
-            Dim dsNkindt As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-            For x As Integer = 0 To dsNkindt.Tables(RS).Rows.Count - 1
-                Sql = ""
-                Sql += "INSERT INTO Public.t63_krnkindt("
-                Sql += "会社コード, 入金番号, 行番号, 入金種別, 入金種別名, 請求先コード, 請求先名, 振込先, 入金額, 備考, 入金日, 更新者, 更新日)"
-                Sql += " VALUES('"
-                Sql += frmC01F10_Login.loginValue.BumonCD
-                Sql += "', '"
-                Sql += dsNkindt.Tables(RS).Rows(x)("入金番号").ToString
-                Sql += "', '"
-                Sql += dsNkindt.Tables(RS).Rows(x)("行番号").ToString
-                Sql += "', '"
-                Sql += dsNkindt.Tables(RS).Rows(x)("入金種別").ToString
-                Sql += "', '"
-                Sql += dsNkindt.Tables(RS).Rows(x)("入金種別名").ToString
-                Sql += "', '"
-                Sql += dsNkindt.Tables(RS).Rows(x)("請求先コード").ToString
-                Sql += "', '"
-                Sql += dsNkindt.Tables(RS).Rows(x)("請求先名").ToString
-                Sql += "', '"
-                Sql += dsNkindt.Tables(RS).Rows(x)("振込先").ToString
-                Sql += "', '"
-                Sql += UtilClass.formatNumber(dsNkindt.Tables(RS).Rows(x)("入金額").ToString)
-                Sql += "', '"
-                Sql += dsNkindt.Tables(RS).Rows(x)("備考").ToString
-                Sql += "', '"
-                Sql += UtilClass.strFormatDate(dsNkindt.Tables(RS).Rows(x)("入金日").ToString)
-                Sql += "', '"
-                Sql += frmC01F10_Login.loginValue.TantoNM
-                Sql += "', '"
-                Sql += UtilClass.strFormatDate(dtToday)
-                Sql += "')"
-
-                _db.executeDB(Sql)
-            Next
-        Next
-#End Region
-
-#Region "CSV"
-        Sql = ""
-        Sql += "SELECT * FROM public.t52_krurighd"
-        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        'Sql += " AND "
-        'Sql += "締処理日"
-        'Sql += " = "
-        'Sql += "'"
-        'Sql += dtToday
-        'Sql += "'"
-        Dim csvUrighd As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-        ConvertDataTableToCsv(csvUrighd, "t53_krurigdt", "売上番号", "Uriage")
-
-        Sql = ""
-        Sql += "SELECT * FROM public.t54_krsirehd"
-        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        'Sql += " AND "
-        'Sql += "締処理日"
-        'Sql += " = "
-        'Sql += "'"
-        'Sql += dtToday
-        'Sql += "'"
-        Dim csvSirehd As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-        ConvertDataTableToCsv(csvSirehd, "t55_krsiredt", "仕入番号", "Siire")
-
-        Sql = ""
-        Sql += "SELECT * FROM public.t56_krskyuhd"
-        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        'Sql += " AND "
-        'Sql += "締処理日"
-        'Sql += " = "
-        'Sql += "'"
-        'Sql += dtToday
-        'Sql += "'"
-        Dim csvSkyuhd As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-        ConvertDataTableToCsvSingle(csvSkyuhd, "Maeuke")
-
-        Sql = ""
-        Sql += "SELECT * FROM public.t57_krkikehd"
-        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        'Sql += " AND "
-        'Sql += "締処理日"
-        'Sql += " = "
-        'Sql += "'"
-        'Sql += dtToday
-        'Sql += "'"
-        Dim csvKikehd As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-        ConvertDataTableToCsvSingle(csvKikehd, "Maebarai")
-
-        Sql = ""
-        Sql += "SELECT * FROM public.t58_krnyukohd"
-        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        'Sql += " AND "
-        'Sql += "締処理日"
-        'Sql += " = "
-        'Sql += "'"
-        'Sql += dtToday
-        'Sql += "'"
-        Dim csvNyukohd As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-        ConvertDataTableToCsv(csvNyukohd, "t59_krnyukodt", "入庫番号", "Nyuko")
-
-        Sql = ""
-        Sql += "SELECT * FROM public.t60_krshukohd"
-        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        'Sql += " AND "
-        'Sql += "締処理日"
-        'Sql += " = "
-        'Sql += "'"
-        'Sql += dtToday
-        'Sql += "'"
-        Dim csvShukohd As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-        ConvertDataTableToCsv(csvShukohd, "t61_krshukodt", "出庫番号", "Shuko")
-
-        Sql = ""
-        Sql += "SELECT * FROM public.t62_krnkinhd"
-        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        'Sql += " AND "
-        'Sql += "締処理日"
-        'Sql += " = "
-        'Sql += "'"
-        'Sql += dtToday
-        'Sql += "'"
-        Dim csvNkinhd As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-        ConvertDataTableToCsv(csvNkinhd, "t63_krnkindt", "入金番号", "Nyukin")
-
-        Sql = ""
-        Sql += "SELECT * FROM public.t64_krshrihd"
-        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        'Sql += " AND "
-        'Sql += "締処理日"
-        'Sql += " = "
-        'Sql += "'"
-        'Sql += dtToday
-        'Sql += "'"
-        Dim csvShrihd As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-        ConvertDataTableToCsv(csvShrihd, "t65_krshridt", "支払番号", "Siharai")
-
-        Sql = ""
-        Sql += "SELECT * FROM public.t66_swkhd"
-        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        'Sql += " AND "
-        'Sql += "仕分日"
-        'Sql += " = "
-        'Sql += "'"
-        'Sql += dtToday
-        'Sql += "'"
-        Dim csvSwkhd As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-        'ConvertDataTableToCsvSingle(csvSwkhd, "Shiwake")
-#End Region
-        _msgHd.dspMSG("CreateExcel", frmC01F10_Login.loginValue.Language)
 
 
         Accounting = True

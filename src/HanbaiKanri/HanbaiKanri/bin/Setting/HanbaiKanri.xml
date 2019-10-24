@@ -830,6 +830,14 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
   </MSG_DATA>
   <MSG_DATA>
+    <ID>ClosingLog</ID>
+    <MSG1>締処理が完了しました。</MSG1>
+    <MSG1_EN>The closing process has been completed.</MSG1_EN>
+    <BUTTON_TYPE>OK</BUTTON_TYPE>
+    <ICONT_TYPE>Information</ICONT_TYPE>
+    <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
+  </MSG_DATA>
+  <MSG_DATA>
     <ID>CreateCSV</ID>
     <MSG1>CSVファイルが作成されました。</MSG1>
     <MSG1_EN>CSV file has been created.</MSG1_EN>

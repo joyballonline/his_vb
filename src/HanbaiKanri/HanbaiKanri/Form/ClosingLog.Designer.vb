@@ -22,13 +22,13 @@ Partial Class ClosingLog
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LblMode = New System.Windows.Forms.Label()
         Me.LblPerson = New System.Windows.Forms.Label()
         Me.TxtPerson = New System.Windows.Forms.TextBox()
@@ -44,7 +44,7 @@ Partial Class ClosingLog
         Me.BtnBack = New System.Windows.Forms.Button()
         Me.BtnOutput = New System.Windows.Forms.Button()
         Me.dtmSime = New System.Windows.Forms.DateTimePicker()
-        Me.LblQuote = New System.Windows.Forms.Label()
+        Me.LblShime = New System.Windows.Forms.Label()
         CType(Me.DgvClosingLog, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -104,17 +104,17 @@ Partial Class ClosingLog
         'DgvClosingLog
         '
         Me.DgvClosingLog.AllowUserToAddRows = False
-        DataGridViewCellStyle8.Font = New System.Drawing.Font("MS UI Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.DgvClosingLog.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("MS UI Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.DgvClosingLog.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.DgvClosingLog.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle9.Font = New System.Drawing.Font("MS UI Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        DataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DgvClosingLog.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("MS UI Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DgvClosingLog.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.DgvClosingLog.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvClosingLog.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.締処理日時, Me.前回締日, Me.今回締日, Me.次回締日, Me.担当者})
         Me.DgvClosingLog.Location = New System.Drawing.Point(15, 169)
@@ -127,40 +127,40 @@ Partial Class ClosingLog
         '
         '締処理日時
         '
-        DataGridViewCellStyle10.Font = New System.Drawing.Font("MS UI Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.締処理日時.DefaultCellStyle = DataGridViewCellStyle10
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("MS UI Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.締処理日時.DefaultCellStyle = DataGridViewCellStyle3
         Me.締処理日時.HeaderText = "締処理日時"
         Me.締処理日時.Name = "締処理日時"
         Me.締処理日時.Width = 97
         '
         '前回締日
         '
-        DataGridViewCellStyle11.Font = New System.Drawing.Font("MS UI Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.前回締日.DefaultCellStyle = DataGridViewCellStyle11
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("MS UI Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.前回締日.DefaultCellStyle = DataGridViewCellStyle4
         Me.前回締日.HeaderText = "前回締日"
         Me.前回締日.Name = "前回締日"
         Me.前回締日.Width = 84
         '
         '今回締日
         '
-        DataGridViewCellStyle12.Font = New System.Drawing.Font("MS UI Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.今回締日.DefaultCellStyle = DataGridViewCellStyle12
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("MS UI Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.今回締日.DefaultCellStyle = DataGridViewCellStyle5
         Me.今回締日.HeaderText = "今回締日"
         Me.今回締日.Name = "今回締日"
         Me.今回締日.Width = 84
         '
         '次回締日
         '
-        DataGridViewCellStyle13.Font = New System.Drawing.Font("MS UI Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.次回締日.DefaultCellStyle = DataGridViewCellStyle13
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("MS UI Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.次回締日.DefaultCellStyle = DataGridViewCellStyle6
         Me.次回締日.HeaderText = "次回締日"
         Me.次回締日.Name = "次回締日"
         Me.次回締日.Width = 84
         '
         '担当者
         '
-        DataGridViewCellStyle14.Font = New System.Drawing.Font("MS UI Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.担当者.DefaultCellStyle = DataGridViewCellStyle14
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("MS UI Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.担当者.DefaultCellStyle = DataGridViewCellStyle7
         Me.担当者.HeaderText = "担当者"
         Me.担当者.Name = "担当者"
         Me.担当者.Width = 71
@@ -208,17 +208,17 @@ Partial Class ClosingLog
         Me.dtmSime.TabIndex = 326
         Me.dtmSime.Value = New Date(2018, 6, 5, 23, 23, 58, 0)
         '
-        'LblQuote
+        'LblShime
         '
-        Me.LblQuote.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.LblQuote.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblQuote.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblQuote.Location = New System.Drawing.Point(436, 45)
-        Me.LblQuote.Name = "LblQuote"
-        Me.LblQuote.Size = New System.Drawing.Size(112, 23)
-        Me.LblQuote.TabIndex = 327
-        Me.LblQuote.Text = "締処理日"
-        Me.LblQuote.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LblShime.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblShime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblShime.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblShime.Location = New System.Drawing.Point(436, 45)
+        Me.LblShime.Name = "LblShime"
+        Me.LblShime.Size = New System.Drawing.Size(112, 23)
+        Me.LblShime.TabIndex = 327
+        Me.LblShime.Text = "締処理日"
+        Me.LblShime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'ClosingLog
         '
@@ -226,7 +226,7 @@ Partial Class ClosingLog
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1350, 561)
         Me.Controls.Add(Me.dtmSime)
-        Me.Controls.Add(Me.LblQuote)
+        Me.Controls.Add(Me.LblShime)
         Me.Controls.Add(Me.BtnOutput)
         Me.Controls.Add(Me.BtnBack)
         Me.Controls.Add(Me.BtnClosing)
@@ -259,5 +259,5 @@ Partial Class ClosingLog
     Friend WithEvents 次回締日 As DataGridViewTextBoxColumn
     Friend WithEvents 担当者 As DataGridViewTextBoxColumn
     Friend WithEvents dtmSime As DateTimePicker
-    Friend WithEvents LblQuote As Label
+    Friend WithEvents LblShime As Label
 End Class
