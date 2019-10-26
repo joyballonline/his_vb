@@ -323,7 +323,9 @@ Public Class OrderManagement
                 DgvOrder.Rows(i).Cells("品名").Value = ds3.Tables(RS).Rows(i)("品名")
                 DgvOrder.Rows(i).Cells("型式").Value = ds3.Tables(RS).Rows(i)("型式")
 
-                DgvOrder.Rows(i).Cells("売単価").Value = ds3.Tables(RS).Rows(i)("見積単価") '売単価 = 見積単価
+                'DgvOrder.Rows(i).Cells("売単価").Value = ds3.Tables(RS).Rows(i)("見積単価") '売単価 = 見積単価
+                DgvOrder.Rows(i).Cells("売単価").Value = ds3.Tables(RS).Rows(i)("見積単価_外貨") '売単価 = 見積単価
+
                 DgvOrder.Rows(i).Cells("受注数量").Value = ds3.Tables(RS).Rows(i)("受注数量")
                 DgvOrder.Rows(i).Cells("単位").Value = ds3.Tables(RS).Rows(i)("単位")
                 DgvOrder.Rows(i).Cells("受注金額").Value = DgvOrder.Rows(i).Cells("売単価").Value * DgvOrder.Rows(i).Cells("受注数量").Value

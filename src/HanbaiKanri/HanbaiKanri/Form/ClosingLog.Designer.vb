@@ -35,14 +35,16 @@ Partial Class ClosingLog
         Me.LblConditions = New System.Windows.Forms.Label()
         Me.BtnSearch = New System.Windows.Forms.Button()
         Me.DgvClosingLog = New System.Windows.Forms.DataGridView()
-        Me.BtnClosing = New System.Windows.Forms.Button()
-        Me.BtnBack = New System.Windows.Forms.Button()
-        Me.BtnOutput = New System.Windows.Forms.Button()
         Me.締処理日時 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.前回締日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.今回締日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.次回締日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.担当者 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.BtnClosing = New System.Windows.Forms.Button()
+        Me.BtnBack = New System.Windows.Forms.Button()
+        Me.BtnOutput = New System.Windows.Forms.Button()
+        Me.dtmSime = New System.Windows.Forms.DateTimePicker()
+        Me.LblShime = New System.Windows.Forms.Label()
         CType(Me.DgvClosingLog, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -123,36 +125,6 @@ Partial Class ClosingLog
         Me.DgvClosingLog.Size = New System.Drawing.Size(1325, 334)
         Me.DgvClosingLog.TabIndex = 4
         '
-        'BtnClosing
-        '
-        Me.BtnClosing.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.BtnClosing.Location = New System.Drawing.Point(1004, 509)
-        Me.BtnClosing.Name = "BtnClosing"
-        Me.BtnClosing.Size = New System.Drawing.Size(165, 40)
-        Me.BtnClosing.TabIndex = 5
-        Me.BtnClosing.Text = "締処理実行"
-        Me.BtnClosing.UseVisualStyleBackColor = True
-        '
-        'BtnBack
-        '
-        Me.BtnBack.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.BtnBack.Location = New System.Drawing.Point(1175, 509)
-        Me.BtnBack.Name = "BtnBack"
-        Me.BtnBack.Size = New System.Drawing.Size(165, 40)
-        Me.BtnBack.TabIndex = 6
-        Me.BtnBack.Text = "戻る"
-        Me.BtnBack.UseVisualStyleBackColor = True
-        '
-        'BtnOutput
-        '
-        Me.BtnOutput.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.BtnOutput.Location = New System.Drawing.Point(723, 509)
-        Me.BtnOutput.Name = "BtnOutput"
-        Me.BtnOutput.Size = New System.Drawing.Size(165, 40)
-        Me.BtnOutput.TabIndex = 325
-        Me.BtnOutput.Text = "仕訳出力"
-        Me.BtnOutput.UseVisualStyleBackColor = True
-        '
         '締処理日時
         '
         DataGridViewCellStyle3.Font = New System.Drawing.Font("MS UI Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
@@ -193,11 +165,68 @@ Partial Class ClosingLog
         Me.担当者.Name = "担当者"
         Me.担当者.Width = 71
         '
+        'BtnClosing
+        '
+        Me.BtnClosing.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.BtnClosing.Location = New System.Drawing.Point(1004, 509)
+        Me.BtnClosing.Name = "BtnClosing"
+        Me.BtnClosing.Size = New System.Drawing.Size(165, 40)
+        Me.BtnClosing.TabIndex = 5
+        Me.BtnClosing.Text = "締処理実行"
+        Me.BtnClosing.UseVisualStyleBackColor = True
+        '
+        'BtnBack
+        '
+        Me.BtnBack.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.BtnBack.Location = New System.Drawing.Point(1175, 509)
+        Me.BtnBack.Name = "BtnBack"
+        Me.BtnBack.Size = New System.Drawing.Size(165, 40)
+        Me.BtnBack.TabIndex = 6
+        Me.BtnBack.Text = "戻る"
+        Me.BtnBack.UseVisualStyleBackColor = True
+        '
+        'BtnOutput
+        '
+        Me.BtnOutput.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.BtnOutput.Location = New System.Drawing.Point(723, 509)
+        Me.BtnOutput.Name = "BtnOutput"
+        Me.BtnOutput.Size = New System.Drawing.Size(165, 40)
+        Me.BtnOutput.TabIndex = 325
+        Me.BtnOutput.Text = "仕訳出力"
+        Me.BtnOutput.UseVisualStyleBackColor = True
+        '
+        'dtmSime
+        '
+        Me.dtmSime.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.dtmSime.CustomFormat = ""
+        Me.dtmSime.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.dtmSime.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtmSime.Location = New System.Drawing.Point(554, 46)
+        Me.dtmSime.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
+        Me.dtmSime.Name = "dtmSime"
+        Me.dtmSime.Size = New System.Drawing.Size(150, 22)
+        Me.dtmSime.TabIndex = 326
+        Me.dtmSime.Value = New Date(2018, 6, 5, 23, 23, 58, 0)
+        '
+        'LblShime
+        '
+        Me.LblShime.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblShime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblShime.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblShime.Location = New System.Drawing.Point(436, 45)
+        Me.LblShime.Name = "LblShime"
+        Me.LblShime.Size = New System.Drawing.Size(112, 23)
+        Me.LblShime.TabIndex = 327
+        Me.LblShime.Text = "締処理日"
+        Me.LblShime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'ClosingLog
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.dtmSime)
+        Me.Controls.Add(Me.LblShime)
         Me.Controls.Add(Me.BtnOutput)
         Me.Controls.Add(Me.BtnBack)
         Me.Controls.Add(Me.BtnClosing)
@@ -229,4 +258,6 @@ Partial Class ClosingLog
     Friend WithEvents 今回締日 As DataGridViewTextBoxColumn
     Friend WithEvents 次回締日 As DataGridViewTextBoxColumn
     Friend WithEvents 担当者 As DataGridViewTextBoxColumn
+    Friend WithEvents dtmSime As DateTimePicker
+    Friend WithEvents LblShime As Label
 End Class
