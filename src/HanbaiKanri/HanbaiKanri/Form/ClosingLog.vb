@@ -238,12 +238,13 @@ Public Class ClosingLog
         Dim dtmShime As DateTime
 
 
+        Sql1 += "SELECT * FROM public.m01_company"
+        Sql1 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+
+        ds1 = _db.selectDB(Sql1, RS, reccnt)
+
+
         If intFlg = 0 Then  '通常
-
-            Sql1 += "SELECT * FROM public.m01_company"
-            Sql1 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-
-            ds1 = _db.selectDB(Sql1, RS, reccnt)
 
             dtmLastMonth = DateAdd("d", 1, ds1.Tables(RS).Rows(0)("前回締日"))  '判定用
             dtmThisMonth = DateAdd("d", 1, ds1.Tables(RS).Rows(0)("今回締日"))
@@ -255,11 +256,6 @@ Public Class ClosingLog
             dtmLastMonth = DateAdd("m", -1, dtmThisMonth)  '今月1日
             dtmShime = Shime  '締日
 
-
-            Sql1 += "SELECT * FROM public.m01_company"
-            Sql1 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-
-            ds1 = _db.selectDB(Sql1, RS, reccnt)
 
             ds1.Tables(RS).Rows(0)("前回締日") = DateAdd("d", -1, dtmLastMonth)
             ds1.Tables(RS).Rows(0)("今回締日") = Shime
@@ -301,10 +297,14 @@ Public Class ClosingLog
 
 
 
-        'ログと会社マスタの更新
-        If mSetLog(ds1) = False Then
-            Exit Sub
+        If intFlg = 0 Then  '通常
+
+            'ログと会社マスタの更新
+            If mSetLog(ds1) = False Then
+                Exit Sub
+            End If
         End If
+
 
 
         '登録完了メッセージ
