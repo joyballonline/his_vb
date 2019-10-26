@@ -87,7 +87,7 @@ Public Class ClosingLog
 
             ds = _db.selectDB(Sql, RS, reccnt)
 
-            dtmSime.Value = ds.Tables(RS).Rows(0)("今回締日")
+            dtmSime.Text = ds.Tables(RS).Rows(0)("今回締日")
 
 
             '明細
@@ -146,6 +146,31 @@ Public Class ClosingLog
         End If
 
 
+        Me.MaximizeBox = False
+        Me.Width = 1366
+        Me.Height = 600
+        Me.Left = 67
+        Me.Top = 180
+
+        Me.dtmSime.Enabled = False
+
+    End Sub
+
+    Protected Overrides Sub WndProc(ByRef m As System.Windows.Forms.Message)
+        Const WM_NCLBUTTONDBLCLK As Integer = &HA3
+        Select Case m.Msg
+            Case WM_NCLBUTTONDBLCLK
+                'ここからタイトルバーがダブルクリックされた時に実行したい処理を記述
+
+                Dim openForm As Form = Nothing
+                openForm = New ClosingAdmin(_msgHd, _db, _langHd, Me)
+                openForm.ShowDialog()
+                'Me.Hide()
+
+                MyBase.WndProc(m)
+            Case Else
+                MyBase.WndProc(m)
+        End Select
     End Sub
 
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
@@ -194,20 +219,53 @@ Public Class ClosingLog
         End Try
     End Sub
 
-    Private Sub BtnClosing_Click(sender As Object, e As EventArgs) Handles BtnClosing.Click
+    '締処理ボタン
+    Public Sub BtnClosing_Click(sender As Object, e As EventArgs) Handles BtnClosing.Click
+
+        Call Closing_btn(0)
+
+    End Sub
+
+    Public Sub Closing_btn(ByVal intFlg As Integer, Optional ByVal Shime As DateTime = Nothing)
 
         Dim reccnt As Integer = 0
-
-
         Dim Sql1 As String = ""
-        Sql1 += "SELECT * FROM public.m01_company"
-        Sql1 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
 
-        Dim ds1 As DataSet = _db.selectDB(Sql1, RS, reccnt)
+        Dim ds1 As DataSet
 
-        Dim dtmLastMonth As DateTime = DateAdd("d", 1, ds1.Tables(RS).Rows(0)("前回締日"))  '判定用
-        Dim dtmThisMonth As DateTime = DateAdd("d", 1, ds1.Tables(RS).Rows(0)("今回締日"))
-        Dim dtmShime As DateTime = ds1.Tables(RS).Rows(0)("今回締日")  '締日
+        Dim dtmLastMonth As DateTime
+        Dim dtmThisMonth As DateTime
+        Dim dtmShime As DateTime
+
+
+        If intFlg = 0 Then  '通常
+
+            Sql1 += "SELECT * FROM public.m01_company"
+            Sql1 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+
+            ds1 = _db.selectDB(Sql1, RS, reccnt)
+
+            dtmLastMonth = DateAdd("d", 1, ds1.Tables(RS).Rows(0)("前回締日"))  '判定用
+            dtmThisMonth = DateAdd("d", 1, ds1.Tables(RS).Rows(0)("今回締日"))
+            dtmShime = ds1.Tables(RS).Rows(0)("今回締日")  '締日
+
+        Else  '管理者用
+
+            dtmThisMonth = DateAdd("d", 1, Shime)          '来月1日
+            dtmLastMonth = DateAdd("m", -1, dtmThisMonth)  '今月1日
+            dtmShime = Shime  '締日
+
+
+            Sql1 += "SELECT * FROM public.m01_company"
+            Sql1 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+
+            ds1 = _db.selectDB(Sql1, RS, reccnt)
+
+            ds1.Tables(RS).Rows(0)("前回締日") = DateAdd("d", -1, dtmLastMonth)
+            ds1.Tables(RS).Rows(0)("今回締日") = Shime
+            ds1.Tables(RS).Rows(0)("次回締日") = DateAdd("d", -1, DateAdd("m", 1, dtmThisMonth))
+
+        End If
 
 
 
@@ -225,7 +283,7 @@ Public Class ClosingLog
 
         '仕訳データ作成
         'CSVファイルの書き出し処理
-        If Accounting(ds1, dtmShime) = False Then
+        If Accounting(dtmShime) = False Then
             Exit Sub
         End If
 
@@ -256,14 +314,13 @@ Public Class ClosingLog
         _parentForm.Show()
         Me.Dispose()
 
-
     End Sub
 
     Private Function mSetkrTable(ByRef dsCompany As DataSet, ByVal dtmShime As DateTime) As Boolean
 
         Dim Sql As String
         Dim reccnt As Integer = 0
-        Dim dtToday As DateTime = dtmSime.Value
+        Dim dtToday As DateTime = dtmSime.Text
 
 
 #Region "売上"
@@ -1961,7 +2018,7 @@ Public Class ClosingLog
     Private Function mSet_t50_zikhd() As Boolean
 
         Dim reccnt As Integer = 0
-        Dim dtToday As DateTime = dtmSime.Value
+        Dim dtToday As DateTime = dtmSime.Text
 
         Dim Sql1 As String = ""
         Sql1 += "SELECT * FROM public.m01_company"
@@ -2780,7 +2837,7 @@ Public Class ClosingLog
     'End Sub
 
 
-    Private Function Accounting(ByRef dsCompany As DataSet, ByVal dtmShime As DateTime) As Boolean
+    Private Function Accounting(ByVal dtmShime As DateTime) As Boolean
         '仕訳データ作成処理
 
         Dim dtToday As DateTime = DateTime.Now
