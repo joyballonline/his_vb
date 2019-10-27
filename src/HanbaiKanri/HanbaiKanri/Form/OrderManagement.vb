@@ -332,7 +332,7 @@ Public Class OrderManagement
 
                 DgvOrder.Rows(i).Cells("売上数量").Value = ds3.Tables(RS).Rows(i)("売上数量")
                 DgvOrder.Rows(i).Cells("受注残数").Value = ds3.Tables(RS).Rows(i)("受注残数")
-                DgvOrder.Rows(i).Cells("未登録額").Value = ds3.Tables(RS).Rows(i)("見積単価") * ds3.Tables(RS).Rows(i)("受注残数")
+                DgvOrder.Rows(i).Cells("未登録額").Value = DgvOrder.Rows(i).Cells("売単価").Value * DgvOrder.Rows(i).Cells("受注残数").Value
 
                 'DgvOrder.Rows(i).Cells("売上金額").Value = ds3.Tables(RS).Rows(i)("見積金額")
 
@@ -354,6 +354,7 @@ Public Class OrderManagement
                 DgvHistory.Columns.Add("仕入先", "SupplierName")
                 DgvHistory.Columns.Add("売単価", "SellingPrice")
                 DgvHistory.Columns.Add("売上数量", "SalesQuantity")
+                DgvHistory.Columns.Add("売上金額", "SalesAmount")
                 DgvHistory.Columns.Add("売上日", "SalesInvoiceDate")
                 DgvHistory.Columns.Add("入金予定日", "PlannedDepositDate")
                 DgvHistory.Columns.Add("備考", "Remarks")
@@ -369,6 +370,7 @@ Public Class OrderManagement
                 DgvHistory.Columns.Add("仕入先", "仕入先")
                 DgvHistory.Columns.Add("売単価", "売単価")
                 DgvHistory.Columns.Add("売上数量", "売上数量")
+                DgvHistory.Columns.Add("売上金額", "売上金額")
                 DgvHistory.Columns.Add("売上日", "SalesInvoiceDate")
                 DgvHistory.Columns.Add("入金予定日", "入金予定日")
                 DgvHistory.Columns.Add("備考", "備考")
@@ -377,10 +379,12 @@ Public Class OrderManagement
 
             DgvHistory.Columns("売単価").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             DgvHistory.Columns("売上数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            DgvHistory.Columns("売上金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
             '数字形式
             DgvHistory.Columns("売単価").DefaultCellStyle.Format = "N2"
             DgvHistory.Columns("売上数量").DefaultCellStyle.Format = "N2"
+            DgvHistory.Columns("売上金額").DefaultCellStyle.Format = "N2"
 
             DgvHistory.Columns("仕入先").Visible = False
 
@@ -401,6 +405,7 @@ Public Class OrderManagement
                 DgvHistory.Rows(i).Cells("仕入先").Value = ds2.Tables(RS).Rows(i)("仕入先名")
                 DgvHistory.Rows(i).Cells("売単価").Value = ds2.Tables(RS).Rows(i)("見積単価") '売単価 = 見積単価
                 DgvHistory.Rows(i).Cells("売上数量").Value = ds2.Tables(RS).Rows(i)("売上数量")
+                DgvHistory.Rows(i).Cells("売上金額").Value = DgvHistory.Rows(i).Cells("売単価").Value * DgvHistory.Rows(i).Cells("売上数量").Value
                 DgvHistory.Rows(i).Cells("売上日").Value = ds2.Tables(RS).Rows(i)("売上日").ToShortDateString
                 DgvHistory.Rows(i).Cells("入金予定日").Value = ds2.Tables(RS).Rows(i)("入金予定日").ToShortDateString
                 DgvHistory.Rows(i).Cells("備考").Value = ds2.Tables(RS).Rows(i)("備考")
@@ -423,6 +428,7 @@ Public Class OrderManagement
                 DgvAdd.Columns.Add("仕入先", "SupplierName")
                 DgvAdd.Columns.Add("売単価", "Sellingprice")
                 DgvAdd.Columns.Add("売上数量", "SalesQuantity")
+                DgvAdd.Columns.Add("売上金額", "SalesAmount")
                 DgvAdd.Columns.Add("備考", "Remarks")
             Else
                 DgvAdd.Columns.Add("No", "No")
@@ -436,15 +442,18 @@ Public Class OrderManagement
                 DgvAdd.Columns.Add("仕入先", "仕入先")
                 DgvAdd.Columns.Add("売単価", "売単価")
                 DgvAdd.Columns.Add("売上数量", "売上数量")
+                DgvAdd.Columns.Add("売上金額", "売上金額")
                 DgvAdd.Columns.Add("備考", "備考")
             End If
 
             DgvAdd.Columns("売単価").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             DgvAdd.Columns("売上数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            DgvAdd.Columns("売上金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
             '数字形式
             DgvAdd.Columns("売単価").DefaultCellStyle.Format = "N2"
             DgvAdd.Columns("売上数量").DefaultCellStyle.Format = "N2"
+            DgvAdd.Columns("売上金額").DefaultCellStyle.Format = "N2"
 
 
             DgvAdd.Columns("No").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
@@ -465,6 +474,8 @@ Public Class OrderManagement
             DgvAdd.Columns("仕入先").ReadOnly = True
             DgvAdd.Columns("売単価").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
             DgvAdd.Columns("売単価").ReadOnly = True
+            DgvAdd.Columns("売上金額").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
+            DgvAdd.Columns("売上金額").ReadOnly = True
 
             DgvAdd.Columns("仕入区分値").Visible = False
             DgvAdd.Columns("仕入先").Visible = False
@@ -486,8 +497,10 @@ Public Class OrderManagement
                     DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("単位").Value = ds3.Tables(RS).Rows(index)("単位")
                     DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("売単価").Value = IIf(ds3.Tables(RS).Rows(index)("仕入区分").ToString = CommonConst.Sire_KBN_SERVICE,
                                                                                 ds3.Tables(RS).Rows(index)("売単価"),
-                                                                                ds3.Tables(RS).Rows(index)("見積単価")) '売単価 = 見積単価
+                                                                                ds3.Tables(RS).Rows(index)("見積単価_外貨")) '売単価 = 見積単価
                     DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("売上数量").Value = 0
+                    'DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("売上金額").Value = 0
+
                     DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("備考").Value = ds3.Tables(RS).Rows(index)("備考")
                 End If
             Next
@@ -1049,6 +1062,9 @@ Public Class OrderManagement
                 DgvAdd.Rows(e.RowIndex).Cells("売上数量").Value = 0
                 Exit Sub
             End If
+
+            DgvAdd.Rows(e.RowIndex).Cells("売上金額").Value = DgvAdd.Rows(e.RowIndex).Cells("売単価").Value * DgvAdd.Rows(e.RowIndex).Cells("売上数量").Value
+
         End If
 
     End Sub
