@@ -752,6 +752,8 @@ Public Class AccountsPayable
             Dim decTmp As Decimal = DgvAdd.Rows(e.RowIndex).Cells("今回買掛金額計").Value
             DgvAdd.Rows(e.RowIndex).Cells("今回買掛金額計").Value = decTmp
 
+            DgvAdd.Rows(e.RowIndex).Cells("今回備考1").Value = VendorInvoiceNumber.Text
+
         End If
 
     End Sub
