@@ -205,9 +205,9 @@ Public Class GoodsIssue
             Sql += " ON t70.会社コード = t44.会社コード"
             Sql += " AND  t70.入出庫区分 = '2'"
             'Sql += " AND  t70.倉庫コード = t45.倉庫コード"
-            'Sql += " AND  t70.伝票番号 = t44.出庫番号"
-            'Sql += " AND  t70.行番号 = t45.行番号"
-            Sql += " AND  t70.ロケ番号 = concat(t44.出庫番号, t45.行番号)"
+            Sql += " AND  t70.伝票番号 = t44.出庫番号"
+            Sql += " AND  t70.行番号 = t45.行番号"
+            'Sql += " AND  t70.ロケ番号 = concat(t44.出庫番号, t45.行番号)"
 
             If dsCymnhd.Tables(RS).Rows.Count > 0 Then
                 Sql += " WHERE t45.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
@@ -316,7 +316,7 @@ Public Class GoodsIssue
                     DgvHistory.Rows(i).Cells("倉庫").Value = getWarehouseName(dsShukodt.Tables(RS).Rows(i)("倉庫コード"))
                 End If
 
-                If dsShukodt.Tables(RS).Rows(i).IsNull(("入出庫種別")) = False Then
+                If dsShukodt.Tables(RS).Rows(i).IsNull("入出庫種別") = False Then
                     DgvHistory.Rows(i).Cells("入出庫種別").Value = getInOutName(dsShukodt.Tables(RS).Rows(i)("入出庫種別"))
                 End If
 
@@ -816,7 +816,7 @@ Public Class GoodsIssue
                 '行番号が一致したら
                 If DgvOrder.Rows(x).Cells("明細").Value = DgvAdd.Rows(i).Cells("行番号").Value Then
                     '出庫数が未出庫数を超えたら
-                    If DgvOrder.Rows(i).Cells("未出庫数").Value < DgvAdd.Rows(i).Cells("出庫数量").Value Then
+                    If DgvOrder.Rows(x).Cells("未出庫数").Value < DgvAdd.Rows(i).Cells("出庫数量").Value Then
 
                         '操作できないアラートを出す
                         _msgHd.dspMSG("chkGIBalanceError", frmC01F10_Login.loginValue.Language)
@@ -1372,6 +1372,17 @@ Public Class GoodsIssue
     End Sub
 
     Private Sub BtnDeliveryNote_Click(sender As Object, e As EventArgs) Handles BtnDeliveryNote.Click
+
+        If frmC01F10_Login.loginValue.BumonCD = "ZENBI" Then
+            DeliveryNote_Zenbi()
+        Else
+            DeliveryNote_StdCompany()
+        End If
+
+    End Sub
+
+    Private Sub DeliveryNote_StdCompany()
+
         Dim SelectedRow As Integer = DgvHistory.CurrentCell.RowIndex
 
         Dim createFlg = False
@@ -2114,7 +2125,7 @@ Public Class GoodsIssue
         Sql += " AND m21.倉庫コード ILIKE t70.倉庫コード "
         Sql += " AND m21.伝票番号 ILIKE t70.伝票番号 "
         Sql += " AND m21.行番号 = t70.行番号 "
-        Sql += " AND t70.仕入区分 <> '" & CommonConst.Sire_KBN_Sire.ToString & "'"
+        Sql += " AND COALESCE(t70.仕入区分,'NL') <> '" & CommonConst.Sire_KBN_Sire.ToString & "'"
 
         Sql += " GROUP BY m21.倉庫コード, m21.入出庫種別, m21.最終入庫日, m21.伝票番号, m21.行番号 "
         Sql += " ORDER BY m21.最終入庫日 "
@@ -2380,5 +2391,128 @@ Public Class GoodsIssue
 
         End If
     End Sub
+
+    Private Sub DeliveryNote_Zenbi()
+
+        Dim SelectedRow As Integer = DgvHistory.CurrentCell.RowIndex
+
+        Dim createFlg = False
+
+        Dim Sql1 As String = ""
+        Sql1 += "SELECT * FROM public.t44_shukohd"
+        Sql1 += " WHERE 出庫番号 = '" & DgvHistory.Rows(SelectedRow).Cells("出庫番号").Value & "'"
+
+
+        Dim Sql2 As String = ""
+        Sql2 += "SELECT * FROM public.t45_shukodt"
+        Sql2 += " WHERE 出庫番号 = '" & DgvHistory.Rows(SelectedRow).Cells("出庫番号").Value & "'"
+
+        Dim reccnt As Integer = 0
+        Dim ds1 As DataSet = _db.selectDB(Sql1, RS, reccnt)
+        Dim ds2 As DataSet = _db.selectDB(Sql2, RS, reccnt)
+
+        '定義
+        Dim app As Excel.Application = Nothing
+        Dim book As Excel.Workbook = Nothing
+        Dim sheet As Excel.Worksheet = Nothing
+
+        'カーソルをビジー状態にする
+        Cursor.Current = Cursors.WaitCursor
+
+        Try
+            '雛形パス
+            Dim sHinaPath As String = ""
+            sHinaPath = StartUp._iniVal.BaseXlsPath
+
+            '雛形ファイル名
+            Dim sHinaFileDeliv As String = ""
+            sHinaFileDeliv = sHinaPath & "\" & "DeliveryNote.xlsx"
+
+            Dim sHinaFileReceipt As String = ""
+            sHinaFileReceipt = sHinaPath & "\" & "DeliveryNote.xlsx"
+
+            '出力先パス
+            Dim sOutPath As String = ""
+            sOutPath = StartUp._iniVal.OutXlsPath
+
+            '出力ファイル名
+            Dim sOutFile As String = ""
+            sOutFile = sOutPath & "\DeliveryNote_" & ds2.Tables(RS).Rows(0)("出庫番号") & ".xlsx"
+
+
+
+            app = New Excel.Application()
+            book = app.Workbooks.Add(sHinaFileDeliv)  'テンプレート
+            sheet = CType(book.Worksheets(1), Excel.Worksheet)
+
+            sheet.Range("B8").Value = ":" & ds1.Tables(RS).Rows(0)("得意先名")
+            sheet.Range("B9").Value = ":" & ds1.Tables(RS).Rows(0)("得意先住所") & " " & ds1.Tables(RS).Rows(0)("得意先郵便番号")
+            sheet.Range("B11").Value = ":" & ds1.Tables(RS).Rows(0)("得意先電話番号")
+
+            sheet.Range("E8").Value = ":" & ds1.Tables(RS).Rows(0)("出庫番号")
+            sheet.Range("E9").Value = ":" & ds1.Tables(RS).Rows(0)("出庫日")
+            sheet.Range("E10").Value = ":" & ds1.Tables(RS).Rows(0)("客先番号")
+
+
+            Dim rowCnt As Integer = 0
+            Dim lstRow As Integer = 14
+            Dim num As Integer = 1
+
+
+            For j As Integer = 0 To ds2.Tables(RS).Rows.Count - 1
+                Dim cellPos As String = lstRow & ":" & lstRow
+                Dim R As Object
+                cellPos = lstRow & ":" & lstRow
+                R = sheet.Range(cellPos)
+                R.Copy()
+                R.Insert()
+                If Marshal.IsComObject(R) Then
+                    Marshal.ReleaseComObject(R)
+                End If
+
+                sheet.Range("A" & lstRow).Value = num
+                sheet.Range("B" & lstRow).Value = ds2.Tables(RS).Rows(j)("メーカー") & Environment.NewLine & ds2.Tables(RS).Rows(j)("品名") & Environment.NewLine & ds2.Tables(RS).Rows(j)("型式") & Environment.NewLine & ds2.Tables(RS).Rows(j)("備考")
+                sheet.Range("C" & lstRow).Value = ds2.Tables(RS).Rows(j)("出庫数量")
+                sheet.Range("D" & lstRow).Value = ds2.Tables(RS).Rows(j)("単位")
+                'sheet.Range("E" & lstRow).Value = ds2.Tables(RS).Rows(j)("備考")
+
+                num += 1
+                lstRow = lstRow + 1
+            Next
+
+            sheet.Cells.Rows.AutoFit()
+
+            app.DisplayAlerts = False 'Microsoft Excelのアラート一旦無効化
+
+            Dim excelChk As Boolean = excelOutput(sOutFile)
+            If excelChk = False Then
+                Exit Sub
+            End If
+            book.SaveAs(sOutFile) '書き込み実行
+
+            app.DisplayAlerts = True 'アラート無効化を解除
+
+            app.Visible = True
+
+            '_msgHd.dspMSG("CreateExcel")
+            createFlg = True
+            'カーソルをビジー状態から元に戻す
+            Cursor.Current = Cursors.Default
+
+        Catch ex As Exception
+            'カーソルをビジー状態から元に戻す
+            Cursor.Current = Cursors.Default
+
+            Throw ex
+        Finally
+
+        End Try
+
+        If createFlg = True Then
+            _msgHd.dspMSG("CreateExcel", frmC01F10_Login.loginValue.Language)
+        End If
+    End Sub
+
+
 
 End Class

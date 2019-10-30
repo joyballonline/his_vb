@@ -23,6 +23,7 @@ Partial Class GoodsIssue
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.TxtSuffixNo = New System.Windows.Forms.TextBox()
         Me.BtnRegist = New System.Windows.Forms.Button()
         Me.DtpGoodsIssueDate = New System.Windows.Forms.DateTimePicker()
@@ -70,7 +71,7 @@ Partial Class GoodsIssue
         Me.TxtSuffixNo.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtSuffixNo.Location = New System.Drawing.Point(351, 10)
         Me.TxtSuffixNo.Name = "TxtSuffixNo"
-        Me.TxtSuffixNo.Size = New System.Drawing.Size(36, 37)
+        Me.TxtSuffixNo.Size = New System.Drawing.Size(36, 22)
         Me.TxtSuffixNo.TabIndex = 285
         Me.TxtSuffixNo.TabStop = False
         '
@@ -89,13 +90,13 @@ Partial Class GoodsIssue
         Me.DtpGoodsIssueDate.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.DtpGoodsIssueDate.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpGoodsIssueDate.CustomFormat = ""
-        Me.DtpGoodsIssueDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.DtpGoodsIssueDate.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpGoodsIssueDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DtpGoodsIssueDate.Location = New System.Drawing.Point(302, 0)
+        Me.DtpGoodsIssueDate.Location = New System.Drawing.Point(302, 1)
         Me.DtpGoodsIssueDate.Margin = New System.Windows.Forms.Padding(0)
         Me.DtpGoodsIssueDate.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.DtpGoodsIssueDate.Name = "DtpGoodsIssueDate"
-        Me.DtpGoodsIssueDate.Size = New System.Drawing.Size(148, 37)
+        Me.DtpGoodsIssueDate.Size = New System.Drawing.Size(148, 22)
         Me.DtpGoodsIssueDate.TabIndex = 3
         Me.DtpGoodsIssueDate.TabStop = False
         Me.DtpGoodsIssueDate.Value = New Date(2018, 7, 16, 0, 0, 0, 0)
@@ -105,7 +106,7 @@ Partial Class GoodsIssue
         Me.LblRemarks.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.LblRemarks.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblRemarks.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblRemarks.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblRemarks.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblRemarks.Location = New System.Drawing.Point(478, 1)
         Me.LblRemarks.Name = "LblRemarks"
         Me.LblRemarks.Size = New System.Drawing.Size(136, 22)
@@ -117,10 +118,10 @@ Partial Class GoodsIssue
         '
         Me.TxtRemarks.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtRemarks.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtRemarks.Location = New System.Drawing.Point(617, 0)
+        Me.TxtRemarks.Location = New System.Drawing.Point(617, 1)
         Me.TxtRemarks.Margin = New System.Windows.Forms.Padding(0)
         Me.TxtRemarks.Name = "TxtRemarks"
-        Me.TxtRemarks.Size = New System.Drawing.Size(589, 37)
+        Me.TxtRemarks.Size = New System.Drawing.Size(589, 22)
         Me.TxtRemarks.TabIndex = 4
         '
         'LblGoodsIssueDate
@@ -128,7 +129,7 @@ Partial Class GoodsIssue
         Me.LblGoodsIssueDate.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.LblGoodsIssueDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblGoodsIssueDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblGoodsIssueDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblGoodsIssueDate.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblGoodsIssueDate.Location = New System.Drawing.Point(149, 1)
         Me.LblGoodsIssueDate.Name = "LblGoodsIssueDate"
         Me.LblGoodsIssueDate.Size = New System.Drawing.Size(150, 22)
@@ -140,7 +141,7 @@ Partial Class GoodsIssue
         '
         Me.LblAdd.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.LblAdd.BackColor = System.Drawing.Color.Transparent
-        Me.LblAdd.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblAdd.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblAdd.Location = New System.Drawing.Point(0, 1)
         Me.LblAdd.Margin = New System.Windows.Forms.Padding(0)
         Me.LblAdd.Name = "LblAdd"
@@ -152,7 +153,7 @@ Partial Class GoodsIssue
         'LblCount3
         '
         Me.LblCount3.BackColor = System.Drawing.Color.Transparent
-        Me.LblCount3.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblCount3.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblCount3.Location = New System.Drawing.Point(1316, 343)
         Me.LblCount3.Name = "LblCount3"
         Me.LblCount3.Size = New System.Drawing.Size(22, 22)
@@ -167,7 +168,7 @@ Partial Class GoodsIssue
         Me.TxtCount3.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtCount3.Location = New System.Drawing.Point(1272, 343)
         Me.TxtCount3.Name = "TxtCount3"
-        Me.TxtCount3.Size = New System.Drawing.Size(38, 37)
+        Me.TxtCount3.Size = New System.Drawing.Size(38, 22)
         Me.TxtCount3.TabIndex = 277
         Me.TxtCount3.TabStop = False
         Me.TxtCount3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -186,7 +187,7 @@ Partial Class GoodsIssue
         'LblHistory
         '
         Me.LblHistory.BackColor = System.Drawing.Color.Transparent
-        Me.LblHistory.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblHistory.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblHistory.Location = New System.Drawing.Point(12, 212)
         Me.LblHistory.Name = "LblHistory"
         Me.LblHistory.Size = New System.Drawing.Size(170, 22)
@@ -197,7 +198,7 @@ Partial Class GoodsIssue
         'LblOrder
         '
         Me.LblOrder.BackColor = System.Drawing.Color.Transparent
-        Me.LblOrder.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblOrder.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblOrder.Location = New System.Drawing.Point(12, 82)
         Me.LblOrder.Name = "LblOrder"
         Me.LblOrder.Size = New System.Drawing.Size(170, 22)
@@ -208,7 +209,7 @@ Partial Class GoodsIssue
         'LblCount2
         '
         Me.LblCount2.BackColor = System.Drawing.Color.Transparent
-        Me.LblCount2.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblCount2.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblCount2.Location = New System.Drawing.Point(1316, 212)
         Me.LblCount2.Name = "LblCount2"
         Me.LblCount2.Size = New System.Drawing.Size(22, 22)
@@ -223,7 +224,7 @@ Partial Class GoodsIssue
         Me.TxtCount2.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtCount2.Location = New System.Drawing.Point(1272, 212)
         Me.TxtCount2.Name = "TxtCount2"
-        Me.TxtCount2.Size = New System.Drawing.Size(38, 37)
+        Me.TxtCount2.Size = New System.Drawing.Size(38, 22)
         Me.TxtCount2.TabIndex = 272
         Me.TxtCount2.TabStop = False
         Me.TxtCount2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -233,6 +234,14 @@ Partial Class GoodsIssue
         Me.DgvHistory.AllowUserToAddRows = False
         Me.DgvHistory.AllowUserToDeleteRows = False
         Me.DgvHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DgvHistory.DefaultCellStyle = DataGridViewCellStyle1
         Me.DgvHistory.Location = New System.Drawing.Point(12, 237)
         Me.DgvHistory.Name = "DgvHistory"
         Me.DgvHistory.ReadOnly = True
@@ -245,7 +254,7 @@ Partial Class GoodsIssue
         'LblCount1
         '
         Me.LblCount1.BackColor = System.Drawing.Color.Transparent
-        Me.LblCount1.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblCount1.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblCount1.Location = New System.Drawing.Point(1316, 82)
         Me.LblCount1.Name = "LblCount1"
         Me.LblCount1.Size = New System.Drawing.Size(22, 22)
@@ -260,7 +269,7 @@ Partial Class GoodsIssue
         Me.TxtCount1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtCount1.Location = New System.Drawing.Point(1272, 82)
         Me.TxtCount1.Name = "TxtCount1"
-        Me.TxtCount1.Size = New System.Drawing.Size(38, 37)
+        Me.TxtCount1.Size = New System.Drawing.Size(38, 22)
         Me.TxtCount1.TabIndex = 269
         Me.TxtCount1.TabStop = False
         Me.TxtCount1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -270,14 +279,14 @@ Partial Class GoodsIssue
         Me.DgvOrder.AllowUserToAddRows = False
         Me.DgvOrder.AllowUserToDeleteRows = False
         Me.DgvOrder.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DgvOrder.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DgvOrder.DefaultCellStyle = DataGridViewCellStyle2
         Me.DgvOrder.Location = New System.Drawing.Point(12, 106)
         Me.DgvOrder.Name = "DgvOrder"
         Me.DgvOrder.ReadOnly = True
@@ -290,7 +299,7 @@ Partial Class GoodsIssue
         '
         Me.LblOrderDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblOrderDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblOrderDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblOrderDate.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblOrderDate.Location = New System.Drawing.Point(732, 10)
         Me.LblOrderDate.Name = "LblOrderDate"
         Me.LblOrderDate.Size = New System.Drawing.Size(170, 22)
@@ -305,7 +314,7 @@ Partial Class GoodsIssue
         Me.TxtOrderDate.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtOrderDate.Location = New System.Drawing.Point(908, 10)
         Me.TxtOrderDate.Name = "TxtOrderDate"
-        Me.TxtOrderDate.Size = New System.Drawing.Size(157, 37)
+        Me.TxtOrderDate.Size = New System.Drawing.Size(157, 22)
         Me.TxtOrderDate.TabIndex = 266
         Me.TxtOrderDate.TabStop = False
         '
@@ -316,7 +325,7 @@ Partial Class GoodsIssue
         Me.TxtCustomerName.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtCustomerName.Location = New System.Drawing.Point(351, 38)
         Me.TxtCustomerName.Name = "TxtCustomerName"
-        Me.TxtCustomerName.Size = New System.Drawing.Size(375, 37)
+        Me.TxtCustomerName.Size = New System.Drawing.Size(375, 22)
         Me.TxtCustomerName.TabIndex = 265
         Me.TxtCustomerName.TabStop = False
         '
@@ -324,7 +333,7 @@ Partial Class GoodsIssue
         '
         Me.LblCustomer.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblCustomer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblCustomer.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblCustomer.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblCustomer.Location = New System.Drawing.Point(12, 38)
         Me.LblCustomer.Name = "LblCustomer"
         Me.LblCustomer.Size = New System.Drawing.Size(170, 22)
@@ -339,7 +348,7 @@ Partial Class GoodsIssue
         Me.TxtCustomerCode.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtCustomerCode.Location = New System.Drawing.Point(188, 38)
         Me.TxtCustomerCode.Name = "TxtCustomerCode"
-        Me.TxtCustomerCode.Size = New System.Drawing.Size(157, 37)
+        Me.TxtCustomerCode.Size = New System.Drawing.Size(157, 22)
         Me.TxtCustomerCode.TabIndex = 263
         Me.TxtCustomerCode.TabStop = False
         '
@@ -357,7 +366,7 @@ Partial Class GoodsIssue
         '
         Me.LblOrderNo.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblOrderNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblOrderNo.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblOrderNo.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblOrderNo.Location = New System.Drawing.Point(12, 10)
         Me.LblOrderNo.Name = "LblOrderNo"
         Me.LblOrderNo.Size = New System.Drawing.Size(170, 22)
@@ -372,7 +381,7 @@ Partial Class GoodsIssue
         Me.TxtOrderNo.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtOrderNo.Location = New System.Drawing.Point(188, 10)
         Me.TxtOrderNo.Name = "TxtOrderNo"
-        Me.TxtOrderNo.Size = New System.Drawing.Size(157, 37)
+        Me.TxtOrderNo.Size = New System.Drawing.Size(157, 22)
         Me.TxtOrderNo.TabIndex = 260
         Me.TxtOrderNo.TabStop = False
         '
@@ -381,7 +390,7 @@ Partial Class GoodsIssue
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(12, 10)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(0, 24)
+        Me.Label1.Size = New System.Drawing.Size(0, 13)
         Me.Label1.TabIndex = 259
         '
         'BtnDeliveryNote
@@ -399,7 +408,7 @@ Partial Class GoodsIssue
         '
         Me.LblMode.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblMode.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblMode.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblMode.Location = New System.Drawing.Point(1152, 9)
         Me.LblMode.Name = "LblMode"
         Me.LblMode.Size = New System.Drawing.Size(186, 22)
@@ -411,7 +420,7 @@ Partial Class GoodsIssue
         '
         Me.LblCustomerNo.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblCustomerNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblCustomerNo.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblCustomerNo.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblCustomerNo.Location = New System.Drawing.Point(393, 10)
         Me.LblCustomerNo.Name = "LblCustomerNo"
         Me.LblCustomerNo.Size = New System.Drawing.Size(170, 22)
@@ -426,7 +435,7 @@ Partial Class GoodsIssue
         Me.TxtCustomerPO.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtCustomerPO.Location = New System.Drawing.Point(569, 10)
         Me.TxtCustomerPO.Name = "TxtCustomerPO"
-        Me.TxtCustomerPO.Size = New System.Drawing.Size(157, 37)
+        Me.TxtCustomerPO.Size = New System.Drawing.Size(157, 22)
         Me.TxtCustomerPO.TabIndex = 288
         Me.TxtCustomerPO.TabStop = False
         '
@@ -462,7 +471,7 @@ Partial Class GoodsIssue
         Me.TxtIDRCurrency.MaxLength = 20
         Me.TxtIDRCurrency.Name = "TxtIDRCurrency"
         Me.TxtIDRCurrency.ReadOnly = True
-        Me.TxtIDRCurrency.Size = New System.Drawing.Size(70, 39)
+        Me.TxtIDRCurrency.Size = New System.Drawing.Size(70, 23)
         Me.TxtIDRCurrency.TabIndex = 328
         Me.TxtIDRCurrency.TabStop = False
         Me.TxtIDRCurrency.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
