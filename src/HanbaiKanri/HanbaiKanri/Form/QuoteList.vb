@@ -853,7 +853,7 @@ Public Class QuoteList
             Dim Suffix As String = DgvMithd.Rows(RowIdx).Cells("見積番号枝番").Value
 
             Dim openForm As Form = Nothing
-            openForm = New Quote(_msgHd, _db, _langHd, Me, No, Suffix)   '処理選択
+            openForm = New Quote(_msgHd, _db, _langHd, Me, No, Suffix, CommonConst.STATUS_EDIT)   '処理選択
             Me.Enabled = False
             Me.Hide()
             openForm.ShowDialog()

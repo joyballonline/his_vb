@@ -446,6 +446,12 @@ Public Class Quote
                     Case CommonConst.STATUS_VIEW
                         DtpQuote.Value = ds1.Tables(RS).Rows(0)("見積日")                                       '見積日
                         DtpExpiration.Text = DateAdd("d", CommonConst.DEADLINE_DEFAULT_DAY, DtpQuote.Value)     '見積有効期限
+                    Case CommonConst.STATUS_PRICE
+                        DtpQuote.Value = ds1.Tables(RS).Rows(0)("見積日")                                       '見積日
+                        DtpExpiration.Text = DateAdd("d", CommonConst.DEADLINE_DEFAULT_DAY, DtpQuote.Value)     '見積有効期限
+                    Case CommonConst.STATUS_EDIT
+                        DtpQuote.Value = ds1.Tables(RS).Rows(0)("見積日")                                       '見積日
+                        DtpExpiration.Text = DateAdd("d", CommonConst.DEADLINE_DEFAULT_DAY, DtpQuote.Value)     '見積有効期限
                     Case Else
                         DtpQuote.Value = dtNow.ToShortDateString                                                '見積日
                         DtpExpiration.Text = DateAdd("d", CommonConst.DEADLINE_DEFAULT_DAY, DtpQuote.Value)     '見積有効期限

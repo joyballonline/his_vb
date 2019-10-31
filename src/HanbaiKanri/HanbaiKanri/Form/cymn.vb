@@ -484,7 +484,7 @@ Public Class Cymn
             lblProfitmarginRate.Text = "ProfitmarginRate"   '利益率
             'lblProfitmarginRate.Size = New Size(180, 23)
             'lblProfitmarginRate.Location = New Point(923, 480)
-            LblVatAmount.Text = "Currency"
+            'LblVatAmount.Text = "Currency"
             'TxtVatAmount.Size = New Size(151, 23)
             LblCurrencyVatAmount.Text = "Currency"
             'TxtCurrencyVatAmount.Size = New Size(151, 23)

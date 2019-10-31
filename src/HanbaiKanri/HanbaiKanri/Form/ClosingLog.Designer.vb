@@ -43,8 +43,8 @@ Partial Class ClosingLog
         Me.BtnClosing = New System.Windows.Forms.Button()
         Me.BtnBack = New System.Windows.Forms.Button()
         Me.BtnOutput = New System.Windows.Forms.Button()
-        Me.dtmSime = New System.Windows.Forms.DateTimePicker()
         Me.LblShime = New System.Windows.Forms.Label()
+        Me.dtmSime = New System.Windows.Forms.TextBox()
         CType(Me.DgvClosingLog, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -195,19 +195,6 @@ Partial Class ClosingLog
         Me.BtnOutput.Text = "仕訳出力"
         Me.BtnOutput.UseVisualStyleBackColor = True
         '
-        'dtmSime
-        '
-        Me.dtmSime.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.dtmSime.CustomFormat = ""
-        Me.dtmSime.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.dtmSime.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtmSime.Location = New System.Drawing.Point(554, 46)
-        Me.dtmSime.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
-        Me.dtmSime.Name = "dtmSime"
-        Me.dtmSime.Size = New System.Drawing.Size(150, 22)
-        Me.dtmSime.TabIndex = 326
-        Me.dtmSime.Value = New Date(2018, 6, 5, 23, 23, 58, 0)
-        '
         'LblShime
         '
         Me.LblShime.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
@@ -220,11 +207,20 @@ Partial Class ClosingLog
         Me.LblShime.Text = "締処理日"
         Me.LblShime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'dtmSime
+        '
+        Me.dtmSime.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.dtmSime.Location = New System.Drawing.Point(553, 47)
+        Me.dtmSime.Name = "dtmSime"
+        Me.dtmSime.Size = New System.Drawing.Size(98, 22)
+        Me.dtmSime.TabIndex = 328
+        Me.dtmSime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
         'ClosingLog
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.ClientSize = New System.Drawing.Size(1083, 561)
         Me.Controls.Add(Me.dtmSime)
         Me.Controls.Add(Me.LblShime)
         Me.Controls.Add(Me.BtnOutput)
@@ -258,6 +254,6 @@ Partial Class ClosingLog
     Friend WithEvents 今回締日 As DataGridViewTextBoxColumn
     Friend WithEvents 次回締日 As DataGridViewTextBoxColumn
     Friend WithEvents 担当者 As DataGridViewTextBoxColumn
-    Friend WithEvents dtmSime As DateTimePicker
     Friend WithEvents LblShime As Label
+    Friend WithEvents dtmSime As TextBox
 End Class

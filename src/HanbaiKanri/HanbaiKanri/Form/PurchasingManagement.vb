@@ -365,6 +365,7 @@ Public Class PurchasingManagement
 
             Sql += " left join t21_hattyu t21"
             Sql += " on t41.発注番号 = t21.発注番号 and t41.発注番号枝番 = t21.発注番号枝番"
+            Sql += " and t41.メーカー = t21.メーカー and t41.品名 = t21.品名 and t41.型式 = t21.型式 and t41.発注数量 = t21.発注数量"
 
 
             Sql += " WHERE "
@@ -599,6 +600,8 @@ Public Class PurchasingManagement
         End If
 
 
+#Region "SQL"
+
         Sql = " AND 発注番号 = '" & No & "'"
         Sql += " AND 発注番号枝番 = '" & Suffix & "'"
         Sql += " AND "
@@ -612,6 +615,11 @@ Public Class PurchasingManagement
         Sql2 += " AND 発注番号枝番 = '" & Suffix & "'"
 
         Dim ds2 As DataSet = _db.selectDB(Sql2, RS, reccnt)
+
+#End Region
+
+
+#Region "Check"
 
         Dim chkCount As Integer = 0 '仕入データがあるか合算する用
         '最初に今回仕入に入力がなかったらエラーで返す
@@ -639,6 +647,9 @@ Public Class PurchasingManagement
 
         Next
 
+#End Region
+
+
         Try
             Dim PC As String = getSaiban("50", dtToday)
             Dim WH As String = getSaiban("60", dtToday)
@@ -647,6 +658,8 @@ Public Class PurchasingManagement
             For i As Integer = 0 To ds2.Tables(RS).Rows.Count - 1
                 PurchaseAmount += ds2.Tables(RS).Rows(i)("仕入金額")
             Next
+
+#Region "t40_sirehd"
 
             Sql3 = ""
             Sql3 += "INSERT INTO "
@@ -725,6 +738,11 @@ Public Class PurchasingManagement
 
             _db.executeDB(Sql3)
 
+#End Region
+
+
+#Region "t41_siredt"
+
             For index As Integer = 0 To DgvAdd.Rows.Count() - 1
                 Sql4 = ""
                 Sql4 += "INSERT INTO "
@@ -788,6 +806,9 @@ Public Class PurchasingManagement
                     _db.executeDB(Sql4)
                 End If
             Next
+
+#End Region
+
 
             Dim PurchaseNum As Integer
             Dim OrdingNum As Integer
