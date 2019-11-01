@@ -499,3 +499,116 @@ UPDATE Public.t42_nyukohd SET 取消区分 = 1, 取消日 = '24/08/2019 10.05.41
    at UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:line 294
    at UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) in C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:line 208
 SELECT * FROM public.t10_cymnhd WHERE 会社コード = 'ZENBI' AND 受注番号 = 'AO02060109' AND 受注番号枝番 = '1'
+2019/10/06 13:09:18   ERR***** データ取得失敗：ERROR: 42P01: missing FROM-clause entry for table "t11"
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+ SELECT t20.* ,t21.行番号 ,t21.メーカー ,t21.品名 ,t21.型式 ,t11.発注残数 ,t11.受注残数 ,t11.未出庫数 ,t11.出庫数 from t20_hattyu as t20 left join t21_hattyu as t21 on t20.発注番号 = t21.発注番号 and t20.発注番号枝番 = t21.発注番号枝番 WHERE t20.会社コード = 'ZENBI'   and t20.発注番号枝番 = (SELECT MAX(t20M.発注番号枝番) FROM t20_hattyu as t20M where t20.発注番号 = t20M.発注番号)  ORDER BY  t20.発注日, t20.発注番号, t20.発注番号枝番, t21.行番号
+2019/10/06 13:14:57   ERR***** データ取得失敗：ERROR: 42P01: missing FROM-clause entry for table "t11"
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+ SELECT t20.* ,t21.行番号 ,t21.メーカー ,t21.品名 ,t21.型式 ,t11.発注残数 ,t11.仕入数量 from t20_hattyu as t20 left join t21_hattyu as t21 on t20.発注番号 = t21.発注番号 and t20.発注番号枝番 = t21.発注番号枝番 WHERE t20.会社コード = 'ZENBI'   and t20.発注番号枝番 = (SELECT MAX(t20M.発注番号枝番) FROM t20_hattyu as t20M where t20.発注番号 = t20M.発注番号)  ORDER BY  t20.発注日, t20.発注番号, t20.発注番号枝番, t21.行番号
+2019/10/06 14:47:24   ERR***** データ取得失敗：The Connection is broken.
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+ SELECT t20.* ,t21.行番号 ,t21.メーカー ,t21.品名 ,t21.型式 ,t21.発注残数 ,t21.仕入数量 ,t21.入庫数 ,t21.未入庫数 from t20_hattyu as t20 left join t21_hattyu as t21 on t20.発注番号 = t21.発注番号 and t20.発注番号枝番 = t21.発注番号枝番 WHERE t20.会社コード = 'ZENBI'   and t20.発注番号枝番 = (SELECT MAX(t20M.発注番号枝番) FROM t20_hattyu as t20M where t20.発注番号 = t20M.発注番号)  ORDER BY  t20.発注日, t20.発注番号, t20.発注番号枝番, t21.行番号
+2019/10/06 15:07:43   ERR***** データ取得失敗：ERROR: 42P01: missing FROM-clause entry for table "t10"
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+ SELECT t20.* ,t21.行番号 ,t21.メーカー ,t21.品名 ,t21.型式 ,t21.発注残数 ,t21.仕入数量 ,t21.入庫数 ,t21.未入庫数 from t20_hattyu as t20 left join t21_hattyu as t21 on t20.発注番号 = t21.発注番号 and t20.発注番号枝番 = t21.発注番号枝番 WHERE t20.会社コード = 'ZENBI'   and t20.発注番号枝番 = (SELECT MAX(t20M.発注番号枝番) FROM t20_hattyu as t20M where t20.発注番号 = t20M.発注番号)  AND  t10.受注日 >= '2019/09/22' AND  t10.受注日 <= '2019/10/06' AND  t10.取消区分 = 0 ORDER BY  t20.発注日, t20.発注番号, t20.発注番号枝番, t21.行番号
+2019/10/06 15:09:29   ERR***** データ取得失敗：ERROR: 42P01: missing FROM-clause entry for table "t10"
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+ SELECT t20.* ,t21.行番号 ,t21.メーカー ,t21.品名 ,t21.型式 ,t21.発注残数 ,t21.仕入数量 ,t21.入庫数 ,t21.未入庫数 from t20_hattyu as t20 left join t21_hattyu as t21 on t20.発注番号 = t21.発注番号 and t20.発注番号枝番 = t21.発注番号枝番 WHERE t20.会社コード = 'ZENBI'   and t20.発注番号枝番 = (SELECT MAX(t20M.発注番号枝番) FROM t20_hattyu as t20M where t20.発注番号 = t20M.発注番号)  AND  t20.発注日 >= '2019/09/22' AND  t10.発注日 <= '2019/10/06' AND  t20.取消区分 = 0 ORDER BY  t20.発注日, t20.発注番号, t20.発注番号枝番, t21.行番号
+2019/10/06 15:10:02   ERR***** データ取得失敗：ERROR: 42P01: missing FROM-clause entry for table "t10"
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+ SELECT t20.* ,t21.行番号 ,t21.メーカー ,t21.品名 ,t21.型式 ,t21.発注残数 ,t21.仕入数量 ,t21.入庫数 ,t21.未入庫数 from t20_hattyu as t20 left join t21_hattyu as t21 on t20.発注番号 = t21.発注番号 and t20.発注番号枝番 = t21.発注番号枝番 WHERE t20.会社コード = 'ZENBI'   and t20.発注番号枝番 = (SELECT MAX(t20M.発注番号枝番) FROM t20_hattyu as t20M where t20.発注番号 = t20M.発注番号)  AND  t20.発注日 >= '2019/09/22' AND  t10.発注日 <= '2019/10/06' AND  t20.取消区分 = 0 ORDER BY  t20.発注日, t20.発注番号, t20.発注番号枝番, t21.行番号
+2019/10/06 16:23:30   ERR***** データ取得失敗：The Connection is broken.
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT * FROM public.m10_customer WHERE 会社コード = 'ZENBI'
+20/10/2019 10.20.48   ERR***** データ取得失敗：The Connection is broken.
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+ SELECT  t10.受注番号,t10.受注番号枝番,t10.受注日,t10.取消区分,t10.客先番号,t10.見積番号,t10.見積番号枝番,t10.見積日,t10.見積有効期限,t10.得意先コード,t10.得意先名,t10.得意先郵便番号,t10.得意先住所,t10.得意先電話番号,t10.得意先ＦＡＸ,t10.得意先担当者名,t10.得意先担当者役職,t10.ＶＡＴ,t10.通貨,t10.見積金額_外貨,t10.見積金額,t10.仕入金額,t10.粗利額,t10.支払条件,t10.営業担当者,t10.入力担当者,t10.備考,t10.登録日,t10.更新者,t10.更新日 FROM t10_cymnhd t10  left join t11_cymndt t11  on (t10.受注番号 = t11.受注番号 and t10.受注番号枝番 = t11.受注番号枝番) WHERE t10.会社コード = 'ZENBI'  AND t10.受注日 >= '2019/10/06' AND t10.受注日 <= '2019/10/20' AND t10.取消区分 = 0 group by  t10.受注番号,t10.受注番号枝番,t10.受注日,t10.取消区分,t10.客先番号,t10.見積番号,t10.見積番号枝番,t10.見積日,t10.見積有効期限,t10.得意先コード,t10.得意先名,t10.得意先郵便番号,t10.得意先住所,t10.得意先電話番号,t10.得意先ＦＡＸ,t10.得意先担当者名,t10.得意先担当者役職,t10.ＶＡＴ,t10.通貨,t10.見積金額_外貨,t10.見積金額,t10.仕入金額,t10.粗利額,t10.支払条件,t10.営業担当者,t10.入力担当者,t10.備考,t10.登録日,t10.更新者,t10.更新日 ORDER BY t10.登録日 DESC
+20/10/2019 11.10.58   ERR***** データ取得失敗：ERROR: 42P01: missing FROM-clause entry for table "m21"
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT sum(m21.現在庫数) as 在庫数量  from t45_shukodt t45  WHERE t45.会社コード = 'ZENBI' AND  t45.受注番号 = 'souko_A' AND  t45.受注番号枝番 = 'souko_A' AND  t45.行番号 = 'souko_A'
+20/10/2019 11.18.16   ERR***** データ取得失敗：ERROR: 42P01: missing FROM-clause entry for table "m21"
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT sum(m21.現在庫数) as 在庫数量  from t45_shukodt t45  WHERE t45.会社コード = 'ZENBI' AND  t45.受注番号 = 'AO10200572' AND  t45.受注番号枝番 = '1' AND  t45.行番号 = '1' AND  t45.出庫区分 = 2
+20/10/2019 11.21.40   ERR***** データ取得失敗：ERROR: 42P01: missing FROM-clause entry for table "m21"
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT sum(m21.現在庫数) as 在庫数量  from t45_shukodt t45  WHERE t45.会社コード = 'ZENBI' AND  t45.受注番号 = 'AO10200572' AND  t45.受注番号枝番 = '1' AND  t45.行番号 = 1 AND  t45.出庫区分 = 2
+20/10/2019 11.22.47   ERR***** データ取得失敗：ERROR: 42883: operator does not exist: character = integer
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT 出庫数量  from t45_shukodt t45  WHERE t45.会社コード = 'ZENBI' AND  t45.受注番号 = 'AO10200572' AND  t45.受注番号枝番 = '1' AND  t45.行番号 = 1 AND  t45.出庫区分 = 2
+20/10/2019 12.16.24   ERR***** データベース接続失敗
+データベースの接続に失敗しました。
+	　 FATAL: 3D000: database "HIS SHIMADA" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler..ctor(String prmSvAdr, String prmPortNo, String prmDbNm, String prmUserId, String prmPswd, Int16 prmTimeout) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 77
+   場所 UtilMDL.DB.UtilPostgresDebugger..ctor(String prmSvAdr, String prmPortNo, String prmDbNm, String prmUserId, String prmPswd, String prmFileNm, Boolean prmDebugFlg, Boolean prmConsoleWrite, Int16 prmTimeout) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 91
+20/10/2019 12.17.22   ERR***** データベース接続失敗
+データベースの接続に失敗しました。
+	　 FATAL: 3D000: database "HIS SHIMADA" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler..ctor(String prmSvAdr, String prmPortNo, String prmDbNm, String prmUserId, String prmPswd, Int16 prmTimeout) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 77
+   場所 UtilMDL.DB.UtilPostgresDebugger..ctor(String prmSvAdr, String prmPortNo, String prmDbNm, String prmUserId, String prmPswd, String prmFileNm, Boolean prmDebugFlg, Boolean prmConsoleWrite, Int16 prmTimeout) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 91
+20/10/2019 12.19.10   ERR***** データベース接続失敗
+データベースの接続に失敗しました。
+	　 FATAL: 3D000: database "HIS SHIMADA" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler..ctor(String prmSvAdr, String prmPortNo, String prmDbNm, String prmUserId, String prmPswd, Int16 prmTimeout) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 77
+   場所 UtilMDL.DB.UtilPostgresDebugger..ctor(String prmSvAdr, String prmPortNo, String prmDbNm, String prmUserId, String prmPswd, String prmFileNm, Boolean prmDebugFlg, Boolean prmConsoleWrite, Int16 prmTimeout) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 91
+20/10/2019 12.20.40   ERR***** データベース接続失敗
+データベースの接続に失敗しました。
+	　 FATAL: 3D000: database "HIS SHIMADA" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler..ctor(String prmSvAdr, String prmPortNo, String prmDbNm, String prmUserId, String prmPswd, Int16 prmTimeout) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 77
+   場所 UtilMDL.DB.UtilPostgresDebugger..ctor(String prmSvAdr, String prmPortNo, String prmDbNm, String prmUserId, String prmPswd, String prmFileNm, Boolean prmDebugFlg, Boolean prmConsoleWrite, Int16 prmTimeout) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 91
+20/10/2019 12.27.25   ERR***** データベース接続失敗
+データベースの接続に失敗しました。
+	　 FATAL: 3D000: database "HIS SHIMADA" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler..ctor(String prmSvAdr, String prmPortNo, String prmDbNm, String prmUserId, String prmPswd, Int16 prmTimeout) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 77
+   場所 UtilMDL.DB.UtilPostgresDebugger..ctor(String prmSvAdr, String prmPortNo, String prmDbNm, String prmUserId, String prmPswd, String prmFileNm, Boolean prmDebugFlg, Boolean prmConsoleWrite, Int16 prmTimeout) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 91
+20/10/2019 13.45.50   ERR***** データ取得失敗：ERROR: 42601: syntax error at or near "on"
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+ on t67.会社コード = m92.会社コード and t67."GLACCOUNT" = m92.勘定科目名称１ WHERE t67.会社コード = 'ZENBI' ORDER BY "TRANSACTIONID","KeyID"
+20/10/2019 13.47.39   ERR***** データ取得失敗：ERROR: 42601: syntax error at or near "on"
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+ on t67.会社コード = m92.会社コード and t67.GLACCOUNT = 'm92.勘定科目名称１' WHERE t67.会社コード = 'ZENBI' ORDER BY "TRANSACTIONID","KeyID"
+20/10/2019 13.49.02   ERR***** データ取得失敗：ERROR: 42601: syntax error at or near "from"
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+ select t67.*,m92.会計用勘定科目コード from t67_swkhd t67,m92_kanjo m92  from t67_swkhd t67 left join m92_kanjo m92  on t67.会社コード = m92.会社コード and t67.GLACCOUNT = 'm92.勘定科目名称１' WHERE t67.会社コード = 'ZENBI' ORDER BY "TRANSACTIONID","KeyID"
+20/10/2019 13.50.46   ERR***** データ取得失敗：ERROR: 42703: column t67.glaccount does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+select t67.*,m92.会計用勘定科目コード from t67_swkhd t67 left join m92_kanjo m92  on t67.会社コード = m92.会社コード and t67.GLACCOUNT = 'm92.勘定科目名称１' WHERE t67.会社コード = 'ZENBI' ORDER BY "TRANSACTIONID","KeyID"
+20/10/2019 13.52.55   ERR***** データ取得失敗：ERROR: 42703: column t67.glaccount does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+select t67.*,m92.会計用勘定科目コード from t67_swkhd t67 left join m92_kanjo m92  on t67.会社コード = m92.会社コード and t67.GLACCOUNT = 'm92.勘定科目名称１' WHERE t67.会社コード = 'ZENBI' ORDER BY "TRANSACTIONID","KeyID"
+20/10/2019 13.53.54   ERR***** データ取得失敗：ERROR: 42601: syntax error at or near "["
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+select t67.*,m92.会計用勘定科目コード from t67_swkhd t67 left join m92_kanjo m92  on t67.会社コード = m92.会社コード and t67.[GLACCOUNT] = 'm92.勘定科目名称１' WHERE t67.会社コード = 'ZENBI' ORDER BY "TRANSACTIONID","KeyID"
+20/10/2019 14.54.27   ERR***** データ取得失敗：ERROR: 42P01: missing FROM-clause entry for table "t67"
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+select 文字３ from m90_hanyo  WHERE t67.会社コード = 'ZENBI'   and 固定キー ='1'   and 文字１ ='振込入金' ORDER BY "TRANSACTIONID","KeyID"
+20/10/2019 14.55.36   ERR***** データ取得失敗：ERROR: 42703: column "TRANSACTIONID" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+select 文字３ from m90_hanyo  WHERE 会社コード = 'ZENBI'   and 固定キー ='1'   and 文字１ ='振込入金' ORDER BY "TRANSACTIONID","KeyID"
+20/10/2019 14.57.12   ERR***** データ取得失敗：ERROR: 42703: column "TRANSACTIONID" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+select 文字３ from m90_hanyo  WHERE 会社コード = 'ZENBI'   and 固定キー ='1'   and 文字１ ='振込入金' ORDER BY "TRANSACTIONID","KeyID"
+20/10/2019 14.58.23   ERR***** データ取得失敗：ERROR: 42703: column "TRANSACTIONID" does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+select 文字３ from m90_hanyo  WHERE 会社コード = 'ZENBI'   and 固定キー ='1'   and 文字１ ='振込入金' ORDER BY "TRANSACTIONID","KeyID"
