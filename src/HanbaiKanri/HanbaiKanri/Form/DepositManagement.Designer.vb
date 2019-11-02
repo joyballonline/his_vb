@@ -26,11 +26,11 @@ Partial Class DepositManagement
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -40,6 +40,7 @@ Partial Class DepositManagement
         Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.BtnRegist = New System.Windows.Forms.Button()
         Me.BtnBack = New System.Windows.Forms.Button()
         Me.LblNo1 = New System.Windows.Forms.Label()
@@ -96,6 +97,7 @@ Partial Class DepositManagement
         Me.受注番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.請求情報請求番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.請求日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.入金予定日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.請求金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.請求情報入金額計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.請求情報入金額計固定 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -136,7 +138,7 @@ Partial Class DepositManagement
         'LblNo1
         '
         Me.LblNo1.BackColor = System.Drawing.Color.Transparent
-        Me.LblNo1.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblNo1.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblNo1.Location = New System.Drawing.Point(1316, 65)
         Me.LblNo1.Name = "LblNo1"
         Me.LblNo1.Size = New System.Drawing.Size(22, 22)
@@ -151,7 +153,7 @@ Partial Class DepositManagement
         Me.TxtHistoryCount.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtHistoryCount.Location = New System.Drawing.Point(1272, 65)
         Me.TxtHistoryCount.Name = "TxtHistoryCount"
-        Me.TxtHistoryCount.Size = New System.Drawing.Size(38, 37)
+        Me.TxtHistoryCount.Size = New System.Drawing.Size(38, 22)
         Me.TxtHistoryCount.TabIndex = 290
         Me.TxtHistoryCount.TabStop = False
         Me.TxtHistoryCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -160,11 +162,11 @@ Partial Class DepositManagement
         '
         Me.DtpDepositDate.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpDepositDate.CustomFormat = ""
-        Me.DtpDepositDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.DtpDepositDate.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpDepositDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.DtpDepositDate.Location = New System.Drawing.Point(291, 335)
         Me.DtpDepositDate.Name = "DtpDepositDate"
-        Me.DtpDepositDate.Size = New System.Drawing.Size(148, 37)
+        Me.DtpDepositDate.Size = New System.Drawing.Size(148, 22)
         Me.DtpDepositDate.TabIndex = 7
         Me.DtpDepositDate.TabStop = False
         Me.DtpDepositDate.Value = New Date(2018, 7, 25, 13, 29, 25, 0)
@@ -173,7 +175,7 @@ Partial Class DepositManagement
         '
         Me.LblRemarks.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblRemarks.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblRemarks.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblRemarks.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblRemarks.Location = New System.Drawing.Point(445, 335)
         Me.LblRemarks.Name = "LblRemarks"
         Me.LblRemarks.Size = New System.Drawing.Size(170, 22)
@@ -186,14 +188,14 @@ Partial Class DepositManagement
         Me.TxtRemarks.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtRemarks.Location = New System.Drawing.Point(621, 335)
         Me.TxtRemarks.Name = "TxtRemarks"
-        Me.TxtRemarks.Size = New System.Drawing.Size(645, 37)
+        Me.TxtRemarks.Size = New System.Drawing.Size(645, 22)
         Me.TxtRemarks.TabIndex = 8
         '
         'LblDepositDate
         '
         Me.LblDepositDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblDepositDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblDepositDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblDepositDate.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblDepositDate.Location = New System.Drawing.Point(187, 335)
         Me.LblDepositDate.Name = "LblDepositDate"
         Me.LblDepositDate.Size = New System.Drawing.Size(98, 22)
@@ -204,7 +206,7 @@ Partial Class DepositManagement
         'LblNo2
         '
         Me.LblNo2.BackColor = System.Drawing.Color.Transparent
-        Me.LblNo2.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblNo2.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblNo2.Location = New System.Drawing.Point(1316, 198)
         Me.LblNo2.Name = "LblNo2"
         Me.LblNo2.Size = New System.Drawing.Size(22, 22)
@@ -219,7 +221,7 @@ Partial Class DepositManagement
         Me.TxtDepositCount.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtDepositCount.Location = New System.Drawing.Point(1272, 198)
         Me.TxtDepositCount.Name = "TxtDepositCount"
-        Me.TxtDepositCount.Size = New System.Drawing.Size(38, 37)
+        Me.TxtDepositCount.Size = New System.Drawing.Size(38, 22)
         Me.TxtDepositCount.TabIndex = 280
         Me.TxtDepositCount.TabStop = False
         Me.TxtDepositCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -277,7 +279,7 @@ Partial Class DepositManagement
         Me.LblBillingInfo.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblBillingInfo.Location = New System.Drawing.Point(13, 339)
         Me.LblBillingInfo.Name = "LblBillingInfo"
-        Me.LblBillingInfo.Size = New System.Drawing.Size(163, 30)
+        Me.LblBillingInfo.Size = New System.Drawing.Size(82, 15)
         Me.LblBillingInfo.TabIndex = 279
         Me.LblBillingInfo.Text = "■請求情報"
         '
@@ -287,7 +289,7 @@ Partial Class DepositManagement
         Me.LblHistory.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblHistory.Location = New System.Drawing.Point(12, 68)
         Me.LblHistory.Name = "LblHistory"
-        Me.LblHistory.Size = New System.Drawing.Size(160, 30)
+        Me.LblHistory.Size = New System.Drawing.Size(80, 15)
         Me.LblHistory.TabIndex = 278
         Me.LblHistory.Text = "■入金済み"
         '
@@ -297,7 +299,7 @@ Partial Class DepositManagement
         Me.LblDeposit.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblDeposit.Location = New System.Drawing.Point(13, 203)
         Me.LblDeposit.Name = "LblDeposit"
-        Me.LblDeposit.Size = New System.Drawing.Size(163, 30)
+        Me.LblDeposit.Size = New System.Drawing.Size(82, 15)
         Me.LblDeposit.TabIndex = 277
         Me.LblDeposit.Text = "■入金入力"
         '
@@ -305,7 +307,7 @@ Partial Class DepositManagement
         '
         Me.DgvBillingInfo.AllowUserToAddRows = False
         Me.DgvBillingInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvBillingInfo.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.InfoNo, Me.受注番号, Me.請求情報請求番号, Me.請求日, Me.請求金額, Me.請求情報入金額計, Me.請求情報入金額計固定, Me.請求情報請求残高, Me.請求情報請求残高固定, Me.入金額, Me.請求区分, Me.受注番号枝番, Me.得意先コード, Me.客先番号})
+        Me.DgvBillingInfo.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.InfoNo, Me.受注番号, Me.請求情報請求番号, Me.請求日, Me.入金予定日, Me.請求金額, Me.請求情報入金額計, Me.請求情報入金額計固定, Me.請求情報請求残高, Me.請求情報請求残高固定, Me.入金額, Me.請求区分, Me.受注番号枝番, Me.得意先コード, Me.客先番号})
         Me.DgvBillingInfo.Location = New System.Drawing.Point(12, 363)
         Me.DgvBillingInfo.Name = "DgvBillingInfo"
         Me.DgvBillingInfo.RowHeadersVisible = False
@@ -318,14 +320,14 @@ Partial Class DepositManagement
         Me.DgvHistory.AllowUserToAddRows = False
         Me.DgvHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvHistory.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.No, Me.請求番号, Me.入金済請求先, Me.入金番号, Me.入金日, Me.入金種目, Me.入金済入金額計, Me.備考})
-        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle15.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle15.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        DataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DgvHistory.DefaultCellStyle = DataGridViewCellStyle15
+        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle16.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle16.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle16.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DgvHistory.DefaultCellStyle = DataGridViewCellStyle16
         Me.DgvHistory.Location = New System.Drawing.Point(10, 92)
         Me.DgvHistory.Name = "DgvHistory"
         Me.DgvHistory.RowHeadersVisible = False
@@ -379,8 +381,8 @@ Partial Class DepositManagement
         '
         '入金済入金額計
         '
-        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.入金済入金額計.DefaultCellStyle = DataGridViewCellStyle14
+        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.入金済入金額計.DefaultCellStyle = DataGridViewCellStyle15
         Me.入金済入金額計.HeaderText = "入金額計"
         Me.入金済入金額計.Name = "入金済入金額計"
         Me.入金済入金額計.ReadOnly = True
@@ -408,8 +410,8 @@ Partial Class DepositManagement
         '
         '行番号
         '
-        DataGridViewCellStyle16.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.行番号.DefaultCellStyle = DataGridViewCellStyle16
+        DataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.行番号.DefaultCellStyle = DataGridViewCellStyle17
         Me.行番号.HeaderText = "行番号"
         Me.行番号.Name = "行番号"
         Me.行番号.ReadOnly = True
@@ -417,9 +419,9 @@ Partial Class DepositManagement
         '
         '入力入金額
         '
-        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle17.Format = "N0"
-        Me.入力入金額.DefaultCellStyle = DataGridViewCellStyle17
+        DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle18.Format = "N0"
+        Me.入力入金額.DefaultCellStyle = DataGridViewCellStyle18
         Me.入力入金額.HeaderText = "今回入金額"
         Me.入力入金額.MaxInputLength = 14
         Me.入力入金額.Name = "入力入金額"
@@ -442,7 +444,7 @@ Partial Class DepositManagement
         'LblNo3
         '
         Me.LblNo3.BackColor = System.Drawing.Color.Transparent
-        Me.LblNo3.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblNo3.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblNo3.Location = New System.Drawing.Point(1316, 335)
         Me.LblNo3.Name = "LblNo3"
         Me.LblNo3.Size = New System.Drawing.Size(22, 22)
@@ -457,7 +459,7 @@ Partial Class DepositManagement
         Me.TxtBillingCount.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtBillingCount.Location = New System.Drawing.Point(1272, 335)
         Me.TxtBillingCount.Name = "TxtBillingCount"
-        Me.TxtBillingCount.Size = New System.Drawing.Size(38, 37)
+        Me.TxtBillingCount.Size = New System.Drawing.Size(38, 22)
         Me.TxtBillingCount.TabIndex = 295
         Me.TxtBillingCount.TabStop = False
         Me.TxtBillingCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -484,7 +486,7 @@ Partial Class DepositManagement
         '
         Me.LblMode.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblMode.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblMode.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblMode.Location = New System.Drawing.Point(1106, 9)
         Me.LblMode.Name = "LblMode"
         Me.LblMode.Size = New System.Drawing.Size(233, 22)
@@ -501,7 +503,7 @@ Partial Class DepositManagement
         Me.TxtIDRCurrency.MaxLength = 20
         Me.TxtIDRCurrency.Name = "TxtIDRCurrency"
         Me.TxtIDRCurrency.ReadOnly = True
-        Me.TxtIDRCurrency.Size = New System.Drawing.Size(70, 39)
+        Me.TxtIDRCurrency.Size = New System.Drawing.Size(70, 23)
         Me.TxtIDRCurrency.TabIndex = 326
         Me.TxtIDRCurrency.TabStop = False
         Me.TxtIDRCurrency.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -574,8 +576,8 @@ Partial Class DepositManagement
         '
         '行番号_仕訳
         '
-        DataGridViewCellStyle18.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.行番号_仕訳.DefaultCellStyle = DataGridViewCellStyle18
+        DataGridViewCellStyle19.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.行番号_仕訳.DefaultCellStyle = DataGridViewCellStyle19
         Me.行番号_仕訳.HeaderText = "行番号"
         Me.行番号_仕訳.Name = "行番号_仕訳"
         Me.行番号_仕訳.ReadOnly = True
@@ -633,11 +635,19 @@ Partial Class DepositManagement
         Me.請求日.ReadOnly = True
         Me.請求日.Width = 150
         '
+        '入金予定日
+        '
+        DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.入金予定日.DefaultCellStyle = DataGridViewCellStyle8
+        Me.入金予定日.HeaderText = "入金予定日"
+        Me.入金予定日.Name = "入金予定日"
+        Me.入金予定日.ReadOnly = True
+        '
         '請求金額
         '
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.請求金額.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.請求金額.DefaultCellStyle = DataGridViewCellStyle9
         Me.請求金額.HeaderText = "既請求額"
         Me.請求金額.Name = "請求金額"
         Me.請求金額.ReadOnly = True
@@ -645,9 +655,9 @@ Partial Class DepositManagement
         '
         '請求情報入金額計
         '
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.請求情報入金額計.DefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.請求情報入金額計.DefaultCellStyle = DataGridViewCellStyle10
         Me.請求情報入金額計.HeaderText = "既入金額"
         Me.請求情報入金額計.Name = "請求情報入金額計"
         Me.請求情報入金額計.ReadOnly = True
@@ -655,8 +665,8 @@ Partial Class DepositManagement
         '
         '請求情報入金額計固定
         '
-        DataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.請求情報入金額計固定.DefaultCellStyle = DataGridViewCellStyle10
+        DataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.請求情報入金額計固定.DefaultCellStyle = DataGridViewCellStyle11
         Me.請求情報入金額計固定.HeaderText = "請求情報入金額計固定"
         Me.請求情報入金額計固定.Name = "請求情報入金額計固定"
         Me.請求情報入金額計固定.ReadOnly = True
@@ -664,9 +674,9 @@ Partial Class DepositManagement
         '
         '請求情報請求残高
         '
-        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.請求情報請求残高.DefaultCellStyle = DataGridViewCellStyle11
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.請求情報請求残高.DefaultCellStyle = DataGridViewCellStyle12
         Me.請求情報請求残高.HeaderText = "未入金額"
         Me.請求情報請求残高.Name = "請求情報請求残高"
         Me.請求情報請求残高.ReadOnly = True
@@ -674,8 +684,8 @@ Partial Class DepositManagement
         '
         '請求情報請求残高固定
         '
-        DataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.請求情報請求残高固定.DefaultCellStyle = DataGridViewCellStyle12
+        DataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.請求情報請求残高固定.DefaultCellStyle = DataGridViewCellStyle13
         Me.請求情報請求残高固定.HeaderText = "請求情報請求残高固定"
         Me.請求情報請求残高固定.Name = "請求情報請求残高固定"
         Me.請求情報請求残高固定.ReadOnly = True
@@ -683,9 +693,9 @@ Partial Class DepositManagement
         '
         '入金額
         '
-        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle13.Format = "N0"
-        Me.入金額.DefaultCellStyle = DataGridViewCellStyle13
+        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle14.Format = "N0"
+        Me.入金額.DefaultCellStyle = DataGridViewCellStyle14
         Me.入金額.HeaderText = "今回入金額"
         Me.入金額.MaxInputLength = 14
         Me.入金額.Name = "入金額"
@@ -797,20 +807,6 @@ Partial Class DepositManagement
     Friend WithEvents 行番号 As DataGridViewTextBoxColumn
     Friend WithEvents 入力入金額 As DataGridViewTextBoxColumn
     Friend WithEvents 入力入金額_計算用 As DataGridViewTextBoxColumn
-    Friend WithEvents InfoNo As DataGridViewTextBoxColumn
-    Friend WithEvents 受注番号 As DataGridViewTextBoxColumn
-    Friend WithEvents 請求情報請求番号 As DataGridViewTextBoxColumn
-    Friend WithEvents 請求日 As DataGridViewTextBoxColumn
-    Friend WithEvents 請求金額 As DataGridViewTextBoxColumn
-    Friend WithEvents 請求情報入金額計 As DataGridViewTextBoxColumn
-    Friend WithEvents 請求情報入金額計固定 As DataGridViewTextBoxColumn
-    Friend WithEvents 請求情報請求残高 As DataGridViewTextBoxColumn
-    Friend WithEvents 請求情報請求残高固定 As DataGridViewTextBoxColumn
-    Friend WithEvents 入金額 As DataGridViewTextBoxColumn
-    Friend WithEvents 請求区分 As DataGridViewTextBoxColumn
-    Friend WithEvents 受注番号枝番 As DataGridViewTextBoxColumn
-    Friend WithEvents 得意先コード As DataGridViewTextBoxColumn
-    Friend WithEvents 客先番号 As DataGridViewTextBoxColumn
     Friend WithEvents 請求番号_仕訳 As DataGridViewTextBoxColumn
     Friend WithEvents 請求区分_仕訳 As DataGridViewTextBoxColumn
     Friend WithEvents 請求日_仕訳 As DataGridViewTextBoxColumn
@@ -824,4 +820,19 @@ Partial Class DepositManagement
     Friend WithEvents 入金種目名_仕訳 As DataGridViewTextBoxColumn
     Friend WithEvents 入金額_仕訳 As DataGridViewTextBoxColumn
     Friend WithEvents 客先番号_仕訳 As DataGridViewTextBoxColumn
+    Friend WithEvents InfoNo As DataGridViewTextBoxColumn
+    Friend WithEvents 受注番号 As DataGridViewTextBoxColumn
+    Friend WithEvents 請求情報請求番号 As DataGridViewTextBoxColumn
+    Friend WithEvents 請求日 As DataGridViewTextBoxColumn
+    Friend WithEvents 入金予定日 As DataGridViewTextBoxColumn
+    Friend WithEvents 請求金額 As DataGridViewTextBoxColumn
+    Friend WithEvents 請求情報入金額計 As DataGridViewTextBoxColumn
+    Friend WithEvents 請求情報入金額計固定 As DataGridViewTextBoxColumn
+    Friend WithEvents 請求情報請求残高 As DataGridViewTextBoxColumn
+    Friend WithEvents 請求情報請求残高固定 As DataGridViewTextBoxColumn
+    Friend WithEvents 入金額 As DataGridViewTextBoxColumn
+    Friend WithEvents 請求区分 As DataGridViewTextBoxColumn
+    Friend WithEvents 受注番号枝番 As DataGridViewTextBoxColumn
+    Friend WithEvents 得意先コード As DataGridViewTextBoxColumn
+    Friend WithEvents 客先番号 As DataGridViewTextBoxColumn
 End Class
