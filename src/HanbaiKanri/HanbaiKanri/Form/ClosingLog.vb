@@ -81,7 +81,7 @@ Public Class ClosingLog
         Try
 
             '締処理日
-            Sql = "SELECT 今回締日"
+            Sql = "SELECT COALESCE(今回締日,current_date) 今回締日"
             Sql += " FROM m01_company"
             Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
 
@@ -147,8 +147,8 @@ Public Class ClosingLog
 
 
         Me.MaximizeBox = False
-        Me.Width = 1366
-        Me.Height = 600
+        'Me.Width = 1366
+        'Me.Height = 600
         Me.Left = 67
         Me.Top = 180
 
@@ -3355,7 +3355,15 @@ Public Class ClosingLog
         sOutFile = sOutPath & "\siwake.csv"
 
         '書き込むファイルを開く
-        Dim sr As New System.IO.StreamWriter(sOutFile, False, enc)
+        Dim sr As System.IO.StreamWriter
+        Try
+            Dim srx As New System.IO.StreamWriter(sOutFile, False, enc)
+            sr = srx
+        Catch ex As Exception
+            Cursor.Current = Cursors.Default
+            MsgBox("Please close siwake.csv")
+            Exit Sub
+        End Try
 
         For i As Integer = 0 To ds1.Tables(RS).Rows.Count - 1
             '列名
@@ -3531,7 +3539,6 @@ Public Class ClosingLog
                 Dim valDate As String = shiwakeData.Tables(RS).Rows(i)(2).ToString()
                 Dim valTransactionid As String = shiwakeData.Tables(RS).Rows(i)(3).ToString()
                 Dim ci As New System.Globalization.CultureInfo("ja-JP")
-
                 Dim nextTransactionid As String = ""
                 If shiwakeData.Tables(RS).Rows.Count - 1 > i Then
                     nextTransactionid = shiwakeData.Tables(RS).Rows(i + 1)(3).ToString() '次のvalTransactionid（判定用）
@@ -3561,8 +3568,9 @@ Public Class ClosingLog
                     shiwakeSql += "   and 文字１ ='" & strTmp.Substring(1) & "'"
 
                     Dim shiwakeData2 As DataSet = _db.selectDB(shiwakeSql, RS, reccnt) 'reccnt:(省略可能)SELECT文の取得レコード件数
-
-                    valGlaccountCD = shiwakeData2.Tables(RS).Rows(0)("文字３").ToString()
+                    If reccnt > 0 Then
+                        valGlaccountCD = shiwakeData2.Tables(RS).Rows(0)("文字３").ToString()
+                    End If
                 End If
 
                 '初回に必ず入れる
@@ -3680,7 +3688,7 @@ Public Class ClosingLog
                 Console.WriteLine(ex.Message)
             End Try
 
-        Catch ex As Exception
+            'Catch ex As Exception
         Catch lex As UsrDefException
             Cursor.Current = Cursors.Default
             lex.dspMsg()
