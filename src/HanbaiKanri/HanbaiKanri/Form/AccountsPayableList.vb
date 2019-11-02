@@ -415,7 +415,7 @@ Public Class AccountsPayableList
     't25_nkinhd, t27_nkinkshihd, t23_skyuhd
     Private Sub updateData()
 
-        Dim dtNow As String = formatDatetime(DateTime.Now)
+        Dim dtNow As String = UtilClass.formatDatetime(DateTime.Now)
         Dim Sql As String = ""
 
         If ds.Tables(RS).Rows(0)("更新日") = DgvKike.Rows(DgvKike.CurrentCell.RowIndex).Cells("更新日").Value Then
