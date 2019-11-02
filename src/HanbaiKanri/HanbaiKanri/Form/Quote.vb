@@ -2995,7 +2995,7 @@ Public Class Quote
 
             Next
 
-            currentRow += 2
+            currentRow += 1
 
             '言語の判定
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then  '英語
