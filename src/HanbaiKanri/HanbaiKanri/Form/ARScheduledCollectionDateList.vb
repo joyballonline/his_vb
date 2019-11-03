@@ -96,8 +96,9 @@ Public Class ARScheduledCollectionDateList
             DgvCymndt.Columns("請求日").HeaderText = "BillingDate"
             DgvCymndt.Columns("請求金額").HeaderText = "TotalBillingAmount"
             DgvCymndt.Columns("入金額").HeaderText = "MoneyReceiptAmount"
-            DgvCymndt.Columns("売掛金残高").HeaderText = "APBalance"
+            DgvCymndt.Columns("売掛金残高").HeaderText = "ARBalance"
             DgvCymndt.Columns("備考").HeaderText = "Remarks"
+            DgvCymndt.Columns("通貨_外貨").HeaderText = "Currency"
 
         End If
 
@@ -138,10 +139,11 @@ Public Class ARScheduledCollectionDateList
                 DgvCymndt.Rows(i).Cells("得意先名").Value = dsSkyuhd.Tables(RS).Rows(i)("得意先名")
                 DgvCymndt.Rows(i).Cells("請求番号").Value = dsSkyuhd.Tables(RS).Rows(i)("請求番号")
                 DgvCymndt.Rows(i).Cells("請求日").Value = dsSkyuhd.Tables(RS).Rows(i)("請求日").ToShortDateString()
-                DgvCymndt.Rows(i).Cells("請求金額").Value = dsSkyuhd.Tables(RS).Rows(i)("請求金額計")
-                DgvCymndt.Rows(i).Cells("入金額").Value = dsSkyuhd.Tables(RS).Rows(i)("入金額計")
-                DgvCymndt.Rows(i).Cells("売掛金残高").Value = dsSkyuhd.Tables(RS).Rows(i)("売掛残高")
+                DgvCymndt.Rows(i).Cells("請求金額").Value = dsSkyuhd.Tables(RS).Rows(i)("請求金額計_外貨")
+                DgvCymndt.Rows(i).Cells("入金額").Value = dsSkyuhd.Tables(RS).Rows(i)("入金額計_外貨")
+                DgvCymndt.Rows(i).Cells("売掛金残高").Value = dsSkyuhd.Tables(RS).Rows(i)("売掛残高_外貨")
                 DgvCymndt.Rows(i).Cells("備考").Value = dsSkyuhd.Tables(RS).Rows(i)("備考1")
+                DgvCymndt.Rows(i).Cells("通貨_外貨").Value = getCurrencyName(dsSkyuhd.Tables(RS).Rows(i)("通貨"))
 
             Next
 
@@ -216,8 +218,9 @@ Public Class ARScheduledCollectionDateList
                 sheet.Range("D1").Value = "BillingDate"
                 sheet.Range("E1").Value = "TotalBillingAmount"
                 sheet.Range("F1").Value = "MoneyReceiptAmount"
-                sheet.Range("G1").Value = "APBalance"
+                sheet.Range("G1").Value = "ARBalance"
                 sheet.Range("H1").Value = "Remarks"
+                sheet.Range("I1").Value = "Currency"
 
             End If
 
@@ -233,6 +236,7 @@ Public Class ARScheduledCollectionDateList
                 sheet.Range("F" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("入金額").Value
                 sheet.Range("G" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("売掛金残高").Value
                 sheet.Range("H" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("備考").Value
+                sheet.Range("I" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("通貨_外貨").Value
 
             Next
 
@@ -306,6 +310,18 @@ Public Class ARScheduledCollectionDateList
             Return True
         End If
         Return True
+    End Function
+
+    Public Function getCurrencyName(ByVal k_ As String) As String
+        Dim Sql As String
+        Sql = " and 採番キー = " & k_
+        Dim ds As DataSet = getDsData("m25_currency", Sql)
+        If ds.Tables(RS).Rows(0)("通貨コード") Is DBNull.Value Then
+            Return "IDR"
+        Else
+            Return (ds.Tables(RS).Rows(0)("通貨コード"))
+        End If
+
     End Function
 
 End Class
