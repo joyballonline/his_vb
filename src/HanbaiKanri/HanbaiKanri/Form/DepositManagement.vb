@@ -249,7 +249,7 @@ Public Class DepositManagement
     '請求先情報
     Private Sub setDgvCustomer()
         Dim Sql As String = ""
-        Dim AccountsReceivable As Long
+        Dim AccountsReceivable As Decimal 'Long
         Dim curds As DataSet  'm25_currency
         Dim cur As String
 
