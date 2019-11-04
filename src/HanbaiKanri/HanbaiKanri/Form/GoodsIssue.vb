@@ -856,7 +856,7 @@ Public Class GoodsIssue
                 '仕入区分が2（在庫引当）の場合、作成済みの仮出庫データを「取消区分=0, 取消日=Datetime.Date」でUPDATEする
                 If DgvAdd.Rows(i).Cells("仕入区分値").Value = CommonConst.Sire_KBN_Zaiko Then
 
-                    Sql = " SELECT t44.出庫番号 "
+                    Sql = " SELECT t44.出庫番号,t45.行番号"
                     Sql += " FROM "
                     Sql += " t44_shukohd t44 "
                     Sql += " INNER JOIN "
@@ -869,8 +869,6 @@ Public Class GoodsIssue
                     Sql += " AND t44.受注番号枝番 = '" & Suffix & "'"
                     Sql += " AND t45.出庫区分 = '" & CommonConst.SHUKO_KBN_TMP & "'" '仮出庫のものを取得
                     Sql += " AND t44.取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'" '見取消のもの
-                    Sql += " GROUP bY "
-                    Sql += " t44.出庫番号 "
 
                     Dim shukkoTmpData As DataSet = _db.selectDB(Sql, RS, reccnt)
 
@@ -911,11 +909,8 @@ Public Class GoodsIssue
                         Sql += "='"
                         Sql += frmC01F10_Login.loginValue.BumonCD
                         Sql += "'"
-                        Sql += " AND"
-                        Sql += " 伝票番号"
-                        Sql += "='"
-                        Sql += shukkoTmpData.Tables(RS).Rows(x)("出庫番号")
-                        Sql += "' "
+                        Sql += " AND 伝票番号 ='" & shukkoTmpData.Tables(RS).Rows(x)("出庫番号") & "' "
+                        Sql += " AND 行番号 ='" & shukkoTmpData.Tables(RS).Rows(x)("行番号") & "' "
 
                         _db.executeDB(Sql)
 
