@@ -552,7 +552,7 @@ Public Class GoodsIssueList
                 Sql += ", '" & dsShukohd.Tables(RS).Rows(0)("備考") & "'"                '備考
                 Sql += ", null"     '取消日
                 Sql += ", 0"     '取消区分
-                Sql += ", '" & UtilClass.strFormatDate(dsShukohd.Tables(RS).Rows(0)("出庫日")) & "'"     '出庫日
+                Sql += ", '" & UtilClass.formatDatetime(dsShukohd.Tables(RS).Rows(0)("出庫日")) & "'"     '出庫日
                 Sql += ", '" & UtilClass.formatDatetime(dtNow) & "'"                 '登録日
                 Sql += ", '" & UtilClass.formatDatetime(dtNow) & "'"                 '更新日
                 Sql += ", '" & frmC01F10_Login.loginValue.TantoNM & "'"     '更新者
@@ -586,7 +586,6 @@ Public Class GoodsIssueList
                     Sql += ", '" & dsShuko.Tables(RS).Rows(i)("型式") & "'"                '型式
                     Sql += ", '" & dsShuko.Tables(RS).Rows(i)("仕入先名") & "'"            '仕入先名
                     Sql += ", " & UtilClass.formatNumber(dsShuko.Tables(RS).Rows(i)("売単価"))    '売単価
-                    'Sql += ", " & DgvItemList.Rows(i).Cells("数量").Value.ToString                   '出庫数量
                     Sql += ", " & UtilClass.formatNumber(dsShuko.Tables(RS).Rows(i)("出庫数量"))        '数量
                     Sql += ", '" & dsShuko.Tables(RS).Rows(i)("単位") & "'"                         '単位
                     Sql += ", '" & dsShuko.Tables(RS).Rows(i)("備考") & "'"                          '備考
@@ -600,28 +599,16 @@ Public Class GoodsIssueList
 
                     '在庫データの伝票番号と行番号を呼び出す（重要）
                     'inoutのロケ番号へ挿入
-                    Sql = "SELECT m21.伝票番号, m21.行番号 "
-                    Sql += " from m21_zaiko m21, t70_inout t70 "
+                    Sql = "SELECT ロケ番号 "
+                    Sql += " from t70_inout t70 "
 
-                    Sql += " WHERE m21.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                    Sql += " WHERE 会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
 
-                    Sql += " AND  m21.メーカー ILIKE '" & dsShuko.Tables(RS).Rows(i)("メーカー") & "'"
-                    Sql += " AND  m21.品名 ILIKE '" & dsShuko.Tables(RS).Rows(i)("品名") & "'"
-                    Sql += " AND  m21.型式 ILIKE '" & dsShuko.Tables(RS).Rows(i)("型式") & "'"
-                    Sql += " AND  m21.倉庫コード ILIKE '" & dsShuko.Tables(RS).Rows(i)("倉庫コード") & "'"
-                    Sql += " AND  m21.入出庫種別 ILIKE '" & CommonConst.INOUT_KBN_NORMAL.ToString & "'"　'入出庫種別(0：通常）
-                    Sql += " AND  m21.無効フラグ = " & CommonConst.CANCEL_KBN_ENABLED
-                    Sql += " AND  m21.現在庫数 <> 0"
-
-                    Sql += " AND m21.会社コード ILIKE t70.会社コード "
-                    Sql += " AND m21.倉庫コード ILIKE t70.倉庫コード "
-                    Sql += " AND m21.伝票番号 ILIKE t70.伝票番号 "
-                    Sql += " AND m21.行番号 = t70.行番号 "
-                    Sql += " AND t70.仕入区分 <> '" & CommonConst.Sire_KBN_Sire.ToString & "'"
+                    Sql += "   AND 伝票番号 = '" & dsShuko.Tables(RS).Rows(i)("出庫番号") & "'"
+                    Sql += "   AND   行番号 = '" & dsShuko.Tables(RS).Rows(i)("行番号") & "'"
 
                     '在庫マスタから現在庫数を取得
                     Dim dsZaiko As DataSet = _db.selectDB(Sql, RS, reccnt)
-
 
 
                     't70_inout にデータ登録
@@ -659,7 +646,7 @@ Public Class GoodsIssueList
                     Sql += "', '"
                     Sql += dsShuko.Tables(RS).Rows(i)("備考") '備考
                     Sql += "', '"
-                    Sql += UtilClass.strFormatDate(dsShukohd.Tables(RS).Rows(0)("出庫日")) '入出庫日
+                    Sql += UtilClass.formatDatetime(dsShukohd.Tables(RS).Rows(0)("出庫日")) '入出庫日
                     Sql += "', '"
                     Sql += CommonConst.CANCEL_KBN_ENABLED.ToString '取消区分
                     Sql += "', '"
@@ -667,7 +654,9 @@ Public Class GoodsIssueList
                     Sql += "', '"
                     Sql += UtilClass.formatDatetime(dtNow) '更新日
                     Sql += "', '"
-                    Sql += dsZaiko.Tables(RS).Rows(i)("伝票番号") & dsZaiko.Tables(RS).Rows(i)("行番号")
+                    'Sql += dsZaiko.Tables(RS).Rows(i)("伝票番号") & dsZaiko.Tables(RS).Rows(i)("行番号")
+                    Sql += dsZaiko.Tables(RS).Rows(0)("ロケ番号")
+
                     'Sql += "WH082601801"
 
                     'Sql += " ', '"
