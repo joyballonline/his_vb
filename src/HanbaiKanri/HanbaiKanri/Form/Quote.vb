@@ -3525,7 +3525,7 @@ Public Class Quote
 
         Dim ds As DataSet = getDsData("m25_currency", Sql)
 
-        'リードタイム単位の多言語対応
+        '通貨コードの多言語対応
 
         Return ds.Tables(RS).Rows(0)("通貨コード")
 
@@ -3562,7 +3562,4 @@ Public Class Quote
 
     End Sub
 
-    Private Sub DgvItemList_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DgvItemList.CellContentClick
-
-    End Sub
 End Class

@@ -643,7 +643,7 @@ Public Class PurchaseList
 
 
         '取消済みデータは取消操作不可能
-        If DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("取消").Value = CommonConst.CANCEL_KBN_DISABLED_TXT Then
+        If DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("取消").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_JPN, CommonConst.CANCEL_KBN_JPN_TXT, CommonConst.CANCEL_KBN_ENG_TXT) Then
             '取消データは選択できないアラートを出す
             _msgHd.dspMSG("cannotSelectTorikeshiData", frmC01F10_Login.loginValue.Language)
             Return
@@ -681,7 +681,7 @@ Public Class PurchaseList
 
         Dim Sql2 As String = ""
         Sql2 += "SELECT "
-        Sql2 += " * "
+        Sql2 += " *, coalesce(発注行番号, 行番号, 0) X "
         Sql2 += "FROM "
         Sql2 += "public"
         Sql2 += "."
@@ -746,7 +746,7 @@ Public Class PurchaseList
 
             For index1 As Integer = 0 To ds1.Tables(RS).Rows.Count() - 1
                 For index2 As Integer = 0 To ds2.Tables(RS).Rows.Count() - 1
-                    If ds1.Tables(RS).Rows(index1)("行番号") = ds2.Tables(RS).Rows(index2)("行番号") Then
+                    If ds1.Tables(RS).Rows(index1)("行番号") = ds2.Tables(RS).Rows(index2)("X") Then
                         Sql4 = ""
                         Sql4 += "UPDATE "
                         Sql4 += "Public."
@@ -754,7 +754,10 @@ Public Class PurchaseList
                         Sql4 += "SET "
                         Sql4 += "仕入数量"
                         Sql4 += " = '"
-                        PurchaseNum = ds1.Tables(RS).Rows(index1)("仕入数量") - ds2.Tables(RS).Rows(index1)("仕入数量")
+                        PurchaseNum = ds1.Tables(RS).Rows(index1)("仕入数量") - ds2.Tables(RS).Rows(index2)("仕入数量")
+                        'If PurchaseNum < 0 Then
+                        '_msgHd.dspMSG("chkAPBalanceError", frmC01F10_Login.loginValue.Language)
+                        'End If
                         Sql4 += PurchaseNum.ToString
                         Sql4 += "', "
                         Sql4 += " 発注残数"
