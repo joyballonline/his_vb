@@ -127,7 +127,7 @@ Public Class Payment
             LblHistory.Text = "PaymentHistory"
             LblPayment.Text = "PaymentInput"
             LblAPInfo.Text = "AccountsPayableInfo"
-            LblDepositDate.Text = "AccountsPayableDate"
+            LblDepositDate.Text = "PaymentDate"
             LblIDRCurrency.Text = "Currency"
             LblDepositDate.Size = New Size(157, 22)
             DtpDepositDate.Location = New Point(351, 335)
@@ -180,12 +180,14 @@ Public Class Payment
             DgvKikeInfo.Columns("買掛情報支払金額計").HeaderText = "AlreadyPaid" & vbCrLf & "b"        '既支払額
             DgvKikeInfo.Columns("買掛情報買掛残高").HeaderText = "AccountsPayable" & vbCrLf & "c=a-b"  '買掛残高(残債務)
             DgvKikeInfo.Columns("支払金額").HeaderText = "PaymentAmount"
+            DgvKikeInfo.Columns("支払予定日").HeaderText = "PaymentDueDate"
 
         Else  '日本語
 
             DgvKikeInfo.Columns("買掛金額").HeaderText = "買掛金額" & vbCrLf & "a"
             DgvKikeInfo.Columns("買掛情報支払金額計").HeaderText = "既支払額" & vbCrLf & "b"
             DgvKikeInfo.Columns("買掛情報買掛残高").HeaderText = "買掛残高(残債務)" & vbCrLf & "c=a-b"
+            DgvKikeInfo.Columns("支払予定日").HeaderText = "支払予定日"
 
         End If
 
@@ -201,6 +203,7 @@ Public Class Payment
         DgvKikeInfo.Columns("買掛情報買掛残高").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
         DgvKikeInfo.Columns("支払金額").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvKikeInfo.Columns("支払予定日").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
 
         '数字形式
@@ -236,7 +239,7 @@ Public Class Payment
     '支払先情報
     Private Sub setDgvSupplier()
         Dim Sql As String = ""
-        Dim AccountsReceivable As Integer
+        Dim AccountsReceivable As Decimal
         Dim curds As DataSet  'm25_currency
         Dim cur As String
 
@@ -253,7 +256,7 @@ Public Class Payment
             Sql += " AND 通貨 = " & CurCode
         End If
 
-        '仕入先と一致する発注基本を取得
+        '仕入先と一致する買掛基本を取得
         Dim dsSkyuhd As DataSet = getDsData("t46_kikehd", Sql)
 
         '買掛残高を集計
@@ -352,7 +355,7 @@ Public Class Payment
         TxtPaymentCount.Text = DgvPayment.Rows.Count()
     End Sub
 
-    '請求情報の出力
+    '買掛情報の出力
     Private Sub setDgvKikeInfo()
         Dim Sql As String = ""
 
@@ -368,21 +371,21 @@ Public Class Payment
             Sql += " AND 通貨 = " & CurCode
         End If
 
-        '仕入先と一致する請求基本を取得
+        '仕入先と一致する買掛基本を取得
         Dim dsKikehd As DataSet = getDsData("t46_kikehd", Sql)
 
 
         '明細行の件数をセット
         TxtKikeCount.Text = dsKikehd.Tables(RS).Rows.Count()
 
-        't46_kikehd 支払金額に登録する
+        't46_kikehd 買掛金額を計算
         KikeAmount = IIf(
             dsKikehd.Tables(RS).Compute("SUM(買掛金額計_外貨)", Nothing) IsNot DBNull.Value,
             dsKikehd.Tables(RS).Compute("SUM(買掛金額計_外貨)", Nothing),
             0
         )
 
-        '請求情報の出力
+        '買掛情報の出力
         For i As Integer = 0 To dsKikehd.Tables(RS).Rows.Count - 1
             DgvKikeInfo.Rows.Add()
             DgvKikeInfo.Rows(i).Cells("InfoNo").Value = i + 1
@@ -407,6 +410,7 @@ Public Class Payment
                 DgvKikeInfo.Rows(i).Cells("買掛情報買掛残高固定").Value = dsKikehd.Tables(RS).Rows(i)("買掛金額計_外貨") - dsKikehd.Tables(RS).Rows(i)("支払金額計_外貨")
             End If
             DgvKikeInfo.Rows(i).Cells("支払金額").Value = 0
+            DgvKikeInfo.Rows(i).Cells("支払予定日").Value = dsKikehd.Tables(RS).Rows(i)("支払予定日").ToShortDateString()
 
             '非可視
             DgvKikeInfo.Rows(i).Cells("買掛区分").Value = dsKikehd.Tables(RS).Rows(i)("買掛区分")
@@ -853,7 +857,7 @@ Public Class Payment
         Sql += "', '"
         Sql += APSaiban
         Sql += "', '"
-        Sql += dtToday
+        Sql += dtShiharaiday
         Sql += "', '"
         Sql += SupplierCode
         Sql += "', '"
@@ -948,7 +952,7 @@ Public Class Payment
             Sql += "', '"
             Sql += SupplierName
             Sql += "', '"
-            Sql += dtToday
+            Sql += dtShiharaiday
             Sql += "', '"
             Sql += TxtRemarks.Text
 
@@ -990,7 +994,7 @@ Public Class Payment
                 Sql += "', '"
                 Sql += APSaiban
                 Sql += "', '"
-                Sql += dtToday
+                Sql += dtShiharaiday
                 Sql += "', '"
                 Sql += DgvKikeInfo.Rows(i).Cells("買掛情報買掛番号").Value.ToString
                 Sql += "', '"

@@ -839,7 +839,8 @@ Public Class QuoteList
             Return
         End If
 
-        If DgvMithd.Rows(RowIdx).Cells("取消").Value = CommonConst.CANCEL_KBN_DISABLED_TXT Then
+        If DgvMithd.Rows(RowIdx).Cells("取消").Value =
+            IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_JPN, CommonConst.CANCEL_KBN_JPN_TXT, CommonConst.CANCEL_KBN_ENG_TXT) Then
             '対象のデータではないことをアラートする
             _msgHd.dspMSG("cannotSelectTorikeshiData", frmC01F10_Login.loginValue.Language)
 
@@ -946,7 +947,7 @@ Public Class QuoteList
             Return
         End If
 
-        If DgvMithd.Rows(RowIdx).Cells("取消").Value = CommonConst.CANCEL_KBN_DISABLED_TXT Then
+        If DgvMithd.Rows(RowIdx).Cells("取消").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_JPN, CommonConst.CANCEL_KBN_JPN_TXT, CommonConst.CANCEL_KBN_ENG_TXT) Then
             '対象のデータではないことをアラートする
             _msgHd.dspMSG("cannotSelectTorikeshiData", frmC01F10_Login.loginValue.Language)
 
@@ -990,7 +991,8 @@ Public Class QuoteList
         Dim RowIdx As Integer
         RowIdx = Me.DgvMithd.CurrentCell.RowIndex
 
-        If DgvMithd.Rows(RowIdx).Cells("取消").Value = CommonConst.CANCEL_KBN_DISABLED_TXT Then
+        If DgvMithd.Rows(RowIdx).Cells("取消").Value =
+            IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_JPN, CommonConst.CANCEL_KBN_JPN_TXT, CommonConst.CANCEL_KBN_ENG_TXT) Then
             '対象のデータではないことをアラートする
             _msgHd.dspMSG("cannotSelectTorikeshiData", frmC01F10_Login.loginValue.Language)
 
@@ -1036,7 +1038,7 @@ Public Class QuoteList
 
         End If
 
-        If DgvMithd.Rows(RowIdx).Cells("取消").Value = CommonConst.CANCEL_KBN_DISABLED_TXT Then
+        If DgvMithd.Rows(RowIdx).Cells("取消").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_JPN, CommonConst.CANCEL_KBN_JPN_TXT, CommonConst.CANCEL_KBN_ENG_TXT) Then
             '対象のデータではないことをアラートする
             _msgHd.dspMSG("cannotSelectTorikeshiData", frmC01F10_Login.loginValue.Language)
 
@@ -1092,7 +1094,7 @@ Public Class QuoteList
             Return
         End If
 
-        If DgvMithd.Rows(RowIdx).Cells("取消").Value = CommonConst.CANCEL_KBN_DISABLED_TXT Then
+        If DgvMithd.Rows(RowIdx).Cells("取消").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_JPN, CommonConst.CANCEL_KBN_JPN_TXT, CommonConst.CANCEL_KBN_ENG_TXT) Then
             '対象のデータではないことをアラートする
             _msgHd.dspMSG("cannotSelectTorikeshiData", frmC01F10_Login.loginValue.Language)
 

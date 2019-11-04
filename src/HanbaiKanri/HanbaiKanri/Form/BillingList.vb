@@ -306,7 +306,8 @@ Public Class BillingList
         End If
 
         '取消済みデータは取消操作不可能
-        If DgvBilling.Rows(DgvBilling.CurrentCell.RowIndex).Cells("取消").Value = CommonConst.CANCEL_KBN_DISABLED_TXT Then
+        If DgvBilling.Rows(DgvBilling.CurrentCell.RowIndex).Cells("取消").Value =
+            IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_JPN, CommonConst.CANCEL_KBN_JPN_TXT, CommonConst.CANCEL_KBN_ENG_TXT) Then
             '取消データは選択できないアラートを出す
             _msgHd.dspMSG("cannotSelectTorikeshiData", frmC01F10_Login.loginValue.Language)
             Return

@@ -243,7 +243,7 @@ Public Class PaymentList
                 '支払残０を含める場合　チェック = true
                 If ChkZeroData.Checked = True Then
                 Else
-                    Sql += " having  sum(買掛残高)<> 0"
+                    Sql += " having  sum(買掛残高_外貨)<> 0"
                 End If
 
                 Dim dsKikehd As DataSet = _db.selectDB(Sql, RS, reccnt)

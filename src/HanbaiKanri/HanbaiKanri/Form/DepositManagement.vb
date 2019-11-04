@@ -188,6 +188,7 @@ Public Class DepositManagement
             DgvBillingInfo.Columns("請求情報入金額計").HeaderText = "DepositAmount" & vbCrLf & "b"                  '既入金額
             DgvBillingInfo.Columns("請求情報請求残高").HeaderText = "AccountsReceivableBalance" & vbCrLf & "c=a-b"  '未入金額
             DgvBillingInfo.Columns("入金額").HeaderText = "AmountToRegisterForReceiving"
+            DgvBillingInfo.Columns("入金予定日").HeaderText = "DueDate"
 
         Else  '日本語
 
@@ -207,6 +208,7 @@ Public Class DepositManagement
         DgvBillingInfo.Columns("請求情報入金額計").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
         DgvBillingInfo.Columns("請求情報請求残高").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
         DgvBillingInfo.Columns("入金額").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvBillingInfo.Columns("入金予定日").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
 
         '数字形式
@@ -247,7 +249,7 @@ Public Class DepositManagement
     '請求先情報
     Private Sub setDgvCustomer()
         Dim Sql As String = ""
-        Dim AccountsReceivable As Long
+        Dim AccountsReceivable As Decimal 'Long
         Dim curds As DataSet  'm25_currency
         Dim cur As String
 
@@ -403,6 +405,8 @@ Public Class DepositManagement
             DgvBillingInfo.Rows(i).Cells("受注番号").Value = dsSkyuhd.Tables(RS).Rows(i)("受注番号")
             DgvBillingInfo.Rows(i).Cells("請求情報請求番号").Value = dsSkyuhd.Tables(RS).Rows(i)("請求番号")
             DgvBillingInfo.Rows(i).Cells("請求日").Value = dsSkyuhd.Tables(RS).Rows(i)("請求日").ToShortDateString()
+            DgvBillingInfo.Rows(i).Cells("入金予定日").Value = dsSkyuhd.Tables(RS).Rows(i)("入金予定日").ToShortDateString()
+
             DgvBillingInfo.Rows(i).Cells("請求金額").Value = dsSkyuhd.Tables(RS).Rows(i)("請求金額計_外貨")
             If dsSkyuhd.Tables(RS).Rows(i)("入金額計_外貨") Is DBNull.Value Then
                 DgvBillingInfo.Rows(i).Cells("請求情報入金額計").Value = 0

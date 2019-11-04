@@ -367,7 +367,7 @@ Public Class BillingManagement
         Next
 
         '数字形式
-        DgvHistory.Columns("請求金額").DefaultCellStyle.Format = "N0"
+        DgvHistory.Columns("請求金額").DefaultCellStyle.Format = "N2"
 
 
         '請求済みデータ件数カウント
@@ -386,7 +386,7 @@ Public Class BillingManagement
         End If
 
         '数字形式
-        DgvAdd.Columns("今回請求金額計").DefaultCellStyle.Format = "N0"
+        DgvAdd.Columns("今回請求金額計").DefaultCellStyle.Format = "N2"
 
     End Sub
 
