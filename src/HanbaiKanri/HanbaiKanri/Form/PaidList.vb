@@ -147,8 +147,8 @@ Public Class PaidList
 
                 Sql = " SELECT"
                 Sql += " t47.通貨,t47.支払番号,t47.支払日,t47.支払先名,t47.支払金額計_外貨,t47.支払金額計"
-                Sql += ",t47.更新日,t47.備考"
-                Sql += ",t20.取消区分"
+                Sql += ",t47.更新日,t47.備考, t46.支払予定日"
+                Sql += ",t47.取消区分"
                 Sql += ",m11.銀行コード , m11.銀行名 , m11.支店名, m11.預金種目 , m11.口座番号, m11.口座名義"
 
                 Sql += " FROM t47_shrihd t47 "
@@ -164,7 +164,7 @@ Public Class PaidList
                 Sql += " ON t49.会社コード = t46.会社コード "
                 Sql += " AND t49.買掛番号 = t46.買掛番号 "
                 Sql += " AND "
-                Sql += " t46.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '発注取消されていないデータ
+                Sql += " t46.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '買掛取消されていないデータ
 
                 Sql += " INNER JOIN "
                 Sql += " t20_hattyu t20"
@@ -183,8 +183,8 @@ Public Class PaidList
 
                 Sql += " GROUP BY "
                 Sql += " t47.通貨,t47.支払番号,t47.支払日,t47.支払先名,t47.支払金額計_外貨,t47.支払金額計"
-                Sql += ",t47.更新日,t47.備考"
-                Sql += ",t20.取消区分"
+                Sql += ",t47.更新日,t47.備考,t46.支払予定日"
+                Sql += ",t47.取消区分"
                 Sql += ",m11.銀行コード , m11.銀行名 , m11.支店名, m11.預金種目 , m11.口座番号, m11.口座名義"
 
                 Sql += " ORDER BY "
@@ -197,6 +197,7 @@ Public Class PaidList
                     DgvHtyhd.Columns.Add("取消", "Cancel")
                     DgvHtyhd.Columns.Add("支払番号", "PaymentNumber")
                     DgvHtyhd.Columns.Add("支払日", "PaymentDate")
+                    DgvHtyhd.Columns.Add("支払予定日", "PaymentDueDate")
                     DgvHtyhd.Columns.Add("支払先名", "SupplierName")
                     DgvHtyhd.Columns.Add("支払先", "PaymentDestination")
                     DgvHtyhd.Columns.Add("通貨_外貨", "Currency")
@@ -209,6 +210,7 @@ Public Class PaidList
                     DgvHtyhd.Columns.Add("取消", "取消")
                     DgvHtyhd.Columns.Add("支払番号", "支払番号")
                     DgvHtyhd.Columns.Add("支払日", "支払日")
+                    DgvHtyhd.Columns.Add("支払予定日", "支払予定日")
                     DgvHtyhd.Columns.Add("支払先名", "支払先名")
                     DgvHtyhd.Columns.Add("支払先", "支払先")
                     DgvHtyhd.Columns.Add("通貨_外貨", "通貨(外貨)")
@@ -230,10 +232,10 @@ Public Class PaidList
 
                 For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
 
-                    If IsDBNull(ds.Tables(RS).Rows(0)("通貨")) Then
+                    If IsDBNull(ds.Tables(RS).Rows(index)("通貨")) Then
                         cur = vbNullString
                     Else
-                        Sql = " and 採番キー = " & ds.Tables(RS).Rows(0)("通貨")
+                        Sql = " and 採番キー = " & ds.Tables(RS).Rows(index)("通貨")
                         curds = getDsData("m25_currency", Sql)
 
                         cur = curds.Tables(RS).Rows(0)("通貨コード")
@@ -255,11 +257,11 @@ Public Class PaidList
                     DgvHtyhd.Rows(index).Cells("支払番号").Value = ds.Tables(RS).Rows(index)("支払番号")
                     DgvHtyhd.Rows(index).Cells("支払日").Value = ds.Tables(RS).Rows(index)("支払日").ToShortDateString
                     DgvHtyhd.Rows(index).Cells("支払先名").Value = ds.Tables(RS).Rows(index)("支払先名")
-                    DgvHtyhd.Rows(index).Cells("支払先").Value = ds.Tables(RS).Rows(0)("銀行名") & " " &
-                                                                    ds.Tables(RS).Rows(0)("支店名") & " " &
+                    DgvHtyhd.Rows(index).Cells("支払先").Value = ds.Tables(RS).Rows(index)("銀行名") & " " &
+                                                                    ds.Tables(RS).Rows(index)("支店名") & " " &
                                                                     dcName & " " &
-                                                                    ds.Tables(RS).Rows(0)("口座番号") & " " &
-                                                                    ds.Tables(RS).Rows(0)("口座名義")
+                                                                    ds.Tables(RS).Rows(index)("口座番号") & " " &
+                                                                    ds.Tables(RS).Rows(index)("口座名義")
 
                     DgvHtyhd.Rows(index).Cells("通貨_外貨").Value = cur
                     DgvHtyhd.Rows(index).Cells("支払金額計_外貨").Value = ds.Tables(RS).Rows(index)("支払金額計_外貨")
@@ -267,11 +269,13 @@ Public Class PaidList
                     DgvHtyhd.Rows(index).Cells("支払金額計").Value = ds.Tables(RS).Rows(index)("支払金額計")
                     DgvHtyhd.Rows(index).Cells("更新日").Value = ds.Tables(RS).Rows(index)("更新日")
                     DgvHtyhd.Rows(index).Cells("備考").Value = ds.Tables(RS).Rows(index)("備考")
+                    DgvHtyhd.Rows(index).Cells("支払予定日").Value = ds.Tables(RS).Rows(index)("支払予定日").ToShortDateString
+
                 Next
 
             Else '明細単位
 
-                Sql = " SELECT t49.* "
+                Sql = " SELECT t48.*, t47.取消区分, t46.買掛番号"
                 Sql += " FROM t48_shridt t48 "
 
                 Sql += " INNER JOIN t47_shrihd t47 "
@@ -286,7 +290,7 @@ Public Class PaidList
                 Sql += " ON t49.会社コード = t46.会社コード "
                 Sql += " AND t49.買掛番号 = t46.買掛番号 "
                 Sql += " AND "
-                Sql += " t46.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '発注取消されていないデータ
+                Sql += " t46.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '買掛取消されていないデータ
 
                 Sql += " INNER JOIN "
                 Sql += " t20_hattyu t20"
@@ -299,14 +303,14 @@ Public Class PaidList
                 Sql += " AND "
                 Sql += " t20.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '発注取消されていないデータ
 
-                Sql += " INNER JOIN "
-                Sql += " t21_hattyu t21"
-                Sql += " ON "
-                Sql += " t20.会社コード = t21.会社コード "
-                Sql += " AND "
-                Sql += " t20.発注番号 = t21.発注番号"
-                Sql += " AND "
-                Sql += " t20.発注番号枝番 = t21.発注番号枝番"
+                'Sql += " INNER JOIN "
+                'Sql += " t21_hattyu t21"
+                'Sql += " ON "
+                'Sql += " t20.会社コード = t21.会社コード "
+                'Sql += " AND "
+                'Sql += " t20.発注番号 = t21.発注番号"
+                'Sql += " AND "
+                'Sql += " t20.発注番号枝番 = t21.発注番号枝番"
 
                 Sql += " WHERE t47.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
 
@@ -343,10 +347,11 @@ Public Class PaidList
                 For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
                     DgvHtyhd.Rows.Add()
                     DgvHtyhd.Rows(index).Cells("取消").Value = getDelKbnTxt(ds.Tables(RS).Rows(index)("取消区分"))
+                    DgvHtyhd.Rows(index).Cells("買掛番号").Value = ds.Tables(RS).Rows(index)("買掛番号")
                     DgvHtyhd.Rows(index).Cells("支払番号").Value = ds.Tables(RS).Rows(index)("支払番号")
                     DgvHtyhd.Rows(index).Cells("支払日").Value = ds.Tables(RS).Rows(index)("支払日").ToShortDateString
                     DgvHtyhd.Rows(index).Cells("支払先名").Value = ds.Tables(RS).Rows(index)("支払先名")
-                    DgvHtyhd.Rows(index).Cells("支払金額計").Value = ds.Tables(RS).Rows(index)("支払消込額計")
+                    DgvHtyhd.Rows(index).Cells("支払金額計").Value = ds.Tables(RS).Rows(index)("支払金額_外貨")
                     DgvHtyhd.Rows(index).Cells("備考").Value = ds.Tables(RS).Rows(index)("備考")
                 Next
 
@@ -447,7 +452,7 @@ Public Class PaidList
         End If
 
         '取消済みデータは取消操作不可能
-        If DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("取消").Value = CommonConst.CANCEL_KBN_DISABLED_TXT Then
+        If DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("取消").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_JPN, CommonConst.CANCEL_KBN_JPN_TXT, CommonConst.CANCEL_KBN_ENG_TXT) Then
             '取消データは選択できないアラートを出す
             _msgHd.dspMSG("cannotSelectTorikeshiData", frmC01F10_Login.loginValue.Language)
             Return
@@ -504,7 +509,7 @@ Public Class PaidList
 
             '支払基本から支払金額計を取得
             Dim dstShrihd As DataSet = getDsData("t47_shrihd", Sql)
-            Dim strSiharaiGaku As Decimal = dstShrihd.Tables(RS).Rows(0)("支払金額計")
+            Dim strSiharaiGaku As Decimal = dstShrihd.Tables(RS).Rows(0)("支払金額計_外貨")
 
             Sql = " AND 支払番号 ='" & DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("支払番号").Value & "'"
 
@@ -513,11 +518,11 @@ Public Class PaidList
 
             Sql = " AND 買掛番号 ='" & dsShrikshihd.Tables(RS).Rows(0)("買掛番号") & "' "
 
-            '買掛基本から発注番号を取得
+            '買掛基本から金額を取得
             Dim dsKikehd As DataSet = getDsData("t46_kikehd", Sql)
 
-            Dim decKaikakeZan As Decimal = dsKikehd.Tables(RS).Rows(0)("買掛残高") + strSiharaiGaku
-            Dim decSiharaiKei As Decimal = dsKikehd.Tables(RS).Rows(0)("支払金額計") - strSiharaiGaku
+            Dim decKaikakeZan As Decimal = dsKikehd.Tables(RS).Rows(0)("買掛残高_外貨") + strSiharaiGaku
+            Dim decSiharaiKei As Decimal = dsKikehd.Tables(RS).Rows(0)("支払金額計_外貨") - strSiharaiGaku
 
 
             Sql = "UPDATE Public.t49_shrikshihd "
@@ -537,8 +542,8 @@ Public Class PaidList
             Sql = "UPDATE Public.t46_kikehd "
             Sql += "SET "
 
-            Sql += "買掛残高 = " & UtilClass.formatNumber(decKaikakeZan) '買掛残高を増やす
-            Sql += ", 支払金額計 = " & UtilClass.formatNumber(decSiharaiKei) '支払金額計を減らす
+            Sql += "買掛残高_外貨 = " & UtilClass.formatNumber(decKaikakeZan) '買掛残高を増やす
+            Sql += ", 支払金額計_外貨 = " & UtilClass.formatNumber(decSiharaiKei) '支払金額計を減らす
             Sql += ", 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
             Sql += ", 更新日 = '" & dtNow & "'"
 

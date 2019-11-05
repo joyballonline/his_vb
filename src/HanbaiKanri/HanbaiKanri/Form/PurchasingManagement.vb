@@ -151,7 +151,8 @@ Public Class PurchasingManagement
             DgvHistory.Columns.Add("仕入数量", "PurchasedQuantity")
             DgvHistory.Columns.Add("仕入日", "PurchaseDate")
             DgvHistory.Columns.Add("備考", "Remarks")
-
+            DgvHistory.Columns.Add("発注行番号", "POLINENO")
+            DgvHistory.Columns.Add("取消", "DEL")
         Else
             DgvHistory.Columns.Add("No", "No")
             DgvHistory.Columns.Add("仕入番号", "仕入番号")
@@ -166,6 +167,8 @@ Public Class PurchasingManagement
             DgvHistory.Columns.Add("仕入数量", "仕入(検収)登録済み数量")
             DgvHistory.Columns.Add("仕入日", "仕入(検収)登録日")
             DgvHistory.Columns.Add("備考", "備考")
+            DgvHistory.Columns.Add("発注行番号", "POLINENO")
+            DgvHistory.Columns.Add("取消", "取消")
         End If
 
         'DgvHistory.Columns("仕入値").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -345,30 +348,34 @@ Public Class PurchasingManagement
 
             Dim dsHattyuHd As DataSet = getDsData("t20_hattyu", Sql)
 
-            '発注済みエリア
+            '仕入済みエリア
             Sql = "SELECT"
             Sql += " t41.*, t40.取消区分"
             Sql += ",t21.仕入値_外貨,t21.仕入金額_外貨"
 
             Sql += " FROM "
-            Sql += " public.t41_siredt t41 "
+            'Sql += " public.t41_siredt t41 "
 
-            Sql += " INNER JOIN "
-            Sql += " t40_sirehd t40"
-            Sql += " ON "
+            'Sql += " INNER JOIN "
+            'Sql += " t40_sirehd t40"
+            'Sql += " ON "
 
-            Sql += " t41.会社コード = t40.会社コード"
-            Sql += " AND "
-            Sql += " t41.仕入番号 = t40.仕入番号"
+            'Sql += " t41.会社コード = t40.会社コード"
+            'Sql += " AND "
+            'Sql += " t41.仕入番号 = t40.仕入番号"
             'Sql += " AND "
             'Sql += " t41.発注番号枝番 = t40.発注番号枝番"
 
-            Sql += " left join t21_hattyu t21"
-            Sql += " on t41.発注番号 = t21.発注番号 and t41.発注番号枝番 = t21.発注番号枝番"
-            Sql += " and t41.メーカー = t21.メーカー and t41.品名 = t21.品名 and t41.型式 = t21.型式 and t41.発注数量 = t21.発注数量"
+            ' fuke
+            'Sql += " left join t21_hattyu t21"
+            'Sql += " on t41.発注番号 = t21.発注番号 and t41.発注番号枝番 = t21.発注番号枝番"
+            'Sql += " and t41.メーカー = t21.メーカー and t41.品名 = t21.品名 and t41.型式 = t21.型式 and t41.発注数量 = t21.発注数量"
 
+            Sql += "public.t41_siredt t41, public.t40_sirehd t40, public.t21_hattyu t21 "
+            Sql += "where t41.会社コード = t40.会社コード And t41.仕入番号 = t40.仕入番号 and "
+            Sql += "t41.発注番号 = t21.発注番号 And t41.発注番号枝番 = t21.発注番号枝番 and t41.発注行番号 = t21.行番号 and "
 
-            Sql += " WHERE "
+            'Sql += " WHERE "
             Sql += " t41.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
             Sql += " AND t41.発注番号 = '" & No & "'"
             Sql += " AND t41.発注番号枝番 = '" & Suffix & "'"
@@ -376,7 +383,7 @@ Public Class PurchasingManagement
 
             Dim dsSireDt As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-            '仕入済みエリア
+            '発注済みエリア
             Sql = "SELECT"
             Sql += " t21.*, t20.取消区分"
             Sql += " FROM "
@@ -423,6 +430,7 @@ Public Class PurchasingManagement
                 DgvPurchase.Rows(i).Cells("仕入単価").Value = dsHattyuDt.Tables(RS).Rows(i)("仕入値_外貨")
                 'DgvPurchase.Rows(i).Cells("仕入金額").Value = dsHattyuDt.Tables(RS).Rows(i)("仕入金額_外貨")
                 DgvPurchase.Rows(i).Cells("発注残数").Value = dsHattyuDt.Tables(RS).Rows(i)("発注残数")
+                DgvPurchase.Rows(i).Cells("明細").Value = dsHattyuDt.Tables(RS).Rows(i)("行番号")
             Next
 
             '仕入済みエリアに明細を表示
@@ -431,7 +439,7 @@ Public Class PurchasingManagement
                 DgvHistory.Rows(i).Cells("仕入番号").Value = dsSireDt.Tables(RS).Rows(i)("仕入番号")
                 DgvHistory.Rows(i).Cells("行番号").Value = dsSireDt.Tables(RS).Rows(i)("行番号")
 
-                'リードタイムのリストを汎用マスタから取得
+                '仕入区分のリストを汎用マスタから取得
                 Dim dsHanyou As DataSet = getDsHanyoData(CommonConst.FIXED_KEY_PURCHASING_CLASS, dsSireDt.Tables(RS).Rows(i)("仕入区分"))
                 If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                     DgvHistory.Rows(i).Cells("仕入区分").Value = dsHanyou.Tables(RS).Rows(0)("文字２")
@@ -448,6 +456,8 @@ Public Class PurchasingManagement
                 DgvHistory.Rows(i).Cells("仕入数量").Value = dsSireDt.Tables(RS).Rows(i)("仕入数量")
                 DgvHistory.Rows(i).Cells("仕入日").Value = dsSireDt.Tables(RS).Rows(i)("仕入日").ToShortDateString()
                 DgvHistory.Rows(i).Cells("備考").Value = dsSireDt.Tables(RS).Rows(i)("備考")
+                DgvHistory.Rows(i).Cells("発注行番号").Value = dsSireDt.Tables(RS).Rows(i)("発注行番号")
+                DgvHistory.Rows(i).Cells("取消").Value = dsSireDt.Tables(RS).Rows(i)("取消区分")
             Next
 
             '今回仕入エリアに入力エリアを作成
@@ -483,7 +493,7 @@ Public Class PurchasingManagement
             Dim i1 As Integer = DgvPurchase.Rows.Count()
             Dim No1 As Integer = 1
             For c As Integer = 0 To i1 - 1
-                DgvPurchase.Rows(c).Cells(0).Value = No1
+                'DgvPurchase.Rows(c).Cells(0).Value = No1
                 No1 += 1
             Next c
             TxtCount1.Text = DgvPurchase.Rows.Count()
@@ -614,7 +624,7 @@ Public Class PurchasingManagement
         Sql2 += " AND 発注番号 = '" & No & "'"
         Sql2 += " AND 発注番号枝番 = '" & Suffix & "'"
 
-        Dim ds2 As DataSet = _db.selectDB(Sql2, RS, reccnt)
+        'Dim ds2a As DataSet = _db.selectDB(Sql2, RS, reccnt)
 
 #End Region
 
@@ -637,12 +647,15 @@ Public Class PurchasingManagement
         For i As Integer = 0 To DgvAdd.Rows.Count() - 1
 
             '仕入数が発注数を超えたら
-            If DgvPurchase.Rows(i).Cells("発注数量").Value < DgvPurchase.Rows(i).Cells("仕入数量").Value + DgvAdd.Rows(i).Cells("仕入数量").Value Then
+            'If DgvPurchase.Rows(i).Cells("発注数量").Value < DgvPurchase.Rows(i).Cells("仕入数量").Value + DgvAdd.Rows(i).Cells("仕入数量").Value Then
+            If DgvAdd.Rows(i).Cells("仕入数量").Value > 0 Then
+                If Not chkPurchasedQuantity(DgvAdd.Rows(i).Cells("仕入数量").Value, No, Suffix, DgvAdd.Rows(i).Cells("行番号").Value) Then
 
-                '操作できないアラートを出す
-                _msgHd.dspMSG("chkAPBalanceError", frmC01F10_Login.loginValue.Language)
+                    '操作できないアラートを出す
+                    _msgHd.dspMSG("chkAPBalanceError", frmC01F10_Login.loginValue.Language)
 
-                Return
+                    Return
+                End If
             End If
 
         Next
@@ -655,8 +668,10 @@ Public Class PurchasingManagement
             Dim WH As String = getSaiban("60", dtToday)
 
             Dim PurchaseAmount As Decimal = 0
-            For i As Integer = 0 To ds2.Tables(RS).Rows.Count - 1
-                PurchaseAmount += ds2.Tables(RS).Rows(i)("仕入金額")
+            For i As Integer = 0 To DgvAdd.Rows.Count - 1 'ds2.Tables(RS).Rows.Count - 1
+                If DgvAdd.Rows(i).Cells("仕入数量").Value > 0 Then
+                    PurchaseAmount += DgvAdd.Rows(i).Cells("仕入数量").Value * DgvAdd.Rows(i).Cells("仕入値").Value
+                End If
             Next
 
 #Region "t40_sirehd"
@@ -697,9 +712,9 @@ Public Class PurchasingManagement
             Sql3 += "', '"
             Sql3 += ds1.Tables(RS).Rows(0)("支払条件").ToString '支払条件
             Sql3 += "', '"
-            Sql3 += formatNumber(PurchaseAmount) '仕入金額
+            Sql3 += UtilClass.formatNumber(PurchaseAmount) '仕入金額
             Sql3 += "', '"
-            Sql3 += formatNumber(Decimal.Parse(ds1.Tables(RS).Rows(0)("粗利額"))) '粗利額
+            Sql3 += UtilClass.formatNumber(Decimal.Parse(ds1.Tables(RS).Rows(0)("粗利額"))) '粗利額
             Sql3 += "', '"
             Sql3 += ds1.Tables(RS).Rows(0)("営業担当者").ToString '営業担当者
             Sql3 += "', '"
@@ -711,12 +726,12 @@ Public Class PurchasingManagement
             Sql3 += ", "
             Sql3 += CommonConst.CANCEL_KBN_ENABLED.ToString() '取消区分 = 0
             Sql3 += ", '"
-            Sql3 += formatNumber(Decimal.Parse(ds1.Tables(RS).Rows(0)("ＶＡＴ").ToString)) 'ＶＡＴ
+            Sql3 += UtilClass.formatNumber(Decimal.Parse(ds1.Tables(RS).Rows(0)("ＶＡＴ").ToString)) 'ＶＡＴ
             Sql3 += "', '"
             If ds1.Tables(RS).Rows(0)("ＰＰＨ") Is DBNull.Value Then
                 Sql3 += "0" 'ＰＰＨ
             Else
-                Sql3 += formatNumber(Decimal.Parse(ds1.Tables(RS).Rows(0)("ＰＰＨ").ToString)) 'ＰＰＨ
+                Sql3 += UtilClass.formatNumber(Decimal.Parse(ds1.Tables(RS).Rows(0)("ＰＰＨ").ToString)) 'ＰＰＨ
             End If
             Sql3 += "', '"
             Sql3 += UtilClass.strFormatDate(DtpPurchaseDate.Text) '仕入日
@@ -749,7 +764,7 @@ Public Class PurchasingManagement
                 Sql4 += "Public."
                 Sql4 += "t41_siredt("
                 Sql4 += "会社コード, 仕入番号, 発注番号, 発注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式, 仕入先名, 仕入値, 発注数量"
-                Sql4 += ", 仕入数量, 発注残数, 単位, 仕入金額, 間接費, リードタイム, 備考, 仕入日, 更新者, 更新日)"
+                Sql4 += ", 仕入数量, 発注残数, 単位, 仕入金額, 間接費, リードタイム, 備考, 仕入日, 更新者, 更新日, 発注行番号)"
                 Sql4 += " VALUES('"
                 Sql4 += ds1.Tables(RS).Rows(0)("会社コード").ToString '会社コード
                 Sql4 += "', '"
@@ -772,26 +787,29 @@ Public Class PurchasingManagement
                 'Sql4 += DgvAdd.Rows(index).Cells("仕入先").Value.ToString '仕入先名
                 Sql4 += TxtSupplierName.Text    '仕入先名
                 Sql4 += "', '"
-                Sql4 += formatNumber(Decimal.Parse(DgvAdd.Rows(index).Cells("仕入値").Value.ToString)) '仕入値
+                Sql4 += UtilClass.formatNumber(Decimal.Parse(DgvAdd.Rows(index).Cells("仕入値").Value.ToString)) '仕入値
                 Sql4 += "', '"
-                Sql4 += ds2.Tables(RS).Rows(index)("発注数量").ToString '発注数量
+                Sql4 += DgvAdd.Rows(index).Cells("発注数量").Value.ToString '発注数量
                 Sql4 += "', '"
                 Sql4 += DgvAdd.Rows(index).Cells("仕入数量").Value.ToString '仕入数量
                 Sql4 += "', '"
 
-                Dim OrderNo As Integer = ds2.Tables(RS).Rows(index)("発注数量")
-                Dim PurchaseNo As Integer = DgvAdd.Rows(index).Cells("仕入数量").Value
-                Dim RemainingNo As Integer = OrderNo - PurchaseNo
-
-                Sql4 += RemainingNo.ToString '発注残数
+                Dim OrderQ As Integer = DgvAdd.Rows(index).Cells("発注数量").Value
+                Dim PurchaseQ As Integer = DgvAdd.Rows(index).Cells("仕入数量").Value
+                Dim RemainingQ As Integer = OrderQ - PurchaseQ
+                'If RemainingQ < 0 Then
+                '_msgHd.dspMSG("chkAPBalanceError", frmC01F10_Login.loginValue.Language)
+                'End If
+                Sql4 += RemainingQ.ToString '発注残数
                 Sql4 += "', '"
                 Sql4 += DgvAdd.Rows(index).Cells("単位").Value.ToString '単位
                 Sql4 += "', '"
-                Sql4 += formatNumber(Decimal.Parse(ds2.Tables(RS).Rows(index)("仕入金額").ToString)) '仕入金額
+                Dim dsx As DataSet = getPolByLineNo(No, Suffix, DgvAdd.Rows(index).Cells("行番号").Value)
+                Sql4 += UtilClass.formatNumber(Decimal.Parse(dsx.Tables(RS).Rows(0)("仕入金額").ToString)) '仕入金額
                 Sql4 += "', '"
-                Sql4 += formatNumber(Decimal.Parse(ds2.Tables(RS).Rows(index)("間接費").ToString)) '間接費
+                Sql4 += UtilClass.formatNumber(Decimal.Parse(dsx.Tables(RS).Rows(0)("間接費").ToString)) '間接費
                 Sql4 += "', '"
-                Sql4 += ds2.Tables(RS).Rows(index)("リードタイム").ToString 'リードタイム
+                Sql4 += dsx.Tables(RS).Rows(0)("リードタイム").ToString 'リードタイム
                 Sql4 += "', '"
                 Sql4 += DgvAdd.Rows(index).Cells("備考").Value '備考
                 Sql4 += "', '"
@@ -800,6 +818,8 @@ Public Class PurchasingManagement
                 Sql4 += Input '更新者
                 Sql4 += "', '"
                 Sql4 += strToday '更新日
+                Sql4 += "', '"
+                Sql4 += DgvAdd.Rows(index).Cells("行番号").Value.ToString
                 Sql4 += "')"
                 If DgvAdd.Rows(index).Cells("仕入数量").Value.ToString = 0 Then
                 Else
@@ -820,12 +840,16 @@ Public Class PurchasingManagement
                 Sql6 += "SET "
                 Sql6 += "仕入数量"
                 Sql6 += " = '"
-                PurchaseNum = ds2.Tables(RS).Rows(index)("仕入数量") + DgvAdd.Rows(index).Cells("仕入数量").Value
+                Dim dsy As DataSet = getPolByLineNo(No, Suffix, DgvAdd.Rows(index).Cells("行番号").Value)
+                PurchaseNum = dsy.Tables(RS).Rows(0)("仕入数量") + DgvAdd.Rows(index).Cells("仕入数量").Value
                 Sql6 += PurchaseNum.ToString
                 Sql6 += "', "
                 Sql6 += " 発注残数"
                 Sql6 += " = '"
-                OrdingNum = ds2.Tables(RS).Rows(index)("発注残数") - DgvAdd.Rows(index).Cells("仕入数量").Value
+                OrdingNum = dsy.Tables(RS).Rows(0)("発注残数") - DgvAdd.Rows(index).Cells("仕入数量").Value
+                'If OrdingNum < 0 Then
+                '_msgHd.dspMSG("chkAPBalanceError", frmC01F10_Login.loginValue.Language)
+                'End If
                 Sql6 += OrdingNum.ToString
                 Sql6 += "', "
                 Sql6 += "更新者"
@@ -840,20 +864,22 @@ Public Class PurchasingManagement
                 Sql6 += " AND"
                 Sql6 += " 発注番号"
                 Sql6 += "='"
-                Sql6 += ds2.Tables(RS).Rows(index)("発注番号").ToString
+                Sql6 += No 'ds2.Tables(RS).Rows(index)("発注番号").ToString
                 Sql6 += "'"
                 Sql6 += " AND"
                 Sql6 += " 発注番号枝番"
                 Sql6 += "='"
-                Sql6 += ds2.Tables(RS).Rows(index)("発注番号枝番").ToString
+                Sql6 += Suffix 'ds2a.Tables(RS).Rows(index)("発注番号枝番").ToString
                 Sql6 += "'"
                 Sql6 += " AND"
                 Sql6 += " 行番号"
                 Sql6 += "='"
-                Sql6 += ds2.Tables(RS).Rows(index)("行番号").ToString
+                Sql6 += DgvAdd.Rows(index).Cells("行番号").Value.ToString
                 Sql6 += "' "
-
-                _db.executeDB(Sql6)
+                If DgvAdd.Rows(index).Cells("仕入数量").Value.ToString = 0 Then
+                Else
+                    _db.executeDB(Sql6)
+                End If
             Next
             '登録完了メッセージ
             _msgHd.dspMSG("completeInsert", frmC01F10_Login.loginValue.Language)
@@ -1090,13 +1116,13 @@ Public Class PurchasingManagement
 
     '金額フォーマット（登録の際の小数点指定子）を日本の形式に合わせる
     '桁区切り記号は外す
-    Private Function formatNumber(ByVal prmVal As Decimal) As String
+    'Private Function formatNumber(ByVal prmVal As Decimal) As String
 
-        Dim nfi As NumberFormatInfo = New CultureInfo(CommonConst.CI_JP, False).NumberFormat
+    '    Dim nfi As NumberFormatInfo = New CultureInfo(CommonConst.CI_JP, False).NumberFormat
 
-        '日本の形式に書き換える
-        Return prmVal.ToString("F3", nfi) '売掛残高を増やす
-    End Function
+    '日本の形式に書き換える
+    'Return prmVal.ToString("F3", nfi) '売掛残高を増やす
+    'End Function
 
     '汎用マスタから固定キー、可変キーに応じた結果を返す
     'param1：String 固定キー
@@ -1113,6 +1139,30 @@ Public Class PurchasingManagement
         'リードタイムのリストを汎用マスタから取得
         Return getDsData("m90_hanyo", Sql)
 
+    End Function
+
+    Private Function chkPurchasedQuantity(ByVal q_ As Integer, ByVal h_ As String, ByVal l_ As String, pol_ As String) As Boolean
+        Dim Sql As String
+        Sql = " and 発注番号='" + h_ + "' and 発注番号枝番='" + l_ + "' and 行番号=" + pol_
+        Dim dsb As DataSet = getDsData("t21_hattyu", Sql)
+
+        If dsb.Tables(RS).Rows.Count > 0 Then
+            If dsb.Tables(RS).Rows(0)("発注数量") < dsb.Tables(RS).Rows(0)("仕入数量") + q_ Then
+                Return False
+            Else
+                Return True
+            End If
+        End If
+
+        Return False
+
+    End Function
+
+    Private Function getPolByLineNo(ByVal o_ As String, ByVal l_ As String, pol_ As String) As DataSet
+        Dim Sql As String
+        Sql = " AND 発注番号 = '" & o_ & "'"
+        Sql += " AND 発注番号枝番 = '" & l_ & "' and 行番号=" + pol_
+        Return getDsData("t21_hattyu", Sql)
     End Function
 
 End Class

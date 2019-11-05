@@ -101,7 +101,9 @@ Public Class AccountsPayableBulk
         'dtAPDateSince.Value = DateAdd("d", CommonConst.SINCE_DEFAULT_DAY, DateTime.Today)
         'dtAPDateUntil.Value = DateTime.Today
 
-        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then  '英語
+            BtnExcelOutput.Text = "Excel output"
+            BtnRegist.Text = "Bulk registration"
 
         Else  '日本語
 
@@ -401,7 +403,7 @@ Public Class AccountsPayableBulk
                         '登録対象データかどうか確認する ======================
                         '空行チェック
                         If row("請求日").ToString = "" And row("仕入先請求番号").ToString = "" And row("支払予定日").ToString = "" Then
-                            errorCnt += 1 'エラーカウント
+                            skipCnt += 1 'スキップカウント
 
                             'エラーの発注書番号を記録
                             errorMsg = row("発注番号").ToString & vbCrLf
@@ -412,7 +414,7 @@ Public Class AccountsPayableBulk
                         'データの整合性を確認する ======================
                         'データ有無チェック
                         If row("請求日").ToString = "" Or row("仕入先請求番号").ToString = "" Or row("支払予定日").ToString = "" Then
-                            skipCnt += 1 'スキップカウント
+                            errorCnt += 1 'エラーカウント
 
                             '一旦コンソールに出力
                             Console.WriteLine(row("発注番号").ToString)

@@ -47,6 +47,7 @@ Partial Class SalesVATList
         Me.型式 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.数量 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.単位 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.通貨_外貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.売単価 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ＶＡＴ = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.売上計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -67,7 +68,7 @@ Partial Class SalesVATList
         '
         Me.Label8.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.Label8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label8.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Label8.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.Label8.Location = New System.Drawing.Point(13, 9)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(170, 22)
@@ -91,7 +92,7 @@ Partial Class SalesVATList
         Me.DgvList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.DgvList.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.DgvList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.売上番号, Me.売上日, Me.得意先名, Me.客先番号, Me.営業担当者, Me.メーカー, Me.品名, Me.型式, Me.数量, Me.単位, Me.売単価, Me.ＶＡＴ, Me.売上計})
+        Me.DgvList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.売上番号, Me.売上日, Me.得意先名, Me.客先番号, Me.営業担当者, Me.メーカー, Me.品名, Me.型式, Me.数量, Me.単位, Me.通貨_外貨, Me.売単価, Me.ＶＡＴ, Me.売上計})
         Me.DgvList.Location = New System.Drawing.Point(13, 102)
         Me.DgvList.Name = "DgvList"
         Me.DgvList.ReadOnly = True
@@ -105,7 +106,7 @@ Partial Class SalesVATList
         '
         Me.LblMode.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblMode.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblMode.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblMode.Location = New System.Drawing.Point(1173, 9)
         Me.LblMode.Name = "LblMode"
         Me.LblMode.Size = New System.Drawing.Size(165, 22)
@@ -162,7 +163,7 @@ Partial Class SalesVATList
         'LblMonth
         '
         Me.LblMonth.AutoSize = True
-        Me.LblMonth.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblMonth.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblMonth.Location = New System.Drawing.Point(34, 43)
         Me.LblMonth.Name = "LblMonth"
         Me.LblMonth.Size = New System.Drawing.Size(23, 15)
@@ -172,7 +173,7 @@ Partial Class SalesVATList
         'LblYear
         '
         Me.LblYear.AutoSize = True
-        Me.LblYear.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblYear.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblYear.Location = New System.Drawing.Point(34, 73)
         Me.LblYear.Name = "LblYear"
         Me.LblYear.Size = New System.Drawing.Size(23, 15)
@@ -184,56 +185,56 @@ Partial Class SalesVATList
         Me.売上番号.HeaderText = "売上番号"
         Me.売上番号.Name = "売上番号"
         Me.売上番号.ReadOnly = True
-        Me.売上番号.Width = 78
+        Me.売上番号.Width = 80
         '
         '売上日
         '
         Me.売上日.HeaderText = "売上日"
         Me.売上日.Name = "売上日"
         Me.売上日.ReadOnly = True
-        Me.売上日.Width = 66
+        Me.売上日.Width = 68
         '
         '得意先名
         '
         Me.得意先名.HeaderText = "得意先名"
         Me.得意先名.Name = "得意先名"
         Me.得意先名.ReadOnly = True
-        Me.得意先名.Width = 78
+        Me.得意先名.Width = 80
         '
         '客先番号
         '
         Me.客先番号.HeaderText = "客先番号"
         Me.客先番号.Name = "客先番号"
         Me.客先番号.ReadOnly = True
-        Me.客先番号.Width = 78
+        Me.客先番号.Width = 80
         '
         '営業担当者
         '
         Me.営業担当者.HeaderText = "営業担当者"
         Me.営業担当者.Name = "営業担当者"
         Me.営業担当者.ReadOnly = True
-        Me.営業担当者.Width = 90
+        Me.営業担当者.Width = 92
         '
         'メーカー
         '
         Me.メーカー.HeaderText = "メーカー"
         Me.メーカー.Name = "メーカー"
         Me.メーカー.ReadOnly = True
-        Me.メーカー.Width = 67
+        Me.メーカー.Width = 69
         '
         '品名
         '
         Me.品名.HeaderText = "品名"
         Me.品名.Name = "品名"
         Me.品名.ReadOnly = True
-        Me.品名.Width = 54
+        Me.品名.Width = 56
         '
         '型式
         '
         Me.型式.HeaderText = "型式"
         Me.型式.Name = "型式"
         Me.型式.ReadOnly = True
-        Me.型式.Width = 54
+        Me.型式.Width = 56
         '
         '数量
         '
@@ -243,14 +244,21 @@ Partial Class SalesVATList
         Me.数量.HeaderText = "数量"
         Me.数量.Name = "数量"
         Me.数量.ReadOnly = True
-        Me.数量.Width = 54
+        Me.数量.Width = 56
         '
         '単位
         '
         Me.単位.HeaderText = "単位"
         Me.単位.Name = "単位"
         Me.単位.ReadOnly = True
-        Me.単位.Width = 54
+        Me.単位.Width = 56
+        '
+        '通貨_外貨
+        '
+        Me.通貨_外貨.HeaderText = "通貨"
+        Me.通貨_外貨.Name = "通貨_外貨"
+        Me.通貨_外貨.ReadOnly = True
+        Me.通貨_外貨.Width = 56
         '
         '売単価
         '
@@ -260,7 +268,7 @@ Partial Class SalesVATList
         Me.売単価.HeaderText = "売単価"
         Me.売単価.Name = "売単価"
         Me.売単価.ReadOnly = True
-        Me.売単価.Width = 66
+        Me.売単価.Width = 68
         '
         'ＶＡＴ
         '
@@ -270,7 +278,7 @@ Partial Class SalesVATList
         Me.ＶＡＴ.HeaderText = "ＶＡＴ"
         Me.ＶＡＴ.Name = "ＶＡＴ"
         Me.ＶＡＴ.ReadOnly = True
-        Me.ＶＡＴ.Width = 55
+        Me.ＶＡＴ.Width = 57
         '
         '売上計
         '
@@ -280,7 +288,7 @@ Partial Class SalesVATList
         Me.売上計.HeaderText = "売上計"
         Me.売上計.Name = "売上計"
         Me.売上計.ReadOnly = True
-        Me.売上計.Width = 66
+        Me.売上計.Width = 68
         '
         'SalesVATList
         '
@@ -326,6 +334,7 @@ Partial Class SalesVATList
     Friend WithEvents 型式 As DataGridViewTextBoxColumn
     Friend WithEvents 数量 As DataGridViewTextBoxColumn
     Friend WithEvents 単位 As DataGridViewTextBoxColumn
+    Friend WithEvents 通貨_外貨 As DataGridViewTextBoxColumn
     Friend WithEvents 売単価 As DataGridViewTextBoxColumn
     Friend WithEvents ＶＡＴ As DataGridViewTextBoxColumn
     Friend WithEvents 売上計 As DataGridViewTextBoxColumn

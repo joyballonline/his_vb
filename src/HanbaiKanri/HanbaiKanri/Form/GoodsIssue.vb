@@ -776,9 +776,6 @@ Public Class GoodsIssue
         '受注明細の「出庫数」更新に使用
         Dim dsCymndt As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-
-#Region "Check"
-
         '対象データがなかったらメッセージを表示
         If DgvAdd.RowCount = 0 Then
             '操作できないメッセージを表示
@@ -849,8 +846,6 @@ Public Class GoodsIssue
                 End If
             End If
         Next
-#End Region
-
 
         Try
 
@@ -861,7 +856,7 @@ Public Class GoodsIssue
                 '仕入区分が2（在庫引当）の場合、作成済みの仮出庫データを「取消区分=0, 取消日=Datetime.Date」でUPDATEする
                 If DgvAdd.Rows(i).Cells("仕入区分値").Value = CommonConst.Sire_KBN_Zaiko Then
 
-                    Sql = " SELECT t44.出庫番号 "
+                    Sql = " SELECT t44.出庫番号,t45.行番号"
                     Sql += " FROM "
                     Sql += " t44_shukohd t44 "
                     Sql += " INNER JOIN "
@@ -874,13 +869,12 @@ Public Class GoodsIssue
                     Sql += " AND t44.受注番号枝番 = '" & Suffix & "'"
                     Sql += " AND t45.出庫区分 = '" & CommonConst.SHUKO_KBN_TMP & "'" '仮出庫のものを取得
                     Sql += " AND t44.取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'" '見取消のもの
-                    Sql += " GROUP bY "
-                    Sql += " t44.出庫番号 "
 
                     Dim shukkoTmpData As DataSet = _db.selectDB(Sql, RS, reccnt)
 
                     '該当データがあったら
-                    If shukkoTmpData.Tables(RS).Rows.Count > 0 Then
+                    'If shukkoTmpData.Tables(RS).Rows.Count > 0 Then
+                    For x As Integer = 0 To shukkoTmpData.Tables(RS).Rows.Count - 1
 
                         Sql = "UPDATE "
                         Sql += " t44_shukohd "
@@ -891,42 +885,38 @@ Public Class GoodsIssue
                         Sql += " ,更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
                         Sql += " WHERE "
                         Sql += " 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-                        Sql += " AND 出庫番号 = '" & shukkoTmpData.Tables(RS).Rows(0)("出庫番号") & "'"
+                        Sql += " AND 出庫番号 = '" & shukkoTmpData.Tables(RS).Rows(x)("出庫番号") & "'"
 
                         _db.executeDB(Sql)
 
-                        'inoutは該当数分取消す
-                        For x As Integer = 0 To shukkoTmpData.Tables(RS).Rows.Count - 1
 
-                            Sql = "UPDATE "
-                            Sql += "Public."
-                            Sql += "t70_inout "
-                            Sql += "SET "
+                        'inoutを取消す
+                        Sql = "UPDATE "
+                        Sql += "Public."
+                        Sql += "t70_inout "
+                        Sql += "SET "
 
-                            Sql += "取消日"
-                            Sql += " = '"
-                            Sql += UtilClass.formatDatetime(dtToday)
-                            Sql += "', "
-                            Sql += "取消区分 = '" & CommonConst.CANCEL_KBN_DISABLED.ToString & "'"
-                            Sql += ", 更新日 = '" & UtilClass.formatDatetime(dtToday) & "'"
-                            Sql += " ,更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+                        Sql += "取消日"
+                        Sql += " = '"
+                        Sql += UtilClass.formatDatetime(dtToday)
+                        Sql += "', "
+                        Sql += "取消区分 = '" & CommonConst.CANCEL_KBN_DISABLED.ToString & "'"
+                        Sql += ", 更新日 = '" & UtilClass.formatDatetime(dtToday) & "'"
+                        Sql += " ,更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
 
-                            Sql += "WHERE"
-                            Sql += " 会社コード"
-                            Sql += "='"
-                            Sql += frmC01F10_Login.loginValue.BumonCD
-                            Sql += "'"
-                            Sql += " AND"
-                            Sql += " 伝票番号"
-                            Sql += "='"
-                            Sql += shukkoTmpData.Tables(RS).Rows(x)("出庫番号")
-                            Sql += "' "
+                        Sql += "WHERE"
+                        Sql += " 会社コード"
+                        Sql += "='"
+                        Sql += frmC01F10_Login.loginValue.BumonCD
+                        Sql += "'"
+                        Sql += " AND 伝票番号 ='" & shukkoTmpData.Tables(RS).Rows(x)("出庫番号") & "' "
+                        Sql += " AND 行番号 ='" & shukkoTmpData.Tables(RS).Rows(x)("行番号") & "' "
 
-                            _db.executeDB(Sql)
+                        _db.executeDB(Sql)
 
-                        Next
+                    Next
 
-                    End If
+                    'End If
 
                 End If
             Next
@@ -1439,14 +1429,13 @@ Public Class GoodsIssue
             book = app.Workbooks.Add(sHinaFileDeliv)  'テンプレート
             sheet = CType(book.Worksheets(1), Excel.Worksheet)
 
-            sheet.Range("B8").Value = ":" & ds1.Tables(RS).Rows(0)("得意先名")
-            sheet.Range("B9").Value = ":" & Mid(ds1.Tables(RS).Rows(0)("得意先住所"), 1, 55)
-            sheet.Range("B10").Value = Mid(ds1.Tables(RS).Rows(0)("得意先住所"), 56) & ds1.Tables(RS).Rows(0)("得意先郵便番号")
-            sheet.Range("B11").Value = ":" & ds1.Tables(RS).Rows(0)("得意先電話番号")
+            sheet.Range("B7").Value = ds1.Tables(RS).Rows(0)("得意先名")
+            sheet.Range("B8").Value = ds1.Tables(RS).Rows(0)("得意先住所") & " " & ds1.Tables(RS).Rows(0)("得意先郵便番号")
+            sheet.Range("B11").Value = "'" & ds1.Tables(RS).Rows(0)("得意先電話番号")
 
-            sheet.Range("E8").Value = ":" & ds1.Tables(RS).Rows(0)("出庫番号")
-            sheet.Range("E9").Value = ":" & ds1.Tables(RS).Rows(0)("出庫日")
-            sheet.Range("E10").Value = ":" & ds1.Tables(RS).Rows(0)("客先番号")
+            sheet.Range("E7").Value = ds1.Tables(RS).Rows(0)("出庫番号")
+            sheet.Range("E8").Value = ds1.Tables(RS).Rows(0)("出庫日")
+            sheet.Range("E9").Value = ds1.Tables(RS).Rows(0)("客先番号")
 
 
             Dim rowCnt As Integer = 0
@@ -2045,6 +2034,8 @@ Public Class GoodsIssue
         Dim reccnt As Integer = 0 'DB用（デフォルト）
         Dim lngSuryo As Long = 0
 
+
+        '通常の場合
         Sql = "SELECT sum(m21.現在庫数) as 在庫数量 "
         Sql += " from m21_zaiko m21 "
 
@@ -2068,40 +2059,40 @@ Public Class GoodsIssue
         End If
 
 
-        '引き当ての場合
-        Sql = "SELECT sum(出庫数量) as 出庫数量 "
-        Sql += " from t45_shukodt t45 "
+
+        '引き当ての場合は仮出庫の分も加算する
+        Sql = "SELECT t45.出庫数量"
+
+        Sql += " from t45_shukodt t45 left join t44_shukohd t44"
+        Sql += " on t45.出庫番号 = t44.出庫番号"
 
         Sql += " WHERE t45.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql += " AND  t45.受注番号 = '" & TxtOrderNo.Text & "'"
         Sql += " AND  t45.受注番号枝番 = '" & TxtSuffixNo.Text & "'"
         Sql += " AND  t45.行番号 = " & DgvAdd.Rows(rowIndex).Cells("行番号").Value.ToString
         Sql += " AND  t45.出庫区分 = '" & CommonConst.SHUKO_KBN_TMP & "'"  '仮出庫
+        Sql += " AND  t44.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
+
 
         '在庫マスタから現在庫数を取得
         Dim dsSyuko As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-        If dsSyuko.Tables(RS).Rows.Count > 0 Then
-            If dsSyuko.Tables(RS).Rows(0)("出庫数量") IsNot DBNull.Value Then
 
-                Sql = "SELECT count(*) as 件数"
-                Sql += " from t45_shukodt t45 "
-
-                Sql += " WHERE t45.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-                Sql += " AND  t45.受注番号 = '" & TxtOrderNo.Text & "'"
-                Sql += " AND  t45.受注番号枝番 = '" & TxtSuffixNo.Text & "'"
-                Sql += " AND  t45.行番号 = " & DgvAdd.Rows(rowIndex).Cells("行番号").Value.ToString
-                Sql += " AND  t45.出庫区分 = '" & CommonConst.SHUKO_KBN_NORMAL & "'"  '通常出庫
-
-                '在庫マスタから現在庫数を取得
-                Dim dsSyuko2 As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-                If dsSyuko2.Tables(RS).Rows(0)("件数") = 0 Then
-                    lngSuryo += dsSyuko.Tables(RS).Rows(0)("出庫数量")
-                End If
-
-            End If
+        'データがなければ終了
+        If dsSyuko.Tables(RS).Rows.Count = 0 Then
+            Return lngSuryo
         End If
+
+
+        For i As Integer = 0 To dsSyuko.Tables(RS).Rows.Count - 1
+
+            '仮出庫の数量を足す
+            lngSuryo += dsSyuko.Tables(RS).Rows(i)("出庫数量")
+        Next
+
+
+        dsSyuko.Dispose()
+
 
         Return lngSuryo
 

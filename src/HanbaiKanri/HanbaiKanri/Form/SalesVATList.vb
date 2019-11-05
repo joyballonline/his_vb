@@ -97,8 +97,10 @@ Public Class SalesVATList
             DgvList.Columns("数量").HeaderText = "Quantity"
             DgvList.Columns("単位").HeaderText = "Unit"
             DgvList.Columns("売単価").HeaderText = "SellingPrice"
-            DgvList.Columns("ＶＡＴ").HeaderText = "ＶＡＴ"
+            DgvList.Columns("ＶＡＴ").HeaderText = "VAT"
             DgvList.Columns("売上計").HeaderText = "TotalAmount"
+            DgvList.Columns("通貨_外貨").HeaderText = "Currency"
+
 
             LblMode.Text = SalesStatus & " Mode"
 
@@ -183,11 +185,12 @@ Public Class SalesVATList
                 DgvList.Rows(i).Cells("型式").Value = ds.Tables(RS).Rows(i)("型式")
                 DgvList.Rows(i).Cells("数量").Value = ds.Tables(RS).Rows(i)("売上数量")
                 DgvList.Rows(i).Cells("単位").Value = ds.Tables(RS).Rows(i)("単位")
+                DgvList.Rows(i).Cells("通貨_外貨").Value = "IDR"
                 DgvList.Rows(i).Cells("売単価").Value = ds.Tables(RS).Rows(i)("見積単価")
-                DgvList.Rows(i).Cells("ＶＡＴ").Value = ds.Tables(RS).Rows(i)("ＶＡＴ")
-                DgvList.Rows(i).Cells("売上計").Value = (ds.Tables(RS).Rows(i)("見積単価") + ds.Tables(RS).Rows(i)("ＶＡＴ")) * ds.Tables(RS).Rows(i)("売上数量")
+                DgvList.Rows(i).Cells("ＶＡＴ").Value = DgvList.Rows(i).Cells("売単価").Value * ds.Tables(RS).Rows(i)("ＶＡＴ") / 100
+                DgvList.Rows(i).Cells("売上計").Value = (DgvList.Rows(i).Cells("売単価").Value + DgvList.Rows(i).Cells("ＶＡＴ").Value) * DgvList.Rows(i).Cells("数量").Value  '(ds.Tables(RS).Rows(i)("見積単価") + ds.Tables(RS).Rows(i)("ＶＡＴ")) * ds.Tables(RS).Rows(i)("売上数量")
 
-                totalSalesAmount += (ds.Tables(RS).Rows(i)("見積単価") + ds.Tables(RS).Rows(i)("ＶＡＴ")) * ds.Tables(RS).Rows(i)("売上数量")
+                totalSalesAmount += (DgvList.Rows(i).Cells("売上計").Value)
             Next
 
             TxtSalesAmount.Text = totalSalesAmount.ToString("N2")

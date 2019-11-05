@@ -635,7 +635,8 @@ Public Class OrderList
         End If
 
         '取消済みデータは取消操作不可能
-        If DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("取消").Value = CommonConst.CANCEL_KBN_DISABLED_TXT Then
+        If DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("取消").Value =
+            IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_JPN, CommonConst.CANCEL_KBN_JPN_TXT, CommonConst.CANCEL_KBN_ENG_TXT) Then
             '取消データは選択できないアラートを出す
             _msgHd.dspMSG("cannotSelectTorikeshiData", frmC01F10_Login.loginValue.Language)
             Exit Sub
@@ -683,7 +684,8 @@ Public Class OrderList
         End If
 
         '取消済みデータは取消操作不可能
-        If DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("取消").Value = CommonConst.CANCEL_KBN_DISABLED_TXT Then
+        If DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("取消").Value =
+            IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_JPN, CommonConst.CANCEL_KBN_JPN_TXT, CommonConst.CANCEL_KBN_ENG_TXT) Then
             '取消データは選択できないアラートを出す
             _msgHd.dspMSG("cannotSelectTorikeshiData", frmC01F10_Login.loginValue.Language)
             Exit Sub
@@ -708,7 +710,8 @@ Public Class OrderList
         End If
 
         '取消済みデータは取消操作不可能
-        If DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("取消").Value = CommonConst.CANCEL_KBN_DISABLED_TXT Then
+        If DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("取消").Value =
+            IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_JPN, CommonConst.CANCEL_KBN_JPN_TXT, CommonConst.CANCEL_KBN_ENG_TXT) Then
             '取消データは選択できないアラートを出す
             _msgHd.dspMSG("cannotSelectTorikeshiData", frmC01F10_Login.loginValue.Language)
             Exit Sub
@@ -725,6 +728,7 @@ Public Class OrderList
 
     '受注取消
     Private Sub BtnOrderCancel_Click(sender As Object, e As EventArgs) Handles BtnOrderCancel.Click
+
         'グリッドに何もないときは次画面へ移動しない
         If Me.DgvCymnhd.RowCount = 0 Then
             '操作できないアラートを出す
@@ -745,7 +749,8 @@ Public Class OrderList
         End If
 
         '取消済みデータは取消操作不可能
-        If DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("取消").Value = CommonConst.CANCEL_KBN_DISABLED_TXT Then
+        If DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("取消").Value =
+            IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_JPN, CommonConst.CANCEL_KBN_JPN_TXT, CommonConst.CANCEL_KBN_ENG_TXT) Then
             '取消データは選択できないアラートを出す
             _msgHd.dspMSG("cannotSelectTorikeshiData", frmC01F10_Login.loginValue.Language)
             Return
@@ -807,6 +812,7 @@ Public Class OrderList
 
         Dim dtNow As String = UtilClass.formatDatetime(DateTime.Now)
         Dim Sql1 As String = ""
+        Dim reccnt As Integer = 0 'DB用（デフォルト）
 
         mOutCancel = False
 
@@ -825,7 +831,81 @@ Public Class OrderList
                 '仕入区分が2（在庫引当）の場合、作成済みの仮出庫データを「取消区分=0, 取消日=Datetime.Date」でUPDATEする
                 If dsCymndt.Tables(RS).Rows(i)("仕入区分").ToString = CommonConst.Sire_KBN_Zaiko Then
 
-#Region "shuko"
+                    '出庫データ select
+                    'Sql1 = " AND 受注番号 = '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号").Value & "'"
+                    'Sql1 += " AND 受注番号枝番 = '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号枝番").Value & "'"
+                    'Sql1 += " AND 行番号 = '" & dsCymndt.Tables(RS).Rows(i)("行番号").ToString & "'"
+
+                    'Dim dsShukodt As DataSet = getDsData("t45_shukodt", Sql1)
+
+
+                    Dim strJytyuNo = DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号").Value
+                    Dim strEda = DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号枝番").Value
+
+                    Sql1 = " SELECT t44.出庫番号,t45.行番号 "
+
+                    Sql1 += " FROM t44_shukohd t44 INNER JOIN t45_shukodt t45 "
+                    Sql1 += " on t44.出庫番号 = t45.出庫番号 "
+
+                    Sql1 += " WHERE "
+                    Sql1 += " t44.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                    Sql1 += " AND t44.受注番号 = '" & strJytyuNo & "'"
+                    Sql1 += " AND t44.受注番号枝番 = '" & strEda & "'"
+                    Sql1 += " AND t45.出庫区分 = '" & CommonConst.SHUKO_KBN_TMP & "'" '仮出庫のものを取得
+                    Sql1 += " AND t44.取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'" '見取消のもの
+
+                    Dim dsShukodt As DataSet = _db.selectDB(Sql1, RS, reccnt)
+
+
+                    '該当データがあったら
+                    'If shukkoTmpData.Tables(RS).Rows.Count > 0 Then
+                    For x As Integer = 0 To dsShukodt.Tables(RS).Rows.Count - 1
+
+                        Dim strSyukoNo As String = dsShukodt.Tables(RS).Rows(x)("出庫番号").ToString
+                        Dim strGyo As String = dsShukodt.Tables(RS).Rows(x)("行番号").ToString
+
+
+                        't45_shukodt
+                        Sql1 = "UPDATE t45_shukodt"
+
+                        Sql1 += " SET "
+                        Sql1 += " 更新日 = '" & UtilClass.formatDatetime(dtNow) & "'"
+                        Sql1 += ",更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+
+                        Sql1 += " WHERE "
+                        Sql1 += "     会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                        Sql1 += " AND 出庫番号 ='" & strSyukoNo & "'"
+                        Sql1 += " AND 行番号 ='" & strGyo & "'"
+
+                        _db.executeDB(Sql1)
+
+
+#Region "inout"
+
+                        't70_inout
+                        Sql1 = "UPDATE t70_inout "
+                        Sql1 += " SET "
+                        Sql1 += " 取消区分 = " & CommonConst.CANCEL_KBN_DISABLED.ToString
+                        Sql1 += ",取消日 = '" & UtilClass.formatDatetime(dtNow) & "'"
+                        Sql1 += ",更新日 = '" & UtilClass.formatDatetime(dtNow) & "'"
+                        Sql1 += ",更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+
+                        Sql1 += " WHERE "
+                        Sql1 += "     会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                        Sql1 += " AND 伝票番号 ='" & strSyukoNo & "'"
+                        Sql1 += " AND 行番号 ='" & strGyo & "'"
+
+
+                        _db.executeDB(Sql1)
+
+#End Region
+
+                    Next
+
+
+
+#Region "t44_shukohd"
+
                     't44_shukohd
                     Sql1 = "UPDATE "
                     Sql1 += " t44_shukohd "
@@ -841,76 +921,10 @@ Public Class OrderList
                     Sql1 += " 受注番号 = '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号").Value & "'"
                     Sql1 += " AND "
                     Sql1 += " 受注番号枝番 = '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号枝番").Value & "'"
+                    Sql1 += " AND 取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'" '見取消のもの
 
                     _db.executeDB(Sql1)
 
-
-                    't45_shukodt
-                    Sql1 = "UPDATE "
-                    Sql1 += " t45_shukodt "
-                    Sql1 += " SET "
-                    Sql1 += " 更新日 = '" & UtilClass.formatDatetime(dtNow) & "'"
-                    Sql1 += ",更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
-
-                    Sql1 += " WHERE "
-                    Sql1 += " 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-                    Sql1 += " AND "
-                    Sql1 += " 受注番号 = '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号").Value & "'"
-                    Sql1 += " AND "
-                    Sql1 += " 受注番号枝番 = '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号枝番").Value & "'"
-                    Sql1 += " AND "
-                    Sql1 += " 行番号 = '" & dsCymndt.Tables(RS).Rows(i)("行番号").ToString & "'"
-
-                    _db.executeDB(Sql1)
-#End Region
-
-                    '出庫データ select
-                    Sql1 = " AND 受注番号 = '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号").Value & "'"
-                    Sql1 += " AND 受注番号枝番 = '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号枝番").Value & "'"
-                    Sql1 += " AND 行番号 = '" & dsCymndt.Tables(RS).Rows(i)("行番号").ToString & "'"
-
-                    Dim dsShukodt As DataSet = getDsData("t45_shukodt", Sql1)
-
-
-#Region "inout"
-                    't70_inout
-                    Sql1 = "UPDATE t70_inout "
-                    Sql1 += " SET "
-                    Sql1 += " 取消区分 = " & CommonConst.CANCEL_KBN_DISABLED.ToString
-                    Sql1 += ",取消日 = '" & UtilClass.formatDatetime(dtNow) & "'"
-                    Sql1 += ",更新日 = '" & UtilClass.formatDatetime(dtNow) & "'"
-                    Sql1 += ",更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
-
-                    Sql1 += " WHERE "
-                    Sql1 += " 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-                    Sql1 += " AND"
-                    Sql1 += " 伝票番号 ='" & dsShukodt.Tables(RS).Rows(0)("出庫番号").ToString & "'"
-                    Sql1 += " AND"
-                    Sql1 += "   行番号 ='" & dsShukodt.Tables(RS).Rows(0)("行番号").ToString & "'"
-
-                    _db.executeDB(Sql1)
-
-#End Region
-
-#Region "t11_cymndt"
-                    't11_cymndtの出庫数は修正しない
-                    'Dim calShukko As Integer = dsCymndt.Tables(RS).Rows(i)("出庫数") - dsShukodt.Tables(RS).Rows(x)("出庫数量")
-                    ''Dim calUnShukko As Integer = dsCymndt.Tables(RS).Rows(i)("未出庫数") + dsShukodt.Tables(RS).Rows(x)("出庫数量")
-                    'Dim calUnShukko As Integer = dsCymndt.Tables(RS).Rows(i)("未出庫数") - dsShukodt.Tables(RS).Rows(x)("出庫数量")
-
-                    'Sql1 = "update t11_cymndt set "
-                    ''Sql1 += "出庫数 = '" & calShukko & "'"
-                    'Sql1 += "未出庫数 = '" & calUnShukko & "'"
-                    'Sql1 += ",更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
-                    'Sql1 += " where 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-                    'Sql1 += " AND "
-                    'Sql1 += "受注番号 ILIKE '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号").Value & "'"
-                    'Sql1 += " AND "
-                    'Sql1 += "受注番号枝番 ILIKE '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号枝番").Value & "'"
-                    'Sql1 += " AND "
-                    'Sql1 += "行番号 = '" & dsShukodt.Tables(RS).Rows(x)("行番号") & "'"
-
-                    '_db.executeDB(Sql1)
 #End Region
 
                 End If
@@ -1037,7 +1051,8 @@ Public Class OrderList
         End If
 
         '取消済みデータは取消操作不可能
-        If DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("取消").Value = CommonConst.CANCEL_KBN_DISABLED_TXT Then
+        If DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("取消").Value =
+            IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_JPN, CommonConst.CANCEL_KBN_JPN_TXT, CommonConst.CANCEL_KBN_ENG_TXT) Then
             '取消データは選択できないアラートを出す
             _msgHd.dspMSG("cannotSelectTorikeshiData", frmC01F10_Login.loginValue.Language)
             Exit Sub
@@ -1067,7 +1082,8 @@ Public Class OrderList
         End If
 
         '取消済みデータは取消操作不可能
-        If DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("取消").Value = CommonConst.CANCEL_KBN_DISABLED_TXT Then
+        If DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("取消").Value =
+            IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_JPN, CommonConst.CANCEL_KBN_JPN_TXT, CommonConst.CANCEL_KBN_ENG_TXT) Then
             '取消データは選択できないアラートを出す
             _msgHd.dspMSG("cannotSelectTorikeshiData", frmC01F10_Login.loginValue.Language)
             Exit Sub

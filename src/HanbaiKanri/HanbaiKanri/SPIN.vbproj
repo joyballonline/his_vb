@@ -854,7 +854,7 @@
     <None Include="bin\BaseXls\APScheduledCollectionDateList.xlsx" />
     <None Include="bin\BaseXls\ARScheduledCollectionDateList.xlsx" />
     <None Include="bin\BaseXls\CustomerARList.xlsx" />
-    <None Include="bin\BaseXls\DeliveryNote.xlsx" />
+    <None Include="bin\BaseXls\DeliveryNote_20191101.xlsx" />
     <None Include="bin\BaseXls\Invoice.xlsx" />
     <None Include="bin\BaseXls\JobOrderList.xlsx" />
     <None Include="bin\BaseXls\OrderRemainingList.xlsx" />
