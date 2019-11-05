@@ -397,6 +397,16 @@ Public Class ReceiptList
             Return
         End If
 
+
+        '出庫済のデータはエラー
+        Dim blnFlg As Boolean = mCheckSyuko()
+        If blnFlg = False Then
+            '取消データは選択できないアラートを出す
+            _msgHd.dspMSG("cannotSelectTorikeshiData_syuko", frmC01F10_Login.loginValue.Language)
+            Return
+        End If
+
+
         '取消確認のアラート
         Dim result As DialogResult = _msgHd.dspMSG("confirmCancel", frmC01F10_Login.loginValue.Language)
 
@@ -405,6 +415,48 @@ Public Class ReceiptList
         End If
 
     End Sub
+
+    Private Function mCheckSyuko() As Boolean
+
+        Dim reccnt As Integer = 0
+
+        '入庫と結び付いた出庫データが存在するか検索する
+        '発注番号で発注データを検索 → 受注番号で取消されていない出庫データを検索
+        Dim strHatyuNo As String = DgvNyuko.Rows(DgvNyuko.CurrentCell.RowIndex).Cells("発注番号").Value
+        Dim strEda As String = DgvNyuko.Rows(DgvNyuko.CurrentCell.RowIndex).Cells("発注番号枝番").Value
+
+
+        Dim Sql As String = "SELECT t20.受注番号 as 受注1,t44.受注番号 as 受注2"
+
+        Sql += " FROM t20_hattyu t20 left join t44_shukohd t44"
+        Sql += " on t20.受注番号 = t44.受注番号 and t20.受注番号枝番 = t44.受注番号枝番"
+
+        Sql += " WHERE "
+        Sql += "     t20.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " and t20.発注番号 = '" & strHatyuNo & "'"
+        Sql += " and t20.発注番号枝番 = '" & strEda & "'"
+        Sql += " and t44.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+
+
+        Dim dsNyukodt As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+        If dsNyukodt.Tables(RS).Rows.Count = 0 Then
+            '対象の出庫データがない場合は正常終了
+            mCheckSyuko = True
+            Exit Function
+        End If
+
+
+        Dim strMoji = Convert.ToString(dsNyukodt.Tables(RS).Rows(0)("受注2"))
+        If String.IsNullOrEmpty(strMoji) Then
+            '対象の出庫データがない場合は正常終了
+            mCheckSyuko = True
+        Else
+            '対象の出庫データがあった場合は入庫取消ができない
+            mCheckSyuko = False
+        End If
+
+    End Function
 
     '選択データをもとに以下テーブル更新
     't20_hattyu, t21_hattyu

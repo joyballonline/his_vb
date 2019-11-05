@@ -778,6 +778,14 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <MEMO>データ選択時、変更/取消/参照モード、かつ、選択データが取消データの場合に表示</MEMO>
   </MSG_DATA>
   <MSG_DATA>
+    <ID>cannotSelectTorikeshiData_syuko</ID>
+    <MSG1>出庫済みの商品があるため取消できません。</MSG1>
+    <MSG1_EN>Cannot cancel because there are already issued goods.</MSG1_EN>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+    <CREATE_DATE>2018/03/09 15:00</CREATE_DATE>
+    <MEMO></MEMO>
+  </MSG_DATA>
+  <MSG_DATA>
     <ID>confirmDeleteRow</ID>
     <MSG1>選択行を削除します。</MSG1>
     <MSG1_EN>Delete the selected line.</MSG1_EN>
