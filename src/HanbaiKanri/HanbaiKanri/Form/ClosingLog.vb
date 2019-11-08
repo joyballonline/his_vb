@@ -156,23 +156,6 @@ Public Class ClosingLog
 
     End Sub
 
-    Protected Overrides Sub WndProc(ByRef m As System.Windows.Forms.Message)
-        Const WM_NCLBUTTONDBLCLK As Integer = &HA3
-        Select Case m.Msg
-            Case WM_NCLBUTTONDBLCLK
-                'ここからタイトルバーがダブルクリックされた時に実行したい処理を記述
-
-                Dim openForm As Form = Nothing
-                openForm = New ClosingAdmin(_msgHd, _db, _langHd, Me)
-                openForm.ShowDialog()
-                'Me.Hide()
-
-                MyBase.WndProc(m)
-            Case Else
-                MyBase.WndProc(m)
-        End Select
-    End Sub
-
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
         _parentForm.Enabled = True
         _parentForm.Show()
@@ -8516,4 +8499,10 @@ Public Class ClosingLog
 
     End Function
 
+    Private Sub LblConditions_DoubleClick(sender As Object, e As EventArgs) Handles LblConditions.DoubleClick
+        Dim openForm As Form = Nothing
+        openForm = New ClosingAdmin(_msgHd, _db, _langHd, Me)
+        openForm.ShowDialog()
+        'Me.Hide()
+    End Sub
 End Class
