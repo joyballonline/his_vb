@@ -710,18 +710,47 @@ Public Class SalesProfitList
                 sheet.PageSetup.LeftHeader = "SalesProfitList（Monthly）"
                 sheet.PageSetup.CenterHeader = strSelectMonth & "/" & strSelectYear
 
-                sheet.Range("A1").Value = "SalesNumber"
-                sheet.Range("B1").Value = "SalesDate"
-                sheet.Range("C1").Value = "CustomerName"
-                sheet.Range("D1").Value = "SalesAmount"
-                sheet.Range("E1").Value = "ＶＡＴ"
+                sheet.Range("A1").Value = "JobOrderNo"
+                sheet.Range("B1").Value = "JobOrderVer"
+                sheet.Range("C1").Value = "LineNo"
+
+                sheet.Range("D1").Value = "SalesNo"
+                sheet.Range("E1").Value = "SalesVer"
+
                 sheet.Range("F1").Value = "CustomerNumber"
-                sheet.Range("G1").Value = "SalesPersonInCharge"
-                sheet.Range("H1").Value = "TotalSalesAmount"
-                sheet.Range("I1").Value = "Overhead"
-                sheet.Range("J1").Value = "SalesCost"
-                sheet.Range("K1").Value = "GrossMargin"
-                sheet.Range("L1").Value = "GrossMarginRate"
+                sheet.Range("G1").Value = "CustomerName"
+
+                sheet.Range("H1").Value = "Maker"
+                sheet.Range("I1").Value = "Product"
+                sheet.Range("J1").Value = "Model"
+
+                sheet.Range("K1").Value = "SalesCurrency"
+                sheet.Range("L1").Value = "OrderPrice(OriginalCurrency)"
+                sheet.Range("M1").Value = "OrderPrice(IDR)"
+                sheet.Range("N1").Value = "OrderQuantity"
+                sheet.Range("O1").Value = "Unit"
+                sheet.Range("P1").Value = "OrderAmount(OriginalCurrency)"
+                sheet.Range("Q1").Value = "OrderAmount(IDR)"
+
+                sheet.Range("R1").Value = "OrderNo"
+                sheet.Range("S1").Value = "OrderVer"
+                sheet.Range("T1").Value = "LineNo"
+                sheet.Range("U1").Value = "PurchaseNo"
+                sheet.Range("V1").Value = "LineNo"
+                sheet.Range("W1").Value = "PurchaseCategory"
+                sheet.Range("X1").Value = "VendorCode"
+
+                sheet.Range("Y1").Value = "PurchaseCurrency"
+                sheet.Range("Z1").Value = "PurchasePrice(OriginalCurrency)"
+                sheet.Range("AA1").Value = "PurchasePrice(IDR)"
+                sheet.Range("AB1").Value = "PurchasingCost(OriginalCurrency)"
+                sheet.Range("AC1").Value = "PurchasingCost(IDR)"
+                sheet.Range("AD1").Value = "Overhead"
+                sheet.Range("AE1").Value = "Profit"
+                sheet.Range("AF1").Value = "ProfitRate(%)"
+
+
+
             End If
 #End Region
 
@@ -820,15 +849,29 @@ Public Class SalesProfitList
 
             '最後に合計行の追加
             cellRowIndex += 2
-            sheet.Range("D" & cellRowIndex.ToString).Value = "受注金額計"
-            sheet.Range("D" & cellRowIndex.ToString + 1).Value = CDec(TxtSalesAmount.Text)
-            sheet.Range("D" & cellRowIndex.ToString + 3).Value = "仕入原価計"
-            sheet.Range("D" & cellRowIndex.ToString + 4).Value = CDec(TxtSalesCostAmount.Text)
 
-            sheet.Range("F" & cellRowIndex.ToString).Value = "利益"
-            sheet.Range("F" & cellRowIndex.ToString + 1).Value = CDec(TxtGrossMargin.Text)
-            sheet.Range("F" & cellRowIndex.ToString + 3).Value = "利益率(%)"
-            sheet.Range("F" & cellRowIndex.ToString + 4).Value = CDec(TxtGrossMarginRate.Text)
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then  '英語
+                sheet.Range("D" & cellRowIndex.ToString).Value = "OrderAmountTotal"
+                sheet.Range("D" & cellRowIndex.ToString + 3).Value = "PurchaseCostMeter"
+                sheet.Range("F" & cellRowIndex.ToString).Value = "ProfitMargin"
+                sheet.Range("F" & cellRowIndex.ToString + 3).Value = "ProfitRate(%)"
+
+            Else  '日本語
+                sheet.Range("D" & cellRowIndex.ToString).Value = "受注金額計"
+                sheet.Range("D" & cellRowIndex.ToString + 3).Value = "仕入原価計"
+                sheet.Range("F" & cellRowIndex.ToString).Value = "利益"
+                sheet.Range("F" & cellRowIndex.ToString + 3).Value = "利益率(%)"
+            End If
+
+            sheet.Range("D" & cellRowIndex.ToString + 1).Value = CDec(TxtSalesAmount.Text).ToString("0.00")
+            sheet.Range("D" & cellRowIndex.ToString + 1).NumberFormatLocal = "0.00"
+            sheet.Range("D" & cellRowIndex.ToString + 4).Value = CDec(TxtSalesCostAmount.Text).ToString("0.00")
+            sheet.Range("D" & cellRowIndex.ToString + 4).NumberFormatLocal = "0.00"
+
+            sheet.Range("F" & cellRowIndex.ToString + 1).Value = CDec(TxtGrossMargin.Text).ToString("0.00")
+            sheet.Range("F" & cellRowIndex.ToString + 1).NumberFormatLocal = "0.00"
+            sheet.Range("F" & cellRowIndex.ToString + 4).Value = CDec(TxtGrossMarginRate.Text).ToString("0.00")
+            sheet.Range("F" & cellRowIndex.ToString + 4).NumberFormatLocal = "0.0"
 
 
             ' 境界線オブジェクトを作成 →7行目の下部に罫線を描画する
