@@ -653,7 +653,7 @@ Public Class OrderingList
                     DgvHtyhd.Rows(i).Cells("発注残数").Value = ds.Tables(RS).Rows(i)("発注残数")
                     DgvHtyhd.Rows(i).Cells("単位").Value = ds.Tables(RS).Rows(i)("単位")
 
-                    DgvHtyhd.Rows(i).Cells("仕入金額_外貨").Value = ds.Tables(RS).Rows(i)("仕入値_外貨") * ds.Tables(RS).Rows(i)("発注数量")
+                    DgvHtyhd.Rows(i).Cells("仕入金額_外貨").Value = rmNullDecimal(ds.Tables(RS).Rows(i)("仕入値_外貨")) * ds.Tables(RS).Rows(i)("発注数量")
                     DgvHtyhd.Rows(i).Cells("仕入金額").Value = ds.Tables(RS).Rows(i)("仕入値") * ds.Tables(RS).Rows(i)("発注数量")
 
                     DgvHtyhd.Rows(i).Cells("間接費").Value = ds.Tables(RS).Rows(i)("間接費")
