@@ -152,7 +152,7 @@ Public Class SupplierAPList
 
             DgvCymndt.Rows(i).Cells("通貨_外貨").Value = cur
             DgvCymndt.Rows(i).Cells("買掛金額計_外貨").Value = dsKikehd.Tables(RS).Rows(i)("買掛金額計_外貨")
-            DgvCymndt.Rows(i).Cells("支払金額計_外貨").Value = dsKikehd.Tables(RS).Rows(i)("買掛金額計_外貨") - dsKikehd.Tables(RS).Rows(i)("買掛残高_外貨")
+            DgvCymndt.Rows(i).Cells("支払金額計_外貨").Value = rmNullDecimal(dsKikehd.Tables(RS).Rows(i)("買掛金額計_外貨")) - rmNullDecimal(dsKikehd.Tables(RS).Rows(i)("買掛残高_外貨"))
             DgvCymndt.Rows(i).Cells(V).Value = dsKikehd.Tables(RS).Rows(i)("買掛残高_外貨")
 
             DgvCymndt.Rows(i).Cells("通貨").Value = setBaseCurrency()
@@ -365,6 +365,26 @@ Public Class SupplierAPList
         Dim ds As DataSet = getDsData("m25_currency", Sql)
         'TxtIDRCurrency.Text = ds.Tables(RS).Rows(0)("通貨コード")
         setBaseCurrency = ds.Tables(RS).Rows(0)("通貨コード")
+
+    End Function
+
+    'NothingをDecimalに置換
+    Private Function rmNullDecimal(ByVal prmField As Object) As Decimal
+        If prmField Is Nothing Then
+            rmNullDecimal = 0
+            Exit Function
+        End If
+        If prmField Is DBNull.Value Then
+            rmNullDecimal = 0
+            Exit Function
+        End If
+
+        If Not IsNumeric(prmField) Then
+            rmNullDecimal = 0
+            Exit Function
+        End If
+
+        rmNullDecimal = prmField
 
     End Function
 
