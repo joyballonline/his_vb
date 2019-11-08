@@ -1862,6 +1862,16 @@ Public Class Quote
             Exit Sub
         End If
 
+
+        'データグリッド内に同一の商品があった場合はエラー
+        Dim blnFlg As Boolean = mCheckDuplicate()
+        If blnFlg = False Then
+
+            _msgHd.dspMSG("chkDuplicateError", frmC01F10_Login.loginValue.Language)
+            Exit Sub
+        End If
+
+
         Dim dtToday As DateTime = DateTime.Now
         Dim strToday As String = UtilClass.formatDatetime(dtToday)
 
@@ -2312,6 +2322,30 @@ Public Class Quote
         Me.Dispose()
 
     End Sub
+
+
+    Private Function mCheckDuplicate() As Boolean
+
+        For i As Integer = 0 To DgvItemList.Rows.Count - 1
+
+            For j As Integer = i + 1 To DgvItemList.Rows.Count - 1
+
+                '商品が同じ場合
+                If DgvItemList.Rows(i).Cells("メーカー").Value = DgvItemList.Rows(j).Cells("メーカー").Value _
+                       And DgvItemList.Rows(i).Cells("品名").Value = DgvItemList.Rows(j).Cells("品名").Value _
+                       And DgvItemList.Rows(i).Cells("型式").Value = DgvItemList.Rows(j).Cells("型式").Value Then
+
+                    mCheckDuplicate = False
+                    Exit Function
+                End If
+            Next
+
+        Next
+
+        mCheckDuplicate = True
+
+    End Function
+
 
     '見積書印刷
     '
