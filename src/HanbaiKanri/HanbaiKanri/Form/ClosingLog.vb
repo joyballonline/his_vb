@@ -81,13 +81,24 @@ Public Class ClosingLog
         Try
 
             '締処理日
-            Sql = "SELECT COALESCE(今回締日,current_date) 今回締日"
+            'Sql = "SELECT COALESCE(今回締日,current_date) 今回締日"
+            Sql = "SELECT 今回締日"
             Sql += " FROM m01_company"
             Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
 
             ds = _db.selectDB(Sql, RS, reccnt)
 
-            dtmSime.Text = ds.Tables(RS).Rows(0)("今回締日")
+
+            '今回締日を判定
+            Dim strShime As String = Convert.ToString(ds.Tables(RS).Rows(0)("今回締日"))
+            If strShime = vbNullString Then
+                '今回締日がテーブルに登録されていない場合は前月末の日付をセットする
+                Dim dtmShime As Date = DateSerial(Now.Year, Now.Month, 1)
+                dtmSime.Text = DateAdd("d", -1, dtmShime)
+            Else
+                'テーブルの値をセットする
+                dtmSime.Text = ds.Tables(RS).Rows(0)("今回締日")
+            End If
 
 
             '明細

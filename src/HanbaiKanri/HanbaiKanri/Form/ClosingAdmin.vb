@@ -87,7 +87,17 @@ Public Class ClosingAdmin
 
         Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-        dtmSime.Text = ds.Tables(RS).Rows(0)("今回締日")
+
+        '今回締日を判定
+        Dim strShime As String = Convert.ToString(ds.Tables(RS).Rows(0)("今回締日"))
+        If strShime = vbNullString Then
+            '今回締日がテーブルに登録されていない場合は前月末の日付をセットする
+            Dim dtmShime As Date = DateSerial(Now.Year, Now.Month, 1)
+            dtmSime.Text = DateAdd("d", -1, dtmShime)
+        Else
+            'テーブルの値をセットする
+            dtmSime.Text = ds.Tables(RS).Rows(0)("今回締日")
+        End If
 
 
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
@@ -104,7 +114,6 @@ Public Class ClosingAdmin
 
     '登録ボタン押下時
     Private Sub BtnRegistration_Click(sender As Object, e As EventArgs) Handles BtnRegistration.Click
-
 
         Dim frmNew As New ClosingLog(_msgHd, _db, _langHd, Me)
         frmNew.Closing_btn(1, dtmSime.Value)
