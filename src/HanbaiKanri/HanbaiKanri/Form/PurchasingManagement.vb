@@ -373,7 +373,7 @@ Public Class PurchasingManagement
 
             Sql += "public.t41_siredt t41, public.t40_sirehd t40, public.t21_hattyu t21 "
             Sql += "where t41.会社コード = t40.会社コード And t41.仕入番号 = t40.仕入番号 and "
-            Sql += "t41.発注番号 = t21.発注番号 And t41.発注番号枝番 = t21.発注番号枝番 and t41.発注行番号 = t21.行番号 and "
+            Sql += "t41.発注番号 = t21.発注番号 And t41.発注番号枝番 = t21.発注番号枝番 and t41.行番号 = t21.行番号 and "
 
             'Sql += " WHERE "
             Sql += " t41.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
