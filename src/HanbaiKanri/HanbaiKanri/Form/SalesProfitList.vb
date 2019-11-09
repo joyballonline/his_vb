@@ -251,21 +251,23 @@ Public Class SalesProfitList
 
 
                 DgvList.Rows(i).Cells("販売通貨").Value = cur
-                DgvList.Rows(i).Cells("受注単価_原通貨").Value = ds.Tables(RS).Rows(i)("見積単価")
                 If rmNullDecimal(ds.Tables(RS).Rows(i)("レート")) = 0 Then
                 Else
-                    DgvList.Rows(i).Cells("受注単価_IDR").Value = rmNullDecimal(ds.Tables(RS).Rows(i)("見積単価_外貨"))
+                    DgvList.Rows(i).Cells("受注単価_原通貨").Value = rmNullDecimal(ds.Tables(RS).Rows(i)("見積単価_外貨"))
                 End If
+                DgvList.Rows(i).Cells("受注単価_IDR").Value = ds.Tables(RS).Rows(i)("見積単価")
+
 
                 DgvList.Rows(i).Cells("受注数量").Value = ds.Tables(RS).Rows(i)("受注数量")
                 DgvList.Rows(i).Cells("単位").Value = ds.Tables(RS).Rows(i)("単位")
 
 
-                DgvList.Rows(i).Cells("受注金額_原通貨").Value = ds.Tables(RS).Rows(i)("見積金額")
                 If rmNullDecimal(ds.Tables(RS).Rows(i)("レート")) = 0 Then
                 Else
-                    DgvList.Rows(i).Cells("受注金額_IDR").Value = rmNullDecimal(ds.Tables(RS).Rows(i)("見積金額_外貨"))
+                    DgvList.Rows(i).Cells("受注金額_原通貨").Value = rmNullDecimal(ds.Tables(RS).Rows(i)("見積金額_外貨"))
                 End If
+                DgvList.Rows(i).Cells("受注金額_IDR").Value = ds.Tables(RS).Rows(i)("見積金額")
+
 
                 totalSales += DgvList.Rows(i).Cells("受注金額_IDR").Value
 
@@ -310,11 +312,11 @@ Public Class SalesProfitList
 
                 DgvList.Rows(i).Cells("仕入通貨").Value = cur
 
-                DgvList.Rows(i).Cells("仕入単価_原通貨").Value = ds.Tables(RS).Rows(i)("仕入値")
-                DgvList.Rows(i).Cells("仕入単価_IDR").Value = rmNullDecimal(ds.Tables(RS).Rows(i)("仕入単価_外貨"))
+                DgvList.Rows(i).Cells("仕入単価_原通貨").Value = rmNullDecimal(ds.Tables(RS).Rows(i)("仕入単価_外貨"))
+                DgvList.Rows(i).Cells("仕入単価_IDR").Value = ds.Tables(RS).Rows(i)("仕入値")
 
-                DgvList.Rows(i).Cells("仕入原価_原通貨").Value = ds.Tables(RS).Rows(i)("仕入原価")
-                DgvList.Rows(i).Cells("仕入原価_IDR").Value = rmNullDecimal(ds.Tables(RS).Rows(i)("仕入単価_外貨")) * ds.Tables(RS).Rows(i)("受注数量")
+                DgvList.Rows(i).Cells("仕入原価_原通貨").Value = rmNullDecimal(ds.Tables(RS).Rows(i)("仕入単価_外貨")) * ds.Tables(RS).Rows(i)("受注数量")
+                DgvList.Rows(i).Cells("仕入原価_IDR").Value = ds.Tables(RS).Rows(i)("仕入原価")
 
                 DgvList.Rows(i).Cells("間接費").Value = ds.Tables(RS).Rows(i)("間接費") * rmNullDecimal(ds.Tables(RS).Rows(i)("仕入レート"))
 
@@ -739,15 +741,17 @@ Public Class SalesProfitList
                 sheet.Range("V1").Value = "LineNo"
                 sheet.Range("W1").Value = "PurchaseCategory"
                 sheet.Range("X1").Value = "VendorCode"
+                sheet.Range("X1").Value = "VendorCode"
+                sheet.Range("Y1").Value = "VendorName"
 
-                sheet.Range("Y1").Value = "PurchaseCurrency"
-                sheet.Range("Z1").Value = "PurchasePrice(OriginalCurrency)"
-                sheet.Range("AA1").Value = "PurchasePrice(IDR)"
-                sheet.Range("AB1").Value = "PurchasingCost(OriginalCurrency)"
-                sheet.Range("AC1").Value = "PurchasingCost(IDR)"
-                sheet.Range("AD1").Value = "Overhead"
-                sheet.Range("AE1").Value = "Profit"
-                sheet.Range("AF1").Value = "ProfitRate(%)"
+                sheet.Range("Z1").Value = "PurchaseCurrency"
+                sheet.Range("AA1").Value = "PurchasePrice(OriginalCurrency)"
+                sheet.Range("AB1").Value = "PurchasePrice(IDR)"
+                sheet.Range("AC1").Value = "PurchasingCost(OriginalCurrency)"
+                sheet.Range("AD1").Value = "PurchasingCost(IDR)"
+                sheet.Range("AE1").Value = "Overhead"
+                sheet.Range("AF1").Value = "Profit"
+                sheet.Range("AG1").Value = "ProfitRate(%)"
 
 
 
@@ -826,11 +830,11 @@ Public Class SalesProfitList
                 sheet.Range("AA" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("仕入単価_原通貨").Value) '仕入単価_原通貨
                 sheet.Range("AB" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("仕入単価_IDR").Value) '仕入単価_IDR
                 sheet.Range("AC" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("仕入原価_原通貨").Value) '仕入原価_原通貨
-                sheet.Range("AA" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("仕入原価_IDR").Value) '仕入原価_IDR
+                sheet.Range("AD" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("仕入原価_IDR").Value) '仕入原価_IDR
 
-                sheet.Range("AD" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("間接費").Value) '間接費
-                sheet.Range("AE" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("利益").Value) '利益
-                sheet.Range("AF" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("利益率").Value) '利益率
+                sheet.Range("AE" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("間接費").Value) '間接費
+                sheet.Range("AF" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("利益").Value) '利益
+                sheet.Range("AG" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("利益率").Value) '利益率
 
 
                 'sheet.Range("L" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight
@@ -841,7 +845,7 @@ Public Class SalesProfitList
 
             Next
 
-            sheet.Columns("A:AF").EntireColumn.AutoFit  '幅の自動調整
+            sheet.Columns("A:AG").EntireColumn.AutoFit  '幅の自動調整
 
             ' 行7全体のオブジェクトを作成
             xlRngTmp = sheet.Rows
@@ -864,12 +868,12 @@ Public Class SalesProfitList
             End If
 
             sheet.Range("D" & cellRowIndex.ToString + 1).Value = CDec(TxtSalesAmount.Text).ToString("0.00")
-            sheet.Range("D" & cellRowIndex.ToString + 1).NumberFormatLocal = "0.00"
+            sheet.Range("D" & cellRowIndex.ToString + 1).NumberFormatLocal = "#,##0.00"
             sheet.Range("D" & cellRowIndex.ToString + 4).Value = CDec(TxtSalesCostAmount.Text).ToString("0.00")
-            sheet.Range("D" & cellRowIndex.ToString + 4).NumberFormatLocal = "0.00"
+            sheet.Range("D" & cellRowIndex.ToString + 4).NumberFormatLocal = "#,##0.00"
 
             sheet.Range("F" & cellRowIndex.ToString + 1).Value = CDec(TxtGrossMargin.Text).ToString("0.00")
-            sheet.Range("F" & cellRowIndex.ToString + 1).NumberFormatLocal = "0.00"
+            sheet.Range("F" & cellRowIndex.ToString + 1).NumberFormatLocal = "#,##0.00"
             sheet.Range("F" & cellRowIndex.ToString + 4).Value = CDec(TxtGrossMarginRate.Text).ToString("0.00")
             sheet.Range("F" & cellRowIndex.ToString + 4).NumberFormatLocal = "0.0"
 
