@@ -410,7 +410,13 @@ Public Class Payment
                 DgvKikeInfo.Rows(i).Cells("買掛情報買掛残高固定").Value = dsKikehd.Tables(RS).Rows(i)("買掛金額計_外貨") - dsKikehd.Tables(RS).Rows(i)("支払金額計_外貨")
             End If
             DgvKikeInfo.Rows(i).Cells("支払金額").Value = 0
-            DgvKikeInfo.Rows(i).Cells("支払予定日").Value = dsKikehd.Tables(RS).Rows(i)("支払予定日").ToShortDateString()
+
+            Dim strTmp As String = Convert.ToString(dsKikehd.Tables(RS).Rows(i)("支払予定日"))
+            If strTmp = vbNullString Then
+                DgvKikeInfo.Rows(i).Cells("支払予定日").Value = vbNullString
+            Else
+                DgvKikeInfo.Rows(i).Cells("支払予定日").Value = dsKikehd.Tables(RS).Rows(i)("支払予定日").ToShortDateString()
+            End If
 
             '非可視
             DgvKikeInfo.Rows(i).Cells("買掛区分").Value = dsKikehd.Tables(RS).Rows(i)("買掛区分")

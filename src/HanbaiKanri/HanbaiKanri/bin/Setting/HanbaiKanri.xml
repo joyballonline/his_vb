@@ -802,6 +802,14 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <MEMO></MEMO>
   </MSG_DATA>
   <MSG_DATA>
+    <ID>cannotSelectTorikeshiData_shiharai</ID>
+    <MSG1>既に支払登録がなされているので取り消すことができません。</MSG1>
+    <MSG1_EN>The payment has already been registered and cannot be canceled.</MSG1_EN>
+    <ICONT_TYPE>Information</ICONT_TYPE>
+    <CREATE_DATE>2019/11/10 15:00</CREATE_DATE>
+    <MEMO></MEMO>
+  </MSG_DATA>
+  <MSG_DATA>
     <ID>confirmDeleteRow</ID>
     <MSG1>選択行を削除します。</MSG1>
     <MSG1_EN>Delete the selected line.</MSG1_EN>

@@ -886,6 +886,16 @@ Public Class OrderingList
             Return
         End If
 
+
+        '支払済みのデータはエラー
+        Dim blnFlg As Boolean = mCheckShiharai()
+        If blnFlg = False Then
+            '取消データは選択できないアラートを出す
+            _msgHd.dspMSG("cannotSelectTorikeshiData_shiharai", frmC01F10_Login.loginValue.Language)
+            Return
+        End If
+
+
         Try
             Sql = "UPDATE Public.t20_hattyu "
             Sql += "SET "
@@ -915,6 +925,53 @@ Public Class OrderingList
         End Try
 
     End Sub
+
+
+    Private Function mCheckShiharai() As Boolean
+
+        Dim reccnt As Integer = 0
+
+
+        '発注と結び付いた支払データが存在するか検索する
+        '発注番号で買掛データを検索 → 買掛番号で取消されていない支払データを検索
+        Dim strHatyuNo As String = DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("発注番号").Value
+        Dim strEda As String = DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("発注番号枝番").Value
+
+
+        Dim Sql As String = "SELECT t46.買掛番号 as 買掛1, t49.買掛番号 as 買掛2"
+
+        Sql += " FROM t46_kikehd t46 left join t49_shrikshihd t49"
+        Sql += " on t46.買掛番号 = t49.買掛番号"
+
+        Sql += " WHERE "
+        Sql += "     t46.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " and t46.発注番号 = '" & strHatyuNo & "'"
+        Sql += " and t46.発注番号枝番 = '" & strEda & "'"
+        Sql += " and t49.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+
+
+        Dim dsShiharai As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+        If dsShiharai.Tables(RS).Rows.Count = 0 Then
+            '対象の出庫データがない場合は正常終了
+            mCheckShiharai = True
+        Else
+            Dim strMoji = Convert.ToString(dsShiharai.Tables(RS).Rows(0)("買掛2"))
+            If String.IsNullOrEmpty(strMoji) Then
+                '対象の出庫データがない場合は正常終了
+                mCheckShiharai = True
+            Else
+                '対象の出庫データがあった場合は入庫取消ができない
+                mCheckShiharai = False
+            End If
+        End If
+
+
+        dsShiharai.Dispose()
+
+
+    End Function
+
 
     '仕入入力ボタン押下時
     Private Sub BtnOrding_Click(sender As Object, e As EventArgs) Handles BtnOrding.Click
