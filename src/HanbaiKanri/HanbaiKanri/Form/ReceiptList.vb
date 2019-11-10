@@ -421,6 +421,9 @@ Public Class ReceiptList
 
         Dim reccnt As Integer = 0
 
+
+#Region "受注"
+
         '入庫と結び付いた出庫データが存在するか検索する
         '発注番号で発注データを検索 → 受注番号で取消されていない出庫データを検索
         Dim strHatyuNo As String = DgvNyuko.Rows(DgvNyuko.CurrentCell.RowIndex).Cells("発注番号").Value
@@ -444,18 +447,57 @@ Public Class ReceiptList
         If dsNyukodt.Tables(RS).Rows.Count = 0 Then
             '対象の出庫データがない場合は正常終了
             mCheckSyuko = True
-            Exit Function
+        Else
+            Dim strMoji = Convert.ToString(dsNyukodt.Tables(RS).Rows(0)("受注2"))
+            If String.IsNullOrEmpty(strMoji) Then
+                '対象の出庫データがない場合は正常終了
+                mCheckSyuko = True
+            Else
+                '対象の出庫データがあった場合は入庫取消ができない
+                mCheckSyuko = False
+            End If
         End If
 
 
-        Dim strMoji = Convert.ToString(dsNyukodt.Tables(RS).Rows(0)("受注2"))
-        If String.IsNullOrEmpty(strMoji) Then
+        dsNyukodt.Dispose()
+
+
+#End Region
+
+
+#Region "t70_inout"
+
+        '在庫引当の場合、t70_inoutのロケ番に存在するかを確認する
+        Dim strNyukoNo As String = DgvNyuko.Rows(DgvNyuko.CurrentCell.RowIndex).Cells("入庫番号").Value
+
+
+        Sql = "SELECT count(*) as 件数"
+
+        Sql += " FROM t70_inout"
+
+        Sql += " WHERE "
+        Sql += "     会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " and 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+        Sql += " and left(ロケ番号,10) = '" & strNyukoNo & "'"
+
+
+        Dim dsinout As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+
+        If dsinout.Tables(RS).Rows(0)("件数") = 0 Then
             '対象の出庫データがない場合は正常終了
             mCheckSyuko = True
         Else
             '対象の出庫データがあった場合は入庫取消ができない
             mCheckSyuko = False
         End If
+
+
+        dsinout.Dispose()
+
+
+#End Region
+
 
     End Function
 
