@@ -313,6 +313,15 @@ Public Class BillingList
             Return
         End If
 
+        '入金済みのデータはエラー
+        Dim blnFlg As Boolean = mCheckNyukin()
+        If blnFlg = False Then
+            '取消データは選択できないアラートを出す
+            _msgHd.dspMSG("cannotSelectTorikeshiData_nyukin", frmC01F10_Login.loginValue.Language)
+            Return
+        End If
+
+
         Try
 
             '取消確認のアラート
@@ -330,6 +339,42 @@ Public Class BillingList
         End Try
 
     End Sub
+
+
+    Private Function mCheckNyukin() As Boolean
+
+        Dim reccnt As Integer = 0
+
+
+        't80_shiwakenyuに請求番号があるか検索
+        Dim strSeikyu As String = DgvBilling.Rows(DgvBilling.CurrentCell.RowIndex).Cells("請求番号").Value
+
+
+        Dim Sql As String = "SELECT count(*) as 件数"
+
+        Sql += " FROM t80_shiwakenyu"
+
+        Sql += " WHERE "
+        Sql += "     会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " and 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+        Sql += " and 請求番号 = '" & strSeikyu & "'"
+
+
+        Dim dsSeikyu As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+        If dsSeikyu.Tables(RS).Rows(0)("件数") = 0 Then
+            '対象の入金データがない場合は正常終了
+            mCheckNyukin = True
+        Else
+            '対象の入金データがあった場合は取消ができない
+            mCheckNyukin = False
+        End If
+
+
+        dsSeikyu.Dispose()
+
+
+    End Function
 
     Private Function viewSearchConditions() As String
         Dim Sql As String = ""

@@ -984,7 +984,7 @@ Public Class DepositManagement
             Sql += "Public."
             Sql += "t80_shiwakenyu("
             Sql += "会社コード, 請求番号,請求区分,請求日,受注番号,受注番号枝番,得意先コード"
-            Sql += ",入金番号,識別番号,行番号,入金種目,入金種目名,入金日,入金額,登録日,更新者"
+            Sql += ",入金番号,識別番号,行番号,入金種目,入金種目名,入金日,入金額,登録日,更新者,取消区分"
             Sql += ",客先番号"
 
             Sql += ") VALUES('"
@@ -1019,6 +1019,8 @@ Public Class DepositManagement
             Sql += dtToday      '登録日
             Sql += "', '"
             Sql += frmC01F10_Login.loginValue.TantoNM
+            Sql += "', '"
+            Sql += Convert.ToString(CommonConst.CANCEL_KBN_ENABLED)    '取消区分
             Sql += "', '"
             Sql += ShiwakeData.Rows(i).Cells("客先番号_仕訳").Value.ToString
 

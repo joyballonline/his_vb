@@ -517,6 +517,24 @@ Public Class DepositDetailList
             '請求基本を更新
             _db.executeDB(Sql)
 
+
+            't80_shiwakenyu
+            Sql = "UPDATE Public.t80_shiwakenyu "
+            Sql += " SET "
+
+            Sql += "取消区分 = '" & CommonConst.CANCEL_KBN_DISABLED & "'"
+            Sql += ", 取消日 = '" & dtNow & "' "
+            Sql += ", 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "' "
+            Sql += ", 更新日 = '" & dtNow & "'"
+
+            Sql += "WHERE 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += " AND 入金番号 ='" & DgvBilling.Rows(DgvBilling.CurrentCell.RowIndex).Cells("入金番号").Value & "'"
+
+            '入金基本を更新
+            _db.executeDB(Sql)
+
+
+
             setDgvBilling()
 
         Else
