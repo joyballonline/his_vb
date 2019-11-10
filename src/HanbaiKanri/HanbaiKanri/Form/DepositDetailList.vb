@@ -395,7 +395,7 @@ Public Class DepositDetailList
         If RbtnDetails.Checked Or DgvBilling.Rows.Count = 0 Then
 
             '操作できないアラートを出す
-            _msgHd.dspMSG("NonAction", frmC01F10_Login.loginValue.Language)
+            _msgHd.dspMSG("chkDetailsCancel", frmC01F10_Login.loginValue.Language)
             Return
 
         End If
