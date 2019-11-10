@@ -786,6 +786,14 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <MEMO></MEMO>
   </MSG_DATA>
   <MSG_DATA>
+    <ID>chkDetailsCancel</ID>
+    <MSG1>明細単位では取消処理ができません。</MSG1>
+    <MSG1_EN>Cancellation processing cannot be performed for each item.</MSG1_EN>
+    <ICONT_TYPE>Information</ICONT_TYPE>
+    <CREATE_DATE>2019/11/10 15:00</CREATE_DATE>
+    <MEMO></MEMO>
+  </MSG_DATA>
+  <MSG_DATA>
     <ID>confirmDeleteRow</ID>
     <MSG1>選択行を削除します。</MSG1>
     <MSG1_EN>Delete the selected line.</MSG1_EN>
