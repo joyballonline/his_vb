@@ -394,6 +394,15 @@ Public Class AccountsPayableList
             Return
         End If
 
+        '支払済みのデータはエラー
+        Dim blnFlg As Boolean = mCheckShiharai()
+        If blnFlg = False Then
+            '取消データは選択できないアラートを出す
+            _msgHd.dspMSG("cannotSelectTorikeshiData_shiharai", frmC01F10_Login.loginValue.Language)
+            Return
+        End If
+
+
         Try
 
             '取消確認のアラート
@@ -411,6 +420,43 @@ Public Class AccountsPayableList
         End Try
 
     End Sub
+
+
+    Private Function mCheckShiharai() As Boolean
+
+        Dim reccnt As Integer = 0
+
+
+        't49_shrikshihdに買掛番号があるか検索
+        Dim strKaikake As String = DgvKike.Rows(DgvKike.CurrentCell.RowIndex).Cells("買掛番号").Value
+
+
+        Dim Sql As String = "SELECT count(*) as 件数"
+
+        Sql += " FROM t49_shrikshihd"
+
+        Sql += " WHERE "
+        Sql += "     会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " and 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+        Sql += " and 買掛番号 = '" & strKaikake & "'"
+
+
+        Dim dsKaikake As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+        If dsKaikake.Tables(RS).Rows(0)("件数") = 0 Then
+            '対象の入金データがない場合は正常終了
+            mCheckShiharai = True
+        Else
+            '対象の入金データがあった場合は取消ができない
+            mCheckShiharai = False
+        End If
+
+
+        dsKaikake.Dispose()
+
+
+    End Function
+
 
     '選択データをもとに以下テーブル更新
     't25_nkinhd, t27_nkinkshihd, t23_skyuhd

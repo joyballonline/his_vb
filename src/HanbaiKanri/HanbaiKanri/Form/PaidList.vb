@@ -553,6 +553,23 @@ Public Class PaidList
             '買掛基本を更新
             _db.executeDB(Sql)
 
+
+            't81_shiwakeshi
+            Sql = "UPDATE Public.t81_shiwakeshi "
+            Sql += "SET "
+
+            Sql += "取消区分 = '" & CommonConst.CANCEL_KBN_DISABLED & "'"
+            Sql += ", 取消日 = '" & dtNow & "'"
+            Sql += ", 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+            Sql += ", 更新日 = '" & dtNow & "'"
+
+            Sql += "WHERE 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += " AND 支払番号 ='" & DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("支払番号").Value & "'"
+
+            '支払基本を更新
+            _db.executeDB(Sql)
+
+
             setDgvHtyhd()
 
         Else

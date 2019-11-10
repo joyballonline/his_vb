@@ -1126,7 +1126,7 @@ Public Class Payment
             Sql += "Public."
             Sql += "t81_shiwakeshi("
             Sql += "会社コード, 買掛番号,買掛区分,買掛日,発注番号,発注番号枝番,仕入先コード"
-            Sql += ",支払番号,識別番号,行番号,支払種目,支払種目名,支払日,支払額,登録日,更新者"
+            Sql += ",支払番号,識別番号,行番号,支払種目,支払種目名,支払日,支払額,登録日,更新者,取消区分"
             Sql += ",客先番号"
 
             Sql += ") VALUES('"
@@ -1161,6 +1161,8 @@ Public Class Payment
             Sql += dtToday      '登録日
             Sql += "', '"
             Sql += frmC01F10_Login.loginValue.TantoNM
+            Sql += "', '"
+            Sql += Convert.ToString(CommonConst.CANCEL_KBN_ENABLED)    '取消区分
             Sql += "', '"
             Sql += ShiwakeData.Rows(i).Cells("客先番号_仕訳").Value.ToString
 
