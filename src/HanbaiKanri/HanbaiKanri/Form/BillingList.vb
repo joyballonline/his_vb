@@ -346,13 +346,13 @@ Public Class BillingList
         Dim reccnt As Integer = 0
 
 
-        't80_shiwakenyuに請求番号があるか検索
+        't27_nkinkshihdに請求番号があるか検索
         Dim strSeikyu As String = DgvBilling.Rows(DgvBilling.CurrentCell.RowIndex).Cells("請求番号").Value
 
 
         Dim Sql As String = "SELECT count(*) as 件数"
 
-        Sql += " FROM t80_shiwakenyu"
+        Sql += " FROM t27_nkinkshihd"
 
         Sql += " WHERE "
         Sql += "     会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
