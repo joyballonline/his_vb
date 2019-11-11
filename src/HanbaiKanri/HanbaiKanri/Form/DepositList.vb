@@ -92,9 +92,9 @@ Public Class DepositList
         Dim AccountsReceivableFC As Decimal  '売掛残高_外貨
         Dim AmountDeposited As Decimal  '入金額計_外貨
 
-        Dim CustomerBillingAmount As Decimal  '請求金額
+        'Dim CustomerBillingAmount As Decimal  '請求金額
         Dim CustomerOrderAmount As Decimal    '見積金額
-        Dim AccountsReceivable As Decimal  '売掛残高
+        'Dim AccountsReceivable As Decimal  '売掛残高
 
         'Language=ENGの時
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then

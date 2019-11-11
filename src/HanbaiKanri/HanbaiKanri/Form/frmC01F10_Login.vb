@@ -478,6 +478,7 @@ Public Class frmC01F10_Login
             _msgHd.dspMSG("chkAppUseSettingError", CommonConst.LANG_KBN_JPN, "No File")
             Application.Exit()
 
+            Return ""
         End If
 
     End Function

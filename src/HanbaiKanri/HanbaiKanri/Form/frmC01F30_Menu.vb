@@ -2306,9 +2306,28 @@ Public Class frmC01F30_Menu
         TabPage2.ImageIndex = 1
         TabPage3.ImageIndex = 2
         TabPage4.ImageIndex = 3
+        TabPage6.ImageIndex = 0
         TabPage5.ImageIndex = 4
 
-        TabControl1.SelectedTab.ImageIndex = TabControl1.SelectedIndex + 5
+        'TabControl1.SelectedTab.ImageIndex = TabControl1.SelectedIndex + 5
+
+        Select Case TabControl1.SelectedIndex
+            Case 0
+                TabControl1.SelectedTab.ImageIndex = 5
+            Case 1
+                TabControl1.SelectedTab.ImageIndex = 6
+            Case 2
+                TabControl1.SelectedTab.ImageIndex = 7
+            Case 3
+                TabControl1.SelectedTab.ImageIndex = 8
+            Case 4
+                TabControl1.SelectedTab.ImageIndex = 5
+            Case 5
+                TabControl1.SelectedTab.ImageIndex = 9
+
+        End Select
+
+
 
     End Sub
 

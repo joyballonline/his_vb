@@ -178,10 +178,10 @@ Public Class MstSupplier
             For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
                 Console.WriteLine(ds.Tables(RS).Rows(i)("仕入先コード"))
 
-                Dim getHanyo As DataSet
-                If Not IsDBNull(ds.Tables(RS).Rows(i)("預金種目")) Then
-                    getHanyo = getDsHanyoData(CommonConst.DC_CODE, Trim(ds.Tables(RS).Rows(i)("預金種目")))
-                End If
+                'Dim getHanyo As DataSet
+                'If Not IsDBNull(ds.Tables(RS).Rows(i)("預金種目")) Then
+                'getHanyo = getDsHanyoData(CommonConst.DC_CODE, Trim(ds.Tables(RS).Rows(i)("預金種目")))
+                'End If
 
 
                 Dgv_Supplier.Rows.Add()
@@ -206,6 +206,7 @@ Public Class MstSupplier
                 If IsDBNull(ds.Tables(RS).Rows(i)("預金種目")) Then
                     Dgv_Supplier.Rows(i).Cells("預金種目").Value = vbNullString
                 Else
+                    Dim getHanyo As DataSet = getDsHanyoData(CommonConst.DC_CODE, Trim(ds.Tables(RS).Rows(i)("預金種目")))
                     Dgv_Supplier.Rows(i).Cells("預金種目").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
                                                                getHanyo.Tables(RS).Rows(0)("文字２"),
                                                                getHanyo.Tables(RS).Rows(0)("文字１"))

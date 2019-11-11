@@ -22,13 +22,13 @@ Partial Class ClosingLog
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LblMode = New System.Windows.Forms.Label()
         Me.LblPerson = New System.Windows.Forms.Label()
         Me.TxtPerson = New System.Windows.Forms.TextBox()
@@ -52,11 +52,10 @@ Partial Class ClosingLog
         '
         Me.LblMode.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblMode.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblMode.Location = New System.Drawing.Point(2546, 9)
-        Me.LblMode.Margin = New System.Windows.Forms.Padding(7, 0, 7, 0)
+        Me.LblMode.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblMode.Location = New System.Drawing.Point(1175, 5)
         Me.LblMode.Name = "LblMode"
-        Me.LblMode.Size = New System.Drawing.Size(355, 43)
+        Me.LblMode.Size = New System.Drawing.Size(165, 24)
         Me.LblMode.TabIndex = 321
         Me.LblMode.Text = "モード"
         Me.LblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -66,11 +65,10 @@ Partial Class ClosingLog
         '
         Me.LblPerson.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblPerson.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblPerson.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblPerson.Location = New System.Drawing.Point(37, 89)
-        Me.LblPerson.Margin = New System.Windows.Forms.Padding(7, 0, 7, 0)
+        Me.LblPerson.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblPerson.Location = New System.Drawing.Point(17, 48)
         Me.LblPerson.Name = "LblPerson"
-        Me.LblPerson.Size = New System.Drawing.Size(366, 43)
+        Me.LblPerson.Size = New System.Drawing.Size(170, 24)
         Me.LblPerson.TabIndex = 314
         Me.LblPerson.Text = "担当者"
         Me.LblPerson.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -78,31 +76,28 @@ Partial Class ClosingLog
         'TxtPerson
         '
         Me.TxtPerson.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtPerson.Location = New System.Drawing.Point(418, 90)
-        Me.TxtPerson.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
+        Me.TxtPerson.Location = New System.Drawing.Point(193, 49)
         Me.TxtPerson.Name = "TxtPerson"
-        Me.TxtPerson.Size = New System.Drawing.Size(429, 37)
+        Me.TxtPerson.Size = New System.Drawing.Size(200, 22)
         Me.TxtPerson.TabIndex = 2
         '
         'LblConditions
         '
         Me.LblConditions.AutoSize = True
-        Me.LblConditions.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblConditions.Location = New System.Drawing.Point(26, 18)
-        Me.LblConditions.Margin = New System.Windows.Forms.Padding(7, 0, 7, 0)
+        Me.LblConditions.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblConditions.Location = New System.Drawing.Point(12, 10)
         Me.LblConditions.Name = "LblConditions"
-        Me.LblConditions.Size = New System.Drawing.Size(163, 30)
+        Me.LblConditions.Size = New System.Drawing.Size(87, 15)
         Me.LblConditions.TabIndex = 309
         Me.LblConditions.Text = "■抽出条件"
         '
         'BtnSearch
         '
         Me.BtnSearch.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.BtnSearch.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.BtnSearch.Location = New System.Drawing.Point(1517, 70)
-        Me.BtnSearch.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
+        Me.BtnSearch.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.BtnSearch.Location = New System.Drawing.Point(700, 38)
         Me.BtnSearch.Name = "BtnSearch"
-        Me.BtnSearch.Size = New System.Drawing.Size(358, 79)
+        Me.BtnSearch.Size = New System.Drawing.Size(165, 43)
         Me.BtnSearch.TabIndex = 3
         Me.BtnSearch.Text = "検索"
         Me.BtnSearch.UseVisualStyleBackColor = True
@@ -110,75 +105,73 @@ Partial Class ClosingLog
         'DgvClosingLog
         '
         Me.DgvClosingLog.AllowUserToAddRows = False
-        DataGridViewCellStyle8.Font = New System.Drawing.Font("MS UI Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.DgvClosingLog.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("MS UI Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.DgvClosingLog.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.DgvClosingLog.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle9.Font = New System.Drawing.Font("MS UI Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        DataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DgvClosingLog.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("MS UI Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DgvClosingLog.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.DgvClosingLog.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvClosingLog.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.締処理日時, Me.前回締日, Me.今回締日, Me.次回締日, Me.担当者})
-        Me.DgvClosingLog.Location = New System.Drawing.Point(33, 338)
-        Me.DgvClosingLog.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
+        Me.DgvClosingLog.Location = New System.Drawing.Point(15, 183)
         Me.DgvClosingLog.Name = "DgvClosingLog"
         Me.DgvClosingLog.RowHeadersVisible = False
         Me.DgvClosingLog.RowTemplate.Height = 21
         Me.DgvClosingLog.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvClosingLog.Size = New System.Drawing.Size(1874, 668)
+        Me.DgvClosingLog.Size = New System.Drawing.Size(865, 162)
         Me.DgvClosingLog.TabIndex = 4
         '
         '締処理日時
         '
-        DataGridViewCellStyle10.Font = New System.Drawing.Font("MS UI Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.締処理日時.DefaultCellStyle = DataGridViewCellStyle10
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("MS UI Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.締処理日時.DefaultCellStyle = DataGridViewCellStyle3
         Me.締処理日時.HeaderText = "締処理日時"
         Me.締処理日時.Name = "締処理日時"
-        Me.締処理日時.Width = 187
+        Me.締処理日時.Width = 97
         '
         '前回締日
         '
-        DataGridViewCellStyle11.Font = New System.Drawing.Font("MS UI Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.前回締日.DefaultCellStyle = DataGridViewCellStyle11
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("MS UI Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.前回締日.DefaultCellStyle = DataGridViewCellStyle4
         Me.前回締日.HeaderText = "前回締日"
         Me.前回締日.Name = "前回締日"
-        Me.前回締日.Width = 161
+        Me.前回締日.Width = 84
         '
         '今回締日
         '
-        DataGridViewCellStyle12.Font = New System.Drawing.Font("MS UI Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.今回締日.DefaultCellStyle = DataGridViewCellStyle12
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("MS UI Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.今回締日.DefaultCellStyle = DataGridViewCellStyle5
         Me.今回締日.HeaderText = "今回締日"
         Me.今回締日.Name = "今回締日"
-        Me.今回締日.Width = 161
+        Me.今回締日.Width = 84
         '
         '次回締日
         '
-        DataGridViewCellStyle13.Font = New System.Drawing.Font("MS UI Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.次回締日.DefaultCellStyle = DataGridViewCellStyle13
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("MS UI Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.次回締日.DefaultCellStyle = DataGridViewCellStyle6
         Me.次回締日.HeaderText = "次回締日"
         Me.次回締日.Name = "次回締日"
-        Me.次回締日.Width = 161
+        Me.次回締日.Width = 84
         '
         '担当者
         '
-        DataGridViewCellStyle14.Font = New System.Drawing.Font("MS UI Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.担当者.DefaultCellStyle = DataGridViewCellStyle14
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("MS UI Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.担当者.DefaultCellStyle = DataGridViewCellStyle7
         Me.担当者.HeaderText = "担当者"
         Me.担当者.Name = "担当者"
-        Me.担当者.Width = 135
+        Me.担当者.Width = 71
         '
         'BtnClosing
         '
         Me.BtnClosing.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.BtnClosing.Location = New System.Drawing.Point(1083, 1017)
-        Me.BtnClosing.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
+        Me.BtnClosing.Location = New System.Drawing.Point(515, 361)
         Me.BtnClosing.Name = "BtnClosing"
-        Me.BtnClosing.Size = New System.Drawing.Size(358, 79)
+        Me.BtnClosing.Size = New System.Drawing.Size(165, 43)
         Me.BtnClosing.TabIndex = 5
         Me.BtnClosing.Text = "締処理実行"
         Me.BtnClosing.UseVisualStyleBackColor = True
@@ -186,10 +179,9 @@ Partial Class ClosingLog
         'BtnBack
         '
         Me.BtnBack.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.BtnBack.Location = New System.Drawing.Point(1517, 1017)
-        Me.BtnBack.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
+        Me.BtnBack.Location = New System.Drawing.Point(715, 361)
         Me.BtnBack.Name = "BtnBack"
-        Me.BtnBack.Size = New System.Drawing.Size(358, 79)
+        Me.BtnBack.Size = New System.Drawing.Size(165, 43)
         Me.BtnBack.TabIndex = 6
         Me.BtnBack.Text = "戻る"
         Me.BtnBack.UseVisualStyleBackColor = True
@@ -197,10 +189,9 @@ Partial Class ClosingLog
         'BtnOutput
         '
         Me.BtnOutput.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.BtnOutput.Location = New System.Drawing.Point(650, 1017)
-        Me.BtnOutput.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
+        Me.BtnOutput.Location = New System.Drawing.Point(315, 361)
         Me.BtnOutput.Name = "BtnOutput"
-        Me.BtnOutput.Size = New System.Drawing.Size(358, 79)
+        Me.BtnOutput.Size = New System.Drawing.Size(165, 43)
         Me.BtnOutput.TabIndex = 325
         Me.BtnOutput.Text = "仕訳出力"
         Me.BtnOutput.UseVisualStyleBackColor = True
@@ -210,10 +201,9 @@ Partial Class ClosingLog
         Me.LblShime.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblShime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblShime.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblShime.Location = New System.Drawing.Point(945, 90)
-        Me.LblShime.Margin = New System.Windows.Forms.Padding(7, 0, 7, 0)
+        Me.LblShime.Location = New System.Drawing.Point(436, 49)
         Me.LblShime.Name = "LblShime"
-        Me.LblShime.Size = New System.Drawing.Size(240, 44)
+        Me.LblShime.Size = New System.Drawing.Size(112, 25)
         Me.LblShime.TabIndex = 327
         Me.LblShime.Text = "締処理日"
         Me.LblShime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -221,18 +211,17 @@ Partial Class ClosingLog
         'dtmSime
         '
         Me.dtmSime.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.dtmSime.Location = New System.Drawing.Point(1198, 94)
-        Me.dtmSime.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
+        Me.dtmSime.Location = New System.Drawing.Point(553, 51)
         Me.dtmSime.Name = "dtmSime"
-        Me.dtmSime.Size = New System.Drawing.Size(208, 37)
+        Me.dtmSime.Size = New System.Drawing.Size(98, 22)
         Me.dtmSime.TabIndex = 328
         Me.dtmSime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'ClosingLog
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(13.0!, 24.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1948, 1122)
+        Me.ClientSize = New System.Drawing.Size(926, 428)
         Me.Controls.Add(Me.dtmSime)
         Me.Controls.Add(Me.LblShime)
         Me.Controls.Add(Me.BtnOutput)
@@ -244,7 +233,6 @@ Partial Class ClosingLog
         Me.Controls.Add(Me.TxtPerson)
         Me.Controls.Add(Me.LblConditions)
         Me.Controls.Add(Me.BtnSearch)
-        Me.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.Name = "ClosingLog"
         Me.Text = "ClosingLog"
         CType(Me.DgvClosingLog, System.ComponentModel.ISupportInitialize).EndInit()
