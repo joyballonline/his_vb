@@ -35,7 +35,7 @@ Partial Class ClosingAdmin
         Me.BtnBack.Location = New System.Drawing.Point(228, 205)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(165, 40)
-        Me.BtnBack.TabIndex = 6
+        Me.BtnBack.TabIndex = 2
         Me.BtnBack.Text = "閉じる"
         Me.BtnBack.UseVisualStyleBackColor = True
         '
@@ -57,7 +57,7 @@ Partial Class ClosingAdmin
         Me.BtnRegistration.Location = New System.Drawing.Point(40, 204)
         Me.BtnRegistration.Name = "BtnRegistration"
         Me.BtnRegistration.Size = New System.Drawing.Size(165, 40)
-        Me.BtnRegistration.TabIndex = 5
+        Me.BtnRegistration.TabIndex = 1
         Me.BtnRegistration.Text = "締処理実行"
         Me.BtnRegistration.UseVisualStyleBackColor = True
         '
@@ -75,11 +75,16 @@ Partial Class ClosingAdmin
         '
         'dtmSime
         '
-        Me.dtmSime.Font = New System.Drawing.Font("MS UI Gothic", 11.25!)
+        Me.dtmSime.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.dtmSime.CustomFormat = ""
+        Me.dtmSime.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.dtmSime.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtmSime.Location = New System.Drawing.Point(211, 93)
+        Me.dtmSime.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.dtmSime.Name = "dtmSime"
         Me.dtmSime.Size = New System.Drawing.Size(155, 22)
-        Me.dtmSime.TabIndex = 331
+        Me.dtmSime.TabIndex = 0
+        Me.dtmSime.Value = New Date(2019, 1, 1, 0, 0, 0, 0)
         '
         'ClosingAdmin
         '

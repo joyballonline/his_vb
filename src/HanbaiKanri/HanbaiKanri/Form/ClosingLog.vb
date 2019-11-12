@@ -240,9 +240,9 @@ Public Class ClosingLog
 
         If intFlg = 0 Then  '通常
 
-            dtmLastMonth = DateAdd("d", 1, ds1.Tables(RS).Rows(0)("前回締日"))  '判定用
-            dtmThisMonth = DateAdd("d", 1, ds1.Tables(RS).Rows(0)("今回締日"))
-            dtmShime = ds1.Tables(RS).Rows(0)("今回締日")  '締日
+            dtmLastMonth = UtilClass.strFormatDate(DateAdd("d", 1, ds1.Tables(RS).Rows(0)("前回締日")))  '判定用
+            dtmThisMonth = UtilClass.strFormatDate(DateAdd("d", 1, ds1.Tables(RS).Rows(0)("今回締日")))
+            dtmShime = UtilClass.strFormatDate(ds1.Tables(RS).Rows(0)("今回締日"))  '締日
 
         Else  '管理者用
 
@@ -251,9 +251,9 @@ Public Class ClosingLog
             dtmShime = Shime  '締日
 
 
-            ds1.Tables(RS).Rows(0)("前回締日") = DateAdd("d", -1, dtmLastMonth)
-            ds1.Tables(RS).Rows(0)("今回締日") = Shime
-            ds1.Tables(RS).Rows(0)("次回締日") = DateAdd("d", -1, DateAdd("m", 1, dtmThisMonth))
+            ds1.Tables(RS).Rows(0)("前回締日") = UtilClass.strFormatDate(DateAdd("d", -1, dtmLastMonth))
+            ds1.Tables(RS).Rows(0)("今回締日") = UtilClass.strFormatDate(Shime)
+            ds1.Tables(RS).Rows(0)("次回締日") = UtilClass.strFormatDate(DateAdd("d", -1, DateAdd("m", 1, dtmThisMonth)))
 
         End If
 
@@ -1650,10 +1650,10 @@ Public Class ClosingLog
         Sql14 += "INSERT INTO Public.t51_smlog("
         Sql14 += "会社コード, 処理日時, 前回締日, 今回締日, 次回締日, 担当者)"
         Sql14 += " VALUES('" & frmC01F10_Login.loginValue.BumonCD & "'"
-        Sql14 += " , '" & dtToday & "'"
-        Sql14 += " , '" & ds1.Tables(RS).Rows(0)("前回締日") & "'"
-        Sql14 += " , '" & ds1.Tables(RS).Rows(0)("今回締日") & "'"
-        Sql14 += " , '" & ds1.Tables(RS).Rows(0)("次回締日") & "'"
+        Sql14 += " , '" & UtilClass.formatDatetime(dtToday) & "'"
+        Sql14 += " , '" & UtilClass.strFormatDate(ds1.Tables(RS).Rows(0)("前回締日")) & "'"
+        Sql14 += " , '" & UtilClass.strFormatDate(ds1.Tables(RS).Rows(0)("今回締日")) & "'"
+        Sql14 += " , '" & UtilClass.strFormatDate(ds1.Tables(RS).Rows(0)("次回締日")) & "'"
         Sql14 += " , '" & frmC01F10_Login.loginValue.TantoNM & "'"
         Sql14 += " )"
 
@@ -1679,9 +1679,9 @@ Public Class ClosingLog
         Sql15 = ""
         Sql15 += "UPDATE Public.m01_company "
         Sql15 += "SET "
-        Sql15 += "前回締日  = '" & ds1.Tables(RS).Rows(0)("今回締日") & "'"
-        Sql15 += " , 今回締日 = '" & ds1.Tables(RS).Rows(0)("次回締日") & "'"
-        Sql15 += " , 次回締日 = '" & nextClosingDate & "'"
+        Sql15 += "前回締日  = '" & UtilClass.strFormatDate(ds1.Tables(RS).Rows(0)("今回締日")) & "'"
+        Sql15 += " , 今回締日 = '" & UtilClass.strFormatDate(ds1.Tables(RS).Rows(0)("次回締日")) & "'"
+        Sql15 += " , 次回締日 = '" & UtilClass.strFormatDate(nextClosingDate) & "'"
 
         Sql15 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
         _db.executeDB(Sql15)
@@ -1703,17 +1703,17 @@ Public Class ClosingLog
         sql = "UPDATE Public.t23_skyuhd "
         sql += " SET 締処理日 = null"
         sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        sql += " AND 締処理日 = '" & dtmShime & "'"
+        sql += " AND 締処理日 = '" & UtilClass.strFormatDate(dtmShime) & "'"
 
         _db.executeDB(sql)
 
 
         '締処理日をセット
         sql = "UPDATE Public.t23_skyuhd "
-        sql += " SET 締処理日 = '" & dtmShime & "'"
+        sql += " SET 締処理日 = '" & UtilClass.strFormatDate(dtmShime) & "'"
         sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        sql += " AND (請求日 >= '" & dtmLastMonth & "'"
-        sql += " AND  請求日 < '" & dtmThisMonth & "')"
+        sql += " AND (請求日 >= '" & UtilClass.strFormatDate(dtmLastMonth) & "'"
+        sql += " AND  請求日 < '" & UtilClass.strFormatDate(dtmThisMonth) & "')"
 
         _db.executeDB(sql)
 
@@ -1725,16 +1725,16 @@ Public Class ClosingLog
         sql = "UPDATE Public.t25_nkinhd "
         sql += " SET 締処理日 = null"
         sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        sql += " AND 締処理日 = '" & dtmShime & "'"
+        sql += " AND 締処理日 = '" & UtilClass.strFormatDate(dtmShime) & "'"
 
         _db.executeDB(sql)
 
 
         sql = "UPDATE Public.t25_nkinhd "
-        sql += " SET 締処理日 = '" & dtmShime & "'"
+        sql += " SET 締処理日 = '" & UtilClass.strFormatDate(dtmShime) & "'"
         sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        sql += " AND (入金日 >= '" & dtmLastMonth & "'"
-        sql += " AND  入金日 < '" & dtmThisMonth & "')"
+        sql += " AND (入金日 >= '" & UtilClass.strFormatDate(dtmLastMonth) & "'"
+        sql += " AND  入金日 < '" & UtilClass.strFormatDate(dtmThisMonth) & "')"
 
         _db.executeDB(sql)
 
@@ -1746,16 +1746,16 @@ Public Class ClosingLog
         sql = "UPDATE Public.t27_nkinkshihd "
         sql += " SET 締処理日 = null"
         sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        sql += " AND 締処理日 = '" & dtmShime & "'"
+        sql += " AND 締処理日 = '" & UtilClass.strFormatDate(dtmShime) & "'"
 
         _db.executeDB(sql)
 
 
         sql = "UPDATE Public.t27_nkinkshihd "
-        sql += " SET 締処理日 = '" & dtmShime & "'"
+        sql += " SET 締処理日 = '" & UtilClass.strFormatDate(dtmShime) & "'"
         sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        sql += " AND (入金日 >= '" & dtmLastMonth & "'"
-        sql += " AND  入金日 < '" & dtmThisMonth & "')"
+        sql += " AND (入金日 >= '" & UtilClass.strFormatDate(dtmLastMonth) & "'"
+        sql += " AND  入金日 < '" & UtilClass.strFormatDate(dtmThisMonth) & "')"
 
         _db.executeDB(sql)
 
@@ -1768,16 +1768,16 @@ Public Class ClosingLog
         sql = "UPDATE Public.t30_urighd "
         sql += " SET 締処理日 = null"
         sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        sql += " AND 締処理日 = '" & dtmShime & "'"
+        sql += " AND 締処理日 = '" & UtilClass.strFormatDate(dtmShime) & "'"
 
         _db.executeDB(sql)
 
 
         sql = "UPDATE Public.t30_urighd "
-        sql += " SET 締処理日 = '" & dtmShime & "'"
+        sql += " SET 締処理日 = '" & UtilClass.strFormatDate(dtmShime) & "'"
         sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        sql += " AND (売上日 >= '" & dtmLastMonth & "'"
-        sql += " AND  売上日 < '" & dtmThisMonth & "')"
+        sql += " AND (売上日 >= '" & UtilClass.strFormatDate(dtmLastMonth) & "'"
+        sql += " AND  売上日 < '" & UtilClass.strFormatDate(dtmThisMonth) & "')"
 
         _db.executeDB(sql)
 
@@ -1790,16 +1790,16 @@ Public Class ClosingLog
         sql = "UPDATE Public.t40_sirehd "
         sql += " SET 締処理日 = null"
         sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        sql += " AND 締処理日 = '" & dtmShime & "'"
+        sql += " AND 締処理日 = '" & UtilClass.strFormatDate(dtmShime) & "'"
 
         _db.executeDB(sql)
 
 
         sql = "UPDATE Public.t40_sirehd "
-        sql += " SET 締処理日 = '" & dtmShime & "'"
+        sql += " SET 締処理日 = '" & UtilClass.strFormatDate(dtmShime) & "'"
         sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        sql += " AND (仕入日 >= '" & dtmLastMonth & "'"
-        sql += " AND  仕入日 < '" & dtmThisMonth & "')"
+        sql += " AND (仕入日 >= '" & UtilClass.strFormatDate(dtmLastMonth) & "'"
+        sql += " AND  仕入日 < '" & UtilClass.strFormatDate(dtmThisMonth) & "')"
 
         _db.executeDB(sql)
 
@@ -1808,16 +1808,16 @@ Public Class ClosingLog
         sql = "UPDATE Public.t41_siredt "
         sql += " SET 締処理日 = null"
         sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        sql += " AND 締処理日 = '" & dtmShime & "'"
+        sql += " AND 締処理日 = '" & UtilClass.strFormatDate(dtmShime) & "'"
 
         _db.executeDB(sql)
 
 
         sql = "UPDATE Public.t41_siredt "
-        sql += " SET 締処理日 = '" & dtmShime & "'"
+        sql += " SET 締処理日 = '" & UtilClass.strFormatDate(dtmShime) & "'"
         sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        sql += " AND (仕入日 >= '" & dtmLastMonth & "'"
-        sql += " AND  仕入日 < '" & dtmThisMonth & "')"
+        sql += " AND (仕入日 >= '" & UtilClass.strFormatDate(dtmLastMonth) & "'"
+        sql += " AND  仕入日 < '" & UtilClass.strFormatDate(dtmThisMonth) & "')"
 
         _db.executeDB(sql)
 
@@ -1829,16 +1829,16 @@ Public Class ClosingLog
         sql = "UPDATE Public.t42_nyukohd "
         sql += " SET 締処理日 = null"
         sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        sql += " AND 締処理日 = '" & dtmShime & "'"
+        sql += " AND 締処理日 = '" & UtilClass.strFormatDate(dtmShime) & "'"
 
         _db.executeDB(sql)
 
 
         sql = "UPDATE Public.t42_nyukohd "
-        sql += " SET 締処理日 = '" & dtmShime & "'"
+        sql += " SET 締処理日 = '" & UtilClass.strFormatDate(dtmShime) & "'"
         sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        sql += " AND (入庫日 >= '" & dtmLastMonth & "'"
-        sql += " AND  入庫日 < '" & dtmThisMonth & "')"
+        sql += " AND (入庫日 >= '" & UtilClass.strFormatDate(dtmLastMonth) & "'"
+        sql += " AND  入庫日 < '" & UtilClass.strFormatDate(dtmThisMonth) & "')"
 
         _db.executeDB(sql)
 
@@ -1850,16 +1850,16 @@ Public Class ClosingLog
         sql = "UPDATE Public.t44_shukohd "
         sql += " SET 締処理日 = null"
         sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        sql += " AND 締処理日 = '" & dtmShime & "'"
+        sql += " AND 締処理日 = '" & UtilClass.strFormatDate(dtmShime) & "'"
 
         _db.executeDB(sql)
 
 
         sql = "UPDATE Public.t44_shukohd "
-        sql += " SET 締処理日 = '" & dtmShime & "'"
+        sql += " SET 締処理日 = '" & UtilClass.strFormatDate(dtmShime) & "'"
         sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        sql += " AND (出庫日 >= '" & dtmLastMonth & "'"
-        sql += " AND  出庫日 < '" & dtmThisMonth & "')"
+        sql += " AND (出庫日 >= '" & UtilClass.strFormatDate(dtmLastMonth) & "'"
+        sql += " AND  出庫日 < '" & UtilClass.strFormatDate(dtmThisMonth) & "')"
 
         _db.executeDB(sql)
 
@@ -1871,16 +1871,16 @@ Public Class ClosingLog
         sql = "UPDATE Public.t46_kikehd "
         sql += " SET 締処理日 = null"
         sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        sql += " AND 締処理日 = '" & dtmShime & "'"
+        sql += " AND 締処理日 = '" & UtilClass.strFormatDate(dtmShime) & "'"
 
         _db.executeDB(sql)
 
 
         sql = "UPDATE Public.t46_kikehd "
-        sql += " SET 締処理日 = '" & dtmShime & "'"
+        sql += " SET 締処理日 = '" & UtilClass.strFormatDate(dtmShime) & "'"
         sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        sql += " AND (買掛日 >= '" & dtmLastMonth & "'"
-        sql += " AND  買掛日 < '" & dtmThisMonth & "')"
+        sql += " AND (買掛日 >= '" & UtilClass.strFormatDate(dtmLastMonth) & "'"
+        sql += " AND  買掛日 < '" & UtilClass.strFormatDate(dtmThisMonth) & "')"
 
         _db.executeDB(sql)
 
@@ -1892,16 +1892,16 @@ Public Class ClosingLog
         sql = "UPDATE Public.t47_shrihd "
         sql += " SET 締処理日 = null"
         sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        sql += " AND 締処理日 = '" & dtmShime & "'"
+        sql += " AND 締処理日 = '" & UtilClass.strFormatDate(dtmShime) & "'"
 
         _db.executeDB(sql)
 
 
         sql = "UPDATE Public.t47_shrihd "
-        sql += " SET 締処理日 = '" & dtmShime & "'"
+        sql += " SET 締処理日 = '" & UtilClass.strFormatDate(dtmShime) & "'"
         sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        sql += " AND (支払日 >= '" & dtmLastMonth & "'"
-        sql += " AND  支払日 < '" & dtmThisMonth & "')"
+        sql += " AND (支払日 >= '" & UtilClass.strFormatDate(dtmLastMonth) & "'"
+        sql += " AND  支払日 < '" & UtilClass.strFormatDate(dtmThisMonth) & "')"
 
         _db.executeDB(sql)
 
@@ -1913,16 +1913,16 @@ Public Class ClosingLog
         sql = "UPDATE Public.t49_shrikshihd "
         sql += " SET 締処理日 = null"
         sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        sql += " AND 締処理日 = '" & dtmShime & "'"
+        sql += " AND 締処理日 = '" & UtilClass.strFormatDate(dtmShime) & "'"
 
         _db.executeDB(sql)
 
 
         sql = "UPDATE Public.t49_shrikshihd "
-        sql += " SET 締処理日 = '" & dtmShime & "'"
+        sql += " SET 締処理日 = '" & UtilClass.strFormatDate(dtmShime) & "'"
         sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        sql += " AND (支払日 >= '" & dtmLastMonth & "'"
-        sql += " AND  支払日 < '" & dtmThisMonth & "')"
+        sql += " AND (支払日 >= '" & UtilClass.strFormatDate(dtmLastMonth) & "'"
+        sql += " AND  支払日 < '" & UtilClass.strFormatDate(dtmThisMonth) & "')"
 
         _db.executeDB(sql)
 
@@ -1934,16 +1934,16 @@ Public Class ClosingLog
         sql = "UPDATE Public.t80_shiwakenyu "
         sql += " SET 締処理日 = null"
         sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        sql += " AND 締処理日 = '" & dtmShime & "'"
+        sql += " AND 締処理日 = '" & UtilClass.strFormatDate(dtmShime) & "'"
 
         _db.executeDB(sql)
 
 
         sql = "UPDATE Public.t80_shiwakenyu "
-        sql += " SET 締処理日 = '" & dtmShime & "'"
+        sql += " SET 締処理日 = '" & UtilClass.strFormatDate(dtmShime) & "'"
         sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        sql += " AND (入金日 >= '" & dtmLastMonth & "'"
-        sql += " AND  入金日 < '" & dtmThisMonth & "')"
+        sql += " AND (入金日 >= '" & UtilClass.strFormatDate(dtmLastMonth) & "'"
+        sql += " AND  入金日 < '" & UtilClass.strFormatDate(dtmThisMonth) & "')"
 
         _db.executeDB(sql)
 
@@ -1955,16 +1955,16 @@ Public Class ClosingLog
         sql = "UPDATE Public.t81_shiwakeshi "
         sql += " SET 締処理日 = null"
         sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        sql += " AND 締処理日 = '" & dtmShime & "'"
+        sql += " AND 締処理日 = '" & UtilClass.strFormatDate(dtmShime) & "'"
 
         _db.executeDB(sql)
 
 
         sql = "UPDATE Public.t81_shiwakeshi "
-        sql += " SET 締処理日 = '" & dtmShime & "'"
+        sql += " SET 締処理日 = '" & UtilClass.strFormatDate(dtmShime) & "'"
         sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        sql += " AND (支払日 >= '" & dtmLastMonth & "'"
-        sql += " AND  支払日 < '" & dtmThisMonth & "')"
+        sql += " AND (支払日 >= '" & UtilClass.strFormatDate(dtmLastMonth) & "'"
+        sql += " AND  支払日 < '" & UtilClass.strFormatDate(dtmThisMonth) & "')"
 
         _db.executeDB(sql)
 
@@ -1998,8 +1998,8 @@ Public Class ClosingLog
 
 
         strWhere = " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        strWhere += " AND (仕分日 >= '" & dtmLastMonth & "'"
-        strWhere += " AND 仕分日 < '" & dtmThisMonth & "')"
+        strWhere += " AND (仕分日 >= '" & UtilClass.strFormatDate(dtmLastMonth) & "'"
+        strWhere += " AND 仕分日 < '" & UtilClass.strFormatDate(dtmThisMonth) & "')"
 
         _db.executeDB("delete from t66_swkhd" & strWhere)
 
@@ -2843,7 +2843,7 @@ Public Class ClosingLog
         Sql = ""
         Sql += "SELECT * FROM public.t27_nkinkshihd"
         Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        Sql += " AND 締処理日 = '" & dtmShime & "'"
+        Sql += " AND 締処理日 = '" & UtilClass.strFormatDate(dtmShime) & "'"
 
         Dim dsNkinkshihd As DataSet = _db.selectDB(Sql, RS, reccnt)
 
@@ -2959,7 +2959,7 @@ Public Class ClosingLog
         Sql = ""
         Sql += "SELECT * FROM public.t30_urighd"
         Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        Sql += " AND 締処理日 = '" & dtmShime & "'"
+        Sql += " AND 締処理日 = '" & UtilClass.strFormatDate(dtmShime) & "'"
 
         Dim dsSwkUrighd As DataSet = _db.selectDB(Sql, RS, reccnt)
 
@@ -3027,7 +3027,7 @@ Public Class ClosingLog
         Sql = ""
         Sql += "SELECT * FROM public.t49_shrikshihd"
         Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        Sql += " AND 締処理日 = '" & dtmShime & "'"
+        Sql += " AND 締処理日 = '" & UtilClass.strFormatDate(dtmShime) & "'"
 
         Dim dsShrikshihd As DataSet = _db.selectDB(Sql, RS, reccnt)
 
@@ -3141,7 +3141,7 @@ Public Class ClosingLog
         Sql = ""
         Sql += "SELECT * FROM public.t40_sirehd"
         Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        Sql += " AND 締処理日 = '" & dtmShime & "'"
+        Sql += " AND 締処理日 = '" & UtilClass.strFormatDate(dtmShime) & "'"
 
         Dim dsSwkSirehd As DataSet = _db.selectDB(Sql, RS, reccnt)
 
