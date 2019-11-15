@@ -958,12 +958,16 @@ Public Class OrderingList
         Dim blnFlg2 As Boolean = False
         Dim blnFlg3 As Boolean = False
 
+        Dim strNyukoNo As String = vbNullString
+        Dim strShiireNo As String = vbNullString
+        Dim strKaikakeNo As String = vbNullString
+
 
 #Region "入庫"
 
 
         '発注と結び付いた入庫データが存在するか検索する
-        Dim Sql As String = "SELECT count(*) as 件数"
+        Dim Sql As String = "SELECT 入庫番号"
 
         Sql += " FROM t42_nyukohd "
 
@@ -976,11 +980,13 @@ Public Class OrderingList
         Dim dsNyuko As DataSet = _db.selectDB(Sql, RS, reccnt)
 
 
-        If dsNyuko.Tables(RS).Rows(0)("件数") = 0 Then
+        If dsNyuko.Tables(RS).Rows.Count = 0 Then
         Else
             '入庫登録あり
             blnFlg1 = True
             mCheckShiire = True
+
+            strNyukoNo = dsNyuko.Tables(RS).Rows(0)("入庫番号")
         End If
 
 
@@ -993,7 +999,7 @@ Public Class OrderingList
 
 
         '発注と結び付いた仕入データが存在するか検索する
-        Sql = "SELECT count(*) as 件数"
+        Sql = "SELECT 仕入番号"
 
         Sql += " FROM t40_sirehd "
 
@@ -1005,11 +1011,13 @@ Public Class OrderingList
 
         Dim dsShiire As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-        If dsShiire.Tables(RS).Rows(0)("件数") = 0 Then
+        If dsShiire.Tables(RS).Rows.Count = 0 Then
         Else
             '仕入登録あり
             blnFlg2 = True
             mCheckShiire = True
+
+            strShiireNo = dsShiire.Tables(RS).Rows(0)("仕入番号")
         End If
 
 
@@ -1022,7 +1030,7 @@ Public Class OrderingList
 
 
         '買掛と結び付いた仕入データが存在するか検索する
-        Sql = "SELECT count(*) as 件数"
+        Sql = "SELECT 買掛番号"
 
         Sql += " FROM t46_kikehd "
 
@@ -1034,11 +1042,13 @@ Public Class OrderingList
 
         Dim dsKaikake As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-        If dsKaikake.Tables(RS).Rows(0)("件数") = 0 Then
+        If dsKaikake.Tables(RS).Rows.Count = 0 Then
         Else
             '買掛登録あり
             blnFlg3 = True
             mCheckShiire = True
+
+            strKaikakeNo = dsKaikake.Tables(RS).Rows(0)("買掛番号")
         End If
 
 
@@ -1059,40 +1069,81 @@ Public Class OrderingList
 
         '確認メッセージの作成
         If blnFlg1 = True Then
-            strMessage += "入庫登録" & vbCrLf
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then  '英語
+                strMessage += "Goods receipt registration" & vbCrLf
+            Else
+                strMessage += "入庫登録" & vbCrLf
+            End If
         End If
 
         If blnFlg2 = True Then
-            strMessage += "仕入登録" & vbCrLf
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then  '英語
+                strMessage += "Purchase registration" & vbCrLf
+            Else
+                strMessage += "仕入登録" & vbCrLf
+            End If
         End If
 
         If blnFlg3 = True Then
-            strMessage += "買掛登録" & vbCrLf
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then  '英語
+                strMessage += "Accounts payable registration" & vbCrLf
+            Else
+                strMessage += "買掛登録" & vbCrLf
+            End If
         End If
 
-        strMessage += "が既になされています。発注登録と合わせて" & vbCrLf
 
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then  '英語
+            strMessage += "Has already been done.Together with order registration" & vbCrLf
 
-        If blnFlg1 = True Then
-            strMessage += "入庫登録"
-        End If
-
-        If blnFlg2 = True Then
             If blnFlg1 = True Then
-                strMessage += "・"
+                strMessage += "Goods receipt registration"
             End If
-            strMessage += "仕入登録"
+
+            If blnFlg2 = True Then
+                If blnFlg1 = True Then
+                    strMessage += "・"
+                End If
+                strMessage += "Purchase registration"
+            End If
+
+            If blnFlg3 = True Then
+                If blnFlg1 = True Or blnFlg2 = True Then
+                    strMessage += "・"
+                End If
+                strMessage += "Accounts payable registration"
+            End If
+
+        Else
+            strMessage += "が既になされています。発注登録と合わせて" & vbCrLf
+
+            If blnFlg1 = True Then
+                strMessage += "入庫登録"
+            End If
+
+            If blnFlg2 = True Then
+                If blnFlg1 = True Then
+                    strMessage += "・"
+                End If
+                strMessage += "仕入登録"
+            End If
+
+            If blnFlg3 = True Then
+                If blnFlg1 = True Or blnFlg2 = True Then
+                    strMessage += "・"
+                End If
+                strMessage += "買掛登録"
+            End If
+
         End If
 
-        If blnFlg3 = True Then
-            If blnFlg1 = True Or blnFlg2 = True Then
-                strMessage += "・"
-            End If
-            strMessage += "買掛登録"
+
+        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then  '英語
+            strMessage += " Do you also cancel?"
+        Else
+            strMessage += "も取り消しますか？"
         End If
 
-
-        strMessage += "も取り消しますか？"
 
         Dim result As DialogResult = MessageBox.Show(strMessage, CommonConst.AP_NAME, MessageBoxButtons.OKCancel,
                                                      MessageBoxIcon.Information, MessageBoxDefaultButton.Button2)
@@ -1106,9 +1157,422 @@ Public Class OrderingList
 #End Region
 
 
+#Region "入庫取消"
+
+        '入庫に対象の発注番号がある場合
+        If blnFlg1 = True Then
+            Dim blnFlg As Boolean = updateData(strHatyuNo, strEda, strNyukoNo)  '入庫取消
+            If blnFlg = False Then
+                Exit Function
+            End If
+        End If
+
+
+#End Region
+
+
+#Region "仕入取消"
+
+        '仕入に対象の発注番号がある場合
+        If blnFlg2 = True Then
+            Dim blnFlg As Boolean = updateShiire(strHatyuNo, strEda, strShiireNo)  '仕入取消
+            If blnFlg = False Then
+                Exit Function
+            End If
+        End If
+
+#End Region
+
+
+#Region "買掛取消"
+
+        '買掛に対象の発注番号がある場合
+        If blnFlg3 = True Then
+            Dim blnFlg As Boolean = updateKaikake(strKaikakeNo)  '買掛取消
+            If blnFlg = False Then
+                Exit Function
+            End If
+        End If
+
+#End Region
+
+
         mCheckShiire = True
 
     End Function
+
+
+    Private Function updateKaikake(ByVal strKaikakeNo As String) As Boolean
+
+        Dim dtNow As String = UtilClass.formatDatetime(DateTime.Now)
+        Dim Sql As String = ""
+
+
+        Try
+
+            Sql = "UPDATE Public.t46_kikehd "
+            Sql += "SET "
+
+            Sql += "取消区分 = " & CommonConst.CANCEL_KBN_DISABLED
+            Sql += " , 取消日 = '" & dtNow & "'"
+            Sql += " , 更新日 = '" & dtNow & "'"
+            Sql += " , 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+
+            Sql += "WHERE 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += " AND 買掛番号 ='" & strKaikakeNo & "'"
+
+            '買掛基本を更新
+            _db.executeDB(Sql)
+
+
+        Catch ue As UsrDefException
+            ue.dspMsg()
+            Throw ue
+        Catch ex As Exception
+            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
+            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
+        End Try
+
+
+        updateKaikake = True
+
+    End Function
+
+
+    Private Function updateShiire(ByVal strHatyuNo As String, ByVal strEda As String, ByVal strShiireNo As String) As Boolean
+
+        Dim dtNow As String = UtilClass.formatDatetime(DateTime.Now)
+        Dim reccnt As Integer = 0
+
+        Dim Sql As String = ""
+
+        Try
+
+            Sql = "SELECT "
+            Sql += " * "
+            Sql += "FROM "
+            Sql += "public"
+            Sql += "."
+            Sql += "t21_hattyu "
+            Sql += "WHERE"
+            Sql += " 会社コード"
+            Sql += "='"
+            Sql += frmC01F10_Login.loginValue.BumonCD
+            Sql += "'"
+            Sql += " AND"
+            Sql += " 発注番号"
+            Sql += "='"
+            Sql += strHatyuNo
+            Sql += "' "
+            Sql += " AND"
+            Sql += " 発注番号枝番"
+            Sql += "='"
+            Sql += strEda
+            Sql += "' "
+
+            Dim ds1 As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+            Dim Sql2 As String = ""
+            Sql2 += "SELECT "
+            Sql2 += " *, coalesce(発注行番号, 行番号, 0) X "
+            Sql2 += "FROM "
+            Sql2 += "public"
+            Sql2 += "."
+            Sql2 += "t41_siredt "
+            Sql2 += "WHERE"
+            Sql2 += " 会社コード"
+            Sql2 += "='"
+            Sql2 += frmC01F10_Login.loginValue.BumonCD
+            Sql2 += "'"
+            Sql2 += " AND"
+            Sql2 += " 仕入番号"
+            Sql2 += "='"
+            Sql2 += strShiireNo
+            Sql2 += "' "
+
+            Dim ds2 As DataSet = _db.selectDB(Sql2, RS, reccnt)
+
+            Dim Sql3 As String = ""
+            Sql3 = ""
+            Sql3 += "UPDATE "
+            Sql3 += "Public."
+            Sql3 += "t40_sirehd "
+            Sql3 += "SET "
+
+            Sql3 += "取消区分"
+            Sql3 += " = '"
+            Sql3 += "1"
+            Sql3 += "', "
+            Sql3 += "取消日"
+            Sql3 += " = '"
+            Sql3 += dtNow
+            Sql3 += "', "
+            Sql3 += "更新日"
+            Sql3 += " = '"
+            Sql3 += dtNow
+            Sql3 += "', "
+            Sql3 += "更新者"
+            Sql3 += " = '"
+            Sql3 += frmC01F10_Login.loginValue.TantoNM
+            Sql3 += " ' "
+
+            Sql3 += "WHERE"
+            Sql3 += " 会社コード"
+            Sql3 += "='"
+            Sql3 += frmC01F10_Login.loginValue.BumonCD
+            Sql3 += "'"
+            Sql3 += " AND"
+            Sql3 += " 仕入番号"
+            Sql3 += "='"
+            Sql3 += strShiireNo
+            Sql3 += "' "
+
+            _db.executeDB(Sql3)
+
+            Dim Sql4 As String = ""
+            Dim PurchaseNum As Integer = 0
+            Dim OrderingNum As Integer = 0
+
+            For index1 As Integer = 0 To ds1.Tables(RS).Rows.Count() - 1
+                For index2 As Integer = 0 To ds2.Tables(RS).Rows.Count() - 1
+                    If ds1.Tables(RS).Rows(index1)("行番号") = ds2.Tables(RS).Rows(index2)("X") Then
+                        Sql4 = ""
+                        Sql4 += "UPDATE "
+                        Sql4 += "Public."
+                        Sql4 += "t21_hattyu "
+                        Sql4 += "SET "
+                        Sql4 += "仕入数量"
+                        Sql4 += " = '"
+                        PurchaseNum = ds1.Tables(RS).Rows(index1)("仕入数量") - ds2.Tables(RS).Rows(index2)("仕入数量")
+                        'If PurchaseNum < 0 Then
+                        '_msgHd.dspMSG("chkAPBalanceError", frmC01F10_Login.loginValue.Language)
+                        'End If
+                        Sql4 += PurchaseNum.ToString
+                        Sql4 += "', "
+                        Sql4 += " 発注残数"
+                        Sql4 += " = '"
+                        OrderingNum = ds1.Tables(RS).Rows(index1)("発注残数") + ds2.Tables(RS).Rows(index2)("仕入数量")
+                        Sql4 += OrderingNum.ToString
+                        Sql4 += "', "
+                        Sql4 += "更新者"
+                        Sql4 += " = '"
+                        Sql4 += frmC01F10_Login.loginValue.TantoNM
+                        Sql4 += "' "
+                        Sql4 += "WHERE"
+                        Sql4 += " 会社コード"
+                        Sql4 += "='"
+                        Sql4 += ds1.Tables(RS).Rows(index1)("会社コード")
+                        Sql4 += "'"
+                        Sql4 += " AND"
+                        Sql4 += " 発注番号"
+                        Sql4 += "='"
+                        Sql4 += ds1.Tables(RS).Rows(index1)("発注番号")
+                        Sql4 += "'"
+                        Sql4 += " AND"
+                        Sql4 += " 発注番号枝番"
+                        Sql4 += "='"
+                        Sql4 += ds1.Tables(RS).Rows(index1)("発注番号枝番")
+                        Sql4 += "'"
+                        Sql4 += " AND"
+                        Sql4 += " 行番号"
+                        Sql4 += "='"
+                        Sql4 += ds1.Tables(RS).Rows(index1)("行番号").ToString
+                        Sql4 += "' "
+
+                        _db.executeDB(Sql4)
+
+                        Sql4 = ""
+                        PurchaseNum = 0
+                        OrderingNum = 0
+                    End If
+                Next
+            Next
+
+        Catch ue As UsrDefException
+            ue.dspMsg()
+            Throw ue
+        Catch ex As Exception
+            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
+            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
+        End Try
+
+        updateShiire = True
+
+    End Function
+
+    Private Function updateData(ByVal strHatyuNo As String, ByVal strEda As String, ByVal strNyukoNo As String) As String
+
+        Dim dtNow As String = FormatDateTime(DateTime.Now)
+        Dim Sql As String = ""
+
+        Try
+
+            '発注データ
+            Sql = " AND "
+            Sql += "発注番号 ILIKE '" & strHatyuNo & "'"
+            Sql += " AND "
+            Sql += "発注番号枝番 ILIKE '" & strEda & "'"
+
+            Dim dsHattyudt As DataSet = getDsData("t21_hattyu", Sql)
+
+            '入庫データ
+            Sql = " AND"
+            Sql += " 入庫番号"
+            Sql += "='"
+            Sql += strNyukoNo
+            Sql += "'"
+
+            Dim dsNyukodt As DataSet = getDsData("t43_nyukodt", Sql)
+
+            Sql = "UPDATE "
+            Sql += "Public."
+            Sql += "t42_nyukohd "
+            Sql += "SET "
+
+            Sql += "取消区分 = " & CommonConst.CANCEL_KBN_DISABLED '取消区分：1
+            Sql += ", "
+            Sql += "取消日"
+            Sql += " = '"
+            Sql += UtilClass.strFormatDate(dtNow)
+            Sql += "', "
+            Sql += "更新日"
+            Sql += " = '"
+            Sql += UtilClass.strFormatDate(dtNow)
+            Sql += "', "
+            Sql += "更新者"
+            Sql += " = '"
+            Sql += frmC01F10_Login.loginValue.TantoNM
+            Sql += " ' "
+
+            Sql += "WHERE"
+            Sql += " 会社コード"
+            Sql += "='"
+            Sql += frmC01F10_Login.loginValue.BumonCD
+            Sql += "'"
+            Sql += " AND"
+            Sql += " 入庫番号"
+            Sql += "='"
+            Sql += strNyukoNo
+            Sql += "' "
+
+            _db.executeDB(Sql)
+
+            Sql = "UPDATE "
+            Sql += "Public."
+            Sql += "t43_nyukodt "
+            Sql += "SET "
+
+            Sql += "更新日"
+            Sql += " = '"
+            Sql += UtilClass.strFormatDate(dtNow)
+            Sql += "', "
+            Sql += "更新者"
+            Sql += " = '"
+            Sql += frmC01F10_Login.loginValue.TantoNM
+            Sql += " ' "
+
+            Sql += "WHERE"
+            Sql += " 会社コード"
+            Sql += "='"
+            Sql += frmC01F10_Login.loginValue.BumonCD
+            Sql += "'"
+            Sql += " AND"
+            Sql += " 入庫番号"
+            Sql += "='"
+            Sql += strNyukoNo
+            Sql += "' "
+
+            _db.executeDB(Sql)
+
+            '発注データを更新する
+            For i As Integer = 0 To dsHattyudt.Tables(RS).Rows.Count - 1
+                For x As Integer = 0 To dsNyukodt.Tables(RS).Rows.Count - 1
+
+                    '行番号が一致したら
+                    If dsHattyudt.Tables(RS).Rows(i)("行番号") = dsNyukodt.Tables(RS).Rows(x)("行番号") Then
+                        Dim calShukko As Integer = dsHattyudt.Tables(RS).Rows(i)("入庫数") - dsNyukodt.Tables(RS).Rows(x)("入庫数量")
+                        Dim calUnShukko As Integer = dsHattyudt.Tables(RS).Rows(i)("未入庫数") + dsNyukodt.Tables(RS).Rows(x)("入庫数量")
+
+                        Sql = "update t21_hattyu set "
+                        Sql += "入庫数 = '" & calShukko & "'"
+                        Sql += ",未入庫数 = '" & calUnShukko & "'"
+                        Sql += ",更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+                        Sql += " where 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                        Sql += " AND "
+                        Sql += "発注番号 ILIKE '" & strHatyuNo & "'"
+                        Sql += " AND "
+                        Sql += "発注番号枝番 ILIKE '" & strEda & "'"
+                        Sql += " AND "
+                        Sql += "行番号 = '" & dsHattyudt.Tables(RS).Rows(i)("行番号") & "'"
+
+                        _db.executeDB(Sql)
+
+                        Sql = "update t20_hattyu set "
+                        Sql += "更新日 = '" & UtilClass.strFormatDate(dtNow) & "'"
+                        Sql += ",更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+                        Sql += " where 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                        Sql += " AND "
+                        Sql += "発注番号 ILIKE '" & strHatyuNo & "'"
+                        Sql += " AND "
+                        Sql += "発注番号枝番 ILIKE '" & strEda & "'"
+                        Sql += " AND "
+                        Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '取消区分=0
+
+                        _db.executeDB(Sql)
+
+                    End If
+
+                Next
+
+            Next
+
+            Sql = "UPDATE "
+            Sql += "Public."
+            Sql += "t70_inout "
+            Sql += "SET "
+
+            Sql += "取消日"
+            Sql += " = '"
+            Sql += UtilClass.strFormatDate(dtNow)
+            Sql += "', "
+            Sql += "取消区分"
+            Sql += " = '"
+            Sql += CommonConst.CANCEL_KBN_DISABLED.ToString
+            Sql += "', "
+            Sql += "更新日"
+            Sql += " = '"
+            Sql += UtilClass.strFormatDate(dtNow)
+            Sql += "', "
+            Sql += "更新者"
+            Sql += " = '"
+            Sql += frmC01F10_Login.loginValue.TantoNM
+            Sql += " ' "
+
+            Sql += "WHERE"
+            Sql += " 会社コード"
+            Sql += "='"
+            Sql += frmC01F10_Login.loginValue.BumonCD
+            Sql += "'"
+            Sql += " AND"
+            Sql += " 伝票番号"
+            Sql += "='"
+            Sql += strNyukoNo
+            Sql += "' "
+
+            _db.executeDB(Sql)
+
+        Catch ue As UsrDefException
+            ue.dspMsg()
+            Throw ue
+        Catch ex As Exception
+            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
+            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
+        End Try
+
+        updateData = True
+
+    End Function
+
 
 
     Private Function mCheckShiharai() As Boolean
