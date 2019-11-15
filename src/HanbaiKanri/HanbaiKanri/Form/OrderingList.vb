@@ -897,6 +897,28 @@ Public Class OrderingList
 
 
         Try
+
+            '発注番号を保持しておく
+            Dim strHatyuNo As String = DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("発注番号").Value
+            Dim strEda As String = DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("発注番号枝番").Value
+
+
+            '取消確認のアラート
+            Dim result As DialogResult = _msgHd.dspMSG("confirmCancel", frmC01F10_Login.loginValue.Language)
+
+            If result = DialogResult.No Then
+                Exit Sub
+            End If
+
+
+            '仕入、買掛、入庫取消
+            blnFlg = mCheckShiire(strHatyuNo, strEda)
+            If blnFlg = False Then
+                'キャンセルボタンの場合は終了
+                Exit Sub
+            End If
+
+
             Sql = "UPDATE Public.t20_hattyu "
             Sql += "SET "
 
@@ -909,13 +931,11 @@ Public Class OrderingList
             Sql += " AND 発注番号 = '" & DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("発注番号").Value & "'"
             Sql += " AND 発注番号枝番 = '" & DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("発注番号枝番").Value & "'"
 
-            '取消確認のアラート
-            Dim result As DialogResult = _msgHd.dspMSG("confirmCancel", frmC01F10_Login.loginValue.Language)
 
-            If result = DialogResult.Yes Then
-                _db.executeDB(Sql)
-                getList() 'データ更新
-            End If
+            _db.executeDB(Sql)
+
+
+            getList() 'データ更新
 
         Catch ex As Exception
 
@@ -925,6 +945,170 @@ Public Class OrderingList
         End Try
 
     End Sub
+
+
+    Private Function mCheckShiire(ByVal strHatyuNo As String, ByVal strEda As String) As Boolean
+
+        Dim reccnt As Integer = 0
+        mCheckShiire = False
+
+
+        Dim strMessage As String = vbNullString
+        Dim blnFlg1 As Boolean = False
+        Dim blnFlg2 As Boolean = False
+        Dim blnFlg3 As Boolean = False
+
+
+#Region "入庫"
+
+
+        '発注と結び付いた入庫データが存在するか検索する
+        Dim Sql As String = "SELECT count(*) as 件数"
+
+        Sql += " FROM t42_nyukohd "
+
+        Sql += " WHERE "
+        Sql += "     会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " and 発注番号 = '" & strHatyuNo & "'"
+        Sql += " and 発注番号枝番 = '" & strEda & "'"
+        Sql += " and 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+
+        Dim dsNyuko As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+
+        If dsNyuko.Tables(RS).Rows(0)("件数") = 0 Then
+        Else
+            '入庫登録あり
+            blnFlg1 = True
+            mCheckShiire = True
+        End If
+
+
+        dsNyuko = Nothing
+
+#End Region
+
+
+#Region "仕入"
+
+
+        '発注と結び付いた仕入データが存在するか検索する
+        Sql = "SELECT count(*) as 件数"
+
+        Sql += " FROM t40_sirehd "
+
+        Sql += " WHERE "
+        Sql += "     会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " and 発注番号 = '" & strHatyuNo & "'"
+        Sql += " and 発注番号枝番 = '" & strEda & "'"
+        Sql += " and 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+
+        Dim dsShiire As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+        If dsShiire.Tables(RS).Rows(0)("件数") = 0 Then
+        Else
+            '仕入登録あり
+            blnFlg2 = True
+            mCheckShiire = True
+        End If
+
+
+        dsShiire = Nothing
+
+#End Region
+
+
+#Region "買掛"
+
+
+        '買掛と結び付いた仕入データが存在するか検索する
+        Sql = "SELECT count(*) as 件数"
+
+        Sql += " FROM t46_kikehd "
+
+        Sql += " WHERE "
+        Sql += "     会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " and 発注番号 = '" & strHatyuNo & "'"
+        Sql += " and 発注番号枝番 = '" & strEda & "'"
+        Sql += " and 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+
+        Dim dsKaikake As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+        If dsKaikake.Tables(RS).Rows(0)("件数") = 0 Then
+        Else
+            '買掛登録あり
+            blnFlg3 = True
+            mCheckShiire = True
+        End If
+
+
+        dsKaikake = Nothing
+
+#End Region
+
+
+#Region "メッセージ確認"
+
+
+        '入庫、仕入、買掛に対象の発注番号がない場合は終了
+        If mCheckShiire = False Then
+            mCheckShiire = True
+            Exit Function
+        End If
+
+
+        '確認メッセージの作成
+        If blnFlg1 = True Then
+            strMessage += "入庫登録" & vbCrLf
+        End If
+
+        If blnFlg2 = True Then
+            strMessage += "仕入登録" & vbCrLf
+        End If
+
+        If blnFlg3 = True Then
+            strMessage += "買掛登録" & vbCrLf
+        End If
+
+        strMessage += "が既になされています。発注登録と合わせて" & vbCrLf
+
+
+        If blnFlg1 = True Then
+            strMessage += "入庫登録"
+        End If
+
+        If blnFlg2 = True Then
+            If blnFlg1 = True Then
+                strMessage += "・"
+            End If
+            strMessage += "仕入登録"
+        End If
+
+        If blnFlg3 = True Then
+            If blnFlg1 = True Or blnFlg2 = True Then
+                strMessage += "・"
+            End If
+            strMessage += "買掛登録"
+        End If
+
+
+        strMessage += "も取り消しますか？"
+
+        Dim result As DialogResult = MessageBox.Show(strMessage, CommonConst.AP_NAME, MessageBoxButtons.OKCancel,
+                                                     MessageBoxIcon.Information, MessageBoxDefaultButton.Button2)
+
+        If result = DialogResult.Cancel Then
+            'キャンセル場合は終了
+            mCheckShiire = False
+            Exit Function
+        End If
+
+#End Region
+
+
+        mCheckShiire = True
+
+    End Function
 
 
     Private Function mCheckShiharai() As Boolean
@@ -948,7 +1132,6 @@ Public Class OrderingList
         Sql += " and t46.発注番号 = '" & strHatyuNo & "'"
         Sql += " and t46.発注番号枝番 = '" & strEda & "'"
         Sql += " and t49.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
-
 
         Dim dsShiharai As DataSet = _db.selectDB(Sql, RS, reccnt)
 
