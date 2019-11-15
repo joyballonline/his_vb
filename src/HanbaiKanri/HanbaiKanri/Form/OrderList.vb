@@ -756,6 +756,14 @@ Public Class OrderList
             Return
         End If
 
+        '入金済みのデータはエラー
+        Dim blnFlg As Boolean = mCheckNyukin()
+        If blnFlg = False Then
+            '取消データは選択できないアラートを出す
+            _msgHd.dspMSG("cannotSelectTorikeshiData_nyukin", frmC01F10_Login.loginValue.Language)
+            Return
+        End If
+
         Try
 
             '取消確認のアラート
@@ -800,6 +808,51 @@ Public Class OrderList
         End Try
 
     End Sub
+
+
+    Private Function mCheckNyukin() As Boolean
+
+        Dim reccnt As Integer = 0
+
+
+        '受注と結び付いた入金データが存在するか検索する
+        '受注番号で請求データを検索 → 請求番号で取消されていない入金データを検索
+        Dim strJyutyuNo As String = DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号").Value
+        Dim strEda As String = DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号枝番").Value
+
+
+        Dim Sql As String = "SELECT t23.請求番号 as 請求1, t27.請求番号 as 請求2"
+
+        Sql += " FROM t23_skyuhd t23 left join t27_nkinkshihd t27"
+        Sql += " on t23.請求番号 = t27.請求番号"
+
+        Sql += " WHERE "
+        Sql += "     t23.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " and t23.受注番号 = '" & strJyutyuNo & "'"
+        Sql += " and t23.受注番号枝番 = '" & strEda & "'"
+        Sql += " and t27.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+
+        Dim dsNyukin As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+        If dsNyukin.Tables(RS).Rows.Count = 0 Then
+            '対象の入金データがない場合は正常終了
+            mCheckNyukin = True
+        Else
+            Dim strMoji = Convert.ToString(dsNyukin.Tables(RS).Rows(0)("請求2"))
+            If String.IsNullOrEmpty(strMoji) Then
+                '対象の入金データがない場合は正常終了
+                mCheckNyukin = True
+            Else
+                '対象の入金データがあった場合は受注取消ができない
+                mCheckNyukin = False
+            End If
+        End If
+
+
+        dsNyukin = Nothing
+
+    End Function
+
 
     '引当データを元に戻す
     't44_shukohd
