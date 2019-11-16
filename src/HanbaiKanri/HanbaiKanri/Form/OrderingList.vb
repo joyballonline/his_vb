@@ -888,7 +888,10 @@ Public Class OrderingList
 
 
         '支払済みのデータはエラー
-        Dim blnFlg As Boolean = mCheckShiharai()
+        Dim strHatyuNo As String = DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("発注番号").Value
+        Dim strEda As String = DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("発注番号枝番").Value
+
+        Dim blnFlg As Boolean = gCheckShiharai(strHatyuNo, strEda)
         If blnFlg = False Then
             '取消データは選択できないアラートを出す
             _msgHd.dspMSG("cannotSelectTorikeshiData_shiharai", frmC01F10_Login.loginValue.Language)
@@ -897,10 +900,8 @@ Public Class OrderingList
 
 
         Try
-
-            '発注番号を保持しておく
-            Dim strHatyuNo As String = DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("発注番号").Value
-            Dim strEda As String = DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("発注番号枝番").Value
+            Dim strHatyu As String = DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("発注番号").Value
+            Dim strHatyuEda As String = DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("発注番号枝番").Value
 
 
             '取消確認のアラート
@@ -912,27 +913,19 @@ Public Class OrderingList
 
 
             '仕入、買掛、入庫取消
-            blnFlg = mCheckShiire(strHatyuNo, strEda)
+            blnFlg = gCheckShiire(0, strHatyuNo, strEda)
             If blnFlg = False Then
                 'キャンセルボタンの場合は終了
                 Exit Sub
             End If
 
 
-            Sql = "UPDATE Public.t20_hattyu "
-            Sql += "SET "
-
-            Sql += "取消区分 = " & CommonConst.CANCEL_KBN_DISABLED
-            Sql += ", 取消日 = current_date"
-            Sql += ", 更新日 = current_timestamp"
-            Sql += ", 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "' "
-
-            Sql += "WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Sql += " AND 発注番号 = '" & DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("発注番号").Value & "'"
-            Sql += " AND 発注番号枝番 = '" & DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("発注番号枝番").Value & "'"
-
-
-            _db.executeDB(Sql)
+            '発注取消
+            blnFlg = gHatyuCancel(strHatyu, strHatyuEda)
+            If blnFlg = False Then
+                'キャンセルボタンの場合は終了
+                Exit Sub
+            End If
 
 
             getList() 'データ更新
@@ -947,10 +940,34 @@ Public Class OrderingList
     End Sub
 
 
-    Private Function mCheckShiire(ByVal strHatyuNo As String, ByVal strEda As String) As Boolean
+    Public Function gHatyuCancel(ByVal strHatyu As String, ByVal strHatyuEda As String) As Boolean
+
+
+        Dim Sql As String = "UPDATE Public.t20_hattyu "
+        Sql += "SET "
+
+        Sql += "取消区分 = " & CommonConst.CANCEL_KBN_DISABLED
+        Sql += ", 取消日 = current_date"
+        Sql += ", 更新日 = current_timestamp"
+        Sql += ", 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "' "
+
+        Sql += "WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " AND 発注番号 = '" & strHatyu & "'"
+        Sql += " AND 発注番号枝番 = '" & strHatyuEda & "'"
+
+
+        _db.executeDB(Sql)
+
+        gHatyuCancel = True
+
+
+    End Function
+
+
+    Public Function gCheckShiire(ByVal intFlg As Long, ByVal strHatyuNo As String, ByVal strEda As String) As Boolean
 
         Dim reccnt As Integer = 0
-        mCheckShiire = False
+        gCheckShiire = False
 
 
         Dim strMessage As String = vbNullString
@@ -984,7 +1001,7 @@ Public Class OrderingList
         Else
             '入庫登録あり
             blnFlg1 = True
-            mCheckShiire = True
+            gCheckShiire = True
 
             strNyukoNo = dsNyuko.Tables(RS).Rows(0)("入庫番号")
         End If
@@ -1015,7 +1032,7 @@ Public Class OrderingList
         Else
             '仕入登録あり
             blnFlg2 = True
-            mCheckShiire = True
+            gCheckShiire = True
 
             strShiireNo = dsShiire.Tables(RS).Rows(0)("仕入番号")
         End If
@@ -1046,7 +1063,7 @@ Public Class OrderingList
         Else
             '買掛登録あり
             blnFlg3 = True
-            mCheckShiire = True
+            gCheckShiire = True
 
             strKaikakeNo = dsKaikake.Tables(RS).Rows(0)("買掛番号")
         End If
@@ -1057,104 +1074,107 @@ Public Class OrderingList
 #End Region
 
 
+        If intFlg = 0 Then  'メッセージを表示する場合
+
 #Region "メッセージ確認"
 
-
-        '入庫、仕入、買掛に対象の発注番号がない場合は終了
-        If mCheckShiire = False Then
-            mCheckShiire = True
-            Exit Function
-        End If
-
-
-        '確認メッセージの作成
-        If blnFlg1 = True Then
-            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then  '英語
-                strMessage += "Goods receipt registration" & vbCrLf
-            Else
-                strMessage += "入庫登録" & vbCrLf
+            '入庫、仕入、買掛に対象の発注番号がない場合は終了
+            If gCheckShiire = False Then
+                gCheckShiire = True
+                Exit Function
             End If
-        End If
-
-        If blnFlg2 = True Then
-            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then  '英語
-                strMessage += "Purchase registration" & vbCrLf
-            Else
-                strMessage += "仕入登録" & vbCrLf
-            End If
-        End If
-
-        If blnFlg3 = True Then
-            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then  '英語
-                strMessage += "Accounts payable registration" & vbCrLf
-            Else
-                strMessage += "買掛登録" & vbCrLf
-            End If
-        End If
 
 
-        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then  '英語
-            strMessage += "Has already been done.Together with order registration" & vbCrLf
-
+            '確認メッセージの作成
             If blnFlg1 = True Then
-                strMessage += "Goods receipt registration"
+                If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then  '英語
+                    strMessage += "Goods receipt registration" & vbCrLf
+                Else
+                    strMessage += "入庫登録" & vbCrLf
+                End If
             End If
 
             If blnFlg2 = True Then
-                If blnFlg1 = True Then
-                    strMessage += "・"
+                If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then  '英語
+                    strMessage += "Purchase registration" & vbCrLf
+                Else
+                    strMessage += "仕入登録" & vbCrLf
                 End If
-                strMessage += "Purchase registration"
             End If
 
             If blnFlg3 = True Then
-                If blnFlg1 = True Or blnFlg2 = True Then
-                    strMessage += "・"
+                If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then  '英語
+                    strMessage += "Accounts payable registration" & vbCrLf
+                Else
+                    strMessage += "買掛登録" & vbCrLf
                 End If
-                strMessage += "Accounts payable registration"
             End If
 
-        Else
-            strMessage += "が既になされています。発注登録と合わせて" & vbCrLf
 
-            If blnFlg1 = True Then
-                strMessage += "入庫登録"
-            End If
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then  '英語
+                strMessage += "Has already been done.Together with order registration" & vbCrLf
 
-            If blnFlg2 = True Then
                 If blnFlg1 = True Then
-                    strMessage += "・"
+                    strMessage += "Goods receipt registration"
                 End If
-                strMessage += "仕入登録"
+
+                If blnFlg2 = True Then
+                    If blnFlg1 = True Then
+                        strMessage += "・"
+                    End If
+                    strMessage += "Purchase registration"
+                End If
+
+                If blnFlg3 = True Then
+                    If blnFlg1 = True Or blnFlg2 = True Then
+                        strMessage += "・"
+                    End If
+                    strMessage += "Accounts payable registration"
+                End If
+
+            Else
+                strMessage += "が既になされています。発注登録と合わせて" & vbCrLf
+
+                If blnFlg1 = True Then
+                    strMessage += "入庫登録"
+                End If
+
+                If blnFlg2 = True Then
+                    If blnFlg1 = True Then
+                        strMessage += "・"
+                    End If
+                    strMessage += "仕入登録"
+                End If
+
+                If blnFlg3 = True Then
+                    If blnFlg1 = True Or blnFlg2 = True Then
+                        strMessage += "・"
+                    End If
+                    strMessage += "買掛登録"
+                End If
+
             End If
 
-            If blnFlg3 = True Then
-                If blnFlg1 = True Or blnFlg2 = True Then
-                    strMessage += "・"
-                End If
-                strMessage += "買掛登録"
+
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then  '英語
+                strMessage += " Do you also cancel?"
+            Else
+                strMessage += "も取り消しますか？"
             End If
 
-        End If
 
+            Dim result As DialogResult = MessageBox.Show(strMessage, CommonConst.AP_NAME, MessageBoxButtons.OKCancel,
+                                                         MessageBoxIcon.Information, MessageBoxDefaultButton.Button2)
 
-        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then  '英語
-            strMessage += " Do you also cancel?"
-        Else
-            strMessage += "も取り消しますか？"
-        End If
-
-
-        Dim result As DialogResult = MessageBox.Show(strMessage, CommonConst.AP_NAME, MessageBoxButtons.OKCancel,
-                                                     MessageBoxIcon.Information, MessageBoxDefaultButton.Button2)
-
-        If result = DialogResult.Cancel Then
-            'キャンセル場合は終了
-            mCheckShiire = False
-            Exit Function
-        End If
+            If result = DialogResult.Cancel Then
+                'キャンセル場合は終了
+                gCheckShiire = False
+                Exit Function
+            End If
 
 #End Region
+
+        End If
 
 
 #Region "入庫取消"
@@ -1197,7 +1217,7 @@ Public Class OrderingList
 #End Region
 
 
-        mCheckShiire = True
+        gCheckShiire = True
 
     End Function
 
@@ -1575,17 +1595,13 @@ Public Class OrderingList
 
 
 
-    Private Function mCheckShiharai() As Boolean
+    Public Function gCheckShiharai(ByVal strHatyuNo As String, ByVal strEda As String) As Boolean
 
         Dim reccnt As Integer = 0
 
 
         '発注と結び付いた支払データが存在するか検索する
         '発注番号で買掛データを検索 → 買掛番号で取消されていない支払データを検索
-        Dim strHatyuNo As String = DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("発注番号").Value
-        Dim strEda As String = DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("発注番号枝番").Value
-
-
         Dim Sql As String = "SELECT t46.買掛番号 as 買掛1, t49.買掛番号 as 買掛2"
 
         Sql += " FROM t46_kikehd t46 left join t49_shrikshihd t49"
@@ -1601,20 +1617,20 @@ Public Class OrderingList
 
         If dsShiharai.Tables(RS).Rows.Count = 0 Then
             '対象の出庫データがない場合は正常終了
-            mCheckShiharai = True
+            gCheckShiharai = True
         Else
             Dim strMoji = Convert.ToString(dsShiharai.Tables(RS).Rows(0)("買掛2"))
             If String.IsNullOrEmpty(strMoji) Then
                 '対象の出庫データがない場合は正常終了
-                mCheckShiharai = True
+                gCheckShiharai = True
             Else
                 '対象の出庫データがあった場合は入庫取消ができない
-                mCheckShiharai = False
+                gCheckShiharai = False
             End If
         End If
 
 
-        dsShiharai.Dispose()
+        dsShiharai = Nothing
 
 
     End Function

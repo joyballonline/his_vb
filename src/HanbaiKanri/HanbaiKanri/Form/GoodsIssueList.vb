@@ -966,7 +966,7 @@ Public Class GoodsIssueList
     'param2：DateTime 登録日
     'Return: String 伝票番号
     '伝票番号を取得
-    Private Function getSaiban(ByVal key As String, ByVal today As DateTime) As String
+    Public Function getSaiban(ByVal key As String, ByVal today As DateTime) As String
         Dim Sql As String = ""
         Dim saibanID As String = ""
         Dim reccnt As Integer = 0 'DB用（デフォルト）
