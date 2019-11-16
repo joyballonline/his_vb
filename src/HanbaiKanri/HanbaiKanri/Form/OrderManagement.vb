@@ -94,7 +94,7 @@ Public Class OrderManagement
             LblOrder.Text = "JobOrder"
             LblHistory.Text = "SalesHistoryData"
             LblAdd.Text = "SalesThisTime"
-            LblSalesDate.Text = "SalesInvoiceDate"
+            LblSalesDate.Text = "DeliveryDate"
             LblDepositDate.Text = "DepositDate"
             LblRemarks.Text = "Remarks"
             LblIDRCurrency.Text = "Currency"
@@ -355,7 +355,7 @@ Public Class OrderManagement
                 DgvHistory.Columns.Add("売単価", "SellingPrice")
                 DgvHistory.Columns.Add("売上数量", "SalesQuantity")
                 DgvHistory.Columns.Add("売上金額", "SalesAmount")
-                DgvHistory.Columns.Add("売上日", "SalesInvoiceDate")
+                DgvHistory.Columns.Add("売上日", "DeliveryDate")
                 DgvHistory.Columns.Add("入金予定日", "PlannedDepositDate")
                 DgvHistory.Columns.Add("備考", "Remarks")
             Else
@@ -371,7 +371,8 @@ Public Class OrderManagement
                 DgvHistory.Columns.Add("売単価", "売単価")
                 DgvHistory.Columns.Add("売上数量", "売上数量")
                 DgvHistory.Columns.Add("売上金額", "売上金額")
-                DgvHistory.Columns.Add("売上日", "SalesInvoiceDate")
+                'DgvHistory.Columns.Add("売上日", "SalesInvoiceDate")
+                DgvHistory.Columns.Add("売上日", "納品日")
                 DgvHistory.Columns.Add("入金予定日", "入金予定日")
                 DgvHistory.Columns.Add("備考", "備考")
             End If

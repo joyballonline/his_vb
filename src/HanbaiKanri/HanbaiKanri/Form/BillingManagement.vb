@@ -112,7 +112,7 @@ Public Class BillingManagement
 
 
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-            LblBillingDate.Text = "BillingDate"
+            'LblBillingDate.Text = "BillingDate"
             LblDepositDate.Text = "DepositDate"
             LblNo1.Text = "Record"
             LblNo1.Location = New Point(1272, 118)
@@ -155,8 +155,10 @@ Public Class BillingManagement
             DgvCymndt.Columns("売上単価").HeaderText = "SellingPrice"
             DgvCymndt.Columns("売上金額").HeaderText = "SalesAmount"
 
-            DgvHistory.Columns("請求番号").HeaderText = "InvoiceNumber"
-            DgvHistory.Columns("請求日").HeaderText = "BillingDate"
+            'DgvHistory.Columns("請求番号").HeaderText = "InvoiceNumber"
+            DgvHistory.Columns("請求番号").HeaderText = "SalesInvoiceNo"
+            'DgvHistory.Columns("請求日").HeaderText = "BillingDate"
+            DgvHistory.Columns("請求日").HeaderText = "SalesInvoiceDate"
             DgvHistory.Columns("請求区分").HeaderText = "BillingClassification"
             DgvHistory.Columns("請求先").HeaderText = "BillingAddress"
             DgvHistory.Columns("請求金額").HeaderText = "BillingAmount"

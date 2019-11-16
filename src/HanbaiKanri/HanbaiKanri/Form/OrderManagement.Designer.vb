@@ -127,7 +127,7 @@ Partial Class OrderManagement
         Me.LblSalesDate.Name = "LblSalesDate"
         Me.LblSalesDate.Size = New System.Drawing.Size(154, 22)
         Me.LblSalesDate.TabIndex = 253
-        Me.LblSalesDate.Text = "SalesInvoiceDate"
+        Me.LblSalesDate.Text = "納品日"
         Me.LblSalesDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'LblAdd
