@@ -509,7 +509,7 @@ Public Class BillingManagement
         total = dsCymnhd.Tables(RS).Rows(0)("見積金額") + dsCymnhd.Tables(RS).Rows(0)("見積金額") * dsCymnhd.Tables(RS).Rows(0)("ＶＡＴ") / 100
 
         Dim BillTotal As Decimal = DgvAdd.Rows(0).Cells("今回請求金額計").Value + BillingAmount
-        Dim Balance As Decimal = total - BillTotal
+        Dim Balance As Decimal = Math.Round(total, 2, MidpointRounding.AwayFromZero) - BillTotal
 
         If Balance < 0 Then
             '対象データがないメッセージを表示

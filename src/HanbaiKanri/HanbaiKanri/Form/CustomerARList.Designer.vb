@@ -32,6 +32,7 @@ Partial Class CustomerARList
         Me.得意先名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.請求番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.請求日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.通貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.請求金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.入金額 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.売掛金残高 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -53,7 +54,7 @@ Partial Class CustomerARList
         '
         Me.DgvCymndt.AllowUserToAddRows = False
         Me.DgvCymndt.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvCymndt.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.得意先名, Me.請求番号, Me.請求日, Me.請求金額, Me.入金額, Me.売掛金残高, Me.備考})
+        Me.DgvCymndt.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.得意先名, Me.請求番号, Me.請求日, Me.通貨, Me.請求金額, Me.入金額, Me.売掛金残高, Me.備考})
         Me.DgvCymndt.Location = New System.Drawing.Point(13, 51)
         Me.DgvCymndt.Name = "DgvCymndt"
         Me.DgvCymndt.ReadOnly = True
@@ -67,7 +68,7 @@ Partial Class CustomerARList
         '
         Me.LblMode.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblMode.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblMode.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblMode.Location = New System.Drawing.Point(1106, 9)
         Me.LblMode.Name = "LblMode"
         Me.LblMode.Size = New System.Drawing.Size(233, 22)
@@ -105,6 +106,12 @@ Partial Class CustomerARList
         Me.請求日.MaxInputLength = 10
         Me.請求日.Name = "請求日"
         Me.請求日.ReadOnly = True
+        '
+        '通貨
+        '
+        Me.通貨.HeaderText = "通貨"
+        Me.通貨.Name = "通貨"
+        Me.通貨.ReadOnly = True
         '
         '請求金額
         '
@@ -163,6 +170,7 @@ Partial Class CustomerARList
     Friend WithEvents 得意先名 As DataGridViewTextBoxColumn
     Friend WithEvents 請求番号 As DataGridViewTextBoxColumn
     Friend WithEvents 請求日 As DataGridViewTextBoxColumn
+    Friend WithEvents 通貨 As DataGridViewTextBoxColumn
     Friend WithEvents 請求金額 As DataGridViewTextBoxColumn
     Friend WithEvents 入金額 As DataGridViewTextBoxColumn
     Friend WithEvents 売掛金残高 As DataGridViewTextBoxColumn
