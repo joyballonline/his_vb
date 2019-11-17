@@ -358,7 +358,7 @@ Public Class SalesList
             DgvCymnhd.Columns.Add("売上番号", "SalesNumber")
             DgvCymnhd.Columns.Add("売上番号枝番", "SalesVer")
             DgvCymnhd.Columns.Add("客先番号", "CustomerNumber")
-            DgvCymnhd.Columns.Add("売上日", "SalesDate")
+            DgvCymnhd.Columns.Add("売上日", "DeliveryDate")
 
             DgvCymnhd.Columns.Add("受注日", "JobOrderDate")
             DgvCymnhd.Columns.Add("得意先コード", "CustomerCode")
@@ -395,7 +395,7 @@ Public Class SalesList
             DgvCymnhd.Columns.Add("売上番号", "売上番号")
             DgvCymnhd.Columns.Add("売上番号枝番", "売上Ver")
             DgvCymnhd.Columns.Add("客先番号", "客先番号")
-            DgvCymnhd.Columns.Add("売上日", "売上日")
+            DgvCymnhd.Columns.Add("売上日", "納品日")
             DgvCymnhd.Columns.Add("受注番号", "受注番号")
             DgvCymnhd.Columns.Add("受注番号枝番", "受注番号枝番")
             DgvCymnhd.Columns.Add("受注日", "受注日")
@@ -1056,4 +1056,7 @@ Public Class SalesList
 
     End Function
 
+    Private Sub Label8_Click(sender As Object, e As EventArgs) Handles Label8.Click
+
+    End Sub
 End Class

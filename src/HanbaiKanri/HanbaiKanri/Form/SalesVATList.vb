@@ -87,7 +87,7 @@ Public Class SalesVATList
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
 
             DgvList.Columns("売上番号").HeaderText = "SalesNumber"
-            DgvList.Columns("売上日").HeaderText = "SalesDate"
+            DgvList.Columns("売上日").HeaderText = "DeliveryDate"
             DgvList.Columns("得意先名").HeaderText = "CustomerName"
             DgvList.Columns("客先番号").HeaderText = "CustomerNumber"
             DgvList.Columns("営業担当者").HeaderText = "SalesPersonInCharge"
@@ -274,7 +274,7 @@ Public Class SalesVATList
                 sheet.PageSetup.CenterHeader = strSelectMonth & "/" & strSelectYear
 
                 sheet.Range("A1").Value = "SalesNumber"
-                sheet.Range("B1").Value = "SalesDate"
+                sheet.Range("B1").Value = "DeliveryDate"
                 sheet.Range("C1").Value = "CustomerName"
                 sheet.Range("D1").Value = "CustomerNumber"
                 sheet.Range("E1").Value = "SalesPersonInCharge"
