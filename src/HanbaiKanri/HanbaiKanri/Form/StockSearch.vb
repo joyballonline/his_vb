@@ -145,13 +145,13 @@ Public Class StockSearch
 
             Sql += " WHERE "
 
-            Sql += " m21.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += " m21.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
             Sql += " AND m21.無効フラグ = " & CommonConst.CANCEL_KBN_ENABLED
             Sql += " AND m21.入出庫種別 <= '" & CommonConst.INOUT_KBN_SAMPLE & "'"
 
-            Sql += " AND m21.メーカー ILIKE '" & manufactuer & "'"
-            Sql += " AND m21.品名 ILIKE '" & itemName & "'"
-            Sql += " AND m21.型式 ILIKE '" & spec & "'"
+            Sql += " AND m21.メーカー = '" & manufactuer & "'"
+            Sql += " AND m21.品名 = '" & itemName & "'"
+            Sql += " AND m21.型式 = '" & spec & "'"
 
             Sql += " AND m21.現在庫数 <> 0 "
 
@@ -162,10 +162,11 @@ Public Class StockSearch
 
             'Sql += " GROUP BY m21.会社コード, m21.倉庫コード, m21.最終入庫日, m21.最終出庫日 "
             'Sql += " , m21.入出庫種別, m20.名称,m90.文字１, m90.文字２, t43.仕入区分 "
-            Sql += " GROUP BY m21.会社コード, m21.倉庫コード, m21.最終入庫日, m21.入出庫種別, m21.現在庫数"
-            Sql += " , m21.入庫単価, m21.最終出庫日, m20.名称, m90.文字１, m90.文字２, t43.仕入区分 "
-            Sql += " , m21.伝票番号, m21.行番号, t43.入庫番号 "
-            Sql += " , 入庫行番号, m21.ロケ番号 "
+            '20191117 M.Kuji このSelectだと下記Group By は不要と思われます。
+            'Sql += " GROUP BY m21.会社コード, m21.倉庫コード, m21.最終入庫日, m21.入出庫種別, m21.現在庫数"
+            'Sql += " , m21.入庫単価, m21.最終出庫日, m20.名称, m90.文字１, m90.文字２, t43.仕入区分 "
+            'Sql += " , m21.伝票番号, m21.行番号, t43.入庫番号 "
+            'Sql += " , 入庫行番号, m21.ロケ番号 "
 
             Dim dsZaiko As DataSet = _db.selectDB(Sql, RS, reccnt)
 
