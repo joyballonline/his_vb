@@ -41,6 +41,7 @@ Partial Class OrderRemainingList
         Me.型式 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.数量 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.単位 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.通貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.単価 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ＶＡＴ = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -63,7 +64,7 @@ Partial Class OrderRemainingList
         '
         Me.DgvCymndt.AllowUserToAddRows = False
         Me.DgvCymndt.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvCymndt.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.受注番号, Me.受注番号枝番, Me.行番号, Me.受注日, Me.得意先名, Me.メーカー, Me.品名, Me.型式, Me.数量, Me.単位, Me.単価, Me.ＶＡＴ, Me.計, Me.受注残数, Me.備考})
+        Me.DgvCymndt.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.受注番号, Me.受注番号枝番, Me.行番号, Me.受注日, Me.得意先名, Me.メーカー, Me.品名, Me.型式, Me.数量, Me.単位, Me.通貨, Me.単価, Me.ＶＡＴ, Me.計, Me.受注残数, Me.備考})
         Me.DgvCymndt.Location = New System.Drawing.Point(13, 51)
         Me.DgvCymndt.Name = "DgvCymndt"
         Me.DgvCymndt.ReadOnly = True
@@ -77,7 +78,7 @@ Partial Class OrderRemainingList
         '
         Me.LblMode.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblMode.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblMode.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblMode.Location = New System.Drawing.Point(1106, 9)
         Me.LblMode.Name = "LblMode"
         Me.LblMode.Size = New System.Drawing.Size(233, 22)
@@ -168,6 +169,12 @@ Partial Class OrderRemainingList
         Me.単位.Name = "単位"
         Me.単位.ReadOnly = True
         '
+        '通貨
+        '
+        Me.通貨.HeaderText = "通貨"
+        Me.通貨.Name = "通貨"
+        Me.通貨.ReadOnly = True
+        '
         '単価
         '
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
@@ -241,6 +248,7 @@ Partial Class OrderRemainingList
     Friend WithEvents 型式 As DataGridViewTextBoxColumn
     Friend WithEvents 数量 As DataGridViewTextBoxColumn
     Friend WithEvents 単位 As DataGridViewTextBoxColumn
+    Friend WithEvents 通貨 As DataGridViewTextBoxColumn
     Friend WithEvents 単価 As DataGridViewTextBoxColumn
     Friend WithEvents ＶＡＴ As DataGridViewTextBoxColumn
     Friend WithEvents 計 As DataGridViewTextBoxColumn
