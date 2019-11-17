@@ -133,7 +133,7 @@ Public Class OrderRemainingList
                 DgvCymndt.Rows(i).Cells("計").Value = calAmount
                 DgvCymndt.Rows(i).Cells("受注残数").Value = dsCymndt.Tables(RS).Rows(i)("受注残数") '受注数量に係るものはここだけ
                 DgvCymndt.Rows(i).Cells("備考").Value = dsCymndt.Tables(RS).Rows(i)("備考")
-                DgvCymndt.Rows(i).Cells("通貨").Value = GetCurrencyDisplayName(dsCymndt.Tables(RS).Rows(i)("通貨"))
+                DgvCymndt.Rows(i).Cells("通貨").Value = GetCurrencyDisplayName(dsCymndt.Tables(RS).Rows(i)("通貨"), _db)
             Next
 
         Catch ue As UsrDefException
@@ -352,14 +352,20 @@ Public Class OrderRemainingList
         Return True
     End Function
 
-    Public Function GetCurrencyDisplayName(ByVal code_ As String) As String
+    Public Shared Function GetCurrencyDisplayName(ByVal code_ As String, ByRef db_ As UtilDBIf) As String
         Dim cur As String
         If IsDBNull(code_) Then
             cur = ""
         Else
-            Dim Sql As String = " and 採番キー = " & code_
-            Dim curds As DataSet = getDsData("m25_currency", Sql)
-            cur = curds.Tables(RS).Rows(0)("通貨コード")
+            Dim reccnt As Integer = 0 'DB用（デフォルト）
+            Dim Sql As String = ""
+
+            Sql += "SELECT * FROM public.m25_currency"
+            Sql += " WHERE "
+            Sql += "会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += " and 採番キー = " & code_
+            Dim ds As DataSet = db_.selectDB(Sql, RS, reccnt)
+            cur = ds.Tables(RS).Rows(0)("通貨コード")
             If IsDBNull(cur) Then
                 cur = ""
             End If
