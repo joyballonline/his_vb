@@ -89,8 +89,8 @@ Public Class CustomerARList
             BtnBack.Text = "Back"
 
             DgvCymndt.Columns("得意先名").HeaderText = "CustomerName"
-            DgvCymndt.Columns("請求番号").HeaderText = "InvoiceNumber"
-            DgvCymndt.Columns("請求日").HeaderText = "BillingDate"
+            DgvCymndt.Columns("請求番号").HeaderText = "SalesInvoiceNo"
+            DgvCymndt.Columns("請求日").HeaderText = "SalesInvoiceDate"
             DgvCymndt.Columns("請求金額").HeaderText = "TotalBillingAmount"
             DgvCymndt.Columns("入金額").HeaderText = "MoneyReceiptAmount"
             DgvCymndt.Columns("売掛金残高").HeaderText = "ARBalance"
@@ -216,8 +216,8 @@ Public Class CustomerARList
                 sheet.PageSetup.RightHeader = "OutputDate：" & DateTime.Now.ToShortDateString
 
                 sheet.Range("A1").Value = "CustomerName"
-                sheet.Range("B1").Value = "InvoiceNumber"
-                sheet.Range("C1").Value = "BillingDate"
+                sheet.Range("B1").Value = "SalesInvoiceNo"
+                sheet.Range("C1").Value = "SalesInvoiceDate"
                 sheet.Range("D1").Value = "TotalBillingAmount"
                 sheet.Range("E1").Value = "MoneyReceiptAmount"
                 sheet.Range("F1").Value = "ARBalance"

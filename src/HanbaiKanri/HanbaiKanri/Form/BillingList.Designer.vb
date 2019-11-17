@@ -111,7 +111,7 @@ Partial Class BillingList
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(170, 22)
         Me.Label7.TabIndex = 138
-        Me.Label7.Text = "請求番号"
+        Me.Label7.Text = "SalesInvoiceNo"
         Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'TxtBillingNoSince
@@ -131,7 +131,7 @@ Partial Class BillingList
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(170, 22)
         Me.Label8.TabIndex = 136
-        Me.Label8.Text = "請求日"
+        Me.Label8.Text = "SalesInvoiceDate"
         Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label4

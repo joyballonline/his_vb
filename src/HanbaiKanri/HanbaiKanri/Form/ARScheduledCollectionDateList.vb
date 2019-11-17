@@ -92,8 +92,8 @@ Public Class ARScheduledCollectionDateList
 
             DgvCymndt.Columns("回収期日").HeaderText = "DueDate"
             DgvCymndt.Columns("得意先名").HeaderText = "CustomerName"
-            DgvCymndt.Columns("請求番号").HeaderText = "InvoiceNumber"
-            DgvCymndt.Columns("請求日").HeaderText = "BillingDate"
+            DgvCymndt.Columns("請求番号").HeaderText = "SalesInvoiceNo"
+            DgvCymndt.Columns("請求日").HeaderText = "SalesInvoiceDate"
             DgvCymndt.Columns("請求金額").HeaderText = "TotalBillingAmount"
             DgvCymndt.Columns("入金額").HeaderText = "MoneyReceiptAmount"
             DgvCymndt.Columns("売掛金残高").HeaderText = "ARBalance"
@@ -214,8 +214,8 @@ Public Class ARScheduledCollectionDateList
 
                 sheet.Range("A1").Value = "DueDate"
                 sheet.Range("B1").Value = "CustomerName"
-                sheet.Range("C1").Value = "InvoiceNumber"
-                sheet.Range("D1").Value = "BillingDate"
+                sheet.Range("C1").Value = "SalesInvoiceNo"
+                sheet.Range("D1").Value = "SalesInvoiceDate"
                 sheet.Range("E1").Value = "TotalBillingAmount"
                 sheet.Range("F1").Value = "MoneyReceiptAmount"
                 sheet.Range("G1").Value = "ARBalance"

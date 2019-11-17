@@ -22,9 +22,9 @@ Partial Class CustomerARList
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.BtnBack = New System.Windows.Forms.Button()
         Me.DgvCymndt = New System.Windows.Forms.DataGridView()
         Me.LblMode = New System.Windows.Forms.Label()
@@ -94,22 +94,22 @@ Partial Class CustomerARList
         '
         '請求番号
         '
-        Me.請求番号.HeaderText = "請求番号"
+        Me.請求番号.HeaderText = "SalesInvoiceNo"
         Me.請求番号.MaxInputLength = 15
         Me.請求番号.Name = "請求番号"
         Me.請求番号.ReadOnly = True
         '
         '請求日
         '
-        Me.請求日.HeaderText = "請求日"
+        Me.請求日.HeaderText = "SalesInvoiceDate"
         Me.請求日.MaxInputLength = 10
         Me.請求日.Name = "請求日"
         Me.請求日.ReadOnly = True
         '
         '請求金額
         '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.請求金額.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.請求金額.DefaultCellStyle = DataGridViewCellStyle1
         Me.請求金額.HeaderText = "請求金額"
         Me.請求金額.MaxInputLength = 20
         Me.請求金額.Name = "請求金額"
@@ -117,8 +117,8 @@ Partial Class CustomerARList
         '
         '入金額
         '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.入金額.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.入金額.DefaultCellStyle = DataGridViewCellStyle2
         Me.入金額.HeaderText = "入金額"
         Me.入金額.MaxInputLength = 20
         Me.入金額.Name = "入金額"
@@ -126,8 +126,8 @@ Partial Class CustomerARList
         '
         '売掛金残高
         '
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.売掛金残高.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.売掛金残高.DefaultCellStyle = DataGridViewCellStyle3
         Me.売掛金残高.HeaderText = "売掛金残高"
         Me.売掛金残高.MaxInputLength = 20
         Me.売掛金残高.Name = "売掛金残高"

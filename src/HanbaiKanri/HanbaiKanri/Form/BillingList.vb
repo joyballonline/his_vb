@@ -108,8 +108,8 @@ Public Class BillingList
             LblConditions.Text = "ExtractionCondition"
             Label1.Text = "CustomerName"
             Label4.Text = "CustomerCode"
-            Label8.Text = "BillingDate"
-            Label7.Text = "InvoiceNumber"
+            Label8.Text = "SalesInvoiceDate"
+            Label7.Text = "SalesInvoiceNo"
             Label11.Text = "CustomerNumber"
             LblItemName.Text = "ItemName"
             LblSpec.Text = "Spec"
@@ -159,9 +159,9 @@ Public Class BillingList
             '英語の表記
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 DgvBilling.Columns.Add("取消", "Cancel")
-                DgvBilling.Columns.Add("請求番号", "InvoiceNumber")
+                DgvBilling.Columns.Add("請求番号", "SalesInvoiceNo")
                 DgvBilling.Columns.Add("請求区分", "BillingClassification")
-                DgvBilling.Columns.Add("請求日", "BillingDate")
+                DgvBilling.Columns.Add("請求日", "SalesInvoiceDate")
                 DgvBilling.Columns.Add("客先番号", "CustomerNumber")
                 DgvBilling.Columns.Add("受注番号", "JobOrderNumber")
                 DgvBilling.Columns.Add("受注番号枝番", "JobOrderSubNumber")
@@ -179,9 +179,9 @@ Public Class BillingList
                 DgvBilling.Columns.Add("更新者", "ModifiedBy")
             Else
                 DgvBilling.Columns.Add("取消", "取消")
-                DgvBilling.Columns.Add("請求番号", "請求番号")
+                DgvBilling.Columns.Add("請求番号", "SalesInvoiceNo")
                 DgvBilling.Columns.Add("請求区分", "請求区分")
-                DgvBilling.Columns.Add("請求日", "請求日")
+                DgvBilling.Columns.Add("請求日", "SalesInvoiceDate")
                 DgvBilling.Columns.Add("客先番号", "客先番号")
                 DgvBilling.Columns.Add("受注番号", "受注番号")
                 DgvBilling.Columns.Add("受注番号枝番", "受注番号枝番")

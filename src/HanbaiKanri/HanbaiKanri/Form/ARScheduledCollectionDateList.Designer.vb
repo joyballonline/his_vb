@@ -69,7 +69,7 @@ Partial Class ARScheduledCollectionDateList
         '
         Me.LblMode.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblMode.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblMode.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblMode.Location = New System.Drawing.Point(1106, 9)
         Me.LblMode.Name = "LblMode"
         Me.LblMode.Size = New System.Drawing.Size(233, 22)
@@ -101,13 +101,13 @@ Partial Class ARScheduledCollectionDateList
         '
         '請求番号
         '
-        Me.請求番号.HeaderText = "請求番号"
+        Me.請求番号.HeaderText = "SalesInvoiceNo"
         Me.請求番号.Name = "請求番号"
         Me.請求番号.ReadOnly = True
         '
         '請求日
         '
-        Me.請求日.HeaderText = "請求日"
+        Me.請求日.HeaderText = "SalesInvoiceDate"
         Me.請求日.Name = "請求日"
         Me.請求日.ReadOnly = True
         '
