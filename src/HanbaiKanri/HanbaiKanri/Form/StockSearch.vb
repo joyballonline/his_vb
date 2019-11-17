@@ -105,6 +105,10 @@ Public Class StockSearch
         End If
 
         Try
+
+
+#Region "m21_zaiko"
+
             '在庫マスタから対象データを取得
             '
             '会社コード = ログイン情報
@@ -160,6 +164,7 @@ Public Class StockSearch
                 Sql += " OR t43.仕入区分 = '" & CommonConst.Sire_KBN_Move & "' ) "
             End If
 
+
             'Sql += " GROUP BY m21.会社コード, m21.倉庫コード, m21.最終入庫日, m21.最終出庫日 "
             'Sql += " , m21.入出庫種別, m20.名称,m90.文字１, m90.文字２, t43.仕入区分 "
             '20191117 M.Kuji このSelectだと下記Group By は不要と思われます。
@@ -167,6 +172,95 @@ Public Class StockSearch
             'Sql += " , m21.入庫単価, m21.最終出庫日, m20.名称, m90.文字１, m90.文字２, t43.仕入区分 "
             'Sql += " , m21.伝票番号, m21.行番号, t43.入庫番号 "
             'Sql += " , 入庫行番号, m21.ロケ番号 "
+#End Region
+
+
+#Region "union t21_hattyu"
+
+            Sql += " union all"
+
+
+            Sql += " SELECT "
+            Sql += " t21.会社コード, t20.倉庫コード"
+            Sql += " , null as 最終入庫日"
+            Sql += " , '1' as 入出庫種別"
+            Sql += " , t21.発注残数 as 現在庫数"
+            Sql += " , t21.仕入値 as 入庫単価"
+            Sql += " , null as 最終出庫日"
+            Sql += " , m20.名称"
+            Sql += " , '入庫予定' as 文字１"
+            Sql += " , 'Scheduled goods receipt' as 文字２"
+            Sql += " , t21.仕入区分 "
+
+            Sql += " , '1' as 伝票番号"
+            Sql += " , '1' as 行番号 "
+            Sql += " , '1' as ロケ番号"
+            Sql += " , '1' as 入庫番号"
+            Sql += " , '1' as 入庫行番号 "
+
+
+            Sql += " FROM t21_hattyu t21 left join t20_hattyu t20"
+            Sql += " on t21.発注番号 = t20.発注番号 and t21.発注番号枝番 = t20.発注番号枝番"
+            Sql += " left join m20_warehouse m20 "
+            Sql += " ON t20.会社コード = m20.会社コード AND t20.倉庫コード = m20.倉庫コード "
+
+
+            Sql += " WHERE "
+            Sql += " t21.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += " AND t20.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+
+            Sql += " AND t21.メーカー = '" & manufactuer & "'"
+            Sql += " AND t21.品名 = '" & itemName & "'"
+            Sql += " AND t21.型式 = '" & spec & "'"
+
+            Sql += " AND t21.発注残数 <> 0 "
+            Sql += " AND (t21.仕入区分 = '" & CommonConst.Sire_KBN_Sire & "' or t21.仕入区分 = '" & CommonConst.Sire_KBN_Zaiko & "')"
+#End Region
+
+
+#Region "union t45_shukodt"
+
+            Sql += " union all"
+
+            Sql += " SELECT "
+            Sql += " t45.会社コード, t45.倉庫コード"
+            Sql += " , null as 最終入庫日"
+            Sql += " , '1' as 入出庫種別"
+            Sql += " , t45.出庫数量 as 現在庫数"
+            Sql += " , t11.仕入値 as 入庫単価"
+            Sql += " , null as 最終出庫日"
+            Sql += " , m20.名称"
+            Sql += " , '引当' as 文字１"
+            Sql += " , 'Number of provisions' as 文字２"
+            Sql += " , t11.仕入区分 "
+
+            Sql += " , '1' as 伝票番号"
+            Sql += " , '1' as 行番号 "
+            Sql += " , '1' as ロケ番号"
+            Sql += " , '1' as 入庫番号"
+            Sql += " , '1' as 入庫行番号 "
+
+            Sql += " FROM t45_shukodt t45 left join t44_shukohd t44"
+            Sql += " on t45.出庫番号 = t44.出庫番号"
+
+            Sql += " left join t11_cymndt t11"
+            Sql += " on t45.受注番号 = t11.受注番号 and t45.受注番号枝番  = t11.受注番号枝番"
+            Sql += " left join m20_warehouse m20 "
+            Sql += " ON t45.会社コード = m20.会社コード AND t45.倉庫コード = m20.倉庫コード "
+
+            Sql += " WHERE "
+            Sql += " t45.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += " AND t44.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+
+            Sql += " AND t45.メーカー = '" & manufactuer & "'"
+            Sql += " AND t45.品名 = '" & itemName & "'"
+            Sql += " AND t45.型式 = '" & spec & "'"
+
+            Sql += " AND t45.出庫数量 <> 0 "
+            Sql += " AND t45.出庫区分 = '" & CommonConst.SHUKO_KBN_TMP & "'"
+
+#End Region
+
 
             Dim dsZaiko As DataSet = _db.selectDB(Sql, RS, reccnt)
 
