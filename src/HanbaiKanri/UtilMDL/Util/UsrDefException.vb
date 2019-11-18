@@ -85,8 +85,17 @@ Public Class UsrDefException
                    Optional ByVal prmOutLogFile As String = "")
         Call Me.New(prmException.Message, prmDspMessageVO)  '②に処理委託
         Debug.WriteLine(prmException.StackTrace)
-        _defaultIcon = MessageBoxIcon.Error
-        Call Me.dspMsg(prmSilentMode, prmOutLogFile)                                    'システム例外は直ちにエラーMSGの表示を行う
+
+        If prmException.Message = "The Connection is broken." Then
+            '_defaultIcon = MessageBoxIcon.Information
+            'Call Me.dspMsg(prmSilentMode, prmOutLogFile)
+            'MsgBox("Connection is not so good!, Login again!")
+            MessageBox.Show("Signal is not so good. Please login again!", "SPIN", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Else
+            _defaultIcon = MessageBoxIcon.Error
+            Call Me.dspMsg(prmSilentMode, prmOutLogFile)                                    'システム例外は直ちにエラーMSGの表示を行う
+        End If
+
     End Sub
     '④(ユーザー定義例外生成用コンストラクタ)
     ''' <summary>
