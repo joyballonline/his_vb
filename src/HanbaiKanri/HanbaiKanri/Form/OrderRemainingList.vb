@@ -101,6 +101,8 @@ Public Class OrderRemainingList
             DgvCymndt.Columns("計").HeaderText = "Amount"
             DgvCymndt.Columns("受注残数").HeaderText = "OrderRemainingAmount"
             DgvCymndt.Columns("備考").HeaderText = "Remarks"
+            DgvCymndt.Columns("通貨").HeaderText = "Currency"
+
 
         End If
 
@@ -131,10 +133,11 @@ Public Class OrderRemainingList
                 DgvCymndt.Rows(i).Cells("計").Value = calAmount
                 DgvCymndt.Rows(i).Cells("受注残数").Value = dsCymndt.Tables(RS).Rows(i)("受注残数") '受注数量に係るものはここだけ
                 DgvCymndt.Rows(i).Cells("備考").Value = dsCymndt.Tables(RS).Rows(i)("備考")
+                DgvCymndt.Rows(i).Cells("通貨").Value = GetCurrencyDisplayName(dsCymndt.Tables(RS).Rows(i)("通貨"), _db)
             Next
 
         Catch ue As UsrDefException
-            ue.dspMsg()
+            'ue.dspMsg()
             Throw ue
         Catch ex As Exception
             'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
@@ -156,7 +159,7 @@ Public Class OrderRemainingList
         Dim Sql As String = ""
 
         Sql = "SELECT t10.受注番号, t10.受注番号枝番, t11.行番号, t10.受注日, t10.得意先名, t11.メーカー, t11.品名, t11.型式, t11.受注数量"
-        Sql += ",t11.単位, t11.見積単価, t10.ＶＡＴ, t11.売上金額, t11.受注残数, t11.備考"
+        Sql += ",t11.単位, t11.見積単価, t10.ＶＡＴ, t11.売上金額, t11.受注残数, t11.備考, t11.通貨"
         Sql += " FROM  public.t11_cymndt t11 "
         Sql += " INNER JOIN  t10_cymnhd t10"
         Sql += " ON t11.会社コード = t10.会社コード"
@@ -239,6 +242,8 @@ Public Class OrderRemainingList
 
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 sheet.PageSetup.RightHeader = "OutputDate：" & DateTime.Now.ToShortDateString
+                sheet.PageSetup.LeftHeader = "Order Remaining List"
+                sheet.PageSetup.CenterHeader = ""
 
                 sheet.Range("A1").Value = "JobOrderNo"
                 sheet.Range("B1").Value = "JobOrderDate"
@@ -248,11 +253,12 @@ Public Class OrderRemainingList
                 sheet.Range("F1").Value = "Spec"
                 sheet.Range("G1").Value = "Quantity"
                 sheet.Range("H1").Value = "Unit"
-                sheet.Range("I1").Value = "UnitPrice"
-                sheet.Range("J1").Value = "ＶＡＴ"
-                sheet.Range("K1").Value = "Amount"
-                sheet.Range("L1").Value = "OrderRemainingAmount"
-                sheet.Range("M1").Value = "Remarks"
+                sheet.Range("I1").Value = "Currency"
+                sheet.Range("J1").Value = "UnitPrice"
+                sheet.Range("K1").Value = "ＶＡＴ"
+                sheet.Range("L1").Value = "Amount"
+                sheet.Range("M1").Value = "OrderRemainingAmount"
+                sheet.Range("N1").Value = "Remarks"
             End If
 
             For i As Integer = 0 To DgvCymndt.RowCount - 1
@@ -267,11 +273,12 @@ Public Class OrderRemainingList
                 sheet.Range("F" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("型式").Value
                 sheet.Range("G" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("数量").Value
                 sheet.Range("H" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("単位").Value
-                sheet.Range("I" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("単価").Value
-                sheet.Range("J" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("ＶＡＴ").Value
-                sheet.Range("K" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("計").Value
-                sheet.Range("L" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("受注残数").Value
-                sheet.Range("M" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("備考").Value
+                sheet.Range("I" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("通貨").Value
+                sheet.Range("J" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("単価").Value
+                sheet.Range("K" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("ＶＡＴ").Value
+                sheet.Range("L" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("計").Value
+                sheet.Range("M" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("受注残数").Value
+                sheet.Range("N" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("備考").Value
 
             Next
 
@@ -343,6 +350,29 @@ Public Class OrderRemainingList
             Return True
         End If
         Return True
+    End Function
+
+    Public Shared Function GetCurrencyDisplayName(ByVal code_ As String, ByRef db_ As UtilDBIf) As String
+        Dim cur As String
+        If IsDBNull(code_) Then
+            cur = ""
+        Else
+            Dim reccnt As Integer = 0 'DB用（デフォルト）
+            Dim Sql As String = ""
+
+            Sql += "SELECT * FROM public.m25_currency"
+            Sql += " WHERE "
+            Sql += "会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += " and 採番キー = " & code_
+            Dim ds As DataSet = db_.selectDB(Sql, RS, reccnt)
+            cur = ds.Tables(RS).Rows(0)("通貨コード")
+            If IsDBNull(cur) Then
+                cur = ""
+            End If
+        End If
+
+        Return cur
+
     End Function
 
 End Class

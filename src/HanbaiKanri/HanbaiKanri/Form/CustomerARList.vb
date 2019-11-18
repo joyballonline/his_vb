@@ -95,6 +95,7 @@ Public Class CustomerARList
             DgvCymndt.Columns("入金額").HeaderText = "MoneyReceiptAmount"
             DgvCymndt.Columns("売掛金残高").HeaderText = "ARBalance"
             DgvCymndt.Columns("備考").HeaderText = "Remarks"
+            DgvCymndt.Columns("通貨").HeaderText = "Currency"
 
         End If
 
@@ -129,6 +130,7 @@ Public Class CustomerARList
             DgvCymndt.Rows(i).Cells("入金額").Value = dsSkyuhd.Tables(RS).Rows(i)("入金額計")
             DgvCymndt.Rows(i).Cells("売掛金残高").Value = dsSkyuhd.Tables(RS).Rows(i)("売掛残高")
             DgvCymndt.Rows(i).Cells("備考").Value = dsSkyuhd.Tables(RS).Rows(i)("備考1")
+            DgvCymndt.Rows(i).Cells("通貨").Value = SPIN.OrderRemainingList.GetCurrencyDisplayName(dsSkyuhd.Tables(RS).Rows(i)("通貨"), _db)
 
         Next
 
@@ -218,10 +220,11 @@ Public Class CustomerARList
                 sheet.Range("A1").Value = "CustomerName"
                 sheet.Range("B1").Value = "SalesInvoiceNo"
                 sheet.Range("C1").Value = "SalesInvoiceDate"
-                sheet.Range("D1").Value = "TotalBillingAmount"
-                sheet.Range("E1").Value = "MoneyReceiptAmount"
-                sheet.Range("F1").Value = "ARBalance"
-                sheet.Range("G1").Value = "Remarks"
+                sheet.Range("D1").Value = "Currency"
+                sheet.Range("E1").Value = "TotalBillingAmount"
+                sheet.Range("F1").Value = "MoneyReceiptAmount"
+                sheet.Range("G1").Value = "ARBalance"
+                sheet.Range("H1").Value = "Remarks"
 
             End If
 
@@ -232,10 +235,11 @@ Public Class CustomerARList
                 sheet.Range("A" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("得意先名").Value
                 sheet.Range("B" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("請求番号").Value
                 sheet.Range("C" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("請求日").Value
-                sheet.Range("D" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("請求金額").Value
-                sheet.Range("E" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("入金額").Value
-                sheet.Range("F" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("売掛金残高").Value
-                sheet.Range("G" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("備考").Value
+                sheet.Range("D" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("通貨").Value
+                sheet.Range("E" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("請求金額").Value
+                sheet.Range("F" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("入金額").Value
+                sheet.Range("G" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("売掛金残高").Value
+                sheet.Range("H" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("備考").Value
 
             Next
 

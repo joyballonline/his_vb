@@ -92,6 +92,7 @@ Public Class JobOrderList
             DgvList.Columns("型式").HeaderText = "Spec"
             DgvList.Columns("数量").HeaderText = "Quantity"
             DgvList.Columns("単位").HeaderText = "Unit"
+            DgvList.Columns("通貨").HeaderText = "Currency"
             DgvList.Columns("単価").HeaderText = "UnitPrice"
             DgvList.Columns("ＶＡＴ").HeaderText = "ＶＡＴ"
             DgvList.Columns("計").HeaderText = "TotalAmount"
@@ -134,7 +135,7 @@ Public Class JobOrderList
         DgvList.Rows.Clear() '一覧クリア
 
         Sql = "SELECT t10.受注番号, t10.受注日, t10.得意先名, t11.メーカー, t11.品名, t11.型式, t11.受注数量"
-        Sql += ",t11.単位, t11.見積単価, t10.ＶＡＴ, t11.備考"
+        Sql += ",t11.単位, t11.見積単価, t10.ＶＡＴ, t11.備考, t11.通貨"
         Sql += " FROM  public.t11_cymndt t11 "
         Sql += " INNER JOIN  t10_cymnhd t10"
         Sql += " ON t11.会社コード = t10.会社コード"
@@ -175,6 +176,7 @@ Public Class JobOrderList
                 DgvList.Rows(i).Cells("単価").Value = ds.Tables(RS).Rows(i)("見積単価")
                 DgvList.Rows(i).Cells("ＶＡＴ").Value = vatAmount
                 DgvList.Rows(i).Cells("計").Value = (ds.Tables(RS).Rows(i)("見積単価") + vatAmount) * ds.Tables(RS).Rows(i)("受注数量")
+                DgvList.Rows(i).Cells("通貨").Value = SPIN.OrderRemainingList.GetCurrencyDisplayName(ds.Tables(RS).Rows(i)("通貨"), _db)
 
             Next
 
@@ -256,9 +258,10 @@ Public Class JobOrderList
                 sheet.Range("F1").Value = "Spec"
                 sheet.Range("G1").Value = "Quantity"
                 sheet.Range("H1").Value = "Unit"
-                sheet.Range("I1").Value = "UnitPrice"
-                sheet.Range("J1").Value = "ＶＡＴ"
-                sheet.Range("K1").Value = "TotalAmount"
+                sheet.Range("I1").Value = "Currency"
+                sheet.Range("J1").Value = "UnitPrice"
+                sheet.Range("K1").Value = "ＶＡＴ"
+                sheet.Range("L1").Value = "TotalAmount"
 
             End If
 
@@ -275,9 +278,10 @@ Public Class JobOrderList
                 sheet.Range("F" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("型式").Value '型式
                 sheet.Range("G" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("数量").Value '数量
                 sheet.Range("H" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("単位").Value '単位
-                sheet.Range("I" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("単価").Value '単価
-                sheet.Range("J" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("ＶＡＴ").Value 'ＶＡＴ
-                sheet.Range("K" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("計").Value '計
+                sheet.Range("I" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("通貨").Value
+                sheet.Range("J" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("単価").Value '単価
+                sheet.Range("K" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("ＶＡＴ").Value 'ＶＡＴ
+                sheet.Range("L" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("計").Value '計
 
                 sheet.Range("G" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight
                 sheet.Range("I" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight

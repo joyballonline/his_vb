@@ -104,6 +104,7 @@ Public Class AccountsPayableBulk
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then  '英語
             BtnExcelOutput.Text = "Excel output"
             BtnRegist.Text = "Bulk registration"
+            BtnBack.Text = "Back"
 
         Else  '日本語
 
@@ -460,7 +461,7 @@ Public Class AccountsPayableBulk
                         _msgHd.dspMSG("importFileError", frmC01F10_Login.loginValue.Language, errorMsg)
                     Else
 
-                        Dim saveMsg As String = "登録件数：" & saveCnt & vbCrLf & "スキップ件数：" & skipCnt
+                        Dim saveMsg As String = "Registration#：" & saveCnt & vbCrLf & "Skip#：" & skipCnt
 
                         '取消確認のアラート
                         Dim result As DialogResult = _msgHd.dspMSG("registrationConfirmation",
