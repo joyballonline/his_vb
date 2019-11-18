@@ -121,6 +121,8 @@ Public Class StockSearch
             Sql += " , m21.入庫単価, m21.最終出庫日, m20.名称, m90.文字１, m90.文字２, t43.仕入区分 "
             Sql += " , m21.伝票番号, m21.行番号 "
             Sql += " , m21.ロケ番号, t43.入庫番号, t43.行番号 as 入庫行番号 "
+            Sql += " , null as 出庫番号, '0' as 出庫区分"
+
             Sql += " FROM m21_zaiko m21 "
 
             Sql += " LEFT JOIN "
@@ -183,7 +185,7 @@ Public Class StockSearch
             Sql += " SELECT "
             Sql += " t21.会社コード, t20.倉庫コード"
             Sql += " , null as 最終入庫日"
-            Sql += " , '1' as 入出庫種別"
+            Sql += " , null as 入出庫種別"
             Sql += " , t21.発注残数 as 現在庫数"
             Sql += " , t21.仕入値 as 入庫単価"
             Sql += " , null as 最終出庫日"
@@ -192,11 +194,12 @@ Public Class StockSearch
             Sql += " , 'Scheduled goods receipt' as 文字２"
             Sql += " , t21.仕入区分 "
 
-            Sql += " , '1' as 伝票番号"
-            Sql += " , '1' as 行番号 "
-            Sql += " , '1' as ロケ番号"
-            Sql += " , '1' as 入庫番号"
-            Sql += " , '1' as 入庫行番号 "
+            Sql += " , null as 伝票番号"
+            Sql += " , null as 行番号 "
+            Sql += " , null as ロケ番号"
+            Sql += " , null as 入庫番号"
+            Sql += " , null as 入庫行番号 "
+            Sql += " , null as 出庫番号,'0' as 出庫区分"
 
 
             Sql += " FROM t21_hattyu t21 left join t20_hattyu t20"
@@ -225,7 +228,7 @@ Public Class StockSearch
             Sql += " SELECT "
             Sql += " t45.会社コード, t45.倉庫コード"
             Sql += " , null as 最終入庫日"
-            Sql += " , '1' as 入出庫種別"
+            Sql += " , null as 入出庫種別"
             Sql += " , t45.出庫数量 as 現在庫数"
             Sql += " , t11.仕入値 as 入庫単価"
             Sql += " , null as 最終出庫日"
@@ -234,11 +237,12 @@ Public Class StockSearch
             Sql += " , 'Number of provisions' as 文字２"
             Sql += " , t11.仕入区分 "
 
-            Sql += " , '1' as 伝票番号"
-            Sql += " , '1' as 行番号 "
-            Sql += " , '1' as ロケ番号"
-            Sql += " , '1' as 入庫番号"
-            Sql += " , '1' as 入庫行番号 "
+            Sql += " , null as 伝票番号"
+            Sql += " , t45.行番号 "
+            Sql += " , null as ロケ番号"
+            Sql += " , null as 入庫番号"
+            Sql += " , null as 入庫行番号 "
+            Sql += " , t45.出庫番号,t45.出庫区分"
 
             Sql += " FROM t45_shukodt t45 left join t44_shukohd t44"
             Sql += " on t45.出庫番号 = t44.出庫番号"
@@ -285,7 +289,18 @@ Public Class StockSearch
                 DgvList.Rows(i).Cells("入出庫種別").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
                                                            dsZaiko.Tables(RS).Rows(i)("文字２"),
                                                            dsZaiko.Tables(RS).Rows(i)("文字１")) '移動入力でも使用
+
+                Dim intSuryo As Integer = dsZaiko.Tables(RS).Rows(i)("現在庫数")
+                If dsZaiko.Tables(RS).Rows(i)("出庫区分") = CommonConst.SHUKO_KBN_TMP Then  '在庫引当の場合
+                    Dim strSyuko As String = Convert.ToString(dsZaiko.Tables(RS).Rows(i)("出庫番号"))
+                    Dim intGyo As String = dsZaiko.Tables(RS).Rows(i)("行番号")
+
+                    '引当数を対象の入庫番号を特定し足しこむ
+                    Dim blnHikiate As Boolean = mCheckHikiate(strSyuko, intGyo, intSuryo)
+                End If
+
                 DgvList.Rows(i).Cells("現在庫数").Value = dsZaiko.Tables(RS).Rows(i)("現在庫数") '移動入力でも使用
+
                 DgvList.Rows(i).Cells("入庫単価").Value = dsZaiko.Tables(RS).Rows(i)("入庫単価") '移動入力でも使用
                 DgvList.Rows(i).Cells("最終出庫日").Value = dsZaiko.Tables(RS).Rows(i)("最終出庫日")
                 DgvList.Rows(i).Cells("伝票番号").Value = dsZaiko.Tables(RS).Rows(i)("伝票番号") '移動入力でも使用
@@ -313,6 +328,55 @@ Public Class StockSearch
         End Try
 
     End Sub
+
+
+    Private Function mCheckHikiate(ByVal strSyuko As String, ByVal intGyo As Integer, ByVal intSuryo As Integer) As Boolean
+
+        Dim reccnt As Integer = 0 'DB用（デフォルト）
+
+        'inoutを出庫番号で検索
+        Dim SQL As String = "select ロケ番号"
+
+        SQL += " from t70_inout t70"
+
+        SQL += " where "
+        SQL += "     t70.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        SQL += " AND t70.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+
+        SQL += " AND t70.伝票番号 = '" & strSyuko & "'"
+        SQL += " AND t70.行番号 = " & intGyo
+
+        Dim dsZaiko As DataSet = _db.selectDB(SQL, RS, reccnt)
+
+        If dsZaiko.Tables(0).Rows.Count = 0 Then
+            Exit Function
+        End If
+
+
+        '表示中の一覧から対象の在庫を特定する
+        Dim strLoca As String = Mid(Convert.ToString(dsZaiko.Tables(0).Rows(0)("ロケ番号")), 1, 10)
+        Dim strLocaGyo As String = Mid(Convert.ToString(dsZaiko.Tables(0).Rows(0)("ロケ番号")), 11, 1)
+
+        For i As Integer = 0 To DgvList.Rows.Count - 1  '一覧
+
+            Dim strDen As String = Convert.ToString(DgvList.Rows(i).Cells("伝票番号").Value)
+            Dim strDenGyo As String = Convert.ToString(DgvList.Rows(i).Cells("行番号").Value)
+
+            If strDen = vbNullString Then
+            Else
+                'inoutのロケ番と画面の伝票番号が一致した場合は現在個数に引当数を足す
+                If strDen = strLoca And strDenGyo = Convert.ToInt32(strLocaGyo) Then
+                    DgvList.Rows(i).Cells("現在庫数").Value += intSuryo
+                End If
+            End If
+
+        Next
+
+
+        mCheckHikiate = True
+
+    End Function
+
 
     '戻るボタン押下時
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
