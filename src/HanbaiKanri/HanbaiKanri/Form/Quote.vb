@@ -569,7 +569,8 @@ Public Class Quote
             Dim GrossProfit As Decimal = 0      '粗利
 
             For index As Integer = 0 To DgvItemList.Rows.Count - 1
-                PurchaseTotal += Math.Ceiling(DgvItemList.Rows(index).Cells("仕入金額").Value)
+                'PurchaseTotal += Math.Ceiling(DgvItemList.Rows(index).Cells("仕入金額").Value)
+                PurchaseTotal += DgvItemList.Rows(index).Cells("仕入金額").Value
                 Total += DgvItemList.Rows(index).Cells("売上金額").Value
                 QuoteTotal += DgvItemList.Rows(index).Cells("見積金額").Value
                 GrossProfit += DgvItemList.Rows(index).Cells("粗利額").Value
@@ -1078,9 +1079,9 @@ Public Class Quote
                                 '小数点表示にするため切り上げをコメントアウト
                                 'DgvItemList("仕入単価", e.RowIndex).Value = Math.Ceiling(DgvItemList("仕入単価_外貨", e.RowIndex).Value / DgvItemList("仕入レート", e.RowIndex).Value)
                                 Dim dotAlign As Decimal = DgvItemList("仕入単価_外貨", e.RowIndex).Value / DgvItemList("仕入レート", e.RowIndex).Value
-                                dotAlign *= 100
-                                dotAlign = Math.Ceiling(dotAlign)
-                                dotAlign /= 100
+                                'dotAlign *= 100
+                                'dotAlign = Math.Ceiling(dotAlign)
+                                'dotAlign /= 100
                                 DgvItemList("仕入単価", e.RowIndex).Value = dotAlign
                             End If
                     End Select
@@ -1147,7 +1148,7 @@ Public Class Quote
                             DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value = Decimal.Parse(
                                                                                    rmNullDecimal(DgvItemList.Rows(e.RowIndex).Cells("売単価").Value) + rmNullDecimal(DgvItemList.Rows(e.RowIndex).Cells("関税額").Value) + rmNullDecimal(DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value) + rmNullDecimal(DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value))
                             '端数処理
-                            DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value = Math.Truncate(DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value * 100) / 100
+                            'DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value = Math.Truncate(DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value * 100) / 100
                             If (DgvItemList.Rows(e.RowIndex).Cells("関税額").Value Is Nothing Or DgvItemList.Rows(e.RowIndex).Cells("関税額").Value = 0) _
                                 And (DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value Is Nothing Or DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value = 0) _
                                 And (DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value Is Nothing Or DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value = 0) Then
@@ -1170,7 +1171,7 @@ Public Class Quote
                             DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value = Decimal.Parse(
                                                                                    rmNullDecimal(DgvItemList.Rows(e.RowIndex).Cells("売単価").Value) + rmNullDecimal(DgvItemList.Rows(e.RowIndex).Cells("関税額").Value) + rmNullDecimal(DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value) + rmNullDecimal(DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value))
                             '端数処理
-                            DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value = Math.Truncate(DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value * 100) / 100
+                            'DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value = Math.Truncate(DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value * 100) / 100
 
                             If (DgvItemList.Rows(e.RowIndex).Cells("関税額").Value Is Nothing Or DgvItemList.Rows(e.RowIndex).Cells("関税額").Value = 0) _
                                 And (DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value Is Nothing Or DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value = 0) _
@@ -1276,7 +1277,7 @@ Public Class Quote
 
                             DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value = DgvItemList.Rows(e.RowIndex).Cells("見積単価_外貨").Value / TxtRate.Text
                             '端数処理
-                            DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value = Math.Truncate(DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value * 100) / 100
+                            'DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value = Math.Truncate(DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value * 100) / 100
                             tmp4 = DgvItemList.Rows(e.RowIndex).Cells("関税額").Value + DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value + DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value
 
                             DgvItemList.Rows(e.RowIndex).Cells("売単価").Value = DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value - tmp4
@@ -1942,7 +1943,7 @@ Public Class Quote
                         Sql2 += ",仕入単価 = 0"
                     End If
 
-                    If DgvItemList.Rows(index).Cells("仕入通貨").Value IsNot Nothing And Not IsNumeric(DgvItemList.Rows(index).Cells("仕入通貨").Value) Then
+                    If DgvItemList.Rows(index).Cells("仕入通貨").Value IsNot Nothing Then
                         Sql2 += ",仕入通貨 = " & DgvItemList.Rows(index).Cells("仕入通貨").Value.ToString
                     Else
                         Sql2 += ",仕入通貨 = 1"
@@ -1968,7 +1969,7 @@ Public Class Quote
                         Sql2 += ",仕入原価 = 0"
                     End If
                     If DgvItemList.Rows(index).Cells("関税率").Value IsNot Nothing Then
-                        Sql2 += ",関税率 = " & UtilClass.formatNumber(DgvItemList.Rows(index).Cells("関税率").Value.ToString) / 100
+                        Sql2 += ",関税率 = " & UtilClass.formatNumber(DgvItemList.Rows(index).Cells("関税率").Value.ToString / 100)
                     Else
                         Sql2 += ",関税率 = 0"
                     End If
@@ -1978,7 +1979,7 @@ Public Class Quote
                         Sql2 += ",関税額 = 0"
                     End If
                     If DgvItemList.Rows(index).Cells("前払法人税率").Value IsNot Nothing Then
-                        Sql2 += ",前払法人税率 = " & UtilClass.formatNumber(DgvItemList.Rows(index).Cells("前払法人税率").Value.ToString) / 100
+                        Sql2 += ",前払法人税率 = " & UtilClass.formatNumber(DgvItemList.Rows(index).Cells("前払法人税率").Value.ToString / 100)
                     Else
                         Sql2 += ",前払法人税率 = 0"
                     End If
@@ -1988,7 +1989,7 @@ Public Class Quote
                         Sql2 += ",前払法人税額 = 0"
                     End If
                     If DgvItemList.Rows(index).Cells("輸送費率").Value IsNot Nothing Then
-                        Sql2 += ",輸送費率 = " & UtilClass.formatNumber(DgvItemList.Rows(index).Cells("輸送費率").Value.ToString) / 100
+                        Sql2 += ",輸送費率 = " & UtilClass.formatNumber(DgvItemList.Rows(index).Cells("輸送費率").Value.ToString / 100)
                     Else
                         Sql2 += ",輸送費率 = 0"
                     End If
@@ -2905,7 +2906,7 @@ Public Class Quote
 
             Dim rowCnt As Integer = 0
             Dim currentRow As Integer = 11
-            Dim lastRow As Integer = 13
+            Dim lastRow As Integer = 11
 
             '言語の判定
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then  '英語
@@ -2966,17 +2967,17 @@ Public Class Quote
             sheet.Range("O3").Value = Input
             sheet.Range("B6").Value = PaymentTerms
             sheet.Range("B7").Value = QuoteRemarks
-            sheet.Range("U15").Value = PurchaseTotal        '仕入
-            sheet.Range("U16").Value = Total                '売上
-            sheet.Range("U17").Value = QuoteAmount          '見積
-            sheet.Range("U18").Value = GrossProfitAmount    '粗利
+            'sheet.Range("U15").Value = PurchaseTotal        '仕入
+            'sheet.Range("U16").Value = Total                '売上
+            'sheet.Range("U17").Value = QuoteAmount          '見積
+            'sheet.Range("U18").Value = GrossProfitAmount    '粗利
 
 
 
             For index As Integer = 0 To DgvItemList.Rows.Count - 1
-                If rowCnt >= 3 Then
+                If rowCnt >= 1 Then
                     Dim R As Object
-                    R = sheet.Range(lastRow - 2 & ":" & lastRow - 2)
+                    R = sheet.Range(lastRow & ":" & lastRow)
                     R.Copy()
                     R.Insert()
                     If Marshal.IsComObject(R) Then
@@ -3040,6 +3041,10 @@ Public Class Quote
                 sheet.Range("T" & currentRow + 3).Value = "GrossMargin"     '粗利額
             End If
 
+            sheet.Range("U" & currentRow).Value = PurchaseTotal        '仕入
+            sheet.Range("U" & currentRow + 1).Value = Total                '売上
+            sheet.Range("U" & currentRow + 2).Value = QuoteAmount          '見積
+            sheet.Range("U" & currentRow + 3).Value = GrossProfitAmount    '粗利
 
             app.DisplayAlerts = False 'Microsoft Excelのアラート一旦無効化
 
