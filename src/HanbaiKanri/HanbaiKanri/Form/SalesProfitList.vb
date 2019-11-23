@@ -513,8 +513,8 @@ Public Class SalesProfitList
             DgvList.Columns("受注番号枝番").HeaderText = "OrderVer"
             DgvList.Columns("受注行番号").HeaderText = "OrderNo"
 
-            DgvList.Columns("売上番号").HeaderText = "SalesNumber"
-            DgvList.Columns("売上番号枝番").HeaderText = "SalesVer"
+            'DgvList.Columns("売上番号").HeaderText = "SalesNumber"
+            'DgvList.Columns("売上番号枝番").HeaderText = "SalesVer"
 
             DgvList.Columns("得意先コード").HeaderText = "CustomerCode"
             DgvList.Columns("得意先名").HeaderText = "CustomerName"
