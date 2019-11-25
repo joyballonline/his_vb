@@ -709,8 +709,11 @@ Public Class SalesProfitList
                 sheet.Range("B1").Value = "JobOrderVer"
                 sheet.Range("C1").Value = "LineNo"
 
-                sheet.Range("D1").Value = "SalesNo"
-                sheet.Range("E1").Value = "SalesVer"
+                'sheet.Range("D1").Value = "SalesNo"
+                'sheet.Range("E1").Value = "SalesVer"
+
+                sheet.Range("D1").Value = "SalesInvoiceNo"
+                sheet.Range("E1").Value = "SalesInvoiceDate"
 
                 sheet.Range("F1").Value = "CustomerNumber"
                 sheet.Range("G1").Value = "CustomerName"
@@ -787,8 +790,11 @@ Public Class SalesProfitList
                 sheet.Range("B" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("受注番号枝番").Value '受注番号枝番
                 sheet.Range("C" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("受注行番号").Value '行番号
 
-                sheet.Range("D" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("売上番号").Value '売上番号
-                sheet.Range("E" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("売上番号枝番").Value '売上番号枝番
+                'sheet.Range("D" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("売上番号").Value '売上番号
+                'sheet.Range("E" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("売上番号枝番").Value '売上番号枝番
+
+                sheet.Range("D" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("請求番号").Value '請求番号
+                sheet.Range("E" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("請求日").Value '請求日
 
                 sheet.Range("F" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("得意先コード").Value '得意先コード
                 sheet.Range("G" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("得意先名").Value '得意先名
