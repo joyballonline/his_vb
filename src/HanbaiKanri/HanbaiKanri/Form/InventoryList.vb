@@ -112,7 +112,7 @@ Public Class InventoryList
             DgvList.Columns.Add("最終出庫日", "LastDeliveryDate")
 
             DgvList.Columns.Add("仕入先名", "SupplierName")
-            DgvList.Columns.Add("買掛番号", "SupplierInvoiceNo")
+            DgvList.Columns.Add("仕入先請求番号", "SupplierInvoiceNo")
 
         Else
             DgvList.Columns.Add("メーカー", "メーカー")
@@ -125,7 +125,7 @@ Public Class InventoryList
             DgvList.Columns.Add("最終出庫日", "最終出庫日")
 
             DgvList.Columns.Add("仕入先名", "仕入先名")
-            DgvList.Columns.Add("買掛番号", "SupplierInvoiceNo")
+            DgvList.Columns.Add("仕入先請求番号", "SupplierInvoiceNo")
 
         End If
 
@@ -154,7 +154,7 @@ Public Class InventoryList
             DgvList.Columns.Add("最終出庫日", "LastDeliveryDate")
 
             DgvList.Columns.Add("仕入先名", "SupplierName")
-            DgvList.Columns.Add("買掛番号", "SupplierInvoiceNo")
+            DgvList.Columns.Add("仕入先請求番号", "SupplierInvoiceNo")
 
         Else
             DgvList.Columns.Add("倉庫", "倉庫")
@@ -168,7 +168,7 @@ Public Class InventoryList
             DgvList.Columns.Add("最終出庫日", "最終出庫日")
 
             DgvList.Columns.Add("仕入先名", "仕入先名")
-            DgvList.Columns.Add("買掛番号", "SupplierInvoiceNo")
+            DgvList.Columns.Add("仕入先請求番号", "SupplierInvoiceNo")
 
         End If
 
@@ -199,7 +199,7 @@ Public Class InventoryList
                 Sql = "SELECT "
                 Sql += " m21.メーカー, m21.品名, m21.型式, m21.入出庫種別, sum(m21.現在庫数) as 現在庫数 "
                 Sql += " ,m21.入庫単価, m21.最終入庫日, m21.最終出庫日, m90.文字１, m90.文字２ "
-                Sql += " ,t46.買掛番号, t46.仕入先名"
+                Sql += " ,t46.仕入先請求番号, t46.仕入先名"
 
                 Sql += " FROM m21_zaiko m21"
 
@@ -235,7 +235,7 @@ Public Class InventoryList
                 Sql += " GROUP BY "
                 Sql += " m21.メーカー, m21.品名, m21.型式, m21.入出庫種別 "
                 Sql += " ,m21.入庫単価, m21.最終入庫日, m21.最終出庫日, m90.文字１, m90.文字２, m21.伝票番号 "
-                Sql += " ,t46.買掛番号, t46.仕入先名"
+                Sql += " ,t46.仕入先請求番号, t46.仕入先名"
 
                 Sql += " ORDER BY "
                 'Sql += " m21.メーカー, m21.品名, m21.型式, m21.最終入庫日, m21.入出庫種別 "
@@ -288,7 +288,7 @@ Public Class InventoryList
 
 
                     DgvList.Rows(i).Cells("仕入先名").Value = dsList.Tables(RS).Rows(i)("仕入先名").ToString
-                    DgvList.Rows(i).Cells("買掛番号").Value = dsList.Tables(RS).Rows(i)("買掛番号").ToString
+                    DgvList.Rows(i).Cells("仕入先請求番号").Value = dsList.Tables(RS).Rows(i)("仕入先請求番号").ToString
 
                 Next
 
@@ -310,7 +310,7 @@ Public Class InventoryList
                 Sql = "SELECT "
                 Sql += " m21.メーカー, m21.品名, m21.型式, m21.入出庫種別, sum(m21.現在庫数) as 現在庫数 "
                 Sql += " ,m21.入庫単価, m21.最終入庫日, m21.最終出庫日, m90.文字１, m90.文字２, m20.名称 "
-                Sql += " ,t46.買掛番号, t46.仕入先名"
+                Sql += " ,t46.仕入先請求番号, t46.仕入先名"
 
                 Sql += " FROM m21_zaiko m21"
 
@@ -352,7 +352,7 @@ Public Class InventoryList
                 Sql += " GROUP BY "
                 Sql += " m21.倉庫コード, m21.メーカー, m21.品名, m21.型式, m21.入出庫種別, m21.現在庫数 "
                 Sql += " ,m21.入庫単価, m21.最終入庫日, m21.最終出庫日, m90.文字１, m90.文字２, m20.名称, m21.伝票番号 "
-                Sql += " ,t46.買掛番号, t46.仕入先名"
+                Sql += " ,t46.仕入先請求番号, t46.仕入先名"
 
                 Sql += " ORDER BY "
                 'Sql += " m21.メーカー, m21.品名, m21.型式, m21.最終入庫日, m21.入出庫種別 "
@@ -388,7 +388,7 @@ Public Class InventoryList
                     DgvList.Rows(i).Cells("最終出庫日").Value = dsList.Tables(RS).Rows(i)("最終出庫日")
 
                     DgvList.Rows(i).Cells("仕入先名").Value = dsList.Tables(RS).Rows(i)("仕入先名").ToString
-                    DgvList.Rows(i).Cells("買掛番号").Value = dsList.Tables(RS).Rows(i)("買掛番号").ToString
+                    DgvList.Rows(i).Cells("仕入先請求番号").Value = dsList.Tables(RS).Rows(i)("仕入先請求番号").ToString
 
                 Next
 
