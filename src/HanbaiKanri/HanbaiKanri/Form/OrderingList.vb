@@ -488,6 +488,8 @@ Public Class OrderingList
                     DgvHtyhd.Columns.Add("発注数量", "OrderQuantity")
                     DgvHtyhd.Columns.Add("仕入数量", "PurchasedQuantity")
                     DgvHtyhd.Columns.Add("発注残数", "NumberOfOrderRemaining ")
+                    DgvHtyhd.Columns.Add("入庫済数量", "InStock")
+                    DgvHtyhd.Columns.Add("未入庫数量", "NotReceived")
                     DgvHtyhd.Columns.Add("単位", "Unit")
 
                     DgvHtyhd.Columns.Add("仕入金額_外貨", "PurchaseCost" & vbCrLf & "(OrignalCurrency)")
@@ -519,8 +521,10 @@ Public Class OrderingList
 
 
                     DgvHtyhd.Columns.Add("発注数量", "発注数量")
-                    DgvHtyhd.Columns.Add("仕入数量", "入庫済数量")
+                    DgvHtyhd.Columns.Add("仕入数量", "仕入登録済数量")
                     DgvHtyhd.Columns.Add("発注残数", "発注残数量")
+                    DgvHtyhd.Columns.Add("入庫済数量", "入庫済数量")
+                    DgvHtyhd.Columns.Add("未入庫数量", "未入庫数量")
                     DgvHtyhd.Columns.Add("単位", "単位")
 
                     DgvHtyhd.Columns.Add("仕入金額_外貨", "仕入原価" & vbCrLf & "(原通貨)")
@@ -541,6 +545,8 @@ Public Class OrderingList
                 DgvHtyhd.Columns("発注数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 DgvHtyhd.Columns("仕入数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 DgvHtyhd.Columns("発注残数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                DgvHtyhd.Columns("入庫済数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                DgvHtyhd.Columns("未入庫数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 DgvHtyhd.Columns("間接費").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 DgvHtyhd.Columns("仕入金額_外貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 DgvHtyhd.Columns("仕入金額").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -554,6 +560,8 @@ Public Class OrderingList
                 DgvHtyhd.Columns("発注数量").DefaultCellStyle.Format = "N2"
                 DgvHtyhd.Columns("仕入数量").DefaultCellStyle.Format = "N2"
                 DgvHtyhd.Columns("発注残数").DefaultCellStyle.Format = "N2"
+                DgvHtyhd.Columns("入庫済数量").DefaultCellStyle.Format = "N2"
+                DgvHtyhd.Columns("未入庫数量").DefaultCellStyle.Format = "N2"
                 DgvHtyhd.Columns("間接費").DefaultCellStyle.Format = "N2"
                 DgvHtyhd.Columns("仕入金額_外貨").DefaultCellStyle.Format = "N2"
                 DgvHtyhd.Columns("仕入金額").DefaultCellStyle.Format = "N2"
@@ -590,6 +598,10 @@ Public Class OrderingList
                 DgvHtyhd.Columns("仕入数量").ReadOnly = True
                 DgvHtyhd.Columns("発注残数").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
                 DgvHtyhd.Columns("発注残数").ReadOnly = True
+                DgvHtyhd.Columns("入庫済数量").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("入庫済数量").ReadOnly = True
+                DgvHtyhd.Columns("未入庫数量").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                DgvHtyhd.Columns("未入庫数量").ReadOnly = True
                 DgvHtyhd.Columns("単位").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
                 DgvHtyhd.Columns("単位").ReadOnly = True
                 DgvHtyhd.Columns("仕入金額_外貨").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
@@ -651,6 +663,8 @@ Public Class OrderingList
                     DgvHtyhd.Rows(i).Cells("発注数量").Value = ds.Tables(RS).Rows(i)("発注数量")
                     DgvHtyhd.Rows(i).Cells("仕入数量").Value = ds.Tables(RS).Rows(i)("仕入数量")
                     DgvHtyhd.Rows(i).Cells("発注残数").Value = ds.Tables(RS).Rows(i)("発注残数")
+                    DgvHtyhd.Rows(i).Cells("入庫済数量").Value = ds.Tables(RS).Rows(i)("入庫数")
+                    DgvHtyhd.Rows(i).Cells("未入庫数量").Value = ds.Tables(RS).Rows(i)("未入庫数")
                     DgvHtyhd.Rows(i).Cells("単位").Value = ds.Tables(RS).Rows(i)("単位")
 
                     DgvHtyhd.Rows(i).Cells("仕入金額_外貨").Value = rmNullDecimal(ds.Tables(RS).Rows(i)("仕入値_外貨")) * ds.Tables(RS).Rows(i)("発注数量")
