@@ -216,11 +216,11 @@ Public Class ARScheduledCollectionDateList
                 sheet.Range("B1").Value = "CustomerName"
                 sheet.Range("C1").Value = "SalesInvoiceNo"
                 sheet.Range("D1").Value = "SalesInvoiceDate"
-                sheet.Range("E1").Value = "TotalBillingAmount"
-                sheet.Range("F1").Value = "MoneyReceiptAmount"
-                sheet.Range("G1").Value = "ARBalance"
-                sheet.Range("H1").Value = "Remarks"
-                sheet.Range("I1").Value = "Currency"
+                sheet.Range("E1").Value = "Currency"
+                sheet.Range("F1").Value = "TotalBillingAmount"
+                sheet.Range("G1").Value = "MoneyReceiptAmount"
+                sheet.Range("H1").Value = "ARBalance"
+                sheet.Range("I1").Value = "Remarks"
 
             End If
 
@@ -232,11 +232,11 @@ Public Class ARScheduledCollectionDateList
                 sheet.Range("B" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("得意先名").Value
                 sheet.Range("C" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("請求番号").Value
                 sheet.Range("D" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("請求日").Value
-                sheet.Range("E" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("請求金額").Value
-                sheet.Range("F" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("入金額").Value
-                sheet.Range("G" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("売掛金残高").Value
-                sheet.Range("H" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("備考").Value
-                sheet.Range("I" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("通貨_外貨").Value
+                sheet.Range("E" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("通貨_外貨").Value
+                sheet.Range("F" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("請求金額").Value
+                sheet.Range("G" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("入金額").Value
+                sheet.Range("H" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("売掛金残高").Value
+                sheet.Range("I" & cellRowIndex.ToString).Value = DgvCymndt.Rows(i).Cells("備考").Value
 
             Next
 

@@ -283,9 +283,10 @@ Public Class SalesVATList
                 sheet.Range("H1").Value = "Spec"
                 sheet.Range("I1").Value = "Quantity"
                 sheet.Range("J1").Value = "Unit"
-                sheet.Range("K1").Value = "UnitPrice"
-                sheet.Range("L1").Value = "ＶＡＴ"
-                sheet.Range("M1").Value = "Amount"
+                sheet.Range("K1").Value = "Currency"
+                sheet.Range("L1").Value = "UnitPrice"
+                sheet.Range("M1").Value = "ＶＡＴ"
+                sheet.Range("N1").Value = "Amount"
             End If
 
             Dim cellRowIndex As Integer = 1
@@ -304,9 +305,10 @@ Public Class SalesVATList
                 sheet.Range("H" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("型式").Value '型式
                 sheet.Range("I" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("数量").Value '数量
                 sheet.Range("J" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("単位").Value '単位
-                sheet.Range("K" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("売単価").Value '売単価
-                sheet.Range("L" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("ＶＡＴ").Value 'ＶＡＴ
-                sheet.Range("M" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("売上計").Value '売上金額計
+                sheet.Range("K" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("通貨_外貨").Value '通貨
+                sheet.Range("L" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("売単価").Value '売単価
+                sheet.Range("M" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("ＶＡＴ").Value 'ＶＡＴ
+                sheet.Range("N" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("売上計").Value '売上金額計
 
             Next
 
@@ -316,7 +318,7 @@ Public Class SalesVATList
 
             '最後に合計行の追加
             cellRowIndex += 1
-            sheet.Range("M" & cellRowIndex.ToString).Value = TxtSalesAmount.Text '粗利率
+            sheet.Range("N" & cellRowIndex.ToString).Value = TxtSalesAmount.Text '粗利率
 
             ' 境界線オブジェクトを作成 →7行目の下部に罫線を描画する
             xlBorders = xlRngTmp.Borders
