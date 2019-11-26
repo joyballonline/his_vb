@@ -1039,10 +1039,6 @@ Public Class Receipt
                     _db.executeDB(Sql)
 
 
-                    '登録完了メッセージ
-                    _msgHd.dspMSG("completeInsert", frmC01F10_Login.loginValue.Language)
-
-
                 Catch ue As UsrDefException
                     ue.dspMsg()
                     Throw ue
@@ -1056,8 +1052,11 @@ Public Class Receipt
             'End If
         Next
 
-
         'Next
+
+        '登録完了メッセージ
+        _msgHd.dspMSG("completeInsert", frmC01F10_Login.loginValue.Language)
+
 
         'Dim openForm As Form = Nothing
         'openForm = New OrderingList(_msgHd, _db, _langHd, Me, CommonConst.STATUS_RECEIPT)
