@@ -495,17 +495,17 @@ Public Class Ordering
             TxtQuoteSuffix.Text = dsHattyu.Tables(RS).Rows(0)("見積番号枝番")
         End If
         If dsHattyu.Tables(RS).Rows(0)("発注日") IsNot DBNull.Value Then
-            If PurchaseStatus Is CommonConst.STATUS_VIEW Then
+            If (PurchaseStatus Is CommonConst.STATUS_VIEW) Or (PurchaseStatus Is CommonConst.STATUS_EDIT) Then
                 DtpPurchaseDate.Value = dsHattyu.Tables(RS).Rows(0)("発注日")
             Else
                 DtpPurchaseDate.Value = dtNow
             End If
         End If
         If dsHattyu.Tables(RS).Rows(0)("登録日") IsNot DBNull.Value Then
-            If PurchaseStatus Is CommonConst.STATUS_VIEW Then
+            If (PurchaseStatus Is CommonConst.STATUS_VIEW) Or (PurchaseStatus Is CommonConst.STATUS_EDIT) Then
                 DtpRegistrationDate.Value = dsHattyu.Tables(RS).Rows(0)("登録日")
             Else
-                DtpPurchaseDate.Value = dtNow
+                DtpRegistrationDate.Value = dtNow
             End If
         End If
         If dsHattyu.Tables(RS).Rows(0)("仕入先コード") IsNot DBNull.Value Then
