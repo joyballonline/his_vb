@@ -369,7 +369,7 @@ Public Class SalesProfitList
                     Else
                         DgvList.Rows(intListCnt).Cells("仕入先コード").Value = ds.Tables(RS).Rows(i)("仕入先コード")
                         DgvList.Rows(intListCnt).Cells("仕入先名").Value = ds.Tables(RS).Rows(i)("仕入先名")
-                        DgvList.Rows(intListCnt).Cells("仕入単価_IDR").Value = ds.Tables(RS).Rows(i)("仕入原価")
+                        DgvList.Rows(intListCnt).Cells("仕入単価_IDR").Value = ds.Tables(RS).Rows(i)("仕入値")
                         DgvList.Rows(intListCnt).Cells("仕入単価_原通貨").Value = rmNullDecimal(ds.Tables(RS).Rows(i)("仕入単価_外貨"))
                     End If
 
