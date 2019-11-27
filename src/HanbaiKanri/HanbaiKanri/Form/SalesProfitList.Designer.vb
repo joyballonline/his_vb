@@ -44,6 +44,7 @@ Partial Class SalesProfitList
         Me.TxtGrossMargin = New System.Windows.Forms.TextBox()
         Me.LblMonth = New System.Windows.Forms.Label()
         Me.LblYear = New System.Windows.Forms.Label()
+        Me.行番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.受注番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.受注番号枝番 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.受注行番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -64,8 +65,6 @@ Partial Class SalesProfitList
         Me.発注番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.発注番号枝番 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.発注行番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.仕入番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.仕入行番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.仕入区分 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.仕入先コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.仕入先名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -117,7 +116,7 @@ Partial Class SalesProfitList
         Me.DgvList.AllowUserToAddRows = False
         Me.DgvList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.DgvList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.受注番号, Me.受注番号枝番, Me.受注行番号, Me.請求番号, Me.請求日, Me.得意先コード, Me.得意先名, Me.メーカー, Me.品名, Me.型式, Me.販売通貨, Me.受注単価_原通貨, Me.受注単価_IDR, Me.受注数量, Me.単位, Me.受注金額_原通貨, Me.受注金額_IDR, Me.発注番号, Me.発注番号枝番, Me.発注行番号, Me.仕入番号, Me.仕入行番号, Me.仕入区分, Me.仕入先コード, Me.仕入先名, Me.仕入通貨, Me.仕入単価_原通貨, Me.仕入単価_IDR, Me.仕入原価_原通貨, Me.仕入原価_IDR, Me.間接費, Me.利益, Me.利益率})
+        Me.DgvList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.行番号, Me.受注番号, Me.受注番号枝番, Me.受注行番号, Me.請求番号, Me.請求日, Me.得意先コード, Me.得意先名, Me.メーカー, Me.品名, Me.型式, Me.販売通貨, Me.受注単価_原通貨, Me.受注単価_IDR, Me.受注数量, Me.単位, Me.受注金額_原通貨, Me.受注金額_IDR, Me.発注番号, Me.発注番号枝番, Me.発注行番号, Me.仕入区分, Me.仕入先コード, Me.仕入先名, Me.仕入通貨, Me.仕入単価_原通貨, Me.仕入単価_IDR, Me.仕入原価_原通貨, Me.仕入原価_IDR, Me.間接費, Me.利益, Me.利益率})
         Me.DgvList.Location = New System.Drawing.Point(13, 102)
         Me.DgvList.Name = "DgvList"
         Me.DgvList.ReadOnly = True
@@ -311,6 +310,13 @@ Partial Class SalesProfitList
         Me.LblYear.TabIndex = 344
         Me.LblYear.Text = "年"
         '
+        '行番号
+        '
+        Me.行番号.HeaderText = "行番号"
+        Me.行番号.Name = "行番号"
+        Me.行番号.ReadOnly = True
+        Me.行番号.Width = 127
+        '
         '受注番号
         '
         Me.受注番号.FillWeight = 468.8439!
@@ -471,22 +477,6 @@ Partial Class SalesProfitList
         Me.発注行番号.ReadOnly = True
         Me.発注行番号.Width = 99
         '
-        '仕入番号
-        '
-        Me.仕入番号.FillWeight = 16.71241!
-        Me.仕入番号.HeaderText = "仕入番号"
-        Me.仕入番号.Name = "仕入番号"
-        Me.仕入番号.ReadOnly = True
-        Me.仕入番号.Width = 118
-        '
-        '仕入行番号
-        '
-        Me.仕入行番号.FillWeight = 9.845428!
-        Me.仕入行番号.HeaderText = "行No"
-        Me.仕入行番号.Name = "仕入行番号"
-        Me.仕入行番号.ReadOnly = True
-        Me.仕入行番号.Width = 99
-        '
         '仕入区分
         '
         Me.仕入区分.FillWeight = 12.44413!
@@ -631,6 +621,7 @@ Partial Class SalesProfitList
     Friend WithEvents TxtGrossMargin As TextBox
     Friend WithEvents LblMonth As Label
     Friend WithEvents LblYear As Label
+    Friend WithEvents 行番号 As DataGridViewTextBoxColumn
     Friend WithEvents 受注番号 As DataGridViewTextBoxColumn
     Friend WithEvents 受注番号枝番 As DataGridViewTextBoxColumn
     Friend WithEvents 受注行番号 As DataGridViewTextBoxColumn
@@ -651,8 +642,6 @@ Partial Class SalesProfitList
     Friend WithEvents 発注番号 As DataGridViewTextBoxColumn
     Friend WithEvents 発注番号枝番 As DataGridViewTextBoxColumn
     Friend WithEvents 発注行番号 As DataGridViewTextBoxColumn
-    Friend WithEvents 仕入番号 As DataGridViewTextBoxColumn
-    Friend WithEvents 仕入行番号 As DataGridViewTextBoxColumn
     Friend WithEvents 仕入区分 As DataGridViewTextBoxColumn
     Friend WithEvents 仕入先コード As DataGridViewTextBoxColumn
     Friend WithEvents 仕入先名 As DataGridViewTextBoxColumn

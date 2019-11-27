@@ -153,9 +153,9 @@ Public Class SalesProfitList
 
         Sql += ",t21.発注番号,t21.発注番号枝番,t21.行番号 as 発注行番号"
 
-        Sql += ",t40.仕入先コード,t11.仕入先名"
-        Sql += ",t41.仕入番号,t41.行番号 as 仕入行番号,t11.仕入区分"
-        Sql += ",t21.仕入単価"
+        Sql += ",t20.仕入先コード,t20.仕入先名"
+        'Sql += ",t41.仕入番号,t41.行番号 as 仕入行番号"
+        Sql += ",t11.仕入区分,t21.仕入単価"
 
 
         '受注
@@ -187,12 +187,12 @@ Public Class SalesProfitList
 
 
         '仕入
-        Sql += " left join t40_sirehd as t40 "
-        Sql += " on  t20.発注番号 = t40.発注番号 and t20.発注番号枝番 = t40.発注番号枝番"
-        Sql += " and t40.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+        'Sql += " left join t40_sirehd as t40 "
+        'Sql += " on  t20.発注番号 = t40.発注番号 and t20.発注番号枝番 = t40.発注番号枝番"
+        'Sql += " and t40.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
 
-        Sql += " left join t41_siredt as t41 "
-        Sql += " on  t40.仕入番号 = t41.仕入番号 and t20.発注番号 = t41.発注番号 and t20.発注番号枝番 = t41.発注番号枝番"
+        'Sql += " left join t41_siredt as t41 "
+        'Sql += " on  t40.仕入番号 = t41.仕入番号 and t20.発注番号 = t41.発注番号 and t20.発注番号枝番 = t41.発注番号枝番"
         'Sql += " and t11.メーカー = t21.メーカー and t11.品名 = t21.品名 and t11.型式 = t21.型式"
 
 
@@ -253,6 +253,9 @@ Public Class SalesProfitList
                 For j As Integer = 0 To intCnt - 1
 
                     DgvList.Rows.Add()
+
+
+                    DgvList.Rows(intListCnt).Cells("行番号").Value = intListCnt + 1
 
 #Region "受注"
 
@@ -328,8 +331,8 @@ Public Class SalesProfitList
                     End If
 
 
-                    DgvList.Rows(intListCnt).Cells("仕入番号").Value = ds.Tables(RS).Rows(i)("仕入番号")
-                    DgvList.Rows(intListCnt).Cells("仕入行番号").Value = ds.Tables(RS).Rows(i)("仕入行番号")
+                    'DgvList.Rows(intListCnt).Cells("仕入番号").Value = ds.Tables(RS).Rows(i)("仕入番号")
+                    'DgvList.Rows(intListCnt).Cells("仕入行番号").Value = ds.Tables(RS).Rows(i)("仕入行番号")
 
 
                     'リードタイムのリストを汎用マスタから取得
@@ -521,6 +524,8 @@ Public Class SalesProfitList
         '言語の判定
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then  '英語 
 
+            DgvList.Columns("行番号").HeaderText = "LineNo"
+
             DgvList.Columns("受注番号").HeaderText = "OrderNumber"
             DgvList.Columns("受注番号枝番").HeaderText = "OrderVer"
             DgvList.Columns("受注行番号").HeaderText = "OrderNo"
@@ -549,8 +554,8 @@ Public Class SalesProfitList
             DgvList.Columns("発注行番号").HeaderText = "PurchaseNo"
 
 
-            DgvList.Columns("仕入番号").HeaderText = "PurchaseNumber"
-            DgvList.Columns("仕入行番号").HeaderText = "PurchaseNo"
+            'DgvList.Columns("仕入番号").HeaderText = "PurchaseNumber"
+            'DgvList.Columns("仕入行番号").HeaderText = "PurchaseNo"
             DgvList.Columns("仕入区分").HeaderText = "PurchasingClassification"
             DgvList.Columns("仕入先コード").HeaderText = "SupplierCode"
             DgvList.Columns("仕入先名").HeaderText = "SupplierName"
@@ -717,49 +722,50 @@ Public Class SalesProfitList
                 sheet.PageSetup.LeftHeader = "SalesProfitList（Monthly）"
                 sheet.PageSetup.CenterHeader = strSelectMonth & "/" & strSelectYear
 
-                sheet.Range("A1").Value = "JobOrderNo"
-                sheet.Range("B1").Value = "JobOrderVer"
-                sheet.Range("C1").Value = "LineNo"
+                sheet.Range("A1").Value = "LineNo"
+
+                sheet.Range("B1").Value = "JobOrderNo"
+                sheet.Range("C1").Value = "JobOrderVer"
+                sheet.Range("D1").Value = "LineNo"
 
                 'sheet.Range("D1").Value = "SalesNo"
                 'sheet.Range("E1").Value = "SalesVer"
 
-                sheet.Range("D1").Value = "SalesInvoiceNo"
-                sheet.Range("E1").Value = "SalesInvoiceDate"
+                sheet.Range("E1").Value = "SalesInvoiceNo"
+                sheet.Range("F1").Value = "SalesInvoiceDate"
 
-                sheet.Range("F1").Value = "CustomerNumber"
-                sheet.Range("G1").Value = "CustomerName"
+                sheet.Range("G1").Value = "CustomerNumber"
+                sheet.Range("H1").Value = "CustomerName"
 
-                sheet.Range("H1").Value = "Maker"
-                sheet.Range("I1").Value = "Product"
-                sheet.Range("J1").Value = "Model"
+                sheet.Range("I1").Value = "Maker"
+                sheet.Range("J1").Value = "Product"
+                sheet.Range("K1").Value = "Model"
 
-                sheet.Range("K1").Value = "SalesCurrency"
-                sheet.Range("L1").Value = "OrderPrice(OriginalCurrency)"
-                sheet.Range("M1").Value = "OrderPrice(IDR)"
-                sheet.Range("N1").Value = "OrderQuantity"
-                sheet.Range("O1").Value = "Unit"
-                sheet.Range("P1").Value = "OrderAmount(OriginalCurrency)"
-                sheet.Range("Q1").Value = "OrderAmount(IDR)"
+                sheet.Range("L1").Value = "SalesCurrency"
+                sheet.Range("M1").Value = "OrderPrice(OriginalCurrency)"
+                sheet.Range("N1").Value = "OrderPrice(IDR)"
+                sheet.Range("O1").Value = "OrderQuantity"
+                sheet.Range("P1").Value = "Unit"
+                sheet.Range("Q1").Value = "OrderAmount(OriginalCurrency)"
+                sheet.Range("R1").Value = "OrderAmount(IDR)"
 
-                sheet.Range("R1").Value = "OrderNo"
-                sheet.Range("S1").Value = "OrderVer"
-                sheet.Range("T1").Value = "LineNo"
-                sheet.Range("U1").Value = "PurchaseNo"
-                sheet.Range("V1").Value = "LineNo"
-                sheet.Range("W1").Value = "PurchaseCategory"
-                sheet.Range("X1").Value = "VendorCode"
-                sheet.Range("X1").Value = "VendorCode"
-                sheet.Range("Y1").Value = "VendorName"
+                sheet.Range("S1").Value = "OrderNo"
+                sheet.Range("T1").Value = "OrderVer"
+                sheet.Range("U1").Value = "LineNo"
+                'sheet.Range("U1").Value = "PurchaseNo"
+                'sheet.Range("V1").Value = "LineNo"
+                sheet.Range("V1").Value = "PurchaseCategory"
+                sheet.Range("W1").Value = "VendorCode"
+                sheet.Range("X1").Value = "VendorName"
 
-                sheet.Range("Z1").Value = "PurchaseCurrency"
-                sheet.Range("AA1").Value = "PurchasePrice(OriginalCurrency)"
-                sheet.Range("AB1").Value = "PurchasePrice(IDR)"
-                sheet.Range("AC1").Value = "PurchasingCost(OriginalCurrency)"
-                sheet.Range("AD1").Value = "PurchasingCost(IDR)"
-                sheet.Range("AE1").Value = "Overhead"
-                sheet.Range("AF1").Value = "Profit"
-                sheet.Range("AG1").Value = "ProfitRate(%)"
+                sheet.Range("Y1").Value = "PurchaseCurrency"
+                sheet.Range("Z1").Value = "PurchasePrice(OriginalCurrency)"
+                sheet.Range("AA1").Value = "PurchasePrice(IDR)"
+                sheet.Range("AB1").Value = "PurchasingCost(OriginalCurrency)"
+                sheet.Range("AC1").Value = "PurchasingCost(IDR)"
+                sheet.Range("AD1").Value = "Overhead"
+                sheet.Range("AE1").Value = "Profit"
+                sheet.Range("AF1").Value = "ProfitRate(%)"
 
 
 
@@ -797,55 +803,57 @@ Public Class SalesProfitList
                 cellRowIndex += 1
                 'sheet.Rows(cellRowIndex).Insert
 
+                sheet.Range("A" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("行番号").Value '行番号
 
-                sheet.Range("A" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("受注番号").Value '受注番号
-                sheet.Range("B" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("受注番号枝番").Value '受注番号枝番
-                sheet.Range("C" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("受注行番号").Value '行番号
+
+                sheet.Range("B" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("受注番号").Value '受注番号
+                sheet.Range("C" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("受注番号枝番").Value '受注番号枝番
+                sheet.Range("D" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("受注行番号").Value '行番号
 
                 'sheet.Range("D" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("売上番号").Value '売上番号
                 'sheet.Range("E" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("売上番号枝番").Value '売上番号枝番
 
-                sheet.Range("D" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("請求番号").Value '請求番号
-                sheet.Range("E" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("請求日").Value '請求日
+                sheet.Range("E" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("請求番号").Value '請求番号
+                sheet.Range("F" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("請求日").Value '請求日
 
-                sheet.Range("F" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("得意先コード").Value '得意先コード
-                sheet.Range("G" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("得意先名").Value '得意先名
+                sheet.Range("G" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("得意先コード").Value '得意先コード
+                sheet.Range("H" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("得意先名").Value '得意先名
 
-                sheet.Range("H" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("メーカー").Value 'メーカー
-                sheet.Range("I" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("品名").Value '品名
-                sheet.Range("J" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("型式").Value '型式
+                sheet.Range("I" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("メーカー").Value 'メーカー
+                sheet.Range("J" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("品名").Value '品名
+                sheet.Range("K" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("型式").Value '型式
 
-                sheet.Range("K" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("販売通貨").Value '販売通貨
-                sheet.Range("L" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("受注単価_原通貨").Value) '受注単価_原通貨
-                sheet.Range("M" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("受注単価_IDR").Value) '受注単価_IDR
-                sheet.Range("N" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("受注数量").Value) '受注数量
-                sheet.Range("O" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("単位").Value '単位
+                sheet.Range("L" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("販売通貨").Value '販売通貨
+                sheet.Range("M" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("受注単価_原通貨").Value) '受注単価_原通貨
+                sheet.Range("N" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("受注単価_IDR").Value) '受注単価_IDR
+                sheet.Range("O" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("受注数量").Value) '受注数量
+                sheet.Range("P" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("単位").Value '単位
 
-                sheet.Range("P" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("受注金額_原通貨").Value) '受注金額_原通貨
-                sheet.Range("Q" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("受注金額_IDR").Value) '受注金額_IDR
-
-
-                sheet.Range("R" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("発注番号").Value '発注番号
-                sheet.Range("S" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("発注番号枝番").Value '発注番号枝番
-                sheet.Range("T" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("発注行番号").Value '発注行番号
-
-                sheet.Range("U" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("仕入番号").Value '仕入番号
-                sheet.Range("V" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("仕入行番号").Value '仕入行番号
-                sheet.Range("W" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("仕入区分").Value '仕入区分
-
-                sheet.Range("X" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("仕入先コード").Value '仕入先コード
-                sheet.Range("Y" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("仕入先名").Value '仕入先名
+                sheet.Range("Q" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("受注金額_原通貨").Value) '受注金額_原通貨
+                sheet.Range("R" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("受注金額_IDR").Value) '受注金額_IDR
 
 
-                sheet.Range("Z" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("仕入通貨").Value '仕入通貨
-                sheet.Range("AA" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("仕入単価_原通貨").Value) '仕入単価_原通貨
-                sheet.Range("AB" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("仕入単価_IDR").Value) '仕入単価_IDR
-                sheet.Range("AC" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("仕入原価_原通貨").Value) '仕入原価_原通貨
-                sheet.Range("AD" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("仕入原価_IDR").Value) '仕入原価_IDR
+                sheet.Range("S" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("発注番号").Value '発注番号
+                sheet.Range("T" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("発注番号枝番").Value '発注番号枝番
+                sheet.Range("U" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("発注行番号").Value '発注行番号
 
-                sheet.Range("AE" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("間接費").Value) '間接費
-                sheet.Range("AF" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("利益").Value) '利益
-                sheet.Range("AG" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("利益率").Value) '利益率
+                'sheet.Range("U" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("仕入番号").Value '仕入番号
+                'sheet.Range("V" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("仕入行番号").Value '仕入行番号
+                sheet.Range("V" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("仕入区分").Value '仕入区分
+
+                sheet.Range("W" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("仕入先コード").Value '仕入先コード
+                sheet.Range("X" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("仕入先名").Value '仕入先名
+
+
+                sheet.Range("Y" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("仕入通貨").Value '仕入通貨
+                sheet.Range("Z" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("仕入単価_原通貨").Value) '仕入単価_原通貨
+                sheet.Range("AA" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("仕入単価_IDR").Value) '仕入単価_IDR
+                sheet.Range("AB" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("仕入原価_原通貨").Value) '仕入原価_原通貨
+                sheet.Range("AC" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("仕入原価_IDR").Value) '仕入原価_IDR
+
+                sheet.Range("AD" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("間接費").Value) '間接費
+                sheet.Range("AE" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("利益").Value) '利益
+                sheet.Range("AF" & cellRowIndex.ToString).Value = CDec(DgvList.Rows(i).Cells("利益率").Value) '利益率
 
 
                 'sheet.Range("L" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight
@@ -856,7 +864,7 @@ Public Class SalesProfitList
 
             Next
 
-            sheet.Columns("A:AG").EntireColumn.AutoFit  '幅の自動調整
+            sheet.Columns("A:AF").EntireColumn.AutoFit  '幅の自動調整
 
             ' 行7全体のオブジェクトを作成
             xlRngTmp = sheet.Rows
