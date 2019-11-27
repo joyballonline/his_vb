@@ -781,8 +781,8 @@ Public Class OrderList
             Dim strJyutyuNo As String = DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号").Value
             Dim strEda As String = DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号枝番").Value
 
-            Dim strMitumoriNo As String = DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("見積番号").Value 
-            Dim strMitumoriEda As String = DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("見積番号").Value
+            Dim strMitumoriNo As String = DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("見積番号").Value
+            Dim strMitumoriEda As String = DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("見積番号枝番").Value
 
 
             '取消確認のアラート
