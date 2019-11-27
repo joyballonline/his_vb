@@ -1901,8 +1901,8 @@ Public Class OrderList
                     'Dim dsShukodt As DataSet = getDsData("t45_shukodt", Sql1)
 
 
-                    Dim strJyutyuNo2 = DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号").Value
-                    Dim strEda2 = DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号枝番").Value
+                    Dim strJyutyuNo2 = dsCymndt.Tables(RS).Rows(i)("受注番号")
+                    Dim strEda2 = dsCymndt.Tables(RS).Rows(i)("受注番号枝番")
 
                     Sql1 = " SELECT t44.出庫番号,t45.行番号 "
 
