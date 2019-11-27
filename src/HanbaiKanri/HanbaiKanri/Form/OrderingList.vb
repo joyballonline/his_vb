@@ -10,6 +10,11 @@ Imports UtilMDL.xls
 Imports System.Globalization
 Imports System.Text.RegularExpressions
 
+Imports Microsoft.Office.Interop
+Imports Microsoft.Office.Interop.Excel
+Imports System.Runtime.InteropServices
+Imports System.IO
+
 Public Class OrderingList
     Inherits System.Windows.Forms.Form
 
@@ -86,7 +91,7 @@ Public Class OrderingList
             End If
 
             BtnOrding.Visible = True
-            BtnOrding.Location = New Point(997, 509)
+            BtnOrding.Location = New System.Drawing.Point(997, 509)
         ElseIf _status = CommonConst.STATUS_RECEIPT Then
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "GoodsReceiptInputMode"
@@ -95,7 +100,7 @@ Public Class OrderingList
             End If
 
             BtnReceipt.Visible = True
-            BtnReceipt.Location = New Point(997, 509)
+            BtnReceipt.Location = New System.Drawing.Point(997, 509)
         ElseIf _status = CommonConst.STATUS_EDIT Then
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "EditMode"
@@ -104,7 +109,7 @@ Public Class OrderingList
             End If
 
             BtnPurchaseEdit.Visible = True
-            BtnPurchaseEdit.Location = New Point(997, 509)
+            BtnPurchaseEdit.Location = New System.Drawing.Point(997, 509)
         ElseIf _status = CommonConst.STATUS_VIEW Then
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "ViewMode"
@@ -113,7 +118,7 @@ Public Class OrderingList
             End If
 
             BtnPurchaseView.Visible = True
-            BtnPurchaseView.Location = New Point(997, 509)
+            BtnPurchaseView.Location = New System.Drawing.Point(997, 509)
         ElseIf _status = CommonConst.STATUS_CANCEL Then
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "CancelMode"
@@ -122,7 +127,7 @@ Public Class OrderingList
             End If
 
             BtnPurchaseCancel.Visible = True
-            BtnPurchaseCancel.Location = New Point(997, 509)
+            BtnPurchaseCancel.Location = New System.Drawing.Point(997, 509)
         ElseIf _status = CommonConst.STATUS_CLONE Then
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "NewCopyMode"
@@ -131,7 +136,7 @@ Public Class OrderingList
             End If
 
             BtnPurchaseClone.Visible = True
-            BtnPurchaseClone.Location = New Point(997, 509)
+            BtnPurchaseClone.Location = New System.Drawing.Point(997, 509)
         ElseIf _status = CommonConst.STATUS_AP Then
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 LblMode.Text = "AccountsPayableInputMode"
@@ -140,7 +145,10 @@ Public Class OrderingList
             End If
 
             BtnAP.Visible = True
-            BtnAP.Location = New Point(997, 509)
+            BtnAP.Location = New System.Drawing.Point(997, 509)
+
+            BtnExcelOutput.Visible = True
+            BtnExcelOutput.Location = New System.Drawing.Point(13, 509)
         End If
 
         '検索（Date）の初期値
@@ -167,10 +175,10 @@ Public Class OrderingList
             RbtnSlip.Text = "UnitOfVoucher"
 
             RbtnDetails.Text = "LineItemUnit"
-            RbtnDetails.Location = New Point(166, 196)
+            RbtnDetails.Location = New System.Drawing.Point(166, 196)
 
             ChkCancelData.Text = "IncludeCancelData"
-            ChkCancelData.Location = New Point(556, 196)
+            ChkCancelData.Location = New System.Drawing.Point(556, 196)
 
             BtnPurchaseView.Text = "PurchaseView"
             BtnPurchaseSearch.Text = "Search"
@@ -1722,6 +1730,15 @@ Public Class OrderingList
 
         End If
 
+        '明細表示時は取消操作不可能
+        If RbtnDetails.Checked Then
+
+            '操作できないアラートを出す
+            _msgHd.dspMSG("chkDetailsCancel", frmC01F10_Login.loginValue.Language)
+            Return
+
+        End If
+
         '取消済みデータは取消操作不可能
         If DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("取消").Value =
             IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_JPN, CommonConst.CANCEL_KBN_JPN_TXT, CommonConst.CANCEL_KBN_ENG_TXT) Then
@@ -1744,6 +1761,168 @@ Public Class OrderingList
         getList()
 
     End Sub
+
+
+    'Excel出力ボタン押下時
+    Private Sub BtnExcelOutput_Click(sender As Object, e As EventArgs) Handles BtnExcelOutput.Click
+        '対象データがない場合は取消操作不可能
+        If DgvHtyhd.Rows.Count = 0 Then
+
+            '該当データがないアラートを出す
+            _msgHd.dspMSG("noTargetData", frmC01F10_Login.loginValue.Language)
+
+            Return
+        End If
+
+        '明細表示時は取消操作不可能
+        If RbtnDetails.Checked Then
+
+            '操作できないアラートを出す
+            _msgHd.dspMSG("chkDetailsCancel", frmC01F10_Login.loginValue.Language)
+            Return
+        End If
+
+
+        'Excel出力処理
+        outputExcel()
+
+
+    End Sub
+
+
+    'excel出力処理
+    Private Sub outputExcel()
+
+        '定義
+        Dim app As Excel.Application = Nothing
+        Dim books As Excel.Workbooks = Nothing
+        Dim book As Excel.Workbook = Nothing
+        Dim sheet As Excel.Worksheet = Nothing
+
+        'Dim dtToday As DateTime = DateTime.Today
+
+        ' セル
+        Dim xlRngTmp As Range = Nothing
+        Dim xlRng As Range = Nothing
+
+        ' セル境界線（枠）
+        Dim xlBorders As Borders = Nothing
+        Dim xlBorder As Border = Nothing
+
+        Dim filePath As String = ""
+
+        'カーソルをビジー状態にする
+        Cursor.Current = Cursors.WaitCursor
+
+        Try
+            'インスタンス作成
+            Dim sfd As New SaveFileDialog()
+
+            sfd.Filter = "Microsoft Excel ブック(*.xlsx)|*.xlsx" '保存ファイルの形式を指定
+            sfd.FileName = "AccountsPayableBulkList_" & DateTime.Now.ToString("yyyyMMddHHmm") & ".xlsx"
+
+            'ダイアログを表示する
+            If sfd.ShowDialog() = DialogResult.OK Then
+
+                'OKボタンがクリックされたとき、選択されたファイル名を表示する
+                filePath = sfd.FileName
+
+                '雛形パス
+                Dim sHinaPath As String = StartUp._iniVal.BaseXlsPath
+                '雛形ファイル名
+                Dim sHinaFile As String = sHinaPath & "\" & "AccountsPayableBulkList.xlsx"
+
+                app = New Excel.Application()
+                books = app.Workbooks
+                book = books.Add(sHinaFile)  'テンプレート
+                sheet = CType(book.Worksheets(1), Excel.Worksheet)
+
+                '見出し 英語表示対応
+                If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+                    sheet.PageSetup.LeftHeader = "Inventory control table"
+                    sheet.PageSetup.RightHeader = "OutputDate：" & DateTime.Now.ToShortDateString
+
+                    sheet.Range("A1").Value = "PurchaseOrderNumber" '発注番号
+                    sheet.Range("B1").Value = "PurchaseOrderSubNumber" '発注番号枝番
+                    sheet.Range("C1").Value = "BillingDate" '請求日
+                    sheet.Range("D1").Value = "SupplierInvoiceNumber" '仕入先請求番号
+                    sheet.Range("E1").Value = "PaymentDueDate" '支払予定日
+                    sheet.Range("F1").Value = "Remark1" '備考1
+                    sheet.Range("G1").Value = "Remark2" '備考2
+                End If
+
+
+                'For Each setRow As DataRow In prmkikeData.Rows
+                For i As Integer = 0 To DgvHtyhd.Rows.Count - 1
+
+                    sheet.Range("A" & i + 2).Value = DgvHtyhd.Rows(i).Cells("発注番号").Value '発注番号
+                    sheet.Range("B" & i + 2).Value = DgvHtyhd.Rows(i).Cells("発注番号枝番").Value '発注番号枝番
+
+                Next
+
+                app.DisplayAlerts = False 'Microsoft Excelのアラート一旦無効化
+
+                Dim excelChk As Boolean = excelOutput(filePath)
+                If excelChk = False Then
+                    Exit Sub
+                End If
+                book.SaveAs(filePath) '書き込み実行
+
+                app.DisplayAlerts = True 'アラート無効化を解除
+                app.Visible = True
+
+                'カーソルを砂時計から元に戻す
+                Cursor.Current = Cursors.Default
+
+                _msgHd.dspMSG("CreateExcel", frmC01F10_Login.loginValue.Language)
+
+                'app.Quit()
+
+                'リソースの解放
+                Marshal.ReleaseComObject(sheet)
+                Marshal.ReleaseComObject(book)
+                Marshal.ReleaseComObject(books)
+                Marshal.ReleaseComObject(app)
+            End If
+
+        Catch ex As Exception
+            'カーソルをビジー状態から元に戻す
+            Cursor.Current = Cursors.Default
+
+            Throw ex
+        Finally
+
+        End Try
+
+
+    End Sub
+
+
+    'Excel出力する際のチェック
+    Private Function excelOutput(ByVal prmFilePath As String)
+        Dim fileChk As String = Dir(prmFilePath)
+        '同名ファイルがあるかどうかチェック
+        If fileChk <> "" Then
+            Dim result = _msgHd.dspMSG("confirmFileExist", frmC01F10_Login.loginValue.Language, prmFilePath)
+            If result = DialogResult.No Then
+                Return False
+            End If
+
+            Try
+                'ファイルが開けるかどうかチェック
+                Dim sr As StreamReader = New StreamReader(prmFilePath)
+                sr.Close() '処理が通ったら閉じる
+            Catch ex As Exception
+                '開けない場合はアラートを表示してリターンさせる
+                MessageBox.Show(ex.Message, CommonConst.AP_NAME, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return False
+            End Try
+
+            Return True
+        End If
+        Return True
+    End Function
+
 
     '戻るボタン押下時
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
@@ -1896,5 +2075,6 @@ Public Class OrderingList
         setBaseCurrency = ds.Tables(RS).Rows(0)("通貨コード")
 
     End Function
+
 
 End Class

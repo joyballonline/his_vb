@@ -64,6 +64,7 @@ Partial Class OrderingList
         Me.LblItemName = New System.Windows.Forms.Label()
         Me.txtMaker = New System.Windows.Forms.TextBox()
         Me.lblMaker = New System.Windows.Forms.Label()
+        Me.BtnExcelOutput = New System.Windows.Forms.Button()
         CType(Me.DgvHtyhd, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
@@ -525,10 +526,22 @@ Partial Class OrderingList
         Me.lblMaker.Text = "メーカー"
         Me.lblMaker.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'BtnExcelOutput
+        '
+        Me.BtnExcelOutput.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.BtnExcelOutput.Location = New System.Drawing.Point(255, 509)
+        Me.BtnExcelOutput.Name = "BtnExcelOutput"
+        Me.BtnExcelOutput.Size = New System.Drawing.Size(165, 40)
+        Me.BtnExcelOutput.TabIndex = 347
+        Me.BtnExcelOutput.Text = "Excel出力"
+        Me.BtnExcelOutput.UseVisualStyleBackColor = True
+        Me.BtnExcelOutput.Visible = False
+        '
         'OrderingList
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.BtnExcelOutput)
         Me.Controls.Add(Me.txtMaker)
         Me.Controls.Add(Me.lblMaker)
         Me.Controls.Add(Me.TxtSpec)
@@ -620,4 +633,5 @@ Partial Class OrderingList
     Friend WithEvents LblItemName As Label
     Friend WithEvents txtMaker As TextBox
     Friend WithEvents lblMaker As Label
+    Friend WithEvents BtnExcelOutput As Button
 End Class
