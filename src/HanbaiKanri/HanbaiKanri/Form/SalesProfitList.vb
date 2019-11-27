@@ -155,6 +155,7 @@ Public Class SalesProfitList
 
         Sql += ",t40.仕入先コード,t11.仕入先名"
         Sql += ",t41.仕入番号,t41.行番号 as 仕入行番号,t11.仕入区分"
+        Sql += ",t21.仕入単価"
 
 
         '受注
@@ -300,12 +301,12 @@ Public Class SalesProfitList
                     DgvList.Rows(intListCnt).Cells("単位").Value = ds.Tables(RS).Rows(i)("単位")
 
 
+
                     If rmNullDecimal(ds.Tables(RS).Rows(i)("レート")) = 0 Then
                     Else
-                        DgvList.Rows(intListCnt).Cells("受注金額_原通貨").Value = rmNullDecimal(ds.Tables(RS).Rows(i)("見積金額_外貨"))
+                        DgvList.Rows(intListCnt).Cells("受注金額_原通貨").Value = rmNullDecimal(DgvList.Rows(intListCnt).Cells("受注単価_原通貨").Value) * rmNullDecimal(DgvList.Rows(intListCnt).Cells("受注数量").Value)
                     End If
-                    DgvList.Rows(intListCnt).Cells("受注金額_IDR").Value = ds.Tables(RS).Rows(i)("見積金額")
-
+                    DgvList.Rows(intListCnt).Cells("受注金額_IDR").Value = rmNullDecimal(DgvList.Rows(intListCnt).Cells("受注単価_IDR").Value) * rmNullDecimal(DgvList.Rows(intListCnt).Cells("受注数量").Value)
 
                     totalSales += DgvList.Rows(intListCnt).Cells("受注金額_IDR").Value
 
@@ -344,8 +345,6 @@ Public Class SalesProfitList
                     End If
 
 
-                    DgvList.Rows(intListCnt).Cells("仕入先コード").Value = ds.Tables(RS).Rows(i)("仕入先コード")
-                    DgvList.Rows(intListCnt).Cells("仕入先名").Value = ds.Tables(RS).Rows(i)("仕入先名")
 
 
                     If IsDBNull(ds.Tables(RS).Rows(i)("仕入通貨")) Then
@@ -359,11 +358,20 @@ Public Class SalesProfitList
 
                     DgvList.Rows(intListCnt).Cells("仕入通貨").Value = cur
 
-                    DgvList.Rows(intListCnt).Cells("仕入単価_原通貨").Value = rmNullDecimal(ds.Tables(RS).Rows(i)("仕入単価_外貨"))
-                    DgvList.Rows(intListCnt).Cells("仕入単価_IDR").Value = ds.Tables(RS).Rows(i)("仕入値")
+                    If rmNullDecimal(ds.Tables(RS).Rows(i)("仕入区分")) = CommonConst.Sire_KBN_Zaiko Then  '在庫の場合
+                        DgvList.Rows(intListCnt).Cells("仕入先コード").Value = dsHattyu.Tables(RS).Rows(j)("仕入先コード")
+                        DgvList.Rows(intListCnt).Cells("仕入先名").Value = dsHattyu.Tables(RS).Rows(j)("仕入先名")
+                        DgvList.Rows(intListCnt).Cells("仕入単価_IDR").Value = dsHattyu.Tables(RS).Rows(j)("仕入値")
+                        DgvList.Rows(intListCnt).Cells("仕入単価_原通貨").Value = dsHattyu.Tables(RS).Rows(j)("仕入単価_外貨")
+                    Else
+                        DgvList.Rows(intListCnt).Cells("仕入先コード").Value = ds.Tables(RS).Rows(i)("仕入先コード")
+                        DgvList.Rows(intListCnt).Cells("仕入先名").Value = ds.Tables(RS).Rows(i)("仕入先名")
+                        DgvList.Rows(intListCnt).Cells("仕入単価_IDR").Value = ds.Tables(RS).Rows(i)("仕入原価")
+                        DgvList.Rows(intListCnt).Cells("仕入単価_原通貨").Value = rmNullDecimal(ds.Tables(RS).Rows(i)("仕入単価_外貨"))
+                    End If
 
-                    DgvList.Rows(intListCnt).Cells("仕入原価_原通貨").Value = rmNullDecimal(ds.Tables(RS).Rows(i)("仕入単価_外貨")) * ds.Tables(RS).Rows(i)("受注数量")
-                    DgvList.Rows(intListCnt).Cells("仕入原価_IDR").Value = ds.Tables(RS).Rows(i)("仕入原価")
+                    DgvList.Rows(intListCnt).Cells("仕入原価_原通貨").Value = rmNullDecimal(DgvList.Rows(intListCnt).Cells("仕入単価_原通貨").Value) * rmNullDecimal(DgvList.Rows(intListCnt).Cells("受注数量").Value)
+                    DgvList.Rows(intListCnt).Cells("仕入原価_IDR").Value = rmNullDecimal(DgvList.Rows(intListCnt).Cells("仕入単価_IDR").Value) * rmNullDecimal(DgvList.Rows(intListCnt).Cells("受注数量").Value)
 
                     DgvList.Rows(intListCnt).Cells("間接費").Value = ds.Tables(RS).Rows(i)("間接費") * rmNullDecimal(ds.Tables(RS).Rows(i)("仕入レート"))
 
@@ -454,7 +462,7 @@ Public Class SalesProfitList
         Dim Sql As String = " SELECT "
 
         Sql += " t43.発注番号 as 発注番号2, t43.発注番号枝番 as 発注番号枝番2, t21.行番号 as 発注行番号2"
-        Sql += ",t43.入庫数量"
+        Sql += ",t43.入庫数量,t21.仕入値,t21.仕入単価_外貨,t20.仕入先コード,t20.仕入先名 "
 
 
         't45_shukodt t44_shukohd
@@ -479,6 +487,10 @@ Public Class SalesProfitList
         Sql += " and t43.品名 = t21.品名"
         Sql += " and t43.型式 = t21.型式"
 
+        't20_hattyu
+        Sql += " left join t20_hattyu t20 "
+        Sql += "  on t43.発注番号 = t20.発注番号"
+        Sql += " and t43.発注番号枝番 = t20.発注番号枝番"
 
         Sql += " WHERE"
         Sql += " t45.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
