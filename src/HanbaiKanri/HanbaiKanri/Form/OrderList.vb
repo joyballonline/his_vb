@@ -781,6 +781,9 @@ Public Class OrderList
             Dim strJyutyuNo As String = DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号").Value
             Dim strEda As String = DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号枝番").Value
 
+            Dim strMitumoriNo As String = DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("見積番号").Value 
+            Dim strMitumoriEda As String = DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("見積番号").Value
+
 
             '取消確認のアラート
             Dim result As DialogResult = _msgHd.dspMSG("confirmCancel", frmC01F10_Login.loginValue.Language)
@@ -800,7 +803,7 @@ Public Class OrderList
 
             '引当データを元に戻す
             '受注データの取消
-            If mOutCancel() = False Then
+            If mOutCancel(strJyutyuNo, strEda, strMitumoriNo, strMitumoriEda) = False Then
                 Exit Sub
             End If
 
@@ -1863,7 +1866,8 @@ Public Class OrderList
     't44_shukohd
     't45_shukodt
     't01_mithd
-    Private Function mOutCancel() As Boolean
+    Private Function mOutCancel(ByVal strJyutyuNo As String, ByVal strEda As String _
+                                     , ByVal strMitumoriNo As String, ByVal strMitumoriEda As String) As Boolean
 
         Dim dtNow As String = UtilClass.formatDatetime(DateTime.Now)
         Dim Sql1 As String = ""
@@ -1875,8 +1879,11 @@ Public Class OrderList
 
 
             '出庫データ登録前に、「在庫引当」の商品があるかどうかチェック
-            Sql1 = "AND 受注番号 = '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号").Value & "'"
-            Sql1 += "AND 受注番号枝番 = '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号枝番").Value & "'"
+            'Sql1 = "AND 受注番号 = '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号").Value & "'"
+            'Sql1 += "AND 受注番号枝番 = '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号枝番").Value & "'"
+
+            Sql1 = "AND 受注番号 = '" & strJyutyuNo & "'"
+            Sql1 += "AND 受注番号枝番 = '" & strEda & "'"
 
             Dim dsCymndt As DataSet = getDsData("t11_cymndt", Sql1)
 
@@ -1894,8 +1901,8 @@ Public Class OrderList
                     'Dim dsShukodt As DataSet = getDsData("t45_shukodt", Sql1)
 
 
-                    Dim strJytyuNo = DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号").Value
-                    Dim strEda = DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号枝番").Value
+                    Dim strJyutyuNo2 = DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号").Value
+                    Dim strEda2 = DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号枝番").Value
 
                     Sql1 = " SELECT t44.出庫番号,t45.行番号 "
 
@@ -1904,8 +1911,8 @@ Public Class OrderList
 
                     Sql1 += " WHERE "
                     Sql1 += " t44.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-                    Sql1 += " AND t44.受注番号 = '" & strJytyuNo & "'"
-                    Sql1 += " AND t44.受注番号枝番 = '" & strEda & "'"
+                    Sql1 += " AND t44.受注番号 = '" & strJyutyuNo2 & "'"
+                    Sql1 += " AND t44.受注番号枝番 = '" & strEda2 & "'"
                     Sql1 += " AND t45.出庫区分 = '" & CommonConst.SHUKO_KBN_TMP & "'" '仮出庫のものを取得
                     Sql1 += " AND t44.取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'" '見取消のもの
 
@@ -1973,9 +1980,9 @@ Public Class OrderList
                     Sql1 += " WHERE "
                     Sql1 += " 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
                     Sql1 += " AND "
-                    Sql1 += " 受注番号 = '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号").Value & "'"
+                    Sql1 += " 受注番号 = '" & strJyutyuNo2 & "'"
                     Sql1 += " AND "
-                    Sql1 += " 受注番号枝番 = '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号枝番").Value & "'"
+                    Sql1 += " 受注番号枝番 = '" & strEda2 & "'"
                     Sql1 += " AND 取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'" '見取消のもの
 
                     _db.executeDB(Sql1)
@@ -1998,8 +2005,8 @@ Public Class OrderList
             Sql1 += ", 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
 
             Sql1 += " WHERE 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Sql1 += " AND 受注番号 ='" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号").Value & "'"
-            Sql1 += " AND 受注番号枝番 ='" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号枝番").Value & "'"
+            Sql1 += " AND 受注番号 ='" & strJyutyuNo & "'"
+            Sql1 += " AND 受注番号枝番 ='" & strEda & "'"
 
             _db.executeDB(Sql1)
 
@@ -2011,8 +2018,8 @@ Public Class OrderList
             Sql1 += " 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
 
             Sql1 += " WHERE 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Sql1 += " AND 受注番号 ='" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号").Value & "'"
-            Sql1 += " AND 受注番号枝番 ='" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号枝番").Value & "'"
+            Sql1 += " AND 受注番号 ='" & strJyutyuNo & "'"
+            Sql1 += " AND 受注番号枝番 ='" & strEda & "'"
 
             _db.executeDB(Sql1)
 
@@ -2031,8 +2038,8 @@ Public Class OrderList
             Sql1 += ",更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
 
             Sql1 += " WHERE 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Sql1 += " AND 見積番号 ='" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("見積番号").Value & "'"
-            Sql1 += " AND 見積番号枝番 ='" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("見積番号枝番").Value & "'"
+            Sql1 += " AND 見積番号 ='" & strMitumoriNo & "'"
+            Sql1 += " AND 見積番号枝番 ='" & strMitumoriEda & "'"
 
             _db.executeDB(Sql1)
 
