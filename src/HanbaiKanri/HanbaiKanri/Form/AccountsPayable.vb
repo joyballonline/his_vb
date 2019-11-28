@@ -396,7 +396,7 @@ Public Class AccountsPayable
 
         '発注明細データより仕入金額を算出
         For i As Integer = 0 To dsHattyudt.Tables(RS).Rows.Count - 1
-            PurchaseCostFC = PurchaseCostFC + (dsHattyudt.Tables(RS).Rows(i)("仕入値_外貨") * dsHattyudt.Tables(RS).Rows(i)("仕入数量"))
+            PurchaseCostFC = PurchaseCostFC + (dsHattyudt.Tables(RS).Rows(i)("仕入値_外貨") * dsHattyudt.Tables(RS).Rows(i)("発注数量"))
         Next
 
         VAT_FC = PurchaseCostFC * dsHattyu.Tables(RS).Rows(0)("ＶＡＴ").ToString / 100
@@ -433,9 +433,9 @@ Public Class AccountsPayable
             DgvCymndt.Rows(i).Cells("型式").Value = dsHattyudt.Tables(RS).Rows(i)("型式")
             DgvCymndt.Rows(i).Cells("発注個数").Value = dsHattyudt.Tables(RS).Rows(i)("発注数量")
             DgvCymndt.Rows(i).Cells("単位").Value = dsHattyudt.Tables(RS).Rows(i)("単位")
-            DgvCymndt.Rows(i).Cells("仕入数量").Value = dsHattyudt.Tables(RS).Rows(i)("仕入数量")
+            DgvCymndt.Rows(i).Cells("仕入数量").Value = dsHattyudt.Tables(RS).Rows(i)("発注数量")
             DgvCymndt.Rows(i).Cells("仕入単価").Value = dsHattyudt.Tables(RS).Rows(i)("仕入値_外貨")
-            DgvCymndt.Rows(i).Cells("仕入金額").Value = dsHattyudt.Tables(RS).Rows(i)("仕入値_外貨") * dsHattyudt.Tables(RS).Rows(i)("仕入数量")
+            DgvCymndt.Rows(i).Cells("仕入金額").Value = dsHattyudt.Tables(RS).Rows(i)("仕入値_外貨") * dsHattyudt.Tables(RS).Rows(i)("発注数量")
         Next
 
         TxtHattyudtCount.Text = dsHattyudt.Tables(RS).Rows.Count
