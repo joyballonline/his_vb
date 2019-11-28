@@ -194,6 +194,13 @@ Public Class OrderingList
     End Sub
 
     Private Sub getList()
+
+        ' 行や列を追加したり、セルに値を設定するときは、自動サイズ設定しない。
+        DgvHtyhd.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None
+        DgvHtyhd.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None
+        DgvHtyhd.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing
+        DgvHtyhd.Visible = False
+
         '一覧クリア
         DgvHtyhd.Rows.Clear()
         DgvHtyhd.Columns.Clear()
@@ -709,15 +716,21 @@ Public Class OrderingList
             '見出しの文字位置
             DgvHtyhd.ReadOnly = False
             'DataGridViewの列幅を固定
-            DgvHtyhd.AllowUserToResizeColumns = True
+            'DgvHtyhd.AllowUserToResizeColumns = True
             'DgvHtyhd.AutoSizeColumnsMode = DataGridViewAutoSizeColumnMode.AllCells
-            DgvHtyhd.AllowUserToResizeRows = True
+            'DgvHtyhd.AllowUserToResizeRows = True
             '列ヘッダー高さを固定
-            DgvHtyhd.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing
+            'DgvHtyhd.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing
 
             '行ヘッダーの幅を可変
-            DgvHtyhd.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells)
-            DgvHtyhd.ColumnHeadersHeight = 40
+            'DgvHtyhd.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells)
+            'DgvHtyhd.ColumnHeadersHeight = 40
+
+            '自動でサイズを設定するのは、行や列を追加したり、セルに値を設定した後にする。
+            DgvHtyhd.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
+            DgvHtyhd.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
+            DgvHtyhd.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
+            DgvHtyhd.Visible = True
 
 
         Catch ue As UsrDefException
