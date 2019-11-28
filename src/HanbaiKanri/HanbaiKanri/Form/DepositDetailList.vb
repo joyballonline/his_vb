@@ -154,7 +154,7 @@ Public Class DepositDetailList
                 Sql += " t25.通貨,t25.入金番号,t25.入金日,t25.請求先名,t25.振込先"
                 Sql += ",t25.入金額計_外貨,t25.入金額,t25.更新日,t25.備考"
                 Sql += ",t25.更新日,t25.備考"
-                Sql += ",t10.取消区分"
+                Sql += ",t25.取消区分"
                 Sql += ",m01.銀行コード , m01.銀行名 , m01.支店名, m01.預金種目 , m01.口座番号, m01.口座名義 "
 
 
@@ -171,25 +171,16 @@ Public Class DepositDetailList
                 Sql += " ON t27.会社コード = t23.会社コード "
                 Sql += " AND t27.請求番号 = t23.請求番号 "
 
-                Sql += " INNER JOIN "
-                Sql += " t10_cymnhd t10"
-                Sql += " ON "
-                Sql += " t23.会社コード = t10.会社コード "
-                Sql += " AND "
-                Sql += " t23.受注番号 = t10.受注番号"
-                Sql += " AND "
-                Sql += " t23.受注番号枝番 = t10.受注番号枝番"
-                Sql += " AND "
-                Sql += " t10.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '受注取消されていないデータ
+                Sql += " INNER JOIN t10_cymnhd t10"
+                Sql += " ON t23.会社コード = t10.会社コード "
+                Sql += " AND t23.受注番号 = t10.受注番号"
+                Sql += " AND t23.受注番号枝番 = t10.受注番号枝番"
+                Sql += " AND t10.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '受注取消されていないデータ
 
-                Sql += " INNER JOIN "
-                Sql += " t11_cymndt t11"
-                Sql += " ON "
-                Sql += " t10.会社コード = t11.会社コード"
-                Sql += " AND "
-                Sql += " t10.受注番号 = t11.受注番号"
-                Sql += " AND "
-                Sql += " t10.受注番号枝番 = t11.受注番号枝番"
+                Sql += " INNER JOIN t11_cymndt t11"
+                Sql += " ON t10.会社コード = t11.会社コード"
+                Sql += " AND t10.受注番号 = t11.受注番号"
+                Sql += " AND t10.受注番号枝番 = t11.受注番号枝番"
 
                 Sql += " WHERE t25.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
 
@@ -199,11 +190,10 @@ Public Class DepositDetailList
                 Sql += " t25.通貨,t25.入金番号,t25.入金日,t25.請求先名,t25.振込先"
                 Sql += ",t25.入金額計_外貨,t25.入金額,t25.更新日,t25.備考"
                 Sql += ",t25.更新日,t25.備考"
-                Sql += ",t10.取消区分"
+                Sql += ",t25.取消区分"
                 Sql += ",m01.銀行コード , m01.銀行名 , m01.支店名, m01.預金種目 , m01.口座番号, m01.口座名義 "
 
-                Sql += " ORDER BY "
-                Sql += "t25.更新日 DESC"
+                Sql += " ORDER BY t25.更新日 DESC"
 
                 ds = _db.selectDB(Sql, RS, reccnt)
 
@@ -281,8 +271,7 @@ Public Class DepositDetailList
 
             Else '明細単位
 
-                Sql = " SELECT "
-                Sql += " t27.* "
+                Sql = " SELECT t27.* "
                 Sql += " FROM t26_nkindt t26 "
 
                 Sql += " INNER JOIN t25_nkinhd t25 "
@@ -297,32 +286,22 @@ Public Class DepositDetailList
                 Sql += " ON t27.会社コード = t23.会社コード "
                 Sql += " AND t27.請求番号 = t23.請求番号 "
 
-                Sql += " INNER JOIN "
-                Sql += " t10_cymnhd t10"
-                Sql += " ON "
-                Sql += " t23.会社コード = t10.会社コード "
-                Sql += " AND "
-                Sql += " t23.受注番号 = t10.受注番号"
-                Sql += " AND "
-                Sql += " t23.受注番号枝番 = t10.受注番号枝番"
-                Sql += " AND "
-                Sql += " t10.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '受注取消されていないデータ
+                Sql += " INNER JOIN t10_cymnhd t10"
+                Sql += " ON t23.会社コード = t10.会社コード "
+                Sql += " AND t23.受注番号 = t10.受注番号"
+                Sql += " AND t23.受注番号枝番 = t10.受注番号枝番"
+                Sql += " AND t10.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '受注取消されていないデータ
 
-                Sql += " INNER JOIN "
-                Sql += " t11_cymndt t11"
-                Sql += " ON "
-                Sql += " t10.会社コード = t11.会社コード"
-                Sql += " AND "
-                Sql += " t10.受注番号 = t11.受注番号"
-                Sql += " AND "
-                Sql += " t10.受注番号枝番 = t11.受注番号枝番"
+                Sql += " INNER JOIN t11_cymndt t11"
+                Sql += " ON t10.会社コード = t11.会社コード"
+                Sql += " AND t10.受注番号 = t11.受注番号"
+                Sql += " AND t10.受注番号枝番 = t11.受注番号枝番"
 
                 Sql += " WHERE t25.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
 
                 Sql += viewSearchConditions() '抽出条件取得
 
-                Sql += " ORDER BY "
-                Sql += "t27.更新日 DESC"
+                Sql += " ORDER BY t27.更新日 DESC"
 
                 ds = _db.selectDB(Sql, RS, reccnt)
 
@@ -581,43 +560,35 @@ Public Class DepositDetailList
         Dim spec As String = UtilClass.escapeSql(TxtSpec.Text)
 
         If customerName <> Nothing Then
-            Sql += " AND "
-            Sql += " t25.請求先名 ILIKE '%" & customerName & "%' "
+            Sql += " AND t25.請求先名 ILIKE '%" & customerName & "%' "
         End If
 
         If customerCode <> Nothing Then
-            Sql += " AND "
-            Sql += " t25.請求先コード ILIKE '%" & customerCode & "%' "
+            Sql += " AND t25.請求先コード ILIKE '%" & customerCode & "%' "
         End If
 
         If sinceDate <> Nothing Then
-            Sql += " AND "
-            Sql += " t25.入金日 >= '" & sinceDate & "'"
+            Sql += " AND t25.入金日 >= '" & sinceDate & "'"
         End If
         If untilDate <> Nothing Then
-            Sql += " AND "
-            Sql += " t25.入金日 <= '" & untilDate & "'"
+            Sql += " AND t25.入金日 <= '" & untilDate & "'"
         End If
 
         If sinceNum <> Nothing Then
-            Sql += " AND "
-            Sql += " t25.入金番号 ILIKE '%" & sinceNum & "%' "
+            Sql += " AND t25.入金番号 ILIKE '%" & sinceNum & "%' "
         End If
 
         If itemName <> Nothing Then
-            Sql += " AND "
-            Sql += " t11.品名 ILIKE '%" & itemName & "%' "
+            Sql += " AND t11.品名 ILIKE '%" & itemName & "%' "
         End If
 
         If spec <> Nothing Then
-            Sql += " AND "
-            Sql += " t11.型式 ILIKE '%" & spec & "%' "
+            Sql += " AND t11.型式 ILIKE '%" & spec & "%' "
         End If
 
         '取消データを含めない場合
         If ChkCancelData.Checked = False Then
-            Sql += " AND "
-            Sql += "t25.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+            Sql += " AND t25.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
         End If
 
         Return Sql

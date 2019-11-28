@@ -239,23 +239,11 @@ Public Class DepositList
                         CustomerBillingAmountFC = dsSkyuhd.Tables(RS).Rows(0)("請求金額計_外貨合計")
                     End If
 
-                    'If IsDBNull(dsSkyuhd.Tables(RS).Rows(0)("請求金額計_合計")) Then
-                    '    CustomerBillingAmount = 0
-                    'Else
-                    '    CustomerBillingAmount = dsSkyuhd.Tables(RS).Rows(0)("請求金額計_合計")
-                    'End If
-
                     If IsDBNull(dsSkyuhd.Tables(RS).Rows(0)("売掛残高_外貨合計")) Then
                         AccountsReceivableFC = 0
                     Else
                         AccountsReceivableFC = dsSkyuhd.Tables(RS).Rows(0)("売掛残高_外貨合計")
                     End If
-
-                    'If IsDBNull(dsSkyuhd.Tables(RS).Rows(0)("売掛残高_合計")) Then
-                    '    AccountsReceivable = 0
-                    'Else
-                    '    AccountsReceivable = dsSkyuhd.Tables(RS).Rows(0)("売掛残高_合計")
-                    'End If
 
                     If IsDBNull(dsSkyuhd.Tables(RS).Rows(0)("入金額計_外貨合計")) Then
                         AmountDeposited = 0
@@ -284,11 +272,6 @@ Public Class DepositList
                     DgvCustomer.Rows(idx).Cells("売掛金額_外貨").Value = CustomerBillingAmountFC
                     DgvCustomer.Rows(idx).Cells("既入金額_外貨").Value = AmountDeposited
                     DgvCustomer.Rows(idx).Cells("売掛残高_外貨").Value = AccountsReceivableFC
-                    'DgvCustomer.Rows(idx).Cells("請求金額残_外貨").Value = CustomerOrderAmountFC - CustomerBillingAmountFC
-
-                    'DgvCustomer.Rows(idx).Cells("通貨").Value = setBaseCurrency()
-                    'DgvCustomer.Rows(idx).Cells("請求金額残").Value = CustomerOrderAmount - CustomerBillingAmount
-                    'DgvCustomer.Rows(idx).Cells("売掛残高").Value = AccountsReceivable
                     DgvCustomer.Rows(idx).Cells("会社コード").Value = dsCustomer.Tables(RS).Rows(i)("会社コード")
 
                     DgvCustomer.Rows(idx).Cells("通貨_外貨コード").Value = dsCymnhd.Tables(RS).Rows(j)("通貨")
@@ -356,27 +339,21 @@ Public Class DepositList
         Dim customerCode As String = escapeSql(TxtCustomerCode.Text)
 
         If customerName <> Nothing Then
-            Sql += " AND "
-            Sql += " 得意先名 ILIKE '%" & customerName & "%' "
+            Sql += " AND 得意先名 ILIKE '%" & customerName & "%' "
         End If
 
         If customerAddress <> Nothing Then
-            Sql += " AND "
-            Sql += " (住所１ ILIKE '%" & customerAddress & "%' "
-            Sql += " OR "
-            Sql += " 住所２ ILIKE '%" & customerAddress & "%' "
-            Sql += " OR "
-            Sql += " 住所３ ILIKE '%" & customerAddress & "%' )"
+            Sql += " AND (住所１ ILIKE '%" & customerAddress & "%' "
+            Sql += " OR 住所２ ILIKE '%" & customerAddress & "%' "
+            Sql += " OR 住所３ ILIKE '%" & customerAddress & "%' )"
         End If
 
         If customerTel <> Nothing Then
-            Sql += " AND "
-            Sql += " 電話番号検索用 ILIKE '%" & customerTel & "%' "
+            Sql += " AND 電話番号検索用 ILIKE '%" & customerTel & "%' "
         End If
 
         If customerCode <> Nothing Then
-            Sql += " AND "
-            Sql += " 得意先コード ILIKE '%" & customerCode & "%' "
+            Sql += " AND 得意先コード ILIKE '%" & customerCode & "%' "
         End If
 
         Return Sql
