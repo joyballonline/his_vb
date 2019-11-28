@@ -149,6 +149,8 @@ Public Class OrderingList
 
             BtnExcelOutput.Visible = True
             BtnExcelOutput.Location = New System.Drawing.Point(13, 509)
+
+            ChkGoodsReceiptDate.Visible = True
         End If
 
         '検索（Date）の初期値
@@ -164,7 +166,7 @@ Public Class OrderingList
             Label2.Text = "Address"
             Label3.Text = "PhoneNumber"
             Label4.Text = "SupplierCode"
-            Label8.Text = "PurchaseDate"
+            lblOrderDate.Text = "PurchaseDate"
             Label7.Text = "PurchaseNumber"
             Label6.Text = "SalesPersonInCharge"
             Label11.Text = "CustomerNumber"
@@ -190,6 +192,8 @@ Public Class OrderingList
             BtnReceipt.Text = "ReceiptRegistration"
             BtnPurchaseEdit.Text = "PurchaseEdit"
 
+            BtnExcelOutput.Text = "Excel Output"
+            ChkGoodsReceiptDate.Text = "narrow down by goods receipt date"
         End If
     End Sub
 
@@ -217,7 +221,9 @@ Public Class OrderingList
                     DgvHtyhd.Columns.Add("発注番号", "PurchaseNumber")
                     DgvHtyhd.Columns.Add("発注番号枝番", "PurchaseOrderVer.")
                     DgvHtyhd.Columns.Add("客先番号", "CustomerNumber")
+
                     DgvHtyhd.Columns.Add("発注日", "PurchaseDate")
+
                     DgvHtyhd.Columns.Add("得意先名", "CustomerName")
                     DgvHtyhd.Columns.Add("仕入先コード", "SupplierCode")
                     DgvHtyhd.Columns.Add("仕入先名", "SupplierName")
@@ -249,6 +255,7 @@ Public Class OrderingList
                     DgvHtyhd.Columns.Add("発注番号", "発注番号")
                     DgvHtyhd.Columns.Add("発注番号枝番", "発注Ver.")
                     DgvHtyhd.Columns.Add("客先番号", "客先番号")
+
                     DgvHtyhd.Columns.Add("発注日", "発注日")
                     DgvHtyhd.Columns.Add("得意先名", "得意先名")
                     DgvHtyhd.Columns.Add("仕入先コード", "仕入先コード")
@@ -355,6 +362,7 @@ Public Class OrderingList
 
                 '発注基本を取得
                 Sql = "SELECT"
+
                 Sql += " t20.発注番号,t20.発注番号枝番,t20.発注日,t20.取消区分"
                 Sql += ",t20.得意先名,t20.客先番号,t20.仕入先コード,t20.仕入先名,t20.仕入先郵便番号,t20.仕入先住所"
                 Sql += ",t20.仕入先電話番号,t20.仕入先ＦＡＸ,t20.仕入先担当者名,t20.仕入先担当者役職"
@@ -370,6 +378,7 @@ Public Class OrderingList
                 Sql += " WHERE t20.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
 
                 Sql += viewSearchConditions() '抽出条件取得
+
 
 
                 Sql += " GROUP BY "
@@ -408,7 +417,9 @@ Public Class OrderingList
                     DgvHtyhd.Rows(i).Cells("発注番号").Value = ds.Tables(RS).Rows(i)("発注番号")
                     DgvHtyhd.Rows(i).Cells("発注番号枝番").Value = ds.Tables(RS).Rows(i)("発注番号枝番")
                     DgvHtyhd.Rows(i).Cells("客先番号").Value = ds.Tables(RS).Rows(i)("客先番号")
+
                     DgvHtyhd.Rows(i).Cells("発注日").Value = ds.Tables(RS).Rows(i)("発注日")
+
                     DgvHtyhd.Rows(i).Cells("得意先名").Value = ds.Tables(RS).Rows(i)("得意先名")
                     DgvHtyhd.Rows(i).Cells("仕入先コード").Value = ds.Tables(RS).Rows(i)("仕入先コード")
                     DgvHtyhd.Rows(i).Cells("仕入先名").Value = ds.Tables(RS).Rows(i)("仕入先名")
@@ -421,8 +432,8 @@ Public Class OrderingList
                     Dim decPurchaseAmount2 As Decimal = 0
 
                     Call mPurchaseCost(ds.Tables(RS).Rows(i)("発注番号"), ds.Tables(RS).Rows(i)("発注番号枝番") _
-                                       , decPurchase1, decPurchase2 _
-                                       , decPurchaseAmount1, decPurchaseAmount2)
+                                            , decPurchase1, decPurchase2 _
+                                            , decPurchaseAmount1, decPurchaseAmount2)
 
                     DgvHtyhd.Rows(i).Cells("仕入原価_外貨").Value = decPurchase1
                     DgvHtyhd.Rows(i).Cells("仕入原価").Value = decPurchase2
@@ -446,10 +457,10 @@ Public Class OrderingList
 
             Else '明細単位
 
-                '発注基本を取得
+                    '発注基本を取得
 
-                '抽出条件
-                Dim supplierName As String = escapeSql(TxtSupplierName.Text)
+                    '抽出条件
+                    Dim supplierName As String = escapeSql(TxtSupplierName.Text)
                 Dim supplierAddress As String = escapeSql(TxtAddress.Text)
                 Dim supplierTel As String = escapeSql(TxtTel.Text)
                 Dim supplierCode As String = escapeSql(TxtSupplierCode.Text)
@@ -793,6 +804,27 @@ Public Class OrderingList
 
     '取消データチェックイベント
     Private Sub ChkCancelData_CheckedChanged(sender As Object, e As EventArgs) Handles ChkCancelData.CheckedChanged
+        '一覧再表示
+        getList()
+    End Sub
+
+    Private Sub ChkGoodsReceiptDate_CheckedChanged(sender As Object, e As EventArgs) Handles ChkGoodsReceiptDate.CheckedChanged
+
+        If ChkGoodsReceiptDate.Checked = True Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+                lblOrderDate.Text = "GoodsReceiptDate"
+            Else
+                lblOrderDate.Text = "入庫日"
+            End If
+        Else
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+                lblOrderDate.Text = "PurchaseDate"
+            Else
+                lblOrderDate.Text = "発注日"
+            End If
+
+        End If
+
         '一覧再表示
         getList()
     End Sub
@@ -1994,6 +2026,28 @@ Public Class OrderingList
 
         If spec <> Nothing Then
             Sql += " AND t21.型式 ILIKE '%" & spec & "%' "
+        End If
+
+
+        If ChkGoodsReceiptDate.Checked = True Then  '入庫にチェック
+            Sql += " and t20.発注番号 In(Select 発注番号 from t42_nyukohd t42"
+
+            Dim sql2 As String = vbNullString
+
+
+            If sinceDate <> Nothing Then
+                sql2 += " where t42.入庫日 >= '" & sinceDate & "'"
+            End If
+            If untilDate <> Nothing Then
+                If sql2 = vbNullString Then
+                    sql2 += " where t42.入庫日 <= '" & untilDate & "'"
+                Else
+                    sql2 += " AND t42.入庫日 <= '" & untilDate & "'"
+                End If
+            End If
+
+            Sql += sql2 + ")"
+        Else
         End If
 
         '取消データを含めない場合

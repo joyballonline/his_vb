@@ -22,7 +22,7 @@ Partial Class OrderingList
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.BtnPurchaseView = New System.Windows.Forms.Button()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -30,7 +30,7 @@ Partial Class OrderingList
         Me.TxtSales = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.TxtPurchaseSince = New System.Windows.Forms.TextBox()
-        Me.Label8 = New System.Windows.Forms.Label()
+        Me.lblOrderDate = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.TxtSupplierCode = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -55,6 +55,7 @@ Partial Class OrderingList
         Me.dtPurchaseDateSince = New System.Windows.Forms.DateTimePicker()
         Me.dtPurchaseDateUntil = New System.Windows.Forms.DateTimePicker()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.ChkGoodsReceiptDate = New System.Windows.Forms.CheckBox()
         Me.RbtnSlip = New System.Windows.Forms.RadioButton()
         Me.RbtnDetails = New System.Windows.Forms.RadioButton()
         Me.ChkCancelData = New System.Windows.Forms.CheckBox()
@@ -139,17 +140,17 @@ Partial Class OrderingList
         Me.TxtPurchaseSince.Size = New System.Drawing.Size(369, 22)
         Me.TxtPurchaseSince.TabIndex = 6
         '
-        'Label8
+        'lblOrderDate
         '
-        Me.Label8.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.Label8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label8.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label8.Location = New System.Drawing.Point(584, 37)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(170, 22)
-        Me.Label8.TabIndex = 75
-        Me.Label8.Text = "発注日"
-        Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lblOrderDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.lblOrderDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblOrderDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.lblOrderDate.Location = New System.Drawing.Point(584, 37)
+        Me.lblOrderDate.Name = "lblOrderDate"
+        Me.lblOrderDate.Size = New System.Drawing.Size(170, 22)
+        Me.lblOrderDate.TabIndex = 75
+        Me.lblOrderDate.Text = "発注日"
+        Me.lblOrderDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label4
         '
@@ -278,14 +279,14 @@ Partial Class OrderingList
         Me.DgvHtyhd.AllowUserToDeleteRows = False
         Me.DgvHtyhd.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DgvHtyhd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DgvHtyhd.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DgvHtyhd.DefaultCellStyle = DataGridViewCellStyle2
         Me.DgvHtyhd.Location = New System.Drawing.Point(13, 236)
         Me.DgvHtyhd.Name = "DgvHtyhd"
         Me.DgvHtyhd.RowHeadersVisible = False
@@ -411,12 +412,15 @@ Partial Class OrderingList
         'TableLayoutPanel1
         '
         Me.TableLayoutPanel1.BackColor = System.Drawing.Color.Transparent
-        Me.TableLayoutPanel1.ColumnCount = 5
+        Me.TableLayoutPanel1.ColumnCount = 7
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 22.0!))
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.TableLayoutPanel1.Controls.Add(Me.ChkGoodsReceiptDate, 6, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.RbtnSlip, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.RbtnDetails, 1, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.ChkCancelData, 4, 0)
@@ -427,6 +431,19 @@ Partial Class OrderingList
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(834, 29)
         Me.TableLayoutPanel1.TabIndex = 336
+        '
+        'ChkGoodsReceiptDate
+        '
+        Me.ChkGoodsReceiptDate.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.ChkGoodsReceiptDate.AutoSize = True
+        Me.ChkGoodsReceiptDate.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.ChkGoodsReceiptDate.Location = New System.Drawing.Point(380, 5)
+        Me.ChkGoodsReceiptDate.Name = "ChkGoodsReceiptDate"
+        Me.ChkGoodsReceiptDate.Size = New System.Drawing.Size(134, 19)
+        Me.ChkGoodsReceiptDate.TabIndex = 348
+        Me.ChkGoodsReceiptDate.Text = "入庫日で絞り込む"
+        Me.ChkGoodsReceiptDate.UseVisualStyleBackColor = True
+        Me.ChkGoodsReceiptDate.Visible = False
         '
         'RbtnSlip
         '
@@ -566,7 +583,7 @@ Partial Class OrderingList
         Me.Controls.Add(Me.TxtSales)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.TxtPurchaseSince)
-        Me.Controls.Add(Me.Label8)
+        Me.Controls.Add(Me.lblOrderDate)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.TxtSupplierCode)
         Me.Controls.Add(Me.Label3)
@@ -599,7 +616,7 @@ Partial Class OrderingList
     Friend WithEvents TxtSales As TextBox
     Friend WithEvents Label7 As Label
     Friend WithEvents TxtPurchaseSince As TextBox
-    Friend WithEvents Label8 As Label
+    Friend WithEvents lblOrderDate As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents TxtSupplierCode As TextBox
     Friend WithEvents Label3 As Label
@@ -634,4 +651,5 @@ Partial Class OrderingList
     Friend WithEvents txtMaker As TextBox
     Friend WithEvents lblMaker As Label
     Friend WithEvents BtnExcelOutput As Button
+    Friend WithEvents ChkGoodsReceiptDate As CheckBox
 End Class
