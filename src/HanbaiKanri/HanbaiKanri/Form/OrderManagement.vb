@@ -864,7 +864,7 @@ Public Class OrderManagement
                 Sql3 += UtilClass.formatNumber(dsCymnHd.Tables(RS).Rows(0)("ＰＰＨ").ToString) 'ＰＰＨ
             End If
             Sql3 += "', '"
-            Sql3 += strToday '受注日
+            Sql3 += UtilClass.strFormatDate(TxtOrderDate.Text) '受注日
             Sql3 += "', '"
             Sql3 += UtilClass.strFormatDate(DtpOrderDate.Text) '売上日
             Sql3 += "', '"
