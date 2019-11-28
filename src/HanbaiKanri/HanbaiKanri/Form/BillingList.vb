@@ -390,42 +390,34 @@ Public Class BillingList
         Dim spec As String = UtilClass.escapeSql(TxtSpec.Text)
 
         If customerName <> Nothing Then
-            Sql += " AND "
-            Sql += " t23.得意先名 ILIKE '%" & customerName & "%' "
+            Sql += " AND t23.得意先名 ILIKE '%" & customerName & "%' "
         End If
 
         If customerCode <> Nothing Then
-            Sql += " AND "
-            Sql += " t23.得意先コード ILIKE '%" & customerCode & "%' "
+            Sql += " AND t23.得意先コード ILIKE '%" & customerCode & "%' "
         End If
 
         If sinceDate <> Nothing Then
-            Sql += " AND "
-            Sql += " t23.請求日 >= '" & sinceDate & "'"
+            Sql += " AND t23.請求日 >= '" & sinceDate & "'"
         End If
         If untilDate <> Nothing Then
-            Sql += " AND "
-            Sql += " t23.請求日 <= '" & untilDate & "'"
+            Sql += " AND t23.請求日 <= '" & untilDate & "'"
         End If
 
         If sinceNum <> Nothing Then
-            Sql += " AND "
-            Sql += " t23.請求番号 ILIKE '%" & sinceNum & "%' "
+            Sql += " AND t23.請求番号 ILIKE '%" & sinceNum & "%' "
         End If
 
         If poNum <> Nothing Then
-            Sql += " AND "
-            Sql += " t23.客先番号 ILIKE '%" & poNum & "%' "
+            Sql += " AND t23.客先番号 ILIKE '%" & poNum & "%' "
         End If
 
         If itemName <> Nothing Then
-            Sql += " AND "
-            Sql += " t11.品名 ILIKE '%" & itemName & "%' "
+            Sql += " And t10.受注番号 In (Select 受注番号 From t11_cymndt t11 Where t11.品名 ILIKE '%" & itemName & "%')"
         End If
 
         If spec <> Nothing Then
-            Sql += " AND "
-            Sql += " t11.型式 ILIKE '%" & spec & "%' "
+            Sql += " And t10.受注番号 In (Select 受注番号 From t11_cymndt t11 Where t11.型式 ILIKE '%" & spec & "%')"
         End If
 
         '取消データを含めない場合

@@ -612,3 +612,27 @@ select 文字３ from m90_hanyo  WHERE 会社コード = 'ZENBI'   and 固定キ
    場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
    場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\t.tateiwa\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
 select 文字３ from m90_hanyo  WHERE 会社コード = 'ZENBI'   and 固定キー ='1'   and 文字１ ='振込入金' ORDER BY "TRANSACTIONID","KeyID"
+2019/11/28 13:02:14   ERR***** データ取得失敗：ERROR: 42P01: missing FROM-clause entry for table "t31"
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\kuji\Source\Repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\kuji\Source\Repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT t30.*,t10.通貨,t10.見積金額 as t10見積金額,t10.見積金額_外貨 FROM  public.t30_urighd t30  left join t10_cymnhd t10 on t30.受注番号 = t10.受注番号 and t30.受注番号枝番 = t10.受注番号枝番 WHERE  t30.会社コード ILIKE 'SHIMADA' AND  t30.売上日 >= '2019/06/01' AND  t30.売上日 <= '2019/11/28' AND  t31.型式 ILIKE '%SDUS-0004%'  AND t30.取消区分 = 0 ORDER BY t30.更新日 DESC
+2019/11/28 14:04:33   ERR***** データ取得失敗：ERROR: 42P01: missing FROM-clause entry for table "t31"
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\kuji\Source\Repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\kuji\Source\Repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT t30.*,t10.通貨,t10.見積金額 as t10見積金額,t10.見積金額_外貨 FROM  public.t30_urighd t30  left join t10_cymnhd t10 on t30.受注番号 = t10.受注番号 and t30.受注番号枝番 = t10.受注番号枝番 WHERE  t30.会社コード ILIKE 'SHIMADA' AND  t30.売上日 >= '2019/11/14' AND  t30.売上日 <= '2019/11/28' AND  t31.型式 ILIKE '%SDUS-0004%'  AND t30.取消区分 = 0 ORDER BY t30.更新日 DESC
+2019/11/28 14:07:20   ERR***** データ取得失敗：ERROR: 42P01: missing FROM-clause entry for table "t31"
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\kuji\Source\Repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\kuji\Source\Repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT t30.*,t10.通貨,t10.見積金額 as t10見積金額,t10.見積金額_外貨 FROM  public.t30_urighd t30  left join t10_cymnhd t10 on t30.受注番号 = t10.受注番号 and t30.受注番号枝番 = t10.受注番号枝番 WHERE  t30.会社コード ILIKE 'SHIMADA' AND  t30.売上日 >= '2019/11/14' AND  t30.売上日 <= '2019/11/28' AND  t31.型式 ILIKE '%SDUS-0004%'  AND t30.取消区分 = 0 ORDER BY t30.更新日 DESC
+2019/11/28 14:16:36   ERR***** データ取得失敗：ERROR: 42601: syntax error at or near "売上番号"
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\kuji\Source\Repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\kuji\Source\Repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT t30.*,t10.通貨,t10.見積金額 as t10見積金額,t10.見積金額_外貨 FROM  public.t30_urighd t30  left join t10_cymnhd t10 on t30.受注番号 = t10.受注番号 and t30.受注番号枝番 = t10.受注番号枝番 WHERE  t30.会社コード = 'SHIMADA' AND  t30.売上日 >= '2019/11/14' AND  t30.売上日 <= '2019/11/28' AND  t30.売上番号 IN(selecct 売上番号 from t31_urigdt t31 where t31.型式 ILIKE '%SDUS-0004%')  AND t30.取消区分 = 0 ORDER BY t30.更新日 DESC
+2019/11/28 14:22:20   ERR***** データ取得失敗：ERROR: 42601: syntax error at or near "t31"
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\kuji\Source\Repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\kuji\Source\Repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT t30.*,t10.通貨,t10.見積金額 as t10見積金額,t10.見積金額_外貨 FROM  public.t30_urighd t30  left join t10_cymnhd t10 on t30.受注番号 = t10.受注番号 and t30.受注番号枝番 = t10.受注番号枝番 WHERE  t30.会社コード = 'SHIMADA' AND  t30.売上日 >= '2019/11/14' AND  t30.売上日 <= '2019/11/28' AND  t30.売上番号 IN(selecct t31.売上番号 from t31_urigdt t31 where t31.型式 ILIKE '%SDUS-0004%')  AND t30.取消区分 = 0 ORDER BY t30.更新日 DESC
+2019/11/28 21:05:59   ERR***** データ取得失敗：ERROR: 42P01: missing FROM-clause entry for table "t11"
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\kuji\Source\Repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\kuji\Source\Repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT t23.* FROM  public.t23_skyuhd t23  INNER JOIN t10_cymnhd t10 ON t23.会社コード = t10.会社コード   AND t23.受注番号 = t10.受注番号  AND t23.受注番号枝番 = t10.受注番号枝番  AND t10.取消区分 = 0 WHERE t23.会社コード = 'SHIMADA' AND  t23.請求日 >= '2019/11/14' AND  t23.請求日 <= '2019/11/28' AND  t11.型式 ILIKE '%S%'  AND t23.取消区分 = 0 ORDER BY t23.更新日 DESC
