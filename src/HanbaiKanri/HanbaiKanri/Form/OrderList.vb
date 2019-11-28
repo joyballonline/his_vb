@@ -236,6 +236,14 @@ Public Class OrderList
 
     '受注一覧を表示
     Private Sub OrderListLoad(Optional ByRef prmRefStatus As String = "")
+
+        DgvCymnhd.Visible = False
+
+        ' 行や列を追加したり、セルに値を設定するときは、自動サイズ設定しない。
+        DgvCymnhd.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None
+        DgvCymnhd.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None
+        DgvCymnhd.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing
+
         '一覧をクリア
         DgvCymnhd.Rows.Clear()
         DgvCymnhd.Columns.Clear()
@@ -325,6 +333,7 @@ Public Class OrderList
                     setRows(ds) '行をセット
 
                 End If
+                DgvCymnhd.Visible = True
 
                 Exit Sub
 
@@ -425,6 +434,11 @@ Public Class OrderList
                 setRows(ds) '行をセット
 
             End If
+            '自動でサイズを設定するのは、行や列を追加したり、セルに値を設定した後にする。
+            DgvCymnhd.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
+            DgvCymnhd.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
+            DgvCymnhd.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
+            DgvCymnhd.Visible = True
 
         Catch ue As UsrDefException
             ue.dspMsg()
@@ -2281,12 +2295,12 @@ Public Class OrderList
         'DataGridViewの列幅
         DgvCymnhd.AllowUserToResizeColumns = True
         'DgvCymnhd.AutoSizeColumnsMode = DataGridViewAutoSizeColumnMode.AllCells
-        DgvCymnhd.AllowUserToResizeRows = True
+        'DgvCymnhd.AllowUserToResizeRows = True
         '列ヘッダー高さ
         'DgvCymnhd.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing
-        DgvCymnhd.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
-        DgvCymnhd.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
-        DgvCymnhd.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        'DgvCymnhd.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
+        'DgvCymnhd.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
+        'DgvCymnhd.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
 
         DgvCymnhd.Columns("取消").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
         DgvCymnhd.Columns("取消").ReadOnly = True
@@ -2352,9 +2366,9 @@ Public Class OrderList
         DgvCymnhd.Columns("更新者").ReadOnly = True
 
         'DataGridView1のすべての列の幅を自動調整する
-        DgvCymnhd.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells)
+        'DgvCymnhd.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells)
         'DataGridView1のすべての行の高さを自動調整する
-        DgvCymnhd.AutoResizeRows(DataGridViewAutoSizeRowsMode.AllCells)
+        'DgvCymnhd.AutoResizeRows(DataGridViewAutoSizeRowsMode.AllCells)
 
 
     End Sub
@@ -2450,14 +2464,14 @@ Public Class OrderList
         '見出しの文字位置
         DgvCymnhd.ReadOnly = False
         'DataGridViewの列幅
-        DgvCymnhd.AllowUserToResizeColumns = True
+        'DgvCymnhd.AllowUserToResizeColumns = True
         'DgvCymnhd.AutoSizeColumnsMode = DataGridViewAutoSizeColumnMode.AllCells
-        DgvCymnhd.AllowUserToResizeRows = True
+        'DgvCymnhd.AllowUserToResizeRows = True
         '列ヘッダー高さ
         'DgvCymnhd.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing
-        DgvCymnhd.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
-        DgvCymnhd.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
-        DgvCymnhd.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        'DgvCymnhd.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
+        'DgvCymnhd.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
+        'DgvCymnhd.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
 
         DgvCymnhd.Columns("取消").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
         DgvCymnhd.Columns("取消").ReadOnly = True
@@ -2511,9 +2525,9 @@ Public Class OrderList
         DgvCymnhd.Columns("登録日").ReadOnly = True
 
         'DataGridView1のすべての列の幅を自動調整する
-        DgvCymnhd.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells)
+        'DgvCymnhd.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells)
         'DataGridView1のすべての行の高さを自動調整する
-        DgvCymnhd.AutoResizeRows(DataGridViewAutoSizeRowsMode.AllCells)
+        'DgvCymnhd.AutoResizeRows(DataGridViewAutoSizeRowsMode.AllCells)
 
     End Sub
 
@@ -2735,7 +2749,7 @@ Public Class OrderList
     End Function
 
     Private Sub OrderList_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
-        OrderListLoad() '一覧を再表示
+        'OrderListLoad() '一覧を再表示
     End Sub
 
     '基準通貨の通貨コードを取得する

@@ -213,6 +213,13 @@ Public Class AccountsPayableList
 
     '一覧表示
     Private Sub PurchaseListLoad()
+        DgvKike.Visible = False
+
+        ' 行や列を追加したり、セルに値を設定するときは、自動サイズ設定しない。
+        DgvKike.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None
+        DgvKike.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None
+        DgvKike.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing
+
         '変数等
         Dim Sql As String = ""
         Dim reccnt As Integer = 0 'DB用（デフォルト）
@@ -305,6 +312,12 @@ Public Class AccountsPayableList
                 DgvKike.Rows(i).Cells("更新日").Value = ds.Tables(RS).Rows(i)("更新日")
                 DgvKike.Rows(i).Cells("更新者").Value = ds.Tables(RS).Rows(i)("更新者")
             Next
+
+            '自動でサイズを設定するのは、行や列を追加したり、セルに値を設定した後にする。
+            DgvKike.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
+            DgvKike.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
+            DgvKike.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
+            DgvKike.Visible = True
 
         Catch ue As UsrDefException
             ue.dspMsg()
@@ -465,9 +478,9 @@ Public Class AccountsPayableList
         Dim dtNow As String = UtilClass.formatDatetime(DateTime.Now)
         Dim Sql As String = ""
 
-        If ds.Tables(RS).Rows(0)("更新日") = DgvKike.Rows(DgvKike.CurrentCell.RowIndex).Cells("更新日").Value Then
+        'If ds.Tables(RS).Rows(0)("更新日") = DgvKike.Rows(DgvKike.CurrentCell.RowIndex).Cells("更新日").Value Then
 
-            Sql = "UPDATE Public.t46_kikehd "
+        Sql = "UPDATE Public.t46_kikehd "
             Sql += "SET "
 
             Sql += "取消区分 = " & CommonConst.CANCEL_KBN_DISABLED
@@ -483,16 +496,16 @@ Public Class AccountsPayableList
 
             PurchaseListLoad()
 
-        Else
+        'Else
 
-            '画面を開いたときの日時とデータの日時が異なっていた場合
-            'データが誰かに変更された旨を伝える
-            _msgHd.dspMSG("chkData", frmC01F10_Login.loginValue.Language)
+        '画面を開いたときの日時とデータの日時が異なっていた場合
+        'データが誰かに変更された旨を伝える
+        '_msgHd.dspMSG("chkData", frmC01F10_Login.loginValue.Language)
 
-            '表示データを更新
-            PurchaseListLoad()
+        '表示データを更新
+        'PurchaseListLoad()
 
-        End If
+        'End If
 
     End Sub
 
@@ -625,4 +638,7 @@ Public Class AccountsPayableList
 
     End Function
 
+    Private Sub AccountsPayableList_Activated(sender As Object, e As EventArgs) Handles Me.Activated
+
+    End Sub
 End Class

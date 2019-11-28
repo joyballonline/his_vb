@@ -195,9 +195,17 @@ Public Class OrderingList
             BtnExcelOutput.Text = "Excel Output"
             ChkGoodsReceiptDate.Text = "narrow down by goods receipt date"
         End If
+        DgvHtyhd.Visible = True
     End Sub
 
     Private Sub getList()
+        DgvHtyhd.Visible = False
+
+        ' 行や列を追加したり、セルに値を設定するときは、自動サイズ設定しない。
+        DgvHtyhd.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None
+        DgvHtyhd.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None
+        DgvHtyhd.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing
+
         '一覧クリア
         DgvHtyhd.Rows.Clear()
         DgvHtyhd.Columns.Clear()
@@ -357,6 +365,7 @@ Public Class OrderingList
                 ds = _db.selectDB(Sql, RS, reccnt)
 
                 If ds.Tables(RS).Rows(0)("件数") = 0 Then
+                    DgvHtyhd.Visible = True
                     Exit Sub
                 End If
 
@@ -720,15 +729,21 @@ Public Class OrderingList
             '見出しの文字位置
             DgvHtyhd.ReadOnly = False
             'DataGridViewの列幅を固定
-            DgvHtyhd.AllowUserToResizeColumns = True
+            'DgvHtyhd.AllowUserToResizeColumns = True
             'DgvHtyhd.AutoSizeColumnsMode = DataGridViewAutoSizeColumnMode.AllCells
-            DgvHtyhd.AllowUserToResizeRows = True
+            'DgvHtyhd.AllowUserToResizeRows = True
             '列ヘッダー高さを固定
-            DgvHtyhd.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing
+            'DgvHtyhd.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing
 
             '行ヘッダーの幅を可変
-            DgvHtyhd.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells)
-            DgvHtyhd.ColumnHeadersHeight = 40
+            'DgvHtyhd.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells)
+            'DgvHtyhd.ColumnHeadersHeight = 40
+
+            '自動でサイズを設定するのは、行や列を追加したり、セルに値を設定した後にする。
+            DgvHtyhd.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
+            DgvHtyhd.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
+            DgvHtyhd.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
+            DgvHtyhd.Visible = True
 
 
         Catch ue As UsrDefException
@@ -2115,7 +2130,8 @@ Public Class OrderingList
 
     Private Sub OrderingList_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
         '一覧再表示
-        getList()
+        'getList()
+        'DgvHtyhd.Visible = True
     End Sub
 
     '基準通貨の取得

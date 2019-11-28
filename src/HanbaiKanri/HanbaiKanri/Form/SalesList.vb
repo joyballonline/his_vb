@@ -84,9 +84,9 @@ Public Class SalesList
         Dim curds As DataSet  'm25_currency
         Dim cur As String
 
-        Sql = "AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
+        'Sql = "AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
 
-        cymnUpdateDate = getDsData("t10_cymnhd", Sql)
+        'cymnUpdateDate = getDsData("t10_cymnhd", Sql)
 
         '一覧クリア
         DgvCymnhd.Rows.Clear()
@@ -106,7 +106,7 @@ Public Class SalesList
                 Sql += " on t30.受注番号 = t10.受注番号 and t30.受注番号枝番 = t10.受注番号枝番"
 
                 Sql += " WHERE "
-                Sql += " t30.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                Sql += " t30.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
 
                 Sql += viewSearchConditions() '検索条件
 
@@ -330,12 +330,12 @@ Public Class SalesList
 
         If itemName <> Nothing Then
             Sql += " AND "
-            Sql += " t31.品名 ILIKE '%" & itemName & "%' "
+            Sql += " t30.売上番号 IN(select t31.売上番号 from t31_urigdt t31 where t31.品名 ILIKE '%" & itemName & "%') "
         End If
 
         If spec <> Nothing Then
             Sql += " AND "
-            Sql += " t31.型式 ILIKE '%" & spec & "%' "
+            Sql += " t30.売上番号 IN(select t31.売上番号 from t31_urigdt t31 where t31.型式 ILIKE '%" & spec & "%') "
         End If
 
         '取消データを含めない場合
