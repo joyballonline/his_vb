@@ -191,15 +191,16 @@ Public Class OrderingList
             BtnPurchaseEdit.Text = "PurchaseEdit"
 
         End If
+        DgvHtyhd.Visible = True
     End Sub
 
     Private Sub getList()
+        DgvHtyhd.Visible = False
 
         ' 行や列を追加したり、セルに値を設定するときは、自動サイズ設定しない。
         DgvHtyhd.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None
         DgvHtyhd.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None
         DgvHtyhd.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-        DgvHtyhd.Visible = False
 
         '一覧クリア
         DgvHtyhd.Rows.Clear()
@@ -357,6 +358,7 @@ Public Class OrderingList
                 ds = _db.selectDB(Sql, RS, reccnt)
 
                 If ds.Tables(RS).Rows(0)("件数") = 0 Then
+                    DgvHtyhd.Visible = True
                     Exit Sub
                 End If
 
@@ -2074,7 +2076,8 @@ Public Class OrderingList
 
     Private Sub OrderingList_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
         '一覧再表示
-        getList()
+        'getList()
+        'DgvHtyhd.Visible = True
     End Sub
 
     '基準通貨の取得

@@ -236,6 +236,14 @@ Public Class OrderList
 
     '受注一覧を表示
     Private Sub OrderListLoad(Optional ByRef prmRefStatus As String = "")
+
+        DgvCymnhd.Visible = False
+
+        ' 行や列を追加したり、セルに値を設定するときは、自動サイズ設定しない。
+        DgvCymnhd.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None
+        DgvCymnhd.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None
+        DgvCymnhd.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing
+
         '一覧をクリア
         DgvCymnhd.Rows.Clear()
         DgvCymnhd.Columns.Clear()
@@ -325,6 +333,7 @@ Public Class OrderList
                     setRows(ds) '行をセット
 
                 End If
+                DgvCymnhd.Visible = True
 
                 Exit Sub
 
@@ -425,6 +434,11 @@ Public Class OrderList
                 setRows(ds) '行をセット
 
             End If
+            '自動でサイズを設定するのは、行や列を追加したり、セルに値を設定した後にする。
+            DgvCymnhd.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
+            DgvCymnhd.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
+            DgvCymnhd.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
+            DgvCymnhd.Visible = True
 
         Catch ue As UsrDefException
             ue.dspMsg()
@@ -2735,7 +2749,7 @@ Public Class OrderList
     End Function
 
     Private Sub OrderList_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
-        OrderListLoad() '一覧を再表示
+        'OrderListLoad() '一覧を再表示
     End Sub
 
     '基準通貨の通貨コードを取得する
