@@ -399,7 +399,7 @@ Public Class AccountsPayable
             PurchaseCostFC = PurchaseCostFC + (dsHattyudt.Tables(RS).Rows(i)("仕入値_外貨") * dsHattyudt.Tables(RS).Rows(i)("発注数量"))
         Next
 
-        VAT_FC = PurchaseCostFC * dsHattyu.Tables(RS).Rows(0)("ＶＡＴ").ToString / 100
+        VAT_FC = Math.Round(PurchaseCostFC * dsHattyu.Tables(RS).Rows(0)("ＶＡＴ").ToString / 100, 2)
         PurchaseAmountFC = PurchaseCostFC + VAT_FC
 
         DgvCymn.Rows.Add()
