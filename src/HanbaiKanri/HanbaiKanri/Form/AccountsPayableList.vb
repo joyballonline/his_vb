@@ -638,4 +638,7 @@ Public Class AccountsPayableList
 
     End Function
 
+    Private Sub AccountsPayableList_Activated(sender As Object, e As EventArgs) Handles Me.Activated
+
+    End Sub
 End Class
