@@ -610,7 +610,9 @@ Public Class Receipt
                     DgvAdd.Rows(rowIndex).Cells("未入庫数量").Value = dsHattyudt.Tables(RS).Rows(i)("未入庫数")
 
                     DgvAdd.Rows(rowIndex).Cells("入出庫種別").Value = dsHanyo.Tables(RS).Rows(0)("可変キー")
-                    DgvAdd.Rows(rowIndex).Cells("入庫数量").Value = 0  '今回入庫数量
+
+                    '自動で未入庫数をセットする
+                    DgvAdd.Rows(rowIndex).Cells("入庫数量").Value = dsHattyudt.Tables(RS).Rows(i)("未入庫数")  '今回入庫数量
 
 
                     'DgvAdd.Rows(rowIndex).Cells("引当区分").Value = CommonConst.AC_KBN_NORMAL
@@ -631,6 +633,8 @@ Public Class Receipt
                 No1 += 1
             Next c
             TxtCount1.Text = DgvPurchase.Rows.Count()
+            DgvPurchase.Rows(0).Cells(0).Selected = False
+
 
             Dim i2 As Integer = DgvHistory.Rows.Count()
             Dim No2 As Integer = 1
@@ -639,6 +643,7 @@ Public Class Receipt
                 No2 += 1
             Next c
             TxtCount2.Text = DgvHistory.Rows.Count()
+            DgvHistory.Rows(0).Cells(0).Selected = False
 
             Dim i3 As Integer = DgvAdd.Rows.Count()
             Dim No3 As Integer = 1
@@ -647,6 +652,8 @@ Public Class Receipt
                 No3 += 1
             Next c
             TxtCount3.Text = DgvAdd.Rows.Count()
+            DgvAdd.Rows(0).Cells(0).Selected = False
+
 
             '通常は発注データから入庫データが作られる
             If dsHattyu.Tables(RS).Rows.Count > 0 Then
@@ -671,6 +678,8 @@ Public Class Receipt
             ''入庫日の選択最小日を発注日にする
             'DtpReceiptDate.MinDate = dsHattyu.Tables(RS).Rows(0)("発注日").ToShortDateString()
 
+            DgvAdd.Rows(0).Cells("入庫数量").Selected = True
+
 #End Region
 
 
@@ -691,17 +700,22 @@ Public Class Receipt
 
         'ヘッダー以外だったら
         If e.RowIndex > -1 Then
+            '操作したカラム名を取得
+            Dim currentColumn As String = DgvAdd.Columns(e.ColumnIndex).Name
 
-            '各項目の属性チェック
-            If Not IsNumeric(DgvAdd.Rows(e.RowIndex).Cells("入庫数量").Value) And (DgvAdd.Rows(e.RowIndex).Cells("入庫数量").Value IsNot Nothing) Then
-                _msgHd.dspMSG("IsNotNumeric", frmC01F10_Login.loginValue.Language)
-                DgvAdd.Rows(e.RowIndex).Cells("入庫数量").Value = 0
-                Exit Sub
+            If currentColumn = "入庫数量" Then  'Cellが入庫数量の場合
+
+                '各項目の属性チェック
+                If Not IsNumeric(DgvAdd.Rows(e.RowIndex).Cells("入庫数量").Value) And (DgvAdd.Rows(e.RowIndex).Cells("入庫数量").Value IsNot Nothing) Then
+                    _msgHd.dspMSG("IsNotNumeric", frmC01F10_Login.loginValue.Language)
+                    DgvAdd.Rows(e.RowIndex).Cells("入庫数量").Value = 0
+                    Exit Sub
+                End If
+
+                Dim decTmp As Decimal = DgvAdd.Rows(e.RowIndex).Cells("入庫数量").Value
+                DgvAdd.Rows(e.RowIndex).Cells("入庫数量").Value = decTmp
+
             End If
-
-            Dim decTmp As Decimal = DgvAdd.Rows(e.RowIndex).Cells("入庫数量").Value
-            DgvAdd.Rows(e.RowIndex).Cells("入庫数量").Value = decTmp
-
         End If
 
     End Sub
