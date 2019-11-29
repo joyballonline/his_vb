@@ -499,69 +499,71 @@ Public Class OrderManagement
                     DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("売単価").Value = IIf(ds3.Tables(RS).Rows(index)("仕入区分").ToString = CommonConst.Sire_KBN_SERVICE,
                                                                                 ds3.Tables(RS).Rows(index)("売単価"),
                                                                                 ds3.Tables(RS).Rows(index)("見積単価_外貨")) '売単価 = 見積単価
-                    DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("売上数量").Value = 0
-                    'DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("売上金額").Value = 0
+
+                    '自動で受注残をセットする
+                    DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("売上数量").Value = ds3.Tables(RS).Rows(index)("受注残数")
 
                     DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("備考").Value = ds3.Tables(RS).Rows(index)("備考")
                 End If
             Next
+
 
 #End Region
 
 
             '行番号の振り直し
             Dim i1 As Integer = DgvOrder.Rows.Count()
-            Dim No1 As Integer = 1
-            For c As Integer = 0 To i1 - 1
-                DgvOrder.Rows(c).Cells(0).Value = No1
-                No1 += 1
-            Next c
-            TxtCount1.Text = DgvOrder.Rows.Count()
+        Dim No1 As Integer = 1
+        For c As Integer = 0 To i1 - 1
+            DgvOrder.Rows(c).Cells(0).Value = No1
+            No1 += 1
+        Next c
+        TxtCount1.Text = DgvOrder.Rows.Count()
 
-            Dim i2 As Integer = DgvHistory.Rows.Count()
-            Dim No2 As Integer = 1
-            For c As Integer = 0 To i2 - 1
-                DgvHistory.Rows(c).Cells(0).Value = No2
-                No2 += 1
-            Next c
-            TxtCount2.Text = DgvHistory.Rows.Count()
+        Dim i2 As Integer = DgvHistory.Rows.Count()
+        Dim No2 As Integer = 1
+        For c As Integer = 0 To i2 - 1
+            DgvHistory.Rows(c).Cells(0).Value = No2
+            No2 += 1
+        Next c
+        TxtCount2.Text = DgvHistory.Rows.Count()
 
-            Dim i3 As Integer = DgvAdd.Rows.Count()
-            Dim No3 As Integer = 1
-            For c As Integer = 0 To i3 - 1
-                DgvAdd.Rows(c).Cells(0).Value = No3
-                No3 += 1
-            Next c
-            TxtCount3.Text = DgvAdd.Rows.Count()
+        Dim i3 As Integer = DgvAdd.Rows.Count()
+        Dim No3 As Integer = 1
+        For c As Integer = 0 To i3 - 1
+            DgvAdd.Rows(c).Cells(0).Value = No3
+            No3 += 1
+        Next c
+        TxtCount3.Text = DgvAdd.Rows.Count()
 
-            TxtOrderNo.Text = ds1.Tables(RS).Rows(0)("受注番号")
-            TxtSuffixNo.Text = ds1.Tables(RS).Rows(0)("受注番号枝番")
-            TxtCustomerPO.Text = ds1.Tables(RS).Rows(0)("客先番号").ToString
-            TxtOrderDate.Text = ds1.Tables(RS).Rows(0)("受注日")
-            TxtCustomerCode.Text = ds1.Tables(RS).Rows(0)("得意先コード")
-            TxtCustomerName.Text = ds1.Tables(RS).Rows(0)("得意先名")
+        TxtOrderNo.Text = ds1.Tables(RS).Rows(0)("受注番号")
+        TxtSuffixNo.Text = ds1.Tables(RS).Rows(0)("受注番号枝番")
+        TxtCustomerPO.Text = ds1.Tables(RS).Rows(0)("客先番号").ToString
+        TxtOrderDate.Text = ds1.Tables(RS).Rows(0)("受注日")
+        TxtCustomerCode.Text = ds1.Tables(RS).Rows(0)("得意先コード")
+        TxtCustomerName.Text = ds1.Tables(RS).Rows(0)("得意先名")
 
-            '#633 のためコメントアウト
-            ''売上日、入金予定日のMinDateを受注日に設定
-            'DtpOrderDate.MinDate = ds1.Tables(RS).Rows(0)("受注日").ToShortDateString()
-            'DtpDepositDate.MinDate = ds1.Tables(RS).Rows(0)("受注日").ToShortDateString()
+        '#633 のためコメントアウト
+        ''売上日、入金予定日のMinDateを受注日に設定
+        'DtpOrderDate.MinDate = ds1.Tables(RS).Rows(0)("受注日").ToShortDateString()
+        'DtpDepositDate.MinDate = ds1.Tables(RS).Rows(0)("受注日").ToShortDateString()
 
-            If _status = CommonConst.STATUS_VIEW Then
-                DtpOrderDate.Value = ds4.Tables(RS).Rows(0)("売上日")
-                TxtRemarks.Text = ds4.Tables(RS).Rows(0)("備考")
-            End If
+        If _status = CommonConst.STATUS_VIEW Then
+            DtpOrderDate.Value = ds4.Tables(RS).Rows(0)("売上日")
+            TxtRemarks.Text = ds4.Tables(RS).Rows(0)("備考")
+        End If
 
-            '今回売上の初期カーソル位置
-            If DgvAdd.Rows.Count > 0 Then
-                DgvAdd.CurrentCell = DgvAdd(10, 0)
-            End If
+        '今回売上の初期カーソル位置
+        If DgvAdd.Rows.Count > 0 Then
+            DgvAdd.CurrentCell = DgvAdd(10, 0)
+        End If
 
         Catch ue As UsrDefException
-            ue.dspMsg()
-            Throw ue
+        ue.dspMsg()
+        Throw ue
         Catch ex As Exception
-            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
+        'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
+        Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
         End Try
     End Sub
 
@@ -1057,14 +1059,20 @@ Public Class OrderManagement
         'ヘッダー以外だったら
         If e.RowIndex > -1 Then
 
-            '各項目の属性チェック
-            If Not IsNumeric(DgvAdd.Rows(e.RowIndex).Cells("売上数量").Value) And (DgvAdd.Rows(e.RowIndex).Cells("売上数量").Value IsNot Nothing) Then
-                _msgHd.dspMSG("IsNotNumeric", frmC01F10_Login.loginValue.Language)
-                DgvAdd.Rows(e.RowIndex).Cells("売上数量").Value = 0
-                Exit Sub
-            End If
+            '操作したカラム名を取得
+            Dim currentColumn As String = DgvAdd.Columns(e.ColumnIndex).Name
 
-            DgvAdd.Rows(e.RowIndex).Cells("売上金額").Value = DgvAdd.Rows(e.RowIndex).Cells("売単価").Value * DgvAdd.Rows(e.RowIndex).Cells("売上数量").Value
+            If currentColumn = "売上数量" Then  'Cellが売上数量の場合
+
+                '各項目の属性チェック
+                If Not IsNumeric(DgvAdd.Rows(e.RowIndex).Cells("売上数量").Value) And (DgvAdd.Rows(e.RowIndex).Cells("売上数量").Value IsNot Nothing) Then
+                    _msgHd.dspMSG("IsNotNumeric", frmC01F10_Login.loginValue.Language)
+                    DgvAdd.Rows(e.RowIndex).Cells("売上数量").Value = 0
+                    Exit Sub
+                End If
+
+                DgvAdd.Rows(e.RowIndex).Cells("売上金額").Value = DgvAdd.Rows(e.RowIndex).Cells("売単価").Value * DgvAdd.Rows(e.RowIndex).Cells("売上数量").Value
+            End If
 
         End If
 
