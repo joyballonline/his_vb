@@ -416,6 +416,10 @@ Public Class GoodsIssue
                     DgvAdd.Rows(rowIndex).Cells("単位").Value = dsCymndt.Tables(RS).Rows(i)("単位")
                     DgvAdd.Rows(rowIndex).Cells("未出庫数量").Value = dsCymndt.Tables(RS).Rows(i)("未出庫数")
 
+                    '今回出庫数量に未出庫数をセットする
+                    DgvAdd.Rows(rowIndex).Cells("出庫数量").Value = dsCymndt.Tables(RS).Rows(i)("未出庫数")
+
+
                     DgvAdd.Rows(rowIndex).Cells("売単価").Value = dsCymndt.Tables(RS).Rows(i)("見積単価")
                     'DgvAdd.Rows(rowIndex).Cells("出庫数量").Value = 0
 
@@ -2376,17 +2380,23 @@ Public Class GoodsIssue
         'ヘッダー以外だったら
         If e.RowIndex > -1 Then
 
-            '各項目の属性チェック
-            If Not IsNumeric(DgvAdd.Rows(e.RowIndex).Cells("出庫数量").Value) And (DgvAdd.Rows(e.RowIndex).Cells("出庫数量").Value IsNot Nothing) Then
-                _msgHd.dspMSG("IsNotNumeric", frmC01F10_Login.loginValue.Language)
-                DgvAdd.Rows(e.RowIndex).Cells("出庫数量").Value = 0
-                Exit Sub
+            '操作したカラム名を取得
+            Dim currentColumn As String = DgvAdd.Columns(e.ColumnIndex).Name
+
+            If currentColumn = "出庫数量" Then  'Cellが出庫数量の場合
+
+                '各項目の属性チェック
+                If Not IsNumeric(DgvAdd.Rows(e.RowIndex).Cells("出庫数量").Value) And (DgvAdd.Rows(e.RowIndex).Cells("出庫数量").Value IsNot Nothing) Then
+                    _msgHd.dspMSG("IsNotNumeric", frmC01F10_Login.loginValue.Language)
+                    DgvAdd.Rows(e.RowIndex).Cells("出庫数量").Value = 0
+                    Exit Sub
+                End If
+
+                Dim decTmp As Decimal = DgvAdd.Rows(e.RowIndex).Cells("出庫数量").Value
+                DgvAdd.Rows(e.RowIndex).Cells("出庫数量").Value = decTmp
             End If
-
-            Dim decTmp As Decimal = DgvAdd.Rows(e.RowIndex).Cells("出庫数量").Value
-            DgvAdd.Rows(e.RowIndex).Cells("出庫数量").Value = decTmp
-
         End If
+
     End Sub
 
     Private Sub DeliveryNote_Zenbi()
