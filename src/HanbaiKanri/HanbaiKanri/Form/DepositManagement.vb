@@ -231,6 +231,9 @@ Public Class DepositManagement
         '入金入力の行を追加
         BtnAdd.PerformClick()
 
+        '入力入金額に売掛残高をセットする
+        DgvDeposit.Rows(0).Cells("入力入金額").Value = DgvCustomer.Rows(0).Cells("請求残高").Value
+
     End Sub
 
     '各Table内の作成
@@ -1153,15 +1156,21 @@ Public Class DepositManagement
         'ヘッダー以外だったら
         If e.RowIndex > -1 Then
 
-            '各項目の属性チェック
-            If Not IsNumeric(DgvDeposit.Rows(e.RowIndex).Cells("入力入金額").Value) And (DgvDeposit.Rows(e.RowIndex).Cells("入力入金額").Value IsNot Nothing) Then
-                _msgHd.dspMSG("IsNotNumeric", frmC01F10_Login.loginValue.Language)
-                DgvDeposit.Rows(e.RowIndex).Cells("入力入金額").Value = 0
-                Exit Sub
-            End If
+            '操作したカラム名を取得
+            Dim currentColumn As String = DgvDeposit.Columns(e.ColumnIndex).Name
 
-            Dim decTmp As Decimal = DgvDeposit.Rows(e.RowIndex).Cells("入力入金額").Value
-            DgvDeposit.Rows(e.RowIndex).Cells("入力入金額").Value = decTmp
+            If currentColumn = "入力入金額" Then  'Cellが入力入金額の場合
+
+                '各項目の属性チェック
+                If Not IsNumeric(DgvDeposit.Rows(e.RowIndex).Cells("入力入金額").Value) And (DgvDeposit.Rows(e.RowIndex).Cells("入力入金額").Value IsNot Nothing) Then
+                    _msgHd.dspMSG("IsNotNumeric", frmC01F10_Login.loginValue.Language)
+                    DgvDeposit.Rows(e.RowIndex).Cells("入力入金額").Value = 0
+                    Exit Sub
+                End If
+
+                Dim decTmp As Decimal = DgvDeposit.Rows(e.RowIndex).Cells("入力入金額").Value
+                DgvDeposit.Rows(e.RowIndex).Cells("入力入金額").Value = decTmp
+            End If
         End If
 
     End Sub
