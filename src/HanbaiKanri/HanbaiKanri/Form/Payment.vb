@@ -221,6 +221,9 @@ Public Class Payment
         '支払入力の行を追加
         BtnAdd.PerformClick()
 
+        '入力支払金額に買掛残高をセットする
+        DgvPayment.Rows(0).Cells("入力支払金額").Value = DgvSupplier.Rows(0).Cells("買掛残高").Value
+
     End Sub
 
     '各Table内の作成
@@ -426,6 +429,8 @@ Public Class Payment
 
         Next
 
+        DgvKikeInfo.Rows(0).Cells(0).Selected = False
+
     End Sub
 
     '前の画面に戻る
@@ -625,16 +630,21 @@ Public Class Payment
         'ヘッダー以外だったら
         If e.RowIndex > -1 Then
 
-            '各項目の属性チェック
-            If Not IsNumeric(DgvPayment.Rows(e.RowIndex).Cells("入力支払金額").Value) And (DgvPayment.Rows(e.RowIndex).Cells("入力支払金額").Value IsNot Nothing) Then
-                _msgHd.dspMSG("IsNotNumeric", frmC01F10_Login.loginValue.Language)
-                DgvPayment.Rows(e.RowIndex).Cells("入力支払金額").Value = 0
-                Exit Sub
+            '操作したカラム名を取得
+            Dim currentColumn As String = DgvPayment.Columns(e.ColumnIndex).Name
+
+            If currentColumn = "入力支払金額" Then  'Cellが入力支払金額の場合
+
+                '各項目の属性チェック
+                If Not IsNumeric(DgvPayment.Rows(e.RowIndex).Cells("入力支払金額").Value) And (DgvPayment.Rows(e.RowIndex).Cells("入力支払金額").Value IsNot Nothing) Then
+                    _msgHd.dspMSG("IsNotNumeric", frmC01F10_Login.loginValue.Language)
+                    DgvPayment.Rows(e.RowIndex).Cells("入力支払金額").Value = 0
+                    Exit Sub
+                End If
+
+                Dim decTmp As Decimal = DgvPayment.Rows(e.RowIndex).Cells("入力支払金額").Value
+                DgvPayment.Rows(e.RowIndex).Cells("入力支払金額").Value = decTmp
             End If
-
-            Dim decTmp As Decimal = DgvPayment.Rows(e.RowIndex).Cells("入力支払金額").Value
-            DgvPayment.Rows(e.RowIndex).Cells("入力支払金額").Value = decTmp
-
         End If
 
     End Sub
