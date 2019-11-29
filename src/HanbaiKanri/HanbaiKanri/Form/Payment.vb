@@ -429,7 +429,9 @@ Public Class Payment
 
         Next
 
-        DgvKikeInfo.Rows(0).Cells(0).Selected = False
+        If DgvKikeInfo.Rows.Count > 0 Then
+            DgvKikeInfo.Rows(0).Cells(0).Selected = False
+        End If
 
     End Sub
 

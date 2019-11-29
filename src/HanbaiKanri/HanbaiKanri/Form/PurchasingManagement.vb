@@ -573,7 +573,9 @@ Public Class PurchasingManagement
             BtnBack.Text = "Back"
         End If
 
-        DgvAdd.Rows(0).Cells("仕入数量").Selected = True
+        If DgvAdd.Rows.Count > 0 Then
+            DgvAdd.Rows(0).Cells("仕入数量").Selected = True
+        End If
 
     End Sub
 

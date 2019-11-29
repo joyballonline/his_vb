@@ -633,7 +633,10 @@ Public Class Receipt
                 No1 += 1
             Next c
             TxtCount1.Text = DgvPurchase.Rows.Count()
-            DgvPurchase.Rows(0).Cells(0).Selected = False
+
+            If DgvPurchase.Rows.Count > 0 Then
+                DgvPurchase.Rows(0).Cells(0).Selected = False
+            End If
 
 
             Dim i2 As Integer = DgvHistory.Rows.Count()
@@ -643,7 +646,10 @@ Public Class Receipt
                 No2 += 1
             Next c
             TxtCount2.Text = DgvHistory.Rows.Count()
-            DgvHistory.Rows(0).Cells(0).Selected = False
+
+            If DgvHistory.Rows.Count > 0 Then
+                DgvHistory.Rows(0).Cells(0).Selected = False
+            End If
 
             Dim i3 As Integer = DgvAdd.Rows.Count()
             Dim No3 As Integer = 1
@@ -652,7 +658,10 @@ Public Class Receipt
                 No3 += 1
             Next c
             TxtCount3.Text = DgvAdd.Rows.Count()
-            DgvAdd.Rows(0).Cells(0).Selected = False
+
+            If DgvAdd.Rows.Count > 0 Then
+                DgvAdd.Rows(0).Cells(0).Selected = False
+            End If
 
 
             '通常は発注データから入庫データが作られる
@@ -678,7 +687,9 @@ Public Class Receipt
             ''入庫日の選択最小日を発注日にする
             'DtpReceiptDate.MinDate = dsHattyu.Tables(RS).Rows(0)("発注日").ToShortDateString()
 
-            DgvAdd.Rows(0).Cells("入庫数量").Selected = True
+            If DgvAdd.Rows.Count > 0 Then
+                DgvAdd.Rows(0).Cells("入庫数量").Selected = True
+            End If
 
 #End Region
 
