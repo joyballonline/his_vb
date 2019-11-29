@@ -481,7 +481,9 @@ Public Class AccountsPayable
             DgvAdd.Rows(0).Cells("AddNo").Value = 1
             DgvAdd(1, 0).Value = 2
             DgvAdd.Rows(0).Cells("今回支払先").Value = dsHattyu.Tables(RS).Rows(0)("仕入先名")
-            DgvAdd.Rows(0).Cells("今回買掛金額計").Value = 0
+
+            '自動で買掛残高をセットする
+            DgvAdd.Rows(0).Cells("今回買掛金額計").Value = DgvCymn.Rows(0).Cells("買掛残高").Value
 
             TxtCount3.Text = 1
         End If
@@ -742,15 +744,21 @@ Public Class AccountsPayable
         'ヘッダー以外だったら
         If e.RowIndex > -1 Then
 
-            '各項目の属性チェック
-            If Not IsNumeric(DgvAdd.Rows(e.RowIndex).Cells("今回買掛金額計").Value) And (DgvAdd.Rows(e.RowIndex).Cells("今回買掛金額計").Value IsNot Nothing) Then
-                _msgHd.dspMSG("IsNotNumeric", frmC01F10_Login.loginValue.Language)
-                DgvAdd.Rows(e.RowIndex).Cells("今回買掛金額計").Value = 0
-                Exit Sub
-            End If
+            '操作したカラム名を取得
+            Dim currentColumn As String = DgvAdd.Columns(e.ColumnIndex).Name
 
-            Dim decTmp As Decimal = DgvAdd.Rows(e.RowIndex).Cells("今回買掛金額計").Value
-            DgvAdd.Rows(e.RowIndex).Cells("今回買掛金額計").Value = decTmp
+            If currentColumn = "今回買掛金額計" Then  'Cellが今回買掛金額計の場合
+
+                '各項目の属性チェック
+                If Not IsNumeric(DgvAdd.Rows(e.RowIndex).Cells("今回買掛金額計").Value) And (DgvAdd.Rows(e.RowIndex).Cells("今回買掛金額計").Value IsNot Nothing) Then
+                    _msgHd.dspMSG("IsNotNumeric", frmC01F10_Login.loginValue.Language)
+                    DgvAdd.Rows(e.RowIndex).Cells("今回買掛金額計").Value = 0
+                    Exit Sub
+                End If
+
+                Dim decTmp As Decimal = DgvAdd.Rows(e.RowIndex).Cells("今回買掛金額計").Value
+                DgvAdd.Rows(e.RowIndex).Cells("今回買掛金額計").Value = decTmp
+            End If
 
             DgvAdd.Rows(e.RowIndex).Cells("今回備考1").Value = VendorInvoiceNumber.Text
 
