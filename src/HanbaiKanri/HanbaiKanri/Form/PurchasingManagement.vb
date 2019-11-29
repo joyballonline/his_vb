@@ -484,7 +484,9 @@ Public Class PurchasingManagement
 
                     DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("登録済数量").Value = dsHattyuDt.Tables(RS).Rows(i)("仕入数量")
                     DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("未登録数量").Value = dsHattyuDt.Tables(RS).Rows(i)("発注残数")
-                    DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("仕入数量").Value = 0
+
+                    '自動で発注残数をセットする
+                    DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("仕入数量").Value = dsHattyuDt.Tables(RS).Rows(i)("発注残数")
                     'DgvAdd.Rows(DgvAdd.Rows.Count - 1).Cells("備考").Value = dsHattyuDt.Tables(RS).Rows(i)("備考")
                 End If
             Next
@@ -527,9 +529,9 @@ Public Class PurchasingManagement
             'DtpPaymentDate.MinDate = dsHattyuHd.Tables(RS).Rows(0)("発注日").ToShortDateString()
 
             '今回仕入の初期カーソル位置
-            If DgvAdd.Rows.Count > 0 Then
-                DgvAdd.CurrentCell = DgvAdd(11, 0)
-            End If
+            'If DgvAdd.Rows.Count > 0 Then
+            '    DgvAdd.CurrentCell = DgvAdd(11, 0)
+            'End If
 
         Catch ue As UsrDefException
             ue.dspMsg()
@@ -570,6 +572,9 @@ Public Class PurchasingManagement
             BtnRegist.Text = "Registration"
             BtnBack.Text = "Back"
         End If
+
+        DgvAdd.Rows(0).Cells("仕入数量").Selected = True
+
     End Sub
 
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
@@ -1090,11 +1095,20 @@ Public Class PurchasingManagement
         'ヘッダー以外だったら
         If e.RowIndex > -1 Then
 
-            '各項目の属性チェック
-            If Not IsNumeric(DgvAdd.Rows(e.RowIndex).Cells("仕入数量").Value) And (DgvAdd.Rows(e.RowIndex).Cells("仕入数量").Value IsNot Nothing) Then
-                _msgHd.dspMSG("IsNotNumeric", frmC01F10_Login.loginValue.Language)
-                DgvAdd.Rows(e.RowIndex).Cells("仕入数量").Value = 0
-                Exit Sub
+            '操作したカラム名を取得
+            Dim currentColumn As String = DgvAdd.Columns(e.ColumnIndex).Name
+
+            If currentColumn = "仕入数量" Then  'Cellが仕入数量の場合
+
+                '各項目の属性チェック
+                If Not IsNumeric(DgvAdd.Rows(e.RowIndex).Cells("仕入数量").Value) And (DgvAdd.Rows(e.RowIndex).Cells("仕入数量").Value IsNot Nothing) Then
+                    _msgHd.dspMSG("IsNotNumeric", frmC01F10_Login.loginValue.Language)
+                    DgvAdd.Rows(e.RowIndex).Cells("仕入数量").Value = 0
+                    Exit Sub
+                End If
+
+                Dim decTmp As Decimal = DgvAdd.Rows(e.RowIndex).Cells("仕入数量").Value
+                DgvAdd.Rows(e.RowIndex).Cells("仕入数量").Value = decTmp.ToString("N2")
             End If
         End If
 
