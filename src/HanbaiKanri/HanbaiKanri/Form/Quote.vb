@@ -1864,13 +1864,14 @@ Public Class Quote
         End If
 
 
+        '一時的にコメントアウト
         'データグリッド内に同一の商品があった場合はエラー
-        Dim blnFlg As Boolean = mCheckDuplicate()
-        If blnFlg = False Then
+        'Dim blnFlg As Boolean = mCheckDuplicate()
+        'If blnFlg = False Then
 
-            _msgHd.dspMSG("chkDuplicateError", frmC01F10_Login.loginValue.Language)
-            Exit Sub
-        End If
+        '    _msgHd.dspMSG("chkDuplicateError", frmC01F10_Login.loginValue.Language)
+        '    Exit Sub
+        'End If
 
 
         Dim dtToday As DateTime = DateTime.Now
