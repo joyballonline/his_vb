@@ -381,7 +381,9 @@ Public Class BillingManagement
             DgvAdd.Rows(0).Cells("AddNo").Value = 1
             DgvAdd(1, 0).Value = 2
             DgvAdd.Rows(0).Cells("今回請求先").Value = dsCymnhd.Tables(RS).Rows(0)("得意先名")
-            DgvAdd.Rows(0).Cells("今回請求金額計").Value = 0
+
+            '今回請求金額に請求残高をセットする
+            DgvAdd.Rows(0).Cells("今回請求金額計").Value = (total - BillingAmount).ToString("N2")
 
             '請求データ作成件数カウント
             TxtDgvAddCount.Text = 1
@@ -692,16 +694,21 @@ Public Class BillingManagement
         'ヘッダー以外だったら
         If e.RowIndex > -1 Then
 
-            '各項目の属性チェック
-            If Not IsNumeric(DgvAdd.Rows(e.RowIndex).Cells("今回請求金額計").Value) And (DgvAdd.Rows(e.RowIndex).Cells("今回請求金額計").Value IsNot Nothing) Then
-                _msgHd.dspMSG("IsNotNumeric", frmC01F10_Login.loginValue.Language)
-                DgvAdd.Rows(e.RowIndex).Cells("今回請求金額計").Value = 0
-                Exit Sub
+            '操作したカラム名を取得
+            Dim currentColumn As String = DgvAdd.Columns(e.ColumnIndex).Name
+
+            If currentColumn = "今回請求金額計" Then  'Cellが今回請求金額計の場合
+
+                '各項目の属性チェック
+                If Not IsNumeric(DgvAdd.Rows(e.RowIndex).Cells("今回請求金額計").Value) And (DgvAdd.Rows(e.RowIndex).Cells("今回請求金額計").Value IsNot Nothing) Then
+                    _msgHd.dspMSG("IsNotNumeric", frmC01F10_Login.loginValue.Language)
+                    DgvAdd.Rows(e.RowIndex).Cells("今回請求金額計").Value = 0
+                    Exit Sub
+                End If
+
+                Dim decTmp As Decimal = DgvAdd.Rows(e.RowIndex).Cells("今回請求金額計").Value
+                DgvAdd.Rows(e.RowIndex).Cells("今回請求金額計").Value = decTmp.ToString("N2")
             End If
-
-            Dim decTmp As Decimal = DgvAdd.Rows(e.RowIndex).Cells("今回請求金額計").Value
-            DgvAdd.Rows(e.RowIndex).Cells("今回請求金額計").Value = decTmp.ToString("N2")
-
         End If
     End Sub
 
