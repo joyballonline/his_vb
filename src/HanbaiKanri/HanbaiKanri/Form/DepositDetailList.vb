@@ -370,11 +370,11 @@ Public Class DepositDetailList
     '入金取消処理
     Private Sub BtnBillingCancel_Click(sender As Object, e As EventArgs) Handles BtnDepositCancel.Click
 
-        '明細表示時、または対象データがない場合は取消操作不可能
-        If RbtnDetails.Checked Or DgvBilling.Rows.Count = 0 Then
+        '対象データがない場合は取消操作不可能
+        If DgvBilling.Rows.Count = 0 Then
 
             '操作できないアラートを出す
-            _msgHd.dspMSG("chkDetailsCancel", frmC01F10_Login.loginValue.Language)
+            _msgHd.dspMSG("NonAction", frmC01F10_Login.loginValue.Language)
             Return
 
         End If
@@ -383,7 +383,7 @@ Public Class DepositDetailList
         If RbtnDetails.Checked Then
 
             '操作できないアラートを出す
-            _msgHd.dspMSG("NonAction", frmC01F10_Login.loginValue.Language)
+            _msgHd.dspMSG("chkDetailsCancel", frmC01F10_Login.loginValue.Language)
             Return
         End If
 
@@ -474,10 +474,8 @@ Public Class DepositDetailList
             'Dim strNyukinGaku_g As Decimal = dsNkinhd.Tables(RS).Rows(0)("入金額計_外貨")
 
 
-            't27_nkinkshihd
-            Sql = " AND 入金番号 ='" & DgvBilling.Rows(DgvBilling.CurrentCell.RowIndex).Cells("入金番号").Value & "'"
-
             '入金消込から請求番号を取得
+            Sql = " AND 入金番号 ='" & DgvBilling.Rows(DgvBilling.CurrentCell.RowIndex).Cells("入金番号").Value & "'"
             Dim dsNkinkshihd As DataSet = getDsData("t27_nkinkshihd", Sql)
 
 
@@ -491,9 +489,8 @@ Public Class DepositDetailList
                 Dim strNyukinGaku_g As Decimal = dsNkinkshihd.Tables(RS).Rows(i)("入金消込額計_外貨")
 
 
-                Sql = " AND 請求番号 ='" & dsNkinkshihd.Tables(RS).Rows(i)("請求番号") & "'"
-
                 '請求基本から受注番号を取得
+                Sql = " AND 請求番号 ='" & dsNkinkshihd.Tables(RS).Rows(i)("請求番号") & "'"
                 Dim dsSkyuhd As DataSet = getDsData("t23_skyuhd", Sql)
 
 

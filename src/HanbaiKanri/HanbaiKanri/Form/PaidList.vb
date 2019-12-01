@@ -335,6 +335,7 @@ Public Class PaidList
                 Else
                     DgvHtyhd.Columns.Add("取消", "取消")
                     DgvHtyhd.Columns.Add("支払番号", "支払番号")
+                    DgvHtyhd.Columns.Add("買掛番号", "買掛番号")
                     DgvHtyhd.Columns.Add("支払日", "支払日")
                     DgvHtyhd.Columns.Add("支払先名", "支払先名")
                     DgvHtyhd.Columns.Add("支払金額計", "支払金額計")
@@ -442,14 +443,25 @@ Public Class PaidList
     '支払取消処理
     Private Sub BtnPurchaseCancel_Click(sender As Object, e As EventArgs) Handles BtnCancel.Click
 
-        '明細表示時、または対象データがない場合は取消操作不可能
-        If RbtnDetails.Checked Or DgvHtyhd.Rows.Count = 0 Then
+        '対象データがない場合は取消操作不可能
+        If DgvHtyhd.Rows.Count = 0 Then
+
+            '操作できないアラートを出す
+            _msgHd.dspMSG("NonAction", frmC01F10_Login.loginValue.Language)
+            Return
+
+        End If
+
+
+        '明細表示時は取消操作不可能
+        If RbtnDetails.Checked Then
 
             '操作できないアラートを出す
             _msgHd.dspMSG("chkDetailsCancel", frmC01F10_Login.loginValue.Language)
             Return
 
         End If
+
 
         '取消済みデータは取消操作不可能
         If DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("取消").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_JPN, CommonConst.CANCEL_KBN_JPN_TXT, CommonConst.CANCEL_KBN_ENG_TXT) Then
@@ -491,6 +503,9 @@ Public Class PaidList
 
         If ds.Tables(RS).Rows(0)("更新日") = DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("更新日").Value Then
 
+
+#Region "t47_shrihd"
+
             Sql = "UPDATE Public.t47_shrihd "
             Sql += "SET "
 
@@ -505,25 +520,10 @@ Public Class PaidList
             '支払基本を更新
             _db.executeDB(Sql)
 
-            Sql = " AND 支払番号 ='" & DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("支払番号").Value & "'"
+#End Region
 
-            '支払基本から支払金額計を取得
-            Dim dstShrihd As DataSet = getDsData("t47_shrihd", Sql)
-            Dim strSiharaiGaku As Decimal = dstShrihd.Tables(RS).Rows(0)("支払金額計_外貨")
 
-            Sql = " AND 支払番号 ='" & DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("支払番号").Value & "'"
-
-            '支払消込から買掛番号を取得
-            Dim dsShrikshihd As DataSet = getDsData("t49_shrikshihd", Sql)
-
-            Sql = " AND 買掛番号 ='" & dsShrikshihd.Tables(RS).Rows(0)("買掛番号") & "' "
-
-            '買掛基本から金額を取得
-            Dim dsKikehd As DataSet = getDsData("t46_kikehd", Sql)
-
-            Dim decKaikakeZan As Decimal = dsKikehd.Tables(RS).Rows(0)("買掛残高_外貨") + strSiharaiGaku
-            Dim decSiharaiKei As Decimal = dsKikehd.Tables(RS).Rows(0)("支払金額計_外貨") - strSiharaiGaku
-
+#Region "t49_shrikshihd"
 
             Sql = "UPDATE Public.t49_shrikshihd "
             Sql += "SET "
@@ -539,20 +539,69 @@ Public Class PaidList
             '支払消込基本を更新
             _db.executeDB(Sql)
 
-            Sql = "UPDATE Public.t46_kikehd "
-            Sql += "SET "
+#End Region
 
-            Sql += "買掛残高_外貨 = " & UtilClass.formatNumber(decKaikakeZan) '買掛残高を増やす
-            Sql += ", 支払金額計_外貨 = " & UtilClass.formatNumber(decSiharaiKei) '支払金額計を減らす
-            Sql += ", 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
-            Sql += ", 更新日 = '" & dtNow & "'"
 
-            Sql += "WHERE 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Sql += " AND 買掛番号 ='" & dsShrikshihd.Tables(RS).Rows(0)("買掛番号") & "'"
+            'Sql = " AND 支払番号 ='" & DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("支払番号").Value & "'"
 
-            '買掛基本を更新
-            _db.executeDB(Sql)
+            ''支払基本から支払金額計を取得
+            'Dim dstShrihd As DataSet = getDsData("t47_shrihd", Sql)
+            'Dim strSiharaiGaku As Decimal = dstShrihd.Tables(RS).Rows(0)("支払金額計_外貨")
 
+
+            '支払消込から買掛番号を取得
+            Sql = " AND 支払番号 ='" & DgvHtyhd.Rows(DgvHtyhd.CurrentCell.RowIndex).Cells("支払番号").Value & "'"
+            Dim dsShrikshihd As DataSet = getDsData("t49_shrikshihd", Sql)
+
+
+            For i As Integer = 0 To dsShrikshihd.Tables(RS).Rows.Count - 1
+
+
+#Region "t46_kikehd"
+
+                Dim strSiharaiGaku As Decimal = dsShrikshihd.Tables(RS).Rows(i)("支払消込額計")
+                Dim strSiharaiGaku_g As Decimal = dsShrikshihd.Tables(RS).Rows(i)("支払消込額計_外貨")
+
+
+                '買掛基本から金額を取得
+                Sql = " AND 買掛番号 ='" & dsShrikshihd.Tables(RS).Rows(i)("買掛番号") & "' "
+                Dim dsKikehd As DataSet = getDsData("t46_kikehd", Sql)
+
+
+                Dim decKaikakeZan As Decimal = dsKikehd.Tables(RS).Rows(0)("買掛残高") + strSiharaiGaku
+                Dim decKaikakeZan_g As Decimal = dsKikehd.Tables(RS).Rows(0)("買掛残高_外貨") + strSiharaiGaku_g
+
+                Dim decSiharaiKei As Decimal = dsKikehd.Tables(RS).Rows(0)("支払金額計") - strSiharaiGaku
+                Dim decSiharaiKei_g As Decimal = dsKikehd.Tables(RS).Rows(0)("支払金額計_外貨") - strSiharaiGaku_g
+
+
+                Sql = "UPDATE Public.t46_kikehd "
+                Sql += "SET "
+
+                Sql += "  買掛残高 = " & UtilClass.formatNumber(decKaikakeZan)      '買掛残高を増やす
+                Sql += ", 買掛残高_外貨 = " & UtilClass.formatNumber(decKaikakeZan_g)
+                Sql += ", 支払金額計 = " & UtilClass.formatNumber(decSiharaiKei)    '支払金額計を減らす
+                Sql += ", 支払金額計_外貨 = " & UtilClass.formatNumber(decSiharaiKei_g)
+                Sql += ", 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+                Sql += ", 更新日 = '" & dtNow & "'"
+
+                '買掛が残るなら入金完了日は削除する
+                If dsKikehd.Tables(RS).Rows(0)("買掛金額計") <> FormatNumber(decSiharaiKei) Then
+                    Sql += ", 支払完了日 = NULL "
+                End If
+
+                Sql += "WHERE 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
+                Sql += " AND 買掛番号 ='" & dsShrikshihd.Tables(RS).Rows(i)("買掛番号") & "'"
+
+                '買掛基本を更新
+                _db.executeDB(Sql)
+
+#End Region
+
+            Next
+
+
+#Region "t81_shiwakeshi"
 
             't81_shiwakeshi
             Sql = "UPDATE Public.t81_shiwakeshi "
@@ -568,6 +617,8 @@ Public Class PaidList
 
             '支払基本を更新
             _db.executeDB(Sql)
+
+#End Region
 
 
             setDgvHtyhd()
