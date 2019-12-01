@@ -154,6 +154,7 @@ Public Class BillingManagement
             DgvCymndt.Columns("売上数量").HeaderText = "SalesQuantity"
             DgvCymndt.Columns("売上単価").HeaderText = "SellingPrice"
             DgvCymndt.Columns("売上金額").HeaderText = "SalesAmount"
+            DgvCymndt.Columns("請求").HeaderText = "Billing"
 
             'DgvHistory.Columns("請求番号").HeaderText = "InvoiceNumber"
             DgvHistory.Columns("請求番号").HeaderText = "SalesInvoiceNo"
@@ -303,6 +304,8 @@ Public Class BillingManagement
         DgvCymn.Rows(0).Cells("請求金額計").Value = BillingAmount
         DgvCymn.Rows(0).Cells("請求残高").Value = (total - BillingAmount).ToString("N2")
 
+
+
         '数字形式
         DgvCymn.Columns("受注金額").DefaultCellStyle.Format = "N2"
         DgvCymn.Columns("請求金額計").DefaultCellStyle.Format = "N2"
@@ -311,6 +314,7 @@ Public Class BillingManagement
         '#633 のためコメントアウト
         'DtpBillingDate.MinDate = dsCymnhd.Tables(RS).Rows(0)("受注日").ToShortDateString()
         'DtpDepositDate.MinDate = dsCymnhd.Tables(RS).Rows(0)("受注日").ToShortDateString()
+
 
         '受注明細データから対象のデータの詳細を表示
         For i As Integer = 0 To dsCymndt.Tables(RS).Rows.Count - 1
@@ -327,6 +331,10 @@ Public Class BillingManagement
             'VATを加算
             DgvCymndt.Rows(i).Cells("売上金額").Value = dsCymndt.Tables(RS).Rows(i)("見積金額_外貨") _
                                                       + (dsCymndt.Tables(RS).Rows(i)("見積金額_外貨") * dsCymnhd.Tables(RS).Rows(0)("ＶＡＴ") / 100)
+
+            'チェックボックス
+            DgvCymndt.Rows(i).Cells("請求").Value = False
+
         Next
 
         '数字形式
@@ -710,6 +718,54 @@ Public Class BillingManagement
                 DgvAdd.Rows(e.RowIndex).Cells("今回請求金額計").Value = decTmp.ToString("N2")
             End If
         End If
+    End Sub
+
+
+    'CurrentCellDirtyStateChangedイベントハンドラ
+    Private Sub DataGridView1_CurrentCellDirtyStateChanged(
+        ByVal sender As Object, ByVal e As EventArgs) _
+        Handles DgvCymndt.CurrentCellDirtyStateChanged
+
+        If DgvCymndt.CurrentCellAddress.X = 9 AndAlso  '請求フラグが更新であれば「DgvCymndt_CellValueChanged」へ
+        DgvCymndt.IsCurrentCellDirty Then
+            'コミットする
+            DgvCymndt.CommitEdit(DataGridViewDataErrorContexts.Commit)
+        End If
+    End Sub
+
+
+    Private Sub DgvCymndt_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles DgvCymndt.CellValueChanged
+
+        'ヘッダー以外だったら
+        If e.RowIndex > -1 Then
+
+            '請求データがない場合は終了
+            If DgvAdd.Rows.Count = 0 Then
+                Exit Sub
+            End If
+
+
+            '操作したカラム名を取得
+            Dim currentColumn As String = DgvCymndt.Columns(e.ColumnIndex).Name
+
+            If currentColumn = "請求" Then  '請求フラグの更新の場合
+
+                Dim decUriSum As Decimal = 0
+
+                For i As Integer = 0 To DgvCymndt.Rows.Count - 1  '受注明細をループ
+
+                    'チェックがあるデータの売上金額を合計
+                    If DgvCymndt.Rows(i).Cells("請求").Value = True Then
+                        decUriSum += DgvCymndt.Rows(i).Cells("売上金額").Value
+                    Else
+                    End If
+                Next
+
+                DgvAdd.Rows(0).Cells("今回請求金額計").Value = decUriSum  '今回請求額
+
+            End If
+        End If
+
     End Sub
 
 End Class
