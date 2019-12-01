@@ -427,6 +427,9 @@ Public Class DepositDetailList
 
         If ds.Tables(RS).Rows(0)("更新日") = DgvBilling.Rows(DgvBilling.CurrentCell.RowIndex).Cells("更新日").Value Then
 
+
+#Region "t25_nkinhd"
+
             Sql = "UPDATE Public.t25_nkinhd "
             Sql += " SET "
 
@@ -441,25 +444,10 @@ Public Class DepositDetailList
             '入金基本を更新
             _db.executeDB(Sql)
 
-            Sql = " AND 入金番号 ='" & DgvBilling.Rows(DgvBilling.CurrentCell.RowIndex).Cells("入金番号").Value & "'"
-
-            '入金基本から入金額を取得
-            Dim dsNkinhd As DataSet = getDsData("t25_nkinhd", Sql)
-            Dim strNyukinGaku As Decimal = dsNkinhd.Tables(RS).Rows(0)("入金額")
-
-            Sql = " AND 入金番号 ='" & DgvBilling.Rows(DgvBilling.CurrentCell.RowIndex).Cells("入金番号").Value & "'"
-
-            '入金消込から請求番号を取得
-            Dim dsNkinkshihd As DataSet = getDsData("t27_nkinkshihd", Sql)
+#End Region
 
 
-            Sql = " AND 請求番号 ='" & dsNkinkshihd.Tables(RS).Rows(0)("請求番号") & "'"
-
-            '請求基本から受注番号を取得
-            Dim dsSkyuhd As DataSet = getDsData("t23_skyuhd", Sql)
-
-            Dim decUrikakeZan As Decimal = dsSkyuhd.Tables(RS).Rows(0)("売掛残高") + strNyukinGaku
-            Dim decNyukinKei As Decimal = dsSkyuhd.Tables(RS).Rows(0)("入金額計") - strNyukinGaku
+#Region "t27_nkinkshihd"
 
             Sql = "UPDATE Public.t27_nkinkshihd "
             Sql += "SET "
@@ -475,27 +463,79 @@ Public Class DepositDetailList
             '入金消込基本を更新
             _db.executeDB(Sql)
 
-            Dim nfi As NumberFormatInfo = New CultureInfo(CommonConst.CI_JP, False).NumberFormat
+#End Region
 
-            Sql = "UPDATE Public.t23_skyuhd "
-            Sql += "SET "
 
-            Sql += "売掛残高 = " & UtilClass.formatNumber(decUrikakeZan) '売掛残高を増やす
-            Sql += ", 入金額計 = " & UtilClass.formatNumber(decNyukinKei) '入金額計を減らす
-            Sql += ", 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
-            Sql += ", 更新日 = '" & dtNow & "'"
+            'Sql = " AND 入金番号 ='" & DgvBilling.Rows(DgvBilling.CurrentCell.RowIndex).Cells("入金番号").Value & "'"
 
-            '売掛が残るなら入金完了日は削除する
-            If dsSkyuhd.Tables(RS).Rows(0)("請求金額計") <> formatNumber(decNyukinKei) Then
-                Sql += ", 入金完了日 = NULL "
-            End If
+            ''入金基本から入金額を取得
+            'Dim dsNkinhd As DataSet = getDsData("t25_nkinhd", Sql)
+            'Dim strNyukinGaku As Decimal = dsNkinhd.Tables(RS).Rows(0)("入金額")
+            'Dim strNyukinGaku_g As Decimal = dsNkinhd.Tables(RS).Rows(0)("入金額計_外貨")
 
-            Sql += " WHERE 会社コード='" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Sql += " AND 請求番号 ='" & dsNkinkshihd.Tables(RS).Rows(0)("請求番号") & "' "
 
-            '請求基本を更新
-            _db.executeDB(Sql)
+            't27_nkinkshihd
+            Sql = " AND 入金番号 ='" & DgvBilling.Rows(DgvBilling.CurrentCell.RowIndex).Cells("入金番号").Value & "'"
 
+            '入金消込から請求番号を取得
+            Dim dsNkinkshihd As DataSet = getDsData("t27_nkinkshihd", Sql)
+
+
+            '入金消込を請求書データ分ループ
+            For i As Integer = 0 To dsNkinkshihd.Tables(RS).Rows.Count - 1
+
+
+#Region "t23_skyuhd"
+
+                Dim strNyukinGaku As Decimal = dsNkinkshihd.Tables(RS).Rows(i)("入金消込額計")
+                Dim strNyukinGaku_g As Decimal = dsNkinkshihd.Tables(RS).Rows(i)("入金消込額計_外貨")
+
+
+                Sql = " AND 請求番号 ='" & dsNkinkshihd.Tables(RS).Rows(i)("請求番号") & "'"
+
+                '請求基本から受注番号を取得
+                Dim dsSkyuhd As DataSet = getDsData("t23_skyuhd", Sql)
+
+
+                Dim decUrikakeZan As Decimal = dsSkyuhd.Tables(RS).Rows(0)("売掛残高") + strNyukinGaku
+                Dim decUrikakeZan_g As Decimal = dsSkyuhd.Tables(RS).Rows(0)("売掛残高_外貨") + strNyukinGaku_g
+
+                Dim decNyukinKei As Decimal = dsSkyuhd.Tables(RS).Rows(0)("入金額計") - strNyukinGaku
+                Dim decNyukinKei_g As Decimal = dsSkyuhd.Tables(RS).Rows(0)("入金額計_外貨") - strNyukinGaku_g
+
+
+                Dim nfi As NumberFormatInfo = New CultureInfo(CommonConst.CI_JP, False).NumberFormat
+
+
+                Sql = "UPDATE Public.t23_skyuhd "
+                Sql += "SET "
+
+                Sql += "  売掛残高 = " & UtilClass.formatNumber(decUrikakeZan)      '売掛残高を増やす
+                Sql += ", 売掛残高_外貨 = " & UtilClass.formatNumber(decUrikakeZan_g)
+
+                Sql += ", 入金額計 = " & UtilClass.formatNumber(decNyukinKei)      '入金額計を減らす
+                Sql += ", 入金額計_外貨 = " & UtilClass.formatNumber(decNyukinKei_g)
+
+                Sql += ", 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+                Sql += ", 更新日 = '" & dtNow & "'"
+
+                '売掛が残るなら入金完了日は削除する
+                If dsSkyuhd.Tables(RS).Rows(0)("請求金額計") <> FormatNumber(decNyukinKei) Then
+                    Sql += ", 入金完了日 = NULL "
+                End If
+
+                Sql += " WHERE 会社コード='" & frmC01F10_Login.loginValue.BumonCD & "'"
+                Sql += " AND 請求番号 ='" & dsNkinkshihd.Tables(RS).Rows(i)("請求番号") & "' "
+
+                '請求基本を更新
+                _db.executeDB(Sql)
+
+#End Region
+
+            Next
+
+
+#Region "t80_shiwakenyu"
 
             't80_shiwakenyu
             Sql = "UPDATE Public.t80_shiwakenyu "
@@ -512,7 +552,7 @@ Public Class DepositDetailList
             '入金基本を更新
             _db.executeDB(Sql)
 
-
+#End Region
 
             setDgvBilling()
 
