@@ -84,7 +84,7 @@ Namespace API
         ''' <param name="prmKeyName">項目名</param>
         ''' <returns>取得値</returns>
         ''' <remarks>（処理概要）通知されたセクション名/項目名に対応した設定値を取得する</remarks>
-        Public Function getIni(ByVal prmAppName As String, ByVal prmKeyName As String) As String
+        Public Function getIni(ByVal prmAppName As String, ByVal prmKeyName As String, Optional ByVal prmDefault As String = "") As String
 
             Dim sb As StringBuilder
             sb = New StringBuilder(1024)
@@ -92,12 +92,15 @@ Namespace API
             Dim rtnCode As Integer
             Dim rtnStr As String = ""
             Dim ini As String = _iniFilePath
+            If prmDefault = "" Then
+                prmDefault = DEFAULTVALUE
+            End If
             'APIコール
-            rtnCode = GetPrivateProfileString(prmAppName, prmKeyName, DEFAULTVALUE, sb, sb.Capacity, ini)
+            rtnCode = GetPrivateProfileString(prmAppName, prmKeyName, prmDefault, sb, sb.Capacity, ini)
             rtnStr = sb.ToString()                                                 '読込内容取得
 
             If rtnCode < 1 Or rtnStr = DEFAULTVALUE Then                          '読込内容チェック
-                Dim tex As UsrDefException = New UsrDefException("INIファイル読み込みエラー" & ControlChars.NewLine & _
+                Dim tex As UsrDefException = New UsrDefException("INIファイル読み込みエラー" & ControlChars.NewLine &
                                                      "Iniファイル・セクション・キーの存在を確認してください。")
                 Debug.WriteLine(tex.Message)
                 Throw tex

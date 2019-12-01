@@ -184,7 +184,7 @@ Public Class UtilProgresBarCancelable
         btnCancel.Name = "btnCancel"
         btnCancel.Size = New System.Drawing.Size(101, 23)
         btnCancel.TabIndex = 1
-        btnCancel.Text = "キャンセル(&C)"
+        btnCancel.Text = "Cancel(&C)"
         btnCancel.UseVisualStyleBackColor = True
         btnCancel.Cursor = Cursors.Default
         Me.Controls.Add(btnCancel)
@@ -196,7 +196,7 @@ Public Class UtilProgresBarCancelable
 
     Public Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
         '_hd.noticeCancel = True
-        Throw New UtilProgressBarCancelEx("キャンセル実行")
+        Throw New UtilProgressBarCancelEx("Cancel!")
     End Sub
 
     'Private Sub btnCancel_MouseHover(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnCancel.MouseHover

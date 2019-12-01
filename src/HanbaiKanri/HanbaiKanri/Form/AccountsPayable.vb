@@ -183,6 +183,11 @@ Public Class AccountsPayable
             DgvCymndt.Columns("仕入数量").HeaderText = "PurchaseQuantity" & vbCrLf & "f"
             DgvCymndt.Columns("仕入単価").HeaderText = "PurchaseUnitPrice" & vbCrLf & "g"
             DgvCymndt.Columns("仕入金額").HeaderText = "PurchaseCost" & vbCrLf & "h=f*g"
+            DgvCymndt.Columns("VAT").HeaderText = "VAT-IN"
+            DgvCymndt.Columns("仕入金額計").HeaderText = "PurchaseCostSum"
+
+            DgvCymndt.Columns("買掛").HeaderText = "Payable"
+
 
             DgvHistory.Columns("買掛番号").HeaderText = "AccountsPayableNumber"
             DgvHistory.Columns("買掛日").HeaderText = "AccountsPayableDate"
@@ -271,6 +276,8 @@ Public Class AccountsPayable
         DgvCymndt.Columns("仕入数量").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
         DgvCymndt.Columns("仕入単価").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
         DgvCymndt.Columns("仕入金額").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        'DgvCymndt.Columns("VAT").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        'DgvCymndt.Columns("仕入金額計").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
         DgvHistory.Columns("買掛番号").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
         DgvHistory.Columns("買掛日").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
@@ -298,6 +305,8 @@ Public Class AccountsPayable
         DgvCymndt.Columns("仕入数量").DefaultCellStyle.Format = "N2"
         DgvCymndt.Columns("仕入単価").DefaultCellStyle.Format = "N2"
         DgvCymndt.Columns("仕入金額").DefaultCellStyle.Format = "N2"
+        DgvCymndt.Columns("VAT").DefaultCellStyle.Format = "N2"
+        DgvCymndt.Columns("仕入金額計").DefaultCellStyle.Format = "N2"
 
         DgvHistory.Columns("買掛金額").DefaultCellStyle.Format = "N2"
 
@@ -307,6 +316,9 @@ Public Class AccountsPayable
         '右寄せ
         DgvCymn.Columns("仕入原価").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DgvCymn.Columns("VAT_IN").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+        DgvCymndt.Columns("VAT").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DgvCymndt.Columns("仕入金額計").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
 
         '今回買掛の初期カーソル位置
@@ -436,6 +448,10 @@ Public Class AccountsPayable
             DgvCymndt.Rows(i).Cells("仕入数量").Value = dsHattyudt.Tables(RS).Rows(i)("発注数量")
             DgvCymndt.Rows(i).Cells("仕入単価").Value = dsHattyudt.Tables(RS).Rows(i)("仕入値_外貨")
             DgvCymndt.Rows(i).Cells("仕入金額").Value = dsHattyudt.Tables(RS).Rows(i)("仕入値_外貨") * dsHattyudt.Tables(RS).Rows(i)("発注数量")
+            DgvCymndt.Rows(i).Cells("VAT").Value = (DgvCymndt.Rows(i).Cells("仕入金額").Value * dsHattyu.Tables(RS).Rows(0)("VAT") / 100)
+            DgvCymndt.Rows(i).Cells("仕入金額計").Value = DgvCymndt.Rows(i).Cells("仕入金額").Value + DgvCymndt.Rows(i).Cells("VAT").Value
+
+            DgvCymndt.Rows(i).Cells("買掛").Value = False
         Next
 
         TxtHattyudtCount.Text = dsHattyudt.Tables(RS).Rows.Count
@@ -794,5 +810,52 @@ Public Class AccountsPayable
         '初期表示に選択状態じゃなくする
         DgvCymn.CurrentCell = Nothing
         DgvCymndt.CurrentCell = Nothing
+    End Sub
+
+
+    'CurrentCellDirtyStateChangedイベントハンドラ
+    Private Sub DataGridView1_CurrentCellDirtyStateChanged(
+        ByVal sender As Object, ByVal e As EventArgs) _
+        Handles DgvCymndt.CurrentCellDirtyStateChanged
+
+        If DgvCymndt.CurrentCellAddress.X = 10 AndAlso  '買掛フラグが更新であれば「DgvCymndt_CellValueChanged」へ
+        DgvCymndt.IsCurrentCellDirty Then
+            'コミットする
+            DgvCymndt.CommitEdit(DataGridViewDataErrorContexts.Commit)
+        End If
+    End Sub
+
+
+    Private Sub DgvCymndt_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles DgvCymndt.CellValueChanged
+
+        'ヘッダー以外だったら
+        If e.RowIndex > -1 Then
+
+            '買掛データがない場合は終了
+            If DgvAdd.Rows.Count = 0 Then
+                Exit Sub
+            End If
+
+
+            '操作したカラム名を取得
+            Dim currentColumn As String = DgvCymndt.Columns(e.ColumnIndex).Name
+
+            If currentColumn = "買掛" Then  '買掛フラグの更新の場合
+
+                Dim decShiireSum As Decimal = 0
+
+                For i As Integer = 0 To DgvCymndt.Rows.Count - 1  '発注明細をループ
+
+                    'チェックがあるデータの仕入原価（仕入金額）を合計
+                    If DgvCymndt.Rows(i).Cells("買掛").Value = True Then
+                        decShiireSum += DgvCymndt.Rows(i).Cells("仕入金額計").Value
+                    Else
+                    End If
+                Next
+
+                DgvAdd.Rows(0).Cells("今回買掛金額計").Value = decShiireSum  '今回登録額
+
+            End If
+        End If
     End Sub
 End Class

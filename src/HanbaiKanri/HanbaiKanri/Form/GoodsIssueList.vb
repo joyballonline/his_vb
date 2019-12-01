@@ -491,6 +491,10 @@ Public Class GoodsIssueList
             Return
         End If
 
+        Dim openForm As Form = Nothing
+        openForm = New ReturnReason(_msgHd, _db, _langHd, DgvCymnhd.CurrentCell.RowIndex, Me)   '処理選択
+        openForm.ShowDialog(Me)
+
         '取消確認のアラート
         Dim result As DialogResult = _msgHd.dspMSG("confirmCancel", frmC01F10_Login.loginValue.Language)
 
@@ -694,7 +698,11 @@ Public Class GoodsIssueList
             Sql += "更新者"
             Sql += " = '"
             Sql += frmC01F10_Login.loginValue.TantoNM
-            Sql += " ' "
+            Sql += "', "
+            Sql += "備考"
+            Sql += " = '"
+            Sql += DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("備考").Value
+            Sql += "' "
 
             Sql += "WHERE"
             Sql += " 会社コード"

@@ -659,7 +659,7 @@ Dim RtnDir As String = UtilDirectorySelector.choiceFolder("C:\WINDOWS", "○○�
  <param name="prmFileName">対象とするIniファイル名(フルパス)</param>
  <remarks></remarks>
 </member>
-<member name="M:UtilMDL.API.UtilIniFileHandler.getIni(System.String,System.String)">
+<member name="M:UtilMDL.API.UtilIniFileHandler.getIni(System.String,System.String,System.String)">
  <summary>
  項目取得
  </summary>
