@@ -20,6 +20,7 @@ Imports UtilMDL.DataGridView
 Imports UtilMDL.FileDirectory
 Imports UtilMDL.xls
 Imports System.Net
+Imports System.Runtime.InteropServices
 
 Public Class frmC01F30_Menu
     Inherits System.Windows.Forms.Form
@@ -83,6 +84,8 @@ Public Class frmC01F30_Menu
         'Me.cmdExit.Text = _langHd.getLANG("Exit(B)", frmC01F10_Login.loginValue.Language)
         'Me.BtnPurchase.Text = _langHd.getLANG("Purchase", frmC01F10_Login.loginValue.Language)
 
+        Timer1.Interval = 5 * 60 * 1000 'StartUp._iniVal.poolingtime
+        Timer1.Start()
 
         _init = True
 
@@ -161,6 +164,7 @@ Public Class frmC01F30_Menu
         Me.gbH07 = New System.Windows.Forms.GroupBox()
         Me.TabPage6 = New System.Windows.Forms.TabPage()
         Me.TableLayoutPanel28 = New System.Windows.Forms.TableLayoutPanel()
+        Me.gbH16 = New System.Windows.Forms.GroupBox()
         Me.gbH15 = New System.Windows.Forms.GroupBox()
         Me.gbH13 = New System.Windows.Forms.GroupBox()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
@@ -169,7 +173,7 @@ Public Class frmC01F30_Menu
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.BtnLogout = New System.Windows.Forms.Button()
         Me.BtnInformation = New System.Windows.Forms.Button()
-        Me.gbH16 = New System.Windows.Forms.GroupBox()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         CType(Me.dgvLIST, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabProcessingMenu.SuspendLayout()
         Me.TabGeneral.SuspendLayout()
@@ -194,7 +198,7 @@ Public Class frmC01F30_Menu
         'btnSelect
         '
         Me.btnSelect.Enabled = False
-        Me.btnSelect.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.btnSelect.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.btnSelect.Location = New System.Drawing.Point(1140, 501)
         Me.btnSelect.Name = "btnSelect"
         Me.btnSelect.Size = New System.Drawing.Size(94, 48)
@@ -204,7 +208,7 @@ Public Class frmC01F30_Menu
         '
         'cmdExit
         '
-        Me.cmdExit.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.cmdExit.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.cmdExit.Location = New System.Drawing.Point(1240, 501)
         Me.cmdExit.Name = "cmdExit"
         Me.cmdExit.Size = New System.Drawing.Size(94, 48)
@@ -330,7 +334,7 @@ Public Class frmC01F30_Menu
         '
         '処理ID
         '
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("MS PGothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.処理ID.DefaultCellStyle = DataGridViewCellStyle2
         Me.処理ID.HeaderText = "処理ID"
         Me.処理ID.Name = "処理ID"
@@ -341,7 +345,7 @@ Public Class frmC01F30_Menu
         '
         '業務
         '
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("MS PGothic", 11.25!)
         Me.業務.DefaultCellStyle = DataGridViewCellStyle3
         Me.業務.HeaderText = "業務"
         Me.業務.Name = "業務"
@@ -351,7 +355,7 @@ Public Class frmC01F30_Menu
         '
         '処理名
         '
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("MS PGothic", 11.25!)
         Me.処理名.DefaultCellStyle = DataGridViewCellStyle4
         Me.処理名.HeaderText = "処理名"
         Me.処理名.Name = "処理名"
@@ -361,7 +365,7 @@ Public Class frmC01F30_Menu
         '
         '説明
         '
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("MS PGothic", 11.25!)
         Me.説明.DefaultCellStyle = DataGridViewCellStyle5
         Me.説明.HeaderText = "説明"
         Me.説明.Name = "説明"
@@ -372,7 +376,7 @@ Public Class frmC01F30_Menu
         'My前回操作日時
         '
         DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("MS PGothic", 11.25!)
         Me.My前回操作日時.DefaultCellStyle = DataGridViewCellStyle6
         Me.My前回操作日時.HeaderText = " My前回操作日時"
         Me.My前回操作日時.Name = "My前回操作日時"
@@ -383,7 +387,7 @@ Public Class frmC01F30_Menu
         '
         '操作者
         '
-        DataGridViewCellStyle7.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("MS PGothic", 11.25!)
         Me.操作者.DefaultCellStyle = DataGridViewCellStyle7
         Me.操作者.HeaderText = "　操作者"
         Me.操作者.Name = "操作者"
@@ -395,7 +399,7 @@ Public Class frmC01F30_Menu
         '前回操作日時
         '
         DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle8.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        DataGridViewCellStyle8.Font = New System.Drawing.Font("MS PGothic", 11.25!)
         Me.前回操作日時.DefaultCellStyle = DataGridViewCellStyle8
         Me.前回操作日時.HeaderText = "前回操作日時"
         Me.前回操作日時.Name = "前回操作日時"
@@ -500,7 +504,7 @@ Public Class frmC01F30_Menu
         '
         'DataGridViewTextBoxColumn1
         '
-        DataGridViewCellStyle10.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle10.Font = New System.Drawing.Font("MS PGothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle10
         Me.DataGridViewTextBoxColumn1.HeaderText = "処理ID"
         Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
@@ -511,7 +515,7 @@ Public Class frmC01F30_Menu
         '
         'DataGridViewTextBoxColumn2
         '
-        DataGridViewCellStyle11.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        DataGridViewCellStyle11.Font = New System.Drawing.Font("MS PGothic", 11.25!)
         Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle11
         Me.DataGridViewTextBoxColumn2.HeaderText = "業務"
         Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
@@ -521,7 +525,7 @@ Public Class frmC01F30_Menu
         '
         'DataGridViewTextBoxColumn3
         '
-        DataGridViewCellStyle12.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        DataGridViewCellStyle12.Font = New System.Drawing.Font("MS PGothic", 11.25!)
         Me.DataGridViewTextBoxColumn3.DefaultCellStyle = DataGridViewCellStyle12
         Me.DataGridViewTextBoxColumn3.HeaderText = "処理名"
         Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
@@ -531,7 +535,7 @@ Public Class frmC01F30_Menu
         '
         'DataGridViewTextBoxColumn4
         '
-        DataGridViewCellStyle13.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        DataGridViewCellStyle13.Font = New System.Drawing.Font("MS PGothic", 11.25!)
         Me.DataGridViewTextBoxColumn4.DefaultCellStyle = DataGridViewCellStyle13
         Me.DataGridViewTextBoxColumn4.HeaderText = "説明"
         Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
@@ -542,7 +546,7 @@ Public Class frmC01F30_Menu
         'DataGridViewTextBoxColumn5
         '
         DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle14.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        DataGridViewCellStyle14.Font = New System.Drawing.Font("MS PGothic", 11.25!)
         Me.DataGridViewTextBoxColumn5.DefaultCellStyle = DataGridViewCellStyle14
         Me.DataGridViewTextBoxColumn5.HeaderText = " My前回操作日時"
         Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
@@ -553,7 +557,7 @@ Public Class frmC01F30_Menu
         '
         'DataGridViewTextBoxColumn6
         '
-        DataGridViewCellStyle15.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        DataGridViewCellStyle15.Font = New System.Drawing.Font("MS PGothic", 11.25!)
         Me.DataGridViewTextBoxColumn6.DefaultCellStyle = DataGridViewCellStyle15
         Me.DataGridViewTextBoxColumn6.HeaderText = "　操作者"
         Me.DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
@@ -565,7 +569,7 @@ Public Class frmC01F30_Menu
         'DataGridViewTextBoxColumn7
         '
         DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle16.Font = New System.Drawing.Font("ＭＳ Ｐゴシック", 11.25!)
+        DataGridViewCellStyle16.Font = New System.Drawing.Font("MS PGothic", 11.25!)
         Me.DataGridViewTextBoxColumn7.DefaultCellStyle = DataGridViewCellStyle16
         Me.DataGridViewTextBoxColumn7.HeaderText = "前回操作日時"
         Me.DataGridViewTextBoxColumn7.Name = "DataGridViewTextBoxColumn7"
@@ -859,6 +863,15 @@ Public Class frmC01F30_Menu
         Me.TableLayoutPanel28.Size = New System.Drawing.Size(1256, 428)
         Me.TableLayoutPanel28.TabIndex = 1
         '
+        'gbH16
+        '
+        Me.gbH16.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.gbH16.Location = New System.Drawing.Point(631, 3)
+        Me.gbH16.Name = "gbH16"
+        Me.gbH16.Size = New System.Drawing.Size(308, 422)
+        Me.gbH16.TabIndex = 34
+        Me.gbH16.TabStop = False
+        '
         'gbH15
         '
         Me.gbH15.Dock = System.Windows.Forms.DockStyle.Fill
@@ -926,7 +939,7 @@ Public Class frmC01F30_Menu
         '
         'BtnLogout
         '
-        Me.BtnLogout.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.BtnLogout.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnLogout.Location = New System.Drawing.Point(19, 501)
         Me.BtnLogout.Name = "BtnLogout"
         Me.BtnLogout.Size = New System.Drawing.Size(106, 48)
@@ -938,21 +951,17 @@ Public Class frmC01F30_Menu
         '
         Me.BtnInformation.BackgroundImage = Global.SPIN.My.Resources.Resources.information_icon
         Me.BtnInformation.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.BtnInformation.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.BtnInformation.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.BtnInformation.Location = New System.Drawing.Point(149, 501)
         Me.BtnInformation.Name = "BtnInformation"
         Me.BtnInformation.Size = New System.Drawing.Size(51, 48)
         Me.BtnInformation.TabIndex = 25
         Me.BtnInformation.UseVisualStyleBackColor = True
         '
-        'gbH16
+        'Timer1
         '
-        Me.gbH16.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.gbH16.Location = New System.Drawing.Point(631, 3)
-        Me.gbH16.Name = "gbH16"
-        Me.gbH16.Size = New System.Drawing.Size(308, 422)
-        Me.gbH16.TabIndex = 34
-        Me.gbH16.TabStop = False
+        Me.Timer1.Enabled = True
+        Me.Timer1.Interval = 1000
         '
         'frmC01F30_Menu
         '
@@ -2338,6 +2347,39 @@ Public Class frmC01F30_Menu
         openForm = New Information(_msgHd, _db, _langHd, Me)
         openForm.Show()
         Me.Hide()
+
+    End Sub
+
+    <StructLayout(LayoutKind.Sequential)> Public Structure LASTINPUTINFO
+        Public cbSize As UInteger
+        Public dwTime As UInteger
+    End Structure
+
+    <DllImport("user32")>
+    Public Shared Function GetLastInputInfo(ByRef x As LASTINPUTINFO) As <MarshalAs(UnmanagedType.Bool)> Boolean
+        ' Leave the body of the function empty.
+    End Function
+
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+
+        Dim x As LASTINPUTINFO
+        Dim i As Integer
+        x.cbSize = Marshal.SizeOf(x)
+        If GetLastInputInfo(x) Then
+            'i = x.dwTime Mod Int32.MaxValue
+            i = (System.Environment.TickCount - x.dwTime)
+        Else
+            i = 0
+        End If
+
+        If i > StartUp._iniVal.timeout Then
+            Dim m As System.Threading.Mutex = New System.Threading.Mutex(False, "HanbaiKanri")
+            m.ReleaseMutex()
+            m.Close()
+            Application.Restart()
+        Else
+            'MessageBox.Show(i.ToString, "B", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
 
     End Sub
 

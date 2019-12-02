@@ -798,7 +798,7 @@ Public Class PurchasingManagement
                 Sql4 += "', '"
                 Sql4 += DgvAdd.Rows(index).Cells("発注数量").Value.ToString '発注数量
                 Sql4 += "', '"
-                Sql4 += DgvAdd.Rows(index).Cells("仕入数量").Value.ToString '仕入数量
+                Sql4 += UtilClass.formatNumber(DgvAdd.Rows(index).Cells("仕入数量").Value.ToString) '仕入数量
                 Sql4 += "', '"
 
                 Dim OrderQ As Integer = DgvAdd.Rows(index).Cells("発注数量").Value

@@ -776,7 +776,7 @@ Public Class AccountsPayable
                 DgvAdd.Rows(e.RowIndex).Cells("今回買掛金額計").Value = decTmp
             End If
 
-            DgvAdd.Rows(e.RowIndex).Cells("今回備考1").Value = VendorInvoiceNumber.Text
+            'DgvAdd.Rows(e.RowIndex).Cells("今回備考1").Value = VendorInvoiceNumber.Text
 
         End If
 
@@ -857,5 +857,9 @@ Public Class AccountsPayable
 
             End If
         End If
+    End Sub
+
+    Private Sub VendorInvoiceNumber_Validated(sender As Object, e As EventArgs) Handles VendorInvoiceNumber.Validated
+        DgvAdd.Rows(0).Cells("今回備考1").Value = VendorInvoiceNumber.Text
     End Sub
 End Class
