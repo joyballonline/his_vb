@@ -47,8 +47,6 @@ Public Class StartUp
         Public PrintSelUpperCnt As Integer      '帳票出力指示画面検索時、警告表示する上限件数
         Public BaseXlsPath As String            'EXCEl出力の雛形フォルダパス
         Public OutXlsPath As String             'EXCEl出力先フォルダパス
-        Public key As String
-        Public timeout As Decimal
     End Structure
 
     '汎用マスタデータ格納用変数
@@ -552,10 +550,6 @@ Public Class StartUp
                 _iniVal.UserId_stby = ini.getIni(INIITEM1_DB_STBY, INIITEM2_USERID_STBY)
                 errXMLstrkey = "NonDbIniKey"
                 _iniVal.Password_stby = ini.getIni(INIITEM1_DB_STBY, INIITEM2_PASSWORD_STBY)
-                errXMLstrkey = "NonDbIniKey"
-                _iniVal.key = ini.getIni(INIITEM1_DB, "Key", "NotImplemented")
-                errXMLstrkey = "NonDbIniKey"
-                _iniVal.timeout = ini.getIni(INIITEM1_DB, "Timeout", "1800000")
 
                 'システム規定情報
                 errXMLstrkey = "NonProductInfoIniKey"

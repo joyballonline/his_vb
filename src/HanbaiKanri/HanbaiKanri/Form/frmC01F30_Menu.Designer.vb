@@ -79,7 +79,6 @@ Partial Class frmC01F30_Menu
     Friend WithEvents gbH11 As GroupBox
     Friend WithEvents gbH06 As GroupBox
     Friend WithEvents gbH16 As GroupBox
-    Friend WithEvents Timer1 As Timer
 
     'メモ: 以下のプロシージャは Windows フォーム デザイナーで必要です。
     'Windows フォーム デザイナーを使用して変更できます。  

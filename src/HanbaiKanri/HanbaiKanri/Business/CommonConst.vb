@@ -303,7 +303,7 @@ Public Class CommonConst
     Public Const CANCEL_KBN_DISABLED As Integer = 1                 '取消済
 
     '取消 テキスト
-    'Public Const CANCEL_KBN_DISABLED_TXT As String = "済"                '取消
+    Public Const CANCEL_KBN_DISABLED_TXT As String = "済"                '取消
 
     '言語
     Public Const LANG_KBN_JPN As String = "JPN"                         '日本語
