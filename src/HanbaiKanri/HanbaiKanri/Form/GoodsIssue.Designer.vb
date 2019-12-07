@@ -56,6 +56,8 @@ Partial Class GoodsIssue
         Me.LblCustomerNo = New System.Windows.Forms.Label()
         Me.TxtCustomerPO = New System.Windows.Forms.TextBox()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.LblDepositDate = New System.Windows.Forms.Label()
+        Me.DtpDepositDate = New System.Windows.Forms.DateTimePicker()
         Me.TxtIDRCurrency = New System.Windows.Forms.TextBox()
         Me.LblIDRCurrency = New System.Windows.Forms.Label()
         CType(Me.DgvAdd, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -92,11 +94,11 @@ Partial Class GoodsIssue
         Me.DtpGoodsIssueDate.CustomFormat = ""
         Me.DtpGoodsIssueDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpGoodsIssueDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DtpGoodsIssueDate.Location = New System.Drawing.Point(302, 0)
+        Me.DtpGoodsIssueDate.Location = New System.Drawing.Point(192, 0)
         Me.DtpGoodsIssueDate.Margin = New System.Windows.Forms.Padding(0)
         Me.DtpGoodsIssueDate.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.DtpGoodsIssueDate.Name = "DtpGoodsIssueDate"
-        Me.DtpGoodsIssueDate.Size = New System.Drawing.Size(148, 37)
+        Me.DtpGoodsIssueDate.Size = New System.Drawing.Size(106, 37)
         Me.DtpGoodsIssueDate.TabIndex = 3
         Me.DtpGoodsIssueDate.TabStop = False
         Me.DtpGoodsIssueDate.Value = New Date(2018, 7, 16, 0, 0, 0, 0)
@@ -107,9 +109,9 @@ Partial Class GoodsIssue
         Me.LblRemarks.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblRemarks.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblRemarks.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblRemarks.Location = New System.Drawing.Point(478, 1)
+        Me.LblRemarks.Location = New System.Drawing.Point(606, 1)
         Me.LblRemarks.Name = "LblRemarks"
-        Me.LblRemarks.Size = New System.Drawing.Size(136, 22)
+        Me.LblRemarks.Size = New System.Drawing.Size(199, 22)
         Me.LblRemarks.TabIndex = 282
         Me.LblRemarks.Text = "備考"
         Me.LblRemarks.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -118,10 +120,10 @@ Partial Class GoodsIssue
         '
         Me.TxtRemarks.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtRemarks.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtRemarks.Location = New System.Drawing.Point(617, 0)
+        Me.TxtRemarks.Location = New System.Drawing.Point(808, 0)
         Me.TxtRemarks.Margin = New System.Windows.Forms.Padding(0)
         Me.TxtRemarks.Name = "TxtRemarks"
-        Me.TxtRemarks.Size = New System.Drawing.Size(589, 37)
+        Me.TxtRemarks.Size = New System.Drawing.Size(439, 37)
         Me.TxtRemarks.TabIndex = 4
         '
         'LblGoodsIssueDate
@@ -130,9 +132,9 @@ Partial Class GoodsIssue
         Me.LblGoodsIssueDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblGoodsIssueDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblGoodsIssueDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblGoodsIssueDate.Location = New System.Drawing.Point(149, 1)
+        Me.LblGoodsIssueDate.Location = New System.Drawing.Point(98, 1)
         Me.LblGoodsIssueDate.Name = "LblGoodsIssueDate"
-        Me.LblGoodsIssueDate.Size = New System.Drawing.Size(150, 22)
+        Me.LblGoodsIssueDate.Size = New System.Drawing.Size(91, 22)
         Me.LblGoodsIssueDate.TabIndex = 280
         Me.LblGoodsIssueDate.Text = "出庫日"
         Me.LblGoodsIssueDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -145,7 +147,7 @@ Partial Class GoodsIssue
         Me.LblAdd.Location = New System.Drawing.Point(0, 1)
         Me.LblAdd.Margin = New System.Windows.Forms.Padding(0)
         Me.LblAdd.Name = "LblAdd"
-        Me.LblAdd.Size = New System.Drawing.Size(146, 22)
+        Me.LblAdd.Size = New System.Drawing.Size(95, 22)
         Me.LblAdd.TabIndex = 279
         Me.LblAdd.Text = "■今回出庫"
         Me.LblAdd.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -443,24 +445,56 @@ Partial Class GoodsIssue
         '
         Me.TableLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.TableLayoutPanel1.BackColor = System.Drawing.Color.Transparent
-        Me.TableLayoutPanel1.ColumnCount = 5
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.09228!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.92135!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.36597!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.77407!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.68735!))
+        Me.TableLayoutPanel1.ColumnCount = 8
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.78899!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.24771!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.31193!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2.06422!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.58716!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 167.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 205.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 436.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.LblAdd, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.LblGoodsIssueDate, 1, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.DtpGoodsIssueDate, 2, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.LblRemarks, 3, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.TxtRemarks, 4, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.TxtRemarks, 7, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.LblRemarks, 6, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.LblDepositDate, 4, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.DtpDepositDate, 5, 0)
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(12, 341)
         Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(0)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 1
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1206, 25)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1247, 25)
         Me.TableLayoutPanel1.TabIndex = 290
+        '
+        'LblDepositDate
+        '
+        Me.LblDepositDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblDepositDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblDepositDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblDepositDate.Location = New System.Drawing.Point(310, 0)
+        Me.LblDepositDate.Name = "LblDepositDate"
+        Me.LblDepositDate.Size = New System.Drawing.Size(114, 22)
+        Me.LblDepositDate.TabIndex = 330
+        Me.LblDepositDate.Text = "入金予定日"
+        Me.LblDepositDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'DtpDepositDate
+        '
+        Me.DtpDepositDate.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.DtpDepositDate.CustomFormat = ""
+        Me.DtpDepositDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.DtpDepositDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.DtpDepositDate.Location = New System.Drawing.Point(436, 0)
+        Me.DtpDepositDate.Margin = New System.Windows.Forms.Padding(0)
+        Me.DtpDepositDate.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
+        Me.DtpDepositDate.Name = "DtpDepositDate"
+        Me.DtpDepositDate.Size = New System.Drawing.Size(112, 37)
+        Me.DtpDepositDate.TabIndex = 329
+        Me.DtpDepositDate.TabStop = False
+        Me.DtpDepositDate.Value = New Date(2018, 7, 25, 13, 29, 25, 0)
         '
         'TxtIDRCurrency
         '
@@ -568,4 +602,6 @@ Partial Class GoodsIssue
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
     Friend WithEvents TxtIDRCurrency As TextBox
     Friend WithEvents LblIDRCurrency As Label
+    Friend WithEvents DtpDepositDate As DateTimePicker
+    Friend WithEvents LblDepositDate As Label
 End Class
