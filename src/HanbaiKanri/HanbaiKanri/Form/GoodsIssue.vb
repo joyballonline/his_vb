@@ -94,6 +94,8 @@ Public Class GoodsIssue
             LblGoodsIssueDate.Text = "GoodsDeliveryDate"
             LblIDRCurrency.Text = "Currency"
             LblRemarks.Text = "Remarks"
+            LblDepositDate.Text = "DepositDate"
+
             LblCount1.Text = "Record"
             LblCount1.Location = New Point(1272, 82)
             LblCount1.Size = New Size(66, 22)
@@ -107,7 +109,7 @@ Public Class GoodsIssue
             TxtCount1.Location = New Point(1228, 82)
             TxtCount2.Location = New Point(1228, 212)
             TxtCount3.Location = New Point(1228, 343)
-            TxtRemarks.Size = New Size(600, 22)
+            'TxtRemarks.Size = New Size(600, 22)
 
             'BtnDeliveryNote.Text = "Invoice/Receipt Issue"
             BtnDeliveryNote.Text = "Delivery Note" & Environment.NewLine & "Receipt Issue"
