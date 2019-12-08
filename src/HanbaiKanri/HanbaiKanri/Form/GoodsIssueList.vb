@@ -491,14 +491,175 @@ Public Class GoodsIssueList
             Return
         End If
 
+
+        '出庫番号
+        Dim strSyukoNo As String = DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("出庫番号").Value
+
+
         '取消確認のアラート
         Dim result As DialogResult = _msgHd.dspMSG("confirmCancel", frmC01F10_Login.loginValue.Language)
 
         If result = DialogResult.Yes Then
+
             updateData() 'データ更新
+
+
+            'm90_hanyo  SimpleRegistrationの可変キーが1の場合は仕入取消処理も行う
+            Dim Sql As String = "  AND 固定キー = 'SR'"
+            Sql += " AND 可変キー = '1'"
+
+            Dim dsHanyo As DataTable = getDsData("m90_hanyo", Sql).Tables(0)
+
+            If dsHanyo.Rows.Count = 0 Then  'データなしの場合は終了
+                Exit Sub
+            End If
+
+
+            '仕入取消処理
+            Dim blnFlg As Boolean = mUpdate_UriageTorikeshi(strSyukoNo)
+            If blnFlg = False Then
+                Exit Sub
+            End If
         End If
 
     End Sub
+
+
+    Private Function mUpdate_UriageTorikeshi(ByVal strSyukoNo As String) As Boolean
+
+        Dim dtNow As DateTime = DateTime.Now
+        Dim strNow As String = UtilClass.formatDatetime(dtNow)
+        Dim reccnt As Integer = 0
+
+
+        Try
+
+
+#Region "select_t45_shukodt"
+
+            Dim Sql As String = "SELECT * "
+
+            Sql += " FROM t44_shukohd t44"
+            Sql += " left join t45_shukodt t45"
+            Sql += " on t44.出庫番号 = t45.出庫番号"
+
+            Sql += " where t44.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += "   and t44.出庫番号 = '" & strSyukoNo & "'"
+
+            Dim dtSyukodt As DataTable = _db.selectDB(Sql, RS, reccnt).Tables(0)
+
+#End Region
+
+
+            '取消す売上データをループさせながら、受注データから減算していく
+            For index1 As Integer = 0 To dtSyukodt.Rows.Count() - 1  '出庫
+
+
+                Dim strJyutyuNo As String = dtSyukodt.Rows(index1)("受注番号")
+                Dim strEda As String = dtSyukodt.Rows(index1)("受注番号枝番")
+                Dim intSyukosu As Integer = dtSyukodt.Rows(index1)("出庫数量")
+
+
+#Region "select_t31_urigdt"
+
+                Dim Sql2 As String = "SELECT *"
+
+                Sql2 += " FROM t31_urigdt t31"
+                Sql2 += " left join t30_urighd t30"
+                Sql2 += " on t31.売上番号 = t30.売上番号 and t31.売上番号枝番 = t30.売上番号枝番"
+
+                Sql2 += " where t31.会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
+                Sql2 += "   and t31.行番号 = '" & dtSyukodt.Rows(index1)("行番号") & "'"
+                Sql2 += "   and t31.受注番号 = '" & strJyutyuNo & "'"
+                Sql2 += "   and t31.受注番号枝番 ='" & strEda & "'"
+                Sql2 += "   and t30.売上日 ='" & UtilClass.strFormatDate(dtSyukodt.Rows(index1)("出庫日")） & "'"
+                Sql2 += "   and t31.売上数量 ='" & intSyukosu & "'"
+
+
+                Dim dtUrigDt As DataTable = _db.selectDB(Sql2, RS, reccnt).Tables(0)
+
+#End Region
+
+
+#Region "update_t11_cymndt"
+
+                '受注明細から取消す売上データ明細の数を減算
+                Dim Sql4 As String = "UPDATE t11_cymndt"
+
+                Sql4 += " SET "
+                Sql4 += " 売上数量 = 売上数量 - '" & intSyukosu & "'"
+                Sql4 += ",受注残数 = 受注残数 + '" & intSyukosu & "'"
+                Sql4 += ",更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+
+
+                Sql4 += " where 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
+                Sql4 += "   and 受注番号 ='" & dtUrigDt.Rows(0)("受注番号") & "'"
+                Sql4 += "   and 受注番号枝番 ='" & dtUrigDt.Rows(0)("受注番号枝番") & "'"
+                Sql4 += "   and 行番号 = '" & dtUrigDt.Rows(0)("行番号") & "'"
+
+                _db.executeDB(Sql4)
+
+#End Region
+
+
+
+                If index1 = 0 Then
+
+
+#Region "update_t10_cymnhd"
+
+                    '受注基本データを更新
+                    Dim Sql5 As String = "UPDATE t10_cymnhd "
+                    Sql5 += " SET "
+                    Sql5 += " 更新日 = '" & UtilClass.formatDatetime(dtNow) & "'"
+                    Sql5 += ",更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+
+                    Sql5 += " where 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
+                    Sql5 += "   and 受注番号 ='" & dtUrigDt.Rows(0)("受注番号") & "'"
+                    Sql5 += "   and 受注番号枝番 ='" & dtUrigDt.Rows(0)("受注番号枝番") & "'"
+
+                    _db.executeDB(Sql5)
+
+#End Region
+
+
+#Region "update_t30_urighd"
+
+                    Dim Sql6 As String = "UPDATE t30_urighd"
+                    Sql6 += " SET "
+                    Sql6 += " 取消区分 = " & CommonConst.CANCEL_KBN_DISABLED.ToString
+                    Sql6 += ",取消日 = '" & UtilClass.strFormatDate(dtNow) & "'"
+                    Sql6 += ",更新日 = '" & UtilClass.strFormatDate(dtNow) & "'"
+                    Sql6 += ",更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+
+                    Sql6 += " where 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
+                    Sql6 += "   and 売上番号 ='" & dtUrigDt.Rows(0)("売上番号") & "'"
+                    Sql6 += "   and 売上番号枝番 ='" & dtUrigDt.Rows(0)("売上番号枝番") & "'"
+
+                    _db.executeDB(Sql6)
+
+#End Region
+
+
+                End If
+
+            Next
+
+
+        Catch ue As UsrDefException
+            ue.dspMsg()
+            Throw ue
+        Catch ex As Exception
+            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
+            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
+        End Try
+
+
+        mUpdate_UriageTorikeshi = True
+
+    End Function
+
+
 
     '選択データをもとに以下テーブル更新
     't44_shukohd, t21_hattyu
