@@ -733,7 +733,8 @@ Public Class OrderManagement
                         Sql4 += "', '"
 
                         If dsCymndt.Tables(RS).Rows(x)("売単価").ToString > 0 Then
-                            Sql4 += UtilClass.formatNumber(Format(dsCymndt.Tables(RS).Rows(x)("仕入値").ToString / (dsCymndt.Tables(RS).Rows(x)("売単価").ToString) * 100, "0.0")) '粗利率
+                            'Sql4 += UtilClass.formatNumber(Format(dsCymndt.Tables(RS).Rows(x)("仕入値").ToString / (dsCymndt.Tables(RS).Rows(x)("売単価").ToString) * 100, "0.0")) '粗利率
+                            Sql4 += UtilClass.formatNumber(Format(100 - (dsCymndt.Tables(RS).Rows(x)("仕入値").ToString / dsCymndt.Tables(RS).Rows(x)("売単価").ToString) * 100, "0.0")) '粗利率
                         Else
                             Sql4 += "0" '粗利率
                         End If
@@ -765,7 +766,8 @@ Public Class OrderManagement
                         Sql4 += "', '"
                         Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(x)("輸送費額").ToString)
                         Sql4 += "', '"
-                        Sql4 += UtilClass.formatNumber((dsCymndt.Tables(RS).Rows(x)("仕入値").ToString + kansetsuhi) * DgvAdd.Rows(i).Cells("売上数量").Value.ToString)
+                        'Sql4 += UtilClass.formatNumber((dsCymndt.Tables(RS).Rows(x)("仕入値").ToString + kansetsuhi) * DgvAdd.Rows(i).Cells("売上数量").Value.ToString)
+                        Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(x)("仕入値").ToString * DgvAdd.Rows(i).Cells("売上数量").Value.ToString + kansetsuhi)
                         Sql4 += "', '"
                         Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(x)("見積単価").ToString)
                         Sql4 += "', '"

@@ -378,7 +378,10 @@ Public Class ReceiptList
 
     '取消ボタン押下時
     Private Sub BtnSalesCancel_Click(sender As Object, e As EventArgs) Handles BtnReceiptCancel.Click
+
         Dim dtNow As DateTime = DateTime.Now
+
+#Region "Chrack"
 
         '明細表示時、または対象データがない場合は取消操作不可能
         If RbtnDetails.Checked Or DgvNyuko.Rows.Count = 0 Then
@@ -407,15 +410,138 @@ Public Class ReceiptList
             Return
         End If
 
+#End Region
+
+
+        '入庫番号
+        Dim strNyukoNo As String = DgvNyuko.Rows(DgvNyuko.CurrentCell.RowIndex).Cells("入庫番号").Value
 
         '取消確認のアラート
         Dim result As DialogResult = _msgHd.dspMSG("confirmCancel", frmC01F10_Login.loginValue.Language)
 
         If result = DialogResult.Yes Then
+
             updateData() 'データ更新
+
+
+            'm90_hanyo  SimpleRegistrationの可変キーが1の場合は仕入取消処理も行う
+            Dim Sql As String = "  AND 固定キー = 'SR'"
+            Sql += " AND 可変キー = '1'"
+
+            Dim dsHanyo As DataTable = getDsData("m90_hanyo", Sql).Tables(0)
+
+            If dsHanyo.Rows.Count = 0 Then  'データなしの場合は終了
+                Exit Sub
+            End If
+
+
+            '仕入取消処理
+            blnFlg = mUpdate_ShiireTorikeshi(strNyukoNo)
+            If blnFlg = False Then
+                Exit Sub
+            End If
         End If
 
     End Sub
+
+    Private Function mUpdate_ShiireTorikeshi(ByVal strNyukoNo As String) As Boolean
+
+        Dim dtNow As String = UtilClass.formatDatetime(DateTime.Now)
+        Dim reccnt As Integer = 0
+
+
+#Region "nyukodt"
+
+        Dim Sql As String = "SELECT * "
+
+        Sql += " FROM t42_nyukohd t42"
+        Sql += " left join t43_nyukodt t43"
+        Sql += " on t42.入庫番号 = t43.入庫番号"
+
+        Sql += " where t42.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += "   and t42.入庫番号 = '" & strNyukoNo & "'"
+
+        Dim dtNyukodt As DataTable = _db.selectDB(Sql, RS, reccnt).Tables(0)
+
+#End Region
+
+
+        For index1 As Integer = 0 To dtNyukodt.Rows.Count() - 1  '入庫
+
+
+            Dim strHatyuNo As String = dtNyukodt.Rows(index1)("発注番号")
+            Dim strEda As String = dtNyukodt.Rows(index1)("発注番号枝番")
+            Dim intNyukosu As Integer = dtNyukodt.Rows(index1)("入庫数量")
+
+
+#Region "t41_siredt"
+
+            Dim Sql2 As String = "SELECT "
+            Sql2 += " *, coalesce(発注行番号, 行番号, 0) as 発注行番号 "
+            Sql2 += "FROM t41_siredt "
+            Sql2 += " where 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql2 += "   and 行番号 = '" & dtNyukodt.Rows(index1)("行番号") & "'"
+            Sql2 += "   and 発注番号 = '" & strHatyuNo & "'"
+            Sql2 += "   and 発注番号枝番 ='" & strEda & "'"
+            Sql2 += "   and 仕入日 ='" & UtilClass.strFormatDate(dtNyukodt.Rows(index1)("入庫日")） & "'"
+            Sql2 += "   and 仕入数量 ='" & intNyukosu & "'"
+
+            Dim dtShiire As DataTable = _db.selectDB(Sql2, RS, reccnt).Tables(0)
+
+#End Region
+
+
+
+#Region "update_t21_hattyu"
+
+            Dim Sql4 As String = ""
+            Sql4 += "UPDATE t21_hattyu "
+
+            Sql4 += "SET "
+            Sql4 += " 仕入数量 = 仕入数量 - '" & intNyukosu & "'"
+            Sql4 += ",発注残数 = 発注残数 + '" & intNyukosu & "'"
+            Sql4 += ",更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+
+            Sql4 += " where 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql4 += "   and 発注番号 ='" & dtShiire.Rows(0)("発注番号") & "'"
+            Sql4 += "   and 発注番号枝番 ='" & dtShiire.Rows(0)("発注番号枝番") & "'"
+            Sql4 += "   and 行番号 = '" & dtShiire.Rows(0)("発注行番号") & "'"
+
+            _db.executeDB(Sql4)
+
+#End Region
+
+
+            If index1 = 0 Then
+
+#Region "t40_sirehd"
+
+                Dim Sql3 As String = ""
+                Sql3 = ""
+                Sql3 += "UPDATE t40_sirehd "
+
+                Sql3 += " SET "
+                Sql3 += " 取消区分 = '1'"
+                Sql3 += ",取消日 = '" & dtNow & "'"
+                Sql3 += ",更新日 = '" & dtNow & "'"
+                Sql3 += ",更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+
+                Sql3 += " where 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
+                Sql3 += "   and 仕入番号 ='" & dtShiire.Rows(0)("仕入番号") & "'"
+
+                _db.executeDB(Sql3)
+
+#End Region
+
+            End If
+
+        Next
+
+
+        dtNyukodt = Nothing
+        mUpdate_ShiireTorikeshi = True
+
+    End Function
 
     Private Function mCheckSyuko() As Boolean
 
