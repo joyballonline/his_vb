@@ -924,6 +924,15 @@ Public Class OrderingList
         Dim Suffix As String = DgvHtyhd.Rows(RowIdx).Cells("発注番号枝番").Value
         Dim status As String = CommonConst.STATUS_EDIT
 
+        '入庫済みなら発注編集不可とする→入庫済みです。入庫取消をしてください。
+        'Dim Sql As String = ""
+        'Sql = "Select Case 1 from t42_nyukohd t42 where t42.発注番号 ='" & No & "' and t42.発注番号枝番='" & Suffix & "' and t42.取消区分=0 and t42.会社コード='SOFTBANK'
+        Dim DS As DataSet = getDsData("t42_nyukohd", " and 発注番号 ='" & No & "' and 発注番号枝番='" & Suffix & "' and 取消区分=0")
+        If DS.Tables(RS).Rows.Count() > 0 Then
+            _msgHd.dspMSG("cannoteditafterreceipt", frmC01F10_Login.loginValue.Language)
+            Return
+        End If
+
         Dim openForm As Form = Nothing
         openForm = New Ordering(_msgHd, _db, _langHd, Me, No, Suffix, status)   '処理選択
         openForm.ShowDialog(Me)
