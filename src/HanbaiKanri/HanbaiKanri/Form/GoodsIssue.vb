@@ -164,6 +164,21 @@ Public Class GoodsIssue
 
         End If
 
+        'm90_hanyo  SimpleRegistrationの可変キーが1か判定
+        Dim Sql As String = "  AND 固定キー = 'SR'"
+        Sql += " AND 可変キー = '1'"
+
+        Dim dsHanyo As DataTable = getDsData("m90_hanyo", Sql).Tables(0)
+
+        If dsHanyo.Rows.Count = 0 Then  'データなしの場合は入金予定日を非表示にする
+            LblDepositDate.Visible = False
+            DtpDepositDate.Visible = False
+        Else
+            LblDepositDate.Visible = True
+            DtpDepositDate.Visible = True
+        End If
+
+
         setDgvHd() '見出し行セット
         getlist() '内容表示
 
