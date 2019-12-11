@@ -2367,7 +2367,7 @@ Public Class frmC01F30_Menu
         x.cbSize = Marshal.SizeOf(x)
         If GetLastInputInfo(x) Then
             'i = x.dwTime Mod Int32.MaxValue
-            i = (System.Environment.TickCount - x.dwTime)
+            i = ((System.Environment.TickCount And Int32.MaxValue) - x.dwTime)
         Else
             i = 0
         End If

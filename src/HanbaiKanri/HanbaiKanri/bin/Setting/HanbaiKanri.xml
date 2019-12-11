@@ -1538,6 +1538,17 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <MEMO></MEMO>
   </MSG_DATA>
   <MSG_DATA>
+    <ID>cannoteditafterreceipt</ID>
+    <MSG1>入庫済みなので変更出来ません。まず入庫取消をしてください。</MSG1>
+    <MSG1_EN>You cannot edit this PO because you have already received it. Please cancel goods receipt first.</MSG1_EN>
+    <BUTTON_TYPE>OK</BUTTON_TYPE>
+    <ICONT_TYPE>
+      <ICONT_TYPE>Warning</ICONT_TYPE>
+    </ICONT_TYPE>
+    <CREATE_DATE>2019/12/10 00:00</CREATE_DATE>
+    <MEMO></MEMO>
+  </MSG_DATA>
+  <MSG_DATA>
     <ID>registrationConfirmation</ID>
     <MSG1>以下の内容で登録します。</MSG1>
     <MSG1_EN>Register with the following contents.</MSG1_EN>
