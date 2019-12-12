@@ -8,6 +8,7 @@ Imports UtilMDL.DataGridView
 Imports UtilMDL.FileDirectory
 Imports UtilMDL.xls
 Imports System.Globalization
+Imports System.Text.RegularExpressions
 
 Public Class PurchasingManagement
     Inherits System.Windows.Forms.Form
@@ -699,7 +700,7 @@ Public Class PurchasingManagement
             Sql3 += "', '"
             Sql3 += ds1.Tables(RS).Rows(0)("発注番号枝番").ToString '発注番号枝番
             Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("客先番号").ToString '客先番号
+            Sql3 += UtilClass.escapeSql(ds1.Tables(RS).Rows(0)("客先番号").ToString) '客先番号
             Sql3 += "', '"
             Sql3 += ds1.Tables(RS).Rows(0)("仕入先コード").ToString '仕入先コード
             Sql3 += "', '"
@@ -713,11 +714,11 @@ Public Class PurchasingManagement
             Sql3 += "', '"
             Sql3 += ds1.Tables(RS).Rows(0)("仕入先ＦＡＸ").ToString '仕入先ＦＡＸ
             Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("仕入先担当者役職").ToString '仕入先担当者役職
+            Sql3 += UtilClass.escapeSql(ds1.Tables(RS).Rows(0)("仕入先担当者役職").ToString) '仕入先担当者役職
             Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("仕入先担当者名").ToString '仕入先担当者名
+            Sql3 += UtilClass.escapeSql(ds1.Tables(RS).Rows(0)("仕入先担当者名").ToString) '仕入先担当者名
             Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("支払条件").ToString '支払条件
+            Sql3 += UtilClass.escapeSql(ds1.Tables(RS).Rows(0)("支払条件").ToString) '支払条件
             Sql3 += "', '"
             Sql3 += UtilClass.formatNumber(PurchaseAmount) '仕入金額
             Sql3 += "', '"
@@ -727,7 +728,7 @@ Public Class PurchasingManagement
             Sql3 += "', '"
             Sql3 += ds1.Tables(RS).Rows(0)("入力担当者").ToString '入力担当者
             Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("備考").ToString '備考
+            Sql3 += UtilClass.escapeSql(ds1.Tables(RS).Rows(0)("備考").ToString) '備考
             Sql3 += "', "
             Sql3 += "null" '取消日
             Sql3 += ", "
@@ -809,7 +810,7 @@ Public Class PurchasingManagement
                 'End If
                 Sql4 += RemainingQ.ToString '発注残数
                 Sql4 += "', '"
-                Sql4 += DgvAdd.Rows(index).Cells("単位").Value.ToString '単位
+                Sql4 += UtilClass.escapeSql(DgvAdd.Rows(index).Cells("単位").Value.ToString) '単位
                 Sql4 += "', '"
                 Dim dsx As DataSet = getPolByLineNo(No, Suffix, DgvAdd.Rows(index).Cells("行番号").Value)
                 Sql4 += UtilClass.formatNumber(Decimal.Parse(dsx.Tables(RS).Rows(0)("仕入金額").ToString)) '仕入金額
@@ -818,7 +819,7 @@ Public Class PurchasingManagement
                 Sql4 += "', '"
                 Sql4 += dsx.Tables(RS).Rows(0)("リードタイム").ToString 'リードタイム
                 Sql4 += "', '"
-                Sql4 += DgvAdd.Rows(index).Cells("備考").Value '備考
+                Sql4 += UtilClass.escapeSql(DgvAdd.Rows(index).Cells("備考").Value) '備考
                 Sql4 += "', '"
                 Sql4 += UtilClass.strFormatDate(DtpPurchaseDate.Text) '仕入日
                 Sql4 += "', '"
@@ -1001,9 +1002,9 @@ Public Class PurchasingManagement
         Sql += "', '"
         Sql += UtilClass.formatNumber(tmp.ToString)
         Sql += "', '"
-        Sql += TxtRemarks.Text
+        Sql += UtilClass.escapeSql(TxtRemarks.Text)
         Sql += "', '"
-        Sql += DgvAdd.Rows(0).Cells("備考").Value
+        Sql += UtilClass.escapeSql(DgvAdd.Rows(0).Cells("備考").Value)
         Sql += "', '"
         Sql += "0"
         Sql += "', '"

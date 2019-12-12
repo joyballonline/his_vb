@@ -871,7 +871,7 @@ Public Class Receipt
             Sql += "', '"
             Sql += dsHattyu.Tables(RS).Rows(0)("発注番号枝番").ToString
             Sql += "', '"
-            Sql += dsHattyu.Tables(RS).Rows(0)("客先番号").ToString
+            Sql += UtilClass.escapeSql(dsHattyu.Tables(RS).Rows(0)("客先番号").ToString)
             Sql += "', '"
             Sql += dsHattyu.Tables(RS).Rows(0)("仕入先コード").ToString
             Sql += "', '"
@@ -885,11 +885,11 @@ Public Class Receipt
             Sql += "', '"
             Sql += dsHattyu.Tables(RS).Rows(0)("仕入先ＦＡＸ").ToString
             Sql += "', '"
-            Sql += dsHattyu.Tables(RS).Rows(0)("仕入先担当者役職").ToString
+            Sql += UtilClass.escapeSql(dsHattyu.Tables(RS).Rows(0)("仕入先担当者役職").ToString)
             Sql += "', '"
-            Sql += dsHattyu.Tables(RS).Rows(0)("仕入先担当者名").ToString
+            Sql += UtilClass.escapeSql(dsHattyu.Tables(RS).Rows(0)("仕入先担当者名").ToString)
             Sql += "', '"
-            Sql += dsHattyu.Tables(RS).Rows(0)("支払条件").ToString
+            Sql += UtilClass.escapeSql(dsHattyu.Tables(RS).Rows(0)("支払条件").ToString)
             Sql += "', '"
             Sql += UtilClass.formatNumber(dsHattyu.Tables(RS).Rows(0)("仕入金額"))
             Sql += "', '"
@@ -899,7 +899,7 @@ Public Class Receipt
             Sql += "', '"
             Sql += dsHattyu.Tables(RS).Rows(0)("入力担当者").ToString
             Sql += "', '"
-            Sql += dsHattyu.Tables(RS).Rows(0)("備考").ToString
+            Sql += UtilClass.escapeSql(dsHattyu.Tables(RS).Rows(0)("備考").ToString)
             Sql += "', '"
             Sql += CommonConst.CANCEL_KBN_ENABLED.ToString
             Sql += "', '"
@@ -986,9 +986,9 @@ Public Class Receipt
                             Sql += "', '"
                             Sql += UtilClass.formatNumber(DgvAdd.Rows(x).Cells("入庫数量").Value.ToString)
                             Sql += "', '"
-                            Sql += DgvAdd.Rows(x).Cells("単位").Value.ToString
+                            Sql += UtilClass.escapeSql(DgvAdd.Rows(x).Cells("単位").Value.ToString)
                             Sql += "', '"
-                            Sql += DgvAdd.Rows(x).Cells("備考").Value
+                            Sql += UtilClass.escapeSql(DgvAdd.Rows(x).Cells("備考").Value)
                             Sql += "', '"
                             Sql += Input
                             Sql += "', '"
@@ -1071,9 +1071,9 @@ Public Class Receipt
                     Sql += "', '"
                     Sql += DgvAdd.Rows(x).Cells("入庫数量").Value.ToString '数量
                     Sql += "', '"
-                    Sql += DgvAdd.Rows(x).Cells("単位").Value.ToString '単位
+                    Sql += UtilClass.escapeSql(DgvAdd.Rows(x).Cells("単位").Value.ToString) '単位
                     Sql += "', '"
-                    Sql += DgvAdd.Rows(x).Cells("備考").Value '備考
+                    Sql += UtilClass.escapeSql(DgvAdd.Rows(x).Cells("備考").Value) '備考
                     Sql += "', '"
                     Sql += nyukoDate
                     Sql += "', '"
@@ -1197,7 +1197,7 @@ Public Class Receipt
             Sql3 += "', '"
             Sql3 += ds1.Tables(RS).Rows(0)("発注番号枝番").ToString '発注番号枝番
             Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("客先番号").ToString '客先番号
+            Sql3 += UtilClass.escapeSql(ds1.Tables(RS).Rows(0)("客先番号").ToString) '客先番号
             Sql3 += "', '"
             Sql3 += ds1.Tables(RS).Rows(0)("仕入先コード").ToString '仕入先コード
             Sql3 += "', '"
@@ -1211,11 +1211,11 @@ Public Class Receipt
             Sql3 += "', '"
             Sql3 += ds1.Tables(RS).Rows(0)("仕入先ＦＡＸ").ToString '仕入先ＦＡＸ
             Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("仕入先担当者役職").ToString '仕入先担当者役職
+            Sql3 += UtilClass.escapeSql(ds1.Tables(RS).Rows(0)("仕入先担当者役職").ToString) '仕入先担当者役職
             Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("仕入先担当者名").ToString '仕入先担当者名
+            Sql3 += UtilClass.escapeSql(ds1.Tables(RS).Rows(0)("仕入先担当者名").ToString) '仕入先担当者名
             Sql3 += "', '"
-            Sql3 += ds1.Tables(RS).Rows(0)("支払条件").ToString '支払条件
+            Sql3 += UtilClass.escapeSql(ds1.Tables(RS).Rows(0)("支払条件").ToString) '支払条件
             Sql3 += "', '"
             Sql3 += UtilClass.formatNumber(PurchaseAmount) '仕入金額
             Sql3 += "', '"
@@ -1226,7 +1226,7 @@ Public Class Receipt
             Sql3 += ds1.Tables(RS).Rows(0)("入力担当者").ToString '入力担当者
             Sql3 += "', '"
             'Sql3 += ds1.Tables(RS).Rows(0)("備考").ToString '備考
-            Sql3 += TxtRemarks.Text '備考
+            Sql3 += UtilClass.escapeSql(TxtRemarks.Text) '備考
 
             Sql3 += "', "
             Sql3 += "null" '取消日
@@ -1313,7 +1313,7 @@ Public Class Receipt
 
                     Sql4 += RemainingQ.ToString '発注残数
                     Sql4 += "', '"
-                    Sql4 += DgvAdd.Rows(index).Cells("単位").Value.ToString '単位
+                    Sql4 += UtilClass.escapeSql(DgvAdd.Rows(index).Cells("単位").Value.ToString) '単位
                     Sql4 += "', '"
 
 
@@ -1323,7 +1323,7 @@ Public Class Receipt
                     Sql4 += "', '"
                     Sql4 += dsx.Tables(RS).Rows(0)("リードタイム").ToString 'リードタイム
                     Sql4 += "', '"
-                    Sql4 += DgvAdd.Rows(index).Cells("備考").Value '備考
+                    Sql4 += UtilClass.escapeSql(DgvAdd.Rows(index).Cells("備考").Value) '備考
                     Sql4 += "', '"
                     Sql4 += UtilClass.strFormatDate(DtpReceiptDate.Text) '仕入日
                     Sql4 += "', '"
