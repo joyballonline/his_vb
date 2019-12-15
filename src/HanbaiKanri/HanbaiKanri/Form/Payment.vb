@@ -768,7 +768,9 @@ Public Class Payment
 
         '入力した支払金額を合算
         For i As Integer = 0 To DgvPayment.Rows.Count - 1
-            PaymentAmount += DgvPayment.Rows(i).Cells("入力支払金額").Value
+            If DgvPayment.Rows(i).Cells("支払種目").Value <> 2 Then
+                PaymentAmount += DgvPayment.Rows(i).Cells("入力支払金額").Value
+            End If
         Next
 
         '買掛残高
