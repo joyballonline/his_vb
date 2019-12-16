@@ -902,7 +902,7 @@ Public Class GoodsIssue
                     Sql += " WHERE "
                     Sql += " t44.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
                     Sql += " AND t44.受注番号 = '" & No & "'"
-                    Sql += " AND t44.受注番号枝番 = '" & Suffix & "'"
+                    'Sql += " AND t44.受注番号枝番 = '" & Suffix & "'"
                     Sql += " AND t45.出庫区分 = '" & CommonConst.SHUKO_KBN_TMP & "'" '仮出庫のものを取得
                     Sql += " AND t44.取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'" '見取消のもの
 
@@ -2418,7 +2418,7 @@ Public Class GoodsIssue
 
     '在庫マスタから現在庫数を取得
     '検索対象行番を引数にセット
-    Private Function setZaikoQuantity(ByVal rowIndex As Integer) As Long
+    Private Function setZaikoQuantity1(ByVal rowIndex As Integer) As Long
         Dim Sql As String = ""
         Dim reccnt As Integer = 0 'DB用（デフォルト）
 
@@ -2432,8 +2432,8 @@ Public Class GoodsIssue
         Sql += " t44.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "' "
         Sql += " and "
         Sql += " t44.受注番号 ILIKE '" & No & "' "
-        Sql += " and "
-        Sql += " t44.受注番号枝番 ILIKE '" & Suffix & "' "
+        'Sql += " and "
+        'Sql += " t44.受注番号枝番 ILIKE '" & Suffix & "' "
         Sql += " and "
         Sql += " t44.出庫番号 ILIKE t45.出庫番号 "
         Sql += " and "
@@ -2465,7 +2465,7 @@ Public Class GoodsIssue
     End Function
 
     '在庫マスタから現在庫数を取得
-    '検索対象行番を引数にセット
+    '検索対象行番を引数にセット(regist and load, ALLOC)
     Private Function setZaikoCurrency(ByVal rowIndex As Integer) As Long
         Dim Sql As String = ""
         Dim reccnt As Integer = 0 'DB用（デフォルト）
@@ -2505,7 +2505,7 @@ Public Class GoodsIssue
 
         Sql += " WHERE t45.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql += " AND  t45.受注番号 = '" & TxtOrderNo.Text & "'"
-        Sql += " AND  t45.受注番号枝番 = '" & TxtSuffixNo.Text & "'"
+        'Sql += " AND  t45.受注番号枝番 = '" & TxtSuffixNo.Text & "'"
         Sql += " AND  t45.行番号 = " & DgvAdd.Rows(rowIndex).Cells("行番号").Value.ToString
         Sql += " AND  t45.出庫区分 = '" & CommonConst.SHUKO_KBN_TMP & "'"  '仮出庫
         Sql += " AND  t44.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
@@ -2572,7 +2572,7 @@ Public Class GoodsIssue
     End Function
 
     '仕入区分 1 or 9 の時の在庫数取得
-    '入庫リスト取得
+    '入庫リスト取得(-OR)
     Private Function setNukoList(ByVal rowIndex As Integer) As Long
         Dim Sql As String = ""
         Dim reccnt As Integer = 0 'DB用（デフォルト）
@@ -2586,8 +2586,8 @@ Public Class GoodsIssue
         Sql += " t10.会社コード = t20.会社コード "
         Sql += " AND "
         Sql += " t10.受注番号 = t20.受注番号 "
-        Sql += " AND "
-        Sql += " t10.受注番号枝番 = t20.受注番号枝番 "
+        'Sql += " AND "
+        'Sql += " t10.受注番号枝番 = t20.受注番号枝番 "
         'Sql += " AND "
         'Sql += " t20.発注番号枝番 = (SELECT MAX(発注番号枝番) AS 発注番号枝番 FROM t20_hattyu) "
 
@@ -2611,8 +2611,8 @@ Public Class GoodsIssue
         Sql += " t10.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql += " AND "
         Sql += " t10.受注番号 = '" & TxtOrderNo.Text & "'"
-        Sql += " AND "
-        Sql += " t10.受注番号枝番 = '" & TxtSuffixNo.Text & "'"
+        'Sql += " AND "
+        'Sql += " t10.受注番号枝番 = '" & TxtSuffixNo.Text & "'"
 
         Sql += " AND t43.メーカー ILIKE '" & DgvAdd.Rows(rowIndex).Cells("メーカー").Value.ToString & "'"
         Sql += " AND t43.品名 ILIKE '" & DgvAdd.Rows(rowIndex).Cells("品名").Value.ToString & "'"
@@ -2673,7 +2673,7 @@ Public Class GoodsIssue
     End Function
 
     '在庫マスタから現在庫数一覧を取得
-    '仕入区分 2 の時
+    '仕入区分 2 の時(-OR, regist)
     Private Function getNukoList(ByVal rowIndex As Integer) As DataSet
         Dim Sql As String = ""
         Dim reccnt As Integer = 0 'DB用（デフォルト）
@@ -2697,9 +2697,9 @@ Public Class GoodsIssue
         Sql += " AND t43.品名 ILIKE '" & DgvAdd.Rows(rowIndex).Cells("品名").Value.ToString & "'"
         Sql += " AND t43.型式 ILIKE '" & DgvAdd.Rows(rowIndex).Cells("型式").Value.ToString & "'"
         Sql += " AND t43.仕入区分 = '" & DgvAdd.Rows(rowIndex).Cells("仕入区分値").Value.ToString & "'"
-
+        Sql += " AND t42.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
         Sql += " and t20.受注番号 = '" & TxtOrderNo.Text & "'"
-        Sql += " and t20.受注番号枝番 = '" & TxtSuffixNo.Text & "'"
+        'Sql += " and t20.受注番号枝番 = '" & TxtSuffixNo.Text & "'"
 
         'Sql = " SELECT t42.入庫番号 "
         'Sql += " FROM t10_cymnhd t10  "

@@ -726,7 +726,7 @@ Public Class OrderManagement
                         Sql4 += "', '"
 
                         Dim arariAmount As Decimal = IIf(dsCymndt.Tables(RS).Rows(x)("売単価").ToString <> 0,
-                                                      Decimal.Parse((dsCymndt.Tables(RS).Rows(x)("売単価").ToString - dsCymndt.Tables(RS).Rows(x)("仕入値").ToString) * DgvAdd.Rows(x).Cells("売上数量").Value),
+                                                      Decimal.Parse((dsCymndt.Tables(RS).Rows(x)("売単価").ToString - dsCymndt.Tables(RS).Rows(x)("仕入値").ToString) * DgvAdd.Rows(i).Cells("売上数量").Value),
                                                       0)
 
                         Sql4 += UtilClass.formatNumber(Format(arariAmount, "0.000")) '粗利額

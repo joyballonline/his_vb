@@ -135,6 +135,12 @@ Public Class GoodsIssueList
 
             DgvCymnhd.Columns("仕入区分").Visible = False
 
+            For i As Integer = 0 To DgvCymnhd.Columns.Count - 1
+                If i <> 16 Then
+                    DgvCymnhd.Columns(i).ReadOnly = True
+                End If
+            Next
+
             Try
 
                 '伝票単位選択時
@@ -248,6 +254,10 @@ Public Class GoodsIssueList
                 DgvCymnhd.Columns.Add("更新者", "更新者")
                 DgvCymnhd.Columns.Add("更新日", "更新日")
             End If
+
+            For i As Integer = 0 To DgvCymnhd.Columns.Count - 1
+                DgvCymnhd.Columns(i).ReadOnly = True
+            Next
 
             DgvCymnhd.Columns("出庫数量").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             DgvCymnhd.Columns("売単価").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -855,8 +865,11 @@ Public Class GoodsIssueList
             Sql += "更新者"
             Sql += " = '"
             Sql += frmC01F10_Login.loginValue.TantoNM
-            Sql += " ' "
-
+            Sql += "', "
+            Sql += "備考"
+            Sql += " = '"
+            Sql += DgvCymnhd.Rows(index:=DgvCymnhd.CurrentCell.RowIndex).Cells("備考").Value.ToString
+            Sql += "' "
             Sql += "WHERE"
             Sql += " 会社コード"
             Sql += "='"

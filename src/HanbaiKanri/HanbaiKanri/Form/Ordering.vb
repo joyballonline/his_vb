@@ -1894,14 +1894,14 @@ Public Class Ordering
     End Sub
 
     'sqlで実行する文字列からシングルクォーテーションを文字コードにする
-    Private Function escapeSql(ByVal prmSql As String) As String
-        Dim sql As String = prmSql
-
-        sql = sql.Replace("'"c, "''") 'シングルクォーテーションを置換
-
-        Return Regex.Escape(sql)
-        Return sql
-    End Function
+    'Private Function escapeSql123(ByVal prmSql As String) As String
+    'Dim sql As String = prmSql
+    '
+    '    sql = sql.Replace("'"c, "''") 'シングルクォーテーションを置換
+    '
+    'Return Regex.Escape(sql)
+    'Return sql
+    'End Function
 
     'param1：String テーブル名
     'param2：String 詳細条件
@@ -2328,10 +2328,6 @@ Public Class Ordering
         openForm = New SalesSearch(_msgHd, _db, _langHd, Me, Status)   '処理選択
         openForm.Show(Me)
         Me.Enabled = False
-
-    End Sub
-
-    Private Sub DgvItemList_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DgvItemList.CellContentClick
 
     End Sub
 

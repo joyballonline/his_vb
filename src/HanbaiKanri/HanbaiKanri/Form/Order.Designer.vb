@@ -164,6 +164,8 @@ Partial Class Order
         Me.LblGrossProfit = New System.Windows.Forms.Label()
         Me.txtGrossmarginRate = New System.Windows.Forms.TextBox()
         Me.lblGrossmargin = New System.Windows.Forms.Label()
+        Me.dtpDeliveryDate = New System.Windows.Forms.DateTimePicker()
+        Me.lblDeliveryDate = New System.Windows.Forms.Label()
         CType(Me.DgvItemList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -219,7 +221,7 @@ Partial Class Order
         Me.DtpExpiration.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpExpiration.CustomFormat = "yyyy/MM/dd"
         Me.DtpExpiration.Enabled = False
-        Me.DtpExpiration.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.DtpExpiration.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpExpiration.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.DtpExpiration.Location = New System.Drawing.Point(933, 43)
         Me.DtpExpiration.Name = "DtpExpiration"
@@ -233,7 +235,7 @@ Partial Class Order
         Me.DtpQuoteDate.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpQuoteDate.CustomFormat = "yyyy/MM/dd"
         Me.DtpQuoteDate.Enabled = False
-        Me.DtpQuoteDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.DtpQuoteDate.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpQuoteDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.DtpQuoteDate.Location = New System.Drawing.Point(661, 43)
         Me.DtpQuoteDate.Name = "DtpQuoteDate"
@@ -247,7 +249,7 @@ Partial Class Order
         Me.LblHyphen.AutoSize = True
         Me.LblHyphen.Location = New System.Drawing.Point(221, 49)
         Me.LblHyphen.Name = "LblHyphen"
-        Me.LblHyphen.Size = New System.Drawing.Size(11, 12)
+        Me.LblHyphen.Size = New System.Drawing.Size(10, 13)
         Me.LblHyphen.TabIndex = 173
         Me.LblHyphen.Text = "-"
         '
@@ -256,7 +258,7 @@ Partial Class Order
         Me.DtpQuoteRegistration.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpQuoteRegistration.CustomFormat = "yyyy/MM/dd"
         Me.DtpQuoteRegistration.Enabled = False
-        Me.DtpQuoteRegistration.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.DtpQuoteRegistration.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpQuoteRegistration.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.DtpQuoteRegistration.Location = New System.Drawing.Point(391, 42)
         Me.DtpQuoteRegistration.Name = "DtpQuoteRegistration"
@@ -343,7 +345,7 @@ Partial Class Order
         '
         Me.DtpOrderDate.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpOrderDate.CustomFormat = "yyyy/MM/dd"
-        Me.DtpOrderDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.DtpOrderDate.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpOrderDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.DtpOrderDate.Location = New System.Drawing.Point(727, 12)
         Me.DtpOrderDate.Name = "DtpOrderDate"
@@ -434,7 +436,7 @@ Partial Class Order
         Me.Label2.AutoSize = True
         Me.Label2.Location = New System.Drawing.Point(221, 20)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(11, 12)
+        Me.Label2.Size = New System.Drawing.Size(10, 13)
         Me.Label2.TabIndex = 157
         Me.Label2.Text = "-"
         '
@@ -465,7 +467,7 @@ Partial Class Order
         Me.DtpOrderRegistration.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpOrderRegistration.CustomFormat = "yyyy/MM/dd"
         Me.DtpOrderRegistration.Enabled = False
-        Me.DtpOrderRegistration.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.DtpOrderRegistration.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpOrderRegistration.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.DtpOrderRegistration.Location = New System.Drawing.Point(979, 11)
         Me.DtpOrderRegistration.Name = "DtpOrderRegistration"
@@ -1518,10 +1520,38 @@ Partial Class Order
         Me.lblGrossmargin.Text = "粗利率（p）"
         Me.lblGrossmargin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'dtpDeliveryDate
+        '
+        Me.dtpDeliveryDate.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.dtpDeliveryDate.CustomFormat = "yyyy/MM/dd"
+        Me.dtpDeliveryDate.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.dtpDeliveryDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtpDeliveryDate.Location = New System.Drawing.Point(1049, 187)
+        Me.dtpDeliveryDate.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
+        Me.dtpDeliveryDate.Name = "dtpDeliveryDate"
+        Me.dtpDeliveryDate.Size = New System.Drawing.Size(200, 22)
+        Me.dtpDeliveryDate.TabIndex = 348
+        Me.dtpDeliveryDate.TabStop = False
+        Me.dtpDeliveryDate.Value = New Date(2000, 1, 1, 0, 0, 0, 0)
+        '
+        'lblDeliveryDate
+        '
+        Me.lblDeliveryDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.lblDeliveryDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblDeliveryDate.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.lblDeliveryDate.Location = New System.Drawing.Point(893, 187)
+        Me.lblDeliveryDate.Name = "lblDeliveryDate"
+        Me.lblDeliveryDate.Size = New System.Drawing.Size(150, 23)
+        Me.lblDeliveryDate.TabIndex = 347
+        Me.lblDeliveryDate.Text = "客先希望納期"
+        Me.lblDeliveryDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'Order
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.dtpDeliveryDate)
+        Me.Controls.Add(Me.lblDeliveryDate)
         Me.Controls.Add(Me.txtGrossmarginRate)
         Me.Controls.Add(Me.lblGrossmargin)
         Me.Controls.Add(Me.TxtGrossProfit)
@@ -1727,4 +1757,6 @@ Partial Class Order
     Friend WithEvents 備考 As DataGridViewTextBoxColumn
     Friend WithEvents 出庫数 As DataGridViewTextBoxColumn
     Friend WithEvents 未出庫数 As DataGridViewTextBoxColumn
+    Friend WithEvents dtpDeliveryDate As DateTimePicker
+    Friend WithEvents lblDeliveryDate As Label
 End Class

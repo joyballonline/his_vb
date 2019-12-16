@@ -505,6 +505,9 @@ Public Class Order
             If ds1.Tables(RS).Rows(0)("客先番号") IsNot DBNull.Value Then
                 TxtCustomerPO.Text = ds1.Tables(RS).Rows(0)("客先番号")
             End If
+            If ds1.Tables(RS).Rows(0)("客先希望納期") IsNot DBNull.Value Then
+                dtpDeliveryDate.Value = ds1.Tables(RS).Rows(0)("客先希望納期")
+            End If
 
             '見積明細情報
             Dim Sql3 As String = ""
@@ -575,6 +578,8 @@ Public Class Order
                 BtnRegistration.Visible = False
                 TxtCustomerPO.Enabled = False
                 CmCurrency.Enabled = False
+                dtpDeliveryDate.Enabled = False
+                TxtVat.Enabled = False
             End If
 
             '通貨・レート情報設定
@@ -619,6 +624,7 @@ Public Class Order
             LblExpiration.Size = New Size(205, 23)
             LblExpiration.Location = New Point(976, 42)
             DtpExpiration.Location = New Point(1187, 42)
+            lblDeliveryDate.Text = "PlannedDeliveryDate"
             LblCustomerName.Text = "CustomerName"
             LblAddress.Text = "Address"
             LblTel.Text = "PhoneNumber"
@@ -822,7 +828,7 @@ Public Class Order
                 Sql1 += ", 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職"
                 Sql1 += ", 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額, 仕入金額, 粗利額, 営業担当者"
                 Sql1 += ", 営業担当者コード, 入力担当者, 入力担当者コード, 備考, 見積備考, ＶＡＴ, 受注日, 登録日, 更新日"
-                Sql1 += ", 更新者, 取消区分, 見積金額_外貨, 通貨, レート)"
+                Sql1 += ", 更新者, 取消区分, 見積金額_外貨, 通貨, レート, 客先希望納期)"
                 Sql1 += " VALUES("
                 Sql1 += "'" & CompanyCode & "'" '会社コード
                 Sql1 += ", '"
@@ -892,6 +898,8 @@ Public Class Order
                 Sql1 += CmCurrency.SelectedValue.ToString '通貨
                 Sql1 += "', '"
                 Sql1 += UtilClass.formatNumberF10(TxtRate.Text) 'レート
+                Sql1 += "', '"
+                Sql1 += UtilClass.strFormatDate(dtpDeliveryDate.Value) ' Delivery Date
                 Sql1 += "')"
 
                 _db.executeDB(Sql1)

@@ -86,6 +86,7 @@ Public Class Cymn
         DtpPurchaseDate.Text = DateTime.Today '発注日
         '仕入区分が在庫引当のレコードが来るまで使用不可
         DtpPurchaseDate.Enabled = False
+        dtpDeliveryDate.Text = DateTime.Today 'Planned Delivery Date
 
         'セルの内容に合わせて、行の高さが自動的に調節されるようにする
         DgvItemList.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
@@ -488,6 +489,7 @@ Public Class Cymn
             'TxtVatAmount.Size = New Size(151, 23)
             LblCurrencyVatAmount.Text = "Currency"
             'TxtCurrencyVatAmount.Size = New Size(151, 23)
+            lblDeliveryDate.Text = "PlannedDeliveryDate"
 
             LblRate.Text = "Rate"
             LblWarehouse.Text = "Warehouse"
@@ -671,7 +673,7 @@ Public Class Cymn
                 Sql1 += ", 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職"
                 Sql1 += ", 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額,仕入金額, 粗利額"
                 Sql1 += ", 営業担当者コード, 営業担当者, 入力担当者コード, 入力担当者, 備考, 見積備考, ＶＡＴ"
-                Sql1 += ", 受注日, 登録日, 更新日, 更新者, 取消区分, 見積金額_外貨, 通貨, レート)"
+                Sql1 += ", 受注日, 登録日, 更新日, 更新者, 取消区分, 見積金額_外貨, 通貨, レート, 客先希望納期)"
                 Sql1 += " VALUES('" & frmC01F10_Login.loginValue.BumonCD & "'"     '会社コード
                 Sql1 += ", '" & TxtOrderNo.Text & "'"       '受注番号
                 Sql1 += ", '" & TxtOrderSuffix.Text & "'"   '受注番号枝番
@@ -707,6 +709,7 @@ Public Class Cymn
                 Sql1 += ", " & formatStringToNumber(TxtQuoteTotal2.Text)  '見積金額_外貨
                 Sql1 += ", " & CmCurrency.SelectedValue.ToString          '通貨
                 Sql1 += ", " & UtilClass.formatNumberF10(TxtRate.Text)    'レート
+                Sql1 += ", '" & UtilClass.strFormatDate(dtpDeliveryDate.Value) & "'"
                 Sql1 += " )"
 
                 _db.executeDB(Sql1)
