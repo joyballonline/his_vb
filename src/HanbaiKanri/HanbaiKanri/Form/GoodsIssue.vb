@@ -1819,14 +1819,24 @@ Public Class GoodsIssue
 
         Dim createFlg = False
 
+        '2019.12.19 受注番号基準に変更し、受注番号、出庫日、出庫区分を抽出条件とする
         Dim Sql1 As String = ""
-        Sql1 += "SELECT * FROM public.t44_shukohd"
-        Sql1 += " WHERE 出庫番号 = '" & DgvHistory.Rows(SelectedRow).Cells("出庫番号").Value & "'"
+        Sql1 += "SELECT HD.* FROM public.t44_shukohd HD"
+        Sql1 += " INNER JOIN public.t45_shukodt DT ON (HD.会社コード=DT.会社コード AND HD.出庫番号=DT.出庫番号)"
+        ''Sql1 += " WHERE 出庫番号 = '" & DgvHistory.Rows(SelectedRow).Cells("出庫番号").Value & "'"
+        Sql1 += " WHERE HD.受注番号 = '" & TxtOrderNo.Text & "'"
+        Sql1 += " AND HD.出庫日 = '" & CDate(DgvHistory.Rows(SelectedRow).Cells("出庫日").Value).ToString("yyyyMMdd") & "'"
+        Sql1 += " AND DT.出庫区分 = '1'"
 
 
+
+        '2019.12.19 受注番号基準に変更し、受注番号、出庫日、出庫区分を抽出条件とする
         Dim Sql2 As String = ""
-        Sql2 += "SELECT * FROM public.t45_shukodt"
-        Sql2 += " WHERE 出庫番号 = '" & DgvHistory.Rows(SelectedRow).Cells("出庫番号").Value & "'"
+        Sql2 += "SELECT DT.* FROM public.t45_shukodt DT"
+        Sql2 += " INNER JOIN public.t44_shukohd HD ON (HD.会社コード=DT.会社コード AND HD.出庫番号=DT.出庫番号)"
+        'Sql2 += " WHERE 出庫番号 = '" & DgvHistory.Rows(SelectedRow).Cells("出庫番号").Value & "'"
+        Sql2 += " WHERE DT.受注番号 = '" & TxtOrderNo.Text & "' AND DT.出庫区分 = '1'"
+        Sql2 += "   AND HD.出庫日 = '" & CDate(DgvHistory.Rows(SelectedRow).Cells("出庫日").Value).ToString("yyyyMMdd") & "'"
 
         Dim reccnt As Integer = 0
         Dim ds1 As DataSet = _db.selectDB(Sql1, RS, reccnt)
@@ -1857,8 +1867,10 @@ Public Class GoodsIssue
             sOutPath = StartUp._iniVal.OutXlsPath
 
             '出力ファイル名
+            '2019.12.19 受注番号+1行目出庫番号基準に変更
             Dim sOutFile As String = ""
-            sOutFile = sOutPath & "\DeliveryNote_" & ds2.Tables(RS).Rows(0)("出庫番号") & ".xlsx"
+            ''sOutFile = sOutPath & "\DeliveryNote_" & ds2.Tables(RS).Rows(0)("出庫番号") & ".xlsx"
+            sOutFile = sOutPath & "\DeliveryNote_" & TxtOrderNo.Text & ds2.Tables(RS).Rows(0)("出庫番号") & ".xlsx"
 
 
 
@@ -1870,7 +1882,9 @@ Public Class GoodsIssue
             sheet.Range("B8").Value = ds1.Tables(RS).Rows(0)("得意先住所") & " " & ds1.Tables(RS).Rows(0)("得意先郵便番号")
             sheet.Range("B11").Value = "'" & ds1.Tables(RS).Rows(0)("得意先電話番号")
 
-            sheet.Range("E7").Value = ds1.Tables(RS).Rows(0)("出庫番号")
+            '2019.12.19 出庫番号ー＞受注番号表示に改訂
+            ''sheet.Range("E7").Value = ":" & ds1.Tables(RS).Rows(0)("出庫番号")
+            sheet.Range("E7").Value = ":" & TxtOrderNo.Text
             sheet.Range("E8").Value = ds1.Tables(RS).Rows(0)("出庫日")
             sheet.Range("E9").Value = ds1.Tables(RS).Rows(0)("客先番号")
 
@@ -1904,8 +1918,11 @@ Public Class GoodsIssue
 
                 'lstRow = lstRow + 1
 
+                '2019.12.19 Range("B")に出庫番号を出力する改訂
                 sheet.Range("A" & lstRow).Value = num
-                sheet.Range("B" & lstRow).Value = ds2.Tables(RS).Rows(j)("メーカー") & Environment.NewLine & ds2.Tables(RS).Rows(j)("品名") & Environment.NewLine & ds2.Tables(RS).Rows(j)("型式")
+                sheet.Range("B" & lstRow).Value = ds2.Tables(RS).Rows(j)("メーカー") & Environment.NewLine & ds2.Tables(RS).Rows(j)("品名") &
+                                                  Environment.NewLine & ds2.Tables(RS).Rows(j)("型式") &
+                                                  Environment.NewLine & "DeliveryNoteNo." & ds2.Tables(RS).Rows(j)("出庫番号") & "-" & ds2.Tables(RS).Rows(j)("行番号")
                 sheet.Range("C" & lstRow).Value = ds2.Tables(RS).Rows(j)("出庫数量")
                 sheet.Range("D" & lstRow).Value = ds2.Tables(RS).Rows(j)("単位")
                 sheet.Range("E" & lstRow).Value = ds2.Tables(RS).Rows(j)("備考")
@@ -1963,8 +1980,10 @@ Public Class GoodsIssue
             sOutPath = StartUp._iniVal.OutXlsPath
 
             '出力ファイル名
+            '2019.12.19 受注番号+1行目出庫番号基準に変更
             Dim sOutFile As String = ""
-            sOutFile = sOutPath & "\PackingList_" & ds2.Tables(RS).Rows(0)("出庫番号") & ".xlsx"
+            ''sOutFile = sOutPath & "\PackingList_" & ds2.Tables(RS).Rows(0)("出庫番号") & ".xlsx"
+            sOutFile = sOutPath & "\PackingList_" & TxtOrderNo.Text & ds2.Tables(RS).Rows(0)("出庫番号") & ".xlsx"
 
             app = New Excel.Application()
             book = app.Workbooks.Add(sHinaFile)  'テンプレート
@@ -1975,7 +1994,9 @@ Public Class GoodsIssue
             sheet.Range("B9").Value = ds1.Tables(RS).Rows(0)("得意先住所") & " " & ds1.Tables(RS).Rows(0)("得意先郵便番号")
             sheet.Range("B11").Value = "'" & ds1.Tables(RS).Rows(0)("得意先電話番号")
 
-            sheet.Range("G8").Value = ds1.Tables(RS).Rows(0)("出庫番号")
+            '2019.12.19 出庫番号ー＞受注番号表示に改訂
+            ''sheet.Range("G8").Value = ds1.Tables(RS).Rows(0)("出庫番号")
+            sheet.Range("G8").Value = TxtOrderNo.Text
             sheet.Range("G9").Value = ds1.Tables(RS).Rows(0)("出庫日")
             sheet.Range("G10").Value = ds1.Tables(RS).Rows(0)("客先番号")
 
@@ -2006,8 +2027,11 @@ Public Class GoodsIssue
 
                 'lstRow = lstRow + 1
 
+                '2019.12.19 Range("B")に出庫番号を出力する改訂
                 sheet.Range("A" & lstRow).Value = num
-                sheet.Range("B" & lstRow).Value = ds2.Tables(RS).Rows(j)("メーカー") & Environment.NewLine & ds2.Tables(RS).Rows(j)("品名") & Environment.NewLine & ds2.Tables(RS).Rows(j)("型式")
+                sheet.Range("B" & lstRow).Value = ds2.Tables(RS).Rows(j)("メーカー") & Environment.NewLine & ds2.Tables(RS).Rows(j)("品名") &
+                                                  Environment.NewLine & ds2.Tables(RS).Rows(j)("型式") &
+                                                  Environment.NewLine & "DeliveryNoteNo." & ds2.Tables(RS).Rows(j)("出庫番号") & "-" & ds2.Tables(RS).Rows(j)("行番号")
                 sheet.Range("F" & lstRow).Value = ds2.Tables(RS).Rows(j)("出庫数量") & " " & ds2.Tables(RS).Rows(j)("単位")
                 'sheet.Rows(lstRow & ":" & lstRow).AutoFit
 
@@ -2057,8 +2081,10 @@ Public Class GoodsIssue
             sOutPath = StartUp._iniVal.OutXlsPath
 
             '出力ファイル名
+            '2019.12.19 受注番号+1行目出庫番号基準に変更
             Dim sOutFile As String = ""
-            sOutFile = sOutPath & "\Receipt_" & ds2.Tables(RS).Rows(0)("出庫番号") & ".xlsx"
+            ''sOutFile = sOutPath & "\Receipt_" & ds2.Tables(RS).Rows(0)("出庫番号") & ".xlsx"
+            sOutFile = sOutPath & "\Receipt_" & TxtOrderNo.Text & ds2.Tables(RS).Rows(0)("出庫番号") & ".xlsx"
 
 
 
@@ -2070,7 +2096,9 @@ Public Class GoodsIssue
             sheet.Range("E9").Value = ds1.Tables(RS).Rows(0)("得意先住所") & " " & ds1.Tables(RS).Rows(0)("得意先郵便番号")
             sheet.Range("E11").Value = "'" & ds1.Tables(RS).Rows(0)("得意先電話番号")
 
-            sheet.Range("U8").Value = ds1.Tables(RS).Rows(0)("出庫番号")
+            '2019.12.19 出庫番号ー＞受注番号表示に改訂
+            ''sheet.Range("U8").Value = ds1.Tables(RS).Rows(0)("出庫番号")
+            sheet.Range("U8").Value = TxtOrderNo.Text
             sheet.Range("U9").Value = ds1.Tables(RS).Rows(0)("出庫日")
             sheet.Range("U10").Value = ds1.Tables(RS).Rows(0)("客先番号")
 
@@ -2103,8 +2131,11 @@ Public Class GoodsIssue
 
                 'lstRow = lstRow + 1
 
+                '2019.12.19 Range("C")に出庫番号を出力する改訂
                 sheet.Range("A" & lstRow).Value = num
-                sheet.Range("C" & lstRow).Value = ds2.Tables(RS).Rows(j)("メーカー") & Environment.NewLine & ds2.Tables(RS).Rows(j)("品名") & Environment.NewLine & ds2.Tables(RS).Rows(j)("型式")
+                sheet.Range("C" & lstRow).Value = ds2.Tables(RS).Rows(j)("メーカー") & Environment.NewLine & ds2.Tables(RS).Rows(j)("品名") &
+                                                  Environment.NewLine & ds2.Tables(RS).Rows(j)("型式") &
+                                                  Environment.NewLine & "DeliveryNoteNo." & ds2.Tables(RS).Rows(j)("出庫番号") & "-" & ds2.Tables(RS).Rows(j)("行番号")
                 sheet.Range("N" & lstRow).Value = ds2.Tables(RS).Rows(j)("出庫数量")
                 sheet.Range("Q" & lstRow).Value = ds2.Tables(RS).Rows(j)("単位")
                 sheet.Range("T" & lstRow).Value = ds2.Tables(RS).Rows(j)("備考")
@@ -2810,6 +2841,8 @@ Public Class GoodsIssue
 
         Dim PurchaseTotal As Integer = 0
 
+
+
         'ヘッダー以外だったら
         If e.RowIndex > -1 Then
 
@@ -2838,14 +2871,24 @@ Public Class GoodsIssue
 
         Dim createFlg = False
 
+        '2019.12.19 受注番号基準に変更し、受注番号、出庫日、出庫区分を抽出条件とする
         Dim Sql1 As String = ""
-        Sql1 += "SELECT * FROM public.t44_shukohd"
-        Sql1 += " WHERE 出庫番号 = '" & DgvHistory.Rows(SelectedRow).Cells("出庫番号").Value & "'"
+        Sql1 += "SELECT HD.* FROM public.t44_shukohd HD"
+        Sql1 += " INNER JOIN public.t45_shukodt DT ON (HD.会社コード=DT.会社コード AND HD.出庫番号=DT.出庫番号)"
+        ''Sql1 += " WHERE 出庫番号 = '" & DgvHistory.Rows(SelectedRow).Cells("出庫番号").Value & "'"
+        Sql1 += " WHERE HD.受注番号 = '" & TxtOrderNo.Text & "'"
+        Sql1 += " AND HD.出庫日 = '" & CDate(DgvHistory.Rows(SelectedRow).Cells("出庫日").Value).ToString("yyyyMMdd") & "'"
+        Sql1 += " AND DT.出庫区分 = '1'"
 
 
+        '2019.12.19 受注番号基準に変更し、受注番号、出庫日、出庫区分を抽出条件とする
         Dim Sql2 As String = ""
-        Sql2 += "SELECT * FROM public.t45_shukodt"
-        Sql2 += " WHERE 出庫番号 = '" & DgvHistory.Rows(SelectedRow).Cells("出庫番号").Value & "'"
+        Sql2 += "SELECT DT.* FROM public.t45_shukodt DT"
+        Sql2 += " INNER JOIN public.t44_shukohd HD ON (HD.会社コード=DT.会社コード AND HD.出庫番号=DT.出庫番号)"
+        'Sql2 += " WHERE 出庫番号 = '" & DgvHistory.Rows(SelectedRow).Cells("出庫番号").Value & "'"
+        Sql2 += " WHERE DT.受注番号 = '" & TxtOrderNo.Text & "'"
+        Sql2 += "   AND HD.出庫日 = '" & CDate(DgvHistory.Rows(SelectedRow).Cells("出庫日").Value).ToString("yyyyMMdd") & "'"
+        Sql2 += " AND DT.出庫区分 = '1'"
 
         Dim reccnt As Integer = 0
         Dim ds1 As DataSet = _db.selectDB(Sql1, RS, reccnt)
@@ -2876,8 +2919,10 @@ Public Class GoodsIssue
             sOutPath = StartUp._iniVal.OutXlsPath
 
             '出力ファイル名
+            '2019.12.19 受注番号+1行目出庫番号基準に変更
             Dim sOutFile As String = ""
-            sOutFile = sOutPath & "\DeliveryNote_" & ds2.Tables(RS).Rows(0)("出庫番号") & ".xlsx"
+            ''sOutFile = sOutPath & "\DeliveryNote_" & ds2.Tables(RS).Rows(0)("出庫番号") & ".xlsx"
+            sOutFile = sOutPath & "\DeliveryNote_" & TxtOrderNo.Text & ds2.Tables(RS).Rows(0)("出庫番号") & ".xlsx"
 
 
 
@@ -2889,7 +2934,9 @@ Public Class GoodsIssue
             sheet.Range("B9").Value = ":" & ds1.Tables(RS).Rows(0)("得意先住所") & " " & ds1.Tables(RS).Rows(0)("得意先郵便番号")
             sheet.Range("B11").Value = ":" & ds1.Tables(RS).Rows(0)("得意先電話番号")
 
-            sheet.Range("E8").Value = ":" & ds1.Tables(RS).Rows(0)("出庫番号")
+            '2019.12.19 出庫番号ー＞受注番号表示に改訂
+            ''sheet.Range("E8").Value = ":" & ds1.Tables(RS).Rows(0)("出庫番号")
+            sheet.Range("E8").Value = ":" & TxtOrderNo.Text
             sheet.Range("E9").Value = ":" & ds1.Tables(RS).Rows(0)("出庫日")
             sheet.Range("E10").Value = ":" & ds1.Tables(RS).Rows(0)("客先番号")
 
@@ -2910,8 +2957,11 @@ Public Class GoodsIssue
                     Marshal.ReleaseComObject(R)
                 End If
 
+                '2019.12.19 Range("B")に出庫番号を出力する改訂
                 sheet.Range("A" & lstRow).Value = num
-                sheet.Range("B" & lstRow).Value = ds2.Tables(RS).Rows(j)("メーカー") & Environment.NewLine & ds2.Tables(RS).Rows(j)("品名") & Environment.NewLine & ds2.Tables(RS).Rows(j)("型式") & Environment.NewLine & ds2.Tables(RS).Rows(j)("備考")
+                sheet.Range("B" & lstRow).Value = ds2.Tables(RS).Rows(j)("メーカー") & Environment.NewLine & ds2.Tables(RS).Rows(j)("品名") &
+                                                  Environment.NewLine & ds2.Tables(RS).Rows(j)("型式") & Environment.NewLine & ds2.Tables(RS).Rows(j)("備考") &
+                                                  Environment.NewLine & "DeliveryNoteNo." & ds2.Tables(RS).Rows(j)("出庫番号") & "-" & ds2.Tables(RS).Rows(j)("行番号")
                 sheet.Range("C" & lstRow).Value = ds2.Tables(RS).Rows(j)("出庫数量")
                 sheet.Range("D" & lstRow).Value = ds2.Tables(RS).Rows(j)("単位")
                 'sheet.Range("E" & lstRow).Value = ds2.Tables(RS).Rows(j)("備考")

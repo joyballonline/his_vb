@@ -89,12 +89,13 @@ Public Class GoodsIssueList
         If RbtnSlip.Checked Then
 
             '使用言語によって表示切替
+            '2019.12.16 表現順序を取消、出庫番号、出庫日、受注番号、受注番号枝番 -> 取消、受注番号、受注番号枝番、出庫番号、出庫日に変更
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 DgvCymnhd.Columns.Add("取消", "Cancel")
-                DgvCymnhd.Columns.Add("出庫番号", "GoodsDeliveryNumber")
-                DgvCymnhd.Columns.Add("出庫日", "GoodsDeliveryDate")
                 DgvCymnhd.Columns.Add("受注番号", "JobOrderNumber")
                 DgvCymnhd.Columns.Add("受注番号枝番", "JobOrderSubNumber")
+                DgvCymnhd.Columns.Add("出庫番号", "GoodsDeliveryNumber")
+                DgvCymnhd.Columns.Add("出庫日", "GoodsDeliveryDate")
                 DgvCymnhd.Columns.Add("客先番号", "CustomerNumber")
                 DgvCymnhd.Columns.Add("得意先コード", "CustomerCode")
                 DgvCymnhd.Columns.Add("得意先名", "CustomerName")
@@ -112,10 +113,10 @@ Public Class GoodsIssueList
 
             Else
                 DgvCymnhd.Columns.Add("取消", "取消")
-                DgvCymnhd.Columns.Add("出庫番号", "出庫番号")
-                DgvCymnhd.Columns.Add("出庫日", "出庫日")
                 DgvCymnhd.Columns.Add("受注番号", "受注番号")
                 DgvCymnhd.Columns.Add("受注番号枝番", "受注番号枝番")
+                DgvCymnhd.Columns.Add("出庫番号", "出庫番号")
+                DgvCymnhd.Columns.Add("出庫日", "出庫日")
                 DgvCymnhd.Columns.Add("客先番号", "客先番号")
                 DgvCymnhd.Columns.Add("得意先コード", "得意先コード")
                 DgvCymnhd.Columns.Add("得意先名", "得意先名")
@@ -144,10 +145,12 @@ Public Class GoodsIssueList
             Try
 
                 '伝票単位選択時
+                '2019.12.16 表現順序を取消、出庫番号、出庫日、受注番号、受注番号枝番 -> 取消、受注番号、受注番号枝番、出庫番号、出庫日に変更
                 '----------------------------
                 Sql = " SELECT "
 
-                Sql += " t44.取消区分,t44.出庫番号,t44.出庫日,t44.受注番号,t44.受注番号枝番,t44.客先番号 "
+                ''Sql += " t44.取消区分,t44.出庫番号,t44.出庫日,t44.受注番号,t44.受注番号枝番,t44.客先番号 "     '2019.12.16 DEL
+                Sql += " t44.取消区分,t44.受注番号,t44.受注番号枝番,t44.出庫番号,t44.出庫日,t44.客先番号 "       '2019.12.16 ADD
                 Sql += ",t44.得意先コード,t44.得意先名,t44.得意先郵便番号,t44.得意先住所,t44.得意先電話番号"
 
                 Sql += ",t44.得意先ＦＡＸ,t44.得意先担当者名,t44.得意先担当者役職,t44.営業担当者,t44.入力担当者"
@@ -171,23 +174,27 @@ Public Class GoodsIssueList
                 Sql += " t45.出庫区分 <> '" & CommonConst.SHUKO_KBN_TMP.ToString & "'" '仮出庫以外のデータ
 
                 Sql += " GROUP BY "
-                Sql += " t44.取消区分,t44.出庫番号,t44.出庫日,t44.受注番号,t44.受注番号枝番,t44.客先番号 "
+                ''Sql += " t44.取消区分,t44.出庫番号,t44.出庫日,t44.受注番号,t44.受注番号枝番,t44.客先番号 "     '2019.12.16 DEL
+                Sql += " t44.取消区分,t44.受注番号,t44.受注番号枝番,t44.出庫番号,t44.出庫日,t44.客先番号 "       '2019.12.16 ADD
                 Sql += ",t44.得意先コード,t44.得意先名,t44.得意先郵便番号,t44.得意先住所,t44.得意先電話番号"
                 Sql += ",t44.得意先ＦＡＸ,t44.得意先担当者名,t44.得意先担当者役職,t44.営業担当者,t44.入力担当者"
                 Sql += ",t44.備考,t44.登録日,t44.更新日,t45.仕入区分"
 
                 Sql += " ORDER BY "
-                Sql += " t44.更新日 DESC"
+                '2019.12.16 表示順を表示キー順とする
+                ''Sql += " t44.更新日 DESC"                                                                      '2019.12.16 DEL  
+                Sql += " t44.受注番号 ASC ,t44.受注番号枝番 ASC ,t44.出庫番号 ASC ,t44.出庫日 ASC"               '2019.12.16 ADD
 
                 ds = _db.selectDB(Sql, RS, reccnt)
 
+                '2019.12.16 表現順序を取消、出庫番号、出庫日、受注番号、受注番号枝番 -> 取消、受注番号、受注番号枝番、出庫番号、出庫日に変更
                 For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
                     DgvCymnhd.Rows.Add()
                     DgvCymnhd.Rows(i).Cells("取消").Value = getDelKbnTxt(ds.Tables(RS).Rows(i)("取消区分"))
-                    DgvCymnhd.Rows(i).Cells("出庫番号").Value = ds.Tables(RS).Rows(i)("出庫番号")
-                    DgvCymnhd.Rows(i).Cells("出庫日").Value = ds.Tables(RS).Rows(i)("出庫日").ToShortDateString()
                     DgvCymnhd.Rows(i).Cells("受注番号").Value = ds.Tables(RS).Rows(i)("受注番号")
                     DgvCymnhd.Rows(i).Cells("受注番号枝番").Value = ds.Tables(RS).Rows(i)("受注番号枝番")
+                    DgvCymnhd.Rows(i).Cells("出庫番号").Value = ds.Tables(RS).Rows(i)("出庫番号")
+                    DgvCymnhd.Rows(i).Cells("出庫日").Value = ds.Tables(RS).Rows(i)("出庫日").ToShortDateString()
                     DgvCymnhd.Rows(i).Cells("客先番号").Value = ds.Tables(RS).Rows(i)("客先番号")
                     DgvCymnhd.Rows(i).Cells("得意先コード").Value = ds.Tables(RS).Rows(i)("得意先コード")
                     DgvCymnhd.Rows(i).Cells("得意先名").Value = ds.Tables(RS).Rows(i)("得意先名")
@@ -216,14 +223,15 @@ Public Class GoodsIssueList
         Else
 
             '明細単位選択時
+            '2019.12.16 表現順序を取消、出庫番号、行番号、出庫日、受注番号、受注番号枝番 -> 取消、受注番号、受注番号枝番、出庫番号、行番号、出庫日に変更
             '----------------------------
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 DgvCymnhd.Columns.Add("取消", "Cancel")
+                DgvCymnhd.Columns.Add("受注番号", "JobOrderNumber")
+                DgvCymnhd.Columns.Add("受注番号枝番", "JobOrderSubNumber")
                 DgvCymnhd.Columns.Add("出庫番号", "GoodsDeliveryNumber")
                 DgvCymnhd.Columns.Add("行番号", "LineNumber")
                 DgvCymnhd.Columns.Add("出庫日", "GoodsDeliveryDate")
-                DgvCymnhd.Columns.Add("受注番号", "JobOrderNumber")
-                DgvCymnhd.Columns.Add("受注番号枝番", "JobOrderSubNumber")
                 DgvCymnhd.Columns.Add("仕入区分", "PurchasingClassification")
                 DgvCymnhd.Columns.Add("メーカー", "Manufacturer")
                 DgvCymnhd.Columns.Add("品名", "ItemName")
@@ -237,11 +245,11 @@ Public Class GoodsIssueList
                 DgvCymnhd.Columns.Add("更新日", "UpdateDate")
             Else
                 DgvCymnhd.Columns.Add("取消", "取消")
+                DgvCymnhd.Columns.Add("受注番号", "受注番号")
+                DgvCymnhd.Columns.Add("受注番号枝番", "受注番号枝番")
                 DgvCymnhd.Columns.Add("出庫番号", "出庫番号")
                 DgvCymnhd.Columns.Add("行番号", "行番号")
                 DgvCymnhd.Columns.Add("出庫日", "出庫日")
-                DgvCymnhd.Columns.Add("受注番号", "受注番号")
-                DgvCymnhd.Columns.Add("受注番号枝番", "受注番号枝番")
                 DgvCymnhd.Columns.Add("仕入区分", "仕入区分")
                 DgvCymnhd.Columns.Add("メーカー", "メーカー")
                 DgvCymnhd.Columns.Add("品名", "品名")
@@ -283,7 +291,9 @@ Public Class GoodsIssueList
             Sql += " AND "
             Sql += " t45.出庫区分 <> '" & CommonConst.SHUKO_KBN_TMP.ToString & "'" '仮出庫以外のデータ
             Sql += " ORDER BY "
-            Sql += "t45.更新日 DESC"
+            '2019.12.16 表示順を表示キー順とする
+            ''Sql += " t45.更新日 DESC"                                                                      '2019.12.16 DEL  
+            Sql += " t45.受注番号 ASC ,t45.受注番号枝番 ASC ,t45.出庫番号 ASC ,t45.行番号 ASC"               '2019.12.16 ADD
 
             Try
 
@@ -291,15 +301,16 @@ Public Class GoodsIssueList
 
                 For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
                     '汎用マスタから仕入区分名称取得
+                    '2019.12.16 表現順序を取消、出庫番号、行番号、出庫日、受注番号、受注番号枝番 -> 取消、受注番号、受注番号枝番、出庫番号、行番号、出庫日に変更
                     Dim sireKbn As DataSet = getDsHanyoData(CommonConst.FIXED_KEY_PURCHASING_CLASS, ds.Tables(RS).Rows(i)("仕入区分").ToString)
 
                     DgvCymnhd.Rows.Add()
                     DgvCymnhd.Rows(i).Cells("取消").Value = getDelKbnTxt(ds.Tables(RS).Rows(i)("取消区分"))
+                    DgvCymnhd.Rows(i).Cells("受注番号").Value = ds.Tables(RS).Rows(i)("受注番号")
+                    DgvCymnhd.Rows(i).Cells("受注番号枝番").Value = ds.Tables(RS).Rows(i)("受注番号枝番")
                     DgvCymnhd.Rows(i).Cells("出庫番号").Value = ds.Tables(RS).Rows(i)("出庫番号")
                     DgvCymnhd.Rows(i).Cells("行番号").Value = ds.Tables(RS).Rows(i)("行番号")
                     DgvCymnhd.Rows(i).Cells("出庫日").Value = ds.Tables(RS).Rows(i)("出庫日").ToShortDateString()
-                    DgvCymnhd.Rows(i).Cells("受注番号").Value = ds.Tables(RS).Rows(i)("受注番号")
-                    DgvCymnhd.Rows(i).Cells("受注番号枝番").Value = ds.Tables(RS).Rows(i)("受注番号枝番")
                     DgvCymnhd.Rows(i).Cells("仕入区分").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
                                                                 sireKbn.Tables(RS).Rows(0)("文字２"),
                                                                 sireKbn.Tables(RS).Rows(0)("文字１"))
