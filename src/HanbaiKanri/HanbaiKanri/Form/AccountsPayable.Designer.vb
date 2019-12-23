@@ -22,26 +22,21 @@ Partial Class AccountsPayable
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.BtnRegist = New System.Windows.Forms.Button()
         Me.BtnBack = New System.Windows.Forms.Button()
         Me.LblNo1 = New System.Windows.Forms.Label()
@@ -86,15 +81,6 @@ Partial Class AccountsPayable
         Me.買掛済み発注番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.買掛済み発注番号枝番 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DgvCymndt = New System.Windows.Forms.DataGridView()
-        Me.LblMode = New System.Windows.Forms.Label()
-        Me.DtpPaymentDate = New System.Windows.Forms.DateTimePicker()
-        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.LblPaymentDate = New System.Windows.Forms.Label()
-        Me.TxtIDRCurrency = New System.Windows.Forms.TextBox()
-        Me.LblIDRCurrency = New System.Windows.Forms.Label()
-        Me.VendorInvoiceNumber = New System.Windows.Forms.TextBox()
-        Me.lblVendorInvoiceNumber = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.明細 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.メーカー = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.品名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -107,6 +93,16 @@ Partial Class AccountsPayable
         Me.仕入金額計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.買掛 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.発注個数 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.LblMode = New System.Windows.Forms.Label()
+        Me.DtpPaymentDate = New System.Windows.Forms.DateTimePicker()
+        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.LblPaymentDate = New System.Windows.Forms.Label()
+        Me.TxtIDRCurrency = New System.Windows.Forms.TextBox()
+        Me.LblIDRCurrency = New System.Windows.Forms.Label()
+        Me.VendorInvoiceNumber = New System.Windows.Forms.TextBox()
+        Me.lblVendorInvoiceNumber = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.BtnVat = New System.Windows.Forms.Button()
         CType(Me.DgvCymn, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvAdd, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvHistory, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -137,7 +133,7 @@ Partial Class AccountsPayable
         'LblNo1
         '
         Me.LblNo1.BackColor = System.Drawing.Color.Transparent
-        Me.LblNo1.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblNo1.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblNo1.Location = New System.Drawing.Point(1316, 111)
         Me.LblNo1.Name = "LblNo1"
         Me.LblNo1.Size = New System.Drawing.Size(22, 22)
@@ -152,7 +148,7 @@ Partial Class AccountsPayable
         Me.TxtHattyudtCount.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtHattyudtCount.Location = New System.Drawing.Point(1272, 111)
         Me.TxtHattyudtCount.Name = "TxtHattyudtCount"
-        Me.TxtHattyudtCount.Size = New System.Drawing.Size(38, 37)
+        Me.TxtHattyudtCount.Size = New System.Drawing.Size(38, 22)
         Me.TxtHattyudtCount.TabIndex = 290
         Me.TxtHattyudtCount.TabStop = False
         Me.TxtHattyudtCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -160,7 +156,7 @@ Partial Class AccountsPayable
         'LblNo3
         '
         Me.LblNo3.BackColor = System.Drawing.Color.Transparent
-        Me.LblNo3.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblNo3.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblNo3.Location = New System.Drawing.Point(1316, 379)
         Me.LblNo3.Name = "LblNo3"
         Me.LblNo3.Size = New System.Drawing.Size(22, 22)
@@ -176,7 +172,7 @@ Partial Class AccountsPayable
         Me.TxtCount3.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtCount3.Location = New System.Drawing.Point(1272, 379)
         Me.TxtCount3.Name = "TxtCount3"
-        Me.TxtCount3.Size = New System.Drawing.Size(38, 37)
+        Me.TxtCount3.Size = New System.Drawing.Size(38, 22)
         Me.TxtCount3.TabIndex = 286
         Me.TxtCount3.TabStop = False
         Me.TxtCount3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -187,12 +183,12 @@ Partial Class AccountsPayable
         Me.DtpAPDate.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.DtpAPDate.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpAPDate.CustomFormat = ""
-        Me.DtpAPDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.DtpAPDate.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpAPDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DtpAPDate.Location = New System.Drawing.Point(381, 3)
+        Me.DtpAPDate.Location = New System.Drawing.Point(381, 10)
         Me.DtpAPDate.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.DtpAPDate.Name = "DtpAPDate"
-        Me.DtpAPDate.Size = New System.Drawing.Size(148, 37)
+        Me.DtpAPDate.Size = New System.Drawing.Size(148, 22)
         Me.DtpAPDate.TabIndex = 4
         Me.DtpAPDate.TabStop = False
         Me.DtpAPDate.Value = New Date(2019, 1, 1, 0, 0, 0, 0)
@@ -202,7 +198,7 @@ Partial Class AccountsPayable
         Me.LblAccountsPayableDate.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.LblAccountsPayableDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblAccountsPayableDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblAccountsPayableDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblAccountsPayableDate.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblAccountsPayableDate.Location = New System.Drawing.Point(183, 10)
         Me.LblAccountsPayableDate.Name = "LblAccountsPayableDate"
         Me.LblAccountsPayableDate.Size = New System.Drawing.Size(192, 22)
@@ -213,7 +209,7 @@ Partial Class AccountsPayable
         'LblNo2
         '
         Me.LblNo2.BackColor = System.Drawing.Color.Transparent
-        Me.LblNo2.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblNo2.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblNo2.Location = New System.Drawing.Point(1316, 245)
         Me.LblNo2.Name = "LblNo2"
         Me.LblNo2.Size = New System.Drawing.Size(22, 22)
@@ -228,7 +224,7 @@ Partial Class AccountsPayable
         Me.TxtKikehdCount.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtKikehdCount.Location = New System.Drawing.Point(1272, 245)
         Me.TxtKikehdCount.Name = "TxtKikehdCount"
-        Me.TxtKikehdCount.Size = New System.Drawing.Size(38, 37)
+        Me.TxtKikehdCount.Size = New System.Drawing.Size(38, 22)
         Me.TxtKikehdCount.TabIndex = 280
         Me.TxtKikehdCount.TabStop = False
         Me.TxtKikehdCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -237,24 +233,16 @@ Partial Class AccountsPayable
         '
         Me.DgvCymn.AllowUserToAddRows = False
         Me.DgvCymn.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DgvCymn.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DgvCymn.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvCymn.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.発注番号, Me.発注番号枝番, Me.客先番号, Me.発注日, Me.仕入先コード, Me.仕入先, Me.仕入原価, Me.VAT_IN, Me.発注金額, Me.買掛金額計, Me.買掛残高})
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DgvCymn.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DgvCymn.DefaultCellStyle = DataGridViewCellStyle5
         Me.DgvCymn.Location = New System.Drawing.Point(12, 38)
         Me.DgvCymn.Name = "DgvCymn"
         Me.DgvCymn.RowHeadersVisible = False
@@ -268,7 +256,7 @@ Partial Class AccountsPayable
         Me.発注番号.HeaderText = "発注番号"
         Me.発注番号.Name = "発注番号"
         Me.発注番号.ReadOnly = True
-        Me.発注番号.Width = 151
+        Me.発注番号.Width = 78
         '
         '発注番号枝番
         '
@@ -276,91 +264,91 @@ Partial Class AccountsPayable
         Me.発注番号枝番.MaxInputLength = 2
         Me.発注番号枝番.Name = "発注番号枝番"
         Me.発注番号枝番.ReadOnly = True
-        Me.発注番号枝番.Width = 138
+        Me.発注番号枝番.Width = 72
         '
         '客先番号
         '
         Me.客先番号.HeaderText = "客先番号"
         Me.客先番号.Name = "客先番号"
         Me.客先番号.ReadOnly = True
-        Me.客先番号.Width = 151
+        Me.客先番号.Width = 78
         '
         '発注日
         '
         Me.発注日.HeaderText = "発注日"
         Me.発注日.Name = "発注日"
         Me.発注日.ReadOnly = True
-        Me.発注日.Width = 127
+        Me.発注日.Width = 66
         '
         '仕入先コード
         '
         Me.仕入先コード.HeaderText = "仕入先コード"
         Me.仕入先コード.Name = "仕入先コード"
-        Me.仕入先コード.Width = 181
+        Me.仕入先コード.Width = 93
         '
         '仕入先
         '
         Me.仕入先.HeaderText = "仕入先名"
         Me.仕入先.Name = "仕入先"
         Me.仕入先.ReadOnly = True
-        Me.仕入先.Width = 151
+        Me.仕入先.Width = 78
         '
         '仕入原価
         '
-        DataGridViewCellStyle2.Format = "N2"
-        DataGridViewCellStyle2.NullValue = "0.00"
-        Me.仕入原価.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle1.Format = "N2"
+        DataGridViewCellStyle1.NullValue = "0.00"
+        Me.仕入原価.DefaultCellStyle = DataGridViewCellStyle1
         Me.仕入原価.HeaderText = "仕入原価"
         Me.仕入原価.Name = "仕入原価"
-        Me.仕入原価.Width = 151
+        Me.仕入原価.Width = 78
         '
         'VAT_IN
         '
         Me.VAT_IN.HeaderText = "VAT-IN"
         Me.VAT_IN.Name = "VAT_IN"
-        Me.VAT_IN.Width = 132
+        Me.VAT_IN.Width = 70
         '
         '発注金額
+        '
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle2.Format = "N2"
+        DataGridViewCellStyle2.NullValue = "0.00"
+        Me.発注金額.DefaultCellStyle = DataGridViewCellStyle2
+        Me.発注金額.HeaderText = "発注金額"
+        Me.発注金額.Name = "発注金額"
+        Me.発注金額.ReadOnly = True
+        Me.発注金額.Width = 78
+        '
+        '買掛金額計
         '
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         DataGridViewCellStyle3.Format = "N2"
         DataGridViewCellStyle3.NullValue = "0.00"
-        Me.発注金額.DefaultCellStyle = DataGridViewCellStyle3
-        Me.発注金額.HeaderText = "発注金額"
-        Me.発注金額.Name = "発注金額"
-        Me.発注金額.ReadOnly = True
-        Me.発注金額.Width = 151
+        Me.買掛金額計.DefaultCellStyle = DataGridViewCellStyle3
+        Me.買掛金額計.HeaderText = "買掛金額計"
+        Me.買掛金額計.Name = "買掛金額計"
+        Me.買掛金額計.ReadOnly = True
+        Me.買掛金額計.Width = 90
         '
-        '買掛金額計
+        '買掛残高
         '
         DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         DataGridViewCellStyle4.Format = "N2"
         DataGridViewCellStyle4.NullValue = "0.00"
-        Me.買掛金額計.DefaultCellStyle = DataGridViewCellStyle4
-        Me.買掛金額計.HeaderText = "買掛金額計"
-        Me.買掛金額計.Name = "買掛金額計"
-        Me.買掛金額計.ReadOnly = True
-        Me.買掛金額計.Width = 175
-        '
-        '買掛残高
-        '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle5.Format = "N2"
-        DataGridViewCellStyle5.NullValue = "0.00"
-        Me.買掛残高.DefaultCellStyle = DataGridViewCellStyle5
+        Me.買掛残高.DefaultCellStyle = DataGridViewCellStyle4
         Me.買掛残高.HeaderText = "買掛残高"
         Me.買掛残高.Name = "買掛残高"
         Me.買掛残高.ReadOnly = True
-        Me.買掛残高.Width = 151
+        Me.買掛残高.Width = 78
         '
         'LblAdd
         '
         Me.LblAdd.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.LblAdd.AutoSize = True
         Me.LblAdd.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblAdd.Location = New System.Drawing.Point(3, 6)
+        Me.LblAdd.Location = New System.Drawing.Point(3, 14)
         Me.LblAdd.Name = "LblAdd"
-        Me.LblAdd.Size = New System.Drawing.Size(163, 30)
+        Me.LblAdd.Size = New System.Drawing.Size(82, 15)
         Me.LblAdd.TabIndex = 279
         Me.LblAdd.Text = "■今回買掛"
         '
@@ -370,7 +358,7 @@ Partial Class AccountsPayable
         Me.LblHistory.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblHistory.Location = New System.Drawing.Point(14, 249)
         Me.LblHistory.Name = "LblHistory"
-        Me.LblHistory.Size = New System.Drawing.Size(220, 30)
+        Me.LblHistory.Size = New System.Drawing.Size(110, 15)
         Me.LblHistory.TabIndex = 278
         Me.LblHistory.Text = "■買掛登録済み"
         '
@@ -380,7 +368,7 @@ Partial Class AccountsPayable
         Me.LblPurchaseOrder.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblPurchaseOrder.Location = New System.Drawing.Point(14, 114)
         Me.LblPurchaseOrder.Name = "LblPurchaseOrder"
-        Me.LblPurchaseOrder.Size = New System.Drawing.Size(193, 30)
+        Me.LblPurchaseOrder.Size = New System.Drawing.Size(97, 15)
         Me.LblPurchaseOrder.TabIndex = 277
         Me.LblPurchaseOrder.Text = "＜発注明細＞"
         '
@@ -388,24 +376,8 @@ Partial Class AccountsPayable
         '
         Me.DgvAdd.AllowUserToAddRows = False
         Me.DgvAdd.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle7.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DgvAdd.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle7
         Me.DgvAdd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvAdd.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.AddNo, Me.今回支払先, Me.今回買掛金額計, Me.今回備考1, Me.今回備考2})
-        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle11.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        DataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DgvAdd.DefaultCellStyle = DataGridViewCellStyle11
         Me.DgvAdd.Location = New System.Drawing.Point(11, 452)
         Me.DgvAdd.Name = "DgvAdd"
         Me.DgvAdd.RowHeadersVisible = False
@@ -415,67 +387,59 @@ Partial Class AccountsPayable
         '
         'AddNo
         '
-        DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.AddNo.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.AddNo.DefaultCellStyle = DataGridViewCellStyle6
         Me.AddNo.HeaderText = "No"
         Me.AddNo.Name = "AddNo"
         Me.AddNo.ReadOnly = True
-        Me.AddNo.Width = 82
+        Me.AddNo.Width = 44
         '
         '今回支払先
         '
-        DataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.今回支払先.DefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.今回支払先.DefaultCellStyle = DataGridViewCellStyle7
         Me.今回支払先.HeaderText = "支払先"
         Me.今回支払先.Name = "今回支払先"
         Me.今回支払先.ReadOnly = True
-        Me.今回支払先.Width = 127
+        Me.今回支払先.Width = 66
         '
         '今回買掛金額計
         '
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.今回買掛金額計.DefaultCellStyle = DataGridViewCellStyle10
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.今回買掛金額計.DefaultCellStyle = DataGridViewCellStyle8
         Me.今回買掛金額計.HeaderText = "今回登録額"
         Me.今回買掛金額計.MaxInputLength = 14
         Me.今回買掛金額計.Name = "今回買掛金額計"
-        Me.今回買掛金額計.Width = 175
+        Me.今回買掛金額計.Width = 90
         '
         '今回備考1
         '
         Me.今回備考1.HeaderText = "備考1"
         Me.今回備考1.MaxInputLength = 50
         Me.今回備考1.Name = "今回備考1"
-        Me.今回備考1.Width = 115
+        Me.今回備考1.Width = 60
         '
         '今回備考2
         '
         Me.今回備考2.HeaderText = "備考2"
         Me.今回備考2.MaxInputLength = 50
         Me.今回備考2.Name = "今回備考2"
-        Me.今回備考2.Width = 115
+        Me.今回備考2.Width = 60
         '
         'DgvHistory
         '
         Me.DgvHistory.AllowUserToAddRows = False
         Me.DgvHistory.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
-        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle12.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        DataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DgvHistory.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle12
         Me.DgvHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvHistory.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.No, Me.買掛番号, Me.買掛区分, Me.買掛日, Me.仕入先請求番号, Me.支払先, Me.買掛金額, Me.備考1, Me.備考2, Me.買掛済み発注番号, Me.買掛済み発注番号枝番})
-        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle14.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle14.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        DataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle14.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DgvHistory.DefaultCellStyle = DataGridViewCellStyle14
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle10.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DgvHistory.DefaultCellStyle = DataGridViewCellStyle10
         Me.DgvHistory.Location = New System.Drawing.Point(12, 273)
         Me.DgvHistory.Name = "DgvHistory"
         Me.DgvHistory.RowHeadersVisible = False
@@ -489,64 +453,64 @@ Partial Class AccountsPayable
         Me.No.HeaderText = "No"
         Me.No.Name = "No"
         Me.No.ReadOnly = True
-        Me.No.Width = 82
+        Me.No.Width = 44
         '
         '買掛番号
         '
         Me.買掛番号.HeaderText = "買掛番号"
         Me.買掛番号.Name = "買掛番号"
         Me.買掛番号.ReadOnly = True
-        Me.買掛番号.Width = 118
+        Me.買掛番号.Width = 61
         '
         '買掛区分
         '
         Me.買掛区分.HeaderText = "買掛区分"
         Me.買掛区分.Name = "買掛区分"
         Me.買掛区分.ReadOnly = True
-        Me.買掛区分.Width = 118
+        Me.買掛区分.Width = 61
         '
         '買掛日
         '
         Me.買掛日.HeaderText = "SuplierInvoiceDate"
         Me.買掛日.Name = "買掛日"
         Me.買掛日.ReadOnly = True
-        Me.買掛日.Width = 240
+        Me.買掛日.Width = 125
         '
         '仕入先請求番号
         '
         Me.仕入先請求番号.HeaderText = "SupplierInvoiceNo"
         Me.仕入先請求番号.Name = "仕入先請求番号"
-        Me.仕入先請求番号.Width = 232
+        Me.仕入先請求番号.Width = 121
         '
         '支払先
         '
         Me.支払先.HeaderText = "支払先"
         Me.支払先.Name = "支払先"
         Me.支払先.ReadOnly = True
-        Me.支払先.Width = 118
+        Me.支払先.Width = 61
         '
         '買掛金額
         '
-        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.買掛金額.DefaultCellStyle = DataGridViewCellStyle13
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.買掛金額.DefaultCellStyle = DataGridViewCellStyle9
         Me.買掛金額.HeaderText = "買掛登録済み額"
         Me.買掛金額.Name = "買掛金額"
         Me.買掛金額.ReadOnly = True
-        Me.買掛金額.Width = 161
+        Me.買掛金額.Width = 83
         '
         '備考1
         '
         Me.備考1.HeaderText = "備考1"
         Me.備考1.Name = "備考1"
         Me.備考1.ReadOnly = True
-        Me.備考1.Width = 97
+        Me.備考1.Width = 51
         '
         '備考2
         '
         Me.備考2.HeaderText = "備考2"
         Me.備考2.Name = "備考2"
         Me.備考2.ReadOnly = True
-        Me.備考2.Width = 97
+        Me.備考2.Width = 51
         '
         '買掛済み発注番号
         '
@@ -568,24 +532,16 @@ Partial Class AccountsPayable
         '
         Me.DgvCymndt.AllowUserToAddRows = False
         Me.DgvCymndt.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
-        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle15.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        DataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DgvCymndt.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle15
         Me.DgvCymndt.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvCymndt.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.明細, Me.メーカー, Me.品名, Me.型式, Me.仕入数量, Me.単位, Me.仕入単価, Me.仕入金額, Me.VAT, Me.仕入金額計, Me.買掛, Me.発注個数})
-        DataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle20.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle20.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        DataGridViewCellStyle20.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle20.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DgvCymndt.DefaultCellStyle = DataGridViewCellStyle20
+        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle15.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle15.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DgvCymndt.DefaultCellStyle = DataGridViewCellStyle15
         Me.DgvCymndt.Location = New System.Drawing.Point(12, 139)
         Me.DgvCymndt.Name = "DgvCymndt"
         Me.DgvCymndt.RowHeadersVisible = False
@@ -594,11 +550,102 @@ Partial Class AccountsPayable
         Me.DgvCymndt.Size = New System.Drawing.Size(1326, 100)
         Me.DgvCymndt.TabIndex = 2
         '
+        '明細
+        '
+        Me.明細.HeaderText = "行No"
+        Me.明細.Name = "明細"
+        Me.明細.ReadOnly = True
+        Me.明細.Width = 56
+        '
+        'メーカー
+        '
+        Me.メーカー.HeaderText = "メーカー"
+        Me.メーカー.Name = "メーカー"
+        Me.メーカー.ReadOnly = True
+        Me.メーカー.Width = 67
+        '
+        '品名
+        '
+        Me.品名.HeaderText = "品名"
+        Me.品名.Name = "品名"
+        Me.品名.ReadOnly = True
+        Me.品名.Width = 54
+        '
+        '型式
+        '
+        Me.型式.HeaderText = "型式"
+        Me.型式.Name = "型式"
+        Me.型式.ReadOnly = True
+        Me.型式.Width = 54
+        '
+        '仕入数量
+        '
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.仕入数量.DefaultCellStyle = DataGridViewCellStyle11
+        Me.仕入数量.HeaderText = "数量"
+        Me.仕入数量.Name = "仕入数量"
+        Me.仕入数量.ReadOnly = True
+        Me.仕入数量.Width = 54
+        '
+        '単位
+        '
+        Me.単位.HeaderText = "単位"
+        Me.単位.Name = "単位"
+        Me.単位.ReadOnly = True
+        Me.単位.Width = 54
+        '
+        '仕入単価
+        '
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.仕入単価.DefaultCellStyle = DataGridViewCellStyle12
+        Me.仕入単価.HeaderText = "仕入単価"
+        Me.仕入単価.Name = "仕入単価"
+        Me.仕入単価.ReadOnly = True
+        Me.仕入単価.Width = 78
+        '
+        '仕入金額
+        '
+        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.仕入金額.DefaultCellStyle = DataGridViewCellStyle13
+        Me.仕入金額.HeaderText = "仕入原価"
+        Me.仕入金額.Name = "仕入金額"
+        Me.仕入金額.ReadOnly = True
+        Me.仕入金額.Width = 78
+        '
+        'VAT
+        '
+        Me.VAT.HeaderText = "VAT-OUT"
+        Me.VAT.Name = "VAT"
+        Me.VAT.Width = 82
+        '
+        '仕入金額計
+        '
+        Me.仕入金額計.HeaderText = "仕入金額"
+        Me.仕入金額計.Name = "仕入金額計"
+        Me.仕入金額計.Width = 78
+        '
+        '買掛
+        '
+        Me.買掛.FillWeight = 110.0!
+        Me.買掛.HeaderText = "買掛"
+        Me.買掛.Name = "買掛"
+        Me.買掛.Width = 35
+        '
+        '発注個数
+        '
+        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.発注個数.DefaultCellStyle = DataGridViewCellStyle14
+        Me.発注個数.HeaderText = "発注個数"
+        Me.発注個数.Name = "発注個数"
+        Me.発注個数.ReadOnly = True
+        Me.発注個数.Visible = False
+        Me.発注個数.Width = 151
+        '
         'LblMode
         '
         Me.LblMode.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblMode.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblMode.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblMode.Location = New System.Drawing.Point(1115, 9)
         Me.LblMode.Name = "LblMode"
         Me.LblMode.Size = New System.Drawing.Size(225, 22)
@@ -611,12 +658,12 @@ Partial Class AccountsPayable
         Me.DtpPaymentDate.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.DtpPaymentDate.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpPaymentDate.CustomFormat = ""
-        Me.DtpPaymentDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.DtpPaymentDate.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpPaymentDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DtpPaymentDate.Location = New System.Drawing.Point(745, 3)
+        Me.DtpPaymentDate.Location = New System.Drawing.Point(745, 10)
         Me.DtpPaymentDate.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.DtpPaymentDate.Name = "DtpPaymentDate"
-        Me.DtpPaymentDate.Size = New System.Drawing.Size(148, 37)
+        Me.DtpPaymentDate.Size = New System.Drawing.Size(148, 22)
         Me.DtpPaymentDate.TabIndex = 324
         Me.DtpPaymentDate.TabStop = False
         Me.DtpPaymentDate.Value = New Date(2019, 1, 1, 0, 0, 0, 0)
@@ -651,7 +698,7 @@ Partial Class AccountsPayable
         Me.LblPaymentDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblPaymentDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LblPaymentDate.Cursor = System.Windows.Forms.Cursors.Default
-        Me.LblPaymentDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblPaymentDate.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblPaymentDate.Location = New System.Drawing.Point(553, 10)
         Me.LblPaymentDate.Name = "LblPaymentDate"
         Me.LblPaymentDate.Size = New System.Drawing.Size(186, 22)
@@ -668,7 +715,7 @@ Partial Class AccountsPayable
         Me.TxtIDRCurrency.MaxLength = 20
         Me.TxtIDRCurrency.Name = "TxtIDRCurrency"
         Me.TxtIDRCurrency.ReadOnly = True
-        Me.TxtIDRCurrency.Size = New System.Drawing.Size(70, 39)
+        Me.TxtIDRCurrency.Size = New System.Drawing.Size(70, 23)
         Me.TxtIDRCurrency.TabIndex = 330
         Me.TxtIDRCurrency.TabStop = False
         Me.TxtIDRCurrency.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -690,7 +737,7 @@ Partial Class AccountsPayable
         Me.VendorInvoiceNumber.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.VendorInvoiceNumber.Location = New System.Drawing.Point(393, 424)
         Me.VendorInvoiceNumber.Name = "VendorInvoiceNumber"
-        Me.VendorInvoiceNumber.Size = New System.Drawing.Size(512, 37)
+        Me.VendorInvoiceNumber.Size = New System.Drawing.Size(512, 22)
         Me.VendorInvoiceNumber.TabIndex = 334
         '
         'lblVendorInvoiceNumber
@@ -698,7 +745,7 @@ Partial Class AccountsPayable
         Me.lblVendorInvoiceNumber.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblVendorInvoiceNumber.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.lblVendorInvoiceNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lblVendorInvoiceNumber.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.lblVendorInvoiceNumber.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.lblVendorInvoiceNumber.Location = New System.Drawing.Point(195, 424)
         Me.lblVendorInvoiceNumber.Name = "lblVendorInvoiceNumber"
         Me.lblVendorInvoiceNumber.Size = New System.Drawing.Size(192, 22)
@@ -712,105 +759,25 @@ Partial Class AccountsPayable
         Me.Label1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.Label1.Location = New System.Drawing.Point(13, 11)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(193, 30)
+        Me.Label1.Size = New System.Drawing.Size(97, 15)
         Me.Label1.TabIndex = 335
         Me.Label1.Text = "＜発注伝票＞"
         '
-        '明細
+        'BtnVat
         '
-        Me.明細.HeaderText = "行No"
-        Me.明細.Name = "明細"
-        Me.明細.ReadOnly = True
-        Me.明細.Width = 106
-        '
-        'メーカー
-        '
-        Me.メーカー.HeaderText = "メーカー"
-        Me.メーカー.Name = "メーカー"
-        Me.メーカー.ReadOnly = True
-        Me.メーカー.Width = 129
-        '
-        '品名
-        '
-        Me.品名.HeaderText = "品名"
-        Me.品名.Name = "品名"
-        Me.品名.ReadOnly = True
-        Me.品名.Width = 103
-        '
-        '型式
-        '
-        Me.型式.HeaderText = "型式"
-        Me.型式.Name = "型式"
-        Me.型式.ReadOnly = True
-        Me.型式.Width = 103
-        '
-        '仕入数量
-        '
-        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.仕入数量.DefaultCellStyle = DataGridViewCellStyle16
-        Me.仕入数量.HeaderText = "数量"
-        Me.仕入数量.Name = "仕入数量"
-        Me.仕入数量.ReadOnly = True
-        Me.仕入数量.Width = 103
-        '
-        '単位
-        '
-        Me.単位.HeaderText = "単位"
-        Me.単位.Name = "単位"
-        Me.単位.ReadOnly = True
-        Me.単位.Width = 103
-        '
-        '仕入単価
-        '
-        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.仕入単価.DefaultCellStyle = DataGridViewCellStyle17
-        Me.仕入単価.HeaderText = "仕入単価"
-        Me.仕入単価.Name = "仕入単価"
-        Me.仕入単価.ReadOnly = True
-        Me.仕入単価.Width = 151
-        '
-        '仕入金額
-        '
-        DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.仕入金額.DefaultCellStyle = DataGridViewCellStyle18
-        Me.仕入金額.HeaderText = "仕入原価"
-        Me.仕入金額.Name = "仕入金額"
-        Me.仕入金額.ReadOnly = True
-        Me.仕入金額.Width = 151
-        '
-        'VAT
-        '
-        Me.VAT.HeaderText = "VAT-OUT"
-        Me.VAT.Name = "VAT"
-        Me.VAT.Width = 157
-        '
-        '仕入金額計
-        '
-        Me.仕入金額計.HeaderText = "仕入金額"
-        Me.仕入金額計.Name = "仕入金額計"
-        Me.仕入金額計.Width = 151
-        '
-        '買掛
-        '
-        Me.買掛.FillWeight = 110.0!
-        Me.買掛.HeaderText = "買掛"
-        Me.買掛.Name = "買掛"
-        Me.買掛.Width = 64
-        '
-        '発注個数
-        '
-        DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.発注個数.DefaultCellStyle = DataGridViewCellStyle19
-        Me.発注個数.HeaderText = "発注個数"
-        Me.発注個数.Name = "発注個数"
-        Me.発注個数.ReadOnly = True
-        Me.発注個数.Visible = False
-        Me.発注個数.Width = 151
+        Me.BtnVat.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.BtnVat.Location = New System.Drawing.Point(833, 509)
+        Me.BtnVat.Name = "BtnVat"
+        Me.BtnVat.Size = New System.Drawing.Size(165, 40)
+        Me.BtnVat.TabIndex = 336
+        Me.BtnVat.Text = "VAT update"
+        Me.BtnVat.UseVisualStyleBackColor = True
         '
         'AccountsPayable
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.BtnVat)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.VendorInvoiceNumber)
         Me.Controls.Add(Me.lblVendorInvoiceNumber)
@@ -911,4 +878,5 @@ Partial Class AccountsPayable
     Friend WithEvents 仕入金額計 As DataGridViewTextBoxColumn
     Friend WithEvents 買掛 As DataGridViewCheckBoxColumn
     Friend WithEvents 発注個数 As DataGridViewTextBoxColumn
+    Friend WithEvents BtnVat As Button
 End Class

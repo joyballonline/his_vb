@@ -862,4 +862,41 @@ Public Class AccountsPayable
     Private Sub VendorInvoiceNumber_Validated(sender As Object, e As EventArgs) Handles VendorInvoiceNumber.Validated
         DgvAdd.Rows(0).Cells("今回備考1").Value = VendorInvoiceNumber.Text
     End Sub
+
+    Private Sub BtnVat_Click(sender As Object, e As EventArgs) Handles BtnVat.Click
+
+        Dim Sql As String = " AND "
+        Sql += "発注番号 ILIKE '" & HattyuNo & "'"
+        Sql += " AND "
+        Sql += "発注番号枝番 ILIKE '" & Suffix & "'"
+        Sql += " AND "
+        Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+        Sql += " ORDER BY 更新日 DESC "
+        Dim dsHattyu As DataSet = getDsData("t20_hattyu", Sql)
+        Dim x As String = dsHattyu.Tables(RS).Rows(0)("仕入先コード")
+
+        Sql = " AND "
+        Sql += "仕入先コード = '" & x & "'"
+        Dim dsSup As DataSet = getDsData("m11_supplier", Sql)
+        Dim y As String = dsSup.Tables(RS).Rows(0)("国内区分")
+        Dim s As String = "10"
+        If y = "1" Then
+            s = "0"
+        End If
+
+        Sql = "UPDATE public.t20_hattyu "
+        Sql += "SET "
+        Sql += " ＶＡＴ  = " & s & ""
+        Sql += ", 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+        Sql += ", 更新日 = '" & UtilClass.formatDatetime(Today) & "'"
+        Sql += " WHERE 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " AND "
+        Sql += "発注番号 = '" & HattyuNo & "'"
+        Sql += " AND "
+        Sql += "発注番号枝番 = '" & Suffix & "'"
+        Sql += " AND "
+        Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+
+        _db.executeDB(Sql)
+    End Sub
 End Class
