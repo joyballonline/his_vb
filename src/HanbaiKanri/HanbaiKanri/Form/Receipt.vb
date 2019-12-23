@@ -1113,6 +1113,8 @@ Public Class Receipt
         Dim dsHanyo As DataTable = getDsData("m90_hanyo", Sql).Tables(0)
 
         If dsHanyo.Rows.Count = 0 Then  'データなしの場合は終了
+            '登録完了メッセージ
+            _msgHd.dspMSG("completeInsert", frmC01F10_Login.loginValue.Language)
             Exit Sub
         End If
 
@@ -1217,7 +1219,9 @@ Public Class Receipt
             Sql3 += "', '"
             Sql3 += UtilClass.escapeSql(ds1.Tables(RS).Rows(0)("支払条件").ToString) '支払条件
             Sql3 += "', '"
-            Sql3 += UtilClass.formatNumber(PurchaseAmount) '仕入金額
+            'Sql3 += UtilClass.formatNumber(PurchaseAmount) '仕入金額  仕入の仕入値は外貨に変換
+            PurchaseAmount = PurchaseAmount * ds1.Tables(RS).Rows(0)("レート").ToString
+            Sql3 += UtilClass.formatNumber(PurchaseAmount) '仕入金額  仕入の仕入値は外貨に変換
             Sql3 += "', '"
             Sql3 += UtilClass.formatNumber(Decimal.Parse(ds1.Tables(RS).Rows(0)("粗利額"))) '粗利額
             Sql3 += "', '"
@@ -1299,7 +1303,9 @@ Public Class Receipt
                     Sql4 += "', '"
                     Sql4 += TxtSupplierName.Text    '仕入先名
                     Sql4 += "', '"
-                    Sql4 += UtilClass.formatNumber(Decimal.Parse(DgvAdd.Rows(index).Cells("仕入値").Value.ToString)) '仕入値
+                    'Sql4 += UtilClass.formatNumber(Decimal.Parse(DgvAdd.Rows(index).Cells("仕入値").Value.ToString)) '仕入値
+                    Sql4 += UtilClass.formatNumber(Decimal.Parse(dsx.Tables(RS).Rows(0)("仕入値_外貨").ToString)) '仕入の仕入値は外貨に変換
+
                     Sql4 += "', '"
                     Sql4 += DgvAdd.Rows(index).Cells("発注数量").Value.ToString '発注数量
                     Sql4 += "', '"
