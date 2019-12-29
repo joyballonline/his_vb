@@ -335,7 +335,7 @@ Public Class ClosingLog
         Sql += "insert into t68_krzaiko"
 
         Sql += " SELECT "
-        Sql += " 会社コード," & strSyoriTogetu & " as 処理年月, メーカー, 品名, 型式, 月末数量, 最終出庫日, 入庫日, "
+        Sql += " 会社コード," & strSyoriTogetu & " as 処理年月, 倉庫コード, メーカー, 品名, 型式, 月末数量, 最終出庫日, 入庫日, "
         Sql += " 入庫単価, 発注番号, 発注番号枝番, 入庫番号, 行番号, 仕入先コード, 仕入先名, 仕入先請求番号"
 
         Sql += " FROM t68_krzaiko"
@@ -358,7 +358,7 @@ Public Class ClosingLog
         Sql += "insert into Public.t68_krzaiko"
 
         Sql += " SELECT t42.会社コード," & strSyoriTogetu & " as 処理年月"
-        Sql += ",t43.メーカー, t43.品名, t43.型式, t43.入庫数量 as 月末数量"
+        Sql += ",t42.倉庫コード, t43.メーカー, t43.品名, t43.型式, t43.入庫数量 as 月末数量"
         Sql += ",null as 最終出庫日, t42.入庫日"
         Sql += ",t43.仕入値 as 入庫単価, t43.発注番号, t43.発注番号枝番"
         Sql += ",t43.入庫番号, t43.行番号, t42.仕入先コード, t42.仕入先名, null as 仕入先請求番号"
@@ -414,7 +414,7 @@ Public Class ClosingLog
             End If
 
             Dim strNyukoNo As String = Mid(dsinout.Rows(i)("ロケ番号"), 1, 10)
-            Dim strGyo As String = Mid(dsinout.Rows(i)("ロケ番号"), 11, 1)
+            Dim strGyo As String = Mid(dsinout.Rows(i)("ロケ番号"), 11)
 
             'update t68_krzaiko
             Sql = vbNullString
