@@ -24,13 +24,12 @@ Partial Class InventoryRegistrationBulk
     Private Sub InitializeComponent()
         Me.BtnRegist = New System.Windows.Forms.Button()
         Me.BtnBack = New System.Windows.Forms.Button()
-        Me.BtnExcelOutput = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'BtnRegist
         '
         Me.BtnRegist.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.BtnRegist.Location = New System.Drawing.Point(281, 302)
+        Me.BtnRegist.Location = New System.Drawing.Point(281, 225)
         Me.BtnRegist.Name = "BtnRegist"
         Me.BtnRegist.Size = New System.Drawing.Size(165, 40)
         Me.BtnRegist.TabIndex = 9
@@ -40,31 +39,22 @@ Partial Class InventoryRegistrationBulk
         'BtnBack
         '
         Me.BtnBack.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.BtnBack.Location = New System.Drawing.Point(552, 509)
+        Me.BtnBack.Location = New System.Drawing.Point(503, 426)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(165, 40)
         Me.BtnBack.TabIndex = 10
         Me.BtnBack.Text = "戻る"
         Me.BtnBack.UseVisualStyleBackColor = True
         '
-        'BtnExcelOutput
-        '
-        Me.BtnExcelOutput.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.BtnExcelOutput.Location = New System.Drawing.Point(281, 179)
-        Me.BtnExcelOutput.Name = "BtnExcelOutput"
-        Me.BtnExcelOutput.Size = New System.Drawing.Size(165, 40)
-        Me.BtnExcelOutput.TabIndex = 23
-        Me.BtnExcelOutput.Text = "Excel出力"
-        Me.BtnExcelOutput.UseVisualStyleBackColor = True
-        '
         'InventoryRegistrationBulk
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(729, 561)
-        Me.Controls.Add(Me.BtnExcelOutput)
+        Me.ClientSize = New System.Drawing.Size(694, 490)
         Me.Controls.Add(Me.BtnBack)
         Me.Controls.Add(Me.BtnRegist)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "InventoryRegistrationBulk"
         Me.Text = "InventoryRegistrationBulk"
         Me.ResumeLayout(False)
@@ -73,5 +63,4 @@ Partial Class InventoryRegistrationBulk
 
     Friend WithEvents BtnRegist As Button
     Friend WithEvents BtnBack As Button
-    Friend WithEvents BtnExcelOutput As Button
 End Class

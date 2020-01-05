@@ -355,7 +355,7 @@ Public Class StockSearch
 
         '表示中の一覧から対象の在庫を特定する
         Dim strLoca As String = Mid(Convert.ToString(dsZaiko.Tables(0).Rows(0)("ロケ番号")), 1, 10)
-        Dim strLocaGyo As String = Mid(Convert.ToString(dsZaiko.Tables(0).Rows(0)("ロケ番号")), 11, 1)
+        Dim strLocaGyo As String = Mid(Convert.ToString(dsZaiko.Tables(0).Rows(0)("ロケ番号")), 11)
 
         For i As Integer = 0 To DgvList.Rows.Count - 1  '一覧
 
