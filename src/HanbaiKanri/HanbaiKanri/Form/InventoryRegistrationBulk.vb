@@ -162,6 +162,16 @@ Public Class InventoryRegistrationBulk
                 Continue For '次の行へ
             End If
 
+            '数量チェック
+            If row("現在在庫数").ToString = 0 OrElse row("入庫単価").ToString = 0 Then
+
+                skipCnt += 1 'スキップカウント
+
+                'エラーの発注書番号を記録
+                errorMsg = "No:" & row("No").ToString & vbCrLf
+                Continue For '次の行へ
+            End If
+
 #End Region
 
 
