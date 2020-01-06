@@ -351,7 +351,7 @@ Public Class QuoteList
                     Sql += "t01.見積有効期限 >= '" & UtilClass.strFormatDate(strToday) & "'"
                 End If
 
-                Sql += " ORDER BY t01.見積番号 DESC,t01.見積番号枝番 DESC"
+                Sql += " ORDER BY t01.見積日 DESC, t01.見積番号 DESC,t01.見積番号枝番 DESC"
 
                 ds = _db.selectDB(Sql, RS, reccnt)
 
