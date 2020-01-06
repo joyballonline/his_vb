@@ -305,7 +305,7 @@ Public Class OrderList
                     Sql += ",t10.営業担当者,t10.入力担当者,t10.備考,t10.登録日,t10.更新者,t10.更新日"
 
 
-                    Sql += " ORDER BY t10.登録日 DESC"
+                    Sql += " ORDER BY t10.受注日 DESC ,t10.受注番号 DESC "
 
                     ds = _db.selectDB(Sql, RS, reccnt)
 
@@ -326,7 +326,7 @@ Public Class OrderList
 
                     Sql += viewSearchConditions() '検索条件
 
-                    Sql += " ORDER BY t11.登録日 DESC"
+                    Sql += " ORDER BY t11.登録日 DESC ,t10.受注番号 DESC"
 
                     ds = _db.selectDB(Sql, RS, reccnt)
 

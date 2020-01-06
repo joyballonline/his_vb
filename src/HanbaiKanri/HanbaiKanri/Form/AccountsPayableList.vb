@@ -230,29 +230,20 @@ Public Class AccountsPayableList
         DgvKike.Rows.Clear()
 
         Try
-            Sql = "SELECT"
-            Sql += " t46.*, t20.ＶＡＴ"
-            Sql += " FROM "
-            Sql += " public.t46_kikehd t46 "
+            Sql = "SELECT t46.*, t20.ＶＡＴ"
+            Sql += " FROM public.t46_kikehd t46 "
 
-            Sql += " INNER JOIN "
-            Sql += " t20_hattyu t20"
-            Sql += " ON "
-            Sql += " t46.会社コード = t20.会社コード "
-            Sql += " AND "
-            Sql += " t46.発注番号 = t20.発注番号"
-            Sql += " AND "
-            Sql += " t46.発注番号枝番 = t20.発注番号枝番"
-            Sql += " AND "
-            Sql += " t20.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '発注取消されていないデータ
+            Sql += " INNER JOIN t20_hattyu t20"
+            Sql += " ON t46.会社コード = t20.会社コード "
+            Sql += " AND t46.発注番号 = t20.発注番号"
+            Sql += " AND t46.発注番号枝番 = t20.発注番号枝番"
+            Sql += " AND t20.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '発注取消されていないデータ
 
-            Sql += " WHERE "
-            Sql += " t46.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += " WHERE t46.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
 
             Sql += viewSearchConditions() '抽出条件取得
 
-            Sql += " ORDER BY "
-            Sql += "t46.更新日 DESC, t46.買掛番号"
+            Sql += " ORDER BY t46.更新日 DESC, t46.買掛番号"
 
             ds = _db.selectDB(Sql, RS, reccnt)
 
@@ -281,7 +272,6 @@ Public Class AccountsPayableList
                                                                                                     CommonConst.APC_KBN_DEPOSIT_TXT,
                                                                                                     CommonConst.APC_KBN_NORMAL_TXT)
                 End If
-                'DgvKike.Rows(i).Cells("買掛日").Value = ds.Tables(RS).Rows(i)("買掛日").ToShortDateString()
                 DgvKike.Rows(i).Cells("買掛日").Value = ds.Tables(RS).Rows(i)("買掛日")
                 DgvKike.Rows(i).Cells("仕入先請求番号").Value = ds.Tables(RS).Rows(i)("仕入先請求番号")
                 DgvKike.Rows(i).Cells("客先番号").Value = ds.Tables(RS).Rows(i)("客先番号")
@@ -301,11 +291,6 @@ Public Class AccountsPayableList
                 DgvKike.Rows(i).Cells("買掛金額").Value = decShiire + decVAT
                 DgvKike.Rows(i).Cells("買掛金額計_外貨").Value = ds.Tables(RS).Rows(i)("買掛金額計_外貨")  '既登録額
                 DgvKike.Rows(i).Cells("未登録額").Value = （decShiire + decVAT） - ds.Tables(RS).Rows(i)("買掛金額計_外貨")
-
-                'DgvKike.Rows(i).Cells("買掛残高_外貨").Value = ds.Tables(RS).Rows(i)("買掛残高_外貨")
-                'DgvKike.Rows(i).Cells("通貨").Value =   setBaseCurrency()
-                'DgvKike.Rows(i).Cells("買掛金額計").Value = ds.Tables(RS).Rows(i)("買掛金額計")
-                'DgvKike.Rows(i).Cells("買掛残高").Value = ds.Tables(RS).Rows(i)("買掛残高")
 
                 DgvKike.Rows(i).Cells("備考1").Value = ds.Tables(RS).Rows(i)("備考1")
                 DgvKike.Rows(i).Cells("備考2").Value = ds.Tables(RS).Rows(i)("備考2")
