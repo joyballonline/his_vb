@@ -1,4 +1,6 @@
-﻿Option Explicit On
+﻿'2020.01.09 ロケ番号→出庫開始サインに名称変更
+
+Option Explicit On
 
 Imports UtilMDL
 Imports UtilMDL.MSG
@@ -781,8 +783,9 @@ Public Class GoodsIssueList
 
 
                     '在庫データの伝票番号と行番号を呼び出す（重要）
-                    'inoutのロケ番号へ挿入
-                    Sql = "SELECT ロケ番号 "
+                    'inoutの出庫開始サイン（旧：ロケ番号）へ挿入
+                    ''Sql = "SELECT ロケ番号 "                      '2020.01.09 DEL
+                    Sql = "SELECT 出庫開始サイン "                  '2020.01.09 ADD
                     Sql += " from t70_inout t70 "
 
                     Sql += " WHERE 会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
@@ -800,7 +803,8 @@ Public Class GoodsIssueList
                     Sql += "t70_inout("
                     Sql += "会社コード, 入出庫区分, 倉庫コード, 伝票番号, 行番号, 入出庫種別, 引当区分"
                     Sql += ", メーカー, 品名, 型式, 数量, 単位, 備考, 入出庫日"
-                    Sql += ", 取消区分, 更新者, 更新日, ロケ番号"
+                    ''Sql += ", 取消区分, 更新者, 更新日, ロケ番号"                   '2020.01.09 DEL
+                    Sql += ", 取消区分, 更新者, 更新日, 出庫開始サイン"               '2020.01.09 ADD
                     Sql += " )VALUES('"
                     Sql += frmC01F10_Login.loginValue.BumonCD '会社コード
                     Sql += "', '"
@@ -838,7 +842,8 @@ Public Class GoodsIssueList
                     Sql += UtilClass.formatDatetime(dtNow) '更新日
                     Sql += "', '"
                     'Sql += dsZaiko.Tables(RS).Rows(i)("伝票番号") & dsZaiko.Tables(RS).Rows(i)("行番号")
-                    Sql += dsZaiko.Tables(RS).Rows(0)("ロケ番号")
+                    ''Sql += dsZaiko.Tables(RS).Rows(0)("ロケ番号")                 '2020.01.09 DEL
+                    Sql += dsZaiko.Tables(RS).Rows(0)("出庫開始サイン")             '2020.01.09 ADD
 
                     'Sql += "WH082601801"
 

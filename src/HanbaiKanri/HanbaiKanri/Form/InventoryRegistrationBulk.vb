@@ -474,7 +474,7 @@ Public Class InventoryRegistrationBulk
             Sql += "," & CommonConst.CANCEL_KBN_ENABLED　           '取消区分 0:未取消
             Sql += ",'" & frmC01F10_Login.loginValue.TantoNM & "'"  '更新者
             Sql += ",'" & UtilClass.formatDatetime(Now) & "'"       '更新日
-            Sql += ",null"　                         'ロケ番号
+            Sql += ",null"　                         '出庫開始サイン（旧：ロケ番号）
             Sql += "," & CommonConst.Sire_KBN_Zaiko  '仕入区分 2:在庫
             Sql += ",null"                           '製造番号
 

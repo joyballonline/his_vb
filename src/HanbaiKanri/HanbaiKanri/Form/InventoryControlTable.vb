@@ -1,4 +1,6 @@
-﻿Option Explicit On
+﻿'2020.01.09 ロケ番号→出庫開始サインに名称変更
+
+Option Explicit On
 
 Imports UtilMDL
 Imports UtilMDL.MSG
@@ -712,7 +714,8 @@ Public Class InventoryControlTable
                 Sql += "   and t70.入出庫日 < '" & UtilClass.strFormatDate(dtmSyoriNentukiE.ToShortDateString) & "')"
 
                 Sql += "   and t70.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
-                Sql += "   and t70.ロケ番号 = '" & strLocation & "'"
+                ''Sql += "   and t70.ロケ番号 = '" & strLocation & "'"                      '2020.01.09 DEL
+                Sql += "   and t70.出庫開始サイン = '" & strLocation & "'"                  '2020.01.09 ADD
 
 
                 Dim dsinout As DataTable = _db.selectDB(Sql, RS, reccnt).Tables(0)

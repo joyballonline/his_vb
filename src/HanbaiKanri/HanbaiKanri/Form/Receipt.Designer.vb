@@ -58,6 +58,8 @@ Partial Class Receipt
         Me.CmWarehouse = New System.Windows.Forms.ComboBox()
         Me.TxtIDRCurrency = New System.Windows.Forms.TextBox()
         Me.LblIDRCurrency = New System.Windows.Forms.Label()
+        Me.LblLocation = New System.Windows.Forms.Label()
+        Me.TxtLocationCode = New System.Windows.Forms.TextBox()
         CType(Me.DgvAdd, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvHistory, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvPurchase, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -466,10 +468,38 @@ Partial Class Receipt
         Me.LblIDRCurrency.Text = "仕入通貨"
         Me.LblIDRCurrency.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'LblLocation
+        '
+        Me.LblLocation.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblLocation.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblLocation.Enabled = False
+        Me.LblLocation.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblLocation.Location = New System.Drawing.Point(850, 343)
+        Me.LblLocation.Name = "LblLocation"
+        Me.LblLocation.Size = New System.Drawing.Size(140, 22)
+        Me.LblLocation.TabIndex = 329
+        Me.LblLocation.Text = "ロケーション"
+        Me.LblLocation.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LblLocation.Visible = False
+        '
+        'TxtLocationCode
+        '
+        Me.TxtLocationCode.BackColor = System.Drawing.Color.White
+        Me.TxtLocationCode.Enabled = False
+        Me.TxtLocationCode.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtLocationCode.Location = New System.Drawing.Point(996, 342)
+        Me.TxtLocationCode.MaxLength = 50
+        Me.TxtLocationCode.Name = "TxtLocationCode"
+        Me.TxtLocationCode.Size = New System.Drawing.Size(241, 23)
+        Me.TxtLocationCode.TabIndex = 316
+        Me.TxtLocationCode.Visible = False
+        '
         'Receipt
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.TxtLocationCode)
+        Me.Controls.Add(Me.LblLocation)
         Me.Controls.Add(Me.TxtIDRCurrency)
         Me.Controls.Add(Me.LblIDRCurrency)
         Me.Controls.Add(Me.CmWarehouse)
@@ -549,4 +579,6 @@ Partial Class Receipt
     Friend WithEvents CmWarehouse As ComboBox
     Friend WithEvents TxtIDRCurrency As TextBox
     Friend WithEvents LblIDRCurrency As Label
+    Friend WithEvents LblLocation As Label
+    Friend WithEvents TxtLocationCode As TextBox
 End Class

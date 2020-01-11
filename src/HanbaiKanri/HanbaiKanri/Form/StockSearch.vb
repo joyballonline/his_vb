@@ -1,4 +1,6 @@
-﻿Option Explicit On
+﻿'2020.01.09 ロケ番号→出庫開始サインに名称変更
+
+Option Explicit On
 
 Imports UtilMDL
 Imports UtilMDL.MSG
@@ -120,7 +122,8 @@ Public Class StockSearch
             Sql += " m21.会社コード, m21.倉庫コード, m21.最終入庫日, m21.入出庫種別, m21.現在庫数"
             Sql += " , m21.入庫単価, m21.最終出庫日, m20.名称, m90.文字１, m90.文字２, t43.仕入区分 "
             Sql += " , m21.伝票番号, m21.行番号 "
-            Sql += " , m21.ロケ番号, t43.入庫番号, t43.行番号 as 入庫行番号 "
+            ''Sql += " , m21.ロケ番号, t43.入庫番号, t43.行番号 as 入庫行番号 "         '2020.01.09 DEL
+            Sql += " , m21.出庫開始サイン, t43.入庫番号, t43.行番号 as 入庫行番号 "     '2020.01.09 ADD
             Sql += " , null as 出庫番号, '0' as 出庫区分"
 
             Sql += " FROM m21_zaiko m21 "
@@ -146,7 +149,8 @@ Public Class StockSearch
             Sql += " ( m21.伝票番号 = t43.入庫番号 "
             Sql += " AND m21.行番号 = t43.行番号 ) "
             Sql += " OR "
-            Sql += " ( m21.ロケ番号 = concat(t43.入庫番号, t43.行番号) ) "
+            ''Sql += " ( m21.ロケ番号 = concat(t43.入庫番号, t43.行番号) ) "           '2020.01.09 DEL
+            Sql += " ( m21.出庫開始サイン = concat(t43.入庫番号, t43.行番号) ) "       '2020.01.09 ADD
             Sql += "  ) "
 
             Sql += " WHERE "
@@ -173,7 +177,7 @@ Public Class StockSearch
             'Sql += " GROUP BY m21.会社コード, m21.倉庫コード, m21.最終入庫日, m21.入出庫種別, m21.現在庫数"
             'Sql += " , m21.入庫単価, m21.最終出庫日, m20.名称, m90.文字１, m90.文字２, t43.仕入区分 "
             'Sql += " , m21.伝票番号, m21.行番号, t43.入庫番号 "
-            'Sql += " , 入庫行番号, m21.ロケ番号 "
+            'Sql += " , 入庫行番号, m21.出庫開始サイン "            '2020.01.09 REP
 #End Region
 
 
@@ -196,7 +200,8 @@ Public Class StockSearch
 
             Sql += " , null as 伝票番号"
             Sql += " , null as 行番号 "
-            Sql += " , null as ロケ番号"
+            ''Sql += " , null as ロケ番号"              '2020.01.09 ADD
+            Sql += " , null as 出庫開始サイン"          '2020.01.09 ADD
             Sql += " , null as 入庫番号"
             Sql += " , null as 入庫行番号 "
             Sql += " , null as 出庫番号,'0' as 出庫区分"
@@ -239,7 +244,8 @@ Public Class StockSearch
 
             Sql += " , null as 伝票番号"
             Sql += " , t45.行番号 "
-            Sql += " , null as ロケ番号"
+            ''Sql += " , null as ロケ番号"          '2020.01.09 DEL
+            Sql += " , null as 出庫開始サイン"      '2020.01.09 ADD
             Sql += " , null as 入庫番号"
             Sql += " , null as 入庫行番号 "
             Sql += " , t45.出庫番号,t45.出庫区分"
@@ -305,7 +311,8 @@ Public Class StockSearch
                 DgvList.Rows(i).Cells("最終出庫日").Value = dsZaiko.Tables(RS).Rows(i)("最終出庫日")
                 DgvList.Rows(i).Cells("伝票番号").Value = dsZaiko.Tables(RS).Rows(i)("伝票番号") '移動入力でも使用
                 DgvList.Rows(i).Cells("行番号").Value = dsZaiko.Tables(RS).Rows(i)("行番号") '移動入力でも使用
-                DgvList.Rows(i).Cells("ロケ番号").Value = dsZaiko.Tables(RS).Rows(i)("ロケ番号") '移動入力でも使用
+                ''DgvList.Rows(i).Cells("ロケ番号").Value = dsZaiko.Tables(RS).Rows(i)("ロケ番号") '移動入力でも使用                '2020.01.09 DEL
+                DgvList.Rows(i).Cells("出庫開始サイン").Value = dsZaiko.Tables(RS).Rows(i)("出庫開始サイン") '移動入力でも使用      '2020.01.09 ADD
                 DgvList.Rows(i).Cells("入庫番号").Value = dsZaiko.Tables(RS).Rows(i)("入庫番号") '移動入力でも使用
                 DgvList.Rows(i).Cells("入庫行番号").Value = dsZaiko.Tables(RS).Rows(i)("入庫行番号") '移動入力でも使用
 
@@ -335,7 +342,8 @@ Public Class StockSearch
         Dim reccnt As Integer = 0 'DB用（デフォルト）
 
         'inoutを出庫番号で検索
-        Dim SQL As String = "select ロケ番号"
+        ''Dim SQL As String = "select ロケ番号"             '2020.01.09 DEL
+        Dim SQL As String = "select 出庫開始サイン"         '2020.01.09 ADD
 
         SQL += " from t70_inout t70"
 
@@ -354,8 +362,10 @@ Public Class StockSearch
 
 
         '表示中の一覧から対象の在庫を特定する
-        Dim strLoca As String = Mid(Convert.ToString(dsZaiko.Tables(0).Rows(0)("ロケ番号")), 1, 10)
-        Dim strLocaGyo As String = Mid(Convert.ToString(dsZaiko.Tables(0).Rows(0)("ロケ番号")), 11)
+        ''Dim strLoca As String = Mid(Convert.ToString(dsZaiko.Tables(0).Rows(0)("ロケ番号")), 1, 10)           '2020.01.09 DEL
+        ''Dim strLocaGyo As String = Mid(Convert.ToString(dsZaiko.Tables(0).Rows(0)("ロケ番号")), 11)           '2020.01.09 DEL
+        Dim strLoca As String = Mid(Convert.ToString(dsZaiko.Tables(0).Rows(0)("出庫開始サイン")), 1, 10)       '2020.01.09 ADD
+        Dim strLocaGyo As String = Mid(Convert.ToString(dsZaiko.Tables(0).Rows(0)("出庫開始サイン")), 11)       '2020.01.09 ADD   
 
         For i As Integer = 0 To DgvList.Rows.Count - 1  '一覧
 
@@ -415,7 +425,8 @@ Public Class StockSearch
         frm.TxtLineNumber.Text = DgvList.Rows(rowIndex).Cells("行番号").Value.ToString
         frm.TxtDenpyoNo.Tag = DgvList.Rows(rowIndex).Cells("入庫番号").Value.ToString
         frm.TxtLineNumber.Tag = DgvList.Rows(rowIndex).Cells("入庫行番号").Value.ToString
-        frm.TxtLocationNo.Text = DgvList.Rows(rowIndex).Cells("ロケ番号").Value.ToString
+        ''frm.TxtLocationNo.Text = DgvList.Rows(rowIndex).Cells("ロケ番号").Value.ToString          '2020.01.09 DEL
+        frm.TxtLocationNo.Text = DgvList.Rows(rowIndex).Cells("出庫開始サイン").Value.ToString      '2020.01.09 ADD
         'frm.TxtUnit.Text = DgvList.Rows(rowIndex).Cells("単位").Value
 
         frm.TxtQuantityTo.Text = 0
