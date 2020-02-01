@@ -1809,6 +1809,36 @@ Public Class Quote
             End If
         Next
 
+        '商品桁数チェック
+        For i As Integer = 0 To DgvItemList.RowCount - 1
+            'メーカー
+            If UtilClass.getLenB(DgvItemList.Rows(i).Cells("メーカー").Value) > 50 Then
+
+                '対象データがないメッセージを表示
+                _msgHd.dspMSG("CharacterRestrictionsMaker", frmC01F10_Login.loginValue.Language)
+
+                Exit Sub
+            End If
+
+            '品名
+            If UtilClass.getLenB(DgvItemList.Rows(i).Cells("品名").Value) > 50 Then
+
+                '対象データがないメッセージを表示
+                _msgHd.dspMSG("CharacterRestrictionsProductName", frmC01F10_Login.loginValue.Language)
+
+                Exit Sub
+            End If
+
+            '型式
+            If UtilClass.getLenB(DgvItemList.Rows(i).Cells("型式").Value) > 255 Then
+
+                '対象データがないメッセージを表示
+                _msgHd.dspMSG("CharacterRestrictionsModel", frmC01F10_Login.loginValue.Language)
+
+                Exit Sub
+            End If
+        Next
+
         'TxtVatの属性チェック
         If Not IsNumeric(TxtVat.Text) Then
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
