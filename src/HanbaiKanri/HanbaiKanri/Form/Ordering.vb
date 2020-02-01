@@ -1196,7 +1196,47 @@ Public Class Ordering
             Dim result As DialogResult = MessageBox.Show(strMessage, strMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Exit Sub
         End If
+        '品名が選択されていない場合
+        For i As Integer = 0 To DgvItemList.RowCount - 1
+            If (DgvItemList.Rows(i).Cells("メーカー").Value Is Nothing Or DgvItemList.Rows(i).Cells("メーカー").Value = vbNullString) Or
+                (DgvItemList.Rows(i).Cells("品名").Value Is Nothing Or DgvItemList.Rows(i).Cells("品名").Value = vbNullString) Or
+                (DgvItemList.Rows(i).Cells("型式").Value Is Nothing Or DgvItemList.Rows(i).Cells("型式").Value = vbNullString) Then
 
+                '対象データがないメッセージを表示
+                _msgHd.dspMSG("chkQuoteInputError", frmC01F10_Login.loginValue.Language)
+
+                Exit Sub
+            End If
+        Next
+        '商品桁数チェック
+        For i As Integer = 0 To DgvItemList.RowCount - 1
+            'メーカー
+            If UtilClass.getLenB(DgvItemList.Rows(i).Cells("メーカー").Value) > 50 Then
+
+                '対象データがないメッセージを表示
+                _msgHd.dspMSG("CharacterRestrictionsMaker", frmC01F10_Login.loginValue.Language)
+
+                Exit Sub
+            End If
+
+            '品名
+            If UtilClass.getLenB(DgvItemList.Rows(i).Cells("品名").Value) > 50 Then
+
+                '対象データがないメッセージを表示
+                _msgHd.dspMSG("CharacterRestrictionsProductName", frmC01F10_Login.loginValue.Language)
+
+                Exit Sub
+            End If
+
+            '型式
+            If UtilClass.getLenB(DgvItemList.Rows(i).Cells("型式").Value) > 255 Then
+
+                '対象データがないメッセージを表示
+                _msgHd.dspMSG("CharacterRestrictionsModel", frmC01F10_Login.loginValue.Language)
+
+                Exit Sub
+            End If
+        Next
         '仕入区分が「在庫引当」以外かつ仕入先と数量がなかったらエラーで戻す
         For i As Integer = 0 To DgvItemList.RowCount - 1
             If DgvItemList.Rows(i).Cells("仕入区分").Value <> CommonConst.Sire_KBN_Zaiko And
