@@ -3602,4 +3602,7 @@ Public Class Quote
 
     End Sub
 
+    Private Sub TxtSales_TextChanged(sender As Object, e As EventArgs) Handles TxtSales.TextChanged
+
+    End Sub
 End Class

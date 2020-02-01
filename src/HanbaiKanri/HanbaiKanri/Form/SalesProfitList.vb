@@ -1,4 +1,6 @@
-﻿Option Explicit On
+﻿'2020.01.09 ロケ番号→出庫開始サインに名称変更
+
+Option Explicit On
 
 Imports UtilMDL
 Imports UtilMDL.MSG
@@ -479,8 +481,10 @@ Public Class SalesProfitList
 
         't43_nyukodt
         Sql += " left join t43_nyukodt t43"
-        Sql += "  on left(t70.ロケ番号,10) = t43.入庫番号"
-        Sql += " and right(t70.ロケ番号,1) = CAST(t43.行番号 AS VARCHAR(1))"
+        ''Sql += "  on left(t70.ロケ番号,10) = t43.入庫番号"                           '2020.01.09 DEL
+        Sql += "  on left(t70.出庫開始サイン,10) = t43.入庫番号"                       '2020.01.09 ADD
+        ''Sql += " and right(t70.ロケ番号,1) = CAST(t43.行番号 AS VARCHAR(1))"         '2020.01.09 DEL
+        Sql += " and right(t70.出庫開始サイン,1) = CAST(t43.行番号 AS VARCHAR(1))"     '2020.01.09 ADD   
 
         't21_hattyu
         Sql += " left join t21_hattyu t21 "

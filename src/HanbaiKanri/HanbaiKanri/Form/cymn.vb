@@ -1,4 +1,6 @@
-﻿Option Explicit On
+﻿'2020.01.09 ロケ番号→出庫開始サインに名称変更
+
+Option Explicit On
 
 Imports UtilMDL
 Imports UtilMDL.MSG
@@ -860,7 +862,8 @@ Public Class Cymn
                                 Sql += "t70_inout("
                                 Sql += "会社コード, 入出庫区分, 倉庫コード, 伝票番号, 行番号, 入出庫種別"
                                 Sql += ", 引当区分, メーカー, 品名, 型式, 数量, 単位, 備考, 入出庫日"
-                                Sql += ", 取消区分, 更新者, 更新日, ロケ番号)"
+                                ''Sql += ", 取消区分, 更新者, 更新日, ロケ番号)"                          '2020.01.09 DEL
+                                Sql += ", 取消区分, 更新者, 更新日, 出庫開始サイン)"                      '2020.01.09 ADD
                                 Sql += " VALUES('"
                                 Sql += frmC01F10_Login.loginValue.BumonCD '会社コード
                                 Sql += "', '"

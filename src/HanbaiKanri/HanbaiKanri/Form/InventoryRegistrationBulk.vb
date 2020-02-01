@@ -1,4 +1,6 @@
-﻿Option Explicit On
+﻿'2020.01.18 t70_inout ロケ番号項目追加
+
+Option Explicit On
 
 Imports UtilMDL
 Imports UtilMDL.MSG
@@ -466,27 +468,28 @@ Public Class InventoryRegistrationBulk
             Sql = "INSERT INTO t70_inout"
             Sql += " VALUES("
 
-            Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'" '会社コード
-            Sql += ",'1'"                                     '入出庫区分 1:入庫
-            Sql += ",'" & addDt.Rows(i)("倉庫コード") & "'"             '倉庫コード
-            Sql += ",'" & WH & "'"                            '伝票番号
-            Sql += "," & lngCnt                               '行番号
-            Sql += ",'" & CommonConst.INOUT_KBN_NORMAL & "'"　'入出庫種別 0:通常
-            Sql += ",null"                                  　'引当区分
-            Sql += ",'" & addDt.Rows(i)("メーカー") & "'"  'メーカー
-            Sql += ",'" & addDt.Rows(i)("品名") & "'"      '品名
-            Sql += ",'" & addDt.Rows(i)("型式") & "'"      '型式
+            Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'"   '会社コード
+            Sql += ",'1'"                                           '入出庫区分 1:入庫
+            Sql += ",'" & addDt.Rows(i)("倉庫コード") & "'"         '倉庫コード
+            Sql += ",'" & WH & "'"                                  '伝票番号
+            Sql += "," & lngCnt                                     '行番号
+            Sql += ",'" & CommonConst.INOUT_KBN_NORMAL & "'"　      '入出庫種別 0:通常
+            Sql += ",null"                                  　      '引当区分
+            Sql += ",'" & addDt.Rows(i)("メーカー") & "'"           'メーカー
+            Sql += ",'" & addDt.Rows(i)("品名") & "'"               '品名
+            Sql += ",'" & addDt.Rows(i)("型式") & "'"               '型式
             Sql += "," & addDt.Rows(i)("現在在庫数").ToString       '数量
-            Sql += ",null"　'単位
-            Sql += ",null"　'備考
+            Sql += ",null"　                                        '単位
+            Sql += ",null"　                                        '備考
             Sql += ",'" & strGessyo2 & "'"     　　　　　　　　　　 '入出庫日
             Sql += ",null"                                          '取消日
             Sql += "," & CommonConst.CANCEL_KBN_ENABLED　           '取消区分 0:未取消
             Sql += ",'" & frmC01F10_Login.loginValue.TantoNM & "'"  '更新者
             Sql += ",'" & UtilClass.formatDatetime(Now) & "'"       '更新日
-            Sql += ",null"　                         'ロケ番号
-            Sql += "," & CommonConst.Sire_KBN_Zaiko  '仕入区分 2:在庫
-            Sql += ",null"                           '製造番号
+            Sql += ",null"　                                        '出庫開始サイン（旧：ロケ番号）
+            Sql += "," & CommonConst.Sire_KBN_Zaiko                 '仕入区分 2:在庫
+            Sql += ",null"                                          '製造番号
+            Sql += ",null"　                                        'ロケ番号 2020.01.18 ADD
 
             Sql += ")"
 

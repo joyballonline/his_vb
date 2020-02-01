@@ -1,4 +1,6 @@
-﻿Option Explicit On
+﻿'2020.01.09 ロケ番号→出庫開始サインに名称変更
+
+Option Explicit On
 
 Imports UtilMDL
 Imports UtilMDL.MSG
@@ -173,7 +175,7 @@ Public Class MovementInput
             Sql += " t43.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
             Sql += " AND "
 
-            'ロケ番号がない場合は伝票番号をそのまま使用する
+            '出庫開始サイン（旧：ロケ番号）がない場合は伝票番号をそのまま使用する
             If TxtDenpyoNo.Tag.ToString <> "" Then
                 Sql += " t43.入庫番号 ILIKE '" & TxtDenpyoNo.Tag & "'"
             Else
@@ -300,7 +302,8 @@ Public Class MovementInput
                 Sql += "t70_inout("
                 Sql += "会社コード, 入出庫区分, 倉庫コード, 伝票番号, 行番号"
                 Sql += ", 入出庫種別, メーカー, 品名, 型式, 数量, 単位, 入出庫日"
-                Sql += ", 取消区分, 更新者, 更新日, ロケ番号, 仕入区分)"
+                ''Sql += ", 取消区分, 更新者, 更新日, ロケ番号, 仕入区分)"                '2020.01.09 DEL
+                Sql += ", 取消区分, 更新者, 更新日, 出庫開始サイン, 仕入区分)"            '2020.01.09 ADD   
                 'Sql += ", 取消区分, 更新者, 更新日, 仕入区分)"
                 Sql += " VALUES('"
                 Sql += frmC01F10_Login.loginValue.BumonCD '会社コード
@@ -339,8 +342,8 @@ Public Class MovementInput
                 Sql += "', '"
                 Sql += UtilClass.formatDatetime(dtToday) '更新日
                 Sql += "', '"
-                'Sql += IIf(TxtDenpyoNo.Tag.ToString <> "", "'" & TxtDenpyoNo.Tag & TxtLineNumber.Text & "'", "NULL") 'ロケ番号
-                Sql += dsNyuko.Tables(RS).Rows(0)("入庫番号").ToString & dsNyuko.Tables(RS).Rows(0)("行番号").ToString 'ロケ番号
+                'Sql += IIf(TxtDenpyoNo.Tag.ToString <> "", "'" & TxtDenpyoNo.Tag & TxtLineNumber.Text & "'", "NULL") '出庫開始サイン（旧：ロケ番号）
+                Sql += dsNyuko.Tables(RS).Rows(0)("入庫番号").ToString & dsNyuko.Tables(RS).Rows(0)("行番号").ToString '出庫開始サイン（旧：ロケ番号）
                 Sql += "', '"
                 Sql += CommonConst.Sire_KBN_Move.ToString '仕入区分
                 Sql += "')"
@@ -531,7 +534,7 @@ Public Class MovementInput
                 Sql += "t70_inout("
                 Sql += "会社コード, 入出庫区分, 倉庫コード, 伝票番号, 行番号"
                 Sql += ", 入出庫種別, メーカー, 品名, 型式, 数量, 単位, 入出庫日"
-                'Sql += ", 取消区分, 更新者, 更新日, ロケ番号, 仕入区分"
+                'Sql += ", 取消区分, 更新者, 更新日, 出庫開始サイン, 仕入区分"       '2020.01.09 REP
                 Sql += ", 取消区分, 更新者, 更新日, 仕入区分"
                 Sql += " )VALUES('"
                 Sql += frmC01F10_Login.loginValue.BumonCD '会社コード
@@ -574,7 +577,7 @@ Public Class MovementInput
                 Sql += "', '"
                 Sql += UtilClass.formatDatetime(dtToday) '更新日
                 'Sql += "', '"
-                'Sql += dsNyuko.Tables(RS).Rows(0)("入庫番号").ToString & dsNyuko.Tables(RS).Rows(0)("行番号").ToString 'ロケ番号
+                'Sql += dsNyuko.Tables(RS).Rows(0)("入庫番号").ToString & dsNyuko.Tables(RS).Rows(0)("行番号").ToString '出庫開始サイン（旧：ロケ番号）
                 Sql += "', '"
                 Sql += CommonConst.Sire_KBN_Zaiko.ToString '仕入区分
                 Sql += "')"

@@ -1,4 +1,6 @@
-﻿Option Explicit On
+﻿'2020.01.07 ロケーションナンバー項目の追加（旧ロケ番号項目改訂のためコメント化）
+
+Option Explicit On
 
 Imports UtilMDL
 Imports UtilMDL.MSG
@@ -90,7 +92,9 @@ Public Class Receipt
             LblAdd.Text = "GoodsReceiptThisTime"
             LblReceiptDate.Text = "GoodsReceiptDate"
             LblWarehouse.Text = "Warehouse"
+            '''LblLocation.Text = "Location"               '2020.01.07 ADD
             LblIDRCurrency.Text = "Currency"
+
 
             LblRemarks.Text = "Remarks"
             LblCount1.Text = "Record"
@@ -144,6 +148,7 @@ Public Class Receipt
             LblWarehouse.Visible = False
             CmWarehouse.Visible = False
 
+            ''''TxtLocationCode.Enabled = False             '2020.01.07 ADD
             BtnRegist.Visible = False
 
         End If
@@ -242,6 +247,7 @@ Public Class Receipt
             DgvHistory.Columns.Add("仕入値", "PurchaseAmount")
             DgvHistory.Columns.Add("入庫数量", "ReceivedQuantity")  '入庫済数量
             DgvHistory.Columns.Add("倉庫", "Warehouse")
+            ''''DgvHistory.Columns.Add("ロケーション", "Location")            '2020.01.07 ADD
             DgvHistory.Columns.Add("入出庫種別", "StorageType")
             'DgvHistory.Columns.Add("引当区分", "AssignClassification")
             DgvHistory.Columns.Add("入庫日", "GoodsReceiptDate")
@@ -260,6 +266,7 @@ Public Class Receipt
             DgvHistory.Columns.Add("仕入値", "仕入値")
             DgvHistory.Columns.Add("入庫数量", "入庫済数量")
             DgvHistory.Columns.Add("倉庫", "倉庫")
+            ''''DgvHistory.Columns.Add("ロケーション", "ロケーション")          '2020.01.07 ADD
             DgvHistory.Columns.Add("入出庫種別", "入出庫種別")
             'DgvHistory.Columns.Add("引当区分", "引当区分")
             DgvHistory.Columns.Add("入庫日", "入庫日")
@@ -1675,5 +1682,7 @@ Public Class Receipt
             '    SendKeys.Send("{F2}")
         End If
     End Sub
+
+
 
 End Class

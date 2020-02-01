@@ -40,7 +40,7 @@ Partial Class StockSearch
         Me.伝票番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.行番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.単位 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ロケ番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.出庫開始サイン = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.入庫番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.入庫行番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DgvList, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -61,7 +61,7 @@ Partial Class StockSearch
         Me.DgvList.AllowUserToAddRows = False
         Me.DgvList.AllowUserToDeleteRows = False
         Me.DgvList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.引当, Me.倉庫コード, Me.倉庫, Me.最終入庫日, Me.入出庫種別区分, Me.入出庫種別, Me.現在庫数, Me.入庫単価, Me.最終出庫日, Me.伝票番号, Me.行番号, Me.単位, Me.ロケ番号, Me.入庫番号, Me.入庫行番号})
+        Me.DgvList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.引当, Me.倉庫コード, Me.倉庫, Me.最終入庫日, Me.入出庫種別区分, Me.入出庫種別, Me.現在庫数, Me.入庫単価, Me.最終出庫日, Me.伝票番号, Me.行番号, Me.単位, Me.出庫開始サイン, Me.入庫番号, Me.入庫行番号})
         Me.DgvList.Location = New System.Drawing.Point(12, 12)
         Me.DgvList.Name = "DgvList"
         Me.DgvList.ReadOnly = True
@@ -165,12 +165,12 @@ Partial Class StockSearch
         Me.単位.ReadOnly = True
         Me.単位.Visible = False
         '
-        'ロケ番号
+        '出庫開始サイン
         '
-        Me.ロケ番号.HeaderText = "ロケ番号"
-        Me.ロケ番号.Name = "ロケ番号"
-        Me.ロケ番号.ReadOnly = True
-        Me.ロケ番号.Visible = False
+        Me.出庫開始サイン.HeaderText = "出庫開始サイン"
+        Me.出庫開始サイン.Name = "出庫開始サイン"
+        Me.出庫開始サイン.ReadOnly = True
+        Me.出庫開始サイン.Visible = False
         '
         '入庫番号
         '
@@ -215,7 +215,7 @@ Partial Class StockSearch
     Friend WithEvents 伝票番号 As DataGridViewTextBoxColumn
     Friend WithEvents 行番号 As DataGridViewTextBoxColumn
     Friend WithEvents 単位 As DataGridViewTextBoxColumn
-    Friend WithEvents ロケ番号 As DataGridViewTextBoxColumn
+    Friend WithEvents 出庫開始サイン As DataGridViewTextBoxColumn
     Friend WithEvents 入庫番号 As DataGridViewTextBoxColumn
     Friend WithEvents 入庫行番号 As DataGridViewTextBoxColumn
 End Class

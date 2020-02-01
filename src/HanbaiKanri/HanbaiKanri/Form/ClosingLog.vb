@@ -1,4 +1,6 @@
-﻿Option Explicit On
+﻿'2020.01.09 ロケ番号→出庫開始サインに名称変更
+
+Option Explicit On
 
 Imports UtilMDL
 Imports UtilMDL.MSG
@@ -378,7 +380,7 @@ Public Class ClosingLog
 
 #Region "出庫"
 
-        'inoutのロケ番号で入庫データを検索する
+        'inoutの出庫開始サイン（旧：ロケ番号）で入庫データを検索する
         'inoutの出庫データを取得
         '未取消
 
@@ -400,7 +402,8 @@ Public Class ClosingLog
         Sql += " AND (入出庫日 >= '" & UtilClass.strFormatDate(dtmLastMonth) & "'"
         Sql += " AND  入出庫日 < '" & UtilClass.strFormatDate(dtmThisMonth) & "')"
 
-        Sql += " order by ロケ番号,入出庫日"
+        ''Sql += " order by ロケ番号,入出庫日"              '2020.01.09 DEL
+        Sql += " order by 出庫開始サイン,入出庫日"          '2020.01.09 ADD
 
         Dim dsinout As DataTable = _db.selectDB(Sql, RS, reccnt).Tables(0)
 
@@ -413,8 +416,10 @@ Public Class ClosingLog
                 Continue For
             End If
 
-            Dim strNyukoNo As String = Mid(dsinout.Rows(i)("ロケ番号"), 1, 10)
-            Dim strGyo As String = Mid(dsinout.Rows(i)("ロケ番号"), 11)
+            ''Dim strNyukoNo As String = Mid(dsinout.Rows(i)("ロケ番号"), 1, 10)            '2020.01.09 DEL
+            ''Dim strGyo As String = Mid(dsinout.Rows(i)("ロケ番号"), 11)                   '2020.01.09 DEL
+            Dim strNyukoNo As String = Mid(dsinout.Rows(i)("出庫開始サイン"), 1, 10)        '2020.01.09 ADD
+            Dim strGyo As String = Mid(dsinout.Rows(i)("出庫開始サイン"), 11)               '2020.01.09 ADD
 
             'update t68_krzaiko
             Sql = vbNullString

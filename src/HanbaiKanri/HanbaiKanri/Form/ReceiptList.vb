@@ -1,4 +1,6 @@
-﻿Option Explicit On
+﻿'2020.01.09 ロケ番号→出庫開始サインに名称変更
+
+Option Explicit On
 
 Imports UtilMDL
 Imports UtilMDL.MSG
@@ -604,7 +606,8 @@ Public Class ReceiptList
         Sql += " WHERE "
         Sql += "     会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql += " and 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
-        Sql += " and left(ロケ番号,10) = '" & strNyukoNo & "'"
+        ''Sql += " and left(ロケ番号,10) = '" & strNyukoNo & "'"                '2020.01.09 DEL
+        Sql += " and left(出庫開始サイン,10) = '" & strNyukoNo & "'"            '2020.01.09 ADD
 
 
         Dim dsinout As DataSet = _db.selectDB(Sql, RS, reccnt)

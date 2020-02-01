@@ -1,4 +1,6 @@
-﻿Option Explicit On
+﻿'2020.01.09 ロケ番号→出庫開始サインに名称変更
+
+Option Explicit On
 
 Imports UtilMDL
 Imports UtilMDL.MSG
@@ -226,7 +228,7 @@ Public Class GoodsIssue
             'Sql += " AND  t70.倉庫コード = t45.倉庫コード"
             Sql += " AND  t70.伝票番号 = t44.出庫番号"
             Sql += " AND  t70.行番号 = t45.行番号"
-            'Sql += " AND  t70.ロケ番号 = concat(t44.出庫番号, t45.行番号)"
+            'Sql += " AND  t70.出庫開始サイン = concat(t44.出庫番号, t45.行番号)"     '2020.01.09 REP
 
             If dsCymnhd.Tables(RS).Rows.Count > 0 Then
                 Sql += " WHERE t45.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
@@ -1226,7 +1228,8 @@ Public Class GoodsIssue
                                 Sql += "会社コード, 入出庫区分, 倉庫コード, 伝票番号, 行番号, 入出庫種別"
                                 Sql += ", メーカー, 品名, 型式, 数量, 単位, 備考, 入出庫日"
                                 'Sql += ", 引当区分, メーカー, 品名, 型式, 数量, 単位, 備考, 入出庫日"
-                                Sql += ", 取消区分, 更新者, 更新日, ロケ番号, 仕入区分"
+                                ''Sql += ", 取消区分, 更新者, 更新日, ロケ番号, 仕入区分"                     '2020.01.09 DEL
+                                Sql += ", 取消区分, 更新者, 更新日, 出庫開始サイン, 仕入区分"                 '2020.01.09 ADD
                                 Sql += " )VALUES('"
                                 Sql += frmC01F10_Login.loginValue.BumonCD '会社コード
                                 Sql += "', '"
