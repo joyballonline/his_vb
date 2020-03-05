@@ -315,34 +315,6 @@ Public Class Company
             Exit Sub
         End If
 
-        '項目チェック
-        Dim strMessage As String = ""    'メッセージ本文
-        Dim strMessageTitle As String = ""      'メッセージタイトル
-        ''会社コードは必須
-        If TxtCompanyCode.Text = "" Then
-            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-                strMessage = "Please enter Company Code. "
-                strMessageTitle = "CompanyCode Error"
-            Else
-                strMessage = "会社コードを入力してください。"
-                strMessageTitle = "会社コード入力エラー"
-            End If
-            Dim result As DialogResult = MessageBox.Show(strMessage, strMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-            Exit Sub
-        End If
-        '表示順の属性チェック（表示順のみ数値項目）
-        If Not IsNumeric(TxtDisplayOrder.Text) And Not TxtDisplayOrder.Text = "" Then
-            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-                strMessage = "Please enter with numeric value. "
-                strMessageTitle = "DisplayOrder Error"
-            Else
-                strMessage = "数値で入力してください。"
-                strMessageTitle = "表示順入力エラー"
-            End If
-            Dim result As DialogResult = MessageBox.Show(strMessage, strMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-            Exit Sub
-        End If
-
 
         Dim dtToday As String = UtilClass.formatDatetime(DateTime.Now)
         Try
