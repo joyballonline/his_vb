@@ -308,6 +308,13 @@ Public Class Company
     End Sub
 
     Private Sub btnAddCompany_Click_1(sender As Object, e As EventArgs) Handles BtnRegistration.Click
+
+        '入力チェック  2020.03.05
+        Dim blnFlg As Boolean = mCheck
+        If blnFlg = False Then
+            Exit Sub
+        End If
+
         '項目チェック
         Dim strMessage As String = ""    'メッセージ本文
         Dim strMessageTitle As String = ""      'メッセージタイトル
@@ -434,6 +441,48 @@ Public Class Company
             Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
         End Try
     End Sub
+
+
+    Private Function mCheck() As Boolean  '2020.03.05
+
+        Dim strMessage As String = ""    'メッセージ本文
+        Dim strMessageTitle As String = ""      'メッセージタイトル
+        ''会社コードは必須
+        If TxtCompanyCode.Text = "" Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+                strMessage = "Please enter Company Code. "
+                strMessageTitle = "CompanyCode Error"
+            Else
+                strMessage = "会社コードを入力してください。"
+                strMessageTitle = "会社コード入力エラー"
+            End If
+            Dim result As DialogResult = MessageBox.Show(strMessage, strMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Exit Function
+        End If
+        '表示順の属性チェック（表示順のみ数値項目）
+        If Not IsNumeric(TxtDisplayOrder.Text) And Not TxtDisplayOrder.Text = "" Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+                strMessage = "Please enter with numeric value. "
+                strMessageTitle = "DisplayOrder Error"
+            Else
+                strMessage = "数値で入力してください。"
+                strMessageTitle = "表示順入力エラー"
+            End If
+            Dim result As DialogResult = MessageBox.Show(strMessage, strMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Exit Function
+        End If
+
+        '前払法人税率
+        If IsNumeric(TxtPph.Text) = False Then
+
+            _msgHd.dspMSG("IsNotNumeric", frmC01F10_Login.loginValue.Language)
+            TxtPph.Select()
+            Exit Function
+        End If
+
+        mCheck = True
+
+    End Function
 
 
     '有効無効のコンボボックスを作成
