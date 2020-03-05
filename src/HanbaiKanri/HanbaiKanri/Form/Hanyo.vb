@@ -88,6 +88,13 @@ Public Class Hanyo
     End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles BtnRegistration.Click
+
+        '入力チェック 2020.03.05
+        Dim blnFlg As Boolean = mCheck
+        If blnFlg = False Then
+            Exit Sub
+        End If
+
         Dim dtToday As String = UtilClass.formatDatetime(DateTime.Now)
         Try
             If _status = CommonConst.STATUS_ADD Then
@@ -311,6 +318,71 @@ Public Class Hanyo
             Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
         End Try
     End Sub
+
+    Private Function mCheck() As Boolean  '2020.03.05
+
+        '文字数チェックはプロパティのMaxLengthで設定
+
+        '表示順
+        If IsNumeric(TxtDisplayOrder.Text) = False Then
+
+            _msgHd.dspMSG("IsNotNumeric", frmC01F10_Login.loginValue.Language)
+            TxtDisplayOrder.Select()
+            Exit Function
+        End If
+
+        '数値１
+        If TxtNum1.Text <> vbNullString AndAlso IsNumeric(TxtNum1.Text) = False Then
+
+            _msgHd.dspMSG("IsNotNumeric", frmC01F10_Login.loginValue.Language)
+            TxtNum1.Select()
+            Exit Function
+        End If
+
+        '数値２
+        If TxtNum2.Text <> vbNullString AndAlso IsNumeric(TxtNum2.Text) = False Then
+
+            _msgHd.dspMSG("IsNotNumeric", frmC01F10_Login.loginValue.Language)
+            TxtNum2.Select()
+            Exit Function
+        End If
+
+        '数値３
+        If TxtNum3.Text <> vbNullString AndAlso IsNumeric(TxtNum3.Text) = False Then
+
+            _msgHd.dspMSG("IsNotNumeric", frmC01F10_Login.loginValue.Language)
+            TxtNum3.Select()
+            Exit Function
+        End If
+
+        '数値４
+        If TxtNum4.Text <> vbNullString AndAlso IsNumeric(TxtNum4.Text) = False Then
+
+            _msgHd.dspMSG("IsNotNumeric", frmC01F10_Login.loginValue.Language)
+            TxtNum4.Select()
+            Exit Function
+        End If
+
+        '数値５
+        If TxtNum5.Text <> vbNullString AndAlso IsNumeric(TxtNum5.Text) = False Then
+
+            _msgHd.dspMSG("IsNotNumeric", frmC01F10_Login.loginValue.Language)
+            TxtNum5.Select()
+            Exit Function
+        End If
+
+        '数値６
+        If TxtNum6.Text <> vbNullString AndAlso IsNumeric(TxtNum6.Text) = False Then
+
+            _msgHd.dspMSG("IsNotNumeric", frmC01F10_Login.loginValue.Language)
+            TxtNum6.Select()
+            Exit Function
+        End If
+
+        mCheck = True
+
+    End Function
+
 
     Private Sub Hanyo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
