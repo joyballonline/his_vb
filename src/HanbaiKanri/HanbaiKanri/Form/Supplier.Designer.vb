@@ -206,6 +206,7 @@ Partial Class Supplier
         Me.TxtTelSearch.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtTelSearch.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtTelSearch.Location = New System.Drawing.Point(175, 300)
+        Me.TxtTelSearch.MaxLength = 20
         Me.TxtTelSearch.Name = "TxtTelSearch"
         Me.TxtTelSearch.Size = New System.Drawing.Size(301, 22)
         Me.TxtTelSearch.TabIndex = 9
