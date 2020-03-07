@@ -85,6 +85,7 @@ Partial Class Hanyo
         '
         Me.TxtChar6.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtChar6.Location = New System.Drawing.Point(101, 192)
+        Me.TxtChar6.MaxLength = 100
         Me.TxtChar6.Name = "TxtChar6"
         Me.TxtChar6.Size = New System.Drawing.Size(234, 22)
         Me.TxtChar6.TabIndex = 9
@@ -133,6 +134,7 @@ Partial Class Hanyo
         '
         Me.TxtMemo.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtMemo.Location = New System.Drawing.Point(483, 330)
+        Me.TxtMemo.MaxLength = 255
         Me.TxtMemo.Name = "TxtMemo"
         Me.TxtMemo.Size = New System.Drawing.Size(234, 22)
         Me.TxtMemo.TabIndex = 16
@@ -141,6 +143,7 @@ Partial Class Hanyo
         '
         Me.TxtNum6.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtNum6.Location = New System.Drawing.Point(101, 327)
+        Me.TxtNum6.MaxLength = 10
         Me.TxtNum6.Name = "TxtNum6"
         Me.TxtNum6.Size = New System.Drawing.Size(234, 22)
         Me.TxtNum6.TabIndex = 15
@@ -149,6 +152,7 @@ Partial Class Hanyo
         '
         Me.TxtNum5.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtNum5.Location = New System.Drawing.Point(483, 282)
+        Me.TxtNum5.MaxLength = 10
         Me.TxtNum5.Name = "TxtNum5"
         Me.TxtNum5.Size = New System.Drawing.Size(234, 22)
         Me.TxtNum5.TabIndex = 14
@@ -157,6 +161,7 @@ Partial Class Hanyo
         '
         Me.TxtNum4.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtNum4.Location = New System.Drawing.Point(101, 282)
+        Me.TxtNum4.MaxLength = 10
         Me.TxtNum4.Name = "TxtNum4"
         Me.TxtNum4.Size = New System.Drawing.Size(234, 22)
         Me.TxtNum4.TabIndex = 13
@@ -215,6 +220,7 @@ Partial Class Hanyo
         '
         Me.TxtNum3.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtNum3.Location = New System.Drawing.Point(483, 237)
+        Me.TxtNum3.MaxLength = 10
         Me.TxtNum3.Name = "TxtNum3"
         Me.TxtNum3.Size = New System.Drawing.Size(234, 22)
         Me.TxtNum3.TabIndex = 12
@@ -223,6 +229,7 @@ Partial Class Hanyo
         '
         Me.TxtNum2.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtNum2.Location = New System.Drawing.Point(101, 237)
+        Me.TxtNum2.MaxLength = 10
         Me.TxtNum2.Name = "TxtNum2"
         Me.TxtNum2.Size = New System.Drawing.Size(234, 22)
         Me.TxtNum2.TabIndex = 11
@@ -231,6 +238,7 @@ Partial Class Hanyo
         '
         Me.TxtNum1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtNum1.Location = New System.Drawing.Point(483, 192)
+        Me.TxtNum1.MaxLength = 10
         Me.TxtNum1.Name = "TxtNum1"
         Me.TxtNum1.Size = New System.Drawing.Size(234, 22)
         Me.TxtNum1.TabIndex = 10
@@ -239,6 +247,7 @@ Partial Class Hanyo
         '
         Me.TxtChar5.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtChar5.Location = New System.Drawing.Point(483, 147)
+        Me.TxtChar5.MaxLength = 100
         Me.TxtChar5.Name = "TxtChar5"
         Me.TxtChar5.Size = New System.Drawing.Size(234, 22)
         Me.TxtChar5.TabIndex = 8
@@ -247,6 +256,7 @@ Partial Class Hanyo
         '
         Me.txtChar4.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.txtChar4.Location = New System.Drawing.Point(101, 147)
+        Me.txtChar4.MaxLength = 100
         Me.txtChar4.Name = "txtChar4"
         Me.txtChar4.Size = New System.Drawing.Size(234, 22)
         Me.txtChar4.TabIndex = 7
@@ -325,6 +335,7 @@ Partial Class Hanyo
         '
         Me.TxtChar3.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtChar3.Location = New System.Drawing.Point(483, 102)
+        Me.TxtChar3.MaxLength = 100
         Me.TxtChar3.Name = "TxtChar3"
         Me.TxtChar3.Size = New System.Drawing.Size(234, 22)
         Me.TxtChar3.TabIndex = 6
@@ -333,6 +344,7 @@ Partial Class Hanyo
         '
         Me.TxtChar2.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtChar2.Location = New System.Drawing.Point(101, 102)
+        Me.TxtChar2.MaxLength = 100
         Me.TxtChar2.Name = "TxtChar2"
         Me.TxtChar2.Size = New System.Drawing.Size(234, 22)
         Me.TxtChar2.TabIndex = 5
@@ -341,6 +353,7 @@ Partial Class Hanyo
         '
         Me.TxtChar1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtChar1.Location = New System.Drawing.Point(483, 57)
+        Me.TxtChar1.MaxLength = 100
         Me.TxtChar1.Name = "TxtChar1"
         Me.TxtChar1.Size = New System.Drawing.Size(234, 22)
         Me.TxtChar1.TabIndex = 4
@@ -349,6 +362,7 @@ Partial Class Hanyo
         '
         Me.TxtDisplayOrder.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtDisplayOrder.Location = New System.Drawing.Point(101, 57)
+        Me.TxtDisplayOrder.MaxLength = 3
         Me.TxtDisplayOrder.Name = "TxtDisplayOrder"
         Me.TxtDisplayOrder.Size = New System.Drawing.Size(234, 22)
         Me.TxtDisplayOrder.TabIndex = 3
@@ -358,6 +372,7 @@ Partial Class Hanyo
         Me.TxtVariableKey.Enabled = False
         Me.TxtVariableKey.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtVariableKey.Location = New System.Drawing.Point(483, 12)
+        Me.TxtVariableKey.MaxLength = 20
         Me.TxtVariableKey.Name = "TxtVariableKey"
         Me.TxtVariableKey.Size = New System.Drawing.Size(234, 22)
         Me.TxtVariableKey.TabIndex = 2
@@ -367,6 +382,7 @@ Partial Class Hanyo
         Me.TxtFixedKey.Enabled = False
         Me.TxtFixedKey.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtFixedKey.Location = New System.Drawing.Point(101, 12)
+        Me.TxtFixedKey.MaxLength = 20
         Me.TxtFixedKey.Name = "TxtFixedKey"
         Me.TxtFixedKey.Size = New System.Drawing.Size(234, 22)
         Me.TxtFixedKey.TabIndex = 1

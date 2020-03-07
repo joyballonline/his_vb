@@ -285,50 +285,12 @@ Public Class Supplier
     End Sub
 
     Private Sub btnAddSupplier_Click(sender As Object, e As EventArgs) Handles BtnRegistration.Click
-        '項目チェック
-        Dim strMessage As String = ""    'メッセージ本文
-        Dim strMessageTitle As String = ""      'メッセージタイトル
-        '仕入先コードは必須
-        If TxtSupplierCode.Text = "" Then
-            _msgHd.dspMSG("chkInputSupplierCodeError", frmC01F10_Login.loginValue.Language)
-            Exit Sub
-        End If
-        '仕入先名は必須
-        If TxtSupplierName.Text = "" Then
-            _msgHd.dspMSG("chkInputSupplierNameError", frmC01F10_Login.loginValue.Language)
-            Exit Sub
-        End If
-        '仕入先名略称は必須
-        If TxtSupplierShortName.Text = "" Then
-            _msgHd.dspMSG("chkInputSupplierShortNameError", frmC01F10_Login.loginValue.Language)
-            Exit Sub
-        End If
-        '関税率
-        If TxtTariffRate.Text = "" Then
-            _msgHd.dspMSG("chkInputTariffRateError", frmC01F10_Login.loginValue.Language)
-            Exit Sub
-        ElseIf Decimal.Parse(TxtTariffRate.Text.ToString) < 0 And cmDomesticKbn.SelectedIndex = 1 Then
-            '0 and 国外の場合
-            _msgHd.dspMSG("chkInputTariffRateError", frmC01F10_Login.loginValue.Language)
-            Exit Sub
-        End If
-        '前払法人税率
-        If TxtPph.Text = "" Then
-            _msgHd.dspMSG("chkInputPPHError", frmC01F10_Login.loginValue.Language)
-            Exit Sub
-        ElseIf Decimal.Parse(TxtPph.Text.ToString) < 0 Then
-            _msgHd.dspMSG("chkInputPPHError", frmC01F10_Login.loginValue.Language)
-            Exit Sub
-        End If
-        '輸送費率
-        If TxtTransportationCost.Text = "" Then
-            _msgHd.dspMSG("chkInputTransportationCostError", frmC01F10_Login.loginValue.Language)
-            Exit Sub
-        ElseIf Decimal.Parse(TxtTransportationCost.Text.ToString) < 0 Then
-            _msgHd.dspMSG("chkInputTransportationCostError", frmC01F10_Login.loginValue.Language)
-            Exit Sub
-        End If
 
+        '入力チェック  2020.03.05
+        Dim blnFlg As Boolean = mCheck
+        If blnFlg = False Then
+            Exit Sub
+        End If
 
 
         '登録処理はここから
@@ -561,6 +523,77 @@ Public Class Supplier
             Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
         End Try
     End Sub
+
+    Private Function mCheck() As Boolean  '2020.03.05
+
+        '仕入先コードは必須
+        If TxtSupplierCode.Text = "" Then
+            _msgHd.dspMSG("chkInputSupplierCodeError", frmC01F10_Login.loginValue.Language)
+            Exit Function
+        End If
+        '仕入先名は必須
+        If TxtSupplierName.Text = "" Then
+            _msgHd.dspMSG("chkInputSupplierNameError", frmC01F10_Login.loginValue.Language)
+            Exit Function
+        End If
+        '仕入先名略称は必須
+        If TxtSupplierShortName.Text = "" Then
+            _msgHd.dspMSG("chkInputSupplierShortNameError", frmC01F10_Login.loginValue.Language)
+            Exit Function
+        End If
+        '関税率
+        If TxtTariffRate.Text = "" Then
+            _msgHd.dspMSG("chkInputTariffRateError", frmC01F10_Login.loginValue.Language)
+            Exit Function
+        End If
+        If IsNumeric(TxtTariffRate.Text) = False Then  '数値チェック
+
+            _msgHd.dspMSG("IsNotNumeric", frmC01F10_Login.loginValue.Language)
+            TxtTariffRate.Select()
+            Exit Function
+        End If
+        If Decimal.Parse(TxtTariffRate.Text.ToString) < 0 And cmDomesticKbn.SelectedIndex = 1 Then
+            '0 and 国外の場合
+            _msgHd.dspMSG("chkInputTariffRateError", frmC01F10_Login.loginValue.Language)
+            Exit Function
+        End If
+        '前払法人税率
+        If TxtPph.Text = "" Then
+            _msgHd.dspMSG("chkInputPPHError", frmC01F10_Login.loginValue.Language)
+            Exit Function
+        End If
+        If IsNumeric(TxtPph.Text) = False Then  '数値チェック
+
+            _msgHd.dspMSG("IsNotNumeric", frmC01F10_Login.loginValue.Language)
+            TxtPph.Select()
+            Exit Function
+        End If
+        If Decimal.Parse(TxtPph.Text.ToString) < 0 Then
+            _msgHd.dspMSG("chkInputPPHError", frmC01F10_Login.loginValue.Language)
+            Exit Function
+        End If
+        '輸送費率
+        If TxtTransportationCost.Text = "" Then
+            _msgHd.dspMSG("chkInputTransportationCostError", frmC01F10_Login.loginValue.Language)
+            Exit Function
+        End If
+        If IsNumeric(TxtTransportationCost.Text) = False Then  '数値チェック
+
+            _msgHd.dspMSG("IsNotNumeric", frmC01F10_Login.loginValue.Language)
+            TxtTransportationCost.Select()
+            Exit Function
+        End If
+        If Decimal.Parse(TxtTransportationCost.Text.ToString) < 0 Then
+            _msgHd.dspMSG("chkInputTransportationCostError", frmC01F10_Login.loginValue.Language)
+            Exit Function
+        End If
+
+
+
+        mCheck = True
+
+    End Function
+
 
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
         _parentForm.Enabled = True

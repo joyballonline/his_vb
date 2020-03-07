@@ -132,7 +132,7 @@ Partial Class Warehouse
         Me.TxtShortName.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.TxtShortName.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtShortName.Location = New System.Drawing.Point(157, 59)
-        Me.TxtShortName.MaxLength = 50
+        Me.TxtShortName.MaxLength = 20
         Me.TxtShortName.Name = "TxtShortName"
         Me.TxtShortName.Size = New System.Drawing.Size(283, 22)
         Me.TxtShortName.TabIndex = 3
@@ -142,7 +142,7 @@ Partial Class Warehouse
         Me.TxtRemarks.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.TxtRemarks.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtRemarks.Location = New System.Drawing.Point(157, 338)
-        Me.TxtRemarks.MaxLength = 50
+        Me.TxtRemarks.MaxLength = 255
         Me.TxtRemarks.Multiline = True
         Me.TxtRemarks.Name = "TxtRemarks"
         Me.TxtRemarks.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal
@@ -233,7 +233,7 @@ Partial Class Warehouse
         Me.TxtPhone.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.TxtPhone.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtPhone.Location = New System.Drawing.Point(157, 253)
-        Me.TxtPhone.MaxLength = 50
+        Me.TxtPhone.MaxLength = 20
         Me.TxtPhone.Name = "TxtPhone"
         Me.TxtPhone.Size = New System.Drawing.Size(283, 22)
         Me.TxtPhone.TabIndex = 8
@@ -254,7 +254,7 @@ Partial Class Warehouse
         Me.TxtAddress3.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.TxtAddress3.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtAddress3.Location = New System.Drawing.Point(157, 207)
-        Me.TxtAddress3.MaxLength = 50
+        Me.TxtAddress3.MaxLength = 100
         Me.TxtAddress3.Multiline = True
         Me.TxtAddress3.Name = "TxtAddress3"
         Me.TxtAddress3.Size = New System.Drawing.Size(283, 40)
@@ -265,7 +265,7 @@ Partial Class Warehouse
         Me.TxtAddress2.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.TxtAddress2.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtAddress2.Location = New System.Drawing.Point(157, 161)
-        Me.TxtAddress2.MaxLength = 50
+        Me.TxtAddress2.MaxLength = 100
         Me.TxtAddress2.Multiline = True
         Me.TxtAddress2.Name = "TxtAddress2"
         Me.TxtAddress2.Size = New System.Drawing.Size(283, 40)
@@ -276,7 +276,7 @@ Partial Class Warehouse
         Me.TxtAddress1.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.TxtAddress1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtAddress1.Location = New System.Drawing.Point(157, 115)
-        Me.TxtAddress1.MaxLength = 50
+        Me.TxtAddress1.MaxLength = 100
         Me.TxtAddress1.Multiline = True
         Me.TxtAddress1.Name = "TxtAddress1"
         Me.TxtAddress1.Size = New System.Drawing.Size(283, 40)
@@ -287,7 +287,7 @@ Partial Class Warehouse
         Me.TxtPostalCode.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.TxtPostalCode.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtPostalCode.Location = New System.Drawing.Point(157, 87)
-        Me.TxtPostalCode.MaxLength = 50
+        Me.TxtPostalCode.MaxLength = 7
         Me.TxtPostalCode.Name = "TxtPostalCode"
         Me.TxtPostalCode.Size = New System.Drawing.Size(283, 22)
         Me.TxtPostalCode.TabIndex = 4
@@ -364,7 +364,7 @@ Partial Class Warehouse
         Me.TxtFax.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.TxtFax.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtFax.Location = New System.Drawing.Point(157, 281)
-        Me.TxtFax.MaxLength = 50
+        Me.TxtFax.MaxLength = 20
         Me.TxtFax.Name = "TxtFax"
         Me.TxtFax.Size = New System.Drawing.Size(283, 22)
         Me.TxtFax.TabIndex = 9
