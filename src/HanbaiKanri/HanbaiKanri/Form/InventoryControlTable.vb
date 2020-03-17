@@ -1,4 +1,10 @@
-﻿'2020.01.09 ロケ番号→出庫開始サインに名称変更
+﻿'------------------------------------------------------------------------------------------------------
+'改訂履歴
+'2020.01.09 
+'ロケ番号→出庫開始サインに名称変更
+'2020.03.15
+'在庫管理区分、在庫表示区分によるリスト表示方式の改訂（区分を会社マスタに実装するまで変数で固定割り当てする）
+'------------------------------------------------------------------------------------------------------
 
 Option Explicit On
 
@@ -44,6 +50,8 @@ Public Class InventoryControlTable
     Private CompanyCode As String = ""
     Private OrderNo As String()
     Private OrderStatus As String = ""
+    Private InventoryControl As String = "V"                 '倉庫、入出庫種別を管理初期値とする
+    Private InventoryViewer As String = "7"                  '倉庫、入出庫種別、ロケーションを表示初期値とする
 
 
     '-------------------------------------------------------------------------------
@@ -93,7 +101,7 @@ Public Class InventoryControlTable
             BtnExcelOutput.Text = "ExcelOutput"
             BtnBack.Text = "Back"
 
-            LblWarehouse.Text = "Warehouse"
+            lblWarehouse.Text = "Warehouse"
             LblMovingDay.Text = "MovingDay"
 
             lblYear.Text = "Year"
@@ -106,7 +114,18 @@ Public Class InventoryControlTable
             cmd検索.Text = "Search"
         End If
 
-        createWarehouseCombobox(CmWarehouseFrom)
+        makeTableLayoutPanel1()     'コンボボックスコントロールの表示制御
+        createZaikoCombobox(cmWarehouseFrom)
+        createZaikoCombobox(cmSyubetsuFrom)
+        createZaikoCombobox(cmLocationFrom)
+        createZaikoCombobox(cmSerialNoFrom)
+        createZaikoCombobox(cmOrderNoFrom)
+
+        '2020.03.17
+
+
+
+
 
 
         '対象年月
@@ -376,6 +395,72 @@ Public Class InventoryControlTable
 
     End Sub
 
+    '-------------------------------------------------------------------------------
+    '在庫コンボボックス項目をコントロールする
+    '-------------------------------------------------------------------------------
+    Private Sub makeTableLayoutPanel1()
+
+        Dim reccnt As Integer = 0 'DB用（デフォルト）
+        Dim Sql As String = ""
+
+        Sql = "SELECT "
+        Sql += " m01.在庫管理区分 AS 在庫管理区分,m01.在庫表示区分 AS 在庫表示区分 "
+        Sql += " FROM m01_company m01"
+        Sql += " WHERE "
+        Sql += " m01.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
+
+        Try
+
+            Dim dsM01 As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+            InventoryControl = dsM01.Tables(RS).Rows(0)("在庫管理区分")
+            InventoryViewer = dsM01.Tables(RS).Rows(0)("在庫表示区分")
+
+        Catch ue As UsrDefException
+        Catch ex As Exception
+        End Try
+
+        'コンボボックス表示状態を「商品別」以外リセットする
+        lblWarehouse.Visible = False
+        lblSyubetsu.Visible = False
+        lblLocation.Visible = False
+        lblSerialNo.Visible = False
+        lblOrderNo.Visible = False
+
+        cmWarehouseFrom.Visible = False
+        cmSyubetsuFrom.Visible = False
+        cmLocationFrom.Visible = False
+        cmSerialNoFrom.Visible = False
+        cmOrderNoFrom.Visible = False
+
+        Select Case InventoryControl
+            Case "1", "3", "7", "F", "V"
+                lblWarehouse.Visible = True
+                cmWarehouseFrom.Visible = True
+        End Select
+        Select Case InventoryControl
+            Case "3", "7", "F", "V"
+                lblSyubetsu.Visible = True
+                cmSyubetsuFrom.Visible = True
+        End Select
+        Select Case InventoryControl
+            Case "7", "F", "V"
+                lblLocation.Visible = True
+                cmLocationFrom.Visible = True
+        End Select
+        Select Case InventoryControl
+            Case "F", "V"
+                lblSerialNo.Visible = True
+                cmSerialNoFrom.Visible = True
+        End Select
+        Select Case InventoryControl
+            Case "V"
+                lblOrderNo.Visible = True
+                cmOrderNoFrom.Visible = True
+        End Select
+
+    End Sub
+
     'param1：String テーブル名
     'param2：String 詳細条件
     'Return: DataSet
@@ -470,6 +555,104 @@ Public Class InventoryControlTable
         End If
 
     End Sub
+    Private Sub createZaikoCombobox(ByRef prmComboboxName As ComboBox, Optional ByRef prmVal As String = "")
+
+        Dim reccnt As Integer = 0 'DB用（デフォルト）
+
+        prmComboboxName.DisplayMember = "Text"
+        prmComboboxName.ValueMember = "Value"
+
+
+
+        Dim Sql As String = ""
+
+        If prmComboboxName.Name = "cmWarehouseFrom" Then
+            Sql = "SELECT T70.倉庫コード AS 名称 FROM T70_INOUT T70 "
+            Sql += "WHERE T70.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            ''Sql += " AND (T70.入出庫日 >= '" & UtilClass.strFormatDate(dtmSyoriNentuki.ToShortDateString) & "'"
+            ''Sql += " AND  T70.入出庫日 < '" & UtilClass.strFormatDate(dtmSyoriNentukiE.ToShortDateString) & "')"
+            Sql += " AND T70.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
+            Sql += " GROUP BY T70.倉庫コード"
+            Sql += " ORDER BY T70.倉庫コード"
+        End If
+        If prmComboboxName.Name = "cmSyubetsuFrom" Then
+            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+                Sql = "SELECT M90.文字２ AS 名称 FROM M90_HANYO M90 INNER JOIN T70_INOUT T70 "
+                Sql += " ON (M90.会社コード = T70.会社コード AND M90.可変キー = T70.入出庫種別)"
+                Sql += "WHERE T70.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                Sql += " AND M90.固定キー ILIKE '" & CommonConst.INOUT_CLASS & "'"
+                Sql += " AND T70.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
+                Sql += " GROUP BY M90.文字２"
+                Sql += " ORDER BY M90.文字２"
+            Else
+                Sql = "SELECT M90.文字１ AS 名称 FROM M90_HANYO M90 INNER JOIN T70_INOUT T70 "
+                Sql += " ON (M90.会社コード = T70.会社コード AND M90.可変キー = T70.入出庫種別)"
+                Sql += "WHERE T70.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                Sql += " AND M90.固定キー ILIKE '" & CommonConst.INOUT_CLASS & "'"
+                Sql += " AND T70.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
+                Sql += " GROUP BY M90.文字１"
+                Sql += " ORDER BY M90.文字１"
+            End If
+        End If
+        If prmComboboxName.Name = "cmLocationFrom" Then
+            Sql = "SELECT T70.ロケ番号 AS 名称 FROM T70_INOUT T70 "
+            Sql += "WHERE T70.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            ''Sql += " AND (T70.入出庫日 >= '" & UtilClass.strFormatDate(dtmSyoriNentuki.ToShortDateString) & "'"
+            ''Sql += " AND  T70.入出庫日 < '" & UtilClass.strFormatDate(dtmSyoriNentukiE.ToShortDateString) & "')"
+            Sql += " AND T70.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
+            Sql += " GROUP BY T70.ロケ番号"
+            Sql += " ORDER BY T70.ロケ番号"
+        End If
+        If prmComboboxName.Name = "cmSerialNoFrom" Then
+            Sql = "SELECT T70.製造番号 AS 名称 FROM T70_INOUT T70 "
+            Sql += "WHERE T70.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            ''Sql += " AND (T70.入出庫日 >= '" & UtilClass.strFormatDate(dtmSyoriNentuki.ToShortDateString) & "'"
+            ''Sql += " AND  T70.入出庫日 < '" & UtilClass.strFormatDate(dtmSyoriNentukiE.ToShortDateString) & "')"
+            Sql += " AND T70.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
+            Sql += " GROUP BY T70.製造番号"
+            Sql += " ORDER BY T70.製造番号"
+        End If
+        If prmComboboxName.Name = "cmOrderNoFrom" Then
+            Sql = "SELECT T70.伝票番号 AS 名称 FROM T70_INOUT T70 "
+            Sql += "WHERE T70.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            ''Sql += " AND (T70.入出庫日 >= '" & UtilClass.strFormatDate(dtmSyoriNentuki.ToShortDateString) & "'"
+            ''Sql += " AND  T70.入出庫日 < '" & UtilClass.strFormatDate(dtmSyoriNentukiE.ToShortDateString) & "')"
+            Sql += " AND T70.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
+            Sql += " GROUP BY T70.伝票番号"
+            Sql += " ORDER BY T70.伝票番号"
+        End If
+
+        Try
+            Dim dsList As DataSet = _db.selectDB(Sql, RS, reccnt)
+            Dim tb As New DataTable("Table")
+            tb.Columns.Add("Text", GetType(String))
+            tb.Columns.Add("Value", GetType(String))
+            tb.Rows.Add(IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG, "All", "すべて"), "all")
+            For i As Integer = 0 To dsList.Tables(RS).Rows.Count - 1
+                tb.Rows.Add(dsList.Tables(RS).Rows(i)("名称"), dsList.Tables(RS).Rows(i)("名称"))
+            Next
+
+
+            prmComboboxName.DataSource = tb
+
+            '倉庫データがあったら
+            If dsList.Tables(RS).Rows.Count > 0 Then
+                If prmVal IsNot "" Then
+                    prmComboboxName.SelectedValue = tb
+                Else
+                    prmComboboxName.SelectedIndex = 0
+                End If
+            End If
+
+
+        Catch ex As Exception
+
+            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
+            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
+        End Try
+
+
+    End Sub
 
     '処理区分のコンボボックスを作成
     Private Sub createStorageType(ByRef prmComboboxName As ComboBox, Optional ByRef prmVal As String = "")
@@ -516,7 +699,7 @@ Public Class InventoryControlTable
 
         Try
 
-            Dim strSoko As String = CmWarehouseFrom.SelectedValue  '倉庫コード
+            Dim strSoko As String = cmWarehouseFrom.SelectedValue  '倉庫コード
 
 
 #Region "t68_krzaiko"
