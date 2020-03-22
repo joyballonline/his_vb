@@ -50,8 +50,8 @@ Public Class InventoryControlTable
     Private CompanyCode As String = ""
     Private OrderNo As String()
     Private OrderStatus As String = ""
-    Private InventoryControl As String = "V"                 '倉庫、入出庫種別を管理初期値とする
-    Private InventoryViewer As String = "7"                  '倉庫、入出庫種別、ロケーションを表示初期値とする
+    Private InventoryControl As String = "1"                 '倉庫、入出庫種別を管理初期値とする
+    Private InventoryViewer As String = "1"                  '倉庫、入出庫種別、ロケーションを表示初期値とする
 
 
     '-------------------------------------------------------------------------------
@@ -104,6 +104,11 @@ Public Class InventoryControlTable
             lblWarehouse.Text = "Warehouse"
             LblMovingDay.Text = "MovingDay"
 
+            lblSyubetsu.Text = "StrageType"
+            lblLocation.Text = "Location"
+            lblSerialNo.Text = "SerialNo"
+            lblOrderNo.Text = "OrderNo"
+
             lblYear.Text = "Year"
             lblMonth.Text = "Month"
 
@@ -120,13 +125,6 @@ Public Class InventoryControlTable
         createZaikoCombobox(cmLocationFrom)
         createZaikoCombobox(cmSerialNoFrom)
         createZaikoCombobox(cmOrderNoFrom)
-
-        '2020.03.17
-
-
-
-
-
 
         '対象年月
         Dim dtmTemp As Date = DateAdd("m", -1, Now)
@@ -170,12 +168,14 @@ Public Class InventoryControlTable
         DgvList.Rows.Clear()    '一覧クリア
 
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-            DgvList.Columns.Add("倉庫", "Manufacturer")
             DgvList.Columns.Add("メーカー", "Manufacturer")
             DgvList.Columns.Add("品名", "ItemName")
             DgvList.Columns.Add("型式", "Spec")
-            DgvList.Columns.Add("伝票番号", "SlipNumber")
-            'DgvList.Columns.Add("入出庫種別", "StorageType")
+            DgvList.Columns.Add("倉庫", "Manufacturer")
+            DgvList.Columns.Add("入出庫種別", "StorageType")
+            DgvList.Columns.Add("ロケ番号", "Location")
+            DgvList.Columns.Add("製造番号", "SerialNo")
+            DgvList.Columns.Add("伝票番号", "OrderNo")
             DgvList.Columns.Add("入出庫日", "InOutDate")
             DgvList.Columns.Add("取引先", "Suppliers")
             DgvList.Columns.Add("月末在庫数", "MonthEndInventory")
@@ -186,12 +186,14 @@ Public Class InventoryControlTable
             DgvList.Columns.Add("在庫数", "StocksQuantity")
             DgvList.Columns.Add("備考", "Remarks")
         Else
-            DgvList.Columns.Add("倉庫", "倉庫")
             DgvList.Columns.Add("メーカー", "メーカー")
             DgvList.Columns.Add("品名", "品名")
             DgvList.Columns.Add("型式", "型式")
+            DgvList.Columns.Add("倉庫", "倉庫")
+            DgvList.Columns.Add("入出庫種別", "入出庫種別")
+            DgvList.Columns.Add("ロケ番号", "ロケ番号")
+            DgvList.Columns.Add("製造番号", "製造番号")
             DgvList.Columns.Add("伝票番号", "伝票番号")
-            'DgvList.Columns.Add("入出庫種別", "入出庫種別")
             DgvList.Columns.Add("入出庫日", "入出庫日")
             DgvList.Columns.Add("取引先", "取引先")
             DgvList.Columns.Add("月末在庫数", "月末在庫数")
@@ -217,6 +219,103 @@ Public Class InventoryControlTable
         DgvList.Columns("出庫数量").DefaultCellStyle.Format = "N2"
         DgvList.Columns("出庫単価").DefaultCellStyle.Format = "N2"
         DgvList.Columns("在庫数").DefaultCellStyle.Format = "N2"
+
+        '在庫表示区分から表示する在庫管理対象列を選定する
+        If "13579BDFHJLNPRTV".Contains(InventoryViewer) Then
+            DgvList.Columns("倉庫").Visible = True
+        Else
+            DgvList.Columns("倉庫").Visible = False
+        End If
+        If "2367ABEFIJMNQRUV".Contains(InventoryViewer) Then
+            DgvList.Columns("入出庫種別").Visible = True
+        Else
+            DgvList.Columns("入出庫種別").Visible = False
+        End If
+        If "4567CDEFKLMNSTUV".Contains(InventoryViewer) Then
+            DgvList.Columns("ロケ番号").Visible = True
+        Else
+            DgvList.Columns("ロケ番号").Visible = False
+        End If
+        If "89ABCDEFOPQRSTUV".Contains(InventoryViewer) Then
+            DgvList.Columns("製造番号").Visible = True
+        Else
+            DgvList.Columns("製造番号").Visible = False
+        End If
+        If "GHIJKLMNOPQRSTUV".Contains(InventoryViewer) Then
+            DgvList.Columns("伝票番号").Visible = True
+        Else
+            DgvList.Columns("伝票番号").Visible = False
+        End If
+
+        If InventoryControl = "0" Then
+            DgvList.Columns("メーカー").DisplayIndex = 0
+            DgvList.Columns("品名").DisplayIndex = 1
+            DgvList.Columns("型式").DisplayIndex = 2
+            DgvList.Columns("倉庫").DisplayIndex = 3
+            DgvList.Columns("入出庫種別").DisplayIndex = 4
+            DgvList.Columns("ロケ番号").DisplayIndex = 5
+            DgvList.Columns("製造番号").DisplayIndex = 6
+            DgvList.Columns("伝票番号").DisplayIndex = 7
+        End If
+        If InventoryControl = "1" Then
+            DgvList.Columns("倉庫").DisplayIndex = 0
+            DgvList.Columns("メーカー").DisplayIndex = 1
+            DgvList.Columns("品名").DisplayIndex = 2
+            DgvList.Columns("型式").DisplayIndex = 3
+            DgvList.Columns("入出庫種別").DisplayIndex = 4
+            DgvList.Columns("ロケ番号").DisplayIndex = 5
+            DgvList.Columns("製造番号").DisplayIndex = 6
+            DgvList.Columns("伝票番号").DisplayIndex = 7
+        End If
+        If InventoryControl = "3" Then
+            DgvList.Columns("倉庫").DisplayIndex = 0
+            DgvList.Columns("入出庫種別").DisplayIndex = 1
+            DgvList.Columns("メーカー").DisplayIndex = 2
+            DgvList.Columns("品名").DisplayIndex = 3
+            DgvList.Columns("型式").DisplayIndex = 4
+            DgvList.Columns("ロケ番号").DisplayIndex = 5
+            DgvList.Columns("製造番号").DisplayIndex = 6
+            DgvList.Columns("伝票番号").DisplayIndex = 7
+        End If
+        If InventoryControl = "7" Then
+            DgvList.Columns("倉庫").DisplayIndex = 0
+            DgvList.Columns("入出庫種別").DisplayIndex = 1
+            DgvList.Columns("ロケ番号").DisplayIndex = 2
+            DgvList.Columns("メーカー").DisplayIndex = 3
+            DgvList.Columns("品名").DisplayIndex = 4
+            DgvList.Columns("型式").DisplayIndex = 5
+            DgvList.Columns("製造番号").DisplayIndex = 6
+            DgvList.Columns("伝票番号").DisplayIndex = 7
+        End If
+        If InventoryControl = "F" Then
+            DgvList.Columns("倉庫").DisplayIndex = 0
+            DgvList.Columns("入出庫種別").DisplayIndex = 1
+            DgvList.Columns("ロケ番号").DisplayIndex = 2
+            DgvList.Columns("製造番号").DisplayIndex = 3
+            DgvList.Columns("メーカー").DisplayIndex = 4
+            DgvList.Columns("品名").DisplayIndex = 5
+            DgvList.Columns("型式").DisplayIndex = 6
+            DgvList.Columns("伝票番号").DisplayIndex = 7
+        End If
+        If InventoryControl = "V" Then
+            DgvList.Columns("伝票番号").DisplayIndex = 0
+            DgvList.Columns("倉庫").DisplayIndex = 1
+            DgvList.Columns("入出庫種別").DisplayIndex = 2
+            DgvList.Columns("ロケ番号").DisplayIndex = 3
+            DgvList.Columns("製造番号").DisplayIndex = 4
+            DgvList.Columns("メーカー").DisplayIndex = 5
+            DgvList.Columns("品名").DisplayIndex = 6
+            DgvList.Columns("型式").DisplayIndex = 7
+        End If
+        DgvList.Columns("入出庫日").DisplayIndex = 8
+        DgvList.Columns("取引先").DisplayIndex = 9
+        DgvList.Columns("月末在庫数").DisplayIndex = 10
+        DgvList.Columns("入庫数量").DisplayIndex = 11
+        DgvList.Columns("入庫単価").DisplayIndex = 12
+        DgvList.Columns("出庫数量").DisplayIndex = 13
+        DgvList.Columns("出庫単価").DisplayIndex = 14
+        DgvList.Columns("在庫数").DisplayIndex = 15
+        DgvList.Columns("備考").DisplayIndex = 16
 
     End Sub
 
@@ -689,6 +788,8 @@ Public Class InventoryControlTable
     End Sub
 
     '変更されたら一覧を再取得する
+    '2020.03.21 T68KRZAIKOに入出庫種別、ロケーション等の情報がないので抽出コードの変更は行わない
+    '           T70INOUT,T68KRZAIKOの整備が完了した段階でこの部分のコードを見直すこと
     Private Sub setList()
         Dim reccnt As Integer = 0 'DB用（デフォルト）
         Dim Sql As String = ""
