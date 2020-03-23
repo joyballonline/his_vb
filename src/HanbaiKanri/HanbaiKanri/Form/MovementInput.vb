@@ -1,4 +1,6 @@
 ﻿'2020.01.09 ロケ番号→出庫開始サインに名称変更
+'2020.03.23 在庫管理区分、表示区分に応じて在庫移動入力を操作する
+
 
 Option Explicit On
 
@@ -40,6 +42,8 @@ Public Class MovementInput
     Private CompanyCode As String = ""
     Private OrderNo As String()
     Private OrderStatus As String = ""
+    Private InventoryControl As String = "3"                 '倉庫、入出庫種別を管理初期値とする
+    Private InventoryViewer As String = "7"                  '倉庫、入出庫種別、ロケーションを表示初期値とする
 
 
     '-------------------------------------------------------------------------------
@@ -89,24 +93,32 @@ Public Class MovementInput
             LblProcessingDate.Text = "ProcessingDate" '処理日
             LblProcessingClassification.Text = "ProcessingClassification" '処理区分
 
+            BtnSearch.Text = "InventorySearch" '在庫検索
+
             LblManufacturer.Text = "Manufacturer" 'メーカー
             LblItemName.Text = "ItemName" '品名
             LblSpec.Text = "Spec" '型式
 
-            BtnSearch.Text = "InventorySearch" '在庫検索
+            LblMovingSource.Text = "MovingSource"               '移動元
+            LblWarehouseSince.Text = "Warehouse"                '倉庫
+            LblStorageTypeSince.Text = "StorageType"            '入出庫種別
+            LblLocationSince.Text = "Location"                  'ロケ番号
+            LblSerialNoSince.Text = "SerialNo"                  '製造番号
+            LblOrderNoSince.Text = "OrderNo"                    '伝票番号
+            LblQuantityFrom.Text = "Quantity"                   '数量
+            LblUnitPrice.Text = "UnitPrice"                     '単価
+            LblGoodsReceiptDate.Text = "LblGoodsReceiptDate"    '入庫日
 
-            LblMovingSource.Text = "MovingSource" '移動元
-            LblWarehouseSince.Text = "Warehouse" '倉庫
-            LblStorageTypeSince.Text = "StorageType" '入出庫種別
-            LblQuantityFrom.Text = "Quantity" '数量
-            LblUnitPrice.Text = "UnitPrice" '単価
-            LblGoodsReceiptDate.Text = "LblGoodsReceiptDate" '入庫日
 
-
-            LblMovingDestination.Text = "MovingDestination" '移動先
-            LblWarehouseTo.Text = "Warehouse" '倉庫
-            LblStorageTypeTo.Text = "StorageType" '入出庫種別
-            LblQuantityTo.Text = "Quantity" '数量
+            LblMovingDestination.Text = "MovingDestination"     '移動先
+            LblWarehouseTo.Text = "Warehouse"                   '倉庫
+            LblStorageTypeTo.Text = "StorageType"               '入出庫種別
+            LblLocationTo.Text = "Location"                     'ロケ番号
+            LblSerialNoTo.Text = "SerialNo"                     '製造番号
+            LblOrderNoTo.Text = "OrderNo"                       '伝票番号
+            LblQuantityTo.Text = "Quantity"                     '数量
+            LblUnitPriceTo.Text = "UnitPrice"                   '単価
+            LblGoodsReceiptDateTo.Text = "LblGoodsReceiptDate"  '入庫日
 
             'LblWarehouseSince.Text = "TargetWarehouse"
             'LblWarehouseTo.Text = "Destination"
@@ -126,9 +138,87 @@ Public Class MovementInput
 
         DtpProcessingDate.Text = DateTime.Today
 
-        createWarehouseToCombobox() '倉庫コンボボックス
-        createPCKbn() '処理区分コンボボックス
-        createInOutKbn("0,1") '入出庫種別コンボボックス
+        createPCKbn()                           '処理区分コンボボックス
+        createWarehouseToCombobox()             '倉庫コンボボックス
+        createInOutKbn("0,1")                   '入出庫種別コンボボックス
+
+        '2020.03.23 在庫管理区分、表示区分の処理
+
+        Sql = "SELECT "
+        Sql += " m01.在庫管理区分 AS 在庫管理区分,m01.在庫表示区分 AS 在庫表示区分 "
+        Sql += " FROM m01_company m01"
+        Sql += " WHERE "
+        Sql += " m01.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
+
+        Try
+            Dim dsM01 As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+            InventoryControl = dsM01.Tables(RS).Rows(0)("在庫管理区分")
+            InventoryViewer = dsM01.Tables(RS).Rows(0)("在庫表示区分")
+
+        Catch ue As UsrDefException
+        Catch ex As Exception
+        End Try
+
+        '在庫表示区分から表示する在庫管理対象列を選定する
+        If "13579BDFHJLNPRTV".Contains(InventoryViewer) Then
+            LblWarehouseSince.Visible = True
+            LblWarehouseTo.Visible = True
+            TxtWarehouseSince.Visible = True
+            CmWarehouseTo.Visible = True
+        Else
+            LblWarehouseSince.Visible = False
+            LblWarehouseTo.Visible = False
+            TxtWarehouseSince.Visible = False
+            CmWarehouseTo.Visible = False
+        End If
+        If "2367ABEFIJMNQRUV".Contains(InventoryViewer) Then
+            LblStorageTypeSince.Visible = True
+            LblStorageTypeTo.Visible = True
+            TxtStorageTypeSince.Visible = True
+            CmStorageTypeTo.Visible = True
+        Else
+            LblStorageTypeSince.Visible = False
+            LblStorageTypeTo.Visible = False
+            TxtStorageTypeSince.Visible = False
+            CmStorageTypeTo.Visible = False
+        End If
+        If "4567CDEFKLMNSTUV".Contains(InventoryViewer) Then
+            LblLocationSince.Visible = True
+            LblLocationTo.Visible = True
+            TxtLocationSince.Visible = True
+            TxtLocationTo.Visible = True
+        Else
+            LblLocationSince.Visible = False
+            LblLocationTo.Visible = False
+            TxtLocationSince.Visible = False
+            TxtLocationTo.Visible = False
+        End If
+        If "89ABCDEFOPQRSTUV".Contains(InventoryViewer) Then
+            LblSerialNoSince.Visible = True
+            LblSerialNoTo.Visible = True
+            TxtSerialNoSince.Visible = True
+            TxtSerialNoTo.Visible = True
+        Else
+            LblSerialNoSince.Visible = False
+            LblSerialNoTo.Visible = False
+            TxtSerialNoSince.Visible = False
+            TxtSerialNoTo.Visible = False
+        End If
+        If "GHIJKLMNOPQRSTUV".Contains(InventoryViewer) Then
+            LblOrderNoSince.Visible = True
+            LblOrderNoTo.Visible = True
+            TxtOrderNoSince.Visible = True
+            TxtOrderNoTo.Visible = True
+        Else
+            LblOrderNoSince.Visible = False
+            LblOrderNoTo.Visible = False
+            TxtOrderNoSince.Visible = False
+            TxtOrderNoTo.Visible = False
+        End If
+
+
+
 
     End Sub
 
@@ -163,6 +253,8 @@ Public Class MovementInput
 
             '在庫マスタデータを元に、入庫データ取得
             '-----------------------------
+            '2020.03.23 「在庫マスタデータを元に」と記載しているが、実際には入庫ファイルヘッダ、明細をベースとする
+
             Sql = " SELECT t43.* ,t42.* FROM t43_nyukodt t43 "
             Sql += " LEFT JOIN "
             Sql += " t42_nyukohd t42 "
@@ -175,20 +267,21 @@ Public Class MovementInput
             Sql += " t43.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
             Sql += " AND "
 
+            '2020.03.23 伝票番号、行番号部分コメントアウト
             '出庫開始サイン（旧：ロケ番号）がない場合は伝票番号をそのまま使用する
-            If TxtDenpyoNo.Tag.ToString <> "" Then
-                Sql += " t43.入庫番号 ILIKE '" & TxtDenpyoNo.Tag & "'"
-            Else
-                Sql += " t43.入庫番号 ILIKE '" & TxtDenpyoNo.Text & "'"
-            End If
+            ''If TxtDenpyoNo.Tag.ToString <> "" Then
+            ''    Sql += " t43.入庫番号 ILIKE '" & TxtDenpyoNo.Tag & "'"
+            ''Else
+            ''    Sql += " t43.入庫番号 ILIKE '" & TxtDenpyoNo.Text & "'"
+            ''End If
 
-            Sql += " AND "
+            ''Sql += " AND "
 
-            If TxtLineNumber.Tag.ToString <> "" Then
-                Sql += " t43.行番号 = '" & TxtLineNumber.Tag & "'"
-            Else
-                Sql += " t43.行番号 = '" & TxtLineNumber.Text & "'"
-            End If
+            ''If TxtLineNumber.Tag.ToString <> "" Then
+            ''    Sql += " t43.行番号 = '" & TxtLineNumber.Tag & "'"
+            ''Else
+            ''    Sql += " t43.行番号 = '" & TxtLineNumber.Text & "'"
+            ''End If
 
             '対象の入庫データを取得
             Dim dsNyuko As DataSet = _db.selectDB(Sql, RS, reccnt)
@@ -988,6 +1081,14 @@ Public Class MovementInput
             TxtQuantityTo.Focus()
             Exit Sub
         End If
+
+    End Sub
+
+    Private Sub TableLayoutPanel6_Paint(sender As Object, e As PaintEventArgs) Handles TableLayoutPanel6.Paint
+
+    End Sub
+
+    Private Sub TableLayoutPanel4_Paint(sender As Object, e As PaintEventArgs) Handles TableLayoutPanel4.Paint
 
     End Sub
 End Class

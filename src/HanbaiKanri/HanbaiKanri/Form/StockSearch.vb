@@ -421,12 +421,14 @@ Public Class StockSearch
         frm.TxtQuantityFrom.Text = DgvList.Rows(rowIndex).Cells("現在庫数").Value.ToString
         frm.TxtUnitPrice.Text = DgvList.Rows(rowIndex).Cells("入庫単価").Value.ToString
         frm.TxtGoodsReceiptDate.Text = DgvList.Rows(rowIndex).Cells("最終入庫日").Value.ToString
-        frm.TxtDenpyoNo.Text = DgvList.Rows(rowIndex).Cells("伝票番号").Value.ToString
-        frm.TxtLineNumber.Text = DgvList.Rows(rowIndex).Cells("行番号").Value.ToString
-        frm.TxtDenpyoNo.Tag = DgvList.Rows(rowIndex).Cells("入庫番号").Value.ToString
-        frm.TxtLineNumber.Tag = DgvList.Rows(rowIndex).Cells("入庫行番号").Value.ToString
-        ''frm.TxtLocationNo.Text = DgvList.Rows(rowIndex).Cells("ロケ番号").Value.ToString          '2020.01.09 DEL
-        frm.TxtLocationNo.Text = DgvList.Rows(rowIndex).Cells("出庫開始サイン").Value.ToString      '2020.01.09 ADD
+
+        '2020.03.23 一旦コメントアウトする
+        ''frm.TxtDenpyoNo.Text = DgvList.Rows(rowIndex).Cells("伝票番号").Value.ToString
+        ''frm.TxtLineNumber.Text = DgvList.Rows(rowIndex).Cells("行番号").Value.ToString
+        ''frm.TxtDenpyoNo.Tag = DgvList.Rows(rowIndex).Cells("入庫番号").Value.ToString
+        ''frm.TxtLineNumber.Tag = DgvList.Rows(rowIndex).Cells("入庫行番号").Value.ToString
+        ''''frm.TxtLocationNo.Text = DgvList.Rows(rowIndex).Cells("ロケ番号").Value.ToString          '2020.01.09 DEL
+        ''frm.TxtLocationNo.Text = DgvList.Rows(rowIndex).Cells("出庫開始サイン").Value.ToString      '2020.01.09 ADD
         'frm.TxtUnit.Text = DgvList.Rows(rowIndex).Cells("単位").Value
 
         frm.TxtQuantityTo.Text = 0
